@@ -1,0 +1,78 @@
+# Off-Flavour Target Compounds — Plant-Based Meat Alternatives
+#
+# These compounds must be MINIMISED or TRAPPED in the final product.
+# Sources: Maillard_Plant_based.md, pathways.md, Elicit reports.
+# SMILES validated against PubChem.
+#
+# Fields:
+#   name          : IUPAC or common name
+#   cas           : CAS registry number
+#   smiles        : canonical SMILES
+#   origin        : biological/chemical origin in plant matrices
+#   pathway       : formation pathway
+#   sensory_desc  : off-flavour descriptor
+#   odour_threshold_ug_per_kg: detection threshold in water (μg/kg); null if unknown
+#   mitigation    : key strategy to reduce/trap this compound
+#   priority      : "critical" | "high" | "medium"
+
+compounds:
+
+  - name: "Hexanal"
+    cas: "66-25-1"
+    smiles: "CCCCCC=O"
+    inchi: "InChI=1S/C6H12O/c1-2-3-4-5-6-7/h6H,2-5H2,1H3"
+    origin: "β-scission of linoleic acid (18:2) hydroperoxide"
+    pathway: "Lipid auto-oxidation (PUFA oxidation in soy/pea matrices)"
+    sensory_desc: "Beany, grassy, green, fatty"
+    odour_threshold_ug_per_kg: 4.5
+    mitigation: "Schiff base trapping with free amino acids (Pathway D); lipoxygenase inactivation; solid-state fermentation pre-treatment"
+    priority: "critical"
+    notes: "Most prevalent off-flavour in soy/pea PBMAs. Key target for chemical trapping."
+
+  - name: "Nonanal"
+    cas: "124-19-6"
+    smiles: "CCCCCCCCC=O"
+    inchi: "InChI=1S/C9H18O/c1-2-3-4-5-6-7-8-9-10/h9H,2-8H2,1H3"
+    origin: "β-scission of oleic acid (18:1) hydroperoxide"
+    pathway: "Lipid auto-oxidation"
+    sensory_desc: "Cardboard, waxy, tallowy"
+    odour_threshold_ug_per_kg: 1.0
+    mitigation: "Schiff base trapping with amino acids; antioxidant addition (tocopherol, rosemary extract)"
+    priority: "high"
+    notes: "Very low threshold; co-occurs with hexanal in oxidised plant oils."
+
+  - name: "1-Octen-3-ol"
+    cas: "3391-86-4"
+    smiles: "CCCCC(O)C=C"
+    inchi: "InChI=1S/C8H16O/c1-3-5-6-8(9)7-4-2/h4,7-9H,2-3,5-6H2,1H3"
+    origin: "Homolytic cleavage of linoleic acid 10-hydroperoxide"
+    pathway: "Lipid auto-oxidation"
+    sensory_desc: "Mushroom, grassy, earthy"
+    odour_threshold_ug_per_kg: 1.0
+    mitigation: "Lipoxygenase inactivation (blanching, ultrasound); controlled packaging atmosphere"
+    priority: "high"
+    notes: "Generated even at low temperatures; challenge during storage."
+
+  - name: "2-Pentylfuran"
+    cas: "3777-69-3"
+    smiles: "CCCCCc1ccco1"
+    inchi: "InChI=1S/C9H14O/c1-2-3-4-5-9-6-7-10-8-9/h6-8H,2-5H2,1H3"
+    origin: "Oxidation of linoleic acid hydroperoxides; also from Maillard furan pathway"
+    pathway: "Lipid auto-oxidation (secondary product)"
+    sensory_desc: "Beany, green, earthy"
+    odour_threshold_ug_per_kg: 6.0
+    mitigation: "Reduce linoleic acid pre-oxidation; vacuum packaging"
+    priority: "high"
+    notes: "Universal marker of beany off-flavour in soy-based products."
+
+  - name: "1-Hexanol"
+    cas: "111-27-3"
+    smiles: "CCCCCCO"
+    inchi: "InChI=1S/C6H14O/c1-2-3-4-5-6-7/h7H,2-6H2,1H3"
+    origin: "Reduction of hexanal; linoleic acid oxidation"
+    pathway: "Lipid auto-oxidation (secondary)"
+    sensory_desc: "Green, grassy, floral"
+    odour_threshold_ug_per_kg: 500.0
+    mitigation: "Yeast fermentation (aldehyde dehydrogenase converts hexanal → less volatile products)"
+    priority: "medium"
+    notes: "Lower potency than hexanal; secondary concern."

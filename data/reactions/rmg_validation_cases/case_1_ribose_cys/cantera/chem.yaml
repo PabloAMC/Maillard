@@ -1,0 +1,371 @@
+generator: ck2yaml
+input-files: [chem.inp, tran.dat]
+cantera-version: 2.6.0
+date: Sun, 01 Mar 2026 21:25:12 +0100
+
+units: {length: cm, time: s, quantity: mol, activation-energy: kcal/mol}
+
+phases:
+- name: gas
+  thermo: ideal-gas
+  elements: [H, D, T, C, Ci, O, Oi, N, Ne, Ar, He, Si, S, F, Cl, Br, I,
+    X]
+  species: [Ar, He, Ne, N2, ribose(1), cysteine(2), water(3), C8H17NO7S(14),
+    C8H17NO7S(15), C6H14N2O4S2(17), C13H27NO12S(22), C11H24N2O9S2(25), C11H24N2O9S2(32),
+    S(45), C11H24N2O9S2(56), S(63), S(66), S(71)]
+  kinetics: gas
+  transport: mixture-averaged
+  state: {T: 300.0, P: 1 atm}
+
+elements:
+- symbol: Ci
+  atomic-weight: 13.003
+- symbol: D
+  atomic-weight: 2.014
+- symbol: Oi
+  atomic-weight: 17.999
+- symbol: T
+  atomic-weight: 3.016
+- symbol: X
+  atomic-weight: 195.083
+
+species:
+- name: Ar
+  composition: {Ar: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [200.0, 6000.0]
+    data:
+    - [2.5, 0.0, 0.0, 0.0, 0.0, -745.375, 4.37967]
+  transport:
+    model: gas
+    geometry: atom
+    well-depth: 136.501
+    diameter: 3.33
+    note: GRI-Mech
+- name: He
+  composition: {He: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [200.0, 6000.0]
+    data:
+    - [2.5, 0.0, 0.0, 0.0, 0.0, -745.375, 0.928724]
+  transport:
+    model: gas
+    geometry: atom
+    well-depth: 10.2
+    diameter: 2.576
+    note: NOx2018
+- name: Ne
+  composition: {Ne: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [200.0, 6000.0]
+    data:
+    - [2.5, 0.0, 0.0, 0.0, 0.0, -745.375, 3.35532]
+  transport:
+    model: gas
+    geometry: atom
+    well-depth: 148.6
+    diameter: 3.758
+    note: Epsilon & sigma estimated with fixed Lennard Jones Parameters.
+      This is the fallback method! Try improving transport databases!
+- name: N2
+  composition: {N: 2}
+  thermo:
+    model: NASA7
+    temperature-ranges: [200.0, 1000.0, 6000.0]
+    data:
+    - [3.53101, -1.23661e-04, -5.02999e-07, 2.43531e-09, -1.40881e-12, -1046.98,
+      2.96747]
+    - [2.95258, 1.3969e-03, -4.92632e-07, 7.8601e-11, -4.60755e-15, -923.949,
+      5.87189]
+  transport:
+    model: gas
+    geometry: linear
+    well-depth: 97.53
+    diameter: 3.621
+    polarizability: 1.76
+    rotational-relaxation: 4.0
+    note: GRI-Mech
+- name: ribose(1)
+  composition: {C: 5, H: 10, O: 5}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 1047.11, 5000.0]
+    data:
+    - [-0.938952822, 0.109173112, -1.19960887e-04, 6.93499498e-08, -1.60609082e-11,
+      -1.11138466e+05, 43.8486101]
+    - [18.124716, 0.0363506413, -1.56437635e-05, 2.93539314e-09, -2.04594875e-13,
+      -1.15130898e+05, -49.0005334]
+  transport:
+    model: gas
+    geometry: nonlinear
+    well-depth: 693.654
+    diameter: 5.835
+    note: Epsilon & sigma estimated with Tc=900.85 K, Pc=65.88 bar (from
+      Joback method)
+- name: cysteine(2)
+  composition: {C: 3, H: 7, N: 1, O: 2, S: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 974.39, 5000.0]
+    data:
+    - [1.19194855, 0.0659582533, -6.78932769e-05, 3.91632128e-08, -9.507956e-12,
+      -5.01662997e+04, 25.8329247]
+    - [9.57623949, 0.0315398354, -1.49090339e-05, 2.91220821e-09, -2.07063456e-13,
+      -5.18002234e+04, -14.3989638]
+  transport:
+    model: gas
+    geometry: nonlinear
+    well-depth: 602.919
+    diameter: 5.736
+    note: Epsilon & sigma estimated with Tc=783.01 K, Pc=60.28 bar (from
+      Joback method)
+- name: water(3)
+  composition: {H: 2, O: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 1130.24, 5000.0]
+    data:
+    - [4.05763584, -7.87935966e-04, 2.90877529e-06, -1.47518904e-09, 2.12843112e-13,
+      -3.02815866e+04, -0.311364095]
+    - [2.84325043, 2.7510855e-03, -7.81031516e-07, 1.07243647e-10, -5.79392302e-15,
+      -2.99586128e+04, 5.91042004]
+  transport:
+    model: gas
+    geometry: nonlinear
+    well-depth: 572.402
+    diameter: 2.605
+    dipole: 1.844
+    rotational-relaxation: 4.0
+    note: GRI-Mech
+- name: C8H17NO7S(14)
+  composition: {C: 8, H: 17, N: 1, O: 7, S: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 816.63, 5000.0]
+    data:
+    - [-6.22986669, 0.24207008, -3.66273783e-04, 3.01464089e-07, -9.86796526e-11,
+      -1.70044311e+05, 76.1396151]
+    - [22.9972831, 0.0812312769, -3.83690122e-05, 7.2645184e-09, -4.9873122e-13,
+      -1.74228376e+05, -55.3346829]
+  transport:
+    model: gas
+    geometry: nonlinear
+    well-depth: 1069.61
+    diameter: 6.861
+    note: Epsilon & sigma estimated with Tc=1389.10 K, Pc=62.49 bar (from
+      Joback method)
+- name: C8H17NO7S(15)
+  composition: {C: 8, H: 17, N: 1, O: 7, S: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 893.18, 5000.0]
+    data:
+    - [-6.34819978, 0.235752963, -3.19078951e-04, 2.2297495e-07, -6.13465964e-11,
+      -1.6650506e+05, 71.5438592]
+    - [32.4773294, 0.0618798247, -2.70816292e-05, 5.03204919e-09, -3.45470356e-13,
+      -1.73440791e+05, -111.381393]
+  transport:
+    model: gas
+    geometry: nonlinear
+    well-depth: 1083.596
+    diameter: 7.099
+    note: Epsilon & sigma estimated with Tc=1407.27 K, Pc=57.13 bar (from
+      Joback method)
+- name: C6H14N2O4S2(17)
+  composition: {C: 6, H: 14, N: 2, O: 4, S: 2}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 662.46, 5000.0]
+    data:
+    - [-3.90503179, 0.189651609, -2.64553134e-04, 1.92201914e-07, -5.25448841e-11,
+      -9.70434002e+04, 55.7941755]
+    - [20.051215, 0.0660152911, -3.21861146e-05, 6.24230074e-09, -4.37201761e-13,
+      -1.00678516e+05, -53.3960335]
+  transport:
+    model: gas
+    geometry: nonlinear
+    well-depth: 899.887
+    diameter: 6.565
+    note: Epsilon & sigma estimated with Tc=1168.68 K, Pc=60 bar (from Joback
+      method)
+- name: C13H27NO12S(22)
+  composition: {C: 13, H: 27, N: 1, O: 12, S: 1}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 820.44, 5000.0]
+    data:
+    - [-13.6853182, 0.410835526, -6.1366073e-04, 4.79915152e-07, -1.47958848e-10,
+      -2.86386753e+05, 121.548315]
+    - [45.9205822, 0.111522246, -5.05081673e-05, 9.37550332e-09, -6.36340951e-13,
+      -2.95874261e+05, -152.432573]
+  transport:
+    model: gas
+    geometry: nonlinear
+    well-depth: 2649.528
+    diameter: 9.453
+    note: Epsilon & sigma estimated with Tc=3440.95 K, Pc=59.17 bar (from
+      Joback method)
+- name: C11H24N2O9S2(25)
+  composition: {C: 11, H: 24, N: 2, O: 9, S: 2}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 823.37, 5000.0]
+    data:
+    - [-11.6159745, 0.36213046, -5.29043983e-04, 4.00909588e-07, -1.19761504e-10,
+      -2.13374933e+05, 102.07975]
+    - [43.2030415, 0.0958612104, -4.4043639e-05, 8.28223969e-09, -5.68627324e-13,
+      -2.22403762e+05, -151.745748]
+  transport:
+    model: gas
+    geometry: nonlinear
+    well-depth: 1683.51
+    diameter: 8.235
+    note: Epsilon & sigma estimated with Tc=2186.38 K, Pc=56.87 bar (from
+      Joback method)
+- name: C11H24N2O9S2(32)
+  composition: {C: 11, H: 24, N: 2, O: 9, S: 2}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 826.25, 5000.0]
+    data:
+    - [-11.5199151, 0.368788865, -5.77817481e-04, 4.8201016e-07, -1.58464395e-10,
+      -2.16913279e+05, 106.750458]
+    - [33.9058326, 0.114873822, -5.51233373e-05, 1.0463438e-08, -7.17493483e-13,
+      -2.23259241e+05, -96.7090873]
+  transport:
+    model: gas
+    geometry: nonlinear
+    well-depth: 1644.06
+    diameter: 7.93
+    note: Epsilon & sigma estimated with Tc=2135.14 K, Pc=62.2 bar (from
+      Joback method)
+- name: S(45)
+  composition: {C: 16, H: 34, N: 2, O: 14, S: 2}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 828.68, 5000.0]
+    data:
+    - [-18.9887611, 0.5377307, -8.25918829e-04, 6.61553744e-07, -2.08298286e-10,
+      -3.33255153e+05, 152.206081]
+    - [56.8514815, 0.145124149, -6.72379291e-05, 1.25684216e-08, -8.54592839e-13,
+      -3.44913718e+05, -193.931207]
+  transport:
+    model: gas
+    geometry: nonlinear
+    well-depth: 8692.301
+    diameter: 14.068
+    note: Epsilon & sigma estimated with Tc=11288.70 K, Pc=58.9 bar (from
+      Joback method)
+- name: C11H24N2O9S2(56)
+  composition: {C: 11, H: 24, N: 2, O: 9, S: 2}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 813.84, 5000.0]
+    data:
+    - [-11.009975, 0.35021465, -5.05340254e-04, 3.83832692e-07, -1.15730823e-10,
+      -2.13708689e+05, 102.744039]
+    - [39.4955528, 0.101997362, -4.78768011e-05, 9.12012254e-09, -6.31866182e-13,
+      -2.219299e+05, -130.515466]
+  transport:
+    model: gas
+    geometry: nonlinear
+    well-depth: 1644.06
+    diameter: 7.93
+    note: Epsilon & sigma estimated with Tc=2135.14 K, Pc=62.2 bar (from
+      Joback method)
+- name: S(63)
+  composition: {C: 16, H: 34, N: 2, O: 14, S: 2}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 817.56, 5000.0]
+    data:
+    - [-18.438005, 0.526549217, -8.05216533e-04, 6.49090442e-07, -2.06611944e-10,
+      -3.33586569e+05, 153.063462]
+    - [53.261571, 0.151045329, -7.09406313e-05, 1.33743329e-08, -9.15106332e-13,
+      -3.44484624e+05, -173.353349]
+  transport:
+    model: gas
+    geometry: nonlinear
+    well-depth: 7481.31
+    diameter: 12.982
+    note: Epsilon & sigma estimated with Tc=9715.99 K, Pc=64.52 bar (from
+      Joback method)
+- name: S(66)
+  composition: {C: 16, H: 34, N: 2, O: 14, S: 2}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 836.68, 5000.0]
+    data:
+    - [-18.4816763, 0.51921495, -7.53772039e-04, 5.63997752e-07, -1.65921866e-10,
+      -3.3005045e+05, 148.2084]
+    - [62.4877927, 0.132159402, -5.99364609e-05, 1.12114024e-08, -7.67781951e-13,
+      -3.43601074e+05, -227.993585]
+  transport:
+    model: gas
+    geometry: nonlinear
+    well-depth: 8692.301
+    diameter: 14.068
+    note: Epsilon & sigma estimated with Tc=11288.70 K, Pc=58.9 bar (from
+      Joback method)
+- name: S(71)
+  composition: {C: 21, H: 44, N: 2, O: 19, S: 2}
+  thermo:
+    model: NASA7
+    temperature-ranges: [100.0, 819.79, 5000.0]
+    data:
+    - [-25.8948656, 0.695333245, -1.05267884e-03, 8.27656828e-07, -2.55949683e-10,
+      -4.49928952e+05, 198.477096]
+    - [76.1873444, 0.181331794, -8.3077063e-05, 1.54846521e-08, -1.05265942e-12,
+      -4.66131459e+05, -270.464987]
+  transport:
+    model: gas
+    geometry: nonlinear
+    well-depth: 2840.911
+    diameter: 9.576
+    note: Epsilon & sigma estimated with Tc=-3689.50 K, Pc=61.04 bar (from
+      Joback method)
+
+reactions:
+- equation: cysteine(2) + ribose(1) <=> C8H17NO7S(15)  # Reaction 1
+  rate-constant: {A: 1.0e+06, b: 1.0, Ea: 12.0}
+- equation: cysteine(2) + cysteine(2) <=> C6H14N2O4S2(17)  # Reaction 2
+  rate-constant: {A: 1.0e+06, b: 1.0, Ea: 12.0}
+- equation: cysteine(2) + C8H17NO7S(15) <=> C11H24N2O9S2(25)  # Reaction 3
+  rate-constant: {A: 1.0e+06, b: 1.0, Ea: 12.0}
+- equation: ribose(1) + C6H14N2O4S2(17) <=> C11H24N2O9S2(25)  # Reaction 4
+  rate-constant: {A: 1.0e+06, b: 1.0, Ea: 12.0}
+- equation: C8H17NO7S(14) <=> cysteine(2) + ribose(1)  # Reaction 5
+  rate-constant: {A: 1.0e+05, b: 1.0, Ea: 28.0}
+- equation: C13H27NO12S(22) <=> ribose(1) + C8H17NO7S(15)  # Reaction 6
+  rate-constant: {A: 1.0e+05, b: 1.0, Ea: 28.0}
+- equation: ribose(1) + C8H17NO7S(14) <=> C13H27NO12S(22)  # Reaction 7
+  rate-constant: {A: 1.0e+06, b: 1.0, Ea: 12.0}
+- equation: C11H24N2O9S2(32) <=> ribose(1) + C6H14N2O4S2(17)  # Reaction 8
+  rate-constant: {A: 1.0e+05, b: 1.0, Ea: 28.0}
+- equation: cysteine(2) + C8H17NO7S(14) <=> C11H24N2O9S2(32)  # Reaction 9
+  rate-constant: {A: 1.0e+06, b: 1.0, Ea: 12.0}
+- equation: cysteine(2) + C8H17NO7S(14) <=> C11H24N2O9S2(56)  # Reaction 10
+  rate-constant: {A: 1.0e+06, b: 1.0, Ea: 12.777}
+- equation: C8H17NO7S(14) + C8H17NO7S(14) <=> S(63)  # Reaction 11
+  rate-constant: {A: 1.0e+06, b: 1.0, Ea: 12.777}
+- equation: S(63) <=> ribose(1) + C11H24N2O9S2(56)  # Reaction 12
+  rate-constant: {A: 1.0e+05, b: 1.0, Ea: 28.0}
+- equation: S(45) <=> ribose(1) + C11H24N2O9S2(25)  # Reaction 13
+  rate-constant: {A: 1.0e+05, b: 1.0, Ea: 28.0}
+- equation: C8H17NO7S(14) + C8H17NO7S(15) <=> S(45)  # Reaction 14
+  rate-constant: {A: 1.0e+06, b: 1.0, Ea: 12.0}
+- equation: ribose(1) + C11H24N2O9S2(32) <=> S(45)  # Reaction 15
+  rate-constant: {A: 1.0e+06, b: 1.0, Ea: 12.0}
+- equation: cysteine(2) + C13H27NO12S(22) <=> S(66)  # Reaction 16
+  rate-constant: {A: 1.0e+06, b: 1.0, Ea: 12.777}
+- equation: ribose(1) + C11H24N2O9S2(56) <=> S(66)  # Reaction 17
+  rate-constant: {A: 1.0e+06, b: 1.0, Ea: 12.0}
+- equation: C8H17NO7S(14) + C13H27NO12S(22) <=> S(71)  # Reaction 18
+  rate-constant: {A: 1.0e+06, b: 1.0, Ea: 12.777}
+- equation: ribose(1) + S(63) <=> S(71)  # Reaction 19
+  rate-constant: {A: 1.0e+06, b: 1.0, Ea: 12.0}
+- equation: S(71) <=> ribose(1) + S(66)  # Reaction 20
+  rate-constant: {A: 1.0e+05, b: 1.0, Ea: 28.0}

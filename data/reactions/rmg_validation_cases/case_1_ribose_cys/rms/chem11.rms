@@ -1,0 +1,444 @@
+Phases:
+- Species:
+  - comment: 'Thermo library: primaryThermoLibrary'
+    name: Ar
+    radicalelectrons: 0
+    smiles: '[Ar]'
+    thermo:
+      polys:
+      - Tmax: 1000.0
+        Tmin: 200.0
+        coefs:
+        - 2.5
+        - 0.0
+        - 0.0
+        - 0.0
+        - 0.0
+        - -745.375
+        - 4.37967
+        type: NASApolynomial
+      - Tmax: 6000.0
+        Tmin: 1000.0
+        coefs:
+        - 2.5
+        - 0.0
+        - 0.0
+        - 0.0
+        - 0.0
+        - -745.375
+        - 4.37967
+        type: NASApolynomial
+      type: NASA
+    type: Species
+  - comment: 'Thermo library: primaryThermoLibrary'
+    name: He
+    radicalelectrons: 0
+    smiles: '[He]'
+    thermo:
+      polys:
+      - Tmax: 1000.0
+        Tmin: 200.0
+        coefs:
+        - 2.5
+        - 0.0
+        - 0.0
+        - 0.0
+        - 0.0
+        - -745.375
+        - 0.928724
+        type: NASApolynomial
+      - Tmax: 6000.0
+        Tmin: 1000.0
+        coefs:
+        - 2.5
+        - 0.0
+        - 0.0
+        - 0.0
+        - 0.0
+        - -745.375
+        - 0.928724
+        type: NASApolynomial
+      type: NASA
+    type: Species
+  - comment: 'Thermo library: primaryThermoLibrary'
+    name: Ne
+    radicalelectrons: 0
+    smiles: '[Ne]'
+    thermo:
+      polys:
+      - Tmax: 1000.0
+        Tmin: 200.0
+        coefs:
+        - 2.5
+        - 0.0
+        - 0.0
+        - 0.0
+        - 0.0
+        - -745.375
+        - 3.35532
+        type: NASApolynomial
+      - Tmax: 6000.0
+        Tmin: 1000.0
+        coefs:
+        - 2.5
+        - 0.0
+        - 0.0
+        - 0.0
+        - 0.0
+        - -745.375
+        - 3.35532
+        type: NASApolynomial
+      type: NASA
+    type: Species
+  - comment: 'Thermo library: primaryThermoLibrary'
+    name: N2
+    radicalelectrons: 0
+    smiles: N#N
+    thermo:
+      polys:
+      - Tmax: 1000.0
+        Tmin: 200.0
+        coefs:
+        - 3.53101
+        - -0.000123661
+        - -5.02999e-07
+        - 2.43531e-09
+        - -1.40881e-12
+        - -1046.98
+        - 2.96747
+        type: NASApolynomial
+      - Tmax: 6000.0
+        Tmin: 1000.0
+        coefs:
+        - 2.95258
+        - 0.0013969
+        - -4.92632e-07
+        - 7.8601e-11
+        - -4.60755e-15
+        - -923.949
+        - 5.87189
+        type: NASApolynomial
+      type: NASA
+    type: Species
+  - comment: 'Thermo group additivity estimation: group(O2s-CsH) + group(O2s-CsH)
+      + group(O2s-CsH) + group(O2s-CsH) + group(Cs-CsCsOsH) + group(Cs-CsCsOsH) +
+      group(Cs-(Cds-O2d)CsOsH) + group(Cs-CsOsHH) + group(Cds-OdCsH)'
+    name: ribose
+    radicalelectrons: 0
+    smiles: O=CC(O)C(O)C(O)CO
+    thermo:
+      polys:
+      - Tmax: 1047.1093008988541
+        Tmin: 100.0
+        coefs:
+        - -0.9389528220270389
+        - 0.10917311222918065
+        - -0.00011996088715629269
+        - 6.934994982363744e-08
+        - -1.606090824205899e-11
+        - -111138.46582980218
+        - 43.848610143683885
+        type: NASApolynomial
+      - Tmax: 5000.0
+        Tmin: 1047.1093008988541
+        coefs:
+        - 18.1247160281309
+        - 0.03635064132319905
+        - -1.5643763543443355e-05
+        - 2.9353931398697257e-09
+        - -2.0459487462325662e-13
+        - -115130.89800464467
+        - -49.00053340560506
+        type: NASApolynomial
+      type: NASA
+    type: Species
+  - comment: 'Thermo group additivity estimation: group(S2s-CsH) + group(O2s-(Cds-O2d)H)
+      + group(N3s-CsHH) + group(Cs-CsN3sH(Cds-O2d)) + group(Cs-CsS2HH) + group(Cds-OdCsOs)'
+    name: cysteine
+    radicalelectrons: 0
+    smiles: NC(C(=O)O)CS
+    thermo:
+      polys:
+      - Tmax: 974.3936061472704
+        Tmin: 100.0
+        coefs:
+        - 1.1919485477552128
+        - 0.06595825326259154
+        - -6.789327691819144e-05
+        - 3.9163212826795305e-08
+        - -9.507955999309079e-12
+        - -50166.2997179953
+        - 25.832924709375252
+        type: NASApolynomial
+      - Tmax: 5000.0
+        Tmin: 974.3936061472704
+        coefs:
+        - 9.576239490967357
+        - 0.03153983536872289
+        - -1.4909033900462321e-05
+        - 2.9122082137885632e-09
+        - -2.0706345608516097e-13
+        - -51800.22338843984
+        - -14.398963840029454
+        type: NASApolynomial
+      type: NASA
+    type: Species
+  - comment: 'Thermo library: primaryThermoLibrary'
+    name: water
+    radicalelectrons: 0
+    smiles: O
+    thermo:
+      polys:
+      - Tmax: 1130.2388926465626
+        Tmin: 100.0
+        coefs:
+        - 4.057635842138811
+        - -0.0007879359660094121
+        - 2.908775287241331e-06
+        - -1.47518904114397e-09
+        - 2.1284311194182071e-13
+        - -30281.58663699715
+        - -0.3113640952221707
+        type: NASApolynomial
+      - Tmax: 5000.0
+        Tmin: 1130.2388926465626
+        coefs:
+        - 2.843250429891205
+        - 0.0027510854998008425
+        - -7.810315156543284e-07
+        - 1.0724364682113548e-10
+        - -5.793923020922181e-15
+        - -29958.61275856748
+        - 5.910420040389626
+        type: NASApolynomial
+      type: NASA
+    type: Species
+  - comment: 'Thermo group additivity estimation: group(S2s-CsCs) + group(O2s-CsH)
+      + group(O2s-CsH) + group(O2s-CsH) + group(O2s-CsH) + group(O2s-CsH) + group(O2s-(Cds-O2d)H)
+      + group(N3s-CsHH) + group(Cs-CsCsOsH) + group(Cs-CsCsOsH) + group(Cs-CsCsOsH)
+      + group(Cs-CsN3sH(Cds-O2d)) + group(Cs-CsOsS2H) + group(Cs-CsS2HH) + group(Cs-CsOsHH)
+      + group(Cds-OdCsOs)'
+    name: OCC(C(C(C(SCC(C(=O)O)N)O)O)O)O
+    radicalelectrons: 0
+    smiles: OCC(C(C(C(SCC(C(=O)O)N)O)O)O)O
+    thermo:
+      polys:
+      - Tmax: 893.1829958256372
+        Tmin: 100.0
+        coefs:
+        - -6.348199779564709
+        - 0.23575296262277118
+        - -0.00031907895105275986
+        - 2.229749496819014e-07
+        - -6.134659644527517e-11
+        - -166505.0600262102
+        - 71.54385918108514
+        type: NASApolynomial
+      - Tmax: 5000.0
+        Tmin: 893.1829958256372
+        coefs:
+        - 32.47732936393479
+        - 0.06187982471609231
+        - -2.7081629162213953e-05
+        - 5.032049194902642e-09
+        - -3.4547035592229996e-13
+        - -173440.79135889947
+        - -111.38139308587839
+        type: NASApolynomial
+      type: NASA
+    type: Species
+  - comment: 'Thermo group additivity estimation: group(S2s-CsCs) + group(S2s-CsH)
+      + group(O2s-CsH) + group(O2s-CsH) + group(O2s-(Cds-O2d)H) + group(N3s-CsHH)
+      + group(N3s-CsHH) + group(Cs-N3sCsCsH) + group(Cs-CsN3sH(Cds-O2d)) + group(Cs-CsOsOsSs)
+      + group(Cs-CsS2HH) + group(Cs-CsS2HH) + group(Cds-OdCsOs)'
+    name: SCC(C(SCC(C(=O)O)N)(O)O)N
+    radicalelectrons: 0
+    smiles: SCC(C(SCC(C(=O)O)N)(O)O)N
+    thermo:
+      polys:
+      - Tmax: 662.4624940882693
+        Tmin: 100.0
+        coefs:
+        - -3.9050317945177357
+        - 0.18965160908126732
+        - -0.0002645531337358735
+        - 1.9220191382246792e-07
+        - -5.254488410680687e-11
+        - -97043.40017600809
+        - 55.79417551651041
+        type: NASApolynomial
+      - Tmax: 5000.0
+        Tmin: 662.4624940882693
+        coefs:
+        - 20.051215041105
+        - 0.0660152910685204
+        - -3.2186114611305845e-05
+        - 6.242300743228962e-09
+        - -4.372017608649645e-13
+        - -100678.51575066139
+        - -53.39603351449401
+        type: NASApolynomial
+      type: NASA
+    type: Species
+  - comment: 'Thermo group additivity estimation: group(S2s-CsCs) + group(S2s-CsCs)
+      + group(O2s-CsH) + group(O2s-CsH) + group(O2s-CsH) + group(O2s-CsH) + group(O2s-CsH)
+      + group(O2s-CsH) + group(O2s-CsH) + group(O2s-(Cds-O2d)H) + group(N3s-CsHH)
+      + group(N3s-CsHH) + group(Cs-N3sCsCsH) + group(Cs-CsCsOsH) + group(Cs-CsCsOsH)
+      + group(Cs-CsCsOsH) + group(Cs-CsN3sH(Cds-O2d)) + group(Cs-CsOsOsSs) + group(Cs-CsOsS2H)
+      + group(Cs-CsS2HH) + group(Cs-CsS2HH) + group(Cs-CsOsHH) + group(Cds-OdCsOs)'
+    name: OCC(C(C(C(SCC(C(SCC(C(=O)O)N)(O)O)N)O)O)O)O
+    radicalelectrons: 0
+    smiles: OCC(C(C(C(SCC(C(SCC(C(=O)O)N)(O)O)N)O)O)O)O
+    thermo:
+      polys:
+      - Tmax: 823.3672541523363
+        Tmin: 100.0
+        coefs:
+        - -11.615974484818272
+        - 0.36213045964583657
+        - -0.0005290439825341623
+        - 4.0090958805958696e-07
+        - -1.197615041456112e-10
+        - -213374.93283289866
+        - 102.07975001619516
+        type: NASApolynomial
+      - Tmax: 5000.0
+        Tmin: 823.3672541523363
+        coefs:
+        - 43.20304150442102
+        - 0.09586121037618432
+        - -4.4043638995206085e-05
+        - 8.282239693987141e-09
+        - -5.686273243436854e-13
+        - -222403.76189595045
+        - -151.74574769322032
+        type: NASApolynomial
+      type: NASA
+    type: Species
+  - comment: 'Thermo group additivity estimation: group(S2s-CsH) + group(O2s-CsH)
+      + group(O2s-CsH) + group(O2s-CsH) + group(O2s-CsH) + group(O2s-CsH) + group(O2s-(Cds-O2d)H)
+      + group(N3s-CsHH) + group(Cs-CCCN) + group(Cs-CsCsOsH) + group(Cs-CsCsOsH) +
+      group(Cs-CsCsOsH) + group(Cs-CsCsOsH) + group(Cs-CsS2HH) + group(Cs-CsOsHH)
+      + group(Cds-OdCsOs)'
+    name: OCC(C(C(C(C(C(=O)O)(CS)N)O)O)O)O
+    radicalelectrons: 0
+    smiles: OCC(C(C(C(C(C(=O)O)(CS)N)O)O)O)O
+    thermo:
+      polys:
+      - Tmax: 816.6271560503345
+        Tmin: 100.0
+        coefs:
+        - -6.22986669013597
+        - 0.2420700800386869
+        - -0.00036627378256981203
+        - 3.014640889100176e-07
+        - -9.867965261315583e-11
+        - -170044.31054400795
+        - 76.13961507447175
+        type: NASApolynomial
+      - Tmax: 5000.0
+        Tmin: 816.6271560503345
+        coefs:
+        - 22.99728309597792
+        - 0.08123127690646144
+        - -3.836901215753727e-05
+        - 7.264518401843139e-09
+        - -4.987312195303263e-13
+        - -174228.37588378345
+        - -55.33468289608275
+        type: NASApolynomial
+      type: NASA
+    type: Species
+  name: phase
+Reactions:
+- comment: 'Exact match found for rate rule [Carbonyl;Thiol]
+
+    Euclidian distance = 0
+
+    family: Thiol_Addition'
+  electronchange: 0
+  kinetics:
+    A: 1.0000000000000002
+    Ea: 50208.0
+    n: 1.0
+    type: Arrhenius
+  products:
+  - OCC(C(C(C(SCC(C(=O)O)N)O)O)O)O
+  radicalchange: 0
+  reactants:
+  - cysteine
+  - ribose
+  type: ElementaryReaction
+- comment: 'Exact match found for rate rule [Carbonyl;Thiol]
+
+    Euclidian distance = 0
+
+    family: Thiol_Addition'
+  electronchange: 0
+  kinetics:
+    A: 1.0000000000000002
+    Ea: 50208.0
+    n: 1.0
+    type: Arrhenius
+  products:
+  - SCC(C(SCC(C(=O)O)N)(O)O)N
+  radicalchange: 0
+  reactants:
+  - cysteine
+  - cysteine
+  type: ElementaryReaction
+- comment: 'Exact match found for rate rule [Carbonyl;Thiol]
+
+    Euclidian distance = 0
+
+    family: Thiol_Addition'
+  electronchange: 0
+  kinetics:
+    A: 1.0000000000000002
+    Ea: 50208.0
+    n: 1.0
+    type: Arrhenius
+  products:
+  - OCC(C(C(C(SCC(C(SCC(C(=O)O)N)(O)O)N)O)O)O)O
+  radicalchange: 0
+  reactants:
+  - cysteine
+  - OCC(C(C(C(SCC(C(=O)O)N)O)O)O)O
+  type: ElementaryReaction
+- comment: 'Exact match found for rate rule [Carbonyl;Thiol]
+
+    Euclidian distance = 0
+
+    family: Thiol_Addition'
+  electronchange: 0
+  kinetics:
+    A: 1.0000000000000002
+    Ea: 50208.0
+    n: 1.0
+    type: Arrhenius
+  products:
+  - OCC(C(C(C(SCC(C(SCC(C(=O)O)N)(O)O)N)O)O)O)O
+  radicalchange: 0
+  reactants:
+  - ribose
+  - SCC(C(SCC(C(=O)O)N)(O)O)N
+  type: ElementaryReaction
+- comment: 'Exact match found for rate rule [Aldol_Adduct]
+
+    Euclidian distance = 0
+
+    family: Retro_Aldol_Fragmentation'
+  electronchange: 0
+  kinetics:
+    A: 100000.0
+    Ea: 117152.0
+    n: 1.0
+    type: Arrhenius
+  products:
+  - cysteine
+  - ribose
+  radicalchange: 0
+  reactants:
+  - OCC(C(C(C(C(C(=O)O)(CS)N)O)O)O)O
+  type: ElementaryReaction
+Units: {}

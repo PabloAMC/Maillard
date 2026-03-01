@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+.venv/
+env/
+
+# Conda
+.conda/
+
+# Computational outputs
+results/
+*.log
+*.out
+*.err
+*.chk
+*.fchk
+*.wfn
+*.molden
+
+# xTB scratch
+xtbopt.log
+xtbtopo.mol
+wbo
+xtbrestart
+charges
+energy
+
+# macOS
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
+*.swp
