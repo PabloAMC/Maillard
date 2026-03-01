@@ -1,0 +1,140 @@
+# Desirable Target Volatiles for Plant-Based Meat Flavour Replication
+#
+# Source: pathways.md, Maillard_meat.md, Maillard_Plant_based.md and literature.
+# All SMILES validated against PubChem.
+# Odour thresholds in μg/kg (water), where available.
+#
+# Fields:
+#   name          : IUPAC or common name
+#   cas           : CAS registry number
+#   smiles        : canonical SMILES
+#   inchi         : InChI string
+#   precursor     : biological precursor amino acid or sugar
+#   pathway       : which Maillard sub-pathway produces it
+#   sensory_desc  : human olfactory descriptor
+#   odour_threshold_ug_per_kg: detection threshold in water (μg/kg); null if unknown
+#   priority      : "critical" | "high" | "medium"
+#   notes         : any relevant notes
+
+compounds:
+
+  - name: "2-Methyl-3-furanthiol (MFT)"
+    cas: "28588-74-1"
+    smiles: "Cc1occc1S"
+    inchi: "InChI=1S/C5H6OS/c1-4-5(7)2-3-6-4/h2-3,7H,1H3"
+    precursor: "D-Ribose (retro-aldol → 1,4-dideoxyosone)"
+    pathway: "C — S-Maillard"
+    sensory_desc: "Intense meaty, boiled meat, broth-like"
+    odour_threshold_ug_per_kg: 0.0001   # extremely low threshold
+    priority: "critical"
+    notes: "Single most important meaty odorant. Absent in plant matrices without ribose + cysteine."
+
+  - name: "2-Furfurylthiol (FFT)"
+    cas: "98-02-2"
+    smiles: "SCc1ccco1"
+    inchi: "InChI=1S/C5H6OS/c6-3-5-2-1-4-7-5/h1-2,4,6H,3H2"
+    precursor: "Pentose (ribose/xylose) + L-Cysteine"
+    pathway: "C — S-Maillard: furfural + H₂S"
+    sensory_desc: "Roasted, coffee-like, sesame, meaty"
+    odour_threshold_ug_per_kg: 0.01
+    priority: "critical"
+    notes: "Requires pentose dehydration to furfural; cysteine supplies H₂S."
+
+  - name: "Methional (3-(methylthio)propanal)"
+    cas: "3268-49-3"
+    smiles: "CSCCC=O"
+    inchi: "InChI=1S/C4H8OS/c1-6-3-2-4-5/h4H,2-3H2,1H3"
+    precursor: "L-Methionine"
+    pathway: "B — Strecker Degradation"
+    sensory_desc: "Cooked potato, savory meat broth"
+    odour_threshold_ug_per_kg: 0.2
+    priority: "critical"
+    notes: "Extremely potent; contributes heavily to broth/umami base note."
+
+  - name: "2-Methylbutanal"
+    cas: "96-17-3"
+    smiles: "CCC(C)C=O"
+    inchi: "InChI=1S/C5H10O/c1-3-5(2)4-6/h4-5H,3H2,1-2H3"
+    precursor: "L-Isoleucine"
+    pathway: "B — Strecker Degradation"
+    sensory_desc: "Malty, chocolate, fruity"
+    odour_threshold_ug_per_kg: 1.5
+    priority: "high"
+    notes: "Branched-chain Strecker aldehyde from Ile."
+
+  - name: "3-Methylbutanal"
+    cas: "590-86-3"
+    smiles: "CC(C)CC=O"
+    inchi: "InChI=1S/C5H10O/c1-5(2)3-4-6/h4H,3H2,1-2H3"
+    precursor: "L-Leucine"
+    pathway: "B — Strecker Degradation"
+    sensory_desc: "Malty, toasted, fruity"
+    odour_threshold_ug_per_kg: 1.5
+    priority: "high"
+    notes: "Branched-chain Strecker aldehyde from Leu."
+
+  - name: "2-Methylpropanal (isobutyraldehyde)"
+    cas: "78-84-2"
+    smiles: "CC(C)C=O"
+    inchi: "InChI=1S/C4H8O/c1-4(2)3-5/h3-4H,1-2H3"
+    precursor: "L-Valine"
+    pathway: "B — Strecker Degradation"
+    sensory_desc: "Malty, fruity, chocolate-like"
+    odour_threshold_ug_per_kg: 0.5
+    priority: "high"
+    notes: "Strecker aldehyde from Val."
+
+  - name: "Phenylacetaldehyde"
+    cas: "122-78-1"
+    smiles: "O=CCc1ccccc1"
+    inchi: "InChI=1S/C8H8O/c9-7-6-8-4-2-1-3-5-8/h1-5,7H,6H2"
+    precursor: "L-Phenylalanine"
+    pathway: "B — Strecker Degradation"
+    sensory_desc: "Honey-like, floral, rose"
+    odour_threshold_ug_per_kg: 5.2
+    priority: "medium"
+    notes: "Also implicated in PhIP (carcinogenic HAA) formation via creatinine condensation — dual role."
+
+  - name: "2,3-Dimethylpyrazine"
+    cas: "5910-89-4"
+    smiles: "Cc1nccnc1C"
+    inchi: "InChI=1S/C6H8N2/c1-5-6(2)8-4-3-7-5/h3-4H,1-2H3"
+    precursor: "Alanine / Glycine + α-dicarbonyl"
+    pathway: "B — Strecker → α-aminoketone dimerisation"
+    sensory_desc: "Roasted, nutty, earthy"
+    odour_threshold_ug_per_kg: null
+    priority: "high"
+    notes: "Alkaline pH strongly favours pyrazine formation over furans."
+
+  - name: "2-Ethyl-3,5-dimethylpyrazine"
+    cas: "13360-64-0"
+    smiles: "CCc1nc(C)cnc1C"
+    inchi: "InChI=1S/C8H12N2/c1-4-7-8(3)10-6-5-9-7/h5-6H,4H2,1-3H3"
+    precursor: "L-Leucine / L-Isoleucine + α-dicarbonyl"
+    pathway: "B — Strecker → α-aminoketone dimerisation"
+    sensory_desc: "Roasted crust, deep earthy, nutty"
+    odour_threshold_ug_per_kg: null
+    priority: "high"
+    notes: "High-impact aroma compound in seared meat crust."
+
+  - name: "Dimethyl disulfide"
+    cas: "624-92-0"
+    smiles: "CSSC"
+    inchi: "InChI=1S/C2H6S2/c1-3-4-2/h1-2H3"
+    precursor: "L-Cysteine / Thiamine thermal degradation"
+    pathway: "C — S-Maillard"
+    sensory_desc: "Onion-like, meaty base note"
+    odour_threshold_ug_per_kg: 7.6
+    priority: "medium"
+    notes: "Forms via radical recombination of methanethiol."
+
+  - name: "Dimethyl trisulfide"
+    cas: "3658-80-8"
+    smiles: "CSSSC"
+    inchi: "InChI=1S/C2H6S3/c1-3-4-5-2/h1-2H3"
+    precursor: "L-Cysteine / Thiamine thermal degradation"
+    pathway: "C — S-Maillard"
+    sensory_desc: "Cooked meat, onion, sulfurous"
+    odour_threshold_ug_per_kg: 0.1
+    priority: "medium"
+    notes: "Very low threshold; even trace amounts contribute to meaty base."

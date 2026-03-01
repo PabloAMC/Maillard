@@ -1,0 +1,566 @@
+# Maillard Reaction Families — Domain Knowledge for RMG-Py
+#
+# This file documents all reaction families that must be either confirmed present
+# in RMG-Py's default library or added as custom reaction families.
+#
+# Structure:
+#   id         : unique reaction ID (1B.x matching todo.md)
+#   pathway    : which of the 5 major pathway families (A–E)
+#   name       : reaction name
+#   type       : mechanism type (ionic | radical | elimination | condensation | fragmentation | rearrangement)
+#   reactants  : list of reactant species/classes
+#   products   : list of product species/classes
+#   conditions : environmental/physical conditions that govern this step
+#   ph_effect  : pH sensitivity (none | acidic_favoured | alkaline_favoured | both)
+#   temperature_range_C: [min, max] for this step to be active
+#   stoichiometry_notes: any Lys/Cys/H₂S pool competition notes
+#   evidence   : experimental_confirmed | proposed | well-established
+#   rmg_status : native_family | custom_required | partial
+#   notes      : implementation guidance
+
+# ===========================================================================
+# PATHWAY A — Core Maillard Cascade
+# ===========================================================================
+
+reaction_families:
+
+  - id: "1B.1"
+    pathway: "A — Core Maillard Cascade"
+    name: "Schiff base formation"
+    type: "condensation"
+    reactants:
+      - "Open-chain reducing sugar (aldehyde form)"
+      - "Primary amine (amino acid α-NH₂ or Lys ε-NH₂)"
+    products:
+      - "N-substituted glycosylamine (Schiff base / aldimine)"
+      - "H₂O"
+    conditions:
+      - "Aqueous medium (aw > 0.3)"
+      - "Temperature: 50–200°C"
+    ph_effect: "alkaline_favoured"
+    temperature_range_C: [50, 200]
+    stoichiometry_notes: "Consumes 1 Lys (or other amine) and 1 sugar molecule"
+    evidence: "experimental_confirmed"
+    rmg_status: "partial"
+    notes: |
+      RMG handles nucleophilic addition. Key challenge: correctly representing the open-chain
+      (acyclic) tautomer of the sugar as the reactive species. Most sugars in RMG databases
+      are in ring form; must force open-chain representation for reactivity.
+      Reaction is reversible at low temperature.
+
+  - id: "1B.2"
+    pathway: "A — Core Maillard Cascade"
+    name: "Amadori rearrangement (aldose sugars)"
+    type: "rearrangement"
+    reactants:
+      - "N-substituted glycosylamine (from aldose: glucose, ribose, xylose)"
+    products:
+      - "1-amino-1-deoxy-2-ketose (Amadori product, ARP)"
+    conditions:
+      - "Mild heat (50–150°C)"
+      - "Aqueous or low-moisture"
+    ph_effect: "none"
+    temperature_range_C: [50, 150]
+    stoichiometry_notes: "No net consumption of additional precursors"
+    evidence: "experimental_confirmed"
+    rmg_status: "custom_required"
+    notes: |
+      This is the pivotal, largely irreversible rearrangement. No direct equivalent in
+      RMG's combustion families. Must be implemented as a custom [1,2]-H shift / keto-enol
+      tautomerisation with cyclisation. Key rate-limiting step; target for Tier 2 DFT.
+      HIGH PRIORITY reaction family to implement.
+
+  - id: "1B.3"
+    pathway: "A — Core Maillard Cascade"
+    name: "Heyns rearrangement (ketose sugars)"
+    type: "rearrangement"
+    reactants:
+      - "N-substituted glycosylamine (from ketose: fructose)"
+    products:
+      - "2-amino-2-deoxyaldose (Heyns Rearrangement Product, HRP)"
+    conditions:
+      - "Mild heat (50–150°C)"
+    ph_effect: "none"
+    temperature_range_C: [50, 150]
+    stoichiometry_notes: "No net consumption of additional precursors"
+    evidence: "experimental_confirmed"
+    rmg_status: "custom_required"
+    notes: |
+      Analogous to 1B.2 but for fructose/ketoses. Yields different downstream intermediates
+      than Amadori products — important distinction for fructose-supplemented PBMAs.
+
+  - id: "1B.4"
+    pathway: "A — Core Maillard Cascade"
+    name: "1,2-Enolisation (acidic pH pathway)"
+    type: "elimination"
+    reactants:
+      - "Amadori product (ARP)"
+    products:
+      - "3-deoxyosone (3-DG)"
+      - "Free amine (released)"
+    conditions:
+      - "Acidic pH (< 6)"
+      - "Temperature: 100–200°C"
+    ph_effect: "acidic_favoured"
+    temperature_range_C: [100, 200]
+    stoichiometry_notes: "Releases amine back to pool (reversible for 1st step only)"
+    evidence: "experimental_confirmed"
+    rmg_status: "custom_required"
+    notes: |
+      3-deoxyosone undergoes further dehydration → furfural (C5) or HMF (C6).
+      This pathway is LESS desirable for meat-flavour replication — generates fewer
+      sulfur/nitrogen heterocycles.
+      pH-conditional branching: must be encoded as a conditional rule vs 1B.5.
+
+  - id: "1B.5"
+    pathway: "A — Core Maillard Cascade"
+    name: "2,3-Enolisation (neutral/alkaline pH pathway)"
+    type: "elimination"
+    reactants:
+      - "Amadori product (ARP)"
+    products:
+      - "1-deoxyosone (1-DG)"
+      - "α-dicarbonyl compounds (pyruvaldehyde, diacetyl, glyoxal)"
+    conditions:
+      - "Neutral to alkaline pH (≥ 6)"
+      - "Temperature: 100–200°C"
+    ph_effect: "alkaline_favoured"
+    temperature_range_C: [100, 200]
+    stoichiometry_notes: "Generates pool of reactive α-dicarbonyls that drive Strecker (1B.8)"
+    evidence: "experimental_confirmed"
+    rmg_status: "custom_required"
+    notes: |
+      CRITICAL PATHWAY for meat-flavour generation. Must be favoured in the model.
+      pH 6–8 (achievable by alkaline pre-treatment of plant proteins, e.g., NaHCO₃) is key.
+      1-Deoxyosones are the α-dicarbonyl pool that feeds Strecker degradation.
+      pH-conditional branching rule: if pH ≥ 6, this pathway > 1B.4.
+
+  - id: "1B.6"
+    pathway: "A — Core Maillard Cascade"
+    name: "Retro-aldol fragmentation of sugar skeleton"
+    type: "fragmentation"
+    reactants:
+      - "1-deoxyosone or Amadori product (C5/C6)"
+    products:
+      - "C2 fragments (glycolaldehyde, glyoxal)"
+      - "C3 fragments (pyruvaldehyde, methylglyoxal)"
+    conditions:
+      - "High temperature (120–200°C)"
+      - "Alkaline pH favoured"
+    ph_effect: "alkaline_favoured"
+    temperature_range_C: [120, 200]
+    stoichiometry_notes: "Ribose fragments more readily than glucose (5-carbon skeleton more fragile)"
+    evidence: "experimental_confirmed"
+    rmg_status: "partial"
+    notes: |
+      Retro-aldol is a known RMG reaction family (reverse of aldol condensation).
+      Ribose undergoes this more readily than glucose, producing greater α-dicarbonyl yield.
+      C2/C3 fragments combine with H₂S/NH₃ to form thiazoles, thiazolines, pyrazines.
+
+  - id: "1B.7"
+    pathway: "A — Core Maillard Cascade"
+    name: "pH-conditional enolisation branching rule"
+    type: "conditional_rule"
+    reactants:
+      - "Amadori product"
+    products:
+      - "Conditional branch: pH < 6 → 1B.4 (3-deoxyosone); pH ≥ 6 → 1B.5 (1-deoxyosone)"
+    conditions:
+      - "pH parameter must be explicitly set at network-generation time"
+    ph_effect: "both"
+    temperature_range_C: [80, 200]
+    stoichiometry_notes: "No net consumption — controls routing"
+    evidence: "experimental_confirmed"
+    rmg_status: "custom_required"
+    notes: |
+      RMG does not natively handle protonation equilibria. Implement as a multiplier on
+      reaction rate constants: k_12enol / k_23enol = f(pH). Under acidic conditions,
+      weight pathway 1B.4 more heavily; under alkaline, weight 1B.5.
+      Simplest implementation: run two separate RMG jobs (pH_low, pH_high) and compare.
+
+# ===========================================================================
+# PATHWAY B — Strecker Degradation
+# ===========================================================================
+
+  - id: "1B.8"
+    pathway: "B — Strecker Degradation"
+    name: "Strecker amino acid oxidative deamination"
+    type: "condensation"
+    reactants:
+      - "Free α-amino acid (any)"
+      - "α-dicarbonyl compound (pyruvaldehyde, glyoxal, methylglyoxal)"
+    products:
+      - "α-aminoketone"
+      - "Strecker aldehyde (n-1 carbon relative to amino acid)"
+      - "CO₂"
+    conditions:
+      - "Temperature: 100–180°C"
+      - "Neutral to slightly alkaline pH"
+    ph_effect: "alkaline_favoured"
+    temperature_range_C: [100, 180]
+    stoichiometry_notes: "Consumes α-dicarbonyl from pool (1B.5/1B.6 feed this pool)"
+    evidence: "experimental_confirmed"
+    rmg_status: "custom_required"
+    notes: |
+      Core flavour-generating step. Each amino acid yields a characteristic Strecker aldehyde.
+      The released CO₂ can be used as a reaction progress marker experimentally.
+      α-aminoketone co-product is the nitrogen source for pyrazines (1B.10).
+
+  - id: "1B.9"
+    pathway: "B — Strecker Degradation"
+    name: "Strecker aldehyde precursor mapping"
+    type: "mapping_rule"
+    reactants: []
+    products: []
+    conditions: []
+    ph_effect: "none"
+    temperature_range_C: [100, 180]
+    stoichiometry_notes: "One-to-one precursor→product mapping"
+    evidence: "experimental_confirmed"
+    rmg_status: "custom_required"
+    notes: |
+      Hard-coded Strecker mapping (validated in literature):
+        L-Valine      → 2-methylpropanal   (odour threshold: 0.5 μg/kg)
+        L-Leucine     → 3-methylbutanal    (odour threshold: 1.5 μg/kg)
+        L-Isoleucine  → 2-methylbutanal    (odour threshold: 1.5 μg/kg)
+        L-Methionine  → methional          (very low threshold)
+        L-Phenylalanine → phenylacetaldehyde (5.2 μg/kg) ⚠️ PhIP risk
+        Glycine       → acetaldehyde
+        L-Alanine     → acetaldehyde
+      Use these mappings to hard-code expected products for RMG validation tests.
+
+  - id: "1B.10"
+    pathway: "B — Strecker Degradation"
+    name: "α-Aminoketone condensation → pyrazine"
+    type: "condensation"
+    reactants:
+      - "2 × α-aminoketone molecules"
+    products:
+      - "Dihydropyrazine intermediate"
+      - "Pyrazine (after oxidation)"
+    conditions:
+      - "Temperature: 120–200°C"
+      - "Alkaline pH strongly favoured"
+      - "Low water activity (aw < 0.7)"
+    ph_effect: "alkaline_favoured"
+    temperature_range_C: [120, 200]
+    stoichiometry_notes: "Requires 2 α-aminoketone molecules (bimolecular); oxidation step needs O₂ or oxidant"
+    evidence: "experimental_confirmed"
+    rmg_status: "partial"
+    notes: |
+      Dimerisation of two α-aminoketones → dihydropyrazine is an aldol-type condensation
+      (RMG partial support). The oxidation to fully aromatic pyrazine is the rate-limiting step.
+      High pH and low aw maximise pyrazine yield — important engineering lever.
+
+# ===========================================================================
+# PATHWAY C — S-Maillard (Sulfur Pathway)
+# ===========================================================================
+
+  - id: "1B.11"
+    pathway: "C — S-Maillard"
+    name: "Thermal degradation of cysteine"
+    type: "fragmentation"
+    reactants:
+      - "L-Cysteine"
+    products:
+      - "H₂S"
+      - "NH₃"
+      - "Pyruvaldehyde (or dehydroalanine)"
+    conditions:
+      - "Temperature: > 100°C"
+      - "Aqueous medium"
+    ph_effect: "both"
+    temperature_range_C: [100, 250]
+    stoichiometry_notes: "1 Cys → 1 H₂S + 1 NH₃ + C3 fragment. H₂S is key sulfur donor for FFT/MFT."
+    evidence: "experimental_confirmed"
+    rmg_status: "custom_required"
+    notes: |
+      Rate of H₂S release from Cys is the primary determinant of sulfur volatile yield.
+      CRITICAL: any Cys diverted to DHA pathway (1B.20) reduces H₂S pool → reduces MFT/FFT.
+      H₂S release rate increases with temperature; monitor in model to avoid oversaturation
+      (excess free H₂S = rotten egg/sulfur off-note).
+
+  - id: "1B.12"
+    pathway: "C — S-Maillard"
+    name: "Pentose dehydration → furfural"
+    type: "elimination"
+    reactants:
+      - "D-Ribose or D-Xylose (open-chain form)"
+    products:
+      - "Furfural (2-furaldehyde)"
+      - "3 × H₂O"
+    conditions:
+      - "Temperature: 100–180°C"
+      - "Acidic to neutral pH (< 7)"
+    ph_effect: "acidic_favoured"
+    temperature_range_C: [100, 180]
+    stoichiometry_notes: "1 pentose → 1 furfural"
+    evidence: "experimental_confirmed"
+    rmg_status: "partial"
+    notes: |
+      RMG handles sequential elimination reactions. Key: pentose must be in open-chain form.
+      Furfural is the required electrophilic intermediate for FFT formation (1B.13).
+      Also contributes sweet/almond aroma by itself.
+
+  - id: "1B.13"
+    pathway: "C — S-Maillard"
+    name: "Furfural + H₂S → 2-Furfurylthiol (FFT)"
+    type: "condensation"
+    reactants:
+      - "Furfural"
+      - "H₂S"
+    products:
+      - "2-Furfurylthiol (FFT)"
+    conditions:
+      - "Temperature: 100–160°C"
+      - "Aqueous medium"
+      - "pH 4–7"
+    ph_effect: "none"
+    temperature_range_C: [100, 160]
+    stoichiometry_notes: "1 furfural + 1 H₂S → 1 FFT. H₂S pool shared with 1B.18."
+    evidence: "experimental_confirmed"
+    rmg_status: "custom_required"
+    notes: |
+      HIGH PRIORITY target reaction. FFT has one of the strongest 'meaty/roasted' aromas.
+      Requires both furfural (from 1B.12) AND H₂S (from 1B.11) to be present simultaneously.
+      Thiol addition to carbonyl → hemithioacetal → rearrangement to thiol.
+      Literature: Cys + xylose mixture → highly efficient FFT generation.
+
+  - id: "1B.14"
+    pathway: "C — S-Maillard"
+    name: "Ribose retro-aldol → 1,4-dideoxyosone → MFT"
+    type: "fragmentation"
+    reactants:
+      - "D-Ribose (retro-aldol fragmentation product)"
+    products:
+      - "1,4-dideoxyosone (key reactive intermediate)"
+      - "→ 3-mercapto-2-pentanone (intermediate)"
+      - "→ 2-Methyl-3-furanthiol (MFT)"
+    conditions:
+      - "Temperature: 100–160°C"
+      - "L-Cysteine must be present to supply H₂S"
+    ph_effect: "none"
+    temperature_range_C: [100, 160]
+    stoichiometry_notes: "Ribose-specific fragmentation pathway; does NOT require furfural as intermediate"
+    evidence: "proposed (strong experimental support)"
+    rmg_status: "custom_required"
+    notes: |
+      HIGHEST PRIORITY target. MFT is the most powerful meaty odorant.
+      This pathway is ribose-SPECIFIC — does not occur with glucose.
+      Multi-step sequence: requires custom encoding of 1,4-dideoxyosone as intermediate.
+      Literature: Maillard_Plant_based.md confirms a secondary pathway bypassing 4-hydroxy-5-methyl-3(2H)-furanone.
+      Target for Tier 2 DFT calculation (3.2e in todo.md).
+
+  - id: "1B.15"
+    pathway: "C — S-Maillard"
+    name: "Thiamine thermal fragmentation"
+    type: "fragmentation"
+    reactants:
+      - "Thiamine (Vitamin B1)"
+    products:
+      - "H₂S"
+      - "2-Methylthiophene"
+      - "4,5-dihydro-2-methylthiophene"
+      - "Various thiazoles and furans"
+    conditions:
+      - "Temperature: > 100°C"
+      - "Aqueous or low-moisture"
+    ph_effect: "none"
+    temperature_range_C: [100, 250]
+    stoichiometry_notes: "Multiple products; H₂S release amplifies sulfur volatile pool"
+    evidence: "experimental_confirmed"
+    rmg_status: "custom_required"
+    notes: |
+      Thiamine pyrimidine and thiazole ring fragmentation releases sulfur/nitrogen donors.
+      Adds to H₂S pool (supplement to Cys degradation).
+      Used exogenously in PBMA formulation: xylose + Cys + thiamine = robust meaty flavour system.
+
+  - id: "1B.16"
+    pathway: "C — S-Maillard"
+    name: "Glutathione (GSH) thermal cleavage"
+    type: "hydrolysis"
+    reactants:
+      - "Glutathione (GSH: γ-Glu-Cys-Gly)"
+    products:
+      - "Glutamic acid"
+      - "Cysteinylglycine dipeptide (CysGly)"
+    conditions:
+      - "Temperature: 100–140°C"
+      - "pH 4.5–5.5 (slightly acidic optimum)"
+    ph_effect: "acidic_favoured"
+    temperature_range_C: [100, 140]
+    stoichiometry_notes: "CysGly dipeptide then undergoes further Maillard reactions differently than free Cys"
+    evidence: "experimental_confirmed"
+    rmg_status: "custom_required"
+    notes: |
+      GSH is preferable to free cysteine as a precursor because CysGly gives a qualitatively
+      superior volatile profile (more nuanced, less crude sulfurous). Optimal: 131.53°C, 94.85 min, pH 4.79.
+      CysGly then enters pathway 1B.11.
+
+# ===========================================================================
+# PATHWAY D — Lipid-Maillard Crosstalk & Off-Flavour Trapping
+# ===========================================================================
+
+  - id: "1B.17"
+    pathway: "D — Lipid-Maillard Crosstalk"
+    name: "Off-flavour trapping: aldehyde → non-volatile Schiff base"
+    type: "condensation"
+    reactants:
+      - "Hexanal (or nonanal, other lipid-derived aldehyde)"
+      - "Free amino acid (ε-NH₂ of Lys, or α-NH₂)"
+    products:
+      - "Non-volatile Schiff base (permanently trapped, odourless)"
+    conditions:
+      - "Temperature: 100–160°C"
+      - "Excess amino acid beyond Maillard demand"
+    ph_effect: "alkaline_favoured"
+    temperature_range_C: [100, 160]
+    stoichiometry_notes: "CONSUMES free amino acid; strategy: add excess amino acid to ensure both Maillard AND trapping can proceed"
+    evidence: "experimental_confirmed"
+    rmg_status: "custom_required"
+    notes: |
+      KEY ENGINEERING LEVER for reducing beany off-flavours.
+      Hexanal reacts with amine → Schiff base → irreversible covalent bond with denatured protein → non-volatile.
+      Must model this as a COMPETING pathway that removes hexanal from the volatile pool.
+      In recommend.py: add "off-flavour trapping bonus" when excess amino acid is available.
+      Target for Tier 2 DFT: reaction 3.2g.
+
+  - id: "1B.18"
+    pathway: "D — Lipid-Maillard Crosstalk"
+    name: "Lipid aldehyde + H₂S → alkylthiazoles (synergy)"
+    type: "condensation"
+    reactants:
+      - "Long-chain lipid aldehyde (hexanal, nonanal, etc.)"
+      - "H₂S"
+      - "NH₃"
+    products:
+      - "Long-chain alkylthiazoles"
+      - "Long-chain alkylpyrazines"
+    conditions:
+      - "Temperature: 120–200°C"
+      - "Simultaneous with Maillard cascade"
+    ph_effect: "none"
+    temperature_range_C: [120, 200]
+    stoichiometry_notes: "H₂S pool shared with FFT/MFT pathways (1B.13, 1B.14) — zeor-sum competition"
+    evidence: "experimental_confirmed"
+    rmg_status: "custom_required"
+    notes: |
+      DUAL character: lipid aldehydes are off-flavour precursors BUT can be redirected to desirable
+      alkylthiazoles/pyrazines via Maillard crosstalk. Species-specific 'chicken' and 'beef fat'
+      aromas emerge via this pathway. Balance is critical: too much lipid oxidation → off-notes dominate.
+
+# ===========================================================================
+# PATHWAY E — Dehydroalanine (DHA) Competing Pathway
+# ===========================================================================
+
+  - id: "1B.19"
+    pathway: "E — DHA Competing Pathway"
+    name: "Serine β-elimination → dehydroalanine (DHA)"
+    type: "elimination"
+    reactants:
+      - "L-Serine (β-OH group)"
+    products:
+      - "Dehydroalanine (DHA)"
+      - "H₂O"
+    conditions:
+      - "High temperature (> 140°C)"
+      - "High shear (extrusion)"
+      - "Alkaline pH"
+    ph_effect: "alkaline_favoured"
+    temperature_range_C: [140, 250]
+    stoichiometry_notes: "Serine consumed; DHA is a highly electrophilic intermediate that attacks Lys and Cys"
+    evidence: "experimental_confirmed"
+    rmg_status: "custom_required"
+    notes: |
+      DHA pathway is the primary stoichiometric COMPETITOR to the Maillard reaction.
+      High-temperature extrusion (120–177°C) + high shear → significant β-elimination.
+      DHA formation rate must be tracked to correctly predict Lys pool available for Maillard.
+
+  - id: "1B.20"
+    pathway: "E — DHA Competing Pathway"
+    name: "Cysteine β-elimination → DHA + H₂S"
+    type: "elimination"
+    reactants:
+      - "L-Cysteine"
+    products:
+      - "Dehydroalanine (DHA)"
+      - "H₂S"
+    conditions:
+      - "High temperature (> 140°C)"
+      - "Alkaline pH"
+    ph_effect: "alkaline_favoured"
+    temperature_range_C: [140, 250]
+    stoichiometry_notes: "DUAL LOSS: Cys removed from S-Maillard pool AND Lys attacked by DHA product"
+    evidence: "experimental_confirmed"
+    rmg_status: "custom_required"
+    notes: |
+      ⚠️ CRITICAL competition: if Cys undergoes 1B.20 instead of 1B.11, it both:
+      (a) forfeits direct H₂S contribution to MFT/FFT pathways
+      (b) generates DHA that then destroys Lys
+      Model must track which Cys fraction goes to DHA vs S-Maillard as a function of T and pH.
+      Target for Tier 2 DFT: reaction 3.2f.
+
+  - id: "1B.21"
+    pathway: "E — DHA Competing Pathway"
+    name: "DHA + Lysine → Lysinoalanine (LAL)"
+    type: "condensation"
+    reactants:
+      - "Dehydroalanine (DHA)"
+      - "Lysine (ε-amino group)"
+    products:
+      - "Lysinoalanine (LAL) — permanent protein cross-link"
+    conditions:
+      - "High temperature"
+      - "Alkaline pH"
+    ph_effect: "alkaline_favoured"
+    temperature_range_C: [120, 250]
+    stoichiometry_notes: "IRREVERSIBLY consumes 1 Lys. This Lys is permanently removed from Maillard pool."
+    evidence: "experimental_confirmed"
+    rmg_status: "custom_required"
+    notes: |
+      Michael addition of Lys ε-NH₂ to DHA alkene. Forms covalent protein cross-link.
+      Models must decrement Lys pool by 1 for each LAL formed.
+      LAL formation improves texture (cross-linking) but destroys flavour potential.
+      This is the fundamental Maillard-DHA trade-off in PBMA formulation.
+
+  - id: "1B.22"
+    pathway: "E — DHA Competing Pathway"
+    name: "DHA + Cysteine → Lanthionine (LAN)"
+    type: "condensation"
+    reactants:
+      - "Dehydroalanine (DHA)"
+      - "Cysteine (thiol group)"
+    products:
+      - "Lanthionine (LAN) — permanent protein cross-link"
+    conditions:
+      - "High temperature"
+      - "Near-neutral to alkaline pH"
+    ph_effect: "alkaline_favoured"
+    temperature_range_C: [120, 250]
+    stoichiometry_notes: "IRREVERSIBLY consumes 1 Cys. Reduces H₂S pool for S-Maillard."
+    evidence: "experimental_confirmed"
+    rmg_status: "custom_required"
+    notes: |
+      Double penalty: consumes Cys (removing H₂S source) AND removes DHA (reducing further DHA-Lys).
+      Lanthionine cross-links build texture but starve the sulfur volatile pathway.
+
+  - id: "1B.23"
+    pathway: "E — DHA Competing Pathway"
+    name: "Stoichiometric competition encoding rule"
+    type: "accounting_rule"
+    reactants: []
+    products: []
+    conditions: []
+    ph_effect: "none"
+    temperature_range_C: [100, 250]
+    stoichiometry_notes: |
+      Maillard-available Lys = Total Lys - Lys consumed by DHA (1B.21)
+      Maillard-available Cys = Total Cys - Cys consumed by DHA (1B.20) - Lanthionine (1B.22)
+      H₂S pool = H₂S from 1B.11 + 1B.15 + 1B.20
+    evidence: "experimental_confirmed"
+    rmg_status: "custom_required"
+    notes: |
+      This is not a chemical reaction but a stoichiometric accounting rule that must be
+      implemented in src/pathway_ranker.py and src/recommend.py.
+      Without this rule, models will OVERESTIMATE meaty volatile yield (as documented in pathways.md).
+      Failing to model DHA systematically leads to overoptimistic precursor recommendations.

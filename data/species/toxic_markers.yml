@@ -1,0 +1,119 @@
+# Toxic / Harmful Maillard Reaction Marker Compounds
+#
+# These compounds form in advanced Maillard stages and must be FLAGGED and MINIMISED.
+# Sources: Maillard_meat.md, Maillard_Plant_based.md, Elicit reports.
+# SMILES validated against PubChem.
+#
+# Fields:
+#   name          : IUPAC or common name
+#   cas           : CAS registry number
+#   smiles        : canonical SMILES
+#   class         : compound class (AGE, HAA, acrylamide, furan, cross-link)
+#   formation     : key chemical precursors and mechanism
+#   health_risk   : carcinogenic / inflammatory / genotoxic classification
+#   iarc_class    : IARC classification where applicable
+#   analytical_marker: whether used as an analytical Maillard reaction marker
+#   priority      : "critical" | "high" | "medium"
+#   notes         : relevant context for plant-based vs meat matrix
+
+compounds:
+
+  # --- Advanced Glycation End-Products (AGEs) ---
+
+  - name: "Nε-(Carboxymethyl)lysine (CML)"
+    cas: "23100-12-1"
+    smiles: "NCCCC[C@@H](N)C(=O)O.OCC(=O)O"
+    inchi: "InChI=1S/C8H16N2O4/c9-4-2-1-3-6(10-5-7(11)12)8(13)14/h6H,1-5,9-10H2,(H,11,12)(H,13,14)/t6-/m0/s1"
+    class: "AGE (Advanced Glycation End-product)"
+    formation: "Lysine + glyoxal (from Amadori oxidation); also from ascorbic acid oxidation"
+    health_risk: "Pro-inflammatory; binds RAGE receptors triggering NF-κB cascade; associated with CVD and T2D"
+    iarc_class: null
+    analytical_marker: true
+    priority: "critical"
+    notes: "PBMA concentrations 16.46–47.61 mg/kg; benchmark 79% reduction possible on whole-food plant diet. Indicator of advanced Maillard progression."
+
+  - name: "Nε-(Carboxyethyl)lysine (CEL)"
+    cas: "136362-46-2"
+    smiles: "NCCCC[C@@H](N)C(=O)O.CCC(=O)O"
+    inchi: null
+    class: "AGE"
+    formation: "Lysine + methylglyoxal (from triose phosphate / Amadori fragmentation)"
+    health_risk: "Terminal irreversible AGE; systemic dicarbonyl stress marker; associated with kidney disease and diabetic complications"
+    iarc_class: null
+    analytical_marker: true
+    priority: "critical"
+    notes: "PBMA concentrations 25.21–86.23 mg/kg. Higher concentration than CML in many extruded PBMAs."
+
+  - name: "5-Hydroxymethylfurfural (HMF)"
+    cas: "67-47-0"
+    smiles: "OCc1ccc(C=O)o1"
+    inchi: "InChI=1S/C6H6O3/c7-2-5-1-3-6(4-5)9-2/h1,3-4,8H,2H2"  # approximate
+    class: "Furan derivative / AGE precursor"
+    formation: "1,2-enolisation of hexose Amadori products (acidic pH); also from fructose dehydration"
+    health_risk: "Genotoxic metabolite SMF (5-sulfoxymethylfurfural) after gut biotransformation; forms DNA adducts"
+    iarc_class: "Group 3 (not classifiable) — metabolite SMF more concerning"
+    analytical_marker: true
+    priority: "high"
+    notes: "Forms at low pH; high sugar + acidic conditions → HMF. Indicator of early-stage Maillard at acidic pH."
+
+  - name: "Lysinoalanine (LAL)"
+    cas: "6027-77-6"
+    smiles: "NCCCC[C@@H](N)C(=O)O.N[C@@H](CC(=O)O)C(=O)O"  # simplified
+    inchi: null
+    class: "Protein cross-link (DHA pathway marker)"
+    formation: "Dehydroalanine (from Ser/Cys β-elimination) + Lys ε-amino group"
+    health_risk: "Non-toxic per se but indicates severe lysine destruction; reduces protein quality and nutritional value; nephrotoxic in rodent models at high doses"
+    iarc_class: null
+    analytical_marker: true
+    priority: "high"
+    notes: "Marker of DHA pathway activation. HIGH LAL = Lys depleted from Maillard pool → reduced flavour yield."
+
+  - name: "Lanthionine (LAN)"
+    cas: "922-55-4"
+    smiles: "N[C@@H](CSCC[C@@H](N)C(=O)O)C(=O)O"
+    inchi: null
+    class: "Protein cross-link (DHA pathway marker)"
+    formation: "Dehydroalanine + Cys thiol group"
+    health_risk: "Indicates cysteine consumption; reduces available H₂S for S-Maillard; reduces sulfur volatile yield"
+    iarc_class: null
+    analytical_marker: true
+    priority: "high"
+    notes: "Key stoichiometric competitor to the S-Maillard pathway for cysteine."
+
+  - name: "Acrylamide"
+    cas: "79-06-1"
+    smiles: "C=CC(=O)N"
+    inchi: "InChI=1S/C3H5NO/c1-2-3(4)5/h2H,1H2,(H2,4,5)"
+    class: "Maillard byproduct"
+    formation: "Strecker degradation of L-asparagine + reducing sugar → decarboxylation → acrylamide"
+    health_risk: "Probable human carcinogen (IARC 2A); genotoxic; neurotoxic at high doses; forms glycidamide DNA adducts"
+    iarc_class: "Group 2A"
+    analytical_marker: false
+    priority: "high"
+    notes: "Primarily a concern in carbohydrate-rich plant foods (crisps, baked goods). Lower concern in PBMA unless asparagine-rich protein + high reducing sugar + low moisture."
+
+  # --- Heterocyclic Aromatic Amines (HAAs) ---
+
+  - name: "2-Amino-1-methyl-6-phenylimidazo[4,5-b]pyridine (PhIP)"
+    cas: "105650-23-5"
+    smiles: "Cc1nc2cc(-c3ccccc3)ccc2n1N"
+    inchi: null
+    class: "Thermic HAA (IQ-type)"
+    formation: "Strecker degradation of Phe → phenylacetaldehyde → aldol condensation with creatinine → cyclisation"
+    health_risk: "Probable human carcinogen; associated with colorectal, breast, and prostate cancer risk"
+    iarc_class: "Group 2B"
+    analytical_marker: false
+    priority: "high"
+    notes: "Most abundant HAA in consumer diets. Requires creatinine (present in meat, absent in plants). Risk lower in pure plant-based products but watch if meat-like Maillard is pushed aggressively."
+
+  - name: "2-Amino-3-methylimidazo[4,5-f]quinoxaline (MeIQx)"
+    cas: "77094-11-2"
+    smiles: "Cc1nc2ccc3nccnc3c2n1N"
+    inchi: null
+    class: "Thermic HAA (IQ-type)"
+    formation: "Dialkylpyrazine free radical + creatinine condensation"
+    health_risk: "Probable human carcinogen"
+    iarc_class: "Group 2A"
+    analytical_marker: false
+    priority: "medium"
+    notes: "Forms at 150–300°C. Requires creatine/creatinine. Mainly a concern in animal muscle tissue."

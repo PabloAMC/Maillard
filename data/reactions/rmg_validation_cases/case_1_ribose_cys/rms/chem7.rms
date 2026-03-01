@@ -1,0 +1,218 @@
+Phases:
+- Species:
+  - comment: 'Thermo library: primaryThermoLibrary'
+    name: Ar
+    radicalelectrons: 0
+    smiles: '[Ar]'
+    thermo:
+      polys:
+      - Tmax: 1000.0
+        Tmin: 200.0
+        coefs:
+        - 2.5
+        - 0.0
+        - 0.0
+        - 0.0
+        - 0.0
+        - -745.375
+        - 4.37967
+        type: NASApolynomial
+      - Tmax: 6000.0
+        Tmin: 1000.0
+        coefs:
+        - 2.5
+        - 0.0
+        - 0.0
+        - 0.0
+        - 0.0
+        - -745.375
+        - 4.37967
+        type: NASApolynomial
+      type: NASA
+    type: Species
+  - comment: 'Thermo library: primaryThermoLibrary'
+    name: He
+    radicalelectrons: 0
+    smiles: '[He]'
+    thermo:
+      polys:
+      - Tmax: 1000.0
+        Tmin: 200.0
+        coefs:
+        - 2.5
+        - 0.0
+        - 0.0
+        - 0.0
+        - 0.0
+        - -745.375
+        - 0.928724
+        type: NASApolynomial
+      - Tmax: 6000.0
+        Tmin: 1000.0
+        coefs:
+        - 2.5
+        - 0.0
+        - 0.0
+        - 0.0
+        - 0.0
+        - -745.375
+        - 0.928724
+        type: NASApolynomial
+      type: NASA
+    type: Species
+  - comment: 'Thermo library: primaryThermoLibrary'
+    name: Ne
+    radicalelectrons: 0
+    smiles: '[Ne]'
+    thermo:
+      polys:
+      - Tmax: 1000.0
+        Tmin: 200.0
+        coefs:
+        - 2.5
+        - 0.0
+        - 0.0
+        - 0.0
+        - 0.0
+        - -745.375
+        - 3.35532
+        type: NASApolynomial
+      - Tmax: 6000.0
+        Tmin: 1000.0
+        coefs:
+        - 2.5
+        - 0.0
+        - 0.0
+        - 0.0
+        - 0.0
+        - -745.375
+        - 3.35532
+        type: NASApolynomial
+      type: NASA
+    type: Species
+  - comment: 'Thermo library: primaryThermoLibrary'
+    name: N2
+    radicalelectrons: 0
+    smiles: N#N
+    thermo:
+      polys:
+      - Tmax: 1000.0
+        Tmin: 200.0
+        coefs:
+        - 3.53101
+        - -0.000123661
+        - -5.02999e-07
+        - 2.43531e-09
+        - -1.40881e-12
+        - -1046.98
+        - 2.96747
+        type: NASApolynomial
+      - Tmax: 6000.0
+        Tmin: 1000.0
+        coefs:
+        - 2.95258
+        - 0.0013969
+        - -4.92632e-07
+        - 7.8601e-11
+        - -4.60755e-15
+        - -923.949
+        - 5.87189
+        type: NASApolynomial
+      type: NASA
+    type: Species
+  - comment: 'Thermo group additivity estimation: group(O2s-CsH) + group(O2s-CsH)
+      + group(O2s-CsH) + group(O2s-CsH) + group(Cs-CsCsOsH) + group(Cs-CsCsOsH) +
+      group(Cs-(Cds-O2d)CsOsH) + group(Cs-CsOsHH) + group(Cds-OdCsH)'
+    name: ribose
+    radicalelectrons: 0
+    smiles: O=CC(O)C(O)C(O)CO
+    thermo:
+      polys:
+      - Tmax: 1047.1093008988541
+        Tmin: 100.0
+        coefs:
+        - -0.9389528220270389
+        - 0.10917311222918065
+        - -0.00011996088715629269
+        - 6.934994982363744e-08
+        - -1.606090824205899e-11
+        - -111138.46582980218
+        - 43.848610143683885
+        type: NASApolynomial
+      - Tmax: 5000.0
+        Tmin: 1047.1093008988541
+        coefs:
+        - 18.1247160281309
+        - 0.03635064132319905
+        - -1.5643763543443355e-05
+        - 2.9353931398697257e-09
+        - -2.0459487462325662e-13
+        - -115130.89800464467
+        - -49.00053340560506
+        type: NASApolynomial
+      type: NASA
+    type: Species
+  - comment: 'Thermo group additivity estimation: group(S2s-CsH) + group(O2s-(Cds-O2d)H)
+      + group(N3s-CsHH) + group(Cs-CsN3sH(Cds-O2d)) + group(Cs-CsS2HH) + group(Cds-OdCsOs)'
+    name: cysteine
+    radicalelectrons: 0
+    smiles: NC(C(=O)O)CS
+    thermo:
+      polys:
+      - Tmax: 974.3936061472704
+        Tmin: 100.0
+        coefs:
+        - 1.1919485477552128
+        - 0.06595825326259154
+        - -6.789327691819144e-05
+        - 3.9163212826795305e-08
+        - -9.507955999309079e-12
+        - -50166.2997179953
+        - 25.832924709375252
+        type: NASApolynomial
+      - Tmax: 5000.0
+        Tmin: 974.3936061472704
+        coefs:
+        - 9.576239490967357
+        - 0.03153983536872289
+        - -1.4909033900462321e-05
+        - 2.9122082137885632e-09
+        - -2.0706345608516097e-13
+        - -51800.22338843984
+        - -14.398963840029454
+        type: NASApolynomial
+      type: NASA
+    type: Species
+  - comment: 'Thermo library: primaryThermoLibrary'
+    name: water
+    radicalelectrons: 0
+    smiles: O
+    thermo:
+      polys:
+      - Tmax: 1130.2388926465626
+        Tmin: 100.0
+        coefs:
+        - 4.057635842138811
+        - -0.0007879359660094121
+        - 2.908775287241331e-06
+        - -1.47518904114397e-09
+        - 2.1284311194182071e-13
+        - -30281.58663699715
+        - -0.3113640952221707
+        type: NASApolynomial
+      - Tmax: 5000.0
+        Tmin: 1130.2388926465626
+        coefs:
+        - 2.843250429891205
+        - 0.0027510854998008425
+        - -7.810315156543284e-07
+        - 1.0724364682113548e-10
+        - -5.793923020922181e-15
+        - -29958.61275856748
+        - 5.910420040389626
+        type: NASApolynomial
+      type: NASA
+    type: Species
+  name: phase
+Reactions: []
+Units: {}
