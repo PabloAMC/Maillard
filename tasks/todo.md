@@ -3,6 +3,84 @@
 
 ---
 
+## ⚡ Prioritized Action Plan (as of 2026-03-04)
+
+Ordered by **impact on alt-protein formulation scientists** (the end-user):
+
+| Priority | Task | Why |
+|----------|------|-----|
+| **1** | 7.1 — Wire SmirksEngine to Recommender | Unlocks the core value: combinatorial screening of novel formulations. |
+| **2** | 7.2 — CLI formulation arguments | Makes the tool usable for scientists without editing Python code. |
+| **3** | 7.3 — Sensory Output Mapping | Translates "2-furfurylthiol" into "🥩 Meaty 85%", the language formulators speak. |
+| **4** | 7.4 — Inverse Design Mode | Answers the user's real question: "What precursors do I add to get meaty aroma?" |
+| **5** | 8.1 — DFT barriers (Skala) | Replaces noisy xTB barriers with accurate kinetics for robust bottleneck identification. |
+| **6** | 8.2 — Cantera Kinetics | Enables precise time/temperature cooking simulations (reliant on 8.1). |
+
+> **Deferred:** Phase 5 (Experimental validation), Phase 8 (Kinetic modeling), and AI-models (IBM RXN).
+
+---
+
+## 🏃‍♂️ ACTIVE & UPCOMING PHASES
+
+## Phase 7: Plant-Based Formulation Tools & PBMA Usability (NEW CORE FOCUS)
+
+> **Context:** The `SmirksEngine` is now wired to the Recommender, but the tool currently acts as a *generic* Maillard simulator. To be useful for alt-protein scientists, it must specifically address PBMA formulation challenges highlighted in the literature: managing lipid off-flavors ("beany" notes), utilizing complex additives (thiamine/glutathione), and simulating transition-metal (heme) catalysis.
+
+- [x] 7.1 **Wire SmirksEngine to Recommender:** Create a unified pipeline script (`scripts/run_pipeline.py`) that accepts simple precursors, runs `SmirksEngine.enumerate()`, screens energetic bottlenecks, and feeds results directly into `recommend.py`.
+- [ ] 7.2 **Implement Core PBMA Precursors & Degradation Rules:** Extrude the `SmirksEngine` to handle the heavy lifters of PBMA formulation:
+    - Add thermal degradation templates for **Thiamine** (breaking into thiazole and H₂S) and **Glutathione** (cleaving into cysteinyl glycine).
+    - Ensure lipid aldehydes (e.g., hexanal) can be inputted to simulate the inherent PBMA matrix.
+- [ ] 7.3 **Advanced CLI Formulation Interface:** Implement complex `argparse` allowing users to run realistic formulations: e.g., `--sugars xylose --amino-acids cysteine --additives thiamine --lipids hexanal --catalyst heme --ph 6.0`.
+    - Note: `--catalyst heme` should apply a heuristic thermodynamic barrier reduction to Strecker and Pyrazine pathways in the FAST screener.
+- [ ] 7.4 **Sensory & Trapping Output Metrics:** 
+    - Create a lookup table mapping known Maillard volatiles to sensory descriptors (OAV lookup MVP).
+    - **Crucial Metric:** Update the Recommender to calculate an **"Off-Flavor Trapping Efficiency"** score, showing the percentage of input lipid aldehydes successfully bound into non-volatile Schiff bases.
+- [ ] 7.5 **Inverse Design Mode:** Implement a search mode where the user specifies target profiles (e.g., `--target meaty --minimize beany`), and the tool evaluates a predefined grid of precursor formulations to recommend the optimal industrial blend.
+
+## Phase 3: Tier 2 — DFT Refinement with Skala
+
+Focus on the 6–8 chemically decisive reactions only:
+
+- [x] 3.1 Write `src/skala_refiner.py`: PySCF + Skala XC functional template for TS optimisation with CPCM water solvent
+- [x] 3.2 Write `tests/test_skala_refiner.py`: run a fast, low-basis single-point energy calculation on a small molecule to ensure PySCF+Skala integration works
+- [ ] 3.3 Compute barriers for:
+    - [ ] 3.3a Amadori rearrangement (Schiff base → 1-amino-1-deoxy-2-ketose)
+    - [ ] 3.3b 2,3-enolisation vs 1,2-enolisation bifurcation point
+    - [ ] 3.3c Strecker decarboxylation (α-dicarbonyl + amino acid)
+    - [ ] 3.3d Cysteine + ribose → FFT (via furfural + H₂S)
+    - [ ] 3.3e Ribose retro-aldol → 1,4-dideoxyosone → MFT
+    - [ ] 3.3f DHA β-elimination (Ser → dehydroalanine)
+    - [ ] 3.3g Off-flavour trapping: hexanal + amino acid → Schiff base
+    - [ ] 3.3h α-aminoketone dimerisation → pyrazine
+- [ ] 3.4 Validate with IRC (intrinsic reaction coordinate) to confirm each TS connects to correct reactant/product
+- [ ] 3.5 Compare Skala barriers against published DFT or CCSD(T) data where available
+
+---
+
+## ⏸️ DEFERRED PHASES
+
+## Phase 8: Quantitative Kinetic Modeling (DEFERRED)
+
+> **Context:** Precise temporal yield predictions (e.g., "how much FFT at t=12m") require robust DFT barriers. This is scientifically valuable but deferred until the core categorical recommendation tool (Phase 7) is usable.
+
+- [ ] 8.1 **Tier 2 DFT Refinement (from Phase 3.3):** Compute exact barriers using PySCF/Skala for rate-limiting steps. xTB barriers are too noisy for strict kinetic solvers.
+- [ ] 8.2 **Cantera Kinetic Simulation:** 
+    - Write a Cantera YAML mechanism generator that converts DFT barriers to Arrhenius rate constants.
+    - Run microkinetic time-temperature profiles to plot concentration-vs-time curves for target volatiles.
+
+## Phase 5: Experimental Validation Preparation (DEFERRED / OUT OF SCOPE)
+
+> **Context:** As a purely computational framework, physical wet-lab validation is currently deferred until the complete *in silico* pipeline (including automated generation and kinetic filtering) is fully operational.
+
+- [ ] 5.1 Select 5–10 top-ranked novel formulations from computational output
+- [ ] 5.2 Generate a lab protocol summary
+- [ ] 5.3 Define GC-MS validation criteria (expected retention times from NIST)
+- [ ] 5.4 Document comparison methodology for predicted vs. observed agreement
+
+---
+
+## ✅ COMPLETED PHASES
+
 ## Phase 0: Project Infrastructure
 
 - [x] 0.1 Initialise git repository and `.gitignore`
@@ -92,9 +170,39 @@ Each family below corresponds to a pathway identified in `pathways.md` (A–E) a
 
 - [x] 1B.24 Verify: run RMG with `{D-ribose, L-cysteine}` input → **Result:** Ribose reacts via Thiol_Addition, but competitive kinetics prevent FFT/MFT discovery.
 - [x] 1B.25 Verify: run RMG with `{D-glucose, glycine}` input → **Result:** Amadori product requires better dehydration/cyclization families.
-- [x] 1B.26 **Strategic Pivot:** Switched to hand-curated pathways for Phase 2 screening to bypass RMG's automated discovery limitations.
+- [x] 1B.26 **Strategic Pivot (MVP):** Switched to hand-curated pathways for Phase 2/4 to get the energetic and recommendation engine working. 
+- [ ] 1B.27 **Long-Term Requirement:** RMG is optimized for gas-phase combustion. We must identify a better liquid-phase generative engine (e.g., AutoMeKin, Chemoton, or AI-driven forward synthesis models) to fulfill the tool's true purpose of *automated discovery*. (See Phase 6).
 
 ---
+
+## Phase 1C: RMG Rule Validation & Debugging
+
+**Goal:** All 14 custom Maillard reaction families must load and parse correctly via `RMGDatabase.load_kinetics()`.
+
+### Key lessons learned:
+- `groups.py` needs: `template(reactants=[...])` + `recipe(actions=[...])` + `entry()` + `tree()`
+- Recipe atom labels (`*1`, `*2`...) must map to starred atoms in the adjacency list entries
+- Adjacency list describes pre-reaction state — do NOT include bonds the recipe will form
+- All bonds must be reciprocal (atom A lists B → B must list A)
+- Use `db.local_context` (not `{}`) when loading to avoid `ArrheniusEP` errors in rules.py
+- **Valence Violations:** Fixed 5-valent carbon/nitrogen errors in Enolisation, Amadori, Heyns, and Retro_Aldol families by correcting proton transfers in recipes.
+- **Product Count:** RMG `apply_recipe` requires template product count to match fragment count. Fixed with `products=["Product1", "Product2"]`.
+
+### Progress (14 families total — ALL PASSING ✅):
+- [x] 1C.1 **Thiol_Addition** — reference implementation ✅
+- [x] 1C.2 **Amadori_Rearrangement** — 1,2-proton shift ✅
+- [x] 1C.3 **Heyns_Rearrangement** — ketose equivalent ✅
+- [x] 1C.4 **Strecker_Degradation** — fixed: product count 1→2, removed FORM+CHANGE combo ✅
+- [x] 1C.5 **Retro_Aldol_Fragmentation** — fixed: simplified to BREAK_BOND only, product count 1→2 ✅
+- [x] 1C.6 **Schiff_Base_Formation** — fixed: product count 1→2, removed FORM+CHANGE combo ✅
+- [x] 1C.7 **Lipid_Schiff_Base** — fixed: same as Schiff_Base_Formation ✅
+- [x] 1C.8 **DHA_Crosslinking** — fixed: product count 1→2 ✅
+- [x] 1C.9 **Enolisation** — fixed: rules.py label mismatch ✅
+- [x] 1C.10 **Aminoketone_Condensation** — fixed: simplified groups, product count 1→2 ✅
+- [x] 1C.11 **Lipid_Thiazole_Condensation** — fixed: rules.py label mismatch ✅
+- [x] 1C.12 **Beta_Elimination** — fixed: product count 1→2, rules.py Serine entry removed ✅
+- [x] 1C.13 **Cysteine_Degradation** — fixed: product count 1→2 ✅
+- [x] 1C.14 **Sugar_Ring_Opening** — New family for hemiacetal opening ✅
 
 ## Phase 2: Tier 1 — xTB Energy Screening Pipeline
 
@@ -178,80 +286,82 @@ Each family below corresponds to a pathway identified in `pathways.md` (A–E) a
 
 ---
 
-## Phase 3: Tier 2 — DFT Refinement with Skala
-
-Focus on the 6–8 chemically decisive reactions only:
-
-- [x] 3.1 Write `src/skala_refiner.py`: PySCF + Skala XC functional template for TS optimisation with CPCM water solvent
-- [x] 3.2 Write `tests/test_skala_refiner.py`: run a fast, low-basis single-point energy calculation on a small molecule to ensure PySCF+Skala integration works
-- [ ] 3.3 Compute barriers for:
-    - [ ] 3.3a Amadori rearrangement (Schiff base → 1-amino-1-deoxy-2-ketose)
-    - [ ] 3.3b 2,3-enolisation vs 1,2-enolisation bifurcation point
-    - [ ] 3.3c Strecker decarboxylation (α-dicarbonyl + amino acid)
-    - [ ] 3.3d Cysteine + ribose → FFT (via furfural + H₂S)
-    - [ ] 3.3e Ribose retro-aldol → 1,4-dideoxyosone → MFT
-    - [ ] 3.3f DHA β-elimination (Ser → dehydroalanine)
-    - [ ] 3.3g Off-flavour trapping: hexanal + amino acid → Schiff base
-    - [ ] 3.3h α-aminoketone dimerisation → pyrazine
-- [ ] 3.4 Validate with IRC (intrinsic reaction coordinate) to confirm each TS connects to correct reactant/product
-- [ ] 3.5 Compare Skala barriers against published DFT or CCSD(T) data where available
-
----
-
 ## Phase 4: Integration & Precursor Recommendation Prototype
 
-- [ ] 4.1 Write `src/recommend.py`: given a target volatile profile (e.g., "maximise MFT and FFT, minimise hexanal"), query the reaction graph and xTB/DFT-ranked pathways to score precursor combinations
-- [ ] 4.2 Write `tests/test_recommend.py`: provide mock ranked pathways and target profiles, assert correct precursor recommendation and penalty application
-- [ ] 4.3 Parametrise environmental conditions: pH (5–8), T (100–250°C), water activity (0.3–0.9)
-- [ ] 4.4 Include DHA competition penalty: deduct Lys consumed by DHA from Maillard-available pool
-- [ ] 4.5 Include off-flavour trapping bonus: amino acid excess beyond Maillard need traps hexanal/nonanal
-- [ ] 4.6 Output: ranked table of precursor formulations with predicted volatile yields, off-flavour risk, and toxicity flags (AGE/HAA markers)
-- [ ] 4.7 Verify: run prototype on 3 canonical systems and confirm results align with published model-system GC-MS
-    - Ribose + Cys → expect dominant sulfur heterocycles
-    - Glucose + Gly → expect dominant furans and pyrazines
-    - Ribose + Cys + Leu → expect sulfur heterocycles + 3-methylbutanal
+> **Current status:** Phase 4 is complete. `recommend.py` loads curated pathways and screening results, runs the pathway ranker, and outputs a rich Unicode table.
+
+**🔴 Highest Priority — Wire up real recommendations:**
+- [x] 4.0 **Annotate curated pathways with target compounds** — each pathway in `curated_pathways.py` must declare what aroma compound it produces (e.g., `C_S_Maillard_FFT → produces: FFT`).
+- [x] 4.1 **Rewrite `src/recommend.py`** to accept precursor inputs and conditions, load relevant curated pathways, run `PathwayRanker`, and output a ranked list of reachable target compounds. Remove all mocked logic.
+- [x] 4.2 **Add multi-precursor comparison variants to `curated_pathways.py`:** at minimum:
+    - Ribose + Cysteine (current)
+    - Glucose + Glycine (Core Maillard, furans/pyrazines)
+    - Ribose + Cysteine + Leucine (adds Strecker 3-methylbutanal)
+    - Methionine path (methional / cooked-potato note)
+- [x] 4.3 **Add penalty scoring for competing pathways:** DHA pathway consuming Lys, off-flavour risk (Pathway D).
+- [x] 4.4 **Add toxicity flags:** if the scored network includes AGEs (CML, CEL) or HMF, flag at output.
+- [x] 4.5 **Validate output on 3 canonical model systems** (per `architecture.md` §5 Phase 2):
+    - Ribose + Cys → expect FFT dominant
+    - Glucose + Gly → expect furans and pyrazines dominant
+    - Ribose + Cys + Leu → expect FFT + 3-methylbutanal
+- [x] 4.6 **Write `tests/test_recommend.py`** with real (non-mock) pathway data to confirm the output is physically reasonable.
+- [x] 4.7 **Output format:** produce a human-readable ranked table: precursor → predicted volatiles → confidence (barrier rank) → off-flavour risk → toxicity
+- [x] 4.8 **Document known limitations:** xTB barriers are relative rankings only; absolute yield predictions require Tier 2 DFT.
 
 ---
 
-## Phase 5: Experimental Validation Preparation
+## Phase 6: Automated Pathway Generation (Tier 0 Replacement)
 
-- [ ] 5.1 Select 5–10 top-ranked novel formulations from Phase 4 output
-- [ ] 5.2 Generate a lab protocol summary: precursor concentrations, pH, temperature, heating time, expected volatile profile
-- [ ] 5.3 Define GC-MS validation criteria: which peaks to look for, expected retention times (from NIST WebBook)
-- [ ] 5.4 Document comparison methodology: how to score predicted vs observed agreement
+> **Context:** The current pipeline securely evaluates thermodynamics (xTB/Skala) but relies on a hardcoded list of curated pathways (`curated_pathways.py`). To truly explore the combinatorial ingredient space, we must build a hybrid generative pipeline. This phase is the **core intellectual contribution** of the project.
 
----
+### 6.1 Deterministic Rule Enumeration (Hybrid SMIRKS + Templates)
 
-## Phase 1C: RMG Rule Validation & Debugging
+> **Goal:** Replace the hand-curated `PATHWAYS` dict with a rule engine that automatically enumerates Maillard reaction pathways for *any* sugar + amino acid combination.
+>
+> **Approach — Hybrid Design:**
+> - **Tier A (SMIRKS):** Simple functional-group transforms where atom mapping is unambiguous: Schiff base formation (aldehyde + amine → imine), sugar dehydration (pentose → furfural, hexose → HMF), thiol addition (furfural + H₂S → FFT). These are robust, well-defined SMIRKS.
+> - **Tier B (Parameterised Templates):** Complex multi-step rearrangements where SMIRKS would be chemically misleading: Amadori/Heyns rearrangement, Strecker degradation, β-elimination (DHA). These are encoded as *template functions* that accept any sugar/amino acid pair and return the correct `ElementaryStep` sequence by SMILES substitution.
+>
+> **Safeguards against combinatorial explosion:**
+> - Molecular weight cap of 300 Da on generated products.
+> - Aldehyde-specific SMARTS (`[CH:1]=O`) instead of generic carbonyl matching.
+> - Canonical SMILES deduplication at each generation.
+> - Depth-limited to 3 generations (configurable).
 
-**Goal:** All 14 custom Maillard reaction families must load and parse correctly via `RMGDatabase.load_kinetics()`.
+- [x] 6.1.1 **Define Tier A SMIRKS rules** for 3 simple transforms:
+    - Schiff base formation: aldehyde + primary amine → imine + H₂O
+    - Pentose dehydration: pentose → furfural + 3 H₂O (pH < 6)
+    - Thiol addition: furfural + H₂S → FFT + H₂O
+- [x] 6.1.2 **Define Tier B template functions** for 4 complex rearrangements:
+    - `amadori_template(sugar, amino_acid)` → `[SchiffBase, AmadoriProduct, Deoxyosone]` steps
+    - `strecker_template(dicarbonyl, amino_acid)` → `[StreckerAldehyde, Aminoketone, CO₂]` step
+    - `enolisation_template(amadori_product, pH)` → 1,2- or 2,3-enolisation products
+    - `beta_elimination_template(cysteine_or_serine)` → DHA + side products
+- [x] 6.1.3 **Write `src/smirks_engine.py`:** `SmirksEngine` class that:
+    - Accepts `List[Species]` + `ReactionConditions`
+    - Applies Tier B templates first (to generate core intermediates)
+    - Then applies Tier A SMIRKS iteratively on the growing pool (with pruning)
+    - Outputs `List[ElementaryStep]` compatible with `xtb_screener.py`
+- [x] 6.1.4 **Add pH-conditional gating** via `conditions.py`: 1,2-enolisation template fires only at pH < 6; 2,3-enolisation only at pH ≥ 6.
+- [x] 6.1.5 **Write `tests/test_smirks_engine.py`:**
+    - Ribose + Glycine @ pH 5 → produces Schiff base + Amadori + furfural
+    - Glucose + Glycine @ pH 7 → produces Schiff base + Amadori + pyruvaldehyde
+    - Ribose + Cysteine → thiol addition produces FFT
+    - All outputs are valid `ElementaryStep` objects
+- [x] 6.1.6 **Verify against curated pathways:** Run on 4 canonical systems, confirm it rediscovers Pathways A–E from `curated_pathways.py`.
 
-### Key lessons learned:
-- `groups.py` needs: `template(reactants=[...])` + `recipe(actions=[...])` + `entry()` + `tree()`
-- Recipe atom labels (`*1`, `*2`...) must map to starred atoms in the adjacency list entries
-- Adjacency list describes pre-reaction state — do NOT include bonds the recipe will form
-- All bonds must be reciprocal (atom A lists B → B must list A)
-- Use `db.local_context` (not `{}`) when loading to avoid `ArrheniusEP` errors in rules.py
-- **Valence Violations:** Fixed 5-valent carbon/nitrogen errors in Enolisation, Amadori, Heyns, and Retro_Aldol families by correcting proton transfers in recipes.
-- **Product Count:** RMG `apply_recipe` requires template product count to match fragment count. Fixed with `products=["Product1", "Product2"]`.
+### 6.2 Extended Template Coverage (Remaining 6 Families)
 
-### Progress (14 families total — ALL PASSING ✅):
-- [x] 1C.1 **Thiol_Addition** — reference implementation ✅
-- [x] 1C.2 **Amadori_Rearrangement** — 1,2-proton shift ✅
-- [x] 1C.3 **Heyns_Rearrangement** — ketose equivalent ✅
-- [x] 1C.4 **Strecker_Degradation** — fixed: product count 1→2, removed FORM+CHANGE combo ✅
-- [x] 1C.5 **Retro_Aldol_Fragmentation** — fixed: simplified to BREAK_BOND only, product count 1→2 ✅
-- [x] 1C.6 **Schiff_Base_Formation** — fixed: product count 1→2, removed FORM+CHANGE combo ✅
-- [x] 1C.7 **Lipid_Schiff_Base** — fixed: same as Schiff_Base_Formation ✅
-- [x] 1C.8 **DHA_Crosslinking** — fixed: product count 1→2 ✅
-- [x] 1C.9 **Enolisation** — fixed: rules.py label mismatch ✅
-- [x] 1C.10 **Aminoketone_Condensation** — fixed: simplified groups, product count 1→2 ✅
-- [x] 1C.11 **Lipid_Thiazole_Condensation** — fixed: rules.py label mismatch ✅
-- [x] 1C.12 **Beta_Elimination** — fixed: product count 1→2, rules.py Serine entry removed ✅
-- [x] 1C.13 **Cysteine_Degradation** — fixed: product count 1→2 ✅
-- [x] 1C.14 **Sugar_Ring_Opening** — New family for hemiacetal opening ✅
+> **Goal:** Extend `smirks_engine.py` to cover *all* 14 known Maillard reaction families, completing the deterministic reaction enumeration layer.
+>
+> **Why not AI tools?** IBM RXN and ASKCOS are trained on >90% pharmaceutical synthesis data. The missing Maillard reactions (aminoketone condensation, retro-aldol fragmentation, cysteine thermolysis) have essentially zero representation in their training sets. Extending the well-tested template approach is faster, more reliable, and chemically verifiable.
 
----
+- [x] 6.2.1 **Aminoketone_Condensation template:** 2 × aminoketone → dihydropyrazine → pyrazine + H₂O. Highest impact — pyrazines are key roasted/meaty volatiles.
+- [x] 6.2.2 **Retro_Aldol_Fragmentation template:** 3-deoxyosone → acetol + glycolaldehyde (C2 + C3 fragments). These are precursors for pyrazine formation.
+- [x] 6.2.3 **Cysteine_Degradation template:** Cys (thermal, >150°C) → H₂S + acetaldehyde + NH₃. Provides the sulfur source independently of beta-elimination.
+- [x] 6.2.4 **Lipid_Thiazole_Condensation template:** aldehyde + H₂S + NH₃ → 4,5-dihydrothiazole. Secondary savory aroma compounds.
+- [x] 6.2.5 **Heyns_Rearrangement template:** Variant of Amadori for ketose sugars (fructose). Minor modification to existing template.
+- [x] 6.2.6 **Sugar_Ring_Opening template:** Hemiacetal → open-chain aldehyde form (trivial prerequisite step).
+- [x] 6.2.7 **Update `tests/test_smirks_engine.py`:** Add tests for pyrazine formation, retro-aldol products, cysteine thermolysis, and thiazole formation.
+- [x] 6.2.8 **Verify 14/14 family coverage:** Run on all canonical systems and confirm every RMG family has a corresponding template or SMIRKS rule.
 
-## Review Section
-*To be filled during implementation — record what worked, what didn't, and lessons learned.*

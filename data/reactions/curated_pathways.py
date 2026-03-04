@@ -56,19 +56,22 @@ DHA           = _s("dehydroalanine",   "C=C(N)C(=O)O")
 LAL           = _s("lysinoalanine",    "NC(CCCCNCC(N)C(=O)O)C(=O)O")
 
 # Schiff bases and Amadori products
-RIBOSE_GLY_SCHIFF = _s("ribose-glycine-Schiff-base",
-                        "OCC(O)C(O)C(O)/C=N/CC(=O)O")
-RIBOSE_GLY_AMADORI = _s("ribose-glycine-Amadori",
-                         "OCC(O)C(O)C(=O)CNCC(=O)O")
+RIBOSE_GLY_SCHIFF = _s("ribose-glycine-Schiff-base", "OCC(O)C(O)C(O)/C=N/CC(=O)O")
+RIBOSE_GLY_AMADORI = _s("ribose-glycine-Amadori", "OCC(O)C(O)C(=O)CNCC(=O)O")
+GLUCOSE_GLY_SCHIFF = _s("glucose-glycine-Schiff-base", "OCC(O)C(O)C(O)C(O)/C=N/CC(=O)O")
+GLUCOSE_GLY_AMADORI = _s("glucose-glycine-Amadori", "OCC(O)C(O)C(O)C(=O)CNCC(=O)O")
 DEOXYOSONE_3  = _s("3-deoxyosone",    "O=CC(=O)CC(O)CO")
+GLUCOSE_DEOXYOSONE_3 = _s("glucose-3-deoxyosone", "O=CC(=O)CC(O)C(O)CO")
+HMF = _s("HMF", "OCC1=CC=C(C=O)O1")
 
 # Lipid off-flavour
 HEXANAL       = _s("hexanal",         "CCCCCC=O")
-HEXANAL_SCHIFF = _s("hexanal-glycine-Schiff-base",
-                     "CCCCC/C=N/CC(=O)O")
+HEXANAL_GLY_SCHIFF = _s("hexanal-glycine-Schiff-base", "CCCCC/C=N/CC(=O)O")
+HEXANAL_LYS_SCHIFF = _s("hexanal-lysine-Schiff-base", "CCCCC/C=N/CCCCC(N)C(=O)O")
 
 # Alpha-aminoketone (Strecker co-product)
 AMINOACETONE  = _s("aminoacetone",    "CC(=O)CN")
+
 
 
 # ──────────────────────────────────────────────────────────────────────
@@ -105,6 +108,30 @@ PATHWAYS = {
         ),
     ],
 
+    # ── Pathway A2: Core Maillard Cascade (Glucose + Glycine) ──────────
+    "A_Core_Maillard_Glucose_Gly": [
+        ElementaryStep(
+            reactants=[GLUCOSE, GLYCINE],
+            products=[GLUCOSE_GLY_SCHIFF, WATER],
+            reaction_family="Schiff_Base_Formation",
+        ),
+        ElementaryStep(
+            reactants=[GLUCOSE_GLY_SCHIFF],
+            products=[GLUCOSE_GLY_AMADORI],
+            reaction_family="Amadori_Rearrangement",
+        ),
+        ElementaryStep(
+            reactants=[GLUCOSE_GLY_AMADORI],
+            products=[GLUCOSE_DEOXYOSONE_3, GLYCINE],
+            reaction_family="Enolisation",
+        ),
+        ElementaryStep(
+            reactants=[GLUCOSE_DEOXYOSONE_3],
+            products=[HMF, WATER, WATER],
+            reaction_family="Sugar_Dehydration",
+        ),
+    ],
+
     # ── Pathway B: Strecker Degradation (Leucine → 3-methylbutanal) ──
     "B_Strecker_Leu": [
         # Step 1: α-dicarbonyl + amino acid → Strecker aldehyde + aminoketone + CO₂
@@ -137,12 +164,21 @@ PATHWAYS = {
         ),
     ],
 
-    # ── Pathway D: Off-flavour trapping (Hexanal + Glycine) ──────────
-    "D_Offflavour_Trapping": [
+    # ── Pathway D1: Off-flavour trapping (Hexanal + Glycine) ──────────
+    "D_Offflavour_Trapping_Gly": [
         # Step 1: Hexanal + amino acid → non-volatile Schiff base
         ElementaryStep(
             reactants=[HEXANAL, GLYCINE],
-            products=[HEXANAL_SCHIFF, WATER],
+            products=[HEXANAL_GLY_SCHIFF, WATER],
+            reaction_family="Lipid_Schiff_Base",
+        ),
+    ],
+
+    # ── Pathway D2: Off-flavour trapping (Hexanal + Lysine) ──────────
+    "D_Offflavour_Trapping_Lys": [
+        ElementaryStep(
+            reactants=[HEXANAL, LYSINE],
+            products=[HEXANAL_LYS_SCHIFF, WATER],
             reaction_family="Lipid_Schiff_Base",
         ),
     ],
@@ -164,6 +200,51 @@ PATHWAYS = {
     ],
 }
 
+# Metadata linking each pathway to its target volatile or function
+PATHWAY_METADATA = {
+    "A_Core_Maillard_Ribose_Gly": {
+        "target": FURFURAL,
+        "type": "desirable", # Produces desirable furan volatiles
+        "consumes": ["D-ribose", "glycine"],
+        "toxicity_flag": None,
+    },
+    "A_Core_Maillard_Glucose_Gly": {
+        "target": HMF,
+        "type": "desirable", # Produces desirable furan volatiles
+        "consumes": ["D-glucose", "glycine"],
+        "toxicity_flag": "5-Hydroxymethylfurfural (HMF)",
+    },
+    "B_Strecker_Leu": {
+        "target": METHYLBUTANAL_3,
+        "type": "desirable", # Produces desirable Strecker aldehydes
+        "consumes": ["pyruvaldehyde", "L-leucine"],
+        "toxicity_flag": None,
+    },
+    "C_S_Maillard_FFT": {
+        "target": FFT,
+        "type": "desirable", # Produces highly desirable meaty sulfur volatiles
+        "consumes": ["L-cysteine", "D-ribose"],
+        "toxicity_flag": None,
+    },
+    "D_Offflavour_Trapping_Gly": {
+        "target": HEXANAL_GLY_SCHIFF,
+        "type": "masking", # Beneficial trapping of off-flavours into non-volatiles
+        "consumes": ["hexanal", "glycine"],
+        "toxicity_flag": None,
+    },
+    "D_Offflavour_Trapping_Lys": {
+        "target": HEXANAL_LYS_SCHIFF,
+        "type": "masking",
+        "consumes": ["hexanal", "L-lysine"],
+        "toxicity_flag": None,
+    },
+    "E_DHA_Competition": {
+        "target": LAL,
+        "type": "competing", # Pathological competition for nitrogen (toxic LAL footprint)
+        "consumes": ["L-cysteine", "L-lysine"],
+        "toxicity_flag": "Lysinoalanine (LAL)",
+    },
+}
 
 if __name__ == "__main__":
     print("Curated Maillard Pathways")
