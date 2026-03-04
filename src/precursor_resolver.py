@@ -28,7 +28,7 @@ def _load_precursors() -> Dict[str, dict]:
         data = yaml.safe_load(f)
 
     _LOOKUP = {}
-    for category in ("amino_acids", "sugars", "exogenous_precursors"):
+    for category in ("amino_acids", "sugars", "exogenous_precursors", "lipids"):
         for entry in data.get(category, []):
             name = entry["name"]
             # Index by multiple keys for fuzzy matching:
@@ -44,6 +44,10 @@ def _load_precursors() -> Dict[str, dict]:
             if "(" in name:
                 base = name.split("(")[0].strip()
                 keys.append(base.lower())
+                # Handle prefixes on the base name too
+                for prefix in ("l-", "d-"):
+                    if base.lower().startswith(prefix):
+                        keys.append(base.lower()[len(prefix):])
 
             for key in keys:
                 _LOOKUP[key] = entry

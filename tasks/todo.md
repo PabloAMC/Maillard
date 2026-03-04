@@ -27,15 +27,20 @@ Ordered by **impact on alt-protein formulation scientists** (the end-user):
 > **Context:** The `SmirksEngine` is now wired to the Recommender, but the tool currently acts as a *generic* Maillard simulator. To be useful for alt-protein scientists, it must specifically address PBMA formulation challenges highlighted in the literature: managing lipid off-flavors ("beany" notes), utilizing complex additives (thiamine/glutathione), and simulating transition-metal (heme) catalysis.
 
 - [x] 7.1 **Wire SmirksEngine to Recommender:** Create a unified pipeline script (`scripts/run_pipeline.py`) that accepts simple precursors, runs `SmirksEngine.enumerate()`, screens energetic bottlenecks, and feeds results directly into `recommend.py`.
-- [ ] 7.2 **Implement Core PBMA Precursors & Degradation Rules:** Extrude the `SmirksEngine` to handle the heavy lifters of PBMA formulation:
-    - Add thermal degradation templates for **Thiamine** (breaking into thiazole and H₂S) and **Glutathione** (cleaving into cysteinyl glycine).
-    - Ensure lipid aldehydes (e.g., hexanal) can be inputted to simulate the inherent PBMA matrix.
-- [ ] 7.3 **Advanced CLI Formulation Interface:** Implement complex `argparse` allowing users to run realistic formulations: e.g., `--sugars xylose --amino-acids cysteine --additives thiamine --lipids hexanal --catalyst heme --ph 6.0`.
-    - Note: `--catalyst heme` should apply a heuristic thermodynamic barrier reduction to Strecker and Pyrazine pathways in the FAST screener.
-- [ ] 7.4 **Sensory & Trapping Output Metrics:** 
+- [x] 7.2 **Implement Core PBMA Precursors & Degradation Rules:** `[Diff: 7/10 | Model: Claude Opus / Gemini Pro]` Extrude the `SmirksEngine` to handle the heavy lifters of PBMA formulation:
+    - **Add Lipids:** [x] Add `Hexanal` and `Nonanal` to `data/species/precursors.yml` to simulate the inherent oxidizing matrix of pea/soy isolates.
+    - **Add Thiamine Template:** [x] Write a Tier B `_thiamine_degradation` function in `smirks_engine.py` that cleaves Thiamine into H₂S, 2-methylthiophene, and 4,5-dihydro-2-methylthiazole.
+    - **Add Glutathione Template:** [x] Write a Tier B `_glutathione_cleavage` function in `smirks_engine.py` that cleaves GSH into Glutamic Acid and the highly reactive Cysteinylglycine dipeptide.
+    - **Testing:** [x] Add assertions in `tests/test_smirks_engine.py` to ensure Thiamine and GSH break down correctly, and ensure the existing `Lipid_Schiff_Base` rule correctly consumes Hexanal + an amino acid.
+- [x] 7.3 **Advanced CLI Formulation Interface:** [x] `[Diff: 4/10 | Model: Gemini Flash]` Implement complex `argparse` allowing users to run realistic formulations: e.g., `--sugars xylose --amino-acids cysteine --additives thiamine --lipids hexanal --catalyst heme --ph 6.0`.
+    - **Update Resolver:** [x] Add `"lipids"` to the categories indexer in `src/precursor_resolver.py`.
+    - **Update CLI Arguments:** [x] In `scripts/run_pipeline.py`, add `--additives`, `--lipids`, and `--catalyst` (currently supports `"heme"`).
+    - **Implement Heme Heuristic:** [x] In `FAST` mode, if `--catalyst heme` is set, reduce barriers by 5.0 kcal for `Strecker_Degradation` and `Aminoketone_Condensation` families.
+    - **Verification:** [x] Run `python scripts/run_pipeline.py --sugars xylose --amino-acids cysteine --catalyst heme` and verify Pyrazine/Strecker barriers are reduced compared to a control run.
+- [ ] 7.4 **Sensory & Trapping Output Metrics:** `[Diff: 5/10 | Model: Claude Sonnet]`
     - Create a lookup table mapping known Maillard volatiles to sensory descriptors (OAV lookup MVP).
     - **Crucial Metric:** Update the Recommender to calculate an **"Off-Flavor Trapping Efficiency"** score, showing the percentage of input lipid aldehydes successfully bound into non-volatile Schiff bases.
-- [ ] 7.5 **Inverse Design Mode:** Implement a search mode where the user specifies target profiles (e.g., `--target meaty --minimize beany`), and the tool evaluates a predefined grid of precursor formulations to recommend the optimal industrial blend.
+- [ ] 7.5 **Inverse Design Mode:** `[Diff: 8/10 | Model: Claude Opus]` Implement a search mode where the user specifies target profiles (e.g., `--target meaty --minimize beany`), and the tool evaluates a predefined grid of precursor formulations to recommend the optimal industrial blend.
 
 ## Phase 3: Tier 2 — DFT Refinement with Skala
 
@@ -43,7 +48,7 @@ Focus on the 6–8 chemically decisive reactions only:
 
 - [x] 3.1 Write `src/skala_refiner.py`: PySCF + Skala XC functional template for TS optimisation with CPCM water solvent
 - [x] 3.2 Write `tests/test_skala_refiner.py`: run a fast, low-basis single-point energy calculation on a small molecule to ensure PySCF+Skala integration works
-- [ ] 3.3 Compute barriers for:
+- [ ] 3.3 **Compute barriers for key bifurcations:** `[Diff: 9/10 | Model: Gemini Pro (Long Context for Logs)]`
     - [ ] 3.3a Amadori rearrangement (Schiff base → 1-amino-1-deoxy-2-ketose)
     - [ ] 3.3b 2,3-enolisation vs 1,2-enolisation bifurcation point
     - [ ] 3.3c Strecker decarboxylation (α-dicarbonyl + amino acid)
@@ -52,8 +57,8 @@ Focus on the 6–8 chemically decisive reactions only:
     - [ ] 3.3f DHA β-elimination (Ser → dehydroalanine)
     - [ ] 3.3g Off-flavour trapping: hexanal + amino acid → Schiff base
     - [ ] 3.3h α-aminoketone dimerisation → pyrazine
-- [ ] 3.4 Validate with IRC (intrinsic reaction coordinate) to confirm each TS connects to correct reactant/product
-- [ ] 3.5 Compare Skala barriers against published DFT or CCSD(T) data where available
+- [ ] 3.4 **Validate with IRC:** `[Diff: 6/10 | Model: Claude Sonnet]` (intrinsic reaction coordinate) to confirm each TS connects to correct reactant/product
+- [ ] 3.5 **Comparison Study:** `[Diff: 3/10 | Model: Gemini Flash]` Compare Skala barriers against published DFT or CCSD(T) data where available
 
 ---
 

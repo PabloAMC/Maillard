@@ -106,6 +106,17 @@ compounds:
     priority: "high"
     notes: "Alkaline pH strongly favours pyrazine formation over furans."
 
+  - name: "2,5-Dimethylpyrazine"
+    cas: "123-32-0"
+    smiles: "Cc1cnc(C)cn1"
+    inchi: "InChI=1S/C6H8N2/c1-5-3-8-6(2)4-7-5/h3-4H,1-2H3"
+    precursor: "Glycine / Alanine + α-dicarbonyl"
+    pathway: "B — Strecker → α-aminoketone dimerisation"
+    sensory_desc: "Roasted, popcorn, nutty"
+    odour_threshold_ug_per_kg: 1800.0
+    priority: "high"
+    notes: "Major product of aminoacetone condensation."
+
   - name: "2-Ethyl-3,5-dimethylpyrazine"
     cas: "13360-64-0"
     smiles: "CCc1nc(C)cnc1C"

@@ -62,11 +62,13 @@ def print_table(active_pathways: list):
 
 def main():
     parser = argparse.ArgumentParser(description="Maillard formulation screening pipeline.")
-    parser.add_argument("--sugars", type=str, required=True, help="Comma-separated sugars (e.g. ribose,glucose)")
-    parser.add_argument("--amino-acids", type=str, required=True, help="Comma-separated amino acids (e.g. cysteine,glycine)")
-    parser.add_argument("--other", type=str, default="", help="Comma-separated other precursors (e.g. thiamine)")
+    parser.add_argument("--sugars", type=str, default="", help="Comma-separated sugars (e.g. ribose,glucose)")
+    parser.add_argument("--amino-acids", type=str, default="", help="Comma-separated amino acids (e.g. cysteine,glycine)")
+    parser.add_argument("--additives", type=str, default="", help="Comma-separated additives (e.g. thiamine,glutathione)")
+    parser.add_argument("--lipids", type=str, default="", help="Comma-separated lipid aldehydes (e.g. hexanal,nonanal)")
     parser.add_argument("--ph", type=float, default=6.0, help="Reaction pH (default 6.0)")
     parser.add_argument("--temp", type=float, default=150.0, help="Heating temperature in Celsius (default 150)")
+    parser.add_argument("--catalyst", type=str, default=None, choices=["heme"], help="Apply catalyst effect (e.g. heme)")
     parser.add_argument("--xtb", action="store_true", help="Run full GFN2-xTB structural optimizations (SLOW!). Defaults to fast Hammond estimating.")
     parser.add_argument("--list-precursors", action="store_true", help="List available precursors and exit")
     
@@ -80,10 +82,16 @@ def main():
     args = parser.parse_args()
 
     # 1. Resolve Precursors
-    names = args.sugars.split(",") + args.amino_acids.split(",")
-    if args.other:
-        names += args.other.split(",")
+    names = []
+    if args.sugars: names += args.sugars.split(",")
+    if args.amino_acids: names += args.amino_acids.split(",")
+    if args.additives: names += args.additives.split(",")
+    if args.lipids: names += args.lipids.split(",")
     names = [n.strip() for n in names if n.strip()]
+
+    if not names:
+        print("ERROR: No precursors specified. Use --sugars, --amino-acids, --additives, or --lipids.")
+        sys.exit(1)
 
     try:
         precursors = precursor_resolver.resolve_many(names)
@@ -95,7 +103,7 @@ def main():
     print("      Maillard Generative Pipeline (Phase 7)")
     print("======================================================\n")
     print(f"Inputs: {', '.join(p.label for p in precursors)}")
-    print(f"Conditions: pH {args.ph}, {args.temp}°C")
+    print(f"Conditions: pH {args.ph}, {args.temp}°C, Catalyst: {args.catalyst or 'None'}")
     print("-" * 60)
 
     # 2. Enumerate Pathways (SmirksEngine)
@@ -143,6 +151,7 @@ def main():
                 fm = step.reaction_family.lower()
                 if "amadori" in fm or "heyns" in fm: bar = 25.0
                 elif "schiff" in fm: bar = 15.0
+                elif "ring" in fm: bar = 5.0
                 elif "dehydration" in fm or "enolisation" in fm: bar = 30.0
                 elif "strecker" in fm: bar = 22.0
                 elif "retro" in fm: bar = 35.0
@@ -151,11 +160,17 @@ def main():
                 
             # Apply condition modifiers
             ph_mult = conditions.get_ph_multiplier(step.reaction_family or "")
-            arrh_mult = conditions.get_arrhenius_multiplier(bar)
             
-            # Very crude adjustment to show differences
-            adjusted_bar = bar * ph_mult
-            
+            # Accelerate by dividing barrier if multiplier > 1 (higher kinetic probability)
+            adjusted_bar = bar / ph_mult
+
+            # 3a. Apply Catalyst Heme Heuristic (Phase 7.3)
+            # Heme/Iron catalysts strongly accelerate Strecker and Pyrazine pathways
+            if args.catalyst == "heme":
+                if step.reaction_family in ["Strecker_Degradation", "Aminoketone_Condensation"]:
+                    # Significant barrier reduction to show catalytic effect
+                    adjusted_bar -= 7.0 
+                
             barriers_dict[step_key] = adjusted_bar
             
     print("\n\nScreening complete.")

@@ -197,7 +197,7 @@ class Recommender:
         # Identify which targets were produced
         active_pathways = []
         for p_canon, span in distances.items():
-            if p_canon in target_lookup and span < float('inf') and span > 0.0:
+            if p_canon in target_lookup and span < float('inf') and span >= 0.0:
                 t_info = target_lookup[p_canon]
                 
                 # We mock a Species object for the old table formatter

@@ -316,3 +316,57 @@ class TestOutputCompatibility:
         from src.smirks_engine import _step_key
         keys = [_step_key(s) for s in self.steps]
         assert len(keys) == len(set(keys)), "Duplicate steps found"
+
+
+# ── PBMA Additive & Lipid Tests ───────────────────────────────────────────
+
+class TestPBMAAdditives:
+    """Tests for Phase 7.2 PBMA formulation additives and lipid trapping."""
+
+    def test_thiamine_degradation(self):
+        engine = SmirksEngine(conditions=ReactionConditions(temperature_celsius=150))
+        thiamine = to_species("Thiamine", "Cc1ncc(C[n+]2csc(CCO)c2C)c(N)n1")
+        steps = engine.enumerate([thiamine])
+        
+        # Should have found the Additive_Thermal_Degradation step
+        degrad_steps = [s for s in steps if s.reaction_family == "Additive_Thermal_Degradation"]
+        assert len(degrad_steps) >= 1
+        
+        products = [p.label for step in degrad_steps for p in step.products]
+        assert "Hydrogen_Sulfide" in products
+        assert "2-methylthiophene" in products
+        assert "4,5-dihydro-2-methylthiazole" in products
+
+    def test_glutathione_cleavage(self):
+        engine = SmirksEngine(conditions=ReactionConditions(temperature_celsius=150))
+        gsh = to_species("L-Glutathione", "N[C@@H](CCC(=O)N[C@@H](CS)C(=O)NCC(=O)O)C(=O)O")
+        steps = engine.enumerate([gsh])
+        
+        degrad_steps = [s for s in steps if s.reaction_family == "Additive_Thermal_Degradation"]
+        assert len(degrad_steps) >= 1
+        
+        products = [p.label for step in degrad_steps for p in step.products]
+        assert "Glutamic_Acid" in products
+        assert "Cysteinylglycine" in products
+
+    def test_lipid_schiff_base_trapping(self):
+        engine = SmirksEngine(conditions=ReactionConditions(pH=6.0))
+        hexanal = to_species("Hexanal", "CCCCCC=O")
+        glycine = to_species("Glycine", "NCC(=O)O")
+        
+        steps = engine.enumerate([hexanal, glycine])
+        
+        sb_steps = [s for s in steps if s.reaction_family == "Lipid_Schiff_Base"]
+        assert len(sb_steps) >= 1
+        
+        # Verify hexanal Schiff base is formed: C6 aliphatic chain attached to =N
+        has_hexanal_imine = False
+        for step in sb_steps:
+            for p in step.products:
+                mol = Chem.MolFromSmiles(p.smiles)
+                # Quick SMARTS check for aliphatic imine attached to an acid
+                if mol and mol.HasSubstructMatch(Chem.MolFromSmarts("CCCCC/C=N\\CC(=O)O")):
+                    has_hexanal_imine = True
+        
+        assert has_hexanal_imine, "Hexanal was not correctly trapped into a Schiff base by glycine"
+
