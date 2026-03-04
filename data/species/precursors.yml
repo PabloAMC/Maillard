@@ -169,3 +169,23 @@ exogenous_precursors:
     pathway_relevance: ["C — S-Maillard"]
     plant_matrix_status: "added exogenously; also present in trace amounts in pea/soy"
     notes: "Optimal heating at 131.53°C, 94.85 min, pH 4.79 maximises meat-like odorants. Preferable to free Cys alone for sensory quality."
+
+lipids:
+
+  - name: "Hexanal"
+    cas: "66-25-1"
+    smiles: "CCCCCC=O"
+    inchi: "InChI=1S/C6H12O/c1-2-3-4-5-6-7/h6H,2-5H2,1H3"
+    role: "Primary lipid oxidation off-flavour; must be trapped via Schiff base"
+    pathway_relevance: ["D — Off-Flavour Trapping"]
+    plant_matrix_status: "abundant in native soy and pea isolates due to PUFA oxidation"
+    notes: "Imparts strong 'beany' or 'grassy' notes. Goal is to chemically mask this with amino groups."
+
+  - name: "Nonanal"
+    cas: "124-19-6"
+    smiles: "CCCCCCCCC=O"
+    inchi: "InChI=1S/C9H18O/c1-2-3-4-5-6-7-8-9-10/h9H,2-8H2,1H3"
+    role: "Secondary lipid oxidation off-flavour; similar to hexanal but fattier, citrus, soapy"
+    pathway_relevance: ["D — Off-Flavour Trapping"]
+    plant_matrix_status: "present in native soy/pea isolates"
+    notes: "Another key target for Schiff base trapping."

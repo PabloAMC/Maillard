@@ -43,6 +43,10 @@ from src.conditions import ReactionConditions
 
 MAX_MW = 300.0  # Daltons — prune products above this (volatiles are small)
 
+# Additive Canonical SMILES (for exact matching)
+_THIAMINE_CANONICAL = "Cc1ncc(C[n+]2csc(CCO)c2C)c(N)n1"
+_GSH_CANONICAL = "N[C@@H](CCC(=O)N[C@@H](CS)C(=O)NCC(=O)O)C(=O)O"
+
 # Tier A SMIRKS rules: (name, reaction_family, smirks, ph_gate)
 # ph_gate: "any" | "acid" (pH<6) | "neutral" (pH>=6)
 #
@@ -55,9 +59,9 @@ _SMIRKS_RULES: List[Tuple[str, str, str, str]] = [
     (
         "schiff_base_lipid",
         "Lipid_Schiff_Base",
-        # C3+ aliphatic aldehyde whose alpha-carbon has NO hydroxyl (not a sugar):
-        # [CX4;!$([CX4]O)] = saturated C not bearing an OH
-        "[CX4H2,CX4H3:2][CH1:1]=O.[NH2:3][CX4;!$([CX4]O):4]>>[C:2][C:1]=[N:3].[C:4].O",
+        # C3+ aliphatic aldehyde whose alpha-carbon has NO hydroxyl (excludes sugars).
+        # The amine donor can be anything with a primary amine on an sp3 carbon (like amino acids).
+        "[CX4H2,CX4H3:2][CH1:1]=O.[NH2:3][CX4:4]>>[C:2][C:1]=[N:3]-[C:4].O",
         "any",
     ),
     (
@@ -323,16 +327,16 @@ def _strecker_step(
     """
     _strecker_map = {
         # amino acid smiles pattern → (aldehyde_label, aldehyde_smiles, aminoketone_smiles)
-        "L-leucine":      ("3-methylbutanal", "CC(C)CC=O",    "CC(=O)CN"),
-        "L-isoleucine":   ("2-methylbutanal", "CCC(C)C=O",    "CC(=O)CN"),
-        "L-valine":       ("2-methylpropanal","CC(C)C=O",     "CC(=O)CN"),
+        "l-leucine":      ("3-methylbutanal", "CC(C)CC=O",    "CC(=O)CN"),
+        "l-isoleucine":   ("2-methylbutanal", "CCC(C)C=O",    "CC(=O)CN"),
+        "l-valine":       ("2-methylpropanal","CC(C)C=O",     "CC(=O)CN"),
         "glycine":        ("acetaldehyde",    "CC=O",          "CC(=O)CN"),
-        "L-alanine":      ("acetaldehyde",    "CC=O",          "CC(=O)CN"),
-        "L-phenylalanine":("phenylacetaldehyde","O=CCc1ccccc1","CC(=O)CN"),
-        "L-methionine":   ("methional",       "O=CCCS",        "CC(=O)CN"),
+        "l-alanine":      ("acetaldehyde",    "CC=O",          "CC(=O)CN"),
+        "l-phenylalanine":("phenylacetaldehyde","O=CCc1ccccc1","CC(=O)CN"),
+        "l-methionine":   ("methional",       "O=CCCS",        "CC(=O)CN"),
     }
 
-    entry = _strecker_map.get(amino_acid.label)
+    entry = _strecker_map.get(amino_acid.label.lower())
     if entry is None:
         return None  # amino acid not in Strecker map, skip
 
@@ -508,6 +512,54 @@ def _sugar_ring_opening(pool_species: List[Species]) -> List[ElementaryStep]:
     return steps
 
 
+# ── PBMA Additive Degradations ───────────────────────────────────────────
+
+def _thiamine_degradation(pool: List[Species], conditions: ReactionConditions) -> List[ElementaryStep]:
+    """
+    Tier B Template: Thermal breakdown of Thiamine (Vitamin B1).
+    Literature shows this yields H2S, 2-methylthiophene, and thiazoles.
+    """
+    if conditions.temperature_celsius < 100:
+        return []
+        
+    steps = []
+    # Identify Thiamine in the pool by canonical SMILES
+    for s in pool:
+        if _canonical(s.smiles) == _canonical(_THIAMINE_CANONICAL):
+            p1 = Species("Hydrogen_Sulfide", "S")
+            p2 = Species("2-methylthiophene", "Cc1cccs1")
+            p3 = Species("4,5-dihydro-2-methylthiazole", "CC1=NCCS1")
+            
+            steps.append(ElementaryStep(
+                reactants=[s],
+                products=[p1, p2, p3],
+                reaction_family="Additive_Thermal_Degradation"
+            ))
+    return steps
+
+
+def _glutathione_cleavage(pool: List[Species], conditions: ReactionConditions) -> List[ElementaryStep]:
+    """
+    Tier B Template: Controlled cleavage of Glutathione (GSH).
+    Literature shows it cleaves into glutamic acid and cysteinylglycine dipeptide.
+    """
+    if conditions.temperature_celsius < 100:
+        return []
+        
+    steps = []
+    for s in pool:
+        if _canonical(s.smiles) == _canonical(_GSH_CANONICAL):
+            p1 = Species("Glutamic_Acid", "N[C@@H](CCC(=O)O)C(=O)O")
+            p2 = Species("Cysteinylglycine", "N[C@@H](CS)C(=O)NCC(=O)O")
+            
+            steps.append(ElementaryStep(
+                reactants=[s],
+                products=[p1, p2],
+                reaction_family="Additive_Thermal_Degradation"
+            ))
+    return steps
+
+
 # ──────────────────────────────────────────────────────────────────────────
 # Tier A: SMIRKS application
 # ──────────────────────────────────────────────────────────────────────────
@@ -638,6 +690,19 @@ class SmirksEngine:
         # ── Pre-Phase: Sugar Ring Opening ────────────────────────────────
         ring_steps = _sugar_ring_opening(pool_list())
         for step in ring_steps:
+            if not _step_exists(step, all_steps):
+                all_steps.append(step)
+                add_step_products(step)
+
+        # ── Pre-Phase: PBMA Additive Degradations ─────────────────────────
+        thiamine_steps = _thiamine_degradation(pool_list(), self.conditions)
+        for step in thiamine_steps:
+            if not _step_exists(step, all_steps):
+                all_steps.append(step)
+                add_step_products(step)
+                
+        gsh_steps = _glutathione_cleavage(pool_list(), self.conditions)
+        for step in gsh_steps:
             if not _step_exists(step, all_steps):
                 all_steps.append(step)
                 add_step_products(step)
