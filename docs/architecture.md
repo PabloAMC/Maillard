@@ -29,18 +29,53 @@ A computational tool that can **screen and rank candidate precursor systems** be
 
 ---
 
-## 2. Target Outputs and Success Criteria
+## 2. Target Outputs, Success Criteria, and Usefulness
 
 The tool should predict, for a given input formulation (amino acid/peptide composition, reducing sugar, pH, T, aw):
 
-| Output | Description |
-|--------|-------------|
-| **Desirable volatiles** | Predicted yields of MFT, FFT, key pyrazines, Strecker aldehydes |
-| **Off-flavour risk** | Risk of hexanal, nonanal, grassy/beany compound generation |
-| **Competing pathway load** | DHA / lysinoalanine formation consuming lysine |
-| **Toxicity flags** | AGE (CML, CEL) and HAA (PhIP, MeIQx) risk under proposed conditions |
+| Output | Description | Current Status |
+|--------|-------------|:-:|
+| **Desirable volatiles** | Predicted top volatiles with relative ranking (MFT, FFT, pyrazines, Strecker aldehydes) | ⚠️ Partial — predicted but rankings not validated |
+| **Off-flavour risk** | Risk of hexanal, nonanal, grassy/beany compound generation | ✅ Flagged via trapping metric |
+| **Competing pathway load** | DHA / lysinoalanine formation consuming lysine | ⚠️ Partial — modelled but not surfaced quantitatively |
+| **Toxicity flags** | AGE (CML, CEL) and HAA (PhIP, MeIQx) risk under proposed conditions | ✅ Flagged via toxic_markers.yml |
+| **Concentration sensitivity** | How does the ranking change when cysteine doubles? | ❌ Not implemented |
 
-Success = reducing the number of wet-lab conditions by ≥ 10× while maintaining experimental hit rate.
+**Headline success criterion**: Reducing the number of wet-lab conditions by ≥10× while maintaining experimental hit rate.
+
+### 2.1 What "Useful" Concretely Looks Like
+
+A formulation scientist at a pea-protein company wants to hit a *savory, meaty* profile without a *beany* off-note. They have:
+- Access to 5 amino acid supplements, 2 reducing sugars, a pH dial, and a temperature profile.
+- A GC-MS instrument that takes 3 days and £1,500 per sample.
+
+The tool is **useful** if it can:
+
+1. **Correctly predict winners and losers** within a set of formulations they'd test anyway.
+   - *Example*: Given {ribose, cysteine, pH 5} vs {glucose, glycine, pH 7}, the tool correctly predicts that the former gives higher FFT (sulfur, roasted) and the latter gives more pyrazines (nutty, roasted).
+   - *This is validated by the Literature Validation Gate (8.C.5).*
+
+2. **Reveal non-obvious trade-offs** that they would not have intuited.
+   - *Example*: "Adding hexanal (lipid) to a cysteine+leucine formulation actually increases alkylthiazoles via Strecker catalysis, not just masking."
+   - *This requires the Lipid-Maillard synergy pathway (8.E).*
+
+3. **Give concentration guidance** beyond binary present/absent.
+   - *Example*: "You need ≥0.3% cysteine to shift from pyrazine-dominant to FFT-dominant at pH 5."
+   - *This requires concentration support + Boltzmann scoring (8.D).*
+
+The tool is **not useful** if it merely confirms what any experienced food chemist already knows from memory.
+
+### 2.2 Risk Mitigation
+
+> [!CAUTION]
+> The biggest risk is building a confident-looking tool that doesn't correlate with experiment. A tool that produces wrong rankings is worse than no tool at all, because it erodes trust and wastes wet-lab resources.
+
+**Primary risk**: The scoring function (`score = Σ max(0, 40 − barrier)`) produces near-identical scores for all formulations containing the same reaction families. A scientist who tests the "top" formulation and sees no differentiation from the second-best will immediately distrust the tool.
+
+**Mitigations in the plan**:
+1. **Literature Validation Gate (8.C.5)**: Before proceeding to concentration or synergy features, verify the tool reproduces 3 known experimental outcomes from published model-system GC-MS data. This is a hard gate.
+2. **Boltzmann Scoring Redesign (8.D.B)**: Replace additive linear score with `Σ [c] ⋅ exp(−barrier/kT)`, which gives exponential sensitivity to barrier differences and explicit concentration weighting.
+3. **Incremental validation loop**: After each major feature addition (8.D, 8.E), re-run the validation gate against the same 3 test systems to detect regressions.
 
 ---
 
@@ -81,12 +116,16 @@ The framework has three tiers of increasing physical fidelity and computational 
 **Role**: Enumerate the chemical space of possible reactions from a given precursor set.
 
 **Approach**:
-- Use RMG-Py's thermochemical database and reaction families to auto-generate pathways starting from, e.g., `{D-ribose, L-cysteine, L-leucine}`
+- Use `SmirksEngine` to enumerate the chemical space of possible reactions from a given precursor set.
+- **Strict Mass Conservation**: Every `ElementaryStep` must strictly conserve atoms. This is a physical prerequisite for Tiers 1 and 2.
+- **Hybrid Modeling Strategy**: 
+  - **Tier A (SMARTS)** for high-throughput 1-2 reactant transforms.
+  - **Tier B (Handcrafted Functions)** for complex 3+ reactant clusters (e.g., Thiazole, Thiol Addition) to guarantee balance and specificity.
 - Apply domain-specific constraints to prune the network:
   - Force inclusion of known Maillard families: nucleophilic additions, Amadori rearrangements, retro-aldol fragmentations, Strecker decarboxylations, cyclisations
   - Set maximum molecular weight cutoff (e.g., < 300 Da for volatiles of interest)
   - Flag pathways terminating in known target compounds (MFT, FFT, pyrazines) as high-priority
-- Output: a directed reaction graph (nodes = species, edges = elementary reactions with initial thermochemical estimates from RMG's built-in databases)
+- Output: a directed reaction graph consisting of strict atom-balanced elementary steps.
 
 **Key nuances to encode as rules**:
 - pH-dependent bifurcation: acidic pH → 1,2-enolisation (furans); neutral/alkaline → 2,3-enolisation (dicarbonyls → Strecker)
@@ -164,6 +203,8 @@ Maillard barriers are notoriously sensitive to the XC functional used. Skala pro
 **xTB** is an excellent filter. At ~10–60s per molecule, it enables screening thousands of reaction steps that would take hours at DFT, at the cost of quantitative accuracy. Used correctly as a *relative ranker* not an *absolute predictor*, it is highly cost-effective.
 
 **DFT for barriers** is necessary and unavoidable for the key steps. The question is not whether to do it, but how to scope it. The proposal to focus on 6–8 key reactions is pragmatic and correct.
+
+**Strict Mass Conservation** is the "ground truth" of the engine. An unbalanced `ElementaryStep` makes ΔE‡ and ΔGrxn calculations physically impossible or deceptive. Enforcing balance at Tier 0 (via `assert_balanced` unit tests) is the anchor for the entire physics pipeline.
 
 ### Honest caveats
 

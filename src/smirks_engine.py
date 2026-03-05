@@ -32,6 +32,7 @@ from rdkit import RDLogger
 RDLogger.DisableLog("rdApp.warning")
 
 from rdkit import Chem
+from rdkit.Chem import AllChem
 from rdkit.Chem import Descriptors, AllChem
 
 from src.pathway_extractor import Species, ElementaryStep
@@ -61,14 +62,7 @@ _SMIRKS_RULES: List[Tuple[str, str, str, str]] = [
         "Lipid_Schiff_Base",
         # C3+ aliphatic aldehyde whose alpha-carbon has NO hydroxyl (excludes sugars).
         # The amine donor can be anything with a primary amine on an sp3 carbon (like amino acids).
-        "[CX4H2,CX4H3:2][CH1:1]=O.[NH2:3][CX4:4]>>[C:2][C:1]=[N:3]-[C:4].O",
-        "any",
-    ),
-    (
-        "thiol_addition_furfural",
-        "Thiol_Addition",
-        # Aromatic aldehyde (furfural-type) + H2S -> thiol + water
-        "[c:1][CH:2]=O.[SH2]>>[c:1][CH2:2]S.O",
+        "[CX4H2,CX4H3:2][CH1:1]=[O:5].[NH2:3][CX4:4]>>[*:2][CH1:1]=[N:3][*:4].[O:5]",
         "any",
     ),
 ]
@@ -206,63 +200,73 @@ def _amadori_cascade(sugar: Species, amino_acid: Species) -> List[ElementaryStep
     steps = []
     water = Species(label="water", smiles="O")
 
-    # --- RDKit Assembly ---
-    sugar_mol = _mol(sugar.smiles)
-    amino_mol = _mol(amino_acid.smiles)
-    if not sugar_mol or not amino_mol:
+    # The string approach actually worked well except for extracting the N.
+    # We should just ensure we extract the alpha fragment AND append the basic NH!
+    # Let's write a robust version of extraction using RDKit that returns the whole molecule
+    # MINUS the oxygen.
+    
+    # RDKit approach:
+    # 1. Sugar: Convert C=O to C-OH and add dummy linker?
+    # Simpler: If we know the exact SMILES of sugar and AA, let's use string manipulation 
+    # but WITH atom conservation.
+    # Aldohexose: O=CC(O)C(O)C(O)C(O)CO + NCC(=O)O -> OCC(O)C(O)C(O)C(O)/C=N/CC(=O)O + H2O
+    # Ribose: O=CC(O)C(O)C(O)CO + NCC(=O)O -> OCC(O)C(O)C(O)/C=N/CC(=O)O + H2O
+    
+    # We need the fragment of the amino acid starting *from the N*, but without its 2 Hs.
+    # In canonical SMILES, primary amines are often `N...` or `[NH2]...`.
+    # Let's find the N, isolate the fragment, and use it.
+    
+    _fragment = _extract_alpha_amine_fragment_with_n(amino_acid)
+    if not _fragment:
         return []
-    
-    # Identify Schiff Base and Amadori logic via RDKit
-    # We'll use a simplified model for the MVP:
-    # 1. Sugar terminal C=O becomes C=N-R
-    # 2. Amadori is the rearrangement.
-    
-    # For now, to keep it compatible with the previous labels and logic,
-    # we'll still use the string templates but ENSURE the fragment is rooted correctly.
-    
-    _fragment = _extract_alpha_amine_fragment(amino_acid)
-    
-    # Build Schiff base label
+        
     schiff_label = f"{sugar.label}-{amino_acid.label}-Schiff-base"
     
     if _is_ketose(sugar):
-        # Heyns route
         amadori_label = f"{sugar.label}-{amino_acid.label}-Heyns"
         family = "Heyns_Rearrangement"
         if "fructose" in sugar.label.lower():
-            schiff_smiles = f"OCC(=N{_fragment})C(O)C(O)C(O)CO"
-            amadori_smiles = f"O=CC(N{_fragment})C(O)C(O)C(O)CO"
-            deoxyosone_smiles = "O=CC(=O)CC(O)C(O)CO"
+            # Fructose: OCC(=O)C(O)C(O)C(O)CO
+            # C=O is at index 1 (carbon 2).
+            # Fragment = -N-R
+            schiff_smiles = f"OCC(={_fragment})C(O)C(O)C(O)CO"
+            # Add parenthesis around the -NH-R group so the chain continues properly
+            amadori_smiles = f"O=CC(-{_fragment}H)C(O)C(O)C(O)CO"
+            # Wait, if _fragment is e.g. "NC(CC)C(=O)O", "-NC(CC)C(=O)OH" is invalid because it has a dash before N.
+            # RDKit will output N(CC)C(=O)O if we root it.
+            # So _fragment starts with N.
+            # schiff: OCC(=N...)
+            # amadori: O=CC(N...H) -> The 'H' can be appended inside the N parenthesis if any, but string concat is hard.
+            # The safest is: "O=CC(" + _fragment + ")C(O)C(O)C(O)CO", and let RDKit implicitly add the H to N to satisfy valence.
+            amadori_smiles = f"O=CC({_fragment})C(O)C(O)C(O)CO"
         else:
             return []
     else:
-        # Amadori route
         amadori_label = f"{sugar.label}-{amino_acid.label}-Amadori"
         family = "Amadori_Rearrangement"
         if _is_pentose(sugar):
-            schiff_smiles = f"OCC(O)C(O)C(O)/C=N/{_fragment}"
-            amadori_smiles = f"OCC(O)C(O)C(=O)CN{_fragment}"
-            deoxyosone_smiles = "O=CC(=O)CC(O)CO"
+            # Ribose: O=CC(O)C(O)C(O)CO
+            schiff_smiles = f"OCC(O)C(O)C(O)/C={_fragment}"
+            # Again, use parenthesis around the N fragment
+            amadori_smiles = f"OCC(O)C(O)C(=O)C({_fragment})"
         elif _is_hexose(sugar):
-            schiff_smiles = f"OCC(O)C(O)C(O)C(O)/C=N/{_fragment}"
-            amadori_smiles = f"OCC(O)C(O)C(O)C(=O)CN{_fragment}"
-            deoxyosone_smiles = "O=CC(=O)CC(O)C(O)CO"
+            # Glucose: O=CC(O)C(O)C(O)C(O)CO
+            schiff_smiles = f"OCC(O)C(O)C(O)C(O)/C={_fragment}"
+            amadori_smiles = f"OCC(O)C(O)C(O)C(=O)C({_fragment})"
         else:
             return []
 
-    # Final validation of generated SMILES
     if not _is_valid(schiff_smiles) or not _is_valid(amadori_smiles):
-        # Fallback to a very simple label-based species if SMILES fails
-        # but better to return empty than invalid
-        if not _is_valid(schiff_smiles):
-            # Try to fix by stripping leading parentheses if any
-            if _fragment.startswith("(") and _fragment.endswith(")"):
-                _fragment = _fragment[1:-1]
-                # Re-run logic... but let's just be safe.
-        return []
+        # We might have generated invalid stereo like C=N]C...
+        # Let's clean it up slightly and re-verify
+        schiff_smiles = schiff_smiles.replace("=[N", "=N").replace("=[nH]", "=N")
+        amadori_smiles = amadori_smiles.replace("C[N", "CN").replace("C[nH]", "CN")
+        if not _is_valid(schiff_smiles) or not _is_valid(amadori_smiles):
+            return []
 
     schiff_base = Species(label=schiff_label, smiles=schiff_smiles)
     amadori_product = Species(label=amadori_label, smiles=amadori_smiles)
+
     steps.append(ElementaryStep(
         reactants=[sugar, amino_acid],
         products=[schiff_base, water],
@@ -276,43 +280,58 @@ def _amadori_cascade(sugar: Species, amino_acid: Species) -> List[ElementaryStep
     return steps
 
 
-def _extract_alpha_amine_fragment(amino_acid: Species) -> str:
+def _extract_alpha_amine_fragment_with_n(amino_acid: Species) -> str:
     """
-    Extract the fragment attached to the amine of an alpha-amino acid
-    for SMILES construction. Returns the SMILES of R–CH(NH–)–COOH minus NH2.
-    E.g. glycine NCC(=O)O → CC(=O)O (alpha side chain + carboxyl).
-    This is used to append to the imine carbon in Schiff base SMILES.
+    Extracts the alpha-amino acid SMILES with its alpha nitrogen explicitly grouped,
+    e.g., as N(...). We identify the primary alpha N, insert an attachment point or 
+    restructure the SMILES so it begins with N.
     """
-    # Use RDKit to remove the primary amine properly
+    # For glycine: NCC(=O)O -> N(CC(=O)O) or something similar
+    # By default, RDKit canonical SMILES for simple AAs usually start with N.
     m = _mol(amino_acid.smiles)
-    if m:
-        # Remove the first primary amine [NH2] or [NH] found.
-        # This is the standard Strecker/Amadori nitrogen.
-        pat = Chem.MolFromSmarts("[NH2,NH1;!$(N=C);!$(N#C)]")
-        res = Chem.DeleteSubstructs(m, pat, onlyFrags=False)
-        try:
-            # We must use isomericSmiles=False here to stay compatible with the template's simple string concatenation
-            return Chem.MolToSmiles(res, isomericSmiles=False)
-        except:
-            pass
+    if not m: return ""
     
-    # Simple heuristic fallback
-    smi = amino_acid.smiles
-    for prefix in ["N[C@@H]", "N[C@H]", "NC"]:
-        if smi.startswith(prefix):
-            return smi[len("N"):] 
+    # Find alpha nitrogen (N attached to CH attached to C=O)
+    pat = Chem.MolFromSmarts("[NH2][CH1,CH2][C](=O)[OH]")
+    matches = m.GetSubstructMatches(pat)
+    
+    # If no match, maybe it's cysteine or something that didn't match perfectly.
+    # Try more general: primary amine
+    if not matches:
+        pat = Chem.MolFromSmarts("[NH2]")
+        matches = m.GetSubstructMatches(pat)
+        
+    if not matches:
+        # Fallback to string manipulation if we really can't find it
+        return "N" + _extract_alpha_amine_fragment(amino_acid)
+        
+    # We want to re-root the SMILES generation at the alpha nitrogen
+    n_idx = matches[0][0]
+    smi = Chem.MolToSmiles(m, rootedAtAtom=n_idx, isomericSmiles=False)
+    
+    # The SMILES will start with N. We want to return exactly that string,
+    # but when it's appended to C= etc., we'll strip the leading N? No, we WANT the N.
+    # E.g. rooted glycine: NCC(=O)O. We want to return N(CC(=O)O).
+    # Wait, if we return NCC(=O)O, and substitute `C={fragment}`, we get `C=NCC(=O)O`, 
+    # which is exactly correct!
+    
+    # Let's test Lysine: NCCCCC(N)C(=O)O
+    # Rotated at alpha-amine: NC(CCCCN)C(=O)O
+    # So `C=NC(CCCCN)C(=O)O` works perfectly!
+    
     return smi
 
 
 def _enolisation_steps(
     amadori: Species,
     sugar: Species,
+    amino_acid: Species, # We need the original AA to balance atoms
     conditions: ReactionConditions
 ) -> List[ElementaryStep]:
     """
-    Amadori product → 3-deoxyosone → dehydrated product.
-    1,2-enolisation (pH<6): pentose → furfural, hexose → HMF
-    2,3-enolisation (pH>=6): both → pyruvaldehyde (dicarbonyl)
+    Amadori product → 3-deoxyosone + amino_acid + H2O.
+    1,2-enolisation (pH<6): deoxyosone → furfural/HMF + 2 H2O
+    2,3-enolisation (pH>=6): deoxyosone → pyruvaldehyde + ?
     """
     steps = []
     water = Species(label="water", smiles="O")
@@ -325,9 +344,17 @@ def _enolisation_steps(
     deoxy = Species(label=f"{sugar.label}-deoxyosone-3", smiles=deoxy_smi)
 
     # 1. Formation of deoxyosone intermediate
+    # Amadori -> Deoxyosone + Amino Acid
+    # C11H19NO8 (ribose-glycine Amadori) -> C5H8O4 (pentose deoxy) + C2H5NO2 (glycine)
+    # Sum: C5H8O4 + C2H5NO2 = C7H13NO6 + ??
+    # Let's check ribose amadori: OCC(O)C(O)C(=O)CNCC(=O)O
+    # Ribose: C5H10O5. Glycine: C2H5NO2. Schiff base: C7H13NO6 (loses H2O).
+    # Amadori: C7H13NO6.
+    # Deoxy: C5H8O4 (O=CC(=O)CC(O)CO)
+    # C5H8O4 + C2H5NO2 (glycine) = C7H13NO6! Perfectly balanced without water.
     steps.append(ElementaryStep(
         reactants=[amadori],
-        products=[deoxy, water],
+        products=[deoxy, amino_acid],
         reaction_family="Enolisation_Intermediate"
     ))
 
@@ -335,16 +362,35 @@ def _enolisation_steps(
     if conditions.pH < 6:
         if _is_pentose(sugar):
             product = Species(label="furfural", smiles="O=Cc1ccco1")
+            # C5H8O5 (deoxy) -> C5H4O2 (furfural) + 3 H2O 
+            # Wait, PySCF/xTB needs exact balance. 
+            # Pentose deoxyosone is O=CC(=O)CC(O)CO (C5H8O4). Wait, C5H8O4.
+            # Furfural is C5H4O2. C5H8O4 -> C5H4O2 + 2 H2O.
+            water_count = 2
         else:
             product = Species(label="HMF", smiles="OCC1=CC=C(C=O)O1")
+            # Hexose deoxy is O=CC(=O)CC(O)C(O)CO (C6H10O5). HMF is C6H6O3.
+            # C6H10O5 -> C6H6O3 + 2 H2O.
+            water_count = 2
         family = "Enolisation_1_2"
+        products = [product] + [water] * water_count
     else:
         product = Species(label="pyruvaldehyde", smiles="CC(=O)C=O")
+        # Deoxyosone -> Pyruvaldehyde + (Glyceraldehyde or Glycolaldehyde)
+        # Wait, enolisation 2,3 -> 1-deoxyosone -> cleavage.
+        # But this code currently just emits pyruvaldehyde + 2 water, which loses C2/C3 atoms!
+        # Let's fix this properly.
+        if _is_pentose(sugar): # C5H8O4 -> C3H4O2 (pyruv) + C2H4O2 (glycolaldehyde)
+            p2 = Species(label="glycolaldehyde", smiles="O=CCO")
+        else: # C6H10O5 -> C3H4O2 (pyruv) + C3H6O3 (glyceraldehyde)
+            p2 = Species(label="glyceraldehyde", smiles="O=CC(O)CO")
+        
+        products = [product, p2]
         family = "Enolisation_2_3"
 
     steps.append(ElementaryStep(
         reactants=[deoxy],
-        products=[product, water, water], # 2 more waters lost
+        products=products,
         reaction_family=family,
     ))
 
@@ -356,28 +402,93 @@ def _strecker_step(
 ) -> Optional[ElementaryStep]:
     """
     α-dicarbonyl (e.g. pyruvaldehyde) + amino acid → Strecker aldehyde + aminoketone + CO₂
-
-    The Strecker aldehyde is one carbon shorter than the amino acid's side chain.
-    We use a lookup table for the standard amino acids.
+    
+    To balance atoms: 
+    Amino acid (e.g. Glycine: C2 H5 N O2) loses CO2 (C1 O2) and its sidechain becomes the Strecker aldehyde.
+    The remaining -(NH2) group from the amino acid attaches to the dicarbonyl.
+    The dicarbonyl (e.g. Pyruvaldehyde: C3 H4 O2) loses ONE oxygen (which goes to the Strecker aldehyde as its carbonyl O), 
+    and accepts the -(NH2) to form the aminoketone.
+    
+    Wait, let's track the exact mechanism:
+    Dicarbonyl: R1-C(=O)-C(=O)-R2
+    Amino Acid: NH2-CH(R3)-COOH
+    
+    1. Condensation to Schiff base, losing H2O (from dicarbonyl O and amino 2H).
+    2. Decarboxylation: Loses CO2.
+    3. Hydrolysis: Adds H2O across the C=N bond.
+    
+    Net reaction:
+    R1-C(=O)-C(=O)-R2 + NH2-CH(R3)-COOH → R1-C(=O)-CH(NH2)-R2 + O=CH-R3 + CO2
+    
+    So the aminoketone is exactly the dicarbonyl minus ONE carbonyl oxygen, plus NH2, plus 1 H (from the amino acid alpha carbon).
+    Since building this dynamically for pyruvaldehyde (CC(=O)C=O) vs diacetyl (CC(=O)C(=O)C) via SMIRKS is complex, 
+    we'll use a mapping for both the amino acid AND the dicarbonyl.
     """
-    _strecker_map = {
-        # amino acid smiles pattern → (aldehyde_label, aldehyde_smiles, aminoketone_smiles)
-        "l-leucine":      ("3-methylbutanal", "CC(C)CC=O",    "CC(=O)CN"),
-        "l-isoleucine":   ("2-methylbutanal", "CCC(C)C=O",    "CC(=O)CN"),
-        "l-valine":       ("2-methylpropanal","CC(C)C=O",     "CC(=O)CN"),
-        "glycine":        ("acetaldehyde",    "CC=O",          "CC(=O)CN"),
-        "l-alanine":      ("acetaldehyde",    "CC=O",          "CC(=O)CN"),
-        "l-phenylalanine":("phenylacetaldehyde","O=CCc1ccccc1","CC(=O)CN"),
-        "l-methionine":   ("methional",       "CSCCC=O",       "CC(=O)CN"),
+    
+    # 1. Map Amino Acid to its Strecker Aldehyde
+    _aa_to_aldehyde = {
+        # name -> (aldehyde_label, aldehyde_smiles)
+        "l-leucine":      ("3-methylbutanal", "CC(C)CC=O"),
+        "l-isoleucine":   ("2-methylbutanal", "CCC(C)C=O"),
+        "l-valine":       ("2-methylpropanal","CC(C)C=O"),
+        "glycine":        ("formaldehyde",    "C=O"), # Glycine sidechain is H. So H-C=O is formaldehyde
+        "l-alanine":      ("acetaldehyde",    "CC=O"),
+        "l-phenylalanine":("phenylacetaldehyde","O=CCc1ccccc1"),
+        "l-methionine":   ("methional",       "CSCCC=O"),
+        "l-lysine":       ("5-aminopentanal", "NCCCCC=O"), # Assuming epsilon amine doesn't react here
     }
 
-    entry = _strecker_map.get(amino_acid.label.lower())
-    if entry is None:
-        return None  # amino acid not in Strecker map, skip
+    # 2. Map Dicarbonyl to its Aminoketone
+    # R1-C(=O)-C(=O)-R2 -> R1-C(=O)-CH(NH2)-R2
+    _dicarbonyl_to_ak = {
+        "pyruvaldehyde": ("aminoacetone", "CC(=O)CN"), # CC(=O)C=O (C3H4O2) -> CC(=O)CN (C3H7NO)
+        "diacetyl":      ("3-amino-2-butanone", "CC(=O)C(N)C"),
+        "glyoxal":       ("2-aminoethanal", "O=CCN"),
+        "furfural":      None, # Not a dicarbonyl
+        "HMF":           None, 
+    }
+    
+    aa_entry = _aa_to_aldehyde.get(amino_acid.label.lower())
+    if aa_entry is None:
+        # Fallback for unrecognized amino acids, though they won't balance if we don't know the products.
+        return None
 
-    ald_label, ald_smiles, ak_smiles = entry
+    ald_label, ald_smiles = aa_entry
+    
+    # Find matching dicarbonyl
+    ak_entry = _dicarbonyl_to_ak.get(dicarbonyl.label)
+    
+    # If it's a generic deoxyosone, it acts as the dicarbonyl.
+    # e.g., D-glucose-deoxyosone-3 is O=CC(=O)CC(O)C(O)CO.
+    # It turns into the corresponding aminoketone: O=CC(N)CC(O)C(O)CO or NC(=O)CC(O)C(O)CO (Wait, aldehydes are more reactive).
+    # Since generating these dynamically is hard, we can use an RDKit reaction!
+    
+    if ak_entry is None:
+        # Generic RDKit reaction for dicarbonyl + amino acid -> aldehyde + aminoketone + CO2
+        # It's much easier to just use RunReactants.
+        # Dicarbonyl: [C:1](=[O:2])[C:3](=[O:4])
+        # Amino Acid: [NH2:5][CH1,CH2:6]([R:7])[C:8](=[O:9])[OH:10]
+        # Strecker aldehyde: [R:7][C:6]=[O:2] (Wait, the O comes from dicarbonyl? No, O comes from water hydrolysis. Net it's the same as swapping).
+        # We know the aldehyde SMILES from the dictionary. We just need the aminoketone!
+        rxn_ak = AllChem.ReactionFromSmarts(
+            "[C:1](=[O:2])[C:3](=[O:4]) >> [C:1](=[O:2])[C:3]([NH2])"
+        )
+        dic_mol = _mol(dicarbonyl.smiles)
+        if not dic_mol: return None
+        prods = rxn_ak.RunReactants((dic_mol,))
+        if not prods: return None
+        
+        try:
+            Chem.SanitizeMol(prods[0][0])
+            ak_smiles = Chem.MolToSmiles(prods[0][0])
+            ak_label = f"amino-{dicarbonyl.label}"
+        except:
+            return None
+    else:
+        ak_label, ak_smiles = ak_entry
+
     aldehyde = Species(label=ald_label, smiles=ald_smiles)
-    aminoketone = Species(label="aminoacetone", smiles=ak_smiles)
+    aminoketone = Species(label=ak_label, smiles=ak_smiles)
     co2 = Species(label="CO2", smiles="O=C=O")
 
     return ElementaryStep(
@@ -430,60 +541,112 @@ def _beta_elimination_steps(aa: Species, pool_species: List[Species]) -> List[El
 
 
 def _aminoketone_condensation(pool_species: List[Species]) -> List[ElementaryStep]:
-    """2x aminoacetone -> 2,5-dimethylpyrazine + 3H2O"""
+    """
+    2x aminoacetone -> 2,5-dimethylpyrazine + 2H2O + H2
+    (Aromatic pyrazines require oxidation/loss of 2H from the dihydro-intermediate).
+    """
     steps = []
     aks = [s for s in pool_species if "aminoacetone" in s.label.lower() or s.smiles == "CC(=O)CN"]
     for ak in aks:
         pyrazine = Species(label="2,5-dimethylpyrazine", smiles="Cc1cnc(C)cn1")
         water = Species(label="water", smiles="O")
+        hydro = Species(label="H2", smiles="[HH]")
         steps.append(ElementaryStep(
             reactants=[ak, ak],
-            products=[pyrazine, water, water, water],
+            products=[pyrazine, water, water, hydro],
             reaction_family="Aminoketone_Condensation"
         ))
     return steps
 
 
 def _retro_aldol_fragmentation(pool_species: List[Species]) -> List[ElementaryStep]:
-    """3-deoxyosone -> C2 + C3 fragments"""
+    """
+    3-deoxyosone -> C2 + C3 fragments
+    Hexose Deoxyosone (C6 H10 O5) -> Pyruvaldehyde (C3 H4 O2) + Glyceraldehyde (C3 H6 O3)
+    Sum: C6 H10 O5. Balanced! No water needed.
+    Pentose Deoxyosone (C5 H8 O4) -> Pyruvaldehyde (C3 H4 O2) + Glycolaldehyde (C2 H4 O2)
+    Sum: C5 H8 O4. Balanced.
+    """
     steps = []
     for s in pool_species:
         lower = s.label.lower()
         if "deoxyosone" in lower:
-            # C6 -> C3 + C3
-            if "glucose" in lower or s.smiles == "O=CC(=O)CC(O)C(O)CO":
+            # Hexose -> Pyruvaldehyde + Glyceraldehyde
+            if "glucose" in lower or "fructose" in lower or _is_hexose(s):
                 p1 = Species(label="pyruvaldehyde", smiles="CC(=O)C=O")
                 p2 = Species(label="glyceraldehyde", smiles="O=CC(O)CO")
                 steps.append(ElementaryStep([s], [p1, p2], "Retro_Aldol_Fragmentation"))
-            # C5 -> C2 + C3
-            elif "ribose" in lower or s.smiles == "O=CC(=O)CC(O)CO":
+            # Pentose -> Pyruvaldehyde + Glycolaldehyde
+            elif "ribose" in lower or _is_pentose(s):
                 p1 = Species(label="pyruvaldehyde", smiles="CC(=O)C=O")
                 p2 = Species(label="glycolaldehyde", smiles="O=CCO")
                 steps.append(ElementaryStep([s], [p1, p2], "Retro_Aldol_Fragmentation"))
     return steps
 
 
-def _cysteine_degradation(pool_species: List[Species], conditions: ReactionConditions) -> List[ElementaryStep]:
-    """Thermal degradation of Cysteine to H2S, NH3, acetaldehyde, CO2."""
+def _cysteine_degradation(amino_acids: List[Species], conditions: ReactionConditions) -> List[ElementaryStep]:
+    """
+    Thermal degradation of Cysteine -> H2S, NH3, acetaldehyde, CO2
+    NC(CS)C(=O)O (C3 H7 N O2 S) -> H2S (H2 S) + NH3 (H3 N) + CC=O (C2 H4 O) + O=C=O (C1 O2)
+    Sum products: H5 N S + C3 H4 O3
+    Total: C3 H9 N O3 S
+    Reactants: C3 H7 N O2 S. Difference is +H2O in the products!
+    So Cysteine + H2O -> H2S + NH3 + Acetaldehyde + CO2 is perfectly balanced.
+    Wait, if water is required, it should be a reactant.
+    """
     steps = []
     if conditions.temperature_celsius < 100:
         return steps
-    for s in pool_species:
-        if "cysteine" in s.label.lower() or s.smiles == "NC(CS)C(=O)O":
-            h2s = Species("H2S", "S")
-            nh3 = Species("ammonia", "N")
-            aca = Species("acetaldehyde", "CC=O")
-            co2 = Species("CO2", "O=C=O")
-            steps.append(ElementaryStep([s], [h2s, nh3, aca, co2], "Cysteine_Degradation"))
+        
+    for aa in amino_acids:
+        if "cysteine" == aa.label.lower() or "l-cysteine" == aa.label.lower() or aa.smiles == "NC(CS)C(=O)O":
+            h2s = Species(label="H2S", smiles="S")
+            ammonia = Species(label="ammonia", smiles="N")
+            acetaldehyde = Species(label="acetaldehyde", smiles="CC=O")
+            co2 = Species(label="CO2", smiles="O=C=O")
+            water = Species(label="water", smiles="O")
+            
+            steps.append(ElementaryStep(
+                reactants=[aa, water],
+                products=[h2s, ammonia, acetaldehyde, co2],
+                reaction_family="Cysteine_Degradation"
+            ))
+            
     return steps
 
 
 def _thiazole_condensation(pool_species: List[Species]) -> List[ElementaryStep]:
-    """Strecker aldehyde + H2S + NH3 -> Thiazole"""
+    """
+    Thiazole formation (Simplified balanced pathway).
+    Pyruvaldehyde (C3 H4 O2) + NH3 (H3 N) + H2S (H2 S) -> Thiazole (C3 H3 N S) + 2 H2O (H4 O2) + H2 (H2).
+    Sum Reactants: C3 H9 N O2 S. Sum Products: C3 H9 N O2 S. Perfectly balanced!
+    Then we can decorate it via alkylation (for the 2-alkylthiazoles) or just use the Strecker aldehydes as the backbone 
+    if they have enough carbons. Wait, the template generates specific alkylthiazoles based on the Strecker aldehyde.
+    E.g. 3-methylbutanal (C5 H10 O) -> 2-isobutylthiazole (C7 H11 N S). 
+    This gains 2 Carbons (C3 backbone from somewhere).
+    So: Aldehyde (C_n) + Pyruvaldehyde (C3) + NH3 + H2S -> 2-Alkylthiazole (C_{n+2}) + ... wait.
+    Let's use the actual balanced synthesis:
+    Aldehyde (R-CHO) + alpha-mercapto-ketone (R'-C(=O)-CH(SH)-R'') + NH3 -> Thiazole + 3H2O.
+    The easiest way to balance the existing hardcoded list is to use Pyruvaldehyde (C3H4O2) as the C3 backbone.
+    Aldehyde (R-CHO: C_n H_2n O) + Pyruvaldehyde (C3 H4 O2) + NH3 (H3 N) + H2S (H2 S) 
+      -> 2-Alkylthiazole (C_{n+3} H_{2n+3} N S) + 3 H2O (H6 O3) + H2 gas (H2).
+    Let's check math for acetaldehyde (C2 H4 O).
+    Reactants: C2H4O + C3H4O2 + NH3 + H2S = C5 H13 N O3 S.
+    Products: 2-methylthiazole (C4 H5 N S). Wait, C4? Acetaldehyde (C2) + Pyruvaldehyde (C3) = C5!
+    Where did the extra carbon go? 2-methylthiazole only has 4 carbons!
+    Ah, the Thiazole ring itself has 3 carbons. 2-methylthiazole has 3 (ring) + 1 (methyl) = 4 carbons.
+    So the backbone must be a C2 piece! Glycolaldehyde (C2 H4 O2).
+    Let's check Glycolaldehyde (C2 H4 O2) + Acetaldehyde (C2 H4 O) + NH3 + H2S -> C4 H13 N O3 S.
+    2-methylthiazole (C4 H5 N S) + 3 H2O (H6 O3) + H2 (H2) -> C4 H13 N O3 S. PERFECTLY BALANCED!
+    
+    So: Strecker Aldehyde + Glycolaldehyde + NH3 + H2S -> 2-Alkylthiazole + 3 H2O + H2.
+    """
     steps = []
     h2s = next((s for s in pool_species if s.smiles == "S"), None)
     nh3 = next((s for s in pool_species if s.smiles == "N"), None)
-    if not (h2s and nh3):
+    glycol = next((s for s in pool_species if "glycolaldehyde" in s.label.lower() or s.smiles == "O=CCO"), None)
+    
+    if not (h2s and nh3 and glycol):
         return steps
         
     _thiazole_map = {
@@ -498,11 +661,88 @@ def _thiazole_condensation(pool_species: List[Species]) -> List[ElementaryStep]:
         if entry:
             tz = Species(label=entry[0], smiles=entry[1])
             water = Species("water", "O")
+            hydro = Species("H2", "[HH]")
             steps.append(ElementaryStep(
-                reactants=[sp, h2s, nh3], 
-                products=[tz, water, water], 
+                reactants=[sp, glycol, h2s, nh3], 
+                products=[tz, water, water, water, hydro], 
                 reaction_family="Lipid_Thiazole_Condensation"
             ))
+    return steps
+
+
+def _thiol_addition(pool_species: List[Species]) -> List[ElementaryStep]:
+    """
+    Furfural + H2S + H2 -> Furfurylthiol (FFT) + H2O.
+
+    Atom balance:
+      furfural (C5H4O2) + H2S (H2S) + H2 (H2) = C5H8O2S
+      FFT      (C5H6OS) + H2O (H2O)            = C5H8O2S  ✓
+
+    H2 and H2S are matched by EXACT SMILES only to avoid false-positive
+    matches against Cysteine's -SH or organic thiols.
+    """
+    steps = []
+    h2s = next((s for s in pool_species if s.smiles == "S"), None)
+    h2  = next((s for s in pool_species if s.smiles == "[HH]"), None)
+    if not (h2s and h2):
+        return steps
+
+    _fft_map = {
+        "furfural":         ("furfurylthiol",       "SCc1ccco1"),
+        "5-methylfurfural": ("5-methylfurfurylthiol","SCc1ccc(C)o1"),
+    }
+
+    rxn = AllChem.ReactionFromSmarts(
+        "[c:1][CH1:2]=[O:3].[SH2;D0:4].[HH]>>[*:1][CH2:2][SH1:4].[O:3]"
+    )
+    h2s_m = _mol("S")
+    h2_m  = _mol("[HH]")
+
+    seen = set()
+    for sp in pool_species:
+        entry = _fft_map.get(sp.label)
+        if entry:
+            key = (sp.smiles, "S", "[HH]")
+            if key in seen:
+                continue
+            seen.add(key)
+            fft   = Species(label=entry[0], smiles=entry[1])
+            water = Species("water", "O")
+            steps.append(ElementaryStep(
+                reactants=[sp, h2s, h2],
+                products=[fft, water],
+                reaction_family="Thiol_Addition"
+            ))
+        else:
+            # Fallback: attempt SMARTS match for unlisted aromatic aldehydes
+            m = _mol(sp.smiles)
+            if m is None:
+                continue
+            try:
+                prods = rxn.RunReactants((m, h2s_m, h2_m))
+            except Exception:
+                continue
+            for prod_tuple in prods:
+                prod_smiles, ok = [], True
+                for p in prod_tuple:
+                    try:
+                        Chem.SanitizeMol(p)
+                        ps = Chem.MolToSmiles(p)
+                        if _is_valid(ps):
+                            prod_smiles.append(ps)
+                        else:
+                            ok = False; break
+                    except Exception:
+                        ok = False; break
+                if ok and len(prod_smiles) == len(prod_tuple):
+                    key = (sp.smiles, "S", "[HH]", tuple(prod_smiles))
+                    if key not in seen:
+                        seen.add(key)
+                        steps.append(ElementaryStep(
+                            reactants=[sp, h2s, h2],
+                            products=[Species(ps, ps) for ps in prod_smiles],
+                            reaction_family="Thiol_Addition"
+                        ))
     return steps
 
 
@@ -657,14 +897,24 @@ def _apply_smirks_rule(
                     continue
                 for prod_tuple in prods:
                     prod_smiles = []
+                    valid_step = True
                     for p in prod_tuple:
                         try:
+                            # Sanitize to catch valence issues
+                            Chem.SanitizeMol(p)
                             ps = Chem.MolToSmiles(p)
                             if _is_valid(ps):
                                 prod_smiles.append(ps)
+                            else:
+                                valid_step = False
+                                break
                         except Exception:
-                            pass
-                    if prod_smiles:
+                            valid_step = False
+                            break
+                            
+                    # Only append if ALL products were successfully generated and are valid
+                    # This guarantees mass conservation. The RDKit reaction MUST output everything.
+                    if valid_step and len(prod_smiles) == len(prod_tuple):
                         r1 = next((s for s in pool if s.smiles == smi1), Species(smi1, smi1))
                         r2 = next((s for s in pool if s.smiles == smi2), Species(smi2, smi2))
                         steps.append(ElementaryStep(
@@ -672,6 +922,44 @@ def _apply_smirks_rule(
                             products=[Species(ps, ps) for ps in prod_smiles],
                             reaction_family=family,
                         ))
+
+    elif n_reactants == 3:
+        for smi1 in pool_smiles:
+            for smi2 in pool_smiles:
+                for smi3 in pool_smiles:
+                    m1, m2, m3 = _mol(smi1), _mol(smi2), _mol(smi3)
+                    if m1 is None or m2 is None or m3 is None:
+                        continue
+                    try:
+                        prods = rxn.RunReactants((m1, m2, m3))
+                    except Exception:
+                        continue
+                    for prod_tuple in prods:
+                        prod_smiles = []
+                        valid_step = True
+                        for p in prod_tuple:
+                            try:
+                                Chem.SanitizeMol(p)
+                                ps = Chem.MolToSmiles(p)
+                                if _is_valid(ps):
+                                    prod_smiles.append(ps)
+                                else:
+                                    valid_step = False
+                                    break
+                            except Exception:
+                                valid_step = False
+                                break
+                                
+                        if valid_step and len(prod_smiles) == len(prod_tuple):
+                            r1 = next((s for s in pool if s.smiles == smi1), Species(smi1, smi1))
+                            r2 = next((s for s in pool if s.smiles == smi2), Species(smi2, smi2))
+                            r3 = next((s for s in pool if s.smiles == smi3), Species(smi3, smi3))
+                            steps.append(ElementaryStep(
+                                reactants=[r1, r2, r3],
+                                products=[Species(ps, ps) for ps in prod_smiles],
+                                reaction_family=family,
+                            ))
+
     return steps
 
 
@@ -760,7 +1048,7 @@ class SmirksEngine:
                 amadori_sp = pool_dict.get(amadori_can) if amadori_can else None
                 
                 if amadori_sp:
-                    enols = _enolisation_steps(amadori_sp, sugar, self.conditions)
+                    enols = _enolisation_steps(amadori_sp, sugar, amine, self.conditions)
                     for enol in enols:
                         if not _step_exists(enol, all_steps):
                             all_steps.append(enol)
@@ -810,6 +1098,13 @@ class SmirksEngine:
         # 3d. Lipid Thiazole Condensation
         tz_steps = _thiazole_condensation(pool_list())
         for step in tz_steps:
+            if not _step_exists(step, all_steps):
+                all_steps.append(step)
+                add_step_products(step)
+
+        # 3e. Thiol Addition (Furfural + H2S + H2 -> FFT)
+        ta_steps = _thiol_addition(pool_list())
+        for step in ta_steps:
             if not _step_exists(step, all_steps):
                 all_steps.append(step)
                 add_step_products(step)

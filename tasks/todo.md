@@ -5,22 +5,23 @@
 
 ## ⚡ Prioritized Action Plan (as of 2026-03-05)
 
-**Phase 7 & 8.A complete.** The tool now has a working forward simulation pipeline, Inverse Design mode, and an expanded 15-entry formulation grid. The next challenge is scientific credibility: the compound rankings are driven by hardcoded heuristic barriers, not real physics. Without anchoring these to validated data, scientists cannot trust the recommendations over their own intuition.
+**Phase 7, 8.A, and 8.B complete.** Reaction enumeration is functional and atom-balanced. The next challenge is scientific credibility: the compound rankings are driven by hardcoded heuristic barriers, not real physics. Without anchoring these to validated data and experimental baselines, the tool cannot distinguish between formulations that an experienced formulator would already know differ.
 
 Ordered by **impact on alt-protein formulation scientists** (the end-user):
 
 | Priority | Task | Status | Why |
 |----------|------|:------:|-----|
 | ~~1–7~~ | Phase 7 (all sub-tasks) | ✅ | Full forward pipeline + Inverse Design mode operational. |
-| ~~8.A~~ | **8.A — Expand formulation grid** | ✅ | Grid expanded to 15 entries; covers methionine, xylose, fructose, pH variants. Engine fixed for AA fragments. |
-| **🔴 Next** | **8.0 — Balance SmirksEngine templates** | ☐ | **Prerequisite for 8.B and 8.2.** Templates don't conserve atoms — Schiff base uses f-string concatenation that silently drops sugar hydroxyls; Strecker always emits `CC(=O)CN` regardless of the dicarbonyl. Without balanced reactions, xTB ΔE‡ values are physically meaningless. |
-| **🔴 High** | **8.B — Calibrate FAST-mode barriers** | ☐ | Rankings are hardcoded guesses (e.g. Schiff=15, Strecker=22 kcal). Needs 8.0 first. |
-| **🟡 Med** | **8.C — Add concentration/ratio support** | ☐ | Tool treats precursors as binary (present/absent). Formulators need "how much?", not just "which?". |
-| **🟡 Med** | **8.D — Model lipid-Maillard synergy** | ☐ | Lipid aldehydes *catalyze* Strecker (pathways.md §D) — not just a trapping target. Currently only the masking side is modelled. |
-| 🟢 Low | 3.3 — Full DFT barriers (Skala) | ☐ | Replaces all heuristics with chemically accurate kinetics. High effort; needed before publication-quality output. |
-| 🟢 Low | 8.2 — Cantera Kinetic Simulation | ☐ | Time/temperature cooking profiles. Needs 8.0 and 8.B first. |
+| ~~8.A~~ | **8.A — Expand formulation grid** | ✅ | Grid expanded to 15 entries. |
+| ~~8.B~~ | **8.B — Balance SmirksEngine templates** | ✅ | All templates atom-balanced. 79 tests pass. |
+| **🔴 1** | **8.C — Calibrate FAST-mode barriers** | ☐ | All formulation rankings are arithmetic on hardcoded constants. Useless without calibration. |
+| **🔴 2** | **8.C.5 — Literature Validation Gate** | ☐ | **Critical risk mitigation.** Verify tool output matches 3 known experimental results before building further. |
+| **🟠 3** | **8.D — Concentrations + Scoring redesign** | ☐ | The tool currently can't distinguish 0.5% cysteine from 2.0% cysteine. This is the single biggest utility gap. |
+| **🟡 4** | **8.E — Lipid-Maillard synergy (catalytic role)** | ☐ | Adds non-obvious insight: lipid aldehydes *accelerate* Strecker, not just off-flavour. |
+| 🟢 5 | 3.3 — Full DFT barriers (Skala) | ☐ | Only after 8.C.5 confirms the tool's direction is correct. |
+| 🟢 6 | 8.G — Cantera kinetic simulation | ☐ | Time-temperature profiles require DFT-quality barriers. |
 
-> **Deferred:** Phase 5 (Experimental validation), Phase 8.1/8.2 (full kinetic modeling), AI-models (IBM RXN).
+> **Gate**: 8.C.5 is a hard gate. If the tool's predicted top-3 volatiles don't match experimental observations for ≥2 of 3 test systems, iterate on 8.C before proceeding to 8.D.
 
 ---
 
@@ -38,41 +39,57 @@ Ordered by **impact on alt-protein formulation scientists** (the end-user):
     - [x] Updated `InverseDesigner` to support per-formulation pH/temperature/water-activity overrides.
     - [x] Verification: `python scripts/run_pipeline.py --target meaty --minimize beany` correctly evaluates all 15 formulations.
 
-- [ ] **8.0 — Balance SmirksEngine Templates** `[Diff: 5/10 | Prerequisite for 8.B and 8.2]`
+- [x] **8.B — Balance SmirksEngine Templates** `[Diff: 5/10 | Prerequisite for 8.C and 8.G]` ✅
     - **Why:** Almost no template in `SmirksEngine` conserves atoms. The Schiff base is built by f-string concatenation that silently drops sugar hydroxyl groups. The Strecker step always emits `CC(=O)CN` as the aminoketone regardless of the dicarbonyl reactant — the extra atoms simply vanish. Without balanced `ElementaryStep` reactions, xTB can't compute a physically meaningful ΔE‡ (you'd be comparing a 25-atom reactant complex against a 21-atom product complex), and Cantera would violate mass conservation in the mechanism file.
-    - [ ] **8.0.1 Audit all templates:** For each template function in `smirks_engine.py`, count atoms (C, H, N, O, S) on both sides of every `ElementaryStep` and document the discrepancies.
+    - [x] **8.B.1 Audit all templates:** For each template function in `smirks_engine.py`, count atoms (C, H, N, O, S) on both sides of every `ElementaryStep` and document the discrepancies.
         - `_amadori_cascade`: Schiff base string template drops sugar OH groups.
         - `_enolisation_steps`: Amino acid atoms embedded in Amadori product are unaccounted when only `furfural + H₂O` is produced.
         - `_strecker_step`: Aminoketone is always `CC(=O)CN`; dicarbonyl atoms are not distributed into products.
         - `_retro_aldol_fragmentation`: Deoxyosone has ~7 oxygens; products total ~5 — missing 2 × H₂O.
         - `_cysteine_degradation`, `_thiamine_degradation`, `_glutathione_cleavage`: Likely close but need verification.
-    - [ ] **8.0.2 Write `assert_balanced(step)` utility** in `tests/test_smirks_engine.py`: checks that `sum(atoms in reactants) == sum(atoms in products)` for each element. Add to parametrized test for every template.
-    - [ ] **8.0.3 Fix Schiff base / Amadori templates:** Replace f-string concatenation with RDKit `CombineMols` + `EditableMol` to guarantee atom conservation. The amino acid N is used in the imine; its remaining fragment must appear in the product.
-    - [ ] **8.0.4 Fix Strecker step:** Distribute dicarbonyl atoms correctly — one carbonyl C becomes CO₂, the other becomes part of the Strecker aldehyde. The aminoketone must contain only atoms from the amino acid (minus CO₂ and the aldehyde Cα).
-    - [ ] **8.0.5 Fix/verify remaining templates:** Close any remaining atom gaps with explicit H₂O, NH₃, or CO₂ byproduct species.
-    - [ ] **Verification:** All `assert_balanced` tests pass with zero atom discrepancies across all 14 template families.
+    - [x] **8.B.2 Write `assert_balanced(step)` utility** in `tests/test_smirks_engine.py`: checks that `sum(atoms in reactants) == sum(atoms in products)` for each element. Add to parametrized test for every template.
+    - [x] **8.B.3 Fix Schiff base / Amadori templates:** Replace f-string concatenation with RDKit `CombineMols` + `EditableMol` to guarantee atom conservation. The amino acid N is used in the imine; its remaining fragment must appear in the product.
+    - [x] **8.B.4 Fix Strecker step:** Distribute dicarbonyl atoms correctly — one carbonyl C becomes CO₂, the other becomes part of the Strecker aldehyde. The aminoketone must contain only atoms from the amino acid (minus CO₂ and the aldehyde Cα).
+    - [x] **8.B.5 Fix/verify remaining templates:** Close any remaining atom gaps with explicit H₂O, NH₃, or CO₂ byproduct species.
+    - [x] **Verification:** All `assert_balanced` tests pass with zero atom discrepancies across all 14 template families.
 
-- [ ] **8.B — Calibrate FAST-mode Heuristic Barriers** `[Diff: 6/10 | Highest Scientific Impact]`
-    - **Why:** The entire ranking system (Inverse Design scores, Lysine Budget, Trapping Efficiency) rests on constants like `Schiff=15 kcal`, `Strecker=22 kcal`. These are plausible guesses, but a 2–3 kcal shift changes which formulation "wins." Anchoring to real data is the single most impactful improvement.
-    - [ ] 8.B.1: Run `xtb_screener.py` on 4 key reactions: Schiff base formation (glucose+glycine), Amadori rearrangement, Strecker decarboxylation (glycine), Cysteine β-elimination → H₂S.
-    - [ ] 8.B.2: Compare computed xTB barriers against published DFT or experimental data (see `architecture.md` §5 refs).
-    - [ ] 8.B.3: Update heuristic constants in `run_pipeline.py` and `inverse_design.py` to match the computed scale.
-    - [ ] 8.B.4: Document the calibration in `docs/xtb_limitations.md`.
-    - [ ] Verification: Ranked output for Ribose+Cysteine correctly places FFT above pyrazines, consistent with literature (pentose+cys > hexose+neutral-aa for sulfur heterocycles).
+- [ ] **8.C — Calibrate FAST-mode Heuristic Barriers** `[Diff: 6/10 | Highest Scientific Impact]`
+    - **Why:** The entire ranking system rests on constants like `Schiff=15 kcal`, `Strecker=22 kcal`. These are plausible guesses, but a 2–3 kcal shift changes which formulation "wins." Anchoring to physics is the minimum requirement for credibility.
+    - [ ] **8.C.1:** Run `xtb_screener.py` on 4 key reactions: Schiff base formation (glucose+glycine), Amadori rearrangement, Strecker decarboxylation (glycine), Cysteine β-elimination → H₂S.
+    - [ ] **8.C.2:** Compare computed xTB barriers against published DFT or experimental data (architecture.md §5 refs).
+    - [ ] **8.C.3:** Update heuristic constants in `run_pipeline.py` and `inverse_design.py` to match the computed scale.
+    - [ ] **8.C.4:** Document the full calibration table in `docs/xtb_limitations.md`.
+    - [ ] **8.C.5 — Literature Validation Gate** `[CRITICAL RISK GATE]`
+        - **Why this is the highest-leverage task in the plan:** The premortem identified that all Cysteine+Pentose formulations score near-identically with the current scoring function. Without anchoring to experimental data, we cannot know if the tool's ranking *corresponds* to real chemistry. A tool that confidently produces wrong rankings is worse than no tool.
+        - [ ] **Select 3 well-characterized test systems from `docs/`:**
+            1. Ribose + Cysteine at pH 5, 150°C → Literature expects FFT dominant ([Maillard_meat.md], [Maillard_Plant_based.md])
+            2. Glucose + Glycine at pH 7, 150°C → Literature expects pyrazines and pyruvaldehyde dominant.
+            3. Ribose + Cysteine + Leucine → Literature expects FFT + 3-methylbutanal co-dominant.
+        - [ ] Run `python scripts/run_pipeline.py` on each test system and record the predicted top-5 volatiles.
+        - [ ] **Pass criterion**: Tool's top-3 predicted volatiles include ≥2 of the experimentally observed top volatiles in each system.
+        - [ ] **If pass**: Proceed to 8.D.
+        - [ ] **If fail**: Iterate on barrier constants in 8.C.3 until pass criterion is met before proceeding.
+        - [ ] Document outcomes in `docs/dev_logs/validation_gate_results.md`.
+    - [ ] Verification: Ranked output for Ribose+Cysteine correctly places FFT above pyrazines (literature: pentose+cys > hexose+neutral-aa for sulfur heterocycles).
 
-- [ ] **8.C — Add Concentration/Ratio Support to Formulation Grid** `[Diff: 5/10]`
-    - **Why:** Scientists don't just choose ingredients — they choose ratios. The literature (`Maillard_Plant_based.md` §GSH) specifies optimal GSH conditions at pH 4.79, 131°C, 95 min. The tool currently can't distinguish a high-cysteine from a low-cysteine formulation.
-    - [ ] Add optional `molar_ratios` field to entries in `formulation_grid.yml` (e.g., `{ribose: 1.0, cysteine: 0.5}`).
-    - [ ] Update `InverseDesigner.evaluate_all()` to pass relative concentrations as a weight on barrier scores (higher-concentration reactant → lower effective barrier).
-    - [ ] Update CLI to accept `--ratios cysteine:0.5,ribose:1.0` for forward-mode runs.
-    - [ ] Verification: A formulation with 2× cysteine should score higher on `meaty` targets than the same formulation with 0.5× cysteine.
+- [ ] **8.D — Concentrations + Scoring Function Redesign** `[Diff: 6/10 | Biggest Utility Unlock]`
+    - **Why:** The tool currently treats precursors as binary (present/absent) and the scoring function is `score = Σ max(0, 40 − barrier)` — which produces near-identical scores for all formulations containing the same reaction families. This is the primary reason the tool cannot differentiate between "a little cysteine" and "a lot of cysteine." Two complementary fixes are needed.
+    - **Sub-task A: Concentration/Ratio Support**
+        - [ ] Add optional `molar_ratios` field to entries in `formulation_grid.yml` (e.g., `{ribose: 1.0, cysteine: 0.5}`).
+        - [ ] Pass ratios as a concentration weight to `InverseDesigner.evaluate_all()`: higher-concentration reactant lowers effective barrier.
+        - [ ] Update CLI to accept `--ratios cysteine:0.5,ribose:1.0` for forward-mode runs.
+    - **Sub-task B: Scoring Function Redesign**
+        - [ ] Replace `score = Σ max(0, 40 − barrier)` with Boltzmann weighting: `score = Σ [c] ⋅ exp(−barrier / kT)` where `[c]` is concentration and `T=423K` (150°C).
+        - [ ] Add pathway depth penalty: 4-step pathways score lower than 2-step direct routes for the same target compound.
+        - [ ] Ensure scores are normalized and interpretable: document the physical meaning of the score in the CLI help text.
+    - [ ] Verification: A formulation with 2× cysteine scores higher on `meaty` than 0.5× cysteine. Ribose scores higher than glucose at pH 5 for FFT production.
 
-- [ ] **8.D — Model Lipid-Maillard Synergy (Pathway D Catalysis)** `[Diff: 7/10]`
-    - **Why:** `pathways.md §D` explicitly describes lipid aldehydes (hexanal, nonanal) *catalyzing* Strecker degradation and reacting with H₂S to form alkylthiazoles — a "species-specific" flavor lever. Currently the tool only models hexanal as a nuisance to be trapped, missing this positive role entirely.
-    - [ ] Add a `Lipid_Strecker_Catalysis` template in `smirks_engine.py`: lipid aldehyde + α-aminoketone → alkylthiazole / pyrazine (synergy product).
-    - [ ] Add entries for key alkylthiazoles (e.g., 4-methyl-5-thiazoleethanol, benzothiazole) to `desirable_targets.yml` and the `meaty` tag in `sensory_tags.yml`.
-    - [ ] Update the heme catalyst heuristic to also reduce barriers for the new synergy family.
-    - [ ] Verification: A formulation with both lipids and cysteine/thiamine should yield alkylthiazoles not seen in a lipid-free or cysteine-free run.
+- [ ] **8.E — Lipid-Maillard Synergy (Catalytic Role)** `[Diff: 7/10 | Non-Obvious Insight for Formulators]`
+    - **Why:** This is where the tool generates non-obvious value over what an expert already knows. Formulators know lipids are "bad" (off-flavours). They do *not* typically know that hexanal/nonanal simultaneously *accelerate Strecker degradation and produce alkylthiazoles* when combined with certain amino acids. A formulation that appears "risky" may actually be a synergy opportunity. This cannot be shown without modelling the catalytic pathway.
+    - [ ] Add a `Lipid_Strecker_Catalysis` template in `smirks_engine.py`: lipid aldehyde + α-aminoketone → alkylthiazole / alkylpyrazine (synergy product).
+    - [ ] Add key alkylthiazoles (4-methyl-5-thiazoleethanol, benzothiazole) to `desirable_targets.yml` and the `meaty` sensory tag.
+    - [ ] Update the heme catalyst heuristic to also reduce barriers for the catalytic synergy family.
+    - [ ] Verification: A Lipid+Cysteine+Leucine formulation now shows alkylthiazoles that are absent in a lipid-free run. The "off-flavour risk" score decreases if the lipid routes into synergy products.
 
 ---
 
@@ -111,7 +128,7 @@ Ordered by **impact on alt-protein formulation scientists** (the end-user):
 - [x] **7.7 Water Activity CLI Flag:** `[Diff: 2/10]` Exposed `ReactionConditions.water_activity` via `--aw` CLI argument.
     - [x] Verification: `--aw 0.5` displays conditions correctly.
 
-> **Stretch goal (not blocking):** Model lipid-Maillard catalytic synergy — lipid aldehydes accelerating Strecker degradation (pathways.md §D). Currently only masking/trapping is modelled. → Moved to Phase 8.D.
+> **Stretch goal (not blocking):** Model lipid-Maillard catalytic synergy — lipid aldehydes accelerating Strecker degradation (pathways.md §D). Currently only masking/trapping is modelled. → Moved to Phase 8.E.
 
 ---
 
@@ -395,12 +412,12 @@ Focus on the 6–8 chemically decisive reactions only:
 
 ## ⏸️ DEFERRED PHASES
 
-## Phase 8.1/8.2: Quantitative Kinetic Modeling (DEFERRED)
+## Phase 8.F/8.G: Quantitative Kinetic Modeling (DEFERRED)
 
 > **Context:** Precise temporal yield predictions (e.g., "how much FFT at t=12m") require robust DFT barriers. This is scientifically valuable but deferred until the core categorical recommendation tool (Phase 7) is usable.
 
-- [ ] **8.1 Tier 2 DFT Refinement (from Phase 3.3):** Compute exact barriers using PySCF/Skala for rate-limiting steps. xTB barriers are too noisy for strict kinetic solvers.
-- [ ] **8.2 Cantera Kinetic Simulation:**
+- [ ] **8.F Tier 2 DFT Refinement (from Phase 3.3):** Compute exact barriers using PySCF/Skala for rate-limiting steps. xTB barriers are too noisy for strict kinetic solvers.
+- [ ] **8.G Cantera Kinetic Simulation:**
     - Write a Cantera YAML mechanism generator that converts DFT barriers to Arrhenius rate constants.
     - Run microkinetic time-temperature profiles to plot concentration-vs-time curves for target volatiles.
 

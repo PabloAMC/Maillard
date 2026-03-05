@@ -8,6 +8,7 @@ sys.path.insert(0, str(ROOT))
 
 from src.recommend import Recommender
 from src.smirks_engine import SmirksEngine, ReactionConditions
+from src.pathway_extractor import Species
 from src.precursor_resolver import resolve
 
 def test_trapping_efficiency_calculation():
@@ -54,7 +55,8 @@ def test_sensory_metadata_presence():
     
     ribose = resolve("ribose")
     cysteine = resolve("cysteine")
-    steps = engine.enumerate([ribose, cysteine])
+    h2 = Species("H2", "[HH]")
+    steps = engine.enumerate([ribose, cysteine, h2])
     
     # Just need 1 target to check
     barriers = {}
