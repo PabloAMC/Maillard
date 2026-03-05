@@ -92,9 +92,9 @@ class InverseDesigner:
                 
             # Create a localized conditions object (e.g. to apply catalyst override if specified)
             cond = ReactionConditions(
-                pH=global_conditions.pH,
-                temperature_celsius=global_conditions.temperature_celsius,
-                water_activity=global_conditions.water_activity
+                pH=form.get("ph", global_conditions.pH),
+                temperature_celsius=form.get("temp", global_conditions.temperature_celsius),
+                water_activity=form.get("aw", global_conditions.water_activity)
             )
             
             # FAST mode heuristic barrier overrides
@@ -103,7 +103,7 @@ class InverseDesigner:
             apply_heme = (catalyst == "heme" or global_conditions.pH > 7)  # Note: just relying on simple logic for demo
             
             engine = SmirksEngine(cond)
-            steps = engine.enumerate(precursors)
+            steps = engine.enumerate(precursors, max_generations=4)
             
             # Calculate mock fast barriers
             for step in steps:
