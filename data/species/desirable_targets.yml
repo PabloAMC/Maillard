@@ -102,7 +102,7 @@ compounds:
     precursor: "Alanine / Glycine + α-dicarbonyl"
     pathway: "B — Strecker → α-aminoketone dimerisation"
     sensory_desc: "Roasted, nutty, earthy"
-    odour_threshold_ug_per_kg: null
+    odour_threshold_ug_per_kg: 2500.0
     priority: "high"
     notes: "Alkaline pH strongly favours pyrazine formation over furans."
 
@@ -124,7 +124,7 @@ compounds:
     precursor: "L-Leucine / L-Isoleucine + α-dicarbonyl"
     pathway: "B — Strecker → α-aminoketone dimerisation"
     sensory_desc: "Roasted crust, deep earthy, nutty"
-    odour_threshold_ug_per_kg: null
+    odour_threshold_ug_per_kg: 1.0
     priority: "high"
     notes: "High-impact aroma compound in seared meat crust."
 
@@ -149,3 +149,36 @@ compounds:
     odour_threshold_ug_per_kg: 0.1
     priority: "medium"
     notes: "Very low threshold; even trace amounts contribute to meaty base."
+
+  - name: "2-Methylthiophene"
+    cas: "554-14-3"
+    smiles: "Cc1cccs1"
+    inchi: "InChI=1S/C5H6S/c1-5-3-2-4-6-5/h2-4H,1H3"
+    precursor: "Thiamine (Vitamin B1)"
+    pathway: "Additive_Thermal_Degradation"
+    sensory_desc: "Meaty, roasted, sulfurous"
+    odour_threshold_ug_per_kg: 1.5
+    priority: "high"
+    notes: "Key thermal degradation product of thiamine."
+
+  - name: "4,5-Dihydro-2-methylthiazole"
+    cas: "2346-00-1"
+    smiles: "CC1=NCCS1"
+    inchi: "InChI=1S/C4H7NS/c1-4-5-2-3-6-4/h2-3H2,1H3"
+    precursor: "Thiamine (Vitamin B1)"
+    pathway: "Additive_Thermal_Degradation"
+    sensory_desc: "Meaty, nutty, popcorn"
+    odour_threshold_ug_per_kg: 5.0
+    priority: "high"
+    notes: "Thiazoline derivation from thiamine."
+
+  - name: "Hydrogen Sulfide"
+    cas: "7783-06-4"
+    smiles: "S"
+    inchi: "InChI=1S/H2S/h1H2"
+    precursor: "Cysteine / Thiamine"
+    pathway: "Thermal_Degradation"
+    sensory_desc: "Sulfurous, boiled egg, meaty base"
+    odour_threshold_ug_per_kg: 0.5
+    priority: "critical"
+    notes: "Essential for robust meaty flavor profile; strong interaction with lipid oxidation products."

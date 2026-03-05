@@ -1,0 +1,44 @@
+formulations:
+  - name: "Soy/Pea Base (Untreated)"
+    sugars: ["glucose"]
+    amino_acids: ["glycine", "lysine"]
+    additives: []
+    lipids: ["hexanal", "nonanal"]
+    
+  - name: "Soy/Pea Base + Reducing Sugar"
+    sugars: ["ribose"]
+    amino_acids: ["glycine", "lysine"]
+    additives: []
+    lipids: ["hexanal", "nonanal"]
+    
+  - name: "Cysteine Enrichment (Basic)"
+    sugars: ["ribose"]
+    amino_acids: ["cysteine", "glycine", "lysine"]
+    additives: []
+    lipids: ["hexanal", "nonanal"]
+    
+  - name: "Heme-Catalyzed Base"
+    sugars: ["glucose"]
+    amino_acids: ["lysine", "leucine"]
+    additives: []
+    lipids: ["hexanal", "nonanal"]
+    catalyst: "heme"
+    
+  - name: "Thiamine Boosted"
+    sugars: ["ribose"]
+    amino_acids: ["glycine", "lysine"]
+    additives: ["thiamine"]
+    lipids: ["hexanal", "nonanal"]
+    
+  - name: "Premium Meaty Mix"
+    sugars: ["ribose"]
+    amino_acids: ["cysteine", "leucine", "lysine"]
+    additives: ["thiamine", "glutathione"]
+    lipids: ["hexanal"]
+    
+  - name: "Roasted/Crust Focus"
+    sugars: ["glucose"]
+    amino_acids: ["glycine", "alanine", "leucine"]
+    additives: []
+    lipids: []
+    catalyst: "heme"

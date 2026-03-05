@@ -9,7 +9,6 @@ def pyscf_installed():
         return False
 
 @pytest.mark.slow
-@pytest.mark.skipif(not pyscf_installed(), reason="PySCF not installed")
 def test_integration_pyscf_water():
     """
     Validates PySCF / Skala backend plumbing with a live single point calculation.

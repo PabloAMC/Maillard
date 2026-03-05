@@ -7,16 +7,19 @@
 
 Ordered by **impact on alt-protein formulation scientists** (the end-user):
 
-| Priority | Task | Why |
-|----------|------|-----|
-| **1** | 7.1 — Wire SmirksEngine to Recommender | Unlocks the core value: combinatorial screening of novel formulations. |
-| **2** | 7.2 — CLI formulation arguments | Makes the tool usable for scientists without editing Python code. |
-| **3** | 7.3 — Sensory Output Mapping | Translates "2-furfurylthiol" into "🥩 Meaty 85%", the language formulators speak. |
-| **4** | 7.4 — Inverse Design Mode | Answers the user's real question: "What precursors do I add to get meaty aroma?" |
-| **5** | 8.1 — DFT barriers (Skala) | Replaces noisy xTB barriers with accurate kinetics for robust bottleneck identification. |
-| **6** | 8.2 — Cantera Kinetics | Enables precise time/temperature cooking simulations (reliant on 8.1). |
+| Priority | Task | Status | Why |
+|----------|------|:------:|-----|
+| ~~1~~ | 7.1 — Wire SmirksEngine → Recommender | ✅ | Core value: combinatorial screening of novel formulations. |
+| ~~2~~ | 7.2 — PBMA Precursors & Degradation Rules | ✅ | Thiamine, Glutathione, Lipid trapping — the PBMA-specific chemistry. |
+| ~~3~~ | 7.3 — Advanced CLI Formulation Interface | ✅ | Scientists can run realistic formulations without editing Python. |
+| ~~4~~ | 7.4 — Sensory & Trapping Output Metrics | ✅ | Translates SMILES into "Meaty", "Beany" — the language formulators speak. |
+| **5** | 7.6 — Lysine Budget & DHA Competition | ☐ | Without this, the tool **overestimates** aroma yields (pathways.md §E). |
+| **6** | 7.7 — Water Activity (`--aw`) Flag | ☐ | Critical processing variable for extrusion/spray-drying; trivial to add. |
+| **7** | 7.5 — Inverse Design Mode | ☐ | Answers the scientist's real question: "What do I add to get meaty?" |
+| 8 | 3.3 — DFT barriers (Skala) | ☐ | Replaces noisy heuristics with accurate kinetics. |
+| 9 | 8.2 — Cantera Kinetics | ☐ | Time/temperature cooking simulations (needs DFT barriers first). |
 
-> **Deferred:** Phase 5 (Experimental validation), Phase 8 (Kinetic modeling), and AI-models (IBM RXN).
+> **Deferred:** Phase 5 (Experimental validation), Phase 8 (Kinetic modeling), AI-models (IBM RXN).
 
 ---
 
@@ -37,10 +40,25 @@ Ordered by **impact on alt-protein formulation scientists** (the end-user):
     - **Update CLI Arguments:** [x] In `scripts/run_pipeline.py`, add `--additives`, `--lipids`, and `--catalyst` (currently supports `"heme"`).
     - **Implement Heme Heuristic:** [x] In `FAST` mode, if `--catalyst heme` is set, reduce barriers by 5.0 kcal for `Strecker_Degradation` and `Aminoketone_Condensation` families.
     - **Verification:** [x] Run `python scripts/run_pipeline.py --sugars xylose --amino-acids cysteine --catalyst heme` and verify Pyrazine/Strecker barriers are reduced compared to a control run.
-- [ ] 7.4 **Sensory & Trapping Output Metrics:** `[Diff: 5/10 | Model: Claude Sonnet]`
-    - Create a lookup table mapping known Maillard volatiles to sensory descriptors (OAV lookup MVP).
-    - **Crucial Metric:** Update the Recommender to calculate an **"Off-Flavor Trapping Efficiency"** score, showing the percentage of input lipid aldehydes successfully bound into non-volatile Schiff bases.
-- [ ] 7.5 **Inverse Design Mode:** `[Diff: 8/10 | Model: Claude Opus]` Implement a search mode where the user specifies target profiles (e.g., `--target meaty --minimize beany`), and the tool evaluates a predefined grid of precursor formulations to recommend the optimal industrial blend.
+- [x] 7.4 **Sensory & Trapping Output Metrics:** [x] `[Diff: 5/10 | Model: Claude Sonnet]`
+    - **OAV & Sensory Lookup:** [x] Ensure all entries in `desirable_targets.yml` and `off_flavour_targets.yml` have `sensory_desc` and `odour_threshold_ug_per_kg`.
+    - **Trapping Score Logic:** [x] Update `src/recommend.py` to calculate a "Lipid Trapping Potential" based on the fraction of lipid pathways that end in Schiff bases vs. remaining free.
+    - **Output Enhancement:** [x] Update the CLI table to display sensory descriptors and the calculated Trapping Efficiency.
+    - **Verification:** [x] Run `python scripts/run_pipeline.py --lipids hexanal --amino-acids lysine` and verify the "Trapping Efficiency: XX%" metric is displayed.
+- [x] 7.5 **Inverse Design Mode:** [x] `[Diff: 8/10 | Model: Claude Opus]` Implement a search mode where the user specifies target profiles (e.g., `--target meaty --minimize beany`), and the tool evaluates a predefined grid of precursor formulations to recommend the optimal industrial blend.
+    - **Define Sensory Tags:** [x] Create a mapping from target names to human-readable tags (`meaty`, `roasted`, `beany`, `grassy`) in `data/species/sensory_tags.yml`.
+    - **Build Formulation Grid:** [x] Define a grid of realistic precursor combinations spanning pea/soy bases with various sugar+additive combos in `data/formulation_grid.yml`.
+    - **Grid Evaluation Engine:** [x] Write `inverse_design.py` that runs the pipeline over each grid entry, collects the predicted targets, and scores each formulation against the user's `--target` / `--minimize` profile.
+    - **Ranking & Output:** [x] Display a ranked table of top-N formulations sorted by match score, with columns: Formulation, Target Score, Risk Penalty, Lys Budget, Trap Eff.
+    - **Verification:** [x] Run `python scripts/run_pipeline.py --target meaty --minimize beany` and confirm meaningful ranking.
+- [x] 7.6 **Lysine Budget & DHA Competition Metric:** [x] `[Diff: 3/10 | Model: Gemini Flash]` Surface the stoichiometric competition between the DHA crosslinking pathway and the Maillard cascade to the user.
+    - **Logic:** [x] In `recommend.py`, count how many generated steps consume Lysine (via DHA_Crosslinking) vs. Maillard (Schiff base), and compute a ratio.
+    - **Output:** [x] Display a `⚠️ Lysine Budget: X% consumed by DHA crosslinking` warning in the PBMA metrics block when Lysine + Serine/Cysteine are in the pool.
+    - **Verification:** [x] Run with `--amino-acids lysine,serine` and confirm the warning appears.
+- [x] 7.7 **Water Activity CLI Flag:** [x] `[Diff: 2/10 | Model: Gemini Flash]` Expose the existing `ReactionConditions.water_activity` field via a `--aw` CLI argument in `run_pipeline.py`.
+    - **Verification:** [x] Run with `--aw 0.5` and confirm conditions are displayed correctly.
+
+> **Stretch goal (not blocking):** Model lipid-Maillard catalytic synergy — lipid aldehydes accelerating Strecker degradation (pathways.md §D). Currently only masking/trapping is modelled.
 
 ## Phase 3: Tier 2 — DFT Refinement with Skala
 

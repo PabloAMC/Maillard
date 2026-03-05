@@ -167,7 +167,7 @@ def _has_cysteine_beta_carbon(s: Species) -> bool:
     Detects cysteine-like β-carbon with thiol (Cys, Ser).
     Pattern: N[C][C][SH or OH] (2-aminol/thiol-3-carbon skeleton).
     """
-    pat = Chem.MolFromSmarts("[NH2][CH][CHSX1,CH2OH]")
+    pat = Chem.MolFromSmarts("[NH2][CH1][CH2][SX2H,OX2H]")
     m = _mol(s.smiles)
     return m is not None and m.HasSubstructMatch(pat)
 
@@ -748,8 +748,8 @@ class SmirksEngine:
 
         # ── Tier B Phase 3: Secondary Condensations & Eliminations ────────
         # 3a. Beta-elimination (DHA pathway)
-        thiol_aas = [s for s in pool_list() if _has_thiol(s) and _is_primary_amine(s)]
-        for aa in thiol_aas:
+        beta_candidates = [s for s in pool_list() if _has_cysteine_beta_carbon(s)]
+        for aa in beta_candidates:
             be_steps = _beta_elimination_steps(aa, pool_list())
             for step in be_steps:
                 if not _step_exists(step, all_steps):

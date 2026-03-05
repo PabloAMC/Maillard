@@ -22,7 +22,7 @@ compounds:
 
   - name: "Nε-(Carboxymethyl)lysine (CML)"
     cas: "23100-12-1"
-    smiles: "NCCCC[C@@H](N)C(=O)O.OCC(=O)O"
+    smiles: "N[C@@H](CCCCNCC(=O)O)C(=O)O"
     inchi: "InChI=1S/C8H16N2O4/c9-4-2-1-3-6(10-5-7(11)12)8(13)14/h6H,1-5,9-10H2,(H,11,12)(H,13,14)/t6-/m0/s1"
     class: "AGE (Advanced Glycation End-product)"
     formation: "Lysine + glyoxal (from Amadori oxidation); also from ascorbic acid oxidation"
@@ -34,7 +34,7 @@ compounds:
 
   - name: "Nε-(Carboxyethyl)lysine (CEL)"
     cas: "136362-46-2"
-    smiles: "NCCCC[C@@H](N)C(=O)O.CCC(=O)O"
+    smiles: "N[C@@H](CCCCNC(C)C(=O)O)C(=O)O"
     inchi: null
     class: "AGE"
     formation: "Lysine + methylglyoxal (from triose phosphate / Amadori fragmentation)"
