@@ -22,4 +22,12 @@ Today we completed the architectural transition from static, curated pathways (P
     - **Rigorous Mode (`--xtb`):** Triggers the complete semi-empirical physics engine for publishable or novel results.
 
 ### Current Status
-The architecture successfully supports arbitrary precursor pools. Running "Ribose + Cysteine" via the FAST heuristic mode instantly enumerates 14 steps and ranks 2-Furfurylthiol (FFT) as the dominant meaty aroma target, proving the hypergraph routing and SmirksEngine integration is complete and functioning from first principles.
+The generative architecture successfully supports arbitrary precursor pools. Running "Ribose + Cysteine" via the FAST heuristic mode instantly enumerates steps and ranks 2-Furfurylthiol (FFT) as the dominant meaty aroma target.
+
+### Update: Phase 7 Completion (Inverse Design & PBMA Metrics)
+Following the core pipeline integration, we extended the engine to support **Plant-Based Meat Alternative (PBMA) industrial workflows**:
+1. **PBMA Additives & Trapping (`7.2` & `7.4`)**: Integrated Thiamine degradation, Glutathione cleavage, and Hexanal/Nonanal lipid oxidation products. Implemented a **Lipid Trapping Efficiency** metric to quantify how well amino acids scavenge off-flavor aldehydes into Schiff bases.
+2. **Lysine Budget / DHA Competition (`7.6`)**: Added a stoichiometric tracker that compares the kinetic flux of Lysine towards Maillard (flavor) vs. Dehydroalanine crosslinking (texture), exposing the physical competition inherent in plant protein extrusion.
+3. **Inverse Design Engine (`7.5`)**: Built an optimization layer (`src/inverse_design.py`) that evaluates a matrix of predefined industrial formulations (`formulation_grid.yml`) against desired sensory profiles (`sensory_tags.yml`). By running the FAST engine across the grid and scoring the generated targets (e.g., maximizing `meaty` while minimizing `beany`), the tool successfully acts as a recommendation engine for food scientists. 
+
+Phase 7 is officially complete. The pipeline now functions as a complete end-to-end sandbox for both forward simulation and inverse commercial design.

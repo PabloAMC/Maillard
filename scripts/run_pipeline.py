@@ -27,10 +27,11 @@ from src import precursor_resolver
 
 
 def print_table(active_pathways: list):
-    """Reuse the standard unicode table format."""
-    print("    ┌" + "─"*24 + "┬" + "─"*18 + "┬" + "─"*15 + "┬" + "─"*15 + "┬" + "─"*22 + "┐")
-    print("    │ PREDICTED COMPOUND     │ PATHWAY TYPE     │ BARRIER (ΔE‡) │ PENALTY RISK  │ TOXICITY ALERT       │")
-    print("    ├" + "─"*24 + "┼" + "─"*18 + "┼" + "─"*15 + "┼" + "─"*15 + "┼" + "─"*22 + "┤")
+    """Update table to include sensory descriptors."""
+    # Column widths: 22, 16, 12, 30, 20
+    print("    ┌" + "─"*22 + "┬" + "─"*16 + "┬" + "─"*12 + "┬" + "─"*30 + "┬" + "─"*20 + "┐")
+    print("    │ PREDICTED COMPOUND   │ FORMATION TAG    │ BARRIER    │ SENSORY CHARACTER            │ TOXICITY/RISK        │")
+    print("    ├" + "─"*22 + "┼" + "─"*16 + "┼" + "─"*12 + "┼" + "─"*30 + "┼" + "─"*20 + "┤")
     
     for p in active_pathways:
         target_str = p['target'].label if p['target'] else "Unknown"
@@ -42,22 +43,22 @@ def print_table(active_pathways: list):
         elif p['type'] == 'masking': tag = "[🛡️ MASKING]"
         
         barrier_str = f"{p['span']:.1f} kcal"
-        penalty_str = p.get('penalty', '-')
+        sensory_str = p.get('sensory', '-')
         
         tox_str = "-"
         if p.get('toxicity'):
             meta = p['toxicity']
             tox_str = f"[{meta['priority']}] {meta['name']}"
             
-        col1 = _trunc(target_str, 22)
-        col2 = _trunc(tag, 16)
-        col3 = _trunc(barrier_str, 13)
-        col4 = _trunc(penalty_str, 13)
-        col5 = _trunc(tox_str, 20)
+        col1 = _trunc(target_str, 20)
+        col2 = _trunc(tag, 14)
+        col3 = _trunc(barrier_str, 10)
+        col4 = _trunc(sensory_str, 28)
+        col5 = _trunc(tox_str, 18)
         
         print(f"    │ {col1} │ {col2} │ {col3} │ {col4} │ {col5} │")
         
-    print("    └" + "─"*24 + "┴" + "─"*18 + "┴" + "─"*15 + "┴" + "─"*15 + "┴" + "─"*22 + "┘")
+    print("    └" + "─"*22 + "┴" + "─"*16 + "┴" + "─"*12 + "┴" + "─"*30 + "┴" + "─"*20 + "┘")
 
 
 def main():
@@ -69,6 +70,9 @@ def main():
     parser.add_argument("--ph", type=float, default=6.0, help="Reaction pH (default 6.0)")
     parser.add_argument("--temp", type=float, default=150.0, help="Heating temperature in Celsius (default 150)")
     parser.add_argument("--catalyst", type=str, default=None, choices=["heme"], help="Apply catalyst effect (e.g. heme)")
+    parser.add_argument("--aw", "--water-activity", type=float, default=1.0, help="Water activity (default 1.0)")
+    parser.add_argument("--target", type=str, default=None, help="Inverse design target sensory tag (e.g. meaty, roasted)")
+    parser.add_argument("--minimize", type=str, default="beany", help="Inverse design off-flavour tag to minimize (default: beany)")
     parser.add_argument("--xtb", action="store_true", help="Run full GFN2-xTB structural optimizations (SLOW!). Defaults to fast Hammond estimating.")
     parser.add_argument("--list-precursors", action="store_true", help="List available precursors and exit")
     
@@ -81,6 +85,55 @@ def main():
 
     args = parser.parse_args()
 
+    # 1. Setup Conditions
+    conditions = ReactionConditions(
+        pH=args.ph, 
+        temperature_celsius=args.temp,
+        water_activity=args.aw
+    )
+
+    # =================================================================
+    # Inverse Design Mode Execution
+    # =================================================================
+    if args.target:
+        print("======================================================")
+        print("      Maillard Inverse Design Mode (Phase 7.5)")
+        print("======================================================\n")
+        print(f"Targeting Sensory Profile: '{args.target}'")
+        print(f"Minimizing Risk Profile:   '{args.minimize}'")
+        print(f"Conditions: pH {conditions.pH}, {conditions.temperature_celsius}°C, aᵥ {conditions.water_activity}")
+        print("-" * 60)
+        
+        try:
+            from src.inverse_design import InverseDesigner
+            designer = InverseDesigner(args.target, args.minimize)
+            print(f"Evaluating {len(designer.grid)} industrial formulations against tags...")
+            
+            results = designer.evaluate_all(conditions)
+            
+            print("\n  Top Recommended Formulations:")
+            print("    ┌──────────────────────────────┬──────────────┬──────────────┬─────────────┬─────────────┐")
+            print("    │ FORMULATION                  │ TARGET SCORE │ RISK PENALTY │ LYS BUDGET  │ TRAP EFF    │")
+            print("    ├──────────────────────────────┼──────────────┼──────────────┼─────────────┼─────────────┤")
+            
+            for res in results[:10]:  # Top 10
+                t_score = f"{res.target_score:.1f}"
+                r_score = f"{res.off_flavour_risk:.1f}"
+                lys = f"{res.lysine_budget:.1f}%"
+                trap = f"{res.trapping_efficiency:.1f}%"
+                print(f"    │ {res.name[:28]:<28} │ {t_score:>12} │ {r_score:>12} │ {lys:>11} │ {trap:>11} │")
+            
+            print("    └──────────────────────────────┴──────────────┴──────────────┴─────────────┴─────────────┘")
+            sys.exit(0)
+            
+        except ValueError as e:
+            print(f"ERROR: {e}")
+            sys.exit(1)
+
+    # =================================================================
+    # Standard Forward Pipeline Execution
+    # =================================================================
+
     # 1. Resolve Precursors
     names = []
     if args.sugars: names += args.sugars.split(",")
@@ -90,7 +143,7 @@ def main():
     names = [n.strip() for n in names if n.strip()]
 
     if not names:
-        print("ERROR: No precursors specified. Use --sugars, --amino-acids, --additives, or --lipids.")
+        print("ERROR: No precursors specified. Use --sugars, --amino-acids, --additives, --lipids OR --target.")
         sys.exit(1)
 
     try:
@@ -99,15 +152,16 @@ def main():
         print(f"ERROR: {e}")
         sys.exit(1)
 
+    # Print Forward Pipeline Header
     print("======================================================")
     print("      Maillard Generative Pipeline (Phase 7)")
     print("======================================================\n")
+    
     print(f"Inputs: {', '.join(p.label for p in precursors)}")
-    print(f"Conditions: pH {args.ph}, {args.temp}°C, Catalyst: {args.catalyst or 'None'}")
+    print(f"Conditions: pH {conditions.pH}, {conditions.temperature_celsius}°C, aᵥ {conditions.water_activity}, Catalyst: {args.catalyst or 'None'}")
     print("-" * 60)
 
     # 2. Enumerate Pathways (SmirksEngine)
-    conditions = ReactionConditions(pH=args.ph, temperature_celsius=args.temp)
     engine = SmirksEngine(conditions)
     print("Running rule-based generation (up to 3 generations)...")
     steps = engine.enumerate(precursors)
@@ -155,8 +209,11 @@ def main():
                 elif "dehydration" in fm or "enolisation" in fm: bar = 30.0
                 elif "strecker" in fm: bar = 22.0
                 elif "retro" in fm: bar = 35.0
-                elif "cysteine" in fm or "beta" in fm: bar = 32.0
+                elif "beta" in fm: bar = 16.0
+                elif "cysteine" in fm: bar = 32.0
+                elif "additive" in fm or "thermal" in fm: bar = 25.0
                 elif "thiol" in fm: bar = 18.0
+                elif "dha" in fm: bar = 18.0
                 
             # Apply condition modifiers
             ph_mult = conditions.get_ph_multiplier(step.reaction_family or "")
@@ -179,7 +236,9 @@ def main():
     recommender = Recommender(None)
     initial_pool_smiles = [p.smiles for p in precursors]
     
-    active_pathways = recommender.predict_from_steps(steps, barriers_dict, initial_pool_smiles)
+    results = recommender.predict_from_steps(steps, barriers_dict, initial_pool_smiles)
+    active_pathways = results["targets"]
+    metrics = results["metrics"]
     
     print("-" * 60)
     if not active_pathways:
@@ -187,6 +246,22 @@ def main():
     else:
         print("  Predicted Targets (ranked by pathway bottleneck barrier):")
         print_table(active_pathways)
+
+    # 5. Display PBMA Metrics
+    if metrics["trapping_efficiency"] or metrics.get("lysine_budget_dha", 0) > 0:
+        print("\n  PBMA Formulation Metrics:")
+        for lipid, eff in metrics["trapping_efficiency"].items():
+            bar_len = int(eff / 5)
+            bar_str = "█" * bar_len + "░" * (20 - bar_len)
+            print(f"    │ Lipid Trapping ({lipid}): {eff:5.1f}% | {bar_str} |")
+        
+        lys_budget = metrics.get("lysine_budget_dha", 0)
+        if lys_budget > 0:
+            bar_len = int(lys_budget / 5)
+            bar_str = "█" * bar_len + "░" * (20 - bar_len)
+            print(f"    │ Lysine Budget (DHA):    {lys_budget:5.1f}% | {bar_str} |")
+            if lys_budget > 50.0:
+                print("    ⚠️  WARNING: High Lysine consumption by DHA pathway significantly reduces aroma yield.")
         
     print("\n" + "═"*85)
     print(" ℹ️  KNOWN LIMITATIONS:")

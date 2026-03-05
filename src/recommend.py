@@ -76,6 +76,23 @@ SYSTEMS = [
 ]
 
 
+# Build canonical SMILES lookup for targets
+def _canon(smi):
+    try:
+        from rdkit import Chem
+        can = set(Chem.MolToSmiles(Chem.MolFromSmiles(smi)).split("."))
+        # just return the largest fragment if disconnected
+        return max(can, key=len)
+    except:
+        return smi
+
+def _weight(barrier_kcal, temp_kelvin=423.15): # Default 150C
+    import math
+    if barrier_kcal >= 99.0: return 0.0
+    R = 0.001987
+    return math.exp(-barrier_kcal / (R * temp_kelvin))
+
+
 class Recommender:
     def __init__(self, results_path: Optional[Path] = None):
         self.results_path = results_path
@@ -137,15 +154,6 @@ class Recommender:
         off_flavours = self._load_off_flavours()
         toxic = self._load_toxic_markers()
         
-        # Build canonical SMILES lookup for targets
-        def _canon(smi):
-            try:
-                can = set(Chem.MolToSmiles(Chem.MolFromSmiles(smi)).split("."))
-                # just return the largest fragment if disconnected
-                return max(can, key=len)
-            except:
-                return smi
-
         target_lookup = {}
         for db, t_type in [(desirable, "desirable"), (off_flavours, "competing"), (toxic, "toxic")]:
             for name, data in db.items():
@@ -211,7 +219,9 @@ class Recommender:
                     "target": MockTarget(t_info["name"]),
                     "type": t_info["type"],
                     "penalty": "LOW",
-                    "toxicity": None
+                    "toxicity": None,
+                    "sensory": t_info["data"].get("sensory_desc", "-"),
+                    "threshold": t_info["data"].get("odour_threshold_ug_per_kg", None)
                 }
                 
                 if t_info["type"] == "toxic":
@@ -223,24 +233,89 @@ class Recommender:
                 
                 active_pathways.append(p_dict)
                 
-        # Sort active pathways by kinetic probability (energetic span)
-        active_pathways.sort(key=lambda x: x["span"])
-        
-        # Penalties: very rough heuristic for dynamic pathways
-        # If there are competing off-flavours with lower barriers, increase penalty
-        for p in active_pathways:
-            if p["type"] == "desirable":
-                comp_spans = [cp["span"] for cp in active_pathways if cp["type"] == "competing"]
-                if not comp_spans:
-                    p["penalty"] = "LOW"
-                else:
-                    min_comp = min(comp_spans)
-                    if min_comp < p["span"]:
-                        p["penalty"] = "HIGH"
-                    elif min_comp < p["span"] + 5.0:
-                        p["penalty"] = "MEDIUM"
+        # ── PBMA Metrics: Lipid Trapping Efficiency ──
+        # Find which initial pool members are lipids
+        lipid_pool_canons = []
+        lysine_can = _canon("NCCCC[C@@H](N)C(=O)O")
+        has_lysine = lysine_can in [ _canon(s) for s in initial_pool_smiles ]
+
+        for s in initial_pool_smiles:
+            can = _canon(s)
+            if can in target_lookup and target_lookup[can]["name"] in off_flavours:
+                lipid_pool_canons.append(can)
+
+        trapping_results = {}
+        for lipid_can in lipid_pool_canons:
+            lipid_name = target_lookup[lipid_can]["name"]
+            
+            # Find all Schiff bases derived from this lipid
+            sb_weights = 0.0
+            for step in steps:
+                if step.reaction_family == "Lipid_Schiff_Base":
+                    step_r_canons = [_canon(r.smiles) for r in step.reactants]
+                    if lipid_can in step_r_canons:
+                        # Path barrier for this step
+                        max_r_dist = 0.0
+                        reachable = True
+                        for r_smi in [r.smiles for r in step.reactants]:
+                            rc = _canon(r_smi)
+                            if rc not in distances:
+                                reachable = False; break
+                            max_r_dist = max(max_r_dist, distances[rc])
                         
-        return active_pathways
+                        if reachable:
+                            step_key = f"{'+'.join(sorted(r.smiles for r in step.reactants))}->{'+'.join(sorted(p.smiles for p in step.products))}"
+                            barrier = barriers_dict.get(step_key, 99.0)
+                            path_barrier = max(max_r_dist, barrier)
+                            sb_weights += _weight(path_barrier)
+            
+            persistence_w = _weight(30.0)
+            if sb_weights + persistence_w > 0:
+                eff = 100.0 * sb_weights / (persistence_w + sb_weights)
+            else:
+                eff = 0.0
+            trapping_results[lipid_name] = eff
+
+        # ── PBMA Metrics: Lysine Budget (DHA Competition) ──
+        lysine_budget = 0.0
+        if has_lysine:
+            w_maillard = 0.0
+            w_dha = 0.0
+            
+            for step in steps:
+                step_r_canons = [_canon(r.smiles) for r in step.reactants]
+                if lysine_can in step_r_canons:
+                    # Path barrier
+                    max_r_dist = 0.0
+                    reachable = True
+                    for r_smi in [r.smiles for r in step.reactants]:
+                        rc = _canon(r_smi)
+                        if rc not in distances:
+                            reachable = False; break
+                        max_r_dist = max(max_r_dist, distances[rc])
+                    
+                    if not reachable: continue
+                    
+                    step_key = f"{'+'.join(sorted(r.smiles for r in step.reactants))}->{'+'.join(sorted(p.smiles for p in step.products))}"
+                    barrier = barriers_dict.get(step_key, 99.0)
+                    path_barrier = max(max_r_dist, barrier)
+                    weight = _weight(path_barrier)
+                    
+                    if step.reaction_family in ["Schiff_Base_Formation", "Lipid_Schiff_Base"]:
+                        w_maillard += weight
+                    elif step.reaction_family == "DHA_Crosslinking":
+                        w_dha += weight
+            
+            if w_maillard + w_dha > 0:
+                lysine_budget = 100.0 * w_dha / (w_maillard + w_dha)
+
+        return {
+            "targets": active_pathways,
+            "metrics": {
+                "trapping_efficiency": trapping_results,
+                "lysine_budget_dha": lysine_budget
+            }
+        }
 
     def predict(self, pool: List[str]):
         """Predict the outcome for a given pool of precursors (static curated)."""

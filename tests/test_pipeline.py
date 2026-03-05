@@ -79,7 +79,7 @@ def test_recommender_predict_from_steps():
     steps = [step1, step2, step3]
     initial_pool = [RIBOSE.smiles, CYS.smiles, LINOLEIC.smiles]
     
-    predictions = rec.predict_from_steps(steps, barriers, initial_pool)
+    predictions = rec.predict_from_steps(steps, barriers, initial_pool)["targets"]
     
     # Assertions
     assert len(predictions) == 2
