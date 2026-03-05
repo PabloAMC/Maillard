@@ -42,3 +42,49 @@ formulations:
     additives: []
     lipids: []
     catalyst: "heme"
+
+  - name: "Methionine Broth Base"
+    sugars: ["glucose"]
+    amino_acids: ["methionine"]
+    notes: "Targeting methional for potato/broth notes."
+
+  - name: "High-Reactivity Xylose Base"
+    sugars: ["xylose"]
+    amino_acids: ["cysteine"]
+    notes: "Classic FFT (furfurylthiol) savory formulation."
+
+  - name: "Heyns Pathway Test"
+    sugars: ["fructose"]
+    amino_acids: ["cysteine"]
+    notes: "Hexose ketose testing for different enolisation kinetics."
+
+  - name: "Acidic GSH Optimizer"
+    sugars: ["ribose"]
+    amino_acids: ["glutathione", "cysteine"]
+    ph: 4.8
+    temp: 131.5
+    notes: "Optimized conditions for savory glutathione cleavage per literature."
+
+  - name: "Alkaline Pyrazine Boost"
+    sugars: ["glucose"]
+    amino_acids: ["glycine", "alanine", "lysine"]
+    ph: 8.0
+    notes: "High pH favors pyrazine formation over furans."
+
+  - name: "Soy-Specific Masking"
+    sugars: ["ribose"]
+    amino_acids: ["alanine", "lysine"]
+    lipids: ["hexanal"]
+    notes: "High amine pool to trap intrinsic soy beaniness."
+
+  - name: "Complex Savory Terroir"
+    sugars: ["ribose"]
+    amino_acids: ["methionine", "cysteine"]
+    additives: ["thiamine"]
+    notes: "Maximum synergy: pentose + S-amino-acids + thiamine."
+
+  - name: "Low-Sugar Efficient Crust"
+    sugars: ["glucose"]
+    amino_acids: ["alanine", "lysine"]
+    catalyst: "heme"
+    notes: "Heme catalysis to drive crust formation at lower sugar concentrations."

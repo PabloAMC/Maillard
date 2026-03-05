@@ -83,7 +83,7 @@ _ALDEHYDE_SMARTS = Chem.MolFromSmarts("[CH1]=O")          # aliphatic aldehyde
 _POLYOL_ALDEHYDE_SMARTS = Chem.MolFromSmarts("[CH1]=O")   # reused on sugars
 _AMINO_SMARTS = Chem.MolFromSmarts("[NH2][CX4]")          # primary amine, not amide
 _THIOL_SMARTS = Chem.MolFromSmarts("[SH]")                # thiol or H2S
-_DICARBONYL_SMARTS = Chem.MolFromSmarts("[C](=O)[C](=O)")  # adjacent carbonyls
+_DICARBONYL_SMARTS = Chem.MolFromSmarts("[CX3](=O)[CX3](=O)")  # adjacent carbonyls
 _AROMATIC_ALDEHYDE_SMARTS = Chem.MolFromSmarts("[c][CH]=O") # furfural-type
 
 
@@ -206,6 +206,22 @@ def _amadori_cascade(sugar: Species, amino_acid: Species) -> List[ElementaryStep
     steps = []
     water = Species(label="water", smiles="O")
 
+    # --- RDKit Assembly ---
+    sugar_mol = _mol(sugar.smiles)
+    amino_mol = _mol(amino_acid.smiles)
+    if not sugar_mol or not amino_mol:
+        return []
+    
+    # Identify Schiff Base and Amadori logic via RDKit
+    # We'll use a simplified model for the MVP:
+    # 1. Sugar terminal C=O becomes C=N-R
+    # 2. Amadori is the rearrangement.
+    
+    # For now, to keep it compatible with the previous labels and logic,
+    # we'll still use the string templates but ENSURE the fragment is rooted correctly.
+    
+    _fragment = _extract_alpha_amine_fragment(amino_acid)
+    
     # Build Schiff base label
     schiff_label = f"{sugar.label}-{amino_acid.label}-Schiff-base"
     
@@ -213,10 +229,9 @@ def _amadori_cascade(sugar: Species, amino_acid: Species) -> List[ElementaryStep
         # Heyns route
         amadori_label = f"{sugar.label}-{amino_acid.label}-Heyns"
         family = "Heyns_Rearrangement"
-        # Fructose pattern: OCC(=O)C(O)C(O)C(O)CO
         if "fructose" in sugar.label.lower():
-            schiff_smiles = f"OCC(=N{_extract_alpha_amine_fragment(amino_acid)})C(O)C(O)C(O)CO"
-            amadori_smiles = f"O=CC(N{_extract_alpha_amine_fragment(amino_acid)})C(O)C(O)C(O)CO"
+            schiff_smiles = f"OCC(=N{_fragment})C(O)C(O)C(O)CO"
+            amadori_smiles = f"O=CC(N{_fragment})C(O)C(O)C(O)CO"
             deoxyosone_smiles = "O=CC(=O)CC(O)C(O)CO"
         else:
             return []
@@ -225,20 +240,29 @@ def _amadori_cascade(sugar: Species, amino_acid: Species) -> List[ElementaryStep
         amadori_label = f"{sugar.label}-{amino_acid.label}-Amadori"
         family = "Amadori_Rearrangement"
         if _is_pentose(sugar):
-            schiff_smiles = f"OCC(O)C(O)C(O)/C=N/{_extract_alpha_amine_fragment(amino_acid)}"
-            amadori_smiles = f"OCC(O)C(O)C(=O)CN{_extract_alpha_amine_fragment(amino_acid)}"
+            schiff_smiles = f"OCC(O)C(O)C(O)/C=N/{_fragment}"
+            amadori_smiles = f"OCC(O)C(O)C(=O)CN{_fragment}"
             deoxyosone_smiles = "O=CC(=O)CC(O)CO"
         elif _is_hexose(sugar):
-            schiff_smiles = f"OCC(O)C(O)C(O)C(O)/C=N/{_extract_alpha_amine_fragment(amino_acid)}"
-            amadori_smiles = f"OCC(O)C(O)C(O)C(=O)CN{_extract_alpha_amine_fragment(amino_acid)}"
+            schiff_smiles = f"OCC(O)C(O)C(O)C(O)/C=N/{_fragment}"
+            amadori_smiles = f"OCC(O)C(O)C(O)C(=O)CN{_fragment}"
             deoxyosone_smiles = "O=CC(=O)CC(O)C(O)CO"
         else:
             return []
 
+    # Final validation of generated SMILES
+    if not _is_valid(schiff_smiles) or not _is_valid(amadori_smiles):
+        # Fallback to a very simple label-based species if SMILES fails
+        # but better to return empty than invalid
+        if not _is_valid(schiff_smiles):
+            # Try to fix by stripping leading parentheses if any
+            if _fragment.startswith("(") and _fragment.endswith(")"):
+                _fragment = _fragment[1:-1]
+                # Re-run logic... but let's just be safe.
+        return []
+
     schiff_base = Species(label=schiff_label, smiles=schiff_smiles)
     amadori_product = Species(label=amadori_label, smiles=amadori_smiles)
-    deoxyosone = Species(label=f"{sugar.label}-deoxyosone-3", smiles=deoxyosone_smiles)
-
     steps.append(ElementaryStep(
         reactants=[sugar, amino_acid],
         products=[schiff_base, water],
@@ -259,14 +283,25 @@ def _extract_alpha_amine_fragment(amino_acid: Species) -> str:
     E.g. glycine NCC(=O)O → CC(=O)O (alpha side chain + carboxyl).
     This is used to append to the imine carbon in Schiff base SMILES.
     """
-    # Simple heuristic: remove the terminal NH2 from the SMILES
+    # Use RDKit to remove the primary amine properly
+    m = _mol(amino_acid.smiles)
+    if m:
+        # Remove the first primary amine [NH2] or [NH] found.
+        # This is the standard Strecker/Amadori nitrogen.
+        pat = Chem.MolFromSmarts("[NH2,NH1;!$(N=C);!$(N#C)]")
+        res = Chem.DeleteSubstructs(m, pat, onlyFrags=False)
+        try:
+            # We must use isomericSmiles=False here to stay compatible with the template's simple string concatenation
+            return Chem.MolToSmiles(res, isomericSmiles=False)
+        except:
+            pass
+    
+    # Simple heuristic fallback
     smi = amino_acid.smiles
-    # Replace first occurrence of NH2-connected C with just the carbon
-    # This is a string approximation — chemically valid for linear amino acids
     for prefix in ["N[C@@H]", "N[C@H]", "NC"]:
         if smi.startswith(prefix):
-            return smi[len("N"):]  # drop leading N
-    return smi  # fallback
+            return smi[len("N"):] 
+    return smi
 
 
 def _enolisation_steps(
@@ -333,7 +368,7 @@ def _strecker_step(
         "glycine":        ("acetaldehyde",    "CC=O",          "CC(=O)CN"),
         "l-alanine":      ("acetaldehyde",    "CC=O",          "CC(=O)CN"),
         "l-phenylalanine":("phenylacetaldehyde","O=CCc1ccccc1","CC(=O)CN"),
-        "l-methionine":   ("methional",       "O=CCCS",        "CC(=O)CN"),
+        "l-methionine":   ("methional",       "CSCCC=O",       "CC(=O)CN"),
     }
 
     entry = _strecker_map.get(amino_acid.label.lower())
@@ -720,8 +755,10 @@ class SmirksEngine:
                         all_steps.append(step)
                         add_step_products(step)
 
-                amadori_label = next((p.label for s in cascade for p in s.products if "Amadori" in p.label or "Heyns" in p.label), None)
-                amadori_sp = next((s for s in pool_list() if s.label == amadori_label), None)
+                amadori_smiles = next((p.smiles for s in cascade for p in s.products if "Amadori" in p.label or "Heyns" in p.label), None)
+                amadori_can = _canonical(amadori_smiles) if amadori_smiles else None
+                amadori_sp = pool_dict.get(amadori_can) if amadori_can else None
+                
                 if amadori_sp:
                     enols = _enolisation_steps(amadori_sp, sugar, self.conditions)
                     for enol in enols:
@@ -836,8 +873,8 @@ if __name__ == "__main__":
         print(f"\n{'='*60}")
         print(f"System: {label}")
         print(f"Input:  {[p.label for p in precursors]}")
-        engine = SmirksEngine(conditions=conds)
-        steps = engine.enumerate(precursors)
+        engine = SmirksEngine(conds)
+        steps = engine.enumerate(precursors, max_generations=4)
         print(f"Generated {len(steps)} elementary steps:")
         for step in steps:
             print(f"  {step}")

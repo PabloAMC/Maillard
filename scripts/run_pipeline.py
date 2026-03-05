@@ -163,8 +163,8 @@ def main():
 
     # 2. Enumerate Pathways (SmirksEngine)
     engine = SmirksEngine(conditions)
-    print("Running rule-based generation (up to 3 generations)...")
-    steps = engine.enumerate(precursors)
+    print("Running rule-based generation (up to 4 generations)...")
+    steps = engine.enumerate(precursors, max_generations=4)
     print(f"Generated {len(steps)} unique elementary steps in the reaction network.")
 
     # 3. Screen Barriers
