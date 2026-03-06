@@ -14,6 +14,11 @@ formulations:
   - name: "Cysteine Enrichment (Basic)"
     sugars: ["ribose"]
     amino_acids: ["cysteine", "glycine", "lysine"]
+    molar_ratios:
+      ribose: 1.0
+      cysteine: 2.0
+      glycine: 0.5
+      lysine: 0.5
     additives: []
     lipids: ["hexanal", "nonanal"]
     
@@ -33,6 +38,10 @@ formulations:
   - name: "Premium Meaty Mix"
     sugars: ["ribose"]
     amino_acids: ["cysteine", "leucine", "lysine"]
+    molar_ratios:
+      ribose: 1.5
+      cysteine: 3.0
+      leucine: 0.8
     additives: ["thiamine", "glutathione"]
     lipids: ["hexanal"]
     
@@ -61,6 +70,10 @@ formulations:
   - name: "Acidic GSH Optimizer"
     sugars: ["ribose"]
     amino_acids: ["glutathione", "cysteine"]
+    molar_ratios:
+      ribose: 2.0
+      glutathione: 1.5
+      cysteine: 0.5
     ph: 4.8
     temp: 131.5
     notes: "Optimized conditions for savory glutathione cleavage per literature."

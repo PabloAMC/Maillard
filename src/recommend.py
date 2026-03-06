@@ -144,7 +144,7 @@ class Recommender:
                 
         return required_exogenous
 
-    def predict_from_steps(self, steps: List[any], barriers_dict: Dict[str, float], initial_pool_smiles: List[str]):
+    def predict_from_steps(self, steps: List[any], barriers_dict: Dict[str, float], initial_concentrations: Dict[str, float]):
         """
         Dynamically predict active pathways given a list of generated ElementarySteps
         and their computed barriers from xTB or Hammond fallback.
@@ -161,10 +161,11 @@ class Recommender:
                     can = _canon(data["smiles"])
                     target_lookup[can] = {"name": name, "type": t_type, "data": data}
 
-        # Build hypergraph relaxation to find min-max barrier
-        distances = {}
-        for s in initial_pool_smiles:
-            distances[_canon(s)] = 0.0
+        # Build hypergraph relaxation to find min-max barrier, limiting concentration, and depth
+        # tracking dict: canon_smiles -> (span, concentration, depth)
+        tracking = {}
+        for s, conc in initial_concentrations.items():
+            tracking[s] = (0.0, conc, 0)
 
         changed = True
         iterations = 0
@@ -182,29 +183,40 @@ class Recommender:
                 p_canons = [_canon(p.smiles) for p in step.products]
                 
                 # The distance to fire this step is the MAX distance of all its reactants
+                # The limiting concentration is the MIN of all reactants
+                # The depth is the MAX depth of all reactants + 1
                 max_r_dist = 0.0
+                min_r_conc = float('inf')
+                max_r_depth = 0
                 reachable = True
+                
                 for r in r_canons:
-                    if r not in distances:
+                    if r not in tracking:
                         reachable = False
                         break
-                    max_r_dist = max(max_r_dist, distances[r])
+                    r_span, r_conc, r_depth = tracking[r]
+                    max_r_dist = max(max_r_dist, r_span)
+                    min_r_conc = min(min_r_conc, r_conc)
+                    max_r_depth = max(max_r_depth, r_depth)
                     
                 if not reachable:
                     continue
                     
-                # Path barrier to products via this step
-                path_barrier = max(max_r_dist, barrier)
+                # Path properties to products via this step
+                path_span = max(max_r_dist, barrier)
+                path_conc = min_r_conc
+                path_depth = max_r_depth + 1
                 
-                # Relaxation
+                # Relaxation: we primarily want the lowest span path. 
+                # If spans are equal, we could optimize for conc/depth, but for now just span.
                 for p in p_canons:
-                    if p not in distances or path_barrier < distances[p]:
-                        distances[p] = path_barrier
+                    if p not in tracking or path_span < tracking[p][0]:
+                        tracking[p] = (path_span, path_conc, path_depth)
                         changed = True
 
         # Identify which targets were produced
         active_pathways = []
-        for p_canon, span in distances.items():
+        for p_canon, (span, conc, depth) in tracking.items():
             if p_canon in target_lookup and span < float('inf') and span >= 0.0:
                 t_info = target_lookup[p_canon]
                 
@@ -216,6 +228,8 @@ class Recommender:
                 p_dict = {
                     "name": t_info["name"],
                     "span": span,
+                    "concentration": conc,
+                    "depth": depth,
                     "target": MockTarget(t_info["name"]),
                     "type": t_info["type"],
                     "penalty": "LOW",
@@ -237,10 +251,9 @@ class Recommender:
         # Find which initial pool members are lipids
         lipid_pool_canons = []
         lysine_can = _canon("NCCCC[C@@H](N)C(=O)O")
-        has_lysine = lysine_can in [ _canon(s) for s in initial_pool_smiles ]
+        has_lysine = lysine_can in initial_concentrations
 
-        for s in initial_pool_smiles:
-            can = _canon(s)
+        for can in initial_concentrations.keys():
             if can in target_lookup and target_lookup[can]["name"] in off_flavours:
                 lipid_pool_canons.append(can)
 
@@ -259,9 +272,9 @@ class Recommender:
                         reachable = True
                         for r_smi in [r.smiles for r in step.reactants]:
                             rc = _canon(r_smi)
-                            if rc not in distances:
+                            if rc not in tracking:
                                 reachable = False; break
-                            max_r_dist = max(max_r_dist, distances[rc])
+                            max_r_dist = max(max_r_dist, tracking[rc][0])
                         
                         if reachable:
                             step_key = f"{'+'.join(sorted(r.smiles for r in step.reactants))}->{'+'.join(sorted(p.smiles for p in step.products))}"
@@ -286,13 +299,11 @@ class Recommender:
                 step_r_canons = [_canon(r.smiles) for r in step.reactants]
                 if lysine_can in step_r_canons:
                     # Path barrier
-                    max_r_dist = 0.0
-                    reachable = True
                     for r_smi in [r.smiles for r in step.reactants]:
                         rc = _canon(r_smi)
-                        if rc not in distances:
+                        if rc not in tracking:
                             reachable = False; break
-                        max_r_dist = max(max_r_dist, distances[rc])
+                        max_r_dist = max(max_r_dist, tracking[rc][0])
                     
                     if not reachable: continue
                     

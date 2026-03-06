@@ -24,6 +24,7 @@ from src.pathway_extractor import ElementaryStep
 from src.xtb_screener import XTBScreener
 from src.recommend import Recommender, _trunc
 from src import precursor_resolver
+from src.barrier_constants import get_barrier, HEME_CATALYST_FAMILIES, HEME_CATALYST_REDUCTION
 
 
 def print_table(active_pathways: list):
@@ -69,6 +70,7 @@ def main():
     parser.add_argument("--lipids", type=str, default="", help="Comma-separated lipid aldehydes (e.g. hexanal,nonanal)")
     parser.add_argument("--ph", type=float, default=6.0, help="Reaction pH (default 6.0)")
     parser.add_argument("--temp", type=float, default=150.0, help="Heating temperature in Celsius (default 150)")
+    parser.add_argument("--ratios", type=str, default="", help="Optional comma-separated molar ratios (e.g. cysteine:2.0,ribose:1.0). Default 1.0.")
     parser.add_argument("--catalyst", type=str, default=None, choices=["heme"], help="Apply catalyst effect (e.g. heme)")
     parser.add_argument("--aw", "--water-activity", type=float, default=1.0, help="Water activity (default 1.0)")
     parser.add_argument("--target", type=str, default=None, help="Inverse design target sensory tag (e.g. meaty, roasted)")
@@ -152,12 +154,33 @@ def main():
         print(f"ERROR: {e}")
         sys.exit(1)
 
+    # Parse ratios
+    ratio_dict = {}
+    if args.ratios:
+        for pair in args.ratios.split(","):
+            if ":" in pair:
+                k, v = pair.split(":")
+                try:
+                    ratio_dict[k.strip().lower()] = float(v.strip())
+                except ValueError:
+                    print(f"ERROR: Invalid ratio value '{v}' for '{k}'. Must be a float.")
+                    sys.exit(1)
+
+    # Build canonical smiles to concentration map
+    from src.recommend import _canon
+    initial_concentrations = {}
+    for p in precursors:
+        qty = ratio_dict.get(p.label.lower(), 1.0)
+        initial_concentrations[_canon(p.smiles)] = qty
+
     # Print Forward Pipeline Header
     print("======================================================")
     print("      Maillard Generative Pipeline (Phase 7)")
     print("======================================================\n")
     
     print(f"Inputs: {', '.join(p.label for p in precursors)}")
+    if args.ratios:
+        print(f"Molar Ratios: {', '.join(f'{k}: {v}' for k, v in ratio_dict.items())}")
     print(f"Conditions: pH {conditions.pH}, {conditions.temperature_celsius}°C, aᵥ {conditions.water_activity}, Catalyst: {args.catalyst or 'None'}")
     print("-" * 60)
 
@@ -190,30 +213,8 @@ def main():
                 dE, bar = 99.0, 99.0 # Extreme penalty for failed convergence
             barriers_dict[step_key] = bar
         else:
-            # Fake fast evaluation using heuristics to allow testing pipeline logic
-            # This is a mock since real XTBScreener.compute_reaction_energy calls RDKit EmbedMultipleConfs which is slow,
-            # even when it falls back to Hammond. We want true CLI instant-response mode here.
-            
-            # Simple heuristic mock logic (for demo CLI speed):
-            # Amadori/Heyns: ~25 kcal
-            # Schiff base: ~15 kcal
-            # Dehydration: ~30 kcal
-            # Condensation/Strecker: ~20 kcal
-            # Default: 40 kcal
-            bar = 40.0
-            if step.reaction_family:
-                fm = step.reaction_family.lower()
-                if "amadori" in fm or "heyns" in fm: bar = 25.0
-                elif "schiff" in fm: bar = 15.0
-                elif "ring" in fm: bar = 5.0
-                elif "dehydration" in fm or "enolisation" in fm: bar = 30.0
-                elif "strecker" in fm: bar = 22.0
-                elif "retro" in fm: bar = 35.0
-                elif "beta" in fm: bar = 16.0
-                elif "cysteine" in fm: bar = 32.0
-                elif "additive" in fm or "thermal" in fm: bar = 25.0
-                elif "thiol" in fm: bar = 18.0
-                elif "dha" in fm: bar = 18.0
+            # Calculate boundaries from shared constants
+            bar = get_barrier(step.reaction_family)
                 
             # Apply condition modifiers
             ph_mult = conditions.get_ph_multiplier(step.reaction_family or "")
@@ -221,12 +222,9 @@ def main():
             # Accelerate by dividing barrier if multiplier > 1 (higher kinetic probability)
             adjusted_bar = bar / ph_mult
 
-            # 3a. Apply Catalyst Heme Heuristic (Phase 7.3)
-            # Heme/Iron catalysts strongly accelerate Strecker and Pyrazine pathways
-            if args.catalyst == "heme":
-                if step.reaction_family in ["Strecker_Degradation", "Aminoketone_Condensation"]:
-                    # Significant barrier reduction to show catalytic effect
-                    adjusted_bar -= 7.0 
+            # 3a. Apply Catalyst Heme Heuristic 
+            if args.catalyst == "heme" and step.reaction_family in HEME_CATALYST_FAMILIES:
+                adjusted_bar -= HEME_CATALYST_REDUCTION 
                 
             barriers_dict[step_key] = adjusted_bar
             
@@ -234,9 +232,8 @@ def main():
 
     # 4. Recommend Targets
     recommender = Recommender(None)
-    initial_pool_smiles = [p.smiles for p in precursors]
     
-    results = recommender.predict_from_steps(steps, barriers_dict, initial_pool_smiles)
+    results = recommender.predict_from_steps(steps, barriers_dict, initial_concentrations)
     active_pathways = results["targets"]
     metrics = results["metrics"]
     

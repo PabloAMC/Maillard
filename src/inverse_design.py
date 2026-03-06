@@ -6,6 +6,7 @@ from dataclasses import dataclass
 from src.smirks_engine import SmirksEngine, ReactionConditions
 from src.recommend import Recommender
 from src.precursor_resolver import resolve_many
+from src.barrier_constants import get_barrier, HEME_CATALYST_REDUCTION, HEME_CATALYST_FAMILIES
 
 # Locate data files
 ROOT = Path(__file__).resolve().parents[1]
@@ -48,19 +49,35 @@ class InverseDesigner:
             data = yaml.safe_load(f)
             return data.get("tags", {})
             
-    def _score_targets(self, targets_found: List[dict], target_list: List[str]) -> Tuple[float, List[str]]:
+    def _score_targets(self, targets_found: List[dict], target_list: List[str], conditions: ReactionConditions) -> Tuple[float, List[str]]:
         """
         Score a list of found targets against a desired list of compound names.
-        Score is inverse to the barrier (lower barrier = higher probability = higher score).
+        Score uses Boltzmann weighting: [conc] * exp(-barrier / RT) * (0.8^depth)
         """
+        import math
         score = 0.0
         detected = []
+        
+        # T in Kelvin, R in kcal/(mol*K)
+        temp_k = conditions.temperature_celsius + 273.15
+        RT = 0.001987 * temp_k
+        
         for t in targets_found:
             name = t["name"]
             if name in target_list:
-                barrier = t["span"]
-                # 40 kcal is baseline 0 score. 0 kcal is 100 score.
-                impact = max(0.0, 40.0 - barrier)
+                barrier = t.get("span", 99.0)
+                conc = t.get("concentration", 1.0)
+                depth = t.get("depth", 1)
+                
+                # Baseline 0 score for unachievable pathways
+                if barrier >= 99.0:
+                    continue
+                    
+                boltzmann_weight = math.exp(-barrier / RT)
+                depth_penalty = 0.8 ** depth # 20% penalty per reaction step
+                
+                # Scale up by 1e6 for readability (otherwise scores are tiny)
+                impact = conc * boltzmann_weight * depth_penalty * 1e6
                 score += impact
                 detected.append(name)
         return score, detected
@@ -105,22 +122,9 @@ class InverseDesigner:
             engine = SmirksEngine(cond)
             steps = engine.enumerate(precursors, max_generations=4)
             
-            # Calculate mock fast barriers
+            # Calculate barriers from centralised constants
             for step in steps:
-                bar = 40.0
-                if step.reaction_family:
-                    fm = step.reaction_family.lower()
-                    if "amadori" in fm or "heyns" in fm: bar = 25.0
-                    elif "schiff" in fm: bar = 15.0
-                    elif "ring" in fm: bar = 5.0
-                    elif "dehydration" in fm or "enolisation" in fm: bar = 30.0
-                    elif "strecker" in fm: bar = 22.0
-                    elif "retro" in fm: bar = 35.0
-                    elif "beta" in fm: bar = 16.0
-                    elif "cysteine" in fm: bar = 32.0
-                    elif "additive" in fm or "thermal" in fm: bar = 25.0
-                    elif "thiol" in fm: bar = 18.0
-                    elif "dha" in fm: bar = 18.0
+                bar = get_barrier(step.reaction_family)
                     
                 ph_mult = cond.get_ph_multiplier(step.reaction_family or "")
                 if ph_mult > 1.0:
@@ -129,18 +133,31 @@ class InverseDesigner:
                     bar += (1.0 - ph_mult) * 10.0
                     
                 # Heme heuristic application
-                if apply_heme and step.reaction_family in ["Strecker_Degradation", "Aminoketone_Condensation"]:
-                    bar -= 5.0
+                if apply_heme and step.reaction_family in HEME_CATALYST_FAMILIES:
+                    bar -= HEME_CATALYST_REDUCTION
                     
                 rxn_key = f"{'+'.join(sorted(r.smiles for r in step.reactants))}->{'+'.join(sorted(p.smiles for p in step.products))}"
                 heuristic_barriers[rxn_key] = max(0.0, bar)
                 
+            # Build canonical concentrations map
+            from src.recommend import _canon
+            initial_concentrations = {}
+            ratios = form.get("molar_ratios", {})
+            for p in precursors:
+                # Default ratio is 1.0 if not specified
+                qty = 1.0
+                for k, v in ratios.items():
+                    if k.lower() in p.label.lower() or p.label.lower() in k.lower():
+                        qty = float(v)
+                        break
+                initial_concentrations[_canon(p.smiles)] = qty
+                
             recommender = Recommender()
-            rec_result = recommender.predict_from_steps(steps, heuristic_barriers, [p.smiles for p in precursors])
+            rec_result = recommender.predict_from_steps(steps, heuristic_barriers, initial_concentrations)
             
             # Score against tags
-            t_score, t_detected = self._score_targets(rec_result["targets"], target_compounds)
-            m_score, m_detected = self._score_targets(rec_result["targets"], minimize_compounds)
+            t_score, t_detected = self._score_targets(rec_result["targets"], target_compounds, cond)
+            m_score, m_detected = self._score_targets(rec_result["targets"], minimize_compounds, cond)
             
             trap_dict = rec_result["metrics"].get("trapping_efficiency", {})
             trap_avg = sum(trap_dict.values()) / len(trap_dict) if trap_dict else 0.0

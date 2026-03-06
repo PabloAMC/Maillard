@@ -462,3 +462,28 @@ class TestPBMAAdditives:
         
         assert has_hexanal_imine, "Hexanal was not correctly trapped into a Schiff base by glycine"
 
+class TestLipidMaillardSynergy:
+    """Tests for Phase 8.E lipid-Maillard synergy pathways."""
+
+    def test_alkylthiazole_formation(self):
+        engine = SmirksEngine(conditions=NEUTRAL)
+        # We provide hexanal + glycine + leucine + cysteine
+        # 1. Glycine/Leucine + Ribose -> dicarbonyls -> aminoacetone
+        # 2. Hexanal + aminoacetone + H2S -> 2-pentyl-4-methylthiazole
+        hexanal = to_species("Hexanal", "CCCCCC=O")
+        ribose = to_species("D-ribose", "O=CC(O)C(O)C(O)CO")
+        glycine = to_species("Glycine", "NCC(=O)O")
+        cysteine = to_species("L-cysteine", "NC(CS)C(=O)O")
+        
+        # We need H2S which comes from Cysteine degradation or is provided
+        h2s = to_species("H2S", "S")
+        
+        steps = engine.enumerate([hexanal, ribose, glycine, cysteine, h2s])
+        
+        families = _families(steps)
+        labels = _labels(steps)
+        
+        assert "Lipid_Strecker_Synergy" in families
+        assert "2-pentyl-4-methylthiazole" in labels
+        
+
