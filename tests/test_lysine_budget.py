@@ -26,7 +26,8 @@ def test_lysine_budget_competition():
         for s in steps_a
     }
     
-    results_a = recommender.predict_from_steps(steps_a, barriers_a, [glucose.smiles, lysine.smiles])
+    initial_conc_a = {glucose.smiles: 1.0, lysine.smiles: 1.0}
+    results_a = recommender.predict_from_steps(steps_a, barriers_a, initial_conc_a)
     budget_a = results_a["metrics"]["lysine_budget_dha"]
     
     # System B: Glucose + Lysine + Serine (Maillard + DHA)
@@ -37,7 +38,8 @@ def test_lysine_budget_competition():
         for s in steps_b
     }
     
-    results_b = recommender.predict_from_steps(steps_b, barriers_b, [glucose.smiles, lysine.smiles, cysteine.smiles])
+    initial_conc_b = {glucose.smiles: 1.0, lysine.smiles: 1.0, cysteine.smiles: 1.0}
+    results_b = recommender.predict_from_steps(steps_b, barriers_b, initial_conc_b)
     budget_b = results_b["metrics"]["lysine_budget_dha"]
     
     # With FAST mode heuristics, DHA (18 kcal) competes with Schiff Base (15 kcal)

@@ -77,7 +77,7 @@ def test_recommender_predict_from_steps():
     barriers[s3_key] = 45.0
     
     steps = [step1, step2, step3]
-    initial_pool = [RIBOSE.smiles, CYS.smiles, LINOLEIC.smiles]
+    initial_pool = {RIBOSE.smiles: 1.0, CYS.smiles: 1.0, LINOLEIC.smiles: 1.0}
     
     predictions = rec.predict_from_steps(steps, barriers, initial_pool)["targets"]
     

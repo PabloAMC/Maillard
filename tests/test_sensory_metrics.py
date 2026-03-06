@@ -27,7 +27,8 @@ def test_trapping_efficiency_calculation():
         for s in steps_a if s.reaction_family == "Lipid_Schiff_Base"
     }
     
-    results_a = recommender.predict_from_steps(steps_a, barriers_a, [hexanal.smiles, glycine.smiles])
+    initial_conc_a = {hexanal.smiles: 1.0, glycine.smiles: 1.0}
+    results_a = recommender.predict_from_steps(steps_a, barriers_a, initial_conc_a)
     eff_a = results_a["metrics"]["trapping_efficiency"]["Hexanal"]
     
     # System B: Hexanal + Lysine
@@ -38,7 +39,8 @@ def test_trapping_efficiency_calculation():
         for s in steps_b if s.reaction_family == "Lipid_Schiff_Base"
     }
     
-    results_b = recommender.predict_from_steps(steps_b, barriers_b, [hexanal.smiles, lysine.smiles])
+    initial_conc_b = {hexanal.smiles: 1.0, lysine.smiles: 1.0}
+    results_b = recommender.predict_from_steps(steps_b, barriers_b, initial_conc_b)
     eff_b = results_b["metrics"]["trapping_efficiency"]["Hexanal"]
     
     print(f"\nTrapping Efficiency - Glycine: {eff_a:.2f}%")
@@ -63,8 +65,9 @@ def test_sensory_metadata_presence():
     for s in steps:
         key = f"{'+'.join(sorted(r.smiles for r in s.reactants))}->{'+'.join(sorted(p.smiles for p in s.products))}"
         barriers[key] = 40.0
-        
-    results = recommender.predict_from_steps(steps, barriers, [ribose.smiles, cysteine.smiles])
+    
+    initial_conc = {ribose.smiles: 1.0, cysteine.smiles: 1.0}
+    results = recommender.predict_from_steps(steps, barriers, initial_conc)
     targets = results["targets"]
     
     fft_found = False

@@ -88,3 +88,59 @@ def test_conditions_scaling(monkeypatch):
     
     # Pyrazine should be favored > 4.0x
     assert prof_pyrazine.scaled_rates[0] > prof_furan.scaled_rates[0]
+
+def test_energetic_span_complex_profile():
+    """
+    Validate span for a profile with multiple 'valleys' and 'peaks'.
+    A (0) -> B (10, TS: 15) -> C (5, TS: 20) -> D (-10, TS: 10)
+    Energy levels: [0, 15, 10, 20, 5, 10, -10]
+    Lowest intermediate: 0 (A), then 10 (B), then 5 (C), then -10 (D).
+    BUT, the span is TS_i - lowest_intermediate_j (where j <= i).
+    TS1: 15 - 0 = 15
+    TS2: 20 - 0 = 20
+    TS3: 10 - 0 = 10
+    Max span = 20.
+    """
+    profile = PathwayProfile(
+        pathway_name="Complex",
+        steps=[],
+        deltaE_kcal_list=[10.0, -5.0, -15.0],
+        barrier_kcal_list=[15.0, 10.0, 5.0],
+        scaled_rates=[]
+    )
+    # Re-calc manually:
+    # TS1 = 15. I1 = 10. (Low: 0)
+    # TS2 = I1 + 10 = 20. I2 = I1 - 5 = 5. (Low: 0)
+    # TS3 = I2 + 5 = 10. I3 = I2 - 15 = -10. (Low: 0)
+    # Max(TS - prevailing_low): Max(15-0, 20-0, 10-0) = 20.
+    assert profile.energetic_span == 20.0
+
+def test_ranker_sorting_criteria(monkeypatch):
+    """Ensure energetic span is the primary sorting key."""
+    import src.pathway_ranker
+    
+    # Pathway A: Max Barrier 25, Span 25
+    # Pathway B: Max Barrier 20, Span 30 (Worse span, better max barrier)
+    
+    p_a = PathwayProfile("A", [], [0], [25])
+    p_b = PathwayProfile("B", [], [10, -10], [20, 20]) # Span is 20 - 0 = 20, TS2 is 10+20=30 relative to start.
+    # Calculation for B: 
+    # TS1=20, I1=10. 
+    # TS2=10+20=30. I2=0. 
+    # Span = Max(20-0, 30-0) = 30.
+    
+    assert p_a.rate_limiting_barrier == 25
+    assert p_a.energetic_span == 25
+    assert p_b.rate_limiting_barrier == 20
+    assert p_b.energetic_span == 30
+    
+    ranker = PathwayRanker(n_cores=1)
+    # We mock screen_pathways return or just test the sort logic directly if possible
+    # But screen_pathways calls _evaluate_pathway which we'd need to mock heavily.
+    # Let's just test the sort key logic that's inside screen_pathways.
+    
+    profiles = [p_b, p_a] # B is first in list
+    profiles.sort(key=lambda p: p.energetic_span if p.energetic_span > 0 else p.rate_limiting_barrier)
+    
+    # A should be first because 25 < 30
+    assert profiles[0].pathway_name == "A"

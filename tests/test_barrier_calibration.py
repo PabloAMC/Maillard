@@ -30,7 +30,9 @@ def run_model_system(sugars, aminos, ph=6.0, temp=150.0):
         barriers_dict[rxn_key] = max(0.0, bar)
         
     recommender = Recommender()
-    res = recommender.predict_from_steps(steps, barriers_dict, [p.smiles for p in precursors])
+    # Convert list of precursor SMILES to dict with default concentration 1.0
+    initial_conc = {p.smiles: 1.0 for p in precursors}
+    res = recommender.predict_from_steps(steps, barriers_dict, initial_conc)
     
     # Sort targets by barrier ascending (lowest barrier = most favoured output)
     targets = sorted(res["targets"], key=lambda t: t["span"])

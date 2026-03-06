@@ -89,3 +89,29 @@ def test_missing_files_raise_error(tmp_path):
     
     with pytest.raises(FileNotFoundError):
         empty_extractor.run()
+
+def test_extractor_malformed_input(tmp_path):
+    """Test robustness against malformed lines in chem_annotated.inp."""
+    # Use a unique subdirectory to avoid collision with setup_mock_rmg_output fixture if it ran
+    test_dir = tmp_path / "malformed_test"
+    chem_dir = test_dir / "chemkin"
+    chem_dir.mkdir(parents=True)
+    
+    # Valid dict
+    (chem_dir / "species_dictionary.txt").write_text("A\n// SMILES=\"C\"\n1 0\n")
+    
+    # Malformed inp (missing '=' or empty species)
+    inp_content = """
+REACTIONS
+A+B  1.0 0 0
+A=A  1.0 0 0
+END
+"""
+    (chem_dir / "chem_annotated.inp").write_text(inp_content)
+    
+    extractor = PathwayExtractor(test_dir)
+    steps = extractor.run()
+    
+    # A+B should be ignored as it has no '=' (it has space)
+    # A=A should be kept if A is resolved
+    assert len(steps) == 1
