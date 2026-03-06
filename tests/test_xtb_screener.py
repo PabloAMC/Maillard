@@ -102,3 +102,27 @@ def test_compute_reaction_energy(monkeypatch):
     # E = -20 - (-13 - 4) = -3 Hartree = -1882.527 kcal/mol
     assert abs(delta_E - (-1882.527)) < 0.1
     assert barrier == 12.5
+
+def test_xtb_embedding_failure_handling(monkeypatch):
+    """Verify that RDKit failures return the penalty barrier."""
+    from rdkit.Chem import AllChem
+    
+    # Mock EmbedMultipleConfs to return empty list (failure)
+    monkeypatch.setattr(AllChem, "EmbedMultipleConfs", lambda *args, **kwargs: [])
+    
+    screener = XTBScreener()
+    # Water optimization should fail to embed and return empty string
+    xyz = screener.generate_3d_xyz("O")
+    assert xyz is None  # Source returns None on empty cids
+    
+    # compute_reaction_energy should catch this and return penaltys via optimize_species exception
+    # and eventually its own try-except or just failing.
+    # Actually compute_reaction_energy calls optimize_species which raises ValueError.
+    # In src/pathway_ranker.py, evaluate_single_step catches exceptions and returns 999.
+    
+    # Let's test evaluate_single_step directly to verify the 999.0 logic
+    from src.pathway_ranker import evaluate_single_step
+    step = ElementaryStep([Species("W", "O")], [Species("W", "O")])
+    dE, bar = evaluate_single_step(step)
+    assert dE == 999.0
+    assert bar == 999.0
