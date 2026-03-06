@@ -1,13 +1,26 @@
-# Maillard Reaction Computational Framework
+# Maillard Reactant Framework 🍳
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-Accelerating wet-lab experimentation for plant-based meat alternatives by computationally exploring the chemical pathways of the Maillard reaction.
+**Maillard** is a high-fidelity chemical discovery engine designed for the next generation of plant-based foods. It explores the high-dimensional chemical space of the Maillard reaction to help you design flavor systems that are indistinguishable from animal meat.
+
+- 🌿 **Plant-Based Focus**: Tailored rules for soy, pea, and fungal protein precursors.
+- ⚡ **Multi-Tiered Screening**: Balances generative breadth with DFT precision.
+- 🔬 **Scientific Rigor**: Includes native support for pH, water activity, and heme catalysis.
+
+---
 
 ## 🎯 Mission
 
-Enable food chemists and formulation scientists to rationally design precursor combinations that maximize desirable "meaty" volatiles while minimizing off-flavors and toxic by-products.
+To empower food scientists to rationally design precursor combinations that maximize meaty volatiles (MFT, pyrazines) while minimizing off-flavors and toxic by-products like HMF.
+
+### 🌟 Highlights
+- **Hybrid SmirksEngine**: Automated discovery of thousands of pathways with strict mass conservation.
+- **Formulation Inverse Design**: Don't just predict; search the formulation grid for the optimal precursor matrix to hit a target sensory profile.
+- **PBMA Metrics**: Native calculation of "Lysine Budgets" and "Lipid Trapping Efficiency" to account for competition in complex food matrices.
+
+---
 
 ## 🧬 The Challenge
 
@@ -33,48 +46,93 @@ This framework employs a multi-tiered approach to bridge the gap between screeni
 - **Physical Parametrization**: Native support for **pH**, **Temperature**, and **Water Activity ($a_w$)** affects pathway bifurcations and kinetics.
 - **Boltzmann scoring**: Concentration-dependent ranking of formulations based on active flux predictions rather than binary presence/absence.
 
-## 🚀 Getting Started
+## 🚀 Installation
 
-### Prerequisites
-- Conda or Mamba
-- RDKit, xTB (via conda-forge)
-- PySCF, Skala (for Tier 2)
+### 1. Prerequisites (Conda)
+Maillard requires RDKit and xTB for screening. We recommend using a dedicated environment:
 
-### Installation
 ```bash
 conda env create -f environment.yml
 conda activate maillard
+```
+
+### 2. Verify Scientific Dependencies
+Ensure that the QM engines are correctly mapped:
+```bash
+# Check xTB and RDKit installation
 python scripts/check_env.py
 ```
 
-### Basic Usage
-
-#### Forward Mode (Predict Volatiles)
-Predict the aroma profile of a specific formulation:
+### 3. Install Skala (Tier 2 DFT)
+If you intend to run Tier 2 DFT refinement, install Microsoft Skala:
 ```bash
-python scripts/run_pipeline.py --sugars ribose --amino-acids cysteine,leucine --catalyst heme
+pip install git+https://github.com/microsoft/skala.git
 ```
 
-#### Inverse Design Mode (Optimize Formulation)
-Search the `formulation_grid.yml` for the best precursor combination to hit a target sensory profile:
+---
+
+## 🛠️ Usage
+
+### 1. Identify Available Precursors
+List the supported sugars, amino acids, and lipids in the framework:
+```bash
+python scripts/run_pipeline.py --list-precursors
+```
+
+### 2. Forward Mode: Predict Aroma
+Predict the volatiles produced by a specific precursor combination.
+```bash
+python scripts/run_pipeline.py \
+    --sugars ribose \
+    --amino-acids cysteine:2.0,leucine:1.0 \
+    --catalyst heme \
+    --ph 6.5 \
+    --temp 160
+```
+*Note: Use `--xtb` to run rigorous structural optimizations (slow).*
+
+### 3. Inverse Design Mode: Optimize Formulation
+Generate the optimal precursor matrix to maximize a specific flavor profile.
 ```bash
 python scripts/run_pipeline.py --target meaty --minimize beany
 ```
 
-## 📊 Current Status (Phase 8.E Complete)
+---
+
+## 📂 Output
+
+Results are displayed in a formatted terminal table and include:
+
+- **Predicted Compound**: The target volatile species (e.g., thiols, pyrazines).
+- **Formation Tag**: Classification of the compound (Desirable, Toxic, etc.).
+- **Barrier**: The rate-limiting energetic span for the pathway.
+- **Sensory Character**: Qualitative descriptor (e.g., "savory, meaty").
+- **Toxicity/Risk**: Metadata regarding known by-product risks (e.g., HMF, LAL).
+
+### PBMA Metrics
+The pipeline also calculates proprietary formulation indices:
+- **Lipid Trapping Efficiency**: % of reactive aldehydes successfully sequestered by amino acid traps.
+- **Lysine Budget (DHA)**: % of available lysine consumed by the competing Dehydroalanine pathway.
+
+---
+
+## 🧩 Architecture
+
+- **`src/smirks_engine.py`**: Rule-based reaction network generator.
+- **`src/xtb_screener.py`**: GFN2-xTB energy evaluation and NEB optimization.
+- **`src/skala_refiner.py`**: High-precision DFT refinement using the Skala XC functional.
+- **`src/recommend.py`**: Sensory scoring and pathway bottleneck identification.
+- **`src/inverse_design.py`**: Automated search over formulation matrices.
+
+---
+
+## 📊 Project Roadmap (Phase 8.E Complete)
 
 Internal milestone reached: The core generative engine is fully atom-balanced and calibrated against literature baselines.
 - [x] **Lipid synergy** (alkylthiazole formation) modeled.
 - [x] **Concentration sensitivity** (Boltzmann scoring) implemented.
 - [x] **Literature Validation Gate** passed (benchmarked against Ribose/Cys/Leu systems).
 - [ ] **Phase 3.3 (Ongoing)**: High-precision DFT refinement for rate-limiting bottlenecks.
-
-## 📂 Project Structure
-
-- `src/`: Core logic (engine, recommender, screeners).
-- `data/`: Species databases, sensory tags, and formulation grids.
-- `docs/`: Technical architecture, pathway analysis, and theoretical limitations.
-- `tests/`: Comprehensive unit and integration test suite (ensuring mass conservation & chemistry rules).
 
 ## ⚖️ License
 
