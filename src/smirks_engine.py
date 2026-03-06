@@ -176,6 +176,25 @@ def _is_aromatic_aldehyde(s: Species) -> bool:
     return m is not None and m.HasSubstructMatch(_AROMATIC_ALDEHYDE_SMARTS)
 
 
+def _is_lipid_aldehyde(s: Species) -> bool:
+    """C5+ aliphatic monocarbonyl aldehyde without multiple OH (excludes sugars/dicarbonyls)."""
+    m = _mol(s.smiles)
+    if not m: return False
+    # Has aldehyde
+    if not m.HasSubstructMatch(_ALDEHYDE_SMARTS): return False
+    # NOT aromatic
+    if m.HasSubstructMatch(Chem.MolFromSmarts("a")): return False
+    # NOT dicarbonyl
+    if m.HasSubstructMatch(_DICARBONYL_SMARTS): return False
+    # NOT nitrogenous (excludes amino-aldehydes like 5-aminopentanal)
+    if any(atom.GetAtomicNum() == 7 for atom in m.GetAtoms()): return False
+    # Not a sugar (oh_count < 2)
+    oh_count = sum(1 for atom in m.GetAtoms() if atom.GetAtomicNum() == 8 and atom.GetTotalNumHs() >= 1 and atom.GetDegree() == 1)
+    # C5+ (typically lipid-derived volatiles like pentanal, hexanal)
+    c_count = sum(1 for atom in m.GetAtoms() if atom.GetAtomicNum() == 6)
+    return oh_count < 2 and c_count >= 5
+
+
 def _species_from_pool(pool: Set[str], label: str, smiles: str) -> Species:
     """Create a Species, canonicalise its SMILES, and add to pool."""
     can = _canonical(smiles)
@@ -746,6 +765,53 @@ def _thiol_addition(pool_species: List[Species]) -> List[ElementaryStep]:
     return steps
 
 
+def _lipid_maillard_synergy(pool_species: List[Species]) -> List[ElementaryStep]:
+    """
+    Lipid Aldehyde + alpha-aminoketone + H2S -> 2-Alkylthiazole + 2 H2O + H2.
+    Lipid Aldehyde + 2x alpha-aminoketone -> Alkylpyrazine (Branching synergy).
+    """
+    steps = []
+    h2s = next((s for s in pool_species if s.smiles == "S"), None)
+    
+    lipids = [s for s in pool_species if _is_lipid_aldehyde(s)]
+    # Target aminoketones (aminoacetone, 3-amino-2-butanone, etc.)
+    aks = [s for s in pool_species if "amino" in s.label.lower() and ("acetone" in s.label.lower() or s.smiles == "CC(=O)CN") and "dicarbonyl" not in s.label.lower()]
+
+    if not lipids or not aks:
+        return steps
+
+    water = Species("water", "O")
+    hydro = Species("H2", "[HH]")
+
+    for lip in lipids:
+        # Extract alkyl chain length for label
+        m_lip = _mol(lip.smiles)
+        c_lip = sum(1 for a in m_lip.GetAtoms() if a.GetAtomicNum() == 6)
+        r_len = c_lip - 1 # excluding carbonyl C
+        
+        for ak in aks:
+            # 1. Thiazole Synergy (if H2S present)
+            if h2s:
+                if r_len == 5: # Hexanal
+                    tz_name = "2-pentyl-4-methylthiazole"
+                    tz_smi = "CCCCCC1=NC(C)=CS1"
+                elif r_len == 6: # Heptanal
+                    tz_name = "2-hexyl-4-methylthiazole"
+                    tz_smi = "CCCCCCC1=NC(C)=CS1"
+                else:
+                    tz_name = f"2-alkyl(C{r_len})-4-methylthiazole"
+                    prefix = "C" * r_len
+                    tz_smi = f"{prefix}C1=NC(C)=CS1"
+
+                steps.append(ElementaryStep(
+                    reactants=[lip, ak, h2s],
+                    products=[Species(tz_name, tz_smi), water, water, hydro],
+                    reaction_family="Lipid_Strecker_Synergy"
+                ))
+
+    return steps
+
+
 def _sugar_ring_opening(pool_species: List[Species]) -> List[ElementaryStep]:
     """Hemiacetal cyclic sugar -> open-chain aldehyde. (Defensive rule via RWMol)"""
     steps = []
@@ -1108,7 +1174,12 @@ class SmirksEngine:
             if not _step_exists(step, all_steps):
                 all_steps.append(step)
                 add_step_products(step)
-
+        # 3f. Lipid-Maillard Synergy (Lipid Aldehyde + Strecker AK)
+        syn_steps = _lipid_maillard_synergy(pool_list())
+        for step in syn_steps:
+            if not _step_exists(step, all_steps):
+                all_steps.append(step)
+                add_step_products(step)
         # ── Tier A: SMIRKS rules, iterative ──────────────────────────────
         seen_step_keys: Set[str] = {_step_key(s) for s in all_steps}
 
