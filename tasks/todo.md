@@ -18,8 +18,8 @@ Ordered by **impact on alt-protein formulation scientists** (the end-user):
 | ~~8.C.5~~ | **8.C.5 — Literature Validation Gate** | ✅ | Confirmed tool matches known experimental breadcrumbs. |
 | ~~8.D~~ | **8.D — Concentrations + Scoring redesign** | ✅ | Boltzmann scoring distinguishes 0.5% vs 2.0% cysteine. |
 | ~~8.E~~ | **8.E — Lipid-Maillard synergy** | ✅ | Adds insight: lipid aldehydes accelerate Strecker synergy. |
-| **� 1** | 3.3 — Full DFT barriers (Skala) | ☐ | Move beyond xTB noise for rate-limiting steps. |
-| **� 2** | 8.G — Cantera kinetic simulation | ☐ | Time-temperature profiles require DFT-quality barriers. |
+| **🔴 1** | 3.3 — Full DFT (r2SCAN-3c/wB97M-V) | ☐ | Move beyond xTB noise for rate-limiting steps. | ☐ | Move beyond xTB noise for rate-limiting steps. |
+| **🟠 2** | 8.G — Cantera kinetic simulation | ☐ | Time-temperature profiles require DFT-quality barriers. | ☐ | Time-temperature profiles require DFT-quality barriers. |
 
 > **Gate**: 8.C.5 is a hard gate. If the tool's predicted top-3 volatiles don't match experimental observations for ≥2 of 3 test systems, iterate on 8.C before proceeding to 8.D.
 
@@ -200,12 +200,18 @@ Ordered by **impact on alt-protein formulation scientists** (the end-user):
 
 ---
 
-## Phase 3: Tier 2 — DFT Refinement with Skala ⏳
+## Phase 3: Tier 2 — DFT Refinement (r2SCAN-3c / wB97M-V) ⏳
+
+> **Context:** The Skala functional was initially considered, but to maximize accuracy without wasting compute cycles, we are shifting to a tiered composite workflow:
+> 1. **Geometry/Frequencies:** `r2SCAN-3c` (Meta-GGA, $O(N^3)$, excellent geometry/vib scaling).
+> 2. **Refinement:** `wB97M-V` (Range-separated hybrid, $O(N^4)$, handles non-covalent interactions and reduces self-interaction error).
+> 3. **Verification:** `revDSD-PBEP86-D4` (Double hybrid, $O(N^5)$, for benchmarking key bifurcations).
+> 4. **Thermodynamics:** Apply quasi-harmonic corrections (Grimme/Truhlar) to `r2SCAN-3c` frequencies to prevent artificial $\Delta S^\ddagger$ blowups from low-frequency modes.
 
 Focus on the 6–8 chemically decisive reactions only:
 
-- [x] **3.1** Write `src/skala_refiner.py`: PySCF + Skala XC functional template for TS optimisation with CPCM water solvent.
-- [x] **3.2** Write `tests/test_skala_refiner.py`: run a fast, low-basis single-point energy calculation on a small molecule to ensure PySCF+Skala integration works.
+- [ ] **3.1** Write `src/dft_refiner.py`: Integration with PySCF for `r2SCAN-3c` TS optimization and `wB97M-V` single-point energies.
+- [ ] **3.2** Implement Quasi-Harmonic Correction: Add post-processing module to correct low-freq entropy overestimation.
 - [ ] **3.3 Compute barriers for key bifurcations:** `[Diff: 9/10]`
     - [ ] 3.3a: Amadori rearrangement (Schiff base → 1-amino-1-deoxy-2-ketose)
     - [ ] 3.3b: 2,3-enolisation vs 1,2-enolisation bifurcation point
@@ -215,8 +221,8 @@ Focus on the 6–8 chemically decisive reactions only:
     - [ ] 3.3f: DHA β-elimination (Ser → dehydroalanine)
     - [ ] 3.3g: Off-flavour trapping: hexanal + amino acid → Schiff base
     - [ ] 3.3h: α-aminoketone dimerisation → pyrazine
-- [ ] **3.4 Validate with IRC:** `[Diff: 6/10]` Confirm each TS connects to correct reactant/product via intrinsic reaction coordinate.
-- [ ] **3.5 Comparison Study:** `[Diff: 3/10]` Compare Skala barriers against published DFT or CCSD(T) data where available.
+- [ ] **3.4 Validate with IRC:** `[Diff: 6/10]` Confirm each TS connects to correct reactant/product via intrinsic reaction coordinate (using `r2SCAN-3c`).
+- [ ] **3.5 Verification Study:** `[Diff: 4/10]` Run `revDSD-PBEP86-D4` on a curated subset of 20–30 critical rate-determining steps to ensure `wB97M-V` single points aren't drifting.
 
 ---
 
