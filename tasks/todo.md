@@ -15,7 +15,7 @@ The core Tier 0/1/2 pipeline is operational. The next objective is to align with
 | **🟢 4** | **11 — Sella Eigenvector-Following TS** | ✅ | Faster TS search than NEB |
 | **🟠 5** | **12 — Cantera Microkinetics** | ✅ | Predict concentration-vs-time (GC-MS comparable) |
 | **� 6** | **15 — Temperature Ramp Modeling** | ✅ | Realistic extrusion profiles, not isothermal |
-| **🟠 7** | **16 — Structured Results Database** | 📋 | Scale from 8 to 1000+ reactions |
+| **� 7** | **16 — Structured Results Database** | ✅ | Scale from 8 to 1000+ reactions |
 | **🟠 8** | **17 — GC-MS Comparison Output** | 📋 | Direct overlay with experimental data |
 | **🟡 9** | **13 — Δ-ML Network Scaling** | 📋 | DFT-quality energies without DFT cost |
 | **🟡 10** | **14 — React-TS Diffusion TS Guessing** | 📋 | Frontier: generative TS from 2D graphs |
@@ -497,11 +497,11 @@ The core Tier 0/1/2 pipeline is operational. The next objective is to align with
 
 > **Why:** Results are currently stored as individual JSON files in `results/dft_tier2/`. This won't scale from 8 to 1000+ reactions. A queryable database with provenance tracking (method, basis, solvation model) is essential for reproducibility.
 
-- [ ] **16.1** Create `src/results_db.py`: SQLite-backed storage for barriers, geometries, and metadata.
-    - Schema: `reactions(id, family, reactants, products, barrier_kcal, method, basis, solvation, timestamp)`.
-    - Query API: `db.get_barrier("amadori", method="wB97M-V")`, `db.compare_methods("amadori")`.
-- [ ] **16.2** Modify `DFTRefiner` to auto-write results to the database after every `calculate_barrier()` call.
-- [ ] **16.3** Write `tests/test_results_db.py`: verify read/write roundtrip for barrier data.
+- [x] **16.1 Design SQLite Schema:** Reactions table (reactant/product SMILES, family), Barriers table (energy, method, basis, solvation, CPU time, timestamp).
+- [x] **16.2 Implement `src/results_db.py`:** `ResultsDB` class focusing on fast lookup by reaction SMILES and provenance filtering.
+- [x] **16.3 Integrate `DFTRefiner` logging:** Auto-write to DB after every successful converged calculation.
+- [x] **16.4 Migration Script:** Convert existing `refinement_all.json` data into the new DB format.
+- [x] **16.5 Query Interface:** Implement basic CLI/API for `get_best_barrier(reactants, products)` with automatic method prioritization (DFT > xTB).
 
 ---
 

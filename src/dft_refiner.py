@@ -39,12 +39,22 @@ class DFTResult:
 class DFTRefiner:
     """Wrapper for running the tiered DFT composite workflow."""
     
-    def __init__(self, solvent_name: str = 'water', temp_k: float = 423.15, use_explicit_solvent: bool = False, n_water: int = 3, geometry_backend: str = 'pyscf'):
+    def __init__(self, solvent_name: str = 'water', temp_k: float = 423.15, 
+                 use_explicit_solvent: bool = False, n_water: int = 3, 
+                 geometry_backend: str = 'pyscf', db_path: Optional[str] = None):
         self.solvent_name = solvent_name
         self.temp_k = temp_k # Default 150 C
         self.use_explicit_solvent = use_explicit_solvent
         self.n_water = n_water
         self.geometry_backend = geometry_backend.lower()
+        self.db_path = db_path
+        
+        # Phase 16: Initialize Results Database
+        if self.db_path:
+            from .results_db import ResultsDB
+            self.db = ResultsDB(db_path=self.db_path)
+        else:
+            self.db = None
         
         # Phase 9: Initialize Solvation Engine with CREST/QCG discovery
         self.solvation_engine = SolvationEngine()
@@ -380,10 +390,14 @@ class DFTRefiner:
         energy = self.single_point(optimized_xyz, xc_method=self.verif_method, basis=self.verif_basis, charge=charge, spin=spin)
         return energy
 
-    def calculate_barrier(self, reactant_xyz: str, ts_xyz: str, charge: int = 0, run_irc: bool = False) -> float:
+    def calculate_barrier(self, reactant_xyz: str, ts_xyz: str, charge: int = 0, 
+                          run_irc: bool = False, reaction_meta: Optional[Dict] = None) -> float:
         """
         End-to-end composite calculation of a kinetic barrier in kcal/mol.
         If run_irc=True, performs Phase 3.4 IRC validation.
+        
+        Args:
+            reaction_meta: Optional dict with 'reactants', 'products' (SMILES lists) and 'family'.
         """
         # 1. Optimize Reactant
         print(">>> [Phase 3.3] Starting Reactant Optimization...")
@@ -403,4 +417,19 @@ class DFTRefiner:
             
         # 4. Delta G‡
         delta_g_h = res_ts.quasi_harmonic_gibbs_hartree - res_r.quasi_harmonic_gibbs_hartree
-        return delta_g_h * 627.509
+        barrier_kcal = delta_g_h * 627.509
+        
+        # 5. Log to DB if available
+        if self.db and reaction_meta:
+            self.db.add_barrier(
+                reactants=reaction_meta.get('reactants', []),
+                products=reaction_meta.get('products', []),
+                family=reaction_meta.get('family', 'unknown'),
+                delta_g_kcal=barrier_kcal,
+                method=res_ts.method,
+                basis=self.refinement_basis,
+                solvation=self.solvent_name,
+                converged=True
+            )
+            
+        return barrier_kcal
