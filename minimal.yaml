@@ -1,0 +1,34 @@
+cantera-version: 3.0.0
+phases:
+- kinetics: gas
+  name: gas
+  reactions: all
+  species:
+  - A
+  - B
+  thermo: ideal-gas
+reactions:
+- equation: A => B
+  rate-constant:
+    A: 10000000000000.0
+    Ea: 0.0
+    b: 0.0
+species:
+- composition:
+    H: 2
+  name: A
+  thermo:
+    cp0: 20.0
+    h0: 0.0
+    model: constant-cp
+    s0: 0.0
+    t0: 273.15
+- composition:
+    H: 2
+  name: B
+  thermo:
+    cp0: 20.0
+    h0: 0.0
+    model: constant-cp
+    s0: 0.0
+    t0: 273.15

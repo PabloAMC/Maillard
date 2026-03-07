@@ -54,6 +54,8 @@ Maillard requires RDKit and xTB for screening. We recommend using a dedicated en
 ```bash
 conda env create -f environment.yml
 conda activate maillard
+# Optional: Install Cantera for kinetics simulations
+conda install -c cantera cantera
 ```
 
 ### 2. Verify Scientific Dependencies
@@ -97,7 +99,19 @@ Generate the optimal precursor matrix to maximize a specific flavor profile.
 python scripts/run_pipeline.py --target meaty --minimize beany
 ```
 
-### 4. Advanced: Tier 2 DFT Refinement
+### 4. Kinetics: Concentration-vs-Time Profiles
+Run rigorous ODE-based microkinetic simulations to see how concentrations evolve.
+```bash
+python scripts/run_cantera_cli.py \
+    --sugars ribose \
+    --amino-acids cysteine:1.0 \
+    --temp 150 \
+    --time 600 \
+    --predict-sensory
+```
+*Use `--export mech.yaml` to save the Cantera mechanism for external use.*
+
+### 5. Advanced: Tier 2 DFT Refinement
 High-precision activation barriers using the `r2SCAN-3c // wB97M-V` composite protocol.
 
 > [!IMPORTANT]
@@ -168,7 +182,9 @@ Internal milestone reached: The core generative engine is fully atom-balanced an
 - [x] **Lipid synergy** (alkylthiazole formation) modeled.
 - [x] **Concentration sensitivity** (Boltzmann scoring) implemented.
 - [x] **Literature Validation Gate** passed (benchmarked against Ribose/Cys/Leu systems).
+- [x] **Phase 12 Complete**: Cantera microkinetic integration and CLI.
 - [ ] **Phase 3.3 (Ongoing)**: High-precision DFT refinement for rate-limiting bottlenecks.
+- [ ] **Phase 15 (Next)**: Temperature ramp modeling and realistic cooking profiles.
 
 ## ⚖️ License
 
