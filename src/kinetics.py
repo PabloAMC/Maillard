@@ -51,6 +51,54 @@ class KineticsEngine:
             
         return results
 
+    def simulate_network_cantera(self, mechanism_yaml: str, initial_concentrations: Dict[str, float], 
+                                 time_span: tuple, temperature_k: Optional[float] = None) -> Dict[str, np.ndarray]:
+        """
+        Phase 12: Rigorous ODE integration of a reaction network using Cantera.
+        
+        Args:
+            mechanism_yaml: Path to the Cantera YAML mechanism file.
+            initial_concentrations: Dict mapping species names to initial molarities.
+            time_span: Tuple (t_start, t_end) in seconds.
+            temperature_k: Temperature for the simulation (defaults to self.T).
+            
+        Returns:
+            Dict mapping species names to concentration arrays.
+        """
+        try:
+            import cantera as ct
+        except ImportError:
+            raise ImportError("Cantera is not installed. Please run 'pip install cantera'.")
+
+        T = temperature_k or self.T
+        
+        # 1. Load the mechanism
+        gas = ct.Solution(mechanism_yaml)
+        gas.TP = T, 101325  # Standard pressure
+        
+        # 2. Set initial state
+        # Cantera typically uses mass/mole fractions. For simplicity in Maillard 
+        # liquid phases, we approximate molarity as relative mole fractions if sum is small.
+        gas.X = initial_concentrations
+        
+        # 3. Create a batch reactor
+        r = ct.IdealGasConstPressureReactor(gas)
+        sim = ct.ReactorNet([r])
+        
+        # 4. Integrate
+        time_points = np.linspace(time_span[0], time_span[1], 100)
+        results = {name: [] for name in gas.species_names}
+        results["time"] = []
+        
+        for t in time_points:
+            sim.advance(t)
+            results["time"].append(t)
+            for i, name in enumerate(gas.species_names):
+                results[name].append(gas.concentrations[i])
+                
+        # Convert to numpy arrays
+        return {k: np.array(v) for k, v in results.items()}
+
 if __name__ == "__main__":
     # Quick sanity check for a 20 kcal/mol barrier at 150 C (423 K)
     engine = KineticsEngine(temperature_k=423.15)

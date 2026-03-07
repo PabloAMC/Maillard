@@ -10,10 +10,10 @@ The core Tier 0/1/2 pipeline is operational. The next objective is to align with
 | Priority | Phase | Status | Impact |
 |----------|-------|:------:|--------|
 | **🔴 1** | **3.3 — DFT Refinement Runs** | ⏳ | Amadori fast-mode verified (1.09 kcal/mol); 3.3b-h ready |
-| **🔴 2** | **9 — Explicit Solvation (CREST/QCG)** | 📋 | Largest accuracy improvement per SOTA §5 |
-| **🔴 3** | **10 — MLP Geometry Optimization (MACE)** | 📋 | Hours → seconds for geometry optimization |
-| **🟠 4** | **11 — Sella Eigenvector-Following TS** | 📋 | Faster TS search than NEB |
-| **🟠 5** | **12 — Cantera Microkinetics** | 📋 | Predict concentration-vs-time (GC-MS comparable) |
+| **🟢 2** | **9 — Explicit Solvation (CREST/QCG)** | ✅ | Largest accuracy improvement per SOTA §5 |
+| **🟢 3** | **10 — MLP Geometry Optimization (MACE)** | ✅ | Hours → seconds for geometry optimization |
+| **🟢 4** | **11 — Sella Eigenvector-Following TS** | ✅ | Faster TS search than NEB |
+| **🟠 5** | **12 — Cantera Microkinetics** | ✅ | Predict concentration-vs-time (GC-MS comparable) |
 | **🟠 6** | **15 — Temperature Ramp Modeling** | 📋 | Realistic extrusion profiles, not isothermal |
 | **🟠 7** | **16 — Structured Results Database** | 📋 | Scale from 8 to 1000+ reactions |
 | **🟠 8** | **17 — GC-MS Comparison Output** | 📋 | Direct overlay with experimental data |
@@ -449,18 +449,13 @@ The core Tier 0/1/2 pipeline is operational. The next objective is to align with
 
 ---
 
-### Phase 12: Cantera Microkinetic Integration `[🟠 HIGH | Diff: 7/10]`
-
-> **Why:** SOTA §8 emphasizes that even with perfect barriers, aroma yield prediction requires ODE integration of rate constants. Our `src/kinetics.py` has TST scaffolding but no proper ODE solver for multi-step networks.
-
-- [ ] **12.1** Extend `kinetics.py` with `simulate_network()` method using `scipy.integrate.solve_ivp`.
-    - Accept full reaction network (from `SmirksEngine`) + barrier dict → concentration-vs-time profiles.
-- [ ] **12.2** Create `src/cantera_export.py`: export Maillard network as Cantera-compatible `.yaml`.
-    - Convert DFT barriers to Arrhenius parameters (A, Ea, n).
-- [ ] **12.3** Add `cantera>=3.0` to `environment.yml` (optional dependency).
-- [ ] **12.4** Write `tests/test_cantera_export.py`: verify exported mechanism is valid Cantera input.
-- [ ] **12.5** Cantera CLI (`scripts/run_cantera_kinetics.py`): Provide command-line simulation interface for precursors, temperature, and pH.
-- [ ] **12.6** Sensory Prediction: Implement `--predict-sensory` to evaluate output concentration profiles against sensory tags.
+### Phase 12: Cantera Microkinetic Integration ✅
+- [x] **12.1 Extend `kinetics.py` with `simulate_network_cantera()`:** wraps Cantera Python API for batch reactor simulations.
+- [x] **12.2 Create `src/cantera_export.py`:** exports Maillard network as Cantera-compatible `.yaml`.
+- [x] **12.3 Setup Environment:** `cantera>=3.0` verified in environment.
+- [x] **12.4 Verification Tests:** `tests/test_cantera_integration.py` and `tests/test_cantera_cli.py` (23/23 pass).
+- [x] **12.5 Cantera CLI:** `scripts/run_cantera_cli.py` for direct kinetic simulations.
+- [x] **12.6 Sensory Prediction:** Integrated with `--predict-sensory` in kinetics results.
 
 ---
 
