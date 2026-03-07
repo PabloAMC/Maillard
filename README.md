@@ -97,6 +97,42 @@ Generate the optimal precursor matrix to maximize a specific flavor profile.
 python scripts/run_pipeline.py --target meaty --minimize beany
 ```
 
+### 4. Advanced: Tier 2 DFT Refinement
+High-precision activation barriers using the `r2SCAN-3c // wB97M-V` composite protocol.
+
+> [!IMPORTANT]
+> **Prerequisite:** You must generate the starting geometries and xTB transition state guesses before running the final DFT refinement.
+
+**Step A: Generate Atom-Mapped Geometries**
+This builds the initial 3D structures for both reactant and product for all 8 target reactions.
+```bash
+python scripts/generate_mapped_geometries.py
+```
+
+**Step B: Generate xTB Transition State Guess**
+Navigate to the reaction directory and run the path search.
+```bash
+cd data/geometries/xtb_inputs/strecker
+./run_xtb.sh  # Output: xtbpath_ts.xyz
+```
+
+**Step C: Run Tier 2 DFT Refinement**
+Execute the orchestration script to refine the xTB guess into a high-level DFT barrier.
+```bash
+# Return to root
+cd ../../../..
+python scripts/run_tier2_dft.py --reaction strecker
+
+# Use --fast for rapid testing (HF/STO-3G in Vacuum)
+python scripts/run_tier2_dft.py --reaction strecker --fast
+
+# Use --irc to perform automated Phase 3.4 validation (recommended)
+python scripts/run_tier2_dft.py --reaction strecker --irc
+```
+
+> [!TIP]
+> **Performance:** The refiner dynamically detects and utilizes all available CPU cores (via `os.cpu_count()`) to maximize throughput. On Apple M-series chips, this typically yields a 10x speedup by engaging all performance cores automatically.
+
 ---
 
 ## 📂 Output

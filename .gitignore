@@ -28,6 +28,12 @@ wbo
 xtbrestart
 charges
 energy
+*.xyz.bak
+xtbpath_*.xyz
+xtbpath.xyz
+xtbpath_ts.xyz
+xtb_connectivity.xyz
+gfnff_topo
 
 # macOS
 .DS_Store
