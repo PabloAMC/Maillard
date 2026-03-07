@@ -7,6 +7,7 @@ Converts DFT barriers (Delta G‡) into rate constants and temporal fluxes.
 
 import numpy as np
 from scipy.constants import kilo, calorie_th, Planck, Boltzmann, gas_constant
+from typing import Dict, List, Optional, Tuple
 
 class KineticsEngine:
     def __init__(self, temperature_k: float = 423.15):
@@ -17,15 +18,16 @@ class KineticsEngine:
         self.h = Planck
         self.R = gas_constant
 
-    def get_rate_constant(self, delta_g_kcal_mol: float) -> float:
+    def get_rate_constant(self, delta_g_kcal_mol: float, temperature_k: Optional[float] = None) -> float:
         """
         Calculate the first-order rate constant k using Eyring-Polanyi equation:
         k = (kB * T / h) * exp(-Delta G‡ / RT)
         """
+        T = temperature_k or self.T
         delta_g_j = delta_g_kcal_mol * self.kcal_to_j_per_mol
         
-        pre_exponential = (self.kb * self.T) / self.h
-        exponential = np.exp(-delta_g_j / (self.R * self.T))
+        pre_exponential = (self.kb * T) / self.h
+        exponential = np.exp(-delta_g_j / (self.R * T))
         
         return pre_exponential * exponential
 
@@ -52,15 +54,18 @@ class KineticsEngine:
         return results
 
     def simulate_network_cantera(self, mechanism_yaml: str, initial_concentrations: Dict[str, float], 
-                                 time_span: tuple, temperature_k: Optional[float] = None) -> Dict[str, np.ndarray]:
+                                 time_span: tuple, temperature_k: Optional[float] = None,
+                                 temperature_profile: Optional[List[Tuple[float, float]]] = None) -> Dict[str, np.ndarray]:
         """
-        Phase 12: Rigorous ODE integration of a reaction network using Cantera.
+        Phase 12/15: Rigorous ODE integration of a reaction network using Cantera.
+        Supports optional non-isothermal temperature profiles.
         
         Args:
             mechanism_yaml: Path to the Cantera YAML mechanism file.
             initial_concentrations: Dict mapping species names to initial molarities.
             time_span: Tuple (t_start, t_end) in seconds.
-            temperature_k: Temperature for the simulation (defaults to self.T).
+            temperature_k: Constant temperature (ignored if temperature_profile is provided).
+            temperature_profile: List of (time_sec, temp_k) points for interpolation.
             
         Returns:
             Dict mapping species names to concentration arrays.
@@ -70,34 +75,65 @@ class KineticsEngine:
         except ImportError:
             raise ImportError("Cantera is not installed. Please run 'pip install cantera'.")
 
-        T = temperature_k or self.T
-        
         # 1. Load the mechanism
         gas = ct.Solution(mechanism_yaml)
-        gas.TP = T, 101325  # Standard pressure
+        
+        # Initial T
+        if temperature_profile:
+            t_pts, t_vals = zip(*temperature_profile)
+            T_init = float(np.interp(time_span[0], t_pts, t_vals))
+        else:
+            T_init = temperature_k or self.T
+            
+        gas.TP = T_init, 101325  # Standard pressure
         
         # 2. Set initial state
-        # Cantera typically uses mass/mole fractions. For simplicity in Maillard 
-        # liquid phases, we approximate molarity as relative mole fractions if sum is small.
         gas.X = initial_concentrations
         
         # 3. Create a batch reactor
+        # We use an IdealGasReactor but we will manually update its temperature
+        # at each step to simulate a defined T(t) profile.
         r = ct.IdealGasConstPressureReactor(gas)
         sim = ct.ReactorNet([r])
         
         # 4. Integrate
-        time_points = np.linspace(time_span[0], time_span[1], 100)
+        n_points = 100
+        time_points = np.linspace(time_span[0], time_span[1], n_points)
         results = {name: [] for name in gas.species_names}
+        # Also store mole fractions for T/P invariant conversion math
+        for name in gas.species_names:
+            results[f"{name}_X"] = []
+            
         results["time"] = []
+        results["temperature"] = []
         
         for t in time_points:
+            # Update temperature if profile provided
+            if temperature_profile:
+                T_curr = float(np.interp(t, t_pts, t_vals))
+                gas.TP = T_curr, 101325
+                r.syncState() 
+            
             sim.advance(t)
+            
             results["time"].append(t)
+            results["temperature"].append(gas.T)
             for i, name in enumerate(gas.species_names):
                 results[name].append(gas.concentrations[i])
+                results[f"{name}_X"].append(gas.X[i])
                 
         # Convert to numpy arrays
         return {k: np.array(v) for k, v in results.items()}
+
+if __name__ == "__main__":
+    # Quick sanity check for a 20 kcal/mol barrier at 150 C (423 K)
+    engine = KineticsEngine(temperature_k=423.15)
+    k = engine.get_rate_constant(20.0)
+    print(f"Rate constant for 20 kcal/mol at 150C: {k:.2e} s^-1")
+    
+    # 50% conversion time (t1/2 = ln(2)/k)
+    t_half_min = (np.log(2) / k) / 60
+    print(f"Half-life: {t_half_min:.2f} minutes")
 
 if __name__ == "__main__":
     # Quick sanity check for a 20 kcal/mol barrier at 150 C (423 K)
