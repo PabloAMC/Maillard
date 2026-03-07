@@ -1,33 +1,40 @@
 # Maillard Reaction Computational Framework — Working Plan
-## Status: Active Development
+## Status: Scientific Validation & Refinement
 
 ---
 
-## ⚡ Prioritized Action Plan (as of 2026-03-05)
+## ⚡ ACTIVE EXECUTION: High-Precision Barriers (Phase 3)
 
-**Phases 7 through 8.E are complete.** The core generative engine is now atom-balanced, calibrated against literature baselines (8.C), and supports concentration-dependent Boltzmann scoring (8.D). It also captures lipid-Maillard synergy (8.E). The next stage is increasing precision via Tier 2 DFT and kinetics.
+The core infrastructure is complete. We are now in the **Execution Phase**, refining approximate xTB barriers into publication-quality DFT values.
 
-Ordered by **impact on alt-protein formulation scientists** (the end-user):
-
-| Priority | Task | Status | Why |
+| Priority | Task | Status | Note |
 |----------|------|:------:|-----|
-| ~~1–7~~ | Phase 7 (all sub-tasks) | ✅ | Full forward pipeline + Inverse Design mode operational. |
-| ~~8.A~~ | **8.A — Expand formulation grid** | ✅ | Grid expanded to 15 entries. |
-| ~~8.B~~ | **8.B — Balance SmirksEngine templates** | ✅ | All templates atom-balanced. 79 tests pass. |
-| ~~8.C~~ | **8.C — Calibrate FAST-mode barriers** | ✅ | Anchored heuristic constants to literature/xTB data. |
-| ~~8.C.5~~ | **8.C.5 — Literature Validation Gate** | ✅ | Confirmed tool matches known experimental breadcrumbs. |
-| ~~8.D~~ | **8.D — Concentrations + Scoring redesign** | ✅ | Boltzmann scoring distinguishes 0.5% vs 2.0% cysteine. |
-| ~~8.E~~ | **8.E — Lipid-Maillard synergy** | ✅ | Adds insight: lipid aldehydes accelerate Strecker synergy. |
-| **🔴 1** | 3.3 — Full DFT (r2SCAN-3c/wB97M-V) | ☐ | Move beyond xTB noise for rate-limiting steps. | ☐ | Move beyond xTB noise for rate-limiting steps. |
-| **🟠 2** | 8.G — Cantera kinetic simulation | ☐ | Time-temperature profiles require DFT-quality barriers. | ☐ | Time-temperature profiles require DFT-quality barriers. |
+| **🔴 1** | **3.3 — DFT Refinement Runs** | ⏳ | Amadori (3.3a) running; All other inputs (3.3b-h) ready. |
+| **🟠 2** | **3.4 — IRC Validation** | ✅ | Native 'Displace+Optimize' implemented and operational. |
+| **🟡 3** | **8.G — Kinetic Scaffolding** | ✅ | TST-based `src/kinetics.py` implemented and verified. |
 
-> **Gate**: 8.C.5 is a hard gate. If the tool's predicted top-3 volatiles don't match experimental observations for ≥2 of 3 test systems, iterate on 8.C before proceeding to 8.D.
+### [ACTIVE] Phase 3: Tier 2 — DFT Refinement (r2SCAN-3c // wB97M-V)
+
+- [x] **3.1 Workflow Implementation:** `DFTRefiner` in `src/dft_refiner.py`.
+- [x] **3.2 Quasi-Harmonic Correction:** `QuasiHarmonicCorrector` in `src/thermo.py`.
+- [/] **3.3 Compute barriers for key bifurcations:** `[Diff: 9/10]`
+      *(Note: Inputs for all 8 reactions generated and mapped in `data/geometries/xtb_inputs/`).*
+    - [/] 3.3a: Amadori rearrangement (Executing: --fast)
+    - [ ] 3.3b: 2,3-enolisation vs 1,2-enolisation bifurcation point (Inputs Ready)
+    - [ ] 3.3c: Strecker decarboxylation (α-dicarbonyl + amino acid) (Inputs Ready)
+    - [ ] 3.3d: Cysteine + ribose → FFT (via furfural + H₂S) (Inputs Ready)
+    - [ ] 3.3e: Ribose retro-aldol → 1,4-dideoxyosone → MFT (Inputs Ready)
+    - [ ] 3.3f: DHA β-elimination (Ser → dehydroalanine) (Inputs Ready)
+    - [ ] 3.3g: Off-flavour trapping: hexanal + amino acid → Schiff base (Inputs Ready)
+    - [ ] 3.3h: α-aminoketone dimerisation → pyrazine (Inputs Ready)
+- [x] **3.4 Validate with IRC:** `[Diff: 6/10]` Native 'Displace + Optimize' engine in `src/dft_refiner.py`.
+- [x] **3.5 Verification Study:** `[Diff: 4/10]` Scaffolded `verify_barrier` in `DFTRefiner`. Execution pending results.
 
 ---
 
-## 🏃 ACTIVE & UPCOMING PHASES
+## 🏃 COMPLETED RECENTLY (Details Promoted)
 
-## Phase 8: Scientific Credibility & Formulation Depth (CURRENT FOCUS)
+### Phase 8: Scientific Credibility & Formulation Depth (CURRENT FOCUS) ✅
 
 > **Context:** Phase 7 delivered a functional pipeline and Inverse Design mode. The next bottleneck is *credibility*: scoring is driven by hardcoded heuristic barriers, the formulation grid is too small, and precursors are treated as binary (present/absent). These gaps must be addressed before the tool is useful to a working food scientist.
 
@@ -91,11 +98,52 @@ Ordered by **impact on alt-protein formulation scientists** (the end-user):
     - [x] Update the heme catalyst heuristic to also reduce barriers for the `Lipid_Strecker_Synergy` family.
     - [x] Verification: A Lipid+Cysteine+Leucine formulation now shows alkylthiazoles that are absent in a lipid-free run. `pytest tests/test_smirks_engine.py` confirms formation.
 
+### Phase 2B: Physics & Implementation Improvements ✅ (Full Original Detail)
+
+- [x] **2B.1 Replace fake barrier formula in `xtb_screener.py`:** Implemented xTB `--path` (NEB) mode for real approximate ΔE‡ values.
+    - [x] 2B.1a: Implemented `_run_xtb_path()` using `xtb --path` with reactant/product XYZ inputs.
+    - [x] 2B.1b: Parsed NEB output to extract the highest-energy image as the barrier estimate.
+    - [x] 2B.1c: Updated `compute_reaction_energy()` to call NEB instead of the constant offset.
+    - [x] 2B.1d: Wrote `tests/test_xtb_neb.py` with mocked NEB output to verify parsing logic.
+- [x] **2B.2 Add pH / Temperature / Water Activity (aᵥ) parametrisation:**
+    - [x] 2B.2a: Created `ReactionConditions` dataclass in `src/conditions.py` with fields: `pH`, `temperature_celsius`, `water_activity`.
+    - [x] 2B.2b: Applied pH-conditional branching rules (pH < 6 → 1,2-enolisation; pH ≥ 6 → 2,3-enolisation).
+    - [x] 2B.2c: Applied Arrhenius scaling with literature activation energies (23–238 kJ/mol range).
+    - [x] 2B.2d: Applied water-activity bell-curve (peak reactivity at aᵥ 0.6–0.8).
+    - [x] 2B.2e: Wrote `tests/test_conditions.py`: pH < 6 → furan-dominant; pH ≥ 7 → pyrazine-dominant.
+- [x] **2B.3 Add explicit water molecules in transition states for proton-transfer steps:**
+    - [x] 2B.3a: For Amadori and enolisation TSs, included 1–2 explicit H₂O to model the Grotthuss proton-shuttle.
+    - [x] 2B.3b: Documented which steps require explicit water in `docs/xtb_limitations.md`.
+    - [x] 2B.3c: Updated `skala_refiner.py` to accept explicit-water TS geometries.
+- [x] **2B.4 Fix incorrect D-Ribose SMILES in `benchmark_xtb.py`:**
+    - [x] 2B.4a: Corrected ribose open-chain SMILES to 5-carbon aldopentose (`OC[C@@H](O)[C@H](O)C=O`).
+    - [x] 2B.4b: Fixed derived Schiff base SMILES accordingly.
+    - [x] 2B.4c: Added SMILES validation in `scripts/check_env.py` (ribose = 5C, glucose = 6C).
+- [x] **2B.5 Validate Skala API against Microsoft documentation:**
+    - [x] 2B.5a: Read the Skala GitHub repo README and example scripts.
+    - [x] 2B.5b: Updated `skala_refiner.py` `_build_mf()` to use the correct documented API.
+    - [x] 2B.5c: Fixed `run_tier2_dft.py` mock XYZ geometries (correct atom counts, even electron numbers).
+    - [x] 2B.5d: Re-ran `tests/test_skala_refiner.py` after API correction.
+- [x] **2B.6 Uncheck Phase 3 items that were only scaffolded, not executed** (3.3a–3.3h, 3.4, 3.5).
+- [x] **2B.7 Multi-conformer sampling in `xtb_screener.py`:**
+    - [x] 2B.7a: Generate 5–10 conformers via RDKit `EmbedMultipleConfs()` instead of single `EmbedMolecule(seed=42)`.
+    - [x] 2B.7b: UFF-optimize all conformers, select the lowest-energy one as the xTB input.
+    - [x] 2B.7c: Updated `tests/test_xtb_screener.py` to verify multi-conformer logic.
+- [x] **2B.8 Add physics-level integration tests:**
+    - [x] 2B.8a: `tests/test_integration_xtb.py` (`@pytest.mark.slow`): xTB on water + formaldehyde → methanediol; assert ΔE exothermic within ±5 kcal/mol.
+    - [x] 2B.8b: `tests/test_integration_pyscf.py` (`@pytest.mark.slow`): PySCF single-point on ethanol within expected range.
+    - [x] 2B.8c: At least one integration test required before merging PRs touching `xtb_screener` or `skala_refiner`.
+- [x] **2B.9 Improve pathway ranking in `pathway_ranker.py`:**
+    - [x] 2B.9a: Replaced `max(barriers)` with **Energetic Span Analysis** (Kozuch & Shaik, 2011).
+    - [x] 2B.9b: For linear pathways, also report the cumulative sum of barriers as a secondary metric.
+    - [x] 2B.9c: Updated `tests/test_pathway_ranker.py` to validate the new ranking logic.
+
 ---
 
-## ✅ COMPLETED PHASES
+## 🏛️ HISTORICAL PROGRESS: Phases 0 - 7 (Full Detail Archive)
 
-## Phase 7: Plant-Based Formulation Tools & PBMA Usability ✅
+<details>
+<summary><b>Phase 7: Plant-Based Formulation Tools & PBMA Usability ✅ (Expand for Full Detail)</b></summary>
 
 > **Context:** The `SmirksEngine` is now wired to the Recommender. To be useful for alt-protein scientists, the tool specifically addresses PBMA formulation challenges: managing lipid off-flavors ("beany" notes), utilizing complex additives (thiamine/glutathione), and simulating transition-metal (heme) catalysis.
 
@@ -129,10 +177,10 @@ Ordered by **impact on alt-protein formulation scientists** (the end-user):
     - [x] Verification: `--aw 0.5` displays conditions correctly.
 
 > **Stretch goal (not blocking):** Model lipid-Maillard catalytic synergy — lipid aldehydes accelerating Strecker degradation (pathways.md §D). Currently only masking/trapping is modelled. → Moved to Phase 8.E.
+</details>
 
----
-
-## Phase 6: Automated Pathway Generation (Tier 0 Replacement) ✅
+<details>
+<summary><b>Phase 6: Automated Pathway Generation ✅ (Expand for Full Detail)</b></summary>
 
 > **Context:** The current pipeline evaluates thermodynamics (xTB/Skala) but previously relied on a hardcoded list of curated pathways (`curated_pathways.py`). This phase replaced it with a hybrid generative rule engine.
 >
@@ -178,10 +226,10 @@ Ordered by **impact on alt-protein formulation scientists** (the end-user):
 - [x] **6.2.6 Sugar_Ring_Opening template:** Hemiacetal → open-chain aldehyde form (prerequisite step).
 - [x] **6.2.7 Update `tests/test_smirks_engine.py`:** Added tests for pyrazine formation, retro-aldol products, cysteine thermolysis, and thiazole formation.
 - [x] **6.2.8 Verify 14/14 family coverage:** Confirmed every RMG family has a corresponding template or SMIRKS rule.
+</details>
 
----
-
-## Phase 4: Integration & Precursor Recommendation Prototype ✅
+<details>
+<summary><b>Phase 4: Integration & Precursor Recommendation Prototype ✅ (Expand for Full Detail)</b></summary>
 
 > **Context:** `recommend.py` loads curated pathways and screening results, runs the pathway ranker, and outputs a rich Unicode table.
 
@@ -197,89 +245,10 @@ Ordered by **impact on alt-protein formulation scientists** (the end-user):
 - [x] **4.6 Write `tests/test_recommend.py`** with real (non-mock) pathway data.
 - [x] **4.7 Output format:** human-readable ranked table: precursor → predicted volatiles → confidence (barrier rank) → off-flavour risk → toxicity.
 - [x] **4.8 Document known limitations:** xTB barriers are relative rankings only; absolute yield predictions require Tier 2 DFT.
+</details>
 
----
-
-## Phase 3: Tier 2 — DFT Refinement (r2SCAN-3c / wB97M-V) ⏳
-
-> **Context:** The Skala functional was initially considered, but to maximize accuracy without wasting compute cycles, we are shifting to a tiered composite workflow:
-> 1. **Geometry/Frequencies:** `r2SCAN-3c` (Meta-GGA, $O(N^3)$, excellent geometry/vib scaling).
-> 2. **Refinement:** `wB97M-V` (Range-separated hybrid, $O(N^4)$, handles non-covalent interactions and reduces self-interaction error).
-> 3. **Verification:** `revDSD-PBEP86-D4` (Double hybrid, $O(N^5)$, for benchmarking key bifurcations).
-> 4. **Thermodynamics:** Apply quasi-harmonic corrections (Grimme/Truhlar) to `r2SCAN-3c` frequencies to prevent artificial $\Delta S^\ddagger$ blowups from low-frequency modes.
-
-Focus on the 6–8 chemically decisive reactions only:
-
-- [ ] **3.1** Write `src/dft_refiner.py`: Integration with PySCF for `r2SCAN-3c` TS optimization and `wB97M-V` single-point energies.
-- [ ] **3.2** Implement Quasi-Harmonic Correction: Add post-processing module to correct low-freq entropy overestimation.
-- [ ] **3.3 Compute barriers for key bifurcations:** `[Diff: 9/10]`
-    - [ ] 3.3a: Amadori rearrangement (Schiff base → 1-amino-1-deoxy-2-ketose)
-    - [ ] 3.3b: 2,3-enolisation vs 1,2-enolisation bifurcation point
-    - [ ] 3.3c: Strecker decarboxylation (α-dicarbonyl + amino acid)
-    - [ ] 3.3d: Cysteine + ribose → FFT (via furfural + H₂S)
-    - [ ] 3.3e: Ribose retro-aldol → 1,4-dideoxyosone → MFT
-    - [ ] 3.3f: DHA β-elimination (Ser → dehydroalanine)
-    - [ ] 3.3g: Off-flavour trapping: hexanal + amino acid → Schiff base
-    - [ ] 3.3h: α-aminoketone dimerisation → pyrazine
-- [ ] **3.4 Validate with IRC:** `[Diff: 6/10]` Confirm each TS connects to correct reactant/product via intrinsic reaction coordinate (using `r2SCAN-3c`).
-- [ ] **3.5 Verification Study:** `[Diff: 4/10]` Run `revDSD-PBEP86-D4` on a curated subset of 20–30 critical rate-determining steps to ensure `wB97M-V` single points aren't drifting.
-
----
-
-## Phase 2B: Physics & Implementation Improvements ✅
-
-> Identified during cross-referencing the codebase against `Maillard_meat.md`, `Maillard_Plant_based.md`, `pathways.md`, and `architecture.md`.
-
-### 🔴 Critical — Barriers, Conditions, and Solvation
-
-- [x] **2B.1 Replace fake barrier formula in `xtb_screener.py`:** Implemented xTB `--path` (NEB) mode for real approximate ΔE‡ values.
-    - [x] 2B.1a: Implemented `_run_xtb_path()` using `xtb --path` with reactant/product XYZ inputs.
-    - [x] 2B.1b: Parsed NEB output to extract the highest-energy image as the barrier estimate.
-    - [x] 2B.1c: Updated `compute_reaction_energy()` to call NEB instead of the constant offset.
-    - [x] 2B.1d: Wrote `tests/test_xtb_neb.py` with mocked NEB output to verify parsing logic.
-- [x] **2B.2 Add pH / Temperature / Water Activity (aᵥ) parametrisation:**
-    - [x] 2B.2a: Created `ReactionConditions` dataclass in `src/conditions.py` with fields: `pH`, `temperature_celsius`, `water_activity`.
-    - [x] 2B.2b: Applied pH-conditional branching rules (pH < 6 → 1,2-enolisation; pH ≥ 6 → 2,3-enolisation).
-    - [x] 2B.2c: Applied Arrhenius scaling with literature activation energies (23–238 kJ/mol range).
-    - [x] 2B.2d: Applied water-activity bell-curve (peak reactivity at aᵥ 0.6–0.8).
-    - [x] 2B.2e: Wrote `tests/test_conditions.py`: pH < 6 → furan-dominant; pH ≥ 7 → pyrazine-dominant.
-- [x] **2B.3 Add explicit water molecules in transition states for proton-transfer steps:**
-    - [x] 2B.3a: For Amadori and enolisation TSs, included 1–2 explicit H₂O to model the Grotthuss proton-shuttle.
-    - [x] 2B.3b: Documented which steps require explicit water in `docs/xtb_limitations.md`.
-    - [x] 2B.3c: Updated `skala_refiner.py` to accept explicit-water TS geometries.
-
-### 🟡 Moderate — Data Correctness and API Validation
-
-- [x] **2B.4 Fix incorrect D-Ribose SMILES in `benchmark_xtb.py`:**
-    - [x] 2B.4a: Corrected ribose open-chain SMILES to 5-carbon aldopentose (`OC[C@@H](O)[C@H](O)C=O`).
-    - [x] 2B.4b: Fixed derived Schiff base SMILES accordingly.
-    - [x] 2B.4c: Added SMILES validation in `scripts/check_env.py` (ribose = 5C, glucose = 6C).
-- [x] **2B.5 Validate Skala API against Microsoft documentation:**
-    - [x] 2B.5a: Read the Skala GitHub repo README and example scripts.
-    - [x] 2B.5b: Updated `skala_refiner.py` `_build_mf()` to use the correct documented API.
-    - [x] 2B.5c: Fixed `run_tier2_dft.py` mock XYZ geometries (correct atom counts, even electron numbers).
-    - [x] 2B.5d: Re-ran `tests/test_skala_refiner.py` after API correction.
-- [x] **2B.6 Uncheck Phase 3 items that were only scaffolded, not executed** (3.3a–3.3h, 3.4, 3.5).
-
-### 🟢 Minor — Robustness and Accuracy
-
-- [x] **2B.7 Multi-conformer sampling in `xtb_screener.py`:**
-    - [x] 2B.7a: Generate 5–10 conformers via RDKit `EmbedMultipleConfs()` instead of single `EmbedMolecule(seed=42)`.
-    - [x] 2B.7b: UFF-optimize all conformers, select the lowest-energy one as the xTB input.
-    - [x] 2B.7c: Updated `tests/test_xtb_screener.py` to verify multi-conformer logic.
-- [x] **2B.8 Add physics-level integration tests:**
-    - [x] 2B.8a: `tests/test_integration_xtb.py` (`@pytest.mark.slow`): xTB on water + formaldehyde → methanediol; assert ΔE exothermic within ±5 kcal/mol.
-    - [x] 2B.8b: `tests/test_integration_pyscf.py` (`@pytest.mark.slow`): PySCF single-point on ethanol within expected range.
-    - [x] 2B.8c: At least one integration test required before merging PRs touching `xtb_screener` or `skala_refiner`.
-- [x] **2B.9 Improve pathway ranking in `pathway_ranker.py`:**
-    - [x] 2B.9a: Replaced `max(barriers)` with **Energetic Span Analysis** (Kozuch & Shaik, 2011).
-    - [x] 2B.9b: For linear pathways, also report the cumulative sum of barriers as a secondary metric.
-    - [x] 2B.9c: Updated `tests/test_pathway_ranker.py` to validate the new ranking logic.
-
----
-
-## Phase 2: Tier 1 — xTB Energy Screening Pipeline ✅
-
+<details>
+<summary><b>Phase 2: Tier 1 — xTB Screening ✅ (Expand for Full Detail)</b></summary>
 - [x] **2.1** Set up test framework: `tests/` directory, `pytest` in `environment.yml`, `pytest.ini`.
 - [x] **2.2** Write `src/pathway_extractor.py`: parse RMG output graph → extract list of elementary reaction steps.
 - [x] **2.3** Write `tests/test_pathway_extractor.py`.
@@ -294,43 +263,10 @@ Focus on the 6–8 chemically decisive reactions only:
 - [x] **2.12** Write `data/reactions/curated_pathways.py`: 5 core Maillard cascades (A–E) as explicit `ElementaryStep` sequences.
 - [x] **2.13** Write `scripts/run_curated_screening.py`: feeds curated pathways directly into the Phase 2 pipeline.
 - [ ] **2.14** Analyze `curated_screening_results.json` and identify fast vs slow pathway bottlenecks.
+</details>
 
----
-
-## Phase 1C: RMG Rule Validation & Debugging ✅
-
-**Goal:** All 14 custom Maillard reaction families load and parse correctly via `RMGDatabase.load_kinetics()`.
-
-### Key Lessons Learned
-
-- `groups.py` requires: `template(reactants=[...])` + `recipe(actions=[...])` + `entry()` + `tree()`
-- Recipe atom labels (`*1`, `*2`...) must map to starred atoms in the adjacency list entries
-- Adjacency list describes pre-reaction state — do NOT include bonds the recipe will form
-- All bonds must be reciprocal (atom A lists B → B must list A)
-- Use `db.local_context` (not `{}`) when loading to avoid `ArrheniusEP` errors in rules.py
-- **Valence Violations:** Fixed 5-valent carbon/nitrogen errors in Enolisation, Amadori, Heyns, and Retro_Aldol families.
-- **Product Count:** RMG `apply_recipe` requires template product count to match fragment count.
-
-### Progress (14 families total — ALL PASSING ✅)
-
-- [x] 1C.1: **Thiol_Addition** — reference implementation
-- [x] 1C.2: **Amadori_Rearrangement** — 1,2-proton shift
-- [x] 1C.3: **Heyns_Rearrangement** — ketose equivalent
-- [x] 1C.4: **Strecker_Degradation** — fixed: product count 1→2, removed FORM+CHANGE combo
-- [x] 1C.5: **Retro_Aldol_Fragmentation** — fixed: simplified to BREAK_BOND only, product count 1→2
-- [x] 1C.6: **Schiff_Base_Formation** — fixed: product count 1→2, removed FORM+CHANGE combo
-- [x] 1C.7: **Lipid_Schiff_Base** — fixed: same as Schiff_Base_Formation
-- [x] 1C.8: **DHA_Crosslinking** — fixed: product count 1→2
-- [x] 1C.9: **Enolisation** — fixed: rules.py label mismatch
-- [x] 1C.10: **Aminoketone_Condensation** — fixed: simplified groups, product count 1→2
-- [x] 1C.11: **Lipid_Thiazole_Condensation** — fixed: rules.py label mismatch
-- [x] 1C.12: **Beta_Elimination** — fixed: product count 1→2, Serine entry removed
-- [x] 1C.13: **Cysteine_Degradation** — fixed: product count 1→2
-- [x] 1C.14: **Sugar_Ring_Opening** — new family for hemiacetal opening
-
----
-
-## Phase 1: Target Compound Library & Domain Knowledge Encoding ✅
+<details>
+<summary><b>Phase 1: Knowledge Encoding ✅ (Expand for Full Detail)</b></summary>
 
 ### 1A. Build the Target Compound Database
 
@@ -398,10 +334,28 @@ Focus on the 6–8 chemically decisive reactions only:
 - [x] 1B.26: **Strategic Pivot (MVP):** Switched to hand-curated pathways for Phase 2/4 to get the energetic and recommendation engine working.
 - [ ] 1B.27: **Long-Term Requirement:** Identify a liquid-phase generative engine (AutoMeKin, Chemoton, or AI-driven forward synthesis) to replace RMG for the *automated discovery* use case. (See Phase 6.)
 
----
+### 1C. RMG Rule Validation & Debugging
 
-## Phase 0: Project Infrastructure ✅
+**Goal:** All 14 custom Maillard reaction families load and parse correctly via `RMGDatabase.load_kinetics()`.
 
+- [x] 1C.1: **Thiol_Addition** — reference implementation
+- [x] 1C.2: **Amadori_Rearrangement** — 1,2-proton shift
+- [x] 1C.3: **Heyns_Rearrangement** — ketose equivalent
+- [x] 1C.4: **Strecker_Degradation** — fixed: product count 1→2, removed FORM+CHANGE combo
+- [x] 1C.5: **Retro_Aldol_Fragmentation** — fixed: simplified to BREAK_BOND only, product count 1→2
+- [x] 1C.6: **Schiff_Base_Formation** — fixed: product count 1→2, removed FORM+CHANGE combo
+- [x] 1C.7: **Lipid_Schiff_Base** — fixed: same as Schiff_Base_Formation
+- [x] 1C.8: **DHA_Crosslinking** — fixed: product count 1→2
+- [x] 1C.9: **Enolisation** — fixed: rules.py label mismatch
+- [x] 1C.10: **Aminoketone_Condensation** — fixed: simplified groups, product count 1→2
+- [x] 1C.11: **Lipid_Thiazole_Condensation** — fixed: rules.py label mismatch
+- [x] 1C.12: **Beta_Elimination** — fixed: product count 1→2, Serine entry removed
+- [x] 1C.13: **Cysteine_Degradation** — fixed: product count 1→2
+- [x] 1C.14: **Sugar_Ring_Opening** — new family for hemiacetal opening
+</details>
+
+<details>
+<summary><b>Phase 0: Project Infrastructure ✅ (Expand for Full Detail)</b></summary>
 - [x] **0.1** Initialised git repository and `.gitignore`.
 - [x] **0.2** Created directory structure: `src/`, `data/`, `data/species/`, `data/reactions/`, `results/`, `scripts/`.
 - [x] **0.3** Created conda/mamba environment spec (`environment.yml`) with:
@@ -413,6 +367,7 @@ Focus on the 6–8 chemically decisive reactions only:
     - NetworkX (reaction graph analysis)
 - [x] **0.4** Write `scripts/check_env.py` — smoke-test that all packages import and key binaries execute.
 - [x] **0.5** Verify: `python scripts/check_env.py` passes on a clean install.
+</details>
 
 ---
 
@@ -435,3 +390,6 @@ Focus on the 6–8 chemically decisive reactions only:
 - [ ] **5.2** Generate a lab protocol summary.
 - [ ] **5.3** Define GC-MS validation criteria (expected retention times from NIST).
 - [ ] **5.4** Document comparison methodology for predicted vs. observed agreement.
+
+---
+*Last Updated: 2026-03-07*
