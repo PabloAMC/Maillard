@@ -41,3 +41,7 @@ dependencies:
 
     # Jupyter for analysis notebooks
     - jupyterlab>=4.0
+
+    # Phase 10: MLP-Accelerated Geometry Optimization
+    - torch>=2.0.0
+    - mace-torch>=0.3.3
