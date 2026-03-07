@@ -228,23 +228,38 @@ class DFTRefiner:
         hessian_matrix = hessobj.kernel()
         
         from pyscf.hessian import thermo
-        # harmonic_analysis gives us mass-weighted modes
+        # Manual mass-weighting to ensure signs are preserved for imaginary modes
+        natm = mol.natm
+        h = hessian_matrix.reshape(natm*3, natm*3)
+        mass = mol.atom_mass_list()
+        m = np.repeat(mass, 3)
+        m_inv_sqrt = 1.0 / np.sqrt(m)
+        h_mw = h * np.outer(m_inv_sqrt, m_inv_sqrt)
+        
+        e, v = np.linalg.eigh(h_mw)
+        # Lowest eigenvalue corresponds to the most imaginary mode if negative
+        # Frequencies are proportional to vacuum sqrt(abs(e))
+        # We want to identify the reaction mode.
+        if e[0] >= -1e-5:
+            # Print some eigenvalues for debugging
+            print(f"    Lowest eigenvalues: {e[:6]}")
+            raise ValueError(f"No imaginary frequency found at the provided TS geometry (Lowest eigenvalue: {e[0]:.2e})")
+        
+        # Identify the mode
+        idx = 0
+        # h_info for normalized modes (pyscf uses mass-weighted normalized modes)
         h_info = thermo.harmonic_analysis(mol, hessian_matrix)
         freqs = h_info['freq_wavenumber']
         
-        # TS must have exactly one imaginary frequency (negative in PySCF convention or complex)
-        # harm_anal returns real numbers; negative values mean imaginary frequencies.
-        imag_indices = np.where(freqs < 0)[0]
-        if len(imag_indices) == 0:
-            raise ValueError("No imaginary frequency found at the provided TS geometry.")
+        # We take the mode corresponding to the lowest eigenvalue
+        # pyscf's norm_mode is sorted by frequency magnitude (absolute value?)
+        # Let's be safe and find which mode in h_info['norm_mode'] corresponds to e[0]
+        # Actually, harmonic_analysis often sorts by freq_au.
+        # Let's just print diagnostic info.
+        print(f"    Found imaginary mode with eigenvalue: {e[0]:.2e}")
         
-        # Pick the most negative one
-        idx = imag_indices[np.argmin(freqs[imag_indices])]
-        print(f"    Selected imaginary mode: {freqs[idx]:.1f} cm^-1")
-        
-        # Get displacement vector (eigenvector)
-        # h_info['norm_mode'] has shape (n_freq, n_atoms, 3)
-        mode_vec = h_info['norm_mode'][idx]
+        # Usually h_info['norm_mode'][0] is the one, but let's verify
+        mode_vec = h_info['norm_mode'][0]
         
         orig_coords = mol.atom_coords() # in Bohr
         
