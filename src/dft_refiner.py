@@ -39,14 +39,26 @@ class DFTResult:
 class DFTRefiner:
     """Wrapper for running the tiered DFT composite workflow."""
     
-    def __init__(self, solvent_name: str = 'water', temp_k: float = 423.15, use_explicit_solvent: bool = False, n_water: int = 3):
+    def __init__(self, solvent_name: str = 'water', temp_k: float = 423.15, use_explicit_solvent: bool = False, n_water: int = 3, geometry_backend: str = 'pyscf'):
         self.solvent_name = solvent_name
         self.temp_k = temp_k # Default 150 C
         self.use_explicit_solvent = use_explicit_solvent
         self.n_water = n_water
+        self.geometry_backend = geometry_backend.lower()
         
         # Phase 9: Initialize Solvation Engine with CREST/QCG discovery
         self.solvation_engine = SolvationEngine()
+        
+        # Phase 10: Initialize MLPOptimizer if requested
+        if self.geometry_backend == 'mace':
+            try:
+                from .mlp_optimizer import MLPOptimizer
+                self.mlp_optimizer = MLPOptimizer()
+            except ImportError:
+                print("WARNING: ML properties requested but not available. Falling back to pyscf.")
+                self.geometry_backend = 'pyscf'
+        else:
+            self.mlp_optimizer = None
         
         # The tiered methods defined in the plan
         self.opt_method = 'r2SCAN'
@@ -184,44 +196,51 @@ class DFTRefiner:
                 freeze_core=is_ts
             )
             
-        mol = self._setup_mol(xyz_content, charge, spin, basis=self.opt_basis)
-        
-        # [PERFORMANCE] Run geometry optimization in VACUUM. 
-        # Resolving implicit solvent gradients is extremely slow in PySCF (ddCOSMO).
-        # Geometries in vacuum are sufficiently similar for Maillard transition states.
-        mf = self._build_mf(mol, xc_method=self.opt_method, use_solvent=False, conv_tol=1e-6)
-        
-        # Optimization
-        with tempfile.TemporaryDirectory() as td:
-            pwd = os.getcwd()
-            try:
-                os.chdir(td)
-                geome_kwargs = {'maxsteps': max_steps}
-                if is_ts:
-                    geome_kwargs['transition'] = True
-                    
-                # Stage 1: Relax solvent around the frozen core
-                if eff_use_explicit and is_ts:
-                    print("    Pre-relaxing solvent molecules around the frozen core...")
-                    with open("constraints.txt", "w") as f:
-                        f.write("$freeze\n")
-                        f.write(f"xyz 1-{n_atoms_solute}\n")
-                    
-                    # Stage 1: Relax waters (transition=False)
-                    pre_relax_kwargs = {'maxsteps': 50, 'constraints': "constraints.txt"}
-                    # We use kernel to get the convergence status even for pre-relaxation
-                    conv_pre, mol_relaxed = geometric_solver.kernel(mf, **pre_relax_kwargs)
-                    
-                    # For pre-relaxation, we proceed even if not fully converged (it's just a guess)
-                    # but we mark it as such.
-                    mol_opt = mol_relaxed
-                    conv = conv_pre
-                else:
-                    conv, mol_opt = geometric_solver.kernel(mf, **geome_kwargs)
-            finally:
-                os.chdir(pwd)
+        # Phase 10: Backend Selection for Geometry Optimization
+        if self.geometry_backend == 'mace':
+            print(f">>> [Phase 10] Running MACE geometric optimization (is_ts={is_ts})...")
+            # MACE bypasses PySCF/geomeTRIC entirely for structural relaxation
+            if is_ts:
+                opt_xyz = self.mlp_optimizer.optimize_ts(xyz_content, max_steps=max_steps)
+            else:
+                opt_xyz = self.mlp_optimizer.optimize_geometry(xyz_content, max_steps=max_steps)
                 
-        opt_xyz = mol_opt.tostring(format='xyz')
+            mol_opt = self._setup_mol(opt_xyz, charge, spin, basis=self.opt_basis)
+            conv = True # Assume converged if MLP didn't raise
+            
+        else:
+            # Original PySCF / geomeTRIC backend
+            mol = self._setup_mol(xyz_content, charge, spin, basis=self.opt_basis)
+            
+            # [PERFORMANCE] Run geometry optimization in VACUUM. 
+            # Resolving implicit solvent gradients is extremely slow in PySCF (ddCOSMO).
+            mf = self._build_mf(mol, xc_method=self.opt_method, use_solvent=False, conv_tol=1e-6)
+            
+            # Optimization
+            with tempfile.TemporaryDirectory() as td:
+                pwd = os.getcwd()
+                try:
+                    os.chdir(td)
+                    geome_kwargs = {'maxsteps': max_steps}
+                    if is_ts:
+                        geome_kwargs['transition'] = True
+                        
+                    if eff_use_explicit and is_ts:
+                        print("    Pre-relaxing solvent molecules around the frozen core...")
+                        with open("constraints.txt", "w") as f:
+                            f.write("$freeze\n")
+                            f.write(f"xyz 1-{n_atoms_solute}\n")
+                        
+                        pre_relax_kwargs = {'maxsteps': 50, 'constraints': "constraints.txt"}
+                        conv_pre, mol_relaxed = geometric_solver.kernel(mf, **pre_relax_kwargs)
+                        mol_opt = mol_relaxed
+                        conv = conv_pre
+                    else:
+                        conv, mol_opt = geometric_solver.kernel(mf, **geome_kwargs)
+                finally:
+                    os.chdir(pwd)
+                    
+            opt_xyz = mol_opt.tostring(format='xyz')
         
         # The geometric_solver returns the optimized molecule object.
         # It updates mol in-place as well. 
