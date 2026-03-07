@@ -439,13 +439,13 @@ The core Tier 0/1/2 pipeline is operational. The next objective is to align with
 
 > **Why:** SOTA §3 recommends Sella for direct saddle-point optimization. Instead of optimizing entire reaction paths (NEB), Sella walks directly toward the nearest saddle point, which is drastically faster when the initial xTB guess is good.
 
-- [ ] **11.1** Add `sella` to `environment.yml` and explicitly install it in the `.venv`.
-- [ ] **11.2** Create `src/ts_optimizer.py`: wrapper around `sella` Python package.
-    - `find_ts(atoms, calculator)` accepting ASE calculator (MACE or PySCF).
-- [ ] **11.3** Update `DFTRefiner.optimize_geometry()` to use `TSOptimizer` for TS searches when `is_ts=True`.
-- [ ] **11.4** Implement automatic fallback to `geomeTRIC` if Sella fails to converge.
-- [ ] **11.5** Write `tests/test_ts_optimizer.py`: verify saddle point found for H-transfer model system.
-- [ ] **11.6** Update `MLPOptimizer.optimize_ts()` to use Sella + MACE.
+- [x] **11.1** Add `sella` to `environment.yml` and explicitly install it in the `.venv`.
+- [x] **11.2** Create `src/ts_optimizer.py`: wrapper around `sella` Python package.
+    - [x] `find_ts(atoms, calculator)` accepting ASE calculator (MACE or PySCF).
+- [x] **11.3** Update `DFTRefiner.optimize_geometry()` to use `TSOptimizer` for TS searches when `is_ts=True`.
+- [x] **11.4** Implement automatic fallback to `geomeTRIC` if Sella fails to converge.
+- [x] **11.5** Write `tests/test_ts_optimizer.py`: verify saddle point found for H-transfer model system.
+- [x] **11.6** Update `MLPOptimizer.optimize_ts()` to use Sella + MACE.
 
 ---
 

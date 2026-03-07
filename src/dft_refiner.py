@@ -60,6 +60,13 @@ class DFTRefiner:
         else:
             self.mlp_optimizer = None
         
+        # Phase 11: Initialize TSOptimizer
+        try:
+            from .ts_optimizer import TSOptimizer
+            self.ts_optimizer = TSOptimizer()
+        except ImportError:
+            self.ts_optimizer = None
+        
         # The tiered methods defined in the plan
         self.opt_method = 'r2SCAN'
         self.opt_basis = 'def2-svp' # Close approximation to -3c base
@@ -211,36 +218,48 @@ class DFTRefiner:
         else:
             # Original PySCF / geomeTRIC backend
             mol = self._setup_mol(xyz_content, charge, spin, basis=self.opt_basis)
-            
-            # [PERFORMANCE] Run geometry optimization in VACUUM. 
-            # Resolving implicit solvent gradients is extremely slow in PySCF (ddCOSMO).
             mf = self._build_mf(mol, xc_method=self.opt_method, use_solvent=False, conv_tol=1e-6)
             
-            # Optimization
-            with tempfile.TemporaryDirectory() as td:
-                pwd = os.getcwd()
-                try:
-                    os.chdir(td)
-                    geome_kwargs = {'maxsteps': max_steps}
-                    if is_ts:
-                        geome_kwargs['transition'] = True
+            # Phase 11: Specialized TS search via Sella
+            if is_ts and self.ts_optimizer:
+                print(">>> [Phase 11] Running Sella eigenvector-following TS search...")
+                atoms = self.ts_optimizer.find_ts(mol.to_ase(), mf.as_ase())
+                if self.ts_optimizer.is_converged(atoms):
+                    opt_xyz = atoms.tostring(format='xyz')
+                    mol_opt = self._setup_mol(opt_xyz, charge, spin, basis=self.opt_basis)
+                    conv = True
+                else:
+                    print("    WARNING: Sella failed to converge. Falling back to geomeTRIC...")
+                    is_ts_fallback = True
+            else:
+                is_ts_fallback = is_ts
+
+            if not is_ts or (is_ts and not self.ts_optimizer) or (is_ts and not conv):
+                # Optimization via geomeTRIC (Standard or Fallback)
+                with tempfile.TemporaryDirectory() as td:
+                    pwd = os.getcwd()
+                    try:
+                        os.chdir(td)
+                        geome_kwargs = {'maxsteps': max_steps}
+                        if is_ts_fallback:
+                            geome_kwargs['transition'] = True
+                            
+                        if eff_use_explicit and is_ts_fallback:
+                            print("    Pre-relaxing solvent molecules around the frozen core...")
+                            with open("constraints.txt", "w") as f:
+                                f.write("$freeze\n")
+                                f.write(f"xyz 1-{n_atoms_solute}\n")
+                            
+                            pre_relax_kwargs = {'maxsteps': 50, 'constraints': "constraints.txt"}
+                            conv_pre, mol_relaxed = geometric_solver.kernel(mf, **pre_relax_kwargs)
+                            mol_opt = mol_relaxed
+                            conv = conv_pre
+                        else:
+                            conv, mol_opt = geometric_solver.kernel(mf, **geome_kwargs)
+                    finally:
+                        os.chdir(pwd)
                         
-                    if eff_use_explicit and is_ts:
-                        print("    Pre-relaxing solvent molecules around the frozen core...")
-                        with open("constraints.txt", "w") as f:
-                            f.write("$freeze\n")
-                            f.write(f"xyz 1-{n_atoms_solute}\n")
-                        
-                        pre_relax_kwargs = {'maxsteps': 50, 'constraints': "constraints.txt"}
-                        conv_pre, mol_relaxed = geometric_solver.kernel(mf, **pre_relax_kwargs)
-                        mol_opt = mol_relaxed
-                        conv = conv_pre
-                    else:
-                        conv, mol_opt = geometric_solver.kernel(mf, **geome_kwargs)
-                finally:
-                    os.chdir(pwd)
-                    
-            opt_xyz = mol_opt.tostring(format='xyz')
+                opt_xyz = mol_opt.tostring(format='xyz')
         
         # The geometric_solver returns the optimized molecule object.
         # It updates mol in-place as well. 
