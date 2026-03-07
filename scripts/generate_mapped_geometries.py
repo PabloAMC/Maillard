@@ -180,6 +180,10 @@ def main():
         "pyrazine": {
             "r": "CC(=O)CN.CC(=O)CN",          # 2x Aminoacetone
             "p": "CC1=NCC(C)=NC1.O.O"          # Dihydropyrazine + 2x Water (balanced)
+        },
+        "retro_aldol": {
+            "r": "OCC(O)C(O)C(O)C=O",          # Linear Ribose
+            "p": "OCC(O)C=O.OCC=O"             # Glyceraldehyde + Glycolaldehyde
         }
     }
 

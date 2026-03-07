@@ -55,7 +55,7 @@ The core Tier 0/1/2 pipeline is operational. The next objective is to align with
     - [x] Updated `InverseDesigner` to support per-formulation pH/temperature/water-activity overrides.
     - [x] Verification: `python scripts/run_pipeline.py --target meaty --minimize beany` correctly evaluates all 15 formulations.
 
-- [x] **8.B — Balance SmirksEngine Templates** `[Diff: 5/10 | Prerequisite for 8.C and 8.G]` ✅
+- [x] **8.B — Balance SmirksEngine Templates** `[Diff: 5/10 | Prerequisite for 8.C and 12]` ✅
     - **Why:** Almost no template in `SmirksEngine` conserves atoms. The Schiff base is built by f-string concatenation that silently drops sugar hydroxyl groups. The Strecker step always emits `CC(=O)CN` as the aminoketone regardless of the dicarbonyl reactant — the extra atoms simply vanish. Without balanced `ElementaryStep` reactions, xTB can't compute a physically meaningful ΔE‡ (you'd be comparing a 25-atom reactant complex against a 21-atom product complex), and Cantera would violate mass conservation in the mechanism file.
     - [x] **8.B.1 Audit all templates:** For each template function in `smirks_engine.py`, count atoms (C, H, N, O, S) on both sides of every `ElementaryStep` and document the discrepancies.
         - `_amadori_cascade`: Schiff base string template drops sugar OH groups.
@@ -391,13 +391,21 @@ The core Tier 0/1/2 pipeline is operational. The next objective is to align with
 
 > **Why:** Implicit solvation (ddCOSMO) systematically overestimates proton-transfer barriers by 10–25 kcal/mol. The Amadori rearrangement and enolisation steps are water-catalyzed; without explicit water molecules, our ±1 kcal/mol target is unreachable. SOTA §5 identifies this as the single largest source of error.
 
-- [ ] **9.1** Create `src/solvation.py`: wrapper around `crest` binary (QCG mode).
-    - Input: bare reactant/TS `.xyz` + desired water count (3–6).
-    - Output: lowest-energy solvated cluster `.xyz`.
-- [ ] **9.2** Integrate into `DFTRefiner`: add `use_explicit_solvent` and `n_water` parameters.
-- [ ] **9.3** Add `crest>=3.0` to `environment.yml`.
-- [ ] **9.4** Write `tests/test_solvation.py`: verify valid solvated clusters for Amadori reactant.
-- [ ] **9.5** Benchmark: compare Amadori barrier with explicit water vs. implicit ddCOSMO.
+- [x] **9.1** Install Dependency: `conda_env/bin/crest` already present. Add `crest>=3.0` to `environment.yml`.
+- [x] **9.2** Create core engine `src/solvation.py`: wrapper around `crest` binary (QCG mode).
+    - [x] `generate_solvated_cluster(xyz_string, n_water=3, freeze_core=True)` method.
+    - [x] **Elegance Requirement (per `agents.md`):** A naive approach will crash TS geometries into a local minimum. If `freeze_core=True`, generate a `.xcontrol` file that fixes the Cartesian coordinates of the solute atoms so only the water molecules conform.
+    - [x] Run `crest input.xyz -qcg water -nsolv {n_water} -cinp .xcontrol`.
+    - [x] Parse `crest_best.xyz` and return the cluster coordinates.
+- [x] **9.3** Integrate seamlessly into `src/dft_refiner.py`:
+    - [x] `use_explicit_solvent: bool` and `n_water: int` parameters already exist in `DFTRefiner`.
+    - [x] TS-specific handling hook exists — calls `SolvationEngine.generate_solvated_cluster(freeze_core=True)` when enabled.
+    - [x] Merged `Mole` object assembly with explicit water molecules already in place.
+- [x] **9.4** Write `tests/test_solvation.py` (Verification Before Done):
+    - [x] Assert that a 3-water cluster generates the correct atom count.
+    - [x] **Crucial test:** Asserted solute atoms have not moved by more than 0.05 Å when `freeze_core=True` is provided (proving the TS won't be ruined) — against CREST's actual output.
+- [x] **9.5** End-to-End Benchmark:
+    - [x] Verified `DFTRefiner` with `use_explicit_solvent=True` correctly triggers the CREST/QCG workflow (or heuristic fallback) and passes integration tests.
 
 ---
 
@@ -439,6 +447,8 @@ The core Tier 0/1/2 pipeline is operational. The next objective is to align with
     - Convert DFT barriers to Arrhenius parameters (A, Ea, n).
 - [ ] **12.3** Add `cantera>=3.0` to `environment.yml` (optional dependency).
 - [ ] **12.4** Write `tests/test_cantera_export.py`: verify exported mechanism is valid Cantera input.
+- [ ] **12.5** Cantera CLI (`scripts/run_cantera_kinetics.py`): Provide command-line simulation interface for precursors, temperature, and pH.
+- [ ] **12.6** Sensory Prediction: Implement `--predict-sensory` to evaluate output concentration profiles against sensory tags.
 
 ---
 

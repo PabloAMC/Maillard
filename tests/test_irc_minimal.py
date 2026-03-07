@@ -23,12 +23,13 @@ class TestIRC(unittest.TestCase):
         Actually, let's use water as a dummy 'TS' and expect it to fail 
         (no imaginary frequency) to test the error handling.
         """
-        water_xyz = "3\n\nO 0.0 0.0 0.0\nH 0.0 0.0 1.0\nH 0.0 1.0 0.0"
+        # Use a physically reasonable water molecule (near minimum)
+        water_xyz = "3\n\nO 0.000 0.000 0.117\nH 0.000 0.757 -0.469\nH 0.000 -0.757 -0.469"
         
         print("\nTesting IRC error handling (stable structure)...")
         with self.assertRaises(ValueError) as cm:
             self.refiner.generate_irc(water_xyz)
-        self.assertIn("No imaginary frequency found", str(cm.exception))
+        self.assertIn("No significant imaginary frequency found", str(cm.exception))
 
 if __name__ == "__main__":
     unittest.main()

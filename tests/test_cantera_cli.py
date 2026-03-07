@@ -1,5 +1,5 @@
 """
-Test suite for Phase 8.G — Cantera CLI Interface
+Test suite for Phase 12 — Cantera CLI Interface
 
 Tests command-line interface for kinetic simulation, output formatting,
 and sensory profile prediction driven by Cantera.
@@ -15,7 +15,7 @@ class TestCanteraCLITemperatureProfile:
 
     def test_cli_arg_temperature_ramp(self):
         """CLI: --temp-profile linear:20to150:30min."""
-        pytest.skip("Implementation pending for Phase 8.G CLI")
+        pytest.skip("Implementation pending for Phase 12 CLI")
         # import subprocess
         # cmd = [
         #     'python', 'scripts/run_cantera_kinetics.py',
@@ -36,7 +36,7 @@ class TestCanteraCLITemperatureProfile:
 
     def test_cli_arg_isothermal_constant_temp(self):
         """CLI: --temperature 150 for isothermal simulation."""
-        pytest.skip("Implementation pending for Phase 8.G CLI")
+        pytest.skip("Implementation pending for Phase 12 CLI")
         # cmd = [
         #     'python', 'scripts/run_cantera_kinetics.py',
         #     '--precursors', 'ribose:0.1,cysteine:0.1',
@@ -54,7 +54,7 @@ class TestCanteraCLIOutputFormat:
 
     def test_cli_arg_output_csv(self):
         """CLI: --output csv generates CSV file."""
-        pytest.skip("Implementation pending for Phase 8.G CLI")
+        pytest.skip("Implementation pending for Phase 12 CLI")
         # cmd = [
         #     'python', 'scripts/run_cantera_kinetics.py',
         #     '--precursors', 'ribose:0.1',
@@ -73,7 +73,7 @@ class TestCanteraCLIOutputFormat:
 
     def test_cli_arg_output_json(self):
         """CLI: --output json generates JSON file."""
-        pytest.skip("Implementation pending for Phase 8.G CLI")
+        pytest.skip("Implementation pending for Phase 12 CLI")
         # cmd = [
         #     'python', 'scripts/run_cantera_kinetics.py',
         #     '--precursors', 'ribose:0.1',
@@ -90,7 +90,7 @@ class TestCanteraCLIOutputFormat:
 
     def test_cli_multiple_output_formats(self):
         """CLI: --output csv --output json generates both."""
-        pytest.skip("Implementation pending for Phase 8.G CLI")
+        pytest.skip("Implementation pending for Phase 12 CLI")
         # cmd = [
         #     'python', 'scripts/run_cantera_kinetics.py',
         #     '--precursors', 'ribose:0.1,cysteine:0.1',
@@ -110,7 +110,7 @@ class TestCanteraCLISensoryPrediction:
 
     def test_cli_sensory_prediction(self):
         """CLI: --predict-sensory returns sensory profile rankings from Cantera output."""
-        pytest.skip("Implementation pending for Phase 8.G CLI")
+        pytest.skip("Implementation pending for Phase 12 CLI")
         # cmd = [
         #     'python', 'scripts/run_cantera_kinetics.py',
         #     '--precursors', 'ribose:0.1,cysteine:0.1',
@@ -134,7 +134,7 @@ class TestCanteraCLISensoryPrediction:
 
     def test_cli_sensory_ranking_output(self):
         """CLI sensory output shows human-readable rankings."""
-        pytest.skip("Implementation pending for Phase 8.G CLI")
+        pytest.skip("Implementation pending for Phase 12 CLI")
         # cmd = [
         #     'python', 'scripts/run_cantera_kinetics.py',
         #     '--precursors', 'ribose:0.1,cysteine:0.1',
@@ -154,7 +154,7 @@ class TestCanteraCLIPHArgument:
 
     def test_cli_arg_ph(self):
         """CLI: --pH 5.0 sets reaction pH."""
-        pytest.skip("Implementation pending for Phase 8.G CLI")
+        pytest.skip("Implementation pending for Phase 12 CLI")
         # cmd = [
         #     'python', 'scripts/run_cantera_kinetics.py',
         #     '--precursors', 'ribose:0.1,glucose:0.1',
@@ -168,7 +168,7 @@ class TestCanteraCLIPHArgument:
 
     def test_cli_arg_ph_low_produces_furans(self):
         """CLI: --pH 5.0 should produce more furans than --pH 7.0."""
-        pytest.skip("Implementation pending for Phase 8.G CLI")
+        pytest.skip("Implementation pending for Phase 12 CLI")
         # # Run at pH 5
         # subprocess.run([
         #     'python', 'scripts/run_cantera_kinetics.py',
@@ -207,7 +207,7 @@ class TestCanteraCLIValidation:
 
     def test_cli_invalid_precursor_name(self):
         """CLI should error on invalid precursor name."""
-        pytest.skip("Implementation pending for Phase 8.G CLI")
+        pytest.skip("Implementation pending for Phase 12 CLI")
         # cmd = [
         #     'python', 'scripts/run_cantera_kinetics.py',
         #     '--precursors', 'foobarone:0.1',
@@ -219,7 +219,7 @@ class TestCanteraCLIValidation:
 
     def test_cli_invalid_temperature_range(self):
         """CLI should error on physically unrealistic temperatures."""
-        pytest.skip("Implementation pending for Phase 8.G CLI")
+        pytest.skip("Implementation pending for Phase 12 CLI")
         # cmd = [
         #     'python', 'scripts/run_cantera_kinetics.py',
         #     '--precursors', 'ribose:0.1',
@@ -230,7 +230,7 @@ class TestCanteraCLIValidation:
 
     def test_cli_missing_required_args(self):
         """CLI should require --precursors argument."""
-        pytest.skip("Implementation pending for Phase 8.G CLI")
+        pytest.skip("Implementation pending for Phase 12 CLI")
         # cmd = [
         #     'python', 'scripts/run_cantera_kinetics.py',
         #     '--temperature', '150'
