@@ -87,11 +87,22 @@ class MLPOptimizer:
 
     def optimize_ts(self, xyz_string: str, fmax: float = 0.05, max_steps: int = 200) -> str:
         """
-        Placeholder for true Eigenvector Following saddle-point search (Sella - Phase 11).
-        
-        For Phase 10, this emits a warning and falls back to standard minimization
-        so that the algorithmic routing logic in DFTRefiner can be tested.
+        Perform a rigorous Eigenvector Following saddle-point search using Sella.
         """
-        print(">>> [MLPOptimizer] WARNING: Sella (Phase 11) is not yet integrated. "
-              "Falling back to standard BFGS minimization. THIS IS NOT A TRUE TS SEARCH.")
-        return self.optimize_geometry(xyz_string, fmax=fmax, max_steps=max_steps)
+        from .ts_optimizer import TSOptimizer
+        ts_opt = TSOptimizer(fmax=fmax, max_steps=max_steps)
+        
+        # 1. Convert to Atoms
+        with tempfile.NamedTemporaryFile('w', suffix='.xyz') as tmp_in:
+            tmp_in.write(xyz_string)
+            tmp_in.flush()
+            atoms = read(tmp_in.name, format='xyz')
+            
+        # 2. Run Sella + MACE
+        atoms = ts_opt.find_ts(atoms, self.calc)
+        
+        # 3. Convert back to XYZ
+        with tempfile.NamedTemporaryFile('w+', suffix='.xyz') as tmp_out:
+            write(tmp_out.name, atoms, format='xyz')
+            tmp_out.seek(0)
+            return tmp_out.read()
