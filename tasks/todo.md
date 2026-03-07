@@ -1,17 +1,26 @@
 # Maillard Reaction Computational Framework — Working Plan
-## Status: Scientific Validation & Refinement
+## Status: SOTA Alignment & Production Scaling
 
 ---
 
-## ⚡ ACTIVE EXECUTION: High-Precision Barriers (Phase 3)
+## ⚡ ACTIVE EXECUTION & SOTA ROADMAP
 
-The core infrastructure is complete. We are now in the **Execution Phase**, refining approximate xTB barriers into publication-quality DFT values.
+The core Tier 0/1/2 pipeline is operational. The next objective is to align with the [SOTA Architecture](../docs/SOTA_Maillard_Architecture.md) and make this the **best possible tool for alternative protein researchers**.
 
-| Priority | Task | Status | Note |
-|----------|------|:------:|-----|
-| **🔴 1** | **3.3 — DFT Refinement Runs** | ⏳ | Amadori (3.3a) running; All other inputs (3.3b-h) ready. |
-| **🟠 2** | **3.4 — IRC Validation** | ✅ | Native 'Displace+Optimize' implemented and operational. |
-| **🟡 3** | **8.G — Kinetic Scaffolding** | ✅ | TST-based `src/kinetics.py` implemented and verified. |
+| Priority | Phase | Status | Impact |
+|----------|-------|:------:|--------|
+| **🔴 1** | **3.3 — DFT Refinement Runs** | ⏳ | Amadori fast-mode verified (1.09 kcal/mol); 3.3b-h ready |
+| **🔴 2** | **9 — Explicit Solvation (CREST/QCG)** | 📋 | Largest accuracy improvement per SOTA §5 |
+| **🔴 3** | **10 — MLP Geometry Optimization (MACE)** | 📋 | Hours → seconds for geometry optimization |
+| **🟠 4** | **11 — Sella Eigenvector-Following TS** | 📋 | Faster TS search than NEB |
+| **🟠 5** | **12 — Cantera Microkinetics** | 📋 | Predict concentration-vs-time (GC-MS comparable) |
+| **🟠 6** | **15 — Temperature Ramp Modeling** | 📋 | Realistic extrusion profiles, not isothermal |
+| **🟠 7** | **16 — Structured Results Database** | 📋 | Scale from 8 to 1000+ reactions |
+| **🟠 8** | **17 — GC-MS Comparison Output** | 📋 | Direct overlay with experimental data |
+| **🟡 9** | **13 — Δ-ML Network Scaling** | 📋 | DFT-quality energies without DFT cost |
+| **🟡 10** | **14 — React-TS Diffusion TS Guessing** | 📋 | Frontier: generative TS from 2D graphs |
+| **🟡 11** | **18 — Regression Gate** | 📋 | Prevent accuracy degradation |
+| **🟡 12** | **19 — Web Dashboard** | 📋 | Lower adoption barrier for food scientists |
 
 ### [ACTIVE] Phase 3: Tier 2 — DFT Refinement (r2SCAN-3c // wB97M-V)
 
@@ -19,7 +28,7 @@ The core infrastructure is complete. We are now in the **Execution Phase**, refi
 - [x] **3.2 Quasi-Harmonic Correction:** `QuasiHarmonicCorrector` in `src/thermo.py`.
 - [/] **3.3 Compute barriers for key bifurcations:** `[Diff: 9/10]`
       *(Note: Inputs for all 8 reactions generated and mapped in `data/geometries/xtb_inputs/`).*
-    - [/] 3.3a: Amadori rearrangement (Executing: --fast)
+    - [x] 3.3a: Amadori rearrangement ✅ (Fast-mode verified: 1.09 kcal/mol)
     - [ ] 3.3b: 2,3-enolisation vs 1,2-enolisation bifurcation point (Inputs Ready)
     - [ ] 3.3c: Strecker decarboxylation (α-dicarbonyl + amino acid) (Inputs Ready)
     - [ ] 3.3d: Cysteine + ribose → FFT (via furfural + H₂S) (Inputs Ready)
@@ -371,20 +380,152 @@ The core infrastructure is complete. We are now in the **Execution Phase**, refi
 
 ---
 
-## ⏸️ DEFERRED PHASES
+## 🚀 SOTA-ALIGNED ROADMAP: Phases 9–19
 
-## Phase 8.F/8.G: Quantitative Kinetic Modeling (DEFERRED)
+> **Source:** [SOTA Maillard Architecture](../docs/SOTA_Maillard_Architecture.md) + beyond-SOTA usability analysis.
+> **Goal:** Make this the best possible tool for alternative protein researchers.
 
-> **Context:** Precise temporal yield predictions (e.g., "how much FFT at t=12m") require robust DFT barriers. This is scientifically valuable but deferred until the core categorical recommendation tool (Phase 7) is usable.
+---
 
-- [ ] **8.F Tier 2 DFT Refinement (from Phase 3.3):** Compute exact barriers using PySCF/Skala for rate-limiting steps. xTB barriers are too noisy for strict kinetic solvers.
-- [ ] **8.G Cantera Kinetic Simulation:**
-    - Write a Cantera YAML mechanism generator that converts DFT barriers to Arrhenius rate constants.
-    - Run microkinetic time-temperature profiles to plot concentration-vs-time curves for target volatiles.
+### Phase 9: Explicit Solvation Automation (CREST/QCG) `[🔴 CRITICAL | Diff: 7/10]`
+
+> **Why:** Implicit solvation (ddCOSMO) systematically overestimates proton-transfer barriers by 10–25 kcal/mol. The Amadori rearrangement and enolisation steps are water-catalyzed; without explicit water molecules, our ±1 kcal/mol target is unreachable. SOTA §5 identifies this as the single largest source of error.
+
+- [ ] **9.1** Create `src/solvation.py`: wrapper around `crest` binary (QCG mode).
+    - Input: bare reactant/TS `.xyz` + desired water count (3–6).
+    - Output: lowest-energy solvated cluster `.xyz`.
+- [ ] **9.2** Integrate into `DFTRefiner`: add `use_explicit_solvent` and `n_water` parameters.
+- [ ] **9.3** Add `crest>=3.0` to `environment.yml`.
+- [ ] **9.4** Write `tests/test_solvation.py`: verify valid solvated clusters for Amadori reactant.
+- [ ] **9.5** Benchmark: compare Amadori barrier with explicit water vs. implicit ddCOSMO.
+
+---
+
+### Phase 10: MLP-Accelerated Geometry Optimization (MACE) `[🔴 CRITICAL | Diff: 8/10]`
+
+> **Why:** SOTA §2 recommends replacing DFT-level optimization with MACE MLP, reducing optimization from hours to seconds. However, pre-trained MACE will fail on sulfur chemistry and sugar fragmentation without fine-tuning on Maillard-specific DFT data.
+
+- [ ] **10.1** Create `src/mlp_optimizer.py`: ASE-based wrapper around `mace-mp-0`.
+    - `optimize_geometry()` and `optimize_ts()` methods using ASE `BFGS`.
+- [ ] **10.2** Refactor `DFTRefiner.optimize_geometry()` to accept pluggable backend (`pyscf`, `mace`).
+    - When `backend='mace'`: MLP for geometry, DFT for single-point only (algorithmic decoupling).
+- [ ] **10.3** Create fine-tuning pipeline: script to generate training data from `results/dft_tier2/`.
+- [ ] **10.4** Add `mace-torch` and `torch` to `environment.yml`.
+- [ ] **10.5** Write `tests/test_mlp_optimizer.py`: benchmark MACE geometry vs. DFT geometry (RMSD < 0.1 Å).
+- [ ] **10.6** ⚠️ **VALIDATION GATE:** Quantify out-of-distribution error on all 8 Phase 3 reactions before production use.
+
+---
+
+### Phase 11: Sella Eigenvector-Following TS Search `[🟠 HIGH | Diff: 6/10]`
+
+> **Why:** SOTA §3 recommends Sella for direct saddle-point optimization. Instead of optimizing entire reaction paths (NEB), Sella walks directly toward the nearest saddle point, which is drastically faster when the initial xTB guess is good.
+
+- [ ] **11.1** Create `src/ts_optimizer.py`: wrapper around `sella` Python package.
+    - `find_ts(xyz, calculator)` accepting ASE calculator (MACE or PySCF).
+- [ ] **11.2** Replace `geometric_solver.optimize(mf, transition=True)` with `ts_optimizer.find_ts()` when available.
+- [ ] **11.3** Implement automatic fallback to NEB/geomeTRIC if Sella fails to converge.
+- [ ] **11.4** Add `sella` to `environment.yml`.
+- [ ] **11.5** Write `tests/test_ts_optimizer.py`: verify saddle point found for H-transfer model system.
+
+---
+
+### Phase 12: Cantera Microkinetic Integration `[🟠 HIGH | Diff: 7/10]`
+
+> **Why:** SOTA §8 emphasizes that even with perfect barriers, aroma yield prediction requires ODE integration of rate constants. Our `src/kinetics.py` has TST scaffolding but no proper ODE solver for multi-step networks.
+
+- [ ] **12.1** Extend `kinetics.py` with `simulate_network()` method using `scipy.integrate.solve_ivp`.
+    - Accept full reaction network (from `SmirksEngine`) + barrier dict → concentration-vs-time profiles.
+- [ ] **12.2** Create `src/cantera_export.py`: export Maillard network as Cantera-compatible `.yaml`.
+    - Convert DFT barriers to Arrhenius parameters (A, Ea, n).
+- [ ] **12.3** Add `cantera>=3.0` to `environment.yml` (optional dependency).
+- [ ] **12.4** Write `tests/test_cantera_export.py`: verify exported mechanism is valid Cantera input.
+
+---
+
+### Phase 13: Δ-ML Network Scaling `[🟡 MEDIUM | Diff: 8/10]`
+
+> **Why:** SOTA §7 proposes training a correction model `E_DFT ≈ E_MACE + Δ_ML` on 500–1000 DFT-calculated Maillard reactions to predict DFT-quality energies across the entire network without running expensive DFT on every step.
+
+- [ ] **13.1** Create `src/delta_ml.py`: train simple regression (KRR or small NN) on `(MACE_energy, DFT_energy)` pairs.
+- [ ] **13.2** Create training script consuming `results/dft_tier2/*.json` as ground truth.
+- [ ] **13.3** Write `tests/test_delta_ml.py`: verify correction model reduces MAE vs. raw MACE energies.
+- [ ] **13.4** ⚠️ **BLOCKED:** Requires 500+ diverse DFT data points (Phase 3.3 batch execution must complete first).
+
+---
+
+### Phase 14: React-TS Diffusion Model (Frontier) `[🟡 MEDIUM | Diff: 9/10]`
+
+> **Why:** SOTA §3 identifies React-TS as the 2026 SOTA for generating 3D saddle points from 2D molecular graphs. Uses SE(3)-equivariant stochastic diffusion for sub-angstrom TS prediction. However, success rates are biased toward pharmaceutical datasets.
+
+- [ ] **14.1** Create `src/diffusion_ts.py`: wrapper around React-TS inference.
+    - `generate_ts_guess(reactant_smiles, product_smiles)` method.
+- [ ] **14.2** Confidence scoring to trigger xTB fallback for out-of-distribution reactions.
+- [ ] **14.3** ⚠️ **VALIDATION GATE:** Extensive validation against DFT-computed TSs required before replacing xTB.
+
+---
+
+### Phase 15: Temperature Ramp Modeling `[🟠 HIGH | Diff: 5/10]`
+
+> **Why:** Real cooking and extrusion are NOT isothermal. Extrusion profiles ramp from 25°C → 180°C over minutes. Different pathways dominate at different temperatures (Amadori is fast at 100°C, pyrazines only form >140°C). An isothermal model misses these dynamics entirely.
+
+- [ ] **15.1** Add `simulate_ramp(initial_conc, barriers, temp_profile)` method to `kinetics.py`.
+    - `temp_profile` accepts time-temperature pairs (e.g., `[(0, 25), (60, 100), (180, 180)]`).
+    - Integrate rate constants dynamically as `k(T(t))` changes with the ramp.
+- [ ] **15.2** Add `--temp-profile` flag to `scripts/run_tier2_dft.py` accepting CSV of `(time_sec, temp_C)`.
+- [ ] **15.3** Write `tests/test_temp_ramp.py`: assert 25→180°C ramp produces different profiles than isothermal 150°C.
+
+---
+
+### Phase 16: Structured Results Database `[🟠 HIGH | Diff: 5/10]`
+
+> **Why:** Results are currently stored as individual JSON files in `results/dft_tier2/`. This won't scale from 8 to 1000+ reactions. A queryable database with provenance tracking (method, basis, solvation model) is essential for reproducibility.
+
+- [ ] **16.1** Create `src/results_db.py`: SQLite-backed storage for barriers, geometries, and metadata.
+    - Schema: `reactions(id, family, reactants, products, barrier_kcal, method, basis, solvation, timestamp)`.
+    - Query API: `db.get_barrier("amadori", method="wB97M-V")`, `db.compare_methods("amadori")`.
+- [ ] **16.2** Modify `DFTRefiner` to auto-write results to the database after every `calculate_barrier()` call.
+- [ ] **16.3** Write `tests/test_results_db.py`: verify read/write roundtrip for barrier data.
+
+---
+
+### Phase 17: GC-MS Comparison Output `[🟠 HIGH | Diff: 5/10]`
+
+> **Why:** SOTA §8 notes that concentration-vs-time profiles are "the only metric directly comparable with analytical GC-MS data." Food scientists compare against GC-MS chromatograms — we should output in their native format.
+
+- [ ] **17.1** Create `src/gcms_export.py`: export predicted volatile concentrations as `.csv`.
+    - Columns: `compound, CAS, retention_index, predicted_conc_ppm, odour_threshold`.
+- [ ] **17.2** Add OAV (Odour Activity Value) calculation: `OAV = [compound] / odour_threshold`.
+- [ ] **17.3** Generate overlay-ready plots (predicted vs. experimental) using `matplotlib`.
+
+---
+
+### Phase 18: Automated Regression Gate `[🟡 MEDIUM | Diff: 4/10]`
+
+> **Why:** As we add MACE, CREST, Δ-ML, each change risks *regressing* accuracy on previously validated systems. An automated gate ensures we never break the Literature Validation (Phase 8.C.5).
+
+- [ ] **18.1** Create `tests/test_regression_gate.py`: parametrized test re-running the 3 canonical validation systems.
+    - Ribose+Cysteine → FFT dominant.
+    - Glucose+Glycine → pyrazines dominant.
+    - Ribose+Cysteine+Leucine → FFT + 3-methylbutanal co-dominant.
+- [ ] **18.2** Assert top-3 predicted volatiles still match experimental expectations.
+- [ ] **18.3** Integrate as CI/pre-commit hook.
+
+---
+
+### Phase 19: Web Dashboard for Food Scientists `[🟡 MEDIUM | Diff: 6/10]`
+
+> **Why:** The CLI is powerful but alien to most food scientists. A web interface with visual outputs would dramatically lower the barrier to adoption for the alt-protein community.
+
+- [ ] **19.1** Create `app/` directory with Streamlit app.
+- [ ] **19.2** Input form: precursors, pH, temperature, target sensory profile.
+- [ ] **19.3** Output: ranked formulation table, volatile concentration chart, sensory radar plot.
+- [ ] **19.4** Connect to existing `SmirksEngine` + `InverseDesigner` backend.
+
+---
 
 ## Phase 5: Experimental Validation Preparation (DEFERRED / OUT OF SCOPE)
 
-> **Context:** As a purely computational framework, physical wet-lab validation is currently deferred until the complete *in silico* pipeline (including automated generation and kinetic filtering) is fully operational.
+> **Context:** Physical wet-lab validation is deferred until the complete *in silico* pipeline is fully operational with SOTA methods.
 
 - [ ] **5.1** Select 5–10 top-ranked novel formulations from computational output.
 - [ ] **5.2** Generate a lab protocol summary.
@@ -393,3 +534,4 @@ The core infrastructure is complete. We are now in the **Execution Phase**, refi
 
 ---
 *Last Updated: 2026-03-07*
+
