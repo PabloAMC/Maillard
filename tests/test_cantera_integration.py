@@ -1,5 +1,5 @@
 """
-Test suite for Phase 8.G — Cantera Kinetic Simulation Integration
+Test suite for Phase 12 — Cantera Kinetic Simulation Integration
 
 Tests kinetic simulations using DFT-quality barriers from Phase 3,
 including time-temperature profiles, multiple pathways, and sensory predictions.
@@ -16,7 +16,7 @@ class TestMechanismFileGeneration:
 
     def test_mechanism_file_generation(self):
         """Convert RMG mechanism + DFT barriers → CTI format."""
-        pytest.skip("Implementation pending for Phase 8.G")
+        pytest.skip("Implementation pending for Phase 12")
         # from src.cantera_integration import generate_mechanism_file
         #
         # rmg_mechanism = load_rmg_output('tests/fixtures/rmg_output/mechanism.py')
@@ -31,7 +31,7 @@ class TestMechanismFileGeneration:
 
     def test_mechanism_file_no_syntax_errors(self):
         """Generated CTI/YAML parses without syntax errors in Cantera."""
-        pytest.skip("Implementation pending for Phase 8.G")
+        pytest.skip("Implementation pending for Phase 12")
         # import cantera as ct
         # mech_file = generate_mechanism_file(...)
         # try:
@@ -46,7 +46,7 @@ class TestIsothermalSimulation:
 
     def test_simple_isothermal_simulation(self):
         """Isothermal batch reactor: Ribose+Cys at 150°C."""
-        pytest.skip("Implementation pending for Phase 8.G")
+        pytest.skip("Implementation pending for Phase 12")
         # from src.cantera_integration import run_isothermal_simulation
         #
         # initial_state = {
@@ -66,7 +66,7 @@ class TestIsothermalSimulation:
 
     def test_isothermal_equilibration(self):
         """After sufficient time, system should show reasonable species distribution."""
-        pytest.skip("Implementation pending for Phase 8.G")
+        pytest.skip("Implementation pending for Phase 12")
         # time_long = (0, 3600)  # 1 hour
         # solution = run_isothermal_simulation(gas, initial_state, time_long)
         #
@@ -82,7 +82,7 @@ class TestTimeTemperatureProfile:
 
     def test_time_temperature_profile(self):
         """Temperature ramp: RT → 150°C over 30 min."""
-        pytest.skip("Implementation pending for Phase 8.G")
+        pytest.skip("Implementation pending for Phase 12")
         # from src.cantera_integration import run_time_temperature_simulation
         #
         # # Define temperature profile: linear ramp RT → 150°C
@@ -115,7 +115,7 @@ class TestMultiplePathways:
 
     def test_multiple_pathways_coexist(self):
         """Multi-pathway mechanism (Pathways A, B, C) coexist rationally."""
-        pytest.skip("Implementation pending for Phase 8.G")
+        pytest.skip("Implementation pending for Phase 12")
         # # Maillard formulation: ribose + cysteine + glucose + glycine
         # # Should produce both S-Maillard (FFT) and N-Maillard (pyrazines)
         #
@@ -133,7 +133,7 @@ class TestMultiplePathways:
 
     def test_pathway_selectivity_chemistry(self):
         """Pathway selectivity mirrors expected chemistry."""
-        pytest.skip("Implementation pending for Phase 8.G")
+        pytest.skip("Implementation pending for Phase 12")
         # # Cysteine + ribose → prefer S-Maillard (FFT)
         # state_s_maillard = {'ribose': 0.1, 'cysteine': 0.1}
         # sol_s = run_isothermal_simulation(gas, state_s_maillard, (0, 600), T=423)
@@ -154,7 +154,7 @@ class TestBarrierSensitivity:
 
     def test_barrier_effect_on_kinetics(self):
         """Varying ΔG‡ by ±3 kcal/mol confirms rate sensitivity."""
-        pytest.skip("Implementation pending for Phase 8.G")
+        pytest.skip("Implementation pending for Phase 12")
         # from src.cantera_integration import modify_mechanism_barriers
         #
         # # Run baseline
@@ -182,7 +182,7 @@ class TestpHDependentBranching:
 
     def test_ph_dependent_branching(self):
         """pH < 6 produces furans; pH ≥ 6 produces pyrazines."""
-        pytest.skip("Implementation pending for Phase 8.G")
+        pytest.skip("Implementation pending for Phase 12")
         # # Low pH
         # solution_low_ph = run_time_temperature_simulation(
         #     gas, initial_state, (0, 600), T=423, pH=5.0
@@ -205,7 +205,7 @@ class TestLysineDepletion:
 
     def test_lysine_depletion_dha_competition(self):
         """Lysine consumed by DHA + Maillard should satisfy mass balance."""
-        pytest.skip("Implementation pending for Phase 8.G")
+        pytest.skip("Implementation pending for Phase 12")
         # initial_state = {
         #     'ribose': 0.1,
         #     'lysine': 0.05,       # Limited Lysine
@@ -231,7 +231,7 @@ class TestSensoryPrediction:
 
     def test_sensory_profile_ranking(self):
         """Rank formulations by predicted sensory profile vs Cantera kinetics."""
-        pytest.skip("Implementation pending for Phase 8.G")
+        pytest.skip("Implementation pending for Phase 12")
         # from src.cantera_integration import predict_sensory_profile
         #
         # formulations = [
@@ -252,7 +252,7 @@ class TestSensoryPrediction:
 
     def test_sensory_correlates_with_dft(self):
         """Sensory score should correlate with computed DFT barriers."""
-        pytest.skip("Implementation pending for Phase 8.G")
+        pytest.skip("Implementation pending for Phase 12")
         # # High-barrier meaty precursor → predicted lower sensory score if slow
         # # Low-barrier meaty precursor → predicted higher sensory score if fast
         #
@@ -272,7 +272,7 @@ class TestKineticsRefinement:
 
     def test_compare_xtb_vs_dft_kinetics(self):
         """DFT-based kinetics should show refinement over xTB-based kinetics."""
-        pytest.skip("Implementation pending for Phase 8.G")
+        pytest.skip("Implementation pending for Phase 12")
         # # Simulate with xTB barriers
         # gas_xtb = generate_mechanism_file(rmg_mech, xtb_barriers)
         # solution_xtb = run_isothermal_simulation(gas_xtb, initial_state, (0, 600), T=423)

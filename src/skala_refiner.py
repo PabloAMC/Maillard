@@ -60,13 +60,11 @@ class SkalaRefiner:
         # Determine XC functional
         if self.use_skala:
             try:
-                import skala
-                # Assuming standard interface to load Skala into PySCF mf block
-                # as per Microsoft's documentation
-                mf.xc = 'SKALA' 
-                mf = skala.apply_skala(mf)
+                from skala.pyscf import SkalaKS
+                mf = SkalaKS(mol, xc='skala')
             except ImportError:
                 print(f"Warning: Skala not found. Falling back to {self.fallback_xc}.")
+                mf = dft.RKS(mol)
                 mf.xc = self.fallback_xc
         else:
             mf.xc = self.fallback_xc

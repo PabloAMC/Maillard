@@ -1,5 +1,5 @@
 """
-Pytest configuration and shared fixtures for Phase 3 and Phase 8.G tests.
+Pytest configuration and shared fixtures for Phase 3 and Phase 12 tests.
 """
 
 import pytest
@@ -109,7 +109,7 @@ def temperature_list():
 
 
 # ============================================================================
-# PHASE 8.G FIXTURES: Cantera Integration and CLI
+# PHASE 12 FIXTURES: Cantera Integration and CLI
 # ============================================================================
 
 @pytest.fixture
@@ -226,5 +226,5 @@ def pytest_configure(config):
     """Register custom pytest markers."""
     config.addinivalue_line("markers", "slow: marks tests as slow (deselect with '-m \"not slow\"')")
     config.addinivalue_line("markers", "dft: marks Phase 3 DFT tests")
-    config.addinivalue_line("markers", "cantera: marks Phase 8.G Cantera tests")
+    config.addinivalue_line("markers", "cantera: marks Phase 12 Cantera tests")
     config.addinivalue_line("markers", "integration: marks end-to-end integration tests")

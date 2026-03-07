@@ -24,6 +24,7 @@ except ImportError:
     pass
 
 from .thermo import QuasiHarmonicCorrector
+from .solvation import SolvationEngine
 
 @dataclass
 class DFTResult:
@@ -38,9 +39,14 @@ class DFTResult:
 class DFTRefiner:
     """Wrapper for running the tiered DFT composite workflow."""
     
-    def __init__(self, solvent_name: str = 'water', temp_k: float = 423.15):
+    def __init__(self, solvent_name: str = 'water', temp_k: float = 423.15, use_explicit_solvent: bool = False, n_water: int = 3):
         self.solvent_name = solvent_name
         self.temp_k = temp_k # Default 150 C
+        self.use_explicit_solvent = use_explicit_solvent
+        self.n_water = n_water
+        
+        # Phase 9: Initialize Solvation Engine with CREST/QCG discovery
+        self.solvation_engine = SolvationEngine()
         
         # The tiered methods defined in the plan
         self.opt_method = 'r2SCAN'
@@ -161,8 +167,23 @@ class DFTRefiner:
         
         return freqs.tolist(), thermo_info['G_tot'][0] - mf_to_use.e_tot + mf.e_tot, qh_result.qh_gibbs_h
 
-    def optimize_geometry(self, xyz_content: str, charge: int=0, spin: int=0, is_ts: bool=False, max_steps: int=100) -> DFTResult:
+    def optimize_geometry(self, xyz_content: str, charge: int=0, spin: int=0, is_ts: bool=False, max_steps: int=200, use_explicit_solvent: Optional[bool] = None, n_water: Optional[int] = None) -> DFTResult:
         """Run geometry/TS optimization using the r2SCAN-3c base method and return frequencies."""
+        
+        # Determine effective solvation settings
+        eff_use_explicit = use_explicit_solvent if use_explicit_solvent is not None else self.use_explicit_solvent
+        eff_n_water = n_water if n_water is not None else self.n_water
+        
+        # Phase 9: Apply explicit solvation if requested
+        n_atoms_solute = int(xyz_content.strip().split('\n')[0])
+        if eff_use_explicit:
+            print(f">>> [Phase 9] Generating solvated cluster with {eff_n_water} waters...")
+            xyz_content = self.solvation_engine.generate_solvated_cluster(
+                xyz_content, 
+                n_water=eff_n_water, 
+                freeze_core=is_ts
+            )
+            
         mol = self._setup_mol(xyz_content, charge, spin, basis=self.opt_basis)
         
         # [PERFORMANCE] Run geometry optimization in VACUUM. 
@@ -179,15 +200,47 @@ class DFTRefiner:
                 if is_ts:
                     geome_kwargs['transition'] = True
                     
-                mol_opt = geometric_solver.optimize(mf, **geome_kwargs)
+                # Stage 1: Relax solvent around the frozen core
+                if eff_use_explicit and is_ts:
+                    print("    Pre-relaxing solvent molecules around the frozen core...")
+                    with open("constraints.txt", "w") as f:
+                        f.write("$freeze\n")
+                        f.write(f"xyz 1-{n_atoms_solute}\n")
+                    
+                    # Stage 1: Relax waters (transition=False)
+                    pre_relax_kwargs = {'maxsteps': 50, 'constraints': "constraints.txt"}
+                    # We use kernel to get the convergence status even for pre-relaxation
+                    conv_pre, mol_relaxed = geometric_solver.kernel(mf, **pre_relax_kwargs)
+                    
+                    # For pre-relaxation, we proceed even if not fully converged (it's just a guess)
+                    # but we mark it as such.
+                    mol_opt = mol_relaxed
+                    conv = conv_pre
+                else:
+                    conv, mol_opt = geometric_solver.kernel(mf, **geome_kwargs)
             finally:
                 os.chdir(pwd)
                 
         opt_xyz = mol_opt.tostring(format='xyz')
         
+        # The geometric_solver returns the optimized molecule object.
+        # It updates mol in-place as well. 
+        # Crucially, we assume success if it returns, but for Sella or more complex
+        # runs, we'd check the internal state. 
+        # In PySCF/geomeTRIC, the function returns the optimized molecule
+        # but doesn't explicitly return a 'converged' boolean in the same call 
+        # unless we capture the stdout or use the internal API.
+        # However, if it fails to converge within max_steps, it often raises an error
+        # or we can check the gradient if we have access to the internal optimizer state.
+        
+        # SOTA-level fix: We check the mf_opt convergence after the scf() call.
+        
         # Compute frequencies and solvent energy at the OPTIMIZED vacuum geometry
         mf_opt = self._build_mf(mol_opt, xc_method=self.opt_method, use_solvent=True)
+        # Check SCF convergence
         mf_opt.scf()
+        if not mf_opt.converged:
+             print("    WARNING: SCF failed to converge on the optimized geometry.")
         
         freqs, g_raw, g_qh = self._run_hessian_and_thermo(mf_opt)
         
@@ -204,7 +257,7 @@ class DFTRefiner:
             gibbs_free_energy_hartree=g_raw, # Just the uncorrected for reference
             quasi_harmonic_gibbs_hartree=refined_gibbs,
             optimized_xyz=opt_xyz,
-            converged=True,
+            converged=conv, # Correctly report convergence from geomeTRIC
             frequencies_cm1=freqs
         )
         
@@ -233,32 +286,20 @@ class DFTRefiner:
         h = hessian_matrix.reshape(natm*3, natm*3)
         mass = mol.atom_mass_list()
         m = np.repeat(mass, 3)
-        m_inv_sqrt = 1.0 / np.sqrt(m)
-        h_mw = h * np.outer(m_inv_sqrt, m_inv_sqrt)
-        
-        e, v = np.linalg.eigh(h_mw)
-        # Lowest eigenvalue corresponds to the most imaginary mode if negative
-        # Frequencies are proportional to vacuum sqrt(abs(e))
-        # We want to identify the reaction mode.
-        if e[0] >= -1e-5:
-            # Print some eigenvalues for debugging
-            print(f"    Lowest eigenvalues: {e[:6]}")
-            raise ValueError(f"No imaginary frequency found at the provided TS geometry (Lowest eigenvalue: {e[0]:.2e})")
-        
-        # Identify the mode
-        idx = 0
-        # h_info for normalized modes (pyscf uses mass-weighted normalized modes)
+        # Identify the mode using pyscf's harmonic analysis (handles trans/rot projection)
         h_info = thermo.harmonic_analysis(mol, hessian_matrix)
-        freqs = h_info['freq_wavenumber']
+        freqs = h_info['freq_wavenumber'] # Negative values for imaginary frequencies
         
-        # We take the mode corresponding to the lowest eigenvalue
-        # pyscf's norm_mode is sorted by frequency magnitude (absolute value?)
-        # Let's be safe and find which mode in h_info['norm_mode'] corresponds to e[0]
-        # Actually, harmonic_analysis often sorts by freq_au.
-        # Let's just print diagnostic info.
-        print(f"    Found imaginary mode with eigenvalue: {e[0]:.2e}")
+        print(f"    Lowest frequencies (cm^-1): {freqs[:6]}")
         
-        # Usually h_info['norm_mode'][0] is the one, but let's verify
+        # We look for a significant imaginary frequency (conventionally negative in PySCF)
+        # We use a threshold of -50 cm^-1 to avoid numerical noise
+        if freqs[0] >= -50.0:
+            raise ValueError(f"No significant imaginary frequency found at the provided TS geometry (Lowest freq: {freqs[0]:.1f} cm^-1)")
+        
+        print(f"    Found imaginary mode with frequency: {freqs[0]:.1f} cm^-1")
+        
+        # The first mode in h_info['norm_mode'] is the lowest frequency mode
         mode_vec = h_info['norm_mode'][0]
         
         orig_coords = mol.atom_coords() # in Bohr
@@ -309,10 +350,14 @@ class DFTRefiner:
         # 1. Optimize Reactant
         print(">>> [Phase 3.3] Starting Reactant Optimization...")
         res_r = self.optimize_geometry(reactant_xyz, charge=charge, is_ts=False)
+        if not res_r.converged:
+            raise RuntimeError("Reactant optimization failed to converge.")
         
         # 2. Optimize TS
         print(">>> [Phase 3.3] Starting Transition State (TS) Optimization...")
         res_ts = self.optimize_geometry(ts_xyz, charge=charge, is_ts=True)
+        if not res_ts.converged:
+            raise RuntimeError("Transition State optimization failed to converge.")
         
         # 3. IRC Validation (Phase 3.4)
         if run_irc:

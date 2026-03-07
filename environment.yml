@@ -13,6 +13,8 @@ dependencies:
 
   # Semi-empirical QM screening (Tier 1)
   - xtb>=6.6        # GFN2-xTB via conda-forge
+  - crest>=3.0      # Conformational search & explicit solvation
+  - geometric      # Geometry optimization engine for PySCF
 
   # Atomistic simulation environment (glue layer)
   - ase>=3.23

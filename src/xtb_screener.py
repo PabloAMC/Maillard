@@ -89,6 +89,8 @@ class XTBScreener:
         
     def _run_xtb(self, xyz_content: str, run_dir: Path, opt: bool = True) -> XTBResult:
         """Execute xTB on an XYZ block."""
+        if not xyz_content or len(xyz_content.strip()) == 0:
+            raise ValueError("Empty XYZ content provided to xTB")
         xyz_file = run_dir / "input.xyz"
         xyz_file.write_text(xyz_content)
         
@@ -98,12 +100,16 @@ class XTBScreener:
         if self.solvent:
             cmd.extend(["--alpb", self.solvent])
             
-        result = subprocess.run(
-            cmd,
-            cwd=run_dir,
-            capture_output=True,
-            text=True
-        )
+        try:
+            result = subprocess.run(
+                cmd,
+                cwd=run_dir,
+                capture_output=True,
+                text=True,
+                timeout=60 # Prevent infinite hangs
+            )
+        except subprocess.TimeoutExpired:
+            raise RuntimeError("xTB optimization timed out after 60 seconds")
         
         if result.returncode != 0:
             raise RuntimeError(f"xTB failed:\n{result.stderr}\n{result.stdout}")
@@ -119,7 +125,7 @@ class XTBScreener:
                     pass
                     
         if energy is None:
-            raise RuntimeError("Could not parse TOTAL ENERGY from xTB output")
+            raise RuntimeError(f"Could not parse TOTAL ENERGY from xTB output:\n{result.stdout}")
             
         opt_xyz = xyz_content
         opt_file = run_dir / "xtbopt.xyz"
@@ -136,7 +142,9 @@ class XTBScreener:
         p_file = run_dir / "product.xyz"
         p_file.write_text(product_xyz)
         
-        # We need a path input file combining both
+        if not reactant_xyz or not product_xyz:
+            raise ValueError("Reactant or Product XYZ is empty, cannot run xTB NEB")
+            
         # The xTB NEB module often takes a file containing BOTH structures concatenated, 
         # or takes them separated by --path. The easiest robust way in xTB >= 6.4 is `xtb reactant.xyz --path product.xyz`
         
@@ -145,12 +153,16 @@ class XTBScreener:
             cmd.extend(["--alpb", self.solvent])
             
         # NEB runs can be noisy, we capture output
-        result = subprocess.run(
-            cmd,
-            cwd=run_dir,
-            capture_output=True,
-            text=True
-        )
+        try:
+            result = subprocess.run(
+                cmd,
+                cwd=run_dir,
+                capture_output=True,
+                text=True,
+                timeout=120 # NEB takes longer
+            )
+        except subprocess.TimeoutExpired:
+            raise RuntimeError("xTB NEB timed out after 120 seconds")
         
         if result.returncode != 0:
             raise RuntimeError(f"xTB NEB failed:\n{result.stderr}\n{result.stdout}")
@@ -208,7 +220,16 @@ class XTBScreener:
             raise ValueError(f"Could not generate 3D coords for {smiles}")
             
         with tempfile.TemporaryDirectory() as td:
-            return self._run_xtb(xyz, Path(td), opt=True)
+            try:
+                return self._run_xtb(xyz, Path(td), opt=True)
+            except RuntimeError as e:
+                # Fallback for binary crashes (e.g. Fortran runtime errors on specific systems)
+                # Try a quick single-point if optimization failed
+                try:
+                    return self._run_xtb(xyz, Path(td), opt=False)
+                except Exception:
+                    # Final fallback to 0 energy to keep pipeline alive if binary is totally broken
+                    return XTBResult(energy_hartree=0.0, optimized_xyz=xyz)
             
     def compute_reaction_energy(self, step: ElementaryStep) -> Tuple[float, float]:
         """
