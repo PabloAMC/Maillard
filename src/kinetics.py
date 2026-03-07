@@ -93,7 +93,8 @@ class KineticsEngine:
         # 3. Create a batch reactor
         # We use an IdealGasReactor but we will manually update its temperature
         # at each step to simulate a defined T(t) profile.
-        r = ct.IdealGasConstPressureReactor(gas)
+        # clone=False suppresses Cantera 3.2+ deprecation warnings
+        r = ct.IdealGasConstPressureReactor(gas, clone=False)
         sim = ct.ReactorNet([r])
         
         # 4. Integrate

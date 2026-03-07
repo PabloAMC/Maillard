@@ -14,6 +14,7 @@ from pathlib import Path
 from src.cantera_export import CanteraExporter
 from src.kinetics import KineticsEngine
 from src.sensory import SensoryPredictor
+from src.results_db import ResultsDB
 
 def run_simulation(barriers_json: str, precursors: dict, temp_c: Optional[float] = None, 
                    time_sec: float = 600.0, temp_ramp_csv: Optional[str] = None,
@@ -21,26 +22,39 @@ def run_simulation(barriers_json: str, precursors: dict, temp_c: Optional[float]
     """
     Ties together the microkinetic workflow.
     """
-    # 1. Load barriers
-    with open(barriers_json, "r") as f:
-        barriers = json.load(f)
+    # 1. Load barriers (JSON or SQLite)
+    is_db = barriers_json.endswith(".db")
+    if is_db:
+        print(f"Loading barriers from database: {barriers_json}")
+        db = ResultsDB(db_path=barriers_json)
+        barriers = {}
+    else:
+        print(f"Loading barriers from JSON: {barriers_json}")
+        with open(barriers_json, "r") as f:
+            barriers = json.load(f)
     
     # 2. Build the mechanism
-    print(f"Building Cantera mechanism from {len(barriers)} available barriers...")
     exporter = CanteraExporter()
     
-    # Representative Maillard pathways (balanced via exporter heuristic)
+    # Representative Maillard pathways
     SMILES_MAP = {
         "amadori": (["OCC1OC(O)C(O)C1O", "NCC(O)=O"], ["OCC1OC(O)C(O)C1N=CC(O)=O", "O"]),
         "strecker": (["OCC1OC(O)C(O)C1N=CC(O)=O"], ["C1=C(SC=C1)CS"]), 
     }
     
-    for key, barrier in barriers.items():
-        if barrier is None or key not in SMILES_MAP:
-            continue
-        reactants, products = SMILES_MAP[key]
-        exporter.add_reaction(reactants, products, barrier)
-        
+    for key, (reactants, products) in SMILES_MAP.items():
+        barrier_val = None
+        if is_db:
+            res = db.find_barrier(reactants, products)
+            if res:
+                barrier_val = res["delta_g_kcal"]
+        else:
+            barrier_val = barriers.get(key)
+            
+        if barrier_val is not None:
+            exporter.add_reaction(reactants, products, barrier_val)
+            
+    print(f"Built Cantera mechanism with {len(exporter.reactions)} reactions.")
     mech_path = f"{output_prefix}_mech.yaml"
     exporter.export_yaml(mech_path)
     
@@ -139,8 +153,8 @@ def run_simulation(barriers_json: str, precursors: dict, temp_c: Optional[float]
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run Cantera microkinetic simulation for Maillard.")
-    parser.add_argument("--input", "-i", type=str, default="results/dft_tier2/refinement_all.json",
-                        help="Path to the JSON output from run_tier2_dft.py")
+    parser.add_argument("--input", "-i", type=str, default="results/maillard_results.db",
+                        help="Path to the Results DB (.db) or legacy JSON.")
     parser.add_argument("--precursors", "-p", type=str, required=True,
                         help="Comma-separated precursors and molarities (e.g., 'ribose:0.1,glycine:0.1')")
     parser.add_argument("--temp", "-T", type=float, help="Temperature in Celsius (isothermal)")
