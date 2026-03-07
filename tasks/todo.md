@@ -14,7 +14,7 @@ The core Tier 0/1/2 pipeline is operational. The next objective is to align with
 | **🟢 3** | **10 — MLP Geometry Optimization (MACE)** | ✅ | Hours → seconds for geometry optimization |
 | **🟢 4** | **11 — Sella Eigenvector-Following TS** | ✅ | Faster TS search than NEB |
 | **🟠 5** | **12 — Cantera Microkinetics** | ✅ | Predict concentration-vs-time (GC-MS comparable) |
-| **🟠 6** | **15 — Temperature Ramp Modeling** | 📋 | Realistic extrusion profiles, not isothermal |
+| **� 6** | **15 — Temperature Ramp Modeling** | ✅ | Realistic extrusion profiles, not isothermal |
 | **🟠 7** | **16 — Structured Results Database** | 📋 | Scale from 8 to 1000+ reactions |
 | **🟠 8** | **17 — GC-MS Comparison Output** | 📋 | Direct overlay with experimental data |
 | **🟡 9** | **13 — Δ-ML Network Scaling** | 📋 | DFT-quality energies without DFT cost |
@@ -481,15 +481,15 @@ The core Tier 0/1/2 pipeline is operational. The next objective is to align with
 
 ---
 
-### Phase 15: Temperature Ramp Modeling `[🟠 HIGH | Diff: 5/10]`
+### Phase 15: Temperature Ramp Modeling ✅
 
 > **Why:** Real cooking and extrusion are NOT isothermal. Extrusion profiles ramp from 25°C → 180°C over minutes. Different pathways dominate at different temperatures (Amadori is fast at 100°C, pyrazines only form >140°C). An isothermal model misses these dynamics entirely.
 
-- [ ] **15.1** Add `simulate_ramp(initial_conc, barriers, temp_profile)` method to `kinetics.py`.
-    - `temp_profile` accepts time-temperature pairs (e.g., `[(0, 25), (60, 100), (180, 180)]`).
-    - Integrate rate constants dynamically as `k(T(t))` changes with the ramp.
-- [ ] **15.2** Add `--temp-profile` flag to `scripts/run_tier2_dft.py` accepting CSV of `(time_sec, temp_C)`.
-- [ ] **15.3** Write `tests/test_temp_ramp.py`: assert 25→180°C ramp produces different profiles than isothermal 150°C.
+- [x] **15.1 Extend `kinetics.py` support for $T(t)$:** Update `simulate_network_cantera` to accept `temperature_profile` list.
+- [x] **15.2 Implement Reactor Callback:** Use Cantera's dynamic state updates to interpolate $T$ during integration.
+- [x] **15.3 CLI Ramp Support:** Update `scripts/run_cantera_kinetics.py` to accept `--temp-ramp` CSV files.
+- [x] **15.4 Verification:** Write `tests/test_temp_ramp.py` asserting divergence between isothermal and ramped results.
+- [x] **15.5 Visualization:** Add temperature-vs-time overlaid on concentration plots in CLI output.
 
 ---
 
