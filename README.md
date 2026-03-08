@@ -114,6 +114,21 @@ python scripts/compare_sim_to_lit.py
 ```
 *Use `--export mech.yaml` to save the Cantera mechanism for external use.*
 
+### 1.3 Feature Dependency Matrix (Gap 6 Sync)
+
+| Feature | Tier | Status | Required Dependencies | Usage Level |
+|---------|:----:|:------:|-----------------------|-------------|
+| **Kinetics/Inverse Design** | 0/1 | ✅ | `rdkit`, `cantera`, `pandas` | **Standard (Laptop)** |
+| **Heuristic Baseline** | 1 | ✅ | Native (`barrier_constants.py`) | **Standard (Laptop)** |
+| **Low-Level DFT (xTB)** | 1 | ✅ | `xtb` (conda-forge) | **Standard (Laptop)** |
+| **High-Precision DFT** | 2 | ✅ | `pyscf`, `geometric` | **Advanced (Cloud/HPC)** |
+| **Explicit Solvation** | 2 | 🔧 | **CREST** (External binary) | **Advanced (Cloud/HPC)** |
+| **MLP Optimization** | 2 | 🔧 | **MACE**, `torch` (~2GB weights)| **Experimental** |
+| **Sella TS Search** | 2 | 🔧 | `sella`, `ase` | **Experimental** |
+
+---
+
+## 2. Prerequisites & Environment Setup
 ### 5. Advanced: Tier 2 DFT Refinement
 High-precision activation barriers using the `r2SCAN-3c // wB97M-V` composite protocol.
 
