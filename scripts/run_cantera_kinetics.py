@@ -17,10 +17,14 @@ from src.cantera_export import CanteraExporter
 from src.kinetics import KineticsEngine
 from src.sensory import SensoryPredictor
 from src.results_db import ResultsDB
+from src.smirks_engine import SmirksEngine, Species
+from src.barrier_constants import get_barrier
+from src.conditions import ReactionConditions
 
 def run_simulation(barriers_json: str, precursors: dict, temp_c: Optional[float] = None, 
                    time_sec: float = 600.0, temp_ramp_csv: Optional[str] = None,
-                   predict_sensory: bool = False, output_prefix: str = "simulation"):
+                   predict_sensory: bool = False, output_prefix: str = "simulation",
+                   **kwargs):
     """
     Ties together the microkinetic workflow.
     """
@@ -38,40 +42,80 @@ def run_simulation(barriers_json: str, precursors: dict, temp_c: Optional[float]
     # 2. Build the mechanism
     exporter = CanteraExporter()
     
-    # Common name mapping for discovery
     NAME_MAP = {
-        "OCC1OC(O)C(O)C1O": "ribose",
+        "O=CC(O)C(O)C(O)CO": "ribose",
+        "OCC1OC(O)C(O)C1O": "ribose_ring",
         "NCC(O)=O": "glycine",
+        "NC(CS)C(=O)O": "cysteine",
+        "CC(C)CC(N)C(=O)O": "leucine",
         "OCC1OC(O)C(O)C1N=CC(O)=O": "amadori",
-        "C1=C(SC=C1)CS": "2-furfurylthiol",
-        "C1=COC(=C1)C=O": "furfural",
-        "CC1=NC=C(N=C1)C": "2,5-dimethylpyrazine"
+        "SCc1ccco1": "2-furfurylthiol",
+        "C1=C(SC=C1)CS": "2-furfurylthiol_legacy",
+        "O=Cc1ccco1": "furfural",
+        "CC1=NC=C(N=C1)C": "2,5-dimethylpyrazine",
+        "CC=O": "acetaldehyde",
+        "O": "water",
+        "O=C=O": "CO2",
+        "N": "ammonia",
+        "S": "H2S",
+        "[HH]": "H2"
     }
     
-    if is_db:
-        print("Discovering mechanism from database...")
-        conn = sqlite3.connect(barriers_json)
-        cursor = conn.cursor()
-        cursor.execute("SELECT id, reactants_json, products_json FROM reactions")
-        rows = cursor.fetchall()
-        conn.close()
+    # Precursor normalization lookup
+    lookup = {
+        "ribose": "O=CC(O)C(O)C(O)CO", 
+        "glycine": "NCC(O)=O",
+        "cysteine": "NC(CS)C(=O)O",
+        "leucine": "CC(C)CC(N)C(=O)O"
+    }
+
+    if kwargs.get("from_smirks", False):
+        print(f"Generating dynamic network from precursors using SmirksEngine...")
+        cond = ReactionConditions(temperature_celsius=temp_c if temp_c else 150.0)
+        engine_smirks = SmirksEngine(conditions=cond)
+        
+        # Convert precursors to Species objects
+        precursor_objs = []
+        for name, conc in precursors.items():
+            smi = lookup.get(name.lower(), name)
+            precursor_objs.append(Species(label=name, smiles=smi))
+            
+        # Discover network
+        steps = engine_smirks.enumerate(precursor_objs, max_generations=3)
+        print(f"SmirksEngine discovered {len(steps)} elementary steps.")
         
         count = 0
-        for rid, r_json, p_json in rows:
-            reactants = json.loads(r_json)
-            products = json.loads(p_json)
+        for step in steps:
+            reactants = [s.smiles for s in step.reactants]
+            products = [s.smiles for s in step.products]
             
-            best_res = db.find_barrier(reactants, products)
-            if best_res:
-                # Add species with names if known
-                for r in reactants:
-                    if r in NAME_MAP: exporter.add_species(r, name=NAME_MAP[r])
-                for p in products:
-                    if p in NAME_MAP: exporter.add_species(p, name=NAME_MAP[p])
-                    
-                exporter.add_reaction(reactants, products, best_res["delta_g_kcal"])
+            # --- DUAL-LOOKUP BARRIER ---
+            # Single source of truth: DB first, then heuristic fallback
+            if is_db:
+                barrier_kcal, source = db.get_best_barrier(reactants, products, step.reaction_family)
+            else:
+                barrier_kcal = get_barrier(step.reaction_family)
+                source = "Heuristic"
+
+            # Add species names if known
+            for s in step.reactants + step.products:
+                if s.smiles in NAME_MAP:
+                    exporter.add_species(s.smiles, name=NAME_MAP[s.smiles])
+                else:
+                    # Fallback label from SmirksEngine if no common name
+                    exporter.add_species(s.smiles, name=s.label)
+            
+            try:
+                exporter.add_reaction(reactants, products, barrier_kcal)
+                print(f"  Reaction {step.reaction_family}: {barrier_kcal} kcal/mol [{source}]")
                 count += 1
-        print(f"Discovered {count} reactions from database.")
+            except ValueError as e:
+                print(f"  Skipping unbalanced reaction ({step.reaction_family}): {e}")
+        
+        print(f"Integrated {count} valid reactions into mechanism.")
+
+    elif is_db:
+        print("Discovering mechanism from database...")
     else:
         # Legacy hardcoded fallback for JSON
         SMILES_MAP = {
@@ -108,7 +152,12 @@ def run_simulation(barriers_json: str, precursors: dict, temp_c: Optional[float]
     for smiles, conc in precursors.items():
         found = False
         # Normalize common names to SMILES if needed
-        lookup = {"ribose": "OCC1OC(O)C(O)C1O", "glycine": "NCC(O)=O"}
+        lookup = {
+            "ribose": "O=CC(O)C(O)C(O)CO", 
+            "glycine": "NCC(O)=O",
+            "cysteine": "NC(CS)C(=O)O",
+            "leucine": "CC(C)CC(N)C(=O)O"
+        }
         norm_smiles = lookup.get(smiles.lower(), smiles)
         
         for k, v in exporter.species.items():
@@ -191,6 +240,7 @@ if __name__ == "__main__":
     parser.add_argument("--time", "-t", type=float, default=600.0, help="Total simulation time in seconds")
     parser.add_argument("--output", "-o", type=str, default="results/sim_maillard", help="Output file prefix")
     parser.add_argument("--predict-sensory", action="store_true", help="Predict sensory aroma profile")
+    parser.add_argument("--from-smirks", action="store_true", help="Generate network dynamically via SmirksEngine")
     
     args = parser.parse_args()
     
@@ -205,4 +255,5 @@ if __name__ == "__main__":
         
     run_simulation(args.input, precursor_dict, args.temp, args.time, 
                    temp_ramp_csv=args.temp_ramp,
-                   predict_sensory=args.predict_sensory, output_prefix=args.output)
+                   predict_sensory=args.predict_sensory, output_prefix=args.output,
+                   from_smirks=args.from_smirks)

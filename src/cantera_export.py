@@ -47,9 +47,9 @@ class CanteraExporter:
                      barrier_kcal: float, temperature_k: float = 423.15,
                      A: float = 1e13, b: float = 0.0):
         """
-        Add an elementary step. Enforces mass balance by mirroring reactant
-        atomic composition onto products (Maillard pathways are incomplete
-        networks where full stoichiometry is not always specified).
+        Add an elementary step. Enforces strict mass balance. If a reaction is 
+        not balanced atom-for-atom, it raises an error. Virtual atoms are NOT 
+        allowed because they break Cantera's mass action kinetics and reversibility.
         """
         r_names = [self.add_species(r) for r in reactants]
         p_names = [self.add_species(p) for p in products]
@@ -65,40 +65,21 @@ class CanteraExporter:
             for k, v in self.species[p]["composition"].items():
                 p_comp[k] = p_comp.get(k, 0) + v
 
-        # Enforce balance: distribute reactant atoms across products so Cantera accepts it.
-        # This is a deliberate simplification for the kinetics model; the true stoichiometry
-        # of individual species is tracked separately for sensory prediction.
-        if r_comp != p_comp:
-            # Strategy: keep the first product's composition (from RDKit), and
-            # set the LAST product's composition to absorb the atom deficit.
-            # This ensures the total (all products) == total (all reactants).
-            #
-            # For single-product reactions where product has different atoms:
-            # just overwrite with reactant composition directly.
-            if len(products) == 1:
-                self.species[products[0]]["composition"] = dict(r_comp)
-            else:
-                # Sum composition of all products EXCEPT the last one
-                other_p_comp = {}
-                for p in products[:-1]:
-                    for k, v in self.species[p]["composition"].items():
-                        other_p_comp[k] = other_p_comp.get(k, 0) + v
-                
-                # Last product gets: reactant_total - other_products_total
-                last_comp = {}
-                all_elements = set(r_comp.keys()) | set(other_p_comp.keys())
-                for elem in all_elements:
-                    diff = r_comp.get(elem, 0) - other_p_comp.get(elem, 0)
-                    if diff > 0:
-                        last_comp[elem] = diff
-                
-                # Safety: Cantera requires at least one element per species
-                if not last_comp:
-                    last_comp = {"H": 1}
-                    
-                self.species[products[-1]]["composition"] = last_comp
+        # Enforce strict balance
+        all_elements = set(r_comp.keys()) | set(p_comp.keys())
+        diffs = {}
+        for elem in all_elements:
+            d = p_comp.get(elem, 0) - r_comp.get(elem, 0)
+            if d != 0:
+                diffs[elem] = d
+
+        if diffs:
+            raise ValueError(f"Reaction is structurally unbalanced! "
+                             f"Reactants {reactants} vs Products {products}. "
+                             f"Atom difference (Products - Reactants): {diffs}")
 
         reaction_str = " + ".join(r_names) + " <=> " + " + ".join(p_names)
+        
         self.reactions.append({
             "equation": reaction_str,
             "rate-constant": {
@@ -131,17 +112,31 @@ class CanteraExporter:
             "reactions": self.reactions
         }
         
+        from src.thermo import get_nasa_coefficients
+        
         for s in self.species.values():
-            data["species"].append({
-                "name": s["name"],
-                "composition": s["composition"],
-                "thermo": {
+            try:
+                coeffs = get_nasa_coefficients(s["smiles"])
+                thermo_block = {
+                    "model": "NASA7",
+                    "temperature-ranges": [300.0, 1000.0],
+                    "data": [coeffs]
+                }
+            except Exception as e:
+                # Fallback to constant-cp if estimation fails
+                print(f"  Warning: Thermo estimation failed for {s['name']} ({s['smiles']}): {e}")
+                thermo_block = {
                     "model": "constant-cp",
                     "t0": 273.15,
                     "h0": 0.0,
                     "s0": 0.0,
-                    "cp0": 75000.0  # J/kmol-K
+                    "cp0": 75000.0
                 }
+
+            data["species"].append({
+                "name": s["name"],
+                "composition": s["composition"],
+                "thermo": thermo_block
             })
             
         with open(output_path, "w") as f:

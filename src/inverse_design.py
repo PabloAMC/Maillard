@@ -7,6 +7,7 @@ from src.smirks_engine import SmirksEngine, ReactionConditions
 from src.recommend import Recommender
 from src.precursor_resolver import resolve_many
 from src.barrier_constants import get_barrier, HEME_CATALYST_REDUCTION, HEME_CATALYST_FAMILIES
+from src.results_db import ResultsDB
 
 # Locate data files
 ROOT = Path(__file__).resolve().parents[1]
@@ -34,6 +35,9 @@ class InverseDesigner:
             raise ValueError(f"Unknown target tag: '{self.target_tag}'. Available: {list(self.tags.keys())}")
         if self.minimize_tag and self.minimize_tag not in self.tags:
              raise ValueError(f"Unknown minimize tag: '{self.minimize_tag}'. Available: {list(self.tags.keys())}")
+        
+        # Initialize Database connection for unified barrier lookup
+        self.db = ResultsDB()
 
     def _load_grid(self) -> List[Dict]:
         if not GRID_FILE.exists():
@@ -122,9 +126,12 @@ class InverseDesigner:
             engine = SmirksEngine(cond)
             steps = engine.enumerate(precursors, max_generations=4)
             
-            # Calculate barriers from centralised constants
+            # Calculate barriers from unified source (DB first, then heuristic)
             for step in steps:
-                bar = get_barrier(step.reaction_family)
+                reactants = [s.smiles for s in step.reactants]
+                products = [s.smiles for s in step.products]
+                
+                bar, source = self.db.get_best_barrier(reactants, products, step.reaction_family)
                     
                 ph_mult = cond.get_ph_multiplier(step.reaction_family or "")
                 if ph_mult > 1.0:

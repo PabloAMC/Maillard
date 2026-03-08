@@ -11,7 +11,25 @@ import time
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple, Any
 
+from src.barrier_constants import get_barrier
+
 class ResultsDB:
+    def get_best_barrier(self, reactants: List[str], products: List[str], family: str = "unknown") -> Tuple[float, str]:
+        """
+        Single source of truth for barrier lookups.
+        1. Queries DB for exact match (using method priority).
+        2. Falls back to heuristic constants if no DB entry exists.
+        
+        Returns (barrier_kcal, source_string)
+        """
+        res = self.find_barrier(reactants, products)
+        if res:
+            return res["delta_g_kcal"], f"DB:{res['method']}"
+        
+        # Fallback to heuristic
+        barrier_kcal = get_barrier(family)
+        return barrier_kcal, "Heuristic"
+
     def __init__(self, db_path: str = "results/maillard_results.db"):
         self.db_path = Path(db_path)
         self.db_path.parent.mkdir(parents=True, exist_ok=True)
@@ -105,7 +123,7 @@ class ResultsDB:
             conn.commit()
 
     def find_barrier(self, reactants: List[str], products: List[str], 
-                     method_preference: List[str] = ["wB97M-V", "r2SCAN-3c", "xtb"]) -> Optional[Dict[str, Any]]:
+                     method_preference: List[str] = ["wB97M-V", "r2SCAN-3c", "xtb", "hf", "literature_heuristic"]) -> Optional[Dict[str, Any]]:
         """
         Find the best available barrier for a reaction based on method priority.
         """

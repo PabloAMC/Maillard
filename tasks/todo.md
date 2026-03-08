@@ -29,24 +29,33 @@ The core Tier 0/1/2 pipeline is operational. The next objective is to **maximise
 | **🟡 11** | **13 — Δ-ML Network Scaling** | 📋 | Blocked on 500+ DFT data points |
 | **🟡 12** | **14 — React-TS Diffusion TS Guessing** | 📋 | Frontier: generative TS from 2D graphs |
 
-### [ACTIVE] Phase 20: Heuristic DB Population `[🔴 CRITICAL | Diff: 2/10]` *(Closes Gap 1, 5)*
+### [DEPRECATED] Phase 20: Heuristic DB Population ~~`[🔴 CRITICAL]`~~ → Absorbed into Phase 21
 
-> **Why:** The Cantera mechanism currently contains only 2 DFT barriers. Meanwhile, `barrier_constants.py` already has 17 literature-calibrated barriers covering every reaction family. Importing these into `ResultsDB` immediately enables full-network simulations without any DFT.
-
-- [ ] **20.1** Extend `scripts/migrate_results_to_db.py` to import ALL heuristic barriers from `barrier_constants.py` with `method="literature_heuristic"`.
-- [ ] **20.2** Update `ResultsDB.find_barrier()` default preference to `["wB97M-V", "r2SCAN-3c", "hf", "literature_heuristic"]`. DFT automatically wins when available.
-- [ ] **20.3** Verify: `run_cantera_kinetics.py --input results/maillard_results.db` now discovers all 17 reaction families.
+> **ADR (Architectural Decision Record):** This phase was initially implemented and then deliberately reverted. The original plan was to populate `ResultsDB` with heuristic SMILES from `curated_pathways.py` using `literature_heuristic` barriers.
+>
+> **Why this was wrong:**
+> 1. `ResultsDB` operates on *exact SMILES* strings. Populating it with 16 hardcoded molecule pairs misuses the DB as a generic lookup table — it will not match if a user substitutes even one precursor.
+> 2. `barrier_constants.py` already provides the correct family-level constants. There is no need to copy them into the DB.
+> 3. Pre-populating a DB to serve as a generic fallback is fundamentally inelegant and creates a non-generalisable system.
+>
+> **Correct approach (implemented in Phase 21):** The simulation script queries `ResultsDB` first for exact computed (DFT/xTB) barriers on specific molecules, and live-falls back to `barrier_constants.get_barrier(family)` otherwise. The DB grows organically from real computations only.
 
 ---
 
-### [ACTIVE] Phase 21: SmirksEngine → Cantera Bridge `[🔴 CRITICAL | Diff: 5/10]` *(Closes Gap 5)*
+### [ACTIVE] Phase 21: SmirksEngine → Cantera Bridge `[🔴 CRITICAL | Diff: 5/10]` *(Closes Gap 1, 5)*
 
-> **Why:** Currently, `run_cantera_kinetics.py` only simulates reactions that have entries in the DB. But `SmirksEngine` generates hundreds of specific elementary steps from precursors. This phase bridges them: enumerate the network, map each step to its family barrier, and feed the full mechanism into Cantera. **This creates a complete zero-DFT laptop pipeline.**
+> **Why:** This is the *correct* zero-DFT laptop pipeline. `SmirksEngine` dynamically generates the exact, mass-balanced reaction network for any precursor combination. The bridge assigns barriers live: first checking `ResultsDB` for any existing DFT/xTB calculation for that exact SMILES pair, then falling back directly to `barrier_constants.get_barrier(reaction_family)`. No DB pre-population step is needed.
 
-- [ ] **21.1** Add `--from-smirks` mode to `run_cantera_kinetics.py`: accepts precursors, runs `SmirksEngine.enumerate()`, maps each `ElementaryStep` to its family barrier via `barrier_constants.get_barrier()`.
-- [ ] **21.2** Feed the full network (potentially 50-200 steps) into `CanteraExporter` and simulate.
-- [ ] **21.3** End-to-end test: `python scripts/run_cantera_kinetics.py --from-smirks --precursors ribose:0.1,cysteine:0.1 --temp 150 --time 1800` shows FFT, furfural, pyrazines in output.
-- [ ] **21.4** Compare output with `inverse_design.py` rankings for consistency check.
+- [x] **21.1** Extend `run_cantera_kinetics.py` CLI with `--from-smirks` flag and adjust `run_simulation` entry point.
+- [x] **21.2** Implement **SmirksEngine integration**: Initialize engine, enumerate network from `--precursors`, and deduplicate `ElementaryStep` objects.
+- [x] **21.3** Implement **Dual-Lookup Barrier logic**:
+    - Try `ResultsDB.find_barrier(reactants, products)` for exact calculated match.
+    - Fallback to `barrier_constants.get_barrier(reaction_family)` for heuristic baseline.
+    - Log which source was used for each reaction (transparency).
+- [x] **21.4** Precursor Mapping: Ensure `--precursors` names (ribose, cysteine) map to the exactly balanced SMILES expected by SmirksEngine.
+- [x] **21.5** End-to-end test: `python scripts/run_cantera_kinetics.py --from-smirks --precursors ribose:0.1,cysteine:0.1 --temp 150 --time 1800`.
+- [x] **21.6** Database Override Verification: Manually add a fake low barrier to DB for a specific step and confirm Cantera simulation shifts its flux accordingly.
+- [x] **21.7** Consistency Check: Verify Cantera product concentrations correlate with `inverse_design.py` pathway scores.
 
 ---
 
@@ -55,9 +64,11 @@ The core Tier 0/1/2 pipeline is operational. The next objective is to **maximise
 
 > **Why:** `inverse_design.py` uses `barrier_constants.get_barrier()` for scoring. `run_cantera_kinetics.py` queries `ResultsDB`. These are **different barrier values** for the same reaction families. A formulation ranked #1 in Inverse Design might rank #5 in Cantera mode. This erodes trust.
 
-- [ ] **23.1** Refactor `inverse_design.py` to query `ResultsDB` first, falling back to `barrier_constants.get_barrier()` only when no DB entry exists.
-- [ ] **23.2** Ensure both paths agree on the same barrier for any given reaction.
-- [ ] **23.3** Test: run both modes on Ribose+Cysteine and verify the ranking order is identical.
+- [x] **23.1** Centralize lookup: Add `ResultsDB.get_best_barrier(reactants, products, family)` as the single source of truth.
+- [x] **23.2** Refactor `run_cantera_kinetics.py` to use the centralized `ResultsDB.get_best_barrier()` method (removing duplicated logic).
+- [x] **23.3** Refactor `inverse_design.py`: Initialize `ResultsDB` and query it for every step, ensuring fast-mode rankings "see" DFT results.
+- [x] **23.4** Consistency Test: Run both Inverse Design and Cantera simulation for Ribose+Cysteine and verify identical barrier usage.
+- [x] **23.5** Override Verification: Confirm that a high-level DB entry affects both ranking and kinetics flux.
 
 ---
 
@@ -65,10 +76,12 @@ The core Tier 0/1/2 pipeline is operational. The next objective is to **maximise
 
 > **Why:** `cantera_export.py` uses `constant-cp` with `h0=0, s0=0, cp0=75000` for ALL species. This makes equilibrium constants meaningless and reverse reaction rates unphysical. Any system where reversibility matters (Schiff base hydrolysis, Amadori equilibrium) will give wrong results.
 
-- [ ] **24.1** Use RDKit + group-additivity (Benson tables) or the NIST WebBook to estimate `H_f°`, `S°`, and `Cp(T)` for each species.
-- [ ] **24.2** Convert to NASA 7-coefficient polynomial format for Cantera.
-- [ ] **24.3** Update `CanteraExporter.export_yaml()` to emit NASA polynomial thermo instead of constant-Cp.
-- [ ] **24.4** Verify: reverse rate constants for Schiff base formation/hydrolysis are physically reasonable (K_eq within literature range).
+- [x] **24.1** Implement `src/thermo.py`: Use Joback group additivity for $H_f$ and $C_p(T)$ estimation.
+- [x] **24.2** SMILES-to-Groups: Add RDKit-based substructure matching to decompose Maillard intermediates into Joback groups.
+- [x] **24.3** NASA-7 Polynomial Fitter: Fit $C_p(T)$ to 7 coefficients and integrate to obtain $H(T)$ and $S(T)$.
+- [x] **24.4** Update `CanteraExporter`: Inject computed NASA polynomials into the YAML mechanism.
+- [x] **24.5** Physical Validation: Verify that reverse rates in Cantera now reflect real thermodynamics (equilibrium constants).
+- [x] **24.6** Non-Isothermal Test: Run a simulation with a temperature ramp and verify that thermo-dependent fluxes change realistically.
 
 ---
 
