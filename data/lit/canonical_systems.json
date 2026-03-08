@@ -1,0 +1,35 @@
+{
+    "ribose_cysteine": {
+        "precursors": {
+            "ribose": 0.1,
+            "cysteine": 0.1
+        },
+        "targets": [
+            "2-methylthiazole",
+            "furfural",
+            "FFT"
+        ]
+    },
+    "glucose_glycine": {
+        "precursors": {
+            "glucose": 0.1,
+            "glycine": 0.1
+        },
+        "targets": [
+            "2,5-dimethylpyrazine",
+            "HMF"
+        ]
+    },
+    "ribose_cysteine_leucine": {
+        "precursors": {
+            "ribose": 0.1,
+            "cysteine": 0.05,
+            "leucine": 0.05
+        },
+        "targets": [
+            "3-methylbutanal",
+            "2-methylthiazole",
+            "isovaleraldehyde"
+        ]
+    }
+}
