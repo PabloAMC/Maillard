@@ -34,3 +34,36 @@ Phase 12 focuses on integrating Cantera for rigorous ODE-based microkinetic simu
 ## Next Steps
 - **Phase 15**: Temperature Ramp Modeling (extending `kinetics.py` to handle $T(t)$ profiles).
 - **Phase 17**: GC-MS Comparison Output (formatting Cantera results for analytical overlay).
+
+---
+
+# Dev Log: Phase 20 — Heuristic DB Population (Deprecated)
+Date: 2026-03-08
+Status: DEPRECATED ❌ → Absorbed into Phase 21
+
+## Decision Record
+
+### What was attempted
+
+Phase 20 sought to make Cantera simulations possible without DFT by pre-populating `ResultsDB` with the 17 literature-calibrated barriers from `barrier_constants.py`. The approach extracted `ElementaryStep` objects from `data/reactions/curated_pathways.py`, inserted them as SMILES-keyed rows with `method="literature_heuristic"`, and extended `ResultsDB.find_barrier()` to fall back to this method if DFT was absent.
+
+### Why it was reverted
+
+During review, a fundamental architectural flaw was identified:
+
+1. **`ResultsDB` is a precision instrument for computed barriers.** It indexes by exact SMILES pairs, meaning it correctly stores "for *this specific DFT calculation* on *this particular transition state*, the barrier was X kcal/mol." Pre-populating it with generic family constants conflates computed and assumed data.
+
+2. **Loss of generality.** Inserting 16 specific molecule pairs works only for those 16 reactions. If a user runs `ribose:0.1,glucose:0.1` the DB returns nothing, despite `barrier_constants.py` already having the correct generic family rate. The pre-population is simultaneously redundant (for covered cases) and incomplete (for any novel combination).
+
+3. **`barrier_constants.py` already solves this problem.** There is no need to copy generic constants into a relational database.
+
+### Correct architecture (implemented in Phase 21)
+
+The simulation script queries `ResultsDB` first (for any real DFT/xTB calculation on that exact SMILES pair), then falls back to `barrier_constants.get_barrier(reaction_family)` inline. The DB grows organically. No migration script, no pre-population.
+
+### Side effects of this exploration (kept)
+
+- `curated_pathways.py` was audited and two structurally unbalanced reactions were corrected (Cysteine Degradation now yields `Acetaldehyde + CO2`, not `Pyruvaldehyde + CO2`; Thiol Addition now includes explicit H₂ reactant). These corrections are chemically correct and align the file with `smirks_engine.py`.
+- `src/cantera_export.py` now enforces **strict mass balance** and raises `ValueError` on any unbalanced reaction, replacing an earlier "virtual ghost atom" hack. This is a net improvement to the codebase.
+- `src/results_db.py` now includes `"hf"` and `"literature_heuristic"` in the `find_barrier` method preference list. This is harmless and future-proof.
+
