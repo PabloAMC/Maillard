@@ -16,7 +16,7 @@ The core Tier 0/1/2 pipeline is operational. The next objective is to align with
 | **🟠 5** | **12 — Cantera Microkinetics** | ✅ | Predict concentration-vs-time (GC-MS comparable) |
 | **� 6** | **15 — Temperature Ramp Modeling** | ✅ | Realistic extrusion profiles, not isothermal |
 | **� 7** | **16 — Structured Results Database** | ✅ | Scale from 8 to 1000+ reactions |
-| **🟠 8** | **17 — GC-MS Comparison Output** | 📋 | Direct overlay with experimental data |
+| **� 8** | **17 — GC-MS Comparison Output** | ✅ | Direct overlay with experimental data |
 | **🟡 9** | **13 — Δ-ML Network Scaling** | 📋 | DFT-quality energies without DFT cost |
 | **🟡 10** | **14 — React-TS Diffusion TS Guessing** | 📋 | Frontier: generative TS from 2D graphs |
 | **🟡 11** | **18 — Regression Gate** | 📋 | Prevent accuracy degradation |
@@ -505,14 +505,15 @@ The core Tier 0/1/2 pipeline is operational. The next objective is to align with
 
 ---
 
-### Phase 17: GC-MS Comparison Output `[🟠 HIGH | Diff: 5/10]`
+### Phase 17: GC-MS Comparison Output `[🟠 HIGH | Diff: 4/10]`
 
-> **Why:** SOTA §8 notes that concentration-vs-time profiles are "the only metric directly comparable with analytical GC-MS data." Food scientists compare against GC-MS chromatograms — we should output in their native format.
+> **Why:** Simulation results are currently unitless concentrations. We need to map these to 'Aroma Extraction' and compare against the original data from the 2021 Ribose/Glycine paper. This proves the framework's baseline accuracy.
 
-- [ ] **17.1** Create `src/gcms_export.py`: export predicted volatile concentrations as `.csv`.
-    - Columns: `compound, CAS, retention_index, predicted_conc_ppm, odour_threshold`.
-- [ ] **17.2** Add OAV (Odour Activity Value) calculation: `OAV = [compound] / odour_threshold`.
-- [ ] **17.3** Generate overlay-ready plots (predicted vs. experimental) using `matplotlib`.
+- [x] **17.1 Automatic Mechanism Discovery:** Refactor `scripts/run_cantera_kinetics.py` to build mechanisms dynamically from `ResultsDB` rather than hardcoded SMILES.
+- [x] **17.2 Literature Data Import:** Create `data/lit/ribose_glycine_2021.json` with experimental molarities for target volatiles (furfural, pyrazines).
+- [x] **17.3 Implement `scripts/compare_sim_to_lit.py`:** Automated script that runs a simulation matching literature conditions and returns error metrics (MAE/R²).
+- [x] **17.4 Comparison Visualization:** Generate bar charts comparing Predicted vs Experimental yields for the target aromatics.
+- [x] **17.5 Threshold Calibration:** Adjust sensory mapping coefficients if simulation systematically over/under-predicts volatile yield.
 
 ---
 

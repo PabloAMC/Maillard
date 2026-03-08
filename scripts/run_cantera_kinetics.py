@@ -9,8 +9,10 @@ and sensory prediction.
 
 import argparse
 import json
+import sqlite3
 import pandas as pd
 from pathlib import Path
+from typing import Optional
 from src.cantera_export import CanteraExporter
 from src.kinetics import KineticsEngine
 from src.sensory import SensoryPredictor
@@ -36,23 +38,50 @@ def run_simulation(barriers_json: str, precursors: dict, temp_c: Optional[float]
     # 2. Build the mechanism
     exporter = CanteraExporter()
     
-    # Representative Maillard pathways
-    SMILES_MAP = {
-        "amadori": (["OCC1OC(O)C(O)C1O", "NCC(O)=O"], ["OCC1OC(O)C(O)C1N=CC(O)=O", "O"]),
-        "strecker": (["OCC1OC(O)C(O)C1N=CC(O)=O"], ["C1=C(SC=C1)CS"]), 
+    # Common name mapping for discovery
+    NAME_MAP = {
+        "OCC1OC(O)C(O)C1O": "ribose",
+        "NCC(O)=O": "glycine",
+        "OCC1OC(O)C(O)C1N=CC(O)=O": "amadori",
+        "C1=C(SC=C1)CS": "2-furfurylthiol",
+        "C1=COC(=C1)C=O": "furfural",
+        "CC1=NC=C(N=C1)C": "2,5-dimethylpyrazine"
     }
     
-    for key, (reactants, products) in SMILES_MAP.items():
-        barrier_val = None
-        if is_db:
-            res = db.find_barrier(reactants, products)
-            if res:
-                barrier_val = res["delta_g_kcal"]
-        else:
-            barrier_val = barriers.get(key)
+    if is_db:
+        print("Discovering mechanism from database...")
+        conn = sqlite3.connect(barriers_json)
+        cursor = conn.cursor()
+        cursor.execute("SELECT id, reactants_json, products_json FROM reactions")
+        rows = cursor.fetchall()
+        conn.close()
+        
+        count = 0
+        for rid, r_json, p_json in rows:
+            reactants = json.loads(r_json)
+            products = json.loads(p_json)
             
-        if barrier_val is not None:
-            exporter.add_reaction(reactants, products, barrier_val)
+            best_res = db.find_barrier(reactants, products)
+            if best_res:
+                # Add species with names if known
+                for r in reactants:
+                    if r in NAME_MAP: exporter.add_species(r, name=NAME_MAP[r])
+                for p in products:
+                    if p in NAME_MAP: exporter.add_species(p, name=NAME_MAP[p])
+                    
+                exporter.add_reaction(reactants, products, best_res["delta_g_kcal"])
+                count += 1
+        print(f"Discovered {count} reactions from database.")
+    else:
+        # Legacy hardcoded fallback for JSON
+        SMILES_MAP = {
+            "amadori": (["OCC1OC(O)C(O)C1O", "NCC(O)=O"], ["OCC1OC(O)C(O)C1N=CC(O)=O", "O"]),
+            "strecker": (["OCC1OC(O)C(O)C1N=CC(O)=O"], ["C1=C(SC=C1)CS"]), 
+        }
+        for key, (reactants, products) in SMILES_MAP.items():
+            barrier_val = barriers.get(key)
+            if barrier_val is not None:
+                exporter.add_reaction(reactants, products, barrier_val)
             
     print(f"Built Cantera mechanism with {len(exporter.reactions)} reactions.")
     mech_path = f"{output_prefix}_mech.yaml"

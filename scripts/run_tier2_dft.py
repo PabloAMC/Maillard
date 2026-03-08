@@ -59,7 +59,8 @@ def main():
     
     args = parser.parse_args()
     
-    refiner = DFTRefiner(solvent_name=args.solvent, temp_k=args.temp)
+    refiner = DFTRefiner(solvent_name=args.solvent, temp_k=args.temp, 
+                         db_path="results/maillard_results.db")
     if args.fast:
         print("[FAST MODE] Using minimal basis and methods.")
         refiner.opt_basis = 'sto-3g'
@@ -68,6 +69,13 @@ def main():
         refiner.refinement_basis = 'sto-3g'
         
     targets = list(TARGET_REACTIONS.keys()) if args.reaction == "all" else [args.reaction]
+    
+    # Pre-defined SMILES for targets to ensure DB consistency
+    # (In a full production engine, these would come from the SMIRKS generator)
+    SMILES_DATA = {
+        "amadori": {"reactants": ["OCC1OC(O)C(O)C1O", "NCC(O)=O"], "products": ["OCC1OC(O)C(O)C1N=CC(O)=O", "O"]},
+        "strecker": {"reactants": ["OCC1OC(O)C(O)C1N=CC(O)=O"], "products": ["C1=C(SC=C1)CS"]}, # Simplified for demo
+    }
     
     results = {}
     
@@ -82,12 +90,18 @@ def main():
             print(f"SKIPPED: {str(e)}")
             continue
         
+        # Meta for DB
+        meta = SMILES_DATA.get(t, {})
+        if meta:
+            meta["family"] = t
+
         try:
             barrier = refiner.calculate_barrier(
                 data["reactant_xyz"],
                 data["ts_xyz"],
                 charge=data.get("charge", 0),
-                run_irc=args.irc
+                run_irc=args.irc,
+                reaction_meta=meta
             )
             print(f"SUCCESS: Delta G‡ (qh-corrected) = {barrier:.2f} kcal/mol")
             results[t] = barrier

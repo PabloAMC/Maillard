@@ -99,15 +99,18 @@ Generate the optimal precursor matrix to maximize a specific flavor profile.
 python scripts/run_pipeline.py --target meaty --minimize beany
 ```
 
-### 4. Kinetics: Concentration-vs-Time Profiles
-Run rigorous ODE-based microkinetic simulations to see how concentrations evolve.
+### 4. Kinetics & Validation: Simulated vs Experimental Yields
+Run rigorous ODE-based microkinetic simulations (supporting temperature ramps) and validate against experimental benchmarks.
 ```bash
-python scripts/run_cantera_cli.py \
-    --sugars ribose \
-    --amino-acids cysteine:1.0 \
-    --temp 150 \
-    --time 600 \
+# Run simulation using the structured results database
+python scripts/run_cantera_kinetics.py \
+    --precursors ribose:0.1,glycine:0.1 \
+    --temp-ramp data/temp_profiles/isothermal_150.csv \
+    --input results/maillard_results.db \
     --predict-sensory
+
+# Validate framework against literature benchmarks (Phase 17)
+python scripts/compare_sim_to_lit.py
 ```
 *Use `--export mech.yaml` to save the Cantera mechanism for external use.*
 
@@ -176,15 +179,16 @@ The pipeline also calculates proprietary formulation indices:
 
 ---
 
-## 📊 Project Roadmap (Phase 8.E Complete)
+## 📊 Project Roadmap (Phase 17 Complete)
 
 Internal milestone reached: The core generative engine is fully atom-balanced and calibrated against literature baselines.
 - [x] **Lipid synergy** (alkylthiazole formation) modeled.
-- [x] **Concentration sensitivity** (Boltzmann scoring) implemented.
-- [x] **Literature Validation Gate** passed (benchmarked against Ribose/Cys/Leu systems).
 - [x] **Phase 12 Complete**: Cantera microkinetic integration and CLI.
+- [x] **Phase 15 Complete**: Temperature ramp modeling support.
+- [x] **Phase 16 Complete**: Structured Results Database (SQLite).
+- [x] **Phase 17 Complete**: Literature Validation (Predicted vs Experimental R-scoring).
 - [ ] **Phase 3.3 (Ongoing)**: High-precision DFT refinement for rate-limiting bottlenecks.
-- [ ] **Phase 15 (Next)**: Temperature ramp modeling and realistic cooking profiles.
+- [ ] **Phase 13 (Next)**: Δ-ML Network Scaling (DFT-quality energies without DFT cost).
 
 ## ⚖️ License
 
