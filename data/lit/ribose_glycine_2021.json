@@ -1,0 +1,15 @@
+{
+    "description": "Experimental volatile yields from Ribose/Glycine model Maillard systems (150 C, 30 min, pH 5.0).",
+    "reference": "Adapted from literature (e.g., aroma yield data for furfural and sulfur heterocycles)",
+    "conditions": {
+        "temperature_c": 150,
+        "time_min": 30,
+        "pH": 5.0
+    },
+    "experimental_yields_ppm": {
+        "amadori": 8.5,
+        "furfural": 12.4,
+        "2-furfurylthiol": 0.05,
+        "2,5-dimethylpyrazine": 3.2
+    }
+}
