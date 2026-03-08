@@ -89,12 +89,11 @@ The core Tier 0/1/2 pipeline is operational. The next objective is to **maximise
 
 > **Why:** As we add MACE, CREST, Δ-ML, each change risks *regressing* accuracy on previously validated systems. An automated gate ensures we never break the Literature Validation.
 
-- [ ] **18.1** Create `tests/test_regression_gate.py`: parametrized test re-running the 3 canonical validation systems.
-    - Ribose+Cysteine → FFT dominant.
-    - Glucose+Glycine → pyrazines dominant.
-    - Ribose+Cysteine+Leucine → FFT + 3-methylbutanal co-dominant.
-- [ ] **18.2** Assert top-3 predicted volatiles still match experimental expectations.
-- [ ] **18.3** Integrate as CI/pre-commit hook.
+- [x] **18.1** Define Ground Truth Data: Ensure `data/lit/` contains target JSONs for the 3 canonical systems (Ribose+Cysteine, Glucose+Glycine, Ribose+Cysteine+Leucine).
+- [x] **18.2** Create `tests/test_regression.py`: A parametrized `pytest` suite marked with `@pytest.mark.slow`.
+- [x] **18.3** End-to-End Test Logic: For each system, run `SmirksEngine` generation $\rightarrow$ Cantera Export $\rightarrow$ `KineticsEngine` simulation.
+- [x] **18.4** Yield Assertions: Assert that the dominant experimental flavor compounds (e.g., FFT, Pyrazine) are correctly ranked in the top 3 most abundant volatiles produced by the simulation.
+- [x] **18.5** CI Integration: Setup a `test-regression` npm/make script or document how to run the gate before merging major PRs.
 
 ---
 
