@@ -35,11 +35,11 @@ The tool should predict, for a given input formulation (amino acid/peptide compo
 
 | Output | Description | Current Status |
 |--------|-------------|:-:|
-| **Desirable volatiles** | Predicted top volatiles with relative ranking (MFT, FFT, pyrazines, Strecker aldehydes) | ⚠️ Partial — predicted but rankings not validated |
+| **Desirable volatiles** | Predicted top volatiles with relative ranking (MFT, FFT, pyrazines, Strecker aldehydes) | ✅ Validated via Lit Gate (8.C.5) |
 | **Off-flavour risk** | Risk of hexanal, nonanal, grassy/beany compound generation | ✅ Flagged via trapping metric |
-| **Competing pathway load** | DHA / lysinoalanine formation consuming lysine | ⚠️ Partial — modelled but not surfaced quantitatively |
+| **Competing pathway load** | DHA / lysinoalanine formation consuming lysine | ✅ Surface in Recommender (7.6) |
 | **Toxicity flags** | AGE (CML, CEL) and HAA (PhIP, MeIQx) risk under proposed conditions | ✅ Flagged via toxic_markers.yml |
-| **Concentration sensitivity** | How does the ranking change when cysteine doubles? | ❌ Not implemented |
+| **Concentration sensitivity** | How does the ranking change when cysteine doubles? | ✅ Boltzmann Scoring (8.D) |
 
 **Headline success criterion**: Reducing the number of wet-lab conditions by ≥10× while maintaining experimental hit rate.
 
@@ -85,33 +85,32 @@ The framework has three tiers of increasing physical fidelity and computational 
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│  TIER 0: Pathway Graph & Rule-Based Filtering                │
+│  TIER 0: Pathway Enumeration (Rule-Based)                    │
+│  (seconds per query)                                         │
+│  • SmirksEngine: Hybrid SMIRKS + Parametric Templates        │
+│  • Enforces strict atom-balanced elementary steps            │
+│  Output: Enumerated reaction graph, stoichiometric network   │
+└────────────────────┬─────────────────────────────────────────┘
+                     │ Complete network with family labels
+┌────────────────────▼─────────────────────────────────────────┐
+│  TIER 1: Laptop-Feasible Kinetics (Heuristic / xTB)          │
 │  (seconds–minutes per query)                                 │
-│  • RMG-Py automated reaction mechanism generation            │
-│  • Expert-curated rules from Hodge/Strecker/S-Maillard lit.  │
-│  Output: Enumerated reaction network, initial flux estimates │
+│  • Literature-calibrated heuristic barriers (Primary)        │
+│  • xTB (GFN2-xTB) for relative ranking of novel paths        │
+│  Output: Instant Boltzmann scores and Cantera mechanisms     │
 └────────────────────┬─────────────────────────────────────────┘
-                     │ Top-N pathways by predicted flux
+                     │ Rate-limiting bottleneck steps
 ┌────────────────────▼─────────────────────────────────────────┐
-│  TIER 1: Semi-Empirical Energy Screening                     │
-│  (minutes–hours per pathway)                                 │
-│  • xTB (GFN2-xTB) for rapid geometry optimisation           │
-│  • Reaction coordinate scans to identify key transition      │
-│    state geometries and barrier estimates                    │
-│  Output: Ranked pathways by approximate ΔG‡, ΔGrxn           │
-└────────────────────┬─────────────────────────────────────────┘
-                     │ Bottleneck / rate-limiting steps
-┌────────────────────▼─────────────────────────────────────────┐
-│  TIER 2: DFT Refinement of Critical Barriers                 │
+│  TIER 2: Production DFT Refinement (Cloud/HPC)               │
 │  (hours–days per calculation)                                 │
-│  • B3LYP-D3/def2-TZVP or ωB97X-D level theory               │
-│  • ORCA or Gaussian for transition state optimisation        │
-│  • Solvent effects via CPCM (water, to mimic aw conditions)  │
-│  Output: Validated ΔG‡ for key rate-limiting steps           │
+│  • Protocol: r2SCAN-3c // wB97M-V / def2-TZVP                │
+│  • Backend: PySCF + geomeTRIC (Native)                       │
+│  • Solvation: Implicit (ddCOSMO) or Explicit (CREST/QCG)     │
+│  Output: High-accuracy barriers saved to ResultsDB           │
 └──────────────────────────────────────────────────────────────┘
 ```
 
-### 3.1 Tier 0 — Reaction Mechanism Generation (RMG-Py)
+### 3.1 Tier 0 — Reaction Mechanism Generation (SmirksEngine)
 
 **Role**: Enumerate the chemical space of possible reactions from a given precursor set.
 
@@ -121,43 +120,28 @@ The framework has three tiers of increasing physical fidelity and computational 
 - **Hybrid Modeling Strategy**: 
   - **Tier A (SMARTS)** for high-throughput 1-2 reactant transforms.
   - **Tier B (Handcrafted Functions)** for complex 3+ reactant clusters (e.g., Thiazole, Thiol Addition) to guarantee balance and specificity.
-- Apply domain-specific constraints to prune the network:
-  - Force inclusion of known Maillard families: nucleophilic additions, Amadori rearrangements, retro-aldol fragmentations, Strecker decarboxylations, cyclisations
-  - Set maximum molecular weight cutoff (e.g., < 300 Da for volatiles of interest)
-  - Flag pathways terminating in known target compounds (MFT, FFT, pyrazines) as high-priority
 - Output: a directed reaction graph consisting of strict atom-balanced elementary steps.
 
-**Key nuances to encode as rules**:
-- pH-dependent bifurcation: acidic pH → 1,2-enolisation (furans); neutral/alkaline → 2,3-enolisation (dicarbonyls → Strecker)
-- Ribose vs. glucose reactivity (ribose ~5× faster, different fragmentation pattern)
-- DHA pathway competition: β-elimination of Ser/Cys at high temperature consuming Lys
+### 3.2 Tier 1 — Heuristic & xTB Screening
 
-### 3.2 Tier 1 — xTB Energy Screening
-
-**Role**: Rapidly estimate reaction barriers and thermodynamics to rank pathways.
+**Role**: Provide instant, useful rankings on laptop-class hardware.
 
 **Approach**:
-- Take the top-N pathways (e.g., 50–200) from Tier 0
-- For each elementary step: optimise reactant, product, and a crude transition state (NEB or relaxed scan) using `xtb` (GFN2-xTB, tight convergence)
-- Compute ΔErxn and ΔE‡ to build a rough kinetic ordering
-- Parallelise across CPU cores (xTB is lightweight, ~10–60s per optimisation)
+- **Heuristic Baseline**: Utilizes 17 literature-calibrated barrier constants (Yaylayan, Martins, Hofmann) stored in `src/barrier_constants.py`.
+- **xTB NEB**: For reactions without a family match, uses `xtb --path` (GFN2-xTB) to estimate activation energies.
+- **Boltzmann Scoring**: `score = Σ [c] ⋅ exp(−ΔG‡/kT)` provides physical sensitivity to concentrations and barriers.
 
-**Limitations to be aware of**:
-- xTB barriers can be off by 5–15 kcal/mol for reactions involving H-transfer, radical steps, or ionic mechanisms in water — treat as relative screening, not absolute truth
-- Solvent effects are implicit (GBSA water) — adequate for ranking
-
-### 3.3 Tier 2 — DFT Refinement with Microsoft Skala
+### 3.3 Tier 2 — DFT Refinement (PySCF)
 
 **Role**: Obtain chemically accurate barriers for the rate-limiting steps that determine product yield.
 
 **Approach**:
-- Select the top 5–15 bottleneck steps from Tier 1.
-- Use **Microsoft Skala**, a deep learning-based exchange-correlation (XC) functional, to achieve chemical accuracy (CCSD(T) equivalent) at the computational cost of standard DFT.
-- Execute calculations via **PySCF** or **ASE** (both supported by the Skala Python package).
-- Use solvent effects via CPCM (water, to mimic aw conditions).
+- Use the **r2SCAN-3c // wB97M-V / def2-TZVP** composite protocol for high accuracy at moderate cost.
+- Backend: **PySCF** for all electronic structure evaluations, orchestrated by `src/dft_refiner.py`.
+- Solvation: Implicit water via ddCOSMO (default) with optional explicit solvation via CREST/QCG for proton-transfer steps.
 
-**Why Skala?**:
-Maillard barriers are notoriously sensitive to the XC functional used. Skala provides the "gold standard" accuracy required to distinguish between competing pathways (e.g., 1,2- vs 2,3-enolization) without the catastrophic cost of pure CCSD(T).
+**Why PySCF?**:
+PySCF provides a modern, Pythonic interface that enables direct integration of ML-accelerated geometry optimization and automated transition-state search without the file-I/O overhead of legacy binaries.
 
 ---
 
@@ -165,32 +149,32 @@ Maillard barriers are notoriously sensitive to the XC functional used. Skala pro
 
 | Component | Why Deferred |
 |-----------|-------------|
-| **Microkinetic ODE modelling** | Requires experimentally validated rate constants; circular if we're trying to generate those constants. Consider Phase 2 once DFT barriers are available. |
 | **ML/Random Forest predictors** | Useful eventually, but requires a dataset of (conditions → volatilome) pairs that does not yet exist. Phase 3 after wet-lab validation loop. |
 | **Molecular dynamics / QM-MM** | Only relevant for peptide-bound reactions (protein-matrix effects), not for the small-molecule Maillard cascade addressed here. |
 | **Lipid oxidation pathways** | PUFA oxidation involves radical chain mechanisms and lipid peroxide chemistry — a separate, very large problem. Flag as a parallel effort. |
+| **Full Skala XC Integration** | Current DFT uses r2SCAN-3c; Skala is experimental and scaffolded for future cloud use. |
 
 ---
 
 ## 5. Suggested Phase Plan
 
-### Phase 1 — Foundation (Months 1–3)
-- [ ] Set up RMG-Py environment; validate against known Maillard pathways from literature
-- [ ] Implement domain-specific rules and target compound library
-- [ ] Run initial Tier 0 enumeration for the 3 canonical precursor systems: (glucose + glycine), (ribose + cysteine), (ribose + cysteine + leucine)
-- [ ] Validate RMG output by confirming presence of known intermediates (Amadori product, furfural, methional, etc.)
-- [ ] Tier 1 xTB screening setup; benchmark against any published barrier data
+### Phase 1 — Foundation (COMPLETED)
+- [x] Set up SmirksEngine environment; validate against known Maillard pathways from literature
+- [x] Implement domain-specific rules and target compound library
+- [x] Run initial Tier 0 enumeration for the 3 canonical precursor systems: (glucose + glycine), (ribose + cysteine), (ribose + cysteine + leucine)
+- [x] Validate SmirksEngine output by confirming presence of known intermediates (Amadori product, furfural, methional, etc.)
+- [x] Tier 1 xTB screening setup; benchmark against published barrier data
 
-### Phase 2 — Core Computational Results (Months 3–6)
-- [ ] DFT calculations (Tier 2) for the 6–8 key reactions listed above
-- [ ] Compare predicted pathway rankings against empirical GC-MS observations from published model system experiments
-- [ ] Develop first "precursor recommendation" prototype: given a target volatile profile, rank precursor combinations by predicted pathway flux
+### Phase 2 — Core Computational Results (ACTIVE)
+- [x] DFT calculations (Tier 2) for initial model systems
+- [/] Compare predicted pathway rankings against empirical GC-MS observations from published model system experiments (Phase 17)
+- [x] Develop first "precursor recommendation" prototype: given a target volatile profile, rank precursor combinations by predicted pathway flux (Inverse Design mode)
 
-### Phase 3 — Experimental Validation Loop (Months 6–12)
-- [ ] Select 5–10 top-ranked formulations from computational screening
-- [ ] Run wet-lab validation (model system heating, GC-MS volatilome analysis)
-- [ ] Compare predicted vs. observed volatilomes; iterate on xTB/DFT parameters and RMG rules
-- [ ] Begin microkinetic modelling if rate constant data allows
+### Phase 3 — Production & SOTA Scaling (NEXT)
+- [ ] Mass generation of 500+ DFT barriers for Δ-ML scaling (Phase 3.3 / 13)
+- [ ] Implement NASA Polynomial Thermodynamics for physically accurate reverse rates (Phase 24)
+- [ ] Deploy Web Dashboard for community access (Phase 19)
+- [ ] Experimental validation loop with industrial partners
 
 ---
 
@@ -198,23 +182,23 @@ Maillard barriers are notoriously sensitive to the XC functional used. Skala pro
 
 ### What is well-motivated
 
-**RMG-Py** is genuinely the right tool for Tier 0. It was developed precisely for combustion and pyrolysis reaction networks, which share many structural similarities with thermally-driven food chemistry cascades (fragmentation, radical chemistry, condensation). Its thermochemical database (via RMG's thermo libraries and GAVs) can be supplemented with Maillard-specific reaction families.
+**SmirksEngine** is genuinely the right tool for Tier 0. It was developed to provide deterministic, atom-balanced reaction networks using a hybrid of SMARTS transforms and parametric templates. Its deterministic nature (compared to stochastic learners) ensures that every reaction is chemically verifiable by a human expert.
 
 **xTB** is an excellent filter. At ~10–60s per molecule, it enables screening thousands of reaction steps that would take hours at DFT, at the cost of quantitative accuracy. Used correctly as a *relative ranker* not an *absolute predictor*, it is highly cost-effective.
 
-**DFT for barriers** is necessary and unavoidable for the key steps. The question is not whether to do it, but how to scope it. The proposal to focus on 6–8 key reactions is pragmatic and correct.
+**DFT for barriers** via **PySCF** is necessary and unavoidable for the key steps. The protocol (r2SCAN-3c // wB97M-V) targets the highest-leverage reaction families identified during the Tier 1 screening.
 
 **Strict Mass Conservation** is the "ground truth" of the engine. An unbalanced `ElementaryStep` makes ΔE‡ and ΔGrxn calculations physically impossible or deceptive. Enforcing balance at Tier 0 (via `assert_balanced` unit tests) is the anchor for the entire physics pipeline.
 
 ### Honest caveats
 
-1. **RMG-Py was designed for gas-phase and combustion chemistry.** The Maillard reaction occurs in a complex aqueous (or low-moisture) condensed-phase environment. Adapting RMG for condensed-phase food chemistry will require:
+1. **Deterministic Rule Engineering** requires constant expert oversight. While more reliable than general-purpose AI for this niche, the Maillard reaction occurs in a complex aqueous environment. Adapting for condensed-phase food chemistry requires:
    - Custom reaction families for Amadori rearrangement, Strecker degradation, Schiff base formation/hydrolysis
-   - pH-dependent reactivity (RMG does not natively handle protonation equilibria) — likely needs manual encoding as conditional rules
+   - pH-dependent reactivity (handled via `ReactionConditions` branching)
 
 2. **Barrier accuracy with xTB** for reactions involving proton transfer in water, ionic intermediates, and β-elimination can be qualitatively misleading. Treat Tier 1 as ordering-only, never as a source of rate constants.
 
-3. **The "off-flavour trapping" pathway** (Schiff base formation between hexanal and free amino acids) is actually *useful* chemistry to model — it is a key engineering lever for plant-based systems. Make sure this is included in the RMG rule set as a deliberate masking pathway, not just as a side reaction.
+3. **The "off-flavour trapping" pathway** (Schiff base formation between hexanal and free amino acids) is actually *useful* chemistry to model — it is a key engineering lever for plant-based systems. Included in the template set as a deliberate masking pathway.
 
 4. **Experimental validation is essential and non-negotiable.** Computational screening can narrow the search space dramatically, but the Maillard network is too complex for purely *in silico* prediction at this stage. The computational → experimental → computational iteration cycle is the actual core of the scientific method here.
 
@@ -246,10 +230,10 @@ Maillard barriers are notoriously sensitive to the XC functional used. Skala pro
 
 | Tool | Role | Notes |
 |------|------|-------|
-| [RMG-Py](https://github.com/ReactionMechanismGenerator/RMG-Py) | Reaction network generation | Requires custom Maillard reaction families |
+| **SmirksEngine** | Reaction network generation | Custom hybrid engine; mass-balanced templates |
 | [xTB](https://github.com/grimme-lab/xtb) | Semi-empirical QM | GFN2-xTB recommended; fast, good geometries |
-| [ORCA](https://orcaforum.kofo.mpg.de) | DFT / DLPNO-CCSD(T) | For Tier 2 barrier calculations |
-| [Gaussian 16](https://gaussian.com) | DFT alternative | Well-established, good IRC support |
-| [ASE](https://wiki.fysik.dtu.dk/ase/) | Atomistic simulation interface | Useful for automating xTB workflows |
-| [AutoTST](https://github.com/ReactionMechanismGenerator/AutoTST) | Automated TS search | Integrates with RMG, worth evaluating |
+| [PySCF](https://pyscf.org) | Electronic Structure | Native Tier 2 engine; composite protocol support |
+| [geomeTRIC](https://github.com/leeping/geomeTRIC) | Geometry Optimization | Native optimizer for PySCF calculations |
+| [ASE](https://wiki.fysik.dtu.dk/ase/) | Atomistic simulation interface | Useful for automating xTB/MACE workflows |
+| [Sella](https://github.com/zadorlab/sella) | TS Search | Saddle-point optimizer (Phase 11) |
 | NIST WebBook / SDBS | Spectral reference | For validating predicted VOC structures |
