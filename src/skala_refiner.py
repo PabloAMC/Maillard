@@ -147,3 +147,6 @@ class SkalaRefiner:
         
         delta_eh = ts_res.energy_hartree - r_res.energy_hartree
         return delta_eh * 627.509
+
+    # Alias for interface consistency with DFTRefiner
+    calculate_barrier = refine_barrier
