@@ -7,7 +7,9 @@ Converts DFT barriers (Delta G‡) into rate constants and temporal fluxes.
 
 import numpy as np
 from scipy.constants import kilo, calorie_th, Planck, Boltzmann, gas_constant
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple, Set
+from src.conditions import ReactionConditions
+from src.thermo import JobackEstimator
 
 class KineticsEngine:
     def __init__(self, temperature_k: float = 423.15):
@@ -18,18 +20,47 @@ class KineticsEngine:
         self.h = Planck
         self.R = gas_constant
 
-    def get_rate_constant(self, delta_g_kcal_mol: float, temperature_k: Optional[float] = None) -> float:
+    def get_rate_constant(self, delta_g_kcal_mol: float, 
+                          temperature_k: Optional[float] = None,
+                          conditions: Optional[ReactionConditions] = None,
+                          reaction_family: Optional[str] = None) -> float:
         """
         Calculate the first-order rate constant k using Eyring-Polanyi equation:
         k = (kB * T / h) * exp(-Delta G‡ / RT)
+        
+        Includes Phase 12 enhancements:
+        - pH scaling from ReactionConditions
+        - Kirkwood-Onsager Solvent Scaling
         """
         T = temperature_k or self.T
+        if conditions:
+            T = conditions.temperature_kelvin
+            
+        # 1. Apply pH/Environmental Multipliers
+        multiplier = 1.0
+        if conditions and reaction_family:
+            multiplier *= conditions.get_ph_multiplier(reaction_family)
+            multiplier *= conditions.get_water_activity_multiplier()
+            
+        # 2. Kirkwood-Onsager Solvent Scaling (Phase 12.1)
+        # Simplified: Polar transitions (Maillard) are accelerated in polar solvents.
+        # Barriers are adjusted by f(epsilon) = (eps-1)/(2eps+1).
+        # We assume the input barrier is for water (eps=78.4, f=0.49).
+        # Adjusted Barrier = Base_Barrier - Shift * (f(eps) - f(water))
+        if conditions:
+            eps = conditions.dielectric_constant
+            f_eps = (eps - 1) / (2 * eps + 1)
+            f_water = (78.4 - 1) / (2 * 78.4 + 1)
+            # Empirical shift: 5 kcal/mol sensitivity to solvent polarity
+            barrier_shift = 5.0 * (f_eps - f_water)
+            delta_g_kcal_mol -= barrier_shift
+
         delta_g_j = delta_g_kcal_mol * self.kcal_to_j_per_mol
         
         pre_exponential = (self.kb * T) / self.h
         exponential = np.exp(-delta_g_j / (self.R * T))
         
-        return pre_exponential * exponential
+        return pre_exponential * exponential * multiplier
 
     def simulate_flux(self, initial_conc: float, rate_constant: float, time_steps_sec: np.ndarray) -> np.ndarray:
         """
@@ -52,6 +83,28 @@ class KineticsEngine:
             results[product] = conc_p
             
         return results
+
+    def is_reaction_feasible(self, reactants: List[str], products: List[str], 
+                             threshold_kcal_mol: float = 30.0) -> Tuple[bool, float]:
+        """
+        Phase 12.3: Dynamic Thermo-Gating.
+        Uses Joback Group Additivity to estimate Delta G for a reaction.
+        If Delta G > threshold, the reaction is considered unphysical (non-spontaneous).
+        
+        Returns:
+            (is_feasible, delta_g_estimated_kcal_mol)
+        """
+        try:
+            r_energy = sum(JobackEstimator.estimate(s)["G298"] for s in reactants)
+            p_energy = sum(JobackEstimator.estimate(s)["G298"] for s in products)
+            
+            # Convert J/mol to kcal/mol
+            delta_g = (p_energy - r_energy) / 4184.0
+            
+            return delta_g <= threshold_kcal_mol, delta_g
+        except Exception as e:
+            # If Joback fails (unsupported groups), default to feasible for safety
+            return True, 0.0
 
     def simulate_network_cantera(self, mechanism_yaml: str, initial_concentrations: Dict[str, float], 
                                  time_span: tuple, temperature_k: Optional[float] = None,

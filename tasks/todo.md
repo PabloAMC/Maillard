@@ -9,14 +9,29 @@ The core Tier 0/1/2 pipeline is operational and the zero-DFT laptop pipeline is 
 
 The immediate next priority is generating the required 500+ data points to unblock Machine Learning models, and optimizing MACE for sulfur chemistry to eliminate drift.
 
+> [!IMPORTANT]
+> **Environment Note:** Use `.venv` for full test coverage. The `conda_env` is missing `mace-torch` and will skip MLP/MACE related tests (`tests/qm/test_mlp_*`).
+
 | Priority | Phase | Status | Impact |
 |----------|-------|:------:|--------|
-| **🔴 1** | **Phase 13: Tier 2 Batch Execution (Dataset Gen)** | 🚧 | Generates 500+ DFT points required for fine-tuning ML potentials. |
-| **🔴 2** | **Phase 14: MACE Fine-Tuning (Sulfur)** | 📋 | Fixes 1.11 Å drift on sulfur species (FFT, MFT) for accurate laptop runs. |
-| **🟠 3** | **Phase 15: Δ-ML Network Scaling** | 📋 | Predicts DFT-quality energy correctly at MACE speed without full DFT. |
-| **🟡 4** | **Phase 16: FFT Pathway Bottleneck** | 🚧 | Refine Ribose+Cys+Leu system investigation. |
-| **🔵 5** | **Phase 17: Web Dashboard** | ⏳ | Deferred. GUI for food scientists. |
-| **🔵 6** | **Phase 18: Experimental Validation Prep** | ⏳ | Deferred until pipeline is fully validated against ≥ 3 benchmarks. |
+| **✅** | **Phase 12: Advanced Kinetic Features** | � | pH, Temperature, and Thermo gating completed & verified. |
+| **🟠 2** | **Phase 13: Tier 2 Batch Execution (Dataset Gen)** | 🚧 | Generates 500+ DFT points required for fine-tuning ML potentials. |
+| **� 3** | **Phase 14: MACE Fine-Tuning (Sulfur)** | 📋 | Fixes 1.11 Å drift on sulfur species (FFT, MFT) for accurate laptop runs. |
+| **� 4** | **Phase 15: Δ-ML Network Scaling** | 📋 | Predicts DFT-quality energy correctly at MACE speed without full DFT. |
+| **� 5** | **Phase 16: FFT Pathway Bottleneck** | 🚧 | Refine Ribose+Cys+Leu system investigation. |
+| **🔵 6** | **Phase 17: Web Dashboard** | ⏳ | Deferred. GUI for food scientists. |
+| **🔵 7** | **Phase 18: Experimental Validation Prep** | ⏳ | Deferred until pipeline is fully validated against ≥ 3 benchmarks. |
+
+---
+
+### [DONE] Phase 12: Advanced Kinetic Features `[✅ COMPLETE]`
+
+> **Why:** Standard TST barriers are static. Real Maillard chemistry is heavily pH-dependent (e.g., Schiff Base is optimal at pH 5.5) and influenced by solvent. These features improve accuracy without requiring expensive DFT calculations.
+- [x] **12.1 Barrier Auto-Scaling**: Implement pH and temperature-dependent activation scaling (Kirkwood-Onsager approximation) in `src/kinetics.py`.
+- [x] **12.2 Multi-Reactant Integration**: Expand `CanteraExporter.add_reaction` to handle higher-order > 2 reactant/product rules.
+- [x] **12.3 Dynamic Thermo-Gating**: Use `JobackEstimator` to pre-prune highly endergonic (ΔG > 30 kcal/mol) reactions before ODE integration.
+- [x] **12.4 Solvent-Dependent Scaling**: Add empirical barrier scaling based on solvent dielectric constants.
+- [x] **12.5 Verification**: Added `tests/unit/test_advanced_kinetics.py` to ensure long-term correctness of pH and solvent scaling.
 
 ---
 

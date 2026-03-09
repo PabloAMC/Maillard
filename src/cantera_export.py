@@ -9,6 +9,7 @@ into a Cantera-compatible YAML mechanism file.
 import yaml
 from typing import Dict, List, Optional
 from pathlib import Path
+from src.kinetics import KineticsEngine
 
 class CanteraExporter:
     """
@@ -19,6 +20,7 @@ class CanteraExporter:
         self.name = name
         self.species = {}  # SMILES -> Metadata
         self.reactions = []
+        self.kinetics = KineticsEngine()
 
     def add_species(self, smiles: str, name: Optional[str] = None):
         """Append a species to the mechanism and calculate composition via RDKit."""
@@ -45,12 +47,20 @@ class CanteraExporter:
 
     def add_reaction(self, reactants: List[str], products: List[str], 
                      barrier_kcal: float, temperature_k: float = 423.15,
-                     A: float = 1e13, b: float = 0.0):
+                     A: float = 1e13, b: float = 0.0,
+                     thermo_gating: bool = True,
+                     gating_threshold: float = 30.0):
         """
-        Add an elementary step. Enforces strict mass balance. If a reaction is 
-        not balanced atom-for-atom, it raises an error. Virtual atoms are NOT 
-        allowed because they break Cantera's mass action kinetics and reversibility.
+        Add an elementary step. Enforces strict mass balance and optional thermo-gating.
         """
+        # 1. Thermo-Gating (Phase 12.3)
+        if thermo_gating:
+            is_feasible, dg = self.kinetics.is_reaction_feasible(reactants, products, gating_threshold)
+            if not is_feasible:
+                # Log and skip unphysical reactions
+                # print(f"  Skipping unphysical reaction (Delta G = {dg:.1f} kcal/mol): {reactants} -> {products}")
+                return
+
         r_names = [self.add_species(r) for r in reactants]
         p_names = [self.add_species(p) for p in products]
         
@@ -78,7 +88,14 @@ class CanteraExporter:
                              f"Reactants {reactants} vs Products {products}. "
                              f"Atom difference (Products - Reactants): {diffs}")
 
-        reaction_str = " + ".join(r_names) + " <=> " + " + ".join(p_names)
+        # Support for stoichiometric coefficients in equation string
+        def group_and_count(names):
+            counts = {}
+            for n in names:
+                counts[n] = counts.get(n, 0) + 1
+            return " + ".join([(f"{v} " if v > 1 else "") + k for k, v in counts.items()])
+
+        reaction_str = f"{group_and_count(r_names)} <=> {group_and_count(p_names)}"
         
         self.reactions.append({
             "equation": reaction_str,

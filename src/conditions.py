@@ -8,7 +8,22 @@ class ReactionConditions:
     pH: float = 7.0
     temperature_celsius: float = 150.0 
     water_activity: float = 0.8
+    dielectric_constant: float = 78.4 # Default: Water
+    solvent_name: str = "water"
     
+    def __post_init__(self):
+        """Set dielectric constant based on solvent name if provided."""
+        presets = {
+            "water": 78.4,
+            "ethanol": 24.5,
+            "methanol": 32.7,
+            "lipid": 2.0,
+            "benzene": 2.3,
+            "dimethyl_sulfoxide": 46.7
+        }
+        if self.solvent_name.lower() in presets:
+            self.dielectric_constant = presets[self.solvent_name.lower()]
+
     @property
     def temperature_kelvin(self) -> float:
         return self.temperature_celsius + 273.15
@@ -25,7 +40,7 @@ class ReactionConditions:
         fam = reaction_family.lower()
         
         # 1,2-enolisation to furans (favored at acidic pH)
-        if "1,2-enolis" in fam or "furan" in fam:
+        if "1,2" in fam or "1_2" in fam or "furan" in fam:
             if self.pH < 6.0:
                 return 5.0 # Accelerated
             return 1.0
