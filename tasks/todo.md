@@ -18,15 +18,15 @@ The core Tier 0/1/2 pipeline is operational. The next objective is to **maximise
 | **🟠 4** | **24 — NASA Polynomial Thermodynamics** | 📋 | constant-Cp makes reverse rates unphysical (Gap 4) |
 | **🟠 5** | **18 — Regression Gate** | 📋 | Protect the heuristic baseline |
 | **🟠 6** | **19 — Web Dashboard** | 📋 | Lower adoption barrier for food scientists |
-| **🟡 7** | **3.3 — DFT Refinement Runs** | ⏳ | Optional cloud/HPC; auto-upgrades DB when available |
-| **🟢 8** | **12 — Cantera Microkinetics** | ✅ | Predict concentration-vs-time (GC-MS comparable) |
+| **� 7** | **3.3 — DFT Refinement Runs** | ⏳ | Optional cloud/HPC; auto-upgrades DB when available |
+| **� 8** | **12 — Cantera Microkinetics** | ✅ | Predict concentration-vs-time (GC-MS comparable) |
 | **🟢 9** | **15 — Temperature Ramp Modeling** | ✅ | Realistic extrusion profiles, not isothermal |
 | **🟢 10** | **16 — Structured Results Database** | ✅ | Scale from 8 to 1000+ reactions |
 | **🟢 11** | **17 — GC-MS Comparison Output** | ✅ | Direct overlay with experimental data |
 | **🔧 8** | **9 — Explicit Solvation (CREST/QCG)** | 🔧 | Scaffolded; requires CREST binary (not bundled) |
 | **🔧 9** | **10 — MLP Geometry Opt (MACE)** | 🔧 | Scaffolded; requires MACE weights (~500MB download) |
 | **🔧 10** | **11 — Sella TS Search** | 🔧 | Scaffolded; requires `pip install sella` + ASE calculator |
-| **🟡 11** | **13 — Δ-ML Network Scaling** | 📋 | Blocked on 500+ DFT data points |
+| **�🟡 11** | **13 — Δ-ML Network Scaling** | 📋 | Blocked on 500+ DFT data points |
 | **🟡 12** | **14 — React-TS Diffusion TS Guessing** | 📋 | Frontier: generative TS from 2D graphs |
 
 ### 🐛 ACTIVE BUGS — 14 Failing Tests (2026-03-09 Triage)
@@ -57,7 +57,7 @@ The core Tier 0/1/2 pipeline is operational. The next objective is to **maximise
 
 ---
 
-#### Bug B: Recommender `predict()` Fails to Match FFT Pathway `[2 tests | 🔴 FIX CODE]`
+#### Bug B: Recommender `predict()` Fails to Match FFT Pathway `[2 tests | � FIX CODE]`
 
 **Root Cause:** `_get_pathway_requirements()` in `recommend.py` computes the set of exogenous reactants needed for `C_S_Maillard_FFT`. Step 1 requires `[CYSTEINE, WATER]`, Step 3 requires `[FURFURAL, H2S, hydrogen]`. Furfural and H2S are produced in earlier steps, but **`water` and `hydrogen` (`[HH]`)** are treated as exogenous requirements. When the test calls `predict(["D-ribose", "L-cysteine"])`, the pathway never activates because `water` and `hydrogen` are missing from the pool.
 
@@ -113,7 +113,7 @@ except ImportError:
 
 ---
 
-#### Bug E: PySCF `Mole.to_ase()` Doesn't Exist `[1 test | 🟠 FIX CODE]`
+#### Bug E: PySCF `Mole.to_ase()` Doesn't Exist `[1 test | � FIX CODE]`
 
 **Root Cause:** `dft_refiner.py` line 236 calls `mol.to_ase()` and `mf.as_ase()`, but PySCF's `gto.Mole` has no `to_ase()` method and `mf.as_ase()` doesn't exist either. This is the Sella TS search integration path. The code was scaffolded but never tested end-to-end (noted in Phase 11.7: "PySCF↔ASE bridge is untested").
 
