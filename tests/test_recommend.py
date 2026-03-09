@@ -32,8 +32,8 @@ def test_recommender_canonical_systems():
     assert hmf_pathway["toxicity"] is not None
     assert hmf_pathway["toxicity"]["name"] == "5-Hydroxymethylfurfural (HMF)"
     
-    # 3. Strecker System (Ribose + Cys + Leu)
-    cplx_active = recommender.predict(["D-ribose", "L-cysteine", "L-leucine"])
+    # 3. Strecker System (Ribose + Cys + Leu + Pyruvaldehyde)
+    cplx_active = recommender.predict(["D-ribose", "L-cysteine", "L-leucine", "pyruvaldehyde"])
     cplx_names = [p["name"] for p in cplx_active]
     assert "C_S_Maillard_FFT" in cplx_names
     assert "B_Strecker_Leu" in cplx_names

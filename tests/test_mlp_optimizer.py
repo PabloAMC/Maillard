@@ -12,6 +12,14 @@ try:
 except ImportError:
     MLPOptimizer = None
 
+# Direct check for MACE backend — more reliable than checking MLPOptimizer class
+_MACE_AVAILABLE = False
+try:
+    from mace.calculators import mace_mp
+    _MACE_AVAILABLE = True
+except (ImportError, Exception):
+    pass
+
 FORMALDEHYDE_XYZ = """\
 4
 Formaldehyde
@@ -21,7 +29,7 @@ H       0.000000    0.940000   -0.580000
 H       0.000000   -0.940000   -0.580000
 """
 
-@pytest.mark.skipif(MLPOptimizer is None, reason="ML dependencies (mace-torch/ase) not installed")
+@pytest.mark.skipif(not _MACE_AVAILABLE, reason="MACE ML dependencies not installed")
 @pytest.mark.slow
 def test_mlp_optimizer_smoke():
     """
@@ -42,7 +50,7 @@ def test_mlp_optimizer_smoke():
     elements_out = [line.split()[0] for line in lines[2:]]
     assert sorted(elements_out) == sorted(["O", "C", "H", "H"])
 
-@pytest.mark.skipif(MLPOptimizer is None, reason="ML dependencies not installed")
+@pytest.mark.skipif(not _MACE_AVAILABLE, reason="MACE ML dependencies not installed")
 @pytest.mark.slow
 def test_mlp_optimizer_ts_fallback():
     """ Verify the TS scaffold correctly warns and falls back to standard minimization. """
@@ -50,7 +58,7 @@ def test_mlp_optimizer_ts_fallback():
     opt_xyz = optimizer.optimize_ts(FORMALDEHYDE_XYZ, fmax=0.05, max_steps=10)
     assert "4" in opt_xyz.splitlines()[0]
 
-@pytest.mark.skipif(MLPOptimizer is None, reason="ML dependencies not installed")
+@pytest.mark.skipif(not _MACE_AVAILABLE, reason="MACE ML dependencies not installed")
 @pytest.mark.slow
 def test_dft_refiner_mace_backend():
     """ Verify DFTRefiner routes structural relaxation through MLPOptimizer and returns valid energies. """

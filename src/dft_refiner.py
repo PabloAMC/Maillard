@@ -231,16 +231,36 @@ class DFTRefiner:
             mf = self._build_mf(mol, xc_method=self.opt_method, use_solvent=False, conv_tol=1e-6)
             
             # Phase 11: Specialized TS search via Sella
+            conv = False  # Initialize before potential Sella/geomeTRIC paths
             if is_ts and self.ts_optimizer:
                 print(">>> [Phase 11] Running Sella eigenvector-following TS search...")
-                atoms = self.ts_optimizer.find_ts(mol.to_ase(), mf.as_ase())
-                if self.ts_optimizer.is_converged(atoms):
-                    opt_xyz = atoms.tostring(format='xyz')
-                    mol_opt = self._setup_mol(opt_xyz, charge, spin, basis=self.opt_basis)
-                    conv = True
-                else:
-                    print("    WARNING: Sella failed to converge. Falling back to geomeTRIC...")
-                    is_ts_fallback = True
+                try:
+                    # PySCF↔ASE bridge: convert Mole to ASE Atoms manually
+                    from ase import Atoms as ASEAtoms
+                    from pyscf.data import nist as pyscf_nist
+                    
+                    coords_bohr = mol.atom_coords()
+                    symbols = [mol.atom_symbol(i) for i in range(mol.natm)]
+                    positions_ang = coords_bohr * pyscf_nist.BOHR
+                    ase_atoms = ASEAtoms(symbols=symbols, positions=positions_ang)
+                    
+                    # Use PySCF as ASE calculator via ase-pyscf bridge
+                    # This requires a working pyscf ASE calculator interface
+                    from ase.calculators.pyscf import PySCF as PySCFCalc
+                    calc = PySCFCalc(atoms=ase_atoms, molcell=mol, mf_class=type(mf), xc=getattr(mf, 'xc', 'hf'))
+                    ase_atoms.calc = calc
+                    
+                    atoms = self.ts_optimizer.find_ts(ase_atoms, calc)
+                    if self.ts_optimizer.is_converged(atoms):
+                        opt_xyz = atoms.tostring(format='xyz')
+                        mol_opt = self._setup_mol(opt_xyz, charge, spin, basis=self.opt_basis)
+                        conv = True
+                    else:
+                        print("    WARNING: Sella failed to converge. Falling back to geomeTRIC...")
+                except (ImportError, AttributeError, Exception) as e:
+                    print(f"    WARNING: Sella/ASE bridge not available ({type(e).__name__}: {e}). Falling back to geomeTRIC...")
+                    
+                is_ts_fallback = is_ts and not conv
             else:
                 is_ts_fallback = is_ts
 

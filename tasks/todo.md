@@ -29,6 +29,105 @@ The core Tier 0/1/2 pipeline is operational. The next objective is to **maximise
 | **🟡 11** | **13 — Δ-ML Network Scaling** | 📋 | Blocked on 500+ DFT data points |
 | **🟡 12** | **14 — React-TS Diffusion TS Guessing** | 📋 | Frontier: generative TS from 2D graphs |
 
+### 🐛 ACTIVE BUGS — 14 Failing Tests (2026-03-09 Triage)
+
+> **Summary:** 219 passing, 43 skipped, **14 failed** across 6 test files.
+> Failures fall into **5 root-cause buckets**. Two are real bugs; three are test–code mismatches from Phase 20→21 architecture changes.
+
+---
+
+#### Bug A: Cantera Test Fixtures Use Unbalanced Dummy Reactions `[7 tests | 🔴 FIX TESTS]`
+
+**Root Cause:** Phase 20 introduced strict mass-balance enforcement in `cantera_export.py` (line 77). Several test fixtures were written *before* this enforcement, using toy reactions like `C → CC` (methane → ethane) or `Ribose → FFT` that are not atom-balanced. The enforcement is correct — the *tests* need updating with balanced dummy reactions or a test-only bypass.
+
+**Affected Tests:**
+- `test_cantera_integration.py::TestIsothermalSimulation::test_simple_isothermal_simulation`
+- `test_cantera_integration.py::TestIsothermalSimulation::test_isothermal_equilibration`
+- `test_cantera_integration.py::TestTimeTemperatureProfile::test_time_temperature_profile`
+- `test_cantera_integration.py::TestMultiplePathways::test_multiple_pathways_coexist`
+- `test_cantera_integration.py::TestMultiplePathways::test_pathway_selectivity_chemistry`
+- `test_cantera_integration.py::TestBarrierSensitivity::test_barrier_effect_on_kinetics`
+- `test_temp_ramp.py::test_isothermal_vs_ramp`
+
+**Fix:** Rewrite test fixtures to use atom-balanced dummy reactions that satisfy `add_reaction()`'s mass-balance check. For kinetics tests that only care about rate behaviour (not chemistry), use simple balanced isomerisation reactions like `A ⇌ B` where A and B have identical molecular formula (e.g. `CC=O ⇌ C=CO` — acetaldehyde ⇌ vinyl alcohol).
+
+- [ ] **A.1** Fix `test_cantera_integration.py` — replace all unbalanced `[\"C\"] → [\"CC\"]` with balanced dummy reactions
+- [ ] **A.2** Fix `test_temp_ramp.py` — replace `[\"C\"] → [\"CC\"]` with balanced isomerisation
+- [ ] **A.3** Fix multi-step test assertions (`test_simple_isothermal_simulation`, `test_multiple_pathways_coexist`) — Ribose→FFT shortcuts are not atom-balanced; redesign with realistic multi-step intermediates or pre-build balanced mechanism
+
+---
+
+#### Bug B: Recommender `predict()` Fails to Match FFT Pathway `[2 tests | 🔴 FIX CODE]`
+
+**Root Cause:** `_get_pathway_requirements()` in `recommend.py` computes the set of exogenous reactants needed for `C_S_Maillard_FFT`. Step 1 requires `[CYSTEINE, WATER]`, Step 3 requires `[FURFURAL, H2S, hydrogen]`. Furfural and H2S are produced in earlier steps, but **`water` and `hydrogen` (`[HH]`)** are treated as exogenous requirements. When the test calls `predict(["D-ribose", "L-cysteine"])`, the pathway never activates because `water` and `hydrogen` are missing from the pool.
+
+**Affected Tests:**
+- `test_recommend.py::test_recommender_canonical_systems`
+- `test_recommend.py::test_recommender_penalties`
+
+**Fix:** Treat ubiquitous small molecules (`water`, `hydrogen`, `ammonia`) as always-available in the reaction environment. Two options:
+1. **Preferred:** Add implicit species set in `predict()` — `available_species |= {"water", "hydrogen", "ammonia"}` before the pathway loop.
+2. **Alternative:** Remove `WATER` and `_s("hydrogen", "[HH]")` from reactant lists in `curated_pathways.py` and adjust mass balance accordingly (chemically less accurate).
+
+- [ ] **B.1** Add implicit "solvent/ambient" species to `predict()` in `recommend.py`
+- [ ] **B.2** Verify both `test_recommender_canonical_systems` and `test_recommender_penalties` pass
+
+---
+
+#### Bug C: Lysine Budget DHA — Scoping Bug `[1 test | 🟡 FIX CODE]`
+
+**Root Cause:** In `recommend.py` `predict_from_steps()`, the DHA lysine budget calculation (lines 292–321) uses `max_r_dist` and `reachable` variables without re-initialising them for each step. These variables leak from the lipid trapping loop above, causing the DHA reachability check to use stale values. The test expects `budget_b > 0.0` but gets `0.0`.
+
+**Affected Test:**
+- `test_lysine_budget.py::test_lysine_budget_competition`
+
+**Fix:** Re-initialise `max_r_dist = 0.0` and `reachable = True` inside the DHA loop for each step iteration (line ~298).
+
+- [ ] **C.1** Fix variable scoping in `predict_from_steps()` lysine budget section
+
+---
+
+#### Bug D: MLP/MACE NameError `[3 tests | 🟠 FIX SKIPGUARD]`
+
+**Root Cause:** `mlp_optimizer.py` imports `mace_mp` inside `try/except ImportError`, but when `mace-torch` is partially installed (importable module but broken internals) the `except` catches silently. The test's `@pytest.mark.skipif(MLPOptimizer is None, ...)` guard evaluates `True` because the class *is* importable, but when the constructor calls `mace_mp()` it raises `NameError: name 'mace_mp' is not defined` because the inner import failed silently.
+
+**Affected Tests:**
+- `test_mlp_optimizer.py::test_mlp_optimizer_smoke`
+- `test_mlp_optimizer.py::test_mlp_optimizer_ts_fallback`
+- `test_mlp_optimizer.py::test_dft_refiner_mace_backend`
+
+**Fix:** Make `MLPOptimizer.__init__` more defensive: if `mace_mp` isn't available, raise `ImportError` explicitly. Or change the skip guard to check for `mace_mp` directly:
+```python
+_MACE_AVAILABLE = False
+try:
+    from mace.calculators import mace_mp
+    _MACE_AVAILABLE = True
+except ImportError:
+    pass
+
+@pytest.mark.skipif(not _MACE_AVAILABLE, reason="mace-torch not installed")
+```
+
+- [ ] **D.1** Fix test skip guard in `test_mlp_optimizer.py` to check `mace_mp` availability directly
+- [ ] **D.2** Fix `mlp_optimizer.py` to set a module-level `_MACE_AVAILABLE` flag for reliable detection
+
+---
+
+#### Bug E: PySCF `Mole.to_ase()` Doesn't Exist `[1 test | 🟠 FIX CODE]`
+
+**Root Cause:** `dft_refiner.py` line 236 calls `mol.to_ase()` and `mf.as_ase()`, but PySCF's `gto.Mole` has no `to_ase()` method and `mf.as_ase()` doesn't exist either. This is the Sella TS search integration path. The code was scaffolded but never tested end-to-end (noted in Phase 11.7: "PySCF↔ASE bridge is untested").
+
+**Affected Test:**
+- `test_explicit_solvation_integration.py::test_dft_refiner_explicit_solvation`
+
+**Fix:** Two options:
+1. **Implement the bridge** — convert PySCF Mole to ASE Atoms manually (reading coordinates + elements from `mol.atom_coords()` and `mol.atom_symbol()`).
+2. **Skip the Sella path** when Sella is not available and fall through to geomeTRIC, which is the existing fallback. The test should still pass because it uses `is_ts=True` but doesn't require Sella. The real issue is that `self.ts_optimizer` is not `None` even though Sella may not work with PySCF directly.
+
+- [ ] **E.1** Fix the Sella code path in `dft_refiner.py` to handle the PySCF↔ASE conversion properly, or make `ts_optimizer` initialization more defensive
+
+---
+
 ### [DEPRECATED] Phase 20: Heuristic DB Population ~~`[🔴 CRITICAL]`~~ → Absorbed into Phase 21
 
 > **ADR (Architectural Decision Record):** This phase was initially implemented and then deliberately reverted. The original plan was to populate `ResultsDB` with heuristic SMILES from `curated_pathways.py` using `literature_heuristic` barriers.
