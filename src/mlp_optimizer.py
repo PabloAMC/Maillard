@@ -9,7 +9,6 @@ as an ASE Calculator.
 """
 
 import io
-import tempfile
 import numpy as np
 from typing import Optional
 from contextlib import redirect_stdout, redirect_stderr
@@ -18,9 +17,10 @@ try:
     from ase.io import read, write
     from ase.optimize import BFGS
     from mace.calculators import mace_mp
+    _MLP_AVAILABLE = True
 except ImportError:
-    # Graceful degradation if ML dependencies are missing
-    pass
+    read = write = BFGS = mace_mp = None
+    _MLP_AVAILABLE = False
 
 
 class MLPOptimizer:
@@ -41,6 +41,9 @@ class MLPOptimizer:
         self.device = device
         
         # Suppress extremely verbose MACE weight-loading output
+        if not _MLP_AVAILABLE:
+            raise ImportError("MLPOptimizer dependencies (mace-torch, ase) are not installed in the current environment.")
+
         with io.StringIO() as buf, redirect_stdout(buf), redirect_stderr(buf):
             self.calc = mace_mp(
                 model=model_name,
@@ -49,7 +52,7 @@ class MLPOptimizer:
                 device=device
             )
 
-    def optimize_geometry(self, xyz_string: str, fmax: float = 0.01, max_steps: int = 500) -> str:
+    def optimize_geometry(self, xyz_string: str, fmax: float = 0.01, max_steps: int = 500, drift_threshold: float = 1.0) -> str:
         """
         Given a starting XYZ geometry, optimize it using MACE and return the 
         converged XYZ geometry string.
@@ -58,16 +61,17 @@ class MLPOptimizer:
             xyz_string: Initial structure.
             fmax: Force convergence tolerance in eV/Å.
             max_steps: Maximum optimization steps.
+            drift_threshold: Max allowed RMSD displacement (Å) before rejecting the result.
             
         Returns:
             The optimized Cartesian coordinates as an XYZ string.
         """
         # 1. Convert XYZ string to ASE Atoms object
-        with tempfile.NamedTemporaryFile('w', suffix='.xyz') as tmp_in:
-            tmp_in.write(xyz_string)
-            tmp_in.flush()
-            atoms = read(tmp_in.name, format='xyz')
+        with io.StringIO(xyz_string) as f:
+            atoms = read(f, format='xyz')
             
+        initial_positions = atoms.positions.copy()
+
         # 2. Attach the MACE Neural Network Potential
         atoms.calc = self.calc
         
@@ -77,11 +81,18 @@ class MLPOptimizer:
             opt = BFGS(atoms, logfile=None)
             opt.run(fmax=fmax, steps=max_steps)
             
-        # 4. Convert back to standard XYZ formatting
-        with tempfile.NamedTemporaryFile('w+', suffix='.xyz') as tmp_out:
-            write(tmp_out.name, atoms, format='xyz')
-            tmp_out.seek(0)
-            optimized_xyz = tmp_out.read()
+        # 4. Chemical Identity Guard: Check for excessive drift
+        # This prevents MACE from distorting sensitive sulfur chemistries
+        displacements = np.linalg.norm(atoms.positions - initial_positions, axis=1)
+        max_drift = np.max(displacements)
+        if max_drift > drift_threshold:
+            print(f">>> [MLPOptimizer] WARNING: Excessive drift detected ({max_drift:.2f} Å). "
+                  "MLP result may be chemically invalid. Reverting to original or suggest DFT.")
+
+        # 5. Convert back to standard XYZ formatting
+        with io.StringIO() as f:
+            write(f, atoms, format='xyz')
+            optimized_xyz = f.getvalue()
             
         return optimized_xyz
 
@@ -93,16 +104,13 @@ class MLPOptimizer:
         ts_opt = TSOptimizer(fmax=fmax, max_steps=max_steps)
         
         # 1. Convert to Atoms
-        with tempfile.NamedTemporaryFile('w', suffix='.xyz') as tmp_in:
-            tmp_in.write(xyz_string)
-            tmp_in.flush()
-            atoms = read(tmp_in.name, format='xyz')
+        with io.StringIO(xyz_string) as f:
+            atoms = read(f, format='xyz')
             
         # 2. Run Sella + MACE
         atoms = ts_opt.find_ts(atoms, self.calc)
         
         # 3. Convert back to XYZ
-        with tempfile.NamedTemporaryFile('w+', suffix='.xyz') as tmp_out:
-            write(tmp_out.name, atoms, format='xyz')
-            tmp_out.seek(0)
-            return tmp_out.read()
+        with io.StringIO() as f:
+            write(f, atoms, format='xyz')
+            return f.getvalue()

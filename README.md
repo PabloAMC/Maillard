@@ -122,8 +122,8 @@ python scripts/compare_sim_to_lit.py
 | **Heuristic Baseline** | 1 | ✅ | Native (`barrier_constants.py`) | **Standard (Laptop)** |
 | **Low-Level DFT (xTB)** | 1 | ✅ | `xtb` (conda-forge) | **Standard (Laptop)** |
 | **High-Precision DFT** | 2 | ✅ | `pyscf`, `geometric` | **Advanced (Cloud/HPC)** |
-| **Explicit Solvation** | 2 | 🔧 | **CREST** (External binary) | **Advanced (Cloud/HPC)** |
-| **MLP Optimization** | 2 | 🔧 | **MACE**, `torch` (~2GB weights)| **Experimental** |
+| **Explicit Solvation** | 2 | ✅ | **CREST** (found in `conda_env/bin/crest`) | **Advanced (Cloud/HPC)** |
+| **MLP Optimization** | 2 | 🏗️ | **MACE**, `torch` (~2GB weights)| **Experimental** |
 | **Sella TS Search** | 2 | 🔧 | `sella`, `ase` | **Experimental** |
 
 ---
@@ -163,6 +163,8 @@ python scripts/run_tier2_dft.py --reaction strecker --irc
 ```
 
 > [!TIP]
+> **Explicit Solvation:** To use explicit solvation (Phase 9), ensure the `CREST` binary is available at `conda_env/bin/crest`. Enable it in `DFTRefiner(use_explicit_solvent=True, n_water=X)`.
+>
 > **Performance:** The refiner dynamically detects and utilizes all available CPU cores (via `os.cpu_count()`) to maximize throughput. On Apple M-series chips, this typically yields a 10x speedup by engaging all performance cores automatically.
 
 ---
