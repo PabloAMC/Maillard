@@ -25,6 +25,7 @@ except ImportError:
 
 from .thermo import QuasiHarmonicCorrector
 from .solvation import SolvationEngine
+from .diffusion_ts import DiffusionTSEngine
 
 @dataclass
 class DFTResult:
@@ -76,6 +77,9 @@ class DFTRefiner:
             self.ts_optimizer = TSOptimizer()
         except ImportError:
             self.ts_optimizer = None
+            
+        # Phase 14: Initialize Diffusion TS Engine
+        self.diffusion_engine = DiffusionTSEngine()
         
         # The tiered methods defined in the plan
         self.opt_method = 'r2SCAN'
@@ -213,6 +217,21 @@ class DFTRefiner:
                 freeze_core=is_ts
             )
             
+        # Phase 14: First-pass TS guess via Diffusion Model
+        diffusion_ts_xyz = None
+        if is_ts and self.diffusion_engine.available:
+            # We need smiles for diffusion, if available in metadata we'd use them.
+            # Passing placeholder strings or extracting from XYZ if possible.
+            # For now, we check confidence and try to predict.
+            # metadata could be passed through kwargs or extracted if we had SMILES.
+            # This is a scaffold for React-TS integration.
+            conf = self.diffusion_engine.get_confidence_score("", "") 
+            if conf > 0.85:
+                print(">>> [Phase 14] Attempting high-confidence TS guess via Diffusion Model...")
+                diffusion_ts_xyz = self.diffusion_engine.predict_ts_geometry("", "")
+                if diffusion_ts_xyz:
+                    xyz_content = diffusion_ts_xyz
+
         # Phase 10: Backend Selection for Geometry Optimization
         if self.geometry_backend == 'mace':
             print(f">>> [Phase 10] Running MACE geometric optimization (is_ts={is_ts})...")
