@@ -31,14 +31,14 @@ def test_lysine_budget_competition():
     budget_a = results_a["metrics"]["lysine_budget_dha"]
     
     # System B: Glucose + Lysine + Serine (Maillard + DHA)
-    cysteine = resolve("cysteine")
-    steps_b = engine.enumerate([glucose, lysine, cysteine])
+    serine = resolve("serine")
+    steps_b = engine.enumerate([glucose, lysine, serine])
     barriers_b = {
         f"{'+'.join(sorted(r.smiles for r in s.reactants))}->{'+'.join(sorted(p.smiles for p in s.products))}": 20.0
         for s in steps_b
     }
     
-    initial_conc_b = {glucose.smiles: 1.0, lysine.smiles: 1.0, cysteine.smiles: 1.0}
+    initial_conc_b = {glucose.smiles: 1.0, lysine.smiles: 1.0, serine.smiles: 1.0}
     results_b = recommender.predict_from_steps(steps_b, barriers_b, initial_conc_b)
     budget_b = results_b["metrics"]["lysine_budget_dha"]
     

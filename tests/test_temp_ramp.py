@@ -7,9 +7,10 @@ from src.kinetics import KineticsEngine
 from src.cantera_export import CanteraExporter
 
 def test_isothermal_vs_ramp(tmp_path):
-    # 1. Create a simple mechanism: A -> B
+    # 1. Create a simple balanced isomerisation mechanism: A <=> B
     exporter = CanteraExporter()
-    exporter.add_reaction(["C"], ["CC"], 25.0) # 25 kcal/mol barrier (slower)
+    # Balanced: acetaldehyde <=> vinyl alcohol (both C2H4O)
+    exporter.add_reaction(["CC=O"], ["C=CO"], 25.0) # 25 kcal/mol barrier (slower)
     mech_path = tmp_path / "simple_mech.yaml"
     exporter.export_yaml(str(mech_path))
     

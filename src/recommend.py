@@ -165,7 +165,7 @@ class Recommender:
         # tracking dict: canon_smiles -> (span, concentration, depth)
         tracking = {}
         for s, conc in initial_concentrations.items():
-            tracking[s] = (0.0, conc, 0)
+            tracking[_canon(s)] = (0.0, conc, 0)
 
         changed = True
         iterations = 0
@@ -250,8 +250,8 @@ class Recommender:
         # ── PBMA Metrics: Lipid Trapping Efficiency ──
         # Find which initial pool members are lipids
         lipid_pool_canons = []
-        lysine_can = _canon("NCCCC[C@@H](N)C(=O)O")
-        has_lysine = lysine_can in initial_concentrations
+        lysine_can = _canon("NCCCCC(N)C(=O)O")
+        has_lysine = lysine_can in tracking
 
         for can in initial_concentrations.keys():
             if can in target_lookup and target_lookup[can]["name"] in off_flavours:
@@ -298,7 +298,9 @@ class Recommender:
             for step in steps:
                 step_r_canons = [_canon(r.smiles) for r in step.reactants]
                 if lysine_can in step_r_canons:
-                    # Path barrier
+                    # Path barrier — must re-initialise per step
+                    max_r_dist = 0.0
+                    reachable = True
                     for r_smi in [r.smiles for r in step.reactants]:
                         rc = _canon(r_smi)
                         if rc not in tracking:
@@ -331,6 +333,14 @@ class Recommender:
     def predict(self, pool: List[str]):
         """Predict the outcome for a given pool of precursors (static curated)."""
         available_species = set(pool)
+        
+        # Ubiquitous molecules present in Maillard reaction environments:
+        # water is the solvent, H2 and NH3 are common by-products that accumulate,
+        # CO2 is released in decarboxylation steps. These should not block pathway
+        # activation since they are always available in any food-chemistry system.
+        IMPLICIT_AMBIENT = {"water", "hydrogen", "ammonia", "CO2"}
+        available_species |= IMPLICIT_AMBIENT
+        
         active_pathways = []
         
         # Iteratively activate pathways (since one pathway can feed another)

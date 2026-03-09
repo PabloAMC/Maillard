@@ -95,6 +95,7 @@ class KineticsEngine:
         # at each step to simulate a defined T(t) profile.
         # clone=False suppresses Cantera 3.2+ deprecation warnings
         r = ct.IdealGasConstPressureReactor(gas, clone=False)
+        r.energy_enabled = False
         sim = ct.ReactorNet([r])
         
         # 4. Integrate
