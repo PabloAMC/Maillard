@@ -70,9 +70,10 @@ The immediate next priority is generating the required 500+ data points to unblo
 ### [ACTIVE] Phase 16: FFT Pathway Bottleneck Investigation `[🟡 MEDIUM | Diff: 5/10]`
 
 > **Why:** The literature system (Ribose+Cys+Leu) does not optimally generate the flavor target FFT. Need to investigate the flux bottleneck in the current network constraint.
-- [ ] **16.1** Analyze Cantera simulation logs for Ribose+Cys+Leu to identify which intermediate is stockpiling.
-- [ ] **16.2** Adjust heuristic barrier or SMIRKS rule to alleviate bottleneck if it's a model artifact, or confirm if chemically accurate.
-- [ ] **16.3** Run `test_regression.py` to verify rank improvement of FFT in the yield profile.
+- [/] **16.1 Baseline Simulation**: Run `scripts/run_cantera_kinetics.py` for Ribose/Cys/Leu (pH 7, 150°C) and track `H2`, `H2S`, and `furfural` flux.
+- [ ] **16.2 Sensitivity Mapping**: Use Phase 12 features to test pH (5.5, 7.0, 8.5) and solvent (Water, Lipid) effects on FFT yield.
+- [ ] **16.3 SMIRKS Audit**: Evaluate if the `H2` requirement in `src/smirks_engine.py`'s `_thiol_addition` is the root cause of the bottleneck.
+- [ ] **16.4 Yield Optimization**: Refine heuristic barriers or rules to match experimental yield rankings in `tests/integration/test_regression.py`.
 
 ---
 
