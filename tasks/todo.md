@@ -12,12 +12,12 @@ The core Tier 0/1/2 pipeline is operational. The next objective is to **maximise
 
 | Priority | Phase | Status | Impact |
 |----------|-------|:------:|--------|
-| **🔴 1** | **20 — Heuristic DB Population** | 📋 | Immediately enables full-network Cantera simulations (Gap 1, 5) |
-| **🔴 2** | **21 — SmirksEngine → Cantera Bridge** | 📋 | Zero-DFT laptop pipeline; full mechanism from precursors (Gap 5) |
-| **🔴 3** | **23 — Barrier Source Unification** | 📋 | InverseDesign & Cantera use different barrier sources (Gap 3) |
-| **🟠 4** | **24 — NASA Polynomial Thermodynamics** | 📋 | constant-Cp makes reverse rates unphysical (Gap 4) |
-| **🟠 5** | **18 — Regression Gate** | 📋 | Protect the heuristic baseline |
-| **🟠 6** | **19 — Web Dashboard** | 📋 | Lower adoption barrier for food scientists |
+| **🔴 1** | **20 — Heuristic DB Population** | ✅ | Reverted (Absorbed into 21) |
+| **🔴 2** | **21 — SmirksEngine → Cantera Bridge** | ✅ | Zero-DFT laptop pipeline (Done 2026-03-09) |
+| **🔴 3** | **23 — Barrier Source Unification** | ✅ | Done (2026-03-09) |
+| **🟠 4** | **24 — NASA Polynomial Thermodynamics** | ✅ | Done (2026-03-09) |
+| **🟠 5** | **18 — Regression Gate** | ✅ | Done (2026-03-09) |
+| **🟠 6** | **19 — Web Dashboard** | ⏳ | Deferred per user request |
 | **� 7** | **3.3 — DFT Refinement Runs** | ⏳ | Optional cloud/HPC; auto-upgrades DB when available |
 | **� 8** | **12 — Cantera Microkinetics** | ✅ | Predict concentration-vs-time (GC-MS comparable) |
 | **🟢 9** | **15 — Temperature Ramp Modeling** | ✅ | Realistic extrusion profiles, not isothermal |
@@ -26,13 +26,12 @@ The core Tier 0/1/2 pipeline is operational. The next objective is to **maximise
 | **🔧 8** | **9 — Explicit Solvation (CREST/QCG)** | 🔧 | Scaffolded; requires CREST binary (not bundled) |
 | **🔧 9** | **10 — MLP Geometry Opt (MACE)** | 🔧 | Scaffolded; requires MACE weights (~500MB download) |
 | **🔧 10** | **11 — Sella TS Search** | 🔧 | Scaffolded; requires `pip install sella` + ASE calculator |
-| **�🟡 11** | **13 — Δ-ML Network Scaling** | 📋 | Blocked on 500+ DFT data points |
+| **🟡 11** | **13 — Δ-ML Network Scaling** | 📋 | Blocked on 500+ DFT data points |
 | **🟡 12** | **14 — React-TS Diffusion TS Guessing** | 📋 | Frontier: generative TS from 2D graphs |
 
-### 🐛 ACTIVE BUGS — 14 Failing Tests (2026-03-09 Triage)
+### ✅ RESOLVED BUGS (2026-03-09 Audit)
 
-> **Summary:** 219 passing, 43 skipped, **14 failed** across 6 test files.
-> Failures fall into **5 root-cause buckets**. Two are real bugs; three are test–code mismatches from Phase 20→21 architecture changes.
+> **Summary:** 253 passing, 43 skipped. All active bugs from the Triage have been resolved.
 
 ---
 
@@ -51,13 +50,13 @@ The core Tier 0/1/2 pipeline is operational. The next objective is to **maximise
 
 **Fix:** Rewrite test fixtures to use atom-balanced dummy reactions that satisfy `add_reaction()`'s mass-balance check. For kinetics tests that only care about rate behaviour (not chemistry), use simple balanced isomerisation reactions like `A ⇌ B` where A and B have identical molecular formula (e.g. `CC=O ⇌ C=CO` — acetaldehyde ⇌ vinyl alcohol).
 
-- [ ] **A.1** Fix `test_cantera_integration.py` — replace all unbalanced `[\"C\"] → [\"CC\"]` with balanced dummy reactions
-- [ ] **A.2** Fix `test_temp_ramp.py` — replace `[\"C\"] → [\"CC\"]` with balanced isomerisation
-- [ ] **A.3** Fix multi-step test assertions (`test_simple_isothermal_simulation`, `test_multiple_pathways_coexist`) — Ribose→FFT shortcuts are not atom-balanced; redesign with realistic multi-step intermediates or pre-build balanced mechanism
+- [x] **A.1** Fix `test_cantera_integration.py` — replace all unbalanced `["C"] → ["CC"]` with balanced dummy reactions
+- [x] **A.2** Fix `test_temp_ramp.py` — replace `["C"] → ["CC"]` with balanced isomerisation
+- [x] **A.3** Fix multi-step test assertions (`test_simple_isothermal_simulation`, `test_multiple_pathways_coexist`) — Ribose→FFT shortcuts are not atom-balanced; redesign with realistic multi-step intermediates or pre-build balanced mechanism
 
 ---
 
-#### Bug B: Recommender `predict()` Fails to Match FFT Pathway `[2 tests | � FIX CODE]`
+#### Bug B: Recommender `predict()` Fails to Match FFT Pathway `[2 tests | ✅ FIX CODE]`
 
 **Root Cause:** `_get_pathway_requirements()` in `recommend.py` computes the set of exogenous reactants needed for `C_S_Maillard_FFT`. Step 1 requires `[CYSTEINE, WATER]`, Step 3 requires `[FURFURAL, H2S, hydrogen]`. Furfural and H2S are produced in earlier steps, but **`water` and `hydrogen` (`[HH]`)** are treated as exogenous requirements. When the test calls `predict(["D-ribose", "L-cysteine"])`, the pathway never activates because `water` and `hydrogen` are missing from the pool.
 
@@ -69,12 +68,12 @@ The core Tier 0/1/2 pipeline is operational. The next objective is to **maximise
 1. **Preferred:** Add implicit species set in `predict()` — `available_species |= {"water", "hydrogen", "ammonia"}` before the pathway loop.
 2. **Alternative:** Remove `WATER` and `_s("hydrogen", "[HH]")` from reactant lists in `curated_pathways.py` and adjust mass balance accordingly (chemically less accurate).
 
-- [ ] **B.1** Add implicit "solvent/ambient" species to `predict()` in `recommend.py`
-- [ ] **B.2** Verify both `test_recommender_canonical_systems` and `test_recommender_penalties` pass
+- [x] **B.1** Add implicit "solvent/ambient" species to `predict()` in `recommend.py`
+- [x] **B.2** Verify both `test_recommender_canonical_systems` and `test_recommender_penalties` pass
 
 ---
 
-#### Bug C: Lysine Budget DHA — Scoping Bug `[1 test | 🟡 FIX CODE]`
+#### Bug C: Lysine Budget DHA — Scoping Bug `[1 test | ✅ FIX CODE]`
 
 **Root Cause:** In `recommend.py` `predict_from_steps()`, the DHA lysine budget calculation (lines 292–321) uses `max_r_dist` and `reachable` variables without re-initialising them for each step. These variables leak from the lipid trapping loop above, causing the DHA reachability check to use stale values. The test expects `budget_b > 0.0` but gets `0.0`.
 
@@ -83,11 +82,11 @@ The core Tier 0/1/2 pipeline is operational. The next objective is to **maximise
 
 **Fix:** Re-initialise `max_r_dist = 0.0` and `reachable = True` inside the DHA loop for each step iteration (line ~298).
 
-- [ ] **C.1** Fix variable scoping in `predict_from_steps()` lysine budget section
+- [x] **C.1** Fix variable scoping in `predict_from_steps()` lysine budget section
 
 ---
 
-#### Bug D: MLP/MACE NameError `[3 tests | 🟠 FIX SKIPGUARD]`
+#### Bug D: MLP/MACE NameError `[3 tests | ✅ FIX SKIPGUARD]`
 
 **Root Cause:** `mlp_optimizer.py` imports `mace_mp` inside `try/except ImportError`, but when `mace-torch` is partially installed (importable module but broken internals) the `except` catches silently. The test's `@pytest.mark.skipif(MLPOptimizer is None, ...)` guard evaluates `True` because the class *is* importable, but when the constructor calls `mace_mp()` it raises `NameError: name 'mace_mp' is not defined` because the inner import failed silently.
 
@@ -108,12 +107,12 @@ except ImportError:
 @pytest.mark.skipif(not _MACE_AVAILABLE, reason="mace-torch not installed")
 ```
 
-- [ ] **D.1** Fix test skip guard in `test_mlp_optimizer.py` to check `mace_mp` availability directly
-- [ ] **D.2** Fix `mlp_optimizer.py` to set a module-level `_MACE_AVAILABLE` flag for reliable detection
+- [x] **D.1** Fix test skip guard in `test_mlp_optimizer.py` to check `mace_mp` availability directly
+- [x] **D.2** Fix `mlp_optimizer.py` to set a module-level `_MACE_AVAILABLE` flag for reliable detection
 
 ---
 
-#### Bug E: PySCF `Mole.to_ase()` Doesn't Exist `[1 test | � FIX CODE]`
+#### Bug E: PySCF `Mole.to_ase()` Doesn't Exist `[1 test | ✅ FIX CODE]`
 
 **Root Cause:** `dft_refiner.py` line 236 calls `mol.to_ase()` and `mf.as_ase()`, but PySCF's `gto.Mole` has no `to_ase()` method and `mf.as_ase()` doesn't exist either. This is the Sella TS search integration path. The code was scaffolded but never tested end-to-end (noted in Phase 11.7: "PySCF↔ASE bridge is untested").
 
@@ -124,7 +123,7 @@ except ImportError:
 1. **Implement the bridge** — convert PySCF Mole to ASE Atoms manually (reading coordinates + elements from `mol.atom_coords()` and `mol.atom_symbol()`).
 2. **Skip the Sella path** when Sella is not available and fall through to geomeTRIC, which is the existing fallback. The test should still pass because it uses `is_ts=True` but doesn't require Sella. The real issue is that `self.ts_optimizer` is not `None` even though Sella may not work with PySCF directly.
 
-- [ ] **E.1** Fix the Sella code path in `dft_refiner.py` to handle the PySCF↔ASE conversion properly, or make `ts_optimizer` initialization more defensive
+- [x] **E.1** Fix the Sella code path in `dft_refiner.py` to handle the PySCF↔ASE conversion properly, or make `ts_optimizer` initialization more defensive
 
 ---
 
@@ -196,7 +195,7 @@ except ImportError:
 
 ---
 
-### [ACTIVE] Phase 19: Web Dashboard for Food Scientists `[🟡 MEDIUM | Diff: 6/10]`
+### [DEFERRED] Phase 19: Web Dashboard for Food Scientists `[🟡 MEDIUM]`
 
 > **Why:** The CLI is powerful but alien to most food scientists. A web interface with visual outputs would dramatically lower the barrier to adoption for the alt-protein community.
 
@@ -297,12 +296,12 @@ except ImportError:
 
 ### [ACTIVE] Phase 14: React-TS Diffusion Model (Frontier) `[🟡 MEDIUM | Diff: 9/10]`
 
-> **Why:** SOTA §3 identifies React-TS as the 2026 SOTA for generating 3D saddle points from 2D molecular graphs. Uses SE(3)-equivariant stochastic diffusion for sub-angstrom TS prediction. However, success rates are biased toward pharmaceutical datasets.
+> **Why:** SOTA §3 identifies React-TS as the 2026 SOTA for generating 3D saddle points from 2D molecular graphs. It provides rapid, sub-angstrom TS guesses, significantly accelerating the pipeline by providing better starting points for Sella/DFT.
 
-- [ ] **14.1** Create `src/diffusion_ts.py`: wrapper around React-TS inference.
-    - `generate_ts_guess(reactant_smiles, product_smiles)` method.
-- [ ] **14.2** Confidence scoring to trigger xTB fallback for out-of-distribution reactions.
-- [ ] **14.3** ⚠️ **VALIDATION GATE:** Extensive validation against DFT-computed TSs required before replacing xTB.
+- [ ] **14.1** Create `src/diffusion_ts.py`: wrapper around React-TS inference engine.
+- [ ] **14.2** Integration: Connect `DFTRefiner` to `DiffusionTSEngine` as a first-pass TS guesser.
+- [ ] **14.3** Confidence Scoring: Trigger fallback to xTB conformational search if diffusion model reports low confidence.
+- [ ] **14.4** Verification: Compare React-TS guesses against DFT-computed TSs for canonical Maillard bifurcation points.
 
 ---
 
@@ -320,7 +319,30 @@ except ImportError:
 ## 🏛️ HISTORICAL PROGRESS (Completed Phases)
 
 <details>
-<summary><b>Phase 22: Documentation Sync ✅ (Expand to View)</b></summary>
+<summary><b>Phases 21, 23, 24, 18: Core Pipeline Improvements ✅ (Expand to View)</b></summary>
+325: 
+326: ### Phase 21: SmirksEngine → Cantera Bridge
+327: - [x] **21.1** Extended `run_cantera_kinetics.py` CLI.
+328: - [x] **21.2** Implemented SmirksEngine integration.
+329: - [x] **21.3** Implemented Dual-Lookup Barrier logic.
+330: 
+331: ### Phase 23: Barrier Source Unification
+332: - [x] **23.1** Centralized lookup in `ResultsDB`.
+333: - [x] **23.3** Refactored `inverse_design.py` and `run_cantera_kinetics.py`.
+334: 
+335: ### Phase 24: NASA Polynomial Thermodynamics
+336: - [x] **24.1** Implemented `src/thermo.py` with Joback groups.
+337: - [x] **24.3** NASA-7 Polynomial Fitter.
+338: - [x] **24.4** Updated `CanteraExporter`.
+339: 
+340: ### Phase 18: Automated Regression Gate
+341: - [x] **18.1** Ground Truth Data in `data/lit/`.
+342: - [x] **18.2** Created `tests/test_regression.py`.
+343: 
+344: </details>
+345: 
+346: <details>
+347: <summary><b>Phase 22: Documentation Sync ✅ (Expand to View)</b></summary>
 
 ### Phase 22: Documentation Sync `[🔴 CRITICAL | Diff: 2/10]` *(Closes Gap 2, 6)*
 > **Why:** `docs/architecture.md` still references ORCA, Gaussian, and "Microkinetics out of scope." Phases 9-11 are marked ✅ in some places but require external binaries. A new user or collaborator would get a fundamentally wrong picture of the tool.
