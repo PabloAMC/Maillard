@@ -11,6 +11,7 @@ Thermodynamics incorporate Grimme quasi-harmonic corrections.
 
 import os
 import tempfile
+import io
 import numpy as np
 from dataclasses import dataclass
 from typing import Optional, Tuple, Dict, List
@@ -119,13 +120,21 @@ class DFTRefiner:
 
     def _build_mf(self, mol: 'gto.Mole', xc_method: str = 'r2SCAN', use_solvent: bool = True, conv_tol: float = 1e-7):
         """Build the Mean-Field object with specified XC and implicit solvent."""
-        from pyscf import scf
+        from pyscf import scf, dft
         
-        # Use RHF for pure Hartree-Fock to avoid DFT grid overhead
+        is_open_shell = (mol.spin != 0)
+        
+        # Use RHF/UHF for pure Hartree-Fock
         if xc_method.lower() == 'hf':
-            mf = scf.RHF(mol)
+            if is_open_shell:
+                mf = scf.UHF(mol)
+            else:
+                mf = scf.RHF(mol)
         else:
-            mf = dft.RKS(mol)
+            if is_open_shell:
+                mf = dft.UKS(mol)
+            else:
+                mf = dft.RKS(mol)
             mf.xc = xc_method
         
         if use_solvent and self.solvent_name:
@@ -167,12 +176,15 @@ class DFTRefiner:
             # PySCF 2.x Hessian with ddCOSMO has known issues.
             # We create a vacuum counterpart for the Hessian calculation.
             from pyscf import scf
+            from pyscf import scf, dft
+            is_open_shell = (mf.mol.spin != 0)
             if hasattr(mf, 'xc'):
-                mf_vac = dft.RKS(mf.mol)
+                mf_vac = dft.UKS(mf.mol) if is_open_shell else dft.RKS(mf.mol)
                 mf_vac.xc = mf.xc
             else:
-                mf_vac = scf.RHF(mf.mol)
+                mf_vac = scf.UHF(mf.mol) if is_open_shell else scf.RHF(mf.mol)
             
+            mf_vac.chkfile = None
             mf_vac.scf()
             hessobj = mf_vac.Hessian()
             vib = hessobj.kernel()
@@ -256,28 +268,66 @@ class DFTRefiner:
                 try:
                     # PySCF↔ASE bridge: convert Mole to ASE Atoms manually
                     from ase import Atoms as ASEAtoms
+                    from ase.calculators.calculator import Calculator, all_changes
                     from pyscf.data import nist as pyscf_nist
                     
+                    class BuiltinPySCFCalc(Calculator):
+                        """Minimal ASE Calculator for PySCF to avoid ase-pyscf dependency gaps."""
+                        implemented_properties = ['energy', 'forces', 'hessian']
+                        def __init__(self, mol, mf_class, xc):
+                            super().__init__()
+                            self.mol = mol
+                            self.mf_class = mf_class
+                            self.xc = xc
+                        def calculate(self, atoms=None, properties=['energy'], system_changes=all_changes):
+                            super().calculate(atoms, properties, system_changes)
+                            # Update molecular coordinates
+                            self.mol.set_geom_(atoms.positions / pyscf_nist.BOHR, unit='Bohr')
+                            mf = self.mf_class(self.mol)
+                            if hasattr(mf, 'xc'): 
+                                mf.xc = self.xc
+                            
+                            mf.kernel()
+                            self.results['energy'] = float(mf.e_tot) * pyscf_nist.HARTREE2EV
+                            
+                            # Forces = -Gradient
+                            if 'forces' in properties:
+                                g = mf.nuc_grad_method().kernel()
+                                self.results['forces'] = -g * pyscf_nist.HARTREE2EV / pyscf_nist.BOHR
+                                
+                            if 'hessian' in properties:
+                                h_obj = mf.Hessian()
+                                h = h_obj.kernel()
+                                # PySCF returns (natm, natm, 3, 3). Sella/ASE expects (3*natm, 3*natm)
+                                natm = self.mol.natm
+                                h_reshaped = h.transpose(0, 2, 1, 3).reshape(3*natm, 3*natm)
+                                self.results['hessian'] = h_reshaped * pyscf_nist.HARTREE2EV / (pyscf_nist.BOHR**2)
+                        
+                        def get_hessian(self, atoms):
+                            self.calculate(atoms, properties=['hessian'])
+                            return self.results['hessian']
+
                     coords_bohr = mol.atom_coords()
                     symbols = [mol.atom_symbol(i) for i in range(mol.natm)]
                     positions_ang = coords_bohr * pyscf_nist.BOHR
                     ase_atoms = ASEAtoms(symbols=symbols, positions=positions_ang)
                     
-                    # Use PySCF as ASE calculator via ase-pyscf bridge
-                    # This requires a working pyscf ASE calculator interface
-                    from ase.calculators.pyscf import PySCF as PySCFCalc
-                    calc = PySCFCalc(atoms=ase_atoms, molcell=mol, mf_class=type(mf), xc=getattr(mf, 'xc', 'hf'))
+                    calc = BuiltinPySCFCalc(mol=mol, mf_class=type(mf), xc=getattr(mf, 'xc', 'hf'))
                     ase_atoms.calc = calc
                     
                     atoms = self.ts_optimizer.find_ts(ase_atoms, calc)
                     if self.ts_optimizer.is_converged(atoms):
-                        opt_xyz = atoms.tostring(format='xyz')
+                        # Convert ASE Atoms back to XYZ string
+                        from ase.io import write as ase_write
+                        with io.StringIO() as f_xyz:
+                            ase_write(f_xyz, atoms, format='xyz')
+                            opt_xyz = f_xyz.getvalue()
                         mol_opt = self._setup_mol(opt_xyz, charge, spin, basis=self.opt_basis)
                         conv = True
                     else:
                         print("    WARNING: Sella failed to converge. Falling back to geomeTRIC...")
                 except (ImportError, AttributeError, Exception) as e:
-                    print(f"    WARNING: Sella/ASE bridge not available ({type(e).__name__}: {e}). Falling back to geomeTRIC...")
+                    print(f"    WARNING: Sella/ASE bridge failed ({type(e).__name__}: {e}). Falling back to geomeTRIC...")
                     
                 is_ts_fallback = is_ts and not conv
             else:
@@ -332,7 +382,7 @@ class DFTRefiner:
         freqs, g_raw, g_qh = self._run_hessian_and_thermo(mf_opt)
         
         # Single-point Refinement
-        sp_energy = self.single_point(opt_xyz, xc_method=self.refinement_method, basis=self.refinement_basis)
+        sp_energy = self.single_point(opt_xyz, xc_method=self.refinement_method, basis=self.refinement_basis, charge=charge, spin=spin)
         
         # Calculate final refined Gibbs using SP energy + (G_qh - E_opt) thermal corrections
         thermal_corr_qh = g_qh - mf_opt.e_tot
