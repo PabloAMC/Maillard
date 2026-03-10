@@ -40,13 +40,13 @@ class ReactionConditions:
         fam = reaction_family.lower()
         
         # 1,2-enolisation to furans (favored at acidic pH)
-        if "1,2" in fam or "1_2" in fam or "furan" in fam:
+        if "1,2" in fam or "1_2" in fam or "furan" in fam or "thiol" in fam:
             if self.pH < 6.0:
                 return 5.0 # Accelerated
             return 1.0
             
         # 2,3-enolisation to pyrazines/strecker (favored at alkaline pH)
-        if "2,3-enolis" in fam or "pyrazine" in fam or "strecker" in fam:
+        if "2,3" in fam or "2_3" in fam or "pyrazine" in fam or "strecker" in fam:
             if self.pH >= 6.0:
                 base = 1.0
                 # Exponential increase with alkalinity

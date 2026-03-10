@@ -349,8 +349,8 @@ def _enolisation_steps(
 ) -> List[ElementaryStep]:
     """
     Amadori product → 3-deoxyosone + amino_acid + H2O.
-    1,2-enolisation (pH<6): deoxyosone → furfural/HMF + 2 H2O
-    2,3-enolisation (pH>=6): deoxyosone → pyruvaldehyde + ?
+    1,2-enolisation: deoxyosone → furfural/HMF + 2 H2O
+    2,3-enolisation: deoxyosone → pyruvaldehyde + fragment
     """
     steps = []
     water = Species(label="water", smiles="O")
@@ -363,54 +363,39 @@ def _enolisation_steps(
     deoxy = Species(label=f"{sugar.label}-deoxyosone-3", smiles=deoxy_smi)
 
     # 1. Formation of deoxyosone intermediate
-    # Amadori -> Deoxyosone + Amino Acid
-    # C11H19NO8 (ribose-glycine Amadori) -> C5H8O4 (pentose deoxy) + C2H5NO2 (glycine)
-    # Sum: C5H8O4 + C2H5NO2 = C7H13NO6 + ??
-    # Let's check ribose amadori: OCC(O)C(O)C(=O)CNCC(=O)O
-    # Ribose: C5H10O5. Glycine: C2H5NO2. Schiff base: C7H13NO6 (loses H2O).
-    # Amadori: C7H13NO6.
-    # Deoxy: C5H8O4 (O=CC(=O)CC(O)CO)
-    # C5H8O4 + C2H5NO2 (glycine) = C7H13NO6! Perfectly balanced without water.
+    # C5H8O4 + C2H5NO2 (glycine) = C7H13NO6 (Amadori)!
     steps.append(ElementaryStep(
         reactants=[amadori],
         products=[deoxy, amino_acid],
         reaction_family="Enolisation_Intermediate"
     ))
 
-    # 2. Dehydration to final product
-    if conditions.pH < 6:
-        if _is_pentose(sugar):
-            product = Species(label="furfural", smiles="O=Cc1ccco1")
-            # C5H8O5 (deoxy) -> C5H4O2 (furfural) + 3 H2O 
-            # Wait, PySCF/xTB needs exact balance. 
-            # Pentose deoxyosone is O=CC(=O)CC(O)CO (C5H8O4). Wait, C5H8O4.
-            # Furfural is C5H4O2. C5H8O4 -> C5H4O2 + 2 H2O.
-            water_count = 2
-        else:
-            product = Species(label="HMF", smiles="OCC1=CC=C(C=O)O1")
-            # Hexose deoxy is O=CC(=O)CC(O)C(O)CO (C6H10O5). HMF is C6H6O3.
-            # C6H10O5 -> C6H6O3 + 2 H2O.
-            water_count = 2
-        family = "Enolisation_1_2"
-        products = [product] + [water] * water_count
+    # 2. Dehydration to final products
+    # 2a. 1,2-enolisation (favored at acidic pH)
+    if _is_pentose(sugar):
+        product_12 = Species(label="furfural", smiles="O=Cc1ccco1")
+        water_count = 2
     else:
-        product = Species(label="pyruvaldehyde", smiles="CC(=O)C=O")
-        # Deoxyosone -> Pyruvaldehyde + (Glyceraldehyde or Glycolaldehyde)
-        # Wait, enolisation 2,3 -> 1-deoxyosone -> cleavage.
-        # But this code currently just emits pyruvaldehyde + 2 water, which loses C2/C3 atoms!
-        # Let's fix this properly.
-        if _is_pentose(sugar): # C5H8O4 -> C3H4O2 (pyruv) + C2H4O2 (glycolaldehyde)
-            p2 = Species(label="glycolaldehyde", smiles="O=CCO")
-        else: # C6H10O5 -> C3H4O2 (pyruv) + C3H6O3 (glyceraldehyde)
-            p2 = Species(label="glyceraldehyde", smiles="O=CC(O)CO")
-        
-        products = [product, p2]
-        family = "Enolisation_2_3"
-
+        product_12 = Species(label="HMF", smiles="OCC1=CC=C(C=O)O1")
+        water_count = 2
+    
     steps.append(ElementaryStep(
         reactants=[deoxy],
-        products=products,
-        reaction_family=family,
+        products=[product_12] + [water] * water_count,
+        reaction_family="Enolisation_1_2"
+    ))
+
+    # 2b. 2,3-enolisation (favored at neutral/alkali pH)
+    product_23 = Species(label="pyruvaldehyde", smiles="CC(=O)C=O")
+    if _is_pentose(sugar): # C5H8O4 -> C3H4O2 (pyruv) + C2H4O2 (glycolaldehyde)
+        p2 = Species(label="glycolaldehyde", smiles="O=CCO")
+    else: # C6H10O5 -> C3H4O2 (pyruv) + C3H6O3 (glyceraldehyde)
+        p2 = Species(label="glyceraldehyde", smiles="O=CC(O)CO")
+    
+    steps.append(ElementaryStep(
+        reactants=[deoxy],
+        products=[product_23, p2],
+        reaction_family="Enolisation_2_3"
     ))
 
     return steps
@@ -691,77 +676,70 @@ def _thiazole_condensation(pool_species: List[Species]) -> List[ElementaryStep]:
 
 def _thiol_addition(pool_species: List[Species]) -> List[ElementaryStep]:
     """
-    Furfural + H2S + H2 -> Furfurylthiol (FFT) + H2O.
+    Furfural + H2S + [Reducer] -> Furfurylthiol (FFT) + ... 
 
-    Atom balance:
-      furfural (C5H4O2) + H2S (H2S) + H2 (H2) = C5H8O2S
-      FFT      (C5H6OS) + H2O (H2O)            = C5H8O2S  ✓
-
-    H2 and H2S are matched by EXACT SMILES only to avoid false-positive
-    matches against Cysteine's -SH or organic thiols.
+    In vivo/food matrices, reduction is driven by the sugar pool (Reductones)
+    rather than H2 gas. We couple Furfural reduction with Sugar dehydration:
+    Furfural (C5H4O2) + H2S (H2S) + Ribose (C5H10O5) -> FFT (C5H6OS) + Deoxyosone (C5H8O4) + 2 H2O
     """
     steps = []
     h2s = next((s for s in pool_species if s.smiles == "S"), None)
-    h2  = next((s for s in pool_species if s.smiles == "[HH]"), None)
-    if not (h2s and h2):
+    if not h2s:
         return steps
 
+    # Priority 1: H2 Gas (Legacy/Specific path)
+    h2 = next((s for s in pool_species if s.smiles == "[HH]"), None)
+
     _fft_map = {
-        "furfural":         ("furfurylthiol",       "SCc1ccco1"),
+        "furfural":         ("2-furfurylthiol",       "SCc1ccco1"),
         "5-methylfurfural": ("5-methylfurfurylthiol","SCc1ccc(C)o1"),
     }
 
-    rxn = AllChem.ReactionFromSmarts(
-        "[c:1][CH1:2]=[O:3].[SH2;D0:4].[HH]>>[*:1][CH2:2][SH1:4].[O:3]"
-    )
-    h2s_m = _mol("S")
-    h2_m  = _mol("[HH]")
-
+    water = Species("water", "O")
     seen = set()
+    
     for sp in pool_species:
         entry = _fft_map.get(sp.label)
-        if entry:
-            key = (sp.smiles, "S", "[HH]")
-            if key in seen:
-                continue
-            seen.add(key)
-            fft   = Species(label=entry[0], smiles=entry[1])
-            water = Species("water", "O")
-            steps.append(ElementaryStep(
-                reactants=[sp, h2s, h2],
-                products=[fft, water],
-                reaction_family="Thiol_Addition"
-            ))
-        else:
-            # Fallback: attempt SMARTS match for unlisted aromatic aldehydes
-            m = _mol(sp.smiles)
-            if m is None:
-                continue
-            try:
-                prods = rxn.RunReactants((m, h2s_m, h2_m))
-            except Exception:
-                continue
-            for prod_tuple in prods:
-                prod_smiles, ok = [], True
-                for p in prod_tuple:
-                    try:
-                        Chem.SanitizeMol(p)
-                        ps = Chem.MolToSmiles(p)
-                        if _is_valid(ps):
-                            prod_smiles.append(ps)
-                        else:
-                            ok = False; break
-                    except Exception:
-                        ok = False; break
-                if ok and len(prod_smiles) == len(prod_tuple):
-                    key = (sp.smiles, "S", "[HH]", tuple(prod_smiles))
-                    if key not in seen:
-                        seen.add(key)
-                        steps.append(ElementaryStep(
-                            reactants=[sp, h2s, h2],
-                            products=[Species(ps, ps) for ps in prod_smiles],
-                            reaction_family="Thiol_Addition"
-                        ))
+        if not entry:
+            continue
+
+        # Strategy A: H2 gas reduction (if available)
+        if h2:
+            key = (sp.smiles, h2.smiles)
+            if key not in seen:
+                seen.add(key)
+                fft = Species(label=entry[0], smiles=entry[1])
+                steps.append(ElementaryStep(
+                    reactants=[sp, h2s, h2],
+                    products=[fft, water],
+                    reaction_family="Thiol_Addition_H2"
+                ))
+
+        # Strategy B: H2S-mediated reduction (Two-Step Bimolecular)
+        # Step 1: Furfural + H2S -> Thiohemiacetal (C5H6O2S)
+        # Step 2: Thiohemiacetal + H2S -> FFT + S + H2O
+        if h2s:
+            intermed_smi = "OC(S)c1ccco1" # Thiohemiacetal
+            key = (sp.smiles, "bimolecular_coupled")
+            if key not in seen:
+                seen.add(key)
+                intermed = Species(label=f"{sp.label}-thiohemiacetal", smiles=intermed_smi)
+                fft = Species(label=entry[0], smiles=entry[1])
+                sulfur = Species(label="elemental-sulfur", smiles="[S]")
+                
+                # Step 1
+                steps.append(ElementaryStep(
+                    reactants=[sp, h2s],
+                    products=[intermed],
+                    reaction_family="Thiohemiacetal_Formation"
+                ))
+                # Step 2
+                steps.append(ElementaryStep(
+                    reactants=[intermed, h2s],
+                    products=[fft, sulfur, water],
+                    reaction_family="Thiol_Dehydration"
+                ))
+
     return steps
 
 

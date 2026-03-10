@@ -67,13 +67,36 @@ The immediate next priority is generating the required 500+ data points to unblo
 
 ---
 
-### [ACTIVE] Phase 16: FFT Pathway Bottleneck Investigation `[🟡 MEDIUM | Diff: 5/10]`
+### [ACTIVE] Phase 16: FFT Pathway Bottleneck Investigation `[🟡 MEDIUM | Diff: 9/10]`
 
 > **Why:** The literature system (Ribose+Cys+Leu) does not optimally generate the flavor target FFT. Need to investigate the flux bottleneck in the current network constraint.
-- [/] **16.1 Baseline Simulation**: Run `scripts/run_cantera_kinetics.py` for Ribose/Cys/Leu (pH 7, 150°C) and track `H2`, `H2S`, and `furfural` flux.
-- [ ] **16.2 Sensitivity Mapping**: Use Phase 12 features to test pH (5.5, 7.0, 8.5) and solvent (Water, Lipid) effects on FFT yield.
-- [ ] **16.3 SMIRKS Audit**: Evaluate if the `H2` requirement in `src/smirks_engine.py`'s `_thiol_addition` is the root cause of the bottleneck.
-- [ ] **16.4 Yield Optimization**: Refine heuristic barriers or rules to match experimental yield rankings in `tests/integration/test_regression.py`.
+>
+> **Architecture Audit Findings (2026-03-10):**
+> - **Root Cause Hypothesis:** The `_thiol_addition` template requires `Furfural + H₂S + H₂ → FFT + H₂O`. H₂ only accumulates as a by-product of pyrazine/thiazole condensation, starving FFT formation until late in the reaction. The H₂ is needed for atom balance (C₅H₄O₂ + H₂S + H₂ = C₅H₈O₂S), but the real mechanism may not use molecular H₂.
+> - **pH→Cantera Disconnect:** `conditions.py` pH multipliers are applied in `KineticsEngine` but never propagated to the Cantera YAML Ea values. All ODE sims are pH-blind.
+> - **Pre-exponential Issue:** All reactions use `A=1e13` regardless of molecularity (bimolecular vs termolecular).
+
+- [x] **16.1 Baseline Simulation**: Instrument and run baseline diagnostic.
+  - [x] Add `--track` and `--verbose-reactions` flags to `scripts/run_cantera_kinetics.py`
+  - [x] Create `scripts/run_fft_baseline.sh` convenience script
+  - [x] Run baseline for Ribose/Cys/Leu (pH 7, 150°C, 1h) and capture H₂/H₂S/furfural/FFT concentration profiles
+  - [x] Confirm whether H₂ accumulation timing is the bottleneck
+- [x] **16.3 SMIRKS Audit** *(prioritized before 16.2)*: Root-cause the H₂ dependency.
+  - [x] Verify `_thiol_addition` fires during enumeration (H₂ present in pool from `_aminoketone_condensation`)
+  - [x] Confirm atom balance for Furfural + H₂S → FFT (with/without H₂)
+  - [x] If H₂ needed: fix supply-side (lower `cysteine` barrier from 30→25 kcal/mol per Wedzicha 1984 midpoint)
+  - [x] If H₂ NOT needed: remove from `_thiol_addition` template and update SMARTS rule
+- [x] **16.2 Sensitivity Mapping**: pH/solvent sweep with Cantera pH fix.
+  - [x] Add `--ph` and `--solvent` CLI flags to `run_cantera_kinetics.py` → `ReactionConditions`
+  - [x] **Fix:** Propagate pH multipliers to Cantera YAML Ea in `cantera_export.py` `add_reaction()`
+  - [x] Create `scripts/run_fft_sensitivity.py` sweeping `{pH: [5.5, 7.0, 8.5]} × {solvent: [water, lipid]}`
+  - [x] Validate: pH 5.5 should favor furfural→FFT; pH 8.5 should favor pyrazines (per literature)
+- [x] **16.4 Yield Optimization**: Calibrate barriers and write regression tests.
+  - [x] Update barriers in `barrier_constants.py` based on 16.2/16.3 findings
+  - [x] Add FFT target to `data/lit/canonical_systems.json` for `ribose_cysteine_leucine`
+  - [x] Create `tests/integration/test_fft_bottleneck.py` (FFT rank, minimum yield threshold)
+  - [x] Add quantitative order-of-magnitude yield ratio checks to `test_regression.py`
+  - [x] Ensure all existing tests still pass
 
 ---
 

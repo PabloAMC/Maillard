@@ -36,6 +36,13 @@ FAST_BARRIERS: Dict[str, Tuple[float, str]] = {
     "amadori":      (23.0,  "Martins 2003: 1,2-proton shift ΔG‡ ≈ 20–28; midpoint"),
     "heyns":        (24.0,  "Ketose analogue of Amadori; slightly higher barrier"),
 
+    # ── Sulfur pathways ─────────────────────────────────────────────
+    "cysteine":     (30.0,  "Wedzicha 1984: thermolysis ΔG‡ ≈ 20–30; upper range"),
+    "thiol_addition_trimolecular": (15.0, "Trimolecular H2S-mediated thiolation; collision-limited"),
+    "thiohemiacetal": (18.0, "Formation of furfural-thiohemiacetal; fast nucleophilic addition"),
+    "thiol_dehydration": (15.0, "Dehydration of thiohemiacetal to furfurylthiol; very fast"),
+    "thiol":        (15.0,  "Furfural + H₂S thiol addition is fast; literature 10–18"),
+
     # ── Enolisation / dehydration ───────────────────────────────────
     "enolisation":  (28.0,  "Nursten 2005: enolisation is rate-limiting in advanced Maillard"),
     "dehydration":  (28.0,  "Coupled with enolisation; same approximate range"),
@@ -46,10 +53,6 @@ FAST_BARRIERS: Dict[str, Tuple[float, str]] = {
 
     # ── Retro-aldol ─────────────────────────────────────────────────
     "retro":        (32.0,  "Hodge 1953: C-C bond cleavage is high-barrier; softened from 35"),
-
-    # ── Sulfur pathways ─────────────────────────────────────────────
-    "cysteine":     (30.0,  "Wedzicha 1984: thermolysis ΔG‡ ≈ 20–30; upper range"),
-    "thiol":        (15.0,  "Furfural + H₂S thiol addition is fast; literature 10–18"),
     "thiazole":     (20.0,  "Lipid thiazole condensation; comparable to Strecker"),
 
     # ── DHA / β-elimination ─────────────────────────────────────────
