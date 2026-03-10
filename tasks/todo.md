@@ -16,8 +16,8 @@ The core Tier 0/1/2 pipeline is operational and the zero-DFT laptop pipeline is 
 | Priority | Phase | Status | Impact |
 |----------|-------|:------:|--------|
 | **🔴 1** | **Phase A: Literature Arrhenius Calibration** | 📋 | Replace heuristic barriers with published experimental (A, Ea) data |
-| **🔴 2** | **Phase B: Public ML Potential Integration** | 📋 | Use MACE-OFF24/AIMNet2 instead of custom fine-tuning |
-| **🔴 3** | **Phase C: Full Sensory Prediction Model** | 📋 | Expand OAV database from 5 → 30+ compounds; add psychophysical mixing |
+| **🔴 2** | **Phase B: Public ML Potential Integration** | ✅ | Use MACE-OFF24/AIMNet2 instead of custom fine-tuning |
+| **🔴 3** | **Phase C: Full Sensory Prediction Model** | ✅ | Expand OAV database from 5 → 30+ compounds; add psychophysical mixing |
 | **🟠 4** | **Phase D: Headspace & Volatility Model** | 📋 | Convert matrix → air-phase concentrations for real OAV prediction |
 | **🟠 5** | **Phase E: Sigmoid pH Model** | 📋 | Replace step-function pH multipliers with Henderson-Hasselbalch curves |
 | **🟡 6** | **Phase F: AGE/Safety Scoring in Optimizer** | 📋 | Integrate toxic marker penalties into InverseDesigner |
