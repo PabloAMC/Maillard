@@ -144,6 +144,17 @@ def _is_pentose(s: Species) -> bool:
     return _is_sugar(s) and c_count == 5
 
 
+def _is_asparagine(s: Species) -> bool:
+    """Detects strictly free asparagine."""
+    if s.label.lower() in ["l-asparagine", "asparagine"]: return True
+    return s.smiles == "NC(CC(N)=O)C(=O)O"
+
+
+def _is_lysine(s: Species) -> bool:
+    """Detects strictly free lysine."""
+    if s.label.lower() in ["l-lysine", "lysine"]: return True
+    return s.smiles == "NCCCCC(N)C(=O)O"
+
 def _is_primary_amine(s: Species) -> bool:
     """Has a primary amine not in amide context (amino acids, amines)."""
     m = _mol(s.smiles)
@@ -831,6 +842,60 @@ def _sugar_ring_opening(pool_species: List[Species]) -> List[ElementaryStep]:
     return steps
 
 
+# ── Toxic / Safety Marker Templates ──────────────────────────────────────
+
+def _acrylamide_formation(sugar: Species, asparagine: Species) -> List[ElementaryStep]:
+    """
+    Asparagine + Reducing Sugar -> Acrylamide + Fragments.
+    Acrylamide: C=CC(=O)N (C3H5NO)
+    """
+    if not (_is_sugar(sugar) and _is_asparagine(asparagine)):
+        return []
+    
+    # Net balanced reaction (simplified):
+    # Asparagine (C4H8N2O3) -> Acrylamide (C3H5NO) + CO2 (CO2) + NH3 (H3N)
+    acrylamide = Species(label="Acrylamide", smiles="C=CC(=O)N")
+    co2 = Species(label="CO2", smiles="O=C=O")
+    ammonia = Species(label="ammonia", smiles="N")
+    
+    return [ElementaryStep(
+        reactants=[sugar, asparagine],
+        products=[acrylamide, sugar, co2, ammonia], # Sugar is conserved here for simplicity
+        reaction_family="Safety_Risk_Acrylamide"
+    )]
+
+
+def _cml_cel_formation(lysine: Species, pool: List[Species]) -> List[ElementaryStep]:
+    """
+    Lysine + Glyoxal -> CML
+    Lysine + Methylglyoxal -> CEL
+    """
+    if not _is_lysine(lysine):
+        return []
+        
+    steps = []
+    
+    for s in pool:
+        # Glyoxal -> CML
+        if s.smiles == "O=CC=O" or s.label == "glyoxal":
+            cml = Species("CML", "N[C@@H](CCCCNCC(=O)O)C(=O)O")
+            steps.append(ElementaryStep(
+                reactants=[lysine, s],
+                products=[cml],
+                reaction_family="Safety_Risk_AGE"
+            ))
+        # Methylglyoxal -> CEL
+        elif s.smiles == "CC(=O)C=O" or s.label == "pyruvaldehyde" or s.label == "methylglyoxal":
+            cel = Species("CEL", "N[C@@H](CCCCNC(C)C(=O)O)C(=O)O")
+            steps.append(ElementaryStep(
+                reactants=[lysine, s],
+                products=[cel],
+                reaction_family="Safety_Risk_AGE"
+            ))
+            
+    return steps
+
+
 # ── PBMA Additive Degradations ───────────────────────────────────────────
 
 def _thiamine_degradation(pool: List[Species], conditions: ReactionConditions) -> List[ElementaryStep]:
@@ -1152,7 +1217,24 @@ class SmirksEngine:
             if not _step_exists(step, all_steps):
                 all_steps.append(step)
                 add_step_products(step)
-        # 3f. Lipid-Maillard Synergy (Lipid Aldehyde + Strecker AK)
+
+        # 3f. Safety / Toxic Markers (Acrylamide, CML, CEL)
+        for sug in sugars:
+            for amine in amines_now:
+                acry_steps = _acrylamide_formation(sug, amine)
+                for step in acry_steps:
+                    if not _step_exists(step, all_steps):
+                        all_steps.append(step)
+                        add_step_products(step)
+        
+        for amine in amines_now:
+            age_steps = _cml_cel_formation(amine, pool_list())
+            for step in age_steps:
+                if not _step_exists(step, all_steps):
+                    all_steps.append(step)
+                    add_step_products(step)
+
+        # 3g. Lipid-Maillard Synergy (Lipid Aldehyde + Strecker AK)
         syn_steps = _lipid_maillard_synergy(pool_list())
         for step in syn_steps:
             if not _step_exists(step, all_steps):

@@ -206,15 +206,15 @@ class TestInverseDesignerEvaluation:
             assert hasattr(result, 'trapping_efficiency'), "Result should have trapping_efficiency"
 
     def test_evaluate_all_results_sorted(self):
-        """Results should be sorted by target_score (descending)."""
+        """Results should be sorted by (target_score - safety_score) descending."""
         designer = InverseDesigner(target_tag="meaty", minimize_tag="beany")
         cond = ReactionConditions(pH=6.0, temperature_celsius=150.0)
         results = designer.evaluate_all(cond)
         
         if len(results) > 1:
-            scores = [r.target_score for r in results]
+            scores = [(r.target_score - 1.0 * r.safety_score) for r in results]
             assert scores == sorted(scores, reverse=True), \
-                "Results should be sorted by target_score (descending)"
+                "Results should be sorted by Pareto ranking (descending)"
 
     def test_target_score_is_numeric(self):
         """All target scores should be numeric."""

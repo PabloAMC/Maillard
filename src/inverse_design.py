@@ -25,6 +25,8 @@ class FormulationResult:
     detected_targets: List[str]
     detected_minimize: List[str]
     radar: Dict[str, float]  # Phase C: Radar category scores
+    safety_score: float      # Phase F: Safety evaluation
+    flagged_toxics: List[str]
 
 class InverseDesigner:
     def __init__(self, target_tag: str, minimize_tag: str = "beany"):
@@ -73,21 +75,57 @@ class InverseDesigner:
             name = t["name"]
             if name in target_list:
                 barrier = t.get("span", 99.0)
-                conc = t.get("concentration", 1.0)
+                flux = t.get("weighted_flux", 0.0)
                 depth = t.get("depth", 1)
                 
                 # Baseline 0 score for unachievable pathways
                 if barrier >= 99.0:
                     continue
                     
-                boltzmann_weight = math.exp(-barrier / RT)
                 depth_penalty = 0.8 ** depth # 20% penalty per reaction step
                 
                 # Scale up by 1e6 for readability (otherwise scores are tiny)
-                impact = conc * boltzmann_weight * depth_penalty * 1e6
+                impact = flux * depth_penalty * 1e6
                 score += impact
                 detected.append(name)
         return score, detected
+
+    def _score_safety(self, targets_found: List[dict], conditions: ReactionConditions) -> Tuple[float, List[str]]:
+        """
+        Score safety risks. 
+        Penalty = sum(weight_i * conc_i * exp(-(barrier_i - 20)/RT))
+        Weights based on priority: critical=10, high=5, medium=2.
+        Only matches compounds from 'toxic_markers.yml'.
+        """
+        import math
+        penalty = 0.0
+        flagged = []
+        
+        temp_k = conditions.temperature_celsius + 273.15
+        RT = 0.001987 * temp_k
+        
+        # We use the sensory database to identify toxics (it already loads toxic_markers.yml)
+        for t in targets_found:
+            name = t["name"]
+            entry = self.sensory.db.find_entry(name)
+            
+            # Check if source is toxic_markers.yml
+            if entry and entry.get("source") == "toxic_markers.yml":
+                barrier = t.get("span", 99.0)
+                conc = t.get("concentration", 1.0)
+                
+                if barrier >= 99.0:
+                    continue
+                
+                priority_map = {"critical": 10.0, "high": 5.0, "medium": 2.0}
+                weight = priority_map.get(entry.get("priority", "medium"), 2.0)
+                
+                # Use same scaling as sensory (barrier-20) for consistency in "predicted intensity"
+                impact = weight * conc * math.exp(-(barrier - 20.0) / RT)
+                penalty += impact
+                flagged.append(name)
+                
+        return penalty, flagged
 
     def evaluate_all(self, global_conditions: ReactionConditions) -> List[FormulationResult]:
         """
@@ -169,11 +207,12 @@ class InverseDesigner:
                 initial_concentrations[_canon(p.smiles)] = qty
                 
             recommender = Recommender()
-            rec_result = recommender.predict_from_steps(steps, heuristic_barriers, initial_concentrations)
+            rec_result = recommender.predict_from_steps(steps, heuristic_barriers, initial_concentrations, temperature_kelvin=cond.temperature_kelvin)
             
             # Score against tags
             t_score, t_detected = self._score_targets(rec_result["targets"], target_compounds, cond)
             m_score, m_detected = self._score_targets(rec_result["targets"], minimize_compounds, cond)
+            s_penalty, flagged = self._score_safety(rec_result["targets"], cond)
             
             trap_dict = rec_result["metrics"].get("trapping_efficiency", {})
             trap_avg = sum(trap_dict.values()) / len(trap_dict) if trap_dict else 0.0
@@ -204,9 +243,12 @@ class InverseDesigner:
                 trapping_efficiency=trap_avg,
                 detected_targets=t_detected,
                 detected_minimize=m_detected,
-                radar=radar_scores
+                radar=radar_scores,
+                safety_score=s_penalty,
+                flagged_toxics=flagged
             ))
             
-        # Rank by target_score DESC, off_flavour_risk ASC
-        results.sort(key=lambda x: (x.target_score, -x.off_flavour_risk), reverse=True)
+        # Rank by (target_score - risk_aversion * safety_score) DESC, off_flavour_risk ASC
+        risk_aversion = 1.0 # Default
+        results.sort(key=lambda x: (x.target_score - risk_aversion * x.safety_score, -x.off_flavour_risk), reverse=True)
         return results
