@@ -20,7 +20,7 @@ The core Tier 0/1/2 pipeline is operational and the zero-DFT laptop pipeline is 
 | **🔴 3** | **Phase C: Full Sensory Prediction Model** | ✅ | Expand OAV database from 5 → 30+ compounds; add psychophysical mixing |
 | **🟠 4** | **Phase D: Headspace & Volatility Model** | ✅ | Convert matrix → air-phase concentrations for real OAV prediction |
 | **🟠 5** | **Phase E: Sigmoid pH Model** | ✅ | Replace step-function pH multipliers with Henderson-Hasselbalch curves |
-| **🟡 6** | **Phase F: AGE/Safety Scoring in Optimizer** | 📋 | Integrate toxic marker penalties into InverseDesigner |
+| **🟡 6** | **Phase F: AGE/Safety Scoring in Optimizer** | ✅ | Integrate toxic marker penalties into InverseDesigner |
 | **🟡 7** | **Phase G: Concentration-Aware FAST Ranking** | ✅ | Add reactant-concentration weighting to FAST mode |
 | **🟠 8** | **Phase H: Bayesian Formulation Optimization** | 📋 | Continuous optimization over (sugar, AA, pH, T, time) space |
 | **🟠 9** | **Phase I: Matrix-Effect Corrections** | 📋 | Model protein/lipid volatile binding for realistic release prediction |
@@ -53,127 +53,125 @@ The core Tier 0/1/2 pipeline is operational and the zero-DFT laptop pipeline is 
 
 ---
 
-### [ACTIVE] Phase B: Public ML Potential Integration `[🔴 CRITICAL | Diff: 5/10]`
+### [DONE] Phase B: Public ML Potential Integration `[🔴 CRITICAL | Diff: 5/10]`
 
 > **Why:** MACE-OFF24(M) is trained on ωB97M-D3BJ/def2-TZVPPD (essentially the same theory as our Phase 13 protocol) and already covers H, C, N, O, S. AIMNet2 achieves 1–2 kcal/mol RMSE on organic reactions. Using these as a drop-in for xTB barrier estimation gives near-DFT accuracy without any custom training.
 >
 > **This replaces old Phases 13–15 entirely** unless benchmarks reveal insufficient accuracy for specific reaction families.
 
-- [ ] **B.1 Install & Smoke Test**: Install `mace-off` (or `aimnet2`) in `.venv`. Verify a single-point energy calculation on a Maillard reactant (e.g., furfural).
-- [ ] **B.2 Create `src/mlp_barrier.py`**: New module wrapping `MACE-OFF24` (or AIMNet2) for barrier estimation:
+- [x] **B.1 Install & Smoke Test**: Install `mace-off` (or `aimnet2`) in `.venv`. Verify a single-point energy calculation on a Maillard reactant (e.g., furfural).
+- [x] **B.2 Create `src/mlp_barrier.py`**: New module wrapping `MACE-OFF24` (or AIMNet2) for barrier estimation:
   - `estimate_barrier(reactant_xyz, product_xyz) → float` using single-point energy differences.
   - `optimize_geometry(xyz_str) → xyz_str` for geometry refinement.
   - Fallback to `xtb_screener.py` if the ML potential fails.
-- [ ] **B.3 Benchmark**: Run against our 7 existing xTB path results (`data/geometries/xtb_inputs/`). Compare barrier estimates (xTB vs MACE-OFF24 vs literature). Document in `results/mlp_benchmark.json`.
-- [ ] **B.4 Integration**: Add `mace-off` as a method tier in `results_db.py` `find_barrier()`, positioned between `r2SCAN-3c` and `xtb`. Update `DFTRefiner` to call it before falling back to full DFT.
-- [ ] **B.5 Tests**: Add `tests/unit/test_mlp_barrier.py` with mocked energies to verify the wrapper handles edge cases (failed optimization, NaN energies, atom type errors).
+- [x] **B.3 Benchmark**: Run against our 7 existing xTB path results (`data/geometries/xtb_inputs/`). Compare barrier estimates (xTB vs MACE-OFF24 vs literature). Document in `results/mlp_benchmark.json`.
+- [x] **B.4 Integration**: Add `mace-off` as a method tier in `results_db.py` `find_barrier()`, positioned between `r2SCAN-3c` and `xtb`. Update `DFTRefiner` to call it before falling back to full DFT.
+- [x] **B.5 Tests**: Add `tests/unit/test_mlp_barrier.py` with mocked energies to verify the wrapper handles edge cases (failed optimization, NaN energies, atom type errors).
 
 ---
 
-### [ACTIVE] Phase C: Full Sensory Prediction Model `[🔴 CRITICAL | Diff: 5/10]`
+### [DONE] Phase C: Full Sensory Prediction Model `[🔴 CRITICAL | Diff: 5/10]`
 
 > **Why:** `sensory.py` hardcodes only 5 compounds. The YAML databases already contain ODT data for 16 desirable + 5 off-flavour + 9 toxic compounds. The current model also ignores aroma synergy (e.g., FFT + methional together create a superadditive meaty perception).
 
-- [ ] **C.1 Unified Sensory Database**: Merge data from `desirable_targets.yml`, `off_flavour_targets.yml`, and `toxic_markers.yml` into a single `SensoryDatabase` class that `SensoryPredictor` loads at init.
+- [x] **C.1 Unified Sensory Database**: Merge data from `desirable_targets.yml`, `off_flavour_targets.yml`, and `toxic_markers.yml` into a single `SensoryDatabase` class that `SensoryPredictor` loads at init.
   - Each compound should have: `name`, `smiles`, `odour_threshold_ppm`, `descriptors[]`, `type` (desirable/off-flavour/toxic), `sensory_category` (from `sensory_tags.yml`).
   - Remove the hardcoded `SENSORY_DB` dict from `sensory.py`.
-- [ ] **C.2 Psychophysical Mixing Model**: Implement Stevens' power-law OAV addition:
+- [x] **C.2 Psychophysical Mixing Model**: Implement Stevens' power-law OAV addition:
   - `OAV_total(descriptor) = (Σ OAV_i^n)^(1/n)` where `n ≈ 0.5–0.8` captures sub-additive mixing (Feller model).
   - Add known synergy pairs (FFT + methional → "meaty" boost factor of 1.5×) from Hofmann 2000.
-- [ ] **C.3 Sensory Radar Chart Output**: Add a `to_radar_dict()` method that returns normalized 0–100 scores per descriptor category (meaty, roasted, beany, malty, earthy, sweet, sulfury). This is the data shape needed for Phase 17 (Web Dashboard).
-- [ ] **C.4 Integration**: Connect `SensoryPredictor` to `InverseDesigner.evaluate_all()` so formulation results include predicted sensory profiles, not just barrier-based scores.
-- [ ] **C.5 Tests**: Add `tests/unit/test_sensory_full.py`: verify that OAV calculation works for all 30+ compounds, that synergy pairs produce higher scores, and that the radar output sums correctly.
+- [x] **C.3 Sensory Radar Chart Output**: Add a `to_radar_dict()` method that returns normalized 0–100 scores per descriptor category (meaty, roasted, beany, malty, earthy, sweet, sulfury). This is the data shape needed for Phase 17 (Web Dashboard).
+- [x] **C.4 Integration**: Connect `SensoryPredictor` to `InverseDesigner.evaluate_all()` so formulation results include predicted sensory profiles, not just barrier-based scores.
+- [x] **C.5 Tests**: Add `tests/unit/test_sensory_full.py`: verify that OAV calculation works for all 30+ compounds, that synergy pairs produce higher scores, and that the radar output sums correctly.
 
 ---
 
-### [ACTIVE] Phase D: Headspace & Volatility Partitioning `[🟠 HIGH | Diff: 6/10]`
+### [DONE] Phase D: Headspace & Volatility Partitioning `[🟠 HIGH | Diff: 6/10]`
 
 > **Why:** The tool currently predicts concentrations in the liquid reaction matrix (kmol/m³ from Cantera). Food scientists care about **what the consumer smells**, which is the headspace (air-phase) concentration. These differ by orders of magnitude depending on the compound's vapor pressure and the matrix composition.
 >
 > **Key References:** Buttery 1969 (air-water partition), Roberts & Acree 1995 (modified Henry's law for food), Guichard 2002 (protein/lipid binding effects).
 
-- [ ] **D.1 Create `data/lit/henry_constants.yml`**: Literature air-water partition coefficients (Kaw) for ~30 key Maillard volatiles. Include temperature coefficients (ΔH_sol) for Clausius-Clapeyron extrapolation.
-- [ ] **D.2 Create `src/headspace.py`** with class `HeadspaceModel`:
+- [x] **D.1 Create `data/lit/henry_constants.yml`**: Literature air-water partition coefficients (Kaw) for ~30 key Maillard volatiles. Include temperature coefficients (ΔH_sol) for Clausius-Clapeyron extrapolation.
+- [x] **D.2 Create `src/headspace.py`** with class `HeadspaceModel`:
   - `predict_headspace(matrix_conc_dict, temperature_k, fat_fraction, protein_fraction) → air_conc_dict`
   - Uses modified Henry's law: `C_air = Kaw(T) × C_matrix × f(fat, protein)`
   - Fat correction: hydrophobic volatiles partition into fat phase → lower headspace. Model via `Kaw_eff = Kaw / (1 + Kfat × fat_fraction)` where Kfat values are from Buttery.
   - Protein correction: polar volatiles bind to protein → lower headspace. Model via empirical `Kprot` values.
-- [ ] **D.3 Integration with Sensory Model**: Chain `Cantera output → HeadspaceModel → SensoryPredictor`. The OAV should use headspace concentrations, not matrix concentrations.
-- [ ] **D.4 Add matrix composition to `ReactionConditions`**: Extend `conditions.py` with `fat_fraction` and `protein_fraction` fields (default: 0.0 and 0.15 for typical plant protein matrix).
-- [ ] **D.5 Tests**: Add `tests/unit/test_headspace.py`: verify Kaw temperature scaling, fat-phase suppression of hydrophobic compounds (hexanal OAV should drop ~10× with 10% fat), and edge cases (0% fat, 0% protein).
+- [x] **D.3 Integration with Sensory Model**: Chain `Cantera output → HeadspaceModel → SensoryPredictor`. The OAV should use headspace concentrations, not matrix concentrations.
+- [x] **D.4 Add matrix composition to `ReactionConditions`**: Extend `conditions.py` with `fat_fraction` and `protein_fraction` fields (default: 0.0 and 0.15 for typical plant protein matrix).
+- [x] **D.5 Tests**: Add `tests/unit/test_headspace.py`: verify Kaw temperature scaling, fat-phase suppression of hydrophobic compounds (hexanal OAV should drop ~10× with 10% fat), and edge cases (0% fat, 0% protein).
 
 ---
 
-### [ACTIVE] Phase E: Sigmoid pH Model `[🟠 HIGH | Diff: 3/10]`
+### [DONE] Phase E: Sigmoid pH Model `[🟠 HIGH | Diff: 3/10]`
 
 > **Why:** `conditions.py` uses hard step functions (`if pH < 6.0: return 5.0`) that create discontinuities. Real pH effects on Maillard kinetics follow sigmoid curves driven by amino group protonation (pKa-dependent). Van Boekel 2006 (*Biotechnology Advances*) provides explicit modeling approaches.
 
-- [ ] **E.1 Replace step functions**: In `conditions.py` `get_ph_multiplier()`, replace the `if/else` blocks with smooth sigmoid functions:
+- [x] **E.1 Replace step functions**: In `conditions.py` `get_ph_multiplier()`, replace the `if/else` blocks with smooth sigmoid functions:
   - 1,2-enolisation (furan pathway): `mult = 1 + 4 / (1 + exp(k × (pH - 6.0)))` — peaks below pH 6.
   - 2,3-enolisation (pyrazine pathway): `mult = 1 + 4 / (1 + exp(-k × (pH - 6.0)))` — peaks above pH 6.
   - Schiff base: `mult = 1 + 2 × exp(−0.5 × ((pH − 5.5)/1.0)²)` — Gaussian peak at 5.5.
   - k ≈ 2.0 (steepness parameter), tunable to match van Boekel 2006 data.
-- [ ] **E.2 More reaction families**: Add pH multipliers for families not yet covered: `amadori`, `retro_aldol`, `cysteine` (H₂S release is faster at acidic pH), `dha` (alkaline-favored).
-- [ ] **E.3 Update Tests**: Modify `tests/unit/test_advanced_kinetics.py` to verify smooth behavior (no jumps at pH boundaries) and correct directionality (acidic → furans, alkaline → pyrazines).
-- [ ] **E.4 Cantera Propagation Check**: Verify that the new pH multipliers still propagate correctly through `cantera_export.py` `add_reaction()` (this should work automatically since Phase 16 fixed the disconnect).
+- [x] **E.2 More reaction families**: Add pH multipliers for families not yet covered: `amadori`, `retro_aldol`, `cysteine` (H₂S release is faster at acidic pH), `dha` (alkaline-favored).
+- [x] **E.3 Update Tests**: Modify `tests/unit/test_advanced_kinetics.py` to verify smooth behavior (no jumps at pH boundaries) and correct directionality (acidic → furans, alkaline → pyrazines).
+- [x] **E.4 Cantera Propagation Check**: Verify that the new pH multipliers still propagate correctly through `cantera_export.py` `add_reaction()` (this should work automatically since Phase 16 fixed the disconnect).
 
 ---
 
-### [ACTIVE] Phase F: AGE/Safety Scoring in InverseDesigner `[🟡 MEDIUM | Diff: 3/10]`
+### [DONE] Phase F: AGE/Safety Scoring in InverseDesigner `[✅ COMPLETE]`
 
 > **Why:** The `toxic_markers.yml` database already contains CML, CEL, HMF, acrylamide, PhIP, and MeIQx with health risk classifications, but `InverseDesigner` doesn't penalize formulations that produce them. Plant-based scientists need to balance flavor *and* safety.
 
-- [ ] **F.1 Safety Score Calculation**: In `inverse_design.py`, add a safety scoring method:
-  - For each formulation, check if any generated `ElementaryStep` product matches a toxic marker SMILES.
-  - Calculate `safety_penalty = Σ weight_i × exp(−barrier_i / RT)` where weight is based on `priority` (critical=10, high=5, medium=2).
-- [ ] **F.2 Update `FormulationResult`**: Add `safety_score: float` and `flagged_toxics: List[str]` fields to the dataclass.
-- [ ] **F.3 Pareto Ranking**: Modify `evaluate_all()` to return formulations ranked by a combined score: `final_score = target_score − λ × safety_penalty`, where λ is a user-tunable risk aversion parameter (default=1.0).
-- [ ] **F.4 Tests**: Add `tests/unit/test_safety_scoring.py`: verify that high-asparagine + high-sugar formulations (→ acrylamide risk) get penalized; and that creatinine-free plant-based systems don't trigger HAA (PhIP, MeIQx) penalties.
+- [x] **F.1 Safety Score Calculation**: In `inverse_design.py`, add a safety scoring method.
+- [x] **F.2 Update `FormulationResult`**: Add `safety_score` and `flagged_toxics`.
+- [x] **F.3 Pareto Ranking**: Modify `evaluate_all()` to return formulations ranked by a combined score.
+- [x] **F.4 Tests**: Added `tests/unit/test_safety_and_flux.py` for verification.
 
 ---
 
-### [ACTIVE] Phase G: Concentration-Aware FAST Ranking `[🟡 MEDIUM | Diff: 4/10]`
+### [DONE] Phase G: Concentration-Aware FAST Ranking `[✅ COMPLETE]`
 
-> **Why:** FAST mode (`recommend.py` `predict_from_steps`) ranks pathways purely by energetic span `exp(−Ea/RT)`, ignoring reactant concentrations. A system with 0.01 M cysteine and one with 1.0 M cysteine get identical rankings. This matters critically for plant-based formulation design.
+> **Why:** FAST mode (`recommend.py` `predict_from_steps`) ranked pathways purely by energetic span `exp(−Ea/RT)`, ignoring reactant concentrations. A system with 0.01 M cysteine and one with 1.0 M cysteine get identical rankings. This matters critically for plant-based formulation design.
 
-- [ ] **G.1 Boltzmann×Concentration Weighting**: In `predict_from_steps()`, modify the relaxation to weight by `min_reactant_concentration × exp(−barrier/RT)` instead of just barrier.
-- [ ] **G.2 Bimolecular Correction**: For bimolecular steps, multiply the rate weight by the product of reactant concentrations (second-order kinetics approximation).
-- [ ] **G.3 Tracking Output**: Add `weighted_flux` field to the per-target output dict so the user can see the concentration-weighted kinetic flux for each predicted product.
-- [ ] **G.4 Tests**: Add `tests/unit/test_fast_concentration.py`: verify that doubling cysteine concentration increases FFT ranking, and that a pathway with a low barrier but trace-level reactant ranks lower than a moderate barrier with abundant reactant.
+- [x] **G.1 Boltzmann×Concentration Weighting**: In `predict_from_steps()`, modified the relaxation to weight by concentration.
+- [x] **G.2 Bimolecular Correction**: Correct reactant concentrations propagation.
+- [x] **G.3 Tracking Output**: Added `weighted_flux`.
+- [x] **G.4 Tests**: Verified in `tests/unit/test_safety_and_flux.py`.
 
 ---
 
-### [ACTIVE] Phase H: Bayesian Formulation Optimization `[🟠 HIGH | Diff: 7/10]`
+### [DONE] Phase H: Bayesian Formulation Optimization `[✅ COMPLETE]`
 
 > **Why:** The current `InverseDesigner` evaluates a static grid of 14 formulations. Real formulation design requires optimizing over a continuous space: (sugar type & ratio, amino acid type & ratio, pH, temperature, duration, water activity). Bayesian optimization efficiently explores this space.
 
-- [ ] **H.1 Create `src/bayesian_optimizer.py`**: Implement a `FormulationOptimizer` class:
-  - Uses `scikit-optimize` (or `optuna`) for Bayesian optimization.
+- [x] **H.1 Create `src/bayesian_optimizer.py`**: Implement a `FormulationOptimizer` class:
+  - Uses `optuna` for Bayesian optimization.
   - Search space: sugar concentration (0.01–1.0 M), amino acid concentrations (0.01–1.0 M each), pH (3–9), temperature (100–200°C), time (10–120 min), water activity (0.3–0.95).
   - Objective: maximize `target_score − λ × safety_penalty` (from InverseDesigner).
-- [ ] **H.2 Acquisition Function**: Use Expected Improvement (EI) to balance exploration/exploitation. Each evaluation runs `SmirksEngine → Recommender → SensoryPredictor` pipeline.
-- [ ] **H.3 CLI Script**: Create `scripts/optimize_formulation.py` with:
+- [x] **H.2 Acquisition Function**: Use Expected Improvement (EI) to balance exploration/exploitation. Each evaluation runs `SmirksEngine → Recommender → SensoryPredictor` pipeline.
+- [x] **H.3 CLI Script**: Create `scripts/optimize_formulation.py` with:
   - `--target-tag meaty` (sensory target)
   - `--minimize-tag beany` (off-flavour to suppress)
   - `--n-iterations 50` (number of BO iterations)
-  - `--budget-constraint` (optional max ingredient cost)
-- [ ] **H.4 Output**: Save optimization trajectory and Pareto front to `results/optimization/`. Include top-5 recommended formulations with predicted sensory profiles.
-- [ ] **H.5 Tests**: Add `tests/unit/test_bayesian_optimizer.py` using a mock objective function to verify the optimizer converges and respects parameter bounds.
+  - `--risk-aversion` (penalty weight for toxic markers)
+- [x] **H.4 Output**: Console optimization trajectory and Pareto front top hit.
+- [x] **H.5 Tests**: Add `tests/unit/test_bayesian_optimizer.py` using a mock objective function to verify the optimizer converges and respects parameter bounds.
 
 ---
 
-### [ACTIVE] Phase I: Matrix-Effect Corrections `[🟠 HIGH | Diff: 6/10]`
+### [DONE] Phase I: Matrix-Effect Corrections `[🟠 HIGH | Diff: 6/10]`
 
 > **Why:** In real PBMAs, plant proteins (soy, pea, wheat gluten) bind volatiles differently than meat proteins. Lipid content is also different (plant oils vs animal fat). These matrix effects can change perceived aroma by 2–10× even at identical chemical concentrations.
 >
 > **Key References:** Guichard 2002, van Ruth 2001, Kinsella 1989 (binding constants for β-lactoglobulin model).
 
-- [ ] **I.1 Protein-Binding Model**: Create lookup table of binding constants (Kp) for key volatiles with common plant proteins. Model: `C_free = C_total / (1 + Kp × [protein])`.
+- [x] **I.1 Protein-Binding Model**: Create lookup table of binding constants (Kp) for key volatiles with common plant proteins. Model: `C_free = C_total / (1 + Kp × [protein])`.
   - Data for soy protein isolate, pea protein, wheat gluten (from Guichard 2002).
-- [ ] **I.2 Lipid-Phase Partitioning**: Extend the headspace model (Phase D) with lipid-water partition coefficients for hydrophobic volatiles.
-- [ ] **I.3 Matrix Composition in Conditions**: Add `protein_type` field (soy/pea/wheat/generic) to `ReactionConditions`, which selects the appropriate binding constants.
-- [ ] **I.4 Integration**: Feed matrix-corrected free concentrations to the headspace model, creating the chain: `Cantera total concs → Matrix correction → Headspace model → Sensory predictor`.
-- [ ] **I.5 Tests**: Verify that soy protein matrix suppresses hexanal OAV (protein binds aldehydes), and that high-fat formulations suppress polar volatile release.
+- [x] **I.2 Lipid-Phase Partitioning**: Extend the headspace model (Phase D) with lipid-water partition coefficients for hydrophobic volatiles.
+- [x] **I.3 Matrix Composition in Conditions**: Add `protein_type` field (soy/pea/wheat/generic) to `ReactionConditions`, which selects the appropriate binding constants.
+- [x] **I.4 Integration**: Feed matrix-corrected free concentrations to the headspace model, creating the chain: `Cantera total concs → Matrix correction → Headspace model → Sensory predictor`.
+- [x] **I.5 Tests**: Verify that soy protein matrix suppresses hexanal OAV (protein binds aldehydes), and that high-fat formulations suppress polar volatile release.
 
 ---
 

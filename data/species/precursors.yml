@@ -108,6 +108,15 @@ amino_acids:
     deficiency_in_plant_matrix: false
     notes: "⚠️ Primary DHA pathway entry point. High Ser → high DHA → depletes Lys pool."
 
+  - name: "L-Asparagine"
+    cas: "70-47-3"
+    smiles: "NC(CC(N)=O)C(=O)O"
+    role: "Primary precursor for acrylamide formation via decarboxylation of Schiff base"
+    pathway_relevance: ["Safety — Acrylamide"]
+    maillard_reactivity: "medium"
+    deficiency_in_plant_matrix: false
+    notes: "⚠️ Key safety risk in carbohydrate-rich plant matrices. Produces acrylamide."
+
 sugars:
 
   - name: "D-Ribose"
