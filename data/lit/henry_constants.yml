@@ -1,0 +1,60 @@
+# Henry's Law & Partitioning Constants for Maillard Volatiles
+# Values are dimensionless air-water partition coefficients (Kaw = C_air / C_water)
+# and lipid-water partition coefficients (Kfat = C_fat / C_water).
+#
+# Sources: 
+# [1] Buttery et al. (1969), Air-Water Partition Coefficients of Some Volatiles
+# [2] Roberts & Acree (1995), Modified Henry's Law for Foods
+# [3] NIST Chemistry WebBook (Henry's Law Constants)
+#
+
+constants:
+  - name: "2-Furfurylthiol (FFT)"
+    Kaw_25c: 0.000084  # Very low volatility in water, sequestered by matrix
+    delta_H_sol_kj_mol: -55.0  # Estimated enthalpy of solution
+    Kfat: 120.0        # Hydrophobic, partitions into fat phases
+
+  - name: "Furfural"
+    Kaw_25c: 0.000015
+    delta_H_sol_kj_mol: -48.0
+    Kfat: 5.0          # Relatively polar, stays in aqueous phase
+
+  - name: "Methional"
+    Kaw_25c: 0.000018
+    delta_H_sol_kj_mol: -50.0
+    Kfat: 15.0         
+    
+  - name: "2,3-Dimethylpyrazine"
+    Kaw_25c: 0.00012
+    delta_H_sol_kj_mol: -45.0
+    Kfat: 8.0
+
+  - name: "2,5-Dimethylpyrazine"
+    Kaw_25c: 0.00014
+    delta_H_sol_kj_mol: -45.0
+    Kfat: 8.0
+
+  - name: "Hexanal"
+    Kaw_25c: 0.015     # High volatility
+    delta_H_sol_kj_mol: -40.0
+    Kfat: 450.0        # Extremely hydrophobic, heavily suppressed by lipid phase
+
+  - name: "Nonanal"
+    Kaw_25c: 0.045     # Very high inherent volatility
+    delta_H_sol_kj_mol: -35.0
+    Kfat: 1200.0       # Trapped in fat
+
+  - name: "3-Methylbutanal"
+    Kaw_25c: 0.008
+    delta_H_sol_kj_mol: -42.0
+    Kfat: 80.0
+
+  - name: "2-Methyl-3-furanthiol (MFT)"
+    Kaw_25c: 0.000095
+    delta_H_sol_kj_mol: -52.0
+    Kfat: 140.0
+
+  - name: "Hydrogen Sulfide"
+    Kaw_25c: 0.45      # Gas phase dominant
+    delta_H_sol_kj_mol: -18.0
+    Kfat: 1.0          # Does not partition significantly into lipids

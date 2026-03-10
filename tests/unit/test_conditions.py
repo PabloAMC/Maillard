@@ -10,7 +10,8 @@ def test_ph_multipliers():
     
     # Alkaline conditions
     cond_alkaline = ReactionConditions(pH=8.0)
-    assert cond_alkaline.get_ph_multiplier("1,2-enolisation") == 1.0 # Baseline
+    # With smooth sigmoids, we use approx for the tails
+    assert cond_alkaline.get_ph_multiplier("1,2-enolisation") == pytest.approx(1.0, abs=0.1)
     assert cond_alkaline.get_ph_multiplier("2,3-enolisation") > 4.0 # Heavily favored
 
 def test_water_activity():

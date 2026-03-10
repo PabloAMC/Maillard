@@ -118,7 +118,9 @@ class InverseDesigner:
             cond = ReactionConditions(
                 pH=form.get("ph", global_conditions.pH),
                 temperature_celsius=form.get("temp", global_conditions.temperature_celsius),
-                water_activity=form.get("aw", global_conditions.water_activity)
+                water_activity=form.get("aw", global_conditions.water_activity),
+                fat_fraction=global_conditions.fat_fraction,
+                protein_fraction=global_conditions.protein_fraction
             )
             
             # FAST mode heuristic barrier overrides
@@ -137,10 +139,14 @@ class InverseDesigner:
                 bar, source = self.db.get_best_barrier(reactants, products, step.reaction_family)
                     
                 ph_mult = cond.get_ph_multiplier(step.reaction_family or "")
-                if ph_mult > 1.0:
-                    bar /= ph_mult
-                elif ph_mult < 1.0:
-                    bar += (1.0 - ph_mult) * 10.0
+                if ph_mult != 1.0:
+                    old_bar = bar
+                    import math
+                    RT = 0.001987 * cond.temperature_kelvin
+                    if ph_mult > 0:
+                        bar -= RT * math.log(ph_mult)
+                    else:
+                        bar += 20.0
                     
                 # Heme heuristic application
                 if apply_heme and step.reaction_family in HEME_CATALYST_FAMILIES:
@@ -172,11 +178,23 @@ class InverseDesigner:
             trap_dict = rec_result["metrics"].get("trapping_efficiency", {})
             trap_avg = sum(trap_dict.values()) / len(trap_dict) if trap_dict else 0.0
 
-            # Calculate perceived sensory profile (Phase C)
-            # We map target concentrations from recommender to concentrations in ppm
-            # recommender uses arbitrary units (scaled by initial concs), we assume 1.0 unit = 1 ppm for simplicity in this tier
-            conc_map = {t["name"]: t["concentration"] for t in rec_result["targets"]}
-            radar_scores = self.sensory.get_radar_data(conc_map)
+            # Calculate perceived sensory profile (Phase C/D)
+            # Kinetic-aware weighting: Conc_eff = Conc_limiting * exp(-(PathSpan - 20) / RT)
+            # We use 20 kcal/mol as a baseline to make results visible in ppm units.
+            RT = 0.001987 * cond.temperature_kelvin
+            import math
+            conc_map = {}
+            for t in rec_result["targets"]:
+                # Shifted Boltzmann for better visualization in ppm range
+                weight = math.exp(-(t["span"] - 20.0) / RT) if t["span"] < 90 else 0.0
+                conc_map[t["name"]] = t["concentration"] * weight
+
+            radar_scores = self.sensory.get_radar_data(
+                conc_map, 
+                temp_c=cond.temperature_celsius,
+                fat_fraction=cond.fat_fraction,
+                protein_fraction=cond.protein_fraction
+            )
 
             results.append(FormulationResult(
                 name=name,

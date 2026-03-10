@@ -3,19 +3,50 @@ import numpy as np
 from src.kinetics import KineticsEngine
 from src.conditions import ReactionConditions
 
-def test_ph_scaling():
-    """Verify that pH scaling affects rate constants for specific families."""
+def test_ph_scaling_sigmoid():
+    """Verify that pH scaling is smooth and monotonic for enolisation families."""
     engine = KineticsEngine(temperature_k=423.15)
     
-    # 1,2-enolisation (Favored at pH < 6)
-    cond_acid = ReactionConditions(pH=5.0)
-    cond_neutral = ReactionConditions(pH=7.0)
+    # 1. 1,2-enolisation (Acidic favored)
+    # Check monotonicity: pH 5.0 > pH 6.0 > pH 7.0
+    ph_range = [5.0, 5.5, 6.0, 6.5, 7.0]
+    multipliers = []
+    for ph in ph_range:
+        cond = ReactionConditions(pH=ph)
+        multipliers.append(cond.get_ph_multiplier("Enolisation_1_2"))
     
-    k_acid = engine.get_rate_constant(25.0, conditions=cond_acid, reaction_family="Enolisation_1_2")
-    k_neutral = engine.get_rate_constant(25.0, conditions=cond_neutral, reaction_family="Enolisation_1_2")
+    # Should be strictly decreasing
+    assert all(x > y for x, y in zip(multipliers, multipliers[1:]))
+    assert multipliers[0] > 3.0  # High at acidic
+    assert multipliers[-1] < 2.0 # Low at neutral
     
-    # Should be 5x faster in acidic conditions per get_ph_multiplier
-    assert k_acid / k_neutral == pytest.approx(5.0, rel=0.1)
+    # 2. 2,3-enolisation (Alkaline favored)
+    # Check monotonicity: pH 5.0 < pH 7.0 < pH 9.0
+    ph_range_alk = [5.0, 6.0, 7.0, 8.0, 9.0]
+    multipliers_alk = []
+    for ph in ph_range_alk:
+        cond = ReactionConditions(pH=ph)
+        multipliers_alk.append(cond.get_ph_multiplier("Enolisation_2_3"))
+        
+    # Should be strictly increasing
+    assert all(x < y for x, y in zip(multipliers_alk, multipliers_alk[1:]))
+    assert multipliers_alk[0] < 1.0 # Suppressed at acidic
+    assert multipliers_alk[-1] > 5.0 # High at alkaline
+
+def test_ph_scaling_gaussian():
+    """Verify that Schiff base formation has a peak response around pH 5.5."""
+    cond_low = ReactionConditions(pH=4.0)
+    cond_peak = ReactionConditions(pH=5.5)
+    cond_high = ReactionConditions(pH=7.5)
+    
+    m_low = cond_low.get_ph_multiplier("Schiff_Base")
+    m_peak = cond_peak.get_ph_multiplier("Schiff_Base")
+    m_high = cond_high.get_ph_multiplier("Schiff_Base")
+    
+    # Peak should be highest
+    assert m_peak > m_low
+    assert m_peak > m_high
+    assert m_peak == pytest.approx(3.0) # 1.0 + 2.0 * Gaussian(0)
 
 def test_solvent_scaling():
     """Verify Kirkwood-Onsager solvent scaling."""

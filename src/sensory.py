@@ -9,6 +9,7 @@ import os
 import yaml
 from pathlib import Path
 from typing import Dict, List, Any, Optional
+from src.headspace import HeadspaceModel
 
 class SensoryDatabase:
     """
@@ -77,18 +78,31 @@ class SensoryPredictor:
     Predicts sensory profiles using psychophysical mixing.
     """
     
-    def __init__(self, database: Optional[SensoryDatabase] = None):
+    def __init__(self, database: Optional[SensoryDatabase] = None, headspace: Optional[HeadspaceModel] = None):
         self.db = database or SensoryDatabase()
+        self.headspace = headspace
         self.exponent = 0.5  # Stevens' Law exponent for odorants
 
-    def predict_profile(self, concentration_dict_ppm: Dict[str, float]) -> Dict[str, float]:
+    def predict_profile(self, 
+                        concentration_dict_ppm: Dict[str, float], 
+                        temp_c: Optional[float] = None,
+                        fat_fraction: float = 0.0,
+                        protein_fraction: float = 0.0) -> Dict[str, float]:
         """
-        Calculate perceived intensity for each compound using Stevens' Law.
-        I = (C / Threshold)^n
-        Returns raw OAV_eff scores per compound name.
+        Calculate perceived intensity for each compound.
+        If headspace model is present, it first converts matrix conc -> air conc.
         """
+        # 1. Headspace Partitioning (optional)
+        if self.headspace and temp_c is not None:
+            effective_concs = self.headspace.predict_headspace(
+                concentration_dict_ppm, temp_c, fat_fraction, protein_fraction
+            )
+        else:
+            effective_concs = concentration_dict_ppm
+
+        # 2. Perceived Intensity calculation
         results = {}
-        for compound, conc in concentration_dict_ppm.items():
+        for compound, conc in effective_concs.items():
             entry = self.db.find_entry(compound)
             if entry and entry["threshold_ppm"]:
                 oav = conc / entry["threshold_ppm"]
@@ -97,12 +111,17 @@ class SensoryPredictor:
                 results[entry["name"]] = intensity
         return results
 
-    def get_radar_data(self, concentration_dict_ppm: Dict[str, float]) -> Dict[str, float]:
+    def get_radar_data(self, 
+                       concentration_dict_ppm: Dict[str, float],
+                       temp_c: Optional[float] = None,
+                       fat_fraction: float = 0.0,
+                       protein_fraction: float = 0.0) -> Dict[str, float]:
         """
-        Groups perceived intensities into radar categories (meaty, roasted, etc.)
-        Sums intensities within each category.
+        Groups perceived intensities into radar categories.
         """
-        compound_intensities = self.predict_profile(concentration_dict_ppm)
+        compound_intensities = self.predict_profile(
+            concentration_dict_ppm, temp_c, fat_fraction, protein_fraction
+        )
         radar = {tag: 0.0 for tag in self.db.tags.keys()}
         
         # Map compounds to categories using tags

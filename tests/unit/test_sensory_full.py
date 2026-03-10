@@ -6,6 +6,7 @@ Verifies the unified SensoryDatabase and psychophysical mixing.
 
 import pytest
 from src.sensory import SensoryDatabase, SensoryPredictor
+from src.headspace import HeadspaceModel
 
 def test_sensory_database_loading():
     """Verify that we load compounds from multiple YAML files."""
@@ -59,6 +60,28 @@ def test_radar_aggregation():
     
     assert radar["roasted"] == pytest.approx(3.162, rel=1e-3)
     assert radar["beany"] == pytest.approx(3.162, rel=1e-3)
+
+def test_sensory_headspace_integration():
+    """Verify end-to-end headspace aware sensory scoring."""
+    from src.headspace import HeadspaceModel
+    hs = HeadspaceModel()
+    predictor = SensoryPredictor(headspace=hs)
+    
+    # 1.0 ppm Hexanal in 10% fat matrix
+    # Kaw(25C) = 0.015, Kfat = 450
+    # Kaw_eff = 0.015 / (1 + 450*0.1) = 0.015 / 46 = 0.000326
+    # conc_air = 1.0 * 0.000326 = 3.26e-4
+    # Hexanal ODT = 4.5 ppb = 0.0045 ppm
+    # OAV = 3.26e-4 / 4.5e-3 = 0.072
+    # Intensity = sqrt(0.072) ~ 0.27
+    
+    profile = predictor.predict_profile({"Hexanal": 1.0}, temp_c=25.0, fat_fraction=0.1)
+    assert profile["Hexanal"] < 0.3
+    
+    # Same concentration, but 0% fat -> much higher intensity
+    profile_pure = predictor.predict_profile({"Hexanal": 1.0}, temp_c=25.0, fat_fraction=0.0)
+    # Kaw = 0.015, conc_air = 0.015, OAV = 0.015 / 0.0045 = 3.33, Intensity = sqrt(3.33) ~ 1.82
+    assert profile_pure["Hexanal"] > 1.5
 
 if __name__ == "__main__":
     pytest.main([__file__])

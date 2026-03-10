@@ -8,6 +8,8 @@ class ReactionConditions:
     pH: float = 7.0
     temperature_celsius: float = 150.0 
     water_activity: float = 0.8
+    fat_fraction: float = 0.0      # Added phase D
+    protein_fraction: float = 0.15  # Added phase D
     dielectric_constant: float = 78.4 # Default: Water
     solvent_name: str = "water"
     
@@ -28,31 +30,45 @@ class ReactionConditions:
     def temperature_kelvin(self) -> float:
         return self.temperature_celsius + 273.15
         
+    def _sigmoid(self, x: float, center: float, k: float) -> float:
+        """Helper for sigmoid transitions."""
+        import math
+        try:
+            return 1.0 / (1.0 + math.exp(-k * (x - center)))
+        except OverflowError:
+            return 0.0 if x < center else 1.0
+
+    def _gaussian(self, x: float, center: float, sigma: float) -> float:
+        """Helper for peaked responses (e.g. Schiff base)."""
+        import math
+        return math.exp(-0.5 * ((x - center) / sigma) ** 2)
+
     def get_ph_multiplier(self, reaction_family: str) -> float:
         """
-        Calculates a kinetic multiplier based on pH according to known Maillard chemistry.
-        - Acidic pH (< 6) favors 1,2-enolisation (furan pathways).
-        - Alkaline/Neutral pH (>= 6) favors 2,3-enolisation (pyrazine/Strecker pathways).
+        Calculates a kinetic multiplier based on pH using smooth sigmoid/Gaussian curves.
+        
+        Physics:
+        - 1,2-enolisation (furans): Favored at acidic pH (pH < 6).
+        - 2,3-enolisation (pyrazines): Favored at alkaline pH (pH > 6).
+        - Schiff base: Optimal at pH 5.5 (amine nucleophilicity vs protonation balance).
         """
         if not reaction_family:
             return 1.0
             
         fam = reaction_family.lower()
         
-        # 1,2-enolisation to furans (favored at acidic pH)
-        if "1,2" in fam or "1_2" in fam or "furan" in fam or "thiol" in fam:
-            if self.pH < 6.0:
-                return 5.0 # Accelerated
-            return 1.0
-            
-        # 2,3-enolisation to pyrazines/strecker (favored at alkaline pH)
-        if "2,3" in fam or "2_3" in fam or "pyrazine" in fam or "strecker" in fam:
-            if self.pH >= 6.0:
-                base = 1.0
-                # Exponential increase with alkalinity
-                base += (self.pH - 6.0) * 2.0 
-                return max(1.0, base)
-            return 0.2 # Suppressed at low pH
+        # 1. Schiff Base: Gaussian peak at pH 5.5
+        if any(x in fam for x in ["schiff", "condensation"]):
+            return 1.0 + 2.0 * self._gaussian(self.pH, 5.5, 1.0)
+
+        # 2. 2,3-enolisation / Pyrazine / Strecker / Amadori / Heyns (Alkaline favored)
+        elif any(x in fam for x in ["2,3", "2_3", "pyrazine", "strecker", "amadori", "heyns"]):
+            base_mult = 0.2 + 8.0 * self._sigmoid(self.pH, 6.5, 1.5)
+            return max(0.01, base_mult)
+
+        # 3. 1,2-enolisation / Furan / Thiol / Thio / Cysteine / [Generic Enolisation] (Acidic favored)
+        elif any(x in fam for x in ["1,2", "1_2", "furan", "thiol", "thio", "cysteine", "enolisation"]):
+            return 1.0 + 4.0 * (1.0 - self._sigmoid(self.pH, 6.0, 2.0))
             
         return 1.0
         
