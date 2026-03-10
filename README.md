@@ -1,9 +1,9 @@
-# Maillard Reactant Framework 🍳
+# Maillard Reactant Framework
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-**Maillard** is a high-fidelity chemical discovery engine designed for the next generation of plant-based foods. It explores the high-dimensional chemical space of the Maillard reaction to help you design flavor systems that are indistinguishable from animal meat.
+**Maillard** is a pure-Python, high-fidelity chemical discovery engine designed for the next generation of plant-based foods. It explores the high-dimensional chemical space of the Maillard reaction to help you design flavor systems that are indistinguishable from animal meat.
 
 - 🌿 **Plant-Based Focus**: Tailored rules for soy, pea, and fungal protein precursors.
 - ⚡ **Multi-Tiered Screening**: Balances generative breadth with DFT precision.
@@ -13,11 +13,13 @@
 
 ## 🎯 Mission
 
-To empower food scientists to rationally design precursor combinations that maximize meaty volatiles (MFT, pyrazines) while minimizing off-flavors and toxic by-products like HMF.
+To empower food scientists to rationally design precursor combinations (pea, soy, sugars, fats) that maximize meaty volatiles (MFT, pyrazines) while minimizing off-flavors (beany hexanal) and toxic by-products (HMF, acrylamide).
 
 ### 🌟 Highlights
 - **Hybrid SmirksEngine**: Automated discovery of thousands of pathways with strict mass conservation.
 - **Formulation Inverse Design**: Don't just predict; search the formulation grid for the optimal precursor matrix to hit a target sensory profile.
+- **Bayesian Formulation Optimization**: Actively learn and search a continuous space of precursor concentrations, pH, and temperature using `optuna`.
+- **Sensory & Safety Radar**: Target flavor profiles (e.g., meaty) using Stevens' psychophysical power-law scaling while strictly penalizing toxic markers (Acrylamide, HMF) via Pareto ranking.
 - **PBMA Metrics**: Native calculation of "Lysine Budgets" and "Lipid Trapping Efficiency" to account for competition in complex food matrices.
 
 ---
@@ -31,20 +33,26 @@ Plant-based proteins (pea, soy, etc.) lack the native precursor matrix of animal
 
 Exploring this space in the wet-lab is **combinatorially explosive**, **slow**, and **expensive**.
 
-## 🛠️ Computational Architecture
+## 🛠️ How It Works
 
-This framework employs a multi-tiered approach to bridge the gap between screening breadth and physical accuracy:
+Maillard uses a funnel strategy: generate broadly, then refine precisely. Most users only need the top two tiers.
 
-| Tier | Method | Scope | Purpose |
+| Tier | What it does | Speed | When you need it |
 |---|---|---|---|
-| **Tier 0** | **Generative SMIRKS Engine** | Thousands of pathways | Automated discovery & mass conservation |
-| **Tier 1** | **Semi-Empirical (GFN2-xTB)** | Hundreds of steps | Rapid energetic screening & pathway ranking |
-| **Tier 2** | **DFT (r2SCAN-3c / wB97M-V)** | Decisive bottlenecks | High-precision activation barriers |
+| **Tier 0** | Generates reaction networks (SMIRKS + templates) | Seconds | **Always** — this is the core engine |
+| **FAST** | Concentration-aware kinetic ranking + sensory prediction | Seconds | **Always** — ranks pathways by flavor impact |
+| **ML (MACE-OFF24)** | Near-DFT activation barriers via machine learning | Minutes | When you need accurate barrier energies without HPC |
+| **xTB / DFT** | Semi-empirical or full quantum chemistry | Hours | Research-grade validation of specific bottlenecks |
 
-### Key Technological Pillars
-- **Hybrid SmirksEngine**: A rule-based generative engine combining SMARTS functional group transforms with expert-parameterized templates (Strecker, Amadori, etc.) to ensure strict mass conservation.
-- **Physical Parametrization**: Native support for **pH**, **Temperature**, and **Water Activity ($a_w$)** affects pathway bifurcations and kinetics.
-- **Boltzmann scoring**: Concentration-dependent ranking of formulations based on active flux predictions rather than binary presence/absence.
+> [!TIP]
+> **For most formulation work**, Tier 0 + FAST is all you need. The Bayesian optimizer uses these tiers internally and runs entirely on a laptop.
+
+### Key Capabilities
+- **Reaction Discovery**: Automated enumeration of Maillard, Strecker, Amadori, retro-aldol, and thiol pathways with strict mass conservation.
+- **pH & Temperature Physics**: Smooth sigmoid kinetics model how pH shifts favor different pathways (acidic → furans/thiols, alkaline → pyrazines).
+- **Headspace Partitioning**: Converts liquid-phase concentrations to what the consumer actually smells, accounting for fat/protein binding in plant matrices.
+- **Safety Scoring**: Automatically flags and penalizes toxic marker formation (Acrylamide, CML, CEL, HMF) using Pareto ranking.
+- **Sensory Radar**: Stevens' power-law psychophysical model generates multi-axis flavor profiles (meaty, roasted, beany, malty, earthy).
 
 ## 🚀 Installation
 
@@ -75,13 +83,45 @@ pip install git+https://github.com/microsoft/skala.git
 
 ## 🛠️ Usage
 
-### 1. Identify Available Precursors
+### 1. Python API Quickstart (For Food Scientists)
+Maillard is designed to be easily scriptable in Jupyter Notebooks or standard Python workflows. Here is how you run a Bayesian formulation optimization to find the perfect mix of ingredients:
+
+```python
+from src.bayesian_optimizer import FormulationOptimizer
+
+# 1. Define your goal: Maximize "meaty" notes, mask "beany" off-flavors
+optimizer = FormulationOptimizer(
+    target_tag="meaty", 
+    minimize_tag="beany", 
+    risk_aversion=1.5 # Penalize Acrylamide/HMF by 1.5x
+)
+
+# 2. Define your available ingredients (e.g., from a pea protein matrix)
+sugars = ["ribose", "glucose"]
+amino_acids = ["cysteine", "leucine"]
+lipids = ["hexanal"] # Source of the beany off-flavor
+
+# 3. Optimize! Optuna will search the concentration, pH, and temp space
+study = optimizer.optimize(
+    fixed_sugars=sugars,
+    fixed_amino_acids=amino_acids,
+    fixed_lipids=lipids,
+    n_trials=25
+)
+
+best = study.best_trial
+print(f"Best Target Score: {best.user_attrs['target_score']:.2f}")
+print(f"Optimal pH: {best.params['ph']:.2f}")
+print(f"Optimal Temp: {best.params['temp']:.1f} °C")
+```
+
+### 2. Command Line Interface (CLI)
 List the supported sugars, amino acids, and lipids in the framework:
 ```bash
 python scripts/run_pipeline.py --list-precursors
 ```
 
-### 2. Forward Mode: Predict Aroma
+### 3. Forward Mode: Predict Aroma
 Predict the volatiles produced by a specific precursor combination.
 ```bash
 python scripts/run_pipeline.py \
@@ -93,13 +133,18 @@ python scripts/run_pipeline.py \
 ```
 *Note: Use `--xtb` to run rigorous structural optimizations (slow).*
 
-### 3. Inverse Design Mode: Optimize Formulation
-Generate the optimal precursor matrix to maximize a specific flavor profile.
+### 4. Bayesian Formulation Optimization
+Instead of evaluating a static grid, dynamically search the continuous parameter space (concentrations, pH, temp) to find the absolute Pareto-optimal formulation for flavor vs safety.
 ```bash
-python scripts/run_pipeline.py --target meaty --minimize beany
+python scripts/optimize_formulation.py \
+    --sugars ribose,glucose \
+    --amino-acids cysteine,leucine \
+    --target-tag meaty \
+    --minimize-tag beany \
+    --n-iterations 50
 ```
 
-### 4. Kinetics & Validation: Simulated vs Experimental Yields
+### 5. Kinetics & Validation: Simulated vs Experimental Yields
 Run rigorous ODE-based microkinetic simulations (supporting temperature ramps) and validate against experimental benchmarks.
 ```bash
 # Run simulation using the structured results database
@@ -114,98 +159,68 @@ python scripts/compare_sim_to_lit.py
 ```
 *Use `--export mech.yaml` to save the Cantera mechanism for external use.*
 
-### 1.3 Feature Dependency Matrix (Gap 6 Sync)
-
-| Feature | Tier | Status | Required Dependencies | Usage Level |
-|---------|:----:|:------:|-----------------------|-------------|
-| **Kinetics/Inverse Design** | 0/1 | ✅ | `rdkit`, `cantera`, `pandas` | **Standard (Laptop)** |
-| **Heuristic Baseline** | 1 | ✅ | Native (`barrier_constants.py`) | **Standard (Laptop)** |
-| **Low-Level DFT (xTB)** | 1 | ✅ | `xtb` (conda-forge) | **Standard (Laptop)** |
-| **High-Precision DFT** | 2 | ✅ | `pyscf`, `geometric` | **Advanced (Cloud/HPC)** |
-| **Explicit Solvation** | 2 | ✅ | **CREST** (found in `conda_env/bin/crest`) | **Advanced (Cloud/HPC)** |
-| **MLP Optimization** | 2 | 🏗️ | **MACE**, `torch` (~2GB weights)| **Experimental** |
-| **Sella TS Search** | 2 | 🔧 | `sella`, `ase` | **Experimental** |
-
 ---
 
-## 2. Prerequisites & Environment Setup
-### 5. Advanced: Tier 2 DFT Refinement
-High-precision activation barriers using the `r2SCAN-3c // wB97M-V` composite protocol.
+## 📂 What You Get Back
 
-> [!IMPORTANT]
-> **Prerequisite:** You must generate the starting geometries and xTB transition state guesses before running the final DFT refinement.
+Every evaluation (whether from the CLI, Python API, or Bayesian optimizer) returns:
 
-**Step A: Generate Atom-Mapped Geometries**
-This builds the initial 3D structures for both reactant and product for all 8 target reactions.
+| Output | What it tells you |
+|---|---|
+| **Sensory Radar** | Multi-axis flavor profile (meaty, roasted, beany, malty, earthy) scaled by Stevens' power law |
+| **Target Score** | How well this formulation hits your desired flavor tag (e.g., "meaty") |
+| **Safety Score** | Penalty from predicted toxic marker formation (Acrylamide, CML, HMF) |
+| **Flagged Toxics** | Specific compounds flagged as safety risks for this formulation |
+| **Off-Flavour Risk** | Predicted intensity of undesirable notes (e.g., beany/grassy) |
+| **Lipid Trapping %** | How effectively your amino acids sequester reactive aldehydes (like hexanal) |
+| **Lysine Budget** | % of lysine consumed by the competing Dehydroalanine (DHA) pathway |
+
+The Bayesian optimizer additionally tracks the full optimization trajectory so you can inspect how it converged on the optimal formulation.
+
+<details>
+<summary><strong>🔬 Advanced: DFT Barrier Refinement (for computational chemists)</strong></summary>
+
+If you need research-grade activation barriers, the framework supports a full quantum chemistry pipeline:
+
 ```bash
+# Generate 3D geometries for reactants/products
 python scripts/generate_mapped_geometries.py
-```
 
-**Step B: Generate xTB Transition State Guess**
-Navigate to the reaction directory and run the path search.
-```bash
-cd data/geometries/xtb_inputs/strecker
-./run_xtb.sh  # Output: xtbpath_ts.xyz
-```
-
-**Step C: Run Tier 2 DFT Refinement**
-Execute the orchestration script to refine the xTB guess into a high-level DFT barrier.
-```bash
-# Return to root
-cd ../../../..
+# Run xTB transition state search
 python scripts/run_tier2_dft.py --reaction strecker
 
-# Use --fast for rapid testing (HF/STO-3G in Vacuum)
-python scripts/run_tier2_dft.py --reaction strecker --fast
-
-# Use --irc to perform automated Phase 3.4 validation (recommended)
+# With IRC validation
 python scripts/run_tier2_dft.py --reaction strecker --irc
 ```
 
-> [!TIP]
-> **Explicit Solvation:** To use explicit solvation (Phase 9), ensure the `CREST` binary is available at `conda_env/bin/crest`. Enable it in `DFTRefiner(use_explicit_solvent=True, n_water=X)`.
->
-> **Performance:** The refiner dynamically detects and utilizes all available CPU cores (via `os.cpu_count()`) to maximize throughput. On Apple M-series chips, this typically yields a 10x speedup by engaging all performance cores automatically.
+This uses the `r2SCAN-3c // wB97M-V` composite protocol. Requires `pyscf`, `geometric`, and optionally `CREST` for explicit solvation. See `src/skala_refiner.py` for details.
+
+</details>
 
 ---
 
-## 📂 Output
+## 🧩 Architecture: A Codebase Tour
 
-Results are displayed in a formatted terminal table and include:
+If you are new to the project, here is how the core modules plug together to build the simulation:
 
-- **Predicted Compound**: The target volatile species (e.g., thiols, pyrazines).
-- **Formation Tag**: Classification of the compound (Desirable, Toxic, etc.).
-- **Barrier**: The rate-limiting energetic span for the pathway.
-- **Sensory Character**: Qualitative descriptor (e.g., "savory, meaty").
-- **Toxicity/Risk**: Metadata regarding known by-product risks (e.g., HMF, LAL).
+### 1. Generative Chemistry (`src/`)
+- **`smirks_engine.py`**: The heart of the network generator. Applies reaction SMIRKS templates to discover thousands of possible Maillard pathways while enforcing strict stoichiometric mass conservation.
+- **`conditions.py`**: Defines the physical `ReactionConditions` (pH, temperature, water activity). Enforces physical kinetics using smooth sigmoid transitions instead of hard cutoffs.
 
-### PBMA Metrics
-The pipeline also calculates proprietary formulation indices:
-- **Lipid Trapping Efficiency**: % of reactive aldehydes successfully sequestered by amino acid traps.
-- **Lysine Budget (DHA)**: % of available lysine consumed by the competing Dehydroalanine pathway.
+### 2. Physical & Quantum Chemistry (`src/`)
+- **`results_db.py`**: SQLite caching layer so we never compute the same activation barrier twice.
+- **`mlp_barrier.py`**: Leverages the **MACE-OFF24** ML potential for near-DFT accurate barrier approximations in milliseconds.
+- **`xtb_screener.py`** & **`skala_refiner.py`**: The heavy-duty quantum chemistry layers. Used to resolve unknown pathway bottlenecks via Semi-Empirical (GFN2-xTB) or full DFT (r2SCAN-3c) calculations.
 
----
+### 3. Food Science & Sensory Prediction (`src/`)
+- **`recommend.py`**: The `FAST` kinetic solver. Ranks active flavor pathways by resolving rate-limiting bottlenecks against reactant concentrations.
+- **`headspace.py`**: Corrects liquid concentrations into air-phase (headspace) concentrations. Accounts for matrix effects (hydrophobic flavors getting trapped in plant fats/proteins).
+- **`sensory.py`**: Translates chemical concentrations into human perception using Stevens' Power Law, generating multi-dimensional flavor radar charts.
 
-## 🧩 Architecture
-
-- **`src/smirks_engine.py`**: Rule-based reaction network generator.
-- **`src/xtb_screener.py`**: GFN2-xTB energy evaluation and NEB optimization.
-- **`src/skala_refiner.py`**: High-precision DFT refinement using the Skala XC functional.
-- **`src/recommend.py`**: Sensory scoring and pathway bottleneck identification.
-- **`src/inverse_design.py`**: Automated search over formulation matrices.
-
----
-
-## 📊 Project Roadmap (Phase 17 Complete)
-
-Internal milestone reached: The core generative engine is fully atom-balanced and calibrated against literature baselines.
-- [x] **Lipid synergy** (alkylthiazole formation) modeled.
-- [x] **Phase 12 Complete**: Cantera microkinetic integration and CLI.
-- [x] **Phase 15 Complete**: Temperature ramp modeling support.
-- [x] **Phase 16 Complete**: Structured Results Database (SQLite).
-- [x] **Phase 17 Complete**: Literature Validation (Predicted vs Experimental R-scoring).
-- [ ] **Phase 3.3 (Ongoing)**: High-precision DFT refinement for rate-limiting bottlenecks.
-- [ ] **Phase 13 (Next)**: Δ-ML Network Scaling (DFT-quality energies without DFT cost).
+### 4. Formulation Design (`src/` & `scripts/`)
+- **`inverse_design.py`**: Evaluates static grids of formulations, applying Pareto-ranking to balance desired flavor profiles against safety risks (like Acrylamide or HMF).
+- **`bayesian_optimizer.py`** / `scripts/optimize_formulation.py`: Uses `optuna` to actively search the continuous multi-dimensional space (varying pH, time, temperatures, and exact ingredient ratios) to find the absolute mathematically optimal formulation.
+- **`scripts/run_cantera_kinetics.py`**: Exports the discovered network to Cantera for rigorous, time-dependent ODE temperature-ramp simulations.
 
 ## ⚖️ License
 
