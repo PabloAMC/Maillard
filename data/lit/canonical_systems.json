@@ -29,7 +29,8 @@
         "targets": [
             "3-methylbutanal",
             "2-methylthiazole",
-            "isovaleraldehyde"
+            "isovaleraldehyde",
+            "2-furfurylthiol"
         ]
     }
 }

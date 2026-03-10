@@ -7,7 +7,7 @@ into a Cantera-compatible YAML mechanism file.
 """
 
 import yaml
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Any
 from pathlib import Path
 from src.kinetics import KineticsEngine
 
@@ -49,7 +49,9 @@ class CanteraExporter:
                      barrier_kcal: float, temperature_k: float = 423.15,
                      A: float = 1e13, b: float = 0.0,
                      thermo_gating: bool = True,
-                     gating_threshold: float = 30.0):
+                     gating_threshold: float = 30.0,
+                     reaction_family: Optional[str] = None,
+                     conditions: Optional[Any] = None):
         """
         Add an elementary step. Enforces strict mass balance and optional thermo-gating.
         """
@@ -60,6 +62,11 @@ class CanteraExporter:
                 # Log and skip unphysical reactions
                 # print(f"  Skipping unphysical reaction (Delta G = {dg:.1f} kcal/mol): {reactants} -> {products}")
                 return
+
+        # Apply pH/Environment multipliers (Phase 16.2 fix)
+        if conditions and reaction_family:
+            A *= conditions.get_ph_multiplier(reaction_family)
+            A *= conditions.get_water_activity_multiplier()
 
         r_names = [self.add_species(r) for r in reactants]
         p_names = [self.add_species(p) for p in products]
@@ -97,6 +104,11 @@ class CanteraExporter:
 
         reaction_str = f"{group_and_count(r_names)} <=> {group_and_count(p_names)}"
         
+        # Scale A-factor for trimolecular reactions to reduce stiffness (Phase 16.3 fix)
+        # Standard collision theory: A_tri << A_bi
+        if len(reactants) >= 3:
+            A = A * 1e-4
+
         self.reactions.append({
             "equation": reaction_str,
             "rate-constant": {

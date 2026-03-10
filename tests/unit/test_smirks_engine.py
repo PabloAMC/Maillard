@@ -130,10 +130,10 @@ class TestRiboseGlycinePH5:
         assert "furfural" in labels, \
             f"furfural not in products. Products: {labels}"
 
-    def test_neutral_enolisation_does_not_fire(self):
+    def test_neutral_enolisation_fires(self):
         families = _families(self.steps)
-        assert "Enolisation_2_3" not in families, \
-            "2,3-enolisation should not fire at pH 5"
+        assert "Enolisation_2_3" in families, \
+            "2,3-enolisation should fire at all pH levels (kinetically gated)"
 
     def test_all_smiles_valid(self):
         valid, bad = _all_smiles_valid(self.steps)
@@ -171,10 +171,10 @@ class TestGlucoseGlycinePH7:
         assert "pyruvaldehyde" in labels, \
             f"pyruvaldehyde not in products. Products: {labels}"
 
-    def test_acid_enolisation_does_not_fire(self):
+    def test_acid_enolisation_fires(self):
         families = _families(self.steps)
-        assert "Enolisation_1_2" not in families, \
-            "1,2-enolisation should not fire at pH 7"
+        assert "Enolisation_1_2" in families, \
+            "1,2-enolisation should fire at all pH levels (kinetically gated)"
 
     def test_all_smiles_valid(self):
         valid, bad = _all_smiles_valid(self.steps)
@@ -204,11 +204,11 @@ class TestRiboseCysteine:
         assert "dehydroalanine" in labels, \
             f"DHA not in products. Products: {labels}"
 
-    def test_thiol_addition_fires(self):
-        """Furfural + H₂S + H2 → FFT (via Thiol_Addition SMIRKS)."""
+    def test_thiohemiacetal_formation_fires(self):
+        """Furfural + H₂S → Thiohemiacetal (Stage 1 of FFT)."""
         families = _families(self.steps)
-        assert "Thiol_Addition" in families, \
-            f"Thiol addition not found. Families: {families}"
+        assert "Thiohemiacetal_Formation" in families, \
+            f"Thiohemiacetal formation not found. Families: {families}"
 
     def test_all_smiles_valid(self):
         valid, bad = _all_smiles_valid(self.steps)

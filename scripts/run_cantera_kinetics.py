@@ -12,7 +12,7 @@ import json
 import sqlite3
 import pandas as pd
 from pathlib import Path
-from typing import Optional
+from typing import Optional, List
 from src.cantera_export import CanteraExporter
 from src.kinetics import KineticsEngine
 from src.sensory import SensoryPredictor
@@ -24,6 +24,11 @@ from src.conditions import ReactionConditions
 def run_simulation(barriers_json: str, precursors: dict, temp_c: Optional[float] = None, 
                    time_sec: float = 600.0, temp_ramp_csv: Optional[str] = None,
                    predict_sensory: bool = False, output_prefix: str = "simulation",
+                   track_species: Optional[List[str]] = None,
+                   verbose_reactions: bool = False,
+                   no_gating: bool = False,
+                   pH: float = 7.0,
+                   solvent: str = "water",
                    **kwargs):
     """
     Ties together the microkinetic workflow.
@@ -40,6 +45,7 @@ def run_simulation(barriers_json: str, precursors: dict, temp_c: Optional[float]
             barriers = json.load(f)
     
     # 2. Build the mechanism
+    conditions = ReactionConditions(pH=pH, solvent_name=solvent, temperature_celsius=temp_c if temp_c else 150.0)
     exporter = CanteraExporter()
     
     NAME_MAP = {
@@ -71,8 +77,7 @@ def run_simulation(barriers_json: str, precursors: dict, temp_c: Optional[float]
 
     if kwargs.get("from_smirks", False):
         print(f"Generating dynamic network from precursors using SmirksEngine...")
-        cond = ReactionConditions(temperature_celsius=temp_c if temp_c else 150.0)
-        engine_smirks = SmirksEngine(conditions=cond)
+        engine_smirks = SmirksEngine(conditions=conditions)
         
         # Convert precursors to Species objects
         precursor_objs = []
@@ -106,11 +111,18 @@ def run_simulation(barriers_json: str, precursors: dict, temp_c: Optional[float]
                     exporter.add_species(s.smiles, name=s.label)
             
             try:
-                exporter.add_reaction(reactants, products, barrier_kcal)
-                print(f"  Reaction {step.reaction_family}: {barrier_kcal} kcal/mol [{source}]")
+                exporter.add_reaction(reactants, products, barrier_kcal, 
+                                      thermo_gating=(not no_gating),
+                                      reaction_family=step.reaction_family,
+                                      conditions=conditions)
+                if verbose_reactions:
+                    react_str = " + ".join([NAME_MAP.get(s.smiles, s.label) for s in step.reactants])
+                    prod_str = " + ".join([NAME_MAP.get(s.smiles, s.label) for s in step.products])
+                    print(f"  [{step.reaction_family}] {react_str} -> {prod_str} | Ea: {barrier_kcal:.2f} kcal/mol ({source})")
                 count += 1
             except ValueError as e:
-                print(f"  Skipping unbalanced reaction ({step.reaction_family}): {e}")
+                if verbose_reactions:
+                    print(f"  Skipping unbalanced reaction ({step.reaction_family}): {e}")
         
         print(f"Integrated {count} valid reactions into mechanism.")
 
@@ -180,6 +192,21 @@ def run_simulation(barriers_json: str, precursors: dict, temp_c: Optional[float]
     csv_path = f"{output_prefix}_results.csv"
     df.to_csv(csv_path, index=False)
     print(f"Saved concentration profiles to {csv_path}")
+
+    # Track specific species
+    if track_species:
+        print("\n--- TRACKED SPECIES (Final Yield) ---")
+        for s in track_species:
+            if s in df.columns:
+                val = df[s].iloc[-1]
+                print(f"  {s:<20}: {val:.4e} kmol/m3")
+            else:
+                # Try partial match or case-insensitive
+                matches = [c for c in df.columns if s.lower() in c.lower()]
+                for m in matches:
+                    val = df[m].iloc[-1]
+                    print(f"  {m:<20}: {val:.4e} kmol/m3 (partial match)")
+        print("-------------------------------------\n")
     
     # 6. Visualization
     try:
@@ -187,22 +214,32 @@ def run_simulation(barriers_json: str, precursors: dict, temp_c: Optional[float]
         fig, ax1 = plt.subplots(figsize=(10, 6))
         
         # Plot concentrations on primary axis
+        # If tracking, only plot tracked species + anything else significant?
+        # Actually, let's plot all but highlight tracked ones if specified.
         for name in results.keys():
             if name not in ["time", "temperature"] and not name.endswith("_X"):
-                ax1.plot(df["time"], df[name], label=name)
+                linestyle = "-"
+                alpha = 0.7
+                if track_species and name in track_species:
+                    linestyle = "--"
+                    alpha = 1.0
+                    ax1.plot(df["time"], df[name], label=f"*{name}*", linestyle=linestyle, linewidth=2.5)
+                else:
+                    ax1.plot(df["time"], df[name], label=name, alpha=alpha)
         
         ax1.set_xlabel("Time (s)")
         ax1.set_ylabel("Concentration (kmol/m3)")
-        ax1.legend(loc="upper left")
+        ax1.legend(loc="upper left", bbox_to_anchor=(1.05, 1))
         ax1.grid(True, alpha=0.3)
         
         # Plot temperature on secondary axis
         ax2 = ax1.twinx()
-        ax2.plot(df["time"], df["temperature"], color="red", linestyle="--", alpha=0.5, label="Temp")
+        ax2.plot(df["time"], df["temperature"], color="red", linestyle=":", alpha=0.5, label="Temp")
         ax2.set_ylabel("Temperature (K)", color="red")
         ax2.tick_params(axis='y', labelcolor="red")
         
         plt.title(f"Maillard Microkinetics: {'Ramp' if temp_ramp_csv else 'Isothermal'}")
+        plt.tight_layout()
         plot_path = f"{output_prefix}_plot.png"
         plt.savefig(plot_path)
         print(f"Plot saved to {plot_path}")
@@ -214,7 +251,7 @@ def run_simulation(barriers_json: str, precursors: dict, temp_c: Optional[float]
         predictor = SensoryPredictor()
         # Take the final concentrations (index -1)
         final_concs = {name: df[name].iloc[-1] for name in results.keys() if name not in ["time", "temperature"] and not name.endswith("_X")}
-        # Convert fractions to ppm
+        # Convert fractions to ppm (approximation)
         ppm_concs = {name: conc * 1e6 for name, conc in final_concs.items()}
         
         profile = predictor.predict_profile(ppm_concs)
@@ -241,6 +278,11 @@ if __name__ == "__main__":
     parser.add_argument("--output", "-o", type=str, default="results/sim_maillard", help="Output file prefix")
     parser.add_argument("--predict-sensory", action="store_true", help="Predict sensory aroma profile")
     parser.add_argument("--from-smirks", action="store_true", help="Generate network dynamically via SmirksEngine")
+    parser.add_argument("--track", type=str, help="Comma-separated species names to track even if not precursors")
+    parser.add_argument("--verbose-reactions", action="store_true", help="Print verbose details of each reaction added")
+    parser.add_argument("--no-gating", action="store_true", help="Disable thermodynamic gating (skip Delta G check)")
+    parser.add_argument("--ph", type=float, default=7.0, help="Reaction pH (default 7.0)")
+    parser.add_argument("--solvent", type=str, default="water", help="Solvent name (water, lipid, etc.)")
     
     args = parser.parse_args()
     
@@ -253,7 +295,14 @@ if __name__ == "__main__":
         name, conc = p.split(":")
         precursor_dict[name] = float(conc)
         
+    track_list = args.track.split(",") if args.track else None
+    
     run_simulation(args.input, precursor_dict, args.temp, args.time, 
                    temp_ramp_csv=args.temp_ramp,
                    predict_sensory=args.predict_sensory, output_prefix=args.output,
-                   from_smirks=args.from_smirks)
+                   from_smirks=args.from_smirks,
+                   track_species=track_list,
+                   verbose_reactions=args.verbose_reactions,
+                   no_gating=args.no_gating,
+                   pH=args.ph,
+                   solvent=args.solvent)
