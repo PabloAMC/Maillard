@@ -18,10 +18,10 @@ The core Tier 0/1/2 pipeline is operational and the zero-DFT laptop pipeline is 
 | **🔴 1** | **Phase A: Literature Arrhenius Calibration** | 📋 | Replace heuristic barriers with published experimental (A, Ea) data |
 | **🔴 2** | **Phase B: Public ML Potential Integration** | ✅ | Use MACE-OFF24/AIMNet2 instead of custom fine-tuning |
 | **🔴 3** | **Phase C: Full Sensory Prediction Model** | ✅ | Expand OAV database from 5 → 30+ compounds; add psychophysical mixing |
-| **🟠 4** | **Phase D: Headspace & Volatility Model** | 📋 | Convert matrix → air-phase concentrations for real OAV prediction |
-| **🟠 5** | **Phase E: Sigmoid pH Model** | 📋 | Replace step-function pH multipliers with Henderson-Hasselbalch curves |
+| **🟠 4** | **Phase D: Headspace & Volatility Model** | ✅ | Convert matrix → air-phase concentrations for real OAV prediction |
+| **🟠 5** | **Phase E: Sigmoid pH Model** | ✅ | Replace step-function pH multipliers with Henderson-Hasselbalch curves |
 | **🟡 6** | **Phase F: AGE/Safety Scoring in Optimizer** | 📋 | Integrate toxic marker penalties into InverseDesigner |
-| **🟡 7** | **Phase G: Concentration-Aware FAST Ranking** | 📋 | Add reactant-concentration weighting to FAST mode |
+| **🟡 7** | **Phase G: Concentration-Aware FAST Ranking** | ✅ | Add reactant-concentration weighting to FAST mode |
 | **🟠 8** | **Phase H: Bayesian Formulation Optimization** | 📋 | Continuous optimization over (sugar, AA, pH, T, time) space |
 | **🟠 9** | **Phase I: Matrix-Effect Corrections** | 📋 | Model protein/lipid volatile binding for realistic release prediction |
 | **✅** | **Phase 12: Advanced Kinetic Features** | ✅ | pH, Temperature, and Thermo gating completed & verified |
