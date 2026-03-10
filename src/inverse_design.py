@@ -8,6 +8,7 @@ from src.recommend import Recommender
 from src.precursor_resolver import resolve_many
 from src.barrier_constants import get_barrier, HEME_CATALYST_REDUCTION, HEME_CATALYST_FAMILIES
 from src.results_db import ResultsDB
+from src.sensory import SensoryPredictor
 
 # Locate data files
 ROOT = Path(__file__).resolve().parents[1]
@@ -23,6 +24,7 @@ class FormulationResult:
     trapping_efficiency: float
     detected_targets: List[str]
     detected_minimize: List[str]
+    radar: Dict[str, float]  # Phase C: Radar category scores
 
 class InverseDesigner:
     def __init__(self, target_tag: str, minimize_tag: str = "beany"):
@@ -38,6 +40,7 @@ class InverseDesigner:
         
         # Initialize Database connection for unified barrier lookup
         self.db = ResultsDB()
+        self.sensory = SensoryPredictor()
 
     def _load_grid(self) -> List[Dict]:
         if not GRID_FILE.exists():
@@ -169,6 +172,12 @@ class InverseDesigner:
             trap_dict = rec_result["metrics"].get("trapping_efficiency", {})
             trap_avg = sum(trap_dict.values()) / len(trap_dict) if trap_dict else 0.0
 
+            # Calculate perceived sensory profile (Phase C)
+            # We map target concentrations from recommender to concentrations in ppm
+            # recommender uses arbitrary units (scaled by initial concs), we assume 1.0 unit = 1 ppm for simplicity in this tier
+            conc_map = {t["name"]: t["concentration"] for t in rec_result["targets"]}
+            radar_scores = self.sensory.get_radar_data(conc_map)
+
             results.append(FormulationResult(
                 name=name,
                 target_score=t_score,
@@ -176,7 +185,8 @@ class InverseDesigner:
                 lysine_budget=rec_result["metrics"].get("lysine_budget_dha", 0.0),
                 trapping_efficiency=trap_avg,
                 detected_targets=t_detected,
-                detected_minimize=m_detected
+                detected_minimize=m_detected,
+                radar=radar_scores
             ))
             
         # Rank by target_score DESC, off_flavour_risk ASC

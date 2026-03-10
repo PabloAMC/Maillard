@@ -235,8 +235,8 @@ class TestSensoryPrediction:
         # Roasted precursor: pyrazine (smaller OAV due to higher threshold)
         roasted_conc = {"2,3-dimethylpyrazine": 1.0} # 1 ppm
         
-        profile_meaty = predictor.predict_profile(meaty_conc)
-        profile_roasted = predictor.predict_profile(roasted_conc)
+        profile_meaty = predictor.get_radar_data(meaty_conc)
+        profile_roasted = predictor.get_radar_data(roasted_conc)
         
         assert profile_meaty["meaty"] > profile_roasted["meaty"]
         assert profile_roasted["roasted"] > 0
@@ -249,8 +249,8 @@ class TestSensoryPrediction:
         low_conc = {"FFT": 0.0001}
         high_conc = {"FFT": 0.1}
         
-        profile_low = predictor.predict_profile(low_conc)
-        profile_high = predictor.predict_profile(high_conc)
+        profile_low = predictor.get_radar_data(low_conc)
+        profile_high = predictor.get_radar_data(high_conc)
         
         assert profile_high["meaty"] > profile_low["meaty"]
 

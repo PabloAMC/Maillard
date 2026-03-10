@@ -82,6 +82,13 @@ class DFTRefiner:
         # Phase 14: Initialize Diffusion TS Engine
         self.diffusion_engine = DiffusionTSEngine()
         
+        # Phase B: Initialize MLP Barrier (MACE-OFF24)
+        try:
+            from .mlp_barrier import MLPBarrier
+            self.mlp_barrier = MLPBarrier()
+        except ImportError:
+            self.mlp_barrier = None
+        
         # The tiered methods defined in the plan
         self.opt_method = 'r2SCAN'
         self.opt_basis = 'def2-svp' # Close approximation to -3c base
@@ -517,6 +524,30 @@ class DFTRefiner:
                 delta_g_kcal=barrier_kcal,
                 method=res_ts.method,
                 basis=self.refinement_basis,
+                solvation=self.solvent_name,
+                converged=True
+            )
+            
+        return barrier_kcal
+
+    def calculate_mlp_barrier(self, reactant_xyz: str, product_xyz: str, reaction_meta: Optional[Dict] = None) -> Optional[float]:
+        """
+        Rapidly estimate the barrier using MACE-OFF24.
+        Bypasses full TS optimization for a quick relative ranking.
+        """
+        if not self.mlp_barrier:
+            return None
+            
+        barrier_kcal = self.mlp_barrier.estimate_barrier(reactant_xyz, product_xyz)
+        
+        if barrier_kcal is not None and self.db and reaction_meta:
+            self.db.add_barrier(
+                reactants=reaction_meta.get('reactants', []),
+                products=reaction_meta.get('products', []),
+                family=reaction_meta.get('family', 'unknown'),
+                delta_g_kcal=barrier_kcal,
+                method="mace-off",
+                basis="OFF23_medium", # Default model name
                 solvation=self.solvent_name,
                 converged=True
             )

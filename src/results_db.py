@@ -123,7 +123,7 @@ class ResultsDB:
             conn.commit()
 
     def find_barrier(self, reactants: List[str], products: List[str], 
-                     method_preference: List[str] = ["wB97M-V", "r2SCAN-3c", "xtb", "hf", "literature_heuristic"]) -> Optional[Dict[str, Any]]:
+                     method_preference: List[str] = ["wB97M-V", "r2SCAN-3c", "mace-off", "xtb", "hf", "literature_heuristic"]) -> Optional[Dict[str, Any]]:
         """
         Find the best available barrier for a reaction based on method priority.
         """
