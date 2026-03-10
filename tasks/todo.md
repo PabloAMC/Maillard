@@ -5,22 +5,175 @@
 
 ## ⚡ ACTIVE EXECUTION & SOTA ROADMAP
 
-The core Tier 0/1/2 pipeline is operational and the zero-DFT laptop pipeline is functional. All bug fixes and core infrastructure tasks are now archived. 
+The core Tier 0/1/2 pipeline is operational and the zero-DFT laptop pipeline is functional. The **FFT pathway bottleneck (Phase 16) has been resolved** via an H₂S-mediated pathway and pH-dependent rate scaling.
 
-The immediate next priority is generating the required 500+ data points to unblock Machine Learning models, and optimizing MACE for sulfur chemistry to eliminate drift.
+> [!IMPORTANT]
+> **Strategic Pivot (2026-03-10):** After a deep audit, we determined that multiple high-impact, non-DFT improvements should be prioritized *before* investing in custom DFT dataset generation and ML potential training. Public pre-trained models (MACE-OFF24, AIMNet2) already cover organic sulfur chemistry with ~0.25 kcal/mol accuracy. See `strategic_assessment.md` for full rationale.
 
 > [!IMPORTANT]
 > **Environment Note:** Use `.venv` for full test coverage. The `conda_env` is missing `mace-torch` and will skip MLP/MACE related tests (`tests/qm/test_mlp_*`).
 
 | Priority | Phase | Status | Impact |
 |----------|-------|:------:|--------|
-| **✅** | **Phase 12: Advanced Kinetic Features** | � | pH, Temperature, and Thermo gating completed & verified. |
-| **🟠 2** | **Phase 13: Tier 2 Batch Execution (Dataset Gen)** | 🚧 | Generates 500+ DFT points required for fine-tuning ML potentials. |
-| **� 3** | **Phase 14: MACE Fine-Tuning (Sulfur)** | 📋 | Fixes 1.11 Å drift on sulfur species (FFT, MFT) for accurate laptop runs. |
-| **� 4** | **Phase 15: Δ-ML Network Scaling** | 📋 | Predicts DFT-quality energy correctly at MACE speed without full DFT. |
-| **� 5** | **Phase 16: FFT Pathway Bottleneck** | 🚧 | Refine Ribose+Cys+Leu system investigation. |
-| **🔵 6** | **Phase 17: Web Dashboard** | ⏳ | Deferred. GUI for food scientists. |
-| **🔵 7** | **Phase 18: Experimental Validation Prep** | ⏳ | Deferred until pipeline is fully validated against ≥ 3 benchmarks. |
+| **🔴 1** | **Phase A: Literature Arrhenius Calibration** | 📋 | Replace heuristic barriers with published experimental (A, Ea) data |
+| **🔴 2** | **Phase B: Public ML Potential Integration** | 📋 | Use MACE-OFF24/AIMNet2 instead of custom fine-tuning |
+| **🔴 3** | **Phase C: Full Sensory Prediction Model** | 📋 | Expand OAV database from 5 → 30+ compounds; add psychophysical mixing |
+| **🟠 4** | **Phase D: Headspace & Volatility Model** | 📋 | Convert matrix → air-phase concentrations for real OAV prediction |
+| **🟠 5** | **Phase E: Sigmoid pH Model** | 📋 | Replace step-function pH multipliers with Henderson-Hasselbalch curves |
+| **🟡 6** | **Phase F: AGE/Safety Scoring in Optimizer** | 📋 | Integrate toxic marker penalties into InverseDesigner |
+| **🟡 7** | **Phase G: Concentration-Aware FAST Ranking** | 📋 | Add reactant-concentration weighting to FAST mode |
+| **🟠 8** | **Phase H: Bayesian Formulation Optimization** | 📋 | Continuous optimization over (sugar, AA, pH, T, time) space |
+| **🟠 9** | **Phase I: Matrix-Effect Corrections** | 📋 | Model protein/lipid volatile binding for realistic release prediction |
+| **✅** | **Phase 12: Advanced Kinetic Features** | ✅ | pH, Temperature, and Thermo gating completed & verified |
+| **✅** | **Phase 16: FFT Pathway Bottleneck** | ✅ | Investigated and resolved via H2S-mediated steps |
+| **🔵** | **Phases 13–15: Custom DFT + MACE Training** | ⏳ | Deferred. Only needed if public ML potentials prove insufficient |
+| **🔵** | **Phase 17: Web Dashboard** | ⏳ | Deferred. GUI for food scientists |
+| **🔵** | **Phase 18: Experimental Validation Prep** | ⏳ | Deferred until pipeline is fully validated |
+
+---
+
+### [ACTIVE] Phase A: Literature Arrhenius Calibration `[🔴 CRITICAL | Diff: 4/10]`
+
+> **Why:** `barrier_constants.py` uses coarse midpoint estimates from literature ranges (e.g., "12–20 kcal/mol → 15.0"). Published experimental Arrhenius parameters (A, Ea) exist for the major Maillard steps and would replace TST-with-heuristic-barriers with directly measured kinetics. This is a pure data-curation task.
+>
+> **Key References:** Martins & van Boekel 2003, Brands & van Boekel 2001, Yaylayan 1994, Hofmann & Schieberle 2000, Wedzicha 1984.
+
+- [ ] **A.1 Literature Search & Data Extraction**: Search for published Arrhenius parameters (A, Ea) for each reaction family in `barrier_constants.py`. Record source, temperature range, pH, and substrate.
+  - [ ] Schiff base condensation
+  - [ ] Amadori/Heyns rearrangement
+  - [ ] Strecker degradation (per amino acid)
+  - [ ] 1,2- and 2,3-enolisation
+  - [ ] Cysteine thermolysis / H₂S release
+  - [ ] Retro-aldol fragmentation
+- [ ] **A.2 Create `data/lit/arrhenius_params.yml`**: Structured YAML with per-family entries: `{family, A_value, A_unit, Ea_kcal, Ea_kj, temp_range_K, pH, substrate, source_doi}`.
+- [ ] **A.3 Update `barrier_constants.py`**: Add a `get_arrhenius_params(family) → (A, Ea)` function that returns the literature values. Keep `get_barrier()` as a fallback for families without Arrhenius data.
+- [ ] **A.4 Update `cantera_export.py`**: Use literature (A, Ea) in Cantera YAML instead of fixed `A=1e13` + TST-derived Ea. Modify `add_reaction()` to call `get_arrhenius_params()`.
+- [ ] **A.5 Verification**: Run the Ribose+Cys+Leu benchmark system with new parameters. Compare concentration profiles before/after. Update `tests/integration/test_fft_bottleneck.py` thresholds if needed.
+- [ ] **A.6 Tests**: Add `tests/unit/test_arrhenius_params.py` verifying data loading, fallback behavior, and that all families in the YAML have valid numeric entries.
+
+---
+
+### [ACTIVE] Phase B: Public ML Potential Integration `[🔴 CRITICAL | Diff: 5/10]`
+
+> **Why:** MACE-OFF24(M) is trained on ωB97M-D3BJ/def2-TZVPPD (essentially the same theory as our Phase 13 protocol) and already covers H, C, N, O, S. AIMNet2 achieves 1–2 kcal/mol RMSE on organic reactions. Using these as a drop-in for xTB barrier estimation gives near-DFT accuracy without any custom training.
+>
+> **This replaces old Phases 13–15 entirely** unless benchmarks reveal insufficient accuracy for specific reaction families.
+
+- [ ] **B.1 Install & Smoke Test**: Install `mace-off` (or `aimnet2`) in `.venv`. Verify a single-point energy calculation on a Maillard reactant (e.g., furfural).
+- [ ] **B.2 Create `src/mlp_barrier.py`**: New module wrapping `MACE-OFF24` (or AIMNet2) for barrier estimation:
+  - `estimate_barrier(reactant_xyz, product_xyz) → float` using single-point energy differences.
+  - `optimize_geometry(xyz_str) → xyz_str` for geometry refinement.
+  - Fallback to `xtb_screener.py` if the ML potential fails.
+- [ ] **B.3 Benchmark**: Run against our 7 existing xTB path results (`data/geometries/xtb_inputs/`). Compare barrier estimates (xTB vs MACE-OFF24 vs literature). Document in `results/mlp_benchmark.json`.
+- [ ] **B.4 Integration**: Add `mace-off` as a method tier in `results_db.py` `find_barrier()`, positioned between `r2SCAN-3c` and `xtb`. Update `DFTRefiner` to call it before falling back to full DFT.
+- [ ] **B.5 Tests**: Add `tests/unit/test_mlp_barrier.py` with mocked energies to verify the wrapper handles edge cases (failed optimization, NaN energies, atom type errors).
+
+---
+
+### [ACTIVE] Phase C: Full Sensory Prediction Model `[🔴 CRITICAL | Diff: 5/10]`
+
+> **Why:** `sensory.py` hardcodes only 5 compounds. The YAML databases already contain ODT data for 16 desirable + 5 off-flavour + 9 toxic compounds. The current model also ignores aroma synergy (e.g., FFT + methional together create a superadditive meaty perception).
+
+- [ ] **C.1 Unified Sensory Database**: Merge data from `desirable_targets.yml`, `off_flavour_targets.yml`, and `toxic_markers.yml` into a single `SensoryDatabase` class that `SensoryPredictor` loads at init.
+  - Each compound should have: `name`, `smiles`, `odour_threshold_ppm`, `descriptors[]`, `type` (desirable/off-flavour/toxic), `sensory_category` (from `sensory_tags.yml`).
+  - Remove the hardcoded `SENSORY_DB` dict from `sensory.py`.
+- [ ] **C.2 Psychophysical Mixing Model**: Implement Stevens' power-law OAV addition:
+  - `OAV_total(descriptor) = (Σ OAV_i^n)^(1/n)` where `n ≈ 0.5–0.8` captures sub-additive mixing (Feller model).
+  - Add known synergy pairs (FFT + methional → "meaty" boost factor of 1.5×) from Hofmann 2000.
+- [ ] **C.3 Sensory Radar Chart Output**: Add a `to_radar_dict()` method that returns normalized 0–100 scores per descriptor category (meaty, roasted, beany, malty, earthy, sweet, sulfury). This is the data shape needed for Phase 17 (Web Dashboard).
+- [ ] **C.4 Integration**: Connect `SensoryPredictor` to `InverseDesigner.evaluate_all()` so formulation results include predicted sensory profiles, not just barrier-based scores.
+- [ ] **C.5 Tests**: Add `tests/unit/test_sensory_full.py`: verify that OAV calculation works for all 30+ compounds, that synergy pairs produce higher scores, and that the radar output sums correctly.
+
+---
+
+### [ACTIVE] Phase D: Headspace & Volatility Partitioning `[🟠 HIGH | Diff: 6/10]`
+
+> **Why:** The tool currently predicts concentrations in the liquid reaction matrix (kmol/m³ from Cantera). Food scientists care about **what the consumer smells**, which is the headspace (air-phase) concentration. These differ by orders of magnitude depending on the compound's vapor pressure and the matrix composition.
+>
+> **Key References:** Buttery 1969 (air-water partition), Roberts & Acree 1995 (modified Henry's law for food), Guichard 2002 (protein/lipid binding effects).
+
+- [ ] **D.1 Create `data/lit/henry_constants.yml`**: Literature air-water partition coefficients (Kaw) for ~30 key Maillard volatiles. Include temperature coefficients (ΔH_sol) for Clausius-Clapeyron extrapolation.
+- [ ] **D.2 Create `src/headspace.py`** with class `HeadspaceModel`:
+  - `predict_headspace(matrix_conc_dict, temperature_k, fat_fraction, protein_fraction) → air_conc_dict`
+  - Uses modified Henry's law: `C_air = Kaw(T) × C_matrix × f(fat, protein)`
+  - Fat correction: hydrophobic volatiles partition into fat phase → lower headspace. Model via `Kaw_eff = Kaw / (1 + Kfat × fat_fraction)` where Kfat values are from Buttery.
+  - Protein correction: polar volatiles bind to protein → lower headspace. Model via empirical `Kprot` values.
+- [ ] **D.3 Integration with Sensory Model**: Chain `Cantera output → HeadspaceModel → SensoryPredictor`. The OAV should use headspace concentrations, not matrix concentrations.
+- [ ] **D.4 Add matrix composition to `ReactionConditions`**: Extend `conditions.py` with `fat_fraction` and `protein_fraction` fields (default: 0.0 and 0.15 for typical plant protein matrix).
+- [ ] **D.5 Tests**: Add `tests/unit/test_headspace.py`: verify Kaw temperature scaling, fat-phase suppression of hydrophobic compounds (hexanal OAV should drop ~10× with 10% fat), and edge cases (0% fat, 0% protein).
+
+---
+
+### [ACTIVE] Phase E: Sigmoid pH Model `[🟠 HIGH | Diff: 3/10]`
+
+> **Why:** `conditions.py` uses hard step functions (`if pH < 6.0: return 5.0`) that create discontinuities. Real pH effects on Maillard kinetics follow sigmoid curves driven by amino group protonation (pKa-dependent). Van Boekel 2006 (*Biotechnology Advances*) provides explicit modeling approaches.
+
+- [ ] **E.1 Replace step functions**: In `conditions.py` `get_ph_multiplier()`, replace the `if/else` blocks with smooth sigmoid functions:
+  - 1,2-enolisation (furan pathway): `mult = 1 + 4 / (1 + exp(k × (pH - 6.0)))` — peaks below pH 6.
+  - 2,3-enolisation (pyrazine pathway): `mult = 1 + 4 / (1 + exp(-k × (pH - 6.0)))` — peaks above pH 6.
+  - Schiff base: `mult = 1 + 2 × exp(−0.5 × ((pH − 5.5)/1.0)²)` — Gaussian peak at 5.5.
+  - k ≈ 2.0 (steepness parameter), tunable to match van Boekel 2006 data.
+- [ ] **E.2 More reaction families**: Add pH multipliers for families not yet covered: `amadori`, `retro_aldol`, `cysteine` (H₂S release is faster at acidic pH), `dha` (alkaline-favored).
+- [ ] **E.3 Update Tests**: Modify `tests/unit/test_advanced_kinetics.py` to verify smooth behavior (no jumps at pH boundaries) and correct directionality (acidic → furans, alkaline → pyrazines).
+- [ ] **E.4 Cantera Propagation Check**: Verify that the new pH multipliers still propagate correctly through `cantera_export.py` `add_reaction()` (this should work automatically since Phase 16 fixed the disconnect).
+
+---
+
+### [ACTIVE] Phase F: AGE/Safety Scoring in InverseDesigner `[🟡 MEDIUM | Diff: 3/10]`
+
+> **Why:** The `toxic_markers.yml` database already contains CML, CEL, HMF, acrylamide, PhIP, and MeIQx with health risk classifications, but `InverseDesigner` doesn't penalize formulations that produce them. Plant-based scientists need to balance flavor *and* safety.
+
+- [ ] **F.1 Safety Score Calculation**: In `inverse_design.py`, add a safety scoring method:
+  - For each formulation, check if any generated `ElementaryStep` product matches a toxic marker SMILES.
+  - Calculate `safety_penalty = Σ weight_i × exp(−barrier_i / RT)` where weight is based on `priority` (critical=10, high=5, medium=2).
+- [ ] **F.2 Update `FormulationResult`**: Add `safety_score: float` and `flagged_toxics: List[str]` fields to the dataclass.
+- [ ] **F.3 Pareto Ranking**: Modify `evaluate_all()` to return formulations ranked by a combined score: `final_score = target_score − λ × safety_penalty`, where λ is a user-tunable risk aversion parameter (default=1.0).
+- [ ] **F.4 Tests**: Add `tests/unit/test_safety_scoring.py`: verify that high-asparagine + high-sugar formulations (→ acrylamide risk) get penalized; and that creatinine-free plant-based systems don't trigger HAA (PhIP, MeIQx) penalties.
+
+---
+
+### [ACTIVE] Phase G: Concentration-Aware FAST Ranking `[🟡 MEDIUM | Diff: 4/10]`
+
+> **Why:** FAST mode (`recommend.py` `predict_from_steps`) ranks pathways purely by energetic span `exp(−Ea/RT)`, ignoring reactant concentrations. A system with 0.01 M cysteine and one with 1.0 M cysteine get identical rankings. This matters critically for plant-based formulation design.
+
+- [ ] **G.1 Boltzmann×Concentration Weighting**: In `predict_from_steps()`, modify the relaxation to weight by `min_reactant_concentration × exp(−barrier/RT)` instead of just barrier.
+- [ ] **G.2 Bimolecular Correction**: For bimolecular steps, multiply the rate weight by the product of reactant concentrations (second-order kinetics approximation).
+- [ ] **G.3 Tracking Output**: Add `weighted_flux` field to the per-target output dict so the user can see the concentration-weighted kinetic flux for each predicted product.
+- [ ] **G.4 Tests**: Add `tests/unit/test_fast_concentration.py`: verify that doubling cysteine concentration increases FFT ranking, and that a pathway with a low barrier but trace-level reactant ranks lower than a moderate barrier with abundant reactant.
+
+---
+
+### [ACTIVE] Phase H: Bayesian Formulation Optimization `[🟠 HIGH | Diff: 7/10]`
+
+> **Why:** The current `InverseDesigner` evaluates a static grid of 14 formulations. Real formulation design requires optimizing over a continuous space: (sugar type & ratio, amino acid type & ratio, pH, temperature, duration, water activity). Bayesian optimization efficiently explores this space.
+
+- [ ] **H.1 Create `src/bayesian_optimizer.py`**: Implement a `FormulationOptimizer` class:
+  - Uses `scikit-optimize` (or `optuna`) for Bayesian optimization.
+  - Search space: sugar concentration (0.01–1.0 M), amino acid concentrations (0.01–1.0 M each), pH (3–9), temperature (100–200°C), time (10–120 min), water activity (0.3–0.95).
+  - Objective: maximize `target_score − λ × safety_penalty` (from InverseDesigner).
+- [ ] **H.2 Acquisition Function**: Use Expected Improvement (EI) to balance exploration/exploitation. Each evaluation runs `SmirksEngine → Recommender → SensoryPredictor` pipeline.
+- [ ] **H.3 CLI Script**: Create `scripts/optimize_formulation.py` with:
+  - `--target-tag meaty` (sensory target)
+  - `--minimize-tag beany` (off-flavour to suppress)
+  - `--n-iterations 50` (number of BO iterations)
+  - `--budget-constraint` (optional max ingredient cost)
+- [ ] **H.4 Output**: Save optimization trajectory and Pareto front to `results/optimization/`. Include top-5 recommended formulations with predicted sensory profiles.
+- [ ] **H.5 Tests**: Add `tests/unit/test_bayesian_optimizer.py` using a mock objective function to verify the optimizer converges and respects parameter bounds.
+
+---
+
+### [ACTIVE] Phase I: Matrix-Effect Corrections `[🟠 HIGH | Diff: 6/10]`
+
+> **Why:** In real PBMAs, plant proteins (soy, pea, wheat gluten) bind volatiles differently than meat proteins. Lipid content is also different (plant oils vs animal fat). These matrix effects can change perceived aroma by 2–10× even at identical chemical concentrations.
+>
+> **Key References:** Guichard 2002, van Ruth 2001, Kinsella 1989 (binding constants for β-lactoglobulin model).
+
+- [ ] **I.1 Protein-Binding Model**: Create lookup table of binding constants (Kp) for key volatiles with common plant proteins. Model: `C_free = C_total / (1 + Kp × [protein])`.
+  - Data for soy protein isolate, pea protein, wheat gluten (from Guichard 2002).
+- [ ] **I.2 Lipid-Phase Partitioning**: Extend the headspace model (Phase D) with lipid-water partition coefficients for hydrophobic volatiles.
+- [ ] **I.3 Matrix Composition in Conditions**: Add `protein_type` field (soy/pea/wheat/generic) to `ReactionConditions`, which selects the appropriate binding constants.
+- [ ] **I.4 Integration**: Feed matrix-corrected free concentrations to the headspace model, creating the chain: `Cantera total concs → Matrix correction → Headspace model → Sensory predictor`.
+- [ ] **I.5 Tests**: Verify that soy protein matrix suppresses hexanal OAV (protein binds aldehydes), and that high-fat formulations suppress polar volatile release.
 
 ---
 
@@ -35,68 +188,36 @@ The immediate next priority is generating the required 500+ data points to unblo
 
 ---
 
-### [ACTIVE] Phase 13: Tier 2 Batch Execution (Dataset Gen) `[🔴 CRITICAL | Diff: 7/10]`
+### [DEFERRED] Phases 13–15: Custom DFT Dataset & MACE Fine-Tuning `[🔵 POSTPONED]`
 
-> **Why:** The Machine Learning models (MACE fine-tuning and Δ-ML) are blocked on requiring 500–1000 high-fidelity DFT data points. We must batch-execute the `DFTRefiner` across our generated pathways to build this dataset.
+> **Why deferred:** Public ML potentials (MACE-OFF24, AIMNet2) already cover organic sulfur at ~0.25 kcal/mol accuracy. Custom fine-tuning should only be pursued if Phase B benchmarks reveal insufficient accuracy for specific Maillard reaction families.
+
+<details>
+<summary><b>Phase 13: Tier 2 Batch Execution (Dataset Gen)</b></summary>
+
 - [ ] **13.1** Ensure all input geometries for the top 500 reactions exist in `data/geometries/xtb_inputs/`.
-- [ ] **13.2** Run `src/dft_refiner.py` in batch mode (via multiprocessing or HPC) to converge these 500+ reactions using the PySCF/Sella bridge.
-- [ ] **13.3** Save outputs consistently to `results/dft_tier2/*.json` to be consumed by training scripts.
+- [ ] **13.2** Run `src/dft_refiner.py` in batch mode to converge 500+ reactions using PySCF/Sella bridge.
+- [ ] **13.3** Save outputs to `results/dft_tier2/*.json`.
 
----
+</details>
 
-### [ACTIVE] Phase 14: MACE Fine-Tuning for Sulfur Chemistry `[🔴 CRITICAL | Diff: 8/10]`
+<details>
+<summary><b>Phase 14: MACE Fine-Tuning for Sulfur Chemistry</b></summary>
 
-> **Why:** Pre-trained MACE has confirmed 1.11 Å RMSD drift on Maillard sulfur species (FFT, MFT, thiazoles). It cannot be used for production S-chemistry without fine-tuning on our explicit data.
-> **Blocked on:** Phase 13 (Tier 2 Batch Execution).
-- [ ] **14.1** Extend `scripts/generate_mace_training_data.py` to read `results/dft_tier2/*.json` and convert to `extxyz` format. Add sulfur species augmentation (FFT, MFT, thiazoles) to ensure domain coverage.
-- [ ] **14.2** Add `fine_tune()` entrypoint to `src/mlp_optimizer.py` wrapping `mace_run_train` with Maillard-specific hyperparameters (cutoff 5.5 Å, 256 hidden channels).
+- [ ] **14.1** Extend `scripts/generate_mace_training_data.py` for sulfur species augmentation.
+- [ ] **14.2** Add `fine_tune()` entrypoint to `src/mlp_optimizer.py`.
 - [ ] **14.3** Fine-tune MACE on Phase 13 data.
-- [ ] **14.4** Re-run benchmark; verify RMSD drift falls below 0.05 Å on sulfur species and barrier MAE < 2 kcal/mol vs DFT.
+- [ ] **14.4** Verify RMSD drift < 0.05 Å on sulfur species.
 
----
+</details>
 
-### [ACTIVE] Phase 15: Δ-ML Network Scaling `[🟠 HIGH | Diff: 8/10]`
+<details>
+<summary><b>Phase 15: Δ-ML Network Scaling</b></summary>
 
-> **Why:** Train a correction model `E_DFT ≈ E_MACE + Δ_ML` on Phase 13 outputs to predict DFT-quality barriers at MACE speed across the entire network. E_MACE will be fast and structurally accurate (thanks to Phase 14), and Δ_ML fixes the remaining energy residual.
-> **Blocked on:** Phase 13 and Phase 14.
-- [ ] **15.1** Create `src/delta_ml.py` implementing a KRR or small NN regression on `(E_MACE, E_DFT)` pairs. Target: `E_DFT − E_MACE` residual.
-- [ ] **15.2** Training script consuming `results/dft_tier2/*.json` as ground truth. Cross-validation with 80/20 train/test split.
-- [ ] **15.3** Add `delta_ml` to the method priority list in `src/results_db.py` `find_barrier()`, positioned between `r2SCAN-3c` and `xtb`.
-- [ ] **15.4** Write `tests/test_delta_ml.py` to verify MAE on held-out set is lower than raw MACE MAE.
-- [ ] **15.5** Integrate into `DFTRefiner` as a new method tier (invoked after MACE guess, before full DFT SP).
+- [ ] **15.1** Create `src/delta_ml.py` implementing KRR on (E_MACE, E_DFT) pairs.
+- [ ] **15.2–15.5** Training script, DB integration, tests, DFTRefiner integration.
 
----
-
-### [ACTIVE] Phase 16: FFT Pathway Bottleneck Investigation `[🟡 MEDIUM | Diff: 9/10]`
-
-> **Why:** The literature system (Ribose+Cys+Leu) does not optimally generate the flavor target FFT. Need to investigate the flux bottleneck in the current network constraint.
->
-> **Architecture Audit Findings (2026-03-10):**
-> - **Root Cause Hypothesis:** The `_thiol_addition` template requires `Furfural + H₂S + H₂ → FFT + H₂O`. H₂ only accumulates as a by-product of pyrazine/thiazole condensation, starving FFT formation until late in the reaction. The H₂ is needed for atom balance (C₅H₄O₂ + H₂S + H₂ = C₅H₈O₂S), but the real mechanism may not use molecular H₂.
-> - **pH→Cantera Disconnect:** `conditions.py` pH multipliers are applied in `KineticsEngine` but never propagated to the Cantera YAML Ea values. All ODE sims are pH-blind.
-> - **Pre-exponential Issue:** All reactions use `A=1e13` regardless of molecularity (bimolecular vs termolecular).
-
-- [x] **16.1 Baseline Simulation**: Instrument and run baseline diagnostic.
-  - [x] Add `--track` and `--verbose-reactions` flags to `scripts/run_cantera_kinetics.py`
-  - [x] Create `scripts/run_fft_baseline.sh` convenience script
-  - [x] Run baseline for Ribose/Cys/Leu (pH 7, 150°C, 1h) and capture H₂/H₂S/furfural/FFT concentration profiles
-  - [x] Confirm whether H₂ accumulation timing is the bottleneck
-- [x] **16.3 SMIRKS Audit** *(prioritized before 16.2)*: Root-cause the H₂ dependency.
-  - [x] Verify `_thiol_addition` fires during enumeration (H₂ present in pool from `_aminoketone_condensation`)
-  - [x] Confirm atom balance for Furfural + H₂S → FFT (with/without H₂)
-  - [x] If H₂ needed: fix supply-side (lower `cysteine` barrier from 30→25 kcal/mol per Wedzicha 1984 midpoint)
-  - [x] If H₂ NOT needed: remove from `_thiol_addition` template and update SMARTS rule
-- [x] **16.2 Sensitivity Mapping**: pH/solvent sweep with Cantera pH fix.
-  - [x] Add `--ph` and `--solvent` CLI flags to `run_cantera_kinetics.py` → `ReactionConditions`
-  - [x] **Fix:** Propagate pH multipliers to Cantera YAML Ea in `cantera_export.py` `add_reaction()`
-  - [x] Create `scripts/run_fft_sensitivity.py` sweeping `{pH: [5.5, 7.0, 8.5]} × {solvent: [water, lipid]}`
-  - [x] Validate: pH 5.5 should favor furfural→FFT; pH 8.5 should favor pyrazines (per literature)
-- [x] **16.4 Yield Optimization**: Calibrate barriers and write regression tests.
-  - [x] Update barriers in `barrier_constants.py` based on 16.2/16.3 findings
-  - [x] Add FFT target to `data/lit/canonical_systems.json` for `ribose_cysteine_leucine`
-  - [x] Create `tests/integration/test_fft_bottleneck.py` (FFT rank, minimum yield threshold)
-  - [x] Add quantitative order-of-magnitude yield ratio checks to `test_regression.py`
-  - [x] Ensure all existing tests still pass
+</details>
 
 ---
 
@@ -118,7 +239,21 @@ The immediate next priority is generating the required 500+ data points to unblo
 
 ---
 
-## 🏛️ ARCHIVE / HISTORICAL PROGRESS (Completed Phases)
+
+---
+
+<details>
+<summary><b>Phase 16: FFT Pathway Bottleneck Resolution (Mar 2026) ✅</b></summary>
+
+> **Goal:** Investigate and resolve the persistent zero-yield bottleneck for **2-furfurylthiol (FFT)**.
+
+- [x] **Root Cause Identification**: Identified structural deadlock (H₂ requirement) and pH-blindness in ODE simulations.
+- [x] **H2S-Mediated Mechanism**: Replaced H₂-dependent template with a robust 2-step H₂S-mediated pathway via a thiohemiacetal intermediate.
+- [x] **Numerical Stability**: Decomposed trimolecular reactions into bimolecular steps to resolve CVode integration failure.
+- [x] **pH-Kinetics Propagation**: Fixed the disconnect between `conditions.py` and `cantera_export.py`.
+- [x] **Verification**: FFT yield confirmed > 0 in Ribose+Cys system; pH sensitivity validated against literature.
+
+</details>
 
 <details>
 <summary><b>Phases 9-12: High-Fidelity Refinements & Bug Fixes (Mar 2026) ✅</b></summary>
