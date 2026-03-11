@@ -80,7 +80,7 @@ def run_simulation(barriers_json: str, precursors: dict, temp_c: Optional[float]
         # Convert precursors to Species objects
         precursor_objs = []
         for name, conc in precursors.items():
-            smi = lookup.get(name.lower(), name)
+            smi = lookup.get(name.lower(), name) or name
             precursor_objs.append(Species(label=name, smiles=smi))
             
         # Discover network
@@ -95,9 +95,9 @@ def run_simulation(barriers_json: str, precursors: dict, temp_c: Optional[float]
             # --- DUAL-LOOKUP BARRIER ---
             # Single source of truth: DB first, then heuristic fallback
             if is_db:
-                barrier_kcal, source, _ = db.get_best_barrier(reactants, products, step.reaction_family)
+                barrier_kcal, source, _ = db.get_best_barrier(reactants, products, step.reaction_family or "unknown")
             else:
-                barrier_kcal = get_barrier(step.reaction_family)
+                barrier_kcal = get_barrier(step.reaction_family or "unknown")
                 source = "Heuristic"
 
             # Add species names if known
@@ -109,7 +109,8 @@ def run_simulation(barriers_json: str, precursors: dict, temp_c: Optional[float]
                     exporter.add_species(s.smiles, name=s.label)
             
             try:
-                exporter.add_reaction(reactants, products, barrier_kcal, 
+                barrier_val = barrier_kcal[0] if isinstance(barrier_kcal, tuple) else barrier_kcal
+                exporter.add_reaction(reactants, products, barrier_val, 
                                       thermo_gating=(not no_gating),
                                       reaction_family=step.reaction_family,
                                       conditions=conditions)
@@ -148,7 +149,7 @@ def run_simulation(barriers_json: str, precursors: dict, temp_c: Optional[float]
         ramp_df = pd.read_csv(temp_ramp_csv)
         # Expect columns 'time' (sec) and 'temp' (Celsius)
         temp_profile = list(zip(ramp_df['time'], ramp_df['temp'] + 273.15))
-        max_time = ramp_df['time'].max()
+        max_time = float(ramp_df['time'].max())
         time_sec = max_time
         print(f"Ramp detected: {len(temp_profile)} points over {time_sec} s.")
     else:
