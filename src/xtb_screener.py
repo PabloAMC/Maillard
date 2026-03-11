@@ -16,7 +16,7 @@ try:
     from rdkit import Chem
     from rdkit.Chem import AllChem
 except ImportError:
-    pass # handled gracefully
+    Chem = AllChem = None  # handled gracefully
 
 from src.pathway_extractor import ElementaryStep  # noqa: E402
 

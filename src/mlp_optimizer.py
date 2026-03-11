@@ -43,6 +43,7 @@ class MLPOptimizer:
         if not _MLP_AVAILABLE:
             raise ImportError("MLPOptimizer dependencies (mace-torch, ase) are not installed in the current environment.")
 
+        assert mace_mp is not None
         with io.StringIO() as buf, redirect_stdout(buf), redirect_stderr(buf):
             self.calc = mace_mp(
                 model=model_name,
@@ -66,8 +67,11 @@ class MLPOptimizer:
             The optimized Cartesian coordinates as an XYZ string.
         """
         # 1. Convert XYZ string to ASE Atoms object
+        assert read is not None
         with io.StringIO(xyz_string) as f:
             atoms = read(f, format='xyz')
+            if isinstance(atoms, list):
+                atoms = atoms[-1]
             
         initial_positions = atoms.positions.copy()
 
@@ -76,6 +80,7 @@ class MLPOptimizer:
         
         # 3. Optimize using BFGS algorithm
         # Suppress ASE optimization step logs to keep output clean
+        assert BFGS is not None
         with io.StringIO() as buf, redirect_stdout(buf):
             opt = BFGS(atoms, logfile=None)
             opt.run(fmax=fmax, steps=max_steps)
@@ -89,6 +94,7 @@ class MLPOptimizer:
                   "MLP result may be chemically invalid. Reverting to original or suggest DFT.")
 
         # 5. Convert back to standard XYZ formatting
+        assert write is not None
         with io.StringIO() as f:
             write(f, atoms, format='xyz')
             optimized_xyz = f.getvalue()
@@ -103,13 +109,21 @@ class MLPOptimizer:
         ts_opt = TSOptimizer(fmax=fmax, max_steps=max_steps)
         
         # 1. Convert to Atoms
+        assert read is not None
         with io.StringIO(xyz_string) as f:
             atoms = read(f, format='xyz')
+            if isinstance(atoms, list):
+                atoms = atoms[-1]
             
         # 2. Run Sella + MACE
-        atoms = ts_opt.find_ts(atoms, self.calc)
+        result = ts_opt.find_ts(atoms, self.calc)
+        if isinstance(result, list):
+            atoms = result[-1]
+        else:
+            atoms = result
         
         # 3. Convert back to XYZ
+        assert write is not None
         with io.StringIO() as f:
-            write(f, atoms, format='xyz')
+            write(f, atoms, format='xyz')  # type: ignore
             return f.getvalue()

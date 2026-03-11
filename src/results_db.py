@@ -112,7 +112,9 @@ class ResultsDB:
                 "INSERT INTO reactions (family, reactants_json, products_json) VALUES (?, ?, ?)",
                 (family, r_json, p_json)
             )
-            return cursor.lastrowid
+            res = cursor.lastrowid
+            assert res is not None
+            return int(res)
 
     def add_barrier(self, reactants: List[str], products: List[str], delta_g_kcal: float,
                     method: str, family: str = "unknown", basis: Optional[str] = None,

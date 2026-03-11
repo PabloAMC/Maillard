@@ -40,6 +40,7 @@ class MLPBarrier:
         self.device = device
         
         # Load the pre-trained foundation model
+        assert mace_off is not None
         with io.StringIO() as buf, redirect_stdout(buf), redirect_stderr(buf):
             self.calc = mace_off(
                 model=model,
@@ -49,10 +50,13 @@ class MLPBarrier:
 
     def get_energy(self, xyz_string: str) -> float:
         """Calculate potential energy in eV using MACE."""
+        assert read is not None
         with io.StringIO(xyz_string.strip()) as f:
             atoms = read(f, format='xyz')
+            if isinstance(atoms, list):
+                atoms = atoms[-1]
         
-        atoms.calc = self.calc
+        assert atoms is not None
         return atoms.get_potential_energy()
 
     def estimate_barrier(self, reactant_xyz: str, product_xyz: str) -> Optional[float]:
@@ -96,15 +100,20 @@ class MLPBarrier:
         """
         from ase.optimize import BFGS
         
+        assert read is not None
         with io.StringIO(xyz_string) as f:
             atoms = read(f, format='xyz')
+            if isinstance(atoms, list):
+                atoms = atoms[-1]
         
+        assert atoms is not None
         atoms.calc = self.calc
         
         with io.StringIO() as buf, redirect_stdout(buf):
             opt = BFGS(atoms, logfile=None)
             opt.run(fmax=fmax)
             
+        assert write is not None
         with io.StringIO() as f:
             write(f, atoms, format='xyz')
             return f.getvalue()

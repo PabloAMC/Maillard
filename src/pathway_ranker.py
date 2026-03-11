@@ -6,7 +6,7 @@ evaluates them in parallel via XTBScreener, and ranks them by
 maximum rate-limiting barrier height.
 """
 
-from typing import List, Tuple
+from typing import List, Tuple, Optional
 from dataclasses import dataclass
 from multiprocessing import Pool
 
@@ -20,15 +20,7 @@ class PathwayProfile:
     steps: List[ElementaryStep]
     deltaE_kcal_list: List[float]
     barrier_kcal_list: List[float]
-    scaled_rates: List[float] = None
-    
-    def __post_init__(self):
-        if self.scaled_rates is None:
-            self.scaled_rates = []
-    pathway_name: str
-    steps: List[ElementaryStep]
-    deltaE_kcal_list: List[float]
-    barrier_kcal_list: List[float]
+    scaled_rates: Optional[List[float]] = None
     
     @property
     def rate_limiting_barrier(self) -> float:
@@ -83,7 +75,7 @@ def evaluate_single_step(step: ElementaryStep) -> Tuple[float, float]:
         # Penalize drastically if evaluation fails (usually RDKit embedding failure for tricky intermediates)
         return (999.0, 999.0)
 
-def _evaluate_pathway(args: Tuple[str, List[ElementaryStep], ReactionConditions]) -> PathwayProfile:
+def _evaluate_pathway(args: Tuple[str, List[ElementaryStep], Optional[ReactionConditions]]) -> PathwayProfile:
     """Helper to evaluate a full pathway sequence."""
     name, steps, conditions = args
     dEs, barriers, scaled_rates = [], [], []
@@ -109,7 +101,7 @@ def _evaluate_pathway(args: Tuple[str, List[ElementaryStep], ReactionConditions]
 class PathwayRanker:
     """Evaluates multiple pathways and ranks them."""
     
-    def __init__(self, n_cores: int = 4, conditions: ReactionConditions = None):
+    def __init__(self, n_cores: int = 4, conditions: Optional[ReactionConditions] = None):
         self.n_cores = n_cores
         self.conditions = conditions
         

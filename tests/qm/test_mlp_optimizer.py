@@ -35,6 +35,7 @@ def test_mlp_optimizer_smoke():
     Smoke test: Ensure the MLPOptimizer can load the small MACE general-purpose model
     and optimize a simple molecule without crashing.
     """
+    assert MLPOptimizer is not None
     # Use "small" model to keep the test runtime manageable
     optimizer = MLPOptimizer(model_name="small", device="cpu")
     
@@ -53,6 +54,7 @@ def test_mlp_optimizer_smoke():
 @pytest.mark.slow
 def test_mlp_optimizer_ts_fallback():
     """ Verify the TS scaffold correctly warns and falls back to standard minimization. """
+    assert MLPOptimizer is not None
     optimizer = MLPOptimizer(model_name="small", device="cpu")
     opt_xyz = optimizer.optimize_ts(FORMALDEHYDE_XYZ, fmax=0.05, max_steps=10)
     assert "4" in opt_xyz.splitlines()[0]
@@ -69,9 +71,10 @@ def test_dft_refiner_mace_backend():
     refiner.refinement_method = "hf"
     refiner.refinement_basis = "sto-3g"
     
+    assert MLPOptimizer is not None
     # We must explicitly force MLPOptimizer to use 'small' for test speed
-    refiner.mlp_optimizer.model_name = "small"
-    refiner.mlp_optimizer.calc = MLPOptimizer(model_name="small", device="cpu").calc
+    refiner.mlp_optimizer.model_name = "small" # type: ignore
+    refiner.mlp_optimizer.calc = MLPOptimizer(model_name="small", device="cpu").calc # type: ignore
 
     # Attempt a geometry optimization cycle
     result = refiner.optimize_geometry(FORMALDEHYDE_XYZ, max_steps=10)

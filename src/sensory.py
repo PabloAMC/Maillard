@@ -186,9 +186,9 @@ class SensoryPredictor:
                         
         return radar
 
-    def get_dominant_notes(self, radar_profile: Dict[str, float], top_n: int = 3) -> List[tuple]:
+    def get_dominant_notes(self, radar_profile: Dict[str, Tuple[float, float]], top_n: int = 3) -> List[tuple]:
         """Return the top categories by score."""
-        sorted_notes = sorted(radar_profile.items(), key=lambda x: x[1], reverse=True)
+        sorted_notes = sorted(radar_profile.items(), key=lambda x: x[1][0], reverse=True)
         return sorted_notes[:top_n]
 
 

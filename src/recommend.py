@@ -12,7 +12,7 @@ import json
 import yaml
 from pathlib import Path
 from dataclasses import dataclass
-from typing import List, Dict, Set, Optional
+from typing import List, Dict, Set, Optional, Any
 
 from data.reactions.curated_pathways import PATHWAYS, PATHWAY_METADATA
 try:
@@ -124,7 +124,7 @@ class Recommender:
         return self._load_yaml_db("off_flavour_targets.yml")
         
     def _load_results(self) -> dict:
-        if not self.results_path.exists():
+        if self.results_path is None or not self.results_path.exists():
             print(f"ERROR: Screening results not found at {self.results_path}")
             print("Please run `python scripts/run_curated_screening.py` first.")
             sys.exit(1)
@@ -150,7 +150,7 @@ class Recommender:
                 
         return required_exogenous
 
-    def predict_from_steps(self, steps: List[any], barriers_dict: Dict[str, float], initial_concentrations: Dict[str, float], temperature_kelvin: float = 423.15, time_minutes: Optional[float] = None):
+    def predict_from_steps(self, steps: List[Any], barriers_dict: Dict[str, float], initial_concentrations: Dict[str, float], temperature_kelvin: float = 423.15, time_minutes: Optional[float] = None):
         """
         Dynamically predict active pathways given a list of generated ElementarySteps
         and their computed barriers from xTB or Hammond fallback.
@@ -183,7 +183,9 @@ class Recommender:
             iterations += 1
             
             for step in steps:
-                step_key = f"{'+'.join(sorted(r.smiles for r in step.reactants))}->{'+'.join(sorted(p.smiles for p in step.products))}"
+                r_smiles = [r.smiles for r in step.reactants]
+                p_smiles = [p.smiles for p in step.products]
+                step_key = f"{'+'.join(sorted(r_smiles))}->{'+'.join(sorted(p_smiles))}"
                 barrier_data = barriers_dict.get(step_key, (99.0, 5.0))
                 barrier, step_unc = barrier_data if isinstance(barrier_data, tuple) else (barrier_data, 5.0)
                 

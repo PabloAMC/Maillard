@@ -1242,7 +1242,7 @@ class SmirksEngine:
         # steps: List[ElementaryStep] — feed into xtb_screener or recommend.py
     """
 
-    def __init__(self, conditions: ReactionConditions = None):
+    def __init__(self, conditions: Optional[ReactionConditions] = None):
         self.conditions = conditions or ReactionConditions()
 
     def enumerate(
