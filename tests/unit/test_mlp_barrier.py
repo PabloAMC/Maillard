@@ -4,13 +4,10 @@ tests/unit/test_mlp_barrier.py
 Verifies MACE-OFF activation energy estimation.
 """
 
-import os
 import pytest
-import sqlite3
-import json
-from src.mlp_barrier import MLPBarrier
-from src.results_db import ResultsDB
-from src.dft_refiner import DFTRefiner
+from src.mlp_barrier import MLPBarrier  # noqa: E402
+from src.results_db import ResultsDB  # noqa: E402
+from src.dft_refiner import DFTRefiner  # noqa: E402
 
 # Simple balanced stoichiometry: H2 + H -> H + H2 (as a dummy check)
 H_MOL = """2

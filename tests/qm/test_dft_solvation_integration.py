@@ -1,6 +1,6 @@
 import pytest
 import os
-from src.dft_refiner import DFTRefiner, DFTResult
+from src.dft_refiner import DFTRefiner, DFTResult  # noqa: E402
 
 # Simple water molecule for fast testing
 WATER_XYZ = """3

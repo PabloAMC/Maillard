@@ -1,6 +1,6 @@
 import pytest
 from pathlib import Path
-from src.pathway_extractor import PathwayExtractor, ElementaryStep, Species
+from src.pathway_extractor import PathwayExtractor  # noqa: E402
 
 # Define mock test directories
 MOCK_DIR = Path(__file__).parent / "mock_rmg_output"

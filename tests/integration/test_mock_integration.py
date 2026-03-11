@@ -1,7 +1,4 @@
-import pytest
-from src.recommend import Recommender
-from src.pathway_extractor import Species, ElementaryStep
-from src.conditions import ReactionConditions
+from src.recommend import Recommender  # noqa: E402
 
 class MockScreener:
     """A sub-second mock screener that returns deterministic values."""

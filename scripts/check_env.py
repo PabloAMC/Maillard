@@ -134,7 +134,7 @@ def check_yaml_files() -> bool:
         else:
             try:
                 with open(p) as f:
-                    data = yaml.safe_load(f)
+                    yaml.safe_load(f)
                 ok(f"YAML parseable: {rel_path}")
             except yaml.YAMLError as e:
                 fail(f"YAML parse error in {rel_path}: {e}")

@@ -1,7 +1,6 @@
 import pytest
 import os
-import numpy as np
-from src.dft_refiner import DFTRefiner, DFTResult
+from src.dft_refiner import DFTRefiner, DFTResult  # noqa: E402
 
 # Use a very simple H-transfer transition state guess (planar H3)
 # To keep DFT fast, we use STO-3G

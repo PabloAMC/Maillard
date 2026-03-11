@@ -22,21 +22,19 @@ Output: List[ElementaryStep] — fully compatible with xtb_screener.py
 import sys
 from pathlib import Path
 from typing import List, Optional, Set, Tuple
-from dataclasses import dataclass, field
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 # Suppress RDKit atom-mapping warnings from SMIRKS rules that use unmapped atoms
-from rdkit import RDLogger
+from rdkit import Chem, RDLogger  # noqa: E402
+from rdkit.Chem import AllChem, Descriptors  # noqa: E402
+
+from src.pathway_extractor import Species, ElementaryStep  # noqa: E402
+from src.conditions import ReactionConditions  # noqa: E402
+
+# Suppress RDKit atom-mapping warnings
 RDLogger.DisableLog("rdApp.warning")
-
-from rdkit import Chem
-from rdkit.Chem import AllChem
-from rdkit.Chem import Descriptors, AllChem
-
-from src.pathway_extractor import Species, ElementaryStep
-from src.conditions import ReactionConditions
 
 # ──────────────────────────────────────────────────────────────────────────
 # Constants
@@ -50,12 +48,6 @@ _GSH_CANONICAL = "N[C@@H](CCC(=O)N[C@@H](CS)C(=O)NCC(=O)O)C(=O)O"
 
 # Tier A SMIRKS rules: (name, reaction_family, smirks, ph_gate)
 # ph_gate: "any" | "acid" (pH<6) | "neutral" (pH>=6)
-#
-# These rules are deliberately narrow:
-# - Lipid_Schiff_Base: only aliphatic C3+ aldehydes with a plain alkyl carbon (no OH)
-#   adjacent to the carbonyl. This excludes sugars, which have C(O) alpha-carbons
-#   and are handled exclusively by the Tier B Amadori template.
-# - Thiol_Addition: only aromatic (furanyl) aldehydes + H2S → thiol.
 _SMIRKS_RULES: List[Tuple[str, str, str, str]] = [
     (
         "schiff_base_lipid",
@@ -119,7 +111,8 @@ def _is_sugar(s: Species) -> bool:
 def _is_ketose(s: Species) -> bool:
     """Heuristic: has a ketone C=O and multiple OH."""
     m = _mol(s.smiles)
-    if not m: return False
+    if not m: 
+        return False
     pat = Chem.MolFromSmarts("[CX4][CX3](=O)[CX4]")
     has_ketone = m.HasSubstructMatch(pat)
     oh_count = sum(1 for atom in m.GetAtoms() if atom.GetAtomicNum() == 8 and atom.GetTotalNumHs() >= 1 and atom.GetDegree() == 1)
@@ -146,13 +139,15 @@ def _is_pentose(s: Species) -> bool:
 
 def _is_asparagine(s: Species) -> bool:
     """Detects strictly free asparagine."""
-    if s.label.lower() in ["l-asparagine", "asparagine"]: return True
+    if s.label.lower() in ["l-asparagine", "asparagine"]: 
+        return True
     return s.smiles == "NC(CC(N)=O)C(=O)O"
 
 
 def _is_lysine(s: Species) -> bool:
     """Detects strictly free lysine."""
-    if s.label.lower() in ["l-lysine", "lysine"]: return True
+    if s.label.lower() in ["l-lysine", "lysine"]: 
+        return True
     return s.smiles == "NCCCCC(N)C(=O)O"
 
 def _is_primary_amine(s: Species) -> bool:
@@ -190,15 +185,20 @@ def _is_aromatic_aldehyde(s: Species) -> bool:
 def _is_lipid_aldehyde(s: Species) -> bool:
     """C5+ aliphatic monocarbonyl aldehyde without multiple OH (excludes sugars/dicarbonyls)."""
     m = _mol(s.smiles)
-    if not m: return False
+    if not m: 
+        return False
     # Has aldehyde
-    if not m.HasSubstructMatch(_ALDEHYDE_SMARTS): return False
+    if not m.HasSubstructMatch(_ALDEHYDE_SMARTS): 
+        return False
     # NOT aromatic
-    if m.HasSubstructMatch(Chem.MolFromSmarts("a")): return False
+    if m.HasSubstructMatch(Chem.MolFromSmarts("a")): 
+        return False
     # NOT dicarbonyl
-    if m.HasSubstructMatch(_DICARBONYL_SMARTS): return False
+    if m.HasSubstructMatch(_DICARBONYL_SMARTS): 
+        return False
     # NOT nitrogenous (excludes amino-aldehydes like 5-aminopentanal)
-    if any(atom.GetAtomicNum() == 7 for atom in m.GetAtoms()): return False
+    if any(atom.GetAtomicNum() == 7 for atom in m.GetAtoms()): 
+        return False
     # Not a sugar (oh_count < 2)
     oh_count = sum(1 for atom in m.GetAtoms() if atom.GetAtomicNum() == 8 and atom.GetTotalNumHs() >= 1 and atom.GetDegree() == 1)
     # C5+ (typically lipid-derived volatiles like pentanal, hexanal)
@@ -319,7 +319,8 @@ def _extract_alpha_amine_fragment_with_n(amino_acid: Species) -> str:
     # For glycine: NCC(=O)O -> N(CC(=O)O) or something similar
     # By default, RDKit canonical SMILES for simple AAs usually start with N.
     m = _mol(amino_acid.smiles)
-    if not m: return ""
+    if not m: 
+        return ""
     
     # Find alpha nitrogen (N attached to CH attached to C=O)
     pat = Chem.MolFromSmarts("[NH2][CH1,CH2][C](=O)[OH]")
@@ -332,8 +333,8 @@ def _extract_alpha_amine_fragment_with_n(amino_acid: Species) -> str:
         matches = m.GetSubstructMatches(pat)
         
     if not matches:
-        # Fallback to string manipulation if we really can't find it
-        return "N" + _extract_alpha_amine_fragment(amino_acid)
+        # Fallback if we really can't find it
+        return ""
         
     # We want to re-root the SMILES generation at the alpha nitrogen
     n_idx = matches[0][0]
@@ -489,15 +490,17 @@ def _strecker_step(
             "[C:1](=[O:2])[C:3](=[O:4]) >> [C:1](=[O:2])[C:3]([NH2])"
         )
         dic_mol = _mol(dicarbonyl.smiles)
-        if not dic_mol: return None
+        if not dic_mol: 
+            return None
         prods = rxn_ak.RunReactants((dic_mol,))
-        if not prods: return None
+        if not prods: 
+            return None
         
         try:
             Chem.SanitizeMol(prods[0][0])
             ak_smiles = Chem.MolToSmiles(prods[0][0])
             ak_label = f"amino-{dicarbonyl.label}"
-        except:
+        except Exception:
             return None
     else:
         ak_label, ak_smiles = ak_entry
@@ -957,14 +960,17 @@ def _sugar_ring_opening(pool_species: List[Species]) -> List[ElementaryStep]:
     # Match hemiacetal: O(ring) - C(ring)(OH)
     # The [O;X2;R] ensures it's a ring oxygen, [C;X4;R] is a ring carbon, [O;X2;H] is the hydroxyl.
     patt = Chem.MolFromSmarts("[O;X2;R]-[C;X4;R]-[OH]")
-    if not patt: return steps
+    if not patt: 
+        return steps
     
     for s in pool_species:
         m = _mol(s.smiles)
-        if not m: continue
+        if not m: 
+            continue
             
         matches = m.GetSubstructMatches(patt)
-        if not matches: continue
+        if not matches: 
+            continue
             
         # We might have multiple hemiacetals (e.g., dimers), just take the first
         o_ring_idx, c_anomeric_idx, o_hydroxyl_idx = matches[0]
@@ -1456,7 +1462,7 @@ def _step_exists(step: ElementaryStep, existing: List[ElementaryStep]) -> bool:
 
 if __name__ == "__main__":
     from data.reactions.curated_pathways import (
-        RIBOSE, GLUCOSE, GLYCINE, CYSTEINE, LEUCINE, LYSINE, HEXANAL, H2S
+        RIBOSE, GLUCOSE, GLYCINE, CYSTEINE, LEUCINE, H2S
     )
 
     SYSTEMS = [

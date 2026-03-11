@@ -6,13 +6,11 @@ sequences for the 4 canonical Maillard precursor systems, and that all
 outputs are structurally valid and pipeline-compatible.
 """
 
-import pytest
-from pathlib import Path
-from rdkit import Chem
+from rdkit import Chem  # noqa: E402
 
-from src.smirks_engine import SmirksEngine, _canonical
-from src.conditions import ReactionConditions
-from src.pathway_extractor import Species, ElementaryStep
+from src.smirks_engine import SmirksEngine  # noqa: E402
+from src.conditions import ReactionConditions  # noqa: E402
+from src.pathway_extractor import Species, ElementaryStep  # noqa: E402
 
 
 # ── Helpers ────────────────────────────────────────────────────────────────
@@ -73,8 +71,14 @@ def assert_balanced(step: ElementaryStep):
             # Explicitly add Hs
             try:
                 mol = Chem.AddHs(mol)
-            except:
-                pass 
+            except Exception:
+                # Fallback
+                # If AddHs fails, we can't count atoms reliably for this molecule.
+                # Returning None here would break the Counter logic.
+                # The original code passed, meaning it continued with the mol
+                # as it was before AddHs. Let's maintain that behavior for now
+                # to ensure syntactic correctness and functional consistency.
+                pass
                 
             for atom in mol.GetAtoms():
                 counts[atom.GetSymbol()] += 1

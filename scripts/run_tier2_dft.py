@@ -7,11 +7,10 @@ Uses the r2SCAN-3c + wB97M-V protocol defined in `src/dft_refiner.py`.
 """
 
 import argparse
-import sys
 from pathlib import Path
 import json
 
-from src.dft_refiner import DFTRefiner
+from src.dft_refiner import DFTRefiner  # noqa: E402
 
 TARGET_REACTIONS = {
     "amadori": "3.3a: Amadori rearrangement",
@@ -80,9 +79,9 @@ def main():
     results = {}
     
     for t in targets:
-        print(f"\n========================================================")
+        print("\n========================================================")
         print(f"Refining: {TARGET_REACTIONS[t]}")
-        print(f"========================================================")
+        print("========================================================")
         
         try:
             data = load_geometries(t)

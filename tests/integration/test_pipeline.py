@@ -10,9 +10,9 @@ Verifies:
 import pytest
 from pathlib import Path
 
-from src.precursor_resolver import resolve, resolve_many
-from src.pathway_extractor import Species, ElementaryStep
-from src.recommend import Recommender
+from src.precursor_resolver import resolve, resolve_many  # noqa: E402
+from src.pathway_extractor import Species, ElementaryStep  # noqa: E402
+from src.recommend import Recommender  # noqa: E402
 
 def test_resolver_exact_match():
     sp = resolve("L-Cysteine")

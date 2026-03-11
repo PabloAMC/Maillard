@@ -1,9 +1,8 @@
 import optuna
-import logging
-from typing import List, Dict, Any, Optional
+from typing import List
 
-from src.inverse_design import InverseDesigner
-from src.smirks_engine import ReactionConditions
+from src.inverse_design import InverseDesigner  # noqa: E402
+from src.smirks_engine import ReactionConditions  # noqa: E402
 
 class FormulationOptimizer:
     """

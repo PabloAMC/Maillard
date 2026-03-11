@@ -1,6 +1,4 @@
-import pytest
-import os
-from src.dft_refiner import DFTRefiner
+from src.dft_refiner import DFTRefiner  # noqa: E402
 
 # Simple formaldehyde model
 FORMALDEHYDE_XYZ = """4

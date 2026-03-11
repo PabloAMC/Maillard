@@ -1,5 +1,5 @@
 import pytest
-from src.skala_refiner import SkalaRefiner
+from src.skala_refiner import SkalaRefiner  # noqa: E402
 
 # Methane XYZ (simplest test case)
 METHANE_XYZ = """5
@@ -63,7 +63,6 @@ def test_skala_ts_optimization_mock(monkeypatch):
 
 def test_skala_import_fallback(monkeypatch):
     """Test that it falls back to B3LYP if Skala is missing."""
-    import sys
     from src.skala_refiner import SkalaRefiner
     
     # We need to monkeypatch the block where the import happens

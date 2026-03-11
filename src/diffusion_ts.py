@@ -7,9 +7,7 @@ diffusion engine to generate 3D transition state (TS) guesses
 directly from 2D molecular graphs (SMILES).
 """
 
-import os
-import numpy as np
-from typing import Optional, Union, List
+from typing import Optional
 
 try:
     from ase import Atoms

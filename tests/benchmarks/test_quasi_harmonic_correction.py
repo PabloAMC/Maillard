@@ -6,7 +6,6 @@ overestimation in transition states and products.
 """
 
 import pytest
-import numpy as np
 
 
 @pytest.mark.slow

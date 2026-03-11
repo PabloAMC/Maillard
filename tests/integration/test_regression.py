@@ -2,13 +2,12 @@ import pytest
 import json
 import os
 import pandas as pd
-import numpy as np
 from pathlib import Path
-from src.smirks_engine import SmirksEngine, Species
-from src.cantera_export import CanteraExporter
-from src.kinetics import KineticsEngine
-from src.results_db import ResultsDB
-from src.conditions import ReactionConditions
+from src.smirks_engine import SmirksEngine, Species  # noqa: E402
+from src.cantera_export import CanteraExporter  # noqa: E402
+from src.kinetics import KineticsEngine  # noqa: E402
+from src.results_db import ResultsDB  # noqa: E402
+from src.conditions import ReactionConditions  # noqa: E402
 
 @pytest.fixture
 def regression_data():
@@ -116,7 +115,7 @@ def test_canonical_systems(system_key, regression_data, results_db):
     results = kinetics.simulate_network_cantera(mech_path, init_state, (0, simulation_duration))
     
     # 6. Verify Targets
-    df = pd.DataFrame(results)
+    pd.DataFrame(results)
     final_concs = {k: v for k, v in results.items() if k not in ["time", "temperature"] and not k.endswith("_X")}
     
     # Filter out precursors and inert small molecules for "volatiles" ranking
@@ -128,13 +127,19 @@ def test_canonical_systems(system_key, regression_data, results_db):
     # such as Schiff bases, Amadori products, and deoxyosones.
     def is_volatile(name):
         name_lower = name.lower()
-        if name_lower in inerts_lower: return False
-        if name_lower in precursor_names_lower: return False
-        if "base" in name_lower: return False
-        if "amadori" in name_lower: return False
-        if "osone" in name_lower: return False
+        if name_lower in inerts_lower: 
+            return False
+        if name_lower in precursor_names_lower: 
+            return False
+        if "base" in name_lower: 
+            return False
+        if "amadori" in name_lower: 
+            return False
+        if "osone" in name_lower: 
+            return False
         # Also exclude common non-aroma fragments
-        if name_lower in ["dehydroalanine", "glyceraldehyde"]: return False
+        if name_lower in ["dehydroalanine", "glyceraldehyde"]: 
+            return False
         return True
 
     volatiles = {k: v[-1] for k, v in final_concs.items() if is_volatile(k)}

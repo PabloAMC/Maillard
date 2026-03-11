@@ -29,7 +29,8 @@ dev = [
     "jupyterlab>=4.0",
     "black",
     "isort",
-    "pytest-timeout"
+    "pytest-timeout",
+    "types-PyYAML"
 ]
 
 [build-system]

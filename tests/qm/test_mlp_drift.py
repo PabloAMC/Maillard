@@ -1,7 +1,6 @@
 import pytest
-import os
 import numpy as np
-from src.mlp_optimizer import MLPOptimizer
+from src.mlp_optimizer import MLPOptimizer  # noqa: E402
 
 # Cysteine SMILES for drift test (sulfur species)
 CYSTEINE_XYZ = """14
@@ -24,7 +23,7 @@ H   -2.325   1.761   1.528
 
 def mace_not_found():
     try:
-        import mace
+        import mace # noqa: F401
         return False
     except ImportError:
         return True

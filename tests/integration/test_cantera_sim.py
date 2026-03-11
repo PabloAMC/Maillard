@@ -7,7 +7,6 @@ including time-temperature profiles, multiple pathways, and sensory predictions.
 
 import pytest
 import numpy as np
-from pathlib import Path
 
 
 @pytest.mark.slow

@@ -12,19 +12,18 @@ The core Phase 7 orchestrator.
 import sys
 import argparse
 from pathlib import Path
-from typing import List, Dict
+from typing import Dict
 
 # Add project root
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from src.conditions import ReactionConditions
-from src.smirks_engine import SmirksEngine
-from src.pathway_extractor import ElementaryStep
-from src.xtb_screener import XTBScreener
-from src.recommend import Recommender, _trunc
-from src import precursor_resolver
-from src.barrier_constants import get_barrier, HEME_CATALYST_FAMILIES, HEME_CATALYST_REDUCTION
+from src.conditions import ReactionConditions  # noqa: E402
+from src.smirks_engine import SmirksEngine  # noqa: E402
+from src.xtb_screener import XTBScreener  # noqa: E402
+from src.recommend import Recommender, _trunc  # noqa: E402
+from src import precursor_resolver  # noqa: E402
+from src.barrier_constants import get_barrier, HEME_CATALYST_FAMILIES, HEME_CATALYST_REDUCTION  # noqa: E402
 
 
 def print_table(active_pathways: list):
@@ -38,10 +37,14 @@ def print_table(active_pathways: list):
         target_str = p['target'].label if p['target'] else "Unknown"
         
         tag = ""
-        if p['type'] == 'desirable': tag = "[✅ AROMA]"
-        elif p['type'] == 'competing': tag = "[⚠️ COMPETING]"
-        elif p['type'] == 'toxic': tag = "[☠️ TOXIC]"
-        elif p['type'] == 'masking': tag = "[🛡️ MASKING]"
+        if p['type'] == 'desirable':
+            tag = "[✅ AROMA]"
+        elif p['type'] == 'competing':
+            tag = "[⚠️ COMPETING]"
+        elif p['type'] == 'toxic':
+            tag = "[☠️ TOXIC]"
+        elif p['type'] == 'masking':
+            tag = "[🛡️ MASKING]"
         
         barrier_str = f"{p['span']:.1f} kcal"
         sensory_str = p.get('sensory', '-')
@@ -138,10 +141,14 @@ def main():
 
     # 1. Resolve Precursors
     names = []
-    if args.sugars: names += args.sugars.split(",")
-    if args.amino_acids: names += args.amino_acids.split(",")
-    if args.additives: names += args.additives.split(",")
-    if args.lipids: names += args.lipids.split(",")
+    if args.sugars:
+        names += args.sugars.split(",")
+    if args.amino_acids:
+        names += args.amino_acids.split(",")
+    if args.additives:
+        names += args.additives.split(",")
+    if args.lipids:
+        names += args.lipids.split(",")
     names = [n.strip() for n in names if n.strip()]
 
     if not names:
@@ -208,9 +215,9 @@ def main():
         if args.xtb:
             try:
                 # Full execution
-                dE, bar = screener.compute_reaction_energy(step)
-            except Exception as e:
-                dE, bar = 99.0, 99.0 # Extreme penalty for failed convergence
+                _, bar = screener.compute_reaction_energy(step)
+            except Exception:
+                _, bar = 99.0, 99.0 # Extreme penalty for failed convergence
             barriers_dict[step_key] = bar
         else:
             # Calculate boundaries from shared constants

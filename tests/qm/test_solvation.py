@@ -1,7 +1,8 @@
 import os
+import shutil
 import pytest
 import numpy as np
-from src.solvation import SolvationEngine
+from src.solvation import SolvationEngine  # noqa: E402
 
 # Simple water dimer as a test case
 WATER_XYZ = """3

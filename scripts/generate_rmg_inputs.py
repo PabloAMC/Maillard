@@ -10,7 +10,6 @@ This creates the `input.py` configuration files for three critical test cases:
 Usage: python scripts/generate_rmg_inputs.py
 """
 
-import sys
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent

@@ -14,11 +14,10 @@ def resource_filename(package_or_requirement, resource_name):
 dummy_pkg.resource_filename = resource_filename
 sys.modules["pkg_resources"] = dummy_pkg
 
-from rxnmapper import RXNMapper
-from rdkit import Chem
-from rdkit.Chem import AllChem
-import os
-from pathlib import Path
+from rxnmapper import RXNMapper # noqa: E402
+from rdkit import Chem  # noqa: E402
+from rdkit.Chem import AllChem  # noqa: E402
+from pathlib import Path  # noqa: E402
 
 def generate_mapped_pair(rxnmapper, name, reactant_smiles, product_smiles, output_dir):
     print(f"[{name}] Generating mapped geometries...")
@@ -33,7 +32,6 @@ def generate_mapped_pair(rxnmapper, name, reactant_smiles, product_smiles, outpu
         return False
 
     r_smi, p_smi = mapped_rxn.split('>>')
-    from rdkit import Geometry
     
     # Generate separated reactant
     frags = r_smi.split('.')
@@ -88,7 +86,8 @@ def generate_mapped_pair(rxnmapper, name, reactant_smiles, product_smiles, outpu
     p_to_r_h = {}
     
     for m in ordered_maps:
-        if m not in p_map_to_idx: continue
+        if m not in p_map_to_idx: 
+            continue
         r_idx = r_map_to_idx[m]
         p_idx = p_map_to_idx[m]
         
@@ -117,12 +116,15 @@ def generate_mapped_pair(rxnmapper, name, reactant_smiles, product_smiles, outpu
             if m > 0 and m in p_map_to_idx:
                 final_p_order.append(p_map_to_idx[m])
             else:
-                if unmapped_p: final_p_order.append(unmapped_p.pop(0))
-                else: return False
+                if unmapped_p:
+                    final_p_order.append(unmapped_p.pop(0))
+                else: 
+                    return False
         else:
             final_p_order.append(r_to_p_h.get(i, -1))
             
-    if -1 in final_p_order: return False
+    if -1 in final_p_order:
+        return False
         
     # 5. Embed Product
     try:

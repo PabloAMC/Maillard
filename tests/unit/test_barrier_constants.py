@@ -10,8 +10,7 @@ Validates:
 5. Heme catalyst constants
 """
 
-import pytest
-from src.barrier_constants import (
+from src.barrier_constants import (  # noqa: E402
     FAST_BARRIERS,
     DEFAULT_BARRIER,
     HEME_CATALYST_REDUCTION,

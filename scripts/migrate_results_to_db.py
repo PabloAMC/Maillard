@@ -7,16 +7,15 @@ Populates the ResultsDB with:
 """
 
 import json
-import sqlite3
 import sys
 from pathlib import Path
 
 # Add project root to path
 sys.path.append(str(Path(__file__).parent.parent))
 
-from src.results_db import ResultsDB
+from src.results_db import ResultsDB  # noqa: E402
 from data.reactions.curated_pathways import PATHWAYS
-from src.barrier_constants import get_barrier, DEFAULT_BARRIER
+from src.barrier_constants import get_barrier, DEFAULT_BARRIER  # noqa: E402
 
 def migrate(legacy_json_path: str, db_path: str):
     db_path_obj = Path(db_path)

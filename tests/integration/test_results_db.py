@@ -1,7 +1,5 @@
-import pytest
-import sqlite3
 from pathlib import Path
-from src.results_db import ResultsDB
+from src.results_db import ResultsDB  # noqa: E402
 
 def test_results_db_basic(tmp_path):
     db_file = tmp_path / "test.db"

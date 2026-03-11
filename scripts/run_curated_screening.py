@@ -14,9 +14,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from data.reactions.curated_pathways import PATHWAYS
-from src.pathway_ranker import PathwayRanker
-from src.conditions import ReactionConditions
+from data.reactions.curated_pathways import PATHWAYS # noqa: E402
+from src.pathway_ranker import PathwayRanker  # noqa: E402
+from src.conditions import ReactionConditions  # noqa: E402
 
 
 def main():

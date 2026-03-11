@@ -9,11 +9,10 @@ maximum rate-limiting barrier height.
 from typing import List, Tuple
 from dataclasses import dataclass
 from multiprocessing import Pool
-from copy import deepcopy
 
-from src.pathway_extractor import ElementaryStep
-from src.xtb_screener import XTBScreener
-from src.conditions import ReactionConditions
+from src.pathway_extractor import ElementaryStep  # noqa: E402
+from src.xtb_screener import XTBScreener  # noqa: E402
+from src.conditions import ReactionConditions  # noqa: E402
 
 @dataclass
 class PathwayProfile:
@@ -80,7 +79,7 @@ def evaluate_single_step(step: ElementaryStep) -> Tuple[float, float]:
     screener = XTBScreener()
     try:
         return screener.compute_reaction_energy(step)
-    except Exception as e:
+    except Exception:
         # Penalize drastically if evaluation fails (usually RDKit embedding failure for tricky intermediates)
         return (999.0, 999.0)
 

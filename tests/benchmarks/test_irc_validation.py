@@ -6,7 +6,6 @@ via IRC calculations. Validates proper bonding changes and energy profiles.
 """
 
 import pytest
-import numpy as np
 
 
 @pytest.mark.slow

@@ -14,7 +14,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from src.bayesian_optimizer import FormulationOptimizer
+from src.bayesian_optimizer import FormulationOptimizer  # noqa: E402
 
 def main():
     parser = argparse.ArgumentParser(description="Bayesian Formulation Optimizer")
@@ -29,7 +29,7 @@ def main():
 
     sugars = [s.strip() for s in args.sugars.split(",")] if args.sugars else []
     aas = [a.strip() for a in args.amino_acids.split(",")] if args.amino_acids else []
-    lipids = [l.strip() for l in args.lipids.split(",")] if args.lipids else []
+    lipids = [lip.strip() for lip in args.lipids.split(",")] if args.lipids else []
 
     print("======================================================")
     print("      Maillard Bayesian Formulation Optimizer")

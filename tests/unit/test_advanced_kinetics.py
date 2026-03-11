@@ -1,11 +1,10 @@
 import pytest
-import numpy as np
-from src.kinetics import KineticsEngine
-from src.conditions import ReactionConditions
+from src.kinetics import KineticsEngine  # noqa: E402
+from src.conditions import ReactionConditions  # noqa: E402
 
 def test_ph_scaling_sigmoid():
     """Verify that pH scaling is smooth and monotonic for enolisation families."""
-    engine = KineticsEngine(temperature_k=423.15)
+    KineticsEngine(temperature_k=423.15)
     
     # 1. 1,2-enolisation (Acidic favored)
     # Check monotonicity: pH 5.0 > pH 6.0 > pH 7.0

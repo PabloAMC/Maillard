@@ -1,5 +1,4 @@
-import pytest
-from src.barrier_constants import get_barrier, get_arrhenius_params, DEFAULT_BARRIER
+from src.barrier_constants import get_barrier, get_arrhenius_params, DEFAULT_BARRIER  # noqa: E402
 
 def test_get_barrier_exact_match():
     # Test valid exact matches and normalized variants

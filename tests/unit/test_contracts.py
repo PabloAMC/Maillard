@@ -1,7 +1,6 @@
-import pytest
-from src.xtb_screener import XTBScreener
-from src.dft_refiner import DFTRefiner
-from src.skala_refiner import SkalaRefiner
+from src.xtb_screener import XTBScreener  # noqa: E402
+from src.dft_refiner import DFTRefiner  # noqa: E402
+from src.skala_refiner import SkalaRefiner  # noqa: E402
 
 def test_screener_interface_contract():
     """Ensure XTBScreener implements the required pipeline methods."""
@@ -28,7 +27,6 @@ def test_result_objects_contract():
     """Ensure result objects from screeners have mandatory fields."""
     # This catches changes to the XTBResult or ThermoResult dataclasses
     from src.xtb_screener import XTBResult
-    from src.thermo import ThermoResult
     
     # XTBResult check (used in pipeline)
     assert "energy_hartree" in XTBResult.__dataclass_fields__

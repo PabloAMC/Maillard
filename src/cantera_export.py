@@ -12,9 +12,14 @@ and Girolami's density approximation.
 
 import yaml
 from typing import Dict, List, Optional, Any
-from pathlib import Path
-from src.kinetics import KineticsEngine
-from src.barrier_constants import get_arrhenius_params
+
+# Scientific stack
+from rdkit import Chem  # noqa: E402
+from rdkit.Chem import Descriptors  # noqa: E402
+
+from src.kinetics import KineticsEngine  # noqa: E402
+from src.barrier_constants import get_arrhenius_params  # noqa: E402
+from src.thermo import get_nasa_coefficients  # noqa: E402
 
 
 def _estimate_molar_volume(smiles: str) -> float:
@@ -28,10 +33,10 @@ def _estimate_molar_volume(smiles: str) -> float:
     For organic Maillard intermediates, typical densities are 0.8–1.3 g/cm³.
     We use a simplified version that gives reasonable estimates for small organics.
 
+    We use a simplified version that gives reasonable estimates for small organics.
+
     Returns molar volume in m³/kmol (Cantera's default unit for this field).
     """
-    from rdkit import Chem
-    from rdkit.Chem import Descriptors
 
     mol = Chem.MolFromSmiles(smiles)
     if mol is None:
@@ -74,15 +79,14 @@ class CanteraExporter:
     """
     
     def __init__(self, name: str = "Maillard_Mechanism"):
-        self.name = name
-        self.species = {}  # SMILES -> Metadata
-        self.reactions = []
-        self.kinetics = KineticsEngine()
+        self.name: str = name
+        self.species: Dict[str, Dict[str, Any]] = {}  # SMILES -> Metadata
+        self.reactions: List[Dict[str, Any]] = []
+        self.kinetics: KineticsEngine = KineticsEngine()
 
-    def add_species(self, smiles: str, name: Optional[str] = None):
+    def add_species(self, smiles: str, name: Optional[str] = None) -> str:
         """Append a species to the mechanism and calculate composition via RDKit."""
         if smiles not in self.species:
-            from rdkit import Chem
             
             mol = Chem.MolFromSmiles(smiles)
             if mol:
@@ -210,14 +214,15 @@ class CanteraExporter:
             "reactions": []
         }
         
-        # Format reactions as irreversible to avoid thermodynamic bias (P0 fix)
+        # 2. Format reactions as irreversible to avoid thermodynamic bias (P0 fix)
+        cantera_reactions: List[Dict[str, Any]] = []
         for r in self.reactions:
-            cantera_reac = r.copy()
+            cantera_reac = dict(r)
             cantera_reac["reversible"] = False
-            data["reactions"].append(cantera_reac)
+            cantera_reactions.append(cantera_reac)
+        data["reactions"] = cantera_reactions
         
-        from src.thermo import get_nasa_coefficients
-        
+        cantera_species: List[Dict[str, Any]] = []
         for s in self.species.values():
             try:
                 # P3 Fix: get_nasa_coefficients now returns 14 floats (2 ranges)
@@ -239,7 +244,7 @@ class CanteraExporter:
                 }
 
             # R.1: Each species needs an equation-of-state block for ideal-condensed
-            data["species"].append({
+            cantera_species.append({
                 "name": s["name"],
                 "composition": s["composition"],
                 "thermo": thermo_block,
@@ -248,6 +253,7 @@ class CanteraExporter:
                     "molar-volume": s["molar_volume"],
                 }
             })
+        data["species"] = cantera_species
             
         with open(output_path, "w") as f:
             yaml.dump(data, f, sort_keys=False, default_flow_style=False)

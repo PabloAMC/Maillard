@@ -5,8 +5,8 @@ Verifies the unified SensoryDatabase and psychophysical mixing.
 """
 
 import pytest
-from src.sensory import SensoryDatabase, SensoryPredictor
-from src.headspace import HeadspaceModel
+from src.sensory import SensoryDatabase, SensoryPredictor  # noqa: E402
+from src.headspace import HeadspaceModel  # noqa: E402
 
 def test_sensory_database_loading():
     """Verify that we load compounds from multiple YAML files."""
@@ -65,7 +65,6 @@ def test_radar_aggregation():
 
 def test_sensory_headspace_integration():
     """Verify end-to-end headspace aware sensory scoring."""
-    from src.headspace import HeadspaceModel
     hs = HeadspaceModel()
     predictor = SensoryPredictor(headspace=hs)
     

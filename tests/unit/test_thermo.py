@@ -1,5 +1,4 @@
-import pytest
-from src.thermo import QuasiHarmonicCorrector
+from src.thermo import QuasiHarmonicCorrector  # noqa: E402
 
 def test_harmonic_entropy():
     corrector = QuasiHarmonicCorrector(temp_k=298.15)

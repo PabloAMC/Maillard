@@ -1,9 +1,9 @@
 import pytest
-from src.skala_refiner import SkalaRefiner
+from src.skala_refiner import SkalaRefiner  # noqa: E402
 
 def pyscf_installed():
     try:
-        import pyscf
+        from pyscf import dft # noqa: F401
         return True
     except ImportError:
         return False
@@ -24,10 +24,9 @@ def test_integration_pyscf_water():
     assert res.converged
     # Approximate Hartree-Fock/LDA energy of water in STO-3G is ~ -75.0 Hartree
     assert -80.0 < res.energy_hartree < -70.0
-from src.xtb_screener import XTBScreener
-from src.pathway_extractor import ElementaryStep, Species
-import subprocess
-from pathlib import Path
+from src.xtb_screener import XTBScreener  # noqa: E402
+from src.pathway_extractor import ElementaryStep, Species  # noqa: E402
+import subprocess # noqa: E402
 
 def xtb_installed():
     """Use XTBScreener's auto-detect to find xTB binary."""

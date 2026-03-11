@@ -4,10 +4,9 @@ scripts/mlp_benchmark.py
 Phase B.3: Benchmark MACE-OFF against existing xTB pathway endpoints.
 """
 
-import os
 import json
 from pathlib import Path
-from src.mlp_barrier import MLPBarrier
+from src.mlp_barrier import MLPBarrier  # noqa: E402
 
 def run_benchmark():
     input_dir = Path("data/geometries/xtb_inputs")

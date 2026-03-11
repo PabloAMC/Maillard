@@ -1,0 +1,7 @@
+{
+    "venvPath": "/Users/pabloantoniomorenocasares/Developer/Maillard",
+    "venv": ".venv",
+    "extraPaths": [
+        "src"
+    ]
+}

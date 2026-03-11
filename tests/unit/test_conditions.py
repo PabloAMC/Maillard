@@ -1,6 +1,5 @@
 import pytest
-import math
-from src.conditions import ReactionConditions
+from src.conditions import ReactionConditions  # noqa: E402
 
 def test_ph_multipliers():
     # Acidic conditions

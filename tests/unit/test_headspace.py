@@ -5,7 +5,7 @@ Verifies headspace partitioning and matrix effect logic.
 """
 
 import pytest
-from src.headspace import HeadspaceModel
+from src.headspace import HeadspaceModel  # noqa: E402
 
 def test_headspace_temperature_scaling():
     """Verify that volatility increases with temperature."""

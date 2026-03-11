@@ -1,7 +1,6 @@
-import pytest
-from src.pathway_ranker import PathwayRanker, PathwayProfile, _evaluate_pathway
-from src.pathway_extractor import ElementaryStep, Species
-from src.conditions import ReactionConditions
+from src.pathway_ranker import PathwayRanker, PathwayProfile, _evaluate_pathway  # noqa: E402
+from src.pathway_extractor import ElementaryStep  # noqa: E402
+from src.conditions import ReactionConditions  # noqa: E402
 
 def mock_evaluate_single_step(step: ElementaryStep):
     """Return mock barrier based on reaction family name prefix."""
@@ -117,7 +116,6 @@ def test_energetic_span_complex_profile():
 
 def test_ranker_sorting_criteria(monkeypatch):
     """Ensure energetic span is the primary sorting key."""
-    import src.pathway_ranker
     
     # Pathway A: Max Barrier 25, Span 25
     # Pathway B: Max Barrier 20, Span 30 (Worse span, better max barrier)
@@ -134,7 +132,7 @@ def test_ranker_sorting_criteria(monkeypatch):
     assert p_b.rate_limiting_barrier == 20
     assert p_b.energetic_span == 30
     
-    ranker = PathwayRanker(n_cores=1)
+    PathwayRanker(n_cores=1)
     # We mock screen_pathways return or just test the sort logic directly if possible
     # But screen_pathways calls _evaluate_pathway which we'd need to mock heavily.
     # Let's just test the sort key logic that's inside screen_pathways.

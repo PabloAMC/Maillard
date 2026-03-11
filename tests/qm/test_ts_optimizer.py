@@ -10,7 +10,7 @@ import pytest
 import numpy as np
 from ase import Atoms
 from ase.calculators.emt import EMT
-from src.ts_optimizer import TSOptimizer
+from src.ts_optimizer import TSOptimizer  # noqa: E402
 
 # Model system: Hydrogen Cyanide (HCN) to Hydrogen Isocyanide (CNH)
 # Simple initial guess for the TS (bent structure)

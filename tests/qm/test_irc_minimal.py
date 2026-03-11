@@ -1,12 +1,11 @@
 import unittest
 import os
 import sys
-import numpy as np
 
 # Add project root to path
 sys.path.append(os.getcwd())
 
-from src.dft_refiner import DFTRefiner
+from src.dft_refiner import DFTRefiner  # noqa: E402
 
 class TestIRC(unittest.TestCase):
     def setUp(self):

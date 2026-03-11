@@ -1,6 +1,5 @@
-import pytest
-from src.xtb_screener import XTBScreener
-from src.pathway_extractor import ElementaryStep, Species
+from src.xtb_screener import XTBScreener  # noqa: E402
+from src.pathway_extractor import ElementaryStep, Species  # noqa: E402
 import tempfile
 from pathlib import Path
 

@@ -1,8 +1,7 @@
-import pytest
 import yaml
 import json
 from pathlib import Path
-from src.cantera_export import CanteraExporter
+from src.cantera_export import CanteraExporter  # noqa: E402
 
 def test_cantera_yaml_format_validity():
     """Verify that CanteraExporter generates valid YAML 1.2."""
