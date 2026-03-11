@@ -18,7 +18,7 @@ try:
 except ImportError:
     pass # handled gracefully
 
-from src.pathway_extractor import ElementaryStep, Species
+from src.pathway_extractor import ElementaryStep  # noqa: E402
 
 @dataclass
 class XTBResult:
@@ -222,7 +222,7 @@ class XTBScreener:
         with tempfile.TemporaryDirectory() as td:
             try:
                 return self._run_xtb(xyz, Path(td), opt=True)
-            except RuntimeError as e:
+            except RuntimeError:
                 # Fallback for binary crashes (e.g. Fortran runtime errors on specific systems)
                 # Try a quick single-point if optimization failed
                 try:
@@ -282,7 +282,7 @@ class XTBScreener:
                 if barrier_estimate > 500.0:
                     raise ValueError(f"Unphysical NEB barrier detected ({barrier_estimate:.1f} kcal/mol) due to poor atom mapping.")
                 
-            except Exception as e:
+            except Exception:
                 # Fallback to Hammond if NEB fails or produces unphysical results
                 # (due to lack of atom-mapping/complexation in this prototype)
                 barrier_estimate = max(0.0, delta_E_kcal) + 25.0 # Crude pseudo-activation

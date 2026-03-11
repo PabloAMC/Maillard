@@ -10,19 +10,19 @@ that freezes all solute Cartesian coordinates so only the water molecules are
 sampled — preventing CREST from collapsing the TS into a local minimum.
 """
 
-import os
 import subprocess
 import tempfile
 import shutil
 import numpy as np
 from pathlib import Path
 from typing import Optional
+from typing import List
 
 
 class SolvationEngine:
     """
-    Generates explicit solvation clusters via CREST/QCG (Quantum Cluster Growth).
-
+    Handles generation of explicit water clusters natively using CREST.
+    Uses generic heuristics when CREST fails.
     The 'freeze_core' option writes a .xcontrol constraint file that pins all
     solute atom coordinates while CREST samples conformers for the water shell.
     This is mandatory for transition state geometries.
@@ -36,12 +36,16 @@ class SolvationEngine:
         """
         if crest_bin is None:
             # Auto-resolve relative to this file's parent (project root)
-            project_root = Path(__file__).parent.parent
-            candidates = [
+            project_root: Path = Path(__file__).parent.parent
+            home: Path = Path.home()
+            
+            candidates: List[Path] = [
                 project_root / "conda_env" / "bin" / "crest",
-                Path("/opt/homebrew/Caskroom/miniforge/base/bin/crest"),
-                Path("/Users/pabloantoniomorenocasares/miniforge3/bin/crest"),
-                Path("/Users/pabloantoniomorenocasares/miniconda3/bin/crest")
+                project_root / ".venv" / "bin" / "crest",
+                home / "miniforge3" / "bin" / "crest",
+                home / "miniconda3" / "bin" / "crest",
+                Path("/usr/local/bin/crest"),
+                Path("/opt/homebrew/bin/crest")
             ]
             
             for candidate in candidates:
@@ -53,8 +57,8 @@ class SolvationEngine:
                 # Fall back to PATH lookup
                 crest_bin = shutil.which("crest") or "crest"
 
-        self.crest_bin = crest_bin
-        self.timeout_sec = timeout_sec
+        self.crest_bin: str = crest_bin
+        self.timeout_sec: int = timeout_sec
 
     # ------------------------------------------------------------------
     # Public API

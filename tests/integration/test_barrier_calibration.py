@@ -1,9 +1,8 @@
-import pytest
-from src.barrier_constants import FAST_BARRIERS, get_barrier
-from src.recommend import Recommender
-from src.smirks_engine import SmirksEngine
-from src.conditions import ReactionConditions
-from src.precursor_resolver import resolve_many
+from src.barrier_constants import get_barrier  # noqa: E402
+from src.recommend import Recommender  # noqa: E402
+from src.smirks_engine import SmirksEngine  # noqa: E402
+from src.conditions import ReactionConditions  # noqa: E402
+from src.precursor_resolver import resolve_many  # noqa: E402
 
 def test_barrier_constants_coverage():
     """Ensure we have constants for the major families we generate."""

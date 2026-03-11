@@ -1,18 +1,20 @@
 import pytest
-from rdkit import Chem
+from rdkit import Chem  # noqa: E402
 from data.reactions.curated_pathways import PATHWAYS
 
 def get_comp(smi):
     try:
         mol = Chem.MolFromSmiles(smi)
-        if not mol: return None
+        if not mol: 
+            return None
         mol = Chem.AddHs(mol)
         comp = {}
         for a in mol.GetAtoms():
             s = a.GetSymbol()
             comp[s] = comp.get(s, 0) + 1
         return comp
-    except:
+    except Exception:
+        # If external validation tool not installed, this is fine
         return None
 
 @pytest.mark.parametrize("pathway_name", PATHWAYS.keys())

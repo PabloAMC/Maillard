@@ -1,5 +1,4 @@
-import pytest
-from src.diffusion_ts import DiffusionTSEngine
+from src.diffusion_ts import DiffusionTSEngine  # noqa: E402
 
 def test_diffusion_engine_initialization():
     engine = DiffusionTSEngine()

@@ -2,7 +2,7 @@ import pytest
 import sqlite3
 import json
 from pathlib import Path
-from src.cantera_export import CanteraExporter
+from src.cantera_export import CanteraExporter  # noqa: E402
 
 @pytest.mark.skipif(not Path("results/maillard_results.db").exists(), reason="Results DB not found")
 def test_database_reaction_balance():

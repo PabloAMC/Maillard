@@ -11,13 +11,13 @@ Thermodynamics incorporate Grimme quasi-harmonic corrections.
 
 import os
 import tempfile
-import io
 import numpy as np
+import io
 from dataclasses import dataclass
 from typing import Optional, Tuple, Dict, List
 
 try:
-    from pyscf import gto, dft, hessian, lib
+    from pyscf import gto, scf, hessian # noqa: F401
     from pyscf.geomopt import geometric_solver
     from pyscf.data import nist
 except ImportError:
@@ -102,11 +102,6 @@ class DFTRefiner:
         # [PERFORMANCE] Enable multithreading using available CPU cores
         n_threads = os.cpu_count() or 1
         os.environ["OMP_NUM_THREADS"] = str(n_threads)
-        try:
-            from pyscf import lib
-            # We rely on the environment variable above.
-        except ImportError:
-            pass
         
     def _setup_mol(self, xyz_content: str, charge: int = 0, spin: int = 0, basis: str = 'def2-svp') -> 'gto.Mole':
         """Initialize PySCF GTO Mole object from XYZ."""
@@ -183,7 +178,7 @@ class DFTRefiner:
             # PySCF 2.x Hessian with ddCOSMO has known issues.
             # We create a vacuum counterpart for the Hessian calculation.
             from pyscf import scf
-            from pyscf import scf, dft
+            from pyscf import dft
             is_open_shell = (mf.mol.spin != 0)
             if hasattr(mf, 'xc'):
                 mf_vac = dft.UKS(mf.mol) if is_open_shell else dft.RKS(mf.mol)
@@ -427,9 +422,9 @@ class DFTRefiner:
         from pyscf.hessian import thermo
         # Manual mass-weighting to ensure signs are preserved for imaginary modes
         natm = mol.natm
-        h = hessian_matrix.reshape(natm*3, natm*3)
+        hessian_matrix.reshape(natm*3, natm*3)
         mass = mol.atom_mass_list()
-        m = np.repeat(mass, 3)
+        np.repeat(mass, 3)
         # Identify the mode using pyscf's harmonic analysis (handles trans/rot projection)
         h_info = thermo.harmonic_analysis(mol, hessian_matrix)
         freqs = h_info['freq_wavenumber'] # Negative values for imaginary frequencies

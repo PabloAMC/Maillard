@@ -9,17 +9,15 @@ and sensory prediction.
 
 import argparse
 import json
-import sqlite3
 import pandas as pd
-from pathlib import Path
 from typing import Optional, List
-from src.cantera_export import CanteraExporter
-from src.kinetics import KineticsEngine
-from src.sensory import SensoryPredictor
-from src.results_db import ResultsDB
-from src.smirks_engine import SmirksEngine, Species
-from src.barrier_constants import get_barrier
-from src.conditions import ReactionConditions
+from src.cantera_export import CanteraExporter  # noqa: E402
+from src.kinetics import KineticsEngine  # noqa: E402
+from src.sensory import SensoryPredictor  # noqa: E402
+from src.results_db import ResultsDB  # noqa: E402
+from src.smirks_engine import SmirksEngine, Species  # noqa: E402
+from src.barrier_constants import get_barrier  # noqa: E402
+from src.conditions import ReactionConditions  # noqa: E402
 
 def run_simulation(barriers_json: str, precursors: dict, temp_c: Optional[float] = None, 
                    time_sec: float = 600.0, temp_ramp_csv: Optional[str] = None,
@@ -76,7 +74,7 @@ def run_simulation(barriers_json: str, precursors: dict, temp_c: Optional[float]
     }
 
     if kwargs.get("from_smirks", False):
-        print(f"Generating dynamic network from precursors using SmirksEngine...")
+        print("Generating dynamic network from precursors using SmirksEngine...")
         engine_smirks = SmirksEngine(conditions=conditions)
         
         # Convert precursors to Species objects

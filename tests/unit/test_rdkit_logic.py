@@ -1,7 +1,5 @@
-import pytest
-from rdkit import Chem
-from rdkit.Chem import AllChem
-from src.smirks_engine import SmirksEngine
+from rdkit import Chem  # noqa: E402
+from rdkit.Chem import AllChem  # noqa: E402
 
 def test_smarts_hydration_logic():
     """Verify basic SMARTS reaction for furfural hydration/reduction."""

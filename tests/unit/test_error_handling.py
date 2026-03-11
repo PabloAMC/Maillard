@@ -13,13 +13,12 @@ Verifies:
 """
 
 import pytest
-import tempfile
 from pathlib import Path
-from src.pathway_extractor import Species, ElementaryStep
-from src.smirks_engine import SmirksEngine
-from src.conditions import ReactionConditions
-from src.recommend import Recommender
-from rdkit import Chem
+from src.pathway_extractor import Species, ElementaryStep  # noqa: E402
+from src.smirks_engine import SmirksEngine  # noqa: E402
+from src.conditions import ReactionConditions  # noqa: E402
+from src.recommend import Recommender  # noqa: E402
+from rdkit import Chem  # noqa: E402
 
 
 class TestInvalidSmilesHandling:
@@ -46,7 +45,7 @@ class TestInvalidSmilesHandling:
         assert s.smiles == ""
         # RDKit accepts empty string and may create an empty molecule
         # (behavior varies by RDKit version)
-        mol = Chem.MolFromSmiles(s.smiles)
+        Chem.MolFromSmiles(s.smiles)
         # Just verify it doesn't crash the system
         assert s.label == "empty"
 
@@ -138,7 +137,7 @@ class TestNegativeBarrierHandling:
         
         # Implementation might filter or raise error
         # Test just ensures it doesn't crash
-        recommender = Recommender()
+        Recommender()
         # Try to use it - should either filter or handle gracefully
         try:
             # Just verify negative barriers don't crash the system
@@ -203,7 +202,7 @@ class TestConcurrencyAndResourceLimits:
             steps.append(step)
         
         barriers = {
-            f"C->CC": get_barrier(f"test_reaction_{i%5}") 
+            "C->CC": get_barrier(f"test_reaction_{i%5}") 
             for i in range(100)
         }
         
@@ -248,7 +247,7 @@ class TestTypeValidation:
         # Implementation should validate this
         recommender = Recommender()
         try:
-            result = recommender.predict_from_steps([], invalid_barriers, {})
+            recommender.predict_from_steps([], invalid_barriers, {})
             pytest.skip("Implementation may not validate barrier types")
         except (TypeError, ValueError):
             # Expected: type error for non-numeric barrier
@@ -262,7 +261,7 @@ class TestTypeValidation:
         
         recommender = Recommender()
         try:
-            result = recommender.predict_from_steps([], {}, invalid_conc)
+            recommender.predict_from_steps([], {}, invalid_conc)
             pytest.skip("Implementation may not validate concentration types")
         except (TypeError, ValueError):
             # Expected: type error for non-numeric concentration

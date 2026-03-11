@@ -1,4 +1,4 @@
-from src.smirks_engine import Species, _thiol_addition
+from src.smirks_engine import Species, _thiol_addition  # noqa: E402
 
 def test_thiohemiacetal_pathway():
     # Test that _thiol_addition generates the 2-step H2S pathway

@@ -1,6 +1,5 @@
-import pytest
 import numpy as np
-from src.kinetics import KineticsEngine
+from src.kinetics import KineticsEngine  # noqa: E402
 
 def test_rate_constant_sanity():
     """Verify Eyring-Polanyi rate constant scales correctly with barrier."""

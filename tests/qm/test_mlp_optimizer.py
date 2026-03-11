@@ -5,7 +5,6 @@ Phase 10: Verification of the MACE MLP geometry optimizer.
 """
 
 import pytest
-import numpy as np
 
 try:
     from src.mlp_optimizer import MLPOptimizer
@@ -15,7 +14,7 @@ except ImportError:
 # Direct check for MACE backend — more reliable than checking MLPOptimizer class
 _MACE_AVAILABLE = False
 try:
-    from mace.calculators import mace_mp
+    from mace.calculators import mace_mp # noqa: F401
     _MACE_AVAILABLE = True
 except (ImportError, Exception):
     pass

@@ -1,7 +1,7 @@
 
 import pytest
-from src.inverse_design import InverseDesigner
-from src.smirks_engine import ReactionConditions
+from src.inverse_design import InverseDesigner  # noqa: E402
+from src.smirks_engine import ReactionConditions  # noqa: E402
 
 def test_safety_scoring_acrylamide():
     """Verify that asparagine-rich formulations trigger safety penalties."""

@@ -1,8 +1,8 @@
 import pytest
 import numpy as np
 from hypothesis import given, strategies as st
-from src.kinetics import KineticsEngine
-from src.thermo import get_nasa_coefficients, JobackEstimator
+from src.kinetics import KineticsEngine  # noqa: E402
+from src.thermo import get_nasa_coefficients, JobackEstimator  # noqa: E402
 
 @given(
     delta_g=st.floats(min_value=0.0, max_value=100.0),
@@ -39,7 +39,6 @@ def test_nasa_coeffs_physical_range(smiles):
     coeffs = get_nasa_coefficients(smiles)
     # Cp/R = a1 + a2T + a3T^2 + a4T^3 + a5T^4
     # Test at several points in the valid range
-    R = 8.314
     for T in [300, 500, 800]:
         cp_r = coeffs[0] + coeffs[1]*T + coeffs[2]*T**2 + coeffs[3]*T**3 + coeffs[4]*T**4
         assert cp_r > 0, f"Negative Cp/R for {smiles} at {T}K"

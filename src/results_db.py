@@ -11,7 +11,7 @@ import time
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple, Any
 
-from src.barrier_constants import get_barrier
+from src.barrier_constants import get_barrier  # noqa: E402
 
 class ResultsDB:
     def get_best_barrier(self, reactants: List[str], products: List[str], family: str = "unknown") -> Tuple[float, str, float]:

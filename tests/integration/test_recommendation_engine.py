@@ -5,13 +5,12 @@ import tempfile
 import sys
 import subprocess
 from pathlib import Path
-from rdkit import Chem
 
-from src.recommend import Recommender
-from src.smirks_engine import SmirksEngine, ReactionConditions
-from src.pathway_extractor import Species
-from src.precursor_resolver import resolve, resolve_many
-from src.inverse_design import InverseDesigner
+from src.recommend import Recommender  # noqa: E402
+from src.smirks_engine import SmirksEngine, ReactionConditions  # noqa: E402
+from src.pathway_extractor import Species  # noqa: E402
+from src.precursor_resolver import resolve  # noqa: E402
+from src.inverse_design import InverseDesigner  # noqa: E402
 
 # Add project root to sys.path for subprocess parity
 ROOT = Path(__file__).resolve().parents[2]
@@ -65,7 +64,7 @@ def test_recommender_penalties():
     """Test that competing pathways correctly apply penalties to desirable ones."""
     results_path = ROOT / "results" / "curated_screening_results.json"
     if not results_path.exists():
-        pytest.skip(f"Screening results not found")
+        pytest.skip("Screening results not found")
         
     recommender = Recommender(results_path)
     
@@ -234,7 +233,7 @@ class TestInverseDesignerEvaluation:
         
         for result in results:
             assert isinstance(result.off_flavour_risk, (int, float)), \
-                f"off_flavour_risk should be numeric"
+                "off_flavour_risk should be numeric"
             assert result.off_flavour_risk >= 0, "Risk should be non-negative"
 
     def test_different_conditions_affect_scoring(self):

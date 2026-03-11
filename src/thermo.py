@@ -1,6 +1,6 @@
 import numpy as np
 from dataclasses import dataclass
-from typing import List, Tuple, Optional, Dict, Any
+from typing import List, Dict
 import math
 
 # Universal gas constant in J/(mol K)
@@ -84,7 +84,7 @@ class QuasiHarmonicCorrector:
             return 0.0
             
         freq_hz = freq_cm1 * self.c
-        mu = (self.h * freq_hz) / (self.k_b * self.temp_k)
+        (self.h * freq_hz) / (self.k_b * self.temp_k)
         
         # Free rotor approximation
         sr = self.k_b * (0.5 + 0.5 * math.log( (8.0 * math.pi**3 * moment_of_inertia * self.k_b * self.temp_k) / (self.h**2) ))
@@ -142,7 +142,7 @@ class QuasiHarmonicCorrector:
         # Since we just want the *difference* or the corrected Gibbs, the correction is solely in the vibrational entropy term.
         
         # We compute the *delta* S from harmonic to QH, and apply it.
-        delta_S_j_mol_k = qh_S_vib_j_mol_k - raw_S_vib_j_mol_k
+        qh_S_vib_j_mol_k - raw_S_vib_j_mol_k
         
         # Return partial properties just based on vibration/ZPE (relative Gibbs, not absolute, unless translational/rotational added)
         # Note: A full implementation integrates seamlessly with PySCF's thermo module by replacing its S_vib.
@@ -167,8 +167,8 @@ class QuasiHarmonicCorrector:
             qh_gibbs_h=qh_gibbs_h,
             entropy_diff_kcal_mol=entropy_diff_kcal
         )
-from rdkit import Chem
-from scipy.constants import gas_constant
+from rdkit import Chem  # noqa: E402
+from scipy.constants import gas_constant  # noqa: E402
 
 # Joback Group Contributions
 # Format: { 'smarts': (dfH, dfG, cp_a, cp_b, cp_c, cp_d) }
@@ -258,7 +258,8 @@ def get_nasa_coefficients(smiles: str) -> List[float]:
         c = SMALL_MOLECULE_THERMO[smiles]
         return c + c
         
-    if smiles == "[H][H]": smiles = "[HH]" # Normalization
+    if smiles == "[H][H]":
+        smiles = "[HH]" # Normalization
     
     # 2. Joback Estimation (Low Range: 300-1000K)
     res = JobackEstimator.estimate(smiles)

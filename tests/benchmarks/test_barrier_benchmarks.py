@@ -1,5 +1,4 @@
 import pytest
-import numpy as np
 
 # These benchmarks represent the research frontier (Phase 3). 
 # Most tests are currently skipped as they depend on ongoing DFT batch runs.

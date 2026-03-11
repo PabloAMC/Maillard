@@ -103,24 +103,49 @@ def get_barrier(reaction_family: str) -> Tuple[float, float]:
         return FAST_BARRIERS[fm][0], 3.5
         
     if "enolisation" in fm:
-        if "1,2" in reaction_family or "1_2" in fm: fm = "1,2-enolisation"
-        elif "2,3" in reaction_family or "2_3" in fm: fm = "2,3-enolisation"
-        else: fm = "1,2-enolisation" # Default
+        if "1,2" in reaction_family or "1_2" in fm:
+            fm = "1,2-enolisation"
+        elif "2,3" in reaction_family or "2_3" in fm:
+            fm = "2,3-enolisation"
+        elif "dha" in fm:
+            fm = "beta_elimination_dha"
+        elif "beta" in fm:
+            fm = "beta_elimination"
+        elif "elimination" in fm:
+            fm = "beta_elimination"
+        else:
+            fm = "1,2-enolisation" # Default
     elif "schiff" in fm:
-        fm = "schiff_condensation" if "hydrolysis" not in fm and "reversion" not in fm else "schiff_base_hydrolysis"
-    elif "retro" in fm: fm = "retro_aldol"
-    elif "lipid" in fm and "synergy" in fm: fm = "lipid_strecker_synergy"
-    elif "lipid" in fm: fm = "lipid_condensation"
-    elif "synergy" in fm: fm = "lipid_strecker_synergy"
-    elif "strecker" in fm: fm = "strecker_degradation"
-    elif "amadori" in fm: fm = "amadori_rearrangement"
-    elif "heyns" in fm: fm = "heyns_rearrangement"
-    elif "cysteine" in fm or "thermolysis" in fm: fm = "cysteine_thermolysis"
-    elif "thiol" in fm and "addition" in fm: fm = "thiol_addition"
-    elif "pyrazine" in fm or "aminoketone" in fm: fm = "aminoketone_condensation"
-    elif "thiazole" in fm: fm = "lipid_thiazole"
-    elif "beta" in fm: fm = "beta_elimination"
-    elif "ring" in fm or "mutarotation" in fm: fm = "ring_opening"
+        if "hydrolysis" not in fm and "reversion" not in fm:
+            fm = "schiff_condensation"
+        else:
+            fm = "schiff_base_hydrolysis"
+    elif "retro" in fm:
+        fm = "retro_aldol"
+    elif "lipid" in fm and "synergy" in fm:
+        fm = "lipid_strecker_synergy"
+    elif "lipid" in fm:
+        fm = "lipid_condensation"
+    elif "synergy" in fm:
+        fm = "lipid_strecker_synergy"
+    elif "strecker" in fm:
+        fm = "strecker_degradation"
+    elif "amadori" in fm:
+        fm = "amadori_rearrangement"
+    elif "heyns" in fm:
+        fm = "heyns_rearrangement"
+    elif "cysteine" in fm or "thermolysis" in fm:
+        fm = "cysteine_thermolysis"
+    elif "thiol" in fm and "addition" in fm:
+        fm = "thiol_addition"
+    elif "pyrazine" in fm or "aminoketone" in fm:
+        fm = "aminoketone_condensation"
+    elif "thiazole" in fm:
+        fm = "lipid_thiazole"
+    elif "beta" in fm:
+        fm = "beta_elimination"
+    elif "ring" in fm or "mutarotation" in fm:
+        fm = "ring_opening"
         
     if fm in FAST_BARRIERS:
         return FAST_BARRIERS[fm][0], 3.5
@@ -155,18 +180,30 @@ def get_arrhenius_params(family: str) -> Optional[Tuple[float, float, str, float
     
     # Normalize to YAML keys
     yaml_key = None
-    if "schiff" in fm: yaml_key = "schiff_condensation"
-    elif "amadori" in fm: yaml_key = "amadori"
-    elif "enolisation" in fm or ("dehydration" in fm and "thiol" not in fm): yaml_key = "dehydration"
-    elif "strecker" in fm: yaml_key = "strecker"
-    elif "pyrazine" in fm or "aminoketone" in fm: yaml_key = "pyrazine_condensation"
-    elif "cysteine" in fm or "thermolysis" in fm: yaml_key = "cysteine_thermolysis"
-    elif "thiol_addition" in fm: yaml_key = "thiol_addition"
-    elif "retro" in fm: yaml_key = None # No retro_aldol data yet in yaml, only aggregates
-    elif "beta" in fm or "dha" in fm: yaml_key = "beta_elimination_dha"
-    elif "thiamine" in fm: yaml_key = "thiamine_degradation"
-    elif "mutarotation" in fm or "ring" in fm: yaml_key = "mutarotation"
-    elif "thiazole" in fm: yaml_key = "pyrazine_condensation" # Use similar collision factor
+    if "schiff" in fm:
+        yaml_key = "schiff_condensation"
+    elif "amadori" in fm:
+        yaml_key = "amadori"
+    elif "enolisation" in fm or ("dehydration" in fm and "thiol" not in fm):
+        yaml_key = "dehydration"
+    elif "strecker" in fm:
+        yaml_key = "strecker"
+    elif "pyrazine" in fm or "aminoketone" in fm:
+        yaml_key = "pyrazine_condensation"
+    elif "cysteine" in fm or "thermolysis" in fm:
+        yaml_key = "cysteine_thermolysis"
+    elif "thiol_addition" in fm:
+        yaml_key = "thiol_addition"
+    elif "retro" in fm:
+        yaml_key = None # No retro_aldol data yet in yaml, only aggregates
+    elif "beta" in fm or "dha" in fm:
+        yaml_key = "beta_elimination_dha"
+    elif "thiamine" in fm:
+        yaml_key = "thiamine_degradation"
+    elif "mutarotation" in fm or "ring" in fm:
+        yaml_key = "mutarotation"
+    elif "thiazole" in fm:
+        yaml_key = "pyrazine_condensation" # Use similar collision factor
     
     if yaml_key and yaml_key in _ARRHENIUS_CACHE:
         entry = _ARRHENIUS_CACHE[yaml_key]

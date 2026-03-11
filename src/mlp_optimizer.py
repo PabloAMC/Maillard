@@ -10,7 +10,6 @@ as an ASE Calculator.
 
 import io
 import numpy as np
-from typing import Optional
 from contextlib import redirect_stdout, redirect_stderr
 
 try:

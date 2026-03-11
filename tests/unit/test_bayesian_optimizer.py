@@ -1,8 +1,7 @@
 import pytest
-import optuna
 
-from src.bayesian_optimizer import FormulationOptimizer
-from src.inverse_design import FormulationResult
+from src.bayesian_optimizer import FormulationOptimizer  # noqa: E402
+from src.inverse_design import FormulationResult  # noqa: E402
 
 def test_formulation_optimizer_initialization():
     """Verify the optimizer initializes with the correct targets."""

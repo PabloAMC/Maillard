@@ -10,15 +10,15 @@ or canonical precursors to recommend actionable formulation adjustments.
 import sys
 import json
 import yaml
-import networkx as nx
 from pathlib import Path
 from dataclasses import dataclass
 from typing import List, Dict, Set, Optional
 
+from data.reactions.curated_pathways import PATHWAYS, PATHWAY_METADATA
 try:
     from rdkit import Chem
 except ImportError:
-    pass
+    Chem = None
 
 # Add project root to path
 ROOT = Path(__file__).resolve().parents[1]
@@ -37,7 +37,7 @@ def _trunc(s: str, max_len: int) -> str:
         return s[:max_len-3] + "..."
     return s.ljust(max_len)
 
-from data.reactions.curated_pathways import PATHWAYS, PATHWAY_METADATA
+# Imports moved to top
 
 
 @dataclass
@@ -78,17 +78,23 @@ SYSTEMS = [
 
 # Build canonical SMILES lookup for targets
 def _canon(smi):
+    if Chem is None:
+        return smi
     try:
-        from rdkit import Chem
         can = set(Chem.MolToSmiles(Chem.MolFromSmiles(smi)).split("."))
         # just return the largest fragment if disconnected
         return max(can, key=len)
-    except:
+    except ImportError:
+        # RDKit not available, return original SMILES
+        return smi
+    except Exception as e:
+        print(f"Warning: RDKit conformer generation failed: {e}")
         return smi
 
 def _weight(barrier_kcal, temp_kelvin=423.15): # Default 150C
     import math
-    if barrier_kcal >= 99.0: return 0.0
+    if barrier_kcal >= 99.0: 
+        return 0.0
     R = 0.001987
     return math.exp(-barrier_kcal / (R * temp_kelvin))
 
@@ -210,7 +216,6 @@ class Recommender:
                 # Expert Refinement (R.7): Use sequential bottleneck (microkinetics)
                 # Instead of max(barriers), we use the cumulative resistance:
                 # exp(G_eff/RT) = sum(exp(G_i/RT))
-                import math
                 RT = 0.001987 * temperature_kelvin
                 
                 # To avoid overflow, we use the log-sum-exp trick:
@@ -259,11 +264,17 @@ class Recommender:
                 # Relaxation: we primarily want the lowest span path. 
                 for p in p_canons:
                     # Update if new span is lower OR if span is same but weight is higher
-                    if p not in tracking or path_span < tracking[p][0]:
-                        tracking[p] = (path_span, path_conc, path_depth, path_weight, path_unc)
+                    p_key = p # Assuming p is the canonical SMILES string
+                    if p_key not in tracking:
+                        tracking[p_key] = (float('inf'), 0.0, 0, 0.0, 0.0) # Initialize if not present
+                    
+                    current_span, current_conc, current_depth, current_weight, current_unc = tracking[p_key]
+
+                    if path_span < current_span:
+                        tracking[p_key] = (path_span, path_conc, path_depth, path_weight, path_unc)
                         changed = True
-                    elif path_span == tracking[p][0] and path_weight > tracking[p][3]:
-                        tracking[p] = (path_span, path_conc, path_depth, path_weight, path_unc)
+                    elif path_span == current_span and path_weight > current_weight:
+                        tracking[p_key] = (path_span, path_conc, path_depth, path_weight, path_unc)
                         changed = True
 
         # Identify which targets were produced
@@ -327,7 +338,8 @@ class Recommender:
                         for r_smi in [r.smiles for r in step.reactants]:
                             rc = _canon(r_smi)
                             if rc not in tracking:
-                                reachable = False; break
+                                reachable = False
+                                break
                             max_r_dist = max(max_r_dist, tracking[rc][0])
                         
                         if reachable:
@@ -359,10 +371,12 @@ class Recommender:
                     for r_smi in [r.smiles for r in step.reactants]:
                         rc = _canon(r_smi)
                         if rc not in tracking:
-                            reachable = False; break
+                            reachable = False
+                            break
                         max_r_dist = max(max_r_dist, tracking[rc][0])
                     
-                    if not reachable: continue
+                    if not reachable: 
+                        continue
                     
                     step_key = f"{'+'.join(sorted(r.smiles for r in step.reactants))}->{'+'.join(sorted(p.smiles for p in step.products))}"
                     barrier_data = barriers_dict.get(step_key, (99.0, 5.0))
@@ -503,9 +517,12 @@ def main():
             
             # Formatting tags based on type
             tag = ""
-            if p['type'] == 'desirable': tag = "[✅ AROMA]"
-            elif p['type'] == 'competing': tag = "[⚠️ COMPETING]"
-            elif p['type'] == 'masking': tag = "[🛡️ MASKING]"
+            if p['type'] == 'desirable':
+                tag = "[✅ AROMA]"
+            elif p['type'] == 'competing':
+                tag = "[⚠️ COMPETING]"
+            elif p['type'] == 'masking':
+                tag = "[🛡️ MASKING]"
             
             barrier_str = f"{p['span']:.1f} kcal"
             penalty_str = p['penalty']

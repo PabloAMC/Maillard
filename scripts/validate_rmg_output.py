@@ -24,7 +24,8 @@ RESET = "\033[0m"
 
 def canonicalize(smiles: str) -> str:
     mol = Chem.MolFromSmiles(smiles)
-    if mol is None: return None
+    if mol is None: 
+        return None
     return Chem.MolToSmiles(mol)
 
 def parse_rmg_dictionary(dict_path: Path) -> dict[str, str]:
@@ -72,7 +73,7 @@ def main():
         print("  Please run RMG on the input.py file first:\n  $ rmg data/reactions/rmg_validation_cases/.../input.py\n")
         return 1
 
-    found_species = parse_rmg_dictionary(dict_path)
+    parse_rmg_dictionary(dict_path)
     
     all_found = True
     for t_idx, target in enumerate(target_smiles):

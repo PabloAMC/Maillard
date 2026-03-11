@@ -3,8 +3,8 @@ import numpy as np
 import pandas as pd
 import json
 from pathlib import Path
-from src.kinetics import KineticsEngine
-from src.cantera_export import CanteraExporter
+from src.kinetics import KineticsEngine  # noqa: E402
+from src.cantera_export import CanteraExporter  # noqa: E402
 
 def test_isothermal_vs_ramp(tmp_path):
     # 1. Create a simple balanced isomerisation mechanism: A <=> B

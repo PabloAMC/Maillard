@@ -1,14 +1,14 @@
 import yaml
 from pathlib import Path
-from typing import List, Dict, Tuple
+from typing import List, Dict, Tuple, Optional
 from dataclasses import dataclass
 
-from src.smirks_engine import SmirksEngine, ReactionConditions
-from src.recommend import Recommender
-from src.precursor_resolver import resolve_many
-from src.barrier_constants import get_barrier, HEME_CATALYST_REDUCTION, HEME_CATALYST_FAMILIES
-from src.results_db import ResultsDB
-from src.sensory import SensoryPredictor
+from src.smirks_engine import SmirksEngine, ReactionConditions  # noqa: E402
+from src.recommend import Recommender  # noqa: E402
+from src.precursor_resolver import resolve_many  # noqa: E402
+from src.barrier_constants import HEME_CATALYST_REDUCTION, HEME_CATALYST_FAMILIES  # noqa: E402
+from src.results_db import ResultsDB  # noqa: E402
+from src.sensory import SensoryPredictor  # noqa: E402
 
 # Locate data files
 ROOT = Path(__file__).resolve().parents[1]
@@ -63,13 +63,12 @@ class InverseDesigner:
         Score a list of found targets against a desired list of compound names.
         Score uses Boltzmann weighting: [conc] * exp(-barrier / RT) * (0.8^depth)
         """
-        import math
         score = 0.0
         detected = []
         
         # T in Kelvin, R in kcal/(mol*K)
         temp_k = conditions.temperature_celsius + 273.15
-        RT = 0.001987 * temp_k
+        0.001987 * temp_k
         
         for t in targets_found:
             name = t["name"]
@@ -188,7 +187,6 @@ class InverseDesigner:
                     
                 ph_mult = cond.get_ph_multiplier(step.reaction_family or "")
                 if ph_mult != 1.0:
-                    old_bar = bar
                     import math
                     RT = 0.001987 * cond.temperature_kelvin
                     if ph_mult > 0:

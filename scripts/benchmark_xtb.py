@@ -9,8 +9,8 @@ Simulates the energetic ranking of two parallel Maillard initiation steps:
 Literature establishes Ribose reacts ~5x faster. We assert our tier-1 screening recovers this sequence.
 """
 
-from src.pathway_extractor import ElementaryStep, Species
-from src.pathway_ranker import PathwayRanker
+from src.pathway_extractor import ElementaryStep, Species  # noqa: E402
+from src.pathway_ranker import PathwayRanker  # noqa: E402
 
 def run_benchmark():
     # Amine representing a Lysine side-chain epsilon group

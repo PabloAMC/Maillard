@@ -5,11 +5,10 @@ Phase C: Full Sensory Prediction Model.
 Maps predicted volatile concentrations to aroma descriptors using a psychophysical mixing model.
 """
 
-import os
 import yaml
 from pathlib import Path
-from typing import Dict, List, Any, Optional
-from src.headspace import HeadspaceModel
+from typing import Dict, List, Optional, Tuple
+from src.headspace import HeadspaceModel  # noqa: E402
 
 class SensoryDatabase:
     """

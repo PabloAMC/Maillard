@@ -9,7 +9,7 @@ import yaml
 from pathlib import Path
 from typing import List, Dict, Optional
 
-from src.pathway_extractor import Species
+from src.pathway_extractor import Species  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 _PRECURSORS_PATH = ROOT / "data" / "species" / "precursors.yml"

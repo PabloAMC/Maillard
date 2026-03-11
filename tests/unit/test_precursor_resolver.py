@@ -13,7 +13,7 @@ Verifies:
 """
 
 import pytest
-from src.precursor_resolver import resolve, resolve_many, list_available
+from src.precursor_resolver import resolve, resolve_many, list_available  # noqa: E402
 
 
 class TestResolveBasicMatching:

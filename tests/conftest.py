@@ -4,8 +4,6 @@ Pytest configuration and shared fixtures for Phase 3 and Phase 12 tests.
 
 import pytest
 import numpy as np
-from pathlib import Path
-import json
 
 
 # ============================================================================

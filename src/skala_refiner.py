@@ -7,12 +7,10 @@ implicit water solvent (CPCM).
 """
 
 import tempfile
-from pathlib import Path
 from dataclasses import dataclass
-from typing import Optional, Tuple
 
 try:
-    from pyscf import gto, dft, solvent
+    from pyscf import gto, dft
     from pyscf.geomopt import geometric_solver
 except ImportError:
     # Graceful degradation for environments without PySCF

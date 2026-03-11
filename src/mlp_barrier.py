@@ -6,8 +6,7 @@ Wraps MACE-OFF24 for rapid activation energy estimation.
 """
 
 import io
-import numpy as np
-from typing import Optional, List, Tuple
+from typing import Optional
 from contextlib import redirect_stdout, redirect_stderr
 
 try:
@@ -64,8 +63,8 @@ class MLPBarrier:
         Enforces strict stoichiometry check (atom count must match).
         """
         # Quick stoichiometry check
-        r_lines = [l.strip() for l in reactant_xyz.strip().split('\n') if l.strip()]
-        p_lines = [l.strip() for l in product_xyz.strip().split('\n') if l.strip()]
+        r_lines = [line.strip() for line in reactant_xyz.strip().split('\n') if line.strip()]
+        p_lines = [line.strip() for line in product_xyz.strip().split('\n') if line.strip()]
         
         if not r_lines or not p_lines:
             return None
