@@ -42,7 +42,7 @@ class KineticsEngine:
             multiplier *= conditions.get_ph_multiplier(reaction_family)
             multiplier *= conditions.get_water_activity_multiplier()
             
-        # 2. Kirkwood-Onsager Solvent Scaling (Phase 12.1)
+        # 2. Kirkwood-Onsager Solvent Scaling (Phase 12.1 + O.1)
         # Simplified: Polar transitions (Maillard) are accelerated in polar solvents.
         # Barriers are adjusted by f(epsilon) = (eps-1)/(2eps+1).
         # We assume the input barrier is for water (eps=78.4, f=0.49).
@@ -51,8 +51,23 @@ class KineticsEngine:
             eps = conditions.dielectric_constant
             f_eps = (eps - 1) / (2 * eps + 1)
             f_water = (78.4 - 1) / (2 * 78.4 + 1)
-            # Empirical shift: 5 kcal/mol sensitivity to solvent polarity
-            barrier_shift = 5.0 * (f_eps - f_water)
+            
+            # Phase O.1: Gate sensitivity by reaction family
+            sensitivity = 0.0
+            if reaction_family:
+                rf = reaction_family.lower()
+                if "condensation" in rf or "addition" in rf or "schiff" in rf:
+                    sensitivity = 5.0  # Highly dependent on solvent stabilization
+                elif "elimination" in rf or "dehydration" in rf or "thermolysis" in rf:
+                    sensitivity = 3.0  # Polar transition states, but mostly unimolecular
+                elif "cleavage" in rf or "strecker" in rf:
+                    sensitivity = 1.0  # Mostly entropic, less charge separation
+                else:
+                    sensitivity = 2.0  # Generic default
+            else:
+                sensitivity = 5.0 # Fallback for legacy
+                
+            barrier_shift = sensitivity * (f_eps - f_water)
             delta_g_kcal_mol -= barrier_shift
 
         delta_g_j = delta_g_kcal_mol * self.kcal_to_j_per_mol

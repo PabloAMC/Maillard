@@ -46,6 +46,25 @@ class HeadspaceModel:
         exponent = (dh / self.R) * (1.0 / temp_k - 1.0 / 298.15)
         return kaw_298 * math.exp(exponent)
 
+    def _get_kprot_for_compound(self, name: str) -> float:
+        """
+        Calculates empirical protein binding constant (Kprot) for a volatile.
+        Based on generic plant protein binding affinities (e.g. Guichard 2002).
+        """
+        n = name.lower()
+        if "sulfide" in n or "h2s" == n:
+            return 0.0      # Inorganic gases do not bind substantially
+        elif "thiol" in n or "methional" in n or "sulfur" in n:
+            return 2.0      # Small sulfur volatiles have low protein affinity
+        elif "pyrazine" in n or "thiazole" in n:
+            return 5.0      # Heterocycles have moderate binding
+        elif "aldehyde" in n or "anal" in n or "fural" in n:
+            return 30.0     # Aliphatic/aromatic aldehydes bind strongly to plant proteins
+        elif "one" in n or "diacetyl" in n:
+            return 10.0     # Ketones bind moderately
+        else:
+            return 5.0      # Default moderate binding
+
     def predict_headspace(self, 
                           matrix_concentrations: Dict[str, float], 
                           temp_c: float, 
@@ -66,9 +85,7 @@ class HeadspaceModel:
             
             if entry:
                 k_fat = entry.get("Kfat", 1.0)
-                # Protein binding is simplified here; polar compounds bind more to protein.
-                # In this version, we use a generic Kprot = 5.0 for non-H2S compounds.
-                k_prot = 5.0 if name != "Hydrogen Sulfide" else 0.0
+                k_prot = self._get_kprot_for_compound(name)
                 
                 # Effective Kaw accounting for matrix sequestration
                 denom = 1.0 + (k_fat * fat_fraction) + (k_prot * protein_fraction)
