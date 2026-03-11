@@ -15,14 +15,20 @@ def test_solvation_engine_init():
     """Verify engine initializes and finds crest binary."""
     engine = SolvationEngine()
     assert engine.crest_bin is not None
-    assert os.path.exists(engine.crest_bin) or os.path.isabs(engine.crest_bin)
+    # If it's a relative path ("crest"), it's fine as a fallback to PATH lookup
+    assert os.path.isabs(engine.crest_bin) or not ("/" in engine.crest_bin or "\\" in engine.crest_bin) or os.path.exists(engine.crest_bin)
 
 def test_n_atoms_parsing():
     """Verify the internal atom count parser."""
     engine = SolvationEngine()
     assert engine._parse_n_atoms(WATER_XYZ) == 3
 
-@pytest.mark.skipif(not os.path.exists("conda_env/bin/crest"), reason="CREST binary not found in conda_env")
+def _has_crest():
+    engine = SolvationEngine()
+    # Check if the detected path is valid and executable
+    return engine.crest_bin and (os.path.exists(engine.crest_bin) or shutil.which(engine.crest_bin))
+
+@pytest.mark.skipif(not _has_crest(), reason="CREST binary not found in any auto-detected paths")
 def test_explicit_solvation_run():
     """Run a real CREST/QCG call if the binary is present."""
     engine = SolvationEngine()

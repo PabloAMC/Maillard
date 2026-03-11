@@ -58,3 +58,32 @@ constants:
     Kaw_25c: 0.45      # Gas phase dominant
     delta_H_sol_kj_mol: -18.0
     Kfat: 1.0          # Does not partition significantly into lipids
+  - name: "Methanethiol"
+    Kaw_25c: 0.12      # High volatility
+    delta_H_sol_kj_mol: -22.0
+    Kfat: 1.5
+
+  - name: "Dimethyl-disulfide"
+    Kaw_25c: 0.005
+    delta_H_sol_kj_mol: -35.0
+    Kfat: 35.0
+
+  - name: "Dimethyl-trisulfide"
+    Kaw_25c: 0.0008
+    delta_H_sol_kj_mol: -40.0
+    Kfat: 150.0
+
+  - name: "Acrolein"
+    Kaw_25c: 0.0001
+    delta_H_sol_kj_mol: -45.0
+    Kfat: 2.0
+
+  - name: "Acetaldehyde"
+    Kaw_25c: 0.001
+    delta_H_sol_kj_mol: -30.0
+    Kfat: 1.5
+
+  - name: "Acetone"
+    Kaw_25c: 0.000011 # Low Kaw, highly water-soluble
+    delta_H_sol_kj_mol: -42.0
+    Kfat: 1.2

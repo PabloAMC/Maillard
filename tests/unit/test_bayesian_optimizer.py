@@ -10,7 +10,7 @@ def test_formulation_optimizer_initialization():
     assert optimizer.target_tag == "meaty"
     assert optimizer.minimize_tag == "beany"
     assert optimizer.risk_aversion == 2.0
-    assert optimizer.designer is not None
+    assert optimizer.target_tag == "meaty"
 
 def test_optimization_execution(monkeypatch):
     """
@@ -19,13 +19,13 @@ def test_optimization_execution(monkeypatch):
     """
     optimizer = FormulationOptimizer(target_tag="meaty")
     
-    # Mock InverseDesigner.evaluate_all to return a predictable result based on temp
-    def mock_evaluate_all(self, cond):
-        # Let's say target score peaks at 150 C
+    # Mock InverseDesigner.evaluate_single to return a predictable result based on temp
+    # R.8: designer is now created per-trial, so we monkeypatch the class method
+    def mock_evaluate_single(self, formulation, cond):
         temp = cond.temperature_celsius
         score = 100.0 - abs(temp - 150.0)
         
-        return [FormulationResult(
+        return FormulationResult(
             name="MockResult",
             target_score=score,
             off_flavour_risk=0.0,
@@ -36,9 +36,10 @@ def test_optimization_execution(monkeypatch):
             radar={"meaty": score},
             safety_score=0.0,
             flagged_toxics=[]
-        )]
-        
-    monkeypatch.setattr(optimizer.designer, "evaluate_all", mock_evaluate_all.__get__(optimizer.designer))
+        )
+
+    from src.inverse_design import InverseDesigner
+    monkeypatch.setattr(InverseDesigner, "evaluate_single", mock_evaluate_single)
     
     # Run a short study
     study = optimizer.optimize(["ribose"], ["cysteine"], n_trials=5)

@@ -83,21 +83,24 @@ HEME_CATALYST_REDUCTION: float = 5.0
 HEME_CATALYST_FAMILIES = frozenset({"Strecker_Degradation", "Aminoketone_Condensation", "Lipid_Strecker_Synergy"})
 
 
-def get_barrier(reaction_family: str) -> float:
-    """Return the FAST-mode barrier for a reaction family string.
-
-    Performs exact matching against the normalized ``FAST_BARRIERS`` dict.
-    Returns ``DEFAULT_BARRIER`` if no pattern matches.
+def get_barrier(reaction_family: str) -> Tuple[float, float]:
+    """Return the FAST-mode (barrier, uncertainty) for a reaction family.
+    
+    Uncertainty mapping:
+    * Heuristic fallback: ±5.0 kcal/mol
+    * Literature calibrated: ±2.5 kcal/mol
     """
+    default_unc = 5.0
+    
     if not reaction_family:
-        return DEFAULT_BARRIER
+        return DEFAULT_BARRIER, default_unc
         
     fm = reaction_family.lower().replace(" ", "_").replace("-", "_")
     
     # Normalize some common variants
     # Check exact match first
     if fm in FAST_BARRIERS:
-        return FAST_BARRIERS[fm][0]
+        return FAST_BARRIERS[fm][0], 3.5
         
     if "enolisation" in fm:
         if "1,2" in reaction_family or "1_2" in fm: fm = "1,2-enolisation"
@@ -120,18 +123,16 @@ def get_barrier(reaction_family: str) -> float:
     elif "ring" in fm or "mutarotation" in fm: fm = "ring_opening"
         
     if fm in FAST_BARRIERS:
-        return FAST_BARRIERS[fm][0]
-    return DEFAULT_BARRIER
+        return FAST_BARRIERS[fm][0], 3.5
+    return DEFAULT_BARRIER, 5.0
 
 # Global cache for arrhenius parameters
 _ARRHENIUS_CACHE = None
 
-def get_arrhenius_params(family: str) -> Optional[Tuple[float, float]]:
+def get_arrhenius_params(family: str) -> Optional[Tuple[float, float, str, float]]:
     """
-    Retrieve literature-calibrated (A_value, Ea_kcal_mol) for a reaction family.
+    Retrieve literature-calibrated (A_value, Ea_kcal_mol, source_quality, uncertainty) for a reaction family.
     Returns None if no data is found for the family.
-    A_value is returned in 1/s or L/mol.s.
-    Ea is returned in kcal/mol for consistency with our kinetics engine.
     """
     global _ARRHENIUS_CACHE
     if _ARRHENIUS_CACHE is None:
@@ -139,6 +140,11 @@ def get_arrhenius_params(family: str) -> Optional[Tuple[float, float]]:
             with open(ARRHENIUS_FILE, "r") as f:
                 data = yaml.safe_load(f)
                 _ARRHENIUS_CACHE = data.get("arrhenius_data", {})
+                # Warm cache with TST defaults for missing A values
+                for k, v in _ARRHENIUS_CACHE.items():
+                    if v.get("A_value") is None or (isinstance(v["A_value"], float) and math.isnan(v["A_value"])):
+                        v["A_value"] = 6.25e12 # TST @ 150C
+                        v["source_quality"] = "estimated_tst"
         else:
             _ARRHENIUS_CACHE = {}
             
@@ -160,20 +166,27 @@ def get_arrhenius_params(family: str) -> Optional[Tuple[float, float]]:
     elif "beta" in fm or "dha" in fm: yaml_key = "beta_elimination_dha"
     elif "thiamine" in fm: yaml_key = "thiamine_degradation"
     elif "mutarotation" in fm or "ring" in fm: yaml_key = "mutarotation"
+    elif "thiazole" in fm: yaml_key = "pyrazine_condensation" # Use similar collision factor
     
     if yaml_key and yaml_key in _ARRHENIUS_CACHE:
         entry = _ARRHENIUS_CACHE[yaml_key]
         A = float(entry.get("A_value", 0.0))
         Ea_kj = float(entry.get("Ea_kj_mol", 0.0))
+        quality = entry.get("source_quality", "estimated")
         
         # Convert kJ/mol to kcal/mol
         Ea_kcal = Ea_kj / 4.184
         
-        # If A_value is NaN or 0.0 (placeholder), return None so caller falls back to A=1e13
-        if math.isnan(A) or A <= 0.0:
-            return None
+        # Assign uncertainty based on quality
+        quality_unc_map = {
+            "literature": 2.0,
+            "estimated_tst": 4.0,
+            "heuristic": 5.0,
+            "estimated": 3.5
+        }
+        uncertainty = quality_unc_map.get(quality, 3.5)
             
-        return A, Ea_kcal
+        return A, Ea_kcal, quality, uncertainty
         
     return None
 

@@ -1,0 +1,138 @@
+[
+  {
+    "pathway": "B_Strecker_Leu",
+    "max_barrier_kcal": 25.0,
+    "energetic_span_kcal": 25.0,
+    "overall_deltaE_kcal": -9.437502854108194,
+    "steps": [
+      {
+        "reaction": "pyruvaldehyde + L-leucine -> 3-methylbutanal + aminoacetone + CO2 [Strecker_Degradation]",
+        "barrier_kcal": 25.0,
+        "deltaE_kcal": -9.437502854108194
+      }
+    ]
+  },
+  {
+    "pathway": "D_Offflavour_Trapping_Gly",
+    "max_barrier_kcal": 25.0,
+    "energetic_span_kcal": 25.0,
+    "overall_deltaE_kcal": -13.448566930763809,
+    "steps": [
+      {
+        "reaction": "hexanal + glycine -> hexanal-glycine-Schiff-base + water [Lipid_Schiff_Base]",
+        "barrier_kcal": 25.0,
+        "deltaE_kcal": -13.448566930763809
+      }
+    ]
+  },
+  {
+    "pathway": "D_Offflavour_Trapping_Lys",
+    "max_barrier_kcal": 25.0,
+    "energetic_span_kcal": 25.0,
+    "overall_deltaE_kcal": -15.28089176309978,
+    "steps": [
+      {
+        "reaction": "hexanal + L-lysine -> hexanal-lysine-Schiff-base + water [Lipid_Schiff_Base]",
+        "barrier_kcal": 25.0,
+        "deltaE_kcal": -15.28089176309978
+      }
+    ]
+  },
+  {
+    "pathway": "E_DHA_Competition",
+    "max_barrier_kcal": 36.35519135769942,
+    "energetic_span_kcal": 36.35519135769942,
+    "overall_deltaE_kcal": -11.698260659758196,
+    "steps": [
+      {
+        "reaction": "L-cysteine -> dehydroalanine + H2S [Beta_Elimination]",
+        "barrier_kcal": 36.35519135769942,
+        "deltaE_kcal": 11.35519135769942
+      },
+      {
+        "reaction": "dehydroalanine + L-lysine -> lysinoalanine [DHA_Crosslinking]",
+        "barrier_kcal": 25.0,
+        "deltaE_kcal": -23.053452017457616
+      }
+    ]
+  },
+  {
+    "pathway": "C_S_Maillard_FFT",
+    "max_barrier_kcal": 36.433765052753046,
+    "energetic_span_kcal": 36.433765052753074,
+    "overall_deltaE_kcal": -1232.6980441650412,
+    "steps": [
+      {
+        "reaction": "L-cysteine -> pyruvaldehyde + H2S + ammonia [Cysteine_Degradation]",
+        "barrier_kcal": 25.0,
+        "deltaE_kcal": -589.2425632554744
+      },
+      {
+        "reaction": "D-ribose -> furfural + water + water + water [Sugar_Dehydration]",
+        "barrier_kcal": 36.433765052753046,
+        "deltaE_kcal": 11.433765052753042
+      },
+      {
+        "reaction": "furfural + H2S -> 2-furfurylthiol + water [Thiol_Addition]",
+        "barrier_kcal": 25.0,
+        "deltaE_kcal": -654.8892459623199
+      }
+    ]
+  },
+  {
+    "pathway": "A_Core_Maillard_Glucose_Gly",
+    "max_barrier_kcal": 57.661309271037304,
+    "energetic_span_kcal": 60.29538430802275,
+    "overall_deltaE_kcal": 7.502048488902657,
+    "steps": [
+      {
+        "reaction": "D-glucose + glycine -> glucose-glycine-Schiff-base + water [Schiff_Base_Formation]",
+        "barrier_kcal": 25.0,
+        "deltaE_kcal": -18.934246390644386
+      },
+      {
+        "reaction": "glucose-glycine-Schiff-base -> glucose-glycine-Amadori [Amadori_Rearrangement]",
+        "barrier_kcal": 0.0,
+        "deltaE_kcal": 2.634075036985438
+      },
+      {
+        "reaction": "glucose-glycine-Amadori -> glucose-3-deoxyosone + glycine [Enolisation]",
+        "barrier_kcal": 57.661309271037304,
+        "deltaE_kcal": 32.661309271037304
+      },
+      {
+        "reaction": "glucose-3-deoxyosone -> HMF + water + water [Sugar_Dehydration]",
+        "barrier_kcal": 25.0,
+        "deltaE_kcal": -8.8590894284757
+      }
+    ]
+  },
+  {
+    "pathway": "A_Core_Maillard_Ribose_Gly",
+    "max_barrier_kcal": 62.52954383321746,
+    "energetic_span_kcal": 62.52954383321746,
+    "overall_deltaE_kcal": 11.433499103142966,
+    "steps": [
+      {
+        "reaction": "D-ribose + glycine -> ribose-glycine-Schiff-base + water [Schiff_Base_Formation]",
+        "barrier_kcal": 25.0,
+        "deltaE_kcal": -14.166641962873138
+      },
+      {
+        "reaction": "ribose-glycine-Schiff-base -> ribose-glycine-Amadori [Amadori_Rearrangement]",
+        "barrier_kcal": 25.0,
+        "deltaE_kcal": -2.8016768123814955
+      },
+      {
+        "reaction": "ribose-glycine-Amadori -> 3-deoxyosone + glycine [Enolisation]",
+        "barrier_kcal": 62.52954383321746,
+        "deltaE_kcal": 37.52954383321746
+      },
+      {
+        "reaction": "3-deoxyosone -> furfural + water + water [Sugar_Dehydration]",
+        "barrier_kcal": 25.0,
+        "deltaE_kcal": -9.12772595481986
+      }
+    ]
+  }
+]

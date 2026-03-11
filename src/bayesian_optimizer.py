@@ -15,7 +15,6 @@ class FormulationOptimizer:
         self.target_tag = target_tag
         self.minimize_tag = minimize_tag
         self.risk_aversion = risk_aversion
-        self.designer = InverseDesigner(target_tag, minimize_tag)
         self.study = None
 
     def objective(self, trial: optuna.Trial, fixed_sugars: List[str], fixed_amino_acids: List[str], fixed_lipids: List[str] = None) -> float:
@@ -70,16 +69,9 @@ class FormulationOptimizer:
             "time_minutes": time_mins
         }
         
-        # Temporarily restrict the InverseDesigner to evaluating just this point
-        self.designer.grid = [formulation]
-        
-        # 4. Evaluate using the robust pipeline
-        results = self.designer.evaluate_all(cond)
-        if not results:
-            # If the conditions somehow prevent finding pathways, prune
-            raise optuna.exceptions.TrialPruned()
-            
-        res = results[0]
+        # 4. Evaluate using the robust pipeline without mutating global state (R.8 fix)
+        designer = InverseDesigner(self.target_tag, self.minimize_tag)
+        res = designer.evaluate_single(formulation, cond)
         
         # 5. Objective Calculation
         # Maximize: target_score - risk_aversion * safety_score

@@ -1,0 +1,37 @@
+[project]
+name = "Maillard"
+version = "0.1.0"
+description = "Computational Maillard Reaction Network Explorer for Alt-Protein Science"
+authors = [
+    { name = "PabloAMC", email = "" }
+]
+dependencies = [
+    "rdkit>=2023.9.1",
+    "networkx>=3.2",
+    "numpy>=1.26",
+    "scipy>=1.11",
+    "pandas>=2.1",
+    "matplotlib>=3.8",
+    "pyyaml>=6.0",
+    "tqdm>=4.66",
+    "optuna>=3.5",
+    "cantera>=3.0",
+    "torch>=2.0.0",
+    "mace-torch>=0.3.3",
+    "sella",
+    "ase>=3.23",
+    "pytest>=8.0",
+    "hypothesis>=6.100"
+]
+
+[project.optional-dependencies]
+dev = [
+    "jupyterlab>=4.0",
+    "black",
+    "isort",
+    "pytest-timeout"
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"

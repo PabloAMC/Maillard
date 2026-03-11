@@ -1,0 +1,37 @@
+{
+  "pyrazine": {
+    "reactant_energy_ev": -13452.55320692644,
+    "product_energy_ev": 192847.82149320305,
+    "estimated_barrier_kcal": 4757389.790772337
+  },
+  "dha": {
+    "reactant_energy_ev": -19652.626893572782,
+    "product_energy_ev": -16393.393471665193,
+    "estimated_barrier_kcal": 75159.55232589996
+  },
+  "cys_ribose": {
+    "reactant_energy_ev": 4877358.521112449,
+    "product_energy_ev": -20252.092156697927,
+    "estimated_barrier_kcal": 0.0
+  },
+  "trapping": {
+    "reactant_energy_ev": -12987.119074725284,
+    "product_energy_ev": -13130.275926425631,
+    "estimated_barrier_kcal": 0.0
+  },
+  "enolisation": {
+    "reactant_energy_ev": -21257.33316946597,
+    "product_energy_ev": -21251.98298269496,
+    "estimated_barrier_kcal": 123.37798203281683
+  },
+  "strecker": {
+    "reactant_energy_ev": 2334.9648828381614,
+    "product_energy_ev": 30906.699975726715,
+    "estimated_barrier_kcal": 658878.4971095566
+  },
+  "retro_aldol": {
+    "reactant_energy_ev": -15592.918132581784,
+    "product_energy_ev": -15575.430099174842,
+    "estimated_barrier_kcal": 403.28279438078886
+  }
+}

@@ -64,13 +64,14 @@ class TestIsothermalSimulation:
         engine = KineticsEngine(temperature_k=423.15)
         # S_0=acetaldehyde, S_1=vinyl alcohol, S_2=oxirane
         initial_concs = {"S_0": 1.0} 
-        time_span = (0, 600)
+        # Extremely fast reactions (k~1e5) need sub-millisecond resolution
+        time_span = (0, 0.001) 
         
         results = engine.simulate_network_cantera(str(output_file), initial_concs, time_span)
         
-        assert np.max(results["S_1"]) > 0  # Intermediate formed
-        assert np.max(results["S_2"]) > 0  # Final product formed
-        assert results["S_0"][-1] < 1.0    # Reactant consumed
+        assert np.max(results["S_1"]) > 0, f"S_1 not formed. Available: {list(results.keys())}"
+        assert np.max(results["S_2"]) > 0, f"S_2 not formed. Available: {list(results.keys())}"
+        assert results["S_0"][-1] < 1.0
 
     def test_isothermal_equilibration(self, tmp_path):
         """Test mole fraction conservation in the simulation."""
@@ -238,8 +239,13 @@ class TestSensoryPrediction:
         profile_meaty = predictor.get_radar_data(meaty_conc)
         profile_roasted = predictor.get_radar_data(roasted_conc)
         
-        assert profile_meaty["meaty"] > profile_roasted["meaty"]
-        assert profile_roasted["roasted"] > 0
+        # Unpack (score, uncertainty) tuples
+        meaty_score = profile_meaty["meaty"][0]
+        roasted_score_meaty = profile_roasted["meaty"][0]
+        roasted_score = profile_roasted["roasted"][0]
+        
+        assert meaty_score > roasted_score_meaty
+        assert roasted_score > 0
 
     def test_sensory_correlates_with_dft(self):
         """Sensory score should correlate with concentration."""
@@ -252,7 +258,7 @@ class TestSensoryPrediction:
         profile_low = predictor.get_radar_data(low_conc)
         profile_high = predictor.get_radar_data(high_conc)
         
-        assert profile_high["meaty"] > profile_low["meaty"]
+        assert profile_high["meaty"][0] > profile_low["meaty"][0]
 
 
 @pytest.mark.slow
