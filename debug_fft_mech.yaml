@@ -1,0 +1,617 @@
+generator: Maillard Framework CanteraExporter
+cantera-version: 3.0.0
+date: '2026-03-08'
+units:
+  length: m
+  quantity: kmol
+  mass: kg
+  time: s
+  energy: J
+phases:
+- name: maillard_phase
+  thermo: ideal-gas
+  species:
+  - ribose
+  - cysteine
+  - ribose-cysteine-Schiff-base
+  - water
+  - ribose-cysteine-Amadori
+  - ribose-deoxyosone-3
+  - furfural
+  - pyruvaldehyde
+  - glycolaldehyde
+  - leucine
+  - ribose-leucine-Schiff-base
+  - ribose-leucine-Amadori
+  - dehydroalanine
+  - H2S
+  - ammonia
+  - acetaldehyde
+  - CO2
+  - 2-methylthiazole
+  - H2
+  - 2-furfurylthiol
+  - furfural-thiohemiacetal
+  - elemental-sulfur
+  - CC(C)CC(N=CCO)C(=O)O
+  - O=C(O)C(CS)N=CCO
+  - CC=NC(CC(C)C)C(=O)O
+  - CC=NC(CS)C(=O)O
+  kinetics: gas
+  reactions: all
+  state:
+    T: 423.15
+    P: 101325
+species:
+- name: ribose
+  composition:
+    O: 5
+    C: 5
+    H: 10
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    data:
+    - - -6.4742608719490535
+      - 0.6133890107178951
+      - -0.00043334129521892045
+      - 9.622991126965928e-08
+      - 1.1270817343892773e-23
+      - -129085.7479976486
+      - -180.17845564836023
+- name: cysteine
+  composition:
+    N: 1
+    C: 3
+    S: 1
+    O: 2
+    H: 7
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    data:
+    - - -3.4433975248717843
+      - 0.3794713073952939
+      - -0.00028336166848063455
+      - 7.435236988738298e-08
+      - 1.1746092774056925e-23
+      - -71442.36876915311
+      - -114.21331184872805
+- name: ribose-cysteine-Schiff-base
+  composition:
+    O: 6
+    C: 8
+    N: 1
+    S: 1
+    H: 15
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    data:
+    - - -11.838407906855522
+      - 1.1039438652306657
+      - -0.0007762377794457386
+      - 1.7740172368799821e-07
+      - 1.1406610323939671e-23
+      - -193841.98997615767
+      - -317.9794397021534
+- name: water
+  composition:
+    O: 1
+    H: 2
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    data:
+    - - 4.19864056
+      - -0.0020364341
+      - 6.52040211e-06
+      - -5.48797062e-09
+      - 1.77197817e-12
+      - -30293.7267
+      - -0.8490322
+- name: ribose-cysteine-Amadori
+  composition:
+    O: 6
+    C: 8
+    N: 1
+    S: 1
+    H: 15
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    data:
+    - - -10.539466472392736
+      - 1.0064150125265066
+      - -0.0007239193050021136
+      - 1.7112350675471946e-07
+      - 3.197924680104515e-23
+      - -180484.3111141069
+      - -290.0240260825602
+- name: ribose-deoxyosone-3
+  composition:
+    O: 4
+    C: 5
+    H: 8
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    data:
+    - - -6.534397049470411
+      - 0.500116506738656
+      - -0.00036695095523533674
+      - 9.064927399567878e-08
+      - 1.008262876848239e-23
+      - -91455.65594074281
+      - -133.35375276700125
+- name: furfural
+  composition:
+    O: 2
+    C: 5
+    H: 4
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    data:
+    - - -0.8455146559503769
+      - 0.021216043429536886
+      - -2.7782914014869663e-05
+      - 1.4348491956597058e-08
+      - 1.0821003097487413e-25
+      - -11748.120476160768
+      - -2.070121956202425
+- name: pyruvaldehyde
+  composition:
+    C: 3
+    O: 2
+    H: 4
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    data:
+    - - -3.7200239414714003
+      - 0.20403002309447887
+      - -0.0001641717646333153
+      - 4.9708564339150336e-08
+      - 4.1586600139363394e-24
+      - -32786.84217999884
+      - -44.29958592092094
+- name: glycolaldehyde
+  composition:
+    O: 2
+    C: 2
+    H: 4
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    data:
+    - - -2.2527012099501746
+      - 0.16925928525162717
+      - -0.00012917250931588378
+      - 3.4818846784864e-08
+      - 2.3594030283149025e-24
+      - -41082.527356532715
+      - -46.59720537924131
+- name: leucine
+  composition:
+    C: 6
+    N: 1
+    O: 2
+    H: 13
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    data:
+    - - -21.063297538633854
+      - 0.8500729782064884
+      - -0.0006737657329493571
+      - 1.835596682662086e-07
+      - 1.9689982106800623e-24
+      - -89082.59637533205
+      - -148.2289812852598
+- name: ribose-leucine-Schiff-base
+  composition:
+    O: 6
+    C: 11
+    N: 1
+    H: 21
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    data:
+    - - -29.458307920610142
+      - 1.574545536041806
+      - -0.0011666418439143199
+      - 2.866090220666684e-07
+      - 6.300794274176199e-23
+      - -211482.21758233738
+      - -351.9951091387164
+- name: ribose-leucine-Amadori
+  composition:
+    O: 6
+    C: 11
+    N: 1
+    H: 21
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    data:
+    - - -28.15936648615253
+      - 1.4770166833376903
+      - -0.0011143233694708204
+      - 2.803308051335401e-07
+      - 2.0097361046941328e-23
+      - -198124.5387202862
+      - -324.03969551910245
+- name: dehydroalanine
+  composition:
+    C: 3
+    N: 1
+    O: 2
+    H: 5
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    data:
+    - - 1.42763285435719
+      - 0.06830267042876355
+      - -6.037672223144652e-05
+      - 2.1793350733739377e-08
+      - 1.17121445290452e-24
+      - -71101.81211190693
+      - -43.466459917071724
+- name: H2S
+  composition:
+    S: 1
+    H: 2
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    data:
+    - - 3.32730594
+      - 0.00325049333
+      - 4.35401667e-07
+      - -2.13203333e-09
+      - 8.44026667e-13
+      - -3420.0
+      - 7.32
+- name: ammonia
+  composition:
+    N: 1
+    H: 3
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    data:
+    - - 2.73147413
+      - 0.00592211918
+      - -8.62541814e-07
+      - -1.50343719e-09
+      - 8.01021461e-13
+      - -6690.33346
+      - 4.61741644
+- name: acetaldehyde
+  composition:
+    C: 2
+    O: 1
+    H: 4
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    data:
+    - - -5.343700734548483
+      - 0.17757010498508108
+      - -0.00015046071615844973
+      - 4.670175546308861e-08
+      - 1.1033179628810696e-24
+      - -15344.277328845805
+      - -23.02262622984046
+- name: CO2
+  composition:
+    O: 2
+    C: 1
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    data:
+    - - 2.35677352
+      - 0.00898459677
+      - -7.12356269e-06
+      - 2.45919022e-09
+      - -1.43699544e-13
+      - -48371.9697
+      - 9.90105222
+- name: 2-methylthiazole
+  composition:
+    C: 4
+    N: 1
+    S: 1
+    H: 5
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    data:
+    - - -9.060116505368827
+      - 0.18161125611451776
+      - -0.00016970429296528976
+      - 5.712936864529812e-08
+      - -1.1202920853869322e-24
+      - 5221.293841293573
+      - 5.193319245211791
+- name: H2
+  composition:
+    H: 2
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    data:
+    - - 2.34433112
+      - 0.00798052075
+      - -1.9478151e-05
+      - 2.01572094e-08
+      - -7.37611761e-12
+      - -854.73062
+      - -3.94046088
+- name: 2-furfurylthiol
+  composition:
+    S: 1
+    C: 5
+    O: 1
+    H: 6
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    data:
+    - - -4.934774727403269
+      - 0.1800717699699703
+      - -0.00014733363492734023
+      - 4.498186078597903e-08
+      - 5.940942877051913e-25
+      - 12073.050889417664
+      - -23.648524139161154
+- name: furfural-thiohemiacetal
+  composition:
+    O: 2
+    C: 5
+    S: 1
+    H: 6
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    data:
+    - - -1.8437752028045629
+      - 0.17176095023651342
+      - -0.00012604542808476716
+      - 3.309895210774727e-08
+      - 4.379323606512553e-24
+      - -13665.199138269289
+      - -47.22310328856363
+- name: elemental-sulfur
+  composition:
+    S: 1
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    data:
+    - - -4.561930426770528
+      - 0.025257194558971883
+      - -4.702649082170427e-05
+      - 2.4776105138799663e-08
+      - 8.020272884020082e-25
+      - 8817.450693978592
+      - 26.145823518849046
+- name: CC(C)CC(N=CCO)C(=O)O
+  composition:
+    C: 8
+    N: 1
+    O: 3
+    H: 15
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    data:
+    - - -25.236748258613968
+      - 1.13041581057556
+      - -0.0008624730580113483
+      - 2.2519795758195267e-07
+      - 1.9825775086847528e-23
+      - -123478.99694122124
+      - -218.4138588695866
+- name: O=C(O)C(CS)N=CCO
+  composition:
+    O: 3
+    C: 5
+    S: 1
+    N: 1
+    H: 9
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    data:
+    - - -7.6168482448538635
+      - 0.6598141397643784
+      - -0.00047206899354265306
+      - 1.1599065920314969e-07
+      - 2.3458237303102124e-23
+      - -105838.76933504209
+      - -184.39818943304647
+- name: CC=NC(CC(C)C)C(=O)O
+  composition:
+    C: 8
+    N: 1
+    O: 2
+    H: 15
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    data:
+    - - -28.32774778321216
+      - 1.138726630309014
+      - -0.000883761264853915
+      - 2.3708086626017903e-07
+      - 1.7924673366190915e-23
+      - -97740.74691353439
+      - -194.83927972018648
+- name: CC=NC(CS)C(=O)O
+  composition:
+    C: 5
+    N: 1
+    S: 1
+    O: 2
+    H: 9
+  thermo:
+    model: NASA7
+    temperature-ranges:
+    - 300.0
+    - 1000.0
+    data:
+    - - -10.70784776945205
+      - 0.6681249594978343
+      - -0.0004933572003852309
+      - 1.278735678813935e-07
+      - 1.2764540124408682e-23
+      - -80100.51930735522
+      - -160.8236102836466
+reactions:
+- equation: ribose + cysteine <=> ribose-cysteine-Schiff-base + water
+  rate-constant:
+    A: 332105093794.836
+    b: 0.0
+    Ea: 57.0 kcal/mol
+- equation: ribose-cysteine-Schiff-base <=> ribose-cysteine-Amadori
+  rate-constant:
+    A: 22152964023648.633
+    b: 0.0
+    Ea: 23.0 kcal/mol
+- equation: ribose-cysteine-Amadori <=> ribose-deoxyosone-3 + cysteine
+  rate-constant:
+    A: 742283572503.8807
+    b: 0.0
+    Ea: 29.608030592734224 kcal/mol
+- equation: ribose-deoxyosone-3 <=> furfural + 2 water
+  rate-constant:
+    A: 742283572503.8807
+    b: 0.0
+    Ea: 29.608030592734224 kcal/mol
+- equation: ribose-deoxyosone-3 <=> pyruvaldehyde + glycolaldehyde
+  rate-constant:
+    A: 684526588330.7428
+    b: 0.0
+    Ea: 29.608030592734224 kcal/mol
+- equation: ribose + leucine <=> ribose-leucine-Schiff-base + water
+  rate-constant:
+    A: 332105093794.836
+    b: 0.0
+    Ea: 57.0 kcal/mol
+- equation: ribose-leucine-Schiff-base <=> ribose-leucine-Amadori
+  rate-constant:
+    A: 22152964023648.633
+    b: 0.0
+    Ea: 23.0 kcal/mol
+- equation: ribose-leucine-Amadori <=> ribose-deoxyosone-3 + leucine
+  rate-constant:
+    A: 742283572503.8807
+    b: 0.0
+    Ea: 29.608030592734224 kcal/mol
+- equation: cysteine <=> dehydroalanine + H2S
+  rate-constant:
+    A: 8007374029168.077
+    b: 0.0
+    Ea: 18.0 kcal/mol
+- equation: cysteine + water <=> H2S + ammonia + acetaldehyde + CO2
+  rate-constant:
+    A: 75909905.79651338
+    b: 0.0
+    Ea: 49.235181644359464 kcal/mol
+- equation: acetaldehyde + glycolaldehyde + H2S + ammonia <=> 2-methylthiazole + 3
+    water + H2
+  rate-constant:
+    A: 2214033958.63224
+    b: 0.0
+    Ea: 40.0 kcal/mol
+- equation: furfural + H2S + H2 <=> 2-furfurylthiol + water
+  rate-constant:
+    A: 2402212208.750423
+    b: 0.0
+    Ea: 15.0 kcal/mol
+- equation: furfural + H2S <=> furfural-thiohemiacetal
+  rate-constant:
+    A: 24022122087504.23
+    b: 0.0
+    Ea: 18.0 kcal/mol
+- equation: furfural-thiohemiacetal + H2S <=> 2-furfurylthiol + elemental-sulfur +
+    water
+  rate-constant:
+    A: 24022122087504.23
+    b: 0.0
+    Ea: 15.0 kcal/mol
+- equation: glycolaldehyde + leucine <=> CC(C)CC(N=CCO)C(=O)O + water
+  rate-constant:
+    A: 332105093794.836
+    b: 0.0
+    Ea: 57.0 kcal/mol
+- equation: glycolaldehyde + cysteine <=> O=C(O)C(CS)N=CCO + water
+  rate-constant:
+    A: 332105093794.836
+    b: 0.0
+    Ea: 57.0 kcal/mol
+- equation: acetaldehyde + leucine <=> CC=NC(CC(C)C)C(=O)O + water
+  rate-constant:
+    A: 332105093794.836
+    b: 0.0
+    Ea: 57.0 kcal/mol
+- equation: acetaldehyde + cysteine <=> CC=NC(CS)C(=O)O + water
+  rate-constant:
+    A: 332105093794.836
+    b: 0.0
+    Ea: 57.0 kcal/mol

@@ -144,7 +144,7 @@ class Recommender:
                 
         return required_exogenous
 
-    def predict_from_steps(self, steps: List[any], barriers_dict: Dict[str, float], initial_concentrations: Dict[str, float], temperature_kelvin: float = 423.15):
+    def predict_from_steps(self, steps: List[any], barriers_dict: Dict[str, float], initial_concentrations: Dict[str, float], temperature_kelvin: float = 423.15, time_minutes: Optional[float] = None):
         """
         Dynamically predict active pathways given a list of generated ElementarySteps
         and their computed barriers from xTB or Hammond fallback.
@@ -221,6 +221,23 @@ class Recommender:
                 
                 # Path weight (Flux approximation)
                 path_weight = reactant_conc_product * math.exp(-path_span / RT)
+                
+                # Phase Q.1: Temporal FAST Mode.
+                # If a time is provided, penalise pathways that require many steps.
+                # Approximate 1st order characteristic timescale: tau ~ exp(Ea/RT) / A
+                # We assume a generic pre-exponential for this rough heuristic.
+                if time_minutes is not None:
+                    # Characteristic time approx (seconds)
+                    # Using A ~ 1e11 (from new Arrhenius data average)
+                    tau_sec = math.exp(path_span / RT) / 1e11
+                    tau_min = tau_sec / 60.0
+                    
+                    # Number of steps increases characteristic time roughly linearly
+                    total_tau = tau_min * path_depth
+                    
+                    # Weight decay: if total_tau >> time_minutes, weight drops exponentially
+                    time_penalty = math.exp(-total_tau / time_minutes)
+                    path_weight *= time_penalty
                 
                 # Relaxation: we primarily want the lowest span path. 
                 for p in p_canons:

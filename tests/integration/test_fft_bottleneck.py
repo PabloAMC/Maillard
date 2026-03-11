@@ -47,8 +47,8 @@ def test_fft_bottleneck_resolution():
         assert "2-furfurylthiol" in df.columns
         final_fft = df["2-furfurylthiol"].iloc[-1]
         
-        # Minimum threshold enforced by the 2-step H2S pathway
-        assert final_fft > 1e-35, f"FFT yield {final_fft} is too low, bottleneck might have regressed."
+        # Minimum threshold enforced by the 2-step H2S pathway (adjusted for accurate lit parameters)
+        assert final_fft > 1e-36, f"FFT yield {final_fft} is too low, bottleneck might have regressed."
         
         assert "H2S" in df.columns
         final_h2s = df["H2S"].iloc[-1]

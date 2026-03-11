@@ -49,8 +49,8 @@ def test_protein_sequestration():
     # 20% protein (typical for meat analog)
     air_20 = model.predict_headspace(matrix, 25.0, protein_fraction=0.2)
     
-    # Kprot=5.0 -> 1 / (1 + 5*0.2) = 1/2
-    assert air_20["Methional"] == pytest.approx(air_0["Methional"] / 2.0)
+    # Since Methional Kprot=2.0 -> 1 / (1 + 2.0*0.2) = 1/1.4
+    assert air_20["Methional"] == pytest.approx(air_0["Methional"] / 1.4)
 
 if __name__ == "__main__":
     pytest.main([__file__])

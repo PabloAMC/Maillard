@@ -15,41 +15,49 @@ The core Tier 0/1/2 pipeline is operational and the zero-DFT laptop pipeline is 
 
 | Priority | Phase | Status | Impact |
 |----------|-------|:------:|--------|
-| **🔴 1** | **Phase A: Literature Arrhenius Calibration** | 📋 | Replace heuristic barriers with published experimental (A, Ea) data |
-| **🔴 2** | **Phase B: Public ML Potential Integration** | ✅ | Use MACE-OFF24/AIMNet2 instead of custom fine-tuning |
-| **🔴 3** | **Phase C: Full Sensory Prediction Model** | ✅ | Expand OAV database from 5 → 30+ compounds; add psychophysical mixing |
-| **🟠 4** | **Phase D: Headspace & Volatility Model** | ✅ | Convert matrix → air-phase concentrations for real OAV prediction |
-| **🟠 5** | **Phase E: Sigmoid pH Model** | ✅ | Replace step-function pH multipliers with Henderson-Hasselbalch curves |
-| **🟡 6** | **Phase F: AGE/Safety Scoring in Optimizer** | ✅ | Integrate toxic marker penalties into InverseDesigner |
-| **🟡 7** | **Phase G: Concentration-Aware FAST Ranking** | ✅ | Add reactant-concentration weighting to FAST mode |
-| **🟠 8** | **Phase H: Bayesian Formulation Optimization** | 📋 | Continuous optimization over (sugar, AA, pH, T, time) space |
-| **🟠 9** | **Phase I: Matrix-Effect Corrections** | 📋 | Model protein/lipid volatile binding for realistic release prediction |
-| **✅** | **Phase 12: Advanced Kinetic Features** | ✅ | pH, Temperature, and Thermo gating completed & verified |
-| **✅** | **Phase 16: FFT Pathway Bottleneck** | ✅ | Investigated and resolved via H2S-mediated steps |
-| **🔵** | **Phases 13–15: Custom DFT + MACE Training** | ⏳ | Deferred. Only needed if public ML potentials prove insufficient |
-| **🔵** | **Phase 17: Web Dashboard** | ⏳ | Deferred. GUI for food scientists |
-| **🔵** | **Phase 18: Experimental Validation Prep** | ⏳ | Deferred until pipeline is fully validated |
+| **🔴 P0** | **Phase A: Literature Arrhenius Calibration** | ✅ | Integrate exhaustive Arrhenius parameters data |
+| **🔴 P1** | **Phase J: Cantera Phase Model** | 📋 | Fix or document ideal-gas phase approximations |
+| **🔴 P2** | **Phase K: Barrier Constants Matching** | 📋 | Replace substring matching with exact-match dicts |
+| **🟠 P3** | **Phase L: Gaussian Water Activity Model** | 📋 | Replace linear `aw` model with Gaussian curve |
+| **🟠 P4** | **Phase M: Specific Protein Binding** | 📋 | Per-compound protein binding in headspace model |
+| **🟠 P5** | **Phase N: Per-Amino Acid BO Options** | 📋 | Separate amino-acid concentration in optimizer |
+| **🟡 P6** | **Phase O: Per-Family Solvent Sensing** | 📋 | Family-dependent Kirkwood-Onsager correction |
+| **🟡 P7** | **Phase P: Sensory Tag Expansion** | 📋 | Ensure all target species map to radar categories |
+| **🟡 P8** | **Phase Q: Temporal FAST Mode** | 📋 | Add time-approx weight to FAST pathway ranker |
+| **✅** | **Phase B-I: Generative & ML Features** | ✅ | ML Potentials, Sensory, Headspace, pH, BO done |
+| **✅** | **Phase 12, 16: Advanced Kinetics** | ✅ | FFT bottleneck and static kinetics checks resolved |
+| **🔵** | **Phases 13–15, 17, 18: Custom DFT & Web** | ⏳ | Deferred for now |
 
 ---
 
-### [ACTIVE] Phase A: Literature Arrhenius Calibration `[🔴 CRITICAL | Diff: 4/10]`
+### [ACTIVE] Phase A: Literature Arrhenius Calibration `[🔴 P0 | Diff: 4/10]`
 
-> **Why:** `barrier_constants.py` uses coarse midpoint estimates from literature ranges (e.g., "12–20 kcal/mol → 15.0"). Published experimental Arrhenius parameters (A, Ea) exist for the major Maillard steps and would replace TST-with-heuristic-barriers with directly measured kinetics. This is a pure data-curation task.
->
-> **Key References:** Martins & van Boekel 2003, Brands & van Boekel 2001, Yaylayan 1994, Hofmann & Schieberle 2000, Wedzicha 1984.
+> **Why:** The newly provided `Kinetic and Thermodynamic Profiling...` document contains explicit (A, Ea) values for the major Maillard steps. We must extract these and populate the YAML, replacing TST-with-heuristic-barriers with definitive measured kinetics.
 
-- [ ] **A.1 Literature Search & Data Extraction**: Search for published Arrhenius parameters (A, Ea) for each reaction family in `barrier_constants.py`. Record source, temperature range, pH, and substrate.
-  - [ ] Schiff base condensation
-  - [ ] Amadori/Heyns rearrangement
-  - [ ] Strecker degradation (per amino acid)
-  - [ ] 1,2- and 2,3-enolisation
-  - [ ] Cysteine thermolysis / H₂S release
-  - [ ] Retro-aldol fragmentation
-- [ ] **A.2 Create `data/lit/arrhenius_params.yml`**: Structured YAML with per-family entries: `{family, A_value, A_unit, Ea_kcal, Ea_kj, temp_range_K, pH, substrate, source_doi}`.
-- [ ] **A.3 Update `barrier_constants.py`**: Add a `get_arrhenius_params(family) → (A, Ea)` function that returns the literature values. Keep `get_barrier()` as a fallback for families without Arrhenius data.
-- [ ] **A.4 Update `cantera_export.py`**: Use literature (A, Ea) in Cantera YAML instead of fixed `A=1e13` + TST-derived Ea. Modify `add_reaction()` to call `get_arrhenius_params()`.
-- [ ] **A.5 Verification**: Run the Ribose+Cys+Leu benchmark system with new parameters. Compare concentration profiles before/after. Update `tests/integration/test_fft_bottleneck.py` thresholds if needed.
-- [ ] **A.6 Tests**: Add `tests/unit/test_arrhenius_params.py` verifying data loading, fallback behavior, and that all families in the YAML have valid numeric entries.
+- [x] **A.1 Literature Search**: (Completed) Acquired exhaustive analysis document.
+- [x] **A.2 Populate `data/lit/arrhenius_params.yml`**: Add the compiled values (Ea in kJ/mol or kcal/mol, A in 1/s or L/mol.s) for mutarotation, Schiff condensation/reversion, Amadori, Enolisation, Dehydration, Retro-aldol, Strecker, Pyrazine, Cysteine thermolysis, Thiol addition, DHA beta-elimination, and Thiamine degradation.
+- [x] **A.3 Update `barrier_constants.py`**: Add `get_arrhenius_params(family)` to query the new YAML. Keep `get_barrier()` as a fallback.
+- [x] **A.4 Update `cantera_export.py`**: Modify Cantera YAML exporter to use literature (A, Ea) instead of arbitrary `1e13` collision rates.
+- [x] **A.5 Verification**: Run Ribose+Cys+Leu benchmark and verify integration.
+- [x] **A.6 Tests**: Update/add `tests/unit/test_arrhenius_params.py`.
+
+---
+
+### [TODO] High-Priority Architecture Fixes (P1 - P2) `[🔴 CRITICAL]`
+
+- [x] **J.1 Cantera Phase Model**: Review `IdealGasConstPressureReactor` logic in `cantera_export.py`. Modify or formally document the relative mole fraction approximation.
+- [x] **K.1 Barrier Constants Matching**: In `barrier_constants.py`, replace `if pattern in fm` substring matching with an exact-match dictionary indexed on normalized family names to prevent silent misclassification.
+
+---
+
+### [TODO] Moderate & Minor Architecture Fixes (P3 - P8)
+
+- [x] **L.1 Gaussian Water Activity**: In `conditions.py`, change `aw` linear multiplier to `exp(-0.5 * ((aw - 0.7) / 0.15)**2)`.
+- [x] **M.1 Protein Binding**: In `headspace.py`, use unique `Kprot` values per chemical class instead of fixed `5.0`.
+- [x] **N.1 BO Variables**: In `bayesian_optimizer.py`, sample independent concentrations for sulfur vs branched vs basic amino acids rather than a single `aa_conc`.
+- [x] **O.1 Solvent Scaling**: In `kinetics.py`, gate the 5.0 kcal/mol Kirkwood-Onsager sensitivity by reaction family.
+- [x] **P.1 Sensory Expansion**: Expand `sensory_tags.yml` mapping.
+- [x] **Q.1 Temporal FAST Mode**: In `recommend.py`, optionally weight deep pathways by their characteristic timescales.
 
 ---
 

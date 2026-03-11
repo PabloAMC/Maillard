@@ -91,15 +91,17 @@ class ReactionConditions:
             
     def get_water_activity_multiplier(self) -> float:
         """
-        Maillard reaction peaks at aw 0.6-0.8.
-        Falls off rapidly due to diffusion limits (glass state) at low aw,
-        and dilution at high aw.
+        Calculates the kinetic multiplier for water activity (aw).
+        
+        Physics:
+        Maillard reactions peak at aw ≈ 0.6-0.8 (typically around 0.7).
+        - At low aw (glassy state), diffusion becomes limiting.
+        - At high aw, water acts as a diluent and product inhibitor (Le Chatelier).
+        
+        Replaced the piecewise linear model with a continuous Gaussian curve:
+        mult = exp(-0.5 * ((aw - 0.7) / 0.15)^2)
         """
-        if 0.6 <= self.water_activity <= 0.8:
-            return 1.0
-        elif self.water_activity < 0.6:
-            # Drop off linearly to 0 at aw 0
-            return max(0.01, self.water_activity / 0.6)
-        else:
-            # Greater than 0.8, dilute
-            return max(0.1, 1.0 - (self.water_activity - 0.8) * 4)
+        # Center peak around aw = 0.7, with a standard deviation of 0.15
+        val = self._gaussian(self.water_activity, center=0.7, sigma=0.15)
+        # Prevent it from dropping exactly to zero to avoid numerical singularities in ODEs
+        return max(0.01, val)

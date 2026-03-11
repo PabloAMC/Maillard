@@ -23,7 +23,13 @@ class FormulationOptimizer:
         
         # 1. Sample continuous parameters
         sugar_conc = trial.suggest_float("sugar_conc", 0.01, 1.0, log=True)
-        aa_conc = trial.suggest_float("aa_conc", 0.01, 1.0, log=True)
+        
+        # Phase N: Sample independent concentrations based on amino acid class
+        aa_conc_sulfur = trial.suggest_float("aa_conc_sulfur", 0.01, 1.0, log=True)
+        aa_conc_branched = trial.suggest_float("aa_conc_branched", 0.01, 1.0, log=True)
+        aa_conc_basic = trial.suggest_float("aa_conc_basic", 0.01, 1.0, log=True)
+        aa_conc_other = trial.suggest_float("aa_conc_other", 0.01, 1.0, log=True)
+
         ph = trial.suggest_float("ph", 3.0, 9.0)
         temp = trial.suggest_float("temp", 100.0, 200.0)
         aw = trial.suggest_float("aw", 0.3, 0.95)
@@ -37,8 +43,18 @@ class FormulationOptimizer:
         molar_ratios = {}
         for s in fixed_sugars:
             molar_ratios[s] = sugar_conc
+            
         for a in fixed_amino_acids:
-            molar_ratios[a] = aa_conc
+            name_lower = a.lower()
+            if name_lower in ["cysteine", "methionine"]:
+                molar_ratios[a] = aa_conc_sulfur
+            elif name_lower in ["leucine", "isoleucine", "valine"]:
+                molar_ratios[a] = aa_conc_branched
+            elif name_lower in ["lysine", "arginine", "histidine"]:
+                molar_ratios[a] = aa_conc_basic
+            else:
+                molar_ratios[a] = aa_conc_other
+                
         for L in fixed_lipids:
             molar_ratios[L] = 0.1 # Example fixed trace lipid
             

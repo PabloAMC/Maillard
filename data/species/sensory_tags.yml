@@ -15,12 +15,27 @@ tags:
     - "2,5-Dimethylpyrazine"
     - "2,3-Dimethylpyrazine"
     - "2-Ethyl-3,5-dimethylpyrazine"
+    - "2-Methylthiophene" # Also has roasted notes
   beany:
     - "Hexanal"
     - "Nonanal"
+    - "2-Pentylfuran"
   earthy:
     - "1-Octen-3-ol"
+    - "2-Ethyl-3,5-dimethylpyrazine" # Deep earthy
+    - "2-Pentylfuran"
   malty:
     - "2-Methylbutanal"
     - "3-Methylbutanal"
     - "2-Methylpropanal (isobutyraldehyde)"
+  sweet:
+    - "Phenylacetaldehyde"
+    - "2-Methylpropanal (isobutyraldehyde)"
+  floral:
+    - "Phenylacetaldehyde"
+    - "1-Hexanol"
+  sulfury:
+    - "Hydrogen Sulfide"
+    - "Dimethyl disulfide"
+    - "Dimethyl trisulfide"
+    - "2-Methylthiophene"
