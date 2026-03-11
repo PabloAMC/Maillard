@@ -1,46 +1,43 @@
 # Python
 __pycache__/
 *.py[cod]
-*.egg-info/
-.eggs/
-dist/
-build/
+*$py.class
 .venv/
 env/
+venv/
+ENV/
 
 # Conda
-.conda/
 conda_env/
+.conda/
 
-# Computational outputs
-results/
-*.log
-*.out
-*.err
-*.chk
-*.fchk
-*.wfn
-*.molden
-*.hypothesis
-
-# xTB scratch
-xtbopt.log
-xtbtopo.mol
-wbo
-xtbrestart
-charges
-energy
-*.xyz.bak
-xtbpath_*.xyz
-xtbpath.xyz
-xtbpath_ts.xyz
-xtb_connectivity.xyz
-gfnff_topo
-
-# macOS
-.DS_Store
-
-# Editors
+# IDEs
 .vscode/
 .idea/
-*.swp
+
+# Maillard Framework Temporary/Debug Files
+debug_*
+tmp_*
+test_compete.yaml
+test_failures.log
+minimal.yaml
+test_mech.yaml
+*.png
+*.csv
+*.log
+*.hypothesis/
+data/
+.DS_Store
+
+# xTB outputs
+xtbopt.log
+xtbrestart
+xtbtopo.mol
+wbo
+charges
+scr/
+
+# Cantera
+*.yaml
+!data/**/*.yml
+!data/**/*.yaml

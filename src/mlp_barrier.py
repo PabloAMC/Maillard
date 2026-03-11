@@ -57,6 +57,7 @@ class MLPBarrier:
                 atoms = atoms[-1]
         
         assert atoms is not None
+        atoms.calc = self.calc
         return atoms.get_potential_energy()
 
     def estimate_barrier(self, reactant_xyz: str, product_xyz: str) -> Optional[float]:
