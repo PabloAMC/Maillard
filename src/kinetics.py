@@ -142,7 +142,7 @@ class KineticsEngine:
             import cantera as ct
         except ImportError:
             # Shielded top-level-ish import for linter visibility while preserving env-safety
-            pass
+            ct = None
 
         # 1. Load the mechanism
         phase = ct.Solution(mechanism_yaml)

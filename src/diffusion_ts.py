@@ -7,23 +7,21 @@ diffusion engine to generate 3D transition state (TS) guesses
 directly from 2D molecular graphs (SMILES).
 """
 
-from typing import Optional
+from typing import Optional, Any
 
 try:
-    from ase import Atoms
+    from ase import Atoms as ASEAtoms # avoid name collision
 except ImportError:
-    Atoms = None
+    ASEAtoms = None
 
-# Placeholder for the actual diffusion model library
-# In a real 2026 environment, this would be:
-# from react_ts import Predictor
-_DIFFUSION_AVAILABLE = False
 try:
     # Simulating the presence of a diffusion engine
     # In production, this would load the weights and model architecture
+    from rdkit import Chem, AllChem
     _DIFFUSION_AVAILABLE = True
 except ImportError:
-    pass
+    Chem = AllChem = None
+    _DIFFUSION_AVAILABLE = False
 
 class DiffusionTSEngine:
     """
@@ -72,19 +70,19 @@ class DiffusionTSEngine:
             return 0.90
         return 0.50
 
-    def smiles_to_atoms(self, smiles: str) -> Optional[Atoms]:
+    def smiles_to_atoms(self, smiles: str) -> Any:
         """Helper to convert SMILES to ASE Atoms (Requires RDKit)."""
-        if Atoms is None:
+        if ASEAtoms is None or Chem is None or AllChem is None:
             return None
         try:
-            from rdkit import Chem
-            from rdkit.Chem import AllChem
             mol = Chem.MolFromSmiles(smiles)
+            if mol is None:
+                return None
             mol = Chem.AddHs(mol)
             AllChem.EmbedMolecule(mol)
             
             coords = mol.getConformer().GetPositions()
             symbols = [atom.GetSymbol() for atom in mol.GetAtoms()]
-            return Atoms(symbols=symbols, positions=coords)
+            return ASEAtoms(symbols=symbols, positions=coords)
         except Exception:
             return None

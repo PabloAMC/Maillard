@@ -1,6 +1,6 @@
 import numpy as np
 from dataclasses import dataclass
-from typing import List, Dict
+from typing import List, Dict, Any
 import math
 
 # Universal gas constant in J/(mol K)
@@ -83,9 +83,6 @@ class QuasiHarmonicCorrector:
         if freq_cm1 <= 0.0:
             return 0.0
             
-        freq_hz = freq_cm1 * self.c
-        (self.h * freq_hz) / (self.k_b * self.temp_k)
-        
         # Free rotor approximation
         sr = self.k_b * (0.5 + 0.5 * math.log( (8.0 * math.pi**3 * moment_of_inertia * self.k_b * self.temp_k) / (self.h**2) ))
         
@@ -141,9 +138,6 @@ class QuasiHarmonicCorrector:
         # normally retrieved from full thermo outputs, but we isolate vibrational correction here)
         # Since we just want the *difference* or the corrected Gibbs, the correction is solely in the vibrational entropy term.
         
-        # We compute the *delta* S from harmonic to QH, and apply it.
-        qh_S_vib_j_mol_k - raw_S_vib_j_mol_k
-        
         # Return partial properties just based on vibration/ZPE (relative Gibbs, not absolute, unless translational/rotational added)
         # Note: A full implementation integrates seamlessly with PySCF's thermo module by replacing its S_vib.
         # Here we provide the correction delta which can be applied directly to a raw `Thermodynamics` output.
@@ -195,7 +189,7 @@ JOBACK_GROUPS = {
 
 class JobackEstimator:
     @staticmethod
-    def estimate(smiles: str) -> Dict[str, any]:
+    def estimate(smiles: str) -> Dict[str, Any]:
         mol = Chem.MolFromSmiles(smiles)
         if not mol:
             raise ValueError(f"Invalid SMILES: {smiles}")

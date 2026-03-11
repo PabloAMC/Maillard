@@ -12,9 +12,8 @@ Thermodynamics incorporate Grimme quasi-harmonic corrections.
 import os
 import tempfile
 import numpy as np
-import io
 from dataclasses import dataclass
-from typing import Optional, Tuple, Dict, List
+from typing import Optional, Tuple, Dict, List, Any
 
 try:
     from pyscf import gto, scf, hessian # noqa: F401
@@ -22,7 +21,7 @@ try:
     from pyscf.data import nist
 except ImportError:
     # Graceful degradation for environments without PySCF
-    pass
+    gto = scf = hessian = geometric_solver = nist = None
 
 from .thermo import QuasiHarmonicCorrector
 from .solvation import SolvationEngine
@@ -41,7 +40,7 @@ class DFTResult:
 class DFTRefiner:
     """Wrapper for running the tiered DFT composite workflow."""
     
-    def __init__(self, solvent_name: str = 'water', temp_k: float = 423.15, 
+    def __init__(self, solvent_name: Optional[str] = 'water', temp_k: float = 423.15, 
                  use_explicit_solvent: bool = False, n_water: int = 3, 
                  geometry_backend: str = 'pyscf', db_path: Optional[str] = None):
         self.solvent_name = solvent_name
@@ -103,7 +102,7 @@ class DFTRefiner:
         n_threads = os.cpu_count() or 1
         os.environ["OMP_NUM_THREADS"] = str(n_threads)
         
-    def _setup_mol(self, xyz_content: str, charge: int = 0, spin: int = 0, basis: str = 'def2-svp') -> 'gto.Mole':
+    def _setup_mol(self, xyz_content: str, charge: int = 0, spin: int = 0, basis: str = 'def2-svp') -> Any:
         """Initialize PySCF GTO Mole object from XYZ."""
         lines = xyz_content.strip().split('\n')
         if len(lines) > 2 and lines[0].strip().isdigit():
@@ -120,7 +119,7 @@ class DFTRefiner:
         )
         return mol
 
-    def _build_mf(self, mol: 'gto.Mole', xc_method: str = 'r2SCAN', use_solvent: bool = True, conv_tol: float = 1e-7):
+    def _build_mf(self, mol: Any, xc_method: str = 'r2SCAN', use_solvent: bool = True, conv_tol: float = 1e-7):
         """Build the Mean-Field object with specified XC and implicit solvent."""
         from pyscf import scf, dft
         
@@ -139,7 +138,7 @@ class DFTRefiner:
                 mf = dft.RKS(mol)
             mf.xc = xc_method
         
-        if use_solvent and self.solvent_name:
+        if use_solvent and self.solvent_name is not None:
             mf = mf.ddCOSMO()
             if self.solvent_name.lower() == 'water':
                 mf.with_solvent.eps = 78.3553
@@ -203,7 +202,7 @@ class DFTRefiner:
         freqs = freq_info['freq_wavenumber']
         
         # Raw thermodynamics (standard harmonic)
-        thermo_info = thermo.thermo(mf_to_use, freq_info['freq_au'], self.temp_k, 101325.0)
+        thermo_info = thermo.thermo(mf_to_use, freq_info['freq_au'], self.temp_k, 101325)
         
         # Apply quasi-harmonic
         corrector = QuasiHarmonicCorrector(temp_k=self.temp_k)
@@ -321,6 +320,7 @@ class DFTRefiner:
                     if self.ts_optimizer.is_converged(atoms):
                         # Convert ASE Atoms back to XYZ string
                         from ase.io import write as ase_write
+                        import io # Added import for io
                         with io.StringIO() as f_xyz:
                             ase_write(f_xyz, atoms, format='xyz')
                             opt_xyz = f_xyz.getvalue()
@@ -507,6 +507,8 @@ class DFTRefiner:
             self.generate_irc(res_ts.optimized_xyz, charge=charge)
             
         # 4. Delta G‡
+        assert res_ts.quasi_harmonic_gibbs_hartree is not None
+        assert res_r.quasi_harmonic_gibbs_hartree is not None
         delta_g_h = res_ts.quasi_harmonic_gibbs_hartree - res_r.quasi_harmonic_gibbs_hartree
         barrier_kcal = delta_g_h * 627.509
         

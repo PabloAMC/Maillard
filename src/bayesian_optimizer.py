@@ -1,5 +1,5 @@
 import optuna
-from typing import List
+from typing import List, Optional
 
 from src.inverse_design import InverseDesigner  # noqa: E402
 from src.smirks_engine import ReactionConditions  # noqa: E402
@@ -16,7 +16,7 @@ class FormulationOptimizer:
         self.risk_aversion = risk_aversion
         self.study = None
 
-    def objective(self, trial: optuna.Trial, fixed_sugars: List[str], fixed_amino_acids: List[str], fixed_lipids: List[str] = None) -> float:
+    def objective(self, trial: optuna.Trial, fixed_sugars: List[str], fixed_amino_acids: List[str], fixed_lipids: Optional[List[str]] = None) -> float:
         fixed_lipids = fixed_lipids or []
         
         # 1. Sample continuous parameters
@@ -90,7 +90,7 @@ class FormulationOptimizer:
     def optimize(self, 
                  fixed_sugars: List[str], 
                  fixed_amino_acids: List[str], 
-                 fixed_lipids: List[str] = None,
+                 fixed_lipids: Optional[List[str]] = None,
                  n_trials: int = 50) -> optuna.Study:
         """Runs the Expected Improvement (EI) Bayesian optimization."""
         # Suppress noisy standard INFO level logging from optuna

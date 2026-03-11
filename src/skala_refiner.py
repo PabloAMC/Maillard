@@ -7,6 +7,7 @@ implicit water solvent (CPCM).
 """
 
 import tempfile
+from typing import Optional, Any
 from dataclasses import dataclass
 
 try:
@@ -14,7 +15,7 @@ try:
     from pyscf.geomopt import geometric_solver
 except ImportError:
     # Graceful degradation for environments without PySCF
-    pass
+    gto = dft = geometric_solver = None
 
 @dataclass
 class SkalaResult:
@@ -25,14 +26,14 @@ class SkalaResult:
 class SkalaRefiner:
     """Wrapper for running DFT calculations via PySCF using the Skala functional."""
     
-    def __init__(self, basis: str = 'def2-svp', solvent_name: str = 'water', use_skala: bool = True):
+    def __init__(self, basis: str = 'def2-svp', solvent_name: Optional[str] = 'water', use_skala: bool = True):
         self.basis = basis
         self.solvent_name = solvent_name
         self.use_skala = use_skala
         # Fallback to standard robust hybrid if Skala isn't installed
         self.fallback_xc = 'b3lyp' 
         
-    def _setup_mol(self, xyz_content: str, charge: int = 0, spin: int = 0) -> 'gto.Mole':
+    def _setup_mol(self, xyz_content: str, charge: int = 0, spin: int = 0) -> Any:
         """Initialize PySCF GTO Mole object from XYZ."""
         # PySCF expects XYZ without the first two lines (atom count and comment)
         # or it can parse a standard XYZ block. But it's safer to strip headers.
@@ -51,7 +52,7 @@ class SkalaRefiner:
         )
         return mol
         
-    def _build_mf(self, mol: 'gto.Mole'):
+    def _build_mf(self, mol: Any):
         """Build the Mean-Field object with Skala XC and CPCM solvent."""
         mf = dft.RKS(mol)
         

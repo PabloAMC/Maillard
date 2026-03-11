@@ -64,6 +64,7 @@ def test_ts_optimizer_import_error():
         # but for simplicity, we check the raise in find_ts
         opt = TSOptimizer()
         with pytest.raises(ImportError):
-            # We pass None for atoms/calc because it should fail before using them
+            # Pass dummy mock object instead of None
+            from unittest.mock import MagicMock
             with patch('src.ts_optimizer.Sella', None):
-                opt.find_ts(None, None)
+                opt.find_ts(MagicMock(), MagicMock())

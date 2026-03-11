@@ -24,7 +24,7 @@ class FormulationResult:
     trapping_efficiency: float
     detected_targets: List[str]
     detected_minimize: List[str]
-    radar: Dict[str, float]  # Phase C: Radar category scores
+    radar: Dict[str, tuple]  # Phase C: Radar category scores
     safety_score: float      # Phase F: Safety evaluation
     flagged_toxics: List[str]
 
@@ -67,8 +67,6 @@ class InverseDesigner:
         detected = []
         
         # T in Kelvin, R in kcal/(mol*K)
-        temp_k = conditions.temperature_celsius + 273.15
-        0.001987 * temp_k
         
         for t in targets_found:
             name = t["name"]
@@ -183,7 +181,7 @@ class InverseDesigner:
                 reactants = [s.smiles for s in step.reactants]
                 products = [s.smiles for s in step.products]
                 
-                bar, source, unc = self.db.get_best_barrier(reactants, products, step.reaction_family)
+                bar, source, unc = self.db.get_best_barrier(reactants, products, step.reaction_family or "unknown")
                     
                 ph_mult = cond.get_ph_multiplier(step.reaction_family or "")
                 if ph_mult != 1.0:

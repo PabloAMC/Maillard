@@ -1,7 +1,10 @@
 {
-    "venvPath": "/Users/pabloantoniomorenocasares/Developer/Maillard",
-    "venv": ".venv",
-    "extraPaths": [
-        "src"
-    ]
+    "typeCheckingMode": "basic",
+    "ignore": [
+        "**/__pycache__"
+    ],
+    "reportMissingImports": "warning",
+    "reportMissingModuleSource": "none",
+    "reportOptionalMemberAccess": "none",
+    "reportAttributeAccessIssue": false
 }

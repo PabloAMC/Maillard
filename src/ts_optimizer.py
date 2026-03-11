@@ -52,7 +52,7 @@ class TSOptimizer:
         # Run Sella optimization
         # We suppress stdout to keep logs clean unless there is an error
         with io.StringIO() as buf, redirect_stdout(buf):
-            dyn = Sella(atoms, logfile=None)
+            dyn = Sella(atoms, logfile=None)  # type: ignore
             dyn.run(fmax=fmax, steps=max_steps)
             
         return atoms
