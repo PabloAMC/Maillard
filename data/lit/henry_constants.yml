@@ -44,10 +44,35 @@ constants:
     delta_H_sol_kj_mol: -35.0
     Kfat: 1200.0       # Trapped in fat
 
+  - name: "1-Octen-3-ol"
+    Kaw_25c: 0.0003
+    delta_H_sol_kj_mol: -50.0
+    Kfat: 80.0
+
+  - name: "2-Pentylfuran"
+    Kaw_25c: 0.005
+    delta_H_sol_kj_mol: -42.0
+    Kfat: 450.0
+
   - name: "3-Methylbutanal"
     Kaw_25c: 0.008
     delta_H_sol_kj_mol: -42.0
     Kfat: 80.0
+
+  - name: "2-Methylbutanal"
+    Kaw_25c: 0.012
+    delta_H_sol_kj_mol: -42.0
+    Kfat: 80.0
+
+  - name: "2-Methylpropanal (isobutyraldehyde)"
+    Kaw_25c: 0.007
+    delta_H_sol_kj_mol: -40.0
+    Kfat: 45.0
+
+  - name: "Phenylacetaldehyde"
+    Kaw_25c: 0.00015
+    delta_H_sol_kj_mol: -55.0
+    Kfat: 15.0
 
   - name: "2-Methyl-3-furanthiol (MFT)"
     Kaw_25c: 0.000095
@@ -58,20 +83,46 @@ constants:
     Kaw_25c: 0.45      # Gas phase dominant
     delta_H_sol_kj_mol: -18.0
     Kfat: 1.0          # Does not partition significantly into lipids
+
   - name: "Methanethiol"
     Kaw_25c: 0.12      # High volatility
     delta_H_sol_kj_mol: -22.0
     Kfat: 1.5
 
-  - name: "Dimethyl-disulfide"
+  - name: "Dimethyl disulfide"
     Kaw_25c: 0.005
     delta_H_sol_kj_mol: -35.0
     Kfat: 35.0
 
-  - name: "Dimethyl-trisulfide"
+  - name: "Dimethyl trisulfide"
     Kaw_25c: 0.0008
     delta_H_sol_kj_mol: -40.0
     Kfat: 150.0
+
+  - name: "2-Methylthiophene"
+    Kaw_25c: 0.035
+    delta_H_sol_kj_mol: -38.0
+    Kfat: 45.0
+
+  - name: "2-Ethyl-3,5-dimethylpyrazine"
+    Kaw_25c: 0.00018
+    delta_H_sol_kj_mol: -48.0
+    Kfat: 30.0
+
+  - name: "4,5-Dihydro-2-methylthiazole"
+    Kaw_25c: 0.00005
+    delta_H_sol_kj_mol: -55.0
+    Kfat: 25.0
+
+  - name: "2-pentyl-4-methylthiazole"
+    Kaw_25c: 0.0002
+    delta_H_sol_kj_mol: -60.0
+    Kfat: 800.0
+
+  - name: "2-hexyl-4-methylthiazole"
+    Kaw_25c: 0.0003
+    delta_H_sol_kj_mol: -60.0
+    Kfat: 1500.0
 
   - name: "Acrolein"
     Kaw_25c: 0.0001
@@ -83,7 +134,33 @@ constants:
     delta_H_sol_kj_mol: -30.0
     Kfat: 1.5
 
+  - name: "1-Hexanol"
+    Kaw_25c: 0.00003
+    delta_H_sol_kj_mol: -52.0
+    Kfat: 25.0
+
   - name: "Acetone"
     Kaw_25c: 0.000011 # Low Kaw, highly water-soluble
     delta_H_sol_kj_mol: -42.0
     Kfat: 1.2
+
+  # Non-volatile markers (effectively zero volatility)
+  - name: "5-Hydroxymethylfurfural (HMF)"
+    Kaw_25c: 1.0e-10
+    delta_H_sol_kj_mol: -60.0
+    Kfat: 0.5
+
+  - name: "Nε-(Carboxymethyl)lysine (CML)"
+    Kaw_25c: 1.0e-12
+    delta_H_sol_kj_mol: -80.0
+    Kfat: 0.1
+
+  - name: "Nε-(Carboxyethyl)lysine (CEL)"
+    Kaw_25c: 1.0e-12
+    delta_H_sol_kj_mol: -80.0
+    Kfat: 0.1
+
+  - name: "Acrylamide"
+    Kaw_25c: 1.0e-9
+    delta_H_sol_kj_mol: -55.0
+    Kfat: 0.2

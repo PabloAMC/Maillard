@@ -87,7 +87,8 @@ class SensoryPredictor:
         # (Compound A, Compound B) -> multiplier
         self.synergy_pairs = {
             ("2-furfurylthiol", "methional"): 1.8, # Meaty synergy
-            ("2-methyl-3-furanthiol", "methional"): 2.0, # Stronger meaty synergy
+            ("2-methyl-3-furanthiol", "methional"): 2.2, # Stronger meaty synergy
+            ("2,5-dimethylpyrazine", "pyrazine"): 1.3, # Roasted synergy boost
             ("4-hydroxy-2,5-dimethyl-3(2h)-furanone", "furaneol"): 1.2 # caramel-sweet synergy
         }
 
@@ -141,48 +142,53 @@ class SensoryPredictor:
         compound_intensities = self.predict_profile(
             concentration_dict_ppm, temp_c, fat_fraction, protein_fraction
         )
-        radar = {tag: (0.0, 0.0) for tag in self.db.tags.keys()}
         
         # 1. Group intensities by category
-        category_contributions = {tag: [] for tag in self.db.tags.keys()}
-        category_uncertainties = {tag: [] for tag in self.db.tags.keys()}
+        radar = {tag: (0.0, 0.0) for tag in self.db.tags.keys()}
+        
         for tag, search_names in self.db.tags.items():
+            intensities = []
+            uncertainties = []
+            matched_compounds = set()
+            
             for s_name in search_names:
                 for c_name, (intensity, unc) in compound_intensities.items():
-                    if s_name.lower() in c_name.lower():
-                        category_contributions[tag].append(intensity)
-                        category_uncertainties[tag].append(unc)
-        
-        # 2. Apply Synergy Synergy Model
-        # Formula: I_group = (Σ I_i^β)^(1/β) where β relates to synergy/suppression
-        for tag, intensities in category_contributions.items():
+                    if s_name.lower() in c_name.lower() and c_name not in matched_compounds:
+                        intensities.append(intensity)
+                        uncertainties.append(unc)
+                        matched_compounds.add(c_name)
+            
             if not intensities:
                 continue
+
+            # Identify which compounds are active for this tag to check for synergy
+            active_for_tag = [c.lower() for c in matched_compounds]
             
-            # Filter duplicates if any
-            unique_ints = list(set(intensities))
-            uncertainties = category_uncertainties[tag]
+            # Specialized synergy check
+            synergy_boost = 1.0
+            for (a, b), boost in self.synergy_pairs.items():
+                # If both members of a synergy pair are active for THIS tag
+                has_a = any(a in name for name in active_for_tag)
+                has_b = any(b in name for name in active_for_tag)
+                if has_a and has_b:
+                    synergy_boost = max(synergy_boost, boost)
             
-            if tag.lower() in ["meaty", "sulfurous"]:
-                # Specialized synergy check for local pairs
-                synergy_boost = 1.0
-                active_compounds = [c.lower() for c in compound_intensities.keys()]
-                for (a, b), boost in self.synergy_pairs.items():
-                    if any(a in c for c in active_compounds) and any(b in c for c in active_compounds):
-                        synergy_boost = max(synergy_boost, boost)
-                
-                group_sum = sum([pow(i, 1.1) for i in unique_ints])
+            if tag.lower() in ["meaty", "sulfury", "sulfurous"]:
+                # High additivity for meaty/sulfur (β=1.1)
+                group_sum = sum([pow(i, 1.1) for i in intensities])
                 score = pow(group_sum, 1.0/1.1) * synergy_boost
+            elif tag.lower() == "roasted":
+                # Moderate additivity for roasted (β=1.2)
+                group_sum = sum([pow(i, 1.2) for i in intensities])
+                score = pow(group_sum, 1.0/1.2) * synergy_boost
             else:
-                # Standard partial additivity
-                group_sum = sum([pow(i, self.synergy_pow) for i in unique_ints])
+                # Standard partial additivity (β=1.3)
+                group_sum = sum([pow(i, self.synergy_pow) for i in intensities])
                 score = pow(group_sum, 1.0/self.synergy_pow)
             
             # Simple sum of squares for propagated uncertainty
             total_unc = sum([u**2 for u in uncertainties])**0.5
             radar[tag] = (score, total_unc)
-                        
-        return radar
                         
         return radar
 

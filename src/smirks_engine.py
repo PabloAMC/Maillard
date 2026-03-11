@@ -776,8 +776,8 @@ def _mft_pathway(pool_species: List[Species]) -> List[ElementaryStep]:
             # Filter out N-containing species; they require deamination first (R.12)
             if "N" in s.smiles:
                 continue
-                
-            # 1. Net Dehydration/Thiolation to MFT
+
+            # Net Dehydration/Thiolation to MFT
             # Balanced: C5H8O4 + 2 H2S -> C5H6OS + 3 H2O + S
             mft = Species(label="2-methyl-3-furanthiol", smiles="Cc1c(S)cco1")
             sulfur = Species(label="elemental-sulfur", smiles="[S]")
@@ -837,75 +837,79 @@ def _sulfur_volatiles_pathway(pool_species: List[Species]) -> List[ElementarySte
 
 def _deamination_step(pool_species: List[Species]) -> List[ElementaryStep]:
     """
-    R.12: Hydrolytic deamination of alpha-aminoketones back to dicarbonyls.
-
-    Covers ALL alpha-aminoketones produced in the network — from Strecker degradation
-    (aminoacetone, amino-pyruvaldehyde, 3-amino-2-butanone, …) and from generic
-    deoxyosone aminoketones.
+    R.12: Generalized Hydrolytic deamination of ketosamines (Amadori) 
+    and alpha-aminoketones back to dicarbonyls (deoxyosones).
 
     Mechanism:
-        alpha-aminoketone + H2O → dicarbonyl + NH3 + H2
-
-    Atom balance check (aminoacetone example):
-        CC(=O)CN  +  H2O  →  CC(=O)C=O  +  NH3  +  H2
-        C3H7NO    +  H2O  →  C3H4O2     +  NH3  +  H2
-        C3H9NO2          =   C3H9NO2           ✓
+        R-C(=O)-CH2-NH-R' + H2O → R-C(=O)-CHO + NH2-R'
     """
     steps = []
     water = Species("water", "O")
-    nh3   = Species("ammonia", "N")
-    h2    = Species("H2", "[HH]")
-
-    # SMARTS: alpha-amino-ketone pattern — NH2 on the carbon directly adjacent to a C=O.
-    # [C:1](=[O:2])[CH1:3]([NH2:4]) — the CH must carry exactly one H so the product
-    # gets a proper carbonyl after deamination.
-    _AK_SMARTS = Chem.MolFromSmarts("[C:1](=[O:2])[CH1:3]([NH2:4])")
-    rxn = AllChem.ReactionFromSmarts("[C:1](=[O:2])[CH1:3]([NH2:4])>>[C:1](=[O:2])[C:3]=[O]")
+    
+    # SMIRKS for hydrolytic deamination:
+    # [C:1](=[O:2])[CH2:3]-[NX3:4] >> [C:1](=[O:2])[CH1:3]=[O] . [NX3:4]
+    # This takes the ketosamine and splits it into a dicarbonyl and an amine.
+    rxn = AllChem.ReactionFromSmarts("[CX3:1](=[O:2])-[CX4H2:3]-[NX3:4]>>[CX3:1](=[O:2])-[CX3H1:3]=O.[NX3:4]")
 
     for s in pool_species:
-        mol = _mol(s.smiles)
-        if mol is None:
+        # Filter out pyrazines or very large structures
+        if "pyrazine" in s.label.lower() or _mw(s.smiles) > MAX_MW:
             continue
-
-        # Only process small-to-medium intermediates (volatiles / amino-ketones)
-        if _mw(s.smiles) > MAX_MW:
-            continue
-
-        # Structural gate: must contain an alpha-aminoketone motif
-        if not mol.HasSubstructMatch(_AK_SMARTS):
-            continue
-
-        # Skip if this is a free amino acid precursor — they have their own templates
+            
+        # R.12: Skip free amino acids — they undergo Strecker/Maillard, not self-deamination
         if any(aa in s.label.lower() for aa in [
             "glycine", "alanine", "leucine", "isoleucine", "valine",
             "phenylalanine", "methionine", "lysine", "cysteine",
             "asparagine", "serine", "threonine", "arginine"
         ]):
             continue
+            
+        mol = _mol(s.smiles)
+        if mol is None:
+            continue
 
         prods = rxn.RunReactants((mol,))
         if not prods:
             continue
-
+            
         try:
-            Chem.SanitizeMol(prods[0][0])
-            dic_smiles = Chem.MolToSmiles(prods[0][0])
+            # First product is the dicarbonyl (deoxyosone)
+            # Second product is the amine fragment
+            dicarb_smi = Chem.MolToSmiles(prods[0][0])
+            amine_smi = Chem.MolToSmiles(prods[0][1])
+            
+            # Labeling logic
+            dicarb_label = f"deaminated-{s.label}-dicarbonyl"
+            # If it's a pentose Amadori, call it deoxyosone
+            if "Amadori" in s.label or "Heyns" in s.label:
+                # Heuristic: if C5 -> pentose-deoxyosone, C6 -> hexose-deoxyosone
+                c_count = sum(1 for a in prods[0][0].GetAtoms() if a.GetAtomicNum() == 6)
+                if c_count == 5: dicarb_label = "pentose-deoxyosone-R12"
+                elif c_count == 6: dicarb_label = "hexose-deoxyosone-R12"
 
-            # Derive label: "amino-D-ribose-deoxyosone-3" -> "D-ribose-deoxyosone-3"
-            # For generic Strecker aminoketones: "amino-pyruvaldehyde" -> "pyruvaldehyde"
-            dic_label = s.label.replace("amino-", "").replace("Amino-", "")
-
-            dic = Species(label=dic_label, smiles=dic_smiles)
-            steps.append(ElementaryStep(
-                reactants=[s, water],
-                products=[dic, nh3, h2],
-                reaction_family="Deamination"
-            ))
+            amine_sp = Species(label=f"liberated-amine-{s.label}", smiles=amine_smi)
+            dicarb_sp = Species(label=dicarb_label, smiles=dicarb_smi)
+            
+            # Stoichiometry logic:
+            # Amadori (ketosamine) -> Dicarb + Amine (Balanced)
+            # Aminoketone + H2O -> Dicarb + Amine + H2 (Balanced)
+            if "Amadori" in s.label or "Heyns" in s.label:
+                steps.append(ElementaryStep(
+                    reactants=[s],
+                    products=[dicarb_sp, amine_sp],
+                    reaction_family="Generalized_Deamination"
+                ))
+            else:
+                h2 = Species("H2", "[HH]")
+                steps.append(ElementaryStep(
+                    reactants=[s, water],
+                    products=[dicarb_sp, amine_sp, h2],
+                    reaction_family="Generalized_Deamination"
+                ))
         except Exception:
             continue
 
     return steps
-
 
 def _lipid_maillard_synergy(pool_species: List[Species]) -> List[ElementaryStep]:
     """
