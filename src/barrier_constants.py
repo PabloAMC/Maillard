@@ -20,6 +20,7 @@ Sources
 """
 
 import yaml
+import math
 from pathlib import Path
 from typing import Dict, Tuple, Optional
 
@@ -168,8 +169,8 @@ def get_arrhenius_params(family: str) -> Optional[Tuple[float, float]]:
         # Convert kJ/mol to kcal/mol
         Ea_kcal = Ea_kj / 4.184
         
-        # If A_value is 0.0 (placeholder), return None so caller falls back to A=1e13
-        if A <= 0.0:
+        # If A_value is NaN or 0.0 (placeholder), return None so caller falls back to A=1e13
+        if math.isnan(A) or A <= 0.0:
             return None
             
         return A, Ea_kcal
