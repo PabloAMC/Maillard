@@ -92,7 +92,7 @@ def main():
         # Meta for DB
         meta = SMILES_DATA.get(t, {})
         if meta:
-            meta["family"] = t
+            meta["family"] = [t]
 
         try:
             barrier = refiner.calculate_barrier(

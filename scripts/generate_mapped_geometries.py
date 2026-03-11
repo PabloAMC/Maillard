@@ -9,6 +9,7 @@ def resource_filename(package_or_requirement, resource_name):
     # We will resolve it relative to the rxnmapper package installation directory
     import importlib.util
     spec = importlib.util.find_spec("rxnmapper")
+    assert spec is not None and spec.origin is not None
     base_path = pathlib.Path(spec.origin).parent
     return str(base_path / resource_name)
 dummy_pkg.resource_filename = resource_filename

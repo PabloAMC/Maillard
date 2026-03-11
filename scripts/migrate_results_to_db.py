@@ -40,7 +40,7 @@ def migrate(legacy_json_path: str, db_path: str):
                 continue
             seen_reactions.add(reaction_key)
             
-            barrier_kcal = get_barrier(step.reaction_family)
+            barrier_kcal, _ = get_barrier(step.reaction_family or "unknown")
             if barrier_kcal == DEFAULT_BARRIER:
                 print(f"  Warning: Default barrier used for {step.reaction_family}")
             
@@ -51,7 +51,7 @@ def migrate(legacy_json_path: str, db_path: str):
                 method="literature_heuristic",
                 basis=None,
                 solvation="water",
-                family=step.reaction_family,
+                family=step.reaction_family or "unknown",
                 converged=True
             )
             count_heuristic += 1

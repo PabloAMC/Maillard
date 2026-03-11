@@ -25,7 +25,7 @@ RESET = "\033[0m"
 def canonicalize(smiles: str) -> str:
     mol = Chem.MolFromSmiles(smiles)
     if mol is None: 
-        return None
+        return ""
     return Chem.MolToSmiles(mol)
 
 def parse_rmg_dictionary(dict_path: Path) -> dict[str, str]:
