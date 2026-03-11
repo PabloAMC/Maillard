@@ -56,21 +56,27 @@ Maillard uses a funnel strategy: generate broadly, then refine precisely. Most u
 
 ## 🚀 Installation
 
-### 1. Prerequisites (Conda)
-Maillard requires RDKit and xTB for screening. We recommend using a dedicated environment:
+### 1. Recommended Setup (Conda / Mamba)
+The Maillard framework relies on complex scientific binaries (`CREST`, `xTB`, `PySCF`) which are most reliably managed via Conda.
 
 ```bash
+# Create the unified environment
 conda env create -f environment.yml
+
+# Activate it
 conda activate maillard
-# Optional: Install Cantera for kinetics simulations
-conda install -c cantera cantera
 ```
 
+
 ### 2. Verify Scientific Dependencies
-Ensure that the QM engines are correctly mapped:
+Ensure that the QM engines are correctly detected by the framework:
 ```bash
-# Check xTB and RDKit installation
-python scripts/check_env.py
+# Check if binaries are in your PATH
+which crest
+which xtb
+
+# Run core validation tests
+python -m pytest tests/qm/test_solvation.py
 ```
 
 ### 3. Install Skala (Tier 2 DFT)
