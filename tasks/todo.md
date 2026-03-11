@@ -16,21 +16,21 @@ The core Tier 0/1/2 pipeline is operational and the zero-DFT laptop pipeline is 
 | Priority | Phase | Status | Impact |
 |----------|-------|:------:|--------|
 | **🔴 P0** | **Phase A: Literature Arrhenius Calibration** | ✅ | Integrate exhaustive Arrhenius parameters data |
-| **🔴 P1** | **Phase J: Cantera Phase Model** | 📋 | Fix or document ideal-gas phase approximations |
-| **🔴 P2** | **Phase K: Barrier Constants Matching** | 📋 | Replace substring matching with exact-match dicts |
-| **🟠 P3** | **Phase L: Gaussian Water Activity Model** | 📋 | Replace linear `aw` model with Gaussian curve |
-| **🟠 P4** | **Phase M: Specific Protein Binding** | 📋 | Per-compound protein binding in headspace model |
-| **🟠 P5** | **Phase N: Per-Amino Acid BO Options** | 📋 | Separate amino-acid concentration in optimizer |
-| **🟡 P6** | **Phase O: Per-Family Solvent Sensing** | 📋 | Family-dependent Kirkwood-Onsager correction |
-| **🟡 P7** | **Phase P: Sensory Tag Expansion** | 📋 | Ensure all target species map to radar categories |
-| **🟡 P8** | **Phase Q: Temporal FAST Mode** | 📋 | Add time-approx weight to FAST pathway ranker |
+| **🔴 P1** | **Phase J: Cantera Phase Model** | ✅ | Fix or document ideal-gas phase approximations |
+| **🔴 P2** | **Phase K: Barrier Constants Matching** | ✅ | Replace substring matching with exact-match dicts |
+| **🟠 P3** | **Phase L: Gaussian Water Activity Model** | ✅ | Replace linear `aw` model with Gaussian curve |
+| **🟠 P4** | **Phase M: Specific Protein Binding** | ✅ | Per-compound protein binding in headspace model |
+| **🟠 P5** | **Phase N: Per-Amino Acid BO Options** | ✅ | Separate amino-acid concentration in optimizer |
+| **🟡 P6** | **Phase O: Per-Family Solvent Sensing** | ✅ | Family-dependent Kirkwood-Onsager correction |
+| **🟡 P7** | **Phase P: Sensory Tag Expansion** | ✅ | Ensure all target species map to radar categories |
+| **🟡 P8** | **Phase Q: Temporal FAST Mode** | ✅ | Add time-approx weight to FAST pathway ranker |
 | **✅** | **Phase B-I: Generative & ML Features** | ✅ | ML Potentials, Sensory, Headspace, pH, BO done |
 | **✅** | **Phase 12, 16: Advanced Kinetics** | ✅ | FFT bottleneck and static kinetics checks resolved |
 | **🔵** | **Phases 13–15, 17, 18: Custom DFT & Web** | ⏳ | Deferred for now |
 
 ---
 
-### [ACTIVE] Phase A: Literature Arrhenius Calibration `[🔴 P0 | Diff: 4/10]`
+### [DONE] Phase A: Literature Arrhenius Calibration `[🔴 P0 | 100%]`
 
 > **Why:** The newly provided `Kinetic and Thermodynamic Profiling...` document contains explicit (A, Ea) values for the major Maillard steps. We must extract these and populate the YAML, replacing TST-with-heuristic-barriers with definitive measured kinetics.
 
@@ -43,14 +43,14 @@ The core Tier 0/1/2 pipeline is operational and the zero-DFT laptop pipeline is 
 
 ---
 
-### [TODO] High-Priority Architecture Fixes (P1 - P2) `[🔴 CRITICAL]`
+### [DONE] High-Priority Architecture Fixes (P1 - P2) `[🔴 CRITICAL]`
 
 - [x] **J.1 Cantera Phase Model**: Review `IdealGasConstPressureReactor` logic in `cantera_export.py`. Modify or formally document the relative mole fraction approximation.
 - [x] **K.1 Barrier Constants Matching**: In `barrier_constants.py`, replace `if pattern in fm` substring matching with an exact-match dictionary indexed on normalized family names to prevent silent misclassification.
 
 ---
 
-### [TODO] Moderate & Minor Architecture Fixes (P3 - P8)
+### [DONE] Moderate & Minor Architecture Fixes (P3 - P8)
 
 - [x] **L.1 Gaussian Water Activity**: In `conditions.py`, change `aw` linear multiplier to `exp(-0.5 * ((aw - 0.7) / 0.15)**2)`.
 - [x] **M.1 Protein Binding**: In `headspace.py`, use unique `Kprot` values per chemical class instead of fixed `5.0`.
