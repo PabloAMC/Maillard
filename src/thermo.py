@@ -277,22 +277,26 @@ def get_nasa_coefficients(smiles: str) -> List[float]:
     a7 = (S0 / R) - (a1*np.log(T0) + a2*T0 + a3*T0**2/2 + a4*T0**3/3 + a5*T0**4/4)
     low_range = [float(x) for x in [a1, a2, a3, a4, a5, a6, a7]]
     
-    # 3. Continuous High Range (1000-3000K)
-    # We maintain the 1000K values but zero out the slopes to avoid wild extrapolation.
-    # To ensure continuity in H and S at Tmid (1000K), we calculate high-range a6 and a7.
+    # 3. High Range (1000-3000K)
+    # Even if Joback is less accurate here, a fit is better than a constant.
+    T_high = np.linspace(1000, 3000, 20)
+    Cp_high = a + b*T_high + c*T_high**2 + d*T_high**3
+    
+    high_coeffs_raw = np.polyfit(T_high, Cp_high/R, 4)[::-1]
+    ha1, ha2, ha3, ha4, ha5 = high_coeffs_raw
+    
+    # high_a6 and high_a7 to ensure continuity at T_mid = 1000 K
     T_mid = 1000.0
+    a1_l, a2_l, a3_l, a4_l, a5_l, a6_l, a7_l = low_range
     
-    # Low-range Cp/R, H/RT, S/R at T_mid
-    a1, a2, a3, a4, a5, a6_low, a7_low = low_range
-    cp_r_mid = a1 + a2*T_mid + a3*T_mid**2 + a4*T_mid**3 + a5*T_mid**4
-    h_rt_mid = a1 + a2*T_mid/2 + a3*T_mid**2/3 + a4*T_mid**3/4 + a5*T_mid**4/5 + a6_low/T_mid
-    s_r_mid = a1*np.log(T_mid) + a2*T_mid + a3*T_mid**2/2 + a4*T_mid**3/3 + a5*T_mid**4/4 + a7_low
+    # H/RT at T_mid (Low range)
+    h_rt_mid = a1_l + a2_l*T_mid/2 + a3_l*T_mid**2/3 + a4_l*T_mid**3/4 + a5_l*T_mid**4/5 + a6_l/T_mid
+    # S/R at T_mid (Low range)
+    s_r_mid = a1_l*np.log(T_mid) + a2_l*T_mid + a3_l*T_mid**2/2 + a4_l*T_mid**3/3 + a5_l*T_mid**4/4 + a7_l
     
-    # High range a1 set to match Cp/R at Tmid
-    high_a1 = cp_r_mid
-    high_6 = (h_rt_mid * T_mid) - (high_a1 * T_mid)
-    high_7 = s_r_mid - (high_a1 * np.log(T_mid))
+    ha6 = (h_rt_mid * T_mid) - (ha1*T_mid + ha2*T_mid**2/2 + ha3*T_mid**3/3 + ha4*T_mid**4/4 + ha5*T_mid**5/5)
+    ha7 = s_r_mid - (ha1*np.log(T_mid) + ha2*T_mid + ha3*T_mid**2/2 + ha4*T_mid**3/3 + ha5*T_mid**4/4)
     
-    high_range = [float(high_a1), 0.0, 0.0, 0.0, 0.0, float(high_6), float(high_7)]
+    high_range = [float(x) for x in [ha1, ha2, ha3, ha4, ha5, ha6, ha7]]
     
     return low_range + high_range

@@ -1,0 +1,38 @@
+name: maillard
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.12
+  - pip
+  - setuptools
+  - pytest
+  - hypothesis
+  - numpy>=2.0
+  - scipy
+  - pandas
+  - matplotlib
+  - rdkit
+  - cantera>=3.2.0
+  - ase
+  - pyscf
+  - xtb
+  - crest
+  - geometric
+  - sqlalchemy
+  - pydantic>=2.0
+  - pydantic-settings
+  - pyyaml
+  - optuna
+  - tqdm
+  - requests
+  - diskcache
+  - networkx
+  - pip:
+      - sella
+      - mace-torch
+      - rxn-chem-utils
+      - rxnmapper
+      - torch>=2.1.0
+      - huggingface_hub
+      - orjson

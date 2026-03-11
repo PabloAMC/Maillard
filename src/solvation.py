@@ -10,6 +10,7 @@ that freezes all solute Cartesian coordinates so only the water molecules are
 sampled — preventing CREST from collapsing the TS into a local minimum.
 """
 
+import os
 import subprocess
 import tempfile
 import shutil
@@ -22,7 +23,6 @@ from typing import List
 class SolvationEngine:
     """
     Handles generation of explicit water clusters natively using CREST.
-    Uses generic heuristics when CREST fails.
     The 'freeze_core' option writes a .xcontrol constraint file that pins all
     solute atom coordinates while CREST samples conformers for the water shell.
     This is mandatory for transition state geometries.
@@ -38,15 +38,19 @@ class SolvationEngine:
             # Auto-resolve relative to this file's parent (project root)
             project_root: Path = Path(__file__).parent.parent
             home: Path = Path.home()
+            conda_prefix = os.environ.get("CONDA_PREFIX")
             
-            candidates: List[Path] = [
+            candidates: List[Path] = []
+            if conda_prefix:
+                candidates.append(Path(conda_prefix) / "bin" / "crest")
+                
+            candidates.extend([
                 project_root / "conda_env" / "bin" / "crest",
-                project_root / ".venv" / "bin" / "crest",
                 home / "miniforge3" / "bin" / "crest",
                 home / "miniconda3" / "bin" / "crest",
                 Path("/usr/local/bin/crest"),
                 Path("/opt/homebrew/bin/crest")
-            ]
+            ])
             
             for candidate in candidates:
                 if candidate.exists():
@@ -135,68 +139,19 @@ class SolvationEngine:
                 if result.returncode != 0:
                     # Specific check for missing xtb-IFF
                     if "xtb-IFF" in result.stderr or "xtb-IFF" in result.stdout:
-                        print(">>> [Solvation] WARNING: xtb-IFF not found. Falling back to heuristic placement.")
-                        return self._generate_heuristic_cluster(xyz_string, n_water)
+                        raise RuntimeError(f"CREST/QCG failed (exit {result.returncode}): xtb-IFF not found. Please ensure xtb-IFF is installed and in your PATH.")
                     
-                    raise RuntimeError(f"CREST/QCG failed (exit {result.returncode}).")
+                    raise RuntimeError(f"CREST/QCG failed (exit {result.returncode}): {result.stderr}")
 
                 best_xyz = tmp / "crest_best.xyz"
                 if not best_xyz.exists():
-                    return self._generate_heuristic_cluster(xyz_string, n_water)
+                    raise FileNotFoundError("CREST completed but 'crest_best.xyz' was not generated.")
 
                 return best_xyz.read_text()
 
-            except (subprocess.TimeoutExpired, RuntimeError, FileNotFoundError, Exception) as e:
-                print(f">>> [Solvation] WARNING: CREST/QCG call failed ({type(e).__name__}). Falling back to heuristic placement.")
-                return self._generate_heuristic_cluster(xyz_string, n_water)
+            except (subprocess.TimeoutExpired, RuntimeError, FileNotFoundError) as e:
+                raise RuntimeError(f"Solvation error: {str(e)}") from e
 
-    # ------------------------------------------------------------------
-    # Fallback Heuristics (for environments without full CREST stack)
-    # ------------------------------------------------------------------
-
-    def _generate_heuristic_cluster(self, xyz_string: str, n_water: int = 3) -> str:
-        """
-        Geometric fallback: place waters near polar sites.
-        Used when CREST or xtb-IFF is missing.
-        """
-        lines = xyz_string.strip().split('\n')
-        n_atoms_solute = int(lines[0])
-        solute_data = []
-        for line in lines[2:2+n_atoms_solute]:
-            parts = line.split()
-            solute_data.append({
-                'symbol': parts[0],
-                'coords': np.array([float(parts[1]), float(parts[2]), float(parts[3])])
-            })
-
-        # Identify polar sites (O, N) for water placement
-        sites = [d['coords'] for d in solute_data if d['symbol'] in ['O', 'N']]
-        if not sites:
-            sites = [d['coords'] for d in solute_data]
-
-        cluster_atoms = solute_data.copy()
-        
-        for i in range(n_water):
-            base_site = sites[i % len(sites)]
-            angle = (2 * np.pi / max(1, n_water)) * i
-            phi = np.pi / 4 
-            offset = np.array([
-                np.cos(angle) * np.sin(phi), 
-                np.sin(angle) * np.sin(phi), 
-                np.cos(phi)
-            ]) * 2.8
-            
-            o_coord = base_site + offset
-            cluster_atoms.append({'symbol': 'O', 'coords': o_coord})
-            cluster_atoms.append({'symbol': 'H', 'coords': o_coord + np.array([0.96, 0.0, 0.0])})
-            cluster_atoms.append({'symbol': 'H', 'coords': o_coord + np.array([-0.24, 0.93, 0.0])})
-
-        # Form final XYZ string
-        final_xyz = f"{len(cluster_atoms)}\nSolvated Cluster (Heuristic Fallback)\n"
-        for d in cluster_atoms:
-            final_xyz += f"{d['symbol']:<2} {d['coords'][0]:12.6f} {d['coords'][1]:12.6f} {d['coords'][2]:12.6f}\n"
-
-        return final_xyz
 
     # ------------------------------------------------------------------
     # Helpers

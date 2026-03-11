@@ -24,12 +24,22 @@ def test_n_atoms_parsing():
     engine = SolvationEngine()
     assert engine._parse_n_atoms(WATER_XYZ) == 3
 
-def _has_crest():
+def _has_crest() -> bool:
     engine = SolvationEngine()
     # Check if the detected path is valid and executable
-    return engine.crest_bin and (os.path.exists(engine.crest_bin) or shutil.which(engine.crest_bin))
+    return bool(engine.crest_bin and (os.path.exists(engine.crest_bin) or shutil.which(engine.crest_bin)))
 
-@pytest.mark.skipif(not _has_crest(), reason="CREST binary not found in any auto-detected paths")
+def _has_xtb_iff() -> bool:
+    """CREST's QCG mode requires xtb-IFF; without it CREST segfaults (exit -11)."""
+    return shutil.which("xtb-IFF") is not None
+
+_CREST_QCG_AVAILABLE = _has_crest() and _has_xtb_iff()
+_CREST_QCG_SKIP_REASON = (
+    "CREST binary not found" if not _has_crest()
+    else "xtb-IFF not found (required by CREST -qcg mode)"
+)
+
+@pytest.mark.skipif(not _CREST_QCG_AVAILABLE, reason=_CREST_QCG_SKIP_REASON)
 def test_explicit_solvation_run():
     """Run a real CREST/QCG call if the binary is present."""
     engine = SolvationEngine()
@@ -56,11 +66,11 @@ def test_explicit_solvation_run():
     for i in range(3):
         np.testing.assert_allclose(solute_coords[i], expected_coords[i], atol=1e-3)
 
-def test_heuristic_fallback():
-    """Verify the fallback works when CREST fails."""
+def test_error_handling_on_missing_bin():
+    """Verify that a missing or invalid binary raises a RuntimeError."""
     engine = SolvationEngine(crest_bin="/path/to/nonexistent/crest")
-    res_xyz = engine.generate_solvated_cluster(WATER_XYZ, n_water=1, freeze_core=True)
+    with pytest.raises(RuntimeError) as excinfo:
+        engine.generate_solvated_cluster(WATER_XYZ, n_water=1, freeze_core=True)
     
-    lines = res_xyz.strip().split('\n')
-    assert int(lines[0]) == 6
-    assert "Heuristic Fallback" in lines[1]
+    assert "Solvation error" in str(excinfo.value)
+    assert "No such file or directory" in str(excinfo.value)
