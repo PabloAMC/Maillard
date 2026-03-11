@@ -97,7 +97,7 @@ def run_simulation(barriers_json: str, precursors: dict, temp_c: Optional[float]
             # --- DUAL-LOOKUP BARRIER ---
             # Single source of truth: DB first, then heuristic fallback
             if is_db:
-                barrier_kcal, source = db.get_best_barrier(reactants, products, step.reaction_family)
+                barrier_kcal, source, _ = db.get_best_barrier(reactants, products, step.reaction_family)
             else:
                 barrier_kcal = get_barrier(step.reaction_family)
                 source = "Heuristic"

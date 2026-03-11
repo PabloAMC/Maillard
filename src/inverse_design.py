@@ -127,7 +127,16 @@ class InverseDesigner:
                 
         return penalty, flagged
 
-    def evaluate_all(self, global_conditions: ReactionConditions) -> List[FormulationResult]:
+    def evaluate_single(self, formulation: Dict, global_conditions: ReactionConditions) -> FormulationResult:
+        """
+        R.8.2: Evaluate a single formulation without touching self.grid.
+        """
+        results = self.evaluate_all(global_conditions, grid_override=[formulation])
+        if not results:
+            raise ValueError("Evaluation failed for formulation")
+        return results[0]
+
+    def evaluate_all(self, global_conditions: ReactionConditions, grid_override: Optional[List[Dict]] = None) -> List[FormulationResult]:
         """
         Run the generative pipeline for every formulation in the grid.
         Returns a ranked list of results.
@@ -136,7 +145,8 @@ class InverseDesigner:
         target_compounds = self.tags.get(self.target_tag, [])
         minimize_compounds = self.tags.get(self.minimize_tag, []) if self.minimize_tag else []
 
-        for form in self.grid:
+        eval_grid = grid_override if grid_override is not None else self.grid
+        for form in eval_grid:
             name = form.get("name", "Unknown")
             sugars = form.get("sugars", [])
             amino_acids = form.get("amino_acids", [])
@@ -174,7 +184,7 @@ class InverseDesigner:
                 reactants = [s.smiles for s in step.reactants]
                 products = [s.smiles for s in step.products]
                 
-                bar, source = self.db.get_best_barrier(reactants, products, step.reaction_family)
+                bar, source, unc = self.db.get_best_barrier(reactants, products, step.reaction_family)
                     
                 ph_mult = cond.get_ph_multiplier(step.reaction_family or "")
                 if ph_mult != 1.0:
@@ -191,7 +201,7 @@ class InverseDesigner:
                     bar -= HEME_CATALYST_REDUCTION
                     
                 rxn_key = f"{'+'.join(sorted(r.smiles for r in step.reactants))}->{'+'.join(sorted(p.smiles for p in step.products))}"
-                heuristic_barriers[rxn_key] = max(0.0, bar)
+                heuristic_barriers[rxn_key] = (max(0.0, bar), unc)
                 
             # Build canonical concentrations map
             from src.recommend import _canon

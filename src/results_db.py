@@ -14,21 +14,31 @@ from typing import Dict, List, Optional, Tuple, Any
 from src.barrier_constants import get_barrier
 
 class ResultsDB:
-    def get_best_barrier(self, reactants: List[str], products: List[str], family: str = "unknown") -> Tuple[float, str]:
+    def get_best_barrier(self, reactants: List[str], products: List[str], family: str = "unknown") -> Tuple[float, str, float]:
         """
         Single source of truth for barrier lookups.
         1. Queries DB for exact match (using method priority).
         2. Falls back to heuristic constants if no DB entry exists.
         
-        Returns (barrier_kcal, source_string)
+        Returns (barrier_kcal, source_string, uncertainty_kcal)
         """
         res = self.find_barrier(reactants, products)
         if res:
-            return res["delta_g_kcal"], f"DB:{res['method']}"
+            method = res['method'].lower()
+            # Expert Uncertainty Mapping (R.11)
+            method_unc_map = {
+                "wb97m-v": 1.5,
+                "r2scan-3c": 2.0,
+                "mace-off": 2.5,
+                "xtb": 3.0,
+                "hf": 5.0
+            }
+            unc = method_unc_map.get(method, 3.5)
+            return res["delta_g_kcal"], f"DB:{res['method']}", unc
         
         # Fallback to heuristic
-        barrier_kcal = get_barrier(family)
-        return barrier_kcal, "Heuristic"
+        barrier_kcal, unc = get_barrier(family)
+        return barrier_kcal, "Heuristic", unc
 
     def __init__(self, db_path: str = "results/maillard_results.db"):
         self.db_path = Path(db_path)

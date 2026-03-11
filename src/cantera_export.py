@@ -4,6 +4,10 @@ src/cantera_export.py
 Phase 12: Cantera mechanism export.
 Converts the SMILES-based reaction network and computed barriers 
 into a Cantera-compatible YAML mechanism file.
+
+R.1 Fix: Uses `ideal-condensed` phase model for liquid/solid Maillard
+kinetics, with per-species molar volumes estimated from molecular weight
+and Girolami's density approximation.
 """
 
 import yaml
@@ -11,6 +15,58 @@ from typing import Dict, List, Optional, Any
 from pathlib import Path
 from src.kinetics import KineticsEngine
 from src.barrier_constants import get_arrhenius_params
+
+
+def _estimate_molar_volume(smiles: str) -> float:
+    """
+    Estimate molar volume in m³/kmol using Girolami's atom/group contribution method.
+
+    Girolami's method estimates liquid density from atom counts:
+      density ≈ MW / (sum of atom volume increments)
+    Then: V_m = MW / density (in L/mol) → convert to m³/kmol.
+
+    For organic Maillard intermediates, typical densities are 0.8–1.3 g/cm³.
+    We use a simplified version that gives reasonable estimates for small organics.
+
+    Returns molar volume in m³/kmol (Cantera's default unit for this field).
+    """
+    from rdkit import Chem
+    from rdkit.Chem import Descriptors
+
+    mol = Chem.MolFromSmiles(smiles)
+    if mol is None:
+        return 0.1  # Fallback: ~100 mL/mol
+
+    mol = Chem.AddHs(mol)
+    mw = Descriptors.MolWt(mol)
+
+    # Count atoms by element
+    atom_counts = {}
+    for atom in mol.GetAtoms():
+        sym = atom.GetSymbol()
+        atom_counts[sym] = atom_counts.get(sym, 0) + 1
+
+    # Girolami volume increments (cm³/mol per atom)
+    # Source: Girolami, J. Chem. Educ. 1994, 71, 962-964
+    vol_increments = {
+        "C": 16.35, "H": 8.71, "O": 12.43, "N": 14.39,
+        "S": 22.91, "Cl": 20.95, "Br": 26.21, "F": 10.48,
+    }
+
+    total_vol = 0.0
+    for sym, count in atom_counts.items():
+        increment = vol_increments.get(sym, 15.0)  # Default for rare atoms
+        total_vol += increment * count
+
+    if total_vol <= 0:
+        total_vol = mw  # Absolute fallback
+
+    # total_vol is in cm³/mol = mL/mol
+    # Convert to m³/kmol: 1 mL/mol = 1e-3 L/mol = 1e-6 m³/mol = 1e-3 m³/kmol
+    molar_volume_m3_per_kmol = total_vol * 1e-3
+
+    return max(molar_volume_m3_per_kmol, 0.01)  # Floor at 10 mL/mol
+
 
 class CanteraExporter:
     """
@@ -43,6 +99,7 @@ class CanteraExporter:
                 "name": name or f"S_{len(self.species)}",
                 "smiles": smiles,
                 "composition": comp,
+                "molar_volume": _estimate_molar_volume(smiles),
             }
         return self.species[smiles]["name"]
 
@@ -60,17 +117,18 @@ class CanteraExporter:
         if thermo_gating:
             is_feasible, dg = self.kinetics.is_reaction_feasible(reactants, products, gating_threshold)
             if not is_feasible:
-                # Log and skip unphysical reactions
-                # print(f"  Skipping unphysical reaction (Delta G = {dg:.1f} kcal/mol): {reactants} -> {products}")
                 return
 
         # 2. Literature Arrhenius Calibration (Phase A)
-        # Check if we have measured literature (A, Ea) for this family
+        source_quality = "heuristic"
         if reaction_family:
             lit_params = get_arrhenius_params(reaction_family)
             if lit_params:
-                # Override the A (1/s or L/mol.s) and Ea (kcal/mol) with literature values
-                A, barrier_kcal = lit_params
+                # lit_params is (A, Ea, source, quality)
+                A_lit, barrier_lit, source_q_lit, _ = lit_params
+                A = float(A_lit)
+                barrier_kcal = float(barrier_lit)
+                source_quality = str(source_q_lit)
 
         # Apply pH/Environment multipliers (Phase 16.2 fix)
         if conditions and reaction_family:
@@ -111,12 +169,11 @@ class CanteraExporter:
                 counts[n] = counts.get(n, 0) + 1
             return " + ".join([(f"{v} " if v > 1 else "") + k for k, v in counts.items()])
 
-        reaction_str = f"{group_and_count(r_names)} <=> {group_and_count(p_names)}"
+        reaction_str = f"{group_and_count(r_names)} => {group_and_count(p_names)}"
         
         # Scale A-factor for trimolecular reactions to reduce stiffness (Phase 16.3 fix)
-        # Standard collision theory: A_tri << A_bi
         if len(reactants) >= 3:
-            A = A * 1e-4
+            A = float(A) * 1e-4
 
         self.reactions.append({
             "equation": reaction_str,
@@ -124,7 +181,8 @@ class CanteraExporter:
                 "A": A,
                 "b": b,
                 "Ea": f"{barrier_kcal} kcal/mol"
-            }
+            },
+            "note": f"Source: {source_quality} ({reaction_family})"
         })
 
     def export_yaml(self, output_path: str):
@@ -133,53 +191,62 @@ class CanteraExporter:
         for s in self.species.values():
             elements.update(s["composition"].keys())
             
-        data = {
+        # Explicit typing helps some linters with the heterogeneous dict
+        data: Dict[str, Any] = {
             "generator": "Maillard Framework CanteraExporter",
             "cantera-version": "3.0.0",
-            "date": "2026-03-08",
+            "date": "2026-03-11",
             "units": {"length": "m", "quantity": "kmol", "mass": "kg", "time": "s", "energy": "J"},
             "phases": [{
                 "name": "maillard_phase",
-                # NOTE (Phase J): The Maillard reaction occurs in an aqueous / semi-solid matrix. 
-                # We use ideal-gas mechanics in Cantera purely as a lightweight ODE integrator.
-                # Therefore, absolute volumetric concentrations (kmol/m^3) generated by Cantera 
-                # must be interpreted as relative yields/mole-fractions, until a custom 
-                # IdealSolidSolution phase with explicit molar volumes is implemented.
-                "thermo": "ideal-gas", 
+                "thermo": "ideal-condensed",
                 "species": [s["name"] for s in self.species.values()],
-                "kinetics": "gas", 
+                "kinetics": "gas",
                 "reactions": "all",
+                "standard-concentration-basis": "unity",
                 "state": {"T": 423.15, "P": 101325}
             }],
             "species": [],
-            "reactions": self.reactions
+            "reactions": []
         }
+        
+        # Format reactions as irreversible to avoid thermodynamic bias (P0 fix)
+        for r in self.reactions:
+            cantera_reac = r.copy()
+            cantera_reac["reversible"] = False
+            data["reactions"].append(cantera_reac)
         
         from src.thermo import get_nasa_coefficients
         
         for s in self.species.values():
             try:
+                # P3 Fix: get_nasa_coefficients now returns 14 floats (2 ranges)
                 coeffs = get_nasa_coefficients(s["smiles"])
                 thermo_block = {
                     "model": "NASA7",
-                    "temperature-ranges": [300.0, 1000.0],
-                    "data": [coeffs]
+                    "temperature-ranges": [300.0, 1000.0, 3000.0],
+                    "data": [coeffs[:7], coeffs[7:]]
                 }
             except Exception as e:
                 # Fallback to constant-cp if estimation fails
                 print(f"  Warning: Thermo estimation failed for {s['name']} ({s['smiles']}): {e}")
                 thermo_block = {
                     "model": "constant-cp",
-                    "t0": 273.15,
+                    "t0": 298.15,
                     "h0": 0.0,
                     "s0": 0.0,
-                    "cp0": 75000.0
+                    "cp0": 150000.0 # Higher for condensed phase
                 }
 
+            # R.1: Each species needs an equation-of-state block for ideal-condensed
             data["species"].append({
                 "name": s["name"],
                 "composition": s["composition"],
-                "thermo": thermo_block
+                "thermo": thermo_block,
+                "equation-of-state": {
+                    "model": "constant-volume",
+                    "molar-volume": s["molar_volume"],
+                }
             })
             
         with open(output_path, "w") as f:

@@ -77,7 +77,7 @@ def test_canonical_systems(system_key, regression_data, results_db):
         products = [s.smiles for s in step.products]
         
         # Dual-lookup barrier
-        barrier_kcal, _ = results_db.get_best_barrier(reactants, products, step.reaction_family)
+        barrier_kcal, _, _ = results_db.get_best_barrier(reactants, products, step.reaction_family)
         
         # Add species with names
         for s in step.reactants + step.products:

@@ -161,12 +161,12 @@ class Recommender:
                     can = _canon(data["smiles"])
                     target_lookup[can] = {"name": name, "type": t_type, "data": data}
 
-        # tracking dict: canon_smiles -> (span, concentration, depth, weight)
+        # tracking dict: canon_smiles -> (span, concentration, depth, weight, uncertainty)
         tracking = {}
         # Pre-calculate exp(0) for initial precursors
         import math
         for s, conc in initial_concentrations.items():
-            tracking[_canon(s)] = (0.0, conc, 0, conc * 1.0)
+            tracking[_canon(s)] = (0.0, conc, 0, conc * 1.0, 0.0)
 
         changed = True
         iterations = 0
@@ -178,7 +178,8 @@ class Recommender:
             
             for step in steps:
                 step_key = f"{'+'.join(sorted(r.smiles for r in step.reactants))}->{'+'.join(sorted(p.smiles for p in step.products))}"
-                barrier = barriers_dict.get(step_key, 99.0)
+                barrier_data = barriers_dict.get(step_key, (99.0, 5.0))
+                barrier, step_unc = barrier_data if isinstance(barrier_data, tuple) else (barrier_data, 5.0)
                 
                 r_canons = [_canon(r.smiles) for r in step.reactants]
                 p_canons = [_canon(p.smiles) for p in step.products]
@@ -187,6 +188,7 @@ class Recommender:
                 # The limiting concentration is the MIN of all reactants
                 # The depth is the MAX depth of all reactants + 1
                 max_r_dist = 0.0
+                max_r_unc = 0.0
                 min_r_conc = float('inf')
                 max_r_depth = 0
                 reachable = True
@@ -195,8 +197,9 @@ class Recommender:
                     if r not in tracking:
                         reachable = False
                         break
-                    r_span, r_conc, r_depth, r_weight = tracking[r]
+                    r_span, r_conc, r_depth, r_weight, r_unc = tracking[r]
                     max_r_dist = max(max_r_dist, r_span)
+                    max_r_unc = max(max_r_unc, r_unc)
                     min_r_conc = min(min_r_conc, r_conc)
                     max_r_depth = max(max_r_depth, r_depth)
                     
@@ -204,7 +207,21 @@ class Recommender:
                     continue
                     
                 # Path properties to products via this step
-                path_span = max(max_r_dist, barrier)
+                # Expert Refinement (R.7): Use sequential bottleneck (microkinetics)
+                # Instead of max(barriers), we use the cumulative resistance:
+                # exp(G_eff/RT) = sum(exp(G_i/RT))
+                import math
+                RT = 0.001987 * temperature_kelvin
+                
+                # To avoid overflow, we use the log-sum-exp trick:
+                # ln(sum(exp(x_i))) = x_max + ln(sum(exp(x_i - x_max)))
+                # x_max = max(max_r_dist, barrier)
+                # For sequential bottleneck, we propagate uncertainty as the max of reactant/step uncertainties
+                # (since they are typically dominated by the rate-limiting step's error)
+                x_max = max(max_r_dist, barrier)
+                path_span = x_max + RT * math.log(math.exp((max_r_dist - x_max)/RT) + math.exp((barrier - x_max)/RT))
+                path_unc = max(max_r_unc, step_unc)
+                
                 path_conc = min_r_conc
                 path_depth = max_r_depth + 1
                 
@@ -243,17 +260,17 @@ class Recommender:
                 for p in p_canons:
                     # Update if new span is lower OR if span is same but weight is higher
                     if p not in tracking or path_span < tracking[p][0]:
-                        tracking[p] = (path_span, path_conc, path_depth, path_weight)
+                        tracking[p] = (path_span, path_conc, path_depth, path_weight, path_unc)
                         changed = True
                     elif path_span == tracking[p][0] and path_weight > tracking[p][3]:
-                        tracking[p] = (path_span, path_conc, path_depth, path_weight)
+                        tracking[p] = (path_span, path_conc, path_depth, path_weight, path_unc)
                         changed = True
 
         # Identify which targets were produced
         active_pathways = []
-        for p_canon, (span, conc, depth, weight) in tracking.items():
-            if p_canon in target_lookup and span < float('inf') and span >= 0.0:
-                t_info = target_lookup[p_canon]
+        for p_canon, (span, conc, depth, weight, unc) in tracking.items():
+            t_info = target_lookup.get(p_canon)
+            if t_info and span < float('inf') and span >= 0.0:
                 
                 # We mock a Species object for the old table formatter
                 class MockTarget:
@@ -265,6 +282,7 @@ class Recommender:
                     "span": span,
                     "concentration": conc,
                     "weighted_flux": weight,
+                    "span_uncertainty": tracking[p_canon][4],
                     "depth": depth,
                     "target": MockTarget(t_info["name"]),
                     "type": t_info["type"],
@@ -314,7 +332,8 @@ class Recommender:
                         
                         if reachable:
                             step_key = f"{'+'.join(sorted(r.smiles for r in step.reactants))}->{'+'.join(sorted(p.smiles for p in step.products))}"
-                            barrier = barriers_dict.get(step_key, 99.0)
+                            barrier_data = barriers_dict.get(step_key, (99.0, 5.0))
+                            barrier = barrier_data[0] if isinstance(barrier_data, tuple) else barrier_data
                             path_barrier = max(max_r_dist, barrier)
                             sb_weights += _weight(path_barrier)
             
@@ -346,7 +365,8 @@ class Recommender:
                     if not reachable: continue
                     
                     step_key = f"{'+'.join(sorted(r.smiles for r in step.reactants))}->{'+'.join(sorted(p.smiles for p in step.products))}"
-                    barrier = barriers_dict.get(step_key, 99.0)
+                    barrier_data = barriers_dict.get(step_key, (99.0, 5.0))
+                    barrier = barrier_data[0] if isinstance(barrier_data, tuple) else barrier_data
                     path_barrier = max(max_r_dist, barrier)
                     weight = _weight(path_barrier)
                     

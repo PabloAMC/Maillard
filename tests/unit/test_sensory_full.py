@@ -41,7 +41,8 @@ def test_psychophysical_scaling():
     predictor.db.compounds["TestCompound"] = mock_entry
     
     profile = predictor.predict_profile({"TestCompound": 100.0})
-    assert profile["TestCompound"] == pytest.approx(10.0)
+    # profile["TestCompound"] is now (intensity, uncertainty)
+    assert profile["TestCompound"][0] == pytest.approx(10.0)
 
 def test_radar_aggregation():
     """Verify that intensities are correctly grouped into categories."""
@@ -58,8 +59,9 @@ def test_radar_aggregation():
     
     radar = predictor.get_radar_data(mock_conc)
     
-    assert radar["roasted"] == pytest.approx(3.162, rel=1e-3)
-    assert radar["beany"] == pytest.approx(3.162, rel=1e-3)
+    # radar[tag] is now (score, uncertainty)
+    assert radar["roasted"][0] == pytest.approx(3.162, rel=1e-3)
+    assert radar["beany"][0] == pytest.approx(3.162, rel=1e-3)
 
 def test_sensory_headspace_integration():
     """Verify end-to-end headspace aware sensory scoring."""
@@ -76,12 +78,12 @@ def test_sensory_headspace_integration():
     # Intensity = sqrt(0.072) ~ 0.27
     
     profile = predictor.predict_profile({"Hexanal": 1.0}, temp_c=25.0, fat_fraction=0.1)
-    assert profile["Hexanal"] < 0.3
+    assert profile["Hexanal"][0] < 0.3
     
     # Same concentration, but 0% fat -> much higher intensity
     profile_pure = predictor.predict_profile({"Hexanal": 1.0}, temp_c=25.0, fat_fraction=0.0)
     # Kaw = 0.015, conc_air = 0.015, OAV = 0.015 / 0.0045 = 3.33, Intensity = sqrt(3.33) ~ 1.82
-    assert profile_pure["Hexanal"] > 1.5
+    assert profile_pure["Hexanal"][0] > 1.5
 
 if __name__ == "__main__":
     pytest.main([__file__])

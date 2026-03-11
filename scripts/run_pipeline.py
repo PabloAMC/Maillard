@@ -214,19 +214,19 @@ def main():
             barriers_dict[step_key] = bar
         else:
             # Calculate boundaries from shared constants
-            bar = get_barrier(step.reaction_family)
+            bar_val, unc = get_barrier(step.reaction_family)
                 
             # Apply condition modifiers
             ph_mult = conditions.get_ph_multiplier(step.reaction_family or "")
             
             # Accelerate by dividing barrier if multiplier > 1 (higher kinetic probability)
-            adjusted_bar = bar / ph_mult
+            adjusted_bar = bar_val / ph_mult
 
             # 3a. Apply Catalyst Heme Heuristic 
             if args.catalyst == "heme" and step.reaction_family in HEME_CATALYST_FAMILIES:
                 adjusted_bar -= HEME_CATALYST_REDUCTION 
                 
-            barriers_dict[step_key] = adjusted_bar
+            barriers_dict[step_key] = (adjusted_bar, unc)
             
     print("\n\nScreening complete.")
 

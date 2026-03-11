@@ -89,11 +89,11 @@ def test_recommender_predict_from_steps():
     p2 = predictions[1]
     
     assert p1["name"] == "2-Methyl-3-furanthiol (MFT)"
-    assert p1["span"] == 30.0
+    assert p1["span"] == pytest.approx(30.0, abs=1e-5)
     assert p1["type"] == "desirable"
     
     assert p2["name"] == "Hexanal"
-    assert p2["span"] == 45.0
+    assert p2["span"] == pytest.approx(45.0, abs=1e-5)
     assert p2["type"] == "competing"
 
     # Cleanup mock if needed

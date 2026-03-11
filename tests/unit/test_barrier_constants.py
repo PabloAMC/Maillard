@@ -16,8 +16,11 @@ from src.barrier_constants import (
     DEFAULT_BARRIER,
     HEME_CATALYST_REDUCTION,
     HEME_CATALYST_FAMILIES,
-    get_barrier,
+    get_barrier as _get_barrier,
 )
+
+def get_barrier(family):
+    return _get_barrier(family)[0]
 
 
 class TestFastBarriersConstants:

@@ -37,10 +37,19 @@ class SolvationEngine:
         if crest_bin is None:
             # Auto-resolve relative to this file's parent (project root)
             project_root = Path(__file__).parent.parent
-            candidate = project_root / "conda_env" / "bin" / "crest"
-            if candidate.exists():
-                crest_bin = str(candidate)
-            else:
+            candidates = [
+                project_root / "conda_env" / "bin" / "crest",
+                Path("/opt/homebrew/Caskroom/miniforge/base/bin/crest"),
+                Path("/Users/pabloantoniomorenocasares/miniforge3/bin/crest"),
+                Path("/Users/pabloantoniomorenocasares/miniconda3/bin/crest")
+            ]
+            
+            for candidate in candidates:
+                if candidate.exists():
+                    crest_bin = str(candidate)
+                    break
+                    
+            if not crest_bin:
                 # Fall back to PATH lookup
                 crest_bin = shutil.which("crest") or "crest"
 

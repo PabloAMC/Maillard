@@ -754,6 +754,156 @@ def _thiol_addition(pool_species: List[Species]) -> List[ElementaryStep]:
     return steps
 
 
+def _mft_pathway(pool_species: List[Species]) -> List[ElementaryStep]:
+    """
+    Template for 2-methyl-3-furanthiol (MFT) formation (Critical Meat Aroma).
+    Path: 3-deoxyosone -> 1,4-dideoxyosone (1,4-DDO) -> MFT.
+    Balanced: 
+    C5H8O4 (deoxyosone) + H2S -> C5H6OS (MFT) + 2H2O.
+    """
+    steps = []
+    h2s = next((s for s in pool_species if s.smiles == "S"), None)
+    if not h2s:
+        return steps
+        
+    water = Species("water", "O")
+    
+    for s in pool_species:
+        if "deoxyosone" in s.label.lower() and (_is_pentose(s) or "ribose" in s.label.lower()):
+            # Filter out N-containing species; they require deamination first (R.12)
+            if "N" in s.smiles:
+                continue
+                
+            # 1. Net Dehydration/Thiolation to MFT
+            # Balanced: C5H8O4 + 2 H2S -> C5H6OS + 3 H2O + S
+            mft = Species(label="2-methyl-3-furanthiol", smiles="Cc1c(S)cco1")
+            sulfur = Species(label="elemental-sulfur", smiles="[S]")
+            steps.append(ElementaryStep(
+                reactants=[s, h2s, h2s],
+                products=[mft, sulfur, water, water, water],
+                reaction_family="Thiol_Addition"
+            ))
+            
+    return steps
+
+
+def _sulfur_volatiles_pathway(pool_species: List[Species]) -> List[ElementaryStep]:
+    """
+    Template for Methionine-derived sulfur volatiles (MeSH, DMDS, DMTS).
+    Methional (CSCCC=O) -> Methanethiol (CS) + Acrolein (C=CC=O).
+    2x Methanethiol (CS) -> DMDS (CSSC) + H2.
+    DMDS + Methanethiol -> DMTS (CSSSC) + H2.
+    """
+    steps = []
+    hydro = Species("H2", "[HH]")
+    
+    methionals = [s for s in pool_species if s.label == "methional" or s.smiles == "CSCCC=O"]
+    for m in methionals:
+        mesh = Species(label="methanethiol", smiles="CS")
+        acrolein = Species(label="acrolein", smiles="C=CC=O")
+        steps.append(ElementaryStep(
+            reactants=[m],
+            products=[mesh, acrolein],
+            reaction_family="Strecker_Degradation"
+        ))
+        
+    mesh_list = [s for s in pool_species if s.label == "methanethiol" or s.smiles == "CS"]
+    dmds_list = []
+    for m1 in mesh_list:
+        dmds = Species(label="dimethyl-disulfide", smiles="CSSC")
+        steps.append(ElementaryStep(
+            reactants=[m1, m1],
+            products=[dmds, hydro],
+            reaction_family="Thiol_Oxidation"
+        ))
+        dmds_list.append(dmds)
+        
+    for d in dmds_list:
+        for m1 in mesh_list:
+            dmts = Species(label="dimethyl-trisulfide", smiles="CSSSC")
+            steps.append(ElementaryStep(
+                reactants=[d, m1],
+                products=[dmts, hydro],
+                reaction_family="Thiol_Oxidation"
+            ))
+            
+    return steps
+
+
+
+
+def _deamination_step(pool_species: List[Species]) -> List[ElementaryStep]:
+    """
+    R.12: Hydrolytic deamination of alpha-aminoketones back to dicarbonyls.
+
+    Covers ALL alpha-aminoketones produced in the network — from Strecker degradation
+    (aminoacetone, amino-pyruvaldehyde, 3-amino-2-butanone, …) and from generic
+    deoxyosone aminoketones.
+
+    Mechanism:
+        alpha-aminoketone + H2O → dicarbonyl + NH3 + H2
+
+    Atom balance check (aminoacetone example):
+        CC(=O)CN  +  H2O  →  CC(=O)C=O  +  NH3  +  H2
+        C3H7NO    +  H2O  →  C3H4O2     +  NH3  +  H2
+        C3H9NO2          =   C3H9NO2           ✓
+    """
+    steps = []
+    water = Species("water", "O")
+    nh3   = Species("ammonia", "N")
+    h2    = Species("H2", "[HH]")
+
+    # SMARTS: alpha-amino-ketone pattern — NH2 on the carbon directly adjacent to a C=O.
+    # [C:1](=[O:2])[CH1:3]([NH2:4]) — the CH must carry exactly one H so the product
+    # gets a proper carbonyl after deamination.
+    _AK_SMARTS = Chem.MolFromSmarts("[C:1](=[O:2])[CH1:3]([NH2:4])")
+    rxn = AllChem.ReactionFromSmarts("[C:1](=[O:2])[CH1:3]([NH2:4])>>[C:1](=[O:2])[C:3]=[O]")
+
+    for s in pool_species:
+        mol = _mol(s.smiles)
+        if mol is None:
+            continue
+
+        # Only process small-to-medium intermediates (volatiles / amino-ketones)
+        if _mw(s.smiles) > MAX_MW:
+            continue
+
+        # Structural gate: must contain an alpha-aminoketone motif
+        if not mol.HasSubstructMatch(_AK_SMARTS):
+            continue
+
+        # Skip if this is a free amino acid precursor — they have their own templates
+        if any(aa in s.label.lower() for aa in [
+            "glycine", "alanine", "leucine", "isoleucine", "valine",
+            "phenylalanine", "methionine", "lysine", "cysteine",
+            "asparagine", "serine", "threonine", "arginine"
+        ]):
+            continue
+
+        prods = rxn.RunReactants((mol,))
+        if not prods:
+            continue
+
+        try:
+            Chem.SanitizeMol(prods[0][0])
+            dic_smiles = Chem.MolToSmiles(prods[0][0])
+
+            # Derive label: "amino-D-ribose-deoxyosone-3" -> "D-ribose-deoxyosone-3"
+            # For generic Strecker aminoketones: "amino-pyruvaldehyde" -> "pyruvaldehyde"
+            dic_label = s.label.replace("amino-", "").replace("Amino-", "")
+
+            dic = Species(label=dic_label, smiles=dic_smiles)
+            steps.append(ElementaryStep(
+                reactants=[s, water],
+                products=[dic, nh3, h2],
+                reaction_family="Deamination"
+            ))
+        except Exception:
+            continue
+
+    return steps
+
+
 def _lipid_maillard_synergy(pool_species: List[Species]) -> List[ElementaryStep]:
     """
     Lipid Aldehyde + alpha-aminoketone + H2S -> 2-Alkylthiazole + 2 H2O + H2.
@@ -1211,9 +1361,30 @@ class SmirksEngine:
                 all_steps.append(step)
                 add_step_products(step)
 
+        # 3e-0. R.12: Deamination (Must happen before volatile templates)
+        deam_steps = _deamination_step(pool_list())
+        for step in deam_steps:
+            if not _step_exists(step, all_steps):
+                all_steps.append(step)
+                add_step_products(step)
+
         # 3e. Thiol Addition (Furfural + H2S + H2 -> FFT)
         ta_steps = _thiol_addition(pool_list())
         for step in ta_steps:
+            if not _step_exists(step, all_steps):
+                all_steps.append(step)
+                add_step_products(step)
+
+        # 3e-2. MFT Formation (Phase R.2 Fix)
+        mft_steps = _mft_pathway(pool_list())
+        for step in mft_steps:
+            if not _step_exists(step, all_steps):
+                all_steps.append(step)
+                add_step_products(step)
+
+        # 3e-3. Methionine Sulfur Volatiles (Phase R.2 Fix)
+        sulf_steps = _sulfur_volatiles_pathway(pool_list())
+        for step in sulf_steps:
             if not _step_exists(step, all_steps):
                 all_steps.append(step)
                 add_step_products(step)

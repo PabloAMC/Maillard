@@ -247,16 +247,20 @@ SMALL_MOLECULE_THERMO = {
 
 def get_nasa_coefficients(smiles: str) -> List[float]:
     """
-    Returns 7 NASA polynomial coefficients for the given SMILES.
-    Fits over T=300-1000K. 
-    Returns: [a1, a2, a3, a4, a5, a6, a7]
+    Returns 14 NASA polynomial coefficients for the given SMILES (two ranges).
+    Low range: 300-1000 K. High range: 1000-3000 K.
+    Returns: [low_a1..a7, high_a1..a7]
     """
     # 1. Specialized Literature Overrides
     if smiles in SMALL_MOLECULE_THERMO:
-        return SMALL_MOLECULE_THERMO[smiles]
+        # Standard NASA-7 for small molecules usually has 14 or 15 coeffs. 
+        # We'll duplicate the single range we have into both for these.
+        c = SMALL_MOLECULE_THERMO[smiles]
+        return c + c
+        
     if smiles == "[H][H]": smiles = "[HH]" # Normalization
     
-    # 2. Joback Estimation
+    # 2. Joback Estimation (Low Range: 300-1000K)
     res = JobackEstimator.estimate(smiles)
     R = gas_constant
     
@@ -265,8 +269,8 @@ def get_nasa_coefficients(smiles: str) -> List[float]:
     Cp = a + b*T + c*T**2 + d*T**3 
     
     # Cp/R = a1 + a2T + a3T^2 + a4T^3 + a5T^4
-    coeffs = np.polyfit(T, Cp/R, 4)[::-1]
-    a1, a2, a3, a4, a5 = coeffs
+    low_coeffs = np.polyfit(T, Cp/R, 4)[::-1]
+    a1, a2, a3, a4, a5 = low_coeffs
     
     # a6 (Enthalpy offset)
     T0 = 298.15
@@ -276,5 +280,24 @@ def get_nasa_coefficients(smiles: str) -> List[float]:
     # a7 (Entropy offset)
     S0 = (res["H298"] - res["G298"]) / T0
     a7 = (S0 / R) - (a1*np.log(T0) + a2*T0 + a3*T0**2/2 + a4*T0**3/3 + a5*T0**4/4)
+    low_range = [float(x) for x in [a1, a2, a3, a4, a5, a6, a7]]
     
-    return [float(x) for x in [a1, a2, a3, a4, a5, a6, a7]]
+    # 3. Continuous High Range (1000-3000K)
+    # We maintain the 1000K values but zero out the slopes to avoid wild extrapolation.
+    # To ensure continuity in H and S at Tmid (1000K), we calculate high-range a6 and a7.
+    T_mid = 1000.0
+    
+    # Low-range Cp/R, H/RT, S/R at T_mid
+    a1, a2, a3, a4, a5, a6_low, a7_low = low_range
+    cp_r_mid = a1 + a2*T_mid + a3*T_mid**2 + a4*T_mid**3 + a5*T_mid**4
+    h_rt_mid = a1 + a2*T_mid/2 + a3*T_mid**2/3 + a4*T_mid**3/4 + a5*T_mid**4/5 + a6_low/T_mid
+    s_r_mid = a1*np.log(T_mid) + a2*T_mid + a3*T_mid**2/2 + a4*T_mid**3/3 + a5*T_mid**4/4 + a7_low
+    
+    # High range a1 set to match Cp/R at Tmid
+    high_a1 = cp_r_mid
+    high_6 = (h_rt_mid * T_mid) - (high_a1 * T_mid)
+    high_7 = s_r_mid - (high_a1 * np.log(T_mid))
+    
+    high_range = [float(high_a1), 0.0, 0.0, 0.0, 0.0, float(high_6), float(high_7)]
+    
+    return low_range + high_range

@@ -144,7 +144,7 @@ class KineticsEngine:
             raise ImportError("Cantera is not installed. Please run 'pip install cantera'.")
 
         # 1. Load the mechanism
-        gas = ct.Solution(mechanism_yaml)
+        phase = ct.Solution(mechanism_yaml)
         
         # Initial T
         if temperature_profile:
@@ -153,25 +153,26 @@ class KineticsEngine:
         else:
             T_init = temperature_k or self.T
             
-        gas.TP = T_init, 101325  # Standard pressure
+        phase.TP = T_init, 101325  # Standard pressure
         
         # 2. Set initial state
-        gas.X = initial_concentrations
+        phase.X = initial_concentrations
         
         # 3. Create a batch reactor
-        # We use an IdealGasReactor but we will manually update its temperature
-        # at each step to simulate a defined T(t) profile.
-        # clone=False suppresses Cantera 3.2+ deprecation warnings
-        r = ct.IdealGasConstPressureReactor(gas, clone=False)
-        r.energy_enabled = False
+        # R.1: Use ConstPressureMoleReactor — compatible with incompressible
+        # condensed-phase models (ideal-condensed). Unlike MoleReactor (constant
+        # volume), this reactor varies volume at constant pressure, avoiding
+        # the "setDensity not available" error on incompressible phases.
+        r = ct.ConstPressureMoleReactor(phase, energy='off', clone=False)
         sim = ct.ReactorNet([r])
+
         
         # 4. Integrate
         n_points = 100
         time_points = np.linspace(time_span[0], time_span[1], n_points)
-        results = {name: [] for name in gas.species_names}
+        results = {name: [] for name in phase.species_names}
         # Also store mole fractions for T/P invariant conversion math
-        for name in gas.species_names:
+        for name in phase.species_names:
             results[f"{name}_X"] = []
             
         results["time"] = []
@@ -181,35 +182,28 @@ class KineticsEngine:
             # Update temperature if profile provided
             if temperature_profile:
                 T_curr = float(np.interp(t, t_pts, t_vals))
-                gas.TP = T_curr, 101325
+                phase.TP = T_curr, 101325
                 r.syncState() 
             
             sim.advance(t)
+            r.syncState()
             
             results["time"].append(t)
-            results["temperature"].append(gas.T)
-            for i, name in enumerate(gas.species_names):
-                results[name].append(gas.concentrations[i])
-                results[f"{name}_X"].append(gas.X[i])
+            results["temperature"].append(phase.T)
+            for i, name in enumerate(phase.species_names):
+                results[name].append(phase.concentrations[i])
+                results[f"{name}_X"].append(phase.X[i])
+
                 
         # Convert to numpy arrays
         return {k: np.array(v) for k, v in results.items()}
 
 if __name__ == "__main__":
-    # Quick sanity check for a 20 kcal/mol barrier at 150 C (423 K)
-    engine = KineticsEngine(temperature_k=423.15)
-    k = engine.get_rate_constant(20.0)
-    print(f"Rate constant for 20 kcal/mol at 150C: {k:.2e} s^-1")
-    
-    # 50% conversion time (t1/2 = ln(2)/k)
-    t_half_min = (np.log(2) / k) / 60
-    print(f"Half-life: {t_half_min:.2f} minutes")
-
-if __name__ == "__main__":
-    # Quick sanity check for a 20 kcal/mol barrier at 150 C (423 K)
-    engine = KineticsEngine(temperature_k=423.15)
-    k = engine.get_rate_constant(20.0)
-    print(f"Rate constant for 20 kcal/mol at 150C: {k:.2e} s^-1")
+    from src.conditions import ReactionConditions
+    ke = KineticsEngine()
+    # Test alanine + glyoxal
+    k = ke.get_rate_constant(15.0, 423.15, ReactionConditions(pH=6.5))
+    print(f"Rate constant: {k:.2e} s^-1")
     
     # 50% conversion time (t1/2 = ln(2)/k)
     t_half_min = (np.log(2) / k) / 60
