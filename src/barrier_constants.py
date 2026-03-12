@@ -73,10 +73,15 @@ FAST_BARRIERS: Dict[str, Tuple[float, str]] = {
     "thiamine_degradation": (25.0,  "Thiamine thermolysis; moderate barrier"),
     "additive_degradation": (25.0,  "Generic additive degradation"),
     "glutathione_cleavage": (22.0,  "GSH peptide bond cleavage"),
+
+    # ── Lipid Oxidation (Phase 19) ──────────────────────────────────
+    "lipid_homolysis":      (42.0,  "O-O bond cleavage in hydroperoxides; high barrier"),
+    "beta_scission":        (22.0,  "β-scission of alkoxy radicals; moderate barrier"),
+    "radical_crosstalk":    (15.0,  "Radical + H2S collisions; fast"),
 }
 
 # Default barrier when no family pattern matches
-DEFAULT_BARRIER: float = 40.0
+DEFAULT_BARRIER: float = 45.0
 
 # Heme catalyst barrier reduction (kcal/mol)
 HEME_CATALYST_REDUCTION: float = 5.0
@@ -146,6 +151,12 @@ def get_barrier(reaction_family: str) -> Tuple[float, float]:
         fm = "beta_elimination"
     elif "ring" in fm or "mutarotation" in fm:
         fm = "ring_opening"
+    elif "homolysis" in fm:
+        fm = "lipid_homolysis"
+    elif "beta_scission" in fm:
+        fm = "beta_scission"
+    elif "crosstalk" in fm:
+        fm = "radical_crosstalk"
         
     if fm in FAST_BARRIERS:
         return FAST_BARRIERS[fm][0], 3.5

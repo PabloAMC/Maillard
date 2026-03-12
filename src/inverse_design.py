@@ -150,6 +150,7 @@ class InverseDesigner:
             additives = form.get("additives", [])
             lipids = form.get("lipids", [])
             catalyst = form.get("catalyst", None)
+            interventions = form.get("interventions", [])
             
             # Combine all names
             all_names = sugars + amino_acids + additives + lipids
@@ -173,6 +174,19 @@ class InverseDesigner:
             # Apply heme catalyst heuristic to Strecker/Pyrazines if formulation has it
             apply_heme = (catalyst == "heme" or global_conditions.pH > 7)  # Note: just relying on simple logic for demo
             
+            # Phase 20: Pre-calculate intervention modifiers
+            # Mapping: {family_name: delta_kcal_mol}
+            modifiers = {}
+            if "calcium_carbonate" in interventions:
+                # Suppresses acrylamide by lowering temperature/stabilizing intermediates (heuristic: +5 kcal/mol to acrylamide)
+                # Wait, the plan said -5 kcal? Usually calcium carbonate reduces acrylamide.
+                # If we WANT to suppress it, we should INCREASE the barrier for the safety-marker path.
+                modifiers["Safety_Risk_Acrylamide"] = 5.0
+            if "rosemary_extract" in interventions:
+                # Natural antioxidant inhibits lipid oxidation
+                modifiers["Lipid_Homolysis"] = 8.0
+                modifiers["Beta_Scission"] = 3.0
+            
             engine = SmirksEngine(cond)
             steps = engine.enumerate(precursors, max_generations=4)
             
@@ -192,9 +206,14 @@ class InverseDesigner:
                     else:
                         bar += 20.0
                     
-                # Heme heuristic application
                 if apply_heme and step.reaction_family in HEME_CATALYST_FAMILIES:
                     bar -= HEME_CATALYST_REDUCTION
+                
+                # Phase 20: Apply intervention modifiers
+                family = step.reaction_family or ""
+                for mod_fam, delta in modifiers.items():
+                    if mod_fam.lower() in family.lower():
+                        bar += delta
                     
                 rxn_key = f"{'+'.join(sorted(r.smiles for r in step.reactants))}->{'+'.join(sorted(p.smiles for p in step.products))}"
                 heuristic_barriers[rxn_key] = (max(0.0, bar), unc)

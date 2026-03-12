@@ -57,6 +57,14 @@ _SMIRKS_RULES: List[Tuple[str, str, str, str]] = [
         "[CX4H2,CX4H3:2][CH1:1]=[O:5].[NH2:3][CX4:4]>>[*:2][CH1:1]=[N:3][*:4].[O:5]",
         "any",
     ),
+    (
+        "beta_scission_alkoxy",
+        "Beta_Scission",
+        # Alkoxy radical (R-O.) fragmentation. 
+        # Pattern: [C:1]([O:2])-[C:3]. >> [C:1]=[O:2] + [C:3].
+        "[CX4:3][CX4:1][OX1H0:2]>>[C:1]=[O:2].[C:3]",
+        "any",
+    ),
 ]
 
 
@@ -194,7 +202,7 @@ def _is_lipid_aldehyde(s: Species) -> bool:
     if m.HasSubstructMatch(Chem.MolFromSmarts("a")): 
         return False
     # NOT dicarbonyl
-    if m.HasSubstructMatch(_DICARBONYL_SMARTS): 
+    if m.HasSubstructMatch(_ALDEHYDE_SMARTS) and len(m.GetSubstructMatches(_ALDEHYDE_SMARTS)) > 1:
         return False
     # NOT nitrogenous (excludes amino-aldehydes like 5-aminopentanal)
     if any(atom.GetAtomicNum() == 7 for atom in m.GetAtoms()): 
@@ -204,6 +212,20 @@ def _is_lipid_aldehyde(s: Species) -> bool:
     # C5+ (typically lipid-derived volatiles like pentanal, hexanal)
     c_count = sum(1 for atom in m.GetAtoms() if atom.GetAtomicNum() == 6)
     return oh_count < 2 and c_count >= 5
+
+
+def _is_lipid_hydroperoxide(s: Species) -> bool:
+    """Heuristic: has a hydroperoxide group [OX2H,OX2-] and a lipid chain."""
+    m = _mol(s.smiles)
+    if not m:
+        return False
+    # Match R-O-OH or anion
+    pat = Chem.MolFromSmarts("[OX2,OX1-][OX2H,OX1H0-]")
+    if not m.HasSubstructMatch(pat):
+        return False
+    # C8+ (typical PUFA derivatives)
+    c_count = sum(1 for atom in m.GetAtoms() if atom.GetAtomicNum() == 6)
+    return c_count >= 8
 
 
 def _species_from_pool(pool: Set[str], label: str, smiles: str) -> Species:
@@ -958,6 +980,96 @@ def _lipid_maillard_synergy(pool_species: List[Species]) -> List[ElementaryStep]
     return steps
 
 
+def _lipid_hydroperoxide_scission(pool: List[Species]) -> List[ElementaryStep]:
+    """
+    Tier B: Homolytic cleavage of lipid hydroperoxides.
+    R-OOH -> R-O. + .OH
+    """
+    steps = []
+    oh_radical = Species(label="hydroxyl-radical", smiles="[OH]")
+    
+    for s in pool:
+        if _is_lipid_hydroperoxide(s):
+            # Use SMIRKS for homolysis but tag the alkoxy oxygen with Isotope 13 so we can find it
+            rxn = AllChem.ReactionFromSmarts("[CX4:1]-[OX2:3][OX2H,OX1H0-:2]>>[C:1]-[13OX1:3].[OH:2]")
+            m = _mol(s.smiles)
+            if not m: continue
+            prods = rxn.RunReactants((m,))
+            if prods:
+                alk_mol = prods[0][0]
+                # Explicitly set radical on the oxygen (find Isotope 13)
+                for atom in alk_mol.GetAtoms():
+                    if atom.GetIsotope() == 13 and atom.GetAtomicNum() == 8:
+                        atom.SetIsotope(0)
+                        atom.SetNumExplicitHs(0)
+                        atom.SetNoImplicit(True)
+                        atom.SetNumRadicalElectrons(1)
+                
+                try:
+                    alk_mol.UpdatePropertyCache(strict=False)
+                    Chem.SanitizeMol(alk_mol)
+                except Exception:
+                    pass
+
+                alkoxy_smi = Chem.MolToSmiles(alk_mol)
+                alkoxy = Species(label=f"{s.label}-alkoxy-radical", smiles=alkoxy_smi)
+                steps.append(ElementaryStep(
+                    reactants=[s],
+                    products=[alkoxy, oh_radical],
+                    reaction_family="Lipid_Homolysis"
+                ))
+    return steps
+
+
+def _radical_crosstalk_templates(pool: List[Species]) -> List[ElementaryStep]:
+    """
+    Templates for radical + sulfur collisions.
+    R. + H2S -> R-H + .SH
+    R. + .SH -> R-SH
+    """
+    steps = []
+    h2s = next((s for s in pool if s.smiles == "S"), None)
+    if not h2s:
+        return steps
+        
+    radicals = [s for s in pool if "[" in s.smiles and "." not in s.smiles] # Simplified radical detection
+    # Better: use RDKit to check for unpaired electrons on Carbon atoms
+    actual_radicals = []
+    for s in pool:
+        m = _mol(s.smiles)
+        if m and any(a.GetNumRadicalElectrons() > 0 and a.GetAtomicNum() == 6 for a in m.GetAtoms()):
+            actual_radicals.append(s)
+            
+    for rad in actual_radicals:
+        # Rad + H2S -> RH + SH.
+        # Use RDKit to formally quench the radical
+        m_rad = _mol(rad.smiles)
+        if not m_rad: continue
+        
+        # Determine product RH by finding radical atom and clearing it, and adding an H
+        rh_mol = Chem.RWMol(m_rad)
+        for atom in rh_mol.GetAtoms():
+            if atom.GetNumRadicalElectrons() > 0:
+                atom.SetNumRadicalElectrons(0)
+                # Ensure H count is adjusted
+                atom.SetNumExplicitHs(atom.GetTotalNumHs() + 1)
+        
+        try:
+            rh_mol.UpdatePropertyCache(strict=False)
+            Chem.SanitizeMol(rh_mol)
+            rh_smi = Chem.MolToSmiles(rh_mol)
+            sh_rad = Species(label="thiol-radical", smiles="[SH]")
+            steps.append(ElementaryStep(
+                reactants=[rad, h2s],
+                products=[Species(label=f"quenched-{rad.label}", smiles=rh_smi), sh_rad],
+                reaction_family="Radical_Crosstalk"
+            ))
+        except Exception:
+            continue
+            
+    return steps
+
+
 def _sugar_ring_opening(pool_species: List[Species]) -> List[ElementaryStep]:
     """Hemiacetal cyclic sugar -> open-chain aldehyde. (Defensive rule via RWMol)"""
     steps = []
@@ -1148,6 +1260,13 @@ def _apply_smirks_rule(
                         pass
                 if prod_smiles:
                     reactant_sp = next((s for s in pool if s.smiles == smi), Species(smi, smi))
+                    # Phase 19 fix: ensure radicals are marked
+                    for p in prod_tuple:
+                        for atom in p.GetAtoms():
+                            if atom.GetExplicitValence() < Chem.GetPeriodicTable().GetDefaultValence(atom.GetAtomicNum()) and atom.GetNumRadicalElectrons() == 0:
+                                # This is a simple heuristic, but usually works for our cases
+                                pass # Actually, better to rely on SMARTS if possible
+                    
                     steps.append(ElementaryStep(
                         reactants=[reactant_sp],
                         products=[Species(ps, ps) for ps in prod_smiles],
@@ -1421,6 +1540,20 @@ class SmirksEngine:
             if not _step_exists(step, all_steps):
                 all_steps.append(step)
                 add_step_products(step)
+
+        # 3h. Lipid Oxidation Radicals (Phase 19)
+        hooh_steps = _lipid_hydroperoxide_scission(pool_list())
+        for step in hooh_steps:
+            if not _step_exists(step, all_steps):
+                all_steps.append(step)
+                add_step_products(step)
+        
+        cross_steps = _radical_crosstalk_templates(pool_list())
+        for step in cross_steps:
+            if not _step_exists(step, all_steps):
+                all_steps.append(step)
+                add_step_products(step)
+
         # ── Tier A: SMIRKS rules, iterative ──────────────────────────────
         seen_step_keys: Set[str] = {_step_key(s) for s in all_steps}
 

@@ -30,24 +30,14 @@ Close your terminal window completely and open a new one to apply the changes.
 
 ### 🍎 macOS Users (Apple Silicon: M1/M2/M3)
 
-Do not attempt to run this natively on macOS ARM64. Current versions of crest contain memory allocation bugs on Apple Silicon that cause fatal crashes. Instead, we will use Docker to run a lightweight, seamless Linux environment right on your Mac:Install OrbStack (Recommended, much faster) or Docker Desktop. 
+Do not attempt to run this natively on macOS ARM64. Instead, we use Docker to run a lightweight Linux environment. 
 
-The easiest way is using Homebrew in your terminal:
-```
-# For OrbStack (Recommended)
-brew install --cask orbstack
+**Quick Start**: See the [README.md](README.md#1-recommended-setup-conda--mamba) for the standard Docker activation commands.
 
-# OR for Docker Desktop
-brew install --cask docker
-```
-Open the OrbStack (or Docker) app once to let it initialize. You can do this by pressing Cmd + Space on your keyboard to open Spotlight Search, typing "OrbStack" (or "Docker"), and pressing Enter.
-
-Open your Mac's Terminal and run this command to start a Linux shell equipped with Miniforge:
-```
-docker run --platform linux/amd64 -it -v "$(pwd):/workspace" -w /workspace condaforge/miniforge3
-```
-
-(Mac users: You will run all of the following commands inside this new container shell).
+**Setup Detail**:
+1. Install OrbStack (Recommended) or Docker Desktop. 
+2. Open your Mac's Terminal and run the `docker run` command provided in the README to start your Linux shell.
+3. All following commands (Section 2-5) must be run **inside** this container shell.
 
 ## 2. Downloading Maillard & Creating the Environment
 First, download the Maillard repository to your computer and enter the directory:
@@ -160,17 +150,7 @@ If you close your terminal or restart your computer, you do not need to reinstal
 
 ### 🍎 macOS Users (Docker/OrbStack)
 
-Open your Mac Terminal and navigate to your project folder: `cd path/to/Maillard`
-
-Restart your existing Linux container:
-```
-docker start -ai maillard_container
-```
-
-Reactivate the software environment inside the container:
-```
-conda activate maillard
-```
+See [README.md](README.md#returning-to-work-macos) for the quick `docker start` and `conda activate` commands.
 
 ### 🐧 Linux & 🪟 Windows (WSL2) Users
 
