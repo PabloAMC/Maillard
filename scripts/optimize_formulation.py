@@ -25,6 +25,7 @@ def main():
     parser.add_argument("--minimize-tag", type=str, default="beany", help="Flavor to suppress (default: beany)")
     parser.add_argument("--n-iterations", type=int, default=50, help="Number of Optuna trials (default: 50)")
     parser.add_argument("--risk-aversion", type=float, default=1.0, help="Penalty weight for toxic markers (default: 1.0)")
+    parser.add_argument("--pre-process", type=str, choices=["none", "yeast", "protease", "both"], default="none", help="Biological pre-processing step")
     args = parser.parse_args()
 
     sugars = [s.strip() for s in args.sugars.split(",")] if args.sugars else []
@@ -40,6 +41,7 @@ def main():
     print(f"Iterations:   {args.n_iterations}")
     print("-" * 54)
     print(f"System:       {'+'.join(sugars + aas + lipids)}")
+    print(f"Pre-process:  {args.pre_process}")
     print("-" * 54)
     print("Starting optimization... this may take a few minutes depending on complexity.\n")
 

@@ -65,6 +65,7 @@ We are currently extending the framework to address the most difficult challenge
 ### 1. Recommended Setup (Conda / Mamba)
 The Maillard framework relies on complex scientific binaries (`CREST`, `xTB`, `PySCF`) which are most reliably managed via Conda.
 
+**For Linux & Windows (WSL2):**
 ```bash
 # Create the unified environment
 conda env create -f environment.yml
@@ -72,6 +73,25 @@ conda env create -f environment.yml
 # Activate it
 conda activate maillard
 ```
+
+**For macOS (Apple Silicon: M1/M2/M3):**
+Do not attempt to run this natively on macOS. Instead, use Docker for a seamless Linux environment:
+```bash
+# Start a new container (First time)
+docker run --platform linux/amd64 -it -v "$(pwd):/workspace" -w /workspace condaforge/miniforge3
+
+# Inside the container, set up environment:
+# conda create -n maillard python=3.12 -y && conda activate maillard
+```
+
+**Returning to Work (macOS):**
+```bash
+docker start -ai maillard_container
+conda activate maillard
+```
+
+> [!NOTE]
+> For detailed per-OS setup (Windows WSL2, Linux native) and chemistry library patching (xtbiff), please refer to the [Installation Guide](Installation.md).
 
 
 ### 2. Verify Scientific Dependencies

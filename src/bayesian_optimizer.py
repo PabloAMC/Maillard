@@ -3,6 +3,7 @@ from typing import List, Optional
 
 from src.inverse_design import InverseDesigner  # noqa: E402
 from src.smirks_engine import ReactionConditions  # noqa: E402
+from src.pre_processor import PreProcessor  # noqa: E402
 
 class FormulationOptimizer:
     """
@@ -34,6 +35,18 @@ class FormulationOptimizer:
         # Time is logged for future kinetic-model expansion, currently not used in FAST bounds
         time_mins = trial.suggest_float("time_minutes", 10.0, 120.0)
         
+        # Phase 20: Suggest interventions
+        intervention = trial.suggest_categorical("intervention", ["none", "calcium_carbonate", "rosemary_extract"])
+        interventions = [intervention] if intervention != "none" else []
+        
+        # Phase 21: Pre-processing options (could also be part of the trial)
+        pre_processing = trial.suggest_categorical("pre_processing", ["none", "yeast_fermentation", "protease_hydrolysis", "both"])
+        pre_steps = []
+        if pre_processing == "both":
+            pre_steps = ["yeast_fermentation", "protease_hydrolysis"]
+        elif pre_processing != "none":
+            pre_steps = [pre_processing]
+
         # 2. Setup the single evaluation condition
         cond = ReactionConditions(pH=ph, temperature_celsius=temp, water_activity=aw)
         
@@ -56,6 +69,10 @@ class FormulationOptimizer:
         for L in fixed_lipids:
             molar_ratios[L] = 0.1 # Example fixed trace lipid
             
+        # Phase 21: Apply Pre-Processing
+        processor = PreProcessor()
+        molar_ratios = processor.apply(molar_ratios, pre_steps)
+
         formulation = {
             "name": f"Trial_{trial.number}",
             "sugars": fixed_sugars,
@@ -65,7 +82,8 @@ class FormulationOptimizer:
             "ph": ph,
             "temp": temp,
             "aw": aw,
-            "time_minutes": time_mins
+            "time_minutes": time_mins,
+            "interventions": interventions
         }
         
         # 4. Evaluate using the robust pipeline without mutating global state (R.8 fix)
