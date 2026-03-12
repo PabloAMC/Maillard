@@ -34,7 +34,8 @@ def test_optimization_execution(monkeypatch):
             detected_minimize=[],
             radar={"meaty": score},
             safety_score=0.0,
-            flagged_toxics=[]
+            flagged_toxics=[],
+            texture_risk=0.0
         )
 
     from src.inverse_design import InverseDesigner

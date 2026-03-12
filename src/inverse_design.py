@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import List, Dict, Tuple, Optional
 from dataclasses import dataclass
 
-from src.smirks_engine import SmirksEngine, ReactionConditions  # noqa: E402
+from src.smirks_engine import SmirksEngine, ReactionConditions, Species  # noqa: E402
 from src.recommend import Recommender  # noqa: E402
 from src.precursor_resolver import resolve_many  # noqa: E402
 from src.barrier_constants import HEME_CATALYST_REDUCTION, HEME_CATALYST_FAMILIES  # noqa: E402
@@ -27,6 +27,8 @@ class FormulationResult:
     radar: Dict[str, tuple]  # Phase C: Radar category scores
     safety_score: float      # Phase F: Safety evaluation
     flagged_toxics: List[str]
+    texture_risk: float      # Phase 2: DHA competition risk
+
 
 class InverseDesigner:
     def __init__(self, target_tag: str, minimize_tag: str = "beany"):
@@ -124,6 +126,35 @@ class InverseDesigner:
                 
         return penalty, flagged
 
+    def _score_texture_risk(self, precursors: List[Species], r_sugars: List[str]) -> float:
+        """
+        Heuristic for DHA-Maillard competition.
+        High risk if [Sugar] / ([Serine] + [Cysteine]) is low.
+        Returns a risk score 0-100.
+        """
+        sugar_total = 0.0
+        dha_precursor_total = 0.0
+        
+        # Check species labels or smiles
+        for p in precursors:
+            label = p.label.lower()
+            # Crude molar estimation from tags/labels
+            if any(s in label for s in ["serine", "cysteine"]):
+                dha_precursor_total += 1.0 # Base stoichiometry
+            if any(s in label for s in ["glucose", "ribose", "xylose", "fructose", "maltose", "sucrose"]):
+                sugar_total += 1.0
+                
+        # If no Ser/Cys, no DHA risk
+        if dha_precursor_total == 0:
+            return 0.0
+            
+        ratio = sugar_total / dha_precursor_total
+        # If ratio < 0.5, risk is high (DHA dominates)
+        # Risk = 100 * (1 - ratio/0.5) clamped
+        risk = max(0.0, 100.0 * (1.0 - ratio / 0.5))
+        return risk
+
+
     def evaluate_single(self, formulation: Dict, global_conditions: ReactionConditions) -> FormulationResult:
         """
         R.8.2: Evaluate a single formulation without touching self.grid.
@@ -174,18 +205,25 @@ class InverseDesigner:
             # Apply heme catalyst heuristic to Strecker/Pyrazines if formulation has it
             apply_heme = (catalyst == "heme" or global_conditions.pH > 7)  # Note: just relying on simple logic for demo
             
-            # Phase 20: Pre-calculate intervention modifiers
-            # Mapping: {family_name: delta_kcal_mol}
+            # Phase 20: Pre-calculate intervention modifiers from library
             modifiers = {}
-            if "calcium_carbonate" in interventions:
-                # Suppresses acrylamide by lowering temperature/stabilizing intermediates (heuristic: +5 kcal/mol to acrylamide)
-                # Wait, the plan said -5 kcal? Usually calcium carbonate reduces acrylamide.
-                # If we WANT to suppress it, we should INCREASE the barrier for the safety-marker path.
-                modifiers["Safety_Risk_Acrylamide"] = 5.0
-            if "rosemary_extract" in interventions:
-                # Natural antioxidant inhibits lipid oxidation
-                modifiers["Lipid_Homolysis"] = 8.0
-                modifiers["Beta_Scission"] = 3.0
+            if interventions:
+                import yaml
+                LIBRARY_PATH = ROOT / "data" / "interventions.yml"
+                if LIBRARY_PATH.exists():
+                    with open(LIBRARY_PATH, "r") as f:
+                        lib_data = yaml.safe_load(f)
+                        intervention_lib = {a["name"]: a for a in lib_data.get("interventions", [])}
+                        
+                    for inter in interventions:
+                        agent_name = inter.get("name")
+                        dose = inter.get("dose", 1.0)
+                        agent_data = intervention_lib.get(agent_name)
+                        if agent_data:
+                            for mech in agent_data.get("mechanisms", []):
+                                target = mech.get("target_family", "")
+                                delta = mech.get("delta_barrier_per_unit", 0.0)
+                                modifiers[target] = delta * dose
             
             engine = SmirksEngine(cond)
             steps = engine.enumerate(precursors, max_generations=4)
@@ -270,10 +308,16 @@ class InverseDesigner:
                 detected_minimize=m_detected,
                 radar=radar_scores,
                 safety_score=s_penalty,
-                flagged_toxics=flagged
+                flagged_toxics=flagged,
+                texture_risk=self._score_texture_risk(precursors, sugars)
             ))
+
             
-        # Rank by (target_score - risk_aversion * safety_score) DESC, off_flavour_risk ASC
+        # Rank by (target_score - risk_aversion * safety_score - texture_penalty) DESC, off_flavour_risk ASC
         risk_aversion = 1.0 # Default
-        results.sort(key=lambda x: (x.target_score - risk_aversion * x.safety_score, -x.off_flavour_risk), reverse=True)
+        texture_aversion = 0.01 # 100 risk = 1.0 score penalty
+        results.sort(
+            key=lambda x: (x.target_score - risk_aversion * x.safety_score - texture_aversion * x.texture_risk, -x.off_flavour_risk), 
+            reverse=True
+        )
         return results

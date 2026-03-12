@@ -1,5 +1,8 @@
 import optuna
+from pathlib import Path
 from typing import List, Optional
+
+ROOT = Path(__file__).resolve().parents[1]
 
 from src.inverse_design import InverseDesigner  # noqa: E402
 from src.smirks_engine import ReactionConditions  # noqa: E402
@@ -35,9 +38,20 @@ class FormulationOptimizer:
         # Time is logged for future kinetic-model expansion, currently not used in FAST bounds
         time_mins = trial.suggest_float("time_minutes", 10.0, 120.0)
         
-        # Phase 20: Suggest interventions
-        intervention = trial.suggest_categorical("intervention", ["none", "calcium_carbonate", "rosemary_extract"])
-        interventions = [intervention] if intervention != "none" else []
+        # Phase 20: Suggest interventions from library
+        import yaml
+        LIBRARY_PATH = ROOT / "data" / "interventions.yml"
+        if LIBRARY_PATH.exists():
+            with open(LIBRARY_PATH, "r") as f:
+                lib_data = yaml.safe_load(f)
+                agents = [a["name"] for a in lib_data.get("interventions", [])] + ["none"]
+        else:
+            agents = ["none"]
+            
+        agent = trial.suggest_categorical("intervention_agent", agents)
+        agent_dose = trial.suggest_float("intervention_dose", 0.0, 1.0) if agent != "none" else 0.0
+        
+        interventions = [{"name": agent, "dose": agent_dose}] if agent != "none" else []
         
         # Phase 21: Pre-processing options (could also be part of the trial)
         pre_processing = trial.suggest_categorical("pre_processing", ["none", "yeast_fermentation", "protease_hydrolysis", "both"])

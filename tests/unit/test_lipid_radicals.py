@@ -50,3 +50,38 @@ def test_radical_crosstalk():
     products = [Chem.MolToSmiles(Chem.MolFromSmiles(p.smiles)) for s in crosstalk for p in s.products]
     assert "[SH]" in products
     assert "CCCCC" in products # Quenched pentane
+def test_full_autoxidation_cycle():
+    # Linoleic acid (C18:2) model
+    smi = r"CCCCC/C=C\C=C/CCCCCCCC(=O)O"
+    lipid = Species(label="linoleic_acid", smiles=smi)
+    # Start with a trace radical
+    rad = Species(label="alkyl-radical", smiles=r"CCCCC/C=C\C=C/C[CH]CCCCCCC(=O)O")
+    o2 = Species(label="O2", smiles="[O]=[O]")
+    
+    engine = SmirksEngine()
+    steps = engine.enumerate([lipid, rad, o2], max_generations=2)
+    
+    # 1. Propagation: R. + O2 -> ROO.
+    propagation = [s for s in steps if s.reaction_family == "Radical_Propagation_O2"]
+    assert len(propagation) > 0
+    peroxy = propagation[0].products[0]
+    assert "O[O]" in peroxy.smiles
+    
+    # 2. H-abstraction: ROO. + RH -> ROOH + R.
+    abstraction = [s for s in steps if s.reaction_family == "Peroxy_H_Abstraction"]
+    assert len(abstraction) > 0
+    
+    # 3. Termination
+    termination = [s for s in steps if s.reaction_family == "Radical_Termination"]
+    assert len(termination) > 0
+
+def test_mft_quenching():
+    rad = Species(label="alkyl-radical", smiles="CCCC[CH2]")
+    mft = Species(label="2-methyl-3-furanthiol", smiles="Cc1c(S)cco1")
+    
+    engine = SmirksEngine()
+    steps = engine.enumerate([rad, mft])
+    
+    quenching = [s for s in steps if s.reaction_family == "Radical_Crosstalk" and "MFT" in s.products[1].label]
+    assert len(quenching) > 0
+    assert quenching[0].products[1].label == "MFT-radical"

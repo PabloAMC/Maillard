@@ -22,6 +22,7 @@ Output: List[ElementaryStep] — fully compatible with xtb_screener.py
 import sys
 from pathlib import Path
 from typing import List, Optional, Set, Tuple
+from functools import lru_cache
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -65,6 +66,29 @@ _SMIRKS_RULES: List[Tuple[str, str, str, str]] = [
         "[CX4:3][CX4:1][OX1H0:2]>>[C:1]=[O:2].[C:3]",
         "any",
     ),
+    (
+        "radical_propagation_o2",
+        "Radical_Propagation_O2",
+        # Alkyl radical + O2 -> Peroxy radical
+        "[C;X3:1].[O;X1:2]=[O;X1:3]>>[C;X4:1]-[O;X2:2]-[O;X1:3]",
+        "any",
+    ),
+    (
+        "peroxy_h_abstraction",
+        "Peroxy_H_Abstraction",
+        # Peroxy radical + Reactive H (Allylic or specific lipid H) -> Hydroperoxide + Alkyl radical
+        # Pattern: [O.] + [H-C-C=C] or [H-C-O]
+        # We'll use a broad but restricted pattern to avoid matching EVERY sugar carbon.
+        "[O;X1:1]-[O;X2:2].[C;H1,H2,H3;$(C-C=C);!$(C=O):3]>>[O;X2:1]([H])[O;X2:2].[C;X3:3]",
+        "any",
+    ),
+    (
+        "radical_termination_disproportionation",
+        "Radical_Termination",
+        # Two peroxy radicals -> O2 + ... (simplified)
+        "[O;X1:1]-[O;X2:2].[O;X1:3]-[O;X2:4]>>[O;X2:1]=[O;X2:3].[O;X2:2].[O;X2:4]",
+        "any",
+    ),
 ]
 
 
@@ -81,12 +105,21 @@ _DICARBONYL_SMARTS = Chem.MolFromSmarts("[CX3](=O)[CX3](=O)")  # adjacent carbon
 _AROMATIC_ALDEHYDE_SMARTS = Chem.MolFromSmarts("[c][CH]=O") # furfural-type
 
 
-def _mol(smi: str) -> Optional[Chem.Mol]:
+@lru_cache(maxsize=4096)
+def _mol_cached(smi: str) -> Optional[Chem.Mol]:
+    """Internal cached Mol parsing."""
     return Chem.MolFromSmiles(smi) if smi else None
 
 
+def _mol(smi: str) -> Optional[Chem.Mol]:
+    """Returns a CLONE of the cached Mol to prevent in-place mutation issues."""
+    m = _mol_cached(smi)
+    return Chem.Mol(m) if m else None
+
+
+@lru_cache(maxsize=4096)
 def _canonical(smi: str) -> Optional[str]:
-    m = _mol(smi)
+    m = _mol_cached(smi)
     return Chem.MolToSmiles(m) if m else None
 
 
@@ -1028,45 +1061,71 @@ def _radical_crosstalk_templates(pool: List[Species]) -> List[ElementaryStep]:
     R. + .SH -> R-SH
     """
     steps = []
-    h2s = next((s for s in pool if s.smiles == "S"), None)
-    if not h2s:
-        return steps
-        
-    radicals = [s for s in pool if "[" in s.smiles and "." not in s.smiles] # Simplified radical detection
-    # Better: use RDKit to check for unpaired electrons on Carbon atoms
     actual_radicals = []
     for s in pool:
         m = _mol(s.smiles)
-        if m and any(a.GetNumRadicalElectrons() > 0 and a.GetAtomicNum() == 6 for a in m.GetAtoms()):
+        if m and any(a.GetNumRadicalElectrons() > 0 for a in m.GetAtoms()):
             actual_radicals.append(s)
             
-    for rad in actual_radicals:
-        # Rad + H2S -> RH + SH.
-        # Use RDKit to formally quench the radical
-        m_rad = _mol(rad.smiles)
-        if not m_rad: continue
-        
-        # Determine product RH by finding radical atom and clearing it, and adding an H
-        rh_mol = Chem.RWMol(m_rad)
-        for atom in rh_mol.GetAtoms():
-            if atom.GetNumRadicalElectrons() > 0:
-                atom.SetNumRadicalElectrons(0)
-                # Ensure H count is adjusted
-                atom.SetNumExplicitHs(atom.GetTotalNumHs() + 1)
-        
-        try:
-            rh_mol.UpdatePropertyCache(strict=False)
-            Chem.SanitizeMol(rh_mol)
-            rh_smi = Chem.MolToSmiles(rh_mol)
-            sh_rad = Species(label="thiol-radical", smiles="[SH]")
-            steps.append(ElementaryStep(
-                reactants=[rad, h2s],
-                products=[Species(label=f"quenched-{rad.label}", smiles=rh_smi), sh_rad],
-                reaction_family="Radical_Crosstalk"
-            ))
-        except Exception:
-            continue
+    # H2S Crosstalk
+    h2s = next((s for s in pool if s.smiles == "S"), None)
+    if h2s:
+        for rad in actual_radicals:
+            # Rad + H2S -> RH + SH.
+            m_rad = _mol(rad.smiles)
+            if not m_rad: continue
+            rh_mol = Chem.RWMol(m_rad)
+            rad_indices = []
+            for atom in rh_mol.GetAtoms():
+                if atom.GetNumRadicalElectrons() > 0:
+                    rad_indices.append(atom.GetIdx())
+                    atom.SetNumRadicalElectrons(0)
+                    atom.SetNumExplicitHs(atom.GetTotalNumHs() + 1)
+            if not rad_indices: continue
+            try:
+                rh_mol.UpdatePropertyCache(strict=False)
+                Chem.SanitizeMol(rh_mol)
+                rh_smi = Chem.MolToSmiles(rh_mol)
+                sh_rad = Species(label="thiol-radical", smiles="[SH]")
+                steps.append(ElementaryStep(
+                    reactants=[rad, h2s],
+                    products=[Species(label=f"quenched-{rad.label}", smiles=rh_smi), sh_rad],
+                    reaction_family="Radical_Crosstalk"
+                ))
+            except Exception:
+                continue
             
+    # Expanded Crosstalk: Rad + MFT -> RH + MFT-radical
+    mft_can = "Cc1occc1S" # Fixed canonical
+    mft_sp = next((s for s in pool if _canonical(s.smiles) == mft_can), None)
+    if mft_sp:
+        for rad in actual_radicals:
+             m_rad = _mol(rad.smiles)
+             if not m_rad: continue
+             rh_mol = Chem.RWMol(m_rad)
+             for atom in rh_mol.GetAtoms():
+                 if atom.GetNumRadicalElectrons() > 0:
+                     atom.SetNumRadicalElectrons(0)
+                     atom.SetNumExplicitHs(atom.GetTotalNumHs() + 1)
+             try:
+                 rh_mol.UpdatePropertyCache(strict=False)
+                 Chem.SanitizeMol(rh_mol)
+                 rh_smi = Chem.MolToSmiles(rh_mol)
+                 # MFT radical: S on the furan ring
+                 m_mft_rad = Chem.RWMol(_mol(mft_sp.smiles))
+                 for atom in m_mft_rad.GetAtoms():
+                     if atom.GetSymbol() == "S":
+                         atom.SetNumRadicalElectrons(1)
+                 mft_rad_smi = Chem.MolToSmiles(m_mft_rad)
+                 mft_rad = Species(label="MFT-radical", smiles=mft_rad_smi)
+                 steps.append(ElementaryStep(
+                     reactants=[rad, mft_sp],
+                     products=[Species(label=f"quenched-{rad.label}", smiles=rh_smi), mft_rad],
+                     reaction_family="Radical_Crosstalk"
+                 ))
+             except Exception:
+                 continue
+
     return steps
 
 
@@ -1220,6 +1279,37 @@ def _glutathione_cleavage(pool: List[Species], conditions: ReactionConditions) -
 # Tier A: SMIRKS application
 # ──────────────────────────────────────────────────────────────────────────
 
+def _fix_radicals(mol: Chem.Mol, family: str, clear_all: bool = False):
+    """Ensure atoms with unsatisfied valence are marked as radicals, and clear satisfied ones."""
+    if clear_all:
+        for atom in mol.GetAtoms():
+            atom.SetNumRadicalElectrons(0)
+        return mol
+
+    for atom in mol.GetAtoms():
+        an = atom.GetAtomicNum()
+        # Use explicit valence (bond order sum) + implicit H
+        # This is more accurate for double/triple bonds.
+        try:
+            val = atom.GetExplicitValence() + atom.GetNumImplicitHs()
+        except Exception:
+            # Fallback if property cache is not updated
+            val = atom.GetTotalDegree() + atom.GetTotalNumHs()
+        
+        # Determine if we should set or clear radicals
+        if an == 6: # Carbon
+            if val == 3:
+                atom.SetNumRadicalElectrons(1)
+            elif val >= 4:
+                atom.SetNumRadicalElectrons(0)
+        elif an == 8: # Oxygen
+            if val == 1:
+                if any(f in family for f in ["Radical_Propagation", "Lipid_Homolysis", "Beta_Scission"]):
+                    atom.SetNumRadicalElectrons(1)
+            elif val >= 2:
+                atom.SetNumRadicalElectrons(0)
+    return mol
+
 def _apply_smirks_rule(
     name: str, family: str, smirks: str, ph_gate: str,
     pool: List[Species], conditions: ReactionConditions
@@ -1260,12 +1350,13 @@ def _apply_smirks_rule(
                         pass
                 if prod_smiles:
                     reactant_sp = next((s for s in pool if s.smiles == smi), Species(smi, smi))
-                    # Phase 19 fix: ensure radicals are marked
                     for p in prod_tuple:
-                        for atom in p.GetAtoms():
-                            if atom.GetExplicitValence() < Chem.GetPeriodicTable().GetDefaultValence(atom.GetAtomicNum()) and atom.GetNumRadicalElectrons() == 0:
-                                # This is a simple heuristic, but usually works for our cases
-                                pass # Actually, better to rely on SMARTS if possible
+                        _fix_radicals(p, family, clear_all=True)
+                        try:
+                            Chem.SanitizeMol(p)
+                        except Exception:
+                            pass
+                        _fix_radicals(p, family)
                     
                     steps.append(ElementaryStep(
                         reactants=[reactant_sp],
@@ -1288,8 +1379,10 @@ def _apply_smirks_rule(
                     valid_step = True
                     for p in prod_tuple:
                         try:
+                            _fix_radicals(p, family, clear_all=True)
                             # Sanitize to catch valence issues
                             Chem.SanitizeMol(p)
+                            _fix_radicals(p, family)
                             ps = Chem.MolToSmiles(p)
                             if _is_valid(ps):
                                 prod_smiles.append(ps)

@@ -13,19 +13,31 @@ class PreProcessor:
     """
     
     @staticmethod
-    def simulate_yeast_cleaning(molar_ratios: Dict[str, float]) -> Dict[str, float]:
+    def simulate_yeast_cleaning(molar_ratios: Dict[str, float], efficiency: float = 0.8) -> Dict[str, float]:
         """
         Simulates yeast action (e.g., Saccharomyces cerevisiae) which can 
-        metabolize beany aldehydes (hexanal) into less impactful alcohols.
+        metabolize beany/rancid aldehydes into less impactful alcohols.
+        
+        Library expansion (Phase 2):
+        - Hexanal -> Hexanol (Beany -> Mild)
+        - Nonanal -> Nonanol (Green/Fatty -> Mild)
+        - 2,4-Decadienal -> 2,4-Decadienol (Deep Fatty/Rancid -> Mild)
         """
         new_ratios = molar_ratios.copy()
-        # Yeast ADH (alcohol dehydrogenase) converts hexanal -> hexanol
+        target_map = {
+            "hexanal": "hexanol",
+            "nonanal": "nonanol",
+            "decadienal": "decadienol"
+        }
+        
         for k in list(new_ratios.keys()):
-            if "hexanal" in k.lower():
-                val = new_ratios[k]
-                # Assume 80% conversion in a standard fermentation step
-                new_ratios[k] = val * 0.2
-                new_ratios["hexanol"] = new_ratios.get("hexanol", 0.0) + val * 0.8
+            k_lower = k.lower()
+            for aldehyde, alcohol in target_map.items():
+                if aldehyde in k_lower:
+                    val = new_ratios[k]
+                    # Apply biotransformation efficiency
+                    new_ratios[k] = val * (1.0 - efficiency)
+                    new_ratios[alcohol] = new_ratios.get(alcohol, 0.0) + val * efficiency
         return new_ratios
 
     @staticmethod
@@ -46,8 +58,26 @@ class PreProcessor:
     def apply(self, molar_ratios: Dict[str, float], interventions: list) -> Dict[str, float]:
         """Apply a set of pre-processing interventions."""
         ratios = molar_ratios
-        if "yeast_fermentation" in interventions:
-            ratios = self.simulate_yeast_cleaning(ratios)
+        
+        # Check for fermentation specific intervention with time/efficiency
+        for inter in interventions:
+            if "yeast_fermentation" in str(inter):
+                eff = 0.8
+                # Handle both {"yeast_fermentation": {"time_hours": 5}} and {"yeast_fermentation": True}
+                if isinstance(inter, dict):
+                    params = inter.get("yeast_fermentation")
+                    if isinstance(params, dict):
+                        eff = params.get("efficiency", 0.8)
+                        if "time_hours" in params:
+                            import math
+                            t = params["time_hours"]
+                            eff = 1.0 - math.exp(-0.4 * t)
+                    else:
+                        eff = inter.get("efficiency", 0.8)
+                
+                ratios = self.simulate_yeast_cleaning(ratios, efficiency=eff)
+                break
+                
         if "protease_hydrolysis" in interventions:
             ratios = self.simulate_protease_hydrolysis(ratios)
         return ratios
