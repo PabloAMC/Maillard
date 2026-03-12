@@ -62,12 +62,12 @@ class ReactionConditions:
             return 1.0 + 2.0 * self._gaussian(self.pH, 5.5, 1.0)
 
         # 2. 2,3-enolisation / Pyrazine / Strecker / Amadori / Heyns (Alkaline favored)
-        elif any(x in fam for x in ["2,3", "2_3", "pyrazine", "strecker", "amadori", "heyns"]):
+        elif any(x in fam for x in ["2,3", "2_3", "pyrazine", "strecker", "amadori", "heyns", "nitrogen_heterocycle"]):
             base_mult = 0.2 + 8.0 * self._sigmoid(self.pH, 6.5, 1.5)
             return max(0.01, base_mult)
 
         # 3. 1,2-enolisation / Furan / Thiol / Thio / Cysteine / [Generic Enolisation] (Acidic favored)
-        elif any(x in fam for x in ["1,2", "1_2", "furan", "thiol", "thio", "cysteine", "enolisation"]):
+        elif any(x in fam for x in ["1,2", "1_2", "furan", "thiol", "thio", "cysteine", "enolisation", "oxygen_heterocycle"]):
             return 1.0 + 4.0 * (1.0 - self._sigmoid(self.pH, 6.0, 2.0))
             
         return 1.0

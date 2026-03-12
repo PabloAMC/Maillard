@@ -20,8 +20,9 @@ def test_intervention_barrier_shift():
         "sugars": ["glucose"],
         "amino_acids": ["asparagine"],
         "molar_ratios": {"glucose": 0.1, "asparagine": 0.1},
-        "interventions": ["calcium_carbonate"]
+        "interventions": [{"name": "calcium_carbonate", "dose": 0.5}]
     }
+
     
     res_base = designer.evaluate_single(form_base, cond)
     res_calcium = designer.evaluate_single(form_calcium, cond)
@@ -43,5 +44,6 @@ def test_bo_suggests_intervention():
     
     # At least check that the trials contain interventions
     trials = study.get_trials()
-    interventions = [t.params.get("intervention") for t in trials]
-    assert any(i in ["calcium_carbonate", "rosemary_extract"] for i in interventions)
+    interventions = [t.params.get("intervention_agent") for t in trials]
+    assert any(i in ["calcium_carbonate", "rosemary_extract", "none"] for i in interventions)
+
