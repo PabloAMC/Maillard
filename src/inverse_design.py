@@ -273,8 +273,8 @@ class InverseDesigner:
             rec_result = recommender.predict_from_steps(steps, heuristic_barriers, initial_concentrations, temperature_kelvin=cond.temperature_kelvin)
             
             # Score against tags
-            t_score, t_detected = self._score_targets(rec_result["targets"], target_compounds, cond)
-            m_score, m_detected = self._score_targets(rec_result["targets"], minimize_compounds, cond)
+            t_score_legacy, t_detected = self._score_targets(rec_result["targets"], target_compounds, cond)
+            m_score_legacy, m_detected = self._score_targets(rec_result["targets"], minimize_compounds, cond)
             s_penalty, flagged = self._score_safety(rec_result["targets"], cond)
             
             trap_dict = rec_result["metrics"].get("trapping_efficiency", {})
@@ -297,6 +297,11 @@ class InverseDesigner:
                 fat_fraction=cond.fat_fraction,
                 protein_fraction=cond.protein_fraction
             )
+            
+            # Use radar score for the target category as the official t_score
+            t_score = radar_scores.get(self.target_tag, (0.0, 0))[0]
+            # Use radar score for the minimize category as the official m_score
+            m_score = radar_scores.get(self.minimize_tag, (0.0, 0))[0] if self.minimize_tag else 0.0
 
             results.append(FormulationResult(
                 name=name,

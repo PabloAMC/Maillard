@@ -33,6 +33,17 @@ Plant-based proteins (pea, soy, etc.) lack the native precursor matrix of animal
 
 Exploring this space in the wet-lab is **combinatorially explosive**, **slow**, and **expensive**.
 
+## 🧪 Scientific Case Studies & Reports
+
+We provide detailed scientific reports that illustrate how to use the framework for real-world Alt-Protein formulation challenges. Each case study compares predicted outcomes against peer-reviewed literature.
+
+- 🍔 **[Premium Roast Pea Protein Patty](docs/use_cases/pea_protein_report.md)**: Strategies for masking beany off-flavors while maximizing meaty thiols (MFT/FFT).
+- 🥜 **[Alkali-Induced Roasted Nutty Profile](docs/use_cases/roasted_nutty_report.md)**: Optimizing pyrazine formation for plant-based milks and beverages.
+- ☢️ **[Toxicity-Flavor Decoupling](docs/use_cases/toxicity_decoupling_report.md)**: Balancing high-heat searing flavor with Acrylamide/HMF safety limits.
+- 📑 **[Report Template](docs/use_cases/REPORT_TEMPLATE.md)**: Guidelines for contributing new scientific validations.
+
+---
+
 ## 🛠️ How It Works
 
 Maillard uses a funnel strategy: generate broadly, then refine precisely. Most users only need the top two tiers.
@@ -110,6 +121,20 @@ If you intend to run Tier 2 DFT refinement, install Microsoft Skala:
 ```bash
 pip install git+https://github.com/microsoft/skala.git
 ```
+
+---
+
+## 🔬 Scientific Accuracy & Monitoring
+
+The framework uses a **Test-Driven Science** approach. We maintain specific tests in `tests/scientific/` that monitor our correlation with literature and document known gaps. For a detailed breakdown of how we verify our predictions, see the **[Scientific Validation Guide](docs/VALIDATION_GUIDE.md)**.
+
+### 🚩 Known Blind Spots (Tracked)
+We proactively document and test for current engine limitations to prevent over-confidence in edge cases:
+- **Peptide Accessibility**: Modeling how buried amino groups in protein matrices reduce yield.
+- **Matrix Inhibition**: Modeling how fiber/starch traps volatiles (partitioning).
+- **Metal Catalysis**: Explicit support for iron/copper catalysis of pyrazine formation.
+
+*Run these baseline tests with:* `python -m pytest tests/scientific/test_blind_spots.py`
 
 ---
 

@@ -24,7 +24,11 @@ def run_targeted_simulation(temp_c, time_min, precursors):
         "--output", "results/validation/sim_raw"
     ]
     
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    import os
+    env = os.environ.copy()
+    env["PYTHONPATH"] = env.get("PYTHONPATH", "") + ":" + str(Path.cwd())
+    
+    result = subprocess.run(cmd, capture_output=True, text=True, env=env)
     if result.returncode != 0:
         print(f"Simulation failed:\n{result.stderr}")
         return None

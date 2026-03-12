@@ -1,18 +1,33 @@
 from dataclasses import dataclass
+from typing import Optional
 
 @dataclass
 class ReactionConditions:
     """
     Environmental parameters governing the Maillard cascade.
     """
-    pH: float = 7.0
-    temperature_celsius: float = 150.0 
-    water_activity: float = 0.8
-    fat_fraction: float = 0.0      # Added phase D
-    protein_fraction: float = 0.15  # Added phase D
-    dielectric_constant: float = 78.4 # Default: Water
-    solvent_name: str = "water"
-    
+    def __init__(self,
+                 pH: float = 6.0,
+                 temperature_celsius: float = 120.0,
+                 water_activity: float = 0.8,
+                 fat_fraction: float = 0.0,
+                 protein_fraction: float = 1.0,
+                 dielectric_constant: float = 78.4, # Default: Water
+                 solvent_name: str = "water",
+                 matrix_fiber: float = 0.0, # Placeholder for blind spot
+                 metal_catalyst: Optional[str] = None # Placeholder for blind spot
+                 ):
+        self.pH = pH
+        self.temperature_celsius = temperature_celsius
+        self.water_activity = water_activity
+        self.fat_fraction = fat_fraction
+        self.protein_fraction = protein_fraction
+        self.dielectric_constant = dielectric_constant
+        self.solvent_name = solvent_name
+        self.matrix_fiber = matrix_fiber
+        self.metal_catalyst = metal_catalyst
+        self.__post_init__()
+
     def __post_init__(self):
         """Set dielectric constant based on solvent name if provided."""
         presets = {
