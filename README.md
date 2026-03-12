@@ -54,6 +54,12 @@ Maillard uses a funnel strategy: generate broadly, then refine precisely. Most u
 - **Safety Scoring**: Automatically flags and penalizes toxic marker formation (Acrylamide, CML, CEL, HMF) using Pareto ranking.
 - **Sensory Radar**: Stevens' power-law psychophysical model generates multi-axis flavor profiles (meaty, roasted, beany, malty, earthy).
 
+## 🚀 The Bleeding Edge (Roadmap)
+We are currently extending the framework to address the most difficult challenges in Alternative Protein science:
+1. **Radical Lipid Oxidation**: Modeling the *generation* of beany off-flavors (hexanal) from PUFAs and their crosstalk with Maillard intermediates.
+2. **Toxicity Decoupling**: BO-driven optimization to suggest interventions (antioxidants/cations) that lower toxic by-products while preserving flavor.
+3. **Enzymatic Pre-Processing**: Simulating solid-state fermentation and protease treatment to "clean" raw isolates before thermal extrusion.
+
 ## 🚀 Installation
 
 ### 1. Recommended Setup (Conda / Mamba)

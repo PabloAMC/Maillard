@@ -36,6 +36,8 @@ xtbtopo.mol
 wbo
 charges
 scr/
+grow/
+manual_test_qcg/
 
 # Cantera
 *.yaml
