@@ -11,7 +11,12 @@ H  0.000000  0.000000  0.900000
 H  0.000000  0.000000 -0.900000
 """
 
-@pytest.mark.skipif(not os.path.exists(".venv/lib/python3.14/site-packages/sella"), reason="Sella not installed")
+import importlib.util
+
+def _has_sella():
+    return importlib.util.find_spec("sella") is not None
+
+@pytest.mark.skipif(not _has_sella(), reason="Sella not installed in current environment")
 def test_sella_ts_search_integration():
     """
     Verify that DFTRefiner correctly uses Sella for TS searches 

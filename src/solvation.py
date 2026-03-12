@@ -62,6 +62,7 @@ class SolvationEngine:
                 crest_bin = shutil.which("crest") or "crest"
 
         self.crest_bin: str = crest_bin
+        self.xtbiff_bin: Optional[str] = shutil.which("xtbiff")
         self.timeout_sec: int = timeout_sec
 
     # ------------------------------------------------------------------
@@ -117,12 +118,19 @@ class SolvationEngine:
             #    -qcg activates Quantum Cluster Growth mode
             #    -nsolv controls number of solvent molecules
             #    -cinp points to our constraint file
+            #    Note: we use "water.xyz" explicitly as some versions of CREST 
+            #    require the extension in the -qcg argument.
             cmd = [
                 self.crest_bin,
                 str(input_xyz),
-                "-qcg", "water",
+                "-qcg", "water.xyz",
                 "-nsolv", str(n_water),
             ]
+            
+            # Use standalone xtbiff if present (required for some Docker/macOS setups)
+            if self.xtbiff_bin:
+                cmd.append("--xtbiff")
+
             if xcontrol_path is not None:
                 cmd += ["-cinp", str(xcontrol_path)]
 
@@ -137,17 +145,19 @@ class SolvationEngine:
                 )
                 
                 if result.returncode != 0:
-                    # Specific check for missing xtb-IFF
-                    if "xtb-IFF" in result.stderr or "xtb-IFF" in result.stdout:
-                        raise RuntimeError(f"CREST/QCG failed (exit {result.returncode}): xtb-IFF not found. Please ensure xtb-IFF is installed and in your PATH.")
-                    
                     raise RuntimeError(f"CREST/QCG failed (exit {result.returncode}): {result.stderr}")
 
+                # CREST 2.x outputs crest_best.xyz in CWD.
+                # CREST 3.x outputs grow/cluster.xyz in CWD.
                 best_xyz = tmp / "crest_best.xyz"
-                if not best_xyz.exists():
-                    raise FileNotFoundError("CREST completed but 'crest_best.xyz' was not generated.")
-
-                return best_xyz.read_text()
+                qcg_cluster = tmp / "grow" / "cluster.xyz"
+                
+                if qcg_cluster.exists():
+                    return qcg_cluster.read_text()
+                elif best_xyz.exists():
+                    return best_xyz.read_text()
+                else:
+                    raise FileNotFoundError(f"CREST completed but neither 'grow/cluster.xyz' nor 'crest_best.xyz' was generated. Files in {tmp}: {list(tmp.glob('*'))}")
 
             except (subprocess.TimeoutExpired, RuntimeError, FileNotFoundError) as e:
                 raise RuntimeError(f"Solvation error: {str(e)}") from e

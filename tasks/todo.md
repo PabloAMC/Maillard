@@ -13,29 +13,53 @@
 
 | Priority | Phase | Status | Impact |
 |----------|-------|:------:|--------|
-| **🔴 P3** | **R.4: NASA7 Polynomial Format** | `[x]` | Fix single-range → two-range format |
-| **🟠 P7** | **R.8: BO Thread Safety** | `[x]` | Stop mutating shared InverseDesigner state |
+| **🔥 P0** | **19: Lipid Oxidation Radical Network** | `[ ]` | Predict "beany" off-flavors natively |
+| **🚀 P1** | **20: Toxicity Decoupling Interventions** | `[ ]` | BO-driven additive suggestions |
+| **🔬 P2** | **21: Enzymatic Pre-Processing Layer** | `[ ]` | Initial matrix cleanup simulation |
 
 ---
 
-### [x] R.4: NASA7 Polynomial Format Fix `[🔴 P3 | Correctness]`
+### Phase 19: Lipid Oxidation Radical Network `[🔥 P0 | Scientific Depth]`
 
-> **Why:** `get_nasa_coefficients` in `thermo.py` produces 7 coefficients with a single temperature range (300–1000 K). Cantera's NASA7 format requires 14 coefficients (two ranges). This may cause silent thermo errors or Cantera parse failures.
+> **Goal:** Model the generation of hexanal/nonanal from PUFAs and their crosstalk with Maillard intermediates.
 
-- [x] **R.4.1** Modify `get_nasa_coefficients` to produce two-range NASA7 (low: 300–1000 K, high: 1000–3000 K) with 14 coefficients
-- [x] **R.4.2** Alternative: switch Joback-estimated species to `ShomatePoly` which is naturally single-range
-- [x] **R.4.3** Update `cantera_export.py` to emit correct `temperature-ranges: [300.0, 1000.0, 3000.0]` with two data arrays
-- [x] **R.4.4** Add test: load exported YAML in Cantera, verify thermo evaluations at 300 K, 423 K, and 500 K match Joback predictions within 5%
+- [ ] **19.1** Define `LipidRadical` family in `src/smirks_engine.py` using β-scission SMIRKS.
+- [ ] **19.2** Add lipid-specific barrier constants for hydroperoxide homolysis (lit-derived).
+- [ ] **19.3** Implement `Crosstalk` templates (e.g., $H_2S$ + hexanal → alkylthiazoles).
+- [ ] **19.4** Add validation test: verify hexanal generation from linoleic acid model.
+
+### Phase 20: Toxicity Decoupling Interventions `[🚀 P1 | Utility]`
+
+> **Goal:** Enhance the Bayesian Optimizer to suggest ingredients that lower toxicity without compromising flavor.
+
+- [ ] **20.1** Add `InterventionParams` (e.g., calcium carbonate, rosemary extract) to `InverseDesigner`.
+- [ ] **20.2** Map interventions to specific barrier modifiers in `mlp_barrier.py` or `kinetics.py`.
+- [ ] **20.3** Update `FormulationOptimizer` to include these as searchable categorical variables.
+- [ ] **20.4** Test: Verify BO finds a "low-acrylamide" variant of a target flavor profile.
+
+### Phase 21: Enzymatic Pre-Processing Layer `[🔬 P2 | Workflow]`
+
+> **Goal:** Simulate yeast/protease action on raw ingredients before the thermal simulation starts.
+
+- [ ] **21.1** Create `src/pre_processor.py` with standard "Fermentation/Hydrolysis" profiles.
+- [ ] **21.2** Implement `PreProcessor.apply(initial_concentrations)` to transform feedstocks.
+- [ ] **21.3** Integrate into `scripts/optimize_formulation.py` as a pre-step flag.
 
 ---
 
-### [x] R.8: Bayesian Optimizer Thread Safety `[🟠 P7 | Robustness]`
+## ✅ Archived: Completed Work (Post-Audit 2026-03-11)
 
-> **Why:** `bayesian_optimizer.py` L74 mutates `self.designer.grid` on every trial. This is not thread-safe, corrupts state on crashes, and loses the original grid after the first trial.
+<details>
+<summary><b>R.4: NASA7 Polynomial Format Fix ✅</b></summary>
 
-- [x] **R.8.1** Create a fresh `InverseDesigner` per trial, or pass formulation as parameter
-- [x] **R.8.2** Add a `evaluate_single(formulation, conditions)` method to `InverseDesigner` that doesn't require grid mutation
-- [x] **R.8.3** Add test: verify optimizer produces consistent results across repeated runs
+- Modified `get_nasa_coefficients` to produce two-range NASA7 with 14 coefficients.
+</details>
+
+<details>
+<summary><b>R.8: Bayesian Optimizer Thread Safety ✅</b></summary>
+
+- Ensured fresh state per trial in BO.
+</details>
 
 ---
 

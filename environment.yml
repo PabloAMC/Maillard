@@ -1,5 +1,6 @@
 name: maillard
 channels:
+  - pytorch
   - conda-forge
   - defaults
 dependencies:
@@ -28,11 +29,11 @@ dependencies:
   - requests
   - diskcache
   - networkx
+  - pytorch::pytorch=*=*cpu* # Forces the lightweight CPU version by default
   - pip:
       - sella
       - mace-torch
       - rxn-chem-utils
       - rxnmapper
-      - torch>=2.1.0
       - huggingface_hub
       - orjson
