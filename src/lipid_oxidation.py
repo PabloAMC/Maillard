@@ -63,11 +63,13 @@ def predict_lop_generation(
     load = oxidation_rate * time_min * 1e4
     
     return {
-        "hexanal": load * 0.37,
-        "2-pentylfuran": load * 0.08,
-        "furfural": load * 0.1,
-        "2-methyl-3-furanthiol": load * 0.05,
-        "bis(2-methyl-3-furyl)disulfide": load * 0.01
+        "CCCCCC=O": load * 0.37,          # hexanal
+        "CCCCCc1ccco1": load * 0.08,      # 2-pentylfuran
+        "O=Cc1ccco1": load * 0.1,         # furfural
+        "Cc1occc1S": load * 0.05,         # 2-methyl-3-furanthiol (MFT)
+        "Cc1occc1SSc1ccoc1C": load * 0.01, # bis(2-methyl-3-furyl)disulfide
+        "CCCCCCO": load * 0.05,           # 1-hexanol
+        "CCCCCCCCC=O": load * 0.12        # nonanal
     }
 
 def predict_hexanal_generation(

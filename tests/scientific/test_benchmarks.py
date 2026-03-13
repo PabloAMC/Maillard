@@ -36,13 +36,22 @@ def test_benchmark_correlation(bench_file):
     # Map precursors to the structure expected by evaluate_single
     molar_ratios = {name: data["concentration_mM"] for name, data in bench["precursors"].items()}
     
-    # Extract sugars and amino acids lists
+    # Extract sugars and amino acids lists, filtering out matrix indicators
     sugars = []
     amino_acids = []
+    lipids = []
+    
+    matrix_names = ["pea protein isolate", "soy protein isolate", "brown rice protein isolate", "pea protein", "soy protein", "mycoprotein"]
+    
     for name in bench["precursors"]:
         name_lower = name.lower()
-        if any(s in name_lower for s in ["ribose", "glucose", "fructose", "xylose", "maltose"]):
+        if any(m in name_lower for m in matrix_names):
+            continue
+            
+        if any(s in name_lower for s in ["ribose", "glucose", "fructose", "xylose", "maltose", "sugar"]):
             sugars.append(name)
+        elif any(l in name_lower for l in ["hexanal", "nonanal", "lipid", "fat"]):
+            lipids.append(name)
         else:
             amino_acids.append(name)
 
@@ -50,11 +59,14 @@ def test_benchmark_correlation(bench_file):
         "name": bench["benchmark_id"],
         "sugars": sugars,
         "amino_acids": amino_acids,
+        "lipids": lipids,
         "molar_ratios": molar_ratios,
         "ph": bench["conditions"]["ph"],
         "temp": bench["conditions"]["temp_C"],
         "aw": bench["conditions"]["water_activity"],
-        "time_minutes": bench["conditions"]["time_min"]
+        "time_minutes": bench["conditions"]["time_min"],
+        "protein_type": bench.get("protein_type", "free"),
+        "denaturation_state": bench.get("denaturation_state", 0.5)
     }
     
     # The current model doesn't have a single "run" that returns PPB easily in recommend.py 
