@@ -7,7 +7,8 @@ Maps predicted volatile concentrations to aroma descriptors using a psychophysic
 
 import yaml
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Any, Tuple, Optional
+from src.matrix_correction import ProteinType, MATRIX_CORRECTIONS
 from src.headspace import HeadspaceModel  # noqa: E402
 
 class SensoryDatabase:
@@ -21,6 +22,7 @@ class SensoryDatabase:
         self.compounds = {}  # key: name, value: data
         self.smiles_map = {}
         self.tags = {}
+        self.chemical_to_descriptor = {} # key: smiles, value: {odt_ppb, descriptor}
         
         self._load_all()
 
@@ -49,8 +51,25 @@ class SensoryDatabase:
                         "source": fname
                     }
                     self.compounds[name] = entry
+                    self.compounds[name] = entry
                     if entry["smiles"]:
+                        can = entry["smiles"]
+                        try:
+                            from rdkit import Chem
+                            m = Chem.MolFromSmiles(can)
+                            if m: can = Chem.MolToSmiles(m)
+                        except ImportError:
+                            pass
+
                         self.smiles_map[entry["smiles"]] = entry
+                        self.smiles_map[can] = entry
+                        
+                        desc_dict = {
+                            "odt": threshold_ppb,
+                            "descriptor": entry["descriptors"][0] if entry["descriptors"] else "unknown"
+                        }
+                        self.chemical_to_descriptor[entry["smiles"]] = desc_dict
+                        self.chemical_to_descriptor[can] = desc_dict
 
         # 2. Load tags (radar categories)
         tags_path = self.data_dir / "sensory_tags.yml"
@@ -93,56 +112,99 @@ class SensoryPredictor:
         }
 
     def predict_profile(self, 
-                        concentration_dict_ppm: Dict[str, float], 
+                        concentration_dict_ppb: Dict[str, float], 
+                        protein_type: str = "free",
                         temp_c: Optional[float] = None,
                         fat_fraction: float = 0.0,
                         protein_fraction: float = 0.0) -> Dict[str, Tuple[float, float]]:
         """
-        Calculate perceived intensity for each compound.
+        Calculate perceived intensity for each compound using Stevens' Power Law.
         Returns {name: (intensity, intensity_uncertainty)}
+        
+        Updated with Matrix ODT corrections and Perceptual Masking.
         """
-        # 1. Headspace Partitioning (optional)
+        import math
+        
+        p_type = ProteinType(protein_type)
+        # Use matrix volatile retention factor to adjust ODT
+        retention = MATRIX_CORRECTIONS[p_type].volatile_retention
+
+        # 1. Headspace Partitioning (optional) - convert ppb to ppm for old model if needed
+        # Actually let's stay in ppb for consistency with new safety/benchmarks.
         if self.headspace and temp_c is not None:
             effective_concs = self.headspace.predict_headspace(
-                concentration_dict_ppm, temp_c, fat_fraction, protein_fraction
+                concentration_dict_ppb, temp_c, fat_fraction, protein_fraction
             )
         else:
-            effective_concs = concentration_dict_ppm
+            effective_concs = concentration_dict_ppb
 
         # 2. Perceived Intensity calculation
         results = {}
         for compound, conc_data in effective_concs.items():
-            # Handle both float concs and (conc, unc) tuples
             if isinstance(conc_data, tuple):
-                conc, unc_ratio = conc_data # unc_ratio is roughly fractional uncertainty on conc
+                conc, unc_ratio = conc_data
             else:
-                conc, unc_ratio = conc_data, 0.2
+                conc, unc_ratio = conc_data, 0.25
             
             entry = self.db.find_entry(compound)
-            if entry and entry["threshold_ppm"]:
-                oav = conc / entry["threshold_ppm"]
-                # Apply psychophysical scaling
-                intensity = pow(oav, self.exponent) if oav > 0 else 0
+            if entry:
+                # ODT from DB is usually in ppb. 
+                # If unavailable, fallback to 0.1 ppb
+                odt_base = entry.get("threshold_ppb", 0.1) 
+                if entry.get("threshold_ppm"):
+                    odt_base = entry["threshold_ppm"] * 1000.0
                 
-                # Propagate uncertainty: dI = I * exp * (dc/c)
-                # For Maillard, unc is mostly in the barrier (Ea/RT error), leading to large log-uncertainty
-                i_unc = intensity * self.exponent * unc_ratio
-                results[entry["name"]] = (intensity, i_unc)
-        return results
+                # Matrix Effect: ODT_matrix = ODT_water / Retention
+                odt_matrix = odt_base / max(0.01, retention)
+                
+                # Stevens' Power Law: I = (C / ODT)^0.55
+                if conc > odt_matrix:
+                    intensity = pow(conc / odt_matrix, self.exponent)
+                    i_unc = intensity * self.exponent * unc_ratio
+                    results[entry["name"]] = (intensity, i_unc)
 
-    def get_radar_data(self, 
-                       concentration_dict_ppm: Dict[str, float],
-                       temp_c: Optional[float] = None,
-                       fat_fraction: float = 0.0,
-                       protein_fraction: float = 0.0) -> Dict[str, Tuple[float, float]]:
+        # 3. Perceptual Masking (Fix 4)
+        # We group results by descriptor for masking logic
+        masked_results = {k: v for k, v in results.items()}
+        
+        # Determine aggregate intensity for masking families
+        def get_family_intensity(keyword):
+            return sum(v[0] for k, v in results.items() if keyword in k.lower() or keyword in self.db.find_entry(k)["descriptors"])
+
+        beany_total = get_family_intensity("beany")
+        meaty_total = get_family_intensity("meaty")
+        
+        if beany_total > 0 and meaty_total > 0:
+            # Masking coefficient: meaty is reduced by beany presence
+            k_mask = 0.35 # 35% max reduction
+            mask_factor = 1.0 - k_mask * (beany_total / (beany_total + meaty_total))
+            for k, (v, u) in masked_results.items():
+                entry = self.db.find_entry(k)
+                if "meaty" in entry["descriptors"]:
+                    masked_results[k] = (v * mask_factor, u * mask_factor)
+
+        return masked_results
+
+    def export_qda_profile(self, intensity_results: Dict[str, Tuple[float, float]]) -> Dict[str, float]:
         """
-        Groups perceived intensities into radar categories.
+        Normalizes intensities to a 0-10 QDA scale for export.
+        """
+        import math
+        # Aggregated categories
+        categories = {}
+        # This is similar to get_radar_data but returns 0-10 scores
+        radar = self.get_radar_data_from_intensities(intensity_results)
+        
+        # Normalize radar scores to 10
+        max_score = max([v[0] for v in radar.values()]) if radar else 1.0
+        qda = {k: min(10.0, (v[0] / max_score) * 10.0) for k, v in radar.items() if v[0] > 0}
+        return qda
+
+    def get_radar_data_from_intensities(self, compound_intensities: Dict[str, Tuple[float, float]]) -> Dict[str, Tuple[float, float]]:
+        """
+        Helper to group already calculated intensities into radar categories.
         Returns {category: (score, uncertainty)}
         """
-        compound_intensities = self.predict_profile(
-            concentration_dict_ppm, temp_c, fat_fraction, protein_fraction
-        )
-        
         # 1. Group intensities by category
         radar = {tag: (0.0, 0.0) for tag in self.db.tags.keys()}
         
@@ -167,7 +229,6 @@ class SensoryPredictor:
             # Specialized synergy check
             synergy_boost = 1.0
             for (a, b), boost in self.synergy_pairs.items():
-                # If both members of a synergy pair are active for THIS tag
                 has_a = any(a in name for name in active_for_tag)
                 has_b = any(b in name for name in active_for_tag)
                 if has_a and has_b:
@@ -186,11 +247,28 @@ class SensoryPredictor:
                 group_sum = sum([pow(i, self.synergy_pow) for i in intensities])
                 score = pow(group_sum, 1.0/self.synergy_pow)
             
-            # Simple sum of squares for propagated uncertainty
             total_unc = sum([u**2 for u in uncertainties])**0.5
             radar[tag] = (score, total_unc)
                         
         return radar
+
+    def get_radar_data(self, 
+                       concentration_dict_ppb: Dict[str, float],
+                       protein_type: str = "free",
+                       temp_c: Optional[float] = None,
+                       fat_fraction: float = 0.0,
+                       protein_fraction: float = 0.0) -> Dict[str, Tuple[float, float]]:
+        """
+        High-level entry for radar categories.
+        """
+        compound_intensities = self.predict_profile(
+            concentration_dict_ppb, 
+            protein_type=protein_type,
+            temp_c=temp_c, 
+            fat_fraction=fat_fraction, 
+            protein_fraction=protein_fraction
+        )
+        return self.get_radar_data_from_intensities(compound_intensities)
 
     def get_dominant_notes(self, radar_profile: Dict[str, Tuple[float, float]], top_n: int = 3) -> List[tuple]:
         """Return the top categories by score."""

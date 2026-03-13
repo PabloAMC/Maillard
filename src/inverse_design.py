@@ -1,7 +1,7 @@
 import yaml
 from pathlib import Path
 from typing import List, Dict, Tuple, Optional
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from src.smirks_engine import SmirksEngine, ReactionConditions, Species  # noqa: E402
 from src.recommend import Recommender  # noqa: E402
@@ -9,6 +9,8 @@ from src.precursor_resolver import resolve_many  # noqa: E402
 from src.barrier_constants import HEME_CATALYST_REDUCTION, HEME_CATALYST_FAMILIES  # noqa: E402
 from src.results_db import ResultsDB  # noqa: E402
 from src.sensory import SensoryPredictor  # noqa: E402
+from src.safety import evaluate_formulation_safety  # noqa: E402
+from src.lipid_oxidation import predict_lop_generation  # noqa: E402
 
 # Locate data files
 ROOT = Path(__file__).resolve().parents[1]
@@ -20,14 +22,16 @@ class FormulationResult:
     name: str
     target_score: float
     off_flavour_risk: float
-    lysine_budget: float
-    trapping_efficiency: float
-    detected_targets: List[str]
-    detected_minimize: List[str]
-    radar: Dict[str, tuple]  # Phase C: Radar category scores
-    safety_score: float      # Phase F: Safety evaluation
-    flagged_toxics: List[str]
-    texture_risk: float      # Phase 2: DHA competition risk
+    lysine_budget: float = 0.0
+    trapping_efficiency: float = 0.0
+    detected_targets: List[str] = field(default_factory=list)
+    detected_minimize: List[str] = field(default_factory=list)
+    radar: Dict[str, tuple] = field(default_factory=dict)
+    safety_score: float = 0.0
+    flagged_toxics: List[str] = field(default_factory=list)
+    texture_risk: float = 0.0
+    predicted_ppb: Dict[str, float] = field(default_factory=dict)
+    avg_uncertainty: float = 5.0
 
 
 class InverseDesigner:
@@ -89,43 +93,6 @@ class InverseDesigner:
                 detected.append(name)
         return score, detected
 
-    def _score_safety(self, targets_found: List[dict], conditions: ReactionConditions) -> Tuple[float, List[str]]:
-        """
-        Score safety risks. 
-        Penalty = sum(weight_i * conc_i * exp(-(barrier_i - 20)/RT))
-        Weights based on priority: critical=10, high=5, medium=2.
-        Only matches compounds from 'toxic_markers.yml'.
-        """
-        import math
-        penalty = 0.0
-        flagged = []
-        
-        temp_k = conditions.temperature_celsius + 273.15
-        RT = 0.001987 * temp_k
-        
-        # We use the sensory database to identify toxics (it already loads toxic_markers.yml)
-        for t in targets_found:
-            name = t["name"]
-            entry = self.sensory.db.find_entry(name)
-            
-            # Check if source is toxic_markers.yml
-            if entry and entry.get("source") == "toxic_markers.yml":
-                barrier = t.get("span", 99.0)
-                conc = t.get("concentration", 1.0)
-                
-                if barrier >= 99.0:
-                    continue
-                
-                priority_map = {"critical": 10.0, "high": 5.0, "medium": 2.0}
-                weight = priority_map.get(entry.get("priority", "medium"), 2.0)
-                
-                # Use same scaling as sensory (barrier-20) for consistency in "predicted intensity"
-                impact = weight * conc * math.exp(-(barrier - 20.0) / RT)
-                penalty += impact
-                flagged.append(name)
-                
-        return penalty, flagged
-
     def _score_texture_risk(self, precursors: List[Species], r_sugars: List[str]) -> float:
         """
         Heuristic for DHA-Maillard competition.
@@ -159,10 +126,15 @@ class InverseDesigner:
         """
         R.8.2: Evaluate a single formulation without touching self.grid.
         """
-        results = self.evaluate_all(global_conditions, grid_override=[formulation])
-        if not results:
-            raise ValueError("Evaluation failed for formulation")
-        return results[0]
+        old_grid = self.grid
+        try:
+            self.grid = [formulation]
+            results = self.evaluate_all(global_conditions)
+            if not results:
+                raise ValueError("Evaluation failed for formulation")
+            return results[0]
+        finally:
+            self.grid = old_grid
 
     def evaluate_all(self, global_conditions: ReactionConditions, grid_override: Optional[List[Dict]] = None) -> List[FormulationResult]:
         """
@@ -174,8 +146,12 @@ class InverseDesigner:
         minimize_compounds = self.tags.get(self.minimize_tag, []) if self.minimize_tag else []
 
         eval_grid = grid_override if grid_override is not None else self.grid
+        print(f"DEBUG: evaluate_all starting for {len(eval_grid)} formulations. First 2 names: {[f.get('name') for f in eval_grid[:2]]}")
         for form in eval_grid:
             name = form.get("name", "Unknown")
+            protein_type = form.get("protein_type", global_conditions.protein_type)
+            denaturation_state = form.get("denaturation_state", 0.5)
+            
             sugars = form.get("sugars", [])
             amino_acids = form.get("amino_acids", [])
             additives = form.get("additives", [])
@@ -197,7 +173,8 @@ class InverseDesigner:
                 temperature_celsius=form.get("temp", global_conditions.temperature_celsius),
                 water_activity=form.get("aw", global_conditions.water_activity),
                 fat_fraction=global_conditions.fat_fraction,
-                protein_fraction=global_conditions.protein_fraction
+                protein_fraction=global_conditions.protein_fraction,
+                protein_type=protein_type
             )
             
             # FAST mode heuristic barrier overrides
@@ -214,16 +191,19 @@ class InverseDesigner:
                     with open(LIBRARY_PATH, "r") as f:
                         lib_data = yaml.safe_load(f)
                         intervention_lib = {a["name"]: a for a in lib_data.get("interventions", [])}
-                        
+                    
+                    print(f"DEBUG: {name} raw interventions: {interventions}")
                     for inter in interventions:
                         agent_name = inter.get("name")
                         dose = inter.get("dose", 1.0)
+                        print(f"DEBUG: loading intervention {agent_name} with dose {dose}")
                         agent_data = intervention_lib.get(agent_name)
                         if agent_data:
                             for mech in agent_data.get("mechanisms", []):
                                 target = mech.get("target_family", "")
                                 delta = mech.get("delta_barrier_per_unit", 0.0)
                                 modifiers[target] = delta * dose
+                print(f"DEBUG_INV: {name} final modifiers: {modifiers}")
             
             engine = SmirksEngine(cond)
             steps = engine.enumerate(precursors, max_generations=4)
@@ -235,26 +215,36 @@ class InverseDesigner:
                 
                 bar, source, unc = self.db.get_best_barrier(reactants, products, step.reaction_family or "unknown")
                     
-                ph_mult = cond.get_ph_multiplier(step.reaction_family or "")
-                if ph_mult != 1.0:
-                    import math
-                    RT = 0.001987 * cond.temperature_kelvin
-                    if ph_mult > 0:
-                        bar -= RT * math.log(ph_mult)
-                    else:
-                        bar += 20.0
+                # Phase 7: Use new Arrhenius microkinetics with ionization corrections
+                # k = get_rate_constant returns a rate constant. 
+                # We need to map this back to an effective barrier for the span logic:
+                # k = A * exp(-E_eff / RT) => E_eff = -RT * ln(k / A)
+                # But even better: we can just use the rate constant directly in future iterations.
+                # For now, we adjust the barrier.
+                
+                k = cond.get_rate_constant(step.reaction_family or "unknown", ea_override_kcal=bar)
+                
+                # Effective barrier including pH and aw effects:
+                # Ea_eff = -RT * ln(k / A)
+                import math
+                RT = 0.001987 * cond.temperature_kelvin
+                A = 1e11 # Must match conditions.py
+                if k > 0:
+                    bar_eff = -RT * math.log(k / A)
+                else:
+                    bar_eff = 99.0
                     
                 if apply_heme and step.reaction_family in HEME_CATALYST_FAMILIES:
-                    bar -= HEME_CATALYST_REDUCTION
+                    bar_eff -= HEME_CATALYST_REDUCTION
                 
                 # Phase 20: Apply intervention modifiers
                 family = step.reaction_family or ""
                 for mod_fam, delta in modifiers.items():
                     if mod_fam.lower() in family.lower():
-                        bar += delta
+                        bar_eff += delta
                     
                 rxn_key = f"{'+'.join(sorted(r.smiles for r in step.reactants))}->{'+'.join(sorted(p.smiles for p in step.products))}"
-                heuristic_barriers[rxn_key] = (max(0.0, bar), unc)
+                heuristic_barriers[rxn_key] = (max(0.0, bar_eff), unc)
                 
             # Build canonical concentrations map
             from src.recommend import _canon
@@ -269,13 +259,46 @@ class InverseDesigner:
                         break
                 initial_concentrations[_canon(p.smiles)] = qty
                 
+            # Create a name-to-concentration map for the safety module
+            name_ratios = {p.label: initial_concentrations[_canon(p.smiles)] for p in precursors}
+                
+            # PHASE L: Lipid Oxidation Crosstalk (Fix 7)
+            lipids_input = {k: v for k, v in ratios.items() if any(l in k.lower() for l in ["linoleic", "linolenic", "oil", "fat"])}
+            generated_lops = predict_lop_generation(
+                lipids_input, 
+                cond.temperature_celsius, 
+                form.get("time_minutes", 60.0),
+                cond.water_activity
+            )
+            
+            # Merge LOPs into initial_concentrations
+            for lop_smi, lop_conc in generated_lops.items():
+                initial_concentrations[_canon(lop_smi)] = initial_concentrations.get(_canon(lop_smi), 0.0) + lop_conc
+                
             recommender = Recommender()
-            rec_result = recommender.predict_from_steps(steps, heuristic_barriers, initial_concentrations, temperature_kelvin=cond.temperature_kelvin)
+            rec_result = recommender.predict_from_steps(
+                steps, 
+                heuristic_barriers, 
+                initial_concentrations, 
+                temperature_kelvin=cond.temperature_kelvin,
+                protein_type=protein_type,
+                denaturation_state=denaturation_state
+            )
             
             # Score against tags
             t_score_legacy, t_detected = self._score_targets(rec_result["targets"], target_compounds, cond)
             m_score_legacy, m_detected = self._score_targets(rec_result["targets"], minimize_compounds, cond)
-            s_penalty, flagged = self._score_safety(rec_result["targets"], cond)
+            
+            # PHASE F: Safety evaluation
+            # Replace old heuristic with new quantitative model
+            safety_val, flagged = evaluate_formulation_safety(
+                name_ratios, 
+                cond.temperature_celsius, 
+                form.get("time_minutes", 60.0), 
+                cond.pH,
+                modifiers=modifiers
+            )
+            s_penalty = safety_val * 2.0 # Weight for optimization
             
             trap_dict = rec_result["metrics"].get("trapping_efficiency", {})
             trap_avg = sum(trap_dict.values()) / len(trap_dict) if trap_dict else 0.0
@@ -284,19 +307,21 @@ class InverseDesigner:
             # Kinetic-aware weighting: Conc_eff = Conc_limiting * exp(-(PathSpan - 20) / RT)
             # We use 20 kcal/mol as a baseline to make results visible in ppm units.
             RT = 0.001987 * cond.temperature_kelvin
-            import math
-            conc_map = {}
-            for t in rec_result["targets"]:
-                # Shifted Boltzmann for better visualization in ppm range
-                weight = math.exp(-(t["span"] - 20.0) / RT) if t["span"] < 90 else 0.0
-                conc_map[t["name"]] = t["concentration"] * weight
+            # Populate conc_map for legacy compatibility (though radar scores now use ppb)
+            conc_map = rec_result["predicted_ppb"]
 
+            # PHASE G: Sensory Scoring
             radar_scores = self.sensory.get_radar_data(
-                conc_map, 
+                rec_result["predicted_ppb"], 
+                protein_type=protein_type,
                 temp_c=cond.temperature_celsius,
                 fat_fraction=cond.fat_fraction,
                 protein_fraction=cond.protein_fraction
             )
+            
+            # Calculate average uncertainty for the optimizer
+            valid_spans = [t["span_uncertainty"] for t in rec_result["targets"] if t["span_uncertainty"] > 0]
+            avg_unc = sum(valid_spans) / len(valid_spans) if valid_spans else 5.0
             
             # Use radar score for the target category as the official t_score
             t_score = radar_scores.get(self.target_tag, (0.0, 0))[0]
@@ -314,7 +339,9 @@ class InverseDesigner:
                 radar=radar_scores,
                 safety_score=s_penalty,
                 flagged_toxics=flagged,
-                texture_risk=self._score_texture_risk(precursors, sugars)
+                texture_risk=self._score_texture_risk(precursors, sugars),
+                predicted_ppb=conc_map,
+                avg_uncertainty=avg_unc
             ))
 
             

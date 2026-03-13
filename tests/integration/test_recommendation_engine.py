@@ -97,8 +97,8 @@ def mock_grid_path():
                 "sugars": ["ribose"],
                 "amino_acids": ["cysteine"],
                 "molar_ratios": {
-                    "cysteine": 0.5,
-                    "ribose": 1.0
+                    "cysteine": 500.0,
+                    "ribose": 100.0
                 }
             },
             {
@@ -106,8 +106,8 @@ def mock_grid_path():
                 "sugars": ["ribose"],
                 "amino_acids": ["cysteine"],
                 "molar_ratios": {
-                    "cysteine": 2.0,
-                    "ribose": 1.0
+                    "cysteine": 2000.0,
+                    "ribose": 100.0
                 }
             }
         ]

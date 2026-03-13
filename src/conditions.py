@@ -15,7 +15,8 @@ class ReactionConditions:
                  dielectric_constant: float = 78.4, # Default: Water
                  solvent_name: str = "water",
                  matrix_fiber: float = 0.0, # Placeholder for blind spot
-                 metal_catalyst: Optional[str] = None # Placeholder for blind spot
+                 metal_catalyst: Optional[str] = None, # Placeholder for blind spot
+                 protein_type: str = "free"
                  ):
         self.pH = pH
         self.temperature_celsius = temperature_celsius
@@ -26,6 +27,7 @@ class ReactionConditions:
         self.solvent_name = solvent_name
         self.matrix_fiber = matrix_fiber
         self.metal_catalyst = metal_catalyst
+        self.protein_type = protein_type
         self.__post_init__()
 
     def __post_init__(self):
@@ -84,6 +86,98 @@ class ReactionConditions:
         # 3. 1,2-enolisation / Furan / Thiol / Thio / Cysteine / [Generic Enolisation] (Acidic favored)
         elif any(x in fam for x in ["1,2", "1_2", "furan", "thiol", "thio", "cysteine", "enolisation", "oxygen_heterocycle"]):
             return 1.0 + 4.0 * (1.0 - self._sigmoid(self.pH, 6.0, 2.0))
+            
+        return 1.0
+
+    def get_rate_constant(self, pathway_type: str, ea_override_kcal: float = None) -> float:
+        """
+        Arrhenius rate constant: k = A * exp(-Ea / RT)
+        ea_override_kcal: barrier in kcal/mol from results_db.py
+        
+        Default Activation Energies (kJ/mol):
+        - amadori_formation: 75.0
+        - strecker_degradation: 85.0
+        - thiol_formation: 95.0
+        - pyrazine_formation: 110.0
+        - furfural_formation: 70.0
+        - acrylamide_formation: 130.0
+        """
+        import numpy as np
+        R_J = 8.314  # J/mol/K
+        T_K = self.temperature_kelvin
+        
+        # Ea in kJ/mol
+        ACTIVATION_ENERGIES_KJ = {
+            "amadori_formation": 75.0,
+            "strecker_degradation": 85.0,
+            "thiol_formation": 95.0,       
+            "pyrazine_formation": 110.0,
+            "furfural_formation": 70.0,
+            "acrylamide_formation": 130.0,
+        }
+        
+        if ea_override_kcal is not None:
+            Ea_J = ea_override_kcal * 4184.0 # kcal/mol -> J/mol
+        else:
+            # Match family to default kJ/mol map
+            fam = pathway_type.lower()
+            ea_kj = 90.0 # Default fallback
+            for key, val in ACTIVATION_ENERGIES_KJ.items():
+                if key in fam or fam in key:
+                    ea_kj = val
+                    break
+            Ea_J = ea_kj * 1000.0
+            
+        A = 1e11  # Rough average pre-exponential factor, s^-1
+        k = A * np.exp(-Ea_J / (R_J * T_K))
+        
+        # Apply pH ionization correction
+        ph_factor = self._ionization_correction(pathway_type)
+        
+        # Apply water activity correction (Labuza)
+        aw_factor = self._water_activity_correction(pathway_type)
+        
+        return k * ph_factor * aw_factor
+
+    def _ionization_correction(self, pathway_type: str) -> float:
+        """
+        Henderson-Hasselbalch based correction for reactive species ionization.
+        Replaces arbitrary sigmoids.
+        """
+        fam = pathway_type.lower()
+        # Amine reactions require the deprotonated form (R-NH2)
+        if any(x in fam for x in ("amadori", "strecker", "schiff")):
+            pKa = 8.0  # Common alpha-amino pKa
+            return 1.0 / (1.0 + 10**(pKa - self.pH))
+        
+        # Pyrazines often peak at slightly alkaline pH
+        elif "pyrazine" in fam:
+            return 1.0 / (1.0 + 10**(6.5 - self.pH))
+            
+        return 1.0
+
+    def _water_activity_correction(self, pathway_type: str) -> float:
+        """
+        Correction for water activity effect on Maillard reaction rate.
+        Based on Labuza & Saltmarch (1981).
+        Rate peaks around aw=0.65, drops at both extremes.
+        """
+        aw = self.water_activity
+        fam = pathway_type.lower()
+        
+        if any(x in fam for x in ("amadori", "strecker", "pyrazine")):
+            if aw < 0.2:
+                return 0.1
+            elif aw < 0.65:
+                # Linear ramp
+                return 0.1 + (aw - 0.2) / (0.65 - 0.2) * 0.9
+            else:
+                # Product inhibition/dilution beyond peak
+                return 1.0 - (aw - 0.65) / (1.0 - 0.65) * 0.4
+                
+        elif "furfural" in fam:
+            # Furfural formation (acid-catalyzed dehydration) favored at lower aw
+            return max(0.1, 1.3 - aw)
             
         return 1.0
         
