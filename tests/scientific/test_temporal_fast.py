@@ -2,16 +2,18 @@ import pytest
 from src.recommend import Recommender
 from src.pathway_extractor import Species, ElementaryStep
 
-def test_temporal_ramp_gap_in_fast_mode():
+def test_temporal_ramp_in_fast_mode():
     """
-    DOCUMENTED GAP: The FAST recommender does not yet ingest temporal profile CSVs. 
-    It evaluates at a single temperature point.
+    Verify that the FAST recommender correctly ingests temporal profile CSVs
+    and uses integrated Arrhenius propensity (SOTA).
     """
     recommender = Recommender()
     
-    # Precursors
-    ribose = Species("ribose", "OCC(O)C(O)C(O)C=O")
-    lysine = Species("lysine", "NCCCCC(N)C(=O)O")
+    # Precursors (using SMILES for keys)
+    ribose_smi = "OCC(O)C(O)C(O)C=O"
+    lysine_smi = "NCCCCC(N)C(=O)O"
+    ribose = Species("ribose", ribose_smi)
+    lysine = Species("lysine", lysine_smi)
     
     steps = [
         ElementaryStep(
@@ -21,20 +23,19 @@ def test_temporal_ramp_gap_in_fast_mode():
         )
     ]
     
-    barriers = {
-        "OCC(O)C(O)C(O)C=O+NCCCCC(N)C(=O)O->OCC(O)C(O)C(O)C=NCCCCC(N)C(=O)O": 20.0
-    }
+    # Barriers
+    step_key = f"{ribose_smi}+{lysine_smi}->OCC(O)C(O)C(O)C=NCCCCC(N)C(=O)O"
+    barriers = {step_key: 20.0}
     
-    initial = {"ribose": 1.0, "lysine": 1.0}
+    initial = {ribose_smi: 1.0, lysine_smi: 1.0}
     
-    # We want to pass a CSV ramp like the CLI supports
-    ramp_path = "data/temp_profiles/isothermal_150.csv"
+    # Use the test ramp we created
+    ramp_path = "data/temp_profiles/test_ramp.csv"
     
-    # Current predict_from_steps only takes float temperature_kelvin
-    # Passing a path should either work (if we implement it) or fail clearly.
-    # For now, we xfail to mark this feature request.
-    pytest.xfail("Recommender.predict_from_steps does not yet support temperature ramp CSVs.")
+    # Call with the new parameter
+    res = recommender.predict_from_steps(steps, barriers, initial, temp_ramp_csv=ramp_path)
     
-    # This will fail at runtime if we try to pass a string where it expects a float
-    res = recommender.predict_from_steps(steps, barriers, initial, temperature_kelvin=ramp_path)
     assert res is not None
+    assert "metrics" in res
+    # Integrated weight should be non-zero for a 20 kcal/mol barrier at 150C
+    assert any(v > 0 for v in res["predicted_ppb"].values())

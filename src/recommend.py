@@ -10,9 +10,11 @@ or canonical precursors to recommend actionable formulation adjustments.
 import sys
 import json
 import yaml
+import numpy as np
+import pandas as pd
 from pathlib import Path
 from dataclasses import dataclass
-from typing import List, Dict, Set, Optional, Any
+from typing import List, Dict, Set, Optional, Any, Tuple
 
 from data.reactions.curated_pathways import PATHWAYS, PATHWAY_METADATA
 from src.matrix_correction import ProteinType, apply_matrix_correction
@@ -99,6 +101,55 @@ def _weight(barrier_kcal, temp_kelvin=423.15): # Default 150C
     R = 0.001987
     return math.exp(-barrier_kcal / (R * temp_kelvin))
 
+def _integrate_arrhenius(barrier_kcal: float, 
+                         ramp_data: List[Tuple[float, float]], 
+                         pre_exponential: float = 1e11) -> float:
+    """
+    SOTA: Numerically integrate the Arrhenius propensity over a temperature ramp.
+    Returns the integrated yield approximation: 1 - exp(-integral(k(t) dt)).
+    
+    ramp_data: List of (time_minutes, temp_kelvin)
+    """
+    if not ramp_data or barrier_kcal >= 99.0:
+        return 0.0
+    
+    # Convert minutes to seconds for S-1 pre-exponential
+    times_min, temps_k = zip(*ramp_data)
+    times_sec = np.array(times_min) * 60.0
+    temps_k = np.array(temps_k)
+    
+    # Interpolate to 100 points for fidelity
+    t_fine = np.linspace(times_sec[0], times_sec[-1], 100)
+    T_fine = np.interp(t_fine, times_sec, temps_k)
+    
+    R = 0.001987 # kcal/mol/K
+    k_fine = pre_exponential * np.exp(-barrier_kcal / (R * T_fine))
+    
+    # Integrate using Trapezoidal rule (standard for discrete steps)
+    integral_k_dt = np.trapz(k_fine, t_fine)
+    
+    # Yield approximation (saturation handling)
+    return 1.0 - np.exp(-integral_k_dt)
+
+def _load_ramp(ramp_path: str) -> List[Tuple[float, float]]:
+    """Load a temperature ramp from CSV (time_min, temp_c)."""
+    try:
+        df = pd.read_csv(ramp_path)
+        # Standard schema: 'time' in minutes, 'temp' in Celsius
+        if 'time' not in df.columns or 'temp' not in df.columns:
+            return []
+        return list(zip(df['time'], df['temp'] + 273.15))
+    except Exception as e:
+        print(f"Warning: Failed to load ramp {ramp_path}: {e}")
+        return []
+
+def _weight(barrier_kcal, temp_kelvin=423.15): # Default 150C
+    import math
+    if barrier_kcal >= 99.0: 
+        return 0.0
+    R = 0.001987
+    return math.exp(-barrier_kcal / (R * temp_kelvin))
+
 
 class Recommender:
     def __init__(self, results_path: Optional[Path] = None):
@@ -158,12 +209,16 @@ class Recommender:
                            temperature_kelvin: float = 423.15, 
                            time_minutes: Optional[float] = None,
                            protein_type: str = "free",
-                           denaturation_state: float = 0.5):
+                           denaturation_state: float = 0.5,
+                           temp_ramp_csv: Optional[str] = None):
         """
         Dynamically predict active pathways given a list of generated ElementarySteps
         and their computed barriers from xTB or Hammond fallback.
+        
+        If temp_ramp_csv provided (SOTA), integrates propensity over the ramp.
         """
         p_type = ProteinType(protein_type)
+        ramp_data = _load_ramp(temp_ramp_csv) if temp_ramp_csv else None
         
         # Phase 7: Apply Matrix Accessibility Corrections to precursors
         # We need to map labels to concentrations for apply_matrix_correction
@@ -255,32 +310,34 @@ class Recommender:
                 # Flux = (product of reactant concs) * exp(-barrier/RT)
                 # But for the cumulative pathway, we use the bottleneck span
                 import math
-                RT = 0.001987 * temperature_kelvin
                 
                 # Product of reactant concentrations
                 reactant_conc_product = 1.0
                 for r in r_canons:
                     reactant_conc_product *= tracking[r][1]
                 
-                # Path weight (Flux approximation)
-                path_weight = reactant_conc_product * math.exp(-path_span / RT)
-                
-                # Phase Q.1: Temporal FAST Mode.
-                # If a time is provided, penalise pathways that require many steps.
-                # Approximate 1st order characteristic timescale: tau ~ exp(Ea/RT) / A
-                # We assume a generic pre-exponential for this rough heuristic.
-                if time_minutes is not None:
-                    # Characteristic time approx (seconds)
-                    # Using A ~ 1e11 (from new Arrhenius data average)
-                    tau_sec = math.exp(path_span / RT) / 1e11
-                    tau_min = tau_sec / 60.0
+                if ramp_data:
+                    # SOTA: Integrated Propensity
+                    integrated_propensity = _integrate_arrhenius(path_span, ramp_data)
+                    path_weight = reactant_conc_product * integrated_propensity
+                else:
+                    RT = 0.001987 * temperature_kelvin
+                    # Path weight (Flux approximation)
+                    path_weight = reactant_conc_product * math.exp(-path_span / RT)
                     
-                    # Number of steps increases characteristic time roughly linearly
-                    total_tau = tau_min * path_depth
-                    
-                    # Weight decay: if total_tau >> time_minutes, weight drops exponentially
-                    time_penalty = math.exp(-total_tau / time_minutes)
-                    path_weight *= time_penalty
+                    # Phase Q.1: Temporal FAST Mode (Fallback)
+                    if time_minutes is not None:
+                        # Characteristic time approx (seconds)
+                        # Using A ~ 1e11 (from new Arrhenius data average)
+                        tau_sec = math.exp(path_span / RT) / 1e11
+                        tau_min = tau_sec / 60.0
+                        
+                        # Number of steps increases characteristic time roughly linearly
+                        total_tau = tau_min * path_depth
+                        
+                        # Weight decay: if total_tau >> time_minutes, weight drops exponentially
+                        time_penalty = math.exp(-total_tau / time_minutes)
+                        path_weight *= time_penalty
                 
                 # Relaxation: we primarily want the lowest span path. 
                 for p in p_canons:
@@ -390,9 +447,16 @@ class Recommender:
                             barrier_data = barriers_dict.get(step_key, (99.0, 5.0))
                             barrier = barrier_data[0] if isinstance(barrier_data, tuple) else barrier_data
                             path_barrier = max(max_r_dist, barrier)
-                            sb_weights += _weight(path_barrier)
+                            
+                            if ramp_data:
+                                sb_weights += _integrate_arrhenius(path_barrier, ramp_data)
+                            else:
+                                sb_weights += _weight(path_barrier, temperature_kelvin)
             
-            persistence_w = _weight(30.0)
+            if ramp_data:
+                persistence_w = _integrate_arrhenius(30.0, ramp_data)
+            else:
+                persistence_w = _weight(30.0, temperature_kelvin)
             if sb_weights + persistence_w > 0:
                 eff = 100.0 * sb_weights / (persistence_w + sb_weights)
             else:
@@ -425,7 +489,11 @@ class Recommender:
                     barrier_data = barriers_dict.get(step_key, (99.0, 5.0))
                     barrier = barrier_data[0] if isinstance(barrier_data, tuple) else barrier_data
                     path_barrier = max(max_r_dist, barrier)
-                    weight = _weight(path_barrier)
+                    
+                    if ramp_data:
+                        weight = _integrate_arrhenius(path_barrier, ramp_data)
+                    else:
+                        weight = _weight(path_barrier, temperature_kelvin)
                     
                     if step.reaction_family in ["Schiff_Base_Formation", "Lipid_Schiff_Base"]:
                         w_maillard += weight
