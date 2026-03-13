@@ -65,11 +65,17 @@ Maillard uses a funnel strategy: generate broadly, then refine precisely. Most u
 - **Safety Scoring**: Automatically flags and penalizes toxic marker formation (Acrylamide, CML, CEL, HMF) using Pareto ranking.
 - **Sensory Radar**: Stevens' power-law psychophysical model generates multi-axis flavor profiles (meaty, roasted, beany, malty, earthy).
 
-## 🚀 The Bleeding Edge (Roadmap)
-We are currently extending the framework to address the most difficult challenges in Alternative Protein science:
-1. **Radical Lipid Oxidation**: Modeling the *generation* of beany off-flavors (hexanal) from PUFAs and their crosstalk with Maillard intermediates.
-2. **Toxicity Decoupling**: BO-driven optimization to suggest interventions (antioxidants/cations) that lower toxic by-products while preserving flavor.
-3. **Enzymatic Pre-Processing**: Simulating solid-state fermentation and protease treatment to "clean" raw isolates before thermal extrusion.
+## 🚀 Completed Milestones & Roadmap
+
+### 🟢 Phase 1: Complexity & Matrix (Done)
+- [x] **Radical Lipid Oxidation**: Modeling the *generation* of beany off-flavors (hexanal) from PUFAs via `src/lipid_oxidation.py`.
+- [x] **Matrix Correction Layer**: Scaling reactivity for protein-bound precursors via `src/matrix_correction.py`.
+- [x] **Enzymatic Pre-Processing**: Simulating fermentation/hydrolysis clean-up via `src/pre_processor.py`.
+
+### 🟡 Phase 2: Advanced Physics (Current Priority)
+- [ ] **Temporal FAST Mode**: Integrating temperature ramps into the Boltzmann scoring loop.
+- [ ] **Heme/Iron Catalysis**: Explicit kinetic models for transition-metal promoted oxidation.
+- [ ] **Rheological Feedback**: Linking DHA cross-linking to physical texture changes.
 
 ## 🚀 Installation
 
@@ -130,9 +136,9 @@ The framework uses a **Test-Driven Science** approach. We maintain specific test
 
 ### 🚩 Known Blind Spots (Tracked)
 We proactively document and test for current engine limitations to prevent over-confidence in edge cases:
-- **Peptide Accessibility**: Modeling how buried amino groups in protein matrices reduce yield.
-- **Matrix Inhibition**: Modeling how fiber/starch traps volatiles (partitioning).
-- **Metal Catalysis**: Explicit support for iron/copper catalysis of pyrazine formation.
+- **Heme Optimization**: While supported in the CLI, explicit leghemoglobin-specific kinetics are still being refined.
+- **Supplier Variability**: Batch-level differences between isolate suppliers (PURIS vs Roquette) are not yet modeled.
+- **Metal Catalysis**: General iron/copper synergistic effects on pyrazine formation are currently heuristic.
 
 *Run these baseline tests with:* `python -m pytest tests/scientific/test_blind_spots.py`
 
