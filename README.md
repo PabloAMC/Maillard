@@ -1,6 +1,7 @@
 # Maillard Reactant Framework
 
-[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
+[![Docker Required](https://img.shields.io/badge/Docker-Required-blue.svg)](https://www.docker.com/)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 **Maillard** is a pure-Python, high-fidelity chemical discovery engine designed for the next generation of plant-based foods. It explores the high-dimensional chemical space of the Maillard reaction to help you design flavor systems that are indistinguishable from animal meat.
@@ -67,38 +68,44 @@ Maillard uses a funnel strategy: generate broadly, then refine precisely. Most u
 
 ## 🚀 Completed Milestones & Roadmap
 
-### 🟢 Phase 1: Complexity & Matrix (Done)
-- [x] **Radical Lipid Oxidation**: Modeling the *generation* of beany off-flavors (hexanal) from PUFAs via `src/lipid_oxidation.py`.
-- [x] **Matrix Correction Layer**: Scaling reactivity for protein-bound precursors via `src/matrix_correction.py`.
-- [x] **Enzymatic Pre-Processing**: Simulating fermentation/hydrolysis clean-up via `src/pre_processor.py`.
+### 🟢 Phase 1: Foundation & Complexity (Done)
+- [x] **Reaction Core**: SMIRKS-based enumeration with mass conservation.
+- [x] **Radical Lipid Oxidation**: Generation of beany off-flavors (hexanal) from PUFAs.
+- [x] **Temporal FAST Mode**: Non-isothermal Boltzmann scoring using Arrhenius integrals.
+- [x] **Matrix Correction**: accessibility scaling for high-protein matrices (Pea/Soy).
 
-### 🟡 Phase 2: Advanced Physics (Current Priority)
-- [ ] **Temporal FAST Mode**: Integrating temperature ramps into the Boltzmann scoring loop.
-- [ ] **Heme/Iron Catalysis**: Explicit kinetic models for transition-metal promoted oxidation.
-- [ ] **Rheological Feedback**: Linking DHA cross-linking to physical texture changes.
+### 🟡 Phase 2: Refinement & Safety (Active)
+- [x] **Safety Scoring**: Native Acrylamide/HMF modeling (Knol 2009).
+- [x] **Bayesian Optimization**: Optuna-driven Pareto-optimal precursor design.
+- [ ] **Heme/Iron Catalysis**: Specific kinetic models for metal-promoted pathways. (In Progress)
+- [ ] **Benchmarking**: Full cross-validation against Mottram/Farmer datasets. (In Progress)
+
+### 🔴 Phase 3: Advanced Physics (Next)
+- [ ] **Flavor-Texture Coupling**: Linking DHA cross-linking to rheological feedback.
+- [ ] **High-Shear Extrusion**: Modeling the mechanics of HME vs static heating.
+- [ ] **Phytochemical Scavenging**: Sequestration of osones by plant polyphenols.
 
 ## 🚀 Installation
 
-### 1. Recommended Setup (Conda / Mamba)
-The Maillard framework relies on complex scientific binaries (`CREST`, `xTB`, `PySCF`) which are most reliably managed via Conda.
+For detailed step-by-step instructions, including mandatory patches for `mace` and `e3nn`, please see the **[Installation Guide](Installation.md)**.
 
-**For Linux & Windows (WSL2):**
+### 🐧 Linux & 🪟 Windows (WSL2)
+We recommend using **Miniforge** to manage the complex chemistry dependencies:
 ```bash
-# Create the unified environment
 conda env create -f environment.yml
-
-# Activate it
 conda activate maillard
+# See Installation.md for the 'xtbiff' and 'pytorch' patches.
 ```
 
-**For macOS (Apple Silicon: M1/M2/M3):**
-Do not attempt to run this natively on macOS. Instead, use Docker for a seamless Linux environment:
+### 🍎 macOS (Apple Silicon M1/M2/M3)
+Maillard relies on x86_64 chemical binaries. Use **Docker** (with OrbStack or Docker Desktop) for a seamless experience:
 ```bash
-# Start a new container (First time)
+# Start the Linux environment
 docker run --platform linux/amd64 -it -v "$(pwd):/workspace" -w /workspace condaforge/miniforge3
 
 # Inside the container, set up environment:
-# conda create -n maillard python=3.12 -y && conda activate maillard
+conda create -n maillard python=3.12 -y && conda activate maillard
+# Apply patches from Installation.md
 ```
 
 **Returning to Work (macOS):**
@@ -106,9 +113,6 @@ docker run --platform linux/amd64 -it -v "$(pwd):/workspace" -w /workspace conda
 docker start -ai maillard_container
 conda activate maillard
 ```
-
-> [!NOTE]
-> For detailed per-OS setup (Windows WSL2, Linux native) and chemistry library patching (xtbiff), please refer to the [Installation Guide](Installation.md).
 
 
 ### 2. Verify Scientific Dependencies
@@ -179,25 +183,26 @@ print(f"Optimal Temp: {best.params['temp']:.1f} °C")
 ```
 
 ### 2. Command Line Interface (CLI)
-List the supported sugars, amino acids, and lipids in the framework:
+Identify the precursors and tags available in your current database:
 ```bash
 python scripts/run_pipeline.py --list-precursors
+python scripts/run_pipeline.py --list-tags
 ```
 
 ### 3. Forward Mode: Predict Aroma
-Predict the volatiles produced by a specific precursor combination.
+Predict the volatiles and sensory profile produced by a formulation.
 ```bash
 python scripts/run_pipeline.py \
-    --sugars ribose \
-    --amino-acids cysteine:2.0,leucine:1.0 \
-    --catalyst heme \
-    --ph 6.5 \
-    --temp 160
+    --sugars ribose:0.5 \
+    --amino-acids cysteine:0.2,leucine:0.1 \
+    --ph 5.5 \
+    --temp 105 \
+    --protein-type pea_iso
 ```
-*Note: Use `--xtb` to run rigorous structural optimizations (slow).*
+*Note: Add `--xtb` for rigorous (but slow) structural optimization.*
 
-### 4. Bayesian Formulation Optimization
-Instead of evaluating a static grid, dynamically search the continuous parameter space (concentrations, pH, temp) to find the absolute Pareto-optimal formulation for flavor vs safety.
+### 4. Bayesian Optimizer
+Search the continuous space to find the Pareto-optimal formulation for flavor vs. safety.
 ```bash
 python scripts/optimize_formulation.py \
     --sugars ribose,glucose \
