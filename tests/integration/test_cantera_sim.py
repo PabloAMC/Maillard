@@ -230,10 +230,10 @@ class TestSensoryPrediction:
         from src.sensory import SensoryPredictor
         
         predictor = SensoryPredictor()
-        # Meaty precursor: FFT (large OAV)
-        meaty_conc = {"FFT": 1.0} # 1 ppm
-        # Roasted precursor: pyrazine (smaller OAV due to higher threshold)
-        roasted_conc = {"2,3-dimethylpyrazine": 1.0} # 1 ppm
+        # Meaty precursor: FFT (large OAV). ODT is 0.01 ppb
+        meaty_conc = {"FFT": 1000.0} # 1000 ppb
+        # Roasted precursor: pyrazine (smaller OAV due to higher threshold). ODT is 2500 ppb
+        roasted_conc = {"2,3-dimethylpyrazine": 10000.0} # 10000 ppb
         
         profile_meaty = predictor.get_radar_data(meaty_conc)
         profile_roasted = predictor.get_radar_data(roasted_conc)
@@ -251,8 +251,8 @@ class TestSensoryPrediction:
         from src.sensory import SensoryPredictor
         predictor = SensoryPredictor()
         
-        low_conc = {"FFT": 0.0001}
-        high_conc = {"FFT": 0.1}
+        low_conc = {"FFT": 1.0}
+        high_conc = {"FFT": 100.0}
         
         profile_low = predictor.get_radar_data(low_conc)
         profile_high = predictor.get_radar_data(high_conc)

@@ -79,6 +79,8 @@ def main():
     parser.add_argument("--target", type=str, default=None, help="Inverse design target sensory tag (e.g. meaty, roasted)")
     parser.add_argument("--minimize", type=str, default="beany", help="Inverse design off-flavour tag to minimize (default: beany)")
     parser.add_argument("--xtb", action="store_true", help="Run full GFN2-xTB structural optimizations (SLOW!). Defaults to fast Hammond estimating.")
+    parser.add_argument("--protein-type", choices=["free", "pea_conc", "pea_iso", "soy_conc", "soy_iso", "myco"], default="free", help="Protein matrix type for accessibility corrections.")
+    parser.add_argument("--denaturation-state", type=float, default=0.5, help="Protein denaturation level (0.0 to 1.0). Default 0.5.")
     parser.add_argument("--list-precursors", action="store_true", help="List available precursors and exit")
     
     # Catch simple cases where user only wants to list
@@ -94,7 +96,8 @@ def main():
     conditions = ReactionConditions(
         pH=args.ph, 
         temperature_celsius=args.temp,
-        water_activity=args.aw
+        water_activity=args.aw,
+        protein_type=args.protein_type
     )
 
     # =================================================================
@@ -240,7 +243,13 @@ def main():
     # 4. Recommend Targets
     recommender = Recommender(None)
     
-    results = recommender.predict_from_steps(steps, barriers_dict, initial_concentrations)
+    results = recommender.predict_from_steps(
+        steps, 
+        barriers_dict, 
+        initial_concentrations,
+        protein_type=args.protein_type,
+        denaturation_state=args.denaturation_state
+    )
     active_pathways = results["targets"]
     metrics = results["metrics"]
     

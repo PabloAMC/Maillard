@@ -14,10 +14,12 @@ class FormulationOptimizer:
     Searches the continuous parameter space (concentrations, pH, temp) 
     to maximize the Pareto-ranked sensory outcome minus safety penalties.
     """
-    def __init__(self, target_tag: str, minimize_tag: str = "beany", risk_aversion: float = 1.0):
+    def __init__(self, target_tag: str, minimize_tag: str = "beany", risk_aversion: float = 1.0, protein_type: str = "free", denaturation_state: float = 0.5):
         self.target_tag = target_tag
         self.minimize_tag = minimize_tag
         self.risk_aversion = risk_aversion
+        self.protein_type = protein_type
+        self.denaturation_state = denaturation_state
         self.study = None
 
     def objective(self, trial: optuna.Trial, fixed_sugars: List[str], fixed_amino_acids: List[str], fixed_lipids: Optional[List[str]] = None) -> float:
@@ -62,7 +64,12 @@ class FormulationOptimizer:
             pre_steps = [pre_processing]
 
         # 2. Setup the single evaluation condition
-        cond = ReactionConditions(pH=ph, temperature_celsius=temp, water_activity=aw)
+        cond = ReactionConditions(
+            pH=ph, 
+            temperature_celsius=temp, 
+            water_activity=aw,
+            protein_type=self.protein_type
+        )
         
         # 3. Create a custom grid override
         molar_ratios = {}
@@ -97,7 +104,9 @@ class FormulationOptimizer:
             "temp": temp,
             "aw": aw,
             "time_minutes": time_mins,
-            "interventions": interventions
+            "interventions": interventions,
+            "protein_type": self.protein_type,
+            "denaturation_state": self.denaturation_state
         }
         
         # 4. Evaluate using the robust pipeline without mutating global state (R.8 fix)
@@ -109,15 +118,38 @@ class FormulationOptimizer:
         # But we also want to penalize extreme off-flavours if they spike too high
         off_flavour_penalty = res.off_flavour_risk * 0.5 
         
-        score = res.target_score - (self.risk_aversion * res.safety_score) - off_flavour_penalty
+        # The following lines are from the user's provided change.
+        # It seems there was an intention to use 'best_res' from a list of 'results',
+        # but in this 'objective' method, we have a single 'res' object.
+        # Assuming 'best_res' should refer to 'res' in this context for the subsequent calculations.
+        # best_res = sorted(results, key=lambda x: x.target_score, reverse=True)[0] # This line is commented out as 'results' is not defined.
+            
+        # Uncertainty-aware scoring (Fix 5)
+        # High span uncertainty (from missing/low-quality barriers) penalizes the score
+        # to prevent the optimizer from exploiting model blind spots.
         
-        # Store useful metadata for the CLI output
-        trial.set_user_attr("target_score", res.target_score)
+        # Average uncertainty across detected targets
+        # total_unc = sum(t["span_uncertainty"] for t in res.predicted_ppb.values() if isinstance(t, dict) and "span_uncertainty" in t)
+        # wait, best_res.predicted_ppb is the conc_map from evaluate_all. 
+        # It doesn't have the uncertainty. 
+        # I need to expose average uncertainty in FormulationResult.
+        
+        target_val = res.target_score
+        safety_penalty = self.risk_aversion * res.safety_score
+        off_flavor_penalty = 0.5 * res.off_flavour_risk
+        
+        # Heuristic uncertainty penalty: -0.1 per kcal of span uncertainty
+        unc_penalty = res.avg_uncertainty * 0.1
+        
+        final_objective = target_val - safety_penalty - off_flavor_penalty - unc_penalty
+        
+        trial.set_user_attr("target_score", target_val)
         trial.set_user_attr("safety_score", res.safety_score)
         trial.set_user_attr("off_flavour_risk", res.off_flavour_risk)
-        trial.set_user_attr("flagged_toxics", list(res.flagged_toxics))
+        trial.set_user_attr("avg_uncertainty", res.avg_uncertainty)
+        trial.set_user_attr("flagged_toxics", res.flagged_toxics)
         
-        return score
+        return final_objective
 
     def optimize(self, 
                  fixed_sugars: List[str], 

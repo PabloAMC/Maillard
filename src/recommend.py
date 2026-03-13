@@ -15,6 +15,7 @@ from dataclasses import dataclass
 from typing import List, Dict, Set, Optional, Any
 
 from data.reactions.curated_pathways import PATHWAYS, PATHWAY_METADATA
+from src.matrix_correction import ProteinType, apply_matrix_correction
 try:
     from rdkit import Chem
 except ImportError:
@@ -150,12 +151,30 @@ class Recommender:
                 
         return required_exogenous
 
-    def predict_from_steps(self, steps: List[Any], barriers_dict: Dict[str, float], initial_concentrations: Dict[str, float], temperature_kelvin: float = 423.15, time_minutes: Optional[float] = None):
+    def predict_from_steps(self, 
+                           steps: List[Any], 
+                           barriers_dict: Dict[str, float], 
+                           initial_concentrations: Dict[str, float], 
+                           temperature_kelvin: float = 423.15, 
+                           time_minutes: Optional[float] = None,
+                           protein_type: str = "free",
+                           denaturation_state: float = 0.5):
         """
         Dynamically predict active pathways given a list of generated ElementarySteps
         and their computed barriers from xTB or Hammond fallback.
-        Works without hardcoded pathways!
         """
+        p_type = ProteinType(protein_type)
+        
+        # Phase 7: Apply Matrix Accessibility Corrections to precursors
+        # We need to map labels to concentrations for apply_matrix_correction
+        # Note: apply_matrix_correction handles the scaling.
+        _, corrected_initial = apply_matrix_correction(
+            predicted_concentrations={}, 
+            reactive_amino_acids={k: v for k, v in initial_concentrations.items()},
+            protein_type=p_type,
+            denaturation_state=denaturation_state
+        )
+        
         desirable = self._load_desirable()
         off_flavours = self._load_off_flavours()
         toxic = self._load_toxic_markers()
@@ -171,7 +190,7 @@ class Recommender:
         tracking = {}
         # Pre-calculate exp(0) for initial precursors
         import math
-        for s, conc in initial_concentrations.items():
+        for s, conc in corrected_initial.items():
             tracking[_canon(s)] = (0.0, conc, 0, conc * 1.0, 0.0)
 
         changed = True
@@ -279,6 +298,28 @@ class Recommender:
                         tracking[p_key] = (path_span, path_conc, path_depth, path_weight, path_unc)
                         changed = True
 
+        # Phase 7: Collect raw predictions before matrix retention correction
+        raw_concentrations = {}
+        for p_canon, (span, conc, depth, weight, unc) in tracking.items():
+            # Standardise to ppb range: Weight (Boltzmann) * ratio * 1e9
+            raw_concentrations[p_canon] = weight * 1e9
+
+        # Phase 7: Apply Matrix Retention Corrections to outputs
+        corrected_volatiles, _ = apply_matrix_correction(
+            predicted_concentrations=raw_concentrations,
+            reactive_amino_acids={},
+            protein_type=p_type,
+            denaturation_state=denaturation_state
+        )
+        
+        # Add names to the dictionary for downstream sensory and benchmark matching
+        final_volatiles = {}
+        for p_canon, conc in corrected_volatiles.items():
+            final_volatiles[p_canon] = conc
+            t_info = target_lookup.get(p_canon)
+            if t_info:
+                final_volatiles[t_info["name"]] = conc
+
         # Identify which targets were produced
         active_pathways = []
         for p_canon, (span, conc, depth, weight, unc) in tracking.items():
@@ -293,8 +334,8 @@ class Recommender:
                 p_dict = {
                     "name": t_info["name"],
                     "span": span,
-                    "concentration": conc,
-                    "weighted_flux": weight,
+                    "concentration": final_volatiles.get(p_canon, 0.0), # Use corrected
+                    "weighted_flux": final_volatiles.get(p_canon, 0.0), # Use corrected
                     "span_uncertainty": tracking[p_canon][4],
                     "depth": depth,
                     "target": MockTarget(t_info["name"]),
@@ -393,13 +434,18 @@ class Recommender:
             
             if w_maillard + w_dha > 0:
                 lysine_budget = 100.0 * w_dha / (w_maillard + w_dha)
+            else:
+                lysine_budget = 0.0
+
+        metrics = {
+            "trapping_efficiency": trapping_results,
+            "lysine_budget_dha": lysine_budget
+        }
 
         return {
             "targets": active_pathways,
-            "metrics": {
-                "trapping_efficiency": trapping_results,
-                "lysine_budget_dha": lysine_budget
-            }
+            "metrics": metrics,
+            "predicted_ppb": final_volatiles
         }
 
     def predict(self, pool: List[str]):

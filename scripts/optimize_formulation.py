@@ -26,6 +26,8 @@ def main():
     parser.add_argument("--n-iterations", type=int, default=50, help="Number of Optuna trials (default: 50)")
     parser.add_argument("--risk-aversion", type=float, default=1.0, help="Penalty weight for toxic markers (default: 1.0)")
     parser.add_argument("--pre-process", type=str, choices=["none", "yeast", "protease", "both"], default="none", help="Biological pre-processing step")
+    parser.add_argument("--protein-type", choices=["free", "pea_conc", "pea_iso", "soy_conc", "soy_iso", "myco"], default="free", help="Protein matrix type (default: free)")
+    parser.add_argument("--denaturation-state", type=float, default=0.5, help="Denaturation state 0-1 (default: 0.5)")
     args = parser.parse_args()
 
     sugars = [s.strip() for s in args.sugars.split(",")] if args.sugars else []
@@ -48,7 +50,9 @@ def main():
     optimizer = FormulationOptimizer(
         target_tag=args.target_tag,
         minimize_tag=args.minimize_tag,
-        risk_aversion=args.risk_aversion
+        risk_aversion=args.risk_aversion,
+        protein_type=args.protein_type,
+        denaturation_state=args.denaturation_state
     )
     
     study = optimizer.optimize(
