@@ -126,7 +126,7 @@ pip install git+https://github.com/microsoft/skala.git
 
 ## 🔬 Scientific Accuracy & Monitoring
 
-The framework uses a **Test-Driven Science** approach. We maintain specific tests in `tests/scientific/` that monitor our correlation with literature and document known gaps. For a detailed breakdown of how we verify our predictions, see the **[Scientific Validation Guide](docs/VALIDATION_GUIDE.md)**.
+The framework uses a **Test-Driven Science** approach. We maintain specific tests in `tests/scientific/` that monitor our correlation with literature and document known gaps. For a detailed breakdown of how we verify our predictions against curated literature benchmarks, see the **[Scientific Validation Guide](docs/VALIDATION_GUIDE.md)** and the **[Literature Benchmark Reference](data/benchmarks/maillard_validation_benchmarks.md)**.
 
 ### 🚩 Known Blind Spots (Tracked)
 We proactively document and test for current engine limitations to prevent over-confidence in edge cases:
@@ -211,7 +211,7 @@ python scripts/run_cantera_kinetics.py \
     --input results/maillard_results.db \
     --predict-sensory
 
-# Validate framework against literature benchmarks (Phase 17)
+# Validate framework against literature benchmarks
 python scripts/compare_sim_to_lit.py
 ```
 *Use `--export mech.yaml` to save the Cantera mechanism for external use.*
