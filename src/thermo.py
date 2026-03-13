@@ -164,23 +164,22 @@ class QuasiHarmonicCorrector:
 from rdkit import Chem  # noqa: E402
 from scipy.constants import gas_constant  # noqa: E402
 
-# Joback Group Contributions
+# Joback Group Contributions (Suppressed H version)
 # Format: { 'smarts': (dfH, dfG, cp_a, cp_b, cp_c, cp_d) }
-# Units: dfH, dfG in kJ/mol. Cp = a + bT + cT^2 + dT^3 in J/(mol K)
 JOBACK_GROUPS = {
-    "carboxyl": ("[CX3](=O)[OX2H1]", -426.72, -387.87, 2.41e1, 4.27e-1, -2.88e-4, 7.40e-8),
-    "aldehyde": ("[CX3H1]=O", -162.03, -143.48, 3.09e1, -3.36e-2, 1.60e-4, -8.67e-8),
+    "carboxyl": ("[CX3](=O)[OX1H1]", -426.72, -387.87, 2.41e1, 4.27e-1, -2.88e-4, 7.40e-8),
+    "aldehyde": ("[CX2H1]=O", -162.03, -143.48, 3.09e1, -3.36e-2, 1.60e-4, -8.67e-8),
     "ketone": ("[CX3](=O)[#6]", -132.18, -120.48, 1.35e1, 2.20e-1, -1.14e-4, 2.50e-8),
-    "hydroxyl": ("O[H]", -208.04, -189.20, 2.57e1, -6.91e-2, 1.77e-4, -9.88e-8),
+    "hydroxyl": ("[OX1H1]", -208.04, -189.20, 2.57e1, -6.91e-2, 1.77e-4, -9.88e-8),
     "ether": ("[OX2]([#6])[#6]", -132.22, -105.00, 2.55e1, -6.32e-2, 1.11e-4, -5.48e-8),
-    "primary_amine": ("[NH2;X1]", -22.02, 14.07, 2.69e1, -4.12e-2, 1.64e-4, -9.76e-8),
-    "secondary_amine": ("[NH;X2]", 53.47, 89.04, -1.21, 2.33e-1, -1.74e-4, 4.66e-8),
-    "thiol": ("[SH;X1]", -11.33, 8.44, 3.53e1, -7.58e-2, 1.85e-4, -1.03e-7),
+    "primary_amine": ("[NX1H2]", -22.02, 14.07, 2.69e1, -4.12e-2, 1.64e-4, -9.76e-8),
+    "secondary_amine": ("[NX2H1]", 53.47, 89.04, -1.21, 2.33e-1, -1.74e-4, 4.66e-8),
+    "thiol": ("[SX1H1]", -11.33, 8.44, 3.53e1, -7.58e-2, 1.85e-4, -1.03e-7),
     "sulfide": ("[SX2]", 68.07, 80.24, 3.43e1, -1.28e-2, 1.86e-4, -1.01e-7),
-    "quaternary_c": ("[C;X4]", 8.25, 20.97, -3.74e1, 1.30e0, -1.02e-3, 2.69e-7),
-    "methine": ("[CH;X3]", -6.12, 7.93, -2.30e1, 1.10e0, -7.26e-4, 1.76e-7),
-    "methylene": ("[CH2;X2]", -20.64, -8.42, -9.09, 9.50e-1, -5.44e-4, 1.19e-7),
     "methyl": ("[CH3;X1]", -45.83, -43.85, 1.95e1, 8.08e-1, -4.60e-4, 9.67e-8),
+    "methylene": ("[CH2;X2]", -20.64, -8.42, -9.09, 9.50e-1, -5.44e-4, 1.19e-7),
+    "methine": ("[CH1;X3]", -6.12, 7.93, -2.30e1, 1.10e0, -7.26e-4, 1.76e-7),
+    "quaternary_c": ("[C;X4]", 8.25, 20.97, -3.74e1, 1.30e0, -1.02e-3, 2.69e-7),
     "alkene_methylene": ("[CH2;X2]=C", -1.37, 15.05, 2.36e1, -3.81e-2, 1.72e-4, -1.03e-7),
     "alkene_methine": ("[CH;X2]=C", 8.64, 33.25, -1.61, 2.35e-1, -9.85e-5, 1.53e-8),
     "ring_methylene": ("[CH2;X2;R]", -4.82, 11.37, -6.03, 8.54e-1, -4.80e-4, 1.05e-7),
@@ -188,12 +187,31 @@ JOBACK_GROUPS = {
 }
 
 class JobackEstimator:
+    # Accurate literature values for small molecules (kJ/mol)
+    # Sources: NIST Chemistry WebBook / standard thermo tables
+    _SMALL_MOLECULE_OVERRIDES = {
+        "O":     {"H": -241.83, "G": -228.61, "cp": [33.51, 8.5e-3, -1.2e-6, 1.2e-9]}, # H2O (gas)
+        "O=C=O": {"H": -393.51, "G": -394.39, "cp": [22.26, 5.98e-2, -3.5e-5, 7.47e-9]}, # CO2
+        "N":     {"H": -45.90,  "G": -16.48,  "cp": [27.32, 2.38e-2, -1.7e-5, 1.18e-8]}, # NH3
+        "S":     {"H": -20.63,  "G": -33.56,  "cp": [34.52, -1.77e-2, 6.7e-5, -3.4e-8]}, # H2S
+        "[HH]":  {"H": 0.0,     "G": 0.0,     "cp": [27.14, 9.27e-3, -1.38e-5, 7.64e-9]} # H2
+    }
+
     @staticmethod
     def estimate(smiles: str) -> Dict[str, Any]:
+        # 1. Check for overrides (Phase 16 recursive fix)
+        if smiles in JobackEstimator._SMALL_MOLECULE_OVERRIDES:
+            data = JobackEstimator._SMALL_MOLECULE_OVERRIDES[smiles]
+            return {
+                "H298": data["H"] * 1000.0,
+                "G298": data["G"] * 1000.0,
+                "cp_coeffs": np.array(data["cp"])
+            }
+
         mol = Chem.MolFromSmiles(smiles)
         if not mol:
             raise ValueError(f"Invalid SMILES: {smiles}")
-        mol = Chem.AddHs(mol)
+        # mol = Chem.AddHs(mol) # Removed to avoid connectivity artifacts
         
         dfH = 68.29 # Base kJ/mol
         dfG = 53.88 # Base kJ/mol

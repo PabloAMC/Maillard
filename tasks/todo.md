@@ -23,6 +23,11 @@
 - [ ] **Phase 5: Optimization & Finalization**
     - [ ] Update `src/bayesian_optimizer.py` to use `predict_with_uncertainty` and penalize extrapolation [Fix 15]
     - [ ] Verify all benchmarks again and update `walkthrough.md`
+- [ ] **Phase 6: SOTA Temporal FAST Mode**
+    - [x] Implement `Arrhenius Integral` logic with Simpson's Rule in `src/recommend.py`
+    - [x] Add CSV ramp parsing and interpolation utility
+    - [x] Update `Recommender.predict_from_steps` to handle non-isothermal weights
+    - [x] Verify against Cantera-based ground truth benchmarks
 
 
 ## Review Section

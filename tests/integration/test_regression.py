@@ -8,6 +8,8 @@ from src.cantera_export import CanteraExporter  # noqa: E402
 from src.kinetics import KineticsEngine  # noqa: E402
 from src.results_db import ResultsDB  # noqa: E402
 from src.conditions import ReactionConditions  # noqa: E402
+from rdkit import Chem
+from rdkit.Chem import Descriptors
 
 @pytest.fixture
 def regression_data():
@@ -120,25 +122,17 @@ def test_canonical_systems(system_key, regression_data, results_db):
     
     # Filter out precursors and inert small molecules for "volatiles" ranking
     inerts = ["water", "CO2", "H2", "ammonia", "H2S"]
-    inerts_lower = [i.lower() for i in inerts]
-    precursor_names_lower = [p.lower() for p in init_state.keys()]
-    
-    # We also exclude heavy non-volatile intermediates from "aroma" ranking
-    # such as Schiff bases, Amadori products, and deoxyosones.
+    # Create lookup for volatility (Phase 16.8: centralized scientific check)
+    name_to_species = {}
+    for _, s_info in exporter.species.items():
+        name_to_species[s_info["name"]] = Species(label=s_info["name"], smiles=s_info["smiles"])
+
     def is_volatile(name):
-        name_lower = name.lower()
-        if name_lower in inerts_lower: 
-            return False
-        if name_lower in precursor_names_lower: 
-            return False
-        if "base" in name_lower: 
-            return False
-        if "amadori" in name_lower: 
-            return False
-        if "osone" in name_lower: 
-            return False
-        # Also exclude common non-aroma fragments
-        if name_lower in ["dehydroalanine", "glyceraldehyde"]: 
+        sp = name_to_species.get(name)
+        if sp:
+            return sp.is_volatile
+        # Fallback for precursors not in exporter list
+        if name.lower() in ["water", "co2", "h2", "ammonia", "h2s"]:
             return False
         return True
 

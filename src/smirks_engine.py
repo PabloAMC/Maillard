@@ -500,13 +500,22 @@ def _strecker_step(
     _aa_to_aldehyde = {
         # name -> (aldehyde_label, aldehyde_smiles)
         "l-leucine":      ("3-methylbutanal", "CC(C)CC=O"),
+        "leucine":        ("3-methylbutanal", "CC(C)CC=O"),
         "l-isoleucine":   ("2-methylbutanal", "CCC(C)C=O"),
+        "isoleucine":     ("2-methylbutanal", "CCC(C)C=O"),
         "l-valine":       ("2-methylpropanal","CC(C)C=O"),
-        "glycine":        ("formaldehyde",    "C=O"), # Glycine sidechain is H. So H-C=O is formaldehyde
+        "valine":         ("2-methylpropanal","CC(C)C=O"),
+        "glycine":        ("formaldehyde",    "C=O"), 
         "l-alanine":      ("acetaldehyde",    "CC=O"),
+        "alanine":        ("acetaldehyde",    "CC=O"),
         "l-phenylalanine":("phenylacetaldehyde","O=CCc1ccccc1"),
+        "phenylalanine":  ("phenylacetaldehyde","O=CCc1ccccc1"),
         "l-methionine":   ("methional",       "CSCCC=O"),
-        "l-lysine":       ("5-aminopentanal", "NCCCCC=O"), # Assuming epsilon amine doesn't react here
+        "methionine":     ("methional",       "CSCCC=O"),
+        "l-lysine":       ("5-aminopentanal", "NCCCCC=O"),
+        "lysine":         ("5-aminopentanal", "NCCCCC=O"),
+        "l-cysteine":     ("mercaptoacetaldehyde", "SCC=O"),
+        "cysteine":       ("mercaptoacetaldehyde", "SCC=O"),
     }
 
     # 2. Map Dicarbonyl to its Aminoketone

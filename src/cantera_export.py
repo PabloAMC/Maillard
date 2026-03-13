@@ -214,11 +214,16 @@ class CanteraExporter:
             "reactions": []
         }
         
-        # 2. Format reactions as irreversible to avoid thermodynamic bias (P0 fix)
+        # 2. Format reactions. Schiff bases are reversible; most others irreversible.
         cantera_reactions: List[Dict[str, Any]] = []
         for r in self.reactions:
             cantera_reac = dict(r)
-            cantera_reac["reversible"] = False
+            # Equilibrium for Schiff bases (Phase 16.5 fix)
+            note = r.get("note", "").lower()
+            if "schiff" in note or "thiohemiacetal" in note:
+                cantera_reac["reversible"] = True
+            else:
+                cantera_reac["reversible"] = False
             cantera_reactions.append(cantera_reac)
         data["reactions"] = cantera_reactions
         

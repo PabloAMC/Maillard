@@ -10,10 +10,42 @@ from typing import List, Optional
 from pathlib import Path
 import re
 
+from rdkit import Chem
+from rdkit.Chem import Descriptors
+from functools import cached_property
+
 @dataclass
 class Species:
     label: str
     smiles: str
+
+    @cached_property
+    def is_volatile(self) -> bool:
+        """
+        Scientific heuristic for aroma volatility.
+        Volatiles are generally small (MW < 160) and lack excessive polarity 
+        (H-bond donors <= 1).
+        """
+        if not self.smiles:
+            return False
+            
+        # Inerts and precursors that aren't aroma compounds
+        inerts = {"water", "h2o", "h2", "co2", "ammonia", "h2s"}
+        if self.label.lower() in inerts or self.smiles.lower() in inerts:
+            return False
+
+        try:
+            mol = Chem.MolFromSmiles(self.smiles)
+            if not mol:
+                return False
+            
+            mw = Descriptors.MolWt(mol)
+            h_donors = Descriptors.NumHDonors(mol)
+            
+            # Thresholds aligned with empirical flavor chemistry
+            return mw < 160 and h_donors <= 1
+        except Exception:
+            return False
     
 @dataclass
 class ElementaryStep:
