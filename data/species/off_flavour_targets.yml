@@ -76,3 +76,15 @@ compounds:
     mitigation: "Yeast fermentation (aldehyde dehydrogenase converts hexanal → less volatile products)"
     priority: "medium"
     notes: "Lower potency than hexanal; secondary concern."
+
+  - name: "Furfural"
+    cas: "98-01-1"
+    smiles: "O=Cc1ccco1"
+    inchi: "InChI=1S/C5H4O2/c6-4-5-2-1-3-7-5/h1-4H"
+    origin: "Acid-catalyzed dehydration of pentoses (ribose, xylose)"
+    pathway: "A — Core Maillard Cascade / Pentose dehydration"
+    sensory_desc: "Almond, bread, bready, sweet"
+    odour_threshold_ug_per_kg: 3000.0
+    mitigation: "pH adjustment (alkalinity reduces furfural); bisulfite trapping"
+    priority: "medium"
+    notes: "Key intermediate for furfurylthiol (FFT) in the presence of H2S."

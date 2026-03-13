@@ -139,6 +139,17 @@ compounds:
     priority: "medium"
     notes: "Forms via radical recombination of methanethiol."
 
+  - name: "Bis(2-methyl-3-furyl) disulfide"
+    cas: "28588-75-2"
+    smiles: "Cc1occc1SSc1ccoc1C"
+    inchi: "InChI=1S/C10H10O2S2/c1-7-9(3-5-11-7)13-14-10-4-6-12-8(10)2/h3-6H,1-2H3"
+    precursor: "MFT oxidation / radical recombination"
+    pathway: "C — S-Maillard: MFT dimerisation"
+    sensory_desc: "Meaty, roasted, sulfurous"
+    odour_threshold_ug_per_kg: 0.02
+    priority: "high"
+    notes: "Key meaty odorant in cysteine systems."
+
   - name: "Dimethyl trisulfide"
     cas: "3658-80-8"
     smiles: "CSSSC"
