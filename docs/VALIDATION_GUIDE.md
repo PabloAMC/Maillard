@@ -4,10 +4,10 @@
 The Maillard framework uses a **layered validation strategy** to ensure that predicted concentrations and sensory profiles align with reality.
 
 ### A. Kinetic Reliability (Pearson R)
-We use `scripts/compare_sim_to_lit.py` to correlate our microkinetic yields against peer-reviewed experimental data.
-- **Benchmark**: Ribose-Glycine model systems.
+We use `scripts/compare_sim_to_lit.py` to correlate our microkinetic yields against peer-reviewed experimental data curated in the **[Literature Benchmark Reference](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/maillard_validation_benchmarks.md)**.
+- **Benchmark**: Ribose-Glycine model systems and other PRIMARY-tier systems.
 - **Goal**: Maintain a Pearson R > 0.85 for major volatiles (MFT, 2,5-DMP, Methional).
-- **Status**: Checked every release against `data/lit/ribose_glycine_2021.json`.
+- **Status**: Checked every release against `data/lit/ribose_glycine_2021.json` and associated benchmark data.
 
 ### B. Sensory Fidelity (Stevens' Law)
 Because the human nose is logarithmic, absolute ppm values are less important than **perceived intensity (OAV)**.

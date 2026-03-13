@@ -95,12 +95,20 @@ The framework has three tiers of increasing physical fidelity and computational 
 └────────────────────┬─────────────────────────────────────────┘
                      │ Complete network with family labels
 ┌────────────────────▼─────────────────────────────────────────┐
-│  TIER 1: Laptop-Feasible Kinetics (Heuristic / xTB)          │
-│  (seconds–minutes per query)                                 │
+│  TIER 1: Laptop-Feasible Kinetics (Heuristic)                │
+│  (seconds per query)                                         │
 │  • Literature-calibrated heuristic barriers (Primary)        │
 │  • pH-Sensitive Volatilome Tuning (Sigmoid multipliers)      │
-│  • Optuna-driven Bayesian Optimization of formulations       │
-│  Output: Instant Boltzmann scores and Cantera mechanisms     │
+│  Output: Instant Boltzmann scores and Pareto rankings        │
+└────────────────────┬─────────────────────────────────────────┘
+                     │ High-leverage pathway bottleneck steps
+┌────────────────────▼─────────────────────────────────────────┐
+│  TIER 1.5: ML-Accelerated Physics (MACE & Diffusion)         │
+│  (seconds–minutes per query)                                 │
+│  • MACE-OFF24 Foundation Model: Near-DFT barriers in ms      │
+│  • Diffusion TS Prediction: Direct 2D -> 3D TS geometries    │
+│  • Bayesian Optimization of formulations (Optuna)            │
+│  Output: Refined barriers and 3D TS candidates               │
 └────────────────────┬─────────────────────────────────────────┘
                      │ Rate-limiting bottleneck steps
 ┌────────────────────▼─────────────────────────────────────────┐
@@ -126,23 +134,30 @@ The framework has three tiers of increasing physical fidelity and computational 
   - **Tier B (Handcrafted Functions)** for complex 3+ reactant clusters (e.g., Thiazole, Thiol Addition) to guarantee balance and specificity.
 - Output: a directed reaction graph consisting of strict atom-balanced elementary steps.
 
-### 3.2 Tier 1 — Heuristic & xTB Screening
-
+### 3.2 Tier 1 — Heuristic Screening
 **Role**: Provide instant, useful rankings on laptop-class hardware.
-
 **Approach**:
-- **Heuristic Baseline**: Utilizes 17 literature-calibrated barrier constants (Yaylayan, Martins, Hofmann) stored in `src/barrier_constants.py`.
-- **xTB NEB**: For reactions without a family match, uses `xtb --path` (GFN2-xTB) to estimate activation energies.
+- **Heuristic Baseline**: Utilizes literature-calibrated barrier constants (Yaylayan, Martins, Hofmann) stored in `src/barrier_constants.py`.
 - **Boltzmann Scoring**: `score = Σ [c] ⋅ exp(−ΔG‡/kT)` provides physical sensitivity to concentrations and barriers.
 
-### 3.3 Tier 2 — DFT Refinement (PySCF)
-
-**Role**: Obtain chemically accurate barriers for the rate-limiting steps that determine product yield.
-
+### 3.3 Tier 1.5 — ML-Accelerated Physics (MACE & Diffusion)
+**Role**: Bridge the gap between heuristics and DFT using state-of-the-art machine learning.
 **Approach**:
-- Use the **r2SCAN-3c // wB97M-V / def2-TZVP** composite protocol for high accuracy at moderate cost.
-- Backend: **PySCF** for all electronic structure evaluations, orchestrated by `src/dft_refiner.py`.
-- Solvation: Implicit water via ddCOSMO (default) with optional explicit solvation via CREST/QCG for proton-transfer steps.
+- **MLP Barrier (`src/mlp_barrier.py`)**: Leverages the **MACE-OFF24** interatomic potential to estimate activation energies in milliseconds without heavy QM setup.
+- **Diffusion TS (`src/diffusion_ts.py`)**: Uses SE(3)-equivariant diffusion models (React-TS) to predict 3D transition state geometries directly from 2D graphs, accelerating the input to Tier 2.
+- **Bayesian Optimization**: `src/bayesian_optimizer.py` uses `optuna` to search the multi-dimensional formulation space (pH, T, ratios) using this fast feedback loop.
+
+### 3.4 Matrix & Food Physics Layers
+Translates "beaker chemistry" into "food matrix reality".
+- **Accessibility (`src/matrix_correction.py`)**: Scales reactant concentrations based on protein type (Pea vs Soy) and denaturation state (Extrusion heat). Models the competition between Maillard and DHA pathways.
+- **Partitioning (`src/headspace.py`)**: Uses Henry's Law corrected by protein/fat binding factors to predict the gas-phase volatilome.
+
+### 3.5 Tier 2 — DFT Refinement (PySCF & Skala)
+**Role**: Obtain chemically accurate barriers for the rate-limiting steps.
+**Approach**:
+- Use the **r2SCAN-3c // wB97M-V / def2-TZVP** composite protocol.
+- Backend: **PySCF** orchestrated by `src/dft_refiner.py` and `src/skala_refiner.py`.
+- Solvation: Implicit water (ddCOSMO) or explicit solvation via CREST/QCG.
 
 **Why PySCF?**:
 PySCF provides a modern, Pythonic interface that enables direct integration of ML-accelerated geometry optimization and automated transition-state search without the file-I/O overhead of legacy binaries.
@@ -232,14 +247,39 @@ PySCF provides a modern, Pythonic interface that enables direct integration of M
 
 ---
 
-## 8. Related Work and Tools
+## 8. Module Reference
+
+| Category | Module | Primary Role |
+| :------- | :----- | :----------- |
+| **Generative** | `smirks_engine.py` | Hybrid SMIRKS reaction network generator |
+| | `lipid_oxidation.py` | Radical chain model for off-flavor generation |
+| | `pre_processor.py` | Enzymatic/Fermentation cleanup simulation |
+| **Physics T1/1.5** | `recommend.py` | The `FAST` kinetic solver and ranker |
+| | `mlp_barrier.py` | MACE-OFF24 ML activation energy estimator |
+| | `diffusion_ts.py` | Diffusion model for TS geometry prediction |
+| | `xtb_screener.py` | GFN2-xTB semi-empirical screening layer |
+| **Physics T2** | `dft_refiner.py` | PySCF-based DFT refinement orchestration |
+| | `skala_refiner.py` | Advanced DFT protocol implementation |
+| | `solvation.py` | Implicit (ddCOSMO) and explicit (CREST) solvation |
+| **Matrix/Sensory** | `matrix_correction.py` | Protein accessibility and Lysine Budgeting |
+| | `headspace.py` | Matrix binding and flavor partitioning |
+| | `sensory.py` | Stevens' Power Law odor intensity mapping |
+| **Design/Ops** | `bayesian_optimizer.py`| Optuna-driven formulation optimization |
+| | `inverse_design.py` | Multi-objective Pareto-ranking grid search |
+| | `cantera_export.py` | Export to time-dependent ODE simulations |
+| **Persistence** | `results_db.py` | SQLite caching for all QM/ML results |
+
+---
+
+## 9. Related Work and Tools
 
 | Tool | Role | Notes |
 |------|------|-------|
 | **SmirksEngine** | Reaction network generation | Custom hybrid engine; mass-balanced templates |
 | [xTB](https://github.com/grimme-lab/xtb) | Semi-empirical QM | GFN2-xTB recommended; fast, good geometries |
 | [PySCF](https://pyscf.org) | Electronic Structure | Native Tier 2 engine; composite protocol support |
+| [MACE](https://github.com/ACEsuit/mace) | ML Potentials | MACE-OFF24 foundation model for Tier 1.5 |
 | [geomeTRIC](https://github.com/leeping/geomeTRIC) | Geometry Optimization | Native optimizer for PySCF calculations |
 | [ASE](https://wiki.fysik.dtu.dk/ase/) | Atomistic simulation interface | Useful for automating xTB/MACE workflows |
 | [Sella](https://github.com/zadorlab/sella) | TS Search | Saddle-point optimizer (Phase 11) |
-| NIST WebBook / SDBS | Spectral reference | For validating predicted VOC structures |
+| [Cantera](https://cantera.org) | Kinetics Solver | For time-dependent ODE temperature ramps |
