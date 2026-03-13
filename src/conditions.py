@@ -75,19 +75,28 @@ class ReactionConditions:
         fam = reaction_family.lower()
         
         # 1. Schiff Base: Gaussian peak at pH 5.5
+        mult = 1.0
         if any(x in fam for x in ["schiff", "condensation"]):
-            return 1.0 + 2.0 * self._gaussian(self.pH, 5.5, 1.0)
+            mult *= (1.0 + 2.0 * self._gaussian(self.pH, 5.5, 1.0))
 
         # 2. 2,3-enolisation / Pyrazine / Strecker / Amadori / Heyns (Alkaline favored)
         elif any(x in fam for x in ["2,3", "2_3", "pyrazine", "strecker", "amadori", "heyns", "nitrogen_heterocycle"]):
             base_mult = 0.2 + 8.0 * self._sigmoid(self.pH, 6.5, 1.5)
-            return max(0.01, base_mult)
+            mult *= max(0.01, base_mult)
 
         # 3. 1,2-enolisation / Furan / Thiol / Thio / Cysteine / [Generic Enolisation] (Acidic favored)
         elif any(x in fam for x in ["1,2", "1_2", "furan", "thiol", "thio", "cysteine", "enolisation", "oxygen_heterocycle"]):
-            return 1.0 + 4.0 * (1.0 - self._sigmoid(self.pH, 6.0, 2.0))
+            mult *= (1.0 + 4.0 * (1.0 - self._sigmoid(self.pH, 6.0, 2.0)))
             
-        return 1.0
+        # 4. Metal Catalysis (Heme/Iron Enrichment)
+        # Heme is a potent promoter of lipid oxidation and certain Maillard steps.
+        if self.metal_catalyst and self.metal_catalyst.lower() == "heme":
+            if "oxidation" in fam or "radical" in fam:
+                mult *= 5.0  # Heme significantly accelerates radical generation
+            elif "pyrazine" in fam:
+                mult *= 1.5  # Iron catalysis of nitrogen cyclization
+                
+        return mult
 
     def get_rate_constant(self, pathway_type: str, ea_override_kcal: float = None) -> float:
         """
