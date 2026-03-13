@@ -27,3 +27,23 @@ def test_arrhenius():
     rate_cold = cond_cold.get_arrhenius_multiplier(15.0)
     
     assert rate_hot > rate_cold
+
+def test_heme_catalysis():
+    """Verify that heme catalyst increases multipliers for specific families."""
+    cond_none = ReactionConditions(metal_catalyst=None)
+    cond_heme = ReactionConditions(metal_catalyst="heme")
+    
+    # 1. Lipid Oxidation promotion
+    mult_none = cond_none.get_ph_multiplier("Lipid_Oxidation")
+    mult_heme = cond_heme.get_ph_multiplier("Lipid_Oxidation")
+    assert mult_heme == pytest.approx(mult_none * 5.0)
+    
+    # 2. Pyrazine promotion
+    mult_none_p = cond_none.get_ph_multiplier("Pyrazine_Formation")
+    mult_heme_p = cond_heme.get_ph_multiplier("Pyrazine_Formation")
+    assert mult_heme_p == pytest.approx(mult_none_p * 1.5)
+    
+    # 3. Non-catalyzed family (e.g. Schiff base) should NOT be boosted by heme specifically beyond pH effect
+    mult_none_s = cond_none.get_ph_multiplier("Schiff_Base")
+    mult_heme_s = cond_heme.get_ph_multiplier("Schiff_Base")
+    assert mult_heme_s == mult_none_s
