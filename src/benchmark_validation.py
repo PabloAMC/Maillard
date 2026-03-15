@@ -11,6 +11,7 @@ from typing import Dict, Iterable, List, Optional
 from src.conditions import ReactionConditions
 from src.inverse_design import InverseDesigner
 from src.precursor_resolver import resolve_many
+from src.smirks_engine import SmirksEngine
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -125,6 +126,23 @@ class BenchmarkThresholds:
     ranking_threshold: float = 0.85
     free_aa_ratio_threshold: float = 1.5
     matrix_ratio_threshold: float = 2.0
+
+
+@dataclass(frozen=True)
+class BenchmarkTargetSnapshot:
+    benchmark_id: str
+    bench_file: Path
+    target_name: str
+    target_type: str
+    roles: List[str]
+    predicted_ppb: float
+    weighted_flux: float
+    span: float
+    depth: int
+    headspace_observable: bool
+    headspace_class: str
+    henry_kaw_25c: Optional[float]
+    henry_source_name: Optional[str]
 
 
 DEFAULT_BENCHMARK_THRESHOLDS = BenchmarkThresholds()
@@ -316,6 +334,55 @@ def _build_comparisons(bench: dict, predicted_ppb: Dict[str, float]) -> List[Com
     return comparisons
 
 
+def _run_benchmark_recommendation(
+    bench: dict,
+    *,
+    target_tag: str = DEFAULT_TARGET_TAG,
+) -> dict:
+    formulation = benchmark_to_formulation(bench)
+    conditions = benchmark_to_conditions(bench)
+    designer = InverseDesigner(target_tag=target_tag)
+
+    names = formulation["sugars"] + formulation["amino_acids"] + formulation.get("additives", []) + formulation.get("lipids", [])
+    precursors = resolve_many(names)
+    steps = SmirksEngine(conditions).enumerate(precursors, max_generations=4)
+
+    heuristic_barriers = {}
+    for step in steps:
+        reactants = [s.smiles for s in step.reactants]
+        products = [s.smiles for s in step.products]
+        bar, _source, unc = designer.db.get_best_barrier(reactants, products, step.reaction_family or "unknown")
+        k = conditions.get_rate_constant(step.reaction_family or "unknown", ea_override_kcal=bar)
+        rt = 0.001987 * conditions.temperature_kelvin
+        pre_exponential = 1e11
+        bar_eff = -rt * math.log(k / pre_exponential) if k > 0 else 99.0
+        rxn_key = f"{'+'.join(sorted(r.smiles for r in step.reactants))}->{'+'.join(sorted(p.smiles for p in step.products))}"
+        heuristic_barriers[rxn_key] = (max(0.0, bar_eff), unc)
+
+    from src.recommend import Recommender, _canon
+
+    initial_concentrations = {}
+    ratios = formulation.get("molar_ratios", {})
+    for precursor in precursors:
+        qty = 1.0
+        for key, value in ratios.items():
+            if key.lower() in precursor.label.lower() or precursor.label.lower() in key.lower():
+                qty = float(value)
+                break
+        initial_concentrations[_canon(precursor.smiles)] = qty
+
+    rec = Recommender()
+    return rec.predict_from_steps(
+        steps,
+        heuristic_barriers,
+        initial_concentrations,
+        temperature_kelvin=conditions.temperature_kelvin,
+        time_minutes=formulation.get("time_minutes"),
+        protein_type=formulation.get("protein_type", "free"),
+        denaturation_state=formulation.get("denaturation_state", 0.5),
+    )
+
+
 def evaluate_benchmark(bench_file: Path | str, target_tag: str = DEFAULT_TARGET_TAG) -> BenchmarkEvaluation:
     bench_path = Path(bench_file)
     bench = load_benchmark(bench_path)
@@ -334,10 +401,8 @@ def evaluate_benchmark(bench_file: Path | str, target_tag: str = DEFAULT_TARGET_
             mae_ppb=None,
         )
 
-    conditions = benchmark_to_conditions(bench)
-    designer = InverseDesigner(target_tag=target_tag)
-    result = designer.evaluate_single(formulation, conditions)
-    comparisons = _build_comparisons(bench, result.predicted_ppb)
+    rec_result = _run_benchmark_recommendation(bench, target_tag=target_tag)
+    comparisons = _build_comparisons(bench, rec_result["predicted_ppb"])
 
     matched_comparisons = [comparison for comparison in comparisons if comparison.matched_name is not None]
     measured_values = [comparison.measured_ppb for comparison in matched_comparisons]
@@ -352,7 +417,7 @@ def evaluate_benchmark(bench_file: Path | str, target_tag: str = DEFAULT_TARGET_
         bench_file=bench_path,
         supported=True,
         reason=None,
-        predicted_ppb=result.predicted_ppb,
+        predicted_ppb=rec_result["predicted_ppb"],
         comparisons=comparisons,
         pearson_r=pearson_r,
         mae_ppb=mae_ppb,
@@ -508,6 +573,74 @@ def summarize_benchmarks(
             )
         summaries.append(summary)
     return summaries
+
+
+def snapshot_benchmark_targets(
+    bench_file: Path | str,
+    target_tag: str = DEFAULT_TARGET_TAG,
+) -> List[BenchmarkTargetSnapshot]:
+    bench_path = Path(bench_file)
+    bench = load_benchmark(bench_path)
+    formulation = benchmark_to_formulation(bench)
+    supported, _reason = _is_supported_formulation(formulation)
+    if not supported:
+        return []
+    rec_result = _run_benchmark_recommendation(bench, target_tag=target_tag)
+
+    snapshots: List[BenchmarkTargetSnapshot] = []
+    for target in sorted(rec_result.get("targets", []), key=lambda row: (row.get("type", ""), -float(row.get("concentration", 0.0)), row.get("name", ""))):
+        snapshots.append(
+            BenchmarkTargetSnapshot(
+                benchmark_id=bench["benchmark_id"],
+                bench_file=bench_path,
+                target_name=str(target.get("name", "")),
+                target_type=str(target.get("type", "unknown")),
+                roles=list(target.get("roles", [target.get("type", "unknown")])),
+                predicted_ppb=float(target.get("concentration", 0.0)),
+                weighted_flux=float(target.get("weighted_flux", 0.0)),
+                span=float(target.get("span", math.inf)),
+                depth=int(target.get("depth", 0)),
+                headspace_observable=bool(target.get("headspace_observable", True)),
+                headspace_class=str(target.get("headspace_class", "assumed_observable")),
+                henry_kaw_25c=float(target["henry_kaw_25c"]) if target.get("henry_kaw_25c") is not None else None,
+                henry_source_name=target.get("henry_source_name"),
+            )
+        )
+    return snapshots
+
+
+def snapshot_all_benchmark_targets(
+    benchmark_files: Optional[Iterable[Path | str]] = None,
+    target_tag: str = DEFAULT_TARGET_TAG,
+) -> List[BenchmarkTargetSnapshot]:
+    bench_files = list(benchmark_files) if benchmark_files is not None else get_benchmark_files()
+    snapshots: List[BenchmarkTargetSnapshot] = []
+    for bench_file in bench_files:
+        snapshots.extend(snapshot_benchmark_targets(bench_file, target_tag=target_tag))
+    return snapshots
+
+
+def render_benchmark_targets_markdown(snapshots: Iterable[BenchmarkTargetSnapshot]) -> str:
+    rows = list(snapshots)
+    lines = [
+        "# Benchmark Targets",
+        "",
+        "| Benchmark | Target | Type | Roles | Predicted ppb | Span | Depth | Headspace | Kaw 25C | Henry Name |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+    ]
+
+    for row in rows:
+        kaw = f"{row.henry_kaw_25c:.3e}" if row.henry_kaw_25c is not None else "n/a"
+        lines.append(
+            f"| {row.benchmark_id} | {row.target_name} | {row.target_type} | {', '.join(row.roles)} | {row.predicted_ppb:.3f} | {row.span:.3f} | {row.depth} | {row.headspace_class} | {kaw} | {row.henry_source_name or 'n/a'} |"
+        )
+
+    lines.extend([
+        "",
+        f"Target rows: {len(rows)}",
+        f"Low-headspace rows: {sum(1 for row in rows if row.headspace_class == 'low_headspace')}",
+    ])
+    return "\n".join(lines) + "\n"
 
 
 def build_benchmark_index(

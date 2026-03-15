@@ -18,6 +18,15 @@ from src.recommend import Recommender, _canon
 from src.smirks_engine import SmirksEngine
 
 
+TARGET_TYPE_ALIASES = {
+    "desirable": "desirable",
+    "off_flavour": "competing",
+    "off-flavour": "competing",
+    "competing": "competing",
+    "toxic": "toxic",
+}
+
+
 def _build_rec_result(bench_path: str):
     bench = load_benchmark(bench_path)
     formulation = benchmark_to_formulation(bench)
@@ -68,9 +77,62 @@ def _build_rec_result(bench_path: str):
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--lit", required=True)
+    parser.add_argument(
+        "--targets",
+        action="store_true",
+        help="Print the predicted target snapshot instead of the debug path trace.",
+    )
+    parser.add_argument(
+        "--target-type",
+        default="desirable",
+        choices=sorted(TARGET_TYPE_ALIASES.keys()),
+        help="Target family to print when --targets is enabled.",
+    )
+    parser.add_argument(
+        "--limit",
+        type=int,
+        default=0,
+        help="Optional maximum number of targets to print when --targets is enabled.",
+    )
+    parser.add_argument(
+        "--name",
+        action="append",
+        default=[],
+        help="Optional case-insensitive target-name filter. May be passed multiple times.",
+    )
     args = parser.parse_args()
 
     bench, rec_result = _build_rec_result(args.lit)
+    if args.targets:
+        target_type = TARGET_TYPE_ALIASES[args.target_type]
+        filters = [name.lower() for name in args.name]
+        targets = [
+            target
+            for target in rec_result.get("targets", [])
+            if target.get("type") == target_type
+            and (
+                not filters
+                or any(fragment in target.get("name", "").lower() for fragment in filters)
+            )
+        ]
+        targets.sort(key=lambda item: (-float(item.get("concentration", 0.0)), item.get("name", "")))
+        if args.limit > 0:
+            targets = targets[: args.limit]
+
+        print(f"Benchmark: {bench['benchmark_id']}")
+        print(f"Target type: {target_type}")
+        if not targets:
+            print("No targets matched the requested filters")
+            return 0
+
+        for target in targets:
+            print(
+                f"{target['name']} | ppb={target.get('concentration', 0.0):.6g} | "
+                f"span={target.get('span', 0.0):.3f} | depth={target.get('depth', 0)} | "
+                f"flux={target.get('weighted_flux', 0.0):.6g}"
+            )
+        return 0
+
     debug_paths = rec_result.get("debug_paths", {})
     predicted_ppb = rec_result.get("predicted_ppb", {})
     species_names = rec_result.get("species_names", {})

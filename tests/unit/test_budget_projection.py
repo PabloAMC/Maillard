@@ -1,11 +1,15 @@
 from pathlib import Path
 
+import pytest
 import yaml
 
 from src.pathway_extractor import ElementaryStep, Species
 from src.recommend import (
     Recommender,
+    _apply_output_projection,
     _canon,
+    _headspace_observability_factor,
+    _project_weighted_flux_to_ppb,
     _is_budget_relevant_species,
     _is_observable_target_species,
     _select_accumulating_projection_species,
@@ -147,3 +151,113 @@ def test_projection_prefers_terminal_budget_relevant_endpoints():
     assert _canon(mft.smiles) in selected
     assert _canon(disulfide.smiles) in selected
     assert _canon(thiohemiacetal.smiles) not in selected
+
+
+def test_projection_downweights_low_headspace_targets_in_budget_allocation():
+    precursor = Species("glucose", "OC[C@H]1O[C@@H](O)[C@H](O)[C@@H](O)[C@H]1O")
+    furfural = Species("furfural", "O=Cc1ccco1")
+    hmf = Species("HMF", "O=Cc1ccc(CO)o1")
+
+    tracked_species = {
+        _canon(precursor.smiles): (0.0, 10.0, 0, 10.0, 0.0),
+        _canon(furfural.smiles): (25.0, 10.0, 2, 0.5, 0.0),
+        _canon(hmf.smiles): (25.0, 10.0, 2, 0.5, 0.0),
+    }
+    species_catalog = {
+        _canon(precursor.smiles): precursor,
+        _canon(furfural.smiles): furfural,
+        _canon(hmf.smiles): hmf,
+    }
+    target_lookup = {
+        _canon(furfural.smiles): {"name": "Furfural", "type": "desirable", "data": {}},
+        _canon(hmf.smiles): {"name": "5-Hydroxymethylfurfural (HMF)", "type": "toxic", "data": {}},
+    }
+
+    projected = _project_weighted_flux_to_ppb(
+        steps=[],
+        tracked_species=tracked_species,
+        best_paths={},
+        species_catalog=species_catalog,
+        corrected_initial={_canon(precursor.smiles): 10.0},
+        target_lookup=target_lookup,
+        exogenous_reactants={_canon(precursor.smiles)},
+        temperature_kelvin=423.15,
+        time_minutes=30.0,
+    )
+
+    assert projected[_canon(furfural.smiles)] > projected[_canon(hmf.smiles)] * 50.0
+
+
+def test_low_headspace_factor_is_temperature_aware_but_stays_conservative():
+    furfural = Species("furfural", "O=Cc1ccco1")
+    hmf = Species("HMF", "O=Cc1ccc(CO)o1")
+
+    target_lookup = {
+        _canon(furfural.smiles): {"name": "Furfural", "type": "desirable", "data": {}},
+        _canon(hmf.smiles): {"name": "5-Hydroxymethylfurfural (HMF)", "type": "toxic", "data": {}},
+    }
+
+    hmf_25c = _headspace_observability_factor(hmf, target_lookup, 298.15)
+    hmf_150c = _headspace_observability_factor(hmf, target_lookup, 423.15)
+    furfural_150c = _headspace_observability_factor(furfural, target_lookup, 423.15)
+
+    assert 1.0e-6 <= hmf_25c < hmf_150c < 0.05
+    assert furfural_150c == 1.0
+
+
+def test_output_projection_exposes_proxy_and_observable_channels():
+    furfural = Species("furfural", "O=Cc1ccco1")
+    hmf = Species("HMF", "O=Cc1ccc(CO)o1")
+    raw = {
+        _canon(furfural.smiles): 100.0,
+        _canon(hmf.smiles): 100.0,
+    }
+    species_catalog = {
+        _canon(furfural.smiles): furfural,
+        _canon(hmf.smiles): hmf,
+    }
+    target_lookup = {
+        _canon(furfural.smiles): {"name": "Furfural", "type": "desirable", "data": {}},
+        _canon(hmf.smiles): {"name": "5-Hydroxymethylfurfural (HMF)", "type": "toxic", "data": {}},
+    }
+
+    observable, metadata = _apply_output_projection(
+        raw,
+        species_catalog,
+        target_lookup,
+        temperature_kelvin=423.15,
+        protein_type="free",
+        fat_fraction=0.0,
+        protein_fraction=1.0,
+    )
+
+    assert metadata[_canon(furfural.smiles)]["proxy_ppb"] == pytest.approx(100.0)
+    assert metadata[_canon(furfural.smiles)]["observable_ppb"] == pytest.approx(observable[_canon(furfural.smiles)])
+    assert observable[_canon(furfural.smiles)] == pytest.approx(100.0)
+    assert observable[_canon(hmf.smiles)] < 10.0
+
+
+def test_output_projection_uses_matrix_retention_fallback_when_fractions_are_unspecified():
+    furfural = Species("furfural", "O=Cc1ccco1")
+    raw = {
+        _canon(furfural.smiles): 100.0,
+    }
+    species_catalog = {
+        _canon(furfural.smiles): furfural,
+    }
+    target_lookup = {
+        _canon(furfural.smiles): {"name": "Furfural", "type": "desirable", "data": {}},
+    }
+
+    observable, metadata = _apply_output_projection(
+        raw,
+        species_catalog,
+        target_lookup,
+        temperature_kelvin=313.15,
+        protein_type="pea_iso",
+        fat_fraction=0.0,
+        protein_fraction=1.0,
+    )
+
+    assert metadata[_canon(furfural.smiles)]["matrix_factor"] == pytest.approx(0.5)
+    assert observable[_canon(furfural.smiles)] == pytest.approx(50.0)
