@@ -7,15 +7,22 @@ Sella algorithm, compatible with any ASE calculator (MACE, PySCF, etc.).
 """
 
 import io
-from typing import Optional
+from typing import Optional, Tuple
 from contextlib import redirect_stdout
+
+_SELLA_IMPORT_ERROR: Optional[Exception] = None
 
 try:
     from ase import Atoms
-    from sella import Sella
 except ImportError:
-    # Graceful degradation if Sella is not installed
+    Atoms = object  # type: ignore[assignment]
+
+try:
+    from sella import Sella
+except Exception as exc:
+    # Graceful degradation if Sella is unavailable or broken at import time.
     Sella = None
+    _SELLA_IMPORT_ERROR = exc
 
 
 class TSOptimizer:
@@ -26,6 +33,14 @@ class TSOptimizer:
     def __init__(self, fmax: float = 0.05, max_steps: int = 200):
         self.fmax = fmax
         self.max_steps = max_steps
+
+    @staticmethod
+    def probe_availability() -> Tuple[bool, str]:
+        if Sella is None:
+            if _SELLA_IMPORT_ERROR is None:
+                return False, "Sella is not installed in the active environment."
+            return False, f"Sella is unavailable in the active environment: {_SELLA_IMPORT_ERROR}"
+        return True, ""
 
     def find_ts(self, atoms: Atoms, calculator, fmax: Optional[float] = None, max_steps: Optional[int] = None) -> Atoms:
         """
@@ -41,7 +56,10 @@ class TSOptimizer:
             Optimized ASE Atoms object.
         """
         if Sella is None:
-            raise ImportError("The 'sella' package is not installed. Please run 'pip install sella'.")
+            available, reason = self.probe_availability()
+            if available:
+                reason = "Sella is unavailable in the active environment."
+            raise ImportError(reason)
 
         fmax = fmax or self.fmax
         max_steps = max_steps or self.max_steps
