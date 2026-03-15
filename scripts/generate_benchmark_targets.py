@@ -12,7 +12,11 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src.benchmark_validation import render_benchmark_targets_markdown, snapshot_all_benchmark_targets
+from src.benchmark_validation import (
+    get_matrix_only_target_snapshot_exclusions,
+    render_benchmark_targets_markdown,
+    snapshot_all_benchmark_targets,
+)
 
 
 def main() -> int:
@@ -25,7 +29,11 @@ def main() -> int:
     output_dir.mkdir(parents=True, exist_ok=True)
 
     snapshots = snapshot_all_benchmark_targets(target_tag=args.target_tag)
-    markdown = render_benchmark_targets_markdown(snapshots)
+    excluded_benchmark_ids = get_matrix_only_target_snapshot_exclusions()
+    markdown = render_benchmark_targets_markdown(
+        snapshots,
+        excluded_benchmark_ids=excluded_benchmark_ids,
+    )
     payload = []
     for snapshot in snapshots:
         row = asdict(snapshot)
@@ -41,6 +49,8 @@ def main() -> int:
     print(f"Wrote {markdown_path}")
     print(f"Wrote {json_path}")
     print(f"Low-headspace rows: {sum(1 for row in snapshots if row.headspace_class == 'low_headspace')}")
+    if excluded_benchmark_ids:
+        print(f"Excluded matrix-only benchmarks: {', '.join(sorted(excluded_benchmark_ids))}")
     return 0
 
 

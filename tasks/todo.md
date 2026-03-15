@@ -1,5 +1,20 @@
 # Maillard Literature Replication Plan
 
+## Active Matrix-Only Contract — 2026-03-15
+
+- [x] Auditar y fijar el contrato explícito de benchmarks `matrix_only` en `src/benchmark_validation.py`.
+- [x] Añadir tests de aceptación para `pea_isolate_40C_PratapSingh2021` que cubran soporte, artefactos y exclusión deliberada del snapshot de targets.
+- [x] Aclarar en la documentación qué significa `matrix_only`, qué sí valida y qué queda fuera del strict gate.
+- [x] Revalidar en Docker con `./scripts/docker_maillard.sh` dentro del entorno `maillard`.
+- [x] Documentar el resultado y actualizar el review section.
+
+## Active Headspace Calibration — 2026-03-15
+
+- [x] Alinear `src/headspace.py` con los perfiles de retención pea/soy cuando no haya fracciones explícitas de matriz.
+- [x] Añadir tests unitarios que congelen el fallback de headspace para `pea_iso` y `soy_iso` sin doble conteo.
+- [x] Validar el subset de headspace, matrix_correction y scientific lane en Docker.
+- [x] Documentar el alcance de esta calibración mínima y qué sigue pendiente.
+
 ## Short Priority — 2026-03-15
 
 - [x] Corregir scoring por concentración (`src/recommend.py` / `src/inverse_design.py`) — validado en Docker (`tests/unit/test_safety_and_flux.py::test_concentration_aware_ranking` y `tests/integration/test_recommendation_engine.py::test_concentration_boltzmann_scoring`)
@@ -120,8 +135,8 @@ Rationale: yes, but not as an undifferentiated "make all pytest green" task. The
 
 ## Phase D: Plant Matrix Replication [Very High]
 
-- [ ] Promote `pea_isolate_40C_PratapSingh2021` from xfail to executable benchmark.
-- [ ] Add matrix-aware precursor handling or a dedicated matrix benchmark pathway that does not rely on free-precursor resolution.
+- [x] Promote `pea_isolate_40C_PratapSingh2021` from xfail to executable benchmark.
+- [x] Add matrix-aware precursor handling or a dedicated matrix benchmark pathway that does not rely on free-precursor resolution.
 - [ ] Calibrate `src/headspace.py` against pea and soy headspace literature.
 - [ ] Calibrate `src/matrix_correction.py` against reactive lysine and cysteine accessibility literature.
 - [ ] Add pH-dependent headspace validation using the Pouvreau benchmark family.
@@ -165,13 +180,13 @@ Rationale: yes, but not as an undifferentiated "make all pytest green" task. The
 - [x] Current Docker measurement confirms `cys_ribose_140C_Hofmann1998` has 100% coverage, but still misses absolute scale badly: MFT ratio ~653x, FFT ratio ~253x.
 - [x] Current Docker measurement confirms `cys_ribose_150C_Mottram1994` has 100% coverage and useful ranking (`Pearson R ~= 0.87`), but absolute ratios remain far off: MFT ~185x, disulfide ~327x, furfural ~853x.
 - [x] Current Docker measurement confirms `cys_glucose_150C_Farmer1999` has 100% coverage and strong ranking (`Pearson R ~= 0.99`), but absolute ratios remain far off: MFT ~80x, furfural ~313x, pyrazine ~69x.
-- [x] Current Docker measurement confirms `pea_isolate_40C_PratapSingh2021` is still unsupported by the benchmark harness because it is matrix-only and not resolvable through the current free-precursor execution path.
+- [x] Current Docker measurement confirms `pea_isolate_40C_PratapSingh2021` now runs through a dedicated `matrix_only` intake path with 100% coverage while remaining outside the strict release gate.
 - [x] `predicted_ppb` now excludes exogenous precursors and other non-output species; the interface is once again semantically aligned with projected volatile outputs.
 - [x] Projection now allocates the volatile budget across curated, non-exogenous, budget-relevant outputs instead of diffusing it across the full tracked network.
 - [x] The dominant program risk is no longer global quantitative compression of `predicted_ppb`; the remaining benchmark gaps are now compound-family-specific.
 - [x] The benchmark path and the diagnostic path now both propagate `time_minutes` into FAST prediction, so branch calibration is temporally consistent.
 - [x] Residual branch calibration has been localized and corrected at the family level instead of by ad hoc benchmark-specific patches.
-- [x] Current benchmark-summary status is now explicit: Farmer, Hofmann, and Mottram are `strict-ready`; the pea-isolate case remains `unsupported`.
+- [x] Current benchmark-summary status is now explicit: Farmer, Hofmann, and Mottram are `strict-ready`; the pea-isolate case is executable as `matrix_only` but not `strict-ready`.
 - [x] Docker sweeps confirmed that the remaining free-AA blocker is not a missing single sulfur barrier entry but the translation from FAST activity into observed concentration/headspace.
 - [x] `src/recommend.py` now carries Henry-constant lookup and observability classification helpers, but the benchmark-facing budget still intentionally stays on the stable pre-headspace allocation until the full projection redesign is ready.
 - [x] The benchmark-facing budget now applies a conservative post-projection penalty to explicitly low-headspace targets (for example HMF) without redistributing that budget into the validated free-amino-acid benchmark compounds.
@@ -181,6 +196,8 @@ Rationale: yes, but not as an undifferentiated "make all pytest green" task. The
 ## Review Section
 
 - Verified in Docker with `conda activate maillard` on Python 3.12.
+- Headspace calibration result: `src/headspace.py` now applies a conservative `protein_type` fallback for `pea_iso` and `soy_iso` only when explicit matrix fractions are absent, keeping explicit fat/protein-fraction physics unchanged and validated by Docker (`27 passed` on the focused unit subset, `66 passed, 3 xfailed` on `./scripts/docker_maillard.sh scientific`).
+- Matrix-only contract review result: `pea_isolate_40C_PratapSingh2021` remains executable and supported in summary/index, remains outside the strict gate, and is now explicitly excluded from FAST target snapshots and `targets-report` by contract.
 - Docker reproducibility is now standardized around `./scripts/docker_maillard.sh`; `status`, `summary`, `index`, targeted `pytest`, and full `pytest tests/` all ran successfully in the validated container.
 - Target-level benchmark introspection is now standardized too: `./scripts/docker_maillard.sh targets data/benchmarks/<benchmark>.json [desirable|competing|toxic]` replaces brittle ad hoc inline Python for scientific inspection, while still accepting off-flavour aliases.
 - The skip audit is now explicit: placeholder-heavy `tests/benchmarks/` remain intentionally out of the release gate, while QM skips must be capability-based rather than path-based.
@@ -212,6 +229,7 @@ Rationale: yes, but not as an undifferentiated "make all pytest green" task. The
   - The next conservative step is now in place too: low-headspace targets are lightly suppressed at the projection output stage, so the benchmark-target artifact reflects headspace observability rather than raw liquid-phase proxy mass for near-nonvolatile species.
   - Latest conservative projection step: the low-headspace suppression now uses the existing HeadspaceModel temperature dependence inside Docker validation, but remains capped so free-amino-acid benchmark calibration stays stable (`15 passed` for budget/targets tests and `7 passed` for the benchmark scientific subset).
   - Projection semantics are now explicit in `src/recommend.py`: FAST first produces a proxy output budget, then a separate observable-output projection applies fallback matrix retention and relative headspace suppression; Docker suite remains green at `337 passed, 41 skipped, 4 xfailed`.
+  - The first matrix-only benchmark lane is now executable too: `pea_isolate_40C_PratapSingh2021` runs through a dedicated oxidation/headspace intake model with 100% coverage, `Pearson 1.000`, `max ratio 1.002`, and remains outside the strict gate by design.
 - Root causes identified so far:
   - Free-amino-acid benchmarks were previously contaminated by lipid oxidation products injected without lipid inputs.
   - Benchmark matching was too permissive and could overstate model performance.

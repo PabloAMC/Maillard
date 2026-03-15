@@ -24,3 +24,5 @@
 
 Target rows: 19
 Low-headspace rows: 1
+Excluded matrix-only benchmarks: pea_isolate_40C_PratapSingh2021
+These benchmarks remain executable through summary/index artefacts, but they are deliberately omitted from target snapshots because they do not run through the free-precursor FAST target-ranking path.

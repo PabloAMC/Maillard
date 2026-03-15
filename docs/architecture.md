@@ -72,9 +72,9 @@ The architecture above describes the intended computational stack, but the curre
 
 - The canonical validation path is Docker-first, using the `maillard` conda environment through `./scripts/docker_maillard.sh`.
 - Three PRIMARY free-amino-acid benchmarks are currently strict-ready: `cys_glucose_150C_Farmer1999`, `cys_ribose_140C_Hofmann1998`, and `cys_ribose_150C_Mottram1994`.
-- One PRIMARY matrix benchmark remains an explicit scope gap rather than a silent failure: `pea_isolate_40C_PratapSingh2021` is `matrix_only` under the current execution path.
+- One PRIMARY matrix benchmark is now executable through a dedicated intake path rather than a free-precursor route: `pea_isolate_40C_PratapSingh2021` runs as `matrix_only`, with full benchmark coverage, but is not yet part of the strict release gate.
 
-This distinction matters: the framework is already useful for ranking and benchmarking within the validated free-precursor envelope, but it is not yet a generally validated matrix-headspace replication engine.
+This distinction matters: the framework is already useful for ranking and benchmarking within the validated free-precursor envelope, and it now has a first executable matrix-headspace intake benchmark, but it is not yet a generally validated matrix-headspace replication engine.
 
 ### 2.3 Risk Mitigation
 

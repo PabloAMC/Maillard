@@ -18,8 +18,9 @@ def test_benchmark_index_marks_matrix_only_scope_gaps_explicitly():
 
     assert by_id["cys_glucose_150C_Farmer1999"].execution_path == "free_precursor"
     assert by_id["pea_isolate_40C_PratapSingh2021"].execution_path == "matrix_only"
-    assert by_id["pea_isolate_40C_PratapSingh2021"].supported is False
-    assert by_id["pea_isolate_40C_PratapSingh2021"].status == "unsupported"
+    assert by_id["pea_isolate_40C_PratapSingh2021"].supported is True
+    assert by_id["pea_isolate_40C_PratapSingh2021"].strict_ready is False
+    assert by_id["pea_isolate_40C_PratapSingh2021"].status in {"pass", "partial-pass", "scale-gap", "ranking-gap"}
 
 
 def test_benchmark_index_markdown_exposes_execution_path():

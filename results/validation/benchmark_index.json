@@ -42,9 +42,9 @@
     "family": "matrix_headspace",
     "protein_type": "pea_iso",
     "execution_path": "matrix_only",
-    "supported": false,
-    "reason": "No resolvable free-precursor system in benchmark. Matrix-only precursors: Pea Protein Isolate",
-    "status": "unsupported",
+    "supported": true,
+    "reason": null,
+    "status": "pass",
     "strict_ready": false
   }
 ]

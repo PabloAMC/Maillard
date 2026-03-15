@@ -42,6 +42,8 @@ For the aggregated target artifact with headspace observability metadata, use:
 
 This writes `results/validation/benchmark_targets.md` and `results/validation/benchmark_targets.json`, including per-target headspace class and Henry-law metadata when available.
 
+`matrix_only` benchmarks are intentionally excluded from this target artifact. They remain executable through the summary and index artefacts, but they do not run through the free-precursor FAST target-ranking path, so exposing them as ordinary target snapshots would be scientifically misleading.
+
 The explicit strict gate for free-amino-acid benchmarks is:
 
 ```bash
@@ -55,9 +57,19 @@ As of the current Docker-validated benchmark summary:
 - `cys_glucose_150C_Farmer1999` is `pass` and `strict-ready`.
 - `cys_ribose_140C_Hofmann1998` is `partial-pass` and `strict-ready`.
 - `cys_ribose_150C_Mottram1994` is `pass` and `strict-ready`.
-- `pea_isolate_40C_PratapSingh2021` remains `unsupported` because it is matrix-only and cannot yet run through the free-precursor path.
+- `pea_isolate_40C_PratapSingh2021` is now executable through a dedicated `matrix_only` intake path, with full coverage, but it remains outside the strict release gate.
 
-This means the framework now has three strict-ready free-amino-acid benchmarks and one explicit matrix-only scope gap (`pea isolate`). The absolute concentration projection is therefore materially better calibrated for the current free-precursor envelope, but it is still not a generally validated matrix headspace model.
+The headspace module now also carries a conservative matrix fallback for `pea_iso` and `soy_iso` when no explicit fat/protein fractions are supplied. That fallback is intentionally tied to the same retention estimates already used in `src/matrix_correction.py`, so unit-level headspace and matrix assumptions no longer drift apart.
+
+For `matrix_only` today, the contract is narrow and explicit:
+
+- The benchmark must declare a non-`free` `protein_type` with a registered matrix model.
+- Validation is an intake/headspace execution check, not a general precursor-resolved chemistry claim.
+- It can appear as `supported` in summary/index outputs while still remaining `strict_ready = False`.
+- It is deliberately omitted from `targets-report` until there is a benchmark-facing target-ranking model for matrix systems.
+- The new `protein_type` headspace fallback is a conservative bridge for unspecified matrix fractions, not a replacement for explicit pea/soy composition calibration.
+
+This means the framework now has three strict-ready free-amino-acid benchmarks and one executable matrix-headspace intake benchmark (`pea isolate`). The absolute concentration projection is materially better calibrated for the current free-precursor envelope, but the matrix headspace lane should still be treated as an executable intake model rather than a broadly calibrated release gate.
 
 ## 3. How We Validate
 
@@ -91,7 +103,7 @@ The validated execution contract now uses named Docker lanes instead of ad hoc c
 
 ## 4. Blind Spots That Still Matter
 
-- **Matrix-only systems**: plant-isolate benchmarks still require a dedicated matrix-aware execution path.
+- **Matrix-only systems**: the first plant-isolate benchmark path is now executable, but broader matrix calibration beyond the pea-isolate intake case is still missing.
 - **Headspace translation**: the remaining free-amino-acid scale gaps are now dominated by how FAST activity is translated into observed concentration/headspace, not by a single missing sulfur barrier.
 - **Peptide accessibility**: intact protein systems are still outside the validated free-precursor envelope.
 
@@ -105,7 +117,7 @@ The validated execution contract now uses named Docker lanes instead of ad hoc c
 6. Run `MAILLARD_STRICT_BENCHMARKS=1 ./scripts/docker_maillard.sh pytest tests/scientific/test_benchmarks.py -q` when you want an honest go/no-go signal for the strict free-AA gate.
 7. Run `./scripts/docker_maillard.sh targets data/benchmarks/<benchmark>.json` when you need the current target snapshot for branch-level analysis.
 8. Run `./scripts/docker_maillard.sh targets-report` when you need the aggregate target artifact regenerated before review or comparison.
-9. Treat any unsupported matrix benchmark as a scope gap, not as a passing scientific result.
+9. Treat `matrix_only` benchmarks as executable intake checks unless they are explicitly promoted into the strict gate.
 
 ## 6. Expected Skips In The Docker Lane
 

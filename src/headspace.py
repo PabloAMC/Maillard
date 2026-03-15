@@ -10,6 +10,8 @@ import yaml
 from pathlib import Path
 from typing import Dict, Optional, List
 
+from src.matrix_correction import MATRIX_CORRECTIONS, ProteinType
+
 class HeadspaceModel:
     """
     Models the partitioning of volatiles between the food matrix and air.
@@ -93,19 +95,51 @@ class HeadspaceModel:
         else:
             return 10.0
 
+    def _matrix_retention_fallback(
+        self,
+        protein_type: Optional[str],
+        fat_fraction: float,
+        protein_fraction: float,
+    ) -> float:
+        if fat_fraction > 0.0 or protein_fraction > 0.0 or not protein_type:
+            return 1.0
+
+        try:
+            p_type = ProteinType(protein_type)
+        except ValueError:
+            return 1.0
+
+        if p_type == ProteinType.FREE_AMINO_ACID:
+            return 1.0
+
+        corr = MATRIX_CORRECTIONS.get(p_type)
+        if corr is None:
+            return 1.0
+        return float(corr.volatile_retention)
+
     def predict_headspace(self, 
                           matrix_concentrations: Dict[str, float], 
                           temp_c: float, 
                           fat_fraction: float = 0.0,
-                          protein_fraction: float = 0.0) -> Dict[str, float]:
+                          protein_fraction: float = 0.0,
+                          protein_type: Optional[str] = None) -> Dict[str, float]:
         """
         Predicts air-phase concentrations (ppm).
         
         Equation: C_air = C_total * Kaw_eff
         Kaw_eff = Kaw(T) / (1 + Kfat * phi_fat + Kprot * phi_prot)
+
+        If no explicit matrix fractions are provided, `protein_type` can supply
+        a conservative fallback retention calibrated from the matrix-correction
+        literature estimates already used elsewhere in the project.
         """
         temp_k = temp_c + 273.15
         air_concs = {}
+        matrix_retention = self._matrix_retention_fallback(
+            protein_type,
+            fat_fraction,
+            protein_fraction,
+        )
         
         for name, c_total in matrix_concentrations.items():
             entry = self.data.get(name)
@@ -119,10 +153,10 @@ class HeadspaceModel:
                 denom = 1.0 + (k_fat * fat_fraction) + (k_prot * protein_fraction)
                 kaw_eff = kaw_base / denom
                 
-                air_concs[name] = c_total * kaw_eff
+                air_concs[name] = c_total * kaw_eff * matrix_retention
             else:
                 # Basic fallback
-                air_concs[name] = c_total * kaw_base
+                air_concs[name] = c_total * kaw_base * matrix_retention
                 
         return air_concs
 

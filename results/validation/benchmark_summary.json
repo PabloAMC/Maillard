@@ -71,22 +71,22 @@
     "tier": "PRIMARY",
     "family": "matrix_headspace",
     "execution_path": "matrix_only",
-    "supported": false,
-    "reason": "No resolvable free-precursor system in benchmark. Matrix-only precursors: Pea Protein Isolate",
+    "supported": true,
+    "reason": null,
     "protein_type": "pea_iso",
-    "coverage": 0.0,
-    "matched_compounds": 0,
-    "total_compounds": 0,
-    "pearson_r": null,
-    "mae_ppb": null,
-    "max_ratio": null,
-    "mean_ratio": null,
-    "ranking_status": "unsupported",
-    "scale_status": "unsupported",
-    "overall_status": "unsupported",
+    "coverage": 1.0,
+    "matched_compounds": 3,
+    "total_compounds": 3,
+    "pearson_r": 0.9999995223807515,
+    "mae_ppb": 0.3385431376812657,
+    "max_ratio": 1.002488531616753,
+    "mean_ratio": 1.001391177526661,
+    "ranking_status": "pass",
+    "scale_status": "pass",
+    "overall_status": "pass",
     "strict_ready": false,
     "blocking_issues": [
-      "No resolvable free-precursor system in benchmark. Matrix-only precursors: Pea Protein Isolate"
+      "matrix-only intake path is executable but not yet in the strict release gate"
     ]
   }
 ]

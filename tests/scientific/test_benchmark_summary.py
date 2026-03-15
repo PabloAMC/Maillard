@@ -27,8 +27,9 @@ def test_benchmark_summary_separates_supported_and_unsupported_cases():
     assert by_id["cys_glucose_150C_Farmer1999"].supported is True
     assert by_id["cys_glucose_150C_Farmer1999"].overall_status in {"pass", "scale-gap", "ranking-gap", "partial-pass"}
 
-    assert by_id["pea_isolate_40C_PratapSingh2021"].supported is False
-    assert by_id["pea_isolate_40C_PratapSingh2021"].overall_status == "unsupported"
+    assert by_id["pea_isolate_40C_PratapSingh2021"].supported is True
+    assert by_id["pea_isolate_40C_PratapSingh2021"].strict_ready is False
+    assert by_id["pea_isolate_40C_PratapSingh2021"].overall_status in {"pass", "partial-pass", "scale-gap", "ranking-gap"}
 
 
 def test_benchmark_summary_markdown_includes_gap_labels():
@@ -42,7 +43,7 @@ def test_benchmark_summary_markdown_includes_gap_labels():
     assert "Benchmark Summary" in markdown
     assert "cys_glucose_150C_Farmer1999" in markdown
     assert "pea_isolate_40C_PratapSingh2021" in markdown
-    assert "unsupported" in markdown
+    assert "matrix-only intake path is executable" in markdown
     assert "Strict Ready" in markdown
 
 
