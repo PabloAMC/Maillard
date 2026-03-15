@@ -4,10 +4,17 @@
 
 - [x] Corregir scoring por concentración (`src/recommend.py` / `src/inverse_design.py`) — validado en Docker (`tests/unit/test_safety_and_flux.py::test_concentration_aware_ranking` y `tests/integration/test_recommendation_engine.py::test_concentration_boltzmann_scoring`)
 - [x] Añadir manejo robusto cuando CREST falla (capability probe / pytest marker) — validado en Docker (`tests/qm/test_solvation.py::test_explicit_solvation_run` y `tests/qm/test_explicit_solvation_integration.py::test_dft_refiner_explicit_solvation`)
-- [x] Investigar ratio fuera de umbral en `cys_ribose_140C_Hofmann1998` — la regresión científica actual pasa en Docker
+- [x] Documentar y automatizar el flujo Docker reproducible (`scripts/docker_maillard.sh`, `README.md`, `Installation.md`, `docs/VALIDATION_GUIDE.md`)
+- [x] Auditar los `skip` del suite y corregir guards obsoletos de backend (`tests/qm/test_dft_solvation_integration.py`, `tests/qm/test_sella_ts.py`)
 - [x] Reprobar tests clave en Docker y cerrar Tier 0/benchmark lane — suite completa verde en Docker (`327 passed, 41 skipped, 4 xfailed`)
 - [x] Documentar cambios y lecciones en `tasks/lessons.md`
 - [x] Generar y validar resumen de benchmarks (`scripts/generate_benchmark_summary.py`) — validado en Docker
+
+## Next Scientific Priority — 2026-03-15
+
+- [x] Cerrar el `scale-gap` de `cys_ribose_140C_Hofmann1998` sin reabrir Farmer ni Mottram. Docker-validado con `./scripts/docker_maillard.sh summary` (`max ratio 1.442`, `strict-ready: yes`).
+- [x] Diseñar una lane Docker explícita para `core`, `scientific` y `qm-heavy`, con skips justificados por capacidad real.
+- [x] Definir el primer camino ejecutable para benchmarks matrix-only (`pea_isolate_40C_PratapSingh2021`) sin falsear soporte científico.
 
 ## Validation Contract
 
@@ -61,14 +68,14 @@ Rationale: yes, but not as an undifferentiated "make all pytest green" task. The
 
 - [x] Treat the CREST/QCG segmentation faults in `tests/qm/test_solvation.py` and `tests/qm/test_explicit_solvation_integration.py` as an environment-stability issue first; verify whether they reproduce inside the required Docker `maillard` environment.
 - [x] If CREST is unstable only on the host, add an explicit capability check or pytest marker so unsupported host setups skip cleanly instead of failing the suite.
-- [ ] Document which test subsets are required to pass in Docker before Phase B-E chemistry work continues.
+- [x] Document which test subsets are required to pass in Docker before Phase B-E chemistry work continues.
 
 ### Tier 3: Lock the suite into useful execution lanes
 
-- [ ] Define a small "core correctness" lane that must pass before any new benchmark-calibration work.
-- [ ] Define a "scientific validation" lane for FAST plus benchmark tests in Docker.
-- [ ] Define a "heavy kinetics/QM" lane for Cantera and external-tool tests, with explicit environment prerequisites.
-- [ ] Update docs and local commands so contributors stop interpreting host-only external-tool crashes as chemistry regressions.
+- [x] Define a small "core correctness" lane that must pass before any new benchmark-calibration work.
+- [x] Define a "scientific validation" lane for FAST plus benchmark tests in Docker.
+- [x] Define a "heavy kinetics/QM" lane for Cantera and external-tool tests, with explicit environment prerequisites.
+- [x] Update docs and local commands so contributors stop interpreting host-only external-tool crashes as chemistry regressions.
 
 ### Acceptance criteria for this gate
 
@@ -77,7 +84,7 @@ Rationale: yes, but not as an undifferentiated "make all pytest green" task. The
 - [ ] The remaining Cantera assertions are either fixed or intentionally re-baselined with scientific justification.
 - [ ] External-tool tests fail only for real code defects, not for missing or unstable binaries on unsupported environments.
 
-## Phase A: Benchmark Infrastructure
+## Phase A: Benchmark Infrastructure [Low]
 
 - [x] Create initial benchmark JSON files.
 - [x] Add shared benchmark execution core in `src/benchmark_validation.py`.
@@ -87,18 +94,18 @@ Rationale: yes, but not as an undifferentiated "make all pytest green" task. The
 - [x] Prevent misleading Pearson R reporting for 2-point comparisons.
 - [x] Tighten fuzzy matching so trivial substrings do not count as species matches.
 - [ ] Add benchmark metadata fields for tier and benchmark family directly in each JSON file.
-- [ ] Add a benchmark index in code so tests and reports can filter by PRIMARY, SECONDARY, matrix, and safety.
+- [x] Add a benchmark index in code so tests and reports can filter by PRIMARY, SECONDARY, matrix, and safety.
 
-## Phase B: Free Amino Acid Replication Gate
+## Phase B: Free Amino Acid Replication Gate [Medium]
 
-- [ ] Make `cys_ribose_140C_Hofmann1998` quantitatively credible for MFT and FFT.
-- [ ] Make `cys_ribose_150C_Mottram1994` reproduce sulfur ordering without absurd absolute overprediction.
-- [ ] Make `cys_glucose_150C_Farmer1999` discriminate ribose vs glucose cleanly.
+- [x] Make `cys_ribose_140C_Hofmann1998` quantitatively credible for MFT and FFT.
+- [x] Make `cys_ribose_150C_Mottram1994` reproduce sulfur ordering without absurd absolute overprediction.
+- [x] Make `cys_glucose_150C_Farmer1999` discriminate ribose vs glucose cleanly.
 - [ ] Audit the scaling path from `src/recommend.py` to `src/inverse_design.py` so `predicted_ppb` is physically interpretable, not just a heuristic weight.
 - [ ] Add species alias tables for benchmark matching where literature and internal names diverge.
 - [ ] Enable strict ratio assertions behind the benchmark flag once the first three PRIMARY systems are stable.
 
-## Phase C: FAST Physics and Quantitative Scaling
+## Phase C: FAST Physics and Quantitative Scaling [High]
 
 - [ ] Replace arbitrary ppb scaling in `src/recommend.py` with a documented concentration projection strategy.
 - [ ] Review the relationship between barrier, rate constant, and output concentration in `src/conditions.py`, `src/recommend.py`, and `scripts/run_cantera_kinetics.py`.
@@ -108,7 +115,7 @@ Rationale: yes, but not as an undifferentiated "make all pytest green" task. The
 - [ ] Implement thermodynamic gating where it materially changes benchmark error rather than as a roadmap placeholder.
 - [x] Add explicit observability/headspace groundwork in `src/recommend.py` so the projection layer can distinguish physically low-headspace species before the full benchmark-facing projection redesign is enabled.
 
-## Phase D: Plant Matrix Replication
+## Phase D: Plant Matrix Replication [Very High]
 
 - [ ] Promote `pea_isolate_40C_PratapSingh2021` from xfail to executable benchmark.
 - [ ] Add matrix-aware precursor handling or a dedicated matrix benchmark pathway that does not rely on free-precursor resolution.
@@ -117,19 +124,19 @@ Rationale: yes, but not as an undifferentiated "make all pytest green" task. The
 - [ ] Add pH-dependent headspace validation using the Pouvreau benchmark family.
 - [ ] Keep plant-matrix benchmarks outside the strict gate until coverage and matrix physics are both credible.
 
-## Phase E: Safety and Temporal Validation
+## Phase E: Safety and Temporal Validation [Medium]
 
 - [ ] Validate `src/safety.py` against acrylamide formation and elimination literature, not just monotonic formation.
 - [ ] Add an explicit non-monotonic acrylamide benchmark.
 - [ ] Validate temperature-ramp predictions against the temporal FAST suite and Cantera reference cases.
 - [ ] Separate fast scientific regression tests from slower kinetics validation tests with pytest markers.
 
-## Phase F: Regression Gate and Reporting
+## Phase F: Regression Gate and Reporting [Low]
 
 - [x] Add a benchmark summary report that writes coverage, MAE, ratio failures, and supported vs unsupported benchmarks.
 - [x] Expose strict benchmark mode in documented local commands.
 - [x] Update `docs/VALIDATION_GUIDE.md` so it reflects the actual gate instead of aspirational release checks.
-- [ ] Update `README.md` and `docs/architecture.md` to distinguish current validated capability from long-term SOTA goals.
+- [x] Update `README.md` and `docs/architecture.md` to distinguish current validated capability from long-term SOTA goals.
 
 ## Research Roadmap After Replication Gate
 
@@ -161,7 +168,7 @@ Rationale: yes, but not as an undifferentiated "make all pytest green" task. The
 - [x] The dominant program risk is no longer global quantitative compression of `predicted_ppb`; the remaining benchmark gaps are now compound-family-specific.
 - [x] The benchmark path and the diagnostic path now both propagate `time_minutes` into FAST prediction, so branch calibration is temporally consistent.
 - [x] Residual branch calibration has been localized and corrected at the family level instead of by ad hoc benchmark-specific patches.
-- [x] Current benchmark-summary status is now explicit: Farmer is `pass` and `strict-ready`; Hofmann and Mottram remain `scale-gap`; the pea-isolate case remains `unsupported`.
+- [x] Current benchmark-summary status is now explicit: Farmer, Hofmann, and Mottram are `strict-ready`; the pea-isolate case remains `unsupported`.
 - [x] Docker sweeps confirmed that the remaining free-AA blocker is not a missing single sulfur barrier entry but the translation from FAST activity into observed concentration/headspace.
 - [x] `src/recommend.py` now carries Henry-constant lookup and observability classification helpers, but the benchmark-facing budget still intentionally stays on the stable pre-headspace allocation until the full projection redesign is ready.
 - [ ] A full host `python -m pytest tests/` run is currently not a trustworthy release gate: 13 failures span core logic drift, Cantera serialization breakage, expectation drift in kinetics tests, and CREST host instability.
@@ -170,6 +177,10 @@ Rationale: yes, but not as an undifferentiated "make all pytest green" task. The
 ## Review Section
 
 - Verified in Docker with `conda activate maillard` on Python 3.12.
+- Docker reproducibility is now standardized around `./scripts/docker_maillard.sh`; `status`, `summary`, `index`, targeted `pytest`, and full `pytest tests/` all ran successfully in the validated container.
+- The skip audit is now explicit: placeholder-heavy `tests/benchmarks/` remain intentionally out of the release gate, while QM skips must be capability-based rather than path-based.
+- The Hofmann sulfur benchmark is now back inside the strict-ready envelope through a projection-layer calibration in `src/recommend.py`, validated via `./scripts/docker_maillard.sh summary` and `./scripts/docker_maillard.sh scientific`.
+- The next scientific expansion target is no longer free-amino-acid sulfur calibration but extending the executable envelope beyond `free_precursor`, starting with matrix-aware benchmark handling.
 - Current scientific harness status: `tests/unit/test_budget_projection.py` plus the key scientific suite now pass in Docker (`8 passed, 1 xfailed`).
 - Re-prioritization outcome from the latest Docker benchmark readout:
   - Coverage for the free-amino-acid PRIMARY systems is no longer the gating issue.

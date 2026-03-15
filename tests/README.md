@@ -41,4 +41,10 @@ To ensure both rapid development and scientific accuracy, the Maillard test suit
 
 ## Markers
 - `@pytest.mark.slow`: Deselect with `pytest -m "not slow"` for fast local iteration.
-- `@pytest.mark.skipif(...)`: Automatically skips tests if external binaries (xTB, MACE) are missing.
+- `@pytest.mark.skipif(...)`: Automatically skips tests if an external backend is unavailable or unsupported in the active environment.
+
+## Expected Skips In Docker
+
+- `tests/benchmarks/`: currently forward-looking Phase 3 placeholders and HPC-scale benchmark scaffolds. These skips are intentional and should not be treated as regressions until the underlying data or implementation exists.
+- Optional QM backend tests: skips are legitimate when they reflect a real capability probe, for example missing or unusable Sella/JAX, missing xTB, or unavailable CREST/QCG.
+- Environment-gated skips should probe the actual backend capability, not hard-code stale paths such as `conda_env/bin/...`.

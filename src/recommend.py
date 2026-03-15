@@ -371,6 +371,7 @@ def _select_accumulating_projection_species(
 def _project_weighted_flux_to_ppb(
     steps: List[Any],
     tracked_species: Dict[str, Tuple[float, float, int, float, float]],
+    best_paths: Dict[str, List[Dict[str, Any]]],
     species_catalog: Dict[str, Species],
     corrected_initial: Dict[str, float],
     target_lookup: Dict[str, Dict[str, Any]],
@@ -406,25 +407,37 @@ def _project_weighted_flux_to_ppb(
         return {}
 
     candidate_entries = {
-        canon: (span, weight)
+        canon: (span, depth, weight, best_paths.get(canon, []))
         for canon, (span, conc, depth, weight, unc) in tracked_species.items()
         if canon in projected_species and depth > 0 and span < float("inf")
     }
     if not candidate_entries:
         return {}
 
-    best_span = min(span for span, _weight in candidate_entries.values())
+    best_span = min(span for span, _depth, _weight, _path in candidate_entries.values())
+    min_depth = min(depth for _span, depth, _weight, _path in candidate_entries.values())
     span_window_kcal = max(0.35, 0.65 * 0.001987 * temperature_kelvin)
-    max_weight = max(max(weight, 0.0) for _canon, (_span, weight) in candidate_entries.items())
+    max_weight = max(max(weight, 0.0) for _canon, (_span, _depth, weight, _path) in candidate_entries.items())
+
+    # At lower thermal severity, short terminal routes should retain a mild advantage over
+    # deeper ones when the final ppb budget is allocated across competing outputs.
+    depth_bias_strength = max(0.0, 0.85 - severity) * 1.0
     activities = {}
-    for canon, (span, weight) in candidate_entries.items():
+    for canon, (span, depth, weight, best_path) in candidate_entries.items():
         span_activity = math.exp(-(span - best_span) / span_window_kcal)
         if max_weight > 0.0:
             relative_weight = max(weight, 0.0) / max_weight
             flux_activity = max(relative_weight, 1.0e-6) ** 0.65
         else:
             flux_activity = 1.0
-        activities[canon] = span_activity * flux_activity
+        depth_activity = math.exp(-depth_bias_strength * max(depth - min_depth, 0))
+        terminal_family = ""
+        if best_path:
+            terminal_family = str(best_path[-1].get("family", "")).lower().replace("-", "_").replace(" ", "_")
+        direct_sulfur_bonus = 1.0
+        if terminal_family == "thiol_addition":
+            direct_sulfur_bonus += 0.8 * max(0.0, 0.85 - severity)
+        activities[canon] = span_activity * flux_activity * depth_activity * direct_sulfur_bonus
 
     total_activity = sum(activities.values())
     if total_activity <= 0.0:
@@ -723,6 +736,7 @@ class Recommender:
         raw_concentrations = _project_weighted_flux_to_ppb(
             steps,
             tracking,
+            best_paths,
             species_catalog,
             corrected_initial,
             target_lookup,

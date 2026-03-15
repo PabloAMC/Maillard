@@ -100,30 +100,28 @@ conda activate maillard
 ### 🍎 macOS (Apple Silicon M1/M2/M3)
 Maillard relies on x86_64 chemical binaries. Use **Docker** (with OrbStack or Docker Desktop) for a seamless experience:
 ```bash
-# Start the Linux environment
-docker run --platform linux/amd64 -it -v "$(pwd):/workspace" -w /workspace condaforge/miniforge3
+# One-time container setup / restart
+./scripts/docker_maillard.sh up
 
-# Inside the container, set up environment:
-conda create -n maillard python=3.12 -y && conda activate maillard
-# Apply patches from Installation.md
+# One-time environment bootstrap
+./scripts/docker_maillard.sh bootstrap
+
+# Open an interactive shell in the validated environment
+./scripts/docker_maillard.sh shell
 ```
 
 **Returning to Work (macOS):**
 ```bash
-docker start -ai maillard_container
-conda activate maillard
+./scripts/docker_maillard.sh up
+./scripts/docker_maillard.sh shell
 ```
 
 
 ### 2. Verify Scientific Dependencies
 Ensure that the QM engines are correctly detected by the framework:
 ```bash
-# Check if binaries are in your PATH
-which crest
-which xtb
-
-# Run core validation tests
-python -m pytest tests/qm/test_solvation.py
+./scripts/docker_maillard.sh status
+./scripts/docker_maillard.sh pytest tests/qm/test_solvation.py
 ```
 
 ### 3. Install Skala (Tier 2 DFT)
@@ -140,13 +138,19 @@ The framework uses a **Test-Driven Science** approach. We maintain specific test
 
 Generate the current benchmark summary artifact with:
 ```bash
-python scripts/generate_benchmark_summary.py
+./scripts/docker_maillard.sh summary
 ```
 This writes `results/validation/benchmark_summary.md` and `results/validation/benchmark_summary.json`, separating supported benchmarks, ranking quality, and remaining scale gaps.
 
+Generate the benchmark index with explicit execution-path metadata using:
+```bash
+./scripts/docker_maillard.sh index
+```
+This writes `results/validation/benchmark_index.md` and `results/validation/benchmark_index.json`, making matrix-only scope gaps explicit without presenting them as validated predictive cases.
+
 Run the explicit free-amino-acid strict gate with:
 ```bash
-MAILLARD_STRICT_BENCHMARKS=1 python -m pytest tests/scientific/test_benchmarks.py -q
+MAILLARD_STRICT_BENCHMARKS=1 ./scripts/docker_maillard.sh pytest tests/scientific/test_benchmarks.py -q
 ```
 This consumes the same benchmark summary criteria used by the report: full coverage, Pearson `>= 0.85` when at least three compounds match, and max ratio `<= 1.5x` for free-amino-acid systems. It is intentionally opt-in because the remaining scale-gap benchmarks should fail honestly until they are fixed.
 
@@ -157,6 +161,15 @@ We proactively document and test for current engine limitations to prevent over-
 - **Metal Catalysis**: General iron/copper synergistic effects on pyrazine formation are currently heuristic.
 
 *Run these baseline tests with:* `python -m pytest tests/scientific/test_blind_spots.py`
+
+For the full Docker-validated regression lane, use `./scripts/docker_maillard.sh pytest tests/`.
+
+Named Docker lanes:
+
+- `./scripts/docker_maillard.sh core`: unit + integration correctness lane.
+- `./scripts/docker_maillard.sh scientific`: benchmark summary/index generation plus scientific FAST regressions.
+- `./scripts/docker_maillard.sh qm-heavy`: QM and external-backend validation lane.
+- `./scripts/docker_maillard.sh hofmann`: branch-level diagnostic trace for the remaining Hofmann scale gap.
 
 ---
 
