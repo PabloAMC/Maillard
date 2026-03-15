@@ -5,6 +5,7 @@
 - [x] Corregir scoring por concentración (`src/recommend.py` / `src/inverse_design.py`) — validado en Docker (`tests/unit/test_safety_and_flux.py::test_concentration_aware_ranking` y `tests/integration/test_recommendation_engine.py::test_concentration_boltzmann_scoring`)
 - [x] Añadir manejo robusto cuando CREST falla (capability probe / pytest marker) — validado en Docker (`tests/qm/test_solvation.py::test_explicit_solvation_run` y `tests/qm/test_explicit_solvation_integration.py::test_dft_refiner_explicit_solvation`)
 - [x] Documentar y automatizar el flujo Docker reproducible (`scripts/docker_maillard.sh`, `README.md`, `Installation.md`, `docs/VALIDATION_GUIDE.md`)
+- [x] Exponer una inspección reproducible de targets de benchmark sin `python -c` frágil (`./scripts/docker_maillard.sh targets ...`, con tipos `desirable`/`competing`/`toxic` y alias legibles)
 - [x] Auditar los `skip` del suite y corregir guards obsoletos de backend (`tests/qm/test_dft_solvation_integration.py`, `tests/qm/test_sella_ts.py`)
 - [x] Reprobar tests clave en Docker y cerrar Tier 0/benchmark lane — suite completa verde en Docker (`327 passed, 41 skipped, 4 xfailed`)
 - [x] Documentar cambios y lecciones en `tasks/lessons.md`
@@ -14,6 +15,8 @@
 
 - [x] Cerrar el `scale-gap` de `cys_ribose_140C_Hofmann1998` sin reabrir Farmer ni Mottram. Docker-validado con `./scripts/docker_maillard.sh summary` (`max ratio 1.442`, `strict-ready: yes`).
 - [x] Diseñar una lane Docker explícita para `core`, `scientific` y `qm-heavy`, con skips justificados por capacidad real.
+- [x] Convertir la inspección puntual de Hofmann/Farmer/Mottram en un comando reproducible de snapshot de targets dentro del wrapper Docker.
+- [x] Exportar snapshots agregados de targets de benchmark a `results/validation/benchmark_targets.{md,json}` y regenerarlos desde la lane `scientific`.
 - [x] Definir el primer camino ejecutable para benchmarks matrix-only (`pea_isolate_40C_PratapSingh2021`) sin falsear soporte científico.
 
 ## Validation Contract
@@ -171,6 +174,7 @@ Rationale: yes, but not as an undifferentiated "make all pytest green" task. The
 - [x] Current benchmark-summary status is now explicit: Farmer, Hofmann, and Mottram are `strict-ready`; the pea-isolate case remains `unsupported`.
 - [x] Docker sweeps confirmed that the remaining free-AA blocker is not a missing single sulfur barrier entry but the translation from FAST activity into observed concentration/headspace.
 - [x] `src/recommend.py` now carries Henry-constant lookup and observability classification helpers, but the benchmark-facing budget still intentionally stays on the stable pre-headspace allocation until the full projection redesign is ready.
+- [x] The benchmark-facing budget now applies a conservative post-projection penalty to explicitly low-headspace targets (for example HMF) without redistributing that budget into the validated free-amino-acid benchmark compounds.
 - [ ] A full host `python -m pytest tests/` run is currently not a trustworthy release gate: 13 failures span core logic drift, Cantera serialization breakage, expectation drift in kinetics tests, and CREST host instability.
 - [ ] The highest-value stabilization work is to fix Tier 0 logic and Tier 1 serialization before returning to deeper Phase B-E benchmark calibration.
 
@@ -178,6 +182,7 @@ Rationale: yes, but not as an undifferentiated "make all pytest green" task. The
 
 - Verified in Docker with `conda activate maillard` on Python 3.12.
 - Docker reproducibility is now standardized around `./scripts/docker_maillard.sh`; `status`, `summary`, `index`, targeted `pytest`, and full `pytest tests/` all ran successfully in the validated container.
+- Target-level benchmark introspection is now standardized too: `./scripts/docker_maillard.sh targets data/benchmarks/<benchmark>.json [desirable|competing|toxic]` replaces brittle ad hoc inline Python for scientific inspection, while still accepting off-flavour aliases.
 - The skip audit is now explicit: placeholder-heavy `tests/benchmarks/` remain intentionally out of the release gate, while QM skips must be capability-based rather than path-based.
 - The Hofmann sulfur benchmark is now back inside the strict-ready envelope through a projection-layer calibration in `src/recommend.py`, validated via `./scripts/docker_maillard.sh summary` and `./scripts/docker_maillard.sh scientific`.
 - The next scientific expansion target is no longer free-amino-acid sulfur calibration but extending the executable envelope beyond `free_precursor`, starting with matrix-aware benchmark handling.
@@ -204,6 +209,9 @@ Rationale: yes, but not as an undifferentiated "make all pytest green" task. The
   - Current stable Docker regression state after the latest review is `14 passed, 1 xfailed` for `tests/unit/test_budget_projection.py`, `tests/scientific/test_free_aa_quantitative_regression.py`, `tests/scientific/test_benchmark_summary.py`, and `tests/scientific/test_benchmarks.py`.
   - Short Docker sweeps on local sulfur-family barriers improved individual benchmarks but could not make Hofmann, Mottram, and Farmer all pass together; the next P0 is the concentration/headspace projection layer rather than another local barrier tweak.
   - A conservative B-C groundwork step is now in place: the recommender can classify low-headspace species from Henry constants and preserve multi-role target metadata without disturbing the current validated benchmark budget.
+  - The next conservative step is now in place too: low-headspace targets are lightly suppressed at the projection output stage, so the benchmark-target artifact reflects headspace observability rather than raw liquid-phase proxy mass for near-nonvolatile species.
+  - Latest conservative projection step: the low-headspace suppression now uses the existing HeadspaceModel temperature dependence inside Docker validation, but remains capped so free-amino-acid benchmark calibration stays stable (`15 passed` for budget/targets tests and `7 passed` for the benchmark scientific subset).
+  - Projection semantics are now explicit in `src/recommend.py`: FAST first produces a proxy output budget, then a separate observable-output projection applies fallback matrix retention and relative headspace suppression; Docker suite remains green at `337 passed, 41 skipped, 4 xfailed`.
 - Root causes identified so far:
   - Free-amino-acid benchmarks were previously contaminated by lipid oxidation products injected without lipid inputs.
   - Benchmark matching was too permissive and could overstate model performance.

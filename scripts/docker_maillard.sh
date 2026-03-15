@@ -23,6 +23,10 @@ Commands:
   scientific   Run the scientific validation lane.
   qm-heavy     Run the QM / external-backend lane.
   hofmann      Generate the Hofmann diagnostic snapshot.
+  targets BENCH [TYPE]
+               Generate a benchmark target snapshot (default TYPE=desirable; aliases: off_flavour, off-flavour, competing).
+  targets-report
+               Generate results/validation/benchmark_targets.{md,json}.
   index        Generate results/validation/benchmark_index.{md,json}.
   summary      Generate results/validation/benchmark_summary.{md,json}.
   status       Show container and environment status.
@@ -36,6 +40,7 @@ core_lane() {
 scientific_lane() {
   run_in_env "python scripts/generate_benchmark_summary.py"
   run_in_env "python scripts/generate_benchmark_index.py"
+  run_in_env "python scripts/generate_benchmark_targets.py"
   run_in_env "python -m pytest tests/scientific tests/unit/test_budget_projection.py tests/unit/test_safety_and_flux.py tests/integration/test_recommendation_engine.py"
 }
 
@@ -45,6 +50,12 @@ qm_heavy_lane() {
 
 hofmann_diagnostic() {
   run_in_env "python scripts/diagnose_benchmark_selectivity.py --lit data/benchmarks/cys_ribose_140C_Hofmann1998.json"
+}
+
+targets_snapshot() {
+  local benchmark_path="$1"
+  local target_type="${2:-desirable}"
+  run_in_env "python scripts/diagnose_benchmark_selectivity.py --lit '$benchmark_path' --targets --target-type '$target_type'"
 }
 
 container_exists() {
@@ -173,6 +184,17 @@ case "$cmd" in
     ;;
   hofmann)
     hofmann_diagnostic
+    ;;
+  targets)
+    shift
+    if [ "$#" -lt 1 ]; then
+      echo "Usage: ./scripts/docker_maillard.sh targets BENCHMARK_JSON [TYPE]" >&2
+      exit 1
+    fi
+    targets_snapshot "$1" "${2:-desirable}"
+    ;;
+  targets-report)
+    run_in_env "python scripts/generate_benchmark_targets.py"
     ;;
   index)
     run_in_env "python scripts/generate_benchmark_index.py"

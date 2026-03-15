@@ -25,6 +25,23 @@ The benchmark index artifact is generated with:
 
 This writes `results/validation/benchmark_index.md` and `results/validation/benchmark_index.json` so execution-path limits such as matrix-only benchmarks are explicit.
 
+For reproducible target-level scientific inspection, use:
+
+```bash
+./scripts/docker_maillard.sh targets data/benchmarks/cys_ribose_140C_Hofmann1998.json
+./scripts/docker_maillard.sh targets data/benchmarks/cys_glucose_150C_Farmer1999.json competing
+```
+
+This exposes the current target snapshot (`ppb`, `span`, `depth`, weighted flux) without relying on brittle inline Python or shell quoting.
+
+For the aggregated target artifact with headspace observability metadata, use:
+
+```bash
+./scripts/docker_maillard.sh targets-report
+```
+
+This writes `results/validation/benchmark_targets.md` and `results/validation/benchmark_targets.json`, including per-target headspace class and Henry-law metadata when available.
+
 The explicit strict gate for free-amino-acid benchmarks is:
 
 ```bash
@@ -69,6 +86,8 @@ The validated execution contract now uses named Docker lanes instead of ad hoc c
 - `./scripts/docker_maillard.sh scientific`: benchmark summary/index generation plus scientific FAST regressions.
 - `./scripts/docker_maillard.sh qm-heavy`: QM and external backend validation.
 - `./scripts/docker_maillard.sh hofmann`: reproducible diagnostic trace for the calibrated Hofmann sulfur benchmark.
+- `./scripts/docker_maillard.sh targets ...`: reproducible target snapshot for a specific benchmark and target family (`desirable`, `competing`, `toxic`; aliases `off_flavour` and `off-flavour`).
+- `./scripts/docker_maillard.sh targets-report`: reproducible aggregate target artifact with headspace observability metadata.
 
 ## 4. Blind Spots That Still Matter
 
@@ -84,7 +103,9 @@ The validated execution contract now uses named Docker lanes instead of ad hoc c
 4. Run `./scripts/docker_maillard.sh pytest tests/scientific/test_free_aa_quantitative_regression.py -q` to guard the currently calibrated free-amino-acid ratios.
 5. Run `./scripts/docker_maillard.sh pytest tests/` for the full Docker-validated suite.
 6. Run `MAILLARD_STRICT_BENCHMARKS=1 ./scripts/docker_maillard.sh pytest tests/scientific/test_benchmarks.py -q` when you want an honest go/no-go signal for the strict free-AA gate.
-7. Treat any unsupported matrix benchmark as a scope gap, not as a passing scientific result.
+7. Run `./scripts/docker_maillard.sh targets data/benchmarks/<benchmark>.json` when you need the current target snapshot for branch-level analysis.
+8. Run `./scripts/docker_maillard.sh targets-report` when you need the aggregate target artifact regenerated before review or comparison.
+9. Treat any unsupported matrix benchmark as a scope gap, not as a passing scientific result.
 
 ## 6. Expected Skips In The Docker Lane
 
@@ -98,5 +119,7 @@ The validated execution contract now uses named Docker lanes instead of ad hoc c
 - `./scripts/docker_maillard.sh scientific`: benchmark summary/index plus scientific regression lane.
 - `./scripts/docker_maillard.sh qm-heavy`: QM and external backend lane.
 - `./scripts/docker_maillard.sh hofmann`: diagnostic trace for the calibrated Hofmann sulfur benchmark.
+- `./scripts/docker_maillard.sh targets ...`: benchmark target snapshot lane for scientific inspection.
+- `./scripts/docker_maillard.sh targets-report`: aggregate target artifact lane for scientific inspection and review.
 
 These lanes keep infrastructure validation separate from unresolved scientific scope gaps such as matrix-only precursor systems.

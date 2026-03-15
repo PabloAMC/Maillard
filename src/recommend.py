@@ -17,7 +17,8 @@ from dataclasses import dataclass
 from typing import List, Dict, Set, Optional, Any, Tuple
 
 from data.reactions.curated_pathways import PATHWAYS, PATHWAY_METADATA
-from src.matrix_correction import ProteinType, apply_matrix_correction
+from src.headspace import HeadspaceModel
+from src.matrix_correction import MATRIX_CORRECTIONS, ProteinType, apply_matrix_correction
 from src.pathway_extractor import Species
 try:
     from rdkit import Chem
@@ -40,6 +41,7 @@ sys.path.insert(0, str(ROOT))
 
 _HENRY_CONSTANTS_PATH = ROOT / "data" / "lit" / "henry_constants.yml"
 _NON_OBSERVABLE_KAW_THRESHOLD = 1.0e-8
+_LOW_HEADSPACE_REFERENCE_KAW = 1.0e-5
 
 
 def _normalize_chemical_name(name: str) -> str:
@@ -61,6 +63,7 @@ def _load_henry_lookup() -> Dict[str, Dict[str, Any]]:
 
 
 _HENRY_LOOKUP = _load_henry_lookup()
+_HEADSPACE_MODEL = HeadspaceModel(str(_HENRY_CONSTANTS_PATH))
 
 def _trunc(s: str, max_len: int) -> str:
     """Pad or truncate string for fixed-width columns."""
@@ -315,6 +318,151 @@ def _is_observable_target_species(species: Species, target_lookup: Dict[str, Dic
     return float(entry.get("Kaw_25c", 0.01)) >= _NON_OBSERVABLE_KAW_THRESHOLD
 
 
+def _headspace_observability_metadata(
+    species: Species,
+    target_lookup: Dict[str, Dict[str, Any]],
+) -> Dict[str, Any]:
+    entry = _henry_entry_for_species(species, target_lookup)
+    if entry is None:
+        return {
+            "headspace_observable": True,
+            "headspace_class": "assumed_observable",
+            "henry_kaw_25c": None,
+            "henry_source_name": None,
+        }
+
+    kaw_25c = float(entry.get("Kaw_25c", 0.01))
+    observable = kaw_25c >= _NON_OBSERVABLE_KAW_THRESHOLD
+    return {
+        "headspace_observable": observable,
+        "headspace_class": "observable" if observable else "low_headspace",
+        "henry_kaw_25c": kaw_25c,
+        "henry_source_name": entry.get("name"),
+    }
+
+
+def _headspace_observability_factor(
+    species: Species,
+    target_lookup: Dict[str, Dict[str, Any]],
+    temperature_kelvin: float,
+    fat_fraction: float = 0.0,
+    protein_fraction: float = 0.0,
+) -> float:
+    entry = _henry_entry_for_species(species, target_lookup)
+    if entry is None:
+        return 1.0
+
+    kaw_25c = float(entry.get("Kaw_25c", 0.01))
+    if kaw_25c >= _NON_OBSERVABLE_KAW_THRESHOLD:
+        return 1.0
+
+    compound_name = str(entry.get("name", species.label or ""))
+    try:
+        kaw_at_temp = float(_HEADSPACE_MODEL.get_kaw_at_temp(compound_name, temperature_kelvin))
+    except Exception:
+        kaw_at_temp = kaw_25c
+
+    try:
+        reference_kaw = float(_HEADSPACE_MODEL.get_kaw_at_temp("Furfural", temperature_kelvin))
+    except Exception:
+        reference_kaw = _LOW_HEADSPACE_REFERENCE_KAW
+
+    reference_kaw = max(reference_kaw, _LOW_HEADSPACE_REFERENCE_KAW)
+    intrinsic_factor = max(1.0e-6, min(1.0, kaw_at_temp / reference_kaw))
+
+    matrix_factor = 1.0
+    temp_c = temperature_kelvin - 273.15
+    if fat_fraction > 0.0 or protein_fraction > 0.0:
+        try:
+            baseline_air = float(_HEADSPACE_MODEL.predict_headspace({compound_name: 1.0}, temp_c, fat_fraction=0.0, protein_fraction=0.0).get(compound_name, 1.0))
+            matrix_air = float(_HEADSPACE_MODEL.predict_headspace({compound_name: 1.0}, temp_c, fat_fraction=fat_fraction, protein_fraction=protein_fraction).get(compound_name, baseline_air))
+            if baseline_air > 0.0:
+                matrix_factor = max(1.0e-3, min(1.0, matrix_air / baseline_air))
+        except Exception:
+            matrix_factor = 1.0
+
+    # Keep the penalty conservative so we do not destabilize the validated
+    # free-amino-acid benchmarks while still reflecting that near-nonvolatile
+    # species should not consume the same observable headspace budget.
+    return intrinsic_factor * matrix_factor
+
+
+def _resolve_output_matrix_context(
+    protein_type: ProteinType,
+    fat_fraction: float,
+    protein_fraction: float,
+) -> Tuple[float, float, bool]:
+    fat = max(float(fat_fraction), 0.0)
+    protein = max(float(protein_fraction), 0.0)
+
+    if protein_type == ProteinType.FREE_AMINO_ACID:
+        return fat, 0.0, fat > 0.0
+
+    # ReactionConditions defaults protein_fraction to 1.0, which in this codebase
+    # often means "unspecified" rather than a real volumetric matrix fraction.
+    fractions_explicit = fat > 0.0 or (0.0 < protein < 0.999)
+    if not fractions_explicit:
+        return 0.0, 0.0, False
+    return fat, protein, True
+
+
+def _apply_output_projection(
+    raw_concentrations: Dict[str, float],
+    species_catalog: Dict[str, Species],
+    target_lookup: Dict[str, Dict[str, Any]],
+    temperature_kelvin: float,
+    protein_type: str,
+    fat_fraction: float = 0.0,
+    protein_fraction: float = 0.0,
+) -> Tuple[Dict[str, float], Dict[str, Dict[str, float]]]:
+    p_type = ProteinType(protein_type)
+    fat_eff, protein_eff, explicit_matrix_fractions = _resolve_output_matrix_context(
+        p_type,
+        fat_fraction,
+        protein_fraction,
+    )
+
+    if explicit_matrix_fractions:
+        fallback_matrix_factor = 1.0
+    else:
+        fallback_matrix_factor = float(
+            MATRIX_CORRECTIONS.get(p_type, MATRIX_CORRECTIONS[ProteinType.FREE_AMINO_ACID]).volatile_retention
+        )
+
+    observable_ppb: Dict[str, float] = {}
+    projection_metadata: Dict[str, Dict[str, float]] = {}
+
+    for canon, raw_value in raw_concentrations.items():
+        species = species_catalog.get(canon)
+        if species is None:
+            observable_ppb[canon] = raw_value * fallback_matrix_factor
+            projection_metadata[canon] = {
+                "proxy_ppb": float(raw_value),
+                "matrix_factor": float(fallback_matrix_factor),
+                "headspace_factor": 1.0,
+                "observable_ppb": float(observable_ppb[canon]),
+            }
+            continue
+
+        headspace_factor = _headspace_observability_factor(
+            species,
+            target_lookup,
+            temperature_kelvin,
+            fat_fraction=fat_eff,
+            protein_fraction=protein_eff,
+        )
+        observable_value = raw_value * fallback_matrix_factor * headspace_factor
+        observable_ppb[canon] = observable_value
+        projection_metadata[canon] = {
+            "proxy_ppb": float(raw_value),
+            "matrix_factor": float(fallback_matrix_factor),
+            "headspace_factor": float(headspace_factor),
+            "observable_ppb": float(observable_value),
+        }
+
+    return observable_ppb, projection_metadata
+
+
 def _is_budget_relevant_species(species: Species, target_lookup: Dict[str, Dict[str, Any]]) -> bool:
     canon = _canon(species.smiles)
     if not canon:
@@ -448,6 +596,12 @@ def _project_weighted_flux_to_ppb(
         mol_fraction = activity / total_activity
         molar_concentration = total_volatile_budget_molar * mol_fraction
         projected_ppb[canon] = molar_concentration * _mw_from_smiles(canon) * 1e6
+
+    for canon in list(projected_ppb):
+        species = species_catalog.get(canon)
+        if species is None:
+            continue
+        projected_ppb[canon] *= _headspace_observability_factor(species, target_lookup, temperature_kelvin)
     return projected_ppb
 
 
@@ -510,6 +664,8 @@ class Recommender:
                            time_minutes: Optional[float] = None,
                            protein_type: str = "free",
                            denaturation_state: float = 0.5,
+                           fat_fraction: float = 0.0,
+                           protein_fraction: float = 0.0,
                            temp_ramp_csv: Optional[str] = None):
         """
         Dynamically predict active pathways given a list of generated ElementarySteps
@@ -745,30 +901,39 @@ class Recommender:
             time_minutes,
         )
 
-        # Phase 7: Apply Matrix Retention Corrections to outputs
-        corrected_volatiles, _ = apply_matrix_correction(
-            predicted_concentrations=raw_concentrations,
-            reactive_amino_acids={},
-            protein_type=p_type,
-            denaturation_state=denaturation_state
+        observable_volatiles, projection_metadata = _apply_output_projection(
+            raw_concentrations,
+            species_catalog,
+            target_lookup,
+            temperature_kelvin,
+            protein_type=protein_type,
+            fat_fraction=fat_fraction,
+            protein_fraction=protein_fraction,
         )
+        proxy_volatiles = dict(raw_concentrations)
         
         # Add names to the dictionary for downstream sensory and benchmark matching
         final_volatiles = {}
-        for p_canon, conc in corrected_volatiles.items():
+        final_proxy_volatiles = {}
+        for p_canon, conc in observable_volatiles.items():
             final_volatiles[p_canon] = conc
+            final_proxy_volatiles[p_canon] = proxy_volatiles.get(p_canon, conc)
             species_name = species_name_lookup.get(p_canon)
             if species_name:
                 final_volatiles[species_name] = conc
+                final_proxy_volatiles[species_name] = proxy_volatiles.get(p_canon, conc)
             t_info = target_lookup.get(p_canon)
             if t_info:
                 final_volatiles[t_info["name"]] = conc
+                final_proxy_volatiles[t_info["name"]] = proxy_volatiles.get(p_canon, conc)
 
         # Identify which targets were produced
         active_pathways = []
         for p_canon, (span, conc, depth, weight, unc) in tracking.items():
             t_info = target_lookup.get(p_canon)
             if t_info and span < float('inf') and span >= 0.0:
+                species = species_catalog.get(p_canon, Species(t_info["name"], p_canon))
+                observability = _headspace_observability_metadata(species, target_lookup)
                 
                 # We mock a Species object for the old table formatter
                 class MockTarget:
@@ -779,7 +944,8 @@ class Recommender:
                     "name": t_info["name"],
                     "span": span,
                     "concentration": final_volatiles.get(p_canon, 0.0), # Use corrected
-                    "weighted_flux": final_volatiles.get(p_canon, 0.0), # Use corrected
+                    "proxy_concentration": final_proxy_volatiles.get(p_canon, 0.0),
+                    "weighted_flux": final_volatiles.get(p_canon, 0.0), # Observable output budget proxy for ranking tables
                     "span_uncertainty": tracking[p_canon][4],
                     "depth": depth,
                     "target": MockTarget(t_info["name"]),
@@ -787,7 +953,10 @@ class Recommender:
                     "penalty": "LOW",
                     "toxicity": None,
                     "sensory": t_info["data"].get("sensory_desc", "-"),
-                    "threshold": t_info["data"].get("odour_threshold_ug_per_kg", None)
+                    "threshold": t_info["data"].get("odour_threshold_ug_per_kg", None),
+                    "roles": t_info.get("roles", [t_info["type"]]),
+                    "projection": projection_metadata.get(p_canon, {}),
+                    **observability,
                 }
                 
                 if t_info["type"] == "toxic":
@@ -901,6 +1070,8 @@ class Recommender:
             "targets": active_pathways,
             "metrics": metrics,
             "predicted_ppb": final_volatiles,
+            "predicted_proxy_ppb": final_proxy_volatiles,
+            "projection_metadata": projection_metadata,
             "debug_paths": best_paths,
             "species_names": species_name_lookup,
         }

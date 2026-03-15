@@ -148,6 +148,19 @@ Generate the benchmark index with explicit execution-path metadata using:
 ```
 This writes `results/validation/benchmark_index.md` and `results/validation/benchmark_index.json`, making matrix-only scope gaps explicit without presenting them as validated predictive cases.
 
+Inspect the current target snapshot for a benchmark without resorting to fragile inline Python quoting:
+```bash
+./scripts/docker_maillard.sh targets data/benchmarks/cys_ribose_140C_Hofmann1998.json
+./scripts/docker_maillard.sh targets data/benchmarks/cys_glucose_150C_Farmer1999.json competing
+```
+This prints the current predicted targets with `ppb`, `span`, `depth`, and weighted flux directly from the validated Docker environment.
+
+Generate the aggregated benchmark-target artifact with:
+```bash
+./scripts/docker_maillard.sh targets-report
+```
+This writes `results/validation/benchmark_targets.md` and `results/validation/benchmark_targets.json`, including headspace observability metadata and Henry-law lookup fields where available.
+
 Run the explicit free-amino-acid strict gate with:
 ```bash
 MAILLARD_STRICT_BENCHMARKS=1 ./scripts/docker_maillard.sh pytest tests/scientific/test_benchmarks.py -q
@@ -170,6 +183,8 @@ Named Docker lanes:
 - `./scripts/docker_maillard.sh scientific`: benchmark summary/index generation plus scientific FAST regressions.
 - `./scripts/docker_maillard.sh qm-heavy`: QM and external-backend validation lane.
 - `./scripts/docker_maillard.sh hofmann`: branch-level diagnostic trace for the remaining Hofmann scale gap.
+- `./scripts/docker_maillard.sh targets ...`: stable benchmark-target snapshot for scientific inspection (`desirable`, `competing`, `toxic`; aliases `off_flavour` and `off-flavour`).
+- `./scripts/docker_maillard.sh targets-report`: aggregated benchmark-target artifact with headspace observability metadata.
 
 ---
 

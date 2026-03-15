@@ -32,6 +32,7 @@ class FormulationResult:
     flagged_toxics: List[str] = field(default_factory=list)
     texture_risk: float = 0.0
     predicted_ppb: Dict[str, float] = field(default_factory=dict)
+    predicted_proxy_ppb: Dict[str, float] = field(default_factory=dict)
     avg_uncertainty: float = 5.0
 
 
@@ -283,7 +284,9 @@ class InverseDesigner:
                 temperature_kelvin=cond.temperature_kelvin,
                 time_minutes=form.get("time_minutes"),
                 protein_type=protein_type,
-                denaturation_state=denaturation_state
+                denaturation_state=denaturation_state,
+                fat_fraction=cond.fat_fraction,
+                protein_fraction=cond.protein_fraction,
             )
             
             # Score against tags
@@ -342,6 +345,7 @@ class InverseDesigner:
                 flagged_toxics=flagged,
                 texture_risk=self._score_texture_risk(precursors, sugars),
                 predicted_ppb=conc_map,
+                predicted_proxy_ppb=rec_result.get("predicted_proxy_ppb", {}),
                 avg_uncertainty=avg_unc
             ))
 

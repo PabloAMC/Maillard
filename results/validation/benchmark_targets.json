@@ -1,0 +1,325 @@
+[
+  {
+    "benchmark_id": "cys_glucose_150C_Farmer1999",
+    "bench_file": "/workspace/data/benchmarks/cys_glucose_150C_Farmer1999.json",
+    "target_name": "Furfural",
+    "target_type": "competing",
+    "roles": [
+      "competing"
+    ],
+    "predicted_ppb": 449.4391504337459,
+    "weighted_flux": 449.4391504337459,
+    "span": 28.685250253254868,
+    "depth": 4,
+    "headspace_observable": true,
+    "headspace_class": "observable",
+    "henry_kaw_25c": 1.5e-05,
+    "henry_source_name": "Furfural"
+  },
+  {
+    "benchmark_id": "cys_glucose_150C_Farmer1999",
+    "bench_file": "/workspace/data/benchmarks/cys_glucose_150C_Farmer1999.json",
+    "target_name": "2-Furfurylthiol (FFT)",
+    "target_type": "desirable",
+    "roles": [
+      "desirable"
+    ],
+    "predicted_ppb": 294.3347856460753,
+    "weighted_flux": 294.3347856460753,
+    "span": 28.771263388829862,
+    "depth": 6,
+    "headspace_observable": true,
+    "headspace_class": "observable",
+    "henry_kaw_25c": 8.4e-05,
+    "henry_source_name": "2-Furfurylthiol (FFT)"
+  },
+  {
+    "benchmark_id": "cys_glucose_150C_Farmer1999",
+    "bench_file": "/workspace/data/benchmarks/cys_glucose_150C_Farmer1999.json",
+    "target_name": "2,5-Dimethylpyrazine",
+    "target_type": "desirable",
+    "roles": [
+      "desirable"
+    ],
+    "predicted_ppb": 24.548159429502384,
+    "weighted_flux": 24.548159429502384,
+    "span": 29.49557699751659,
+    "depth": 6,
+    "headspace_observable": true,
+    "headspace_class": "observable",
+    "henry_kaw_25c": 0.00014,
+    "henry_source_name": "2,5-Dimethylpyrazine"
+  },
+  {
+    "benchmark_id": "cys_glucose_150C_Farmer1999",
+    "bench_file": "/workspace/data/benchmarks/cys_glucose_150C_Farmer1999.json",
+    "target_name": "2-Methyl-3-furanthiol (MFT)",
+    "target_type": "desirable",
+    "roles": [
+      "desirable"
+    ],
+    "predicted_ppb": 13.419104331546055,
+    "weighted_flux": 13.419104331546055,
+    "span": 29.785948791380473,
+    "depth": 4,
+    "headspace_observable": true,
+    "headspace_class": "observable",
+    "henry_kaw_25c": 9.5e-05,
+    "henry_source_name": "2-Methyl-3-furanthiol (MFT)"
+  },
+  {
+    "benchmark_id": "cys_glucose_150C_Farmer1999",
+    "bench_file": "/workspace/data/benchmarks/cys_glucose_150C_Farmer1999.json",
+    "target_name": "Bis(2-methyl-3-furyl) disulfide",
+    "target_type": "desirable",
+    "roles": [
+      "desirable"
+    ],
+    "predicted_ppb": 8.613949352386339,
+    "weighted_flux": 8.613949352386339,
+    "span": 30.069741011893655,
+    "depth": 5,
+    "headspace_observable": true,
+    "headspace_class": "assumed_observable",
+    "henry_kaw_25c": null,
+    "henry_source_name": null
+  },
+  {
+    "benchmark_id": "cys_glucose_150C_Farmer1999",
+    "bench_file": "/workspace/data/benchmarks/cys_glucose_150C_Farmer1999.json",
+    "target_name": "Hydrogen Sulfide",
+    "target_type": "desirable",
+    "roles": [
+      "desirable"
+    ],
+    "predicted_ppb": 0.0,
+    "weighted_flux": 0.0,
+    "span": 17.999151311465905,
+    "depth": 1,
+    "headspace_observable": true,
+    "headspace_class": "observable",
+    "henry_kaw_25c": 0.45,
+    "henry_source_name": "Hydrogen Sulfide"
+  },
+  {
+    "benchmark_id": "cys_glucose_150C_Farmer1999",
+    "bench_file": "/workspace/data/benchmarks/cys_glucose_150C_Farmer1999.json",
+    "target_name": "5-Hydroxymethylfurfural (HMF)",
+    "target_type": "toxic",
+    "roles": [
+      "toxic"
+    ],
+    "predicted_ppb": 4.578401324114821e-07,
+    "weighted_flux": 4.578401324114821e-07,
+    "span": 28.685250253254868,
+    "depth": 4,
+    "headspace_observable": false,
+    "headspace_class": "low_headspace",
+    "henry_kaw_25c": 1e-10,
+    "henry_source_name": "5-Hydroxymethylfurfural (HMF)"
+  },
+  {
+    "benchmark_id": "cys_ribose_140C_Hofmann1998",
+    "bench_file": "/workspace/data/benchmarks/cys_ribose_140C_Hofmann1998.json",
+    "target_name": "Furfural",
+    "target_type": "competing",
+    "roles": [
+      "competing"
+    ],
+    "predicted_ppb": 420.9113899134489,
+    "weighted_flux": 420.9113899134489,
+    "span": 29.258524395233458,
+    "depth": 4,
+    "headspace_observable": true,
+    "headspace_class": "observable",
+    "henry_kaw_25c": 1.5e-05,
+    "henry_source_name": "Furfural"
+  },
+  {
+    "benchmark_id": "cys_ribose_140C_Hofmann1998",
+    "bench_file": "/workspace/data/benchmarks/cys_ribose_140C_Hofmann1998.json",
+    "target_name": "2-Methyl-3-furanthiol (MFT)",
+    "target_type": "desirable",
+    "roles": [
+      "desirable"
+    ],
+    "predicted_ppb": 237.2298159141274,
+    "weighted_flux": 237.2298159141274,
+    "span": 29.529703320332953,
+    "depth": 4,
+    "headspace_observable": true,
+    "headspace_class": "observable",
+    "henry_kaw_25c": 9.5e-05,
+    "henry_source_name": "2-Methyl-3-furanthiol (MFT)"
+  },
+  {
+    "benchmark_id": "cys_ribose_140C_Hofmann1998",
+    "bench_file": "/workspace/data/benchmarks/cys_ribose_140C_Hofmann1998.json",
+    "target_name": "2-Furfurylthiol (FFT)",
+    "target_type": "desirable",
+    "roles": [
+      "desirable"
+    ],
+    "predicted_ppb": 198.0176512462366,
+    "weighted_flux": 198.0176512462366,
+    "span": 29.29910341232387,
+    "depth": 6,
+    "headspace_observable": true,
+    "headspace_class": "observable",
+    "henry_kaw_25c": 8.4e-05,
+    "henry_source_name": "2-Furfurylthiol (FFT)"
+  },
+  {
+    "benchmark_id": "cys_ribose_140C_Hofmann1998",
+    "bench_file": "/workspace/data/benchmarks/cys_ribose_140C_Hofmann1998.json",
+    "target_name": "Bis(2-methyl-3-furyl) disulfide",
+    "target_type": "desirable",
+    "roles": [
+      "desirable"
+    ],
+    "predicted_ppb": 76.55573339643884,
+    "weighted_flux": 76.55573339643884,
+    "span": 29.882337168548357,
+    "depth": 5,
+    "headspace_observable": true,
+    "headspace_class": "assumed_observable",
+    "henry_kaw_25c": null,
+    "henry_source_name": null
+  },
+  {
+    "benchmark_id": "cys_ribose_140C_Hofmann1998",
+    "bench_file": "/workspace/data/benchmarks/cys_ribose_140C_Hofmann1998.json",
+    "target_name": "2,5-Dimethylpyrazine",
+    "target_type": "desirable",
+    "roles": [
+      "desirable"
+    ],
+    "predicted_ppb": 31.96987536994946,
+    "weighted_flux": 31.96987536994946,
+    "span": 29.811240244641706,
+    "depth": 6,
+    "headspace_observable": true,
+    "headspace_class": "observable",
+    "henry_kaw_25c": 0.00014,
+    "henry_source_name": "2,5-Dimethylpyrazine"
+  },
+  {
+    "benchmark_id": "cys_ribose_140C_Hofmann1998",
+    "bench_file": "/workspace/data/benchmarks/cys_ribose_140C_Hofmann1998.json",
+    "target_name": "Hydrogen Sulfide",
+    "target_type": "desirable",
+    "roles": [
+      "desirable"
+    ],
+    "predicted_ppb": 0.0,
+    "weighted_flux": 0.0,
+    "span": 17.99915131128836,
+    "depth": 1,
+    "headspace_observable": true,
+    "headspace_class": "observable",
+    "henry_kaw_25c": 0.45,
+    "henry_source_name": "Hydrogen Sulfide"
+  },
+  {
+    "benchmark_id": "cys_ribose_150C_Mottram1994",
+    "bench_file": "/workspace/data/benchmarks/cys_ribose_150C_Mottram1994.json",
+    "target_name": "Furfural",
+    "target_type": "competing",
+    "roles": [
+      "competing"
+    ],
+    "predicted_ppb": 644.6874415215077,
+    "weighted_flux": 644.6874415215077,
+    "span": 28.685250253254868,
+    "depth": 4,
+    "headspace_observable": true,
+    "headspace_class": "observable",
+    "henry_kaw_25c": 1.5e-05,
+    "henry_source_name": "Furfural"
+  },
+  {
+    "benchmark_id": "cys_ribose_150C_Mottram1994",
+    "bench_file": "/workspace/data/benchmarks/cys_ribose_150C_Mottram1994.json",
+    "target_name": "2-Furfurylthiol (FFT)",
+    "target_type": "desirable",
+    "roles": [
+      "desirable"
+    ],
+    "predicted_ppb": 422.2016255722748,
+    "weighted_flux": 422.2016255722748,
+    "span": 28.771263388829862,
+    "depth": 6,
+    "headspace_observable": true,
+    "headspace_class": "observable",
+    "henry_kaw_25c": 8.4e-05,
+    "henry_source_name": "2-Furfurylthiol (FFT)"
+  },
+  {
+    "benchmark_id": "cys_ribose_150C_Mottram1994",
+    "bench_file": "/workspace/data/benchmarks/cys_ribose_150C_Mottram1994.json",
+    "target_name": "2-Methyl-3-furanthiol (MFT)",
+    "target_type": "desirable",
+    "roles": [
+      "desirable"
+    ],
+    "predicted_ppb": 157.423996842555,
+    "weighted_flux": 157.423996842555,
+    "span": 29.16653848456178,
+    "depth": 4,
+    "headspace_observable": true,
+    "headspace_class": "observable",
+    "henry_kaw_25c": 9.5e-05,
+    "henry_source_name": "2-Methyl-3-furanthiol (MFT)"
+  },
+  {
+    "benchmark_id": "cys_ribose_150C_Mottram1994",
+    "bench_file": "/workspace/data/benchmarks/cys_ribose_150C_Mottram1994.json",
+    "target_name": "Bis(2-methyl-3-furyl) disulfide",
+    "target_type": "desirable",
+    "roles": [
+      "desirable"
+    ],
+    "predicted_ppb": 46.08310217814208,
+    "weighted_flux": 46.08310217814208,
+    "span": 29.678630735080084,
+    "depth": 5,
+    "headspace_observable": true,
+    "headspace_class": "assumed_observable",
+    "henry_kaw_25c": null,
+    "henry_source_name": null
+  },
+  {
+    "benchmark_id": "cys_ribose_150C_Mottram1994",
+    "bench_file": "/workspace/data/benchmarks/cys_ribose_150C_Mottram1994.json",
+    "target_name": "2,5-Dimethylpyrazine",
+    "target_type": "desirable",
+    "roles": [
+      "desirable"
+    ],
+    "predicted_ppb": 35.21253117667803,
+    "weighted_flux": 35.21253117667803,
+    "span": 29.49557699751659,
+    "depth": 6,
+    "headspace_observable": true,
+    "headspace_class": "observable",
+    "henry_kaw_25c": 0.00014,
+    "henry_source_name": "2,5-Dimethylpyrazine"
+  },
+  {
+    "benchmark_id": "cys_ribose_150C_Mottram1994",
+    "bench_file": "/workspace/data/benchmarks/cys_ribose_150C_Mottram1994.json",
+    "target_name": "Hydrogen Sulfide",
+    "target_type": "desirable",
+    "roles": [
+      "desirable"
+    ],
+    "predicted_ppb": 0.0,
+    "weighted_flux": 0.0,
+    "span": 17.999151311465905,
+    "depth": 1,
+    "headspace_observable": true,
+    "headspace_class": "observable",
+    "henry_kaw_25c": 0.45,
+    "henry_source_name": "Hydrogen Sulfide"
+  }
+]

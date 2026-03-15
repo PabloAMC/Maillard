@@ -46,6 +46,13 @@ Do not attempt to run this natively on macOS ARM64. Instead, we use Docker to ru
 3. `./scripts/docker_maillard.sh bootstrap` creates the `maillard` conda environment, installs CPU-safe dependencies, applies the `xtbiff` patch, and patches the known PyTorch loader issues in `e3nn` and `mace`.
 4. `./scripts/docker_maillard.sh shell` opens an interactive shell in `/workspace` with the `maillard` environment activated.
 5. All following commands (Section 2-5) may be run inside that shell, or through `./scripts/docker_maillard.sh run ...`.
+6. For reproducible benchmark inspection, prefer the named wrapper commands over ad hoc inline Python. For example:
+	```bash
+	./scripts/docker_maillard.sh summary
+	./scripts/docker_maillard.sh index
+	./scripts/docker_maillard.sh targets data/benchmarks/cys_ribose_140C_Hofmann1998.json
+	./scripts/docker_maillard.sh targets-report
+	```
 
 ## 2. Downloading Maillard & Creating the Environment
 First, download the Maillard repository to your computer and enter the directory:
@@ -147,7 +154,7 @@ Finally, navigate back to the main Maillard directory and run the automated test
 cd ..
 
 # Run the test suite
-python -m pytest tests/
+./scripts/docker_maillard.sh pytest tests/
 ```
 
 If the tests pass smoothly, your environment is perfectly configured. Welcome to Maillard!
@@ -162,6 +169,16 @@ If you close your terminal or restart your computer, you do not need to reinstal
 ./scripts/docker_maillard.sh up
 ./scripts/docker_maillard.sh shell
 ```
+
+Useful validated commands from the repository root:
+```bash
+./scripts/docker_maillard.sh status
+./scripts/docker_maillard.sh scientific
+./scripts/docker_maillard.sh targets data/benchmarks/cys_ribose_150C_Mottram1994.json
+./scripts/docker_maillard.sh targets-report
+```
+
+The `scientific` lane now also regenerates `results/validation/benchmark_targets.md` and `results/validation/benchmark_targets.json` inside the Docker `maillard` environment.
 
 ### 🐧 Linux & 🪟 Windows (WSL2) Users
 
