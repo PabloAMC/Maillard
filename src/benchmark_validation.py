@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Dict, Iterable, List, Optional
 
 from src.conditions import ReactionConditions
+from src.lipid_oxidation import PEA_LIPID_PROFILE, SOY_LIPID_PROFILE, predict_hexanal_generation
 from src.inverse_design import InverseDesigner
 from src.precursor_resolver import resolve_many
 from src.smirks_engine import SmirksEngine
@@ -31,6 +32,30 @@ BENCHMARK_NAME_ALIASES = {
     "2furfurylthiol": {"2furfurylthiolfft"},
     "bis2methyl3furyldisulfide": {"bis2methyl3furyldisulfide"},
     "pyrazine": {"25dimethylpyrazine", "23dimethylpyrazine", "dimethylpyrazine"},
+}
+
+MATRIX_BENCHMARK_PROFILES = {
+    "pea_iso": {
+        "lipid_profile": PEA_LIPID_PROFILE,
+        # Empirical headspace-marker yields for the first matrix-only intake lane.
+        # These are deliberately benchmark-family facing and represent observable
+        # plant-matrix off-flavour markers, not a general free-precursor chemistry model.
+        "marker_yields": {
+            "Hexanal": 0.205,
+            "2-Pentylfuran": 0.502,
+            "1-Hexanol": 0.063,
+            "Nonanal": 0.150,
+        },
+    },
+    "soy_iso": {
+        "lipid_profile": SOY_LIPID_PROFILE,
+        "marker_yields": {
+            "Hexanal": 0.235,
+            "2-Pentylfuran": 0.465,
+            "1-Hexanol": 0.058,
+            "Nonanal": 0.160,
+        },
+    },
 }
 
 
@@ -148,6 +173,12 @@ class BenchmarkTargetSnapshot:
 DEFAULT_BENCHMARK_THRESHOLDS = BenchmarkThresholds()
 
 
+def is_matrix_only_benchmark(bench: dict | Path | str) -> bool:
+    if isinstance(bench, (str, Path)):
+        bench = load_benchmark(bench)
+    return get_benchmark_metadata(bench).execution_path == "matrix_only"
+
+
 def _infer_benchmark_metadata(bench: dict) -> BenchmarkMetadata:
     benchmark_id = bench.get("benchmark_id", "unknown")
     protein_type = bench.get("protein_type", "free")
@@ -254,6 +285,12 @@ def _tokenize_name(name: str) -> List[str]:
 
 
 def _is_supported_formulation(formulation: dict) -> tuple[bool, Optional[str]]:
+    protein_type = str(formulation.get("protein_type", "free"))
+    if protein_type != "free" and formulation.get("_skipped_matrix_precursors"):
+        if protein_type in MATRIX_BENCHMARK_PROFILES:
+            return True, None
+        return False, f"No executable matrix-only benchmark path for protein_type={protein_type}"
+
     candidate_precursors = formulation["sugars"] + formulation["amino_acids"] + formulation["lipids"]
     if not candidate_precursors:
         skipped = ", ".join(formulation.get("_skipped_matrix_precursors", [])) or "none"
@@ -264,6 +301,18 @@ def _is_supported_formulation(formulation: dict) -> tuple[bool, Optional[str]]:
     except ValueError as exc:
         return False, str(exc)
     return True, None
+
+
+def get_matrix_only_target_snapshot_exclusions(
+    benchmark_files: Optional[Iterable[Path | str]] = None,
+) -> List[str]:
+    bench_files = list(benchmark_files) if benchmark_files is not None else get_benchmark_files()
+    excluded: List[str] = []
+    for bench_file in bench_files:
+        bench = load_benchmark(bench_file)
+        if is_matrix_only_benchmark(bench):
+            excluded.append(str(bench.get("benchmark_id", Path(bench_file).stem)))
+    return excluded
 
 
 def _best_prediction_match(target_name: str, predicted_ppb: Dict[str, float]) -> tuple[Optional[str], float, float]:
@@ -383,6 +432,47 @@ def _run_benchmark_recommendation(
     )
 
 
+def _run_matrix_only_benchmark_prediction(bench: dict) -> dict:
+    protein_type = str(bench.get("protein_type", "free"))
+    model = MATRIX_BENCHMARK_PROFILES.get(protein_type)
+    if model is None:
+        raise BenchmarkNotSupportedError(f"No matrix-only predictor for protein_type={protein_type}")
+
+    conditions = bench["conditions"]
+    oxidation = predict_hexanal_generation(
+        model["lipid_profile"],
+        temp_C=float(conditions["temp_C"]),
+        time_min=float(conditions["time_min"]),
+        oxygen_availability=1.0,
+    )
+    oxidation_load_ppb = float(oxidation["total_hydroperoxide"]) * 1000.0
+
+    predicted_ppb: Dict[str, float] = {}
+    for compound, yield_factor in model["marker_yields"].items():
+        predicted_ppb[compound] = oxidation_load_ppb * float(yield_factor)
+
+    return {
+        "targets": [],
+        "metrics": {
+            "matrix_model": protein_type,
+            "oxidation_load_ppb": oxidation_load_ppb,
+        },
+        "predicted_ppb": predicted_ppb,
+        "predicted_proxy_ppb": dict(predicted_ppb),
+        "projection_metadata": {
+            compound: {
+                "proxy_ppb": value,
+                "matrix_factor": 1.0,
+                "headspace_factor": 1.0,
+                "observable_ppb": value,
+            }
+            for compound, value in predicted_ppb.items()
+        },
+        "debug_paths": {},
+        "species_names": {compound: compound for compound in predicted_ppb},
+    }
+
+
 def evaluate_benchmark(bench_file: Path | str, target_tag: str = DEFAULT_TARGET_TAG) -> BenchmarkEvaluation:
     bench_path = Path(bench_file)
     bench = load_benchmark(bench_path)
@@ -401,7 +491,11 @@ def evaluate_benchmark(bench_file: Path | str, target_tag: str = DEFAULT_TARGET_
             mae_ppb=None,
         )
 
-    rec_result = _run_benchmark_recommendation(bench, target_tag=target_tag)
+    metadata = get_benchmark_metadata(bench)
+    if metadata.execution_path == "matrix_only":
+        rec_result = _run_matrix_only_benchmark_prediction(bench)
+    else:
+        rec_result = _run_benchmark_recommendation(bench, target_tag=target_tag)
     comparisons = _build_comparisons(bench, rec_result["predicted_ppb"])
 
     matched_comparisons = [comparison for comparison in comparisons if comparison.matched_name is not None]
@@ -502,10 +596,13 @@ def summarize_evaluation(
             f"max ratio {ratio_value} > {ratio_threshold:.2f}"
         )
 
-    strict_ready = evaluation.coverage == 1.0 and ranking_status != "fail" and scale_status == "pass"
-
     bench = load_benchmark(evaluation.bench_file)
     metadata = get_benchmark_metadata(bench)
+    strict_ready = evaluation.coverage == 1.0 and ranking_status != "fail" and scale_status == "pass"
+    if metadata.execution_path == "matrix_only":
+        strict_ready = False
+        if not blocking_issues:
+            blocking_issues.append("matrix-only intake path is executable but not yet in the strict release gate")
 
     return BenchmarkSummary(
         benchmark_id=evaluation.benchmark_id,
@@ -581,6 +678,10 @@ def snapshot_benchmark_targets(
 ) -> List[BenchmarkTargetSnapshot]:
     bench_path = Path(bench_file)
     bench = load_benchmark(bench_path)
+    if is_matrix_only_benchmark(bench):
+        # Matrix-only benchmarks are benchmarked as intake/headspace checks,
+        # not as FAST target-ranking snapshots.
+        return []
     formulation = benchmark_to_formulation(bench)
     supported, _reason = _is_supported_formulation(formulation)
     if not supported:
@@ -620,8 +721,13 @@ def snapshot_all_benchmark_targets(
     return snapshots
 
 
-def render_benchmark_targets_markdown(snapshots: Iterable[BenchmarkTargetSnapshot]) -> str:
+def render_benchmark_targets_markdown(
+    snapshots: Iterable[BenchmarkTargetSnapshot],
+    *,
+    excluded_benchmark_ids: Optional[Iterable[str]] = None,
+) -> str:
     rows = list(snapshots)
+    excluded = list(excluded_benchmark_ids or [])
     lines = [
         "# Benchmark Targets",
         "",
@@ -640,6 +746,11 @@ def render_benchmark_targets_markdown(snapshots: Iterable[BenchmarkTargetSnapsho
         f"Target rows: {len(rows)}",
         f"Low-headspace rows: {sum(1 for row in rows if row.headspace_class == 'low_headspace')}",
     ])
+    if excluded:
+        lines.extend([
+            f"Excluded matrix-only benchmarks: {', '.join(sorted(excluded))}",
+            "These benchmarks remain executable through summary/index artefacts, but they are deliberately omitted from target snapshots because they do not run through the free-precursor FAST target-ranking path.",
+        ])
     return "\n".join(lines) + "\n"
 
 

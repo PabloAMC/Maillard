@@ -52,5 +52,39 @@ def test_protein_sequestration():
     # Since Methional Kprot=2.0 -> 1 / (1 + 2.0*0.2) = 1/1.4
     assert air_20["Methional"] == pytest.approx(air_0["Methional"] / 1.4)
 
+
+def test_matrix_retention_fallback_uses_pea_and_soy_profiles_when_fractions_are_unspecified():
+    model = HeadspaceModel()
+    matrix = {"Furfural": 1.0}
+
+    air_free = model.predict_headspace(matrix, 25.0, protein_type="free")
+    air_pea = model.predict_headspace(matrix, 25.0, protein_type="pea_iso")
+    air_soy = model.predict_headspace(matrix, 25.0, protein_type="soy_iso")
+
+    assert air_pea["Furfural"] == pytest.approx(air_free["Furfural"] * 0.50)
+    assert air_soy["Furfural"] == pytest.approx(air_free["Furfural"] * 0.55)
+    assert air_soy["Furfural"] > air_pea["Furfural"]
+
+
+def test_explicit_matrix_fractions_override_retention_fallback():
+    model = HeadspaceModel()
+    matrix = {"Methional": 1.0}
+
+    air_with_fraction_only = model.predict_headspace(
+        matrix,
+        25.0,
+        protein_fraction=0.2,
+    )
+    air_with_fraction_and_type = model.predict_headspace(
+        matrix,
+        25.0,
+        protein_fraction=0.2,
+        protein_type="pea_iso",
+    )
+
+    assert air_with_fraction_and_type["Methional"] == pytest.approx(
+        air_with_fraction_only["Methional"]
+    )
+
 if __name__ == "__main__":
     pytest.main([__file__])

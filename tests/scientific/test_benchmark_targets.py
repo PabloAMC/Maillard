@@ -6,7 +6,12 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src.benchmark_validation import render_benchmark_targets_markdown, snapshot_all_benchmark_targets, snapshot_benchmark_targets
+from src.benchmark_validation import (
+    get_matrix_only_target_snapshot_exclusions,
+    render_benchmark_targets_markdown,
+    snapshot_all_benchmark_targets,
+    snapshot_benchmark_targets,
+)
 
 
 def test_benchmark_targets_snapshot_contains_headspace_metadata():
@@ -30,6 +35,24 @@ def test_benchmark_targets_markdown_reports_low_headspace_count():
     assert "Benchmark Targets" in markdown
     assert "Headspace" in markdown
     assert "Low-headspace rows:" in markdown
+
+
+def test_benchmark_targets_markdown_reports_matrix_only_exclusions():
+    rows = snapshot_all_benchmark_targets([
+        ROOT / "data" / "benchmarks" / "cys_glucose_150C_Farmer1999.json",
+        ROOT / "data" / "benchmarks" / "pea_isolate_40C_PratapSingh2021.json",
+    ])
+
+    markdown = render_benchmark_targets_markdown(
+        rows,
+        excluded_benchmark_ids=get_matrix_only_target_snapshot_exclusions([
+            ROOT / "data" / "benchmarks" / "cys_glucose_150C_Farmer1999.json",
+            ROOT / "data" / "benchmarks" / "pea_isolate_40C_PratapSingh2021.json",
+        ]),
+    )
+
+    assert "Excluded matrix-only benchmarks:" in markdown
+    assert "pea_isolate_40C_PratapSingh2021" in markdown
 
 
 def test_benchmark_targets_keep_low_headspace_markers_well_below_observable_outputs():

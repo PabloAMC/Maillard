@@ -159,7 +159,7 @@ Generate the aggregated benchmark-target artifact with:
 ```bash
 ./scripts/docker_maillard.sh targets-report
 ```
-This writes `results/validation/benchmark_targets.md` and `results/validation/benchmark_targets.json`, including headspace observability metadata and Henry-law lookup fields where available.
+This writes `results/validation/benchmark_targets.md` and `results/validation/benchmark_targets.json`, including headspace observability metadata and Henry-law lookup fields where available. Benchmarks declared as `matrix_only` are deliberately excluded from this artifact: they are validated through execution-path summary/index checks, not through the free-precursor FAST target-ranking snapshot.
 
 Run the explicit free-amino-acid strict gate with:
 ```bash
@@ -185,6 +185,12 @@ Named Docker lanes:
 - `./scripts/docker_maillard.sh hofmann`: branch-level diagnostic trace for the remaining Hofmann scale gap.
 - `./scripts/docker_maillard.sh targets ...`: stable benchmark-target snapshot for scientific inspection (`desirable`, `competing`, `toxic`; aliases `off_flavour` and `off-flavour`).
 - `./scripts/docker_maillard.sh targets-report`: aggregated benchmark-target artifact with headspace observability metadata.
+
+Current `matrix_only` contract:
+
+- A benchmark can be `supported` if it declares a registered non-`free` `protein_type` such as `pea_iso`.
+- That support means the dedicated matrix intake/headspace model executes and covers the measured markers.
+- It does not mean the benchmark is inside the strict release gate, and it does not produce ordinary FAST target snapshots.
 
 ---
 
