@@ -12,6 +12,8 @@ from ase import Atoms
 from ase.calculators.emt import EMT
 from src.ts_optimizer import TSOptimizer  # noqa: E402
 
+_SELLA_AVAILABLE, _SELLA_SKIP_REASON = TSOptimizer.probe_availability()
+
 # Model system: Hydrogen Cyanide (HCN) to Hydrogen Isocyanide (CNH)
 # Simple initial guess for the TS (bent structure)
 HCN_TS_GUESS = Atoms(
@@ -23,6 +25,7 @@ HCN_TS_GUESS = Atoms(
     ]
 )
 
+@pytest.mark.skipif(not _SELLA_AVAILABLE, reason=_SELLA_SKIP_REASON)
 def test_ts_optimizer_hcn():
     """ Verify TSOptimizer can find a TS for the HCN model system using a fast calculator. """
     optimizer = TSOptimizer(fmax=0.05)

@@ -1,5 +1,14 @@
 # Maillard Literature Replication Plan
 
+## Short Priority — 2026-03-15
+
+- [x] Corregir scoring por concentración (`src/recommend.py` / `src/inverse_design.py`) — validado en Docker (`tests/unit/test_safety_and_flux.py::test_concentration_aware_ranking` y `tests/integration/test_recommendation_engine.py::test_concentration_boltzmann_scoring`)
+- [x] Añadir manejo robusto cuando CREST falla (capability probe / pytest marker) — validado en Docker (`tests/qm/test_solvation.py::test_explicit_solvation_run` y `tests/qm/test_explicit_solvation_integration.py::test_dft_refiner_explicit_solvation`)
+- [x] Investigar ratio fuera de umbral en `cys_ribose_140C_Hofmann1998` — la regresión científica actual pasa en Docker
+- [x] Reprobar tests clave en Docker y cerrar Tier 0/benchmark lane — suite completa verde en Docker (`327 passed, 41 skipped, 4 xfailed`)
+- [x] Documentar cambios y lecciones en `tasks/lessons.md`
+- [x] Generar y validar resumen de benchmarks (`scripts/generate_benchmark_summary.py`) — validado en Docker
+
 ## Validation Contract
 
 - [ ] Define the project-wide meaning of literature replication.
