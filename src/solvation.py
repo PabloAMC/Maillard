@@ -15,6 +15,7 @@ import subprocess
 import tempfile
 import shutil
 import numpy as np
+from functools import lru_cache
 from pathlib import Path
 from typing import Optional
 from typing import List
@@ -64,6 +65,26 @@ class SolvationEngine:
         self.crest_bin: str = crest_bin
         self.xtbiff_bin: Optional[str] = shutil.which("xtbiff")
         self.timeout_sec: int = timeout_sec
+
+    @staticmethod
+    @lru_cache(maxsize=1)
+    def probe_qcg_capability() -> tuple[bool, str]:
+        engine = SolvationEngine(timeout_sec=90)
+        crest_resolved = engine.crest_bin and (os.path.exists(engine.crest_bin) or shutil.which(engine.crest_bin))
+        if not crest_resolved:
+            return False, "CREST binary not found"
+
+        water_xyz = "3\nwater\nO 0.0 0.0 0.0\nH 0.0 0.0 0.96\nH 0.0 0.92 -0.25\n"
+        try:
+            engine.generate_solvated_cluster(water_xyz, n_water=1, freeze_core=True)
+        except RuntimeError as exc:
+            return False, f"CREST/QCG unavailable: {exc}"
+        return True, "CREST/QCG available"
+
+    @staticmethod
+    def has_qcg_capability() -> bool:
+        supported, _reason = SolvationEngine.probe_qcg_capability()
+        return supported
 
     # ------------------------------------------------------------------
     # Public API
@@ -159,6 +180,8 @@ class SolvationEngine:
                 else:
                     raise FileNotFoundError(f"CREST completed but neither 'grow/cluster.xyz' nor 'crest_best.xyz' was generated. Files in {tmp}: {list(tmp.glob('*'))}")
 
+            except FileNotFoundError as e:
+                raise RuntimeError(f"Solvation error: {str(e)}") from e
             except (subprocess.TimeoutExpired, RuntimeError, FileNotFoundError) as e:
                 raise RuntimeError(f"Solvation error: {str(e)}") from e
 

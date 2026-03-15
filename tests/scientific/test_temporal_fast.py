@@ -1,6 +1,18 @@
 import pytest
-from src.recommend import Recommender
+from src.recommend import Recommender, _temporal_accessibility
 from src.pathway_extractor import Species, ElementaryStep
+
+
+def test_temporal_accessibility_behaves_saturating_not_exponential_collapse():
+    assert _temporal_accessibility(total_tau_minutes=1.0, time_minutes=60.0) > 0.99
+    slow_progress = _temporal_accessibility(total_tau_minutes=600.0, time_minutes=10.0)
+    assert 0.0 < slow_progress < 0.1
+
+
+def test_temporal_accessibility_increases_with_time():
+    short = _temporal_accessibility(total_tau_minutes=60.0, time_minutes=5.0)
+    long = _temporal_accessibility(total_tau_minutes=60.0, time_minutes=60.0)
+    assert long > short
 
 def test_temporal_ramp_in_fast_mode():
     """
@@ -11,23 +23,22 @@ def test_temporal_ramp_in_fast_mode():
     
     # Precursors (using SMILES for keys)
     ribose_smi = "OCC(O)C(O)C(O)C=O"
-    lysine_smi = "NCCCCC(N)C(=O)O"
     ribose = Species("ribose", ribose_smi)
-    lysine = Species("lysine", lysine_smi)
+    furfural_smi = "O=Cc1ccco1"
     
     steps = [
         ElementaryStep(
-            reactants=[ribose, lysine],
-            products=[Species("Schiff", "OCC(O)C(O)C(O)C=NCCCCC(N)C(=O)O")],
-            reaction_family="Schiff_Base_Formation"
+            reactants=[ribose],
+            products=[Species("furfural", furfural_smi)],
+            reaction_family="Enolisation_1_2"
         )
     ]
     
     # Barriers
-    step_key = f"{ribose_smi}+{lysine_smi}->OCC(O)C(O)C(O)C=NCCCCC(N)C(=O)O"
+    step_key = f"{ribose_smi}->{furfural_smi}"
     barriers = {step_key: 20.0}
     
-    initial = {ribose_smi: 1.0, lysine_smi: 1.0}
+    initial = {ribose_smi: 1.0}
     
     # Use the test ramp we created
     ramp_path = "data/temp_profiles/test_ramp.csv"
@@ -37,5 +48,5 @@ def test_temporal_ramp_in_fast_mode():
     
     assert res is not None
     assert "metrics" in res
-    # Integrated weight should be non-zero for a 20 kcal/mol barrier at 150C
-    assert any(v > 0 for v in res["predicted_ppb"].values())
+    # Integrated weight should project a non-zero curated volatile output.
+    assert res["predicted_ppb"].get("furfural", 0.0) > 0.0

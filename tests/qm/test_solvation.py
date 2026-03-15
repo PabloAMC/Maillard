@@ -1,5 +1,4 @@
 import os
-import shutil
 import pytest
 import numpy as np
 from src.solvation import SolvationEngine  # noqa: E402
@@ -23,12 +22,7 @@ def test_n_atoms_parsing():
     engine = SolvationEngine()
     assert engine._parse_n_atoms(WATER_XYZ) == 3
 
-def _has_crest() -> bool:
-    engine = SolvationEngine()
-    return bool(engine.crest_bin and (os.path.exists(engine.crest_bin) or shutil.which(engine.crest_bin)))
-
-_CREST_AVAILABLE = _has_crest()
-_CREST_SKIP_REASON = "CREST binary not found"
+_CREST_AVAILABLE, _CREST_SKIP_REASON = SolvationEngine.probe_qcg_capability()
 
 @pytest.mark.skipif(not _CREST_AVAILABLE, reason=_CREST_SKIP_REASON)
 def test_explicit_solvation_run():

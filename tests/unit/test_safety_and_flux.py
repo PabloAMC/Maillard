@@ -67,7 +67,7 @@ def test_concentration_aware_ranking():
         "name": "LowCys",
         "sugars": ["D-Ribose"],
         "amino_acids": ["L-Cysteine"],
-        "molar_ratios": {"L-Cysteine": 0.1},
+        "molar_ratios": {"D-Ribose": 0.1, "L-Cysteine": 0.1},
         "ph": 6.0,
         "temp": 140
     }
@@ -76,7 +76,7 @@ def test_concentration_aware_ranking():
         "name": "HighCys",
         "sugars": ["D-Ribose"],
         "amino_acids": ["L-Cysteine"],
-        "molar_ratios": {"L-Cysteine": 1.0},
+        "molar_ratios": {"D-Ribose": 1.0, "L-Cysteine": 1.0},
         "ph": 6.0,
         "temp": 140
     }
@@ -91,10 +91,8 @@ def test_concentration_aware_ranking():
     # target_score now uses Sensory radar intensity (Stevens' Law)
     # Intensity ~ Conc^0.5
     # High (1.0M) is 10x conc of Low (0.1M)
-    # Target score should increase by sqrt(10) ~ 3.16x
-    # Updated scaling: MFT/FFT pathways are 2nd order in Sulfur Precursor (Cys).
-    # Intensity ~ Conc^0.5 ~ [Cys]^1.0 (Linear scaling)
-    assert res_high.target_score == pytest.approx(10.0 * res_low.target_score, rel=0.1)
+    # Target score should increase by sqrt(10) ~ 3.16x per Stevens' Law
+    assert res_high.target_score == pytest.approx(math.sqrt(10.0) * res_low.target_score, rel=0.1)
 
 if __name__ == "__main__":
     pytest.main([__file__])

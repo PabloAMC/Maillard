@@ -75,7 +75,7 @@ class DFTRefiner:
         try:
             from .ts_optimizer import TSOptimizer
             self.ts_optimizer = TSOptimizer()
-        except ImportError:
+        except Exception:
             self.ts_optimizer = None
             
         # Phase 14: Initialize Diffusion TS Engine

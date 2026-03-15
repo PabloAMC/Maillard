@@ -56,8 +56,9 @@ def run_simulation(barriers_json: str, precursors: dict, temp_c: Optional[float]
         "SCc1ccco1": "2-furfurylthiol",
         "C1=C(SC=C1)CS": "2-furfurylthiol_legacy",
         "O=Cc1ccco1": "furfural",
-        "CC1=NC=C(N=C1)C": "2,5-dimethylpyrazine",
+        "CC1=NC=C(N=C1)C": "2-5-dimethylpyrazine",
         "CC=O": "acetaldehyde",
+        "Cc1cc(SSC2=C(C)OC=C2)co1": "bis(2-methyl-3-furyl) disulfide",
         "O": "water",
         "O=C=O": "CO2",
         "N": "ammonia",
@@ -84,7 +85,7 @@ def run_simulation(barriers_json: str, precursors: dict, temp_c: Optional[float]
             precursor_objs.append(Species(label=name, smiles=smi))
             
         # Discover network
-        steps = engine_smirks.enumerate(precursor_objs, max_generations=3)
+        steps = engine_smirks.enumerate(precursor_objs, max_generations=4)
         print(f"SmirksEngine discovered {len(steps)} elementary steps.")
         
         count = 0

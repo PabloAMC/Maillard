@@ -445,12 +445,22 @@ def _enolisation_steps(
     else:
         product_12 = Species(label="HMF", smiles="OCC1=CC=C(C=O)O1")
         water_count = 2
+        furfural = Species(label="furfural", smiles="O=Cc1ccco1")
+        formaldehyde = Species(label="formaldehyde", smiles="C=O")
     
     steps.append(ElementaryStep(
         reactants=[deoxy],
         products=[product_12] + [water] * water_count,
         reaction_family="Enolisation_1_2"
     ))
+
+    if not _is_pentose(sugar):
+        # Secondary hexose branch: deoxyosone -> furfural + formaldehyde + 2 H2O.
+        steps.append(ElementaryStep(
+            reactants=[deoxy],
+            products=[furfural, formaldehyde, water, water],
+            reaction_family="Enolisation_1_2"
+        ))
 
     # 2b. 2,3-enolisation (favored at neutral/alkali pH)
     product_23 = Species(label="pyruvaldehyde", smiles="CC(=O)C=O")
@@ -836,7 +846,16 @@ def _mft_pathway(pool_species: List[Species]) -> List[ElementaryStep]:
     water = Species("water", "O")
     
     for s in pool_species:
-        if "deoxyosone" in s.label.lower() and (_is_pentose(s) or "ribose" in s.label.lower()):
+        label_lower = s.label.lower()
+        is_supported_deoxyosone = (
+            "deoxyosone" in label_lower and (
+                _is_pentose(s)
+                or "ribose" in label_lower
+                or "glucose" in label_lower
+                or "fructose" in label_lower
+            )
+        )
+        if is_supported_deoxyosone:
             # Filter out N-containing species; they require deamination first (R.12)
             if "N" in s.smiles:
                 continue
@@ -845,12 +864,51 @@ def _mft_pathway(pool_species: List[Species]) -> List[ElementaryStep]:
             # Balanced: C5H8O4 + 2 H2S -> C5H6OS + 3 H2O + S
             mft = Species(label="2-methyl-3-furanthiol", smiles="Cc1c(S)cco1")
             sulfur = Species(label="elemental-sulfur", smiles="[S]")
-            steps.append(ElementaryStep(
-                reactants=[s, h2s, h2s],
-                products=[mft, sulfur, water, water, water],
-                reaction_family="Thiol_Addition"
-            ))
+            if "glucose" in label_lower or "fructose" in label_lower:
+                formaldehyde = Species(label="formaldehyde", smiles="C=O")
+                steps.append(ElementaryStep(
+                    reactants=[s, h2s, h2s],
+                    products=[mft, formaldehyde, sulfur, water, water, water],
+                    reaction_family="Thiol_Addition_Hexose"
+                ))
+            else:
+                steps.append(ElementaryStep(
+                    reactants=[s, h2s, h2s],
+                    products=[mft, sulfur, water, water, water],
+                    reaction_family="Thiol_Addition"
+                ))
             
+    return steps
+
+
+def _furyl_disulfide_formation(pool_species: List[Species]) -> List[ElementaryStep]:
+    """
+    Oxidative dimerisation of 2-methyl-3-furanthiol to the characteristic Mottram disulfide.
+    Balanced: 2 C5H6OS -> C10H10O2S2 + H2.
+    """
+    steps = []
+    hydro = Species("H2", "[HH]")
+
+    mft_species = [
+        s for s in pool_species
+        if "2-methyl-3-furanthiol" in s.label.lower() or s.smiles == "Cc1c(S)cco1"
+    ]
+    seen = set()
+    for mft in mft_species:
+        key = mft.smiles
+        if key in seen:
+            continue
+        seen.add(key)
+        disulfide = Species(
+            label="bis(2-methyl-3-furyl) disulfide",
+            smiles="Cc1cc(SSC2=C(C)OC=C2)co1",
+        )
+        steps.append(ElementaryStep(
+            reactants=[mft, mft],
+            products=[disulfide, hydro],
+            reaction_family="Thiol_Oxidation",
+        ))
+
     return steps
 
 
@@ -1609,6 +1667,13 @@ class SmirksEngine:
         # 3e-2. MFT Formation (Phase R.2 Fix)
         mft_steps = _mft_pathway(pool_list())
         for step in mft_steps:
+            if not _step_exists(step, all_steps):
+                all_steps.append(step)
+                add_step_products(step)
+
+        # 3e-2b. Furyl disulfide formation from MFT
+        furyl_disulfide_steps = _furyl_disulfide_formation(pool_list())
+        for step in furyl_disulfide_steps:
             if not _step_exists(step, all_steps):
                 all_steps.append(step)
                 add_step_products(step)

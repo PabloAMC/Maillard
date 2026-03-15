@@ -99,27 +99,77 @@ class KineticsEngine:
             
         return results
 
+    def get_reaction_thermo(self, reactants: List[str], products: List[str], 
+                            temperature_k: Optional[float] = None) -> Dict[str, float]:
+        """
+        Phase 1: Thermodynamic Governance.
+        Calculates Delta G, Delta H, and Delta S for a reaction using Joback increments.
+        """
+        T = temperature_k or self.T
+        try:
+            r_res = [JobackEstimator.estimate(s) for s in reactants]
+            p_res = [JobackEstimator.estimate(s) for s in products]
+            
+            # Sum enthalpies and Gibbs energies (J/mol)
+            # Joback gives H298 and G298. 
+            # For H(T): H(T) = H298 + integral(Cp dt)
+            # For G(T): G(T) = H(T) - T*S(T)
+            
+            def get_properties(res_list, temp):
+                total_h = 0.0
+                total_g = 0.0
+                for r in res_list:
+                    # Very simplified T-correction for H and S
+                    # cp = a + bT + cT^2 + dT^3
+                    cp_coeffs = r["cp_coeffs"]
+                    # integral(cp) from 298 to T
+                    def int_cp(t):
+                        return cp_coeffs[0]*t + 0.5*cp_coeffs[1]*t**2 + (1/3)*cp_coeffs[2]*t**3 + 0.25*cp_coeffs[3]*t**4
+                    
+                    dh = int_cp(temp) - int_cp(298.15)
+                    h_t = r["H298"] + dh
+                    
+                    # Entropy S(T) = S298 + integral(cp/T dt)
+                    # S298 derived from (H298 - G298)/298.15
+                    s298 = (r["H298"] - r["G298"]) / 298.15
+                    # integral(cp/T) = a*ln(T) + b*T + 0.5*c*T^2 + (1/3)*d*T^3
+                    def int_cp_over_t(t):
+                        return cp_coeffs[0]*np.log(t) + cp_coeffs[1]*t + 0.5*cp_coeffs[2]*t**2 + (1/3)*cp_coeffs[3]*t**3
+                    
+                    ds = int_cp_over_t(temp) - int_cp_over_t(298.15)
+                    s_t = s298 + ds
+                    
+                    g_t = h_t - temp * s_t
+                    total_h += h_t
+                    total_g += g_t
+                return total_h, total_g
+
+            rh, rg = get_properties(r_res, T)
+            ph, pg = get_properties(p_res, T)
+            
+            delta_g = pg - rg
+            delta_h = ph - rh
+            
+            return {
+                "delta_g_j_mol": delta_g,
+                "delta_g_kcal_mol": delta_g / 4184.0,
+                "delta_h_j_mol": delta_h,
+                "delta_h_kcal_mol": delta_h / 4184.0,
+                "is_spontaneous": delta_g < 0
+            }
+        except Exception:
+            return {"delta_g_kcal_mol": 0.0, "is_spontaneous": True}
+
     def is_reaction_feasible(self, reactants: List[str], products: List[str], 
-                             threshold_kcal_mol: float = 30.0) -> Tuple[bool, float]:
+                             threshold_kcal_mol: float = 30.0,
+                             temperature_k: Optional[float] = None) -> Tuple[bool, float]:
         """
         Phase 12.3: Dynamic Thermo-Gating.
-        Uses Joback Group Additivity to estimate Delta G for a reaction.
         If Delta G > threshold, the reaction is considered unphysical (non-spontaneous).
-        
-        Returns:
-            (is_feasible, delta_g_estimated_kcal_mol)
         """
-        try:
-            r_energy = sum(JobackEstimator.estimate(s)["G298"] for s in reactants)
-            p_energy = sum(JobackEstimator.estimate(s)["G298"] for s in products)
-            
-            # Convert J/mol to kcal/mol
-            delta_g = (p_energy - r_energy) / 4184.0
-            
-            return delta_g <= threshold_kcal_mol, delta_g
-        except Exception:
-            # If Joback fails (unsupported groups), default to feasible for safety
-            return True, 0.0
+        thermo = self.get_reaction_thermo(reactants, products, temperature_k)
+        dg = thermo.get("delta_g_kcal_mol", 0.0)
+        return dg <= threshold_kcal_mol, dg
 
     def simulate_network_cantera(self, mechanism_yaml: str, initial_concentrations: Dict[str, float], 
                                  time_span: Tuple[float, float], temperature_k: Optional[float] = None,

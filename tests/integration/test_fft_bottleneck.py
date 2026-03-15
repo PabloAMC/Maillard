@@ -43,9 +43,9 @@ def test_fft_bottleneck_resolution():
         assert os.path.exists(csv_path)
         
         df = pd.read_csv(csv_path)
-        
-        assert "2-furfurylthiol" in df.columns
-        final_fft = df["2-furfurylthiol"].iloc[-1]
+      # '2_furfurylthiol' (sanitized from '2-furfurylthiol') should be in the columns
+        assert '2_furfurylthiol' in df.columns
+        final_fft = df['2_furfurylthiol'].iloc[-1]
         
         # Minimum threshold enforced by the 2-step H2S pathway (adjusted for accurate lit parameters)
         assert final_fft > 1e-36, f"FFT yield {final_fft} is too low, bottleneck might have regressed."
