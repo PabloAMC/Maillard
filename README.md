@@ -138,6 +138,18 @@ pip install git+https://github.com/microsoft/skala.git
 
 The framework uses a **Test-Driven Science** approach. We maintain specific tests in `tests/scientific/` that monitor our correlation with literature and document known gaps. For a detailed breakdown of how we verify our predictions against curated literature benchmarks, see the **[Scientific Validation Guide](docs/VALIDATION_GUIDE.md)** and the **[Literature Benchmark Reference](data/benchmarks/maillard_validation_benchmarks.md)**.
 
+Generate the current benchmark summary artifact with:
+```bash
+python scripts/generate_benchmark_summary.py
+```
+This writes `results/validation/benchmark_summary.md` and `results/validation/benchmark_summary.json`, separating supported benchmarks, ranking quality, and remaining scale gaps.
+
+Run the explicit free-amino-acid strict gate with:
+```bash
+MAILLARD_STRICT_BENCHMARKS=1 python -m pytest tests/scientific/test_benchmarks.py -q
+```
+This consumes the same benchmark summary criteria used by the report: full coverage, Pearson `>= 0.85` when at least three compounds match, and max ratio `<= 1.5x` for free-amino-acid systems. It is intentionally opt-in because the remaining scale-gap benchmarks should fail honestly until they are fixed.
+
 ### 🚩 Known Blind Spots (Tracked)
 We proactively document and test for current engine limitations to prevent over-confidence in edge cases:
 - **Heme Optimization**: While supported in the CLI, explicit leghemoglobin-specific kinetics are still being refined.

@@ -82,12 +82,21 @@ def main():
     parser.add_argument("--protein-type", choices=["free", "pea_conc", "pea_iso", "soy_conc", "soy_iso", "myco"], default="free", help="Protein matrix type for accessibility corrections.")
     parser.add_argument("--denaturation-state", type=float, default=0.5, help="Protein denaturation level (0.0 to 1.0). Default 0.5.")
     parser.add_argument("--list-precursors", action="store_true", help="List available precursors and exit")
+    parser.add_argument("--list-tags", action="store_true", help="List available sensory tags and exit")
     
     # Catch simple cases where user only wants to list
     if "--list-precursors" in sys.argv:
         print("Available Precursors:")
         for name in precursor_resolver.list_available():
             print(f"  - {name}")
+        sys.exit(0)
+
+    if "--list-tags" in sys.argv:
+        from src.sensory import SensoryDatabase
+        db = SensoryDatabase()
+        print("Available Sensory Tags (Categories):")
+        for tag in db.tags.keys():
+            print(f"  - {tag}")
         sys.exit(0)
 
     args = parser.parse_args()

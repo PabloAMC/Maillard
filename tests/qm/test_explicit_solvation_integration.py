@@ -1,12 +1,8 @@
-import shutil
 import pytest
 from src.dft_refiner import DFTRefiner  # noqa: E402
+from src.solvation import SolvationEngine  # noqa: E402
 
-def _has_crest():
-    return shutil.which("crest") is not None
-
-_SOLVATION_AVAILABLE = _has_crest()
-_SOLVATION_SKIP_REASON = "CREST not found"
+_SOLVATION_AVAILABLE, _SOLVATION_SKIP_REASON = SolvationEngine.probe_qcg_capability()
 
 # Simple formaldehyde model
 FORMALDEHYDE_XYZ = """4

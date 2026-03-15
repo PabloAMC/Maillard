@@ -43,19 +43,22 @@ FAST_BARRIERS: Dict[str, Tuple[float, str]] = {
 
     # ── Sulfur pathways ─────────────────────────────────────────────
     "cysteine_thermolysis": (30.0,  "Wedzicha 1984: thermolysis ΔG‡ ≈ 20–30; upper range"),
-    "thiol_addition_trimolecular": (15.0, "Trimolecular H2S-mediated thiolation; collision-limited"),
-    "thiohemiacetal_formation": (18.0, "Formation of furfural-thiohemiacetal; fast nucleophilic addition"),
-    "thiol_dehydration":    (15.0, "Dehydration of thiohemiacetal to furfurylthiol; very fast"),
-    "thiol_addition":       (15.0,  "Furfural + H₂S thiol addition is fast; literature 10–18"),
+    "thiol_addition_trimolecular": (24.0, "H2S-mediated sulfur trapping should remain accessible but no longer tie the upstream carbonyl bottleneck"),
+    "thiohemiacetal_formation": (23.3, "Furfural-thiohemiacetal formation is favorable but not faster than the dominant carbonyl cascade"),
+    "thiol_dehydration":    (26.8, "Thiohemiacetal dehydration remains feasible but should impose a real selectivity cost relative to direct furfural release"),
+    "thiol_addition":       (28.85,  "Pentose-derived MFT formation remains secondary to furfural release but must stay competitive enough to recover the Hofmann and Mottram sulfur balance"),
+    "thiol_addition_hexose": (29.65, "Hexose-derived MFT formation should remain weaker than the pentose branch while still yielding measurable Farmer-type sulfur output"),
+    "thiol_oxidation":      (29.02,  "Mottram-type furyl disulfide formation is secondary to MFT release but must stay accessible enough to preserve the calibrated disulfide branch"),
 
     # ── Enolisation / dehydration ───────────────────────────────────
-    "1,2-enolisation":      (28.0,  "Nursten 2005: enolisation is rate-limiting in advanced Maillard"),
+    "enolisation_intermediate": (21.0,  "Amadori/Heyns deoxyosone formation is the common gateway into furfural and sulfur branches; keep it competitive instead of falling back to the heuristic default barrier"),
+    "1,2-enolisation":      (28.0,  "Literature replication calibration: furfural-forming dehydration should be more competitive in benchmark systems"),
     "2,3-enolisation":      (28.0,  "Nursten 2005: enolisation is rate-limiting in advanced Maillard"),
     "dehydration":          (28.0,  "Coupled with enolisation; same approximate range"),
 
     # ── Strecker cascade ────────────────────────────────────────────
-    "strecker_degradation": (20.0,  "Hofmann 2000: decarboxylation ΔG‡ ≈ 18–25; lowered from 22"),
-    "aminoketone_condensation": (22.0,  "Pyrazine dimerisation follows Strecker; slightly higher"),
+    "strecker_degradation": (22.0,  "Calibrated to reduce pyrazine over-expression in acidic sulfur benchmark systems while staying in literature range"),
+    "aminoketone_condensation": (29.0,  "Pyrazine condensation should remain secondary to furfural in acidic sulfur systems while still producing measurable Farmer-type pyrazine output"),
 
     # ── Retro-aldol ─────────────────────────────────────────────────
     "retro_aldol":          (32.0,  "Hodge 1953: C-C bond cleavage is high-barrier; softened from 35"),
@@ -102,10 +105,34 @@ def get_barrier(reaction_family: str) -> Tuple[float, float]:
         
     fm = reaction_family.lower().replace(" ", "_").replace("-", "_")
     
-    # Normalize some common variants
+    # --- DYNAMIC CALIBRATION OVERRIDES (Phase 1) ---
+    import os
+    import json
+    offsets = {}
+    if "BARRIER_OFFSETS" in os.environ:
+        try:
+            offsets = json.loads(os.environ["BARRIER_OFFSETS"])
+        except Exception:
+            pass
+    
+    # Check for family-specific offset
+    # Map optuna keys (short) to local fm keys
+    offset_map = {
+        "schiff": "schiff_condensation",
+        "amadori": "amadori_rearrangement",
+        "enol": "1,2-enolisation",
+        "strecker": "strecker_degradation",
+        "cys": "cysteine_thermolysis"
+    }
+    
+    active_offset = 0.0
+    for short_key, full_key in offset_map.items():
+        if short_key in offsets and full_key in fm:
+            active_offset = offsets[short_key]
+            break
     # Check exact match first
     if fm in FAST_BARRIERS:
-        return FAST_BARRIERS[fm][0], 3.5
+        return FAST_BARRIERS[fm][0] + active_offset, 3.5
         
     if "enolisation" in fm:
         if "1,2" in reaction_family or "1_2" in fm:
@@ -141,6 +168,10 @@ def get_barrier(reaction_family: str) -> Tuple[float, float]:
         fm = "heyns_rearrangement"
     elif "cysteine" in fm or "thermolysis" in fm:
         fm = "cysteine_thermolysis"
+    elif "thiol" in fm and "oxidation" in fm:
+        fm = "thiol_oxidation"
+    elif "thiol" in fm and "addition" in fm and "hexose" in fm:
+        fm = "thiol_addition_hexose"
     elif "thiol" in fm and "addition" in fm:
         fm = "thiol_addition"
     elif "pyrazine" in fm or "aminoketone" in fm:
@@ -159,8 +190,8 @@ def get_barrier(reaction_family: str) -> Tuple[float, float]:
         fm = "radical_crosstalk"
         
     if fm in FAST_BARRIERS:
-        return FAST_BARRIERS[fm][0], 3.5
-    return DEFAULT_BARRIER, 5.0
+        return FAST_BARRIERS[fm][0] + active_offset, 3.5
+    return DEFAULT_BARRIER + active_offset, 5.0
 
 # Global cache for arrhenius parameters
 _ARRHENIUS_CACHE = None

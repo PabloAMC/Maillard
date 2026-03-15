@@ -42,8 +42,15 @@ def predict_lop_generation(
     Restored from docs/Claude_feedback.md via inverse_design.py requirements.
     Predicts Lipid Oxidation Product (LOP) SMILES and concentrations.
     """
-    # Map input to a profile or use defaults
-    # In this implementation, we simplify the complex Frankel model to satisfying the interface
+    # No lipid precursor means no lipid oxidation signal should enter the network.
+    if not lipid_input:
+        return {}
+
+    # Map input to a profile or use defaults.
+    # This implementation keeps a lightweight interface but should only emit genuine LOPs.
+    total_lipid_load = sum(float(value) for value in lipid_input.values())
+    if total_lipid_load <= 0.0:
+        return {}
     
     T_K = temp_C + 273.15
     Ea_init = 80000.0  # J/mol
@@ -60,14 +67,11 @@ def predict_lop_generation(
     # 2-pentylfuran = "CCCCCc1ccco1"
     
     # Scale based on time and temp
-    load = oxidation_rate * time_min * 1e4
+    load = oxidation_rate * time_min * total_lipid_load * 1e4
     
     return {
         "CCCCCC=O": load * 0.37,          # hexanal
         "CCCCCc1ccco1": load * 0.08,      # 2-pentylfuran
-        "O=Cc1ccco1": load * 0.1,         # furfural
-        "Cc1occc1S": load * 0.05,         # 2-methyl-3-furanthiol (MFT)
-        "Cc1occc1SSc1ccoc1C": load * 0.01, # bis(2-methyl-3-furyl)disulfide
         "CCCCCCO": load * 0.05,           # 1-hexanol
         "CCCCCCCCC=O": load * 0.12        # nonanal
     }

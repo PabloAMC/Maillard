@@ -8,7 +8,7 @@ Converts matrix concentrations to predicted air-phase (headspace) concentrations
 import math
 import yaml
 from pathlib import Path
-from typing import Dict
+from typing import Dict, Optional, List
 
 class HeadspaceModel:
     """
@@ -46,24 +46,52 @@ class HeadspaceModel:
         exponent = (dh / self.R) * (1.0 / temp_k - 1.0 / 298.15)
         return kaw_298 * math.exp(exponent)
 
-    def _get_kprot_for_compound(self, name: str) -> float:
+    def _extract_properties(self, smiles: str) -> Dict[str, float]:
+        """Estimated logP and MW using RDKit for binding characterization."""
+        from rdkit import Chem
+        from rdkit.Chem import Descriptors, Crippen
+        mol = Chem.MolFromSmiles(smiles)
+        if not mol:
+            return {"logP": 1.0, "MW": 100.0}
+        return {
+            "logP": Crippen.MolLogP(mol),
+            "MW": Descriptors.MolWt(mol)
+        }
+
+    def _get_kprot_for_compound(self, name: str, smiles: Optional[str] = None) -> float:
         """
         Calculates empirical protein binding constant (Kprot) for a volatile.
-        Based on generic plant protein binding affinities (e.g. Guichard 2002).
+        Phase 1: Partitioning Correction.
+        Uses a hydrophobicity-driven model (logP) + molecular weight scaling.
+        Kprot = alpha * logP + beta * MW
         """
+        if smiles:
+            props = self._extract_properties(smiles)
+            logp = props["logP"]
+            mw = props["MW"]
+            
+            # Hydrophobic binding (binding affinity increases with logP)
+            # Scaling factors estimated from Mcclements et al. (flavor-protein interactions)
+            kprot_hydrophobic = max(0, 15.0 * logp)
+            # Entropy/Size factor
+            kprot_size = 0.05 * mw
+            
+            return kprot_hydrophobic + kprot_size
+            
         n = name.lower()
+        # Fallback for named compounds without SMILES lookup
         if "sulfide" in n or "h2s" == n:
-            return 0.0      # Inorganic gases do not bind substantially
-        elif "thiol" in n or "methional" in n or "sulfur" in n:
-            return 2.0      # Small sulfur volatiles have low protein affinity
+            return 0.0      
+        elif "thiol" in n:
+            return 8.0      
+        elif "methional" in n:
+            return 2.0      
         elif "pyrazine" in n or "thiazole" in n:
-            return 5.0      # Heterocycles have moderate binding
+            return 12.0     
         elif "aldehyde" in n or "anal" in n or "fural" in n:
-            return 30.0     # Aliphatic/aromatic aldehydes bind strongly to plant proteins
-        elif "one" in n or "diacetyl" in n:
-            return 10.0     # Ketones bind moderately
+            return 45.0     # Carbonyl-amine covalent binding (Schiff)
         else:
-            return 5.0      # Default moderate binding
+            return 10.0
 
     def predict_headspace(self, 
                           matrix_concentrations: Dict[str, float], 

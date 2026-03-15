@@ -1,31 +1,67 @@
 # Scientific Validation Guide
 
-## 1. How we validate "The Numbers"
-The Maillard framework uses a **layered validation strategy** to ensure that predicted concentrations and sensory profiles align with reality.
+## 1. Validation Contract
 
-### A. Kinetic Reliability (Pearson R)
-We use `scripts/compare_sim_to_lit.py` to correlate our microkinetic yields against peer-reviewed experimental data curated in the **[Literature Benchmark Reference](file:///Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/maillard_validation_benchmarks.md)**.
-- **Benchmark**: Ribose-Glycine model systems and other PRIMARY-tier systems.
-- **Goal**: Maintain a Pearson R > 0.85 for major volatiles (MFT, 2,5-DMP, Methional).
-- **Status**: Checked every release against `data/lit/ribose_glycine_2021.json` and associated benchmark data.
+The project currently uses a layered benchmark contract rather than a single release number.
 
-### B. Sensory Fidelity (Stevens' Law)
-Because the human nose is logarithmic, absolute ppm values are less important than **perceived intensity (OAV)**.
-- We use a square-root scaling factor ($Intensity = \text{Conc}^{0.5}$) for sensory radar charts.
-- This ensures that a 10x increase in precursor concentration doesn't result in an unrealistic 10x flavor intensity, matching psychophysical reality.
+- **Coverage**: all measured compounds in a supported benchmark must resolve to predicted outputs.
+- **Ranking**: Pearson R is only reported when at least 3 compounds match.
+- **Scale**: the strict free-amino-acid gate requires full coverage plus a max measured/predicted ratio <= 1.5x.
+- **Support status**: benchmarks that cannot run through the current execution path are reported as `unsupported`, not silently skipped.
+
+The current benchmark summary artifact is generated with:
+
+```bash
+python scripts/generate_benchmark_summary.py
+```
+
+This writes `results/validation/benchmark_summary.md` and `results/validation/benchmark_summary.json` and is the default diagnostic surface for supported vs unsupported cases, ranking quality, and remaining scale gaps.
+
+The explicit strict gate for free-amino-acid benchmarks is:
+
+```bash
+MAILLARD_STRICT_BENCHMARKS=1 python -m pytest tests/scientific/test_benchmarks.py -q
+```
+
+## 2. Current Validated Envelope
+
+As of the current Docker-validated benchmark summary:
+
+- `cys_glucose_150C_Farmer1999` is `pass` and `strict-ready`.
+- `cys_ribose_140C_Hofmann1998` remains `scale-gap`.
+- `cys_ribose_150C_Mottram1994` remains `scale-gap`.
+- `pea_isolate_40C_PratapSingh2021` remains `unsupported` because it is matrix-only and cannot yet run through the free-precursor path.
+
+This means the framework is now honest about its validated free-amino-acid envelope, but its absolute concentration projection is still not a generally validated headspace model.
+
+## 3. How We Validate
+
+### A. Literature Benchmarks
+
+Benchmark execution is centralized in `src/benchmark_validation.py` and reused by:
+
+- `tests/scientific/test_benchmarks.py`
+- `tests/scientific/test_free_aa_quantitative_regression.py`
+- `scripts/compare_sim_to_lit.py`
+- `scripts/generate_benchmark_summary.py`
+
+### B. Sensory Fidelity
+
+Sensory scoring remains downstream of concentration prediction. Stevens' law and masking logic are useful for ranking perceived aroma, but they do not replace benchmark validation of predicted ppb.
 
 ### C. Safety Conservatism
-Safety scores are designed to be **conservative** (penalizing risk even at low concentrations).
-- We use Pareto-ranking to ensure that "Meaty" flavor is never optimized at the expense of crossing an "Acrylamide" threshold.
 
-## 2. Accurately Describing Blind Spots
-It is critical to be honest about what the tool *does not* yet know. These are documented in [docs/use_cases/pea_protein_report.md](file:///Users/pabloantoniomorenocasares/Developer/Maillard/docs/use_cases/pea_protein_report.md) and verified by `tests/scientific/test_blind_spots.py`:
+Safety scoring is still treated conservatively and independently from the benchmark gate so that flavor optimization does not hide formation-risk regressions.
 
-- **Peptide Accessibility**: Most amino acids in plant isolates are buried inside globulin proteins. Yields will be lower for intact proteins vs. hydrolysates.
-- **Volatile Partitioning**: High fiber/fat matrices trap flavors. 10 ppm of MFT in water smells much stronger than 10 ppm in a high-fiber pea patty.
-- **Non-Heme Catalysis**: Transition metals (Iron) accelerate pyrazine formation faster than simple thermal kinetics suggest.
+## 4. Blind Spots That Still Matter
 
-## 3. How to verify for your system
-1. Run `python scripts/reproduce_use_cases.py` to see the baseline comparisons.
-2. Check the `tests/scientific/` directory for regression tests against literature.
-3. Compare the `Sensory Radar` against your own descriptive sensory panel data.
+- **Matrix-only systems**: plant-isolate benchmarks still require a dedicated matrix-aware execution path.
+- **Headspace translation**: the remaining free-amino-acid scale gaps are now dominated by how FAST activity is translated into observed concentration/headspace, not by a single missing sulfur barrier.
+- **Peptide accessibility**: intact protein systems are still outside the validated free-precursor envelope.
+
+## 5. Recommended Verification Workflow
+
+1. Run `python scripts/generate_benchmark_summary.py` to inspect the current validated envelope.
+2. Run `python -m pytest tests/scientific/test_free_aa_quantitative_regression.py -q` to guard the currently calibrated free-amino-acid ratios.
+3. Run `MAILLARD_STRICT_BENCHMARKS=1 python -m pytest tests/scientific/test_benchmarks.py -q` when you want an honest go/no-go signal for the strict free-AA gate.
+4. Treat any unsupported matrix benchmark as a scope gap, not as a passing scientific result.

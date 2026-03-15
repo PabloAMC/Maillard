@@ -1,4 +1,5 @@
 import yaml
+import logging
 from pathlib import Path
 from typing import List, Dict, Tuple, Optional
 from dataclasses import dataclass, field
@@ -146,7 +147,7 @@ class InverseDesigner:
         minimize_compounds = self.tags.get(self.minimize_tag, []) if self.minimize_tag else []
 
         eval_grid = grid_override if grid_override is not None else self.grid
-        print(f"DEBUG: evaluate_all starting for {len(eval_grid)} formulations. First 2 names: {[f.get('name') for f in eval_grid[:2]]}")
+        logging.getLogger(__name__).debug("evaluate_all starting for %d formulations. First 2 names: %s", len(eval_grid), [f.get('name') for f in eval_grid[:2]])
         for form in eval_grid:
             name = form.get("name", "Unknown")
             protein_type = form.get("protein_type", global_conditions.protein_type)
@@ -164,7 +165,7 @@ class InverseDesigner:
             try:
                 precursors = resolve_many(all_names)
             except ValueError as e:
-                print(f"Skipping '{name}': {e}")
+                logging.getLogger(__name__).warning("Skipping '%s': %s", name, e)
                 continue
                 
             # Create a localized conditions object (e.g. to apply catalyst override if specified)
@@ -191,19 +192,18 @@ class InverseDesigner:
                     with open(LIBRARY_PATH, "r") as f:
                         lib_data = yaml.safe_load(f)
                         intervention_lib = {a["name"]: a for a in lib_data.get("interventions", [])}
-                    
-                    print(f"DEBUG: {name} raw interventions: {interventions}")
+                    logging.getLogger(__name__).debug("%s raw interventions: %s", name, interventions)
                     for inter in interventions:
                         agent_name = inter.get("name")
                         dose = inter.get("dose", 1.0)
-                        print(f"DEBUG: loading intervention {agent_name} with dose {dose}")
+                        logging.getLogger(__name__).debug("loading intervention %s with dose %s", agent_name, dose)
                         agent_data = intervention_lib.get(agent_name)
                         if agent_data:
                             for mech in agent_data.get("mechanisms", []):
                                 target = mech.get("target_family", "")
                                 delta = mech.get("delta_barrier_per_unit", 0.0)
                                 modifiers[target] = delta * dose
-                print(f"DEBUG_INV: {name} final modifiers: {modifiers}")
+                logging.getLogger(__name__).debug("%s final modifiers: %s", name, modifiers)
             
             engine = SmirksEngine(cond)
             steps = engine.enumerate(precursors, max_generations=4)
@@ -281,6 +281,7 @@ class InverseDesigner:
                 heuristic_barriers, 
                 initial_concentrations, 
                 temperature_kelvin=cond.temperature_kelvin,
+                time_minutes=form.get("time_minutes"),
                 protein_type=protein_type,
                 denaturation_state=denaturation_state
             )
