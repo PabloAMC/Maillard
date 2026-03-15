@@ -1,0 +1,50 @@
+[
+  {
+    "benchmark_id": "cys_glucose_150C_Farmer1999",
+    "bench_file": "/workspace/data/benchmarks/cys_glucose_150C_Farmer1999.json",
+    "tier": "PRIMARY",
+    "family": "free_aa_sugar_discrimination",
+    "protein_type": "free",
+    "execution_path": "free_precursor",
+    "supported": true,
+    "reason": null,
+    "status": "pass",
+    "strict_ready": true
+  },
+  {
+    "benchmark_id": "cys_ribose_140C_Hofmann1998",
+    "bench_file": "/workspace/data/benchmarks/cys_ribose_140C_Hofmann1998.json",
+    "tier": "PRIMARY",
+    "family": "free_aa_sulfur",
+    "protein_type": "free",
+    "execution_path": "free_precursor",
+    "supported": true,
+    "reason": null,
+    "status": "partial-pass",
+    "strict_ready": true
+  },
+  {
+    "benchmark_id": "cys_ribose_150C_Mottram1994",
+    "bench_file": "/workspace/data/benchmarks/cys_ribose_150C_Mottram1994.json",
+    "tier": "PRIMARY",
+    "family": "free_aa_sulfur",
+    "protein_type": "free",
+    "execution_path": "free_precursor",
+    "supported": true,
+    "reason": null,
+    "status": "pass",
+    "strict_ready": true
+  },
+  {
+    "benchmark_id": "pea_isolate_40C_PratapSingh2021",
+    "bench_file": "/workspace/data/benchmarks/pea_isolate_40C_PratapSingh2021.json",
+    "tier": "PRIMARY",
+    "family": "matrix_headspace",
+    "protein_type": "pea_iso",
+    "execution_path": "matrix_only",
+    "supported": false,
+    "reason": "No resolvable free-precursor system in benchmark. Matrix-only precursors: Pea Protein Isolate",
+    "status": "unsupported",
+    "strict_ready": false
+  }
+]

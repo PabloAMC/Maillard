@@ -32,12 +32,20 @@ Close your terminal window completely and open a new one to apply the changes.
 
 Do not attempt to run this natively on macOS ARM64. Instead, we use Docker to run a lightweight Linux environment. 
 
-**Quick Start**: See the [README.md](README.md#1-recommended-setup-conda--mamba) for the standard Docker activation commands.
+**Quick Start**: from the repository root, use the helper script:
+
+```bash
+./scripts/docker_maillard.sh up
+./scripts/docker_maillard.sh bootstrap
+./scripts/docker_maillard.sh shell
+```
 
 **Setup Detail**:
 1. Install OrbStack (Recommended) or Docker Desktop. 
-2. Open your Mac's Terminal and run the `docker run` command provided in the README to start your Linux shell.
-3. All following commands (Section 2-5) must be run **inside** this container shell.
+2. `./scripts/docker_maillard.sh up` creates or starts the Linux container named `maillard_validation`.
+3. `./scripts/docker_maillard.sh bootstrap` creates the `maillard` conda environment, installs CPU-safe dependencies, applies the `xtbiff` patch, and patches the known PyTorch loader issues in `e3nn` and `mace`.
+4. `./scripts/docker_maillard.sh shell` opens an interactive shell in `/workspace` with the `maillard` environment activated.
+5. All following commands (Section 2-5) may be run inside that shell, or through `./scripts/docker_maillard.sh run ...`.
 
 ## 2. Downloading Maillard & Creating the Environment
 First, download the Maillard repository to your computer and enter the directory:
@@ -150,7 +158,10 @@ If you close your terminal or restart your computer, you do not need to reinstal
 
 ### 🍎 macOS Users (Docker/OrbStack)
 
-See [README.md](README.md#returning-to-work-macos) for the quick `docker start` and `conda activate` commands.
+```bash
+./scripts/docker_maillard.sh up
+./scripts/docker_maillard.sh shell
+```
 
 ### 🐧 Linux & 🪟 Windows (WSL2) Users
 

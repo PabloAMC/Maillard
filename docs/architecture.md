@@ -66,7 +66,17 @@ The tool is **useful** if it can:
 
 The tool is **not useful** if it merely confirms what any experienced food chemist already knows from memory.
 
-### 2.2 Risk Mitigation
+### 2.2 Current Validated Envelope (2026-03-15)
+
+The architecture above describes the intended computational stack, but the currently validated operating envelope is narrower and now documented explicitly.
+
+- The canonical validation path is Docker-first, using the `maillard` conda environment through `./scripts/docker_maillard.sh`.
+- Three PRIMARY free-amino-acid benchmarks are currently strict-ready: `cys_glucose_150C_Farmer1999`, `cys_ribose_140C_Hofmann1998`, and `cys_ribose_150C_Mottram1994`.
+- One PRIMARY matrix benchmark remains an explicit scope gap rather than a silent failure: `pea_isolate_40C_PratapSingh2021` is `matrix_only` under the current execution path.
+
+This distinction matters: the framework is already useful for ranking and benchmarking within the validated free-precursor envelope, but it is not yet a generally validated matrix-headspace replication engine.
+
+### 2.3 Risk Mitigation
 
 > [!CAUTION]
 > The biggest risk is building a confident-looking tool that doesn't correlate with experiment. A tool that produces wrong rankings is worse than no tool at all, because it erodes trust and wastes wet-lab resources.
@@ -196,6 +206,16 @@ PySCF provides a modern, Pythonic interface that enables direct integration of M
 - [ ] Implement NASA Polynomial Thermodynamics for physically accurate reverse rates (Phase 24)
 - [ ] Deploy Web Dashboard for community access (Phase 19)
 - [ ] Experimental validation loop with industrial partners
+
+### Immediate Validation Priorities
+
+Before expanding Phase 3 scope, the most important remaining near-term task is to extend the validated envelope beyond free-precursor systems without regressing the newly strict-ready sulfur benchmarks.
+
+- Reproducible diagnostic entrypoint: `./scripts/docker_maillard.sh hofmann`
+- Release-grade regression lane: `./scripts/docker_maillard.sh scientific`
+- Full validated suite entrypoint: `./scripts/docker_maillard.sh pytest tests/`
+
+This keeps scientific calibration work tied to the exact environment and lanes that currently define the trusted contract.
 
 ---
 

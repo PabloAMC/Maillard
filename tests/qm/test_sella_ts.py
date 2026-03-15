@@ -1,6 +1,6 @@
 import pytest
-import os
 from src.dft_refiner import DFTRefiner, DFTResult  # noqa: E402
+from src.ts_optimizer import TSOptimizer  # noqa: E402
 
 # Use a very simple H-transfer transition state guess (planar H3)
 # To keep DFT fast, we use STO-3G
@@ -11,12 +11,9 @@ H  0.000000  0.000000  0.900000
 H  0.000000  0.000000 -0.900000
 """
 
-import importlib.util
+_SELLA_AVAILABLE, _SELLA_SKIP_REASON = TSOptimizer.probe_availability()
 
-def _has_sella():
-    return importlib.util.find_spec("sella") is not None
-
-@pytest.mark.skipif(not _has_sella(), reason="Sella not installed in current environment")
+@pytest.mark.skipif(not _SELLA_AVAILABLE, reason=_SELLA_SKIP_REASON)
 def test_sella_ts_search_integration():
     """
     Verify that DFTRefiner correctly uses Sella for TS searches 

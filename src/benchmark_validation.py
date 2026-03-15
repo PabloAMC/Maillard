@@ -33,6 +33,28 @@ BENCHMARK_NAME_ALIASES = {
 }
 
 
+@dataclass(frozen=True)
+class BenchmarkMetadata:
+    tier: str
+    family: str
+    execution_path: str
+    notes: Optional[str] = None
+
+
+@dataclass(frozen=True)
+class BenchmarkIndexEntry:
+    benchmark_id: str
+    bench_file: Path
+    tier: str
+    family: str
+    protein_type: str
+    execution_path: str
+    supported: bool
+    reason: Optional[str]
+    status: str
+    strict_ready: bool
+
+
 class BenchmarkNotSupportedError(RuntimeError):
     pass
 
@@ -78,6 +100,9 @@ class BenchmarkEvaluation:
 class BenchmarkSummary:
     benchmark_id: str
     bench_file: Path
+    tier: str
+    family: str
+    execution_path: str
     supported: bool
     reason: Optional[str]
     protein_type: str
@@ -103,6 +128,42 @@ class BenchmarkThresholds:
 
 
 DEFAULT_BENCHMARK_THRESHOLDS = BenchmarkThresholds()
+
+
+def _infer_benchmark_metadata(bench: dict) -> BenchmarkMetadata:
+    benchmark_id = bench.get("benchmark_id", "unknown")
+    protein_type = bench.get("protein_type", "free")
+    if protein_type != "free":
+        return BenchmarkMetadata(
+            tier="PRIMARY",
+            family="matrix_headspace",
+            execution_path="matrix_only",
+            notes="Matrix-only benchmark requiring a dedicated precursor-accessibility path.",
+        )
+    if "cys_" in benchmark_id:
+        return BenchmarkMetadata(
+            tier="PRIMARY",
+            family="free_aa_sulfur",
+            execution_path="free_precursor",
+            notes="Free amino-acid sulfur benchmark.",
+        )
+    return BenchmarkMetadata(
+        tier="SECONDARY",
+        family="general",
+        execution_path="free_precursor",
+        notes=None,
+    )
+
+
+def get_benchmark_metadata(bench: dict) -> BenchmarkMetadata:
+    metadata = bench.get("metadata") or {}
+    inferred = _infer_benchmark_metadata(bench)
+    return BenchmarkMetadata(
+        tier=str(metadata.get("tier", inferred.tier)),
+        family=str(metadata.get("family", inferred.family)),
+        execution_path=str(metadata.get("execution_path", inferred.execution_path)),
+        notes=metadata.get("notes", inferred.notes),
+    )
 
 
 def get_benchmark_files(benchmark_dir: Path = BENCHMARK_DIR) -> List[Path]:
@@ -318,6 +379,9 @@ def summarize_evaluation(
         return BenchmarkSummary(
             benchmark_id=evaluation.benchmark_id,
             bench_file=evaluation.bench_file,
+            tier="UNKNOWN",
+            family="unknown",
+            execution_path="unknown",
             supported=False,
             reason=evaluation.reason,
             protein_type=protein_type,
@@ -375,9 +439,15 @@ def summarize_evaluation(
 
     strict_ready = evaluation.coverage == 1.0 and ranking_status != "fail" and scale_status == "pass"
 
+    bench = load_benchmark(evaluation.bench_file)
+    metadata = get_benchmark_metadata(bench)
+
     return BenchmarkSummary(
         benchmark_id=evaluation.benchmark_id,
         bench_file=evaluation.bench_file,
+        tier=metadata.tier,
+        family=metadata.family,
+        execution_path=metadata.execution_path,
         supported=True,
         reason=None,
         protein_type=protein_type,
@@ -406,15 +476,76 @@ def summarize_benchmarks(
     for bench_file in bench_files:
         bench_path = Path(bench_file)
         bench = load_benchmark(bench_path)
+        metadata = get_benchmark_metadata(bench)
         evaluation = evaluate_benchmark(bench_path, target_tag=target_tag)
-        summaries.append(
-            summarize_evaluation(
-                evaluation,
-                protein_type=bench.get("protein_type", "free"),
-                thresholds=thresholds,
-            )
+        summary = summarize_evaluation(
+            evaluation,
+            protein_type=bench.get("protein_type", "free"),
+            thresholds=thresholds,
         )
+        if not evaluation.supported:
+            summary = BenchmarkSummary(
+                benchmark_id=summary.benchmark_id,
+                bench_file=summary.bench_file,
+                tier=metadata.tier,
+                family=metadata.family,
+                execution_path=metadata.execution_path,
+                supported=summary.supported,
+                reason=summary.reason,
+                protein_type=summary.protein_type,
+                coverage=summary.coverage,
+                matched_compounds=summary.matched_compounds,
+                total_compounds=summary.total_compounds,
+                pearson_r=summary.pearson_r,
+                mae_ppb=summary.mae_ppb,
+                max_ratio=summary.max_ratio,
+                mean_ratio=summary.mean_ratio,
+                ranking_status=summary.ranking_status,
+                scale_status=summary.scale_status,
+                overall_status=summary.overall_status,
+                strict_ready=summary.strict_ready,
+                blocking_issues=summary.blocking_issues,
+            )
+        summaries.append(summary)
     return summaries
+
+
+def build_benchmark_index(
+    benchmark_files: Optional[Iterable[Path | str]] = None,
+    target_tag: str = DEFAULT_TARGET_TAG,
+) -> List[BenchmarkIndexEntry]:
+    summaries = summarize_benchmarks(benchmark_files=benchmark_files, target_tag=target_tag)
+    return [
+        BenchmarkIndexEntry(
+            benchmark_id=summary.benchmark_id,
+            bench_file=summary.bench_file,
+            tier=summary.tier,
+            family=summary.family,
+            protein_type=summary.protein_type,
+            execution_path=summary.execution_path,
+            supported=summary.supported,
+            reason=summary.reason,
+            status=summary.overall_status,
+            strict_ready=summary.strict_ready,
+        )
+        for summary in summaries
+    ]
+
+
+def render_benchmark_index_markdown(entries: Iterable[BenchmarkIndexEntry]) -> str:
+    rows = list(entries)
+    lines = [
+        "# Benchmark Index",
+        "",
+        "| Benchmark | Tier | Family | Protein | Execution Path | Supported | Status | Strict Ready | Notes |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+    ]
+    for entry in rows:
+        notes = entry.reason or "indexed"
+        lines.append(
+            f"| {entry.benchmark_id} | {entry.tier} | {entry.family} | {entry.protein_type} | {entry.execution_path} | {'yes' if entry.supported else 'no'} | {entry.status} | {'yes' if entry.strict_ready else 'no'} | {notes} |"
+        )
+    return "\n".join(lines) + "\n"
 
 
 def render_benchmark_summary_markdown(summaries: Iterable[BenchmarkSummary]) -> str:
@@ -422,8 +553,8 @@ def render_benchmark_summary_markdown(summaries: Iterable[BenchmarkSummary]) -> 
     lines = [
         "# Benchmark Summary",
         "",
-        "| Benchmark | Protein | Status | Strict Ready | Coverage | Pearson R | Max Ratio | MAE ppb | Notes |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+        "| Benchmark | Tier | Family | Protein | Execution Path | Status | Strict Ready | Coverage | Pearson R | Max Ratio | MAE ppb | Notes |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
     ]
 
     for summary in rows:
@@ -443,7 +574,7 @@ def render_benchmark_summary_markdown(summaries: Iterable[BenchmarkSummary]) -> 
             strict_ready = "yes" if summary.strict_ready else "no"
 
         lines.append(
-            f"| {summary.benchmark_id} | {summary.protein_type} | {summary.overall_status} | {strict_ready} | {coverage} | {pearson} | {max_ratio} | {mae} | {notes} |"
+            f"| {summary.benchmark_id} | {summary.tier} | {summary.family} | {summary.protein_type} | {summary.execution_path} | {summary.overall_status} | {strict_ready} | {coverage} | {pearson} | {max_ratio} | {mae} | {notes} |"
         )
 
     supported_count = sum(1 for summary in rows if summary.supported)

@@ -1,6 +1,6 @@
 import pytest
-import os
 from src.dft_refiner import DFTRefiner, DFTResult  # noqa: E402
+from src.solvation import SolvationEngine  # noqa: E402
 
 # Simple water molecule for fast testing
 WATER_XYZ = """3
@@ -10,7 +10,9 @@ H 0.000000 0.000000 0.958400
 H 0.000000 0.924000 -0.252900
 """
 
-@pytest.mark.skipif(not os.path.exists("conda_env/bin/crest"), reason="CREST binary not found")
+_SOLVATION_AVAILABLE, _SOLVATION_SKIP_REASON = SolvationEngine.probe_qcg_capability()
+
+@pytest.mark.skipif(not _SOLVATION_AVAILABLE, reason=_SOLVATION_SKIP_REASON)
 def test_dft_refiner_explicit_solvation_integration():
     """
     Verify that DFTRefiner correctly triggers SolvationEngine.
