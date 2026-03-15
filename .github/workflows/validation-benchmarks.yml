@@ -1,0 +1,33 @@
+name: Validation Benchmarks
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  run-benchmarks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Conda environment from environment.yml
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          python-version: 3.12
+          activate-environment: maillard
+          environment-file: environment.yml
+          auto-activate-base: false
+
+      - name: Show conda envs
+        run: conda info --envs
+
+      - name: Run benchmarks tests
+        run: |
+          mkdir -p results
+          pytest -q tests/scientific/test_benchmarks.py -s --maxfail=1 2>&1 | tee results/pytest_benchmarks.log
+
+      - name: Upload logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-results
+          path: results/
