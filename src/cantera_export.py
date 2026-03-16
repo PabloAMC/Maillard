@@ -11,6 +11,7 @@ and Girolami's density approximation.
 """
 
 import yaml
+import re
 from typing import Dict, List, Optional, Any
 
 # Scientific stack
@@ -20,6 +21,12 @@ from rdkit.Chem import Descriptors  # noqa: E402
 from src.kinetics import KineticsEngine  # noqa: E402
 from src.barrier_constants import get_arrhenius_params  # noqa: E402
 from src.thermo import get_nasa_coefficients  # noqa: E402
+
+
+def sanitize_cantera_name(name: str) -> str:
+    sanitized = re.sub(r"[^0-9A-Za-z_]+", "_", name)
+    sanitized = re.sub(r"_+", "_", sanitized).strip("_")
+    return sanitized or "species"
 
 
 def _estimate_molar_volume(smiles: str) -> float:
@@ -101,13 +108,16 @@ class CanteraExporter:
                 
             if not name:
                 name = f"S_{len(self.species)}"
-            
-            # Sanitize name for Cantera YAML/Reaction-parsing consistency
-            # Replaces spaces, parentheses, and hyphens with underscores
-            safe_name = name.replace(" ", "_").replace("(", "_").replace(")", "_").replace("-", "_")
-            while "__" in safe_name:
-                safe_name = safe_name.replace("__", "_")
-            safe_name = safe_name.strip("_")
+
+            safe_name = sanitize_cantera_name(name)
+            existing_names = {meta["name"] for existing_smiles, meta in self.species.items() if existing_smiles != smiles}
+            if safe_name in existing_names:
+                suffix = 2
+                unique_name = f"{safe_name}_{suffix}"
+                while unique_name in existing_names:
+                    suffix += 1
+                    unique_name = f"{safe_name}_{suffix}"
+                safe_name = unique_name
 
             self.species[smiles] = {
                 "name": safe_name,

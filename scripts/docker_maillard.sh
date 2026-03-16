@@ -19,6 +19,7 @@ Commands:
   shell        Open an interactive shell in /workspace with the env activated.
   run CMD...   Run an arbitrary command inside the activated env.
   pytest ...   Run pytest inside the activated env.
+  stability    Run the Tier 0/1 stability gate.
   core         Run the core correctness lane.
   scientific   Run the scientific validation lane.
   qm-heavy     Run the QM / external-backend lane.
@@ -35,6 +36,18 @@ EOF
 
 core_lane() {
   run_in_env "python -m pytest tests/unit tests/integration"
+}
+
+stability_lane() {
+  run_in_env "python -m pytest \
+    tests/unit/test_arrhenius_params.py \
+    tests/unit/test_headspace.py \
+    tests/unit/test_safety_and_flux.py \
+    tests/integration/test_recommendation_engine.py \
+    tests/integration/test_cantera_sim.py \
+    tests/integration/test_fft_bottleneck.py \
+    tests/integration/test_regression.py \
+    tests/integration/test_barrier_calibration.py"
 }
 
 scientific_lane() {
@@ -172,6 +185,9 @@ case "$cmd" in
     else
       run_in_env "python -m pytest $*"
     fi
+    ;;
+  stability)
+    stability_lane
     ;;
   core)
     core_lane

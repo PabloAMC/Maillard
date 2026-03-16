@@ -91,6 +91,100 @@ HEME_CATALYST_REDUCTION: float = 5.0
 HEME_CATALYST_FAMILIES = frozenset({"Strecker_Degradation", "Aminoketone_Condensation", "Lipid_Strecker_Synergy"})
 
 
+def _normalize_family_key(reaction_family: Optional[str]) -> str:
+    if not reaction_family:
+        return ""
+    return reaction_family.lower().replace(" ", "_").replace("-", "_")
+
+
+def _canonical_fast_family(reaction_family: Optional[str]) -> str:
+    fm = _normalize_family_key(reaction_family)
+    if not fm:
+        return ""
+    if fm in FAST_BARRIERS:
+        return fm
+
+    if "enolisation" in fm:
+        if "1,2" in str(reaction_family) or "1_2" in fm:
+            return "1,2-enolisation"
+        if "2,3" in str(reaction_family) or "2_3" in fm:
+            return "2,3-enolisation"
+        if "dha" in fm:
+            return "beta_elimination"
+        if "beta" in fm or "elimination" in fm:
+            return "beta_elimination"
+        return "1,2-enolisation"
+    if "schiff" in fm:
+        if "hydrolysis" not in fm and "reversion" not in fm:
+            return "schiff_condensation"
+        return "schiff_base_hydrolysis"
+    if "retro" in fm:
+        return "retro_aldol"
+    if "lipid" in fm and "synergy" in fm:
+        return "lipid_strecker_synergy"
+    if "lipid" in fm:
+        return "lipid_condensation"
+    if "synergy" in fm:
+        return "lipid_strecker_synergy"
+    if "strecker" in fm:
+        return "strecker_degradation"
+    if "amadori" in fm:
+        return "amadori_rearrangement"
+    if "heyns" in fm:
+        return "heyns_rearrangement"
+    if "cysteine" in fm or "thermolysis" in fm:
+        return "cysteine_thermolysis"
+    if "thiol" in fm and "oxidation" in fm:
+        return "thiol_oxidation"
+    if "thiol" in fm and "addition" in fm and "hexose" in fm:
+        return "thiol_addition_hexose"
+    if "thiol" in fm and "addition" in fm:
+        return "thiol_addition"
+    if "pyrazine" in fm or "aminoketone" in fm:
+        return "aminoketone_condensation"
+    if "thiazole" in fm:
+        return "lipid_thiazole"
+    if "beta" in fm:
+        return "beta_elimination"
+    if "ring" in fm or "mutarotation" in fm:
+        return "ring_opening"
+    if "homolysis" in fm:
+        return "lipid_homolysis"
+    if "beta_scission" in fm:
+        return "beta_scission"
+    if "crosstalk" in fm:
+        return "radical_crosstalk"
+    return fm
+
+
+def _arrhenius_yaml_key(family: Optional[str]) -> Optional[str]:
+    canonical_family = _canonical_fast_family(family)
+    if not canonical_family:
+        return None
+    yaml_key_map = {
+        "schiff_condensation": "schiff_condensation",
+        "schiff_base_hydrolysis": None,
+        "amadori_rearrangement": "amadori",
+        "heyns_rearrangement": "amadori",
+        "1,2-enolisation": "enolisation",
+        "2,3-enolisation": "enolisation",
+        "enolisation_intermediate": "enolisation",
+        "dehydration": "dehydration",
+        "strecker_degradation": "strecker",
+        "aminoketone_condensation": "pyrazine_condensation",
+        "cysteine_thermolysis": "cysteine_thermolysis",
+        "thiol_addition": "thiol_addition",
+        "thiol_addition_hexose": "thiol_addition",
+        "retro_aldol": "retro_aldol",
+        "beta_elimination": "beta_elimination_dha",
+        "thiamine_degradation": "thiamine_degradation",
+        "ring_opening": "mutarotation",
+        "mutarotation": "mutarotation",
+        "lipid_thiazole": "pyrazine_condensation",
+    }
+    return yaml_key_map.get(canonical_family)
+
+
 def get_barrier(reaction_family: str) -> Tuple[float, float]:
     """Return the FAST-mode (barrier, uncertainty) for a reaction family.
     
@@ -103,7 +197,7 @@ def get_barrier(reaction_family: str) -> Tuple[float, float]:
     if not reaction_family:
         return DEFAULT_BARRIER, default_unc
         
-    fm = reaction_family.lower().replace(" ", "_").replace("-", "_")
+    fm = _normalize_family_key(reaction_family)
     
     # --- DYNAMIC CALIBRATION OVERRIDES (Phase 1) ---
     import os
@@ -133,62 +227,8 @@ def get_barrier(reaction_family: str) -> Tuple[float, float]:
     # Check exact match first
     if fm in FAST_BARRIERS:
         return FAST_BARRIERS[fm][0] + active_offset, 3.5
-        
-    if "enolisation" in fm:
-        if "1,2" in reaction_family or "1_2" in fm:
-            fm = "1,2-enolisation"
-        elif "2,3" in reaction_family or "2_3" in fm:
-            fm = "2,3-enolisation"
-        elif "dha" in fm:
-            fm = "beta_elimination_dha"
-        elif "beta" in fm:
-            fm = "beta_elimination"
-        elif "elimination" in fm:
-            fm = "beta_elimination"
-        else:
-            fm = "1,2-enolisation" # Default
-    elif "schiff" in fm:
-        if "hydrolysis" not in fm and "reversion" not in fm:
-            fm = "schiff_condensation"
-        else:
-            fm = "schiff_base_hydrolysis"
-    elif "retro" in fm:
-        fm = "retro_aldol"
-    elif "lipid" in fm and "synergy" in fm:
-        fm = "lipid_strecker_synergy"
-    elif "lipid" in fm:
-        fm = "lipid_condensation"
-    elif "synergy" in fm:
-        fm = "lipid_strecker_synergy"
-    elif "strecker" in fm:
-        fm = "strecker_degradation"
-    elif "amadori" in fm:
-        fm = "amadori_rearrangement"
-    elif "heyns" in fm:
-        fm = "heyns_rearrangement"
-    elif "cysteine" in fm or "thermolysis" in fm:
-        fm = "cysteine_thermolysis"
-    elif "thiol" in fm and "oxidation" in fm:
-        fm = "thiol_oxidation"
-    elif "thiol" in fm and "addition" in fm and "hexose" in fm:
-        fm = "thiol_addition_hexose"
-    elif "thiol" in fm and "addition" in fm:
-        fm = "thiol_addition"
-    elif "pyrazine" in fm or "aminoketone" in fm:
-        fm = "aminoketone_condensation"
-    elif "thiazole" in fm:
-        fm = "lipid_thiazole"
-    elif "beta" in fm:
-        fm = "beta_elimination"
-    elif "ring" in fm or "mutarotation" in fm:
-        fm = "ring_opening"
-    elif "homolysis" in fm:
-        fm = "lipid_homolysis"
-    elif "beta_scission" in fm:
-        fm = "beta_scission"
-    elif "crosstalk" in fm:
-        fm = "radical_crosstalk"
-        
+    fm = _canonical_fast_family(reaction_family)
+
     if fm in FAST_BARRIERS:
         return FAST_BARRIERS[fm][0] + active_offset, 3.5
     return DEFAULT_BARRIER + active_offset, 5.0
@@ -218,35 +258,8 @@ def get_arrhenius_params(family: str) -> Optional[Tuple[float, float, str, float
     if not family:
         return None
         
-    fm = family.lower().replace(" ", "_").replace("-", "_")
-    
-    # Normalize to YAML keys
-    yaml_key = None
-    if "schiff" in fm:
-        yaml_key = "schiff_condensation"
-    elif "amadori" in fm:
-        yaml_key = "amadori"
-    elif "enolisation" in fm or ("dehydration" in fm and "thiol" not in fm):
-        yaml_key = "dehydration"
-    elif "strecker" in fm:
-        yaml_key = "strecker"
-    elif "pyrazine" in fm or "aminoketone" in fm:
-        yaml_key = "pyrazine_condensation"
-    elif "cysteine" in fm or "thermolysis" in fm:
-        yaml_key = "cysteine_thermolysis"
-    elif "thiol_addition" in fm:
-        yaml_key = "thiol_addition"
-    elif "retro" in fm:
-        yaml_key = None # No retro_aldol data yet in yaml, only aggregates
-    elif "beta" in fm or "dha" in fm:
-        yaml_key = "beta_elimination_dha"
-    elif "thiamine" in fm:
-        yaml_key = "thiamine_degradation"
-    elif "mutarotation" in fm or "ring" in fm:
-        yaml_key = "mutarotation"
-    elif "thiazole" in fm:
-        yaml_key = "pyrazine_condensation" # Use similar collision factor
-    
+    yaml_key = _arrhenius_yaml_key(family)
+
     if yaml_key and yaml_key in _ARRHENIUS_CACHE:
         entry = _ARRHENIUS_CACHE[yaml_key]
         A = float(entry.get("A_value", 0.0))

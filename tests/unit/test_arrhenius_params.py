@@ -46,3 +46,22 @@ def test_get_arrhenius_params_invalid():
 def test_get_arrhenius_params_normalization():
     # Should normalize "schiff" to "schiff_condensation"
     assert get_arrhenius_params("schiff") == get_arrhenius_params("schiff_condensation")
+
+
+def test_enolisation_uses_enolisation_arrhenius_contract_not_fructose_dehydration():
+    params = get_arrhenius_params("1,2-enolisation")
+    assert params is not None
+    A, ea_kcal, quality, _ = params
+
+    assert A == 1e12
+    assert quality == "literature_estimated"
+    assert abs(ea_kcal - (120.0 / 4.184)) < 0.1
+
+
+def test_fast_enolisation_barrier_stays_close_to_arrhenius_reference():
+    fast_barrier, _ = get_barrier("1,2-enolisation")
+    params = get_arrhenius_params("1,2-enolisation")
+    assert params is not None
+    _, arrhenius_barrier, _, _ = params
+
+    assert abs(fast_barrier - arrhenius_barrier) < 1.0

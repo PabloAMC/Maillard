@@ -4,10 +4,17 @@
 
 The project currently uses a layered benchmark contract rather than a single release number.
 
+- The single source of truth for the benchmark contract now lives in `src/validation_contract.py`.
 - **Coverage**: all measured compounds in a supported benchmark must resolve to predicted outputs.
 - **Ranking**: Pearson R is only reported when at least 3 compounds match.
 - **Scale**: the strict free-amino-acid gate requires full coverage plus a max measured/predicted ratio <= 1.5x.
 - **Support status**: benchmarks that cannot run through the current execution path are reported as `unsupported`, not silently skipped.
+
+The contract now separates three meanings that had started to drift together in docs and tests:
+
+- **Directional validity**: preserves the reported ordering or trend without claiming absolute concentration fidelity.
+- **Quantitative replication**: meets full-coverage plus thresholded Pearson / ratio criteria.
+- **Formulation utility**: remains useful for recipe ranking or intervention comparison even when a benchmark is not strict-ready.
 
 The current benchmark summary artifact is generated with the Docker-validated helper:
 
@@ -58,8 +65,15 @@ As of the current Docker-validated benchmark summary:
 - `cys_ribose_140C_Hofmann1998` is `partial-pass` and `strict-ready`.
 - `cys_ribose_150C_Mottram1994` is `pass` and `strict-ready`.
 - `pea_isolate_40C_PratapSingh2021` is now executable through a dedicated `matrix_only` intake path, with full coverage, but it remains outside the strict release gate.
+- `soy_isolate_40C_PratapSingh2021` is now executable through the same dedicated `matrix_only` intake path, with full coverage, but it also remains outside the strict release gate.
 
-The headspace module now also carries a conservative matrix fallback for `pea_iso` and `soy_iso` when no explicit fat/protein fractions are supplied. That fallback is intentionally tied to the same retention estimates already used in `src/matrix_correction.py`, so unit-level headspace and matrix assumptions no longer drift apart.
+The headspace module now also carries a conservative matrix fallback for `pea_iso` and `soy_iso` when no explicit fat/protein fractions are supplied. That fallback is intentionally tied to the same retention estimates already used in `src/matrix_correction.py`, and those retention estimates now relax with `denaturation_state` in the same way across matrix correction, output projection, and sensory scoring.
+
+The headspace layer now also carries a narrow pH-release correction for plant matrices: in pea/soy systems, acid-sensitive aldehydes and furans are allowed to release more strongly under acidic conditions, anchored so the existing Pratap-Singh pH ~6 baselines remain stable while the Pouvreau pea-isolate family is reproduced as an acidic-vs-less-acidic trend rather than as a forced absolute benchmark with incomplete metadata.
+
+The matrix-accessibility layer now uses explicit native/desaturated endpoints for reactive lysine and cysteine instead of implicitly relaxing all the way to free-amino-acid behavior. In practice, pea-isolate cysteine remains strongly suppressed even after denaturation, matching the repo's literature note that free SH is near undetectable in commercial PPI.
+
+For soy, the current envelope is still conservative, but it is no longer a free-floating placeholder: the repo now anchors it explicitly to the internal plant-protein literature synthesis that describes soy glycinin/β-conglycinin as compact globulins with buried reactive groups, soy as lysine-rich but sulfur-poor relative to meat-like systems, and extrusion / protein-polysaccharide conjugation as the mechanisms that partially reopen accessibility while still trapping volatiles. That is enough to justify the current relative contract `free > soy_iso > pea_iso`, but not enough yet to promote soy into an absolute quantitative accessibility benchmark.
 
 For `matrix_only` today, the contract is narrow and explicit:
 
@@ -68,8 +82,13 @@ For `matrix_only` today, the contract is narrow and explicit:
 - It can appear as `supported` in summary/index outputs while still remaining `strict_ready = False`.
 - It is deliberately omitted from `targets-report` until there is a benchmark-facing target-ranking model for matrix systems.
 - The new `protein_type` headspace fallback is a conservative bridge for unspecified matrix fractions, not a replacement for explicit pea/soy composition calibration.
+- Denaturation-aware retention is now internally consistent across `src/matrix_correction.py`, `src/headspace.py`, `src/recommend.py`, and `src/sensory.py`, but its numeric endpoints are still literature-estimate placeholders rather than benchmark-fitted matrix physics.
+- Denaturation-aware amino-acid accessibility is now explicit too, and canonical lysine/cysteine precursor keys are recognized inside the recommendation path so matrix corrections actually apply to those species.
+- That accessibility contract is now frozen end-to-end by `tests/integration/test_matrix_accessibility_recommendation.py`: sulfur-rich meaty recommendations are penalized in the order `free > soy_iso > pea_iso`, and denatured pea recovers signal without collapsing back to free-amino-acid behavior.
+- The unit layer now freezes the same relative hierarchy in `tests/unit/test_matrix_correction.py`, including the stricter expectation that soy and pea concentrates stay more buried than their corresponding isolates across native, midpoint, and denatured states.
+- pH-dependent plant-matrix headspace validation is now covered as a relative trend check against the Pouvreau pea-isolate family; it is intentionally narrower than the absolute Pratap-Singh intake benchmarks.
 
-This means the framework now has three strict-ready free-amino-acid benchmarks and one executable matrix-headspace intake benchmark (`pea isolate`). The absolute concentration projection is materially better calibrated for the current free-precursor envelope, but the matrix headspace lane should still be treated as an executable intake model rather than a broadly calibrated release gate.
+This means the framework now has three strict-ready free-amino-acid benchmarks and two executable matrix-headspace intake benchmarks (`pea isolate` and `soy isolate`). The absolute concentration projection is materially better calibrated for the current free-precursor envelope, but the matrix headspace lane should still be treated as an executable intake model rather than a broadly calibrated release gate.
 
 ## 3. How We Validate
 

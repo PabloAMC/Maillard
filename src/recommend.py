@@ -18,7 +18,7 @@ from typing import List, Dict, Set, Optional, Any, Tuple
 
 from data.reactions.curated_pathways import PATHWAYS, PATHWAY_METADATA
 from src.headspace import HeadspaceModel
-from src.matrix_correction import MATRIX_CORRECTIONS, ProteinType, apply_matrix_correction
+from src.matrix_correction import ProteinType, apply_matrix_correction, resolve_matrix_correction
 from src.pathway_extractor import Species
 try:
     from rdkit import Chem
@@ -86,6 +86,17 @@ class PrecursorSystem:
     name: str
     precursors: List[str]
     notes: str
+
+
+@dataclass(frozen=True)
+class ProjectionBudget:
+    limiting_precursor_molar: float
+    load_factor: float
+    temperature_factor: float
+    time_factor: float
+    severity: float
+    volatile_yield_fraction: float
+    total_volatile_budget_molar: float
 
 
 SYSTEMS = [
@@ -203,15 +214,53 @@ def _mw_from_smiles(smiles: str) -> float:
 
 
 def _thermal_severity(temperature_kelvin: float, time_minutes: Optional[float]) -> float:
+    return _projection_temperature_factor(temperature_kelvin) * _projection_time_factor(time_minutes)
+
+
+def _projection_temperature_factor(temperature_kelvin: float) -> float:
     import math
 
     temp_c = temperature_kelvin - 273.15
-    temp_factor = 1.0 / (1.0 + math.exp(-(temp_c - 110.0) / 18.0))
+    return 1.0 / (1.0 + math.exp(-(temp_c - 110.0) / 18.0))
+
+
+def _projection_time_factor(time_minutes: Optional[float]) -> float:
+    import math
+
     if time_minutes is None:
-        time_factor = 1.0
-    else:
-        time_factor = 1.0 - math.exp(-max(time_minutes, 0.0) / 25.0)
-    return temp_factor * time_factor
+        return 1.0
+    return 1.0 - math.exp(-max(time_minutes, 0.0) / 25.0)
+
+
+def _estimate_projection_budget(
+    corrected_initial: Dict[str, float],
+    temperature_kelvin: float,
+    time_minutes: Optional[float],
+) -> ProjectionBudget:
+    if not corrected_initial:
+        return ProjectionBudget(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+
+    positive_values = [max(float(value), 0.0) for value in corrected_initial.values() if float(value) > 0.0]
+    if not positive_values:
+        return ProjectionBudget(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+
+    limiting_precursor_molar = min(positive_values) / 1000.0
+    load_factor = _relative_precursor_load_factor(corrected_initial)
+    temperature_factor = _projection_temperature_factor(temperature_kelvin)
+    time_factor = _projection_time_factor(time_minutes)
+    severity = temperature_factor * time_factor
+    volatile_yield_fraction = 1.0e-6 + 1.5e-3 * severity
+    total_volatile_budget_molar = limiting_precursor_molar * volatile_yield_fraction * max(load_factor, 0.0)
+
+    return ProjectionBudget(
+        limiting_precursor_molar=float(limiting_precursor_molar),
+        load_factor=float(max(load_factor, 0.0)),
+        temperature_factor=float(temperature_factor),
+        time_factor=float(time_factor),
+        severity=float(severity),
+        volatile_yield_fraction=float(volatile_yield_fraction),
+        total_volatile_budget_molar=float(max(total_volatile_budget_molar, 0.0)),
+    )
 
 
 def _temporal_accessibility(total_tau_minutes: float, time_minutes: Optional[float]) -> float:
@@ -412,8 +461,10 @@ def _apply_output_projection(
     target_lookup: Dict[str, Dict[str, Any]],
     temperature_kelvin: float,
     protein_type: str,
+    denaturation_state: float = 0.5,
     fat_fraction: float = 0.0,
     protein_fraction: float = 0.0,
+    projection_budget: Optional[ProjectionBudget] = None,
 ) -> Tuple[Dict[str, float], Dict[str, Dict[str, float]]]:
     p_type = ProteinType(protein_type)
     fat_eff, protein_eff, explicit_matrix_fractions = _resolve_output_matrix_context(
@@ -425,12 +476,22 @@ def _apply_output_projection(
     if explicit_matrix_fractions:
         fallback_matrix_factor = 1.0
     else:
-        fallback_matrix_factor = float(
-            MATRIX_CORRECTIONS.get(p_type, MATRIX_CORRECTIONS[ProteinType.FREE_AMINO_ACID]).volatile_retention
-        )
+        fallback_matrix_factor = float(resolve_matrix_correction(p_type, denaturation_state).volatile_retention)
 
     observable_ppb: Dict[str, float] = {}
     projection_metadata: Dict[str, Dict[str, float]] = {}
+
+    budget_metadata = {}
+    if projection_budget is not None:
+        budget_metadata = {
+            "limiting_precursor_molar": float(projection_budget.limiting_precursor_molar),
+            "projection_load_factor": float(projection_budget.load_factor),
+            "projection_temperature_factor": float(projection_budget.temperature_factor),
+            "projection_time_factor": float(projection_budget.time_factor),
+            "projection_severity": float(projection_budget.severity),
+            "volatile_yield_fraction": float(projection_budget.volatile_yield_fraction),
+            "total_volatile_budget_molar": float(projection_budget.total_volatile_budget_molar),
+        }
 
     for canon, raw_value in raw_concentrations.items():
         species = species_catalog.get(canon)
@@ -441,6 +502,7 @@ def _apply_output_projection(
                 "matrix_factor": float(fallback_matrix_factor),
                 "headspace_factor": 1.0,
                 "observable_ppb": float(observable_ppb[canon]),
+                **budget_metadata,
             }
             continue
 
@@ -458,6 +520,7 @@ def _apply_output_projection(
             "matrix_factor": float(fallback_matrix_factor),
             "headspace_factor": float(headspace_factor),
             "observable_ppb": float(observable_value),
+            **budget_metadata,
         }
 
     return observable_ppb, projection_metadata
@@ -529,20 +592,16 @@ def _project_weighted_flux_to_ppb(
 ) -> Dict[str, float]:
     import math
 
-    if not corrected_initial:
+    projection_budget = _estimate_projection_budget(
+        corrected_initial,
+        temperature_kelvin,
+        time_minutes,
+    )
+    if projection_budget.total_volatile_budget_molar <= 0.0:
         return {}
 
-    limiting_precursor_molar = max(min(corrected_initial.values()), 0.0) / 1000.0
-    if limiting_precursor_molar <= 0.0:
-        return {}
-
-    load_factor = _relative_precursor_load_factor(corrected_initial)
-    if load_factor <= 0.0:
-        return {}
-
-    severity = _thermal_severity(temperature_kelvin, time_minutes)
-    volatile_yield_fraction = 1.0e-6 + 1.5e-3 * severity
-    total_volatile_budget_molar = limiting_precursor_molar * volatile_yield_fraction * load_factor
+    severity = projection_budget.severity
+    total_volatile_budget_molar = projection_budget.total_volatile_budget_molar
 
     projected_species = _select_accumulating_projection_species(
         steps,
@@ -596,12 +655,6 @@ def _project_weighted_flux_to_ppb(
         mol_fraction = activity / total_activity
         molar_concentration = total_volatile_budget_molar * mol_fraction
         projected_ppb[canon] = molar_concentration * _mw_from_smiles(canon) * 1e6
-
-    for canon in list(projected_ppb):
-        species = species_catalog.get(canon)
-        if species is None:
-            continue
-        projected_ppb[canon] *= _headspace_observability_factor(species, target_lookup, temperature_kelvin)
     return projected_ppb
 
 
@@ -901,14 +954,22 @@ class Recommender:
             time_minutes,
         )
 
+        projection_budget = _estimate_projection_budget(
+            corrected_initial,
+            temperature_kelvin,
+            time_minutes,
+        )
+
         observable_volatiles, projection_metadata = _apply_output_projection(
             raw_concentrations,
             species_catalog,
             target_lookup,
             temperature_kelvin,
             protein_type=protein_type,
+            denaturation_state=denaturation_state,
             fat_fraction=fat_fraction,
             protein_fraction=protein_fraction,
+            projection_budget=projection_budget,
         )
         proxy_volatiles = dict(raw_concentrations)
         
@@ -1072,6 +1133,15 @@ class Recommender:
             "predicted_ppb": final_volatiles,
             "predicted_proxy_ppb": final_proxy_volatiles,
             "projection_metadata": projection_metadata,
+            "projection_context": {
+                "limiting_precursor_molar": float(projection_budget.limiting_precursor_molar),
+                "projection_load_factor": float(projection_budget.load_factor),
+                "projection_temperature_factor": float(projection_budget.temperature_factor),
+                "projection_time_factor": float(projection_budget.time_factor),
+                "projection_severity": float(projection_budget.severity),
+                "volatile_yield_fraction": float(projection_budget.volatile_yield_fraction),
+                "total_volatile_budget_molar": float(projection_budget.total_volatile_budget_molar),
+            },
             "debug_paths": best_paths,
             "species_names": species_name_lookup,
         }

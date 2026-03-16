@@ -10,7 +10,7 @@ import yaml
 from pathlib import Path
 from typing import Dict, Optional, List
 
-from src.matrix_correction import MATRIX_CORRECTIONS, ProteinType
+from src.matrix_correction import ProteinType, resolve_matrix_correction
 
 class HeadspaceModel:
     """
@@ -100,6 +100,7 @@ class HeadspaceModel:
         protein_type: Optional[str],
         fat_fraction: float,
         protein_fraction: float,
+        denaturation_state: float,
     ) -> float:
         if fat_fraction > 0.0 or protein_fraction > 0.0 or not protein_type:
             return 1.0
@@ -111,18 +112,60 @@ class HeadspaceModel:
 
         if p_type == ProteinType.FREE_AMINO_ACID:
             return 1.0
+        return float(resolve_matrix_correction(p_type, denaturation_state).volatile_retention)
 
-        corr = MATRIX_CORRECTIONS.get(p_type)
-        if corr is None:
+    def get_matrix_ph_release_factor(
+        self,
+        name: str,
+        *,
+        protein_type: Optional[str],
+        pH: Optional[float],
+    ) -> float:
+        """
+        Empirical pH-dependent headspace release factor for plant matrices.
+
+        The current calibration is intentionally narrow:
+        - anchored to pH 6.0 so the existing Pratap-Singh matrix-only baselines stay stable
+        - only applied to pea/soy matrix types
+        - only applied to acid-sensitive lipid-derived off-flavour markers
+        - tuned so pH 4.5 vs 6.5 yields roughly the ~1.6x enhancement reported by
+          the Pouvreau pea-isolate benchmark family for aldehydes/furans
+        """
+        if pH is None or not protein_type:
             return 1.0
-        return float(corr.volatile_retention)
+
+        try:
+            p_type = ProteinType(protein_type)
+        except ValueError:
+            return 1.0
+
+        if p_type not in {
+            ProteinType.PEA_ISOLATE,
+            ProteinType.PEA_CONCENTRATE,
+            ProteinType.SOY_ISOLATE,
+            ProteinType.SOY_CONCENTRATE,
+        }:
+            return 1.0
+
+        compound = name.lower()
+        acid_sensitive = any(token in compound for token in ["anal", "enal", "furan"])
+        if not acid_sensitive:
+            return 1.0
+
+        # Reference pH is the ambient plant-isolate baseline already used in the
+        # current executable matrix-only benchmarks.
+        centered_delta = 6.0 - float(pH)
+        factor = math.exp(0.235 * centered_delta)
+        return max(0.75, min(1.6, factor))
 
     def predict_headspace(self, 
                           matrix_concentrations: Dict[str, float], 
                           temp_c: float, 
                           fat_fraction: float = 0.0,
                           protein_fraction: float = 0.0,
-                          protein_type: Optional[str] = None) -> Dict[str, float]:
+                          protein_type: Optional[str] = None,
+                          denaturation_state: float = 0.5,
+                          pH: Optional[float] = None) -> Dict[str, float]:
         """
         Predicts air-phase concentrations (ppm).
         
@@ -132,6 +175,9 @@ class HeadspaceModel:
         If no explicit matrix fractions are provided, `protein_type` can supply
         a conservative fallback retention calibrated from the matrix-correction
         literature estimates already used elsewhere in the project.
+
+        `pH` is optional and currently only applies an empirical plant-matrix
+        release correction for acid-sensitive aldehydes/furans in pea/soy systems.
         """
         temp_k = temp_c + 273.15
         air_concs = {}
@@ -139,11 +185,17 @@ class HeadspaceModel:
             protein_type,
             fat_fraction,
             protein_fraction,
+            denaturation_state,
         )
         
         for name, c_total in matrix_concentrations.items():
             entry = self.data.get(name)
             kaw_base = self.get_kaw_at_temp(name, temp_k)
+            ph_release_factor = self.get_matrix_ph_release_factor(
+                name,
+                protein_type=protein_type,
+                pH=pH,
+            )
             
             if entry:
                 k_fat = entry.get("Kfat", 1.0)
@@ -153,10 +205,10 @@ class HeadspaceModel:
                 denom = 1.0 + (k_fat * fat_fraction) + (k_prot * protein_fraction)
                 kaw_eff = kaw_base / denom
                 
-                air_concs[name] = c_total * kaw_eff * matrix_retention
+                air_concs[name] = c_total * kaw_eff * matrix_retention * ph_release_factor
             else:
                 # Basic fallback
-                air_concs[name] = c_total * kaw_base * matrix_retention
+                air_concs[name] = c_total * kaw_base * matrix_retention * ph_release_factor
                 
         return air_concs
 

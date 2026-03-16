@@ -66,6 +66,35 @@ def test_matrix_retention_fallback_uses_pea_and_soy_profiles_when_fractions_are_
     assert air_soy["Furfural"] > air_pea["Furfural"]
 
 
+def test_denaturation_state_relaxes_headspace_fallback_when_fractions_are_unspecified():
+    model = HeadspaceModel()
+    matrix = {"Furfural": 1.0}
+
+    air_native = model.predict_headspace(matrix, 25.0, protein_type="pea_iso", denaturation_state=0.0)
+    air_mid = model.predict_headspace(matrix, 25.0, protein_type="pea_iso", denaturation_state=0.5)
+    air_denatured = model.predict_headspace(matrix, 25.0, protein_type="pea_iso", denaturation_state=1.0)
+
+    assert air_native["Furfural"] < air_mid["Furfural"] < air_denatured["Furfural"]
+
+
+def test_acidic_ph_increases_plant_matrix_release_for_acid_sensitive_off_flavour_markers():
+    model = HeadspaceModel()
+    matrix = {
+        "Hexanal": 1.0,
+        "Nonanal": 1.0,
+        "2-Pentylfuran": 1.0,
+        "2,5-Dimethylpyrazine": 1.0,
+    }
+
+    air_acid = model.predict_headspace(matrix, 40.0, protein_type="pea_iso", pH=4.5)
+    air_neutral = model.predict_headspace(matrix, 40.0, protein_type="pea_iso", pH=6.5)
+
+    assert air_acid["Hexanal"] / air_neutral["Hexanal"] == pytest.approx(1.6, rel=0.08)
+    assert air_acid["Nonanal"] / air_neutral["Nonanal"] == pytest.approx(1.6, rel=0.08)
+    assert air_acid["2-Pentylfuran"] / air_neutral["2-Pentylfuran"] == pytest.approx(1.6, rel=0.08)
+    assert air_acid["2,5-Dimethylpyrazine"] == pytest.approx(air_neutral["2,5-Dimethylpyrazine"])
+
+
 def test_explicit_matrix_fractions_override_retention_fallback():
     model = HeadspaceModel()
     matrix = {"Methional": 1.0}

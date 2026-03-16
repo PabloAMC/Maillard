@@ -13,6 +13,7 @@ def test_benchmark_index_marks_matrix_only_scope_gaps_explicitly():
     entries = build_benchmark_index([
         ROOT / "data" / "benchmarks" / "cys_glucose_150C_Farmer1999.json",
         ROOT / "data" / "benchmarks" / "pea_isolate_40C_PratapSingh2021.json",
+        ROOT / "data" / "benchmarks" / "soy_isolate_40C_PratapSingh2021.json",
     ])
     by_id = {entry.benchmark_id: entry for entry in entries}
 
@@ -21,12 +22,17 @@ def test_benchmark_index_marks_matrix_only_scope_gaps_explicitly():
     assert by_id["pea_isolate_40C_PratapSingh2021"].supported is True
     assert by_id["pea_isolate_40C_PratapSingh2021"].strict_ready is False
     assert by_id["pea_isolate_40C_PratapSingh2021"].status in {"pass", "partial-pass", "scale-gap", "ranking-gap"}
+    assert by_id["soy_isolate_40C_PratapSingh2021"].execution_path == "matrix_only"
+    assert by_id["soy_isolate_40C_PratapSingh2021"].supported is True
+    assert by_id["soy_isolate_40C_PratapSingh2021"].strict_ready is False
+    assert by_id["soy_isolate_40C_PratapSingh2021"].status in {"pass", "partial-pass", "scale-gap", "ranking-gap"}
 
 
 def test_benchmark_index_markdown_exposes_execution_path():
     entries = build_benchmark_index([
         ROOT / "data" / "benchmarks" / "cys_glucose_150C_Farmer1999.json",
         ROOT / "data" / "benchmarks" / "pea_isolate_40C_PratapSingh2021.json",
+        ROOT / "data" / "benchmarks" / "soy_isolate_40C_PratapSingh2021.json",
     ])
 
     markdown = render_benchmark_index_markdown(entries)

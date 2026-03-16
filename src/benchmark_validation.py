@@ -9,10 +9,12 @@ from pathlib import Path
 from typing import Dict, Iterable, List, Optional
 
 from src.conditions import ReactionConditions
+from src.headspace import HeadspaceModel
 from src.lipid_oxidation import PEA_LIPID_PROFILE, SOY_LIPID_PROFILE, predict_hexanal_generation
 from src.inverse_design import InverseDesigner
 from src.precursor_resolver import resolve_many
 from src.smirks_engine import SmirksEngine
+from src.validation_contract import BenchmarkThresholds, DEFAULT_VALIDATION_CONTRACT
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -49,10 +51,12 @@ MATRIX_BENCHMARK_PROFILES = {
     },
     "soy_iso": {
         "lipid_profile": SOY_LIPID_PROFILE,
+        # Empirical headspace-marker yields from the same Pratap-Singh 2021
+        # ambient-slurry benchmark family used for the pea intake lane.
         "marker_yields": {
-            "Hexanal": 0.235,
-            "2-Pentylfuran": 0.465,
-            "1-Hexanol": 0.058,
+            "Hexanal": 0.453,
+            "2-Pentylfuran": 2.972,
+            "1-Hexanol": 0.143,
             "Nonanal": 0.160,
         },
     },
@@ -147,13 +151,6 @@ class BenchmarkSummary:
 
 
 @dataclass(frozen=True)
-class BenchmarkThresholds:
-    ranking_threshold: float = 0.85
-    free_aa_ratio_threshold: float = 1.5
-    matrix_ratio_threshold: float = 2.0
-
-
-@dataclass(frozen=True)
 class BenchmarkTargetSnapshot:
     benchmark_id: str
     bench_file: Path
@@ -170,7 +167,7 @@ class BenchmarkTargetSnapshot:
     henry_source_name: Optional[str]
 
 
-DEFAULT_BENCHMARK_THRESHOLDS = BenchmarkThresholds()
+DEFAULT_BENCHMARK_THRESHOLDS = DEFAULT_VALIDATION_CONTRACT.thresholds
 
 
 def is_matrix_only_benchmark(bench: dict | Path | str) -> bool:
@@ -446,10 +443,17 @@ def _run_matrix_only_benchmark_prediction(bench: dict) -> dict:
         oxygen_availability=1.0,
     )
     oxidation_load_ppb = float(oxidation["total_hydroperoxide"]) * 1000.0
+    headspace_model = HeadspaceModel()
+    pH = conditions.get("ph")
 
     predicted_ppb: Dict[str, float] = {}
     for compound, yield_factor in model["marker_yields"].items():
-        predicted_ppb[compound] = oxidation_load_ppb * float(yield_factor)
+        ph_release_factor = headspace_model.get_matrix_ph_release_factor(
+            compound,
+            protein_type=protein_type,
+            pH=pH,
+        )
+        predicted_ppb[compound] = oxidation_load_ppb * float(yield_factor) * ph_release_factor
 
     return {
         "targets": [],
@@ -463,7 +467,11 @@ def _run_matrix_only_benchmark_prediction(bench: dict) -> dict:
             compound: {
                 "proxy_ppb": value,
                 "matrix_factor": 1.0,
-                "headspace_factor": 1.0,
+                "headspace_factor": headspace_model.get_matrix_ph_release_factor(
+                    compound,
+                    protein_type=protein_type,
+                    pH=pH,
+                ),
                 "observable_ppb": value,
             }
             for compound, value in predicted_ppb.items()
@@ -528,11 +536,7 @@ def summarize_evaluation(
     ratios = [comparison.ratio for comparison in matched if math.isfinite(comparison.ratio)]
     max_ratio = max(ratios) if ratios else None
     mean_ratio = sum(ratios) / len(ratios) if ratios else None
-    ratio_threshold = (
-        thresholds.free_aa_ratio_threshold
-        if protein_type == "free"
-        else thresholds.matrix_ratio_threshold
-    )
+    ratio_threshold = thresholds.ratio_threshold_for(protein_type)
 
     if not evaluation.supported:
         return BenchmarkSummary(
@@ -558,7 +562,7 @@ def summarize_evaluation(
             blocking_issues=[evaluation.reason or "unsupported"],
         )
 
-    if len(matched) >= 3 and evaluation.pearson_r is not None:
+    if len(matched) >= thresholds.min_matched_for_ranking and evaluation.pearson_r is not None:
         ranking_status = "pass" if evaluation.pearson_r >= thresholds.ranking_threshold else "fail"
     elif len(matched) > 0:
         ranking_status = "n/a"
@@ -573,7 +577,7 @@ def summarize_evaluation(
         scale_status = "fail"
 
     overall_status = "pass"
-    if evaluation.coverage < 1.0:
+    if evaluation.coverage < thresholds.full_coverage_threshold:
         overall_status = "coverage-gap"
     elif ranking_status == "fail":
         overall_status = "ranking-gap"
@@ -583,8 +587,10 @@ def summarize_evaluation(
         overall_status = "partial-pass"
 
     blocking_issues: List[str] = []
-    if evaluation.coverage < 1.0:
-        blocking_issues.append(f"coverage {evaluation.coverage:.1%} < 100%")
+    if evaluation.coverage < thresholds.full_coverage_threshold:
+        blocking_issues.append(
+            f"coverage {evaluation.coverage:.1%} < {thresholds.full_coverage_threshold:.0%}"
+        )
     if ranking_status == "fail":
         pearson = "n/a" if evaluation.pearson_r is None else f"{evaluation.pearson_r:.3f}"
         blocking_issues.append(
@@ -598,8 +604,15 @@ def summarize_evaluation(
 
     bench = load_benchmark(evaluation.bench_file)
     metadata = get_benchmark_metadata(bench)
-    strict_ready = evaluation.coverage == 1.0 and ranking_status != "fail" and scale_status == "pass"
-    if metadata.execution_path == "matrix_only":
+    strict_ready = (
+        evaluation.coverage >= thresholds.full_coverage_threshold
+        and ranking_status != "fail"
+        and scale_status == "pass"
+    )
+    if not DEFAULT_VALIDATION_CONTRACT.is_strict_gate_eligible(
+        tier=metadata.tier,
+        execution_path=metadata.execution_path,
+    ):
         strict_ready = False
         if not blocking_issues:
             blocking_issues.append("matrix-only intake path is executable but not yet in the strict release gate")

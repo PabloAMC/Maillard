@@ -41,6 +41,7 @@ def test_benchmark_targets_markdown_reports_matrix_only_exclusions():
     rows = snapshot_all_benchmark_targets([
         ROOT / "data" / "benchmarks" / "cys_glucose_150C_Farmer1999.json",
         ROOT / "data" / "benchmarks" / "pea_isolate_40C_PratapSingh2021.json",
+        ROOT / "data" / "benchmarks" / "soy_isolate_40C_PratapSingh2021.json",
     ])
 
     markdown = render_benchmark_targets_markdown(
@@ -48,11 +49,13 @@ def test_benchmark_targets_markdown_reports_matrix_only_exclusions():
         excluded_benchmark_ids=get_matrix_only_target_snapshot_exclusions([
             ROOT / "data" / "benchmarks" / "cys_glucose_150C_Farmer1999.json",
             ROOT / "data" / "benchmarks" / "pea_isolate_40C_PratapSingh2021.json",
+            ROOT / "data" / "benchmarks" / "soy_isolate_40C_PratapSingh2021.json",
         ]),
     )
 
     assert "Excluded matrix-only benchmarks:" in markdown
     assert "pea_isolate_40C_PratapSingh2021" in markdown
+    assert "soy_isolate_40C_PratapSingh2021" in markdown
 
 
 def test_benchmark_targets_keep_low_headspace_markers_well_below_observable_outputs():
