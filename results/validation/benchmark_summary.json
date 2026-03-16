@@ -19,7 +19,13 @@
     "scale_status": "pass",
     "overall_status": "pass",
     "strict_ready": true,
-    "blocking_issues": []
+    "blocking_issues": [],
+    "conditions": {
+      "temp_C": 150,
+      "ph": 5.5,
+      "water_activity": 0.95,
+      "time_min": 60
+    }
   },
   {
     "benchmark_id": "cys_ribose_140C_Hofmann1998",
@@ -41,7 +47,13 @@
     "scale_status": "pass",
     "overall_status": "partial-pass",
     "strict_ready": true,
-    "blocking_issues": []
+    "blocking_issues": [],
+    "conditions": {
+      "temp_C": 140,
+      "ph": 5.0,
+      "water_activity": 0.98,
+      "time_min": 30
+    }
   },
   {
     "benchmark_id": "cys_ribose_150C_Mottram1994",
@@ -63,7 +75,13 @@
     "scale_status": "pass",
     "overall_status": "pass",
     "strict_ready": true,
-    "blocking_issues": []
+    "blocking_issues": [],
+    "conditions": {
+      "temp_C": 150,
+      "ph": 5.5,
+      "water_activity": 0.95,
+      "time_min": 60
+    }
   },
   {
     "benchmark_id": "pea_isolate_40C_PratapSingh2021",
@@ -87,7 +105,13 @@
     "strict_ready": false,
     "blocking_issues": [
       "matrix-only intake path is executable but not yet in the strict release gate"
-    ]
+    ],
+    "conditions": {
+      "temp_C": 40,
+      "ph": 6.0,
+      "water_activity": 0.95,
+      "time_min": 10
+    }
   },
   {
     "benchmark_id": "soy_isolate_40C_PratapSingh2021",
@@ -111,6 +135,12 @@
     "strict_ready": false,
     "blocking_issues": [
       "matrix-only intake path is executable but not yet in the strict release gate"
-    ]
+    ],
+    "conditions": {
+      "temp_C": 40,
+      "ph": 6.0,
+      "water_activity": 0.95,
+      "time_min": 10
+    }
   }
 ]
