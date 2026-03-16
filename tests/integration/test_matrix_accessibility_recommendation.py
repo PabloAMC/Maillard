@@ -1,0 +1,56 @@
+import sys
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from src.inverse_design import InverseDesigner
+from src.smirks_engine import ReactionConditions
+
+
+def _matrix_accessibility_probe(protein_type: str, denaturation_state: float):
+    designer = InverseDesigner(target_tag="meaty", minimize_tag="beany")
+    formulation = {
+        "name": f"matrix_probe_{protein_type}_{denaturation_state}",
+        "sugars": ["ribose"],
+        "amino_acids": ["cysteine", "lysine"],
+        "molar_ratios": {
+            "cysteine": 1200.0,
+            "lysine": 800.0,
+            "ribose": 1000.0,
+        },
+        "time_minutes": 30,
+        "temp": 140.0,
+        "ph": 5.5,
+        "aw": 0.95,
+        "protein_type": protein_type,
+        "denaturation_state": denaturation_state,
+    }
+    conditions = ReactionConditions(pH=5.5, temperature_celsius=140.0, water_activity=0.95)
+    return designer.evaluate_single(formulation, conditions)
+
+
+def test_matrix_accessibility_penalizes_sulfurous_meaty_prediction_in_recommendation_path():
+    result_free = _matrix_accessibility_probe("free", 0.0)
+    result_soy = _matrix_accessibility_probe("soy_iso", 0.0)
+    result_pea = _matrix_accessibility_probe("pea_iso", 0.0)
+
+    assert result_free.target_score > result_soy.target_score > result_pea.target_score
+    assert result_free.predicted_ppb["2-Methyl-3-furanthiol (MFT)"] > result_soy.predicted_ppb["2-Methyl-3-furanthiol (MFT)"] > result_pea.predicted_ppb["2-Methyl-3-furanthiol (MFT)"]
+    assert result_free.predicted_ppb["2-Furfurylthiol (FFT)"] > result_soy.predicted_ppb["2-Furfurylthiol (FFT)"] > result_pea.predicted_ppb["2-Furfurylthiol (FFT)"]
+
+
+def test_pea_denaturation_recovers_signal_without_collapsing_back_to_free_amino_acid_behavior():
+    result_free = _matrix_accessibility_probe("free", 0.0)
+    result_pea_native = _matrix_accessibility_probe("pea_iso", 0.0)
+    result_pea_denatured = _matrix_accessibility_probe("pea_iso", 1.0)
+
+    assert result_pea_denatured.target_score > result_pea_native.target_score
+    assert result_pea_denatured.predicted_ppb["2-Methyl-3-furanthiol (MFT)"] > result_pea_native.predicted_ppb["2-Methyl-3-furanthiol (MFT)"]
+    assert result_pea_denatured.predicted_ppb["2-Furfurylthiol (FFT)"] > result_pea_native.predicted_ppb["2-Furfurylthiol (FFT)"]
+
+    assert result_pea_denatured.target_score < result_free.target_score
+    assert result_pea_denatured.predicted_ppb["2-Methyl-3-furanthiol (MFT)"] < result_free.predicted_ppb["2-Methyl-3-furanthiol (MFT)"]
+    assert result_pea_denatured.predicted_ppb["2-Furfurylthiol (FFT)"] < result_free.predicted_ppb["2-Furfurylthiol (FFT)"]

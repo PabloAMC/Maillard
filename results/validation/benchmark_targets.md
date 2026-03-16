@@ -8,7 +8,7 @@
 | cys_glucose_150C_Farmer1999 | 2-Methyl-3-furanthiol (MFT) | desirable | desirable | 13.419 | 29.786 | 4 | observable | 9.500e-05 | 2-Methyl-3-furanthiol (MFT) |
 | cys_glucose_150C_Farmer1999 | Bis(2-methyl-3-furyl) disulfide | desirable | desirable | 8.614 | 30.070 | 5 | assumed_observable | n/a | n/a |
 | cys_glucose_150C_Farmer1999 | Hydrogen Sulfide | desirable | desirable | 0.000 | 17.999 | 1 | observable | 4.500e-01 | Hydrogen Sulfide |
-| cys_glucose_150C_Farmer1999 | 5-Hydroxymethylfurfural (HMF) | toxic | toxic | 0.000 | 28.685 | 4 | low_headspace | 1.000e-10 | 5-Hydroxymethylfurfural (HMF) |
+| cys_glucose_150C_Farmer1999 | 5-Hydroxymethylfurfural (HMF) | toxic | toxic | 0.016 | 28.685 | 4 | low_headspace | 1.000e-10 | 5-Hydroxymethylfurfural (HMF) |
 | cys_ribose_140C_Hofmann1998 | Furfural | competing | competing | 420.911 | 29.259 | 4 | observable | 1.500e-05 | Furfural |
 | cys_ribose_140C_Hofmann1998 | 2-Methyl-3-furanthiol (MFT) | desirable | desirable | 237.230 | 29.530 | 4 | observable | 9.500e-05 | 2-Methyl-3-furanthiol (MFT) |
 | cys_ribose_140C_Hofmann1998 | 2-Furfurylthiol (FFT) | desirable | desirable | 198.018 | 29.299 | 6 | observable | 8.400e-05 | 2-Furfurylthiol (FFT) |
@@ -24,5 +24,5 @@
 
 Target rows: 19
 Low-headspace rows: 1
-Excluded matrix-only benchmarks: pea_isolate_40C_PratapSingh2021
+Excluded matrix-only benchmarks: pea_isolate_40C_PratapSingh2021, soy_isolate_40C_PratapSingh2021
 These benchmarks remain executable through summary/index artefacts, but they are deliberately omitted from target snapshots because they do not run through the free-precursor FAST target-ranking path.

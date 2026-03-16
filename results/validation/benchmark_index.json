@@ -46,5 +46,17 @@
     "reason": null,
     "status": "pass",
     "strict_ready": false
+  },
+  {
+    "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+    "bench_file": "/workspace/data/benchmarks/soy_isolate_40C_PratapSingh2021.json",
+    "tier": "PRIMARY",
+    "family": "matrix_headspace",
+    "protein_type": "soy_iso",
+    "execution_path": "matrix_only",
+    "supported": true,
+    "reason": null,
+    "status": "pass",
+    "strict_ready": false
   }
 ]

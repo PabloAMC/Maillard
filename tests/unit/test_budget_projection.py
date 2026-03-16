@@ -8,7 +8,9 @@ from src.recommend import (
     Recommender,
     _apply_output_projection,
     _canon,
+    _estimate_projection_budget,
     _headspace_observability_factor,
+    _mw_from_smiles,
     _project_weighted_flux_to_ppb,
     _is_budget_relevant_species,
     _is_observable_target_species,
@@ -185,7 +187,9 @@ def test_projection_downweights_low_headspace_targets_in_budget_allocation():
         time_minutes=30.0,
     )
 
-    assert projected[_canon(furfural.smiles)] > projected[_canon(hmf.smiles)] * 50.0
+    expected_ratio = _mw_from_smiles(furfural.smiles) / _mw_from_smiles(hmf.smiles)
+    observed_ratio = projected[_canon(furfural.smiles)] / projected[_canon(hmf.smiles)]
+    assert observed_ratio == pytest.approx(expected_ratio, rel=1.0e-3)
 
 
 def test_low_headspace_factor_is_temperature_aware_but_stays_conservative():
@@ -234,7 +238,51 @@ def test_output_projection_exposes_proxy_and_observable_channels():
     assert metadata[_canon(furfural.smiles)]["proxy_ppb"] == pytest.approx(100.0)
     assert metadata[_canon(furfural.smiles)]["observable_ppb"] == pytest.approx(observable[_canon(furfural.smiles)])
     assert observable[_canon(furfural.smiles)] == pytest.approx(100.0)
+    assert metadata[_canon(hmf.smiles)]["proxy_ppb"] == pytest.approx(100.0)
     assert observable[_canon(hmf.smiles)] < 10.0
+    assert observable[_canon(hmf.smiles)] < metadata[_canon(hmf.smiles)]["proxy_ppb"]
+
+
+def test_projection_budget_increases_with_temperature_time_and_load():
+    low_temp = _estimate_projection_budget({"ribose": 100.0, "cysteine": 100.0}, 373.15, 5.0)
+    high_temp = _estimate_projection_budget({"ribose": 100.0, "cysteine": 100.0}, 423.15, 5.0)
+    long_time = _estimate_projection_budget({"ribose": 100.0, "cysteine": 100.0}, 423.15, 60.0)
+    high_load = _estimate_projection_budget({"ribose": 400.0, "cysteine": 400.0}, 423.15, 60.0)
+
+    assert high_temp.temperature_factor > low_temp.temperature_factor
+    assert high_temp.total_volatile_budget_molar > low_temp.total_volatile_budget_molar
+    assert long_time.time_factor > high_temp.time_factor
+    assert long_time.total_volatile_budget_molar > high_temp.total_volatile_budget_molar
+    assert high_load.limiting_precursor_molar > long_time.limiting_precursor_molar
+    assert high_load.total_volatile_budget_molar > long_time.total_volatile_budget_molar
+
+
+def test_output_projection_metadata_exposes_budget_context():
+    furfural = Species("furfural", "O=Cc1ccco1")
+    raw = {
+        _canon(furfural.smiles): 25.0,
+    }
+    species_catalog = {
+        _canon(furfural.smiles): furfural,
+    }
+    target_lookup = {
+        _canon(furfural.smiles): {"name": "Furfural", "type": "desirable", "data": {}},
+    }
+    budget = _estimate_projection_budget({"ribose": 100.0, "cysteine": 100.0}, 423.15, 30.0)
+
+    _observable, metadata = _apply_output_projection(
+        raw,
+        species_catalog,
+        target_lookup,
+        temperature_kelvin=423.15,
+        protein_type="free",
+        projection_budget=budget,
+    )
+
+    projection = metadata[_canon(furfural.smiles)]
+    assert projection["total_volatile_budget_molar"] == pytest.approx(budget.total_volatile_budget_molar)
+    assert projection["projection_temperature_factor"] == pytest.approx(budget.temperature_factor)
+    assert projection["projection_time_factor"] == pytest.approx(budget.time_factor)
 
 
 def test_output_projection_uses_matrix_retention_fallback_when_fractions_are_unspecified():
@@ -261,3 +309,41 @@ def test_output_projection_uses_matrix_retention_fallback_when_fractions_are_uns
 
     assert metadata[_canon(furfural.smiles)]["matrix_factor"] == pytest.approx(0.5)
     assert observable[_canon(furfural.smiles)] == pytest.approx(50.0)
+
+
+def test_output_projection_respects_denaturation_state_in_matrix_retention_fallback():
+    furfural = Species("furfural", "O=Cc1ccco1")
+    raw = {
+        _canon(furfural.smiles): 100.0,
+    }
+    species_catalog = {
+        _canon(furfural.smiles): furfural,
+    }
+    target_lookup = {
+        _canon(furfural.smiles): {"name": "Furfural", "type": "desirable", "data": {}},
+    }
+
+    observable_native, metadata_native = _apply_output_projection(
+        raw,
+        species_catalog,
+        target_lookup,
+        temperature_kelvin=313.15,
+        protein_type="pea_iso",
+        denaturation_state=0.0,
+        fat_fraction=0.0,
+        protein_fraction=1.0,
+    )
+    observable_denatured, metadata_denatured = _apply_output_projection(
+        raw,
+        species_catalog,
+        target_lookup,
+        temperature_kelvin=313.15,
+        protein_type="pea_iso",
+        denaturation_state=1.0,
+        fat_fraction=0.0,
+        protein_fraction=1.0,
+    )
+
+    assert metadata_native[_canon(furfural.smiles)]["matrix_factor"] == pytest.approx(0.42)
+    assert metadata_denatured[_canon(furfural.smiles)]["matrix_factor"] == pytest.approx(0.58)
+    assert observable_native[_canon(furfural.smiles)] < observable_denatured[_canon(furfural.smiles)]

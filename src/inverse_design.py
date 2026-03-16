@@ -33,6 +33,7 @@ class FormulationResult:
     texture_risk: float = 0.0
     predicted_ppb: Dict[str, float] = field(default_factory=dict)
     predicted_proxy_ppb: Dict[str, float] = field(default_factory=dict)
+    projection_metadata: Dict[str, Dict[str, float]] = field(default_factory=dict)
     avg_uncertainty: float = 5.0
 
 
@@ -346,6 +347,7 @@ class InverseDesigner:
                 texture_risk=self._score_texture_risk(precursors, sugars),
                 predicted_ppb=conc_map,
                 predicted_proxy_ppb=rec_result.get("predicted_proxy_ppb", {}),
+                projection_metadata=rec_result.get("projection_metadata", {}),
                 avg_uncertainty=avg_unc
             ))
 

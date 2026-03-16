@@ -109,8 +109,8 @@
     "roles": [
       "toxic"
     ],
-    "predicted_ppb": 4.578401324114821e-07,
-    "weighted_flux": 4.578401324114821e-07,
+    "predicted_ppb": 0.016433916166466712,
+    "weighted_flux": 0.016433916166466712,
     "span": 28.685250253254868,
     "depth": 4,
     "headspace_observable": false,

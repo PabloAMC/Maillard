@@ -88,5 +88,29 @@
     "blocking_issues": [
       "matrix-only intake path is executable but not yet in the strict release gate"
     ]
+  },
+  {
+    "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+    "bench_file": "/workspace/data/benchmarks/soy_isolate_40C_PratapSingh2021.json",
+    "tier": "PRIMARY",
+    "family": "matrix_headspace",
+    "execution_path": "matrix_only",
+    "supported": true,
+    "reason": null,
+    "protein_type": "soy_iso",
+    "coverage": 1.0,
+    "matched_compounds": 3,
+    "total_compounds": 3,
+    "pearson_r": 0.9999999995050419,
+    "mae_ppb": 0.164202993808838,
+    "max_ratio": 1.0006793224018127,
+    "mean_ratio": 1.0003693436256798,
+    "ranking_status": "pass",
+    "scale_status": "pass",
+    "overall_status": "pass",
+    "strict_ready": false,
+    "blocking_issues": [
+      "matrix-only intake path is executable but not yet in the strict release gate"
+    ]
   }
 ]

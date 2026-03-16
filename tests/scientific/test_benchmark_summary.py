@@ -20,6 +20,7 @@ def test_benchmark_summary_separates_supported_and_unsupported_cases():
     summaries = summarize_benchmarks([
         ROOT / "data" / "benchmarks" / "cys_glucose_150C_Farmer1999.json",
         ROOT / "data" / "benchmarks" / "pea_isolate_40C_PratapSingh2021.json",
+        ROOT / "data" / "benchmarks" / "soy_isolate_40C_PratapSingh2021.json",
     ])
 
     by_id = {summary.benchmark_id: summary for summary in summaries}
@@ -31,11 +32,16 @@ def test_benchmark_summary_separates_supported_and_unsupported_cases():
     assert by_id["pea_isolate_40C_PratapSingh2021"].strict_ready is False
     assert by_id["pea_isolate_40C_PratapSingh2021"].overall_status in {"pass", "partial-pass", "scale-gap", "ranking-gap"}
 
+    assert by_id["soy_isolate_40C_PratapSingh2021"].supported is True
+    assert by_id["soy_isolate_40C_PratapSingh2021"].strict_ready is False
+    assert by_id["soy_isolate_40C_PratapSingh2021"].overall_status in {"pass", "partial-pass", "scale-gap", "ranking-gap"}
+
 
 def test_benchmark_summary_markdown_includes_gap_labels():
     summaries = summarize_benchmarks([
         ROOT / "data" / "benchmarks" / "cys_glucose_150C_Farmer1999.json",
         ROOT / "data" / "benchmarks" / "pea_isolate_40C_PratapSingh2021.json",
+        ROOT / "data" / "benchmarks" / "soy_isolate_40C_PratapSingh2021.json",
     ])
 
     markdown = render_benchmark_summary_markdown(summaries)
@@ -43,6 +49,7 @@ def test_benchmark_summary_markdown_includes_gap_labels():
     assert "Benchmark Summary" in markdown
     assert "cys_glucose_150C_Farmer1999" in markdown
     assert "pea_isolate_40C_PratapSingh2021" in markdown
+    assert "soy_isolate_40C_PratapSingh2021" in markdown
     assert "matrix-only intake path is executable" in markdown
     assert "Strict Ready" in markdown
 
