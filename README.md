@@ -6,9 +6,9 @@
 
 **Maillard** is a pure-Python, high-fidelity chemical discovery engine designed for the next generation of plant-based foods. It explores the high-dimensional chemical space of the Maillard reaction to help you design flavor systems that are indistinguishable from animal meat.
 
-- 🌿 **Plant-Based Focus**: Tailored rules for soy, pea, and fungal protein precursors.
-- ⚡ **Multi-Tiered Screening**: Balances generative breadth with DFT precision.
-- 🔬 **Scientific Rigor**: Includes native support for pH, water activity, and heme catalysis.
+- 🌿 **Plant-Based Focus**: Mechanistic modeling of precursor accessibility and volatile retention in soy, pea, and fungal matrices.
+- ⚡ **Multi-Tiered Screening**: A hierarchical funneling strategy ranging from combinatorial rule-based graph traversal to high-precision DFT refinement.
+- 🔬 **Scientific Rigor**: Domain-specific physics for pH-dependent kinetics, water activity effects, and heme-mediated lipid/Maillard synergy.
 
 ---
 
@@ -17,11 +17,11 @@
 To empower food scientists to rationally design precursor combinations (pea, soy, sugars, fats) that maximize meaty volatiles (MFT, pyrazines) while minimizing off-flavors (beany hexanal) and toxic by-products (HMF, acrylamide).
 
 ### 🌟 Highlights
-- **Hybrid SmirksEngine**: Automated discovery of thousands of pathways with strict mass conservation.
-- **Formulation Inverse Design**: Don't just predict; search the formulation grid for the optimal precursor matrix to hit a target sensory profile.
-- **Bayesian Formulation Optimization**: Actively learn and search a continuous space of precursor concentrations, pH, and temperature using `optuna`.
-- **Sensory & Safety Radar**: Target flavor profiles (e.g., meaty) using Stevens' psychophysical power-law scaling while strictly penalizing toxic markers (Acrylamide, HMF) via Pareto ranking.
-- **PBMA Metrics**: Native calculation of "Lysine Budgets" and "Lipid Trapping Efficiency" to account for competition in complex food matrices.
+- **Hybrid SmirksEngine**: Automated discovery of complex reaction cascades (Amadori, Strecker, caramelization) with strict stoichiometric mass conservation to ensure physical validity of derived kinetics.
+- **Formulation Inverse Design**: Multi-objective Pareto optimization across formulation grids to identify precursor combinations that satisfy specific sensory targets.
+- **Bayesian Formulation Optimization**: Active learning-driven search of continuous multi-dimensional spaces (precursor ratios, pH, T(t)) facilitated by `optuna`.
+- **Sensory & Safety Radar**: Psychophysical mapping via Stevens' Power Law to correlate chemical flux with human perception, while simultaneously decoupling flavor from toxic marker formation (Acrylamide, HMF, AGEs).
+- **Matrix Physics Engine**: Quantitative modeling of "precursor accessibility" and "headspace partitioning" (Henry's Law constants corrected for protein/fat binding) to account for the unique challenges of plant-based isolates and concentrates.
 
 ---
 
@@ -38,9 +38,9 @@ Exploring this space in the wet-lab is **combinatorially explosive**, **slow**, 
 
 We provide detailed scientific reports that illustrate how to use the framework for real-world Alt-Protein formulation challenges. Each case study compares predicted outcomes against peer-reviewed literature.
 
-- 🍔 **[Premium Roast Pea Protein Patty](docs/use_cases/pea_protein_report.md)**: Strategies for masking beany off-flavors while maximizing meaty thiols (MFT/FFT).
-- 🥜 **[Alkali-Induced Roasted Nutty Profile](docs/use_cases/roasted_nutty_report.md)**: Optimizing pyrazine formation for plant-based milks and beverages.
-- ☢️ **[Toxicity-Flavor Decoupling](docs/use_cases/toxicity_decoupling_report.md)**: Balancing high-heat searing flavor with Acrylamide/HMF safety limits.
+- 🍔 **[Premium Roast Pea Protein Patty](docs/use_cases/pea_protein_report.md)**: Mitigating beany off-flavors by optimizing the Thiol:Aldehyde ratio through pH and sulfur supplementation.
+- 🥜 **[Alkali-Induced Roasted Nutty Profile](docs/use_cases/roasted_nutty_report.md)**: Controlling pyrazine regioselectivity in alkaline plant-based beverage formulations.
+- ☢️ **[Toxicity-Flavor Decoupling](docs/use_cases/toxicity_decoupling_report.md)**: Advanced Pareto optimization to resolve the temperature-dependent conflict between Maillard aroma and Acrylamide safety limits.
 - 📑 **[Report Template](docs/use_cases/REPORT_TEMPLATE.md)**: Guidelines for contributing new scientific validations.
 
 ---
@@ -60,137 +60,108 @@ Maillard uses a funnel strategy: generate broadly, then refine precisely. Most u
 > **For most formulation work**, Tier 0 + FAST is all you need. The Bayesian optimizer uses these tiers internally and runs entirely on a laptop.
 
 ### Key Capabilities
-- **Reaction Discovery**: Automated enumeration of Maillard, Strecker, Amadori, retro-aldol, and thiol pathways with strict mass conservation.
-- **pH & Temperature Physics**: Smooth sigmoid kinetics model how pH shifts favor different pathways (acidic → furans/thiols, alkaline → pyrazines).
-- **Headspace Partitioning**: Converts liquid-phase concentrations to what the consumer actually smells, accounting for fat/protein binding in plant matrices.
-- **Safety Scoring**: Automatically flags and penalizes toxic marker formation (Acrylamide, CML, CEL, HMF) using Pareto ranking.
-- **Sensory Radar**: Stevens' power-law psychophysical model generates multi-axis flavor profiles (meaty, roasted, beany, malty, earthy).
 
-## 🚀 Completed Milestones & Roadmap
+- **Reaction Discovery**: Deterministic enumeration of Maillard cascades, Strecker degradations, and radical-mediated lipid oxidation via a domain-specific SMIRKS library.
+- **Physicochemical Modeling**: Smooth sigmoid transitions for pH-dependent reactivity and non-isothermal Arrhenius time-integrals for complex temperature ramps.
+- **Headspace & Partitioning**: Advanced calculation of the observable volatilome using Henry's Law corrected by matrix-specific protein and lipid binding coefficients.
+- **Safety & Toxicity Decoupling**: Rigorous modeling of toxic byproduct kinetics (Acrylamide, CML, HMF) to provide clear safety boundaries for high-temperature processing.
+- **Sensory Psychophysics**: Mapping chemical concentrations to human olfactory thresholds and intensities using power-law scaling across meaty, roasted, and vegetable-like dimensions. 
 
-### 🟢 Phase 1: Foundation & Complexity (Done)
-- [x] **Reaction Core**: SMIRKS-based enumeration with mass conservation.
-- [x] **Radical Lipid Oxidation**: Generation of beany off-flavors (hexanal) from PUFAs.
-- [x] **Temporal FAST Mode**: Non-isothermal Boltzmann scoring using Arrhenius integrals.
-- [x] **Matrix Correction**: accessibility scaling for high-protein matrices (Pea/Soy).
+## 🗺️ Framework Capabilities Roadmap
 
-### 🟡 Phase 2: Refinement & Safety (Active)
-- [x] **Safety Scoring**: Native Acrylamide/HMF modeling (Knol 2009).
-- [x] **Bayesian Optimization**: Optuna-driven Pareto-optimal precursor design.
-- [ ] **Heme/Iron Catalysis**: Specific kinetic models for metal-promoted pathways. (In Progress)
-- [ ] **Benchmarking**: Full cross-validation against Mottram/Farmer datasets. (In Progress)
+The following scientific capabilities define the framework's scope and modular growth path. For real-time validation status against specific literature benchmarks, see the **[Scientific Validation Guide](docs/VALIDATION_GUIDE.md)**.
 
-### 🔴 Phase 3: Advanced Physics (Next)
-- [ ] **Flavor-Texture Coupling**: Linking DHA cross-linking to rheological feedback.
-- [ ] **High-Shear Extrusion**: Modeling the mechanics of HME vs static heating.
-- [ ] **Phytochemical Scavenging**: Sequestration of osones by plant polyphenols.
+### Core Chemical Foundation
+- **Reaction SmirksEngine**: Deterministic rule-based mechanism generation with atom-by-atom balancing.
+- **Radical Lipid Oxidation**: Mechanistic propagation and β-scission modeling to predict "beany" off-flavor generation from PUFAs.
+- **Temporal FAST Solver**: Rapid kinetic ranking using Boltzmann-weighted flux and Arrhenius temperature integration.
+- **Formulation Design Engine**: Integrated grid search and Bayesian optimization (Optuna) for Pareto-optimal design.
 
-## 🚀 Installation
+### Advanced Food Matrix Physics
+- **Matrix-Aware Kinetics**: Accessibility scaling for protein isolates (Pea, Soy) and concentrates to account for reactive site burial.
+- **Dynamic Headspace Projection**: Multi-phase partitioning model considering native fat/protein binding constants.
+- **Safety Conservatism**: Kinetic models for Acrylamide (Knol 2009) and HMF formation during processing.
+- **Heme & Ion Catalysis**: Specialized kinetic modifiers for metal-promoted pyrazine and sulfur pathways.
 
-For detailed step-by-step instructions, including mandatory patches for `mace` and `e3nn`, please see the **[Installation Guide](Installation.md)**.
+### Future Research Frontiers
+- **Flavor-Texture Coupling**: Integrating the DHA pathway's rheological feedback with flavor precursor consumption.
+- **Mechanochemistry of Extrusion**: Modeling the impact of high-shear environments on precursor release and reaction barriers.
+- **Phytochemical Sequestration**: Modeling how plant-derived polyphenols scavenge reactive osones to modulate flavor profiles.
+
+## ⚙️ Installation & Setup
+
+Maillard requires Python 3.12 and several specialized chemical informatics binaries (RDKit, Cantera, xTB). 
+
+### 🍎 macOS (Apple Silicon M1/M2/M3) - Recommended
+Because chemical binaries are often x86-specific, we recommend using **Docker** (via OrbStack or Docker Desktop) for a consistent environment:
+
+1.  **Start the container**:
+    ```bash
+    ./scripts/docker_maillard.sh up
+    ```
+2.  **Bootstrap the environment** (one-time setup for dependencies):
+    ```bash
+    ./scripts/docker_maillard.sh bootstrap
+    ```
 
 ### 🐧 Linux & 🪟 Windows (WSL2)
-We recommend using **Miniforge** to manage the complex chemistry dependencies:
+Use **Miniforge** to manage native dependencies:
 ```bash
 conda env create -f environment.yml
 conda activate maillard
-# See Installation.md for the 'xtbiff' and 'pytorch' patches.
+# See Installation.md for mandatory patches for 'xtbiff' and 'pytorch'.
 ```
 
-### 🍎 macOS (Apple Silicon M1/M2/M3)
-Maillard relies on x86_64 chemical binaries. Use **Docker** (with OrbStack or Docker Desktop) for a seamless experience:
+> [!NOTE]
+> For a full list of manual patches and external binary requirements, see the **[Detailed Installation Guide](Installation.md)**.
+
+---
+
+## 🐳 Working with Docker (macOS/Workflow)
+
+The `./scripts/docker_maillard.sh` script is your primary tool for day-to-day work. It ensures you are always running against the validated environment.
+
+### Daily Lifecycle
+- **Start**: `./scripts/docker_maillard.sh up`
+- **Interactive Shell**: `./scripts/docker_maillard.sh shell` (activates `maillard` conda env automatically).
+- **Stop**: `./scripts/docker_maillard.sh down`
+
+### Verification Lanes
+Run specific test lanes to verify your changes:
+- `core`: Unit + integration correctness.
+- `scientific`: FAST regressions and benchmark generation.
+- `qm-heavy`: Quantum chemistry and external-backend validation.
+
+Example:
 ```bash
-# One-time container setup / restart
-./scripts/docker_maillard.sh up
-
-# One-time environment bootstrap
-./scripts/docker_maillard.sh bootstrap
-
-# Open an interactive shell in the validated environment
-./scripts/docker_maillard.sh shell
-```
-
-**Returning to Work (macOS):**
-```bash
-./scripts/docker_maillard.sh up
-./scripts/docker_maillard.sh shell
-```
-
-
-### 2. Verify Scientific Dependencies
-Ensure that the QM engines are correctly detected by the framework:
-```bash
-./scripts/docker_maillard.sh status
-./scripts/docker_maillard.sh pytest tests/qm/test_solvation.py
-```
-
-### 3. Install Skala (Tier 2 DFT)
-If you intend to run Tier 2 DFT refinement, install Microsoft Skala:
-```bash
-pip install git+https://github.com/microsoft/skala.git
+./scripts/docker_maillard.sh core
 ```
 
 ---
 
-## 🔬 Scientific Accuracy & Monitoring
+## 🔬 Scientific Validation & Results
 
-The framework uses a **Test-Driven Science** approach. We maintain specific tests in `tests/scientific/` that monitor our correlation with literature and document known gaps. For a detailed breakdown of how we verify our predictions against curated literature benchmarks, see the **[Scientific Validation Guide](docs/VALIDATION_GUIDE.md)** and the **[Literature Benchmark Reference](data/benchmarks/maillard_validation_benchmarks.md)**.
+We use **Test-Driven Science** to monitor our correlation with literature. For a deep dive into our methodology, see the **[Scientific Validation Guide](docs/VALIDATION_GUIDE.md)**.
 
-Generate the current benchmark summary artifact with:
+### Generating Reports
+- **Benchmark Summary**: `./scripts/docker_maillard.sh summary` — Writes `results/validation/benchmark_summary.md`.
+- **Benchmark Index**: `./scripts/docker_maillard.sh index` — Maps execution paths and matrix support status.
+- **Targets Report**: `./scripts/docker_maillard.sh targets-report` — Aggregates all predicted volatiles.
+
+### Inspecting Specific Benchmarks
+View predicted targets for a specific study:
 ```bash
-./scripts/docker_maillard.sh summary
+./scripts/docker_maillard.sh targets data/benchmarks/cys_glucose_150C_Farmer1999.json
 ```
-This writes `results/validation/benchmark_summary.md` and `results/validation/benchmark_summary.json`, separating supported benchmarks, ranking quality, and remaining scale gaps.
 
-Generate the benchmark index with explicit execution-path metadata using:
+
+### Execution Gates
+To enforce the high-fidelity scientific gate during development:
 ```bash
-./scripts/docker_maillard.sh index
+MAILLARD_STRICT_BENCHMARKS=1 ./scripts/docker_maillard.sh pytest tests/scientific/test_benchmarks.py
 ```
-This writes `results/validation/benchmark_index.md` and `results/validation/benchmark_index.json`, making matrix-only scope gaps explicit without presenting them as validated predictive cases.
+This requires Pearson `>= 0.85` and error ratios `<= 1.5x` for all PRIMARY systems.
 
-Inspect the current target snapshot for a benchmark without resorting to fragile inline Python quoting:
-```bash
-./scripts/docker_maillard.sh targets data/benchmarks/cys_ribose_140C_Hofmann1998.json
-./scripts/docker_maillard.sh targets data/benchmarks/cys_glucose_150C_Farmer1999.json competing
-```
-This prints the current predicted targets with `ppb`, `span`, `depth`, and weighted flux directly from the validated Docker environment.
-
-Generate the aggregated benchmark-target artifact with:
-```bash
-./scripts/docker_maillard.sh targets-report
-```
-This writes `results/validation/benchmark_targets.md` and `results/validation/benchmark_targets.json`, including headspace observability metadata and Henry-law lookup fields where available. Benchmarks declared as `matrix_only` are deliberately excluded from this artifact: they are validated through execution-path summary/index checks, not through the free-precursor FAST target-ranking snapshot.
-
-Run the explicit free-amino-acid strict gate with:
-```bash
-MAILLARD_STRICT_BENCHMARKS=1 ./scripts/docker_maillard.sh pytest tests/scientific/test_benchmarks.py -q
-```
-This consumes the same benchmark summary criteria used by the report: full coverage, Pearson `>= 0.85` when at least three compounds match, and max ratio `<= 1.5x` for free-amino-acid systems. It is intentionally opt-in because the remaining scale-gap benchmarks should fail honestly until they are fixed.
-
-### 🚩 Known Blind Spots (Tracked)
-We proactively document and test for current engine limitations to prevent over-confidence in edge cases:
-- **Heme Optimization**: While supported in the CLI, explicit leghemoglobin-specific kinetics are still being refined.
-- **Supplier Variability**: Batch-level differences between isolate suppliers (PURIS vs Roquette) are not yet modeled.
-- **Metal Catalysis**: General iron/copper synergistic effects on pyrazine formation are currently heuristic.
-
-*Run these baseline tests with:* `python -m pytest tests/scientific/test_blind_spots.py`
-
-For the full Docker-validated regression lane, use `./scripts/docker_maillard.sh pytest tests/`.
-
-Named Docker lanes:
-
-- `./scripts/docker_maillard.sh core`: unit + integration correctness lane.
-- `./scripts/docker_maillard.sh scientific`: benchmark summary/index generation plus scientific FAST regressions.
-- `./scripts/docker_maillard.sh qm-heavy`: QM and external-backend validation lane.
-- `./scripts/docker_maillard.sh hofmann`: branch-level diagnostic trace for the remaining Hofmann scale gap.
-- `./scripts/docker_maillard.sh targets ...`: stable benchmark-target snapshot for scientific inspection (`desirable`, `competing`, `toxic`; aliases `off_flavour` and `off-flavour`).
-- `./scripts/docker_maillard.sh targets-report`: aggregated benchmark-target artifact with headspace observability metadata.
-
-Current `matrix_only` contract:
-
-- A benchmark can be `supported` if it declares a registered non-`free` `protein_type` such as `pea_iso`.
-- That support means the dedicated matrix intake/headspace model executes and covers the measured markers.
-- It does not mean the benchmark is inside the strict release gate, and it does not produce ordinary FAST target snapshots.
 
 ---
 

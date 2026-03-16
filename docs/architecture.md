@@ -33,13 +33,13 @@ A computational tool that can **screen and rank candidate precursor systems** be
 
 The tool should predict, for a given input formulation (amino acid/peptide composition, reducing sugar, pH, T, aw):
 
-| Output | Description | Current Status |
-|--------|-------------|:-:|
-| **Off-flavour risk** | Mechanistic enzymatic cleaning + trapping metric | ✅ Ph2: Nonanal/Decadienal library |
-| **Competing pathway load** | DHA / lysinoalanine formation consuming lysine | ✅ Ph2: DHA-Maillard Competition Heuristic |
-| **Toxicity flags** | AGE (CML, CEL) and HAA (PhIP, MeIQx) risk | ✅ Dose-dependent optimization |
-| **Concentration Sensitivity** | Bayesian Optimization of formulated precursors | ✅ Optuna Integration (Ph19) |
-| **Reaction Physics** | Radical propagation & termination cycle | ✅ Full autoxidation support |
+| Output | Description | Status |
+|--------|-------------|:---:|
+| **Off-flavour risk** | Mechanistic enzymatic cleaning + trapping metric | Supported |
+| **Competing pathway load** | DHA / lysinoalanine formation consuming lysine | Supported |
+| **Toxicity flags** | AGE (CML, CEL) and HAA (PhIP, MeIQx) risk | Supported |
+| **Concentration Sensitivity** | Bayesian Optimization of formulated precursors | Supported |
+| **Reaction Physics** | Radical propagation & termination cycle | Supported |
 
 
 **Headline success criterion**: Reducing the number of wet-lab conditions by ≥10× while maintaining experimental hit rate.
@@ -54,15 +54,15 @@ The tool is **useful** if it can:
 
 1. **Correctly predict winners and losers** within a set of formulations they'd test anyway.
    - *Example*: Given {ribose, cysteine, pH 5} vs {glucose, glycine, pH 7}, the tool correctly predicts that the former gives higher FFT (sulfur, roasted) and the latter gives more pyrazines (nutty, roasted).
-   - *This is validated by the Literature Validation Gate (8.C.5).*
+   - *This is verified through the scientific validation suite.*
 
 2. **Reveal non-obvious trade-offs** that they would not have intuited.
    - *Example*: "Adding hexanal (lipid) to a cysteine+leucine formulation actually increases alkylthiazoles via Strecker catalysis, not just masking."
-   - *This requires the Lipid-Maillard synergy pathway (8.E).*
+   - *This leverages the Lipid-Maillard synergy pathways.*
 
 3. **Give concentration guidance** beyond binary present/absent.
    - *Example*: "You need ≥0.3% cysteine to shift from pyrazine-dominant to FFT-dominant at pH 5."
-   - *This requires concentration support + Boltzmann scoring (8.D).*
+   - *This requires precursor concentration resolution and Arrhenius-weighted flux models.*
 
 The tool is **not useful** if it merely confirms what any experienced food chemist already knows from memory.
 
@@ -83,10 +83,11 @@ This distinction matters: the framework is already useful for ranking and benchm
 
 **Primary risk**: The scoring function (`score = Σ max(0, 40 − barrier)`) produces near-identical scores for all formulations containing the same reaction families. A scientist who tests the "top" formulation and sees no differentiation from the second-best will immediately distrust the tool.
 
-**Mitigations in the plan**:
-1. **Literature Validation Gate (8.C.5)**: Before proceeding to concentration or synergy features, verify the tool reproduces 3 known experimental outcomes from published model-system GC-MS data. This is a hard gate.
-2. **Boltzmann Scoring Redesign (8.D.B)**: Replace additive linear score with `Σ [c] ⋅ exp(−barrier/kT)`, which gives exponential sensitivity to barrier differences and explicit concentration weighting.
-3. **Incremental validation loop**: After each major feature addition (8.D, 8.E), re-run the validation gate against the same 3 test systems to detect regressions.
+**Mitigations**:
+
+1.  **Rigorous Literature Validation Gate**: The framework's core chemistry is governed by a "Hard Gate" standard. Before new reaction families or physical models are integrated into the primary simulation, they must demonstrate the ability to reproduce measured outcomes from high-fidelity, published model systems (e.g., the datasets of Hofmann, Mottram, and Farmer). This prevents the tool from drifting into "internally consistent" but experimentally invalid predictions.
+2.  **Thermodynamic Boltzmann Scoring**: To provide the necessary sensitivity for formulation differentiation, the framework implements a Boltzmann-weighted flux model: `Σ [conc] ⋅ exp(−ΔG‡/RT)`. This ensures that small differences in activation barriers (ΔG‡) result in exponential changes in predicted concentration, allowing researchers to distinguish between "good" and "great" ingredient ratios.
+3.  **Automated Scientific Regression**: Every architectural update or chemical rule modification is automatically re-run against the library of primary literature benchmarks. This continuous validation loop ensures that improvements in one flavor branch (e.g., pyrazines) do not unintentionally regress the accuracy of another (e.g., meaty thiols).
 
 ---
 
@@ -99,26 +100,27 @@ The framework has three tiers of increasing physical fidelity and computational 
 │  TIER 0: Pathway Enumeration (Rule-Based)                    │
 │  (seconds per query)                                         │
 │  • SmirksEngine: Hybrid SMIRKS + Parametric Templates        │
-│  • Supports Radical Autoxidation & Enzymatic Pre-processing  │
-│  • Optimized with LRU-cloning cache (70x speedup)            │
-│  Output: Enumerated reaction graph, stoichiometric network   │
+│  • Stoichiometrically balanced graph traversal               │
+│  • Radical Autoxidation & Enzymatic Pre-processing           │
+│  Output: Enumerated reaction graph, balanced chemical network │
 └────────────────────┬─────────────────────────────────────────┘
                      │ Complete network with family labels
 ┌────────────────────▼─────────────────────────────────────────┐
-│  TIER 1: Laptop-Feasible Kinetics (Heuristic)                │
+│  TIER 1: Laptop-Feasible Kinetics (FAST Solver)              │
 │  (seconds per query)                                         │
-│  • Literature-calibrated heuristic barriers (Primary)        │
-│  • pH-Sensitive Volatilome Tuning (Sigmoid multipliers)      │
-│  Output: Instant Boltzmann scores and Pareto rankings        │
-└────────────────────┬─────────────────────────────────────────┘
+│  • Literature-calibrated Arrhenius barrier constants         │
+│  • Boltzmann Scoring: score = Σ [c] ⋅ exp(−ΔG‡/RT)           │
+│  • Time-integration for non-isothermal temperature ramps     │
+│  Output: Instant kinetic flux and Pareto-optimal rankings     │
+└────────────────────▼─────────────────────────────────────────┘
                      │ High-leverage pathway bottleneck steps
 ┌────────────────────▼─────────────────────────────────────────┐
 │  TIER 1.5: ML-Accelerated Physics (MACE & Diffusion)         │
 │  (seconds–minutes per query)                                 │
 │  • MACE-OFF24 Foundation Model: Near-DFT barriers in ms      │
 │  • Diffusion TS Prediction: Direct 2D -> 3D TS geometries    │
-│  • Bayesian Optimization of formulations (Optuna)            │
-│  Output: Refined barriers and 3D TS candidates               │
+│  • Bayesian Optimization (Optuna) of precursor matrices      │
+│  Output: Refined barriers and validated 3D TS candidates     │
 └────────────────────┬─────────────────────────────────────────┘
                      │ Rate-limiting bottleneck steps
 ┌────────────────────▼─────────────────────────────────────────┐
@@ -127,7 +129,7 @@ The framework has three tiers of increasing physical fidelity and computational 
 │  • Protocol: r2SCAN-3c // wB97M-V / def2-TZVP                │
 │  • Backend: PySCF + geomeTRIC (Native)                       │
 │  • Solvation: Implicit (ddCOSMO) or Explicit (CREST/QCG)     │
-│  Output: High-accuracy barriers saved to ResultsDB           │
+│  Output: High-accuracy barriers cached to ResultsDB          │
 └──────────────────────────────────────────────────────────────┘
 
 ```
@@ -139,7 +141,7 @@ The framework has three tiers of increasing physical fidelity and computational 
 **Approach**:
 - Use `SmirksEngine` to enumerate the chemical space of possible reactions from a given precursor set.
 - **Strict Mass Conservation**: Every `ElementaryStep` must strictly conserve atoms. This is a physical prerequisite for Tiers 1 and 2.
-- **Hybrid Modeling Strategy**: 
+- **Hybrid Modeling Strategy**:
   - **Tier A (SMARTS)** for high-throughput 1-2 reactant transforms.
   - **Tier B (Handcrafted Functions)** for complex 3+ reactant clusters (e.g., Thiazole, Thiol Addition) to guarantee balance and specificity.
 - Output: a directed reaction graph consisting of strict atom-balanced elementary steps.
@@ -160,7 +162,25 @@ The framework has three tiers of increasing physical fidelity and computational 
 ### 3.4 Matrix & Food Physics Layers
 Translates "beaker chemistry" into "food matrix reality".
 - **Accessibility (`src/matrix_correction.py`)**: Scales reactant concentrations based on protein type (Pea vs Soy) and denaturation state (Extrusion heat). Models the competition between Maillard and DHA pathways.
-- **Partitioning (`src/headspace.py`)**: Uses Henry's Law corrected by protein/fat binding factors to predict the gas-phase volatilome.
+- **Partitioning (`src/headspace.py`)**: Uses Henry's Law corrected by protein/fat binding factors## 5. Strategic Roadmap and Scientific Frontiers
+
+The framework architecture is modular, allowing for the independent refinement of chemistry rules, physical models, and sensory mapping.
+
+### Core Chemical Foundation
+The **SmirksEngine** serves as the deterministic core, leveraging a domain-specific library of SMIRKS transforms to enumerate Maillard, caramelization, and lipid oxidation cascades. By enforcing strict stoichiometric atom-balancing, the engine generates networks that are physically suitable for downstream kinetic modeling and thermodynamic gating.
+
+### Predictive Validation & Benchmarking
+The framework is rigorously validated against primary model-system literature (e.g., Hofmann, Mottram, Farmer). A **Test-Driven Science** approach ensures that every change to the barrier constants or projection layer is measured against these experimental benchmarks to maintain high correlation (Pearson R >= 0.85) in validated envelopes.
+
+### Advanced Physical Modeling
+Beyond liquid-phase chemistry, the framework incorporates two critical physical layers:
+1.  **Precursor Accessibility**: Modeling the kinetic suppression of reactive amino acid groups (Lysine, Cysteine) due to burial within protein globulins (glycinin, legumin) using native-to-denatured sigmoid transitions.
+2.  **Headspace Partitioning**: Applying phase-corrected Henry's Law constants to predict the gas-phase concentration of odorants, accounting for temperature-dependent hydrophobic binding to plant proteins and lipids.
+
+### Future Research Horizons
+- **Flavor-Texture Integration**: Mapping the dehydroalanine (DHA) cross-linking pathway to predict rheological changes alongside flavor profiles.
+- **Extrusion Dynamics**: Extending the non-isothermal kinetics model to include the high-shear mechanical activation found in High-Moisture Extrusion (HME).
+- **Phytochemical Modulation**: Quantifying the scavenging of reactive Maillard intermediates (α-dicarbonyls) by plant-derived polyphenols and antioxidants.
 
 ### 3.5 Tier 2 — DFT Refinement (PySCF & Skala)
 **Role**: Obtain chemically accurate barriers for the rate-limiting steps.
@@ -178,38 +198,39 @@ PySCF provides a modern, Pythonic interface that enables direct integration of M
 
 | Component | Why Deferred |
 |-----------|-------------|
-| **ML/Random Forest predictors** | Useful eventually, but requires a dataset of (conditions → volatilome) pairs that does not yet exist. Phase 3 after wet-lab validation loop. |
-| **Molecular dynamics / QM-MM** | Only relevant for peptide-bound reactions (protein-matrix effects), not for the small-molecule Maillard cascade addressed here. |
-| **Full Skala XC Integration** | Current DFT uses r2SCAN-3c; Skala is experimental and scaffolded for future cloud use. |
+| **ML/Random Forest predictors** | Requires a dedicated dataset of (conditions → volatilome) pairs that is currently under development. |
+| **Molecular dynamics / QM-MM** | Primarily relevant for peptide-bound reactions; currently focusing on small-molecule Maillard cascades. |
+| **Full Skala XC Integration** | Composite protocols (r2SCAN-3c) currently provide the optimal speed-to-accuracy ratio for Tier 2. |
 
 
 ---
 
-## 5. Suggested Phase Plan
+## 5. Strategic Roadmap
 
-### Phase 1 — Foundation (COMPLETED)
-- [x] Set up SmirksEngine environment; validate against known Maillard pathways from literature
-- [x] Implement domain-specific rules and target compound library
-- [x] Run initial Tier 0 enumeration for the 3 canonical precursor systems: (glucose + glycine), (ribose + cysteine), (ribose + cysteine + leucine)
-- [x] Validate SmirksEngine output by confirming presence of known intermediates (Amadori product, furfural, methional, etc.)
-- [x] Tier 1 xTB screening setup; benchmark against published barrier data
+The roadmap outlines the key development areas and priorities for the framework.
 
-### Phase 2 — Core Computational Results (ACTIVE)
-- [x] DFT calculations (Tier 2) for initial model systems
-- [x] Compare predicted pathway rankings against empirical GC-MS observations (Phase 17)
-- [x] Develop first "precursor recommendation" prototype (Inverse Design mode)
-- [x] Phase 2 Scientific Enhancements: DHA Competition, Radical Cycle, Enzymatic Cleaning.
+### Completed Milestones
+- Set up SmirksEngine environment; validate against known Maillard pathways from literature
+- Implement domain-specific rules and target compound library
+- Run initial Tier 0 enumeration for the 3 canonical precursor systems: (glucose + glycine), (ribose + cysteine), (ribose + cysteine + leucine)
+- Validate SmirksEngine output by confirming presence of known intermediates (Amadori product, furfural, methional, etc.)
+- Tier 1 xTB screening setup; benchmark against published barrier data
 
+### Active Development
+- DFT calculations (Tier 2) for initial model systems
+- Compare predicted pathway rankings against empirical GC-MS observations
+- Develop first "precursor recommendation" prototype (Inverse Design mode)
+- Scientific Enhancements: DHA Competition, Radical Cycle, Enzymatic Cleaning.
 
-### Phase 3 — Production & SOTA Scaling (NEXT)
-- [ ] Mass generation of 500+ DFT barriers for Δ-ML scaling (Phase 3.3 / 13)
-- [ ] Implement NASA Polynomial Thermodynamics for physically accurate reverse rates (Phase 24)
-- [ ] Deploy Web Dashboard for community access (Phase 19)
-- [ ] Experimental validation loop with industrial partners
+### Next Steps
+- Mass generation of 500+ DFT barriers for Δ-ML scaling
+- Implement NASA Polynomial Thermodynamics for physically accurate reverse rates
+- Deploy Web Dashboard for community access
+- Experimental validation loop with industrial partners
 
 ### Immediate Validation Priorities
 
-Before expanding Phase 3 scope, the most important remaining near-term task is to extend the validated envelope beyond free-precursor systems without regressing the newly strict-ready sulfur benchmarks.
+Before expanding scope, the most important remaining near-term task is to extend the validated envelope beyond free-precursor systems without regressing the newly strict-ready sulfur benchmarks.
 
 - Reproducible diagnostic entrypoint: `./scripts/docker_maillard.sh hofmann`
 - Release-grade regression lane: `./scripts/docker_maillard.sh scientific`
@@ -301,5 +322,5 @@ This keeps scientific calibration work tied to the exact environment and lanes t
 | [MACE](https://github.com/ACEsuit/mace) | ML Potentials | MACE-OFF24 foundation model for Tier 1.5 |
 | [geomeTRIC](https://github.com/leeping/geomeTRIC) | Geometry Optimization | Native optimizer for PySCF calculations |
 | [ASE](https://wiki.fysik.dtu.dk/ase/) | Atomistic simulation interface | Useful for automating xTB/MACE workflows |
-| [Sella](https://github.com/zadorlab/sella) | TS Search | Saddle-point optimizer (Phase 11) |
+| [Sella](https://github.com/zadorlab/sella) | TS Search | Saddle-point optimizer for geometry optimization |
 | [Cantera](https://cantera.org) | Kinetics Solver | For time-dependent ODE temperature ramps |

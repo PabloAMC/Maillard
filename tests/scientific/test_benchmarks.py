@@ -29,10 +29,11 @@ def test_benchmark_correlation(bench_file):
         pytest.xfail(f"Incomplete species coverage for {evaluation.benchmark_id}: {evaluation.coverage:.2%}")
     assert evaluation.mae_ppb is not None
 
-    if STRICT_BENCHMARKS and bench.get("protein_type", "free") == "free":
+    metadata = summary.tier
+    if STRICT_BENCHMARKS and summary.tier == "PRIMARY":
         assert summary.strict_ready, (
-            f"{evaluation.benchmark_id} failed strict free-AA gate: "
-            f"{'; '.join(summary.blocking_issues) or summary.overall_status}"
+            f"{evaluation.benchmark_id} (Tier: {summary.tier}, Path: {summary.execution_path}) failed "
+            f"strict validation gate: {'; '.join(summary.blocking_issues) or summary.overall_status}"
         )
 
     for comparison in evaluation.comparisons:

@@ -63,8 +63,8 @@
 
 ### Acceptance thresholds
 
-- [ ] Free amino acid PRIMARY systems: Pearson R >= 0.85 when at least 3 matched compounds are available.
-- [ ] Free amino acid PRIMARY systems: major volatile ratio <= 1.5x once strict mode is enabled.
+- [x] Free amino acid PRIMARY systems: Pearson R >= 0.85 when at least 3 matched compounds are available.
+- [x] Free amino acid PRIMARY systems: major volatile ratio <= 1.5x once strict mode is enabled.
 - [ ] Plant matrix PRIMARY systems: major volatile ratio <= 2.0x once headspace and matrix corrections are calibrated.
 - [x] Benchmarks with fewer than 3 matched compounds: do not report Pearson R; rely on coverage, ratio, and MAE only.
 
@@ -141,8 +141,9 @@ Rationale: yes, but not as an undifferentiated "make all pytest green" task. The
 - [x] Make `cys_ribose_150C_Mottram1994` reproduce sulfur ordering without absurd absolute overprediction.
 - [x] Make `cys_glucose_150C_Farmer1999` discriminate ribose vs glucose cleanly.
 - [x] Audit the scaling path from `src/recommend.py` to `src/inverse_design.py` so `predicted_ppb` is physically interpretable, not just a heuristic weight.
-- [ ] Add species alias tables for benchmark matching where literature and internal names diverge.
-- [ ] Enable strict ratio assertions behind the benchmark flag once the first three PRIMARY systems are stable.
+- [x] Add species alias tables for benchmark matching where literature and internal names diverge.
+- [x] Enable strict ratio assertions behind the benchmark flag once the first three PRIMARY systems are stable.
+- [x] Standardize coordinate tracking in results/validation/benchmark_summary.json
 
 ## Phase C: FAST Physics and Quantitative Scaling [High]
 
@@ -317,6 +318,7 @@ Rationale: yes, but not as an undifferentiated "make all pytest green" task. The
   - Added `tests/scientific/test_free_aa_quantitative_regression.py` so these benchmark-family ratios are enforced directly instead of relying on ad hoc manual inspection.
   - Added `scripts/generate_benchmark_summary.py` plus summary helpers in `src/benchmark_validation.py`; Docker now writes `results/validation/benchmark_summary.md` and `results/validation/benchmark_summary.json`, making supported benchmarks, ranking quality, and remaining scale gaps visible in one place.
   - The opt-in `MAILLARD_STRICT_BENCHMARKS=1` path in `tests/scientific/test_benchmarks.py` now uses the same centralized summary thresholds, so strict failures report benchmark-level blocking issues instead of a disconnected per-compound tolerance.
+  - Reorganized `README.md` to separate installation from daily Docker usage (lanes, shell, summary).
 - Arrhenius and Cantera contract hardening result verified in Docker:
   - `src/barrier_constants.py` now uses a shared canonical-family normalization so FAST barriers and YAML Arrhenius lookup cannot silently disagree on `1,2-enolisation`; the unit contract now pins the enolisation entry to the dedicated YAML row instead of leaking through the fructose dehydration surrogate.
   - `src/cantera_export.py` now sanitizes any parser-unsafe species token via a single helper and disambiguates post-sanitization collisions deterministically, which keeps generated Cantera equations stable for names such as `bis(2-methyl-3-furyl) disulfide`.

@@ -30,10 +30,43 @@ MATRIX_NAMES = (
 )
 
 BENCHMARK_NAME_ALIASES = {
-    "2methyl3furanthiol": {"2methyl3furanthiolmft"},
-    "2furfurylthiol": {"2furfurylthiolfft"},
-    "bis2methyl3furyldisulfide": {"bis2methyl3furyldisulfide"},
-    "pyrazine": {"25dimethylpyrazine", "23dimethylpyrazine", "dimethylpyrazine"},
+    "2methyl3furanthiol": {
+        "2methyl3furanthiolmft",
+        "2methyl3furylthiol",
+        "2methylfuran3thiol",
+        "mft",
+    },
+    "2furfurylthiol": {
+        "2furfurylthiolfft",
+        "2furylmethanethiol",
+        "fft",
+    },
+    "bis2methyl3furyldisulfide": {
+        "bis2methyl3furyldisulfide",
+        "2methyl3furyl2methyl3furyldisulfide",
+    },
+    "pyrazine": {
+        "25dimethylpyrazine",
+        "23dimethylpyrazine",
+        "26dimethylpyrazine",
+        "2ethyl35dimethylpyrazine",
+        "2ethylpyrazine",
+        "trimethylpyrazine",
+        "tetramethylpyrazine",
+        "dimethylpyrazine",
+    },
+    "3methylbutanal": {
+        "3methylbutanal",
+        "isovaleraldehyde",
+    },
+    "2methylbutanal": {
+        "2methylbutanal",
+        "2methylbutyraldehyde",
+    },
+    "methional": {
+        "3methylthiopropanal",
+        "methional",
+    },
 }
 
 MATRIX_BENCHMARK_PROFILES = {
@@ -148,6 +181,7 @@ class BenchmarkSummary:
     overall_status: str
     strict_ready: bool
     blocking_issues: List[str]
+    conditions: Dict[str, float]
 
 
 @dataclass(frozen=True)
@@ -538,13 +572,17 @@ def summarize_evaluation(
     mean_ratio = sum(ratios) / len(ratios) if ratios else None
     ratio_threshold = thresholds.ratio_threshold_for(protein_type)
 
+    bench = load_benchmark(evaluation.bench_file)
+    metadata = get_benchmark_metadata(bench)
+    conditions = bench.get("conditions", {})
+
     if not evaluation.supported:
         return BenchmarkSummary(
             benchmark_id=evaluation.benchmark_id,
             bench_file=evaluation.bench_file,
-            tier="UNKNOWN",
-            family="unknown",
-            execution_path="unknown",
+            tier=metadata.tier,
+            family=metadata.family,
+            execution_path=metadata.execution_path,
             supported=False,
             reason=evaluation.reason,
             protein_type=protein_type,
@@ -560,6 +598,7 @@ def summarize_evaluation(
             overall_status="unsupported",
             strict_ready=False,
             blocking_issues=[evaluation.reason or "unsupported"],
+            conditions=conditions,
         )
 
     if len(matched) >= thresholds.min_matched_for_ranking and evaluation.pearson_r is not None:
@@ -602,8 +641,6 @@ def summarize_evaluation(
             f"max ratio {ratio_value} > {ratio_threshold:.2f}"
         )
 
-    bench = load_benchmark(evaluation.bench_file)
-    metadata = get_benchmark_metadata(bench)
     strict_ready = (
         evaluation.coverage >= thresholds.full_coverage_threshold
         and ranking_status != "fail"
@@ -638,6 +675,7 @@ def summarize_evaluation(
         overall_status=overall_status,
         strict_ready=strict_ready,
         blocking_issues=blocking_issues,
+        conditions=conditions,
     )
 
 
@@ -651,7 +689,6 @@ def summarize_benchmarks(
     for bench_file in bench_files:
         bench_path = Path(bench_file)
         bench = load_benchmark(bench_path)
-        metadata = get_benchmark_metadata(bench)
         evaluation = evaluate_benchmark(bench_path, target_tag=target_tag)
         summary = summarize_evaluation(
             evaluation,
@@ -680,6 +717,7 @@ def summarize_benchmarks(
                 overall_status=summary.overall_status,
                 strict_ready=summary.strict_ready,
                 blocking_issues=summary.blocking_issues,
+                conditions=bench.get("conditions", {}),
             )
         summaries.append(summary)
     return summaries
