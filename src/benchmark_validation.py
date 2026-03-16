@@ -15,6 +15,7 @@ from src.inverse_design import InverseDesigner
 from src.precursor_resolver import resolve_many
 from src.smirks_engine import SmirksEngine
 from src.validation_contract import BenchmarkThresholds, DEFAULT_VALIDATION_CONTRACT
+from src.safety import predict_acrylamide
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -66,6 +67,10 @@ BENCHMARK_NAME_ALIASES = {
     "methional": {
         "3methylthiopropanal",
         "methional",
+    },
+    "acrylamide": {
+        "acrylamide",
+        "2-propenamide",
     },
 }
 
@@ -226,6 +231,13 @@ def _infer_benchmark_metadata(bench: dict) -> BenchmarkMetadata:
             family="free_aa_sulfur",
             execution_path="free_precursor",
             notes="Free amino-acid sulfur benchmark.",
+        )
+    if "acrylamide" in benchmark_id or bench.get("benchmark_type") == "safety":
+        return BenchmarkMetadata(
+            tier="PRIMARY",
+            family="safety",
+            execution_path="free_precursor",
+            notes="Safety-critical benchmark (e.g., Acrylamide).",
         )
     return BenchmarkMetadata(
         tier="SECONDARY",
@@ -534,7 +546,29 @@ def evaluate_benchmark(bench_file: Path | str, target_tag: str = DEFAULT_TARGET_
         )
 
     metadata = get_benchmark_metadata(bench)
-    if metadata.execution_path == "matrix_only":
+    if metadata.family == "safety":
+        # Use the dedicated safety kinetics solver for safety-critical targets
+        conditions = benchmark_to_conditions(bench)
+        asn_conc = 0.0
+        sugar_conc = 0.0
+        for name, data in bench["precursors"].items():
+            n_low = name.lower()
+            if "asparagine" in n_low or "asn" in n_low:
+                asn_conc = data["concentration_mM"]
+            if any(s in n_low for s in ["ribose", "glucose", "fructose", "maltose", "xylose", "sugar"]):
+                sugar_conc += data["concentration_mM"]
+        
+        # We assume 180 min if not specified, but Parker 2012 has it in conditions
+        time_min = bench["conditions"].get("time_min", 20.0)
+        safety_res = predict_acrylamide(
+            asparagine_mM=asn_conc,
+            reducing_sugar_mM=sugar_conc,
+            temp_C=conditions.temperature_celsius,
+            time_min=time_min,
+            pH=conditions.pH,
+        )
+        rec_result = {"predicted_ppb": {"acrylamide": safety_res.acrylamide_ppb}}
+    elif metadata.execution_path == "matrix_only":
         rec_result = _run_matrix_only_benchmark_prediction(bench)
     else:
         rec_result = _run_benchmark_recommendation(bench, target_tag=target_tag)

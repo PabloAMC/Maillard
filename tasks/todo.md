@@ -46,6 +46,7 @@
 - [x] Reprobar tests clave en Docker y cerrar Tier 0/benchmark lane — suite completa verde en Docker (`327 passed, 41 skipped, 4 xfailed`)
 - [x] Documentar cambios y lecciones en `tasks/lessons.md`
 - [x] Generar y validar resumen de benchmarks (`scripts/generate_benchmark_summary.py`) — validado en Docker
+- [x] Implementar cinética no monotónica y benchmark de acrilamida (Phase E Groundwork)
 
 ## Next Scientific Priority — 2026-03-15
 
@@ -171,8 +172,8 @@ Rationale: yes, but not as an undifferentiated "make all pytest green" task. The
 
 ## Phase E: Safety and Temporal Validation [Medium]
 
-- [ ] Validate `src/safety.py` against acrylamide formation and elimination literature, not just monotonic formation.
-- [ ] Add an explicit non-monotonic acrylamide benchmark.
+- [x] Validate `src/safety.py` against acrylamide formation and elimination literature, not just monotonic formation.
+- [x] Add an explicit non-monotonic acrylamide benchmark.
 - [ ] Validate temperature-ramp predictions against the temporal FAST suite and Cantera reference cases.
 - [ ] Separate fast scientific regression tests from slower kinetics validation tests with pytest markers.
 
@@ -256,7 +257,8 @@ Rationale: yes, but not as an undifferentiated "make all pytest green" task. The
 - [x] The Docker conda env named `maillard` is usable for validation runs.
 - [x] The benchmark script runs in Docker and produces reports and plots.
 - [x] Spurious lipid oxidation contamination of free-amino-acid benchmarks was removed.
-- [ ] Free-amino-acid projection is still a proxy observable model, but the previous severe global scaling collapse has been removed and the remaining quantitative gaps are now branch-specific or matrix-facing.
+- [x] Free-amino-acid projection is still a proxy observable model, but the previous severe global scaling collapse has been removed and the remaining quantitative gaps are now branch-specific or matrix-facing.
+- [x] Acrylamide safety model normalized with Parker 2012 (ratio 1.033).
 - [ ] The current FAST output is still a proxy signal, not a validated concentration model.
 - [x] The glucose benchmark chemistry coverage gap is closed; Farmer now has full species coverage.
 - [x] The Mottram disulfide now receives non-zero projected ppb after aligning the curated target SMILES with the generated species identity.

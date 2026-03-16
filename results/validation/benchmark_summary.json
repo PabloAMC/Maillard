@@ -1,5 +1,33 @@
 [
   {
+    "benchmark_id": "acrylamide_asparagine_glucose_Parker2012",
+    "bench_file": "/workspace/data/benchmarks/acrylamide_asparagine_glucose_Parker2012.json",
+    "tier": "PRIMARY",
+    "family": "safety",
+    "execution_path": "free_precursor",
+    "supported": true,
+    "reason": null,
+    "protein_type": "free",
+    "coverage": 1.0,
+    "matched_compounds": 1,
+    "total_compounds": 1,
+    "pearson_r": null,
+    "mae_ppb": 48.59181445621721,
+    "max_ratio": 1.0334790825490707,
+    "mean_ratio": 1.0334790825490707,
+    "ranking_status": "n/a",
+    "scale_status": "pass",
+    "overall_status": "partial-pass",
+    "strict_ready": true,
+    "blocking_issues": [],
+    "conditions": {
+      "temp_C": 180,
+      "time_min": 20,
+      "ph": 6.8,
+      "water_activity": 0.3
+    }
+  },
+  {
     "benchmark_id": "cys_glucose_150C_Farmer1999",
     "bench_file": "/workspace/data/benchmarks/cys_glucose_150C_Farmer1999.json",
     "tier": "PRIMARY",
