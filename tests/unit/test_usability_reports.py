@@ -37,6 +37,10 @@ def test_formulation_explainability_payload_surfaces_matrix_and_projection_conte
                 "matrix_factor": 0.8,
                 "headspace_factor": 0.5,
                 "volatile_class": "furan",
+                "process_state": "heated_matrix",
+                "calibration_source": "class_fallback",
+                "calibration_evidence_strength": "heuristic",
+                "calibration_fallback_mode": "class_level",
             }
         },
         effective_denaturation_state=0.62,
@@ -60,9 +64,11 @@ def test_formulation_explainability_payload_surfaces_matrix_and_projection_conte
     assert payload["matrix_explainability"]["effective_denaturation_state"] == 0.62
     assert payload["top_projection_rows"][0]["volatile_class"] == "furan"
     assert payload["top_projection_rows"][0]["observable_ratio"] == 0.4
+    assert payload["top_projection_rows"][0]["process_state"] == "heated_matrix"
     assert "Formulation Explainability" in markdown
     assert "Effective denaturation state" in markdown
     assert "Obs/Proxy" in markdown
+    assert "Calibration" in markdown
 
 
 def test_validated_envelope_report_mentions_strict_ready_and_matrix_scope():
@@ -177,6 +183,16 @@ def test_generate_report_includes_confidence_metadata(tmp_path: Path):
                 ],
             },
         },
+        projection_metadata={
+            "furfural": {
+                "compound": "furfural",
+                "observable_ppb": 12.0,
+                "process_state": "ambient_slurry",
+                "calibration_source": "Pratap-Singh 2021 soy-vs-pea ambient slurry release ratio",
+                "calibration_evidence_strength": "literature_anchored",
+                "calibration_fallback_mode": "compound_specific",
+            }
+        },
     )
 
     out_dir = generate_report(result, [], {"sugars": "glucose"}, output_dir=tmp_path / "report")
@@ -190,6 +206,8 @@ def test_generate_report_includes_confidence_metadata(tmp_path: Path):
     assert "Compound Confidence" in markdown_text
     assert "Aggregate Sensory Confidence" in markdown_text
     assert "Sensitivity Summary" in markdown_text
+    assert "Projection Calibration" in markdown_text
+    assert "projection_metadata" in json_text
 
 
 def test_build_confidence_package_adds_compound_aggregate_and_sensitivity_sections():

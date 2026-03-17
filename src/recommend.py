@@ -19,6 +19,7 @@ from typing import List, Dict, Set, Optional, Any, Tuple
 from data.reactions.curated_pathways import PATHWAYS, PATHWAY_METADATA
 from src.barrier_constants import arrhenius_rate_constant, get_reference_pre_exponential
 from src.headspace import HeadspaceModel
+from src.matrix_calibration_registry import describe_matrix_calibration, determine_matrix_process_state
 from src.matrix_correction import (
     ProteinType,
     apply_matrix_correction,
@@ -525,6 +526,7 @@ def _apply_output_projection(
     target_lookup: Dict[str, Dict[str, Any]],
     temperature_kelvin: float,
     protein_type: str,
+    time_minutes: Optional[float] = None,
     denaturation_state: float = 0.5,
     fat_fraction: float = 0.0,
     protein_fraction: float = 0.0,
@@ -546,6 +548,10 @@ def _apply_output_projection(
 
     observable_ppb: Dict[str, float] = {}
     projection_metadata: Dict[str, Dict[str, float]] = {}
+    process_state = determine_matrix_process_state(
+        temperature_celsius=temperature_kelvin - 273.15,
+        time_minutes=float(time_minutes or 60.0),
+    )
 
     budget_metadata = {}
     if projection_budget is not None:
@@ -564,8 +570,9 @@ def _apply_output_projection(
         species = species_catalog.get(canon)
         if species is None:
             observable_ppb[canon] = raw_value * fallback_matrix_factor
+            compound_name = species_name_lookup.get(canon, canon) if species_name_lookup else canon
             projection_metadata[canon] = {
-                "compound": species_name_lookup.get(canon, canon) if species_name_lookup else canon,
+                "compound": compound_name,
                 "proxy_ppb": float(raw_value),
                 "matrix_factor": float(fallback_matrix_factor),
                 "base_matrix_factor": float(fallback_matrix_factor),
@@ -574,6 +581,12 @@ def _apply_output_projection(
                 "observable_ppb": float(observable_ppb[canon]),
                 "proxy_to_observable_ratio": 1.0 if raw_value <= 0.0 else float(observable_ppb[canon]) / float(raw_value),
                 "volatile_class": "other",
+                "process_state": process_state,
+                **describe_matrix_calibration(
+                    compound_name,
+                    protein_type=protein_type,
+                    process_state=process_state,
+                ),
                 **budget_metadata,
             }
             continue
@@ -604,8 +617,9 @@ def _apply_output_projection(
         )
         observable_value = raw_value * effective_matrix_factor * headspace_factor
         observable_ppb[canon] = observable_value
+        compound_name = species.label or canon
         projection_metadata[canon] = {
-            "compound": species.label or canon,
+            "compound": compound_name,
             "proxy_ppb": float(raw_value),
             "matrix_factor": float(effective_matrix_factor),
             "base_matrix_factor": float(fallback_matrix_factor),
@@ -613,7 +627,13 @@ def _apply_output_projection(
             "headspace_factor": float(headspace_factor),
             "observable_ppb": float(observable_value),
             "proxy_to_observable_ratio": 1.0 if raw_value <= 0.0 else float(observable_value) / float(raw_value),
-            "volatile_class": classify_volatile_matrix_family(species.label or canon, smiles=species.smiles),
+            "volatile_class": classify_volatile_matrix_family(compound_name, smiles=species.smiles),
+            "process_state": process_state,
+            **describe_matrix_calibration(
+                compound_name,
+                protein_type=protein_type,
+                process_state=process_state,
+            ),
             **budget_metadata,
         }
 
@@ -1067,6 +1087,7 @@ class Recommender:
             target_lookup,
             temperature_kelvin,
             protein_type=protein_type,
+            time_minutes=time_minutes,
             denaturation_state=denaturation_state,
             fat_fraction=fat_fraction,
             protein_fraction=protein_fraction,

@@ -46,6 +46,7 @@ def generate_report(
             "radar": {k: float(v[0]) for k, v in result.radar.items()},
             "matrix_explainability": result.matrix_explainability,
             "confidence_metadata": result.confidence_metadata,
+            "projection_metadata": result.projection_metadata,
             "predicted_ppb": {k: float(v) for k, v in result.predicted_ppb.items()},
             "detected_targets": result.detected_targets,
             "detected_minimize": result.detected_minimize
@@ -155,6 +156,21 @@ def generate_report(
             # This is a bit simplified, but good for a start
             for t in result.detected_targets[:10]:
                 f.write(f"| {t} | - |\n") # Optimization results don't easily expose barriers here
+            f.write("\n")
+
+        if result.projection_metadata:
+            f.write("### Projection Calibration\n")
+            f.write("| Compound | Process State | Calibration Source | Evidence | Fallback | Observable ppb |\n")
+            f.write("| :--- | :--- | :--- | :--- | :--- | ---: |\n")
+            rows = sorted(
+                result.projection_metadata.values(),
+                key=lambda item: float(item.get("observable_ppb", 0.0)),
+                reverse=True,
+            )
+            for row in rows[:8]:
+                f.write(
+                    f"| {row.get('compound', 'unknown')} | {row.get('process_state', 'unknown')} | {row.get('calibration_source', 'class_fallback')} | {row.get('calibration_evidence_strength', 'heuristic')} | {row.get('calibration_fallback_mode', 'class_level')} | {float(row.get('observable_ppb', 0.0)):.2f} |\n"
+                )
             f.write("\n")
 
         f.write("## 4. Analytical Metadata\n")

@@ -72,3 +72,14 @@ def test_benchmark_targets_keep_low_headspace_markers_well_below_observable_outp
     assert hmf.headspace_class == "low_headspace"
     assert furfural.headspace_class == "observable"
     assert furfural.predicted_ppb > hmf.predicted_ppb * 20.0
+
+
+def test_matrix_precursor_augmented_targets_are_included_in_snapshot_reports():
+    rows = snapshot_all_benchmark_targets([
+        ROOT / "data" / "benchmarks" / "pea_isolate_ribose_cysteine_100C_45min_Internal2026.json",
+        ROOT / "data" / "benchmarks" / "soy_isolate_ribose_cysteine_100C_45min_Internal2026.json",
+    ])
+
+    benchmark_ids = {row.benchmark_id for row in rows}
+    assert "pea_isolate_ribose_cysteine_100C_45min_Internal2026" in benchmark_ids
+    assert "soy_isolate_ribose_cysteine_100C_45min_Internal2026" in benchmark_ids

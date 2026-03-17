@@ -10,6 +10,7 @@ if str(ROOT) not in sys.path:
 
 from src.benchmark_validation import (
     evaluate_benchmark,
+    get_matrix_ranking_contract,
     snapshot_all_benchmark_targets,
     snapshot_benchmark_targets,
     summarize_evaluation,
@@ -80,3 +81,26 @@ def test_matrix_only_benchmark_is_deliberately_excluded_from_target_snapshots():
 
     assert rows
     assert {row.benchmark_id for row in rows} == {"cys_glucose_150C_Farmer1999"}
+
+
+def test_matrix_only_benchmark_exposes_ranking_contract_and_calibration_metadata():
+    bench_file = MATRIX_ONLY_BENCHMARKS["soy_iso"]
+
+    evaluation = evaluate_benchmark(bench_file)
+    summary = summarize_evaluation(evaluation, protein_type="soy_iso")
+    contract = get_matrix_ranking_contract(bench_file)
+
+    assert contract["process_state"] == "ambient_slurry"
+    assert contract["calibration_mode"] == "compound_specific_headspace"
+    assert [item["name"] for item in contract["observable_targets"]] == [
+        "2-pentylfuran",
+        "hexanal",
+        "hexanol",
+    ]
+
+    hexanal_meta = evaluation.projection_metadata["Hexanal"]
+    assert hexanal_meta["calibration_evidence_strength"] == "literature_anchored"
+    assert hexanal_meta["calibration_fallback_mode"] == "compound_specific"
+    assert hexanal_meta["process_state"] == "ambient_slurry"
+    assert summary.ranking_contract_status == "pass"
+    assert summary.adverse_markers == ["2-pentylfuran", "hexanal", "hexanol"]

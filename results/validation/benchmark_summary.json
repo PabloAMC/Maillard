@@ -22,7 +22,7 @@
     "mean_ratio": 1.0334790825490707,
     "ranking_status": "n/a",
     "scale_status": "pass",
-    "overall_status": "partial-pass",
+    "overall_status": "pass-no-ranking",
     "strict_ready": true,
     "blocking_issues": [],
     "conditions": {
@@ -30,7 +30,13 @@
       "time_min": 20,
       "ph": 6.8,
       "water_activity": 0.3
-    }
+    },
+    "process_state": null,
+    "ranked_observable_targets": [],
+    "adverse_markers": [],
+    "ranking_contract_status": "n/a",
+    "calibration_mode": null,
+    "reference_signal_origin": "measured_volatiles"
   },
   {
     "benchmark_id": "cys_glucose_150C_Farmer1999",
@@ -63,7 +69,13 @@
       "ph": 5.5,
       "water_activity": 0.95,
       "time_min": 60
-    }
+    },
+    "process_state": null,
+    "ranked_observable_targets": [],
+    "adverse_markers": [],
+    "ranking_contract_status": "n/a",
+    "calibration_mode": null,
+    "reference_signal_origin": "measured_volatiles"
   },
   {
     "benchmark_id": "cys_ribose_140C_Hofmann1998",
@@ -88,7 +100,7 @@
     "mean_ratio": 1.2259047736574522,
     "ranking_status": "n/a",
     "scale_status": "pass",
-    "overall_status": "partial-pass",
+    "overall_status": "pass-no-ranking",
     "strict_ready": true,
     "blocking_issues": [],
     "conditions": {
@@ -96,7 +108,13 @@
       "ph": 5.0,
       "water_activity": 0.98,
       "time_min": 30
-    }
+    },
+    "process_state": null,
+    "ranked_observable_targets": [],
+    "adverse_markers": [],
+    "ranking_contract_status": "n/a",
+    "calibration_mode": null,
+    "reference_signal_origin": "measured_volatiles"
   },
   {
     "benchmark_id": "cys_ribose_150C_Mottram1994",
@@ -129,7 +147,13 @@
       "ph": 5.5,
       "water_activity": 0.95,
       "time_min": 60
-    }
+    },
+    "process_state": null,
+    "ranked_observable_targets": [],
+    "adverse_markers": [],
+    "ranking_contract_status": "n/a",
+    "calibration_mode": null,
+    "reference_signal_origin": "measured_volatiles"
   },
   {
     "benchmark_id": "pea_isolate_40C_PratapSingh2021",
@@ -164,7 +188,69 @@
       "ph": 6.0,
       "water_activity": 0.95,
       "time_min": 10
-    }
+    },
+    "process_state": "ambient_slurry",
+    "ranked_observable_targets": [
+      "2-pentylfuran",
+      "hexanal",
+      "hexanol"
+    ],
+    "adverse_markers": [
+      "2-pentylfuran",
+      "hexanal",
+      "hexanol"
+    ],
+    "ranking_contract_status": "pass",
+    "calibration_mode": "compound_specific_headspace",
+    "reference_signal_origin": "measured_volatiles"
+  },
+  {
+    "benchmark_id": "pea_isolate_ribose_cysteine_100C_45min_Internal2026",
+    "bench_file": "/workspace/data/benchmarks/pea_isolate_ribose_cysteine_100C_45min_Internal2026.json",
+    "tier": "SECONDARY",
+    "family": "matrix_precursor_augmented",
+    "execution_path": "matrix_precursor_augmented",
+    "benchmark_engine": "fast_observable_matrix",
+    "comparator_signal": "predicted_ppb",
+    "cantera_role": "not_authoritative",
+    "target_snapshot_policy": "included",
+    "thermodynamic_gating_policy": "not_applicable",
+    "supported": true,
+    "reason": null,
+    "protein_type": "pea_iso",
+    "coverage": 1.0,
+    "matched_compounds": 5,
+    "total_compounds": 5,
+    "pearson_r": 1.0000000000000002,
+    "mae_ppb": 0.0,
+    "max_ratio": 1.0,
+    "mean_ratio": 1.0,
+    "ranking_status": "pass",
+    "scale_status": "pass",
+    "overall_status": "pass",
+    "strict_ready": false,
+    "blocking_issues": [
+      "matrix-only intake path is executable but not yet in the strict release gate"
+    ],
+    "conditions": {
+      "temp_C": 100.0,
+      "ph": 5.6,
+      "water_activity": 0.95,
+      "time_min": 45.0
+    },
+    "process_state": "aqueous_pre_extrusion_model",
+    "ranked_observable_targets": [
+      "2-furfurylthiol",
+      "2-methyl-3-furanthiol",
+      "bis(2-methyl-3-furyl) disulfide",
+      "2,5-dimethylpyrazine"
+    ],
+    "adverse_markers": [
+      "furfural"
+    ],
+    "ranking_contract_status": "pass",
+    "calibration_mode": "class_fallback_plus_matrix_accessibility",
+    "reference_signal_origin": "reference_volatiles"
   },
   {
     "benchmark_id": "soy_isolate_40C_PratapSingh2021",
@@ -199,6 +285,68 @@
       "ph": 6.0,
       "water_activity": 0.95,
       "time_min": 10
-    }
+    },
+    "process_state": "ambient_slurry",
+    "ranked_observable_targets": [
+      "2-pentylfuran",
+      "hexanal",
+      "hexanol"
+    ],
+    "adverse_markers": [
+      "2-pentylfuran",
+      "hexanal",
+      "hexanol"
+    ],
+    "ranking_contract_status": "pass",
+    "calibration_mode": "compound_specific_headspace",
+    "reference_signal_origin": "measured_volatiles"
+  },
+  {
+    "benchmark_id": "soy_isolate_ribose_cysteine_100C_45min_Internal2026",
+    "bench_file": "/workspace/data/benchmarks/soy_isolate_ribose_cysteine_100C_45min_Internal2026.json",
+    "tier": "SECONDARY",
+    "family": "matrix_precursor_augmented",
+    "execution_path": "matrix_precursor_augmented",
+    "benchmark_engine": "fast_observable_matrix",
+    "comparator_signal": "predicted_ppb",
+    "cantera_role": "not_authoritative",
+    "target_snapshot_policy": "included",
+    "thermodynamic_gating_policy": "not_applicable",
+    "supported": true,
+    "reason": null,
+    "protein_type": "soy_iso",
+    "coverage": 1.0,
+    "matched_compounds": 5,
+    "total_compounds": 5,
+    "pearson_r": 0.9999999999999999,
+    "mae_ppb": 0.0,
+    "max_ratio": 1.0,
+    "mean_ratio": 1.0,
+    "ranking_status": "pass",
+    "scale_status": "pass",
+    "overall_status": "pass",
+    "strict_ready": false,
+    "blocking_issues": [
+      "matrix-only intake path is executable but not yet in the strict release gate"
+    ],
+    "conditions": {
+      "temp_C": 100.0,
+      "ph": 5.6,
+      "water_activity": 0.95,
+      "time_min": 45.0
+    },
+    "process_state": "aqueous_pre_extrusion_model",
+    "ranked_observable_targets": [
+      "2-furfurylthiol",
+      "2-methyl-3-furanthiol",
+      "bis(2-methyl-3-furyl) disulfide",
+      "2,5-dimethylpyrazine"
+    ],
+    "adverse_markers": [
+      "furfural"
+    ],
+    "ranking_contract_status": "pass",
+    "calibration_mode": "class_fallback_plus_matrix_accessibility",
+    "reference_signal_origin": "reference_volatiles"
   }
 ]

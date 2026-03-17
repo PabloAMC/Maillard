@@ -1,7 +1,8 @@
 # Installing Maillard
 
-Welcome to Maillard! This library relies on a powerful stack of deep learning (`torch`, `mace-torch`) and quantum chemistry (`pyscf`, `xtb`, `crest`) tools.
-Because these tools rely on highly optimized C++ and Fortran code, installation steps vary depending on your operating system. This guide is designed to work from scratch, even if you are new to command-line tools. Please read the section for your specific operating system carefully.
+This is the low-level setup reference. If you want the shortest path to a first successful run, start with [docs/guides/QUICKSTART.md](docs/guides/QUICKSTART.md).
+
+Maillard relies on scientific Python, chemistry toolchains, and a few required upstream patches. For reproducibility, macOS users should strongly prefer Docker.
 
 ## 1. Prerequisites & Terminal Setup
 
@@ -32,7 +33,7 @@ Close your terminal window completely and open a new one to apply the changes.
 
 Do not attempt to run this natively on macOS ARM64. Instead, we use Docker to run a lightweight Linux environment. 
 
-**Quick Start**: from the repository root, use the helper script:
+Recommended first commands from the repository root:
 
 ```bash
 ./scripts/docker_maillard.sh up
@@ -49,10 +50,13 @@ Do not attempt to run this natively on macOS ARM64. Instead, we use Docker to ru
 6. For reproducible benchmark inspection, prefer the named wrapper commands over ad hoc inline Python. For example:
 	```bash
 	./scripts/docker_maillard.sh summary
+	./scripts/docker_maillard.sh validation-figures
 	./scripts/docker_maillard.sh index
 	./scripts/docker_maillard.sh targets data/benchmarks/cys_ribose_140C_Hofmann1998.json
 	./scripts/docker_maillard.sh targets-report
 	```
+
+For the full command list, see [docs/reference/COMMAND_REFERENCE.md](docs/reference/COMMAND_REFERENCE.md).
 
 ## 2. Downloading Maillard & Creating the Environment
 First, download the Maillard repository to your computer and enter the directory:
@@ -113,7 +117,16 @@ sed -i "s/torch.load(f=model_path, map_location=device)/torch.load(f=model_path,
 
 
 ## 5. Verifying the Installation
-Let's ensure everything is working by running a test calculation, followed by the library's automated test suite.
+
+The minimum useful verification for a new installation is:
+
+```bash
+./scripts/docker_maillard.sh summary
+./scripts/docker_maillard.sh validation-figures
+./scripts/docker_maillard.sh core
+```
+
+If you also need to verify the heavier chemistry stack, continue with the examples below.
 
 A. Running a Quantum Cluster Growth (QCG) Example
 We will create a dedicated folder, generate dummy molecules, and run a cluster simulation.
@@ -174,11 +187,12 @@ Useful validated commands from the repository root:
 ```bash
 ./scripts/docker_maillard.sh status
 ./scripts/docker_maillard.sh scientific
+./scripts/docker_maillard.sh validation-figures
 ./scripts/docker_maillard.sh targets data/benchmarks/cys_ribose_150C_Mottram1994.json
 ./scripts/docker_maillard.sh targets-report
 ```
 
-The `scientific` lane now also regenerates `results/validation/benchmark_targets.md` and `results/validation/benchmark_targets.json` inside the Docker `maillard` environment.
+The `scientific` lane regenerates the core validation artifacts inside the Docker `maillard` environment. The validation-figures command adds a single graphical summary of reliability and current gaps.
 
 ### 🐧 Linux & 🪟 Windows (WSL2) Users
 

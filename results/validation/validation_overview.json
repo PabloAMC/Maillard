@@ -1,0 +1,203 @@
+{
+  "benchmark_count": 8,
+  "strict_ready_count": 4,
+  "status_counts": {
+    "pass-no-ranking": 2,
+    "pass": 6
+  },
+  "benchmarks": [
+    {
+      "benchmark_id": "acrylamide_asparagine_glucose_Parker2012",
+      "execution_path": "free_precursor",
+      "status": "pass-no-ranking",
+      "strict_ready": true,
+      "coverage": 1.0,
+      "pearson_r": null,
+      "max_ratio": 1.0334790825490707,
+      "mae_ppb": 48.59181445621721
+    },
+    {
+      "benchmark_id": "cys_glucose_150C_Farmer1999",
+      "execution_path": "free_precursor",
+      "status": "pass",
+      "strict_ready": true,
+      "coverage": 1.0,
+      "pearson_r": 0.9999680602847192,
+      "max_ratio": 1.2224806308669673,
+      "mae_ppb": 2.5327779276828655
+    },
+    {
+      "benchmark_id": "cys_ribose_140C_Hofmann1998",
+      "execution_path": "free_precursor",
+      "status": "pass-no-ranking",
+      "strict_ready": true,
+      "coverage": 1.0,
+      "pearson_r": null,
+      "max_ratio": 1.4418630406835105,
+      "mae_ppb": 53.38829245153475
+    },
+    {
+      "benchmark_id": "cys_ribose_150C_Mottram1994",
+      "execution_path": "free_precursor",
+      "status": "pass",
+      "strict_ready": true,
+      "coverage": 1.0,
+      "pearson_r": 0.9954481338454503,
+      "max_ratio": 1.3804227082370715,
+      "mae_ppb": 94.57322767411118
+    },
+    {
+      "benchmark_id": "pea_isolate_40C_PratapSingh2021",
+      "execution_path": "matrix_only",
+      "status": "pass",
+      "strict_ready": false,
+      "coverage": 1.0,
+      "pearson_r": 0.9999995223807515,
+      "max_ratio": 1.002488531616753,
+      "mae_ppb": 0.3385431376812657
+    },
+    {
+      "benchmark_id": "pea_isolate_ribose_cysteine_100C_45min_Internal2026",
+      "execution_path": "matrix_precursor_augmented",
+      "status": "pass",
+      "strict_ready": false,
+      "coverage": 1.0,
+      "pearson_r": 1.0000000000000002,
+      "max_ratio": 1.0,
+      "mae_ppb": 0.0
+    },
+    {
+      "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+      "execution_path": "matrix_only",
+      "status": "pass",
+      "strict_ready": false,
+      "coverage": 1.0,
+      "pearson_r": 0.9999999995050419,
+      "max_ratio": 1.0006793224018127,
+      "mae_ppb": 0.164202993808838
+    },
+    {
+      "benchmark_id": "soy_isolate_ribose_cysteine_100C_45min_Internal2026",
+      "execution_path": "matrix_precursor_augmented",
+      "status": "pass",
+      "strict_ready": false,
+      "coverage": 1.0,
+      "pearson_r": 0.9999999999999999,
+      "max_ratio": 1.0,
+      "mae_ppb": 0.0
+    }
+  ],
+  "matrix_readiness": [
+    {
+      "protein_type": "pea_iso",
+      "off_flavour_anchor_count": 1,
+      "meaty_candidate_count": 1,
+      "external_meaty_anchor_count": 0,
+      "candidate_set_ready": true,
+      "external_assessment_unlocked": false,
+      "blocker": "missing external meaty-positive benchmark"
+    },
+    {
+      "protein_type": "soy_iso",
+      "off_flavour_anchor_count": 1,
+      "meaty_candidate_count": 1,
+      "external_meaty_anchor_count": 0,
+      "candidate_set_ready": true,
+      "external_assessment_unlocked": false,
+      "blocker": "missing external meaty-positive benchmark"
+    }
+  ],
+  "coverage_gaps": [
+    {
+      "dimension": "protein_system",
+      "category": "free",
+      "benchmark_count": 4,
+      "status": "covered",
+      "note": "present in current benchmark set"
+    },
+    {
+      "dimension": "protein_system",
+      "category": "pea_iso",
+      "benchmark_count": 2,
+      "status": "covered",
+      "note": "present in current benchmark set"
+    },
+    {
+      "dimension": "protein_system",
+      "category": "soy_iso",
+      "benchmark_count": 2,
+      "status": "covered",
+      "note": "present in current benchmark set"
+    },
+    {
+      "dimension": "protein_system",
+      "category": "pea_conc",
+      "benchmark_count": 0,
+      "status": "gap",
+      "note": "no benchmark currently covers this protein system"
+    },
+    {
+      "dimension": "protein_system",
+      "category": "soy_conc",
+      "benchmark_count": 0,
+      "status": "gap",
+      "note": "no benchmark currently covers this protein system"
+    },
+    {
+      "dimension": "protein_system",
+      "category": "myco",
+      "benchmark_count": 0,
+      "status": "gap",
+      "note": "no benchmark currently covers this protein system"
+    },
+    {
+      "dimension": "process_state",
+      "category": "ambient_slurry",
+      "benchmark_count": 2,
+      "status": "covered",
+      "note": "present in current benchmark set"
+    },
+    {
+      "dimension": "process_state",
+      "category": "aqueous_pre_extrusion_model",
+      "benchmark_count": 2,
+      "status": "covered",
+      "note": "present in current benchmark set"
+    },
+    {
+      "dimension": "process_state",
+      "category": "heated_matrix",
+      "benchmark_count": 0,
+      "status": "gap",
+      "note": "no benchmark currently covers this process state"
+    },
+    {
+      "dimension": "execution_path",
+      "category": "free_precursor",
+      "benchmark_count": 4,
+      "status": "covered",
+      "note": "free-AA sulfur and safety envelope"
+    },
+    {
+      "dimension": "execution_path",
+      "category": "matrix_only",
+      "benchmark_count": 2,
+      "status": "covered",
+      "note": "matrix off-flavour intake/headspace envelope"
+    },
+    {
+      "dimension": "execution_path",
+      "category": "matrix_precursor_augmented",
+      "benchmark_count": 2,
+      "status": "covered",
+      "note": "matrix meaty-positive reproducibility harness envelope"
+    },
+    {
+      "dimension": "scientific_gap",
+      "category": "external_matrix_meaty_positive",
+      "benchmark_count": 0,
+      "status": "gap",
+      "note": "wet-lab quantitative meaty-positive matrix benchmarks are the main blocker for broad alt-protein validation"
+    }
+  ]
+}

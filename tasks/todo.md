@@ -13,6 +13,14 @@ For this repository to be genuinely state of the art, it must simultaneously pro
 
 ## Truthful Current Status — 2026-03-17
 
+### Documentation and onboarding review — 2026-03-18
+
+- [x] Rework the entry documentation so a new scientist can understand what the tool does, how to run it, and what not to claim from it.
+- [x] Add a dedicated trust-and-limitations guide and a fast quickstart path.
+- [x] Add a command reference and a project-structure reference.
+- [x] Add a reproducible validation-figure artifact so reliability and limitations can be shown graphically.
+- [x] Group development and research notes behind explicit documentation indexes instead of leaving them as an unstructured reading path.
+
 ### What is already strong
 
 - [x] Free-amino-acid PRIMARY benchmarks are in a credible Docker-validated envelope.
@@ -101,38 +109,38 @@ Scientists need to know not only the prediction, but how much to trust it.
 
 #### Phase 1 — Benchmark contract expansion
 
-1. [ ] Define a matrix target-ranking contract that every candidate benchmark must satisfy: observable targets, expected ordering, adverse markers, process metadata, and citation provenance. (Dificultad: Alta — Modelo recomendado: GPT-5.4)
-2. [ ] Add contract fields to the benchmark artifacts and validation loaders so matrix cases expose ranked desirable and adverse targets, not just intake executability. (Dificultad: Alta — Modelo recomendado: GPT-5.4)
-3. [ ] Create a first promotion set for pea and soy with at least one meaty-positive and one off-flavour-negative benchmark per family. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
+1. [x] Define a matrix target-ranking contract that every candidate benchmark must satisfy: observable targets, expected ordering, adverse markers, process metadata, and citation provenance. (Dificultad: Alta — Modelo recomendado: GPT-5.4)
+2. [x] Add contract fields to the benchmark artifacts and validation loaders so matrix cases expose ranked desirable and adverse targets, not just intake executability. (Dificultad: Alta — Modelo recomendado: GPT-5.4)
+3. [x] Create a first promotion set for pea and soy with at least one meaty-positive and one off-flavour-negative benchmark per family. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
 
 #### Phase 2 — Observable calibration surface
 
-1. [ ] Replace class-level matrix observability where evidence exists with compound-level calibration entries keyed by compound, matrix family, and process state. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
-2. [ ] Extend projection metadata so every ranked compound exposes its calibration source, fallback mode, and evidence strength in CLI/report JSON. (Dificultad: Alta — Modelo recomendado: Gemini 3 Pro)
+1. [x] Replace class-level matrix observability where evidence exists with compound-level calibration entries keyed by compound, matrix family, and process state. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
+2. [x] Extend projection metadata so every ranked compound exposes its calibration source, fallback mode, and evidence strength in CLI/report JSON. (Dificultad: Alta — Modelo recomendado: Gemini 3 Pro)
 3. [ ] Add explicit adverse-target calibration for lipid-coupled notes so matrix validation covers the meaty/off-flavour tradeoff in the same experiment. (Dificultad: Alta — Modelo recomendado: Gemini 3 Pro)
 
 #### Phase 3 — Process realism
 
-1. [ ] Introduce process-state descriptors for extrusion or pre-heating history into matrix benchmark inputs and explainability payloads. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
+1. [x] Introduce process-state descriptors for extrusion or pre-heating history into matrix benchmark inputs and explainability payloads. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
 2. [ ] Calibrate accessibility and release heuristics against those states before promoting any matrix family into a stricter gate. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
 
 #### Phase 4 — Validation and promotion
 
-1. [ ] Add Docker-visible ranking assertions for matrix benchmarks: top-k desirable hits, adverse marker ordering, and tolerance thresholds. (Dificultad: Alta — Modelo recomendado: Gemini 3 Pro)
-2. [ ] Add report outputs that show benchmark deltas for every promoted matrix case, including successes, misses, and fallback paths used. (Dificultad: Media — Modelo recomendado: Gemini 3 Flash)
-3. [ ] Keep strict-gate promotion disabled until the first pea/soy candidate passes reproducibly in Docker on ranking metrics, not only execution checks. (Dificultad: Baja — Modelo recomendado: GPT-5 mini)
+1. [x] Add Docker-visible ranking assertions for matrix benchmarks: top-k desirable hits, adverse marker ordering, and tolerance thresholds. (Dificultad: Alta — Modelo recomendado: Gemini 3 Pro)
+2. [x] Add report outputs that show benchmark deltas for every promoted matrix case, including successes, misses, and fallback paths used. (Dificultad: Media — Modelo recomendado: Gemini 3 Flash)
+3. [x] Keep strict-gate promotion disabled until the first pea/soy candidate passes reproducibly in Docker on ranking metrics, not only execution checks. (Dificultad: Baja — Modelo recomendado: GPT-5 mini)
 
 #### P1 deliverables
 
-- [ ] New/updated matrix benchmark YAML cases with ranked targets and adverse markers. (Dificultad: Alta — Modelo recomendado: GPT-5.4)
-- [ ] Projection/calibration registry for compound-level matrix observability. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
-- [ ] Validation code and reports that surface ranking deltas in Docker artifacts. (Dificultad: Alta — Modelo recomendado: Gemini 3 Pro)
+- [x] New/updated matrix benchmark YAML cases with ranked targets and adverse markers. (Dificultad: Alta — Modelo recomendado: GPT-5.4)
+- [x] Projection/calibration registry for compound-level matrix observability. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
+- [x] Validation code and reports that surface ranking deltas in Docker artifacts. (Dificultad: Alta — Modelo recomendado: Gemini 3 Pro)
 
 #### P1 verification plan
 
-- [ ] Add focused pytest coverage for contract parsing, calibration fallback behavior, and ranking assertions. (Dificultad: Alta — Modelo recomendado: Gemini 3 Pro)
+- [x] Add focused pytest coverage for contract parsing, calibration fallback behavior, and ranking assertions. (Dificultad: Alta — Modelo recomendado: Gemini 3 Pro)
 - [ ] Run Docker benchmark lanes for the first promoted matrix family before merge. (Dificultad: Media — Modelo recomendado: GPT-5 mini)
-- [ ] Compare default-branch vs feature-branch benchmark deltas before any strict-gate claim. (Dificultad: Media — Modelo recomendado: GPT-5 mini)
+- [x] Compare default-branch vs feature-branch benchmark deltas before any strict-gate claim. (Dificultad: Media — Modelo recomendado: GPT-5 mini)
 
 ## P3 — Broaden The Scientific Envelope That Matters To Alt-Protein R&D
 
@@ -187,6 +195,9 @@ This is the difference between a strong model repo and a tool scientists keep us
 - It is not yet state of the art for alternative-protein scientists because the decisive missing layers are user-facing decision support, confidence reporting, matrix-ranking validation, and experiment-to-model iteration.
 - P2 is now functionally complete in the main scientist-facing surfaces: CLI/report outputs include prediction mode, calibration diagnostics, compound and aggregate confidence tiers, and local sensitivity summaries.
 - P1 is now the dominant scientific-product blocker and should start with benchmark contract design before any broader chemistry expansion.
+- P1 progress on 2026-03-17: pea/soy matrix benchmarks now carry an explicit ranking contract with process metadata and citation provenance; validation/report artifacts surface ranking-contract status and compound-level calibration provenance while the strict gate remains blocked.
+- P1 evidence status on 2026-03-17: the repo now distinguishes external matrix evidence from internal reproducibility harnesses explicitly; external pea/soy meaty-positive promotion remains blocked because no wet-lab quantitative benchmark is currently available in-repo.
+- P1 completion status on 2026-03-17: the repo now emits matrix assertions, evidence audits, family-readiness summaries, and branch-vs-main deltas in Docker. Pea and soy each have an off-flavour anchor and a meaty candidate, but external meaty-positive assessment remains blocked pending wet-lab data.
 
 ## Model guidance (resumen)
 
