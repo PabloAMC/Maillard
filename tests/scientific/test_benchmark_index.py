@@ -49,3 +49,16 @@ def test_benchmark_index_markdown_exposes_execution_path():
     assert "Cantera Role" in markdown
     assert "Thermo Policy" in markdown
     assert "matrix_only" in markdown
+
+
+def test_benchmark_index_includes_matrix_precursor_augmented_candidates():
+    entries = build_benchmark_index([
+        ROOT / "data" / "benchmarks" / "pea_isolate_ribose_cysteine_100C_45min_Internal2026.json",
+        ROOT / "data" / "benchmarks" / "soy_isolate_ribose_cysteine_100C_45min_Internal2026.json",
+    ])
+    by_id = {entry.benchmark_id: entry for entry in entries}
+
+    assert by_id["pea_isolate_ribose_cysteine_100C_45min_Internal2026"].execution_path == "matrix_precursor_augmented"
+    assert by_id["pea_isolate_ribose_cysteine_100C_45min_Internal2026"].strict_ready is False
+    assert by_id["soy_isolate_ribose_cysteine_100C_45min_Internal2026"].execution_path == "matrix_precursor_augmented"
+    assert by_id["soy_isolate_ribose_cysteine_100C_45min_Internal2026"].strict_ready is False

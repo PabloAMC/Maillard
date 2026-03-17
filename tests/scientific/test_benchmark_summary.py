@@ -35,12 +35,16 @@ def test_benchmark_summary_separates_supported_and_unsupported_cases():
     assert by_id["pea_isolate_40C_PratapSingh2021"].benchmark_engine == "matrix_intake_headspace"
     assert by_id["pea_isolate_40C_PratapSingh2021"].cantera_role == "not_authoritative"
     assert by_id["pea_isolate_40C_PratapSingh2021"].thermodynamic_gating_policy == "not_applicable"
+    assert by_id["pea_isolate_40C_PratapSingh2021"].process_state == "ambient_slurry"
+    assert by_id["pea_isolate_40C_PratapSingh2021"].ranking_contract_status == "pass"
     assert by_id["pea_isolate_40C_PratapSingh2021"].strict_ready is False
     assert by_id["pea_isolate_40C_PratapSingh2021"].overall_status in {"pass", "pass-no-ranking", "scale-gap", "ranking-gap"}
 
     assert by_id["soy_isolate_40C_PratapSingh2021"].supported is True
     assert by_id["soy_isolate_40C_PratapSingh2021"].benchmark_engine == "matrix_intake_headspace"
     assert by_id["soy_isolate_40C_PratapSingh2021"].cantera_role == "not_authoritative"
+    assert by_id["soy_isolate_40C_PratapSingh2021"].process_state == "ambient_slurry"
+    assert by_id["soy_isolate_40C_PratapSingh2021"].ranking_contract_status == "pass"
     assert by_id["soy_isolate_40C_PratapSingh2021"].strict_ready is False
     assert by_id["soy_isolate_40C_PratapSingh2021"].overall_status in {"pass", "pass-no-ranking", "scale-gap", "ranking-gap"}
 
@@ -59,6 +63,8 @@ def test_benchmark_summary_markdown_includes_gap_labels():
     assert "pea_isolate_40C_PratapSingh2021" in markdown
     assert "soy_isolate_40C_PratapSingh2021" in markdown
     assert "matrix-only intake path is executable" in markdown
+    assert "ambient_slurry" in markdown
+    assert "Ranking Contract" in markdown
     assert "Strict Ready" in markdown
     assert "Cantera Role" in markdown
     assert "Thermo Policy" in markdown

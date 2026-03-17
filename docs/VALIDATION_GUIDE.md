@@ -1,5 +1,7 @@
 # Scientific Validation Guide
 
+If you are new to the repository, read [guides/SCIENTIFIC_RELIABILITY.md](guides/SCIENTIFIC_RELIABILITY.md) first. This document is the deeper contract and methodology reference.
+
 ## 1. Validation Contract
 
 The project currently uses a layered benchmark contract rather than a single release number.
@@ -45,6 +47,14 @@ The benchmark index artifact is generated with:
 This writes `results/validation/benchmark_index.md` and `results/validation/benchmark_index.json` so execution-path limits such as matrix-only benchmarks are explicit.
 The index also records which engine is authoritative for each benchmark and whether Cantera is only diagnostic or not currently authoritative.
 
+For a single graphical snapshot of reliability and current limitations, use:
+
+```bash
+./scripts/docker_maillard.sh validation-figures
+```
+
+This writes `results/validation/validation_overview.png`, `results/validation/validation_overview.md`, and `results/validation/validation_overview.json`.
+
 For a reproducible thermodynamic-gating audit, use:
 
 ```bash
@@ -53,6 +63,19 @@ For a reproducible thermodynamic-gating audit, use:
 
 This writes `results/validation/thermodynamic_gating_audit.md` and `results/validation/thermodynamic_gating_audit.json` and reports whether the gated variant materially improves benchmark error. Until that audit says otherwise, thermodynamic gating remains diagnostic-only for benchmark pass/fail.
 The benchmark metadata and generated summary/index artefacts now also expose the current thermodynamic-gating policy so the `auto` benchmark path resolves through an explicit contract rather than an implicit default.
+
+For the current matrix-specific validation surfaces, use:
+
+```bash
+./scripts/docker_maillard.sh matrix-deltas
+./scripts/docker_maillard.sh matrix-evidence
+./scripts/docker_maillard.sh matrix-assertions
+./scripts/docker_maillard.sh matrix-readiness
+./scripts/docker_maillard.sh matrix-branch-deltas main
+./scripts/docker_maillard.sh coverage-gaps
+```
+
+These artifacts make matrix progress and matrix limitations explicit without pretending the matrix lane is already strict-ready.
 
 For marker-separated validation lanes, use:
 

@@ -103,6 +103,10 @@ def build_formulation_explainability_payload(
             "matrix_factor": metadata.get("matrix_factor", 1.0),
             "headspace_factor": metadata.get("headspace_factor", 1.0),
             "volatile_class": metadata.get("volatile_class", "other"),
+            "process_state": metadata.get("process_state", "unknown"),
+            "calibration_source": metadata.get("calibration_source", "class_fallback"),
+            "calibration_evidence_strength": metadata.get("calibration_evidence_strength", "heuristic"),
+            "calibration_fallback_mode": metadata.get("calibration_fallback_mode", "class_level"),
         })
         if len(top_rows) >= 8:
             break
@@ -154,12 +158,12 @@ def render_formulation_explainability_markdown(payload: Dict[str, object]) -> st
         "",
         "## Projection Rows",
         "",
-        "| Compound | Proxy ppb | Observable ppb | Obs/Proxy | Matrix | Headspace | Class |",
-        "| --- | --- | --- | --- | --- | --- | --- |",
+        "| Compound | Proxy ppb | Observable ppb | Obs/Proxy | Matrix | Headspace | Class | Process | Calibration | Evidence | Fallback |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
     ])
     for row in payload["top_projection_rows"]:
         lines.append(
-            f"| {row['compound']} | {row['proxy_ppb']:.3f} | {row['observable_ppb']:.3f} | {row['observable_ratio']:.3f} | {row['matrix_factor']:.3f} | {row['headspace_factor']:.3f} | {row['volatile_class']} |"
+            f"| {row['compound']} | {row['proxy_ppb']:.3f} | {row['observable_ppb']:.3f} | {row['observable_ratio']:.3f} | {row['matrix_factor']:.3f} | {row['headspace_factor']:.3f} | {row['volatile_class']} | {row['process_state']} | {row['calibration_source']} | {row['calibration_evidence_strength']} | {row['calibration_fallback_mode']} |"
         )
     return "\n".join(lines) + "\n"
 

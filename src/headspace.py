@@ -10,23 +10,11 @@ import yaml
 from pathlib import Path
 from typing import Dict, Optional, List
 
+from src.matrix_calibration_registry import (
+    determine_matrix_process_state,
+    get_matrix_calibration_record,
+)
 from src.matrix_correction import ProteinType, resolve_compound_matrix_retention, resolve_matrix_correction
-
-
-_PLANT_MATRIX_BENCHMARK_HEADSPACE_FACTORS = {
-    ProteinType.PEA_ISOLATE: {
-        "hexanal": 1.0,
-        "2-pentylfuran": 1.0,
-        "1-hexanol": 1.0,
-        "nonanal": 1.0,
-    },
-    ProteinType.SOY_ISOLATE: {
-        "hexanal": 0.453 / 0.205,
-        "2-pentylfuran": 2.972 / 0.502,
-        "1-hexanol": 0.143 / 0.063,
-        "nonanal": 0.160 / 0.150,
-    },
-}
 
 class HeadspaceModel:
     """
@@ -180,6 +168,8 @@ class HeadspaceModel:
         *,
         protein_type: Optional[str],
         pH: Optional[float],
+        temperature_celsius: float = 40.0,
+        time_minutes: float = 10.0,
     ) -> float:
         """
         Empirical observable-release factor for the Pratap-Singh plant-matrix lane.
@@ -203,8 +193,16 @@ class HeadspaceModel:
         except ValueError:
             return 1.0
 
-        normalized = name.strip().lower()
-        base_factor = _PLANT_MATRIX_BENCHMARK_HEADSPACE_FACTORS.get(p_type, {}).get(normalized, 1.0)
+        process_state = determine_matrix_process_state(
+            temperature_celsius=float(temperature_celsius),
+            time_minutes=float(time_minutes),
+        )
+        record = get_matrix_calibration_record(
+            name,
+            protein_type=p_type.value,
+            process_state=process_state,
+        )
+        base_factor = float(record.observable_factor) if record is not None else 1.0
         return base_factor * self.get_matrix_ph_release_factor(
             name,
             protein_type=protein_type,

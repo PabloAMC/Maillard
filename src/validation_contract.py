@@ -68,7 +68,8 @@ DEFAULT_VALIDATION_CONTRACT = ValidationContract(
     benchmark_policy=(
         "PRIMARY free-precursor benchmarks compare the FAST observable projection as the authoritative regression signal; "
         "Cantera remains a diagnostic reference lane until a benchmark-facing dual-lane contract is explicitly promoted. "
-        "Matrix-only benchmarks compare the dedicated intake/headspace path and stay outside the strict gate."
+        "Matrix-only benchmarks compare the dedicated intake/headspace path and stay outside the strict gate. "
+        "Matrix precursor-augmented benchmarks are allowed as reproducible matrix target-ranking harnesses, but they also remain outside the strict gate until tied to external evidence."
     ),
     execution_policies=(
         BenchmarkExecutionPolicy(
@@ -88,6 +89,15 @@ DEFAULT_VALIDATION_CONTRACT = ValidationContract(
             target_snapshot_policy="excluded",
             thermodynamic_gating_policy="not_applicable",
             notes="Matrix-only benchmarks validate the dedicated intake/headspace path and remain outside the strict gate until a precursor-resolved benchmark model exists.",
+        ),
+        BenchmarkExecutionPolicy(
+            execution_path="matrix_precursor_augmented",
+            benchmark_engine="fast_observable_matrix",
+            comparator_signal="predicted_ppb",
+            cantera_role="not_authoritative",
+            target_snapshot_policy="included",
+            thermodynamic_gating_policy="not_applicable",
+            notes="Matrix precursor-augmented benchmarks run the FAST observable path with non-free protein accessibility enabled; they are useful for reproducible matrix ranking harnesses but remain outside the strict gate until externally benchmarked.",
         ),
     ),
 )

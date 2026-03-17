@@ -32,6 +32,20 @@ Commands:
                Generate a benchmark target snapshot (default TYPE=desirable; aliases: off_flavour, off-flavour, competing).
   targets-report
                Generate results/validation/benchmark_targets.{md,json}.
+  matrix-deltas
+               Generate results/validation/matrix_benchmark_deltas.{md,json}.
+  matrix-assertions
+               Generate results/validation/matrix_benchmark_assertions.{md,json}.
+  matrix-evidence
+               Generate results/validation/matrix_benchmark_evidence.{md,json}.
+  matrix-readiness
+               Generate results/validation/matrix_promotion_readiness.{md,json}.
+  matrix-branch-deltas [BASE_REF]
+               Generate results/validation/matrix_branch_delta_report.{md,json} against BASE_REF (default: main).
+  coverage-gaps
+               Generate results/validation/benchmark_coverage_gaps.{md,json}.
+  validation-figures
+               Generate results/validation/validation_overview.{md,json,png}.
   thermo-gating
                Generate results/validation/thermodynamic_gating_audit.{md,json}.
   validated-envelope
@@ -64,6 +78,11 @@ scientific_lane() {
   run_in_env "python scripts/generate_benchmark_summary.py"
   run_in_env "python scripts/generate_benchmark_index.py"
   run_in_env "python scripts/generate_benchmark_targets.py"
+  run_in_env "python scripts/generate_matrix_benchmark_deltas.py"
+  run_in_env "python scripts/generate_matrix_benchmark_assertions.py"
+  run_in_env "python scripts/generate_matrix_benchmark_evidence.py"
+  run_in_env "python scripts/generate_matrix_promotion_readiness.py"
+  run_in_env "python scripts/generate_validation_figures.py"
   run_in_env "python scripts/generate_thermodynamic_gating_audit.py"
   scientific_fast_lane
 }
@@ -236,6 +255,28 @@ case "$cmd" in
     ;;
   targets-report)
     run_in_env "python scripts/generate_benchmark_targets.py"
+    ;;
+  matrix-deltas)
+    run_in_env "python scripts/generate_matrix_benchmark_deltas.py"
+    ;;
+  matrix-assertions)
+    run_in_env "python scripts/generate_matrix_benchmark_assertions.py"
+    ;;
+  matrix-evidence)
+    run_in_env "python scripts/generate_matrix_benchmark_evidence.py"
+    ;;
+  matrix-readiness)
+    run_in_env "python scripts/generate_matrix_promotion_readiness.py"
+    ;;
+  matrix-branch-deltas)
+    shift
+    run_in_env "python scripts/compare_matrix_benchmark_branches.py --base-ref '${1:-main}'"
+    ;;
+  coverage-gaps)
+    run_in_env "python scripts/generate_benchmark_coverage_gaps.py"
+    ;;
+  validation-figures)
+    run_in_env "python scripts/generate_validation_figures.py"
     ;;
   thermo-gating)
     run_in_env "python scripts/generate_thermodynamic_gating_audit.py"
