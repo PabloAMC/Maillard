@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from typing import Optional
 
+from src.barrier_constants import arrhenius_rate_constant
+
 @dataclass
 class ReactionConditions:
     """
@@ -111,8 +113,6 @@ class ReactionConditions:
         - furfural_formation: 70.0
         - acrylamide_formation: 130.0
         """
-        import numpy as np
-        R_J = 8.314  # J/mol/K
         T_K = self.temperature_kelvin
         
         # Ea in kJ/mol
@@ -136,9 +136,8 @@ class ReactionConditions:
                     ea_kj = val
                     break
             Ea_J = ea_kj * 1000.0
-            
-        A = 1e11  # Rough average pre-exponential factor, s^-1
-        k = A * np.exp(-Ea_J / (R_J * T_K))
+        
+        barrier_kcal = Ea_J / 4184.0
         
         # Apply pH ionization correction
         ph_factor = self._ionization_correction(pathway_type)
@@ -146,7 +145,12 @@ class ReactionConditions:
         # Apply water activity correction (Labuza)
         aw_factor = self._water_activity_correction(pathway_type)
         
-        return k * ph_factor * aw_factor
+        return arrhenius_rate_constant(
+            barrier_kcal,
+            T_K,
+            family=pathway_type,
+            multiplier=ph_factor * aw_factor,
+        )
 
     def _ionization_correction(self, pathway_type: str) -> float:
         """

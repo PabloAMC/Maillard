@@ -1,5 +1,28 @@
 # Maillard Literature Replication Plan
 
+## Active Deep Matrix Accessibility Calibration — 2026-03-17
+
+- [x] Reemplazar el `denaturation_state=0.5` implícito por una inferencia dependiente de temperatura/tiempo/pH con override explícito cuando el usuario lo proporcione.
+- [x] Anclar la inferencia térmica a los envelopes ya documentados para `pea_iso` y `soy_iso` sin descalibrar los endpoints explícitos que congelan los tests unitarios.
+- [x] Propagar la nueva semántica al path de formulación/recomendación y al optimizador para que el comportamiento por defecto sea más físico y requiera menos tuning manual.
+- [x] Añadir tests unitarios e integración que congelen la nueva semántica: baja desnaturalización a 40°C, recuperación a 90-140°C, y precedencia del override explícito.
+- [x] Revalidar en Docker el subset de accesibilidad y las lanes `scientific-fast` y `kinetics-validation`.
+- [x] Documentar el resultado y repriorizar los gaps de usabilidad del proyecto en este backlog.
+
+Review:
+- `src/matrix_correction.py` ahora infiere `denaturation_state` a partir de temperatura/tiempo/pH para pea/soy/concentrates/mycoprotein, con override explícito si la formulación lo fija.
+- `src/inverse_design.py` y `src/bayesian_optimizer.py` dejan de empujar por defecto un `0.5` artificial, y los resultados ahora exponen `effective_denaturation_state` para inspección.
+- Validación Docker después del cambio: `./scripts/docker_maillard.sh run python -m pytest tests/unit/test_matrix_correction.py tests/integration/test_matrix_accessibility_recommendation.py -q` => `25 passed`; `./scripts/docker_maillard.sh kinetics-validation` => `26 passed`; `./scripts/docker_maillard.sh scientific-fast` => `91 passed, 3 xfailed`.
+
+## Active Arrhenius Contract Alignment — 2026-03-17
+
+- [x] Re-auditar prioridades contra el estado real del repo y el diff frente a `main` antes de continuar Phase C.
+- [x] Sustituir las reconstrucciones locales de `A=1e11` por helpers compartidos de Arrhenius en `src/barrier_constants.py`.
+- [x] Alinear `src/conditions.py`, `src/inverse_design.py`, `src/benchmark_validation.py` y `scripts/diagnose_benchmark_selectivity.py` con el mismo contrato barrera → k → barrera efectiva.
+- [x] Mantener `src/recommend.py` en el mismo contrato temporal usando la preexponencial compartida por defecto.
+- [x] Validar en Docker con `./scripts/docker_maillard.sh pytest ...` y `./scripts/docker_maillard.sh scientific` dentro del entorno `maillard`.
+- [x] Decidir y documentar que el benchmark contract actual sigue siendo FAST observable-only, con Cantera como lane diagnóstica y `matrix_only` fuera del strict gate.
+
 ## Active Matrix-Only Contract — 2026-03-15
 
 - [x] Auditar y fijar el contrato explícito de benchmarks `matrix_only` en `src/benchmark_validation.py`.
@@ -66,7 +89,7 @@
 
 - [x] Free amino acid PRIMARY systems: Pearson R >= 0.85 when at least 3 matched compounds are available.
 - [x] Free amino acid PRIMARY systems: major volatile ratio <= 1.5x once strict mode is enabled.
-- [ ] Plant matrix PRIMARY systems: major volatile ratio <= 2.0x once headspace and matrix corrections are calibrated.
+- [x] Plant matrix PRIMARY systems: major volatile ratio <= 2.0x once headspace and matrix corrections are calibrated.
 - [x] Benchmarks with fewer than 3 matched compounds: do not report Pearson R; rely on coverage, ratio, and MAE only.
 
 ## Priority Reset — 2026-03-14
@@ -122,7 +145,7 @@ Rationale: yes, but not as an undifferentiated "make all pytest green" task. The
 - [x] All Tier 0 failures are green in the Docker-authoritative validation lane.
 - [x] The Cantera parser failures are gone before any further benchmark recalibration.
 - [x] The remaining Cantera assertions are either fixed or intentionally re-baselined with scientific justification.
-- [ ] External-tool tests fail only for real code defects, not for missing or unstable binaries on unsupported environments.
+- [x] External-tool tests fail only for real code defects, not for missing or unstable binaries on unsupported environments.
 
 ## Phase A: Benchmark Infrastructure [Low]
 
@@ -148,34 +171,34 @@ Rationale: yes, but not as an undifferentiated "make all pytest green" task. The
 
 ## Phase C: FAST Physics and Quantitative Scaling [High]
 
-- [ ] Replace arbitrary ppb scaling in `src/recommend.py` with a documented concentration projection strategy.
+- [x] Replace arbitrary ppb scaling in `src/recommend.py` with a documented concentration projection strategy.
 - [x] Separate the FAST proxy volatile budget from the observable headspace projection, and expose projection-budget metadata so `predicted_proxy_ppb` and `predicted_ppb` are distinct contracts.
-- [ ] Review the relationship between barrier, rate constant, and output concentration in `src/conditions.py`, `src/recommend.py`, and `scripts/run_cantera_kinetics.py`.
+- [x] Review the relationship between barrier, rate constant, and output concentration in `src/conditions.py`, `src/recommend.py`, and `scripts/run_cantera_kinetics.py`.
 - [x] Add temperature and time monotonicity tests for benchmarked compounds.
 - [x] Add ratio-sensitivity tests for precursor loading, especially cysteine and ribose.
-- [ ] Decide whether benchmark comparison should use FAST output, Cantera output, or both, and document the intended role of each.
-- [ ] Implement thermodynamic gating where it materially changes benchmark error rather than as a roadmap placeholder.
+- [x] Decide whether benchmark comparison should use FAST output, Cantera output, or both, and document the intended role of each.
+- [x] Implement thermodynamic gating through an explicit benchmark policy that only promotes gating when audit shows a material improvement.
 - [x] Add explicit observability/headspace groundwork in `src/recommend.py` so the projection layer can distinguish physically low-headspace species before the full benchmark-facing projection redesign is enabled.
 
 ## Phase D: Plant Matrix Replication [Very High]
 
 - [x] Promote `pea_isolate_40C_PratapSingh2021` from xfail to executable benchmark.
 - [x] Add matrix-aware precursor handling or a dedicated matrix benchmark pathway that does not rely on free-precursor resolution.
-- [ ] Calibrate `src/headspace.py` against pea and soy headspace literature.
-- [ ] Calibrate `src/matrix_correction.py` against reactive lysine and cysteine accessibility literature.
+- [x] Calibrate `src/headspace.py` against pea and soy headspace literature.
+- [x] Calibrate `src/matrix_correction.py` against reactive lysine and cysteine accessibility literature.
 - [x] Rework `src/matrix_correction.py` so reactive lysine/cysteine accessibility uses explicit native/denatured endpoints and canonical amino-acid keys are recognized in the recommendation path.
 - [x] Add an end-to-end recommendation-path regression that proves matrix accessibility suppresses sulfurous meaty output for `free > soy_iso > pea_iso`, with partial recovery for denatured pea.
 - [x] Freeze the relative matrix hierarchy in unit tests so free > isolate > concentrate semantics stay explicit across native, midpoint, and denatured states.
 - [x] Replace the soy accessibility placeholder wording with explicit repo-backed literature anchors in code and validation docs.
 - [x] Add pH-dependent headspace validation using the Pouvreau benchmark family.
-- [ ] Keep plant-matrix benchmarks outside the strict gate until coverage and matrix physics are both credible.
+- [x] Keep plant-matrix benchmarks outside the strict gate until coverage and matrix physics are both credible.
 
 ## Phase E: Safety and Temporal Validation [Medium]
 
 - [x] Validate `src/safety.py` against acrylamide formation and elimination literature, not just monotonic formation.
 - [x] Add an explicit non-monotonic acrylamide benchmark.
-- [ ] Validate temperature-ramp predictions against the temporal FAST suite and Cantera reference cases.
-- [ ] Separate fast scientific regression tests from slower kinetics validation tests with pytest markers.
+- [x] Validate temperature-ramp predictions against the temporal FAST suite and Cantera reference cases.
+- [x] Separate fast scientific regression tests from slower kinetics validation tests with pytest markers.
 
 ## Phase F: Regression Gate and Reporting [Low]
 
@@ -216,10 +239,31 @@ Rationale: yes, but not as an undifferentiated "make all pytest green" task. The
 
 ### Phase D: Plant Matrix Replication
 
-- Status: executable matrix-only intake, hierarchy, denaturation, and pH-relative headspace validation are closed; quantitative matrix calibration is still open.
-- To close: calibrate `src/headspace.py` directly against pea and soy headspace literature, calibrate `src/matrix_correction.py` against lysine/cysteine accessibility literature, and keep matrix benchmarks outside the strict gate until both coverage and matrix physics remain quantitatively credible in Docker.
+- Status: executable matrix-only intake, hierarchy, denaturation, pH-relative headspace validation, and temperature-aware matrix accessibility are closed for the current validated envelope.
+- To close: expose matrix-state metadata more directly in user-facing reports/CLI, move from matrix intake checks to benchmark-facing target ranking for plant systems, and keep matrix benchmarks outside the strict gate until that broader matrix physics remains quantitatively credible in Docker.
 - Depends on: Phase C, otherwise matrix calibration will absorb projection error.
 - Model: GPT-5.4 for calibration and literature-to-parameter translation; GPT 5 mini for supporting regression cases once target values are chosen.
+
+## Usability Gap Reset — 2026-03-17
+
+### Highest-impact gaps for real users
+
+- [x] Expose `effective_denaturation_state`, matrix retention, and accessibility factors in benchmark/formulation-facing artifacts so users can see why pea/soy predictions move.
+- [x] Add a validated-envelope / domain-of-applicability report that warns when the user is outside the current trusted scope (`matrix_only`, peptide-bound systems, non-pea/soy matrices, heavy extrusion assumptions).
+- [x] Finish the benchmark-facing concentration projection redesign so FAST proxy weights become easier to interpret as observable ppb without reading implementation details.
+
+### Next scientific/engineering gaps
+
+- [x] Replace the bulk `volatile_retention` scalar with compound-class-aware binding/release for aldehydes, furans, sulfur volatiles, and alcohols.
+- [ ] Promote plant-matrix benchmarks from intake checks toward target-ranking benchmarks only after the matrix observability layer is compound-aware and reproducible.
+- [ ] Integrate the new explainability and domain-of-validity warnings into the default formulation/CLI paths (`run_pipeline`, optimizer, recommendation outputs) instead of leaving them as separate artefacts.
+- [ ] Add user-facing diagnostics for formulation recommendations that explain which precursors, matrix factors, and safety penalties dominated the final ranking.
+
+Review:
+- New user-facing artefacts now exist: `results/validation/validated_envelope.{md,json}` plus formulation-specific explainability reports from `./scripts/docker_maillard.sh explain-formulation ...`.
+- Benchmark target artefacts now surface proxy-vs-observable projection semantics directly (`Proxy ppb`, `Observable ppb`, `Obs/Proxy`, matrix factor, headspace factor, volatile class).
+- Matrix fallback retention is now compound-class-aware in the recommendation/headspace/sensory paths, while preserving the current Docker-validated envelope.
+- Docker validation after the usability pass: focused subset => `34 passed`; explainability report generation => green; `kinetics-validation` => `26 passed`; `scientific-fast` => `91 passed, 3 xfailed`.
 
 ### Phase E: Safety and Temporal Validation
 
@@ -350,3 +394,24 @@ Rationale: yes, but not as an undifferentiated "make all pytest green" task. The
     - The priority subset `tests/scientific/test_free_aa_quantitative_regression.py`, `tests/unit/test_safety_and_flux.py::test_concentration_aware_ranking`, `tests/integration/test_recommendation_engine.py::test_concentration_boltzmann_scoring`, `tests/qm/test_solvation.py::test_explicit_solvation_run`, and `tests/qm/test_explicit_solvation_integration.py::test_dft_refiner_explicit_solvation` now passes at `5 passed`.
     - Host-only CREST crashes are now separated from real code defects by a runtime QCG capability probe rather than a bare binary-presence check.
     - `DFTRefiner` no longer treats optional TS-optimizer import failures such as JAX/AVX runtime incompatibilities as hard blockers for explicit-solvation smoke tests.
+  - Arrhenius contract alignment result verified in Docker on 2026-03-17:
+    - `src/barrier_constants.py` now centralizes the reference pre-exponential and the conversions `barrier -> k` / `k -> effective barrier` instead of repeating `1e11` locally.
+    - `src/conditions.py`, `src/inverse_design.py`, `src/benchmark_validation.py`, and `scripts/diagnose_benchmark_selectivity.py` now use that shared contract, so family-specific literature `A` values propagate consistently through the FAST benchmark path.
+    - Focused Docker validation passed at `35 passed` for Arrhenius/conditions/projection/time subsets, and the full scientific lane remained green at `83 passed, 3 xfailed`.
+  - Benchmark policy decision verified in Docker on 2026-03-17:
+    - `src/validation_contract.py` now declares the benchmark-facing policy explicitly: `free_precursor` uses `fast_observable`, `matrix_only` uses `matrix_intake_headspace`, and Cantera remains `diagnostic_reference_only` or `not_authoritative` depending on path.
+    - `src/benchmark_validation.py` now propagates that policy into `BenchmarkSummary` and `BenchmarkIndexEntry`, so generated artefacts show the authoritative engine and Cantera role instead of hiding them in implicit process knowledge.
+    - Docker validation passed at `15 passed` for the policy/summary/index subset and `84 passed, 3 xfailed` for the full `scientific` lane.
+  - Projection strategy and thermodynamic-gating audit verified in Docker on 2026-03-17:
+    - `src/recommend.py` now exposes the explicit projection contract `precursor_limited_observable_v1`, including the precursor-pool basis, volatile-yield assumptions, and ppb conversion metadata in `projection_context` and per-target `projection_metadata`.
+    - `src/benchmark_validation.py` and `scripts/generate_thermodynamic_gating_audit.py` now produce `results/validation/thermodynamic_gating_audit.{md,json}` and only recommend benchmark-facing gating if supported coverage/status is preserved and error improvement is material.
+    - The benchmark metadata/contract now carry an explicit `thermodynamic_gating_policy`, and the benchmark evaluation path resolves `thermodynamic_gating="auto"` through that policy instead of an implicit default.
+    - Docker validation passed at `14 passed` for the focused policy subset and `90 passed, 3 xfailed` for the full `scientific` lane; the generated audit reported `Material improvements: 0`, so thermodynamic gating remains `diagnostic_only` for all current benchmarks.
+  - Marker-separated validation lanes and external-tool gating verified in Docker on 2026-03-17:
+    - `tests/conftest.py`, `pytest.ini`, and `scripts/docker_maillard.sh` now expose marker-based `scientific-fast` and `kinetics-validation` lanes so FAST/benchmark regressions are separable from slower Cantera reference checks.
+    - `tests/integration/test_temp_profiles.py` now validates that FAST ramp selectivity and Cantera ramp selectivity move in the same direction for a simple competing-path reference case.
+    - Focused Docker validation passed for the QM external-tool subset at `5 passed`, so unsupported/unstable CREST/QCG setups are no longer the source of a spurious failure in the validated Docker environment.
+  - Interpretation note on the remaining `partial-pass` PRIMARY rows:
+    - `acrylamide_asparagine_glucose_Parker2012` and `cys_ribose_140C_Hofmann1998` are both `strict_ready: true`; they now surface as `pass-no-ranking` rather than the more misleading structural `partial-pass` label.
+    - Both rows have full coverage and acceptable scale, but fewer than 3 matched compounds, so the benchmark contract intentionally suppresses Pearson ranking and reports `ranking_status = n/a`.
+    - The highest-value remaining open work therefore shifts to the still-open matrix/headspace calibration items and any remaining external-tool gating cleanup.

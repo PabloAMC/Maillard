@@ -33,10 +33,30 @@ def test_validation_contract_centralizes_replication_axes_and_thresholds():
     assert "ordering or trend" in contract.directional_validity
     assert "Pearson and ratio thresholds" in contract.quantitative_replication
     assert "ranking recipes or interventions" in contract.formulation_utility
+    assert "FAST observable projection" in contract.benchmark_policy
+    assert "Cantera remains a diagnostic reference lane" in contract.benchmark_policy
     assert contract.thresholds.min_matched_for_ranking == 3
     assert contract.thresholds.ranking_threshold == 0.85
     assert contract.thresholds.free_aa_ratio_threshold == 1.5
     assert contract.thresholds.matrix_ratio_threshold == 2.0
+
+
+def test_validation_contract_registers_execution_policy_for_fast_and_matrix_paths():
+    contract = DEFAULT_VALIDATION_CONTRACT
+
+    free_policy = contract.policy_for_execution_path("free_precursor")
+    assert free_policy.benchmark_engine == "fast_observable"
+    assert free_policy.comparator_signal == "predicted_ppb"
+    assert free_policy.cantera_role == "diagnostic_reference_only"
+    assert free_policy.target_snapshot_policy == "included"
+    assert free_policy.thermodynamic_gating_policy == "diagnostic_only"
+
+    matrix_policy = contract.policy_for_execution_path("matrix_only")
+    assert matrix_policy.benchmark_engine == "matrix_intake_headspace"
+    assert matrix_policy.comparator_signal == "predicted_ppb"
+    assert matrix_policy.cantera_role == "not_authoritative"
+    assert matrix_policy.target_snapshot_policy == "excluded"
+    assert matrix_policy.thermodynamic_gating_policy == "not_applicable"
 
 
 def test_strict_gate_eligibility_is_centralized_in_validation_contract():
@@ -70,4 +90,5 @@ def test_strict_gate_eligibility_is_centralized_in_validation_contract():
     assert summarize_evaluation(free_eval, protein_type="free").strict_ready is True
     matrix_summary = summarize_evaluation(matrix_eval, protein_type="pea_iso")
     assert matrix_summary.strict_ready is False
+    assert matrix_summary.cantera_role == "not_authoritative"
     assert any("strict release gate" in issue for issue in matrix_summary.blocking_issues)

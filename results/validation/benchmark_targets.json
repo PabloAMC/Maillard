@@ -1,5 +1,56 @@
 [
   {
+    "benchmark_id": "acrylamide_asparagine_glucose_Parker2012",
+    "bench_file": "/workspace/data/benchmarks/acrylamide_asparagine_glucose_Parker2012.json",
+    "target_name": "Furfural",
+    "target_type": "competing",
+    "roles": [
+      "competing"
+    ],
+    "predicted_ppb": 389.35510718266687,
+    "weighted_flux": 389.35510718266687,
+    "span": 28.177643911766534,
+    "depth": 4,
+    "headspace_observable": true,
+    "headspace_class": "observable",
+    "henry_kaw_25c": 1.5e-05,
+    "henry_source_name": "Furfural"
+  },
+  {
+    "benchmark_id": "acrylamide_asparagine_glucose_Parker2012",
+    "bench_file": "/workspace/data/benchmarks/acrylamide_asparagine_glucose_Parker2012.json",
+    "target_name": "5-Hydroxymethylfurfural (HMF)",
+    "target_type": "toxic",
+    "roles": [
+      "toxic"
+    ],
+    "predicted_ppb": 0.017843786162967508,
+    "weighted_flux": 0.017843786162967508,
+    "span": 28.177643911766534,
+    "depth": 4,
+    "headspace_observable": false,
+    "headspace_class": "low_headspace",
+    "henry_kaw_25c": 1e-10,
+    "henry_source_name": "5-Hydroxymethylfurfural (HMF)"
+  },
+  {
+    "benchmark_id": "acrylamide_asparagine_glucose_Parker2012",
+    "bench_file": "/workspace/data/benchmarks/acrylamide_asparagine_glucose_Parker2012.json",
+    "target_name": "Acrylamide",
+    "target_type": "toxic",
+    "roles": [
+      "toxic"
+    ],
+    "predicted_ppb": 5.299648288000875e-18,
+    "weighted_flux": 5.299648288000875e-18,
+    "span": 45.0,
+    "depth": 1,
+    "headspace_observable": false,
+    "headspace_class": "low_headspace",
+    "henry_kaw_25c": 1e-09,
+    "henry_source_name": "Acrylamide"
+  },
+  {
     "benchmark_id": "cys_glucose_150C_Farmer1999",
     "bench_file": "/workspace/data/benchmarks/cys_glucose_150C_Farmer1999.json",
     "target_name": "Furfural",
@@ -7,9 +58,9 @@
     "roles": [
       "competing"
     ],
-    "predicted_ppb": 449.4391504337459,
-    "weighted_flux": 449.4391504337459,
-    "span": 28.685250253254868,
+    "predicted_ppb": 449.4498857161661,
+    "weighted_flux": 449.4498857161661,
+    "span": 28.68643886426342,
     "depth": 4,
     "headspace_observable": true,
     "headspace_class": "observable",
@@ -24,9 +75,9 @@
     "roles": [
       "desirable"
     ],
-    "predicted_ppb": 294.3347856460753,
-    "weighted_flux": 294.3347856460753,
-    "span": 28.771263388829862,
+    "predicted_ppb": 294.3277641322635,
+    "weighted_flux": 294.3277641322635,
+    "span": 28.772459046466217,
     "depth": 6,
     "headspace_observable": true,
     "headspace_class": "observable",
@@ -41,9 +92,9 @@
     "roles": [
       "desirable"
     ],
-    "predicted_ppb": 24.548159429502384,
-    "weighted_flux": 24.548159429502384,
-    "span": 29.49557699751659,
+    "predicted_ppb": 24.54026611343886,
+    "weighted_flux": 24.54026611343886,
+    "span": 29.496854777943092,
     "depth": 6,
     "headspace_observable": true,
     "headspace_class": "observable",
@@ -58,9 +109,9 @@
     "roles": [
       "desirable"
     ],
-    "predicted_ppb": 13.419104331546055,
-    "weighted_flux": 13.419104331546055,
-    "span": 29.785948791380473,
+    "predicted_ppb": 13.411514387346463,
+    "weighted_flux": 13.411514387346463,
+    "span": 29.787299519070945,
     "depth": 4,
     "headspace_observable": true,
     "headspace_class": "observable",
@@ -75,9 +126,9 @@
     "roles": [
       "desirable"
     ],
-    "predicted_ppb": 8.613949352386339,
-    "weighted_flux": 8.613949352386339,
-    "span": 30.069741011893655,
+    "predicted_ppb": 8.608860735804589,
+    "weighted_flux": 8.608860735804589,
+    "span": 30.071096766406242,
     "depth": 5,
     "headspace_observable": true,
     "headspace_class": "assumed_observable",
@@ -94,7 +145,7 @@
     ],
     "predicted_ppb": 0.0,
     "weighted_flux": 0.0,
-    "span": 17.999151311465905,
+    "span": 18.000000000423864,
     "depth": 1,
     "headspace_observable": true,
     "headspace_class": "observable",
@@ -109,9 +160,9 @@
     "roles": [
       "toxic"
     ],
-    "predicted_ppb": 0.016433916166466712,
-    "weighted_flux": 0.016433916166466712,
-    "span": 28.685250253254868,
+    "predicted_ppb": 0.016434308706215744,
+    "weighted_flux": 0.016434308706215744,
+    "span": 28.68643886426342,
     "depth": 4,
     "headspace_observable": false,
     "headspace_class": "low_headspace",
@@ -126,9 +177,9 @@
     "roles": [
       "competing"
     ],
-    "predicted_ppb": 420.9113899134489,
-    "weighted_flux": 420.9113899134489,
-    "span": 29.258524395233458,
+    "predicted_ppb": 420.9481257850682,
+    "weighted_flux": 420.9481257850682,
+    "span": 29.259659632463055,
     "depth": 4,
     "headspace_observable": true,
     "headspace_class": "observable",
@@ -143,9 +194,9 @@
     "roles": [
       "desirable"
     ],
-    "predicted_ppb": 237.2298159141274,
-    "weighted_flux": 237.2298159141274,
-    "span": 29.529703320332953,
+    "predicted_ppb": 237.1931246936436,
+    "weighted_flux": 237.1931246936436,
+    "span": 29.53090807485088,
     "depth": 4,
     "headspace_observable": true,
     "headspace_class": "observable",
@@ -160,9 +211,9 @@
     "roles": [
       "desirable"
     ],
-    "predicted_ppb": 198.0176512462366,
-    "weighted_flux": 198.0176512462366,
-    "span": 29.29910341232387,
+    "predicted_ppb": 198.0302904032869,
+    "weighted_flux": 198.0302904032869,
+    "span": 29.30024473048576,
     "depth": 6,
     "headspace_observable": true,
     "headspace_class": "observable",
@@ -177,9 +228,9 @@
     "roles": [
       "desirable"
     ],
-    "predicted_ppb": 76.55573339643884,
-    "weighted_flux": 76.55573339643884,
-    "span": 29.882337168548357,
+    "predicted_ppb": 76.52860320992644,
+    "weighted_flux": 76.52860320992644,
+    "span": 29.883599028369446,
     "depth": 5,
     "headspace_observable": true,
     "headspace_class": "assumed_observable",
@@ -194,9 +245,9 @@
     "roles": [
       "desirable"
     ],
-    "predicted_ppb": 31.96987536994946,
-    "weighted_flux": 31.96987536994946,
-    "span": 29.811240244641706,
+    "predicted_ppb": 31.964275475769014,
+    "weighted_flux": 31.964275475769014,
+    "span": 29.812450152736638,
     "depth": 6,
     "headspace_observable": true,
     "headspace_class": "observable",
@@ -213,7 +264,7 @@
     ],
     "predicted_ppb": 0.0,
     "weighted_flux": 0.0,
-    "span": 17.99915131128836,
+    "span": 18.00000000024649,
     "depth": 1,
     "headspace_observable": true,
     "headspace_class": "observable",
@@ -228,9 +279,9 @@
     "roles": [
       "competing"
     ],
-    "predicted_ppb": 644.6874415215077,
-    "weighted_flux": 644.6874415215077,
-    "span": 28.685250253254868,
+    "predicted_ppb": 644.7300487664485,
+    "weighted_flux": 644.7300487664485,
+    "span": 28.68643886426342,
     "depth": 4,
     "headspace_observable": true,
     "headspace_class": "observable",
@@ -245,9 +296,9 @@
     "roles": [
       "desirable"
     ],
-    "predicted_ppb": 422.2016255722748,
-    "weighted_flux": 422.2016255722748,
-    "span": 28.771263388829862,
+    "predicted_ppb": 422.2093713961946,
+    "weighted_flux": 422.2093713961946,
+    "span": 28.772459046466217,
     "depth": 6,
     "headspace_observable": true,
     "headspace_class": "observable",
@@ -262,9 +313,9 @@
     "roles": [
       "desirable"
     ],
-    "predicted_ppb": 157.423996842555,
-    "weighted_flux": 157.423996842555,
-    "span": 29.16653848456178,
+    "predicted_ppb": 157.3855581200741,
+    "weighted_flux": 157.3855581200741,
+    "span": 29.167811904476245,
     "depth": 4,
     "headspace_observable": true,
     "headspace_class": "observable",
@@ -279,9 +330,9 @@
     "roles": [
       "desirable"
     ],
-    "predicted_ppb": 46.08310217814208,
-    "weighted_flux": 46.08310217814208,
-    "span": 29.678630735080084,
+    "predicted_ppb": 46.06417366870788,
+    "weighted_flux": 46.06417366870788,
+    "span": 29.679947423139136,
     "depth": 5,
     "headspace_observable": true,
     "headspace_class": "assumed_observable",
@@ -296,9 +347,9 @@
     "roles": [
       "desirable"
     ],
-    "predicted_ppb": 35.21253117667803,
-    "weighted_flux": 35.21253117667803,
-    "span": 29.49557699751659,
+    "predicted_ppb": 35.20269438459882,
+    "weighted_flux": 35.20269438459882,
+    "span": 29.496854777943092,
     "depth": 6,
     "headspace_observable": true,
     "headspace_class": "observable",
@@ -315,7 +366,7 @@
     ],
     "predicted_ppb": 0.0,
     "weighted_flux": 0.0,
-    "span": 17.999151311465905,
+    "span": 18.000000000423864,
     "depth": 1,
     "headspace_observable": true,
     "headspace_class": "observable",

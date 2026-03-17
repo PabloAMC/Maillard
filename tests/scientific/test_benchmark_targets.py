@@ -22,6 +22,8 @@ def test_benchmark_targets_snapshot_contains_headspace_metadata():
     assert furfural.target_type in {"desirable", "competing", "toxic"}
     assert furfural.headspace_class in {"observable", "low_headspace", "assumed_observable"}
     assert furfural.henry_source_name
+    assert furfural.proxy_ppb >= furfural.predicted_ppb
+    assert 0.0 <= furfural.observable_ratio <= 1.0
 
 
 def test_benchmark_targets_markdown_reports_low_headspace_count():
@@ -34,6 +36,8 @@ def test_benchmark_targets_markdown_reports_low_headspace_count():
 
     assert "Benchmark Targets" in markdown
     assert "Headspace" in markdown
+    assert "Proxy ppb" in markdown
+    assert "Obs/Proxy" in markdown
     assert "Low-headspace rows:" in markdown
 
 

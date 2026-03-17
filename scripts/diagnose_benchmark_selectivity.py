@@ -12,6 +12,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from src.benchmark_validation import load_benchmark, benchmark_to_conditions, benchmark_to_formulation
+from src.barrier_constants import effective_barrier_from_rate_constant
 from src.inverse_design import InverseDesigner
 from src.precursor_resolver import resolve_many
 from src.recommend import Recommender, _canon
@@ -45,9 +46,11 @@ def _build_rec_result(bench_path: str):
         products = [s.smiles for s in step.products]
         bar, source, unc = designer.db.get_best_barrier(reactants, products, step.reaction_family or "unknown")
         k = conditions.get_rate_constant(step.reaction_family or "unknown", ea_override_kcal=bar)
-        rt = 0.001987 * conditions.temperature_kelvin
-        pre_exponential = 1e11
-        bar_eff = -rt * math.log(k / pre_exponential) if k > 0 else 99.0
+        bar_eff = effective_barrier_from_rate_constant(
+            k,
+            conditions.temperature_kelvin,
+            step.reaction_family or "unknown",
+        )
         rxn_key = f"{'+'.join(sorted(r.smiles for r in step.reactants))}->{'+'.join(sorted(p.smiles for p in step.products))}"
         heuristic_barriers[rxn_key] = (max(0.0, bar_eff), unc)
 

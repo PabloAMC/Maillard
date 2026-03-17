@@ -85,6 +85,8 @@ FAST_BARRIERS: Dict[str, Tuple[float, str]] = {
 
 # Default barrier when no family pattern matches
 DEFAULT_BARRIER: float = 45.0
+DEFAULT_REFERENCE_PREEXPONENTIAL: float = 1e11
+ARRHENIUS_R_KCAL: float = 0.001987
 
 # Heme catalyst barrier reduction (kcal/mol)
 HEME_CATALYST_REDUCTION: float = 5.0
@@ -281,5 +283,47 @@ def get_arrhenius_params(family: str) -> Optional[Tuple[float, float, str, float
         return A, Ea_kcal, quality, uncertainty
         
     return None
+
+
+def get_reference_pre_exponential(family: Optional[str] = None) -> float:
+    params = get_arrhenius_params(family or "")
+    if params is None:
+        return DEFAULT_REFERENCE_PREEXPONENTIAL
+    return float(params[0])
+
+
+def arrhenius_rate_constant(
+    barrier_kcal: float,
+    temperature_kelvin: float,
+    family: Optional[str] = None,
+    multiplier: float = 1.0,
+) -> float:
+    if barrier_kcal >= 99.0:
+        return 0.0
+
+    pre_exponential = get_reference_pre_exponential(family)
+    exponent = -float(barrier_kcal) / (ARRHENIUS_R_KCAL * float(temperature_kelvin))
+    return pre_exponential * math.exp(exponent) * max(float(multiplier), 0.0)
+
+
+def effective_barrier_from_rate_constant(
+    rate_constant: float,
+    temperature_kelvin: float,
+    family: Optional[str] = None,
+    *,
+    fallback_barrier: float = 99.0,
+) -> float:
+    if rate_constant <= 0.0:
+        return fallback_barrier
+
+    pre_exponential = get_reference_pre_exponential(family)
+    if pre_exponential <= 0.0:
+        return fallback_barrier
+
+    ratio = rate_constant / pre_exponential
+    if ratio <= 0.0:
+        return fallback_barrier
+
+    return max(0.0, -ARRHENIUS_R_KCAL * float(temperature_kelvin) * math.log(ratio))
 
 

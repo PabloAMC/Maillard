@@ -9,7 +9,9 @@ from pathlib import Path
 from typing import Dict, Iterable, List, Optional
 
 from src.conditions import ReactionConditions
+from src.barrier_constants import effective_barrier_from_rate_constant
 from src.headspace import HeadspaceModel
+from src.kinetics import KineticsEngine
 from src.lipid_oxidation import PEA_LIPID_PROFILE, SOY_LIPID_PROFILE, predict_hexanal_generation
 from src.inverse_design import InverseDesigner
 from src.precursor_resolver import resolve_many
@@ -77,27 +79,20 @@ BENCHMARK_NAME_ALIASES = {
 MATRIX_BENCHMARK_PROFILES = {
     "pea_iso": {
         "lipid_profile": PEA_LIPID_PROFILE,
-        # Empirical headspace-marker yields for the first matrix-only intake lane.
-        # These are deliberately benchmark-family facing and represent observable
-        # plant-matrix off-flavour markers, not a general free-precursor chemistry model.
-        "marker_yields": {
-            "Hexanal": 0.205,
-            "2-Pentylfuran": 0.502,
-            "1-Hexanol": 0.063,
-            "Nonanal": 0.150,
-        },
     },
     "soy_iso": {
         "lipid_profile": SOY_LIPID_PROFILE,
-        # Empirical headspace-marker yields from the same Pratap-Singh 2021
-        # ambient-slurry benchmark family used for the pea intake lane.
-        "marker_yields": {
-            "Hexanal": 0.453,
-            "2-Pentylfuran": 2.972,
-            "1-Hexanol": 0.143,
-            "Nonanal": 0.160,
-        },
     },
+}
+
+MATRIX_BENCHMARK_BASE_MARKER_YIELDS = {
+    # Pea-referenced observable yields from the Pratap-Singh 2021 ambient-slurry
+    # family. Soy-vs-pea release differences now live explicitly in HeadspaceModel
+    # so the matrix-only path separates oxidation intake from headspace observability.
+    "Hexanal": 0.205,
+    "2-Pentylfuran": 0.502,
+    "1-Hexanol": 0.063,
+    "Nonanal": 0.150,
 }
 
 
@@ -106,6 +101,11 @@ class BenchmarkMetadata:
     tier: str
     family: str
     execution_path: str
+    benchmark_engine: str
+    comparator_signal: str
+    cantera_role: str
+    target_snapshot_policy: str
+    thermodynamic_gating_policy: str
     notes: Optional[str] = None
 
 
@@ -117,6 +117,9 @@ class BenchmarkIndexEntry:
     family: str
     protein_type: str
     execution_path: str
+    benchmark_engine: str
+    cantera_role: str
+    thermodynamic_gating_policy: str
     supported: bool
     reason: Optional[str]
     status: str
@@ -171,6 +174,11 @@ class BenchmarkSummary:
     tier: str
     family: str
     execution_path: str
+    benchmark_engine: str
+    comparator_signal: str
+    cantera_role: str
+    target_snapshot_policy: str
+    thermodynamic_gating_policy: str
     supported: bool
     reason: Optional[str]
     protein_type: str
@@ -197,16 +205,54 @@ class BenchmarkTargetSnapshot:
     target_type: str
     roles: List[str]
     predicted_ppb: float
+    proxy_ppb: float
+    observable_ratio: float
     weighted_flux: float
     span: float
     depth: int
+    volatile_class: str
+    matrix_factor: float
+    headspace_factor: float
     headspace_observable: bool
     headspace_class: str
     henry_kaw_25c: Optional[float]
     henry_source_name: Optional[str]
 
 
+@dataclass(frozen=True)
+class ThermodynamicGatingAudit:
+    benchmark_id: str
+    bench_file: Path
+    execution_path: str
+    applicable: bool
+    baseline_overall_status: str
+    gated_overall_status: str
+    baseline_mae_ppb: Optional[float]
+    gated_mae_ppb: Optional[float]
+    baseline_max_ratio: Optional[float]
+    gated_max_ratio: Optional[float]
+    delta_mae_ppb: Optional[float]
+    delta_max_ratio: Optional[float]
+    material_improvement: bool
+    recommended_policy: str
+    notes: str
+
+
+THERMODYNAMIC_GATING_POLICIES = {
+    "off",
+    "on",
+    "auto",
+    "diagnostic_only",
+    "benchmark_facing",
+    "not_applicable",
+}
+
+
 DEFAULT_BENCHMARK_THRESHOLDS = DEFAULT_VALIDATION_CONTRACT.thresholds
+THERMODYNAMIC_GATING_THRESHOLD_KCAL = 30.0
+THERMODYNAMIC_GATING_MIN_ABSOLUTE_MAE_IMPROVEMENT_PPB = 5.0
+THERMODYNAMIC_GATING_MIN_RELATIVE_MAE_IMPROVEMENT = 0.05
+THERMODYNAMIC_GATING_MIN_RATIO_IMPROVEMENT = 0.05
 
 
 def is_matrix_only_benchmark(bench: dict | Path | str) -> bool:
@@ -223,6 +269,11 @@ def _infer_benchmark_metadata(bench: dict) -> BenchmarkMetadata:
             tier="PRIMARY",
             family="matrix_headspace",
             execution_path="matrix_only",
+            benchmark_engine="matrix_intake_headspace",
+            comparator_signal="predicted_ppb",
+            cantera_role="not_authoritative",
+            target_snapshot_policy="excluded",
+            thermodynamic_gating_policy="not_applicable",
             notes="Matrix-only benchmark requiring a dedicated precursor-accessibility path.",
         )
     if "cys_" in benchmark_id:
@@ -230,6 +281,11 @@ def _infer_benchmark_metadata(bench: dict) -> BenchmarkMetadata:
             tier="PRIMARY",
             family="free_aa_sulfur",
             execution_path="free_precursor",
+            benchmark_engine="fast_observable",
+            comparator_signal="predicted_ppb",
+            cantera_role="diagnostic_reference_only",
+            target_snapshot_policy="included",
+            thermodynamic_gating_policy="diagnostic_only",
             notes="Free amino-acid sulfur benchmark.",
         )
     if "acrylamide" in benchmark_id or bench.get("benchmark_type") == "safety":
@@ -237,12 +293,22 @@ def _infer_benchmark_metadata(bench: dict) -> BenchmarkMetadata:
             tier="PRIMARY",
             family="safety",
             execution_path="free_precursor",
+            benchmark_engine="fast_observable",
+            comparator_signal="predicted_ppb",
+            cantera_role="diagnostic_reference_only",
+            target_snapshot_policy="included",
+            thermodynamic_gating_policy="diagnostic_only",
             notes="Safety-critical benchmark (e.g., Acrylamide).",
         )
     return BenchmarkMetadata(
         tier="SECONDARY",
         family="general",
         execution_path="free_precursor",
+        benchmark_engine="fast_observable",
+        comparator_signal="predicted_ppb",
+        cantera_role="diagnostic_reference_only",
+        target_snapshot_policy="included",
+        thermodynamic_gating_policy="diagnostic_only",
         notes=None,
     )
 
@@ -250,12 +316,34 @@ def _infer_benchmark_metadata(bench: dict) -> BenchmarkMetadata:
 def get_benchmark_metadata(bench: dict) -> BenchmarkMetadata:
     metadata = bench.get("metadata") or {}
     inferred = _infer_benchmark_metadata(bench)
+    policy = DEFAULT_VALIDATION_CONTRACT.policy_for_execution_path(str(metadata.get("execution_path", inferred.execution_path)))
     return BenchmarkMetadata(
         tier=str(metadata.get("tier", inferred.tier)),
         family=str(metadata.get("family", inferred.family)),
-        execution_path=str(metadata.get("execution_path", inferred.execution_path)),
+        execution_path=policy.execution_path,
+        benchmark_engine=str(metadata.get("benchmark_engine", policy.benchmark_engine)),
+        comparator_signal=str(metadata.get("comparator_signal", policy.comparator_signal)),
+        cantera_role=str(metadata.get("cantera_role", policy.cantera_role)),
+        target_snapshot_policy=str(metadata.get("target_snapshot_policy", policy.target_snapshot_policy)),
+        thermodynamic_gating_policy=str(metadata.get("thermodynamic_gating_policy", policy.thermodynamic_gating_policy)),
         notes=metadata.get("notes", inferred.notes),
     )
+
+
+def resolve_thermodynamic_gating_mode(bench: dict, requested_mode: str = "auto") -> str:
+    metadata = get_benchmark_metadata(bench)
+    normalized_mode = str(requested_mode).strip().lower()
+    if normalized_mode not in THERMODYNAMIC_GATING_POLICIES:
+        raise ValueError(f"Unsupported thermodynamic_gating mode: {requested_mode!r}")
+
+    if normalized_mode == "auto":
+        normalized_mode = metadata.thermodynamic_gating_policy
+
+    if normalized_mode in {"off", "diagnostic_only", "not_applicable"}:
+        return "off"
+    if normalized_mode == "benchmark_facing":
+        return "on"
+    return normalized_mode
 
 
 def get_benchmark_files(benchmark_dir: Path = BENCHMARK_DIR) -> List[Path]:
@@ -430,10 +518,13 @@ def _run_benchmark_recommendation(
     bench: dict,
     *,
     target_tag: str = DEFAULT_TARGET_TAG,
+    thermodynamic_gating: str = "auto",
 ) -> dict:
     formulation = benchmark_to_formulation(bench)
     conditions = benchmark_to_conditions(bench)
     designer = InverseDesigner(target_tag=target_tag)
+    kinetics = KineticsEngine(temperature_k=conditions.temperature_kelvin)
+    gating_mode = resolve_thermodynamic_gating_mode(bench, thermodynamic_gating)
 
     names = formulation["sugars"] + formulation["amino_acids"] + formulation.get("additives", []) + formulation.get("lipids", [])
     precursors = resolve_many(names)
@@ -444,10 +535,20 @@ def _run_benchmark_recommendation(
         reactants = [s.smiles for s in step.reactants]
         products = [s.smiles for s in step.products]
         bar, _source, unc = designer.db.get_best_barrier(reactants, products, step.reaction_family or "unknown")
-        k = conditions.get_rate_constant(step.reaction_family or "unknown", ea_override_kcal=bar)
-        rt = 0.001987 * conditions.temperature_kelvin
-        pre_exponential = 1e11
-        bar_eff = -rt * math.log(k / pre_exponential) if k > 0 else 99.0
+        barrier_for_rate = float(bar)
+        if gating_mode == "on":
+            thermo = kinetics.get_reaction_thermo(reactants, products, conditions.temperature_kelvin)
+            dg = float(thermo.get("delta_g_kcal_mol", 0.0))
+            if dg > THERMODYNAMIC_GATING_THRESHOLD_KCAL:
+                barrier_for_rate = 99.0
+            else:
+                barrier_for_rate = max(barrier_for_rate, max(0.5, dg + 0.5))
+        k = conditions.get_rate_constant(step.reaction_family or "unknown", ea_override_kcal=barrier_for_rate)
+        bar_eff = effective_barrier_from_rate_constant(
+            k,
+            conditions.temperature_kelvin,
+            step.reaction_family or "unknown",
+        )
         rxn_key = f"{'+'.join(sorted(r.smiles for r in step.reactants))}->{'+'.join(sorted(p.smiles for p in step.products))}"
         heuristic_barriers[rxn_key] = (max(0.0, bar_eff), unc)
 
@@ -493,13 +594,13 @@ def _run_matrix_only_benchmark_prediction(bench: dict) -> dict:
     pH = conditions.get("ph")
 
     predicted_ppb: Dict[str, float] = {}
-    for compound, yield_factor in model["marker_yields"].items():
-        ph_release_factor = headspace_model.get_matrix_ph_release_factor(
+    for compound, yield_factor in MATRIX_BENCHMARK_BASE_MARKER_YIELDS.items():
+        headspace_factor = headspace_model.get_matrix_benchmark_headspace_factor(
             compound,
             protein_type=protein_type,
             pH=pH,
         )
-        predicted_ppb[compound] = oxidation_load_ppb * float(yield_factor) * ph_release_factor
+        predicted_ppb[compound] = oxidation_load_ppb * float(yield_factor) * headspace_factor
 
     return {
         "targets": [],
@@ -513,7 +614,7 @@ def _run_matrix_only_benchmark_prediction(bench: dict) -> dict:
             compound: {
                 "proxy_ppb": value,
                 "matrix_factor": 1.0,
-                "headspace_factor": headspace_model.get_matrix_ph_release_factor(
+                "headspace_factor": headspace_model.get_matrix_benchmark_headspace_factor(
                     compound,
                     protein_type=protein_type,
                     pH=pH,
@@ -527,7 +628,11 @@ def _run_matrix_only_benchmark_prediction(bench: dict) -> dict:
     }
 
 
-def evaluate_benchmark(bench_file: Path | str, target_tag: str = DEFAULT_TARGET_TAG) -> BenchmarkEvaluation:
+def evaluate_benchmark(
+    bench_file: Path | str,
+    target_tag: str = DEFAULT_TARGET_TAG,
+    thermodynamic_gating: str = "auto",
+) -> BenchmarkEvaluation:
     bench_path = Path(bench_file)
     bench = load_benchmark(bench_path)
     formulation = benchmark_to_formulation(bench)
@@ -571,7 +676,11 @@ def evaluate_benchmark(bench_file: Path | str, target_tag: str = DEFAULT_TARGET_
     elif metadata.execution_path == "matrix_only":
         rec_result = _run_matrix_only_benchmark_prediction(bench)
     else:
-        rec_result = _run_benchmark_recommendation(bench, target_tag=target_tag)
+        rec_result = _run_benchmark_recommendation(
+            bench,
+            target_tag=target_tag,
+            thermodynamic_gating=thermodynamic_gating,
+        )
     comparisons = _build_comparisons(bench, rec_result["predicted_ppb"])
 
     matched_comparisons = [comparison for comparison in comparisons if comparison.matched_name is not None]
@@ -617,6 +726,11 @@ def summarize_evaluation(
             tier=metadata.tier,
             family=metadata.family,
             execution_path=metadata.execution_path,
+            benchmark_engine=metadata.benchmark_engine,
+            comparator_signal=metadata.comparator_signal,
+            cantera_role=metadata.cantera_role,
+            target_snapshot_policy=metadata.target_snapshot_policy,
+            thermodynamic_gating_policy=metadata.thermodynamic_gating_policy,
             supported=False,
             reason=evaluation.reason,
             protein_type=protein_type,
@@ -657,7 +771,7 @@ def summarize_evaluation(
     elif scale_status == "fail":
         overall_status = "scale-gap"
     elif ranking_status == "n/a":
-        overall_status = "partial-pass"
+        overall_status = "pass-no-ranking"
 
     blocking_issues: List[str] = []
     if evaluation.coverage < thresholds.full_coverage_threshold:
@@ -694,6 +808,11 @@ def summarize_evaluation(
         tier=metadata.tier,
         family=metadata.family,
         execution_path=metadata.execution_path,
+        benchmark_engine=metadata.benchmark_engine,
+        comparator_signal=metadata.comparator_signal,
+        cantera_role=metadata.cantera_role,
+        target_snapshot_policy=metadata.target_snapshot_policy,
+        thermodynamic_gating_policy=metadata.thermodynamic_gating_policy,
         supported=True,
         reason=None,
         protein_type=protein_type,
@@ -757,6 +876,152 @@ def summarize_benchmarks(
     return summaries
 
 
+def _benchmark_status_score(summary: BenchmarkSummary) -> int:
+    ranking = {
+        "unsupported": 0,
+        "coverage-gap": 1,
+        "ranking-gap": 2,
+        "scale-gap": 3,
+        "partial-pass": 4,
+        "pass-no-ranking": 5,
+        "pass": 5,
+    }
+    return ranking.get(summary.overall_status, 0)
+
+
+def thermodynamic_gating_materially_improves(
+    baseline: BenchmarkSummary,
+    gated: BenchmarkSummary,
+) -> bool:
+    if not baseline.supported or not gated.supported:
+        return False
+    if gated.coverage + 1.0e-12 < baseline.coverage:
+        return False
+    if _benchmark_status_score(gated) < _benchmark_status_score(baseline):
+        return False
+
+    baseline_mae = baseline.mae_ppb if baseline.mae_ppb is not None else float("inf")
+    gated_mae = gated.mae_ppb if gated.mae_ppb is not None else float("inf")
+    baseline_ratio = baseline.max_ratio if baseline.max_ratio is not None else float("inf")
+    gated_ratio = gated.max_ratio if gated.max_ratio is not None else float("inf")
+
+    mae_improvement = baseline_mae - gated_mae
+    ratio_improvement = baseline_ratio - gated_ratio
+    mae_threshold = max(
+        THERMODYNAMIC_GATING_MIN_ABSOLUTE_MAE_IMPROVEMENT_PPB,
+        baseline_mae * THERMODYNAMIC_GATING_MIN_RELATIVE_MAE_IMPROVEMENT if math.isfinite(baseline_mae) else float("inf"),
+    )
+
+    return (
+        (math.isfinite(mae_improvement) and mae_improvement >= mae_threshold)
+        or (math.isfinite(ratio_improvement) and ratio_improvement >= THERMODYNAMIC_GATING_MIN_RATIO_IMPROVEMENT)
+    )
+
+
+def audit_thermodynamic_gating(
+    bench_file: Path | str,
+    *,
+    target_tag: str = DEFAULT_TARGET_TAG,
+    thresholds: BenchmarkThresholds = DEFAULT_BENCHMARK_THRESHOLDS,
+) -> ThermodynamicGatingAudit:
+    bench_path = Path(bench_file)
+    bench = load_benchmark(bench_path)
+    metadata = get_benchmark_metadata(bench)
+    protein_type = bench.get("protein_type", "free")
+
+    if metadata.execution_path != "free_precursor" or metadata.family == "safety":
+        return ThermodynamicGatingAudit(
+            benchmark_id=bench["benchmark_id"],
+            bench_file=bench_path,
+            execution_path=metadata.execution_path,
+            applicable=False,
+            baseline_overall_status="n/a",
+            gated_overall_status="n/a",
+            baseline_mae_ppb=None,
+            gated_mae_ppb=None,
+            baseline_max_ratio=None,
+            gated_max_ratio=None,
+            delta_mae_ppb=None,
+            delta_max_ratio=None,
+            material_improvement=False,
+            recommended_policy="diagnostic_only",
+            notes="Thermodynamic gating audit is currently only meaningful for non-safety free-precursor FAST benchmarks.",
+        )
+
+    baseline_eval = evaluate_benchmark(bench_path, target_tag=target_tag, thermodynamic_gating="off")
+    gated_eval = evaluate_benchmark(bench_path, target_tag=target_tag, thermodynamic_gating="on")
+    baseline_summary = summarize_evaluation(baseline_eval, protein_type=protein_type, thresholds=thresholds)
+    gated_summary = summarize_evaluation(gated_eval, protein_type=protein_type, thresholds=thresholds)
+
+    baseline_mae = baseline_summary.mae_ppb
+    gated_mae = gated_summary.mae_ppb
+    baseline_ratio = baseline_summary.max_ratio
+    gated_ratio = gated_summary.max_ratio
+
+    delta_mae = None if baseline_mae is None or gated_mae is None else baseline_mae - gated_mae
+    delta_ratio = None if baseline_ratio is None or gated_ratio is None else baseline_ratio - gated_ratio
+    material = thermodynamic_gating_materially_improves(baseline_summary, gated_summary)
+    if material:
+        notes = "Thermodynamic gating materially improves benchmark error without degrading supported coverage/status."
+        policy = "benchmark_facing_candidate"
+    else:
+        notes = "Thermodynamic gating does not materially improve benchmark error under the current threshold and remains diagnostic-only."
+        policy = "diagnostic_only"
+
+    return ThermodynamicGatingAudit(
+        benchmark_id=bench["benchmark_id"],
+        bench_file=bench_path,
+        execution_path=metadata.execution_path,
+        applicable=True,
+        baseline_overall_status=baseline_summary.overall_status,
+        gated_overall_status=gated_summary.overall_status,
+        baseline_mae_ppb=baseline_mae,
+        gated_mae_ppb=gated_mae,
+        baseline_max_ratio=baseline_ratio,
+        gated_max_ratio=gated_ratio,
+        delta_mae_ppb=delta_mae,
+        delta_max_ratio=delta_ratio,
+        material_improvement=material,
+        recommended_policy=policy,
+        notes=notes,
+    )
+
+
+def audit_all_thermodynamic_gating(
+    benchmark_files: Optional[Iterable[Path | str]] = None,
+    *,
+    target_tag: str = DEFAULT_TARGET_TAG,
+    thresholds: BenchmarkThresholds = DEFAULT_BENCHMARK_THRESHOLDS,
+) -> List[ThermodynamicGatingAudit]:
+    bench_files = list(benchmark_files) if benchmark_files is not None else get_benchmark_files()
+    return [
+        audit_thermodynamic_gating(bench_file, target_tag=target_tag, thresholds=thresholds)
+        for bench_file in bench_files
+    ]
+
+
+def render_thermodynamic_gating_audit_markdown(rows: Iterable[ThermodynamicGatingAudit]) -> str:
+    audits = list(rows)
+    lines = [
+        "# Thermodynamic Gating Audit",
+        "",
+        "| Benchmark | Path | Applicable | Baseline Status | Gated Status | Δ MAE ppb | Δ Max Ratio | Material | Recommended Policy | Notes |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+    ]
+    for row in audits:
+        delta_mae = f"{row.delta_mae_ppb:.2f}" if row.delta_mae_ppb is not None else "n/a"
+        delta_ratio = f"{row.delta_max_ratio:.3f}" if row.delta_max_ratio is not None else "n/a"
+        lines.append(
+            f"| {row.benchmark_id} | {row.execution_path} | {'yes' if row.applicable else 'no'} | {row.baseline_overall_status} | {row.gated_overall_status} | {delta_mae} | {delta_ratio} | {'yes' if row.material_improvement else 'no'} | {row.recommended_policy} | {row.notes} |"
+        )
+    lines.extend([
+        "",
+        f"Audited benchmarks: {len(audits)}",
+        f"Material improvements: {sum(1 for row in audits if row.material_improvement)}",
+    ])
+    return "\n".join(lines) + "\n"
+
+
 def snapshot_benchmark_targets(
     bench_file: Path | str,
     target_tag: str = DEFAULT_TARGET_TAG,
@@ -783,9 +1048,14 @@ def snapshot_benchmark_targets(
                 target_type=str(target.get("type", "unknown")),
                 roles=list(target.get("roles", [target.get("type", "unknown")])),
                 predicted_ppb=float(target.get("concentration", 0.0)),
+                proxy_ppb=float(target.get("proxy_concentration", target.get("concentration", 0.0))),
+                observable_ratio=float(target.get("projection", {}).get("proxy_to_observable_ratio", 1.0)),
                 weighted_flux=float(target.get("weighted_flux", 0.0)),
                 span=float(target.get("span", math.inf)),
                 depth=int(target.get("depth", 0)),
+                volatile_class=str(target.get("projection", {}).get("volatile_class", "other")),
+                matrix_factor=float(target.get("projection", {}).get("matrix_factor", 1.0)),
+                headspace_factor=float(target.get("projection", {}).get("headspace_factor", 1.0)),
                 headspace_observable=bool(target.get("headspace_observable", True)),
                 headspace_class=str(target.get("headspace_class", "assumed_observable")),
                 henry_kaw_25c=float(target["henry_kaw_25c"]) if target.get("henry_kaw_25c") is not None else None,
@@ -816,14 +1086,14 @@ def render_benchmark_targets_markdown(
     lines = [
         "# Benchmark Targets",
         "",
-        "| Benchmark | Target | Type | Roles | Predicted ppb | Span | Depth | Headspace | Kaw 25C | Henry Name |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+        "| Benchmark | Target | Type | Roles | Proxy ppb | Observable ppb | Obs/Proxy | Matrix | Headspace | Class | Span | Depth | Headspace Class | Kaw 25C | Henry Name |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
     ]
 
     for row in rows:
         kaw = f"{row.henry_kaw_25c:.3e}" if row.henry_kaw_25c is not None else "n/a"
         lines.append(
-            f"| {row.benchmark_id} | {row.target_name} | {row.target_type} | {', '.join(row.roles)} | {row.predicted_ppb:.3f} | {row.span:.3f} | {row.depth} | {row.headspace_class} | {kaw} | {row.henry_source_name or 'n/a'} |"
+            f"| {row.benchmark_id} | {row.target_name} | {row.target_type} | {', '.join(row.roles)} | {row.proxy_ppb:.3f} | {row.predicted_ppb:.3f} | {row.observable_ratio:.3f} | {row.matrix_factor:.3f} | {row.headspace_factor:.3f} | {row.volatile_class} | {row.span:.3f} | {row.depth} | {row.headspace_class} | {kaw} | {row.henry_source_name or 'n/a'} |"
         )
 
     lines.extend([
@@ -852,6 +1122,9 @@ def build_benchmark_index(
             family=summary.family,
             protein_type=summary.protein_type,
             execution_path=summary.execution_path,
+            benchmark_engine=summary.benchmark_engine,
+            cantera_role=summary.cantera_role,
+            thermodynamic_gating_policy=summary.thermodynamic_gating_policy,
             supported=summary.supported,
             reason=summary.reason,
             status=summary.overall_status,
@@ -866,13 +1139,13 @@ def render_benchmark_index_markdown(entries: Iterable[BenchmarkIndexEntry]) -> s
     lines = [
         "# Benchmark Index",
         "",
-        "| Benchmark | Tier | Family | Protein | Execution Path | Supported | Status | Strict Ready | Notes |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+        "| Benchmark | Tier | Family | Protein | Execution Path | Engine | Cantera Role | Thermo Policy | Supported | Status | Strict Ready | Notes |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
     ]
     for entry in rows:
         notes = entry.reason or "indexed"
         lines.append(
-            f"| {entry.benchmark_id} | {entry.tier} | {entry.family} | {entry.protein_type} | {entry.execution_path} | {'yes' if entry.supported else 'no'} | {entry.status} | {'yes' if entry.strict_ready else 'no'} | {notes} |"
+            f"| {entry.benchmark_id} | {entry.tier} | {entry.family} | {entry.protein_type} | {entry.execution_path} | {entry.benchmark_engine} | {entry.cantera_role} | {entry.thermodynamic_gating_policy} | {'yes' if entry.supported else 'no'} | {entry.status} | {'yes' if entry.strict_ready else 'no'} | {notes} |"
         )
     return "\n".join(lines) + "\n"
 
@@ -882,8 +1155,8 @@ def render_benchmark_summary_markdown(summaries: Iterable[BenchmarkSummary]) -> 
     lines = [
         "# Benchmark Summary",
         "",
-        "| Benchmark | Tier | Family | Protein | Execution Path | Status | Strict Ready | Coverage | Pearson R | Max Ratio | MAE ppb | Notes |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+        "| Benchmark | Tier | Family | Protein | Execution Path | Engine | Cantera Role | Thermo Policy | Status | Strict Ready | Coverage | Pearson R | Max Ratio | MAE ppb | Notes |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
     ]
 
     for summary in rows:
@@ -903,11 +1176,11 @@ def render_benchmark_summary_markdown(summaries: Iterable[BenchmarkSummary]) -> 
             strict_ready = "yes" if summary.strict_ready else "no"
 
         lines.append(
-            f"| {summary.benchmark_id} | {summary.tier} | {summary.family} | {summary.protein_type} | {summary.execution_path} | {summary.overall_status} | {strict_ready} | {coverage} | {pearson} | {max_ratio} | {mae} | {notes} |"
+            f"| {summary.benchmark_id} | {summary.tier} | {summary.family} | {summary.protein_type} | {summary.execution_path} | {summary.benchmark_engine} | {summary.cantera_role} | {summary.thermodynamic_gating_policy} | {summary.overall_status} | {strict_ready} | {coverage} | {pearson} | {max_ratio} | {mae} | {notes} |"
         )
 
     supported_count = sum(1 for summary in rows if summary.supported)
-    pass_count = sum(1 for summary in rows if summary.overall_status in {"pass", "partial-pass"})
+    pass_count = sum(1 for summary in rows if summary.overall_status in {"pass", "pass-no-ranking", "partial-pass"})
     strict_ready_count = sum(1 for summary in rows if summary.strict_ready)
     lines.extend([
         "",

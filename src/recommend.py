@@ -17,8 +17,16 @@ from dataclasses import dataclass
 from typing import List, Dict, Set, Optional, Any, Tuple
 
 from data.reactions.curated_pathways import PATHWAYS, PATHWAY_METADATA
+from src.barrier_constants import arrhenius_rate_constant, get_reference_pre_exponential
 from src.headspace import HeadspaceModel
-from src.matrix_correction import ProteinType, apply_matrix_correction, resolve_matrix_correction
+from src.matrix_correction import (
+    ProteinType,
+    apply_matrix_correction,
+    classify_volatile_matrix_family,
+    get_volatile_class_retention_factor,
+    resolve_compound_matrix_retention,
+    resolve_matrix_correction,
+)
 from src.pathway_extractor import Species
 try:
     from rdkit import Chem
@@ -99,6 +107,33 @@ class ProjectionBudget:
     total_volatile_budget_molar: float
 
 
+@dataclass(frozen=True)
+class ProjectionStrategy:
+    name: str
+    precursor_concentration_unit: str
+    limiting_pool_to_molar_factor: float
+    baseline_volatile_yield_fraction: float
+    severity_volatile_yield_slope: float
+    ppb_conversion_factor: float
+    ppb_basis: str
+    notes: str
+
+
+DEFAULT_PROJECTION_STRATEGY = ProjectionStrategy(
+    name="precursor_limited_observable_v1",
+    precursor_concentration_unit="mM",
+    limiting_pool_to_molar_factor=1.0e-3,
+    baseline_volatile_yield_fraction=1.0e-6,
+    severity_volatile_yield_slope=1.5e-3,
+    ppb_conversion_factor=1.0e6,
+    ppb_basis="aqueous_mass_equivalent_ppb",
+    notes=(
+        "Allocates a conservative volatile budget from the limiting precursor pool, then converts "
+        "M to ppb via MW assuming dilute aqueous density (~1 kg/L) before matrix/headspace projection."
+    ),
+)
+
+
 SYSTEMS = [
     PrecursorSystem(
         "Ribose + Cysteine (Savory Base)",
@@ -152,7 +187,7 @@ def _weight(barrier_kcal, temp_kelvin=423.15): # Default 150C
 
 def _integrate_arrhenius(barrier_kcal: float, 
                          ramp_data: List[Tuple[float, float]], 
-                         pre_exponential: float = 1e11) -> float:
+                         pre_exponential: Optional[float] = None) -> float:
     """
     SOTA: Numerically integrate the Arrhenius propensity over a temperature ramp.
     Returns the integrated yield approximation: 1 - exp(-integral(k(t) dt)).
@@ -171,8 +206,15 @@ def _integrate_arrhenius(barrier_kcal: float,
     t_fine = np.linspace(times_sec[0], times_sec[-1], 100)
     T_fine = np.interp(t_fine, times_sec, temps_k)
     
-    R = 0.001987 # kcal/mol/K
-    k_fine = pre_exponential * np.exp(-barrier_kcal / (R * T_fine))
+    reference_pre_exponential = pre_exponential
+    if reference_pre_exponential is None:
+        reference_pre_exponential = get_reference_pre_exponential()
+
+    k_fine = np.array(
+        [arrhenius_rate_constant(barrier_kcal, temp_k, multiplier=1.0) for temp_k in T_fine]
+    )
+    if reference_pre_exponential != get_reference_pre_exponential():
+        k_fine *= float(reference_pre_exponential) / get_reference_pre_exponential()
     
     # Integrate using Trapezoidal rule (standard for discrete steps)
     integral_k_dt = np.trapezoid(k_fine, t_fine)
@@ -236,6 +278,7 @@ def _estimate_projection_budget(
     corrected_initial: Dict[str, float],
     temperature_kelvin: float,
     time_minutes: Optional[float],
+    strategy: ProjectionStrategy = DEFAULT_PROJECTION_STRATEGY,
 ) -> ProjectionBudget:
     if not corrected_initial:
         return ProjectionBudget(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
@@ -244,12 +287,15 @@ def _estimate_projection_budget(
     if not positive_values:
         return ProjectionBudget(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
 
-    limiting_precursor_molar = min(positive_values) / 1000.0
+    limiting_precursor_molar = min(positive_values) * strategy.limiting_pool_to_molar_factor
     load_factor = _relative_precursor_load_factor(corrected_initial)
     temperature_factor = _projection_temperature_factor(temperature_kelvin)
     time_factor = _projection_time_factor(time_minutes)
     severity = temperature_factor * time_factor
-    volatile_yield_fraction = 1.0e-6 + 1.5e-3 * severity
+    volatile_yield_fraction = (
+        strategy.baseline_volatile_yield_fraction
+        + strategy.severity_volatile_yield_slope * severity
+    )
     total_volatile_budget_molar = limiting_precursor_molar * volatile_yield_fraction * max(load_factor, 0.0)
 
     return ProjectionBudget(
@@ -288,6 +334,19 @@ def _relative_precursor_load_factor(corrected_initial: Dict[str, float]) -> floa
 
     normalized = [max(value / limiting_value, 1.0e-12) for value in positive_values]
     return math.exp(sum(math.log(value) for value in normalized) / len(normalized))
+
+
+def _projection_strategy_metadata(strategy: ProjectionStrategy) -> Dict[str, Any]:
+    return {
+        "projection_strategy_name": strategy.name,
+        "projection_precursor_unit": strategy.precursor_concentration_unit,
+        "projection_ppb_basis": strategy.ppb_basis,
+        "projection_limiting_pool_to_molar_factor": float(strategy.limiting_pool_to_molar_factor),
+        "projection_baseline_volatile_yield_fraction": float(strategy.baseline_volatile_yield_fraction),
+        "projection_severity_volatile_yield_slope": float(strategy.severity_volatile_yield_slope),
+        "projection_ppb_conversion_factor": float(strategy.ppb_conversion_factor),
+        "projection_strategy_notes": strategy.notes,
+    }
 
 
 _BUDGET_EXCLUDED_CANONICAL = {
@@ -465,6 +524,7 @@ def _apply_output_projection(
     fat_fraction: float = 0.0,
     protein_fraction: float = 0.0,
     projection_budget: Optional[ProjectionBudget] = None,
+    projection_strategy: ProjectionStrategy = DEFAULT_PROJECTION_STRATEGY,
 ) -> Tuple[Dict[str, float], Dict[str, Dict[str, float]]]:
     p_type = ProteinType(protein_type)
     fat_eff, protein_eff, explicit_matrix_fractions = _resolve_output_matrix_context(
@@ -492,6 +552,7 @@ def _apply_output_projection(
             "volatile_yield_fraction": float(projection_budget.volatile_yield_fraction),
             "total_volatile_budget_molar": float(projection_budget.total_volatile_budget_molar),
         }
+    budget_metadata.update(_projection_strategy_metadata(projection_strategy))
 
     for canon, raw_value in raw_concentrations.items():
         species = species_catalog.get(canon)
@@ -500,11 +561,32 @@ def _apply_output_projection(
             projection_metadata[canon] = {
                 "proxy_ppb": float(raw_value),
                 "matrix_factor": float(fallback_matrix_factor),
+                "base_matrix_factor": float(fallback_matrix_factor),
+                "class_matrix_factor": 1.0,
                 "headspace_factor": 1.0,
                 "observable_ppb": float(observable_ppb[canon]),
+                "proxy_to_observable_ratio": 1.0 if raw_value <= 0.0 else float(observable_ppb[canon]) / float(raw_value),
+                "volatile_class": "other",
                 **budget_metadata,
             }
             continue
+
+        if explicit_matrix_fractions:
+            effective_matrix_factor = 1.0
+            class_matrix_factor = 1.0
+        else:
+            class_matrix_factor = get_volatile_class_retention_factor(
+                species.label or canon,
+                protein_type=p_type,
+                denaturation_state=denaturation_state,
+                smiles=species.smiles,
+            )
+            effective_matrix_factor = resolve_compound_matrix_retention(
+                species.label or canon,
+                protein_type=p_type,
+                denaturation_state=denaturation_state,
+                smiles=species.smiles,
+            )
 
         headspace_factor = _headspace_observability_factor(
             species,
@@ -513,13 +595,17 @@ def _apply_output_projection(
             fat_fraction=fat_eff,
             protein_fraction=protein_eff,
         )
-        observable_value = raw_value * fallback_matrix_factor * headspace_factor
+        observable_value = raw_value * effective_matrix_factor * headspace_factor
         observable_ppb[canon] = observable_value
         projection_metadata[canon] = {
             "proxy_ppb": float(raw_value),
-            "matrix_factor": float(fallback_matrix_factor),
+            "matrix_factor": float(effective_matrix_factor),
+            "base_matrix_factor": float(fallback_matrix_factor),
+            "class_matrix_factor": float(class_matrix_factor),
             "headspace_factor": float(headspace_factor),
             "observable_ppb": float(observable_value),
+            "proxy_to_observable_ratio": 1.0 if raw_value <= 0.0 else float(observable_value) / float(raw_value),
+            "volatile_class": classify_volatile_matrix_family(species.label or canon, smiles=species.smiles),
             **budget_metadata,
         }
 
@@ -589,6 +675,7 @@ def _project_weighted_flux_to_ppb(
     exogenous_reactants: Set[str],
     temperature_kelvin: float,
     time_minutes: Optional[float],
+    projection_strategy: ProjectionStrategy = DEFAULT_PROJECTION_STRATEGY,
 ) -> Dict[str, float]:
     import math
 
@@ -596,6 +683,7 @@ def _project_weighted_flux_to_ppb(
         corrected_initial,
         temperature_kelvin,
         time_minutes,
+        strategy=projection_strategy,
     )
     if projection_budget.total_volatile_budget_molar <= 0.0:
         return {}
@@ -654,7 +742,7 @@ def _project_weighted_flux_to_ppb(
     for canon, activity in activities.items():
         mol_fraction = activity / total_activity
         molar_concentration = total_volatile_budget_molar * mol_fraction
-        projected_ppb[canon] = molar_concentration * _mw_from_smiles(canon) * 1e6
+        projected_ppb[canon] = molar_concentration * _mw_from_smiles(canon) * projection_strategy.ppb_conversion_factor
     return projected_ppb
 
 
@@ -727,6 +815,7 @@ class Recommender:
         If temp_ramp_csv provided (SOTA), integrates propensity over the ramp.
         """
         p_type = ProteinType(protein_type)
+        projection_strategy = DEFAULT_PROJECTION_STRATEGY
         ramp_data = _load_ramp(temp_ramp_csv) if temp_ramp_csv else None
         
         # Phase 7: Apply Matrix Accessibility Corrections to precursors
@@ -899,8 +988,7 @@ class Recommender:
                     # Phase Q.1: Temporal FAST Mode (Fallback)
                     if time_minutes is not None:
                         # Characteristic time approx (seconds)
-                        # Using A ~ 1e11 (from new Arrhenius data average)
-                        tau_sec = math.exp(path_span / RT) / 1e11
+                        tau_sec = math.exp(path_span / RT) / get_reference_pre_exponential()
                         tau_min = tau_sec / 60.0
                         
                         # Number of steps increases characteristic time roughly linearly
@@ -952,12 +1040,14 @@ class Recommender:
             exogenous_reactants,
             temperature_kelvin,
             time_minutes,
+            projection_strategy=projection_strategy,
         )
 
         projection_budget = _estimate_projection_budget(
             corrected_initial,
             temperature_kelvin,
             time_minutes,
+            strategy=projection_strategy,
         )
 
         observable_volatiles, projection_metadata = _apply_output_projection(
@@ -970,6 +1060,7 @@ class Recommender:
             fat_fraction=fat_fraction,
             protein_fraction=protein_fraction,
             projection_budget=projection_budget,
+            projection_strategy=projection_strategy,
         )
         proxy_volatiles = dict(raw_concentrations)
         
@@ -1141,6 +1232,7 @@ class Recommender:
                 "projection_severity": float(projection_budget.severity),
                 "volatile_yield_fraction": float(projection_budget.volatile_yield_fraction),
                 "total_volatile_budget_molar": float(projection_budget.total_volatile_budget_molar),
+                **_projection_strategy_metadata(projection_strategy),
             },
             "debug_paths": best_paths,
             "species_names": species_name_lookup,

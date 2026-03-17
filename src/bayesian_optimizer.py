@@ -14,7 +14,7 @@ class FormulationOptimizer:
     Searches the continuous parameter space (concentrations, pH, temp) 
     to maximize the Pareto-ranked sensory outcome minus safety penalties.
     """
-    def __init__(self, target_tag: str, minimize_tag: str = "beany", risk_aversion: float = 1.0, protein_type: str = "free", denaturation_state: float = 0.5):
+    def __init__(self, target_tag: str, minimize_tag: str = "beany", risk_aversion: float = 1.0, protein_type: str = "free", denaturation_state: Optional[float] = None):
         self.target_tag = target_tag
         self.minimize_tag = minimize_tag
         self.risk_aversion = risk_aversion
