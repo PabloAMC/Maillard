@@ -17,7 +17,7 @@ sys.path.insert(0, str(ROOT))
 from src.bayesian_optimizer import FormulationOptimizer  # noqa: E402
 from src.usability_reports import (
     DomainOfValidityChecker, 
-    render_domain_warnings_cli, 
+    build_confidence_package,
     render_decision_summary_cli,
     render_deep_explainability_cli
 )  # noqa: E402
@@ -137,6 +137,15 @@ def main():
         protein_type=args.protein_type,
         temp_c=res.matrix_explainability.get("temperature", 150.0), # or just from params
         ph=res.matrix_explainability.get("pH", 6.0)
+    )
+    res.confidence_metadata = build_confidence_package(
+        res,
+        warnings,
+        precursor_names=sugars + aas + lipids,
+        protein_type=args.protein_type,
+        formulation=best_formulation,
+        baseline_conditions=cond,
+        designer=designer,
     )
     render_decision_summary_cli(res, warnings)
     render_deep_explainability_cli(res)

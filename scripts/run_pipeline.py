@@ -11,6 +11,7 @@ The core Phase 7 orchestrator.
 
 import sys
 import argparse
+from dataclasses import asdict
 from pathlib import Path
 from typing import Dict
 
@@ -27,6 +28,7 @@ from src import precursor_resolver  # noqa: E402
 from src.barrier_constants import get_barrier, HEME_CATALYST_FAMILIES, HEME_CATALYST_REDUCTION  # noqa: E402
 from src.usability_reports import (
     DomainOfValidityChecker, 
+        build_confidence_package,
     render_decision_summary_cli,
     render_deep_explainability_cli
 )  # noqa: E402
@@ -154,14 +156,30 @@ def main():
             
             # --- Decision Summary ---
             checker = DomainOfValidityChecker(args.target)
-            warnings = checker.check(
-                precursor_names=[], # Bulk inverse doesn't easily show top precursors here
-                protein_type=args.protein_type,
-                temp_c=conditions.temperature_celsius,
-                ph=conditions.pH
-            )
             if results:
                 best = results[0]
+                best_formulation = next((item for item in designer.grid if item.get("name") == best.name), {})
+                best_precursors = []
+                for key in ("sugars", "amino_acids", "additives", "lipids"):
+                    best_precursors.extend(best_formulation.get(key, []))
+                best_protein_type = best_formulation.get("protein_type", args.protein_type)
+                best_temp = float(best_formulation.get("temp", conditions.temperature_celsius))
+                best_ph = float(best_formulation.get("ph", conditions.pH))
+                warnings = checker.check(
+                    precursor_names=best_precursors,
+                    protein_type=best_protein_type,
+                    temp_c=best_temp,
+                    ph=best_ph,
+                )
+                best.confidence_metadata = build_confidence_package(
+                    best,
+                    warnings,
+                    precursor_names=best_precursors,
+                    protein_type=best_protein_type,
+                    formulation=best_formulation,
+                    baseline_conditions=conditions,
+                    designer=designer,
+                )
                 # [10] Scientist-Facing Decision Summary
                 render_decision_summary_cli(best, warnings)
                 render_deep_explainability_cli(best)
@@ -275,6 +293,15 @@ def main():
         protein_type=args.protein_type,
         temp_c=args.temp,
         ph=args.ph
+    )
+    res.confidence_metadata = build_confidence_package(
+        res,
+        warnings,
+        precursor_names=names,
+        protein_type=args.protein_type,
+        formulation=formulation,
+        baseline_conditions=conditions,
+        designer=designer,
     )
     render_decision_summary_cli(res, warnings)
     render_deep_explainability_cli(res)

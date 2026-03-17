@@ -38,6 +38,7 @@ class FormulationResult:
     avg_uncertainty: float = 5.0
     effective_denaturation_state: float = 0.5
     matrix_explainability: Dict[str, object] = field(default_factory=dict)
+    confidence_metadata: Dict[str, object] = field(default_factory=dict)
     targets: List[Dict] = field(default_factory=list)
     bottleneck_precursor: str = "none"
     bottleneck_severity: float = 0.0
