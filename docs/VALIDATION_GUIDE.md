@@ -16,6 +16,18 @@ The contract now separates three meanings that had started to drift together in 
 - **Quantitative replication**: meets full-coverage plus thresholded Pearson / ratio criteria.
 - **Formulation utility**: remains useful for recipe ranking or intervention comparison even when a benchmark is not strict-ready.
 
+The benchmark-comparison policy is now explicit too:
+
+- `free_precursor` benchmarks compare the FAST observable path, i.e. the benchmark-facing `predicted_ppb` output from the recommender.
+- Cantera is currently a diagnostic reference lane for mechanism export, temporal debugging, and chemistry investigations; it is not the authoritative comparator for strict benchmark pass/fail.
+- `matrix_only` benchmarks compare the dedicated intake/headspace path and therefore remain outside the strict gate and outside FAST target snapshots.
+
+The absolute projection contract is explicit as well:
+
+- The current projection strategy is `precursor_limited_observable_v1` in `src/recommend.py`.
+- The limiting precursor pool is converted from mM to M, multiplied by a conservative severity-dependent volatile yield fraction, allocated across selected terminal outputs, and then converted to ppb on an aqueous mass-equivalent basis before matrix and headspace penalties are applied.
+- Those strategy constants and assumptions are emitted in `projection_context` and in each target's `projection_metadata`.
+
 The current benchmark summary artifact is generated with the Docker-validated helper:
 
 ```bash
@@ -31,6 +43,26 @@ The benchmark index artifact is generated with:
 ```
 
 This writes `results/validation/benchmark_index.md` and `results/validation/benchmark_index.json` so execution-path limits such as matrix-only benchmarks are explicit.
+The index also records which engine is authoritative for each benchmark and whether Cantera is only diagnostic or not currently authoritative.
+
+For a reproducible thermodynamic-gating audit, use:
+
+```bash
+./scripts/docker_maillard.sh thermo-gating
+```
+
+This writes `results/validation/thermodynamic_gating_audit.md` and `results/validation/thermodynamic_gating_audit.json` and reports whether the gated variant materially improves benchmark error. Until that audit says otherwise, thermodynamic gating remains diagnostic-only for benchmark pass/fail.
+The benchmark metadata and generated summary/index artefacts now also expose the current thermodynamic-gating policy so the `auto` benchmark path resolves through an explicit contract rather than an implicit default.
+
+For marker-separated validation lanes, use:
+
+```bash
+./scripts/docker_maillard.sh scientific-fast
+./scripts/docker_maillard.sh kinetics-validation
+```
+
+The fast lane covers FAST regression and benchmark contract checks, while the kinetics lane covers the slower Cantera reference cases, including temperature-ramp validation.
+Benchmarks with fewer than 3 matched compounds now report `pass-no-ranking` when full coverage and scale pass, which keeps the summary aligned with the contract that Pearson is not meaningful for 1-2 point systems.
 
 For reproducible target-level scientific inspection, use:
 
@@ -69,11 +101,21 @@ As of the current Docker-validated benchmark summary:
 
 The headspace module now also carries a conservative matrix fallback for `pea_iso` and `soy_iso` when no explicit fat/protein fractions are supplied. That fallback is intentionally tied to the same retention estimates already used in `src/matrix_correction.py`, and those retention estimates now relax with `denaturation_state` in the same way across matrix correction, output projection, and sensory scoring.
 
-The headspace layer now also carries a narrow pH-release correction for plant matrices: in pea/soy systems, acid-sensitive aldehydes and furans are allowed to release more strongly under acidic conditions, anchored so the existing Pratap-Singh pH ~6 baselines remain stable while the Pouvreau pea-isolate family is reproduced as an acidic-vs-less-acidic trend rather than as a forced absolute benchmark with incomplete metadata.
+The headspace layer now also carries the explicit observable calibration for the Pratap-Singh plant-matrix intake family: pea remains the reference yield baseline, soy-vs-pea release gaps for the tracked off-flavour markers are modeled in src/headspace.py, and the narrower pH-release correction still preserves the Pratap-Singh pH ~6 baselines while reproducing the Pouvreau acidic-vs-less-acidic pea trend.
 
-The matrix-accessibility layer now uses explicit native/desaturated endpoints for reactive lysine and cysteine instead of implicitly relaxing all the way to free-amino-acid behavior. In practice, pea-isolate cysteine remains strongly suppressed even after denaturation, matching the repo's literature note that free SH is near undetectable in commercial PPI.
+The matrix-accessibility layer now uses explicit native/desaturated endpoints for reactive lysine and cysteine instead of implicitly relaxing all the way to free-amino-acid behavior. The code now also exposes explicit literature windows for the two isolate families it treats as quantitatively anchored: pea-isolate lysine is kept in the approximate 0.30-0.45 reactive envelope while pea cysteine remains near-zero to low-single-digit accessibility, and soy-isolate lysine/cysteine stay in a broader but still conservative 0.36-0.50 / 0.10-0.24 envelope derived from the repo's soy literature synthesis.
 
-For soy, the current envelope is still conservative, but it is no longer a free-floating placeholder: the repo now anchors it explicitly to the internal plant-protein literature synthesis that describes soy glycinin/β-conglycinin as compact globulins with buried reactive groups, soy as lysine-rich but sulfur-poor relative to meat-like systems, and extrusion / protein-polysaccharide conjugation as the mechanisms that partially reopen accessibility while still trapping volatiles. That is enough to justify the current relative contract `free > soy_iso > pea_iso`, but not enough yet to promote soy into an absolute quantitative accessibility benchmark.
+That calibration is now connected to a temperature/time/pH-aware denaturation heuristic in `src/matrix_correction.py`. In the formulation and optimizer paths, `denaturation_state` is no longer forced to `0.5` by default: if the user does not specify it explicitly, the engine infers an effective matrix state from the reaction conditions and exposes that `effective_denaturation_state` in the formulation result. Explicit overrides still win when the user or a benchmark needs to pin the state manually.
+
+The user-facing explainability surface is also broader now:
+
+- benchmark target artefacts expose proxy-vs-observable projection semantics directly (`Proxy ppb`, `Observable ppb`, `Obs/Proxy`, matrix factor, headspace factor, volatile class)
+- formulation-level explainability can be generated with `./scripts/docker_maillard.sh explain-formulation <name>`
+- domain-of-applicability warnings can be generated with `./scripts/docker_maillard.sh validated-envelope`
+
+Finally, the previous bulk matrix fallback has been narrowed into a compound-class-aware overlay in the recommendation/headspace/sensory paths. Aldehydes and furans remain more strongly retained than sulfur volatiles and alcohols, which makes the default pea/soy fallback more interpretable without claiming benchmark-fitted explicit binding chemistry for every compound.
+
+For soy, the current envelope remains conservative rather than benchmark-fitted, but it is no longer a free-floating placeholder: the repo now anchors it explicitly to the internal plant-protein literature synthesis that describes soy glycinin/β-conglycinin as compact globulins with buried reactive groups, soy as lysine-rich but sulfur-poor relative to meat-like systems, and extrusion / protein-polysaccharide conjugation as the mechanisms that partially reopen accessibility while still trapping volatiles. That is enough to justify both the relative contract `free > soy_iso > pea_iso` and the narrower calibrated window frozen in unit tests, while still keeping soy outside any strict absolute accessibility benchmark.
 
 For `matrix_only` today, the contract is narrow and explicit:
 
@@ -119,12 +161,16 @@ The validated execution contract now uses named Docker lanes instead of ad hoc c
 - `./scripts/docker_maillard.sh hofmann`: reproducible diagnostic trace for the calibrated Hofmann sulfur benchmark.
 - `./scripts/docker_maillard.sh targets ...`: reproducible target snapshot for a specific benchmark and target family (`desirable`, `competing`, `toxic`; aliases `off_flavour` and `off-flavour`).
 - `./scripts/docker_maillard.sh targets-report`: reproducible aggregate target artifact with headspace observability metadata.
+- `./scripts/docker_maillard.sh validated-envelope`: reproducible validated-envelope / domain-of-applicability artifact.
+- `./scripts/docker_maillard.sh explain-formulation <name>`: reproducible formulation explainability artifact for a formulation in `data/formulation_grid.yml`.
 
 ## 4. Blind Spots That Still Matter
 
-- **Matrix-only systems**: the first plant-isolate benchmark path is now executable, but broader matrix calibration beyond the pea-isolate intake case is still missing.
+- **Matrix-only systems**: the first plant-isolate benchmark path is now executable and the default matrix-state handling is less manual, but broader matrix calibration beyond the current pea/soy intake family is still missing.
 - **Headspace translation**: the remaining free-amino-acid scale gaps are now dominated by how FAST activity is translated into observed concentration/headspace, not by a single missing sulfur barrier.
 - **Peptide accessibility**: intact protein systems are still outside the validated free-precursor envelope.
+- **User-facing explainability**: the engine now computes a more physical matrix state internally, but that matrix metadata is not yet surfaced broadly in benchmark summary/report artifacts.
+- **Default CLI integration**: explainability and validated-envelope artifacts exist, but the default user commands do not yet surface those warnings inline during every formulation run.
 
 ## 5. Recommended Verification Workflow
 

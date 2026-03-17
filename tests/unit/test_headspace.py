@@ -95,6 +95,42 @@ def test_acidic_ph_increases_plant_matrix_release_for_acid_sensitive_off_flavour
     assert air_acid["2,5-Dimethylpyrazine"] == pytest.approx(air_neutral["2,5-Dimethylpyrazine"])
 
 
+def test_pratap_singh_headspace_calibration_carries_soy_release_gap_in_headspace_layer():
+    model = HeadspaceModel()
+
+    assert model.get_matrix_benchmark_headspace_factor(
+        "Hexanal",
+        protein_type="pea_iso",
+        pH=6.0,
+    ) == pytest.approx(1.0)
+    assert model.get_matrix_benchmark_headspace_factor(
+        "2-Pentylfuran",
+        protein_type="pea_iso",
+        pH=6.0,
+    ) == pytest.approx(1.0)
+    assert model.get_matrix_benchmark_headspace_factor(
+        "1-Hexanol",
+        protein_type="pea_iso",
+        pH=6.0,
+    ) == pytest.approx(1.0)
+
+    assert model.get_matrix_benchmark_headspace_factor(
+        "Hexanal",
+        protein_type="soy_iso",
+        pH=6.0,
+    ) == pytest.approx(0.453 / 0.205)
+    assert model.get_matrix_benchmark_headspace_factor(
+        "2-Pentylfuran",
+        protein_type="soy_iso",
+        pH=6.0,
+    ) == pytest.approx(2.972 / 0.502)
+    assert model.get_matrix_benchmark_headspace_factor(
+        "1-Hexanol",
+        protein_type="soy_iso",
+        pH=6.0,
+    ) == pytest.approx(0.143 / 0.063)
+
+
 def test_explicit_matrix_fractions_override_retention_fallback():
     model = HeadspaceModel()
     matrix = {"Methional": 1.0}

@@ -28,6 +28,7 @@
 - **Equilibrium Dynamics**: In closed-system kinetic models (like Cantera batch reactors), irreversibility is a dangerous simplification for Schiff bases. Always model these as reversible equilibria to avoid "trapping" volatiles at near-zero concentrations, which causes false negatives in aroma prediction.
 - **Metric Validity**: Never report correlation metrics like Pearson R for fewer than 3 matched compounds. With two points they are mathematically misleading and can mask obvious calibration failures.
 - **Workflow Discipline**: After a user correction about process, update the working plan and the lessons file immediately before continuing implementation.
+- **Priority Reassessment**: If the user says another model or chat already advanced the work, re-audit priorities from repo state (`git status`/diff, backlog, repo memory) before answering. Do not trust the previous summary alone.
 - **Execution Environment**: In this repository, verification must run inside Docker using the `maillard` conda environment on Python 3.12 when the user requests it. Do not fall back to host Python tools for scientific validation.
 - **Step Framing**: When the user asks for it, state the difficulty of the next substantial step and whether GPT-5.4 or GPT-5 mini should handle it before proceeding.
 - **Task Annotation**: If the user asks for model recommendations, write the GPT-5.4 vs GPT 5 mini split directly into the active plan or backlog artifact, not only in chat updates.

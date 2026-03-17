@@ -18,14 +18,20 @@ def test_benchmark_index_marks_matrix_only_scope_gaps_explicitly():
     by_id = {entry.benchmark_id: entry for entry in entries}
 
     assert by_id["cys_glucose_150C_Farmer1999"].execution_path == "free_precursor"
+    assert by_id["cys_glucose_150C_Farmer1999"].benchmark_engine == "fast_observable"
+    assert by_id["cys_glucose_150C_Farmer1999"].cantera_role == "diagnostic_reference_only"
+    assert by_id["cys_glucose_150C_Farmer1999"].thermodynamic_gating_policy == "diagnostic_only"
     assert by_id["pea_isolate_40C_PratapSingh2021"].execution_path == "matrix_only"
+    assert by_id["pea_isolate_40C_PratapSingh2021"].benchmark_engine == "matrix_intake_headspace"
+    assert by_id["pea_isolate_40C_PratapSingh2021"].cantera_role == "not_authoritative"
+    assert by_id["pea_isolate_40C_PratapSingh2021"].thermodynamic_gating_policy == "not_applicable"
     assert by_id["pea_isolate_40C_PratapSingh2021"].supported is True
     assert by_id["pea_isolate_40C_PratapSingh2021"].strict_ready is False
-    assert by_id["pea_isolate_40C_PratapSingh2021"].status in {"pass", "partial-pass", "scale-gap", "ranking-gap"}
+    assert by_id["pea_isolate_40C_PratapSingh2021"].status in {"pass", "pass-no-ranking", "scale-gap", "ranking-gap"}
     assert by_id["soy_isolate_40C_PratapSingh2021"].execution_path == "matrix_only"
     assert by_id["soy_isolate_40C_PratapSingh2021"].supported is True
     assert by_id["soy_isolate_40C_PratapSingh2021"].strict_ready is False
-    assert by_id["soy_isolate_40C_PratapSingh2021"].status in {"pass", "partial-pass", "scale-gap", "ranking-gap"}
+    assert by_id["soy_isolate_40C_PratapSingh2021"].status in {"pass", "pass-no-ranking", "scale-gap", "ranking-gap"}
 
 
 def test_benchmark_index_markdown_exposes_execution_path():
@@ -39,4 +45,7 @@ def test_benchmark_index_markdown_exposes_execution_path():
 
     assert "Benchmark Index" in markdown
     assert "Execution Path" in markdown
+    assert "Engine" in markdown
+    assert "Cantera Role" in markdown
+    assert "Thermo Policy" in markdown
     assert "matrix_only" in markdown

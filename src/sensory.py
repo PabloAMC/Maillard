@@ -8,7 +8,7 @@ Maps predicted volatile concentrations to aroma descriptors using a psychophysic
 import yaml
 from pathlib import Path
 from typing import Dict, List, Any, Tuple, Optional
-from src.matrix_correction import ProteinType, resolve_matrix_correction
+from src.matrix_correction import ProteinType, resolve_compound_matrix_retention, resolve_matrix_correction
 from src.headspace import HeadspaceModel  # noqa: E402
 
 class SensoryDatabase:
@@ -141,7 +141,7 @@ class SensoryPredictor:
         
         p_type = ProteinType(protein_type)
         # Use matrix volatile retention factor to adjust ODT
-        retention = resolve_matrix_correction(p_type, denaturation_state).volatile_retention
+        bulk_retention = resolve_matrix_correction(p_type, denaturation_state).volatile_retention
 
         # 1. Headspace Partitioning (optional) - convert ppb to ppm for old model if needed
         # Actually let's stay in ppb for consistency with new safety/benchmarks.
@@ -174,6 +174,11 @@ class SensoryPredictor:
                     odt_base = entry["threshold_ppm"] * 1000.0
                 
                 # Matrix Effect: ODT_matrix = ODT_water / Retention
+                retention = resolve_compound_matrix_retention(
+                    compound,
+                    protein_type=p_type,
+                    denaturation_state=denaturation_state,
+                ) if protein_type != "free" else bulk_retention
                 odt_matrix = odt_base / max(0.01, retention)
                 
                 # Stevens' Power Law: I = (C / ODT)^0.55

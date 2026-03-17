@@ -7,11 +7,12 @@ from dataclasses import dataclass, field
 from src.smirks_engine import SmirksEngine, ReactionConditions, Species  # noqa: E402
 from src.recommend import Recommender  # noqa: E402
 from src.precursor_resolver import resolve_many  # noqa: E402
-from src.barrier_constants import HEME_CATALYST_REDUCTION, HEME_CATALYST_FAMILIES  # noqa: E402
+from src.barrier_constants import HEME_CATALYST_REDUCTION, HEME_CATALYST_FAMILIES, effective_barrier_from_rate_constant  # noqa: E402
 from src.results_db import ResultsDB  # noqa: E402
 from src.sensory import SensoryPredictor  # noqa: E402
 from src.safety import evaluate_formulation_safety  # noqa: E402
 from src.lipid_oxidation import predict_lop_generation  # noqa: E402
+from src.matrix_correction import build_matrix_explainability, resolve_effective_denaturation_state  # noqa: E402
 
 # Locate data files
 ROOT = Path(__file__).resolve().parents[1]
@@ -35,6 +36,8 @@ class FormulationResult:
     predicted_proxy_ppb: Dict[str, float] = field(default_factory=dict)
     projection_metadata: Dict[str, Dict[str, float]] = field(default_factory=dict)
     avg_uncertainty: float = 5.0
+    effective_denaturation_state: float = 0.5
+    matrix_explainability: Dict[str, object] = field(default_factory=dict)
 
 
 class InverseDesigner:
@@ -153,7 +156,13 @@ class InverseDesigner:
         for form in eval_grid:
             name = form.get("name", "Unknown")
             protein_type = form.get("protein_type", global_conditions.protein_type)
-            denaturation_state = form.get("denaturation_state", 0.5)
+            denaturation_state = resolve_effective_denaturation_state(
+                protein_type=protein_type,
+                temperature_celsius=form.get("temp", global_conditions.temperature_celsius),
+                time_minutes=form.get("time_minutes", 60.0),
+                pH=form.get("ph", global_conditions.pH),
+                explicit_denaturation_state=form.get("denaturation_state"),
+            )
             
             sugars = form.get("sugars", [])
             amino_acids = form.get("amino_acids", [])
@@ -226,15 +235,11 @@ class InverseDesigner:
                 
                 k = cond.get_rate_constant(step.reaction_family or "unknown", ea_override_kcal=bar)
                 
-                # Effective barrier including pH and aw effects:
-                # Ea_eff = -RT * ln(k / A)
-                import math
-                RT = 0.001987 * cond.temperature_kelvin
-                A = 1e11 # Must match conditions.py
-                if k > 0:
-                    bar_eff = -RT * math.log(k / A)
-                else:
-                    bar_eff = 99.0
+                bar_eff = effective_barrier_from_rate_constant(
+                    k,
+                    cond.temperature_kelvin,
+                    step.reaction_family or "unknown",
+                )
                     
                 if apply_heme and step.reaction_family in HEME_CATALYST_FAMILIES:
                     bar_eff -= HEME_CATALYST_REDUCTION
@@ -348,7 +353,15 @@ class InverseDesigner:
                 predicted_ppb=conc_map,
                 predicted_proxy_ppb=rec_result.get("predicted_proxy_ppb", {}),
                 projection_metadata=rec_result.get("projection_metadata", {}),
-                avg_uncertainty=avg_unc
+                avg_uncertainty=avg_unc,
+                effective_denaturation_state=denaturation_state,
+                matrix_explainability=build_matrix_explainability(
+                    protein_type=protein_type,
+                    effective_denaturation_state=denaturation_state,
+                    temperature_celsius=cond.temperature_celsius,
+                    time_minutes=form.get("time_minutes", 60.0),
+                    pH=cond.pH,
+                ),
             ))
 
             

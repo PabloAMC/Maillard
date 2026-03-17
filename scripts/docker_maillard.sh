@@ -21,6 +21,10 @@ Commands:
   pytest ...   Run pytest inside the activated env.
   stability    Run the Tier 0/1 stability gate.
   core         Run the core correctness lane.
+  scientific-fast
+               Run the fast scientific regression lane selected by pytest markers.
+  kinetics-validation
+               Run the slower Cantera/kinetics validation lane selected by pytest markers.
   scientific   Run the scientific validation lane.
   qm-heavy     Run the QM / external-backend lane.
   hofmann      Generate the Hofmann diagnostic snapshot.
@@ -28,6 +32,12 @@ Commands:
                Generate a benchmark target snapshot (default TYPE=desirable; aliases: off_flavour, off-flavour, competing).
   targets-report
                Generate results/validation/benchmark_targets.{md,json}.
+  thermo-gating
+               Generate results/validation/thermodynamic_gating_audit.{md,json}.
+  validated-envelope
+               Generate results/validation/validated_envelope.{md,json}.
+  explain-formulation NAME [TARGET_TAG] [MINIMIZE_TAG]
+               Generate a formulation explainability artifact in results/validation.
   index        Generate results/validation/benchmark_index.{md,json}.
   summary      Generate results/validation/benchmark_summary.{md,json}.
   status       Show container and environment status.
@@ -54,7 +64,16 @@ scientific_lane() {
   run_in_env "python scripts/generate_benchmark_summary.py"
   run_in_env "python scripts/generate_benchmark_index.py"
   run_in_env "python scripts/generate_benchmark_targets.py"
-  run_in_env "python -m pytest tests/scientific tests/unit/test_budget_projection.py tests/unit/test_safety_and_flux.py tests/integration/test_recommendation_engine.py"
+  run_in_env "python scripts/generate_thermodynamic_gating_audit.py"
+  scientific_fast_lane
+}
+
+scientific_fast_lane() {
+  run_in_env "python -m pytest -m scientific_regression tests/scientific tests/unit/test_budget_projection.py tests/unit/test_safety_and_flux.py tests/integration/test_recommendation_engine.py"
+}
+
+kinetics_validation_lane() {
+  run_in_env "python -m pytest -m kinetics_validation tests/integration/test_cantera_sim.py tests/integration/test_temp_profiles.py"
 }
 
 qm_heavy_lane() {
@@ -195,6 +214,12 @@ case "$cmd" in
   scientific)
     scientific_lane
     ;;
+  scientific-fast)
+    scientific_fast_lane
+    ;;
+  kinetics-validation)
+    kinetics_validation_lane
+    ;;
   qm-heavy)
     qm_heavy_lane
     ;;
@@ -211,6 +236,20 @@ case "$cmd" in
     ;;
   targets-report)
     run_in_env "python scripts/generate_benchmark_targets.py"
+    ;;
+  thermo-gating)
+    run_in_env "python scripts/generate_thermodynamic_gating_audit.py"
+    ;;
+  validated-envelope)
+    run_in_env "python scripts/generate_validated_envelope_report.py"
+    ;;
+  explain-formulation)
+    shift
+    if [ "$#" -lt 1 ]; then
+      echo "Usage: ./scripts/docker_maillard.sh explain-formulation NAME [TARGET_TAG] [MINIMIZE_TAG]" >&2
+      exit 1
+    fi
+    run_in_env "python scripts/explain_formulation.py --name '$1' --target-tag '${2:-meaty}' --minimize-tag '${3:-beany}'"
     ;;
   index)
     run_in_env "python scripts/generate_benchmark_index.py"

@@ -162,6 +162,26 @@ MAILLARD_STRICT_BENCHMARKS=1 ./scripts/docker_maillard.sh pytest tests/scientifi
 ```
 This requires Pearson `>= 0.85` and error ratios `<= 1.5x` for all PRIMARY systems.
 
+### Benchmark Policy
+- PRIMARY `free_precursor` benchmarks use the FAST observable output (`predicted_ppb`) as the authoritative regression signal.
+- Cantera is currently a diagnostic/reference lane for mechanism inspection and temporal debugging, not the source of pass/fail in the strict benchmark gate.
+- `matrix_only` benchmarks use the dedicated intake/headspace pathway and remain outside the strict gate until a precursor-resolved benchmark contract exists for those systems.
+
+### Projection Strategy
+- The current absolute projection is `precursor_limited_observable_v1` in `src/recommend.py`.
+- It converts the limiting precursor pool from mM to M, applies a conservative volatile-yield fraction from thermal severity, allocates that budget across supported endpoints, and converts to ppb on an aqueous mass-equivalent basis before matrix/headspace corrections.
+- The active projection constants and basis are exposed in `projection_context` and per-target `projection_metadata`.
+
+### Thermodynamic Gating Audit
+- Use `./scripts/docker_maillard.sh thermo-gating` to generate `results/validation/thermodynamic_gating_audit.md` and `.json`.
+- This audit compares the current benchmark-facing FAST path against a thermodynamically gated variant and only recommends benchmark-facing gating when the improvement is material.
+- The benchmark contract now carries an explicit thermodynamic-gating policy as well; current PRIMARY free-precursor systems resolve to `diagnostic_only`, so `auto` benchmark evaluation keeps gating off unless a benchmark is explicitly promoted after audit.
+
+### Validation Lanes
+- Use `./scripts/docker_maillard.sh scientific-fast` for the fast FAST/benchmark regression lane selected by pytest markers.
+- Use `./scripts/docker_maillard.sh kinetics-validation` for the slower Cantera kinetics-reference lane, including temperature-ramp validation.
+- Benchmarks with fewer than 3 matched compounds now surface as `pass-no-ranking` when coverage and scale pass, instead of the more misleading `partial-pass` label.
+
 
 ---
 

@@ -15,8 +15,10 @@ Current legume-matrix anchoring inside the repo:
   docs/Elicit - Maillard Pathways in Plant-Based Cooking - Report.md
 """
 
+import math
 from dataclasses import dataclass
 from enum import Enum
+from typing import Optional
 
 class ProteinType(Enum):
     FREE_AMINO_ACID = "free"
@@ -50,6 +52,36 @@ class EffectiveMatrixCorrection:
     source: str
 
 
+@dataclass(frozen=True)
+class AccessibilityLiteratureWindow:
+    protein_type: ProteinType
+    lysine_min: float
+    lysine_max: float
+    cysteine_min: float
+    cysteine_max: float
+    source: str
+
+
+@dataclass(frozen=True)
+class DenaturationHeuristic:
+    protein_type: ProteinType
+    midpoint_celsius: float
+    width_celsius: float
+    time_gain_celsius: float
+    time_reference_minutes: float
+    acidic_ph_gain_celsius: float
+    reference_ph: float
+    source: str
+
+
+@dataclass(frozen=True)
+class VolatileClassRetentionProfile:
+    protein_type: ProteinType
+    native_factors: dict[str, float]
+    denatured_factors: dict[str, float]
+    source: str
+
+
 _LYSINE_IDENTIFIERS = {
     "lysine",
     "l-lysine",
@@ -60,6 +92,188 @@ _CYSTEINE_IDENTIFIERS = {
     "cysteine",
     "l-cysteine",
     "nc(cs)c(=o)o",
+}
+
+
+ACCESSIBILITY_LITERATURE_WINDOWS = {
+    ProteinType.PEA_ISOLATE: AccessibilityLiteratureWindow(
+        protein_type=ProteinType.PEA_ISOLATE,
+        lysine_min=0.30,
+        lysine_max=0.45,
+        cysteine_min=0.00,
+        cysteine_max=0.08,
+        source="Prigent 2024 TNBS/DTNB + Schneider 2023 OPA envelope; commercial PPI free SH remains near-zero",
+    ),
+    ProteinType.SOY_ISOLATE: AccessibilityLiteratureWindow(
+        protein_type=ProteinType.SOY_ISOLATE,
+        lysine_min=0.36,
+        lysine_max=0.50,
+        cysteine_min=0.10,
+        cysteine_max=0.24,
+        source=(
+            "Repo soy literature synthesis from Kutzli 2020 / Naik 2021: glycinin/"
+            "beta-conglycinin burial, partial reopening after processing, sulfur still"
+            " substantially less accessible than free-AA systems"
+        ),
+    ),
+}
+
+
+DENATURATION_HEURISTICS = {
+    ProteinType.PEA_ISOLATE: DenaturationHeuristic(
+        protein_type=ProteinType.PEA_ISOLATE,
+        midpoint_celsius=82.0,
+        width_celsius=14.0,
+        time_gain_celsius=6.0,
+        time_reference_minutes=10.0,
+        acidic_ph_gain_celsius=2.5,
+        reference_ph=6.0,
+        source="Prigent 2024 TNBS/DTNB + Schneider 2023 OPA envelope; calibrated so pea isolate stays mostly native at 40C but recovers strongly by 90-140C",
+    ),
+    ProteinType.PEA_CONCENTRATE: DenaturationHeuristic(
+        protein_type=ProteinType.PEA_CONCENTRATE,
+        midpoint_celsius=84.0,
+        width_celsius=14.0,
+        time_gain_celsius=5.5,
+        time_reference_minutes=10.0,
+        acidic_ph_gain_celsius=2.0,
+        reference_ph=6.0,
+        source="Pea concentrate inherits the pea-isolate thermal envelope with a modest fiber-burial penalty",
+    ),
+    ProteinType.SOY_ISOLATE: DenaturationHeuristic(
+        protein_type=ProteinType.SOY_ISOLATE,
+        midpoint_celsius=84.0,
+        width_celsius=14.0,
+        time_gain_celsius=5.0,
+        time_reference_minutes=10.0,
+        acidic_ph_gain_celsius=2.0,
+        reference_ph=6.0,
+        source="Repo soy literature synthesis (glycinin/beta-conglycinin burial, partial reopening under heat/process)",
+    ),
+    ProteinType.SOY_CONCENTRATE: DenaturationHeuristic(
+        protein_type=ProteinType.SOY_CONCENTRATE,
+        midpoint_celsius=86.0,
+        width_celsius=14.0,
+        time_gain_celsius=4.5,
+        time_reference_minutes=10.0,
+        acidic_ph_gain_celsius=1.8,
+        reference_ph=6.0,
+        source="Soy concentrate inherits the soy-isolate thermal envelope with added concentrate burial",
+    ),
+    ProteinType.MYCOPROTEIN: DenaturationHeuristic(
+        protein_type=ProteinType.MYCOPROTEIN,
+        midpoint_celsius=78.0,
+        width_celsius=12.0,
+        time_gain_celsius=5.0,
+        time_reference_minutes=10.0,
+        acidic_ph_gain_celsius=1.5,
+        reference_ph=6.0,
+        source="Conservative mycoprotein thermal-unfolding placeholder pending dedicated calibration",
+    ),
+}
+
+
+VOLATILE_CLASS_RETENTION_PROFILES = {
+    ProteinType.PEA_ISOLATE: VolatileClassRetentionProfile(
+        protein_type=ProteinType.PEA_ISOLATE,
+        native_factors={
+            "aldehyde": 0.82,
+            "furan": 0.92,
+            "alcohol": 1.05,
+            "sulfur": 1.08,
+            "pyrazine": 1.02,
+            "other": 1.0,
+        },
+        denatured_factors={
+            "aldehyde": 0.92,
+            "furan": 0.97,
+            "alcohol": 1.02,
+            "sulfur": 1.04,
+            "pyrazine": 1.0,
+            "other": 1.0,
+        },
+        source="Conservative class-aware trapping overlay: aldehydes bind most strongly, sulfur volatiles and alcohols escape somewhat more readily",
+    ),
+    ProteinType.PEA_CONCENTRATE: VolatileClassRetentionProfile(
+        protein_type=ProteinType.PEA_CONCENTRATE,
+        native_factors={
+            "aldehyde": 0.78,
+            "furan": 0.88,
+            "alcohol": 1.03,
+            "sulfur": 1.05,
+            "pyrazine": 1.0,
+            "other": 1.0,
+        },
+        denatured_factors={
+            "aldehyde": 0.88,
+            "furan": 0.94,
+            "alcohol": 1.01,
+            "sulfur": 1.03,
+            "pyrazine": 1.0,
+            "other": 1.0,
+        },
+        source="Pea concentrate inherits stronger aldehyde/furan trapping from the pea family plus a concentrate penalty",
+    ),
+    ProteinType.SOY_ISOLATE: VolatileClassRetentionProfile(
+        protein_type=ProteinType.SOY_ISOLATE,
+        native_factors={
+            "aldehyde": 0.88,
+            "furan": 0.96,
+            "alcohol": 1.04,
+            "sulfur": 1.06,
+            "pyrazine": 1.01,
+            "other": 1.0,
+        },
+        denatured_factors={
+            "aldehyde": 0.95,
+            "furan": 0.99,
+            "alcohol": 1.02,
+            "sulfur": 1.03,
+            "pyrazine": 1.0,
+            "other": 1.0,
+        },
+        source="Conservative soy overlay: aldehydes still bind more strongly than sulfur/alcohol classes, but less severely than pea",
+    ),
+    ProteinType.SOY_CONCENTRATE: VolatileClassRetentionProfile(
+        protein_type=ProteinType.SOY_CONCENTRATE,
+        native_factors={
+            "aldehyde": 0.84,
+            "furan": 0.93,
+            "alcohol": 1.03,
+            "sulfur": 1.04,
+            "pyrazine": 1.0,
+            "other": 1.0,
+        },
+        denatured_factors={
+            "aldehyde": 0.91,
+            "furan": 0.97,
+            "alcohol": 1.01,
+            "sulfur": 1.02,
+            "pyrazine": 1.0,
+            "other": 1.0,
+        },
+        source="Soy concentrate inherits the soy family overlay with added burial",
+    ),
+    ProteinType.MYCOPROTEIN: VolatileClassRetentionProfile(
+        protein_type=ProteinType.MYCOPROTEIN,
+        native_factors={
+            "aldehyde": 0.92,
+            "furan": 0.98,
+            "alcohol": 1.02,
+            "sulfur": 1.03,
+            "pyrazine": 1.0,
+            "other": 1.0,
+        },
+        denatured_factors={
+            "aldehyde": 0.97,
+            "furan": 1.0,
+            "alcohol": 1.01,
+            "sulfur": 1.01,
+            "pyrazine": 1.0,
+            "other": 1.0,
+        },
+        source="Conservative mycoprotein class overlay pending dedicated calibration",
+    ),
 }
 
 MATRIX_CORRECTIONS = {
@@ -80,10 +294,10 @@ MATRIX_CORRECTIONS = {
         protein_type=ProteinType.PEA_ISOLATE,
         # TNBS/OPA envelope in the repo suggests commercial pea isolates sit well
         # below free-AA accessibility even after wet-heat treatment.
-        lysine_accessibility=0.39,
+        lysine_accessibility=0.38,
         cysteine_accessibility=0.04,
         lysine_accessibility_native=0.32,
-        lysine_accessibility_denatured=0.46,
+        lysine_accessibility_denatured=0.44,
         cysteine_accessibility_native=0.01,
         cysteine_accessibility_denatured=0.07,
         volatile_retention=0.50,
@@ -93,10 +307,10 @@ MATRIX_CORRECTIONS = {
     ),
     ProteinType.PEA_CONCENTRATE: MatrixCorrection(
         protein_type=ProteinType.PEA_CONCENTRATE,
-        lysine_accessibility=0.29,
+        lysine_accessibility=0.28,
         cysteine_accessibility=0.03,
         lysine_accessibility_native=0.22,
-        lysine_accessibility_denatured=0.36,
+        lysine_accessibility_denatured=0.34,
         cysteine_accessibility_native=0.005,
         cysteine_accessibility_denatured=0.055,
         volatile_retention=0.35,
@@ -106,12 +320,12 @@ MATRIX_CORRECTIONS = {
     ),
     ProteinType.SOY_CONCENTRATE: MatrixCorrection(
         protein_type=ProteinType.SOY_CONCENTRATE,
-        lysine_accessibility=0.35,
-        cysteine_accessibility=0.16,
+        lysine_accessibility=0.34,
+        cysteine_accessibility=0.15,
         lysine_accessibility_native=0.30,
-        lysine_accessibility_denatured=0.40,
+        lysine_accessibility_denatured=0.38,
         cysteine_accessibility_native=0.11,
-        cysteine_accessibility_denatured=0.21,
+        cysteine_accessibility_denatured=0.19,
         volatile_retention=0.45,
         volatile_retention_native=0.37,
         volatile_retention_denatured=0.53,
@@ -128,12 +342,12 @@ MATRIX_CORRECTIONS = {
         # isolates as lysine-rich globulins whose extrusion state can expose more
         # reactive sites, while still remaining well below free-AA behavior and
         # sulfur-limited relative to true meat-like precursor systems.
-        lysine_accessibility=0.45,
-        cysteine_accessibility=0.20,
-        lysine_accessibility_native=0.39,
-        lysine_accessibility_denatured=0.51,
+        lysine_accessibility=0.43,
+        cysteine_accessibility=0.17,
+        lysine_accessibility_native=0.38,
+        lysine_accessibility_denatured=0.48,
         cysteine_accessibility_native=0.14,
-        cysteine_accessibility_denatured=0.26,
+        cysteine_accessibility_denatured=0.20,
         volatile_retention=0.55,
         volatile_retention_native=0.47,
         volatile_retention_denatured=0.63,
@@ -163,6 +377,153 @@ MATRIX_CORRECTIONS = {
 
 def clamp_denaturation_state(denaturation_state: float) -> float:
     return max(0.0, min(1.0, float(denaturation_state)))
+
+
+def _coerce_protein_type(protein_type: ProteinType | str) -> ProteinType:
+    if isinstance(protein_type, ProteinType):
+        return protein_type
+    return ProteinType(protein_type)
+
+
+def estimate_denaturation_state(
+    protein_type: ProteinType | str,
+    temperature_celsius: float,
+    time_minutes: Optional[float] = None,
+    pH: Optional[float] = None,
+) -> float:
+    p_type = _coerce_protein_type(protein_type)
+    if p_type == ProteinType.FREE_AMINO_ACID:
+        return 1.0
+
+    heuristic = DENATURATION_HEURISTICS.get(p_type)
+    if heuristic is None:
+        return 0.5
+
+    duration = max(0.0, float(time_minutes if time_minutes is not None else 0.0))
+    acidity_shift = 0.0
+    if pH is not None:
+        acidity_shift = heuristic.acidic_ph_gain_celsius * max(0.0, heuristic.reference_ph - float(pH))
+
+    time_shift = heuristic.time_gain_celsius * math.log1p(duration / heuristic.time_reference_minutes)
+    effective_midpoint = heuristic.midpoint_celsius - time_shift - acidity_shift
+    exponent = max(-60.0, min(60.0, -(float(temperature_celsius) - effective_midpoint) / heuristic.width_celsius))
+    return clamp_denaturation_state(1.0 / (1.0 + math.exp(exponent)))
+
+
+def resolve_effective_denaturation_state(
+    protein_type: ProteinType | str,
+    temperature_celsius: float,
+    time_minutes: Optional[float] = None,
+    pH: Optional[float] = None,
+    explicit_denaturation_state: Optional[float] = None,
+) -> float:
+    if explicit_denaturation_state is not None:
+        return clamp_denaturation_state(explicit_denaturation_state)
+    return estimate_denaturation_state(
+        protein_type,
+        temperature_celsius=temperature_celsius,
+        time_minutes=time_minutes,
+        pH=pH,
+    )
+
+
+def get_accessibility_literature_window(
+    protein_type: ProteinType,
+) -> AccessibilityLiteratureWindow | None:
+    return ACCESSIBILITY_LITERATURE_WINDOWS.get(protein_type)
+
+
+def classify_volatile_matrix_family(name: str, smiles: Optional[str] = None) -> str:
+    normalized = name.strip().lower()
+    if any(token in normalized for token in ["thiol", "sulfide", "sulfur", "methional", "thiazole", "thiophene"]):
+        return "sulfur"
+    if "pyrazine" in normalized:
+        return "pyrazine"
+    if any(token in normalized for token in ["furan", "furfural"]):
+        return "furan"
+    if any(token in normalized for token in ["ol", "alcohol"]):
+        return "alcohol"
+    if any(token in normalized for token in ["anal", "enal", "aldehyde"]):
+        return "aldehyde"
+    if smiles:
+        smi = smiles.lower()
+        if "s" in smi:
+            return "sulfur"
+        if "n" in smi and "c1" in smi:
+            return "pyrazine"
+        if "o" in smi and "c1" in smi:
+            return "furan"
+    return "other"
+
+
+def get_volatile_class_retention_factor(
+    name: str,
+    protein_type: ProteinType | str,
+    denaturation_state: float,
+    smiles: Optional[str] = None,
+) -> float:
+    p_type = _coerce_protein_type(protein_type)
+    if p_type == ProteinType.FREE_AMINO_ACID:
+        return 1.0
+    profile = VOLATILE_CLASS_RETENTION_PROFILES.get(p_type)
+    if profile is None:
+        return 1.0
+    family = classify_volatile_matrix_family(name, smiles=smiles)
+    state = clamp_denaturation_state(denaturation_state)
+    native = profile.native_factors.get(family, profile.native_factors.get("other", 1.0))
+    denatured = profile.denatured_factors.get(family, profile.denatured_factors.get("other", 1.0))
+    return native + state * (denatured - native)
+
+
+def resolve_compound_matrix_retention(
+    name: str,
+    protein_type: ProteinType | str,
+    denaturation_state: float = 0.5,
+    smiles: Optional[str] = None,
+) -> float:
+    p_type = _coerce_protein_type(protein_type)
+    base = resolve_matrix_correction(p_type, denaturation_state).volatile_retention
+    class_factor = get_volatile_class_retention_factor(
+        name,
+        protein_type=p_type,
+        denaturation_state=denaturation_state,
+        smiles=smiles,
+    )
+    return max(0.01, min(1.0, base * class_factor))
+
+
+def build_matrix_explainability(
+    *,
+    protein_type: ProteinType | str,
+    effective_denaturation_state: float,
+    temperature_celsius: float,
+    time_minutes: Optional[float],
+    pH: Optional[float],
+) -> dict[str, object]:
+    p_type = _coerce_protein_type(protein_type)
+    effective = resolve_matrix_correction(p_type, effective_denaturation_state)
+    return {
+        "protein_type": p_type.value,
+        "effective_denaturation_state": float(effective_denaturation_state),
+        "temperature_celsius": float(temperature_celsius),
+        "time_minutes": None if time_minutes is None else float(time_minutes),
+        "pH": None if pH is None else float(pH),
+        "lysine_accessibility": float(effective.lysine_accessibility),
+        "cysteine_accessibility": float(effective.cysteine_accessibility),
+        "bulk_volatile_retention": float(effective.volatile_retention),
+        "literature_window": (
+            {
+                "lysine_min": window.lysine_min,
+                "lysine_max": window.lysine_max,
+                "cysteine_min": window.cysteine_min,
+                "cysteine_max": window.cysteine_max,
+                "source": window.source,
+            }
+            if (window := get_accessibility_literature_window(p_type)) is not None
+            else None
+        ),
+        "denaturation_source": DENATURATION_HEURISTICS.get(p_type).source if p_type in DENATURATION_HEURISTICS else "explicit/free",
+    }
 
 
 def resolve_matrix_correction(

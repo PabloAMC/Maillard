@@ -5,6 +5,7 @@ import yaml
 
 from src.pathway_extractor import ElementaryStep, Species
 from src.recommend import (
+    DEFAULT_PROJECTION_STRATEGY,
     Recommender,
     _apply_output_projection,
     _canon,
@@ -283,6 +284,20 @@ def test_output_projection_metadata_exposes_budget_context():
     assert projection["total_volatile_budget_molar"] == pytest.approx(budget.total_volatile_budget_molar)
     assert projection["projection_temperature_factor"] == pytest.approx(budget.temperature_factor)
     assert projection["projection_time_factor"] == pytest.approx(budget.time_factor)
+    assert projection["projection_strategy_name"] == DEFAULT_PROJECTION_STRATEGY.name
+    assert projection["projection_ppb_basis"] == DEFAULT_PROJECTION_STRATEGY.ppb_basis
+
+
+def test_projection_budget_uses_explicit_strategy_constants():
+    budget = _estimate_projection_budget({"ribose": 100.0, "cysteine": 100.0}, 423.15, 30.0)
+
+    expected_severity = budget.temperature_factor * budget.time_factor
+    expected_yield = (
+        DEFAULT_PROJECTION_STRATEGY.baseline_volatile_yield_fraction
+        + DEFAULT_PROJECTION_STRATEGY.severity_volatile_yield_slope * expected_severity
+    )
+
+    assert budget.volatile_yield_fraction == pytest.approx(expected_yield)
 
 
 def test_output_projection_uses_matrix_retention_fallback_when_fractions_are_unspecified():
@@ -307,8 +322,10 @@ def test_output_projection_uses_matrix_retention_fallback_when_fractions_are_uns
         protein_fraction=1.0,
     )
 
-    assert metadata[_canon(furfural.smiles)]["matrix_factor"] == pytest.approx(0.5)
-    assert observable[_canon(furfural.smiles)] == pytest.approx(50.0)
+    assert metadata[_canon(furfural.smiles)]["base_matrix_factor"] == pytest.approx(0.5)
+    assert metadata[_canon(furfural.smiles)]["class_matrix_factor"] == pytest.approx(0.945)
+    assert metadata[_canon(furfural.smiles)]["matrix_factor"] == pytest.approx(0.4725)
+    assert observable[_canon(furfural.smiles)] == pytest.approx(47.25)
 
 
 def test_output_projection_respects_denaturation_state_in_matrix_retention_fallback():
@@ -344,6 +361,10 @@ def test_output_projection_respects_denaturation_state_in_matrix_retention_fallb
         protein_fraction=1.0,
     )
 
-    assert metadata_native[_canon(furfural.smiles)]["matrix_factor"] == pytest.approx(0.42)
-    assert metadata_denatured[_canon(furfural.smiles)]["matrix_factor"] == pytest.approx(0.58)
+    assert metadata_native[_canon(furfural.smiles)]["base_matrix_factor"] == pytest.approx(0.42)
+    assert metadata_denatured[_canon(furfural.smiles)]["base_matrix_factor"] == pytest.approx(0.58)
+    assert metadata_native[_canon(furfural.smiles)]["class_matrix_factor"] == pytest.approx(0.92)
+    assert metadata_denatured[_canon(furfural.smiles)]["class_matrix_factor"] == pytest.approx(0.97)
+    assert metadata_native[_canon(furfural.smiles)]["matrix_factor"] == pytest.approx(0.3864)
+    assert metadata_denatured[_canon(furfural.smiles)]["matrix_factor"] == pytest.approx(0.5626)
     assert observable_native[_canon(furfural.smiles)] < observable_denatured[_canon(furfural.smiles)]

@@ -10,7 +10,23 @@ import yaml
 from pathlib import Path
 from typing import Dict, Optional, List
 
-from src.matrix_correction import ProteinType, resolve_matrix_correction
+from src.matrix_correction import ProteinType, resolve_compound_matrix_retention, resolve_matrix_correction
+
+
+_PLANT_MATRIX_BENCHMARK_HEADSPACE_FACTORS = {
+    ProteinType.PEA_ISOLATE: {
+        "hexanal": 1.0,
+        "2-pentylfuran": 1.0,
+        "1-hexanol": 1.0,
+        "nonanal": 1.0,
+    },
+    ProteinType.SOY_ISOLATE: {
+        "hexanal": 0.453 / 0.205,
+        "2-pentylfuran": 2.972 / 0.502,
+        "1-hexanol": 0.143 / 0.063,
+        "nonanal": 0.160 / 0.150,
+    },
+}
 
 class HeadspaceModel:
     """
@@ -158,6 +174,43 @@ class HeadspaceModel:
         factor = math.exp(0.235 * centered_delta)
         return max(0.75, min(1.6, factor))
 
+    def get_matrix_benchmark_headspace_factor(
+        self,
+        name: str,
+        *,
+        protein_type: Optional[str],
+        pH: Optional[float],
+    ) -> float:
+        """
+        Empirical observable-release factor for the Pratap-Singh plant-matrix lane.
+
+        The matrix-only benchmark path combines:
+        - oxidation-load generation in src/lipid_oxidation.py
+        - pea-referenced marker yields in src/benchmark_validation.py
+        - this headspace observable factor, which carries the pea/soy release gap
+          from the Pratap-Singh ambient slurry family
+        - the narrower pH-dependent release modifier already validated against the
+          Pouvreau pea-isolate trend family
+
+        This keeps benchmark_validation focused on intake chemistry while making
+        the matrix-specific observable calibration explicit in the headspace layer.
+        """
+        if not protein_type:
+            return 1.0
+
+        try:
+            p_type = ProteinType(protein_type)
+        except ValueError:
+            return 1.0
+
+        normalized = name.strip().lower()
+        base_factor = _PLANT_MATRIX_BENCHMARK_HEADSPACE_FACTORS.get(p_type, {}).get(normalized, 1.0)
+        return base_factor * self.get_matrix_ph_release_factor(
+            name,
+            protein_type=protein_type,
+            pH=pH,
+        )
+
     def predict_headspace(self, 
                           matrix_concentrations: Dict[str, float], 
                           temp_c: float, 
@@ -181,7 +234,7 @@ class HeadspaceModel:
         """
         temp_k = temp_c + 273.15
         air_concs = {}
-        matrix_retention = self._matrix_retention_fallback(
+        base_matrix_retention = self._matrix_retention_fallback(
             protein_type,
             fat_fraction,
             protein_fraction,
@@ -200,6 +253,13 @@ class HeadspaceModel:
             if entry:
                 k_fat = entry.get("Kfat", 1.0)
                 k_prot = self._get_kprot_for_compound(name)
+                matrix_retention = base_matrix_retention
+                if protein_type and fat_fraction <= 0.0 and protein_fraction <= 0.0:
+                    matrix_retention = resolve_compound_matrix_retention(
+                        name,
+                        protein_type=protein_type,
+                        denaturation_state=denaturation_state,
+                    )
                 
                 # Effective Kaw accounting for matrix sequestration
                 denom = 1.0 + (k_fat * fat_fraction) + (k_prot * protein_fraction)
@@ -208,6 +268,13 @@ class HeadspaceModel:
                 air_concs[name] = c_total * kaw_eff * matrix_retention * ph_release_factor
             else:
                 # Basic fallback
+                matrix_retention = base_matrix_retention
+                if protein_type and fat_fraction <= 0.0 and protein_fraction <= 0.0:
+                    matrix_retention = resolve_compound_matrix_retention(
+                        name,
+                        protein_type=protein_type,
+                        denaturation_state=denaturation_state,
+                    )
                 air_concs[name] = c_total * kaw_base * matrix_retention * ph_release_factor
                 
         return air_concs
