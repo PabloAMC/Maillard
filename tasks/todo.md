@@ -58,13 +58,13 @@ These are the highest-leverage items because they convert existing validated mac
 - [x] Print a concise default decision summary for every run: dominant desirable compounds, dominant penalties, matrix state, validated-envelope status, and key caveats. (Dificultad: Baja — Modelo recomendado: GPT-5 mini)
 - [x] Surface domain-of-validity warnings inline whenever a run leaves the trusted envelope (`matrix_only`, unsupported matrices, peptide-bound systems, aggressive process assumptions, sparse benchmark analogies). (Dificultad: Media — Modelo recomendado: Gemini 3 Flash)
 - [x] Add a single scientist-facing report mode that outputs both machine-readable JSON and human-readable Markdown from the main CLI, not only from side scripts. (Dificultad: Baja — Modelo recomendado: GPT-5 mini)
-- [ ] Add recommendation diagnostics that explicitly answer: which precursors helped, which penalties dominated, which compounds were suppressed by matrix retention/headspace, and what intervention is most likely to move the outcome. (Dificultad: Alta — Modelo recomendado: Gemini 3 Pro)
+- [x] Add recommendation diagnostics that explicitly answer: which precursors helped, which penalties dominated, which compounds were suppressed by matrix retention/headspace, and what intervention is most likely to move the outcome. (Dificultad: Alta — Modelo recomendado: Gemini 3 Pro)
 - [x] Create side-by-side comparison outputs for multiple candidate formulations so scientists can compare tradeoffs instead of inspecting one run at a time. (Dificultad: Media — Modelo recomendado: Gemini 3 Flash)
 
 ### P0 acceptance criteria
 
-- [ ] A scientist can run one command and immediately see what the model predicts, why, how trustworthy it is, and what to try next. (Dificultad: Baja — Modelo recomendado: GPT-5 mini)
-- [ ] The default CLI no longer requires reading `results/validation/*.md` to understand whether a result is meaningful. (Dificultad: Baja — Modelo recomendado: GPT-5 mini)
+- [x] A scientist can run one command and immediately see what the model predicts, why, how trustworthy it is, and what to try next. (Dificultad: Baja — Modelo recomendado: GPT-5 mini)
+- [x] The default CLI no longer requires reading `results/validation/*.md` to understand whether a result is meaningful. (Dificultad: Baja — Modelo recomendado: GPT-5 mini)
 
 ## P1 — Turn Matrix Handling Into A Real Validation Surface
 

@@ -530,6 +530,7 @@ def _apply_output_projection(
     protein_fraction: float = 0.0,
     projection_budget: Optional[ProjectionBudget] = None,
     projection_strategy: ProjectionStrategy = DEFAULT_PROJECTION_STRATEGY,
+    species_name_lookup: Optional[Dict[str, str]] = None,
 ) -> Tuple[Dict[str, float], Dict[str, Dict[str, float]]]:
     p_type = ProteinType(protein_type)
     fat_eff, protein_eff, explicit_matrix_fractions = _resolve_output_matrix_context(
@@ -564,6 +565,7 @@ def _apply_output_projection(
         if species is None:
             observable_ppb[canon] = raw_value * fallback_matrix_factor
             projection_metadata[canon] = {
+                "compound": species_name_lookup.get(canon, canon) if species_name_lookup else canon,
                 "proxy_ppb": float(raw_value),
                 "matrix_factor": float(fallback_matrix_factor),
                 "base_matrix_factor": float(fallback_matrix_factor),
@@ -603,6 +605,7 @@ def _apply_output_projection(
         observable_value = raw_value * effective_matrix_factor * headspace_factor
         observable_ppb[canon] = observable_value
         projection_metadata[canon] = {
+            "compound": species.label or canon,
             "proxy_ppb": float(raw_value),
             "matrix_factor": float(effective_matrix_factor),
             "base_matrix_factor": float(fallback_matrix_factor),
@@ -1014,6 +1017,7 @@ class Recommender:
                     "barrier": barrier,
                     "path_span": path_span,
                     "reactants": [species_name_lookup.get(r, r) for r in r_canons],
+                    "reactant_canons": list(r_canons),
                     "products": [species_name_lookup.get(p, p) for p in p_canons],
                 }
                 candidate_path = base_path + [step_trace]
@@ -1068,6 +1072,7 @@ class Recommender:
             protein_fraction=protein_fraction,
             projection_budget=projection_budget,
             projection_strategy=projection_strategy,
+            species_name_lookup=species_name_lookup,
         )
         proxy_volatiles = dict(raw_concentrations)
         
@@ -1144,6 +1149,44 @@ class Recommender:
             
         # Sort targets: lower span first, then higher concentration
         active_pathways.sort(key=lambda x: (x["span"], -x["concentration"]))
+
+        # --- Advanced Diagnostics: Precursor Attribution ---
+        precursor_attribution = {} # {precursor_name: contribution_score}
+        # We estimate contribution based on how many targets a precursor "feeds" 
+        # weighted by the target's observable concentration.
+        for p_canon, t_info in active_targets.items():
+            path = best_paths.get(p_canon, [])
+            target_conc = observable_volatiles.get(p_canon, 0.0)
+            if target_conc <= 0: continue
+            
+            # Find all precursors in this path
+            path_precursors = set()
+            for step_tr in path:
+                for r_canon in step_tr.get("reactant_canons", []):
+                    # Initial precursors have span 0.0 in tracking
+                    if r_canon in tracking and tracking[r_canon][0] == 0.0:
+                        path_precursors.add(r_canon)
+            
+            if path_precursors:
+                split_conc = target_conc / len(path_precursors)
+                for prec_can in path_precursors:
+                    p_name = species_name_lookup.get(prec_can, prec_can)
+                    precursor_attribution[p_name] = precursor_attribution.get(p_name, 0.0) + split_conc
+
+        # --- Advanced Diagnostics: Suppressed Compounds ---
+        suppressed_compounds = []
+        for canon, meta in projection_metadata.items():
+            proxy = meta.get("proxy_ppb", 0.0)
+            obs = meta.get("observable_ppb", 0.0)
+            if proxy > 5.0 and (obs / proxy) < 0.3: # Significant suppression
+                suppressed_compounds.append({
+                    "name": species_name_lookup.get(canon, canon),
+                    "proxy_ppb": proxy,
+                    "observable_ppb": obs,
+                    "reduction_factor": 1.0 - (obs / proxy),
+                    "primary_cause": "headspace" if meta.get("headspace_factor", 1.0) < meta.get("matrix_factor", 1.0) else "matrix"
+                })
+        suppressed_compounds.sort(key=lambda x: x["reduction_factor"], reverse=True)
             
         # ── PBMA Metrics: Lipid Trapping Efficiency ──
         # Find which initial pool members are lipids
@@ -1245,7 +1288,9 @@ class Recommender:
                 "precursor": species_name_lookup.get(projection_budget.limiting_precursor_name, projection_budget.limiting_precursor_name),
                 "severity": float(projection_budget.severity),
                 "load_factor": float(projection_budget.load_factor)
-            }
+            },
+            "precursor_attribution": precursor_attribution,
+            "suppressed_compounds": suppressed_compounds
         }
 
         return {
