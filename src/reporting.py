@@ -45,6 +45,7 @@ def generate_report(
             "flagged_toxics": result.flagged_toxics,
             "radar": {k: float(v[0]) for k, v in result.radar.items()},
             "matrix_explainability": result.matrix_explainability,
+            "confidence_metadata": result.confidence_metadata,
             "predicted_ppb": {k: float(v) for k, v in result.predicted_ppb.items()},
             "detected_targets": result.detected_targets,
             "detected_minimize": result.detected_minimize
@@ -86,6 +87,66 @@ def generate_report(
         f.write(f"- **Target Score:** {result.target_score:.2f}\n")
         f.write(f"- **Off-Flavour Risk:** {result.off_flavour_risk:.2f}\n")
         f.write(f"- **Safety Score:** {result.safety_score:.2f}\n\n")
+
+        if result.confidence_metadata:
+            f.write("### Confidence & Support\n")
+            f.write(f"- **tier:** {result.confidence_metadata.get('tier', 'unknown')}\n")
+            f.write(f"- **score:** {result.confidence_metadata.get('score', 0):.1f}\n")
+            f.write(f"- **benchmark_neighborhood:** {result.confidence_metadata.get('benchmark_neighborhood', 'unknown')}\n")
+            f.write(f"- **prediction_mode:** {result.confidence_metadata.get('prediction_mode', 'unknown')}\n")
+            f.write(f"- **recommended_posture:** {result.confidence_metadata.get('recommended_posture', '')}\n")
+            for factor in result.confidence_metadata.get("dominant_factors", []):
+                f.write(f"- **factor:** {factor}\n")
+            f.write("\n")
+
+            calibration = result.confidence_metadata.get("calibration_diagnostics", {})
+            if calibration:
+                f.write("### Calibration Diagnostics\n")
+                f.write(f"- **supported_envelope:** {calibration.get('supported_envelope', False)}\n")
+                f.write(f"- **summary:** {calibration.get('summary', '')}\n")
+                axes = calibration.get("extrapolation_axes", [])
+                if axes:
+                    f.write(f"- **extrapolation_axes:** {', '.join(str(axis) for axis in axes)}\n")
+                f.write("\n")
+
+            compound_rows = result.confidence_metadata.get("compound_confidence", [])
+            if compound_rows:
+                f.write("### Compound Confidence\n")
+                f.write("| Compound | Observable ppb | Tier | Score | Mode |\n")
+                f.write("| :--- | ---: | :---: | ---: | :--- |\n")
+                for row in compound_rows:
+                    f.write(
+                        f"| {row.get('compound', 'unknown')} | {float(row.get('observable_ppb', 0.0)):.2f} | {row.get('tier', 'unknown')} | {float(row.get('score', 0.0)):.1f} | {row.get('prediction_mode', 'unknown')} |\n"
+                    )
+                f.write("\n")
+
+            aggregate_rows = result.confidence_metadata.get("aggregate_confidence", {})
+            if aggregate_rows:
+                f.write("### Aggregate Sensory Confidence\n")
+                f.write("| Tag | Sensory Score | Supporting Compounds | Tier | Mode |\n")
+                f.write("| :--- | ---: | ---: | :---: | :--- |\n")
+                for tag, row in aggregate_rows.items():
+                    f.write(
+                        f"| {tag} | {float(row.get('score', 0.0)):.2f} | {int(row.get('support_count', 0))} | {row.get('tier', 'unknown')} | {row.get('prediction_mode', 'unknown')} |\n"
+                    )
+                f.write("\n")
+
+            sensitivity = result.confidence_metadata.get("sensitivity_summary", {})
+            if sensitivity:
+                f.write("### Sensitivity Summary\n")
+                f.write(f"- **mode:** {sensitivity.get('mode', 'unknown')}\n")
+                f.write(f"- **evaluated_perturbations:** {sensitivity.get('evaluated_perturbations', 0)}\n")
+                for item in sensitivity.get("ranking_drivers", [])[:3]:
+                    f.write(
+                        f"- **ranking_driver:** {item.get('input', 'unknown')} | {item.get('perturbation', 'unknown')} | "
+                        f"Δdecision {float(item.get('decision_delta', 0.0)):+.2f} | Δsafety {float(item.get('safety_delta', 0.0)):+.2f}\n"
+                    )
+                for item in sensitivity.get("safety_drivers", [])[:3]:
+                    f.write(
+                        f"- **safety_driver:** {item.get('input', 'unknown')} | {item.get('perturbation', 'unknown')} | "
+                        f"Δsafety {float(item.get('safety_delta', 0.0)):+.2f}\n"
+                    )
+                f.write("\n")
         
         if result.detected_targets:
             f.write("### Predicted Desirable Targets\n")
@@ -106,6 +167,7 @@ def generate_report(
 def generate_comparison_report(
     results: List[FormulationResult],
     conditions_list: List[Dict[str, Any]],
+    warnings_list: Optional[List[List[DomainWarning]]] = None,
     output_dir: Optional[Path] = None
 ) -> Path:
     """
@@ -133,8 +195,12 @@ def generate_comparison_report(
                 "off_flavour_risk": float(res.off_flavour_risk),
                 "safety_score": float(res.safety_score),
                 "lysine_budget": float(res.lysine_budget),
-                "trapping_efficiency": float(res.trapping_efficiency)
-            }
+                "trapping_efficiency": float(res.trapping_efficiency),
+                "confidence_tier": res.confidence_metadata.get("tier", "unknown"),
+                "confidence_score": float(res.confidence_metadata.get("score", 0.0)),
+                "benchmark_neighborhood": res.confidence_metadata.get("benchmark_neighborhood", "unknown"),
+                "prediction_mode": res.confidence_metadata.get("prediction_mode", "unknown"),
+            },
         })
     
     with open(json_path, "w") as f:
@@ -155,6 +221,8 @@ def generate_comparison_report(
         f.write("| **Safety Score** | " + " | ".join([f"{res.safety_score:.2f}" for res in results]) + " |\n")
         f.write("| **Lysine Budget** | " + " | ".join([f"{res.lysine_budget:.1f}%" for res in results]) + " |\n")
         f.write("| **Trapping Eff.** | " + " | ".join([f"{res.trapping_efficiency:.1f}%" for res in results]) + " |\n")
+        f.write("| **Confidence** | " + " | ".join([f"{res.confidence_metadata.get('tier', 'unknown')} ({float(res.confidence_metadata.get('score', 0.0)):.0f})" for res in results]) + " |\n")
+        f.write("| **Prediction Mode** | " + " | ".join([str(res.confidence_metadata.get('prediction_mode', 'unknown')) for res in results]) + " |\n")
         f.write("\n")
         
         f.write("## 2. Competitive Highlights\n")
@@ -170,14 +238,12 @@ def generate_comparison_report(
         f.write("## 3. Decision Summaries\n")
         import io
         from contextlib import redirect_stdout
-        for res in results:
+        for index, res in enumerate(results):
             f.write(f"### {res.name}\n")
             f.write("```text\n")
             with io.StringIO() as buf, redirect_stdout(buf):
-                # We don't have the warnings easily here without passing them in, 
-                # but for comparison we can show the boxes.
-                # Assuming empty warnings for simplicity in comparison view if not provided.
-                render_decision_summary_cli(res, [])
+                item_warnings = warnings_list[index] if warnings_list and index < len(warnings_list) else []
+                render_decision_summary_cli(res, item_warnings)
                 f.write(buf.getvalue())
             f.write("```\n\n")
             

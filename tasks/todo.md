@@ -86,16 +86,53 @@ This is the biggest scientific-product gap. Without it, the repo is credible for
 
 Scientists need to know not only the prediction, but how much to trust it.
 
-- [ ] Add per-result confidence metadata tied to benchmark neighborhood, matrix support level, and projection assumptions. (Dificultad: Media — Modelo recomendado: Gemini 3 Pro)
-- [ ] Report uncertainty bands or at least confidence tiers for major predicted compounds and aggregate sensory scores. (Dificultad: Alta — Modelo recomendado: GPT-5.4)
-- [ ] Add calibration diagnostics that show when a recommendation is extrapolating beyond supported chemistry or process conditions. (Dificultad: Alta — Modelo recomendado: Gemini 3 Pro)
-- [ ] Distinguish clearly between benchmark-supported quantitative predictions, directional heuristics, and speculative outputs. (Dificultad: Media — Modelo recomendado: Gemini 3 Flash)
-- [ ] Add sensitivity summaries showing which inputs most strongly change the ranking or safety outcome. (Dificultad: Media — Modelo recomendado: Gemini 3 Pro)
+- [x] Add per-result confidence metadata tied to benchmark neighborhood, matrix support level, and projection assumptions. (Dificultad: Media — Modelo recomendado: Gemini 3 Pro)
+- [x] Report uncertainty bands or at least confidence tiers for major predicted compounds and aggregate sensory scores. (Dificultad: Alta — Modelo recomendado: GPT-5.4)
+- [x] Add calibration diagnostics that show when a recommendation is extrapolating beyond supported chemistry or process conditions. (Dificultad: Alta — Modelo recomendado: Gemini 3 Pro)
+- [x] Distinguish clearly between benchmark-supported quantitative predictions, directional heuristics, and speculative outputs. (Dificultad: Media — Modelo recomendado: Gemini 3 Flash)
+- [x] Add sensitivity summaries showing which inputs most strongly change the ranking or safety outcome. (Dificultad: Media — Modelo recomendado: Gemini 3 Pro)
 
 ### P2 acceptance criteria
 
-- [ ] Every recommendation carries an explicit confidence story. (Dificultad: Media — Modelo recomendado: Gemini 3 Pro)
-- [ ] Scientists can tell the difference between “ship this to the wet lab first” and “interesting but speculative”. (Dificultad: Baja — Modelo recomendado: GPT-5 mini)
+- [x] Every recommendation carries an explicit confidence story. (Dificultad: Media — Modelo recomendado: Gemini 3 Pro)
+- [x] Scientists can tell the difference between “ship this to the wet lab first” and “interesting but speculative”. (Dificultad: Baja — Modelo recomendado: GPT-5 mini)
+
+### P1 detailed execution plan
+
+#### Phase 1 — Benchmark contract expansion
+
+1. [ ] Define a matrix target-ranking contract that every candidate benchmark must satisfy: observable targets, expected ordering, adverse markers, process metadata, and citation provenance. (Dificultad: Alta — Modelo recomendado: GPT-5.4)
+2. [ ] Add contract fields to the benchmark artifacts and validation loaders so matrix cases expose ranked desirable and adverse targets, not just intake executability. (Dificultad: Alta — Modelo recomendado: GPT-5.4)
+3. [ ] Create a first promotion set for pea and soy with at least one meaty-positive and one off-flavour-negative benchmark per family. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
+
+#### Phase 2 — Observable calibration surface
+
+1. [ ] Replace class-level matrix observability where evidence exists with compound-level calibration entries keyed by compound, matrix family, and process state. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
+2. [ ] Extend projection metadata so every ranked compound exposes its calibration source, fallback mode, and evidence strength in CLI/report JSON. (Dificultad: Alta — Modelo recomendado: Gemini 3 Pro)
+3. [ ] Add explicit adverse-target calibration for lipid-coupled notes so matrix validation covers the meaty/off-flavour tradeoff in the same experiment. (Dificultad: Alta — Modelo recomendado: Gemini 3 Pro)
+
+#### Phase 3 — Process realism
+
+1. [ ] Introduce process-state descriptors for extrusion or pre-heating history into matrix benchmark inputs and explainability payloads. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
+2. [ ] Calibrate accessibility and release heuristics against those states before promoting any matrix family into a stricter gate. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
+
+#### Phase 4 — Validation and promotion
+
+1. [ ] Add Docker-visible ranking assertions for matrix benchmarks: top-k desirable hits, adverse marker ordering, and tolerance thresholds. (Dificultad: Alta — Modelo recomendado: Gemini 3 Pro)
+2. [ ] Add report outputs that show benchmark deltas for every promoted matrix case, including successes, misses, and fallback paths used. (Dificultad: Media — Modelo recomendado: Gemini 3 Flash)
+3. [ ] Keep strict-gate promotion disabled until the first pea/soy candidate passes reproducibly in Docker on ranking metrics, not only execution checks. (Dificultad: Baja — Modelo recomendado: GPT-5 mini)
+
+#### P1 deliverables
+
+- [ ] New/updated matrix benchmark YAML cases with ranked targets and adverse markers. (Dificultad: Alta — Modelo recomendado: GPT-5.4)
+- [ ] Projection/calibration registry for compound-level matrix observability. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
+- [ ] Validation code and reports that surface ranking deltas in Docker artifacts. (Dificultad: Alta — Modelo recomendado: Gemini 3 Pro)
+
+#### P1 verification plan
+
+- [ ] Add focused pytest coverage for contract parsing, calibration fallback behavior, and ranking assertions. (Dificultad: Alta — Modelo recomendado: Gemini 3 Pro)
+- [ ] Run Docker benchmark lanes for the first promoted matrix family before merge. (Dificultad: Media — Modelo recomendado: GPT-5 mini)
+- [ ] Compare default-branch vs feature-branch benchmark deltas before any strict-gate claim. (Dificultad: Media — Modelo recomendado: GPT-5 mini)
 
 ## P3 — Broaden The Scientific Envelope That Matters To Alt-Protein R&D
 
@@ -139,7 +176,7 @@ This is the difference between a strong model repo and a tool scientists keep us
 
 1. [ ] Inline explainability + validated-envelope warnings in main CLI paths. (Dificultad: Media — Modelo recomendado: Gemini 3 Flash)
 2. [ ] Scientist-facing comparison report for multiple formulations. (Dificultad: Media — Modelo recomendado: Gemini 3 Pro)
-3. [ ] Confidence tiers and benchmark-neighborhood diagnostics. (Dificultad: Alta — Modelo recomendado: GPT-5.4)
+3. [x] Confidence tiers and benchmark-neighborhood diagnostics. (Dificultad: Alta — Modelo recomendado: GPT-5.4)
 4. [ ] Matrix target-ranking benchmark plan and first reproducible promotion candidate. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
 5. [ ] Data-ingestion path for new internal calibration experiments. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
 
@@ -148,6 +185,8 @@ This is the difference between a strong model repo and a tool scientists keep us
 - This backlog replaces the older phase-heavy plan with a scientist-product roadmap.
 - The current repo is already scientifically serious and more usable than a typical research prototype.
 - It is not yet state of the art for alternative-protein scientists because the decisive missing layers are user-facing decision support, confidence reporting, matrix-ranking validation, and experiment-to-model iteration.
+- P2 is now functionally complete in the main scientist-facing surfaces: CLI/report outputs include prediction mode, calibration diagnostics, compound and aggregate confidence tiers, and local sensitivity summaries.
+- P1 is now the dominant scientific-product blocker and should start with benchmark contract design before any broader chemistry expansion.
 
 ## Model guidance (resumen)
 

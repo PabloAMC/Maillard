@@ -18,6 +18,7 @@ sys.path.insert(0, str(ROOT))
 from src.inverse_design import InverseDesigner
 from src.conditions import ReactionConditions
 from src.reporting import generate_comparison_report
+from src.usability_reports import DomainOfValidityChecker, build_confidence_package
 
 def main():
     parser = argparse.ArgumentParser(description="Compare multiple Maillard formulations.")
@@ -68,13 +69,42 @@ def main():
     
     print(f"Evaluating {len(requested_forms)} formulations...")
     results = designer.evaluate_all(conditions, grid_override=requested_forms)
+    results_by_name = {result.name: result for result in results}
+    ordered_results = [results_by_name[formulation["name"]] for formulation in requested_forms if formulation["name"] in results_by_name]
+    checker = DomainOfValidityChecker(args.target_tag)
+    warnings_list = []
+    for formulation in requested_forms:
+        result = results_by_name.get(formulation["name"])
+        if result is None:
+            continue
+        precursor_names = []
+        for key in ("sugars", "amino_acids", "additives", "lipids"):
+            precursor_names.extend(formulation.get(key, []))
+        protein_type = formulation.get("protein_type", "free")
+        item_warnings = checker.check(
+            precursor_names=precursor_names,
+            protein_type=protein_type,
+            temp_c=float(formulation.get("temp", args.temp)),
+            ph=float(formulation.get("ph", args.ph)),
+        )
+        result.confidence_metadata = build_confidence_package(
+            result,
+            item_warnings,
+            precursor_names=precursor_names,
+            protein_type=protein_type,
+            formulation=formulation,
+            baseline_conditions=conditions,
+            designer=designer,
+        )
+        warnings_list.append(item_warnings)
     
     # Prepare conditions_list for the report
-    conditions_list = [vars(args)] * len(results)
+    conditions_list = [vars(args)] * len(ordered_results)
     
     report_dir = generate_comparison_report(
-        results, 
+        ordered_results, 
         conditions_list, 
+        warnings_list=warnings_list,
         output_dir=Path(args.output_dir) if args.output_dir else None
     )
     
