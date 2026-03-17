@@ -105,6 +105,7 @@ class ProjectionBudget:
     severity: float
     volatile_yield_fraction: float
     total_volatile_budget_molar: float
+    limiting_precursor_name: str
 
 
 @dataclass(frozen=True)
@@ -281,13 +282,16 @@ def _estimate_projection_budget(
     strategy: ProjectionStrategy = DEFAULT_PROJECTION_STRATEGY,
 ) -> ProjectionBudget:
     if not corrected_initial:
-        return ProjectionBudget(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+        return ProjectionBudget(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, "none")
 
-    positive_values = [max(float(value), 0.0) for value in corrected_initial.values() if float(value) > 0.0]
-    if not positive_values:
-        return ProjectionBudget(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+    # Find limiting precursor (minimum positive molarity)
+    positive_items = [(k, float(v)) for k, v in corrected_initial.items() if float(v) > 0.0]
+    if not positive_items:
+        return ProjectionBudget(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, "none")
 
-    limiting_precursor_molar = min(positive_values) * strategy.limiting_pool_to_molar_factor
+    limiting_name, limiting_val = min(positive_items, key=lambda x: x[1])
+    limiting_precursor_molar = limiting_val * strategy.limiting_pool_to_molar_factor
+    
     load_factor = _relative_precursor_load_factor(corrected_initial)
     temperature_factor = _projection_temperature_factor(temperature_kelvin)
     time_factor = _projection_time_factor(time_minutes)
@@ -306,6 +310,7 @@ def _estimate_projection_budget(
         severity=float(severity),
         volatile_yield_fraction=float(volatile_yield_fraction),
         total_volatile_budget_molar=float(max(total_volatile_budget_molar, 0.0)),
+        limiting_precursor_name=limiting_name
     )
 
 
@@ -676,15 +681,17 @@ def _project_weighted_flux_to_ppb(
     temperature_kelvin: float,
     time_minutes: Optional[float],
     projection_strategy: ProjectionStrategy = DEFAULT_PROJECTION_STRATEGY,
+    projection_budget: Optional[ProjectionBudget] = None,
 ) -> Dict[str, float]:
     import math
 
-    projection_budget = _estimate_projection_budget(
-        corrected_initial,
-        temperature_kelvin,
-        time_minutes,
-        strategy=projection_strategy,
-    )
+    if projection_budget is None:
+        projection_budget = _estimate_projection_budget(
+            corrected_initial,
+            temperature_kelvin,
+            time_minutes,
+            strategy=projection_strategy,
+        )
     if projection_budget.total_volatile_budget_molar <= 0.0:
         return {}
 
@@ -1030,6 +1037,12 @@ class Recommender:
                         changed = True
 
         # Project ranked FAST outputs onto a bounded volatile ppb budget.
+        projection_budget = _estimate_projection_budget(
+            corrected_initial,
+            temperature_kelvin,
+            time_minutes,
+            strategy=projection_strategy,
+        )
         raw_concentrations = _project_weighted_flux_to_ppb(
             steps,
             tracking,
@@ -1041,13 +1054,7 @@ class Recommender:
             temperature_kelvin,
             time_minutes,
             projection_strategy=projection_strategy,
-        )
-
-        projection_budget = _estimate_projection_budget(
-            corrected_initial,
-            temperature_kelvin,
-            time_minutes,
-            strategy=projection_strategy,
+            projection_budget=projection_budget,
         )
 
         observable_volatiles, projection_metadata = _apply_output_projection(
@@ -1087,39 +1094,57 @@ class Recommender:
                 species = species_catalog.get(p_canon, Species(t_info["name"], p_canon))
                 observability = _headspace_observability_metadata(species, target_lookup)
                 
-                # We mock a Species object for the old table formatter
-                class MockTarget:
-                    def __init__(self, label):
-                        self.label = label
-                
-                p_dict = {
+
+        # Update active_pathways with final ppb
+        active_pathways = []
+        active_targets = {
+            p_canon: t_info
+            for p_canon, t_info in target_lookup.items()
+            if p_canon in tracking and tracking[p_canon][0] < float('inf') and tracking[p_canon][0] >= 0.0
+        }
+
+        class MockTarget:
+            def __init__(self, label):
+                self.label = label
+
+        for p_canon, t_info in active_targets.items():
+            _, _, depth, _, _ = tracking.get(p_canon, (0, 0, 0, 0, 0))
+            span = tracking[p_canon][0]
+            
+            species = species_catalog.get(p_canon, Species(t_info["name"], p_canon))
+            observability = _headspace_observability_metadata(species, target_lookup)
+            
+            p_dict = {
+                "name": t_info["name"],
+                "span": span,
+                "concentration": observable_volatiles.get(p_canon, 0.0), # Use corrected
+                "proxy_concentration": final_proxy_volatiles.get(p_canon, 0.0),
+                "weighted_flux": observable_volatiles.get(p_canon, 0.0), # Observable output budget proxy for ranking tables
+                "span_uncertainty": tracking[p_canon][4],
+                "depth": depth,
+                "target": MockTarget(t_info["name"]),
+                "type": t_info["type"],
+                "penalty": "LOW",
+                "toxicity": None,
+                "sensory": t_info["data"].get("sensory_desc", "-"),
+                "threshold": t_info["data"].get("odour_threshold_ug_per_kg", None),
+                "roles": t_info.get("roles", [t_info["type"]]),
+                "projection": projection_metadata.get(p_canon, {}),
+                **observability,
+            }
+            
+            if t_info["type"] == "toxic":
+                p_dict["toxicity"] = {
                     "name": t_info["name"],
-                    "span": span,
-                    "concentration": final_volatiles.get(p_canon, 0.0), # Use corrected
-                    "proxy_concentration": final_proxy_volatiles.get(p_canon, 0.0),
-                    "weighted_flux": final_volatiles.get(p_canon, 0.0), # Observable output budget proxy for ranking tables
-                    "span_uncertainty": tracking[p_canon][4],
-                    "depth": depth,
-                    "target": MockTarget(t_info["name"]),
-                    "type": t_info["type"],
-                    "penalty": "LOW",
-                    "toxicity": None,
-                    "sensory": t_info["data"].get("sensory_desc", "-"),
-                    "threshold": t_info["data"].get("odour_threshold_ug_per_kg", None),
-                    "roles": t_info.get("roles", [t_info["type"]]),
-                    "projection": projection_metadata.get(p_canon, {}),
-                    **observability,
+                    "risk": t_info["data"].get("health_risk", "Unknown"),
+                    "priority": t_info["data"].get("priority", "high").upper()
                 }
-                
-                if t_info["type"] == "toxic":
-                    p_dict["toxicity"] = {
-                        "name": t_info["name"],
-                        "risk": t_info["data"].get("health_risk", "Unknown"),
-                        "priority": t_info["data"].get("priority", "high").upper()
-                    }
-                
-                active_pathways.append(p_dict)
-                
+            
+            active_pathways.append(p_dict)
+            
+        # Sort targets: lower span first, then higher concentration
+        active_pathways.sort(key=lambda x: (x["span"], -x["concentration"]))
+            
         # ── PBMA Metrics: Lipid Trapping Efficiency ──
         # Find which initial pool members are lipids
         lipid_pool_canons = []
@@ -1215,7 +1240,12 @@ class Recommender:
 
         metrics = {
             "trapping_efficiency": trapping_results,
-            "lysine_budget_dha": lysine_budget
+            "lysine_budget_dha": lysine_budget,
+            "bottleneck": {
+                "precursor": species_name_lookup.get(projection_budget.limiting_precursor_name, projection_budget.limiting_precursor_name),
+                "severity": float(projection_budget.severity),
+                "load_factor": float(projection_budget.load_factor)
+            }
         }
 
         return {

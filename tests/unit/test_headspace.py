@@ -61,8 +61,12 @@ def test_matrix_retention_fallback_uses_pea_and_soy_profiles_when_fractions_are_
     air_pea = model.predict_headspace(matrix, 25.0, protein_type="pea_iso")
     air_soy = model.predict_headspace(matrix, 25.0, protein_type="soy_iso")
 
-    assert air_pea["Furfural"] == pytest.approx(air_free["Furfural"] * 0.50)
-    assert air_soy["Furfural"] == pytest.approx(air_free["Furfural"] * 0.55)
+    # Furfural is a furan. For pea_iso at denaturation 0.5: 
+    # base=0.50, class_factor=0.945 -> effective=0.4725
+    assert air_pea["Furfural"] == pytest.approx(air_free["Furfural"] * 0.4725)
+    # For soy_iso at denaturation 0.5:
+    # base=0.55, class_factor=0.975 -> effective=0.53625
+    assert air_soy["Furfural"] == pytest.approx(air_free["Furfural"] * 0.53625)
     assert air_soy["Furfural"] > air_pea["Furfural"]
 
 
