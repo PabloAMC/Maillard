@@ -358,9 +358,29 @@ def render_deep_explainability_cli(result: "FormulationResult"):
 
     print(f"      Avg. Matrix Loss   : {avg_loss:.1f}% potential flavor trapped")
 
-    # Panel B: Performance Drivers
-    print(f"\n  [B] PERFORMANCE DRIVERS:")
-    # Top 2 targets
+    # Panel B: Precursor Attribution
+    print(f"\n  [B] PRECURSOR ATTRIBUTION (Yield Drivers):")
+    attrib = getattr(result, 'precursor_contributions', {})
+    if attrib:
+        total_attrib = sum(attrib.values())
+        sorted_attrib = sorted(attrib.items(), key=lambda x: x[1], reverse=True)[:3]
+        for name, val in sorted_attrib:
+            share = 100.0 * val / total_attrib if total_attrib > 0 else 0.0
+            print(f"      {name.ljust(18)} : {share:.1f}% of observable yield")
+    else:
+        print(f"      No attribution data available.")
+
+    # Panel C: Physical Suppression
+    suppressed = getattr(result, 'suppressed_compounds', [])
+    if suppressed:
+        print(f"\n  [C] PHYSICAL SUPPRESSION (Lost Potential):")
+        for item in suppressed[:2]:
+            cause = item['primary_cause'].upper()
+            reduction = item['reduction_factor'] * 100.0
+            print(f"      {item['name'].ljust(18)} : -{reduction:.1f}% yield due to {cause}")
+
+    # Panel D: Performance Drivers (Legacy merged or minimized)
+    print(f"\n  [D] KEY AROMA DRIVERS:")
     top_targets = sorted(
         [(m.get("compound", "unknown"), m.get("observable_ppb", 0.0)) for m in result.projection_metadata.values()],
         key=lambda x: x[1],
@@ -370,17 +390,6 @@ def render_deep_explainability_cli(result: "FormulationResult"):
     if top_targets:
         targets_str = ", ".join([f"{t[0]} ({t[1]:.1f} ppb)" for t in top_targets])
         print(f"      Top Yield Drivers  : {targets_str}")
-
-    # Off-flavor drivers if any
-    beany_drivers = []
-    for name, ppb in result.predicted_ppb.items():
-        if "hexanal" in name.lower() or "nonanal" in name.lower() or "decadienal" in name.lower():
-             beany_drivers.append((name, ppb))
-    
-    if beany_drivers:
-        beany_drivers.sort(key=lambda x: x[1], reverse=True)
-        off_str = ", ".join([f"{d[0]} ({d[1]:.1f} ppb)" for d in beany_drivers[:2]])
-        print(f"      Off-Flavor Drivers : {off_str}")
 
     print(f"\n  [💡] INTERVENTION HINT:")
     hint = generate_intervention_hint(result)
@@ -394,21 +403,35 @@ def generate_intervention_hint(result: "FormulationResult") -> str:
     # 1. Yield Bottleneck
     sev = getattr(result, 'bottleneck_severity', 0.0)
     b_prec = getattr(result, 'bottleneck_precursor', 'none')
-    if sev > 0.5:
-        return f"Yield limited by {b_prec}. Increase its molar ratio to boost flavor."
+    if sev > 0.6:
+        return f"Simulation shows severe {b_prec} depletion. Increase its ratio to boost aromatics."
         
-    # 2. Matrix Loss
-    target_metadata = [m for m in result.projection_metadata.values() if m.get("observable_ppb", 0) > 0]
-    avg_matrix = sum(m.get("matrix_factor", 1.0) for m in target_metadata) / len(target_metadata) if target_metadata else 1.0
-    if avg_matrix < 0.5:
-        return "High matrix retention. Increase heating time or pH to recover trapped volatiles."
-        
-    # 3. Off-flavors
+    # 2. Physical Suppression
+    suppressed = getattr(result, 'suppressed_compounds', [])
+    if suppressed:
+        top = suppressed[0]
+        if top['reduction_factor'] > 0.8:
+            if top['primary_cause'] == 'headspace':
+                return f"Major headspace loss for {top['name']}. Optimize processing (time/temp) to release volatiles."
+            else:
+                return f"{top['name']} is heavily trapped in the matrix. Try increasing pH or denaturation state."
+
+    # 3. Precursor Attribution / Balance
+    attrib = getattr(result, 'precursor_contributions', {})
+    if attrib:
+        sorted_attrib = sorted(attrib.items(), key=lambda x: x[1], reverse=True)
+        if len(sorted_attrib) > 1:
+            top_name, top_val = sorted_attrib[0]
+            next_name, next_val = sorted_attrib[1]
+            if top_val > 5.0 * next_val:
+                return f"Yield is overwhelmingly driven by {top_name}. Add {next_name} to diversify the profile."
+
+    # 4. Off-flavors
     if result.off_flavour_risk > 15.0:
-        return "High beany risk. Check lipid precursor purity or add oxidation inhibitors."
+        return "High lipid-beany risk. Reduce lipid precursors or add specific antioxidants."
         
-    # 4. Success
+    # 5. Success
     if result.target_score > 30.0:
-        return "Formulation balanced. Consider sensory panel validation."
+        return "High-performance formulation. Proceed to sensory validation."
         
-    return "Check precursors and process conditions for missing flavor potential."
+    return "Balanced profile but low intensity. Consider increasing temperature or total precursor load."

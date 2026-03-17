@@ -41,6 +41,8 @@ class FormulationResult:
     targets: List[Dict] = field(default_factory=list)
     bottleneck_precursor: str = "none"
     bottleneck_severity: float = 0.0
+    precursor_contributions: Dict[str, float] = field(default_factory=dict)
+    suppressed_compounds: List[Dict] = field(default_factory=list)
 
 
 class InverseDesigner:
@@ -368,6 +370,8 @@ class InverseDesigner:
                 targets=rec_result.get("targets", []),
                 bottleneck_precursor=rec_result["metrics"].get("bottleneck", {}).get("precursor", "none"),
                 bottleneck_severity=rec_result["metrics"].get("bottleneck", {}).get("severity", 0.0),
+                precursor_contributions=rec_result["metrics"].get("precursor_attribution", {}),
+                suppressed_compounds=rec_result["metrics"].get("suppressed_compounds", []),
             ))
 
             
