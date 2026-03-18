@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """
 Correction factors for amino acid reactivity in protein matrices
 vs. free amino acid model systems.
@@ -7,7 +9,8 @@ model system predictions to protein matrix experiments. They should be
 recalibrated as you generate your own experimental data.
 
 Current legume-matrix anchoring inside the repo:
-- pea: Prigent 2024 TNBS/DTNB + Schneider 2023 OPA envelope
+- pea: Asen 2022 DSC/DTNB + Malia 2025 Ellman SH envelope, with older repo
+    literature synthesis retained as a conservative interpolation layer
 - soy: repo literature synthesis around soy glycinin/beta-conglycinin burial,
   sulfur limitation, extrusion-driven accessibility changes, and soy
   protein-polysaccharide conjugate trapping documented in
@@ -15,10 +18,35 @@ Current legume-matrix anchoring inside the repo:
   docs/Elicit - Maillard Pathways in Plant-Based Cooking - Report.md
 """
 
+import json
 import math
 from dataclasses import dataclass
 from enum import Enum
+from pathlib import Path
 from typing import Optional
+
+
+ROOT = Path(__file__).resolve().parents[1]
+DATA_LIT_DIR = ROOT / "data" / "lit"
+
+
+def _load_json_payload(file_name: str) -> dict:
+    payload_path = DATA_LIT_DIR / file_name
+    with open(payload_path, "r", encoding="utf-8") as handle:
+        return json.load(handle)
+
+
+PROCESS_STATE_CALIBRATION_PAYLOAD = _load_json_payload("process_state_calibrations.json")
+
+
+def get_process_state_calibration_payload(protein_type: ProteinType | str) -> list[dict]:
+    normalized = protein_type.value if isinstance(protein_type, ProteinType) else str(protein_type)
+    return [
+        entry
+        for entry in PROCESS_STATE_CALIBRATION_PAYLOAD.get("entries", [])
+        if str(entry.get("protein_type", "")) == normalized
+    ]
+
 
 class ProteinType(Enum):
     FREE_AMINO_ACID = "free"
@@ -102,7 +130,11 @@ ACCESSIBILITY_LITERATURE_WINDOWS = {
         lysine_max=0.45,
         cysteine_min=0.00,
         cysteine_max=0.08,
-        source="Prigent 2024 TNBS/DTNB + Schneider 2023 OPA envelope; commercial PPI free SH remains near-zero",
+        source=(
+            "Asen 2022 DSC/DTNB + Malia 2025 Ellman SH envelope, retained as a "
+            "conservative pea-isolate interpolation while exact benchmark-condition "
+            "values remain unmeasured"
+        ),
     ),
     ProteinType.SOY_ISOLATE: AccessibilityLiteratureWindow(
         protein_type=ProteinType.SOY_ISOLATE,
@@ -128,7 +160,11 @@ DENATURATION_HEURISTICS = {
         time_reference_minutes=10.0,
         acidic_ph_gain_celsius=2.5,
         reference_ph=6.0,
-        source="Prigent 2024 TNBS/DTNB + Schneider 2023 OPA envelope; calibrated so pea isolate stays mostly native at 40C but recovers strongly by 90-140C",
+        source=(
+            "Asen 2022 DSC/DTNB thermal window + Malia 2025 free-SH response; "
+            "calibrated so pea isolate stays mostly native at 40C but opens "
+            "progressively by 90-140C"
+        ),
     ),
     ProteinType.PEA_CONCENTRATE: DenaturationHeuristic(
         protein_type=ProteinType.PEA_CONCENTRATE,
@@ -138,7 +174,10 @@ DENATURATION_HEURISTICS = {
         time_reference_minutes=10.0,
         acidic_ph_gain_celsius=2.0,
         reference_ph=6.0,
-        source="Pea concentrate inherits the pea-isolate thermal envelope with a modest fiber-burial penalty",
+        source=(
+            "Pea concentrate inherits the Asen 2022 / Malia 2025 pea thermal envelope "
+            "with a modest fiber-burial penalty"
+        ),
     ),
     ProteinType.SOY_ISOLATE: DenaturationHeuristic(
         protein_type=ProteinType.SOY_ISOLATE,
@@ -303,7 +342,11 @@ MATRIX_CORRECTIONS = {
         volatile_retention=0.50,
         volatile_retention_native=0.42,
         volatile_retention_denatured=0.58,
-        source="Prigent 2024 TNBS/DTNB + Schneider 2023 OPA envelope; PPI free SH near zero even after processing"
+        source=(
+            "Asen 2022 DSC/DTNB + Malia 2025 Ellman SH envelope; values remain a "
+            "conservative PPI interpolation because the exact 95C pH 5.5 benchmark "
+            "condition still lacks direct wet-lab measurement"
+        )
     ),
     ProteinType.PEA_CONCENTRATE: MatrixCorrection(
         protein_type=ProteinType.PEA_CONCENTRATE,

@@ -28,6 +28,21 @@ For this repository to be genuinely state of the art, it must simultaneously pro
 - [x] Rewrite the root README so a first-time scientist can understand trust levels, main workflows, and how to get useful results without overclaiming.
 - [x] Retire legacy validation plot artifacts that no longer represent the current benchmark narrative.
 
+### External matrix benchmark candidate curation — 2026-03-18
+
+- [x] Draft literature-backed pea and soy meaty-positive benchmark candidate reports so the missing data package is concrete rather than abstract.
+- [x] Promote those candidate reports into visible documentation instead of leaving them buried in research notes.
+
+### SLR benchmark triage — 2026-03-18
+
+- [x] Incorporate the SLR verdict that the missing pea/SPI meaty-positive matrix benchmarks are structural literature gaps, not a search gap.
+- [x] Register the benchmark-intake status of Nishimura 2024, Squeo 2023, Asen 2022, and Malia 2025 in a machine-readable registry instead of leaving them only in prose.
+- [x] Re-anchor pea process-state calibration provenance to Asen 2022 and Malia 2025 in the matrix correction layer.
+- [x] Create explicit machine-readable payloads for the pea process-state calibration anchors and the Squeo 2023 safety reference anchor.
+- [x] Create a canonical human-readable scientific reference document that links pathways, validated articles, numeric anchors, and comments in one place.
+- [x] Recover full text for Nishimura & Abe (2024) and verify whether absolute MFT/FFT concentrations plus internal-standard details are present. Result: full text confirms soy-hydrolysate qualitative sulfur chemistry at 95 C / 90 min, but only as relative peak-area output without absolute ppb or internal-standard benchmark quantitation. (Dificultad: Media — Modelo recomendado: GPT-5.4)
+- [x] Convert the candidate reports into a benchmark-intake checklist with only fully curated references before creating benchmark JSON entries. (Dificultad: Alta — Modelo recomendado: GPT-5.4)
+
 ### What is already strong
 
 - [x] Free-amino-acid PRIMARY benchmarks are in a credible Docker-validated envelope.
@@ -38,9 +53,9 @@ For this repository to be genuinely state of the art, it must simultaneously pro
 
 ### What is still not enough for a best-in-class scientific tool
 
-- [ ] External meaty-positive matrix benchmark data is still missing for pea and soy, so matrix trust cannot advance beyond directional support. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
+- [ ] External meaty-positive matrix benchmark data is still missing for pea and soy, and the SLR now confirms this is a structural literature gap rather than an unresolved search problem, so matrix trust cannot advance beyond directional support. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
 - [ ] Matrix benchmarks are executable intake checks, not yet benchmark-facing target-ranking validations. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
-- [ ] Process-state calibration for accessibility, retention, and release is not yet benchmark-closed across real plant matrices. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
+- [ ] Process-state calibration for accessibility, retention, and release is not yet benchmark-closed across real plant matrices; the SLR only upgrades pea denaturation/SH anchors, not the full PPI/SPI benchmark conditions. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
 - [ ] Benchmark breadth is narrow relative to the scientific space alternative-protein teams actually care about. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
 - [ ] There is still a gap between “validated model component” and “formulation operating system for scientists”, especially for experiment ingestion and campaign-scale comparison. (Dificultad: Alta — Modelo recomendado: Gemini 3 Flash)
 
@@ -88,7 +103,7 @@ This is the biggest scientific-product gap. Without it, the repo is credible for
 - [ ] Promote plant-matrix benchmarks from intake checks toward target-ranking benchmarks with benchmark-facing observable outputs. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
 - [ ] Expand matrix observability from compound classes toward compound-specific calibration where literature or internal data exists. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
 - [ ] Add matrix benchmark families beyond the current pea/soy intake cases: broader protein systems, process states, and off-flavour/meaty tradeoff regimes relevant to alternative proteins. (Dificultad: Alta — Modelo recomendado: Gemini 3 Pro)
-- [ ] Validate matrix predictions against benchmarks that include both beneficial sulfur/meaty targets and adverse lipid-oxidation targets in the same system. (Dificultad: Alta — Modelo recomendado: Gemini 3 Pro)
+- [ ] Validate matrix predictions against benchmarks that include both beneficial sulfur/meaty targets and adverse lipid-oxidation targets in the same system; the SLR confirms this tradeoff benchmark does not currently exist in the literature for PPI/SPI isolate systems. (Dificultad: Alta — Modelo recomendado: Gemini 3 Pro)
 - [ ] Add process-state realism for extrusion/heating history where that state materially changes accessibility or release. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
 - [ ] Keep strict-gate promotion blocked until matrix target ranking is reproducible in Docker and visible in reports. (Dificultad: Baja — Modelo recomendado: GPT-5 mini)
 
@@ -125,6 +140,7 @@ Scientists need to know not only the prediction, but how much to trust it.
 1. [x] Replace class-level matrix observability where evidence exists with compound-level calibration entries keyed by compound, matrix family, and process state. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
 2. [x] Extend projection metadata so every ranked compound exposes its calibration source, fallback mode, and evidence strength in CLI/report JSON. (Dificultad: Alta — Modelo recomendado: Gemini 3 Pro)
 3. [ ] Add explicit adverse-target calibration for lipid-coupled notes so matrix validation covers the meaty/off-flavour tradeoff in the same experiment. (Dificultad: Alta — Modelo recomendado: Gemini 3 Pro)
+4. [ ] Encode Asen 2022 and Malia 2025 as explicit process-state calibration payloads instead of leaving them only as provenance strings in the pea thermal envelope. (Dificultad: Alta — Modelo recomendado: GPT-5.4)
 
 #### Phase 3 — Process realism
 
@@ -156,7 +172,7 @@ This is how the repo stops being a strong niche engine and becomes genuinely sta
 - [ ] Expand benchmark coverage for precursor families, protein systems, process regimes, and target compound families that matter in alternative proteins. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
 - [ ] Add peptide-bound and intact-protein reactivity where it materially changes accessible chemistry. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
 - [ ] Add broader carbohydrate realism beyond the current free-sugar emphasis when relevant to commercial formulations. (Dificultad: Alta — Modelo recomendado: Gemini 3 Pro)
-- [ ] Strengthen safety validation with literature-backed dynamic acrylamide and related risk markers across realistic process trajectories. (Dificultad: Alta — Modelo recomendado: Gemini 3 Pro)
+- [ ] Strengthen safety validation with literature-backed dynamic acrylamide and related risk markers across realistic process trajectories; Squeo 2023 now provides an industrial endpoint anchor but not dynamic T/t/[Asn] kinetics. (Dificultad: Alta — Modelo recomendado: Gemini 3 Pro)
 - [ ] Improve temporal/process-path validation so the model can compare alternative heating profiles, not only endpoint conditions. (Dificultad: Alta — Modelo recomendado: Gemini 3 Pro)
 - [ ] Add better coverage for lipid/Maillard coupling in realistic plant-fat systems. (Dificultad: Alta — Modelo recomendado: Gemini 3 Pro)
 
@@ -189,10 +205,10 @@ This is the difference between a strong model repo and a tool scientists keep us
 
 ## Immediate Execution Sequence
 
-1. [ ] Acquire or encode the first external quantitative meaty-positive matrix benchmark pair for pea and soy. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
-2. [ ] Add adverse-target calibration for lipid-coupled markers so matrix benchmarks cover meaty/off-flavour tradeoffs in the same experiment. (Dificultad: Alta — Modelo recomendado: Gemini 3 Pro)
-3. [ ] Calibrate process-state accessibility and release against benchmarked matrix states before any stricter promotion claim. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
-4. [ ] Expand benchmark coverage beyond isolate-only pea/soy into broader protein families and process regimes. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
+1. [x] Recover full text for Nishimura & Abe (2024) and decide whether it can be promoted from soy-hydrolysate conditional calibration to an encoded literature anchor. Result: it can be promoted only to a qualitative intake anchor, not to an absolute benchmark or calibrated ppb reference. (Dificultad: Media — Modelo recomendado: GPT-5.4)
+2. [x] Encode Squeo 2023 as a formal safety-reference payload and expose its upper-bound acrylamide range in a code-consumable safety reference surface without pretending it is a kinetic benchmark. (Dificultad: Alta — Modelo recomendado: GPT-5.4)
+3. [x] Encode Asen 2022 and Malia 2025 as explicit pea process-state calibration payloads for `denaturation_state` and `cysteine_accessibility`. (Dificultad: Alta — Modelo recomendado: GPT-5.4)
+4. [ ] Design the first primary cross-benchmark experiment for PPI/SPI + ribose + cysteine because the SLR confirms the key meaty/off-flavour/time-series gaps cannot be closed with more literature search; use the intake checklist plus the minimum primary experiment spec as the starting contract. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
 5. [ ] Build the ingestion path for new internal calibration and validation experiments. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
 
 ## Review
@@ -205,6 +221,8 @@ This is the difference between a strong model repo and a tool scientists keep us
 - P1 progress on 2026-03-17: pea/soy matrix benchmarks now carry an explicit ranking contract with process metadata and citation provenance; validation/report artifacts surface ranking-contract status and compound-level calibration provenance while the strict gate remains blocked.
 - P1 evidence status on 2026-03-17: the repo now distinguishes external matrix evidence from internal reproducibility harnesses explicitly; external pea/soy meaty-positive promotion remains blocked because no wet-lab quantitative benchmark is currently available in-repo.
 - P1 completion status on 2026-03-17: the repo now emits matrix assertions, evidence audits, family-readiness summaries, and branch-vs-main deltas in Docker. Pea and soy each have an off-flavour anchor and a meaty candidate, but external meaty-positive assessment remains blocked pending wet-lab data.
+- SLR update on 2026-03-18: the literature search closes the planning uncertainty. Nishimura 2024 is the only soy-protein matrix chemistry candidate for MFT/FFT, Squeo 2023 is the only benchmark-eligible acrylamide endpoint anchor, Asen 2022 and Malia 2025 are the best open pea process-state calibration anchors, and the core PPI/SPI meaty/off-flavour/time-series benchmark gaps are structural and require primary data.
+- Nishimura full-text update on 2026-03-18: the paper is now resolved as a qualitative soy-hydrolysate intake anchor. It confirms the soy matrix chemistry workflow and MRP conditions, but its volatile outputs are relative peak-area signals rather than absolute benchmark-ready concentrations.
 
 ## Model guidance (resumen)
 

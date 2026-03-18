@@ -187,7 +187,26 @@ The validated execution contract now uses named Docker lanes instead of ad hoc c
 - `./scripts/docker_maillard.sh validated-envelope`: reproducible validated-envelope / domain-of-applicability artifact.
 - `./scripts/docker_maillard.sh explain-formulation <name>`: reproducible formulation explainability artifact for a formulation in `data/formulation_grid.yml`.
 
-## 4. Blind Spots That Still Matter
+## 4. How To Read The Validation Figures
+
+The repository now relies on a small set of figures that each have a distinct purpose.
+
+- `validation_overview.png` is the first-pass trust surface. It only shows the two panels that matter most for a skeptical scientific read: predicted-vs-measured parity for the authoritative free-precursor points, and per-benchmark quantitative error against the 1.5x contract.
+- `validated_envelope.png` is the boundary figure. It shows how much of the benchmark set is strict-ready, how much is only directional, and which caveats still define the current edge of reliable use.
+- `*_comparison.png` files are benchmark cards. They show parity, absolute yields, and the benchmark summary for one literature system at a time.
+
+Read them in that order. The overview tells you whether the repo has a real quantitative proof surface. The envelope tells you where that proof stops. The benchmark card tells you why a single literature case passed, failed, or remained directional.
+
+Correlation is informative but not sufficient on its own. The contract should always be interpreted through four signals together:
+
+- coverage
+- Pearson $R$ only when at least three compounds match
+- MAE in ppb
+- max ratio as the release-facing scale tolerance
+
+This is why a benchmark may be scientifically acceptable as `pass-no-ranking` while still lacking a meaningful correlation coefficient.
+
+## 5. Blind Spots That Still Matter
 
 - **Matrix-only systems**: the first plant-isolate benchmark path is now executable and the default matrix-state handling is less manual, but broader matrix calibration beyond the current pea/soy intake family is still missing.
 - **Headspace translation**: the remaining free-amino-acid scale gaps are now dominated by how FAST activity is translated into observed concentration/headspace, not by a single missing sulfur barrier.
@@ -195,7 +214,7 @@ The validated execution contract now uses named Docker lanes instead of ad hoc c
 - **User-facing explainability**: the engine now computes a more physical matrix state internally, but that matrix metadata is not yet surfaced broadly in benchmark summary/report artifacts.
 - **Default CLI integration**: explainability and validated-envelope artifacts exist, but the default user commands do not yet surface those warnings inline during every formulation run.
 
-## 5. Recommended Verification Workflow
+## 6. Recommended Verification Workflow
 
 1. For macOS/OrbStack or Docker Desktop, bring up the validated Linux environment with `./scripts/docker_maillard.sh up` and create or refresh the env with `./scripts/docker_maillard.sh bootstrap`.
 2. Run `./scripts/docker_maillard.sh summary` to inspect the current validated envelope.
@@ -207,13 +226,13 @@ The validated execution contract now uses named Docker lanes instead of ad hoc c
 8. Run `./scripts/docker_maillard.sh targets-report` when you need the aggregate target artifact regenerated before review or comparison.
 9. Treat `matrix_only` benchmarks as executable intake checks unless they are explicitly promoted into the strict gate.
 
-## 6. Expected Skips In The Docker Lane
+## 7. Expected Skips In The Docker Lane
 
 - `tests/benchmarks/` is intentionally skip-heavy today. Those tests are Phase 3 placeholders and HPC-oriented literature checks, not part of the current release gate.
 - Capability-gated QM tests should skip only when the backend is genuinely unavailable or unusable in the active Docker environment.
 - A path-based skip for a binary that is actually present in `PATH` is a test bug, not a valid environment gate.
 
-## 7. Named Docker Lanes
+## 8. Named Docker Lanes
 
 - `./scripts/docker_maillard.sh core`: unit and integration correctness gate.
 - `./scripts/docker_maillard.sh scientific`: benchmark summary/index plus scientific regression lane.
