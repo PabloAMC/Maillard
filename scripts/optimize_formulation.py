@@ -15,6 +15,13 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from src.bayesian_optimizer import FormulationOptimizer  # noqa: E402
+from src.usability_reports import (
+    DomainOfValidityChecker, 
+    build_confidence_package,
+    render_decision_summary_cli,
+    render_deep_explainability_cli
+)  # noqa: E402
+
 
 def main():
     parser = argparse.ArgumentParser(description="Bayesian Formulation Optimizer")
@@ -27,7 +34,9 @@ def main():
     parser.add_argument("--risk-aversion", type=float, default=1.0, help="Penalty weight for toxic markers (default: 1.0)")
     parser.add_argument("--pre-process", type=str, choices=["none", "yeast", "protease", "both"], default="none", help="Biological pre-processing step")
     parser.add_argument("--protein-type", choices=["free", "pea_conc", "pea_iso", "soy_conc", "soy_iso", "myco"], default="free", help="Protein matrix type (default: free)")
-    parser.add_argument("--denaturation-state", type=float, default=0.5, help="Denaturation state 0-1 (default: 0.5)")
+    parser.add_argument("--denaturation-state", type=float, default=None, help="Optional denaturation state 0-1. If omitted, infer from temperature/time/pH.")
+    parser.add_argument("--report", action="store_true", help="Generate consolidated JSON/Markdown report for the best trial")
+    parser.add_argument("--output-dir", type=str, default=None, help="Directory to save the report")
     args = parser.parse_args()
 
     sugars = [s.strip() for s in args.sugars.split(",")] if args.sugars else []
@@ -80,7 +89,10 @@ def main():
         elif key == "aw":
             print(f"  {key.ljust(15)} : {value:.2f}")
         else:
-            print(f"  {key.ljust(15)} : {value:.1f} min")
+            if isinstance(value, (int, float)):
+                print(f"  {key.ljust(15)} : {value:.1f} min")
+            else:
+                print(f"  {key.ljust(15)} : {value}")
             
     print("\n🔍 Predicted Outcomes:")
     print(f"  Target Score   : {best_trial.user_attrs.get('target_score', 0):.4f}")
@@ -90,6 +102,63 @@ def main():
     flagged = best_trial.user_attrs.get('flagged_toxics', [])
     if flagged:
         print(f"  Flagged Toxins : {', '.join(set(flagged))}")
+    
+    # --- Decision Summary ---
+    print("\n🔍 Re-evaluating best formulation for detailed summary...")
+    # Re-construct formulation for evaluate_single
+    best_formulation = {
+        "name": "Best_Trial",
+        "sugars": sugars,
+        "amino_acids": aas,
+        "lipids": lipids,
+        "molar_ratios": best_trial.params, # This might need some mapping if names differ
+        "ph": best_trial.params.get('ph', 6.0),
+        "temp": best_trial.params.get('temp', 150.0),
+        "aw": best_trial.params.get('aw', 0.8),
+        "time_minutes": best_trial.params.get('time_minutes', 60.0),
+        "protein_type": args.protein_type,
+        "denaturation_state": args.denaturation_state
+    }
+    # InverseDesigner is needed here
+    from src.inverse_design import InverseDesigner
+    designer = InverseDesigner(args.target_tag, args.minimize_tag)
+    from src.smirks_engine import ReactionConditions
+    cond = ReactionConditions(
+        pH=best_formulation["ph"],
+        temperature_celsius=best_formulation["temp"],
+        water_activity=best_formulation["aw"],
+        protein_type=args.protein_type
+    )
+    res = designer.evaluate_single(best_formulation, cond)
+    
+    checker = DomainOfValidityChecker(args.target_tag)
+    warnings = checker.check(
+        precursor_names=sugars + aas + lipids, 
+        protein_type=args.protein_type,
+        temp_c=res.matrix_explainability.get("temperature", 150.0), # or just from params
+        ph=res.matrix_explainability.get("pH", 6.0)
+    )
+    res.confidence_metadata = build_confidence_package(
+        res,
+        warnings,
+        precursor_names=sugars + aas + lipids,
+        protein_type=args.protein_type,
+        formulation=best_formulation,
+        baseline_conditions=cond,
+        designer=designer,
+    )
+    render_decision_summary_cli(res, warnings)
+    render_deep_explainability_cli(res)
+    
+    if args.report:
+        from src.reporting import generate_report
+        report_dir = generate_report(
+            res, 
+            warnings, 
+            vars(args), 
+            output_dir=Path(args.output_dir) if args.output_dir else None
+        )
+        print(f"📄 Best Trial Report generated in: {report_dir}")
     
     print("\n(Note: Optimization trace saved in memory. For persistent tracking, configure Optuna DB storage.)")
     print("======================================================")

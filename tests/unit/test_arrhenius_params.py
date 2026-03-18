@@ -1,4 +1,14 @@
-from src.barrier_constants import get_barrier, get_arrhenius_params, DEFAULT_BARRIER  # noqa: E402
+import pytest
+
+from src.barrier_constants import (  # noqa: E402
+    DEFAULT_BARRIER,
+    DEFAULT_REFERENCE_PREEXPONENTIAL,
+    arrhenius_rate_constant,
+    effective_barrier_from_rate_constant,
+    get_arrhenius_params,
+    get_barrier,
+    get_reference_pre_exponential,
+)
 
 def test_get_barrier_exact_match():
     # Test valid exact matches and normalized variants
@@ -46,3 +56,38 @@ def test_get_arrhenius_params_invalid():
 def test_get_arrhenius_params_normalization():
     # Should normalize "schiff" to "schiff_condensation"
     assert get_arrhenius_params("schiff") == get_arrhenius_params("schiff_condensation")
+
+
+def test_enolisation_uses_enolisation_arrhenius_contract_not_fructose_dehydration():
+    params = get_arrhenius_params("1,2-enolisation")
+    assert params is not None
+    A, ea_kcal, quality, _ = params
+
+    assert A == 1e12
+    assert quality == "literature_estimated"
+    assert abs(ea_kcal - (120.0 / 4.184)) < 0.1
+
+
+def test_fast_enolisation_barrier_stays_close_to_arrhenius_reference():
+    fast_barrier, _ = get_barrier("1,2-enolisation")
+    params = get_arrhenius_params("1,2-enolisation")
+    assert params is not None
+    _, arrhenius_barrier, _, _ = params
+
+    assert abs(fast_barrier - arrhenius_barrier) < 1.0
+
+
+def test_reference_pre_exponential_uses_literature_then_fallback():
+    assert get_reference_pre_exponential("schiff_condensation") == 1.5e11
+    assert get_reference_pre_exponential("magic_reaction") == DEFAULT_REFERENCE_PREEXPONENTIAL
+
+
+def test_arrhenius_round_trip_preserves_family_barrier():
+    barrier = 13.62
+    temperature_kelvin = 423.15
+    family = "schiff_condensation"
+
+    rate_constant = arrhenius_rate_constant(barrier, temperature_kelvin, family=family)
+    recovered = effective_barrier_from_rate_constant(rate_constant, temperature_kelvin, family=family)
+
+    assert recovered == pytest.approx(barrier, rel=1e-9)

@@ -4,6 +4,7 @@ Pytest configuration and shared fixtures for Phase 3 and Phase 12 tests.
 
 import pytest
 import numpy as np
+from pathlib import Path
 
 
 # ============================================================================
@@ -226,3 +227,31 @@ def pytest_configure(config):
     config.addinivalue_line("markers", "dft: marks Phase 3 DFT tests")
     config.addinivalue_line("markers", "cantera: marks Phase 12 Cantera tests")
     config.addinivalue_line("markers", "integration: marks end-to-end integration tests")
+    config.addinivalue_line("markers", "scientific_regression: fast scientific regression tests for FAST, benchmarks, and calibrated recommendation behavior")
+    config.addinivalue_line("markers", "kinetics_validation: slower Cantera or kinetics-reference validation tests")
+
+
+def pytest_collection_modifyitems(config, items):
+    """Auto-tag scientific and kinetics validation tests by path."""
+    scientific_regression_files = {
+        Path("tests/unit/test_budget_projection.py"),
+        Path("tests/unit/test_safety_and_flux.py"),
+        Path("tests/integration/test_recommendation_engine.py"),
+    }
+    kinetics_validation_files = {
+        Path("tests/integration/test_cantera_sim.py"),
+        Path("tests/integration/test_temp_profiles.py"),
+    }
+
+    for item in items:
+        path = Path(str(item.fspath)).resolve()
+        try:
+            relative_path = path.relative_to(Path(__file__).resolve().parents[1])
+        except ValueError:
+            continue
+
+        if relative_path.parts[:2] == ("tests", "scientific") or relative_path in scientific_regression_files:
+            item.add_marker(pytest.mark.scientific_regression)
+
+        if relative_path in kinetics_validation_files:
+            item.add_marker(pytest.mark.kinetics_validation)

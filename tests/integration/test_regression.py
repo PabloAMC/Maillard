@@ -149,8 +149,10 @@ def test_canonical_systems(system_key, regression_data, results_db):
     print(f"Top 10 Volatiles: {sorted_volatiles[:10]}")
     
     # Assert at least one target is in top N
-    found_any = any(t in top_n_names for t in targets)
-    assert found_any, f"None of targets {targets} found in top {len(top_n_names)} volatiles: {top_n_names}. volatiles map count: {len(volatiles)}"
+    # Targets in canonical_systems.json still have dashes; sanitize them for comparison
+    safe_targets = [t.replace("-", "_").replace(" ", "_").replace("(", "_").replace(")", "_") for t in targets]
+    found_any = any(t in top_n_names for t in safe_targets)
+    assert found_any, f"None of sanitized targets {safe_targets} found in top {len(top_n_names)} volatiles: {top_n_names}"
     
     # Cleanup
     if os.path.exists(mech_path):

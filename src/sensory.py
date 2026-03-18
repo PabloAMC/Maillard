@@ -8,8 +8,11 @@ Maps predicted volatile concentrations to aroma descriptors using a psychophysic
 import yaml
 from pathlib import Path
 from typing import Dict, List, Any, Tuple, Optional
-from src.matrix_correction import ProteinType, MATRIX_CORRECTIONS
+from src.matrix_correction import ProteinType, resolve_compound_matrix_retention, resolve_matrix_correction
 from src.headspace import HeadspaceModel  # noqa: E402
+
+
+ROOT = Path(__file__).resolve().parents[1]
 
 class SensoryDatabase:
     """
@@ -18,7 +21,10 @@ class SensoryDatabase:
     """
     
     def __init__(self, data_dir: str = "data/species"):
-        self.data_dir = Path(data_dir)
+        data_path = Path(data_dir)
+        if not data_path.is_absolute():
+            data_path = ROOT / data_path
+        self.data_dir = data_path
         self.compounds = {}  # key: name, value: data
         self.smiles_map = {}
         self.tags = {}
@@ -78,15 +84,25 @@ class SensoryDatabase:
                 self.tags = yaml.safe_load(f).get("tags", {})
 
     def find_entry(self, identifier: str) -> Optional[Dict]:
-        """Lookup by name or SMILES."""
+        """Lookup by name or SMILES with robustness to underscores/spaces."""
         if identifier in self.compounds:
             return self.compounds[identifier]
         if identifier in self.smiles_map:
             return self.smiles_map[identifier]
         
-        # Fuzzy match by name
+        def normalize(s):
+            import re
+            return re.sub(r"[^a-z0-9]+", "", s.lower())
+
+        target_norm = normalize(identifier)
+        if not target_norm:
+             return None
+
+        # Robust match by normalized name
         for name, entry in self.compounds.items():
-            if identifier.lower() in name.lower():
+            if target_norm == normalize(name):
+                return entry
+            if target_norm in normalize(name): # Fuzzy fallback
                 return entry
         return None
 
@@ -99,7 +115,10 @@ class SensoryPredictor:
     def __init__(self, database: Optional[SensoryDatabase] = None, headspace: Optional[HeadspaceModel] = None):
         self.db = database or SensoryDatabase()
         self.headspace = headspace
-        self.exponent = 0.5  # Stevens' Law exponent for odorants
+        # Perceived intensity scales with exponent ~0.5 (Stevens' Law).
+        # Historically this was set to 1.0 for linear scaling in formulation design,
+        # but unit tests and benchmark calibration expect 0.5.
+        self.exponent = 0.5
         self.synergy_pow = 1.3  # Group synergy factor (1.0 = additive, 2.0 = vector-sum)
         
         # Expert synergy pairs (Hofmann & Schieberle 2000)
@@ -114,6 +133,7 @@ class SensoryPredictor:
     def predict_profile(self, 
                         concentration_dict_ppb: Dict[str, float], 
                         protein_type: str = "free",
+                        denaturation_state: float = 0.5,
                         temp_c: Optional[float] = None,
                         fat_fraction: float = 0.0,
                         protein_fraction: float = 0.0) -> Dict[str, Tuple[float, float]]:
@@ -127,13 +147,18 @@ class SensoryPredictor:
         
         p_type = ProteinType(protein_type)
         # Use matrix volatile retention factor to adjust ODT
-        retention = MATRIX_CORRECTIONS[p_type].volatile_retention
+        bulk_retention = resolve_matrix_correction(p_type, denaturation_state).volatile_retention
 
         # 1. Headspace Partitioning (optional) - convert ppb to ppm for old model if needed
         # Actually let's stay in ppb for consistency with new safety/benchmarks.
         if self.headspace and temp_c is not None:
             effective_concs = self.headspace.predict_headspace(
-                concentration_dict_ppb, temp_c, fat_fraction, protein_fraction
+                concentration_dict_ppb,
+                temp_c,
+                fat_fraction,
+                protein_fraction,
+                protein_type=protein_type,
+                denaturation_state=denaturation_state,
             )
         else:
             effective_concs = concentration_dict_ppb
@@ -155,6 +180,11 @@ class SensoryPredictor:
                     odt_base = entry["threshold_ppm"] * 1000.0
                 
                 # Matrix Effect: ODT_matrix = ODT_water / Retention
+                retention = resolve_compound_matrix_retention(
+                    compound,
+                    protein_type=p_type,
+                    denaturation_state=denaturation_state,
+                ) if protein_type != "free" else bulk_retention
                 odt_matrix = odt_base / max(0.01, retention)
                 
                 # Stevens' Power Law: I = (C / ODT)^0.55
@@ -208,17 +238,25 @@ class SensoryPredictor:
         # 1. Group intensities by category
         radar = {tag: (0.0, 0.0) for tag in self.db.tags.keys()}
         
+        def normalize(s):
+            import re
+            return re.sub(r"[^a-z0-9]+", "", s.lower())
+
         for tag, search_names in self.db.tags.items():
             intensities = []
             uncertainties = []
             matched_compounds = set()
             
-            for s_name in search_names:
-                for c_name, (intensity, unc) in compound_intensities.items():
-                    if s_name.lower() in c_name.lower() and c_name not in matched_compounds:
+            norm_search_names = [normalize(sn) for sn in search_names]
+            
+            for c_name, (intensity, unc) in compound_intensities.items():
+                c_norm = normalize(c_name)
+                for sn_norm in norm_search_names:
+                    if sn_norm in c_norm and c_name not in matched_compounds:
                         intensities.append(intensity)
                         uncertainties.append(unc)
                         matched_compounds.add(c_name)
+                        break
             
             if not intensities:
                 continue

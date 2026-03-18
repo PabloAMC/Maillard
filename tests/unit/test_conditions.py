@@ -1,4 +1,7 @@
+import math
+
 import pytest
+from src.barrier_constants import arrhenius_rate_constant, effective_barrier_from_rate_constant  # noqa: E402
 from src.conditions import ReactionConditions  # noqa: E402
 
 def test_ph_multipliers():
@@ -47,3 +50,32 @@ def test_heme_catalysis():
     mult_none_s = cond_none.get_ph_multiplier("Schiff_Base")
     mult_heme_s = cond_heme.get_ph_multiplier("Schiff_Base")
     assert mult_heme_s == mult_none_s
+
+
+def test_rate_constant_uses_shared_arrhenius_contract():
+    cond = ReactionConditions(pH=6.0, temperature_celsius=150.0, water_activity=0.8)
+    barrier = 15.0
+
+    expected = arrhenius_rate_constant(
+        barrier,
+        cond.temperature_kelvin,
+        family="schiff_condensation",
+        multiplier=cond._ionization_correction("schiff_condensation") * cond._water_activity_correction("schiff_condensation"),
+    )
+
+    observed = cond.get_rate_constant("schiff_condensation", ea_override_kcal=barrier)
+    assert observed == pytest.approx(expected)
+
+
+def test_effective_barrier_round_trip_reflects_environmental_multipliers():
+    cond = ReactionConditions(pH=6.0, temperature_celsius=150.0, water_activity=0.8)
+    base_barrier = 15.0
+    multiplier = cond._ionization_correction("schiff_condensation") * cond._water_activity_correction("schiff_condensation")
+
+    observed = cond.get_rate_constant("schiff_condensation", ea_override_kcal=base_barrier)
+    effective_barrier = effective_barrier_from_rate_constant(observed, cond.temperature_kelvin, "schiff_condensation")
+
+    assert effective_barrier == pytest.approx(
+        base_barrier - 0.001987 * cond.temperature_kelvin * math.log(multiplier)
+    )
+    assert effective_barrier > base_barrier

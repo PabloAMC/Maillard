@@ -9,9 +9,40 @@ Reference:
 - Stadler et al. 2004 (Asparagine involvement)
 """
 
+import json
 import math
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Dict, List, Tuple, Optional
+
+
+ROOT = Path(__file__).resolve().parents[1]
+SAFETY_REFERENCE_PAYLOAD_PATH = ROOT / "data" / "lit" / "safety_reference_payloads.json"
+
+
+def _load_safety_reference_payloads() -> dict:
+    with open(SAFETY_REFERENCE_PAYLOAD_PATH, "r", encoding="utf-8") as handle:
+        return json.load(handle)
+
+
+SAFETY_REFERENCE_PAYLOADS = _load_safety_reference_payloads()
+
+
+def get_safety_reference_payload(reference_id: str = "squeo_2023_pbpi_acrylamide") -> Optional[dict]:
+    for entry in SAFETY_REFERENCE_PAYLOADS.get("entries", []):
+        if str(entry.get("id", "")) == reference_id:
+            return entry
+    return None
+
+
+def get_safety_reference_range(matrix_family: str, reference_id: str = "squeo_2023_pbpi_acrylamide") -> Optional[dict]:
+    payload = get_safety_reference_payload(reference_id)
+    if payload is None:
+        return None
+    for item in payload.get("matrix_reference_ranges", []):
+        if str(item.get("matrix_family", "")) == matrix_family:
+            return item
+    return None
 
 @dataclass
 class SafetyResult:
@@ -29,52 +60,64 @@ def predict_acrylamide(
     ea_modifier_kcal: float = 0.0
 ) -> SafetyResult:
     """
-    Implements Knol 2009 Arrhenius kinetics for acrylamide formation.
+    Implements formation-elimination kinetics for acrylamide (Knol/Parker model).
     
-    Simplified first-order approximation:
-    d[AA]/dt = k * [Asn] * [Sugar]
+    Kinetics:
+    dA/dt = kf * [Asn] * [Sugar] - ke * [A]
     
-    Wait, Knol 2009 uses more complex pathways but for our formulation
-    design, we use the effective formation constant.
+    Analytical Solution:
+    A(t) = (kf * [Asn] * [Sugar] / ke) * (1 - exp(-ke * t))
     
-    Ea = 129.5 kJ/mol
-    A = 1.6e12 s^-1
+    References:
+    - Knol et al. 2009 (Formation kinetics)
+    - Parker et al. 2012 (Elimination/Degradation kinetics)
     """
     if asparagine_mM <= 0 or reducing_sugar_mM <= 0:
         return SafetyResult(0.0, 0.0, False, "No precursors")
 
-    # Arrhenius
+    # Constants
     R = 8.314 # J/mol/K
     T_K = temp_C + 273.15
-    # Base Ea ~ 120 kJ/mol
-    base_ea = 120000 
-    # Add modifier (1 kcal = 4184 J)
-    Ea = base_ea + (ea_modifier_kcal * 4184.0)
-    
-    A = 1.0e13 # s^-1 (Higher pre-exponential factor)
-    
-    # pH effect: Acrylamide peaks around pH 8, very low below pH 4
-    # Henderson-Hasselbalch style correction for the amine group of Asn (pKa ~8.8)
-    ph_corr = 1.0 / (1.0 + 10**(8.7 - pH))
-    
-    k = A * math.exp(-Ea / (R * T_K)) * ph_corr
-    
-    # Formation in mg/kg (ppm) then convert to ppb
-    # AA_ppm = k * [Asn] * [Sugar] * t_sec
     time_sec = time_min * 60.0
+    MW_AA = 71.08
     
-    # Concentrations in mM -> 10^-3 mol/L. 
-    # For food matrices, we assume 1L ~ 1kg
-    aa_ppm = k * (asparagine_mM / 1000.0) * (reducing_sugar_mM / 1000.0) * time_sec * 71.08 * 1000.0
-    # 71.08 is MW of acrylamide.
+    # 1. Formation (kf)
+    # Base Ea for formation from Knol 2009 (~129 kJ/mol)
+    Ea_f = 129000.0 + (ea_modifier_kcal * 4184.0)
+    A_f = 1.6e13 # L/mol/s 
     
+    # pH effect on formation: Asparagine amine nucleophilicity (pKa ~8.8)
+    # Most reactive in slightly alkaline, sharply drops below pH 5
+    f_ph = 1.0 / (1.0 + 10**(8.8 - pH))
+    kf = A_f * math.exp(-Ea_f / (R * T_K)) * f_ph
+    
+    # 2. Elimination (ke)
+    # Acrylamide degrades at high T. Ea_e typically ~90-110 kJ/mol
+    Ea_e = 105000.0 
+    A_e = 5.0e8 # s^-1
+    ke = A_e * math.exp(-Ea_e / (R * T_K))
+    
+    # 3. Resolve Concentrations (mM to mol/L)
+    asn_molar = asparagine_mM / 1000.0
+    sugar_molar = reducing_sugar_mM / 1000.0
+    
+    # Avoid division by zero if ke is extremely small
+    if ke < 1e-12:
+        # Fallback to simple first-order formation
+        aa_molar = kf * asn_molar * sugar_molar * time_sec
+    else:
+        # Analytical solution
+        aa_molar = (kf * asn_molar * sugar_molar / ke) * (1 - math.exp(-ke * time_sec))
+        
+    # Convert mol/L -> ppm (mg/kg assuming rho=1) -> ppb
+    aa_ppm = aa_molar * MW_AA * 1000.0
     aa_ppb = aa_ppm * 1000.0
     
     # Heuristic uncertainty (25% based on literature variability)
     unc = aa_ppb * 0.25
     
     # EU benchmark for meat analogues/cereals is often ~300-750 ppb
-    # For testing and sensitivity, we use 100 ppb here
+    # We use a conservative 100 ppb threshold for flagging
     is_safe = aa_ppb < 100.0
     
     return SafetyResult(

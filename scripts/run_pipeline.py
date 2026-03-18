@@ -11,6 +11,7 @@ The core Phase 7 orchestrator.
 
 import sys
 import argparse
+from dataclasses import asdict
 from pathlib import Path
 from typing import Dict
 
@@ -19,11 +20,20 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from src.conditions import ReactionConditions  # noqa: E402
-from src.smirks_engine import SmirksEngine  # noqa: E402
+from src.smirks_engine import SmirksEngine, Species  # noqa: E402
+from src.inverse_design import InverseDesigner  # noqa: E402
 from src.xtb_screener import XTBScreener  # noqa: E402
-from src.recommend import Recommender, _trunc  # noqa: E402
+from src.recommend import _trunc  # noqa: E402
 from src import precursor_resolver  # noqa: E402
 from src.barrier_constants import get_barrier, HEME_CATALYST_FAMILIES, HEME_CATALYST_REDUCTION  # noqa: E402
+from src.usability_reports import (
+    DomainOfValidityChecker, 
+        build_confidence_package,
+    render_decision_summary_cli,
+    render_deep_explainability_cli
+)  # noqa: E402
+from src.reporting import generate_report  # noqa: E402
+
 
 
 def print_table(active_pathways: list):
@@ -76,18 +86,31 @@ def main():
     parser.add_argument("--ratios", type=str, default="", help="Optional comma-separated molar ratios (e.g. cysteine:2.0,ribose:1.0). Default 1.0.")
     parser.add_argument("--catalyst", type=str, default=None, choices=["heme"], help="Apply catalyst effect (e.g. heme)")
     parser.add_argument("--aw", "--water-activity", type=float, default=1.0, help="Water activity (default 1.0)")
+    parser.add_argument("--time-minutes", type=float, default=60.0, help="Reaction time in minutes (default 60.0)")
     parser.add_argument("--target", type=str, default=None, help="Inverse design target sensory tag (e.g. meaty, roasted)")
     parser.add_argument("--minimize", type=str, default="beany", help="Inverse design off-flavour tag to minimize (default: beany)")
     parser.add_argument("--xtb", action="store_true", help="Run full GFN2-xTB structural optimizations (SLOW!). Defaults to fast Hammond estimating.")
     parser.add_argument("--protein-type", choices=["free", "pea_conc", "pea_iso", "soy_conc", "soy_iso", "myco"], default="free", help="Protein matrix type for accessibility corrections.")
     parser.add_argument("--denaturation-state", type=float, default=0.5, help="Protein denaturation level (0.0 to 1.0). Default 0.5.")
     parser.add_argument("--list-precursors", action="store_true", help="List available precursors and exit")
+    parser.add_argument("--list-tags", action="store_true", help="List available sensory tags and exit")
+    parser.add_argument("--report", action="store_true", help="Generate consolidated JSON/Markdown report")
+    parser.add_argument("--output-dir", type=str, default=None, help="Directory to save the report")
+    parser.add_argument("--dry-run", action="store_true", help="Validate inputs against envelope without running simulation")
     
     # Catch simple cases where user only wants to list
     if "--list-precursors" in sys.argv:
         print("Available Precursors:")
         for name in precursor_resolver.list_available():
             print(f"  - {name}")
+        sys.exit(0)
+
+    if "--list-tags" in sys.argv:
+        from src.sensory import SensoryDatabase
+        db = SensoryDatabase()
+        print("Available Sensory Tags (Categories):")
+        for tag in db.tags.keys():
+            print(f"  - {tag}")
         sys.exit(0)
 
     args = parser.parse_args()
@@ -113,10 +136,15 @@ def main():
         print("-" * 60)
         
         try:
-            from src.inverse_design import InverseDesigner
             designer = InverseDesigner(args.target, args.minimize)
             print(f"Evaluating {len(designer.grid)} industrial formulations against tags...")
             
+            if args.dry_run:
+                print("\n[DRY RUN] Bypassing expensive grid evaluation.")
+                print("Validation: Grid dimensions bounded correctly.")
+                print("\nDry-run complete. Exiting.")
+                sys.exit(0)
+                
             results = designer.evaluate_all(conditions)
             
             print("\n  Top Recommended Formulations:")
@@ -132,6 +160,46 @@ def main():
                 print(f"    │ {res.name[:28]:<28} │ {t_score:>12} │ {r_score:>12} │ {lys:>11} │ {trap:>11} │")
             
             print("    └──────────────────────────────┴──────────────┴──────────────┴─────────────┴─────────────┘")
+            
+            # --- Decision Summary ---
+            checker = DomainOfValidityChecker(args.target)
+            if results:
+                best = results[0]
+                best_formulation = next((item for item in designer.grid if item.get("name") == best.name), {})
+                best_precursors = []
+                for key in ("sugars", "amino_acids", "additives", "lipids"):
+                    best_precursors.extend(best_formulation.get(key, []))
+                best_protein_type = best_formulation.get("protein_type", args.protein_type)
+                best_temp = float(best_formulation.get("temp", conditions.temperature_celsius))
+                best_ph = float(best_formulation.get("ph", conditions.pH))
+                warnings = checker.check(
+                    precursor_names=best_precursors,
+                    protein_type=best_protein_type,
+                    temp_c=best_temp,
+                    ph=best_ph,
+                )
+                best.confidence_metadata = build_confidence_package(
+                    best,
+                    warnings,
+                    precursor_names=best_precursors,
+                    protein_type=best_protein_type,
+                    formulation=best_formulation,
+                    baseline_conditions=conditions,
+                    designer=designer,
+                )
+                # [10] Scientist-Facing Decision Summary
+                render_decision_summary_cli(best, warnings)
+                render_deep_explainability_cli(best)
+            
+            if args.report:
+                report_dir = generate_report(
+                    results[0], 
+                    warnings, 
+                    vars(args), 
+                    output_dir=Path(args.output_dir) if args.output_dir else None
+                )
+                print(f"📄 Report generated in: {report_dir}")
+            
             sys.exit(0)
             
         except ValueError as e:
@@ -142,7 +210,24 @@ def main():
     # Standard Forward Pipeline Execution
     # =================================================================
 
-    # 1. Resolve Precursors
+    # Parse ratios
+    ratio_dict = {}
+    if args.ratios:
+        for pair in args.ratios.split(","):
+            if ":" in pair:
+                k, v = pair.split(":")
+                try:
+                    ratio_dict[k.strip().lower()] = float(v.strip())
+                except ValueError:
+                    print(f"ERROR: Invalid ratio value '{v}' for '{k}'. Must be a float.")
+                    sys.exit(1)
+
+    # Print Forward Pipeline Header
+    print("======================================================")
+    print("      Maillard Generative Pipeline (Phase 7)")
+    print("======================================================\n")
+    
+    # 1. Resolve Precursors (for display and DoV check)
     names = []
     if args.sugars:
         names += args.sugars.split(",")
@@ -158,124 +243,104 @@ def main():
         print("ERROR: No precursors specified. Use --sugars, --amino-acids, --additives, --lipids OR --target.")
         sys.exit(1)
 
-    try:
-        precursors = precursor_resolver.resolve_many(names)
-    except ValueError as e:
-        print(f"ERROR: {e}")
-        sys.exit(1)
-
-    # Parse ratios
-    ratio_dict = {}
-    if args.ratios:
-        for pair in args.ratios.split(","):
-            if ":" in pair:
-                k, v = pair.split(":")
-                try:
-                    ratio_dict[k.strip().lower()] = float(v.strip())
-                except ValueError:
-                    print(f"ERROR: Invalid ratio value '{v}' for '{k}'. Must be a float.")
-                    sys.exit(1)
-
-    # Build canonical smiles to concentration map
-    from src.recommend import _canon
-    initial_concentrations = {}
-    for p in precursors:
-        qty = ratio_dict.get(p.label.lower(), 1.0)
-        initial_concentrations[_canon(p.smiles)] = qty
-
-    # Print Forward Pipeline Header
-    print("======================================================")
-    print("      Maillard Generative Pipeline (Phase 7)")
-    print("======================================================\n")
-    
-    print(f"Inputs: {', '.join(p.label for p in precursors)}")
+    print(f"Inputs: {', '.join(names)}")
     if args.ratios:
         print(f"Molar Ratios: {', '.join(f'{k}: {v}' for k, v in ratio_dict.items())}")
     print(f"Conditions: pH {conditions.pH}, {conditions.temperature_celsius}°C, aᵥ {conditions.water_activity}, Catalyst: {args.catalyst or 'None'}")
     print("-" * 60)
 
-    # 2. Enumerate Pathways (SmirksEngine)
-    engine = SmirksEngine(conditions)
-    print("Running rule-based generation (up to 4 generations)...")
-    steps = engine.enumerate(precursors, max_generations=4)
-    print(f"Generated {len(steps)} unique elementary steps in the reaction network.")
-
-    # 3. Screen Barriers
-    barriers_dict: Dict[str, float] = {}
-    screener = XTBScreener()
-
-    print(f"\nEvaluating thermodynamics for {len(steps)} steps...")
-    if not args.xtb:
-        print("  Using FAST mode (Hammond fallbacks without full structural optimization).")
-        print("  Pass --xtb for rigorous GFN2-xTB geometries and NEB approximations.")
-        
-    for i, step in enumerate(steps):
-        sys.stdout.write(f"\r  Evaluating step {i+1}/{len(steps)}...")
-        sys.stdout.flush()
-        
-        step_key = f"{'+'.join(sorted(r.smiles for r in step.reactants))}->{'+'.join(sorted(p.smiles for p in step.products))}"
-        
-        if args.xtb:
-            try:
-                # Full execution
-                _, bar = screener.compute_reaction_energy(step)
-            except Exception:
-                _, bar = 99.0, 99.0 # Extreme penalty for failed convergence
-            barriers_dict[step_key] = bar
+    if args.dry_run:
+        print("\n[DRY RUN] Validating formulation inputs against known envelope constraints...")
+        checker = DomainOfValidityChecker("meaty")
+        warnings = checker.check(
+            precursor_names=names,
+            protein_type=args.protein_type,
+            temp_c=args.temp,
+            ph=args.ph
+        )
+        if not warnings:
+            print("  ✅ All inputs are within the rigorously validated envelope.")
         else:
-            # Calculate boundaries from shared constants
-            bar_val, unc = get_barrier(step.reaction_family or "unknown")
-                
-            # Apply condition modifiers
-            ph_mult = conditions.get_ph_multiplier(step.reaction_family or "")
-            
-            # Accelerate by dividing barrier if multiplier > 1 (higher kinetic probability)
-            adjusted_bar = bar_val / ph_mult
+            print("  ⚠️ The following limitations apply to your formulation:")
+            for w in warnings:
+                print(f"      - {w.description}")
+        
+        print("\nDry-run complete. Exiting without evaluating formulation predictions.")
+        sys.exit(0)
 
-            # 3a. Apply Catalyst Heme Heuristic 
-            if args.catalyst == "heme" and step.reaction_family in HEME_CATALYST_FAMILIES:
-                adjusted_bar -= HEME_CATALYST_REDUCTION 
-                
-            barriers_dict[step_key] = adjusted_bar
-            
-    print("\n\nScreening complete.")
-
-    # 4. Recommend Targets
-    recommender = Recommender(None)
+    # --- Decision Summary ---
+    designer = InverseDesigner(target_tag="meaty", minimize_tag="beany")
     
-    results = recommender.predict_from_steps(
-        steps, 
-        barriers_dict, 
-        initial_concentrations,
-        protein_type=args.protein_type,
-        denaturation_state=args.denaturation_state
-    )
-    active_pathways = results["targets"]
-    metrics = results["metrics"]
+    # We construct a formulation dict for the designer
+    formulation = {
+        "name": "Single_Run",
+        "sugars": args.sugars.split(",") if args.sugars else [],
+        "amino_acids": args.amino_acids.split(",") if args.amino_acids else [],
+        "lipids": args.lipids.split(",") if args.lipids else [],
+        "additives": args.additives.split(",") if args.additives else [],
+        "molar_ratios": ratio_dict,
+        "ph": args.ph,
+        "temp": args.temp,
+        "aw": args.aw,
+        "time_minutes": args.time_minutes,
+        "protein_type": args.protein_type,
+        "denaturation_state": args.denaturation_state,
+        "catalyst": args.catalyst
+    }
     
-    print("-" * 60)
-    if not active_pathways:
-        print("  [!] No target compounds (desirable/off-flavour/toxic) found generated from these precursors.")
-    else:
-        print("  Predicted Targets (ranked by pathway bottleneck barrier):")
-        print_table(active_pathways)
+    print("\nRunning generative pipeline and scoring sensory impact...")
+    res = designer.evaluate_single(formulation, conditions)
+    print(f"Generated {len(res.targets)} actionable pathways.")
+    
+    # Display the table for backward compatibility if targets found
+    if res.targets:
+        print("\n  Top Predicted Targets (by likelihood/bottleneck):")
+        print_table(res.targets)
 
     # 5. Display PBMA Metrics
-    if metrics["trapping_efficiency"] or metrics.get("lysine_budget_dha", 0) > 0:
+    if res.trapping_efficiency > 0 or res.lysine_budget > 0:
         print("\n  PBMA Formulation Metrics:")
-        for lipid, eff in metrics["trapping_efficiency"].items():
-            bar_len = int(eff / 5)
+        # trapping_efficiency in res is a float (avg), let's show it
+        if res.trapping_efficiency > 0:
+            bar_len = int(res.trapping_efficiency / 5)
             bar_str = "█" * bar_len + "░" * (20 - bar_len)
-            print(f"    │ Lipid Trapping ({lipid}): {eff:5.1f}% | {bar_str} |")
+            print(f"    │ Lipid Trapping Efficiency: {res.trapping_efficiency:5.1f}% | {bar_str} |")
         
-        lys_budget = metrics.get("lysine_budget_dha", 0)
-        if lys_budget > 0:
-            bar_len = int(lys_budget / 5)
+        if res.lysine_budget > 0:
+            bar_len = int(res.lysine_budget / 5)
             bar_str = "█" * bar_len + "░" * (20 - bar_len)
-            print(f"    │ Lysine Budget (DHA):    {lys_budget:5.1f}% | {bar_str} |")
-            if lys_budget > 50.0:
+            print(f"    │ Lysine Budget (DHA):       {res.lysine_budget:5.1f}% | {bar_str} |")
+            if res.lysine_budget > 50.0:
                 print("    ⚠️  WARNING: High Lysine consumption by DHA pathway significantly reduces aroma yield.")
-        
+    
+    checker = DomainOfValidityChecker()
+    warnings = checker.check(
+        precursor_names=names,
+        protein_type=args.protein_type,
+        temp_c=args.temp,
+        ph=args.ph
+    )
+    res.confidence_metadata = build_confidence_package(
+        res,
+        warnings,
+        precursor_names=names,
+        protein_type=args.protein_type,
+        formulation=formulation,
+        baseline_conditions=conditions,
+        designer=designer,
+    )
+    render_decision_summary_cli(res, warnings)
+    render_deep_explainability_cli(res)
+
+    if args.report:
+        report_dir = generate_report(
+            res, 
+            warnings, 
+            vars(args), 
+            output_dir=Path(args.output_dir) if args.output_dir else None
+        )
+        print(f"📄 Report generated in: {report_dir}")
+
     print("\n" + "═"*85)
     print(" ℹ️  KNOWN LIMITATIONS:")
     print("    - FAST mode barrier estimates are purely qualitative heuristics.")

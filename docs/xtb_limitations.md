@@ -21,7 +21,7 @@ Amino acids exist as zwitterions (NH3+ / COO-) at typical cooking pH levels (5-8
 The decomposition of Serine and Cysteine into Dehydroalanine (DHA) is a key competitive pathway.
 * **Limitation:** The barrier for breaking the C-O or C-S bond concurrently with the C-H bond in a β-elimination can be systematically under- or overestimated depending on the leaving group parametrised in GFN2-xTB.
 * **Impact:** Energetics may be off by 5–15 kcal/mol, throwing off the stoichiometric competition ratio.
-* **Mitigation:** DHA elimination barriers (todo: 3.2f) have been explicitly flagged for Tier 2 Skala refinement.
+* **Mitigation:** DHA elimination barriers have been explicitly flagged for Tier 2 Skala refinement.
 
 ## 4. Spin-State Crossings (Sulfur Radicals)
 Dimethyl disulfide/trisulfide formation involves radical recombination.

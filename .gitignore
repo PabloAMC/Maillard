@@ -43,3 +43,6 @@ manual_test_qcg/
 *.yaml
 !data/**/*.yml
 !data/**/*.yaml
+
+# Test Reports
+reports/

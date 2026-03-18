@@ -141,7 +141,7 @@ compounds:
 
   - name: "Bis(2-methyl-3-furyl) disulfide"
     cas: "28588-75-2"
-    smiles: "Cc1occc1SSc1ccoc1C"
+    smiles: "Cc1cc(SSc2ccoc2C)co1"
     inchi: "InChI=1S/C10H10O2S2/c1-7-9(3-5-11-7)13-14-10-4-6-12-8(10)2/h3-6H,1-2H3"
     precursor: "MFT oxidation / radical recombination"
     pathway: "C — S-Maillard: MFT dimerisation"
