@@ -21,9 +21,18 @@ These documents capture supporting literature, planning notes, and external anal
 
 - [../EXTERNAL_MATRIX_BENCHMARK_UNLOCK_REPORT.md](../EXTERNAL_MATRIX_BENCHMARK_UNLOCK_REPORT.md)
 - [../P3_ALT_PROTEIN_COVERAGE_PLAN.md](../P3_ALT_PROTEIN_COVERAGE_PLAN.md)
+- [../slr_benchmark_evaluation.md](../slr_benchmark_evaluation.md)
+- [../../data/lit/benchmark_intake_registry.json](../../data/lit/benchmark_intake_registry.json)
+- [../reference/SCIENTIFIC_REFERENCE.md](../reference/SCIENTIFIC_REFERENCE.md)
+- [../../data/lit/process_state_calibrations.json](../../data/lit/process_state_calibrations.json)
+- [../../data/lit/safety_reference_payloads.json](../../data/lit/safety_reference_payloads.json)
 
 ## Use Cases
 
+- [../use_cases/README.md](../use_cases/README.md)
+- [../use_cases/pea_matrix_meaty_benchmark.md](../use_cases/pea_matrix_meaty_benchmark.md)
+- [../use_cases/soy_matrix_meaty_benchmark.md](../use_cases/soy_matrix_meaty_benchmark.md)
+- [../use_cases/BENCHMARK_INTAKE_CHECKLIST.md](../use_cases/BENCHMARK_INTAKE_CHECKLIST.md)
 - [../use_cases/pea_protein_report.md](../use_cases/pea_protein_report.md)
 - [../use_cases/roasted_nutty_report.md](../use_cases/roasted_nutty_report.md)
 - [../use_cases/toxicity_decoupling_report.md](../use_cases/toxicity_decoupling_report.md)

@@ -223,6 +223,6 @@ The repository is designed to tell you not only what it predicts, but also when 
 If you need to dig deeper into the science, validation mechanics, or architecture:
 
 - **[docs/README.md](docs/README.md)** - The main index for all deep-dive reference and research documentation.
-- **[docs/VALIDATION_DEEP_DIVE.md](docs/VALIDATION_DEEP_DIVE.md)** - Detailed explanation of what counts as proof, what remains directional, and how to interpret the validation figures.
 - **[docs/guides/SCIENTIFIC_RELIABILITY.md](docs/guides/SCIENTIFIC_RELIABILITY.md)** - Detailed breakdown of matrix predictability caps.
 - **[docs/VALIDATION_GUIDE.md](docs/VALIDATION_GUIDE.md)** - Our strict validation methodology.
+- **[docs/use_cases/README.md](docs/use_cases/README.md)** - Operational reports and the current pea/soy meaty benchmark candidate studies.

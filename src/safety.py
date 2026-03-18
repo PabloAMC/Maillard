@@ -9,9 +9,40 @@ Reference:
 - Stadler et al. 2004 (Asparagine involvement)
 """
 
+import json
 import math
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Dict, List, Tuple, Optional
+
+
+ROOT = Path(__file__).resolve().parents[1]
+SAFETY_REFERENCE_PAYLOAD_PATH = ROOT / "data" / "lit" / "safety_reference_payloads.json"
+
+
+def _load_safety_reference_payloads() -> dict:
+    with open(SAFETY_REFERENCE_PAYLOAD_PATH, "r", encoding="utf-8") as handle:
+        return json.load(handle)
+
+
+SAFETY_REFERENCE_PAYLOADS = _load_safety_reference_payloads()
+
+
+def get_safety_reference_payload(reference_id: str = "squeo_2023_pbpi_acrylamide") -> Optional[dict]:
+    for entry in SAFETY_REFERENCE_PAYLOADS.get("entries", []):
+        if str(entry.get("id", "")) == reference_id:
+            return entry
+    return None
+
+
+def get_safety_reference_range(matrix_family: str, reference_id: str = "squeo_2023_pbpi_acrylamide") -> Optional[dict]:
+    payload = get_safety_reference_payload(reference_id)
+    if payload is None:
+        return None
+    for item in payload.get("matrix_reference_ranges", []):
+        if str(item.get("matrix_family", "")) == matrix_family:
+            return item
+    return None
 
 @dataclass
 class SafetyResult:
