@@ -23,6 +23,8 @@ test_failures.log
 minimal.yaml
 test_mech.yaml
 *.png
+!docs/assets/validation_overview.png
+!results/validation/validation_overview.png
 *.csv
 *.log
 *.hypothesis/
