@@ -93,11 +93,11 @@ Current in-repo validation summary:
 
 In practice, this means the software already reproduces a narrow but real set of literature systems closely enough to support quantitative screening inside that envelope.
 
-The main validation figure now focuses only on the two panels that matter most for first-pass trust: parity against literature and benchmark-level quantitative error.
+The image below is a versioned snapshot of the current first-pass trust surface for GitHub readers. The authoritative validation outputs are still generated locally with `./scripts/docker_maillard.sh validation-figures`.
 
-![Validation Overview](results/validation/validation_overview.png)
+![Validation Overview](docs/assets/validation_overview.png)
 
-If you need the full boundary conditions, benchmark-by-benchmark status, or caveats beyond this first-pass view, use the generated validation documents rather than a second summary graphic.
+If you need the full boundary conditions, benchmark-by-benchmark status, or caveats beyond this first-pass view, use the generated validation documents together with the versioned snapshot above.
 
 How to interpret trust:
 
@@ -229,6 +229,16 @@ Useful flags in this pipeline:
 Every saved bundle now includes provenance metadata: generating command, branch, commit, dirty-state flag, input fingerprint, and the key scientific-reference files needed to interpret the result honestly.
 
 ### 2b. Compare named formulations when the question is comparative
+
+## Reference
+
+The repository includes a compact set of human-focused reference documents under `docs/reference/`. These are short, reviewer-friendly files you should consult when running artifacts or evaluating claims.
+
+- [docs/reference/COMMAND_REFERENCE.md](docs/reference/COMMAND_REFERENCE.md): Command and workflow reference (Docker entrypoints, recommended scripts, validation and campaign commands).
+- [docs/reference/SCIENTIFIC_REFERENCE.md](docs/reference/SCIENTIFIC_REFERENCE.md): Canonical scientific reference and numeric anchors (validated articles, pathway map, and operational numbers used by the codebase).
+- [docs/reference/PROJECT_STRUCTURE.md](docs/reference/PROJECT_STRUCTURE.md): Concise project layout and pointers to key modules, data folders, and generated-artifact locations.
+
+Consult these files for quick orientation before running the main validation or prediction workflows.
 
 ```bash
 python scripts/compare_formulations.py \
