@@ -20,6 +20,10 @@ For this repository to be genuinely state of the art, it must simultaneously pro
 - [x] Add a command reference and a project-structure reference.
 - [x] Add a reproducible validation-figure artifact so reliability and limitations can be shown graphically.
 - [x] Group development and research notes behind explicit documentation indexes instead of leaving them as an unstructured reading path.
+- [x] Add a scientist-shareable reporting surface with explicit provenance, comparison, and campaign artifacts instead of relying on ad hoc terminal context.
+- [x] Align architecture-facing docs with the actual validated envelope so public docs do not blur current support and future ambition.
+- [x] Write the first review-ready internal protocol for the primary PPI/SPI ribose+cysteine benchmark gap.
+- [x] Remove the low-signal validated-envelope graphic from the root README and keep boundary details in the generated validation documents instead.
 
 ### Validation communication cleanup — 2026-03-18
 
@@ -57,7 +61,7 @@ For this repository to be genuinely state of the art, it must simultaneously pro
 - [ ] Matrix benchmarks are executable intake checks, not yet benchmark-facing target-ranking validations. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
 - [ ] Process-state calibration for accessibility, retention, and release is not yet benchmark-closed across real plant matrices; the SLR only upgrades pea denaturation/SH anchors, not the full PPI/SPI benchmark conditions. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
 - [ ] Benchmark breadth is narrow relative to the scientific space alternative-protein teams actually care about. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
-- [ ] There is still a gap between “validated model component” and “formulation operating system for scientists”, especially for experiment ingestion and campaign-scale comparison. (Dificultad: Alta — Modelo recomendado: Gemini 3 Flash)
+- [ ] There is still a gap between “validated model component” and “formulation operating system for scientists”, especially for experiment ingestion and external-team handoff on newly collected data. (Dificultad: Alta — Modelo recomendado: Gemini 3 Flash)
 
 ## Strategic Assessment
 
@@ -186,9 +190,9 @@ This is how the repo stops being a strong niche engine and becomes genuinely sta
 This is the difference between a strong model repo and a tool scientists keep using.
 
 - [ ] Add experiment-ingestion workflows so internal wet-lab data can be added as calibration/validation cases without bespoke code edits. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
-- [ ] Add standardized project/report templates for comparing candidate recipes, interventions, and benchmark deltas over time. (Dificultad: Media — Modelo recomendado: Gemini 3 Flash)
-- [ ] Add versioned result provenance so scientists can trace a recommendation to the exact benchmark contract, calibration state, and code revision. (Dificultad: Media — Modelo recomendado: Gemini 3 Pro)
-- [ ] Add batch campaign workflows for screening formulation sets and exporting ranked decisions with rationale. (Dificultad: Alta — Modelo recomendado: Gemini 3 Pro)
+- [x] Add standardized project/report templates for comparing candidate recipes, interventions, and benchmark deltas over time. (Dificultad: Media — Modelo recomendado: Gemini 3 Flash)
+- [x] Add versioned result provenance so scientists can trace a recommendation to the exact benchmark contract, calibration state, and code revision. (Dificultad: Media — Modelo recomendado: Gemini 3 Pro)
+- [x] Add batch campaign workflows for screening formulation sets and exporting ranked decisions with rationale. (Dificultad: Alta — Modelo recomendado: Gemini 3 Pro)
 - [ ] Add notebook- and report-friendly APIs for external scientific teams. (Dificultad: Baja — Modelo recomendado: GPT-5 mini)
 - [ ] Add explicit support for comparing model output against newly collected GC-MS or sensory panel data. (Dificultad: Alta — Modelo recomendado: Gemini 3 Pro)
 
@@ -208,7 +212,7 @@ This is the difference between a strong model repo and a tool scientists keep us
 1. [x] Recover full text for Nishimura & Abe (2024) and decide whether it can be promoted from soy-hydrolysate conditional calibration to an encoded literature anchor. Result: it can be promoted only to a qualitative intake anchor, not to an absolute benchmark or calibrated ppb reference. (Dificultad: Media — Modelo recomendado: GPT-5.4)
 2. [x] Encode Squeo 2023 as a formal safety-reference payload and expose its upper-bound acrylamide range in a code-consumable safety reference surface without pretending it is a kinetic benchmark. (Dificultad: Alta — Modelo recomendado: GPT-5.4)
 3. [x] Encode Asen 2022 and Malia 2025 as explicit pea process-state calibration payloads for `denaturation_state` and `cysteine_accessibility`. (Dificultad: Alta — Modelo recomendado: GPT-5.4)
-4. [ ] Design the first primary cross-benchmark experiment for PPI/SPI + ribose + cysteine because the SLR confirms the key meaty/off-flavour/time-series gaps cannot be closed with more literature search; use the intake checklist plus the minimum primary experiment spec as the starting contract. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
+4. [x] Design the first primary cross-benchmark experiment for PPI/SPI + ribose + cysteine because the SLR confirms the key meaty/off-flavour/time-series gaps cannot be closed with more literature search; use the intake checklist plus the minimum primary experiment spec as the starting contract. Result: the repo now includes a review-ready protocol and a machine-readable contract for the primary PPI/SPI benchmark gap. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
 5. [ ] Build the ingestion path for new internal calibration and validation experiments. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
 
 ## Review
@@ -223,6 +227,8 @@ This is the difference between a strong model repo and a tool scientists keep us
 - P1 completion status on 2026-03-17: the repo now emits matrix assertions, evidence audits, family-readiness summaries, and branch-vs-main deltas in Docker. Pea and soy each have an off-flavour anchor and a meaty candidate, but external meaty-positive assessment remains blocked pending wet-lab data.
 - SLR update on 2026-03-18: the literature search closes the planning uncertainty. Nishimura 2024 is the only soy-protein matrix chemistry candidate for MFT/FFT, Squeo 2023 is the only benchmark-eligible acrylamide endpoint anchor, Asen 2022 and Malia 2025 are the best open pea process-state calibration anchors, and the core PPI/SPI meaty/off-flavour/time-series benchmark gaps are structural and require primary data.
 - Nishimura full-text update on 2026-03-18: the paper is now resolved as a qualitative soy-hydrolysate intake anchor. It confirms the soy matrix chemistry workflow and MRP conditions, but its volatile outputs are relative peak-area signals rather than absolute benchmark-ready concentrations.
+- README polish update on 2026-03-18: the root README now keeps a single high-signal validation figure and pushes deeper boundary details into the generated validation documents instead of relying on a second summary graphic.
+- Shareability update on 2026-03-18: run, comparison, and campaign artifacts now carry explicit provenance, the public docs now distinguish current validated scope from future architecture more clearly, and the primary PPI/SPI benchmark gap now has a review-ready protocol plus machine-readable contract.
 
 ## Model guidance (resumen)
 

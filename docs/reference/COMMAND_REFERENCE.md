@@ -49,6 +49,7 @@ This reference focuses on the commands a scientist or reviewer is most likely to
 | `./scripts/docker_maillard.sh matrix-readiness` | Family-level readiness for matrix promotion |
 | `./scripts/docker_maillard.sh matrix-branch-deltas main` | Compare current branch matrix outputs against main |
 | `./scripts/docker_maillard.sh coverage-gaps` | Coverage-gap report for P3-style expansion work |
+| `./scripts/docker_maillard.sh campaign data/campaigns/shareable_meaty_screen.yml` | Generate a review-ready campaign package with run-level and campaign-level artifacts |
 
 ## CLI Workflows Outside Docker
 
@@ -58,6 +59,8 @@ This reference focuses on the commands a scientist or reviewer is most likely to
 | `python scripts/run_pipeline.py --list-tags` | List sensory/optimization tags |
 | `python scripts/run_pipeline.py ...` | Run one forward prediction |
 | `python scripts/optimize_formulation.py ...` | Search a formulation space |
+| `python scripts/compare_formulations.py --names ...` | Generate a side-by-side comparison artifact |
+| `python scripts/run_campaign.py --spec data/campaigns/shareable_meaty_screen.yml` | Generate a shareable multi-run campaign package |
 | `python scripts/compare_sim_to_lit.py` | Compare the framework against literature benchmarks |
 
 ## Recommended Review Sequence

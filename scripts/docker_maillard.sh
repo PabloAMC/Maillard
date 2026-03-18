@@ -52,6 +52,8 @@ Commands:
                Generate results/validation/validated_envelope.{md,json}.
   explain-formulation NAME [TARGET_TAG] [MINIMIZE_TAG]
                Generate a formulation explainability artifact in results/validation.
+  campaign SPEC [OUTPUT_DIR]
+               Run a shareable campaign spec and generate campaign artifacts.
   index        Generate results/validation/benchmark_index.{md,json}.
   summary      Generate results/validation/benchmark_summary.{md,json}.
   status       Show container and environment status.
@@ -293,6 +295,18 @@ case "$cmd" in
       exit 1
     fi
     run_in_env "python scripts/explain_formulation.py --name '$1' --target-tag '${2:-meaty}' --minimize-tag '${3:-beany}'"
+    ;;
+  campaign)
+    shift
+    if [ "$#" -lt 1 ]; then
+      echo "Usage: ./scripts/docker_maillard.sh campaign SPEC [OUTPUT_DIR]" >&2
+      exit 1
+    fi
+    if [ "$#" -ge 2 ]; then
+      run_in_env "python scripts/run_campaign.py --spec '$1' --output-dir '$2'"
+    else
+      run_in_env "python scripts/run_campaign.py --spec '$1'"
+    fi
     ;;
   index)
     run_in_env "python scripts/generate_benchmark_index.py"

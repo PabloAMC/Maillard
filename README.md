@@ -21,14 +21,21 @@ Use Maillard when you want to answer questions like these before running a wet-l
 
 The library is most useful as a formulation-screening and prioritization system. It is not a replacement for final experimental confirmation.
 
+## What You Can Share Today
+
+The repository now supports three shareable artifact levels for external scientific review:
+
+- a single-run report with Markdown, JSON, and provenance
+- a side-by-side comparison report for a small named set of formulations
+- a campaign package with per-run reports, a leaderboard, and campaign-level provenance
+
+That does not make every result equally validated. It does mean you can share outputs without losing the command context, branch/commit state, or the scientific files that define the current trust surface.
+
 ---
 
 ## Does It Work?
 
-Yes, within a clearly defined envelope. The repository now keeps two trust surfaces separate:
-
-- a compact validation overview for the strongest quantitative benchmark evidence
-- a validated-envelope figure that shows where that evidence boundary stops
+Yes, within a clearly defined envelope. The repository exposes a compact trust surface centered on the strongest quantitative benchmark evidence.
 
 Current in-repo validation summary:
 
@@ -43,9 +50,7 @@ The main validation figure now focuses only on the two panels that matter most f
 
 ![Validation Overview](results/validation/validation_overview.png)
 
-The benchmark-specific figure below shows what that looks like for an individual literature case: measured versus predicted concentrations on parity axes, the absolute ppb values per compound, and the benchmark summary used to assign status.
-
-![Farmer Benchmark Comparison](results/validation/cys_glucose_150C_Farmer1999_comparison.png)
+If you need the full boundary conditions, benchmark-by-benchmark status, or caveats beyond this first-pass view, use the generated validation documents rather than a second summary graphic.
 
 How to interpret trust:
 
@@ -57,11 +62,11 @@ How to interpret trust:
 
 ## Trust Levels
 
-| System Type                                        | Trust Level        | What You Can Safely Use It For                                                                        |
-| -------------------------------------------------- | ------------------ | ----------------------------------------------------------------------------------------------------- |
-| **Free precursors**                          | **High**     | Quantitative ranking, concentration-scale comparison, candidate screening, safety-aware optimization. |
-| **Pea / soy matrices**                       | **Moderate** | Directional comparison, off-flavour triage, hypothesis generation, deciding what to test next.        |
-| **Intact protein / extrusion-heavy systems** | **Low**      | Exploratory use only; treat outputs as hypotheses until benchmarked.                                  |
+| System Type | Trust Level | What You Can Safely Use It For |
+| --- | --- | --- |
+| **Free precursors** | **High** | Quantitative ranking, concentration-scale comparison, candidate screening, safety-aware optimization. |
+| **Pea / soy matrices** | **Moderate** | Directional comparison, off-flavour triage, hypothesis generation, deciding what to test next. |
+| **Intact protein / extrusion-heavy systems** | **Low** | Exploratory use only; treat outputs as hypotheses until benchmarked. |
 
 Important caveat: matrix trust is lower because accessibility, retention, and pH-dependent headspace effects are not yet benchmark-closed across real plant matrices.
 
@@ -118,7 +123,7 @@ Recommended setup: Docker for reproducibility. Local Python/conda setup is also 
 ./scripts/docker_maillard.sh validation-figures
 ```
 
-This gives you the two artifacts that should be read before interpreting predictions:
+This gives you the core validation artifacts that should be read before interpreting predictions:
 
 - [results/validation/benchmark_summary.md](results/validation/benchmark_summary.md) for the benchmark-by-benchmark contract
 - [results/validation/validation_overview.md](results/validation/validation_overview.md) for the repository-level trust snapshot
@@ -126,13 +131,15 @@ This gives you the two artifacts that should be read before interpreting predict
 
 ## What To Run For Each Goal
 
-| Goal                                              | Command                                                                             | What you get                                                                            |
-| :------------------------------------------------ | :---------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------- |
-| Check whether your use case is benchmark-backed   | `./scripts/docker_maillard.sh validation-figures`                                 | Overview PNGs plus Markdown/JSON summaries of trust and envelope boundaries.            |
-| Inspect benchmark-by-benchmark status             | `./scripts/docker_maillard.sh summary`                                            | The current benchmark table with status, coverage, ratios, and notes.                   |
-| Generate a prediction for a candidate formulation | `python scripts/run_pipeline.py ... --report`                                     | Compound predictions, decision summary, confidence warnings, and a saved report bundle. |
-| Optimize a formulation around a target profile    | `python scripts/optimize_formulation.py ... --report`                             | The best trial, predicted tradeoffs, and an exportable report.                          |
-| Inspect one literature benchmark directly         | `./scripts/docker_maillard.sh run python scripts/compare_sim_to_lit.py --lit ...` | A benchmark card with parity plot, absolute yields, and benchmark summary.              |
+| Goal | Command | What you get |
+| --- | --- | --- |
+| Check whether your use case is benchmark-backed | `./scripts/docker_maillard.sh validation-figures` | Overview PNGs plus Markdown/JSON summaries of trust and envelope boundaries. |
+| Inspect benchmark-by-benchmark status | `./scripts/docker_maillard.sh summary` | The current benchmark table with status, coverage, ratios, and notes. |
+| Generate a prediction for a candidate formulation | `python scripts/run_pipeline.py ... --report` | Compound predictions, decision summary, confidence warnings, and a saved report bundle. |
+| Optimize a formulation around a target profile | `python scripts/optimize_formulation.py ... --report` | The best trial, predicted tradeoffs, and an exportable report. |
+| Compare a short list of named formulations | `python scripts/compare_formulations.py --names ... --output-dir ...` | A side-by-side comparison bundle with confidence and provenance. |
+| Build a scientist-shareable campaign package | `./scripts/docker_maillard.sh campaign data/campaigns/shareable_meaty_screen.yml` | Run-level bundles plus campaign-level Markdown/JSON artifacts. |
+| Inspect one literature benchmark directly | `./scripts/docker_maillard.sh run python scripts/compare_sim_to_lit.py --lit ...` | A benchmark card with parity plot, absolute yields, and benchmark summary. |
 
 ### 2. Run a forward prediction
 
@@ -166,6 +173,38 @@ Useful flags in this pipeline:
 - `--aw` and `--time-minutes` to change process severity
 - `--protein-type` and `--denaturation-state` to express matrix assumptions
 - `--report` to persist a scientist-facing Markdown and JSON bundle
+
+Every saved bundle now includes provenance metadata: generating command, branch, commit, dirty-state flag, input fingerprint, and the key scientific-reference files needed to interpret the result honestly.
+
+### 2b. Compare named formulations when the question is comparative
+
+```bash
+python scripts/compare_formulations.py \
+  --names "Cysteine Enrichment (Basic),Premium Meaty Mix,Soy-Specific Masking" \
+  --ph 5.5 \
+  --temp 105 \
+  --target-tag meaty \
+  --minimize-tag beany \
+  --output-dir results/comparison_meaty
+```
+
+Use this when you want a side-by-side scientific review artifact instead of reading one run at a time.
+
+### 2c. Build a campaign package for external review
+
+```bash
+./scripts/docker_maillard.sh campaign \
+  data/campaigns/shareable_meaty_screen.yml \
+  results/share/campaign_meaty
+```
+
+This produces:
+
+- one report bundle per run in `runs/`
+- `comparison.md` and `comparison.json`
+- `campaign.md` and `campaign.json`
+
+Use this when you need to hand results to scientists or reviewers and want the package itself to carry the review context.
 
 ### 3. Optimize a formulation instead of guessing by hand
 
@@ -223,6 +262,8 @@ The repository is designed to tell you not only what it predicts, but also when 
 If you need to dig deeper into the science, validation mechanics, or architecture:
 
 - **[docs/README.md](docs/README.md)** - The main index for all deep-dive reference and research documentation.
+- **[docs/guides/SHARING_RESULTS.md](docs/guides/SHARING_RESULTS.md)** - How to create shareable single-run, comparison, and campaign artifacts.
 - **[docs/guides/SCIENTIFIC_RELIABILITY.md](docs/guides/SCIENTIFIC_RELIABILITY.md)** - Detailed breakdown of matrix predictability caps.
 - **[docs/VALIDATION_GUIDE.md](docs/VALIDATION_GUIDE.md)** - Our strict validation methodology.
+- **[docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md](docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md)** - The benchmark-ready internal protocol for the primary pea/soy matrix experiment.
 - **[docs/use_cases/README.md](docs/use_cases/README.md)** - Operational reports and the current pea/soy meaty benchmark candidate studies.

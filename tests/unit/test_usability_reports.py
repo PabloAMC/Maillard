@@ -2,7 +2,7 @@ from pathlib import Path
 
 from src.conditions import ReactionConditions
 from src.inverse_design import FormulationResult
-from src.reporting import generate_report
+from src.reporting import generate_comparison_report, generate_report
 from src.usability_reports import (
     DomainWarning,
     assess_formulation_confidence,
@@ -208,6 +208,26 @@ def test_generate_report_includes_confidence_metadata(tmp_path: Path):
     assert "Sensitivity Summary" in markdown_text
     assert "Projection Calibration" in markdown_text
     assert "projection_metadata" in json_text
+    assert '"provenance"' in json_text
+    assert "## 5. Provenance" in markdown_text
+
+
+def test_generate_comparison_report_includes_provenance(tmp_path: Path):
+    first = FormulationResult(name="A", target_score=5.0, off_flavour_risk=1.0, safety_score=0.3)
+    second = FormulationResult(name="B", target_score=3.0, off_flavour_risk=0.5, safety_score=0.1)
+
+    out_dir = generate_comparison_report(
+        [first, second],
+        [{"name": "A", "ph": 5.5, "temp": 105.0}, {"name": "B", "ph": 5.8, "temp": 120.0}],
+        output_dir=tmp_path / "comparison",
+        campaign_metadata={"name": "shareable-screen"},
+    )
+    json_text = (out_dir / "comparison.json").read_text()
+    markdown_text = (out_dir / "comparison.md").read_text()
+
+    assert '"provenance"' in json_text
+    assert '"campaign"' in json_text
+    assert "## 5. Provenance" in markdown_text
 
 
 def test_build_confidence_package_adds_compound_aggregate_and_sensitivity_sections():

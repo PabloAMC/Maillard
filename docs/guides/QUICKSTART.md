@@ -29,11 +29,17 @@ Then open:
 
 ```bash
 python scripts/run_pipeline.py \
-  --sugars ribose:0.5 \
-  --amino-acids cysteine:0.2,leucine:0.1 \
+  --sugars ribose \
+  --amino-acids cysteine,leucine \
+  --ratios ribose:0.5,cysteine:0.2,leucine:0.1 \
   --ph 5.5 \
   --temp 105 \
-  --protein-type pea_iso
+  --time-minutes 45 \
+  --protein-type pea_iso \
+  --target meaty \
+  --minimize beany \
+  --report \
+  --output-dir results/quickstart_run
 ```
 
 What you should look for:
@@ -41,6 +47,7 @@ What you should look for:
 - `predicted_ppb`: observable concentration estimate
 - `confidence_metadata`: how strongly the result is benchmark-backed
 - `projection_metadata`: matrix/headspace corrections and calibration provenance
+- `provenance`: command, git revision, and scientific reference surface used to generate the artifact
 - any validated-envelope warnings that say the run is speculative
 
 ## If You Only Want To Check Scientific Trust
@@ -75,6 +82,20 @@ These commands tell you three different things:
 - what matrix data exists
 - whether the current matrix benchmarks pass their own ranking assertions
 - what still blocks external scientific assessment
+
+## If You Need A Shareable Package
+
+For one formulation, use `--report` as shown above.
+
+For a shareable multi-run campaign, use:
+
+```bash
+./scripts/docker_maillard.sh campaign \
+  data/campaigns/shareable_meaty_screen.yml \
+  results/quickstart_campaign
+```
+
+This creates run-level reports plus campaign-level Markdown and JSON summaries.
 
 ## Before You Trust A Result
 
