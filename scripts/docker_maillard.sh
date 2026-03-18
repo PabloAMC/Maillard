@@ -45,7 +45,7 @@ Commands:
   coverage-gaps
                Generate results/validation/benchmark_coverage_gaps.{md,json}.
   validation-figures
-               Generate results/validation/validation_overview.{md,json,png}.
+               Generate results/validation/validation_overview.{md,json,png} and validated_envelope.{md,json,png}.
   thermo-gating
                Generate results/validation/thermodynamic_gating_audit.{md,json}.
   validated-envelope
@@ -83,6 +83,7 @@ scientific_lane() {
   run_in_env "python scripts/generate_matrix_benchmark_evidence.py"
   run_in_env "python scripts/generate_matrix_promotion_readiness.py"
   run_in_env "python scripts/generate_validation_figures.py"
+  run_in_env "python scripts/generate_validated_envelope_report.py"
   run_in_env "python scripts/generate_thermodynamic_gating_audit.py"
   scientific_fast_lane
 }
@@ -277,6 +278,7 @@ case "$cmd" in
     ;;
   validation-figures)
     run_in_env "python scripts/generate_validation_figures.py"
+    run_in_env "python scripts/generate_validated_envelope_report.py"
     ;;
   thermo-gating)
     run_in_env "python scripts/generate_thermodynamic_gating_audit.py"

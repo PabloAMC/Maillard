@@ -1,45 +1,24 @@
-# Documentation Map
+# Maillard Deep-Dive Documentation Index
 
-This repository now has a deliberate reading order. Choose the path that matches your role.
+If you are a scientist new to this repository, **please start with the root [../README.md](../README.md)**. 
 
-## If You Are A Scientist New To Maillard
+This directory contains the deeper technical, architectural, and scientific documentation for the framework. It is intended for those checking our math, extending the models, or debugging the core architecture.
 
-1. [guides/QUICKSTART.md](guides/QUICKSTART.md)
-2. [guides/SCIENTIFIC_RELIABILITY.md](guides/SCIENTIFIC_RELIABILITY.md)
-3. [reference/COMMAND_REFERENCE.md](reference/COMMAND_REFERENCE.md)
-4. [reference/PROJECT_STRUCTURE.md](reference/PROJECT_STRUCTURE.md)
+---
 
-## If You Need The Validation Contract
+## Validation & Scientific Limits
+- [guides/SCIENTIFIC_RELIABILITY.md](guides/SCIENTIFIC_RELIABILITY.md) - Explains trust boundaries for different matrices in detail.
+- [VALIDATION_GUIDE.md](VALIDATION_GUIDE.md) - Methodology for benchmarking primary literature against predictions.
+- [VALIDATION_DEEP_DIVE.md](VALIDATION_DEEP_DIVE.md) - Extensive notes on specific benchmark failures/successes.
 
-- [VALIDATION_GUIDE.md](VALIDATION_GUIDE.md)
-- [VALIDATION_DEEP_DIVE.md](VALIDATION_DEEP_DIVE.md)
-- [reference/COMMAND_REFERENCE.md](reference/COMMAND_REFERENCE.md)
+## Technical Architecture & Pathways
+- [architecture.md](architecture.md) - Core system architecture (Docker, Cantera, MACE/xTB).
+- [pathways.md](pathways.md) - Overview of the modeled chemical pathways.
+- [SMIRKS_SYSTEM.md](SMIRKS_SYSTEM.md) - How structural transformations are managed in code.
+- [xtb_limitations.md](xtb_limitations.md) - Specific physics constraints and workarounds regarding quantum calculations.
+- [reference/PROJECT_STRUCTURE.md](reference/PROJECT_STRUCTURE.md) - Codebase organization list.
+- [reference/COMMAND_REFERENCE.md](reference/COMMAND_REFERENCE.md) - Raw CLI options and developer commands.
 
-## If You Need Scientific Background
-
-- [architecture.md](architecture.md)
-- [pathways.md](pathways.md)
-- [SMIRKS_SYSTEM.md](SMIRKS_SYSTEM.md)
-- [xtb_limitations.md](xtb_limitations.md)
-
-## If You Want Research Notes And Literature Syntheses
-
-- [research/README.md](research/README.md)
-
-## If You Need Backlog, Lessons, Or Decision Logs
-
-- [development/README.md](development/README.md)
-
-## Recommended Core Validation Artifacts
-
-These are the fastest files to inspect after a Docker run:
-
-- [../results/validation/benchmark_summary.md](../results/validation/benchmark_summary.md)
-- [../results/validation/validated_envelope.md](../results/validation/validated_envelope.md)
-- [../results/validation/validation_overview.md](../results/validation/validation_overview.md)
-- [../results/validation/matrix_benchmark_assertions.md](../results/validation/matrix_benchmark_assertions.md)
-- [../results/validation/matrix_promotion_readiness.md](../results/validation/matrix_promotion_readiness.md)
-
-## Why This Structure Exists
-
-The repository contains both user-facing scientific workflows and deep research notes. The goal of this index is to keep those two layers separate so a new scientist can get oriented quickly without losing access to the deeper technical record.
+## Research & Developer Logs
+- [research/README.md](research/README.md) - Literature notes and biological syntheses.
+- [development/README.md](development/README.md) - Previous implementation attempts, the backlog, and decision logs.
