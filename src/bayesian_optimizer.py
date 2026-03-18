@@ -14,12 +14,13 @@ class FormulationOptimizer:
     Searches the continuous parameter space (concentrations, pH, temp) 
     to maximize the Pareto-ranked sensory outcome minus safety penalties.
     """
-    def __init__(self, target_tag: str, minimize_tag: str = "beany", risk_aversion: float = 1.0, protein_type: str = "free", denaturation_state: float = 0.5):
+    def __init__(self, target_tag: str, minimize_tag: str = "beany", risk_aversion: float = 1.0, protein_type: str = "free", denaturation_state: Optional[float] = None, seed: Optional[int] = None):
         self.target_tag = target_tag
         self.minimize_tag = minimize_tag
         self.risk_aversion = risk_aversion
         self.protein_type = protein_type
         self.denaturation_state = denaturation_state
+        self.seed = seed
         self.study = None
 
     def objective(self, trial: optuna.Trial, fixed_sugars: List[str], fixed_amino_acids: List[str], fixed_lipids: Optional[List[str]] = None) -> float:
@@ -161,7 +162,8 @@ class FormulationOptimizer:
         optuna.logging.set_verbosity(optuna.logging.WARNING)
         
         # Create a study maximizing the combined score
-        self.study = optuna.create_study(direction="maximize")
+        sampler = optuna.samplers.TPESampler(seed=self.seed) if self.seed is not None else None
+        self.study = optuna.create_study(direction="maximize", sampler=sampler)
         
         self.study.optimize(
             lambda trial: self.objective(trial, fixed_sugars, fixed_amino_acids, fixed_lipids), 

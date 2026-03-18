@@ -8,7 +8,13 @@ Converts matrix concentrations to predicted air-phase (headspace) concentrations
 import math
 import yaml
 from pathlib import Path
-from typing import Dict
+from typing import Dict, Optional, List
+
+from src.matrix_calibration_registry import (
+    determine_matrix_process_state,
+    get_matrix_calibration_record,
+)
+from src.matrix_correction import ProteinType, resolve_compound_matrix_retention, resolve_matrix_correction
 
 class HeadspaceModel:
     """
@@ -46,55 +52,228 @@ class HeadspaceModel:
         exponent = (dh / self.R) * (1.0 / temp_k - 1.0 / 298.15)
         return kaw_298 * math.exp(exponent)
 
-    def _get_kprot_for_compound(self, name: str) -> float:
+    def _extract_properties(self, smiles: str) -> Dict[str, float]:
+        """Estimated logP and MW using RDKit for binding characterization."""
+        from rdkit import Chem
+        from rdkit.Chem import Descriptors, Crippen
+        mol = Chem.MolFromSmiles(smiles)
+        if not mol:
+            return {"logP": 1.0, "MW": 100.0}
+        return {
+            "logP": Crippen.MolLogP(mol),
+            "MW": Descriptors.MolWt(mol)
+        }
+
+    def _get_kprot_for_compound(self, name: str, smiles: Optional[str] = None) -> float:
         """
         Calculates empirical protein binding constant (Kprot) for a volatile.
-        Based on generic plant protein binding affinities (e.g. Guichard 2002).
+        Phase 1: Partitioning Correction.
+        Uses a hydrophobicity-driven model (logP) + molecular weight scaling.
+        Kprot = alpha * logP + beta * MW
         """
+        if smiles:
+            props = self._extract_properties(smiles)
+            logp = props["logP"]
+            mw = props["MW"]
+            
+            # Hydrophobic binding (binding affinity increases with logP)
+            # Scaling factors estimated from Mcclements et al. (flavor-protein interactions)
+            kprot_hydrophobic = max(0, 15.0 * logp)
+            # Entropy/Size factor
+            kprot_size = 0.05 * mw
+            
+            return kprot_hydrophobic + kprot_size
+            
         n = name.lower()
+        # Fallback for named compounds without SMILES lookup
         if "sulfide" in n or "h2s" == n:
-            return 0.0      # Inorganic gases do not bind substantially
-        elif "thiol" in n or "methional" in n or "sulfur" in n:
-            return 2.0      # Small sulfur volatiles have low protein affinity
+            return 0.0      
+        elif "thiol" in n:
+            return 8.0      
+        elif "methional" in n:
+            return 2.0      
         elif "pyrazine" in n or "thiazole" in n:
-            return 5.0      # Heterocycles have moderate binding
+            return 12.0     
         elif "aldehyde" in n or "anal" in n or "fural" in n:
-            return 30.0     # Aliphatic/aromatic aldehydes bind strongly to plant proteins
-        elif "one" in n or "diacetyl" in n:
-            return 10.0     # Ketones bind moderately
+            return 45.0     # Carbonyl-amine covalent binding (Schiff)
         else:
-            return 5.0      # Default moderate binding
+            return 10.0
+
+    def _matrix_retention_fallback(
+        self,
+        protein_type: Optional[str],
+        fat_fraction: float,
+        protein_fraction: float,
+        denaturation_state: float,
+    ) -> float:
+        if fat_fraction > 0.0 or protein_fraction > 0.0 or not protein_type:
+            return 1.0
+
+        try:
+            p_type = ProteinType(protein_type)
+        except ValueError:
+            return 1.0
+
+        if p_type == ProteinType.FREE_AMINO_ACID:
+            return 1.0
+        return float(resolve_matrix_correction(p_type, denaturation_state).volatile_retention)
+
+    def get_matrix_ph_release_factor(
+        self,
+        name: str,
+        *,
+        protein_type: Optional[str],
+        pH: Optional[float],
+    ) -> float:
+        """
+        Empirical pH-dependent headspace release factor for plant matrices.
+
+        The current calibration is intentionally narrow:
+        - anchored to pH 6.0 so the existing Pratap-Singh matrix-only baselines stay stable
+        - only applied to pea/soy matrix types
+        - only applied to acid-sensitive lipid-derived off-flavour markers
+        - tuned so pH 4.5 vs 6.5 yields roughly the ~1.6x enhancement reported by
+          the Pouvreau pea-isolate benchmark family for aldehydes/furans
+        """
+        if pH is None or not protein_type:
+            return 1.0
+
+        try:
+            p_type = ProteinType(protein_type)
+        except ValueError:
+            return 1.0
+
+        if p_type not in {
+            ProteinType.PEA_ISOLATE,
+            ProteinType.PEA_CONCENTRATE,
+            ProteinType.SOY_ISOLATE,
+            ProteinType.SOY_CONCENTRATE,
+        }:
+            return 1.0
+
+        compound = name.lower()
+        acid_sensitive = any(token in compound for token in ["anal", "enal", "furan"])
+        if not acid_sensitive:
+            return 1.0
+
+        # Reference pH is the ambient plant-isolate baseline already used in the
+        # current executable matrix-only benchmarks.
+        centered_delta = 6.0 - float(pH)
+        factor = math.exp(0.235 * centered_delta)
+        return max(0.75, min(1.6, factor))
+
+    def get_matrix_benchmark_headspace_factor(
+        self,
+        name: str,
+        *,
+        protein_type: Optional[str],
+        pH: Optional[float],
+        temperature_celsius: float = 40.0,
+        time_minutes: float = 10.0,
+    ) -> float:
+        """
+        Empirical observable-release factor for the Pratap-Singh plant-matrix lane.
+
+        The matrix-only benchmark path combines:
+        - oxidation-load generation in src/lipid_oxidation.py
+        - pea-referenced marker yields in src/benchmark_validation.py
+        - this headspace observable factor, which carries the pea/soy release gap
+          from the Pratap-Singh ambient slurry family
+        - the narrower pH-dependent release modifier already validated against the
+          Pouvreau pea-isolate trend family
+
+        This keeps benchmark_validation focused on intake chemistry while making
+        the matrix-specific observable calibration explicit in the headspace layer.
+        """
+        if not protein_type:
+            return 1.0
+
+        try:
+            p_type = ProteinType(protein_type)
+        except ValueError:
+            return 1.0
+
+        process_state = determine_matrix_process_state(
+            temperature_celsius=float(temperature_celsius),
+            time_minutes=float(time_minutes),
+        )
+        record = get_matrix_calibration_record(
+            name,
+            protein_type=p_type.value,
+            process_state=process_state,
+        )
+        base_factor = float(record.observable_factor) if record is not None else 1.0
+        return base_factor * self.get_matrix_ph_release_factor(
+            name,
+            protein_type=protein_type,
+            pH=pH,
+        )
 
     def predict_headspace(self, 
                           matrix_concentrations: Dict[str, float], 
                           temp_c: float, 
                           fat_fraction: float = 0.0,
-                          protein_fraction: float = 0.0) -> Dict[str, float]:
+                          protein_fraction: float = 0.0,
+                          protein_type: Optional[str] = None,
+                          denaturation_state: float = 0.5,
+                          pH: Optional[float] = None) -> Dict[str, float]:
         """
         Predicts air-phase concentrations (ppm).
         
         Equation: C_air = C_total * Kaw_eff
         Kaw_eff = Kaw(T) / (1 + Kfat * phi_fat + Kprot * phi_prot)
+
+        If no explicit matrix fractions are provided, `protein_type` can supply
+        a conservative fallback retention calibrated from the matrix-correction
+        literature estimates already used elsewhere in the project.
+
+        `pH` is optional and currently only applies an empirical plant-matrix
+        release correction for acid-sensitive aldehydes/furans in pea/soy systems.
         """
         temp_k = temp_c + 273.15
         air_concs = {}
+        base_matrix_retention = self._matrix_retention_fallback(
+            protein_type,
+            fat_fraction,
+            protein_fraction,
+            denaturation_state,
+        )
         
         for name, c_total in matrix_concentrations.items():
             entry = self.data.get(name)
             kaw_base = self.get_kaw_at_temp(name, temp_k)
+            ph_release_factor = self.get_matrix_ph_release_factor(
+                name,
+                protein_type=protein_type,
+                pH=pH,
+            )
             
             if entry:
                 k_fat = entry.get("Kfat", 1.0)
                 k_prot = self._get_kprot_for_compound(name)
+                matrix_retention = base_matrix_retention
+                if protein_type and fat_fraction <= 0.0 and protein_fraction <= 0.0:
+                    matrix_retention = resolve_compound_matrix_retention(
+                        name,
+                        protein_type=protein_type,
+                        denaturation_state=denaturation_state,
+                    )
                 
                 # Effective Kaw accounting for matrix sequestration
                 denom = 1.0 + (k_fat * fat_fraction) + (k_prot * protein_fraction)
                 kaw_eff = kaw_base / denom
                 
-                air_concs[name] = c_total * kaw_eff
+                air_concs[name] = c_total * kaw_eff * matrix_retention * ph_release_factor
             else:
                 # Basic fallback
-                air_concs[name] = c_total * kaw_base
+                matrix_retention = base_matrix_retention
+                if protein_type and fat_fraction <= 0.0 and protein_fraction <= 0.0:
+                    matrix_retention = resolve_compound_matrix_retention(
+                        name,
+                        protein_type=protein_type,
+                        denaturation_state=denaturation_state,
+                    )
+                air_concs[name] = c_total * kaw_base * matrix_retention * ph_release_factor
                 
         return air_concs
 

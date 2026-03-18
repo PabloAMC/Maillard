@@ -52,5 +52,108 @@ def test_protein_sequestration():
     # Since Methional Kprot=2.0 -> 1 / (1 + 2.0*0.2) = 1/1.4
     assert air_20["Methional"] == pytest.approx(air_0["Methional"] / 1.4)
 
+
+def test_matrix_retention_fallback_uses_pea_and_soy_profiles_when_fractions_are_unspecified():
+    model = HeadspaceModel()
+    matrix = {"Furfural": 1.0}
+
+    air_free = model.predict_headspace(matrix, 25.0, protein_type="free")
+    air_pea = model.predict_headspace(matrix, 25.0, protein_type="pea_iso")
+    air_soy = model.predict_headspace(matrix, 25.0, protein_type="soy_iso")
+
+    # Furfural is a furan. For pea_iso at denaturation 0.5: 
+    # base=0.50, class_factor=0.945 -> effective=0.4725
+    assert air_pea["Furfural"] == pytest.approx(air_free["Furfural"] * 0.4725)
+    # For soy_iso at denaturation 0.5:
+    # base=0.55, class_factor=0.975 -> effective=0.53625
+    assert air_soy["Furfural"] == pytest.approx(air_free["Furfural"] * 0.53625)
+    assert air_soy["Furfural"] > air_pea["Furfural"]
+
+
+def test_denaturation_state_relaxes_headspace_fallback_when_fractions_are_unspecified():
+    model = HeadspaceModel()
+    matrix = {"Furfural": 1.0}
+
+    air_native = model.predict_headspace(matrix, 25.0, protein_type="pea_iso", denaturation_state=0.0)
+    air_mid = model.predict_headspace(matrix, 25.0, protein_type="pea_iso", denaturation_state=0.5)
+    air_denatured = model.predict_headspace(matrix, 25.0, protein_type="pea_iso", denaturation_state=1.0)
+
+    assert air_native["Furfural"] < air_mid["Furfural"] < air_denatured["Furfural"]
+
+
+def test_acidic_ph_increases_plant_matrix_release_for_acid_sensitive_off_flavour_markers():
+    model = HeadspaceModel()
+    matrix = {
+        "Hexanal": 1.0,
+        "Nonanal": 1.0,
+        "2-Pentylfuran": 1.0,
+        "2,5-Dimethylpyrazine": 1.0,
+    }
+
+    air_acid = model.predict_headspace(matrix, 40.0, protein_type="pea_iso", pH=4.5)
+    air_neutral = model.predict_headspace(matrix, 40.0, protein_type="pea_iso", pH=6.5)
+
+    assert air_acid["Hexanal"] / air_neutral["Hexanal"] == pytest.approx(1.6, rel=0.08)
+    assert air_acid["Nonanal"] / air_neutral["Nonanal"] == pytest.approx(1.6, rel=0.08)
+    assert air_acid["2-Pentylfuran"] / air_neutral["2-Pentylfuran"] == pytest.approx(1.6, rel=0.08)
+    assert air_acid["2,5-Dimethylpyrazine"] == pytest.approx(air_neutral["2,5-Dimethylpyrazine"])
+
+
+def test_pratap_singh_headspace_calibration_carries_soy_release_gap_in_headspace_layer():
+    model = HeadspaceModel()
+
+    assert model.get_matrix_benchmark_headspace_factor(
+        "Hexanal",
+        protein_type="pea_iso",
+        pH=6.0,
+    ) == pytest.approx(1.0)
+    assert model.get_matrix_benchmark_headspace_factor(
+        "2-Pentylfuran",
+        protein_type="pea_iso",
+        pH=6.0,
+    ) == pytest.approx(1.0)
+    assert model.get_matrix_benchmark_headspace_factor(
+        "1-Hexanol",
+        protein_type="pea_iso",
+        pH=6.0,
+    ) == pytest.approx(1.0)
+
+    assert model.get_matrix_benchmark_headspace_factor(
+        "Hexanal",
+        protein_type="soy_iso",
+        pH=6.0,
+    ) == pytest.approx(0.453 / 0.205)
+    assert model.get_matrix_benchmark_headspace_factor(
+        "2-Pentylfuran",
+        protein_type="soy_iso",
+        pH=6.0,
+    ) == pytest.approx(2.972 / 0.502)
+    assert model.get_matrix_benchmark_headspace_factor(
+        "1-Hexanol",
+        protein_type="soy_iso",
+        pH=6.0,
+    ) == pytest.approx(0.143 / 0.063)
+
+
+def test_explicit_matrix_fractions_override_retention_fallback():
+    model = HeadspaceModel()
+    matrix = {"Methional": 1.0}
+
+    air_with_fraction_only = model.predict_headspace(
+        matrix,
+        25.0,
+        protein_fraction=0.2,
+    )
+    air_with_fraction_and_type = model.predict_headspace(
+        matrix,
+        25.0,
+        protein_fraction=0.2,
+        protein_type="pea_iso",
+    )
+
+    assert air_with_fraction_and_type["Methional"] == pytest.approx(
+        air_with_fraction_only["Methional"]
+    )
+
 if __name__ == "__main__":
     pytest.main([__file__])

@@ -11,6 +11,7 @@ and Girolami's density approximation.
 """
 
 import yaml
+import re
 from typing import Dict, List, Optional, Any
 
 # Scientific stack
@@ -20,6 +21,12 @@ from rdkit.Chem import Descriptors  # noqa: E402
 from src.kinetics import KineticsEngine  # noqa: E402
 from src.barrier_constants import get_arrhenius_params  # noqa: E402
 from src.thermo import get_nasa_coefficients  # noqa: E402
+
+
+def sanitize_cantera_name(name: str) -> str:
+    sanitized = re.sub(r"[^0-9A-Za-z_]+", "_", name)
+    sanitized = re.sub(r"_+", "_", sanitized).strip("_")
+    return sanitized or "species"
 
 
 def _estimate_molar_volume(smiles: str) -> float:
@@ -99,8 +106,21 @@ class CanteraExporter:
                 # Fallback composition when SMILES is not parseable
                 comp = {"C": 1, "H": 1, "O": 1}
                 
+            if not name:
+                name = f"S_{len(self.species)}"
+
+            safe_name = sanitize_cantera_name(name)
+            existing_names = {meta["name"] for existing_smiles, meta in self.species.items() if existing_smiles != smiles}
+            if safe_name in existing_names:
+                suffix = 2
+                unique_name = f"{safe_name}_{suffix}"
+                while unique_name in existing_names:
+                    suffix += 1
+                    unique_name = f"{safe_name}_{suffix}"
+                safe_name = unique_name
+
             self.species[smiles] = {
-                "name": name or f"S_{len(self.species)}",
+                "name": safe_name,
                 "smiles": smiles,
                 "composition": comp,
                 "molar_volume": _estimate_molar_volume(smiles),
@@ -117,24 +137,33 @@ class CanteraExporter:
         """
         Add an elementary step. Enforces strict mass balance and optional thermo-gating.
         """
-        # 1. Thermo-Gating (Phase 12.3)
-        if thermo_gating:
-            is_feasible, dg = self.kinetics.is_reaction_feasible(reactants, products, gating_threshold)
-            if not is_feasible:
-                return
+        # 1. Thermo-Gating & Consistency (Phase 1: Thermodynamic Governance)
+        thermo = self.kinetics.get_reaction_thermo(reactants, products, temperature_k)
+        dg = thermo.get("delta_g_kcal_mol", 0.0)
+        
+        if thermo_gating and dg > gating_threshold:
+            return
+
+        # Enforce physical barrier consistency: Ea >= max(0, Delta G)
+        # We add a small intrinsic barrier (0.5 kcal) to avoid instantaneous equilibrium
+        min_physical_barrier = max(0.5, dg + 0.5)
+        if barrier_kcal < min_physical_barrier:
+            # print(f"  Warning: Barrier {barrier_kcal:.2f} is unphysical for Delta G {dg:.2f}. "
+            #       f"Adjusting to {min_physical_barrier:.2f} kcal/mol.")
+            barrier_kcal = min_physical_barrier
 
         # 2. Literature Arrhenius Calibration (Phase A)
         source_quality = "heuristic"
         if reaction_family:
             lit_params = get_arrhenius_params(reaction_family)
             if lit_params:
-                # lit_params is (A, Ea, source, quality)
                 A_lit, barrier_lit, source_q_lit, _ = lit_params
                 A = float(A_lit)
-                barrier_kcal = float(barrier_lit)
+                # Ensure lit barrier is also physically consistent
+                barrier_kcal = max(barrier_kcal, float(barrier_lit))
                 source_quality = str(source_q_lit)
 
-        # Apply pH/Environment multipliers (Phase 16.2 fix)
+        # Apply pH/Environment multipliers
         if conditions and reaction_family:
             A *= conditions.get_ph_multiplier(reaction_family)
             A *= conditions.get_water_activity_multiplier()
@@ -205,7 +234,7 @@ class CanteraExporter:
                 "name": "maillard_phase",
                 "thermo": "ideal-condensed",
                 "species": [s["name"] for s in self.species.values()],
-                "kinetics": "gas",
+                "kinetics": "bulk",
                 "reactions": "all",
                 "standard-concentration-basis": "unity",
                 "state": {"T": 423.15, "P": 101325}
@@ -214,16 +243,27 @@ class CanteraExporter:
             "reactions": []
         }
         
-        # 2. Format reactions. Schiff bases are reversible; most others irreversible.
+        # 2. Format reactions. 
+        # Most Maillard steps are reversible except for terminal degradations.
         cantera_reactions: List[Dict[str, Any]] = []
         for r in self.reactions:
             cantera_reac = dict(r)
-            # Equilibrium for Schiff bases (Phase 16.5 fix)
             note = r.get("note", "").lower()
-            if "schiff" in note or "thiohemiacetal" in note:
+            
+            # Irreversible families: Decarboxylation, CO2 release, H2O removal in terminal steps
+            irreversible_keywords = [
+                "decarboxylation", "co2", "elimination_h2o", 
+                "fragmentation", "cleavage", "strecker"
+            ]
+            
+            is_irreversible = any(k in note for k in irreversible_keywords)
+            
+            # Schiff bases, hemiacetals, and generic additions are reversible
+            if not is_irreversible:
                 cantera_reac["reversible"] = True
             else:
                 cantera_reac["reversible"] = False
+                
             cantera_reactions.append(cantera_reac)
         data["reactions"] = cantera_reactions
         

@@ -1,7 +1,8 @@
 # Installing Maillard
 
-Welcome to Maillard! This library relies on a powerful stack of deep learning (`torch`, `mace-torch`) and quantum chemistry (`pyscf`, `xtb`, `crest`) tools.
-Because these tools rely on highly optimized C++ and Fortran code, installation steps vary depending on your operating system. This guide is designed to work from scratch, even if you are new to command-line tools. Please read the section for your specific operating system carefully.
+This is the low-level setup reference. If you want the shortest path to a first successful run, start with [docs/guides/QUICKSTART.md](docs/guides/QUICKSTART.md).
+
+Maillard relies on scientific Python, chemistry toolchains, and a few required upstream patches. For reproducibility, macOS users should strongly prefer Docker.
 
 ## 1. Prerequisites & Terminal Setup
 
@@ -32,12 +33,36 @@ Close your terminal window completely and open a new one to apply the changes.
 
 Do not attempt to run this natively on macOS ARM64. Instead, we use Docker to run a lightweight Linux environment. 
 
-**Quick Start**: See the [README.md](README.md#1-recommended-setup-conda--mamba) for the standard Docker activation commands.
+For the fastest setup, you can pull the pre-built image from GitHub Container Registry (ghcr.io) instead of building from scratch. Run:
+
+```bash
+docker pull ghcr.io/PabloAMC/Maillard:latest
+```
+
+If you prefer or need to build from source locally:
+
+```bash
+./scripts/docker_maillard.sh up
+./scripts/docker_maillard.sh bootstrap
+./scripts/docker_maillard.sh shell
+```
 
 **Setup Detail**:
 1. Install OrbStack (Recommended) or Docker Desktop. 
-2. Open your Mac's Terminal and run the `docker run` command provided in the README to start your Linux shell.
-3. All following commands (Section 2-5) must be run **inside** this container shell.
+2. `./scripts/docker_maillard.sh up` creates or starts the Linux container named `maillard_validation`.
+3. `./scripts/docker_maillard.sh bootstrap` creates the `maillard` conda environment, installs CPU-safe dependencies, applies the `xtbiff` patch, and patches the known PyTorch loader issues in `e3nn` and `mace`.
+4. `./scripts/docker_maillard.sh shell` opens an interactive shell in `/workspace` with the `maillard` environment activated.
+5. All following commands (Section 2-5) may be run inside that shell, or through `./scripts/docker_maillard.sh run ...`.
+6. For reproducible benchmark inspection, prefer the named wrapper commands over ad hoc inline Python. For example:
+	```bash
+	./scripts/docker_maillard.sh summary
+	./scripts/docker_maillard.sh validation-figures
+	./scripts/docker_maillard.sh index
+	./scripts/docker_maillard.sh targets data/benchmarks/cys_ribose_140C_Hofmann1998.json
+	./scripts/docker_maillard.sh targets-report
+	```
+
+For the full command list, see [docs/reference/COMMAND_REFERENCE.md](docs/reference/COMMAND_REFERENCE.md).
 
 ## 2. Downloading Maillard & Creating the Environment
 First, download the Maillard repository to your computer and enter the directory:
@@ -98,7 +123,16 @@ sed -i "s/torch.load(f=model_path, map_location=device)/torch.load(f=model_path,
 
 
 ## 5. Verifying the Installation
-Let's ensure everything is working by running a test calculation, followed by the library's automated test suite.
+
+The minimum useful verification for a new installation is:
+
+```bash
+./scripts/docker_maillard.sh summary
+./scripts/docker_maillard.sh validation-figures
+./scripts/docker_maillard.sh core
+```
+
+If you also need to verify the heavier chemistry stack, continue with the examples below.
 
 A. Running a Quantum Cluster Growth (QCG) Example
 We will create a dedicated folder, generate dummy molecules, and run a cluster simulation.
@@ -139,7 +173,7 @@ Finally, navigate back to the main Maillard directory and run the automated test
 cd ..
 
 # Run the test suite
-python -m pytest tests/
+./scripts/docker_maillard.sh pytest tests/
 ```
 
 If the tests pass smoothly, your environment is perfectly configured. Welcome to Maillard!
@@ -150,7 +184,21 @@ If you close your terminal or restart your computer, you do not need to reinstal
 
 ### 🍎 macOS Users (Docker/OrbStack)
 
-See [README.md](README.md#returning-to-work-macos) for the quick `docker start` and `conda activate` commands.
+```bash
+./scripts/docker_maillard.sh up
+./scripts/docker_maillard.sh shell
+```
+
+Useful validated commands from the repository root:
+```bash
+./scripts/docker_maillard.sh status
+./scripts/docker_maillard.sh scientific
+./scripts/docker_maillard.sh validation-figures
+./scripts/docker_maillard.sh targets data/benchmarks/cys_ribose_150C_Mottram1994.json
+./scripts/docker_maillard.sh targets-report
+```
+
+The `scientific` lane regenerates the core validation artifacts inside the Docker `maillard` environment. The validation-figures command adds a single graphical summary of reliability and current gaps.
 
 ### 🐧 Linux & 🪟 Windows (WSL2) Users
 

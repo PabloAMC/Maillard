@@ -1,4 +1,5 @@
 import yaml
+import logging
 from pathlib import Path
 from typing import List, Dict, Tuple, Optional
 from dataclasses import dataclass, field
@@ -6,11 +7,12 @@ from dataclasses import dataclass, field
 from src.smirks_engine import SmirksEngine, ReactionConditions, Species  # noqa: E402
 from src.recommend import Recommender  # noqa: E402
 from src.precursor_resolver import resolve_many  # noqa: E402
-from src.barrier_constants import HEME_CATALYST_REDUCTION, HEME_CATALYST_FAMILIES  # noqa: E402
+from src.barrier_constants import HEME_CATALYST_REDUCTION, HEME_CATALYST_FAMILIES, effective_barrier_from_rate_constant  # noqa: E402
 from src.results_db import ResultsDB  # noqa: E402
 from src.sensory import SensoryPredictor  # noqa: E402
 from src.safety import evaluate_formulation_safety  # noqa: E402
 from src.lipid_oxidation import predict_lop_generation  # noqa: E402
+from src.matrix_correction import build_matrix_explainability, resolve_effective_denaturation_state  # noqa: E402
 
 # Locate data files
 ROOT = Path(__file__).resolve().parents[1]
@@ -31,7 +33,17 @@ class FormulationResult:
     flagged_toxics: List[str] = field(default_factory=list)
     texture_risk: float = 0.0
     predicted_ppb: Dict[str, float] = field(default_factory=dict)
+    predicted_proxy_ppb: Dict[str, float] = field(default_factory=dict)
+    projection_metadata: Dict[str, Dict[str, float]] = field(default_factory=dict)
     avg_uncertainty: float = 5.0
+    effective_denaturation_state: float = 0.5
+    matrix_explainability: Dict[str, object] = field(default_factory=dict)
+    confidence_metadata: Dict[str, object] = field(default_factory=dict)
+    targets: List[Dict] = field(default_factory=list)
+    bottleneck_precursor: str = "none"
+    bottleneck_severity: float = 0.0
+    precursor_contributions: Dict[str, float] = field(default_factory=dict)
+    suppressed_compounds: List[Dict] = field(default_factory=list)
 
 
 class InverseDesigner:
@@ -146,11 +158,17 @@ class InverseDesigner:
         minimize_compounds = self.tags.get(self.minimize_tag, []) if self.minimize_tag else []
 
         eval_grid = grid_override if grid_override is not None else self.grid
-        print(f"DEBUG: evaluate_all starting for {len(eval_grid)} formulations. First 2 names: {[f.get('name') for f in eval_grid[:2]]}")
+        logging.getLogger(__name__).debug("evaluate_all starting for %d formulations. First 2 names: %s", len(eval_grid), [f.get('name') for f in eval_grid[:2]])
         for form in eval_grid:
             name = form.get("name", "Unknown")
             protein_type = form.get("protein_type", global_conditions.protein_type)
-            denaturation_state = form.get("denaturation_state", 0.5)
+            denaturation_state = resolve_effective_denaturation_state(
+                protein_type=protein_type,
+                temperature_celsius=form.get("temp", global_conditions.temperature_celsius),
+                time_minutes=form.get("time_minutes", 60.0),
+                pH=form.get("ph", global_conditions.pH),
+                explicit_denaturation_state=form.get("denaturation_state"),
+            )
             
             sugars = form.get("sugars", [])
             amino_acids = form.get("amino_acids", [])
@@ -164,7 +182,7 @@ class InverseDesigner:
             try:
                 precursors = resolve_many(all_names)
             except ValueError as e:
-                print(f"Skipping '{name}': {e}")
+                logging.getLogger(__name__).warning("Skipping '%s': %s", name, e)
                 continue
                 
             # Create a localized conditions object (e.g. to apply catalyst override if specified)
@@ -191,19 +209,18 @@ class InverseDesigner:
                     with open(LIBRARY_PATH, "r") as f:
                         lib_data = yaml.safe_load(f)
                         intervention_lib = {a["name"]: a for a in lib_data.get("interventions", [])}
-                    
-                    print(f"DEBUG: {name} raw interventions: {interventions}")
+                    logging.getLogger(__name__).debug("%s raw interventions: %s", name, interventions)
                     for inter in interventions:
                         agent_name = inter.get("name")
                         dose = inter.get("dose", 1.0)
-                        print(f"DEBUG: loading intervention {agent_name} with dose {dose}")
+                        logging.getLogger(__name__).debug("loading intervention %s with dose %s", agent_name, dose)
                         agent_data = intervention_lib.get(agent_name)
                         if agent_data:
                             for mech in agent_data.get("mechanisms", []):
                                 target = mech.get("target_family", "")
                                 delta = mech.get("delta_barrier_per_unit", 0.0)
                                 modifiers[target] = delta * dose
-                print(f"DEBUG_INV: {name} final modifiers: {modifiers}")
+                logging.getLogger(__name__).debug("%s final modifiers: %s", name, modifiers)
             
             engine = SmirksEngine(cond)
             steps = engine.enumerate(precursors, max_generations=4)
@@ -224,15 +241,11 @@ class InverseDesigner:
                 
                 k = cond.get_rate_constant(step.reaction_family or "unknown", ea_override_kcal=bar)
                 
-                # Effective barrier including pH and aw effects:
-                # Ea_eff = -RT * ln(k / A)
-                import math
-                RT = 0.001987 * cond.temperature_kelvin
-                A = 1e11 # Must match conditions.py
-                if k > 0:
-                    bar_eff = -RT * math.log(k / A)
-                else:
-                    bar_eff = 99.0
+                bar_eff = effective_barrier_from_rate_constant(
+                    k,
+                    cond.temperature_kelvin,
+                    step.reaction_family or "unknown",
+                )
                     
                 if apply_heme and step.reaction_family in HEME_CATALYST_FAMILIES:
                     bar_eff -= HEME_CATALYST_REDUCTION
@@ -281,8 +294,11 @@ class InverseDesigner:
                 heuristic_barriers, 
                 initial_concentrations, 
                 temperature_kelvin=cond.temperature_kelvin,
+                time_minutes=form.get("time_minutes"),
                 protein_type=protein_type,
-                denaturation_state=denaturation_state
+                denaturation_state=denaturation_state,
+                fat_fraction=cond.fat_fraction,
+                protein_fraction=cond.protein_fraction,
             )
             
             # Score against tags
@@ -341,7 +357,22 @@ class InverseDesigner:
                 flagged_toxics=flagged,
                 texture_risk=self._score_texture_risk(precursors, sugars),
                 predicted_ppb=conc_map,
-                avg_uncertainty=avg_unc
+                predicted_proxy_ppb=rec_result.get("predicted_proxy_ppb", {}),
+                projection_metadata=rec_result.get("projection_metadata", {}),
+                avg_uncertainty=avg_unc,
+                effective_denaturation_state=denaturation_state,
+                matrix_explainability=build_matrix_explainability(
+                    protein_type=protein_type,
+                    effective_denaturation_state=denaturation_state,
+                    temperature_celsius=cond.temperature_celsius,
+                    time_minutes=form.get("time_minutes", 60.0),
+                    pH=cond.pH,
+                ),
+                targets=rec_result.get("targets", []),
+                bottleneck_precursor=rec_result["metrics"].get("bottleneck", {}).get("precursor", "none"),
+                bottleneck_severity=rec_result["metrics"].get("bottleneck", {}).get("severity", 0.0),
+                precursor_contributions=rec_result["metrics"].get("precursor_attribution", {}),
+                suppressed_compounds=rec_result["metrics"].get("suppressed_compounds", []),
             ))
 
             

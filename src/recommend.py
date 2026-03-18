@@ -17,15 +17,62 @@ from dataclasses import dataclass
 from typing import List, Dict, Set, Optional, Any, Tuple
 
 from data.reactions.curated_pathways import PATHWAYS, PATHWAY_METADATA
-from src.matrix_correction import ProteinType, apply_matrix_correction
+from src.barrier_constants import arrhenius_rate_constant, get_reference_pre_exponential
+from src.headspace import HeadspaceModel
+from src.matrix_calibration_registry import describe_matrix_calibration, determine_matrix_process_state
+from src.matrix_correction import (
+    ProteinType,
+    apply_matrix_correction,
+    classify_volatile_matrix_family,
+    get_volatile_class_retention_factor,
+    resolve_compound_matrix_retention,
+    resolve_matrix_correction,
+)
+from src.pathway_extractor import Species
 try:
     from rdkit import Chem
 except ImportError:
     Chem = None
 
+
+if Chem is not None:
+    _CARBOXYLIC_ACID_SMARTS = Chem.MolFromSmarts("[CX3](=O)[OX2H1,OX1-]")
+    _PRIMARY_AMINE_SMARTS = Chem.MolFromSmarts("[NX3;H1,H2;!$(NC=O)]")
+    _IMINE_SMARTS = Chem.MolFromSmarts("[CX3]=[NX2;!R]")
+else:
+    _CARBOXYLIC_ACID_SMARTS = None
+    _PRIMARY_AMINE_SMARTS = None
+    _IMINE_SMARTS = None
+
 # Add project root to path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
+
+_HENRY_CONSTANTS_PATH = ROOT / "data" / "lit" / "henry_constants.yml"
+_NON_OBSERVABLE_KAW_THRESHOLD = 1.0e-8
+_LOW_HEADSPACE_REFERENCE_KAW = 1.0e-5
+
+
+def _normalize_chemical_name(name: str) -> str:
+    return " ".join(str(name).lower().replace("_", " ").replace("-", " ").split())
+
+
+def _load_henry_lookup() -> Dict[str, Dict[str, Any]]:
+    if not _HENRY_CONSTANTS_PATH.exists():
+        return {}
+    with open(_HENRY_CONSTANTS_PATH, "r", encoding="utf-8") as handle:
+        raw = yaml.safe_load(handle) or {}
+    constants = raw.get("constants", [])
+    lookup: Dict[str, Dict[str, Any]] = {}
+    for entry in constants:
+        if not entry.get("name"):
+            continue
+        lookup[_normalize_chemical_name(entry["name"])] = entry
+    return lookup
+
+
+_HENRY_LOOKUP = _load_henry_lookup()
+_HEADSPACE_MODEL = HeadspaceModel(str(_HENRY_CONSTANTS_PATH))
 
 def _trunc(s: str, max_len: int) -> str:
     """Pad or truncate string for fixed-width columns."""
@@ -48,6 +95,45 @@ class PrecursorSystem:
     name: str
     precursors: List[str]
     notes: str
+
+
+@dataclass(frozen=True)
+class ProjectionBudget:
+    limiting_precursor_molar: float
+    load_factor: float
+    temperature_factor: float
+    time_factor: float
+    severity: float
+    volatile_yield_fraction: float
+    total_volatile_budget_molar: float
+    limiting_precursor_name: str
+
+
+@dataclass(frozen=True)
+class ProjectionStrategy:
+    name: str
+    precursor_concentration_unit: str
+    limiting_pool_to_molar_factor: float
+    baseline_volatile_yield_fraction: float
+    severity_volatile_yield_slope: float
+    ppb_conversion_factor: float
+    ppb_basis: str
+    notes: str
+
+
+DEFAULT_PROJECTION_STRATEGY = ProjectionStrategy(
+    name="precursor_limited_observable_v1",
+    precursor_concentration_unit="mM",
+    limiting_pool_to_molar_factor=1.0e-3,
+    baseline_volatile_yield_fraction=1.0e-6,
+    severity_volatile_yield_slope=1.5e-3,
+    ppb_conversion_factor=1.0e6,
+    ppb_basis="aqueous_mass_equivalent_ppb",
+    notes=(
+        "Allocates a conservative volatile budget from the limiting precursor pool, then converts "
+        "M to ppb via MW assuming dilute aqueous density (~1 kg/L) before matrix/headspace projection."
+    ),
+)
 
 
 SYSTEMS = [
@@ -103,7 +189,7 @@ def _weight(barrier_kcal, temp_kelvin=423.15): # Default 150C
 
 def _integrate_arrhenius(barrier_kcal: float, 
                          ramp_data: List[Tuple[float, float]], 
-                         pre_exponential: float = 1e11) -> float:
+                         pre_exponential: Optional[float] = None) -> float:
     """
     SOTA: Numerically integrate the Arrhenius propensity over a temperature ramp.
     Returns the integrated yield approximation: 1 - exp(-integral(k(t) dt)).
@@ -122,11 +208,18 @@ def _integrate_arrhenius(barrier_kcal: float,
     t_fine = np.linspace(times_sec[0], times_sec[-1], 100)
     T_fine = np.interp(t_fine, times_sec, temps_k)
     
-    R = 0.001987 # kcal/mol/K
-    k_fine = pre_exponential * np.exp(-barrier_kcal / (R * T_fine))
+    reference_pre_exponential = pre_exponential
+    if reference_pre_exponential is None:
+        reference_pre_exponential = get_reference_pre_exponential()
+
+    k_fine = np.array(
+        [arrhenius_rate_constant(barrier_kcal, temp_k, multiplier=1.0) for temp_k in T_fine]
+    )
+    if reference_pre_exponential != get_reference_pre_exponential():
+        k_fine *= float(reference_pre_exponential) / get_reference_pre_exponential()
     
     # Integrate using Trapezoidal rule (standard for discrete steps)
-    integral_k_dt = np.trapz(k_fine, t_fine)
+    integral_k_dt = np.trapezoid(k_fine, t_fine)
     
     # Yield approximation (saturation handling)
     return 1.0 - np.exp(-integral_k_dt)
@@ -149,6 +242,538 @@ def _weight(barrier_kcal, temp_kelvin=423.15): # Default 150C
         return 0.0
     R = 0.001987
     return math.exp(-barrier_kcal / (R * temp_kelvin))
+
+
+def _mw_from_smiles(smiles: str) -> float:
+    if Chem is None:
+        return 100.0
+    mol = Chem.MolFromSmiles(smiles)
+    if mol is None:
+        return 100.0
+    try:
+        from rdkit.Chem import Descriptors
+        return float(Descriptors.MolWt(mol))
+    except Exception:
+        return 100.0
+
+
+def _thermal_severity(temperature_kelvin: float, time_minutes: Optional[float]) -> float:
+    return _projection_temperature_factor(temperature_kelvin) * _projection_time_factor(time_minutes)
+
+
+def _projection_temperature_factor(temperature_kelvin: float) -> float:
+    import math
+
+    temp_c = temperature_kelvin - 273.15
+    return 1.0 / (1.0 + math.exp(-(temp_c - 110.0) / 18.0))
+
+
+def _projection_time_factor(time_minutes: Optional[float]) -> float:
+    import math
+
+    if time_minutes is None:
+        return 1.0
+    return 1.0 - math.exp(-max(time_minutes, 0.0) / 25.0)
+
+
+def _estimate_projection_budget(
+    corrected_initial: Dict[str, float],
+    temperature_kelvin: float,
+    time_minutes: Optional[float],
+    strategy: ProjectionStrategy = DEFAULT_PROJECTION_STRATEGY,
+) -> ProjectionBudget:
+    if not corrected_initial:
+        return ProjectionBudget(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, "none")
+
+    # Find limiting precursor (minimum positive molarity)
+    positive_items = [(k, float(v)) for k, v in corrected_initial.items() if float(v) > 0.0]
+    if not positive_items:
+        return ProjectionBudget(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, "none")
+
+    limiting_name, limiting_val = min(positive_items, key=lambda x: x[1])
+    limiting_precursor_molar = limiting_val * strategy.limiting_pool_to_molar_factor
+    
+    load_factor = _relative_precursor_load_factor(corrected_initial)
+    temperature_factor = _projection_temperature_factor(temperature_kelvin)
+    time_factor = _projection_time_factor(time_minutes)
+    severity = temperature_factor * time_factor
+    volatile_yield_fraction = (
+        strategy.baseline_volatile_yield_fraction
+        + strategy.severity_volatile_yield_slope * severity
+    )
+    total_volatile_budget_molar = limiting_precursor_molar * volatile_yield_fraction * max(load_factor, 0.0)
+
+    return ProjectionBudget(
+        limiting_precursor_molar=float(limiting_precursor_molar),
+        load_factor=float(max(load_factor, 0.0)),
+        temperature_factor=float(temperature_factor),
+        time_factor=float(time_factor),
+        severity=float(severity),
+        volatile_yield_fraction=float(volatile_yield_fraction),
+        total_volatile_budget_molar=float(max(total_volatile_budget_molar, 0.0)),
+        limiting_precursor_name=limiting_name
+    )
+
+
+def _temporal_accessibility(total_tau_minutes: float, time_minutes: Optional[float]) -> float:
+    import math
+
+    if time_minutes is None:
+        return 1.0
+    if time_minutes <= 0.0:
+        return 0.0
+    if total_tau_minutes <= 0.0:
+        return 1.0
+    return 1.0 - math.exp(-time_minutes / total_tau_minutes)
+
+
+def _relative_precursor_load_factor(corrected_initial: Dict[str, float]) -> float:
+    import math
+
+    positive_values = [max(float(value), 0.0) for value in corrected_initial.values() if float(value) > 0.0]
+    if not positive_values:
+        return 0.0
+
+    limiting_value = min(positive_values)
+    if limiting_value <= 0.0:
+        return 0.0
+
+    normalized = [max(value / limiting_value, 1.0e-12) for value in positive_values]
+    return math.exp(sum(math.log(value) for value in normalized) / len(normalized))
+
+
+def _projection_strategy_metadata(strategy: ProjectionStrategy) -> Dict[str, Any]:
+    return {
+        "projection_strategy_name": strategy.name,
+        "projection_precursor_unit": strategy.precursor_concentration_unit,
+        "projection_ppb_basis": strategy.ppb_basis,
+        "projection_limiting_pool_to_molar_factor": float(strategy.limiting_pool_to_molar_factor),
+        "projection_baseline_volatile_yield_fraction": float(strategy.baseline_volatile_yield_fraction),
+        "projection_severity_volatile_yield_slope": float(strategy.severity_volatile_yield_slope),
+        "projection_ppb_conversion_factor": float(strategy.ppb_conversion_factor),
+        "projection_strategy_notes": strategy.notes,
+    }
+
+
+_BUDGET_EXCLUDED_CANONICAL = {
+    "O",
+    "O=C=O",
+    "[HH]",
+    "[S]",
+    "S",
+    "N",
+    "C=O",
+}
+
+
+def _carbon_count(smiles: str) -> int:
+    if Chem is None:
+        return 0
+    mol = Chem.MolFromSmiles(smiles)
+    if mol is None:
+        return 0
+    return sum(1 for atom in mol.GetAtoms() if atom.GetAtomicNum() == 6)
+
+
+def _has_reactive_nonvolatile_functionality(smiles: str) -> bool:
+    if Chem is None:
+        return False
+    mol = Chem.MolFromSmiles(smiles)
+    if mol is None:
+        return False
+    if any(atom.GetNumRadicalElectrons() > 0 for atom in mol.GetAtoms()):
+        return True
+    if _CARBOXYLIC_ACID_SMARTS is not None and mol.HasSubstructMatch(_CARBOXYLIC_ACID_SMARTS):
+        return True
+    if _PRIMARY_AMINE_SMARTS is not None and mol.HasSubstructMatch(_PRIMARY_AMINE_SMARTS):
+        return True
+    if _IMINE_SMARTS is not None and mol.HasSubstructMatch(_IMINE_SMARTS):
+        return True
+    return False
+
+
+def _henry_entry_for_species(species: Species, target_lookup: Dict[str, Dict[str, Any]]) -> Optional[Dict[str, Any]]:
+    candidate_names: List[str] = []
+    canon = _canon(species.smiles)
+    target_info = target_lookup.get(canon)
+    if target_info:
+        candidate_names.append(target_info["name"])
+    if species.label:
+        candidate_names.append(species.label)
+
+    alias_map = {
+        "furfural": "Furfural",
+        "hmf": "5-Hydroxymethylfurfural (HMF)",
+        "2-methyl-3-furanthiol": "2-Methyl-3-furanthiol (MFT)",
+        "2-furfurylthiol": "2-Furfurylthiol (FFT)",
+        "2,5-dimethylpyrazine": "2,5-Dimethylpyrazine",
+        "2,3-dimethylpyrazine": "2,3-Dimethylpyrazine",
+        "hydrogen sulfide": "Hydrogen Sulfide",
+        "dimethyl disulfide": "Dimethyl disulfide",
+        "dimethyl trisulfide": "Dimethyl trisulfide",
+        "acrylamide": "Acrylamide",
+    }
+    for name in list(candidate_names):
+        normalized = _normalize_chemical_name(name)
+        if normalized in alias_map:
+            candidate_names.append(alias_map[normalized])
+
+    for name in candidate_names:
+        entry = _HENRY_LOOKUP.get(_normalize_chemical_name(name))
+        if entry is not None:
+            return entry
+    return None
+
+
+def _is_observable_target_species(species: Species, target_lookup: Dict[str, Dict[str, Any]]) -> bool:
+    entry = _henry_entry_for_species(species, target_lookup)
+    if entry is None:
+        return True
+    return float(entry.get("Kaw_25c", 0.01)) >= _NON_OBSERVABLE_KAW_THRESHOLD
+
+
+def _headspace_observability_metadata(
+    species: Species,
+    target_lookup: Dict[str, Dict[str, Any]],
+) -> Dict[str, Any]:
+    entry = _henry_entry_for_species(species, target_lookup)
+    if entry is None:
+        return {
+            "headspace_observable": True,
+            "headspace_class": "assumed_observable",
+            "henry_kaw_25c": None,
+            "henry_source_name": None,
+        }
+
+    kaw_25c = float(entry.get("Kaw_25c", 0.01))
+    observable = kaw_25c >= _NON_OBSERVABLE_KAW_THRESHOLD
+    return {
+        "headspace_observable": observable,
+        "headspace_class": "observable" if observable else "low_headspace",
+        "henry_kaw_25c": kaw_25c,
+        "henry_source_name": entry.get("name"),
+    }
+
+
+def _headspace_observability_factor(
+    species: Species,
+    target_lookup: Dict[str, Dict[str, Any]],
+    temperature_kelvin: float,
+    fat_fraction: float = 0.0,
+    protein_fraction: float = 0.0,
+) -> float:
+    entry = _henry_entry_for_species(species, target_lookup)
+    if entry is None:
+        return 1.0
+
+    kaw_25c = float(entry.get("Kaw_25c", 0.01))
+    if kaw_25c >= _NON_OBSERVABLE_KAW_THRESHOLD:
+        return 1.0
+
+    compound_name = str(entry.get("name", species.label or ""))
+    try:
+        kaw_at_temp = float(_HEADSPACE_MODEL.get_kaw_at_temp(compound_name, temperature_kelvin))
+    except Exception:
+        kaw_at_temp = kaw_25c
+
+    try:
+        reference_kaw = float(_HEADSPACE_MODEL.get_kaw_at_temp("Furfural", temperature_kelvin))
+    except Exception:
+        reference_kaw = _LOW_HEADSPACE_REFERENCE_KAW
+
+    reference_kaw = max(reference_kaw, _LOW_HEADSPACE_REFERENCE_KAW)
+    intrinsic_factor = max(1.0e-6, min(1.0, kaw_at_temp / reference_kaw))
+
+    matrix_factor = 1.0
+    temp_c = temperature_kelvin - 273.15
+    if fat_fraction > 0.0 or protein_fraction > 0.0:
+        try:
+            baseline_air = float(_HEADSPACE_MODEL.predict_headspace({compound_name: 1.0}, temp_c, fat_fraction=0.0, protein_fraction=0.0).get(compound_name, 1.0))
+            matrix_air = float(_HEADSPACE_MODEL.predict_headspace({compound_name: 1.0}, temp_c, fat_fraction=fat_fraction, protein_fraction=protein_fraction).get(compound_name, baseline_air))
+            if baseline_air > 0.0:
+                matrix_factor = max(1.0e-3, min(1.0, matrix_air / baseline_air))
+        except Exception:
+            matrix_factor = 1.0
+
+    # Keep the penalty conservative so we do not destabilize the validated
+    # free-amino-acid benchmarks while still reflecting that near-nonvolatile
+    # species should not consume the same observable headspace budget.
+    return intrinsic_factor * matrix_factor
+
+
+def _resolve_output_matrix_context(
+    protein_type: ProteinType,
+    fat_fraction: float,
+    protein_fraction: float,
+) -> Tuple[float, float, bool]:
+    fat = max(float(fat_fraction), 0.0)
+    protein = max(float(protein_fraction), 0.0)
+
+    if protein_type == ProteinType.FREE_AMINO_ACID:
+        return fat, 0.0, fat > 0.0
+
+    # ReactionConditions defaults protein_fraction to 1.0, which in this codebase
+    # often means "unspecified" rather than a real volumetric matrix fraction.
+    fractions_explicit = fat > 0.0 or (0.0 < protein < 0.999)
+    if not fractions_explicit:
+        return 0.0, 0.0, False
+    return fat, protein, True
+
+
+def _apply_output_projection(
+    raw_concentrations: Dict[str, float],
+    species_catalog: Dict[str, Species],
+    target_lookup: Dict[str, Dict[str, Any]],
+    temperature_kelvin: float,
+    protein_type: str,
+    time_minutes: Optional[float] = None,
+    denaturation_state: float = 0.5,
+    fat_fraction: float = 0.0,
+    protein_fraction: float = 0.0,
+    projection_budget: Optional[ProjectionBudget] = None,
+    projection_strategy: ProjectionStrategy = DEFAULT_PROJECTION_STRATEGY,
+    species_name_lookup: Optional[Dict[str, str]] = None,
+) -> Tuple[Dict[str, float], Dict[str, Dict[str, float]]]:
+    p_type = ProteinType(protein_type)
+    fat_eff, protein_eff, explicit_matrix_fractions = _resolve_output_matrix_context(
+        p_type,
+        fat_fraction,
+        protein_fraction,
+    )
+
+    if explicit_matrix_fractions:
+        fallback_matrix_factor = 1.0
+    else:
+        fallback_matrix_factor = float(resolve_matrix_correction(p_type, denaturation_state).volatile_retention)
+
+    observable_ppb: Dict[str, float] = {}
+    projection_metadata: Dict[str, Dict[str, float]] = {}
+    process_state = determine_matrix_process_state(
+        temperature_celsius=temperature_kelvin - 273.15,
+        time_minutes=float(time_minutes or 60.0),
+    )
+
+    budget_metadata = {}
+    if projection_budget is not None:
+        budget_metadata = {
+            "limiting_precursor_molar": float(projection_budget.limiting_precursor_molar),
+            "projection_load_factor": float(projection_budget.load_factor),
+            "projection_temperature_factor": float(projection_budget.temperature_factor),
+            "projection_time_factor": float(projection_budget.time_factor),
+            "projection_severity": float(projection_budget.severity),
+            "volatile_yield_fraction": float(projection_budget.volatile_yield_fraction),
+            "total_volatile_budget_molar": float(projection_budget.total_volatile_budget_molar),
+        }
+    budget_metadata.update(_projection_strategy_metadata(projection_strategy))
+
+    for canon, raw_value in raw_concentrations.items():
+        species = species_catalog.get(canon)
+        if species is None:
+            observable_ppb[canon] = raw_value * fallback_matrix_factor
+            compound_name = species_name_lookup.get(canon, canon) if species_name_lookup else canon
+            projection_metadata[canon] = {
+                "compound": compound_name,
+                "proxy_ppb": float(raw_value),
+                "matrix_factor": float(fallback_matrix_factor),
+                "base_matrix_factor": float(fallback_matrix_factor),
+                "class_matrix_factor": 1.0,
+                "headspace_factor": 1.0,
+                "observable_ppb": float(observable_ppb[canon]),
+                "proxy_to_observable_ratio": 1.0 if raw_value <= 0.0 else float(observable_ppb[canon]) / float(raw_value),
+                "volatile_class": "other",
+                "process_state": process_state,
+                **describe_matrix_calibration(
+                    compound_name,
+                    protein_type=protein_type,
+                    process_state=process_state,
+                ),
+                **budget_metadata,
+            }
+            continue
+
+        if explicit_matrix_fractions:
+            effective_matrix_factor = 1.0
+            class_matrix_factor = 1.0
+        else:
+            class_matrix_factor = get_volatile_class_retention_factor(
+                species.label or canon,
+                protein_type=p_type,
+                denaturation_state=denaturation_state,
+                smiles=species.smiles,
+            )
+            effective_matrix_factor = resolve_compound_matrix_retention(
+                species.label or canon,
+                protein_type=p_type,
+                denaturation_state=denaturation_state,
+                smiles=species.smiles,
+            )
+
+        headspace_factor = _headspace_observability_factor(
+            species,
+            target_lookup,
+            temperature_kelvin,
+            fat_fraction=fat_eff,
+            protein_fraction=protein_eff,
+        )
+        observable_value = raw_value * effective_matrix_factor * headspace_factor
+        observable_ppb[canon] = observable_value
+        compound_name = species.label or canon
+        projection_metadata[canon] = {
+            "compound": compound_name,
+            "proxy_ppb": float(raw_value),
+            "matrix_factor": float(effective_matrix_factor),
+            "base_matrix_factor": float(fallback_matrix_factor),
+            "class_matrix_factor": float(class_matrix_factor),
+            "headspace_factor": float(headspace_factor),
+            "observable_ppb": float(observable_value),
+            "proxy_to_observable_ratio": 1.0 if raw_value <= 0.0 else float(observable_value) / float(raw_value),
+            "volatile_class": classify_volatile_matrix_family(compound_name, smiles=species.smiles),
+            "process_state": process_state,
+            **describe_matrix_calibration(
+                compound_name,
+                protein_type=protein_type,
+                process_state=process_state,
+            ),
+            **budget_metadata,
+        }
+
+    return observable_ppb, projection_metadata
+
+
+def _is_budget_relevant_species(species: Species, target_lookup: Dict[str, Dict[str, Any]]) -> bool:
+    canon = _canon(species.smiles)
+    if not canon:
+        return False
+    if canon in _BUDGET_EXCLUDED_CANONICAL:
+        return False
+    if canon in target_lookup:
+        return True
+    if not species.is_volatile:
+        return False
+    if _carbon_count(canon) < 2:
+        return False
+    if _has_reactive_nonvolatile_functionality(canon):
+        return False
+    return True
+
+
+def _is_ppb_output_species(
+    species: Species,
+    target_lookup: Dict[str, Dict[str, Any]],
+    exogenous_reactants: Set[str],
+) -> bool:
+    canon = _canon(species.smiles)
+    if not canon or canon in exogenous_reactants:
+        return False
+    if canon not in target_lookup:
+        return False
+    return _is_budget_relevant_species(species, target_lookup)
+
+
+def _select_accumulating_projection_species(
+    steps: List[Any],
+    tracked_species: Dict[str, Tuple[float, float, int, float, float]],
+    species_catalog: Dict[str, Species],
+    target_lookup: Dict[str, Dict[str, Any]],
+    exogenous_reactants: Set[str],
+    downstream_margin_kcal: float = 0.25,
+) -> Set[str]:
+    candidate_canons: Set[str] = set()
+    for canon, (span, _conc, depth, _weight, _unc) in tracked_species.items():
+        species = species_catalog.get(canon)
+        if species is None:
+            continue
+        if depth <= 0 or span == float("inf"):
+            continue
+        if _is_ppb_output_species(species, target_lookup, exogenous_reactants):
+            candidate_canons.add(canon)
+
+    if not candidate_canons:
+        return set()
+    return candidate_canons
+
+
+def _project_weighted_flux_to_ppb(
+    steps: List[Any],
+    tracked_species: Dict[str, Tuple[float, float, int, float, float]],
+    best_paths: Dict[str, List[Dict[str, Any]]],
+    species_catalog: Dict[str, Species],
+    corrected_initial: Dict[str, float],
+    target_lookup: Dict[str, Dict[str, Any]],
+    exogenous_reactants: Set[str],
+    temperature_kelvin: float,
+    time_minutes: Optional[float],
+    projection_strategy: ProjectionStrategy = DEFAULT_PROJECTION_STRATEGY,
+    projection_budget: Optional[ProjectionBudget] = None,
+) -> Dict[str, float]:
+    import math
+
+    if projection_budget is None:
+        projection_budget = _estimate_projection_budget(
+            corrected_initial,
+            temperature_kelvin,
+            time_minutes,
+            strategy=projection_strategy,
+        )
+    if projection_budget.total_volatile_budget_molar <= 0.0:
+        return {}
+
+    severity = projection_budget.severity
+    total_volatile_budget_molar = projection_budget.total_volatile_budget_molar
+
+    projected_species = _select_accumulating_projection_species(
+        steps,
+        tracked_species,
+        species_catalog,
+        target_lookup,
+        exogenous_reactants,
+    )
+    if not projected_species:
+        return {}
+
+    candidate_entries = {
+        canon: (span, depth, weight, best_paths.get(canon, []))
+        for canon, (span, conc, depth, weight, unc) in tracked_species.items()
+        if canon in projected_species and depth > 0 and span < float("inf")
+    }
+    if not candidate_entries:
+        return {}
+
+    best_span = min(span for span, _depth, _weight, _path in candidate_entries.values())
+    min_depth = min(depth for _span, depth, _weight, _path in candidate_entries.values())
+    span_window_kcal = max(0.35, 0.65 * 0.001987 * temperature_kelvin)
+    max_weight = max(max(weight, 0.0) for _canon, (_span, _depth, weight, _path) in candidate_entries.items())
+
+    # At lower thermal severity, short terminal routes should retain a mild advantage over
+    # deeper ones when the final ppb budget is allocated across competing outputs.
+    depth_bias_strength = max(0.0, 0.85 - severity) * 1.0
+    activities = {}
+    for canon, (span, depth, weight, best_path) in candidate_entries.items():
+        span_activity = math.exp(-(span - best_span) / span_window_kcal)
+        if max_weight > 0.0:
+            relative_weight = max(weight, 0.0) / max_weight
+            flux_activity = max(relative_weight, 1.0e-6) ** 0.65
+        else:
+            flux_activity = 1.0
+        depth_activity = math.exp(-depth_bias_strength * max(depth - min_depth, 0))
+        terminal_family = ""
+        if best_path:
+            terminal_family = str(best_path[-1].get("family", "")).lower().replace("-", "_").replace(" ", "_")
+        direct_sulfur_bonus = 1.0
+        if terminal_family == "thiol_addition":
+            direct_sulfur_bonus += 0.8 * max(0.0, 0.85 - severity)
+        activities[canon] = span_activity * flux_activity * depth_activity * direct_sulfur_bonus
+
+    total_activity = sum(activities.values())
+    if total_activity <= 0.0:
+        return {}
+
+    projected_ppb: Dict[str, float] = {}
+    for canon, activity in activities.items():
+        mol_fraction = activity / total_activity
+        molar_concentration = total_volatile_budget_molar * mol_fraction
+        projected_ppb[canon] = molar_concentration * _mw_from_smiles(canon) * projection_strategy.ppb_conversion_factor
+    return projected_ppb
 
 
 class Recommender:
@@ -210,6 +835,8 @@ class Recommender:
                            time_minutes: Optional[float] = None,
                            protein_type: str = "free",
                            denaturation_state: float = 0.5,
+                           fat_fraction: float = 0.0,
+                           protein_fraction: float = 0.0,
                            temp_ramp_csv: Optional[str] = None):
         """
         Dynamically predict active pathways given a list of generated ElementarySteps
@@ -218,6 +845,7 @@ class Recommender:
         If temp_ramp_csv provided (SOTA), integrates propensity over the ramp.
         """
         p_type = ProteinType(protein_type)
+        projection_strategy = DEFAULT_PROJECTION_STRATEGY
         ramp_data = _load_ramp(temp_ramp_csv) if temp_ramp_csv else None
         
         # Phase 7: Apply Matrix Accessibility Corrections to precursors
@@ -239,14 +867,57 @@ class Recommender:
             for name, data in db.items():
                 if data.get("smiles"):
                     can = _canon(data["smiles"])
-                    target_lookup[can] = {"name": name, "type": t_type, "data": data}
+                    existing = target_lookup.get(can)
+                    if existing is None:
+                        target_lookup[can] = {
+                            "name": name,
+                            "type": t_type,
+                            "roles": [t_type],
+                            "data": data,
+                        }
+                        continue
+                    existing_roles = set(existing.get("roles", [existing.get("type")]))
+                    existing_roles.add(t_type)
+                    existing["roles"] = sorted(existing_roles)
+                    if existing.get("type") == "toxic" and t_type != "toxic":
+                        existing["name"] = name
+                        existing["type"] = t_type
+                        existing["data"] = data
+
+        species_name_lookup: Dict[str, str] = {}
+        species_catalog: Dict[str, Species] = {}
+        reactant_species: Set[str] = set()
+        product_species: Set[str] = set()
+        for step in steps:
+            for species in [*step.reactants, *step.products]:
+                can = _canon(species.smiles)
+                if can:
+                    species_catalog.setdefault(can, species)
+            for species in [*step.reactants, *step.products]:
+                can = _canon(species.smiles)
+                if can and species.label:
+                    species_name_lookup.setdefault(can, species.label)
+            for species in step.reactants:
+                can = _canon(species.smiles)
+                if can:
+                    reactant_species.add(can)
+            for species in step.products:
+                can = _canon(species.smiles)
+                if can:
+                    product_species.add(can)
 
         # tracking dict: canon_smiles -> (span, concentration, depth, weight, uncertainty)
         tracking = {}
+        best_paths: Dict[str, List[Dict[str, Any]]] = {}
         # Pre-calculate exp(0) for initial precursors
         import math
         for s, conc in corrected_initial.items():
-            tracking[_canon(s)] = (0.0, conc, 0, conc * 1.0, 0.0)
+            canon = _canon(s)
+            tracking[canon] = (0.0, conc, 0, conc * 1.0, 0.0)
+            best_paths[canon] = []
+            species_catalog[canon] = Species(species_name_lookup.get(canon, canon), canon)
+
+        exogenous_reactants = set(corrected_initial)
 
         changed = True
         iterations = 0
@@ -266,14 +937,18 @@ class Recommender:
                 r_canons = [_canon(r.smiles) for r in step.reactants]
                 p_canons = [_canon(p.smiles) for p in step.products]
                 
-                # The distance to fire this step is the MAX distance of all its reactants
-                # The limiting concentration is the MIN of all reactants
-                # The depth is the MAX depth of all reactants + 1
+                # The distance to fire this step is the MAX distance of all its reactants.
+                # We propagate two separate notions:
+                # - `conc`: user-specified precursor abundance proxy.
+                # - `weight`: pathway-available reactive flux proxy.
+                # Products must inherit from available flux, not directly from the original precursor pool.
                 max_r_dist = 0.0
                 max_r_unc = 0.0
                 min_r_conc = float('inf')
                 max_r_depth = 0
                 reachable = True
+                dominant_reactant = None
+                dominant_reactant_span = -1.0
                 
                 for r in r_canons:
                     if r not in tracking:
@@ -284,6 +959,9 @@ class Recommender:
                     max_r_unc = max(max_r_unc, r_unc)
                     min_r_conc = min(min_r_conc, r_conc)
                     max_r_depth = max(max_r_depth, r_depth)
+                    if r_span >= dominant_reactant_span:
+                        dominant_reactant = r
+                        dominant_reactant_span = r_span
                     
                 if not reachable:
                     continue
@@ -311,33 +989,58 @@ class Recommender:
                 # But for the cumulative pathway, we use the bottleneck span
                 import math
                 
-                # Product of reactant concentrations
-                reactant_conc_product = 1.0
+                # Use the least-available upstream precursor/intermediate pool once.
+                # The cumulative span already captures pathway resistance, so reusing an
+                # already-discounted upstream weight here would double-penalize deep routes.
+                reactant_flux_pool = min_r_conc
+                if not math.isfinite(reactant_flux_pool):
+                    reactant_flux_pool = 0.0
+
+                # Additional co-reactant availability factor keeps multi-reactant steps sensitive
+                # to precursor abundance without turning units into concentration^n.
+                reference_concentration = 10.0
+                co_reactant_factor = 1.0
                 for r in r_canons:
-                    reactant_conc_product *= tracking[r][1]
+                    if r not in exogenous_reactants:
+                        continue
+                    normalized_conc = tracking[r][1] / (tracking[r][1] + reference_concentration)
+                    co_reactant_factor *= normalized_conc
                 
                 if ramp_data:
                     # SOTA: Integrated Propensity
                     integrated_propensity = _integrate_arrhenius(path_span, ramp_data)
-                    path_weight = reactant_conc_product * integrated_propensity
+                    path_weight = reactant_flux_pool * co_reactant_factor * integrated_propensity
                 else:
                     RT = 0.001987 * temperature_kelvin
                     # Path weight (Flux approximation)
-                    path_weight = reactant_conc_product * math.exp(-path_span / RT)
+                    path_weight = reactant_flux_pool * co_reactant_factor * math.exp(-path_span / RT)
                     
                     # Phase Q.1: Temporal FAST Mode (Fallback)
                     if time_minutes is not None:
                         # Characteristic time approx (seconds)
-                        # Using A ~ 1e11 (from new Arrhenius data average)
-                        tau_sec = math.exp(path_span / RT) / 1e11
+                        tau_sec = math.exp(path_span / RT) / get_reference_pre_exponential()
                         tau_min = tau_sec / 60.0
                         
                         # Number of steps increases characteristic time roughly linearly
                         total_tau = tau_min * path_depth
-                        
-                        # Weight decay: if total_tau >> time_minutes, weight drops exponentially
-                        time_penalty = math.exp(-total_tau / time_minutes)
-                        path_weight *= time_penalty
+
+                        # Finite-duration accessibility: slow routes scale roughly linearly
+                        # when t << tau and saturate smoothly when t >> tau.
+                        path_weight *= _temporal_accessibility(total_tau, time_minutes)
+
+                # Product concentration proxy should inherit the precursor-limited pool,
+                # not the exponentially discounted pathway score.
+                path_conc = reactant_flux_pool
+                base_path = list(best_paths.get(dominant_reactant, [])) if dominant_reactant else []
+                step_trace = {
+                    "family": step.reaction_family or "unknown",
+                    "barrier": barrier,
+                    "path_span": path_span,
+                    "reactants": [species_name_lookup.get(r, r) for r in r_canons],
+                    "reactant_canons": list(r_canons),
+                    "products": [species_name_lookup.get(p, p) for p in p_canons],
+                }
+                candidate_path = base_path + [step_trace]
                 
                 # Relaxation: we primarily want the lowest span path. 
                 for p in p_canons:
@@ -350,68 +1053,162 @@ class Recommender:
 
                     if path_span < current_span:
                         tracking[p_key] = (path_span, path_conc, path_depth, path_weight, path_unc)
+                        best_paths[p_key] = candidate_path
                         changed = True
                     elif path_span == current_span and path_weight > current_weight:
                         tracking[p_key] = (path_span, path_conc, path_depth, path_weight, path_unc)
+                        best_paths[p_key] = candidate_path
                         changed = True
 
-        # Phase 7: Collect raw predictions before matrix retention correction
-        raw_concentrations = {}
-        for p_canon, (span, conc, depth, weight, unc) in tracking.items():
-            # Standardise to ppb range: Weight (Boltzmann) * ratio * 1e9
-            raw_concentrations[p_canon] = weight * 1e9
-
-        # Phase 7: Apply Matrix Retention Corrections to outputs
-        corrected_volatiles, _ = apply_matrix_correction(
-            predicted_concentrations=raw_concentrations,
-            reactive_amino_acids={},
-            protein_type=p_type,
-            denaturation_state=denaturation_state
+        # Project ranked FAST outputs onto a bounded volatile ppb budget.
+        projection_budget = _estimate_projection_budget(
+            corrected_initial,
+            temperature_kelvin,
+            time_minutes,
+            strategy=projection_strategy,
         )
+        raw_concentrations = _project_weighted_flux_to_ppb(
+            steps,
+            tracking,
+            best_paths,
+            species_catalog,
+            corrected_initial,
+            target_lookup,
+            exogenous_reactants,
+            temperature_kelvin,
+            time_minutes,
+            projection_strategy=projection_strategy,
+            projection_budget=projection_budget,
+        )
+
+        observable_volatiles, projection_metadata = _apply_output_projection(
+            raw_concentrations,
+            species_catalog,
+            target_lookup,
+            temperature_kelvin,
+            protein_type=protein_type,
+            time_minutes=time_minutes,
+            denaturation_state=denaturation_state,
+            fat_fraction=fat_fraction,
+            protein_fraction=protein_fraction,
+            projection_budget=projection_budget,
+            projection_strategy=projection_strategy,
+            species_name_lookup=species_name_lookup,
+        )
+        proxy_volatiles = dict(raw_concentrations)
         
         # Add names to the dictionary for downstream sensory and benchmark matching
         final_volatiles = {}
-        for p_canon, conc in corrected_volatiles.items():
+        final_proxy_volatiles = {}
+        for p_canon, conc in observable_volatiles.items():
             final_volatiles[p_canon] = conc
+            final_proxy_volatiles[p_canon] = proxy_volatiles.get(p_canon, conc)
+            species_name = species_name_lookup.get(p_canon)
+            if species_name:
+                final_volatiles[species_name] = conc
+                final_proxy_volatiles[species_name] = proxy_volatiles.get(p_canon, conc)
             t_info = target_lookup.get(p_canon)
             if t_info:
                 final_volatiles[t_info["name"]] = conc
+                final_proxy_volatiles[t_info["name"]] = proxy_volatiles.get(p_canon, conc)
 
         # Identify which targets were produced
         active_pathways = []
         for p_canon, (span, conc, depth, weight, unc) in tracking.items():
             t_info = target_lookup.get(p_canon)
             if t_info and span < float('inf') and span >= 0.0:
+                species = species_catalog.get(p_canon, Species(t_info["name"], p_canon))
+                observability = _headspace_observability_metadata(species, target_lookup)
                 
-                # We mock a Species object for the old table formatter
-                class MockTarget:
-                    def __init__(self, label):
-                        self.label = label
-                
-                p_dict = {
+
+        # Update active_pathways with final ppb
+        active_pathways = []
+        active_targets = {
+            p_canon: t_info
+            for p_canon, t_info in target_lookup.items()
+            if p_canon in tracking and tracking[p_canon][0] < float('inf') and tracking[p_canon][0] >= 0.0
+        }
+
+        class MockTarget:
+            def __init__(self, label):
+                self.label = label
+
+        for p_canon, t_info in active_targets.items():
+            _, _, depth, _, _ = tracking.get(p_canon, (0, 0, 0, 0, 0))
+            span = tracking[p_canon][0]
+            
+            species = species_catalog.get(p_canon, Species(t_info["name"], p_canon))
+            observability = _headspace_observability_metadata(species, target_lookup)
+            
+            p_dict = {
+                "name": t_info["name"],
+                "span": span,
+                "concentration": observable_volatiles.get(p_canon, 0.0), # Use corrected
+                "proxy_concentration": final_proxy_volatiles.get(p_canon, 0.0),
+                "weighted_flux": observable_volatiles.get(p_canon, 0.0), # Observable output budget proxy for ranking tables
+                "span_uncertainty": tracking[p_canon][4],
+                "depth": depth,
+                "target": MockTarget(t_info["name"]),
+                "type": t_info["type"],
+                "penalty": "LOW",
+                "toxicity": None,
+                "sensory": t_info["data"].get("sensory_desc", "-"),
+                "threshold": t_info["data"].get("odour_threshold_ug_per_kg", None),
+                "roles": t_info.get("roles", [t_info["type"]]),
+                "projection": projection_metadata.get(p_canon, {}),
+                **observability,
+            }
+            
+            if t_info["type"] == "toxic":
+                p_dict["toxicity"] = {
                     "name": t_info["name"],
-                    "span": span,
-                    "concentration": final_volatiles.get(p_canon, 0.0), # Use corrected
-                    "weighted_flux": final_volatiles.get(p_canon, 0.0), # Use corrected
-                    "span_uncertainty": tracking[p_canon][4],
-                    "depth": depth,
-                    "target": MockTarget(t_info["name"]),
-                    "type": t_info["type"],
-                    "penalty": "LOW",
-                    "toxicity": None,
-                    "sensory": t_info["data"].get("sensory_desc", "-"),
-                    "threshold": t_info["data"].get("odour_threshold_ug_per_kg", None)
+                    "risk": t_info["data"].get("health_risk", "Unknown"),
+                    "priority": t_info["data"].get("priority", "high").upper()
                 }
-                
-                if t_info["type"] == "toxic":
-                    p_dict["toxicity"] = {
-                        "name": t_info["name"],
-                        "risk": t_info["data"].get("health_risk", "Unknown"),
-                        "priority": t_info["data"].get("priority", "high").upper()
-                    }
-                
-                active_pathways.append(p_dict)
-                
+            
+            active_pathways.append(p_dict)
+            
+        # Sort targets: lower span first, then higher concentration
+        active_pathways.sort(key=lambda x: (x["span"], -x["concentration"]))
+
+        # --- Advanced Diagnostics: Precursor Attribution ---
+        precursor_attribution = {} # {precursor_name: contribution_score}
+        # We estimate contribution based on how many targets a precursor "feeds" 
+        # weighted by the target's observable concentration.
+        for p_canon, t_info in active_targets.items():
+            path = best_paths.get(p_canon, [])
+            target_conc = observable_volatiles.get(p_canon, 0.0)
+            if target_conc <= 0: continue
+            
+            # Find all precursors in this path
+            path_precursors = set()
+            for step_tr in path:
+                for r_canon in step_tr.get("reactant_canons", []):
+                    # Initial precursors have span 0.0 in tracking
+                    if r_canon in tracking and tracking[r_canon][0] == 0.0:
+                        path_precursors.add(r_canon)
+            
+            if path_precursors:
+                split_conc = target_conc / len(path_precursors)
+                for prec_can in path_precursors:
+                    p_name = species_name_lookup.get(prec_can, prec_can)
+                    precursor_attribution[p_name] = precursor_attribution.get(p_name, 0.0) + split_conc
+
+        # --- Advanced Diagnostics: Suppressed Compounds ---
+        suppressed_compounds = []
+        for canon, meta in projection_metadata.items():
+            proxy = meta.get("proxy_ppb", 0.0)
+            obs = meta.get("observable_ppb", 0.0)
+            if proxy > 5.0 and (obs / proxy) < 0.3: # Significant suppression
+                suppressed_compounds.append({
+                    "name": species_name_lookup.get(canon, canon),
+                    "proxy_ppb": proxy,
+                    "observable_ppb": obs,
+                    "reduction_factor": 1.0 - (obs / proxy),
+                    "primary_cause": "headspace" if meta.get("headspace_factor", 1.0) < meta.get("matrix_factor", 1.0) else "matrix"
+                })
+        suppressed_compounds.sort(key=lambda x: x["reduction_factor"], reverse=True)
+            
         # ── PBMA Metrics: Lipid Trapping Efficiency ──
         # Find which initial pool members are lipids
         lipid_pool_canons = []
@@ -507,13 +1304,34 @@ class Recommender:
 
         metrics = {
             "trapping_efficiency": trapping_results,
-            "lysine_budget_dha": lysine_budget
+            "lysine_budget_dha": lysine_budget,
+            "bottleneck": {
+                "precursor": species_name_lookup.get(projection_budget.limiting_precursor_name, projection_budget.limiting_precursor_name),
+                "severity": float(projection_budget.severity),
+                "load_factor": float(projection_budget.load_factor)
+            },
+            "precursor_attribution": precursor_attribution,
+            "suppressed_compounds": suppressed_compounds
         }
 
         return {
             "targets": active_pathways,
             "metrics": metrics,
-            "predicted_ppb": final_volatiles
+            "predicted_ppb": final_volatiles,
+            "predicted_proxy_ppb": final_proxy_volatiles,
+            "projection_metadata": projection_metadata,
+            "projection_context": {
+                "limiting_precursor_molar": float(projection_budget.limiting_precursor_molar),
+                "projection_load_factor": float(projection_budget.load_factor),
+                "projection_temperature_factor": float(projection_budget.temperature_factor),
+                "projection_time_factor": float(projection_budget.time_factor),
+                "projection_severity": float(projection_budget.severity),
+                "volatile_yield_fraction": float(projection_budget.volatile_yield_fraction),
+                "total_volatile_budget_molar": float(projection_budget.total_volatile_budget_molar),
+                **_projection_strategy_metadata(projection_strategy),
+            },
+            "debug_paths": best_paths,
+            "species_names": species_name_lookup,
         }
 
     def predict(self, pool: List[str]):

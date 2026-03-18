@@ -1,295 +1,327 @@
-# Maillard Reactant Framework
+# Maillard
 
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
-[![Docker Required](https://img.shields.io/badge/Docker-Required-blue.svg)](https://www.docker.com/)
+[![Docker Recommended](https://img.shields.io/badge/docker-recommended-blue.svg)](https://www.docker.com/)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-**Maillard** is a pure-Python, high-fidelity chemical discovery engine designed for the next generation of plant-based foods. It explores the high-dimensional chemical space of the Maillard reaction to help you design flavor systems that are indistinguishable from animal meat.
+Maillard is a predictive computational framework designed to help alternative-protein scientists digitally explore and rank Maillard flavor chemistry *before* stepping into the wet lab.
 
-- 🌿 **Plant-Based Focus**: Tailored rules for soy, pea, and fungal protein precursors.
-- ⚡ **Multi-Tiered Screening**: Balances generative breadth with DFT precision.
-- 🔬 **Scientific Rigor**: Includes native support for pH, water activity, and heme catalysis.
+By simulating the complex reactions between sugars and amino acids under specific conditions, it tells you what your current formulation will likely produce, what trade-offs exist (e.g., flavor vs. safety), and what you should try next.
 
 ---
 
-## 🎯 Mission
-
-To empower food scientists to rationally design precursor combinations (pea, soy, sugars, fats) that maximize meaty volatiles (MFT, pyrazines) while minimizing off-flavors (beany hexanal) and toxic by-products (HMF, acrylamide).
-
-### 🌟 Highlights
-- **Hybrid SmirksEngine**: Automated discovery of thousands of pathways with strict mass conservation.
-- **Formulation Inverse Design**: Don't just predict; search the formulation grid for the optimal precursor matrix to hit a target sensory profile.
-- **Bayesian Formulation Optimization**: Actively learn and search a continuous space of precursor concentrations, pH, and temperature using `optuna`.
-- **Sensory & Safety Radar**: Target flavor profiles (e.g., meaty) using Stevens' psychophysical power-law scaling while strictly penalizing toxic markers (Acrylamide, HMF) via Pareto ranking.
-- **PBMA Metrics**: Native calculation of "Lysine Budgets" and "Lipid Trapping Efficiency" to account for competition in complex food matrices.
+**Important Note:** This project relies on complex chemistry dependencies. It **requires conda or Docker** — standard pip-only installation is not supported.
 
 ---
 
-## 🧬 The Challenge
+## 🚀 The Fastest Way to Start
 
-Plant-based proteins (pea, soy, etc.) lack the native precursor matrix of animal meat (Ribose, Cysteine, Heme). This leads to:
-1.  **Aroma Gap**: Insufficient production of key meat odorants like 2-methyl-3-furanthiol (MFT).
-2.  **Off-Flavors**: Dominance of beany/grassy notes from lipid oxidation.
-3.  **Competition**: Stoichiometric competition from the Dehydroalanine (DHA) pathway consuming critical amino acids.
+If you want to run a prediction and see how it works, **start with the [Quickstart Guide](docs/guides/QUICKSTART.md)**. It takes under 10 minutes to run your first formulation.
 
-Exploring this space in the wet-lab is **combinatorially explosive**, **slow**, and **expensive**.
-
-## 🧪 Scientific Case Studies & Reports
-
-We provide detailed scientific reports that illustrate how to use the framework for real-world Alt-Protein formulation challenges. Each case study compares predicted outcomes against peer-reviewed literature.
-
-- 🍔 **[Premium Roast Pea Protein Patty](docs/use_cases/pea_protein_report.md)**: Strategies for masking beany off-flavors while maximizing meaty thiols (MFT/FFT).
-- 🥜 **[Alkali-Induced Roasted Nutty Profile](docs/use_cases/roasted_nutty_report.md)**: Optimizing pyrazine formation for plant-based milks and beverages.
-- ☢️ **[Toxicity-Flavor Decoupling](docs/use_cases/toxicity_decoupling_report.md)**: Balancing high-heat searing flavor with Acrylamide/HMF safety limits.
-- 📑 **[Report Template](docs/use_cases/REPORT_TEMPLATE.md)**: Guidelines for contributing new scientific validations.
+For definitions of project terminology (e.g., "FAST mode", "validated envelope"), see our **[Glossary for Scientists](docs/guides/GLOSSARY.md)**.
 
 ---
 
-## 🛠️ How It Works
+## 📊 Example Output
 
-Maillard uses a funnel strategy: generate broadly, then refine precisely. Most users only need the top two tiers.
+When you run a candidate formulation, Maillard gives you a clear snapshot of its flavor profile, safety risks, and scientific confidence:
 
-| Tier | What it does | Speed | When you need it |
-|---|---|---|---|
-| **Tier 0** | Generates reaction networks (SMIRKS + templates) | Seconds | **Always** — this is the core engine |
-| **FAST** | Concentration-aware kinetic ranking + sensory prediction | Seconds | **Always** — ranks pathways by flavor impact |
-| **ML (MACE-OFF24)** | Near-DFT activation barriers via machine learning | Minutes | When you need accurate barrier energies without HPC |
-| **xTB / DFT** | Semi-empirical or full quantum chemistry | Hours | Research-grade validation of specific bottlenecks |
+```text
+================================================================================
+MAILLARD FORMULATION SCREENING
+================================================================================
+Target: meaty | Minimize: beany | Protein: pea_iso
 
-> [!TIP]
-> **For most formulation work**, Tier 0 + FAST is all you need. The Bayesian optimizer uses these tiers internally and runs entirely on a laptop.
+PREDICTION CONFIDENCE: MODERATE
+Warning: Your system relies heavily on pea matrix behavior. Treat results
+as directional prioritization rather than release-grade claims.
 
-### Key Capabilities
-- **Reaction Discovery**: Automated enumeration of Maillard, Strecker, Amadori, retro-aldol, and thiol pathways with strict mass conservation.
-- **pH & Temperature Physics**: Smooth sigmoid kinetics model how pH shifts favor different pathways (acidic → furans/thiols, alkaline → pyrazines).
-- **Headspace Partitioning**: Converts liquid-phase concentrations to what the consumer actually smells, accounting for fat/protein binding in plant matrices.
-- **Safety Scoring**: Automatically flags and penalizes toxic marker formation (Acrylamide, CML, CEL, HMF) using Pareto ranking.
-- **Sensory Radar**: Stevens' power-law psychophysical model generates multi-axis flavor profiles (meaty, roasted, beany, malty, earthy).
+DOMINANT DESIRABLE COMPOUNDS:
+- 2-methyl-3-furanthiol: 15.4 ppb
+- 2-furfurylthiol: 8.2 ppb
 
-## 🚀 Completed Milestones & Roadmap
-
-### 🟢 Phase 1: Foundation & Complexity (Done)
-- [x] **Reaction Core**: SMIRKS-based enumeration with mass conservation.
-- [x] **Radical Lipid Oxidation**: Generation of beany off-flavors (hexanal) from PUFAs.
-- [x] **Temporal FAST Mode**: Non-isothermal Boltzmann scoring using Arrhenius integrals.
-- [x] **Matrix Correction**: accessibility scaling for high-protein matrices (Pea/Soy).
-
-### 🟡 Phase 2: Refinement & Safety (Active)
-- [x] **Safety Scoring**: Native Acrylamide/HMF modeling (Knol 2009).
-- [x] **Bayesian Optimization**: Optuna-driven Pareto-optimal precursor design.
-- [ ] **Heme/Iron Catalysis**: Specific kinetic models for metal-promoted pathways. (In Progress)
-- [ ] **Benchmarking**: Full cross-validation against Mottram/Farmer datasets. (In Progress)
-
-### 🔴 Phase 3: Advanced Physics (Next)
-- [ ] **Flavor-Texture Coupling**: Linking DHA cross-linking to rheological feedback.
-- [ ] **High-Shear Extrusion**: Modeling the mechanics of HME vs static heating.
-- [ ] **Phytochemical Scavenging**: Sequestration of osones by plant polyphenols.
-
-## 🚀 Installation
-
-For detailed step-by-step instructions, including mandatory patches for `mace` and `e3nn`, please see the **[Installation Guide](Installation.md)**.
-
-### 🐧 Linux & 🪟 Windows (WSL2)
-We recommend using **Miniforge** to manage the complex chemistry dependencies:
-```bash
-conda env create -f environment.yml
-conda activate maillard
-# See Installation.md for the 'xtbiff' and 'pytorch' patches.
+DOMINANT PENALTIES:
+- hexanal: 120.5 ppb (High Risk)
+================================================================================
 ```
 
-### 🍎 macOS (Apple Silicon M1/M2/M3)
-Maillard relies on x86_64 chemical binaries. Use **Docker** (with OrbStack or Docker Desktop) for a seamless experience:
-```bash
-# Start the Linux environment
-docker run --platform linux/amd64 -it -v "$(pwd):/workspace" -w /workspace condaforge/miniforge3
+## 🧪 What Inputs Do I Need?
 
-# Inside the container, set up environment:
-conda create -n maillard python=3.12 -y && conda activate maillard
-# Apply patches from Installation.md
-```
+To run a prediction, you feed the tool a recipe. The minimum inputs are:
 
-**Returning to Work (macOS):**
-```bash
-docker start -ai maillard_container
-conda activate maillard
-```
-
-
-### 2. Verify Scientific Dependencies
-Ensure that the QM engines are correctly detected by the framework:
-```bash
-# Check if binaries are in your PATH
-which crest
-which xtb
-
-# Run core validation tests
-python -m pytest tests/qm/test_solvation.py
-```
-
-### 3. Install Skala (Tier 2 DFT)
-If you intend to run Tier 2 DFT refinement, install Microsoft Skala:
-```bash
-pip install git+https://github.com/microsoft/skala.git
-```
+- **Sugars:** e.g., `ribose`, `glucose`, `xylose`
+- **Amino Acids:** e.g., `cysteine`, `leucine`
+- **Molar Ratios:** The proportions of your precursors
+- **Environment:** `pH`, Temperature (`temp`), and Reaction Time (`time-minutes`)
+- **Protein Matrix:** `free` (buffer), `pea_iso` (pea isolate), or `soy_iso` (soy isolate)
 
 ---
 
-## 🔬 Scientific Accuracy & Monitoring
+## What This Repository Is For
 
-The framework uses a **Test-Driven Science** approach. We maintain specific tests in `tests/scientific/` that monitor our correlation with literature and document known gaps. For a detailed breakdown of how we verify our predictions against curated literature benchmarks, see the **[Scientific Validation Guide](docs/VALIDATION_GUIDE.md)** and the **[Literature Benchmark Reference](data/benchmarks/maillard_validation_benchmarks.md)**.
+Use Maillard when you want to answer questions like these before running a wet-lab experiment:
 
-### 🚩 Known Blind Spots (Tracked)
-We proactively document and test for current engine limitations to prevent over-confidence in edge cases:
-- **Heme Optimization**: While supported in the CLI, explicit leghemoglobin-specific kinetics are still being refined.
-- **Supplier Variability**: Batch-level differences between isolate suppliers (PURIS vs Roquette) are not yet modeled.
-- **Metal Catalysis**: General iron/copper synergistic effects on pyrazine formation are currently heuristic.
+- Which precursor combination is most likely to generate meaty sulfur compounds under my process conditions?
+- If I change pH, temperature, water activity, or reaction time, which flavour-active compounds move the most?
+- Which candidate formulation improves desirable aroma while reducing beany or safety penalties?
+- Which predictions are benchmark-backed, and which are only directional?
 
-*Run these baseline tests with:* `python -m pytest tests/scientific/test_blind_spots.py`
+The library is most useful as a formulation-screening and prioritization system. It is not a replacement for final experimental confirmation.
 
----
+## What You Can Share Today
 
-## 🛠️ Usage
+The repository now supports three shareable artifact levels for external scientific review:
 
-### 1. Python API Quickstart (For Food Scientists)
-Maillard is designed to be easily scriptable in Jupyter Notebooks or standard Python workflows. Here is how you run a Bayesian formulation optimization to find the perfect mix of ingredients:
+- a single-run report with Markdown, JSON, and provenance
+- a side-by-side comparison report for a small named set of formulations
+- a campaign package with per-run reports, a leaderboard, and campaign-level provenance
 
-```python
-from src.bayesian_optimizer import FormulationOptimizer
-
-# 1. Define your goal: Maximize "meaty" notes, mask "beany" off-flavors
-optimizer = FormulationOptimizer(
-    target_tag="meaty", 
-    minimize_tag="beany", 
-    risk_aversion=1.5 # Penalize Acrylamide/HMF by 1.5x
-)
-
-# 2. Define your available ingredients (e.g., from a pea protein matrix)
-sugars = ["ribose", "glucose"]
-amino_acids = ["cysteine", "leucine"]
-lipids = ["hexanal"] # Source of the beany off-flavor
-
-# 3. Optimize! Optuna will search the concentration, pH, and temp space
-study = optimizer.optimize(
-    fixed_sugars=sugars,
-    fixed_amino_acids=amino_acids,
-    fixed_lipids=lipids,
-    n_trials=25
-)
-
-best = study.best_trial
-print(f"Best Target Score: {best.user_attrs['target_score']:.2f}")
-print(f"Optimal pH: {best.params['ph']:.2f}")
-print(f"Optimal Temp: {best.params['temp']:.1f} °C")
-```
-
-### 2. Command Line Interface (CLI)
-Identify the precursors and tags available in your current database:
-```bash
-python scripts/run_pipeline.py --list-precursors
-python scripts/run_pipeline.py --list-tags
-```
-
-### 3. Forward Mode: Predict Aroma
-Predict the volatiles and sensory profile produced by a formulation.
-```bash
-python scripts/run_pipeline.py \
-    --sugars ribose:0.5 \
-    --amino-acids cysteine:0.2,leucine:0.1 \
-    --ph 5.5 \
-    --temp 105 \
-    --protein-type pea_iso
-```
-*Note: Add `--xtb` for rigorous (but slow) structural optimization.*
-
-### 4. Bayesian Optimizer
-Search the continuous space to find the Pareto-optimal formulation for flavor vs. safety.
-```bash
-python scripts/optimize_formulation.py \
-    --sugars ribose,glucose \
-    --amino-acids cysteine,leucine \
-    --target-tag meaty \
-    --minimize-tag beany \
-    --n-iterations 50
-```
-
-### 5. Kinetics & Validation: Simulated vs Experimental Yields
-Run rigorous ODE-based microkinetic simulations (supporting temperature ramps) and validate against experimental benchmarks.
-```bash
-# Run simulation using the structured results database
-python scripts/run_cantera_kinetics.py \
-    --precursors ribose:0.1,glycine:0.1 \
-    --temp-ramp data/temp_profiles/isothermal_150.csv \
-    --input results/maillard_results.db \
-    --predict-sensory
-
-# Validate framework against literature benchmarks
-python scripts/compare_sim_to_lit.py
-```
-*Use `--export mech.yaml` to save the Cantera mechanism for external use.*
+That does not make every result equally validated. It does mean you can share outputs without losing the command context, branch/commit state, or the scientific files that define the current trust surface.
 
 ---
 
-## 📂 What You Get Back
+## Does It Work?
 
-Every evaluation (whether from the CLI, Python API, or Bayesian optimizer) returns:
+Yes, within a clearly defined envelope. The repository exposes a compact trust surface centered on the strongest quantitative benchmark evidence.
 
-| Output | What it tells you |
-|---|---|
-| **Sensory Radar** | Multi-axis flavor profile (meaty, roasted, beany, malty, earthy) scaled by Stevens' power law |
-| **Target Score** | How well this formulation hits your desired flavor tag (e.g., "meaty") |
-| **Safety Score** | Penalty from predicted toxic marker formation (Acrylamide, CML, HMF) |
-| **Flagged Toxics** | Specific compounds flagged as safety risks for this formulation |
-| **Off-Flavour Risk** | Predicted intensity of undesirable notes (e.g., beany/grassy) |
-| **Lipid Trapping %** | How effectively your amino acids sequester reactive aldehydes (like hexanal) |
-| **Lysine Budget** | % of lysine consumed by the competing Dehydroalanine (DHA) pathway |
+Current in-repo validation summary:
 
-The Bayesian optimizer additionally tracks the full optimization trajectory so you can inspect how it converged on the optimal formulation.
+- 8 supported benchmarks are tracked in Docker-validated artifacts
+- 4 benchmarks are strict-ready today, all in the free-precursor envelope
+- 9 matched compounds define the current authoritative quantitative proof surface
+- the median matched-compound ratio in that proof surface is 1.118x
+
+In practice, this means the software already reproduces a narrow but real set of literature systems closely enough to support quantitative screening inside that envelope.
+
+The main validation figure now focuses only on the two panels that matter most for first-pass trust: parity against literature and benchmark-level quantitative error.
+
+![Validation Overview](results/validation/validation_overview.png)
+
+If you need the full boundary conditions, benchmark-by-benchmark status, or caveats beyond this first-pass view, use the generated validation documents rather than a second summary graphic.
+
+How to interpret trust:
+
+- Free-precursor benchmarks are the quantitative proof surface. Use them when you need concentration-scale decisions.
+- Pea and soy matrix paths are useful for directional prioritization, not yet for release-grade quantitative claims.
+- Extrusion-heavy or intact-protein systems remain exploratory unless you add new benchmark evidence.
+
+---
+
+## Trust Levels
+
+| System Type | Trust Level | What You Can Safely Use It For |
+| --- | --- | --- |
+| **Free precursors** | **High** | Quantitative ranking, concentration-scale comparison, candidate screening, safety-aware optimization. |
+| **Pea / soy matrices** | **Moderate** | Directional comparison, off-flavour triage, hypothesis generation, deciding what to test next. |
+| **Intact protein / extrusion-heavy systems** | **Low** | Exploratory use only; treat outputs as hypotheses until benchmarked. |
+
+Important caveat: matrix trust is lower because accessibility, retention, and pH-dependent headspace effects are not yet benchmark-closed across real plant matrices.
+
+---
+
+## What The Software Can Do
+
+Within its supported envelope, Maillard can already do the following:
+
+- **Rank likely volatile products for a formulation.**
+  Given sugars, amino acids, additives, lipids, pH, temperature, water activity, and time, the pipeline predicts which compounds are most likely to dominate.
+- **Estimate concentration-scale outputs in ppb inside the validated free-precursor envelope.**
+  This is the main quantitative use case when your system resembles the strict-ready literature benchmarks.
+- **Score formulations against sensory goals and penalties.**
+  You can target tags such as meaty or roasted and simultaneously penalize beany or safety-related outcomes.
+- **Generate scientist-facing reports.**
+  The CLI can emit Markdown and JSON reports that include decision summaries, confidence metadata, and domain-of-validity warnings.
+- **Optimize precursor mixtures.**
+  The optimizer searches pH, temperature, water activity, time, and concentration choices to maximize a target sensory direction under penalties.
+- **Explain why a prediction looks the way it does.**
+  The reporting layer surfaces dominant compounds, penalties, likely bottlenecks, and why confidence is limited.
+
+## What It Cannot Do Reliably Yet
+
+- It cannot serve as a universal zero-shot predictor for complex plant matrices.
+- It cannot replace wet-lab confirmation for extrusion-heavy or strongly peptide-bound systems.
+- It cannot yet claim broad quantitative accuracy for matrix headspace release across process states.
+- It should not be used as if every output were equally validated; some outputs are quantitative, others are directional.
+
+---
+
+## Recommended Workflow For Useful Results
+
+For a new user, the most productive path is:
+
+1. Check the validation surfaces first so you know whether your intended use case is benchmark-backed.
+2. Run a forward prediction with your candidate precursors and process conditions.
+3. Re-run with `--report` so you get Markdown and JSON outputs you can inspect or share.
+4. If the prediction looks promising, use the optimizer to search nearby formulations instead of tuning by hand.
+5. Treat matrix-heavy outputs as directional unless your system is visibly close to the validated envelope.
+
+---
+
+## Advanced Workflows & Command Reference
 
 <details>
-<summary><strong>🔬 Advanced: DFT Barrier Refinement (for computational chemists)</strong></summary>
+<summary><strong>Click here to view detailed command examples (Docker setup, Optimization, Campaign generation, etc.)</strong></summary>
 
-If you need research-grade activation barriers, the framework supports a full quantum chemistry pipeline:
+### Quick Start (Technical Setup)
+
+Recommended setup: Docker for reproducibility. Local Python/conda setup is also documented in [Installation.md](Installation.md).
+
+### 1. Start the environment and inspect the trust surface
 
 ```bash
-# Generate 3D geometries for reactants/products
-python scripts/generate_mapped_geometries.py
-
-# Run xTB transition state search
-python scripts/run_tier2_dft.py --reaction strecker
-
-# With IRC validation
-python scripts/run_tier2_dft.py --reaction strecker --irc
+./scripts/docker_maillard.sh up
+./scripts/docker_maillard.sh bootstrap
+./scripts/docker_maillard.sh summary
+./scripts/docker_maillard.sh validation-figures
 ```
 
-This uses the `r2SCAN-3c // wB97M-V` composite protocol. Requires `pyscf`, `geometric`, and optionally `CREST` for explicit solvation. See `src/skala_refiner.py` for details.
+This gives you the core validation artifacts that should be read before interpreting predictions:
+
+- [results/validation/benchmark_summary.md](results/validation/benchmark_summary.md) for the benchmark-by-benchmark contract
+- [results/validation/validation_overview.md](results/validation/validation_overview.md) for the repository-level trust snapshot
+- [results/validation/validated_envelope.md](results/validation/validated_envelope.md) for the current boundary of reliable use
+
+## What To Run For Each Goal
+
+| Goal | Command | What you get |
+| --- | --- | --- |
+| Check whether your use case is benchmark-backed | `./scripts/docker_maillard.sh validation-figures` | Overview PNGs plus Markdown/JSON summaries of trust and envelope boundaries. |
+| Inspect benchmark-by-benchmark status | `./scripts/docker_maillard.sh summary` | The current benchmark table with status, coverage, ratios, and notes. |
+| Generate a prediction for a candidate formulation | `python scripts/run_pipeline.py ... --report` | Compound predictions, decision summary, confidence warnings, and a saved report bundle. |
+| Optimize a formulation around a target profile | `python scripts/optimize_formulation.py ... --report` | The best trial, predicted tradeoffs, and an exportable report. |
+| Compare a short list of named formulations | `python scripts/compare_formulations.py --names ... --output-dir ...` | A side-by-side comparison bundle with confidence and provenance. |
+| Build a scientist-shareable campaign package | `./scripts/docker_maillard.sh campaign data/campaigns/shareable_meaty_screen.yml` | Run-level bundles plus campaign-level Markdown/JSON artifacts. |
+| Inspect one literature benchmark directly | `./scripts/docker_maillard.sh run python scripts/compare_sim_to_lit.py --lit ...` | A benchmark card with parity plot, absolute yields, and benchmark summary. |
+
+### 2. Run a forward prediction
+
+Use [scripts/run_pipeline.py](scripts/run_pipeline.py) when you already have a candidate formulation and want to know what it is likely to produce.
+
+```bash
+python scripts/run_pipeline.py \
+  --sugars ribose,glucose \
+  --amino-acids cysteine,leucine \
+  --ratios ribose:0.5,glucose:0.2,cysteine:0.2,leucine:0.1 \
+  --ph 5.5 \
+  --temp 105 \
+  --time-minutes 45 \
+  --protein-type pea_iso \
+  --target meaty \
+  --minimize beany \
+  --report \
+  --output-dir results/first_run
+```
+
+This command is useful because it returns more than a list of compounds. It also gives you:
+
+- a prediction summary for desirable compounds and penalties
+- confidence and domain-of-validity warnings
+- report artifacts you can compare between runs
+
+Useful flags in this pipeline:
+
+- `--list-precursors` to discover supported precursor names
+- `--list-tags` to inspect available sensory tags
+- `--aw` and `--time-minutes` to change process severity
+- `--protein-type` and `--denaturation-state` to express matrix assumptions
+- `--report` to persist a scientist-facing Markdown and JSON bundle
+
+Every saved bundle now includes provenance metadata: generating command, branch, commit, dirty-state flag, input fingerprint, and the key scientific-reference files needed to interpret the result honestly.
+
+### 2b. Compare named formulations when the question is comparative
+
+```bash
+python scripts/compare_formulations.py \
+  --names "Cysteine Enrichment (Basic),Premium Meaty Mix,Soy-Specific Masking" \
+  --ph 5.5 \
+  --temp 105 \
+  --target-tag meaty \
+  --minimize-tag beany \
+  --output-dir results/comparison_meaty
+```
+
+Use this when you want a side-by-side scientific review artifact instead of reading one run at a time.
+
+### 2c. Build a campaign package for external review
+
+```bash
+./scripts/docker_maillard.sh campaign \
+  data/campaigns/shareable_meaty_screen.yml \
+  results/share/campaign_meaty
+```
+
+This produces:
+
+- one report bundle per run in `runs/`
+- `comparison.md` and `comparison.json`
+- `campaign.md` and `campaign.json`
+
+Use this when you need to hand results to scientists or reviewers and want the package itself to carry the review context.
+
+### 3. Optimize a formulation instead of guessing by hand
+
+Use [scripts/optimize_formulation.py](scripts/optimize_formulation.py) when you want the software to search for a better operating point.
+
+```bash
+python scripts/optimize_formulation.py \
+  --sugars ribose,glucose \
+  --amino-acids cysteine,leucine \
+  --lipids hexanal \
+  --target-tag meaty \
+  --minimize-tag beany \
+  --protein-type pea_iso \
+  --risk-aversion 1.5 \
+  --n-iterations 50
+```
+
+The optimizer is useful when you want to balance several levers at once:
+
+- maximize a sensory direction such as meaty
+- penalize off-notes such as beany
+- penalize safety risk through the objective
+- search concentration ratios and process settings faster than manual trial-and-error
+
+If you want a persistent report of the best trial, add `--report --output-dir ...`.
+
+### 4. Generate benchmark-specific validation cards when you need them
+
+If you need to inspect one literature benchmark directly, regenerate its comparison card:
+
+```bash
+./scripts/docker_maillard.sh run \
+  python scripts/compare_sim_to_lit.py \
+    --lit data/benchmarks/cys_glucose_150C_Farmer1999.json
+```
+
+This writes a PNG, Markdown summary, and JSON payload in [results/validation](results/validation).
 
 </details>
 
 ---
 
-## 🧩 Architecture: A Codebase Tour
+## How To Decide Whether A Result Is Actionable
 
-If you are new to the project, here is how the core modules plug together to build the simulation:
+Use this rule of thumb:
 
-### 1. Generative Chemistry (`src/`)
-- **`smirks_engine.py`**: The heart of the network generator. Applies reaction SMIRKS templates to discover thousands of possible Maillard pathways while enforcing strict stoichiometric mass conservation.
-- **`conditions.py`**: Defines the physical `ReactionConditions` (pH, temperature, water activity). Enforces physical kinetics using smooth sigmoid transitions instead of hard cutoffs.
+- If your system is close to the free-precursor benchmarks, the output is suitable for quantitative screening and prioritization.
+- If your system depends heavily on pea or soy matrix behavior, use the output to decide what to test next, not as a final concentration claim.
+- If your system relies on extrusion history, intact proteins, or unsupported matrix physics, treat the result as exploratory.
 
-### 2. Physical & Quantum Chemistry (`src/`)
-- **`results_db.py`**: SQLite caching layer so we never compute the same activation barrier twice.
-- **`mlp_barrier.py`**: Leverages the **MACE-OFF24** ML potential for near-DFT accurate barrier approximations in milliseconds.
-- **`xtb_screener.py`** & **`skala_refiner.py`**: The heavy-duty quantum chemistry layers. Used to resolve unknown pathway bottlenecks via Semi-Empirical (GFN2-xTB) or full DFT (r2SCAN-3c) calculations.
+The repository is designed to tell you not only what it predicts, but also when not to overclaim.
 
-### 3. Food Science & Sensory Prediction (`src/`)
-- **`recommend.py`**: The `FAST` kinetic solver. Ranks active flavor pathways by resolving rate-limiting bottlenecks against reactant concentrations.
-- **`headspace.py`**: Corrects liquid concentrations into air-phase (headspace) concentrations. Accounts for matrix effects (hydrophobic flavors getting trapped in plant fats/proteins).
-- **`sensory.py`**: Translates chemical concentrations into human perception using Stevens' Power Law, generating multi-dimensional flavor radar charts.
+---
 
-### 4. Formulation Design (`src/` & `scripts/`)
-- **`inverse_design.py`**: Evaluates static grids of formulations, applying Pareto-ranking to balance desired flavor profiles against safety risks (like Acrylamide or HMF).
-- **`bayesian_optimizer.py`** / `scripts/optimize_formulation.py`: Uses `optuna` to actively search the continuous multi-dimensional space (varying pH, time, temperatures, and exact ingredient ratios) to find the absolute mathematically optimal formulation.
-- **`scripts/run_cantera_kinetics.py`**: Exports the discovered network to Cantera for rigorous, time-dependent ODE temperature-ramp simulations.
+## Deeper Documentation
 
-## ⚖️ License
+If you need to dig deeper into the science, validation mechanics, or architecture:
 
-This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
+- **[docs/README.md](docs/README.md)** - The main index for all deep-dive reference and research documentation.
+- **[docs/guides/SHARING_RESULTS.md](docs/guides/SHARING_RESULTS.md)** - How to create shareable single-run, comparison, and campaign artifacts.
+- **[docs/guides/SCIENTIFIC_RELIABILITY.md](docs/guides/SCIENTIFIC_RELIABILITY.md)** - Detailed breakdown of matrix predictability caps.
+- **[docs/VALIDATION_GUIDE.md](docs/VALIDATION_GUIDE.md)** - Our strict validation methodology.
+- **[docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md](docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md)** - The review-ready internal protocol for the primary pea/soy matrix experiment.
+- **[docs/use_cases/README.md](docs/use_cases/README.md)** - Operational reports and the current pea/soy meaty benchmark candidate studies.
+- **[docs/use_cases/food_scientist_walkthrough.md](docs/use_cases/food_scientist_walkthrough.md)** - A narrative walkthrough demonstrating how a food scientist would use Maillard to solve a formulation challenge.
+- **[docs/guides/PYTHON_API.md](docs/guides/PYTHON_API.md)** - Guide for using the core components in custom Python scripts.
+- **[docs/notebooks/1_Formulation_Screening_Example.ipynb](docs/notebooks/1_Formulation_Screening_Example.ipynb)** - Interactive Jupyter notebook for the programmatic API.
+- **[docs/notebooks/2_Food_Scientist_Walkthrough.ipynb](docs/notebooks/2_Food_Scientist_Walkthrough.ipynb)** - Interactive version of the food scientist narrative walkthrough.

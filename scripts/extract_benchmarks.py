@@ -57,10 +57,36 @@ def extract_pratap_singh_2021_pea():
     }
     return bench
 
+
+def extract_pratap_singh_2021_soy():
+    """Extract Pratap-Singh et al. (2021) soy isolate baseline."""
+    bench = {
+        "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+        "source_doi": "10.3390/molecules26134104",
+        "precursors": {
+            "Soy Protein Isolate": {"concentration_mM": 1000.0}
+        },
+        "conditions": {
+            "temp_C": 40,
+            "ph": 6.0,
+            "water_activity": 0.95,
+            "time_min": 10
+        },
+        "measured_volatiles": {
+            "hexanal": {"conc_ppb": 380, "uncertainty_pct": 11},
+            "2-pentylfuran": {"conc_ppb": 2492, "uncertainty_pct": 8},
+            "hexanol": {"conc_ppb": 120, "uncertainty_pct": 15}
+        },
+        "protein_type": "soy_iso",
+        "denaturation_state": 0.0
+    }
+    return bench
+
 def main():
     benchmarks = [
         extract_hofmann_1998(),
-        extract_pratap_singh_2021_pea()
+        extract_pratap_singh_2021_pea(),
+        extract_pratap_singh_2021_soy(),
     ]
     
     for b in benchmarks:

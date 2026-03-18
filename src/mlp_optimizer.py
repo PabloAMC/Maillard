@@ -9,6 +9,7 @@ as an ASE Calculator.
 """
 
 import io
+import logging
 import numpy as np
 from contextlib import redirect_stdout, redirect_stderr
 
@@ -116,7 +117,14 @@ class MLPOptimizer:
                 atoms = atoms[-1]
             
         # 2. Run Sella + MACE
-        result = ts_opt.find_ts(atoms, self.calc)
+        try:
+            result = ts_opt.find_ts(atoms, self.calc)
+        except ImportError as exc:
+            logging.getLogger(__name__).warning(
+                "TS optimizer backend unavailable; falling back to geometry minimization: %s",
+                exc,
+            )
+            return self.optimize_geometry(xyz_string, fmax=fmax, max_steps=max_steps)
         if isinstance(result, list):
             atoms = result[-1]
         else:
