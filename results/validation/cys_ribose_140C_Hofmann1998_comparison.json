@@ -1,0 +1,25 @@
+{
+  "benchmark_id": "cys_ribose_140C_Hofmann1998",
+  "coverage": 1.0,
+  "pearson_r": null,
+  "mae_ppb": 53.38829245153475,
+  "max_ratio": 1.4418630406835105,
+  "overall_status": "pass-no-ranking",
+  "strict_ready": true,
+  "comparisons": [
+    {
+      "compound": "2-methyl-3-furanthiol",
+      "measured_ppb": 342.0,
+      "predicted_ppb": 237.1931246936436,
+      "uncertainty_pct": 20,
+      "predicted_over_measured": 0.693547148227028
+    },
+    {
+      "compound": "2-furfurylthiol",
+      "measured_ppb": 200.0,
+      "predicted_ppb": 198.0302904032869,
+      "uncertainty_pct": 25,
+      "predicted_over_measured": 0.9901514520164345
+    }
+  ]
+}

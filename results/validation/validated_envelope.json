@@ -6,8 +6,8 @@
     "cys_ribose_140C_Hofmann1998",
     "cys_ribose_150C_Mottram1994"
   ],
-  "supported_benchmarks": 6,
-  "total_benchmarks": 6,
+  "supported_benchmarks": 8,
+  "total_benchmarks": 8,
   "matrix_only_benchmarks": [
     "pea_isolate_40C_PratapSingh2021",
     "soy_isolate_40C_PratapSingh2021"

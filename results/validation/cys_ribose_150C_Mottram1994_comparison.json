@@ -1,0 +1,32 @@
+{
+  "benchmark_id": "cys_ribose_150C_Mottram1994",
+  "coverage": 1.0,
+  "pearson_r": 0.9954481338454503,
+  "mae_ppb": 94.57322767411118,
+  "max_ratio": 1.3804227082370715,
+  "overall_status": "pass",
+  "strict_ready": true,
+  "comparisons": [
+    {
+      "compound": "2-methyl-3-furanthiol",
+      "measured_ppb": 120.0,
+      "predicted_ppb": 157.3855581200741,
+      "uncertainty_pct": 20,
+      "predicted_over_measured": 1.3115463176672841
+    },
+    {
+      "compound": "bis(2-methyl-3-furyl) disulfide",
+      "measured_ppb": 45.0,
+      "predicted_ppb": 46.06417366870788,
+      "uncertainty_pct": 25,
+      "predicted_over_measured": 1.023648303749064
+    },
+    {
+      "compound": "furfural",
+      "measured_ppb": 890.0,
+      "predicted_ppb": 644.7300487664485,
+      "uncertainty_pct": 15,
+      "predicted_over_measured": 0.724415785130841
+    }
+  ]
+}

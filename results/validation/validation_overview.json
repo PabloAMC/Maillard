@@ -5,11 +5,10 @@
     "pass-no-ranking": 2,
     "pass": 6
   },
-  "benchmarks": [
+  "authoritative_benchmarks": [
     {
       "benchmark_id": "acrylamide_asparagine_glucose_Parker2012",
-      "execution_path": "free_precursor",
-      "status": "pass-no-ranking",
+      "overall_status": "pass-no-ranking",
       "strict_ready": true,
       "coverage": 1.0,
       "pearson_r": null,
@@ -18,8 +17,7 @@
     },
     {
       "benchmark_id": "cys_glucose_150C_Farmer1999",
-      "execution_path": "free_precursor",
-      "status": "pass",
+      "overall_status": "pass",
       "strict_ready": true,
       "coverage": 1.0,
       "pearson_r": 0.9999680602847192,
@@ -28,8 +26,7 @@
     },
     {
       "benchmark_id": "cys_ribose_140C_Hofmann1998",
-      "execution_path": "free_precursor",
-      "status": "pass-no-ranking",
+      "overall_status": "pass-no-ranking",
       "strict_ready": true,
       "coverage": 1.0,
       "pearson_r": null,
@@ -38,53 +35,104 @@
     },
     {
       "benchmark_id": "cys_ribose_150C_Mottram1994",
-      "execution_path": "free_precursor",
-      "status": "pass",
+      "overall_status": "pass",
       "strict_ready": true,
       "coverage": 1.0,
       "pearson_r": 0.9954481338454503,
       "max_ratio": 1.3804227082370715,
       "mae_ppb": 94.57322767411118
+    }
+  ],
+  "authoritative_points": [
+    {
+      "benchmark_id": "acrylamide_asparagine_glucose_Parker2012",
+      "compound": "acrylamide",
+      "measured_ppb": 1500.0,
+      "predicted_ppb": 1451.4081855437828,
+      "uncertainty_pct": 20,
+      "max_ratio": 1.0334790825490707,
+      "overall_status": "pass-no-ranking",
+      "strict_ready": true
     },
     {
-      "benchmark_id": "pea_isolate_40C_PratapSingh2021",
-      "execution_path": "matrix_only",
-      "status": "pass",
-      "strict_ready": false,
-      "coverage": 1.0,
-      "pearson_r": 0.9999995223807515,
-      "max_ratio": 1.002488531616753,
-      "mae_ppb": 0.3385431376812657
+      "benchmark_id": "cys_glucose_150C_Farmer1999",
+      "compound": "2-methyl-3-furanthiol",
+      "measured_ppb": 15.0,
+      "predicted_ppb": 13.411514387346463,
+      "uncertainty_pct": 30,
+      "max_ratio": 1.1184419273450765,
+      "overall_status": "pass",
+      "strict_ready": true
     },
     {
-      "benchmark_id": "pea_isolate_ribose_cysteine_100C_45min_Internal2026",
-      "execution_path": "matrix_precursor_augmented",
-      "status": "pass",
-      "strict_ready": false,
-      "coverage": 1.0,
-      "pearson_r": 1.0000000000000002,
-      "max_ratio": 1.0,
-      "mae_ppb": 0.0
+      "benchmark_id": "cys_glucose_150C_Farmer1999",
+      "compound": "furfural",
+      "measured_ppb": 450.0,
+      "predicted_ppb": 449.4498857161661,
+      "uncertainty_pct": 20,
+      "max_ratio": 1.0012239724634868,
+      "overall_status": "pass",
+      "strict_ready": true
     },
     {
-      "benchmark_id": "soy_isolate_40C_PratapSingh2021",
-      "execution_path": "matrix_only",
-      "status": "pass",
-      "strict_ready": false,
-      "coverage": 1.0,
-      "pearson_r": 0.9999999995050419,
-      "max_ratio": 1.0006793224018127,
-      "mae_ppb": 0.164202993808838
+      "benchmark_id": "cys_glucose_150C_Farmer1999",
+      "compound": "pyrazine",
+      "measured_ppb": 30.0,
+      "predicted_ppb": 24.54026611343886,
+      "uncertainty_pct": 25,
+      "max_ratio": 1.2224806308669673,
+      "overall_status": "pass",
+      "strict_ready": true
     },
     {
-      "benchmark_id": "soy_isolate_ribose_cysteine_100C_45min_Internal2026",
-      "execution_path": "matrix_precursor_augmented",
-      "status": "pass",
-      "strict_ready": false,
-      "coverage": 1.0,
-      "pearson_r": 0.9999999999999999,
-      "max_ratio": 1.0,
-      "mae_ppb": 0.0
+      "benchmark_id": "cys_ribose_140C_Hofmann1998",
+      "compound": "2-methyl-3-furanthiol",
+      "measured_ppb": 342.0,
+      "predicted_ppb": 237.1931246936436,
+      "uncertainty_pct": 20,
+      "max_ratio": 1.4418630406835105,
+      "overall_status": "pass-no-ranking",
+      "strict_ready": true
+    },
+    {
+      "benchmark_id": "cys_ribose_140C_Hofmann1998",
+      "compound": "2-furfurylthiol",
+      "measured_ppb": 200.0,
+      "predicted_ppb": 198.0302904032869,
+      "uncertainty_pct": 25,
+      "max_ratio": 1.0099465066313937,
+      "overall_status": "pass-no-ranking",
+      "strict_ready": true
+    },
+    {
+      "benchmark_id": "cys_ribose_150C_Mottram1994",
+      "compound": "2-methyl-3-furanthiol",
+      "measured_ppb": 120.0,
+      "predicted_ppb": 157.3855581200741,
+      "uncertainty_pct": 20,
+      "max_ratio": 1.3115463176672841,
+      "overall_status": "pass",
+      "strict_ready": true
+    },
+    {
+      "benchmark_id": "cys_ribose_150C_Mottram1994",
+      "compound": "bis(2-methyl-3-furyl) disulfide",
+      "measured_ppb": 45.0,
+      "predicted_ppb": 46.06417366870788,
+      "uncertainty_pct": 25,
+      "max_ratio": 1.023648303749064,
+      "overall_status": "pass",
+      "strict_ready": true
+    },
+    {
+      "benchmark_id": "cys_ribose_150C_Mottram1994",
+      "compound": "furfural",
+      "measured_ppb": 890.0,
+      "predicted_ppb": 644.7300487664485,
+      "uncertainty_pct": 15,
+      "max_ratio": 1.3804227082370715,
+      "overall_status": "pass",
+      "strict_ready": true
     }
   ],
   "matrix_readiness": [

@@ -37,3 +37,4 @@ dependencies:
       - rxnmapper
       - huggingface_hub
       - orjson
+      - SciencePlots

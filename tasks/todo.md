@@ -21,6 +21,13 @@ For this repository to be genuinely state of the art, it must simultaneously pro
 - [x] Add a reproducible validation-figure artifact so reliability and limitations can be shown graphically.
 - [x] Group development and research notes behind explicit documentation indexes instead of leaving them as an unstructured reading path.
 
+### Validation communication cleanup — 2026-03-18
+
+- [x] Remove the fold-error-by-compound panel from benchmark comparison figures because it is visually confusing for first-pass scientific review.
+- [x] Align the validation deep dive with the current proof model: strict quantitative free-precursor evidence vs. non-authoritative matrix readiness.
+- [x] Rewrite the root README so a first-time scientist can understand trust levels, main workflows, and how to get useful results without overclaiming.
+- [x] Retire legacy validation plot artifacts that no longer represent the current benchmark narrative.
+
 ### What is already strong
 
 - [x] Free-amino-acid PRIMARY benchmarks are in a credible Docker-validated envelope.
@@ -31,11 +38,11 @@ For this repository to be genuinely state of the art, it must simultaneously pro
 
 ### What is still not enough for a best-in-class scientific tool
 
-- [ ] Default user flows still do not surface the right scientific interpretation inline. (Dificultad: Baja — Modelo recomendado: GPT-5 mini)
+- [ ] External meaty-positive matrix benchmark data is still missing for pea and soy, so matrix trust cannot advance beyond directional support. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
 - [ ] Matrix benchmarks are executable intake checks, not yet benchmark-facing target-ranking validations. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
-- [ ] The tool still exposes little uncertainty, little calibration confidence, and too little “why this recommendation” at decision time. (Dificultad: Alta — Modelo recomendado: Gemini 3 Pro)
+- [ ] Process-state calibration for accessibility, retention, and release is not yet benchmark-closed across real plant matrices. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
 - [ ] Benchmark breadth is narrow relative to the scientific space alternative-protein teams actually care about. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
-- [ ] There is still a gap between “validated model component” and “formulation operating system for scientists”. (Dificultad: Alta — Modelo recomendado: Gemini 3 Flash)
+- [ ] There is still a gap between “validated model component” and “formulation operating system for scientists”, especially for experiment ingestion and campaign-scale comparison. (Dificultad: Alta — Modelo recomendado: Gemini 3 Flash)
 
 ## Strategic Assessment
 
@@ -182,11 +189,11 @@ This is the difference between a strong model repo and a tool scientists keep us
 
 ## Immediate Execution Sequence
 
-1. [ ] Inline explainability + validated-envelope warnings in main CLI paths. (Dificultad: Media — Modelo recomendado: Gemini 3 Flash)
-2. [ ] Scientist-facing comparison report for multiple formulations. (Dificultad: Media — Modelo recomendado: Gemini 3 Pro)
-3. [x] Confidence tiers and benchmark-neighborhood diagnostics. (Dificultad: Alta — Modelo recomendado: GPT-5.4)
-4. [ ] Matrix target-ranking benchmark plan and first reproducible promotion candidate. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
-5. [ ] Data-ingestion path for new internal calibration experiments. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
+1. [ ] Acquire or encode the first external quantitative meaty-positive matrix benchmark pair for pea and soy. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
+2. [ ] Add adverse-target calibration for lipid-coupled markers so matrix benchmarks cover meaty/off-flavour tradeoffs in the same experiment. (Dificultad: Alta — Modelo recomendado: Gemini 3 Pro)
+3. [ ] Calibrate process-state accessibility and release against benchmarked matrix states before any stricter promotion claim. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
+4. [ ] Expand benchmark coverage beyond isolate-only pea/soy into broader protein families and process regimes. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
+5. [ ] Build the ingestion path for new internal calibration and validation experiments. (Dificultad: Muy alta — Modelo recomendado: GPT-5.4)
 
 ## Review
 

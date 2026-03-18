@@ -1,22 +1,17 @@
 # Validation Overview
 
-This artifact summarizes current reliability and current limits in a single place.
+This artifact now focuses only on the two first-pass trust panels: quantitative parity and per-benchmark error.
 
 - Benchmarks summarized: 8
 - Strict-ready benchmarks: 4
-- Status distribution: {'pass-no-ranking': 2, 'pass': 6}
-- Matrix families externally unlocked: 0
+- Authoritative free-precursor benchmarks: 4
+- Authoritative matched compounds: 9
+- Median compound max-ratio in authoritative set: 1.118
 - Coverage gaps still open: 5
 
-The accompanying PNG combines four views:
+How to read the PNG:
 
-- benchmark max-ratio behavior versus the strict free-precursor threshold
-- benchmark status distribution
-- matrix readiness by protein family
-- open coverage gaps that still limit scientific scope
+- left: proof surface for the validated free-precursor envelope
+- right: per-benchmark quantitative error against the 1.5x contract
 
-Interpretation:
-
-- free-precursor systems form the current high-trust envelope
-- matrix candidate sets exist for pea and soy
-- external meaty-positive matrix evidence is still the main blocker
+Matrix readiness, benchmark evidence, and coverage gaps remain in their own dedicated artifacts.

@@ -1,7 +1,7 @@
 # Validated Envelope
 
 Target tag: meaty
-Supported benchmarks: 6/6
+Supported benchmarks: 8/8
 Strict-ready benchmarks: acrylamide_asparagine_glucose_Parker2012, cys_glucose_150C_Farmer1999, cys_ribose_140C_Hofmann1998, cys_ribose_150C_Mottram1994
 Matrix-only executable benchmarks: pea_isolate_40C_PratapSingh2021, soy_isolate_40C_PratapSingh2021
 
