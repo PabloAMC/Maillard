@@ -12,6 +12,9 @@ dependencies:
   - numpy>=2.0
   - scipy
   - pandas
+  - jupyter
+  - ipykernel
+  - ipywidgets
   - matplotlib
   - rdkit
   - cantera>=3.2.0

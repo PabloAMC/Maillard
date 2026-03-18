@@ -25,7 +25,7 @@ The key pathways to incorporate into your model include:
 
 **B. Strecker Degradation (The Aroma Engine)** This pathway is arguably the most important for your model in generating volatile meat aromatics.
 
-* **Mechanism:** Model the reaction of the $\\alpha$-dicarbonyls (from the intermediate stage) with free amino acids. This oxidative deamination and decarboxylation sequence yields an **$\\alpha$-aminoketone** (a nitrogen donor for pyrazines) and a **Strecker aldehyde**.  
+* **Mechanism:** Model the reaction of the $\alpha$-dicarbonyls (from the intermediate stage) with free amino acids. This oxidative deamination and decarboxylation sequence yields an **$\alpha$-aminoketone** (a nitrogen donor for pyrazines) and a **Strecker aldehyde**.  
 * **Computational Mapping:** You can strictly map precursor to product. For example, inputting valine must yield 2-methylpropanal; leucine must yield 3-methylbutanal; and methionine must yield methional.
 
 **C. The S-Maillard Reaction (The Sulfur Pathway)** Because sulfur VOCs are the backbone of meat flavor, modeling the "S-Maillard" pathways of cysteine and methionine is crucial 1, 29\.
@@ -39,4 +39,4 @@ The key pathways to incorporate into your model include:
 * **Synergy:** Lipid aldehydes can act as catalysts for Strecker degradation or react directly with $H\_2S$ to form long-chain alkylthiazoles and alkylpyrazines.  
 * **Chemical Masking (Trapping):** A key mitigation strategy in plant-based meats is using the Maillard reaction to deliberately trap "beany" aldehydes. Model the condensation reactions where added amino acids bind to the electrophilic carbonyls of hexanal/nonanal, forming permanent, non-volatile Schiff bases that effectively neutralize the off-flavor.
 
-**E. The Competing Dehydroalanine (DHA) Pathway** Finally, an accurate computational model must account for zero-sum stoichiometric competition. Under high heat and shear, serine and cysteine undergo $\\beta$-elimination to form dehydroalanine (DHA). DHA aggressively cross-links with lysine to form textural lysinoalanine (LAL) and lanthionine (LAN) networks. Because this pathway permanently consumes the lysine needed for the Maillard reaction, failing to model the DHA pathway will result in overestimating your final aroma and flavor yields.  
+**E. The Competing Dehydroalanine (DHA) Pathway** Finally, an accurate computational model must account for zero-sum stoichiometric competition. Under high heat and shear, serine and cysteine undergo $\beta$-elimination to form dehydroalanine (DHA). DHA aggressively cross-links with lysine to form textural lysinoalanine (LAL) and lanthionine (LAN) networks. Because this pathway permanently consumes the lysine needed for the Maillard reaction, failing to model the DHA pathway will result in overestimating your final aroma and flavor yields.  

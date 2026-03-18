@@ -33,7 +33,13 @@ Close your terminal window completely and open a new one to apply the changes.
 
 Do not attempt to run this natively on macOS ARM64. Instead, we use Docker to run a lightweight Linux environment. 
 
-Recommended first commands from the repository root:
+For the fastest setup, you can pull the pre-built image from GitHub Container Registry (ghcr.io) instead of building from scratch. Run:
+
+```bash
+docker pull ghcr.io/PabloAMC/Maillard:latest
+```
+
+If you prefer or need to build from source locally:
 
 ```bash
 ./scripts/docker_maillard.sh up

@@ -56,6 +56,7 @@ Commands:
                Run a shareable campaign spec and generate campaign artifacts.
   index        Generate results/validation/benchmark_index.{md,json}.
   summary      Generate results/validation/benchmark_summary.{md,json}.
+  notebook     Launch a Jupyter notebook server on port 8888.
   status       Show container and environment status.
 EOF
 }
@@ -125,6 +126,7 @@ ensure_container() {
     docker run -d \
       --platform linux/amd64 \
       --name "$CONTAINER_NAME" \
+      -p 8888:8888 \
       -v "$WORKSPACE_DIR:$WORKSPACE_MOUNT" \
       -w "$WORKSPACE_MOUNT" \
       "$IMAGE_NAME" \
@@ -141,7 +143,8 @@ env_exists() {
 run_in_env() {
   ensure_container
   local command="$1"
-  docker exec "$CONTAINER_NAME" bash -lc "set -eo pipefail; source '$CONDA_SH'; set +u; conda activate '$ENV_NAME'; set -u; cd '$WORKSPACE_MOUNT'; $command"
+  # We use 'export MKL_INTERFACE_LAYER=LP64' and 'set +u' to bypass common Conda activation script bugs
+  docker exec "$CONTAINER_NAME" bash -lc "set -eo pipefail; source '$CONDA_SH'; export MKL_INTERFACE_LAYER=LP64; set +u; conda activate '$ENV_NAME'; set -u; cd '$WORKSPACE_MOUNT'; $command"
 }
 
 bootstrap_env() {
@@ -151,7 +154,7 @@ bootstrap_env() {
     docker exec "$CONTAINER_NAME" bash -lc "set -eo pipefail; source '$CONDA_SH'; conda create -n '$ENV_NAME' python=3.12 -y"
   fi
 
-  run_in_env "conda install -y -c conda-forge jax jaxlib wget xz"
+  run_in_env "conda install -y -c conda-forge jax jaxlib wget xz jupyter ipywidgets"
   run_in_env "pip install --index-url https://download.pytorch.org/whl/cpu torch"
   run_in_env "conda env update -n '$ENV_NAME' --file environment.yml"
 
@@ -313,6 +316,9 @@ case "$cmd" in
     ;;
   summary)
     run_in_env "python scripts/generate_benchmark_summary.py"
+    ;;
+  notebook)
+    run_in_env "jupyter notebook --ip 0.0.0.0 --port 8888 --no-browser --allow-root"
     ;;
   status)
     status
