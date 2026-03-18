@@ -11,6 +11,9 @@ from typing import Dict, List, Any, Tuple, Optional
 from src.matrix_correction import ProteinType, resolve_compound_matrix_retention, resolve_matrix_correction
 from src.headspace import HeadspaceModel  # noqa: E402
 
+
+ROOT = Path(__file__).resolve().parents[1]
+
 class SensoryDatabase:
     """
     Unified database for aroma compounds, off-flavours, and toxic markers.
@@ -18,7 +21,10 @@ class SensoryDatabase:
     """
     
     def __init__(self, data_dir: str = "data/species"):
-        self.data_dir = Path(data_dir)
+        data_path = Path(data_dir)
+        if not data_path.is_absolute():
+            data_path = ROOT / data_path
+        self.data_dir = data_path
         self.compounds = {}  # key: name, value: data
         self.smiles_map = {}
         self.tags = {}

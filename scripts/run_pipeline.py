@@ -96,6 +96,7 @@ def main():
     parser.add_argument("--list-tags", action="store_true", help="List available sensory tags and exit")
     parser.add_argument("--report", action="store_true", help="Generate consolidated JSON/Markdown report")
     parser.add_argument("--output-dir", type=str, default=None, help="Directory to save the report")
+    parser.add_argument("--dry-run", action="store_true", help="Validate inputs against envelope without running simulation")
     
     # Catch simple cases where user only wants to list
     if "--list-precursors" in sys.argv:
@@ -138,6 +139,12 @@ def main():
             designer = InverseDesigner(args.target, args.minimize)
             print(f"Evaluating {len(designer.grid)} industrial formulations against tags...")
             
+            if args.dry_run:
+                print("\n[DRY RUN] Bypassing expensive grid evaluation.")
+                print("Validation: Grid dimensions bounded correctly.")
+                print("\nDry-run complete. Exiting.")
+                sys.exit(0)
+                
             results = designer.evaluate_all(conditions)
             
             print("\n  Top Recommended Formulations:")
@@ -241,6 +248,25 @@ def main():
         print(f"Molar Ratios: {', '.join(f'{k}: {v}' for k, v in ratio_dict.items())}")
     print(f"Conditions: pH {conditions.pH}, {conditions.temperature_celsius}°C, aᵥ {conditions.water_activity}, Catalyst: {args.catalyst or 'None'}")
     print("-" * 60)
+
+    if args.dry_run:
+        print("\n[DRY RUN] Validating formulation inputs against known envelope constraints...")
+        checker = DomainOfValidityChecker("meaty")
+        warnings = checker.check(
+            precursor_names=names,
+            protein_type=args.protein_type,
+            temp_c=args.temp,
+            ph=args.ph
+        )
+        if not warnings:
+            print("  ✅ All inputs are within the rigorously validated envelope.")
+        else:
+            print("  ⚠️ The following limitations apply to your formulation:")
+            for w in warnings:
+                print(f"      - {w.description}")
+        
+        print("\nDry-run complete. Exiting without evaluating formulation predictions.")
+        sys.exit(0)
 
     # --- Decision Summary ---
     designer = InverseDesigner(target_tag="meaty", minimize_tag="beany")

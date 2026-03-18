@@ -15,12 +15,9 @@ These documents capture supporting literature, planning notes, and external anal
 - [../Elicit - Maillard Pathways in Plant-Based Cooking - Report.md](../Elicit%20-%20Maillard%20Pathways%20in%20Plant-Based%20Cooking%20-%20Report.md)
 - [../Elicit - Maillard Reaction Pathways in Meat Cooking - Report.md](../Elicit%20-%20Maillard%20Reaction%20Pathways%20in%20Meat%20Cooking%20-%20Report.md)
 - [../Kinetic and Thermodynamic Profiling of Aqueous Maillard and Advanced Sulfur Pathways_ An Exhaustive Analysis of Arrhenius Parameters.md](../Kinetic%20and%20Thermodynamic%20Profiling%20of%20Aqueous%20Maillard%20and%20Advanced%20Sulfur%20Pathways_%20An%20Exhaustive%20Analysis%20of%20Arrhenius%20Parameters.md)
-- [../Claude_feedback.md](../Claude_feedback.md)
 
 ## Current Research Planning
 
-- [../EXTERNAL_MATRIX_BENCHMARK_UNLOCK_REPORT.md](../EXTERNAL_MATRIX_BENCHMARK_UNLOCK_REPORT.md)
-- [../P3_ALT_PROTEIN_COVERAGE_PLAN.md](../P3_ALT_PROTEIN_COVERAGE_PLAN.md)
 - [../slr_benchmark_evaluation.md](../slr_benchmark_evaluation.md)
 - [../../data/lit/benchmark_intake_registry.json](../../data/lit/benchmark_intake_registry.json)
 - [../reference/SCIENTIFIC_REFERENCE.md](../reference/SCIENTIFIC_REFERENCE.md)

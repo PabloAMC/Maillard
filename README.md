@@ -10,6 +10,53 @@ By simulating the complex reactions between sugars and amino acids under specifi
 
 ---
 
+**Important Note:** This project relies on complex chemistry dependencies. It **requires conda or Docker** — standard pip-only installation is not supported.
+
+---
+
+## 🚀 The Fastest Way to Start
+
+If you want to run a prediction and see how it works, **start with the [Quickstart Guide](docs/guides/QUICKSTART.md)**. It takes under 10 minutes to run your first formulation.
+
+For definitions of project terminology (e.g., "FAST mode", "validated envelope"), see our **[Glossary for Scientists](docs/guides/GLOSSARY.md)**.
+
+---
+
+## 📊 Example Output
+
+When you run a candidate formulation, Maillard gives you a clear snapshot of its flavor profile, safety risks, and scientific confidence:
+
+```text
+================================================================================
+MAILLARD FORMULATION SCREENING
+================================================================================
+Target: meaty | Minimize: beany | Protein: pea_iso
+
+PREDICTION CONFIDENCE: MODERATE
+Warning: Your system relies heavily on pea matrix behavior. Treat results
+as directional prioritization rather than release-grade claims.
+
+DOMINANT DESIRABLE COMPOUNDS:
+- 2-methyl-3-furanthiol: 15.4 ppb
+- 2-furfurylthiol: 8.2 ppb
+
+DOMINANT PENALTIES:
+- hexanal: 120.5 ppb (High Risk)
+================================================================================
+```
+
+## 🧪 What Inputs Do I Need?
+
+To run a prediction, you feed the tool a recipe. The minimum inputs are:
+
+- **Sugars:** e.g., `ribose`, `glucose`, `xylose`
+- **Amino Acids:** e.g., `cysteine`, `leucine`
+- **Molar Ratios:** The proportions of your precursors
+- **Environment:** `pH`, Temperature (`temp`), and Reaction Time (`time-minutes`)
+- **Protein Matrix:** `free` (buffer), `pea_iso` (pea isolate), or `soy_iso` (soy isolate)
+
+---
+
 ## What This Repository Is For
 
 Use Maillard when you want to answer questions like these before running a wet-lab experiment:
@@ -110,7 +157,12 @@ For a new user, the most productive path is:
 
 ---
 
-## Quick Start
+## Advanced Workflows & Command Reference
+
+<details>
+<summary><strong>Click here to view detailed command examples (Docker setup, Optimization, Campaign generation, etc.)</strong></summary>
+
+### Quick Start (Technical Setup)
 
 Recommended setup: Docker for reproducibility. Local Python/conda setup is also documented in [Installation.md](Installation.md).
 
@@ -243,6 +295,8 @@ If you need to inspect one literature benchmark directly, regenerate its compari
 
 This writes a PNG, Markdown summary, and JSON payload in [results/validation](results/validation).
 
+</details>
+
 ---
 
 ## How To Decide Whether A Result Is Actionable
@@ -265,5 +319,9 @@ If you need to dig deeper into the science, validation mechanics, or architectur
 - **[docs/guides/SHARING_RESULTS.md](docs/guides/SHARING_RESULTS.md)** - How to create shareable single-run, comparison, and campaign artifacts.
 - **[docs/guides/SCIENTIFIC_RELIABILITY.md](docs/guides/SCIENTIFIC_RELIABILITY.md)** - Detailed breakdown of matrix predictability caps.
 - **[docs/VALIDATION_GUIDE.md](docs/VALIDATION_GUIDE.md)** - Our strict validation methodology.
-- **[docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md](docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md)** - The benchmark-ready internal protocol for the primary pea/soy matrix experiment.
+- **[docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md](docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md)** - The review-ready internal protocol for the primary pea/soy matrix experiment.
 - **[docs/use_cases/README.md](docs/use_cases/README.md)** - Operational reports and the current pea/soy meaty benchmark candidate studies.
+- **[docs/use_cases/food_scientist_walkthrough.md](docs/use_cases/food_scientist_walkthrough.md)** - A narrative walkthrough demonstrating how a food scientist would use Maillard to solve a formulation challenge.
+- **[docs/guides/PYTHON_API.md](docs/guides/PYTHON_API.md)** - Guide for using the core components in custom Python scripts.
+- **[docs/notebooks/1_Formulation_Screening_Example.ipynb](docs/notebooks/1_Formulation_Screening_Example.ipynb)** - Interactive Jupyter notebook for the programmatic API.
+- **[docs/notebooks/2_Food_Scientist_Walkthrough.ipynb](docs/notebooks/2_Food_Scientist_Walkthrough.ipynb)** - Interactive version of the food scientist narrative walkthrough.

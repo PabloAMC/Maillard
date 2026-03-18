@@ -21,6 +21,9 @@ This directory contains the deeper technical, architectural, and scientific docu
 - [xtb_limitations.md](xtb_limitations.md) - Specific physics constraints and workarounds regarding quantum calculations.
 - [reference/PROJECT_STRUCTURE.md](reference/PROJECT_STRUCTURE.md) - Codebase organization list.
 - [reference/COMMAND_REFERENCE.md](reference/COMMAND_REFERENCE.md) - Raw CLI options and developer commands.
+- [guides/PYTHON_API.md](guides/PYTHON_API.md) - Programmatic Python usage guide.
+- [notebooks/1_Formulation_Screening_Example.ipynb](notebooks/1_Formulation_Screening_Example.ipynb) - Jupyter formulation notebook.
+- [notebooks/2_Food_Scientist_Walkthrough.ipynb](notebooks/2_Food_Scientist_Walkthrough.ipynb) - Interactive narrative walkthrough.
 
 ## Protocols & Shareable Surfaces
 
@@ -30,4 +33,5 @@ This directory contains the deeper technical, architectural, and scientific docu
 
 - [research/README.md](research/README.md) - Literature notes and biological syntheses.
 - [use_cases/README.md](use_cases/README.md) - Operational reports and candidate external benchmark studies.
+- [use_cases/food_scientist_walkthrough.md](use_cases/food_scientist_walkthrough.md) - Narrative formulation walkthrough.
 - [development/README.md](development/README.md) - Previous implementation attempts, the backlog, and decision logs.
