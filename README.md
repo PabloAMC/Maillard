@@ -230,6 +230,16 @@ Every saved bundle now includes provenance metadata: generating command, branch,
 
 ### 2b. Compare named formulations when the question is comparative
 
+## Reference
+
+The repository includes a compact set of human-focused reference documents under `docs/reference/`. These are short, reviewer-friendly files you should consult when running artifacts or evaluating claims.
+
+- [docs/reference/COMMAND_REFERENCE.md](docs/reference/COMMAND_REFERENCE.md): Command and workflow reference (Docker entrypoints, recommended scripts, validation and campaign commands).
+- [docs/reference/SCIENTIFIC_REFERENCE.md](docs/reference/SCIENTIFIC_REFERENCE.md): Canonical scientific reference and numeric anchors (validated articles, pathway map, and operational numbers used by the codebase).
+- [docs/reference/PROJECT_STRUCTURE.md](docs/reference/PROJECT_STRUCTURE.md): Concise project layout and pointers to key modules, data folders, and generated-artifact locations.
+
+Consult these files for quick orientation before running the main validation or prediction workflows.
+
 ```bash
 python scripts/compare_formulations.py \
   --names "Cysteine Enrichment (Basic),Premium Meaty Mix,Soy-Specific Masking" \
