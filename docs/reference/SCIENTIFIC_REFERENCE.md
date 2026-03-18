@@ -97,18 +97,18 @@ Operational meaning for the repo:
 
 ## 3. Validated Scientific Anchors
 
-The table below only includes references that the repository is currently willing to use as validated anchors, parameter references, or benchmark-intake signals.
+The table below only includes references that the repository is currently willing to use as validated anchors, parameter references, or benchmark-intake signals. Every entry now includes a DOI string and a DOI URL so readers can verify the source directly.
 
-| Reference | Role In Repo | Key Numeric Values | What It Supports | Comment |
-| --- | --- | --- | --- | --- |
-| Hofmann & Schieberle (1998), DOI 10.1021/jf9705983 | Free-precursor sulfur anchor | MFT and FFT formation in ribose plus cysteine model systems; article-level anchor validated | Confirms that pentose plus cysteine is the correct free-chemistry family for MFT and FFT | Strong chemistry anchor; not a plant-matrix benchmark |
-| Mottram & Nobrega (2002), DOI 10.1021/jf0200826 | Free-precursor sulfur anchor | pH 5, 95 C, 4 h; ribose carbon skeleton retained in MFT and FFT; pages 4080-4086 validated | Mechanistic support for ribose plus cysteine sulfur pathway and benchmark candidate design | Strong mechanistic anchor; no direct PPI or SPI matrix data |
-| Pratap-Singh et al. (2021), DOI 10.3390/molecules26134104 | Matrix headspace anchor | PPI 2-pentylfuran 638 +/- 49 ppb-equivalent; SPI 2-pentylfuran 2492 +/- 199 ppb-equivalent; compound-specific soy vs pea release ratios | Baseline off-flavour anchors for ambient pea and soy slurries | Valid for native matrix headspace, not meaty-positive induction |
-| Shu et al. (2024), DOI 10.1016/j.ultsonch.2023.106675 | Conditional matrix tradeoff calibration | SPI hexanal reduction 70.60%; (E)-2-hexenal reduction 95.60%; 1-octen-3-ol reduction 61.23%; 2-pentylfuran not detected after treatment | Soy off-flavour attenuation under high-severity treatment | Useful for adverse-marker calibration only; no meaty sulfur panel |
-| Asen et al. (2022) | Pea process-state calibration | PPC 10% w/v; pH 3/5/7/9; 100 C, 30 min; base Td 74.45 C; heated fractions 124-206 C; triplicates | Best open denaturation-state anchor for pea thermal state versus pH | Parameter anchor, not benchmark chemistry |
-| Malia et al. (2025) | Pea process-state calibration | Pea protein 3% w/w; Ellman DTNB with extinction coefficient 1.36e4; free SH in nmol/mg protein; triplicates | Best open free-SH accessibility anchor for pea heating response | Parameter anchor; still not the exact benchmark condition |
-| Squeo et al. (2023), DOI 10.3390/foods12061331 | Safety reference anchor | Soy wet-extraction acrylamide 185-748 ug/kg; wet-extraction mean 451 ug/kg; 3 replicates; LC-MS/MS with d3-acrylamide; LOD 7 ng/mL; LOQ 24 ng/mL | Industrial endpoint reference for acrylamide in plant-protein ingredients | Honest safety reference, not a dynamic kinetic benchmark |
-| Nishimura & Abe (2024), DOI 10.1016/j.foodchem.2024.141599 | Qualitative soy chemistry intake | Soy starting slurry 75 mg/mL; MRP mixture 62.5 mg/mL SPH + 16.5 mM cysteine + 16.5 mM ribose; 95 C, 90 min; HS-SPME-GC/MS with n = 3; volatile output reported as relative peak areas / z-transformed clustering | Confirms soy-hydrolysate protein-matrix sulfur chemistry and supports a soy benchmark-intake design | Full text now reviewed: useful as a qualitative intake anchor only, not as an absolute ppb or internal-standard benchmark |
+| Reference | DOI | Verification URL | Role In Repo | Key Numeric Values | What It Supports | Comment |
+| --- | --- | --- | --- | --- | --- | --- |
+| Hofmann & Schieberle (1998) | 10.1021/jf9705983 | [https://doi.org/10.1021/jf9705983](https://doi.org/10.1021/jf9705983) | Free-precursor sulfur anchor | MFT and FFT formation in ribose plus cysteine model systems; article-level anchor validated | Confirms that pentose plus cysteine is the correct free-chemistry family for MFT and FFT | Strong chemistry anchor; not a plant-matrix benchmark |
+| Mottram & Nobrega (2002) | 10.1021/jf0200826 | [https://doi.org/10.1021/jf0200826](https://doi.org/10.1021/jf0200826) | Free-precursor sulfur anchor | pH 5, 95 C, 4 h; ribose carbon skeleton retained in MFT and FFT; pages 4080-4086 validated | Mechanistic support for ribose plus cysteine sulfur pathway and benchmark candidate design | Strong mechanistic anchor; no direct PPI or SPI matrix data |
+| Pratap-Singh et al. (2021) | 10.3390/molecules26134104 | [https://doi.org/10.3390/molecules26134104](https://doi.org/10.3390/molecules26134104) | Matrix headspace anchor | PPI 2-pentylfuran 638 +/- 49 ppb-equivalent; SPI 2-pentylfuran 2492 +/- 199 ppb-equivalent; compound-specific soy vs pea release ratios | Baseline off-flavour anchors for ambient pea and soy slurries | Valid for native matrix headspace, not meaty-positive induction |
+| Shu et al. (2024) | 10.1016/j.ultsonch.2023.106675 | [https://doi.org/10.1016/j.ultsonch.2023.106675](https://doi.org/10.1016/j.ultsonch.2023.106675) | Conditional matrix tradeoff calibration | SPI hexanal reduction 70.60%; (E)-2-hexenal reduction 95.60%; 1-octen-3-ol reduction 61.23%; 2-pentylfuran not detected after treatment | Soy off-flavour attenuation under high-severity treatment | Useful for adverse-marker calibration only; no meaty sulfur panel |
+| Asen et al. (2022) | 10.3389/fnut.2022.852225 | [https://doi.org/10.3389/fnut.2022.852225](https://doi.org/10.3389/fnut.2022.852225) | Pea process-state calibration | PPC 10% w/v; pH 3/5/7/9; 100 C, 30 min; base Td 74.45 C; heated fractions 124-206 C; triplicates | Best open denaturation-state anchor for pea thermal state versus pH | Parameter anchor, not benchmark chemistry |
+| Li et al. (2025) | 10.1016/j.crfs.2025.101173 | [https://doi.org/10.1016/j.crfs.2025.101173](https://doi.org/10.1016/j.crfs.2025.101173) | Pea process-state calibration | Pea protein 3% w/w; Ellman DTNB with extinction coefficient 1.36e4; free SH in nmol/mg protein; triplicates | Best open free-SH accessibility anchor for pea heating response | Parameter anchor; still not the exact benchmark condition |
+| Squeo et al. (2023) | 10.3390/foods12061331 | [https://doi.org/10.3390/foods12061331](https://doi.org/10.3390/foods12061331) | Safety reference anchor | Soy wet-extraction acrylamide 185-748 ug/kg; wet-extraction mean 451 ug/kg; 3 replicates; LC-MS/MS with d3-acrylamide; LOD 7 ng/mL; LOQ 24 ng/mL | Industrial endpoint reference for acrylamide in plant-protein ingredients | Honest safety reference, not a dynamic kinetic benchmark |
+| Nishimura & Abe (2024) | 10.1016/j.foodchem.2024.141599 | [https://doi.org/10.1016/j.foodchem.2024.141599](https://doi.org/10.1016/j.foodchem.2024.141599) | Qualitative soy chemistry intake | Soy starting slurry 75 mg/mL; MRP mixture 62.5 mg/mL SPH + 16.5 mM cysteine + 16.5 mM ribose; 95 C, 90 min; HS-SPME-GC/MS with n = 3; volatile output reported as relative peak areas / z-transformed clustering | Confirms soy-hydrolysate protein-matrix sulfur chemistry and supports a soy benchmark-intake design | Full text now reviewed: useful as a qualitative intake anchor only, not as an absolute ppb or internal-standard benchmark |
 
 ## 4. Numeric Anchors By Module
 
@@ -139,7 +139,7 @@ The table below only includes references that the repository is currently willin
   - pH sweep: 3, 5, 7, 9
   - base Td: 74.45 C
   - heated fraction Td range: 124-206 C
-- Malia 2025:
+- Li 2025:
   - pea protein solution: 3% w/w
   - Ellman assay extinction coefficient: 1.36 x 10^4
   - free-SH units: nmol/mg protein
