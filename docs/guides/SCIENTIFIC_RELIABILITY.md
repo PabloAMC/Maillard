@@ -103,6 +103,27 @@ The figure summarizes:
 - matrix readiness by protein family
 - current coverage gaps and missing scientific evidence
 
+## Key Scientific References
+
+The canonical repository reference list lives in [../reference/SCIENTIFIC_REFERENCE.md](../reference/SCIENTIFIC_REFERENCE.md).
+
+That document is the single human-readable source of truth for:
+
+- validated articles currently trusted by the repository
+- numeric anchors that matter operationally
+- comments on what each article supports and where the evidence still stops
+
+If you only want the key anchors behind the current trust surface, start with:
+
+- Hofmann & Schieberle (1998): free-precursor sulfur chemistry for MFT and FFT.
+- Mottram & Nobrega (2002): mechanistic ribose plus cysteine sulfur pathway support.
+- Pratap-Singh et al. (2021): native pea and soy off-flavour headspace baselines.
+- Shu et al. (2024): soy off-flavour attenuation under treatment.
+- Asen et al. (2022) and Malia et al. (2025): pea denaturation-state and SH accessibility calibration.
+- Squeo et al. (2023): acrylamide endpoint range in plant-protein ingredients.
+
+For the wider screening and benchmark-gap view, see [../slr_benchmark_evaluation.md](../slr_benchmark_evaluation.md).
+
 ## Recommended Commands Before Presenting Results Externally
 
 ```bash

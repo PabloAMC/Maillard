@@ -119,6 +119,23 @@ Important caveat: matrix trust is lower because accessibility, retention, and pH
 
 ---
 
+## Scientific References
+
+The canonical human-readable reference list is [docs/reference/SCIENTIFIC_REFERENCE.md](docs/reference/SCIENTIFIC_REFERENCE.md). That file is the place to look for the validated papers, numeric anchors, and scientific caveats currently trusted by the repository.
+
+If you want the shortest possible reading list, start with these anchors:
+
+- Hofmann & Schieberle (1998): free-precursor sulfur chemistry anchor for MFT and FFT.
+- Mottram & Nobrega (2002): mechanistic support for ribose plus cysteine sulfur pathways.
+- Pratap-Singh et al. (2021): pea and soy baseline off-flavour headspace anchor.
+- Shu et al. (2024): soy off-flavour attenuation anchor under high-severity treatment.
+- Asen et al. (2022) and Malia et al. (2025): pea process-state and accessibility calibration anchors.
+- Squeo et al. (2023): acrylamide safety anchor for plant-protein ingredients.
+
+For a broader literature-screening view, also see [docs/slr_benchmark_evaluation.md](docs/slr_benchmark_evaluation.md).
+
+---
+
 ## What The Software Can Do
 
 Within its supported envelope, Maillard can already do the following:
@@ -229,16 +246,6 @@ Useful flags in this pipeline:
 Every saved bundle now includes provenance metadata: generating command, branch, commit, dirty-state flag, input fingerprint, and the key scientific-reference files needed to interpret the result honestly.
 
 ### 2b. Compare named formulations when the question is comparative
-
-## Reference
-
-The repository includes a compact set of human-focused reference documents under `docs/reference/`. These are short, reviewer-friendly files you should consult when running artifacts or evaluating claims.
-
-- [docs/reference/COMMAND_REFERENCE.md](docs/reference/COMMAND_REFERENCE.md): Command and workflow reference (Docker entrypoints, recommended scripts, validation and campaign commands).
-- [docs/reference/SCIENTIFIC_REFERENCE.md](docs/reference/SCIENTIFIC_REFERENCE.md): Canonical scientific reference and numeric anchors (validated articles, pathway map, and operational numbers used by the codebase).
-- [docs/reference/PROJECT_STRUCTURE.md](docs/reference/PROJECT_STRUCTURE.md): Concise project layout and pointers to key modules, data folders, and generated-artifact locations.
-
-Consult these files for quick orientation before running the main validation or prediction workflows.
 
 ```bash
 python scripts/compare_formulations.py \
