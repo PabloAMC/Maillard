@@ -36,7 +36,7 @@ Do not attempt to run this natively on macOS ARM64. Instead, we use Docker to ru
 For the fastest setup, you can pull the pre-built image from GitHub Container Registry (ghcr.io) instead of building from scratch. Run:
 
 ```bash
-docker pull ghcr.io/PabloAMC/Maillard:latest
+docker pull ghcr.io/pabloamc/maillard:latest
 ```
 
 If you prefer or need to build from source locally:
