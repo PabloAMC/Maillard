@@ -93,11 +93,11 @@ Current in-repo validation summary:
 
 In practice, this means the software already reproduces a narrow but real set of literature systems closely enough to support quantitative screening inside that envelope.
 
-The main validation figure now focuses only on the two panels that matter most for first-pass trust: parity against literature and benchmark-level quantitative error.
+The image below is a versioned snapshot of the current first-pass trust surface for GitHub readers. The authoritative validation outputs are still generated locally with `./scripts/docker_maillard.sh validation-figures`.
 
-![Validation Overview](results/validation/validation_overview.png)
+![Validation Overview](docs/assets/validation_overview.png)
 
-If you need the full boundary conditions, benchmark-by-benchmark status, or caveats beyond this first-pass view, use the generated validation documents rather than a second summary graphic.
+If you need the full boundary conditions, benchmark-by-benchmark status, or caveats beyond this first-pass view, use the generated validation documents together with the versioned snapshot above.
 
 How to interpret trust:
 

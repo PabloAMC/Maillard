@@ -92,7 +92,7 @@ Use:
 
 This writes:
 
-- [../../results/validation/validation_overview.png](../../results/validation/validation_overview.png)
+- [Versioned validation overview snapshot](../assets/validation_overview.png)
 - [../../results/validation/validation_overview.md](../../results/validation/validation_overview.md)
 - [../../results/validation/validation_overview.json](../../results/validation/validation_overview.json)
 
