@@ -31,10 +31,20 @@ This is the shortest useful map of the repository.
 | Path | Role |
 | --- | --- |
 | `data/benchmarks/` | Literature and internal benchmark definitions |
+| `data/campaigns/` | Shareable screening campaign specifications |
+| `data/protocols/` | Machine-readable primary benchmark protocol contracts |
 | `data/species/` | Target sets for desirable, adverse, and toxic markers |
 | `data/reactions/` | Curated pathways and reaction families |
 | `data/formulation_grid.yml` | Named formulation definitions for explainability and comparisons |
 | `data/temp_profiles/` | Temperature ramp profiles |
+
+## Shareable Workflow Entrypoints
+
+| Path | Role |
+| --- | --- |
+| `scripts/run_pipeline.py` | Single-run scientist-facing prediction and report generation |
+| `scripts/compare_formulations.py` | Side-by-side comparison for a small named set of formulations |
+| `scripts/run_campaign.py` | Campaign-level package generation with run artifacts and provenance |
 
 ## Test Layout
 
@@ -61,5 +71,6 @@ Not every document in `docs/` is meant for a first-time reader.
 
 - use `docs/guides/` for onboarding
 - use `docs/reference/` for commands and structure
+- use `docs/protocols/` for review-ready experimental contracts
 - use `docs/research/` for literature notes and scientific planning
 - use `docs/development/` for logs, lessons, and backlog context
