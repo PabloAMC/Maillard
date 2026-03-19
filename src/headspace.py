@@ -13,6 +13,7 @@ from typing import Dict, Optional, List
 from src.matrix_calibration_registry import (
     determine_matrix_process_state,
     get_matrix_calibration_record,
+    get_matrix_runtime_composition_policy,
 )
 from src.matrix_correction import ProteinType, resolve_compound_matrix_retention, resolve_matrix_correction
 
@@ -203,7 +204,28 @@ class HeadspaceModel:
             process_state=process_state,
         )
         base_factor = float(record.observable_factor) if record is not None else 1.0
-        return base_factor * self.get_matrix_ph_release_factor(
+        dynamic_release_factor = 1.0
+        runtime_policy = get_matrix_runtime_composition_policy(
+            name,
+            protein_type=p_type.value,
+            process_state=process_state,
+        )
+        if runtime_policy.get("mode") == "compose_dynamic_retention":
+            matrix_retention = resolve_compound_matrix_retention(
+                name,
+                protein_type=p_type,
+                denaturation_state=0.5,
+                temperature_celsius=temperature_celsius,
+                time_minutes=time_minutes,
+                process_state=process_state,
+            )
+            baseline_retention = resolve_compound_matrix_retention(
+                name,
+                protein_type=p_type,
+                denaturation_state=0.5,
+            )
+            dynamic_release_factor = 1.0 if baseline_retention <= 0.0 else matrix_retention / baseline_retention
+        return base_factor * dynamic_release_factor * self.get_matrix_ph_release_factor(
             name,
             protein_type=protein_type,
             pH=pH,
@@ -257,6 +279,8 @@ class HeadspaceModel:
                         name,
                         protein_type=protein_type,
                         denaturation_state=denaturation_state,
+                        temperature_celsius=temp_c,
+                        time_minutes=None,
                     )
                 
                 # Effective Kaw accounting for matrix sequestration
@@ -272,6 +296,8 @@ class HeadspaceModel:
                         name,
                         protein_type=protein_type,
                         denaturation_state=denaturation_state,
+                        temperature_celsius=temp_c,
+                        time_minutes=None,
                     )
                 air_concs[name] = c_total * kaw_base * matrix_retention * ph_release_factor
                 

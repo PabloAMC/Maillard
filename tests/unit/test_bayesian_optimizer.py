@@ -1,7 +1,7 @@
 import pytest
 
 from src.bayesian_optimizer import FormulationOptimizer  # noqa: E402
-from src.inverse_design import FormulationResult  # noqa: E402
+from src.pipeline import FormulationResult  # noqa: E402
 
 def test_formulation_optimizer_initialization():
     """Verify the optimizer initializes with the correct targets."""
@@ -18,7 +18,7 @@ def test_optimization_execution(monkeypatch):
     """
     optimizer = FormulationOptimizer(target_tag="meaty")
     
-    # Mock InverseDesigner.evaluate_single to return a predictable result based on temp
+    # Mock MaillardPipeline.evaluate_single to return a predictable result based on temp
     # R.8: designer is now created per-trial, so we monkeypatch the class method
     def mock_evaluate_single(self, formulation, cond):
         temp = cond.temperature_celsius
@@ -38,8 +38,8 @@ def test_optimization_execution(monkeypatch):
             texture_risk=0.0
         )
 
-    from src.inverse_design import InverseDesigner
-    monkeypatch.setattr(InverseDesigner, "evaluate_single", mock_evaluate_single)
+    from src.pipeline import MaillardPipeline
+    monkeypatch.setattr(MaillardPipeline, "evaluate_single", mock_evaluate_single)
     
     # Run a short study
     study = optimizer.optimize(["ribose"], ["cysteine"], n_trials=5)
@@ -102,8 +102,8 @@ def test_meaty_quality_penalty_reduces_objective(monkeypatch):
             avg_uncertainty=0.0,
         )
 
-    from src.inverse_design import InverseDesigner
-    monkeypatch.setattr(InverseDesigner, "evaluate_single", mock_evaluate_single)
+    from src.pipeline import MaillardPipeline
+    monkeypatch.setattr(MaillardPipeline, "evaluate_single", mock_evaluate_single)
 
     trial = DummyTrial()
     value = optimizer.objective(trial, ["ribose"], ["cysteine"], None)

@@ -1,7 +1,8 @@
 from pathlib import Path
 
 from src.conditions import ReactionConditions
-from src.inverse_design import FormulationResult
+from src.pipeline import FormulationResult
+from src.projection_metadata import normalize_projection_metadata_row
 from src.reporting import generate_comparison_report, generate_report
 from src.usability_reports import (
     DomainWarning,
@@ -9,9 +10,14 @@ from src.usability_reports import (
     build_confidence_package,
     build_formulation_explainability_payload,
     build_validated_envelope_report,
+)
+from src.presentation import (
     render_formulation_explainability_markdown,
     render_validated_envelope_markdown,
+    render_projection_rows_markdown,
+    render_provenance_markdown,
 )
+from src.projection_utils import build_projection_rows
 
 
 def test_formulation_explainability_payload_surfaces_matrix_and_projection_context():
@@ -35,9 +41,11 @@ def test_formulation_explainability_payload_surfaces_matrix_and_projection_conte
                 "observable_ppb": 48.0,
                 "proxy_to_observable_ratio": 0.4,
                 "matrix_factor": 0.8,
+                "dynamic_retention_factor": 1.1,
                 "headspace_factor": 0.5,
                 "volatile_class": "furan",
                 "process_state": "heated_matrix",
+                "retention_runtime_mode": "temporal_attenuation",
                 "calibration_source": "class_fallback",
                 "calibration_evidence_strength": "heuristic",
                 "calibration_fallback_mode": "class_level",
@@ -51,6 +59,14 @@ def test_formulation_explainability_payload_surfaces_matrix_and_projection_conte
             "bulk_volatile_retention": 0.51,
             "denaturation_source": "test source",
         },
+        strecker_balance_score=0.3,
+        pyrazine_burden=12.0,
+        flavor_axis_summary={
+            "strecker_balance_score": 0.3,
+            "pyrazine_burden": 12.0,
+            "thiamine_pathway_active": False,
+        },
+        targets=[{"name": "furfural", "concentration": 48.0}],
     )
 
     payload = build_formulation_explainability_payload(
@@ -65,10 +81,30 @@ def test_formulation_explainability_payload_surfaces_matrix_and_projection_conte
     assert payload["top_projection_rows"][0]["volatile_class"] == "furan"
     assert payload["top_projection_rows"][0]["observable_ratio"] == 0.4
     assert payload["top_projection_rows"][0]["process_state"] == "heated_matrix"
+    assert payload["top_projection_rows"][0]["retention_runtime_mode"] == "temporal_attenuation"
     assert "Formulation Explainability" in markdown
     assert "Effective denaturation state" in markdown
     assert "Obs/Proxy" in markdown
     assert "Calibration" in markdown
+    assert "Flavor Axis" in markdown
+
+
+def test_projection_metadata_normalizer_fills_schema_defaults_for_sparse_rows():
+    row = normalize_projection_metadata_row(
+        {
+            "proxy_ppb": 120.0,
+            "observable_ppb": 48.0,
+            "process_state": "heated_matrix",
+        },
+        compound_fallback="furfural",
+    )
+
+    assert row["compound"] == "furfural"
+    assert row["matrix_factor"] == 1.0
+    assert row["headspace_factor"] == 1.0
+    assert row["retention_runtime_mode"] == "static_class_profile"
+    assert row["calibration_source"] == "class_fallback"
+    assert row["proxy_to_observable_ratio"] == 0.4
 
 
 def test_validated_envelope_report_mentions_strict_ready_and_matrix_scope():
@@ -188,10 +224,27 @@ def test_generate_report_includes_confidence_metadata(tmp_path: Path):
                 "compound": "furfural",
                 "observable_ppb": 12.0,
                 "process_state": "ambient_slurry",
+                "retention_runtime_mode": "static_class_profile",
                 "calibration_source": "Pratap-Singh 2021 soy-vs-pea ambient slurry release ratio",
                 "calibration_evidence_strength": "literature_anchored",
                 "calibration_fallback_mode": "compound_specific",
             }
+        },
+        strecker_balance_score=0.25,
+        strecker_gap_penalty=0.4,
+        pyrazine_propensity=0.7,
+        pyrazine_burden=14.0,
+        pyrazine_penalty=0.2,
+        flavor_axis_summary={
+            "strecker_balance_score": 0.25,
+            "strecker_gap_penalty": 0.4,
+            "pyrazine_signal_ppb": 7.0,
+            "pyrazine_propensity": 0.7,
+            "pyrazine_burden": 14.0,
+            "pyrazine_penalty": 0.2,
+            "thiamine_pathway_active": False,
+            "thiamine_provenance_mode": "inactive",
+            "lincoln_crosstalk_prior": {"summary": "inactive"},
         },
     )
 
@@ -207,14 +260,39 @@ def test_generate_report_includes_confidence_metadata(tmp_path: Path):
     assert "Aggregate Sensory Confidence" in markdown_text
     assert "Sensitivity Summary" in markdown_text
     assert "Projection Calibration" in markdown_text
+    assert "Flavor Axis Diagnostics" in markdown_text
     assert "projection_metadata" in json_text
     assert '"provenance"' in json_text
     assert "## 5. Provenance" in markdown_text
 
 
 def test_generate_comparison_report_includes_provenance(tmp_path: Path):
-    first = FormulationResult(name="A", target_score=5.0, off_flavour_risk=1.0, safety_score=0.3)
-    second = FormulationResult(name="B", target_score=3.0, off_flavour_risk=0.5, safety_score=0.1)
+    first = FormulationResult(
+        name="A",
+        target_score=5.0,
+        off_flavour_risk=1.0,
+        safety_score=0.3,
+        mft_to_furfural_ratio=0.02,
+        meaty_quality_penalty=0.4,
+        strecker_balance_score=0.2,
+        strecker_gap_penalty=0.8,
+        pyrazine_burden=35.0,
+        pyrazine_penalty=0.7,
+        flavor_axis_summary={"thiamine_pathway_active": False, "furanone_expected": ["HEMF"]},
+    )
+    second = FormulationResult(
+        name="B",
+        target_score=3.0,
+        off_flavour_risk=0.5,
+        safety_score=0.1,
+        mft_to_furfural_ratio=0.10,
+        meaty_quality_penalty=0.1,
+        strecker_balance_score=0.7,
+        strecker_gap_penalty=0.0,
+        pyrazine_burden=8.0,
+        pyrazine_penalty=0.0,
+        flavor_axis_summary={"thiamine_pathway_active": True, "furanone_expected": ["HEMF", "DMHF"]},
+    )
 
     out_dir = generate_comparison_report(
         [first, second],
@@ -227,6 +305,11 @@ def test_generate_comparison_report_includes_provenance(tmp_path: Path):
 
     assert '"provenance"' in json_text
     assert '"campaign"' in json_text
+    assert '"mft_to_furfural_ratio"' in json_text
+    assert '"strecker_balance_score"' in json_text
+    assert '"pyrazine_burden"' in json_text
+    assert "Cross-Marker Context" in markdown_text
+    assert "MFT/Furfural Ratio" in markdown_text
     assert "## 5. Provenance" in markdown_text
 
 

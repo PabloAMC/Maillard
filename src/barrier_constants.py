@@ -5,7 +5,7 @@ These values are approximate activation energies (kcal/mol) for each
 Maillard reaction family, sourced from published DFT/experimental data
 and cross-checked against GFN2-xTB NEB estimates.
 
-They are used by both `inverse_design.py` and `run_pipeline.py` for the
+They are used by both `pipeline.py` and `run_pipeline.py` for the
 instant FAST-mode rankings.  Update this single file when new data
 is available — both call-sites import from here.
 

@@ -22,7 +22,7 @@ def test_benchmark_correlation(bench_file):
     summary = summarize_evaluation(evaluation, protein_type=bench.get("protein_type", "free"))
 
     if not evaluation.supported:
-        pytest.xfail(evaluation.reason or "Benchmark not yet executable through InverseDesigner")
+        pytest.xfail(evaluation.reason or "Benchmark not yet executable through MaillardPipeline")
 
     assert evaluation.comparisons, f"No comparisons produced for {evaluation.benchmark_id}"
     if evaluation.coverage < 1.0:

@@ -9,10 +9,10 @@ if str(ROOT) not in sys.path:
 from src.benchmark_validation import (
     BenchmarkSummary,
     audit_all_thermodynamic_gating,
-    render_thermodynamic_gating_audit_markdown,
     resolve_thermodynamic_gating_mode,
     thermodynamic_gating_materially_improves,
 )
+from src.presentation import render_thermodynamic_gating_audit_markdown
 
 
 def _summary(*, status: str, mae: float, max_ratio: float) -> BenchmarkSummary:

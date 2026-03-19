@@ -4,7 +4,7 @@ from typing import List, Optional
 
 ROOT = Path(__file__).resolve().parents[1]
 
-from src.inverse_design import InverseDesigner  # noqa: E402
+from src.pipeline import MaillardPipeline  # noqa: E402
 from src.smirks_engine import ReactionConditions  # noqa: E402
 from src.pre_processor import PreProcessor  # noqa: E402
 
@@ -111,7 +111,7 @@ class FormulationOptimizer:
         }
         
         # 4. Evaluate using the robust pipeline without mutating global state (R.8 fix)
-        designer = InverseDesigner(self.target_tag, self.minimize_tag)
+        designer = MaillardPipeline(self.target_tag, self.minimize_tag)
         res = designer.evaluate_single(formulation, cond)
         
         # 5. Objective Calculation
@@ -139,17 +139,22 @@ class FormulationOptimizer:
         safety_penalty = self.risk_aversion * res.safety_score
         off_flavor_penalty = 0.5 * res.off_flavour_risk
         quality_penalty = res.meaty_quality_penalty
+        strecker_penalty = res.strecker_gap_penalty
+        pyrazine_penalty = res.pyrazine_penalty
         
         # Heuristic uncertainty penalty: -0.1 per kcal of span uncertainty
         unc_penalty = res.avg_uncertainty * 0.1
         
-        final_objective = target_val - safety_penalty - off_flavor_penalty - quality_penalty - unc_penalty
+        final_objective = target_val - safety_penalty - off_flavor_penalty - quality_penalty - strecker_penalty - pyrazine_penalty - unc_penalty
         
         trial.set_user_attr("target_score", target_val)
         trial.set_user_attr("safety_score", res.safety_score)
         trial.set_user_attr("off_flavour_risk", res.off_flavour_risk)
         trial.set_user_attr("meaty_quality_penalty", res.meaty_quality_penalty)
         trial.set_user_attr("mft_to_furfural_ratio", res.mft_to_furfural_ratio)
+        trial.set_user_attr("strecker_gap_penalty", res.strecker_gap_penalty)
+        trial.set_user_attr("pyrazine_penalty", res.pyrazine_penalty)
+        trial.set_user_attr("pyrazine_burden", res.pyrazine_burden)
         trial.set_user_attr("avg_uncertainty", res.avg_uncertainty)
         trial.set_user_attr("flagged_toxics", res.flagged_toxics)
         

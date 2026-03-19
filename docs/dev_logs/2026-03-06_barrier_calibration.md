@@ -3,7 +3,7 @@
 **Status:** Completed successfully
 
 ## 1. Context and Objective
-The `SmirksEngine` ranking system previously relied on hardcoded barrier constants (e.g., `Schiff=15 kcal/mol`, `Strecker=22 kcal/mol`) embedded directly inside the `run_pipeline.py` and `inverse_design.py` evaluation loops. The Phase 8.C objective was to:
+The `SmirksEngine` ranking system previously relied on hardcoded barrier constants (e.g., `Schiff=15 kcal/mol`, `Strecker=22 kcal/mol`) embedded directly inside the `run_pipeline.py` and `pipeline.py` evaluation loops. The Phase 8.C objective was to:
 1. Extract these into a centralised, physics-grounded module (`src/barrier_constants.py`).
 2. Calibrate these constants against published DFT and experimental literature.
 3. Pass the **8.C.5 Literature Validation Gate**: ensure that the tool structurally reproduces the *known* dominant volatiles for 3 standard experimental model systems.

@@ -50,7 +50,7 @@ This plan is no longer a generic calibration roadmap. It is a step-by-step SLR i
 - [x] Pratap-Singh 2021 ambient pea/soy observable calibration in src/matrix_calibration_registry.py.
 - [x] Heated soy hexanal and censored 2-pentylfuran carryover from Shu 2024 in src/matrix_calibration_registry.py.
 - [x] Process-state and matrix priors for pea and soy in data/lit/computational_priors.json.
-- [x] Meaty-quality ratio and penalty in src/inverse_design.py, src/bayesian_optimizer.py, and src/reporting.py.
+- [x] Meaty-quality ratio and penalty in src/pipeline.py, src/bayesian_optimizer.py, and src/reporting.py.
 - [x] Melanoidin sulfur trapping surrogate in src/recommend.py.
 - [x] DFT triage contract in src/dft_refinement_contract.py.
 
@@ -390,7 +390,7 @@ This plan is no longer a generic calibration roadmap. It is a step-by-step SLR i
 #### Files
 
 - [ ] src/smirks_engine.py
-- [ ] src/inverse_design.py
+- [ ] src/pipeline.py
 - [ ] src/sensory.py
 - [ ] data/lit/flavor_reference_payloads.json
 - [ ] tests/unit/
@@ -417,7 +417,7 @@ This plan is no longer a generic calibration roadmap. It is a step-by-step SLR i
 
 - [ ] data/lit/computational_priors.json
 - [ ] src/conditions.py or new src/pyrazine_control.py
-- [ ] src/inverse_design.py
+- [ ] src/pipeline.py
 - [ ] src/reporting.py
 
 #### Exact tasks
@@ -711,16 +711,16 @@ This plan is no longer a generic calibration roadmap. It is a step-by-step SLR i
 
 - [ ] tests/unit/test_headspace.py
 - [ ] tests/unit/test_budget_projection.py
-- [ ] tests/unit/test_inverse_design_projection_contract.py
+- [ ] tests/unit/test_pipeline_projection_contract.py
 - [ ] tests/unit/test_bayesian_optimizer.py
 - [ ] tests/unit/test_usability_reports.py
 - [ ] focused ranking and contract tests in tests/integration/test_recommendation_engine.py
 
 ### Docker commands
 
-- [ ] ./scripts/docker_maillard.sh pytest tests/unit/test_headspace.py tests/unit/test_budget_projection.py tests/unit/test_inverse_design_projection_contract.py tests/unit/test_bayesian_optimizer.py
+- [ ] ./scripts/docker_maillard.sh pytest tests/unit/test_headspace.py tests/unit/test_budget_projection.py tests/unit/test_pipeline_projection_contract.py tests/unit/test_bayesian_optimizer.py
 - [ ] ./scripts/docker_maillard.sh pytest tests/unit/test_usability_reports.py
-- [ ] ./scripts/docker_maillard.sh pytest tests/integration/test_recommendation_engine.py::TestInverseDesignerEvaluation::test_evaluate_all_returns_results tests/integration/test_recommendation_engine.py::TestInverseDesignerEvaluation::test_evaluate_all_result_attributes tests/integration/test_recommendation_engine.py::TestInverseDesignerEvaluation::test_evaluate_all_results_sorted
+- [ ] ./scripts/docker_maillard.sh pytest tests/integration/test_recommendation_engine.py::TestMaillardPipelineEvaluation::test_evaluate_all_returns_results tests/integration/test_recommendation_engine.py::TestMaillardPipelineEvaluation::test_evaluate_all_result_attributes tests/integration/test_recommendation_engine.py::TestMaillardPipelineEvaluation::test_evaluate_all_results_sorted
 - [ ] ./scripts/docker_maillard.sh run python scripts/run_campaign.py --spec data/campaigns/heated_soy_tradeoff_screen.yml --output-dir results/heated_soy_tradeoff_screen
 
 ### Promotion rule
@@ -759,3 +759,29 @@ This plan is no longer a generic calibration roadmap. It is a step-by-step SLR i
 ## Review Note — 2026-03-19
 
 - The repository no longer needs more abstract strategy before acting. The next useful work is to tighten calibration in the observable layer, keep matrix realism explicit, and use DFT only as a narrow offline correction tool once the cheap surrogates stop buying meaningful accuracy.
+
+## Track 9: Codebase Restructuring (Clean Code)
+
+### Goal
+- Repartition massive logic clusters into focused modules without altering science or validation boundaries.
+- Separate reaction templates from the SMIRKS engine.
+- Separate projection math from recommendation logic.
+- Fix naming misalignment in pipeline orchestration.
+
+### Exact tasks
+1. [x] Move structural template logic (`_amadori_cascade`, etc.) out of `src/smirks_engine.py` into a new `src/reaction_templates.py`.
+2. [x] Move projection logic (`ProjectionBudget`, etc.) out of `src/recommend.py` into a new `src/projection.py`.
+3. [x] Rename `src/inverse_design.py` to `src/pipeline.py` and `InverseDesigner` to `MaillardPipeline`. Update imports in `scripts/run_pipeline.py` and tests.
+4. [x] Run full unit/integration test suite (`./scripts/docker_maillard.sh pytest`) to verify absolute parity.
+5. [x] Legacy Code Cleanup (Dead code removal)
+    - [x] Remove `src/pyrazine_control.py` (Dead code)
+    - [x] Remove `src/skala_refiner.py` & `tests/qm/test_skala_refiner.py` (Superseded by `dft_refiner.py`)
+    - [x] Remove `scripts/migrate_results_to_db.py` (One-off script)
+    - [x] Remove `tmp_mech.yaml` (Root leftover)
+    - [x] Update `test_contracts.py` & `test_backend_plumbing.py` to use `DFTRefiner`.
+6. [/] Phase 2: Presentation & Logic Separation
+    - [ ] Create `src/presentation.py` and move Markdown/CLI rendering logic.
+    - [ ] Create `src/projection_utils.py` and move data helpers like `build_projection_rows`.
+    - [ ] Deduplicate `reporting.py` and `usability_reports.py`.
+    - [ ] Refactor `benchmark_validation.py` to reuse main projection paths.
+    - [ ] Run full test suite and verify report outputs.

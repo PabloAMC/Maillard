@@ -2,7 +2,7 @@ import pytest
 from pathlib import Path
 from src.recommend import Recommender
 from src.pathway_extractor import Species, ElementaryStep
-from src.inverse_design import InverseDesigner, FormulationResult
+from src.pipeline import MaillardPipeline, FormulationResult
 
 def test_precursor_attribution_tracing():
     # Mock a simple case: Glucose -> Furfural

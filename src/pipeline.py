@@ -14,6 +14,8 @@ from src.sensory import SensoryPredictor  # noqa: E402
 from src.safety import evaluate_formulation_safety  # noqa: E402
 from src.lipid_oxidation import predict_lop_generation  # noqa: E402
 from src.matrix_correction import build_matrix_explainability, resolve_effective_denaturation_state  # noqa: E402
+from src.literature_runtime import build_flavor_axis_summary
+from src.projection_metadata import ProjectionMetadataMap
 
 # Locate data files
 ROOT = Path(__file__).resolve().parents[1]
@@ -76,7 +78,7 @@ class FormulationResult:
     texture_risk: float = 0.0
     predicted_ppb: Dict[str, float] = field(default_factory=dict)
     predicted_proxy_ppb: Dict[str, float] = field(default_factory=dict)
-    projection_metadata: Dict[str, Dict[str, float]] = field(default_factory=dict)
+    projection_metadata: ProjectionMetadataMap = field(default_factory=dict)
     avg_uncertainty: float = 5.0
     effective_denaturation_state: float = 0.5
     matrix_explainability: Dict[str, object] = field(default_factory=dict)
@@ -88,9 +90,15 @@ class FormulationResult:
     suppressed_compounds: List[Dict] = field(default_factory=list)
     mft_to_furfural_ratio: float = 0.0
     meaty_quality_penalty: float = 0.0
+    strecker_balance_score: float = 0.0
+    strecker_gap_penalty: float = 0.0
+    pyrazine_propensity: float = 0.0
+    pyrazine_burden: float = 0.0
+    pyrazine_penalty: float = 0.0
+    flavor_axis_summary: Dict[str, object] = field(default_factory=dict)
 
 
-class InverseDesigner:
+class MaillardPipeline:
     def __init__(self, target_tag: str, minimize_tag: str = "beany"):
         self.target_tag = target_tag.lower()
         self.minimize_tag = minimize_tag.lower()
@@ -386,6 +394,17 @@ class InverseDesigner:
             mft_to_furfural_ratio, meaty_quality_penalty = _compute_meaty_quality_constraint(
                 conc_map
             )
+            flavor_axis_summary = build_flavor_axis_summary(
+                projection_metadata=rec_result.get("projection_metadata", {}),
+                sugars=sugars,
+                amino_acids=amino_acids,
+                additives=additives,
+                lipids=lipids,
+                protein_type=protein_type,
+                pH=cond.pH,
+            )
+            strecker_gap_penalty = float(flavor_axis_summary.get("strecker_gap_penalty", 0.0))
+            pyrazine_penalty = float(flavor_axis_summary.get("pyrazine_penalty", 0.0))
 
             # Use radar score for the target category as the official t_score
             t_score = radar_scores.get(self.target_tag, (0.0, 0))[0]
@@ -423,6 +442,12 @@ class InverseDesigner:
                 suppressed_compounds=rec_result["metrics"].get("suppressed_compounds", []),
                 mft_to_furfural_ratio=mft_to_furfural_ratio,
                 meaty_quality_penalty=meaty_quality_penalty,
+                strecker_balance_score=float(flavor_axis_summary.get("strecker_balance_score", 0.0)),
+                strecker_gap_penalty=strecker_gap_penalty,
+                pyrazine_propensity=float(flavor_axis_summary.get("pyrazine_propensity", 0.0)),
+                pyrazine_burden=float(flavor_axis_summary.get("pyrazine_burden", 0.0)),
+                pyrazine_penalty=pyrazine_penalty,
+                flavor_axis_summary=flavor_axis_summary,
             ))
 
             
@@ -430,7 +455,15 @@ class InverseDesigner:
         risk_aversion = 1.0 # Default
         texture_aversion = 0.01 # 100 risk = 1.0 score penalty
         results.sort(
-            key=lambda x: (x.target_score - risk_aversion * x.safety_score - texture_aversion * x.texture_risk - x.meaty_quality_penalty, -x.off_flavour_risk), 
+            key=lambda x: (
+                x.target_score
+                - risk_aversion * x.safety_score
+                - texture_aversion * x.texture_risk
+                - x.meaty_quality_penalty
+                - x.strecker_gap_penalty
+                - x.pyrazine_penalty,
+                -x.off_flavour_risk,
+            ), 
             reverse=True
         )
         return results

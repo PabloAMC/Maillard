@@ -119,9 +119,9 @@ def main():
         "protein_type": args.protein_type,
         "denaturation_state": args.denaturation_state
     }
-    # InverseDesigner is needed here
-    from src.inverse_design import InverseDesigner
-    designer = InverseDesigner(args.target_tag, args.minimize_tag)
+    # MaillardPipeline is needed here
+    from src.pipeline import MaillardPipeline
+    designer = MaillardPipeline(args.target_tag, args.minimize_tag)
     from src.smirks_engine import ReactionConditions
     cond = ReactionConditions(
         pH=best_formulation["ph"],

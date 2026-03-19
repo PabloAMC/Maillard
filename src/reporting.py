@@ -7,16 +7,26 @@ Outputs machine-readable JSON and human-readable Markdown.
 
 import datetime
 import hashlib
+import io
 import json
 import platform
 import shlex
 import subprocess
 import sys
+from contextlib import redirect_stdout
 from pathlib import Path
 from typing import List, Dict, Any, Optional
 
-from src.inverse_design import FormulationResult
-from src.usability_reports import DomainWarning, render_decision_summary_cli
+from src.pipeline import FormulationResult
+from src.projection_metadata import ProjectionMetadataMap
+from src.usability_reports import DomainWarning
+from src.projection_utils import build_projection_rows, build_artifact_provenance
+from src.presentation import (
+    render_decision_summary_cli,
+    render_flavor_axis_markdown,
+    render_projection_rows_markdown,
+    render_provenance_markdown,
+)
 
 SCHEMA_VERSION = "2026-03-18"
 
@@ -70,74 +80,6 @@ def _build_scientific_surface(root: Path) -> Dict[str, str]:
     return payload
 
 
-def build_artifact_provenance(
-    artifact_kind: str,
-    output_dir: Path,
-    inputs: Any,
-    campaign_metadata: Optional[Dict[str, Any]] = None,
-) -> Dict[str, Any]:
-    root = _repo_root()
-    status_text = _safe_git_output(root, ["status", "--porcelain"]) or ""
-    changed_paths = []
-    for line in status_text.splitlines():
-        path_text = line[3:].strip()
-        if path_text:
-            changed_paths.append(path_text)
-
-    serialized_inputs = json.dumps(inputs, sort_keys=True, default=str)
-    provenance: Dict[str, Any] = {
-        "schema_version": SCHEMA_VERSION,
-        "artifact_kind": artifact_kind,
-        "generated_at": datetime.datetime.now().isoformat(),
-        "generator": {
-            "entrypoint": Path(sys.argv[0]).name,
-            "argv": sys.argv[1:],
-            "command": shlex.join(sys.argv),
-        },
-        "runtime": {
-            "python_version": sys.version.split()[0],
-            "platform": platform.platform(),
-        },
-        "repository": {
-            "name": root.name,
-            "root": str(root),
-            "branch": _safe_git_output(root, ["rev-parse", "--abbrev-ref", "HEAD"]) or "unknown",
-            "commit": _safe_git_output(root, ["rev-parse", "HEAD"]) or "unknown",
-            "short_commit": _safe_git_output(root, ["rev-parse", "--short", "HEAD"]) or "unknown",
-            "dirty": bool(changed_paths),
-            "changed_file_count": len(changed_paths),
-            "changed_files_sample": changed_paths[:10],
-        },
-        "input_fingerprint_sha256": hashlib.sha256(serialized_inputs.encode("utf-8")).hexdigest(),
-        "output_directory": _to_repo_relative(output_dir, root),
-        "scientific_surface": _build_scientific_surface(root),
-    }
-    if campaign_metadata:
-        provenance["campaign"] = campaign_metadata
-    return provenance
-
-
-def _render_provenance_markdown(provenance: Dict[str, Any]) -> str:
-    repository = provenance.get("repository", {})
-    scientific_surface = provenance.get("scientific_surface", {})
-    lines = ["## 5. Provenance\n"]
-    lines.append(f"- **artifact_kind:** {provenance.get('artifact_kind', 'unknown')}\n")
-    lines.append(f"- **generated_at:** {provenance.get('generated_at', 'unknown')}\n")
-    lines.append(f"- **generator:** {provenance.get('generator', {}).get('command', '')}\n")
-    lines.append(
-        f"- **repository:** {repository.get('name', 'unknown')} | branch {repository.get('branch', 'unknown')} | commit {repository.get('short_commit', 'unknown')} | dirty {repository.get('dirty', False)}\n"
-    )
-    lines.append(f"- **input_fingerprint_sha256:** {provenance.get('input_fingerprint_sha256', '')}\n")
-    if scientific_surface:
-        lines.append("- **scientific_surface:**\n")
-        for key, value in scientific_surface.items():
-            lines.append(f"  - {key}: {value}\n")
-    campaign = provenance.get("campaign")
-    if campaign:
-        lines.append(f"- **campaign_name:** {campaign.get('name', 'unknown')}\n")
-    lines.append("\n")
-    return "".join(lines)
-
 def generate_report(
     result: FormulationResult, 
     warnings: List[DomainWarning], 
@@ -178,11 +120,17 @@ def generate_report(
             "trapping_efficiency": float(result.trapping_efficiency),
             "mft_to_furfural_ratio": float(result.mft_to_furfural_ratio),
             "meaty_quality_penalty": float(result.meaty_quality_penalty),
+            "strecker_balance_score": float(result.strecker_balance_score),
+            "strecker_gap_penalty": float(result.strecker_gap_penalty),
+            "pyrazine_propensity": float(result.pyrazine_propensity),
+            "pyrazine_burden": float(result.pyrazine_burden),
+            "pyrazine_penalty": float(result.pyrazine_penalty),
             "flagged_toxics": result.flagged_toxics,
             "radar": {k: float(v[0]) for k, v in result.radar.items()},
             "matrix_explainability": result.matrix_explainability,
             "confidence_metadata": result.confidence_metadata,
-            "projection_metadata": result.projection_metadata,
+            "projection_metadata": dict(result.projection_metadata),
+            "flavor_axis_summary": result.flavor_axis_summary,
             "predicted_ppb": {k: float(v) for k, v in result.predicted_ppb.items()},
             "detected_targets": result.detected_targets,
             "detected_minimize": result.detected_minimize
@@ -211,10 +159,6 @@ def generate_report(
         
         f.write("## 2. Decision Summary\n")
         f.write("```text\n")
-        # We'll use a string buffer or just capture stdout if we want exact same box
-        # But better to have a clean MD version. For now, let's embed the CLI box for visual parity.
-        import io
-        from contextlib import redirect_stdout
         with io.StringIO() as buf, redirect_stdout(buf):
             render_decision_summary_cli(result, warnings)
             f.write(buf.getvalue())
@@ -226,6 +170,11 @@ def generate_report(
         f.write(f"- **Safety Score:** {result.safety_score:.2f}\n\n")
         f.write(f"- **MFT/Furfural Ratio:** {result.mft_to_furfural_ratio:.4f}\n")
         f.write(f"- **Meaty Quality Penalty:** {result.meaty_quality_penalty:.2f}\n\n")
+        f.write(f"- **Strecker Balance Score:** {result.strecker_balance_score:.2f}\n")
+        f.write(f"- **Strecker Gap Penalty:** {result.strecker_gap_penalty:.2f}\n")
+        f.write(f"- **Pyrazine Propensity:** {result.pyrazine_propensity:.2f}\n")
+        f.write(f"- **Pyrazine Burden:** {result.pyrazine_burden:.2f}\n")
+        f.write(f"- **Pyrazine Penalty:** {result.pyrazine_penalty:.2f}\n\n")
 
         if result.confidence_metadata:
             f.write("### Confidence & Support\n")
@@ -291,32 +240,23 @@ def generate_report(
             f.write("### Predicted Desirable Targets\n")
             f.write("| Compound | Barrier |\n")
             f.write("| :--- | :--- |\n")
-            # This is a bit simplified, but good for a start
             for t in result.detected_targets[:10]:
-                f.write(f"| {t} | - |\n") # Optimization results don't easily expose barriers here
+                f.write(f"| {t} | - |\n")
             f.write("\n")
 
-        if result.projection_metadata:
-            f.write("### Projection Calibration\n")
-            f.write("| Compound | Process State | Calibration Source | Evidence | Fallback | Observable ppb |\n")
-            f.write("| :--- | :--- | :--- | :--- | :--- | ---: |\n")
-            rows = sorted(
-                result.projection_metadata.values(),
-                key=lambda item: float(item.get("observable_ppb", 0.0)),
-                reverse=True,
-            )
-            for row in rows[:8]:
-                f.write(
-                    f"| {row.get('compound', 'unknown')} | {row.get('process_state', 'unknown')} | {row.get('calibration_source', 'class_fallback')} | {row.get('calibration_evidence_strength', 'heuristic')} | {row.get('calibration_fallback_mode', 'class_level')} | {float(row.get('observable_ppb', 0.0)):.2f} |\n"
-                )
-            f.write("\n")
+        if getattr(result, "projection_metadata", None):
+            projection_rows = build_projection_rows(result)
+            f.write(render_projection_rows_markdown(projection_rows, heading="### Projection Calibration", variant="compact"))
+
+        if getattr(result, "flavor_axis_summary", None):
+            f.write(render_flavor_axis_markdown(result.flavor_axis_summary, heading="### Flavor Axis Diagnostics", variant="detailed"))
 
         f.write("## 4. Analytical Metadata\n")
         f.write("### Matrix Explainability\n")
         for k, v in result.matrix_explainability.items():
             f.write(f"- **{k}:** {v}\n")
         f.write("\n")
-        f.write(_render_provenance_markdown(provenance))
+        f.write(render_provenance_markdown(provenance))
             
     return output_dir
 
@@ -362,11 +302,19 @@ def generate_comparison_report(
                 "safety_score": float(res.safety_score),
                 "lysine_budget": float(res.lysine_budget),
                 "trapping_efficiency": float(res.trapping_efficiency),
+                "mft_to_furfural_ratio": float(res.mft_to_furfural_ratio),
+                "meaty_quality_penalty": float(res.meaty_quality_penalty),
+                "strecker_balance_score": float(res.strecker_balance_score),
+                "strecker_gap_penalty": float(res.strecker_gap_penalty),
+                "pyrazine_propensity": float(res.pyrazine_propensity),
+                "pyrazine_burden": float(res.pyrazine_burden),
+                "pyrazine_penalty": float(res.pyrazine_penalty),
                 "confidence_tier": res.confidence_metadata.get("tier", "unknown"),
                 "confidence_score": float(res.confidence_metadata.get("score", 0.0)),
                 "benchmark_neighborhood": res.confidence_metadata.get("benchmark_neighborhood", "unknown"),
                 "prediction_mode": res.confidence_metadata.get("prediction_mode", "unknown"),
             },
+            "flavor_axis_summary": res.flavor_axis_summary,
         })
     
     with open(json_path, "w") as f:
@@ -387,12 +335,17 @@ def generate_comparison_report(
         f.write("| **Safety Score** | " + " | ".join([f"{res.safety_score:.2f}" for res in results]) + " |\n")
         f.write("| **Lysine Budget** | " + " | ".join([f"{res.lysine_budget:.1f}%" for res in results]) + " |\n")
         f.write("| **Trapping Eff.** | " + " | ".join([f"{res.trapping_efficiency:.1f}%" for res in results]) + " |\n")
+        f.write("| **MFT/Furfural Ratio** | " + " | ".join([f"{res.mft_to_furfural_ratio:.4f}" for res in results]) + " |\n")
+        f.write("| **Meaty Quality Penalty** | " + " | ".join([f"{res.meaty_quality_penalty:.2f}" for res in results]) + " |\n")
+        f.write("| **Strecker Balance** | " + " | ".join([f"{res.strecker_balance_score:.2f}" for res in results]) + " |\n")
+        f.write("| **Strecker Penalty** | " + " | ".join([f"{res.strecker_gap_penalty:.2f}" for res in results]) + " |\n")
+        f.write("| **Pyrazine Burden** | " + " | ".join([f"{res.pyrazine_burden:.2f}" for res in results]) + " |\n")
+        f.write("| **Pyrazine Penalty** | " + " | ".join([f"{res.pyrazine_penalty:.2f}" for res in results]) + " |\n")
         f.write("| **Confidence** | " + " | ".join([f"{res.confidence_metadata.get('tier', 'unknown')} ({float(res.confidence_metadata.get('score', 0.0)):.0f})" for res in results]) + " |\n")
         f.write("| **Prediction Mode** | " + " | ".join([str(res.confidence_metadata.get('prediction_mode', 'unknown')) for res in results]) + " |\n")
         f.write("\n")
         
         f.write("## 2. Competitive Highlights\n")
-        # Find winners
         best_target = max(results, key=lambda x: x.target_score)
         best_safety = min(results, key=lambda x: x.safety_score)
         best_risk = min(results, key=lambda x: x.off_flavour_risk)
@@ -401,9 +354,16 @@ def generate_comparison_report(
         f.write(f"- 🛡️ **Safest Formulation:** {best_safety.name} ({best_safety.safety_score:.2f})\n")
         f.write(f"- 🍃 **Lowest Off-Flavour Risk:** {best_risk.name} ({best_risk.off_flavour_risk:.2f})\n\n")
 
-        f.write("## 3. Decision Summaries\n")
-        import io
-        from contextlib import redirect_stdout
+        f.write("## 3. Cross-Marker Context\n")
+        f.write("| Formulation | Strecker Balance | Pyrazine Burden | Thiamine Pathway | Expected Furanones |\n")
+        f.write("| :--- | ---: | ---: | :---: | :--- |\n")
+        for res in results:
+            flavor_axis = res.flavor_axis_summary or {}
+            f.write(
+                f"| {res.name} | {res.strecker_balance_score:.2f} | {res.pyrazine_burden:.2f} | {str(flavor_axis.get('thiamine_pathway_active', False))} | {', '.join(str(item) for item in flavor_axis.get('furanone_expected', [])) or '-'} |\n"
+            )
+        f.write("\n")
+
         for index, res in enumerate(results):
             f.write(f"### {res.name}\n")
             f.write("```text\n")
@@ -412,7 +372,7 @@ def generate_comparison_report(
                 render_decision_summary_cli(res, item_warnings)
                 f.write(buf.getvalue())
             f.write("```\n\n")
-        f.write(_render_provenance_markdown(provenance))
+        f.write(render_provenance_markdown(provenance))
             
     return output_dir
 
@@ -506,6 +466,6 @@ def generate_campaign_report(
                 f"- run artifact: {artifact.get('name', 'unknown')} -> {artifact.get('directory', '')}\n"
             )
         handle.write("\n")
-        handle.write(_render_provenance_markdown(provenance))
+        handle.write(render_provenance_markdown(provenance))
 
     return comparison_dir

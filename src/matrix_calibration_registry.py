@@ -16,6 +16,16 @@ class MatrixCalibrationRecord:
     notes: str = ""
 
 
+@dataclass(frozen=True)
+class MatrixRuntimeCompositionRule:
+    protein_type: str
+    compound: str
+    mode: str
+    active_process_states: tuple[str, ...]
+    source: str
+    notes: str = ""
+
+
 _MATRIX_CALIBRATION_RECORDS = (
     MatrixCalibrationRecord(
         protein_type="pea_iso",
@@ -115,6 +125,18 @@ _MATRIX_CALIBRATION_RECORDS = (
 )
 
 
+_MATRIX_RUNTIME_COMPOSITION_RULES = (
+    MatrixRuntimeCompositionRule(
+        protein_type="soy_iso",
+        compound="hexanal",
+        mode="compose_dynamic_retention",
+        active_process_states=("intermediate_matrix", "heated_matrix"),
+        source="Ince 2024 reversible soy hexanal binding plus Xu 2023 thermal attenuation prior",
+        notes="Ambient slurry remains frozen to preserve the historical Pratap-Singh benchmark calibration.",
+    ),
+)
+
+
 def _normalize_compound(name: str) -> str:
     return str(name).strip().lower()
 
@@ -155,6 +177,40 @@ def get_matrix_calibration_record(
                 notes=f"Requested process state '{requested_state}' falls back to '{record.process_state}'.",
             )
     return None
+
+
+def get_matrix_runtime_composition_policy(
+    compound: str,
+    *,
+    protein_type: Optional[str],
+    process_state: Optional[str],
+) -> Dict[str, str]:
+    if not protein_type:
+        return {
+            "mode": "static_observable_calibration",
+            "source": "none",
+            "notes": "No protein-type-specific runtime composition policy is registered.",
+        }
+
+    normalized = _normalize_compound(compound)
+    requested_state = process_state or "ambient_slurry"
+    for rule in _MATRIX_RUNTIME_COMPOSITION_RULES:
+        if rule.protein_type != protein_type:
+            continue
+        if _normalize_compound(rule.compound) != normalized:
+            continue
+        if requested_state in rule.active_process_states:
+            return {
+                "mode": rule.mode,
+                "source": rule.source,
+                "notes": rule.notes,
+            }
+
+    return {
+        "mode": "static_observable_calibration",
+        "source": "historical_calibration_default",
+        "notes": "Observable calibration is used as-is for this compound/process-state pair.",
+    }
 
 
 def describe_matrix_calibration(
