@@ -92,6 +92,26 @@ _MATRIX_CALIBRATION_RECORDS = (
         source="Pratap-Singh 2021 soy-vs-pea ambient slurry release ratio",
         fallback_mode="compound_specific",
     ),
+    MatrixCalibrationRecord(
+        protein_type="soy_iso",
+        process_state="heated_matrix",
+        compound="hexanal",
+        observable_factor=(0.453 / 0.205) * (1.0 - 0.7060),
+        evidence_strength="conditional_literature_anchored",
+        source="Shu 2024 heated soy off-flavour attenuation carried onto the Pratap-Singh soy ambient baseline",
+        fallback_mode="compound_specific_process_state",
+        notes="High-severity soy treatment prior for heated matrix states. Useful for reliability and directional accuracy, but not a meaty benchmark anchor.",
+    ),
+    MatrixCalibrationRecord(
+        protein_type="soy_iso",
+        process_state="heated_matrix",
+        compound="2-pentylfuran",
+        observable_factor=(2.972 / 0.502) * 0.03,
+        evidence_strength="conditional_literature_anchored",
+        source="Shu 2024 heated soy 2-pentylfuran below-detection carryover onto the Pratap-Singh soy ambient baseline",
+        fallback_mode="compound_specific_process_state",
+        notes="Below-detection is carried as a small non-zero censoring surrogate so heated soy ranking stays numerically stable while honoring the reported severe attenuation.",
+    ),
 )
 
 

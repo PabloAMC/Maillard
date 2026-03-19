@@ -1,7 +1,11 @@
 from unittest.mock import MagicMock
 
+import pytest
+
 from src.inverse_design import InverseDesigner
 from src.smirks_engine import ReactionConditions, Species
+from src.pathway_extractor import Species as OutputSpecies
+from src.recommend import _apply_output_projection, _canon
 
 
 def test_inverse_design_preserves_proxy_and_projection_metadata(monkeypatch):
@@ -63,3 +67,26 @@ def test_inverse_design_preserves_proxy_and_projection_metadata(monkeypatch):
     assert result.predicted_proxy_ppb["furfural"] == 120.0
     assert result.projection_metadata["furfural"]["observable_ppb"] == 48.0
     assert result.projection_metadata["furfural"]["proxy_ppb"] == 120.0
+
+
+def test_output_projection_applies_compound_specific_matrix_calibration():
+    species = OutputSpecies("Hexanal", "CCCCCC=O")
+    canon = _canon(species.smiles)
+
+    observable, metadata = _apply_output_projection(
+        {canon: 100.0},
+        {canon: species},
+        {},
+        120.0 + 273.15,
+        protein_type="soy_iso",
+        time_minutes=20.0,
+        denaturation_state=0.5,
+    )
+
+    row = metadata[canon]
+
+    assert row["calibration_observable_factor"] == pytest.approx((0.453 / 0.205) * (1.0 - 0.7060))
+    assert row["calibration_factor"] == pytest.approx(row["calibration_observable_factor"])
+    assert observable[canon] == pytest.approx(
+        100.0 * row["matrix_factor"] * row["headspace_factor"] * row["calibration_factor"]
+    )

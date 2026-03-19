@@ -14,6 +14,7 @@ from src.matrix_correction import (
     resolve_effective_denaturation_state,
     resolve_matrix_correction,
 )
+from src.matrix_prior_registry import get_matrix_correction_entry
 
 def test_apply_matrix_correction_free_aa():
     """Verify that FREE_AMINO_ACID type applies no correction."""
@@ -258,3 +259,15 @@ def test_build_matrix_explainability_surfaces_effective_accessibility_context():
     assert payload["effective_denaturation_state"] == pytest.approx(0.65)
     assert payload["lysine_accessibility"] > payload["cysteine_accessibility"]
     assert payload["literature_window"] is not None
+    assert payload["prior_summary"]["matrix_correction"]["confidence_tier"] == "medium"
+
+
+def test_matrix_corrections_are_loaded_from_computational_prior_registry():
+    entry = get_matrix_correction_entry("pea_iso")
+
+    assert entry is not None
+    assert entry["provenance_tier"] == "literature_derived_transfer"
+    assert "Li 2025" in entry["source"]
+    assert MATRIX_CORRECTIONS[ProteinType.PEA_ISOLATE].cysteine_accessibility == pytest.approx(
+        entry["cysteine_accessibility_mid"]
+    )

@@ -1,5 +1,6 @@
 import yaml
 import logging
+import math
 from pathlib import Path
 from typing import List, Dict, Tuple, Optional
 from dataclasses import dataclass, field
@@ -18,6 +19,47 @@ from src.matrix_correction import build_matrix_explainability, resolve_effective
 ROOT = Path(__file__).resolve().parents[1]
 GRID_FILE = ROOT / "data" / "formulation_grid.yml"
 TAGS_FILE = ROOT / "data" / "species" / "sensory_tags.yml"
+
+_MFT_ALIASES = (
+    "2-Methyl-3-furanthiol (MFT)",
+    "2-methyl-3-furanthiol",
+    "mft",
+)
+_FURFURAL_ALIASES = (
+    "Furfural",
+    "furfural",
+)
+
+
+def _max_predicted_signal(predicted_ppb: Dict[str, float], aliases: Tuple[str, ...]) -> float:
+    signal = 0.0
+    for alias in aliases:
+        value = predicted_ppb.get(alias)
+        if value is not None:
+            signal = max(signal, float(value))
+    return signal
+
+
+def _compute_meaty_quality_constraint(predicted_ppb: Dict[str, float]) -> Tuple[float, float]:
+    """
+    Penalize sulfur-poor runs where furfural dominates the meaty branch.
+
+    The threshold is intentionally broad and only activates when the observed
+    MFT/furfural balance drops by more than an order of magnitude below the
+    expected qualitative literature window for a meat-like outcome.
+    """
+    mft_ppb = _max_predicted_signal(predicted_ppb, _MFT_ALIASES)
+    furfural_ppb = _max_predicted_signal(predicted_ppb, _FURFURAL_ALIASES)
+
+    if furfural_ppb <= 0.0:
+        return (1.0e6 if mft_ppb > 0.0 else 0.0, 0.0)
+    if mft_ppb <= 0.0:
+        return 0.0, 2.5
+
+    ratio = mft_ppb / furfural_ppb
+    target_ratio = 1.0e-2
+    penalty = max(0.0, math.log10(target_ratio / max(ratio, 1.0e-9))) * 1.25
+    return ratio, penalty
 
 @dataclass
 class FormulationResult:
@@ -44,6 +86,8 @@ class FormulationResult:
     bottleneck_severity: float = 0.0
     precursor_contributions: Dict[str, float] = field(default_factory=dict)
     suppressed_compounds: List[Dict] = field(default_factory=list)
+    mft_to_furfural_ratio: float = 0.0
+    meaty_quality_penalty: float = 0.0
 
 
 class InverseDesigner:
@@ -339,6 +383,10 @@ class InverseDesigner:
             valid_spans = [t["span_uncertainty"] for t in rec_result["targets"] if t["span_uncertainty"] > 0]
             avg_unc = sum(valid_spans) / len(valid_spans) if valid_spans else 5.0
             
+            mft_to_furfural_ratio, meaty_quality_penalty = _compute_meaty_quality_constraint(
+                conc_map
+            )
+
             # Use radar score for the target category as the official t_score
             t_score = radar_scores.get(self.target_tag, (0.0, 0))[0]
             # Use radar score for the minimize category as the official m_score
@@ -373,6 +421,8 @@ class InverseDesigner:
                 bottleneck_severity=rec_result["metrics"].get("bottleneck", {}).get("severity", 0.0),
                 precursor_contributions=rec_result["metrics"].get("precursor_attribution", {}),
                 suppressed_compounds=rec_result["metrics"].get("suppressed_compounds", []),
+                mft_to_furfural_ratio=mft_to_furfural_ratio,
+                meaty_quality_penalty=meaty_quality_penalty,
             ))
 
             
@@ -380,7 +430,7 @@ class InverseDesigner:
         risk_aversion = 1.0 # Default
         texture_aversion = 0.01 # 100 risk = 1.0 score penalty
         results.sort(
-            key=lambda x: (x.target_score - risk_aversion * x.safety_score - texture_aversion * x.texture_risk, -x.off_flavour_risk), 
+            key=lambda x: (x.target_score - risk_aversion * x.safety_score - texture_aversion * x.texture_risk - x.meaty_quality_penalty, -x.off_flavour_risk), 
             reverse=True
         )
         return results

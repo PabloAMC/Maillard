@@ -9,7 +9,7 @@ model system predictions to protein matrix experiments. They should be
 recalibrated as you generate your own experimental data.
 
 Current legume-matrix anchoring inside the repo:
-- pea: Asen 2022 DSC/DTNB + Malia 2025 Ellman SH envelope, with older repo
+- pea: Asen 2022 DSC/DTNB + Li 2025 Ellman SH envelope, with older repo
     literature synthesis retained as a conservative interpolation layer
 - soy: repo literature synthesis around soy glycinin/beta-conglycinin burial,
   sulfur limitation, extrusion-driven accessibility changes, and soy
@@ -24,6 +24,14 @@ from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path
 from typing import Optional
+
+from src.matrix_prior_registry import (
+    get_accessibility_window_entry,
+    get_denaturation_heuristic_entry,
+    get_matrix_correction_entry,
+    get_volatile_class_profile_entry,
+    summarize_matrix_prior_bundle,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -123,299 +131,87 @@ _CYSTEINE_IDENTIFIERS = {
 }
 
 
-ACCESSIBILITY_LITERATURE_WINDOWS = {
-    ProteinType.PEA_ISOLATE: AccessibilityLiteratureWindow(
-        protein_type=ProteinType.PEA_ISOLATE,
-        lysine_min=0.30,
-        lysine_max=0.45,
-        cysteine_min=0.00,
-        cysteine_max=0.08,
-        source=(
-            "Asen 2022 DSC/DTNB + Malia 2025 Ellman SH envelope, retained as a "
-            "conservative pea-isolate interpolation while exact benchmark-condition "
-            "values remain unmeasured"
-        ),
-    ),
-    ProteinType.SOY_ISOLATE: AccessibilityLiteratureWindow(
-        protein_type=ProteinType.SOY_ISOLATE,
-        lysine_min=0.36,
-        lysine_max=0.50,
-        cysteine_min=0.10,
-        cysteine_max=0.24,
-        source=(
-            "Repo soy literature synthesis from Kutzli 2020 / Naik 2021: glycinin/"
-            "beta-conglycinin burial, partial reopening after processing, sulfur still"
-            " substantially less accessible than free-AA systems"
-        ),
-    ),
-}
-
-
-DENATURATION_HEURISTICS = {
-    ProteinType.PEA_ISOLATE: DenaturationHeuristic(
-        protein_type=ProteinType.PEA_ISOLATE,
-        midpoint_celsius=82.0,
-        width_celsius=14.0,
-        time_gain_celsius=6.0,
-        time_reference_minutes=10.0,
-        acidic_ph_gain_celsius=2.5,
-        reference_ph=6.0,
-        source=(
-            "Asen 2022 DSC/DTNB thermal window + Malia 2025 free-SH response; "
-            "calibrated so pea isolate stays mostly native at 40C but opens "
-            "progressively by 90-140C"
-        ),
-    ),
-    ProteinType.PEA_CONCENTRATE: DenaturationHeuristic(
-        protein_type=ProteinType.PEA_CONCENTRATE,
-        midpoint_celsius=84.0,
-        width_celsius=14.0,
-        time_gain_celsius=5.5,
-        time_reference_minutes=10.0,
-        acidic_ph_gain_celsius=2.0,
-        reference_ph=6.0,
-        source=(
-            "Pea concentrate inherits the Asen 2022 / Malia 2025 pea thermal envelope "
-            "with a modest fiber-burial penalty"
-        ),
-    ),
-    ProteinType.SOY_ISOLATE: DenaturationHeuristic(
-        protein_type=ProteinType.SOY_ISOLATE,
-        midpoint_celsius=84.0,
-        width_celsius=14.0,
-        time_gain_celsius=5.0,
-        time_reference_minutes=10.0,
-        acidic_ph_gain_celsius=2.0,
-        reference_ph=6.0,
-        source="Repo soy literature synthesis (glycinin/beta-conglycinin burial, partial reopening under heat/process)",
-    ),
-    ProteinType.SOY_CONCENTRATE: DenaturationHeuristic(
-        protein_type=ProteinType.SOY_CONCENTRATE,
-        midpoint_celsius=86.0,
-        width_celsius=14.0,
-        time_gain_celsius=4.5,
-        time_reference_minutes=10.0,
-        acidic_ph_gain_celsius=1.8,
-        reference_ph=6.0,
-        source="Soy concentrate inherits the soy-isolate thermal envelope with added concentrate burial",
-    ),
-    ProteinType.MYCOPROTEIN: DenaturationHeuristic(
-        protein_type=ProteinType.MYCOPROTEIN,
-        midpoint_celsius=78.0,
-        width_celsius=12.0,
-        time_gain_celsius=5.0,
-        time_reference_minutes=10.0,
-        acidic_ph_gain_celsius=1.5,
-        reference_ph=6.0,
-        source="Conservative mycoprotein thermal-unfolding placeholder pending dedicated calibration",
-    ),
-}
-
-
-VOLATILE_CLASS_RETENTION_PROFILES = {
-    ProteinType.PEA_ISOLATE: VolatileClassRetentionProfile(
-        protein_type=ProteinType.PEA_ISOLATE,
-        native_factors={
-            "aldehyde": 0.82,
-            "furan": 0.92,
-            "alcohol": 1.05,
-            "sulfur": 1.08,
-            "pyrazine": 1.02,
-            "other": 1.0,
-        },
-        denatured_factors={
-            "aldehyde": 0.92,
-            "furan": 0.97,
-            "alcohol": 1.02,
-            "sulfur": 1.04,
-            "pyrazine": 1.0,
-            "other": 1.0,
-        },
-        source="Conservative class-aware trapping overlay: aldehydes bind most strongly, sulfur volatiles and alcohols escape somewhat more readily",
-    ),
-    ProteinType.PEA_CONCENTRATE: VolatileClassRetentionProfile(
-        protein_type=ProteinType.PEA_CONCENTRATE,
-        native_factors={
-            "aldehyde": 0.78,
-            "furan": 0.88,
-            "alcohol": 1.03,
-            "sulfur": 1.05,
-            "pyrazine": 1.0,
-            "other": 1.0,
-        },
-        denatured_factors={
-            "aldehyde": 0.88,
-            "furan": 0.94,
-            "alcohol": 1.01,
-            "sulfur": 1.03,
-            "pyrazine": 1.0,
-            "other": 1.0,
-        },
-        source="Pea concentrate inherits stronger aldehyde/furan trapping from the pea family plus a concentrate penalty",
-    ),
-    ProteinType.SOY_ISOLATE: VolatileClassRetentionProfile(
-        protein_type=ProteinType.SOY_ISOLATE,
-        native_factors={
-            "aldehyde": 0.88,
-            "furan": 0.96,
-            "alcohol": 1.04,
-            "sulfur": 1.06,
-            "pyrazine": 1.01,
-            "other": 1.0,
-        },
-        denatured_factors={
-            "aldehyde": 0.95,
-            "furan": 0.99,
-            "alcohol": 1.02,
-            "sulfur": 1.03,
-            "pyrazine": 1.0,
-            "other": 1.0,
-        },
-        source="Conservative soy overlay: aldehydes still bind more strongly than sulfur/alcohol classes, but less severely than pea",
-    ),
-    ProteinType.SOY_CONCENTRATE: VolatileClassRetentionProfile(
-        protein_type=ProteinType.SOY_CONCENTRATE,
-        native_factors={
-            "aldehyde": 0.84,
-            "furan": 0.93,
-            "alcohol": 1.03,
-            "sulfur": 1.04,
-            "pyrazine": 1.0,
-            "other": 1.0,
-        },
-        denatured_factors={
-            "aldehyde": 0.91,
-            "furan": 0.97,
-            "alcohol": 1.01,
-            "sulfur": 1.02,
-            "pyrazine": 1.0,
-            "other": 1.0,
-        },
-        source="Soy concentrate inherits the soy family overlay with added burial",
-    ),
-    ProteinType.MYCOPROTEIN: VolatileClassRetentionProfile(
-        protein_type=ProteinType.MYCOPROTEIN,
-        native_factors={
-            "aldehyde": 0.92,
-            "furan": 0.98,
-            "alcohol": 1.02,
-            "sulfur": 1.03,
-            "pyrazine": 1.0,
-            "other": 1.0,
-        },
-        denatured_factors={
-            "aldehyde": 0.97,
-            "furan": 1.0,
-            "alcohol": 1.01,
-            "sulfur": 1.01,
-            "pyrazine": 1.0,
-            "other": 1.0,
-        },
-        source="Conservative mycoprotein class overlay pending dedicated calibration",
-    ),
-}
-
-MATRIX_CORRECTIONS = {
-    ProteinType.FREE_AMINO_ACID: MatrixCorrection(
-        protein_type=ProteinType.FREE_AMINO_ACID,
-        lysine_accessibility=1.0,
-        cysteine_accessibility=1.0,
-        lysine_accessibility_native=1.0,
-        lysine_accessibility_denatured=1.0,
-        cysteine_accessibility_native=1.0,
-        cysteine_accessibility_denatured=1.0,
-        volatile_retention=1.0,
-        volatile_retention_native=1.0,
-        volatile_retention_denatured=1.0,
-        source="model system, no correction"
-    ),
-    ProteinType.PEA_ISOLATE: MatrixCorrection(
-        protein_type=ProteinType.PEA_ISOLATE,
-        # TNBS/OPA envelope in the repo suggests commercial pea isolates sit well
-        # below free-AA accessibility even after wet-heat treatment.
-        lysine_accessibility=0.38,
-        cysteine_accessibility=0.04,
-        lysine_accessibility_native=0.32,
-        lysine_accessibility_denatured=0.44,
-        cysteine_accessibility_native=0.01,
-        cysteine_accessibility_denatured=0.07,
-        volatile_retention=0.50,
-        volatile_retention_native=0.42,
-        volatile_retention_denatured=0.58,
-        source=(
-            "Asen 2022 DSC/DTNB + Malia 2025 Ellman SH envelope; values remain a "
-            "conservative PPI interpolation because the exact 95C pH 5.5 benchmark "
-            "condition still lacks direct wet-lab measurement"
+def _build_accessibility_literature_windows() -> dict[ProteinType, AccessibilityLiteratureWindow]:
+    windows: dict[ProteinType, AccessibilityLiteratureWindow] = {}
+    for protein_type in ProteinType:
+        entry = get_accessibility_window_entry(protein_type.value)
+        if entry is None:
+            continue
+        windows[protein_type] = AccessibilityLiteratureWindow(
+            protein_type=protein_type,
+            lysine_min=float(entry["lysine_min"]),
+            lysine_max=float(entry["lysine_max"]),
+            cysteine_min=float(entry["cysteine_min"]),
+            cysteine_max=float(entry["cysteine_max"]),
+            source=str(entry["source"]),
         )
-    ),
-    ProteinType.PEA_CONCENTRATE: MatrixCorrection(
-        protein_type=ProteinType.PEA_CONCENTRATE,
-        lysine_accessibility=0.28,
-        cysteine_accessibility=0.03,
-        lysine_accessibility_native=0.22,
-        lysine_accessibility_denatured=0.34,
-        cysteine_accessibility_native=0.005,
-        cysteine_accessibility_denatured=0.055,
-        volatile_retention=0.35,
-        volatile_retention_native=0.27,
-        volatile_retention_denatured=0.43,
-        source="Pea-isolate accessibility envelope with added fiber burial penalty"
-    ),
-    ProteinType.SOY_CONCENTRATE: MatrixCorrection(
-        protein_type=ProteinType.SOY_CONCENTRATE,
-        lysine_accessibility=0.34,
-        cysteine_accessibility=0.15,
-        lysine_accessibility_native=0.30,
-        lysine_accessibility_denatured=0.38,
-        cysteine_accessibility_native=0.11,
-        cysteine_accessibility_denatured=0.19,
-        volatile_retention=0.45,
-        volatile_retention_native=0.37,
-        volatile_retention_denatured=0.53,
-        source=(
-            "Soy concentrate envelope derived from soy-isolate globulin burial "
-            "(glycinin/beta-conglycinin) with added fiber/concentrate penalty; "
-            "repo anchors: Kutzli 2020 / Naik 2021 synthesis plus soy-polysaccharide "
-            "conjugation trapping notes in docs/Maillard_Plant_based.md"
+    return windows
+
+
+def _build_denaturation_heuristics() -> dict[ProteinType, DenaturationHeuristic]:
+    heuristics: dict[ProteinType, DenaturationHeuristic] = {}
+    for protein_type in ProteinType:
+        if protein_type == ProteinType.FREE_AMINO_ACID:
+            continue
+        entry = get_denaturation_heuristic_entry(protein_type.value)
+        if entry is None:
+            continue
+        heuristics[protein_type] = DenaturationHeuristic(
+            protein_type=protein_type,
+            midpoint_celsius=float(entry["midpoint_celsius"]),
+            width_celsius=float(entry["width_celsius"]),
+            time_gain_celsius=float(entry["time_gain_celsius"]),
+            time_reference_minutes=float(entry["time_reference_minutes"]),
+            acidic_ph_gain_celsius=float(entry["acidic_ph_gain_celsius"]),
+            reference_ph=float(entry["reference_ph"]),
+            source=str(entry["source"]),
         )
-    ),
-    ProteinType.SOY_ISOLATE: MatrixCorrection(
-        protein_type=ProteinType.SOY_ISOLATE,
-        # Soy is kept above pea because the repo literature synthesis treats soy
-        # isolates as lysine-rich globulins whose extrusion state can expose more
-        # reactive sites, while still remaining well below free-AA behavior and
-        # sulfur-limited relative to true meat-like precursor systems.
-        lysine_accessibility=0.43,
-        cysteine_accessibility=0.17,
-        lysine_accessibility_native=0.38,
-        lysine_accessibility_denatured=0.48,
-        cysteine_accessibility_native=0.14,
-        cysteine_accessibility_denatured=0.20,
-        volatile_retention=0.55,
-        volatile_retention_native=0.47,
-        volatile_retention_denatured=0.63,
-        source=(
-            "Soy isolate envelope anchored to repo literature on glycinin/beta-conglycinin "
-            "burial, lysine-rich but sulfur-poor plant-protein composition, and extrusion- "
-            "altered reactive-site accessibility; see docs/Maillard_Plant_based.md and "
-            "docs/Elicit - Maillard Pathways in Plant-Based Cooking - Report.md "
-            "(Kutzli 2020 / Naik 2021 synthesis)"
+    return heuristics
+
+
+def _build_volatile_class_retention_profiles() -> dict[ProteinType, VolatileClassRetentionProfile]:
+    profiles: dict[ProteinType, VolatileClassRetentionProfile] = {}
+    for protein_type in ProteinType:
+        if protein_type == ProteinType.FREE_AMINO_ACID:
+            continue
+        entry = get_volatile_class_profile_entry(protein_type.value)
+        if entry is None:
+            continue
+        profiles[protein_type] = VolatileClassRetentionProfile(
+            protein_type=protein_type,
+            native_factors={key: float(value) for key, value in entry.get("native_factors", {}).items()},
+            denatured_factors={key: float(value) for key, value in entry.get("denatured_factors", {}).items()},
+            source=str(entry["source"]),
         )
-    ),
-    ProteinType.MYCOPROTEIN: MatrixCorrection(
-        protein_type=ProteinType.MYCOPROTEIN,
-        lysine_accessibility=0.50,
-        cysteine_accessibility=0.24,
-        lysine_accessibility_native=0.42,
-        lysine_accessibility_denatured=0.58,
-        cysteine_accessibility_native=0.18,
-        cysteine_accessibility_denatured=0.30,
-        volatile_retention=0.60,
-        volatile_retention_native=0.54,
-        volatile_retention_denatured=0.66,
-        source="Conservative mycoprotein estimate pending dedicated calibration"
-    ),
-}
+    return profiles
+
+
+def _build_matrix_corrections() -> dict[ProteinType, MatrixCorrection]:
+    corrections: dict[ProteinType, MatrixCorrection] = {}
+    for protein_type in ProteinType:
+        entry = get_matrix_correction_entry(protein_type.value)
+        if entry is None:
+            continue
+        corrections[protein_type] = MatrixCorrection(
+            protein_type=protein_type,
+            lysine_accessibility=float(entry["lysine_accessibility_mid"]),
+            cysteine_accessibility=float(entry["cysteine_accessibility_mid"]),
+            lysine_accessibility_native=float(entry["lysine_accessibility_native"]),
+            lysine_accessibility_denatured=float(entry["lysine_accessibility_denatured"]),
+            cysteine_accessibility_native=float(entry["cysteine_accessibility_native"]),
+            cysteine_accessibility_denatured=float(entry["cysteine_accessibility_denatured"]),
+            volatile_retention=float(entry["volatile_retention_mid"]),
+            volatile_retention_native=float(entry["volatile_retention_native"]),
+            volatile_retention_denatured=float(entry["volatile_retention_denatured"]),
+            source=str(entry["source"]),
+        )
+    return corrections
+
+
+ACCESSIBILITY_LITERATURE_WINDOWS = _build_accessibility_literature_windows()
+DENATURATION_HEURISTICS = _build_denaturation_heuristics()
+VOLATILE_CLASS_RETENTION_PROFILES = _build_volatile_class_retention_profiles()
+MATRIX_CORRECTIONS = _build_matrix_corrections()
 
 
 def clamp_denaturation_state(denaturation_state: float) -> float:
@@ -566,6 +362,7 @@ def build_matrix_explainability(
             else None
         ),
         "denaturation_source": DENATURATION_HEURISTICS.get(p_type).source if p_type in DENATURATION_HEURISTICS else "explicit/free",
+        "prior_summary": summarize_matrix_prior_bundle(p_type.value),
     }
 
 

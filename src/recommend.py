@@ -520,6 +520,34 @@ def _resolve_output_matrix_context(
     return fat, protein, True
 
 
+_MELANOIDIN_TRAPPING_PROFILES = {
+    _normalize_chemical_name("2-methyl-3-furanthiol"): {"slope": 0.85, "floor": 0.20},
+    _normalize_chemical_name("2-furfurylthiol"): {"slope": 1.10, "floor": 0.08},
+    _normalize_chemical_name("bis(2-methyl-3-furyl) disulfide"): {"slope": 0.55, "floor": 0.35},
+}
+
+
+def _resolve_melanoidin_trapping_factor(
+    compound_name: str,
+    *,
+    protein_type: ProteinType,
+    process_state: str,
+    projection_severity: float,
+) -> float:
+    if protein_type == ProteinType.FREE_AMINO_ACID:
+        return 1.0
+
+    profile = _MELANOIDIN_TRAPPING_PROFILES.get(_normalize_chemical_name(compound_name))
+    if profile is None:
+        return 1.0
+
+    severity = max(0.0, min(1.0, float(projection_severity)))
+    factor = 1.0 - float(profile["slope"]) * severity
+    if process_state == "heated_matrix":
+        factor *= 0.92
+    return max(float(profile["floor"]), min(1.0, factor))
+
+
 def _apply_output_projection(
     raw_concentrations: Dict[str, float],
     species_catalog: Dict[str, Species],
@@ -565,12 +593,29 @@ def _apply_output_projection(
             "total_volatile_budget_molar": float(projection_budget.total_volatile_budget_molar),
         }
     budget_metadata.update(_projection_strategy_metadata(projection_strategy))
+    projection_severity = float(
+        budget_metadata.get("projection_severity", _thermal_severity(temperature_kelvin, time_minutes))
+    )
+    budget_metadata.setdefault("projection_severity", projection_severity)
 
     for canon, raw_value in raw_concentrations.items():
         species = species_catalog.get(canon)
         if species is None:
             observable_ppb[canon] = raw_value * fallback_matrix_factor
             compound_name = species_name_lookup.get(canon, canon) if species_name_lookup else canon
+            calibration = describe_matrix_calibration(
+                compound_name,
+                protein_type=protein_type,
+                process_state=process_state,
+            )
+            calibration_factor = float(calibration.get("calibration_observable_factor") or 1.0)
+            melanoidin_factor = _resolve_melanoidin_trapping_factor(
+                compound_name,
+                protein_type=p_type,
+                process_state=process_state,
+                projection_severity=projection_severity,
+            )
+            observable_ppb[canon] *= calibration_factor * melanoidin_factor
             projection_metadata[canon] = {
                 "compound": compound_name,
                 "proxy_ppb": float(raw_value),
@@ -578,15 +623,13 @@ def _apply_output_projection(
                 "base_matrix_factor": float(fallback_matrix_factor),
                 "class_matrix_factor": 1.0,
                 "headspace_factor": 1.0,
+                "calibration_factor": calibration_factor,
+                "melanoidin_trapping_factor": float(melanoidin_factor),
                 "observable_ppb": float(observable_ppb[canon]),
                 "proxy_to_observable_ratio": 1.0 if raw_value <= 0.0 else float(observable_ppb[canon]) / float(raw_value),
                 "volatile_class": "other",
                 "process_state": process_state,
-                **describe_matrix_calibration(
-                    compound_name,
-                    protein_type=protein_type,
-                    process_state=process_state,
-                ),
+                **calibration,
                 **budget_metadata,
             }
             continue
@@ -615,9 +658,21 @@ def _apply_output_projection(
             fat_fraction=fat_eff,
             protein_fraction=protein_eff,
         )
-        observable_value = raw_value * effective_matrix_factor * headspace_factor
-        observable_ppb[canon] = observable_value
         compound_name = species.label or canon
+        calibration = describe_matrix_calibration(
+            compound_name,
+            protein_type=protein_type,
+            process_state=process_state,
+        )
+        calibration_factor = float(calibration.get("calibration_observable_factor") or 1.0)
+        melanoidin_factor = _resolve_melanoidin_trapping_factor(
+            compound_name,
+            protein_type=p_type,
+            process_state=process_state,
+            projection_severity=projection_severity,
+        )
+        observable_value = raw_value * effective_matrix_factor * headspace_factor * calibration_factor * melanoidin_factor
+        observable_ppb[canon] = observable_value
         projection_metadata[canon] = {
             "compound": compound_name,
             "proxy_ppb": float(raw_value),
@@ -625,15 +680,13 @@ def _apply_output_projection(
             "base_matrix_factor": float(fallback_matrix_factor),
             "class_matrix_factor": float(class_matrix_factor),
             "headspace_factor": float(headspace_factor),
+            "calibration_factor": float(calibration_factor),
+            "melanoidin_trapping_factor": float(melanoidin_factor),
             "observable_ppb": float(observable_value),
             "proxy_to_observable_ratio": 1.0 if raw_value <= 0.0 else float(observable_value) / float(raw_value),
             "volatile_class": classify_volatile_matrix_family(compound_name, smiles=species.smiles),
             "process_state": process_state,
-            **describe_matrix_calibration(
-                compound_name,
-                protein_type=protein_type,
-                process_state=process_state,
-            ),
+            **calibration,
             **budget_metadata,
         }
 
