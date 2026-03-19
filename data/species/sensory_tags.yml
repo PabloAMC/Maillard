@@ -10,6 +10,8 @@ tags:
     - "2-hexyl-4-methylthiazole"
     - "Hydrogen Sulfide"
     - "2-Furfurylthiol (FFT)"
+    - "HEMF"
+    - "DMHF"
   roasted:
     - "2-Furfurylthiol (FFT)"
     - "2,5-Dimethylpyrazine"
@@ -31,6 +33,8 @@ tags:
   sweet:
     - "Phenylacetaldehyde"
     - "2-Methylpropanal (isobutyraldehyde)"
+    - "HEMF"
+    - "DMHF"
   floral:
     - "Phenylacetaldehyde"
     - "1-Hexanol"

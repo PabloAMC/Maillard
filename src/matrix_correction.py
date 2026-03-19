@@ -32,6 +32,7 @@ from src.matrix_prior_registry import (
     get_volatile_class_profile_entry,
     summarize_matrix_prior_bundle,
 )
+from src.literature_runtime import describe_retention_runtime
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -319,6 +320,9 @@ def resolve_compound_matrix_retention(
     protein_type: ProteinType | str,
     denaturation_state: float = 0.5,
     smiles: Optional[str] = None,
+    temperature_celsius: Optional[float] = None,
+    time_minutes: Optional[float] = None,
+    process_state: Optional[str] = None,
 ) -> float:
     p_type = _coerce_protein_type(protein_type)
     base = resolve_matrix_correction(p_type, denaturation_state).volatile_retention
@@ -328,7 +332,50 @@ def resolve_compound_matrix_retention(
         denaturation_state=denaturation_state,
         smiles=smiles,
     )
-    return max(0.01, min(1.0, base * class_factor))
+    runtime = describe_retention_runtime(
+        name,
+        protein_type=p_type.value,
+        temperature_celsius=temperature_celsius,
+        time_minutes=time_minutes,
+        process_state=process_state,
+    )
+    dynamic_factor = float(runtime.get("dynamic_retention_factor", 1.0))
+    return max(0.01, min(1.0, base * class_factor * dynamic_factor))
+
+
+def describe_compound_matrix_retention(
+    name: str,
+    protein_type: ProteinType | str,
+    denaturation_state: float = 0.5,
+    smiles: Optional[str] = None,
+    temperature_celsius: Optional[float] = None,
+    time_minutes: Optional[float] = None,
+    process_state: Optional[str] = None,
+) -> dict[str, object]:
+    p_type = _coerce_protein_type(protein_type)
+    base = resolve_matrix_correction(p_type, denaturation_state).volatile_retention
+    class_factor = get_volatile_class_retention_factor(
+        name,
+        protein_type=p_type,
+        denaturation_state=denaturation_state,
+        smiles=smiles,
+    )
+    runtime = describe_retention_runtime(
+        name,
+        protein_type=p_type.value,
+        temperature_celsius=temperature_celsius,
+        time_minutes=time_minutes,
+        process_state=process_state,
+    )
+    dynamic_factor = float(runtime.get("dynamic_retention_factor", 1.0))
+    matrix_factor = max(0.01, min(1.0, base * class_factor * dynamic_factor))
+    return {
+        "base_matrix_factor": float(base),
+        "class_matrix_factor": float(class_factor),
+        "dynamic_retention_factor": float(dynamic_factor),
+        "matrix_factor": float(matrix_factor),
+        **runtime,
+    }
 
 
 def build_matrix_explainability(

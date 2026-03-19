@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from src.conditions import ReactionConditions  # noqa: E402
-from src.inverse_design import InverseDesigner  # noqa: E402
+from src.pipeline import MaillardPipeline  # noqa: E402
 from src.reporting import generate_campaign_report, generate_report  # noqa: E402
 from src.usability_reports import DomainOfValidityChecker, build_confidence_package  # noqa: E402
 
@@ -64,7 +64,7 @@ def main() -> int:
 
     target_tag = str(campaign_meta.get("target_tag", "meaty"))
     minimize_tag = str(campaign_meta.get("minimize_tag", "beany"))
-    designer = InverseDesigner(target_tag, minimize_tag)
+    designer = MaillardPipeline(target_tag, minimize_tag)
     checker = DomainOfValidityChecker(target_tag)
 
     base_conditions = ReactionConditions(

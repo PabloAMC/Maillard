@@ -433,6 +433,20 @@ class TestPBMAAdditives:
         assert "2-methylthiophene" in products
         assert "4,5-dihydro-2-methylthiazole" in products
 
+    def test_furanone_generation_from_pentose_and_alanine_or_glycine(self):
+        engine = SmirksEngine(conditions=ReactionConditions(temperature_celsius=120))
+        ribose = to_species("D-Ribose", "OC[C@H]1O[C@@H](O)[C@H](O)[C@@H]1O")
+        alanine = to_species("L-Alanine", "CC(N)C(=O)O")
+        glycine = to_species("Glycine", "NCC(=O)O")
+
+        steps = engine.enumerate([ribose, alanine, glycine])
+        furanone_steps = [s for s in steps if s.reaction_family == "Furanone_Formation"]
+
+        assert len(furanone_steps) >= 2
+        products = {p.label for step in furanone_steps for p in step.products}
+        assert "HEMF" in products
+        assert "DMHF" in products
+
     def test_glutathione_cleavage(self):
         engine = SmirksEngine(conditions=ReactionConditions(temperature_celsius=150))
         gsh = to_species("L-Glutathione", "N[C@@H](CCC(=O)N[C@@H](CS)C(=O)NCC(=O)O)C(=O)O")

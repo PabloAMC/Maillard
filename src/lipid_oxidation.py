@@ -39,7 +39,7 @@ def predict_lop_generation(
     oxygen_availability: float = 1.0
 ) -> dict[str, float]:
     """
-    Restored from docs/Claude_feedback.md via inverse_design.py requirements.
+    Restored from docs/Claude_feedback.md via pipeline.py requirements.
     Predicts Lipid Oxidation Product (LOP) SMILES and concentrations.
     """
     # No lipid precursor means no lipid oxidation signal should enter the network.

@@ -21,14 +21,16 @@ sys.path.insert(0, str(ROOT))
 
 from src.conditions import ReactionConditions  # noqa: E402
 from src.smirks_engine import SmirksEngine, Species  # noqa: E402
-from src.inverse_design import InverseDesigner  # noqa: E402
+from src.pipeline import MaillardPipeline  # noqa: E402
 from src.xtb_screener import XTBScreener  # noqa: E402
 from src.recommend import _trunc  # noqa: E402
 from src import precursor_resolver  # noqa: E402
 from src.barrier_constants import get_barrier, HEME_CATALYST_FAMILIES, HEME_CATALYST_REDUCTION  # noqa: E402
 from src.usability_reports import (
     DomainOfValidityChecker, 
-        build_confidence_package,
+        build_confidence_package
+)  # noqa: E402
+from src.presentation import (
     render_decision_summary_cli,
     render_deep_explainability_cli
 )  # noqa: E402
@@ -136,7 +138,7 @@ def main():
         print("-" * 60)
         
         try:
-            designer = InverseDesigner(args.target, args.minimize)
+            designer = MaillardPipeline(args.target, args.minimize)
             print(f"Evaluating {len(designer.grid)} industrial formulations against tags...")
             
             if args.dry_run:
@@ -269,7 +271,7 @@ def main():
         sys.exit(0)
 
     # --- Decision Summary ---
-    designer = InverseDesigner(target_tag="meaty", minimize_tag="beany")
+    designer = MaillardPipeline(target_tag="meaty", minimize_tag="beany")
     
     # We construct a formulation dict for the designer
     formulation = {

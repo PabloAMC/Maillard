@@ -1,6 +1,5 @@
 from src.xtb_screener import XTBScreener  # noqa: E402
 from src.dft_refiner import DFTRefiner  # noqa: E402
-from src.skala_refiner import SkalaRefiner  # noqa: E402
 
 def test_screener_interface_contract():
     """Ensure XTBScreener implements the required pipeline methods."""
@@ -19,7 +18,7 @@ def test_refiner_interface_contract():
         "single_point",
         "calculate_barrier"
     ]
-    for cls in [DFTRefiner, SkalaRefiner]:
+    for cls in [DFTRefiner]:
         for method in required_methods:
             assert hasattr(cls, method), f"{cls.__name__} missing {method}"
 

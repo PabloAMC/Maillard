@@ -7,13 +7,9 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src.benchmark_validation import (
-    BenchmarkEvaluation,
-    CompoundComparison,
-    render_benchmark_summary_markdown,
-    summarize_benchmarks,
-    summarize_evaluation,
-)
+from src.benchmark_validation import summarize_benchmarks, summarize_evaluation
+from src.benchmark_types import BenchmarkEvaluation, CompoundComparison
+from src.presentation import render_benchmark_summary_markdown
 
 
 def test_benchmark_summary_separates_supported_and_unsupported_cases():

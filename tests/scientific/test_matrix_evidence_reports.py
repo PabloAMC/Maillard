@@ -6,10 +6,8 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src.benchmark_validation import (  # noqa: E402
-    build_matrix_benchmark_evidence_audit,
-    render_matrix_benchmark_evidence_markdown,
-)
+from src.benchmark_validation import build_matrix_benchmark_evidence_audit
+from src.presentation import render_matrix_benchmark_evidence_markdown
 
 
 def test_matrix_evidence_audit_distinguishes_external_off_flavour_from_internal_meaty_candidates():
@@ -31,5 +29,5 @@ def test_matrix_evidence_audit_distinguishes_external_off_flavour_from_internal_
     assert pea_meaty.target_profile == "mixed"
     assert pea_meaty.promotable is False
     assert "missing external quantitative matrix evidence" in pea_meaty.promotion_blocker
-    assert "Matrix Benchmark Evidence Audit" in markdown
+    assert "Matrix Benchmark Evidence Audit Report" in markdown
     assert "internal_reference_only" in markdown

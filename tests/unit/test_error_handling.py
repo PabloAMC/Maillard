@@ -167,16 +167,16 @@ class TestMissingFileHandling:
             # If it does raise, that's also acceptable
             pass
 
-    def test_inverse_designer_missing_grid(self, monkeypatch):
+    def test_pipelineer_missing_grid(self, monkeypatch):
         """Should handle missing grid file gracefully."""
-        from src.inverse_design import InverseDesigner
-        import src.inverse_design as inv
+        from src.pipeline import MaillardPipeline
+        import src.pipeline as inv
         
         # Point grid file to nonexistent location
         monkeypatch.setattr(inv, "GRID_FILE", Path("/tmp/nonexistent_grid_xyz_12345.yml"))
         
         try:
-            designer = InverseDesigner(target_tag="test", minimize_tag="test")
+            designer = MaillardPipeline(target_tag="test", minimize_tag="test")
             # Should either fail during init or have empty grid
             assert designer.grid is not None
         except (FileNotFoundError, IOError, ValueError):

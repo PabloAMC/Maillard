@@ -2,14 +2,14 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from src.inverse_design import InverseDesigner
+from src.pipeline import MaillardPipeline
 from src.smirks_engine import ReactionConditions, Species
 from src.pathway_extractor import Species as OutputSpecies
 from src.recommend import _apply_output_projection, _canon
 
 
-def test_inverse_design_preserves_proxy_and_projection_metadata(monkeypatch):
-    designer = InverseDesigner(target_tag="meaty")
+def test_pipeline_preserves_proxy_and_projection_metadata(monkeypatch):
+    designer = MaillardPipeline(target_tag="meaty")
     formulation = {
         "name": "Projection contract",
         "protein_type": "free",
@@ -19,19 +19,19 @@ def test_inverse_design_preserves_proxy_and_projection_metadata(monkeypatch):
     }
     conditions = ReactionConditions(temperature_celsius=150.0, pH=5.0)
 
-    monkeypatch.setattr("src.inverse_design.resolve_many", lambda names: [
+    monkeypatch.setattr("src.pipeline.resolve_many", lambda names: [
         Species("ribose", "O=CC(O)C(O)C(O)CO"),
         Species("cysteine", "NC(CS)C(=O)O"),
     ])
 
     fake_engine = MagicMock()
     fake_engine.enumerate.return_value = []
-    monkeypatch.setattr("src.inverse_design.SmirksEngine", lambda cond: fake_engine)
-    monkeypatch.setattr("src.inverse_design.predict_lop_generation", lambda *args, **kwargs: {})
+    monkeypatch.setattr("src.pipeline.SmirksEngine", lambda cond: fake_engine)
+    monkeypatch.setattr("src.pipeline.predict_lop_generation", lambda *args, **kwargs: {})
     monkeypatch.setattr(designer.db, "get_best_barrier", lambda *args, **kwargs: (20.0, "mock", 2.0))
     monkeypatch.setattr(designer.sensory, "get_radar_data", lambda *args, **kwargs: {"meaty": (1.0, 1)})
     monkeypatch.setattr(
-        "src.inverse_design.evaluate_formulation_safety",
+        "src.pipeline.evaluate_formulation_safety",
         lambda *args, **kwargs: (0.0, []),
     )
 
@@ -59,7 +59,7 @@ def test_inverse_design_preserves_proxy_and_projection_metadata(monkeypatch):
         "projection_metadata": projection_metadata,
         "projection_context": {"total_volatile_budget_molar": 1.2e-6},
     }
-    monkeypatch.setattr("src.inverse_design.Recommender", lambda: fake_recommender)
+    monkeypatch.setattr("src.pipeline.Recommender", lambda: fake_recommender)
 
     result = designer.evaluate_single(formulation, conditions)
 

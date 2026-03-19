@@ -24,6 +24,7 @@ from src.matrix_correction import (
     ProteinType,
     apply_matrix_correction,
     classify_volatile_matrix_family,
+    describe_compound_matrix_retention,
     get_volatile_class_retention_factor,
     resolve_compound_matrix_retention,
     resolve_matrix_correction,
@@ -97,44 +98,14 @@ class PrecursorSystem:
     notes: str
 
 
-@dataclass(frozen=True)
-class ProjectionBudget:
-    limiting_precursor_molar: float
-    load_factor: float
-    temperature_factor: float
-    time_factor: float
-    severity: float
-    volatile_yield_fraction: float
-    total_volatile_budget_molar: float
-    limiting_precursor_name: str
 
-
-@dataclass(frozen=True)
-class ProjectionStrategy:
-    name: str
-    precursor_concentration_unit: str
-    limiting_pool_to_molar_factor: float
-    baseline_volatile_yield_fraction: float
-    severity_volatile_yield_slope: float
-    ppb_conversion_factor: float
-    ppb_basis: str
-    notes: str
-
-
-DEFAULT_PROJECTION_STRATEGY = ProjectionStrategy(
-    name="precursor_limited_observable_v1",
-    precursor_concentration_unit="mM",
-    limiting_pool_to_molar_factor=1.0e-3,
-    baseline_volatile_yield_fraction=1.0e-6,
-    severity_volatile_yield_slope=1.5e-3,
-    ppb_conversion_factor=1.0e6,
-    ppb_basis="aqueous_mass_equivalent_ppb",
-    notes=(
-        "Allocates a conservative volatile budget from the limiting precursor pool, then converts "
-        "M to ppb via MW assuming dilute aqueous density (~1 kg/L) before matrix/headspace projection."
-    ),
+from src.projection import (
+    ProjectionBudget, ProjectionStrategy, DEFAULT_PROJECTION_STRATEGY,
+    _thermal_severity, _projection_temperature_factor, _projection_time_factor,
+    _estimate_projection_budget, _temporal_accessibility, _relative_precursor_load_factor,
+    _projection_strategy_metadata
 )
-
+from src.projection_metadata import ProjectionMetadataMap, make_projection_metadata_row
 
 SYSTEMS = [
     PrecursorSystem(
@@ -255,104 +226,6 @@ def _mw_from_smiles(smiles: str) -> float:
         return float(Descriptors.MolWt(mol))
     except Exception:
         return 100.0
-
-
-def _thermal_severity(temperature_kelvin: float, time_minutes: Optional[float]) -> float:
-    return _projection_temperature_factor(temperature_kelvin) * _projection_time_factor(time_minutes)
-
-
-def _projection_temperature_factor(temperature_kelvin: float) -> float:
-    import math
-
-    temp_c = temperature_kelvin - 273.15
-    return 1.0 / (1.0 + math.exp(-(temp_c - 110.0) / 18.0))
-
-
-def _projection_time_factor(time_minutes: Optional[float]) -> float:
-    import math
-
-    if time_minutes is None:
-        return 1.0
-    return 1.0 - math.exp(-max(time_minutes, 0.0) / 25.0)
-
-
-def _estimate_projection_budget(
-    corrected_initial: Dict[str, float],
-    temperature_kelvin: float,
-    time_minutes: Optional[float],
-    strategy: ProjectionStrategy = DEFAULT_PROJECTION_STRATEGY,
-) -> ProjectionBudget:
-    if not corrected_initial:
-        return ProjectionBudget(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, "none")
-
-    # Find limiting precursor (minimum positive molarity)
-    positive_items = [(k, float(v)) for k, v in corrected_initial.items() if float(v) > 0.0]
-    if not positive_items:
-        return ProjectionBudget(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, "none")
-
-    limiting_name, limiting_val = min(positive_items, key=lambda x: x[1])
-    limiting_precursor_molar = limiting_val * strategy.limiting_pool_to_molar_factor
-    
-    load_factor = _relative_precursor_load_factor(corrected_initial)
-    temperature_factor = _projection_temperature_factor(temperature_kelvin)
-    time_factor = _projection_time_factor(time_minutes)
-    severity = temperature_factor * time_factor
-    volatile_yield_fraction = (
-        strategy.baseline_volatile_yield_fraction
-        + strategy.severity_volatile_yield_slope * severity
-    )
-    total_volatile_budget_molar = limiting_precursor_molar * volatile_yield_fraction * max(load_factor, 0.0)
-
-    return ProjectionBudget(
-        limiting_precursor_molar=float(limiting_precursor_molar),
-        load_factor=float(max(load_factor, 0.0)),
-        temperature_factor=float(temperature_factor),
-        time_factor=float(time_factor),
-        severity=float(severity),
-        volatile_yield_fraction=float(volatile_yield_fraction),
-        total_volatile_budget_molar=float(max(total_volatile_budget_molar, 0.0)),
-        limiting_precursor_name=limiting_name
-    )
-
-
-def _temporal_accessibility(total_tau_minutes: float, time_minutes: Optional[float]) -> float:
-    import math
-
-    if time_minutes is None:
-        return 1.0
-    if time_minutes <= 0.0:
-        return 0.0
-    if total_tau_minutes <= 0.0:
-        return 1.0
-    return 1.0 - math.exp(-time_minutes / total_tau_minutes)
-
-
-def _relative_precursor_load_factor(corrected_initial: Dict[str, float]) -> float:
-    import math
-
-    positive_values = [max(float(value), 0.0) for value in corrected_initial.values() if float(value) > 0.0]
-    if not positive_values:
-        return 0.0
-
-    limiting_value = min(positive_values)
-    if limiting_value <= 0.0:
-        return 0.0
-
-    normalized = [max(value / limiting_value, 1.0e-12) for value in positive_values]
-    return math.exp(sum(math.log(value) for value in normalized) / len(normalized))
-
-
-def _projection_strategy_metadata(strategy: ProjectionStrategy) -> Dict[str, Any]:
-    return {
-        "projection_strategy_name": strategy.name,
-        "projection_precursor_unit": strategy.precursor_concentration_unit,
-        "projection_ppb_basis": strategy.ppb_basis,
-        "projection_limiting_pool_to_molar_factor": float(strategy.limiting_pool_to_molar_factor),
-        "projection_baseline_volatile_yield_fraction": float(strategy.baseline_volatile_yield_fraction),
-        "projection_severity_volatile_yield_slope": float(strategy.severity_volatile_yield_slope),
-        "projection_ppb_conversion_factor": float(strategy.ppb_conversion_factor),
-        "projection_strategy_notes": strategy.notes,
-    }
 
 
 _BUDGET_EXCLUDED_CANONICAL = {
@@ -561,7 +434,7 @@ def _apply_output_projection(
     projection_budget: Optional[ProjectionBudget] = None,
     projection_strategy: ProjectionStrategy = DEFAULT_PROJECTION_STRATEGY,
     species_name_lookup: Optional[Dict[str, str]] = None,
-) -> Tuple[Dict[str, float], Dict[str, Dict[str, float]]]:
+) -> Tuple[Dict[str, float], ProjectionMetadataMap]:
     p_type = ProteinType(protein_type)
     fat_eff, protein_eff, explicit_matrix_fractions = _resolve_output_matrix_context(
         p_type,
@@ -575,7 +448,7 @@ def _apply_output_projection(
         fallback_matrix_factor = float(resolve_matrix_correction(p_type, denaturation_state).volatile_retention)
 
     observable_ppb: Dict[str, float] = {}
-    projection_metadata: Dict[str, Dict[str, float]] = {}
+    projection_metadata: ProjectionMetadataMap = {}
     process_state = determine_matrix_process_state(
         temperature_celsius=temperature_kelvin - 273.15,
         time_minutes=float(time_minutes or 60.0),
@@ -616,40 +489,40 @@ def _apply_output_projection(
                 projection_severity=projection_severity,
             )
             observable_ppb[canon] *= calibration_factor * melanoidin_factor
-            projection_metadata[canon] = {
-                "compound": compound_name,
-                "proxy_ppb": float(raw_value),
-                "matrix_factor": float(fallback_matrix_factor),
-                "base_matrix_factor": float(fallback_matrix_factor),
-                "class_matrix_factor": 1.0,
-                "headspace_factor": 1.0,
-                "calibration_factor": calibration_factor,
-                "melanoidin_trapping_factor": float(melanoidin_factor),
-                "observable_ppb": float(observable_ppb[canon]),
-                "proxy_to_observable_ratio": 1.0 if raw_value <= 0.0 else float(observable_ppb[canon]) / float(raw_value),
-                "volatile_class": "other",
-                "process_state": process_state,
-                **calibration,
-                **budget_metadata,
-            }
+            projection_metadata[canon] = make_projection_metadata_row(
+                compound=compound_name,
+                proxy_ppb=float(raw_value),
+                observable_ppb=float(observable_ppb[canon]),
+                extras={
+                    "matrix_factor": float(fallback_matrix_factor),
+                    "base_matrix_factor": float(fallback_matrix_factor),
+                    "class_matrix_factor": 1.0,
+                    "headspace_factor": 1.0,
+                    "calibration_factor": calibration_factor,
+                    "melanoidin_trapping_factor": float(melanoidin_factor),
+                    "volatile_class": "other",
+                    "process_state": process_state,
+                    **calibration,
+                    **budget_metadata,
+                },
+            )
             continue
 
         if explicit_matrix_fractions:
             effective_matrix_factor = 1.0
             class_matrix_factor = 1.0
         else:
-            class_matrix_factor = get_volatile_class_retention_factor(
+            retention_description = describe_compound_matrix_retention(
                 species.label or canon,
                 protein_type=p_type,
                 denaturation_state=denaturation_state,
                 smiles=species.smiles,
+                temperature_celsius=temperature_kelvin - 273.15,
+                time_minutes=time_minutes,
+                process_state=process_state,
             )
-            effective_matrix_factor = resolve_compound_matrix_retention(
-                species.label or canon,
-                protein_type=p_type,
-                denaturation_state=denaturation_state,
-                smiles=species.smiles,
-            )
+            class_matrix_factor = float(retention_description.get("class_matrix_factor", 1.0))
+            effective_matrix_factor = float(retention_description.get("matrix_factor", 1.0))
 
         headspace_factor = _headspace_observability_factor(
             species,
@@ -673,22 +546,30 @@ def _apply_output_projection(
         )
         observable_value = raw_value * effective_matrix_factor * headspace_factor * calibration_factor * melanoidin_factor
         observable_ppb[canon] = observable_value
-        projection_metadata[canon] = {
-            "compound": compound_name,
-            "proxy_ppb": float(raw_value),
-            "matrix_factor": float(effective_matrix_factor),
-            "base_matrix_factor": float(fallback_matrix_factor),
-            "class_matrix_factor": float(class_matrix_factor),
-            "headspace_factor": float(headspace_factor),
-            "calibration_factor": float(calibration_factor),
-            "melanoidin_trapping_factor": float(melanoidin_factor),
-            "observable_ppb": float(observable_value),
-            "proxy_to_observable_ratio": 1.0 if raw_value <= 0.0 else float(observable_value) / float(raw_value),
-            "volatile_class": classify_volatile_matrix_family(compound_name, smiles=species.smiles),
-            "process_state": process_state,
-            **calibration,
-            **budget_metadata,
-        }
+        projection_metadata[canon] = make_projection_metadata_row(
+            compound=compound_name,
+            proxy_ppb=float(raw_value),
+            observable_ppb=float(observable_value),
+            extras={
+                "matrix_factor": float(effective_matrix_factor),
+                "base_matrix_factor": float(retention_description.get("base_matrix_factor", fallback_matrix_factor)),
+                "class_matrix_factor": float(class_matrix_factor),
+                "dynamic_retention_factor": float(retention_description.get("dynamic_retention_factor", 1.0)),
+                "retention_runtime_mode": retention_description.get("retention_runtime_mode", "static_class_profile"),
+                "retention_reference_sources": retention_description.get("retention_reference_sources", []),
+                "reversible_release_factor": float(retention_description.get("reversible_release_factor", 1.0)),
+                "temporal_attenuation_factor": float(retention_description.get("temporal_attenuation_factor", 1.0)),
+                "headspace_factor": float(headspace_factor),
+                "calibration_factor": float(calibration_factor),
+                "melanoidin_trapping_factor": float(melanoidin_factor),
+                "browning_index": float(projection_severity),
+                "browning_narrative": "melanoidin-linked sulfur trapping surrogate" if melanoidin_factor < 1.0 else "no explicit browning-linked sulfur penalty",
+                "volatile_class": classify_volatile_matrix_family(compound_name, smiles=species.smiles),
+                "process_state": process_state,
+                **calibration,
+                **budget_metadata,
+            },
+        )
 
     return observable_ppb, projection_metadata
 
@@ -1364,7 +1245,8 @@ class Recommender:
                 "load_factor": float(projection_budget.load_factor)
             },
             "precursor_attribution": precursor_attribution,
-            "suppressed_compounds": suppressed_compounds
+            "suppressed_compounds": suppressed_compounds,
+            "thiamine_pathway_active": any("thiamine" in str(name).lower() for name in species_name_lookup.values()),
         }
 
         return {

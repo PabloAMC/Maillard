@@ -9,10 +9,10 @@ if str(ROOT) not in sys.path:
 from src.benchmark_validation import (  # noqa: E402
     build_matrix_benchmark_deltas,
     evaluate_benchmark,
-    render_matrix_benchmark_deltas_markdown,
     snapshot_benchmark_targets,
     summarize_evaluation,
 )
+from src.presentation import render_matrix_benchmark_deltas_markdown
 
 
 PEA_MEATY = ROOT / "data" / "benchmarks" / "pea_isolate_ribose_cysteine_100C_45min_Internal2026.json"

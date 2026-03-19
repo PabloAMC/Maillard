@@ -1,5 +1,5 @@
 import pytest
-from src.skala_refiner import SkalaRefiner  # noqa: E402
+from src.dft_refiner import DFTRefiner  # noqa: E402
 
 def pyscf_installed():
     try:
@@ -11,15 +11,17 @@ def pyscf_installed():
 @pytest.mark.slow
 def test_integration_pyscf_water():
     """
-    Validates PySCF / Skala backend plumbing with a live single point calculation.
+    Validates PySCF / DFT backend plumbing with a live single point calculation.
     """
     xyz = "3\n\nO 0.0 0.0 0.0\nH 0.0 0.0 1.0\nH 0.0 1.0 0.0\n"
     
-    # Use lowest possible basis set and LDA just to test plumbing without Skala dependency
-    refiner = SkalaRefiner(basis='sto-3g', solvent_name=None, use_skala=False)
-    refiner.fallback_xc = 'lda' 
+    # Use lowest possible basis set and LDA just to test plumbing
+    refiner = DFTRefiner(solvent_name=None, geometry_backend='pyscf')
+    # We override the methods for the test
+    refiner.opt_method = 'lda'
+    refiner.opt_basis = 'sto-3g'
     
-    res = refiner.single_point(xyz)
+    res = refiner.optimize_geometry(xyz, is_ts=False)
     
     assert res.converged
     # Approximate Hartree-Fock/LDA energy of water in STO-3G is ~ -75.0 Hartree

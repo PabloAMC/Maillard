@@ -17,11 +17,28 @@ from src.matrix_calibration_registry import (
     describe_matrix_calibration,
     determine_matrix_process_state,
 )
-from src.inverse_design import InverseDesigner
+from src.pipeline import MaillardPipeline
 from src.precursor_resolver import resolve_many
+from src.projection_metadata import ProjectionMetadataMap, make_projection_metadata_row
 from src.smirks_engine import SmirksEngine
 from src.validation_contract import BenchmarkThresholds, DEFAULT_VALIDATION_CONTRACT
 from src.safety import predict_acrylamide
+from src.projection_utils import build_projection_rows
+from src.benchmark_types import (
+    BenchmarkMetadata,
+    BenchmarkIndexEntry,
+    BenchmarkNotSupportedError,
+    CompoundComparison,
+    BenchmarkEvaluation,
+    BenchmarkSummary,
+    MatrixBenchmarkDelta,
+    MatrixBenchmarkEvidence,
+    MatrixBenchmarkBranchDelta,
+    ThermodynamicGatingAudit,
+    BenchmarkTargetSnapshot,
+    MatrixBenchmarkAssertion,
+    MatrixPromotionFamilyStatus,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -100,250 +117,9 @@ MATRIX_BENCHMARK_BASE_MARKER_YIELDS = {
 }
 
 
-@dataclass(frozen=True)
-class BenchmarkMetadata:
-    tier: str
-    family: str
-    execution_path: str
-    benchmark_engine: str
-    comparator_signal: str
-    cantera_role: str
-    target_snapshot_policy: str
-    thermodynamic_gating_policy: str
-    notes: Optional[str] = None
 
 
-@dataclass(frozen=True)
-class BenchmarkIndexEntry:
-    benchmark_id: str
-    bench_file: Path
-    tier: str
-    family: str
-    protein_type: str
-    execution_path: str
-    benchmark_engine: str
-    cantera_role: str
-    thermodynamic_gating_policy: str
-    supported: bool
-    reason: Optional[str]
-    status: str
-    strict_ready: bool
-    process_state: Optional[str] = None
-    ranking_contract_status: str = "n/a"
 
-
-class BenchmarkNotSupportedError(RuntimeError):
-    pass
-
-
-@dataclass(frozen=True)
-class CompoundComparison:
-    compound: str
-    measured_ppb: float
-    predicted_ppb: float
-    matched_name: Optional[str]
-    uncertainty_pct: Optional[float]
-    match_score: float = 0.0
-
-    @property
-    def ratio(self) -> float:
-        smallest = min(self.measured_ppb, self.predicted_ppb)
-        largest = max(self.measured_ppb, self.predicted_ppb)
-        if smallest <= 0.0:
-            return math.inf if largest > 0.0 else 1.0
-        return largest / smallest
-
-
-@dataclass(frozen=True)
-class BenchmarkEvaluation:
-    benchmark_id: str
-    bench_file: Path
-    supported: bool
-    reason: Optional[str]
-    predicted_ppb: Dict[str, float]
-    comparisons: List[CompoundComparison]
-    pearson_r: Optional[float]
-    mae_ppb: Optional[float]
-    projection_metadata: Dict[str, Dict[str, Any]] = field(default_factory=dict)
-    reference_signal_origin: str = "measured_volatiles"
-
-    @property
-    def coverage(self) -> float:
-        if not self.comparisons:
-            return 0.0
-        matched = sum(1 for comparison in self.comparisons if comparison.matched_name is not None)
-        return matched / len(self.comparisons)
-
-
-@dataclass(frozen=True)
-class BenchmarkSummary:
-    benchmark_id: str
-    bench_file: Path
-    tier: str
-    family: str
-    execution_path: str
-    benchmark_engine: str
-    comparator_signal: str
-    cantera_role: str
-    target_snapshot_policy: str
-    thermodynamic_gating_policy: str
-    supported: bool
-    reason: Optional[str]
-    protein_type: str
-    coverage: float
-    matched_compounds: int
-    total_compounds: int
-    pearson_r: Optional[float]
-    mae_ppb: Optional[float]
-    max_ratio: Optional[float]
-    mean_ratio: Optional[float]
-    ranking_status: str
-    scale_status: str
-    overall_status: str
-    strict_ready: bool
-    blocking_issues: List[str]
-    conditions: Dict[str, float]
-    process_state: Optional[str] = None
-    ranked_observable_targets: List[str] = field(default_factory=list)
-    adverse_markers: List[str] = field(default_factory=list)
-    ranking_contract_status: str = "n/a"
-    calibration_mode: Optional[str] = None
-    reference_signal_origin: str = "measured_volatiles"
-
-
-@dataclass(frozen=True)
-class MatrixBenchmarkDelta:
-    benchmark_id: str
-    bench_file: Path
-    protein_type: str
-    execution_path: str
-    process_state: Optional[str]
-    reference_signal_origin: str
-    ranking_contract_status: str
-    compound: str
-    role: str
-    reference_ppb: float
-    predicted_ppb: float
-    abs_delta_ppb: float
-    pct_delta: Optional[float]
-    ratio: float
-    calibration_source: str
-    calibration_evidence_strength: str
-    calibration_fallback_mode: str
-
-
-@dataclass(frozen=True)
-class MatrixBenchmarkEvidence:
-    benchmark_id: str
-    bench_file: Path
-    protein_type: str
-    execution_path: str
-    process_state: Optional[str]
-    reference_signal_origin: str
-    source_origin: str
-    source_reference: str
-    target_profile: str
-    external_data_status: str
-    promotable: bool
-    promotion_blocker: str
-
-
-@dataclass(frozen=True)
-class MatrixBenchmarkBranchDelta:
-    benchmark_id: str
-    compound: str
-    change_type: str
-    current_present: bool
-    baseline_present: bool
-    current_execution_path: str
-    baseline_execution_path: str
-    current_reference_signal_origin: str
-    baseline_reference_signal_origin: str
-    current_source_origin: str
-    baseline_source_origin: str
-    current_external_data_status: str
-    baseline_external_data_status: str
-    current_predicted_ppb: Optional[float]
-    baseline_predicted_ppb: Optional[float]
-    predicted_delta_ppb: Optional[float]
-    current_ratio: Optional[float]
-    baseline_ratio: Optional[float]
-    ratio_delta: Optional[float]
-
-
-@dataclass(frozen=True)
-class MatrixBenchmarkAssertion:
-    benchmark_id: str
-    bench_file: Path
-    protein_type: str
-    execution_path: str
-    process_state: Optional[str]
-    target_profile: str
-    ranking_contract_status: str
-    coverage: float
-    min_coverage: float
-    top_k: int
-    top_k_hits: int
-    top_k_status: str
-    adverse_order_status: str
-    max_ratio: Optional[float]
-    ratio_tolerance: float
-    ratio_status: str
-    overall_status: str
-    strict_gate_blocked: bool
-    blocker: str
-
-
-@dataclass(frozen=True)
-class MatrixPromotionFamilyStatus:
-    protein_type: str
-    off_flavour_anchor_count: int
-    meaty_candidate_count: int
-    external_meaty_anchor_count: int
-    candidate_set_ready: bool
-    external_assessment_unlocked: bool
-    blocker: str
-
-
-@dataclass(frozen=True)
-class BenchmarkTargetSnapshot:
-    benchmark_id: str
-    bench_file: Path
-    target_name: str
-    target_type: str
-    roles: List[str]
-    predicted_ppb: float
-    proxy_ppb: float
-    observable_ratio: float
-    weighted_flux: float
-    span: float
-    depth: int
-    volatile_class: str
-    matrix_factor: float
-    headspace_factor: float
-    headspace_observable: bool
-    headspace_class: str
-    henry_kaw_25c: Optional[float]
-    henry_source_name: Optional[str]
-
-
-@dataclass(frozen=True)
-class ThermodynamicGatingAudit:
-    benchmark_id: str
-    bench_file: Path
-    execution_path: str
-    applicable: bool
-    baseline_overall_status: str
-    gated_overall_status: str
-    baseline_mae_ppb: Optional[float]
-    gated_mae_ppb: Optional[float]
-    baseline_max_ratio: Optional[float]
-    gated_max_ratio: Optional[float]
-    delta_mae_ppb: Optional[float]
-    delta_max_ratio: Optional[float]
-    material_improvement: bool
-    recommended_policy: str
-    notes: str
 
 
 THERMODYNAMIC_GATING_POLICIES = {
@@ -692,7 +468,7 @@ def _run_benchmark_recommendation(
 ) -> dict:
     formulation = benchmark_to_formulation(bench)
     conditions = benchmark_to_conditions(bench)
-    designer = InverseDesigner(target_tag=target_tag)
+    designer = MaillardPipeline(target_tag=target_tag)
     kinetics = KineticsEngine(temperature_k=conditions.temperature_kelvin)
     gating_mode = resolve_thermodynamic_gating_mode(bench, thermodynamic_gating)
 
@@ -790,25 +566,27 @@ def _run_matrix_only_benchmark_prediction(bench: dict) -> dict:
         "predicted_ppb": predicted_ppb,
         "predicted_proxy_ppb": dict(predicted_ppb),
         "projection_metadata": {
-            compound: {
-                "compound": compound,
-                "proxy_ppb": value,
-                "matrix_factor": 1.0,
-                "headspace_factor": headspace_model.get_matrix_benchmark_headspace_factor(
-                    compound,
-                    protein_type=protein_type,
-                    pH=pH,
-                    temperature_celsius=float(conditions["temp_C"]),
-                    time_minutes=float(conditions["time_min"]),
-                ),
-                "observable_ppb": value,
-                "process_state": process_state,
-                **describe_matrix_calibration(
-                    compound,
-                    protein_type=protein_type,
-                    process_state=process_state,
-                ),
-            }
+            compound: make_projection_metadata_row(
+                compound=compound,
+                proxy_ppb=value,
+                observable_ppb=value,
+                extras={
+                    "matrix_factor": 1.0,
+                    "headspace_factor": headspace_model.get_matrix_benchmark_headspace_factor(
+                        compound,
+                        protein_type=protein_type,
+                        pH=pH,
+                        temperature_celsius=float(conditions["temp_C"]),
+                        time_minutes=float(conditions["time_min"]),
+                    ),
+                    "process_state": process_state,
+                    **describe_matrix_calibration(
+                        compound,
+                        protein_type=protein_type,
+                        process_state=process_state,
+                    ),
+                },
+            )
             for compound, value in predicted_ppb.items()
         },
         "debug_paths": {},
@@ -1221,24 +999,7 @@ def build_matrix_benchmark_evidence_audit(
     return rows
 
 
-def render_matrix_benchmark_evidence_markdown(rows: Iterable[MatrixBenchmarkEvidence]) -> str:
-    evidence_rows = list(rows)
-    lines = [
-        "# Matrix Benchmark Evidence Audit",
-        "",
-        "| Benchmark | Protein | Path | Process State | Target Profile | Reference Origin | Source Origin | External Data Status | Promotable | Blocker | Source |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
-    ]
-    for row in evidence_rows:
-        lines.append(
-            f"| {row.benchmark_id} | {row.protein_type} | {row.execution_path} | {row.process_state or 'n/a'} | {row.target_profile} | {row.reference_signal_origin} | {row.source_origin} | {row.external_data_status} | {'yes' if row.promotable else 'no'} | {row.promotion_blocker or 'none'} | {row.source_reference} |"
-        )
-    lines.extend([
-        "",
-        f"Benchmarks audited: {len(evidence_rows)}",
-        f"Externally promotable meaty-positive matrix benchmarks: {sum(1 for row in evidence_rows if row.promotable)}",
-    ])
-    return "\n".join(lines) + "\n"
+
 
 
 def _matrix_assertion_thresholds(
@@ -1449,25 +1210,7 @@ def build_matrix_promotion_family_status(
     return rows
 
 
-def render_matrix_promotion_family_status_markdown(rows: Iterable[MatrixPromotionFamilyStatus]) -> str:
-    family_rows = list(rows)
-    lines = [
-        "# Matrix Promotion Family Readiness",
-        "",
-        "| Protein | Off-flavour Anchors | Meaty Candidates | External Meaty Anchors | Candidate Set Ready | External Assessment Unlocked | Blocker |",
-        "| --- | ---: | ---: | ---: | --- | --- | --- |",
-    ]
-    for row in family_rows:
-        lines.append(
-            f"| {row.protein_type} | {row.off_flavour_anchor_count} | {row.meaty_candidate_count} | {row.external_meaty_anchor_count} | {'yes' if row.candidate_set_ready else 'no'} | {'yes' if row.external_assessment_unlocked else 'no'} | {row.blocker} |"
-        )
-    lines.extend([
-        "",
-        f"Protein families covered: {len(family_rows)}",
-        f"Candidate sets ready: {sum(1 for row in family_rows if row.candidate_set_ready)}",
-        f"External assessments unlocked: {sum(1 for row in family_rows if row.external_assessment_unlocked)}",
-    ])
-    return "\n".join(lines) + "\n"
+
 
 
 def compare_matrix_benchmark_delta_sets(
@@ -1572,25 +1315,7 @@ def render_matrix_branch_deltas_markdown(
     return "\n".join(lines) + "\n"
 
 
-def render_matrix_benchmark_deltas_markdown(rows: Iterable[MatrixBenchmarkDelta]) -> str:
-    deltas = list(rows)
-    lines = [
-        "# Matrix Benchmark Deltas",
-        "",
-        "| Benchmark | Protein | Path | Process State | Reference Origin | Ranking Contract | Compound | Role | Reference ppb | Predicted ppb | Abs Δ ppb | Δ % | Ratio | Calibration | Evidence | Fallback |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |",
-    ]
-    for row in deltas:
-        pct = f"{100.0 * row.pct_delta:.1f}%" if row.pct_delta is not None else "n/a"
-        lines.append(
-            f"| {row.benchmark_id} | {row.protein_type} | {row.execution_path} | {row.process_state or 'n/a'} | {row.reference_signal_origin} | {row.ranking_contract_status} | {row.compound} | {row.role} | {row.reference_ppb:.3f} | {row.predicted_ppb:.3f} | {row.abs_delta_ppb:.3f} | {pct} | {row.ratio:.3f} | {row.calibration_source} | {row.calibration_evidence_strength} | {row.calibration_fallback_mode} |"
-        )
-    lines.extend([
-        "",
-        f"Delta rows: {len(deltas)}",
-        f"Benchmarks covered: {len({row.benchmark_id for row in deltas})}",
-    ])
-    return "\n".join(lines) + "\n"
+
 
 
 def summarize_benchmarks(
@@ -1610,12 +1335,18 @@ def summarize_benchmarks(
             thresholds=thresholds,
         )
         if not evaluation.supported:
+            metadata = get_benchmark_metadata(bench)
             summary = BenchmarkSummary(
                 benchmark_id=summary.benchmark_id,
                 bench_file=summary.bench_file,
                 tier=metadata.tier,
                 family=metadata.family,
                 execution_path=metadata.execution_path,
+                benchmark_engine=metadata.benchmark_engine,
+                comparator_signal=metadata.comparator_signal,
+                cantera_role=metadata.cantera_role,
+                target_snapshot_policy=metadata.target_snapshot_policy,
+                thermodynamic_gating_policy=metadata.thermodynamic_gating_policy,
                 supported=summary.supported,
                 reason=summary.reason,
                 protein_type=summary.protein_type,
@@ -1761,27 +1492,6 @@ def audit_all_thermodynamic_gating(
     ]
 
 
-def render_thermodynamic_gating_audit_markdown(rows: Iterable[ThermodynamicGatingAudit]) -> str:
-    audits = list(rows)
-    lines = [
-        "# Thermodynamic Gating Audit",
-        "",
-        "| Benchmark | Path | Applicable | Baseline Status | Gated Status | Δ MAE ppb | Δ Max Ratio | Material | Recommended Policy | Notes |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
-    ]
-    for row in audits:
-        delta_mae = f"{row.delta_mae_ppb:.2f}" if row.delta_mae_ppb is not None else "n/a"
-        delta_ratio = f"{row.delta_max_ratio:.3f}" if row.delta_max_ratio is not None else "n/a"
-        lines.append(
-            f"| {row.benchmark_id} | {row.execution_path} | {'yes' if row.applicable else 'no'} | {row.baseline_overall_status} | {row.gated_overall_status} | {delta_mae} | {delta_ratio} | {'yes' if row.material_improvement else 'no'} | {row.recommended_policy} | {row.notes} |"
-        )
-    lines.extend([
-        "",
-        f"Audited benchmarks: {len(audits)}",
-        f"Material improvements: {sum(1 for row in audits if row.material_improvement)}",
-    ])
-    return "\n".join(lines) + "\n"
-
 
 def snapshot_benchmark_targets(
     bench_file: Path | str,
@@ -1837,39 +1547,6 @@ def snapshot_all_benchmark_targets(
     return snapshots
 
 
-def render_benchmark_targets_markdown(
-    snapshots: Iterable[BenchmarkTargetSnapshot],
-    *,
-    excluded_benchmark_ids: Optional[Iterable[str]] = None,
-) -> str:
-    rows = list(snapshots)
-    excluded = list(excluded_benchmark_ids or [])
-    lines = [
-        "# Benchmark Targets",
-        "",
-        "| Benchmark | Target | Type | Roles | Proxy ppb | Observable ppb | Obs/Proxy | Matrix | Headspace | Class | Span | Depth | Headspace Class | Kaw 25C | Henry Name |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
-    ]
-
-    for row in rows:
-        kaw = f"{row.henry_kaw_25c:.3e}" if row.henry_kaw_25c is not None else "n/a"
-        lines.append(
-            f"| {row.benchmark_id} | {row.target_name} | {row.target_type} | {', '.join(row.roles)} | {row.proxy_ppb:.3f} | {row.predicted_ppb:.3f} | {row.observable_ratio:.3f} | {row.matrix_factor:.3f} | {row.headspace_factor:.3f} | {row.volatile_class} | {row.span:.3f} | {row.depth} | {row.headspace_class} | {kaw} | {row.henry_source_name or 'n/a'} |"
-        )
-
-    lines.extend([
-        "",
-        f"Target rows: {len(rows)}",
-        f"Low-headspace rows: {sum(1 for row in rows if row.headspace_class == 'low_headspace')}",
-    ])
-    if excluded:
-        lines.extend([
-            f"Excluded matrix-only benchmarks: {', '.join(sorted(excluded))}",
-            "These benchmarks remain executable through summary/index artefacts, but they are deliberately omitted from target snapshots because they do not run through the free-precursor FAST target-ranking path.",
-        ])
-    return "\n".join(lines) + "\n"
-
-
 def build_benchmark_index(
     benchmark_files: Optional[Iterable[Path | str]] = None,
     target_tag: str = DEFAULT_TARGET_TAG,
@@ -1895,60 +1572,3 @@ def build_benchmark_index(
         )
         for summary in summaries
     ]
-
-
-def render_benchmark_index_markdown(entries: Iterable[BenchmarkIndexEntry]) -> str:
-    rows = list(entries)
-    lines = [
-        "# Benchmark Index",
-        "",
-        "| Benchmark | Tier | Family | Protein | Process State | Execution Path | Engine | Cantera Role | Thermo Policy | Ranking Contract | Supported | Status | Strict Ready | Notes |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
-    ]
-    for entry in rows:
-        notes = entry.reason or "indexed"
-        lines.append(
-            f"| {entry.benchmark_id} | {entry.tier} | {entry.family} | {entry.protein_type} | {entry.process_state or 'n/a'} | {entry.execution_path} | {entry.benchmark_engine} | {entry.cantera_role} | {entry.thermodynamic_gating_policy} | {entry.ranking_contract_status} | {'yes' if entry.supported else 'no'} | {entry.status} | {'yes' if entry.strict_ready else 'no'} | {notes} |"
-        )
-    return "\n".join(lines) + "\n"
-
-
-def render_benchmark_summary_markdown(summaries: Iterable[BenchmarkSummary]) -> str:
-    rows = list(summaries)
-    lines = [
-        "# Benchmark Summary",
-        "",
-        "| Benchmark | Tier | Family | Protein | Process State | Execution Path | Engine | Cantera Role | Thermo Policy | Ranking Contract | Status | Strict Ready | Coverage | Pearson R | Max Ratio | MAE ppb | Notes |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
-    ]
-
-    for summary in rows:
-        if not summary.supported:
-            notes = summary.reason or "Unsupported"
-            pearson = "n/a"
-            max_ratio = "n/a"
-            mae = "n/a"
-            coverage = "0.0%"
-            strict_ready = "no"
-        else:
-            notes = ", ".join(summary.blocking_issues) or "validated"
-            pearson = f"{summary.pearson_r:.3f}" if summary.pearson_r is not None else "n/a"
-            max_ratio = f"{summary.max_ratio:.3f}" if summary.max_ratio is not None else "n/a"
-            mae = f"{summary.mae_ppb:.2f}" if summary.mae_ppb is not None else "n/a"
-            coverage = f"{summary.coverage:.1%}"
-            strict_ready = "yes" if summary.strict_ready else "no"
-
-        lines.append(
-            f"| {summary.benchmark_id} | {summary.tier} | {summary.family} | {summary.protein_type} | {summary.process_state or 'n/a'} | {summary.execution_path} | {summary.benchmark_engine} | {summary.cantera_role} | {summary.thermodynamic_gating_policy} | {summary.ranking_contract_status} | {summary.overall_status} | {strict_ready} | {coverage} | {pearson} | {max_ratio} | {mae} | {notes} |"
-        )
-
-    supported_count = sum(1 for summary in rows if summary.supported)
-    pass_count = sum(1 for summary in rows if summary.overall_status in {"pass", "pass-no-ranking", "partial-pass"})
-    strict_ready_count = sum(1 for summary in rows if summary.strict_ready)
-    lines.extend([
-        "",
-        f"Supported benchmarks: {supported_count}/{len(rows)}",
-        f"Benchmarks without blocking coverage/ranking gaps: {pass_count}/{len(rows)}",
-        f"Strict-ready benchmarks: {strict_ready_count}/{len(rows)}",
-    ])
-    return "\n".join(lines) + "\n"
