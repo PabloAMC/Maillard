@@ -765,6 +765,14 @@ This plan is no longer a generic calibration roadmap. It is a step-by-step SLR i
 - The validation surface now shows all quantitative benchmarks, including matrix-only and matrix-augmented lanes, while keeping strict-ready trust visually distinct from broader executable evidence.
 - Matrix-only observable calibration must be applied exactly once. In this repo, `HeadspaceModel.get_matrix_benchmark_headspace_factor()` already carries the matrix observable factor, so `benchmark_validation` must separate proxy release from total observable scaling rather than multiplying the registry factor twice.
 
+## Validation Contract V2 — 2026-03-19
+
+1. [x] Add a second scale metric to the validation contract so benchmark pass/fail no longer depends only on worst-case max ratio.
+2. [x] Support explicit per-benchmark scale thresholds in benchmark payloads for the authoritative free-precursor set.
+3. [x] Surface the new validation metric in benchmark summary reporting.
+4. [x] Document the tool's precision tiers and what they depend on in README.md, including the distinction between kinetic barriers and observable-layer calibration.
+5. [x] Re-run focused validation tests and regenerate benchmark summary artifacts after the contract update.
+
 ## Track 9: Codebase Restructuring (Clean Code)
 
 ### Goal

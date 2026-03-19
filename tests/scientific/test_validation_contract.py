@@ -31,7 +31,7 @@ def test_validation_contract_centralizes_replication_axes_and_thresholds():
 
     assert "coverage, ranking, and scale" in contract.replication_meaning
     assert "ordering or trend" in contract.directional_validity
-    assert "Pearson and ratio thresholds" in contract.quantitative_replication
+    assert "Pearson, ratio, and log-scale error thresholds" in contract.quantitative_replication
     assert "ranking recipes or interventions" in contract.formulation_utility
     assert "FAST observable projection" in contract.benchmark_policy
     assert "Cantera remains a diagnostic reference lane" in contract.benchmark_policy
@@ -39,6 +39,8 @@ def test_validation_contract_centralizes_replication_axes_and_thresholds():
     assert contract.thresholds.ranking_threshold == 0.85
     assert contract.thresholds.free_aa_ratio_threshold == 1.5
     assert contract.thresholds.matrix_ratio_threshold == 2.0
+    assert contract.thresholds.free_aa_mean_abs_log10_error_threshold == 0.10
+    assert contract.thresholds.matrix_mean_abs_log10_error_threshold == 0.12
 
 
 def test_validation_contract_registers_execution_policy_for_fast_and_matrix_paths():
@@ -92,3 +94,28 @@ def test_strict_gate_eligibility_is_centralized_in_validation_contract():
     assert matrix_summary.strict_ready is False
     assert matrix_summary.cantera_role == "not_authoritative"
     assert any("strict release gate" in issue for issue in matrix_summary.blocking_issues)
+
+
+def test_benchmark_specific_scale_thresholds_override_global_defaults():
+    comparison_rows = [
+        CompoundComparison("cmp1", 100.0, 130.0, "cmp1", None, 1.0),
+        CompoundComparison("cmp2", 100.0, 100.0, "cmp2", None, 1.0),
+    ]
+
+    evaluation = BenchmarkEvaluation(
+        benchmark_id="override_eval",
+        bench_file=ROOT / "data" / "benchmarks" / "cys_glucose_150C_Farmer1999.json",
+        supported=True,
+        reason=None,
+        predicted_ppb={},
+        comparisons=comparison_rows,
+        pearson_r=None,
+        mae_ppb=15.0,
+    )
+
+    summary = summarize_evaluation(evaluation, protein_type="free")
+
+    assert summary.max_ratio == 1.3
+    assert summary.mean_abs_log10_error is not None
+    assert summary.scale_status == "fail"
+    assert any("max ratio 1.300 > 1.25" in issue for issue in summary.blocking_issues)
