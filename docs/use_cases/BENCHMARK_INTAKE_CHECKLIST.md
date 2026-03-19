@@ -34,7 +34,7 @@ Current usable anchors:
 
 - Mottram and Hofmann support the free-precursor sulfur mechanism.
 - Pratap-Singh supports the pea baseline off-flavour context.
-- Asen 2022 and Malia 2025 support pea process-state calibration, not benchmark chemistry.
+- Asen 2022 and Li 2025 support pea process-state calibration, not benchmark chemistry.
 
 Current blockers:
 
