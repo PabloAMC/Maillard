@@ -15,6 +15,7 @@ from src.matrix_calibration_registry import (
     get_matrix_calibration_record,
     get_matrix_runtime_composition_policy,
 )
+from src.literature_runtime import get_retention_ph_release_profile
 from src.matrix_correction import ProteinType, resolve_compound_matrix_retention, resolve_matrix_correction
 
 class HeadspaceModel:
@@ -133,8 +134,8 @@ class HeadspaceModel:
         - anchored to pH 6.0 so the existing Pratap-Singh matrix-only baselines stay stable
         - only applied to pea/soy matrix types
         - only applied to acid-sensitive lipid-derived off-flavour markers
-        - tuned so pH 4.5 vs 6.5 yields roughly the ~1.6x enhancement reported by
-          the Pouvreau pea-isolate benchmark family for aldehydes/furans
+                - tuned through the structured Karolkowski 2021 PPI pH-release payload for
+                    acid-sensitive aldehydes and furans while preserving the executable pH 6 baseline
         """
         if pH is None or not protein_type:
             return 1.0
@@ -157,11 +158,15 @@ class HeadspaceModel:
         if not acid_sensitive:
             return 1.0
 
-        # Reference pH is the ambient plant-isolate baseline already used in the
-        # current executable matrix-only benchmarks.
-        centered_delta = 6.0 - float(pH)
-        factor = math.exp(0.235 * centered_delta)
-        return max(0.75, min(1.6, factor))
+        profile = get_retention_ph_release_profile(name, protein_type=p_type.value)
+        reference_ph = float(profile.get("reference_ph", 6.0) or 6.0)
+        log_slope = float(profile.get("log_slope", 0.235) or 0.235)
+        min_factor = float(profile.get("min_factor", 0.75) or 0.75)
+        max_factor = float(profile.get("max_factor", 1.6) or 1.6)
+
+        centered_delta = reference_ph - float(pH)
+        factor = math.exp(log_slope * centered_delta)
+        return max(min_factor, min(max_factor, factor))
 
     def get_matrix_benchmark_headspace_factor(
         self,
@@ -181,7 +186,7 @@ class HeadspaceModel:
         - this headspace observable factor, which carries the pea/soy release gap
           from the Pratap-Singh ambient slurry family
         - the narrower pH-dependent release modifier already validated against the
-          Pouvreau pea-isolate trend family
+                    Karolkowski PPI pH-release trend family
 
         This keeps benchmark_validation focused on intake chemistry while making
         the matrix-specific observable calibration explicit in the headspace layer.

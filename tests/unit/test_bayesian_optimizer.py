@@ -112,5 +112,59 @@ def test_meaty_quality_penalty_reduces_objective(monkeypatch):
     assert trial.user_attrs["meaty_quality_penalty"] == pytest.approx(1.75)
     assert trial.user_attrs["mft_to_furfural_ratio"] == pytest.approx(0.001)
 
+
+def test_furanone_penalty_reduces_objective(monkeypatch):
+    optimizer = FormulationOptimizer(target_tag="meaty")
+
+    class DummyTrial:
+        number = 0
+
+        def __init__(self):
+            self.user_attrs = {}
+
+        def suggest_float(self, name, low, high, log=False):
+            values = {
+                "sugar_conc": 0.1,
+                "aa_conc_sulfur": 0.1,
+                "aa_conc_branched": 0.1,
+                "aa_conc_basic": 0.1,
+                "aa_conc_other": 0.1,
+                "ph": 5.5,
+                "temp": 150.0,
+                "aw": 0.5,
+                "time_minutes": 30.0,
+                "intervention_dose": 0.0,
+            }
+            return values[name]
+
+        def suggest_categorical(self, name, options):
+            values = {
+                "intervention_agent": "none",
+                "pre_processing": "none",
+            }
+            return values[name]
+
+        def set_user_attr(self, key, value):
+            self.user_attrs[key] = value
+
+    def mock_evaluate_single(self, formulation, cond):
+        return FormulationResult(
+            name="FuranonePenaltyProbe",
+            target_score=10.0,
+            off_flavour_risk=0.0,
+            safety_score=0.0,
+            furanone_penalty=0.35,
+            avg_uncertainty=0.0,
+        )
+
+    from src.pipeline import MaillardPipeline
+    monkeypatch.setattr(MaillardPipeline, "evaluate_single", mock_evaluate_single)
+
+    trial = DummyTrial()
+    value = optimizer.objective(trial, ["ribose"], ["alanine"], None)
+
+    assert value == pytest.approx(9.65)
+    assert trial.user_attrs["furanone_penalty"] == pytest.approx(0.35)
+
 if __name__ == "__main__":
     pytest.main([__file__])

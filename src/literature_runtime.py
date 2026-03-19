@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 import math
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional
+from typing import Any, Dict, Iterable, List, Mapping, Optional
 
 from src.projection_metadata import ProjectionMetadataMap
 
@@ -64,6 +64,124 @@ def get_thiamine_priors() -> dict[str, Any]:
     return {}
 
 
+def get_strecker_crosstalk_priors() -> dict[str, Any]:
+    for entry in COMPUTATIONAL_PRIORS_PAYLOAD.get("strecker_crosstalk_priors", []):
+        if str(entry.get("id", "")).strip() == "lincoln_2025_polyphenol_crosstalk_v1":
+            return dict(entry)
+    return {}
+
+
+_DEFAULT_FLAVOR_PIPELINE_ROLE_BY_BENCHMARK = {
+    "reference_anchor": "secondary_marker",
+    "directional_comparison_anchor": "diagnostic_marker",
+    "pbma_counterexample": "reference_only",
+    "low_confidence_mechanistic_anchor": "optimization_constraint",
+}
+
+
+def _iter_flavor_entries() -> Iterable[tuple[str, Dict[str, Any]]]:
+    for section_name, entries in FLAVOR_REFERENCE_PAYLOADS.items():
+        if not isinstance(entries, list):
+            continue
+        for entry in entries:
+            if isinstance(entry, Mapping):
+                yield str(section_name), dict(entry)
+
+
+def _flavor_entry_by_id(entry_id: str) -> Dict[str, Any]:
+    requested = str(entry_id).strip()
+    for _, entry in _iter_flavor_entries():
+        if str(entry.get("id", "")).strip() == requested:
+            return entry
+    return {}
+
+
+def get_flavor_reference_pipeline_role(entry_id: str) -> str:
+    entry = _flavor_entry_by_id(entry_id)
+    explicit = str(entry.get("pipeline_role", "")).strip().lower()
+    if explicit:
+        return explicit
+    benchmark_role = str(entry.get("benchmark_role", "")).strip().lower()
+    return _DEFAULT_FLAVOR_PIPELINE_ROLE_BY_BENCHMARK.get(benchmark_role, "reference_only")
+
+
+def build_flavor_reference_policy_summary() -> List[Dict[str, Any]]:
+    rows: List[Dict[str, Any]] = []
+    for section_name, entry in _iter_flavor_entries():
+        rows.append(
+            {
+                "id": str(entry.get("id", "unknown")),
+                "section": section_name,
+                "compound": str(entry.get("compound", "unknown")),
+                "benchmark_role": str(entry.get("benchmark_role", "unknown")),
+                "pipeline_role": get_flavor_reference_pipeline_role(str(entry.get("id", "unknown"))),
+                "target_direction": str(entry.get("target_direction", "")),
+                "source_citation": str(entry.get("source_citation", "unknown")),
+            }
+        )
+    rows.sort(key=lambda row: (row["pipeline_role"], row["compound"]))
+    return rows
+
+
+def _role_supports_runtime_scoring(role: str) -> bool:
+    return str(role).strip().lower() in {
+        "primary_target",
+        "secondary_marker",
+        "diagnostic_marker",
+        "optimization_constraint",
+    }
+
+
+def _iter_retention_entries() -> Iterable[tuple[str, str, Dict[str, Any]]]:
+    for section_name, section_payload in RETENTION_REFERENCE_PAYLOADS.items():
+        if not isinstance(section_payload, Mapping):
+            continue
+        for matrix_family, entries in section_payload.items():
+            if not isinstance(entries, list):
+                continue
+            for entry in entries:
+                if isinstance(entry, Mapping):
+                    yield str(section_name), str(matrix_family), dict(entry)
+
+
+def _retention_entry_by_id(entry_id: str) -> Dict[str, Any]:
+    requested = str(entry_id).strip()
+    for _, _, entry in _iter_retention_entries():
+        if str(entry.get("id", "")).strip() == requested:
+            return entry
+    return {}
+
+
+def _retention_source_label(entry: Mapping[str, Any]) -> str:
+    return str(entry.get("source_citation") or entry.get("id") or "unknown retention reference")
+
+
+def get_retention_ph_release_profile(
+    compound_name: str,
+    *,
+    protein_type: Optional[str],
+) -> Dict[str, Any]:
+    normalized = _normalize_name(compound_name)
+    protein = str(protein_type or "")
+
+    candidate_ids: List[str] = []
+    if protein.startswith("pea") and normalized == "hexanal":
+        candidate_ids.append("karolkowski_2021_ppi_hexanal_ph_release")
+    elif protein.startswith("pea") and normalized in {"2 pentylfuran", "2 pentyl furan"}:
+        candidate_ids.append("karolkowski_2021_ppi_2_pentylfuran_native_panel")
+
+    for entry_id in candidate_ids:
+        entry = _retention_entry_by_id(entry_id)
+        surrogate = entry.get("runtime_surrogate", {})
+        if isinstance(surrogate, Mapping) and surrogate.get("type") == "ph_release_modifier":
+            return {
+                **dict(surrogate),
+                "source": _retention_source_label(entry),
+                "entry_id": str(entry.get("id", entry_id)),
+            }
+    return {}
+
+
 def describe_retention_runtime(
     compound_name: str,
     *,
@@ -84,31 +202,54 @@ def describe_retention_runtime(
     sources: List[str] = []
 
     if protein.startswith("pea") and normalized == "hexanal":
-        retention_mode = "direct_binding_anchor"
-        sources.append("JAFC 10.1021/acs.jafc.3c05991 direct PPI hexanal binding")
+        retention_mode = "direct_binding_plus_ph_release_reference"
+        sources.extend(
+            filter(
+                None,
+                [
+                    _retention_source_label(_retention_entry_by_id("jafc_3c05991_ppi_hexanal_binding")),
+                    _retention_source_label(_retention_entry_by_id("karolkowski_2021_ppi_hexanal_ph_release")),
+                ],
+            )
+        )
+    elif protein.startswith("pea") and normalized in {"2 pentylfuran", "2 pentyl furan"}:
+        retention_mode = "ph_release_reference"
+        sources.append(_retention_source_label(_retention_entry_by_id("karolkowski_2021_ppi_2_pentylfuran_native_panel")))
 
     if protein.startswith("soy") and normalized == "hexanal":
+        xu_hexanal = _retention_entry_by_id("xu_2023_spi_hexanal_temporal_profile")
+        xu_surrogate = xu_hexanal.get("runtime_surrogate", {}) if isinstance(xu_hexanal, Mapping) else {}
+        temperature_gate = float(xu_surrogate.get("temperature_gate_celsius", 90.0) or 90.0)
+        reference_minutes = float(xu_surrogate.get("reference_minutes", 8.0) or 8.0)
+        log_slope = float(xu_surrogate.get("log_slope", 0.18) or 0.18)
+        floor = float(xu_surrogate.get("floor", 0.62) or 0.62)
         release_factor = 1.0 + 0.55 * _sigmoid(temperature, 58.0, 10.0)
-        temporal_attenuation_factor = _log_floor_decay(duration, reference=8.0, slope=0.18, floor=0.62) if temperature >= 90.0 else 1.0
+        temporal_attenuation_factor = _log_floor_decay(duration, reference=reference_minutes, slope=log_slope, floor=floor) if temperature >= temperature_gate else 1.0
         dynamic_retention_factor = max(0.85, min(1.65, release_factor * temporal_attenuation_factor))
         retention_mode = "reversible_release_plus_temporal_attenuation"
         sources.extend([
-            "Ince 2024 reversible non-covalent soy hexanal binding",
-            "JAFC 10.1021/acs.jafc.3c05991 direct hexanal binding",
+            _retention_source_label(_retention_entry_by_id("ince_2024_glycinin_hexanal_binding")),
+            _retention_source_label(_retention_entry_by_id("jafc_3c05991_ppi_hexanal_binding")),
         ])
-        if temperature >= 90.0:
-            sources.append("Xu 2023 heated SPI temporal off-flavour attenuation prior")
+        if temperature >= temperature_gate:
+            sources.append(_retention_source_label(xu_hexanal))
     elif protein.startswith("soy") and normalized in {"2 pentylfuran", "2 pentyl furan"}:
-        temporal_attenuation_factor = _log_floor_decay(duration, reference=8.0, slope=0.24, floor=0.55) if temperature >= 90.0 else 1.0
+        xu_furan = _retention_entry_by_id("xu_2023_spi_2_pentylfuran_temporal_profile")
+        xu_surrogate = xu_furan.get("runtime_surrogate", {}) if isinstance(xu_furan, Mapping) else {}
+        temperature_gate = float(xu_surrogate.get("temperature_gate_celsius", 90.0) or 90.0)
+        reference_minutes = float(xu_surrogate.get("reference_minutes", 8.0) or 8.0)
+        log_slope = float(xu_surrogate.get("log_slope", 0.24) or 0.24)
+        floor = float(xu_surrogate.get("floor", 0.55) or 0.55)
+        temporal_attenuation_factor = _log_floor_decay(duration, reference=reference_minutes, slope=log_slope, floor=floor) if temperature >= temperature_gate else 1.0
         dynamic_retention_factor = temporal_attenuation_factor
         retention_mode = "temporal_attenuation"
         sources.extend([
-            "Xu 2023 heated SPI temporal off-flavour attenuation prior",
-            "Shu 2024 heated SPI 2-pentylfuran below-detection endpoint",
+            _retention_source_label(xu_furan),
+            _retention_source_label(_retention_entry_by_id("shu_2024_heated_spi_2_pentylfuran_censored")),
         ])
     elif protein.startswith("soy") and any(token in normalized for token in ["thiol", "sulfide", "sulfur", "methional", "thiazole", "thiophene"]):
         retention_mode = "sulfur_proxy_reference"
-        sources.append("Zhang 2026 SPI sulfur proxy retention prior")
+        sources.append(_retention_source_label(_retention_entry_by_id("zhang_2026_spi_lenthionine_retention")))
 
     if not sources and process_state == "heated_matrix" and protein.startswith("soy"):
         sources.append("heated soy process-state carryover")
@@ -158,6 +299,59 @@ def _reference_panel_value(payload_section: str, entry_id: str, panel_key: str) 
     return 0.0
 
 
+def _resolve_thiamine_availability(
+    thiamine_availability: Any,
+    *,
+    normalized_sugars: List[str],
+    normalized_amino: List[str],
+    normalized_additives: List[str],
+    protein_label: str,
+) -> Dict[str, Any]:
+    inferred_from_inputs = any(
+        "thiamine" in value or "vitamin b1" in value
+        for value in normalized_additives + normalized_amino + normalized_sugars
+    )
+
+    if isinstance(thiamine_availability, Mapping):
+        available = bool(thiamine_availability.get("available", False))
+        source = str(
+            thiamine_availability.get(
+                "source",
+                "explicit_formulation_metadata" if available else "explicitly_disabled",
+            )
+        )
+        explicit = True
+    elif isinstance(thiamine_availability, bool):
+        available = thiamine_availability
+        source = "explicit_formulation_metadata" if available else "explicitly_disabled"
+        explicit = True
+    elif isinstance(thiamine_availability, str) and thiamine_availability.strip():
+        normalized = thiamine_availability.strip().lower().replace("-", "_").replace(" ", "_")
+        positive_tokens = {"present", "available", "fortified", "explicit_additive", "pbma_fortified", "added_thiamine"}
+        negative_tokens = {"absent", "unavailable", "disabled", "native_matrix_default", "benchmark_native_default"}
+        available = normalized in positive_tokens
+        if normalized in negative_tokens:
+            available = False
+        source = normalized
+        explicit = True
+    else:
+        available = inferred_from_inputs
+        explicit = False
+        if inferred_from_inputs:
+            source = "ingredient_list_inference"
+        elif protein_label.startswith(("pea", "soy")):
+            source = "native_matrix_default_inactive"
+        else:
+            source = "no_thiamine_evidence"
+
+    return {
+        "available": bool(available),
+        "source": source,
+        "explicit": bool(explicit),
+        "inferred_from_inputs": bool(inferred_from_inputs),
+    }
+
+
 def build_flavor_axis_summary(
     *,
     projection_metadata: ProjectionMetadataMap,
@@ -167,6 +361,7 @@ def build_flavor_axis_summary(
     lipids: Optional[List[str]] = None,
     protein_type: Optional[str] = None,
     pH: Optional[float] = None,
+    thiamine_availability: Any = None,
 ) -> Dict[str, Any]:
     signal_map = _projection_rows_to_signal_map(projection_metadata)
     sugars = sugars or []
@@ -180,7 +375,9 @@ def build_flavor_axis_summary(
     sulfur_signal = max(mft_signal, fft_signal)
     methional_signal = _compound_signal(signal_map, ["Methional (3-(methylthio)propanal)", "methional"])
     two_methylbutanal_signal = _compound_signal(signal_map, ["2-Methylbutanal", "2-methylbutanal"])
+    three_methylbutanal_signal = _compound_signal(signal_map, ["3-Methylbutanal", "3-methylbutanal"])
     phenylacetaldehyde_signal = _compound_signal(signal_map, ["Phenylacetaldehyde", "phenylacetaldehyde"])
+    benzaldehyde_signal = _compound_signal(signal_map, ["Benzaldehyde", "benzaldehyde"])
 
     two_methylbutanal_target = _reference_panel_value(
         "strecker_reference_anchors",
@@ -192,16 +389,26 @@ def build_flavor_axis_summary(
         "hernandez_2023_methional_panel",
         "regular_ground_beef",
     ) or 4.66
+    three_methylbutanal_target = _reference_panel_value(
+        "strecker_reference_anchors",
+        "hernandez_2023_3_methylbutanal_panel",
+        "regular_ground_beef",
+    ) or 16.91
     phenylacetaldehyde_target = _reference_panel_value(
         "strecker_reference_anchors",
         "hernandez_2023_phenylacetaldehyde_panel",
         "regular_ground_beef",
     ) or 11.85
+    benzaldehyde_target = _reference_panel_value(
+        "strecker_reference_anchors",
+        "hernandez_2023_benzaldehyde_panel",
+        "regular_ground_beef",
+    ) or 23.65
 
     weighted_strecker = (
-        2.0 * min(two_methylbutanal_signal / max(two_methylbutanal_target, 1.0e-6), 1.5)
-        + 1.0 * min(methional_signal / max(methional_target, 1.0e-6), 1.5)
-        + 0.6 * min(phenylacetaldehyde_signal / max(phenylacetaldehyde_target, 1.0e-6), 1.5)
+        (2.0 * min(two_methylbutanal_signal / max(two_methylbutanal_target, 1.0e-6), 1.5) if _role_supports_runtime_scoring(get_flavor_reference_pipeline_role("hernandez_2023_2_methylbutanal_panel")) else 0.0)
+        + (1.0 * min(methional_signal / max(methional_target, 1.0e-6), 1.5) if _role_supports_runtime_scoring(get_flavor_reference_pipeline_role("hernandez_2023_methional_panel")) else 0.0)
+        + (0.6 * min(phenylacetaldehyde_signal / max(phenylacetaldehyde_target, 1.0e-6), 1.5) if _role_supports_runtime_scoring(get_flavor_reference_pipeline_role("hernandez_2023_phenylacetaldehyde_panel")) else 0.0)
     )
     strecker_balance_score = weighted_strecker / 3.6
     strecker_gap_penalty = 0.0
@@ -254,9 +461,27 @@ def build_flavor_axis_summary(
         for compound in ["HEMF", "DMHF"]
         if signal_map.get(_normalize_name(compound), 0.0) > 0.0
     ]
+    missing_furanones = [compound for compound in furanone_expected if compound not in furanone_observed]
+    furanone_support_score = 1.0
+    furanone_penalty = 0.0
+    if furanone_expected:
+        furanone_support_score = len(furanone_observed) / len(furanone_expected)
+        confidence_scale = {
+            "low": 0.35,
+            "medium": 0.60,
+            "high": 0.90,
+        }.get(str(furanone_priors.get("confidence_tier", "low")).lower(), 0.35)
+        furanone_penalty = (1.0 - furanone_support_score) * confidence_scale
 
     thiamine_priors = get_thiamine_priors()
-    thiamine_active = any("thiamine" in value for value in normalized_additives + normalized_amino + normalized_sugars)
+    thiamine_metadata = _resolve_thiamine_availability(
+        thiamine_availability,
+        normalized_sugars=normalized_sugars,
+        normalized_amino=normalized_amino,
+        normalized_additives=normalized_additives,
+        protein_label=protein_label,
+    )
+    thiamine_active = bool(thiamine_metadata["available"])
     thiamine_fraction_estimate = 0.0
     thiamine_mode = "inactive"
     if thiamine_active:
@@ -267,16 +492,35 @@ def build_flavor_axis_summary(
             thiamine_fraction_estimate = float(thiamine_priors.get("thiamine_only_fraction", 1.0) or 1.0)
             thiamine_mode = "thiamine_only"
 
+    strecker_crosstalk_priors = get_strecker_crosstalk_priors()
+    polyphenol_tokens = [
+        str(token).strip().lower()
+        for token in strecker_crosstalk_priors.get("polyphenol_examples", [])
+        if str(token).strip()
+    ] or ["catechin", "tannic acid", "green tea extract", "grape seed extract", "polyphenol"]
+    required_sugars = [
+        str(token).strip().lower()
+        for token in strecker_crosstalk_priors.get("required_sugars", [])
+        if str(token).strip()
+    ] or ["glucose"]
     polyphenol_active = any(
         token in value
         for value in normalized_additives
-        for token in ["catechin", "tannic", "green tea", "grape seed", "polyphenol"]
+        for token in polyphenol_tokens
+    )
+    crosstalk_active = bool(
+        polyphenol_active
+        and lipids
+        and any(any(required in sugar for required in required_sugars) for sugar in normalized_sugars)
     )
     lincoln_crosstalk_prior = {
-        "active": bool(polyphenol_active and lipids and any("glucose" in sugar for sugar in normalized_sugars)),
+        "active": crosstalk_active,
+        "source": str(strecker_crosstalk_priors.get("source", "Lincoln et al. (2025), Sustainable Food Proteins")),
+        "confidence_tier": str(strecker_crosstalk_priors.get("confidence_tier", "medium_low")),
+        "effect_direction": str(strecker_crosstalk_priors.get("effect_direction", "suppress_strecker_and_moderate_oxidative_crosstalk")),
         "summary": (
-            "Lincoln 2025 qualitative prior active: glucose plus lipids plus polyphenols can suppress Strecker aldehydes via dicarbonyl competition."
-            if polyphenol_active and lipids and any("glucose" in sugar for sugar in normalized_sugars)
+            str(strecker_crosstalk_priors.get("summary", "Glucose plus lipid plus polyphenol systems can suppress Strecker aldehydes through alpha-dicarbonyl competition."))
+            if crosstalk_active
             else "Lincoln 2025 qualitative prior inactive for this formulation context."
         ),
     }
@@ -287,8 +531,18 @@ def build_flavor_axis_summary(
         "strecker_signals_ppb": {
             "methional": float(methional_signal),
             "2_methylbutanal": float(two_methylbutanal_signal),
+            "3_methylbutanal": float(three_methylbutanal_signal),
             "phenylacetaldehyde": float(phenylacetaldehyde_signal),
+            "benzaldehyde": float(benzaldehyde_signal),
         },
+        "strecker_reference_targets_ppb": {
+            "methional": float(methional_target),
+            "2_methylbutanal": float(two_methylbutanal_target),
+            "3_methylbutanal": float(three_methylbutanal_target),
+            "phenylacetaldehyde": float(phenylacetaldehyde_target),
+            "benzaldehyde": float(benzaldehyde_target),
+        },
+        "flavor_reference_policy": build_flavor_reference_policy_summary(),
         "pyrazine_signal_ppb": float(pyrazine_signal),
         "pyrazine_propensity": float(pyrazine_propensity),
         "pyrazine_burden": float(pyrazine_burden),
@@ -300,8 +554,14 @@ def build_flavor_axis_summary(
         },
         "furanone_expected": furanone_expected,
         "furanone_observed": furanone_observed,
+        "furanone_support_score": float(furanone_support_score),
+        "furanone_penalty": float(furanone_penalty),
+        "furanone_missing": missing_furanones,
         "furanone_confidence": str(furanone_priors.get("confidence_tier", "low")),
         "thiamine_pathway_active": bool(thiamine_active),
+        "thiamine_availability_source": str(thiamine_metadata["source"]),
+        "thiamine_availability_explicit": bool(thiamine_metadata["explicit"]),
+        "thiamine_inferred_from_inputs": bool(thiamine_metadata["inferred_from_inputs"]),
         "thiamine_mft_fraction_estimate": float(thiamine_fraction_estimate),
         "thiamine_provenance_mode": thiamine_mode,
         "lincoln_crosstalk_prior": lincoln_crosstalk_prior,

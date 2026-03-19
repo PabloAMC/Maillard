@@ -12,7 +12,8 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src.benchmark_validation import build_matrix_promotion_family_status, render_matrix_promotion_family_status_markdown
+from src.benchmark_validation import build_matrix_promotion_family_status
+from src.presentation import render_matrix_promotion_family_status_markdown
 
 
 def main() -> int:

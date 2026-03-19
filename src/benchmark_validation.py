@@ -547,6 +547,8 @@ def _run_matrix_only_benchmark_prediction(bench: dict) -> dict:
     pH = conditions.get("ph")
 
     predicted_ppb: Dict[str, float] = {}
+    predicted_proxy_ppb: Dict[str, float] = {}
+    projection_metadata: Dict[str, Dict[str, Any]] = {}
     for compound, yield_factor in MATRIX_BENCHMARK_BASE_MARKER_YIELDS.items():
         headspace_factor = headspace_model.get_matrix_benchmark_headspace_factor(
             compound,
@@ -555,7 +557,29 @@ def _run_matrix_only_benchmark_prediction(bench: dict) -> dict:
             temperature_celsius=float(conditions["temp_C"]),
             time_minutes=float(conditions["time_min"]),
         )
-        predicted_ppb[compound] = oxidation_load_ppb * float(yield_factor) * headspace_factor
+        calibration = describe_matrix_calibration(
+            compound,
+            protein_type=protein_type,
+            process_state=process_state,
+        )
+        calibration_factor = float(calibration.get("calibration_observable_factor") or 1.0)
+        release_factor = headspace_factor / calibration_factor if calibration_factor > 0.0 else headspace_factor
+        proxy_ppb = oxidation_load_ppb * float(yield_factor) * release_factor
+        observable_ppb = proxy_ppb * calibration_factor
+        predicted_proxy_ppb[compound] = proxy_ppb
+        predicted_ppb[compound] = observable_ppb
+        projection_metadata[compound] = make_projection_metadata_row(
+            compound=compound,
+            proxy_ppb=proxy_ppb,
+            observable_ppb=observable_ppb,
+            extras={
+                "matrix_factor": 1.0,
+                "headspace_factor": release_factor,
+                "total_observable_factor": headspace_factor,
+                "process_state": process_state,
+                **calibration,
+            },
+        )
 
     return {
         "targets": [],
@@ -564,31 +588,8 @@ def _run_matrix_only_benchmark_prediction(bench: dict) -> dict:
             "oxidation_load_ppb": oxidation_load_ppb,
         },
         "predicted_ppb": predicted_ppb,
-        "predicted_proxy_ppb": dict(predicted_ppb),
-        "projection_metadata": {
-            compound: make_projection_metadata_row(
-                compound=compound,
-                proxy_ppb=value,
-                observable_ppb=value,
-                extras={
-                    "matrix_factor": 1.0,
-                    "headspace_factor": headspace_model.get_matrix_benchmark_headspace_factor(
-                        compound,
-                        protein_type=protein_type,
-                        pH=pH,
-                        temperature_celsius=float(conditions["temp_C"]),
-                        time_minutes=float(conditions["time_min"]),
-                    ),
-                    "process_state": process_state,
-                    **describe_matrix_calibration(
-                        compound,
-                        protein_type=protein_type,
-                        process_state=process_state,
-                    ),
-                },
-            )
-            for compound, value in predicted_ppb.items()
-        },
+        "predicted_proxy_ppb": predicted_proxy_ppb,
+        "projection_metadata": projection_metadata,
         "debug_paths": {},
         "species_names": {compound: compound for compound in predicted_ppb},
     }

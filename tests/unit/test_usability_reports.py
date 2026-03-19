@@ -107,6 +107,48 @@ def test_projection_metadata_normalizer_fills_schema_defaults_for_sparse_rows():
     assert row["proxy_to_observable_ratio"] == 0.4
 
 
+def test_build_projection_rows_resolves_target_projection_when_metadata_key_is_canonical():
+    result = FormulationResult(
+        name="canonical-key probe",
+        target_score=1.0,
+        off_flavour_risk=0.0,
+        targets=[
+            {
+                "name": "2-Methyl-3-furanthiol (MFT)",
+                "concentration": 18.0,
+                "projection": {
+                    "compound": "2-Methyl-3-furanthiol (MFT)",
+                    "proxy_ppb": 30.0,
+                    "observable_ppb": 18.0,
+                    "proxy_to_observable_ratio": 0.6,
+                    "matrix_factor": 0.75,
+                    "headspace_factor": 0.8,
+                    "process_state": "heated_matrix",
+                    "retention_runtime_mode": "dynamic_release",
+                    "calibration_source": "compound_specific",
+                    "calibration_evidence_strength": "literature_anchored",
+                    "calibration_fallback_mode": "compound_specific",
+                },
+            }
+        ],
+        projection_metadata={
+            "c1oc(cc1)CS": {
+                "compound": "2-Methyl-3-furanthiol (MFT)",
+                "proxy_ppb": 30.0,
+                "observable_ppb": 18.0,
+            }
+        },
+    )
+
+    rows = build_projection_rows(result)
+
+    assert len(rows) == 1
+    assert rows[0]["compound"] == "2-Methyl-3-furanthiol (MFT)"
+    assert rows[0]["observable_ppb"] == 18.0
+    assert rows[0]["observable_ratio"] == 0.6
+    assert rows[0]["retention_runtime_mode"] == "dynamic_release"
+
+
 def test_validated_envelope_report_mentions_strict_ready_and_matrix_scope():
     report = build_validated_envelope_report(target_tag="meaty")
     markdown = render_validated_envelope_markdown(report)
@@ -222,7 +264,12 @@ def test_generate_report_includes_confidence_metadata(tmp_path: Path):
         projection_metadata={
             "furfural": {
                 "compound": "furfural",
+                "proxy_ppb": 18.0,
                 "observable_ppb": 12.0,
+                "proxy_to_observable_ratio": 0.67,
+                "matrix_factor": 0.85,
+                "headspace_factor": 0.7,
+                "melanoidin_trapping_factor": 1.0,
                 "process_state": "ambient_slurry",
                 "retention_runtime_mode": "static_class_profile",
                 "calibration_source": "Pratap-Singh 2021 soy-vs-pea ambient slurry release ratio",
@@ -243,6 +290,7 @@ def test_generate_report_includes_confidence_metadata(tmp_path: Path):
             "pyrazine_burden": 14.0,
             "pyrazine_penalty": 0.2,
             "thiamine_pathway_active": False,
+            "thiamine_availability_source": "native_matrix_default_inactive",
             "thiamine_provenance_mode": "inactive",
             "lincoln_crosstalk_prior": {"summary": "inactive"},
         },
@@ -259,9 +307,21 @@ def test_generate_report_includes_confidence_metadata(tmp_path: Path):
     assert "Compound Confidence" in markdown_text
     assert "Aggregate Sensory Confidence" in markdown_text
     assert "Sensitivity Summary" in markdown_text
+    assert "Benchmark Neighborhood" in markdown_text
+    assert "Calibration Summary" in markdown_text
+    assert "Compound Evidence Ladder" in markdown_text
+    assert "Missing Data" in markdown_text
+    assert "Safety Reference Context" in markdown_text
+    assert "Flavor Reference Policy" in markdown_text
     assert "Projection Calibration" in markdown_text
     assert "Flavor Axis Diagnostics" in markdown_text
     assert "projection_metadata" in json_text
+    assert "compound_evidence_ladder" in json_text
+    assert "calibration_summary" in json_text
+    assert "missing_data_summary" in json_text
+    assert "benchmark_neighborhood_summary" in json_text
+    assert "safety_reference_summary" in json_text
+    assert "flavor_reference_policy" in json_text
     assert '"provenance"' in json_text
     assert "## 5. Provenance" in markdown_text
 
@@ -278,7 +338,19 @@ def test_generate_comparison_report_includes_provenance(tmp_path: Path):
         strecker_gap_penalty=0.8,
         pyrazine_burden=35.0,
         pyrazine_penalty=0.7,
-        flavor_axis_summary={"thiamine_pathway_active": False, "furanone_expected": ["HEMF"]},
+        projection_metadata={
+            "mft": {
+                "compound": "2-Methyl-3-furanthiol (MFT)",
+                "observable_ppb": 8.0,
+                "melanoidin_trapping_factor": 0.52,
+                "volatile_class": "sulfur",
+                "calibration_source": "Pratap-Singh 2021 soy-vs-pea ambient slurry release ratio",
+                "calibration_evidence_strength": "literature_anchored",
+                "calibration_fallback_mode": "compound_specific",
+            }
+        },
+        confidence_metadata={"benchmark_neighborhood": "matrix_intake_only", "prediction_mode": "directional_only"},
+        flavor_axis_summary={"thiamine_pathway_active": False, "thiamine_availability_source": "native_matrix_default_inactive", "furanone_expected": ["HEMF"]},
     )
     second = FormulationResult(
         name="B",
@@ -291,7 +363,19 @@ def test_generate_comparison_report_includes_provenance(tmp_path: Path):
         strecker_gap_penalty=0.0,
         pyrazine_burden=8.0,
         pyrazine_penalty=0.0,
-        flavor_axis_summary={"thiamine_pathway_active": True, "furanone_expected": ["HEMF", "DMHF"]},
+        projection_metadata={
+            "fft": {
+                "compound": "2-Furfurylthiol (FFT)",
+                "observable_ppb": 11.0,
+                "melanoidin_trapping_factor": 0.91,
+                "volatile_class": "sulfur",
+                "calibration_source": "class_fallback",
+                "calibration_evidence_strength": "heuristic",
+                "calibration_fallback_mode": "class_level",
+            }
+        },
+        confidence_metadata={"benchmark_neighborhood": "free_precursor_partial_analogy", "prediction_mode": "ranking_supported"},
+        flavor_axis_summary={"thiamine_pathway_active": True, "thiamine_availability_source": "pbma_fortified", "furanone_expected": ["HEMF", "DMHF"], "furanone_missing": ["DMHF"]},
     )
 
     out_dir = generate_comparison_report(
@@ -308,8 +392,16 @@ def test_generate_comparison_report_includes_provenance(tmp_path: Path):
     assert '"mft_to_furfural_ratio"' in json_text
     assert '"strecker_balance_score"' in json_text
     assert '"pyrazine_burden"' in json_text
+    assert '"sulfur_trapping_summary"' in json_text
+    assert '"benchmark_neighborhood_summary"' in json_text
+    assert '"safety_reference_summary"' in json_text
+    assert '"flavor_reference_policy"' in json_text
     assert "Cross-Marker Context" in markdown_text
+    assert "Calibration Contrast" in markdown_text
     assert "MFT/Furfural Ratio" in markdown_text
+    assert "Sulfur Trapping" in markdown_text
+    assert "Strecker Support" in markdown_text
+    assert "Benchmark Neighborhood" in markdown_text
     assert "## 5. Provenance" in markdown_text
 
 

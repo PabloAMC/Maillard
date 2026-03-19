@@ -13,12 +13,15 @@ import platform
 import shlex
 import subprocess
 import sys
+from collections import defaultdict
 from contextlib import redirect_stdout
 from pathlib import Path
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Iterable
 
 from src.pipeline import FormulationResult
-from src.projection_metadata import ProjectionMetadataMap
+from src.projection_metadata import ProjectionMetadataMap, normalize_projection_metadata_row
+from src.safety import build_safety_reference_context
+from src.literature_runtime import build_flavor_reference_policy_summary
 from src.usability_reports import DomainWarning
 from src.projection_utils import build_projection_rows, build_artifact_provenance
 from src.presentation import (
@@ -29,6 +32,228 @@ from src.presentation import (
 )
 
 SCHEMA_VERSION = "2026-03-18"
+
+
+def _sorted_projection_metadata(result: FormulationResult) -> List[Dict[str, Any]]:
+    rows: List[Dict[str, Any]] = []
+    for raw_row in (result.projection_metadata or {}).values():
+        normalized = normalize_projection_metadata_row(
+            raw_row,
+            compound_fallback=str(raw_row.get("compound", "unknown")),
+            observable_ppb_fallback=float(raw_row.get("observable_ppb", 0.0) or 0.0),
+        )
+        rows.append(dict(normalized))
+    rows.sort(key=lambda row: float(row.get("observable_ppb", 0.0) or 0.0), reverse=True)
+    return rows
+
+
+def _evidence_ladder_flags(meta: Dict[str, Any]) -> Dict[str, bool]:
+    source = str(meta.get("calibration_source", "")).lower()
+    strength = str(meta.get("calibration_evidence_strength", "")).lower()
+    fallback = str(meta.get("calibration_fallback_mode", "")).lower()
+    notes_blob = " ".join(
+        [
+            source,
+            str(meta.get("calibration_notes", "")).lower(),
+            str(meta.get("retention_runtime_mode", "")).lower(),
+        ]
+    )
+
+    direct_anchor = strength == "literature_anchored" and fallback == "compound_specific"
+    transferred_prior = (
+        strength in {"conditional_literature_anchored", "process_state_mismatch"}
+        or fallback in {"nearest_process_state", "compound_specific_process_state"}
+        or "transfer" in source
+        or "carryover" in source
+        or "ratio" in source
+    )
+    computational_refinement = any(token in notes_blob for token in ["dft", "xtb", "qm", "semiempirical", "computational", "refinement"])
+    mechanistic_surrogate = (
+        not direct_anchor and not transferred_prior and not computational_refinement
+    ) or strength == "heuristic" or float(meta.get("melanoidin_trapping_factor", 1.0) or 1.0) < 1.0
+
+    return {
+        "direct_anchor": bool(direct_anchor),
+        "transferred_prior": bool(transferred_prior),
+        "mechanistic_surrogate": bool(mechanistic_surrogate),
+        "computational_refinement": bool(computational_refinement),
+    }
+
+
+def _build_compound_evidence_ladder(result: FormulationResult, *, top_n: int = 8) -> List[Dict[str, Any]]:
+    ladder_rows: List[Dict[str, Any]] = []
+    for meta in _sorted_projection_metadata(result)[:top_n]:
+        flags = _evidence_ladder_flags(meta)
+        ladder_rows.append(
+            {
+                "compound": str(meta.get("compound", "unknown")),
+                "observable_ppb": float(meta.get("observable_ppb", 0.0) or 0.0),
+                "direct_anchor": flags["direct_anchor"],
+                "transferred_prior": flags["transferred_prior"],
+                "mechanistic_surrogate": flags["mechanistic_surrogate"],
+                "computational_refinement": flags["computational_refinement"],
+                "calibration_source": str(meta.get("calibration_source", "class_fallback")),
+                "calibration_evidence_strength": str(meta.get("calibration_evidence_strength", "heuristic")),
+                "calibration_fallback_mode": str(meta.get("calibration_fallback_mode", "class_level")),
+            }
+        )
+    return ladder_rows
+
+
+def _build_calibration_summary(result: FormulationResult, *, top_n: int = 5) -> List[Dict[str, Any]]:
+    grouped: Dict[str, Dict[str, Any]] = {}
+    for meta in _sorted_projection_metadata(result):
+        source = str(meta.get("calibration_source", "class_fallback"))
+        if not source:
+            continue
+        bucket = grouped.setdefault(
+            source,
+            {
+                "source": source,
+                "compounds": [],
+                "observable_ppb_total": 0.0,
+                "evidence_strength": str(meta.get("calibration_evidence_strength", "heuristic")),
+                "fallback_mode": str(meta.get("calibration_fallback_mode", "class_level")),
+            },
+        )
+        compound = str(meta.get("compound", "unknown"))
+        if compound not in bucket["compounds"]:
+            bucket["compounds"].append(compound)
+        bucket["observable_ppb_total"] += float(meta.get("observable_ppb", 0.0) or 0.0)
+
+    rows = sorted(grouped.values(), key=lambda row: float(row["observable_ppb_total"]), reverse=True)
+    return rows[:top_n]
+
+
+def _flatten_condition_values(value: Any) -> Iterable[str]:
+    if isinstance(value, dict):
+        for nested in value.values():
+            yield from _flatten_condition_values(nested)
+        return
+    if isinstance(value, (list, tuple, set)):
+        for nested in value:
+            yield from _flatten_condition_values(nested)
+        return
+    if value is None:
+        return
+    yield str(value)
+
+
+def _build_benchmark_neighborhood_summary(
+    result: FormulationResult,
+    conditions_dict: Optional[Dict[str, Any]] = None,
+) -> Dict[str, Any]:
+    confidence = result.confidence_metadata or {}
+    neighborhood = str(confidence.get("benchmark_neighborhood", "unknown"))
+    prediction_mode = str(confidence.get("prediction_mode", "unknown"))
+    condition_tokens = " ".join(
+        token.lower() for token in _flatten_condition_values(conditions_dict or {})
+    )
+    hydrolysate_proxy = any(token in condition_tokens for token in ["hydrolysate", "peptide", "glutathione"])
+
+    if hydrolysate_proxy:
+        category = "hydrolysate_proxy"
+        summary = "Run depends on hydrolysate/peptide-like inputs that sit outside the primary free-precursor benchmark surface."
+    elif neighborhood in {"primary_free_precursor", "free_precursor_partial_analogy"}:
+        category = "free_system_anchor"
+        summary = "Run is anchored primarily by the free-system benchmark family, with varying degrees of analogy completeness."
+    elif neighborhood == "matrix_intake_only":
+        category = "matrix_transfer"
+        summary = "Run uses matrix intake/headspace support and transferred accessibility priors rather than direct ranking benchmarks."
+    else:
+        category = "structural_gap"
+        summary = "Run still sits beyond the strongest benchmark neighborhood and should be treated as a structural-gap extrapolation."
+
+    return {
+        "benchmark_neighborhood": neighborhood,
+        "category": category,
+        "prediction_mode": prediction_mode,
+        "summary": summary,
+    }
+
+
+def _build_missing_data_summary(result: FormulationResult) -> Dict[str, Any]:
+    items: List[str] = []
+    hypothesis_only: List[str] = []
+    structurally_unsupported: List[str] = []
+
+    for meta in _sorted_projection_metadata(result)[:8]:
+        compound = str(meta.get("compound", "unknown"))
+        source = str(meta.get("calibration_source", "class_fallback"))
+        strength = str(meta.get("calibration_evidence_strength", "heuristic"))
+        if source == "class_fallback" or strength == "heuristic":
+            structurally_unsupported.append(compound)
+            items.append(f"{compound}: still relies on class-level fallback or heuristic calibration.")
+        elif str(meta.get("calibration_fallback_mode", "")) == "nearest_process_state":
+            hypothesis_only.append(compound)
+            items.append(f"{compound}: uses nearest-process-state transfer rather than a direct benchmark-condition anchor.")
+
+    for compound in result.flavor_axis_summary.get("furanone_missing", []) or []:
+        hypothesis_only.append(str(compound))
+        items.append(f"{compound}: mechanistically expected but still unobserved in the current prediction surface.")
+
+    benchmark_neighborhood = str((result.confidence_metadata or {}).get("benchmark_neighborhood", "unknown"))
+    if benchmark_neighborhood in {"matrix_intake_only", "exploratory_matrix", "sparse_precursor_analogy"}:
+        items.append(
+            "Benchmark neighborhood remains extrapolative relative to the primary free-precursor validation envelope."
+        )
+
+    deduped_items = list(dict.fromkeys(items))[:8]
+    return {
+        "items": deduped_items,
+        "hypothesis_only_compounds": list(dict.fromkeys(hypothesis_only)),
+        "structurally_unsupported_compounds": list(dict.fromkeys(structurally_unsupported)),
+    }
+
+
+def _strecker_support_marker(result: FormulationResult) -> str:
+    score = float(result.strecker_balance_score)
+    if score >= 0.75:
+        return "strong"
+    if score >= 0.4:
+        return "moderate"
+    return "weak"
+
+
+def _sulfur_trapping_summary(result: FormulationResult) -> Dict[str, Any]:
+    sulfur_rows = []
+    for meta in _sorted_projection_metadata(result):
+        volatile_class = str(meta.get("volatile_class", "")).lower()
+        compound = str(meta.get("compound", "")).lower()
+        if volatile_class == "sulfur" or any(token in compound for token in ["thiol", "sulfide", "sulfur", "methional", "thiazole", "thiophene"]):
+            sulfur_rows.append(meta)
+
+    if not sulfur_rows:
+        return {
+            "status": "not_applicable",
+            "avg_trapping_factor": 1.0,
+            "summary": "No sulfur-focused observable rows were present in this run.",
+        }
+
+    avg_trapping = sum(float(row.get("melanoidin_trapping_factor", 1.0) or 1.0) for row in sulfur_rows) / len(sulfur_rows)
+    if avg_trapping < 0.55:
+        status = "severe"
+    elif avg_trapping < 0.85:
+        status = "moderate"
+    else:
+        status = "mild"
+    return {
+        "status": status,
+        "avg_trapping_factor": float(avg_trapping),
+        "summary": f"Average sulfur trapping factor is {avg_trapping:.2f} across {len(sulfur_rows)} sulfur-linked observable rows.",
+    }
+
+
+def _build_safety_reference_summary(result: FormulationResult) -> Dict[str, Any]:
+    analyte = "acrylamide" if "Acrylamide" in (result.flagged_toxics or []) or float(result.safety_score) > 0.0 else "acrylamide"
+    return build_safety_reference_context(analyte=analyte)
+
+
+def _build_flavor_reference_policy(result: FormulationResult) -> List[Dict[str, Any]]:
+    policy_rows = result.flavor_axis_summary.get("flavor_reference_policy") if getattr(result, "flavor_axis_summary", None) else None
+    if isinstance(policy_rows, list) and policy_rows:
+        return [dict(row) for row in policy_rows]
+    return build_flavor_reference_policy_summary()
 
 
 def _repo_root() -> Path:
@@ -103,6 +328,12 @@ def generate_report(
         inputs=conditions_dict,
         campaign_metadata=campaign_metadata,
     )
+    compound_evidence_ladder = _build_compound_evidence_ladder(result)
+    calibration_summary = _build_calibration_summary(result)
+    missing_data_summary = _build_missing_data_summary(result)
+    benchmark_neighborhood_summary = _build_benchmark_neighborhood_summary(result, conditions_dict)
+    safety_reference_summary = _build_safety_reference_summary(result)
+    flavor_reference_policy = _build_flavor_reference_policy(result)
     
     # 1. Save JSON Report
     json_path = output_dir / "report.json"
@@ -125,10 +356,17 @@ def generate_report(
             "pyrazine_propensity": float(result.pyrazine_propensity),
             "pyrazine_burden": float(result.pyrazine_burden),
             "pyrazine_penalty": float(result.pyrazine_penalty),
+            "furanone_penalty": float(result.furanone_penalty),
             "flagged_toxics": result.flagged_toxics,
             "radar": {k: float(v[0]) for k, v in result.radar.items()},
             "matrix_explainability": result.matrix_explainability,
             "confidence_metadata": result.confidence_metadata,
+            "compound_evidence_ladder": compound_evidence_ladder,
+            "calibration_summary": calibration_summary,
+            "missing_data_summary": missing_data_summary,
+            "benchmark_neighborhood_summary": benchmark_neighborhood_summary,
+            "safety_reference_summary": safety_reference_summary,
+            "flavor_reference_policy": flavor_reference_policy,
             "projection_metadata": dict(result.projection_metadata),
             "flavor_axis_summary": result.flavor_axis_summary,
             "predicted_ppb": {k: float(v) for k, v in result.predicted_ppb.items()},
@@ -174,7 +412,8 @@ def generate_report(
         f.write(f"- **Strecker Gap Penalty:** {result.strecker_gap_penalty:.2f}\n")
         f.write(f"- **Pyrazine Propensity:** {result.pyrazine_propensity:.2f}\n")
         f.write(f"- **Pyrazine Burden:** {result.pyrazine_burden:.2f}\n")
-        f.write(f"- **Pyrazine Penalty:** {result.pyrazine_penalty:.2f}\n\n")
+        f.write(f"- **Pyrazine Penalty:** {result.pyrazine_penalty:.2f}\n")
+        f.write(f"- **Furanone Penalty:** {result.furanone_penalty:.2f}\n\n")
 
         if result.confidence_metadata:
             f.write("### Confidence & Support\n")
@@ -195,6 +434,22 @@ def generate_report(
                 axes = calibration.get("extrapolation_axes", [])
                 if axes:
                     f.write(f"- **extrapolation_axes:** {', '.join(str(axis) for axis in axes)}\n")
+                f.write("\n")
+
+            f.write("### Benchmark Neighborhood\n")
+            f.write(f"- **benchmark_neighborhood:** {benchmark_neighborhood_summary.get('benchmark_neighborhood', 'unknown')}\n")
+            f.write(f"- **category:** {benchmark_neighborhood_summary.get('category', 'unknown')}\n")
+            f.write(f"- **prediction_mode:** {benchmark_neighborhood_summary.get('prediction_mode', 'unknown')}\n")
+            f.write(f"- **summary:** {benchmark_neighborhood_summary.get('summary', '')}\n\n")
+
+            if calibration_summary:
+                f.write("### Calibration Summary\n")
+                f.write("| Source | Evidence | Fallback | Compounds | Observable ppb |\n")
+                f.write("| :--- | :--- | :--- | :--- | ---: |\n")
+                for row in calibration_summary:
+                    f.write(
+                        f"| {row.get('source', 'unknown')} | {row.get('evidence_strength', 'unknown')} | {row.get('fallback_mode', 'unknown')} | {', '.join(str(item) for item in row.get('compounds', []))} | {float(row.get('observable_ppb_total', 0.0)):.2f} |\n"
+                    )
                 f.write("\n")
 
             compound_rows = result.confidence_metadata.get("compound_confidence", [])
@@ -219,6 +474,50 @@ def generate_report(
                     )
                 f.write("\n")
 
+        if compound_evidence_ladder:
+            f.write("### Compound Evidence Ladder\n")
+            f.write("| Compound | Direct Anchor | Transferred Prior | Mechanistic Surrogate | Computational Refinement | Source |\n")
+            f.write("| :--- | :---: | :---: | :---: | :---: | :--- |\n")
+            for row in compound_evidence_ladder:
+                f.write(
+                    f"| {row.get('compound', 'unknown')} | {'yes' if row.get('direct_anchor') else '-'} | {'yes' if row.get('transferred_prior') else '-'} | {'yes' if row.get('mechanistic_surrogate') else '-'} | {'yes' if row.get('computational_refinement') else '-'} | {row.get('calibration_source', 'unknown')} |\n"
+                )
+            f.write("\n")
+
+        f.write("### Missing Data\n")
+        missing_items = missing_data_summary.get("items", [])
+        if missing_items:
+            for item in missing_items:
+                f.write(f"- {item}\n")
+        else:
+            f.write("- No high-priority missing-data flags were triggered for the top reported compounds.\n")
+        f.write("\n")
+
+        safety_defaults = safety_reference_summary.get("default_entries", [])
+        if safety_defaults:
+            f.write("### Safety Reference Context\n")
+            f.write("| Visibility | Kind | Source | Summary |\n")
+            f.write("| :--- | :--- | :--- | :--- |\n")
+            for row in safety_defaults:
+                f.write(
+                    f"| {row.get('report_visibility', 'default')} | {row.get('kind', 'unknown')} | {row.get('source_citation', 'unknown')} | {row.get('summary', '')} |\n"
+                )
+            extended_count = len(safety_reference_summary.get("extended_entries", []))
+            if extended_count:
+                f.write(f"\n- Extended safety provenance entries available in JSON: {extended_count}\n")
+            f.write("\n")
+
+        if flavor_reference_policy:
+            f.write("### Flavor Reference Policy\n")
+            f.write("| Compound | Pipeline Role | Benchmark Role | Source |\n")
+            f.write("| :--- | :--- | :--- | :--- |\n")
+            for row in flavor_reference_policy:
+                f.write(
+                    f"| {row.get('compound', 'unknown')} | {row.get('pipeline_role', 'reference_only')} | {row.get('benchmark_role', 'unknown')} | {row.get('source_citation', 'unknown')} |\n"
+                )
+            f.write("\n")
+
+        if result.confidence_metadata:
             sensitivity = result.confidence_metadata.get("sensitivity_summary", {})
             if sensitivity:
                 f.write("### Sensitivity Summary\n")
@@ -293,6 +592,13 @@ def generate_comparison_report(
     }
     
     for res, cond in zip(results, conditions_list):
+        compound_evidence_ladder = _build_compound_evidence_ladder(res)
+        calibration_summary = _build_calibration_summary(res)
+        missing_data_summary = _build_missing_data_summary(res)
+        benchmark_neighborhood_summary = _build_benchmark_neighborhood_summary(res, cond)
+        sulfur_trapping_summary = _sulfur_trapping_summary(res)
+        safety_reference_summary = _build_safety_reference_summary(res)
+        flavor_reference_policy = _build_flavor_reference_policy(res)
         comparison_data["runs"].append({
             "name": res.name,
             "inputs": cond,
@@ -309,11 +615,20 @@ def generate_comparison_report(
                 "pyrazine_propensity": float(res.pyrazine_propensity),
                 "pyrazine_burden": float(res.pyrazine_burden),
                 "pyrazine_penalty": float(res.pyrazine_penalty),
+                "furanone_penalty": float(res.furanone_penalty),
                 "confidence_tier": res.confidence_metadata.get("tier", "unknown"),
                 "confidence_score": float(res.confidence_metadata.get("score", 0.0)),
                 "benchmark_neighborhood": res.confidence_metadata.get("benchmark_neighborhood", "unknown"),
                 "prediction_mode": res.confidence_metadata.get("prediction_mode", "unknown"),
+                "strecker_support_marker": _strecker_support_marker(res),
             },
+            "compound_evidence_ladder": compound_evidence_ladder,
+            "calibration_summary": calibration_summary,
+            "missing_data_summary": missing_data_summary,
+            "benchmark_neighborhood_summary": benchmark_neighborhood_summary,
+            "sulfur_trapping_summary": sulfur_trapping_summary,
+            "safety_reference_summary": safety_reference_summary,
+            "flavor_reference_policy": flavor_reference_policy,
             "flavor_axis_summary": res.flavor_axis_summary,
         })
     
@@ -341,6 +656,7 @@ def generate_comparison_report(
         f.write("| **Strecker Penalty** | " + " | ".join([f"{res.strecker_gap_penalty:.2f}" for res in results]) + " |\n")
         f.write("| **Pyrazine Burden** | " + " | ".join([f"{res.pyrazine_burden:.2f}" for res in results]) + " |\n")
         f.write("| **Pyrazine Penalty** | " + " | ".join([f"{res.pyrazine_penalty:.2f}" for res in results]) + " |\n")
+        f.write("| **Furanone Penalty** | " + " | ".join([f"{res.furanone_penalty:.2f}" for res in results]) + " |\n")
         f.write("| **Confidence** | " + " | ".join([f"{res.confidence_metadata.get('tier', 'unknown')} ({float(res.confidence_metadata.get('score', 0.0)):.0f})" for res in results]) + " |\n")
         f.write("| **Prediction Mode** | " + " | ".join([str(res.confidence_metadata.get('prediction_mode', 'unknown')) for res in results]) + " |\n")
         f.write("\n")
@@ -355,12 +671,30 @@ def generate_comparison_report(
         f.write(f"- 🍃 **Lowest Off-Flavour Risk:** {best_risk.name} ({best_risk.off_flavour_risk:.2f})\n\n")
 
         f.write("## 3. Cross-Marker Context\n")
-        f.write("| Formulation | Strecker Balance | Pyrazine Burden | Thiamine Pathway | Expected Furanones |\n")
-        f.write("| :--- | ---: | ---: | :---: | :--- |\n")
+        f.write("| Formulation | Strecker Balance | Strecker Support | Pyrazine Burden | Sulfur Trapping | Furanone Penalty | Benchmark Neighborhood | Thiamine Pathway | Thiamine Source | Expected Furanones | Missing Furanones |\n")
+        f.write("| :--- | ---: | :---: | ---: | :--- | ---: | :--- | :---: | :--- | :--- | :--- |\n")
         for res in results:
             flavor_axis = res.flavor_axis_summary or {}
+            trapping = _sulfur_trapping_summary(res)
+            benchmark_summary = _build_benchmark_neighborhood_summary(res)
             f.write(
-                f"| {res.name} | {res.strecker_balance_score:.2f} | {res.pyrazine_burden:.2f} | {str(flavor_axis.get('thiamine_pathway_active', False))} | {', '.join(str(item) for item in flavor_axis.get('furanone_expected', [])) or '-'} |\n"
+                f"| {res.name} | {res.strecker_balance_score:.2f} | {_strecker_support_marker(res)} | {res.pyrazine_burden:.2f} | {trapping.get('status', 'n/a')} ({float(trapping.get('avg_trapping_factor', 1.0)):.2f}) | {res.furanone_penalty:.2f} | {benchmark_summary.get('category', 'unknown')} | {str(flavor_axis.get('thiamine_pathway_active', False))} | {str(flavor_axis.get('thiamine_availability_source', 'unknown'))} | {', '.join(str(item) for item in flavor_axis.get('furanone_expected', [])) or '-'} | {', '.join(str(item) for item in flavor_axis.get('furanone_missing', [])) or '-'} |\n"
+            )
+        f.write("\n")
+
+        f.write("## 4. Calibration Contrast\n")
+        f.write("| Formulation | Top Calibration Source | Evidence | Missing Data Flags | Benchmark Summary |\n")
+        f.write("| :--- | :--- | :--- | ---: | :--- |\n")
+        for res, cond in zip(results, conditions_list):
+            calibration_summary = _build_calibration_summary(res)
+            top_calibration = calibration_summary[0] if calibration_summary else {
+                "source": "class_fallback",
+                "evidence_strength": "heuristic",
+            }
+            missing_data = _build_missing_data_summary(res)
+            benchmark_summary = _build_benchmark_neighborhood_summary(res, cond)
+            f.write(
+                f"| {res.name} | {top_calibration.get('source', 'class_fallback')} | {top_calibration.get('evidence_strength', 'heuristic')} | {len(missing_data.get('items', []))} | {benchmark_summary.get('summary', '')} |\n"
             )
         f.write("\n")
 

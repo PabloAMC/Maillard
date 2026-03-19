@@ -2,11 +2,46 @@ from __future__ import annotations
 
 import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional, TYPE_CHECKING
+from typing import Any, Dict, List, Mapping, Optional, TYPE_CHECKING
 import subprocess
 
 from src.pipeline import FormulationResult
-from src.projection_metadata import ProjectionMetadataRow
+from src.projection_metadata import ProjectionMetadataRow, normalize_projection_metadata_row
+
+
+def _resolve_projection_metadata_row(
+    target: Mapping[str, object],
+    metadata: Mapping[str, ProjectionMetadataRow],
+) -> Optional[ProjectionMetadataRow]:
+    target_name = str(target.get("name", "")).strip()
+    observable_fallback = float(target.get("concentration", 0.0) or 0.0)
+
+    target_projection = target.get("projection")
+    if isinstance(target_projection, Mapping) and target_projection:
+        return normalize_projection_metadata_row(
+            target_projection,
+            compound_fallback=target_name or "unknown",
+            observable_ppb_fallback=observable_fallback,
+        )
+
+    direct_match = metadata.get(target_name)
+    if direct_match:
+        return normalize_projection_metadata_row(
+            direct_match,
+            compound_fallback=target_name or "unknown",
+            observable_ppb_fallback=observable_fallback,
+        )
+
+    lowered_target_name = target_name.lower()
+    for raw_row in metadata.values():
+        compound_name = str(raw_row.get("compound", "")).strip()
+        if compound_name.lower() == lowered_target_name:
+            return normalize_projection_metadata_row(
+                raw_row,
+                compound_fallback=target_name or compound_name or "unknown",
+                observable_ppb_fallback=observable_fallback,
+            )
+    return None
 
 
 def build_projection_rows(
@@ -27,13 +62,13 @@ def build_projection_rows(
     )
 
     for target in targets:
-        name = target.get("name")
-        meta: Optional['ProjectionMetadataRow'] = metadata.get(name)
+        name = str(target.get("name", "unknown"))
+        meta = _resolve_projection_metadata_row(target, metadata)
         if not meta:
             continue
             
         rows.append({
-            "compound": name,
+            "compound": str(meta.get("compound", name)),
             "proxy_ppb": meta.get("proxy_ppb"),
             "observable_ppb": meta.get("observable_ppb"),
             "observable_ratio": meta.get("observable_ratio", meta.get("proxy_to_observable_ratio")),
@@ -46,7 +81,37 @@ def build_projection_rows(
             "calibration_source": meta.get("calibration_source"),
             "calibration_evidence_strength": meta.get("calibration_evidence_strength"),
             "calibration_fallback_mode": meta.get("calibration_fallback_mode"),
-            "browning_index": target.get("browning_index", 0.0),
+            "browning_index": meta.get("browning_index", target.get("browning_index", 0.0)),
+        })
+
+    if rows:
+        return rows
+
+    for meta in sorted(
+        metadata.values(),
+        key=lambda row: float(row.get("observable_ppb", 0.0) or 0.0),
+        reverse=True,
+    ):
+        normalized = normalize_projection_metadata_row(
+            meta,
+            compound_fallback=str(meta.get("compound", "unknown")),
+            observable_ppb_fallback=float(meta.get("observable_ppb", 0.0) or 0.0),
+        )
+        rows.append({
+            "compound": str(normalized.get("compound", "unknown")),
+            "proxy_ppb": normalized.get("proxy_ppb"),
+            "observable_ppb": normalized.get("observable_ppb"),
+            "observable_ratio": normalized.get("observable_ratio", normalized.get("proxy_to_observable_ratio")),
+            "matrix_factor": normalized.get("matrix_factor"),
+            "dynamic_retention_factor": normalized.get("dynamic_retention_factor"),
+            "headspace_factor": normalized.get("headspace_factor"),
+            "volatile_class": normalized.get("volatile_class"),
+            "process_state": normalized.get("process_state"),
+            "retention_runtime_mode": normalized.get("retention_runtime_mode"),
+            "calibration_source": normalized.get("calibration_source"),
+            "calibration_evidence_strength": normalized.get("calibration_evidence_strength"),
+            "calibration_fallback_mode": normalized.get("calibration_fallback_mode"),
+            "browning_index": normalized.get("browning_index", 0.0),
         })
     return rows
 

@@ -90,3 +90,49 @@ def test_output_projection_applies_compound_specific_matrix_calibration():
     assert observable[canon] == pytest.approx(
         100.0 * row["matrix_factor"] * row["headspace_factor"] * row["calibration_factor"]
     )
+
+
+def test_pipeline_uses_explicit_thiamine_availability_metadata(monkeypatch):
+    designer = MaillardPipeline(target_tag="meaty")
+    formulation = {
+        "name": "Thiamine provenance contract",
+        "protein_type": "soy_iso",
+        "sugars": ["ribose"],
+        "amino_acids": ["cysteine"],
+        "molar_ratios": {"ribose": 1.0, "cysteine": 1.0},
+        "thiamine_availability": {"available": True, "source": "pbma_fortified"},
+    }
+    conditions = ReactionConditions(temperature_celsius=150.0, pH=5.0, protein_type="soy_iso")
+
+    monkeypatch.setattr("src.pipeline.resolve_many", lambda names: [
+        Species("ribose", "O=CC(O)C(O)C(O)CO"),
+        Species("cysteine", "NC(CS)C(=O)O"),
+    ])
+
+    fake_engine = MagicMock()
+    fake_engine.enumerate.return_value = []
+    monkeypatch.setattr("src.pipeline.SmirksEngine", lambda cond: fake_engine)
+    monkeypatch.setattr("src.pipeline.predict_lop_generation", lambda *args, **kwargs: {})
+    monkeypatch.setattr(designer.db, "get_best_barrier", lambda *args, **kwargs: (20.0, "mock", 2.0))
+    monkeypatch.setattr(designer.sensory, "get_radar_data", lambda *args, **kwargs: {"meaty": (1.0, 1), "beany": (0.0, 1)})
+    monkeypatch.setattr(
+        "src.pipeline.evaluate_formulation_safety",
+        lambda *args, **kwargs: (0.0, []),
+    )
+
+    fake_recommender = MagicMock()
+    fake_recommender.predict_from_steps.return_value = {
+        "targets": [],
+        "metrics": {"trapping_efficiency": {}, "lysine_budget_dha": 0.0},
+        "predicted_ppb": {},
+        "predicted_proxy_ppb": {},
+        "projection_metadata": {},
+        "projection_context": {"total_volatile_budget_molar": 0.0},
+    }
+    monkeypatch.setattr("src.pipeline.Recommender", lambda: fake_recommender)
+
+    result = designer.evaluate_single(formulation, conditions)
+
+    assert result.flavor_axis_summary["thiamine_pathway_active"] is True
+    assert result.flavor_axis_summary["thiamine_provenance_mode"] == "mixed_thiamine_plus_pentose"
+    assert result.flavor_axis_summary["thiamine_availability_source"] == "pbma_fortified"

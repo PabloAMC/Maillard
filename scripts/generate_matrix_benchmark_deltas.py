@@ -12,7 +12,8 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src.benchmark_validation import build_matrix_benchmark_deltas, render_matrix_benchmark_deltas_markdown
+from src.benchmark_validation import build_matrix_benchmark_deltas
+from src.presentation import render_matrix_benchmark_deltas_markdown
 
 
 def main() -> int:
