@@ -10,9 +10,18 @@ class BenchmarkThresholds:
     full_coverage_threshold: float = 1.0
     free_aa_ratio_threshold: float = 1.5
     matrix_ratio_threshold: float = 2.0
+    free_aa_mean_abs_log10_error_threshold: float = 0.10
+    matrix_mean_abs_log10_error_threshold: float = 0.12
 
     def ratio_threshold_for(self, protein_type: str) -> float:
         return self.free_aa_ratio_threshold if protein_type == "free" else self.matrix_ratio_threshold
+
+    def mean_abs_log10_error_threshold_for(self, protein_type: str) -> float:
+        return (
+            self.free_aa_mean_abs_log10_error_threshold
+            if protein_type == "free"
+            else self.matrix_mean_abs_log10_error_threshold
+        )
 
 
 @dataclass(frozen=True)
@@ -58,8 +67,8 @@ DEFAULT_VALIDATION_CONTRACT = ValidationContract(
         "without claiming quantitative concentration accuracy."
     ),
     quantitative_replication=(
-        "Quantitative replication asks whether supported benchmarks also meet the configured Pearson and ratio "
-        "thresholds at full coverage."
+        "Quantitative replication asks whether supported benchmarks also meet the configured Pearson, ratio, and "
+        "log-scale error thresholds at full coverage."
     ),
     formulation_utility=(
         "Formulation utility is downstream usefulness for ranking recipes or interventions; it may remain useful "

@@ -86,7 +86,7 @@ Yes, within a clearly defined envelope. The repository exposes a compact trust s
 
 Current in-repo validation summary:
 
-- 8 supported benchmarks are tracked in Docker-validated artifacts
+- 9 supported benchmarks are tracked in Docker-validated artifacts
 - 4 benchmarks are strict-ready today, all in the free-precursor envelope
 - 9 matched compounds define the current authoritative quantitative proof surface
 - the median matched-compound ratio in that proof surface is 1.118x
@@ -109,13 +109,34 @@ How to interpret trust:
 
 ## Trust Levels
 
-| System Type | Trust Level | What You Can Safely Use It For |
-| --- | --- | --- |
-| **Free precursors** | **High** | Quantitative ranking, concentration-scale comparison, candidate screening, safety-aware optimization. |
-| **Pea / soy matrices** | **Moderate** | Directional comparison, off-flavour triage, hypothesis generation, deciding what to test next. |
-| **Intact protein / extrusion-heavy systems** | **Low** | Exploratory use only; treat outputs as hypotheses until benchmarked. |
+| System Type                                        | Trust Level        | What You Can Safely Use It For                                                                        |
+| -------------------------------------------------- | ------------------ | ----------------------------------------------------------------------------------------------------- |
+| **Free precursors**                          | **High**     | Quantitative ranking, concentration-scale comparison, candidate screening, safety-aware optimization. |
+| **Pea / soy matrices**                       | **Moderate** | Directional comparison, off-flavour triage, hypothesis generation, deciding what to test next.        |
+| **Intact protein / extrusion-heavy systems** | **Low**      | Exploratory use only; treat outputs as hypotheses until benchmarked.                                  |
 
 Important caveat: matrix trust is lower because accessibility, retention, and pH-dependent headspace effects are not yet benchmark-closed across real plant matrices.
+
+## What Precision Depends On
+
+The tool does not have a single accuracy mode. Its precision depends on which layer of the stack is carrying most of the prediction for your system.
+
+| Prediction Layer                                   | Main Inputs                                                                                                                 | Typical Use                                                 | Precision Implication                                                                                                                                               |
+| -------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Core FAST kinetics**                       | Family-level barriers from literature, cached barrier records, and calibrated Arrhenius heuristics                          | Free-precursor ranking and concentration-scale screening    | Strongest when the chemistry stays close to the benchmarked free amino-acid systems. Barrier quality mostly controls pathway ordering and relative competitiveness. |
+| **Observable projection**                    | Proxy-to-observable mapping, volatility, retention, and process-sensitive projection factors                                | Translating pathway signal into ppb-scale outputs           | This layer is the main determinant of absolute concentration fit. It should absorb most calibration work before any barrier retuning is considered.                 |
+| **Matrix calibration and headspace release** | Protein type, process state, compound-specific observable factors, pH release modifiers, and transferred literature anchors | Pea/soy matrix-only and matrix-augmented systems            | Useful for directional and near-quantitative matrix checks only where explicit anchors exist. Accuracy depends more on calibration coverage than on barrier tuning. |
+| **Offline refinement**                       | xTB, selective DFT, or local ML potentials written back as cached artifacts                                                 | Narrow mechanistic correction of a decisive family or motif | Reserved for cases where cheap surrogate closure has stopped buying accuracy. Not intended as a day-to-day runtime fitting knob.                                    |
+
+Two practical rules follow from this:
+
+- We do not normally retune energy barriers just to make one benchmark concentration match. Barrier changes should improve chemistry coherently across benchmark families.
+- When a benchmark misses in absolute ppb but keeps the right pathway ordering, the preferred fix is usually in the observable or matrix-calibration layer, not in the reaction-family barrier table.
+
+Current validation therefore uses two scale checks:
+
+- a **max ratio** check that catches worst-case outliers;
+- a **mean absolute log-scale error** check that guards against broad multiplicative drift even when no single compound is catastrophic.
 
 ---
 
@@ -200,15 +221,15 @@ This gives you the core validation artifacts that should be read before interpre
 
 ## What To Run For Each Goal
 
-| Goal | Command | What you get |
-| --- | --- | --- |
-| Check whether your use case is benchmark-backed | `./scripts/docker_maillard.sh validation-figures` | Overview PNGs plus Markdown/JSON summaries of trust and envelope boundaries. |
-| Inspect benchmark-by-benchmark status | `./scripts/docker_maillard.sh summary` | The current benchmark table with status, coverage, ratios, and notes. |
-| Generate a prediction for a candidate formulation | `python scripts/run_pipeline.py ... --report` | Compound predictions, decision summary, confidence warnings, and a saved report bundle. |
-| Optimize a formulation around a target profile | `python scripts/optimize_formulation.py ... --report` | The best trial, predicted tradeoffs, and an exportable report. |
-| Compare a short list of named formulations | `python scripts/compare_formulations.py --names ... --output-dir ...` | A side-by-side comparison bundle with confidence and provenance. |
-| Build a scientist-shareable campaign package | `./scripts/docker_maillard.sh campaign data/campaigns/shareable_meaty_screen.yml` | Run-level bundles plus campaign-level Markdown/JSON artifacts. |
-| Inspect one literature benchmark directly | `./scripts/docker_maillard.sh run python scripts/compare_sim_to_lit.py --lit ...` | A benchmark card with parity plot, absolute yields, and benchmark summary. |
+| Goal                                              | Command                                                                             | What you get                                                                            |
+| ------------------------------------------------- | ----------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Check whether your use case is benchmark-backed   | `./scripts/docker_maillard.sh validation-figures`                                 | Overview PNGs plus Markdown/JSON summaries of trust and envelope boundaries.            |
+| Inspect benchmark-by-benchmark status             | `./scripts/docker_maillard.sh summary`                                            | The current benchmark table with status, coverage, ratios, and notes.                   |
+| Generate a prediction for a candidate formulation | `python scripts/run_pipeline.py ... --report`                                     | Compound predictions, decision summary, confidence warnings, and a saved report bundle. |
+| Optimize a formulation around a target profile    | `python scripts/optimize_formulation.py ... --report`                             | The best trial, predicted tradeoffs, and an exportable report.                          |
+| Compare a short list of named formulations        | `python scripts/compare_formulations.py --names ... --output-dir ...`             | A side-by-side comparison bundle with confidence and provenance.                        |
+| Build a scientist-shareable campaign package      | `./scripts/docker_maillard.sh campaign data/campaigns/shareable_meaty_screen.yml` | Run-level bundles plus campaign-level Markdown/JSON artifacts.                          |
+| Inspect one literature benchmark directly         | `./scripts/docker_maillard.sh run python scripts/compare_sim_to_lit.py --lit ...` | A benchmark card with parity plot, absolute yields, and benchmark summary.              |
 
 ### 2. Run a forward prediction
 

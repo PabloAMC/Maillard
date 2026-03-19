@@ -442,6 +442,36 @@ def _pearson(values_a: Iterable[float], values_b: Iterable[float]) -> Optional[f
     return numerator / (denom_a * denom_b)
 
 
+def _mean_abs_log10_error(comparisons: Iterable[CompoundComparison]) -> Optional[float]:
+    matched = [comparison for comparison in comparisons if comparison.matched_name is not None]
+    errors = [
+        abs(math.log10(comparison.predicted_ppb / comparison.measured_ppb))
+        for comparison in matched
+        if comparison.measured_ppb > 0.0 and comparison.predicted_ppb > 0.0
+    ]
+    if not errors:
+        return None
+    return sum(errors) / len(errors)
+
+
+def _resolve_scale_thresholds(
+    bench: dict,
+    *,
+    protein_type: str,
+    thresholds: BenchmarkThresholds,
+) -> Dict[str, float]:
+    configured = (bench.get("validation_contract") or {}).get("scale_thresholds") or {}
+    return {
+        "max_ratio": float(configured.get("max_ratio", thresholds.ratio_threshold_for(protein_type))),
+        "mean_abs_log10_error": float(
+            configured.get(
+                "mean_abs_log10_error",
+                thresholds.mean_abs_log10_error_threshold_for(protein_type),
+            )
+        ),
+    }
+
+
 def _build_comparisons(bench: dict, predicted_ppb: Dict[str, float]) -> List[CompoundComparison]:
     comparisons: List[CompoundComparison] = []
     signal_map = bench.get("measured_volatiles") or bench.get("reference_volatiles") or {}
@@ -684,9 +714,16 @@ def summarize_evaluation(
     ratios = [comparison.ratio for comparison in matched if math.isfinite(comparison.ratio)]
     max_ratio = max(ratios) if ratios else None
     mean_ratio = sum(ratios) / len(ratios) if ratios else None
-    ratio_threshold = thresholds.ratio_threshold_for(protein_type)
+    mean_abs_log10_error = _mean_abs_log10_error(matched)
 
     bench = load_benchmark(evaluation.bench_file)
+    scale_thresholds = _resolve_scale_thresholds(
+        bench,
+        protein_type=protein_type,
+        thresholds=thresholds,
+    )
+    ratio_threshold = scale_thresholds["max_ratio"]
+    log_error_threshold = scale_thresholds["mean_abs_log10_error"]
     metadata = get_benchmark_metadata(bench)
     conditions = bench.get("conditions", {})
     ranking_contract = _evaluate_matrix_ranking_contract(bench, evaluation.predicted_ppb) if metadata.execution_path in {"matrix_only", "matrix_precursor_augmented"} else {
@@ -731,6 +768,7 @@ def summarize_evaluation(
             ranking_contract_status=str(ranking_contract.get("status", "n/a")),
             calibration_mode=matrix_contract.get("calibration_mode"),
             reference_signal_origin=evaluation.reference_signal_origin,
+            mean_abs_log10_error=None,
         )
 
     if len(matched) >= thresholds.min_matched_for_ranking and evaluation.pearson_r is not None:
@@ -742,7 +780,9 @@ def summarize_evaluation(
 
     if max_ratio is None:
         scale_status = "fail"
-    elif max_ratio <= ratio_threshold:
+    elif max_ratio <= ratio_threshold and (
+        mean_abs_log10_error is None or mean_abs_log10_error <= log_error_threshold
+    ):
         scale_status = "pass"
     else:
         scale_status = "fail"
@@ -772,6 +812,10 @@ def summarize_evaluation(
         blocking_issues.append(
             f"max ratio {ratio_value} > {ratio_threshold:.2f}"
         )
+        if mean_abs_log10_error is not None and mean_abs_log10_error > log_error_threshold:
+            blocking_issues.append(
+                f"mean |log10 ratio| {mean_abs_log10_error:.3f} > {log_error_threshold:.3f}"
+            )
 
     strict_ready = (
         evaluation.coverage >= thresholds.full_coverage_threshold
@@ -822,6 +866,7 @@ def summarize_evaluation(
         ranking_contract_status=str(ranking_contract.get("status", "n/a")),
         calibration_mode=matrix_contract.get("calibration_mode"),
         reference_signal_origin=evaluation.reference_signal_origin,
+        mean_abs_log10_error=mean_abs_log10_error,
     )
 
 

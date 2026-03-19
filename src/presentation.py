@@ -431,8 +431,8 @@ def render_benchmark_summary_markdown(summaries: Iterable['BenchmarkSummary']) -
     lines = [
         "# Benchmark Summary",
         "",
-        "| Benchmark | Tier | Family | Protein | Process State | Execution Path | Engine | Cantera Role | Thermo Policy | Ranking Contract | Status | Strict Ready | Coverage | Pearson R | Max Ratio | MAE ppb | Notes |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+        "| Benchmark | Tier | Family | Protein | Process State | Execution Path | Engine | Cantera Role | Thermo Policy | Ranking Contract | Status | Strict Ready | Coverage | Pearson R | Max Ratio | Mean |log10 ratio| | MAE ppb | Notes |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
     ]
 
     for summary in rows:
@@ -440,6 +440,7 @@ def render_benchmark_summary_markdown(summaries: Iterable['BenchmarkSummary']) -
             notes = summary.reason or "Unsupported"
             pearson = "n/a"
             max_ratio = "n/a"
+            mean_log_error = "n/a"
             mae = "n/a"
             coverage = "0.0%"
             strict_ready = "no"
@@ -447,12 +448,13 @@ def render_benchmark_summary_markdown(summaries: Iterable['BenchmarkSummary']) -
             notes = ", ".join(summary.blocking_issues) or "validated"
             pearson = f"{summary.pearson_r:.3f}" if summary.pearson_r is not None else "n/a"
             max_ratio = f"{summary.max_ratio:.3f}" if summary.max_ratio is not None else "n/a"
+            mean_log_error = f"{summary.mean_abs_log10_error:.3f}" if summary.mean_abs_log10_error is not None else "n/a"
             mae = f"{summary.mae_ppb:.2f}" if summary.mae_ppb is not None else "n/a"
             coverage = f"{summary.coverage:.1%}"
             strict_ready = "yes" if summary.strict_ready else "no"
 
         lines.append(
-            f"| {summary.benchmark_id} | {summary.tier} | {summary.family} | {summary.protein_type} | {summary.process_state or 'n/a'} | {summary.execution_path} | {summary.benchmark_engine} | {summary.cantera_role} | {summary.thermodynamic_gating_policy} | {summary.ranking_contract_status} | {summary.overall_status} | {strict_ready} | {coverage} | {pearson} | {max_ratio} | {mae} | {notes} |"
+            f"| {summary.benchmark_id} | {summary.tier} | {summary.family} | {summary.protein_type} | {summary.process_state or 'n/a'} | {summary.execution_path} | {summary.benchmark_engine} | {summary.cantera_role} | {summary.thermodynamic_gating_policy} | {summary.ranking_contract_status} | {summary.overall_status} | {strict_ready} | {coverage} | {pearson} | {max_ratio} | {mean_log_error} | {mae} | {notes} |"
         )
 
     supported_count = sum(1 for summary in rows if summary.supported)

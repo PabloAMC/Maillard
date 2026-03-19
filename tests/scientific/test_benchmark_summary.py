@@ -64,6 +64,7 @@ def test_benchmark_summary_markdown_includes_gap_labels():
     assert "Strict Ready" in markdown
     assert "Cantera Role" in markdown
     assert "Thermo Policy" in markdown
+    assert "Mean |log10 ratio|" in markdown
     assert "diagnostic_reference_only" in markdown
 
 

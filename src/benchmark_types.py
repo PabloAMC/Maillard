@@ -116,6 +116,7 @@ class BenchmarkSummary:
     ranking_contract_status: str = "n/a"
     calibration_mode: Optional[str] = None
     reference_signal_origin: str = "measured_volatiles"
+    mean_abs_log10_error: Optional[float] = None
 
 
 @dataclass(frozen=True)
