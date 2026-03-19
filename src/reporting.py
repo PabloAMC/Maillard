@@ -53,6 +53,7 @@ def _build_scientific_surface(root: Path) -> Dict[str, str]:
         "validated_envelope": root / "results/validation/validated_envelope.md",
         "validation_overview": root / "results/validation/validation_overview.md",
         "benchmark_intake_registry": root / "data/lit/benchmark_intake_registry.json",
+        "computational_priors": root / "data/lit/computational_priors.json",
         "process_state_calibrations": root / "data/lit/process_state_calibrations.json",
         "safety_reference_payloads": root / "data/lit/safety_reference_payloads.json",
         "primary_benchmark_protocol": root / "docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md",
@@ -171,6 +172,8 @@ def generate_report(
             "safety_score": float(result.safety_score),
             "lysine_budget": float(result.lysine_budget),
             "trapping_efficiency": float(result.trapping_efficiency),
+            "mft_to_furfural_ratio": float(result.mft_to_furfural_ratio),
+            "meaty_quality_penalty": float(result.meaty_quality_penalty),
             "flagged_toxics": result.flagged_toxics,
             "radar": {k: float(v[0]) for k, v in result.radar.items()},
             "matrix_explainability": result.matrix_explainability,
@@ -217,6 +220,8 @@ def generate_report(
         f.write(f"- **Target Score:** {result.target_score:.2f}\n")
         f.write(f"- **Off-Flavour Risk:** {result.off_flavour_risk:.2f}\n")
         f.write(f"- **Safety Score:** {result.safety_score:.2f}\n\n")
+        f.write(f"- **MFT/Furfural Ratio:** {result.mft_to_furfural_ratio:.4f}\n")
+        f.write(f"- **Meaty Quality Penalty:** {result.meaty_quality_penalty:.2f}\n\n")
 
         if result.confidence_metadata:
             f.write("### Confidence & Support\n")

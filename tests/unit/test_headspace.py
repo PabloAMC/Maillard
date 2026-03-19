@@ -135,6 +135,29 @@ def test_pratap_singh_headspace_calibration_carries_soy_release_gap_in_headspace
     ) == pytest.approx(0.143 / 0.063)
 
 
+def test_shu_heated_soy_calibration_suppresses_2_pentylfuran_to_detection_floor_surrogate():
+    model = HeadspaceModel()
+
+    ambient = model.get_matrix_benchmark_headspace_factor(
+        "2-Pentylfuran",
+        protein_type="soy_iso",
+        pH=6.0,
+        temperature_celsius=40.0,
+        time_minutes=10.0,
+    )
+    heated = model.get_matrix_benchmark_headspace_factor(
+        "2-Pentylfuran",
+        protein_type="soy_iso",
+        pH=6.0,
+        temperature_celsius=120.0,
+        time_minutes=20.0,
+    )
+
+    assert ambient == pytest.approx(2.972 / 0.502)
+    assert heated == pytest.approx((2.972 / 0.502) * 0.03)
+    assert heated < ambient * 0.05
+
+
 def test_explicit_matrix_fractions_override_retention_fallback():
     model = HeadspaceModel()
     matrix = {"Methional": 1.0}

@@ -1,228 +1,605 @@
-# Maillard Strategic Backlog
+# Maillard SLR-To-Repository Execution Plan
+
+## Mission
+
+Rebuild the scientific backlog around the actual delta between:
+
+- what the SLR now contains;
+- what the repository has already encoded into machine-readable artifacts and production logic;
+- what the user can actually see in reports and campaign outputs.
 
-## Product Goal
+This plan is no longer a generic calibration roadmap. It is a step-by-step SLR incorporation program plus an architecture for the remaining gaps that literature cannot close.
 
-Convert Maillard from a scientifically promising validation harness into a decision-grade formulation tool for alternative-protein scientists.
+## Non-Negotiable Rules
 
-For this repository to be genuinely state of the art, it must simultaneously provide:
+- [ ] Docker plus conda remains the only authoritative validation path.
+- [ ] Do not treat SLR prose as incorporated science until it is encoded in a machine-readable artifact or enforced in code.
+- [ ] Do not treat encoded science as user-visible until it appears in report JSON, Markdown, and comparison outputs.
+- [ ] Prefer literature anchor -> calibration payload -> computational prior -> cheap runtime surrogate -> offline semiempirical/QM -> selective DFT -> localized ML potential.
+- [ ] Do not push DFT or ML potentials into the daily runtime path.
+- [ ] Every expensive computation must write back a reusable correction artifact, not a one-off notebook result.
+- [ ] Do not overclaim matrix quantitation where the SLR only provides directional or transferred support.
 
-- trustworthy quantitative envelopes, not only plausible rankings;
-- scientist-facing outputs that explain what to do next in formulation terms;
-- reproducible benchmark, uncertainty, and domain-of-validity surfaces;
-- a workflow that is faster and more informative than spreadsheet-plus-wet-lab iteration.
+## What "Best Possible Tool" Means Here
 
-## Truthful Current Status — 2026-03-18
+### Scientific quality
+
+- [ ] Every material claim in the recommendation surface is traceable to either a quantitative paper, a transferred prior, a censoring surrogate, or a computational artifact.
+- [ ] Every key compound shown to a scientist carries an evidence tier and calibration source.
+- [ ] Important PBMA-vs-meat flavor markers are not silently omitted just because the current model grew around sulfur alone.
+
+### Product quality
 
-### Documentation and onboarding review — 2026-03-18
+- [ ] A scientist can see not only the predicted ranking, but which literature anchors actually drove it.
+- [ ] Comparison reports reveal when a formulation wins for the wrong reason, such as furfural inflation or pyrazine overshoot.
+- [ ] The repo exposes what is encoded, what is transferred, what is still missing, and what is being approximated computationally.
 
-- [x] Rework the entry documentation so a new scientist can understand what the tool does, how to run it, and what not to claim from it.
-- [x] Add a dedicated trust-and-limitations guide and a fast quickstart path.
-- [x] Add a command reference and a project-structure reference.
-- [x] Add a reproducible validation-figure artifact so reliability and limitations can be shown graphically.
-- [x] Group development and research notes behind explicit documentation indexes instead of leaving them as an unstructured reading path.
-- [x] Add a scientist-shareable reporting surface with explicit provenance, comparison, and campaign artifacts instead of relying on ad hoc terminal context.
-- [x] Align architecture-facing docs with the actual validated envelope so public docs do not blur current support and future ambition.
-- [x] Write the first review-ready internal protocol for the primary PPI/SPI ribose+cysteine benchmark gap.
-- [x] Remove the low-signal validated-envelope graphic from the root README and keep boundary details in the generated validation documents instead.
+### Architecture quality
 
-### Validation communication cleanup — 2026-03-18
+- [ ] Cheap-first calibration remains the default path.
+- [ ] DFT is selective and benchmark-driven.
+- [ ] ML potentials are only used where repeated motif classes justify a trained local surrogate.
 
-- [x] Remove the fold-error-by-compound panel from benchmark comparison figures because it is visually confusing for first-pass scientific review.
-- [x] Align the validation deep dive with the current proof model: strict quantitative free-precursor evidence vs. non-authoritative matrix readiness.
-- [x] Rewrite the root README so a first-time scientist can understand trust levels, main workflows, and how to get useful results without overclaiming.
-- [x] Retire legacy validation plot artifacts that no longer represent the current benchmark narrative.
+## Audit Result — 2026-03-19
 
-### External matrix benchmark candidate curation — 2026-03-18
+### Already encoded in the repo with real machine-readable artifacts
 
-- [x] Draft literature-backed pea and soy meaty-positive benchmark candidate reports so the missing data package is concrete rather than abstract.
-- [x] Promote those candidate reports into visible documentation instead of leaving them buried in research notes.
+- [x] Squeo 2023 acrylamide endpoint reference in data/lit/safety_reference_payloads.json.
+- [x] Asen 2022 pea denaturation anchor in data/lit/process_state_calibrations.json.
+- [x] Li 2025 pea free-SH accessibility anchor in data/lit/process_state_calibrations.json.
+- [x] Pratap-Singh 2021 ambient pea/soy observable calibration in src/matrix_calibration_registry.py.
+- [x] Heated soy hexanal and censored 2-pentylfuran carryover from Shu 2024 in src/matrix_calibration_registry.py.
+- [x] Process-state and matrix priors for pea and soy in data/lit/computational_priors.json.
+- [x] Meaty-quality ratio and penalty in src/inverse_design.py, src/bayesian_optimizer.py, and src/reporting.py.
+- [x] Melanoidin sulfur trapping surrogate in src/recommend.py.
+- [x] DFT triage contract in src/dft_refinement_contract.py.
 
-### SLR benchmark triage — 2026-03-18
+### Present in the SLR but not yet encoded as machine-readable science
 
-- [x] Incorporate the SLR verdict that the missing pea/SPI meaty-positive matrix benchmarks are structural literature gaps, not a search gap.
-- [x] Register the benchmark-intake status of Nishimura 2024, Squeo 2023, Asen 2022, and Malia 2025 in a machine-readable registry instead of leaving them only in prose.
-- [x] Re-anchor pea process-state calibration provenance to Asen 2022 and Malia 2025 in the matrix correction layer.
-- [x] Create explicit machine-readable payloads for the pea process-state calibration anchors and the Squeo 2023 safety reference anchor.
-- [x] Create a canonical human-readable scientific reference document that links pathways, validated articles, numeric anchors, and comments in one place.
-- [x] Recover full text for Nishimura & Abe (2024) and verify whether absolute MFT/FFT concentrations plus internal-standard details are present. Result: full text confirms soy-hydrolysate qualitative sulfur chemistry at 95 C / 90 min, but only as relative peak-area output without absolute ppb or internal-standard benchmark quantitation.
-- [x] Convert the candidate reports into a benchmark-intake checklist with only fully curated references before creating benchmark JSON entries.
+- [ ] Foods 12(10):1967 PBMA acrylamide plus AGE reference band.
+- [ ] Choi 2024 acrylamide plus asparagine correlation payload.
+- [ ] MDPI Foods 11(21):3505 SPI free-SH anchor for native versus heated soy isolate.
+- [ ] JAFC 10.1021/acs.jafc.3c05991 PPI/SPI hexanal binding payload.
+- [ ] Xu 2023 SPI temporal off-flavor decline versus time at 95 C.
+- [ ] Karolkowski 2021 PPI pH-dependent off-flavor release payload.
+- [ ] Hernandez 2023 Strecker aldehyde sub-benchmarks.
+- [ ] Hernandez 2023 pyrazine and furfural sub-benchmarks as PBMA reference outputs.
+- [ ] Trikusuma 2019 pea-protein aroma interaction payload.
+- [ ] Troise 2018 soy Amadori and furosine calibration payload.
+- [ ] Lincoln 2025 SPI/PPI polyphenol-modulated Strecker/lipid cross-talk payload.
+- [ ] Laemont 2023 pyrazine pH/sugar control prior.
+- [ ] Arsa 2022 pyrazine pH optimum prior.
+- [ ] Hao 2025 sugar-type to pyrazine profile prior for soy hydrolysate.
+- [ ] Cerny 2007 thiamine-versus-xylose MFT contribution split.
+- [ ] Blank and Fay 1996 HEMF/DMHF mechanistic prior.
+- [ ] Watanabe 2015 DMHF meat-side reference anchor if full quantitative values can be recovered.
+- [ ] Zhang 2026 indirect sulfur volatile retention prior for SPI.
 
-### What is already strong
+### Encoded partially but not modeled at the full level implied by the SLR
 
-- [x] Free-amino-acid PRIMARY benchmarks are in a credible Docker-validated envelope.
-- [x] FAST proxy vs observable projection semantics are explicit and benchmark artifacts expose the projection provenance.
-- [x] Pea/soy matrix handling is materially better than before: accessibility, denaturation inference, headspace fallback, and compound-class-aware retention now exist.
-- [x] The repo now has validated-envelope and formulation explainability artifacts.
-- [x] The Docker-first validation workflow is coherent and reproducible.
+- [ ] Ince 2024 is acknowledged directionally, but hexanal release is not yet modeled as a temperature-dependent reversible retention surface.
+- [ ] Hofmann 2001 is reflected by a cheap trapping surrogate, but not yet tied to an explicit browning index shown to the scientist.
+- [ ] Nishimura 2024 is recognized as qualitative hydrolysate evidence, but its peptide-bound cysteine and protease-specific pyrazine findings are not encoded as structured priors.
+- [ ] Hernandez 2023 drives the MFT/furfural quality idea, but its Strecker and pyrazine subdata are not yet first-class output references.
 
-### What is still not enough for a best-in-class scientific tool
+### Encoded internally but not shown well enough to the user
 
-- [ ] External meaty-positive matrix benchmark data is still missing for pea and soy, and the SLR now confirms this is a structural literature gap rather than an unresolved search problem, so matrix trust cannot advance beyond directional support.
-- [ ] Matrix benchmarks are executable intake checks, not yet benchmark-facing target-ranking validations.
-- [ ] Process-state calibration for accessibility, retention, and release is not yet benchmark-closed across real plant matrices; the SLR only upgrades pea denaturation/SH anchors, not the full PPI/SPI benchmark conditions.
-- [ ] Benchmark breadth is narrow relative to the scientific space alternative-protein teams actually care about.
-- [ ] There is still a gap between “validated model component” and “formulation operating system for scientists”, especially for experiment ingestion and external-team handoff on newly collected data.
+- [ ] Comparison reports do not yet expose MFT/furfural ratio.
+- [ ] Comparison reports do not yet expose meaty_quality_penalty.
+- [ ] Comparison reports do not yet expose sulfur trapping behavior or key projection factors.
+- [ ] Reports do not yet show a compact evidence ladder per key compound.
+- [ ] Reports do not yet distinguish clearly between direct anchor, transferred prior, mechanistic surrogate, and computational refinement at the compound row level.
 
-## Strategic Assessment
+### Structural gaps confirmed by the SLR and still unresolved by public data
 
-The previous summary was directionally correct but not sufficient as a roadmap to a genuinely state-of-the-art repository.
+- [ ] Quantitative aqueous PPI plus ribose plus cysteine benchmark with MFT, FFT, hexanal, and adverse markers.
+- [ ] Quantitative aqueous SPI plus ribose plus cysteine benchmark with the same panel.
+- [ ] Direct matrix-resolved MFT/FFT retention and trapping curves versus browning severity.
+- [ ] Simultaneous Ellman plus OPA plus DSC benchmark in PPI/SPI thermal experiments.
+- [ ] Aqueous SPI/PPI acrylamide kinetics across controlled T/t in wet matrices.
+- [ ] Absolute pyrazine kinetics in PPI/SPI with internal standards.
+- [ ] Absolute HEMF and DMHF in PPI/SPI ribose systems.
 
-It correctly identified immediate usability gaps:
+## Track 0: Build The SLR Incorporation Matrix
 
-- inline CLI explainability;
-- domain-of-validity warnings;
-- compound-aware matrix observability;
-- better user-facing diagnostics.
+### Goal
 
-But a best possible tool for scientists also needs broader priorities that are at least as important:
+- [ ] Make it impossible to confuse cited literature with encoded calibration.
 
-- benchmark expansion beyond the current narrow envelope;
-- uncertainty and confidence reporting;
-- stronger product ergonomics for comparing candidate formulations;
-- scientist-centered outputs that connect predictions to concrete intervention decisions;
-- data-ingestion and calibration workflows that allow the model to improve from new experiments.
+### New artifacts
 
-## Priority Order
+- [ ] data/lit/slr_incorporation_matrix.json
+- [ ] data/lit/flavor_reference_payloads.json
+- [ ] data/lit/retention_reference_payloads.json
+- [ ] data/lit/process_gap_registry.json
 
-## P0 — Make The Existing Science Usable In Daily Work
+### Exact tasks
 
-These are the highest-leverage items because they convert existing validated machinery into something scientists can actually trust and use without reading internal docs.
+1. [ ] Create one row per paper or quantitative sub-payload in the SLR.
+2. [ ] For each row, record:
+	- [ ] paper id
+	- [ ] compounds or parameters supported
+	- [ ] exact numeric anchors
+	- [ ] current repo location if already encoded
+	- [ ] current user-visible surface if already shown
+	- [ ] evidence status: encoded, partially encoded, not encoded
+	- [ ] action type: encode now, show now, compute later, requires wet lab
+3. [ ] Split compound-level flavor references away from safety references so reporting can consume them directly.
+4. [ ] Record structural gaps separately so they stop being mixed with codable literature.
 
-- [x] Integrate deep explainability into CLI output (bottlenecks, penalties, intervention hints) (P0)
-- [x] Print a concise default decision summary for every run: dominant desirable compounds, dominant penalties, matrix state, validated-envelope status, and key caveats.
-- [x] Surface domain-of-validity warnings inline whenever a run leaves the trusted envelope (`matrix_only`, unsupported matrices, peptide-bound systems, aggressive process assumptions, sparse benchmark analogies).
-- [x] Add a single scientist-facing report mode that outputs both machine-readable JSON and human-readable Markdown from the main CLI, not only from side scripts.
-- [x] Add recommendation diagnostics that explicitly answer: which precursors helped, which penalties dominated, which compounds were suppressed by matrix retention/headspace, and what intervention is most likely to move the outcome.
-- [x] Create side-by-side comparison outputs for multiple candidate formulations so scientists can compare tradeoffs instead of inspecting one run at a time.
+### Acceptance criteria
 
-### P0 acceptance criteria
+- [ ] Every paper in docs/slr_benchmark_evaluation.md is mapped to a concrete repo status.
+- [ ] We can answer, from one JSON, whether a datum is only cited, encoded, modeled, and shown.
 
-- [x] A scientist can run one command and immediately see what the model predicts, why, how trustworthy it is, and what to try next.
-- [x] The default CLI no longer requires reading `results/validation/*.md` to understand whether a result is meaningful.
+## Track 1: Encode All SLR Data That We Already Have But Have Not Yet Ingested
 
-## P1 — Turn Matrix Handling Into A Real Validation Surface
+### 1A. Safety references
 
-This is the biggest scientific-product gap. Without it, the repo is credible for a narrow envelope but not yet best-in-class for alternative proteins.
+#### Goal
 
-- [ ] Promote plant-matrix benchmarks from intake checks toward target-ranking benchmarks with benchmark-facing observable outputs.
-- [ ] Expand matrix observability from compound classes toward compound-specific calibration where literature or internal data exists.
-- [ ] Add matrix benchmark families beyond the current pea/soy intake cases: broader protein systems, process states, and off-flavour/meaty tradeoff regimes relevant to alternative proteins.
-- [ ] Validate matrix predictions against benchmarks that include both beneficial sulfur/meaty targets and adverse lipid-oxidation targets in the same system; the SLR confirms this tradeoff benchmark does not currently exist in the literature for PPI/SPI isolate systems.
-- [ ] Add process-state realism for extrusion/heating history where that state materially changes accessibility or release.
-- [ ] Keep strict-gate promotion blocked until matrix target ranking is reproducible in Docker and visible in reports.
+- [ ] Expand the safety surface beyond Squeo 2023 so the repo reflects the full SLR safety layer.
 
-### P1 acceptance criteria
+#### Files
 
-- [ ] Matrix systems can be benchmarked on ranked observable targets, not just “executable intake”.
-- [ ] A pea/soy recommendation is scientifically interpretable as a formulation signal, not only as a conservative heuristic.
+- [ ] data/lit/safety_reference_payloads.json
+- [ ] src/reporting.py
+- [ ] src/safety.py
 
-## P2 — Add Confidence, Uncertainty, And Decision Boundaries
+#### Exact tasks
 
-Scientists need to know not only the prediction, but how much to trust it.
+1. [ ] Add Foods 12(10):1967 PBMA acrylamide range and AGE context.
+2. [ ] Add Choi 2024 acrylamide plus asparagine correlation payload.
+3. [ ] Add Knol 2009, Claeys 2005, and Sen and Gokmen 2023 as kinetic model provenance payloads.
+4. [ ] Add Zilic 2014 only as contextual heat-transfer modifier evidence, not as a benchmark.
 
-- [x] Add per-result confidence metadata tied to benchmark neighborhood, matrix support level, and projection assumptions.
-- [x] Report uncertainty bands or at least confidence tiers for major predicted compounds and aggregate sensory scores.
-- [x] Add calibration diagnostics that show when a recommendation is extrapolating beyond supported chemistry or process conditions.
-- [x] Distinguish clearly between benchmark-supported quantitative predictions, directional heuristics, and speculative outputs.
-- [x] Add sensitivity summaries showing which inputs most strongly change the ranking or safety outcome.
+#### Acceptance criteria
 
-### P2 acceptance criteria
+- [ ] Reports can show both industrial endpoint bands and free-system kinetic provenance.
+- [ ] Safety output distinguishes endpoint references from kinetic models.
 
-- [x] Every recommendation carries an explicit confidence story.
-- [x] Scientists can tell the difference between “ship this to the wet lab first” and “interesting but speculative”.
+### 1B. Process-state and retention references
 
-### P1 detailed execution plan
+#### Goal
 
-#### Phase 1 — Benchmark contract expansion
+- [ ] Fill the current soy and retention blind spots that the SLR already covers.
 
-1. [x] Define a matrix target-ranking contract that every candidate benchmark must satisfy: observable targets, expected ordering, adverse markers, process metadata, and citation provenance.
-2. [x] Add contract fields to the benchmark artifacts and validation loaders so matrix cases expose ranked desirable and adverse targets, not just intake executability.
-3. [x] Create a first promotion set for pea and soy with at least one meaty-positive and one off-flavour-negative benchmark per family.
+#### Files
 
-#### Phase 2 — Observable calibration surface
+- [ ] data/lit/process_state_calibrations.json
+- [ ] data/lit/retention_reference_payloads.json
+- [ ] data/lit/computational_priors.json
+- [ ] src/matrix_calibration_registry.py
+- [ ] src/headspace.py
+- [ ] src/matrix_correction.py
 
-1. [x] Replace class-level matrix observability where evidence exists with compound-level calibration entries keyed by compound, matrix family, and process state.
-2. [x] Extend projection metadata so every ranked compound exposes its calibration source, fallback mode, and evidence strength in CLI/report JSON.
-3. [ ] Add explicit adverse-target calibration for lipid-coupled notes so matrix validation covers the meaty/off-flavour tradeoff in the same experiment.
-4. [ ] Encode Asen 2022 and Malia 2025 as explicit process-state calibration payloads instead of leaving them only as provenance strings in the pea thermal envelope.
+#### Exact tasks
 
-#### Phase 3 — Process realism
+1. [ ] Add MDPI Foods 11(21):3505 as a soy free-SH anchor with native and heated states.
+2. [ ] Add JAFC 3c05991 as a PPI/SPI hexanal binding payload.
+3. [ ] Add Karolkowski 2021 as a pH-dependent PPI release payload.
+4. [ ] Add Xu 2023 as a temporal SPI off-flavor trend payload.
+5. [ ] Add Zhang 2026 as an indirect sulfur-volatile retention prior for soy.
+6. [ ] Add Trikusuma 2019 as a pea mixed-pathway aroma interaction payload if the quantitative table is recoverable enough for intake encoding.
+7. [ ] Add Troise 2018 as a lysine-loss/furosine calibration payload for soy thermal history.
 
-1. [x] Introduce process-state descriptors for extrusion or pre-heating history into matrix benchmark inputs and explainability payloads.
-2. [ ] Calibrate accessibility and release heuristics against those states before promoting any matrix family into a stricter gate.
+#### Acceptance criteria
 
-#### Phase 4 — Validation and promotion
+- [ ] Soy process-state priors are no longer based only on repo literature synthesis when the SLR already supplies a direct anchor.
+- [ ] PPI/SPI aldehyde retention is grounded in explicit payloads rather than only family-level static factors.
 
-1. [x] Add Docker-visible ranking assertions for matrix benchmarks: top-k desirable hits, adverse marker ordering, and tolerance thresholds.
-2. [x] Add report outputs that show benchmark deltas for every promoted matrix case, including successes, misses, and fallback paths used.
-3. [x] Keep strict-gate promotion disabled until the first pea/soy candidate passes reproducibly in Docker on ranking metrics, not only execution checks.
+### 1C. Flavor reference payloads now missing from the repo
 
-#### P1 deliverables
+#### Goal
 
-- [x] New/updated matrix benchmark YAML cases with ranked targets and adverse markers.
-- [x] Projection/calibration registry for compound-level matrix observability.
-- [x] Validation code and reports that surface ranking deltas in Docker artifacts.
+- [ ] Promote non-sulfur flavor markers and cross-pathway markers into first-class reference artifacts.
 
-#### P1 verification plan
+#### Files
 
-- [x] Add focused pytest coverage for contract parsing, calibration fallback behavior, and ranking assertions.
-- [ ] Run Docker benchmark lanes for the first promoted matrix family before merge.
-- [x] Compare default-branch vs feature-branch benchmark deltas before any strict-gate claim.
+- [ ] data/lit/flavor_reference_payloads.json
+- [ ] src/reporting.py
+- [ ] src/recommend.py
 
-## P3 — Broaden The Scientific Envelope That Matters To Alt-Protein R&D
+#### Exact tasks
 
-This is how the repo stops being a strong niche engine and becomes genuinely state of the art.
+1. [ ] Add Hernandez 2023 sub-payloads for:
+	- [ ] 2-methylbutanal
+	- [ ] 3-methylbutanal
+	- [ ] methional
+	- [ ] phenylacetaldehyde
+	- [ ] benzaldehyde
+	- [ ] pyrazines
+	- [ ] furfural
+	- [ ] 2,3-butanedione
+	- [ ] acetoin
+2. [ ] Add Hofmann 1997 and Hernandez 2023 as explicit MFT/FFT target bands in a flavor reference payload, not only in prose.
+3. [ ] Add Watanabe 2015 DMHF reference if quantitative meat values can be extracted robustly enough.
 
-- [ ] Expand benchmark coverage for precursor families, protein systems, process regimes, and target compound families that matter in alternative proteins.
-- [ ] Add peptide-bound and intact-protein reactivity where it materially changes accessible chemistry.
-- [ ] Add broader carbohydrate realism beyond the current free-sugar emphasis when relevant to commercial formulations.
-- [ ] Strengthen safety validation with literature-backed dynamic acrylamide and related risk markers across realistic process trajectories; Squeo 2023 now provides an industrial endpoint anchor but not dynamic T/t/[Asn] kinetics.
-- [ ] Improve temporal/process-path validation so the model can compare alternative heating profiles, not only endpoint conditions.
-- [ ] Add better coverage for lipid/Maillard coupling in realistic plant-fat systems.
+#### Acceptance criteria
 
-### P3 acceptance criteria
+- [ ] The reference surface is no longer sulfur-only.
+- [ ] PBMA-vs-meat sub-markers can be surfaced in reports even if their predictive chemistry is still partial.
 
-- [ ] The validated envelope covers a materially broader slice of real alternative-protein formulation space.
-- [ ] Scientists can use the tool for more than free-precursor exploration plus narrow pea/soy intake modeling.
+## Track 2: Convert SLR Knowledge Into Production Logic
 
-## P4 — Build The Scientific Operating System Layer
+### 2A. Dynamic retention and release
 
-This is the difference between a strong model repo and a tool scientists keep using.
+#### Goal
 
-- [ ] Add experiment-ingestion workflows so internal wet-lab data can be added as calibration/validation cases without bespoke code edits.
-- [x] Add standardized project/report templates for comparing candidate recipes, interventions, and benchmark deltas over time.
-- [x] Add versioned result provenance so scientists can trace a recommendation to the exact benchmark contract, calibration state, and code revision.
-- [x] Add batch campaign workflows for screening formulation sets and exporting ranked decisions with rationale.
-- [ ] Add notebook- and report-friendly APIs for external scientific teams.
-- [ ] Add explicit support for comparing model output against newly collected GC-MS or sensory panel data.
+- [ ] Replace static retention assumptions where the SLR already says the process is temperature-dependent, reversible, or browning-dependent.
 
-### P4 acceptance criteria
+#### Files
 
-- [ ] A team can use the repo as a repeatable formulation platform, not just as a codebase with scripts.
+- [ ] src/headspace.py
+- [ ] src/matrix_correction.py
+- [ ] src/recommend.py
+- [ ] tests/unit/test_headspace.py
 
-## P5 — External Usability & Adoption (Future Sprints)
+#### Exact tasks
 
-This layer focuses on removing friction for non-computational food scientists and data science teams who want to build around the repository.
+1. [ ] Introduce a retention/release model that can depend on:
+	- [ ] temperature
+	- [ ] process_state
+	- [ ] matrix family
+	- [ ] browning index or projection severity
+2. [ ] Use Ince 2024 and JAFC 3c05991 to drive aldehyde reversibility rather than a single static factor.
+3. [ ] Use Xu 2023 to create a cheap temporal attenuation prior for SPI off-flavors.
+4. [ ] Keep the melanoidin sulfur surrogate, but tie it explicitly to a browning or severity narrative in reporting.
 
-- [ ] Add an example Jupyter notebook for programmatic access to the pipeline.
-- [ ] Implement a `--dry-run` or `--validate-inputs` flag to verify recipes against the validated envelope without running heavy simulations.
-- [ ] Document the Python API explicitly for programmatic use.
-- [ ] Publish a pre-built Docker image to Docker Hub so users can bypass the `bootstrap` build step.
-- [ ] Develop a narrative walkthrough use case based on a realistic food scientist persona.
+#### Acceptance criteria
 
-## Guardrails
+- [ ] Hexanal release differs meaningfully between low and high temperature soy conditions.
+- [ ] Projection metadata shows which part came from retention, release, calibration, and browning-linked sulfur trapping.
 
-- [ ] Do not chase new chemistry breadth before the user-facing decision surface is honest and usable.
-- [ ] Do not promote matrix systems into the strict gate before observable target ranking is reproducible.
-- [ ] Do not claim quantitative confidence where only directional support exists.
-- [ ] Keep Docker as the authoritative validation environment.
+### 2B. Strecker flavor axis
 
-## Immediate Execution Sequence
+#### Goal
 
-5. [ ] Build the ingestion path for new internal calibration and validation experiments.
+- [ ] Stop treating the flavor surface as if sulfur alone explained meatiness.
 
-## Review
+#### Files
 
-- **Status (2026-03-18):** P2 usability layers are functionally complete. Validated envelope and boundaries are visually separated and well-documented. Matrix meaty-positive benchmarks remain a structural gap (PPI/SPI + ribose + cysteine cross-experiment needed).
+- [ ] src/smirks_engine.py
+- [ ] src/inverse_design.py
+- [ ] src/sensory.py
+- [ ] data/lit/flavor_reference_payloads.json
+- [ ] tests/unit/
 
-##
+#### Exact tasks
+
+1. [ ] Promote Strecker aldehydes to explicit target compounds in scoring and reporting.
+2. [ ] Use Hernandez 2023 values as PBMA-vs-meat reference bands.
+3. [ ] Make 2-methylbutanal a secondary meaty-quality marker because the SLR identifies it as one of the clearest beef discriminators.
+4. [ ] Add Lincoln 2025 as a qualitative cross-talk prior for glucose plus lipid plus polyphenol systems.
+
+#### Acceptance criteria
+
+- [ ] Reports can explain when a formulation is sulfur-positive but Strecker-poor.
+- [ ] Comparison outputs no longer collapse everything meaty into one scalar without cross-marker context.
+
+### 2C. Pyrazine control layer
+
+#### Goal
+
+- [ ] Encode the SLR's pH-, sugar-, and peptide-dependent pyrazine findings as a real control surface.
+
+#### Files
+
+- [ ] data/lit/computational_priors.json
+- [ ] src/conditions.py or new src/pyrazine_control.py
+- [ ] src/inverse_design.py
+- [ ] src/reporting.py
+
+#### Exact tasks
+
+1. [ ] Add pH-linked pyrazine propensity priors from Laemont 2023 and Arsa 2022.
+2. [ ] Add sugar-type pyrazine-vs-furfural priors from Laemont 2023 and Hao 2025.
+3. [ ] Add peptide-sequence and peptide-size priors from Wang 2021 papers.
+4. [ ] Introduce a pyrazine burden or overshoot term in optimization and comparison reporting.
+
+#### Acceptance criteria
+
+- [ ] The repo can show why high-pH or fructose-heavy systems become pyrazine-heavy.
+- [ ] Scientists can see when a candidate wins on sulfur but loses by roasted or earthy overshoot.
+
+### 2D. Furanone layer
+
+#### Goal
+
+- [ ] Add positive furanone chemistry to the roadmap as a first-class axis rather than letting furfural stand in for all oxygenated flavor chemistry.
+
+#### Files
+
+- [ ] src/smirks_engine.py
+- [ ] src/sensory.py
+- [ ] data/lit/flavor_reference_payloads.json
+- [ ] data/lit/computational_priors.json
+
+#### Exact tasks
+
+1. [ ] Encode HEMF and DMHF as candidate target compounds in the species and sensory layer.
+2. [ ] Use Blank and Fay 1996 as the mechanistic prior for pentose plus alanine and glycine routes.
+3. [ ] Use Watanabe 2015 as a meat-side reference if quantitative extraction is robust enough.
+4. [ ] Keep their confidence low until matrix-specific measurements exist.
+
+#### Acceptance criteria
+
+- [ ] The chemistry layer can represent HEMF and DMHF.
+- [ ] Reports show them as mechanistically expected but low-confidence where appropriate.
+
+### 2E. Thiamine provenance layer
+
+#### Goal
+
+- [ ] Distinguish native SPI/PPI systems from additive-rich PBMA systems that can source MFT from thiamine pathways.
+
+#### Files
+
+- [ ] src/smirks_engine.py
+- [ ] src/recommend.py
+- [ ] data/lit/computational_priors.json
+- [ ] src/reporting.py
+
+#### Exact tasks
+
+1. [ ] Add an explicit formulation metadata field for thiamine availability.
+2. [ ] Use Cerny 2007 as a mechanistic split prior for MFT attribution.
+3. [ ] Mark thiamine-assisted sulfur formation as inactive by default for native SPI/PPI benchmark conditions.
+4. [ ] Surface this as a provenance flag in scientist-facing outputs.
+
+#### Acceptance criteria
+
+- [ ] A commercial PBMA-like formulation and a native SPI/PPI benchmark are no longer interpreted as if they shared the same sulfur source mix.
+
+## Track 3: Show Calibration To The User Properly
+
+### Goal
+
+- [ ] Make calibration visible, legible, and decision-useful.
+
+### Files
+
+- [ ] src/reporting.py
+- [ ] src/recommend.py
+- [ ] results/* generated artifacts
+
+### Exact tasks
+
+1. [ ] Add a compound-level evidence ladder to single-run reports with fields:
+	- [ ] direct_anchor
+	- [ ] transferred_prior
+	- [ ] mechanistic_surrogate
+	- [ ] computational_refinement
+2. [ ] Extend comparison reports to include at minimum:
+	- [ ] MFT/furfural ratio
+	- [ ] meaty_quality_penalty
+	- [ ] pyrazine burden
+	- [ ] Strecker support marker
+	- [ ] sulfur trapping summary
+3. [ ] Add a calibration summary block per run listing the top literature anchors actually used.
+4. [ ] Add a missing-data block listing key target compounds that are still hypothesis-only or structurally unsupported.
+5. [ ] Add a benchmark-neighborhood summary that distinguishes free-system anchor, matrix transfer, hydrolysate proxy, and structural gap.
+
+### Acceptance criteria
+
+- [ ] A scientist can tell, from one report, which literature anchors drove the prediction.
+- [ ] A comparison artifact can reveal when the winning formulation is chemically suspect even if its target score is high.
+
+## Track 4: Immediate Incorporation Sequence From Highest To Lowest Value
+
+### Phase 1: Must encode now because the SLR already contains the data
+
+1. [ ] Add Foods 12(10):1967 and Choi 2024 to safety payloads.
+2. [ ] Add MDPI Foods 11(21):3505 to soy process-state calibrations.
+3. [ ] Add JAFC 3c05991 to retention payloads.
+4. [ ] Add Hernandez 2023 Strecker and pyrazine sub-benchmarks.
+5. [ ] Add Karolkowski 2021 and Xu 2023 to pH/time release priors.
+
+### Phase 2: Must convert to production logic now
+
+1. [ ] Replace static aldehyde retention with a temperature-aware reversible model.
+2. [ ] Add pyrazine burden logic.
+3. [ ] Add Strecker markers to the score and reporting surface.
+4. [ ] Expose calibration evidence in comparison reports.
+
+### Phase 3: Important but lower-confidence literature-derived additions
+
+1. [ ] Add Troise 2018 soy thermal-history payload.
+2. [ ] Add Lincoln 2025 polyphenol-modulated cross-talk prior.
+3. [ ] Add HEMF/DMHF mechanistic priors.
+4. [ ] Add thiamine attribution layer.
+
+## Track 5: Computational Alternatives For The Remaining True Gaps
+
+### Principle
+
+- [ ] Only unresolved gaps that remain benchmark-relevant after Tracks 1 to 4 enter this lane.
+
+### Gap map to method class
+
+#### 5A. Sulfur selectivity and sulfur-loss chemistry
+
+- [ ] Best cheap method: local sensitivity ranking plus explicit meaty-quality and trapping constraints.
+- [ ] Best intermediate method: GFN2-xTB plus CREST conformer search and microhydrated motif screening.
+- [ ] Best DFT method: r2SCAN-3c geometry plus frequency workflow, with single-point omegaB97M-V or wB97X-D/def2-TZVPP and cluster-continuum water correction on the top motif set.
+- [ ] Best focal check: DLPNO-CCSD(T1) or similarly cheap coupled-cluster correction only for 1 to 3 decisive barriers.
+
+#### 5B. Peptide-bound cysteine reactivity
+
+- [ ] Best cheap method: peptide-state priors driven by hydrolysis level, peptide length, and terminal-residue rules.
+- [ ] Best intermediate method: capped dipeptide and tripeptide motif panel screened with GFN2-xTB plus CREST in water.
+- [ ] Best DFT method: selective DFT on the top motif families only after xTB ranking stabilizes.
+- [ ] Best ML option: local delta model trained on motif-level DFT corrections only if many related peptide motifs must be screened repeatedly.
+
+#### 5C. Retention and release of aldehydes and sulfur volatiles
+
+- [ ] Best cheap method: temperature-aware reversible retention surrogates fitted to literature payloads.
+- [ ] Best intermediate method: representative residue-cluster binding calculations on glycinin or beta-conglycinin motif clusters with xTB.
+- [ ] Best DFT method: r2SCAN-3c or similar for motif clusters, but only for calibration deltas, not whole-protein simulation.
+- [ ] Best ML option: not first-line; only justified if many repeated motif classes require rapid rescoring after a sufficient DFT seed set exists.
+
+#### 5D. Wet-matrix acrylamide kinetics
+
+- [ ] Best cheap method: endpoint safety bands plus free-system kinetics plus explicit uncertainty inflation.
+- [ ] Best intermediate method: none unless new internal wet-matrix data exists.
+- [ ] Best DFT method: very low priority, because aqueous acrylamide prediction is dominated by matrix-scale transport and availability rather than a single missing gas-phase barrier.
+- [ ] Best ML option: not justified before wet-lab kinetics exist.
+
+#### 5E. Furanones and pyrazines in matrix systems
+
+- [ ] Best cheap method: literature-derived propensity priors plus explicit confidence demotion.
+- [ ] Best intermediate method: xTB motif ranking for sugar plus amino-acid or peptide branching.
+- [ ] Best DFT method: only for the handful of branching steps that materially move furanone versus furfural or pyrazine versus sulfur competition.
+- [ ] Best ML option: local reaction-family surrogate only after a curated DFT seed set exists.
+
+## Track 6: Bleeding-Edge Architecture For Computation Without Breaking Practicality
+
+### 6A. Recommended layered architecture
+
+#### Layer 0. Literature and calibration layer
+
+- [ ] Machine-readable payloads for every usable SLR datum.
+- [ ] Evidence-tiered priors and censoring surrogates.
+- [ ] User-facing calibration ledger.
+
+#### Layer 1. Cheap mechanistic surrogate layer
+
+- [ ] Projection-severity surrogates.
+- [ ] Reversible retention models.
+- [ ] Pyrazine and Strecker propensity priors.
+- [ ] Thiamine attribution flags.
+
+#### Layer 2. Semiempirical screening layer
+
+- [ ] GFN2-xTB plus CREST plus ALPB or GBSA water.
+- [ ] Motif library for sulfur, peptide, and retention clusters.
+- [ ] Automatic uncertainty tagging based on motif novelty and conformational spread.
+
+#### Layer 3. Selective DFT refinement layer
+
+- [ ] r2SCAN-3c or B97-3c for affordable geometry and thermochemistry.
+- [ ] Cluster-continuum water treatment for microhydrated proton transfer and sulfur steps.
+- [ ] Higher-level single points only on the smallest decisive subset.
+- [ ] Write-back as cached surrogate_patch JSON artifacts.
+
+#### Layer 4. Local ML potential layer
+
+- [ ] Only for repeated motif classes that survive DFT triage and need many related rescoring calls.
+- [ ] Use active learning with committee uncertainty.
+- [ ] Train only local family-specific models, not a fantasy global Maillard potential.
+- [ ] Restrict use to offline acceleration of motif scans, never as the sole source of a new production correction.
+
+### 6B. Recommended methods by realism and value
+
+- [ ] Default geometry and conformer workflow: CREST plus GFN2-xTB.
+- [ ] Default affordable DFT refinement: r2SCAN-3c.
+- [ ] Default decisive single-point refinement: omegaB97M-V or wB97X-D class with def2-TZVPP and solvation.
+- [ ] Default highest-accuracy spot check: DLPNO-CCSD(T1) on the smallest decisive motif subset.
+- [ ] Default local MLP strategy if justified: MACE-style local potential or equivalent committee-based local force field, trained only on motif families with enough DFT labels.
+
+### 6C. Hard gate for ML potentials
+
+- [ ] Do not start with MLPs to compensate for missing literature.
+- [ ] Do not train an MLP until a motif family has at least dozens to hundreds of internally consistent DFT-labeled structures or pathway points.
+- [ ] Do not let an MLP create a new production correction without a benchmark-visible validation step.
+
+## Track 7: DFT And MLP Approval Gates
+
+### Approve selective DFT only if all are true
+
+- [ ] The gap remains benchmark-visible after literature encoding and cheap surrogates are in place.
+- [ ] The missing parameter affects ranking, observability, or safety in a visible way.
+- [ ] The target can be compressed into a reusable surrogate artifact.
+- [ ] The validation target is explicit in Docker.
+
+### Approve a local ML potential only if all are true
+
+- [ ] A DFT seed set already exists for one repeated motif class.
+- [ ] The same family will otherwise require many near-redundant DFT calculations.
+- [ ] Uncertainty can be estimated and surfaced.
+- [ ] The model is used only offline to accelerate motif exploration or delta prediction.
+
+## Track 8: User-Facing Success Criteria
+
+- [ ] Single-run report shows the top literature anchors used.
+- [ ] Single-run report shows which key compounds are anchor-driven versus prior-driven versus surrogate-driven.
+- [ ] Comparison report shows MFT/furfural ratio, pyrazine burden, Strecker support, and sulfur trapping summary.
+- [ ] The repo can show, for each missing gap, whether the next action is literature encoding, wet-lab acquisition, xTB screening, DFT refinement, or no action.
+
+## Review Note — 2026-03-19
+
+- The previous backlog was still too chemistry-general. The next correct move is to finish the SLR-to-repo audit as a first-class artifact, ingest the literature data that already exists but is not yet encoded, expose calibration provenance to the scientist, and reserve DFT or local ML potentials for the much smaller set of gaps that remain genuinely unresolved after that work.
+- [ ] current cheap model and why it failed
+- [ ] chosen method
+- [ ] solvent model
+- [ ] charge and spin
+- [ ] expected outputs
+- [ ] surrogate write-back rule
+- [ ] validation target in Docker
+
+### Default cheap-first method by target class
+
+- [ ] sulfur selectivity: barrier sensitivity plus quality-ratio penalty before DFT
+- [ ] peptide accessibility: priors plus semiempirical conformer screening before DFT
+- [ ] matrix release: calibration registry plus reversible release surrogates before DFT
+- [ ] browning-dependent sulfur trapping: severity surrogate before DFT
+
+### Current candidate list to maintain
+
+- [ ] Keep the active target manifest in data/lit/computational_gap_closure_targets.json.
+- [ ] Update it whenever a gap is closed cheaply so DFT does not expand by inertia.
+
+## Verification Plan
+
+### Unit and focused integration lanes
+
+- [ ] tests/unit/test_headspace.py
+- [ ] tests/unit/test_budget_projection.py
+- [ ] tests/unit/test_inverse_design_projection_contract.py
+- [ ] tests/unit/test_bayesian_optimizer.py
+- [ ] tests/unit/test_usability_reports.py
+- [ ] focused ranking and contract tests in tests/integration/test_recommendation_engine.py
+
+### Docker commands
+
+- [ ] ./scripts/docker_maillard.sh pytest tests/unit/test_headspace.py tests/unit/test_budget_projection.py tests/unit/test_inverse_design_projection_contract.py tests/unit/test_bayesian_optimizer.py
+- [ ] ./scripts/docker_maillard.sh pytest tests/unit/test_usability_reports.py
+- [ ] ./scripts/docker_maillard.sh pytest tests/integration/test_recommendation_engine.py::TestInverseDesignerEvaluation::test_evaluate_all_returns_results tests/integration/test_recommendation_engine.py::TestInverseDesignerEvaluation::test_evaluate_all_result_attributes tests/integration/test_recommendation_engine.py::TestInverseDesignerEvaluation::test_evaluate_all_results_sorted
+- [ ] ./scripts/docker_maillard.sh run python scripts/run_campaign.py --spec data/campaigns/heated_soy_tradeoff_screen.yml --output-dir results/heated_soy_tradeoff_screen
+
+### Promotion rule
+
+- [ ] No new correction is considered complete until both focused tests and one Docker campaign or benchmark-facing artifact show the expected direction.
+
+## Immediate Next Sequence
+
+### Phase 0: Already implemented or in motion
+
+- [x] Make compound-specific matrix calibration affect the observable projection.
+- [x] Add heated soy 2-pentylfuran suppression surrogate.
+- [x] Add meaty-quality penalty from MFT/furfural ratio.
+- [x] Add a first dynamic melanoidin trapping surrogate in the projection layer.
+- [x] Create a heated-soy campaign spec.
+- [x] Create a cheap-first computational gap target manifest.
+
+### Phase 1: Short-term completion
+
+1. [ ] Run the heated soy campaign in Docker and inspect rank shifts and sulfur penalties.
+2. [ ] Add report-facing visibility for melanoidin_trapping_factor if scientist readability needs it beyond raw projection metadata.
+3. [ ] Re-audit whether the new sulfur surrogate improves or harms free-system benchmark behavior.
+
+### Phase 2: Cheap-first gap closure
+
+1. [ ] Implement peptide-bound cysteine priors rather than new reaction families first.
+2. [ ] Expand heated-state adverse-marker calibration only where a real anchor exists.
+3. [ ] Add uncertainty labeling to computational_gap_closure_targets.json if it becomes part of scientist-facing reporting.
+
+### Phase 3: DFT triage only after cheap closure
+
+1. [ ] Run sensitivity analysis to rank which sulfur reactions truly deserve DFT.
+2. [ ] Approve only Tier 1A or Tier 1B targets for the first offline batch.
+3. [ ] Emit cached correction artifacts, not ad hoc notebook outputs.
+
+## Review Note — 2026-03-19
+
+- The repository no longer needs more abstract strategy before acting. The next useful work is to tighten calibration in the observable layer, keep matrix realism explicit, and use DFT only as a narrow offline correction tool once the cheap surrogates stop buying meaningful accuracy.

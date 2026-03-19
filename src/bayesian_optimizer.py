@@ -138,15 +138,18 @@ class FormulationOptimizer:
         target_val = res.target_score
         safety_penalty = self.risk_aversion * res.safety_score
         off_flavor_penalty = 0.5 * res.off_flavour_risk
+        quality_penalty = res.meaty_quality_penalty
         
         # Heuristic uncertainty penalty: -0.1 per kcal of span uncertainty
         unc_penalty = res.avg_uncertainty * 0.1
         
-        final_objective = target_val - safety_penalty - off_flavor_penalty - unc_penalty
+        final_objective = target_val - safety_penalty - off_flavor_penalty - quality_penalty - unc_penalty
         
         trial.set_user_attr("target_score", target_val)
         trial.set_user_attr("safety_score", res.safety_score)
         trial.set_user_attr("off_flavour_risk", res.off_flavour_risk)
+        trial.set_user_attr("meaty_quality_penalty", res.meaty_quality_penalty)
+        trial.set_user_attr("mft_to_furfural_ratio", res.mft_to_furfural_ratio)
         trial.set_user_attr("avg_uncertainty", res.avg_uncertainty)
         trial.set_user_attr("flagged_toxics", res.flagged_toxics)
         
