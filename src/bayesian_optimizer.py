@@ -141,11 +141,12 @@ class FormulationOptimizer:
         quality_penalty = res.meaty_quality_penalty
         strecker_penalty = res.strecker_gap_penalty
         pyrazine_penalty = res.pyrazine_penalty
+        furanone_penalty = res.furanone_penalty
         
         # Heuristic uncertainty penalty: -0.1 per kcal of span uncertainty
         unc_penalty = res.avg_uncertainty * 0.1
         
-        final_objective = target_val - safety_penalty - off_flavor_penalty - quality_penalty - strecker_penalty - pyrazine_penalty - unc_penalty
+        final_objective = target_val - safety_penalty - off_flavor_penalty - quality_penalty - strecker_penalty - pyrazine_penalty - furanone_penalty - unc_penalty
         
         trial.set_user_attr("target_score", target_val)
         trial.set_user_attr("safety_score", res.safety_score)
@@ -155,6 +156,7 @@ class FormulationOptimizer:
         trial.set_user_attr("strecker_gap_penalty", res.strecker_gap_penalty)
         trial.set_user_attr("pyrazine_penalty", res.pyrazine_penalty)
         trial.set_user_attr("pyrazine_burden", res.pyrazine_burden)
+        trial.set_user_attr("furanone_penalty", res.furanone_penalty)
         trial.set_user_attr("avg_uncertainty", res.avg_uncertainty)
         trial.set_user_attr("flagged_toxics", res.flagged_toxics)
         

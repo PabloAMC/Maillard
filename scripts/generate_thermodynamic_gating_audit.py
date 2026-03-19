@@ -12,7 +12,8 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src.benchmark_validation import audit_all_thermodynamic_gating, render_thermodynamic_gating_audit_markdown
+from src.benchmark_validation import audit_all_thermodynamic_gating
+from src.presentation import render_thermodynamic_gating_audit_markdown
 
 
 def main() -> int:

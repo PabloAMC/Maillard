@@ -13,7 +13,7 @@ import json
 import math
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, List, Tuple, Optional
+from typing import Any, Dict, List, Tuple, Optional
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -28,11 +28,66 @@ def _load_safety_reference_payloads() -> dict:
 SAFETY_REFERENCE_PAYLOADS = _load_safety_reference_payloads()
 
 
+_DEFAULT_SAFETY_VISIBILITY_BY_KIND = {
+    "industrial_endpoint_reference": "default",
+    "finished_product_reference": "default",
+    "precursor_correlation_reference": "default",
+    "kinetic_model_reference": "extended",
+    "contextual_process_modifier": "extended",
+}
+
+
+def _normalize_safety_visibility(entry: Dict[str, Any]) -> str:
+    explicit = str(entry.get("report_visibility", "")).strip().lower()
+    if explicit in {"default", "extended"}:
+        return explicit
+    kind = str(entry.get("kind", "")).strip()
+    return _DEFAULT_SAFETY_VISIBILITY_BY_KIND.get(kind, "extended")
+
+
 def get_safety_reference_payload(reference_id: str = "squeo_2023_pbpi_acrylamide") -> Optional[dict]:
     for entry in SAFETY_REFERENCE_PAYLOADS.get("entries", []):
         if str(entry.get("id", "")) == reference_id:
             return entry
     return None
+
+
+def get_safety_reference_entries(
+    *,
+    analyte: Optional[str] = None,
+    visibility: str = "default",
+) -> List[dict]:
+    requested_visibility = str(visibility).strip().lower()
+    entries: List[dict] = []
+    for entry in SAFETY_REFERENCE_PAYLOADS.get("entries", []):
+        entry_analyte = str(entry.get("analyte", "")).strip().lower()
+        if analyte and entry_analyte != str(analyte).strip().lower():
+            continue
+        entry_visibility = _normalize_safety_visibility(entry)
+        if requested_visibility == "default" and entry_visibility != "default":
+            continue
+        entries.append(dict(entry, report_visibility=entry_visibility))
+    return entries
+
+
+def build_safety_reference_context(*, analyte: str = "acrylamide") -> Dict[str, List[Dict[str, Any]]]:
+    def _summarize(entry: Dict[str, Any]) -> Dict[str, Any]:
+        supports = entry.get("what_it_supports", []) or []
+        summary = str(supports[0]) if supports else str(entry.get("comment", ""))
+        return {
+            "id": str(entry.get("id", "unknown")),
+            "kind": str(entry.get("kind", "unknown")),
+            "report_visibility": str(entry.get("report_visibility", _normalize_safety_visibility(entry))),
+            "source_citation": str(entry.get("source_citation", "unknown")),
+            "summary": summary,
+        }
+
+    default_entries = [_summarize(entry) for entry in get_safety_reference_entries(analyte=analyte, visibility="default")]
+    extended_entries = [_summarize(entry) for entry in get_safety_reference_entries(analyte=analyte, visibility="all") if _normalize_safety_visibility(entry) == "extended"]
+    return {
+        "default_entries": default_entries,
+        "extended_entries": extended_entries,
+    }
 
 
 def get_safety_reference_range(matrix_family: str, reference_id: str = "squeo_2023_pbpi_acrylamide") -> Optional[dict]:

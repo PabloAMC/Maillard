@@ -17,7 +17,8 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src.usability_reports import build_validated_envelope_report, render_validated_envelope_markdown
+from src.usability_reports import build_validated_envelope_report
+from src.presentation import render_validated_envelope_markdown
 
 
 def _render_validated_envelope_figure(report, output_path: Path) -> None:

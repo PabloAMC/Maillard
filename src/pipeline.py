@@ -95,6 +95,7 @@ class FormulationResult:
     pyrazine_propensity: float = 0.0
     pyrazine_burden: float = 0.0
     pyrazine_penalty: float = 0.0
+    furanone_penalty: float = 0.0
     flavor_axis_summary: Dict[str, object] = field(default_factory=dict)
 
 
@@ -402,9 +403,11 @@ class MaillardPipeline:
                 lipids=lipids,
                 protein_type=protein_type,
                 pH=cond.pH,
+                thiamine_availability=form.get("thiamine_availability"),
             )
             strecker_gap_penalty = float(flavor_axis_summary.get("strecker_gap_penalty", 0.0))
             pyrazine_penalty = float(flavor_axis_summary.get("pyrazine_penalty", 0.0))
+            furanone_penalty = float(flavor_axis_summary.get("furanone_penalty", 0.0))
 
             # Use radar score for the target category as the official t_score
             t_score = radar_scores.get(self.target_tag, (0.0, 0))[0]
@@ -447,6 +450,7 @@ class MaillardPipeline:
                 pyrazine_propensity=float(flavor_axis_summary.get("pyrazine_propensity", 0.0)),
                 pyrazine_burden=float(flavor_axis_summary.get("pyrazine_burden", 0.0)),
                 pyrazine_penalty=pyrazine_penalty,
+                furanone_penalty=furanone_penalty,
                 flavor_axis_summary=flavor_axis_summary,
             ))
 
@@ -461,7 +465,8 @@ class MaillardPipeline:
                 - texture_aversion * x.texture_risk
                 - x.meaty_quality_penalty
                 - x.strecker_gap_penalty
-                - x.pyrazine_penalty,
+                - x.pyrazine_penalty
+                - x.furanone_penalty,
                 -x.off_flavour_risk,
             ), 
             reverse=True

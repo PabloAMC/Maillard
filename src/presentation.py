@@ -115,6 +115,7 @@ def render_flavor_axis_markdown(
             f"- Strecker balance score: {float(flavor_axis.get('strecker_balance_score', 0.0)):.3f}",
             f"- Pyrazine burden: {float(flavor_axis.get('pyrazine_burden', 0.0)):.3f}",
             f"- Thiamine pathway active: {flavor_axis.get('thiamine_pathway_active', False)}",
+            f"- Thiamine source: {flavor_axis.get('thiamine_availability_source', 'unknown')}",
             "",
         ])
         return "\n".join(lines)
@@ -126,8 +127,11 @@ def render_flavor_axis_markdown(
         f"- **pyrazine_propensity:** {float(flavor_axis.get('pyrazine_propensity', 0.0)):.2f}",
         f"- **pyrazine_burden:** {float(flavor_axis.get('pyrazine_burden', 0.0)):.2f}",
         f"- **pyrazine_penalty:** {float(flavor_axis.get('pyrazine_penalty', 0.0)):.2f}",
+        f"- **furanone_support_score:** {float(flavor_axis.get('furanone_support_score', 1.0)):.2f}",
+        f"- **furanone_penalty:** {float(flavor_axis.get('furanone_penalty', 0.0)):.2f}",
         f"- **thiamine_pathway_active:** {flavor_axis.get('thiamine_pathway_active', False)}",
-        f"- **thiamine_provenance_mode:** {flavor_axis.get('thiamine_provenance_mode', 'inactive')}",
+        f"- **thiamine_availability_source:** {flavor_axis.get('thiamine_availability_source', 'unknown')}",
+        f"- **thiamine_availability_explicit:** {flavor_axis.get('thiamine_availability_explicit', False)}",
         f"- **thiamine_provenance_mode:** {flavor_axis.get('thiamine_provenance_mode', 'inactive')}",
     ])
     expected_furanones = flavor_axis.get("furanone_expected", [])
@@ -136,6 +140,9 @@ def render_flavor_axis_markdown(
     observed_furanones = flavor_axis.get("furanone_observed", [])
     if observed_furanones:
         lines.append(f"- **furanone_observed:** {', '.join(str(item) for item in observed_furanones)}")
+    missing_furanones = flavor_axis.get("furanone_missing", [])
+    if missing_furanones:
+        lines.append(f"- **furanone_missing:** {', '.join(str(item) for item in missing_furanones)}")
     lines.append(f"- **lincoln_crosstalk_prior:** {flavor_axis.get('lincoln_crosstalk_prior', {}).get('summary', '')}")
     lines.append("")
     return "\n".join(lines)

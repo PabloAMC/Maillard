@@ -14,7 +14,8 @@ if str(ROOT) not in sys.path:
 
 from src.pipeline import MaillardPipeline
 from src.smirks_engine import ReactionConditions
-from src.usability_reports import build_formulation_explainability_payload, render_formulation_explainability_markdown
+from src.usability_reports import build_formulation_explainability_payload
+from src.presentation import render_formulation_explainability_markdown
 
 
 def main() -> int:
