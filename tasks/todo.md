@@ -113,6 +113,74 @@ This plan is no longer a generic calibration roadmap. It is a step-by-step SLR i
 - [ ] data/lit/retention_reference_payloads.json
 - [ ] data/lit/process_gap_registry.json
 
+### Track 0 deliverables
+
+- [ ] One canonical incorporation ledger covering every SLR paper and every quantitative sub-payload.
+- [ ] One flavor-reference payload file for non-safety compounds and meat/PBMA anchor bands.
+- [ ] One retention-reference payload file for headspace and binding data.
+- [ ] One explicit structural-gap registry separated from codable literature.
+
+### Track 0 schema contract
+
+#### slr_incorporation_matrix.json
+
+- [ ] One object per paper or per extracted sub-payload when one paper supports multiple independent model surfaces.
+- [ ] Required fields:
+	- [ ] slr_section
+	- [ ] paper_id
+	- [ ] citation
+	- [ ] doi
+	- [ ] matrix_family
+	- [ ] compounds_supported
+	- [ ] parameters_supported
+	- [ ] exact_numeric_anchors
+	- [ ] current_repo_artifacts
+	- [ ] current_runtime_consumers
+	- [ ] current_user_visible_surfaces
+	- [ ] incorporation_status
+	- [ ] next_action
+	- [ ] confidence_tier
+	- [ ] notes_on_limits
+
+#### flavor_reference_payloads.json
+
+- [ ] Organize by:
+	- [ ] sulfur_reference_anchors
+	- [ ] strecker_reference_anchors
+	- [ ] pyrazine_reference_anchors
+	- [ ] carbonyl_reference_anchors
+	- [ ] furanone_reference_anchors
+- [ ] Every entry must include:
+	- [ ] matrix_context
+	- [ ] analytical_method
+	- [ ] units
+	- [ ] benchmark_role
+	- [ ] target_direction
+	- [ ] numeric_band_or_point
+
+#### retention_reference_payloads.json
+
+- [ ] Organize by compound class and then by matrix family.
+- [ ] Every entry must include:
+	- [ ] retention_or_release_mode
+	- [ ] direct_binding_or_headspace_measure
+	- [ ] temperature_context
+	- [ ] time_context
+	- [ ] reversibility_assumption
+	- [ ] transferability_notes
+
+#### process_gap_registry.json
+
+- [ ] One object per unresolved structural gap.
+- [ ] Required fields:
+	- [ ] gap_id
+	- [ ] gap_type
+	- [ ] blocks_modules
+	- [ ] why_literature_cannot_close_it
+	- [ ] cheapest_next_step
+	- [ ] computational_fallback
+	- [ ] wet_lab_requirement
+
 ### Exact tasks
 
 1. [ ] Create one row per paper or quantitative sub-payload in the SLR.
@@ -127,10 +195,19 @@ This plan is no longer a generic calibration roadmap. It is a step-by-step SLR i
 3. [ ] Split compound-level flavor references away from safety references so reporting can consume them directly.
 4. [ ] Record structural gaps separately so they stop being mixed with codable literature.
 
+### Track 0 execution order
+
+1. [ ] Populate the matrix first for all papers already present in benchmark_intake_registry.json, process_state_calibrations.json, computational_priors.json, and safety_reference_payloads.json.
+2. [ ] Add all SLR papers currently cited only in docs/slr_benchmark_evaluation.md.
+3. [ ] Promote papers with direct numeric anchors into flavor_reference_payloads.json or retention_reference_payloads.json.
+4. [ ] Leave non-codable papers in the matrix with explicit next_action values rather than inventing payloads.
+5. [ ] Validate that every Track 1 ingestion item is traceable back to one matrix row.
+
 ### Acceptance criteria
 
 - [ ] Every paper in docs/slr_benchmark_evaluation.md is mapped to a concrete repo status.
 - [ ] We can answer, from one JSON, whether a datum is only cited, encoded, modeled, and shown.
+- [ ] We can generate a machine-readable diff between SLR content and repo content without rereading prose.
 
 ## Track 1: Encode All SLR Data That We Already Have But Have Not Yet Ingested
 
@@ -146,17 +223,30 @@ This plan is no longer a generic calibration roadmap. It is a step-by-step SLR i
 - [ ] src/reporting.py
 - [ ] src/safety.py
 
+#### Track 1A deliverables
+
+- [ ] Safety payloads cover industrial endpoints, PBMA endpoints, precursor correlation anchors, and free-system kinetics provenance.
+- [ ] Reports show which safety statements are endpoint references versus kinetic estimates.
+
 #### Exact tasks
 
 1. [ ] Add Foods 12(10):1967 PBMA acrylamide range and AGE context.
 2. [ ] Add Choi 2024 acrylamide plus asparagine correlation payload.
 3. [ ] Add Knol 2009, Claeys 2005, and Sen and Gokmen 2023 as kinetic model provenance payloads.
 4. [ ] Add Zilic 2014 only as contextual heat-transfer modifier evidence, not as a benchmark.
+5. [ ] Add explicit payload tags for:
+	- [ ] industrial_endpoint_reference
+	- [ ] finished_product_reference
+	- [ ] precursor_correlation_reference
+	- [ ] kinetic_model_reference
+	- [ ] contextual_process_modifier
+6. [ ] Define which safety payloads should surface in default user reports and which should stay in extended provenance only.
 
 #### Acceptance criteria
 
 - [ ] Reports can show both industrial endpoint bands and free-system kinetic provenance.
 - [ ] Safety output distinguishes endpoint references from kinetic models.
+- [ ] No safety reference is misrepresented as if it were a controlled benchmark kinetics dataset.
 
 ### 1B. Process-state and retention references
 
@@ -173,6 +263,12 @@ This plan is no longer a generic calibration roadmap. It is a step-by-step SLR i
 - [ ] src/headspace.py
 - [ ] src/matrix_correction.py
 
+#### Track 1B deliverables
+
+- [ ] Soy process-state anchors stop depending only on repo synthesis where direct literature exists.
+- [ ] Retention/reference payloads exist for aldehydes and sulfur proxy volatiles.
+- [ ] Computational priors become explicit about which entries are direct anchor, transferred anchor, or surrogate interpolation.
+
 #### Exact tasks
 
 1. [ ] Add MDPI Foods 11(21):3505 as a soy free-SH anchor with native and heated states.
@@ -182,11 +278,20 @@ This plan is no longer a generic calibration roadmap. It is a step-by-step SLR i
 5. [ ] Add Zhang 2026 as an indirect sulfur-volatile retention prior for soy.
 6. [ ] Add Trikusuma 2019 as a pea mixed-pathway aroma interaction payload if the quantitative table is recoverable enough for intake encoding.
 7. [ ] Add Troise 2018 as a lysine-loss/furosine calibration payload for soy thermal history.
+8. [ ] Add explicit provenance_tier normalization across these payloads:
+	- [ ] direct_measurement
+	- [ ] literature_derived_transfer
+	- [ ] mechanistic_surrogate
+	- [ ] repo_literature_synthesis
+	- [ ] manual_fallback
+9. [ ] Define an explicit censoring strategy for below-detection literature statements so they are numerically stable and visibly labeled.
+10. [ ] Add field-level notes for transferability limits whenever the source experiment is not the benchmark matrix or not the benchmark process window.
 
 #### Acceptance criteria
 
 - [ ] Soy process-state priors are no longer based only on repo literature synthesis when the SLR already supplies a direct anchor.
 - [ ] PPI/SPI aldehyde retention is grounded in explicit payloads rather than only family-level static factors.
+- [ ] Every retention payload states whether the chemistry is reversible, likely non-covalent, or only indirectly inferred.
 
 ### 1C. Flavor reference payloads now missing from the repo
 
@@ -199,6 +304,11 @@ This plan is no longer a generic calibration roadmap. It is a step-by-step SLR i
 - [ ] data/lit/flavor_reference_payloads.json
 - [ ] src/reporting.py
 - [ ] src/recommend.py
+
+#### Track 1C deliverables
+
+- [ ] A flavor reference file that no longer collapses meat-like quality to sulfur anchors only.
+- [ ] Explicit PBMA-vs-meat reference bands for Strecker, pyrazine, furfural, and key carbonyl markers.
 
 #### Exact tasks
 
@@ -214,11 +324,31 @@ This plan is no longer a generic calibration roadmap. It is a step-by-step SLR i
 	- [ ] acetoin
 2. [ ] Add Hofmann 1997 and Hernandez 2023 as explicit MFT/FFT target bands in a flavor reference payload, not only in prose.
 3. [ ] Add Watanabe 2015 DMHF reference if quantitative meat values can be extracted robustly enough.
+4. [ ] Add benchmark_role tags such as:
+	- [ ] reference_anchor
+	- [ ] pbma_counterexample
+	- [ ] directional_comparison_anchor
+	- [ ] low_confidence_mechanistic_anchor
+5. [ ] Define which reference compounds should affect optimization, which should affect reporting only, and which should remain future-facing until chemistry support improves.
 
 #### Acceptance criteria
 
 - [ ] The reference surface is no longer sulfur-only.
 - [ ] PBMA-vs-meat sub-markers can be surfaced in reports even if their predictive chemistry is still partial.
+- [ ] The user can see when a formulation is close to PBMA practice but still far from meat-like multivariate quality.
+
+### Track 1 execution order
+
+1. [ ] Fill safety_reference_payloads.json first because those payloads are easiest to encode and lowest risk.
+2. [ ] Fill process_state_calibrations.json and retention_reference_payloads.json second because Track 2 depends on them.
+3. [ ] Fill flavor_reference_payloads.json third so reporting and optimization can consume the new reference surfaces together.
+4. [ ] Update slr_incorporation_matrix.json after each ingestion batch so the audit ledger stays authoritative.
+
+### Track 1 done definition
+
+- [ ] All Track 1 papers listed in the audit result are represented in one machine-readable artifact.
+- [ ] No Track 1 paper remains only in docs/slr_benchmark_evaluation.md.
+- [ ] Each ingested payload has a declared consumer path: reporting, matrix calibration, headspace, safety, scoring, or future-only.
 
 ## Track 2: Convert SLR Knowledge Into Production Logic
 
@@ -423,6 +553,7 @@ This plan is no longer a generic calibration roadmap. It is a step-by-step SLR i
 - [ ] Best intermediate method: GFN2-xTB plus CREST conformer search and microhydrated motif screening.
 - [ ] Best DFT method: r2SCAN-3c geometry plus frequency workflow, with single-point omegaB97M-V or wB97X-D/def2-TZVPP and cluster-continuum water correction on the top motif set.
 - [ ] Best focal check: DLPNO-CCSD(T1) or similarly cheap coupled-cluster correction only for 1 to 3 decisive barriers.
+- [ ] Best external-MLP option: evaluate published universal or reactive foundation potentials only as an offline prescreen for conformers or motif stability, never as the sole source of barrier values without chemistry-family validation.
 
 #### 5B. Peptide-bound cysteine reactivity
 
@@ -430,6 +561,7 @@ This plan is no longer a generic calibration roadmap. It is a step-by-step SLR i
 - [ ] Best intermediate method: capped dipeptide and tripeptide motif panel screened with GFN2-xTB plus CREST in water.
 - [ ] Best DFT method: selective DFT on the top motif families only after xTB ranking stabilizes.
 - [ ] Best ML option: local delta model trained on motif-level DFT corrections only if many related peptide motifs must be screened repeatedly.
+- [ ] Best external-MLP option: test whether a published foundation MLP reproduces relative peptide conformer ordering well enough to accelerate prescreening before xTB, but require a benchmark against xTB or DFT on a held-out motif set.
 
 #### 5C. Retention and release of aldehydes and sulfur volatiles
 
@@ -437,6 +569,7 @@ This plan is no longer a generic calibration roadmap. It is a step-by-step SLR i
 - [ ] Best intermediate method: representative residue-cluster binding calculations on glycinin or beta-conglycinin motif clusters with xTB.
 - [ ] Best DFT method: r2SCAN-3c or similar for motif clusters, but only for calibration deltas, not whole-protein simulation.
 - [ ] Best ML option: not first-line; only justified if many repeated motif classes require rapid rescoring after a sufficient DFT seed set exists.
+- [ ] Best external-MLP option: use published local-structure potentials only for geometry relaxation or rapid clustering of binding motifs; do not trust internet MLP energies as final retention calibrations without a DFT cross-check set.
 
 #### 5D. Wet-matrix acrylamide kinetics
 
@@ -489,6 +622,20 @@ This plan is no longer a generic calibration roadmap. It is a step-by-step SLR i
 - [ ] Train only local family-specific models, not a fantasy global Maillard potential.
 - [ ] Restrict use to offline acceleration of motif scans, never as the sole source of a new production correction.
 
+#### Layer 4B. External foundation MLP option
+
+- [ ] Offer the user a second lane based on published or internet-available SOTA MLPs.
+- [ ] Restrict this lane to offline exploration, prescreening, geometry relaxation, or uncertainty-guided candidate narrowing.
+- [ ] Require a calibration card before use:
+	- [ ] model name and source
+	- [ ] domain the model was trained on
+	- [ ] whether sulfur chemistry, charged states, and aqueous motifs are in-domain
+	- [ ] validation subset against xTB or DFT on Maillard-relevant motifs
+	- [ ] failure criteria that disable the model for a motif family
+- [ ] Surface both options to the user explicitly:
+	- [ ] local in-house delta MLPs built after DFT seeding
+	- [ ] external foundation MLPs used as prescreening accelerators
+
 ### 6B. Recommended methods by realism and value
 
 - [ ] Default geometry and conformer workflow: CREST plus GFN2-xTB.
@@ -502,6 +649,8 @@ This plan is no longer a generic calibration roadmap. It is a step-by-step SLR i
 - [ ] Do not start with MLPs to compensate for missing literature.
 - [ ] Do not train an MLP until a motif family has at least dozens to hundreds of internally consistent DFT-labeled structures or pathway points.
 - [ ] Do not let an MLP create a new production correction without a benchmark-visible validation step.
+- [ ] Do not use an external internet MLP as authoritative chemistry unless it has passed a Maillard-specific validation card on our motif families.
+- [ ] Always let the user choose between the external-MLP lane and the in-house-local-MLP lane when both are technically viable.
 
 ## Track 7: DFT And MLP Approval Gates
 
@@ -518,6 +667,13 @@ This plan is no longer a generic calibration roadmap. It is a step-by-step SLR i
 - [ ] The same family will otherwise require many near-redundant DFT calculations.
 - [ ] Uncertainty can be estimated and surfaced.
 - [ ] The model is used only offline to accelerate motif exploration or delta prediction.
+
+### Approve an external SOTA MLP only if all are true
+
+- [ ] The model can be run locally or reproducibly through the project workflow.
+- [ ] Its training domain plausibly covers the motif class being screened.
+- [ ] It passes a small Maillard-specific validation subset against xTB or DFT.
+- [ ] It is used as an accelerator or prescreener, not as unverified final truth.
 
 ## Track 8: User-Facing Success Criteria
 

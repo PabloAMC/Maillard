@@ -45,6 +45,8 @@ manual_test_qcg/
 *.yaml
 !data/**/*.yml
 !data/**/*.yaml
+!data/lit/
 
 # Test Reports
 reports/
+results/
