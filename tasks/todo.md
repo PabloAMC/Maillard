@@ -19,6 +19,50 @@ It is a problem of combining:
 - process-aware confidence boundaries
 - scientist-facing reporting that states what is benchmarked and what is extrapolated
 
+## Current Sprint
+
+This sprint starts from a more honest state description:
+
+- amino acid plus sugar Maillard chemistry is the current first-class core because it is the most transferable and benchmarkable trunk of the product, not because the rest of the chemistry is minor
+- lipid oxidation and lipid-derived carbonyl crosstalk are already partially encoded, but not yet promoted to an equally explicit family-level validation and ingestion surface
+- MLPs and DFT are support tooling for benchmark-visible mechanistic gaps, not the product roadmap themselves
+
+Archive rule for this file:
+
+- leave completed program foundations below as a compact record
+- keep the active sprint clean by only listing unfinished or newly reopened work near the top
+
+### Sprint S1. Expand Beyond Amino Acid-Sugar Without Losing The Core
+
+Goal: make the repo state of the art at the product level by explicitly promoting the next chemistry families that change real plant-based flavor decisions.
+
+S1.1: Decide the next chemistry family lane
+
+- [ ] Treat lipid oxidation and carbonylic crosstalk as the default next expansion unless a stronger benchmark-visible family appears.
+- [ ] Keep amino acid plus sugar, Strecker, and sulfur chemistry as the benchmarked foundation rather than diffusing effort across many under-ingested families.
+- [ ] Name explicitly which additional families are open gaps versus bounded lanes versus first-class core.
+
+S1.2: Generalize SLR ingestion beyond amino acid-sugar
+
+- [ ] Use the same ingestion contract already proven in the repo: intake registry for candidate papers, runtime payloads for closable evidence, and process-gap registries for non-closable scope.
+- [ ] Add a chemistry-family scope artifact that states, for each family, the preferred runtime payload type: benchmark payload, flavor reference payload, retention payload, computational prior, safety payload, or structural-gap registry.
+- [ ] Avoid creating a separate narrative-only markdown workflow for new families; new families should enter the same machine-readable ingestion path used by the current SLR loop.
+- [ ] For lipid oxidation and crosstalk specifically, structure ingestion as a dual lane: observable benchmark targets plus retention and competition payloads.
+
+S1.3: Keep DFT and MLP policy clean for the next sprint
+
+- [ ] Archive the now-completed P4 setup work as infrastructure, not as the active scientific objective.
+- [ ] State clearly that selective DFT is reserved for benchmark-visible sulfur, carbonyl-transfer, and TS-sensitive gaps after cheap-first screening.
+- [ ] State clearly that MLPs remain bounded offline accelerators until local geometry or TS benchmarks accept them on Maillard-relevant systems.
+- [ ] Prevent roadmap language from implying that better MLP branding can substitute for missing family-level ingestion or benchmark closure.
+
+S1 measurable exit criteria:
+
+- [ ] The repo can explain why amino acid-sugar was first without implying that other families are unimportant.
+- [ ] The repo can identify lipid oxidation and crosstalk as either the active next family sprint or an explicitly rejected option with reasons.
+- [x] The repo has a machine-readable chemistry-family scope artifact linked in reporting.
+- [x] The top of this file reads as a clean active sprint rather than a mixed archive of finished and unfinished eras.
+
 ## The Three Modeling Regimes
 
 1. Free precursors
@@ -61,7 +105,9 @@ These are not three independent backlogs. They are three trust regimes of the sa
 
 - [ ] No. The elegant main solution is benchmark-driven observable and accessibility modeling first, selective mechanistic refinement second, and external offline ML-potential acceleration only third.
 
-## Active Roadmap
+## Program Record
+
+The sections below are the program record and archived foundations for the current branch. Keep them for traceability, but prefer the Current Sprint section above for active execution.
 
 ### Current Operating Constraint
 
@@ -316,6 +362,8 @@ Goal: ensure a scientist can see why a prediction should or should not be truste
 
 ## Recent Verification
 
+- [x] Chemistry-family scope now generates data/lit/chemistry_family_scope_registry.json plus results/validation/chemistry_family_scope.{md,json}, making explicit which families are first-class core, bounded lanes, high-priority partial lanes, or open gaps, and recommending lipid oxidation plus carbonylic crosstalk as the next product-scope expansion.
+- [x] Docker validation passed on the chemistry-family scope suite: 11 tests green across the new artifact, reporting-surface exposure, and existing SLR payload exposure.
 - [x] Explicit decision-panel evidence contract propagated through projection metadata, benchmark snapshots, confidence rows, and reporting surfaces.
 - [x] Runtime reports now include a literature evidence summary derived from the existing benchmark intake registry and structural-gap payloads.
 - [x] Docker validation passed on the affected suite: 36 tests green across benchmark targets, matrix delta reports, SLR payloads, usability reports, trust visibility, and projection contract coverage.
