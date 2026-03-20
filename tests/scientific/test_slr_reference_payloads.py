@@ -20,8 +20,14 @@ def test_track0_and_track1_artifacts_exist_and_are_exposed_in_reporting():
 
     assert surface["slr_incorporation_matrix"] == "data/lit/slr_incorporation_matrix.json"
     assert surface["flavor_reference_payloads"] == "data/lit/flavor_reference_payloads.json"
+    assert surface["matrix_family_coverage_registry"] == "data/lit/matrix_family_coverage_registry.json"
     assert surface["retention_reference_payloads"] == "data/lit/retention_reference_payloads.json"
     assert surface["process_gap_registry"] == "data/lit/process_gap_registry.json"
+    assert surface["matrix_family_coverage"] == "results/validation/matrix_family_coverage.md"
+    assert surface["reaction_benchmark_set"] == "data/lit/reaction_benchmark_set.json"
+    assert surface["mlp_candidate_registry"] == "data/lit/mlp_candidate_registry.json"
+    assert surface["mlp_external_benchmark_evidence"] == "data/lit/mlp_external_benchmark_evidence.json"
+    assert surface["p4_geometry_benchmark_set"] == "data/lit/p4_geometry_benchmark_set.json"
 
 
 def test_slr_incorporation_matrix_covers_new_track1_sources():

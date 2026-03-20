@@ -135,6 +135,21 @@ Phase P0.4: Promote matrix validation from intake-only to target-ranking
 - [x] Add summary artifacts that show which matrix targets are quantitatively closed, directionally supported, or still open.
 - [x] Define a measurable promotion rule for moving a matrix benchmark family from directional to near-quantitative support.
 
+Phase P0.5: Make matrix-family coverage explicit beyond pea and soy
+
+- [ ] Create a canonical matrix-family coverage registry that distinguishes chemistry-core support from matrix-family support for at least: free precursors, pea isolate, soy isolate, soy hydrolysate, mycoprotein, extrusion-heavy systems, and lipid-rich co-matrices such as coconut oil.
+- [ ] Mark each family with one explicit runtime posture: quantitative_core, directional_matrix, qualitative_intake_only, indirect_generic_support, or open_gap.
+- [ ] Encode the difference between explicit family support and indirect generic support so fat_fraction or generic lipid-trapping logic is not misread as coconut-oil validation.
+- [ ] Link every family to its current evidence surface: executable benchmark, calibration prior, qualitative intake, mechanistic-only chemistry, or structural external-data gap.
+- [ ] Add a scientist-facing artifact and reporting surface so the repo can answer "what matrix families are actually covered today?" without relying on chat summaries or institutional memory.
+- [ ] Make coconut-oil and other lipid-rich co-matrix gaps explicit as product-scope gaps, not hidden inside generic lipid chemistry.
+
+P0.5 measurable exit criteria:
+
+- [ ] The repo can enumerate which matrix families are directly supported versus only indirectly approximated.
+- [ ] Coconut oil or an equivalent lipid-rich co-matrix appears explicitly as a tracked open family-level gap.
+- [ ] Reports and scientific references expose the coverage artifact so newcomers do not confuse pea/soy progress with broad PBMA matrix closure.
+
 P0 measurable exit criteria:
 
 - [ ] At least one pea and one soy matrix benchmark rank sulfur, Strecker, pyrazine, and adverse markers together.
@@ -238,29 +253,58 @@ P3 measurable exit criteria:
 
 Goal: use ML potentials where they are elegant, not where they are fashionable.
 
-Phase P4.0: Adopt explicit model-selection rules
+Phase P4.0: Gate P4 against the real bottleneck
 
-- [ ] Do not use MLPs as the primary closure path for plant-matrix accuracy; literature-backed observable closure stays first.
-- [ ] Restrict default consideration to chemistry-domain external models before any materials-first model is allowed into the molecular workflow.
-- [ ] Require each proposed MLP use case to declare the target motif class, the expected speedup, the expected failure mode, and the validation comparator.
+- [x] Treat P4 as an offline acceleration track, not as the main closure path for plant-matrix accuracy; benchmark-grade matrix observability and external data gaps remain separate blockers.
+- [x] Only open a new P4 work item when P3 identifies a benchmark-visible mechanistic gap that is not better explained by missing matrix data, observability transfer, or process-state calibration.
+- [x] Require every proposed MLP use case to name the target motif family, the benchmark-visible decision it could change, the expected speedup, the likely failure mode, and the non-ML comparator.
 
-Phase P4.1: Use MLPs only in narrow offline roles
+Phase P4.1: Build a chemistry-domain benchmark before any adoption
 
-- [ ] Restrict ML-potential usage to conformer screening, geometry pre-optimization, local barrier surrogates, or reusable offline acceleration artifacts.
-- [ ] Keep MLP outputs out of the default prediction surface until they have been reduced to validated cached artifacts.
-- [ ] Expose in reports when a result depends on computational refinement rather than direct literature or benchmark support.
+- [x] Replace endpoint-energy-only benchmarking with a reaction-centered benchmark set anchored to existing Tier 2 structures, TS searches, and barrier deltas for Maillard-relevant sulfur, carbonyl, proton-transfer, and fragmentation chemistry.
+- [ ] Benchmark chemistry-first candidates such as MACE organic variants, OrbMol, and AIMNet2 before any materials-first or generic foundation model is considered.
+- [x] Add explicit stop rules: if a candidate produces nonphysical energies, fails TS/geometry sanity checks, or cannot preserve barrier ordering on the benchmark set, quarantine it from workflow integration.
 
-Phase P4.2: Start from the strongest chemistry-domain shortlist
+Phase P4.2: Restrict MLPs to narrow offline roles first
 
-- [ ] Evaluate chemistry-first external models such as MACE organic variants, OrbMol, and AIMNet2 before considering materials-first defaults.
-- [ ] Avoid using materials-only foundation models as the default molecular refinement path for Maillard chemistry.
-- [ ] Add a benchmarked adoption note for any selected MLP, including where it helps and where it is known to fail.
+- [x] Restrict early MLP usage to conformer screening, geometry pre-optimization, TS initialization, or local surrogate ranking for already-approved motif families.
+- [x] Keep MLP outputs out of the default prediction surface until they have been collapsed into validated cached artifacts with provenance and uncertainty.
+- [x] Require every accepted MLP-assisted artifact to be reproducible with a higher-fidelity fallback path such as xTB plus selective DFT.
+
+Phase P4.3: Adopt only benchmarked accelerators
+
+- [x] Add a benchmarked adoption note for any selected MLP, including where it improves throughput, where it fails, and which chemistry families remain out of domain.
+- [x] Expose in reports and provenance when a result depends on computational refinement or cached QM/ML surrogates rather than direct literature or benchmark support.
+- [x] Keep a no-default-MLP posture until at least one candidate demonstrates stable value on the reaction-centered benchmark without degrading scientist-facing trust surfaces.
 
 P4 measurable exit criteria:
 
-- [ ] No MLP is used as a substitute for missing matrix benchmarks.
-- [ ] Any adopted MLP serves a clearly bounded offline role with explicit provenance.
-- [ ] The chosen MLP shortlist is justified against chemistry-domain needs rather than generic SOTA branding.
+- [x] No MLP is used as a substitute for missing matrix benchmarks.
+- [x] Any adopted MLP serves a clearly bounded offline role with explicit provenance and a higher-fidelity fallback.
+- [x] The chosen MLP shortlist is justified against chemistry-domain benchmark results rather than generic SOTA branding.
+- [ ] At least one MLP-assisted offline role reduces compute cost or turnaround while preserving barrier ordering and geometry sanity on the accepted benchmark set.
+
+### P6. Close Product-Scope Blind Spots
+
+Goal: ensure the repo does not overfit its scientific product story to pea/soy isolates when important plant-based meat systems depend on other co-matrices and formulation families.
+
+Phase P6.0: Audit matrix-family scope before expanding mechanics
+
+- [ ] Audit the active runtime and validation surfaces to separate protein families, lipid-rich co-matrices, hydrolysate systems, and process-heavy systems.
+- [ ] Distinguish chemistry families already modeled generically from matrix families that still lack explicit calibration or validation.
+- [ ] Use that audit to prevent roadmap language from implying that pea/soy work equals broad plant-based meat coverage.
+
+Phase P6.1: Prioritize co-matrices by decision impact
+
+- [ ] Rank missing matrix/co-matrix families by how often they appear in real PBMA formulations and how strongly they alter observable tradeoffs.
+- [ ] Treat coconut oil and similar fat phases as first-class scope questions because they change release, oxidation, and sulfur-versus-off-note tradeoffs even when they are not the main amino-acid source.
+- [ ] Separate families that need family-specific lipid composition/retention models from those that only need generic directional warnings.
+
+Phase P6.2: Expand one missing family explicitly before broadening further
+
+- [ ] Start with one high-value missing family-level surface, likely a lipid-rich co-matrix lane, rather than diluting effort across many low-evidence proteins at once.
+- [ ] Require the first expansion to encode both what the repo can already reuse from generic lipid chemistry and what still needs explicit family-specific evidence.
+- [ ] Keep any new family outside the strict gate until it has its own benchmark or bounded calibration surface.
 
 ### P5. Make Trust Visible In Every Decision Surface
 
@@ -279,8 +323,18 @@ Goal: ensure a scientist can see why a prediction should or should not be truste
 - [x] Matrix priors now surface uncertainty posture and process-state applicability, and mycoprotein is encoded as a first-class bounded matrix family.
 - [x] Docker validation passed on the expanded L1/L2/L3 suite: 66 tests green across the new learning-loop coverage, priors, reporting, matrix targets, and trust surfaces.
 - [x] Matrix target support status now generates results/validation/matrix_target_status.{md,json} and separates quantitative closure, internal candidates, directional support, and open gaps at the compound level.
+- [x] Matrix family coverage now generates data/lit/matrix_family_coverage_registry.json plus results/validation/matrix_family_coverage.{md,json}, explicitly separating direct matrix-family support from indirect generic support and making the coconut-oil co-matrix gap visible.
 - [x] Refinement watchlist now generates results/validation/refinement_watchlist.{md,json} plus results/validation/offline_dft_jobs.json to keep expensive refinement benchmark-facing and offline.
 - [x] Docker validation passed on the expanded L4/P0/P1 suite: 71 tests green across matrix status, refinement watchlist, benchmark evidence, target snapshots, accessibility, reporting, and projection contracts.
+- [x] P4 reaction-centered benchmarking now materializes data/lit/reaction_benchmark_set.json plus results/validation/p4_reaction_benchmark.{md,json}.
+- [x] P4 geometry benchmarking now materializes data/lit/p4_geometry_benchmark_set.json plus results/validation/p4_geometry_benchmark.{md,json} and results/validation/p4_geometry_assessment.{md,json}.
+- [x] P4 MLP governance now materializes data/lit/mlp_candidate_registry.json plus results/validation/p4_mlp_assessment.{md,json} and results/validation/p4_adoption_notes.{md,json}, with ResultsDB persistence for adoption decisions.
+- [x] P4 now also materializes data/lit/mlp_external_benchmark_evidence.json plus results/validation/p4_external_mlp_landscape.{md,json}, making external community evidence explicit as shortlist priority rather than as a substitute for local Maillard validation.
+- [x] The current P4 outcome is explicit: mace_off_medium is quarantined for barrier-surrogate use, while mace_mp_small is accepted only for bounded offline geometry pre-optimization with fallback to r2SCAN-3c plus wB97M-V.
+- [x] The current shortlist policy is explicit: AIMNet2, OrbMol, and MACE-OMOL are high-priority chemistry-first candidates because of external molecular evidence, but they remain deferred locally until geometry or TS benchmark evidence exists on Maillard-relevant systems.
+- [x] Docker validation passed on the expanded P4 suite: 23 tests green across geometry benchmarks, reaction benchmarks, chemistry benchmark validation, reporting surface exposure, and MLP adoption persistence.
+- [x] Docker validation passed on the external-evidence P4 suite: 17 tests green across the new external landscape artifact, chemistry benchmark validation, and reporting exposure.
+- [x] Docker validation passed on the matrix-family coverage suite: 11 tests green across the new family-coverage registry, generated artifact, and reporting-surface exposure.
 - [x] P3 global sensitivity now generates results/validation/p3_global_sensitivity.{md,json} and ranks barrier, process, and formulation axes on benchmark-visible systems.
 - [x] Cheap-first refinement screening now generates results/validation/cheap_refinement_screening.{md,json} and explicitly quarantines candidates that are sensitivity-visible but not benchmark-improving.
 - [x] Selective DFT planning now generates results/validation/selective_dft_plan.{md,json} plus results/validation/p3_offline_dft_jobs.json, including explicit no-escalation decisions when cheap-first does not justify QM.
