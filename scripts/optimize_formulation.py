@@ -135,8 +135,10 @@ def main():
     warnings = checker.check(
         precursor_names=sugars + aas + lipids, 
         protein_type=args.protein_type,
-        temp_c=res.matrix_explainability.get("temperature", 150.0), # or just from params
-        ph=res.matrix_explainability.get("pH", 6.0)
+        temp_c=res.matrix_explainability.get("temperature_celsius", 150.0),
+        ph=res.matrix_explainability.get("pH", 6.0),
+        aw=best_formulation.get("aw", cond.water_activity),
+        matrix_explainability=res.matrix_explainability,
     )
     res.confidence_metadata = build_confidence_package(
         res,

@@ -6,6 +6,7 @@ from src.projection_metadata import normalize_projection_metadata_row
 from src.reporting import generate_comparison_report, generate_report
 from src.usability_reports import (
     DomainWarning,
+    DomainOfValidityChecker,
     assess_formulation_confidence,
     build_confidence_package,
     build_formulation_explainability_payload,
@@ -206,6 +207,133 @@ def test_assess_formulation_confidence_marks_matrix_sparse_case_as_exploratory()
     assert assessment.score < 65.0
 
 
+def test_accessibility_warning_flows_into_domain_warnings_and_confidence():
+    result = FormulationResult(
+        name="embedded pea run",
+        target_score=4.0,
+        off_flavour_risk=0.8,
+        avg_uncertainty=4.2,
+        matrix_explainability={
+            "protein_type": "pea_iso",
+            "accessibility_profile": "protein_embedded",
+            "accessibility_warning": True,
+            "accessibility_dominant_source": "estimated_from_conditions",
+            "temperature_celsius": 95.0,
+        },
+    )
+    checker = DomainOfValidityChecker("meaty")
+    warnings = checker.check(
+        precursor_names=["ribose", "cysteine"],
+        protein_type="pea_iso",
+        temp_c=95.0,
+        ph=6.2,
+        aw=0.95,
+        matrix_explainability=result.matrix_explainability,
+    )
+
+    assert any(w.category == "ACCESSIBILITY" for w in warnings)
+
+    assessment = assess_formulation_confidence(
+        result,
+        warnings,
+        precursor_names=["ribose", "cysteine"],
+        protein_type="pea_iso",
+    )
+
+    assert assessment.score < 70.0
+    assert any("accessibility assumptions" in factor for factor in assessment.dominant_factors)
+
+
+def test_build_confidence_package_forces_exploratory_mode_for_extrusion_heavy_conditions():
+    formulation = {
+        "name": "extrusion-heavy soy run",
+        "protein_type": "soy_iso",
+        "temp": 165.0,
+        "aw": 0.35,
+        "ph": 6.1,
+    }
+    result = FormulationResult(
+        name="extrusion-heavy soy run",
+        target_score=6.0,
+        off_flavour_risk=1.2,
+        avg_uncertainty=3.8,
+        matrix_explainability={
+            "protein_type": "soy_iso",
+            "effective_denaturation_state": 0.95,
+            "temperature_celsius": 165.0,
+            "accessibility_profile": "free_like",
+            "accessibility_warning": False,
+        },
+    )
+    checker = DomainOfValidityChecker("meaty")
+    warnings = checker.check(
+        precursor_names=["ribose", "cysteine"],
+        protein_type="soy_iso",
+        temp_c=165.0,
+        ph=6.1,
+        aw=0.35,
+        matrix_explainability=result.matrix_explainability,
+    )
+
+    payload = build_confidence_package(
+        result,
+        warnings,
+        precursor_names=["ribose", "cysteine"],
+        protein_type="soy_iso",
+        formulation=formulation,
+        baseline_conditions=ReactionConditions(pH=6.1, temperature_celsius=165.0, water_activity=0.35, protein_type="soy_iso"),
+    )
+
+    assert payload["process_regime"] == "extrusion_heavy"
+    assert payload["process_neighborhood"] == "out_of_domain"
+    assert payload["prediction_mode"] == "hypothesis_only"
+    assert payload["tier"] == "exploratory"
+    assert payload["extrusion_observable_panel"]["minimum_panel_ready"] is False
+    assert any(w.category == "EXTRUSION" for w in warnings)
+
+
+def test_build_confidence_package_surfaces_extrusion_panel_when_markers_are_present():
+    formulation = {
+        "name": "extrusion-like pea run",
+        "protein_type": "pea_iso",
+        "temp": 145.0,
+        "aw": 0.55,
+        "ph": 6.0,
+    }
+    result = FormulationResult(
+        name="extrusion-like pea run",
+        target_score=7.0,
+        off_flavour_risk=1.0,
+        avg_uncertainty=3.0,
+        projection_metadata={
+            "fft": {"compound": "2-Furfurylthiol (FFT)", "observable_ppb": 8.0},
+            "hex": {"compound": "Hexanal", "observable_ppb": 14.0},
+            "fur": {"compound": "Furfural", "observable_ppb": 22.0},
+        },
+        matrix_explainability={
+            "protein_type": "pea_iso",
+            "temperature_celsius": 145.0,
+            "accessibility_profile": "partially_opened",
+            "accessibility_warning": False,
+        },
+    )
+    payload = build_confidence_package(
+        result,
+        [],
+        precursor_names=["ribose", "cysteine"],
+        protein_type="pea_iso",
+        formulation=formulation,
+        baseline_conditions=ReactionConditions(pH=6.0, temperature_celsius=145.0, water_activity=0.55, protein_type="pea_iso"),
+    )
+
+    panel = payload["extrusion_observable_panel"]
+    assert payload["process_regime"] == "extrusion_like"
+    assert panel["meaty_positive"]["present"] == ["2-Furfurylthiol (FFT)"]
+    assert panel["off_notes"]["present"] == ["Hexanal"]
+    assert panel["severity_markers"]["present"] == ["Furfural"]
+    assert panel["minimum_panel_ready"] is True
+
+
 def test_generate_report_includes_confidence_metadata(tmp_path: Path):
     result = FormulationResult(
         name="report confidence probe",
@@ -217,6 +345,9 @@ def test_generate_report_includes_confidence_metadata(tmp_path: Path):
             "score": 72.0,
             "benchmark_neighborhood": "free_precursor_partial_analogy",
             "prediction_mode": "ranking_supported",
+            "process_regime": "extrusion_like",
+            "process_neighborhood": "near_domain",
+            "process_regime_summary": "Transferred from hydrated matrix states into an extrusion-like neighborhood.",
             "recommended_posture": "Reliable for ranking.",
             "dominant_factors": ["Only part of the precursor set is benchmark-anchored."],
             "calibration_diagnostics": {
@@ -240,6 +371,12 @@ def test_generate_report_includes_confidence_metadata(tmp_path: Path):
                     "tier": "medium",
                     "prediction_mode": "ranking_supported",
                 }
+            },
+            "extrusion_observable_panel": {
+                "meaty_positive": {"required_count": 4, "present_count": 1, "present": ["2-Furfurylthiol (FFT)"], "missing": ["2-Methyl-3-furanthiol (MFT)"]},
+                "off_notes": {"required_count": 4, "present_count": 1, "present": ["Hexanal"], "missing": ["Nonanal"]},
+                "severity_markers": {"required_count": 3, "present_count": 1, "present": ["Furfural"], "missing": ["5-Hydroxymethylfurfural (HMF)"]},
+                "minimum_panel_ready": True
             },
             "sensitivity_summary": {
                 "mode": "local_oat",
@@ -324,6 +461,8 @@ def test_generate_report_includes_confidence_metadata(tmp_path: Path):
     assert "flavor_reference_policy" in json_text
     assert '"provenance"' in json_text
     assert "## 5. Provenance" in markdown_text
+    assert "Extrusion Observable Panel" in markdown_text
+    assert "Support Origin" in markdown_text
 
 
 def test_generate_comparison_report_includes_provenance(tmp_path: Path):

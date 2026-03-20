@@ -199,10 +199,22 @@ def render_decision_summary_cli(result: 'FormulationResult', warnings: List['Dom
         tier = str(confidence.get("tier", "unknown")).upper()
         score = float(confidence.get("score", 0.0))
         neighborhood = confidence.get("benchmark_neighborhood", "unknown")
+        process_regime = confidence.get("process_regime", "unknown")
         posture = confidence.get("recommended_posture", "")
         print(f"\n  [0] DECISION CONFIDENCE: {tier} ({score:.0f}/100)")
         print(f"      Benchmark Basis  : {neighborhood}")
+        if process_regime not in {"unknown", "free_aqueous", "matrix_hydrated"}:
+            print(f"      Process Regime   : {process_regime}")
         print(f"      Prediction Mode : {prediction_mode}")
+        if process_regime in {"extrusion_like", "extrusion_heavy"}:
+            panel = confidence.get("extrusion_observable_panel", {}) or {}
+            if panel:
+                panel_summary = []
+                for category, label in (("meaty_positive", "meaty"), ("off_notes", "off-notes"), ("severity_markers", "severity")):
+                    row = panel.get(category, {})
+                    panel_summary.append(f"{label} {int(row.get('present_count', 0))}/{int(row.get('required_count', 0))}")
+                readiness = "ready" if panel.get("minimum_panel_ready", False) else "incomplete"
+                print(f"      Extrusion Panel  : {' | '.join(panel_summary)} ({readiness})")
         # P1: show accessibility profile when matrix formulation
         matrix_expl = getattr(result, "matrix_explainability", None)
         if matrix_expl and isinstance(matrix_expl, dict) and matrix_expl.get("accessibility_profile"):

@@ -388,6 +388,7 @@ def resolve_compound_matrix_retention(
     smiles: Optional[str] = None,
     temperature_celsius: Optional[float] = None,
     time_minutes: Optional[float] = None,
+    water_activity: Optional[float] = None,
     process_state: Optional[str] = None,
 ) -> float:
     p_type = _coerce_protein_type(protein_type)
@@ -403,6 +404,7 @@ def resolve_compound_matrix_retention(
         protein_type=p_type.value,
         temperature_celsius=temperature_celsius,
         time_minutes=time_minutes,
+        water_activity=water_activity,
         process_state=process_state,
     )
     dynamic_factor = float(runtime.get("dynamic_retention_factor", 1.0))
@@ -416,6 +418,7 @@ def describe_compound_matrix_retention(
     smiles: Optional[str] = None,
     temperature_celsius: Optional[float] = None,
     time_minutes: Optional[float] = None,
+    water_activity: Optional[float] = None,
     process_state: Optional[str] = None,
 ) -> dict[str, object]:
     p_type = _coerce_protein_type(protein_type)
@@ -431,6 +434,7 @@ def describe_compound_matrix_retention(
         protein_type=p_type.value,
         temperature_celsius=temperature_celsius,
         time_minutes=time_minutes,
+        water_activity=water_activity,
         process_state=process_state,
     )
     dynamic_factor = float(runtime.get("dynamic_retention_factor", 1.0))
@@ -451,14 +455,22 @@ def build_matrix_explainability(
     temperature_celsius: float,
     time_minutes: Optional[float],
     pH: Optional[float],
+    dominant_source: Optional[str] = None,
 ) -> dict[str, object]:
     p_type = _coerce_protein_type(protein_type)
     effective = resolve_matrix_correction(p_type, effective_denaturation_state)
+    state_source = dominant_source or "denaturation_state_arg"
     acc_state = classify_accessibility_state(
         p_type.value,
         effective_denaturation_state,
-        dominant_source="denaturation_state_arg" if effective_denaturation_state is not None else "estimated_from_conditions",
+        dominant_source=state_source,
     )
+    if p_type == ProteinType.FREE_AMINO_ACID:
+        denaturation_source = "explicit/free"
+    elif state_source == "estimated_from_conditions":
+        denaturation_source = DENATURATION_HEURISTICS.get(p_type).source if p_type in DENATURATION_HEURISTICS else "estimated_from_conditions"
+    else:
+        denaturation_source = "explicit_override"
     return {
         "protein_type": p_type.value,
         "effective_denaturation_state": float(effective_denaturation_state),
@@ -479,7 +491,7 @@ def build_matrix_explainability(
             if (window := get_accessibility_literature_window(p_type)) is not None
             else None
         ),
-        "denaturation_source": DENATURATION_HEURISTICS.get(p_type).source if p_type in DENATURATION_HEURISTICS else "explicit/free",
+        "denaturation_source": denaturation_source,
         "prior_summary": summarize_matrix_prior_bundle(p_type.value),
         # P1: canonical accessibility state
         "accessibility_profile": acc_state.profile,

@@ -131,27 +131,27 @@ Goal: make extrusion-heavy predictions useful without overclaiming quantitative 
 
 Phase P2.1: Define the extrusion neighborhood
 
-- [ ] Write an explicit extrusion-heavy benchmark neighborhood definition: what counts as in-domain, near-domain, and out-of-domain.
-- [ ] Identify the minimum observable panel needed for extrusion usefulness: at least key meaty positives, key off-notes, and one process-severity marker.
-- [ ] Encode default warnings so extrusion outputs cannot be misread as free-system quantitative predictions.
+- [x] Write an explicit extrusion-heavy benchmark neighborhood definition: what counts as in-domain, near-domain, and out-of-domain.
+- [x] Identify the minimum observable panel needed for extrusion usefulness: at least key meaty positives, key off-notes, and one process-severity marker.
+- [x] Encode default warnings so extrusion outputs cannot be misread as free-system quantitative predictions.
 
 Phase P2.2: Add process-structured extrusion surrogates
 
-- [ ] Add cheap surrogates for moisture redistribution, accessibility loss/recovery, and volatile retention under high-severity processing.
-- [ ] Reuse P1 accessibility and process-state concepts instead of creating a separate extrusion-only stack.
-- [ ] Ensure extrusion surrogates degrade confidence cleanly rather than silently reusing free-precursor assumptions.
+- [x] Add cheap surrogates for moisture redistribution, accessibility loss/recovery, and volatile retention under high-severity processing.
+- [x] Reuse P1 accessibility and process-state concepts instead of creating a separate extrusion-only stack.
+- [x] Ensure extrusion surrogates degrade confidence cleanly rather than silently reusing free-precursor assumptions.
 
 Phase P2.3: Create exploratory extrusion mode
 
-- [ ] Add an explicit exploratory recommendation mode for extrusion-heavy systems.
-- [ ] Report which outputs are still benchmark-backed from lower regimes and which are new extrusion extrapolations.
-- [ ] Add acceptance tests that confirm extrusion mode always carries the intended warnings and confidence posture.
+- [x] Add an explicit exploratory recommendation mode for extrusion-heavy systems.
+- [x] Report which outputs are still benchmark-backed from lower regimes and which are new extrusion extrapolations.
+- [x] Add acceptance tests that confirm extrusion mode always carries the intended warnings and confidence posture.
 
 P2 measurable exit criteria:
 
-- [ ] Extrusion-heavy runs use an explicit exploratory mode with visible warnings.
-- [ ] The runtime reuses shared accessibility/process abstractions rather than duplicating logic.
-- [ ] Scientists can distinguish reused lower-regime support from true extrusion-specific support in the default reports.
+- [x] Extrusion-heavy runs use an explicit exploratory mode with visible warnings.
+- [x] The runtime reuses shared accessibility/process abstractions rather than duplicating logic.
+- [x] Scientists can distinguish reused lower-regime support from true extrusion-specific support in the default reports.
 
 ### P3. Refine Only Decisive Mechanistic Gaps
 

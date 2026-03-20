@@ -176,6 +176,7 @@ class HeadspaceModel:
         pH: Optional[float],
         temperature_celsius: float = 40.0,
         time_minutes: float = 10.0,
+        water_activity: Optional[float] = None,
     ) -> float:
         """
         Empirical observable-release factor for the Pratap-Singh plant-matrix lane.
@@ -202,6 +203,7 @@ class HeadspaceModel:
         process_state = determine_matrix_process_state(
             temperature_celsius=float(temperature_celsius),
             time_minutes=float(time_minutes),
+            water_activity=water_activity,
         )
         record = get_matrix_calibration_record(
             name,
@@ -222,6 +224,7 @@ class HeadspaceModel:
                 denaturation_state=0.5,
                 temperature_celsius=temperature_celsius,
                 time_minutes=time_minutes,
+                water_activity=water_activity,
                 process_state=process_state,
             )
             baseline_retention = resolve_compound_matrix_retention(

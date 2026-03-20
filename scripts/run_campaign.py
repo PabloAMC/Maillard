@@ -113,6 +113,8 @@ def main() -> int:
             protein_type=protein_type,
             temp_c=float(formulation.get("temp", shared_conditions.get("temp", base_conditions.temperature_celsius))),
             ph=float(formulation.get("ph", shared_conditions.get("ph", base_conditions.pH))),
+            aw=float(formulation.get("aw", shared_conditions.get("aw", base_conditions.water_activity))),
+            matrix_explainability=result.matrix_explainability,
         )
         result.confidence_metadata = build_confidence_package(
             result,

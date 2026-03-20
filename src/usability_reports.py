@@ -130,6 +130,140 @@ def _clamp_confidence_score(score: float) -> float:
     return max(5.0, min(100.0, float(score)))
 
 
+def _recommended_posture_from_tier(tier: str) -> str:
+    if tier == "high":
+        return "Suitable for quantitative prioritization before wet-lab confirmation."
+    if tier == "medium":
+        return "Reliable for ranking and formulation triage; verify absolute levels experimentally."
+    if tier == "low":
+        return "Use directionally only; absolute concentrations should be treated as provisional."
+    return "Use for hypothesis generation, not decision-grade prioritization."
+
+
+def _classify_process_regime(
+    *,
+    protein_type: str,
+    temp_c: Optional[float],
+    aw: Optional[float],
+) -> Dict[str, object]:
+    protein = str(protein_type or "free").strip().lower()
+    temperature = None if temp_c is None else float(temp_c)
+    water_activity = None if aw is None else float(aw)
+
+    if protein == "free":
+        return {
+            "process_regime": "free_aqueous",
+            "process_neighborhood": "in_domain",
+            "prediction_mode_override": None,
+            "summary": "Free-system conditions stay inside the baseline aqueous process neighborhood.",
+        }
+
+    if temperature is None or water_activity is None:
+        return {
+            "process_regime": "matrix_hydrated",
+            "process_neighborhood": "unspecified",
+            "prediction_mode_override": None,
+            "summary": "Process severity is not fully specified, so the run defaults to the hydrated matrix neighborhood.",
+        }
+
+    if temperature >= 160.0 and water_activity <= 0.45:
+        return {
+            "process_regime": "extrusion_heavy",
+            "process_neighborhood": "out_of_domain",
+            "prediction_mode_override": "hypothesis_only",
+            "summary": "Temperature and water activity fall into an extrusion-heavy regime that currently sits outside the validated matrix benchmark neighborhood.",
+        }
+
+    if temperature >= 140.0 and water_activity <= 0.65:
+        return {
+            "process_regime": "extrusion_like",
+            "process_neighborhood": "near_domain",
+            "prediction_mode_override": "directional_only",
+            "summary": "Process severity is extrusion-like, so support is transferred from lower-severity matrix benchmarks rather than directly benchmarked here.",
+        }
+
+    return {
+        "process_regime": "matrix_hydrated",
+        "process_neighborhood": "in_domain",
+        "prediction_mode_override": None,
+        "summary": "Run remains in the hydrated matrix neighborhood currently supported by pea/soy accessibility and observability assumptions.",
+    }
+
+
+def _apply_prediction_mode_override(
+    assessment: ConfidenceAssessment,
+    *,
+    prediction_mode_override: Optional[str],
+    dominant_reason: Optional[str] = None,
+) -> ConfidenceAssessment:
+    if prediction_mode_override not in {"directional_only", "hypothesis_only"}:
+        return assessment
+
+    current_mode = _prediction_mode_from_tier(assessment.tier)
+    if prediction_mode_override == current_mode:
+        return assessment
+
+    adjusted_score = min(float(assessment.score), 58.0 if prediction_mode_override == "directional_only" else 40.0)
+    adjusted_tier = _confidence_tier_from_score(adjusted_score)
+    dominant_factors = list(assessment.dominant_factors)
+    if dominant_reason and dominant_reason not in dominant_factors:
+        dominant_factors.insert(0, dominant_reason)
+
+    return ConfidenceAssessment(
+        tier=adjusted_tier,
+        score=adjusted_score,
+        benchmark_neighborhood=assessment.benchmark_neighborhood,
+        support_ratio=assessment.support_ratio,
+        avg_uncertainty_kcal=assessment.avg_uncertainty_kcal,
+        dominant_factors=dominant_factors[:3],
+        recommended_posture=_recommended_posture_from_tier(adjusted_tier),
+    )
+
+
+def _build_extrusion_observable_panel(result: "FormulationResult") -> Dict[str, object]:
+    rows = build_projection_rows(result)
+    signal_map = {
+        str(row.get("compound", "")).strip().lower(): float(row.get("observable_ppb", 0.0) or 0.0)
+        for row in rows
+        if str(row.get("compound", "")).strip()
+    }
+    panel_targets = {
+        "meaty_positive": [
+            "2-Methyl-3-furanthiol (MFT)",
+            "2-Furfurylthiol (FFT)",
+            "Methional",
+            "2,5-Dimethylpyrazine",
+        ],
+        "off_notes": [
+            "Hexanal",
+            "2-Pentylfuran",
+            "Nonanal",
+            "1-Hexanol",
+        ],
+        "severity_markers": [
+            "Furfural",
+            "5-Hydroxymethylfurfural (HMF)",
+            "2-Acetylfuran",
+        ],
+    }
+
+    panel: Dict[str, object] = {}
+    minimum_panel_ready = True
+    for category, compounds in panel_targets.items():
+        present = [compound for compound in compounds if signal_map.get(compound.strip().lower(), 0.0) > 0.0]
+        missing = [compound for compound in compounds if compound not in present]
+        minimum_panel_ready = minimum_panel_ready and bool(present)
+        panel[category] = {
+            "required_count": len(compounds),
+            "present_count": len(present),
+            "present": present,
+            "missing": missing,
+        }
+
+    panel["minimum_panel_ready"] = minimum_panel_ready
+    return panel
+
+
 def _decision_proxy(result: "FormulationResult") -> float:
     return float(result.target_score) - float(result.safety_score) - float(result.off_flavour_risk) - 0.01 * float(result.texture_risk)
 
@@ -421,17 +555,68 @@ def build_confidence_package(
     baseline_conditions: Optional[ReactionConditions] = None,
     designer: Optional[MaillardPipeline] = None,
 ) -> Dict[str, object]:
+    matrix_explainability = getattr(result, "matrix_explainability", {}) or {}
+    temp_c = matrix_explainability.get("temperature_celsius")
+    if temp_c is None and formulation is not None:
+        temp_c = formulation.get("temp")
+    if temp_c is None and baseline_conditions is not None:
+        temp_c = getattr(baseline_conditions, "temperature_celsius", None)
+
+    aw = None
+    if formulation is not None:
+        aw = formulation.get("aw")
+    if aw is None and baseline_conditions is not None:
+        aw = getattr(baseline_conditions, "water_activity", None)
+
+    process_regime = _classify_process_regime(
+        protein_type=protein_type,
+        temp_c=None if temp_c is None else float(temp_c),
+        aw=None if aw is None else float(aw),
+    )
     assessment = assess_formulation_confidence(
         result,
         warnings,
         precursor_names=precursor_names,
         protein_type=protein_type,
     )
+    assessment = _apply_prediction_mode_override(
+        assessment,
+        prediction_mode_override=process_regime.get("prediction_mode_override"),
+        dominant_reason=str(process_regime.get("summary", "")) or None,
+    )
     payload = asdict(assessment)
     payload["prediction_mode"] = _prediction_mode_from_tier(assessment.tier)
+    payload["process_regime"] = process_regime.get("process_regime", "unknown")
+    payload["process_neighborhood"] = process_regime.get("process_neighborhood", "unknown")
+    payload["process_regime_summary"] = process_regime.get("summary", "")
     payload["calibration_diagnostics"] = _build_calibration_diagnostics(assessment, result, warnings)
     payload["compound_confidence"] = _build_compound_confidence_rows(result, assessment)
     payload["aggregate_confidence"] = _build_aggregate_confidence_rows(result, assessment)
+    payload["extrusion_observable_panel"] = _build_extrusion_observable_panel(result)
+
+    if payload["process_regime"] in {"extrusion_like", "extrusion_heavy"}:
+        panel = payload["extrusion_observable_panel"]
+        if not bool(panel.get("minimum_panel_ready", False)):
+            missing_categories = [
+                category.replace("_", " ")
+                for category in ("meaty_positive", "off_notes", "severity_markers")
+                if not panel.get(category, {}).get("present")
+            ]
+            factor = "Extrusion observable panel is incomplete; missing live support for " + ", ".join(missing_categories) + "."
+            dominant_factors = list(payload.get("dominant_factors", []))
+            if factor not in dominant_factors:
+                dominant_factors.append(factor)
+            payload["dominant_factors"] = dominant_factors[:3]
+
+            diagnostics = dict(payload.get("calibration_diagnostics", {}))
+            axes = list(diagnostics.get("extrapolation_axes", []))
+            if "extrusion_observable_panel" not in axes:
+                axes.append("extrusion_observable_panel")
+            diagnostics["extrapolation_axes"] = sorted(set(axes))
+            diagnostics["supported_envelope"] = False
+            diagnostics["summary"] = "Recommendation extrapolates beyond the strongest support on: " + ", ".join(diagnostics["extrapolation_axes"]) + "."
+            payload["calibration_diagnostics"] = diagnostics
+
     payload["sensitivity_summary"] = _analyze_formulation_sensitivity(
         result,
         formulation=formulation,
@@ -465,9 +650,11 @@ class DomainOfValidityChecker:
         protein_type: str, 
         temp_c: float, 
         ph: float,
-        aw: float = 1.0
+        aw: Optional[float] = None,
+        matrix_explainability: Optional[Dict[str, object]] = None,
     ) -> List[DomainWarning]:
         warnings = []
+        matrix_expl = matrix_explainability if isinstance(matrix_explainability, dict) else {}
         
         # 1. Matrix Check
         if protein_type != "free":
@@ -475,6 +662,18 @@ class DomainOfValidityChecker:
                 level="CAUTION",
                 category="MATRIX",
                 message=f"Matrix '{protein_type}' uses speculative accessibility scaling; PRIMARY benchmarks are free-precursor only."
+            ))
+
+        if bool(matrix_expl.get("accessibility_warning", False)):
+            accessibility_profile = str(matrix_expl.get("accessibility_profile", "unknown"))
+            dominant_source = str(matrix_expl.get("accessibility_dominant_source", "unknown"))
+            warnings.append(DomainWarning(
+                level="CAUTION",
+                category="ACCESSIBILITY",
+                message=(
+                    f"Accessibility state '{accessibility_profile}' is still controlling the prediction; "
+                    f"reactive-site exposure is inferred via {dominant_source} rather than benchmarked release behavior."
+                ),
             ))
 
         # 2. Precursor Support Check
@@ -506,6 +705,25 @@ class DomainOfValidityChecker:
                 message=f"pH {ph} is outside the trusted kinetic range ({self.MIN_TRUSTED_PH}-{self.MAX_TRUSTED_PH})."
             ))
 
+        process_regime = _classify_process_regime(
+            protein_type=protein_type,
+            temp_c=temp_c,
+            aw=aw,
+        )
+        override = process_regime.get("prediction_mode_override")
+        if override == "directional_only":
+            warnings.append(DomainWarning(
+                level="CAUTION",
+                category="EXTRUSION",
+                message=str(process_regime.get("summary", "Extrusion-like processing reduces confidence to directional support.")),
+            ))
+        elif override == "hypothesis_only":
+            warnings.append(DomainWarning(
+                level="WARNING",
+                category="EXTRUSION",
+                message=str(process_regime.get("summary", "Extrusion-heavy processing is out of the validated neighborhood.")),
+            ))
+
         return warnings
 
 
@@ -520,6 +738,7 @@ def assess_formulation_confidence(
     normalized_precursors = [name.strip().lower() for name in precursor_names if isinstance(name, str) and name.strip()]
     supported_precursors = sum(1 for name in normalized_precursors if name in trusted_precursors)
     support_ratio = supported_precursors / len(normalized_precursors) if normalized_precursors else 1.0
+    matrix_explainability = getattr(result, "matrix_explainability", {}) or {}
 
     score = 100.0
     dominant_factors: List[str] = []
@@ -556,6 +775,12 @@ def assess_formulation_confidence(
         score -= 6.0
         dominant_factors.append(f"Average pathway uncertainty is moderate ({avg_uncertainty:.1f} kcal/mol).")
 
+    if bool(matrix_explainability.get("accessibility_warning", False)):
+        score -= 10.0
+        dominant_factors.append(
+            "Prediction is dominated by accessibility assumptions rather than directly benchmarked release behavior."
+        )
+
     warning_penalty = 0.0
     for warning in warnings:
         warning_penalty += 12.0 if warning.level == "WARNING" else 7.0
@@ -566,14 +791,7 @@ def assess_formulation_confidence(
     score = _clamp_confidence_score(score)
 
     tier = _confidence_tier_from_score(score)
-    if tier == "high":
-        recommended_posture = "Suitable for quantitative prioritization before wet-lab confirmation."
-    elif tier == "medium":
-        recommended_posture = "Reliable for ranking and formulation triage; verify absolute levels experimentally."
-    elif tier == "low":
-        recommended_posture = "Use directionally only; absolute concentrations should be treated as provisional."
-    else:
-        recommended_posture = "Use for hypothesis generation, not decision-grade prioritization."
+    recommended_posture = _recommended_posture_from_tier(tier)
 
     return ConfidenceAssessment(
         tier=tier,

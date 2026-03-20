@@ -617,6 +617,7 @@ def _run_matrix_only_benchmark_prediction(bench: dict) -> dict:
         determine_matrix_process_state(
             temperature_celsius=float(conditions["temp_C"]),
             time_minutes=float(conditions["time_min"]),
+            water_activity=conditions.get("aw"),
         ),
     ))
     oxidation = predict_hexanal_generation(
@@ -639,6 +640,7 @@ def _run_matrix_only_benchmark_prediction(bench: dict) -> dict:
             pH=pH,
             temperature_celsius=float(conditions["temp_C"]),
             time_minutes=float(conditions["time_min"]),
+            water_activity=conditions.get("aw"),
         )
         calibration = describe_matrix_calibration(
             compound,

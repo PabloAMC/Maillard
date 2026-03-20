@@ -17,6 +17,8 @@ class ProjectionMetadataRow(TypedDict, total=False):
     retention_reference_sources: list[str]
     reversible_release_factor: float
     temporal_attenuation_factor: float
+    extrusion_moisture_factor: float
+    extrusion_structure_factor: float
     headspace_factor: float
     calibration_factor: float
     melanoidin_trapping_factor: float
@@ -75,6 +77,8 @@ def normalize_projection_metadata_row(
         "retention_reference_sources": list(row.get("retention_reference_sources", [])),
         "reversible_release_factor": float(row.get("reversible_release_factor", 1.0)),
         "temporal_attenuation_factor": float(row.get("temporal_attenuation_factor", 1.0)),
+        "extrusion_moisture_factor": float(row.get("extrusion_moisture_factor", 1.0)),
+        "extrusion_structure_factor": float(row.get("extrusion_structure_factor", 1.0)),
         "headspace_factor": float(row.get("headspace_factor", 1.0)),
         "calibration_factor": float(row.get("calibration_factor", row.get("calibration_observable_factor") or 1.0)),
         "melanoidin_trapping_factor": float(row.get("melanoidin_trapping_factor", 1.0)),
