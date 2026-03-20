@@ -9,6 +9,79 @@ from src.pipeline import FormulationResult
 from src.projection_metadata import ProjectionMetadataRow, normalize_projection_metadata_row
 
 
+def _support_origin_from_projection_meta(meta: Mapping[str, object]) -> str:
+    process_state = str(meta.get("process_state", "unknown"))
+    calibration_state = str(meta.get("calibration_process_state", "unknown"))
+    fallback = str(meta.get("calibration_fallback_mode", "class_level"))
+    source = str(meta.get("calibration_source", "class_fallback")).lower()
+    strength = str(meta.get("calibration_evidence_strength", "heuristic")).lower()
+    extrusion_state = process_state in {"aqueous_pre_extrusion_model", "extrusion_structured"}
+
+    if extrusion_state:
+        if fallback == "nearest_process_state" or calibration_state not in {"unknown", process_state}:
+            return "lower_regime_transfer"
+        if strength == "heuristic" or source == "class_fallback":
+            return "extrusion_extrapolation"
+        return "extrusion_specific_support"
+
+    return "standard_matrix_support"
+
+
+def _reachability_payload(meta: Mapping[str, object]) -> Dict[str, object]:
+    evidence_state = str(meta.get("evidence_state", "still_missing")).lower()
+    source = str(meta.get("calibration_source", "class_fallback")).lower()
+    strength = str(meta.get("calibration_evidence_strength", "heuristic")).lower()
+    fallback = str(meta.get("calibration_fallback_mode", "class_level")).lower()
+    notes_blob = " ".join(
+        [
+            source,
+            str(meta.get("calibration_notes", "")).lower(),
+            str(meta.get("retention_runtime_mode", "")).lower(),
+        ]
+    )
+
+    direct_anchor = evidence_state in {"externally_benchmarked", "internally_benchmarked", "conditional_calibration"} or (
+        strength == "literature_anchored" and fallback == "compound_specific"
+    )
+    transferred_support = evidence_state == "transferred_prior" or (
+        strength in {"conditional_literature_anchored", "process_state_mismatch", "directional_transferred", "class_anchored"}
+        or fallback in {"nearest_process_state", "compound_specific_process_state", "class_level"}
+        or "transfer" in source
+        or "carryover" in source
+        or "ratio" in source
+    )
+    computational_refinement = any(token in notes_blob for token in ["dft", "xtb", "qm", "semiempirical", "computational", "refinement"])
+
+    if direct_anchor:
+        return {
+            "chemically_reachable": True,
+            "reachability_status": "chemically_reachable",
+            "reachability_basis": "direct_anchor",
+        }
+    if transferred_support or computational_refinement:
+        return {
+            "chemically_reachable": True,
+            "reachability_status": "conditionally_reachable",
+            "reachability_basis": "transferred_or_refined_support",
+        }
+    return {
+        "chemically_reachable": False,
+        "reachability_status": "merely_plausible",
+        "reachability_basis": "mechanistic_surrogate_only",
+    }
+
+
+def _observable_assumption_summary(meta: Mapping[str, object]) -> str:
+    retention_mode = str(meta.get("retention_runtime_mode", "static_class_profile"))
+    fallback_mode = str(meta.get("calibration_fallback_mode", "class_level"))
+    support_origin = _support_origin_from_projection_meta(meta)
+    accessibility_warning = bool(meta.get("accessibility_warning", False))
+    parts = [retention_mode, fallback_mode, support_origin]
+    if accessibility_warning:
+        parts.append("accessibility_dominated")
+    return " | ".join(parts)
+
+
 def _resolve_projection_metadata_row(
     target: Mapping[str, object],
     metadata: Mapping[str, ProjectionMetadataRow],
@@ -81,7 +154,12 @@ def build_projection_rows(
             "calibration_source": meta.get("calibration_source"),
             "calibration_evidence_strength": meta.get("calibration_evidence_strength"),
             "calibration_fallback_mode": meta.get("calibration_fallback_mode"),
+            "evidence_state": meta.get("evidence_state"),
+            "target_class": meta.get("target_class"),
             "browning_index": meta.get("browning_index", target.get("browning_index", 0.0)),
+            "support_origin": _support_origin_from_projection_meta(meta),
+            "observable_assumption_summary": _observable_assumption_summary(meta),
+            **_reachability_payload(meta),
         })
 
     if rows:
@@ -111,7 +189,12 @@ def build_projection_rows(
             "calibration_source": normalized.get("calibration_source"),
             "calibration_evidence_strength": normalized.get("calibration_evidence_strength"),
             "calibration_fallback_mode": normalized.get("calibration_fallback_mode"),
+            "evidence_state": normalized.get("evidence_state"),
+            "target_class": normalized.get("target_class"),
             "browning_index": normalized.get("browning_index", 0.0),
+            "support_origin": _support_origin_from_projection_meta(normalized),
+            "observable_assumption_summary": _observable_assumption_summary(normalized),
+            **_reachability_payload(normalized),
         })
     return rows
 

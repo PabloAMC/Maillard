@@ -95,6 +95,8 @@ _FREE_PRECURSOR_META = {
         "calibration_source": "literature_direct",
         "calibration_evidence_strength": "externally_benchmarked",
         "calibration_fallback_mode": "none",
+        "evidence_state": "externally_benchmarked",
+        "target_class": "adverse_lipid_markers",
         "browning_index": 0.1,
     }
 }
@@ -121,8 +123,9 @@ def test_prediction_posture_banner_quantitative(capsys):
         "benchmark_neighborhood": "primary_free_precursor",
         "recommended_posture": "Suitable for quantitative prioritization.",
         "dominant_factors": [],
+        "decision_mode": "quantitative_recommendation",
         "prediction_mode": "benchmark_supported_quantitative",
-        "calibration_diagnostics": {"summary": "Within envelope."},
+        "calibration_diagnostics": {"summary": "Within envelope.", "extrapolation_axes": []},
         "compound_confidence": [],
         "sensitivity_summary": {},
     }
@@ -134,6 +137,7 @@ def test_prediction_posture_banner_quantitative(capsys):
     captured = capsys.readouterr().out
     assert "QUANTITATIVE MODE" in captured, f"Expected 'QUANTITATIVE MODE' in output:\n{captured}"
     assert "✅" in captured, f"Expected ✅ in output:\n{captured}"
+    assert "Decision Mode    : quantitative_recommendation" in captured
 
 
 # ---------------------------------------------------------------------------
@@ -147,8 +151,9 @@ def test_prediction_posture_banner_directional(capsys):
         "benchmark_neighborhood": "matrix_intake_only",
         "recommended_posture": "Verify absolute concentrations experimentally.",
         "dominant_factors": ["Plant-matrix support is still intake/headspace validated."],
+        "decision_mode": "directional_hypothesis",
         "prediction_mode": "ranking_supported",
-        "calibration_diagnostics": {"summary": "Class-level anchor applied."},
+        "calibration_diagnostics": {"summary": "Class-level anchor applied.", "extrapolation_axes": ["benchmark_neighborhood"]},
         "compound_confidence": [],
         "sensitivity_summary": {},
     }
@@ -160,6 +165,8 @@ def test_prediction_posture_banner_directional(capsys):
     captured = capsys.readouterr().out
     assert "DIRECTIONAL MODE" in captured, f"Expected 'DIRECTIONAL MODE' in output:\n{captured}"
     assert "⚠️" in captured, f"Expected ⚠️ in output:\n{captured}"
+    assert "Decision Mode    : directional_hypothesis" in captured
+    assert "Extrapolation    : benchmark_neighborhood" in captured
 
 
 # ---------------------------------------------------------------------------
@@ -174,6 +181,11 @@ def test_compound_confidence_includes_calibration_source():
     for row in rows:
         assert "calibration_source" in row, "calibration_source missing from row"
         assert "calibration_evidence_strength" in row, "calibration_evidence_strength missing from row"
+        assert row["evidence_state"] == "externally_benchmarked"
+        assert row["target_class"] == "adverse_lipid_markers"
+        assert row["support_origin"] == "standard_matrix_support"
+        assert row["reachability_status"] == "chemically_reachable"
+        assert row["observable_assumption_summary"] == "dynamic | none | standard_matrix_support"
         assert isinstance(row["calibration_source"], str)
         assert row["calibration_source"] != ""
 

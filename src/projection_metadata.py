@@ -26,10 +26,16 @@ class ProjectionMetadataRow(TypedDict, total=False):
     browning_narrative: str
     volatile_class: str
     process_state: str
+    accessibility_profile: str
+    accessibility_warning: bool
+    accessibility_dominant_source: str
     calibration_source: str
     calibration_process_state: str
     calibration_evidence_strength: str
     calibration_fallback_mode: str
+    evidence_state: str
+    target_class: str
+    decision_panel_source: str
     calibration_observable_factor: float | None
     calibration_notes: str
     limiting_precursor_molar: float
@@ -86,10 +92,16 @@ def normalize_projection_metadata_row(
         "browning_narrative": str(row.get("browning_narrative", "")),
         "volatile_class": str(row.get("volatile_class", "other")),
         "process_state": str(row.get("process_state", "unknown")),
+        "accessibility_profile": str(row.get("accessibility_profile", "unknown")),
+        "accessibility_warning": bool(row.get("accessibility_warning", False)),
+        "accessibility_dominant_source": str(row.get("accessibility_dominant_source", "unknown")),
         "calibration_source": str(row.get("calibration_source", "class_fallback")),
         "calibration_process_state": str(row.get("calibration_process_state", row.get("process_state", "unknown"))),
         "calibration_evidence_strength": str(row.get("calibration_evidence_strength", "heuristic")),
         "calibration_fallback_mode": str(row.get("calibration_fallback_mode", "class_level")),
+        "evidence_state": str(row.get("evidence_state", "still_missing")),
+        "target_class": str(row.get("target_class", "unknown")),
+        "decision_panel_source": str(row.get("decision_panel_source", "")),
         "calibration_observable_factor": row.get("calibration_observable_factor"),
         "calibration_notes": str(row.get("calibration_notes", "")),
     }

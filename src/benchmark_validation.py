@@ -24,6 +24,7 @@ from src.smirks_engine import SmirksEngine
 from src.validation_contract import BenchmarkThresholds, DEFAULT_VALIDATION_CONTRACT
 from src.safety import predict_acrylamide
 from src.projection_utils import build_projection_rows
+from src.matrix_targets import get_compound_panel_entry
 from src.benchmark_types import (
     BenchmarkMetadata,
     BenchmarkIndexEntry,
@@ -647,6 +648,7 @@ def _run_matrix_only_benchmark_prediction(bench: dict) -> dict:
             protein_type=protein_type,
             process_state=process_state,
         )
+        panel_entry = get_compound_panel_entry(compound) or {}
         calibration_factor = float(calibration.get("calibration_observable_factor") or 1.0)
         release_factor = headspace_factor / calibration_factor if calibration_factor > 0.0 else headspace_factor
         proxy_ppb = oxidation_load_ppb * float(yield_factor) * release_factor
@@ -662,6 +664,7 @@ def _run_matrix_only_benchmark_prediction(bench: dict) -> dict:
                 "headspace_factor": release_factor,
                 "total_observable_factor": headspace_factor,
                 "process_state": process_state,
+                **panel_entry,
                 **calibration,
             },
         )
@@ -1312,6 +1315,163 @@ def build_matrix_promotion_family_status(
     return rows
 
 
+def _matrix_compound_support_status(
+    *,
+    evidence_state: str,
+    calibration_evidence_strength: str,
+    reference_signal_origin: str,
+    source_origin: str,
+) -> str:
+    evidence = str(evidence_state).strip().lower()
+    strength = str(calibration_evidence_strength).strip().lower()
+    signal_origin = str(reference_signal_origin).strip().lower()
+    origin = str(source_origin).strip().lower()
+
+    if evidence == "externally_benchmarked" and signal_origin == "measured_volatiles" and origin.startswith("external"):
+        return "quantitative_closed"
+    if evidence in {"internally_benchmarked", "conditional_calibration"} or signal_origin == "reference_volatiles":
+        return "internal_candidate"
+    if evidence in {"transferred_prior", "safety_reference"} or strength in {"class_anchored", "directional_transferred"}:
+        return "directional_support"
+    return "open_gap"
+
+
+def build_matrix_target_status_artifact(
+    benchmark_files: Optional[Iterable[Path | str]] = None,
+    *,
+    target_tag: str = DEFAULT_TARGET_TAG,
+) -> Dict[str, Any]:
+    bench_files = list(benchmark_files) if benchmark_files is not None else get_benchmark_files()
+    benchmark_rows: List[Dict[str, Any]] = []
+    support_totals = {
+        "quantitative_closed": 0,
+        "internal_candidate": 0,
+        "directional_support": 0,
+        "open_gap": 0,
+    }
+
+    for bench_file in bench_files:
+        bench = load_benchmark(bench_file)
+        metadata = get_benchmark_metadata(bench)
+        if metadata.execution_path not in {"matrix_only", "matrix_precursor_augmented"}:
+            continue
+
+        evaluation = evaluate_benchmark(bench_file, target_tag=target_tag)
+        summary = summarize_evaluation(evaluation, protein_type=str(bench.get("protein_type", "free")))
+        evidence = assess_matrix_benchmark_evidence(bench_file)
+        contract = get_matrix_ranking_contract(bench)
+        adverse_markers = {str(item).strip().lower() for item in contract.get("adverse_markers", [])}
+        compounds: List[Dict[str, Any]] = []
+        benchmark_counts = {
+            "quantitative_closed": 0,
+            "internal_candidate": 0,
+            "directional_support": 0,
+            "open_gap": 0,
+        }
+
+        for item in contract.get("observable_targets", []):
+            compound_name = str(item.get("name", "")).strip()
+            if not compound_name:
+                continue
+            meta = _projection_metadata_for_match(
+                evaluation,
+                CompoundComparison(
+                    compound=compound_name,
+                    measured_ppb=0.0,
+                    predicted_ppb=0.0,
+                    matched_name=None,
+                    uncertainty_pct=None,
+                ),
+            )
+            role = str(item.get("role", "adverse_marker" if compound_name.lower() in adverse_markers else "desirable_marker"))
+            support_status = _matrix_compound_support_status(
+                evidence_state=str(meta.get("evidence_state", item.get("evidence_state", "still_missing"))),
+                calibration_evidence_strength=str(meta.get("calibration_evidence_strength", "heuristic")),
+                reference_signal_origin=summary.reference_signal_origin,
+                source_origin=evidence.source_origin,
+            )
+            benchmark_counts[support_status] += 1
+            support_totals[support_status] += 1
+            compounds.append(
+                {
+                    "compound": compound_name,
+                    "role": role,
+                    "target_class": str(meta.get("target_class", item.get("target_class", "unknown"))),
+                    "evidence_state": str(meta.get("evidence_state", item.get("evidence_state", "still_missing"))),
+                    "calibration_source": str(meta.get("calibration_source", "unknown")),
+                    "calibration_evidence_strength": str(meta.get("calibration_evidence_strength", "heuristic")),
+                    "support_status": support_status,
+                }
+            )
+
+        external_decision_ready = (
+            evidence.target_profile in {"mixed", "meaty_positive"}
+            and summary.ranking_contract_status == "pass"
+            and benchmark_counts["quantitative_closed"] >= 2
+            and benchmark_counts["internal_candidate"] == 0
+            and benchmark_counts["directional_support"] == 0
+        )
+        mechanistic_priority_ready = (
+            evidence.target_profile in {"mixed", "meaty_positive"}
+            and summary.ranking_contract_status == "pass"
+            and not external_decision_ready
+            and (benchmark_counts["internal_candidate"] + benchmark_counts["directional_support"]) >= 1
+        )
+        if evidence.target_profile not in {"mixed", "meaty_positive"}:
+            promotion_blocker = "benchmark lacks meaty-positive targets"
+        elif summary.ranking_contract_status != "pass":
+            promotion_blocker = "ranking contract not yet passing"
+        elif benchmark_counts["quantitative_closed"] < 2:
+            promotion_blocker = "insufficient externally measured target closure"
+        elif benchmark_counts["internal_candidate"] > 0 or benchmark_counts["directional_support"] > 0:
+            promotion_blocker = "depends on internal or transferred support"
+        else:
+            promotion_blocker = "none"
+
+        if external_decision_ready:
+            next_best_action = "use_for_external_decision"
+        elif mechanistic_priority_ready:
+            next_best_action = "prioritize_mechanistic_refinement"
+        elif evidence.target_profile in {"mixed", "meaty_positive"}:
+            next_best_action = "seek_external_data"
+        else:
+            next_best_action = "retain_as_adverse_anchor"
+
+        benchmark_rows.append(
+            {
+                "benchmark_id": summary.benchmark_id,
+                "bench_file": str(summary.bench_file),
+                "protein_type": summary.protein_type,
+                "execution_path": summary.execution_path,
+                "process_state": summary.process_state,
+                "target_profile": evidence.target_profile,
+                "reference_signal_origin": summary.reference_signal_origin,
+                "source_origin": evidence.source_origin,
+                "ranking_contract_status": summary.ranking_contract_status,
+                "support_counts": benchmark_counts,
+                "quantitative_support_ready": benchmark_counts["quantitative_closed"] > 0,
+                "promotion_ready": external_decision_ready,
+                "mechanistic_priority_ready": mechanistic_priority_ready,
+                "promotion_blocker": promotion_blocker,
+                "next_best_action": next_best_action,
+                "compounds": compounds,
+            }
+        )
+
+    return {
+        "schema_version": "1.0",
+        "description": "Matrix target support status artifact distinguishing external decision-ready support from mechanistic-priority candidates and unresolved external gaps.",
+        "benchmarks": benchmark_rows,
+        "summary": {
+            "total_benchmarks": len(benchmark_rows),
+            "quantitative_support_ready": sum(1 for row in benchmark_rows if row["quantitative_support_ready"]),
+            "promotion_ready": sum(1 for row in benchmark_rows if row["promotion_ready"]),
+            "mechanistic_priority_ready": sum(1 for row in benchmark_rows if row["mechanistic_priority_ready"]),
+            **support_totals,
+        },
+    }
+
+
 
 
 
@@ -1620,6 +1780,8 @@ def snapshot_benchmark_targets(
                 target_name=str(target.get("name", "")),
                 target_type=str(target.get("type", "unknown")),
                 roles=list(target.get("roles", [target.get("type", "unknown")])),
+                target_class=str(target.get("projection", {}).get("target_class", "unknown")),
+                evidence_state=str(target.get("projection", {}).get("evidence_state", "still_missing")),
                 predicted_ppb=float(target.get("concentration", 0.0)),
                 proxy_ppb=float(target.get("proxy_concentration", target.get("concentration", 0.0))),
                 observable_ratio=float(target.get("projection", {}).get("proxy_to_observable_ratio", 1.0)),

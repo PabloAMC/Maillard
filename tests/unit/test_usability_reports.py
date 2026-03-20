@@ -105,6 +105,8 @@ def test_projection_metadata_normalizer_fills_schema_defaults_for_sparse_rows():
     assert row["headspace_factor"] == 1.0
     assert row["retention_runtime_mode"] == "static_class_profile"
     assert row["calibration_source"] == "class_fallback"
+    assert row["evidence_state"] == "still_missing"
+    assert row["target_class"] == "unknown"
     assert row["proxy_to_observable_ratio"] == 0.4
 
 
@@ -287,6 +289,7 @@ def test_build_confidence_package_forces_exploratory_mode_for_extrusion_heavy_co
     assert payload["process_regime"] == "extrusion_heavy"
     assert payload["process_neighborhood"] == "out_of_domain"
     assert payload["prediction_mode"] == "hypothesis_only"
+    assert payload["decision_mode"] == "directional_hypothesis"
     assert payload["tier"] == "exploratory"
     assert payload["extrusion_observable_panel"]["minimum_panel_ready"] is False
     assert any(w.category == "EXTRUSION" for w in warnings)
@@ -412,6 +415,9 @@ def test_generate_report_includes_confidence_metadata(tmp_path: Path):
                 "calibration_source": "Pratap-Singh 2021 soy-vs-pea ambient slurry release ratio",
                 "calibration_evidence_strength": "literature_anchored",
                 "calibration_fallback_mode": "compound_specific",
+                "evidence_state": "conditional_calibration",
+                "target_class": "severity_markers",
+                "decision_panel_source": "data/lit/matrix_decision_panel.json",
             }
         },
         strecker_balance_score=0.25,
@@ -445,12 +451,22 @@ def test_generate_report_includes_confidence_metadata(tmp_path: Path):
     assert "Aggregate Sensory Confidence" in markdown_text
     assert "Sensitivity Summary" in markdown_text
     assert "Benchmark Neighborhood" in markdown_text
+    assert "decision_mode" in markdown_text
     assert "Calibration Summary" in markdown_text
     assert "Compound Evidence Ladder" in markdown_text
+    assert "Evidence State" in markdown_text
+    assert "Reachability" in markdown_text
+    assert "Observable Assumption" in markdown_text
+    assert "severity_markers" in markdown_text
+    assert "conditional_calibration" in json_text
     assert "Missing Data" in markdown_text
     assert "Safety Reference Context" in markdown_text
     assert "Flavor Reference Policy" in markdown_text
+    assert "Literature Evidence Summary" in markdown_text
+    assert "Literature Learning Loop Summary" in markdown_text
     assert "Projection Calibration" in markdown_text
+    assert "Trust Surface" in markdown_text
+    assert "top_reachability_status" in markdown_text
     assert "Flavor Axis Diagnostics" in markdown_text
     assert "projection_metadata" in json_text
     assert "compound_evidence_ladder" in json_text
@@ -459,10 +475,43 @@ def test_generate_report_includes_confidence_metadata(tmp_path: Path):
     assert "benchmark_neighborhood_summary" in json_text
     assert "safety_reference_summary" in json_text
     assert "flavor_reference_policy" in json_text
+    assert "literature_evidence_summary" in json_text
+    assert "literature_learning_loop_summary" in json_text
     assert '"provenance"' in json_text
     assert "## 5. Provenance" in markdown_text
     assert "Extrusion Observable Panel" in markdown_text
     assert "Support Origin" in markdown_text
+
+
+def test_projection_rows_surface_explicit_panel_contract_fields():
+    result = FormulationResult(
+        name="panel contract probe",
+        target_score=1.0,
+        off_flavour_risk=0.0,
+        targets=[
+            {
+                "name": "Hexanal",
+                "concentration": 14.0,
+            }
+        ],
+        projection_metadata={
+            "hex": {
+                "compound": "Hexanal",
+                "proxy_ppb": 18.0,
+                "observable_ppb": 14.0,
+                "evidence_state": "externally_benchmarked",
+                "target_class": "adverse_lipid_markers",
+            }
+        },
+    )
+
+    rows = build_projection_rows(result)
+
+    assert rows[0]["evidence_state"] == "externally_benchmarked"
+    assert rows[0]["target_class"] == "adverse_lipid_markers"
+    assert rows[0]["support_origin"] == "standard_matrix_support"
+    assert rows[0]["reachability_status"] == "chemically_reachable"
+    assert rows[0]["observable_assumption_summary"] == "static_class_profile | class_level | standard_matrix_support"
 
 
 def test_generate_comparison_report_includes_provenance(tmp_path: Path):
@@ -537,10 +586,14 @@ def test_generate_comparison_report_includes_provenance(tmp_path: Path):
     assert '"flavor_reference_policy"' in json_text
     assert "Cross-Marker Context" in markdown_text
     assert "Calibration Contrast" in markdown_text
+    assert "Decision Mode" in markdown_text
     assert "MFT/Furfural Ratio" in markdown_text
     assert "Sulfur Trapping" in markdown_text
     assert "Strecker Support" in markdown_text
     assert "Benchmark Neighborhood" in markdown_text
+    assert "Observable Assumption" in markdown_text
+    assert "Extrapolation Axes" in markdown_text
+    assert "Trust Surface" in markdown_text
     assert "## 5. Provenance" in markdown_text
 
 
@@ -609,7 +662,10 @@ def test_build_confidence_package_adds_compound_aggregate_and_sensitivity_sectio
     )
 
     assert payload["prediction_mode"] == "benchmark_supported_quantitative"
+    assert payload["decision_mode"] == "quantitative_recommendation"
     assert payload["compound_confidence"][0]["compound"] == "furfural"
+    assert payload["compound_confidence"][0]["reachability_status"] == "conditionally_reachable"
+    assert payload["compound_confidence"][0]["observable_assumption_summary"] == "static_class_profile | class_level | standard_matrix_support"
     assert payload["aggregate_confidence"]["meaty"]["tier"] in {"medium", "high"}
     assert payload["sensitivity_summary"]["mode"] == "local_oat"
     assert payload["sensitivity_summary"]["evaluated_perturbations"] >= 4

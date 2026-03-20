@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Any, Iterable, Mapping
+
 import math
 from typing import Any, Dict, Iterable, List, Optional, Tuple, TYPE_CHECKING
 
@@ -81,23 +83,23 @@ def render_projection_rows_markdown(
     lines = [heading, ""]
     if variant == "compact":
         lines.extend([
-            "| Compound | Process State | Retention | Calibration Source | Evidence | Browning | Observable ppb |",
-            "| :--- | :--- | :--- | :--- | :--- | :--- | ---: |",
+            "| Compound | Panel Class | Evidence State | Reachability | Process State | Retention | Calibration Source | Observable Assumption | Evidence | Browning | Observable ppb |",
+            "| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | ---: |",
         ])
         for row in rows:
             lines.append(
-                f"| {row['compound']} | {row['process_state']} | {row['retention_runtime_mode']} | {row['calibration_source']} | {row['calibration_evidence_strength']} | {float(row.get('browning_index', 0.0)):.2f} | {float(row['observable_ppb']):.2f} |"
+                f"| {row['compound']} | {row.get('target_class', 'unknown')} | {row.get('evidence_state', 'still_missing')} | {row.get('reachability_status', 'merely_plausible')} | {row['process_state']} | {row['retention_runtime_mode']} | {row['calibration_source']} | {row.get('observable_assumption_summary', 'unknown')} | {row['calibration_evidence_strength']} | {float(row.get('browning_index', 0.0)):.2f} | {float(row['observable_ppb']):.2f} |"
             )
         lines.append("")
         return "\n".join(lines)
 
     lines.extend([
-        "| Compound | Proxy ppb | Observable ppb | Obs/Proxy | Matrix | Dynamic | Headspace | Class | Process | Retention | Calibration | Evidence | Fallback |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+        "| Compound | Proxy ppb | Observable ppb | Obs/Proxy | Matrix | Dynamic | Headspace | Class | Panel Class | Evidence State | Reachability | Support Origin | Process | Retention | Calibration | Observable Assumption | Evidence | Fallback |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
     ])
     for row in rows:
         lines.append(
-            f"| {row['compound']} | {float(row['proxy_ppb']):.3f} | {float(row['observable_ppb']):.3f} | {float(row['observable_ratio']):.3f} | {float(row['matrix_factor']):.3f} | {float(row.get('dynamic_retention_factor', 1.0)):.3f} | {float(row['headspace_factor']):.3f} | {row['volatile_class']} | {row['process_state']} | {row.get('retention_runtime_mode', 'static_class_profile')} | {row['calibration_source']} | {row['calibration_evidence_strength']} | {row['calibration_fallback_mode']} |"
+            f"| {row['compound']} | {float(row['proxy_ppb']):.3f} | {float(row['observable_ppb']):.3f} | {float(row['observable_ratio']):.3f} | {float(row['matrix_factor']):.3f} | {float(row.get('dynamic_retention_factor', 1.0)):.3f} | {float(row['headspace_factor']):.3f} | {row['volatile_class']} | {row.get('target_class', 'unknown')} | {row.get('evidence_state', 'still_missing')} | {row.get('reachability_status', 'merely_plausible')} | {row.get('support_origin', 'standard_matrix_support')} | {row['process_state']} | {row.get('retention_runtime_mode', 'static_class_profile')} | {row['calibration_source']} | {row.get('observable_assumption_summary', 'unknown')} | {row['calibration_evidence_strength']} | {row['calibration_fallback_mode']} |"
         )
     lines.append("")
     return "\n".join(lines)
@@ -201,8 +203,10 @@ def render_decision_summary_cli(result: 'FormulationResult', warnings: List['Dom
         neighborhood = confidence.get("benchmark_neighborhood", "unknown")
         process_regime = confidence.get("process_regime", "unknown")
         posture = confidence.get("recommended_posture", "")
+        decision_mode = confidence.get("decision_mode", "directional_hypothesis")
         print(f"\n  [0] DECISION CONFIDENCE: {tier} ({score:.0f}/100)")
         print(f"      Benchmark Basis  : {neighborhood}")
+        print(f"      Decision Mode    : {decision_mode}")
         if process_regime not in {"unknown", "free_aqueous", "matrix_hydrated"}:
             print(f"      Process Regime   : {process_regime}")
         print(f"      Prediction Mode : {prediction_mode}")
@@ -229,6 +233,9 @@ def render_decision_summary_cli(result: 'FormulationResult', warnings: List['Dom
         calibration = confidence.get("calibration_diagnostics", {})
         if calibration:
             print(f"      Calibration      : {calibration.get('summary', '')}")
+            axes = calibration.get("extrapolation_axes", [])
+            if axes:
+                print(f"      Extrapolation    : {', '.join(str(axis) for axis in axes)}")
 
 
     # 1. Scientific Envelope Section
@@ -322,6 +329,9 @@ def render_deep_explainability_cli(result: 'FormulationResult'):
             print(
                 f"      {row['compound'].ljust(22)}: {str(row['tier']).upper()} ({float(row['score']):.0f}/100)  "
                 f"obs {float(row['observable_ppb']):.1f} ppb  [{mode_label}]"
+            )
+            print(
+                f"      {'':22}  class: {str(row.get('target_class', 'unknown'))} | state: {str(row.get('evidence_state', 'still_missing'))}"
             )
             print(
                 f"      {'':22}  cal: {cal_src} | evidence: {cal_evid}"
@@ -448,14 +458,14 @@ def render_benchmark_targets_markdown(
     lines = [
         "# Benchmark Targets",
         "",
-        "| Benchmark | Target | Type | Roles | Proxy ppb | Observable ppb | Obs/Proxy | Matrix | Headspace | Class | Span | Depth | Headspace Class | Kaw 25C | Henry Name |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+        "| Benchmark | Target | Type | Roles | Panel Class | Evidence State | Proxy ppb | Observable ppb | Obs/Proxy | Matrix | Headspace | Class | Span | Depth | Headspace Class | Kaw 25C | Henry Name |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
     ]
 
     for row in rows:
         kaw = f"{row.henry_kaw_25c:.3e}" if row.henry_kaw_25c is not None else "n/a"
         lines.append(
-            f"| {row.benchmark_id} | {row.target_name} | {row.target_type} | {', '.join(row.roles)} | {row.proxy_ppb:.3f} | {row.predicted_ppb:.3f} | {row.observable_ratio:.3f} | {row.matrix_factor:.3f} | {row.headspace_factor:.3f} | {row.volatile_class} | {row.span:.3f} | {row.depth} | {row.headspace_class} | {kaw} | {row.henry_source_name or 'n/a'} |"
+            f"| {row.benchmark_id} | {row.target_name} | {row.target_type} | {', '.join(row.roles)} | {row.target_class} | {row.evidence_state} | {row.proxy_ppb:.3f} | {row.predicted_ppb:.3f} | {row.observable_ratio:.3f} | {row.matrix_factor:.3f} | {row.headspace_factor:.3f} | {row.volatile_class} | {row.span:.3f} | {row.depth} | {row.headspace_class} | {kaw} | {row.henry_source_name or 'n/a'} |"
         )
 
     lines.extend([
@@ -578,6 +588,44 @@ def render_matrix_benchmark_evidence_markdown(rows: Iterable['MatrixBenchmarkEvi
         lines.append(
             f"| {row.benchmark_id} | {row.protein_type} | {row.execution_path} | {row.process_state or 'n/a'} | {row.source_origin} | {row.source_reference} | {row.target_profile} | {row.external_data_status} | {'yes' if row.promotable else 'no'} | {row.promotion_blocker or 'none'} |"
         )
+    return "\n".join(lines) + "\n"
+
+
+def render_matrix_target_status_markdown(payload: Mapping[str, Any]) -> str:
+    benchmark_rows = list(payload.get("benchmarks", []))
+    lines = [
+        "# Matrix Target Status",
+        "",
+        "| Benchmark | Protein | Path | Process State | Target Profile | Ref Signal | Quant Closed | Internal | Directional | Open | External Decision Ready | Mechanistic Priority | Next Action |",
+        "| --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: | --- | --- | --- |",
+    ]
+    for row in benchmark_rows:
+        counts = row.get("support_counts", {})
+        lines.append(
+            f"| {row['benchmark_id']} | {row['protein_type']} | {row['execution_path']} | {row.get('process_state') or 'n/a'} | {row.get('target_profile', 'unknown')} | {row.get('reference_signal_origin', 'unknown')} | {int(counts.get('quantitative_closed', 0))} | {int(counts.get('internal_candidate', 0))} | {int(counts.get('directional_support', 0))} | {int(counts.get('open_gap', 0))} | {'yes' if row.get('promotion_ready', False) else 'no'} | {'yes' if row.get('mechanistic_priority_ready', False) else 'no'} | {row.get('next_best_action', 'unknown')} |"
+        )
+
+    lines.extend([
+        "",
+        "## Compound-Level Support",
+        "",
+        "| Benchmark | Compound | Role | Panel Class | Evidence State | Calibration Evidence | Support Status |",
+        "| --- | --- | --- | --- | --- | --- | --- |",
+    ])
+    for row in benchmark_rows:
+        for compound in row.get("compounds", []):
+            lines.append(
+                f"| {row['benchmark_id']} | {compound['compound']} | {compound['role']} | {compound.get('target_class', 'unknown')} | {compound.get('evidence_state', 'still_missing')} | {compound.get('calibration_evidence_strength', 'heuristic')} | {compound.get('support_status', 'open_gap')} |"
+            )
+
+    summary = payload.get("summary", {})
+    lines.extend([
+        "",
+        f"Benchmarks covered: {int(summary.get('total_benchmarks', 0))}",
+        f"Quantitative-support-ready benchmarks: {int(summary.get('quantitative_support_ready', 0))}",
+        f"External-decision-ready benchmarks: {int(summary.get('promotion_ready', 0))}",
+        f"Mechanistic-priority benchmarks: {int(summary.get('mechanistic_priority_ready', 0))}",
+    ])
     return "\n".join(lines) + "\n"
 
 

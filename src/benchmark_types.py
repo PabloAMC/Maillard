@@ -239,6 +239,8 @@ class BenchmarkTargetSnapshot:
     target_name: str
     target_type: str
     roles: List[str]
+    target_class: str
+    evidence_state: str
     predicted_ppb: float
     proxy_ppb: float
     observable_ratio: float

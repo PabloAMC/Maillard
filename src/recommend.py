@@ -23,6 +23,7 @@ from src.matrix_calibration_registry import describe_matrix_calibration, determi
 from src.matrix_correction import (
     ProteinType,
     apply_matrix_correction,
+    classify_accessibility_state,
     classify_volatile_matrix_family,
     describe_compound_matrix_retention,
     get_volatile_class_retention_factor,
@@ -105,6 +106,7 @@ from src.projection import (
     _estimate_projection_budget, _temporal_accessibility, _relative_precursor_load_factor,
     _projection_strategy_metadata
 )
+from src.matrix_targets import get_compound_panel_entry
 from src.projection_metadata import ProjectionMetadataMap, make_projection_metadata_row
 
 SYSTEMS = [
@@ -455,6 +457,11 @@ def _apply_output_projection(
         time_minutes=float(time_minutes or 60.0),
         water_activity=water_activity,
     )
+    accessibility_state = classify_accessibility_state(
+        protein_type,
+        denaturation_state,
+        dominant_source="denaturation_state_arg",
+    )
 
     budget_metadata = {}
     if projection_budget is not None:
@@ -483,6 +490,7 @@ def _apply_output_projection(
                 protein_type=protein_type,
                 process_state=process_state,
             )
+            panel_entry = get_compound_panel_entry(compound_name) or {}
             calibration_factor = float(calibration.get("calibration_observable_factor") or 1.0)
             melanoidin_factor = _resolve_melanoidin_trapping_factor(
                 compound_name,
@@ -509,6 +517,10 @@ def _apply_output_projection(
                     "melanoidin_trapping_factor": float(melanoidin_factor),
                     "volatile_class": "other",
                     "process_state": process_state,
+                    "accessibility_profile": accessibility_state.profile,
+                    "accessibility_warning": accessibility_state.accessibility_warning,
+                    "accessibility_dominant_source": accessibility_state.dominant_source,
+                    **panel_entry,
                     **calibration,
                     **budget_metadata,
                 },
@@ -545,6 +557,7 @@ def _apply_output_projection(
             protein_type=protein_type,
             process_state=process_state,
         )
+        panel_entry = get_compound_panel_entry(compound_name) or {}
         calibration_factor = float(calibration.get("calibration_observable_factor") or 1.0)
         melanoidin_factor = _resolve_melanoidin_trapping_factor(
             compound_name,
@@ -576,6 +589,10 @@ def _apply_output_projection(
                 "browning_narrative": "melanoidin-linked sulfur trapping surrogate" if melanoidin_factor < 1.0 else "no explicit browning-linked sulfur penalty",
                 "volatile_class": classify_volatile_matrix_family(compound_name, smiles=species.smiles),
                 "process_state": process_state,
+                "accessibility_profile": accessibility_state.profile,
+                "accessibility_warning": accessibility_state.accessibility_warning,
+                "accessibility_dominant_source": accessibility_state.dominant_source,
+                **panel_entry,
                 **calibration,
                 **budget_metadata,
             },
