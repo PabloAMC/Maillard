@@ -236,11 +236,13 @@ def _build_compound_confidence_rows(
 
         matrix_factor = float(meta.get("matrix_factor", 1.0) or 1.0)
         headspace_factor = float(meta.get("headspace_factor", 1.0) or 1.0)
+        accessibility_dominated = min(matrix_factor, headspace_factor) < 0.35
         if min(matrix_factor, headspace_factor) < 0.15:
             score -= 12.0
             dominant_factors.append("Severe physical suppression limits observability.")
         elif min(matrix_factor, headspace_factor) < 0.35:
             score -= 6.0
+            dominant_factors.append("Accessibility (not chemistry) is the main source of uncertainty here.")
 
         score = _clamp_confidence_score(score)
         tier = _confidence_tier_from_score(score)
@@ -253,6 +255,11 @@ def _build_compound_confidence_rows(
             "score": score,
             "prediction_mode": _prediction_mode_from_tier(tier),
             "dominant_factors": dominant_factors[:2],
+            "calibration_source": str(meta.get("calibration_source", "unknown")),
+            "calibration_evidence_strength": str(meta.get("calibration_evidence_strength", "heuristic")),
+            "matrix_factor": matrix_factor,
+            "headspace_factor": headspace_factor,
+            "accessibility_dominated": accessibility_dominated,
         })
     return rows
 
