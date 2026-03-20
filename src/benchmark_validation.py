@@ -140,13 +140,26 @@ THERMODYNAMIC_GATING_MIN_RATIO_IMPROVEMENT = 0.05
 
 
 def get_matrix_ranking_contract(bench: dict | Path | str) -> Dict[str, Any]:
+    from src.matrix_targets import get_compound_evidence_state, get_compound_target_class
+
     if isinstance(bench, (Path, str)):
         bench = load_benchmark(bench)
     contract = bench.get("matrix_ranking_contract") or {}
     process_metadata = bench.get("process_metadata") or {}
-    observable_targets = [
+    
+    raw_observable_targets = [
         item for item in contract.get("observable_targets", []) if isinstance(item, dict) and item.get("name")
     ]
+    observable_targets = []
+    for item in raw_observable_targets:
+        name = str(item["name"])
+        enriched_item = dict(item)
+        if "evidence_state" not in enriched_item:
+            enriched_item["evidence_state"] = get_compound_evidence_state(name)
+        if "target_class" not in enriched_item:
+            enriched_item["target_class"] = get_compound_target_class(name) or "unknown"
+        observable_targets.append(enriched_item)
+
     adverse_markers = [str(item) for item in contract.get("adverse_markers", [])]
     citation_provenance = [str(item) for item in contract.get("citation_provenance", [])]
     return {
@@ -529,6 +542,7 @@ def _run_benchmark_recommendation(
         heuristic_barriers[rxn_key] = (max(0.0, bar_eff), unc)
 
     from src.recommend import Recommender, _canon
+    from src.lipid_oxidation import predict_hexanal_generation
 
     initial_concentrations = {}
     ratios = formulation.get("molar_ratios", {})
@@ -539,6 +553,45 @@ def _run_benchmark_recommendation(
                 qty = float(value)
                 break
         initial_concentrations[_canon(precursor.smiles)] = qty
+
+    protein_type = formulation.get("protein_type", "free")
+    model = MATRIX_BENCHMARK_PROFILES.get(protein_type)
+    if model is not None:
+        oxidation = predict_hexanal_generation(
+            model["lipid_profile"],
+            temp_C=float(conditions.temperature_celsius),
+            time_min=float(formulation.get("time_minutes", 60.0)),
+            oxygen_availability=1.0,
+        )
+        oxidation_load_ppb = float(oxidation["total_hydroperoxide"]) * 1000.0
+        # Convert ppb to a proxy molar concentration. The framework's recommend engine converts molar -> ppb using ppb_conversion_factor later.
+        # But wait, predict_hexanal_generation gives total_hydroperoxide load which drives hexanal and nonanal.
+        # Since the matrix_only path uses MATRIX_BENCHMARK_BASE_MARKER_YIELDS, and recommend.py applies its own logic,
+        # we can just inject the specific SMILES for Hexanal, Nonanal directly into initial_concentrations so the recommender projects them.
+        # Actually, if we inject them, recommender will project them as observables.
+        # Let's inject Hexanal (CCCCCC=O), Nonanal (CCCCCCCCC=O), 1-Hexanol (CCCCCCO), 2-Pentylfuran (CCCCC1=CC=CO1)
+        # We need their proxy mass to align with the yield factors.
+        # Proxy ppb in the matrix_only path was: oxidation_load_ppb * yield_factor.
+        # So we want initial_concentrations to be (oxidation_load_ppb * yield_factor / MW) / ppb_conversion_factor
+        from src.benchmark_validation import MATRIX_BENCHMARK_BASE_MARKER_YIELDS
+        from src.projection import DEFAULT_PROJECTION_STRATEGY
+        for compound_name, yield_factor in MATRIX_BENCHMARK_BASE_MARKER_YIELDS.items():
+            from rdkit import Chem
+            smiles_map = {
+                "Hexanal": "CCCCCC=O",
+                "Nonanal": "CCCCCCCCC=O",
+                "1-Hexanol": "CCCCCCO",
+                "2-Pentylfuran": "CCCCC1=CC=CO1"
+            }
+            smi = smiles_map.get(compound_name)
+            if smi:
+                mol = Chem.MolFromSmiles(smi)
+                mw = sum(atom.GetMass() for atom in mol.GetAtoms()) if mol else 100.0
+                target_proxy_ppb = oxidation_load_ppb * float(yield_factor)
+                # target_proxy_ppb = molar_concentration * mw * ppb_conversion_factor
+                molar_conc = target_proxy_ppb / (mw * DEFAULT_PROJECTION_STRATEGY.ppb_conversion_factor)
+                canon = _canon(smi)
+                initial_concentrations[canon] = initial_concentrations.get(canon, 0.0) + molar_conc
 
     rec = Recommender()
     return rec.predict_from_steps(

@@ -1015,6 +1015,11 @@ class Recommender:
             projection_budget=projection_budget,
         )
 
+        # Ensure injected targets (e.g. Hexanal from lipid oxidation) are included in raw_concentrations
+        for canon, conc in corrected_initial.items():
+            if canon in target_lookup and canon not in raw_concentrations:
+                raw_concentrations[canon] = conc
+
         observable_volatiles, projection_metadata = _apply_output_projection(
             raw_concentrations,
             species_catalog,
