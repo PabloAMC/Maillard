@@ -599,9 +599,9 @@ def _run_benchmark_recommendation(
         heuristic_barriers,
         initial_concentrations,
         temperature_kelvin=conditions.temperature_kelvin,
-        time_minutes=formulation.get("time_minutes"),
-        protein_type=formulation.get("protein_type", "free"),
-        denaturation_state=formulation.get("denaturation_state", 0.5),
+        time_minutes=float(formulation.get("time_minutes", 60.0)),
+        protein_type=protein_type,
+        denaturation_state=float(bench.get("denaturation_state", 0.5)),
     )
 
 
@@ -1108,7 +1108,8 @@ def _matrix_assertion_thresholds(
     thresholds: BenchmarkThresholds,
 ) -> Dict[str, float]:
     contract = bench.get("matrix_ranking_contract") or {}
-    configured = contract.get("assertion_thresholds") or {}
+    # P1: Check for either the legacy assertion_thresholds or the new validation_contract.scale_thresholds
+    configured = contract.get("assertion_thresholds") or contract.get("validation_contract", {}).get("scale_thresholds") or {}
     observable_targets = get_matrix_ranking_contract(bench).get("observable_targets", [])
     return {
         "min_coverage": float(configured.get("min_coverage", thresholds.full_coverage_threshold)),

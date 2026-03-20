@@ -119,6 +119,72 @@ class VolatileClassRetentionProfile:
     source: str
 
 
+@dataclass(frozen=True)
+class AccessibilityState:
+    """
+    Canonical accessibility state for a protein matrix run.
+
+    Maps a denaturation float (0–1) plus protein_type to a named profile
+    so that the pipeline and reports can reason about *why* accessibility
+    constrains predictions, not just *how much*.
+
+    Profiles:
+      protein_embedded  — 0.0–0.2: most reactive sites buried; chemistry
+                          limited by physical accessibility, not kinetics.
+      peptide_bound     — 0.2–0.6: partial denaturation; mixed burial/exposure.
+      partially_opened  — 0.6–0.9: processing has exposed most reactive sites.
+      free_like         — 0.9–1.0: fully denatured; behaves like free precursor.
+    """
+    protein_type: str
+    denaturation_state: float
+    profile: str               # one of the four canonical labels above
+    dominant_source: str       # 'denaturation_state_arg' | 'estimated_from_conditions'
+    accessibility_warning: bool  # True when accessibility dominates uncertainty
+
+
+def classify_accessibility_state(
+    protein_type: str,
+    denaturation_state: float,
+    *,
+    dominant_source: str = "denaturation_state_arg",
+) -> "AccessibilityState":
+    """Return the canonical AccessibilityState for a given protein_type and denaturation float."""
+    d = max(0.0, min(1.0, float(denaturation_state)))
+    pt_lower = str(protein_type).strip().lower()
+
+    # Free systems are always fully accessible
+    if pt_lower in {"free", "free_amino_acid", ""}:
+        return AccessibilityState(
+            protein_type=protein_type,
+            denaturation_state=1.0,
+            profile="free_like",
+            dominant_source="protein_type_is_free",
+            accessibility_warning=False,
+        )
+
+    if d < 0.2:
+        profile = "protein_embedded"
+        warning = True
+    elif d < 0.6:
+        profile = "peptide_bound"
+        warning = True
+    elif d < 0.9:
+        profile = "partially_opened"
+        warning = False
+    else:
+        profile = "free_like"
+        warning = False
+
+    return AccessibilityState(
+        protein_type=protein_type,
+        denaturation_state=d,
+        profile=profile,
+        dominant_source=dominant_source,
+        accessibility_warning=warning,
+    )
+
+
+
 _LYSINE_IDENTIFIERS = {
     "lysine",
     "l-lysine",
@@ -388,6 +454,11 @@ def build_matrix_explainability(
 ) -> dict[str, object]:
     p_type = _coerce_protein_type(protein_type)
     effective = resolve_matrix_correction(p_type, effective_denaturation_state)
+    acc_state = classify_accessibility_state(
+        p_type.value,
+        effective_denaturation_state,
+        dominant_source="denaturation_state_arg" if effective_denaturation_state is not None else "estimated_from_conditions",
+    )
     return {
         "protein_type": p_type.value,
         "effective_denaturation_state": float(effective_denaturation_state),
@@ -410,6 +481,10 @@ def build_matrix_explainability(
         ),
         "denaturation_source": DENATURATION_HEURISTICS.get(p_type).source if p_type in DENATURATION_HEURISTICS else "explicit/free",
         "prior_summary": summarize_matrix_prior_bundle(p_type.value),
+        # P1: canonical accessibility state
+        "accessibility_profile": acc_state.profile,
+        "accessibility_warning": acc_state.accessibility_warning,
+        "accessibility_dominant_source": acc_state.dominant_source,
     }
 
 

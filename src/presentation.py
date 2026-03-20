@@ -180,15 +180,36 @@ def render_decision_summary_cli(result: 'FormulationResult', warnings: List['Dom
     print("═" * 80)
 
     confidence = getattr(result, "confidence_metadata", {}) or {}
+
+    # ── Prediction Posture Banner ─────────────────────────────────────────────
+    prediction_mode = confidence.get("prediction_mode", "")
+    if prediction_mode == "benchmark_supported_quantitative":
+        banner_icon, banner_label, banner_level = "✅", "QUANTITATIVE MODE", "Results are calibrated against PRIMARY benchmarks. Suitable for formulation triage."
+    elif prediction_mode == "ranking_supported":
+        banner_icon, banner_label, banner_level = "⚠️", "DIRECTIONAL MODE", "Results are directionally supported. Verify absolute concentrations experimentally."
+    elif prediction_mode == "directional_only":
+        banner_icon, banner_label, banner_level = "🟡", "DIRECTIONAL ONLY", "Confidence is low. Use for hypothesis generation, not decision-grade prioritization."
+    else:
+        banner_icon, banner_label, banner_level = "🔬", "EXPLORATORY MODE", "Results are speculative. No PRIMARY benchmark covers this formulation space."
+    print(f"\n  {banner_icon} {banner_label}")
+    print(f"      {banner_level}")
+    print("  " + "─" * 76)
+
     if confidence:
         tier = str(confidence.get("tier", "unknown")).upper()
         score = float(confidence.get("score", 0.0))
         neighborhood = confidence.get("benchmark_neighborhood", "unknown")
         posture = confidence.get("recommended_posture", "")
-        prediction_mode = confidence.get("prediction_mode", "unknown")
         print(f"\n  [0] DECISION CONFIDENCE: {tier} ({score:.0f}/100)")
         print(f"      Benchmark Basis  : {neighborhood}")
         print(f"      Prediction Mode : {prediction_mode}")
+        # P1: show accessibility profile when matrix formulation
+        matrix_expl = getattr(result, "matrix_explainability", None)
+        if matrix_expl and isinstance(matrix_expl, dict) and matrix_expl.get("accessibility_profile"):
+            acc_profile = matrix_expl["accessibility_profile"]
+            acc_warning = matrix_expl.get("accessibility_warning", False)
+            acc_icon = "⚠️" if acc_warning else "✅"
+            print(f"      Accessibility    : {acc_profile} {acc_icon}")
         if posture:
             print(f"      Recommended Use  : {posture}")
         for factor in confidence.get("dominant_factors", [])[:2]:
@@ -196,6 +217,7 @@ def render_decision_summary_cli(result: 'FormulationResult', warnings: List['Dom
         calibration = confidence.get("calibration_diagnostics", {})
         if calibration:
             print(f"      Calibration      : {calibration.get('summary', '')}")
+
 
     # 1. Scientific Envelope Section
     status_icon = "✅" if not warnings else "⚠️"
@@ -282,13 +304,40 @@ def render_deep_explainability_cli(result: 'FormulationResult'):
     if compound_rows:
         print(f"\n  [E] COMPOUND CONFIDENCE:")
         for row in compound_rows[:3]:
+            mode_label = str(row.get('prediction_mode', 'unknown')).replace('_', ' ').upper()
+            cal_src = str(row.get('calibration_source', 'unknown'))
+            cal_evid = str(row.get('calibration_evidence_strength', 'heuristic'))
             print(
-                f"      {row['compound'].ljust(18)} : {str(row['tier']).upper()} ({float(row['score']):.0f}/100), "
-                f"obs {float(row['observable_ppb']):.1f} ppb"
+                f"      {row['compound'].ljust(22)}: {str(row['tier']).upper()} ({float(row['score']):.0f}/100)  "
+                f"obs {float(row['observable_ppb']):.1f} ppb  [{mode_label}]"
+            )
+            print(
+                f"      {'':22}  cal: {cal_src} | evidence: {cal_evid}"
             )
 
-    sensitivity = confidence.get("sensitivity_summary", {})
-    ranking_drivers = sensitivity.get("ranking_drivers", []) if isinstance(sensitivity, dict) else []
+    # [G] Accessibility warning — fires when matrix trapping dominates a top compound
+    accessibility_dominated = [
+        row for row in compound_rows
+        if row.get("accessibility_dominated") and float(row.get("observable_ppb", 0.0)) > 0.0
+    ]
+    if accessibility_dominated:
+        print(f"\n  [G] ACCESSIBILITY WARNING:")
+        for row in accessibility_dominated[:2]:
+            mf = float(row.get("matrix_factor", 1.0))
+            hf = float(row.get("headspace_factor", 1.0))
+            print(
+                f"      {row['compound'].ljust(22)}: matrix_factor={mf:.2f}, headspace_factor={hf:.2f}"
+            )
+            print(
+                f"      {'':22}  Accessibility (not chemistry) limits this compound's yield."
+            )
+            print(
+                f"      {'':22}  → Increasing denaturation state or raising pH may improve release."
+            )
+
+    ranking_drivers = confidence.get("sensitivity_summary", {})
+    sensitivity = ranking_drivers if isinstance(ranking_drivers, dict) else {}
+    ranking_drivers = sensitivity.get("ranking_drivers", [])
     if ranking_drivers:
         print(f"\n  [F] SENSITIVITY SUMMARY:")
         for item in ranking_drivers[:2]:
