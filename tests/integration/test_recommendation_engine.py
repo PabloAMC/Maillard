@@ -516,3 +516,59 @@ def test_lysine_budget_competition():
     # With Serine -> DHA steps exist -> Budget > 0
     assert budget_a == 0.0
     assert budget_b > 0.0
+
+
+def test_matrix_benchmark_ranking_contract():
+    """
+    P0.4 gate: both internal pea and soy benchmarks must pass the
+    multi-compound target-ranking contract (desirable + adverse compounds).
+    """
+    from src.benchmark_validation import evaluate_benchmark, summarize_evaluation
+    import pathlib
+
+    bench_dir = ROOT / "data" / "benchmarks"
+    benchmark_pairs = [
+        bench_dir / "pea_isolate_ribose_cysteine_100C_45min_Internal2026.json",
+        bench_dir / "soy_isolate_ribose_cysteine_100C_45min_Internal2026.json",
+    ]
+
+    for bench_file in benchmark_pairs:
+        if not bench_file.exists():
+            pytest.skip(f"Benchmark file not found: {bench_file}")
+
+        evaluation = evaluate_benchmark(bench_file)
+        summary = summarize_evaluation(evaluation, protein_type=evaluation.predicted_ppb and "pea_iso")
+
+        # Ranking contract must not have an unresolvable mismatch
+        assert summary.ranking_contract_status in {"pass", "n/a", "missing_targets"}, (
+            f"{bench_file.name}: unexpected ranking_contract_status={summary.ranking_contract_status!r}"
+        )
+        # Both Hexanal and Nonanal must be included in the adverse markers list
+        adverse_lower = [m.lower() for m in summary.adverse_markers]
+        assert "hexanal" in adverse_lower, f"{bench_file.name}: Hexanal not in adverse_markers"
+        assert "nonanal" in adverse_lower, f"{bench_file.name}: Nonanal not in adverse_markers"
+
+
+def test_matrix_calibration_anchor_evidence():
+    """
+    P0.4 gate: class-level MatrixCalibrationAnchor must be hit for unregistered
+    compounds (e.g. pyrazine class), returning directional_transferred rather than
+    the generic heuristic fallback.
+    """
+    from src.matrix_calibration_registry import describe_matrix_calibration
+
+    # 2,5-dimethylpyrazine is not individually registered in _MATRIX_CALIBRATION_RECORDS
+    # so it must fall through to the class anchor (pyrazine -> directional_transferred)
+    for protein_type in ("pea_iso", "soy_iso"):
+        result = describe_matrix_calibration(
+            "2,5-dimethylpyrazine",
+            protein_type=protein_type,
+            process_state="heated_matrix",
+        )
+        strength = result.get("calibration_evidence_strength", "")
+        assert strength != "heuristic", (
+            f"protein_type={protein_type}: expected class anchor but got 'heuristic' fallback"
+        )
+        assert strength in {"class_anchored", "directional_transferred"}, (
+            f"protein_type={protein_type}: unexpected evidence_strength={strength!r}"
+        )

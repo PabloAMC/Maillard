@@ -4,207 +4,143 @@
 [![Docker Recommended](https://img.shields.io/badge/docker-recommended-blue.svg)](https://www.docker.com/)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-Maillard is a predictive computational framework designed to help alternative-protein scientists digitally explore and rank Maillard flavor chemistry *before* stepping into the wet lab.
+Maillard is a computational screening framework for scientists who want to imitate meat-like Maillard chemistry in plant-based systems before running wet-lab campaigns.
 
-By simulating the complex reactions between sugars and amino acids under specific conditions, it tells you what your current formulation will likely produce, what trade-offs exist (e.g., flavor vs. safety), and what you should try next.
+The point is not to predict every food matrix equally well. The point is to help scientists answer the most useful pre-lab question:
 
----
+Which formulation and process changes are most worth testing next if the goal is meat-like aroma under plant-matrix constraints?
 
-**Important Note:** This project relies on complex chemistry dependencies. It **requires conda or Docker** — standard pip-only installation is not supported.
+Important note: this project requires conda or Docker. Pip-only installation is not supported.
 
----
+## Quick Start
 
-## 🚀 The Fastest Way to Start
+If you want to run the tool immediately, start with [docs/guides/QUICKSTART.md](docs/guides/QUICKSTART.md).
 
-If you want to run a prediction and see how it works, **start with the [Quickstart Guide](docs/guides/QUICKSTART.md)**. It takes under 10 minutes to run your first formulation.
+If you want definitions for terms such as FAST mode, validated envelope, or benchmark neighborhood, see [docs/guides/GLOSSARY.md](docs/guides/GLOSSARY.md).
 
-For definitions of project terminology (e.g., "FAST mode", "validated envelope"), see our **[Glossary for Scientists](docs/guides/GLOSSARY.md)**.
+## The Real Problem
 
----
+The most useful version of this tool is not a universal chemistry oracle. It is a scientist-facing decision system that can:
 
-## 📊 Example Output
+- rank candidate formulations before the wet lab
+- explain why a prediction should be trusted or discounted
+- separate benchmark-backed claims from directional extrapolation
+- show which compounds are driven by free chemistry, matrix observability, or transferred priors
 
-When you run a candidate formulation, Maillard gives you a clear snapshot of its flavor profile, safety risks, and scientific confidence:
+That means the central problem is broader than matching one benchmark table. We need a model that is useful across three regimes of scientific confidence.
 
-```text
-================================================================================
-MAILLARD FORMULATION SCREENING
-================================================================================
-Target: meaty | Minimize: beany | Protein: pea_iso
+## The Three Regimes
 
-PREDICTION CONFIDENCE: MODERATE
-Warning: Your system relies heavily on pea matrix behavior. Treat results
-as directional prioritization rather than release-grade claims.
+| Regime | What it represents | Current trust | What the tool should do well |
+| --- | --- | --- | --- |
+| Free precursors | Buffer-like systems where sugars and amino acids are directly accessible | High | Quantitative ranking and concentration-scale screening |
+| Pea / soy matrices | Real protein matrices where accessibility, retention, and headspace matter | Moderate | Directional and near-quantitative prioritization where explicit anchors exist |
+| Extrusion-heavy systems | Highly processed systems with strong structural and transport effects | Low | Exploratory hypothesis generation and experiment prioritization |
 
-DOMINANT DESIRABLE COMPOUNDS:
-- 2-methyl-3-furanthiol: 15.4 ppb
-- 2-furfurylthiol: 8.2 ppb
+These regimes are not three unrelated products. They are three layers of increasing structural complexity.
 
-DOMINANT PENALTIES:
-- hexanal: 120.5 ppb (High Risk)
-================================================================================
-```
+- Free precursors test whether the chemistry core is right.
+- Pea and soy matrices test whether observable reality is right.
+- Extrusion-heavy systems test whether process-structured accessibility and transport are right.
 
-## 🧪 What Inputs Do I Need?
-
-To run a prediction, you feed the tool a recipe. The minimum inputs are:
-
-- **Sugars:** e.g., `ribose`, `glucose`, `xylose`
-- **Amino Acids:** e.g., `cysteine`, `leucine`
-- **Molar Ratios:** The proportions of your precursors
-- **Environment:** `pH`, Temperature (`temp`), and Reaction Time (`time-minutes`)
-- **Protein Matrix:** `free` (buffer), `pea_iso` (pea isolate), or `soy_iso` (soy isolate)
-
----
-
-## What This Repository Is For
-
-Use Maillard when you want to answer questions like these before running a wet-lab experiment:
-
-- Which precursor combination is most likely to generate meaty sulfur compounds under my process conditions?
-- If I change pH, temperature, water activity, or reaction time, which flavour-active compounds move the most?
-- Which candidate formulation improves desirable aroma while reducing beany or safety penalties?
-- Which predictions are benchmark-backed, and which are only directional?
-
-The library is most useful as a formulation-screening and prioritization system. It is not a replacement for final experimental confirmation.
-
-## What You Can Share Today
-
-The repository now supports three shareable artifact levels for external scientific review:
-
-- a single-run report with Markdown, JSON, and provenance
-- a side-by-side comparison report for a small named set of formulations
-- a campaign package with per-run reports, a leaderboard, and campaign-level provenance
-
-That does not make every result equally validated. It does mean you can share outputs without losing the command context, branch/commit state, or the scientific files that define the current trust surface.
-
----
-
-## Does It Work?
-
-Yes, within a clearly defined envelope. The repository exposes a compact trust surface centered on the strongest quantitative benchmark evidence.
+## What Works Today
 
 Current in-repo validation summary:
 
 - 9 supported benchmarks are tracked in Docker-validated artifacts
-- 4 benchmarks are strict-ready today, all in the free-precursor envelope
+- 4 benchmarks are strict-ready today, all inside the free-precursor envelope
 - 9 matched compounds define the current authoritative quantitative proof surface
 - the median matched-compound ratio in that proof surface is 1.118x
 
-In practice, this means the software already reproduces a narrow but real set of literature systems closely enough to support quantitative screening inside that envelope.
-
-The image below is a versioned snapshot of the current first-pass trust surface for GitHub readers. The authoritative validation outputs are still generated locally with `./scripts/docker_maillard.sh validation-figures`.
+The current validation overview is shown below. The authoritative artifacts are generated locally with `./scripts/docker_maillard.sh validation-figures`.
 
 ![Validation Overview](docs/assets/validation_overview.png)
 
-If you need the full boundary conditions, benchmark-by-benchmark status, or caveats beyond this first-pass view, use the generated validation documents together with the versioned snapshot above.
+How to interpret this trust surface:
 
-How to interpret trust:
+- Free-precursor benchmarks are the quantitative proof surface.
+- Pea and soy matrix paths are useful for prioritization, not yet for broad release-grade claims.
+- Extrusion-heavy systems remain exploratory until benchmarked directly.
 
-- Free-precursor benchmarks are the quantitative proof surface. Use them when you need concentration-scale decisions.
-- Pea and soy matrix paths are useful for directional prioritization, not yet for release-grade quantitative claims.
-- Extrusion-heavy or intact-protein systems remain exploratory unless you add new benchmark evidence.
+## What Accuracy Depends On
 
----
+The tool does not have a single accuracy mode. Its precision depends on which layer is doing most of the work.
 
-## Trust Levels
+| Layer | Main inputs | What it mainly controls |
+| --- | --- | --- |
+| Core FAST kinetics | Literature barriers, cached barrier records, calibrated Arrhenius heuristics | Pathway ordering and relative competitiveness |
+| Observable projection | Proxy-to-observable mapping, volatility, retention, process-sensitive projection factors | Absolute ppb-scale fit |
+| Matrix calibration and headspace release | Protein type, process state, compound-specific observable factors, transferred anchors | Whether matrix predictions stay physically plausible and useful |
+| Offline refinement | xTB, selective DFT, and optional external ML-potential refinement written back as cached artifacts | Narrow mechanistic correction of decisive motif classes |
 
-| System Type                                        | Trust Level        | What You Can Safely Use It For                                                                        |
-| -------------------------------------------------- | ------------------ | ----------------------------------------------------------------------------------------------------- |
-| **Free precursors**                          | **High**     | Quantitative ranking, concentration-scale comparison, candidate screening, safety-aware optimization. |
-| **Pea / soy matrices**                       | **Moderate** | Directional comparison, off-flavour triage, hypothesis generation, deciding what to test next.        |
-| **Intact protein / extrusion-heavy systems** | **Low**      | Exploratory use only; treat outputs as hypotheses until benchmarked.                                  |
+Two rules follow from this:
 
-Important caveat: matrix trust is lower because accessibility, retention, and pH-dependent headspace effects are not yet benchmark-closed across real plant matrices.
+- We should not retune energy barriers just to make one benchmark concentration match.
+- When ranking looks right but ppb scale is wrong, the preferred fix is usually in the observable or matrix-calibration layer.
 
-## What Precision Depends On
+The current validation contract therefore uses two scale checks:
 
-The tool does not have a single accuracy mode. Its precision depends on which layer of the stack is carrying most of the prediction for your system.
+- max ratio, to catch worst-case outliers
+- mean absolute log-scale error, to catch broad multiplicative drift
 
-| Prediction Layer                                   | Main Inputs                                                                                                                 | Typical Use                                                 | Precision Implication                                                                                                                                               |
-| -------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Core FAST kinetics**                       | Family-level barriers from literature, cached barrier records, and calibrated Arrhenius heuristics                          | Free-precursor ranking and concentration-scale screening    | Strongest when the chemistry stays close to the benchmarked free amino-acid systems. Barrier quality mostly controls pathway ordering and relative competitiveness. |
-| **Observable projection**                    | Proxy-to-observable mapping, volatility, retention, and process-sensitive projection factors                                | Translating pathway signal into ppb-scale outputs           | This layer is the main determinant of absolute concentration fit. It should absorb most calibration work before any barrier retuning is considered.                 |
-| **Matrix calibration and headspace release** | Protein type, process state, compound-specific observable factors, pH release modifiers, and transferred literature anchors | Pea/soy matrix-only and matrix-augmented systems            | Useful for directional and near-quantitative matrix checks only where explicit anchors exist. Accuracy depends more on calibration coverage than on barrier tuning. |
-| **Offline refinement**                       | xTB, selective DFT, or local ML potentials written back as cached artifacts                                                 | Narrow mechanistic correction of a decisive family or motif | Reserved for cases where cheap surrogate closure has stopped buying accuracy. Not intended as a day-to-day runtime fitting knob.                                    |
+## Scientific Architecture
 
-Two practical rules follow from this:
+The scientific stack is deliberately layered. Different tools serve different roles.
 
-- We do not normally retune energy barriers just to make one benchmark concentration match. Barrier changes should improve chemistry coherently across benchmark families.
-- When a benchmark misses in absolute ppb but keeps the right pathway ordering, the preferred fix is usually in the observable or matrix-calibration layer, not in the reaction-family barrier table.
+| Layer | Main tool or model | Role in the system | Main dependency |
+| --- | --- | --- | --- |
+| Reaction enumeration | SMIRKS rules and curated pathway families | Generate plausible Maillard and lipid-derived chemistry | Coverage and correctness of the encoded reaction families |
+| Fast prediction core | FAST observable path with empirical or cached barriers | Daily screening, ranking, and benchmark-facing concentrations | Calibration quality of barrier tables and projection layers |
+| Diagnostic thermochemistry | Cantera and thermodynamic gating | Diagnose whether a pathway family is physically plausible and whether gating would materially change benchmark behavior | Thermodynamic data and gating policy |
+| Observable projection | Headspace, retention, matrix, and process-state surrogates | Convert pathway signal into what a scientist would actually measure or smell | Benchmark-anchored observable calibration |
+| Offline mechanistic refinement | xTB first, selective DFT second | Refine decisive motif classes when cheap surrogates stop improving decisions | Availability of narrow, benchmark-relevant refinement targets |
+| Optional ML acceleration | External state-of-the-art ML potentials, only offline | Accelerate conformer or local motif refinement after the refinement task is well-defined | Quality and relevance of the external model for the motif class of interest |
 
-Current validation therefore uses two scale checks:
+What this means in practice:
 
-- a **max ratio** check that catches worst-case outliers;
-- a **mean absolute log-scale error** check that guards against broad multiplicative drift even when no single compound is catastrophic.
+- FAST is the day-to-day engine because it is cheap enough to screen formulations and calibrate against benchmarks.
+- Cantera is a diagnostic lane, not the main benchmark-facing prediction surface.
+- xTB and selective DFT are for targeted refinement, not routine production inference.
+- If ML potentials are used, the right default is to consume a state-of-the-art external model in an offline role, not to train a repository-specific model by default.
 
----
+## Should ML Potentials Be The Main Missing Piece?
 
-## Scientific References
+No.
 
-The canonical human-readable reference list is [docs/reference/SCIENTIFIC_REFERENCE.md](docs/reference/SCIENTIFIC_REFERENCE.md). That file is the place to look for the validated papers, numeric anchors, and scientific caveats currently trusted by the repository.
+ML potentials are useful, but they are not the elegant primary solution to the current product gap.
 
-If you want the shortest possible reading list, start with these anchors:
+The main missing problem is not raw quantum precision. The main missing problem is that plant-matrix and extrusion-heavy systems are under-benchmarked in accessibility, retention, headspace release, and process-state dependence.
 
-- Hofmann & Schieberle (1998): free-precursor sulfur chemistry anchor for MFT and FFT.
-- Mottram & Nobrega (2002): mechanistic support for ribose plus cysteine sulfur pathways.
-- Pratap-Singh et al. (2021): pea and soy baseline off-flavour headspace anchor.
-- Shu et al. (2024): soy off-flavour attenuation anchor under high-severity treatment.
-- Asen et al. (2022) and Malia et al. (2025): pea process-state and accessibility calibration anchors.
-- Squeo et al. (2023): acrylamide safety anchor for plant-protein ingredients.
+That means the clean modeling order is:
 
-For a broader literature-screening view, also see [docs/slr_benchmark_evaluation.md](docs/slr_benchmark_evaluation.md).
+1. benchmark and calibrate observable-layer behavior where literature or internal data exist
+2. add process-aware matrix accessibility and transport surrogates
+3. use xTB and selective DFT to refine narrow motif classes only after cheap closure stops improving decisions
+4. use external state-of-the-art ML potentials later, offline, only if repeated motif classes justify them and the target motif class is already well-scoped
 
----
+ML potentials should therefore be a tertiary offline accelerator, not the main path to making the tool useful, and the default assumption should be to reuse the best available external model rather than train a new one ourselves.
 
-## What The Software Can Do
+## What The Best Version Of This Tool Looks Like
 
-Within its supported envelope, Maillard can already do the following:
+The best version of Maillard is the tool that helps a scientist decide what to make next, not the tool that claims uniform absolute accuracy everywhere.
 
-- **Rank likely volatile products for a formulation.**
-  Given sugars, amino acids, additives, lipids, pH, temperature, water activity, and time, the pipeline predicts which compounds are most likely to dominate.
-- **Estimate concentration-scale outputs in ppb inside the validated free-precursor envelope.**
-  This is the main quantitative use case when your system resembles the strict-ready literature benchmarks.
-- **Score formulations against sensory goals and penalties.**
-  You can target tags such as meaty or roasted and simultaneously penalize beany or safety-related outcomes.
-- **Generate scientist-facing reports.**
-  The CLI can emit Markdown and JSON reports that include decision summaries, confidence metadata, and domain-of-validity warnings.
-- **Optimize precursor mixtures.**
-  The optimizer searches pH, temperature, water activity, time, and concentration choices to maximize a target sensory direction under penalties.
-- **Explain why a prediction looks the way it does.**
-  The reporting layer surfaces dominant compounds, penalties, likely bottlenecks, and why confidence is limited.
+To get there, the repo needs to do five things well:
 
-## What It Cannot Do Reliably Yet
+- keep the free-precursor chemistry quantitatively solid
+- promote pea and soy from intake checks to matrix target-ranking benchmarks
+- model extrusion-heavy systems as process-structured accessibility problems rather than pretending they are just bigger free systems
+- expose confidence, extrapolation axes, and calibration sources clearly in reports
+- keep expensive computation offline and reusable
 
-- It cannot serve as a universal zero-shot predictor for complex plant matrices.
-- It cannot replace wet-lab confirmation for extrusion-heavy or strongly peptide-bound systems.
-- It cannot yet claim broad quantitative accuracy for matrix headspace release across process states.
-- It should not be used as if every output were equally validated; some outputs are quantitative, others are directional.
+## Recommended Workflow
 
----
+1. Check the validation surface first.
+2. Run a forward prediction for your candidate formulation.
+3. Save a report bundle with provenance.
+4. Use the optimizer to search nearby operating points.
+5. Treat matrix-heavy and extrusion-heavy outputs according to their trust regime.
 
-## Recommended Workflow For Useful Results
-
-For a new user, the most productive path is:
-
-1. Check the validation surfaces first so you know whether your intended use case is benchmark-backed.
-2. Run a forward prediction with your candidate precursors and process conditions.
-3. Re-run with `--report` so you get Markdown and JSON outputs you can inspect or share.
-4. If the prediction looks promising, use the optimizer to search nearby formulations instead of tuning by hand.
-5. Treat matrix-heavy outputs as directional unless your system is visibly close to the validated envelope.
-
----
-
-## Advanced Workflows & Command Reference
-
-<details>
-<summary><strong>Click here to view detailed command examples (Docker setup, Optimization, Campaign generation, etc.)</strong></summary>
-
-### Quick Start (Technical Setup)
-
-Recommended setup: Docker for reproducibility. Local Python/conda setup is also documented in [Installation.md](Installation.md).
-
-### 1. Start the environment and inspect the trust surface
+## Key Commands
 
 ```bash
 ./scripts/docker_maillard.sh up
@@ -213,27 +149,7 @@ Recommended setup: Docker for reproducibility. Local Python/conda setup is also 
 ./scripts/docker_maillard.sh validation-figures
 ```
 
-This gives you the core validation artifacts that should be read before interpreting predictions:
-
-- [results/validation/benchmark_summary.md](results/validation/benchmark_summary.md) for the benchmark-by-benchmark contract
-- [results/validation/validation_overview.md](results/validation/validation_overview.md) for the repository-level trust snapshot
-- [results/validation/validated_envelope.md](results/validation/validated_envelope.md) for the current boundary of reliable use
-
-## What To Run For Each Goal
-
-| Goal                                              | Command                                                                             | What you get                                                                            |
-| ------------------------------------------------- | ----------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| Check whether your use case is benchmark-backed   | `./scripts/docker_maillard.sh validation-figures`                                 | Overview PNGs plus Markdown/JSON summaries of trust and envelope boundaries.            |
-| Inspect benchmark-by-benchmark status             | `./scripts/docker_maillard.sh summary`                                            | The current benchmark table with status, coverage, ratios, and notes.                   |
-| Generate a prediction for a candidate formulation | `python scripts/run_pipeline.py ... --report`                                     | Compound predictions, decision summary, confidence warnings, and a saved report bundle. |
-| Optimize a formulation around a target profile    | `python scripts/optimize_formulation.py ... --report`                             | The best trial, predicted tradeoffs, and an exportable report.                          |
-| Compare a short list of named formulations        | `python scripts/compare_formulations.py --names ... --output-dir ...`             | A side-by-side comparison bundle with confidence and provenance.                        |
-| Build a scientist-shareable campaign package      | `./scripts/docker_maillard.sh campaign data/campaigns/shareable_meaty_screen.yml` | Run-level bundles plus campaign-level Markdown/JSON artifacts.                          |
-| Inspect one literature benchmark directly         | `./scripts/docker_maillard.sh run python scripts/compare_sim_to_lit.py --lit ...` | A benchmark card with parity plot, absolute yields, and benchmark summary.              |
-
-### 2. Run a forward prediction
-
-Use [scripts/run_pipeline.py](scripts/run_pipeline.py) when you already have a candidate formulation and want to know what it is likely to produce.
+Generate one prediction:
 
 ```bash
 python scripts/run_pipeline.py \
@@ -250,116 +166,28 @@ python scripts/run_pipeline.py \
   --output-dir results/first_run
 ```
 
-This command is useful because it returns more than a list of compounds. It also gives you:
-
-- a prediction summary for desirable compounds and penalties
-- confidence and domain-of-validity warnings
-- report artifacts you can compare between runs
-
-Useful flags in this pipeline:
-
-- `--list-precursors` to discover supported precursor names
-- `--list-tags` to inspect available sensory tags
-- `--aw` and `--time-minutes` to change process severity
-- `--protein-type` and `--denaturation-state` to express matrix assumptions
-- `--report` to persist a scientist-facing Markdown and JSON bundle
-
-Every saved bundle now includes provenance metadata: generating command, branch, commit, dirty-state flag, input fingerprint, and the key scientific-reference files needed to interpret the result honestly.
-
-### 2b. Compare named formulations when the question is comparative
-
-```bash
-python scripts/compare_formulations.py \
-  --names "Cysteine Enrichment (Basic),Premium Meaty Mix,Soy-Specific Masking" \
-  --ph 5.5 \
-  --temp 105 \
-  --target-tag meaty \
-  --minimize-tag beany \
-  --output-dir results/comparison_meaty
-```
-
-Use this when you want a side-by-side scientific review artifact instead of reading one run at a time.
-
-### 2c. Build a campaign package for external review
-
-```bash
-./scripts/docker_maillard.sh campaign \
-  data/campaigns/shareable_meaty_screen.yml \
-  results/share/campaign_meaty
-```
-
-This produces:
-
-- one report bundle per run in `runs/`
-- `comparison.md` and `comparison.json`
-- `campaign.md` and `campaign.json`
-
-Use this when you need to hand results to scientists or reviewers and want the package itself to carry the review context.
-
-### 3. Optimize a formulation instead of guessing by hand
-
-Use [scripts/optimize_formulation.py](scripts/optimize_formulation.py) when you want the software to search for a better operating point.
+Optimize a formulation:
 
 ```bash
 python scripts/optimize_formulation.py \
   --sugars ribose,glucose \
   --amino-acids cysteine,leucine \
-  --lipids hexanal \
   --target-tag meaty \
   --minimize-tag beany \
   --protein-type pea_iso \
-  --risk-aversion 1.5 \
   --n-iterations 50
 ```
 
-The optimizer is useful when you want to balance several levers at once:
+## Scientific References
 
-- maximize a sensory direction such as meaty
-- penalize off-notes such as beany
-- penalize safety risk through the objective
-- search concentration ratios and process settings faster than manual trial-and-error
+The canonical human-readable reference list is [docs/reference/SCIENTIFIC_REFERENCE.md](docs/reference/SCIENTIFIC_REFERENCE.md).
 
-If you want a persistent report of the best trial, add `--report --output-dir ...`.
+For the broader literature-screening and ingestion view, see [docs/slr_benchmark_evaluation.md](docs/slr_benchmark_evaluation.md).
 
-### 4. Generate benchmark-specific validation cards when you need them
+## Current Boundary
 
-If you need to inspect one literature benchmark directly, regenerate its comparison card:
+Use the generated validation artifacts when you need the exact benchmark-by-benchmark contract:
 
-```bash
-./scripts/docker_maillard.sh run \
-  python scripts/compare_sim_to_lit.py \
-    --lit data/benchmarks/cys_glucose_150C_Farmer1999.json
-```
-
-This writes a PNG, Markdown summary, and JSON payload in [results/validation](results/validation).
-
-</details>
-
----
-
-## How To Decide Whether A Result Is Actionable
-
-Use this rule of thumb:
-
-- If your system is close to the free-precursor benchmarks, the output is suitable for quantitative screening and prioritization.
-- If your system depends heavily on pea or soy matrix behavior, use the output to decide what to test next, not as a final concentration claim.
-- If your system relies on extrusion history, intact proteins, or unsupported matrix physics, treat the result as exploratory.
-
-The repository is designed to tell you not only what it predicts, but also when not to overclaim.
-
----
-
-## Deeper Documentation
-
-If you need to dig deeper into the science, validation mechanics, or architecture:
-
-- **[docs/README.md](docs/README.md)** - The main index for all deep-dive reference and research documentation.
-- **[docs/guides/SHARING_RESULTS.md](docs/guides/SHARING_RESULTS.md)** - How to create shareable single-run, comparison, and campaign artifacts.
-- **[docs/guides/SCIENTIFIC_RELIABILITY.md](docs/guides/SCIENTIFIC_RELIABILITY.md)** - Detailed breakdown of matrix predictability caps.
-- **[docs/VALIDATION_GUIDE.md](docs/VALIDATION_GUIDE.md)** - Our strict validation methodology.
-- **[docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md](docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md)** - The review-ready internal protocol for the primary pea/soy matrix experiment.
-- **[docs/use_cases/README.md](docs/use_cases/README.md)** - Operational reports and the current pea/soy meaty benchmark candidate studies.
-- **[docs/use_cases/food_scientist_walkthrough.md](docs/use_cases/food_scientist_walkthrough.md)** - A narrative walkthrough demonstrating how a food scientist would use Maillard to solve a formulation challenge.
-- **[docs/guides/PYTHON_API.md](docs/guides/PYTHON_API.md)** - Guide for using the core components in custom Python scripts.
-- **[docs/notebooks/1_Formulation_Screening_Example.ipynb](docs/notebooks/1_Formulation_Screening_Example.ipynb)** - Interactive Jupyter notebook for the programmatic API.
-- **[docs/notebooks/2_Food_Scientist_Walkthrough.ipynb](docs/notebooks/2_Food_Scientist_Walkthrough.ipynb)** - Interactive version of the food scientist narrative walkthrough.
+- [results/validation/benchmark_summary.md](results/validation/benchmark_summary.md)
+- [results/validation/validation_overview.md](results/validation/validation_overview.md)
+- [results/validation/validated_envelope.md](results/validation/validated_envelope.md)
