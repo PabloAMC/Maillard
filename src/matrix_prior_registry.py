@@ -52,11 +52,16 @@ def summarize_matrix_prior_bundle(protein_type: str) -> Dict[str, Dict[str, Any]
     def _summarize(entry: Optional[Dict[str, Any]], parameter: str) -> Optional[Dict[str, Any]]:
         if entry is None:
             return None
+        process_state_applicability = entry.get("process_state_applicability", [])
+        if not isinstance(process_state_applicability, list):
+            process_state_applicability = []
         return {
             "parameter": parameter,
             "source": str(entry.get("source", "unknown")),
             "provenance_tier": str(entry.get("provenance_tier", "unknown")),
             "confidence_tier": str(entry.get("confidence_tier", "unknown")),
+            "uncertainty_posture": str(entry.get("uncertainty_posture", "unknown")),
+            "process_state_applicability": [str(item) for item in process_state_applicability],
             "notes": str(entry.get("notes", "")),
         }
 

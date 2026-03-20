@@ -126,6 +126,12 @@ def _prediction_mode_from_tier(tier: str) -> str:
     return "hypothesis_only"
 
 
+def _decision_mode_from_prediction_mode(prediction_mode: str) -> str:
+    if str(prediction_mode) == "benchmark_supported_quantitative":
+        return "quantitative_recommendation"
+    return "directional_hypothesis"
+
+
 def _clamp_confidence_score(score: float) -> float:
     return max(5.0, min(100.0, float(score)))
 
@@ -333,6 +339,11 @@ def _build_compound_confidence_rows(
     *,
     top_n: int = 5,
 ) -> List[Dict[str, object]]:
+    derived_projection_rows = {
+        str(row.get("compound", "")).strip().lower(): row
+        for row in build_projection_rows(result)
+        if str(row.get("compound", "")).strip()
+    }
     target_map = {
         str(target.get("name", "")).strip().lower(): target
         for target in getattr(result, "targets", [])
@@ -346,6 +357,7 @@ def _build_compound_confidence_rows(
     rows: List[Dict[str, object]] = []
     for canon, meta in ranked_metadata[:top_n]:
         compound = str(meta.get("compound", canon))
+        derived_meta = derived_projection_rows.get(compound.strip().lower(), {})
         target = target_map.get(compound.strip().lower(), {})
         score = float(assessment.score)
         dominant_factors: List[str] = []
@@ -391,9 +403,22 @@ def _build_compound_confidence_rows(
             "dominant_factors": dominant_factors[:2],
             "calibration_source": str(meta.get("calibration_source", "unknown")),
             "calibration_evidence_strength": str(meta.get("calibration_evidence_strength", "heuristic")),
+            "evidence_state": str(meta.get("evidence_state", "still_missing")),
+            "target_class": str(meta.get("target_class", "unknown")),
             "matrix_factor": matrix_factor,
             "headspace_factor": headspace_factor,
             "accessibility_dominated": accessibility_dominated,
+            "support_origin": str(derived_meta.get("support_origin", meta.get("support_origin", "standard_matrix_support"))),
+            "observable_assumption_summary": str(
+                derived_meta.get("observable_assumption_summary", meta.get("observable_assumption_summary", "unknown"))
+            ),
+            "chemically_reachable": bool(derived_meta.get("chemically_reachable", meta.get("chemically_reachable", False))),
+            "reachability_status": str(
+                derived_meta.get("reachability_status", meta.get("reachability_status", "merely_plausible"))
+            ),
+            "reachability_basis": str(
+                derived_meta.get("reachability_basis", meta.get("reachability_basis", "mechanistic_surrogate_only"))
+            ),
         })
     return rows
 
@@ -586,6 +611,7 @@ def build_confidence_package(
     )
     payload = asdict(assessment)
     payload["prediction_mode"] = _prediction_mode_from_tier(assessment.tier)
+    payload["decision_mode"] = _decision_mode_from_prediction_mode(payload["prediction_mode"])
     payload["process_regime"] = process_regime.get("process_regime", "unknown")
     payload["process_neighborhood"] = process_regime.get("process_neighborhood", "unknown")
     payload["process_regime_summary"] = process_regime.get("summary", "")

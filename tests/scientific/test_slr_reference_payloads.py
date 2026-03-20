@@ -62,7 +62,9 @@ def test_benchmark_intake_registry_encodes_trikusuma_and_lincoln_artifacts():
 
     assert by_id["trikusuma_2019"]["status"] == "ready_for_intake_encoding"
     assert by_id["trikusuma_2019"]["key_values"]["tracked_uht_markers_ug_per_l"]["hexanal"] == 782.0
+    assert by_id["trikusuma_2019"]["runtime_artifacts"][0]["artifact_id"] == "pea_isolate_uht_140C_Trikusuma2019"
     assert by_id["lincoln_2025"]["status"] == "ready_for_directional_prior_encoding"
+    assert by_id["lincoln_2025"]["runtime_artifacts"][0]["artifact_id"] == "lincoln_2025_polyphenol_crosstalk_v1"
     assert "polyphenol" in json.dumps(by_id["lincoln_2025"]).lower()
 
 
@@ -73,6 +75,19 @@ def test_computational_priors_include_lincoln_crosstalk_prior():
     assert prior["effect_direction"] == "suppress_strecker_and_moderate_oxidative_crosstalk"
     assert "glucose" in prior["required_sugars"]
     assert "catechin" in prior["polyphenol_examples"]
+
+
+def test_computational_priors_promote_mycoprotein_to_a_first_class_matrix_family():
+    payload = _load("data/lit/computational_priors.json")
+
+    accessibility = next(entry for entry in payload["accessibility_windows"] if entry["protein_type"] == "myco")
+    correction = next(entry for entry in payload["matrix_corrections"] if entry["protein_type"] == "myco")
+
+    assert accessibility["provenance_tier"] == "literature_bounded_provisional"
+    assert accessibility["uncertainty_posture"] == "directional_only"
+    assert "extrusion_structured" in accessibility["process_state_applicability"]
+    assert correction["provenance_tier"] == "literature_bounded_provisional"
+    assert correction["uncertainty_posture"] == "directional_only"
 
 
 def test_flavor_reference_payloads_cover_sulfur_strecker_pyrazine_and_furanones():

@@ -260,6 +260,8 @@ def test_build_matrix_explainability_surfaces_effective_accessibility_context():
     assert payload["lysine_accessibility"] > payload["cysteine_accessibility"]
     assert payload["literature_window"] is not None
     assert payload["prior_summary"]["matrix_correction"]["confidence_tier"] == "medium"
+    assert "calibration_grade_transfer" in payload["matrix_prior_uncertainty_postures"]
+    assert "heated_matrix" in payload["matrix_prior_process_state_applicability"]
 
 
 def test_build_matrix_explainability_preserves_inferred_denaturation_provenance():
@@ -274,6 +276,21 @@ def test_build_matrix_explainability_preserves_inferred_denaturation_provenance(
 
     assert payload["accessibility_dominant_source"] == "estimated_from_conditions"
     assert payload["denaturation_source"] != "explicit_override"
+
+
+def test_build_matrix_explainability_surfaces_mycoprotein_prior_tags():
+    payload = build_matrix_explainability(
+        protein_type=ProteinType.MYCOPROTEIN,
+        effective_denaturation_state=0.55,
+        temperature_celsius=120.0,
+        time_minutes=12.0,
+        pH=6.2,
+    )
+
+    assert payload["protein_type"] == "myco"
+    assert "directional_only" in payload["matrix_prior_uncertainty_postures"]
+    assert "aqueous_pre_extrusion_model" in payload["matrix_prior_process_state_applicability"]
+    assert payload["prior_summary"]["accessibility_window"]["provenance_tier"] == "literature_bounded_provisional"
 
 
 def test_matrix_corrections_are_loaded_from_computational_prior_registry():

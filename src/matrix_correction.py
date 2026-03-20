@@ -459,6 +459,7 @@ def build_matrix_explainability(
 ) -> dict[str, object]:
     p_type = _coerce_protein_type(protein_type)
     effective = resolve_matrix_correction(p_type, effective_denaturation_state)
+    prior_summary = summarize_matrix_prior_bundle(p_type.value)
     state_source = dominant_source or "denaturation_state_arg"
     acc_state = classify_accessibility_state(
         p_type.value,
@@ -471,6 +472,21 @@ def build_matrix_explainability(
         denaturation_source = DENATURATION_HEURISTICS.get(p_type).source if p_type in DENATURATION_HEURISTICS else "estimated_from_conditions"
     else:
         denaturation_source = "explicit_override"
+    uncertainty_postures = sorted(
+        {
+            str(item.get("uncertainty_posture", "unknown"))
+            for item in prior_summary.values()
+            if isinstance(item, dict) and item.get("uncertainty_posture")
+        }
+    )
+    process_state_applicability = sorted(
+        {
+            str(state)
+            for item in prior_summary.values()
+            if isinstance(item, dict)
+            for state in item.get("process_state_applicability", [])
+        }
+    )
     return {
         "protein_type": p_type.value,
         "effective_denaturation_state": float(effective_denaturation_state),
@@ -492,7 +508,9 @@ def build_matrix_explainability(
             else None
         ),
         "denaturation_source": denaturation_source,
-        "prior_summary": summarize_matrix_prior_bundle(p_type.value),
+        "prior_summary": prior_summary,
+        "matrix_prior_uncertainty_postures": uncertainty_postures,
+        "matrix_prior_process_state_applicability": process_state_applicability,
         # P1: canonical accessibility state
         "accessibility_profile": acc_state.profile,
         "accessibility_warning": acc_state.accessibility_warning,

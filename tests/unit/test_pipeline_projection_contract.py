@@ -87,6 +87,9 @@ def test_output_projection_applies_compound_specific_matrix_calibration():
 
     assert row["calibration_observable_factor"] == pytest.approx((0.453 / 0.205) * (1.0 - 0.7060))
     assert row["calibration_factor"] == pytest.approx(row["calibration_observable_factor"])
+    assert row["accessibility_profile"] == "peptide_bound"
+    assert row["accessibility_warning"] is True
+    assert row["accessibility_dominant_source"] == "denaturation_state_arg"
     assert observable[canon] == pytest.approx(
         100.0 * row["matrix_factor"] * row["headspace_factor"] * row["calibration_factor"]
     )

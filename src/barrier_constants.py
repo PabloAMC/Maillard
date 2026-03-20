@@ -19,6 +19,7 @@ Sources
 * Maillard_meat.md, Maillard_Plant_based.md (project literature reviews)
 """
 
+import json
 import yaml
 import math
 from pathlib import Path
@@ -27,6 +28,7 @@ from typing import Dict, Tuple, Optional
 # Locate data files
 ROOT = Path(__file__).resolve().parents[1]
 ARRHENIUS_FILE = ROOT / "data" / "lit" / "arrhenius_params.yml"
+REFINEMENT_PATCH_FILE = ROOT / "data" / "lit" / "refinement_surrogate_patches.json"
 
 # Exact Mapping: normalized reaction family name → barrier in kcal/mol.
 # Replaces fragile substring matching.
@@ -187,6 +189,38 @@ def _arrhenius_yaml_key(family: Optional[str]) -> Optional[str]:
     return yaml_key_map.get(canonical_family)
 
 
+_REFINEMENT_PATCH_CACHE: Optional[Dict[str, float]] = None
+_REFINEMENT_PATCH_MTIME: Optional[float] = None
+
+
+def _load_refinement_surrogate_offsets() -> Dict[str, float]:
+    global _REFINEMENT_PATCH_CACHE, _REFINEMENT_PATCH_MTIME
+    if not REFINEMENT_PATCH_FILE.exists():
+        _REFINEMENT_PATCH_CACHE = {}
+        _REFINEMENT_PATCH_MTIME = None
+        return {}
+
+    mtime = REFINEMENT_PATCH_FILE.stat().st_mtime
+    if _REFINEMENT_PATCH_CACHE is not None and _REFINEMENT_PATCH_MTIME == mtime:
+        return dict(_REFINEMENT_PATCH_CACHE)
+
+    try:
+        with open(REFINEMENT_PATCH_FILE, "r", encoding="utf-8") as handle:
+            payload = json.load(handle)
+    except Exception:
+        _REFINEMENT_PATCH_CACHE = {}
+        _REFINEMENT_PATCH_MTIME = mtime
+        return {}
+
+    offsets = payload.get("accepted_offsets", {}) if isinstance(payload, dict) else {}
+    if not isinstance(offsets, dict):
+        offsets = {}
+    normalized = {str(key): float(value) for key, value in offsets.items()}
+    _REFINEMENT_PATCH_CACHE = normalized
+    _REFINEMENT_PATCH_MTIME = mtime
+    return dict(normalized)
+
+
 def get_barrier(reaction_family: str) -> Tuple[float, float]:
     """Return the FAST-mode (barrier, uncertainty) for a reaction family.
     
@@ -203,11 +237,12 @@ def get_barrier(reaction_family: str) -> Tuple[float, float]:
     
     # --- DYNAMIC CALIBRATION OVERRIDES (Phase 1) ---
     import os
-    import json
-    offsets = {}
+    offsets = _load_refinement_surrogate_offsets()
     if "BARRIER_OFFSETS" in os.environ:
         try:
-            offsets = json.loads(os.environ["BARRIER_OFFSETS"])
+            runtime_offsets = json.loads(os.environ["BARRIER_OFFSETS"])
+            if isinstance(runtime_offsets, dict):
+                offsets.update({str(key): float(value) for key, value in runtime_offsets.items()})
         except Exception:
             pass
     
@@ -222,6 +257,8 @@ def get_barrier(reaction_family: str) -> Tuple[float, float]:
     }
     
     active_offset = 0.0
+    if fm in offsets:
+        active_offset = float(offsets[fm])
     for short_key, full_key in offset_map.items():
         if short_key in offsets and full_key in fm:
             active_offset = offsets[short_key]

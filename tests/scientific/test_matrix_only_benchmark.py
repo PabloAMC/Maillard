@@ -103,6 +103,8 @@ def test_matrix_only_benchmark_exposes_ranking_contract_and_calibration_metadata
     assert hexanal_meta["calibration_evidence_strength"] == "literature_anchored"
     assert hexanal_meta["calibration_fallback_mode"] == "compound_specific"
     assert hexanal_meta["process_state"] == "ambient_slurry"
+    assert hexanal_meta["evidence_state"] == "externally_benchmarked"
+    assert hexanal_meta["target_class"] == "adverse_lipid_markers"
     assert summary.ranking_contract_status == "pass"
     assert summary.adverse_markers == ["2-pentylfuran", "hexanal", "hexanol"]
 
