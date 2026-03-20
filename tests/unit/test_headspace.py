@@ -6,7 +6,7 @@ Verifies headspace partitioning and matrix effect logic.
 
 import pytest
 from src.headspace import HeadspaceModel  # noqa: E402
-from src.matrix_calibration_registry import get_matrix_runtime_composition_policy
+from src.matrix_calibration_registry import determine_matrix_process_state, get_matrix_runtime_composition_policy
 
 def test_headspace_temperature_scaling():
     """Verify that volatility increases with temperature."""
@@ -217,10 +217,27 @@ def test_runtime_composition_policy_preserves_ambient_hexanal_baseline_but_activ
         protein_type="soy_iso",
         process_state="heated_matrix",
     )
+    pre_extrusion = get_matrix_runtime_composition_policy(
+        "Hexanal",
+        protein_type="soy_iso",
+        process_state="aqueous_pre_extrusion_model",
+    )
+    extrusion = get_matrix_runtime_composition_policy(
+        "Hexanal",
+        protein_type="soy_iso",
+        process_state="extrusion_structured",
+    )
 
     assert ambient["mode"] == "static_observable_calibration"
     assert intermediate["mode"] == "compose_dynamic_retention"
     assert heated["mode"] == "compose_dynamic_retention"
+    assert pre_extrusion["mode"] == "compose_dynamic_retention"
+    assert extrusion["mode"] == "compose_dynamic_retention"
+
+
+def test_determine_matrix_process_state_uses_water_activity_to_mark_extrusion_states():
+    assert determine_matrix_process_state(temperature_celsius=145.0, time_minutes=2.0, water_activity=0.55) == "aqueous_pre_extrusion_model"
+    assert determine_matrix_process_state(temperature_celsius=165.0, time_minutes=2.0, water_activity=0.35) == "extrusion_structured"
 
 
 def test_explicit_matrix_fractions_override_retention_fallback():

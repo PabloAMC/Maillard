@@ -404,3 +404,35 @@ def test_melanoidin_trapping_penalizes_fft_more_than_mft_in_heated_soy_matrix():
     assert fft_row["process_state"] == "heated_matrix"
     assert fft_row["melanoidin_trapping_factor"] < mft_row["melanoidin_trapping_factor"] < 1.0
     assert observable[_canon(fft.smiles)] < observable[_canon(mft.smiles)]
+
+
+def test_output_projection_surfaces_extrusion_process_state_and_surrogates():
+    species = Species("Hexanal", "CCCCCC=O")
+    canon = _canon(species.smiles)
+
+    hydrated_observable, hydrated_meta = _apply_output_projection(
+        {canon: 100.0},
+        {canon: species},
+        {},
+        150.0 + 273.15,
+        protein_type="soy_iso",
+        time_minutes=3.0,
+        water_activity=0.60,
+        denaturation_state=0.8,
+    )
+    dry_observable, dry_meta = _apply_output_projection(
+        {canon: 100.0},
+        {canon: species},
+        {},
+        165.0 + 273.15,
+        protein_type="soy_iso",
+        time_minutes=3.0,
+        water_activity=0.35,
+        denaturation_state=0.95,
+    )
+
+    assert hydrated_meta[canon]["process_state"] == "aqueous_pre_extrusion_model"
+    assert dry_meta[canon]["process_state"] == "extrusion_structured"
+    assert dry_meta[canon]["extrusion_moisture_factor"] < hydrated_meta[canon]["extrusion_moisture_factor"]
+    assert dry_meta[canon]["extrusion_structure_factor"] < hydrated_meta[canon]["extrusion_structure_factor"]
+    assert dry_observable[canon] < hydrated_observable[canon]

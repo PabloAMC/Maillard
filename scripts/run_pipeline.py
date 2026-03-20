@@ -179,6 +179,8 @@ def main():
                     protein_type=best_protein_type,
                     temp_c=best_temp,
                     ph=best_ph,
+                    aw=float(best_formulation.get("aw", conditions.water_activity)),
+                    matrix_explainability=best.matrix_explainability,
                 )
                 best.confidence_metadata = build_confidence_package(
                     best,
@@ -258,7 +260,8 @@ def main():
             precursor_names=names,
             protein_type=args.protein_type,
             temp_c=args.temp,
-            ph=args.ph
+            ph=args.ph,
+            aw=args.aw,
         )
         if not warnings:
             print("  ✅ All inputs are within the rigorously validated envelope.")
@@ -320,7 +323,9 @@ def main():
         precursor_names=names,
         protein_type=args.protein_type,
         temp_c=args.temp,
-        ph=args.ph
+        ph=args.ph,
+        aw=args.aw,
+        matrix_explainability=res.matrix_explainability,
     )
     res.confidence_metadata = build_confidence_package(
         res,

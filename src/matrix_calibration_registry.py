@@ -236,7 +236,7 @@ _MATRIX_RUNTIME_COMPOSITION_RULES = (
         protein_type="soy_iso",
         compound="hexanal",
         mode="compose_dynamic_retention",
-        active_process_states=("intermediate_matrix", "heated_matrix"),
+        active_process_states=("intermediate_matrix", "heated_matrix", "aqueous_pre_extrusion_model", "extrusion_structured"),
         source="Ince 2024 reversible soy hexanal binding plus Xu 2023 thermal attenuation prior",
         notes="Ambient slurry remains frozen to preserve the historical Pratap-Singh benchmark calibration.",
     ),
@@ -247,7 +247,27 @@ def _normalize_compound(name: str) -> str:
     return str(name).strip().lower()
 
 
-def determine_matrix_process_state(*, temperature_celsius: float, time_minutes: float) -> str:
+def _process_state_fallback_order(requested_state: str) -> tuple[str, ...]:
+    requested = str(requested_state or "ambient_slurry")
+    if requested == "extrusion_structured":
+        return (requested, "aqueous_pre_extrusion_model", "heated_matrix", "intermediate_matrix", "ambient_slurry")
+    if requested == "aqueous_pre_extrusion_model":
+        return (requested, "heated_matrix", "intermediate_matrix", "ambient_slurry")
+    if requested == "heated_matrix":
+        return (requested, "intermediate_matrix", "ambient_slurry")
+    if requested == "intermediate_matrix":
+        return (requested, "ambient_slurry")
+    return (requested,)
+
+
+def determine_matrix_process_state(*, temperature_celsius: float, time_minutes: float, water_activity: Optional[float] = None) -> str:
+    if water_activity is not None:
+        aw = float(water_activity)
+        if temperature_celsius >= 160.0 and aw <= 0.45:
+            return "extrusion_structured"
+        if temperature_celsius >= 140.0 and aw <= 0.65:
+            return "aqueous_pre_extrusion_model"
+
     if temperature_celsius <= 55.0 and time_minutes <= 30.0:
         return "ambient_slurry"
     if temperature_celsius >= 110.0 or time_minutes >= 90.0:
@@ -266,12 +286,16 @@ def get_matrix_calibration_record(
     normalized = _normalize_compound(compound)
     requested_state = process_state or "ambient_slurry"
 
-    for record in _MATRIX_CALIBRATION_RECORDS:
-        if record.protein_type == protein_type and record.process_state == requested_state and _normalize_compound(record.compound) == normalized:
-            return record
-
-    for record in _MATRIX_CALIBRATION_RECORDS:
-        if record.protein_type == protein_type and _normalize_compound(record.compound) == normalized:
+    for candidate_state in _process_state_fallback_order(requested_state):
+        for record in _MATRIX_CALIBRATION_RECORDS:
+            if record.protein_type != protein_type:
+                continue
+            if record.process_state != candidate_state:
+                continue
+            if _normalize_compound(record.compound) != normalized:
+                continue
+            if candidate_state == requested_state:
+                return record
             return MatrixCalibrationRecord(
                 protein_type=record.protein_type,
                 process_state=requested_state,
@@ -280,7 +304,7 @@ def get_matrix_calibration_record(
                 evidence_strength="process_state_mismatch",
                 source=record.source,
                 fallback_mode="nearest_process_state",
-                notes=f"Requested process state '{requested_state}' falls back to '{record.process_state}'.",
+                notes=f"Requested process state '{requested_state}' falls back to nearest calibrated state '{candidate_state}'.",
             )
     return None
 

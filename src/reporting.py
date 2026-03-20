@@ -80,6 +80,24 @@ def _evidence_ladder_flags(meta: Dict[str, Any]) -> Dict[str, bool]:
     }
 
 
+def _support_origin(meta: Dict[str, Any]) -> str:
+    process_state = str(meta.get("process_state", "unknown"))
+    calibration_state = str(meta.get("calibration_process_state", "unknown"))
+    fallback = str(meta.get("calibration_fallback_mode", "class_level"))
+    source = str(meta.get("calibration_source", "class_fallback")).lower()
+    strength = str(meta.get("calibration_evidence_strength", "heuristic")).lower()
+    extrusion_state = process_state in {"aqueous_pre_extrusion_model", "extrusion_structured"}
+
+    if extrusion_state:
+        if fallback == "nearest_process_state" or (calibration_state not in {"unknown", process_state}):
+            return "lower_regime_transfer"
+        if strength == "heuristic" or source == "class_fallback":
+            return "extrusion_extrapolation"
+        return "extrusion_specific_support"
+
+    return "standard_matrix_support"
+
+
 def _build_compound_evidence_ladder(result: FormulationResult, *, top_n: int = 8) -> List[Dict[str, Any]]:
     ladder_rows: List[Dict[str, Any]] = []
     for meta in _sorted_projection_metadata(result)[:top_n]:
@@ -92,6 +110,7 @@ def _build_compound_evidence_ladder(result: FormulationResult, *, top_n: int = 8
                 "transferred_prior": flags["transferred_prior"],
                 "mechanistic_surrogate": flags["mechanistic_surrogate"],
                 "computational_refinement": flags["computational_refinement"],
+                "support_origin": _support_origin(meta),
                 "calibration_source": str(meta.get("calibration_source", "class_fallback")),
                 "calibration_evidence_strength": str(meta.get("calibration_evidence_strength", "heuristic")),
                 "calibration_fallback_mode": str(meta.get("calibration_fallback_mode", "class_level")),
@@ -106,10 +125,12 @@ def _build_calibration_summary(result: FormulationResult, *, top_n: int = 5) -> 
         source = str(meta.get("calibration_source", "class_fallback"))
         if not source:
             continue
+        support_origin = _support_origin(meta)
         bucket = grouped.setdefault(
-            source,
+            f"{source}::{support_origin}",
             {
                 "source": source,
+                "support_origin": support_origin,
                 "compounds": [],
                 "observable_ppb_total": 0.0,
                 "evidence_strength": str(meta.get("calibration_evidence_strength", "heuristic")),
@@ -146,6 +167,7 @@ def _build_benchmark_neighborhood_summary(
     confidence = result.confidence_metadata or {}
     neighborhood = str(confidence.get("benchmark_neighborhood", "unknown"))
     prediction_mode = str(confidence.get("prediction_mode", "unknown"))
+    process_regime = str(confidence.get("process_regime", "unknown"))
     condition_tokens = " ".join(
         token.lower() for token in _flatten_condition_values(conditions_dict or {})
     )
@@ -154,6 +176,9 @@ def _build_benchmark_neighborhood_summary(
     if hydrolysate_proxy:
         category = "hydrolysate_proxy"
         summary = "Run depends on hydrolysate/peptide-like inputs that sit outside the primary free-precursor benchmark surface."
+    elif process_regime in {"extrusion_like", "extrusion_heavy"}:
+        category = "extrusion_regime"
+        summary = str(confidence.get("process_regime_summary", "Run is being interpreted through an extrusion-like regime without direct benchmark closure."))
     elif neighborhood in {"primary_free_precursor", "free_precursor_partial_analogy"}:
         category = "free_system_anchor"
         summary = "Run is anchored primarily by the free-system benchmark family, with varying degrees of analogy completeness."
@@ -168,6 +193,7 @@ def _build_benchmark_neighborhood_summary(
         "benchmark_neighborhood": neighborhood,
         "category": category,
         "prediction_mode": prediction_mode,
+        "process_regime": process_regime,
         "summary": summary,
     }
 
@@ -196,6 +222,18 @@ def _build_missing_data_summary(result: FormulationResult) -> Dict[str, Any]:
     if benchmark_neighborhood in {"matrix_intake_only", "exploratory_matrix", "sparse_precursor_analogy"}:
         items.append(
             "Benchmark neighborhood remains extrapolative relative to the primary free-precursor validation envelope."
+        )
+
+    process_regime = str((result.confidence_metadata or {}).get("process_regime", "unknown"))
+    extrusion_panel = (result.confidence_metadata or {}).get("extrusion_observable_panel", {})
+    if process_regime in {"extrusion_like", "extrusion_heavy"} and not bool(extrusion_panel.get("minimum_panel_ready", False)):
+        missing_categories = [
+            category.replace("_", " ")
+            for category in ("meaty_positive", "off_notes", "severity_markers")
+            if not extrusion_panel.get(category, {}).get("present")
+        ]
+        items.append(
+            "Extrusion observable panel remains incomplete: missing support for " + ", ".join(missing_categories) + "."
         )
 
     deduped_items = list(dict.fromkeys(items))[:8]
@@ -444,13 +482,25 @@ def generate_report(
 
             if calibration_summary:
                 f.write("### Calibration Summary\n")
-                f.write("| Source | Evidence | Fallback | Compounds | Observable ppb |\n")
-                f.write("| :--- | :--- | :--- | :--- | ---: |\n")
+                f.write("| Source | Support Origin | Evidence | Fallback | Compounds | Observable ppb |\n")
+                f.write("| :--- | :--- | :--- | :--- | :--- | ---: |\n")
                 for row in calibration_summary:
                     f.write(
-                        f"| {row.get('source', 'unknown')} | {row.get('evidence_strength', 'unknown')} | {row.get('fallback_mode', 'unknown')} | {', '.join(str(item) for item in row.get('compounds', []))} | {float(row.get('observable_ppb_total', 0.0)):.2f} |\n"
+                        f"| {row.get('source', 'unknown')} | {row.get('support_origin', 'standard_matrix_support')} | {row.get('evidence_strength', 'unknown')} | {row.get('fallback_mode', 'unknown')} | {', '.join(str(item) for item in row.get('compounds', []))} | {float(row.get('observable_ppb_total', 0.0)):.2f} |\n"
                     )
                 f.write("\n")
+
+            extrusion_panel = result.confidence_metadata.get("extrusion_observable_panel", {})
+            if result.confidence_metadata.get("process_regime") in {"extrusion_like", "extrusion_heavy"} and extrusion_panel:
+                f.write("### Extrusion Observable Panel\n")
+                f.write("| Category | Present | Missing | Ready |\n")
+                f.write("| :--- | :--- | :--- | :---: |\n")
+                for category in ("meaty_positive", "off_notes", "severity_markers"):
+                    row = extrusion_panel.get(category, {})
+                    f.write(
+                        f"| {category.replace('_', ' ')} | {', '.join(row.get('present', [])) or '-'} | {', '.join(row.get('missing', [])) or '-'} | {'yes' if row.get('present') else '-'} |\n"
+                    )
+                f.write(f"\n- **minimum_panel_ready:** {extrusion_panel.get('minimum_panel_ready', False)}\n\n")
 
             compound_rows = result.confidence_metadata.get("compound_confidence", [])
             if compound_rows:
@@ -476,11 +526,11 @@ def generate_report(
 
         if compound_evidence_ladder:
             f.write("### Compound Evidence Ladder\n")
-            f.write("| Compound | Direct Anchor | Transferred Prior | Mechanistic Surrogate | Computational Refinement | Source |\n")
-            f.write("| :--- | :---: | :---: | :---: | :---: | :--- |\n")
+            f.write("| Compound | Direct Anchor | Transferred Prior | Mechanistic Surrogate | Computational Refinement | Support Origin | Source |\n")
+            f.write("| :--- | :---: | :---: | :---: | :---: | :--- | :--- |\n")
             for row in compound_evidence_ladder:
                 f.write(
-                    f"| {row.get('compound', 'unknown')} | {'yes' if row.get('direct_anchor') else '-'} | {'yes' if row.get('transferred_prior') else '-'} | {'yes' if row.get('mechanistic_surrogate') else '-'} | {'yes' if row.get('computational_refinement') else '-'} | {row.get('calibration_source', 'unknown')} |\n"
+                    f"| {row.get('compound', 'unknown')} | {'yes' if row.get('direct_anchor') else '-'} | {'yes' if row.get('transferred_prior') else '-'} | {'yes' if row.get('mechanistic_surrogate') else '-'} | {'yes' if row.get('computational_refinement') else '-'} | {row.get('support_origin', 'standard_matrix_support')} | {row.get('calibration_source', 'unknown')} |\n"
                 )
             f.write("\n")
 

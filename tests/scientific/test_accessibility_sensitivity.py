@@ -60,10 +60,15 @@ def test_accessibility_warning_triggers_domain_warning():
         protein_type="pea_iso",
         temp_c=100.0,
         ph=6.5,
+        aw=0.95,
+        matrix_explainability={
+            "accessibility_profile": "protein_embedded",
+            "accessibility_warning": True,
+            "accessibility_dominant_source": "estimated_from_conditions",
+        },
     )
-    # Any MATRIX warning should be present for non-free protein_type
-    matrix_warnings = [w for w in warnings if w.category == "MATRIX"]
-    assert matrix_warnings, "Expected at least one MATRIX DomainWarning for pea_iso"
+    accessibility_warnings = [w for w in warnings if w.category == "ACCESSIBILITY"]
+    assert accessibility_warnings, "Expected an ACCESSIBILITY DomainWarning for an embedded pea_iso state"
 
 
 # ---------------------------------------------------------------------------

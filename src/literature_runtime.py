@@ -156,6 +156,75 @@ def _retention_source_label(entry: Mapping[str, Any]) -> str:
     return str(entry.get("source_citation") or entry.get("id") or "unknown retention reference")
 
 
+def _runtime_volatile_family(normalized_name: str) -> str:
+    if any(token in normalized_name for token in ["thiol", "sulfide", "sulfur", "methional", "thiazole", "thiophene"]):
+        return "sulfur"
+    if "pyrazine" in normalized_name:
+        return "pyrazine"
+    if any(token in normalized_name for token in ["furan", "furfural"]):
+        return "furan"
+    if any(token in normalized_name for token in ["ol", "alcohol"]):
+        return "alcohol"
+    if any(token in normalized_name for token in ["anal", "enal", "aldehyde"]):
+        return "aldehyde"
+    return "other"
+
+
+def _build_extrusion_runtime_surrogate(
+    compound_name: str,
+    *,
+    protein_type: Optional[str],
+    temperature_celsius: float,
+    time_minutes: Optional[float],
+    water_activity: Optional[float],
+    process_state: Optional[str],
+) -> Dict[str, Any]:
+    if process_state not in {"aqueous_pre_extrusion_model", "extrusion_structured"}:
+        return {}
+
+    protein = str(protein_type or "")
+    if not protein.startswith(("pea", "soy", "myco")):
+        return {}
+
+    normalized = _normalize_name(compound_name)
+    family = _runtime_volatile_family(normalized)
+    aw = 0.55 if water_activity is None else max(0.05, min(1.0, float(water_activity)))
+    dryness = max(0.0, min(1.0, (0.65 - aw) / 0.35))
+    thermal_drive = _sigmoid(float(temperature_celsius), 150.0, 9.0)
+    residence_factor = 1.0 if time_minutes is None else max(0.88, min(1.15, 1.0 + 0.06 * math.log1p(max(float(time_minutes), 0.0) / 3.0)))
+
+    if family in {"aldehyde", "alcohol"}:
+        moisture_factor = max(0.42, 1.0 - 0.34 * dryness)
+        structure_factor = max(0.55, 1.0 - 0.18 * thermal_drive)
+    elif family == "furan":
+        moisture_factor = max(0.50, 1.0 - 0.22 * dryness)
+        structure_factor = max(0.62, 1.0 - 0.12 * thermal_drive)
+    elif family in {"sulfur", "pyrazine"}:
+        moisture_factor = 1.0 + 0.12 * (1.0 - dryness)
+        structure_factor = max(0.68, 1.0 - 0.10 * dryness * thermal_drive)
+    else:
+        moisture_factor = max(0.55, 1.0 - 0.18 * dryness)
+        structure_factor = max(0.70, 1.0 - 0.08 * thermal_drive)
+
+    if process_state == "aqueous_pre_extrusion_model":
+        state_factor = 1.0 if family in {"sulfur", "pyrazine"} else 0.92
+        retention_mode = "extrusion_moisture_redistribution"
+    else:
+        state_factor = 0.82 if family in {"sulfur", "pyrazine"} else 0.72
+        retention_mode = "extrusion_structured_entrapment"
+
+    surrogate_factor = max(0.18, min(1.35, moisture_factor * structure_factor * state_factor * residence_factor))
+    return {
+        "retention_runtime_mode": retention_mode,
+        "retention_reference_sources": [
+            "Extrusion severity surrogate derived from shared matrix accessibility/process-state assumptions",
+        ],
+        "extrusion_moisture_factor": float(moisture_factor),
+        "extrusion_structure_factor": float(structure_factor * state_factor),
+        "dynamic_retention_factor": float(surrogate_factor),
+    }
+
+
 def get_retention_ph_release_profile(
     compound_name: str,
     *,
@@ -188,6 +257,7 @@ def describe_retention_runtime(
     protein_type: Optional[str],
     temperature_celsius: Optional[float],
     time_minutes: Optional[float],
+    water_activity: Optional[float] = None,
     process_state: Optional[str],
 ) -> Dict[str, Any]:
     normalized = _normalize_name(compound_name)
@@ -200,6 +270,8 @@ def describe_retention_runtime(
     dynamic_retention_factor = 1.0
     retention_mode = "static_class_profile"
     sources: List[str] = []
+    extrusion_moisture_factor = 1.0
+    extrusion_structure_factor = 1.0
 
     if protein.startswith("pea") and normalized == "hexanal":
         retention_mode = "direct_binding_plus_ph_release_reference"
@@ -254,12 +326,33 @@ def describe_retention_runtime(
     if not sources and process_state == "heated_matrix" and protein.startswith("soy"):
         sources.append("heated soy process-state carryover")
 
+    extrusion_surrogate = _build_extrusion_runtime_surrogate(
+        compound_name,
+        protein_type=protein_type,
+        temperature_celsius=temperature,
+        time_minutes=duration,
+        water_activity=water_activity,
+        process_state=process_state,
+    )
+    if extrusion_surrogate:
+        extrusion_moisture_factor = float(extrusion_surrogate.get("extrusion_moisture_factor", 1.0))
+        extrusion_structure_factor = float(extrusion_surrogate.get("extrusion_structure_factor", 1.0))
+        dynamic_retention_factor *= float(extrusion_surrogate.get("dynamic_retention_factor", 1.0))
+        dynamic_retention_factor = max(0.05, min(1.65, dynamic_retention_factor))
+        extrusion_sources = extrusion_surrogate.get("retention_reference_sources", [])
+        if extrusion_sources:
+            sources.extend(str(item) for item in extrusion_sources)
+        extrusion_mode = str(extrusion_surrogate.get("retention_runtime_mode", "extrusion_surrogate"))
+        retention_mode = extrusion_mode if retention_mode == "static_class_profile" else f"{retention_mode}+{extrusion_mode}"
+
     return {
         "retention_runtime_mode": retention_mode,
         "retention_reference_sources": sources,
         "reversible_release_factor": float(release_factor),
         "temporal_attenuation_factor": float(temporal_attenuation_factor),
         "dynamic_retention_factor": float(dynamic_retention_factor),
+        "extrusion_moisture_factor": float(extrusion_moisture_factor),
+        "extrusion_structure_factor": float(extrusion_structure_factor),
     }
 
 

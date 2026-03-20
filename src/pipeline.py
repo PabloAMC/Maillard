@@ -348,6 +348,7 @@ class MaillardPipeline:
                 initial_concentrations, 
                 temperature_kelvin=cond.temperature_kelvin,
                 time_minutes=form.get("time_minutes"),
+                water_activity=cond.water_activity,
                 protein_type=protein_type,
                 denaturation_state=denaturation_state,
                 fat_fraction=cond.fat_fraction,
@@ -437,6 +438,11 @@ class MaillardPipeline:
                     temperature_celsius=cond.temperature_celsius,
                     time_minutes=form.get("time_minutes", 60.0),
                     pH=cond.pH,
+                    dominant_source=(
+                        "denaturation_state_arg"
+                        if form.get("denaturation_state") is not None
+                        else "estimated_from_conditions"
+                    ),
                 ),
                 targets=rec_result.get("targets", []),
                 bottleneck_precursor=rec_result["metrics"].get("bottleneck", {}).get("precursor", "none"),

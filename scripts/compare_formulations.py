@@ -86,6 +86,8 @@ def main():
             protein_type=protein_type,
             temp_c=float(formulation.get("temp", args.temp)),
             ph=float(formulation.get("ph", args.ph)),
+            aw=float(formulation.get("aw", args.aw)),
+            matrix_explainability=result.matrix_explainability,
         )
         result.confidence_metadata = build_confidence_package(
             result,

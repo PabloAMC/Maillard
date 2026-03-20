@@ -262,6 +262,20 @@ def test_build_matrix_explainability_surfaces_effective_accessibility_context():
     assert payload["prior_summary"]["matrix_correction"]["confidence_tier"] == "medium"
 
 
+def test_build_matrix_explainability_preserves_inferred_denaturation_provenance():
+    payload = build_matrix_explainability(
+        protein_type=ProteinType.PEA_ISOLATE,
+        effective_denaturation_state=0.72,
+        temperature_celsius=105.0,
+        time_minutes=45.0,
+        pH=5.8,
+        dominant_source="estimated_from_conditions",
+    )
+
+    assert payload["accessibility_dominant_source"] == "estimated_from_conditions"
+    assert payload["denaturation_source"] != "explicit_override"
+
+
 def test_matrix_corrections_are_loaded_from_computational_prior_registry():
     entry = get_matrix_correction_entry("pea_iso")
 

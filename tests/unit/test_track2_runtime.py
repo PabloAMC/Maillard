@@ -134,6 +134,30 @@ def test_describe_retention_runtime_for_pea_markers_carries_structured_ph_releas
     assert "Karolkowski et al. (2021)" in " ".join(pentylfuran["retention_reference_sources"])
 
 
+def test_describe_retention_runtime_for_extrusion_states_is_aw_sensitive():
+    hydrated = describe_retention_runtime(
+        "Hexanal",
+        protein_type="soy_iso",
+        temperature_celsius=150.0,
+        time_minutes=3.0,
+        water_activity=0.60,
+        process_state="aqueous_pre_extrusion_model",
+    )
+    dry = describe_retention_runtime(
+        "Hexanal",
+        protein_type="soy_iso",
+        temperature_celsius=165.0,
+        time_minutes=3.0,
+        water_activity=0.35,
+        process_state="extrusion_structured",
+    )
+
+    assert "extrusion_" in hydrated["retention_runtime_mode"]
+    assert "extrusion_" in dry["retention_runtime_mode"]
+    assert dry["dynamic_retention_factor"] < hydrated["dynamic_retention_factor"]
+    assert dry["extrusion_moisture_factor"] < hydrated["extrusion_moisture_factor"]
+
+
 def test_build_flavor_axis_summary_surfaces_secondary_strecker_reference_markers():
     summary = build_flavor_axis_summary(
         projection_metadata={

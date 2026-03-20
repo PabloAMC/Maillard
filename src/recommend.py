@@ -428,6 +428,7 @@ def _apply_output_projection(
     temperature_kelvin: float,
     protein_type: str,
     time_minutes: Optional[float] = None,
+    water_activity: Optional[float] = None,
     denaturation_state: float = 0.5,
     fat_fraction: float = 0.0,
     protein_fraction: float = 0.0,
@@ -452,6 +453,7 @@ def _apply_output_projection(
     process_state = determine_matrix_process_state(
         temperature_celsius=temperature_kelvin - 273.15,
         time_minutes=float(time_minutes or 60.0),
+        water_activity=water_activity,
     )
 
     budget_metadata = {}
@@ -497,6 +499,11 @@ def _apply_output_projection(
                     "matrix_factor": float(fallback_matrix_factor),
                     "base_matrix_factor": float(fallback_matrix_factor),
                     "class_matrix_factor": 1.0,
+                    "dynamic_retention_factor": 1.0,
+                    "reversible_release_factor": 1.0,
+                    "temporal_attenuation_factor": 1.0,
+                    "extrusion_moisture_factor": 1.0,
+                    "extrusion_structure_factor": 1.0,
                     "headspace_factor": 1.0,
                     "calibration_factor": calibration_factor,
                     "melanoidin_trapping_factor": float(melanoidin_factor),
@@ -519,6 +526,7 @@ def _apply_output_projection(
                 smiles=species.smiles,
                 temperature_celsius=temperature_kelvin - 273.15,
                 time_minutes=time_minutes,
+                water_activity=water_activity,
                 process_state=process_state,
             )
             class_matrix_factor = float(retention_description.get("class_matrix_factor", 1.0))
@@ -559,6 +567,8 @@ def _apply_output_projection(
                 "retention_reference_sources": retention_description.get("retention_reference_sources", []),
                 "reversible_release_factor": float(retention_description.get("reversible_release_factor", 1.0)),
                 "temporal_attenuation_factor": float(retention_description.get("temporal_attenuation_factor", 1.0)),
+                "extrusion_moisture_factor": float(retention_description.get("extrusion_moisture_factor", 1.0)),
+                "extrusion_structure_factor": float(retention_description.get("extrusion_structure_factor", 1.0)),
                 "headspace_factor": float(headspace_factor),
                 "calibration_factor": float(calibration_factor),
                 "melanoidin_trapping_factor": float(melanoidin_factor),
@@ -767,6 +777,7 @@ class Recommender:
                            initial_concentrations: Dict[str, float], 
                            temperature_kelvin: float = 423.15, 
                            time_minutes: Optional[float] = None,
+                           water_activity: Optional[float] = None,
                            protein_type: str = "free",
                            denaturation_state: float = 0.5,
                            fat_fraction: float = 0.0,
@@ -1027,6 +1038,7 @@ class Recommender:
             temperature_kelvin,
             protein_type=protein_type,
             time_minutes=time_minutes,
+            water_activity=water_activity,
             denaturation_state=denaturation_state,
             fat_fraction=fat_fraction,
             protein_fraction=protein_fraction,
@@ -1266,6 +1278,7 @@ class Recommender:
                 "projection_temperature_factor": float(projection_budget.temperature_factor),
                 "projection_time_factor": float(projection_budget.time_factor),
                 "projection_severity": float(projection_budget.severity),
+                "water_activity": None if water_activity is None else float(water_activity),
                 "volatile_yield_fraction": float(projection_budget.volatile_yield_fraction),
                 "total_volatile_budget_molar": float(projection_budget.total_volatile_budget_molar),
                 **_projection_strategy_metadata(projection_strategy),
