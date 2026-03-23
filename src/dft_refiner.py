@@ -13,7 +13,11 @@ import os
 import tempfile
 import numpy as np
 from dataclasses import dataclass
-from typing import Optional, Tuple, Dict, List, Any
+from functools import lru_cache
+from typing import Dict, List, Optional, Any, Tuple
+from src.logger import get_logger
+
+logger = get_logger(__name__)
 
 try:
     from pyscf import gto, scf, hessian # noqa: F401
@@ -66,7 +70,7 @@ class DFTRefiner:
                 from .mlp_optimizer import MLPOptimizer
                 self.mlp_optimizer = MLPOptimizer()
             except ImportError:
-                print("WARNING: ML properties requested but not available. Falling back to pyscf.")
+                logger.info("WARNING: ML properties requested but not available. Falling back to pyscf.")
                 self.geometry_backend = 'pyscf'
         else:
             self.mlp_optimizer = None
@@ -223,7 +227,7 @@ class DFTRefiner:
         # Phase 9: Apply explicit solvation if requested
         n_atoms_solute = int(xyz_content.strip().split('\n')[0])
         if eff_use_explicit:
-            print(f">>> [Phase 9] Generating solvated cluster with {eff_n_water} waters...")
+            logger.info(f">>> [Phase 9] Generating solvated cluster with {eff_n_water} waters...")
             xyz_content = self.solvation_engine.generate_solvated_cluster(
                 xyz_content, 
                 n_water=eff_n_water, 
@@ -240,14 +244,14 @@ class DFTRefiner:
             # This is a scaffold for React-TS integration.
             conf = self.diffusion_engine.get_confidence_score("", "") 
             if conf > 0.85:
-                print(">>> [Phase 14] Attempting high-confidence TS guess via Diffusion Model...")
+                logger.info(">>> [Phase 14] Attempting high-confidence TS guess via Diffusion Model...")
                 diffusion_ts_xyz = self.diffusion_engine.predict_ts_geometry("", "")
                 if diffusion_ts_xyz:
                     xyz_content = diffusion_ts_xyz
 
         # Phase 10: Backend Selection for Geometry Optimization
         if self.geometry_backend == 'mace':
-            print(f">>> [Phase 10] Running MACE geometric optimization (is_ts={is_ts})...")
+            logger.info(f">>> [Phase 10] Running MACE geometric optimization (is_ts={is_ts})...")
             # MACE bypasses PySCF/geomeTRIC entirely for structural relaxation
             if is_ts:
                 opt_xyz = self.mlp_optimizer.optimize_ts(xyz_content, max_steps=max_steps)
@@ -265,7 +269,7 @@ class DFTRefiner:
             # Phase 11: Specialized TS search via Sella
             conv = False  # Initialize before potential Sella/geomeTRIC paths
             if is_ts and self.ts_optimizer:
-                print(">>> [Phase 11] Running Sella eigenvector-following TS search...")
+                logger.info(">>> [Phase 11] Running Sella eigenvector-following TS search...")
                 try:
                     # PySCF↔ASE bridge: convert Mole to ASE Atoms manually
                     from ase import Atoms as ASEAtoms
@@ -327,9 +331,9 @@ class DFTRefiner:
                         mol_opt = self._setup_mol(opt_xyz, charge, spin, basis=self.opt_basis)
                         conv = True
                     else:
-                        print("    WARNING: Sella failed to converge. Falling back to geomeTRIC...")
+                        logger.info("    WARNING: Sella failed to converge. Falling back to geomeTRIC...")
                 except (ImportError, AttributeError, Exception) as e:
-                    print(f"    WARNING: Sella/ASE bridge failed ({type(e).__name__}: {e}). Falling back to geomeTRIC...")
+                    logger.info(f"    WARNING: Sella/ASE bridge failed ({type(e).__name__}: {e}). Falling back to geomeTRIC...")
                     
                 is_ts_fallback = is_ts and not conv
             else:
@@ -346,7 +350,7 @@ class DFTRefiner:
                             geome_kwargs['transition'] = True
                             
                         if eff_use_explicit and is_ts_fallback:
-                            print("    Pre-relaxing solvent molecules around the frozen core...")
+                            logger.info("    Pre-relaxing solvent molecules around the frozen core...")
                             with open("constraints.txt", "w") as f:
                                 f.write("$freeze\n")
                                 f.write(f"xyz 1-{n_atoms_solute}\n")
@@ -379,7 +383,7 @@ class DFTRefiner:
         # Check SCF convergence
         mf_opt.scf()
         if not mf_opt.converged:
-             print("    WARNING: SCF failed to converge on the optimized geometry.")
+             logger.info("    WARNING: SCF failed to converge on the optimized geometry.")
         
         freqs, g_raw, g_qh = self._run_hessian_and_thermo(mf_opt)
         
@@ -409,13 +413,13 @@ class DFTRefiner:
         3. Displaces +/- along the mode.
         4. Optimizes both endpoints to find the connected basins.
         """
-        print(">>> [Phase 3.4] Starting IRC Validation (Double-Optimization method)...")
+        logger.info(">>> [Phase 3.4] Starting IRC Validation (Double-Optimization method)...")
         mol = self._setup_mol(ts_xyz, charge, spin, basis=self.opt_basis)
         mf = self._build_mf(mol, xc_method=self.opt_method, use_solvent=False)
         mf.conv_tol = 1e-8
         mf.scf()
         
-        print("    Computing TS Hessian for mode identification...")
+        logger.info("    Computing TS Hessian for mode identification...")
         hessobj = mf.Hessian()
         hessian_matrix = hessobj.kernel()
         
@@ -429,14 +433,14 @@ class DFTRefiner:
         h_info = thermo.harmonic_analysis(mol, hessian_matrix)
         freqs = h_info['freq_wavenumber'] # Negative values for imaginary frequencies
         
-        print(f"    Lowest frequencies (cm^-1): {freqs[:6]}")
+        logger.info(f"    Lowest frequencies (cm^-1): {freqs[:6]}")
         
         # We look for a significant imaginary frequency (conventionally negative in PySCF)
         # We use a threshold of -50 cm^-1 to avoid numerical noise
         if freqs[0] >= -50.0:
             raise ValueError(f"No significant imaginary frequency found at the provided TS geometry (Lowest freq: {freqs[0]:.1f} cm^-1)")
         
-        print(f"    Found imaginary mode with frequency: {freqs[0]:.1f} cm^-1")
+        logger.info(f"    Found imaginary mode with frequency: {freqs[0]:.1f} cm^-1")
         
         # The first mode in h_info['norm_mode'] is the lowest frequency mode
         mode_vec = h_info['norm_mode'][0]
@@ -446,7 +450,7 @@ class DFTRefiner:
         endpoints = []
         for direction in [1.0, -1.0]:
             label = "Forward" if direction > 0 else "Backward"
-            print(f"    Following IRC {label} path...")
+            logger.info(f"    Following IRC {label} path...")
             
             # Displacement in Bohr
             displaced_coords = orig_coords + direction * step_size * mode_vec
@@ -477,7 +481,7 @@ class DFTRefiner:
         Phase 3.5 Verification: Compute single-point energy using a higher-level functional.
         Typically revDSD-PBEP86-D4 on the optimized geometry.
         """
-        print(f">>> [Phase 3.5] Running High-Level Verification SP ({self.verif_method})...")
+        logger.info(f">>> [Phase 3.5] Running High-Level Verification SP ({self.verif_method})...")
         energy = self.single_point(optimized_xyz, xc_method=self.verif_method, basis=self.verif_basis, charge=charge, spin=spin)
         return energy
 
@@ -491,13 +495,13 @@ class DFTRefiner:
             reaction_meta: Optional dict with 'reactants', 'products' (SMILES lists) and 'family'.
         """
         # 1. Optimize Reactant
-        print(">>> [Phase 3.3] Starting Reactant Optimization...")
+        logger.info(">>> [Phase 3.3] Starting Reactant Optimization...")
         res_r = self.optimize_geometry(reactant_xyz, charge=charge, is_ts=False)
         if not res_r.converged:
             raise RuntimeError("Reactant optimization failed to converge.")
         
         # 2. Optimize TS
-        print(">>> [Phase 3.3] Starting Transition State (TS) Optimization...")
+        logger.info(">>> [Phase 3.3] Starting Transition State (TS) Optimization...")
         res_ts = self.optimize_geometry(ts_xyz, charge=charge, is_ts=True)
         if not res_ts.converged:
             raise RuntimeError("Transition State optimization failed to converge.")

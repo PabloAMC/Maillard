@@ -14,7 +14,7 @@ from src.matrix_correction import (
     resolve_effective_denaturation_state,
     resolve_matrix_correction,
 )
-from src.matrix_prior_registry import get_matrix_correction_entry
+from src.matrix_prior_registry import get_matrix_correction_entry, query_family_prior_entries, summarize_family_prior_bundle
 
 def test_apply_matrix_correction_free_aa():
     """Verify that FREE_AMINO_ACID type applies no correction."""
@@ -262,6 +262,29 @@ def test_build_matrix_explainability_surfaces_effective_accessibility_context():
     assert payload["prior_summary"]["matrix_correction"]["confidence_tier"] == "medium"
     assert "calibration_grade_transfer" in payload["matrix_prior_uncertainty_postures"]
     assert "heated_matrix" in payload["matrix_prior_process_state_applicability"]
+
+
+def test_family_prior_query_supports_family_process_and_matrix_filters():
+    rows = query_family_prior_entries(
+        chemistry_family="thiamine_fragmentation_support",
+        protein_type="soy_iso",
+        process_state="heated_matrix",
+    )
+
+    assert rows
+    assert all(row["chemistry_family"] == "thiamine_fragmentation_support" for row in rows)
+    assert all("heated_matrix" in row.get("process_state_scope", row.get("process_state_applicability", [])) for row in rows)
+
+
+def test_family_prior_bundle_summarizes_family_aware_support_without_breaking_matrix_bundle():
+    bundle = summarize_family_prior_bundle(
+        protein_type="soy_iso",
+        process_state="heated_matrix",
+    )
+
+    assert "thiamine_fragmentation_support" in bundle
+    assert "lipid_oxidation_and_carbonylic_crosstalk" in bundle
+    assert any(row["section_name"] == "thiamine_pathway_priors" for row in bundle["thiamine_fragmentation_support"])
 
 
 def test_build_matrix_explainability_preserves_inferred_denaturation_provenance():

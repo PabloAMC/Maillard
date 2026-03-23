@@ -10,11 +10,28 @@ or canonical precursors to recommend actionable formulation adjustments.
 import sys
 import json
 import yaml
+import math
 import numpy as np
 import pandas as pd
 from pathlib import Path
 from dataclasses import dataclass
 from typing import List, Dict, Set, Optional, Any, Tuple
+
+# Add project root to path
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+
+from src.logger import get_logger
+logger = get_logger(__name__)
+
+from src.projection import (
+    ProjectionBudget, ProjectionStrategy, DEFAULT_PROJECTION_STRATEGY,
+    _thermal_severity, _projection_temperature_factor, _projection_time_factor,
+    _estimate_projection_budget, _temporal_accessibility, _relative_precursor_load_factor,
+    _projection_strategy_metadata
+)
+from src.matrix_targets import get_compound_panel_entry
+from src.projection_metadata import ProjectionMetadataMap, make_projection_metadata_row
 
 from data.reactions.curated_pathways import PATHWAYS, PATHWAY_METADATA
 from src.barrier_constants import arrhenius_rate_constant, get_reference_pre_exponential
@@ -46,9 +63,7 @@ else:
     _PRIMARY_AMINE_SMARTS = None
     _IMINE_SMARTS = None
 
-# Add project root to path
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT))
+# Add project root to path handled above
 
 _HENRY_CONSTANTS_PATH = ROOT / "data" / "lit" / "henry_constants.yml"
 _NON_OBSERVABLE_KAW_THRESHOLD = 1.0e-8
@@ -100,15 +115,6 @@ class PrecursorSystem:
 
 
 
-from src.projection import (
-    ProjectionBudget, ProjectionStrategy, DEFAULT_PROJECTION_STRATEGY,
-    _thermal_severity, _projection_temperature_factor, _projection_time_factor,
-    _estimate_projection_budget, _temporal_accessibility, _relative_precursor_load_factor,
-    _projection_strategy_metadata
-)
-from src.matrix_targets import get_compound_panel_entry
-from src.projection_metadata import ProjectionMetadataMap, make_projection_metadata_row
-
 SYSTEMS = [
     PrecursorSystem(
         "Ribose + Cysteine (Savory Base)",
@@ -139,19 +145,9 @@ SYSTEMS = [
 
 
 # Build canonical SMILES lookup for targets
-def _canon(smi):
-    if Chem is None:
-        return smi
-    try:
-        can = set(Chem.MolToSmiles(Chem.MolFromSmiles(smi)).split("."))
-        # just return the largest fragment if disconnected
-        return max(can, key=len)
-    except ImportError:
-        # RDKit not available, return original SMILES
-        return smi
-    except Exception as e:
-        print(f"Warning: RDKit conformer generation failed: {e}")
-        return smi
+from src.chem_utils import canonicalize_smiles
+def _canon(smi: str) -> str:
+    return canonicalize_smiles(smi, fallback_to_original=True, strip_salts=True)
 
 def _weight(barrier_kcal, temp_kelvin=423.15): # Default 150C
     import math
@@ -206,15 +202,8 @@ def _load_ramp(ramp_path: str) -> List[Tuple[float, float]]:
             return []
         return list(zip(df['time'], df['temp'] + 273.15))
     except Exception as e:
-        print(f"Warning: Failed to load ramp {ramp_path}: {e}")
+        logger.warning(f"Failed to load ramp {ramp_path}: {e}")
         return []
-
-def _weight(barrier_kcal, temp_kelvin=423.15): # Default 150C
-    import math
-    if barrier_kcal >= 99.0: 
-        return 0.0
-    R = 0.001987
-    return math.exp(-barrier_kcal / (R * temp_kelvin))
 
 
 def _mw_from_smiles(smiles: str) -> float:
@@ -667,8 +656,6 @@ def _project_weighted_flux_to_ppb(
     projection_strategy: ProjectionStrategy = DEFAULT_PROJECTION_STRATEGY,
     projection_budget: Optional[ProjectionBudget] = None,
 ) -> Dict[str, float]:
-    import math
-
     if projection_budget is None:
         projection_budget = _estimate_projection_budget(
             corrected_initial,
@@ -763,9 +750,10 @@ class Recommender:
         
     def _load_results(self) -> dict:
         if self.results_path is None or not self.results_path.exists():
-            print(f"ERROR: Screening results not found at {self.results_path}")
-            print("Please run `python scripts/run_curated_screening.py` first.")
-            sys.exit(1)
+            raise FileNotFoundError(
+                f"Screening results not found at {self.results_path}. "
+                "Please run `python scripts/run_curated_screening.py` first."
+            )
             
         with open(self.results_path, "r") as f:
             data = json.load(f)
@@ -1305,7 +1293,11 @@ class Recommender:
         }
 
     def predict(self, pool: List[str]):
-        """Predict the outcome for a given pool of precursors (static curated)."""
+        """
+        [DEPRECATED] Static pathway estimation logic from Phase 1.
+        Superseded by predict_from_steps() returning ElementaryStep flows.
+        """
+        logger.warning("Recommender.predict() is deprecated. Do not use for new implementations.")
         available_species = set(pool)
         
         # Ubiquitous molecules present in Maillard reaction environments:
@@ -1460,6 +1452,3 @@ def main():
     print("      microkinetic modeling to account for temporal concentration profiles.")
     print("═"*85 + "\n")
 
-
-if __name__ == "__main__":
-    main()

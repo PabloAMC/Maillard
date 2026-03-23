@@ -12,9 +12,10 @@ from src.barrier_constants import HEME_CATALYST_REDUCTION, HEME_CATALYST_FAMILIE
 from src.results_db import ResultsDB  # noqa: E402
 from src.sensory import SensoryPredictor  # noqa: E402
 from src.safety import evaluate_formulation_safety  # noqa: E402
-from src.lipid_oxidation import predict_lop_generation  # noqa: E402
+from src.lipid_oxidation import build_lipid_input_proxy_loads, predict_lop_generation  # noqa: E402
 from src.matrix_correction import build_matrix_explainability, resolve_effective_denaturation_state  # noqa: E402
-from src.literature_runtime import build_flavor_axis_summary
+from src.literature_runtime import build_family_upstream_contract, build_flavor_axis_summary
+from src.pre_processor import PreProcessor
 from src.projection_metadata import ProjectionMetadataMap
 
 # Locate data files
@@ -96,7 +97,25 @@ class FormulationResult:
     pyrazine_burden: float = 0.0
     pyrazine_penalty: float = 0.0
     furanone_penalty: float = 0.0
+    ranking_score: float = 0.0
     flavor_axis_summary: Dict[str, object] = field(default_factory=dict)
+
+
+def compute_ranking_score(
+    result: FormulationResult,
+    *,
+    risk_aversion: float = 1.0,
+    texture_aversion: float = 0.01,
+) -> float:
+    return (
+        float(result.target_score)
+        - risk_aversion * float(result.safety_score)
+        - texture_aversion * float(result.texture_risk)
+        - float(result.meaty_quality_penalty)
+        - float(result.strecker_gap_penalty)
+        - float(result.pyrazine_penalty)
+        - float(result.furanone_penalty)
+    )
 
 
 class MaillardPipeline:
@@ -114,6 +133,7 @@ class MaillardPipeline:
         # Initialize Database connection for unified barrier lookup
         self.db = ResultsDB()
         self.sensory = SensoryPredictor()
+        self.pre_processor = PreProcessor()
 
     def _load_grid(self) -> List[Dict]:
         if not GRID_FILE.exists():
@@ -229,9 +249,32 @@ class MaillardPipeline:
             lipids = form.get("lipids", [])
             catalyst = form.get("catalyst", None)
             interventions = form.get("interventions", [])
+            raw_ratios = dict(form.get("molar_ratios", {}))
+
+            family_upstream_contract = build_family_upstream_contract(
+                sugars=sugars,
+                amino_acids=amino_acids,
+                additives=additives,
+                interventions=interventions,
+                protein_type=protein_type,
+                pH=form.get("ph", global_conditions.pH),
+                thiamine_availability=form.get("thiamine_availability"),
+                molar_ratios=raw_ratios,
+            )
+            effective_ratios = dict(family_upstream_contract.get("effective_molar_ratios", {})) or raw_ratios.copy()
+            if family_upstream_contract.get("pretreatment_active"):
+                effective_ratios = self.pre_processor.apply(effective_ratios, interventions)
+
+            added_precursors = [
+                precursor
+                for precursor in family_upstream_contract.get("added_precursors", [])
+                if precursor not in sugars + amino_acids + additives + lipids
+            ]
+            for precursor_name, ratio_value in (family_upstream_contract.get("added_precursor_ratios", {}) or {}).items():
+                effective_ratios.setdefault(str(precursor_name), float(ratio_value))
             
             # Combine all names
-            all_names = sugars + amino_acids + additives + lipids
+            all_names = sugars + amino_acids + additives + lipids + added_precursors
             try:
                 precursors = resolve_many(all_names)
             except ValueError as e:
@@ -239,8 +282,9 @@ class MaillardPipeline:
                 continue
                 
             # Create a localized conditions object (e.g. to apply catalyst override if specified)
+            effective_pH = family_upstream_contract.get("effective_pH", form.get("ph", global_conditions.pH))
             cond = ReactionConditions(
-                pH=form.get("ph", global_conditions.pH),
+                pH=effective_pH,
                 temperature_celsius=form.get("temp", global_conditions.temperature_celsius),
                 water_activity=form.get("aw", global_conditions.water_activity),
                 fat_fraction=global_conditions.fat_fraction,
@@ -251,7 +295,7 @@ class MaillardPipeline:
             # FAST mode heuristic barrier overrides
             heuristic_barriers = {}
             # Apply heme catalyst heuristic to Strecker/Pyrazines if formulation has it
-            apply_heme = (catalyst == "heme" or global_conditions.pH > 7)  # Note: just relying on simple logic for demo
+            apply_heme = (catalyst == "heme" or cond.pH > 7)  # Note: just relying on simple logic for demo
             
             # Phase 20: Pre-calculate intervention modifiers from library
             modifiers = {}
@@ -264,8 +308,12 @@ class MaillardPipeline:
                         intervention_lib = {a["name"]: a for a in lib_data.get("interventions", [])}
                     logging.getLogger(__name__).debug("%s raw interventions: %s", name, interventions)
                     for inter in interventions:
-                        agent_name = inter.get("name")
-                        dose = inter.get("dose", 1.0)
+                        if isinstance(inter, dict):
+                            agent_name = inter.get("name")
+                            dose = inter.get("dose", 1.0)
+                        else:
+                            agent_name = str(inter)
+                            dose = 1.0
                         logging.getLogger(__name__).debug("loading intervention %s with dose %s", agent_name, dose)
                         agent_data = intervention_lib.get(agent_name)
                         if agent_data:
@@ -315,7 +363,7 @@ class MaillardPipeline:
             # Build canonical concentrations map
             from src.recommend import _canon
             initial_concentrations = {}
-            ratios = form.get("molar_ratios", {})
+            ratios = effective_ratios
             for p in precursors:
                 # Default ratio is 1.0 if not specified
                 qty = 1.0
@@ -329,7 +377,7 @@ class MaillardPipeline:
             name_ratios = {p.label: initial_concentrations[_canon(p.smiles)] for p in precursors}
                 
             # PHASE L: Lipid Oxidation Crosstalk (Fix 7)
-            lipids_input = {k: v for k, v in ratios.items() if any(l in k.lower() for l in ["linoleic", "linolenic", "oil", "fat"])}
+            lipids_input = build_lipid_input_proxy_loads(lipids, ratios)
             generated_lops = predict_lop_generation(
                 lipids_input, 
                 cond.temperature_celsius, 
@@ -402,20 +450,27 @@ class MaillardPipeline:
                 amino_acids=amino_acids,
                 additives=additives,
                 lipids=lipids,
+                interventions=interventions,
                 protein_type=protein_type,
                 pH=cond.pH,
                 thiamine_availability=form.get("thiamine_availability"),
+                molar_ratios=effective_ratios,
+                family_upstream_contract=family_upstream_contract,
             )
             strecker_gap_penalty = float(flavor_axis_summary.get("strecker_gap_penalty", 0.0))
             pyrazine_penalty = float(flavor_axis_summary.get("pyrazine_penalty", 0.0))
             furanone_penalty = float(flavor_axis_summary.get("furanone_penalty", 0.0))
+            family_adjustments = flavor_axis_summary.get("family_lane_adjustments", {}) or {}
+            family_target_delta = float(family_adjustments.get("target_score_delta", 0.0) or 0.0)
+            family_maillard_closure_delta = float(family_adjustments.get("maillard_closure_delta", 0.0) or 0.0)
+            family_offnote_delta = float(family_adjustments.get("off_flavour_risk_delta", 0.0) or 0.0)
 
             # Use radar score for the target category as the official t_score
-            t_score = radar_scores.get(self.target_tag, (0.0, 0))[0]
+            t_score = max(0.0, radar_scores.get(self.target_tag, (0.0, 0))[0] + family_target_delta + family_maillard_closure_delta)
             # Use radar score for the minimize category as the official m_score
-            m_score = radar_scores.get(self.minimize_tag, (0.0, 0))[0] if self.minimize_tag else 0.0
+            m_score = max(0.0, (radar_scores.get(self.minimize_tag, (0.0, 0))[0] if self.minimize_tag else 0.0) + family_offnote_delta)
 
-            results.append(FormulationResult(
+            result = FormulationResult(
                 name=name,
                 target_score=t_score,
                 off_flavour_risk=m_score,
@@ -458,21 +513,22 @@ class MaillardPipeline:
                 pyrazine_penalty=pyrazine_penalty,
                 furanone_penalty=furanone_penalty,
                 flavor_axis_summary=flavor_axis_summary,
-            ))
+            )
+            results.append(result)
 
             
-        # Rank by (target_score - risk_aversion * safety_score - texture_penalty) DESC, off_flavour_risk ASC
+        # Rank by the full scientist-facing recommendation objective, then by lower off-flavour risk.
         risk_aversion = 1.0 # Default
         texture_aversion = 0.01 # 100 risk = 1.0 score penalty
+        for result in results:
+            result.ranking_score = compute_ranking_score(
+                result,
+                risk_aversion=risk_aversion,
+                texture_aversion=texture_aversion,
+            )
         results.sort(
             key=lambda x: (
-                x.target_score
-                - risk_aversion * x.safety_score
-                - texture_aversion * x.texture_risk
-                - x.meaty_quality_penalty
-                - x.strecker_gap_penalty
-                - x.pyrazine_penalty
-                - x.furanone_penalty,
+                x.ranking_score,
                 -x.off_flavour_risk,
             ), 
             reverse=True

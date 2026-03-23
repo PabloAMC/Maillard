@@ -313,17 +313,3 @@ class SensoryPredictor:
         sorted_notes = sorted(radar_profile.items(), key=lambda x: x[1][0], reverse=True)
         return sorted_notes[:top_n]
 
-
-if __name__ == "__main__":
-    predictor = SensoryPredictor()
-    # Mock concentration profile in ppm (1 ppb = 0.001 ppm)
-    mock_conc = {
-        "2-Furfurylthiol (FFT)": 0.01, # 10 ppb
-        "Methional": 0.005,           # 5 ppb
-        "Hexanal": 0.05               # 50 ppb
-    }
-    
-    radar = predictor.get_radar_data(mock_conc)
-    print("Radar Category Scores (± confidence):")
-    for note, (score, unc) in predictor.get_dominant_notes(radar):
-        print(f"  - {note}: {score:.4f} ± {unc:.4f}")

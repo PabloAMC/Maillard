@@ -9,6 +9,8 @@ import math
 import yaml
 from pathlib import Path
 from typing import Dict, Optional, List
+from src.logger import get_logger
+logger = get_logger(__name__)
 
 from src.matrix_calibration_registry import (
     determine_matrix_process_state,
@@ -311,16 +313,3 @@ class HeadspaceModel:
                 
         return air_concs
 
-if __name__ == "__main__":
-    model = HeadspaceModel()
-    # 100 ppm total hexanal (highly hydrophobic)
-    matrix = {"Hexanal": 100.0}
-    
-    print("Hexanal Headspace Projection at 25°C:")
-    # No fat
-    c_air_pure = model.predict_headspace(matrix, 25.0, fat_fraction=0.0)["Hexanal"]
-    print(f"  Water matrix: {c_air_pure:.4f} ppm")
-    
-    # 10% fat
-    c_air_fat = model.predict_headspace(matrix, 25.0, fat_fraction=0.1)["Hexanal"]
-    print(f"  10% Fat matrix: {c_air_fat:.4f} ppm (Suppression: {c_air_pure/c_air_fat:.1f}x)")

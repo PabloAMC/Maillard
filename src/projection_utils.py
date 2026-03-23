@@ -82,6 +82,13 @@ def _observable_assumption_summary(meta: Mapping[str, object]) -> str:
     return " | ".join(parts)
 
 
+def _panel_modeling_regimes(meta: Mapping[str, object]) -> List[str]:
+    values = meta.get("modeling_regimes", [])
+    if not isinstance(values, list):
+        return []
+    return [str(item) for item in values if str(item)]
+
+
 def _resolve_projection_metadata_row(
     target: Mapping[str, object],
     metadata: Mapping[str, ProjectionMetadataRow],
@@ -156,6 +163,12 @@ def build_projection_rows(
             "calibration_fallback_mode": meta.get("calibration_fallback_mode"),
             "evidence_state": meta.get("evidence_state"),
             "target_class": meta.get("target_class"),
+            "panel_role": meta.get("panel_role"),
+            "observable_kind": meta.get("observable_kind"),
+            "modeling_regimes": _panel_modeling_regimes(meta),
+            "chemistry_family": meta.get("chemistry_family"),
+            "supporting_families": list(meta.get("supporting_families", [])),
+            "observable_panel_tags": list(meta.get("observable_panel_tags", [])),
             "browning_index": meta.get("browning_index", target.get("browning_index", 0.0)),
             "support_origin": _support_origin_from_projection_meta(meta),
             "observable_assumption_summary": _observable_assumption_summary(meta),
@@ -191,6 +204,12 @@ def build_projection_rows(
             "calibration_fallback_mode": normalized.get("calibration_fallback_mode"),
             "evidence_state": normalized.get("evidence_state"),
             "target_class": normalized.get("target_class"),
+            "panel_role": normalized.get("panel_role"),
+            "observable_kind": normalized.get("observable_kind"),
+            "modeling_regimes": _panel_modeling_regimes(normalized),
+            "chemistry_family": normalized.get("chemistry_family"),
+            "supporting_families": list(normalized.get("supporting_families", [])),
+            "observable_panel_tags": list(normalized.get("observable_panel_tags", [])),
             "browning_index": normalized.get("browning_index", 0.0),
             "support_origin": _support_origin_from_projection_meta(normalized),
             "observable_assumption_summary": _observable_assumption_summary(normalized),
