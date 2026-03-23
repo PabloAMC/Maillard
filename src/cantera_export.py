@@ -305,7 +305,3 @@ class CanteraExporter:
             
         print(f"Exported Cantera mechanism to {output_path}")
 
-if __name__ == "__main__":
-    exporter = CanteraExporter()
-    exporter.add_reaction(["C(C1C(C(C(C(O1)O)O)O)O)=O"], ["Product_SMILES"], 25.0)
-    exporter.export_yaml("test_mech.yaml")

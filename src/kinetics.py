@@ -8,6 +8,9 @@ Converts DFT barriers (Delta G‡) into rate constants and temporal fluxes.
 import numpy as np
 from scipy.constants import kilo, calorie_th, Planck, Boltzmann, gas_constant
 from typing import Dict, List, Optional, Tuple
+from src.logger import get_logger
+logger = get_logger(__name__)
+
 from src.conditions import ReactionConditions  # noqa: E402
 from src.thermo import JobackEstimator  # noqa: E402
 
@@ -249,13 +252,3 @@ class KineticsEngine:
         # Convert to numpy arrays
         return {k: np.array(v) for k, v in results.items()}
 
-if __name__ == "__main__":
-    from src.conditions import ReactionConditions
-    ke = KineticsEngine()
-    # Test alanine + glyoxal
-    k = ke.get_rate_constant(15.0, 423.15, ReactionConditions(pH=6.5))
-    print(f"Rate constant: {k:.2e} s^-1")
-    
-    # 50% conversion time (t1/2 = ln(2)/k)
-    t_half_min = (np.log(2) / k) / 60
-    print(f"Half-life: {t_half_min:.2f} minutes")

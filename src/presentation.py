@@ -81,25 +81,31 @@ def render_projection_rows_markdown(
     variant: str = "detailed",
 ) -> str:
     lines = [heading, ""]
+    def _format_regimes(row: Mapping[str, object]) -> str:
+        regimes = row.get("modeling_regimes", [])
+        if not isinstance(regimes, list) or not regimes:
+            return "unknown"
+        return ", ".join(str(item) for item in regimes)
+
     if variant == "compact":
         lines.extend([
-            "| Compound | Panel Class | Evidence State | Reachability | Process State | Retention | Calibration Source | Observable Assumption | Evidence | Browning | Observable ppb |",
-            "| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | ---: |",
+            "| Compound | Panel Class | Role | Kind | Evidence State | Reachability | Process State | Retention | Calibration Source | Observable Assumption | Evidence | Browning | Observable ppb |",
+            "| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | ---: |",
         ])
         for row in rows:
             lines.append(
-                f"| {row['compound']} | {row.get('target_class', 'unknown')} | {row.get('evidence_state', 'still_missing')} | {row.get('reachability_status', 'merely_plausible')} | {row['process_state']} | {row['retention_runtime_mode']} | {row['calibration_source']} | {row.get('observable_assumption_summary', 'unknown')} | {row['calibration_evidence_strength']} | {float(row.get('browning_index', 0.0)):.2f} | {float(row['observable_ppb']):.2f} |"
+                f"| {row['compound']} | {row.get('target_class', 'unknown')} | {row.get('panel_role', 'unknown')} | {row.get('observable_kind', 'unknown')} | {row.get('evidence_state', 'still_missing')} | {row.get('reachability_status', 'merely_plausible')} | {row['process_state']} | {row['retention_runtime_mode']} | {row['calibration_source']} | {row.get('observable_assumption_summary', 'unknown')} | {row['calibration_evidence_strength']} | {float(row.get('browning_index', 0.0)):.2f} | {float(row['observable_ppb']):.2f} |"
             )
         lines.append("")
         return "\n".join(lines)
 
     lines.extend([
-        "| Compound | Proxy ppb | Observable ppb | Obs/Proxy | Matrix | Dynamic | Headspace | Class | Panel Class | Evidence State | Reachability | Support Origin | Process | Retention | Calibration | Observable Assumption | Evidence | Fallback |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+        "| Compound | Proxy ppb | Observable ppb | Obs/Proxy | Matrix | Dynamic | Headspace | Class | Panel Class | Panel Role | Observable Kind | Regimes | Evidence State | Reachability | Support Origin | Process | Retention | Calibration | Observable Assumption | Evidence | Fallback |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
     ])
     for row in rows:
         lines.append(
-            f"| {row['compound']} | {float(row['proxy_ppb']):.3f} | {float(row['observable_ppb']):.3f} | {float(row['observable_ratio']):.3f} | {float(row['matrix_factor']):.3f} | {float(row.get('dynamic_retention_factor', 1.0)):.3f} | {float(row['headspace_factor']):.3f} | {row['volatile_class']} | {row.get('target_class', 'unknown')} | {row.get('evidence_state', 'still_missing')} | {row.get('reachability_status', 'merely_plausible')} | {row.get('support_origin', 'standard_matrix_support')} | {row['process_state']} | {row.get('retention_runtime_mode', 'static_class_profile')} | {row['calibration_source']} | {row.get('observable_assumption_summary', 'unknown')} | {row['calibration_evidence_strength']} | {row['calibration_fallback_mode']} |"
+            f"| {row['compound']} | {float(row['proxy_ppb']):.3f} | {float(row['observable_ppb']):.3f} | {float(row['observable_ratio']):.3f} | {float(row['matrix_factor']):.3f} | {float(row.get('dynamic_retention_factor', 1.0)):.3f} | {float(row['headspace_factor']):.3f} | {row['volatile_class']} | {row.get('target_class', 'unknown')} | {row.get('panel_role', 'unknown')} | {row.get('observable_kind', 'unknown')} | {_format_regimes(row)} | {row.get('evidence_state', 'still_missing')} | {row.get('reachability_status', 'merely_plausible')} | {row.get('support_origin', 'standard_matrix_support')} | {row['process_state']} | {row.get('retention_runtime_mode', 'static_class_profile')} | {row['calibration_source']} | {row.get('observable_assumption_summary', 'unknown')} | {row['calibration_evidence_strength']} | {row['calibration_fallback_mode']} |"
         )
     lines.append("")
     return "\n".join(lines)
@@ -112,14 +118,22 @@ def render_flavor_axis_markdown(
     variant: str = "detailed",
 ) -> str:
     lines = [heading]
+    family_lane_summary = flavor_axis.get("family_lane_summary", {})
+    active_family_lanes = [
+        family_lane_summary[slr_family]
+        for slr_family in flavor_axis.get("active_family_lanes", [])
+        if slr_family in family_lane_summary
+    ]
     if variant == "compact":
         lines.extend([
             f"- Strecker balance score: {float(flavor_axis.get('strecker_balance_score', 0.0)):.3f}",
             f"- Pyrazine burden: {float(flavor_axis.get('pyrazine_burden', 0.0)):.3f}",
             f"- Thiamine pathway active: {flavor_axis.get('thiamine_pathway_active', False)}",
             f"- Thiamine source: {flavor_axis.get('thiamine_availability_source', 'unknown')}",
-            "",
         ])
+        if active_family_lanes:
+            lines.append(f"- Active family lanes: {', '.join(str(row.get('display_name', row.get('slr_family', 'unknown'))) for row in active_family_lanes)}")
+        lines.append("")
         return "\n".join(lines)
 
     lines.extend([
@@ -136,6 +150,27 @@ def render_flavor_axis_markdown(
         f"- **thiamine_availability_explicit:** {flavor_axis.get('thiamine_availability_explicit', False)}",
         f"- **thiamine_provenance_mode:** {flavor_axis.get('thiamine_provenance_mode', 'inactive')}",
     ])
+    upstream_contract = flavor_axis.get("family_upstream_contract", {}) or {}
+    if upstream_contract:
+        lines.append(f"- **effective_runtime_ph:** {float(upstream_contract.get('effective_pH', 0.0)):.2f}" if upstream_contract.get("effective_pH") is not None else "- **effective_runtime_ph:** unknown")
+        lines.append(f"- **dominant_donor_class:** {upstream_contract.get('dominant_donor_class', 'none')}")
+        lines.append(f"- **donor_limited:** {upstream_contract.get('donor_limited', False)}")
+        donor_pool_factors = upstream_contract.get("donor_pool_factors", {}) or {}
+        if donor_pool_factors:
+            lines.append(
+                "- **donor_pool_factors:** "
+                + ", ".join(f"{name}={float(value):.2f}" for name, value in donor_pool_factors.items())
+            )
+        if upstream_contract.get("pretreatment_interventions"):
+            lines.append(
+                "- **pretreatment_interventions:** "
+                + ", ".join(str(item) for item in upstream_contract.get("pretreatment_interventions", []))
+            )
+        if upstream_contract.get("added_precursors"):
+            lines.append(
+                "- **upstream_added_precursors:** "
+                + ", ".join(str(item) for item in upstream_contract.get("added_precursors", []))
+            )
     expected_furanones = flavor_axis.get("furanone_expected", [])
     if expected_furanones:
         lines.append(f"- **furanone_expected:** {', '.join(str(item) for item in expected_furanones)}")
@@ -146,6 +181,38 @@ def render_flavor_axis_markdown(
     if missing_furanones:
         lines.append(f"- **furanone_missing:** {', '.join(str(item) for item in missing_furanones)}")
     lines.append(f"- **lincoln_crosstalk_prior:** {flavor_axis.get('lincoln_crosstalk_prior', {}).get('summary', '')}")
+    if active_family_lanes:
+        lines.append("- **active_family_lanes:** " + ", ".join(str(row.get("display_name", row.get("slr_family", "unknown"))) for row in active_family_lanes))
+        for row in active_family_lanes:
+            lines.append(
+                f"- **family_lane_{row.get('slr_family', 'unknown')}:** {row.get('display_name', 'unknown')} | posture={row.get('strategic_posture', 'unknown')} | {row.get('summary', '')}"
+            )
+    lane_adjustments = flavor_axis.get("family_lane_adjustments", {})
+    if lane_adjustments:
+        lines.append(f"- **family_target_score_delta:** {float(lane_adjustments.get('target_score_delta', 0.0)):.2f}")
+        lines.append(f"- **family_maillard_closure_delta:** {float(lane_adjustments.get('maillard_closure_delta', 0.0)):.2f}")
+        lines.append(f"- **family_off_flavour_risk_delta:** {float(lane_adjustments.get('off_flavour_risk_delta', 0.0)):.2f}")
+    family_prior_bundle = flavor_axis.get("family_prior_bundle", {})
+    if isinstance(family_prior_bundle, dict) and family_prior_bundle:
+        lines.append(
+            "- **family_prior_bundle:** "
+            + ", ".join(f"{family}={len(rows)}" for family, rows in sorted(family_prior_bundle.items()))
+        )
+    lipid_lane = family_lane_summary.get("02", {})
+    if lipid_lane:
+        lines.append(
+            f"- **lipid_benchmark_ready_targets:** {', '.join(str(item) for item in lipid_lane.get('benchmark_ready_targets', [])) or 'none'}"
+        )
+        lines.append(
+            f"- **lipid_crosstalk_priors:** {', '.join(str(item) for item in lipid_lane.get('competition_prior_ids', [])) or 'none'}"
+        )
+        lines.append(
+            f"- **lipid_maillard_closure_pressure:** {float(lipid_lane.get('maillard_closure_pressure', 0.0)):.2f}"
+        )
+    for marker in flavor_axis.get("family_state_markers", []):
+        lines.append(
+            f"- **state_marker_{marker.get('marker_id', 'unknown')}:** {marker.get('display_name', 'unknown')} | role={marker.get('panel_role', 'unknown')} | kind={marker.get('observable_kind', 'unknown')} | influence={marker.get('influence_mode', 'unknown')} | summary={marker.get('state_value_summary', marker.get('summary', ''))}"
+        )
     lines.append("")
     return "\n".join(lines)
 
@@ -502,8 +569,8 @@ def render_benchmark_summary_markdown(summaries: Iterable['BenchmarkSummary']) -
     lines = [
         "# Benchmark Summary",
         "",
-        "| Benchmark | Tier | Family | Protein | Process State | Execution Path | Engine | Cantera Role | Thermo Policy | Ranking Contract | Status | Strict Ready | Coverage | Pearson R | Max Ratio | Mean |log10 ratio| | MAE ppb | Notes |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+        "| Benchmark | Tier | Family | Chemistry Families | Payload Roles | Protein | Process State | Execution Path | Engine | Cantera Role | Thermo Policy | Ranking Contract | Status | Strict Ready | Coverage | Pearson R | Max Ratio | Mean |log10 ratio| | MAE ppb | Notes |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
     ]
 
     for summary in rows:
@@ -525,7 +592,7 @@ def render_benchmark_summary_markdown(summaries: Iterable['BenchmarkSummary']) -
             strict_ready = "yes" if summary.strict_ready else "no"
 
         lines.append(
-            f"| {summary.benchmark_id} | {summary.tier} | {summary.family} | {summary.protein_type} | {summary.process_state or 'n/a'} | {summary.execution_path} | {summary.benchmark_engine} | {summary.cantera_role} | {summary.thermodynamic_gating_policy} | {summary.ranking_contract_status} | {summary.overall_status} | {strict_ready} | {coverage} | {pearson} | {max_ratio} | {mean_log_error} | {mae} | {notes} |"
+            f"| {summary.benchmark_id} | {summary.tier} | {summary.family} | {', '.join(summary.chemistry_families) or 'none'} | {', '.join(summary.payload_roles) or 'none'} | {summary.protein_type} | {summary.process_state or 'n/a'} | {summary.execution_path} | {summary.benchmark_engine} | {summary.cantera_role} | {summary.thermodynamic_gating_policy} | {summary.ranking_contract_status} | {summary.overall_status} | {strict_ready} | {coverage} | {pearson} | {max_ratio} | {mean_log_error} | {mae} | {notes} |"
         )
 
     supported_count = sum(1 for summary in rows if summary.supported)
