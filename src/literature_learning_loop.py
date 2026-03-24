@@ -4,7 +4,11 @@ import json
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Optional
 
+from src.family_validation_overview import build_family_validation_overview_artifact
 from src.literature_family_registry import build_family_payload_coverage_artifact
+from src.literature_family_registry import iter_matrix_decision_panel_entries
+from src.family_ingestion_plan import load_family_ingestion_plan
+from src.family_promotion_state import build_family_promotion_state_artifact
 from src.matrix_prior_registry import summarize_matrix_prior_bundle
 
 
@@ -35,6 +39,15 @@ ARTIFACT_TYPE_TO_TEMPLATE_KIND = {
     "flavor_reference_payload": "flavor_reference_payload",
     "retention_payload": "retention_payload",
     "structural_gap_entry": "structural_gap_entry",
+}
+
+PROMOTION_QUEUE_SLR_FAMILIES = {"03", "04", "05", "06", "07", "10"}
+
+PROMOTION_POSTURE_WEIGHTS = {
+    "immediate_expansion_lane": 5.0,
+    "upstream_pretreatment_lane": 4.0,
+    "high_value_support_lane": 3.5,
+    "matrix_scope_lane": 2.0,
 }
 
 
@@ -361,6 +374,162 @@ def build_payload_queue_review(root: Path = ROOT) -> Dict[str, Any]:
     }
 
 
+def _promotion_benchmarkability_weight(status: str) -> float:
+    normalized = str(status).strip()
+    if "benchmark_ready" in normalized:
+        return 3.0
+    if "calibration_ready" in normalized:
+        return 2.0
+    if "bounded_quantitative_support" in normalized:
+        return 1.5
+    if "mostly_directional" in normalized:
+        return 0.5
+    return 1.0
+
+
+def _direct_matrix_decision_bonus(plan_row: Mapping[str, Any]) -> float:
+    targets = {str(item).strip().lower() for item in plan_row.get("target_compounds_or_state_variables", []) or []}
+    bonus = 0.0
+    if targets.intersection({"ribose", "xylose", "glucose", "fructose", "ribose-5-phosphate"}):
+        bonus += 1.0
+    if targets.intersection({"2-methyl-3-furanthiol", "2-furfurylthiol", "bis(2-methyl-3-furyl) disulfide"}):
+        bonus += 1.0
+    if targets.intersection({"fermentation_pretreatment_state", "free_amino_acid_enrichment", "nucleotide_enrichment"}):
+        bonus += 0.25
+    return bonus
+
+
+def _minimum_runtime_landing_kind(
+    plan_row: Mapping[str, Any],
+    coverage_row: Mapping[str, Any],
+    validation_row: Mapping[str, Any],
+) -> str:
+    preferred = [str(item) for item in plan_row.get("preferred_payload_types", []) or []]
+    if "benchmark_payload" in preferred and int(validation_row.get("benchmark_count", 0)) == 0:
+        return "benchmark_payload"
+    if "process_state_calibration" in preferred and int(coverage_row.get("total_primary_payload_count", 0)) == 0:
+        return "process_state_calibration"
+    if "benchmark_payload" in preferred and int(validation_row.get("quantitative_point_count", 0)) == 0:
+        return "benchmark_payload"
+    return "bounded_prior"
+
+
+def _runtime_landing_contract_note(landing_kind: str) -> str:
+    if landing_kind == "benchmark_payload":
+        return "must land as a benchmark-linked payload that changes the matrix decision surface or trust posture"
+    if landing_kind == "process_state_calibration":
+        return "must land as a runtime-consumed process-state calibration, not narrative-only markdown"
+    return "must land as a bounded prior with explicit uncertainty_posture and process_state_applicability"
+
+
+def _family_promotion_blocker(
+    plan_row: Mapping[str, Any],
+    coverage_row: Mapping[str, Any],
+    validation_row: Mapping[str, Any],
+    promotion_row: Mapping[str, Any],
+    landing_kind: str,
+) -> str:
+    promotion_state = str(promotion_row.get("promotion_state", "unknown"))
+    if promotion_state == "benchmark_linked_support":
+        return "already promoted to benchmark-linked support; standalone primary benchmark payload is still missing"
+    if promotion_state == "calibration_grade":
+        return "already promoted to calibration-grade support; direct benchmark-linked closure is still missing"
+    if promotion_state == "near_quantitative":
+        return "already near-quantitative"
+    blocked_by = [str(item) for item in plan_row.get("blocked_by", []) or []]
+    if blocked_by:
+        return "; ".join(blocked_by)
+    if landing_kind == "benchmark_payload" and int(validation_row.get("benchmark_count", 0)) == 0:
+        return "no benchmark-linked closure yet for a family that directly changes formulation choices"
+    if landing_kind == "process_state_calibration" and int(coverage_row.get("total_primary_payload_count", 0)) == 0:
+        return "no process-state calibration encoded yet"
+    if landing_kind == "bounded_prior" and int(coverage_row.get("total_primary_payload_count", 0)) == 0:
+        return "no bounded prior encoded with explicit uncertainty posture"
+    if int(validation_row.get("quantitative_point_count", 0)) == 0:
+        return "runtime support exists but no benchmark-visible decision change is yet proven"
+    return "none"
+
+
+def build_s11_c_family_promotion_queue(root: Path = ROOT) -> Dict[str, Any]:
+    plan = load_family_ingestion_plan()
+    coverage_payload = build_family_payload_coverage_artifact()
+    promotion_payload = build_family_promotion_state_artifact()
+    coverage_rows = {
+        str(row.get("family_id", "unknown")): row
+        for row in coverage_payload.get("families", [])
+    }
+    promotion_rows = {
+        str(row.get("chemistry_family", "unknown")): row
+        for row in promotion_payload.get("families", [])
+    }
+    validation_payload = build_family_validation_overview_artifact()
+    validation_rows = {
+        str(row.get("chemistry_family", "unknown")): row
+        for row in validation_payload.get("families", [])
+    }
+
+    candidates: List[Dict[str, Any]] = []
+    for family in plan.get("families", []):
+        slr_family = str(family.get("slr_family", "")).zfill(2)
+        if slr_family not in PROMOTION_QUEUE_SLR_FAMILIES:
+            continue
+
+        family_id = str(family.get("family_id", "unknown"))
+        coverage_row = coverage_rows.get(family_id, {})
+        validation_row = validation_rows.get(family_id, {})
+        promotion_row = promotion_rows.get(family_id, {})
+        decision_panel_entry_count = len(list(iter_matrix_decision_panel_entries(family=family_id)))
+        impact_score = (
+            float(PROMOTION_POSTURE_WEIGHTS.get(str(family.get("strategic_posture", "unknown")), 1.5))
+            + _promotion_benchmarkability_weight(str(family.get("benchmarkability_status", "unknown")))
+            + _direct_matrix_decision_bonus(family)
+            + (1.25 * float(min(decision_panel_entry_count, 4)))
+            + (0.10 * float(min(int(coverage_row.get("total_supporting_payload_count", 0)), 20)))
+        )
+        landing_kind = _minimum_runtime_landing_kind(family, coverage_row, validation_row)
+        blocker = _family_promotion_blocker(family, coverage_row, validation_row, promotion_row, landing_kind)
+        candidates.append(
+            {
+                "slr_family": slr_family,
+                "family_id": family_id,
+                "display_name": str(family.get("display_name", family_id)),
+            "current_promotion_state": str(promotion_row.get("promotion_state", "unknown")),
+                "strategic_posture": str(family.get("strategic_posture", "unknown")),
+                "benchmarkability_status": str(family.get("benchmarkability_status", "unknown")),
+                "decision_panel_entry_count": decision_panel_entry_count,
+                "primary_payload_count": int(coverage_row.get("total_primary_payload_count", 0)),
+                "supporting_payload_count": int(coverage_row.get("total_supporting_payload_count", 0)),
+                "benchmark_count": int(validation_row.get("benchmark_count", 0)),
+                "quantitative_point_count": int(validation_row.get("quantitative_point_count", 0)),
+                "minimum_runtime_landing": landing_kind,
+                "runtime_landing_contract": _runtime_landing_contract_note(landing_kind),
+                "promotion_blocker": blocker,
+                "reject_narrative_only": True,
+                "impact_score": round(impact_score, 2),
+            }
+        )
+
+    candidates.sort(key=lambda row: (-float(row.get("impact_score", 0.0)), row.get("slr_family", "99")))
+    for index, row in enumerate(candidates):
+        if row.get("current_promotion_state") in {"benchmark_linked_support", "calibration_grade", "near_quantitative"}:
+            row["promotion_recommendation"] = "already_promoted"
+        elif index == 0:
+            row["promotion_recommendation"] = "select_now"
+        elif index == 1:
+            row["promotion_recommendation"] = "second_if_first_blocked"
+        else:
+            row["promotion_recommendation"] = "defer"
+
+    selected_family = candidates[0] if candidates else None
+    fallback_family = candidates[1] if len(candidates) > 1 else None
+    return {
+        "selection_policy": "rank only families 03/04/05/06/07/10 by direct matrix decision impact, require runtime landing, and reject narrative-only promotion",
+        "selected_family": selected_family,
+        "fallback_family": fallback_family,
+        "candidates": candidates,
+    }
+
+
 def build_matrix_prior_review() -> List[Dict[str, Any]]:
     rows: List[Dict[str, Any]] = []
     for protein_type in ["pea_iso", "soy_iso", "myco"]:
@@ -427,6 +596,7 @@ def build_literature_learning_loop_payload(root: Path = ROOT) -> Dict[str, Any]:
     gap_review = build_literature_gap_review(root)
     family_payload_coverage = build_family_payload_coverage_artifact()
     payload_queue_review = build_payload_queue_review(root)
+    s11_c_family_promotion_queue = build_s11_c_family_promotion_queue(root)
     encoded_count = sum(1 for row in ready_rows if row["encoding_status"] == "encoded_runtime_artifact")
     return {
         "schema_version": "1.0",
@@ -436,6 +606,7 @@ def build_literature_learning_loop_payload(root: Path = ROOT) -> Dict[str, Any]:
         "matrix_prior_review": prior_review,
         "family_payload_coverage": family_payload_coverage,
         "payload_queue_review": payload_queue_review,
+        "s11_c_family_promotion_queue": s11_c_family_promotion_queue,
         **gap_review,
         "summary": {
             "ready_reference_count": len(ready_rows),
@@ -445,6 +616,7 @@ def build_literature_learning_loop_payload(root: Path = ROOT) -> Dict[str, Any]:
             "matrix_prior_families": [row["protein_type"] for row in prior_review],
             "families_with_primary_payload_support": int(family_payload_coverage.get("summary", {}).get("families_with_primary_payload_support", 0)),
             "payload_type_queue": dict(payload_queue_review.get("queue_by_payload_type", {})),
+            "selected_s11_c_family": (s11_c_family_promotion_queue.get("selected_family") or {}).get("family_id"),
             "intake_structural_gap_count": len(gap_review["intake_structural_gap_review"]),
             "process_gap_count": len(gap_review["process_gap_review"]),
         },
@@ -493,6 +665,26 @@ def render_literature_learning_loop_markdown(payload: Mapping[str, Any]) -> str:
         lines.append(
             f"| {row['slr_family']} | {row['family_id']} | {row['total_primary_payload_count']} | {row['total_supporting_payload_count']} | {row['has_runtime_support']} |"
         )
+
+    queue = payload.get("s11_c_family_promotion_queue", {}) or {}
+    selected_family = queue.get("selected_family") or {}
+    fallback_family = queue.get("fallback_family") or {}
+    if queue.get("candidates"):
+        lines.extend([
+            "",
+            "## S11.C Family Promotion Queue",
+            "",
+            f"Selected family: {selected_family.get('family_id', 'unknown')}",
+            f"Fallback family: {fallback_family.get('family_id', 'none')}",
+            f"Selection policy: {queue.get('selection_policy', 'unknown')}",
+            "",
+            "| SLR | Family | Impact | Recommendation | Landing | Primary Payloads | Benchmarks | Quantitative Points | Blocker |",
+            "| --- | --- | ---: | --- | --- | ---: | ---: | ---: | --- |",
+        ])
+        for row in queue.get("candidates", []):
+            lines.append(
+                f"| {row.get('slr_family', '99')} | {row.get('family_id', 'unknown')} | {float(row.get('impact_score', 0.0)):.2f} | {row.get('promotion_recommendation', 'defer')} | {row.get('minimum_runtime_landing', 'unknown')} | {int(row.get('primary_payload_count', 0))} | {int(row.get('benchmark_count', 0))} | {int(row.get('quantitative_point_count', 0))} | {row.get('promotion_blocker', 'unknown')} |"
+            )
 
     lines.extend([
         "",

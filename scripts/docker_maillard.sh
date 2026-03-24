@@ -40,6 +40,24 @@ Commands:
                Generate results/validation/matrix_benchmark_evidence.{md,json}.
   matrix-readiness
                Generate results/validation/matrix_promotion_readiness.{md,json}.
+  matrix-promotion-contract
+               Generate results/validation/matrix_promotion_contract.{md,json}.
+  matrix-closure-audit
+               Generate results/validation/matrix_observable_closure_audit.{md,json}.
+  experiment-intake-schema
+               Generate results/validation/matrix_experiment_intake_schema.{md,json}.
+  compare-experiment INTAKE
+               Generate support-delta artifacts for a matrix experiment intake payload.
+  literature-learning-loop
+               Generate results/validation/literature_learning_loop.{md,json}.
+  family-promotion-state
+               Generate results/validation/family_promotion_state.{md,json}.
+  matrix-family-coverage
+               Generate results/validation/matrix_family_coverage.{md,json}.
+  p3-refinement
+               Generate the P3 refinement artifact bundle including governance.
+  p4-mlp-assessment
+               Generate the P4 MLP assessment and adoption-note artifacts.
   matrix-branch-deltas [BASE_REF]
                Generate results/validation/matrix_branch_delta_report.{md,json} against BASE_REF (default: main).
   coverage-gaps
@@ -85,6 +103,14 @@ scientific_lane() {
   run_in_env "python scripts/generators/generate_matrix_benchmark_assertions.py"
   run_in_env "python scripts/generators/generate_matrix_benchmark_evidence.py"
   run_in_env "python scripts/generators/generate_matrix_promotion_readiness.py"
+  run_in_env "python scripts/generators/generate_matrix_promotion_contract.py --output-dir results/validation"
+  run_in_env "python scripts/generators/generate_matrix_observable_closure_audit.py --output-dir results/validation"
+  run_in_env "python scripts/generators/generate_matrix_experiment_intake_schema.py --output-dir results/validation"
+  run_in_env "python scripts/generators/generate_matrix_family_coverage.py"
+  run_in_env "python scripts/generators/generate_p3_refinement_campaign.py --output-dir results/validation"
+  run_in_env "python scripts/generators/generate_p4_mlp_assessment.py"
+  run_in_env "python scripts/generators/generate_literature_learning_loop.py --output-dir results/validation"
+  run_in_env "python scripts/generators/generate_family_promotion_state.py --output-dir results/validation"
   run_in_env "python scripts/generators/generate_family_lane_validation.py --output-dir results/validation"
   run_in_env "python scripts/generators/generate_family_deviation_audit.py --output-dir results/validation"
   run_in_env "python scripts/generators/generate_validation_figures.py"
@@ -279,6 +305,38 @@ case "$cmd" in
     ;;
   matrix-readiness)
     run_in_env "python scripts/generators/generate_matrix_promotion_readiness.py"
+    ;;
+  matrix-promotion-contract)
+    run_in_env "python scripts/generators/generate_matrix_promotion_contract.py --output-dir results/validation"
+    ;;
+  matrix-closure-audit)
+    run_in_env "python scripts/generators/generate_matrix_observable_closure_audit.py --output-dir results/validation"
+    ;;
+  experiment-intake-schema)
+    run_in_env "python scripts/generators/generate_matrix_experiment_intake_schema.py --output-dir results/validation"
+    ;;
+  literature-learning-loop)
+    run_in_env "python scripts/generators/generate_literature_learning_loop.py --output-dir results/validation"
+    ;;
+  family-promotion-state)
+    run_in_env "python scripts/generators/generate_family_promotion_state.py --output-dir results/validation"
+    ;;
+  matrix-family-coverage)
+    run_in_env "python scripts/generators/generate_matrix_family_coverage.py"
+    ;;
+  p3-refinement)
+    run_in_env "python scripts/generators/generate_p3_refinement_campaign.py --output-dir results/validation"
+    ;;
+  p4-mlp-assessment)
+    run_in_env "python scripts/generators/generate_p4_mlp_assessment.py"
+    ;;
+  compare-experiment)
+    shift
+    if [ "$#" -lt 1 ]; then
+      echo "Usage: ./scripts/docker_maillard.sh compare-experiment INTAKE_FILE" >&2
+      exit 1
+    fi
+    run_in_env "python scripts/generators/compare_matrix_experiment_intake.py --experiment '$1' --output-dir results/validation"
     ;;
   matrix-branch-deltas)
     shift
