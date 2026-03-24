@@ -55,9 +55,11 @@ This repo therefore separates three cases:
 
 The figures below are generated with `./scripts/docker_maillard.sh validation-figures` and are provided as three standalone PNGs so they can be embedded, cropped, or cited independently.
 
-| Compound parity | Per-benchmark accuracy | Family coverage |
-|---:|:---:|:---|
-| ![Compound parity](docs/assets/family_parity.png) | ![Per-benchmark accuracy](docs/assets/family_benchmark_accuracy.png) | ![Family coverage](docs/assets/family_coverage.png) |
+Click the thumbnail below to open the full-size figures, or use the direct links.
+
+[![Validation figures thumbnail](docs/assets/family_validation_thumbnail.png)](docs/assets/family_validation_overview.png)
+
+Direct links: [Parity](docs/assets/family_parity.png) · [Per-benchmark accuracy](docs/assets/family_benchmark_accuracy.png) · [Coverage](docs/assets/family_coverage.png)
 
 Captions:
 
