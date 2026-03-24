@@ -155,7 +155,7 @@ bootstrap_env() {
   fi
 
   run_in_env "conda install -y -c conda-forge jax jaxlib wget xz jupyter ipywidgets"
-  run_in_env "pip install --index-url https://download.pytorch.org/whl/cpu torch"
+  run_in_env "pip install --index-url https://download.pytorch.org/whl/cpu torch==2.5.1"
   run_in_env "conda env update -n '$ENV_NAME' --file environment.yml"
 
   run_in_env '

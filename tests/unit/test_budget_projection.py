@@ -368,3 +368,71 @@ def test_output_projection_respects_denaturation_state_in_matrix_retention_fallb
     assert metadata_native[_canon(furfural.smiles)]["matrix_factor"] == pytest.approx(0.3864)
     assert metadata_denatured[_canon(furfural.smiles)]["matrix_factor"] == pytest.approx(0.5626)
     assert observable_native[_canon(furfural.smiles)] < observable_denatured[_canon(furfural.smiles)]
+
+
+def test_melanoidin_trapping_penalizes_fft_more_than_mft_in_heated_soy_matrix():
+    fft = Species("2-furfurylthiol", "SCc1ccco1")
+    mft = Species("2-methyl-3-furanthiol", "Cc1occc1S")
+    raw = {
+        _canon(fft.smiles): 100.0,
+        _canon(mft.smiles): 100.0,
+    }
+    species_catalog = {
+        _canon(fft.smiles): fft,
+        _canon(mft.smiles): mft,
+    }
+    target_lookup = {
+        _canon(fft.smiles): {"name": "2-Furfurylthiol (FFT)", "type": "desirable", "data": {}},
+        _canon(mft.smiles): {"name": "2-Methyl-3-furanthiol (MFT)", "type": "desirable", "data": {}},
+    }
+
+    observable, metadata = _apply_output_projection(
+        raw,
+        species_catalog,
+        target_lookup,
+        temperature_kelvin=393.15,
+        protein_type="soy_iso",
+        time_minutes=20.0,
+        denaturation_state=0.6,
+        fat_fraction=0.0,
+        protein_fraction=1.0,
+    )
+
+    fft_row = metadata[_canon(fft.smiles)]
+    mft_row = metadata[_canon(mft.smiles)]
+
+    assert fft_row["process_state"] == "heated_matrix"
+    assert fft_row["melanoidin_trapping_factor"] < mft_row["melanoidin_trapping_factor"] < 1.0
+    assert observable[_canon(fft.smiles)] < observable[_canon(mft.smiles)]
+
+
+def test_output_projection_surfaces_extrusion_process_state_and_surrogates():
+    species = Species("Hexanal", "CCCCCC=O")
+    canon = _canon(species.smiles)
+
+    hydrated_observable, hydrated_meta = _apply_output_projection(
+        {canon: 100.0},
+        {canon: species},
+        {},
+        150.0 + 273.15,
+        protein_type="soy_iso",
+        time_minutes=3.0,
+        water_activity=0.60,
+        denaturation_state=0.8,
+    )
+    dry_observable, dry_meta = _apply_output_projection(
+        {canon: 100.0},
+        {canon: species},
+        {},
+        165.0 + 273.15,
+        protein_type="soy_iso",
+        time_minutes=3.0,
+        water_activity=0.35,
+        denaturation_state=0.95,
+    )
+
+    assert hydrated_meta[canon]["process_state"] == "aqueous_pre_extrusion_model"
+    assert dry_meta[canon]["process_state"] == "extrusion_structured"
+    assert dry_meta[canon]["extrusion_moisture_factor"] < hydrated_meta[canon]["extrusion_moisture_factor"]
+    assert dry_meta[canon]["extrusion_structure_factor"] < hydrated_meta[canon]["extrusion_structure_factor"]
+    assert dry_observable[canon] < hydrated_observable[canon]

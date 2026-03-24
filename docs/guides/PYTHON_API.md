@@ -4,7 +4,7 @@ While Maillard is primarily interacted with via the CLI, you can easily embed it
 
 ## The Two Core Objects
 
-The framework is driven by two main objects: `ReactionConditions` (defining the environment) and `InverseDesigner` (defining the formulation and scoring).
+The framework is driven by two main objects: `ReactionConditions` (defining the environment) and `MaillardPipeline` (defining the formulation and scoring).
 
 ### 1. `ReactionConditions`
 Defines the physical boundaries of the reaction.
@@ -20,13 +20,13 @@ conditions = ReactionConditions(
 )
 ```
 
-### 2. `InverseDesigner`
+### 2. `MaillardPipeline`
 Defines what sensory tag you are optimizing for (e.g., `meaty`, `roasted`) and what you want to penalize (e.g., `beany`, `bitter`).
 
 ```python
-from src.inverse_design import InverseDesigner
+from src.pipeline import MaillardPipeline
 
-designer = InverseDesigner(target_tag="meaty", minimize_tag="beany")
+designer = MaillardPipeline(target_tag="meaty", minimize_tag="beany")
 ```
 
 ## Running a Single Evaluation

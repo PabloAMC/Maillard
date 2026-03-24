@@ -6,10 +6,8 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src.benchmark_validation import (  # noqa: E402
-    build_matrix_promotion_family_status,
-    render_matrix_promotion_family_status_markdown,
-)
+from src.benchmark_validation import build_matrix_promotion_family_status
+from src.presentation import render_matrix_promotion_family_status_markdown
 
 
 def test_matrix_promotion_readiness_marks_pea_and_soy_candidate_sets_ready_but_not_externally_unlocked():

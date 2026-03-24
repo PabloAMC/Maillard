@@ -8,6 +8,9 @@ directly from 2D molecular graphs (SMILES).
 """
 
 from typing import Optional, Any
+from src.logger import get_logger
+
+logger = get_logger(__name__)
 
 try:
     from ase import Atoms as ASEAtoms # avoid name collision
@@ -53,7 +56,7 @@ class DiffusionTSEngine:
         
         # MOCK IMPLEMENTATION for Phase 14 scaffold:
         # In a real implementation, this would call the diffusion model's .predict()
-        print(f"Predicting TS from {reactant_smiles} -> {product_smiles}...")
+        logger.debug(f"Predicting TS from {reactant_smiles} -> {product_smiles}...")
         
         # Return None for now to trigger the xTB fallback until weights are loaded
         return None

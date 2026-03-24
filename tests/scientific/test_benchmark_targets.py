@@ -8,10 +8,10 @@ if str(ROOT) not in sys.path:
 
 from src.benchmark_validation import (
     get_matrix_only_target_snapshot_exclusions,
-    render_benchmark_targets_markdown,
     snapshot_all_benchmark_targets,
     snapshot_benchmark_targets,
 )
+from src.presentation import render_benchmark_targets_markdown
 
 
 def test_benchmark_targets_snapshot_contains_headspace_metadata():
@@ -20,6 +20,8 @@ def test_benchmark_targets_snapshot_contains_headspace_metadata():
     assert rows
     furfural = next(row for row in rows if row.target_name == "Furfural")
     assert furfural.target_type in {"desirable", "competing", "toxic"}
+    assert furfural.target_class in {"severity_markers", "furans_furanones", "unknown"}
+    assert furfural.evidence_state in {"conditional_calibration", "transferred_prior", "still_missing"}
     assert furfural.headspace_class in {"observable", "low_headspace", "assumed_observable"}
     assert furfural.henry_source_name
     assert furfural.proxy_ppb >= furfural.predicted_ppb
@@ -35,6 +37,8 @@ def test_benchmark_targets_markdown_reports_low_headspace_count():
     markdown = render_benchmark_targets_markdown(rows)
 
     assert "Benchmark Targets" in markdown
+    assert "Evidence State" in markdown
+    assert "Panel Class" in markdown
     assert "Headspace" in markdown
     assert "Proxy ppb" in markdown
     assert "Obs/Proxy" in markdown

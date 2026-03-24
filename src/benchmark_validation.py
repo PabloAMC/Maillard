@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import math
 import re
+from collections import defaultdict
 from dataclasses import dataclass, field
 from difflib import SequenceMatcher
 from pathlib import Path
@@ -17,11 +18,30 @@ from src.matrix_calibration_registry import (
     describe_matrix_calibration,
     determine_matrix_process_state,
 )
-from src.inverse_design import InverseDesigner
+from src.pipeline import MaillardPipeline
 from src.precursor_resolver import resolve_many
+from src.projection_metadata import ProjectionMetadataMap, make_projection_metadata_row
 from src.smirks_engine import SmirksEngine
 from src.validation_contract import BenchmarkThresholds, DEFAULT_VALIDATION_CONTRACT
 from src.safety import predict_acrylamide
+from src.projection_utils import build_projection_rows
+from src.matrix_targets import get_compound_panel_entry
+from src.literature_family_registry import resolve_family_descriptor
+from src.benchmark_types import (
+    BenchmarkMetadata,
+    BenchmarkIndexEntry,
+    BenchmarkNotSupportedError,
+    CompoundComparison,
+    BenchmarkEvaluation,
+    BenchmarkSummary,
+    MatrixBenchmarkDelta,
+    MatrixBenchmarkEvidence,
+    MatrixBenchmarkBranchDelta,
+    ThermodynamicGatingAudit,
+    BenchmarkTargetSnapshot,
+    MatrixBenchmarkAssertion,
+    MatrixPromotionFamilyStatus,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -100,250 +120,9 @@ MATRIX_BENCHMARK_BASE_MARKER_YIELDS = {
 }
 
 
-@dataclass(frozen=True)
-class BenchmarkMetadata:
-    tier: str
-    family: str
-    execution_path: str
-    benchmark_engine: str
-    comparator_signal: str
-    cantera_role: str
-    target_snapshot_policy: str
-    thermodynamic_gating_policy: str
-    notes: Optional[str] = None
 
 
-@dataclass(frozen=True)
-class BenchmarkIndexEntry:
-    benchmark_id: str
-    bench_file: Path
-    tier: str
-    family: str
-    protein_type: str
-    execution_path: str
-    benchmark_engine: str
-    cantera_role: str
-    thermodynamic_gating_policy: str
-    supported: bool
-    reason: Optional[str]
-    status: str
-    strict_ready: bool
-    process_state: Optional[str] = None
-    ranking_contract_status: str = "n/a"
 
-
-class BenchmarkNotSupportedError(RuntimeError):
-    pass
-
-
-@dataclass(frozen=True)
-class CompoundComparison:
-    compound: str
-    measured_ppb: float
-    predicted_ppb: float
-    matched_name: Optional[str]
-    uncertainty_pct: Optional[float]
-    match_score: float = 0.0
-
-    @property
-    def ratio(self) -> float:
-        smallest = min(self.measured_ppb, self.predicted_ppb)
-        largest = max(self.measured_ppb, self.predicted_ppb)
-        if smallest <= 0.0:
-            return math.inf if largest > 0.0 else 1.0
-        return largest / smallest
-
-
-@dataclass(frozen=True)
-class BenchmarkEvaluation:
-    benchmark_id: str
-    bench_file: Path
-    supported: bool
-    reason: Optional[str]
-    predicted_ppb: Dict[str, float]
-    comparisons: List[CompoundComparison]
-    pearson_r: Optional[float]
-    mae_ppb: Optional[float]
-    projection_metadata: Dict[str, Dict[str, Any]] = field(default_factory=dict)
-    reference_signal_origin: str = "measured_volatiles"
-
-    @property
-    def coverage(self) -> float:
-        if not self.comparisons:
-            return 0.0
-        matched = sum(1 for comparison in self.comparisons if comparison.matched_name is not None)
-        return matched / len(self.comparisons)
-
-
-@dataclass(frozen=True)
-class BenchmarkSummary:
-    benchmark_id: str
-    bench_file: Path
-    tier: str
-    family: str
-    execution_path: str
-    benchmark_engine: str
-    comparator_signal: str
-    cantera_role: str
-    target_snapshot_policy: str
-    thermodynamic_gating_policy: str
-    supported: bool
-    reason: Optional[str]
-    protein_type: str
-    coverage: float
-    matched_compounds: int
-    total_compounds: int
-    pearson_r: Optional[float]
-    mae_ppb: Optional[float]
-    max_ratio: Optional[float]
-    mean_ratio: Optional[float]
-    ranking_status: str
-    scale_status: str
-    overall_status: str
-    strict_ready: bool
-    blocking_issues: List[str]
-    conditions: Dict[str, float]
-    process_state: Optional[str] = None
-    ranked_observable_targets: List[str] = field(default_factory=list)
-    adverse_markers: List[str] = field(default_factory=list)
-    ranking_contract_status: str = "n/a"
-    calibration_mode: Optional[str] = None
-    reference_signal_origin: str = "measured_volatiles"
-
-
-@dataclass(frozen=True)
-class MatrixBenchmarkDelta:
-    benchmark_id: str
-    bench_file: Path
-    protein_type: str
-    execution_path: str
-    process_state: Optional[str]
-    reference_signal_origin: str
-    ranking_contract_status: str
-    compound: str
-    role: str
-    reference_ppb: float
-    predicted_ppb: float
-    abs_delta_ppb: float
-    pct_delta: Optional[float]
-    ratio: float
-    calibration_source: str
-    calibration_evidence_strength: str
-    calibration_fallback_mode: str
-
-
-@dataclass(frozen=True)
-class MatrixBenchmarkEvidence:
-    benchmark_id: str
-    bench_file: Path
-    protein_type: str
-    execution_path: str
-    process_state: Optional[str]
-    reference_signal_origin: str
-    source_origin: str
-    source_reference: str
-    target_profile: str
-    external_data_status: str
-    promotable: bool
-    promotion_blocker: str
-
-
-@dataclass(frozen=True)
-class MatrixBenchmarkBranchDelta:
-    benchmark_id: str
-    compound: str
-    change_type: str
-    current_present: bool
-    baseline_present: bool
-    current_execution_path: str
-    baseline_execution_path: str
-    current_reference_signal_origin: str
-    baseline_reference_signal_origin: str
-    current_source_origin: str
-    baseline_source_origin: str
-    current_external_data_status: str
-    baseline_external_data_status: str
-    current_predicted_ppb: Optional[float]
-    baseline_predicted_ppb: Optional[float]
-    predicted_delta_ppb: Optional[float]
-    current_ratio: Optional[float]
-    baseline_ratio: Optional[float]
-    ratio_delta: Optional[float]
-
-
-@dataclass(frozen=True)
-class MatrixBenchmarkAssertion:
-    benchmark_id: str
-    bench_file: Path
-    protein_type: str
-    execution_path: str
-    process_state: Optional[str]
-    target_profile: str
-    ranking_contract_status: str
-    coverage: float
-    min_coverage: float
-    top_k: int
-    top_k_hits: int
-    top_k_status: str
-    adverse_order_status: str
-    max_ratio: Optional[float]
-    ratio_tolerance: float
-    ratio_status: str
-    overall_status: str
-    strict_gate_blocked: bool
-    blocker: str
-
-
-@dataclass(frozen=True)
-class MatrixPromotionFamilyStatus:
-    protein_type: str
-    off_flavour_anchor_count: int
-    meaty_candidate_count: int
-    external_meaty_anchor_count: int
-    candidate_set_ready: bool
-    external_assessment_unlocked: bool
-    blocker: str
-
-
-@dataclass(frozen=True)
-class BenchmarkTargetSnapshot:
-    benchmark_id: str
-    bench_file: Path
-    target_name: str
-    target_type: str
-    roles: List[str]
-    predicted_ppb: float
-    proxy_ppb: float
-    observable_ratio: float
-    weighted_flux: float
-    span: float
-    depth: int
-    volatile_class: str
-    matrix_factor: float
-    headspace_factor: float
-    headspace_observable: bool
-    headspace_class: str
-    henry_kaw_25c: Optional[float]
-    henry_source_name: Optional[str]
-
-
-@dataclass(frozen=True)
-class ThermodynamicGatingAudit:
-    benchmark_id: str
-    bench_file: Path
-    execution_path: str
-    applicable: bool
-    baseline_overall_status: str
-    gated_overall_status: str
-    baseline_mae_ppb: Optional[float]
-    gated_mae_ppb: Optional[float]
-    baseline_max_ratio: Optional[float]
-    gated_max_ratio: Optional[float]
-    delta_mae_ppb: Optional[float]
-    delta_max_ratio: Optional[float]
-    material_improvement: bool
-    recommended_policy: str
-    notes: str
 
 
 THERMODYNAMIC_GATING_POLICIES = {
@@ -364,13 +143,26 @@ THERMODYNAMIC_GATING_MIN_RATIO_IMPROVEMENT = 0.05
 
 
 def get_matrix_ranking_contract(bench: dict | Path | str) -> Dict[str, Any]:
+    from src.matrix_targets import get_compound_evidence_state, get_compound_target_class
+
     if isinstance(bench, (Path, str)):
         bench = load_benchmark(bench)
     contract = bench.get("matrix_ranking_contract") or {}
     process_metadata = bench.get("process_metadata") or {}
-    observable_targets = [
+    
+    raw_observable_targets = [
         item for item in contract.get("observable_targets", []) if isinstance(item, dict) and item.get("name")
     ]
+    observable_targets = []
+    for item in raw_observable_targets:
+        name = str(item["name"])
+        enriched_item = dict(item)
+        if "evidence_state" not in enriched_item:
+            enriched_item["evidence_state"] = get_compound_evidence_state(name)
+        if "target_class" not in enriched_item:
+            enriched_item["target_class"] = get_compound_target_class(name) or "unknown"
+        observable_targets.append(enriched_item)
+
     adverse_markers = [str(item) for item in contract.get("adverse_markers", [])]
     citation_provenance = [str(item) for item in contract.get("citation_provenance", [])]
     return {
@@ -576,8 +368,7 @@ def benchmark_to_formulation(bench: dict) -> dict:
     return formulation
 
 
-def _normalize_name(name: str) -> str:
-    return re.sub(r"[^a-z0-9]+", "", name.lower())
+from src.text_utils import normalize_compound_name as _normalize_name
 
 
 def _tokenize_name(name: str) -> List[str]:
@@ -666,6 +457,36 @@ def _pearson(values_a: Iterable[float], values_b: Iterable[float]) -> Optional[f
     return numerator / (denom_a * denom_b)
 
 
+def _mean_abs_log10_error(comparisons: Iterable[CompoundComparison]) -> Optional[float]:
+    matched = [comparison for comparison in comparisons if comparison.matched_name is not None]
+    errors = [
+        abs(math.log10(comparison.predicted_ppb / comparison.measured_ppb))
+        for comparison in matched
+        if comparison.measured_ppb > 0.0 and comparison.predicted_ppb > 0.0
+    ]
+    if not errors:
+        return None
+    return sum(errors) / len(errors)
+
+
+def _resolve_scale_thresholds(
+    bench: dict,
+    *,
+    protein_type: str,
+    thresholds: BenchmarkThresholds,
+) -> Dict[str, float]:
+    configured = (bench.get("validation_contract") or {}).get("scale_thresholds") or {}
+    return {
+        "max_ratio": float(configured.get("max_ratio", thresholds.ratio_threshold_for(protein_type))),
+        "mean_abs_log10_error": float(
+            configured.get(
+                "mean_abs_log10_error",
+                thresholds.mean_abs_log10_error_threshold_for(protein_type),
+            )
+        ),
+    }
+
+
 def _build_comparisons(bench: dict, predicted_ppb: Dict[str, float]) -> List[CompoundComparison]:
     comparisons: List[CompoundComparison] = []
     signal_map = bench.get("measured_volatiles") or bench.get("reference_volatiles") or {}
@@ -692,7 +513,7 @@ def _run_benchmark_recommendation(
 ) -> dict:
     formulation = benchmark_to_formulation(bench)
     conditions = benchmark_to_conditions(bench)
-    designer = InverseDesigner(target_tag=target_tag)
+    designer = MaillardPipeline(target_tag=target_tag)
     kinetics = KineticsEngine(temperature_k=conditions.temperature_kelvin)
     gating_mode = resolve_thermodynamic_gating_mode(bench, thermodynamic_gating)
 
@@ -722,7 +543,9 @@ def _run_benchmark_recommendation(
         rxn_key = f"{'+'.join(sorted(r.smiles for r in step.reactants))}->{'+'.join(sorted(p.smiles for p in step.products))}"
         heuristic_barriers[rxn_key] = (max(0.0, bar_eff), unc)
 
-    from src.recommend import Recommender, _canon
+    from src.recommend import Recommender
+    from src.chem_utils import canonicalize_smiles
+    from src.lipid_oxidation import predict_hexanal_generation
 
     initial_concentrations = {}
     ratios = formulation.get("molar_ratios", {})
@@ -732,7 +555,46 @@ def _run_benchmark_recommendation(
             if key.lower() in precursor.label.lower() or precursor.label.lower() in key.lower():
                 qty = float(value)
                 break
-        initial_concentrations[_canon(precursor.smiles)] = qty
+        initial_concentrations[canonicalize_smiles(precursor.smiles, fallback_to_original=True, strip_salts=True)] = qty
+
+    protein_type = formulation.get("protein_type", "free")
+    model = MATRIX_BENCHMARK_PROFILES.get(protein_type)
+    if model is not None:
+        oxidation = predict_hexanal_generation(
+            model["lipid_profile"],
+            temp_C=float(conditions.temperature_celsius),
+            time_min=float(formulation.get("time_minutes", 60.0)),
+            oxygen_availability=1.0,
+        )
+        oxidation_load_ppb = float(oxidation["total_hydroperoxide"]) * 1000.0
+        # Convert ppb to a proxy molar concentration. The framework's recommend engine converts molar -> ppb using ppb_conversion_factor later.
+        # But wait, predict_hexanal_generation gives total_hydroperoxide load which drives hexanal and nonanal.
+        # Since the matrix_only path uses MATRIX_BENCHMARK_BASE_MARKER_YIELDS, and recommend.py applies its own logic,
+        # we can just inject the specific SMILES for Hexanal, Nonanal directly into initial_concentrations so the recommender projects them.
+        # Actually, if we inject them, recommender will project them as observables.
+        # Let's inject Hexanal (CCCCCC=O), Nonanal (CCCCCCCCC=O), 1-Hexanol (CCCCCCO), 2-Pentylfuran (CCCCC1=CC=CO1)
+        # We need their proxy mass to align with the yield factors.
+        # Proxy ppb in the matrix_only path was: oxidation_load_ppb * yield_factor.
+        # So we want initial_concentrations to be (oxidation_load_ppb * yield_factor / MW) / ppb_conversion_factor
+        from src.benchmark_validation import MATRIX_BENCHMARK_BASE_MARKER_YIELDS
+        from src.projection import DEFAULT_PROJECTION_STRATEGY
+        for compound_name, yield_factor in MATRIX_BENCHMARK_BASE_MARKER_YIELDS.items():
+            from rdkit import Chem
+            smiles_map = {
+                "Hexanal": "CCCCCC=O",
+                "Nonanal": "CCCCCCCCC=O",
+                "1-Hexanol": "CCCCCCO",
+                "2-Pentylfuran": "CCCCC1=CC=CO1"
+            }
+            smi = smiles_map.get(compound_name)
+            if smi:
+                mol = Chem.MolFromSmiles(smi)
+                mw = sum(atom.GetMass() for atom in mol.GetAtoms()) if mol else 100.0
+                target_proxy_ppb = oxidation_load_ppb * float(yield_factor)
+                # target_proxy_ppb = molar_concentration * mw * ppb_conversion_factor
+                molar_conc = target_proxy_ppb / (mw * DEFAULT_PROJECTION_STRATEGY.ppb_conversion_factor)
+                canon = canonicalize_smiles(smi, fallback_to_original=True, strip_salts=True)
+                initial_concentrations[canon] = initial_concentrations.get(canon, 0.0) + molar_conc
 
     rec = Recommender()
     return rec.predict_from_steps(
@@ -740,9 +602,9 @@ def _run_benchmark_recommendation(
         heuristic_barriers,
         initial_concentrations,
         temperature_kelvin=conditions.temperature_kelvin,
-        time_minutes=formulation.get("time_minutes"),
-        protein_type=formulation.get("protein_type", "free"),
-        denaturation_state=formulation.get("denaturation_state", 0.5),
+        time_minutes=float(formulation.get("time_minutes", 60.0)),
+        protein_type=protein_type,
+        denaturation_state=float(bench.get("denaturation_state", 0.5)),
     )
 
 
@@ -758,6 +620,7 @@ def _run_matrix_only_benchmark_prediction(bench: dict) -> dict:
         determine_matrix_process_state(
             temperature_celsius=float(conditions["temp_C"]),
             time_minutes=float(conditions["time_min"]),
+            water_activity=conditions.get("aw"),
         ),
     ))
     oxidation = predict_hexanal_generation(
@@ -771,6 +634,8 @@ def _run_matrix_only_benchmark_prediction(bench: dict) -> dict:
     pH = conditions.get("ph")
 
     predicted_ppb: Dict[str, float] = {}
+    predicted_proxy_ppb: Dict[str, float] = {}
+    projection_metadata: Dict[str, Dict[str, Any]] = {}
     for compound, yield_factor in MATRIX_BENCHMARK_BASE_MARKER_YIELDS.items():
         headspace_factor = headspace_model.get_matrix_benchmark_headspace_factor(
             compound,
@@ -778,8 +643,33 @@ def _run_matrix_only_benchmark_prediction(bench: dict) -> dict:
             pH=pH,
             temperature_celsius=float(conditions["temp_C"]),
             time_minutes=float(conditions["time_min"]),
+            water_activity=conditions.get("aw"),
         )
-        predicted_ppb[compound] = oxidation_load_ppb * float(yield_factor) * headspace_factor
+        calibration = describe_matrix_calibration(
+            compound,
+            protein_type=protein_type,
+            process_state=process_state,
+        )
+        panel_entry = get_compound_panel_entry(compound) or {}
+        calibration_factor = float(calibration.get("calibration_observable_factor") or 1.0)
+        release_factor = headspace_factor / calibration_factor if calibration_factor > 0.0 else headspace_factor
+        proxy_ppb = oxidation_load_ppb * float(yield_factor) * release_factor
+        observable_ppb = proxy_ppb * calibration_factor
+        predicted_proxy_ppb[compound] = proxy_ppb
+        predicted_ppb[compound] = observable_ppb
+        projection_metadata[compound] = make_projection_metadata_row(
+            compound=compound,
+            proxy_ppb=proxy_ppb,
+            observable_ppb=observable_ppb,
+            extras={
+                "matrix_factor": 1.0,
+                "headspace_factor": release_factor,
+                "total_observable_factor": headspace_factor,
+                "process_state": process_state,
+                **panel_entry,
+                **calibration,
+            },
+        )
 
     return {
         "targets": [],
@@ -788,29 +678,8 @@ def _run_matrix_only_benchmark_prediction(bench: dict) -> dict:
             "oxidation_load_ppb": oxidation_load_ppb,
         },
         "predicted_ppb": predicted_ppb,
-        "predicted_proxy_ppb": dict(predicted_ppb),
-        "projection_metadata": {
-            compound: {
-                "compound": compound,
-                "proxy_ppb": value,
-                "matrix_factor": 1.0,
-                "headspace_factor": headspace_model.get_matrix_benchmark_headspace_factor(
-                    compound,
-                    protein_type=protein_type,
-                    pH=pH,
-                    temperature_celsius=float(conditions["temp_C"]),
-                    time_minutes=float(conditions["time_min"]),
-                ),
-                "observable_ppb": value,
-                "process_state": process_state,
-                **describe_matrix_calibration(
-                    compound,
-                    protein_type=protein_type,
-                    process_state=process_state,
-                ),
-            }
-            for compound, value in predicted_ppb.items()
-        },
+        "predicted_proxy_ppb": predicted_proxy_ppb,
+        "projection_metadata": projection_metadata,
         "debug_paths": {},
         "species_names": {compound: compound for compound in predicted_ppb},
     }
@@ -905,9 +774,16 @@ def summarize_evaluation(
     ratios = [comparison.ratio for comparison in matched if math.isfinite(comparison.ratio)]
     max_ratio = max(ratios) if ratios else None
     mean_ratio = sum(ratios) / len(ratios) if ratios else None
-    ratio_threshold = thresholds.ratio_threshold_for(protein_type)
+    mean_abs_log10_error = _mean_abs_log10_error(matched)
 
     bench = load_benchmark(evaluation.bench_file)
+    scale_thresholds = _resolve_scale_thresholds(
+        bench,
+        protein_type=protein_type,
+        thresholds=thresholds,
+    )
+    ratio_threshold = scale_thresholds["max_ratio"]
+    log_error_threshold = scale_thresholds["mean_abs_log10_error"]
     metadata = get_benchmark_metadata(bench)
     conditions = bench.get("conditions", {})
     ranking_contract = _evaluate_matrix_ranking_contract(bench, evaluation.predicted_ppb) if metadata.execution_path in {"matrix_only", "matrix_precursor_augmented"} else {
@@ -952,6 +828,7 @@ def summarize_evaluation(
             ranking_contract_status=str(ranking_contract.get("status", "n/a")),
             calibration_mode=matrix_contract.get("calibration_mode"),
             reference_signal_origin=evaluation.reference_signal_origin,
+            mean_abs_log10_error=None,
         )
 
     if len(matched) >= thresholds.min_matched_for_ranking and evaluation.pearson_r is not None:
@@ -963,7 +840,9 @@ def summarize_evaluation(
 
     if max_ratio is None:
         scale_status = "fail"
-    elif max_ratio <= ratio_threshold:
+    elif max_ratio <= ratio_threshold and (
+        mean_abs_log10_error is None or mean_abs_log10_error <= log_error_threshold
+    ):
         scale_status = "pass"
     else:
         scale_status = "fail"
@@ -993,6 +872,10 @@ def summarize_evaluation(
         blocking_issues.append(
             f"max ratio {ratio_value} > {ratio_threshold:.2f}"
         )
+        if mean_abs_log10_error is not None and mean_abs_log10_error > log_error_threshold:
+            blocking_issues.append(
+                f"mean |log10 ratio| {mean_abs_log10_error:.3f} > {log_error_threshold:.3f}"
+            )
 
     strict_ready = (
         evaluation.coverage >= thresholds.full_coverage_threshold
@@ -1043,6 +926,7 @@ def summarize_evaluation(
         ranking_contract_status=str(ranking_contract.get("status", "n/a")),
         calibration_mode=matrix_contract.get("calibration_mode"),
         reference_signal_origin=evaluation.reference_signal_origin,
+        mean_abs_log10_error=mean_abs_log10_error,
     )
 
 
@@ -1221,24 +1105,7 @@ def build_matrix_benchmark_evidence_audit(
     return rows
 
 
-def render_matrix_benchmark_evidence_markdown(rows: Iterable[MatrixBenchmarkEvidence]) -> str:
-    evidence_rows = list(rows)
-    lines = [
-        "# Matrix Benchmark Evidence Audit",
-        "",
-        "| Benchmark | Protein | Path | Process State | Target Profile | Reference Origin | Source Origin | External Data Status | Promotable | Blocker | Source |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
-    ]
-    for row in evidence_rows:
-        lines.append(
-            f"| {row.benchmark_id} | {row.protein_type} | {row.execution_path} | {row.process_state or 'n/a'} | {row.target_profile} | {row.reference_signal_origin} | {row.source_origin} | {row.external_data_status} | {'yes' if row.promotable else 'no'} | {row.promotion_blocker or 'none'} | {row.source_reference} |"
-        )
-    lines.extend([
-        "",
-        f"Benchmarks audited: {len(evidence_rows)}",
-        f"Externally promotable meaty-positive matrix benchmarks: {sum(1 for row in evidence_rows if row.promotable)}",
-    ])
-    return "\n".join(lines) + "\n"
+
 
 
 def _matrix_assertion_thresholds(
@@ -1248,7 +1115,8 @@ def _matrix_assertion_thresholds(
     thresholds: BenchmarkThresholds,
 ) -> Dict[str, float]:
     contract = bench.get("matrix_ranking_contract") or {}
-    configured = contract.get("assertion_thresholds") or {}
+    # P1: Check for either the legacy assertion_thresholds or the new validation_contract.scale_thresholds
+    configured = contract.get("assertion_thresholds") or contract.get("validation_contract", {}).get("scale_thresholds") or {}
     observable_targets = get_matrix_ranking_contract(bench).get("observable_targets", [])
     return {
         "min_coverage": float(configured.get("min_coverage", thresholds.full_coverage_threshold)),
@@ -1449,25 +1317,164 @@ def build_matrix_promotion_family_status(
     return rows
 
 
-def render_matrix_promotion_family_status_markdown(rows: Iterable[MatrixPromotionFamilyStatus]) -> str:
-    family_rows = list(rows)
-    lines = [
-        "# Matrix Promotion Family Readiness",
-        "",
-        "| Protein | Off-flavour Anchors | Meaty Candidates | External Meaty Anchors | Candidate Set Ready | External Assessment Unlocked | Blocker |",
-        "| --- | ---: | ---: | ---: | --- | --- | --- |",
-    ]
-    for row in family_rows:
-        lines.append(
-            f"| {row.protein_type} | {row.off_flavour_anchor_count} | {row.meaty_candidate_count} | {row.external_meaty_anchor_count} | {'yes' if row.candidate_set_ready else 'no'} | {'yes' if row.external_assessment_unlocked else 'no'} | {row.blocker} |"
+def _matrix_compound_support_status(
+    *,
+    evidence_state: str,
+    calibration_evidence_strength: str,
+    reference_signal_origin: str,
+    source_origin: str,
+) -> str:
+    evidence = str(evidence_state).strip().lower()
+    strength = str(calibration_evidence_strength).strip().lower()
+    signal_origin = str(reference_signal_origin).strip().lower()
+    origin = str(source_origin).strip().lower()
+
+    if evidence == "externally_benchmarked" and signal_origin == "measured_volatiles" and origin.startswith("external"):
+        return "quantitative_closed"
+    if evidence in {"internally_benchmarked", "conditional_calibration"} or signal_origin == "reference_volatiles":
+        return "internal_candidate"
+    if evidence in {"transferred_prior", "safety_reference"} or strength in {"class_anchored", "directional_transferred"}:
+        return "directional_support"
+    return "open_gap"
+
+
+def build_matrix_target_status_artifact(
+    benchmark_files: Optional[Iterable[Path | str]] = None,
+    *,
+    target_tag: str = DEFAULT_TARGET_TAG,
+) -> Dict[str, Any]:
+    bench_files = list(benchmark_files) if benchmark_files is not None else get_benchmark_files()
+    benchmark_rows: List[Dict[str, Any]] = []
+    support_totals = {
+        "quantitative_closed": 0,
+        "internal_candidate": 0,
+        "directional_support": 0,
+        "open_gap": 0,
+    }
+
+    for bench_file in bench_files:
+        bench = load_benchmark(bench_file)
+        metadata = get_benchmark_metadata(bench)
+        if metadata.execution_path not in {"matrix_only", "matrix_precursor_augmented"}:
+            continue
+
+        evaluation = evaluate_benchmark(bench_file, target_tag=target_tag)
+        summary = summarize_evaluation(evaluation, protein_type=str(bench.get("protein_type", "free")))
+        evidence = assess_matrix_benchmark_evidence(bench_file)
+        contract = get_matrix_ranking_contract(bench)
+        adverse_markers = {str(item).strip().lower() for item in contract.get("adverse_markers", [])}
+        compounds: List[Dict[str, Any]] = []
+        benchmark_counts = {
+            "quantitative_closed": 0,
+            "internal_candidate": 0,
+            "directional_support": 0,
+            "open_gap": 0,
+        }
+
+        for item in contract.get("observable_targets", []):
+            compound_name = str(item.get("name", "")).strip()
+            if not compound_name:
+                continue
+            meta = _projection_metadata_for_match(
+                evaluation,
+                CompoundComparison(
+                    compound=compound_name,
+                    measured_ppb=0.0,
+                    predicted_ppb=0.0,
+                    matched_name=None,
+                    uncertainty_pct=None,
+                ),
+            )
+            role = str(item.get("role", "adverse_marker" if compound_name.lower() in adverse_markers else "desirable_marker"))
+            support_status = _matrix_compound_support_status(
+                evidence_state=str(meta.get("evidence_state", item.get("evidence_state", "still_missing"))),
+                calibration_evidence_strength=str(meta.get("calibration_evidence_strength", "heuristic")),
+                reference_signal_origin=summary.reference_signal_origin,
+                source_origin=evidence.source_origin,
+            )
+            benchmark_counts[support_status] += 1
+            support_totals[support_status] += 1
+            compounds.append(
+                {
+                    "compound": compound_name,
+                    "role": role,
+                    "target_class": str(meta.get("target_class", item.get("target_class", "unknown"))),
+                    "evidence_state": str(meta.get("evidence_state", item.get("evidence_state", "still_missing"))),
+                    "calibration_source": str(meta.get("calibration_source", "unknown")),
+                    "calibration_evidence_strength": str(meta.get("calibration_evidence_strength", "heuristic")),
+                    "support_status": support_status,
+                }
+            )
+
+        external_decision_ready = (
+            evidence.target_profile in {"mixed", "meaty_positive"}
+            and summary.ranking_contract_status == "pass"
+            and benchmark_counts["quantitative_closed"] >= 2
+            and benchmark_counts["internal_candidate"] == 0
+            and benchmark_counts["directional_support"] == 0
         )
-    lines.extend([
-        "",
-        f"Protein families covered: {len(family_rows)}",
-        f"Candidate sets ready: {sum(1 for row in family_rows if row.candidate_set_ready)}",
-        f"External assessments unlocked: {sum(1 for row in family_rows if row.external_assessment_unlocked)}",
-    ])
-    return "\n".join(lines) + "\n"
+        mechanistic_priority_ready = (
+            evidence.target_profile in {"mixed", "meaty_positive"}
+            and summary.ranking_contract_status == "pass"
+            and not external_decision_ready
+            and (benchmark_counts["internal_candidate"] + benchmark_counts["directional_support"]) >= 1
+        )
+        if evidence.target_profile not in {"mixed", "meaty_positive"}:
+            promotion_blocker = "benchmark lacks meaty-positive targets"
+        elif summary.ranking_contract_status != "pass":
+            promotion_blocker = "ranking contract not yet passing"
+        elif benchmark_counts["quantitative_closed"] < 2:
+            promotion_blocker = "insufficient externally measured target closure"
+        elif benchmark_counts["internal_candidate"] > 0 or benchmark_counts["directional_support"] > 0:
+            promotion_blocker = "depends on internal or transferred support"
+        else:
+            promotion_blocker = "none"
+
+        if external_decision_ready:
+            next_best_action = "use_for_external_decision"
+        elif mechanistic_priority_ready:
+            next_best_action = "prioritize_mechanistic_refinement"
+        elif evidence.target_profile in {"mixed", "meaty_positive"}:
+            next_best_action = "seek_external_data"
+        else:
+            next_best_action = "retain_as_adverse_anchor"
+
+        benchmark_rows.append(
+            {
+                "benchmark_id": summary.benchmark_id,
+                "bench_file": str(summary.bench_file),
+                "protein_type": summary.protein_type,
+                "execution_path": summary.execution_path,
+                "process_state": summary.process_state,
+                "target_profile": evidence.target_profile,
+                "reference_signal_origin": summary.reference_signal_origin,
+                "source_origin": evidence.source_origin,
+                "ranking_contract_status": summary.ranking_contract_status,
+                "support_counts": benchmark_counts,
+                "quantitative_support_ready": benchmark_counts["quantitative_closed"] > 0,
+                "promotion_ready": external_decision_ready,
+                "mechanistic_priority_ready": mechanistic_priority_ready,
+                "promotion_blocker": promotion_blocker,
+                "next_best_action": next_best_action,
+                "compounds": compounds,
+            }
+        )
+
+    return {
+        "schema_version": "1.0",
+        "description": "Matrix target support status artifact distinguishing external decision-ready support from mechanistic-priority candidates and unresolved external gaps.",
+        "benchmarks": benchmark_rows,
+        "summary": {
+            "total_benchmarks": len(benchmark_rows),
+            "quantitative_support_ready": sum(1 for row in benchmark_rows if row["quantitative_support_ready"]),
+            "promotion_ready": sum(1 for row in benchmark_rows if row["promotion_ready"]),
+            "mechanistic_priority_ready": sum(1 for row in benchmark_rows if row["mechanistic_priority_ready"]),
+            **support_totals,
+        },
+    }
+
+
+
 
 
 def compare_matrix_benchmark_delta_sets(
@@ -1572,25 +1579,7 @@ def render_matrix_branch_deltas_markdown(
     return "\n".join(lines) + "\n"
 
 
-def render_matrix_benchmark_deltas_markdown(rows: Iterable[MatrixBenchmarkDelta]) -> str:
-    deltas = list(rows)
-    lines = [
-        "# Matrix Benchmark Deltas",
-        "",
-        "| Benchmark | Protein | Path | Process State | Reference Origin | Ranking Contract | Compound | Role | Reference ppb | Predicted ppb | Abs Δ ppb | Δ % | Ratio | Calibration | Evidence | Fallback |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |",
-    ]
-    for row in deltas:
-        pct = f"{100.0 * row.pct_delta:.1f}%" if row.pct_delta is not None else "n/a"
-        lines.append(
-            f"| {row.benchmark_id} | {row.protein_type} | {row.execution_path} | {row.process_state or 'n/a'} | {row.reference_signal_origin} | {row.ranking_contract_status} | {row.compound} | {row.role} | {row.reference_ppb:.3f} | {row.predicted_ppb:.3f} | {row.abs_delta_ppb:.3f} | {pct} | {row.ratio:.3f} | {row.calibration_source} | {row.calibration_evidence_strength} | {row.calibration_fallback_mode} |"
-        )
-    lines.extend([
-        "",
-        f"Delta rows: {len(deltas)}",
-        f"Benchmarks covered: {len({row.benchmark_id for row in deltas})}",
-    ])
-    return "\n".join(lines) + "\n"
+
 
 
 def summarize_benchmarks(
@@ -1610,12 +1599,18 @@ def summarize_benchmarks(
             thresholds=thresholds,
         )
         if not evaluation.supported:
+            metadata = get_benchmark_metadata(bench)
             summary = BenchmarkSummary(
                 benchmark_id=summary.benchmark_id,
                 bench_file=summary.bench_file,
                 tier=metadata.tier,
                 family=metadata.family,
                 execution_path=metadata.execution_path,
+                benchmark_engine=metadata.benchmark_engine,
+                comparator_signal=metadata.comparator_signal,
+                cantera_role=metadata.cantera_role,
+                target_snapshot_policy=metadata.target_snapshot_policy,
+                thermodynamic_gating_policy=metadata.thermodynamic_gating_policy,
                 supported=summary.supported,
                 reason=summary.reason,
                 protein_type=summary.protein_type,
@@ -1633,8 +1628,248 @@ def summarize_benchmarks(
                 blocking_issues=summary.blocking_issues,
                 conditions=bench.get("conditions", {}),
             )
-        summaries.append(summary)
+        summaries.append(_enrich_benchmark_summary_family_metadata(summary, bench))
     return summaries
+
+
+def _payload_role_from_evidence_state(evidence_state: str) -> str:
+    normalized = str(evidence_state).strip().lower()
+    if normalized in {"externally_benchmarked", "internally_benchmarked"}:
+        return "benchmark_payload"
+    if normalized == "conditional_calibration":
+        return "calibration_payload"
+    if normalized in {"transferred_prior", "safety_reference"}:
+        return "directional_prior"
+    return "structural_gap_extrapolation"
+
+
+def _benchmark_compound_names(bench: dict, summary: BenchmarkSummary) -> List[str]:
+    names: List[str] = []
+    measured = bench.get("measured_volatiles", {}) or {}
+    if isinstance(measured, dict):
+        names.extend(str(name) for name in measured.keys())
+    reference = bench.get("reference_volatiles", {}) or {}
+    if isinstance(reference, dict):
+        names.extend(str(name) for name in reference.keys())
+    names.extend(str(name) for name in summary.ranked_observable_targets)
+    names.extend(str(name) for name in summary.adverse_markers)
+    deduped: List[str] = []
+    seen: set[str] = set()
+    for name in names:
+        normalized = _normalize_name(name)
+        if not normalized or normalized in seen:
+            continue
+        seen.add(normalized)
+        deduped.append(str(name))
+    return deduped
+
+
+def _enrich_benchmark_summary_family_metadata(summary: BenchmarkSummary, bench: dict) -> BenchmarkSummary:
+    chemistry_families: List[str] = []
+    slr_families: List[str] = []
+    family_lane_names: List[str] = []
+    payload_roles: List[str] = []
+
+    for compound_name in _benchmark_compound_names(bench, summary):
+        panel_entry = get_compound_panel_entry(compound_name) or {}
+        chemistry_family = str(panel_entry.get("chemistry_family", "")).strip()
+        if not chemistry_family:
+            continue
+        descriptor = resolve_family_descriptor(chemistry_family)
+        chemistry_families.append(chemistry_family)
+        if descriptor:
+            slr_families.append(str(descriptor.get("slr_family", "")).zfill(2))
+            family_lane_names.append(str(descriptor.get("display_name", chemistry_family)))
+        payload_roles.append(_payload_role_from_evidence_state(str(panel_entry.get("evidence_state", "still_missing"))))
+
+    return BenchmarkSummary(
+        benchmark_id=summary.benchmark_id,
+        bench_file=summary.bench_file,
+        tier=summary.tier,
+        family=summary.family,
+        execution_path=summary.execution_path,
+        benchmark_engine=summary.benchmark_engine,
+        comparator_signal=summary.comparator_signal,
+        cantera_role=summary.cantera_role,
+        target_snapshot_policy=summary.target_snapshot_policy,
+        thermodynamic_gating_policy=summary.thermodynamic_gating_policy,
+        supported=summary.supported,
+        reason=summary.reason,
+        protein_type=summary.protein_type,
+        coverage=summary.coverage,
+        matched_compounds=summary.matched_compounds,
+        total_compounds=summary.total_compounds,
+        pearson_r=summary.pearson_r,
+        mae_ppb=summary.mae_ppb,
+        max_ratio=summary.max_ratio,
+        mean_ratio=summary.mean_ratio,
+        ranking_status=summary.ranking_status,
+        scale_status=summary.scale_status,
+        overall_status=summary.overall_status,
+        strict_ready=summary.strict_ready,
+        blocking_issues=list(summary.blocking_issues),
+        conditions=dict(summary.conditions),
+        process_state=summary.process_state,
+        ranked_observable_targets=list(summary.ranked_observable_targets),
+        adverse_markers=list(summary.adverse_markers),
+        ranking_contract_status=summary.ranking_contract_status,
+        calibration_mode=summary.calibration_mode,
+        reference_signal_origin=summary.reference_signal_origin,
+        mean_abs_log10_error=summary.mean_abs_log10_error,
+        chemistry_families=sorted(dict.fromkeys(chemistry_families)),
+        slr_families=sorted(dict.fromkeys(slr_families)),
+        payload_roles=sorted(dict.fromkeys(payload_roles)),
+        family_lane_names=sorted(dict.fromkeys(family_lane_names)),
+    )
+
+
+def build_family_lane_validation_artifact(
+    benchmark_files: Optional[Iterable[Path | str]] = None,
+    *,
+    target_tag: str = DEFAULT_TARGET_TAG,
+    thresholds: BenchmarkThresholds = DEFAULT_BENCHMARK_THRESHOLDS,
+) -> Dict[str, Any]:
+    summaries = summarize_benchmarks(benchmark_files, target_tag=target_tag, thresholds=thresholds)
+    enriched_summaries: List[BenchmarkSummary] = []
+    for summary in summaries:
+        bench = load_benchmark(summary.bench_file)
+        enriched_summaries.append(_enrich_benchmark_summary_family_metadata(summary, bench))
+
+    family_rows: List[Dict[str, Any]] = []
+    family_groups: Dict[str, Dict[str, Any]] = {}
+    lane_groups: Dict[str, Dict[str, Any]] = defaultdict(lambda: {
+        "execution_path": "unknown",
+        "benchmark_count": 0,
+        "strict_ready_count": 0,
+        "supported_count": 0,
+        "status_counts": defaultdict(int),
+        "chemistry_families": set(),
+        "payload_roles": set(),
+    })
+
+    for summary in enriched_summaries:
+        lane_bucket = lane_groups[summary.execution_path]
+        lane_bucket["execution_path"] = summary.execution_path
+        lane_bucket["benchmark_count"] += 1
+        lane_bucket["strict_ready_count"] += int(bool(summary.strict_ready))
+        lane_bucket["supported_count"] += int(bool(summary.supported))
+        lane_bucket["status_counts"][summary.overall_status] += 1
+        lane_bucket["chemistry_families"].update(summary.chemistry_families)
+        lane_bucket["payload_roles"].update(summary.payload_roles)
+
+        for chemistry_family in summary.chemistry_families:
+            descriptor = resolve_family_descriptor(chemistry_family)
+            family_bucket = family_groups.setdefault(
+                chemistry_family,
+                {
+                    "chemistry_family": chemistry_family,
+                    "slr_family": str(descriptor.get("slr_family", "")).zfill(2) if descriptor else "",
+                    "display_name": str(descriptor.get("display_name", chemistry_family)) if descriptor else chemistry_family,
+                    "strategic_posture": str(descriptor.get("strategic_posture", "unknown")) if descriptor else "unknown",
+                    "benchmark_count": 0,
+                    "strict_ready_count": 0,
+                    "supported_count": 0,
+                    "status_counts": defaultdict(int),
+                    "execution_paths": defaultdict(int),
+                    "payload_roles": set(),
+                    "benchmark_ids": [],
+                },
+            )
+            family_bucket["benchmark_count"] += 1
+            family_bucket["strict_ready_count"] += int(bool(summary.strict_ready))
+            family_bucket["supported_count"] += int(bool(summary.supported))
+            family_bucket["status_counts"][summary.overall_status] += 1
+            family_bucket["execution_paths"][summary.execution_path] += 1
+            family_bucket["payload_roles"].update(summary.payload_roles)
+            family_bucket["benchmark_ids"].append(summary.benchmark_id)
+
+    for chemistry_family, row in sorted(family_groups.items(), key=lambda item: (item[1]["slr_family"], item[0])):
+        family_rows.append(
+            {
+                "chemistry_family": chemistry_family,
+                "slr_family": row["slr_family"],
+                "display_name": row["display_name"],
+                "strategic_posture": row["strategic_posture"],
+                "benchmark_count": int(row["benchmark_count"]),
+                "strict_ready_count": int(row["strict_ready_count"]),
+                "supported_count": int(row["supported_count"]),
+                "status_counts": dict(sorted(row["status_counts"].items())),
+                "execution_paths": dict(sorted(row["execution_paths"].items())),
+                "payload_roles": sorted(row["payload_roles"]),
+                "benchmark_ids": sorted(dict.fromkeys(row["benchmark_ids"])),
+            }
+        )
+
+    lane_rows: List[Dict[str, Any]] = []
+    for execution_path, row in sorted(lane_groups.items()):
+        lane_rows.append(
+            {
+                "execution_path": execution_path,
+                "benchmark_count": int(row["benchmark_count"]),
+                "strict_ready_count": int(row["strict_ready_count"]),
+                "supported_count": int(row["supported_count"]),
+                "status_counts": dict(sorted(row["status_counts"].items())),
+                "chemistry_families": sorted(row["chemistry_families"]),
+                "payload_roles": sorted(row["payload_roles"]),
+            }
+        )
+
+    return {
+        "summary": {
+            "benchmark_count": len(enriched_summaries),
+            "family_count": len(family_rows),
+            "lane_count": len(lane_rows),
+            "tracked_execution_paths": [row["execution_path"] for row in lane_rows],
+        },
+        "families": family_rows,
+        "lanes": lane_rows,
+        "benchmarks": [
+            {
+                "benchmark_id": summary.benchmark_id,
+                "execution_path": summary.execution_path,
+                "overall_status": summary.overall_status,
+                "strict_ready": bool(summary.strict_ready),
+                "chemistry_families": list(summary.chemistry_families),
+                "slr_families": list(summary.slr_families),
+                "payload_roles": list(summary.payload_roles),
+                "family_lane_names": list(summary.family_lane_names),
+            }
+            for summary in enriched_summaries
+        ],
+    }
+
+
+def render_family_lane_validation_markdown(payload: Dict[str, Any]) -> str:
+    lines = [
+        "# Family Lane Validation",
+        "",
+        "| SLR | Family | Posture | Benchmarks | Strict Ready | Supported | Payload Roles | Execution Paths |",
+        "| --- | --- | --- | ---: | ---: | ---: | --- | --- |",
+    ]
+    for row in payload.get("families", []):
+        execution_paths = ", ".join(f"{key}={value}" for key, value in row.get("execution_paths", {}).items()) or "none"
+        lines.append(
+            f"| {row.get('slr_family', '') or 'n/a'} | {row.get('chemistry_family', 'unknown')} | {row.get('strategic_posture', 'unknown')} | {int(row.get('benchmark_count', 0))} | {int(row.get('strict_ready_count', 0))} | {int(row.get('supported_count', 0))} | {', '.join(str(item) for item in row.get('payload_roles', [])) or 'none'} | {execution_paths} |"
+        )
+    lines.extend([
+        "",
+        "## Lane Summary",
+        "",
+        "| Execution Path | Benchmarks | Strict Ready | Supported | Chemistry Families | Payload Roles |",
+        "| --- | ---: | ---: | ---: | --- | --- |",
+    ])
+    for row in payload.get("lanes", []):
+        lines.append(
+            f"| {row.get('execution_path', 'unknown')} | {int(row.get('benchmark_count', 0))} | {int(row.get('strict_ready_count', 0))} | {int(row.get('supported_count', 0))} | {', '.join(str(item) for item in row.get('chemistry_families', [])) or 'none'} | {', '.join(str(item) for item in row.get('payload_roles', [])) or 'none'} |"
+        )
+    summary = payload.get("summary", {})
+    lines.extend([
+        "",
+        f"Benchmarks summarized: {int(summary.get('benchmark_count', 0))}",
+        f"Chemistry families summarized: {int(summary.get('family_count', 0))}",
+        f"Execution lanes summarized: {int(summary.get('lane_count', 0))}",
+    ])
+    return "\n".join(lines) + "\n"
 
 
 def _benchmark_status_score(summary: BenchmarkSummary) -> int:
@@ -1761,27 +1996,6 @@ def audit_all_thermodynamic_gating(
     ]
 
 
-def render_thermodynamic_gating_audit_markdown(rows: Iterable[ThermodynamicGatingAudit]) -> str:
-    audits = list(rows)
-    lines = [
-        "# Thermodynamic Gating Audit",
-        "",
-        "| Benchmark | Path | Applicable | Baseline Status | Gated Status | Δ MAE ppb | Δ Max Ratio | Material | Recommended Policy | Notes |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
-    ]
-    for row in audits:
-        delta_mae = f"{row.delta_mae_ppb:.2f}" if row.delta_mae_ppb is not None else "n/a"
-        delta_ratio = f"{row.delta_max_ratio:.3f}" if row.delta_max_ratio is not None else "n/a"
-        lines.append(
-            f"| {row.benchmark_id} | {row.execution_path} | {'yes' if row.applicable else 'no'} | {row.baseline_overall_status} | {row.gated_overall_status} | {delta_mae} | {delta_ratio} | {'yes' if row.material_improvement else 'no'} | {row.recommended_policy} | {row.notes} |"
-        )
-    lines.extend([
-        "",
-        f"Audited benchmarks: {len(audits)}",
-        f"Material improvements: {sum(1 for row in audits if row.material_improvement)}",
-    ])
-    return "\n".join(lines) + "\n"
-
 
 def snapshot_benchmark_targets(
     bench_file: Path | str,
@@ -1808,6 +2022,8 @@ def snapshot_benchmark_targets(
                 target_name=str(target.get("name", "")),
                 target_type=str(target.get("type", "unknown")),
                 roles=list(target.get("roles", [target.get("type", "unknown")])),
+                target_class=str(target.get("projection", {}).get("target_class", "unknown")),
+                evidence_state=str(target.get("projection", {}).get("evidence_state", "still_missing")),
                 predicted_ppb=float(target.get("concentration", 0.0)),
                 proxy_ppb=float(target.get("proxy_concentration", target.get("concentration", 0.0))),
                 observable_ratio=float(target.get("projection", {}).get("proxy_to_observable_ratio", 1.0)),
@@ -1837,39 +2053,6 @@ def snapshot_all_benchmark_targets(
     return snapshots
 
 
-def render_benchmark_targets_markdown(
-    snapshots: Iterable[BenchmarkTargetSnapshot],
-    *,
-    excluded_benchmark_ids: Optional[Iterable[str]] = None,
-) -> str:
-    rows = list(snapshots)
-    excluded = list(excluded_benchmark_ids or [])
-    lines = [
-        "# Benchmark Targets",
-        "",
-        "| Benchmark | Target | Type | Roles | Proxy ppb | Observable ppb | Obs/Proxy | Matrix | Headspace | Class | Span | Depth | Headspace Class | Kaw 25C | Henry Name |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
-    ]
-
-    for row in rows:
-        kaw = f"{row.henry_kaw_25c:.3e}" if row.henry_kaw_25c is not None else "n/a"
-        lines.append(
-            f"| {row.benchmark_id} | {row.target_name} | {row.target_type} | {', '.join(row.roles)} | {row.proxy_ppb:.3f} | {row.predicted_ppb:.3f} | {row.observable_ratio:.3f} | {row.matrix_factor:.3f} | {row.headspace_factor:.3f} | {row.volatile_class} | {row.span:.3f} | {row.depth} | {row.headspace_class} | {kaw} | {row.henry_source_name or 'n/a'} |"
-        )
-
-    lines.extend([
-        "",
-        f"Target rows: {len(rows)}",
-        f"Low-headspace rows: {sum(1 for row in rows if row.headspace_class == 'low_headspace')}",
-    ])
-    if excluded:
-        lines.extend([
-            f"Excluded matrix-only benchmarks: {', '.join(sorted(excluded))}",
-            "These benchmarks remain executable through summary/index artefacts, but they are deliberately omitted from target snapshots because they do not run through the free-precursor FAST target-ranking path.",
-        ])
-    return "\n".join(lines) + "\n"
-
-
 def build_benchmark_index(
     benchmark_files: Optional[Iterable[Path | str]] = None,
     target_tag: str = DEFAULT_TARGET_TAG,
@@ -1895,60 +2078,3 @@ def build_benchmark_index(
         )
         for summary in summaries
     ]
-
-
-def render_benchmark_index_markdown(entries: Iterable[BenchmarkIndexEntry]) -> str:
-    rows = list(entries)
-    lines = [
-        "# Benchmark Index",
-        "",
-        "| Benchmark | Tier | Family | Protein | Process State | Execution Path | Engine | Cantera Role | Thermo Policy | Ranking Contract | Supported | Status | Strict Ready | Notes |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
-    ]
-    for entry in rows:
-        notes = entry.reason or "indexed"
-        lines.append(
-            f"| {entry.benchmark_id} | {entry.tier} | {entry.family} | {entry.protein_type} | {entry.process_state or 'n/a'} | {entry.execution_path} | {entry.benchmark_engine} | {entry.cantera_role} | {entry.thermodynamic_gating_policy} | {entry.ranking_contract_status} | {'yes' if entry.supported else 'no'} | {entry.status} | {'yes' if entry.strict_ready else 'no'} | {notes} |"
-        )
-    return "\n".join(lines) + "\n"
-
-
-def render_benchmark_summary_markdown(summaries: Iterable[BenchmarkSummary]) -> str:
-    rows = list(summaries)
-    lines = [
-        "# Benchmark Summary",
-        "",
-        "| Benchmark | Tier | Family | Protein | Process State | Execution Path | Engine | Cantera Role | Thermo Policy | Ranking Contract | Status | Strict Ready | Coverage | Pearson R | Max Ratio | MAE ppb | Notes |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
-    ]
-
-    for summary in rows:
-        if not summary.supported:
-            notes = summary.reason or "Unsupported"
-            pearson = "n/a"
-            max_ratio = "n/a"
-            mae = "n/a"
-            coverage = "0.0%"
-            strict_ready = "no"
-        else:
-            notes = ", ".join(summary.blocking_issues) or "validated"
-            pearson = f"{summary.pearson_r:.3f}" if summary.pearson_r is not None else "n/a"
-            max_ratio = f"{summary.max_ratio:.3f}" if summary.max_ratio is not None else "n/a"
-            mae = f"{summary.mae_ppb:.2f}" if summary.mae_ppb is not None else "n/a"
-            coverage = f"{summary.coverage:.1%}"
-            strict_ready = "yes" if summary.strict_ready else "no"
-
-        lines.append(
-            f"| {summary.benchmark_id} | {summary.tier} | {summary.family} | {summary.protein_type} | {summary.process_state or 'n/a'} | {summary.execution_path} | {summary.benchmark_engine} | {summary.cantera_role} | {summary.thermodynamic_gating_policy} | {summary.ranking_contract_status} | {summary.overall_status} | {strict_ready} | {coverage} | {pearson} | {max_ratio} | {mae} | {notes} |"
-        )
-
-    supported_count = sum(1 for summary in rows if summary.supported)
-    pass_count = sum(1 for summary in rows if summary.overall_status in {"pass", "pass-no-ranking", "partial-pass"})
-    strict_ready_count = sum(1 for summary in rows if summary.strict_ready)
-    lines.extend([
-        "",
-        f"Supported benchmarks: {supported_count}/{len(rows)}",
-        f"Benchmarks without blocking coverage/ranking gaps: {pass_count}/{len(rows)}",
-        f"Strict-ready benchmarks: {strict_ready_count}/{len(rows)}",
-    ])
-    return "\n".join(lines) + "\n"

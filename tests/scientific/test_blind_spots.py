@@ -1,7 +1,7 @@
 import pytest
 import sys
 from pathlib import Path
-from src.inverse_design import InverseDesigner
+from src.pipeline import MaillardPipeline
 from src.conditions import ReactionConditions
 
 def test_peptide_accessibility_blind_spot():
@@ -11,7 +11,7 @@ def test_peptide_accessibility_blind_spot():
     EXPECTATION: High hydrolysis should increase flavor score.
     CURRENT: Score remains constant regardless of 'hydrolysis' state.
     """
-    designer = InverseDesigner(target_tag="meaty")
+    designer = MaillardPipeline(target_tag="meaty")
     cond = ReactionConditions(temperature_celsius=100)
     
     # Formulation with a hypothetical 'degree_of_hydrolysis'
@@ -43,7 +43,7 @@ def test_matrix_inhibition_blind_spot():
     EXPECTATION: High fiber content should decrease sensory radar scores.
     CURRENT: Radar scores depend only on chemical concentration.
     """
-    designer = InverseDesigner(target_tag="meaty")
+    designer = MaillardPipeline(target_tag="meaty")
     cond_clear = ReactionConditions(protein_fraction=1.0) # Pure solution
     cond_matrix = ReactionConditions(protein_fraction=0.1, matrix_fiber=0.5) # High bread/pea matrix
     
@@ -65,7 +65,7 @@ def test_metal_catalysis_blind_spot():
     EXPECTATION: Presence of Iron should lower pyrazine barriers.
     CURRENT: Only temperature and pH are taken into account.
     """
-    designer = InverseDesigner(target_tag="roasted") # Pyrazines
+    designer = MaillardPipeline(target_tag="roasted") # Pyrazines
     cond_no_iron = ReactionConditions(temperature_celsius=120)
     cond_iron = ReactionConditions(temperature_celsius=120, metal_catalyst="Fe2+")
     

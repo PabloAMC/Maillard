@@ -21,6 +21,7 @@ MATRIX_ONLY_BENCHMARKS = {
     "pea_iso": ROOT / "data" / "benchmarks" / "pea_isolate_40C_PratapSingh2021.json",
     "soy_iso": ROOT / "data" / "benchmarks" / "soy_isolate_40C_PratapSingh2021.json",
 }
+TRIKUSUMA_BENCHMARK = ROOT / "data" / "benchmarks" / "pea_isolate_uht_140C_Trikusuma2019.json"
 
 
 @pytest.mark.parametrize("bench_file", MATRIX_ONLY_BENCHMARKS.values())
@@ -102,5 +103,23 @@ def test_matrix_only_benchmark_exposes_ranking_contract_and_calibration_metadata
     assert hexanal_meta["calibration_evidence_strength"] == "literature_anchored"
     assert hexanal_meta["calibration_fallback_mode"] == "compound_specific"
     assert hexanal_meta["process_state"] == "ambient_slurry"
+    assert hexanal_meta["evidence_state"] == "externally_benchmarked"
+    assert hexanal_meta["target_class"] == "adverse_lipid_markers"
     assert summary.ranking_contract_status == "pass"
     assert summary.adverse_markers == ["2-pentylfuran", "hexanal", "hexanol"]
+
+
+def test_trikusuma_heated_pea_matrix_benchmark_is_quantitatively_supported():
+    evaluation = evaluate_benchmark(TRIKUSUMA_BENCHMARK)
+    summary = summarize_evaluation(evaluation, protein_type="pea_iso")
+    predicted = {comparison.compound: comparison.predicted_ppb for comparison in evaluation.comparisons}
+    ratios = {comparison.compound: comparison.ratio for comparison in evaluation.comparisons}
+
+    assert predicted["hexanal"] > predicted["2-pentylfuran"] > predicted["nonanal"]
+    assert ratios["hexanal"] <= 1.05
+    assert ratios["2-pentylfuran"] <= 1.05
+    assert ratios["nonanal"] <= 1.05
+    assert summary.process_state == "heated_matrix"
+    assert summary.ranking_contract_status == "pass"
+    assert summary.overall_status == "pass"
+    assert summary.strict_ready is False

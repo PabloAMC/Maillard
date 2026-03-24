@@ -6,12 +6,12 @@ import math
 ROOT = Path("/Users/pabloantoniomorenocasares/Developer/Maillard")
 sys.path.insert(0, str(ROOT))
 
-from src.inverse_design import InverseDesigner
+from src.pipeline import MaillardPipeline
 from src.conditions import ReactionConditions
 
 def calculate_sensitivity():
     print("--- Sensitivity Analysis: Meaty Target (Pea Protein) ---")
-    designer = InverseDesigner(target_tag="meaty")
+    designer = MaillardPipeline(target_tag="meaty")
     cond = ReactionConditions(pH=5.6, temperature_celsius=105.0)
     
     base_form = {

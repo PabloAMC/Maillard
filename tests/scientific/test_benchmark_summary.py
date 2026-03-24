@@ -8,12 +8,13 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from src.benchmark_validation import (
-    BenchmarkEvaluation,
-    CompoundComparison,
-    render_benchmark_summary_markdown,
+    build_family_lane_validation_artifact,
+    render_family_lane_validation_markdown,
     summarize_benchmarks,
     summarize_evaluation,
 )
+from src.benchmark_types import BenchmarkEvaluation, CompoundComparison
+from src.presentation import render_benchmark_summary_markdown
 
 
 def test_benchmark_summary_separates_supported_and_unsupported_cases():
@@ -68,7 +69,29 @@ def test_benchmark_summary_markdown_includes_gap_labels():
     assert "Strict Ready" in markdown
     assert "Cantera Role" in markdown
     assert "Thermo Policy" in markdown
+    assert "Mean |log10 ratio|" in markdown
     assert "diagnostic_reference_only" in markdown
+    assert "Chemistry Families" in markdown
+    assert "Payload Roles" in markdown
+
+
+def test_family_lane_validation_artifact_groups_benchmarks_by_family_and_lane():
+    payload = build_family_lane_validation_artifact([
+        ROOT / "data" / "benchmarks" / "cys_glucose_150C_Farmer1999.json",
+        ROOT / "data" / "benchmarks" / "pea_isolate_40C_PratapSingh2021.json",
+        ROOT / "data" / "benchmarks" / "soy_isolate_40C_PratapSingh2021.json",
+    ])
+
+    assert payload["summary"]["benchmark_count"] == 3
+    assert payload["summary"]["lane_count"] >= 2
+    assert any(row["execution_path"] == "free_precursor" for row in payload["lanes"])
+    assert any(row["execution_path"] == "matrix_only" for row in payload["lanes"])
+    assert any("benchmark_payload" in row["payload_roles"] for row in payload["families"])
+
+    markdown = render_family_lane_validation_markdown(payload)
+    assert "Family Lane Validation" in markdown
+    assert "Lane Summary" in markdown
+    assert "benchmark_payload" in markdown
 
 
 def test_strict_gate_summary_reflects_threshold_failures():

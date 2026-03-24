@@ -15,7 +15,7 @@ from typing import List
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from src.inverse_design import InverseDesigner
+from src.pipeline import MaillardPipeline
 from src.conditions import ReactionConditions
 from src.reporting import generate_comparison_report
 from src.usability_reports import DomainOfValidityChecker, build_confidence_package
@@ -46,7 +46,7 @@ def main():
     print(f"Conditions: pH {args.ph}, {args.temp}°C, aᵥ {args.aw}")
     print("-" * 54)
     
-    designer = InverseDesigner(args.target_tag, args.minimize_tag)
+    designer = MaillardPipeline(args.target_tag, args.minimize_tag)
     
     # Filter grid for requested names
     requested_forms = []
@@ -86,6 +86,8 @@ def main():
             protein_type=protein_type,
             temp_c=float(formulation.get("temp", args.temp)),
             ph=float(formulation.get("ph", args.ph)),
+            aw=float(formulation.get("aw", args.aw)),
+            matrix_explainability=result.matrix_explainability,
         )
         result.confidence_metadata = build_confidence_package(
             result,

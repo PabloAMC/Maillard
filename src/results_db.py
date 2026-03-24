@@ -90,6 +90,28 @@ class ResultsDB:
                     FOREIGN KEY(reaction_id) REFERENCES reactions(id)
                 )
             """)
+
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS ml_adoption_decisions (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    candidate_id TEXT NOT NULL,
+                    model_family TEXT NOT NULL,
+                    model_name TEXT NOT NULL,
+                    proposed_role TEXT NOT NULL,
+                    decision TEXT NOT NULL,
+                    benchmark_set_id TEXT NOT NULL,
+                    coverage_ratio REAL,
+                    rank_correlation REAL,
+                    mean_abs_error_kcal REAL,
+                    max_abs_error_kcal REAL,
+                    stop_reasons_json TEXT,
+                    rationale TEXT,
+                    fallback_comparator TEXT,
+                    benchmark_visible_gap TEXT,
+                    approved_for_default BOOLEAN,
+                    timestamp DATETIME
+                )
+            """)
             conn.commit()
 
     def _get_or_create_reaction(self, reactants: List[str], products: List[str], family: str = "unknown") -> int:
@@ -185,3 +207,92 @@ class ResultsDB:
                 JOIN reactions r ON b.reaction_id = r.id
             """)
             return [dict(zip(["family", "reactants", "products", "barrier", "method", "time"], row)) for row in cursor.fetchall()]
+
+    def add_ml_adoption_decision(self, decision: Dict[str, Any]):
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                """
+                INSERT INTO ml_adoption_decisions (
+                    candidate_id, model_family, model_name, proposed_role, decision,
+                    benchmark_set_id, coverage_ratio, rank_correlation,
+                    mean_abs_error_kcal, max_abs_error_kcal, stop_reasons_json,
+                    rationale, fallback_comparator, benchmark_visible_gap,
+                    approved_for_default, timestamp
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    str(decision.get("candidate_id", "unknown")),
+                    str(decision.get("model_family", "unknown")),
+                    str(decision.get("model_name", "unknown")),
+                    str(decision.get("proposed_role", "unknown")),
+                    str(decision.get("decision", "defer")),
+                    str(decision.get("benchmark_set_id", "unknown")),
+                    decision.get("coverage_ratio"),
+                    decision.get("rank_correlation"),
+                    decision.get("mean_abs_error_kcal"),
+                    decision.get("max_abs_error_kcal"),
+                    json.dumps(decision.get("stop_reasons", [])),
+                    str(decision.get("rationale", "")),
+                    str(decision.get("fallback_comparator", "unknown")),
+                    str(decision.get("benchmark_visible_gap", "unknown")),
+                    bool(decision.get("approved_for_default", False)),
+                    time.strftime('%Y-%m-%d %H:%M:%S'),
+                ),
+            )
+            conn.commit()
+
+    def list_ml_adoption_decisions(self, candidate_id: Optional[str] = None) -> List[Dict[str, Any]]:
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            if candidate_id:
+                cursor.execute(
+                    """
+                    SELECT candidate_id, model_family, model_name, proposed_role, decision,
+                           benchmark_set_id, coverage_ratio, rank_correlation,
+                           mean_abs_error_kcal, max_abs_error_kcal, stop_reasons_json,
+                           rationale, fallback_comparator, benchmark_visible_gap,
+                           approved_for_default, timestamp
+                    FROM ml_adoption_decisions
+                    WHERE candidate_id = ?
+                    ORDER BY id ASC
+                    """,
+                    (candidate_id,),
+                )
+            else:
+                cursor.execute(
+                    """
+                    SELECT candidate_id, model_family, model_name, proposed_role, decision,
+                           benchmark_set_id, coverage_ratio, rank_correlation,
+                           mean_abs_error_kcal, max_abs_error_kcal, stop_reasons_json,
+                           rationale, fallback_comparator, benchmark_visible_gap,
+                           approved_for_default, timestamp
+                    FROM ml_adoption_decisions
+                    ORDER BY id ASC
+                    """
+                )
+            rows = cursor.fetchall()
+
+        payload: List[Dict[str, Any]] = []
+        for row in rows:
+            payload.append(
+                {
+                    "candidate_id": row[0],
+                    "model_family": row[1],
+                    "model_name": row[2],
+                    "proposed_role": row[3],
+                    "decision": row[4],
+                    "benchmark_set_id": row[5],
+                    "coverage_ratio": row[6],
+                    "rank_correlation": row[7],
+                    "mean_abs_error_kcal": row[8],
+                    "max_abs_error_kcal": row[9],
+                    "stop_reasons": json.loads(row[10] or "[]"),
+                    "rationale": row[11],
+                    "fallback_comparator": row[12],
+                    "benchmark_visible_gap": row[13],
+                    "approved_for_default": bool(row[14]),
+                    "timestamp": row[15],
+                }
+            )
+        return payload

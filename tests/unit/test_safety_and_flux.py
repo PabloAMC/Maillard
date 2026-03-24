@@ -1,12 +1,12 @@
 
 import math
 import pytest
-from src.inverse_design import InverseDesigner  # noqa: E402
+from src.pipeline import MaillardPipeline  # noqa: E402
 from src.smirks_engine import ReactionConditions  # noqa: E402
 
 def test_safety_scoring_acrylamide():
     """Verify that asparagine-rich formulations trigger safety penalties."""
-    designer = InverseDesigner(target_tag="roasted", minimize_tag="beany")
+    designer = MaillardPipeline(target_tag="roasted", minimize_tag="beany")
     
     # Mock some grid entries if they don't exist, but we can use the real ones if they serve
     # Or just run evaluate_all and check results
@@ -60,7 +60,7 @@ def test_safety_scoring_acrylamide():
 
 def test_concentration_aware_ranking():
     """Verify that doubling precursor concentration doubles the flux/score."""
-    designer = InverseDesigner(target_tag="meaty")
+    designer = MaillardPipeline(target_tag="meaty")
     
     # Formulation 1: 0.1 M Cysteine
     cys_low = {

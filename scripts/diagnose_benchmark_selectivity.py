@@ -13,7 +13,7 @@ if str(ROOT) not in sys.path:
 
 from src.benchmark_validation import load_benchmark, benchmark_to_conditions, benchmark_to_formulation
 from src.barrier_constants import effective_barrier_from_rate_constant
-from src.inverse_design import InverseDesigner
+from src.pipeline import MaillardPipeline
 from src.precursor_resolver import resolve_many
 from src.recommend import Recommender, _canon
 from src.smirks_engine import SmirksEngine
@@ -36,7 +36,7 @@ def _build_rec_result(bench_path: str):
     names = formulation["sugars"] + formulation["amino_acids"] + formulation.get("additives", []) + formulation.get("lipids", [])
     precursors = resolve_many(names)
 
-    designer = InverseDesigner(target_tag="meaty")
+    designer = MaillardPipeline(target_tag="meaty")
     engine = SmirksEngine(conditions)
     steps = engine.enumerate(precursors, max_generations=4)
 
