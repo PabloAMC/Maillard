@@ -214,3 +214,25 @@ compounds:
     odour_threshold_ug_per_kg: 0.5
     priority: "critical"
     notes: "Essential for robust meaty flavor profile; strong interaction with lipid oxidation products."
+
+  - name: "HEMF"
+    cas: null
+    smiles: "CCC1=C(O)OC(C)C1=O"
+    inchi: null
+    precursor: "Pentose + Alanine"
+    pathway: "B — Furanone Formation"
+    sensory_desc: "Caramel, meaty, soy sauce, brothy"
+    odour_threshold_ug_per_kg: 0.05
+    priority: "medium"
+    notes: "Mechanistically expected in pentose-rich protein matrices; confidence remains low until matrix-specific quantitation exists."
+
+  - name: "DMHF"
+    cas: null
+    smiles: "CC1=C(O)OC(C)C1=O"
+    inchi: null
+    precursor: "Pentose + Glycine or Alanine"
+    pathway: "B — Furanone Formation"
+    sensory_desc: "Caramel, sweet, brothy, roasted"
+    odour_threshold_ug_per_kg: 87.0
+    priority: "medium"
+    notes: "Tracks furaneol-like positive oxygenated Maillard chemistry with low confidence in plant matrices."

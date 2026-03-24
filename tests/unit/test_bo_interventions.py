@@ -1,9 +1,9 @@
 import pytest
 from src.bayesian_optimizer import FormulationOptimizer
-from src.inverse_design import InverseDesigner, ReactionConditions
+from src.pipeline import MaillardPipeline, ReactionConditions
 
 def test_intervention_barrier_shift():
-    designer = InverseDesigner(target_tag="meaty")
+    designer = MaillardPipeline(target_tag="meaty")
     cond = ReactionConditions(temperature_celsius=180)
     
     # Asparagine + Glucose (Acrylamide precursors)

@@ -7,7 +7,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from src.benchmark_validation import benchmark_to_conditions, benchmark_to_formulation, load_benchmark
-from src.inverse_design import InverseDesigner
+from src.pipeline import MaillardPipeline
 
 
 def test_free_amino_acid_benchmark_does_not_inject_lipid_oxidation_products():
@@ -15,7 +15,7 @@ def test_free_amino_acid_benchmark_does_not_inject_lipid_oxidation_products():
     formulation = benchmark_to_formulation(bench)
     conditions = benchmark_to_conditions(bench)
 
-    result = InverseDesigner(target_tag="meaty").evaluate_single(formulation, conditions)
+    result = MaillardPipeline(target_tag="meaty").evaluate_single(formulation, conditions)
 
     assert result.predicted_ppb.get("Hexanal") is None
     assert result.predicted_ppb.get("Nonanal") is None
@@ -27,7 +27,7 @@ def test_free_amino_acid_benchmark_predicted_ppb_excludes_input_precursors():
     formulation = benchmark_to_formulation(bench)
     conditions = benchmark_to_conditions(bench)
 
-    result = InverseDesigner(target_tag="meaty").evaluate_single(formulation, conditions)
+    result = MaillardPipeline(target_tag="meaty").evaluate_single(formulation, conditions)
 
     assert result.predicted_ppb.get("D-Ribose") is None
     assert result.predicted_ppb.get("L-Cysteine") is None

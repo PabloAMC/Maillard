@@ -81,7 +81,7 @@ Why it matters:
 Main modules:
 
 - `src/recommend.py`
-- `src/inverse_design.py`
+- `src/pipeline.py`
 - `src/barrier_constants.py`
 
 Role:

@@ -8,7 +8,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from src.benchmark_validation import benchmark_to_conditions, benchmark_to_formulation, load_benchmark
-from src.inverse_design import InverseDesigner
+from src.pipeline import MaillardPipeline
 from src.recommend import _canon
 
 
@@ -32,7 +32,7 @@ def _evaluate_benchmark_variant(*, temp_c: float | None = None, time_minutes: fl
             key: float(value) * scale for key, value in formulation["molar_ratios"].items()
         }
 
-    designer = InverseDesigner(target_tag="meaty")
+    designer = MaillardPipeline(target_tag="meaty")
     return designer.evaluate_single(formulation, conditions)
 
 

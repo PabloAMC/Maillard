@@ -6,7 +6,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src.inverse_design import InverseDesigner
+from src.pipeline import MaillardPipeline
 from src.smirks_engine import ReactionConditions
 
 
@@ -18,7 +18,7 @@ def _matrix_accessibility_probe(
     time_minutes: float = 30.0,
     pH: float = 5.5,
 ):
-    designer = InverseDesigner(target_tag="meaty", minimize_tag="beany")
+    designer = MaillardPipeline(target_tag="meaty", minimize_tag="beany")
     formulation = {
         "name": f"matrix_probe_{protein_type}_{denaturation_state}",
         "sugars": ["ribose"],

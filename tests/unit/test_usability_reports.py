@@ -1,17 +1,26 @@
+import json
 from pathlib import Path
 
 from src.conditions import ReactionConditions
-from src.inverse_design import FormulationResult
+from src.pipeline import FormulationResult
+from src.projection_metadata import normalize_projection_metadata_row
 from src.reporting import generate_comparison_report, generate_report
 from src.usability_reports import (
     DomainWarning,
+    DomainOfValidityChecker,
     assess_formulation_confidence,
     build_confidence_package,
     build_formulation_explainability_payload,
     build_validated_envelope_report,
-    render_formulation_explainability_markdown,
-    render_validated_envelope_markdown,
 )
+from src.presentation import (
+    render_formulation_explainability_markdown,
+    render_flavor_axis_markdown,
+    render_validated_envelope_markdown,
+    render_projection_rows_markdown,
+    render_provenance_markdown,
+)
+from src.projection_utils import build_projection_rows
 
 
 def test_formulation_explainability_payload_surfaces_matrix_and_projection_context():
@@ -35,9 +44,11 @@ def test_formulation_explainability_payload_surfaces_matrix_and_projection_conte
                 "observable_ppb": 48.0,
                 "proxy_to_observable_ratio": 0.4,
                 "matrix_factor": 0.8,
+                "dynamic_retention_factor": 1.1,
                 "headspace_factor": 0.5,
                 "volatile_class": "furan",
                 "process_state": "heated_matrix",
+                "retention_runtime_mode": "temporal_attenuation",
                 "calibration_source": "class_fallback",
                 "calibration_evidence_strength": "heuristic",
                 "calibration_fallback_mode": "class_level",
@@ -51,6 +62,14 @@ def test_formulation_explainability_payload_surfaces_matrix_and_projection_conte
             "bulk_volatile_retention": 0.51,
             "denaturation_source": "test source",
         },
+        strecker_balance_score=0.3,
+        pyrazine_burden=12.0,
+        flavor_axis_summary={
+            "strecker_balance_score": 0.3,
+            "pyrazine_burden": 12.0,
+            "thiamine_pathway_active": False,
+        },
+        targets=[{"name": "furfural", "concentration": 48.0}],
     )
 
     payload = build_formulation_explainability_payload(
@@ -65,10 +84,74 @@ def test_formulation_explainability_payload_surfaces_matrix_and_projection_conte
     assert payload["top_projection_rows"][0]["volatile_class"] == "furan"
     assert payload["top_projection_rows"][0]["observable_ratio"] == 0.4
     assert payload["top_projection_rows"][0]["process_state"] == "heated_matrix"
+    assert payload["top_projection_rows"][0]["retention_runtime_mode"] == "temporal_attenuation"
     assert "Formulation Explainability" in markdown
     assert "Effective denaturation state" in markdown
     assert "Obs/Proxy" in markdown
     assert "Calibration" in markdown
+    assert "Flavor Axis" in markdown
+
+
+def test_projection_metadata_normalizer_fills_schema_defaults_for_sparse_rows():
+    row = normalize_projection_metadata_row(
+        {
+            "proxy_ppb": 120.0,
+            "observable_ppb": 48.0,
+            "process_state": "heated_matrix",
+        },
+        compound_fallback="furfural",
+    )
+
+    assert row["compound"] == "furfural"
+    assert row["matrix_factor"] == 1.0
+    assert row["headspace_factor"] == 1.0
+    assert row["retention_runtime_mode"] == "static_class_profile"
+    assert row["calibration_source"] == "class_fallback"
+    assert row["evidence_state"] == "still_missing"
+    assert row["target_class"] == "unknown"
+    assert row["proxy_to_observable_ratio"] == 0.4
+
+
+def test_build_projection_rows_resolves_target_projection_when_metadata_key_is_canonical():
+    result = FormulationResult(
+        name="canonical-key probe",
+        target_score=1.0,
+        off_flavour_risk=0.0,
+        targets=[
+            {
+                "name": "2-Methyl-3-furanthiol (MFT)",
+                "concentration": 18.0,
+                "projection": {
+                    "compound": "2-Methyl-3-furanthiol (MFT)",
+                    "proxy_ppb": 30.0,
+                    "observable_ppb": 18.0,
+                    "proxy_to_observable_ratio": 0.6,
+                    "matrix_factor": 0.75,
+                    "headspace_factor": 0.8,
+                    "process_state": "heated_matrix",
+                    "retention_runtime_mode": "dynamic_release",
+                    "calibration_source": "compound_specific",
+                    "calibration_evidence_strength": "literature_anchored",
+                    "calibration_fallback_mode": "compound_specific",
+                },
+            }
+        ],
+        projection_metadata={
+            "c1oc(cc1)CS": {
+                "compound": "2-Methyl-3-furanthiol (MFT)",
+                "proxy_ppb": 30.0,
+                "observable_ppb": 18.0,
+            }
+        },
+    )
+
+    rows = build_projection_rows(result)
+
+    assert len(rows) == 1
+    assert rows[0]["compound"] == "2-Methyl-3-furanthiol (MFT)"
+    assert rows[0]["observable_ppb"] == 18.0
+    assert rows[0]["observable_ratio"] == 0.6
+    assert rows[0]["retention_runtime_mode"] == "dynamic_release"
 
 
 def test_validated_envelope_report_mentions_strict_ready_and_matrix_scope():
@@ -128,6 +211,134 @@ def test_assess_formulation_confidence_marks_matrix_sparse_case_as_exploratory()
     assert assessment.score < 65.0
 
 
+def test_accessibility_warning_flows_into_domain_warnings_and_confidence():
+    result = FormulationResult(
+        name="embedded pea run",
+        target_score=4.0,
+        off_flavour_risk=0.8,
+        avg_uncertainty=4.2,
+        matrix_explainability={
+            "protein_type": "pea_iso",
+            "accessibility_profile": "protein_embedded",
+            "accessibility_warning": True,
+            "accessibility_dominant_source": "estimated_from_conditions",
+            "temperature_celsius": 95.0,
+        },
+    )
+    checker = DomainOfValidityChecker("meaty")
+    warnings = checker.check(
+        precursor_names=["ribose", "cysteine"],
+        protein_type="pea_iso",
+        temp_c=95.0,
+        ph=6.2,
+        aw=0.95,
+        matrix_explainability=result.matrix_explainability,
+    )
+
+    assert any(w.category == "ACCESSIBILITY" for w in warnings)
+
+    assessment = assess_formulation_confidence(
+        result,
+        warnings,
+        precursor_names=["ribose", "cysteine"],
+        protein_type="pea_iso",
+    )
+
+    assert assessment.score < 70.0
+    assert any("accessibility assumptions" in factor for factor in assessment.dominant_factors)
+
+
+def test_build_confidence_package_forces_exploratory_mode_for_extrusion_heavy_conditions():
+    formulation = {
+        "name": "extrusion-heavy soy run",
+        "protein_type": "soy_iso",
+        "temp": 165.0,
+        "aw": 0.35,
+        "ph": 6.1,
+    }
+    result = FormulationResult(
+        name="extrusion-heavy soy run",
+        target_score=6.0,
+        off_flavour_risk=1.2,
+        avg_uncertainty=3.8,
+        matrix_explainability={
+            "protein_type": "soy_iso",
+            "effective_denaturation_state": 0.95,
+            "temperature_celsius": 165.0,
+            "accessibility_profile": "free_like",
+            "accessibility_warning": False,
+        },
+    )
+    checker = DomainOfValidityChecker("meaty")
+    warnings = checker.check(
+        precursor_names=["ribose", "cysteine"],
+        protein_type="soy_iso",
+        temp_c=165.0,
+        ph=6.1,
+        aw=0.35,
+        matrix_explainability=result.matrix_explainability,
+    )
+
+    payload = build_confidence_package(
+        result,
+        warnings,
+        precursor_names=["ribose", "cysteine"],
+        protein_type="soy_iso",
+        formulation=formulation,
+        baseline_conditions=ReactionConditions(pH=6.1, temperature_celsius=165.0, water_activity=0.35, protein_type="soy_iso"),
+    )
+
+    assert payload["process_regime"] == "extrusion_heavy"
+    assert payload["process_neighborhood"] == "out_of_domain"
+    assert payload["prediction_mode"] == "hypothesis_only"
+    assert payload["decision_mode"] == "directional_hypothesis"
+    assert payload["tier"] == "exploratory"
+    assert payload["extrusion_observable_panel"]["minimum_panel_ready"] is False
+    assert any(w.category == "EXTRUSION" for w in warnings)
+
+
+def test_build_confidence_package_surfaces_extrusion_panel_when_markers_are_present():
+    formulation = {
+        "name": "extrusion-like pea run",
+        "protein_type": "pea_iso",
+        "temp": 145.0,
+        "aw": 0.55,
+        "ph": 6.0,
+    }
+    result = FormulationResult(
+        name="extrusion-like pea run",
+        target_score=7.0,
+        off_flavour_risk=1.0,
+        avg_uncertainty=3.0,
+        projection_metadata={
+            "fft": {"compound": "2-Furfurylthiol (FFT)", "observable_ppb": 8.0},
+            "hex": {"compound": "Hexanal", "observable_ppb": 14.0},
+            "fur": {"compound": "Furfural", "observable_ppb": 22.0},
+        },
+        matrix_explainability={
+            "protein_type": "pea_iso",
+            "temperature_celsius": 145.0,
+            "accessibility_profile": "partially_opened",
+            "accessibility_warning": False,
+        },
+    )
+    payload = build_confidence_package(
+        result,
+        [],
+        precursor_names=["ribose", "cysteine"],
+        protein_type="pea_iso",
+        formulation=formulation,
+        baseline_conditions=ReactionConditions(pH=6.0, temperature_celsius=145.0, water_activity=0.55, protein_type="pea_iso"),
+    )
+
+    panel = payload["extrusion_observable_panel"]
+    assert payload["process_regime"] == "extrusion_like"
+    assert panel["meaty_positive"]["present"] == ["2-Furfurylthiol (FFT)"]
+    assert panel["off_notes"]["present"] == ["Hexanal"]
+    assert panel["severity_markers"]["present"] == ["Furfural"]
+    assert panel["minimum_panel_ready"] is True
+
+
 def test_generate_report_includes_confidence_metadata(tmp_path: Path):
     result = FormulationResult(
         name="report confidence probe",
@@ -139,6 +350,9 @@ def test_generate_report_includes_confidence_metadata(tmp_path: Path):
             "score": 72.0,
             "benchmark_neighborhood": "free_precursor_partial_analogy",
             "prediction_mode": "ranking_supported",
+            "process_regime": "extrusion_like",
+            "process_neighborhood": "near_domain",
+            "process_regime_summary": "Transferred from hydrated matrix states into an extrusion-like neighborhood.",
             "recommended_posture": "Reliable for ranking.",
             "dominant_factors": ["Only part of the precursor set is benchmark-anchored."],
             "calibration_diagnostics": {
@@ -163,6 +377,12 @@ def test_generate_report_includes_confidence_metadata(tmp_path: Path):
                     "prediction_mode": "ranking_supported",
                 }
             },
+            "extrusion_observable_panel": {
+                "meaty_positive": {"required_count": 4, "present_count": 1, "present": ["2-Furfurylthiol (FFT)"], "missing": ["2-Methyl-3-furanthiol (MFT)"]},
+                "off_notes": {"required_count": 4, "present_count": 1, "present": ["Hexanal"], "missing": ["Nonanal"]},
+                "severity_markers": {"required_count": 3, "present_count": 1, "present": ["Furfural"], "missing": ["5-Hydroxymethylfurfural (HMF)"]},
+                "minimum_panel_ready": True
+            },
             "sensitivity_summary": {
                 "mode": "local_oat",
                 "evaluated_perturbations": 4,
@@ -186,12 +406,58 @@ def test_generate_report_includes_confidence_metadata(tmp_path: Path):
         projection_metadata={
             "furfural": {
                 "compound": "furfural",
+                "proxy_ppb": 18.0,
                 "observable_ppb": 12.0,
+                "proxy_to_observable_ratio": 0.67,
+                "matrix_factor": 0.85,
+                "headspace_factor": 0.7,
+                "melanoidin_trapping_factor": 1.0,
                 "process_state": "ambient_slurry",
+                "retention_runtime_mode": "static_class_profile",
                 "calibration_source": "Pratap-Singh 2021 soy-vs-pea ambient slurry release ratio",
                 "calibration_evidence_strength": "literature_anchored",
                 "calibration_fallback_mode": "compound_specific",
+                "evidence_state": "conditional_calibration",
+                "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
+                "target_class": "severity_markers",
+                "decision_panel_source": "data/lit/matrix_decision_panel.json",
             }
+        },
+        strecker_balance_score=0.25,
+        strecker_gap_penalty=0.4,
+        pyrazine_propensity=0.7,
+        pyrazine_burden=14.0,
+        pyrazine_penalty=0.2,
+        flavor_axis_summary={
+            "strecker_balance_score": 0.25,
+            "strecker_gap_penalty": 0.4,
+            "pyrazine_signal_ppb": 7.0,
+            "pyrazine_propensity": 0.7,
+            "pyrazine_burden": 14.0,
+            "pyrazine_penalty": 0.2,
+            "thiamine_pathway_active": False,
+            "thiamine_availability_source": "native_matrix_default_inactive",
+            "thiamine_provenance_mode": "inactive",
+            "lincoln_crosstalk_prior": {"summary": "inactive"},
+            "active_family_lanes": ["09"],
+            "family_lane_summary": {
+                "09": {
+                    "slr_family": "09",
+                    "family_id": "carbohydrate_pyrolysis_and_caramelization",
+                    "display_name": "Carbohydrate pyrolysis and caramelization",
+                    "strategic_posture": "severity_and_failure_mode_lane",
+                    "active": True,
+                    "summary": "Severity lane is active.",
+                }
+            },
+            "family_lane_adjustments": {
+                "per_lane": {
+                    "09": {
+                        "target_score_delta": -0.05,
+                        "off_flavour_risk_delta": 0.04,
+                    }
+                }
+            },
         },
     )
 
@@ -206,15 +472,258 @@ def test_generate_report_includes_confidence_metadata(tmp_path: Path):
     assert "Compound Confidence" in markdown_text
     assert "Aggregate Sensory Confidence" in markdown_text
     assert "Sensitivity Summary" in markdown_text
+    assert "Benchmark Neighborhood" in markdown_text
+    assert "decision_mode" in markdown_text
+    assert "Calibration Summary" in markdown_text
+    assert "Compound Evidence Ladder" in markdown_text
+    assert "Evidence State" in markdown_text
+    assert "Reachability" in markdown_text
+    assert "Observable Assumption" in markdown_text
+    assert "severity_markers" in markdown_text
+    assert "conditional_calibration" in json_text
+    assert "Missing Data" in markdown_text
+    assert "Safety Reference Context" in markdown_text
+    assert "Flavor Reference Policy" in markdown_text
+    assert "Literature Evidence Summary" in markdown_text
+    assert "Literature Learning Loop Summary" in markdown_text
     assert "Projection Calibration" in markdown_text
+    assert "Trust Surface" in markdown_text
+    assert "top_reachability_status" in markdown_text
+    assert "Flavor Axis Diagnostics" in markdown_text
     assert "projection_metadata" in json_text
+    assert "compound_evidence_ladder" in json_text
+    assert "calibration_summary" in json_text
+    assert "missing_data_summary" in json_text
+    assert "benchmark_neighborhood_summary" in json_text
+    assert "safety_reference_summary" in json_text
+    assert "flavor_reference_policy" in json_text
+    assert "literature_evidence_summary" in json_text
+    assert "literature_learning_loop_summary" in json_text
+    assert "family_evidence_ladder" in json_text
+    assert "family_runtime_support_summary" in json_text
+    assert "family_specific_open_gaps" in json_text
+    assert "family_lane_sensitivity" in json_text
     assert '"provenance"' in json_text
     assert "## 5. Provenance" in markdown_text
+    assert "Extrusion Observable Panel" in markdown_text
+    assert "Support Origin" in markdown_text
+    assert "Family Runtime Support Summary" in markdown_text
+    assert "Family Evidence Ladder" in markdown_text
+    assert "Family Lane Sensitivity" in markdown_text
+
+
+def test_render_flavor_axis_markdown_surfaces_active_family_lanes():
+    markdown = render_flavor_axis_markdown(
+        {
+            "strecker_balance_score": 0.42,
+            "strecker_gap_penalty": 0.0,
+            "pyrazine_signal_ppb": 4.0,
+            "pyrazine_propensity": 0.6,
+            "pyrazine_burden": 6.4,
+            "pyrazine_penalty": 0.0,
+            "furanone_support_score": 1.0,
+            "furanone_penalty": 0.0,
+            "thiamine_pathway_active": True,
+            "thiamine_availability_source": "pbma_fortified",
+            "thiamine_availability_explicit": True,
+            "thiamine_provenance_mode": "mixed_thiamine_plus_pentose",
+            "lincoln_crosstalk_prior": {"summary": "active"},
+            "family_lane_adjustments": {"target_score_delta": 0.12, "maillard_closure_delta": -0.21, "off_flavour_risk_delta": -0.03},
+            "family_prior_bundle": {
+                "thiamine_fragmentation_support": [{"section_name": "thiamine_pathway_priors"}],
+            },
+            "family_state_markers": [
+                {
+                    "marker_id": "thiamineavailability",
+                    "display_name": "Thiamine availability",
+                    "panel_role": "diagnostic",
+                    "observable_kind": "state_variable",
+                    "influence_mode": "upstream_state_only",
+                    "state_value_summary": "available=True, source=pbma_fortified",
+                }
+            ],
+            "active_family_lanes": ["02", "10"],
+            "family_lane_summary": {
+                "02": {
+                    "slr_family": "02",
+                    "display_name": "Lipid oxidation and carbonylic crosstalk",
+                    "strategic_posture": "immediate_expansion_lane",
+                    "summary": "Crosstalk is active.",
+                    "benchmark_ready_targets": ["Hexanal", "2-Pentylfuran"],
+                    "competition_prior_ids": ["lincoln_2025_polyphenol_crosstalk_v1"],
+                    "maillard_closure_pressure": 1.10,
+                },
+                "10": {
+                    "slr_family": "10",
+                    "display_name": "Microbial fermentation pretreatment",
+                    "strategic_posture": "upstream_pretreatment_lane",
+                    "summary": "Pretreatment is active.",
+                },
+            },
+        },
+        heading="## Flavor Axis",
+        variant="detailed",
+    )
+
+    assert "active_family_lanes" in markdown
+    assert "Lipid oxidation and carbonylic crosstalk" in markdown
+    assert "Microbial fermentation pretreatment" in markdown
+    assert "family_target_score_delta" in markdown
+    assert "family_maillard_closure_delta" in markdown
+    assert "lipid_benchmark_ready_targets" in markdown
+    assert "state_marker_thiamineavailability" in markdown
+    assert "family_prior_bundle" in markdown
+
+
+def test_generate_report_surfaces_family_runtime_support_semantics(tmp_path: Path):
+    result = FormulationResult(
+        name="family-runtime-support",
+        target_score=4.2,
+        off_flavour_risk=0.8,
+        safety_score=0.1,
+        projection_metadata={
+            "mft": {
+                "compound": "2-Methyl-3-furanthiol (MFT)",
+                "observable_ppb": 9.0,
+                "chemistry_family": "thiamine_fragmentation_support",
+                "target_class": "sulfur_meaty_markers",
+                "calibration_source": "class_fallback",
+                "calibration_evidence_strength": "heuristic",
+                "calibration_fallback_mode": "class_level",
+            }
+        },
+        flavor_axis_summary={
+            "family_lane_summary": {
+                "03": {
+                    "slr_family": "03",
+                    "family_id": "thiamine_fragmentation_support",
+                    "display_name": "Thiamine degradation and sulfur support",
+                    "active": True,
+                    "strategic_posture": "high_value_support_lane",
+                    "summary": "Thiamine-derived sulfur support is active.",
+                },
+                "06": {
+                    "slr_family": "06",
+                    "family_id": "alternative_protein_matrix_scope",
+                    "display_name": "Alternative protein matrix scope",
+                    "active": True,
+                    "strategic_posture": "matrix_scope_lane",
+                    "summary": "Matrix scope extension is active.",
+                },
+            },
+            "family_lane_adjustments": {
+                "per_lane": {
+                    "03": {"target_score_delta": 0.22, "maillard_closure_delta": 0.08, "off_flavour_risk_delta": -0.04},
+                    "06": {"target_score_delta": -0.05, "maillard_closure_delta": -0.02, "off_flavour_risk_delta": 0.03},
+                }
+            },
+            "family_prior_bundle": {
+                "thiamine_fragmentation_support": [{"section_name": "thiamine_pathway_priors"}],
+            },
+        },
+    )
+
+    out_dir = generate_report(result, [], {"protein_type": "soy_iso"}, output_dir=tmp_path / "family-report")
+    payload = json.loads((out_dir / "report.json").read_text())
+
+    support_summary = payload["results"]["family_runtime_support_summary"]
+    evidence_rows = payload["results"]["family_evidence_ladder"]
+    open_gaps = payload["results"]["family_specific_open_gaps"]
+
+    assert support_summary["active_family_lane_count"] == 2
+    assert any(row["family_id"] == "thiamine_fragmentation_support" and row["prior_count"] == 1 for row in support_summary["family_lanes"])
+    assert any(row["chemistry_family"] == "thiamine_fragmentation_support" and row["active_runtime_lane"] is True for row in evidence_rows)
+    assert any(row["family_id"] == "alternative_protein_matrix_scope" for row in open_gaps)
+
+
+def test_projection_rows_surface_explicit_panel_contract_fields():
+    result = FormulationResult(
+        name="panel contract probe",
+        target_score=1.0,
+        off_flavour_risk=0.0,
+        targets=[
+            {
+                "name": "Hexanal",
+                "concentration": 14.0,
+            }
+        ],
+        projection_metadata={
+            "hex": {
+                "compound": "Hexanal",
+                "proxy_ppb": 18.0,
+                "observable_ppb": 14.0,
+                "evidence_state": "externally_benchmarked",
+                "target_class": "adverse_lipid_markers",
+                "panel_role": "constrained",
+                "observable_kind": "volatile",
+                "modeling_regimes": ["matrix_hydrated", "extrusion_like"],
+            }
+        },
+    )
+
+    rows = build_projection_rows(result)
+
+    assert rows[0]["evidence_state"] == "externally_benchmarked"
+    assert rows[0]["target_class"] == "adverse_lipid_markers"
+    assert rows[0]["panel_role"] == "constrained"
+    assert rows[0]["observable_kind"] == "volatile"
+    assert rows[0]["modeling_regimes"] == ["matrix_hydrated", "extrusion_like"]
+    assert rows[0]["support_origin"] == "standard_matrix_support"
+    assert rows[0]["reachability_status"] == "chemically_reachable"
+    assert rows[0]["observable_assumption_summary"] == "static_class_profile | class_level | standard_matrix_support"
 
 
 def test_generate_comparison_report_includes_provenance(tmp_path: Path):
-    first = FormulationResult(name="A", target_score=5.0, off_flavour_risk=1.0, safety_score=0.3)
-    second = FormulationResult(name="B", target_score=3.0, off_flavour_risk=0.5, safety_score=0.1)
+    first = FormulationResult(
+        name="A",
+        target_score=5.0,
+        off_flavour_risk=1.0,
+        safety_score=0.3,
+        mft_to_furfural_ratio=0.02,
+        meaty_quality_penalty=0.4,
+        strecker_balance_score=0.2,
+        strecker_gap_penalty=0.8,
+        pyrazine_burden=35.0,
+        pyrazine_penalty=0.7,
+        projection_metadata={
+            "mft": {
+                "compound": "2-Methyl-3-furanthiol (MFT)",
+                "observable_ppb": 8.0,
+                "melanoidin_trapping_factor": 0.52,
+                "volatile_class": "sulfur",
+                "calibration_source": "Pratap-Singh 2021 soy-vs-pea ambient slurry release ratio",
+                "calibration_evidence_strength": "literature_anchored",
+                "calibration_fallback_mode": "compound_specific",
+            }
+        },
+        confidence_metadata={"benchmark_neighborhood": "matrix_intake_only", "prediction_mode": "directional_only"},
+        flavor_axis_summary={"thiamine_pathway_active": False, "thiamine_availability_source": "native_matrix_default_inactive", "furanone_expected": ["HEMF"]},
+    )
+    second = FormulationResult(
+        name="B",
+        target_score=3.0,
+        off_flavour_risk=0.5,
+        safety_score=0.1,
+        mft_to_furfural_ratio=0.10,
+        meaty_quality_penalty=0.1,
+        strecker_balance_score=0.7,
+        strecker_gap_penalty=0.0,
+        pyrazine_burden=8.0,
+        pyrazine_penalty=0.0,
+        projection_metadata={
+            "fft": {
+                "compound": "2-Furfurylthiol (FFT)",
+                "observable_ppb": 11.0,
+                "melanoidin_trapping_factor": 0.91,
+                "volatile_class": "sulfur",
+                "calibration_source": "class_fallback",
+                "calibration_evidence_strength": "heuristic",
+                "calibration_fallback_mode": "class_level",
+            }
+        },
+        confidence_metadata={"benchmark_neighborhood": "free_precursor_partial_analogy", "prediction_mode": "ranking_supported"},
+        flavor_axis_summary={"thiamine_pathway_active": True, "thiamine_availability_source": "pbma_fortified", "furanone_expected": ["HEMF", "DMHF"], "furanone_missing": ["DMHF"]},
+    )
 
     out_dir = generate_comparison_report(
         [first, second],
@@ -227,6 +736,26 @@ def test_generate_comparison_report_includes_provenance(tmp_path: Path):
 
     assert '"provenance"' in json_text
     assert '"campaign"' in json_text
+    assert '"mft_to_furfural_ratio"' in json_text
+    assert '"strecker_balance_score"' in json_text
+    assert '"pyrazine_burden"' in json_text
+    assert '"sulfur_trapping_summary"' in json_text
+    assert '"benchmark_neighborhood_summary"' in json_text
+    assert '"safety_reference_summary"' in json_text
+    assert '"flavor_reference_policy"' in json_text
+    assert '"family_runtime_support_summary"' in json_text
+    assert '"family_specific_open_gaps"' in json_text
+    assert '"family_lane_sensitivity"' in json_text
+    assert "Cross-Marker Context" in markdown_text
+    assert "Calibration Contrast" in markdown_text
+    assert "Decision Mode" in markdown_text
+    assert "MFT/Furfural Ratio" in markdown_text
+    assert "Sulfur Trapping" in markdown_text
+    assert "Strecker Support" in markdown_text
+    assert "Benchmark Neighborhood" in markdown_text
+    assert "Observable Assumption" in markdown_text
+    assert "Extrapolation Axes" in markdown_text
+    assert "Trust Surface" in markdown_text
     assert "## 5. Provenance" in markdown_text
 
 
@@ -295,7 +824,10 @@ def test_build_confidence_package_adds_compound_aggregate_and_sensitivity_sectio
     )
 
     assert payload["prediction_mode"] == "benchmark_supported_quantitative"
+    assert payload["decision_mode"] == "quantitative_recommendation"
     assert payload["compound_confidence"][0]["compound"] == "furfural"
+    assert payload["compound_confidence"][0]["reachability_status"] == "conditionally_reachable"
+    assert payload["compound_confidence"][0]["observable_assumption_summary"] == "static_class_profile | class_level | standard_matrix_support"
     assert payload["aggregate_confidence"]["meaty"]["tier"] in {"medium", "high"}
     assert payload["sensitivity_summary"]["mode"] == "local_oat"
     assert payload["sensitivity_summary"]["evaluated_perturbations"] >= 4

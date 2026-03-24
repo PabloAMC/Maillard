@@ -9,11 +9,15 @@ import math
 import yaml
 from pathlib import Path
 from typing import Dict, Optional, List
+from src.logger import get_logger
+logger = get_logger(__name__)
 
 from src.matrix_calibration_registry import (
     determine_matrix_process_state,
     get_matrix_calibration_record,
+    get_matrix_runtime_composition_policy,
 )
+from src.literature_runtime import get_retention_ph_release_profile
 from src.matrix_correction import ProteinType, resolve_compound_matrix_retention, resolve_matrix_correction
 
 class HeadspaceModel:
@@ -132,8 +136,8 @@ class HeadspaceModel:
         - anchored to pH 6.0 so the existing Pratap-Singh matrix-only baselines stay stable
         - only applied to pea/soy matrix types
         - only applied to acid-sensitive lipid-derived off-flavour markers
-        - tuned so pH 4.5 vs 6.5 yields roughly the ~1.6x enhancement reported by
-          the Pouvreau pea-isolate benchmark family for aldehydes/furans
+                - tuned through the structured Karolkowski 2021 PPI pH-release payload for
+                    acid-sensitive aldehydes and furans while preserving the executable pH 6 baseline
         """
         if pH is None or not protein_type:
             return 1.0
@@ -156,11 +160,15 @@ class HeadspaceModel:
         if not acid_sensitive:
             return 1.0
 
-        # Reference pH is the ambient plant-isolate baseline already used in the
-        # current executable matrix-only benchmarks.
-        centered_delta = 6.0 - float(pH)
-        factor = math.exp(0.235 * centered_delta)
-        return max(0.75, min(1.6, factor))
+        profile = get_retention_ph_release_profile(name, protein_type=p_type.value)
+        reference_ph = float(profile.get("reference_ph", 6.0) or 6.0)
+        log_slope = float(profile.get("log_slope", 0.235) or 0.235)
+        min_factor = float(profile.get("min_factor", 0.75) or 0.75)
+        max_factor = float(profile.get("max_factor", 1.6) or 1.6)
+
+        centered_delta = reference_ph - float(pH)
+        factor = math.exp(log_slope * centered_delta)
+        return max(min_factor, min(max_factor, factor))
 
     def get_matrix_benchmark_headspace_factor(
         self,
@@ -170,6 +178,7 @@ class HeadspaceModel:
         pH: Optional[float],
         temperature_celsius: float = 40.0,
         time_minutes: float = 10.0,
+        water_activity: Optional[float] = None,
     ) -> float:
         """
         Empirical observable-release factor for the Pratap-Singh plant-matrix lane.
@@ -180,7 +189,7 @@ class HeadspaceModel:
         - this headspace observable factor, which carries the pea/soy release gap
           from the Pratap-Singh ambient slurry family
         - the narrower pH-dependent release modifier already validated against the
-          Pouvreau pea-isolate trend family
+                    Karolkowski PPI pH-release trend family
 
         This keeps benchmark_validation focused on intake chemistry while making
         the matrix-specific observable calibration explicit in the headspace layer.
@@ -196,6 +205,7 @@ class HeadspaceModel:
         process_state = determine_matrix_process_state(
             temperature_celsius=float(temperature_celsius),
             time_minutes=float(time_minutes),
+            water_activity=water_activity,
         )
         record = get_matrix_calibration_record(
             name,
@@ -203,7 +213,29 @@ class HeadspaceModel:
             process_state=process_state,
         )
         base_factor = float(record.observable_factor) if record is not None else 1.0
-        return base_factor * self.get_matrix_ph_release_factor(
+        dynamic_release_factor = 1.0
+        runtime_policy = get_matrix_runtime_composition_policy(
+            name,
+            protein_type=p_type.value,
+            process_state=process_state,
+        )
+        if runtime_policy.get("mode") == "compose_dynamic_retention":
+            matrix_retention = resolve_compound_matrix_retention(
+                name,
+                protein_type=p_type,
+                denaturation_state=0.5,
+                temperature_celsius=temperature_celsius,
+                time_minutes=time_minutes,
+                water_activity=water_activity,
+                process_state=process_state,
+            )
+            baseline_retention = resolve_compound_matrix_retention(
+                name,
+                protein_type=p_type,
+                denaturation_state=0.5,
+            )
+            dynamic_release_factor = 1.0 if baseline_retention <= 0.0 else matrix_retention / baseline_retention
+        return base_factor * dynamic_release_factor * self.get_matrix_ph_release_factor(
             name,
             protein_type=protein_type,
             pH=pH,
@@ -257,6 +289,8 @@ class HeadspaceModel:
                         name,
                         protein_type=protein_type,
                         denaturation_state=denaturation_state,
+                        temperature_celsius=temp_c,
+                        time_minutes=None,
                     )
                 
                 # Effective Kaw accounting for matrix sequestration
@@ -272,21 +306,10 @@ class HeadspaceModel:
                         name,
                         protein_type=protein_type,
                         denaturation_state=denaturation_state,
+                        temperature_celsius=temp_c,
+                        time_minutes=None,
                     )
                 air_concs[name] = c_total * kaw_base * matrix_retention * ph_release_factor
                 
         return air_concs
 
-if __name__ == "__main__":
-    model = HeadspaceModel()
-    # 100 ppm total hexanal (highly hydrophobic)
-    matrix = {"Hexanal": 100.0}
-    
-    print("Hexanal Headspace Projection at 25°C:")
-    # No fat
-    c_air_pure = model.predict_headspace(matrix, 25.0, fat_fraction=0.0)["Hexanal"]
-    print(f"  Water matrix: {c_air_pure:.4f} ppm")
-    
-    # 10% fat
-    c_air_fat = model.predict_headspace(matrix, 25.0, fat_fraction=0.1)["Hexanal"]
-    print(f"  10% Fat matrix: {c_air_fat:.4f} ppm (Suppression: {c_air_pure/c_air_fat:.1f}x)")

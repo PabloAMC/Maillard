@@ -6,6 +6,7 @@ Verifies headspace partitioning and matrix effect logic.
 
 import pytest
 from src.headspace import HeadspaceModel  # noqa: E402
+from src.matrix_calibration_registry import determine_matrix_process_state, get_matrix_runtime_composition_policy
 
 def test_headspace_temperature_scaling():
     """Verify that volatility increases with temperature."""
@@ -133,6 +134,110 @@ def test_pratap_singh_headspace_calibration_carries_soy_release_gap_in_headspace
         protein_type="soy_iso",
         pH=6.0,
     ) == pytest.approx(0.143 / 0.063)
+
+
+def test_shu_heated_soy_calibration_suppresses_2_pentylfuran_to_detection_floor_surrogate():
+    model = HeadspaceModel()
+
+    ambient = model.get_matrix_benchmark_headspace_factor(
+        "2-Pentylfuran",
+        protein_type="soy_iso",
+        pH=6.0,
+        temperature_celsius=40.0,
+        time_minutes=10.0,
+    )
+    heated = model.get_matrix_benchmark_headspace_factor(
+        "2-Pentylfuran",
+        protein_type="soy_iso",
+        pH=6.0,
+        temperature_celsius=120.0,
+        time_minutes=20.0,
+    )
+
+    assert ambient == pytest.approx(2.972 / 0.502)
+    assert heated == pytest.approx((2.972 / 0.502) * 0.03)
+    assert heated < ambient * 0.05
+
+
+def test_dynamic_soy_hexanal_release_increases_with_temperature_before_heavy_time_attenuation():
+    model = HeadspaceModel()
+
+    cool = model.get_matrix_benchmark_headspace_factor(
+        "Hexanal",
+        protein_type="soy_iso",
+        pH=6.0,
+        temperature_celsius=25.0,
+        time_minutes=2.0,
+    )
+    hot = model.get_matrix_benchmark_headspace_factor(
+        "Hexanal",
+        protein_type="soy_iso",
+        pH=6.0,
+        temperature_celsius=95.0,
+        time_minutes=2.0,
+    )
+
+    assert hot > cool
+
+
+def test_dynamic_soy_hexanal_release_at_95c_is_temporally_attenuated():
+    model = HeadspaceModel()
+
+    short = model.get_matrix_benchmark_headspace_factor(
+        "Hexanal",
+        protein_type="soy_iso",
+        pH=6.0,
+        temperature_celsius=95.0,
+        time_minutes=2.0,
+    )
+    long = model.get_matrix_benchmark_headspace_factor(
+        "Hexanal",
+        protein_type="soy_iso",
+        pH=6.0,
+        temperature_celsius=95.0,
+        time_minutes=30.0,
+    )
+
+    assert long < short
+
+
+def test_runtime_composition_policy_preserves_ambient_hexanal_baseline_but_activates_thermal_states():
+    ambient = get_matrix_runtime_composition_policy(
+        "Hexanal",
+        protein_type="soy_iso",
+        process_state="ambient_slurry",
+    )
+    intermediate = get_matrix_runtime_composition_policy(
+        "Hexanal",
+        protein_type="soy_iso",
+        process_state="intermediate_matrix",
+    )
+    heated = get_matrix_runtime_composition_policy(
+        "Hexanal",
+        protein_type="soy_iso",
+        process_state="heated_matrix",
+    )
+    pre_extrusion = get_matrix_runtime_composition_policy(
+        "Hexanal",
+        protein_type="soy_iso",
+        process_state="aqueous_pre_extrusion_model",
+    )
+    extrusion = get_matrix_runtime_composition_policy(
+        "Hexanal",
+        protein_type="soy_iso",
+        process_state="extrusion_structured",
+    )
+
+    assert ambient["mode"] == "static_observable_calibration"
+    assert intermediate["mode"] == "compose_dynamic_retention"
+    assert heated["mode"] == "compose_dynamic_retention"
+    assert pre_extrusion["mode"] == "compose_dynamic_retention"
+    assert extrusion["mode"] == "compose_dynamic_retention"
+
+
+def test_determine_matrix_process_state_uses_water_activity_to_mark_extrusion_states():
+    assert determine_matrix_process_state(temperature_celsius=145.0, time_minutes=2.0, water_activity=0.55) == "aqueous_pre_extrusion_model"
+    assert determine_matrix_process_state(temperature_celsius=165.0, time_minutes=2.0, water_activity=0.35) == "extrusion_structured"
 
 
 def test_explicit_matrix_fractions_override_retention_fallback():

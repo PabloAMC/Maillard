@@ -12,9 +12,10 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src.inverse_design import InverseDesigner
+from src.pipeline import MaillardPipeline
 from src.smirks_engine import ReactionConditions
-from src.usability_reports import build_formulation_explainability_payload, render_formulation_explainability_markdown
+from src.usability_reports import build_formulation_explainability_payload
+from src.presentation import render_formulation_explainability_markdown
 
 
 def main() -> int:
@@ -25,7 +26,7 @@ def main() -> int:
     parser.add_argument("--output-dir", default="results/validation")
     args = parser.parse_args()
 
-    designer = InverseDesigner(target_tag=args.target_tag, minimize_tag=args.minimize_tag)
+    designer = MaillardPipeline(target_tag=args.target_tag, minimize_tag=args.minimize_tag)
     formulation = next((row for row in designer.grid if row.get("name") == args.name), None)
     if formulation is None:
         raise SystemExit(f"Unknown formulation name: {args.name}")

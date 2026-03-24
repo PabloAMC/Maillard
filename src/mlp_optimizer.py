@@ -12,6 +12,9 @@ import io
 import logging
 import numpy as np
 from contextlib import redirect_stdout, redirect_stderr
+from src.logger import get_logger
+
+logger = get_logger(__name__)
 
 try:
     from ase.io import read, write
@@ -91,7 +94,7 @@ class MLPOptimizer:
         displacements = np.linalg.norm(atoms.positions - initial_positions, axis=1)
         max_drift = np.max(displacements)
         if max_drift > drift_threshold:
-            print(f">>> [MLPOptimizer] WARNING: Excessive drift detected ({max_drift:.2f} Å). "
+            logger.warning(f">>> [MLPOptimizer] WARNING: Excessive drift detected ({max_drift:.2f} Å). "
                   "MLP result may be chemically invalid. Reverting to original or suggest DFT.")
 
         # 5. Convert back to standard XYZ formatting

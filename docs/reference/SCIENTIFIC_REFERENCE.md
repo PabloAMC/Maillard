@@ -1,188 +1,262 @@
 # Scientific Reference
 
-This is the canonical scientific reference layer for the repository as of 2026-03-18.
+This is the canonical reader-facing scientific reference for the repository as of 2026-03-18.
 
-It answers two different needs at once:
+It has one job: explain which parts of Maillard chemistry matter for this codebase, which papers are trusted for each part, and where the evidence is still structurally missing.
 
-- a reader-facing overview of the Maillard pathways that matter for this codebase
-- a validated reference table of the articles, numeric anchors, and scientific caveats currently trusted by the repository
+The machine-readable companions remain:
 
-## 1. Current State Of The Repo
+- [../../data/lit/process_state_calibrations.json](../../data/lit/process_state_calibrations.json)
+- [../../data/lit/safety_reference_payloads.json](../../data/lit/safety_reference_payloads.json)
+- [../../data/lit/benchmark_intake_registry.json](../../data/lit/benchmark_intake_registry.json)
 
-The repository already had useful scientific material, but it was split across multiple files with different purposes.
+## 1. How To Read This File
 
-The main pieces that existed before this document were:
+If you are new to the project, read the sections in this order:
 
-- [../pathways.md](../pathways.md): broad pathway overview and target-compound framing
-- [../Maillard_Plant_based.md](../Maillard_Plant_based.md): long-form review of plant-matrix chemistry and process tradeoffs
-- [../slr_benchmark_evaluation.md](../slr_benchmark_evaluation.md): benchmark-oriented literature screening with explicit verdicts
-- [../../data/lit/canonical_systems.json](../../data/lit/canonical_systems.json): a small machine-readable seed of canonical precursor systems
-- [../../data/lit/benchmark_intake_registry.json](../../data/lit/benchmark_intake_registry.json): structured intake registry for the latest SLR triage
+1. What the repository is actually modeling
+2. Reaction map for a meaty-positive system
+3. What is well supported vs only approximated
+4. Reference tables by scientific role
+5. Structural gaps confirmed by the SLR
 
-What did not exist was a single canonical file that combined:
+This file is intentionally not a full literature review. It is a map of the chemistry that is operationally important for the repository.
 
-- validated articles only
-- the numeric values that matter operationally
-- comments on what each article does and does not support
-- an easy pathway map for new readers
+## 2. What The Repository Is Actually Modeling
 
-This document fills that gap for human readers. The machine-readable companions are in [../../data/lit/process_state_calibrations.json](../../data/lit/process_state_calibrations.json), [../../data/lit/safety_reference_payloads.json](../../data/lit/safety_reference_payloads.json), and [../../data/lit/benchmark_intake_registry.json](../../data/lit/benchmark_intake_registry.json).
+The repository is not trying to simulate every elementary step in the full food matrix from first principles.
 
-## 2. Easy Pathway Map
+It is trying to predict a usable formulation signal for alternative-protein systems by combining:
 
-The codebase mainly cares about six reaction families.
+- core free-precursor Maillard chemistry;
+- sulfur-driven meaty target formation;
+- adverse lipid-oxidation markers;
+- matrix-dependent accessibility and release;
+- a small safety layer centered on acrylamide.
 
-### A. Core Carbonyl-Amine Entry
+In practical terms, the current question is not “can Maillard happen?” but “under which precursor, process, and matrix conditions do useful savory targets survive strongly enough to matter more than off-flavours and safety penalties?”
 
-Reducing sugars react with amino groups to form a Schiff base and then an Amadori or Heyns product.
+## 3. Reaction Map For A Meaty-Positive System
 
-Operational meaning for the repo:
+### 3.1 Entry Chemistry: Carbonyl Plus Amine
 
-- this is the entry point for the flavor cascade
-- sugar identity and pH change which downstream branch dominates
-- ribose is much more valuable than glucose when the target is sulfur-driven meaty chemistry
+Reducing sugars react with amino groups to form a Schiff base and then Amadori or Heyns intermediates.
 
-### B. Strecker Degradation
+Why it matters here:
 
-Reactive dicarbonyls attack amino acids and generate Strecker aldehydes.
+- this is the gateway to the whole flavor cascade;
+- sugar identity changes the downstream branch balance;
+- ribose is far more useful than glucose when the target is sulfur-driven meaty chemistry.
 
-Operational meaning for the repo:
+### 3.2 Dicarbonyl And Strecker Chemistry
 
-- methionine gives methional
-- leucine gives 3-methylbutanal
-- isoleucine gives 2-methylbutanal
-- these compounds help roasted and savory character, but they are not enough by themselves to make a convincing meaty-positive plant matrix
+Reactive carbonyl intermediates attack amino acids and generate Strecker aldehydes.
 
-### C. Sulfur Pathway
+Why it matters here:
 
-This is the decisive branch for meat-like aroma.
+- methionine supports methional;
+- leucine supports 3-methylbutanal;
+- isoleucine supports 2-methylbutanal;
+- these compounds help roasted and savory character, but they do not by themselves create a convincing meat-like plant system.
 
-Operational meaning for the repo:
+### 3.3 Sulfur Branch: The Main Meaty Pathway
 
-- ribose or another pentose plus cysteine is the main benchmark precursor family
-- the key targets are 2-methyl-3-furanthiol and 2-furfurylthiol
-- Mottram and Hofmann anchor the free-precursor chemistry
-- the big current gap is not the free chemistry but the matrix translation in pea and soy
+This is the decisive branch for the repository's main savory targets.
 
-### D. Lipid-Maillard Crosstalk
+Why it matters here:
 
-Plant matrices bring lipid oxidation chemistry whether we want it or not.
+- ribose plus cysteine is the canonical free-precursor family for meat-like sulfur chemistry;
+- the main targets are 2-methyl-3-furanthiol (MFT) and 2-furfurylthiol (FFT);
+- Hofmann and Mottram anchor the free chemistry;
+- the main scientific gap is not whether the pathway exists, but how much of that chemistry survives translation into pea and soy matrices.
 
-Operational meaning for the repo:
+### 3.4 Lipid-Maillard Crosstalk: Why Matrices Fight Back
 
-- hexanal, 2-pentylfuran, nonanal, and 1-octen-3-ol are the main adverse markers
-- these compounds are not just nuisance outputs; they define whether a matrix recommendation is usable
-- the missing benchmark family is the one that measures desirable sulfur targets and adverse lipid markers in the same experiment
+Plant matrices contribute their own oxidative volatile background.
 
-### E. Matrix Accessibility And Release
+Why it matters here:
 
-Even when the free chemistry is correct, real protein matrices cap what reaches headspace.
+- hexanal, 2-pentylfuran, nonanal, and 1-octen-3-ol are the main adverse markers in this repository;
+- these compounds are part of the optimization target, not a side note;
+- the missing benchmark family is the one that measures desirable sulfur targets and adverse lipid markers in the same experiment.
 
-Operational meaning for the repo:
+### 3.5 Matrix Accessibility And Release: Why Free Chemistry Is Not Enough
 
-- `denaturation_state` controls how open the matrix is
-- `cysteine_accessibility` controls how much sulfur chemistry is actually available
-- `volatile_retention` controls how much of the generated signal escapes into observable headspace
-- these are the main reasons matrix predictions remain directional instead of release-grade quantitative evidence
+Even if the precursor chemistry is correct, protein matrices limit what can react and what can escape into headspace.
 
-### F. Safety Branch
+Why it matters here:
+
+- `denaturation_state` controls how open the matrix is;
+- `cysteine_accessibility` controls how much sulfur chemistry is actually available;
+- `lysine_accessibility` affects how much amino reactivity remains available to the broader network;
+- `volatile_retention` controls how much generated signal reaches observable headspace.
+
+This is the main reason matrix predictions remain directional instead of fully quantitative.
+
+### 3.6 Safety Branch
 
 The main safety branch currently modeled is acrylamide.
 
-Operational meaning for the repo:
+Why it matters here:
 
-- asparagine plus reducing sugar at high temperature is the key risk family
-- Parker and Knol remain the kinetic anchors inside the current model
-- Squeo 2023 now gives the repo an industrial endpoint range for plant-protein ingredients, but not a dynamic kinetic benchmark
+- asparagine plus reducing sugar at elevated temperature is the core risk family;
+- Parker and Knol remain the kinetic anchors inside the current model layer;
+- Squeo 2023 provides an industrial endpoint range for plant-protein ingredients, but not a dynamic time-resolved kinetic benchmark.
 
-## 3. Validated Scientific Anchors
+## 4. What Is Well Supported Vs What Is Approximated
 
-The table below only includes references that the repository is currently willing to use as validated anchors, parameter references, or benchmark-intake signals. Every entry now includes a DOI string and a DOI URL so readers can verify the source directly.
+### Well supported in this repository
+
+- free-precursor sulfur chemistry for ribose plus cysteine;
+- off-flavour baselines for pea and soy native matrices;
+- pea process-state calibration for denaturation and free sulfhydryl accessibility;
+- industrial endpoint range for acrylamide in commercial plant-protein ingredients.
+
+### Only approximated today
+
+- translation from free chemistry to real pea and soy headspace intensity;
+- direct retention of MFT and FFT inside protein matrices;
+- matrix-specific tradeoff between desirable sulfur products and adverse lipid markers in one benchmark;
+- process-history realism beyond the currently calibrated public anchors.
+
+### Structurally missing in the public literature
+
+- a quantitative PPI meaty-positive benchmark with ribose plus cysteine and simultaneous adverse-marker readout;
+- a quantitative SPI meaty-positive benchmark with the same dual-panel readout;
+- direct MFT or FFT retention measurements in pea or soy matrices;
+- benchmark-eligible time series for matrix sulfur chemistry under the target conditions.
+
+## 5. References By Scientific Role
+
+The sections below separate papers by what they actually support. This is easier to read than a single mixed table because it prevents benchmark-ready evidence from being confused with calibration-only evidence.
+
+### 5.1 Direct Chemistry Anchors
+
+These papers support the core free-precursor chemistry that the repository treats as mechanistically reliable.
 
 | Reference | DOI | Verification URL | Role In Repo | Key Numeric Values | What It Supports | Comment |
 | --- | --- | --- | --- | --- | --- | --- |
 | Hofmann & Schieberle (1998) | 10.1021/jf9705983 | [https://doi.org/10.1021/jf9705983](https://doi.org/10.1021/jf9705983) | Free-precursor sulfur anchor | MFT and FFT formation in ribose plus cysteine model systems; article-level anchor validated | Confirms that pentose plus cysteine is the correct free-chemistry family for MFT and FFT | Strong chemistry anchor; not a plant-matrix benchmark |
 | Mottram & Nobrega (2002) | 10.1021/jf0200826 | [https://doi.org/10.1021/jf0200826](https://doi.org/10.1021/jf0200826) | Free-precursor sulfur anchor | pH 5, 95 C, 4 h; ribose carbon skeleton retained in MFT and FFT; pages 4080-4086 validated | Mechanistic support for ribose plus cysteine sulfur pathway and benchmark candidate design | Strong mechanistic anchor; no direct PPI or SPI matrix data |
+
+### 5.2 Matrix And Headspace Calibration Anchors
+
+These papers do not close the meaty-positive benchmark gap, but they do provide numerical anchors for how pea and soy systems behave before or after processing.
+
+| Reference | DOI | Verification URL | Role In Repo | Key Numeric Values | What It Supports | Comment |
+| --- | --- | --- | --- | --- | --- | --- |
 | Pratap-Singh et al. (2021) | 10.3390/molecules26134104 | [https://doi.org/10.3390/molecules26134104](https://doi.org/10.3390/molecules26134104) | Matrix headspace anchor | PPI 2-pentylfuran 638 +/- 49 ppb-equivalent; SPI 2-pentylfuran 2492 +/- 199 ppb-equivalent; compound-specific soy vs pea release ratios | Baseline off-flavour anchors for ambient pea and soy slurries | Valid for native matrix headspace, not meaty-positive induction |
 | Shu et al. (2024) | 10.1016/j.ultsonch.2023.106675 | [https://doi.org/10.1016/j.ultsonch.2023.106675](https://doi.org/10.1016/j.ultsonch.2023.106675) | Conditional matrix tradeoff calibration | SPI hexanal reduction 70.60%; (E)-2-hexenal reduction 95.60%; 1-octen-3-ol reduction 61.23%; 2-pentylfuran not detected after treatment | Soy off-flavour attenuation under high-severity treatment | Useful for adverse-marker calibration only; no meaty sulfur panel |
 | Asen et al. (2022) | 10.3389/fnut.2022.852225 | [https://doi.org/10.3389/fnut.2022.852225](https://doi.org/10.3389/fnut.2022.852225) | Pea process-state calibration | PPC 10% w/v; pH 3/5/7/9; 100 C, 30 min; base Td 74.45 C; heated fractions 124-206 C; triplicates | Best open denaturation-state anchor for pea thermal state versus pH | Parameter anchor, not benchmark chemistry |
 | Li et al. (2025) | 10.1016/j.crfs.2025.101173 | [https://doi.org/10.1016/j.crfs.2025.101173](https://doi.org/10.1016/j.crfs.2025.101173) | Pea process-state calibration | Pea protein 3% w/w; Ellman DTNB with extinction coefficient 1.36e4; free SH in nmol/mg protein; triplicates | Best open free-SH accessibility anchor for pea heating response | Parameter anchor; still not the exact benchmark condition |
+
+### 5.3 Safety Anchor
+
+This paper is the current reader-verifiable endpoint anchor for acrylamide in plant-protein ingredients.
+
+| Reference | DOI | Verification URL | Role In Repo | Key Numeric Values | What It Supports | Comment |
+| --- | --- | --- | --- | --- | --- | --- |
 | Squeo et al. (2023) | 10.3390/foods12061331 | [https://doi.org/10.3390/foods12061331](https://doi.org/10.3390/foods12061331) | Safety reference anchor | Soy wet-extraction acrylamide 185-748 ug/kg; wet-extraction mean 451 ug/kg; 3 replicates; LC-MS/MS with d3-acrylamide; LOD 7 ng/mL; LOQ 24 ng/mL | Industrial endpoint reference for acrylamide in plant-protein ingredients | Honest safety reference, not a dynamic kinetic benchmark |
-| Nishimura & Abe (2024) | 10.1016/j.foodchem.2024.141599 | [https://doi.org/10.1016/j.foodchem.2024.141599](https://doi.org/10.1016/j.foodchem.2024.141599) | Qualitative soy chemistry intake | Soy starting slurry 75 mg/mL; MRP mixture 62.5 mg/mL SPH + 16.5 mM cysteine + 16.5 mM ribose; 95 C, 90 min; HS-SPME-GC/MS with n = 3; volatile output reported as relative peak areas / z-transformed clustering | Confirms soy-hydrolysate protein-matrix sulfur chemistry and supports a soy benchmark-intake design | Full text now reviewed: useful as a qualitative intake anchor only, not as an absolute ppb or internal-standard benchmark |
 
-## 4. Numeric Anchors By Module
+### 5.4 Qualitative Intake Anchors
 
-### Headspace And Matrix Adverse Markers
+These papers are useful because they show that the chemistry exists in a matrix-like system, but they are not benchmark-ready quantitative support.
+
+| Reference | DOI | Verification URL | Role In Repo | Key Numeric Values | What It Supports | Comment |
+| --- | --- | --- | --- | --- | --- | --- |
+| Nishimura & Abe (2024) | 10.1016/j.foodchem.2024.141599 | [https://doi.org/10.1016/j.foodchem.2024.141599](https://doi.org/10.1016/j.foodchem.2024.141599) | Qualitative soy chemistry intake | Soy starting slurry 75 mg/mL; MRP mixture 62.5 mg/mL SPH + 16.5 mM cysteine + 16.5 mM ribose; 95 C, 90 min; HS-SPME-GC/MS with n = 3; volatile output reported as relative peak areas / z-transformed clustering | Confirms soy-hydrolysate protein-matrix sulfur chemistry and supports a soy benchmark-intake design | Full text reviewed: useful as a qualitative intake anchor only, not as an absolute ppb or internal-standard benchmark |
+
+## 6. Numeric Anchors By Modeling Layer
+
+### 6.1 Sulfur Chemistry
+
+- Hofmann & Schieberle 1998:
+  - validates MFT and FFT formation in ribose plus cysteine free systems.
+- Mottram & Nobrega 2002:
+  - pH 5;
+  - 95 C;
+  - 4 h;
+  - ribose carbon skeleton retained in MFT and FFT.
+
+### 6.2 Headspace And Adverse Markers
 
 - Pratap-Singh 2021:
-  - pea 2-pentylfuran: 638 +/- 49 ppb-equivalent
-  - soy 2-pentylfuran: 2492 +/- 199 ppb-equivalent
+  - pea 2-pentylfuran: 638 +/- 49 ppb-equivalent;
+  - soy 2-pentylfuran: 2492 +/- 199 ppb-equivalent.
 - Shu 2024:
-  - soy hexanal post-treatment reduction: 70.60%
-  - soy (E)-2-hexenal post-treatment reduction: 95.60%
-  - soy 1-octen-3-ol post-treatment reduction: 61.23%
-  - soy 2-pentylfuran: non-detected after the reported 120 C treatment
+  - soy hexanal reduction after treatment: 70.60%;
+  - soy (E)-2-hexenal reduction after treatment: 95.60%;
+  - soy 1-octen-3-ol reduction after treatment: 61.23%;
+  - soy 2-pentylfuran not detected after the reported 120 C treatment.
 - Nishimura 2024:
-  - soy starting slurry before hydrolysis: 75 mg/mL
-  - soy hydrolysate used for MRP preparation: 62.5 mg/mL
-  - cysteine: 16.5 mM
-  - ribose: 16.5 mM
-  - MRP condition: 95 C, 90 min
-  - volatile method: HS-SPME-GC/MS, 200 uL sample, 10 min equilibration at 90 C, 15 min extraction at 90 C
-  - output semantics: relative peak areas and z-transformed heatmaps, not absolute ppb concentrations
+  - soy starting slurry before hydrolysis: 75 mg/mL;
+  - soy hydrolysate used for MRP preparation: 62.5 mg/mL;
+  - cysteine: 16.5 mM;
+  - ribose: 16.5 mM;
+  - MRP condition: 95 C, 90 min;
+  - volatile method: HS-SPME-GC/MS, 200 uL sample, 10 min equilibration at 90 C, 15 min extraction at 90 C;
+  - output semantics: relative peak areas and z-transformed heatmaps, not absolute ppb concentrations.
 
-### Pea Process-State Calibration
+### 6.3 Process-State Calibration
 
 - Asen 2022:
-  - pea protein concentrate: 10% w/v
-  - heating condition: 100 C, 30 min
-  - pH sweep: 3, 5, 7, 9
-  - base Td: 74.45 C
-  - heated fraction Td range: 124-206 C
+  - pea protein concentrate: 10% w/v;
+  - heating condition: 100 C, 30 min;
+  - pH sweep: 3, 5, 7, 9;
+  - base Td: 74.45 C;
+  - heated fraction Td range: 124-206 C.
 - Li 2025:
-  - pea protein solution: 3% w/w
-  - Ellman assay extinction coefficient: 1.36 x 10^4
-  - free-SH units: nmol/mg protein
-  - replication: triplicates
+  - pea protein solution: 3% w/w;
+  - Ellman assay extinction coefficient: 1.36 x 10^4;
+  - free-SH units: nmol/mg protein;
+  - replication: triplicates.
 
-### Safety
+### 6.4 Safety
 
 - Squeo 2023:
-  - soy wet-extraction acrylamide range: 185-748 ug/kg
-  - wet-extraction mean: 451 ug/kg
-  - replication: 3
-  - LC-MS/MS calibration range: 1-230 ng/mL
-  - calibration linearity: R^2 = 0.999
-  - LOD: 7 ng/mL
-  - LOQ: 24 ng/mL
+  - soy wet-extraction acrylamide range: 185-748 ug/kg;
+  - wet-extraction mean: 451 ug/kg;
+  - replication: 3;
+  - LC-MS/MS calibration range: 1-230 ng/mL;
+  - calibration linearity: R^2 = 0.999;
+  - LOD: 7 ng/mL;
+  - LOQ: 24 ng/mL.
 
-## 5. Structural Gaps Still Open
+## 7. Structural Gaps Confirmed By The SLR
 
-These are not vague literature wishes. They are confirmed structural gaps in the current public evidence.
+These are confirmed public-evidence gaps, not just missing search effort.
 
-- No quantitative aqueous PPI benchmark with ribose plus cysteine measuring MFT or FFT and hexanal in the same run
-- No quantitative aqueous SPI benchmark with ribose plus cysteine measuring MFT or FFT and adverse off-flavour markers in the same run; Nishimura closes the qualitative chemistry question for soy hydrolysate but not the quantitative benchmark gap
-- No direct MFT or FFT retention measurement in PPI or SPI versus free-precursor systems
-- No benchmark-eligible time series for PPI or SPI sulfur chemistry under the target conditions
-- No single-run tradeoff benchmark combining meaty sulfur targets, adverse lipid markers, and safety readouts
+- No quantitative aqueous PPI benchmark with ribose plus cysteine measuring MFT or FFT and hexanal in the same run.
+- No quantitative aqueous SPI benchmark with ribose plus cysteine measuring MFT or FFT and adverse off-flavour markers in the same run.
+- Nishimura closes the qualitative soy-hydrolysate chemistry question, but not the quantitative SPI benchmark gap.
+- No direct MFT or FFT retention measurement in PPI or SPI versus free-precursor systems.
+- No benchmark-eligible time series for PPI or SPI sulfur chemistry under the target conditions.
+- No single-run tradeoff benchmark combining meaty sulfur targets, adverse lipid markers, and safety readouts.
 
-## 6. Reader Guidance
+## 8. What A Reader Should Conclude
 
-If you want to understand the chemistry quickly, read the sections in this order:
+The repository has a credible chemistry core and a meaningful matrix-calibration layer, but it does not yet have a public quantitative benchmark that closes the final translation from free sulfur chemistry to real pea or soy headspace.
 
-1. sulfur pathway
-2. lipid-Maillard crosstalk
-3. matrix accessibility and release
-4. safety branch
+That means the honest interpretation is:
 
-If you want the operational state of evidence, read:
+- free-precursor sulfur direction is scientifically strong;
+- matrix penalties and release effects are informed, not fully benchmark-closed;
+- safety has an endpoint anchor but not a complete dynamic calibration;
+- the missing data package is now clearly defined enough to guide either internal experiments or selective computational support.
+
+## 9. Next Documents To Read
+
+If you want the benchmark triage and evidence verdicts, read:
 
 1. [../slr_benchmark_evaluation.md](../slr_benchmark_evaluation.md)
 2. [../../data/lit/benchmark_intake_registry.json](../../data/lit/benchmark_intake_registry.json)
-3. [../../data/lit/process_state_calibrations.json](../../data/lit/process_state_calibrations.json)
-4. [../../data/lit/safety_reference_payloads.json](../../data/lit/safety_reference_payloads.json)
 
-If you want the benchmark candidates that translate this science into a missing-data package, read:
+If you want the machine-readable calibration payloads, read:
+
+1. [../../data/lit/process_state_calibrations.json](../../data/lit/process_state_calibrations.json)
+2. [../../data/lit/safety_reference_payloads.json](../../data/lit/safety_reference_payloads.json)
+
+If you want the missing-data packages that would close the main benchmark gaps, read:
 
 1. [../use_cases/pea_matrix_meaty_benchmark.md](../use_cases/pea_matrix_meaty_benchmark.md)
 2. [../use_cases/soy_matrix_meaty_benchmark.md](../use_cases/soy_matrix_meaty_benchmark.md)
