@@ -18,6 +18,8 @@ If you want to run the tool immediately, start with [docs/guides/QUICKSTART.md](
 
 If you want definitions for terms such as FAST mode, validated envelope, or benchmark neighborhood, see [docs/guides/GLOSSARY.md](docs/guides/GLOSSARY.md).
 
+If you want the current matrix-family scope and the experiment-ingestion workflow, see [results/validation/matrix_family_coverage.md](results/validation/matrix_family_coverage.md) and [docs/guides/MATRIX_EXPERIMENT_INGESTION.md](docs/guides/MATRIX_EXPERIMENT_INGESTION.md).
+
 ## The Real Problem
 
 The most useful version of this tool is not a universal chemistry oracle. It is a scientist-facing decision system that can:
@@ -75,9 +77,11 @@ For a scientist evaluating alternative proteins, the operational workflow is:
 
 1. Select matrix family and process state explicitly (for example pea isolate, soy isolate, mycoprotein, extrusion-heavy process).
 2. Run a forward prediction and generate report artifacts.
-3. Read family evidence ladder and family lane sensitivity before trusting absolute concentrations.
-4. Use benchmark-backed families for quantitative decisions and directional families for experiment prioritization.
-5. Promote a family lane only after adding benchmark or calibration evidence, not by tuning barriers alone.
+3. Check the matrix-family coverage artifact so you know whether your family is explicit support, indirect support, or an open gap.
+4. Read family evidence ladder and family lane sensitivity before trusting absolute concentrations.
+5. Use benchmark-backed families for quantitative decisions and directional families for experiment prioritization.
+6. Promote a family lane only after adding benchmark or calibration evidence, not by tuning barriers alone.
+7. When you obtain a new measurement set, compare it against the model through the experiment-intake workflow before treating it as promotion evidence.
 
 Practical commands:
 
@@ -93,6 +97,16 @@ Primary artifacts for this workflow:
 - [results/validation/family_deviation_audit.md](results/validation/family_deviation_audit.md)
 - [results/validation/benchmark_summary.md](results/validation/benchmark_summary.md)
 - [results/validation/validated_envelope.md](results/validation/validated_envelope.md)
+- [results/validation/matrix_family_coverage.md](results/validation/matrix_family_coverage.md)
+- [results/validation/matrix_target_status.md](results/validation/matrix_target_status.md)
+- [results/validation/matrix_promotion_contract.md](results/validation/matrix_promotion_contract.md)
+- [results/validation/matrix_observable_closure_audit.md](results/validation/matrix_observable_closure_audit.md)
+- [results/validation/matrix_experiment_intake_schema.md](results/validation/matrix_experiment_intake_schema.md)
+- [results/validation/p3_refinement_governance.md](results/validation/p3_refinement_governance.md)
+- [results/validation/p4_mlp_assessment.md](results/validation/p4_mlp_assessment.md)
+- [results/validation/p4_adoption_notes.md](results/validation/p4_adoption_notes.md)
+- [results/validation/literature_learning_loop.md](results/validation/literature_learning_loop.md)
+- [results/validation/family_promotion_state.md](results/validation/family_promotion_state.md)
 
 ## Predictive Accuracy: What Is Quantitative Today
 
@@ -126,6 +140,12 @@ How to interpret this trust surface:
 
 - Free-precursor benchmarks are the quantitative proof surface.
 - Pea and soy matrix paths are useful for prioritization, not yet for broad release-grade claims.
+- Soy and pea are not the only matrix families tracked by the repo, but they are the only plant-protein matrix lanes with executable benchmark-plus-calibration support today.
+- Family 07 carbonyl donor hierarchy is now promoted to benchmark-linked support, meaning sugar identity is no longer only a heuristic lane: existing benchmark-linked compounds constrain it with explicit uncertainty, but it is not yet near-quantitative as a standalone family.
+- P3 mechanistic refinement is now explicitly gate-kept by benchmark-visible compounds and cheap-first screening; if [results/validation/p3_refinement_governance.md](results/validation/p3_refinement_governance.md) shows zero approved jobs, offline QM stays parked.
+- P4 MLP work remains an offline accelerator lane only. The current policy in [results/validation/p4_mlp_assessment.md](results/validation/p4_mlp_assessment.md) and [results/validation/p4_adoption_notes.md](results/validation/p4_adoption_notes.md) is no default MLP adoption until the reaction benchmark passes.
+- Mycoprotein is currently bounded prior support, soy hydrolysate remains qualitative intake support, and other plant proteins remain explicit scope gaps until elevated into runtime-facing evidence.
+- P6 matrix expansion is intentionally bounded: [results/validation/matrix_family_coverage.md](results/validation/matrix_family_coverage.md) now separates bounded expansion candidates from evidence-blocked matrix families so scope cannot drift faster than the evidence surface.
 - Extrusion-heavy systems remain exploratory until benchmarked directly.
 - For the full 10-family strategic view including coverage gaps, see the **Family Validation Surface** section above.
 
@@ -214,6 +234,15 @@ To get there, the repo needs to do five things well:
 ./scripts/docker_maillard.sh bootstrap
 ./scripts/docker_maillard.sh summary
 ./scripts/docker_maillard.sh validation-figures
+./scripts/docker_maillard.sh matrix-promotion-contract
+./scripts/docker_maillard.sh matrix-closure-audit
+./scripts/docker_maillard.sh experiment-intake-schema
+./scripts/docker_maillard.sh matrix-family-coverage
+./scripts/docker_maillard.sh p3-refinement
+./scripts/docker_maillard.sh p4-mlp-assessment
+./scripts/docker_maillard.sh literature-learning-loop
+./scripts/docker_maillard.sh family-promotion-state
+./scripts/docker_maillard.sh compare-experiment data/protocols/example_matrix_experiment_intake.yaml
 ```
 
 Generate one prediction:
@@ -260,3 +289,10 @@ Use the generated validation artifacts when you need the exact benchmark-by-benc
 - [results/validation/family_validation_overview.md](results/validation/family_validation_overview.md)
 - [results/validation/family_deviation_audit.md](results/validation/family_deviation_audit.md)
 - [results/validation/validated_envelope.md](results/validation/validated_envelope.md)
+- [results/validation/matrix_family_coverage.md](results/validation/matrix_family_coverage.md)
+- [results/validation/matrix_target_status.md](results/validation/matrix_target_status.md)
+- [results/validation/matrix_promotion_contract.md](results/validation/matrix_promotion_contract.md)
+- [results/validation/matrix_observable_closure_audit.md](results/validation/matrix_observable_closure_audit.md)
+- [results/validation/matrix_experiment_intake_schema.md](results/validation/matrix_experiment_intake_schema.md)
+- [results/validation/literature_learning_loop.md](results/validation/literature_learning_loop.md)
+- [results/validation/family_promotion_state.md](results/validation/family_promotion_state.md)
