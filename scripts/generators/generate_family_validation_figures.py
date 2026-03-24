@@ -208,14 +208,15 @@ def _render_parity(payload: dict[str, object], output_path: Path) -> None:
     ax.legend(
         handles=family_handles + band_handles + path_handles,
         fontsize=_FS - 2,
-        loc="upper right",
-        bbox_to_anchor=(0.98, 0.98),
+        loc="upper left",
+        bbox_to_anchor=(0.02, 0.98),
         bbox_transform=ax.transAxes,
         framealpha=0.9,
         edgecolor="0.75",
         title=r"\textit{Family / execution lane}",
         title_fontsize=_FS - 3,
         labelspacing=0.3,
+        ncol=1,
     )
 
     fig.savefig(output_path, dpi=300, bbox_inches="tight")
