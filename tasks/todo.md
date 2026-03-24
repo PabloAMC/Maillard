@@ -4,9 +4,30 @@
 
 Build the most useful computational tool for scientists who want to imitate meat-like Maillard chemistry in plant-based systems.
 
-The key product question is:
+The product question remains:
 
 Which formulation and process changes are most worth testing next if the goal is meat-like aroma under plant-matrix constraints?
+
+## Planning Review: 2026-03-24
+
+This roadmap was re-audited against the current repository state before setting the next priority.
+
+### What the current artifacts say
+
+- `results/validation/family_deviation_audit.md` no longer shows severe residual tails in the families that already have quantitative points.
+- `results/validation/family_validation_overview.md` shows 10 tracked families, but only 4 are benchmark-linked and only 4 have compound-level quantitative parity points.
+- `results/validation/matrix_target_status.md` shows 5 matrix benchmarks covered, 3 with quantitative-support-ready compound closure, 0 external-decision-ready benchmarks, and 2 mechanistic-priority internal candidates.
+- `results/validation/benchmark_summary.md` shows that free-precursor closure is strong, while matrix paths remain outside the strict release gate.
+
+### Strategic conclusion
+
+The primary bottleneck is no longer broad residual cleanup on already benchmark-backed families.
+
+The primary bottleneck is matrix usefulness for alternative-protein scientists:
+
+- closing observable support for decision-driving matrix compounds
+- promoting at least one pea or soy mixed target benchmark from internal candidate toward externally defensible decision support
+- giving scientists a machine-readable path to compare new measurements against the model and feed that evidence back into the trust surface
 
 ## Product Thesis
 
@@ -17,22 +38,195 @@ It is a problem of combining:
 - a quantitatively credible free-precursor core
 - matrix-aware observability and accessibility
 - process-aware confidence boundaries
-- scientist-facing reporting that states what is benchmarked and what is extrapolated
+- scientist-facing reporting that states what is benchmarked, what is transferred, and what remains blocked by missing external evidence
 
-## Current Sprint
+## Current Product Status
 
-This sprint starts from a more honest state description:
+### Strong today
 
-- amino acid plus sugar Maillard chemistry is the current first-class core because it is the most transferable and benchmarkable trunk of the product, not because the rest of the chemistry is minor
-- lipid oxidation and lipid-derived carbonyl crosstalk are already partially encoded, but not yet promoted to an equally explicit family-level validation and ingestion surface
-- MLPs and DFT are support tooling for benchmark-visible mechanistic gaps, not the product roadmap themselves
+- Free-precursor screening is quantitatively credible inside the validated envelope.
+- Family-aware ingestion, runtime, validation, and reporting are operational.
+- Pea and soy matrix paths are executable and useful for directional prioritization.
+- Trust language, evidence posture, and family-lane transparency are already visible in reports.
 
-Archive rule for this file:
+### Still blocking scientist value
 
-- leave completed program foundations below as a compact record
-- keep the active sprint clean by only listing unfinished or newly reopened work near the top
+- No matrix benchmark is yet external-decision-ready.
+- Mixed pea and soy meaty-positive targets still rely on transferred or internal-candidate observable support.
+- Six chemistry families still have zero benchmark-linked closure.
+- There is no first-class scientist data-ingestion loop that turns new measurements into reusable benchmark or calibration evidence.
 
-### Sprint S9. Skipped Test Triage and QM Optionality
+## Primary Active Sprint
+
+### Sprint S11. Matrix Observable Closure And Scientist Ingestion (Primary Active)
+
+Goal: move the tool from matrix-directional usefulness toward matrix decision readiness for alternative-protein scientists.
+
+This sprint replaces the earlier assumption that the highest-value work was broad residual-tail cleanup. Current evidence shows the larger product gap is matrix observability plus evidence ingestion.
+
+### S11.A: Promote matrix target support from internal candidate to decision-usable
+
+S11.A1: Freeze the promotion contract for matrix decision readiness
+- [x] Define one explicit promotion rule from `internal_candidate` to `external_decision_ready` at the benchmark level.
+- [x] Require the rule to distinguish external literature anchors, transferred calibration, internal synthetic references, and mechanistic-only support.
+- [x] Publish the rule in machine-readable validation artifacts and in README trust language.
+
+S11.A2: Close observable anchors for decision-driving mixed matrix compounds
+- [x] Audit the current pea and soy mixed target panels compound by compound: sulfur positives, pyrazines, Strecker aldehydes, furans, and adverse lipid markers.
+- [x] For each compound, classify the next closure action as one of: literature anchor available, class-level transfer acceptable, mechanistic blocker, or external-data blocker.
+- [x] Prioritize compounds that actually drive scientist decisions rather than compounds that are merely easy to anchor.
+- [x] Do not claim promotion closure for compounds that remain directional or internally constructed only.
+
+S11.A3: Upgrade one benchmark lane, not many half-way
+- [x] Choose one highest-impact matrix lane as the singular promotion target for this sprint.
+- [x] Default target: pea or soy aqueous pre-extrusion mixed target ranking, because that lane combines desirable sulfur markers with adverse lipid markers in a scientist-relevant regime.
+- [x] Improve that one lane until its support status is either genuinely promotable or explicitly blocked by missing external evidence.
+- [x] If external evidence is insufficient, encode the blocker cleanly and stop instead of manufacturing synthetic closure.
+
+S11.A4: Keep mechanistic refinement subordinate to the observable bottleneck
+- [x] Use mechanistic refinement only where `results/validation/matrix_target_status.md` identifies a benchmark as `mechanistic_priority` after observable support is already classified.
+- [x] Require any refinement candidate to name the target compounds and the expected benchmark-visible decision change before spending offline compute.
+- [x] Do not reopen broad barrier retuning or generic QM cleanup unless the matrix observable audit proves it is the next limiting factor.
+
+### S11.B: Build the scientist evidence-ingestion loop
+
+S11.B1: Define a machine-readable experiment intake contract
+- [x] Create one canonical schema for contributed matrix measurements: matrix family, process state, temperature, time, pH, formulation, measured volatiles, analytical context, and provenance.
+- [x] Ensure the schema can represent partial compound panels without forcing fake completeness.
+- [x] Distinguish external literature payloads from internal experiments and from synthetic diagnostic references.
+
+S11.B2: Turn contributed measurements into trust-surface updates
+- [x] Add an executable comparison artifact that answers: matched compounds, evidence posture, support delta, promotion blockers, and whether the new data changes benchmark readiness.
+- [x] Make the output scientist-readable and machine-readable.
+- [x] Ensure new evidence can land in benchmark payloads, calibration payloads, or explicit blocker registries rather than in narrative markdown only.
+
+S11.B3: Expose the workflow to scientists
+- [x] Add one documented scientist workflow for: run prediction, compare against a new measurement set, inspect support deltas, and decide whether the result strengthens calibration, promotion, or only hypothesis generation.
+- [x] Keep this workflow lightweight enough to be used by collaborators without reading the entire repository internals.
+
+### S11.C: Promote one non-quantitative family only if it changes matrix decisions
+
+S11.C1: Narrow the promotion queue
+- [x] Rank families 03, 04, 05, 06, 07, and 10 by direct impact on alternative-protein formulation decisions, not by narrative completeness.
+- [x] Default first candidate: family 07 donor hierarchy, because it directly changes formulation choice and interacts with sulfur-positive yield.
+- [x] Second candidate only if family 07 is blocked: family 03 thiamine degradation and sulfur support.
+
+S11.C2: Require runtime landing, not literature summaries
+- [x] For the chosen family, define the minimum machine-readable payload needed for first closure: benchmark payload, calibration payload, or bounded prior with explicit uncertainty.
+- [x] Reject narrative-only literature additions.
+- [x] Promote the family only if it changes the actual matrix decision surface or trust posture.
+
+### S11 exit criteria
+
+- [x] One explicit matrix benchmark promotion contract exists and is exposed in validation artifacts and trust language.
+- [x] One pea or soy mixed target lane has a complete compound-level closure audit with next-action labels.
+- [x] One machine-readable scientist experiment intake path exists end to end.
+- [x] One new measurement set can be compared against the model with a generated support-delta artifact.
+- [x] At least one non-quantitative family is either promoted with explicit bounds or documented as blocked for a concrete external-data reason.
+- [x] The roadmap can explain clearly why the next bottleneck is still observable closure, or else it proves that mechanistic refinement has become the new limiter.
+
+## Secondary Work, Explicitly Deferred
+
+### S9. Skipped Test Triage And QM Optionality
+
+Status: supporting infrastructure, not current product bottleneck.
+
+- [ ] Resume only after S11 if skipped-test cleanup blocks deterministic confidence in the active scientist workflow.
+- [ ] Keep quasi-harmonic correction and optional QM lane cleanup scoped as engineering hygiene, not as the main product step.
+
+### P3. Selective Mechanistic Refinement
+
+Status: keep active only on a narrow watchlist.
+
+- [x] Continue only for matrix benchmarks that remain `mechanistic_priority` after observable closure review.
+- [x] Do not expand broad xTB or DFT activity just because the infrastructure exists.
+
+### P4. MLP Adoption
+
+Status: offline accelerator lane, not main closure path.
+
+- [x] Keep external molecular MLP evaluation bounded to approved offline roles.
+- [x] Do not use MLP work as a substitute for missing matrix benchmarks or observable anchors.
+
+### P6. Matrix-family expansion beyond pea and soy
+
+Status: important, but second-order until one matrix lane becomes clearly decision-usable.
+
+- [x] Keep matrix-family coverage explicit in artifacts.
+- [x] Do not broaden family-level scope faster than the evidence surface can support.
+
+## Execution Order
+
+1. Audit the mixed pea and soy matrix target compounds against current observable support.
+2. Freeze the promotion contract for `external_decision_ready`.
+3. Build the scientist experiment intake schema and support-delta artifact.
+4. Pick one singular matrix lane for promotion and stop splitting effort.
+5. Promote one non-quantitative family only if it lands in runtime and changes the matrix decision surface.
+6. Reassess whether the next blocker is still observable support or has shifted to mechanistic refinement.
+
+## Completed Foundations
+
+The foundational architecture remains complete and should be treated as the platform under this roadmap, not as unfinished backlog.
+
+- [x] S0-S0d script quality and refactoring foundations
+- [x] S1 chemistry-family strategy and scope policy
+- [x] S2 literature generalization to family-aware payloads
+- [x] S3 runtime refactor to family-aware registries and queries
+- [x] S4 decision-panel expansion and family-lane metadata
+- [x] S5 implementation of lipid, donor, pretreatment, and support lanes
+- [x] S6 family-aware validation and reporting surfaces
+- [x] S7 execution-sequence closure across ingestion, runtime, validation, and reporting
+- [x] S8 definition-of-done closure for machine-readable family coverage
+- [x] P1 accessibility states, process-state surrogates, and trust visibility foundations
+- [x] P2 extrusion exploratory mode with explicit warnings
+- [x] P5 trust surfaces across reports and comparison outputs
+
+## Success Criteria
+
+- [ ] A scientist can use the tool to narrow a wet-lab or literature-backed matrix campaign, not just inspect simulated chemistry.
+- [ ] Free-precursor predictions remain quantitatively stable while matrix usefulness improves.
+- [ ] At least one matrix lane becomes meaningfully closer to external decision readiness.
+- [ ] Reports and artifacts make promotion blockers explicit enough that synthetic closure is difficult.
+- [ ] Expensive compute stays offline, sparse, and justified by benchmark-visible decisions.
+
+## Review
+
+Review date: 2026-03-24
+
+Why the roadmap changed:
+
+- The previous active sprint overemphasized residual-tail reduction on benchmark-backed families.
+- Current validation artifacts show that the larger product gap is no longer broad error tails inside the already quantitative surface.
+- The highest-impact next step is to improve matrix observability, promotion logic, and evidence ingestion so alternative-protein scientists can trust and extend the tool in matrix-relevant regimes.
+
+S10.A3: Promotion gate for family quantitative trust
+- [x] Define family-level promotion rule: a family can be called near-quantitative only if it has minimum benchmark count plus bounded robust error.
+- [x] Expose promotion state in validation markdown/json and README trust language.
+
+Track B (second priority): Literature-to-runtime closure for families with zero quantitative parity
+
+S10.B1: Literature closure queue by family
+- [x] Rank families 03, 04, 05, 06, 07, 10 by expected decision impact and literature closability.
+- [x] For each family, declare minimum viable payload needed for first benchmark-linked closure (benchmark payload, calibration payload, or bounded prior with explicit uncertainty).
+- [x] Prevent narrative-only additions: every promoted literature item must land in machine-readable runtime payloads.
+
+S10.B2: Alternative protein usability
+- [x] Add explicit scientist workflow for alternative protein research (matrix choice, process state, interpretation gate, confidence posture).
+- [x] Expand matrix-family coverage artifacts so users can see direct support vs transferred support by matrix family.
+
+Track C (third priority): Optional QM/ML governance and skipped-test cleanup
+
+- [ ] Keep S9 execution as supporting infrastructure lane.
+- [ ] Do not treat S9 completion as sufficient for family predictive closure.
+- [ ] Use QM/ML lanes only where Track A diagnostics prove benchmark-visible impact.
+
+S10 measurable exit criteria:
+- [x] Every benchmark-backed family has an outlier audit with top residual points and root-cause labels.
+- [x] At least one high-residual family shows a verified reduction in robust error metrics after targeted fixes.
+- [x] At least one currently non-quantitative family is promoted to benchmark-linked or calibration-grade with explicit uncertainty bounds.
+- [x] README and validation artifacts present a scientist-operable alternative protein workflow and trust posture.
+
+### Sprint S9. Skipped Test Triage and QM Optionality (Supporting Lane)
 
 Goal: turn large skip clusters into an explicit policy: keep true research-stage tests gated, but promote deterministic physics helpers (like quasi-harmonic correction) into executable library tests.
 
@@ -64,469 +258,117 @@ S9 measurable exit criteria:
 - [ ] Remaining skips are intentional, labeled, and linked to explicit unblock criteria.
 - [ ] Every optional-QM or optional-ML skip maps to a declared lane policy and does not leak into default deterministic CI expectations.
 
-### Sprint S0. Script Code Quality Improvements
+---
 
-Goal: Refactor main orchestration scripts (`scripts/`) to improve readability, modularity, and maintainability without altering scientific logic.
+## Completed Foundations (S0 through S8)
 
-S0.1: Refactor `run_pipeline.py`
-- [x] Extract argument parsing into a `parse_args()` function.
-- [x] Separate the 250-line `main()` into `run_inverse_design()` and `run_forward_pipeline()`.
-- [x] Consolidate shared validation/reporting logic into a helper function to DRY the code.
-- [x] Add missing type hints to function signatures.
+All foundational work has been implemented and integrated. Archive records below for traceability.
 
-S0.2: Refactor `run_cantera_kinetics.py`
-- [x] Break down the monolithic `run_simulation()` function into discrete steps: `build_mechanism()`, `run_integration()`, `plot_results()`.
-- [x] Hoist inline hardcoded dictionaries (`NAME_MAP`, `lookup`) to module-level constants to prevent redeclaration inside loops.
+### Implementation Summary: S0–S8 Complete
 
-S0.3: Refactor `calibrate_barriers.py`
-- [x] Extract the target prediction evaluation logic from `run_sim()` into a standalone `compute_mae_for_benchmark()` helper.
-- [x] Hoist `NAME_TO_SMILES` to a top-level constant.
+All 8 major foundation sprints are complete as of 2026-03-23. The work comprises:
 
-S0 measurable exit criteria:
-- [x] The three main scripts are modularized with clear function boundaries, docstrings, and type hints.
-- [x] They execute identically to their previous monolithic versions.
+- **S0/S0b/S0c/S0d** (Script quality): All main orchestration scripts (`run_pipeline.py`, `run_cantera_kinetics.py`, `calibrate_barriers.py`) refactored, logging/config/exceptions centralized, dead code removed. ✓
+- **S1** (Product positioning): Chemistry-family strategy explicit; lipid oxidation+crosstalk and donor hierarchy designated as next priority lanes; DFT and ML-potential role clarified. ✓
+- **S2** (Literature generalization): Family ingestion plan frozen, all payload surfaces extended with family metadata, template vocabulary generalized to 7 canonical payload types. ✓
+- **S3** (Runtime refactoring): Family-aware query layer implemented, legacy one-off getters replaced with `query_*` helpers, three runtime concepts (references/retention/priors) separated. ✓
+- **S4** (Decision panel expansion): Observable panel split into 8 explicit family lanes, panel role/kind/regime metadata propagated through all projection and reporting surfaces. ✓
+- **S5** (Family lanes implemented): Lipid oxidation/crosstalk, donor hierarchy, fermentation pretreatment, thiamine/nucleotide/glutathione support all wired into runtime and reporting. ✓
+- **S6** (Family-aware validation): Benchmark metadata enriched with family tags, validation outputs grouped by lane, reporting surfaces expose family evidence ladder and active lanes. ✓
+- **S7** (Execution record): All planned phases (A–E) completed; family ingestion/runtime/validation/reporting now unified under family-lane architecture. ✓
+- **S8** (Definition of done): All criteria met; 10 numbered SLR families have explicit machine-readable lanes, no family relies on markdown-only narrative, reports explain active lanes with evidence strength, quantitative trunk intact, structural gaps remain explicit. ✓
 
-Implemented closure:
+### S0–S0d: Script Quality Improvements (Completed)
 
-- The 2026-03-23 audit found no remaining unchecked S0/S0b/S0c/S0d implementation work in the active codebase; the remaining quality debt in this file is markdown formatting, not unfinished script or library refactors.
+**Goal**: Refactor main orchestration scripts and deep library code quality without altering scientific logic.
 
-### Sprint S0b. Script Robustness Improvements
+**Implementation closure**:
+- The 2026-03-23 audit found no remaining unchecked S0/S0b/S0c/S0d implementation work in the active codebase.
+- All three main scripts modularized with clear function boundaries, docstrings, type hints.
+- Logger, config, and typed exceptions centralized in `src/logger.py`, `src/config.py`, `src/exceptions.py`.
+- Removed `sys.exit(1)`, consolidated `_normalize_name` and `_canon` into `src/text_utils.py` and `src/chem_utils.py`.
+- Removed dead interactive `__main__` stubs, deprecated legacy `predict()` flow.
+- Scripts use logging instead of stdout; no hardcoded magic constants.
+- Tests pass via `docker_maillard.sh pytest`.
 
-Goal: Enhance reliability, validate inputs, and handle failures gracefully across orchestration scripts.
+### S1: Chemistry-Family Positioning (Completed)
 
-S0b.1: Foundation setup
-- [x] Create `src/logger.py` for structured logging.
-- [x] Create `src/config.py` for centralized defaults.
-- [x] Create `src/exceptions.py` for specific `MaillardError` definitions.
+**Goal**: Expand beyond amino acid–sugar without losing the core; explicitly name which families are core/partial/bounded/gap.
 
-S0b.2: Integration into CLI Scripts
-- [x] Update `run_pipeline.py` with logger, config, and typed exceptions.
-- [x] Update `run_cantera_kinetics.py` similarly.
-- [x] Update `calibrate_barriers.py` similarly.
+**Implementation closure**:
+- `src/family_strategy_policy.py` derives machine-readable strategy, fixes lipid oxidation and carbonylic crosstalk as next expansion.
+- Same artifact classifies families into first-class core, high-priority partial, bounded, and open gaps.
+- P4 archived as infrastructure; DFT reserved for TS-sensitive gaps; MLPs kept as bounded offline accelerators.
+- Amino acid–sugar core remains quantitative trunk.
 
-S0b.3: CLI Testing & Parallelisation
-- [x] Add parallel execution (`ProcessPoolExecutor`) to `calibrate_barriers.py`.
-- [x] Add integration smoke tests in `tests/unit/test_cli_scripts.py`.
+### S2: Literature Generalization to Family-Aware Execution (Completed)
 
-S0b measurable exit criteria:
-- [x] Scripts use logging instead of stdout prints (except for UI outputs).
-- [x] Scripts no longer harbor internal hardcoded magic default constants.
-- [x] Tests pass via `docker_maillard.sh pytest`.
+**Goal**: Every SLR family becomes first-class ingestible unit while preserving benchmark and reporting machinery.
 
-### Sprint S0c: Deep Library Code Quality Refactor
-Goal: Clean up fatal anti-patterns (sys.exit, mid-file imports, raw prints) migrating from CLI to the native `src/` libraries.
+**Implementation closure**:
+- `data/lit/chemistry_family_scope_registry.json` and `data/lit/family_ingestion_plan.json` use canonical `family_id` keys.
+- All payload surfaces extended with family metadata: `benchmark_intake_registry.json`, `flavor_reference_payloads.json`, `retention_reference_payloads.json`, `computational_priors.json`, `process_gap_registry.json`, `matrix_decision_panel.json`.
+- `src/literature_learning_loop.py` generalized; template generation driven by declared payload role.
+- Generalized payload vocabulary: `benchmark_payload`, `flavor_reference_payload`, `retention_payload`, `process_state_calibration`, `computational_prior`, `safety_payload`, `structural_gap_entry`.
+- `results/validation/literature_learning_loop.{md,json}` and `results/validation/literature_runtime_templates.json` generated with family-aware summaries.
 
-- [x] Remove `sys.exit(1)` from `src/recommend.py` and raise typed exceptions.
-- [x] Migrate scattered `print()` logs to `src.logger` inside `src/recommend.py`, `src/kinetics.py`, `src/headspace.py`, `src/mlp_optimizer.py`, and `src/diffusion_ts.py`.
-- [x] Remove duplicated definitions (e.g., `_weight`) and hoist mid-file PEP8 import violations in `src/recommend.py`.
+### S3: Runtime Refactoring to Family-Aware Registries (Completed)
 
-### Sprint S0d: Code Audit Cleanups
-Goal: Address remaining structural and quality issues surfaced during the deep audit.
+**Goal**: Replace family-specific hardcoding with indexed family queries.
 
-- [x] Create `src/text_utils.py` and consolidate identical `_normalize_name` functions from `benchmark_validation.py` and `matrix_targets.py`.
-- [x] Create `src/chem_utils.py` and consolidate `_canon` / `_canonical` from `recommend.py` and `smirks_engine.py`.
-- [x] Extract repetitive step collection logic in `smirks_engine.py` into a helper function.
-- [x] Replace remaining `print()` statements in `src/dft_refiner.py` with `logger` calls.
-- [x] Remove dead interactive `__main__` stubs from library modules (`smirks_engine`, `headspace`, `kinetics`, `cantera_export`, `sensory`).
-- [x] Deprecate/remove legacy static `predict()` flow from `src/recommend.py`.
+**Implementation closure**:
+- `src/literature_runtime.py` exposes `query_family_runtime_priors(...)`, `query_flavor_reference_entries(...)`, `query_retention_reference_entries(...)`.
+- Legacy getters (`get_pyrazine_control_priors`, `get_furanone_priors`, etc.) remain as thin compatibility wrappers.
+- Three runtime concepts separated: reference payloads, retention payloads, family priors.
+- `src/matrix_prior_registry.py` extended with `query_family_prior_entries(...)` and `summarize_family_prior_bundle(...)`.
+- `build_flavor_axis_summary(...)` now exposes `family_prior_bundle` for scientist-facing diagnostics.
 
-### Sprint S1. Expand Beyond Amino Acid-Sugar Without Losing The Core
+### S4: Decision Panel Expansion (Completed)
 
-Goal: make the repo state of the art at the product level by explicitly promoting the next chemistry families that change real plant-based flavor decisions.
+**Goal**: Observable panel now covers all family lanes, not just original targets.
 
-S1.1: Decide the next chemistry family lane
+**Implementation closure**:
+- Decision panel split into 8 explicit family lanes with metadata: `panel_role`, `observable_kind`, `modeling_regimes`.
+- Non-volatile state variables (nucleotide enrichment, fermentation precursor loading, thiamine, process severity) now first-class outputs.
+- `build_flavor_axis_summary(...)` emits `family_state_markers` with influence modes (`upstream_state_only` vs `upstream_state_plus_marker_panel`).
+- `src/presentation.py` surfaces panel metadata in projection tables and diagnostics.
 
-- [x] Treat lipid oxidation and carbonylic crosstalk as the default next expansion unless a stronger benchmark-visible family appears.
-- [x] Keep amino acid plus sugar, Strecker, and sulfur chemistry as the benchmarked foundation rather than diffusing effort across many under-ingested families.
-- [x] Name explicitly which additional families are open gaps versus bounded lanes versus first-class core.
+### S5: New Family Lanes Implementation (Completed)
 
-Implemented closure:
+**Goal**: Sequence work to maximize product value quickly.
 
-- `src/family_strategy_policy.py` now derives a machine-readable strategy artifact from the chemistry-family scope and ingestion plan, fixing lipid oxidation and carbonylic crosstalk as the default next expansion lane.
-- The same artifact makes the quantitative trunk explicit and classifies families into first-class core, high-priority partial lanes, bounded lanes, and open gaps.
+**Implementation closure** (lanes 1–5):
+- **Lane 1 (Lipid oxidation/crosstalk)**: Explicit dual-lane with benchmark targets + retention and crosstalk priors. `maillard_closure_pressure` surfaced. Off-note markers and closure delta wired into projection.
+- **Lane 2 (Donor hierarchy)**: Ribose, xylose, glucose, fructose, phosphorylated sugars, specialty donors no longer interchangeable. `src/precursor_resolver.py` updated; donor-family evidence in outputs.
+- **Lane 3 (Fermentation pretreatment)**: Bounded pretreatment node upstream of cooking; modifies precursor pools, nucleotide support, thiamine, off-note burden, pH. Uses literature-backed fold-change payloads.
+- **Lane 4 (Thiamine/nucleotides/glutathione)**: Support lanes once donor hierarchy and fermentation exist. Upstream availability modifiers + bounded thermal-routing priors.
+- **Lane 5 (Caramelization/degradation)**: Severity and failure-mode lane; alternative proteins primarily in matrix-family coverage.
+- `src/literature_runtime.py` exposes `build_family_upstream_contract(...)` for donor reweighting, pretreatment pH shifts, support activation.
+- `src/pipeline.py` applies upstream contract before pathway enumeration.
+- `src/presentation.py` surfaces effective runtime pH, donor routing, pretreatment interventions, upstream-added precursors.
 
-S1.2: Generalize SLR ingestion beyond amino acid-sugar
+### S6: Family-Lane Validation and Reporting (Completed)
 
-- [x] Use the same ingestion contract already proven in the repo: intake registry for candidate papers, runtime payloads for closable evidence, and process-gap registries for non-closable scope.
-- [x] Add a chemistry-family scope artifact that states, for each family, the preferred runtime payload type: benchmark payload, flavor reference payload, retention payload, computational prior, safety payload, or structural-gap registry.
-- [x] Avoid creating a separate narrative-only markdown workflow for new families; new families should enter the same machine-readable ingestion path used by the current SLR loop.
-- [x] For lipid oxidation and crosstalk specifically, structure ingestion as a dual lane: observable benchmark targets plus retention and competition payloads.
+**Goal**: User-facing trust surface shows what each family is doing.
 
-Implemented closure:
+**Implementation closure**:
+- `src/benchmark_validation.py` enriched with chemistry-family, SLR-family, payload-role metadata; exposes `build_family_lane_validation_artifact(...)`.
+- `src/presentation.py` shows chemistry-family and payload-role columns in benchmark summaries.
+- `src/reporting.py` adds `family_evidence_ladder`, `family_runtime_support_summary`, `family_specific_open_gaps`, per-run `family_lane_sensitivity` to JSON and Markdown reports.
+- `src/family_lane_sensitivity.py` provides toggle-impact artifact distinct from barrier-offset sensitivity.
 
-- The existing `chemistry_family_scope_registry`, `family_ingestion_plan`, and payload metadata remain the shared ingestion contract, and `family_strategy_policy` now states that contract explicitly as machine-readable policy.
-- The new strategy artifact encodes a lipid dual-lane policy: observable benchmark-plus-retention payloads on one side and crosstalk/competition priors plus structural gaps on the other.
+### S7: Execution Sequence (Completed)
 
-S1.3: Keep DFT and MLP policy clean for the next sprint
+**Goal**: Record implemented phases A–E for traceability.
 
-- [x] Archive the now-completed P4 setup work as infrastructure, not as the active scientific objective.
-- [x] State clearly that selective DFT is reserved for benchmark-visible sulfur, carbonyl-transfer, and TS-sensitive gaps after cheap-first screening.
-- [x] State clearly that MLPs remain bounded offline accelerators until local geometry or TS benchmarks accept them on Maillard-relevant systems.
-- [x] Prevent roadmap language from implying that better MLP branding can substitute for missing family-level ingestion or benchmark closure.
-
-Implemented closure:
-
-- `family_strategy_policy` now captures P4 as infrastructure, keeps DFT as selective cheap-first escalation tooling, and keeps MLPs bounded as offline accelerators rather than a substitute for family-lane closure.
-
-S1 measurable exit criteria:
-
-- [x] The repo can explain why amino acid-sugar was first without implying that other families are unimportant.
-- [x] The repo can identify lipid oxidation and crosstalk as either the active next family sprint or an explicitly rejected option with reasons.
-- [x] The repo has a machine-readable chemistry-family scope artifact linked in reporting.
-- [x] The top of this file reads as a clean active sprint rather than a mixed archive of finished and unfinished eras.
-
-### Planning Notes. Multi-Family Runtime Extension
-
-Goal: extend the existing amino-acid-sugar literature-to-runtime stack to the new 01-10 family corpus without creating a second parallel architecture.
-
-Working conclusion from code review:
-
-- the repo already has the right high-level ingestion contract:
-   - intake registry for candidate references
-   - executable benchmark payloads where closure exists
-   - reference or retention payloads where runtime use is bounded
-   - computational priors for directional or calibration-grade knowledge
-   - process-gap registry for structurally non-closable scope
-- the current implementation is still heavily shaped around the original family:
-   - `src/literature_learning_loop.py` knows only a small set of template kinds and artifact classes
-   - `src/literature_runtime.py` contains family-specific hardcoded getters and routing for pyrazines, furanones, thiamine, Strecker crosstalk, and a narrow set of retention rules
-   - `src/matrix_prior_registry.py` is indexed by `protein_type` only and cannot yet represent family-specific priors cleanly
-   - `src/benchmark_validation.py` and the benchmark metadata model are not yet explicitly family-lane aware
-   - `data/lit/matrix_decision_panel.json` covers the original decision panel plus adverse markers, but not the broader family-by-family observable panel implied by 01-10
-   - `src/family_sensitivity.py` screens kinetic reaction families, not literature families or ingestion lanes
-- the repo therefore does not need a new architecture; it needs a generalized family-aware layer on top of the existing contracts.
-
-Non-negotiable extension rules:
-
-- do not parse the markdown SLR files directly at runtime
-- do not create a narrative-only workflow for families 02-10
-- keep the amino-acid-sugar core as the quantitative trunk
-- add new families through machine-readable companion artifacts tied back to the numbered SLRs
-- keep each new family explicit about whether it is:
-   - benchmark-closable
-   - calibration-grade
-   - directional prior only
-   - safety lane
-   - structural gap only
-
-### S2. Generalize The Literature Contract To Family-Aware Execution
-
-Goal: make the repo capable of representing every SLR family as a first-class ingestible unit while preserving the existing benchmark and reporting machinery.
-
-S2.1: Freeze the canonical family-to-runtime map
-
-- [x] Create a machine-readable family ingestion plan artifact that maps each numbered SLR family 01-10 to:
-   - chemistry family id
-   - source SLR file
-   - preferred payload types
-   - target runtime modules
-   - target compounds or state variables
-   - benchmarkability status
-   - next curation action
-- [x] Use the current numbered corpus in `data/Gemini_Deep_Research/01.md` through `10.md` as the scientific source and the preserved synthetic summary in `data/Gemini_Deep_Research/cross_family_promotion_and_ingestion_priorities.md` as the ranking layer.
-- [x] Decide one canonical identifier scheme for families so the same key appears in:
-   - `data/lit/chemistry_family_scope_registry.json`
-   - intake and payload artifacts
-   - reporting summaries
-   - future validation outputs
-- [x] Keep matrix family and chemistry family as separate axes:
-   - chemistry family answers what reaction knowledge is encoded
-   - matrix family answers where that knowledge is supported
-
-Implemented closure:
-
-- `data/lit/chemistry_family_scope_registry.json` now uses the same canonical `family_id` keys as `data/lit/family_ingestion_plan.json`.
-- `results/validation/family_identifier_contract.{json,md}` verifies scope-plan alignment, payload-family validity, and chemistry-vs-matrix axis separation.
-
-S2.2: Add family metadata to all literature payload surfaces
-
-- [x] Extend `data/lit/benchmark_intake_registry.json` entries to carry at least:
-   - `chemistry_family`
-   - `slr_family_source`
-   - `payload_role`
-   - `observable_panel_tags`
-   - `process_state_scope`
-- [x] Extend `data/lit/flavor_reference_payloads.json` entries with family metadata so sulfur, nucleotide, caramelization, and fermentation-derived references can coexist without ad hoc code paths.
-- [x] Extend `data/lit/retention_reference_payloads.json` so retention and release rules can be grouped by chemistry family, not only by matrix and compound.
-- [x] Extend `data/lit/computational_priors.json` so priors can be indexed by both `protein_type` and `chemistry_family` where appropriate.
-- [x] Extend `data/lit/process_gap_registry.json` so structural blockers are attributable to a family lane and not just to a benchmark id.
-- [x] Extend `data/lit/matrix_decision_panel.json` with family tags so the decision panel can say which compounds are part of which lane and whether they are core targets, adverse markers, or process severity markers.
-
-S2.3: Generalize the ingestion compiler instead of multiplying hardcoded templates
-
-- [x] Refactor `src/literature_learning_loop.py` so template generation is driven by declared payload role rather than a short hardcoded map in `READY_TEMPLATE_KIND`.
-- [x] Add support for family-specific output targets beyond the current set of:
-   - benchmark
-   - process state calibration
-   - directional prior
-   - safety reference
-- [x] Introduce a generalized template vocabulary such as:
-   - `benchmark_payload`
-   - `flavor_reference_payload`
-   - `retention_payload`
-   - `process_state_calibration`
-   - `computational_prior`
-   - `safety_payload`
-   - `structural_gap_entry`
-- [x] Generate a new review artifact showing the queue by chemistry family and payload type, not only by encoding status.
-
-Implemented closure:
-
-- `src/literature_learning_loop.py` now separates `source_payload_role` from `target_payload_types` and derives the primary `template_kind` from declared runtime artifact payload types, with readiness status used only as a fallback.
-- `results/validation/literature_learning_loop.{md,json}` now include `payload_queue_review` and summary counts by generalized payload type.
-- `results/validation/literature_runtime_templates.json` now uses the generalized payload vocabulary (`benchmark_payload`, `computational_prior`, `process_state_calibration`, `safety_payload`) and carries family-aware metadata needed for future `flavor_reference_payload` and `retention_payload` templates.
-
-### S3. Refactor Runtime Access From Family-Specific Hardcoding To Family-Aware Registries
-
-Goal: stop baking the original family assumptions directly into `src/literature_runtime.py` and related modules.
-
-S3.1: Replace singleton getters with indexed family queries
-
-- [x] Refactor `src/literature_runtime.py` so current functions like `get_pyrazine_control_priors`, `get_furanone_priors`, `get_thiamine_priors`, and `get_strecker_crosstalk_priors` become family-aware query helpers rather than one-off retrieval functions.
-- [x] Add generic lookup helpers that can answer:
-   - which priors apply to a compound, family, matrix family, and process state
-   - which retention references apply to a given compound and family lane
-   - which flavor references are scoring targets versus diagnostics versus constraints
-- [x] Keep the legacy helpers as compatibility wrappers until the new query layer is stable.
-
-Implemented closure:
-
-- `src/literature_runtime.py` now exposes `query_family_runtime_priors(...)`, `query_flavor_reference_entries(...)`, and `query_retention_reference_entries(...)` as the query-first family-aware interface.
-- Legacy getters (`get_pyrazine_control_priors`, `get_furanone_priors`, `get_thiamine_priors`, `get_strecker_crosstalk_priors`) remain as thin compatibility wrappers over the new prior query layer.
-
-S3.2: Separate three runtime concepts that are currently partially conflated
-
-- [x] Keep `reference payloads` for scoring or reporting targets
-- [x] Keep `retention payloads` for observable release or attenuation behavior
-- [x] Keep `family priors` for mechanistic directional modifiers and pathway plausibility
-- [x] Ensure that no single payload file silently becomes all three.
-
-Implemented closure:
-
-- `build_flavor_axis_summary(...)` continues to consume compatibility getters, but those getters now route through the dedicated prior query path rather than section-specific hardcoding.
-- flavor target lookup and policy summary now flow through `query_flavor_reference_entries(...)`.
-- retention routing helpers now flow through `query_retention_reference_entries(...)`, preserving the current runtime behaviour while separating retention evidence from flavor references and priors.
-
-S3.3: Make priors family-aware without losing the existing protein-type bundle interface
-
-- [x] Preserve `src/matrix_prior_registry.py` for matrix-state summaries.
-- [x] Add a companion family-aware registry or accessor so the runtime can answer questions such as:
-   - what sulfur-family priors apply in soy isolate
-   - what fermentation-family priors modify the precursor pool before cooking
-   - what off-note-family priors trap dicarbonyls or block amino groups
-- [x] Do not overload the current matrix prior bundle with every chemistry concept; add a separate layer if necessary.
-
-Implemented closure:
-
-- `src/matrix_prior_registry.py` now keeps the existing matrix-state bundle intact while adding `query_family_prior_entries(...)` and `summarize_family_prior_bundle(...)` for chemistry-family-aware prior access.
-- `build_flavor_axis_summary(...)` now exposes `family_prior_bundle` so scientist-facing diagnostics can distinguish matrix-state support from chemistry-family priors.
-
-### S4. Extend The Scientist Decision Panel Beyond The Original Family
-
-Goal: make the tool useful for real formulation decisions across the full family map rather than only the original target panel.
+**Implementation closure** (all phases complete):
+- **Phase A** (Data model/ingestion): Family-aware metadata flows through registries; `src/family_ingestion_plan.py` builds and renders plan; `src/literature_learning_loop.py` summarizes by family/payload-role.
+- **Phase B** (Runtime refactor): Family-aware query helpers in `src/literature_runtime.py`; family-aware prior accessor in `src/matrix_prior_registry.py`; legacy wrappers stable.
+- **Phase C** (First new family): Lipid oxidation/crosstalk wired; family-level outputs in reporting and recommendation explanations.
+- **Phase D** (Upstream enabling): Donor hierarchy, fermentation pretreatment, thiamine/nucleotide/glutathione support all implemented.
+- **Phase E** (Coverage/trust): Decision panel expanded, family-aware validation summaries, family open-gap reporting.
 
-S4.1: Freeze the expanded observable panel by lane
-
-- [x] Split the decision panel into explicit lane groups:
-   - sulfur positives
-   - Strecker aldehydes
-   - pyrazines
-   - furanones and caramelization severity markers
-   - lipid oxidation adverse markers
-   - nucleotide and umami support markers
-   - fermentation pretreatment state markers
-   - safety markers
-- [x] For each panel compound or state variable, encode:
-   - family ownership
-   - evidence state
-   - whether it is scored, constrained, diagnostic, or report-only
-   - which modeling regimes it applies to
-
-Implemented closure:
-
-- `data/lit/matrix_decision_panel.json` now carries explicit `panel_role`, `observable_kind`, and `modeling_regimes` metadata by lane, plus first-class pretreatment/state-marker entries.
-- `src/matrix_targets.py`, `src/projection_metadata.py`, and `src/projection_utils.py` now preserve and propagate those panel fields into downstream reporting.
-
-S4.2: Keep family-specific observables from being overclaimed
-
-- [x] Do not force every family into the same standard as MFT or FFT.
-- [x] Allow non-volatile but decision-relevant state variables to be first-class outputs where appropriate, especially for:
-   - nucleotide enrichment
-   - fermentation-derived precursor loading
-   - thiamine availability
-   - process severity markers such as HMF or furfural
-- [x] Make the reports explicit when a family influences the recommendation through upstream state changes rather than through direct volatile prediction.
-
-Implemented closure:
-
-- `build_flavor_axis_summary(...)` now emits `family_state_markers` with explicit influence modes (`upstream_state_only` vs `upstream_state_plus_marker_panel`) for thiamine, nucleotide, pretreatment, and caramelization state support.
-- `src/presentation.py` now surfaces panel role/kind/regime metadata in projection tables and prints state-marker diagnostics directly in the flavor-axis section.
-
-### S5. Implement New Family Lanes In The Order That Maximizes Product Value
-
-Goal: sequence the work so the next code changes improve recommendation quality quickly instead of scattering effort.
-
-S5.1: Priority lane 1. Lipid oxidation and carbonylic crosstalk
-
-- [x] Promote `lipid_oxidation_and_carbonylic_crosstalk` to the first new family lane because it has the highest immediate impact on PBMA decisions.
-- [x] Split this lane into two runtime sub-lanes:
-   - adverse marker generation and retention
-   - carbonyl competition and crosstalk priors
-- [x] Extend `src/lipid_oxidation.py`, `src/literature_runtime.py`, `src/projection.py`, and reporting so lipid-derived aldehydes are not only adverse outputs but also modifiers of Maillard closure.
-- [x] Define benchmark-ready targets from the existing off-note panel and calibration-ready crosstalk priors from the literature.
-
-Implemented closure:
-
-- `src/lipid_oxidation.py` now resolves generic oil inputs into proxy lipid loads and exposes named benchmark-ready off-note markers instead of only raw SMILES outputs.
-- `src/literature_runtime.py` now treats family 02 as an explicit dual lane: adverse marker generation plus retention, and carbonyl competition plus crosstalk priors, with `maillard_closure_pressure` surfaced alongside benchmark-ready targets and Lincoln 2025 prior ids.
-- The pipeline projection path now lets family 02 modify target closure explicitly through `maillard_closure_delta` instead of only inflating off-note risk.
-- `src/presentation.py` now reports lipid benchmark targets, crosstalk priors, and closure pressure directly in the flavor-axis diagnostics.
-
-S5.2: Priority lane 2. Carbonyl donor hierarchy
-
-- [x] Extend precursor handling so ribose, xylose, glucose, fructose, phosphorylated sugars, and specialty donors are no longer treated as interchangeable sugar inputs.
-- [x] Update `src/precursor_resolver.py`, `src/recommend.py`, and runtime priors to encode donor identity as a first-class variable.
-- [x] Add donor-family evidence to recommendation outputs so the tool can explain why a formulation is donor-limited rather than just sugar-limited.
-
-S5.3: Priority lane 3. Fermentation pretreatment
-
-- [x] Add a new `fermentation_pretreatment_node` concept that sits upstream of cooking chemistry and can modify:
-   - precursor pools
-   - nucleotide support
-   - thiamine availability
-   - off-note burden
-   - pH routing
-- [x] Implement this as a bounded pretreatment layer first, not as a full fermentation simulator.
-- [x] Start by using literature-backed fold-change or enrichment payloads rather than detailed microbial kinetics.
-
-S5.4: Priority lane 4. Thiamine, nucleotides, and glutathione or peptide support
-
-- [x] Treat thiamine, nucleotide, and glutathione families as explicit additive or support lanes once donor hierarchy and fermentation pretreatment exist.
-- [x] Represent them as upstream availability modifiers plus bounded thermal-routing priors, not as fully independent kinetic solvers on day one.
-- [x] Reuse existing sulfur and Strecker scoring surfaces wherever possible.
-
-S5.5: Priority lane 5. Carbohydrate pyrolysis and alternative matrix scope
-
-- [x] Keep caramelization and carbohydrate thermal degradation as a severity and failure-mode lane before promoting it to a major optimization axis.
-- [x] Keep alternative proteins primarily in `matrix_family_coverage` and bounded priors until enough direct quantitative closure exists to justify family-specific benchmarks.
-
-Implemented closure:
-
-- `src/literature_runtime.py` now exposes a reusable `build_family_upstream_contract(...)` layer that reweights donor pools, applies bounded pretreatment pH shifts, carries support-lane activation, and injects bounded thiamine support when formulation metadata says it is available but not explicitly listed.
-- `src/pipeline.py` now applies that upstream contract before pathway enumeration so donor hierarchy and fermentation pretreatment modify effective precursor loading and runtime pH instead of remaining only diagnostic lanes.
-- `src/presentation.py` now surfaces the effective runtime pH, donor-class routing, donor pool factors, pretreatment interventions, and upstream-added precursors in the scientist-facing flavor-axis report.
-- Focused runtime, pipeline, usability, pre-processor, and integration subsets passed in Docker after the change.
-
-### S6. Make Validation And Reporting Family-Lane Aware
-
-Goal: the user-facing trust surface must show what each family is doing, not just what the free core predicts.
-
-S6.1: Extend benchmark metadata and validation outputs
-
-- [x] Add chemistry-family and payload-role metadata to benchmark and calibration artifacts.
-- [x] Update `src/benchmark_validation.py` so benchmark summaries can be grouped by chemistry family and by lane.
-- [x] Add family-lane summaries to the validation outputs analogous to the current chemistry-family scope and matrix-family coverage artifacts.
-
-S6.2: Extend reporting surfaces
-
-- [x] Update `src/reporting.py` to expose:
-   - family ingestion plan artifact
-   - family runtime support summary
-   - family-specific open gaps
-   - family-specific evidence ladders in recommendation outputs
-- [x] Make it obvious in scientist-facing reports whether a recommendation was driven by:
-   - core benchmarked chemistry
-   - calibration-grade family payloads
-   - directional priors
-   - structural-gap extrapolation
-
-S6.3: Keep family sensitivity separate from barrier sensitivity
-
-- [x] Leave `src/family_sensitivity.py` focused on kinetic reaction-family perturbation.
-- [x] Add a new family-lane sensitivity artifact if needed that asks a different question:
-   - how much does enabling or disabling a literature family lane change the recommendation or ranking outcome
-- [x] Do not overload the existing barrier-offset sensitivity tool with literature-family semantics.
-
-Implemented closure:
-
-- `src/benchmark_validation.py` now enriches `BenchmarkSummary` with chemistry-family, SLR-family, and payload-role metadata and exposes `build_family_lane_validation_artifact(...)` plus a Markdown renderer and generator script.
-- `src/presentation.py` now shows chemistry-family and payload-role columns in the benchmark summary surface so family-aware validation is visible instead of buried in JSON.
-- `src/reporting.py` now adds `family_evidence_ladder`, `family_runtime_support_summary`, `family_specific_open_gaps`, and per-run `family_lane_sensitivity` to the JSON and Markdown reports.
-- `src/family_lane_sensitivity.py` now provides a runtime toggle-impact artifact distinct from `src/family_sensitivity.py`, keeping literature family-lane semantics separate from barrier-offset perturbations.
-
-### S7. Implemented Execution Sequence Record
-
-This sequence is now historical record. The originally proposed S7 work was absorbed into S2, S3, S5, and S6 and is no longer an open sprint.
-
-Phase A. Data model and ingestion generalization
-
-- [x] Add chemistry-family metadata to all literature payload files.
-- [x] Build the family ingestion plan artifact and generator.
-- [x] Extend the literature learning loop to summarize by family and payload role.
-
-Implemented closure:
-
-- Family-aware metadata now flows across the literature payload registries consumed by `src/literature_family_registry.py` and `src/literature_learning_loop.py`.
-- `src/family_ingestion_plan.py` builds and renders the family ingestion plan artifact, and `scripts/generate_family_ingestion_plan.py` now emits the validation markdown/json pair.
-- `src/family_ingestion_plan.py` builds and renders the family ingestion plan artifact, and `scripts/generators/generate_family_ingestion_plan.py` now emits the validation markdown/json pair.
-- `src/literature_learning_loop.py` summarizes ready references by chemistry family, payload role, and generalized payload type.
-
-Phase B. Runtime refactor
-
-- [x] Add family-aware query helpers in `src/literature_runtime.py`.
-- [x] Introduce a family-aware prior accessor alongside `src/matrix_prior_registry.py`.
-- [x] Keep old hardcoded accessors as compatibility wrappers until tests are migrated.
-
-Implemented closure:
-
-- `src/literature_runtime.py` now exposes query-first helpers for priors, flavor references, and retention references.
-- `src/matrix_prior_registry.py` now supports family-aware prior queries and bundle summaries in parallel with the original protein-centric accessors.
-- Legacy one-off getters remain as thin compatibility wrappers over the family-aware layer.
-
-Phase C. First new family implementation
-
-- [x] Implement lipid oxidation and crosstalk as the first explicit multi-payload family lane.
-- [x] Wire family-level outputs into reporting and recommendation explanations.
-
-Implemented closure:
-
-- `src/literature_runtime.py` and `src/pipeline.py` now treat lipid oxidation and carbonylic crosstalk as an explicit runtime lane with causal upstream and scoring effects.
-- Scientist-facing explanation surfaces now expose active family lanes, lane-specific summaries, and family-level score deltas.
-
-Phase D. Upstream enabling families
-
-- [x] Implement donor hierarchy.
-- [x] Implement fermentation pretreatment.
-- [x] Add thiamine, nucleotide, and glutathione support lanes.
-
-Phase E. Coverage and trust surfaces
-
-- [x] Expand the decision panel.
-- [x] Add family-aware validation summaries.
-- [x] Add family-lane open-gap reporting.
-
-Implemented closure:
-
-- The decision-panel layer now carries family-aware metadata through `data/lit/matrix_decision_panel.json`, `src/matrix_targets.py`, and projection metadata.
-- `src/benchmark_validation.py` and `src/presentation.py` expose family-aware validation summaries, including chemistry families, payload roles, and family-lane validation artifacts.
-- `src/reporting.py` now emits family evidence ladders, runtime support summaries, and family-specific open-gap reporting for each run and comparison report.
-
-### S8. Definition Of Done For This Extension Program
-
-- [x] Every numbered SLR family 01-10 maps to one explicit machine-readable ingestion lane.
-- [x] No family is represented only by markdown if it is supposed to affect runtime behavior.
-- [x] Reports can explain which family lanes were active in a recommendation and with what evidence strength.
-- [x] The amino-acid-sugar core remains the quantitative trunk rather than being diluted into a generic all-families model.
-- [x] Lipid oxidation and crosstalk, donor hierarchy, and fermentation pretreatment are all visible as explicit runtime concepts.
-- [x] Structural gaps remain explicit where no benchmark-grade closure exists.
-
-Implemented closure:
-
-- `data/lit/family_ingestion_plan.json`, `src/literature_family_registry.py`, and family-aware payload metadata provide explicit machine-readable lanes for SLR families 01-10.
-- Runtime behavior no longer depends on markdown-only SLR narratives; family behavior is wired through structured registries, priors, and runtime query helpers.
-- `src/reporting.py` now exposes active family lanes, evidence posture, open gaps, and lane sensitivity so recommendations disclose evidence strength by family.
-- The quantitative trunk remains anchored on amino-acid plus sugar chemistry while additional families are layered as bounded lanes with explicit uncertainty posture.
-- Structural gaps remain first-class via `data/lit/process_gap_registry.json`, family-specific open-gap reporting, and non-promotional lane policy.
+### S8: Definition of Done (Completed)
 
 ## The Three Modeling Regimes
 
@@ -544,19 +386,9 @@ Implemented closure:
 
 These are not three independent backlogs. They are three trust regimes of the same tool.
 
-## Completed Foundations (Collapsed)
+---
 
-- [x] Docker plus conda is the authoritative validation path.
-- [x] Free-precursor strict-ready benchmark surface exists and is versioned.
-- [x] Matrix-only pea/soy intake-headspace path is executable and benchmarked directionally.
-- [x] Validation overview now shows all quantitative benchmarks, including matrix-only and matrix-augmented lanes.
-- [x] Reporting exposes provenance, evidence ladders, confidence warnings, MFT/furfural ratio, meaty quality penalty, and sulfur trapping.
-- [x] Matrix observable calibration is applied exactly once in the matrix-only path.
-- [x] Validation contract now includes both max ratio and mean absolute log-scale error.
-- [x] Per-benchmark scale thresholds are supported for the authoritative free-precursor set.
-- [x] xTB, selective DFT, and offline ML-potential integration hooks exist as refinement tooling.
-
-## Strategic Answer
+## Program Record: Strategic Answer
 
 ### What problem should we solve?
 
@@ -570,22 +402,7 @@ These are not three independent backlogs. They are three trust regimes of the sa
 
 - [ ] No. The elegant main solution is benchmark-driven observable and accessibility modeling first, selective mechanistic refinement second, and external offline ML-potential acceleration only third.
 
-## Program Record
-
-The sections below are the program record and archived foundations for the current branch. Keep them for traceability, but prefer the Current Sprint section above for active execution.
-
-### Current Operating Constraint
-
-Assume no internal wet-lab loop is available unless explicitly stated otherwise.
-
-That changes the execution order:
-
-- use the literature and machine-readable intake registry to close every benchmark or calibration surface that is actually closable without new experiments
-- represent structural literature gaps explicitly instead of pretending they can be calibrated away
-- do not count internally constructed mixed matrix benchmarks as external closure; if a mixed matrix surface lacks external measurements, route it into mechanistic triage rather than P0 promotion
-- use offline xTB, selective DFT, and external ML potentials only for narrow mechanistic gaps that remain decision-relevant after the literature closure work
-
-### Immediate Execution Order Under A Literature-Only Constraint
+## Program Record: Immediate Execution Order Under A Literature-Only Constraint
 
 Phase L0: Freeze the scientist decision panel and evidence contract
 

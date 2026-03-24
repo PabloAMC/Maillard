@@ -685,13 +685,13 @@ def _run_matrix_only_benchmark_prediction(bench: dict) -> dict:
     }
 
 
-def evaluate_benchmark(
-    bench_file: Path | str,
+def _evaluate_loaded_benchmark(
+    bench: dict,
+    *,
+    bench_path: Path,
     target_tag: str = DEFAULT_TARGET_TAG,
     thermodynamic_gating: str = "auto",
 ) -> BenchmarkEvaluation:
-    bench_path = Path(bench_file)
-    bench = load_benchmark(bench_path)
     formulation = benchmark_to_formulation(bench)
     supported, reason = _is_supported_formulation(formulation)
 
@@ -764,8 +764,44 @@ def evaluate_benchmark(
     )
 
 
-def summarize_evaluation(
+def evaluate_benchmark(
+    bench_file: Path | str,
+    target_tag: str = DEFAULT_TARGET_TAG,
+    thermodynamic_gating: str = "auto",
+) -> BenchmarkEvaluation:
+    bench_path = Path(bench_file)
+    bench = load_benchmark(bench_path)
+    return _evaluate_loaded_benchmark(
+        bench,
+        bench_path=bench_path,
+        target_tag=target_tag,
+        thermodynamic_gating=thermodynamic_gating,
+    )
+
+
+def evaluate_benchmark_payload(
+    bench: dict,
+    *,
+    benchmark_id: Optional[str] = None,
+    target_tag: str = DEFAULT_TARGET_TAG,
+    thermodynamic_gating: str = "auto",
+) -> BenchmarkEvaluation:
+    normalized = dict(bench)
+    if benchmark_id and not normalized.get("benchmark_id"):
+        normalized["benchmark_id"] = benchmark_id
+    payload_id = str(normalized.get("benchmark_id", benchmark_id or "matrix_experiment_payload"))
+    pseudo_path = ROOT / "results" / "validation" / f"{payload_id}.synthetic_benchmark.json"
+    return _evaluate_loaded_benchmark(
+        normalized,
+        bench_path=pseudo_path,
+        target_tag=target_tag,
+        thermodynamic_gating=thermodynamic_gating,
+    )
+
+
+def summarize_evaluation_for_benchmark(
     evaluation: BenchmarkEvaluation,
+    bench: dict,
     *,
     protein_type: str = "free",
     thresholds: BenchmarkThresholds = DEFAULT_BENCHMARK_THRESHOLDS,
@@ -776,7 +812,6 @@ def summarize_evaluation(
     mean_ratio = sum(ratios) / len(ratios) if ratios else None
     mean_abs_log10_error = _mean_abs_log10_error(matched)
 
-    bench = load_benchmark(evaluation.bench_file)
     scale_thresholds = _resolve_scale_thresholds(
         bench,
         protein_type=protein_type,
@@ -927,6 +962,21 @@ def summarize_evaluation(
         calibration_mode=matrix_contract.get("calibration_mode"),
         reference_signal_origin=evaluation.reference_signal_origin,
         mean_abs_log10_error=mean_abs_log10_error,
+    )
+
+
+def summarize_evaluation(
+    evaluation: BenchmarkEvaluation,
+    *,
+    protein_type: str = "free",
+    thresholds: BenchmarkThresholds = DEFAULT_BENCHMARK_THRESHOLDS,
+) -> BenchmarkSummary:
+    bench = load_benchmark(evaluation.bench_file)
+    return summarize_evaluation_for_benchmark(
+        evaluation,
+        bench,
+        protein_type=protein_type,
+        thresholds=thresholds,
     )
 
 
@@ -1470,6 +1520,275 @@ def build_matrix_target_status_artifact(
             "promotion_ready": sum(1 for row in benchmark_rows if row["promotion_ready"]),
             "mechanistic_priority_ready": sum(1 for row in benchmark_rows if row["mechanistic_priority_ready"]),
             **support_totals,
+        },
+    }
+
+
+
+def _matrix_promotion_requirement_rows(
+    benchmark_row: Mapping[str, Any],
+    evidence_row: MatrixBenchmarkEvidence,
+) -> List[Dict[str, Any]]:
+    support_counts = benchmark_row.get("support_counts", {})
+    requirement_rows = [
+        {
+            "key": "meaty_positive_targets_present",
+            "label": "Target profile includes meaty-positive compounds",
+            "passed": benchmark_row.get("target_profile") in {"mixed", "meaty_positive"},
+            "detail": str(benchmark_row.get("target_profile", "unknown")),
+        },
+        {
+            "key": "ranking_contract_passes",
+            "label": "Ranking contract passes",
+            "passed": benchmark_row.get("ranking_contract_status") == "pass",
+            "detail": str(benchmark_row.get("ranking_contract_status", "unknown")),
+        },
+        {
+            "key": "comparator_is_measured_volatiles",
+            "label": "Comparator signal is wet-lab measured_volatiles",
+            "passed": benchmark_row.get("reference_signal_origin") == "measured_volatiles",
+            "detail": str(benchmark_row.get("reference_signal_origin", "unknown")),
+        },
+        {
+            "key": "external_quantitative_origin",
+            "label": "Source is externally quantitative",
+            "passed": evidence_row.external_data_status == "external_quantitative",
+            "detail": evidence_row.external_data_status,
+        },
+        {
+            "key": "minimum_quantitative_closed_targets",
+            "label": "At least two compounds are quantitatively closed",
+            "passed": int(support_counts.get("quantitative_closed", 0)) >= 2,
+            "detail": str(int(support_counts.get("quantitative_closed", 0))),
+        },
+        {
+            "key": "no_internal_or_directional_dependencies",
+            "label": "No internal-candidate or directional dependencies remain",
+            "passed": int(support_counts.get("internal_candidate", 0)) == 0 and int(support_counts.get("directional_support", 0)) == 0,
+            "detail": f"internal={int(support_counts.get('internal_candidate', 0))}; directional={int(support_counts.get('directional_support', 0))}",
+        },
+    ]
+    return requirement_rows
+
+
+def _select_matrix_promotion_target(
+    benchmark_rows: Iterable[Mapping[str, Any]],
+    evidence_rows: Iterable[MatrixBenchmarkEvidence],
+) -> Optional[Dict[str, Any]]:
+    benchmark_list = list(benchmark_rows)
+    evidence_list = list(evidence_rows)
+    candidates = [
+        row for row in benchmark_list
+        if row.get("target_profile") in {"mixed", "meaty_positive"}
+        and row.get("ranking_contract_status") == "pass"
+    ]
+    if not candidates:
+        return None
+
+    external_anchor_counts: Dict[str, int] = defaultdict(int)
+    distinct_external_states: Dict[str, set[str]] = defaultdict(set)
+    for row in evidence_list:
+        if row.external_data_status != "external_quantitative":
+            continue
+        external_anchor_counts[row.protein_type] += 1
+        if row.process_state:
+            distinct_external_states[row.protein_type].add(str(row.process_state))
+
+    def rank_tuple(row: Mapping[str, Any]) -> tuple[int, int, int, int, str, str]:
+        protein_type = str(row.get("protein_type", "free"))
+        counts = row.get("support_counts", {})
+        return (
+            int(external_anchor_counts.get(protein_type, 0)),
+            len(distinct_external_states.get(protein_type, set())),
+            int(counts.get("quantitative_closed", 0)),
+            -1 * (int(counts.get("internal_candidate", 0)) + int(counts.get("directional_support", 0)) + int(counts.get("open_gap", 0))),
+            "1" if row.get("target_profile") == "mixed" else "0",
+            str(row.get("benchmark_id", "unknown")),
+        )
+
+    selected = sorted(candidates, key=rank_tuple, reverse=True)[0]
+    protein_type = str(selected.get("protein_type", "free"))
+    rationale = []
+    rationale.append(f"same_protein_external_anchor_count={int(external_anchor_counts.get(protein_type, 0))}")
+    rationale.append(f"same_protein_external_process_states={len(distinct_external_states.get(protein_type, set()))}")
+    rationale.append(f"quantitative_closed={int(selected.get('support_counts', {}).get('quantitative_closed', 0))}")
+    rationale.append(f"internal_candidate={int(selected.get('support_counts', {}).get('internal_candidate', 0))}")
+    return {
+        "benchmark_id": selected.get("benchmark_id"),
+        "protein_type": protein_type,
+        "process_state": selected.get("process_state"),
+        "target_profile": selected.get("target_profile"),
+        "rationale": rationale,
+        "selection_policy": "prefer_mixed_matrix_lanes_with_the_broadest_same_protein_external_anchor_span_before_mechanistic_escalation",
+    }
+
+
+def build_matrix_promotion_contract_artifact(
+    benchmark_files: Optional[Iterable[Path | str]] = None,
+    *,
+    target_tag: str = DEFAULT_TARGET_TAG,
+) -> Dict[str, Any]:
+    status_payload = build_matrix_target_status_artifact(benchmark_files, target_tag=target_tag)
+    evidence_rows = build_matrix_benchmark_evidence_audit(benchmark_files)
+    evidence_lookup = {row.benchmark_id: row for row in evidence_rows}
+
+    benchmark_assessments: List[Dict[str, Any]] = []
+    for row in status_payload.get("benchmarks", []):
+        benchmark_id = str(row.get("benchmark_id", "unknown"))
+        evidence = evidence_lookup.get(benchmark_id)
+        if evidence is None:
+            continue
+        requirements = _matrix_promotion_requirement_rows(row, evidence)
+        benchmark_assessments.append(
+            {
+                "benchmark_id": benchmark_id,
+                "protein_type": row.get("protein_type"),
+                "process_state": row.get("process_state"),
+                "target_profile": row.get("target_profile"),
+                "promotion_ready": bool(row.get("promotion_ready", False)),
+                "promotion_blocker": row.get("promotion_blocker", "unknown"),
+                "requirements": requirements,
+            }
+        )
+
+    selected_target = _select_matrix_promotion_target(status_payload.get("benchmarks", []), evidence_rows)
+    summary = status_payload.get("summary", {})
+    return {
+        "schema_version": "1.0",
+        "description": "Explicit matrix promotion contract defining how a matrix benchmark moves from internal candidate support to external decision readiness.",
+        "promotion_rule": {
+            "contract_id": "matrix_external_decision_ready_v1",
+            "minimum_quantitative_closed_targets": 2,
+            "disallow_internal_candidate_support": True,
+            "disallow_directional_support": True,
+            "requires_measured_volatiles": True,
+            "requires_external_quantitative_origin": True,
+            "requires_mixed_or_meaty_positive_target_profile": True,
+            "requires_passing_ranking_contract": True,
+            "notes": [
+                "External decision readiness is a benchmark-level promotion state, not a generic matrix-family claim.",
+                "Internal reproducibility candidates and transferred priors can strengthen triage, but they do not by themselves unlock promotion.",
+                "Mechanistic refinement stays secondary until the observable audit says the remaining blocker is no longer external evidence or transfer dependence.",
+            ],
+        },
+        "selected_promotion_target": selected_target,
+        "benchmarks": benchmark_assessments,
+        "summary": {
+            "benchmarks_assessed": len(benchmark_assessments),
+            "promotion_ready": int(summary.get("promotion_ready", 0)),
+            "mechanistic_priority_ready": int(summary.get("mechanistic_priority_ready", 0)),
+        },
+    }
+
+
+def _matrix_closure_action(
+    *,
+    compound_row: Mapping[str, Any],
+    benchmark_row: Mapping[str, Any],
+) -> str:
+    support_status = str(compound_row.get("support_status", "open_gap"))
+    evidence_state = str(compound_row.get("evidence_state", "still_missing"))
+    calibration_strength = str(compound_row.get("calibration_evidence_strength", "heuristic"))
+
+    if support_status == "quantitative_closed":
+        return "already_closed"
+    if calibration_strength in {"literature_anchored", "conditional_literature_anchored"}:
+        return "literature_anchor_available"
+    if support_status == "internal_candidate" and calibration_strength == "heuristic":
+        return "mechanistic_blocker"
+    if support_status in {"internal_candidate", "directional_support"} and (
+        calibration_strength in {"class_anchored", "directional_transferred"}
+        or evidence_state in {"externally_benchmarked", "transferred_prior", "safety_reference"}
+    ):
+        return "class_level_transfer_acceptable"
+    if benchmark_row.get("mechanistic_priority_ready") and support_status == "internal_candidate":
+        return "mechanistic_blocker"
+    return "external_data_blocker"
+
+
+def _mechanistic_refinement_expected_change(compound_rows: Iterable[Mapping[str, Any]]) -> str:
+    rows = list(compound_rows)
+    roles = {str(row.get("role", "unknown")) for row in rows}
+    if roles == {"adverse_marker"}:
+        return "clarify whether the lane remains meaty-positive once named adverse-marker closure is resolved"
+    if roles == {"desirable_marker"}:
+        return "clarify whether named desirable-marker closure can move the lane toward external decision readiness"
+    return "clarify whether named mechanistic blockers materially change benchmark readiness before broader retuning"
+
+
+def build_matrix_observable_closure_audit(
+    benchmark_files: Optional[Iterable[Path | str]] = None,
+    *,
+    target_tag: str = DEFAULT_TARGET_TAG,
+) -> Dict[str, Any]:
+    status_payload = build_matrix_target_status_artifact(benchmark_files, target_tag=target_tag)
+    evidence_rows = build_matrix_benchmark_evidence_audit(benchmark_files)
+    evidence_lookup = {row.benchmark_id: row for row in evidence_rows}
+    selected_target = _select_matrix_promotion_target(status_payload.get("benchmarks", []), evidence_rows)
+
+    audit_rows: List[Dict[str, Any]] = []
+    action_counts: Dict[str, int] = defaultdict(int)
+    mechanistic_watchlist: List[Dict[str, Any]] = []
+    for benchmark_row in status_payload.get("benchmarks", []):
+        if benchmark_row.get("target_profile") not in {"mixed", "meaty_positive"}:
+            continue
+        benchmark_id = str(benchmark_row.get("benchmark_id", "unknown"))
+        evidence = evidence_lookup.get(benchmark_id)
+        compound_rows: List[Dict[str, Any]] = []
+        benchmark_action_counts: Dict[str, int] = defaultdict(int)
+        for compound_row in benchmark_row.get("compounds", []):
+            closure_action = _matrix_closure_action(compound_row=compound_row, benchmark_row=benchmark_row)
+            benchmark_action_counts[closure_action] += 1
+            action_counts[closure_action] += 1
+            compound_rows.append(
+                {
+                    **compound_row,
+                    "closure_action": closure_action,
+                }
+            )
+        audit_rows.append(
+            {
+                "benchmark_id": benchmark_id,
+                "protein_type": benchmark_row.get("protein_type"),
+                "process_state": benchmark_row.get("process_state"),
+                "target_profile": benchmark_row.get("target_profile"),
+                "promotion_blocker": benchmark_row.get("promotion_blocker"),
+                "source_origin": evidence.source_origin if evidence is not None else "unknown",
+                "compounds": compound_rows,
+                "closure_action_counts": dict(sorted(benchmark_action_counts.items())),
+            }
+        )
+
+        if benchmark_row.get("mechanistic_priority_ready"):
+            blocker_rows = [
+                row for row in compound_rows
+                if str(row.get("closure_action", "unknown")) == "mechanistic_blocker"
+            ]
+            if blocker_rows:
+                mechanistic_watchlist.append(
+                    {
+                        "benchmark_id": benchmark_id,
+                        "protein_type": benchmark_row.get("protein_type"),
+                        "process_state": benchmark_row.get("process_state"),
+                        "promotion_blocker": benchmark_row.get("promotion_blocker"),
+                        "target_compounds": [str(row.get("compound", "unknown")) for row in blocker_rows],
+                        "target_roles": sorted({str(row.get("role", "unknown")) for row in blocker_rows}),
+                        "expected_decision_change": _mechanistic_refinement_expected_change(blocker_rows),
+                        "allowed_scope": "named_compound_refinement_only",
+                        "offline_compute_gate": "escalate_only_if_named_compounds_change_benchmark_visible_decision_readiness",
+                    }
+                )
+
+    return {
+        "schema_version": "1.0",
+        "description": "Compound-level observable closure audit for mixed matrix lanes, labeling the next closure action needed for each decision-driving compound.",
+        "selected_promotion_target": selected_target,
+        "benchmarks": audit_rows,
+        "mechanistic_refinement_watchlist": mechanistic_watchlist,
+        "summary": {
+            "benchmarks_audited": len(audit_rows),
+            "mechanistic_watchlist_count": len(mechanistic_watchlist),
+            "closure_action_counts": dict(sorted(action_counts.items())),
         },
     }
 

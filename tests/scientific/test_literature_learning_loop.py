@@ -32,6 +32,7 @@ def test_learning_loop_reviews_matrix_priors_and_structural_gaps():
     payload = build_literature_learning_loop_payload(ROOT)
     prior_rows = {row["protein_type"]: row for row in payload["matrix_prior_review"]}
     queue_rows = {row["chemistry_family"]: row for row in payload["payload_queue_review"]["queue_by_chemistry_family"]}
+    promotion_queue = payload["s11_c_family_promotion_queue"]
 
     assert prior_rows["myco"]["has_accessibility_window"] is True
     assert "directional_only" in prior_rows["myco"]["uncertainty_postures"]
@@ -42,10 +43,15 @@ def test_learning_loop_reviews_matrix_priors_and_structural_gaps():
     assert any(row["gap_id"] == "ppi_meaty_positive_matrix_benchmark" for row in payload["intake_structural_gap_review"])
     assert any(row["gap_id"] == "intact_spi_ppi_quantified_mft_fft" for row in payload["process_gap_review"])
     assert payload["summary"]["families_with_primary_payload_support"] >= 6
+    assert promotion_queue["selected_family"]["family_id"] == "carbonyl_donor_hierarchy"
+    assert promotion_queue["fallback_family"]["family_id"] == "thiamine_fragmentation_support"
+    assert promotion_queue["selected_family"]["minimum_runtime_landing"] == "benchmark_payload"
+    assert promotion_queue["selected_family"]["reject_narrative_only"] is True
 
     markdown = render_literature_learning_loop_markdown(payload)
     assert "Literature Learning Loop" in markdown
     assert "Payload Queue Review" in markdown
     assert "Family Payload Coverage" in markdown
+    assert "S11.C Family Promotion Queue" in markdown
     assert "Matrix Prior Review" in markdown
     assert "myco" in markdown

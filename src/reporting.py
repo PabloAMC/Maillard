@@ -495,6 +495,8 @@ def _build_scientific_surface(root: Path) -> Dict[str, str]:
         "cheap_refinement_screening_json": root / "results/validation/cheap_refinement_screening.json",
         "selective_dft_plan": root / "results/validation/selective_dft_plan.md",
         "selective_dft_plan_json": root / "results/validation/selective_dft_plan.json",
+        "p3_refinement_governance": root / "results/validation/p3_refinement_governance.md",
+        "p3_refinement_governance_json": root / "results/validation/p3_refinement_governance.json",
         "p3_offline_dft_jobs": root / "results/validation/p3_offline_dft_jobs.json",
         "refinement_impact": root / "results/validation/refinement_impact.md",
         "refinement_impact_json": root / "results/validation/refinement_impact.json",
