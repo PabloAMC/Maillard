@@ -207,17 +207,19 @@ def _render_parity(payload: dict[str, object], output_path: Path) -> None:
     # coordinates so the box scales correctly with figure size.
     ax.legend(
         handles=family_handles + band_handles + path_handles,
-        fontsize=_FS - 3,
+        fontsize=_FS - 4,
         loc="upper left",
-        bbox_to_anchor=(0.06, 0.96),
+        bbox_to_anchor=(0.04, 0.96),
         bbox_transform=ax.transAxes,
         framealpha=0.9,
         edgecolor="0.75",
         title=r"\textit{Family / execution lane}",
-        title_fontsize=_FS - 3,
-        labelspacing=0.2,
-        handletextpad=0.4,
-        borderpad=0.4,
+        title_fontsize=_FS - 4,
+        labelspacing=0.12,
+        handletextpad=0.3,
+        borderpad=0.2,
+        handlelength=1.0,
+        columnspacing=0.6,
         ncol=1,
     )
 

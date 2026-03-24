@@ -55,13 +55,9 @@ This repo therefore separates three cases:
 
 The figures below are generated with `./scripts/docker_maillard.sh validation-figures` and are provided as three standalone PNGs so they can be embedded, cropped, or cited independently.
 
-Below are the two figures you requested as separate images (not merged):
-
 ![Compound parity](docs/assets/family_parity.png)
 
 ![Per-benchmark accuracy](docs/assets/family_benchmark_accuracy.png)
-
-Direct links: [Parity](docs/assets/family_parity.png) · [Per-benchmark accuracy](docs/assets/family_benchmark_accuracy.png)
 
 Captions:
 
