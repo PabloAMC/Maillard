@@ -17,6 +17,8 @@ Run a generator from the repository root, for example:
 ```bash
 python scripts/generators/generate_family_ingestion_plan.py
 python scripts/generators/generate_family_lane_validation.py --output-dir results/validation
+python scripts/generators/generate_family_deviation_audit.py --output-dir results/validation
+python scripts/generators/generate_family_validation_figures.py --output-dir results/validation --docs-asset-dir docs/assets
 ```
 
 ## Conventions
