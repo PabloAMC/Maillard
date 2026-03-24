@@ -24,6 +24,8 @@ minimal.yaml
 test_mech.yaml
 *.png
 !docs/assets/validation_overview.png
+!docs/assets/family_parity.png
+!docs/assets/family_benchmark_accuracy.png
 !results/validation/validation_overview.png
 *.csv
 *.log

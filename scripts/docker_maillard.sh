@@ -45,7 +45,7 @@ Commands:
   coverage-gaps
                Generate results/validation/benchmark_coverage_gaps.{md,json}.
   validation-figures
-               Generate results/validation/validation_overview.{md,json,png} and validated_envelope.{md,json,png}.
+               Generate validation_overview, family_validation_overview, and validated_envelope artifacts.
   thermo-gating
                Generate results/validation/thermodynamic_gating_audit.{md,json}.
   validated-envelope
@@ -78,16 +78,19 @@ stability_lane() {
 }
 
 scientific_lane() {
-  run_in_env "python scripts/generate_benchmark_summary.py"
-  run_in_env "python scripts/generate_benchmark_index.py"
-  run_in_env "python scripts/generate_benchmark_targets.py"
-  run_in_env "python scripts/generate_matrix_benchmark_deltas.py"
-  run_in_env "python scripts/generate_matrix_benchmark_assertions.py"
-  run_in_env "python scripts/generate_matrix_benchmark_evidence.py"
-  run_in_env "python scripts/generate_matrix_promotion_readiness.py"
-  run_in_env "python scripts/generate_validation_figures.py"
-  run_in_env "python scripts/generate_validated_envelope_report.py"
-  run_in_env "python scripts/generate_thermodynamic_gating_audit.py"
+  run_in_env "python scripts/generators/generate_benchmark_summary.py"
+  run_in_env "python scripts/generators/generate_benchmark_index.py"
+  run_in_env "python scripts/generators/generate_benchmark_targets.py"
+  run_in_env "python scripts/generators/generate_matrix_benchmark_deltas.py"
+  run_in_env "python scripts/generators/generate_matrix_benchmark_assertions.py"
+  run_in_env "python scripts/generators/generate_matrix_benchmark_evidence.py"
+  run_in_env "python scripts/generators/generate_matrix_promotion_readiness.py"
+  run_in_env "python scripts/generators/generate_family_lane_validation.py --output-dir results/validation"
+  run_in_env "python scripts/generators/generate_family_deviation_audit.py --output-dir results/validation"
+  run_in_env "python scripts/generators/generate_validation_figures.py"
+  run_in_env "python scripts/generators/generate_family_validation_figures.py --output-dir results/validation --docs-asset-dir docs/assets"
+  run_in_env "python scripts/generators/generate_validated_envelope_report.py"
+  run_in_env "python scripts/generators/generate_thermodynamic_gating_audit.py"
   scientific_fast_lane
 }
 
@@ -149,6 +152,9 @@ run_in_env() {
 
 bootstrap_env() {
   ensure_container
+
+  # Install system LaTeX packages needed for scienceplots LaTeX rendering mode
+  docker exec "$CONTAINER_NAME" bash -lc "apt-get update -qq && apt-get install -y texlive texlive-latex-extra texlive-fonts-recommended dvipng cm-super 2>&1 | tail -3" || true
 
   if ! env_exists; then
     docker exec "$CONTAINER_NAME" bash -lc "set -eo pipefail; source '$CONDA_SH'; conda create -n '$ENV_NAME' python=3.12 -y"
@@ -260,36 +266,39 @@ case "$cmd" in
     targets_snapshot "$1" "${2:-desirable}"
     ;;
   targets-report)
-    run_in_env "python scripts/generate_benchmark_targets.py"
+    run_in_env "python scripts/generators/generate_benchmark_targets.py"
     ;;
   matrix-deltas)
-    run_in_env "python scripts/generate_matrix_benchmark_deltas.py"
+    run_in_env "python scripts/generators/generate_matrix_benchmark_deltas.py"
     ;;
   matrix-assertions)
-    run_in_env "python scripts/generate_matrix_benchmark_assertions.py"
+    run_in_env "python scripts/generators/generate_matrix_benchmark_assertions.py"
     ;;
   matrix-evidence)
-    run_in_env "python scripts/generate_matrix_benchmark_evidence.py"
+    run_in_env "python scripts/generators/generate_matrix_benchmark_evidence.py"
     ;;
   matrix-readiness)
-    run_in_env "python scripts/generate_matrix_promotion_readiness.py"
+    run_in_env "python scripts/generators/generate_matrix_promotion_readiness.py"
     ;;
   matrix-branch-deltas)
     shift
     run_in_env "python scripts/compare_matrix_benchmark_branches.py --base-ref '${1:-main}'"
     ;;
   coverage-gaps)
-    run_in_env "python scripts/generate_benchmark_coverage_gaps.py"
+    run_in_env "python scripts/generators/generate_benchmark_coverage_gaps.py"
     ;;
   validation-figures)
-    run_in_env "python scripts/generate_validation_figures.py"
-    run_in_env "python scripts/generate_validated_envelope_report.py"
+    run_in_env "python scripts/generators/generate_family_lane_validation.py --output-dir results/validation"
+    run_in_env "python scripts/generators/generate_family_deviation_audit.py --output-dir results/validation"
+    run_in_env "python scripts/generators/generate_validation_figures.py"
+    run_in_env "python scripts/generators/generate_family_validation_figures.py --output-dir results/validation --docs-asset-dir docs/assets"
+    run_in_env "python scripts/generators/generate_validated_envelope_report.py"
     ;;
   thermo-gating)
-    run_in_env "python scripts/generate_thermodynamic_gating_audit.py"
+    run_in_env "python scripts/generators/generate_thermodynamic_gating_audit.py"
     ;;
   validated-envelope)
-    run_in_env "python scripts/generate_validated_envelope_report.py"
+    run_in_env "python scripts/generators/generate_validated_envelope_report.py"
     ;;
   explain-formulation)
     shift
@@ -312,10 +321,10 @@ case "$cmd" in
     fi
     ;;
   index)
-    run_in_env "python scripts/generate_benchmark_index.py"
+    run_in_env "python scripts/generators/generate_benchmark_index.py"
     ;;
   summary)
-    run_in_env "python scripts/generate_benchmark_summary.py"
+    run_in_env "python scripts/generators/generate_benchmark_summary.py"
     ;;
   notebook)
     run_in_env "jupyter notebook --ip 0.0.0.0 --port 8888 --no-browser --allow-root"
