@@ -31,11 +31,11 @@ That means the central problem is broader than matching one benchmark table. We 
 
 ## The Three Regimes
 
-| Regime | What it represents | Current trust | What the tool should do well |
-| --- | --- | --- | --- |
-| Free precursors | Buffer-like systems where sugars and amino acids are directly accessible | High | Quantitative ranking and concentration-scale screening |
-| Pea / soy matrices | Real protein matrices where accessibility, retention, and headspace matter | Moderate | Directional and near-quantitative prioritization where explicit anchors exist |
-| Extrusion-heavy systems | Highly processed systems with strong structural and transport effects | Low | Exploratory hypothesis generation and experiment prioritization |
+| Regime                  | What it represents                                                         | Current trust | What the tool should do well                                                  |
+| ----------------------- | -------------------------------------------------------------------------- | ------------- | ----------------------------------------------------------------------------- |
+| Free precursors         | Buffer-like systems where sugars and amino acids are directly accessible   | High          | Quantitative ranking and concentration-scale screening                        |
+| Pea / soy matrices      | Real protein matrices where accessibility, retention, and headspace matter | Moderate      | Directional and near-quantitative prioritization where explicit anchors exist |
+| Extrusion-heavy systems | Highly processed systems with strong structural and transport effects      | Low           | Exploratory hypothesis generation and experiment prioritization               |
 
 These regimes are not three unrelated products. They are three layers of increasing structural complexity.
 
@@ -43,7 +43,73 @@ These regimes are not three unrelated products. They are three layers of increas
 - Pea and soy matrices test whether observable reality is right.
 - Extrusion-heavy systems test whether process-structured accessibility and transport are right.
 
-## What Works Today
+## Family Validation Surface
+
+The important question for a scientist is not whether the repository names many chemistry families. The important question is whether each family has an explicit experimental prediction surface.
+
+This repo therefore separates three cases:
+
+- families with **compound-level quantitative parity** against experiments
+- families with **benchmark-linked calibration support** but not yet strict quantitative closure
+- families that remain **directional or gap-limited**, and are reported as such rather than being overclaimed
+
+The figures below are generated with `./scripts/docker_maillard.sh validation-figures` and are provided as three standalone PNGs so they can be embedded, cropped, or cited independently.
+
+| Compound parity | Per-benchmark accuracy | Family coverage |
+|---:|:---:|:---|
+| ![Compound parity](docs/assets/family_parity.png) | ![Per-benchmark accuracy](docs/assets/family_benchmark_accuracy.png) | ![Family coverage](docs/assets/family_coverage.png) |
+
+Captions:
+
+- **Compound parity:** Predicted vs measured concentrations (log–log). Colour = chemistry family; marker shape = execution lane. Green/yellow bands denote 1.5× and 2× tolerances.
+- **Per-benchmark accuracy:** Worst-case predicted/measured ratio per benchmark (human-readable study labels). Vertical lines mark strict-gate (1.5×) and matrix tolerance (2×).
+- **Family coverage:** Counts of matched quantitative compound points across all 10 families; families with no benchmark-backed points are annotated as explicit gaps.
+
+If your markdown viewer does not render images inline, open the files directly in `docs/assets`.
+
+For machine-readable artifacts, see [results/validation/family_validation_overview.md](results/validation/family_validation_overview.md). For the detailed per-benchmark drill-down see [docs/assets/validation_overview.png](docs/assets/validation_overview.png).
+
+## How To Use This For Alternative Protein Research
+
+For a scientist evaluating alternative proteins, the operational workflow is:
+
+1. Select matrix family and process state explicitly (for example pea isolate, soy isolate, mycoprotein, extrusion-heavy process).
+2. Run a forward prediction and generate report artifacts.
+3. Read family evidence ladder and family lane sensitivity before trusting absolute concentrations.
+4. Use benchmark-backed families for quantitative decisions and directional families for experiment prioritization.
+5. Promote a family lane only after adding benchmark or calibration evidence, not by tuning barriers alone.
+
+Practical commands:
+
+```bash
+./scripts/docker_maillard.sh validation-figures
+python scripts/run_pipeline.py --protein-type pea_iso --target meaty --report --output-dir results/first_run
+```
+
+Primary artifacts for this workflow:
+
+- [results/validation/family_validation_overview.md](results/validation/family_validation_overview.md)
+- [results/validation/family_lane_validation.md](results/validation/family_lane_validation.md)
+- [results/validation/family_deviation_audit.md](results/validation/family_deviation_audit.md)
+- [results/validation/benchmark_summary.md](results/validation/benchmark_summary.md)
+- [results/validation/validated_envelope.md](results/validation/validated_envelope.md)
+
+## Predictive Accuracy: What Is Quantitative Today
+
+Current artifact-backed status (from results/validation):
+
+- 10 chemistry families tracked in runtime scope
+- 4 families currently benchmark-linked
+- 4 families currently have compound-level quantitative parity points
+- 32 quantitative compound points in the current validation surface
+
+Interpretation:
+
+- Quantitative prediction claims are strongest in benchmark-backed families and free-precursor strict-ready lanes.
+- Matrix and support families can still be decision-useful, but some remain calibration-grade or directional.
+- This is a deliberate trust posture: explicit boundaries are preferred over overclaiming broad quantitative closure.
+
+## Current Validation Snapshot
 
 Current in-repo validation summary:
 
@@ -52,7 +118,7 @@ Current in-repo validation summary:
 - 9 matched compounds define the current authoritative quantitative proof surface
 - the median matched-compound ratio in that proof surface is 1.118x
 
-The current validation overview is shown below. The authoritative artifacts are generated locally with `./scripts/docker_maillard.sh validation-figures`.
+The authoritative benchmark-level parity plot (per compound, per benchmark, coloured by study) is shown below.
 
 ![Validation Overview](docs/assets/validation_overview.png)
 
@@ -61,17 +127,18 @@ How to interpret this trust surface:
 - Free-precursor benchmarks are the quantitative proof surface.
 - Pea and soy matrix paths are useful for prioritization, not yet for broad release-grade claims.
 - Extrusion-heavy systems remain exploratory until benchmarked directly.
+- For the full 10-family strategic view including coverage gaps, see the **Family Validation Surface** section above.
 
 ## What Accuracy Depends On
 
 The tool does not have a single accuracy mode. Its precision depends on which layer is doing most of the work.
 
-| Layer | Main inputs | What it mainly controls |
-| --- | --- | --- |
-| Core FAST kinetics | Literature barriers, cached barrier records, calibrated Arrhenius heuristics | Pathway ordering and relative competitiveness |
-| Observable projection | Proxy-to-observable mapping, volatility, retention, process-sensitive projection factors | Absolute ppb-scale fit |
-| Matrix calibration and headspace release | Protein type, process state, compound-specific observable factors, transferred anchors | Whether matrix predictions stay physically plausible and useful |
-| Offline refinement | xTB, selective DFT, and optional external ML-potential refinement written back as cached artifacts | Narrow mechanistic correction of decisive motif classes |
+| Layer                                    | Main inputs                                                                                        | What it mainly controls                                         |
+| ---------------------------------------- | -------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| Core FAST kinetics                       | Literature barriers, cached barrier records, calibrated Arrhenius heuristics                       | Pathway ordering and relative competitiveness                   |
+| Observable projection                    | Proxy-to-observable mapping, volatility, retention, process-sensitive projection factors           | Absolute ppb-scale fit                                          |
+| Matrix calibration and headspace release | Protein type, process state, compound-specific observable factors, transferred anchors             | Whether matrix predictions stay physically plausible and useful |
+| Offline refinement                       | xTB, selective DFT, and optional external ML-potential refinement written back as cached artifacts | Narrow mechanistic correction of decisive motif classes         |
 
 Two rules follow from this:
 
@@ -87,14 +154,14 @@ The current validation contract therefore uses two scale checks:
 
 The scientific stack is deliberately layered. Different tools serve different roles.
 
-| Layer | Main tool or model | Role in the system | Main dependency |
-| --- | --- | --- | --- |
-| Reaction enumeration | SMIRKS rules and curated pathway families | Generate plausible Maillard and lipid-derived chemistry | Coverage and correctness of the encoded reaction families |
-| Fast prediction core | FAST observable path with empirical or cached barriers | Daily screening, ranking, and benchmark-facing concentrations | Calibration quality of barrier tables and projection layers |
-| Diagnostic thermochemistry | Cantera and thermodynamic gating | Diagnose whether a pathway family is physically plausible and whether gating would materially change benchmark behavior | Thermodynamic data and gating policy |
-| Observable projection | Headspace, retention, matrix, and process-state surrogates | Convert pathway signal into what a scientist would actually measure or smell | Benchmark-anchored observable calibration |
-| Offline mechanistic refinement | xTB first, selective DFT second | Refine decisive motif classes when cheap surrogates stop improving decisions | Availability of narrow, benchmark-relevant refinement targets |
-| Optional ML acceleration | External state-of-the-art ML potentials, only offline | Accelerate conformer or local motif refinement after the refinement task is well-defined | Quality and relevance of the external model for the motif class of interest |
+| Layer                          | Main tool or model                                         | Role in the system                                                                                                      | Main dependency                                                             |
+| ------------------------------ | ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| Reaction enumeration           | SMIRKS rules and curated pathway families                  | Generate plausible Maillard and lipid-derived chemistry                                                                 | Coverage and correctness of the encoded reaction families                   |
+| Fast prediction core           | FAST observable path with empirical or cached barriers     | Daily screening, ranking, and benchmark-facing concentrations                                                           | Calibration quality of barrier tables and projection layers                 |
+| Diagnostic thermochemistry     | Cantera and thermodynamic gating                           | Diagnose whether a pathway family is physically plausible and whether gating would materially change benchmark behavior | Thermodynamic data and gating policy                                        |
+| Observable projection          | Headspace, retention, matrix, and process-state surrogates | Convert pathway signal into what a scientist would actually measure or smell                                            | Benchmark-anchored observable calibration                                   |
+| Offline mechanistic refinement | xTB first, selective DFT second                            | Refine decisive motif classes when cheap surrogates stop improving decisions                                            | Availability of narrow, benchmark-relevant refinement targets               |
+| Optional ML acceleration       | External state-of-the-art ML potentials, only offline      | Accelerate conformer or local motif refinement after the refinement task is well-defined                                | Quality and relevance of the external model for the motif class of interest |
 
 What this means in practice:
 
@@ -190,4 +257,6 @@ Use the generated validation artifacts when you need the exact benchmark-by-benc
 
 - [results/validation/benchmark_summary.md](results/validation/benchmark_summary.md)
 - [results/validation/validation_overview.md](results/validation/validation_overview.md)
+- [results/validation/family_validation_overview.md](results/validation/family_validation_overview.md)
+- [results/validation/family_deviation_audit.md](results/validation/family_deviation_audit.md)
 - [results/validation/validated_envelope.md](results/validation/validated_envelope.md)
