@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 from src.conditions import ReactionConditions
@@ -14,6 +15,7 @@ from src.usability_reports import (
 )
 from src.presentation import (
     render_formulation_explainability_markdown,
+    render_flavor_axis_markdown,
     render_validated_envelope_markdown,
     render_projection_rows_markdown,
     render_provenance_markdown,
@@ -416,6 +418,7 @@ def test_generate_report_includes_confidence_metadata(tmp_path: Path):
                 "calibration_evidence_strength": "literature_anchored",
                 "calibration_fallback_mode": "compound_specific",
                 "evidence_state": "conditional_calibration",
+                "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
                 "target_class": "severity_markers",
                 "decision_panel_source": "data/lit/matrix_decision_panel.json",
             }
@@ -436,6 +439,25 @@ def test_generate_report_includes_confidence_metadata(tmp_path: Path):
             "thiamine_availability_source": "native_matrix_default_inactive",
             "thiamine_provenance_mode": "inactive",
             "lincoln_crosstalk_prior": {"summary": "inactive"},
+            "active_family_lanes": ["09"],
+            "family_lane_summary": {
+                "09": {
+                    "slr_family": "09",
+                    "family_id": "carbohydrate_pyrolysis_and_caramelization",
+                    "display_name": "Carbohydrate pyrolysis and caramelization",
+                    "strategic_posture": "severity_and_failure_mode_lane",
+                    "active": True,
+                    "summary": "Severity lane is active.",
+                }
+            },
+            "family_lane_adjustments": {
+                "per_lane": {
+                    "09": {
+                        "target_score_delta": -0.05,
+                        "off_flavour_risk_delta": 0.04,
+                    }
+                }
+            },
         },
     )
 
@@ -477,10 +499,141 @@ def test_generate_report_includes_confidence_metadata(tmp_path: Path):
     assert "flavor_reference_policy" in json_text
     assert "literature_evidence_summary" in json_text
     assert "literature_learning_loop_summary" in json_text
+    assert "family_evidence_ladder" in json_text
+    assert "family_runtime_support_summary" in json_text
+    assert "family_specific_open_gaps" in json_text
+    assert "family_lane_sensitivity" in json_text
     assert '"provenance"' in json_text
     assert "## 5. Provenance" in markdown_text
     assert "Extrusion Observable Panel" in markdown_text
     assert "Support Origin" in markdown_text
+    assert "Family Runtime Support Summary" in markdown_text
+    assert "Family Evidence Ladder" in markdown_text
+    assert "Family Lane Sensitivity" in markdown_text
+
+
+def test_render_flavor_axis_markdown_surfaces_active_family_lanes():
+    markdown = render_flavor_axis_markdown(
+        {
+            "strecker_balance_score": 0.42,
+            "strecker_gap_penalty": 0.0,
+            "pyrazine_signal_ppb": 4.0,
+            "pyrazine_propensity": 0.6,
+            "pyrazine_burden": 6.4,
+            "pyrazine_penalty": 0.0,
+            "furanone_support_score": 1.0,
+            "furanone_penalty": 0.0,
+            "thiamine_pathway_active": True,
+            "thiamine_availability_source": "pbma_fortified",
+            "thiamine_availability_explicit": True,
+            "thiamine_provenance_mode": "mixed_thiamine_plus_pentose",
+            "lincoln_crosstalk_prior": {"summary": "active"},
+            "family_lane_adjustments": {"target_score_delta": 0.12, "maillard_closure_delta": -0.21, "off_flavour_risk_delta": -0.03},
+            "family_prior_bundle": {
+                "thiamine_fragmentation_support": [{"section_name": "thiamine_pathway_priors"}],
+            },
+            "family_state_markers": [
+                {
+                    "marker_id": "thiamineavailability",
+                    "display_name": "Thiamine availability",
+                    "panel_role": "diagnostic",
+                    "observable_kind": "state_variable",
+                    "influence_mode": "upstream_state_only",
+                    "state_value_summary": "available=True, source=pbma_fortified",
+                }
+            ],
+            "active_family_lanes": ["02", "10"],
+            "family_lane_summary": {
+                "02": {
+                    "slr_family": "02",
+                    "display_name": "Lipid oxidation and carbonylic crosstalk",
+                    "strategic_posture": "immediate_expansion_lane",
+                    "summary": "Crosstalk is active.",
+                    "benchmark_ready_targets": ["Hexanal", "2-Pentylfuran"],
+                    "competition_prior_ids": ["lincoln_2025_polyphenol_crosstalk_v1"],
+                    "maillard_closure_pressure": 1.10,
+                },
+                "10": {
+                    "slr_family": "10",
+                    "display_name": "Microbial fermentation pretreatment",
+                    "strategic_posture": "upstream_pretreatment_lane",
+                    "summary": "Pretreatment is active.",
+                },
+            },
+        },
+        heading="## Flavor Axis",
+        variant="detailed",
+    )
+
+    assert "active_family_lanes" in markdown
+    assert "Lipid oxidation and carbonylic crosstalk" in markdown
+    assert "Microbial fermentation pretreatment" in markdown
+    assert "family_target_score_delta" in markdown
+    assert "family_maillard_closure_delta" in markdown
+    assert "lipid_benchmark_ready_targets" in markdown
+    assert "state_marker_thiamineavailability" in markdown
+    assert "family_prior_bundle" in markdown
+
+
+def test_generate_report_surfaces_family_runtime_support_semantics(tmp_path: Path):
+    result = FormulationResult(
+        name="family-runtime-support",
+        target_score=4.2,
+        off_flavour_risk=0.8,
+        safety_score=0.1,
+        projection_metadata={
+            "mft": {
+                "compound": "2-Methyl-3-furanthiol (MFT)",
+                "observable_ppb": 9.0,
+                "chemistry_family": "thiamine_fragmentation_support",
+                "target_class": "sulfur_meaty_markers",
+                "calibration_source": "class_fallback",
+                "calibration_evidence_strength": "heuristic",
+                "calibration_fallback_mode": "class_level",
+            }
+        },
+        flavor_axis_summary={
+            "family_lane_summary": {
+                "03": {
+                    "slr_family": "03",
+                    "family_id": "thiamine_fragmentation_support",
+                    "display_name": "Thiamine degradation and sulfur support",
+                    "active": True,
+                    "strategic_posture": "high_value_support_lane",
+                    "summary": "Thiamine-derived sulfur support is active.",
+                },
+                "06": {
+                    "slr_family": "06",
+                    "family_id": "alternative_protein_matrix_scope",
+                    "display_name": "Alternative protein matrix scope",
+                    "active": True,
+                    "strategic_posture": "matrix_scope_lane",
+                    "summary": "Matrix scope extension is active.",
+                },
+            },
+            "family_lane_adjustments": {
+                "per_lane": {
+                    "03": {"target_score_delta": 0.22, "maillard_closure_delta": 0.08, "off_flavour_risk_delta": -0.04},
+                    "06": {"target_score_delta": -0.05, "maillard_closure_delta": -0.02, "off_flavour_risk_delta": 0.03},
+                }
+            },
+            "family_prior_bundle": {
+                "thiamine_fragmentation_support": [{"section_name": "thiamine_pathway_priors"}],
+            },
+        },
+    )
+
+    out_dir = generate_report(result, [], {"protein_type": "soy_iso"}, output_dir=tmp_path / "family-report")
+    payload = json.loads((out_dir / "report.json").read_text())
+
+    support_summary = payload["results"]["family_runtime_support_summary"]
+    evidence_rows = payload["results"]["family_evidence_ladder"]
+    open_gaps = payload["results"]["family_specific_open_gaps"]
+
+    assert support_summary["active_family_lane_count"] == 2
+    assert any(row["family_id"] == "thiamine_fragmentation_support" and row["prior_count"] == 1 for row in support_summary["family_lanes"])
+    assert any(row["chemistry_family"] == "thiamine_fragmentation_support" and row["active_runtime_lane"] is True for row in evidence_rows)
+    assert any(row["family_id"] == "alternative_protein_matrix_scope" for row in open_gaps)
 
 
 def test_projection_rows_surface_explicit_panel_contract_fields():
@@ -501,6 +654,9 @@ def test_projection_rows_surface_explicit_panel_contract_fields():
                 "observable_ppb": 14.0,
                 "evidence_state": "externally_benchmarked",
                 "target_class": "adverse_lipid_markers",
+                "panel_role": "constrained",
+                "observable_kind": "volatile",
+                "modeling_regimes": ["matrix_hydrated", "extrusion_like"],
             }
         },
     )
@@ -509,6 +665,9 @@ def test_projection_rows_surface_explicit_panel_contract_fields():
 
     assert rows[0]["evidence_state"] == "externally_benchmarked"
     assert rows[0]["target_class"] == "adverse_lipid_markers"
+    assert rows[0]["panel_role"] == "constrained"
+    assert rows[0]["observable_kind"] == "volatile"
+    assert rows[0]["modeling_regimes"] == ["matrix_hydrated", "extrusion_like"]
     assert rows[0]["support_origin"] == "standard_matrix_support"
     assert rows[0]["reachability_status"] == "chemically_reachable"
     assert rows[0]["observable_assumption_summary"] == "static_class_profile | class_level | standard_matrix_support"
@@ -584,6 +743,9 @@ def test_generate_comparison_report_includes_provenance(tmp_path: Path):
     assert '"benchmark_neighborhood_summary"' in json_text
     assert '"safety_reference_summary"' in json_text
     assert '"flavor_reference_policy"' in json_text
+    assert '"family_runtime_support_summary"' in json_text
+    assert '"family_specific_open_gaps"' in json_text
+    assert '"family_lane_sensitivity"' in json_text
     assert "Cross-Marker Context" in markdown_text
     assert "Calibration Contrast" in markdown_text
     assert "Decision Mode" in markdown_text

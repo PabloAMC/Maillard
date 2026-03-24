@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import math
 import re
+from collections import defaultdict
 from dataclasses import dataclass, field
 from difflib import SequenceMatcher
 from pathlib import Path
@@ -25,6 +26,7 @@ from src.validation_contract import BenchmarkThresholds, DEFAULT_VALIDATION_CONT
 from src.safety import predict_acrylamide
 from src.projection_utils import build_projection_rows
 from src.matrix_targets import get_compound_panel_entry
+from src.literature_family_registry import resolve_family_descriptor
 from src.benchmark_types import (
     BenchmarkMetadata,
     BenchmarkIndexEntry,
@@ -366,8 +368,7 @@ def benchmark_to_formulation(bench: dict) -> dict:
     return formulation
 
 
-def _normalize_name(name: str) -> str:
-    return re.sub(r"[^a-z0-9]+", "", name.lower())
+from src.text_utils import normalize_compound_name as _normalize_name
 
 
 def _tokenize_name(name: str) -> List[str]:
@@ -542,7 +543,8 @@ def _run_benchmark_recommendation(
         rxn_key = f"{'+'.join(sorted(r.smiles for r in step.reactants))}->{'+'.join(sorted(p.smiles for p in step.products))}"
         heuristic_barriers[rxn_key] = (max(0.0, bar_eff), unc)
 
-    from src.recommend import Recommender, _canon
+    from src.recommend import Recommender
+    from src.chem_utils import canonicalize_smiles
     from src.lipid_oxidation import predict_hexanal_generation
 
     initial_concentrations = {}
@@ -553,7 +555,7 @@ def _run_benchmark_recommendation(
             if key.lower() in precursor.label.lower() or precursor.label.lower() in key.lower():
                 qty = float(value)
                 break
-        initial_concentrations[_canon(precursor.smiles)] = qty
+        initial_concentrations[canonicalize_smiles(precursor.smiles, fallback_to_original=True, strip_salts=True)] = qty
 
     protein_type = formulation.get("protein_type", "free")
     model = MATRIX_BENCHMARK_PROFILES.get(protein_type)
@@ -591,7 +593,7 @@ def _run_benchmark_recommendation(
                 target_proxy_ppb = oxidation_load_ppb * float(yield_factor)
                 # target_proxy_ppb = molar_concentration * mw * ppb_conversion_factor
                 molar_conc = target_proxy_ppb / (mw * DEFAULT_PROJECTION_STRATEGY.ppb_conversion_factor)
-                canon = _canon(smi)
+                canon = canonicalize_smiles(smi, fallback_to_original=True, strip_salts=True)
                 initial_concentrations[canon] = initial_concentrations.get(canon, 0.0) + molar_conc
 
     rec = Recommender()
@@ -683,13 +685,13 @@ def _run_matrix_only_benchmark_prediction(bench: dict) -> dict:
     }
 
 
-def evaluate_benchmark(
-    bench_file: Path | str,
+def _evaluate_loaded_benchmark(
+    bench: dict,
+    *,
+    bench_path: Path,
     target_tag: str = DEFAULT_TARGET_TAG,
     thermodynamic_gating: str = "auto",
 ) -> BenchmarkEvaluation:
-    bench_path = Path(bench_file)
-    bench = load_benchmark(bench_path)
     formulation = benchmark_to_formulation(bench)
     supported, reason = _is_supported_formulation(formulation)
 
@@ -762,8 +764,44 @@ def evaluate_benchmark(
     )
 
 
-def summarize_evaluation(
+def evaluate_benchmark(
+    bench_file: Path | str,
+    target_tag: str = DEFAULT_TARGET_TAG,
+    thermodynamic_gating: str = "auto",
+) -> BenchmarkEvaluation:
+    bench_path = Path(bench_file)
+    bench = load_benchmark(bench_path)
+    return _evaluate_loaded_benchmark(
+        bench,
+        bench_path=bench_path,
+        target_tag=target_tag,
+        thermodynamic_gating=thermodynamic_gating,
+    )
+
+
+def evaluate_benchmark_payload(
+    bench: dict,
+    *,
+    benchmark_id: Optional[str] = None,
+    target_tag: str = DEFAULT_TARGET_TAG,
+    thermodynamic_gating: str = "auto",
+) -> BenchmarkEvaluation:
+    normalized = dict(bench)
+    if benchmark_id and not normalized.get("benchmark_id"):
+        normalized["benchmark_id"] = benchmark_id
+    payload_id = str(normalized.get("benchmark_id", benchmark_id or "matrix_experiment_payload"))
+    pseudo_path = ROOT / "results" / "validation" / f"{payload_id}.synthetic_benchmark.json"
+    return _evaluate_loaded_benchmark(
+        normalized,
+        bench_path=pseudo_path,
+        target_tag=target_tag,
+        thermodynamic_gating=thermodynamic_gating,
+    )
+
+
+def summarize_evaluation_for_benchmark(
     evaluation: BenchmarkEvaluation,
+    bench: dict,
     *,
     protein_type: str = "free",
     thresholds: BenchmarkThresholds = DEFAULT_BENCHMARK_THRESHOLDS,
@@ -774,7 +812,6 @@ def summarize_evaluation(
     mean_ratio = sum(ratios) / len(ratios) if ratios else None
     mean_abs_log10_error = _mean_abs_log10_error(matched)
 
-    bench = load_benchmark(evaluation.bench_file)
     scale_thresholds = _resolve_scale_thresholds(
         bench,
         protein_type=protein_type,
@@ -925,6 +962,21 @@ def summarize_evaluation(
         calibration_mode=matrix_contract.get("calibration_mode"),
         reference_signal_origin=evaluation.reference_signal_origin,
         mean_abs_log10_error=mean_abs_log10_error,
+    )
+
+
+def summarize_evaluation(
+    evaluation: BenchmarkEvaluation,
+    *,
+    protein_type: str = "free",
+    thresholds: BenchmarkThresholds = DEFAULT_BENCHMARK_THRESHOLDS,
+) -> BenchmarkSummary:
+    bench = load_benchmark(evaluation.bench_file)
+    return summarize_evaluation_for_benchmark(
+        evaluation,
+        bench,
+        protein_type=protein_type,
+        thresholds=thresholds,
     )
 
 
@@ -1473,6 +1525,275 @@ def build_matrix_target_status_artifact(
 
 
 
+def _matrix_promotion_requirement_rows(
+    benchmark_row: Mapping[str, Any],
+    evidence_row: MatrixBenchmarkEvidence,
+) -> List[Dict[str, Any]]:
+    support_counts = benchmark_row.get("support_counts", {})
+    requirement_rows = [
+        {
+            "key": "meaty_positive_targets_present",
+            "label": "Target profile includes meaty-positive compounds",
+            "passed": benchmark_row.get("target_profile") in {"mixed", "meaty_positive"},
+            "detail": str(benchmark_row.get("target_profile", "unknown")),
+        },
+        {
+            "key": "ranking_contract_passes",
+            "label": "Ranking contract passes",
+            "passed": benchmark_row.get("ranking_contract_status") == "pass",
+            "detail": str(benchmark_row.get("ranking_contract_status", "unknown")),
+        },
+        {
+            "key": "comparator_is_measured_volatiles",
+            "label": "Comparator signal is wet-lab measured_volatiles",
+            "passed": benchmark_row.get("reference_signal_origin") == "measured_volatiles",
+            "detail": str(benchmark_row.get("reference_signal_origin", "unknown")),
+        },
+        {
+            "key": "external_quantitative_origin",
+            "label": "Source is externally quantitative",
+            "passed": evidence_row.external_data_status == "external_quantitative",
+            "detail": evidence_row.external_data_status,
+        },
+        {
+            "key": "minimum_quantitative_closed_targets",
+            "label": "At least two compounds are quantitatively closed",
+            "passed": int(support_counts.get("quantitative_closed", 0)) >= 2,
+            "detail": str(int(support_counts.get("quantitative_closed", 0))),
+        },
+        {
+            "key": "no_internal_or_directional_dependencies",
+            "label": "No internal-candidate or directional dependencies remain",
+            "passed": int(support_counts.get("internal_candidate", 0)) == 0 and int(support_counts.get("directional_support", 0)) == 0,
+            "detail": f"internal={int(support_counts.get('internal_candidate', 0))}; directional={int(support_counts.get('directional_support', 0))}",
+        },
+    ]
+    return requirement_rows
+
+
+def _select_matrix_promotion_target(
+    benchmark_rows: Iterable[Mapping[str, Any]],
+    evidence_rows: Iterable[MatrixBenchmarkEvidence],
+) -> Optional[Dict[str, Any]]:
+    benchmark_list = list(benchmark_rows)
+    evidence_list = list(evidence_rows)
+    candidates = [
+        row for row in benchmark_list
+        if row.get("target_profile") in {"mixed", "meaty_positive"}
+        and row.get("ranking_contract_status") == "pass"
+    ]
+    if not candidates:
+        return None
+
+    external_anchor_counts: Dict[str, int] = defaultdict(int)
+    distinct_external_states: Dict[str, set[str]] = defaultdict(set)
+    for row in evidence_list:
+        if row.external_data_status != "external_quantitative":
+            continue
+        external_anchor_counts[row.protein_type] += 1
+        if row.process_state:
+            distinct_external_states[row.protein_type].add(str(row.process_state))
+
+    def rank_tuple(row: Mapping[str, Any]) -> tuple[int, int, int, int, str, str]:
+        protein_type = str(row.get("protein_type", "free"))
+        counts = row.get("support_counts", {})
+        return (
+            int(external_anchor_counts.get(protein_type, 0)),
+            len(distinct_external_states.get(protein_type, set())),
+            int(counts.get("quantitative_closed", 0)),
+            -1 * (int(counts.get("internal_candidate", 0)) + int(counts.get("directional_support", 0)) + int(counts.get("open_gap", 0))),
+            "1" if row.get("target_profile") == "mixed" else "0",
+            str(row.get("benchmark_id", "unknown")),
+        )
+
+    selected = sorted(candidates, key=rank_tuple, reverse=True)[0]
+    protein_type = str(selected.get("protein_type", "free"))
+    rationale = []
+    rationale.append(f"same_protein_external_anchor_count={int(external_anchor_counts.get(protein_type, 0))}")
+    rationale.append(f"same_protein_external_process_states={len(distinct_external_states.get(protein_type, set()))}")
+    rationale.append(f"quantitative_closed={int(selected.get('support_counts', {}).get('quantitative_closed', 0))}")
+    rationale.append(f"internal_candidate={int(selected.get('support_counts', {}).get('internal_candidate', 0))}")
+    return {
+        "benchmark_id": selected.get("benchmark_id"),
+        "protein_type": protein_type,
+        "process_state": selected.get("process_state"),
+        "target_profile": selected.get("target_profile"),
+        "rationale": rationale,
+        "selection_policy": "prefer_mixed_matrix_lanes_with_the_broadest_same_protein_external_anchor_span_before_mechanistic_escalation",
+    }
+
+
+def build_matrix_promotion_contract_artifact(
+    benchmark_files: Optional[Iterable[Path | str]] = None,
+    *,
+    target_tag: str = DEFAULT_TARGET_TAG,
+) -> Dict[str, Any]:
+    status_payload = build_matrix_target_status_artifact(benchmark_files, target_tag=target_tag)
+    evidence_rows = build_matrix_benchmark_evidence_audit(benchmark_files)
+    evidence_lookup = {row.benchmark_id: row for row in evidence_rows}
+
+    benchmark_assessments: List[Dict[str, Any]] = []
+    for row in status_payload.get("benchmarks", []):
+        benchmark_id = str(row.get("benchmark_id", "unknown"))
+        evidence = evidence_lookup.get(benchmark_id)
+        if evidence is None:
+            continue
+        requirements = _matrix_promotion_requirement_rows(row, evidence)
+        benchmark_assessments.append(
+            {
+                "benchmark_id": benchmark_id,
+                "protein_type": row.get("protein_type"),
+                "process_state": row.get("process_state"),
+                "target_profile": row.get("target_profile"),
+                "promotion_ready": bool(row.get("promotion_ready", False)),
+                "promotion_blocker": row.get("promotion_blocker", "unknown"),
+                "requirements": requirements,
+            }
+        )
+
+    selected_target = _select_matrix_promotion_target(status_payload.get("benchmarks", []), evidence_rows)
+    summary = status_payload.get("summary", {})
+    return {
+        "schema_version": "1.0",
+        "description": "Explicit matrix promotion contract defining how a matrix benchmark moves from internal candidate support to external decision readiness.",
+        "promotion_rule": {
+            "contract_id": "matrix_external_decision_ready_v1",
+            "minimum_quantitative_closed_targets": 2,
+            "disallow_internal_candidate_support": True,
+            "disallow_directional_support": True,
+            "requires_measured_volatiles": True,
+            "requires_external_quantitative_origin": True,
+            "requires_mixed_or_meaty_positive_target_profile": True,
+            "requires_passing_ranking_contract": True,
+            "notes": [
+                "External decision readiness is a benchmark-level promotion state, not a generic matrix-family claim.",
+                "Internal reproducibility candidates and transferred priors can strengthen triage, but they do not by themselves unlock promotion.",
+                "Mechanistic refinement stays secondary until the observable audit says the remaining blocker is no longer external evidence or transfer dependence.",
+            ],
+        },
+        "selected_promotion_target": selected_target,
+        "benchmarks": benchmark_assessments,
+        "summary": {
+            "benchmarks_assessed": len(benchmark_assessments),
+            "promotion_ready": int(summary.get("promotion_ready", 0)),
+            "mechanistic_priority_ready": int(summary.get("mechanistic_priority_ready", 0)),
+        },
+    }
+
+
+def _matrix_closure_action(
+    *,
+    compound_row: Mapping[str, Any],
+    benchmark_row: Mapping[str, Any],
+) -> str:
+    support_status = str(compound_row.get("support_status", "open_gap"))
+    evidence_state = str(compound_row.get("evidence_state", "still_missing"))
+    calibration_strength = str(compound_row.get("calibration_evidence_strength", "heuristic"))
+
+    if support_status == "quantitative_closed":
+        return "already_closed"
+    if calibration_strength in {"literature_anchored", "conditional_literature_anchored"}:
+        return "literature_anchor_available"
+    if support_status == "internal_candidate" and calibration_strength == "heuristic":
+        return "mechanistic_blocker"
+    if support_status in {"internal_candidate", "directional_support"} and (
+        calibration_strength in {"class_anchored", "directional_transferred"}
+        or evidence_state in {"externally_benchmarked", "transferred_prior", "safety_reference"}
+    ):
+        return "class_level_transfer_acceptable"
+    if benchmark_row.get("mechanistic_priority_ready") and support_status == "internal_candidate":
+        return "mechanistic_blocker"
+    return "external_data_blocker"
+
+
+def _mechanistic_refinement_expected_change(compound_rows: Iterable[Mapping[str, Any]]) -> str:
+    rows = list(compound_rows)
+    roles = {str(row.get("role", "unknown")) for row in rows}
+    if roles == {"adverse_marker"}:
+        return "clarify whether the lane remains meaty-positive once named adverse-marker closure is resolved"
+    if roles == {"desirable_marker"}:
+        return "clarify whether named desirable-marker closure can move the lane toward external decision readiness"
+    return "clarify whether named mechanistic blockers materially change benchmark readiness before broader retuning"
+
+
+def build_matrix_observable_closure_audit(
+    benchmark_files: Optional[Iterable[Path | str]] = None,
+    *,
+    target_tag: str = DEFAULT_TARGET_TAG,
+) -> Dict[str, Any]:
+    status_payload = build_matrix_target_status_artifact(benchmark_files, target_tag=target_tag)
+    evidence_rows = build_matrix_benchmark_evidence_audit(benchmark_files)
+    evidence_lookup = {row.benchmark_id: row for row in evidence_rows}
+    selected_target = _select_matrix_promotion_target(status_payload.get("benchmarks", []), evidence_rows)
+
+    audit_rows: List[Dict[str, Any]] = []
+    action_counts: Dict[str, int] = defaultdict(int)
+    mechanistic_watchlist: List[Dict[str, Any]] = []
+    for benchmark_row in status_payload.get("benchmarks", []):
+        if benchmark_row.get("target_profile") not in {"mixed", "meaty_positive"}:
+            continue
+        benchmark_id = str(benchmark_row.get("benchmark_id", "unknown"))
+        evidence = evidence_lookup.get(benchmark_id)
+        compound_rows: List[Dict[str, Any]] = []
+        benchmark_action_counts: Dict[str, int] = defaultdict(int)
+        for compound_row in benchmark_row.get("compounds", []):
+            closure_action = _matrix_closure_action(compound_row=compound_row, benchmark_row=benchmark_row)
+            benchmark_action_counts[closure_action] += 1
+            action_counts[closure_action] += 1
+            compound_rows.append(
+                {
+                    **compound_row,
+                    "closure_action": closure_action,
+                }
+            )
+        audit_rows.append(
+            {
+                "benchmark_id": benchmark_id,
+                "protein_type": benchmark_row.get("protein_type"),
+                "process_state": benchmark_row.get("process_state"),
+                "target_profile": benchmark_row.get("target_profile"),
+                "promotion_blocker": benchmark_row.get("promotion_blocker"),
+                "source_origin": evidence.source_origin if evidence is not None else "unknown",
+                "compounds": compound_rows,
+                "closure_action_counts": dict(sorted(benchmark_action_counts.items())),
+            }
+        )
+
+        if benchmark_row.get("mechanistic_priority_ready"):
+            blocker_rows = [
+                row for row in compound_rows
+                if str(row.get("closure_action", "unknown")) == "mechanistic_blocker"
+            ]
+            if blocker_rows:
+                mechanistic_watchlist.append(
+                    {
+                        "benchmark_id": benchmark_id,
+                        "protein_type": benchmark_row.get("protein_type"),
+                        "process_state": benchmark_row.get("process_state"),
+                        "promotion_blocker": benchmark_row.get("promotion_blocker"),
+                        "target_compounds": [str(row.get("compound", "unknown")) for row in blocker_rows],
+                        "target_roles": sorted({str(row.get("role", "unknown")) for row in blocker_rows}),
+                        "expected_decision_change": _mechanistic_refinement_expected_change(blocker_rows),
+                        "allowed_scope": "named_compound_refinement_only",
+                        "offline_compute_gate": "escalate_only_if_named_compounds_change_benchmark_visible_decision_readiness",
+                    }
+                )
+
+    return {
+        "schema_version": "1.0",
+        "description": "Compound-level observable closure audit for mixed matrix lanes, labeling the next closure action needed for each decision-driving compound.",
+        "selected_promotion_target": selected_target,
+        "benchmarks": audit_rows,
+        "mechanistic_refinement_watchlist": mechanistic_watchlist,
+        "summary": {
+            "benchmarks_audited": len(audit_rows),
+            "mechanistic_watchlist_count": len(mechanistic_watchlist),
+            "closure_action_counts": dict(sorted(action_counts.items())),
+        },
+    }
+
+
+
 
 
 def compare_matrix_benchmark_delta_sets(
@@ -1626,8 +1947,248 @@ def summarize_benchmarks(
                 blocking_issues=summary.blocking_issues,
                 conditions=bench.get("conditions", {}),
             )
-        summaries.append(summary)
+        summaries.append(_enrich_benchmark_summary_family_metadata(summary, bench))
     return summaries
+
+
+def _payload_role_from_evidence_state(evidence_state: str) -> str:
+    normalized = str(evidence_state).strip().lower()
+    if normalized in {"externally_benchmarked", "internally_benchmarked"}:
+        return "benchmark_payload"
+    if normalized == "conditional_calibration":
+        return "calibration_payload"
+    if normalized in {"transferred_prior", "safety_reference"}:
+        return "directional_prior"
+    return "structural_gap_extrapolation"
+
+
+def _benchmark_compound_names(bench: dict, summary: BenchmarkSummary) -> List[str]:
+    names: List[str] = []
+    measured = bench.get("measured_volatiles", {}) or {}
+    if isinstance(measured, dict):
+        names.extend(str(name) for name in measured.keys())
+    reference = bench.get("reference_volatiles", {}) or {}
+    if isinstance(reference, dict):
+        names.extend(str(name) for name in reference.keys())
+    names.extend(str(name) for name in summary.ranked_observable_targets)
+    names.extend(str(name) for name in summary.adverse_markers)
+    deduped: List[str] = []
+    seen: set[str] = set()
+    for name in names:
+        normalized = _normalize_name(name)
+        if not normalized or normalized in seen:
+            continue
+        seen.add(normalized)
+        deduped.append(str(name))
+    return deduped
+
+
+def _enrich_benchmark_summary_family_metadata(summary: BenchmarkSummary, bench: dict) -> BenchmarkSummary:
+    chemistry_families: List[str] = []
+    slr_families: List[str] = []
+    family_lane_names: List[str] = []
+    payload_roles: List[str] = []
+
+    for compound_name in _benchmark_compound_names(bench, summary):
+        panel_entry = get_compound_panel_entry(compound_name) or {}
+        chemistry_family = str(panel_entry.get("chemistry_family", "")).strip()
+        if not chemistry_family:
+            continue
+        descriptor = resolve_family_descriptor(chemistry_family)
+        chemistry_families.append(chemistry_family)
+        if descriptor:
+            slr_families.append(str(descriptor.get("slr_family", "")).zfill(2))
+            family_lane_names.append(str(descriptor.get("display_name", chemistry_family)))
+        payload_roles.append(_payload_role_from_evidence_state(str(panel_entry.get("evidence_state", "still_missing"))))
+
+    return BenchmarkSummary(
+        benchmark_id=summary.benchmark_id,
+        bench_file=summary.bench_file,
+        tier=summary.tier,
+        family=summary.family,
+        execution_path=summary.execution_path,
+        benchmark_engine=summary.benchmark_engine,
+        comparator_signal=summary.comparator_signal,
+        cantera_role=summary.cantera_role,
+        target_snapshot_policy=summary.target_snapshot_policy,
+        thermodynamic_gating_policy=summary.thermodynamic_gating_policy,
+        supported=summary.supported,
+        reason=summary.reason,
+        protein_type=summary.protein_type,
+        coverage=summary.coverage,
+        matched_compounds=summary.matched_compounds,
+        total_compounds=summary.total_compounds,
+        pearson_r=summary.pearson_r,
+        mae_ppb=summary.mae_ppb,
+        max_ratio=summary.max_ratio,
+        mean_ratio=summary.mean_ratio,
+        ranking_status=summary.ranking_status,
+        scale_status=summary.scale_status,
+        overall_status=summary.overall_status,
+        strict_ready=summary.strict_ready,
+        blocking_issues=list(summary.blocking_issues),
+        conditions=dict(summary.conditions),
+        process_state=summary.process_state,
+        ranked_observable_targets=list(summary.ranked_observable_targets),
+        adverse_markers=list(summary.adverse_markers),
+        ranking_contract_status=summary.ranking_contract_status,
+        calibration_mode=summary.calibration_mode,
+        reference_signal_origin=summary.reference_signal_origin,
+        mean_abs_log10_error=summary.mean_abs_log10_error,
+        chemistry_families=sorted(dict.fromkeys(chemistry_families)),
+        slr_families=sorted(dict.fromkeys(slr_families)),
+        payload_roles=sorted(dict.fromkeys(payload_roles)),
+        family_lane_names=sorted(dict.fromkeys(family_lane_names)),
+    )
+
+
+def build_family_lane_validation_artifact(
+    benchmark_files: Optional[Iterable[Path | str]] = None,
+    *,
+    target_tag: str = DEFAULT_TARGET_TAG,
+    thresholds: BenchmarkThresholds = DEFAULT_BENCHMARK_THRESHOLDS,
+) -> Dict[str, Any]:
+    summaries = summarize_benchmarks(benchmark_files, target_tag=target_tag, thresholds=thresholds)
+    enriched_summaries: List[BenchmarkSummary] = []
+    for summary in summaries:
+        bench = load_benchmark(summary.bench_file)
+        enriched_summaries.append(_enrich_benchmark_summary_family_metadata(summary, bench))
+
+    family_rows: List[Dict[str, Any]] = []
+    family_groups: Dict[str, Dict[str, Any]] = {}
+    lane_groups: Dict[str, Dict[str, Any]] = defaultdict(lambda: {
+        "execution_path": "unknown",
+        "benchmark_count": 0,
+        "strict_ready_count": 0,
+        "supported_count": 0,
+        "status_counts": defaultdict(int),
+        "chemistry_families": set(),
+        "payload_roles": set(),
+    })
+
+    for summary in enriched_summaries:
+        lane_bucket = lane_groups[summary.execution_path]
+        lane_bucket["execution_path"] = summary.execution_path
+        lane_bucket["benchmark_count"] += 1
+        lane_bucket["strict_ready_count"] += int(bool(summary.strict_ready))
+        lane_bucket["supported_count"] += int(bool(summary.supported))
+        lane_bucket["status_counts"][summary.overall_status] += 1
+        lane_bucket["chemistry_families"].update(summary.chemistry_families)
+        lane_bucket["payload_roles"].update(summary.payload_roles)
+
+        for chemistry_family in summary.chemistry_families:
+            descriptor = resolve_family_descriptor(chemistry_family)
+            family_bucket = family_groups.setdefault(
+                chemistry_family,
+                {
+                    "chemistry_family": chemistry_family,
+                    "slr_family": str(descriptor.get("slr_family", "")).zfill(2) if descriptor else "",
+                    "display_name": str(descriptor.get("display_name", chemistry_family)) if descriptor else chemistry_family,
+                    "strategic_posture": str(descriptor.get("strategic_posture", "unknown")) if descriptor else "unknown",
+                    "benchmark_count": 0,
+                    "strict_ready_count": 0,
+                    "supported_count": 0,
+                    "status_counts": defaultdict(int),
+                    "execution_paths": defaultdict(int),
+                    "payload_roles": set(),
+                    "benchmark_ids": [],
+                },
+            )
+            family_bucket["benchmark_count"] += 1
+            family_bucket["strict_ready_count"] += int(bool(summary.strict_ready))
+            family_bucket["supported_count"] += int(bool(summary.supported))
+            family_bucket["status_counts"][summary.overall_status] += 1
+            family_bucket["execution_paths"][summary.execution_path] += 1
+            family_bucket["payload_roles"].update(summary.payload_roles)
+            family_bucket["benchmark_ids"].append(summary.benchmark_id)
+
+    for chemistry_family, row in sorted(family_groups.items(), key=lambda item: (item[1]["slr_family"], item[0])):
+        family_rows.append(
+            {
+                "chemistry_family": chemistry_family,
+                "slr_family": row["slr_family"],
+                "display_name": row["display_name"],
+                "strategic_posture": row["strategic_posture"],
+                "benchmark_count": int(row["benchmark_count"]),
+                "strict_ready_count": int(row["strict_ready_count"]),
+                "supported_count": int(row["supported_count"]),
+                "status_counts": dict(sorted(row["status_counts"].items())),
+                "execution_paths": dict(sorted(row["execution_paths"].items())),
+                "payload_roles": sorted(row["payload_roles"]),
+                "benchmark_ids": sorted(dict.fromkeys(row["benchmark_ids"])),
+            }
+        )
+
+    lane_rows: List[Dict[str, Any]] = []
+    for execution_path, row in sorted(lane_groups.items()):
+        lane_rows.append(
+            {
+                "execution_path": execution_path,
+                "benchmark_count": int(row["benchmark_count"]),
+                "strict_ready_count": int(row["strict_ready_count"]),
+                "supported_count": int(row["supported_count"]),
+                "status_counts": dict(sorted(row["status_counts"].items())),
+                "chemistry_families": sorted(row["chemistry_families"]),
+                "payload_roles": sorted(row["payload_roles"]),
+            }
+        )
+
+    return {
+        "summary": {
+            "benchmark_count": len(enriched_summaries),
+            "family_count": len(family_rows),
+            "lane_count": len(lane_rows),
+            "tracked_execution_paths": [row["execution_path"] for row in lane_rows],
+        },
+        "families": family_rows,
+        "lanes": lane_rows,
+        "benchmarks": [
+            {
+                "benchmark_id": summary.benchmark_id,
+                "execution_path": summary.execution_path,
+                "overall_status": summary.overall_status,
+                "strict_ready": bool(summary.strict_ready),
+                "chemistry_families": list(summary.chemistry_families),
+                "slr_families": list(summary.slr_families),
+                "payload_roles": list(summary.payload_roles),
+                "family_lane_names": list(summary.family_lane_names),
+            }
+            for summary in enriched_summaries
+        ],
+    }
+
+
+def render_family_lane_validation_markdown(payload: Dict[str, Any]) -> str:
+    lines = [
+        "# Family Lane Validation",
+        "",
+        "| SLR | Family | Posture | Benchmarks | Strict Ready | Supported | Payload Roles | Execution Paths |",
+        "| --- | --- | --- | ---: | ---: | ---: | --- | --- |",
+    ]
+    for row in payload.get("families", []):
+        execution_paths = ", ".join(f"{key}={value}" for key, value in row.get("execution_paths", {}).items()) or "none"
+        lines.append(
+            f"| {row.get('slr_family', '') or 'n/a'} | {row.get('chemistry_family', 'unknown')} | {row.get('strategic_posture', 'unknown')} | {int(row.get('benchmark_count', 0))} | {int(row.get('strict_ready_count', 0))} | {int(row.get('supported_count', 0))} | {', '.join(str(item) for item in row.get('payload_roles', [])) or 'none'} | {execution_paths} |"
+        )
+    lines.extend([
+        "",
+        "## Lane Summary",
+        "",
+        "| Execution Path | Benchmarks | Strict Ready | Supported | Chemistry Families | Payload Roles |",
+        "| --- | ---: | ---: | ---: | --- | --- |",
+    ])
+    for row in payload.get("lanes", []):
+        lines.append(
+            f"| {row.get('execution_path', 'unknown')} | {int(row.get('benchmark_count', 0))} | {int(row.get('strict_ready_count', 0))} | {int(row.get('supported_count', 0))} | {', '.join(str(item) for item in row.get('chemistry_families', [])) or 'none'} | {', '.join(str(item) for item in row.get('payload_roles', [])) or 'none'} |"
+        )
+    summary = payload.get("summary", {})
+    lines.extend([
+        "",
+        f"Benchmarks summarized: {int(summary.get('benchmark_count', 0))}",
+        f"Chemistry families summarized: {int(summary.get('family_count', 0))}",
+        f"Execution lanes summarized: {int(summary.get('lane_count', 0))}",
+    ])
+    return "\n".join(lines) + "\n"
 
 
 def _benchmark_status_score(summary: BenchmarkSummary) -> int:

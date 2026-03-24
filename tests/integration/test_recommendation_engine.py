@@ -10,7 +10,7 @@ from src.recommend import Recommender  # noqa: E402
 from src.smirks_engine import SmirksEngine, ReactionConditions  # noqa: E402
 from src.pathway_extractor import Species  # noqa: E402
 from src.precursor_resolver import resolve  # noqa: E402
-from src.pipeline import MaillardPipeline  # noqa: E402
+from src.pipeline import MaillardPipeline, compute_ranking_score  # noqa: E402
 
 # Add project root to sys.path for subprocess parity
 ROOT = Path(__file__).resolve().parents[2]
@@ -205,13 +205,13 @@ class TestMaillardPipelineEvaluation:
             assert hasattr(result, 'trapping_efficiency'), "Result should have trapping_efficiency"
 
     def test_evaluate_all_results_sorted(self):
-        """Results should be sorted by (target_score - safety_score) descending."""
+        """Results should be sorted by the full recommendation ranking objective."""
         designer = MaillardPipeline(target_tag="meaty", minimize_tag="beany")
         cond = ReactionConditions(pH=6.0, temperature_celsius=150.0)
         results = designer.evaluate_all(cond)
         
         if len(results) > 1:
-            scores = [(r.target_score - 1.0 * r.safety_score) for r in results]
+            scores = [compute_ranking_score(r) for r in results]
             assert scores == sorted(scores, reverse=True), \
                 "Results should be sorted by Pareto ranking (descending)"
 

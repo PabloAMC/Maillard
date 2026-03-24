@@ -7,6 +7,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from src.family_sensitivity import build_family_sensitivity_artifact, render_family_sensitivity_markdown
+from src.family_lane_sensitivity import build_family_lane_sensitivity_payload, render_family_lane_sensitivity_markdown
 
 
 def test_family_sensitivity_builds_barrier_family_impact_artifact_for_benchmark_visible_systems():
@@ -34,3 +35,36 @@ def test_family_sensitivity_builds_barrier_family_impact_artifact_for_benchmark_
     assert "Family Sensitivity" in markdown
     assert "Reaction Family" in markdown
     assert "Benchmarks evaluated" in markdown
+
+
+def test_family_lane_sensitivity_stays_separate_from_barrier_family_sensitivity():
+    payload = build_family_lane_sensitivity_payload(
+        {
+            "family_lane_summary": {
+                "02": {
+                    "display_name": "Lipid oxidation and carbonylic crosstalk",
+                    "active": True,
+                    "strategic_posture": "immediate_expansion_lane",
+                },
+                "10": {
+                    "display_name": "Microbial fermentation pretreatment",
+                    "active": True,
+                    "strategic_posture": "upstream_pretreatment_lane",
+                },
+            },
+            "family_lane_adjustments": {
+                "per_lane": {
+                    "02": {"target_score_delta": -0.08, "maillard_closure_delta": -0.21, "off_flavour_risk_delta": 0.18},
+                    "10": {"target_score_delta": 0.12, "off_flavour_risk_delta": -0.08},
+                }
+            },
+        }
+    )
+
+    assert payload["summary"]["family_lane_count"] == 2
+    assert payload["summary"]["sensitivity_policy"] == "family_lane_sensitivity_tracks_runtime_toggle_impact_not_barrier_offsets"
+    assert payload["family_lanes"][0]["slr_family"] in {"02", "10"}
+
+    markdown = render_family_lane_sensitivity_markdown(payload)
+    assert "Family Lane Sensitivity" in markdown
+    assert "Toggle Magnitude" in markdown
