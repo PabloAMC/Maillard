@@ -6,7 +6,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from scripts.generate_validation_figures import _build_payload
+from scripts.generators.generate_validation_figures import _build_payload
 
 
 def test_validation_overview_payload_includes_quantitative_matrix_benchmarks():

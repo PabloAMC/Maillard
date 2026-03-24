@@ -33,6 +33,7 @@ from rdkit.Chem import AllChem, Descriptors  # noqa: E402
 
 from src.pathway_extractor import Species, ElementaryStep  # noqa: E402
 from src.conditions import ReactionConditions  # noqa: E402
+from src.chem_utils import canonicalize_smiles as _canonical  # noqa: E402
 
 # Suppress RDKit atom-mapping warnings
 RDLogger.DisableLog("rdApp.warning")
@@ -119,10 +120,7 @@ def _mol(smi: str) -> Optional[Chem.Mol]:
     return Chem.Mol(m) if m else None
 
 
-@lru_cache(maxsize=4096)
-def _canonical(smi: str) -> Optional[str]:
-    m = _mol_cached(smi)
-    return Chem.MolToSmiles(m) if m else None
+
 
 
 def _mw(smi: str) -> float:
@@ -497,31 +495,25 @@ class SmirksEngine:
                 if _is_valid(p.smiles):
                     add_to_pool(p)
 
+        def _add_steps(steps_to_add: List[ElementaryStep]):
+            for s in steps_to_add:
+                if not _step_exists(s, all_steps):
+                    all_steps.append(s)
+                    add_step_products(s)
+
         # ── Pre-Phase: Sugar Ring Opening ────────────────────────────────
         ring_steps = _sugar_ring_opening(pool_list())
-        for step in ring_steps:
-            if not _step_exists(step, all_steps):
-                all_steps.append(step)
-                add_step_products(step)
+        _add_steps(ring_steps)
 
         # ── Pre-Phase: PBMA Additive Degradations ─────────────────────────
         thiamine_steps = _thiamine_degradation(pool_list(), self.conditions)
-        for step in thiamine_steps:
-            if not _step_exists(step, all_steps):
-                all_steps.append(step)
-                add_step_products(step)
+        _add_steps(thiamine_steps)
                 
         gsh_steps = _glutathione_cleavage(pool_list(), self.conditions)
-        for step in gsh_steps:
-            if not _step_exists(step, all_steps):
-                all_steps.append(step)
-                add_step_products(step)
+        _add_steps(gsh_steps)
 
         furanone_steps = _furanone_generation(pool_list(), self.conditions)
-        for step in furanone_steps:
-            if not _step_exists(step, all_steps):
-                all_steps.append(step)
-                add_step_products(step)
+        _add_steps(furanone_steps)
 
         # ── Tier B Phase 1: Amadori / Heyns cascade ──────────────────────
         sugars = [s for s in pool_list() if _is_sugar(s)]
@@ -549,10 +541,7 @@ class SmirksEngine:
 
         # ── Tier B Phase 2: Retro-aldol and Strecker degradation ─────────
         ra_steps = _retro_aldol_fragmentation(pool_list())
-        for step in ra_steps:
-            if not _step_exists(step, all_steps):
-                all_steps.append(step)
-                add_step_products(step)
+        _add_steps(ra_steps)
 
         dicarbonyls = [s for s in pool_list() if _is_dicarbonyl(s)]
         amines_now = [s for s in pool_list() if _is_primary_amine(s)]
@@ -569,102 +558,60 @@ class SmirksEngine:
         beta_candidates = [s for s in pool_list() if _has_cysteine_beta_carbon(s)]
         for aa in beta_candidates:
             be_steps = _beta_elimination_steps(aa, pool_list())
-            for step in be_steps:
-                if not _step_exists(step, all_steps):
-                    all_steps.append(step)
-                    add_step_products(step)
+            _add_steps(be_steps)
 
         # 3b. Cysteine thermal degradation
         cys_steps = _cysteine_degradation(pool_list(), self.conditions)
-        for step in cys_steps:
-            if not _step_exists(step, all_steps):
-                all_steps.append(step)
-                add_step_products(step)
+        _add_steps(cys_steps)
 
         # 3c. Aminoketone Condensation (Pyrazines)
         ak_steps = _aminoketone_condensation(pool_list())
-        for step in ak_steps:
-            if not _step_exists(step, all_steps):
-                all_steps.append(step)
-                add_step_products(step)
+        _add_steps(ak_steps)
 
         # 3d. Lipid Thiazole Condensation
         tz_steps = _thiazole_condensation(pool_list())
-        for step in tz_steps:
-            if not _step_exists(step, all_steps):
-                all_steps.append(step)
-                add_step_products(step)
+        _add_steps(tz_steps)
 
         # 3e-0. R.12: Deamination (Must happen before volatile templates)
         deam_steps = _deamination_step(pool_list())
-        for step in deam_steps:
-            if not _step_exists(step, all_steps):
-                all_steps.append(step)
-                add_step_products(step)
+        _add_steps(deam_steps)
 
         # 3e. Thiol Addition (Furfural + H2S + H2 -> FFT)
         ta_steps = _thiol_addition(pool_list())
-        for step in ta_steps:
-            if not _step_exists(step, all_steps):
-                all_steps.append(step)
-                add_step_products(step)
+        _add_steps(ta_steps)
 
         # 3e-2. MFT Formation (Phase R.2 Fix)
         mft_steps = _mft_pathway(pool_list())
-        for step in mft_steps:
-            if not _step_exists(step, all_steps):
-                all_steps.append(step)
-                add_step_products(step)
+        _add_steps(mft_steps)
 
         # 3e-2b. Furyl disulfide formation from MFT
         furyl_disulfide_steps = _furyl_disulfide_formation(pool_list())
-        for step in furyl_disulfide_steps:
-            if not _step_exists(step, all_steps):
-                all_steps.append(step)
-                add_step_products(step)
+        _add_steps(furyl_disulfide_steps)
 
         # 3e-3. Methionine Sulfur Volatiles (Phase R.2 Fix)
         sulf_steps = _sulfur_volatiles_pathway(pool_list())
-        for step in sulf_steps:
-            if not _step_exists(step, all_steps):
-                all_steps.append(step)
-                add_step_products(step)
+        _add_steps(sulf_steps)
 
         # 3f. Safety / Toxic Markers (Acrylamide, CML, CEL)
         for sug in sugars:
             for amine in amines_now:
                 acry_steps = _acrylamide_formation(sug, amine)
-                for step in acry_steps:
-                    if not _step_exists(step, all_steps):
-                        all_steps.append(step)
-                        add_step_products(step)
+                _add_steps(acry_steps)
         
         for amine in amines_now:
             age_steps = _cml_cel_formation(amine, pool_list())
-            for step in age_steps:
-                if not _step_exists(step, all_steps):
-                    all_steps.append(step)
-                    add_step_products(step)
+            _add_steps(age_steps)
 
         # 3g. Lipid-Maillard Synergy (Lipid Aldehyde + Strecker AK)
         syn_steps = _lipid_maillard_synergy(pool_list())
-        for step in syn_steps:
-            if not _step_exists(step, all_steps):
-                all_steps.append(step)
-                add_step_products(step)
+        _add_steps(syn_steps)
 
         # 3h. Lipid Oxidation Radicals (Phase 19)
         hooh_steps = _lipid_hydroperoxide_scission(pool_list())
-        for step in hooh_steps:
-            if not _step_exists(step, all_steps):
-                all_steps.append(step)
-                add_step_products(step)
+        _add_steps(hooh_steps)
         
         cross_steps = _radical_crosstalk_templates(pool_list())
-        for step in cross_steps:
-            if not _step_exists(step, all_steps):
-                all_steps.append(step)
-                add_step_products(step)
+        _add_steps(cross_steps)
 
         # ── Tier A: SMIRKS rules, iterative ──────────────────────────────
         seen_step_keys: Set[str] = {_step_key(s) for s in all_steps}
@@ -709,24 +656,3 @@ def _step_exists(step: ElementaryStep, existing: List[ElementaryStep]) -> bool:
 # CLI demo
 # ──────────────────────────────────────────────────────────────────────────
 
-if __name__ == "__main__":
-    from data.reactions.curated_pathways import (
-        RIBOSE, GLUCOSE, GLYCINE, CYSTEINE, LEUCINE, H2S
-    )
-
-    SYSTEMS = [
-        ("Ribose + Glycine @ pH 5",  [RIBOSE, GLYCINE],            ReactionConditions(pH=5.0)),
-        ("Glucose + Glycine @ pH 7", [GLUCOSE, GLYCINE],           ReactionConditions(pH=7.0)),
-        ("Ribose + Cysteine @ pH 6", [RIBOSE, CYSTEINE, H2S],      ReactionConditions(pH=6.0)),
-        ("Ribose + Cys + Leu",       [RIBOSE, CYSTEINE, LEUCINE, H2S], ReactionConditions(pH=6.0)),
-    ]
-
-    for label, precursors, conds in SYSTEMS:
-        print(f"\n{'='*60}")
-        print(f"System: {label}")
-        print(f"Input:  {[p.label for p in precursors]}")
-        engine = SmirksEngine(conds)
-        steps = engine.enumerate(precursors, max_generations=4)
-        print(f"Generated {len(steps)} elementary steps:")
-        for step in steps:
-            print(f"  {step}")

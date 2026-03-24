@@ -19,15 +19,51 @@ def test_track0_and_track1_artifacts_exist_and_are_exposed_in_reporting():
     surface = _build_scientific_surface(ROOT)
 
     assert surface["slr_incorporation_matrix"] == "data/lit/slr_incorporation_matrix.json"
+    assert surface["chemistry_family_scope_registry"] == "data/lit/chemistry_family_scope_registry.json"
+    assert surface["family_ingestion_plan_registry"] == "data/lit/family_ingestion_plan.json"
+    assert surface["family_identifier_contract"] == "results/validation/family_identifier_contract.md"
+    assert surface["family_strategy_policy"] == "results/validation/family_strategy_policy.md"
     assert surface["flavor_reference_payloads"] == "data/lit/flavor_reference_payloads.json"
     assert surface["matrix_family_coverage_registry"] == "data/lit/matrix_family_coverage_registry.json"
     assert surface["retention_reference_payloads"] == "data/lit/retention_reference_payloads.json"
     assert surface["process_gap_registry"] == "data/lit/process_gap_registry.json"
+    assert surface["chemistry_family_scope"] == "results/validation/chemistry_family_scope.md"
+    assert surface["family_ingestion_plan"] == "results/validation/family_ingestion_plan.md"
+    assert surface["family_identifier_contract_json"] == "results/validation/family_identifier_contract.json"
+    assert surface["family_strategy_policy_json"] == "results/validation/family_strategy_policy.json"
+    assert surface["family_payload_coverage"] == "results/validation/family_payload_coverage.md"
     assert surface["matrix_family_coverage"] == "results/validation/matrix_family_coverage.md"
     assert surface["reaction_benchmark_set"] == "data/lit/reaction_benchmark_set.json"
     assert surface["mlp_candidate_registry"] == "data/lit/mlp_candidate_registry.json"
     assert surface["mlp_external_benchmark_evidence"] == "data/lit/mlp_external_benchmark_evidence.json"
     assert surface["p4_geometry_benchmark_set"] == "data/lit/p4_geometry_benchmark_set.json"
+
+
+def test_family_ingestion_plan_registry_prioritizes_first_wave_extension_lanes():
+    payload = _load("data/lit/family_ingestion_plan.json")
+    by_slr = {entry["slr_family"]: entry for entry in payload["families"]}
+
+    assert by_slr["02"]["strategic_posture"] == "immediate_expansion_lane"
+    assert by_slr["07"]["runtime_concept"] == "carbonyl_donor_hierarchy"
+    assert by_slr["10"]["runtime_concept"] == "fermentation_pretreatment_node"
+    assert by_slr["08"]["preferred_payload_types"][2] == "safety_payload"
+    assert by_slr["06"]["strategic_posture"] == "matrix_scope_lane"
+
+
+def test_family_metadata_is_present_on_literature_payload_surfaces():
+    flavor = _load("data/lit/flavor_reference_payloads.json")
+    retention = _load("data/lit/retention_reference_payloads.json")
+    priors = _load("data/lit/computational_priors.json")
+    intake = _load("data/lit/benchmark_intake_registry.json")
+    gaps = _load("data/lit/process_gap_registry.json")
+    panel = _load("data/lit/matrix_decision_panel.json")
+
+    assert flavor["section_family_metadata"]["sulfur_reference_anchors"]["chemistry_family"] == "amino_acid_sugar_core"
+    assert retention["section_family_metadata"]["aldehydes"]["chemistry_family"] == "lipid_oxidation_and_carbonylic_crosstalk"
+    assert priors["section_family_metadata"]["thiamine_pathway_priors"]["slr_family_source"] == "03"
+    assert intake["eligible_references"][0]["payload_role"] == "benchmark_intake"
+    assert gaps["entries"][0]["payload_role"] == "structural_gap_entry"
+    assert panel["target_class_family_metadata"]["umami_support_markers"]["chemistry_family"] == "nucleotide_and_ribose_support"
 
 
 def test_slr_incorporation_matrix_covers_new_track1_sources():

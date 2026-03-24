@@ -117,6 +117,10 @@ class BenchmarkSummary:
     calibration_mode: Optional[str] = None
     reference_signal_origin: str = "measured_volatiles"
     mean_abs_log10_error: Optional[float] = None
+    chemistry_families: List[str] = field(default_factory=list)
+    slr_families: List[str] = field(default_factory=list)
+    payload_roles: List[str] = field(default_factory=list)
+    family_lane_names: List[str] = field(default_factory=list)
 
 
 @dataclass(frozen=True)

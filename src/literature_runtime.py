@@ -5,6 +5,14 @@ import math
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Optional
 
+from src.family_ingestion_plan import load_family_ingestion_plan
+from src.literature_family_registry import (
+    iter_computational_prior_entries as iter_family_computational_prior_entries,
+    iter_flavor_reference_entries as iter_family_flavor_reference_entries,
+    iter_retention_reference_entries as iter_family_retention_reference_entries,
+)
+from src.matrix_prior_registry import summarize_family_prior_bundle
+from src.matrix_targets import get_compound_panel_entry, iter_target_panel_entries
 from src.projection_metadata import ProjectionMetadataMap
 
 
@@ -23,6 +31,40 @@ def _load_json_payload(file_name: str) -> dict[str, Any]:
 FLAVOR_REFERENCE_PAYLOADS = _load_json_payload("flavor_reference_payloads.json")
 RETENTION_REFERENCE_PAYLOADS = _load_json_payload("retention_reference_payloads.json")
 COMPUTATIONAL_PRIORS_PAYLOAD = _load_json_payload("computational_priors.json")
+try:
+    FAMILY_INGESTION_PLAN_PAYLOAD = load_family_ingestion_plan()
+except FileNotFoundError:
+    FAMILY_INGESTION_PLAN_PAYLOAD = {}
+
+
+_FAMILY_ENTRIES_BY_SLR = {
+    str(entry.get("slr_family", "")).zfill(2): dict(entry)
+    for entry in FAMILY_INGESTION_PLAN_PAYLOAD.get("families", [])
+    if isinstance(entry, Mapping)
+}
+
+_RUNTIME_LANE_PRIOR_REGISTRY = {
+    "pyrazine_control": {
+        "section_name": "pyrazine_control_priors",
+        "default_id": "slr_pyrazine_control_surface_v1",
+        "slr_family": "01",
+    },
+    "strecker_crosstalk": {
+        "section_name": "strecker_crosstalk_priors",
+        "default_id": "lincoln_2025_polyphenol_crosstalk_v1",
+        "slr_family": "02",
+    },
+    "furanone_support": {
+        "section_name": "furanone_priors",
+        "default_id": "blank_fay_1996_furanone_expectation_v1",
+        "slr_family": "01",
+    },
+    "thiamine_fragmentation": {
+        "section_name": "thiamine_pathway_priors",
+        "default_id": "cerny_2007_thiamine_split_v1",
+        "slr_family": "03",
+    },
+}
 
 
 def _normalize_name(name: str) -> str:
@@ -43,32 +85,147 @@ def _log_floor_decay(value: Optional[float], *, reference: float, slope: float, 
     return max(float(floor), min(1.0, float(factor)))
 
 
+def _family_runtime_descriptor(slr_family: str) -> Dict[str, Any]:
+    row = _FAMILY_ENTRIES_BY_SLR.get(str(slr_family).zfill(2), {})
+    if not row:
+        return {"slr_family": str(slr_family).zfill(2)}
+    return {
+        "slr_family": str(row.get("slr_family", slr_family)).zfill(2),
+        "family_id": str(row.get("family_id", "unknown")),
+        "display_name": str(row.get("display_name", "unknown")),
+        "strategic_posture": str(row.get("strategic_posture", "unknown")),
+        "runtime_concept": str(row.get("runtime_concept", "unknown")),
+        "implementation_wave": int(row.get("implementation_wave", 99)),
+        "order_in_wave": int(row.get("order_in_wave", 99)),
+    }
+
+
+def _family_sort_key(slr_family: str) -> tuple[int, int, str]:
+    descriptor = _family_runtime_descriptor(slr_family)
+    return (
+        int(descriptor.get("implementation_wave", 99)),
+        int(descriptor.get("order_in_wave", 99)),
+        str(descriptor.get("slr_family", slr_family)),
+    )
+
+
+def _entry_matches_compound_name(entry: Mapping[str, Any], compound_name: str) -> bool:
+    requested = _normalize_name(compound_name)
+    candidate_values: List[str] = []
+    for key in ["compound", "display_name", "canonical_name", "name"]:
+        value = str(entry.get(key, "")).strip()
+        if value:
+            candidate_values.append(value)
+    aliases = entry.get("aliases", []) or []
+    if isinstance(aliases, list):
+        candidate_values.extend(str(value).strip() for value in aliases if str(value).strip())
+    for key in ["polyphenol_examples", "required_sugars", "target_compounds_or_state_variables"]:
+        values = entry.get(key, []) or []
+        if isinstance(values, list):
+            candidate_values.extend(str(value).strip() for value in values if str(value).strip())
+    return any(_normalize_name(value) == requested for value in candidate_values)
+
+
+def _process_state_matches(entry: Mapping[str, Any], process_state: Optional[str]) -> bool:
+    if process_state is None:
+        return True
+    requested = _normalize_name(process_state)
+    values = entry.get("process_state_scope", entry.get("process_state_applicability", [])) or []
+    if not isinstance(values, list) or not values:
+        return True
+    return requested in {_normalize_name(value) for value in values}
+
+
+def _protein_type_matches_retention_matrix(matrix_family: str, protein_type: Optional[str]) -> bool:
+    if protein_type is None:
+        return True
+    normalized_protein = _normalize_name(protein_type)
+    normalized_matrix = _normalize_name(matrix_family)
+    if not normalized_protein:
+        return True
+    if normalized_protein.startswith("pea"):
+        return normalized_matrix.startswith("pea")
+    if normalized_protein.startswith("soy"):
+        return normalized_matrix.startswith("soy")
+    if normalized_protein.startswith("myco"):
+        return "myco" in normalized_matrix or "fung" in normalized_matrix
+    return normalized_protein in normalized_matrix
+
+
+def _resolve_flavor_reference_pipeline_role(entry: Mapping[str, Any]) -> str:
+    explicit = str(entry.get("pipeline_role", "")).strip().lower()
+    if explicit:
+        return explicit
+    benchmark_role = str(entry.get("benchmark_role", "")).strip().lower()
+    return _DEFAULT_FLAVOR_PIPELINE_ROLE_BY_BENCHMARK.get(benchmark_role, "reference_only")
+
+
+def query_family_runtime_priors(
+    *,
+    runtime_lane: Optional[str] = None,
+    family: Optional[str] = None,
+    protein_type: Optional[str] = None,
+    process_state: Optional[str] = None,
+    compound_name: Optional[str] = None,
+    entry_id: Optional[str] = None,
+) -> List[Dict[str, Any]]:
+    lane_metadata = _RUNTIME_LANE_PRIOR_REGISTRY.get(str(runtime_lane or "").strip(), {}) if runtime_lane is not None else {}
+    section_name = str(lane_metadata.get("section_name", "")).strip()
+    query_family = family
+    if query_family is None and lane_metadata.get("slr_family"):
+        query_family = str(lane_metadata.get("slr_family", ""))
+
+    rows: List[Dict[str, Any]] = []
+    for entry in iter_family_computational_prior_entries(family=query_family, protein_type=protein_type):
+        row = dict(entry)
+        if section_name and str(row.get("_section_name", "")).strip() != section_name:
+            continue
+        if entry_id is not None and str(row.get("id", "")).strip() != str(entry_id).strip():
+            continue
+        if compound_name is not None and not _entry_matches_compound_name(row, compound_name):
+            continue
+        if not _process_state_matches(row, process_state):
+            continue
+        row["runtime_lane"] = str(runtime_lane or row.get("runtime_lane", "generic_prior_query"))
+        row["prior_section"] = str(row.get("_section_name", section_name or "unknown"))
+        if "family" not in row:
+            descriptor = row.get("family_descriptor", {}) if isinstance(row.get("family_descriptor", {}), Mapping) else {}
+            row["family"] = {
+                "slr_family": str(descriptor.get("slr_family", row.get("slr_family_source", ""))).zfill(2),
+                "family_id": str(descriptor.get("family_id", row.get("chemistry_family", "unknown"))),
+                "display_name": str(descriptor.get("display_name", row.get("chemistry_family", "unknown"))),
+                "strategic_posture": str(descriptor.get("strategic_posture", "unknown")),
+            }
+        rows.append(row)
+    rows.sort(key=lambda row: (_family_sort_key(str(row.get("slr_family_source", row.get("family", {}).get("slr_family", "99")))), str(row.get("id", "unknown"))))
+    return rows
+
+
+def get_family_runtime_prior(
+    *,
+    runtime_lane: str,
+    entry_id: Optional[str] = None,
+) -> dict[str, Any]:
+    lane_metadata = _RUNTIME_LANE_PRIOR_REGISTRY.get(str(runtime_lane).strip(), {})
+    requested_id = str(entry_id or lane_metadata.get("default_id", "")).strip() or None
+    rows = query_family_runtime_priors(runtime_lane=runtime_lane, entry_id=requested_id)
+    return rows[0] if rows else {}
+
+
 def get_pyrazine_control_priors() -> dict[str, Any]:
-    for entry in COMPUTATIONAL_PRIORS_PAYLOAD.get("pyrazine_control_priors", []):
-        if str(entry.get("id", "")).strip() == "slr_pyrazine_control_surface_v1":
-            return dict(entry)
-    return {}
+    return get_family_runtime_prior(runtime_lane="pyrazine_control")
 
 
 def get_furanone_priors() -> dict[str, Any]:
-    for entry in COMPUTATIONAL_PRIORS_PAYLOAD.get("furanone_priors", []):
-        if str(entry.get("id", "")).strip() == "blank_fay_1996_furanone_expectation_v1":
-            return dict(entry)
-    return {}
+    return get_family_runtime_prior(runtime_lane="furanone_support")
 
 
 def get_thiamine_priors() -> dict[str, Any]:
-    for entry in COMPUTATIONAL_PRIORS_PAYLOAD.get("thiamine_pathway_priors", []):
-        if str(entry.get("id", "")).strip() == "cerny_2007_thiamine_split_v1":
-            return dict(entry)
-    return {}
+    return get_family_runtime_prior(runtime_lane="thiamine_fragmentation")
 
 
 def get_strecker_crosstalk_priors() -> dict[str, Any]:
-    for entry in COMPUTATIONAL_PRIORS_PAYLOAD.get("strecker_crosstalk_priors", []):
-        if str(entry.get("id", "")).strip() == "lincoln_2025_polyphenol_crosstalk_v1":
-            return dict(entry)
-    return {}
+    return get_family_runtime_prior(runtime_lane="strecker_crosstalk")
 
 
 _DEFAULT_FLAVOR_PIPELINE_ROLE_BY_BENCHMARK = {
@@ -79,30 +236,48 @@ _DEFAULT_FLAVOR_PIPELINE_ROLE_BY_BENCHMARK = {
 }
 
 
-def _iter_flavor_entries() -> Iterable[tuple[str, Dict[str, Any]]]:
-    for section_name, entries in FLAVOR_REFERENCE_PAYLOADS.items():
-        if not isinstance(entries, list):
+def query_flavor_reference_entries(
+    *,
+    family: Optional[str] = None,
+    compound_name: Optional[str] = None,
+    pipeline_role: Optional[str] = None,
+    entry_id: Optional[str] = None,
+    payload_section: Optional[str] = None,
+    scoring_only: bool = False,
+) -> List[Dict[str, Any]]:
+    rows: List[Dict[str, Any]] = []
+    for entry in iter_family_flavor_reference_entries(family=family):
+        row = dict(entry)
+        row["section"] = str(row.get("_section_name", "unknown"))
+        row["pipeline_role"] = _resolve_flavor_reference_pipeline_role(row)
+        if entry_id is not None and str(row.get("id", "")).strip() != str(entry_id).strip():
             continue
-        for entry in entries:
-            if isinstance(entry, Mapping):
-                yield str(section_name), dict(entry)
+        if payload_section is not None and str(row.get("section", "")).strip() != str(payload_section).strip():
+            continue
+        if compound_name is not None and not _entry_matches_compound_name(row, compound_name):
+            continue
+        if pipeline_role is not None and str(row.get("pipeline_role", "")).strip().lower() != str(pipeline_role).strip().lower():
+            continue
+        if scoring_only and not _role_supports_runtime_scoring(str(row.get("pipeline_role", ""))):
+            continue
+        rows.append(row)
+    rows.sort(key=lambda row: (str(row.get("pipeline_role", "unknown")), str(row.get("compound", "unknown"))))
+    return rows
+
+
+def _iter_flavor_entries() -> Iterable[tuple[str, Dict[str, Any]]]:
+    for entry in query_flavor_reference_entries():
+        yield str(entry.get("section", "unknown")), dict(entry)
 
 
 def _flavor_entry_by_id(entry_id: str) -> Dict[str, Any]:
-    requested = str(entry_id).strip()
-    for _, entry in _iter_flavor_entries():
-        if str(entry.get("id", "")).strip() == requested:
-            return entry
-    return {}
+    rows = query_flavor_reference_entries(entry_id=entry_id)
+    return rows[0] if rows else {}
 
 
 def get_flavor_reference_pipeline_role(entry_id: str) -> str:
     entry = _flavor_entry_by_id(entry_id)
-    explicit = str(entry.get("pipeline_role", "")).strip().lower()
-    if explicit:
-        return explicit
-    benchmark_role = str(entry.get("benchmark_role", "")).strip().lower()
-    return _DEFAULT_FLAVOR_PIPELINE_ROLE_BY_BENCHMARK.get(benchmark_role, "reference_only")
+    return _resolve_flavor_reference_pipeline_role(entry)
 
 
 def build_flavor_reference_policy_summary() -> List[Dict[str, Any]]:
@@ -114,7 +289,7 @@ def build_flavor_reference_policy_summary() -> List[Dict[str, Any]]:
                 "section": section_name,
                 "compound": str(entry.get("compound", "unknown")),
                 "benchmark_role": str(entry.get("benchmark_role", "unknown")),
-                "pipeline_role": get_flavor_reference_pipeline_role(str(entry.get("id", "unknown"))),
+                "pipeline_role": str(entry.get("pipeline_role", "reference_only")),
                 "target_direction": str(entry.get("target_direction", "")),
                 "source_citation": str(entry.get("source_citation", "unknown")),
             }
@@ -132,24 +307,45 @@ def _role_supports_runtime_scoring(role: str) -> bool:
     }
 
 
-def _iter_retention_entries() -> Iterable[tuple[str, str, Dict[str, Any]]]:
-    for section_name, section_payload in RETENTION_REFERENCE_PAYLOADS.items():
-        if not isinstance(section_payload, Mapping):
+def query_retention_reference_entries(
+    *,
+    family: Optional[str] = None,
+    compound_name: Optional[str] = None,
+    protein_type: Optional[str] = None,
+    process_state: Optional[str] = None,
+    surrogate_type: Optional[str] = None,
+    entry_id: Optional[str] = None,
+) -> List[Dict[str, Any]]:
+    rows: List[Dict[str, Any]] = []
+    for entry in iter_family_retention_reference_entries(family=family):
+        row = dict(entry)
+        row["section"] = str(row.get("_section_name", "unknown"))
+        row["matrix_family"] = str(row.get("_matrix_family", "unknown"))
+        surrogate = row.get("runtime_surrogate", {}) if isinstance(row.get("runtime_surrogate", {}), Mapping) else {}
+        row["runtime_surrogate_type"] = str(surrogate.get("type", "")) if surrogate else ""
+        if entry_id is not None and str(row.get("id", "")).strip() != str(entry_id).strip():
             continue
-        for matrix_family, entries in section_payload.items():
-            if not isinstance(entries, list):
-                continue
-            for entry in entries:
-                if isinstance(entry, Mapping):
-                    yield str(section_name), str(matrix_family), dict(entry)
+        if compound_name is not None and not _entry_matches_compound_name(row, compound_name):
+            continue
+        if protein_type is not None and not _protein_type_matches_retention_matrix(str(row.get("matrix_family", "")), protein_type):
+            continue
+        if not _process_state_matches(row, process_state):
+            continue
+        if surrogate_type is not None and str(row.get("runtime_surrogate_type", "")).strip() != str(surrogate_type).strip():
+            continue
+        rows.append(row)
+    rows.sort(key=lambda row: (str(row.get("section", "unknown")), str(row.get("matrix_family", "unknown")), str(row.get("id", "unknown"))))
+    return rows
+
+
+def _iter_retention_entries() -> Iterable[tuple[str, str, Dict[str, Any]]]:
+    for entry in query_retention_reference_entries():
+        yield str(entry.get("section", "unknown")), str(entry.get("matrix_family", "unknown")), dict(entry)
 
 
 def _retention_entry_by_id(entry_id: str) -> Dict[str, Any]:
-    requested = str(entry_id).strip()
-    for _, _, entry in _iter_retention_entries():
-        if str(entry.get("id", "")).strip() == requested:
-            return entry
-    return {}
+    rows = query_retention_reference_entries(entry_id=entry_id)
+    return rows[0] if rows else {}
 
 
 def _retention_source_label(entry: Mapping[str, Any]) -> str:
@@ -230,23 +426,17 @@ def get_retention_ph_release_profile(
     *,
     protein_type: Optional[str],
 ) -> Dict[str, Any]:
-    normalized = _normalize_name(compound_name)
-    protein = str(protein_type or "")
-
-    candidate_ids: List[str] = []
-    if protein.startswith("pea") and normalized == "hexanal":
-        candidate_ids.append("karolkowski_2021_ppi_hexanal_ph_release")
-    elif protein.startswith("pea") and normalized in {"2 pentylfuran", "2 pentyl furan"}:
-        candidate_ids.append("karolkowski_2021_ppi_2_pentylfuran_native_panel")
-
-    for entry_id in candidate_ids:
-        entry = _retention_entry_by_id(entry_id)
+    for entry in query_retention_reference_entries(
+        compound_name=compound_name,
+        protein_type=protein_type,
+        surrogate_type="ph_release_modifier",
+    ):
         surrogate = entry.get("runtime_surrogate", {})
-        if isinstance(surrogate, Mapping) and surrogate.get("type") == "ph_release_modifier":
+        if isinstance(surrogate, Mapping):
             return {
                 **dict(surrogate),
                 "source": _retention_source_label(entry),
-                "entry_id": str(entry.get("id", entry_id)),
+                "entry_id": str(entry.get("id", "unknown")),
             }
     return {}
 
@@ -382,10 +572,645 @@ def _pyrazine_signal(signal_map: Dict[str, float]) -> float:
     return total
 
 
-def _reference_panel_value(payload_section: str, entry_id: str, panel_key: str) -> float:
-    for entry in FLAVOR_REFERENCE_PAYLOADS.get(payload_section, []):
-        if str(entry.get("id", "")) != entry_id:
+def _normalize_intervention_tokens(interventions: Optional[List[Any]]) -> List[str]:
+    tokens: List[str] = []
+    for intervention in interventions or []:
+        if isinstance(intervention, Mapping):
+            name = intervention.get("name")
+            if name is not None:
+                tokens.append(_normalize_name(str(name)))
+            else:
+                for key, value in intervention.items():
+                    tokens.append(_normalize_name(str(key)))
+                    if isinstance(value, str) and value.strip():
+                        tokens.append(_normalize_name(value))
+        else:
+            tokens.append(_normalize_name(str(intervention)))
+    return tokens
+
+
+def _build_family_lane_payload(
+    slr_family: str,
+    *,
+    active: bool,
+    summary: str,
+    metrics: Mapping[str, Any],
+) -> Dict[str, Any]:
+    return {
+        **_family_runtime_descriptor(slr_family),
+        "active": bool(active),
+        "summary": str(summary),
+        **dict(metrics),
+    }
+
+
+def _lipid_benchmark_target_panel() -> List[Dict[str, Any]]:
+    benchmarkable_states = {
+        "externally_benchmarked",
+        "internally_benchmarked",
+        "conditional_calibration",
+    }
+    rows = []
+    for row in iter_target_panel_entries(
+        target_class="adverse_lipid_markers",
+        chemistry_family="lipid_oxidation_and_carbonylic_crosstalk",
+        observable_kind="volatile",
+    ):
+        if str(row.get("evidence_state", "still_missing")) not in benchmarkable_states:
             continue
+        rows.append(dict(row))
+    return rows
+
+
+def _build_lipid_crosstalk_lane(
+    *,
+    signal_map: Dict[str, float],
+    normalized_sugars: List[str],
+    lipids: List[str],
+    polyphenol_active: bool,
+    protein_type: Optional[str],
+) -> Dict[str, Any]:
+    lipid_marker_signals = {
+        "hexanal": _compound_signal(signal_map, ["hexanal"]),
+        "2_pentylfuran": _compound_signal(signal_map, ["2-pentylfuran", "2 pentylfuran"]),
+        "1_octen_3_ol": _compound_signal(signal_map, ["1-octen-3-ol", "1 octen 3 ol"]),
+        "nonanal": _compound_signal(signal_map, ["nonanal"]),
+        "2_4_decadienal": _compound_signal(
+            signal_map,
+            ["2,4-decadienal", "2 4 decadienal", "e,e-2,4-decadienal", "e e 2 4 decadienal"],
+        ),
+    }
+    lipid_marker_signal_ppb = sum(float(value) for value in lipid_marker_signals.values())
+    marker_count = sum(1 for value in lipid_marker_signals.values() if float(value) > 0.0)
+    lipid_input_count = len(lipids)
+    donor_pressure = 1.0 if any("ribose" in sugar or "xylose" in sugar or "fructose" in sugar for sugar in normalized_sugars) else 0.55
+    carbonyl_competition_factor = min(1.75, 0.18 * lipid_input_count + donor_pressure * lipid_marker_signal_ppb / 120.0)
+    retention_rows = query_retention_reference_entries(
+        family="02",
+        protein_type=protein_type,
+        process_state="heated_matrix",
+    )
+    crosstalk_prior_rows = query_family_runtime_priors(
+        runtime_lane="strecker_crosstalk",
+        family="02",
+        process_state="heated_matrix",
+    )
+    benchmark_ready_targets = _lipid_benchmark_target_panel()
+    crosstalk_prior_active = bool(crosstalk_prior_rows) and bool(polyphenol_active or lipid_input_count or lipid_marker_signal_ppb > 0.0)
+    strecker_suppression_factor = min(
+        1.0,
+        (carbonyl_competition_factor / 1.75) * (1.15 if polyphenol_active and crosstalk_prior_active else 1.0),
+    )
+    maillard_closure_pressure = min(2.0, carbonyl_competition_factor * (1.0 + 0.25 * float(polyphenol_active and crosstalk_prior_active)))
+    active = bool(lipid_input_count or lipid_marker_signal_ppb > 0.0)
+    summary = "No explicit lipid-driven crosstalk lane active."
+    if active:
+        summary = (
+            "Lipid-derived adverse markers are present or lipid precursors are active, so the lane should be split into adverse-marker retention and carbonyl-competition support rather than treated as a generic off-note penalty."
+        )
+        if polyphenol_active:
+            summary = (
+                "Lipid-derived adverse markers coexist with polyphenol chemistry, so oxidative retention and Strecker-suppression crosstalk should be treated as coupled sub-lanes."
+            )
+    return _build_family_lane_payload(
+        "02",
+        active=active,
+        summary=summary,
+        metrics={
+            "lipid_marker_signals_ppb": lipid_marker_signals,
+            "lipid_marker_signal_ppb": float(lipid_marker_signal_ppb),
+            "lipid_marker_count": int(marker_count),
+            "lipid_input_count": int(lipid_input_count),
+            "polyphenol_crosstalk_active": bool(polyphenol_active and active),
+            "carbonyl_competition_factor": float(carbonyl_competition_factor),
+            "benchmark_ready_targets": [str(row.get("display_name", row.get("canonical_name", "unknown"))) for row in benchmark_ready_targets],
+            "retention_reference_ids": [str(row.get("id", "unknown")) for row in retention_rows],
+            "competition_prior_ids": [str(row.get("id", "unknown")) for row in crosstalk_prior_rows],
+            "strecker_suppression_factor": float(strecker_suppression_factor),
+            "maillard_closure_pressure": float(maillard_closure_pressure),
+            "runtime_sub_lanes": {
+                "adverse_marker_generation_and_retention": {
+                    "active": bool(active),
+                    "benchmark_ready_target_count": len(benchmark_ready_targets),
+                    "benchmark_ready_targets": [str(row.get("display_name", row.get("canonical_name", "unknown"))) for row in benchmark_ready_targets],
+                    "retention_reference_count": len(retention_rows),
+                    "retention_reference_ids": [str(row.get("id", "unknown")) for row in retention_rows],
+                },
+                "carbonyl_competition_and_crosstalk": {
+                    "active": bool(crosstalk_prior_active),
+                    "competition_prior_count": len(crosstalk_prior_rows),
+                    "competition_prior_ids": [str(row.get("id", "unknown")) for row in crosstalk_prior_rows],
+                    "strecker_suppression_factor": float(strecker_suppression_factor),
+                    "maillard_closure_pressure": float(maillard_closure_pressure),
+                },
+            },
+        },
+    )
+
+
+def _build_state_marker_payload(
+    marker_name: str,
+    *,
+    active: bool,
+    state_value: Any,
+    state_value_summary: str,
+    influence_mode: str,
+    family_lane: Mapping[str, Any],
+    summary: str,
+    extras: Optional[Dict[str, Any]] = None,
+) -> Dict[str, Any]:
+    panel_entry = get_compound_panel_entry(marker_name) or {}
+    payload = {
+        "marker_id": str(panel_entry.get("canonical_name", _normalize_name(marker_name))),
+        "display_name": str(panel_entry.get("display_name", marker_name)),
+        "target_class": str(panel_entry.get("target_class", "pretreatment_state_markers")),
+        "panel_role": str(panel_entry.get("panel_role", "report_only")),
+        "observable_kind": str(panel_entry.get("observable_kind", "state_variable")),
+        "modeling_regimes": list(panel_entry.get("modeling_regimes", [])),
+        "chemistry_family": panel_entry.get("chemistry_family"),
+        "supporting_families": list(panel_entry.get("supporting_families", [])),
+        "observable_panel_tags": list(panel_entry.get("observable_panel_tags", [])),
+        "active": bool(active),
+        "state_value": state_value,
+        "state_value_summary": state_value_summary,
+        "influence_mode": influence_mode,
+        "summary": summary,
+        "family_lane": {
+            "slr_family": str(family_lane.get("slr_family", "")),
+            "display_name": str(family_lane.get("display_name", "")),
+            "active": bool(family_lane.get("active", False)),
+        },
+    }
+    if extras:
+        payload.update(extras)
+    return payload
+
+
+def _build_family_state_markers(
+    *,
+    thiamine_metadata: Mapping[str, Any],
+    thiamine_fraction_estimate: float,
+    thiamine_mode: str,
+    thiamine_support_lane: Mapping[str, Any],
+    nucleotide_support_lane: Mapping[str, Any],
+    fermentation_pretreatment_lane: Mapping[str, Any],
+    caramelization_lane: Mapping[str, Any],
+) -> List[Dict[str, Any]]:
+    markers = [
+        _build_state_marker_payload(
+            "thiamine_availability",
+            active=bool(thiamine_support_lane.get("active", False)),
+            state_value=bool(thiamine_metadata.get("available", False)),
+            state_value_summary=(
+                f"available={bool(thiamine_metadata.get('available', False))}, source={thiamine_metadata.get('source', 'unknown')}, mode={thiamine_mode}, mft_fraction_estimate={thiamine_fraction_estimate:.2f}"
+            ),
+            influence_mode="upstream_state_only",
+            family_lane=thiamine_support_lane,
+            summary=str(thiamine_support_lane.get("summary", "")),
+            extras={
+                "source": str(thiamine_metadata.get("source", "unknown")),
+                "explicit": bool(thiamine_metadata.get("explicit", False)),
+                "inferred_from_inputs": bool(thiamine_metadata.get("inferred_from_inputs", False)),
+            },
+        ),
+        _build_state_marker_payload(
+            "nucleotide_enrichment",
+            active=bool(nucleotide_support_lane.get("active", False)),
+            state_value=float(nucleotide_support_lane.get("nucleotide_support_score", 0.0)),
+            state_value_summary=(
+                f"support_score={float(nucleotide_support_lane.get('nucleotide_support_score', 0.0)):.2f}, nucleotide_active={bool(nucleotide_support_lane.get('nucleotide_support_active', False))}, ribose_delivery_active={bool(nucleotide_support_lane.get('ribose_delivery_active', False))}"
+            ),
+            influence_mode="upstream_state_only",
+            family_lane=nucleotide_support_lane,
+            summary=str(nucleotide_support_lane.get("summary", "")),
+        ),
+        _build_state_marker_payload(
+            "free_amino_acid_enrichment",
+            active=bool(fermentation_pretreatment_lane.get("precursor_release_active", False)),
+            state_value=bool(fermentation_pretreatment_lane.get("precursor_release_active", False)),
+            state_value_summary=(
+                f"precursor_release_active={bool(fermentation_pretreatment_lane.get('precursor_release_active', False))}, pretreatment_support_score={float(fermentation_pretreatment_lane.get('pretreatment_support_score', 0.0)):.2f}"
+            ),
+            influence_mode="upstream_state_only",
+            family_lane=fermentation_pretreatment_lane,
+            summary=str(fermentation_pretreatment_lane.get("summary", "")),
+        ),
+        _build_state_marker_payload(
+            "pretreatment_ph_shift",
+            active=bool(fermentation_pretreatment_lane.get("pretreatment_pH_shift_active", False)),
+            state_value=bool(fermentation_pretreatment_lane.get("pretreatment_pH_shift_active", False)),
+            state_value_summary=(
+                f"pretreatment_pH_shift_active={bool(fermentation_pretreatment_lane.get('pretreatment_pH_shift_active', False))}, fermentation_cues_active={bool(fermentation_pretreatment_lane.get('fermentation_cues_active', False))}"
+            ),
+            influence_mode="upstream_state_only",
+            family_lane=fermentation_pretreatment_lane,
+            summary=str(fermentation_pretreatment_lane.get("summary", "")),
+        ),
+        _build_state_marker_payload(
+            "caramelization_severity",
+            active=bool(caramelization_lane.get("active", False)),
+            state_value=float(caramelization_lane.get("severity_signal_ppb", 0.0)),
+            state_value_summary=(
+                f"severity_signal_ppb={float(caramelization_lane.get('severity_signal_ppb', 0.0)):.2f}, severity_penalty_factor={float(caramelization_lane.get('severity_penalty_factor', 0.0)):.2f}"
+            ),
+            influence_mode="upstream_state_plus_marker_panel",
+            family_lane=caramelization_lane,
+            summary=str(caramelization_lane.get("summary", "")),
+            extras={
+                "supportive_furanone_context": float(caramelization_lane.get("caramelization_support_score", 0.0)),
+            },
+        ),
+    ]
+    return markers
+
+
+def _build_core_maillard_lane(
+    *,
+    normalized_sugars: List[str],
+    normalized_amino: List[str],
+    sulfur_signal: float,
+    strecker_balance_score: float,
+) -> Dict[str, Any]:
+    active = bool(normalized_sugars and normalized_amino)
+    core_support_score = min(1.0, 0.45 * float(bool(normalized_sugars)) + 0.35 * float(bool(normalized_amino)) + 0.20 * min(max(strecker_balance_score, 0.0), 1.0))
+    summary = "No explicit amino acid-sugar core lane active."
+    if active:
+        summary = "The amino acid-sugar core lane is active and remains the quantitative trunk for the current formulation."
+        if sulfur_signal > 0.0:
+            summary = "The amino acid-sugar core lane is active and already supports sulfur-positive routing signals."
+    return _build_family_lane_payload(
+        "01",
+        active=active,
+        summary=summary,
+        metrics={
+            "core_support_score": float(core_support_score),
+            "sugar_count": int(len(normalized_sugars)),
+            "amino_count": int(len(normalized_amino)),
+        },
+    )
+
+
+def _classify_donor_family(normalized_sugar: str) -> str:
+    if any(token in normalized_sugar for token in ["phosphate", "ribose 5 phosphate", "glucose 6 phosphate", "fructose 6 phosphate"]):
+        return "phosphorylated"
+    if any(token in normalized_sugar for token in ["ribose", "xylose", "arabinose"]):
+        return "pentose"
+    if "fructose" in normalized_sugar:
+        return "fructose"
+    if "glucose" in normalized_sugar:
+        return "glucose"
+    return "other_reducing_sugar"
+
+
+def _build_donor_hierarchy_lane(normalized_sugars: List[str]) -> Dict[str, Any]:
+    donor_counts: Dict[str, int] = {}
+    donor_inputs: Dict[str, List[str]] = {}
+    donor_strength = {
+        "phosphorylated": 1.0,
+        "pentose": 0.95,
+        "fructose": 0.75,
+        "glucose": 0.50,
+        "other_reducing_sugar": 0.35,
+    }
+    for sugar in normalized_sugars:
+        donor_class = _classify_donor_family(sugar)
+        donor_counts[donor_class] = donor_counts.get(donor_class, 0) + 1
+        donor_inputs.setdefault(donor_class, []).append(sugar)
+
+    dominant_donor_class = "none"
+    if donor_counts:
+        dominant_donor_class = max(
+            donor_counts,
+            key=lambda donor_class: (donor_strength.get(donor_class, 0.0), donor_counts[donor_class], donor_class),
+        )
+
+    active = bool(normalized_sugars)
+    donor_hierarchy_score = donor_strength.get(dominant_donor_class, 0.0)
+    mixed_donor_system = len(donor_counts) > 1
+    summary = "No explicit carbonyl donor hierarchy lane active."
+    if active:
+        summary = (
+            f"Dominant donor class is {dominant_donor_class}, so sugar identity should be treated as a first-class routing variable rather than generic sugar loading."
+        )
+    return _build_family_lane_payload(
+        "07",
+        active=active,
+        summary=summary,
+        metrics={
+            "dominant_donor_class": dominant_donor_class,
+            "donor_class_counts": donor_counts,
+            "donor_inputs": donor_inputs,
+            "donor_hierarchy_score": float(donor_hierarchy_score),
+            "mixed_donor_system": bool(mixed_donor_system),
+            "supports_fast_sulfur_routing": dominant_donor_class in {"pentose", "phosphorylated"},
+        },
+    )
+
+
+def _build_thiamine_support_lane(
+    *,
+    thiamine_active: bool,
+    thiamine_fraction_estimate: float,
+    thiamine_mode: str,
+) -> Dict[str, Any]:
+    summary = "No explicit thiamine support lane active."
+    if thiamine_active:
+        summary = "Thiamine support is active, so sulfur routing should be interpreted as augmented rather than purely core-derived."
+    return _build_family_lane_payload(
+        "03",
+        active=thiamine_active,
+        summary=summary,
+        metrics={
+            "thiamine_support_score": float(thiamine_fraction_estimate),
+            "thiamine_mode": thiamine_mode,
+        },
+    )
+
+
+def _build_nucleotide_support_lane(
+    *,
+    normalized_sugars: List[str],
+    normalized_additives: List[str],
+    normalized_interventions: List[str],
+) -> Dict[str, Any]:
+    support_pool = normalized_sugars + normalized_additives + normalized_interventions
+    nucleotide_tokens = ["imp", "gmp", "inosinate", "guanylate", "yeast extract"]
+    nucleotide_active = any(any(token in value for token in nucleotide_tokens) for value in support_pool)
+    ribose_delivery_active = any(any(token in value for token in ["ribose", "ribose 5 phosphate"]) for value in normalized_sugars + normalized_additives)
+    nucleotide_support_score = min(1.0, 0.55 * float(nucleotide_active) + 0.45 * float(ribose_delivery_active))
+    summary = "No explicit nucleotide support lane active."
+    if nucleotide_active or ribose_delivery_active:
+        summary = "Nucleotide or ribose-delivery support is active, so umami amplification should be treated as an upstream support lane."
+    return _build_family_lane_payload(
+        "04",
+        active=bool(nucleotide_active or ribose_delivery_active),
+        summary=summary,
+        metrics={
+            "nucleotide_support_active": bool(nucleotide_active),
+            "ribose_delivery_active": bool(ribose_delivery_active),
+            "nucleotide_support_score": float(nucleotide_support_score),
+        },
+    )
+
+
+def _build_sulfur_peptide_support_lane(
+    *,
+    normalized_additives: List[str],
+    normalized_amino: List[str],
+    normalized_interventions: List[str],
+) -> Dict[str, Any]:
+    support_pool = normalized_additives + normalized_amino + normalized_interventions
+    glutathione_active = any("glutathione" in value for value in support_pool)
+    peptide_support_active = any(any(token in value for token in ["peptide", "hydrolysate", "autolysate"]) for value in support_pool)
+    sulfur_peptide_support_score = min(1.0, 0.60 * float(glutathione_active) + 0.40 * float(peptide_support_active))
+    summary = "No explicit glutathione or peptide support lane active."
+    if glutathione_active or peptide_support_active:
+        summary = "Glutathione or peptide support is active, so sulfur intensity should be interpreted as partly matrix-supported rather than purely free-cysteine-driven."
+    return _build_family_lane_payload(
+        "05",
+        active=bool(glutathione_active or peptide_support_active),
+        summary=summary,
+        metrics={
+            "glutathione_active": bool(glutathione_active),
+            "peptide_support_active": bool(peptide_support_active),
+            "sulfur_peptide_support_score": float(sulfur_peptide_support_score),
+        },
+    )
+
+
+def _build_matrix_scope_lane(*, protein_label: str) -> Dict[str, Any]:
+    normalized_protein = _normalize_name(protein_label)
+    alternative_matrix_active = bool(normalized_protein and normalized_protein not in {"free", "pea_iso", "pea_conc", "soy_iso", "soy_conc"})
+    matrix_uncertainty_factor = 0.75 if alternative_matrix_active else 0.0
+    summary = "No alternative-matrix scope lane active."
+    if alternative_matrix_active:
+        summary = "Alternative protein matrix scope is active, so matrix-transfer uncertainty should be treated as a first-class recommendation constraint."
+    return _build_family_lane_payload(
+        "06",
+        active=alternative_matrix_active,
+        summary=summary,
+        metrics={
+            "matrix_scope_active": bool(alternative_matrix_active),
+            "matrix_uncertainty_factor": float(matrix_uncertainty_factor),
+            "protein_type": protein_label,
+        },
+    )
+
+
+def _build_fermentation_pretreatment_lane(
+    *,
+    normalized_additives: List[str],
+    normalized_amino: List[str],
+    normalized_interventions: List[str],
+    pH: Optional[float],
+    thiamine_active: bool,
+) -> Dict[str, Any]:
+    pretreatment_pool = normalized_additives + normalized_amino + normalized_interventions
+    fermentation_active = any(
+        any(token in value for token in ["ferment", "koji", "miso", "starter culture", "culture", "yeast extract"])
+        for value in pretreatment_pool
+    )
+    precursor_release_active = any(
+        any(token in value for token in ["hydrolysate", "hydroly", "protease", "peptide", "autolysate"])
+        for value in pretreatment_pool
+    )
+    off_note_cleanup_active = any(
+        any(token in value for token in ["yeast fermentation", "yeast extract", "koji", "ferment"])
+        for value in pretreatment_pool
+    )
+    nucleotide_support_active = any(
+        any(token in value for token in ["imp", "gmp", "inosinate", "guanylate", "yeast extract"])
+        for value in pretreatment_pool
+    )
+    pretreatment_pH_shift_active = bool((fermentation_active or off_note_cleanup_active) and pH is not None and float(pH) < 6.2)
+    active = bool(
+        fermentation_active
+        or precursor_release_active
+        or off_note_cleanup_active
+        or nucleotide_support_active
+    )
+    pretreatment_support_score = min(
+        1.0,
+        0.35 * float(precursor_release_active)
+        + 0.30 * float(off_note_cleanup_active)
+        + 0.20 * float(nucleotide_support_active)
+        + 0.15 * float(thiamine_active),
+    )
+    summary = "No explicit fermentation pretreatment lane active."
+    if active:
+        summary = (
+            "Pretreatment cues indicate upstream fermentation or hydrolysis support, so precursor loading and off-note burden should be interpreted before thermal chemistry."
+        )
+    return _build_family_lane_payload(
+        "10",
+        active=active,
+        summary=summary,
+        metrics={
+            "fermentation_cues_active": bool(fermentation_active),
+            "precursor_release_active": bool(precursor_release_active),
+            "off_note_cleanup_active": bool(off_note_cleanup_active),
+            "nucleotide_support_active": bool(nucleotide_support_active),
+            "pretreatment_pH_shift_active": bool(pretreatment_pH_shift_active),
+            "pretreatment_support_score": float(pretreatment_support_score),
+        },
+    )
+
+
+def _build_caramelization_lane(
+    *,
+    signal_map: Dict[str, float],
+    furanone_expected: List[str],
+    furanone_observed: List[str],
+) -> Dict[str, Any]:
+    severity_marker_signals = {
+        "furfural": _compound_signal(signal_map, ["furfural"]),
+        "hmf": _compound_signal(signal_map, ["5-hydroxymethylfurfural", "5-hydroxymethylfurfural (hmf)", "hmf"]),
+        "2_acetylfuran": _compound_signal(signal_map, ["2-acetylfuran", "2 acetylfuran"]),
+    }
+    severity_signal_ppb = sum(float(value) for value in severity_marker_signals.values())
+    supportive_furanones_observed = len(furanone_observed)
+    active = bool(severity_signal_ppb > 0.0 or furanone_expected)
+    caramelization_support_score = min(1.0, 0.40 * float(bool(furanone_expected)) + 0.30 * min(supportive_furanones_observed, 2) / 2.0)
+    severity_penalty_factor = min(1.5, severity_signal_ppb / 60.0)
+    summary = "No explicit carbohydrate pyrolysis or caramelization lane active."
+    if active:
+        summary = "Carbohydrate pyrolysis or caramelization markers are active, so helpful browning support must be separated from over-furan drift."
+    return _build_family_lane_payload(
+        "09",
+        active=active,
+        summary=summary,
+        metrics={
+            "severity_marker_signals_ppb": severity_marker_signals,
+            "severity_signal_ppb": float(severity_signal_ppb),
+            "caramelization_support_score": float(caramelization_support_score),
+            "severity_penalty_factor": float(severity_penalty_factor),
+        },
+    )
+
+
+def _build_off_note_guardrail_lane(
+    *,
+    normalized_additives: List[str],
+    normalized_interventions: List[str],
+    lipid_crosstalk_lane: Mapping[str, Any],
+    polyphenol_active: bool,
+    protein_label: str,
+) -> Dict[str, Any]:
+    guardrail_pool = normalized_additives + normalized_interventions
+    antioxidant_guardrail_active = any(
+        any(token in value for token in ["rosemary", "catechin", "tannic acid", "green tea extract", "grape seed extract", "polyphenol"])
+        for value in guardrail_pool
+    )
+    calcium_guardrail_active = any("calcium carbonate" in value for value in guardrail_pool)
+    lipid_marker_signal_ppb = float(lipid_crosstalk_lane.get("lipid_marker_signal_ppb", 0.0))
+    dicarbonyl_trapping_factor = 1.0 if polyphenol_active else (0.4 if antioxidant_guardrail_active else 0.0)
+    amino_group_blocking_factor = min(1.5, lipid_marker_signal_ppb / 120.0) if protein_label != "free" else 0.0
+    suppression_pressure_active = bool(
+        lipid_marker_signal_ppb > 0.0
+        or antioxidant_guardrail_active
+        or calcium_guardrail_active
+        or polyphenol_active
+    )
+    summary = "No explicit off-note guardrail lane active."
+    if suppression_pressure_active:
+        summary = (
+            "Plant-matrix guardrails are active, so off-note suppression and amino-group blocking risk should constrain optimistic flavor claims."
+        )
+    return _build_family_lane_payload(
+        "08",
+        active=suppression_pressure_active,
+        summary=summary,
+        metrics={
+            "suppression_pressure_active": bool(suppression_pressure_active),
+            "antioxidant_guardrail_active": bool(antioxidant_guardrail_active),
+            "polyphenol_guardrail_active": bool(polyphenol_active),
+            "acrylamide_guardrail_active": bool(calcium_guardrail_active),
+            "dicarbonyl_trapping_factor": float(dicarbonyl_trapping_factor),
+            "amino_group_blocking_factor": float(amino_group_blocking_factor),
+        },
+    )
+
+
+def _build_family_lane_adjustments(family_lane_summary: Mapping[str, Mapping[str, Any]]) -> Dict[str, Any]:
+    per_lane: Dict[str, Dict[str, float]] = {}
+
+    core_lane = family_lane_summary.get("01", {})
+    per_lane["01"] = {
+        "target_score_delta": 0.08 * float(core_lane.get("core_support_score", 0.0)) if core_lane.get("active") else 0.0,
+        "off_flavour_risk_delta": 0.0,
+    }
+
+    lipid_lane = family_lane_summary.get("02", {})
+    per_lane["02"] = {
+        "target_score_delta": -0.06 * min(1.5, float(lipid_lane.get("lipid_marker_signal_ppb", 0.0)) / 100.0) if lipid_lane.get("active") else 0.0,
+        "maillard_closure_delta": -0.14 * float(lipid_lane.get("maillard_closure_pressure", 0.0)) if lipid_lane.get("active") else 0.0,
+        "off_flavour_risk_delta": 0.18 * min(1.5, float(lipid_lane.get("lipid_marker_signal_ppb", 0.0)) / 100.0) if lipid_lane.get("active") else 0.0,
+    }
+
+    thiamine_lane = family_lane_summary.get("03", {})
+    per_lane["03"] = {
+        "target_score_delta": 0.18 * float(thiamine_lane.get("thiamine_support_score", 0.0)) if thiamine_lane.get("active") else 0.0,
+        "off_flavour_risk_delta": 0.0,
+    }
+
+    nucleotide_lane = family_lane_summary.get("04", {})
+    per_lane["04"] = {
+        "target_score_delta": 0.16 * float(nucleotide_lane.get("nucleotide_support_score", 0.0)) if nucleotide_lane.get("active") else 0.0,
+        "off_flavour_risk_delta": -0.03 * float(nucleotide_lane.get("nucleotide_support_active", False)) if nucleotide_lane.get("active") else 0.0,
+    }
+
+    peptide_lane = family_lane_summary.get("05", {})
+    per_lane["05"] = {
+        "target_score_delta": 0.12 * float(peptide_lane.get("sulfur_peptide_support_score", 0.0)) if peptide_lane.get("active") else 0.0,
+        "off_flavour_risk_delta": 0.0,
+    }
+
+    matrix_lane = family_lane_summary.get("06", {})
+    per_lane["06"] = {
+        "target_score_delta": -0.12 * float(matrix_lane.get("matrix_uncertainty_factor", 0.0)) if matrix_lane.get("active") else 0.0,
+        "off_flavour_risk_delta": 0.05 * float(matrix_lane.get("matrix_uncertainty_factor", 0.0)) if matrix_lane.get("active") else 0.0,
+    }
+
+    donor_lane = family_lane_summary.get("07", {})
+    donor_score = float(donor_lane.get("donor_hierarchy_score", 0.0))
+    supports_fast = bool(donor_lane.get("supports_fast_sulfur_routing", False))
+    per_lane["07"] = {
+        "target_score_delta": (0.14 * donor_score) if donor_lane.get("active") else 0.0,
+        "off_flavour_risk_delta": (-0.04 * donor_score) if donor_lane.get("active") and supports_fast else 0.02 * max(0.0, 0.6 - donor_score),
+    }
+
+    guardrail_lane = family_lane_summary.get("08", {})
+    per_lane["08"] = {
+        "target_score_delta": -0.08 * float(guardrail_lane.get("amino_group_blocking_factor", 0.0)) if guardrail_lane.get("active") else 0.0,
+        "off_flavour_risk_delta": 0.18 * float(guardrail_lane.get("dicarbonyl_trapping_factor", 0.0)) + 0.08 * float(guardrail_lane.get("amino_group_blocking_factor", 0.0)) if guardrail_lane.get("active") else 0.0,
+    }
+
+    caramelization_lane = family_lane_summary.get("09", {})
+    per_lane["09"] = {
+        "target_score_delta": 0.08 * float(caramelization_lane.get("caramelization_support_score", 0.0)) - 0.10 * float(caramelization_lane.get("severity_penalty_factor", 0.0)) if caramelization_lane.get("active") else 0.0,
+        "off_flavour_risk_delta": 0.06 * float(caramelization_lane.get("severity_penalty_factor", 0.0)) if caramelization_lane.get("active") else 0.0,
+    }
+
+    fermentation_lane = family_lane_summary.get("10", {})
+    off_note_cleanup_bonus = 0.08 if bool(fermentation_lane.get("off_note_cleanup_active", False)) else 0.0
+    per_lane["10"] = {
+        "target_score_delta": 0.16 * float(fermentation_lane.get("pretreatment_support_score", 0.0)) if fermentation_lane.get("active") else 0.0,
+        "off_flavour_risk_delta": -off_note_cleanup_bonus if fermentation_lane.get("active") else 0.0,
+    }
+
+    total_target_score_delta = sum(float(row.get("target_score_delta", 0.0)) for row in per_lane.values())
+    total_maillard_closure_delta = sum(float(row.get("maillard_closure_delta", 0.0)) for row in per_lane.values())
+    total_off_flavour_risk_delta = sum(float(row.get("off_flavour_risk_delta", 0.0)) for row in per_lane.values())
+    return {
+        "per_lane": per_lane,
+        "target_score_delta": float(total_target_score_delta),
+        "maillard_closure_delta": float(total_maillard_closure_delta),
+        "off_flavour_risk_delta": float(total_off_flavour_risk_delta),
+    }
+
+
+def _reference_panel_value(payload_section: str, entry_id: str, panel_key: str) -> float:
+    for entry in query_flavor_reference_entries(entry_id=entry_id, payload_section=payload_section):
         values = entry.get("numeric_band_or_point", {}).get("values", {})
         if panel_key in values:
             return float(values[panel_key])
@@ -445,6 +1270,145 @@ def _resolve_thiamine_availability(
     }
 
 
+def build_family_upstream_contract(
+    *,
+    sugars: Optional[List[str]] = None,
+    amino_acids: Optional[List[str]] = None,
+    additives: Optional[List[str]] = None,
+    interventions: Optional[List[Any]] = None,
+    protein_type: Optional[str] = None,
+    pH: Optional[float] = None,
+    thiamine_availability: Any = None,
+    molar_ratios: Optional[Mapping[str, Any]] = None,
+) -> Dict[str, Any]:
+    sugars = sugars or []
+    amino_acids = amino_acids or []
+    additives = additives or []
+    normalized_sugars = [_normalize_name(value) for value in sugars]
+    normalized_additives = [_normalize_name(value) for value in additives]
+    normalized_amino = [_normalize_name(value) for value in amino_acids]
+    normalized_interventions = _normalize_intervention_tokens(interventions)
+    protein_label = str(protein_type or "free")
+
+    thiamine_metadata = _resolve_thiamine_availability(
+        thiamine_availability,
+        normalized_sugars=normalized_sugars,
+        normalized_amino=normalized_amino,
+        normalized_additives=normalized_additives,
+        protein_label=protein_label,
+    )
+    thiamine_active = bool(thiamine_metadata["available"])
+
+    thiamine_priors = get_thiamine_priors()
+    pentose_active = any(token in sugar for sugar in normalized_sugars for token in ["ribose", "xylose", "arabinose"])
+    thiamine_fraction_estimate = 0.0
+    thiamine_mode = "inactive"
+    if thiamine_active:
+        if pentose_active:
+            thiamine_fraction_estimate = float(thiamine_priors.get("mixed_pentose_fraction", 0.5) or 0.5)
+            thiamine_mode = "mixed_thiamine_plus_pentose"
+        else:
+            thiamine_fraction_estimate = float(thiamine_priors.get("thiamine_only_fraction", 1.0) or 1.0)
+            thiamine_mode = "thiamine_only"
+
+    donor_hierarchy_lane = _build_donor_hierarchy_lane(normalized_sugars)
+    fermentation_pretreatment_lane = _build_fermentation_pretreatment_lane(
+        normalized_additives=normalized_additives,
+        normalized_amino=normalized_amino,
+        normalized_interventions=normalized_interventions,
+        pH=pH,
+        thiamine_active=thiamine_active,
+    )
+    thiamine_support_lane = _build_thiamine_support_lane(
+        thiamine_active=thiamine_active,
+        thiamine_fraction_estimate=thiamine_fraction_estimate,
+        thiamine_mode=thiamine_mode,
+    )
+    nucleotide_support_lane = _build_nucleotide_support_lane(
+        normalized_sugars=normalized_sugars,
+        normalized_additives=normalized_additives,
+        normalized_interventions=normalized_interventions,
+    )
+    sulfur_peptide_support_lane = _build_sulfur_peptide_support_lane(
+        normalized_additives=normalized_additives,
+        normalized_amino=normalized_amino,
+        normalized_interventions=normalized_interventions,
+    )
+    matrix_scope_lane = _build_matrix_scope_lane(protein_label=protein_label)
+
+    donor_weight_by_class = {
+        "phosphorylated": 1.35,
+        "pentose": 1.20,
+        "fructose": 1.05,
+        "glucose": 0.92,
+        "other_reducing_sugar": 0.88,
+    }
+    effective_molar_ratios = {
+        str(key): float(value)
+        for key, value in (molar_ratios or {}).items()
+        if value is not None
+    }
+    donor_pool_factors: Dict[str, float] = {}
+    ratio_key_lookup = {_normalize_name(key): key for key in effective_molar_ratios}
+    dominant_donor_class = str(donor_hierarchy_lane.get("dominant_donor_class", "none"))
+    mixed_donor_system = bool(donor_hierarchy_lane.get("mixed_donor_system", False))
+    for sugar in normalized_sugars:
+        donor_class = _classify_donor_family(sugar)
+        factor = float(donor_weight_by_class.get(donor_class, 1.0))
+        if mixed_donor_system and dominant_donor_class in {"phosphorylated", "pentose"} and donor_class != dominant_donor_class:
+            factor *= 0.85
+        donor_pool_factors[sugar] = float(factor)
+        ratio_key = ratio_key_lookup.get(sugar)
+        if ratio_key is not None:
+            effective_molar_ratios[ratio_key] = float(effective_molar_ratios[ratio_key]) * factor
+
+    effective_pH = None if pH is None else float(pH)
+    if fermentation_pretreatment_lane.get("pretreatment_pH_shift_active") and effective_pH is not None:
+        effective_pH = max(4.8, effective_pH - 0.35)
+
+    added_precursors: List[str] = []
+    added_precursor_ratios: Dict[str, float] = {}
+    support_pool = normalized_sugars + normalized_additives + normalized_amino
+    if thiamine_active and not any("thiamine" in value or "vitamin b1" in value for value in support_pool):
+        added_precursors.append("thiamine")
+        added_precursor_ratios["thiamine"] = float(max(0.12, 0.25 * max(thiamine_fraction_estimate, 0.5)))
+
+    return {
+        "effective_molar_ratios": effective_molar_ratios,
+        "effective_pH": effective_pH,
+        "pretreatment_active": bool(fermentation_pretreatment_lane.get("active", False)),
+        "pretreatment_interventions": [
+            token
+            for token in normalized_interventions
+            if token in {"yeast fermentation", "protease hydrolysis", "yeast_fermentation", "protease_hydrolysis"}
+        ],
+        "donor_pool_factors": donor_pool_factors,
+        "donor_limited": bool(donor_hierarchy_lane.get("active", False) and dominant_donor_class in {"glucose", "other_reducing_sugar", "none"}),
+        "dominant_donor_class": dominant_donor_class,
+        "supports_fast_sulfur_routing": bool(donor_hierarchy_lane.get("supports_fast_sulfur_routing", False)),
+        "added_precursors": added_precursors,
+        "added_precursor_ratios": added_precursor_ratios,
+        "thiamine_metadata": thiamine_metadata,
+        "thiamine_fraction_estimate": float(thiamine_fraction_estimate),
+        "thiamine_mode": thiamine_mode,
+        "family_lanes": {
+            "03": thiamine_support_lane,
+            "04": nucleotide_support_lane,
+            "05": sulfur_peptide_support_lane,
+            "06": matrix_scope_lane,
+            "07": donor_hierarchy_lane,
+            "10": fermentation_pretreatment_lane,
+        },
+        "summary": {
+            "donor_identity_first_class": bool(donor_hierarchy_lane.get("active", False)),
+            "fermentation_pretreatment_active": bool(fermentation_pretreatment_lane.get("active", False)),
+            "nucleotide_support_active": bool(nucleotide_support_lane.get("active", False)),
+            "sulfur_peptide_support_active": bool(sulfur_peptide_support_lane.get("active", False)),
+            "matrix_scope_active": bool(matrix_scope_lane.get("active", False)),
+        },
+    }
+
+
 def build_flavor_axis_summary(
     *,
     projection_metadata: ProjectionMetadataMap,
@@ -452,9 +1416,12 @@ def build_flavor_axis_summary(
     amino_acids: Optional[List[str]] = None,
     additives: Optional[List[str]] = None,
     lipids: Optional[List[str]] = None,
+    interventions: Optional[List[Any]] = None,
     protein_type: Optional[str] = None,
     pH: Optional[float] = None,
     thiamine_availability: Any = None,
+    molar_ratios: Optional[Mapping[str, Any]] = None,
+    family_upstream_contract: Optional[Mapping[str, Any]] = None,
 ) -> Dict[str, Any]:
     signal_map = _projection_rows_to_signal_map(projection_metadata)
     sugars = sugars or []
@@ -512,6 +1479,21 @@ def build_flavor_axis_summary(
     normalized_sugars = [_normalize_name(value) for value in sugars]
     normalized_additives = [_normalize_name(value) for value in additives]
     normalized_amino = [_normalize_name(value) for value in amino_acids]
+    normalized_interventions = _normalize_intervention_tokens(interventions)
+
+    upstream_contract = dict(
+        family_upstream_contract
+        or build_family_upstream_contract(
+            sugars=sugars,
+            amino_acids=amino_acids,
+            additives=additives,
+            interventions=interventions,
+            protein_type=protein_type,
+            pH=pH,
+            thiamine_availability=thiamine_availability,
+            molar_ratios=molar_ratios,
+        )
+    )
 
     pyrazine_signal = _pyrazine_signal(signal_map)
     ph_factor = _sigmoid(float(pH if pH is not None else 6.0), 6.7, 0.85)
@@ -567,7 +1549,7 @@ def build_flavor_axis_summary(
         furanone_penalty = (1.0 - furanone_support_score) * confidence_scale
 
     thiamine_priors = get_thiamine_priors()
-    thiamine_metadata = _resolve_thiamine_availability(
+    thiamine_metadata = dict(upstream_contract.get("thiamine_metadata", {})) or _resolve_thiamine_availability(
         thiamine_availability,
         normalized_sugars=normalized_sugars,
         normalized_amino=normalized_amino,
@@ -575,9 +1557,9 @@ def build_flavor_axis_summary(
         protein_label=protein_label,
     )
     thiamine_active = bool(thiamine_metadata["available"])
-    thiamine_fraction_estimate = 0.0
-    thiamine_mode = "inactive"
-    if thiamine_active:
+    thiamine_fraction_estimate = float(upstream_contract.get("thiamine_fraction_estimate", 0.0) or 0.0)
+    thiamine_mode = str(upstream_contract.get("thiamine_mode", "inactive"))
+    if thiamine_active and thiamine_fraction_estimate <= 0.0:
         if pentose_active:
             thiamine_fraction_estimate = float(thiamine_priors.get("mixed_pentose_fraction", 0.5) or 0.5)
             thiamine_mode = "mixed_thiamine_plus_pentose"
@@ -617,6 +1599,94 @@ def build_flavor_axis_summary(
             else "Lincoln 2025 qualitative prior inactive for this formulation context."
         ),
     }
+
+    lipid_crosstalk_lane = _build_lipid_crosstalk_lane(
+        signal_map=signal_map,
+        normalized_sugars=normalized_sugars,
+        lipids=lipids,
+        polyphenol_active=polyphenol_active,
+        protein_type=protein_label,
+    )
+    donor_hierarchy_lane = _build_donor_hierarchy_lane(normalized_sugars)
+    fermentation_pretreatment_lane = _build_fermentation_pretreatment_lane(
+        normalized_additives=normalized_additives,
+        normalized_amino=normalized_amino,
+        normalized_interventions=normalized_interventions,
+        pH=pH,
+        thiamine_active=thiamine_active,
+    )
+    off_note_guardrail_lane = _build_off_note_guardrail_lane(
+        normalized_additives=normalized_additives,
+        normalized_interventions=normalized_interventions,
+        lipid_crosstalk_lane=lipid_crosstalk_lane,
+        polyphenol_active=polyphenol_active,
+        protein_label=protein_label,
+    )
+    core_maillard_lane = _build_core_maillard_lane(
+        normalized_sugars=normalized_sugars,
+        normalized_amino=normalized_amino,
+        sulfur_signal=sulfur_signal,
+        strecker_balance_score=strecker_balance_score,
+    )
+    thiamine_support_lane = _build_thiamine_support_lane(
+        thiamine_active=thiamine_active,
+        thiamine_fraction_estimate=thiamine_fraction_estimate,
+        thiamine_mode=thiamine_mode,
+    )
+    nucleotide_support_lane = _build_nucleotide_support_lane(
+        normalized_sugars=normalized_sugars,
+        normalized_additives=normalized_additives,
+        normalized_interventions=normalized_interventions,
+    )
+    sulfur_peptide_support_lane = _build_sulfur_peptide_support_lane(
+        normalized_additives=normalized_additives,
+        normalized_amino=normalized_amino,
+        normalized_interventions=normalized_interventions,
+    )
+    matrix_scope_lane = _build_matrix_scope_lane(protein_label=protein_label)
+    caramelization_lane = _build_caramelization_lane(
+        signal_map=signal_map,
+        furanone_expected=furanone_expected,
+        furanone_observed=furanone_observed,
+    )
+    family_lane_summary = {
+        row["slr_family"]: row
+        for row in [
+            core_maillard_lane,
+            lipid_crosstalk_lane,
+            thiamine_support_lane,
+            nucleotide_support_lane,
+            sulfur_peptide_support_lane,
+            matrix_scope_lane,
+            donor_hierarchy_lane,
+            caramelization_lane,
+            fermentation_pretreatment_lane,
+            off_note_guardrail_lane,
+        ]
+    }
+    family_lane_adjustments = _build_family_lane_adjustments(family_lane_summary)
+    family_prior_bundle = summarize_family_prior_bundle(
+        protein_type=protein_label,
+        process_state="heated_matrix",
+    )
+    family_state_markers = _build_family_state_markers(
+        thiamine_metadata=thiamine_metadata,
+        thiamine_fraction_estimate=thiamine_fraction_estimate,
+        thiamine_mode=thiamine_mode,
+        thiamine_support_lane=thiamine_support_lane,
+        nucleotide_support_lane=nucleotide_support_lane,
+        fermentation_pretreatment_lane=fermentation_pretreatment_lane,
+        caramelization_lane=caramelization_lane,
+    )
+    active_family_lanes = [
+        slr_family
+        for slr_family, row in sorted(family_lane_summary.items(), key=lambda item: _family_sort_key(item[0]))
+        if bool(row.get("active", False))
+    ]
+    active_family_lane_names = [
+        str(family_lane_summary[slr_family].get("display_name", slr_family))
+        for slr_family in active_family_lanes
+    ]
 
     return {
         "strecker_balance_score": float(strecker_balance_score),
@@ -658,4 +1728,11 @@ def build_flavor_axis_summary(
         "thiamine_mft_fraction_estimate": float(thiamine_fraction_estimate),
         "thiamine_provenance_mode": thiamine_mode,
         "lincoln_crosstalk_prior": lincoln_crosstalk_prior,
+        "family_upstream_contract": upstream_contract,
+        "family_lane_summary": family_lane_summary,
+        "family_lane_adjustments": family_lane_adjustments,
+        "family_prior_bundle": family_prior_bundle,
+        "family_state_markers": family_state_markers,
+        "active_family_lanes": active_family_lanes,
+        "active_family_lane_names": active_family_lane_names,
     }

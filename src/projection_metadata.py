@@ -35,6 +35,12 @@ class ProjectionMetadataRow(TypedDict, total=False):
     calibration_fallback_mode: str
     evidence_state: str
     target_class: str
+    chemistry_family: str | None
+    supporting_families: list[str]
+    observable_panel_tags: list[str]
+    panel_role: str
+    observable_kind: str
+    modeling_regimes: list[str]
     decision_panel_source: str
     calibration_observable_factor: float | None
     calibration_notes: str
@@ -101,6 +107,12 @@ def normalize_projection_metadata_row(
         "calibration_fallback_mode": str(row.get("calibration_fallback_mode", "class_level")),
         "evidence_state": str(row.get("evidence_state", "still_missing")),
         "target_class": str(row.get("target_class", "unknown")),
+        "chemistry_family": row.get("chemistry_family"),
+        "supporting_families": list(row.get("supporting_families", [])),
+        "observable_panel_tags": list(row.get("observable_panel_tags", [])),
+        "panel_role": str(row.get("panel_role", "unknown")),
+        "observable_kind": str(row.get("observable_kind", "unknown")),
+        "modeling_regimes": list(row.get("modeling_regimes", [])),
         "decision_panel_source": str(row.get("decision_panel_source", "")),
         "calibration_observable_factor": row.get("calibration_observable_factor"),
         "calibration_notes": str(row.get("calibration_notes", "")),

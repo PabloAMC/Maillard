@@ -20,6 +20,8 @@ from typing import List, Dict, Any, Optional, Iterable
 
 from src.pipeline import FormulationResult
 from src.literature_learning_loop import build_literature_learning_loop_payload
+from src.family_lane_sensitivity import build_family_lane_sensitivity_payload
+from src.literature_family_registry import build_family_payload_coverage_artifact, resolve_family_descriptor
 from src.projection_metadata import ProjectionMetadataMap, normalize_projection_metadata_row
 from src.safety import build_safety_reference_context
 from src.literature_runtime import build_flavor_reference_policy_summary
@@ -115,6 +117,7 @@ def _build_compound_evidence_ladder(result: FormulationResult, *, top_n: int = 8
                 "mechanistic_surrogate": flags["mechanistic_surrogate"],
                 "computational_refinement": flags["computational_refinement"],
                 "evidence_state": str(meta.get("evidence_state", "still_missing")),
+                "chemistry_family": str(meta.get("chemistry_family", "") or ""),
                 "target_class": str(meta.get("target_class", "unknown")),
                 "decision_panel_source": str(meta.get("decision_panel_source", "")),
                 "support_origin": _support_origin(meta),
@@ -301,6 +304,122 @@ def _build_flavor_reference_policy(result: FormulationResult) -> List[Dict[str, 
     return build_flavor_reference_policy_summary()
 
 
+def _build_family_evidence_ladder(result: FormulationResult) -> List[Dict[str, Any]]:
+    grouped: Dict[str, Dict[str, Any]] = {}
+    family_lane_summary = ((result.flavor_axis_summary or {}).get("family_lane_summary", {}) or {})
+    for row in _build_compound_evidence_ladder(result, top_n=24):
+        chemistry_family = str(row.get("chemistry_family") or row.get("target_class") or "unknown")
+        descriptor = resolve_family_descriptor(chemistry_family)
+        bucket = grouped.setdefault(
+            chemistry_family,
+            {
+                "chemistry_family": chemistry_family,
+                "slr_family": str(descriptor.get("slr_family", "")).zfill(2) if descriptor else "",
+                "display_name": str(descriptor.get("display_name", chemistry_family)) if descriptor else chemistry_family,
+                "direct_anchor_count": 0,
+                "transferred_prior_count": 0,
+                "mechanistic_surrogate_count": 0,
+                "computational_refinement_count": 0,
+                "compounds": [],
+            },
+        )
+        bucket["direct_anchor_count"] += int(bool(row.get("direct_anchor", False)))
+        bucket["transferred_prior_count"] += int(bool(row.get("transferred_prior", False)))
+        bucket["mechanistic_surrogate_count"] += int(bool(row.get("mechanistic_surrogate", False)))
+        bucket["computational_refinement_count"] += int(bool(row.get("computational_refinement", False)))
+        bucket["compounds"].append(str(row.get("compound", "unknown")))
+
+    rows: List[Dict[str, Any]] = []
+    for chemistry_family, bucket in grouped.items():
+        posture = "structural_gap_extrapolation"
+        if chemistry_family == "amino_acid_sugar_core" and bucket["direct_anchor_count"] > 0:
+            posture = "core_benchmarked_chemistry"
+        elif bucket["direct_anchor_count"] > 0:
+            posture = "calibration_grade_family_payloads"
+        elif bucket["transferred_prior_count"] > 0:
+            posture = "directional_priors"
+        rows.append(
+            {
+                **bucket,
+                "evidence_posture": posture,
+                "active_runtime_lane": any(str(lane.get("family_id", "")) == chemistry_family for lane in family_lane_summary.values()),
+                "compounds": sorted(dict.fromkeys(bucket["compounds"])),
+            }
+        )
+    rows.sort(key=lambda row: (row.get("slr_family", "99"), row.get("chemistry_family", "unknown")))
+    return rows
+
+
+def _build_family_runtime_support_summary(result: FormulationResult) -> Dict[str, Any]:
+    family_lane_summary = ((result.flavor_axis_summary or {}).get("family_lane_summary", {}) or {})
+    prior_bundle = ((result.flavor_axis_summary or {}).get("family_prior_bundle", {}) or {})
+    evidence_ladder = _build_family_evidence_ladder(result)
+    evidence_by_family = {str(row.get("chemistry_family", "unknown")): row for row in evidence_ladder}
+    payload_coverage = build_family_payload_coverage_artifact()
+    coverage_by_family = {str(row.get("family_id", "unknown")): row for row in payload_coverage.get("families", [])}
+
+    rows: List[Dict[str, Any]] = []
+    for slr_family, lane in sorted(family_lane_summary.items()):
+        family_id = str(lane.get("family_id", "unknown"))
+        evidence = evidence_by_family.get(family_id, {})
+        coverage = coverage_by_family.get(family_id, {})
+        prior_count = len(prior_bundle.get(family_id, []))
+        evidence_posture = str(evidence.get("evidence_posture", "structural_gap_extrapolation"))
+        rows.append(
+            {
+                "slr_family": str(slr_family),
+                "family_id": family_id,
+                "display_name": str(lane.get("display_name", family_id)),
+                "active": bool(lane.get("active", False)),
+                "strategic_posture": str(lane.get("strategic_posture", "unknown")),
+                "evidence_posture": evidence_posture,
+                "primary_payload_count": int(coverage.get("total_primary_payload_count", 0)),
+                "supporting_payload_count": int(coverage.get("total_supporting_payload_count", 0)),
+                "prior_count": int(prior_count),
+                "summary": str(lane.get("summary", "")),
+            }
+        )
+    return {
+        "active_family_lane_count": sum(1 for row in rows if row.get("active")),
+        "family_lanes": rows,
+    }
+
+
+def _build_family_specific_open_gaps(result: FormulationResult) -> List[Dict[str, Any]]:
+    rows: List[Dict[str, Any]] = []
+    support_summary = _build_family_runtime_support_summary(result)
+    for row in support_summary.get("family_lanes", []):
+        if not row.get("active"):
+            continue
+        if row.get("evidence_posture") == "structural_gap_extrapolation" or int(row.get("primary_payload_count", 0)) == 0:
+            rows.append(
+                {
+                    "slr_family": row.get("slr_family", ""),
+                    "family_id": row.get("family_id", "unknown"),
+                    "display_name": row.get("display_name", "unknown"),
+                    "gap_reason": "active_runtime_lane_without_direct_benchmark_or_calibration_grade_payload_closure",
+                }
+            )
+    for compound in (result.flavor_axis_summary or {}).get("furanone_missing", []) or []:
+        rows.append(
+            {
+                "slr_family": "01",
+                "family_id": "amino_acid_sugar_core",
+                "display_name": "Amino acid plus sugar core Maillard chemistry",
+                "gap_reason": f"expected_marker_missing:{compound}",
+            }
+        )
+    deduped: List[Dict[str, Any]] = []
+    seen: set[tuple[str, str]] = set()
+    for row in rows:
+        key = (str(row.get("family_id", "unknown")), str(row.get("gap_reason", "unknown")))
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append(row)
+    return deduped
+
+
 def _repo_root() -> Path:
     return Path(__file__).resolve().parents[1]
 
@@ -333,6 +452,14 @@ def _build_scientific_surface(root: Path) -> Dict[str, str]:
         "validated_envelope": root / "results/validation/validated_envelope.md",
         "validation_overview": root / "results/validation/validation_overview.md",
         "matrix_decision_panel": root / "data/lit/matrix_decision_panel.json",
+        "chemistry_family_scope_registry": root / "data/lit/chemistry_family_scope_registry.json",
+        "family_ingestion_plan_registry": root / "data/lit/family_ingestion_plan.json",
+        "family_identifier_contract": root / "results/validation/family_identifier_contract.md",
+        "family_identifier_contract_json": root / "results/validation/family_identifier_contract.json",
+        "family_strategy_policy": root / "results/validation/family_strategy_policy.md",
+        "family_strategy_policy_json": root / "results/validation/family_strategy_policy.json",
+        "family_payload_coverage": root / "results/validation/family_payload_coverage.md",
+        "family_payload_coverage_json": root / "results/validation/family_payload_coverage.json",
         "matrix_family_coverage_registry": root / "data/lit/matrix_family_coverage_registry.json",
         "benchmark_intake_registry": root / "data/lit/benchmark_intake_registry.json",
         "computational_priors": root / "data/lit/computational_priors.json",
@@ -347,8 +474,12 @@ def _build_scientific_surface(root: Path) -> Dict[str, str]:
         "literature_learning_loop": root / "results/validation/literature_learning_loop.md",
         "literature_learning_loop_json": root / "results/validation/literature_learning_loop.json",
         "literature_runtime_templates": root / "results/validation/literature_runtime_templates.json",
+        "family_ingestion_plan": root / "results/validation/family_ingestion_plan.md",
+        "family_ingestion_plan_json": root / "results/validation/family_ingestion_plan.json",
         "matrix_target_status": root / "results/validation/matrix_target_status.md",
         "matrix_target_status_json": root / "results/validation/matrix_target_status.json",
+        "chemistry_family_scope": root / "results/validation/chemistry_family_scope.md",
+        "chemistry_family_scope_json": root / "results/validation/chemistry_family_scope.json",
         "matrix_family_coverage": root / "results/validation/matrix_family_coverage.md",
         "matrix_family_coverage_json": root / "results/validation/matrix_family_coverage.json",
         "refinement_watchlist": root / "results/validation/refinement_watchlist.md",
@@ -356,12 +487,16 @@ def _build_scientific_surface(root: Path) -> Dict[str, str]:
         "offline_dft_jobs": root / "results/validation/offline_dft_jobs.json",
         "family_sensitivity": root / "results/validation/family_sensitivity.md",
         "family_sensitivity_json": root / "results/validation/family_sensitivity.json",
+        "family_lane_validation": root / "results/validation/family_lane_validation.md",
+        "family_lane_validation_json": root / "results/validation/family_lane_validation.json",
         "p3_global_sensitivity": root / "results/validation/p3_global_sensitivity.md",
         "p3_global_sensitivity_json": root / "results/validation/p3_global_sensitivity.json",
         "cheap_refinement_screening": root / "results/validation/cheap_refinement_screening.md",
         "cheap_refinement_screening_json": root / "results/validation/cheap_refinement_screening.json",
         "selective_dft_plan": root / "results/validation/selective_dft_plan.md",
         "selective_dft_plan_json": root / "results/validation/selective_dft_plan.json",
+        "p3_refinement_governance": root / "results/validation/p3_refinement_governance.md",
+        "p3_refinement_governance_json": root / "results/validation/p3_refinement_governance.json",
         "p3_offline_dft_jobs": root / "results/validation/p3_offline_dft_jobs.json",
         "refinement_impact": root / "results/validation/refinement_impact.md",
         "refinement_impact_json": root / "results/validation/refinement_impact.json",
@@ -464,6 +599,10 @@ def generate_report(
     flavor_reference_policy = _build_flavor_reference_policy(result)
     literature_evidence_summary = _build_literature_evidence_summary()
     literature_learning_loop_summary = _build_literature_learning_loop_summary()
+    family_evidence_ladder = _build_family_evidence_ladder(result)
+    family_runtime_support_summary = _build_family_runtime_support_summary(result)
+    family_specific_open_gaps = _build_family_specific_open_gaps(result)
+    family_lane_sensitivity = build_family_lane_sensitivity_payload(result.flavor_axis_summary or {})
     
     # 1. Save JSON Report
     json_path = output_dir / "report.json"
@@ -499,6 +638,10 @@ def generate_report(
             "flavor_reference_policy": flavor_reference_policy,
             "literature_evidence_summary": literature_evidence_summary,
             "literature_learning_loop_summary": literature_learning_loop_summary,
+            "family_evidence_ladder": family_evidence_ladder,
+            "family_runtime_support_summary": family_runtime_support_summary,
+            "family_specific_open_gaps": family_specific_open_gaps,
+            "family_lane_sensitivity": family_lane_sensitivity,
             "projection_metadata": dict(result.projection_metadata),
             "flavor_axis_summary": result.flavor_axis_summary,
             "predicted_ppb": {k: float(v) for k, v in result.predicted_ppb.items()},
@@ -546,6 +689,8 @@ def generate_report(
         f.write(f"- **Pyrazine Burden:** {result.pyrazine_burden:.2f}\n")
         f.write(f"- **Pyrazine Penalty:** {result.pyrazine_penalty:.2f}\n")
         f.write(f"- **Furanone Penalty:** {result.furanone_penalty:.2f}\n\n")
+
+        calibration = {}
 
         if result.confidence_metadata:
             f.write("### Confidence & Support\n")
@@ -690,6 +835,44 @@ def generate_report(
                 f.write(f"- **matrix_prior_families:** {', '.join(str(item) for item in literature_learning_loop_summary.get('matrix_prior_families', []))}\n")
             f.write("\n")
 
+        if family_runtime_support_summary.get("family_lanes"):
+            f.write("### Family Runtime Support Summary\n")
+            f.write("| SLR | Family | Active | Posture | Evidence Posture | Primary Payloads | Supporting Payloads | Priors |\n")
+            f.write("| :--- | :--- | :---: | :--- | :--- | ---: | ---: | ---: |\n")
+            for row in family_runtime_support_summary.get("family_lanes", []):
+                f.write(
+                    f"| {row.get('slr_family', '') or 'n/a'} | {row.get('display_name', 'unknown')} | {'yes' if row.get('active') else '-'} | {row.get('strategic_posture', 'unknown')} | {row.get('evidence_posture', 'structural_gap_extrapolation')} | {int(row.get('primary_payload_count', 0))} | {int(row.get('supporting_payload_count', 0))} | {int(row.get('prior_count', 0))} |\n"
+                )
+            f.write("\n")
+
+        if family_evidence_ladder:
+            f.write("### Family Evidence Ladder\n")
+            f.write("| SLR | Family | Evidence Posture | Direct Anchors | Transferred Priors | Surrogates | Compounds |\n")
+            f.write("| :--- | :--- | :--- | ---: | ---: | ---: | :--- |\n")
+            for row in family_evidence_ladder:
+                f.write(
+                    f"| {row.get('slr_family', '') or 'n/a'} | {row.get('display_name', row.get('chemistry_family', 'unknown'))} | {row.get('evidence_posture', 'structural_gap_extrapolation')} | {int(row.get('direct_anchor_count', 0))} | {int(row.get('transferred_prior_count', 0))} | {int(row.get('mechanistic_surrogate_count', 0))} | {', '.join(str(item) for item in row.get('compounds', [])) or '-'} |\n"
+                )
+            f.write("\n")
+
+        if family_specific_open_gaps:
+            f.write("### Family Specific Open Gaps\n")
+            for row in family_specific_open_gaps:
+                f.write(
+                    f"- **{row.get('display_name', row.get('family_id', 'unknown'))}:** {row.get('gap_reason', 'unknown')}\n"
+                )
+            f.write("\n")
+
+        if family_lane_sensitivity.get("family_lanes"):
+            f.write("### Family Lane Sensitivity\n")
+            f.write("| SLR | Family Lane | Active | Target Δ | Closure Δ | Off-flavour Δ | Toggle Magnitude |\n")
+            f.write("| :--- | :--- | :---: | ---: | ---: | ---: | ---: |\n")
+            for row in family_lane_sensitivity.get("family_lanes", [])[:10]:
+                f.write(
+                    f"| {row.get('slr_family', '99')} | {row.get('display_name', 'unknown')} | {'yes' if row.get('active') else '-'} | {float(row.get('target_score_delta', 0.0)):+.2f} | {float(row.get('maillard_closure_delta', 0.0)):+.2f} | {float(row.get('off_flavour_risk_delta', 0.0)):+.2f} | {float(row.get('toggle_magnitude', 0.0)):.2f} |\n"
+                )
+            f.write("\n")
+
         if result.confidence_metadata:
             sensitivity = result.confidence_metadata.get("sensitivity_summary", {})
             if sensitivity:
@@ -784,6 +967,9 @@ def generate_comparison_report(
         flavor_reference_policy = _build_flavor_reference_policy(res)
         literature_evidence_summary = _build_literature_evidence_summary()
         literature_learning_loop_summary = _build_literature_learning_loop_summary()
+        family_runtime_support_summary = _build_family_runtime_support_summary(res)
+        family_specific_open_gaps = _build_family_specific_open_gaps(res)
+        family_lane_sensitivity = build_family_lane_sensitivity_payload(res.flavor_axis_summary or {})
         comparison_data["runs"].append({
             "name": res.name,
             "inputs": cond,
@@ -816,6 +1002,9 @@ def generate_comparison_report(
             "flavor_reference_policy": flavor_reference_policy,
             "literature_evidence_summary": literature_evidence_summary,
             "literature_learning_loop_summary": literature_learning_loop_summary,
+            "family_runtime_support_summary": family_runtime_support_summary,
+            "family_specific_open_gaps": family_specific_open_gaps,
+            "family_lane_sensitivity": family_lane_sensitivity,
             "flavor_axis_summary": res.flavor_axis_summary,
         })
     
