@@ -41,23 +41,23 @@ def test_screen_pathways_ranking(monkeypatch):
     import src.pathway_ranker
     monkeypatch.setattr(src.pathway_ranker, "evaluate_single_step", mock_evaluate_single_step)
     
-    p1_steps = [
+    candidate_steps = [
         ElementaryStep([], [], reaction_family="Fast_Step1"),  # bar: 5
         ElementaryStep([], [], reaction_family="Fast_Step2"),  # bar: 5
     ]
-    p2_steps = [
+    decoy_steps = [
         ElementaryStep([], [], reaction_family="Fast_Step"),   # bar: 5
         ElementaryStep([], [], reaction_family="Slow_Step"),   # bar: 30
     ]
-    p3_steps = [
+    refinement_steps = [
         ElementaryStep([], [], reaction_family="Medium_Step1"),# bar: 15
         ElementaryStep([], [], reaction_family="Medium_Step2"),# bar: 15
     ]
     
     pathways = {
-        "Pathway_Slow": p2_steps,
-        "Pathway_Fast": p1_steps,
-        "Pathway_Medium": p3_steps
+        "Pathway_Slow": decoy_steps,
+        "Pathway_Fast": candidate_steps,
+        "Pathway_Medium": refinement_steps
     }
     
     ranker = PathwayRanker(n_cores=1)

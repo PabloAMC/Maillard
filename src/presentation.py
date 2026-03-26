@@ -125,12 +125,15 @@ def render_flavor_axis_markdown(
         if slr_family in family_lane_summary
     ]
     if variant == "compact":
+        glutathione_lane = family_lane_summary.get("05", {})
         lines.extend([
             f"- Strecker balance score: {float(flavor_axis.get('strecker_balance_score', 0.0)):.3f}",
             f"- Pyrazine burden: {float(flavor_axis.get('pyrazine_burden', 0.0)):.3f}",
             f"- Thiamine pathway active: {flavor_axis.get('thiamine_pathway_active', False)}",
             f"- Thiamine source: {flavor_axis.get('thiamine_availability_source', 'unknown')}",
         ])
+        if glutathione_lane:
+            lines.append(f"- Glutathione support active: {glutathione_lane.get('glutathione_active', False)}")
         if active_family_lanes:
             lines.append(f"- Active family lanes: {', '.join(str(row.get('display_name', row.get('slr_family', 'unknown'))) for row in active_family_lanes)}")
         lines.append("")
@@ -150,6 +153,11 @@ def render_flavor_axis_markdown(
         f"- **thiamine_availability_explicit:** {flavor_axis.get('thiamine_availability_explicit', False)}",
         f"- **thiamine_provenance_mode:** {flavor_axis.get('thiamine_provenance_mode', 'inactive')}",
     ])
+    glutathione_lane = family_lane_summary.get("05", {})
+    if glutathione_lane:
+        lines.append(f"- **glutathione_support_active:** {glutathione_lane.get('glutathione_active', False)}")
+        lines.append(f"- **peptide_support_active:** {glutathione_lane.get('peptide_support_active', False)}")
+        lines.append(f"- **sulfur_peptide_support_score:** {float(glutathione_lane.get('sulfur_peptide_support_score', 0.0)):.2f}")
     upstream_contract = flavor_axis.get("family_upstream_contract", {}) or {}
     if upstream_contract:
         lines.append(f"- **effective_runtime_ph:** {float(upstream_contract.get('effective_pH', 0.0)):.2f}" if upstream_contract.get("effective_pH") is not None else "- **effective_runtime_ph:** unknown")
@@ -663,13 +671,13 @@ def render_matrix_target_status_markdown(payload: Mapping[str, Any]) -> str:
     lines = [
         "# Matrix Target Status",
         "",
-        "| Benchmark | Protein | Path | Process State | Target Profile | Ref Signal | Quant Closed | Internal | Directional | Open | External Decision Ready | Mechanistic Priority | Next Action |",
-        "| --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: | --- | --- | --- |",
+        "| Benchmark | Protein | Path | Process State | Target Profile | Ref Signal | Evidence Origin | Quant Closed | Internal | Directional | Open | External Decision Ready | Evidence/Calibration Priority | Mechanistic Priority | Claim Posture | Blocker Class | Next Action | Best Computational Action |",
+        "| --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: | --- | --- | --- | --- | --- | --- | --- |",
     ]
     for row in benchmark_rows:
         counts = row.get("support_counts", {})
         lines.append(
-            f"| {row['benchmark_id']} | {row['protein_type']} | {row['execution_path']} | {row.get('process_state') or 'n/a'} | {row.get('target_profile', 'unknown')} | {row.get('reference_signal_origin', 'unknown')} | {int(counts.get('quantitative_closed', 0))} | {int(counts.get('internal_candidate', 0))} | {int(counts.get('directional_support', 0))} | {int(counts.get('open_gap', 0))} | {'yes' if row.get('promotion_ready', False) else 'no'} | {'yes' if row.get('mechanistic_priority_ready', False) else 'no'} | {row.get('next_best_action', 'unknown')} |"
+            f"| {row['benchmark_id']} | {row['protein_type']} | {row['execution_path']} | {row.get('process_state') or 'n/a'} | {row.get('target_profile', 'unknown')} | {row.get('reference_signal_origin', 'unknown')} | {row.get('source_origin', 'unknown')} | {int(counts.get('quantitative_closed', 0))} | {int(counts.get('internal_candidate', 0))} | {int(counts.get('directional_support', 0))} | {int(counts.get('open_gap', 0))} | {'yes' if row.get('promotion_ready', False) else 'no'} | {'yes' if row.get('evidence_or_calibration_priority_ready', False) else 'no'} | {'yes' if row.get('mechanistic_priority_ready', False) else 'no'} | {row.get('promotion_claim_posture', 'unknown')} | {row.get('blocker_class', 'unknown')} | {row.get('next_best_action', 'unknown')} | {row.get('best_computational_action', 'unknown')} |"
         )
 
     lines.extend([
@@ -691,6 +699,7 @@ def render_matrix_target_status_markdown(payload: Mapping[str, Any]) -> str:
         f"Benchmarks covered: {int(summary.get('total_benchmarks', 0))}",
         f"Quantitative-support-ready benchmarks: {int(summary.get('quantitative_support_ready', 0))}",
         f"External-decision-ready benchmarks: {int(summary.get('promotion_ready', 0))}",
+        f"Evidence/calibration-priority benchmarks: {int(summary.get('evidence_or_calibration_priority_ready', 0))}",
         f"Mechanistic-priority benchmarks: {int(summary.get('mechanistic_priority_ready', 0))}",
     ])
     return "\n".join(lines) + "\n"
@@ -882,8 +891,10 @@ def render_matrix_experiment_support_delta_markdown(payload: Mapping[str, Any]) 
         "",
         f"Promotion ready before: {'yes' if promotion.get('promotion_ready_before', False) else 'no'}",
         f"Promotion ready after: {'yes' if promotion.get('promotion_ready_after', False) else 'no'}",
+        f"Promotion claim allowed: {'yes' if promotion.get('promotion_claim_allowed', False) else 'no'}",
         f"Blocker before: {promotion.get('promotion_blocker_before', 'unknown')}",
         f"Blocker after: {promotion.get('promotion_blocker_after', 'unknown')}",
+        f"Promotion claim policy: {promotion.get('promotion_claim_policy', 'unknown')}",
         f"Readiness change: {promotion.get('readiness_change', 'unknown')}",
         f"Landing recommendation: {promotion.get('landing_recommendation', 'unknown')}",
         "",

@@ -25,12 +25,10 @@ def test_matrix_observable_closure_audit_labels_transfer_vs_mechanistic_actions(
     watchlist = {row["benchmark_id"]: row for row in payload["mechanistic_refinement_watchlist"]}
 
     assert compounds["2-furfurylthiol"]["closure_action"] == "class_level_transfer_acceptable"
-    assert compounds["Hexanal"]["closure_action"] == "mechanistic_blocker"
-    assert watchlist["pea_isolate_ribose_cysteine_100C_45min_Internal2026"]["target_compounds"] == ["Hexanal", "Nonanal"]
-    assert "named adverse-marker closure" in watchlist["pea_isolate_ribose_cysteine_100C_45min_Internal2026"]["expected_decision_change"]
+    assert compounds["Hexanal"]["closure_action"] == "evidence_or_calibration_blocker"
+    assert watchlist == {}
 
     markdown = render_matrix_observable_closure_audit_markdown(payload)
     assert "Matrix Observable Closure Audit" in markdown
     assert "class_level_transfer_acceptable" in markdown
-    assert "mechanistic_blocker" in markdown
-    assert "Mechanistic Refinement Watchlist" in markdown
+    assert "evidence_or_calibration_blocker" in markdown

@@ -16,7 +16,7 @@ def _watchlist_lookup(payload: Mapping[str, Any]) -> Dict[str, Mapping[str, Any]
     }
 
 
-def build_p3_refinement_governance_artifact(
+def build_selective_refinement_governance_artifact(
     benchmark_files: Optional[Iterable[Path | str]] = None,
     *,
     target_tag: str = DEFAULT_TARGET_TAG,
@@ -29,6 +29,7 @@ def build_p3_refinement_governance_artifact(
     cheap_lookup = _watchlist_lookup(cheap_payload)
     dft_lookup = _watchlist_lookup(dft_payload)
     watchlist_lookup = _watchlist_lookup(watchlist_payload)
+    approved_geom_preopt_candidates = list(watchlist_payload.get("summary", {}).get("approved_geom_preopt_candidates", []))
     benchmark_lookup = {
         str(item.get("benchmark_id", "")): item
         for item in closure_audit.get("benchmarks", [])
@@ -83,6 +84,11 @@ def build_p3_refinement_governance_artifact(
                     if str(compound_row.get("closure_action", "")) == "mechanistic_blocker"
                 ],
                 "candidate_reaction_families": candidate_families,
+                "offline_geom_preopt_plan": (
+                    f"{approved_geom_preopt_candidates[0]} bounded_geom_preopt_before_authority_refinement"
+                    if approved_geom_preopt_candidates
+                    else "none"
+                ),
                 "offline_compute_gate": "hold_observable_first",
             }
         )
@@ -117,6 +123,7 @@ def build_p3_refinement_governance_artifact(
             "cheap_first_advance_count": advance_count,
             "approved_offline_job_count": run_now_count,
             "approved_offline_job_families": approved_job_families,
+            "approved_geom_preopt_candidates": approved_geom_preopt_candidates,
             "policy": "continue_only_when_observable_closure_names_the_targets_and_cheap_first_screening_improves_benchmark_visible_diagnostics",
         },
         "blockers": blockers,
@@ -125,10 +132,10 @@ def build_p3_refinement_governance_artifact(
     }
 
 
-def render_p3_refinement_governance_markdown(payload: Mapping[str, Any]) -> str:
+def render_selective_refinement_governance_markdown(payload: Mapping[str, Any]) -> str:
     summary = payload.get("summary", {})
     lines = [
-        "# P3 Refinement Governance",
+        "# Selective Mechanistic Refinement Governance",
         "",
         f"Governing status: {summary.get('governing_status', 'unknown')}",
         f"Mechanistic-priority benchmarks: {int(summary.get('mechanistic_priority_benchmark_count', 0))}",
@@ -139,8 +146,8 @@ def render_p3_refinement_governance_markdown(payload: Mapping[str, Any]) -> str:
         "",
         "## Benchmark Gates",
         "",
-        "| Benchmark | Protein Type | Target Compounds | Expected Decision Change | Observable Blockers | Offline Gate |",
-        "| --- | --- | --- | --- | --- | --- |",
+        "| Benchmark | Protein Type | Target Compounds | Expected Decision Change | Observable Blockers | Geom Preopt | Offline Gate |",
+        "| --- | --- | --- | --- | --- | --- | --- |",
     ]
     for row in payload.get("mechanistic_priority_benchmarks", []):
         lines.append(
@@ -148,6 +155,7 @@ def render_p3_refinement_governance_markdown(payload: Mapping[str, Any]) -> str:
             f"{', '.join(str(item) for item in row.get('target_compounds', [])) or 'none'} | "
             f"{row.get('expected_decision_change', 'unknown')} | "
             f"{'; '.join(str(item) for item in row.get('observable_blockers', [])) or 'none'} | "
+            f"{row.get('offline_geom_preopt_plan', 'none')} | "
             f"{row.get('offline_compute_gate', 'unknown')} |"
         )
 
@@ -184,3 +192,15 @@ def render_p3_refinement_governance_markdown(payload: Mapping[str, Any]) -> str:
             "No selective DFT jobs are currently approved.",
         ])
     return "\n".join(lines) + "\n"
+
+
+def build_refinement_governance_artifact(
+    benchmark_files: Optional[Iterable[Path | str]] = None,
+    *,
+    target_tag: str = DEFAULT_TARGET_TAG,
+) -> Dict[str, Any]:
+    return build_selective_refinement_governance_artifact(benchmark_files, target_tag=target_tag)
+
+
+def render_refinement_governance_markdown(payload: Mapping[str, Any]) -> str:
+    return render_selective_refinement_governance_markdown(payload)

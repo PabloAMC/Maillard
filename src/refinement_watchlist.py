@@ -21,6 +21,19 @@ from src.results_db import ResultsDB
 from src.smirks_engine import SmirksEngine
 
 
+def _approved_geom_preopt_candidates() -> List[str]:
+    from src.chemistry_benchmark_validator import build_mlp_assessment_artifact
+
+    payload = build_mlp_assessment_artifact()
+    return [
+        str(row.get("candidate_id", "")).strip()
+        for row in payload.get("candidates", [])
+        if str(row.get("decision", "")) == "adopt_offline"
+        and str(row.get("proposed_role", "")) == "geom_preopt"
+        and str(row.get("candidate_id", "")).strip()
+    ]
+
+
 def _benchmark_priority_weight(bench: dict, summary_status: str, reference_signal_origin: str) -> float:
     contract = bench.get("matrix_ranking_contract") or {}
     roles = {str(item.get("role", "")).strip().lower() for item in contract.get("observable_targets", [])}
@@ -86,6 +99,10 @@ def build_refinement_watchlist(
     bench_files = list(benchmark_files) if benchmark_files is not None else get_benchmark_files()
     db = ResultsDB()
     family_rows: Dict[str, Dict[str, Any]] = {}
+    approved_geom_candidates = _approved_geom_preopt_candidates()
+    geom_preopt_plan = "none"
+    if approved_geom_candidates:
+        geom_preopt_plan = f"{approved_geom_candidates[0]} bounded_geom_preopt_for_sulfur_sensitive_inputs"
 
     for bench_file in bench_files:
         bench = load_benchmark(bench_file)
@@ -184,6 +201,7 @@ def build_refinement_watchlist(
             "surrogate_plan": decision.surrogate_plan,
             "required_outputs": list(decision.required_outputs),
             "expected_benchmark_impact": f"Can affect {len(benchmark_ids)} benchmark-visible systems; mixed/meaty matrix candidates are prioritized via weighted occurrence.",
+            "geom_preopt_plan": geom_preopt_plan,
         }
         candidates.append(row_payload)
         if decision.decision == "run_now":
@@ -211,6 +229,7 @@ def build_refinement_watchlist(
             "run_now": sum(1 for row in candidates if row["decision"] == "run_now"),
             "watchlist": sum(1 for row in candidates if row["decision"] == "defer"),
             "reject": sum(1 for row in candidates if row["decision"] == "reject"),
+            "approved_geom_preopt_candidates": approved_geom_candidates,
         },
         "candidates": candidates,
         "offline_jobs": offline_jobs,
@@ -221,12 +240,12 @@ def render_refinement_watchlist_markdown(payload: Dict[str, Any]) -> str:
     lines = [
         "# Refinement Watchlist",
         "",
-        "| Reaction Family | Decision | Tier | Source | Sensitivity | Benchmark Impact | Evidence Gap | Benchmarks |",
-        "| --- | --- | --- | --- | ---: | ---: | ---: | --- |",
+        "| Reaction Family | Decision | Tier | Source | Geom Preopt | Sensitivity | Benchmark Impact | Evidence Gap | Benchmarks |",
+        "| --- | --- | --- | --- | --- | ---: | ---: | ---: | --- |",
     ]
     for row in payload.get("candidates", []):
         lines.append(
-            f"| {row['reaction_family']} | {row['decision']} | {row['priority_tier']} | {row['current_barrier_source']} | {row['sensitivity_score']:.2f} | {row['benchmark_impact_score']:.2f} | {row['evidence_gap_score']:.2f} | {', '.join(row['benchmark_ids'][:4])} |"
+            f"| {row['reaction_family']} | {row['decision']} | {row['priority_tier']} | {row['current_barrier_source']} | {row.get('geom_preopt_plan', 'none')} | {row['sensitivity_score']:.2f} | {row['benchmark_impact_score']:.2f} | {row['evidence_gap_score']:.2f} | {', '.join(row['benchmark_ids'][:4])} |"
         )
     summary = payload.get("summary", {})
     lines.extend([
@@ -234,5 +253,6 @@ def render_refinement_watchlist_markdown(payload: Dict[str, Any]) -> str:
         f"Candidates: {int(summary.get('candidate_count', 0))}",
         f"Run-now candidates: {int(summary.get('run_now', 0))}",
         f"Deferred watchlist candidates: {int(summary.get('watchlist', 0))}",
+        f"Approved geom_preopt candidates: {', '.join(summary.get('approved_geom_preopt_candidates', [])) or 'none'}",
     ])
     return "\n".join(lines) + "\n"

@@ -34,8 +34,10 @@ class MLPModelCandidate:
     expected_speedup: float
     likely_failure_modes: List[str]
     fallback_comparator: str
+    backend_locator: Optional[str] = None
     benchmark_results_path: Optional[str] = None
     geometry_benchmark_path: Optional[str] = None
+    ts_seed_benchmark_path: Optional[str] = None
     external_evidence_id: Optional[str] = None
     status: str = "candidate_shortlist"
 
@@ -93,7 +95,7 @@ def build_adoption_note_payload(
 
 def render_adoption_note_markdown(payload: Mapping[str, Any]) -> str:
     lines = [
-        "# P4 Adoption Notes",
+        "# Offline ML Accelerator Adoption Notes",
         "",
         "| Candidate | Role | Decision | Coverage | Rank Correlation | MAE (kcal/mol) | Stop Reasons | Fallback |",
         "| --- | --- | --- | ---: | ---: | ---: | --- | --- |",

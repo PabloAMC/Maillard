@@ -97,7 +97,7 @@ def build_external_mlp_landscape_payload() -> Dict[str, Any]:
 
 def render_external_mlp_landscape_markdown(payload: Mapping[str, Any]) -> str:
     lines = [
-        "# P4 External MLP Landscape",
+        "# External ML Accelerator Landscape",
         "",
         "| Candidate | Role | External Prior | Domain Relevance | Selection Priority | Externally Supported | Still Unproven |",
         "| --- | --- | --- | --- | --- | --- | --- |",

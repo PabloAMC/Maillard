@@ -41,6 +41,19 @@ class DFTResult:
     converged: bool = False
     frequencies_cm1: Optional[List[float]] = None
 
+
+@dataclass
+class IRCResult:
+    ts_xyz: str
+    path_type: str
+    energies: List[float]
+    backward_endpoint: Optional[str] = None
+    forward_endpoint: Optional[str] = None
+    backward_endpoint_energy: Optional[float] = None
+    forward_endpoint_energy: Optional[float] = None
+    max_energy: Optional[float] = None
+    max_point: Optional[str] = None
+
 class DFTRefiner:
     """Wrapper for running the tiered DFT composite workflow."""
     
@@ -68,7 +81,11 @@ class DFTRefiner:
         if self.geometry_backend == 'mace':
             try:
                 from .mlp_optimizer import MLPOptimizer
-                self.mlp_optimizer = MLPOptimizer()
+                self.mlp_optimizer = MLPOptimizer(
+                    model_name="small",
+                    model_family="mace_mp",
+                    backend_locator="builtin:small",
+                )
             except ImportError:
                 logger.info("WARNING: ML properties requested but not available. Falling back to pyscf.")
                 self.geometry_backend = 'pyscf'
@@ -256,7 +273,11 @@ class DFTRefiner:
             if is_ts:
                 opt_xyz = self.mlp_optimizer.optimize_ts(xyz_content, max_steps=max_steps)
             else:
-                opt_xyz = self.mlp_optimizer.optimize_geometry(xyz_content, max_steps=max_steps)
+                opt_xyz = self.mlp_optimizer.optimize_geometry(
+                    xyz_content,
+                    max_steps=max_steps,
+                    bounded=True,
+                )
                 
             mol_opt = self._setup_mol(opt_xyz, charge, spin, basis=self.opt_basis)
             conv = True # Assume converged if MLP didn't raise
@@ -554,3 +575,77 @@ class DFTRefiner:
             )
             
         return barrier_kcal
+
+
+def compute_irc(
+    ts_xyz: str,
+    *,
+    charge: int = 0,
+    spin: int = 0,
+    step_size: float = 0.05,
+    solvent_name: Optional[str] = 'water',
+    temp_k: float = 423.15,
+    geometry_backend: str = 'pyscf',
+    forward: bool = True,
+    backward: bool = True,
+) -> Dict[str, Any]:
+    """
+    Stable IRC API used by benchmark/authority lanes.
+
+    This exposes the existing displacement-plus-optimization implementation in
+    a structured, importable form without requiring callers to know the
+    DFTRefiner class contract.
+    """
+    if not forward and not backward:
+        raise ValueError("At least one IRC direction must be requested")
+
+    refiner = DFTRefiner(
+        solvent_name=solvent_name,
+        temp_k=temp_k,
+        geometry_backend=geometry_backend,
+    )
+    backward_xyz, forward_xyz = refiner.generate_irc(
+        ts_xyz,
+        charge=charge,
+        spin=spin,
+        step_size=step_size,
+    )
+    ts_energy = float(refiner.single_point(ts_xyz, charge=charge, spin=spin))
+
+    backward_energy: Optional[float] = None
+    if backward:
+        backward_energy = float(refiner.single_point(backward_xyz, charge=charge, spin=spin))
+
+    forward_energy: Optional[float] = None
+    if forward:
+        forward_energy = float(refiner.single_point(forward_xyz, charge=charge, spin=spin))
+
+    energies: List[float] = []
+    if backward and backward_energy is not None:
+        energies.append(backward_energy)
+    energies.append(ts_energy)
+    if forward and forward_energy is not None:
+        energies.append(forward_energy)
+
+    result = IRCResult(
+        ts_xyz=ts_xyz,
+        path_type="double_optimization_proxy",
+        energies=energies,
+        backward_endpoint=backward_xyz if backward else None,
+        forward_endpoint=forward_xyz if forward else None,
+        backward_endpoint_energy=backward_energy,
+        forward_endpoint_energy=forward_energy,
+        max_energy=ts_energy,
+        max_point=ts_xyz,
+    )
+    return {
+        "ts_xyz": result.ts_xyz,
+        "path_type": result.path_type,
+        "energies": result.energies,
+        "backward_endpoint": result.backward_endpoint,
+        "forward_endpoint": result.forward_endpoint,
+        "backward_endpoint_energy": result.backward_endpoint_energy,
+        "forward_endpoint_energy": result.forward_endpoint_energy,
+        "max_energy": result.max_energy,
+        "max_point": result.max_point,
+    }

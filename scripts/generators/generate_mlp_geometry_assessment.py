@@ -21,18 +21,18 @@ def main() -> None:
     assessment_payload = build_geometry_assessment_artifact()
 
     files = {
-        output_dir / "p4_geometry_benchmark.json": benchmark_payload,
-        output_dir / "p4_geometry_assessment.json": assessment_payload,
+        output_dir / "mlp_geometry_benchmark.json": benchmark_payload,
+        output_dir / "mlp_geometry_assessment.json": assessment_payload,
     }
     for path, payload in files.items():
         with open(path, "w", encoding="utf-8") as handle:
             json.dump(payload, handle, indent=2)
 
-    (output_dir / "p4_geometry_benchmark.md").write_text(
+    (output_dir / "mlp_geometry_benchmark.md").write_text(
         render_geometry_benchmark_markdown(benchmark_payload),
         encoding="utf-8",
     )
-    (output_dir / "p4_geometry_assessment.md").write_text(
+    (output_dir / "mlp_geometry_assessment.md").write_text(
         render_geometry_assessment_markdown(assessment_payload),
         encoding="utf-8",
     )

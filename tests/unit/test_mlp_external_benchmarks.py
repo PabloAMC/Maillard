@@ -29,5 +29,5 @@ def test_external_mlp_evidence_index_and_rendering_cover_new_sota_candidates():
 
     assert "mace_omol_external_2026q1" in index
     assert index["orbmol_external_2026q1"].prior_strength == "strong"
-    assert "P4 External MLP Landscape" in markdown
+    assert "External ML Accelerator Landscape" in markdown
     assert "mace_omol_shortlist" in markdown

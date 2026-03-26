@@ -1388,6 +1388,61 @@ def _matrix_compound_support_status(
     return "open_gap"
 
 
+def _promotion_claim_posture(
+    *,
+    source_origin: str,
+    promotion_ready: bool,
+    target_profile: str,
+) -> str:
+    origin = str(source_origin).strip().lower()
+    profile = str(target_profile).strip().lower()
+
+    if promotion_ready and origin.startswith("external"):
+        return "external_promotion_claim_allowed"
+    if origin == "internal_experiment":
+        return "internal_measured_comparator_only"
+    if profile in {"mixed", "meaty_positive"} and origin.startswith("external"):
+        return "external_evidence_not_yet_sufficient"
+    return "not_a_promotion_lane"
+
+
+def _is_evidence_or_calibration_first_compound(compound_row: Mapping[str, Any]) -> bool:
+    compound_name = str(compound_row.get("compound", "")).strip().lower()
+    role = str(compound_row.get("role", "")).strip().lower()
+    calibration_source = str(compound_row.get("calibration_source", "")).strip().lower()
+    calibration_strength = str(compound_row.get("calibration_evidence_strength", "")).strip().lower()
+
+    if compound_name in {"hexanal", "nonanal"}:
+        return True
+    if role == "adverse_marker" and calibration_strength in {
+        "heuristic",
+        "directional_transferred",
+        "class_anchored",
+        "conditional_literature_anchored",
+    }:
+        return True
+    return any(token in calibration_source for token in {"headspace", "retention", "lipid", "oxidation"})
+
+
+def _is_mechanistic_candidate_blocker(compound_row: Mapping[str, Any]) -> bool:
+    role = str(compound_row.get("role", "")).strip().lower()
+    support_status = str(compound_row.get("support_status", "open_gap")).strip().lower()
+    evidence_state = str(compound_row.get("evidence_state", "still_missing")).strip().lower()
+    calibration_strength = str(compound_row.get("calibration_evidence_strength", "heuristic")).strip().lower()
+
+    if support_status not in {"internal_candidate", "directional_support"}:
+        return False
+    if role != "desirable_marker":
+        return False
+    if _is_evidence_or_calibration_first_compound(compound_row):
+        return False
+    if calibration_strength != "heuristic":
+        return False
+    if evidence_state not in {"still_missing", "internally_benchmarked", "conditional_calibration"}:
+        return False
+    return True
+
+
 def build_matrix_target_status_artifact(
     benchmark_files: Optional[Iterable[Path | str]] = None,
     *,
@@ -1456,6 +1511,16 @@ def build_matrix_target_status_artifact(
                 }
             )
 
+        evidence_or_calibration_first_blockers = [
+            compound for compound in compounds
+            if compound["support_status"] in {"internal_candidate", "directional_support"}
+            and _is_evidence_or_calibration_first_compound(compound)
+        ]
+        mechanistic_candidate_blockers = [
+            compound for compound in compounds
+            if _is_mechanistic_candidate_blocker(compound)
+        ]
+
         external_decision_ready = (
             evidence.target_profile in {"mixed", "meaty_positive"}
             and summary.ranking_contract_status == "pass"
@@ -1467,27 +1532,55 @@ def build_matrix_target_status_artifact(
             evidence.target_profile in {"mixed", "meaty_positive"}
             and summary.ranking_contract_status == "pass"
             and not external_decision_ready
-            and (benchmark_counts["internal_candidate"] + benchmark_counts["directional_support"]) >= 1
+            and len(mechanistic_candidate_blockers) >= 1
+        )
+        evidence_or_calibration_priority_ready = (
+            evidence.target_profile in {"mixed", "meaty_positive"}
+            and summary.ranking_contract_status == "pass"
+            and not external_decision_ready
+            and len(mechanistic_candidate_blockers) == 0
+            and len(evidence_or_calibration_first_blockers) >= 1
         )
         if evidence.target_profile not in {"mixed", "meaty_positive"}:
             promotion_blocker = "benchmark lacks meaty-positive targets"
+            blocker_class = "out_of_scope_for_promotion"
         elif summary.ranking_contract_status != "pass":
             promotion_blocker = "ranking contract not yet passing"
+            blocker_class = "ranking_or_calibration_blocker"
+        elif evidence_or_calibration_priority_ready:
+            promotion_blocker = "named compounds remain evidence-or-calibration blockers"
+            blocker_class = "observable_or_calibration_blocker"
+        elif mechanistic_priority_ready:
+            promotion_blocker = "named compounds remain mechanistic blockers"
+            blocker_class = "mechanistic_blocker"
         elif benchmark_counts["quantitative_closed"] < 2:
             promotion_blocker = "insufficient externally measured target closure"
+            blocker_class = "external_data_blocker"
         elif benchmark_counts["internal_candidate"] > 0 or benchmark_counts["directional_support"] > 0:
             promotion_blocker = "depends on internal or transferred support"
+            blocker_class = "transfer_or_internal_support_blocker"
         else:
             promotion_blocker = "none"
+            blocker_class = "none"
 
         if external_decision_ready:
             next_best_action = "use_for_external_decision"
+            best_computational_action = "no_additional_compute_required"
+        elif evidence_or_calibration_priority_ready:
+            next_best_action = "improve_observable_or_calibration"
+            best_computational_action = "improve_observable_or_calibration_before_qm"
         elif mechanistic_priority_ready:
             next_best_action = "prioritize_mechanistic_refinement"
+            best_computational_action = "cheap_screen_then_selective_refinement"
         elif evidence.target_profile in {"mixed", "meaty_positive"}:
             next_best_action = "seek_external_data"
+            if summary.ranking_contract_status != "pass":
+                best_computational_action = "improve_observable_or_calibration_before_qm"
+            else:
+                best_computational_action = "stop_compute_and_seek_external_data"
         else:
             next_best_action = "retain_as_adverse_anchor"
+            best_computational_action = "no_additional_compute_required"
 
         benchmark_rows.append(
             {
@@ -1503,9 +1596,17 @@ def build_matrix_target_status_artifact(
                 "support_counts": benchmark_counts,
                 "quantitative_support_ready": benchmark_counts["quantitative_closed"] > 0,
                 "promotion_ready": external_decision_ready,
+                "evidence_or_calibration_priority_ready": evidence_or_calibration_priority_ready,
                 "mechanistic_priority_ready": mechanistic_priority_ready,
+                "blocker_class": blocker_class,
+                "promotion_claim_posture": _promotion_claim_posture(
+                    source_origin=evidence.source_origin,
+                    promotion_ready=external_decision_ready,
+                    target_profile=evidence.target_profile,
+                ),
                 "promotion_blocker": promotion_blocker,
                 "next_best_action": next_best_action,
+                "best_computational_action": best_computational_action,
                 "compounds": compounds,
             }
         )
@@ -1518,6 +1619,7 @@ def build_matrix_target_status_artifact(
             "total_benchmarks": len(benchmark_rows),
             "quantitative_support_ready": sum(1 for row in benchmark_rows if row["quantitative_support_ready"]),
             "promotion_ready": sum(1 for row in benchmark_rows if row["promotion_ready"]),
+            "evidence_or_calibration_priority_ready": sum(1 for row in benchmark_rows if row.get("evidence_or_calibration_priority_ready", False)),
             "mechanistic_priority_ready": sum(1 for row in benchmark_rows if row["mechanistic_priority_ready"]),
             **support_totals,
         },
@@ -1694,6 +1796,8 @@ def _matrix_closure_action(
         return "already_closed"
     if calibration_strength in {"literature_anchored", "conditional_literature_anchored"}:
         return "literature_anchor_available"
+    if support_status in {"internal_candidate", "directional_support"} and _is_evidence_or_calibration_first_compound(compound_row):
+        return "evidence_or_calibration_blocker"
     if support_status == "internal_candidate" and calibration_strength == "heuristic":
         return "mechanistic_blocker"
     if support_status in {"internal_candidate", "directional_support"} and (
