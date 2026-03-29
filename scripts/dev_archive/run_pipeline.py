@@ -2,13 +2,16 @@
 """
 scripts/run_pipeline.py — End-to-End Generative Maillard Pipeline
 
-Legacy compatibility entrypoint preserved for tests and downstream callers.
-The implementation keeps the historical CLI surface while delegating to the
-current pipeline/reporting stack.
+The core Phase 7 orchestrator.
+1. Accepts custom formulations via CLI.
+2. Generates the full reaction network via SmirksEngine.
+3. Screens barriers (with quick Hammond fallback by default).
+4. Recommends target volatile outputs.
 """
 
 import sys
 import argparse
+from dataclasses import asdict
 from pathlib import Path
 from typing import Dict, List, Any
 
@@ -18,80 +21,65 @@ sys.path.insert(0, str(ROOT))
 
 from src.config import DEFAULTS  # noqa: E402
 from src.logger import get_logger  # noqa: E402
+from src.exceptions import FormulationInputError  # noqa: E402
 
 logger = get_logger(__name__)
 
 from src.conditions import ReactionConditions  # noqa: E402
+from src.smirks_engine import SmirksEngine, Species  # noqa: E402
 from src.pipeline import MaillardPipeline  # noqa: E402
+from src.xtb_screener import XTBScreener  # noqa: E402
 from src.recommend import _trunc  # noqa: E402
 from src import precursor_resolver  # noqa: E402
-from src.barrier_constants import HEME_CATALYST_FAMILIES, HEME_CATALYST_REDUCTION  # noqa: E402
-from src.usability_reports import (  # noqa: E402
-    DomainOfValidityChecker,
-    build_confidence_package,
-)
-from src.presentation import (  # noqa: E402
+from src.barrier_constants import get_barrier, HEME_CATALYST_FAMILIES, HEME_CATALYST_REDUCTION  # noqa: E402
+from src.usability_reports import (
+    DomainOfValidityChecker, 
+    build_confidence_package
+)  # noqa: E402
+from src.presentation import (
     render_decision_summary_cli,
-    render_deep_explainability_cli,
-)
+    render_deep_explainability_cli
+)  # noqa: E402
 from src.reporting import generate_report  # noqa: E402
 
 
-def _formulation_to_dict(formulation: Any) -> Dict[str, Any]:
-    if hasattr(formulation, "to_dict"):
-        return formulation.to_dict()
-    if isinstance(formulation, dict):
-        return dict(formulation)
-    return {
-        "name": getattr(formulation, "name", "unknown"),
-        "sugars": list(getattr(formulation, "sugars", [])),
-        "amino_acids": list(getattr(formulation, "amino_acids", [])),
-        "additives": list(getattr(formulation, "additives", [])),
-        "lipids": list(getattr(formulation, "lipids", [])),
-        "ph": getattr(formulation, "ph", None),
-        "temp": getattr(formulation, "temperature", None),
-        "aw": getattr(formulation, "water_activity", None),
-        "time_minutes": getattr(formulation, "time_minutes", None),
-        "protein_type": getattr(formulation, "protein_type", "free"),
-        "denaturation_state": getattr(formulation, "denaturation_state", None),
-    }
-
-
 def print_table(active_pathways: List[Dict[str, Any]]) -> None:
-    print("    ┌" + "─" * 22 + "┬" + "─" * 16 + "┬" + "─" * 12 + "┬" + "─" * 30 + "┬" + "─" * 20 + "┐")
+    """Update table to include sensory descriptors."""
+    # Column widths: 22, 16, 12, 30, 20
+    print("    ┌" + "─"*22 + "┬" + "─"*16 + "┬" + "─"*12 + "┬" + "─"*30 + "┬" + "─"*20 + "┐")
     print("    │ PREDICTED COMPOUND   │ FORMATION TAG    │ BARRIER    │ SENSORY CHARACTER            │ TOXICITY/RISK        │")
-    print("    ├" + "─" * 22 + "┼" + "─" * 16 + "┼" + "─" * 12 + "┼" + "─" * 30 + "┼" + "─" * 20 + "┤")
-
-    for pathway in active_pathways:
-        target_str = pathway["target"].label if pathway["target"] else "Unknown"
-
+    print("    ├" + "─"*22 + "┼" + "─"*16 + "┼" + "─"*12 + "┼" + "─"*30 + "┼" + "─"*20 + "┤")
+    
+    for p in active_pathways:
+        target_str = p['target'].label if p['target'] else "Unknown"
+        
         tag = ""
-        if pathway["type"] == "desirable":
+        if p['type'] == 'desirable':
             tag = "[✅ AROMA]"
-        elif pathway["type"] == "competing":
+        elif p['type'] == 'competing':
             tag = "[⚠️ COMPETING]"
-        elif pathway["type"] == "toxic":
+        elif p['type'] == 'toxic':
             tag = "[☠️ TOXIC]"
-        elif pathway["type"] == "masking":
+        elif p['type'] == 'masking':
             tag = "[🛡️ MASKING]"
-
-        barrier_str = f"{pathway['span']:.1f} kcal"
-        sensory_str = pathway.get("sensory", "-")
-
+        
+        barrier_str = f"{p['span']:.1f} kcal"
+        sensory_str = p.get('sensory', '-')
+        
         tox_str = "-"
-        if pathway.get("toxicity"):
-            meta = pathway["toxicity"]
+        if p.get('toxicity'):
+            meta = p['toxicity']
             tox_str = f"[{meta['priority']}] {meta['name']}"
-
+            
         col1 = _trunc(target_str, 20)
         col2 = _trunc(tag, 14)
         col3 = _trunc(barrier_str, 10)
         col4 = _trunc(sensory_str, 28)
         col5 = _trunc(tox_str, 18)
-
+        
         print(f"    │ {col1} │ {col2} │ {col3} │ {col4} │ {col5} │")
-
-    print("    └" + "─" * 22 + "┴" + "─" * 16 + "┴" + "─" * 12 + "┴" + "─" * 30 + "┴" + "─" * 20 + "┘")
+        
+    print("    └" + "─"*22 + "┴" + "─"*16 + "┴" + "─"*12 + "┴" + "─"*30 + "┴" + "─"*20 + "┘")
 
 
 def parse_args() -> argparse.Namespace:
@@ -120,15 +108,16 @@ def parse_args() -> argparse.Namespace:
 
 
 def output_decision_summary_and_reports(
-    res: Any,
-    args: argparse.Namespace,
-    conditions: ReactionConditions,
-    designer: MaillardPipeline,
-    formulation: Dict[str, Any],
-    precursor_names: List[str],
+    res: Any, 
+    args: argparse.Namespace, 
+    conditions: ReactionConditions, 
+    designer: MaillardPipeline, 
+    formulation: Dict[str, Any], 
+    precursor_names: List[str]
 ) -> None:
+    """Consolidated helper to render reports and summaries for both modes."""
     checker = DomainOfValidityChecker(args.target if args.target else DEFAULTS.default_target_tag)
-
+    
     warnings = checker.check(
         precursor_names=precursor_names,
         protein_type=formulation.get("protein_type", args.protein_type),
@@ -146,16 +135,17 @@ def output_decision_summary_and_reports(
         baseline_conditions=conditions,
         designer=designer,
     )
-
+    
+    # [10] Scientist-Facing Decision Summary
     render_decision_summary_cli(res, warnings)
     render_deep_explainability_cli(res)
 
     if args.report:
         report_dir = generate_report(
-            res,
-            warnings,
-            vars(args),
-            output_dir=Path(args.output_dir) if args.output_dir else None,
+            res, 
+            warnings, 
+            vars(args), 
+            output_dir=Path(args.output_dir) if args.output_dir else None
         )
         logger.info(f"📄 Report generated in: {report_dir}")
 
@@ -168,69 +158,71 @@ def run_inverse_design(args: argparse.Namespace, conditions: ReactionConditions)
     logger.info(f"Minimizing Risk Profile:   '{args.minimize}'")
     logger.info(f"Conditions: pH {conditions.pH}, {conditions.temperature_celsius}°C, aᵥ {conditions.water_activity}")
     print("-" * 60)
-
-    designer = MaillardPipeline(args.target, args.minimize)
-    logger.info(f"Evaluating {len(designer.grid)} industrial formulations against tags...")
-
-    if args.dry_run:
-        logger.info("\n[DRY RUN] Bypassing expensive grid evaluation.")
-        logger.info("Validation: Grid dimensions bounded correctly.")
-        logger.info("\nDry-run complete. Exiting.")
+    
+    try:
+        designer = MaillardPipeline(args.target, args.minimize)
+        logger.info(f"Evaluating {len(designer.grid)} industrial formulations against tags...")
+        
+        if args.dry_run:
+            logger.info("\n[DRY RUN] Bypassing expensive grid evaluation.")
+            logger.info("Validation: Grid dimensions bounded correctly.")
+            logger.info("\nDry-run complete. Exiting.")
+            sys.exit(0)
+            
+        results = designer.evaluate_all(conditions)
+        
+        print("\n  Top Recommended Formulations:")
+        print("    ┌──────────────────────────────┬──────────────┬──────────────┬─────────────┬─────────────┐")
+        print("    │ FORMULATION                  │ TARGET SCORE │ RISK PENALTY │ LYS BUDGET  │ TRAP EFF    │")
+        print("    ├──────────────────────────────┼──────────────┼──────────────┼─────────────┼─────────────┤")
+        
+        for res in results[:10]:  # Top 10
+            t_score = f"{res.target_score:.1f}"
+            r_score = f"{res.off_flavour_risk:.1f}"
+            lys = f"{res.lysine_budget:.1f}%"
+            trap = f"{res.trapping_efficiency:.1f}%"
+            print(f"    │ {res.name[:28]:<28} │ {t_score:>12} │ {r_score:>12} │ {lys:>11} │ {trap:>11} │")
+        
+        print("    └──────────────────────────────┴──────────────┴──────────────┴─────────────┴─────────────┘")
+        
+        if results:
+            best = results[0]
+            best_formulation = next((item for item in designer.grid if item.get("name") == best.name), {})
+            best_precursors = []
+            for key in ("sugars", "amino_acids", "additives", "lipids"):
+                best_precursors.extend(best_formulation.get(key, []))
+            
+            output_decision_summary_and_reports(
+                best, args, conditions, designer, best_formulation, best_precursors
+            )
+        
         sys.exit(0)
-
-    results = designer.evaluate_all(conditions)
-
-    print("\n  Top Recommended Formulations:")
-    print("    ┌──────────────────────────────┬──────────────┬──────────────┬─────────────┬─────────────┐")
-    print("    │ FORMULATION                  │ TARGET SCORE │ RISK PENALTY │ LYS BUDGET  │ TRAP EFF    │")
-    print("    ├──────────────────────────────┼──────────────┼──────────────┼─────────────┼─────────────┤")
-
-    for res in results[:10]:
-        t_score = f"{res.target_score:.1f}"
-        r_score = f"{res.off_flavour_risk:.1f}"
-        lys = f"{res.lysine_budget:.1f}%"
-        trap = f"{res.trapping_efficiency:.1f}%"
-        print(f"    │ {res.name[:28]:<28} │ {t_score:>12} │ {r_score:>12} │ {lys:>11} │ {trap:>11} │")
-
-    print("    └──────────────────────────────┴──────────────┴──────────────┴─────────────┴─────────────┘")
-
-    if results:
-        best = results[0]
-        best_formulation_obj = next((item for item in designer.grid if getattr(item, "name", None) == best.name), None)
-        best_formulation = _formulation_to_dict(best_formulation_obj) if best_formulation_obj is not None else {}
-        best_precursors: List[str] = []
-        for key in ("sugars", "amino_acids", "additives", "lipids"):
-            best_precursors.extend(best_formulation.get(key, []))
-
-        output_decision_summary_and_reports(
-            best,
-            args,
-            conditions,
-            designer,
-            best_formulation,
-            best_precursors,
-        )
-
-    sys.exit(0)
+        
+    except ValueError as e:
+        logger.error(f"Formulation error: {e}")
+        sys.exit(1)
 
 
 def run_forward_pipeline(args: argparse.Namespace, conditions: ReactionConditions) -> None:
+    # Parse ratios
     ratio_dict = {}
     if args.ratios:
         for pair in args.ratios.split(","):
             if ":" in pair:
-                key, value = pair.split(":")
+                k, v = pair.split(":")
                 try:
-                    ratio_dict[key.strip().lower()] = float(value.strip())
+                    ratio_dict[k.strip().lower()] = float(v.strip())
                 except ValueError:
-                    logger.error(f"Invalid ratio value '{value}' for '{key}'. Must be a float.")
+                    logger.error(f"Invalid ratio value '{v}' for '{k}'. Must be a float.")
                     sys.exit(1)
 
+    # Print Forward Pipeline Header
     print("======================================================")
     print("      Maillard Generative Pipeline (Phase 7)")
     print("======================================================\n")
-
-    names: List[str] = []
+    
+    # 1. Resolve Precursors (for display and DoV check)
+    names = []
     if args.sugars:
         names += args.sugars.split(",")
     if args.amino_acids:
@@ -239,7 +231,7 @@ def run_forward_pipeline(args: argparse.Namespace, conditions: ReactionCondition
         names += args.additives.split(",")
     if args.lipids:
         names += args.lipids.split(",")
-    names = [name.strip() for name in names if name.strip()]
+    names = [n.strip() for n in names if n.strip()]
 
     if not names:
         logger.error("No precursors specified. Use --sugars, --amino-acids, --additives, --lipids OR --target.")
@@ -265,14 +257,14 @@ def run_forward_pipeline(args: argparse.Namespace, conditions: ReactionCondition
             logger.info("  ✅ All inputs are within the rigorously validated envelope.")
         else:
             logger.warning("  ⚠️ The following limitations apply to your formulation:")
-            for warning in warnings:
-                logger.warning(f"      - {warning.description}")
-
+            for w in warnings:
+                logger.warning(f"      - {w.description}")
+        
         logger.info("\nDry-run complete. Exiting without evaluating formulation predictions.")
         sys.exit(0)
 
     designer = MaillardPipeline(target_tag=DEFAULTS.default_target_tag, minimize_tag=DEFAULTS.default_minimize_tag)
-
+    
     formulation = {
         "name": "Single_Run",
         "sugars": args.sugars.split(",") if args.sugars else [],
@@ -286,13 +278,13 @@ def run_forward_pipeline(args: argparse.Namespace, conditions: ReactionCondition
         "time_minutes": args.time_minutes,
         "protein_type": args.protein_type,
         "denaturation_state": args.denaturation_state,
-        "catalyst": args.catalyst,
+        "catalyst": args.catalyst
     }
-
+    
     logger.info("\nRunning generative pipeline and scoring sensory impact...")
     res = designer.evaluate_single(formulation, conditions)
     logger.info(f"Generated {len(res.targets)} actionable pathways.")
-
+    
     if res.targets:
         print("\n  Top Predicted Targets (by likelihood/bottleneck):")
         print_table(res.targets)
@@ -303,26 +295,27 @@ def run_forward_pipeline(args: argparse.Namespace, conditions: ReactionCondition
             bar_len = int(res.trapping_efficiency / 5)
             bar_str = "█" * bar_len + "░" * (20 - bar_len)
             print(f"    │ Lipid Trapping Efficiency: {res.trapping_efficiency:5.1f}% | {bar_str} |")
-
+        
         if res.lysine_budget > 0:
             bar_len = int(res.lysine_budget / 5)
             bar_str = "█" * bar_len + "░" * (20 - bar_len)
             print(f"    │ Lysine Budget (DHA):       {res.lysine_budget:5.1f}% | {bar_str} |")
             if res.lysine_budget > 50.0:
                 print("    ⚠️  WARNING: High Lysine consumption by DHA pathway significantly reduces aroma yield.")
-
+    
     output_decision_summary_and_reports(res, args, conditions, designer, formulation, names)
 
-    print("\n" + "═" * 85)
+    print("\n" + "═"*85)
     print(" ℹ️  KNOWN LIMITATIONS:")
     print("    - FAST mode barrier estimates are purely qualitative heuristics.")
     print("    - Use --xtb for valid semi-empirical calculations.")
-    print("═" * 85 + "\n")
+    print("═"*85 + "\n")
 
 
 def main() -> None:
     args = parse_args()
 
+    # Catch simple cases where user only wants to list
     if args.list_precursors:
         print("Available Precursors:")
         for name in precursor_resolver.list_available():
@@ -331,18 +324,18 @@ def main() -> None:
 
     if args.list_tags:
         from src.sensory import SensoryDatabase
-
         db = SensoryDatabase()
         print("Available Sensory Tags (Categories):")
         for tag in db.tags.keys():
             print(f"  - {tag}")
         sys.exit(0)
 
+    # Setup Conditions
     conditions = ReactionConditions(
-        pH=args.ph,
+        pH=args.ph, 
         temperature_celsius=args.temp,
         water_activity=args.aw,
-        protein_type=args.protein_type,
+        protein_type=args.protein_type
     )
 
     if args.target:

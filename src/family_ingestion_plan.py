@@ -77,14 +77,15 @@ def render_family_ingestion_plan_markdown(payload: Mapping[str, Any]) -> str:
     lines = [
         "# Family Ingestion Plan",
         "",
-        "| SLR | Family | Strategic Posture | Runtime Concept | Payload Types | Wave | Next Build Action |",
-        "| --- | --- | --- | --- | --- | ---: | --- |",
+        "| SLR | Family | Posture | Runtime Concept | Payload Types | Wave | Source File | Next Build Action |",
+        "| --- | --- | --- | --- | --- | ---: | --- | --- |",
     ]
     for row in payload.get("families", []):
         next_action = "; ".join(str(item) for item in row.get("next_curation_actions", [])[:1]) or "none"
+        src = str(row.get("source_slr_file", "")) or "—"
         lines.append(
             f"| {row.get('slr_family', 'unknown')} | {row.get('family_id', 'unknown')} | {row.get('strategic_posture', 'unknown')} | {row.get('runtime_concept', 'unknown')} | "
-            f"{', '.join(str(item) for item in row.get('preferred_payload_types', [])) or 'none'} | {row.get('implementation_wave', 'unknown')} | {next_action} |"
+            f"{', '.join(str(item) for item in row.get('preferred_payload_types', [])) or 'none'} | {row.get('implementation_wave', 'unknown')} | {src} | {next_action} |"
         )
 
     lines.extend([

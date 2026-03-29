@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import Any, Dict, List, Mapping
 
+from src.barrier_constants import DFT_ANCHOR_METADATA, FAST_BARRIERS
 from src.family_barrier_progress import build_family_barrier_progress_artifact
 from src.family_ingestion_plan import load_family_ingestion_plan
 from src.mlp_adoption_contract import load_mlp_candidates
@@ -107,6 +108,49 @@ def _next_compute_action(*, literature_status: str, benchmark_visibility: str, f
     return "fill_missing_literature_anchors_then_xTB_screen_then_run_selective_DFT_only_for_decisive_steps"
 
 
+def build_c4_c5_dft_status() -> List[Dict[str, Any]]:
+    """Return per-reaction DFT status for the 6 C4/C5 targets.
+
+    Reads from ``DFT_ANCHOR_METADATA`` (barrier_constants.py) and resolves
+    whether the *_dft sentinel has been filled by ingest_dft_c4_c5_results.py.
+    This is the canonical machine-readable surface for reaction-level DFT tier.
+    """
+    rows: List[Dict[str, Any]] = []
+    for reaction_key, meta in DFT_ANCHOR_METADATA.items():
+        dft_key = str(meta.get("dft_key", ""))
+        dft_filled = False
+        dft_barrier_kcal: Any = None
+        if dft_key and dft_key in FAST_BARRIERS:
+            val = FAST_BARRIERS[dft_key][0]
+            if val < 99.0:
+                dft_filled = True
+                dft_barrier_kcal = val
+
+        # Resolve the active barrier from the routing table
+        active_key = str(meta.get("active_key", ""))
+        active_barrier_kcal: Any = None
+        if active_key and active_key in FAST_BARRIERS:
+            active_barrier_kcal = FAST_BARRIERS[active_key][0]
+
+        rows.append({
+            "reaction_key":       reaction_key,
+            "slr_family":         str(meta.get("slr_family", "??")).zfill(2),
+            "current_tier":       str(meta.get("current_tier", "unknown")),
+            "target_tier":        str(meta.get("target_tier", "selective_dft_anchor")),
+            "active_key":         active_key,
+            "active_barrier_kcal": active_barrier_kcal,
+            "dft_key":            dft_key,
+            "dft_filled":         dft_filled,
+            "dft_barrier_kcal":   dft_barrier_kcal,
+            "uncertainty_kj":     float(meta.get("uncertainty_kj", 42.0)),
+            "promotion_ceiling":  str(meta.get("promotion_ceiling", "ranking_only")),
+            "honest_label":       str(meta.get("honest_label", "")),
+        })
+
+    rows.sort(key=lambda r: (r["slr_family"], r["reaction_key"]))
+    return rows
+
+
 def build_dft_coverage_map_artifact() -> Dict[str, Any]:
     barrier_progress = build_family_barrier_progress_artifact()
     barrier_lookup = {
@@ -154,6 +198,10 @@ def build_dft_coverage_map_artifact() -> Dict[str, Any]:
         )
 
     rows.sort(key=lambda row: (row["slr_family"], row["family_id"]))
+
+    c4_c5_status = build_c4_c5_dft_status()
+    dft_filled_count = sum(1 for r in c4_c5_status if r["dft_filled"])
+
     return {
         "summary": {
             "family_count": len(rows),
@@ -163,9 +211,13 @@ def build_dft_coverage_map_artifact() -> Dict[str, Any]:
             "literature_first_family_count": sum(
                 1 for row in rows if row.get("literature_status") == "literature_arrhenius_available"
             ),
+            "c4_c5_reaction_count": len(c4_c5_status),
+            "c4_c5_dft_filled_count": dft_filled_count,
+            "c4_c5_dft_pending_count": len(c4_c5_status) - dft_filled_count,
             "policy": "dft_and_mlp_coverage_must_follow_literature_first_then_xTB_then_selective_DFT_with_MLPs_limited_to_bounded_offline_roles",
         },
         "families": rows,
+        "c4_c5_reactions": c4_c5_status,
     }
 
 

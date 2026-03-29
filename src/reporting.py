@@ -29,6 +29,7 @@ from src.usability_reports import DomainWarning
 from src.projection_utils import build_projection_rows, build_artifact_provenance
 from src.presentation import (
     render_decision_summary_cli,
+    render_family_role_explanation_markdown,
     render_flavor_axis_markdown,
     render_projection_rows_markdown,
     render_provenance_markdown,
@@ -63,20 +64,23 @@ def _evidence_ladder_flags(meta: Dict[str, Any]) -> Dict[str, bool]:
         ]
     )
 
-    direct_anchor = evidence_state in {"externally_benchmarked", "internally_benchmarked"} or (
+    direct_anchor = evidence_state in {"externally_benchmarked", "internally_benchmarked", "literature_anchor"} or (
         strength == "literature_anchored" and fallback == "compound_specific"
     )
-    transferred_prior = evidence_state == "transferred_prior" or (
+    transferred_prior = evidence_state in {"transferred_prior", "literature_derived_transfer"} or (
         strength in {"conditional_literature_anchored", "process_state_mismatch"}
         or fallback in {"nearest_process_state", "compound_specific_process_state"}
         or "transfer" in source
         or "carryover" in source
         or "ratio" in source
     )
-    computational_refinement = any(token in notes_blob for token in ["dft", "xtb", "qm", "semiempirical", "computational", "refinement"])
+    computational_refinement = (
+        evidence_state in {"selective_dft_anchor", "xtb_derived_gfn2", "mlp_screen_mace"}
+        or any(token in notes_blob for token in ["dft", "xtb", "qm", "semiempirical", "computational", "refinement"])
+    )
     mechanistic_surrogate = (
         not direct_anchor and not transferred_prior and not computational_refinement
-    ) or evidence_state == "still_missing" or strength == "heuristic" or float(meta.get("melanoidin_trapping_factor", 1.0) or 1.0) < 1.0
+    ) or evidence_state in {"still_missing", "wet_lab_required"} or strength == "heuristic" or float(meta.get("melanoidin_trapping_factor", 1.0) or 1.0) < 1.0
 
     return {
         "direct_anchor": bool(direct_anchor),
@@ -420,6 +424,99 @@ def _build_family_specific_open_gaps(result: FormulationResult) -> List[Dict[str
     return deduped
 
 
+def build_family_role_explanation(result: FormulationResult) -> Dict[str, Any]:
+    """
+    Builds a scientist-facing explanation of which reaction families drove the
+    formulation result, which acted as modifiers only, and which are still absent
+    or transferred.
+
+    Role classification:
+      - "driver"   : active lane with a non-trivial target_score_delta (|delta|>0.01)
+                     or a direct benchmark anchor in the evidence ladder.
+      - "modifier" : active lane that adjusts scores but doesn't anchor a primary target.
+      - "missing_or_transferred" : in the canonical family registry but not active
+                                   in this evaluation run.
+
+    Returns a dict ready for JSON serialisation and markdown rendering.
+    """
+    flavor_axis = result.flavor_axis_summary or {}
+    family_lane_summary = flavor_axis.get("family_lane_summary", {}) or {}
+    family_lane_adjustments = flavor_axis.get("family_lane_adjustments", {}) or {}
+    per_lane_adjustments = family_lane_adjustments.get("per_lane", {}) or {}
+    active_family_lanes = set(flavor_axis.get("active_family_lanes", []) or [])
+
+    # Pull family payload coverage for all canonical families
+    payload_coverage = build_family_payload_coverage_artifact()
+    all_canonical_families = {
+        str(row.get("slr_family", "")): row
+        for row in payload_coverage.get("families", [])
+        if str(row.get("slr_family", ""))
+    }
+
+    drivers: List[Dict[str, Any]] = []
+    modifiers: List[Dict[str, Any]] = []
+    missing_or_transferred: List[Dict[str, Any]] = []
+
+    for slr_family in sorted(all_canonical_families.keys()):
+        coverage_row = all_canonical_families[slr_family]
+        family_id = str(coverage_row.get("family_id", "unknown"))
+        display_name = str(coverage_row.get("display_name", family_id))
+        lane = family_lane_summary.get(slr_family, {})
+        is_active = slr_family in active_family_lanes
+
+        if not is_active:
+            missing_or_transferred.append({
+                "slr_family": slr_family,
+                "family_id": family_id,
+                "display_name": display_name,
+                "reason": "lane_not_active_in_this_evaluation",
+                "primary_payload_count": int(coverage_row.get("total_primary_payload_count", 0)),
+            })
+            continue
+
+        per_lane = per_lane_adjustments.get(slr_family, {}) or {}
+        target_delta = float(per_lane.get("target_score_delta", 0.0))
+        off_flavour_delta = float(per_lane.get("off_flavour_risk_delta", 0.0))
+        closure_delta = float(per_lane.get("maillard_closure_delta", 0.0))
+        primary_payload_count = int(coverage_row.get("total_primary_payload_count", 0))
+
+        # A lane is a "driver" if it has a non-trivial score delta OR benchmark anchors
+        is_driver = (
+            abs(target_delta) > 0.01
+            or abs(off_flavour_delta) > 0.01
+            or primary_payload_count > 0
+        )
+
+        entry = {
+            "slr_family": slr_family,
+            "family_id": family_id,
+            "display_name": display_name,
+            "strategic_posture": str(lane.get("strategic_posture", "unknown")),
+            "target_score_delta": round(target_delta, 4),
+            "off_flavour_risk_delta": round(off_flavour_delta, 4),
+            "maillard_closure_delta": round(closure_delta, 4),
+            "primary_payload_count": primary_payload_count,
+            "summary": str(lane.get("summary", "")),
+        }
+        if is_driver:
+            drivers.append(entry)
+        else:
+            modifiers.append(entry)
+
+    return {
+        "drivers": drivers,
+        "modifiers": modifiers,
+        "missing_or_transferred": missing_or_transferred,
+        "summary": {
+            "driver_count": len(drivers),
+            "modifier_count": len(modifiers),
+            "missing_or_transferred_count": len(missing_or_transferred),
+            "total_canonical_family_count": len(all_canonical_families),
+            "active_lane_count": len(active_family_lanes),
+        },
+    }
+
+
 def _repo_root() -> Path:
     return Path(__file__).resolve().parents[1]
 
@@ -646,6 +743,7 @@ def generate_report(
     family_runtime_support_summary = _build_family_runtime_support_summary(result)
     family_specific_open_gaps = _build_family_specific_open_gaps(result)
     family_lane_sensitivity = build_family_lane_sensitivity_payload(result.flavor_axis_summary or {})
+    family_role_explanation = build_family_role_explanation(result)
     
     # 1. Save JSON Report
     json_path = output_dir / "report.json"
@@ -685,6 +783,7 @@ def generate_report(
             "family_runtime_support_summary": family_runtime_support_summary,
             "family_specific_open_gaps": family_specific_open_gaps,
             "family_lane_sensitivity": family_lane_sensitivity,
+            "family_role_explanation": family_role_explanation,
             "projection_metadata": dict(result.projection_metadata),
             "flavor_axis_summary": result.flavor_axis_summary,
             "predicted_ppb": {k: float(v) for k, v in result.predicted_ppb.items()},
@@ -891,11 +990,12 @@ def generate_report(
 
         if family_runtime_support_summary.get("family_lanes"):
             f.write("### Family Runtime Support Summary\n")
-            f.write("| SLR | Family | Active | Posture | Evidence Posture | Primary Payloads | Supporting Payloads | Priors |\n")
-            f.write("| :--- | :--- | :---: | :--- | :--- | ---: | ---: | ---: |\n")
+            f.write("| SLR | Family | Active | Role | Evidence Posture | Payloads | Outcome |\n")
+            f.write("| :--- | :--- | :---: | :--- | :--- | ---: | :--- |\n")
             for row in family_runtime_support_summary.get("family_lanes", []):
+                outcome = row.get("closure_outcome", "wet_lab_only")
                 f.write(
-                    f"| {row.get('slr_family', '') or 'n/a'} | {row.get('display_name', 'unknown')} | {'yes' if row.get('active') else '-'} | {row.get('strategic_posture', 'unknown')} | {row.get('evidence_posture', 'structural_gap_extrapolation')} | {int(row.get('primary_payload_count', 0))} | {int(row.get('supporting_payload_count', 0))} | {int(row.get('prior_count', 0))} |\n"
+                    f"| {row.get('slr_family', '') or 'n/a'} | {row.get('display_name', 'unknown')} | {'yes' if row.get('active') else '-'} | {row.get('strategic_posture', 'unknown')} | {row.get('evidence_posture', 'structural_gap_extrapolation')} | {int(row.get('primary_payload_count', 0))} | {outcome} |\n"
                 )
             f.write("\n")
 
@@ -912,8 +1012,9 @@ def generate_report(
         if family_specific_open_gaps:
             f.write("### Family Specific Open Gaps\n")
             for row in family_specific_open_gaps:
+                outcome = row.get("closure_outcome", "wet_lab_only")
                 f.write(
-                    f"- **{row.get('display_name', row.get('family_id', 'unknown'))}:** {row.get('gap_reason', 'unknown')}\n"
+                    f"- **{row.get('display_name', row.get('family_id', 'unknown'))}:** {row.get('gap_reason', 'unknown')} | Target: {outcome}\n"
                 )
             f.write("\n")
 
@@ -969,6 +1070,10 @@ def generate_report(
 
         if getattr(result, "flavor_axis_summary", None):
             f.write(render_flavor_axis_markdown(result.flavor_axis_summary, heading="### Flavor Axis Diagnostics", variant="detailed"))
+
+        if family_role_explanation:
+            f.write(render_family_role_explanation_markdown(family_role_explanation, heading="### Family Role Explanation"))
+            f.write("\n")
 
         f.write("## 4. Analytical Metadata\n")
         f.write("### Matrix Explainability\n")

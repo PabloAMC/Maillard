@@ -9,7 +9,17 @@ REMAINING_REACTIONS = [
     "retro_aldol", 
     "dha", 
     "trapping", 
-    "pyrazine"
+    "pyrazine",
+    "hexanal_radical_quench",
+    "mft_protein_noncovalent",
+    "quinone_cys_michael",
+    "quinone_lys_schiff",
+    "aa_ring_open_dicarbonyl",
+    "pe_schiff_base",
+    "pe_amadori",
+    "melanoidin_radical_trapping",
+    "lysinoalanine_crosslink",
+    "furosine_amadori_hydrolysis"
 ]
 
 def main():

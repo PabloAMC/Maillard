@@ -5,6 +5,7 @@ from typing import List, Optional
 ROOT = Path(__file__).resolve().parents[1]
 
 from src.pipeline import MaillardPipeline  # noqa: E402
+from src.formulation import Formulation  # noqa: E402
 from src.smirks_engine import ReactionConditions  # noqa: E402
 from src.pre_processor import PreProcessor  # noqa: E402
 
@@ -95,20 +96,20 @@ class FormulationOptimizer:
         processor = PreProcessor()
         molar_ratios = processor.apply(molar_ratios, pre_steps)
 
-        formulation = {
-            "name": f"Trial_{trial.number}",
-            "sugars": fixed_sugars,
-            "amino_acids": fixed_amino_acids,
-            "lipids": fixed_lipids,
-            "molar_ratios": molar_ratios,
-            "ph": ph,
-            "temp": temp,
-            "aw": aw,
-            "time_minutes": time_mins,
-            "interventions": interventions,
-            "protein_type": self.protein_type,
-            "denaturation_state": self.denaturation_state
-        }
+        formulation = Formulation(
+            name=f"Trial_{trial.number}",
+            sugars=fixed_sugars,
+            amino_acids=fixed_amino_acids,
+            lipids=fixed_lipids,
+            molar_ratios=molar_ratios,
+            ph=ph,
+            temperature=temp,
+            water_activity=aw,
+            interventions=interventions,
+            protein_type=self.protein_type,
+            matrix_type=None,
+            notes=f"Trial {trial.number} from Bayesian Optimization"
+        )
         
         # 4. Evaluate using the robust pipeline without mutating global state (R.8 fix)
         designer = MaillardPipeline(self.target_tag, self.minimize_tag)

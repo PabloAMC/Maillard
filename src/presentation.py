@@ -225,6 +225,77 @@ def render_flavor_axis_markdown(
     return "\n".join(lines)
 
 
+def render_family_role_explanation_markdown(explanation: Dict[str, Any], *, heading: str = "## Family Role Explanation") -> str:
+    """
+    Renders the output of build_family_role_explanation() as structured markdown.
+
+    Answers three questions a scientist should be able to ask:
+      - Which families DROVE the result (score-impacting + benchmark-anchored)?
+      - Which families were only MODIFIERS (active but score-neutral)?
+      - Which families are MISSING or TRANSFERRED (not active this run)?
+    """
+    summary = explanation.get("summary", {})
+    lines = [
+        heading,
+        "",
+        f"Active family lanes: **{summary.get('active_lane_count', 0)}** of "
+        f"**{summary.get('total_canonical_family_count', 0)}** canonical families",
+        f"Drivers: {summary.get('driver_count', 0)} | "
+        f"Modifiers: {summary.get('modifier_count', 0)} | "
+        f"Missing / transferred: {summary.get('missing_or_transferred_count', 0)}",
+        "",
+    ]
+
+    drivers = explanation.get("drivers", [])
+    if drivers:
+        lines += [
+            "### Drivers — families that shaped this result",
+            "",
+            "| SLR | Family | Posture | Δ target | Δ off-flavour | Δ closure | Payloads | Description |",
+            "| --- | --- | --- | ---: | ---: | ---: | ---: | --- |",
+        ]
+        for row in drivers:
+            lines.append(
+                f"| {row['slr_family']} | {row['display_name']} | {row['strategic_posture']} "
+                f"| {row['target_score_delta']:+.4f} | {row['off_flavour_risk_delta']:+.4f} "
+                f"| {row['maillard_closure_delta']:+.4f} | {row['primary_payload_count']} "
+                f"| {row.get('summary', '')} |"
+            )
+        lines.append("")
+
+    modifiers = explanation.get("modifiers", [])
+    if modifiers:
+        lines += [
+            "### Modifiers — active but score-neutral lanes",
+            "",
+            "| SLR | Family | Posture | Description |",
+            "| --- | --- | --- | --- |",
+        ]
+        for row in modifiers:
+            lines.append(
+                f"| {row['slr_family']} | {row['display_name']} | {row['strategic_posture']} "
+                f"| {row.get('summary', '')} |"
+            )
+        lines.append("")
+
+    missing = explanation.get("missing_or_transferred", [])
+    if missing:
+        lines += [
+            "### Missing / transferred — not active in this evaluation",
+            "",
+            "| SLR | Family | Payloads | Reason |",
+            "| --- | --- | ---: | --- |",
+        ]
+        for row in missing:
+            lines.append(
+                f"| {row['slr_family']} | {row['display_name']} "
+                f"| {row['primary_payload_count']} | {row.get('reason', '')} |"
+            )
+        lines.append("")
+
+    return "\n".join(lines)
+
+
 def render_domain_warnings_markdown(warnings: List['DomainWarning']) -> str:
     if not warnings:
         return "> [!NOTE]\n> Run is within the validated scientific envelope.\n"

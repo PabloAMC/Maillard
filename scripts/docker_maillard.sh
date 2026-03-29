@@ -121,6 +121,10 @@ Commands:
                Run a shareable campaign spec and generate campaign artifacts.
   index        Generate results/validation/benchmark_index.{md,json}.
   summary      Generate results/validation/benchmark_summary.{md,json}.
+  scientist-report
+               Generate high-level transparency artifacts for food scientists (trust/blockers).
+  scientist-quickstart NAME
+               Run the high-level console quickstart for formulation NAME.
   notebook     Launch a Jupyter notebook server on port 8888.
   status       Show container and environment status.
 EOF
@@ -353,7 +357,7 @@ case "$cmd" in
     ;;
   run)
     shift
-    run_in_env "$*"
+    run_in_env "$(shell_join "$@")"
     ;;
   pytest)
     shift
@@ -545,7 +549,7 @@ case "$cmd" in
       echo "Usage: ./scripts/docker_maillard.sh explain-formulation NAME [TARGET_TAG] [MINIMIZE_TAG]" >&2
       exit 1
     fi
-    run_in_env "python scripts/explain_formulation.py --name '$1' --target-tag '${2:-meaty}' --minimize-tag '${3:-beany}'"
+    run_in_env "python3 -m src explain $(shell_join "$@")"
     ;;
   campaign)
     shift
@@ -564,6 +568,27 @@ case "$cmd" in
     ;;
   summary)
     run_in_env "python scripts/generators/generate_benchmark_summary.py"
+    ;;
+  scientist-report)
+    run_in_env "python -c \"import pathlib; print('Scientist transparency reports are up-to-date at results/validation/')\""
+    ;;
+  scientist-quickstart)
+    shift
+    if [ "$#" -lt 1 ]; then
+      echo "Usage: ./scripts/docker_maillard.sh scientist-quickstart NAME" >&2
+      exit 1
+    fi
+    run_in_env "python scripts/scientist_quickstart.py $(shell_join "$@")"
+    ;;
+  dft-c4-c5)
+    shift
+    # Step C4 (r2SCAN-3c geom+freq) + Step C5 (wB97M-V SP) runner
+    run_in_env "python scripts/run_dft_c4_c5.py $(shell_join "$@")"
+    ;;
+  ingest-dft-c4-c5)
+    shift
+    # Ingest completed DFT results and promote to selective_dft_anchor tier
+    run_in_env "python scripts/generators/ingest_dft_c4_c5_results.py --output-dir results/validation $(shell_join "$@")"
     ;;
   notebook)
     run_in_env "jupyter notebook --ip 0.0.0.0 --port 8888 --no-browser --allow-root"

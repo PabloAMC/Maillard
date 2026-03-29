@@ -72,7 +72,8 @@ def build_mechanism(
     precursors: dict,
     from_smirks: bool,
     verbose_reactions: bool,
-    no_gating: bool
+    no_gating: bool,
+    unc_direction: float = 0.0
 ) -> None:
     if from_smirks:
         logger.info("Generating dynamic network from precursors using SmirksEngine...")
@@ -105,6 +106,11 @@ def build_mechanism(
             
             try:
                 barrier_val = barrier_kcal[0] if isinstance(barrier_kcal, tuple) else barrier_kcal
+                unc_val = barrier_kcal[1] if isinstance(barrier_kcal, tuple) else 5.0
+                
+                # Apply uncertainty direction: -1.0 lowers barrier (higher conc), +1.0 raises barrier (lower conc)
+                barrier_val += unc_direction * unc_val
+                
                 exporter.add_reaction(
                     reactants, products, barrier_val, 
                     thermo_gating=(not no_gating),
@@ -209,18 +215,6 @@ def run_simulation(barriers_json: str, precursors: dict, temp_c: Optional[float]
             barriers = json.load(f)
     
     conditions = ReactionConditions(pH=pH, solvent_name=solvent, temperature_celsius=temp_c if temp_c else DEFAULTS.default_temp_c)
-    exporter = CanteraExporter()
-    
-    build_mechanism(
-        exporter, conditions, barriers, is_db, db, 
-        precursors, kwargs.get("from_smirks", False), 
-        verbose_reactions, no_gating
-    )
-            
-    logger.info(f"Built Cantera mechanism with {len(exporter.reactions)} reactions.")
-    mech_path = f"{output_prefix}_mech.yaml"
-    exporter.export_yaml(mech_path)
-    
     temp_profile = None
     if temp_ramp_csv:
         logger.info(f"Loading temperature ramp from {temp_ramp_csv}...")
@@ -231,24 +225,81 @@ def run_simulation(barriers_json: str, precursors: dict, temp_c: Optional[float]
         logger.info(f"Ramp detected: {len(temp_profile)} points over {time_sec} s.")
     else:
         logger.info(f"Running isothermal simulation at {temp_c} C for {time_sec} s...")
-    
-    engine = KineticsEngine(temperature_k=(temp_c + 273.15) if temp_c else 423.15)
+
+    # We need init_state based on precursor_dict before _run_pass
+    # We can fake an exporter just to resolve species names to SMILES
+    temp_exporter = CanteraExporter()
+    build_mechanism(temp_exporter, conditions, barriers, is_db, db, precursors, kwargs.get("from_smirks", False), False, no_gating, 0.0)
     
     init_state = {}
     for smiles, conc in precursors.items():
         found = False
         norm_smiles = PRECURSOR_LOOKUP.get(smiles.lower(), smiles)
-        
-        for k, v in exporter.species.items():
+        for k, v in temp_exporter.species.items():
             if v["smiles"] == norm_smiles or v["name"] == smiles:
                 init_state[v["name"]] = conc
                 found = True
                 break
         if not found:
             logger.warning(f"Warning: Precursor {smiles} not found in mechanism.")
+            
+    def _run_pass(direction: float, pass_name: str) -> dict:
+        exporter_pass = CanteraExporter()
+        build_mechanism(
+            exporter_pass, conditions, barriers, is_db, db, 
+            precursors, kwargs.get("from_smirks", False), 
+            verbose_reactions, no_gating, unc_direction=direction
+        )
+        
+        mech_path_pass = f"{output_prefix}_{pass_name}_mech.yaml"
+        exporter_pass.export_yaml(mech_path_pass)
+        
+        engine_pass = KineticsEngine(temperature_k=(temp_c + 273.15) if temp_c else 423.15)
+        try:
+            results_pass = engine_pass.simulate_network_cantera(
+                mech_path_pass, 
+                init_state, 
+                (0, time_sec),
+                temperature_profile=temp_profile
+            )
+            return pd.DataFrame(results_pass).iloc[-1].to_dict()
+        except Exception as e:
+            logger.warning(f"Pass {pass_name} failed: {e}")
+            return {}
 
+    if kwargs.get("uncertainty_bands"):
+        logger.info("Running uncertainty bands (central, high (+unc), low (-unc))...")
+        central_res = _run_pass(0.0, "central")
+        high_res = _run_pass(1.0, "high_barrier")  # Low rate, lower conc
+        low_res = _run_pass(-1.0, "low_barrier")   # High rate, higher conc
+        
+        Summary_df = pd.DataFrame([{
+            "species": k,
+            "ppb_central": central_res.get(k, 0.0) * 1e9,
+            "ppb_low": high_res.get(k, 0.0) * 1e9, # High barrier = low conc
+            "ppb_high": low_res.get(k, 0.0) * 1e9  # Low barrier = high conc
+        } for k in central_res.keys() if k not in ["time", "temperature"] and not str(k).endswith("_X")])
+        
+        unc_path = f"{output_prefix}_uncertainty_bands.csv"
+        Summary_df.to_csv(unc_path, index=False)
+        logger.info(f"Uncertainty bands saved to {unc_path}")
+
+    # Standard central run for ordinary output/plotting
+    exporter = CanteraExporter()
+    build_mechanism(
+        exporter, conditions, barriers, is_db, db, 
+        precursors, kwargs.get("from_smirks", False), 
+        verbose_reactions, no_gating, unc_direction=0.0
+    )
+            
+    logger.info(f"Built Cantera mechanism with {len(exporter.reactions)} reactions.")
+    mech_path = f"{output_prefix}_mech.yaml"
+    exporter.export_yaml(mech_path)
+    
+    engine = KineticsEngine(temperature_k=(temp_c + 273.15) if temp_c else 423.15)
     try:
         results = engine.simulate_network_cantera(
+
             mech_path, 
             init_state, 
             (0, time_sec),
@@ -298,6 +349,7 @@ if __name__ == "__main__":
     parser.add_argument("--no-gating", action="store_true", help="Disable thermodynamic gating (skip Delta G check)")
     parser.add_argument("--ph", type=float, default=DEFAULTS.default_ph, help="Reaction pH")
     parser.add_argument("--solvent", type=str, default="water", help="Solvent name (water, lipid, etc.)")
+    parser.add_argument("--uncertainty-bands", action="store_true", help="Run central, high, and low barrier passes to compute ppb uncertainty bounds")
     
     args = parser.parse_args()
     
@@ -319,4 +371,5 @@ if __name__ == "__main__":
                    verbose_reactions=args.verbose_reactions,
                    no_gating=args.no_gating,
                    pH=args.ph,
-                   solvent=args.solvent)
+                   solvent=args.solvent,
+                   uncertainty_bands=args.uncertainty_bands)

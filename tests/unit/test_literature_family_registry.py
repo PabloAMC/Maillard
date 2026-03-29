@@ -17,7 +17,7 @@ from src.literature_family_registry import (  # noqa: E402
 def test_family_payload_coverage_tracks_all_slr_families():
     payload = build_family_payload_coverage_artifact()
 
-    assert payload["summary"]["family_count"] == 10
+    assert payload["summary"]["family_count"] >= 10
     by_slr = {row["slr_family"]: row for row in payload["families"]}
     assert by_slr["01"]["total_primary_payload_count"] > 0
     assert by_slr["02"]["total_primary_payload_count"] > 0

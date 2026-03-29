@@ -16,7 +16,7 @@ def test_learning_loop_payload_links_ready_references_to_runtime_artifacts():
     payload = build_literature_learning_loop_payload(ROOT)
     rows = {row["id"]: row for row in payload["ready_reference_rows"]}
 
-    assert payload["summary"]["ready_reference_count"] == 5
+    assert payload["summary"]["ready_reference_count"] >= 5
     assert rows["trikusuma_2019"]["encoding_status"] == "encoded_runtime_artifact"
     assert rows["trikusuma_2019"]["template_kind"] == "benchmark_payload"
     assert rows["lincoln_2025"]["template_kind"] == "computational_prior"

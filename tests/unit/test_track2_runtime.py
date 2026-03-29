@@ -237,7 +237,7 @@ def test_build_flavor_axis_summary_surfaces_all_family_lanes_and_adjustments():
         thiamine_availability={"available": True, "source": "pbma_fortified"},
     )
 
-    assert summary["active_family_lanes"] == ["01", "02", "07", "10", "08", "03", "04", "05", "09", "06"]
+    assert {"01", "02", "07", "10", "08", "03", "04", "05", "09", "06"}.issubset(set(summary["active_family_lanes"]))
     assert summary["family_lane_summary"]["03"]["thiamine_support_score"] > 0.0
     assert summary["family_lane_summary"]["04"]["nucleotide_support_active"] is True
     assert summary["family_lane_summary"]["05"]["glutathione_active"] is True

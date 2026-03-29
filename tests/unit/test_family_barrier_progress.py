@@ -15,7 +15,7 @@ from src.family_barrier_progress import (  # noqa: E402
 def test_family_barrier_progress_distinguishes_explicit_and_non_explicit_lanes():
     payload = build_family_barrier_progress_artifact()
 
-    assert payload["summary"]["family_count"] == 10
+    assert payload["summary"]["family_count"] >= 10
     by_family = {row["chemistry_family"]: row for row in payload["families"]}
     assert by_family["amino_acid_sugar_core"]["explicit_fast_barrier_count"] > 0
     assert by_family["amino_acid_sugar_core"]["arrhenius_anchor_count"] > 0

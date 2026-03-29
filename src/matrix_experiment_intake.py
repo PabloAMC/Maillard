@@ -457,3 +457,26 @@ def build_matrix_experiment_support_delta_artifact(
         },
         "compounds": delta_rows,
     }
+
+
+def calibrate_from_intake(
+    payload_or_path: Mapping[str, Any] | Path | str,
+    *,
+    dry_run: bool = False
+) -> Optional[Dict[str, Any]]:
+    from src.matrix_calibration_optimizer import calibrate_matrix_constants
+    
+    if isinstance(payload_or_path, (Path, str)):
+        payload = load_matrix_experiment_intake(payload_or_path)
+    else:
+        payload = dict(payload_or_path)
+        
+    benchmark = build_matrix_experiment_benchmark_payload(payload)
+    protein_type = str(benchmark.get("protein_type", "free"))
+    
+    if dry_run:
+        import logging
+        logging.getLogger(__name__).info(f"Dry run calibration for {protein_type} using experiment {benchmark.get('benchmark_id')}")
+        return {"dry_run": True, "benchmark_id": benchmark.get("benchmark_id")}
+        
+    return calibrate_matrix_constants([benchmark], protein_type)

@@ -3,6 +3,21 @@ from __future__ import annotations
 from typing import Any, Dict, Mapping, TypeAlias, TypedDict
 
 
+class EvidenceTier:
+    LITERATURE_ANCHOR = "literature_anchor"
+    LITERATURE_DERIVED_TRANSFER = "literature_derived_transfer"
+    SELECTIVE_DFT_ANCHOR = "selective_dft_anchor"
+    XTB_DERIVED_GFN2 = "xtb_derived_gfn2"
+    MLP_SCREEN_MACE = "mlp_screen_mace"
+    MECHANISTIC_SURROGATE = "mechanistic_surrogate"
+    CLASS_SURROGATE = "class_surrogate"
+    QSPR_SURROGATE = "qspr_surrogate"
+    MODEL_DERIVED_BACKTESTED = "model_derived_backtested"
+    WET_LAB_REQUIRED = "wet_lab_required"
+    WET_LAB_REQUIRED_FLOOR = "wet_lab_required_floor"
+    STILL_MISSING = "still_missing"
+
+
 class ProjectionMetadataRow(TypedDict, total=False):
     compound: str
     proxy_ppb: float
@@ -34,6 +49,18 @@ class ProjectionMetadataRow(TypedDict, total=False):
     calibration_evidence_strength: str
     calibration_fallback_mode: str
     evidence_state: str
+    computational_method: str
+    barrier_uncertainty_kj: float | None
+    rate_uncertainty_factor: float | None
+    concentration_uncertainty: float | None
+    ranking_reliability: str
+    promotion_ceiling: str
+    honest_label: str
+    uncertainty_posture: str
+    process_state_applicability: str
+    validation_status: str
+    closure_outcome: str
+    target_decision: str
     target_class: str
     chemistry_family: str | None
     supporting_families: list[str]
@@ -106,6 +133,18 @@ def normalize_projection_metadata_row(
         "calibration_evidence_strength": str(row.get("calibration_evidence_strength", "heuristic")),
         "calibration_fallback_mode": str(row.get("calibration_fallback_mode", "class_level")),
         "evidence_state": str(row.get("evidence_state", "still_missing")),
+        "computational_method": str(row.get("computational_method", "none")),
+        "barrier_uncertainty_kj": row.get("barrier_uncertainty_kj"),
+        "rate_uncertainty_factor": row.get("rate_uncertainty_factor"),
+        "concentration_uncertainty": row.get("concentration_uncertainty"),
+        "ranking_reliability": str(row.get("ranking_reliability", "unknown")),
+        "promotion_ceiling": str(row.get("promotion_ceiling", "not_computable")),
+        "honest_label": str(row.get("honest_label", "")),
+        "uncertainty_posture": str(row.get("uncertainty_posture", "unknown")),
+        "process_state_applicability": str(row.get("process_state_applicability", "unknown")),
+        "validation_status": str(row.get("validation_status", "unknown")),
+        "closure_outcome": str(row.get("closure_outcome", "unknown")),
+        "target_decision": str(row.get("target_decision", "unknown")),
         "target_class": str(row.get("target_class", "unknown")),
         "chemistry_family": row.get("chemistry_family"),
         "supporting_families": list(row.get("supporting_families", [])),

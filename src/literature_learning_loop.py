@@ -41,7 +41,7 @@ ARTIFACT_TYPE_TO_TEMPLATE_KIND = {
     "structural_gap_entry": "structural_gap_entry",
 }
 
-PROMOTION_QUEUE_SLR_FAMILIES = {"03", "04", "05", "06", "07", "10"}
+PROMOTION_QUEUE_SLR_FAMILIES = {"03", "04", "05", "06", "07", "10", "11", "12", "13", "14", "15", "16"}
 
 PROMOTION_POSTURE_WEIGHTS = {
     "immediate_expansion_lane": 5.0,

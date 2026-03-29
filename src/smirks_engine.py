@@ -33,7 +33,8 @@ from rdkit.Chem import AllChem, Descriptors  # noqa: E402
 
 from src.pathway_extractor import Species, ElementaryStep  # noqa: E402
 from src.conditions import ReactionConditions  # noqa: E402
-from src.chem_utils import canonicalize_smiles as _canonical  # noqa: E402
+from src.chem_utils import canonicalize_smiles as _canonical, parse_mol as _mol, calculate_mw as _mw  # noqa: E402
+from src.sugar_classifier import is_ketose, is_pentose, is_hexose, is_sugar
 
 # Suppress RDKit atom-mapping warnings
 RDLogger.DisableLog("rdApp.warning")
@@ -108,74 +109,12 @@ _DICARBONYL_SMARTS = Chem.MolFromSmarts("[CX3](=O)[CX3](=O)")  # adjacent carbon
 _AROMATIC_ALDEHYDE_SMARTS = Chem.MolFromSmarts("[c][CH]=O") # furfural-type
 
 
-@lru_cache(maxsize=4096)
-def _mol_cached(smi: str) -> Optional[Chem.Mol]:
-    """Internal cached Mol parsing."""
-    return Chem.MolFromSmiles(smi) if smi else None
-
-
-def _mol(smi: str) -> Optional[Chem.Mol]:
-    """Returns a CLONE of the cached Mol to prevent in-place mutation issues."""
-    m = _mol_cached(smi)
-    return Chem.Mol(m) if m else None
-
-
-
-
-
-def _mw(smi: str) -> float:
-    m = _mol(smi)
-    return Descriptors.MolWt(m) if m else 9999.0
-
-
 def _is_valid(smi: str) -> bool:
     """Return True if SMILES is parseable and MW is below cap."""
     return _mol(smi) is not None and _mw(smi) <= MAX_MW
 
 
-def _is_sugar(s: Species) -> bool:
-    """Heuristic: has an aldehyde OR ketone AND at least 2 hydroxyl groups."""
-    m = _mol(s.smiles)
-    if m is None:
-        return False
-    has_aldehyde = m.HasSubstructMatch(_ALDEHYDE_SMARTS)
-    has_ketone = m.HasSubstructMatch(Chem.MolFromSmarts("[CX4][CX3](=O)[CX4]"))
-    # Count OH groups (O with at least one H)
-    oh_count = sum(
-        1 for atom in m.GetAtoms()
-        if atom.GetAtomicNum() == 8 and atom.GetTotalNumHs() >= 1
-        and atom.GetDegree() == 1  # terminal OH
-    )
-    return (has_aldehyde or has_ketone) and oh_count >= 2
 
-
-def _is_ketose(s: Species) -> bool:
-    """Heuristic: has a ketone C=O and multiple OH."""
-    m = _mol(s.smiles)
-    if not m: 
-        return False
-    pat = Chem.MolFromSmarts("[CX4][CX3](=O)[CX4]")
-    has_ketone = m.HasSubstructMatch(pat)
-    oh_count = sum(1 for atom in m.GetAtoms() if atom.GetAtomicNum() == 8 and atom.GetTotalNumHs() >= 1 and atom.GetDegree() == 1)
-    return has_ketone and oh_count >= 2
-
-
-def _is_hexose(s: Species) -> bool:
-    """Heuristic: 6 carbons + is a sugar."""
-    m = _mol(s.smiles)
-    if m is None:
-        return False
-    c_count = sum(1 for a in m.GetAtoms() if a.GetAtomicNum() == 6)
-    return _is_sugar(s) and c_count == 6
-
-
-def _is_pentose(s: Species) -> bool:
-    """Heuristic: 5 carbons + is a sugar."""
-    m = _mol(s.smiles)
-    if m is None:
-        return False
-    c_count = sum(1 for a in m.GetAtoms() if a.GetAtomicNum() == 6)
-    return _is_sugar(s) and c_count == 5
 
 
 def _is_asparagine(s: Species) -> bool:
@@ -516,7 +455,7 @@ class SmirksEngine:
         _add_steps(furanone_steps)
 
         # ── Tier B Phase 1: Amadori / Heyns cascade ──────────────────────
-        sugars = [s for s in pool_list() if _is_sugar(s)]
+        sugars = [s for s in pool_list() if is_sugar(s)]
         amines = [s for s in pool_list() if _is_primary_amine(s)]
 
         for sugar in sugars:
