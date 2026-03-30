@@ -10,13 +10,8 @@ from src.benchmark_validation import build_matrix_promotion_family_status
 from src.presentation import render_matrix_promotion_family_status_markdown
 
 
-def test_matrix_promotion_readiness_marks_pea_and_soy_candidate_sets_ready_but_not_externally_unlocked():
-    rows = build_matrix_promotion_family_status([
-        ROOT / "data" / "benchmarks" / "pea_isolate_40C_PratapSingh2021.json",
-        ROOT / "data" / "benchmarks" / "soy_isolate_40C_PratapSingh2021.json",
-        ROOT / "data" / "benchmarks" / "pea_isolate_ribose_cysteine_100C_45min_Internal2026.json",
-        ROOT / "data" / "benchmarks" / "soy_isolate_ribose_cysteine_100C_45min_Internal2026.json",
-    ])
+def test_matrix_promotion_readiness_marks_pea_and_soy_candidate_sets_ready_but_not_externally_unlocked(matrix_promotion_family_rows):
+    rows = matrix_promotion_family_rows
     markdown = render_matrix_promotion_family_status_markdown(rows)
     by_protein = {row.protein_type: row for row in rows}
 

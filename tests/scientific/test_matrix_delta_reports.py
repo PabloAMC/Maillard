@@ -40,13 +40,8 @@ def test_matrix_precursor_augmented_benchmark_exposes_target_snapshots():
     assert "2-Methyl-3-furanthiol (MFT)" in names
 
 
-def test_matrix_benchmark_delta_report_covers_matrix_only_and_meaty_candidates():
-    rows = build_matrix_benchmark_deltas([
-        ROOT / "data" / "benchmarks" / "pea_isolate_40C_PratapSingh2021.json",
-        ROOT / "data" / "benchmarks" / "soy_isolate_40C_PratapSingh2021.json",
-        PEA_MEATY,
-        SOY_MEATY,
-    ])
+def test_matrix_benchmark_delta_report_covers_matrix_only_and_meaty_candidates(matrix_benchmark_delta_rows):
+    rows = matrix_benchmark_delta_rows
     markdown = render_matrix_benchmark_deltas_markdown(rows)
 
     benchmark_ids = {row.benchmark_id for row in rows}

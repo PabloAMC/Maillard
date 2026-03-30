@@ -21,8 +21,7 @@ Output: List[ElementaryStep] — fully compatible with xtb_screener.py
 
 import sys
 from pathlib import Path
-from typing import List, Optional, Set, Tuple
-from functools import lru_cache
+from typing import Dict, List, Optional, Set, Tuple
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -30,6 +29,7 @@ sys.path.insert(0, str(ROOT))
 # Suppress RDKit atom-mapping warnings from SMIRKS rules that use unmapped atoms
 from rdkit import Chem, RDLogger  # noqa: E402
 from rdkit.Chem import AllChem, Descriptors  # noqa: E402
+from rdkit.Chem.rdChemReactions import ChemicalReaction  # noqa: E402
 
 from src.pathway_extractor import Species, ElementaryStep  # noqa: E402
 from src.conditions import ReactionConditions  # noqa: E402
@@ -94,6 +94,46 @@ _SMIRKS_RULES: List[Tuple[str, str, str, str]] = [
         "any",
     ),
 ]
+
+# Pre-compile SMIRKS rules at module load to avoid repeated ReactionFromSmarts() calls
+# in the hot enumerate() loop (eliminates ~5 redundant compilations per rule per call).
+_COMPILED_SMIRKS_RULES: List[Tuple[str, str, ChemicalReaction, str]] = [
+    (name, family, AllChem.ReactionFromSmarts(smirks), gate)
+    for name, family, smirks, gate in _SMIRKS_RULES
+]
+
+# Module-level cache for SmirksEngine.enumerate() results.
+# Key includes canonical precursor pool, max generations, and the full
+# ReactionConditions state so cache hits stay semantically correct as the
+# rule engine grows new condition-sensitive branches.
+_ENUMERATE_CACHE: Dict[tuple, Tuple[ElementaryStep, ...]] = {}
+
+
+def _normalize_cache_value(value):
+    if isinstance(value, float):
+        return round(value, 6)
+    return value
+
+
+def _conditions_cache_key(conditions: ReactionConditions) -> Tuple[Tuple[str, object], ...]:
+    return tuple(
+        sorted((name, _normalize_cache_value(value)) for name, value in vars(conditions).items())
+    )
+
+
+def _clone_species(species: Species) -> Species:
+    return Species(label=species.label, smiles=species.smiles)
+
+
+def _clone_step(step: ElementaryStep) -> ElementaryStep:
+    return ElementaryStep(
+        reactants=[_clone_species(species) for species in step.reactants],
+        products=[_clone_species(species) for species in step.products],
+        reaction_family=step.reaction_family,
+        rate_constant_k=step.rate_constant_k,
+        source_quality=step.source_quality,
+        barrier_uncertainty_kcal=step.barrier_uncertainty_kcal,
+    )
 
 
 # ──────────────────────────────────────────────────────────────────────────
@@ -254,7 +294,7 @@ def _fix_radicals(mol: Chem.Mol, family: str, clear_all: bool = False):
     return mol
 
 def _apply_smirks_rule(
-    name: str, family: str, smirks: str, ph_gate: str,
+    name: str, family: str, rxn: ChemicalReaction, ph_gate: str,
     pool: List[Species], conditions: ReactionConditions
 ) -> List[ElementaryStep]:
     """Apply a single SMIRKS rule to all relevant species pairs in the pool."""
@@ -264,7 +304,6 @@ def _apply_smirks_rule(
     if ph_gate == "neutral" and conditions.pH < 6:
         return []
 
-    rxn = AllChem.ReactionFromSmarts(smirks)
     if rxn is None:
         return []
 
@@ -418,6 +457,19 @@ class SmirksEngine:
         """
         all_steps: List[ElementaryStep] = []
 
+        # Module-level cache: skip re-enumeration for identical precursor pools and conditions.
+        # Return clones so callers cannot mutate shared cached objects.
+        _cache_key = (
+            tuple(sorted(_canonical(s.smiles) for s in precursors if _canonical(s.smiles))),
+            max_generations,
+            _conditions_cache_key(self.conditions),
+        )
+        if _cache_key in _ENUMERATE_CACHE:
+            return [_clone_step(step) for step in _ENUMERATE_CACHE[_cache_key]]
+
+        # O(1) deduplication set — maintained throughout all Tier B and Tier A phases
+        seen_step_keys: Set[str] = set()
+
         # Working pool: canonical SMILES → Species
         pool_dict: dict = {_canonical(s.smiles): s for s in precursors if _canonical(s.smiles)}
 
@@ -436,7 +488,9 @@ class SmirksEngine:
 
         def _add_steps(steps_to_add: List[ElementaryStep]):
             for s in steps_to_add:
-                if not _step_exists(s, all_steps):
+                k = _step_key(s)
+                if k not in seen_step_keys:
+                    seen_step_keys.add(k)
                     all_steps.append(s)
                     add_step_products(s)
 
@@ -462,8 +516,9 @@ class SmirksEngine:
             for amine in amines:
                 cascade = _amadori_cascade(sugar, amine)
                 for step in cascade:
-                    # Dedup by reactant+product labels
-                    if not _step_exists(step, all_steps):
+                    k = _step_key(step)
+                    if k not in seen_step_keys:
+                        seen_step_keys.add(k)
                         all_steps.append(step)
                         add_step_products(step)
 
@@ -474,7 +529,9 @@ class SmirksEngine:
                 if amadori_sp:
                     enols = _enolisation_steps(amadori_sp, sugar, amine, self.conditions)
                     for enol in enols:
-                        if not _step_exists(enol, all_steps):
+                        k = _step_key(enol)
+                        if k not in seen_step_keys:
+                            seen_step_keys.add(k)
                             all_steps.append(enol)
                             add_step_products(enol)
 
@@ -488,9 +545,12 @@ class SmirksEngine:
         for dc in dicarbonyls:
             for amine in amines_now:
                 s_step = _strecker_step(dc, amine)
-                if s_step and not _step_exists(s_step, all_steps):
-                    all_steps.append(s_step)
-                    add_step_products(s_step)
+                if s_step:
+                    k = _step_key(s_step)
+                    if k not in seen_step_keys:
+                        seen_step_keys.add(k)
+                        all_steps.append(s_step)
+                        add_step_products(s_step)
 
         # ── Tier B Phase 3: Secondary Condensations & Eliminations ────────
         # 3a. Beta-elimination (DHA pathway)
@@ -553,15 +613,13 @@ class SmirksEngine:
         _add_steps(cross_steps)
 
         # ── Tier A: SMIRKS rules, iterative ──────────────────────────────
-        seen_step_keys: Set[str] = {_step_key(s) for s in all_steps}
-
         for _gen in range(max_generations):
             new_steps_this_gen = []
             current_pool = pool_list()
 
-            for name, family, smirks, gate in _SMIRKS_RULES:
+            for name, family, rxn, gate in _COMPILED_SMIRKS_RULES:
                 candidates = _apply_smirks_rule(
-                    name, family, smirks, gate, current_pool, self.conditions
+                    name, family, rxn, gate, current_pool, self.conditions
                 )
                 for step in candidates:
                     k = _step_key(step)
@@ -576,6 +634,7 @@ class SmirksEngine:
                 add_step_products(step)
             all_steps.extend(new_steps_this_gen)
 
+        _ENUMERATE_CACHE[_cache_key] = tuple(_clone_step(step) for step in all_steps)
         return all_steps
 
 
@@ -584,11 +643,6 @@ def _step_key(step: ElementaryStep) -> str:
     reacts = tuple(sorted(_canonical(r.smiles) or r.label for r in step.reactants))
     prods = tuple(sorted(_canonical(p.smiles) or p.label for p in step.products))
     return str((reacts, prods))
-
-
-def _step_exists(step: ElementaryStep, existing: List[ElementaryStep]) -> bool:
-    key = _step_key(step)
-    return any(_step_key(s) == key for s in existing)
 
 
 # ──────────────────────────────────────────────────────────────────────────

@@ -81,9 +81,7 @@ from src.benchmark_reporting import (
     build_matrix_benchmark_evidence_audit,
     build_matrix_benchmark_deltas,
     compare_matrix_benchmark_delta_sets,
-    render_matrix_branch_deltas_markdown,
     build_family_lane_validation_artifact,
-    render_family_lane_validation_markdown,
     thermodynamic_gating_materially_improves,
     audit_thermodynamic_gating,
     audit_all_thermodynamic_gating,
@@ -94,6 +92,10 @@ from src.benchmark_reporting import (
     _evaluate_matrix_ranking_contract,
     _enrich_benchmark_summary_family_metadata,
     _benchmark_status_score,
+)
+from src.benchmark_markdown import (
+    render_family_lane_validation_markdown,
+    render_matrix_branch_deltas_markdown,
 )
 
 # ── Assertions ────────────────────────────────────────────────────────────────

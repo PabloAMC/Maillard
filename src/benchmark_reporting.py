@@ -663,41 +663,9 @@ def render_matrix_branch_deltas_markdown(
     *,
     base_ref: str,
 ) -> str:
-    delta_rows = list(rows)
-    lines = [
-        f"# Matrix Benchmark Branch Comparison vs {base_ref}",
-        "",
-        "| Benchmark | Compound | Change | Current Path | Base Path | Current Origin | Base Origin | Current Data Status | Base Data Status | Current Predicted ppb | Base Predicted ppb | Δ Predicted ppb |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: |",
-    ]
-    for row in delta_rows:
-        current_predicted = (
-            f"{row.current_predicted_ppb:.3f}" if row.current_predicted_ppb is not None else "n/a"
-        )
-        baseline_predicted = (
-            f"{row.baseline_predicted_ppb:.3f}" if row.baseline_predicted_ppb is not None else "n/a"
-        )
-        predicted_delta = (
-            f"{row.predicted_delta_ppb:.3f}" if row.predicted_delta_ppb is not None else "n/a"
-        )
-        lines.append(
-            f"| {row.benchmark_id} | {row.compound} | {row.change_type}"
-            f" | {row.current_execution_path} | {row.baseline_execution_path}"
-            f" | {row.current_source_origin} | {row.baseline_source_origin}"
-            f" | {row.current_external_data_status} | {row.baseline_external_data_status}"
-            f" | {current_predicted} | {baseline_predicted} | {predicted_delta} |"
-        )
-    lines.extend(
-        [
-            "",
-            f"Changed rows: {len(delta_rows)}",
-            f"Added rows: {sum(1 for row in delta_rows if row.change_type == 'added')}",
-            f"Removed rows: {sum(1 for row in delta_rows if row.change_type == 'removed')}",
-            f"Modified rows: {sum(1 for row in delta_rows if row.change_type == 'modified')}",
-            f"Metadata-only changes: {sum(1 for row in delta_rows if row.change_type == 'metadata_changed')}",
-        ]
-    )
-    return "\n".join(lines) + "\n"
+    from src.benchmark_markdown import render_matrix_branch_deltas_markdown as _render_matrix_branch_deltas_markdown
+
+    return _render_matrix_branch_deltas_markdown(rows, base_ref=base_ref)
 
 
 # ---------------------------------------------------------------------------
@@ -816,49 +784,6 @@ def build_family_lane_validation_artifact(
             for summary in enriched_summaries
         ],
     }
-
-
-def render_family_lane_validation_markdown(payload: Dict[str, Any]) -> str:
-    lines = [
-        "# Family Lane Validation",
-        "",
-        "| SLR | Family | Posture | Benchmarks | Strict Ready | Supported | Payload Roles | Execution Paths |",
-        "| --- | --- | --- | ---: | ---: | ---: | --- | --- |",
-    ]
-    for row in payload.get("families", []):
-        execution_paths = (
-            ", ".join(f"{key}={value}" for key, value in row.get("execution_paths", {}).items())
-            or "none"
-        )
-        lines.append(
-            f"| {row.get('slr_family', '') or 'n/a'} | {row.get('chemistry_family', 'unknown')}"
-            f" | {row.get('strategic_posture', 'unknown')} | {int(row.get('benchmark_count', 0))}"
-            f" | {int(row.get('strict_ready_count', 0))} | {int(row.get('supported_count', 0))}"
-            f" | {', '.join(str(item) for item in row.get('payload_roles', [])) or 'none'}"
-            f" | {execution_paths} |"
-        )
-    lines.extend([
-        "",
-        "## Lane Summary",
-        "",
-        "| Execution Path | Benchmarks | Strict Ready | Supported | Chemistry Families | Payload Roles |",
-        "| --- | ---: | ---: | ---: | --- | --- |",
-    ])
-    for row in payload.get("lanes", []):
-        lines.append(
-            f"| {row.get('execution_path', 'unknown')} | {int(row.get('benchmark_count', 0))}"
-            f" | {int(row.get('strict_ready_count', 0))} | {int(row.get('supported_count', 0))}"
-            f" | {', '.join(str(item) for item in row.get('chemistry_families', [])) or 'none'}"
-            f" | {', '.join(str(item) for item in row.get('payload_roles', [])) or 'none'} |"
-        )
-    summary = payload.get("summary", {})
-    lines.extend([
-        "",
-        f"Benchmarks summarized: {int(summary.get('benchmark_count', 0))}",
-        f"Chemistry families summarized: {int(summary.get('family_count', 0))}",
-        f"Execution lanes summarized: {int(summary.get('lane_count', 0))}",
-    ])
-    return "\n".join(lines) + "\n"
 
 
 # ---------------------------------------------------------------------------

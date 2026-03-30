@@ -10,14 +10,8 @@ from src.benchmark_validation import build_matrix_observable_closure_audit
 from src.presentation import render_matrix_observable_closure_audit_markdown
 
 
-def test_matrix_observable_closure_audit_labels_transfer_vs_mechanistic_actions():
-    payload = build_matrix_observable_closure_audit([
-        ROOT / "data" / "benchmarks" / "pea_isolate_40C_PratapSingh2021.json",
-        ROOT / "data" / "benchmarks" / "pea_isolate_uht_140C_Trikusuma2019.json",
-        ROOT / "data" / "benchmarks" / "soy_isolate_40C_PratapSingh2021.json",
-        ROOT / "data" / "benchmarks" / "pea_isolate_ribose_cysteine_100C_45min_Internal2026.json",
-        ROOT / "data" / "benchmarks" / "soy_isolate_ribose_cysteine_100C_45min_Internal2026.json",
-    ])
+def test_matrix_observable_closure_audit_labels_transfer_vs_mechanistic_actions(matrix_observable_closure_payload):
+    payload = matrix_observable_closure_payload
 
     by_id = {row["benchmark_id"]: row for row in payload["benchmarks"]}
     pea_candidate = by_id["pea_isolate_ribose_cysteine_100C_45min_Internal2026"]

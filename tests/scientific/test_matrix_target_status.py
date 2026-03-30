@@ -10,13 +10,8 @@ from src.benchmark_validation import build_matrix_target_status_artifact
 from src.presentation import render_matrix_target_status_markdown
 
 
-def test_matrix_target_status_distinguishes_quantitative_from_internal_and_directional_support():
-    payload = build_matrix_target_status_artifact([
-        ROOT / "data" / "benchmarks" / "pea_isolate_40C_PratapSingh2021.json",
-        ROOT / "data" / "benchmarks" / "soy_isolate_40C_PratapSingh2021.json",
-        ROOT / "data" / "benchmarks" / "pea_isolate_ribose_cysteine_100C_45min_Internal2026.json",
-        ROOT / "data" / "benchmarks" / "soy_isolate_ribose_cysteine_100C_45min_Internal2026.json",
-    ])
+def test_matrix_target_status_distinguishes_quantitative_from_internal_and_directional_support(matrix_target_status_payload):
+    payload = matrix_target_status_payload
     by_id = {row["benchmark_id"]: row for row in payload["benchmarks"]}
 
     pea_off = by_id["pea_isolate_40C_PratapSingh2021"]
