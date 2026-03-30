@@ -2,6 +2,17 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 
+from src.input_normalization import normalize_aliases
+
+
+_FORMULATION_INPUT_ALIASES = {
+    "ph": ("PH",),
+    "temperature": ("temp", "TEMP"),
+    "water_activity": ("aw", "AW"),
+    "protein_type": ("protein",),
+    "matrix_type": ("matrix",),
+}
+
 @dataclass
 class Formulation:
     """
@@ -46,31 +57,33 @@ class Formulation:
         Creates a Formulation instance from a dictionary, handling legacy
         key mappings (e.g. 'temp' -> 'temperature', 'aw' -> 'water_activity').
         """
+        normalized = normalize_aliases(data, _FORMULATION_INPUT_ALIASES)
+
         # Extract name (required)
-        name = data.get("name", "unnamed_formulation")
+        name = normalized.get("name", "unnamed_formulation")
         
         # Extract components with fallbacks
-        sugars = list(data.get("sugars", []))
-        amino_acids = list(data.get("amino_acids", []))
-        lipids = list(data.get("lipids", []))
-        additives = list(data.get("additives", []))
-        interventions = list(data.get("interventions", []))
-        molar_ratios = dict(data.get("molar_ratios", {}))
+        sugars = list(normalized.get("sugars", []))
+        amino_acids = list(normalized.get("amino_acids", []))
+        lipids = list(normalized.get("lipids", []))
+        additives = list(normalized.get("additives", []))
+        interventions = list(normalized.get("interventions", []))
+        molar_ratios = dict(normalized.get("molar_ratios", {}))
         
         # Handle legacy condition keys — use None when key not present so pipeline falls back to conditions.pH
-        _ph_raw = data.get("ph", data.get("PH"))
+        _ph_raw = normalized.get("ph")
         ph = float(_ph_raw) if _ph_raw is not None else None
-        temperature = float(data.get("temperature", data.get("temp", data.get("TEMP", 120.0))))
-        water_activity = float(data.get("water_activity", data.get("aw", data.get("AW", 0.8))))
-        time_minutes = float(data.get("time_minutes", 60.0))
+        temperature = float(normalized.get("temperature", 120.0))
+        water_activity = float(normalized.get("water_activity", 0.8))
+        time_minutes = float(normalized.get("time_minutes", 60.0))
         
         # Structural fields
-        catalyst = data.get("catalyst")
-        thiamine_availability = data.get("thiamine_availability")
-        denaturation_state = data.get("denaturation_state")
-        protein_type = data.get("protein_type", data.get("protein", "free"))
-        matrix_type = data.get("matrix_type", data.get("matrix", None))
-        notes = data.get("notes", "")
+        catalyst = normalized.get("catalyst")
+        thiamine_availability = normalized.get("thiamine_availability")
+        denaturation_state = normalized.get("denaturation_state")
+        protein_type = normalized.get("protein_type", "free")
+        matrix_type = normalized.get("matrix_type")
+        notes = normalized.get("notes", "")
         
         return cls(
             name=name,

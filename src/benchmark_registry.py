@@ -199,11 +199,15 @@ def get_matrix_ranking_contract(bench: dict | Path | str) -> Dict[str, Any]:
 # ---------------------------------------------------------------------------
 
 def benchmark_to_conditions(bench: dict) -> ReactionConditions:
+    conditions_payload = bench["conditions"]
     return ReactionConditions(
-        pH=bench["conditions"]["ph"],
-        temperature_celsius=bench["conditions"]["temp_C"],
-        water_activity=bench["conditions"]["water_activity"],
+        pH=conditions_payload["ph"],
+        temperature_celsius=conditions_payload["temp_C"],
+        water_activity=conditions_payload["water_activity"],
         protein_type=bench.get("protein_type", "free"),
+        temperature_profile=conditions_payload.get("temperature_profile"),
+        water_activity_profile=conditions_payload.get("water_activity_profile"),
+        pH_profile=conditions_payload.get("pH_profile"),
     )
 
 

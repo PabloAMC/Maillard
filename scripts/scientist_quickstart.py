@@ -11,9 +11,8 @@ import sys
 import os
 from pathlib import Path
 
-# Add src to path
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.append(str(ROOT))
+sys.path.insert(0, str(ROOT))
 
 # Imports will be handled inside main to ensure sys.path is set
 

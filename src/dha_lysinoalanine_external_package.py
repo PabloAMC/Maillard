@@ -1,29 +1,19 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional
 
+from src.artifact_io import load_json_mapping, repo_root, resolve_optional_path
 from src.extrusion_external_closure import build_extrusion_external_closure_artifact
 
 
-def _repo_root() -> Path:
-    return Path(__file__).resolve().parents[1]
-
-
 DEFAULT_DHA_LYSINOALANINE_EXTERNAL_PACKAGE_CONTRACT = (
-    _repo_root() / "data" / "protocols" / "dha_lysinoalanine_external_package_contract.json"
+    repo_root() / "data" / "protocols" / "dha_lysinoalanine_external_package_contract.json"
 )
 
 
-def _load_json(path: Path) -> Dict[str, Any]:
-    with open(path, "r", encoding="utf-8") as handle:
-        return json.load(handle)
-
-
 def load_dha_lysinoalanine_external_package_contract(file_path: Optional[Path | str] = None) -> Dict[str, Any]:
-    path = Path(file_path) if file_path is not None else DEFAULT_DHA_LYSINOALANINE_EXTERNAL_PACKAGE_CONTRACT
-    return _load_json(path)
+    return load_json_mapping(resolve_optional_path(file_path, DEFAULT_DHA_LYSINOALANINE_EXTERNAL_PACKAGE_CONTRACT))
 
 
 def _unique_preserving_order(items: List[str]) -> List[str]:

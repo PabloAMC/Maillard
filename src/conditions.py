@@ -1,7 +1,36 @@
 from dataclasses import dataclass
-from typing import Optional
+from typing import Iterable, Optional, Tuple
 
 from src.barrier_constants import arrhenius_rate_constant
+
+TimeProfile = Tuple[Tuple[float, float], ...]
+
+
+def _normalize_profile(
+    profile: Optional[Iterable[Tuple[float, float]]],
+    *,
+    name: str,
+) -> Optional[TimeProfile]:
+    if profile is None:
+        return None
+
+    normalized = []
+    previous_time: Optional[float] = None
+    for raw_time, raw_value in profile:
+        time_value = float(raw_time)
+        profile_value = float(raw_value)
+        if time_value < 0.0:
+            raise ValueError(f"{name} cannot contain negative times")
+        if previous_time is not None and time_value <= previous_time:
+            raise ValueError(f"{name} must be strictly increasing without repeated timestamps")
+        normalized.append((time_value, profile_value))
+        previous_time = time_value
+
+    if len(normalized) < 2:
+        raise ValueError(f"{name} must include an initial point and a terminal point")
+    if normalized[0][0] != 0.0:
+        raise ValueError(f"{name} must start at time 0.0 minutes")
+    return tuple(normalized)
 
 @dataclass
 class ReactionConditions:
@@ -18,7 +47,11 @@ class ReactionConditions:
                  solvent_name: str = "water",
                  matrix_fiber: float = 0.0, # Placeholder for blind spot
                  metal_catalyst: Optional[str] = None, # Placeholder for blind spot
-                 protein_type: str = "free"
+                 protein_type: str = "free",
+                 prediction_mode: str = "projection",
+                 temperature_profile: Optional[Iterable[Tuple[float, float]]] = None,
+                 water_activity_profile: Optional[Iterable[Tuple[float, float]]] = None,
+                 pH_profile: Optional[Iterable[Tuple[float, float]]] = None,
                  ):
         self.pH = pH
         self.temperature_celsius = temperature_celsius
@@ -30,6 +63,10 @@ class ReactionConditions:
         self.matrix_fiber = matrix_fiber
         self.metal_catalyst = metal_catalyst
         self.protein_type = protein_type
+        self.prediction_mode = prediction_mode
+        self.temperature_profile = _normalize_profile(temperature_profile, name="temperature_profile")
+        self.water_activity_profile = _normalize_profile(water_activity_profile, name="water_activity_profile")
+        self.pH_profile = _normalize_profile(pH_profile, name="pH_profile")
         self.__post_init__()
 
     def __post_init__(self):
@@ -48,6 +85,46 @@ class ReactionConditions:
     @property
     def temperature_kelvin(self) -> float:
         return self.temperature_celsius + 273.15
+
+    @property
+    def has_dynamic_profile(self) -> bool:
+        return any(
+            profile is not None
+            for profile in (self.temperature_profile, self.water_activity_profile, self.pH_profile)
+        )
+
+    def _interpolate_profile(
+        self,
+        profile: Optional[TimeProfile],
+        time_minutes: Optional[float],
+        fallback: float,
+    ) -> float:
+        if profile is None or time_minutes is None:
+            return float(fallback)
+
+        current_time = float(time_minutes)
+        if current_time <= profile[0][0]:
+            return float(profile[0][1])
+        for (start_time, start_value), (end_time, end_value) in zip(profile, profile[1:]):
+            if current_time <= end_time:
+                span = end_time - start_time
+                if span <= 0.0:
+                    return float(end_value)
+                fraction = (current_time - start_time) / span
+                return float(start_value + fraction * (end_value - start_value))
+        return float(profile[-1][1])
+
+    def temperature_celsius_at(self, time_minutes: Optional[float] = None) -> float:
+        return self._interpolate_profile(self.temperature_profile, time_minutes, self.temperature_celsius)
+
+    def temperature_kelvin_at(self, time_minutes: Optional[float] = None) -> float:
+        return self.temperature_celsius_at(time_minutes) + 273.15
+
+    def water_activity_at(self, time_minutes: Optional[float] = None) -> float:
+        return self._interpolate_profile(self.water_activity_profile, time_minutes, self.water_activity)
+
+    def ph_at(self, time_minutes: Optional[float] = None) -> float:
+        return self._interpolate_profile(self.pH_profile, time_minutes, self.pH)
         
     def _sigmoid(self, x: float, center: float, k: float) -> float:
         """Helper for sigmoid transitions."""
@@ -100,7 +177,12 @@ class ReactionConditions:
                 
         return mult
 
-    def get_rate_constant(self, pathway_type: str, ea_override_kcal: float = None) -> float:
+    def get_rate_constant(
+        self,
+        pathway_type: str,
+        ea_override_kcal: float = None,
+        time_minutes: Optional[float] = None,
+    ) -> float:
         """
         Arrhenius rate constant: k = A * exp(-Ea / RT)
         ea_override_kcal: barrier in kcal/mol from results_db.py
@@ -113,7 +195,7 @@ class ReactionConditions:
         - furfural_formation: 70.0
         - acrylamide_formation: 130.0
         """
-        T_K = self.temperature_kelvin
+        T_K = self.temperature_kelvin_at(time_minutes)
         
         # Ea in kJ/mol
         ACTIVATION_ENERGIES_KJ = {
@@ -140,10 +222,10 @@ class ReactionConditions:
         barrier_kcal = Ea_J / 4184.0
         
         # Apply pH ionization correction
-        ph_factor = self._ionization_correction(pathway_type)
+        ph_factor = self._ionization_correction(pathway_type, pH=self.ph_at(time_minutes))
         
         # Apply water activity correction (Labuza)
-        aw_factor = self._water_activity_correction(pathway_type)
+        aw_factor = self._water_activity_correction(pathway_type, water_activity=self.water_activity_at(time_minutes))
         
         return arrhenius_rate_constant(
             barrier_kcal,
@@ -152,30 +234,31 @@ class ReactionConditions:
             multiplier=ph_factor * aw_factor,
         )
 
-    def _ionization_correction(self, pathway_type: str) -> float:
+    def _ionization_correction(self, pathway_type: str, *, pH: Optional[float] = None) -> float:
         """
         Henderson-Hasselbalch based correction for reactive species ionization.
         Replaces arbitrary sigmoids.
         """
         fam = pathway_type.lower()
+        ph_value = self.pH if pH is None else float(pH)
         # Amine reactions require the deprotonated form (R-NH2)
         if any(x in fam for x in ("amadori", "strecker", "schiff")):
             pKa = 8.0  # Common alpha-amino pKa
-            return 1.0 / (1.0 + 10**(pKa - self.pH))
+            return 1.0 / (1.0 + 10**(pKa - ph_value))
         
         # Pyrazines often peak at slightly alkaline pH
         elif "pyrazine" in fam:
-            return 1.0 / (1.0 + 10**(6.5 - self.pH))
+            return 1.0 / (1.0 + 10**(6.5 - ph_value))
             
         return 1.0
 
-    def _water_activity_correction(self, pathway_type: str) -> float:
+    def _water_activity_correction(self, pathway_type: str, *, water_activity: Optional[float] = None) -> float:
         """
         Correction for water activity effect on Maillard reaction rate.
         Based on Labuza & Saltmarch (1981).
         Rate peaks around aw=0.65, drops at both extremes.
         """
-        aw = self.water_activity
+        aw = self.water_activity if water_activity is None else float(water_activity)
         fam = pathway_type.lower()
         
         if any(x in fam for x in ("amadori", "strecker", "pyrazine")):

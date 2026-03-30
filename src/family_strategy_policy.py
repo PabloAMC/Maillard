@@ -5,10 +5,7 @@ from typing import Any, Dict, List, Mapping
 
 from src.chemistry_family_scope import load_chemistry_family_scope_registry
 from src.family_ingestion_plan import load_family_ingestion_plan
-
-
-def _repo_root() -> Path:
-    return Path(__file__).resolve().parents[1]
+from src.artifact_io import repo_root
 
 
 def _sorted_scope_rows(payload: Mapping[str, Any]) -> List[Dict[str, Any]]:

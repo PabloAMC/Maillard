@@ -128,11 +128,11 @@ def test_validator_reads_candidate_indexed_geometry_assessment(tmp_path):
 
 
 def test_validator_can_build_default_geometry_assessment_when_file_is_not_materialized(monkeypatch, tmp_path):
-    from src import chemistry_benchmark_validator as validator_module
+    from src import artifact_io as aio_module
 
     monkeypatch.setattr(
-        validator_module,
-        "_repo_root",
+        aio_module,
+        "repo_root",
         lambda: ROOT,
     )
 

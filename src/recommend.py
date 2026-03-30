@@ -58,11 +58,29 @@ from src.target_registry import get_toxic_markers, get_desirable_targets, get_of
 
 from data.reactions.curated_pathways import PATHWAYS, PATHWAY_METADATA
 from src.barrier_constants import arrhenius_rate_constant, get_reference_pre_exponential
+from src.conditions import ReactionConditions
 from src.matrix_correction import (
     ProteinType,
     apply_matrix_correction,
 )
+from src.ode_kinetics import simulate_kinetic_trace
 from src.pathway_extractor import Species
+
+
+def _kinetic_observable_for_target(
+    canon: str,
+    kinetic_trace: Any,
+) -> Tuple[float, float, float, str]:
+    final_concentration = float(kinetic_trace.final_concentrations.get(canon, 0.0))
+    peak_concentration = float(kinetic_trace.peak_concentrations.get(canon, final_concentration))
+    integrated_exposure = float(kinetic_trace.integrated_concentrations.get(canon, final_concentration))
+    return final_concentration, peak_concentration, integrated_exposure, "final_concentration"
+
+
+def _raw_concentrations_from_kinetic_trace(
+    kinetic_trace: Any,
+) -> Dict[str, float]:
+    return {canon: float(value) for canon, value in kinetic_trace.final_concentrations.items()}
 
 
 def _trunc(s: str, max_len: int) -> str:
@@ -240,7 +258,11 @@ class Recommender:
                            fat_fraction: float = 0.0,
                            protein_fraction: float = 0.0,
                            process_state: Optional[str] = None,
-                           temp_ramp_csv: Optional[str] = None):
+                           temp_ramp_csv: Optional[str] = None,
+                           prediction_mode: str = "projection",
+                           reaction_conditions: Optional[ReactionConditions] = None,
+                           kinetic_trace: Optional[Any] = None,
+                           kinetic_summary: Optional[Any] = None):
         """
         Dynamically predict active pathways given a list of generated ElementarySteps
         and their computed barriers from xTB or Hammond fallback.
@@ -308,6 +330,29 @@ class Recommender:
                 can = _canon(species.smiles)
                 if can:
                     product_species.add(can)
+
+        kinetic_result = None
+        if kinetic_trace is not None:
+            kinetic_result = kinetic_trace
+        elif prediction_mode == "kinetic":
+            ramp_profile = _load_ramp(temp_ramp_csv) if temp_ramp_csv else None
+            kinetics_conditions = reaction_conditions or ReactionConditions(
+                temperature_celsius=temperature_kelvin - 273.15,
+                water_activity=0.8 if water_activity is None else water_activity,
+                fat_fraction=fat_fraction,
+                protein_fraction=protein_fraction,
+                protein_type=protein_type,
+                prediction_mode="kinetic",
+                temperature_profile=ramp_profile,
+            )
+            kinetic_result = simulate_kinetic_trace(
+                steps,
+                barriers_dict,
+                corrected_initial,
+                kinetics_conditions,
+                float(time_minutes or 0.0),
+            )
+            kinetic_summary = kinetic_result.summary
 
         # tracking dict: canon_smiles -> (span, concentration, depth, weight, uncertainty)
         tracking = {}
@@ -471,19 +516,22 @@ class Recommender:
             time_minutes,
             strategy=projection_strategy,
         )
-        raw_concentrations = _project_weighted_flux_to_ppb(
-            steps,
-            tracking,
-            best_paths,
-            species_catalog,
-            corrected_initial,
-            target_lookup,
-            exogenous_reactants,
-            temperature_kelvin,
-            time_minutes,
-            projection_strategy=projection_strategy,
-            projection_budget=projection_budget,
-        )
+        if kinetic_result is None:
+            raw_concentrations = _project_weighted_flux_to_ppb(
+                steps,
+                tracking,
+                best_paths,
+                species_catalog,
+                corrected_initial,
+                target_lookup,
+                exogenous_reactants,
+                temperature_kelvin,
+                time_minutes,
+                projection_strategy=projection_strategy,
+                projection_budget=projection_budget,
+            )
+        else:
+            raw_concentrations = _raw_concentrations_from_kinetic_trace(kinetic_result)
 
         # Ensure injected targets (e.g. Hexanal from lipid oxidation) are included in raw_concentrations
         for canon, conc in corrected_initial.items():
@@ -547,6 +595,17 @@ class Recommender:
         for p_canon, t_info in active_targets.items():
             _, _, depth, _, _ = tracking.get(p_canon, (0, 0, 0, 0, 0))
             span = tracking[p_canon][0]
+            final_kinetic_conc = 0.0
+            peak_kinetic_conc = 0.0
+            integrated_kinetic_exposure = 0.0
+            selected_observable = "projection"
+            if kinetic_result is not None:
+                (
+                    final_kinetic_conc,
+                    peak_kinetic_conc,
+                    integrated_kinetic_exposure,
+                    selected_observable,
+                ) = _kinetic_observable_for_target(p_canon, kinetic_result)
             
             species = species_catalog.get(p_canon, Species(t_info["name"], p_canon))
             observability = _headspace_observability_metadata(species, target_lookup)
@@ -567,6 +626,9 @@ class Recommender:
                 "threshold": t_info["data"].get("odour_threshold_ug_per_kg", None),
                 "roles": t_info.get("roles", [t_info["type"]]),
                 "projection": projection_metadata.get(p_canon, {}),
+                "peak_concentration": peak_kinetic_conc,
+                "integrated_exposure": integrated_kinetic_exposure,
+                "selected_observable": selected_observable,
                 **observability,
             }
             
@@ -741,7 +803,25 @@ class Recommender:
                 "water_activity": None if water_activity is None else float(water_activity),
                 "volatile_yield_fraction": float(projection_budget.volatile_yield_fraction),
                 "total_volatile_budget_molar": float(projection_budget.total_volatile_budget_molar),
+                "prediction_engine": "time_resolved_microkinetic" if kinetic_result is not None else "path_span_projection",
                 **_projection_strategy_metadata(projection_strategy),
+            },
+            "kinetic_metadata": {
+                "prediction_engine": "time_resolved_microkinetic" if kinetic_result is not None else "path_span_projection",
+                "time_grid_minutes": [] if kinetic_result is None else kinetic_result.time_minutes,
+                "solver": None if kinetic_result is None else kinetic_result.solver,
+                "successful": True if kinetic_result is None else kinetic_result.successful,
+                "tracked_species": 0 if kinetic_result is None else len(kinetic_result.trajectories),
+                "reaction_count": 0 if kinetic_summary is None else int(getattr(kinetic_summary, "reaction_count", 0)),
+                "species_count": 0 if kinetic_summary is None else int(getattr(kinetic_summary, "species_count", 0)),
+                "time_horizon_minutes": 0.0 if kinetic_summary is None else float(getattr(kinetic_summary, "time_horizon_minutes", 0.0)),
+                "used_dynamic_profiles": False if kinetic_summary is None else bool(getattr(kinetic_summary, "used_dynamic_profiles", False)),
+                "used_pruning": False if kinetic_summary is None else bool(getattr(kinetic_summary, "used_pruning", False)),
+                "concentration_floor": None if kinetic_summary is None else float(getattr(kinetic_summary, "concentration_floor", 0.0)),
+                "solver_fallback_used": False if kinetic_summary is None else bool(getattr(kinetic_summary, "solver_fallback_used", False)),
+                "fallback_to_projection": False if kinetic_summary is None else bool(getattr(kinetic_summary, "fallback_to_projection", False)),
+                "fallback_reason": None if kinetic_summary is None else getattr(kinetic_summary, "fallback_reason", None),
+                "observable_surface": "end_state_default",
             },
             "debug_paths": best_paths,
             "species_names": species_name_lookup,

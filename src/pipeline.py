@@ -15,6 +15,7 @@ from src.safety import evaluate_formulation_safety  # noqa: E402
 from src.lipid_oxidation import build_lipid_input_proxy_loads, predict_lop_generation  # noqa: E402
 from src.matrix_correction import build_matrix_explainability, resolve_effective_denaturation_state  # noqa: E402
 from src.literature_runtime import build_family_upstream_contract, build_flavor_axis_summary
+from src.ode_kinetics import simulate_kinetic_trace
 from src.pre_processor import PreProcessor
 from src.projection_metadata import ProjectionMetadataMap
 from src.formulation import Formulation
@@ -306,7 +307,8 @@ class MaillardPipeline:
                 water_activity=form.water_activity,
                 fat_fraction=global_conditions.fat_fraction,
                 protein_fraction=global_conditions.protein_fraction,
-                protein_type=protein_type
+                protein_type=protein_type,
+                prediction_mode=getattr(global_conditions, "prediction_mode", "projection"),
             )
             
             # FAST mode heuristic barrier overrides
@@ -412,6 +414,27 @@ class MaillardPipeline:
                 initial_concentrations[_canon(lop_smi)] = initial_concentrations.get(_canon(lop_smi), 0.0) + lop_conc
                 
             recommender = Recommender()
+            kinetic_trace = None
+            kinetic_summary = None
+            prediction_mode = getattr(cond, "prediction_mode", "projection")
+            if prediction_mode == "kinetic":
+                kinetic_run = simulate_kinetic_trace(
+                    steps,
+                    heuristic_barriers,
+                    initial_concentrations,
+                    cond,
+                    float(form.time_minutes or 0.0),
+                )
+                if kinetic_run.summary.fallback_to_projection:
+                    logging.getLogger(__name__).warning(
+                        "Kinetic mode fell back to projection for %s: %s",
+                        name,
+                        kinetic_run.summary.fallback_reason,
+                    )
+                    prediction_mode = "projection"
+                else:
+                    kinetic_trace = kinetic_run
+                    kinetic_summary = kinetic_run.summary
             rec_result = recommender.predict_from_steps(
                 steps, 
                 heuristic_barriers, 
@@ -423,6 +446,10 @@ class MaillardPipeline:
                 denaturation_state=denaturation_state,
                 fat_fraction=cond.fat_fraction,
                 protein_fraction=cond.protein_fraction,
+                prediction_mode=prediction_mode,
+                reaction_conditions=cond,
+                kinetic_trace=kinetic_trace,
+                kinetic_summary=kinetic_summary,
             )
             
             # Score against tags
@@ -528,6 +555,10 @@ class MaillardPipeline:
                         else "estimated_from_conditions"
                     ),
                 ),
+                confidence_metadata={
+                    "prediction_engine": rec_result.get("kinetic_metadata", {}).get("prediction_engine", "path_span_projection"),
+                    "kinetics": rec_result.get("kinetic_metadata", {}),
+                },
                 targets=rec_result.get("targets", []),
                 bottleneck_precursor=rec_result["metrics"].get("bottleneck", {}).get("precursor", "none"),
                 bottleneck_severity=rec_result["metrics"].get("bottleneck", {}).get("severity", 0.0),

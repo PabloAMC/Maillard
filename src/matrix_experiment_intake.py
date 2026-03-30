@@ -7,6 +7,7 @@ from typing import Any, Dict, Iterable, Mapping, Optional
 
 import yaml
 
+from src.artifact_io import load_json_mapping, resolve_optional_path
 from src.benchmark_validation import (
     DEFAULT_TARGET_TAG,
     _matrix_compound_support_status,
@@ -38,9 +39,7 @@ _SUPPORT_RANK = {
 
 
 def load_matrix_experiment_intake_schema(path: Optional[Path | str] = None) -> Dict[str, Any]:
-    schema_path = Path(path) if path is not None else DEFAULT_SCHEMA_PATH
-    with open(schema_path, "r", encoding="utf-8") as handle:
-        return json.load(handle)
+    return load_json_mapping(resolve_optional_path(path, DEFAULT_SCHEMA_PATH))
 
 
 def load_matrix_experiment_intake(path: Path | str) -> Dict[str, Any]:

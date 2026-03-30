@@ -1,21 +1,17 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional
 
-
-def _repo_root() -> Path:
-    return Path(__file__).resolve().parents[1]
+from src.artifact_io import load_json_mapping, repo_root
 
 
-DEFAULT_MATRIX_FAMILY_COVERAGE_REGISTRY = _repo_root() / "data" / "lit" / "matrix_family_coverage_registry.json"
+DEFAULT_MATRIX_FAMILY_COVERAGE_REGISTRY = repo_root() / "data" / "lit" / "matrix_family_coverage_registry.json"
 
 
 def load_matrix_family_coverage_registry(file_path: Optional[Path | str] = None) -> Dict[str, Any]:
     path = Path(file_path) if file_path is not None else DEFAULT_MATRIX_FAMILY_COVERAGE_REGISTRY
-    with open(path, "r", encoding="utf-8") as handle:
-        return json.load(handle)
+    return load_json_mapping(path)
 
 
 def _support_class(row: Mapping[str, Any]) -> str:

@@ -57,15 +57,100 @@ Evolve the Maillard framework from a static, heuristic-heavy decision surface in
 ## Priority 1 — Time-Resolved Microkinetics (The Major Scientific Upgrade)
 **Goal:** Transition core prediction to a true time-resolved ODE engine.
 
-- [ ] **1.1 Wire ODE solver into `pipeline.py`** — **[L4 | Claude 4.6]**
+- [x] **1.1 Wire ODE solver into `pipeline.py`** — **[L4 | Claude 4.6 | Done 2026-03-30]**
   - Implement `src/ode_kinetics.py` using `scipy.integrate.solve_ivp` to propagate species concentrations through time given the SMIRKS-enumerated reaction graph and computed barriers.
   - Implement a `mode="kinetic"` flag in the main pipeline that routes to the ODE solver instead of the budget-projection heuristic.
   - Bridge `smirks_engine.py` outputs into the ODE rate matrix dynamically.
-- [ ] **1.2 Expose Temporal Dynamics in `recommend.py`** — **[L4 | Claude 4.6]**
+- [x] **1.2 Expose Temporal Dynamics in `recommend.py`** — **[L4 | Claude 4.6 | Done 2026-03-30]**
   - Update `predict_from_steps` to accept optional pre-computed ODE time-series if provided.
   - Capture peak vs. plateau states for key markers from ODE output.
-- [ ] **1.3 Dynamic Temperature & Moisture** — **[L3 | Claude 3.5]**
+- [x] **1.3 Dynamic Temperature & Moisture** — **[L3 | Claude 3.5 | Done 2026-03-30]**
   - Allow `ReactionConditions` to accept time-temperature arrays for extrusion history.
+
+### P1 Detailed Implementation Plan — 30 March 2026
+
+#### 1.1 Contracts First: define the kinetic data model before changing pipeline behavior
+- [x] Create `src/ode_kinetics.py` with explicit typed contracts instead of ad hoc dict plumbing.
+- [x] Add `SpeciesState`, `ReactionChannel`, `KineticTrace`, and `KineticRunSummary` dataclasses.
+- [x] Standardize species identity on canonical SMILES while preserving the existing `Species.label` for reporting.
+- [x] Define one stoichiometric reaction channel per `ElementaryStep` with:
+  - reactant indices and product indices
+  - stoichiometric coefficients
+  - `reaction_family`
+  - barrier / uncertainty / source metadata
+  - precomputed base rate constant at reference conditions
+- [x] Keep the first version strictly mass-action and irreversible; do not introduce reversible fitting, activity coefficients, or radical micro-balance extras in the first slice.
+
+#### 1.2 Constant-condition solver: ship the smallest useful kinetic engine first
+- [x] Build a species index from the `SmirksEngine.enumerate()` output and initial precursor concentrations.
+- [x] Translate each `ElementaryStep` into a stoichiometric column and a rate law of the form `k * Π [reactant]^n`.
+- [x] Use `ReactionConditions.get_rate_constant(...)` as the single route from barrier → environment-adjusted rate constant so the kinetic lane reuses the same chemistry assumptions as the heuristic lane.
+- [x] Start with constant `temperature_celsius`, `pH`, and `water_activity`; defer dynamic profiles to 1.3.
+- [x] Solve with `solve_ivp`; prefer `BDF` as the default stiff solver, with an escape hatch to `RK45` for debugging.
+- [x] Return dense `t_eval` traces plus final, peak, and time-integrated concentrations for each species.
+- [x] Add concentration floor clipping and species sparsity pruning so the solver stays stable on large enumerations.
+
+#### 1.3 Pipeline integration: add the kinetic lane without regressing the default path
+- [x] Add an opt-in pipeline mode such as `prediction_mode="projection" | "kinetic"`; keep the current heuristic path as the default until validation is complete.
+- [x] In `pipeline.py`, branch after step enumeration and barrier lookup:
+  - `projection` mode keeps the current `recommend.predict_from_steps(...)`
+  - `kinetic` mode runs `ode_kinetics` and forwards the resulting trace package to the recommender/reporting layers
+- [x] Preserve the existing `FormulationResult` contract so CLI, reporting, and tests do not fork on object shape.
+- [x] Surface kinetic metadata in the result object explicitly:
+  - solver name and success flag
+  - simulated time horizon
+  - species count and reaction count
+  - whether any pruning / concentration floor / solver fallback was applied
+- [x] Add a fast-path guard: if enumeration is empty or no valid rate constants can be constructed, fall back to the current projection path with a warning.
+
+#### 1.4 `recommend.py`: translate kinetic traces into flavor-relevant outputs
+- [x] Extend `predict_from_steps(...)` with an optional `kinetic_trace` / `kinetic_summary` input instead of recomputing kinetic state internally.
+- [x] Define explicit observable surfaces per target compound:
+  - final concentration at process end
+  - peak concentration across the trajectory
+  - time-above-threshold or integrated exposure for transient markers
+- [x] Decide target-by-target which observable drives recommendation scoring in v1; default to end-state concentration unless a compound is known to be transient-sensitive.
+- [x] Reuse existing target canonicalization and projection metadata logic so kinetic mode and projection mode remain comparable in downstream reports.
+- [x] Keep the current ranking schema and radar outputs intact; only change the underlying concentration source when `prediction_mode="kinetic"`.
+
+#### 1.5 Dynamic profiles: temperature and moisture should be functions of time, not scalar afterthoughts
+- [x] Extend `ReactionConditions` with optional time-profile inputs:
+  - `temperature_profile`
+  - `water_activity_profile`
+  - optional `pH_profile` placeholder, but do not wire pH dynamics until the first two are validated
+- [x] Implement a lightweight interpolation helper that returns condition values at arbitrary solver time `t`.
+- [x] Recompute rate constants inside the ODE RHS from the instantaneous conditions, not from a static upfront `k` table, when a profile is present.
+- [x] Keep profile support opt-in; scalar conditions should still use the cheaper constant-condition solver branch.
+- [x] Add guardrails for malformed profiles: unsorted times, repeated timestamps, negative durations, or missing terminal points.
+
+#### 1.6 Validation ladder: prove correctness before broad rollout
+- [x] Add unit tests for `ode_kinetics.py` on toy systems:
+  - `A -> B` monotonic decay / growth
+  - parallel channels with known closed-form ordering
+  - zero-initial-concentration species remain zero
+  - concentration non-negativity and mass-conservation checks on simple stoichiometric systems
+- [x] Add integration tests that run the existing Maillard pipeline in `prediction_mode="kinetic"` on one free-precursor and one matrix benchmark.
+- [x] Add regression tests that prove `prediction_mode="projection"` remains numerically unchanged.
+- [x] Add a directional validation test against the existing temporal / Cantera references where only trend agreement is required in v1.
+- [x] Add performance tests or at least timing assertions for small benchmark sets so the kinetic lane does not silently become unusable.
+
+#### 1.7 Rollout and risk control
+- [x] Phase 1 rollout: hidden / opt-in kinetic mode for tests and notebooks only.
+- [x] Phase 2 rollout: expose kinetic mode in CLI once benchmark-direction tests pass.
+- [x] Phase 3 rollout: decide whether kinetic mode replaces the current projection path for selected process states.
+- [x] Track known technical risks explicitly:
+  - stiff systems with many near-zero species
+  - species explosion from large SMIRKS enumerations
+  - uncertainty propagation from heuristic barriers into unstable kinetic rankings
+  - mismatch between transient kinetic peaks and current end-state-oriented recommendation surfaces
+- [x] Do not attempt full uncertainty propagation, reversible equilibria, or parameter fitting in the first P1 slice; those are follow-on tasks once the forward solver is stable.
+
+#### Suggested execution order
+- [x] P1-A: implement contracts + constant-condition solver + toy tests.
+- [x] P1-B: wire `pipeline.py` behind `prediction_mode="kinetic"` and keep projection default.
+- [x] P1-C: extend `recommend.py` to consume kinetic traces and expose end-state + peak-state outputs.
+- [x] P1-D: add dynamic temperature / moisture profiles.
+- [x] P1-E: benchmark, validate against temporal references, and decide rollout posture.
 
 ---
 

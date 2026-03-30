@@ -1,30 +1,21 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional
 
-
-def _repo_root() -> Path:
-    return Path(__file__).resolve().parents[1]
+from src.artifact_io import load_json_mapping, repo_root, resolve_optional_path
 
 
-DEFAULT_EXTRUSION_EXTERNAL_CLOSURE_CONTRACT = _repo_root() / "data" / "protocols" / "extrusion_external_closure_contract.json"
-PROCESS_STATE_CALIBRATIONS = _repo_root() / "data" / "lit" / "process_state_calibrations.json"
-
-
-def _load_json(path: Path) -> Dict[str, Any]:
-    with open(path, "r", encoding="utf-8") as handle:
-        return json.load(handle)
+DEFAULT_EXTRUSION_EXTERNAL_CLOSURE_CONTRACT = repo_root() / "data" / "protocols" / "extrusion_external_closure_contract.json"
+PROCESS_STATE_CALIBRATIONS = repo_root() / "data" / "lit" / "process_state_calibrations.json"
 
 
 def load_extrusion_external_closure_contract(file_path: Optional[Path | str] = None) -> Dict[str, Any]:
-    path = Path(file_path) if file_path is not None else DEFAULT_EXTRUSION_EXTERNAL_CLOSURE_CONTRACT
-    return _load_json(path)
+    return load_json_mapping(resolve_optional_path(file_path, DEFAULT_EXTRUSION_EXTERNAL_CLOSURE_CONTRACT))
 
 
 def _process_state_lookup() -> Dict[str, Mapping[str, Any]]:
-    payload = _load_json(PROCESS_STATE_CALIBRATIONS)
+    payload = load_json_mapping(PROCESS_STATE_CALIBRATIONS)
     return {
         str(row.get("id", "")).strip(): row
         for row in payload.get("entries", [])

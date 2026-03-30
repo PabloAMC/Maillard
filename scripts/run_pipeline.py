@@ -9,10 +9,11 @@ current pipeline/reporting stack.
 
 import sys
 import argparse
+import csv
+from copy import deepcopy
 from pathlib import Path
 from typing import Dict, List, Any
 
-# Add project root
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
@@ -35,6 +36,17 @@ from src.presentation import (  # noqa: E402
     render_deep_explainability_cli,
 )
 from src.reporting import generate_report  # noqa: E402
+
+
+def _load_profile_csv(path: str, *, value_column: str) -> list[tuple[float, float]]:
+    rows: list[tuple[float, float]] = []
+    with open(path, "r", encoding="utf-8") as handle:
+        reader = csv.DictReader(handle)
+        if "time" not in (reader.fieldnames or []) or value_column not in (reader.fieldnames or []):
+            raise ValueError(f"Profile CSV must contain 'time' and '{value_column}' columns")
+        for row in reader:
+            rows.append((float(row["time"]), float(row[value_column])))
+    return rows
 
 
 def _formulation_to_dict(formulation: Any) -> Dict[str, Any]:
@@ -111,6 +123,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--xtb", action="store_true", help="Run full GFN2-xTB structural optimizations (SLOW!). Defaults to fast Hammond estimating.")
     parser.add_argument("--protein-type", choices=["free", "pea_conc", "pea_iso", "soy_conc", "soy_iso", "myco"], default=DEFAULTS.default_protein_type, help="Protein matrix type for accessibility corrections.")
     parser.add_argument("--denaturation-state", type=float, default=DEFAULTS.default_denaturation_state, help="Protein denaturation level (0.0 to 1.0). Default 0.5.")
+    parser.add_argument("--prediction-mode", choices=["projection", "kinetic"], default="projection", help="Prediction engine to use. Projection stays the default; kinetic runs the ODE microkinetic lane.")
+    parser.add_argument("--temp-ramp-csv", type=str, default=None, help="Optional CSV with columns time,temp defining a temperature profile in minutes and Celsius.")
+    parser.add_argument("--water-activity-profile-csv", type=str, default=None, help="Optional CSV with columns time,water_activity defining a dynamic water-activity profile.")
     parser.add_argument("--list-precursors", action="store_true", help="List available precursors and exit")
     parser.add_argument("--list-tags", action="store_true", help="List available sensory tags and exit")
     parser.add_argument("--report", action="store_true", help="Generate consolidated JSON/Markdown report")
@@ -137,7 +152,7 @@ def output_decision_summary_and_reports(
         aw=float(formulation.get("aw", conditions.water_activity)),
         matrix_explainability=res.matrix_explainability,
     )
-    res.confidence_metadata = build_confidence_package(
+    confidence_payload = build_confidence_package(
         res,
         warnings,
         precursor_names=precursor_names,
@@ -146,6 +161,10 @@ def output_decision_summary_and_reports(
         baseline_conditions=conditions,
         designer=designer,
     )
+    if res.confidence_metadata:
+        confidence_payload["prediction_engine"] = res.confidence_metadata.get("prediction_engine", "path_span_projection")
+        confidence_payload["kinetics"] = deepcopy(res.confidence_metadata.get("kinetics", {}))
+    res.confidence_metadata = confidence_payload
 
     render_decision_summary_cli(res, warnings)
     render_deep_explainability_cli(res)
@@ -343,6 +362,15 @@ def main() -> None:
         temperature_celsius=args.temp,
         water_activity=args.aw,
         protein_type=args.protein_type,
+        prediction_mode=args.prediction_mode,
+        temperature_profile=(
+            _load_profile_csv(args.temp_ramp_csv, value_column="temp") if args.temp_ramp_csv else None
+        ),
+        water_activity_profile=(
+            _load_profile_csv(args.water_activity_profile_csv, value_column="water_activity")
+            if args.water_activity_profile_csv
+            else None
+        ),
     )
 
     if args.target:

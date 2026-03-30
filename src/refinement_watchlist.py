@@ -1,7 +1,9 @@
 from __future__ import annotations
 
+from copy import deepcopy
 import math
 from collections import defaultdict
+from functools import lru_cache
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
 
@@ -19,6 +21,11 @@ from src.dft_refinement_contract import DFTTargetCandidate, build_offline_dft_jo
 from src.precursor_resolver import resolve_many
 from src.results_db import ResultsDB
 from src.smirks_engine import SmirksEngine
+
+
+def _benchmark_cache_key(benchmark_files: Optional[Iterable[Path | str]]) -> tuple[str, ...]:
+    files = list(benchmark_files) if benchmark_files is not None else get_benchmark_files()
+    return tuple(str(Path(file_path).resolve()) for file_path in files)
 
 
 def _approved_geom_preopt_candidates() -> List[str]:
@@ -91,12 +98,12 @@ def _enumerate_benchmark_steps(bench: dict) -> List[Any]:
     return SmirksEngine(conditions).enumerate(precursors, max_generations=4)
 
 
-def build_refinement_watchlist(
-    benchmark_files: Optional[Iterable[Path | str]] = None,
-    *,
-    target_tag: str = DEFAULT_TARGET_TAG,
+@lru_cache(maxsize=8)
+def _build_refinement_watchlist_cached(
+    benchmark_file_keys: tuple[str, ...],
+    target_tag: str,
 ) -> Dict[str, Any]:
-    bench_files = list(benchmark_files) if benchmark_files is not None else get_benchmark_files()
+    bench_files = [Path(file_path) for file_path in benchmark_file_keys]
     db = ResultsDB()
     family_rows: Dict[str, Dict[str, Any]] = {}
     approved_geom_candidates = _approved_geom_preopt_candidates()
@@ -234,6 +241,14 @@ def build_refinement_watchlist(
         "candidates": candidates,
         "offline_jobs": offline_jobs,
     }
+
+
+def build_refinement_watchlist(
+    benchmark_files: Optional[Iterable[Path | str]] = None,
+    *,
+    target_tag: str = DEFAULT_TARGET_TAG,
+) -> Dict[str, Any]:
+    return deepcopy(_build_refinement_watchlist_cached(_benchmark_cache_key(benchmark_files), target_tag))
 
 
 def render_refinement_watchlist_markdown(payload: Dict[str, Any]) -> str:

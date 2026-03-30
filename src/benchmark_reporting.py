@@ -9,8 +9,10 @@ resolution, or raw prediction logic lives here.
 """
 from __future__ import annotations
 
+from copy import deepcopy
 import math
 from collections import defaultdict
+from functools import lru_cache
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Optional
 
@@ -34,6 +36,11 @@ from src.benchmark_registry import (
     get_matrix_ranking_contract,
     load_benchmark,
 )
+
+
+def _benchmark_cache_key(benchmark_files: Optional[Iterable[Path | str]]) -> tuple[str, ...]:
+    files = list(benchmark_files) if benchmark_files is not None else get_benchmark_files()
+    return tuple(str(Path(file_path).resolve()) for file_path in files)
 from src.benchmark_evaluator import (
     evaluate_benchmark,
     _best_prediction_match,
@@ -1143,12 +1150,12 @@ def _matrix_promotion_blocker(
     return "none"
 
 
-def build_matrix_target_status_artifact(
-    benchmark_files: Optional[Iterable[Path | str]] = None,
-    *,
-    target_tag: str = DEFAULT_TARGET_TAG,
+@lru_cache(maxsize=8)
+def _build_matrix_target_status_artifact_cached(
+    benchmark_file_keys: tuple[str, ...],
+    target_tag: str,
 ) -> Dict[str, Any]:
-    bench_files = list(benchmark_files) if benchmark_files is not None else get_benchmark_files()
+    bench_files = [Path(file_path) for file_path in benchmark_file_keys]
     benchmark_rows: List[Dict[str, Any]] = []
     support_totals = {
         "quantitative_closed": 0,
@@ -1310,6 +1317,14 @@ def build_matrix_target_status_artifact(
             **support_totals,
         },
     }
+
+
+def build_matrix_target_status_artifact(
+    benchmark_files: Optional[Iterable[Path | str]] = None,
+    *,
+    target_tag: str = DEFAULT_TARGET_TAG,
+) -> Dict[str, Any]:
+    return deepcopy(_build_matrix_target_status_artifact_cached(_benchmark_cache_key(benchmark_files), target_tag))
 
 
 # ---------------------------------------------------------------------------
@@ -1511,12 +1526,13 @@ def _mechanistic_refinement_expected_change(compound_rows: Iterable[Mapping[str,
     return "clarify whether named mechanistic blockers materially change benchmark readiness before broader retuning"
 
 
-def build_matrix_observable_closure_audit(
-    benchmark_files: Optional[Iterable[Path | str]] = None,
-    *,
-    target_tag: str = DEFAULT_TARGET_TAG,
+@lru_cache(maxsize=8)
+def _build_matrix_observable_closure_audit_cached(
+    benchmark_file_keys: tuple[str, ...],
+    target_tag: str,
 ) -> Dict[str, Any]:
-    status_payload = build_matrix_target_status_artifact(benchmark_files, target_tag=target_tag)
+    benchmark_files = [Path(file_path) for file_path in benchmark_file_keys]
+    status_payload = _build_matrix_target_status_artifact_cached(benchmark_file_keys, target_tag)
     evidence_rows = build_matrix_benchmark_evidence_audit(benchmark_files)
     evidence_lookup = {row.benchmark_id: row for row in evidence_rows}
     selected_target = _select_matrix_promotion_target(status_payload.get("benchmarks", []), evidence_rows)
@@ -1581,3 +1597,11 @@ def build_matrix_observable_closure_audit(
             "closure_action_counts": dict(sorted(action_counts.items())),
         },
     }
+
+
+def build_matrix_observable_closure_audit(
+    benchmark_files: Optional[Iterable[Path | str]] = None,
+    *,
+    target_tag: str = DEFAULT_TARGET_TAG,
+) -> Dict[str, Any]:
+    return deepcopy(_build_matrix_observable_closure_audit_cached(_benchmark_cache_key(benchmark_files), target_tag))

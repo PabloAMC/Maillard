@@ -7,12 +7,10 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Optional
 
+from src.artifact_io import repo_root
+
 
 SKIP_LINE_PATTERN = re.compile(r"^SKIPPED \[(?P<count>\d+)\] (?P<path>.+?):(?P<line>\d+): (?P<reason>.+)$")
-
-
-def _repo_root() -> Path:
-    return Path(__file__).resolve().parents[1]
 
 
 def _classify_dependency(reason: str, path: str) -> str:
@@ -70,12 +68,12 @@ def _unblock_criteria(dependency_class: str, lane: str) -> str:
 
 
 def run_skip_scan(test_targets: Optional[Iterable[str]] = None) -> Dict[str, Any]:
-    repo_root = _repo_root()
+    root = repo_root()
     targets = list(test_targets or ["tests/benchmarks", "tests/qm"])
     command = [sys.executable, "-m", "pytest", *targets, "-rs", "-q"]
     result = subprocess.run(
         command,
-        cwd=repo_root,
+        cwd=root,
         capture_output=True,
         text=True,
         check=False,

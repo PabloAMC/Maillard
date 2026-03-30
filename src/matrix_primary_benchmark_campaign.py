@@ -9,13 +9,10 @@ from src.benchmark_validation import (
     build_matrix_promotion_contract_artifact,
 )
 from src.hexanal_nonanal_calibration import build_hexanal_nonanal_calibration_artifact
+from src.artifact_io import repo_root
 
 
-def _repo_root() -> Path:
-    return Path(__file__).resolve().parents[1]
-
-
-DEFAULT_PRIMARY_BENCHMARK_CONTRACT = _repo_root() / "data" / "protocols" / "ppi_spi_primary_benchmark_contract.json"
+DEFAULT_PRIMARY_BENCHMARK_CONTRACT = repo_root() / "data" / "protocols" / "ppi_spi_primary_benchmark_contract.json"
 
 
 def load_primary_benchmark_contract(file_path: Optional[Path | str] = None) -> Dict[str, Any]:

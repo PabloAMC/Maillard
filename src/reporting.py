@@ -19,6 +19,7 @@ from pathlib import Path
 from typing import List, Dict, Any, Optional, Iterable
 
 from src.pipeline import FormulationResult
+from src.artifact_io import repo_root
 from src.literature_learning_loop import build_literature_learning_loop_payload
 from src.family_lane_sensitivity import build_family_lane_sensitivity_payload
 from src.literature_family_registry import build_family_payload_coverage_artifact, resolve_family_descriptor
@@ -517,10 +518,6 @@ def build_family_role_explanation(result: FormulationResult) -> Dict[str, Any]:
     }
 
 
-def _repo_root() -> Path:
-    return Path(__file__).resolve().parents[1]
-
-
 def _to_repo_relative(path: Path, root: Path) -> str:
     try:
         return str(path.resolve().relative_to(root.resolve()))
@@ -666,8 +663,8 @@ def _build_scientific_surface(root: Path) -> Dict[str, str]:
 
 
 def _build_literature_evidence_summary(root: Optional[Path] = None) -> Dict[str, Any]:
-    repo_root = root or _repo_root()
-    intake_path = repo_root / "data" / "lit" / "benchmark_intake_registry.json"
+    repo_root_dir = root or repo_root()
+    intake_path = repo_root_dir / "data" / "lit" / "benchmark_intake_registry.json"
     if not intake_path.exists():
         return {}
 
@@ -689,7 +686,7 @@ def _build_literature_evidence_summary(root: Optional[Path] = None) -> Dict[str,
             modules[str(module)] += 1
 
     return {
-        "source": _to_repo_relative(intake_path, repo_root),
+        "source": _to_repo_relative(intake_path, repo_root_dir),
         "eligible_reference_count": len(eligible),
         "ready_reference_count": len(ready_refs),
         "closable_without_primary_data_count": len(no_primary_data_refs),
@@ -703,8 +700,8 @@ def _build_literature_evidence_summary(root: Optional[Path] = None) -> Dict[str,
 
 
 def _build_literature_learning_loop_summary(root: Optional[Path] = None) -> Dict[str, Any]:
-    repo_root = root or _repo_root()
-    payload = build_literature_learning_loop_payload(repo_root)
+    repo_root_dir = root or repo_root()
+    payload = build_literature_learning_loop_payload(repo_root_dir)
     return dict(payload.get("summary", {}))
 
 

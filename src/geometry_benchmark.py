@@ -5,12 +5,10 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional
 
-
-def _repo_root() -> Path:
-    return Path(__file__).resolve().parents[1]
+from src.artifact_io import repo_root
 
 
-DEFAULT_GEOMETRY_BENCHMARK_FILE = _repo_root() / "data" / "lit" / "geometry_benchmark_set.json"
+DEFAULT_GEOMETRY_BENCHMARK_FILE = repo_root() / "data" / "lit" / "geometry_benchmark_set.json"
 
 
 @dataclass(frozen=True)

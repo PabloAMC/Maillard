@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-import json
 import math
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Optional
 
+from src.artifact_io import load_optional_json_mapping
 from src.family_ingestion_plan import load_family_ingestion_plan
 from src.literature_family_registry import (
     iter_computational_prior_entries as iter_family_computational_prior_entries,
@@ -21,11 +21,7 @@ DATA_LIT_DIR = ROOT / "data" / "lit"
 
 
 def _load_json_payload(file_name: str) -> dict[str, Any]:
-    payload_path = DATA_LIT_DIR / file_name
-    if not payload_path.exists():
-        return {}
-    with open(payload_path, "r", encoding="utf-8") as handle:
-        return json.load(handle)
+    return load_optional_json_mapping(DATA_LIT_DIR / file_name)
 
 
 FLAVOR_REFERENCE_PAYLOADS = _load_json_payload("flavor_reference_payloads.json")
@@ -67,9 +63,7 @@ _RUNTIME_LANE_PRIOR_REGISTRY = {
 }
 
 
-def _normalize_name(name: str) -> str:
-    normalized = str(name).lower().replace("_", " ").replace("-", " ")
-    return " ".join(normalized.split())
+from src.text_utils import normalize_name_spaced as _normalize_name
 
 
 def _sigmoid(value: float, center: float, width: float) -> float:

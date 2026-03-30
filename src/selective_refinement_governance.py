@@ -1,11 +1,19 @@
 from __future__ import annotations
 
+from copy import deepcopy
+from functools import lru_cache
 from typing import Any, Dict, Iterable, List, Mapping, Optional
 from pathlib import Path
 
 from src.benchmark_validation import DEFAULT_TARGET_TAG, build_matrix_observable_closure_audit
 from src.refinement_campaign import build_cheap_screening_artifact, build_selective_dft_plan
 from src.refinement_watchlist import build_refinement_watchlist
+
+
+def _benchmark_cache_key(benchmark_files: Optional[Iterable[Path | str]]) -> tuple[str, ...]:
+    if benchmark_files is None:
+        return tuple()
+    return tuple(str(Path(file_path).resolve()) for file_path in benchmark_files)
 
 
 def _watchlist_lookup(payload: Mapping[str, Any]) -> Dict[str, Mapping[str, Any]]:
@@ -16,11 +24,12 @@ def _watchlist_lookup(payload: Mapping[str, Any]) -> Dict[str, Mapping[str, Any]
     }
 
 
-def build_selective_refinement_governance_artifact(
-    benchmark_files: Optional[Iterable[Path | str]] = None,
-    *,
-    target_tag: str = DEFAULT_TARGET_TAG,
+@lru_cache(maxsize=8)
+def _build_selective_refinement_governance_artifact_cached(
+    benchmark_file_keys: tuple[str, ...],
+    target_tag: str,
 ) -> Dict[str, Any]:
+    benchmark_files = [Path(file_path) for file_path in benchmark_file_keys] if benchmark_file_keys else None
     closure_audit = build_matrix_observable_closure_audit(benchmark_files, target_tag=target_tag)
     cheap_payload = build_cheap_screening_artifact(benchmark_files, target_tag=target_tag)
     dft_payload = build_selective_dft_plan(benchmark_files, target_tag=target_tag)
@@ -130,6 +139,14 @@ def build_selective_refinement_governance_artifact(
         "mechanistic_priority_benchmarks": benchmark_rows,
         "approved_offline_jobs": approved_jobs,
     }
+
+
+def build_selective_refinement_governance_artifact(
+    benchmark_files: Optional[Iterable[Path | str]] = None,
+    *,
+    target_tag: str = DEFAULT_TARGET_TAG,
+) -> Dict[str, Any]:
+    return deepcopy(_build_selective_refinement_governance_artifact_cached(_benchmark_cache_key(benchmark_files), target_tag))
 
 
 def render_selective_refinement_governance_markdown(payload: Mapping[str, Any]) -> str:

@@ -1,30 +1,20 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 from typing import Any, Dict, Mapping, Optional
 
+from src.artifact_io import load_json_mapping, repo_root, resolve_optional_path
 from src.matrix_primary_benchmark_campaign import build_matrix_primary_benchmark_campaign_artifact
 from src.pea_soy_external_evidence import build_pea_soy_external_evidence_artifact
 
 
-def _repo_root() -> Path:
-    return Path(__file__).resolve().parents[1]
-
-
 DEFAULT_PEA_SOY_MIXED_EXTERNAL_PACKAGE_CONTRACT = (
-    _repo_root() / "data" / "protocols" / "pea_soy_mixed_external_package_contract.json"
+    repo_root() / "data" / "protocols" / "pea_soy_mixed_external_package_contract.json"
 )
 
 
-def _load_json(path: Path) -> Dict[str, Any]:
-    with open(path, "r", encoding="utf-8") as handle:
-        return json.load(handle)
-
-
 def load_pea_soy_mixed_external_package_contract(file_path: Optional[Path | str] = None) -> Dict[str, Any]:
-    path = Path(file_path) if file_path is not None else DEFAULT_PEA_SOY_MIXED_EXTERNAL_PACKAGE_CONTRACT
-    return _load_json(path)
+    return load_json_mapping(resolve_optional_path(file_path, DEFAULT_PEA_SOY_MIXED_EXTERNAL_PACKAGE_CONTRACT))
 
 
 def build_pea_soy_mixed_external_package_artifact(file_path: Optional[Path | str] = None) -> Dict[str, Any]:

@@ -18,6 +18,7 @@ def test_run_pipeline_help():
     result = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
     assert result.returncode == 0
     assert "Maillard formulation screening pipeline" in result.stdout
+    assert "--prediction-mode" in result.stdout
 
 @pytest.mark.slow
 def test_run_pipeline_dry_run():
@@ -26,6 +27,7 @@ def test_run_pipeline_dry_run():
         "python", "scripts/run_pipeline.py",
         "--sugars", "ribose",
         "--amino-acids", "cysteine",
+        "--prediction-mode", "kinetic",
         "--dry-run"
     ]
     result = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)

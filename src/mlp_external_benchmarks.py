@@ -2,17 +2,20 @@ from __future__ import annotations
 
 import json
 from dataclasses import asdict, dataclass
+from functools import lru_cache
 from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional
 
 from src.mlp_adoption_contract import MLPModelCandidate, load_mlp_candidates
+from src.artifact_io import repo_root
 
 
-def _repo_root() -> Path:
-    return Path(__file__).resolve().parents[1]
+DEFAULT_MLP_EXTERNAL_EVIDENCE = repo_root() / "data" / "lit" / "mlp_external_benchmark_evidence.json"
 
 
-DEFAULT_MLP_EXTERNAL_EVIDENCE = _repo_root() / "data" / "lit" / "mlp_external_benchmark_evidence.json"
+def _evidence_cache_key(file_path: Optional[Path | str]) -> str:
+    path = Path(file_path) if file_path is not None else DEFAULT_MLP_EXTERNAL_EVIDENCE
+    return str(path.resolve()) if path.exists() else str(path)
 
 
 @dataclass(frozen=True)
@@ -32,15 +35,25 @@ class ExternalMLPEvidence:
     sources: List[str]
 
 
-def load_external_mlp_evidence(file_path: Optional[Path | str] = None) -> Dict[str, Any]:
-    path = Path(file_path) if file_path is not None else DEFAULT_MLP_EXTERNAL_EVIDENCE
+@lru_cache(maxsize=8)
+def _load_external_mlp_evidence_cached(cache_key: str) -> Dict[str, Any]:
+    path = Path(cache_key)
     with open(path, "r", encoding="utf-8") as handle:
         return json.load(handle)
 
 
+def load_external_mlp_evidence(file_path: Optional[Path | str] = None) -> Dict[str, Any]:
+    return _load_external_mlp_evidence_cached(_evidence_cache_key(file_path))
+
+
+@lru_cache(maxsize=8)
+def _load_external_mlp_evidence_entries_cached(cache_key: str) -> tuple[ExternalMLPEvidence, ...]:
+    payload = _load_external_mlp_evidence_cached(cache_key)
+    return tuple(ExternalMLPEvidence(**row) for row in payload.get("models", []))
+
+
 def load_external_mlp_evidence_entries(file_path: Optional[Path | str] = None) -> List[ExternalMLPEvidence]:
-    payload = load_external_mlp_evidence(file_path)
-    return [ExternalMLPEvidence(**row) for row in payload.get("models", [])]
+    return list(_load_external_mlp_evidence_entries_cached(_evidence_cache_key(file_path)))
 
 
 def build_external_mlp_evidence_index(file_path: Optional[Path | str] = None) -> Dict[str, ExternalMLPEvidence]:

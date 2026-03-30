@@ -1,8 +1,9 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional
+
+from src.artifact_io import load_json_mapping
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -14,7 +15,7 @@ IRC_FIXTURES_ROOT = ROOT / "data" / "qm" / "irc_validation_cases"
 def _load_json_file(path: Path) -> Dict[str, Any]:
     if not path.exists():
         raise FileNotFoundError(f"Benchmark dataset not found: {path}")
-    payload = json.loads(path.read_text(encoding="utf-8"))
+    payload = load_json_mapping(path)
     if not isinstance(payload, dict):
         raise ValueError(f"Benchmark dataset must be a JSON object: {path}")
     return payload

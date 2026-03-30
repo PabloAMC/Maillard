@@ -1,18 +1,16 @@
 from __future__ import annotations
 
-import json
+from copy import deepcopy
 import math
 from dataclasses import asdict
+from functools import lru_cache
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Optional, Tuple
 
+from src.artifact_io import load_json_mapping, repo_root
 from src.mlp_external_benchmarks import build_external_mlp_evidence_index
 from src.mlp_adoption_contract import MLPAdoptionDecision, MLPModelCandidate, load_mlp_candidates
-from src.reaction_benchmark import ReactionBenchmarkEntry, build_reaction_benchmark_alias_index, load_reaction_benchmark_entries
-
-
-def _repo_root() -> Path:
-    return Path(__file__).resolve().parents[1]
+from src.reaction_benchmark import ReactionBenchmarkEntry, load_reaction_benchmark_entries
 
 
 def _normalize_key(value: str) -> str:
@@ -22,9 +20,43 @@ def _normalize_key(value: str) -> str:
     return text
 
 
-def _load_json(path: Path) -> Dict[str, Any]:
-    with open(path, "r", encoding="utf-8") as handle:
-        return json.load(handle)
+def _path_cache_key(path: Path) -> str:
+    return str(path.resolve()) if path.exists() else str(path)
+
+
+@lru_cache(maxsize=32)
+def _load_candidate_predictions_cached(cache_key: str) -> Dict[str, float]:
+    payload = load_json_mapping(Path(cache_key))
+    predictions: Dict[str, float] = {}
+    for key, value in payload.items():
+        predicted = _extract_predicted_barrier(value)
+        if predicted is not None:
+            predictions[_normalize_key(str(key))] = float(predicted)
+    return predictions
+
+
+@lru_cache(maxsize=16)
+def _load_geometry_payload_cached(cache_key: str) -> Dict[str, Any]:
+    path = Path(cache_key)
+    if path.name == "mlp_geometry_assessment.json":
+        from src.geometry_benchmark_validator import build_geometry_assessment_artifact
+
+        return build_geometry_assessment_artifact()
+    if path.exists():
+        return load_json_mapping(path)
+    return {}
+
+
+@lru_cache(maxsize=16)
+def _load_ts_seed_payload_cached(cache_key: str) -> Dict[str, Any]:
+    path = Path(cache_key)
+    if path.name == "mlp_ts_seed_assessment.json":
+        from src.ts_seed_benchmark_validator import build_ts_seed_assessment_artifact
+
+        return build_ts_seed_assessment_artifact()
+    if path.exists():
+        return load_json_mapping(path)
+    return {}
 
 
 def _extract_predicted_barrier(raw_value: Any) -> Optional[float]:
@@ -60,30 +92,19 @@ def _load_candidate_predictions(candidate: MLPModelCandidate) -> Dict[str, float
     if not candidate.benchmark_results_path:
         return {}
     raw_path = Path(candidate.benchmark_results_path)
-    path = raw_path if raw_path.is_absolute() else _repo_root() / raw_path
+    path = raw_path if raw_path.is_absolute() else repo_root() / raw_path
     if not path.exists():
         return {}
-    payload = _load_json(path)
-    predictions: Dict[str, float] = {}
-    for key, value in payload.items():
-        predicted = _extract_predicted_barrier(value)
-        if predicted is not None:
-            predictions[_normalize_key(str(key))] = float(predicted)
-    return predictions
+    return dict(_load_candidate_predictions_cached(_path_cache_key(path)))
 
 
 def _load_geometry_evidence(candidate: MLPModelCandidate) -> Dict[str, Any]:
     if not candidate.geometry_benchmark_path:
         return {"available": False, "evidence_present": False}
     raw_path = Path(candidate.geometry_benchmark_path)
-    path = raw_path if raw_path.is_absolute() else _repo_root() / raw_path
-    if path.name == "mlp_geometry_assessment.json":
-        from src.geometry_benchmark_validator import build_geometry_assessment_artifact
-
-        payload = build_geometry_assessment_artifact()
-    elif path.exists():
-        payload = _load_json(path)
-    else:
+    path = raw_path if raw_path.is_absolute() else repo_root() / raw_path
+    payload = _load_geometry_payload_cached(_path_cache_key(path))
+    if not payload:
         return {"available": False, "evidence_present": False}
     if "candidate_assessments" in payload:
         for row in payload.get("candidate_assessments", []):
@@ -102,14 +123,9 @@ def _load_ts_seed_evidence(candidate: MLPModelCandidate) -> Dict[str, Any]:
     if not candidate.ts_seed_benchmark_path:
         return {"available": False, "evidence_present": False}
     raw_path = Path(candidate.ts_seed_benchmark_path)
-    path = raw_path if raw_path.is_absolute() else _repo_root() / raw_path
-    if path.name == "mlp_ts_seed_assessment.json":
-        from src.ts_seed_benchmark_validator import build_ts_seed_assessment_artifact
-
-        payload = build_ts_seed_assessment_artifact()
-    elif path.exists():
-        payload = _load_json(path)
-    else:
+    path = raw_path if raw_path.is_absolute() else repo_root() / raw_path
+    payload = _load_ts_seed_payload_cached(_path_cache_key(path))
+    if not payload:
         return {"available": False, "evidence_present": False}
     if "candidate_assessments" in payload:
         for row in payload.get("candidate_assessments", []):
@@ -167,7 +183,6 @@ def evaluate_candidate_against_reaction_benchmark(
     benchmark_entries: Iterable[ReactionBenchmarkEntry],
 ) -> Dict[str, Any]:
     benchmark_list = [entry for entry in benchmark_entries if not candidate.target_motif_families or entry.motif_family in candidate.target_motif_families]
-    alias_index = build_reaction_benchmark_alias_index(benchmark_list)
     predictions = _load_candidate_predictions(candidate)
     geometry_evidence = _load_geometry_evidence(candidate)
     ts_seed_evidence = _load_ts_seed_evidence(candidate)
@@ -299,7 +314,8 @@ def evaluate_candidate_against_reaction_benchmark(
     }
 
 
-def build_mlp_assessment_artifact() -> Dict[str, Any]:
+@lru_cache(maxsize=1)
+def _build_mlp_assessment_artifact_cached() -> Dict[str, Any]:
     benchmark_entries = load_reaction_benchmark_entries()
     candidates = load_mlp_candidates()
     candidate_rows = [evaluate_candidate_against_reaction_benchmark(candidate, benchmark_entries) for candidate in candidates]
@@ -316,6 +332,10 @@ def build_mlp_assessment_artifact() -> Dict[str, Any]:
         },
         "candidates": candidate_rows,
     }
+
+
+def build_mlp_assessment_artifact() -> Dict[str, Any]:
+    return deepcopy(_build_mlp_assessment_artifact_cached())
 
 
 def build_adoption_decisions_from_assessment(payload: Mapping[str, Any]) -> List[MLPAdoptionDecision]:

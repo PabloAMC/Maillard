@@ -27,7 +27,8 @@ from typing import Any, Dict, List, Optional
 import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT))
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 DFT_OUTPUT_DIR  = ROOT / "results" / "dft_c4_c5"
 ARRHENIUS_FILE  = ROOT / "data" / "lit" / "arrhenius_params.yml"

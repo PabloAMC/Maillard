@@ -8,11 +8,19 @@ Verifies:
 """
 
 import pytest
+import time
 from pathlib import Path
 
+from src.benchmark_validation import benchmark_to_conditions, benchmark_to_formulation, load_benchmark
+from src.conditions import ReactionConditions
+from src.formulation import Formulation
+from src.pipeline import MaillardPipeline
 from src.precursor_resolver import resolve, resolve_many  # noqa: E402
 from src.pathway_extractor import Species, ElementaryStep  # noqa: E402
 from src.recommend import Recommender  # noqa: E402
+
+
+ROOT = Path(__file__).resolve().parents[2]
 
 def test_resolver_exact_match():
     sp = resolve("L-Cysteine")
@@ -102,3 +110,111 @@ def test_recommender_predict_from_steps():
     # Cleanup mock if needed
     if mock_results.exists():
         mock_results.unlink()
+
+
+def test_recommender_predict_from_steps_kinetic_mode_returns_metadata():
+    rec = Recommender()
+
+    furfural = Species("Furfural", "O=Cc1ccco1")
+    ribose = Species("Ribose", "OC[C@H]1OC(O)[C@H](O)[C@@H]1O")
+    step = ElementaryStep(
+        reactants=[ribose],
+        products=[furfural],
+        reaction_family="furfural_formation",
+    )
+    step_key = f"{ribose.smiles}->{furfural.smiles}"
+
+    result = rec.predict_from_steps(
+        [step],
+        {step_key: 12.0},
+        {ribose.smiles: 1.0},
+        time_minutes=5.0,
+        prediction_mode="kinetic",
+        reaction_conditions=ReactionConditions(prediction_mode="kinetic"),
+    )
+
+    assert result["kinetic_metadata"]["prediction_engine"] == "time_resolved_microkinetic"
+    assert result["kinetic_metadata"]["successful"] is True
+    assert result["projection_context"]["prediction_engine"] == "time_resolved_microkinetic"
+    assert result["kinetic_metadata"]["reaction_count"] == 1
+    assert result["kinetic_metadata"]["observable_surface"] == "end_state_default"
+
+
+def test_pipeline_evaluate_single_kinetic_mode_sets_confidence_metadata():
+    pipeline = MaillardPipeline(target_tag="meaty", minimize_tag="beany")
+    formulation = Formulation(
+        name="kinetic-smoke",
+        sugars=["ribose"],
+        amino_acids=["cysteine"],
+        molar_ratios={"ribose": 1.0, "cysteine": 1.0},
+        temperature=140.0,
+        time_minutes=10.0,
+    )
+
+    result = pipeline.evaluate_single(
+        formulation,
+        ReactionConditions(pH=6.0, temperature_celsius=140.0, prediction_mode="kinetic"),
+    )
+
+    assert result.confidence_metadata["prediction_engine"] == "time_resolved_microkinetic"
+    assert result.confidence_metadata["kinetics"]["successful"] is True
+
+
+def test_pipeline_matrix_benchmark_supports_kinetic_mode():
+    pipeline = MaillardPipeline(target_tag="meaty", minimize_tag="beany")
+    bench = load_benchmark(ROOT / "data" / "benchmarks" / "pea_isolate_ribose_cysteine_100C_45min_Internal2026.json")
+    formulation = benchmark_to_formulation(bench)
+    conditions = benchmark_to_conditions(bench)
+    conditions.prediction_mode = "kinetic"
+
+    result = pipeline.evaluate_single(formulation, conditions)
+
+    assert result.confidence_metadata["prediction_engine"] == "time_resolved_microkinetic"
+    assert result.confidence_metadata["kinetics"]["reaction_count"] >= 1
+    assert result.predicted_ppb
+
+
+def test_projection_mode_remains_unchanged_when_explicitly_requested():
+    rec = Recommender()
+    furfural = Species("Furfural", "O=Cc1ccco1")
+    ribose = Species("Ribose", "OC[C@H]1OC(O)[C@H](O)[C@@H]1O")
+    step = ElementaryStep(
+        reactants=[ribose],
+        products=[furfural],
+        reaction_family="furfural_formation",
+    )
+    step_key = f"{ribose.smiles}->{furfural.smiles}"
+
+    baseline = rec.predict_from_steps([step], {step_key: 18.0}, {ribose.smiles: 1.0}, time_minutes=5.0)
+    explicit_projection = rec.predict_from_steps(
+        [step],
+        {step_key: 18.0},
+        {ribose.smiles: 1.0},
+        time_minutes=5.0,
+        prediction_mode="projection",
+    )
+
+    assert explicit_projection["predicted_ppb"] == baseline["predicted_ppb"]
+    assert explicit_projection["predicted_proxy_ppb"] == baseline["predicted_proxy_ppb"]
+
+
+def test_pipeline_kinetic_mode_small_run_completes_quickly():
+    pipeline = MaillardPipeline(target_tag="meaty", minimize_tag="beany")
+    formulation = Formulation(
+        name="kinetic-performance-smoke",
+        sugars=["ribose"],
+        amino_acids=["cysteine"],
+        molar_ratios={"ribose": 1.0, "cysteine": 1.0},
+        temperature=140.0,
+        time_minutes=5.0,
+    )
+
+    start = time.perf_counter()
+    result = pipeline.evaluate_single(
+        formulation,
+        ReactionConditions(pH=6.0, temperature_celsius=140.0, prediction_mode="kinetic"),
+    )
+    elapsed = time.perf_counter() - start
+
+    assert result.confidence_metadata["kinetics"]["successful"] is True
+    assert elapsed < 10.0

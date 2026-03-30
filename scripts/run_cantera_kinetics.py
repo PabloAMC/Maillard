@@ -12,7 +12,9 @@ import json
 import pandas as pd
 import sys
 from pathlib import Path
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
 
 from src.config import DEFAULTS  # noqa: E402
 from src.logger import get_logger  # noqa: E402
