@@ -451,7 +451,99 @@ Phase P0.2: Build benchmark-grade pea and soy targets
 - [x] Add focused tests proving that the benchmark executes, matches all target compounds, and preserves the intended ordering.
 - [x] Treat mixed matrix candidates without external measurements as mechanistic triage inputs, not promotion evidence.
 
-Phase P0.3: Close matrix observability for decision-driving compounds
+---
+
+## Priority 5 — Strategic Gaps (Scientific Assessment — March 2026)
+**Goal:** Close the gap between the tool's current validated envelope and the needs of working alternative protein scientists, using literature-closable computational methods.
+
+### Tier 1 — High-impact, literature-closable (no wet-lab)
+
+#### 5.1 Extrusion Process Model — **[L4 | Blocked on design decision]**
+The dominant commercial PBMA process (extrusion) is the weakest regime in the tool. Report 12 provides the calibration data.
+
+- [ ] **5.1a SME as independent process variable**: Add `sme_kj_per_kg` to `ReactionConditions`; compute `T_effective = T_jacket + f(SME)` correction from Report 12 SME–temperature offset data (5–40°C delta).
+- [ ] **5.1b Moisture regime classifier**: Add `moisture_regime: Literal['lme', 'hme']` to conditions; flip sign of `∂acrylamide/∂moisture` in `predict_acrylamide()` for LME (<40%) vs HME (>50%).
+- [ ] **5.1c Pre-extrusion damage base load**: Add `pre_extrusion_damage_load(protein_type)` returning baseline furosine and LAL from alkaline extraction + spray drying.
+- [ ] **5.1d Autoclave sterilization step**: Model as a discrete additive damage increment (121–126°C, 15–30 min) separate from extruder.
+- [ ] **5.1e Spatial discretization (pending scope decision)**: Either plug-flow reactor model or sequential isothermal zone model for barrel.
+
+#### 5.2 Protein Source Registry — **[L3]**
+Report 06 produced meaty potential multipliers for 14 protein sources. None are encoded at runtime.
+
+- [ ] Create `data/lit/protein_source_registry.json` with AA composition, meaty potential multiplier, off-note penalty, LOX activity flag, and methoxypyrazine ceiling per source.
+- [ ] Wire registry into `matrix_correction.py` so switching protein source auto-adjusts correction factors.
+- [ ] Add CLI `--protein-source` flag to `run_pipeline.py` that selects from the registry.
+- [ ] Include engineering heuristics from Report 06 (e.g., methoxypyrazine non-correctable flag for pea >50%, wheat gluten Cys advantage for MFT).
+
+#### 5.3 Ingest Benchmark-Eligible Deep Research Data — **[L2]**
+~20 benchmark-eligible datasets exist in the Gemini Deep Research corpus but aren't wired into the runtime.
+
+- [ ] **SPI-HVP + xylose**: Ingest MFT OAV 450, FFT OAV 84 (120°C, 30 min, pH 6.0) as a matrix benchmark.
+- [ ] **Wheat gluten HVP + xylose**: Ingest MFT OAV 850 as the highest-MFT plant-source reference.
+- [ ] **Acrylamide fast kinetics**: Calibrate `predict_acrylamide()` against 22.36→62.62 µg/kg in 20–30s at 130°C.
+- [ ] **CML/CEL commercial PBA ranges**: Validate `predict_cml()` and `predict_cel()` against 20+ product dataset (Foods 2023).
+- [ ] **Furosine formation-elimination crossover**: Validate non-monotonic behavior (peak ~8.7 mg/100g at 140°C, fall above 150°C).
+
+#### 5.4 Kinetic Mode Documentation & User Exposure — **[L1]**
+The ODE kinetics engine is a P1 deliverable but invisible to users.
+
+- [ ] Add `prediction_mode="kinetic"` to `QUICKSTART.md` with example usage.
+- [ ] Add a section to `food_scientist_walkthrough.md` showing kinetic mode for temporal extrusion dynamics.
+- [ ] Update `SCIENTIFIC_RELIABILITY.md` to describe what kinetic mode improves over projection mode.
+- [ ] Add `--prediction-mode kinetic` to the CLI help text prominently.
+
+#### 5.5 Enhanced Onboarding for Food Scientists — **[L2]**
+Current onboarding is too terse and assumes computational background.
+
+- [ ] **Decision tree**: Create a visual flowchart "I have X protein, Y process → use these commands → interpret these numbers → trust them this much."
+- [ ] **Annotated output walkthrough**: Add real (not hypothetical) example output to `food_scientist_walkthrough.md` with annotations explaining each field.
+- [ ] **Glossary linkage**: Add inline glossary links from workflow guides to the README glossary.
+- [ ] **Interactive notebook**: Create `docs/notebooks/formulation_comparison.ipynb` walking through a pea vs. soy comparison.
+
+### Tier 2 — Medium-impact, improves scientific accuracy
+
+#### 5.6 Explicit Carbonyl Donor Hierarchy — **[L3]**
+Ribose, xylose, glucose are not interchangeable (ribose generates 5–10× more MFT). Currently collapsed to near-generic treatment.
+
+- [ ] Add sugar reactivity multipliers to `barrier_constants.py` keyed on donor identity.
+- [ ] Wire donor identity into `ode_kinetics.py` rate constant computation.
+- [ ] Add benchmark test comparing ribose vs glucose MFT yield at equivalent conditions.
+
+#### 5.7 Bidirectional Lipid-Maillard Crosstalk — **[L4]**
+Currently one-directional (LOPs → Maillard). Missing: dicarbonyl → lipid oxidation catalysis, melanoidin → antioxidant protection.
+
+- [ ] Add dicarbonyl–lipid oxidation promotion pathway in `lipid_oxidation.py`.
+- [ ] Add melanoidin antioxidant capacity as a time-dependent LOPs suppressant.
+- [ ] Validate against Report 11 crosstalk heuristics.
+
+#### 5.8 Disulfide Bond Evolution / MFT Retention — **[L3]**
+Free-SH consumption during extrusion constrains MFT flavor retention (disulfide interchange).
+
+- [ ] Model free-SH → disulfide kinetics as function of SME and temperature.
+- [ ] Link to MFT headspace recovery in volatile retention model.
+
+### Tier 3 — Polish and completeness
+
+#### 5.9 Visual Output in Main Prediction Workflow — **[L2]**
+Scientists want charts, not JSON blobs.
+
+- [ ] Add matplotlib/plotly radar chart generation to `--report` output.
+- [ ] Add kinetic trace plot (concentration vs. time) when `prediction_mode="kinetic"`.
+- [ ] Add safety marker dashboard plot alongside formulation report.
+
+#### 5.10 Sunflower Chlorogenic Acid Off-Note — **[L2]**
+Temperature-triggered 4-vinylguaiacol generation from chlorogenic acid degradation (>120°C). Documented in Report 06 but unmodeled.
+
+- [ ] Add temperature-gated 4-vinylguaiacol penalty for sunflower-containing formulations.
+- [ ] Include chlorogenic acid → lysine covalent adduct as a lysine accessibility sink.
+
+#### 5.11 Transport / Diffusion Model for Volatile Release — **[L4 | Long-term]**
+No mass transfer model exists for volatile release from protein matrices.
+
+- [ ] Design a 1D Fickian diffusion slab model for volatile release during cooling/serving.
+- [ ] Integrate with volatile retention factors as a compound-class-specific alternative to scalar correction.
+
+***
 
 - [ ] Add observable anchors for the compounds scientists actually use to decide, not only hexanal-like off-notes.
 - [x] Separate compound classes that are quantitatively anchored from those that remain directional or transferred.
