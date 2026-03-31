@@ -5,12 +5,10 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional
 
-
-def _repo_root() -> Path:
-    return Path(__file__).resolve().parents[1]
+from src.artifact_io import repo_root
 
 
-DEFAULT_GEOMETRY_BENCHMARK_FILE = _repo_root() / "data" / "lit" / "p4_geometry_benchmark_set.json"
+DEFAULT_GEOMETRY_BENCHMARK_FILE = repo_root() / "data" / "lit" / "geometry_benchmark_set.json"
 
 
 @dataclass(frozen=True)
@@ -40,7 +38,7 @@ def build_geometry_benchmark_artifact(file_path: Optional[Path | str] = None) ->
     entries = load_geometry_benchmark_entries(file_path)
     return {
         "summary": {
-            "benchmark_id": "p4_geometry_benchmark_v1",
+            "benchmark_id": "mlp_geometry_benchmark_v1",
             "entry_count": len(entries),
             "ground_state_count": sum(1 for entry in entries if entry.benchmark_kind == "ground_state"),
             "ts_seed_count": sum(1 for entry in entries if entry.benchmark_kind == "ts_seed"),
@@ -52,7 +50,7 @@ def build_geometry_benchmark_artifact(file_path: Optional[Path | str] = None) ->
 
 def render_geometry_benchmark_markdown(payload: Mapping[str, Any]) -> str:
     lines = [
-        "# P4 Geometry Benchmark",
+        "# Geometry Preoptimization Benchmark",
         "",
         "| Benchmark | Kind | Chemistry Family | Source Tier | Recommended Roles | Source |",
         "| --- | --- | --- | --- | --- | --- |",

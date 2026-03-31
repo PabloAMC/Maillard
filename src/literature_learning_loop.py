@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Optional
 
+from src.artifact_io import load_optional_json_mapping
 from src.family_validation_overview import build_family_validation_overview_artifact
 from src.literature_family_registry import build_family_payload_coverage_artifact
 from src.literature_family_registry import iter_matrix_decision_panel_entries
@@ -41,7 +41,7 @@ ARTIFACT_TYPE_TO_TEMPLATE_KIND = {
     "structural_gap_entry": "structural_gap_entry",
 }
 
-PROMOTION_QUEUE_SLR_FAMILIES = {"03", "04", "05", "06", "07", "10"}
+PROMOTION_QUEUE_SLR_FAMILIES = {"03", "04", "05", "06", "07", "10", "11", "12", "13", "14", "15", "16"}
 
 PROMOTION_POSTURE_WEIGHTS = {
     "immediate_expansion_lane": 5.0,
@@ -49,28 +49,17 @@ PROMOTION_POSTURE_WEIGHTS = {
     "high_value_support_lane": 3.5,
     "matrix_scope_lane": 2.0,
 }
-
-
-def _load_json(path: Path) -> Dict[str, Any]:
-    if not path.exists():
-        return {}
-    with open(path, "r", encoding="utf-8") as handle:
-        return json.load(handle)
-
-
 def _to_repo_relative(path: Path, root: Path = ROOT) -> str:
     return path.resolve().relative_to(root.resolve()).as_posix()
 
 
-def _normalize_name(name: str) -> str:
-    lowered = str(name).strip().lower().replace("-", "_").replace(" ", "_")
-    return "_".join(part for part in lowered.split("_") if part)
+from src.text_utils import normalize_name_underscored as _normalize_name
 
 
 def _load_benchmark_payloads() -> Dict[str, Dict[str, Any]]:
     payloads: Dict[str, Dict[str, Any]] = {}
     for bench_path in sorted(BENCHMARK_DIR.glob("*.json")):
-        payload = _load_json(bench_path)
+        payload = load_optional_json_mapping(bench_path)
         benchmark_id = str(payload.get("benchmark_id", bench_path.stem))
         payloads[benchmark_id] = payload
     return payloads
@@ -136,7 +125,7 @@ def _artifact_exists(artifact: Mapping[str, Any], *, root: Path = ROOT) -> bool:
     artifact_type = str(artifact.get("artifact_type", "")).strip()
     if not artifact_id or artifact_type == "benchmark":
         return True
-    payload = _load_json(path)
+    payload = load_optional_json_mapping(path)
     if artifact_type == "intake_registry_entry":
         return any(str(entry.get("id", "")) == artifact_id for entry in payload.get("eligible_references", []))
     if artifact_type == "slr_incorporation_ledger":
@@ -162,7 +151,7 @@ def _artifact_exists(artifact: Mapping[str, Any], *, root: Path = ROOT) -> bool:
 
 
 def _ready_reference_rows(root: Path = ROOT) -> List[Dict[str, Any]]:
-    intake = _load_json(root / _to_repo_relative(INTAKE_REGISTRY_PATH, ROOT))
+    intake = load_optional_json_mapping(root / _to_repo_relative(INTAKE_REGISTRY_PATH, ROOT))
     rows: List[Dict[str, Any]] = []
     for entry in intake.get("eligible_references", []):
         status = str(entry.get("status", ""))
@@ -333,7 +322,7 @@ def _build_template_for_entry(entry: Mapping[str, Any]) -> Dict[str, Any]:
 
 
 def build_runtime_templates(root: Path = ROOT) -> List[Dict[str, Any]]:
-    intake = _load_json(root / _to_repo_relative(INTAKE_REGISTRY_PATH, ROOT))
+    intake = load_optional_json_mapping(root / _to_repo_relative(INTAKE_REGISTRY_PATH, ROOT))
     templates: List[Dict[str, Any]] = []
     ready_rows = {row["id"]: row for row in _ready_reference_rows(root)}
     for entry in intake.get("eligible_references", []):
@@ -560,8 +549,8 @@ def build_matrix_prior_review() -> List[Dict[str, Any]]:
 
 
 def build_literature_gap_review(root: Path = ROOT) -> Dict[str, List[Dict[str, Any]]]:
-    intake = _load_json(root / _to_repo_relative(INTAKE_REGISTRY_PATH, ROOT))
-    process_gaps = _load_json(root / _to_repo_relative(PROCESS_GAP_REGISTRY_PATH, ROOT))
+    intake = load_optional_json_mapping(root / _to_repo_relative(INTAKE_REGISTRY_PATH, ROOT))
+    process_gaps = load_optional_json_mapping(root / _to_repo_relative(PROCESS_GAP_REGISTRY_PATH, ROOT))
     intake_rows = []
     for entry in intake.get("structural_gaps", []):
         intake_rows.append(

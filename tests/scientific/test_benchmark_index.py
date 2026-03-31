@@ -10,12 +10,8 @@ from src.benchmark_validation import build_benchmark_index
 from src.presentation import render_benchmark_index_markdown
 
 
-def test_benchmark_index_marks_matrix_only_scope_gaps_explicitly():
-    entries = build_benchmark_index([
-        ROOT / "data" / "benchmarks" / "cys_glucose_150C_Farmer1999.json",
-        ROOT / "data" / "benchmarks" / "pea_isolate_40C_PratapSingh2021.json",
-        ROOT / "data" / "benchmarks" / "soy_isolate_40C_PratapSingh2021.json",
-    ])
+def test_benchmark_index_marks_matrix_only_scope_gaps_explicitly(benchmark_index_matrix_scope):
+    entries = benchmark_index_matrix_scope
     by_id = {entry.benchmark_id: entry for entry in entries}
 
     assert by_id["cys_glucose_150C_Farmer1999"].execution_path == "free_precursor"
@@ -35,12 +31,8 @@ def test_benchmark_index_marks_matrix_only_scope_gaps_explicitly():
     assert by_id["soy_isolate_40C_PratapSingh2021"].status in {"pass", "pass-no-ranking", "scale-gap", "ranking-gap"}
 
 
-def test_benchmark_index_markdown_exposes_execution_path():
-    entries = build_benchmark_index([
-        ROOT / "data" / "benchmarks" / "cys_glucose_150C_Farmer1999.json",
-        ROOT / "data" / "benchmarks" / "pea_isolate_40C_PratapSingh2021.json",
-        ROOT / "data" / "benchmarks" / "soy_isolate_40C_PratapSingh2021.json",
-    ])
+def test_benchmark_index_markdown_exposes_execution_path(benchmark_index_matrix_scope):
+    entries = benchmark_index_matrix_scope
 
     markdown = render_benchmark_index_markdown(entries)
 
@@ -52,11 +44,8 @@ def test_benchmark_index_markdown_exposes_execution_path():
     assert "matrix_only" in markdown
 
 
-def test_benchmark_index_includes_matrix_precursor_augmented_candidates():
-    entries = build_benchmark_index([
-        ROOT / "data" / "benchmarks" / "pea_isolate_ribose_cysteine_100C_45min_Internal2026.json",
-        ROOT / "data" / "benchmarks" / "soy_isolate_ribose_cysteine_100C_45min_Internal2026.json",
-    ])
+def test_benchmark_index_includes_matrix_precursor_augmented_candidates(benchmark_index_matrix_internal):
+    entries = benchmark_index_matrix_internal
     by_id = {entry.benchmark_id: entry for entry in entries}
 
     assert by_id["pea_isolate_ribose_cysteine_100C_45min_Internal2026"].execution_path == "matrix_precursor_augmented"

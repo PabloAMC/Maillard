@@ -339,6 +339,89 @@ def test_build_confidence_package_surfaces_extrusion_panel_when_markers_are_pres
     assert panel["minimum_panel_ready"] is True
 
 
+def test_build_confidence_package_surfaces_dha_extrusion_closure_as_inference_without_direct_markers():
+    formulation = {
+        "name": "extrusion dha probe",
+        "protein_type": "pea_iso",
+        "temp": 150.0,
+        "aw": 0.55,
+        "ph": 6.0,
+    }
+    result = FormulationResult(
+        name="extrusion dha probe",
+        target_score=5.2,
+        off_flavour_risk=1.1,
+        avg_uncertainty=3.4,
+        lysine_budget=28.0,
+        projection_metadata={
+            "fft": {"compound": "2-Furfurylthiol (FFT)", "observable_ppb": 8.0},
+            "hex": {"compound": "Hexanal", "observable_ppb": 14.0},
+            "fur": {"compound": "Furfural", "observable_ppb": 22.0},
+        },
+        matrix_explainability={
+            "protein_type": "pea_iso",
+            "temperature_celsius": 150.0,
+            "accessibility_profile": "partially_opened",
+            "accessibility_warning": False,
+        },
+    )
+
+    payload = build_confidence_package(
+        result,
+        [],
+        precursor_names=["ribose", "cysteine", "lysine"],
+        protein_type="pea_iso",
+        formulation=formulation,
+        baseline_conditions=ReactionConditions(pH=6.0, temperature_celsius=150.0, water_activity=0.55, protein_type="pea_iso"),
+    )
+
+    panel = payload["dha_extrusion_closure_panel"]
+    assert panel["closure_ready"] is False
+    assert panel["evidence_mode"] == "competition_inference_only"
+    assert panel["risk_band"] == "moderate"
+    assert "dha_extrusion_closure" in payload["calibration_diagnostics"]["extrapolation_axes"]
+
+
+def test_build_confidence_package_surfaces_direct_dha_marker_when_present():
+    formulation = {
+        "name": "extrusion lal probe",
+        "protein_type": "soy_iso",
+        "temp": 165.0,
+        "aw": 0.35,
+        "ph": 6.1,
+    }
+    result = FormulationResult(
+        name="extrusion lal probe",
+        target_score=4.0,
+        off_flavour_risk=1.5,
+        avg_uncertainty=4.1,
+        lysine_budget=41.0,
+        projection_metadata={
+            "lal": {"compound": "Lysinoalanine (LAL)", "observable_ppb": 1.2},
+        },
+        matrix_explainability={
+            "protein_type": "soy_iso",
+            "temperature_celsius": 165.0,
+            "accessibility_profile": "free_like",
+            "accessibility_warning": False,
+        },
+    )
+
+    payload = build_confidence_package(
+        result,
+        [],
+        precursor_names=["cysteine", "lysine"],
+        protein_type="soy_iso",
+        formulation=formulation,
+        baseline_conditions=ReactionConditions(pH=6.1, temperature_celsius=165.0, water_activity=0.35, protein_type="soy_iso"),
+    )
+
+    panel = payload["dha_extrusion_closure_panel"]
+    assert panel["closure_ready"] is True
+    assert panel["evidence_mode"] == "direct_observable_closure"
+    assert panel["present_markers"] == ["Lysinoalanine (LAL)"]
+
+
 def test_generate_report_includes_confidence_metadata(tmp_path: Path):
     result = FormulationResult(
         name="report confidence probe",
@@ -542,7 +625,7 @@ def test_render_flavor_axis_markdown_surfaces_active_family_lanes():
                     "state_value_summary": "available=True, source=pbma_fortified",
                 }
             ],
-            "active_family_lanes": ["02", "10"],
+            "active_family_lanes": ["02", "05", "10"],
             "family_lane_summary": {
                 "02": {
                     "slr_family": "02",
@@ -552,6 +635,15 @@ def test_render_flavor_axis_markdown_surfaces_active_family_lanes():
                     "benchmark_ready_targets": ["Hexanal", "2-Pentylfuran"],
                     "competition_prior_ids": ["lincoln_2025_polyphenol_crosstalk_v1"],
                     "maillard_closure_pressure": 1.10,
+                },
+                "05": {
+                    "slr_family": "05",
+                    "display_name": "Glutathione and low-molecular-weight peptide support",
+                    "strategic_posture": "high_value_support_lane",
+                    "summary": "Glutathione support is active.",
+                    "glutathione_active": True,
+                    "peptide_support_active": True,
+                    "sulfur_peptide_support_score": 1.0,
                 },
                 "10": {
                     "slr_family": "10",
@@ -568,6 +660,8 @@ def test_render_flavor_axis_markdown_surfaces_active_family_lanes():
     assert "active_family_lanes" in markdown
     assert "Lipid oxidation and carbonylic crosstalk" in markdown
     assert "Microbial fermentation pretreatment" in markdown
+    assert "glutathione_support_active" in markdown
+    assert "sulfur_peptide_support_score" in markdown
     assert "family_target_score_delta" in markdown
     assert "family_maillard_closure_delta" in markdown
     assert "lipid_benchmark_ready_targets" in markdown

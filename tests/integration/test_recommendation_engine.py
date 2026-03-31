@@ -19,6 +19,12 @@ if str(ROOT) not in sys.path:
 
 PIPELINE_SCRIPT = ROOT / "scripts" / "run_pipeline.py"
 
+
+@pytest.fixture(scope="module")
+def meaty_results_default(pipeline_meaty_beany):
+    """Cache the default meaty/beany evaluation used by many basic integration checks."""
+    return pipeline_meaty_beany.evaluate_all(ReactionConditions(pH=6.0, temperature_celsius=150.0))
+
 def test_recommender_canonical_systems():
     """
     Test that the Recommender properly identifies active pathways 
@@ -150,27 +156,27 @@ def test_concentration_boltzmann_scoring(mock_grid_path, monkeypatch):
 class TestMaillardPipelineInitialization:
     """Test MaillardPipeline initialization and setup."""
 
-    def test_pipelineer_creation(self):
+    def test_pipelineer_creation(self, pipeline_meaty_beany):
         """MaillardPipeline should initialize without errors."""
-        designer = MaillardPipeline(target_tag="meaty", minimize_tag="beany")
+        designer = pipeline_meaty_beany
         assert designer is not None
         assert designer.target_tag == "meaty"
         assert designer.minimize_tag == "beany"
 
-    def test_pipelineer_default_minimize(self):
+    def test_pipelineer_default_minimize(self, pipeline_roasted_beany):
         """Default minimize tag should be 'beany'."""
-        designer = MaillardPipeline(target_tag="roasted")
+        designer = pipeline_roasted_beany
         assert designer.minimize_tag == "beany"
 
-    def test_pipelineer_grid_loaded(self):
+    def test_pipelineer_grid_loaded(self, pipeline_meaty_beany):
         """Grid should be loaded on initialization."""
-        designer = MaillardPipeline(target_tag="meaty", minimize_tag="beany")
+        designer = pipeline_meaty_beany
         assert hasattr(designer, 'grid')
         assert len(designer.grid) > 0, "Grid should be loaded with formulations"
 
-    def test_pipelineer_tag_validation(self):
+    def test_pipelineer_tag_validation(self, pipeline_meaty_beany):
         """Tags should be strings, not None."""
-        designer = MaillardPipeline(target_tag="meaty", minimize_tag="beany")
+        designer = pipeline_meaty_beany
         assert isinstance(designer.target_tag, str)
         assert isinstance(designer.minimize_tag, str)
         assert len(designer.target_tag) > 0
@@ -180,22 +186,18 @@ class TestMaillardPipelineInitialization:
 class TestMaillardPipelineEvaluation:
     """Test MaillardPipeline.evaluate_all() and scoring logic."""
 
-    def test_evaluate_all_returns_results(self):
+    def test_evaluate_all_returns_results(self, meaty_results_default):
         """evaluate_all() should return FormulationResult objects."""
-        designer = MaillardPipeline(target_tag="meaty", minimize_tag="beany")
-        cond = ReactionConditions(pH=6.0, temperature_celsius=150.0)
-        results = designer.evaluate_all(cond)
+        results = meaty_results_default
         
         assert results is not None
         assert len(results) > 0, "Should have results for grid formulations"
         assert all(hasattr(r, 'target_score') for r in results), \
             "All results should have target_score attribute"
 
-    def test_evaluate_all_result_attributes(self):
+    def test_evaluate_all_result_attributes(self, meaty_results_default):
         """FormulationResult should have expected attributes."""
-        designer = MaillardPipeline(target_tag="meaty", minimize_tag="beany")
-        cond = ReactionConditions(pH=6.0, temperature_celsius=150.0)
-        results = designer.evaluate_all(cond)
+        results = meaty_results_default
         
         for result in results:
             assert hasattr(result, 'name'), "Result should have name"
@@ -204,47 +206,39 @@ class TestMaillardPipelineEvaluation:
             assert hasattr(result, 'lysine_budget'), "Result should have lysine_budget"
             assert hasattr(result, 'trapping_efficiency'), "Result should have trapping_efficiency"
 
-    def test_evaluate_all_results_sorted(self):
+    def test_evaluate_all_results_sorted(self, meaty_results_default):
         """Results should be sorted by the full recommendation ranking objective."""
-        designer = MaillardPipeline(target_tag="meaty", minimize_tag="beany")
-        cond = ReactionConditions(pH=6.0, temperature_celsius=150.0)
-        results = designer.evaluate_all(cond)
+        results = meaty_results_default
         
         if len(results) > 1:
             scores = [compute_ranking_score(r) for r in results]
             assert scores == sorted(scores, reverse=True), \
                 "Results should be sorted by Pareto ranking (descending)"
 
-    def test_target_score_is_numeric(self):
+    def test_target_score_is_numeric(self, meaty_results_default):
         """All target scores should be numeric."""
-        designer = MaillardPipeline(target_tag="meaty", minimize_tag="beany")
-        cond = ReactionConditions(pH=6.0, temperature_celsius=150.0)
-        results = designer.evaluate_all(cond)
+        results = meaty_results_default
         
         for result in results:
             assert isinstance(result.target_score, (int, float)), \
                 f"target_score should be numeric, got {type(result.target_score)}"
 
-    def test_risk_penalty_is_numeric(self):
+    def test_risk_penalty_is_numeric(self, meaty_results_default):
         """Off-flavor risk should be numeric."""
-        designer = MaillardPipeline(target_tag="meaty", minimize_tag="beany")
-        cond = ReactionConditions(pH=6.0, temperature_celsius=150.0)
-        results = designer.evaluate_all(cond)
+        results = meaty_results_default
         
         for result in results:
             assert isinstance(result.off_flavour_risk, (int, float)), \
                 "off_flavour_risk should be numeric"
             assert result.off_flavour_risk >= 0, "Risk should be non-negative"
 
-    def test_different_conditions_affect_scoring(self):
+    def test_different_conditions_affect_scoring(self, pipeline_meaty_beany):
         """Different pH/temp should produce different scores."""
-        designer = MaillardPipeline(target_tag="meaty", minimize_tag="beany")
-        
         cond_acidic = ReactionConditions(pH=5.0, temperature_celsius=150.0)
-        results_acidic = designer.evaluate_all(cond_acidic)
+        results_acidic = pipeline_meaty_beany.evaluate_all(cond_acidic)
         
         cond_neutral = ReactionConditions(pH=7.0, temperature_celsius=150.0)
-        results_neutral = designer.evaluate_all(cond_neutral)
+        results_neutral = pipeline_meaty_beany.evaluate_all(cond_neutral)
         
         # Get first formulation scores
         score_acidic = results_acidic[0].target_score if results_acidic else 0
@@ -253,15 +247,12 @@ class TestMaillardPipelineEvaluation:
         # At different pH, should potentially get different results or rankings
         assert score_acidic >= 0 and score_neutral >= 0, "Scores should be non-negative"
 
-    def test_different_tags_produce_different_rankings(self):
+    def test_different_tags_produce_different_rankings(self, pipeline_meaty_beany, pipeline_roasted_beany):
         """Different target tags should produce different rankings."""
         cond = ReactionConditions(pH=6.0, temperature_celsius=150.0)
-        
-        designer_meaty = MaillardPipeline(target_tag="meaty", minimize_tag="beany")
-        results_meaty = designer_meaty.evaluate_all(cond)
-        
-        designer_roasted = MaillardPipeline(target_tag="roasted", minimize_tag="beany")
-        results_roasted = designer_roasted.evaluate_all(cond)
+
+        results_meaty = pipeline_meaty_beany.evaluate_all(cond)
+        results_roasted = pipeline_roasted_beany.evaluate_all(cond)
         
         # Different targets should produce different top formulation scores
         top_meaty = results_meaty[0].target_score if results_meaty else 0
@@ -275,36 +266,30 @@ class TestMaillardPipelineEvaluation:
 class TestMaillardPipelineErrorHandling:
     """Test error handling and edge cases."""
 
-    def test_evaluate_all_with_extreme_conditions(self):
+    def test_evaluate_all_with_extreme_conditions(self, pipeline_meaty_beany):
         """Should handle extreme pH/temperature gracefully."""
-        designer = MaillardPipeline(target_tag="meaty", minimize_tag="beany")
-        
         # Very acidic
         cond_acidic = ReactionConditions(pH=2.0, temperature_celsius=200.0)
-        results = designer.evaluate_all(cond_acidic)
+        results = pipeline_meaty_beany.evaluate_all(cond_acidic)
         assert len(results) >= 0, "Should handle extreme conditions"
         
         # Very alkaline
         cond_alkaline = ReactionConditions(pH=10.0, temperature_celsius=100.0)
-        results = designer.evaluate_all(cond_alkaline)
+        results = pipeline_meaty_beany.evaluate_all(cond_alkaline)
         assert len(results) >= 0, "Should handle extreme conditions"
 
-    def test_results_have_valid_names(self):
+    def test_results_have_valid_names(self, meaty_results_default):
         """All results should have non-empty names."""
-        designer = MaillardPipeline(target_tag="meaty", minimize_tag="beany")
-        cond = ReactionConditions(pH=6.0, temperature_celsius=150.0)
-        results = designer.evaluate_all(cond)
+        results = meaty_results_default
         
         for result in results:
             assert result.name is not None
             assert isinstance(result.name, str)
             assert len(result.name) > 0, "Result name should not be empty"
 
-    def test_evaluate_all_returns_list(self):
+    def test_evaluate_all_returns_list(self, meaty_results_default):
         """evaluate_all() should always return a list."""
-        designer = MaillardPipeline(target_tag="meaty", minimize_tag="beany")
-        cond = ReactionConditions(pH=6.0, temperature_celsius=150.0)
-        results = designer.evaluate_all(cond)
+        results = meaty_results_default
         
         assert isinstance(results, list), "evaluate_all should return a list"
 
@@ -312,9 +297,9 @@ class TestMaillardPipelineErrorHandling:
 class TestFormulationGridLoading:
     """Test grid loading and formulation data."""
 
-    def test_grid_formulations_have_required_fields(self):
+    def test_grid_formulations_have_required_fields(self, pipeline_meaty_beany):
         """Loaded formulations should have name and precursor info."""
-        designer = MaillardPipeline(target_tag="meaty", minimize_tag="beany")
+        designer = pipeline_meaty_beany
         
         for formulation in designer.grid:
             assert hasattr(formulation, 'name') or formulation.get('name'), \
@@ -328,16 +313,16 @@ class TestFormulationGridLoading:
             )
             assert has_precursor, "Formulation should have at least one precursor category"
 
-    def test_grid_is_not_empty(self):
+    def test_grid_is_not_empty(self, pipeline_meaty_beany):
         """Grid should contain actual formulations."""
-        designer = MaillardPipeline(target_tag="meaty", minimize_tag="beany")
+        designer = pipeline_meaty_beany
         assert len(designer.grid) > 0, "Grid should have at least one formulation"
         assert len(designer.grid) <= 1000, "Grid should not be unreasonably large"
 
 
-def test_trapping_efficiency_calculation():
+def test_trapping_efficiency_calculation(recommender_fast):
     """Verify that Lysine traps Hexanal more efficiently than Glycine."""
-    recommender = Recommender()
+    recommender = recommender_fast
     engine = SmirksEngine(ReactionConditions(pH=6.0, temperature_celsius=150.0))
     
     # System A: Hexanal + Glycine
@@ -374,9 +359,9 @@ def test_trapping_efficiency_calculation():
     # resulting in a higher Boltzmann sum.
     assert eff_b > eff_a
 
-def test_sensory_metadata_presence():
+def test_sensory_metadata_presence(recommender_fast):
     """Verify that predictions include sensory descriptors and thresholds."""
-    recommender = Recommender()
+    recommender = recommender_fast
     engine = SmirksEngine(ReactionConditions(pH=5.0, temperature_celsius=150.0))
     
     ribose = resolve("ribose")
@@ -479,9 +464,9 @@ def test_advanced_formulation_cli():
     assert "Generated" in result.stdout
     assert "MAILLARD DECISION SUMMARY" in result.stdout
 
-def test_lysine_budget_competition():
+def test_lysine_budget_competition(recommender_fast):
     """Verify that Lysine Budget increases when Serine (DHA precursor) is added."""
-    recommender = Recommender()
+    recommender = recommender_fast
     engine = SmirksEngine(ReactionConditions(pH=6.0, temperature_celsius=150.0))
     
     # System A: Glucose + Lysine (Maillard only)

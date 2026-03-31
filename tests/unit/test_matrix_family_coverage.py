@@ -21,10 +21,15 @@ def test_matrix_family_coverage_artifact_distinguishes_explicit_from_indirect_su
     assert by_family["soy_isolate"]["runtime_posture"] == "directional_matrix"
     assert by_family["coconut_oil_co_matrix"]["runtime_posture"] == "indirect_generic_support"
     assert by_family["coconut_oil_co_matrix"]["expansion_status"] == "blocked_on_family_specific_evidence"
+    assert by_family["coconut_oil_co_matrix"]["scope_priority"] == "scope_gap_to_rank"
     assert "coconut-specific lipid profile" in by_family["coconut_oil_co_matrix"]["what_is_not_supported"]
     assert by_family["mycoprotein"]["expansion_status"] == "bounded_expansion_candidate"
+    assert by_family["mycoprotein"]["scope_priority"] == "bounded_next_candidate"
     assert "other_plant_proteins" in payload["summary"]["open_gap_families"]
     assert payload["summary"]["bounded_expansion_candidates"] == ["mycoprotein"]
+    assert "pea_isolate" in payload["summary"]["active_scope_priorities"]
+    assert "soy_isolate" in payload["summary"]["active_scope_priorities"]
+    assert "coconut_oil_co_matrix" in payload["summary"]["scope_gap_priorities"]
 
 
 def test_matrix_family_coverage_markdown_mentions_coconut_gap_policy():
@@ -32,5 +37,7 @@ def test_matrix_family_coverage_markdown_mentions_coconut_gap_policy():
 
     assert "Matrix Family Coverage" in markdown
     assert "Expansion Gates" in markdown
+    assert "Scope Priority" in markdown
     assert "coconut_oil_co_matrix" in markdown
+    assert "Scope-gap priorities" in markdown
     assert "Indirect-only families" in markdown

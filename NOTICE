@@ -1,0 +1,8 @@
+Maillard
+Copyright 2024-2026 The Maillard Authors
+
+This product includes software developed by the Grimme Group (https://github.com/grimme-lab):
+- xtb (Licensed under LGPL-3.0)
+- crest/xtb-iff (Licensed under LGPL-3.0)
+
+Maillard interacts with these tools as external executables via subprocess calls. This interaction does not extend the copyleft requirements of the LGPL to the Maillard codebase itself, which remains under the Apache License 2.0.

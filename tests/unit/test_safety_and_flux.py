@@ -4,6 +4,7 @@ import pytest
 from src.pipeline import MaillardPipeline  # noqa: E402
 from src.smirks_engine import ReactionConditions  # noqa: E402
 
+@pytest.mark.slow
 def test_safety_scoring_acrylamide():
     """Verify that asparagine-rich formulations trigger safety penalties."""
     designer = MaillardPipeline(target_tag="roasted", minimize_tag="beany")
@@ -58,6 +59,7 @@ def test_safety_scoring_acrylamide():
     # AcrylamideRisk should be way more dangerous than baseline due to acrylamide priority
     assert acry_res.safety_score > safe_res.safety_score
 
+@pytest.mark.slow
 def test_concentration_aware_ranking():
     """Verify that doubling precursor concentration doubles the flux/score."""
     designer = MaillardPipeline(target_tag="meaty")

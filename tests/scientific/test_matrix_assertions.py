@@ -10,11 +10,8 @@ from src.benchmark_validation import build_matrix_benchmark_assertions
 from src.presentation import render_matrix_benchmark_assertions_markdown
 
 
-def test_matrix_benchmark_assertions_cover_external_and_internal_matrix_rows():
-    rows = build_matrix_benchmark_assertions([
-        ROOT / "data" / "benchmarks" / "pea_isolate_40C_PratapSingh2021.json",
-        ROOT / "data" / "benchmarks" / "pea_isolate_ribose_cysteine_100C_45min_Internal2026.json",
-    ])
+def test_matrix_benchmark_assertions_cover_external_and_internal_matrix_rows(pea_matrix_assertion_rows):
+    rows = pea_matrix_assertion_rows
     markdown = render_matrix_benchmark_assertions_markdown(rows)
     by_id = {row.benchmark_id: row for row in rows}
 

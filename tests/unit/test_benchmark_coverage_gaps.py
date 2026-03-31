@@ -3,7 +3,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[2]
-SCRIPT_PATH = ROOT / "scripts" / "generate_benchmark_coverage_gaps.py"
+SCRIPT_PATH = ROOT / "scripts" / "generators" / "generate_benchmark_coverage_gaps.py"
 
 
 def _load_script_module():

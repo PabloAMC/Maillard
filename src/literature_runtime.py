@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-import json
 import math
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Optional
 
+from src.artifact_io import load_optional_json_mapping
 from src.family_ingestion_plan import load_family_ingestion_plan
 from src.literature_family_registry import (
     iter_computational_prior_entries as iter_family_computational_prior_entries,
@@ -21,11 +21,7 @@ DATA_LIT_DIR = ROOT / "data" / "lit"
 
 
 def _load_json_payload(file_name: str) -> dict[str, Any]:
-    payload_path = DATA_LIT_DIR / file_name
-    if not payload_path.exists():
-        return {}
-    with open(payload_path, "r", encoding="utf-8") as handle:
-        return json.load(handle)
+    return load_optional_json_mapping(DATA_LIT_DIR / file_name)
 
 
 FLAVOR_REFERENCE_PAYLOADS = _load_json_payload("flavor_reference_payloads.json")
@@ -67,9 +63,7 @@ _RUNTIME_LANE_PRIOR_REGISTRY = {
 }
 
 
-def _normalize_name(name: str) -> str:
-    normalized = str(name).lower().replace("_", " ").replace("-", " ")
-    return " ".join(normalized.split())
+from src.text_utils import normalize_name_spaced as _normalize_name
 
 
 def _sigmoid(value: float, center: float, width: float) -> float:
@@ -849,6 +843,254 @@ def _build_core_maillard_lane(
         },
     )
 
+def _build_positive_adverse_crosstalk_lane(
+    *,
+    sulfur_signal: float,
+    strecker_balance_score: float,
+    lipid_crosstalk_lane: Mapping[str, Any],
+) -> Dict[str, Any]:
+    """
+    [Reframe: Family 11 — Positive vs. adverse Maillard/lipid crosstalk closure]
+
+    Hexanal suppression is NOT a standalone heuristic tweak.  It only makes sense
+    as part of the broader competitive-flux landscape described by Family 11:
+    the same carbonyl pool that drives positive meaty/sulfury Maillard character
+    simultaneously competes with lipid-oxidation pathways for available precursors.
+
+    This lane quantifies that competition as a kinetic proxy:
+      positive_signal  = sulfur_signal + 10 * strecker_balance_score
+      suppression_factor = clipped log10 ratio of positive vs. lipid signal
+
+    Any future compound-specific Kd estimation for hexanal binding should be
+    routed here (Family 11) as an upgrade to this heuristic, NOT added to the
+    retention pipeline as a separate silo.  Retention/Kd is part of the
+    computational closure ladder, not a standalone sprint.
+
+    Source: data/Gemini_Deep_Research/11_maillard_lipid_crosstalk.md
+    """
+    lipid_marker_signal_ppb = float(lipid_crosstalk_lane.get("lipid_marker_signal_ppb", 0.0))
+    positive_signal = sulfur_signal + 10.0 * strecker_balance_score
+    active = bool(positive_signal > 1.0 and lipid_marker_signal_ppb > 1.0)
+    hexanal_suppression_factor = 0.0
+    if active:
+        hexanal_suppression_factor = min(1.0, 0.25 * math.log10(1.0 + positive_signal / max(lipid_marker_signal_ppb, 1.0)))
+    
+    summary = "No positive-vs-adverse crosstalk active."
+    if active:
+        summary = "Positive Maillard pathways outcompete oxidative pathways, suppressing hexanal/lipid marker accumulation."
+        
+    return _build_family_lane_payload(
+        "11",
+        active=active,
+        summary=summary,
+        metrics={
+            "positive_maillard_signal": float(positive_signal),
+            "hexanal_suppression_factor": float(hexanal_suppression_factor),
+        },
+    )
+
+
+def _build_quinone_cys_sink_lane(
+    *,
+    normalized_amino: List[str],
+    polyphenol_active: bool,
+) -> Dict[str, Any]:
+    """
+    [Reframe: Family 13 — Polyphenol/amino-acid capping as an upstream precursor sink]
+
+    Polyphenol interactions are NOT primarily a safety or antioxidant topic in
+    this framework.  They represent a quantitative upstream sink that consumes
+    free amino acids (especially Cys > Lys) via quinone conjugation BEFORE those
+    amino acids can enter core Maillard pathways.  The priority ordering
+    (Cys >> Lys) is dictated by relative nucleophilicity, not by nutritional concern.
+
+    This lane computes a quinone budget that explicitly reduces available
+    precursor pool for downstream flavor formation.
+
+    Source: data/Gemini_Deep_Research/13_polyphenol_amino_capping.md
+    """
+    cys_count = sum(1 for a in normalized_amino if "cysteine" in a or "cys" in a)
+    lys_count = sum(1 for a in normalized_amino if "lysine" in a or "lys" in a)
+    active = bool(polyphenol_active and (cys_count > 0 or lys_count > 0))
+    quinone_budget_consumed = 0.0
+    cys_penalty = 0.0
+    
+    if active:
+        if cys_count > 0:
+            cys_penalty = 0.8  # Quinone consumes Cys heavily over Lys
+            quinone_budget_consumed = 1.0
+        elif lys_count > 0:
+            quinone_budget_consumed = 0.4
+            
+    summary = "No quinone-driven precursor sink active."
+    if active:
+        summary = "Quinones actively deplete available Cysteine/Lysine, throttling downstream meaty/savory Maillard pathways."
+        
+    return _build_family_lane_payload(
+        "13",
+        active=active,
+        summary=summary,
+        metrics={
+            "quinone_budget_consumed": float(quinone_budget_consumed),
+            "cysteine_depletion_penalty": float(cys_penalty),
+        },
+    )
+
+
+def _build_amino_dicarbonyl_source_lane(
+    *,
+    normalized_amino: List[str],
+    core_support_score: float,
+) -> Dict[str, Any]:
+    """
+    [Reframe: Family 14 — Ascorbic acid / AA degradation as a dicarbonyl source term]
+
+    Ascorbic acid and related amino acid degradation pathways contribute to the
+    dicarbonyl pool independently of the main sugar fragmentation route.  This
+    lane adds that source term to the flavor formation budget rather than treating
+    AA as a passive participant.  This is NOT a safety topic; it is a precursor
+    routing issue within the computational closure ladder.
+
+    Source: data/Gemini_Deep_Research/14_ascorbic_acid_maillard.md
+    """
+    active = len(normalized_amino) > 0 and core_support_score > 0.0
+    aa_dicarbonyl_flux = 0.0
+    if active:
+        aa_dicarbonyl_flux = min(1.0, 0.15 * len(normalized_amino) * core_support_score)
+        
+    summary = "No measurable AA-driven dicarbonyl sourcing."
+    if active:
+        summary = "Amino acid degradation acts as an explicit source term for reactive dicarbonyls, bypassing standard sugar fragmentation bottlenecks."
+        
+    return _build_family_lane_payload(
+        "14",
+        active=active,
+        summary=summary,
+        metrics={
+            "aa_dicarbonyl_flux": float(aa_dicarbonyl_flux),
+        },
+    )
+
+
+def _build_sugar_diversion_lane(
+    *,
+    normalized_sugars: List[str],
+    lipids: List[str],
+) -> Dict[str, Any]:
+    """
+    [Reframe: Family 15 — Phospholipid/amine interfacial sugar diversion]
+
+    Phosphatidylethanolamine (PE) acts as one of the most reactive primary amines
+    in the early Maillard reaction, especially in water/oil interfaces during
+    extrusion.  This lane models the competitive diversion of reducing sugars
+    toward PE rather than free amino acids.  It is NOT a lipid oxidation story;
+    it is a precursor availability and interfacial reaction acceleration story
+    that belongs to the computational closure ladder for Family 15.
+
+    Source: data/Gemini_Deep_Research/15_phospholipid_amine_maillard.md
+    """
+    pe_active = any("phosphatidylethanolamine" in str(l).lower() or "pe" in str(l).lower().split() for l in lipids)
+    active = bool(pe_active and normalized_sugars)
+    diversion_factor = 0.0
+    
+    if active:
+        diversion_factor = min(0.8, 0.4 * len(normalized_sugars))
+        
+    summary = "No PE-driven sugar diversion active."
+    if active:
+        summary = "Phosphatidylethanolamine acts as a highly reactive primary amine, aggressively diverting early reducing sugars away from standard flavor pathways via interfacial acceleration."
+        
+    return _build_family_lane_payload(
+        "15",
+        active=active,
+        summary=summary,
+        metrics={
+            "pe_sugar_diversion_factor": float(diversion_factor),
+        },
+    )
+
+
+def _build_trapping_burden_modifier_lane(
+    *,
+    normalized_additives: List[str],
+    protein_label: str,
+) -> Dict[str, Any]:
+    """
+    [Reframe: Family 16 — Melanoidin polymerisation as a macromolecular trapping modifier]
+
+    This lane expresses the generic volatile-trapping burden imposed by high-MW
+    melanoidin networks, cross-linked proteins, and polysaccharide matrices.  It
+    is intentionally framed as a MODIFIER (not an absolute release curve) because
+    compound-specific retention is part of the computational closure ladder and
+    must be earned by Kd evidence, not assumed from macromolecular heuristics.
+
+    Safety implications of AGE cross-linking belong to Family 12
+    (protein_damage_markers), not here.  This lane only governs flavor release
+    attenuation from the polymerised bulk phase.
+
+    Source: data/Gemini_Deep_Research/16_melanoidin_polymerization.md
+    """
+    macromolecular_burden = 0.0
+    if protein_label != "free":
+        macromolecular_burden += 0.40
+    if any("starch" in a or "hydrocolloid" in a or "fiber" in a for a in normalized_additives):
+        macromolecular_burden += 0.35
+        
+    active = float(macromolecular_burden) > 0.0
+    summary = "Matrix entrapment modifying burden is negligible."
+    if active:
+        summary = "Matrix macromolecules impose a generic trapping burden on volatile release, strictly attenuating absolute yield without pretending to be a compound-specific release curve."
+        
+    return _build_family_lane_payload(
+        "16",
+        active=active,
+        summary=summary,
+        metrics={
+            "trapping_burden_modifier": min(1.0, macromolecular_burden),
+        },
+    )
+
+
+def _build_upstream_interception_layer(
+    family_lane_summary: Mapping[str, Mapping[str, Any]],
+) -> Dict[str, Any]:
+    """
+    [Priority 2B Architecture]
+    Groups families 13, 15, and 16 into one explicit upstream runtime layer
+    that modifies effective precursor availability before the main flavor solver.
+    
+    Exposes unified scientist-readable state variables:
+      - effective_cysteine_fraction
+      - effective_sugar_fraction
+      - volatile_retention_factor
+    """
+    f13 = family_lane_summary.get("13", {})
+    f15 = family_lane_summary.get("15", {})
+    f16 = family_lane_summary.get("16", {})
+    
+    f13_metrics = f13.get("metrics", {}) or {}
+    f15_metrics = f15.get("metrics", {}) or {}
+    f16_metrics = f16.get("metrics", {}) or {}
+    
+    active = any([f13.get("active", False), f15.get("active", False), f16.get("active", False)])
+    
+    return {
+        "active": active,
+        "interceptors": {
+            "cysteine_depletion": float(f13_metrics.get("cysteine_depletion_penalty", 0.0)),
+            "quinone_load": float(f13_metrics.get("quinone_budget_consumed", 0.0)),
+            "sugar_diversion": float(f15_metrics.get("pe_sugar_diversion_factor", 0.0)),
+            "trapping_burden": float(f16_metrics.get("trapping_burden_modifier", 0.0)),
+        },
+        "state_variables": {
+            "effective_cysteine_fraction": round(1.0 - float(f13_metrics.get("cysteine_depletion_penalty", 0.0)), 4),
+            "effective_sugar_fraction": round(1.0 - float(f15_metrics.get("pe_sugar_diversion_factor", 0.0)), 4),
+            "volatile_retention_factor": round(1.0 - float(f16_metrics.get("trapping_burden_modifier", 0.0)), 4),
+        },
+        "summary": "Unified layer for Families 13 (Polyphenol Sink), 15 (PE Diversion), and 16 (Trapping Burden)."
+    }
+
+
 
 def _classify_donor_family(normalized_sugar: str) -> str:
     if any(token in normalized_sugar for token in ["phosphate", "ribose 5 phosphate", "glucose 6 phosphate", "fructose 6 phosphate"]):
@@ -1196,6 +1438,36 @@ def _build_family_lane_adjustments(family_lane_summary: Mapping[str, Mapping[str
     per_lane["10"] = {
         "target_score_delta": 0.16 * float(fermentation_lane.get("pretreatment_support_score", 0.0)) if fermentation_lane.get("active") else 0.0,
         "off_flavour_risk_delta": -off_note_cleanup_bonus if fermentation_lane.get("active") else 0.0,
+    }
+
+    family_11_lane = family_lane_summary.get("11", {})
+    per_lane["11"] = {
+        "target_score_delta": 0.05 * float(family_11_lane.get("hexanal_suppression_factor", 0.0)) if family_11_lane.get("active") else 0.0,
+        "off_flavour_risk_delta": -0.15 * float(family_11_lane.get("hexanal_suppression_factor", 0.0)) if family_11_lane.get("active") else 0.0,
+    }
+
+    family_13_lane = family_lane_summary.get("13", {})
+    per_lane["13"] = {
+        "target_score_delta": -0.12 * float(family_13_lane.get("cysteine_depletion_penalty", 0.0)) if family_13_lane.get("active") else 0.0,
+        "off_flavour_risk_delta": 0.05 * float(family_13_lane.get("quinone_budget_consumed", 0.0)) if family_13_lane.get("active") else 0.0,
+    }
+
+    family_14_lane = family_lane_summary.get("14", {})
+    per_lane["14"] = {
+        "target_score_delta": 0.15 * float(family_14_lane.get("aa_dicarbonyl_flux", 0.0)) if family_14_lane.get("active") else 0.0,
+        "off_flavour_risk_delta": -0.05 * float(family_14_lane.get("aa_dicarbonyl_flux", 0.0)) if family_14_lane.get("active") else 0.0,
+    }
+
+    family_15_lane = family_lane_summary.get("15", {})
+    per_lane["15"] = {
+        "target_score_delta": -0.18 * float(family_15_lane.get("pe_sugar_diversion_factor", 0.0)) if family_15_lane.get("active") else 0.0,
+        "off_flavour_risk_delta": 0.08 * float(family_15_lane.get("pe_sugar_diversion_factor", 0.0)) if family_15_lane.get("active") else 0.0,
+    }
+
+    family_16_lane = family_lane_summary.get("16", {})
+    per_lane["16"] = {
+        "target_score_delta": -0.20 * float(family_16_lane.get("trapping_burden_modifier", 0.0)) if family_16_lane.get("active") else 0.0,
+        "off_flavour_risk_delta": -0.10 * float(family_16_lane.get("trapping_burden_modifier", 0.0)) if family_16_lane.get("active") else 0.0,
     }
 
     total_target_score_delta = sum(float(row.get("target_score_delta", 0.0)) for row in per_lane.values())
@@ -1649,6 +1921,27 @@ def build_flavor_axis_summary(
         furanone_expected=furanone_expected,
         furanone_observed=furanone_observed,
     )
+    family_11_lane = _build_positive_adverse_crosstalk_lane(
+        sulfur_signal=sulfur_signal,
+        strecker_balance_score=strecker_balance_score,
+        lipid_crosstalk_lane=lipid_crosstalk_lane,
+    )
+    family_13_lane = _build_quinone_cys_sink_lane(
+        normalized_amino=normalized_amino,
+        polyphenol_active=polyphenol_active,
+    )
+    family_14_lane = _build_amino_dicarbonyl_source_lane(
+        normalized_amino=normalized_amino,
+        core_support_score=float(core_maillard_lane.get("core_support_score", 0.0)),
+    )
+    family_15_lane = _build_sugar_diversion_lane(
+        normalized_sugars=normalized_sugars,
+        lipids=lipids,
+    )
+    family_16_lane = _build_trapping_burden_modifier_lane(
+        normalized_additives=normalized_additives,
+        protein_label=protein_label,
+    )
     family_lane_summary = {
         row["slr_family"]: row
         for row in [
@@ -1662,6 +1955,11 @@ def build_flavor_axis_summary(
             caramelization_lane,
             fermentation_pretreatment_lane,
             off_note_guardrail_lane,
+            family_11_lane,
+            family_13_lane,
+            family_14_lane,
+            family_15_lane,
+            family_16_lane,
         ]
     }
     family_lane_adjustments = _build_family_lane_adjustments(family_lane_summary)

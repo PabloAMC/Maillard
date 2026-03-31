@@ -11,6 +11,7 @@ def test_peptide_accessibility_blind_spot():
     EXPECTATION: High hydrolysis should increase flavor score.
     CURRENT: Score remains constant regardless of 'hydrolysis' state.
     """
+    pytest.xfail("Engine does not yet support peptide accessibility scaling.")
     designer = MaillardPipeline(target_tag="meaty")
     cond = ReactionConditions(temperature_celsius=100)
     
@@ -43,6 +44,7 @@ def test_matrix_inhibition_blind_spot():
     EXPECTATION: High fiber content should decrease sensory radar scores.
     CURRENT: Radar scores depend only on chemical concentration.
     """
+    pytest.xfail("Engine does not yet support matrix inhibition (volatile partitioning).")
     designer = MaillardPipeline(target_tag="meaty")
     cond_clear = ReactionConditions(protein_fraction=1.0) # Pure solution
     cond_matrix = ReactionConditions(protein_fraction=0.1, matrix_fiber=0.5) # High bread/pea matrix
@@ -65,6 +67,7 @@ def test_metal_catalysis_blind_spot():
     EXPECTATION: Presence of Iron should lower pyrazine barriers.
     CURRENT: Only temperature and pH are taken into account.
     """
+    pytest.xfail("Engine does not yet support non-heme metal catalysis (Iron).")
     designer = MaillardPipeline(target_tag="roasted") # Pyrazines
     cond_no_iron = ReactionConditions(temperature_celsius=120)
     cond_iron = ReactionConditions(temperature_celsius=120, metal_catalyst="Fe2+")

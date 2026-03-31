@@ -143,3 +143,102 @@ arrhenius_data:
     pH: "Matrix dependent"
     substrate: "Vitamin B1"
     source: "10.1016/0022-1416(84)90226-9 (or similar lit)"
+
+  # ── C4/C5 DFT-tier Reactions (Families 11-16) ─────────────────────────────
+  # Source quality legend:
+  #   selective_dft_anchor    — wB97M-V//r2SCAN-3c result (after C5 completes)
+  #   xtb_derived_gfn2        — GFN2-xTB NEB path search; ranking use only
+  #   literature_derived_transfer — Well-established Ea from close-analogue literature
+  # Run scripts/run_dft_c4_c5.py to generate selective_dft_anchor results;
+  # run scripts/generators/ingest_dft_c4_c5_results.py to promote entries.
+
+  # 11. Hexanal radical quench — Maillard/lipid competition (Family 11)
+  hexanal_radical_quench_xtb_derived:
+    A_value: 1.0e12
+    A_unit: "1/s"
+    Ea_kj_mol: 31.72    # 7.58 kcal/mol × 4.184 — GFN2-xTB NEB
+    uncertainty_kj: 42.0
+    temp_range_C: "150"
+    pH: "Neutral"
+    substrate: "Cys + hexanal radical"
+    source: "GFN2-xTB NEB path search, data/geometries/xtb_inputs/hexanal_radical_quench"
+    source_quality: "xtb_derived_gfn2"
+    slr_family: "11"
+    promotion_ceiling: "ranking_only"
+    honest_label: "GFN2-xTB estimate, ±factor 3-8 in concentration, ranking only"
+
+  # 12. Quinone-Cys Michael addition (Family 13)
+  quinone_cys_michael_xtb_derived:
+    A_value: 1.0e12
+    A_unit: "1/s"
+    Ea_kj_mol: 74.65    # 17.84 kcal/mol × 4.184 — GFN2-xTB NEB
+    uncertainty_kj: 42.0
+    temp_range_C: "150"
+    pH: "Neutral"
+    substrate: "Ortho-quinone + Cys thiolate"
+    source: "GFN2-xTB NEB path search, data/geometries/xtb_inputs/quinone_cys_michael"
+    source_quality: "xtb_derived_gfn2"
+    slr_family: "13"
+    promotion_ceiling: "bounded_calibration"
+    honest_label: "GFN2-xTB estimate, ±factor 3-8 in concentration, ranking only"
+
+  # 13. Ascorbic acid ring-open → dicarbonyl (Family 14)
+  aa_ring_open_dicarbonyl_xtb_derived:
+    A_value: 1.0e11
+    A_unit: "1/s"
+    Ea_kj_mol: 31.70    # Literature anchor from HCW (aqueous thermal degradation)
+    uncertainty_kj: 20.0
+    temp_range_C: "150"
+    pH: "Acidic"
+    substrate: "Dehydroascorbate → 3-deoxyosone + furfural"
+    source: "Hydrothermal conversion Ea=31.7 kJ/mol (SLR 14 anchor)"
+    source_quality: "xtb_derived_gfn2"  # Pending DFT; literature anchor used as prior
+    slr_family: "14"
+    promotion_ceiling: "bounded_calibration"
+    honest_label: "Literature Ea=31.7 kJ/mol from HCW, DFT validation pending"
+
+  # 14. PE Schiff base (Family 15) — literature_derived_transfer
+  pe_schiff_base_lit_derived:
+    A_value: 1.0e12
+    A_unit: "1/s"
+    Ea_kj_mol: 92.9     # SLR 15: phosphatidylethanolamine + glucose Schiff base
+    uncertainty_kj: 20.9
+    temp_range_C: "150"
+    pH: "Neutral"
+    substrate: "PE headgroup + glucose"
+    source: "SLR 15 (data/Gemini_Deep_Research/15_phospholipid_amine_maillard.md)"
+    source_quality: "literature_derived_transfer"
+    slr_family: "15"
+    promotion_ceiling: "bounded_calibration"
+    honest_label: "SLR 15 literature Ea=92.9 kJ/mol, ±factor 2-5; bounded calibration"
+
+  # 15. PE Amadori rearrangement (Family 15) — literature_derived_transfer
+  pe_amadori_lit_derived:
+    A_value: 1.0e12
+    A_unit: "1/s"
+    Ea_kj_mol: 82.9     # SLR 15: PE-Schiff → Amadori
+    uncertainty_kj: 20.9
+    temp_range_C: "150"
+    pH: "Neutral"
+    substrate: "PE-Schiff base → PE-Amadori"
+    source: "SLR 15 (data/Gemini_Deep_Research/15_phospholipid_amine_maillard.md)"
+    source_quality: "literature_derived_transfer"
+    slr_family: "15"
+    promotion_ceiling: "bounded_calibration"
+    honest_label: "SLR 15 literature Ea=82.9 kJ/mol, ±factor 2-5; bounded calibration"
+
+  # 16. Lysinoalanine crosslink (Family 12)
+  lysinoalanine_crosslink_xtb_derived:
+    A_value: 1.0e12
+    A_unit: "1/s"
+    Ea_kj_mol: 120.93   # 28.90 kcal/mol × 4.184 — GFN2-xTB NEB
+    uncertainty_kj: 42.0
+    temp_range_C: "150"
+    pH: "Alkaline"
+    substrate: "DHA + Lys epsilon-amine"
+    source: "GFN2-xTB NEB path search, data/geometries/xtb_inputs/lysinoalanine_crosslink"
+    source_quality: "xtb_derived_gfn2"
+    slr_family: "12"
+    promotion_ceiling: "ranking_only"
+    honest_label: "GFN2-xTB estimate, ±factor 3-8 in concentration, ranking only"
+

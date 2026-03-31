@@ -2,15 +2,19 @@ from __future__ import annotations
 
 import json
 from dataclasses import asdict, dataclass
+from functools import lru_cache
 from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional
 
-
-def _repo_root() -> Path:
-    return Path(__file__).resolve().parents[1]
+from src.artifact_io import repo_root
 
 
-DEFAULT_MLP_CANDIDATE_REGISTRY = _repo_root() / "data" / "lit" / "mlp_candidate_registry.json"
+DEFAULT_MLP_CANDIDATE_REGISTRY = repo_root() / "data" / "lit" / "mlp_candidate_registry.json"
+
+
+def _registry_cache_key(file_path: Optional[Path | str]) -> str:
+    path = Path(file_path) if file_path is not None else DEFAULT_MLP_CANDIDATE_REGISTRY
+    return str(path.resolve()) if path.exists() else str(path)
 
 
 OFFLINE_ACCELERATOR_ROLES = {
@@ -34,8 +38,10 @@ class MLPModelCandidate:
     expected_speedup: float
     likely_failure_modes: List[str]
     fallback_comparator: str
+    backend_locator: Optional[str] = None
     benchmark_results_path: Optional[str] = None
     geometry_benchmark_path: Optional[str] = None
+    ts_seed_benchmark_path: Optional[str] = None
     external_evidence_id: Optional[str] = None
     status: str = "candidate_shortlist"
 
@@ -59,19 +65,29 @@ class MLPAdoptionDecision:
     approved_for_default: bool = False
 
 
-def load_mlp_candidate_registry(file_path: Optional[Path | str] = None) -> Dict[str, Any]:
-    path = Path(file_path) if file_path is not None else DEFAULT_MLP_CANDIDATE_REGISTRY
+@lru_cache(maxsize=8)
+def _load_mlp_candidate_registry_cached(cache_key: str) -> Dict[str, Any]:
+    path = Path(cache_key)
     with open(path, "r", encoding="utf-8") as handle:
         return json.load(handle)
 
 
-def load_mlp_candidates(file_path: Optional[Path | str] = None) -> List[MLPModelCandidate]:
-    payload = load_mlp_candidate_registry(file_path)
-    candidates = [MLPModelCandidate(**row) for row in payload.get("candidates", [])]
+def load_mlp_candidate_registry(file_path: Optional[Path | str] = None) -> Dict[str, Any]:
+    return _load_mlp_candidate_registry_cached(_registry_cache_key(file_path))
+
+
+@lru_cache(maxsize=8)
+def _load_mlp_candidates_cached(cache_key: str) -> tuple[MLPModelCandidate, ...]:
+    payload = _load_mlp_candidate_registry_cached(cache_key)
+    candidates = tuple(MLPModelCandidate(**row) for row in payload.get("candidates", []))
     for candidate in candidates:
         if candidate.proposed_role not in OFFLINE_ACCELERATOR_ROLES:
             raise ValueError(f"Unsupported P4 role for {candidate.candidate_id}: {candidate.proposed_role}")
     return candidates
+
+
+def load_mlp_candidates(file_path: Optional[Path | str] = None) -> List[MLPModelCandidate]:
+    return list(_load_mlp_candidates_cached(_registry_cache_key(file_path)))
 
 
 def build_adoption_note_payload(
@@ -93,7 +109,7 @@ def build_adoption_note_payload(
 
 def render_adoption_note_markdown(payload: Mapping[str, Any]) -> str:
     lines = [
-        "# P4 Adoption Notes",
+        "# Offline ML Accelerator Adoption Notes",
         "",
         "| Candidate | Role | Decision | Coverage | Rank Correlation | MAE (kcal/mol) | Stop Reasons | Fallback |",
         "| --- | --- | --- | ---: | ---: | ---: | --- | --- |",

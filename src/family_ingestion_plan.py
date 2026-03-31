@@ -1,25 +1,21 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 from typing import Any, Dict, Mapping, Optional
 
-
-def _repo_root() -> Path:
-    return Path(__file__).resolve().parents[1]
+from src.artifact_io import load_json_mapping, repo_root, resolve_optional_path
 
 
-DEFAULT_FAMILY_INGESTION_PLAN = _repo_root() / "data" / "lit" / "family_ingestion_plan.json"
+DEFAULT_FAMILY_INGESTION_PLAN = repo_root() / "data" / "lit" / "family_ingestion_plan.json"
 
 
 def load_family_ingestion_plan(file_path: Optional[Path | str] = None) -> Dict[str, Any]:
-    path = Path(file_path) if file_path is not None else DEFAULT_FAMILY_INGESTION_PLAN
-    with open(path, "r", encoding="utf-8") as handle:
-        return json.load(handle)
+    return load_json_mapping(resolve_optional_path(file_path, DEFAULT_FAMILY_INGESTION_PLAN))
 
 
 def build_family_ingestion_plan_artifact(file_path: Optional[Path | str] = None) -> Dict[str, Any]:
-    payload = load_family_ingestion_plan(file_path)
+    source_path = resolve_optional_path(file_path, DEFAULT_FAMILY_INGESTION_PLAN)
+    payload = load_family_ingestion_plan(source_path)
     families = [dict(row) for row in payload.get("families", [])]
 
     payload_type_counts: Dict[str, int] = {}
@@ -54,7 +50,7 @@ def build_family_ingestion_plan_artifact(file_path: Optional[Path | str] = None)
     active_sequence = [str(row.get("slr_family", "unknown")) for row in families]
 
     return {
-        "source": str((Path(file_path) if file_path is not None else DEFAULT_FAMILY_INGESTION_PLAN).resolve().relative_to(_repo_root().resolve()).as_posix()),
+        "source": str(source_path.resolve().relative_to(repo_root().resolve()).as_posix()),
         "template_source": str(payload.get("template_source", "")),
         "summary": {
             "family_count": len(families),
@@ -77,14 +73,15 @@ def render_family_ingestion_plan_markdown(payload: Mapping[str, Any]) -> str:
     lines = [
         "# Family Ingestion Plan",
         "",
-        "| SLR | Family | Strategic Posture | Runtime Concept | Payload Types | Wave | Next Build Action |",
-        "| --- | --- | --- | --- | --- | ---: | --- |",
+        "| SLR | Family | Posture | Runtime Concept | Payload Types | Wave | Source File | Next Build Action |",
+        "| --- | --- | --- | --- | --- | ---: | --- | --- |",
     ]
     for row in payload.get("families", []):
         next_action = "; ".join(str(item) for item in row.get("next_curation_actions", [])[:1]) or "none"
+        src = str(row.get("source_slr_file", "")) or "—"
         lines.append(
             f"| {row.get('slr_family', 'unknown')} | {row.get('family_id', 'unknown')} | {row.get('strategic_posture', 'unknown')} | {row.get('runtime_concept', 'unknown')} | "
-            f"{', '.join(str(item) for item in row.get('preferred_payload_types', [])) or 'none'} | {row.get('implementation_wave', 'unknown')} | {next_action} |"
+            f"{', '.join(str(item) for item in row.get('preferred_payload_types', [])) or 'none'} | {row.get('implementation_wave', 'unknown')} | {src} | {next_action} |"
         )
 
     lines.extend([

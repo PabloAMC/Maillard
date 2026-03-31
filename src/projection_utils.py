@@ -227,14 +227,15 @@ def build_artifact_provenance(
     """
     Builds robust provenance metadata for an artifact, including git state and scientific surface.
     """
-    from src.reporting import _repo_root, _safe_git_output, _build_scientific_surface, SCHEMA_VERSION
+    from src.reporting import _safe_git_output, _build_scientific_surface, SCHEMA_VERSION
+    from src.artifact_io import repo_root
     import json
     import hashlib
     import sys
     import platform
     import shlex
 
-    root = _repo_root()
+    root = repo_root()
     status_text = _safe_git_output(root, ["status", "--porcelain"]) or ""
     changed_paths = []
     for line in status_text.splitlines():
