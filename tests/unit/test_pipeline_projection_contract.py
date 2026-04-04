@@ -7,6 +7,7 @@ from src.projection_utils import build_projection_rows
 from src.smirks_engine import ReactionConditions, Species
 from src.pathway_extractor import Species as OutputSpecies
 from src.recommend import _apply_output_projection, _canon
+from src.safety import SafetyResult
 
 
 def test_pipeline_preserves_proxy_and_projection_metadata(monkeypatch):
@@ -33,7 +34,7 @@ def test_pipeline_preserves_proxy_and_projection_metadata(monkeypatch):
     monkeypatch.setattr(designer.sensory, "get_radar_data", lambda *args, **kwargs: {"meaty": (1.0, 1)})
     monkeypatch.setattr(
         "src.pipeline.evaluate_formulation_safety",
-        lambda *args, **kwargs: (0.0, []),
+        lambda *args, **kwargs: (0.0, [], SafetyResult(acrylamide_ppb=0.0, flagged=False, description="Mock")),
     )
 
     projection_metadata = {
@@ -121,7 +122,7 @@ def test_pipeline_uses_explicit_thiamine_availability_metadata(monkeypatch):
     monkeypatch.setattr(designer.sensory, "get_radar_data", lambda *args, **kwargs: {"meaty": (1.0, 1), "beany": (0.0, 1)})
     monkeypatch.setattr(
         "src.pipeline.evaluate_formulation_safety",
-        lambda *args, **kwargs: (0.0, []),
+        lambda *args, **kwargs: (0.0, [], SafetyResult(acrylamide_ppb=0.0, flagged=False, description="Mock")),
     )
 
     fake_recommender = MagicMock()
@@ -183,7 +184,7 @@ def test_pipeline_applies_family_upstream_contract_before_prediction(monkeypatch
     monkeypatch.setattr(designer.sensory, "get_radar_data", lambda *args, **kwargs: {"meaty": (1.0, 1), "beany": (0.0, 1)})
     monkeypatch.setattr(
         "src.pipeline.evaluate_formulation_safety",
-        lambda *args, **kwargs: (0.0, []),
+        lambda *args, **kwargs: (0.0, [], SafetyResult(acrylamide_ppb=0.0, flagged=False, description="Mock")),
     )
 
     fake_recommender = MagicMock()

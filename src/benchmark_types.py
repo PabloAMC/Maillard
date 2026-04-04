@@ -6,6 +6,10 @@ from pathlib import Path
 from typing import Dict, List, Optional
 from src.projection_metadata import ProjectionMetadataMap
 
+# Re-exported so that ``from src.benchmark_types import BenchmarkThresholds``
+# works — the canonical definition lives in validation_contract.py.
+from src.validation_contract import BenchmarkThresholds  # noqa: F401
+
 
 @dataclass(frozen=True)
 class BenchmarkMetadata:

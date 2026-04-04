@@ -1,16 +1,20 @@
 from __future__ import annotations
 
 import json
+from functools import lru_cache
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Optional
 
-
-def _repo_root() -> Path:
-    return Path(__file__).resolve().parents[1]
+from src.artifact_io import repo_root
 
 
-DEFAULT_REACTION_BENCHMARK_FILE = _repo_root() / "data" / "lit" / "reaction_benchmark_set.json"
+DEFAULT_REACTION_BENCHMARK_FILE = repo_root() / "data" / "lit" / "reaction_benchmark_set.json"
+
+
+def _payload_cache_key(file_path: Optional[Path | str]) -> str:
+    path = Path(file_path) if file_path is not None else DEFAULT_REACTION_BENCHMARK_FILE
+    return str(path.resolve()) if path.exists() else str(path)
 
 
 def _normalize_alias(value: str) -> str:
@@ -47,15 +51,25 @@ class ReactionBenchmarkEntry:
         return normalized
 
 
-def load_reaction_benchmark_payload(file_path: Optional[Path | str] = None) -> Dict[str, Any]:
-    path = Path(file_path) if file_path is not None else DEFAULT_REACTION_BENCHMARK_FILE
+@lru_cache(maxsize=8)
+def _load_reaction_benchmark_payload_cached(cache_key: str) -> Dict[str, Any]:
+    path = Path(cache_key)
     with open(path, "r", encoding="utf-8") as handle:
         return json.load(handle)
 
 
+def load_reaction_benchmark_payload(file_path: Optional[Path | str] = None) -> Dict[str, Any]:
+    return _load_reaction_benchmark_payload_cached(_payload_cache_key(file_path))
+
+
+@lru_cache(maxsize=8)
+def _load_reaction_benchmark_entries_cached(cache_key: str) -> tuple[ReactionBenchmarkEntry, ...]:
+    payload = _load_reaction_benchmark_payload_cached(cache_key)
+    return tuple(ReactionBenchmarkEntry(**row) for row in payload.get("entries", []))
+
+
 def load_reaction_benchmark_entries(file_path: Optional[Path | str] = None) -> List[ReactionBenchmarkEntry]:
-    payload = load_reaction_benchmark_payload(file_path)
-    return [ReactionBenchmarkEntry(**row) for row in payload.get("entries", [])]
+    return list(_load_reaction_benchmark_entries_cached(_payload_cache_key(file_path)))
 
 
 def build_reaction_benchmark_alias_index(

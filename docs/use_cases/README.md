@@ -20,7 +20,7 @@ These reports are not executable benchmark records yet. They are literature-back
 
 Current status of these candidate reports:
 
-- they do not unlock P3 or strict-gate promotion by themselves
+- they do not unlock selective mechanistic refinement or strict-gate promotion by themselves
 - they do identify concrete pea and soy meaty-positive benchmark designs
 - several key references have been sanity-checked and corrected; Nishimura 2024 has now been reviewed in full text and remains qualitative-only rather than benchmark-quantitative
 - they should be treated as benchmark-intake specifications, not as accepted scientific evidence packages

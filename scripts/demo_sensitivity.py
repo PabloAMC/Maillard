@@ -2,8 +2,7 @@ import sys
 from pathlib import Path
 import math
 
-# Setup environment
-ROOT = Path("/Users/pabloantoniomorenocasares/Developer/Maillard")
+ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from src.pipeline import MaillardPipeline

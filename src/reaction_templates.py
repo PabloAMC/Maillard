@@ -3,11 +3,12 @@ from rdkit import Chem
 from rdkit.Chem import AllChem
 from src.pathway_extractor import Species, ElementaryStep
 from src.conditions import ReactionConditions
+from src.chem_utils import parse_mol as _mol, calculate_mw as _mw, canonicalize_smiles as _canonical
+from src.sugar_classifier import is_ketose, is_pentose, is_hexose, is_sugar
 from src.smirks_engine import (
-    _is_ketose, _is_pentose, _is_hexose, _is_sugar, _is_asparagine, 
-    _is_lysine, _mol, _canonical, _is_valid, _GSH_CANONICAL, 
+    _is_asparagine, _is_lysine, _is_valid, _GSH_CANONICAL, 
     _is_lipid_aldehyde, _is_lipid_hydroperoxide, _is_primary_amine,
-    _has_cysteine_beta_carbon, _is_dicarbonyl, _mw, MAX_MW,
+    _has_cysteine_beta_carbon, _is_dicarbonyl, MAX_MW,
     _THIAMINE_CANONICAL, _DMHF_CANONICAL, _HEMF_CANONICAL
 )
 
@@ -49,7 +50,7 @@ def _amadori_cascade(sugar: Species, amino_acid: Species) -> List[ElementaryStep
         
     schiff_label = f"{sugar.label}-{amino_acid.label}-Schiff-base"
     
-    if _is_ketose(sugar):
+    if is_ketose(sugar):
         amadori_label = f"{sugar.label}-{amino_acid.label}-Heyns"
         family = "Heyns_Rearrangement"
         if "fructose" in sugar.label.lower():
@@ -71,12 +72,12 @@ def _amadori_cascade(sugar: Species, amino_acid: Species) -> List[ElementaryStep
     else:
         amadori_label = f"{sugar.label}-{amino_acid.label}-Amadori"
         family = "Amadori_Rearrangement"
-        if _is_pentose(sugar):
+        if is_pentose(sugar):
             # Ribose: O=CC(O)C(O)C(O)CO
             schiff_smiles = f"OCC(O)C(O)C(O)/C={_fragment}"
             # Again, use parenthesis around the N fragment
             amadori_smiles = f"OCC(O)C(O)C(=O)C({_fragment})"
-        elif _is_hexose(sugar):
+        elif is_hexose(sugar):
             # Glucose: O=CC(O)C(O)C(O)C(O)CO
             schiff_smiles = f"OCC(O)C(O)C(O)C(O)/C={_fragment}"
             amadori_smiles = f"OCC(O)C(O)C(O)C(=O)C({_fragment})"
@@ -164,7 +165,7 @@ def _enolisation_steps(
     steps = []
     water = Species(label="water", smiles="O")
 
-    if _is_pentose(sugar):
+    if is_pentose(sugar):
         deoxy_smi = "O=CC(=O)CC(O)CO"
     else:
         deoxy_smi = "O=CC(=O)CC(O)C(O)CO"
@@ -181,7 +182,7 @@ def _enolisation_steps(
 
     # 2. Dehydration to final products
     # 2a. 1,2-enolisation (favored at acidic pH)
-    if _is_pentose(sugar):
+    if is_pentose(sugar):
         product_12 = Species(label="furfural", smiles="O=Cc1ccco1")
         water_count = 2
     else:
@@ -196,7 +197,7 @@ def _enolisation_steps(
         reaction_family="Enolisation_1_2"
     ))
 
-    if not _is_pentose(sugar):
+    if not is_pentose(sugar):
         # Secondary hexose branch: deoxyosone -> furfural + formaldehyde + 2 H2O.
         steps.append(ElementaryStep(
             reactants=[deoxy],
@@ -206,7 +207,7 @@ def _enolisation_steps(
 
     # 2b. 2,3-enolisation (favored at neutral/alkali pH)
     product_23 = Species(label="pyruvaldehyde", smiles="CC(=O)C=O")
-    if _is_pentose(sugar): # C5H8O4 -> C3H4O2 (pyruv) + C2H4O2 (glycolaldehyde)
+    if is_pentose(sugar): # C5H8O4 -> C3H4O2 (pyruv) + C2H4O2 (glycolaldehyde)
         p2 = Species(label="glycolaldehyde", smiles="O=CCO")
     else: # C6H10O5 -> C3H4O2 (pyruv) + C3H6O3 (glyceraldehyde)
         p2 = Species(label="glyceraldehyde", smiles="O=CC(O)CO")
@@ -406,12 +407,12 @@ def _retro_aldol_fragmentation(pool_species: List[Species]) -> List[ElementarySt
         lower = s.label.lower()
         if "deoxyosone" in lower:
             # Hexose -> Pyruvaldehyde + Glyceraldehyde
-            if "glucose" in lower or "fructose" in lower or _is_hexose(s):
+            if "glucose" in lower or "fructose" in lower or is_hexose(s):
                 p1 = Species(label="pyruvaldehyde", smiles="CC(=O)C=O")
                 p2 = Species(label="glyceraldehyde", smiles="O=CC(O)CO")
                 steps.append(ElementaryStep([s], [p1, p2], "Retro_Aldol_Fragmentation"))
             # Pentose -> Pyruvaldehyde + Glycolaldehyde
-            elif "ribose" in lower or _is_pentose(s):
+            elif "ribose" in lower or is_pentose(s):
                 p1 = Species(label="pyruvaldehyde", smiles="CC(=O)C=O")
                 p2 = Species(label="glycolaldehyde", smiles="O=CCO")
                 steps.append(ElementaryStep([s], [p1, p2], "Retro_Aldol_Fragmentation"))
@@ -591,7 +592,7 @@ def _mft_pathway(pool_species: List[Species]) -> List[ElementaryStep]:
         label_lower = s.label.lower()
         is_supported_deoxyosone = (
             "deoxyosone" in label_lower and (
-                _is_pentose(s)
+                is_pentose(s)
                 or "ribose" in label_lower
                 or "glucose" in label_lower
                 or "fructose" in label_lower
@@ -989,7 +990,7 @@ def _acrylamide_formation(sugar: Species, asparagine: Species) -> List[Elementar
     Asparagine + Reducing Sugar -> Acrylamide + Fragments.
     Acrylamide: C=CC(=O)N (C3H5NO)
     """
-    if not (_is_sugar(sugar) and _is_asparagine(asparagine)):
+    if not (is_sugar(sugar) and _is_asparagine(asparagine)):
         return []
     
     # Net balanced reaction (simplified):
@@ -1073,7 +1074,7 @@ def _furanone_generation(pool: List[Species], conditions: ReactionConditions) ->
     if conditions.temperature_celsius < 90.0:
         return []
 
-    pentoses = [species for species in pool if _is_pentose(species)]
+    pentoses = [species for species in pool if is_pentose(species)]
     if not pentoses:
         return []
 

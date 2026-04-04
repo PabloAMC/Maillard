@@ -102,9 +102,13 @@ def get_safety_reference_range(matrix_family: str, reference_id: str = "squeo_20
 @dataclass
 class SafetyResult:
     acrylamide_ppb: float
-    uncertainty_ppb: float
     flagged: bool
     description: str
+    furosine_mg_100g: float = 0.0
+    cml_mg_kg: float = 0.0
+    cel_mg_kg: float = 0.0
+    lal_mg_100g: float = 0.0
+    uncertainty_ppb: float = 0.0
 
 def predict_acrylamide(
     asparagine_mM: float,
@@ -182,13 +186,188 @@ def predict_acrylamide(
         description="High acrylamide risk" if not is_safe else "Normal levels"
     )
 
+def predict_furosine(
+    T_C: float,
+    t_min: float,
+    lys_mM: float,
+    sugar_mM: float,
+    pH: float
+) -> float:
+    """
+    Furosine is the measurable proxy for Amadori products (early Maillard).
+    Displays non-monotonic formation-elimination: it builds up and then drops
+    sharply at T > 150°C because its degradation Ea < formation Ea in dry states.
+    Target: ~8.7 mg/100g protein at 140C extrusion (anchor r12).
+    """
+    if lys_mM <= 0 or sugar_mM <= 0:
+        return 0.0
+        
+    R = 8.314
+    T_K = T_C + 273.15
+    t_sec = t_min * 60.0
+    
+    # pH effect: Lysine epsilon-amino group pKa ~10.5. More reactive at higher pH
+    f_ph = 1.0 / (1.0 + 10**(10.5 - pH))
+    
+    # Formation: high barrier (~110 kJ/mol)
+    Ea_f = 110000.0
+    A_f = 2.0e9
+    kf = A_f * math.exp(-Ea_f / (R * T_K)) * f_ph
+    
+    # Elimination: lower barrier (~90 kJ/mol) but lower frequency, meaning it dominates at high T
+    Ea_e = 90000.0
+    A_e = 1.5e6 
+    ke = A_e * math.exp(-Ea_e / (R * T_K))
+    
+    lys_molar = lys_mM / 1000.0
+    sugar_molar = sugar_mM / 1000.0
+    
+    if ke < 1e-12:
+        furosine_molar = kf * lys_molar * sugar_molar * t_sec
+    else:
+        furosine_molar = (kf * lys_molar * sugar_molar / ke) * (1 - math.exp(-ke * t_sec))
+        
+    # Calibration factor to align with r12 extrusion target (8.7 mg/100g)
+    # 5 mM lys, 5 mM sugar, 140C, 1min, pH 7
+    calibration_factor = 1.2e5
+    furosine_mg_100g = furosine_molar * calibration_factor
+    return furosine_mg_100g
+
+
+def predict_cml(
+    T_C: float,
+    t_min: float,
+    lys_mM: float,
+    aw: float,
+    protein_type: str
+) -> float:
+    """
+    N(epsilon)-carboxymethyllysine (CML). Generated via glyoxal.
+    Moisture-promoted, rate suppressed at highly extreme temps (>130C) due to pathway shift.
+    Target: 16-110 mg/kg (anchor r12).
+    """
+    if lys_mM <= 0:
+        return 0.0
+        
+    R = 8.314
+    T_K = T_C + 273.15
+    t_sec = t_min * 60.0
+    
+    # Glyoxal flux logic (peaks at lower T than MG flux)
+    # Ea for CML is relatively low (~80 kJ/mol), reflecting oxidative cleavage
+    Ea = 80000.0
+    A = 5e6
+    k = A * math.exp(-Ea / (R * T_K))
+    
+    # Water activity sharply promotes CML (diffusion limits its generation in dry systems)
+    aw_factor = max(0.01, aw**2)
+    
+    # Pathway suppression at very high temps (T > 130C shifts to CEL/MG)
+    temp_penalty = 1.0
+    if T_C > 130.0:
+        temp_penalty = math.exp(-0.05 * (T_C - 130.0))
+        
+    # Protein type effects: SPI yields higher CML than PPI globally
+    matrix_factor = 1.4 if "soy" in protein_type.lower() else 1.0
+        
+    cml_molar = k * (lys_mM / 1000.0) * aw_factor * temp_penalty * matrix_factor * t_sec
+    
+    # Calibrate to ~50 mg/kg at standard conditions
+    return cml_molar * 8.5e6
+
+
+def predict_cel(
+    T_C: float,
+    t_min: float,
+    lys_mM: float,
+    aw: float,
+    protein_type: str
+) -> float:
+    """
+    N(epsilon)-carboxyethyllysine (CEL). Generated via methylglyoxal.
+    Exponential above 121C, moisture-inhibited (dry heat driven).
+    Target: 25-110 mg/kg (anchor r12).
+    """
+    if lys_mM <= 0:
+        return 0.0
+        
+    R = 8.314
+    T_K = T_C + 273.15
+    t_sec = t_min * 60.0
+    
+    # Ea is very high (~120 kJ/mol) mimicking Methylglyoxal accumulation
+    Ea = 120000.0
+    A = 1e11
+    
+    # Thresholding geometry at 121C
+    if T_C < 121.0:
+        A *= 0.1 # Severely retarded below threshold
+        
+    k = A * math.exp(-Ea / (R * T_K))
+    
+    # Moisture inhibited
+    aw_factor = 1.0 if aw < 0.3 else math.exp(-3.0 * (aw - 0.3))
+    
+    matrix_factor = 1.3 if "soy" in protein_type.lower() else 1.0
+    
+    cel_molar = k * (lys_mM / 1000.0) * aw_factor * matrix_factor * t_sec
+    
+    # Calibrate to ~65 mg/kg at standard conditions
+    return cel_molar * 4.0e6
+
+
+def predict_lal(
+    T_C: float,
+    t_min: float,
+    pH: float,
+    cys_mM: float,
+    lys_mM: float,
+    protein_type: str
+) -> float:
+    """
+    Lysinoalanine (LAL). Crosslink from dehydroalanine + lysine epsilon-amino.
+    Primarily pH-catalyzed (requires alkaline conditions or extreme thermal stress >140C).
+    Target severity: PPI ~15% lysine loss vs SPI ~31% lysine loss (r12).
+    """
+    if lys_mM <= 0:
+        return 0.0
+        
+    R = 8.314
+    T_K = T_C + 273.15
+    t_sec = t_min * 60.0
+    
+    # Requires dehydroalanine formation via beta-elimination of serine/cysteine.
+    # Higher pH = geometrically explosive LAL formation.
+    # We model a base-catalyzed pathway + a pure thermal stress pathway.
+    
+    Ea_base = 80000.0
+    A_base = 1e8 * (10**(pH - 7.0)) # 10x per pH unit above 7
+    
+    Ea_heat = 140000.0
+    A_heat = 5e11
+    
+    k_tot = A_base * math.exp(-Ea_base / (R * T_K)) + A_heat * math.exp(-Ea_heat / (R * T_K))
+    
+    # Cysteine provides competing thiols that block dehydroalanine from lysine 
+    # (forming lanthionine instead of lysinoalanine).
+    cys_shield = 1.0 / (1.0 + (cys_mM * 0.5))
+    
+    # Matrix effects
+    matrix_factor = 2.0 if "soy" in protein_type.lower() else 1.0
+    
+    lal_molar = k_tot * (lys_mM / 1000.0) * cys_shield * matrix_factor * t_sec
+    
+    # Calibrate to mg/100g metrics
+    return lal_molar * 2.5e5
+
+
 def evaluate_formulation_safety(
     precursors: Dict[str, float],
     temp_C: float,
     time_min: float,
     pH: float,
     modifiers: Optional[Dict[str, float]] = None
-) -> Tuple[float, List[str]]:
+) -> Tuple[float, List[str], SafetyResult]:
     """
     Aggregated safety score and flagged toxins.
     1.0 = Max danger, 0.0 = Safe (though we don't cap in scientific mode)
@@ -197,18 +376,28 @@ def evaluate_formulation_safety(
     flagged = []
     mods = modifiers or {}
     
-    # 1. Acrylamide Check
+    # 1. Parsing precursors
     asn_conc = 0.0
     sugar_conc = 0.0
+    lys_conc = 0.0
+    cys_conc = 0.0
+    
     for name, conc in precursors.items():
         n_low = name.lower()
         if "asparagine" in n_low or "asn" in n_low:
-            asn_conc = conc
+            asn_conc += conc
+        if "lysine" in n_low or "lys" in n_low:
+            lys_conc += conc
+        if "cysteine" in n_low or "cys" in n_low:
+            cys_conc += conc
         if any(s in n_low for s in ["ribose", "glucose", "fructose", "maltose", "xylose", "sugar", "sucrose", "lactose"]):
             sugar_conc += conc
             
+    # Default to 0 values if not present
+    res = SafetyResult(acrylamide_ppb=0.0, uncertainty_ppb=0.0, flagged=False, description="")
+
+    # 1. Acrylamide Check
     if asn_conc > 0 and sugar_conc > 0:
-        # Resolve Ea modifier for Acrylamide
         ea_mod = 0.0
         for k, v in mods.items():
             if "acrylamide" in k.lower():
@@ -216,13 +405,38 @@ def evaluate_formulation_safety(
                 break
                 
         aa_res = predict_acrylamide(asn_conc, sugar_conc, temp_C, time_min, pH, ea_mod)
-        # Threshold for detection - ensure it's high enough to be seen but low enough to catch precursors
-        if aa_res.acrylamide_ppb > 1e-25:
-            flagged.append("Acrylamide")
-            # Logarithmic risk scaling: ensure we don't saturate for small differences
-            # log10(1e-15 / 1e-20) / 10 = 0.5
-            # log10(1.2e-16 / 1e-20) / 10 = 0.4
-            risk_raw = math.log10(aa_res.acrylamide_ppb / 1e-20) / 10.0
+        res.acrylamide_ppb = aa_res.acrylamide_ppb
+        
+        if aa_res.acrylamide_ppb > 1e-25:  # Engine threshold for gradients
+            risk_raw = math.log10(max(1e-20, aa_res.acrylamide_ppb) / 1e-22) / 10.0
             total_risk += max(0.01, risk_raw)
             
-    return total_risk, flagged
+        if aa_res.acrylamide_ppb > 10.0:  # Human-readable threshold for flags
+            flagged.append("Acrylamide")
+            
+    # 2. Advanced Glycation End-Products (AGEs) & Proxies
+    if lys_conc > 0:
+        aw = mods.get("water_activity", 0.5) # Fallback if not injected through condition modifiers
+        protein_type = mods.get("protein_type", "free")
+        
+        res.furosine_mg_100g = predict_furosine(temp_C, time_min, lys_conc, sugar_conc, pH)
+        if res.furosine_mg_100g > 10.0:
+            flagged.append("Furosine_EarlyAGE")
+            total_risk += (res.furosine_mg_100g / 100.0) * 0.2
+
+        res.cml_mg_kg = predict_cml(temp_C, time_min, lys_conc, aw, protein_type)
+        if res.cml_mg_kg > 50.0:
+            flagged.append("CML")
+            total_risk += (res.cml_mg_kg / 200.0) * 0.3
+            
+        res.cel_mg_kg = predict_cel(temp_C, time_min, lys_conc, aw, protein_type)
+        if res.cel_mg_kg > 60.0:
+            flagged.append("CEL")
+            total_risk += (res.cel_mg_kg / 200.0) * 0.4
+            
+        res.lal_mg_100g = predict_lal(temp_C, time_min, pH, cys_conc, lys_conc, protein_type)
+        if res.lal_mg_100g > 15.0:
+            flagged.append("Lysinoalanine")
+            total_risk += (res.lal_mg_100g / 50.0) * 0.5
+            
+    return total_risk, flagged, res

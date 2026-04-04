@@ -14,8 +14,8 @@ from src.benchmark_validation import (
 from src.presentation import render_benchmark_targets_markdown
 
 
-def test_benchmark_targets_snapshot_contains_headspace_metadata():
-    rows = snapshot_benchmark_targets(ROOT / "data" / "benchmarks" / "cys_glucose_150C_Farmer1999.json")
+def test_benchmark_targets_snapshot_contains_headspace_metadata(benchmark_targets_farmer_rows):
+    rows = benchmark_targets_farmer_rows
 
     assert rows
     furfural = next(row for row in rows if row.target_name == "Furfural")
@@ -66,8 +66,8 @@ def test_benchmark_targets_markdown_reports_matrix_only_exclusions():
     assert "soy_isolate_40C_PratapSingh2021" in markdown
 
 
-def test_benchmark_targets_keep_low_headspace_markers_well_below_observable_outputs():
-    rows = snapshot_benchmark_targets(ROOT / "data" / "benchmarks" / "cys_glucose_150C_Farmer1999.json")
+def test_benchmark_targets_keep_low_headspace_markers_well_below_observable_outputs(benchmark_targets_farmer_rows):
+    rows = benchmark_targets_farmer_rows
 
     by_name = {row.target_name: row for row in rows}
     furfural = by_name["Furfural"]
@@ -78,11 +78,8 @@ def test_benchmark_targets_keep_low_headspace_markers_well_below_observable_outp
     assert furfural.predicted_ppb > hmf.predicted_ppb * 20.0
 
 
-def test_matrix_precursor_augmented_targets_are_included_in_snapshot_reports():
-    rows = snapshot_all_benchmark_targets([
-        ROOT / "data" / "benchmarks" / "pea_isolate_ribose_cysteine_100C_45min_Internal2026.json",
-        ROOT / "data" / "benchmarks" / "soy_isolate_ribose_cysteine_100C_45min_Internal2026.json",
-    ])
+def test_matrix_precursor_augmented_targets_are_included_in_snapshot_reports(benchmark_targets_internal_rows):
+    rows = benchmark_targets_internal_rows
 
     benchmark_ids = {row.benchmark_id for row in rows}
     assert "pea_isolate_ribose_cysteine_100C_45min_Internal2026" in benchmark_ids

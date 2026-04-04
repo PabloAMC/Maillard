@@ -10,14 +10,8 @@ from src.benchmark_validation import build_matrix_promotion_contract_artifact
 from src.presentation import render_matrix_promotion_contract_markdown
 
 
-def test_matrix_promotion_contract_exposes_explicit_rule_and_selects_primary_target_lane():
-    payload = build_matrix_promotion_contract_artifact([
-        ROOT / "data" / "benchmarks" / "pea_isolate_40C_PratapSingh2021.json",
-        ROOT / "data" / "benchmarks" / "pea_isolate_uht_140C_Trikusuma2019.json",
-        ROOT / "data" / "benchmarks" / "soy_isolate_40C_PratapSingh2021.json",
-        ROOT / "data" / "benchmarks" / "pea_isolate_ribose_cysteine_100C_45min_Internal2026.json",
-        ROOT / "data" / "benchmarks" / "soy_isolate_ribose_cysteine_100C_45min_Internal2026.json",
-    ])
+def test_matrix_promotion_contract_exposes_explicit_rule_and_selects_primary_target_lane(matrix_promotion_contract_payload):
+    payload = matrix_promotion_contract_payload
 
     assert payload["promotion_rule"]["contract_id"] == "matrix_external_decision_ready_v1"
     assert payload["promotion_rule"]["minimum_quantitative_closed_targets"] == 2

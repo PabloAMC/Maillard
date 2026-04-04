@@ -332,8 +332,8 @@ def _render_family_coverage(payload: dict[str, object], output_path: Path) -> No
     ax.legend(
         handles=legend_handles,
         fontsize=_FS - 3,
-        loc="upper right",
-        bbox_to_anchor=(0.98, 0.98),
+        loc="lower right",
+        bbox_to_anchor=(0.98, 0.02),
         bbox_transform=ax.transAxes,
         framealpha=0.9,
         edgecolor="0.75",

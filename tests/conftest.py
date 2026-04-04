@@ -218,6 +218,201 @@ def expected_sensory_profile():
 
 
 # ============================================================================
+# SESSION-SCOPED BENCHMARK FIXTURES
+# Evaluate the most-used benchmarks once per test session and share the
+# result across all tests that request the fixture. This eliminates redundant
+# full-pipeline calls for tests with identical benchmark inputs.
+# ============================================================================
+
+_BENCH_DIR = Path(__file__).resolve().parent.parent / "data" / "benchmarks"
+_FARMER_BENCH = _BENCH_DIR / "cys_glucose_150C_Farmer1999.json"
+_PEA_OFF_BENCH = _BENCH_DIR / "pea_isolate_40C_PratapSingh2021.json"
+_SOY_OFF_BENCH = _BENCH_DIR / "soy_isolate_40C_PratapSingh2021.json"
+_PEA_INTERNAL_BENCH = _BENCH_DIR / "pea_isolate_ribose_cysteine_100C_45min_Internal2026.json"
+_SOY_INTERNAL_BENCH = _BENCH_DIR / "soy_isolate_ribose_cysteine_100C_45min_Internal2026.json"
+_PEA_UHT_BENCH = _BENCH_DIR / "pea_isolate_uht_140C_Trikusuma2019.json"
+
+
+@pytest.fixture(scope="session")
+def mottram_evaluation():
+    """Evaluate the Mottram 1994 (cys+ribose, 150°C) benchmark once per session."""
+    from src.benchmark_validation import evaluate_benchmark
+    return evaluate_benchmark(_BENCH_DIR / "cys_ribose_150C_Mottram1994.json")
+
+
+@pytest.fixture(scope="session")
+def farmer_evaluation():
+    """Evaluate the Farmer 1999 (cys+glucose, 150°C) benchmark once per session."""
+    from src.benchmark_validation import evaluate_benchmark
+    return evaluate_benchmark(_FARMER_BENCH)
+
+
+@pytest.fixture(scope="session")
+def hofmann_meaty_result():
+    """Run Hofmann 1998 / meaty pipeline once per session; used for lipid-guard tests."""
+    from src.benchmark_validation import benchmark_to_conditions, benchmark_to_formulation, load_benchmark
+    from src.pipeline import MaillardPipeline
+    bench = load_benchmark(_BENCH_DIR / "cys_ribose_140C_Hofmann1998.json")
+    return MaillardPipeline(target_tag="meaty").evaluate_single(
+        benchmark_to_formulation(bench), benchmark_to_conditions(bench)
+    )
+
+
+@pytest.fixture(scope="session")
+def mottram_meaty_result():
+    """Run Mottram 1994 / meaty pipeline once per session; shared by lipid-guard tests."""
+    from src.benchmark_validation import benchmark_to_conditions, benchmark_to_formulation, load_benchmark
+    from src.pipeline import MaillardPipeline
+    bench = load_benchmark(_BENCH_DIR / "cys_ribose_150C_Mottram1994.json")
+    return MaillardPipeline(target_tag="meaty").evaluate_single(
+        benchmark_to_formulation(bench), benchmark_to_conditions(bench)
+    )
+
+
+@pytest.fixture(scope="session")
+def pipeline_meaty():
+    """Shared meaty pipeline for tests that only read pipeline state or call evaluate_* without mutating grid."""
+    from src.pipeline import MaillardPipeline
+
+    return MaillardPipeline(target_tag="meaty")
+
+
+@pytest.fixture(scope="session")
+def pipeline_meaty_beany():
+    """Shared meaty/beany pipeline for repeated integration checks."""
+    from src.pipeline import MaillardPipeline
+
+    return MaillardPipeline(target_tag="meaty", minimize_tag="beany")
+
+
+@pytest.fixture(scope="session")
+def pipeline_roasted_beany():
+    """Shared roasted/beany pipeline for repeated ranking comparisons."""
+    from src.pipeline import MaillardPipeline
+
+    return MaillardPipeline(target_tag="roasted", minimize_tag="beany")
+
+
+@pytest.fixture(scope="session")
+def recommender_fast():
+    """Shared default recommender for pure in-memory predict_from_steps tests."""
+    from src.recommend import Recommender
+
+    return Recommender()
+
+
+@pytest.fixture(scope="session")
+def matrix_scope_triplet_benchmarks():
+    return [_FARMER_BENCH, _PEA_OFF_BENCH, _SOY_OFF_BENCH]
+
+
+@pytest.fixture(scope="session")
+def matrix_internal_candidate_benchmarks():
+    return [_PEA_INTERNAL_BENCH, _SOY_INTERNAL_BENCH]
+
+
+@pytest.fixture(scope="session")
+def matrix_target_status_benchmarks():
+    return [_PEA_OFF_BENCH, _SOY_OFF_BENCH, _PEA_INTERNAL_BENCH, _SOY_INTERNAL_BENCH]
+
+
+@pytest.fixture(scope="session")
+def matrix_promotion_benchmarks():
+    return [_PEA_OFF_BENCH, _PEA_UHT_BENCH, _SOY_OFF_BENCH, _PEA_INTERNAL_BENCH, _SOY_INTERNAL_BENCH]
+
+
+@pytest.fixture(scope="session")
+def benchmark_summary_matrix_scope(matrix_scope_triplet_benchmarks):
+    from src.benchmark_validation import summarize_benchmarks
+
+    return summarize_benchmarks(matrix_scope_triplet_benchmarks)
+
+
+@pytest.fixture(scope="session")
+def benchmark_index_matrix_scope(matrix_scope_triplet_benchmarks):
+    from src.benchmark_validation import build_benchmark_index
+
+    return build_benchmark_index(matrix_scope_triplet_benchmarks)
+
+
+@pytest.fixture(scope="session")
+def benchmark_index_matrix_internal(matrix_internal_candidate_benchmarks):
+    from src.benchmark_validation import build_benchmark_index
+
+    return build_benchmark_index(matrix_internal_candidate_benchmarks)
+
+
+@pytest.fixture(scope="session")
+def benchmark_targets_farmer_rows():
+    from src.benchmark_validation import snapshot_benchmark_targets
+
+    return snapshot_benchmark_targets(_FARMER_BENCH)
+
+
+@pytest.fixture(scope="session")
+def benchmark_targets_internal_rows(matrix_internal_candidate_benchmarks):
+    from src.benchmark_validation import snapshot_all_benchmark_targets
+
+    return snapshot_all_benchmark_targets(matrix_internal_candidate_benchmarks)
+
+
+@pytest.fixture(scope="session")
+def matrix_target_status_payload(matrix_target_status_benchmarks):
+    from src.benchmark_validation import build_matrix_target_status_artifact
+
+    return build_matrix_target_status_artifact(matrix_target_status_benchmarks)
+
+
+@pytest.fixture(scope="session")
+def matrix_promotion_family_rows(matrix_target_status_benchmarks):
+    from src.benchmark_validation import build_matrix_promotion_family_status
+
+    return build_matrix_promotion_family_status(matrix_target_status_benchmarks)
+
+
+@pytest.fixture(scope="session")
+def pea_matrix_assertion_rows():
+    from src.benchmark_validation import build_matrix_benchmark_assertions
+
+    return build_matrix_benchmark_assertions([_PEA_OFF_BENCH, _PEA_INTERNAL_BENCH])
+
+
+@pytest.fixture(scope="session")
+def pea_matrix_evidence_rows():
+    from src.benchmark_validation import build_matrix_benchmark_evidence_audit
+
+    return build_matrix_benchmark_evidence_audit([_PEA_OFF_BENCH, _PEA_INTERNAL_BENCH])
+
+
+@pytest.fixture(scope="session")
+def matrix_promotion_contract_payload(matrix_promotion_benchmarks):
+    from src.benchmark_validation import build_matrix_promotion_contract_artifact
+
+    return build_matrix_promotion_contract_artifact(matrix_promotion_benchmarks)
+
+
+@pytest.fixture(scope="session")
+def matrix_observable_closure_payload(matrix_promotion_benchmarks):
+    from src.benchmark_validation import build_matrix_observable_closure_audit
+
+    return build_matrix_observable_closure_audit(matrix_promotion_benchmarks)
+
+
+@pytest.fixture(scope="session")
+def matrix_benchmark_delta_rows(matrix_target_status_benchmarks):
+    from src.benchmark_validation import build_matrix_benchmark_deltas
+
+    return build_matrix_benchmark_deltas(matrix_target_status_benchmarks)
+
+
+@pytest.fixture(scope="session")
+def family_lane_validation_payload(matrix_scope_triplet_benchmarks):
+    from src.benchmark_validation import build_family_lane_validation_artifact
+
+    return build_family_lane_validation_artifact(matrix_scope_triplet_benchmarks)
+
+
+# ============================================================================
 # PYTEST MARKERS
 # ============================================================================
 

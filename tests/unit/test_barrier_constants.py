@@ -51,7 +51,9 @@ class TestFastBarriersConstants:
     def test_default_barrier_is_positive(self):
         """DEFAULT_BARRIER should be reasonable."""
         assert DEFAULT_BARRIER > 0
-        assert DEFAULT_BARRIER > max(b for b, _ in FAST_BARRIERS.values()), \
+        # Exclude DFT placeholder sentinels (99.0 = "not yet available")
+        non_sentinel_barriers = [b for b, _ in FAST_BARRIERS.values() if b < 99.0]
+        assert DEFAULT_BARRIER > max(non_sentinel_barriers), \
             "DEFAULT_BARRIER should be higher than most specific barriers"
 
     def test_heme_catalyst_reduction_is_positive(self):

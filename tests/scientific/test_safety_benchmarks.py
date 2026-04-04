@@ -36,7 +36,7 @@ def test_acrylamide_ph_dependency():
 def test_evaluate_formulation_safety_integration():
     """Verify integration of acrylamide in the formulation safety scoring."""
     precursors = {"Asparagine": 1.0, "Glucose": 5.0}
-    risk, flagged = evaluate_formulation_safety(precursors, 180, 15, 6.5)
+    risk, flagged, _result = evaluate_formulation_safety(precursors, 180, 15, 6.5)
     
     assert risk > 0
     assert "Acrylamide" in flagged

@@ -10,11 +10,8 @@ from src.benchmark_validation import build_matrix_benchmark_evidence_audit
 from src.presentation import render_matrix_benchmark_evidence_markdown
 
 
-def test_matrix_evidence_audit_distinguishes_external_off_flavour_from_internal_meaty_candidates():
-    rows = build_matrix_benchmark_evidence_audit([
-        ROOT / "data" / "benchmarks" / "pea_isolate_40C_PratapSingh2021.json",
-        ROOT / "data" / "benchmarks" / "pea_isolate_ribose_cysteine_100C_45min_Internal2026.json",
-    ])
+def test_matrix_evidence_audit_distinguishes_external_off_flavour_from_internal_meaty_candidates(pea_matrix_evidence_rows):
+    rows = pea_matrix_evidence_rows
     markdown = render_matrix_benchmark_evidence_markdown(rows)
     by_id = {row.benchmark_id: row for row in rows}
 

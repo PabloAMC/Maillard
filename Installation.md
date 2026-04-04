@@ -91,7 +91,11 @@ conda env update --file environment.yml
 
 ## 3. The xtbiff Patch (Required)
 
-Due to a syntax error in the source code of the crest chemistry package, the internal docking algorithm will crash during Quantum Cluster Growth (QCG) calculations. We must manually download the standalone xtbiff tool to bypass this bug. Run this block of commands to automatically download, extract, and patch your environment:
+Due to a syntax error in the source code of the crest chemistry package, the internal docking algorithm will crash during Quantum Cluster Growth (QCG) calculations. We must manually download the standalone xtbiff tool to bypass this bug. 
+
+**Note on Licensing**: `xtbiff` is licensed under the **LGPL-3.0**. By downloading it, you agree to its license terms. Maillard uses it as an external dependency.
+
+Run this block of commands to automatically download, extract, and patch your environment:
 ```
 # Ensure we have the tools needed to download and unzip files
 conda install -y -c conda-forge wget xz
@@ -192,11 +196,23 @@ If you close your terminal or restart your computer, you do not need to reinstal
 Useful validated commands from the repository root:
 ```bash
 ./scripts/docker_maillard.sh status
+./scripts/docker_maillard.sh reporting-fast
+./scripts/docker_maillard.sh ml-accelerator-quick-tests
 ./scripts/docker_maillard.sh scientific
 ./scripts/docker_maillard.sh validation-figures
 ./scripts/docker_maillard.sh targets data/benchmarks/cys_ribose_150C_Mottram1994.json
 ./scripts/docker_maillard.sh targets-report
 ```
+
+Optional no-wet-lab backend locators are injected through environment variables when you want to benchmark chemistry-first MLP or TS-seed candidates with a real external backend:
+
+```bash
+export MAILLARD_MACE_OMOL_MODEL=/absolute/path/to/mace_omol_checkpoint.model
+export MAILLARD_AIMNET2_BACKEND=python:your_package.aimnet2_backend
+export MAILLARD_ORBMOL_BACKEND=python:your_package.orbmol_backend
+```
+
+The `python:` locators should point to importable modules that expose `probe_backend(model_name, backend_locator)` and `prepare_ts_seed(xyz_string, model_name, backend_locator, fmax, max_steps)`.
 
 The `scientific` lane regenerates the core validation artifacts inside the Docker `maillard` environment. The validation-figures command adds a single graphical summary of reliability and current gaps.
 

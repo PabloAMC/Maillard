@@ -3,9 +3,11 @@ import numpy as np
 import pandas as pd
 import json
 from pathlib import Path
+from src.conditions import ReactionConditions  # noqa: E402
 from src.kinetics import KineticsEngine  # noqa: E402
 from src.cantera_export import CanteraExporter  # noqa: E402
-from src.recommend import Recommender  # noqa: E402
+from src.ode_kinetics import simulate_kinetic_trace  # noqa: E402
+from src.recommend import Recommender, _canon  # noqa: E402
 from src.pathway_extractor import ElementaryStep, Species  # noqa: E402
 
 def test_isothermal_vs_ramp(tmp_path):
@@ -142,6 +144,64 @@ def test_fast_temporal_ramp_matches_cantera_directional_reference(tmp_path):
     assert fast_iso_fft > 0.0
     assert fast_ramp_fft > 0.0
     assert fast_iso_ratio > fast_ramp_ratio
+    assert conv_iso > conv_ramp > 0.0
+
+
+def test_kinetic_temporal_ramp_tracks_cantera_directional_reference(tmp_path):
+    ribose = Species("ribose", "OCC(O)C(O)C(O)C=O")
+    furfural = Species("furfural", "O=Cc1ccco1")
+    step = ElementaryStep(
+        reactants=[ribose],
+        products=[furfural],
+        reaction_family="Enolisation_1_2",
+    )
+    barriers = {f"{ribose.smiles}->{furfural.smiles}": 28.0}
+    initial = {ribose.smiles: 1.0}
+    time_minutes = 2.0
+    ribose_canon = _canon(ribose.smiles)
+    furfural_canon = _canon(furfural.smiles)
+
+    kinetic_iso = simulate_kinetic_trace(
+        [step],
+        barriers,
+        initial,
+        ReactionConditions(temperature_celsius=150.0, prediction_mode="kinetic"),
+        time_minutes=time_minutes,
+    )
+    kinetic_ramp = simulate_kinetic_trace(
+        [step],
+        barriers,
+        initial,
+        ReactionConditions(
+            temperature_celsius=25.0,
+            prediction_mode="kinetic",
+            temperature_profile=((0.0, 25.0), (1.0, 100.0), (2.0, 150.0)),
+        ),
+        time_minutes=time_minutes,
+    )
+
+    exporter = CanteraExporter()
+    exporter.add_reaction(["CC=O"], ["C=CO"], 28.0)
+    mech_path = tmp_path / "kinetic_reference_mech.yaml"
+    exporter.export_yaml(str(mech_path))
+
+    engine = KineticsEngine()
+    res_iso = engine.simulate_network_cantera(str(mech_path), {"S_0": 1.0}, (0, 120.0), temperature_k=423.15)
+    res_ramp = engine.simulate_network_cantera(
+        str(mech_path),
+        {"S_0": 1.0},
+        (0, 120.0),
+        temperature_profile=[(0.0, 298.15), (60.0, 373.15), (120.0, 423.15)],
+    )
+
+    kinetic_iso_furfural = kinetic_iso.integrated_concentrations[furfural_canon]
+    kinetic_ramp_furfural = kinetic_ramp.integrated_concentrations[furfural_canon]
+    conv_iso = (res_iso["S_0_X"][0] - res_iso["S_0_X"][-1]) / res_iso["S_0_X"][0]
+    conv_ramp = (res_ramp["S_0_X"][0] - res_ramp["S_0_X"][-1]) / res_ramp["S_0_X"][0]
+
+    assert kinetic_iso_furfural > 0.0
+    assert kinetic_ramp_furfural > 0.0
+    assert (kinetic_iso_furfural > kinetic_ramp_furfural) == (conv_iso > conv_ramp)
     assert conv_iso > conv_ramp > 0.0
 
 if __name__ == "__main__":

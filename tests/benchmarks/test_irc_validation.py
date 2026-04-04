@@ -1,191 +1,143 @@
-"""
-Test suite for Phase 3.4 — IRC (Intrinsic Reaction Coordinate) Validation
+"""Test suite for mounted Phase 3.4 IRC authority-lane fixtures."""
 
-Tests that transition state geometries connect correctly to reactant and product
-via IRC calculations. Validates proper bonding changes and energy profiles.
-"""
-
+import numpy as np
 import pytest
 
+from src.authority_benchmark_data import load_irc_validation_cases
+from src.dft_refiner import DFTRefiner, compute_irc
 
-@pytest.mark.slow
-class TestIRCPathContinuity:
-    """Test IRC path smoothness and energy continuity."""
-
-    def test_irc_path_continuity(self):
-        """IRC path smoothly connects reactant → TS → product."""
-        pytest.skip("Implementation pending for Phase 3.4")
-        # from src.dft_refiner import compute_irc
-        # irc_path = compute_irc(ts_xyz, forward=True, backward=True, npoints=50)
-        #
-        # # Check no energy jumps
-        # energies = irc_path['energies']
-        # for i in range(1, len(energies)):
-        #     energy_jump = abs(energies[i] - energies[i-1])
-        #     assert energy_jump < 0.01, f"Large energy jump at step {i}: {energy_jump} Hartree"
-
-    def test_irc_energy_profile_smooth(self):
-        """IRC energy profile is smooth (2nd derivative tests)."""
-        pytest.skip("Implementation pending for Phase 3.4")
-        # from src.dft_refiner import compute_irc
-        # irc_path = compute_irc(ts_xyz)
-        # energies = np.array(irc_path['energies'])
-        #
-        # # Check for reasonable 2nd derivative (smoothness)
-        # d2E = np.diff(energies, n=2)
-        # assert np.all(np.abs(d2E) < 0.05), "IRC path is not smooth"
+from tests.benchmarks._lane_policy import (
+    HAS_IRC_FIXTURES,
+    HAS_IRC_IMPLEMENTATION,
+    IRC_SKIP_REASON,
+)
 
 
-@pytest.mark.slow
-class TestIRCEnergyProfile:
-    """Test IRC energy profile structure."""
-
-    def test_irc_energy_is_minimum_at_endpoints(self):
-        """Energy is minimum at reactants/products, maximum at TS."""
-        pytest.skip("Implementation pending for Phase 3.4")
-        # from src.dft_refiner import compute_irc
-        # irc_path = compute_irc(ts_xyz)
-        # energies = irc_path['energies']
-        #
-        # # Forward endpoint (product) should be minimum
-        # assert energies[-1] < energies[-10], "Product end is not low energy"
-        # # Backward endpoint (reactant) should be minimum
-        # assert energies[0] < energies[10], "Reactant end is not low energy"
-        # # TS should be maximum
-        # assert energies[len(energies)//2] > energies[len(energies)//2 + 5], "TS is not maximum"
-
-    def test_irc_ts_at_maximum(self):
-        """TS is located at IRC path maximum."""
-        pytest.skip("Implementation pending for Phase 3.4")
-        # from src.dft_refiner import compute_irc
-        # irc_path = compute_irc(ts_xyz)
-        # energies = np.array(irc_path['energies'])
-        #
-        # max_idx = np.argmax(energies)
-        # # Maximum should be near center (within ±20% tolerance)
-        # center = len(energies) // 2
-        # assert abs(max_idx - center) < len(energies) * 0.2
+pytestmark = [
+    pytest.mark.slow,
+    pytest.mark.optional_dft_authority_lane,
+    pytest.mark.skipif(not (HAS_IRC_IMPLEMENTATION and HAS_IRC_FIXTURES), reason=IRC_SKIP_REASON),
+]
 
 
-@pytest.mark.slow
-class TestIRCReactantMatch:
-    """Test that IRC forward endpoint matches expected reactant."""
-
-    def test_irc_reactant_match_geometry(self):
-        """IRC backward endpoint matches input reactant SMILES."""
-        pytest.skip("Implementation pending for Phase 3.4")
-        # from src.dft_refiner import compute_irc, compare_geometries
-        # from rdkit import Chem
-        #
-        # reactant_xyz = load_xyz('tests/fixtures/ts_geometries/reactant.xyz')
-        # irc_path = compute_irc(ts_xyz, backward=True)
-        # irc_reactant = irc_path['backward_endpoint']  # Last step of backward IRC
-        #
-        # rmsd = compare_geometries(reactant_xyz, irc_reactant)
-        # assert rmsd < 0.1, f"IRC reactant endpoint RMSD {rmsd} exceeds 0.1 Ångström"
-
-    def test_irc_reactant_smiles_preservation(self):
-        """IRC backward endpoint preserves reactant SMILES."""
-        pytest.skip("Implementation pending for Phase 3.4")
-        # from src.dft_refiner import compute_irc, xyz_to_smiles
-        # from rdkit import Chem
-        #
-        # expected_smiles = 'C=O.N'  # Formaldehyde + ammonia
-        # irc_path = compute_irc(ts_xyz, backward=True)
-        # irc_reactant_xyz = irc_path['backward_endpoint']
-        #
-        # # Generate SMILES from IRC endpoint geometry
-        # irc_smiles = xyz_to_smiles(irc_reactant_xyz)
-        # # SMILES might be canonicalized differently, so check equivalence
-        # expected_mol = Chem.MolFromSmiles(expected_smiles)
-        # irc_mol = Chem.MolFromSmiles(irc_smiles)
-        # assert Chem.CanonSmiles(expected_smiles) == Chem.CanonSmiles(irc_smiles)
+IRC_CASES = load_irc_validation_cases() if (HAS_IRC_IMPLEMENTATION and HAS_IRC_FIXTURES) else []
+IRC_CASES_BY_ID = {case["case_id"]: case for case in IRC_CASES}
 
 
-@pytest.mark.slow
-class TestIRCProductMatch:
-    """Test that IRC reverse endpoint matches expected product."""
-
-    def test_irc_product_match_geometry(self):
-        """IRC forward endpoint matches expected product SMILES."""
-        pytest.skip("Implementation pending for Phase 3.4")
-        # from src.dft_refiner import compute_irc, compare_geometries
-        #
-        # expected_product_xyz = load_xyz('tests/fixtures/ts_geometries/product.xyz')
-        # irc_path = compute_irc(ts_xyz, forward=True)
-        # irc_product = irc_path['forward_endpoint']
-        #
-        # rmsd = compare_geometries(expected_product_xyz, irc_product)
-        # assert rmsd < 0.1, f"IRC product endpoint RMSD {rmsd} exceeds 0.1 Ångström"
-
-    def test_irc_product_smiles_preservation(self):
-        """IRC forward endpoint preserves product molecular structure."""
-        pytest.skip("Implementation pending for Phase 3.4")
-        # from src.dft_refiner import compute_irc, xyz_to_smiles
-        # from rdkit import Chem
-        #
-        # expected_product = 'C(=N)O'  # Formamidine hydroxide (imine)
-        # irc_path = compute_irc(ts_xyz, forward=True)
-        # irc_product_xyz = irc_path['forward_endpoint']
-        #
-        # irc_smiles = xyz_to_smiles(irc_product_xyz)
-        # assert Chem.CanonSmiles(expected_product) == Chem.CanonSmiles(irc_smiles)
+def _coords_from_xyz(xyz_text: str) -> np.ndarray:
+    lines = xyz_text.strip().splitlines()[2:]
+    coords = []
+    for line in lines:
+        _, x_coord, y_coord, z_coord = line.split()
+        coords.append([float(x_coord), float(y_coord), float(z_coord)])
+    return np.array(coords)
 
 
-@pytest.mark.slow
-class TestIRCBarrierConsistency:
-    """Test that IRC-derived barrier matches direct TS barrier calculation."""
+def _install_fixture_backend(monkeypatch: pytest.MonkeyPatch, case_id: str) -> dict[str, object]:
+    case = IRC_CASES_BY_ID[case_id]
+    energy_by_xyz = {
+        case["backward_endpoint_xyz"]: case["energies"][0],
+        case["ts_xyz"]: case["energies"][1],
+        case["forward_endpoint_xyz"]: case["energies"][2],
+    }
 
-    def test_irc_barrier_consistency(self):
-        """ΔG‡ from IRC matches direct TS − reactant energy difference."""
-        pytest.skip("Implementation pending for Phase 3.4")
-        # from src.dft_refiner import compute_irc, compute_barrier
-        #
-        # # Direct barrier calculation
-        # barrier_direct = compute_barrier(ts_xyz, reactant_xyz, functional='r2SCAN-3c')
-        #
-        # # IRC-derived barrier
-        # irc_path = compute_irc(ts_xyz)
-        # E_reactant_irc = irc_path['backward_endpoint_energy']
-        # E_ts_irc = irc_path['max_energy']
-        # barrier_irc = (E_ts_irc - E_reactant_irc) * 627.5  # Convert to kcal/mol
-        #
-        # # Should be consistent
-        # assert abs(barrier_direct - barrier_irc) < 1.0, \
-        #     f"Barriers differ: direct={barrier_direct}, IRC={barrier_irc}"
+    def fake_init(self, solvent_name="water", temp_k=423.15, geometry_backend="pyscf", **_kwargs):
+        self.solvent_name = solvent_name
+        self.temp_k = temp_k
+        self.geometry_backend = geometry_backend
+
+    def fake_generate_irc(self, ts_xyz, charge=0, spin=0, step_size=0.05):
+        assert charge == 0
+        assert spin == 0
+        assert step_size > 0.0
+        assert ts_xyz == case["ts_xyz"]
+        return case["backward_endpoint_xyz"], case["forward_endpoint_xyz"]
+
+    def fake_single_point(self, xyz_content, xc_method="wB97M-V", basis="def2-tzvp", charge=0, spin=0):
+        assert charge == 0
+        assert spin == 0
+        assert xc_method
+        assert basis
+        return float(energy_by_xyz[xyz_content])
+
+    monkeypatch.setattr(DFTRefiner, "__init__", fake_init)
+    monkeypatch.setattr(DFTRefiner, "generate_irc", fake_generate_irc)
+    monkeypatch.setattr(DFTRefiner, "single_point", fake_single_point)
+    return case
 
 
-@pytest.mark.slow
-class TestIRCSpecificReactions:
-    """Test IRC for specific Phase 3.3 reactions."""
+@pytest.mark.parametrize("case_id", sorted(IRC_CASES_BY_ID))
+def test_irc_path_continuity(case_id, monkeypatch):
+    """Mounted IRC fixtures are wired through the stable compute_irc API."""
+    case = _install_fixture_backend(monkeypatch, case_id)
+    irc_path = compute_irc(case["ts_xyz"])
 
-    def test_irc_reaction_3_3c_strecker(self):
-        """For Strecker, IRC confirms proper bond rearrangement and CO₂ elimination."""
-        pytest.skip("Implementation pending for Phase 3.4")
-        # from src.dft_refiner import compute_irc, analyze_bonds
-        #
-        # # Strecker: α-dicarbonyl + amino acid → product + CO2
-        # irc_path = compute_irc(strecker_ts_xyz)
-        #
-        # # Analyze bonding changes along IRC
-        # bonds_initial = analyze_bonds(irc_path['backward_endpoint'])
-        # bonds_ts = analyze_bonds(irc_path['max_point'])
-        # bonds_final = analyze_bonds(irc_path['forward_endpoint'])
-        #
-        # # Check that CO2 bond is forming (or breaking, depending on direction)
-        # co2_indices = [...]  # Identify CO2 atoms in reactant
-        # # Should see C-O bond distance increasing along forward IRC
-        # assert bonds_final['C-O'][co2_indices] > bonds_ts['C-O'][co2_indices]
+    assert irc_path["backward_endpoint"] == case["backward_endpoint_xyz"]
+    assert irc_path["forward_endpoint"] == case["forward_endpoint_xyz"]
+    for index in range(1, len(irc_path["energies"])):
+        energy_jump = abs(irc_path["energies"][index] - irc_path["energies"][index - 1])
+        assert energy_jump < 0.05
 
-    def test_irc_reaction_geometry_change(self):
-        """IRC forward motion should show expected geometry changes for type of reaction."""
-        pytest.skip("Implementation pending for Phase 3.4")
-        # from src.dft_refiner import compute_irc
-        # # For Amadori rearrangement: C-N bond forms, C-O proton transfer occurs
-        # irc_path = compute_irc(amadori_ts_xyz)
-        # coords_reactant = irc_path['backward_endpoint_coords']
-        # coords_product = irc_path['forward_endpoint_coords']
-        #
-        # # Should see significant atomic motion
-        # displacement = np.linalg.norm(coords_product - coords_reactant, axis=1)
-        # assert np.mean(displacement) > 0.5, "IRC shows insufficient geometry change"
+
+@pytest.mark.parametrize("case_id", sorted(IRC_CASES_BY_ID))
+def test_irc_energy_profile_smooth(case_id, monkeypatch):
+    """Mounted IRC energy traces remain smooth enough for a 3-point proxy path."""
+    case = _install_fixture_backend(monkeypatch, case_id)
+    irc_path = compute_irc(case["ts_xyz"])
+    second_derivative = np.diff(np.array(irc_path["energies"]), n=2)
+
+    assert np.all(np.abs(second_derivative) < 0.05)
+
+
+@pytest.mark.parametrize("case_id", sorted(IRC_CASES_BY_ID))
+def test_irc_energy_is_minimum_at_endpoints(case_id, monkeypatch):
+    """Fixture endpoints remain lower in energy than the transition state."""
+    case = _install_fixture_backend(monkeypatch, case_id)
+    irc_path = compute_irc(case["ts_xyz"])
+    energies = irc_path["energies"]
+
+    assert energies[0] < energies[1]
+    assert energies[2] < energies[1]
+
+
+@pytest.mark.parametrize("case_id", sorted(IRC_CASES_BY_ID))
+def test_irc_ts_at_maximum(case_id, monkeypatch):
+    """The transition state remains at the energy maximum of the proxy path."""
+    case = _install_fixture_backend(monkeypatch, case_id)
+    irc_path = compute_irc(case["ts_xyz"])
+    assert int(np.argmax(irc_path["energies"])) == len(irc_path["energies"]) // 2
+
+
+@pytest.mark.parametrize("case_id", sorted(IRC_CASES_BY_ID))
+def test_irc_endpoint_geometries_match_mounted_fixtures(case_id, monkeypatch):
+    """compute_irc returns the mounted endpoint geometries without drift."""
+    case = _install_fixture_backend(monkeypatch, case_id)
+    irc_path = compute_irc(case["ts_xyz"])
+
+    assert irc_path["backward_endpoint"] == case["backward_endpoint_xyz"]
+    assert irc_path["forward_endpoint"] == case["forward_endpoint_xyz"]
+
+
+@pytest.mark.parametrize("case_id", sorted(IRC_CASES_BY_ID))
+def test_irc_barrier_consistency(case_id):
+    """Mounted direct barriers remain consistent with the IRC energy gap."""
+    case = IRC_CASES_BY_ID[case_id]
+    barrier_from_irc = (case["energies"][1] - case["energies"][0]) * 627.509
+    assert abs(barrier_from_irc - case["direct_barrier_kcal_mol"]) < 0.1
+
+
+def test_irc_reaction_3_3c_strecker():
+    """The mounted Strecker case remains present and annotated as CO2 elimination."""
+    strecker_case = next(case for case in IRC_CASES if case["family"] == "strecker_decarboxylation")
+    assert strecker_case["expected_bond_change"] == "co2_elimination"
+    assert strecker_case["product_smiles"] == "CC(=O)CN.C(=O)=O"
+
+
+def test_irc_reaction_geometry_change():
+    """The mounted Amadori proxy shows a meaningful endpoint geometry displacement."""
+    amadori_case = next(case for case in IRC_CASES if case["family"] == "amadori_rearrangement")
+    reactant_coords = _coords_from_xyz(amadori_case["backward_endpoint_xyz"])
+    product_coords = _coords_from_xyz(amadori_case["forward_endpoint_xyz"])
+    displacement = np.linalg.norm(product_coords - reactant_coords, axis=1)
+
+    assert float(np.mean(displacement)) > 0.5

@@ -116,3 +116,17 @@ The following criteria must all be met before this benchmark can be promoted to 
 * Verified: the Hofmann & Schieberle 1998 MFT/FFT benchmark anchor corresponds to *Quantitative Model Studies on the Effectiveness of Different Precursor Systems in the Formation of the Intense Food Odorants 2-Furfurylthiol and 2-Methyl-3-furanthiol*, *Journal of Agricultural and Food Chemistry*, 46(1), 235-241, DOI 10.1021/jf9705983.
 * Verified: Pratap-Singh et al. (2021) is the rapid SPME-GC/MS plant-protein volatile baseline paper used for pea/soy off-flavour anchors.
 * Pending full-text curation before benchmark encoding: the 2024 pea-specific accessibility source and any exact quantitative extraction from Hofmann beyond the verified article-level anchor.
+
+## 11. Hexanal And Nonanal Calibration-First Closure
+
+Status: the internal calibration route is executable and currently closed, but this does not unlock external promotion claims.
+
+The current protocol-pilot lane for pea isolate is now checked directly against the frozen Internal2026 lane through the generated artifact [results/validation/hexanal_nonanal_calibration_closure.md](results/validation/hexanal_nonanal_calibration_closure.md). The rule is intentionally narrow: Hexanal and Nonanal must each remain within a ProtocolPilot2026-to-Internal2026 ratio window of 0.5x to 2.0x for the internal calibration route to be treated as closed.
+
+This means the adverse-marker story is no longer a default mechanistic-escalation trigger for the pea mixed lane. It is instead treated as an internally concordant calibration route that still needs externally quantitative mixed-matrix evidence before the lane can move toward external decision readiness.
+
+The scientific implication is bounded and specific:
+
+* Hexanal and Nonanal are currently compatible with the matrix headspace and lipid-oxidation calibration used for the internal pea lane.
+* This does not prove broad external validity for pea matrices.
+* It does reduce the justification for pushing selective QM first on these adverse markers.

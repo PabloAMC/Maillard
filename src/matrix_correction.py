@@ -18,13 +18,13 @@ Current legume-matrix anchoring inside the repo:
   docs/Elicit - Maillard Pathways in Plant-Based Cooking - Report.md
 """
 
-import json
 import math
 from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path
 from typing import Optional
 
+from src.artifact_io import load_json_mapping
 from src.matrix_prior_registry import (
     get_accessibility_window_entry,
     get_denaturation_heuristic_entry,
@@ -40,9 +40,7 @@ DATA_LIT_DIR = ROOT / "data" / "lit"
 
 
 def _load_json_payload(file_name: str) -> dict:
-    payload_path = DATA_LIT_DIR / file_name
-    with open(payload_path, "r", encoding="utf-8") as handle:
-        return json.load(handle)
+    return load_json_mapping(DATA_LIT_DIR / file_name)
 
 
 PROCESS_STATE_CALIBRATION_PAYLOAD = _load_json_payload("process_state_calibrations.json")
