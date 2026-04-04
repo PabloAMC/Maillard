@@ -14,9 +14,9 @@ if str(ROOT) not in sys.path:
 
 from src.benchmark_validation import (
     get_matrix_only_target_snapshot_exclusions,
-    render_benchmark_targets_markdown,
     snapshot_all_benchmark_targets,
 )
+from src.presentation import render_benchmark_targets_markdown
 
 
 def main() -> int:

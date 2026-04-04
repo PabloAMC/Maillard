@@ -43,6 +43,16 @@ from src.presentation import (
 from src.reporting import generate_report  # noqa: E402
 
 
+def _parse_float_list(raw: str) -> List[float]:
+    values: List[float] = []
+    for item in raw.split(","):
+        token = item.strip()
+        if not token:
+            continue
+        values.append(float(token))
+    return values
+
+
 def print_table(active_pathways: List[Dict[str, Any]]) -> None:
     """Update table to include sensory descriptors."""
     # Column widths: 22, 16, 12, 30, 20
@@ -94,10 +104,17 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--catalyst", type=str, default=None, choices=["heme"], help="Apply catalyst effect (e.g. heme)")
     parser.add_argument("--aw", "--water-activity", type=float, default=DEFAULTS.default_aw, help="Water activity (default 1.0)")
     parser.add_argument("--time-minutes", type=float, default=DEFAULTS.default_time_minutes, help="Reaction time in minutes (default 60.0)")
+    parser.add_argument("--sme-kj-per-kg", type=float, default=0.0, help="Specific mechanical energy for extrusion correction (default 0.0)")
+    parser.add_argument("--moisture-regime", choices=["lme", "hme"], default=None, help="Extrusion moisture regime override")
+    parser.add_argument("--sterilization-temp", type=float, default=None, help="Optional post-extrusion sterilization temperature in Celsius")
+    parser.add_argument("--sterilization-time-minutes", type=float, default=0.0, help="Optional post-extrusion sterilization time in minutes")
+    parser.add_argument("--barrel-zones", type=str, default="", help="Comma-separated sequential barrel zone temperatures in Celsius")
+    parser.add_argument("--barrel-zone-time-fractions", type=str, default="", help="Comma-separated residence-time fractions aligned with --barrel-zones")
     parser.add_argument("--target", type=str, default=None, help="Inverse design target sensory tag (e.g. meaty, roasted)")
     parser.add_argument("--minimize", type=str, default=DEFAULTS.default_minimize_tag, help="Inverse design off-flavour tag to minimize (default: beany)")
     parser.add_argument("--xtb", action="store_true", help="Run full GFN2-xTB structural optimizations (SLOW!). Defaults to fast Hammond estimating.")
     parser.add_argument("--protein-type", choices=["free", "pea_conc", "pea_iso", "soy_conc", "soy_iso", "myco"], default=DEFAULTS.default_protein_type, help="Protein matrix type for accessibility corrections.")
+    parser.add_argument("--protein-source", type=str, default=None, help="Explicit registry-backed protein source for MEATY multipliers (e.g. pea_isolate, wheat_gluten).")
     parser.add_argument("--denaturation-state", type=float, default=DEFAULTS.default_denaturation_state, help="Protein denaturation level (0.0 to 1.0). Default 0.5.")
     parser.add_argument("--list-precursors", action="store_true", help="List available precursors and exit")
     parser.add_argument("--list-tags", action="store_true", help="List available sensory tags and exit")
@@ -249,7 +266,7 @@ def run_forward_pipeline(args: argparse.Namespace, conditions: ReactionCondition
         warnings = checker.check(
             precursor_names=names,
             protein_type=args.protein_type,
-            temp_c=args.temp,
+            temp_c=conditions.effective_temperature_celsius,
             ph=args.ph,
             aw=args.aw,
         )
@@ -276,7 +293,14 @@ def run_forward_pipeline(args: argparse.Namespace, conditions: ReactionCondition
         "temp": args.temp,
         "aw": args.aw,
         "time_minutes": args.time_minutes,
+        "sme_kj_per_kg": args.sme_kj_per_kg,
+        "moisture_regime": args.moisture_regime,
+        "sterilization_temperature_celsius": args.sterilization_temp,
+        "sterilization_time_minutes": args.sterilization_time_minutes,
+        "barrel_zone_temperatures": _parse_float_list(args.barrel_zones) if args.barrel_zones else None,
+        "barrel_zone_time_fractions": _parse_float_list(args.barrel_zone_time_fractions) if args.barrel_zone_time_fractions else None,
         "protein_type": args.protein_type,
+        "protein_source": args.protein_source,
         "denaturation_state": args.denaturation_state,
         "catalyst": args.catalyst
     }
@@ -335,7 +359,13 @@ def main() -> None:
         pH=args.ph, 
         temperature_celsius=args.temp,
         water_activity=args.aw,
-        protein_type=args.protein_type
+        protein_type=args.protein_type,
+        sme_kj_per_kg=args.sme_kj_per_kg,
+        moisture_regime=args.moisture_regime,
+        sterilization_temperature_celsius=args.sterilization_temp,
+        sterilization_time_minutes=args.sterilization_time_minutes,
+        barrel_zone_temperatures=_parse_float_list(args.barrel_zones) if args.barrel_zones else None,
+        barrel_zone_time_fractions=_parse_float_list(args.barrel_zone_time_fractions) if args.barrel_zone_time_fractions else None,
     )
 
     if args.target:

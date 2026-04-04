@@ -12,7 +12,7 @@ family_benchmark_accuracy.png
     chart with human-readable study labels.
 
 family_coverage.png
-    Coverage census across all 10 chemistry families showing how many
+    Coverage census across all tracked chemistry families showing how many
     quantitative compound points each family currently has.
 
 Each figure is saved independently at (8 x 6) inches so it can be placed in
@@ -41,6 +41,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from src.benchmark_validation import summarize_benchmarks  # noqa: E402
+from src.benchmark_labels import benchmark_label  # noqa: E402
 from src.family_validation_overview import (  # noqa: E402
     build_family_validation_overview_artifact,
     render_family_validation_overview_markdown,
@@ -50,7 +51,7 @@ from src.family_validation_overview import (  # noqa: E402
 # Human-readable label tables (LaTeX-safe: & → \&, % → \%)
 # ---------------------------------------------------------------------------
 
-# All 10 SLR families — used as y-tick labels in the coverage figure
+# Selected short labels for tracked SLR families used in the coverage figure
 _FAMILY_LABELS: dict[str, str] = {
     "amino_acid_sugar_core":                     r"F01 \ Amino acid + sugar Maillard core",
     "lipid_oxidation_and_carbonylic_crosstalk":  r"F02 \ Lipid oxidation \& carbonylic crosstalk",
@@ -62,31 +63,32 @@ _FAMILY_LABELS: dict[str, str] = {
     "off_note_and_maillard_suppression":         r"F08 \ Off-notes \& Maillard suppression",
     "carbohydrate_pyrolysis_and_caramelization": r"F09 \ Caramelisation \& pyrolysis",
     "fermentation_pretreatment":                 r"F10 \ Fermentation pre-treatment",
+    "lipid_maillard_crosstalk":                  r"F11 \ Maillard-lipid crosstalk",
+    "protein_damage_markers":                    r"F12 \ Protein damage markers",
+    "polyphenol_amino_capping":                  r"F13 \ Polyphenol-amino capping",
+    "ascorbic_acid_maillard":                    r"F14 \ Ascorbic acid Maillard",
+    "phospholipid_amine_sink":                   r"F15 \ Phospholipid-amine sink",
+    "melanoidin_polymerization":                 r"F16 \ Melanoidin polymerisation",
 }
 
 # Short labels for scatter plot legend (space-constrained)
 _FAMILY_LEGEND_LABELS: dict[str, str] = {
     "amino_acid_sugar_core":                     r"F01 \ Amino acid + sugar",
     "lipid_oxidation_and_carbonylic_crosstalk":  r"F02 \ Lipid oxidation",
+    "thiamine_fragmentation_support":            r"F03 \ Thiamine",
+    "nucleotide_and_ribose_support":             r"F04 \ Nucleotide support",
+    "glutathione_and_peptide_support":           r"F05 \ Peptide support",
+    "alternative_protein_matrix_scope":          r"F06 \ Matrix scope",
+    "carbonyl_donor_hierarchy":                  r"F07 \ Donor hierarchy",
     "off_note_and_maillard_suppression":         r"F08 \ Off-notes \& suppression",
     "carbohydrate_pyrolysis_and_caramelization": r"F09 \ Caramelisation",
-}
-
-# Benchmark id → human-readable study label
-_BENCH_LABELS: dict[str, str] = {
-    "acrylamide_asparagine_glucose_Parker2012":              r"Asn + glucose $\to$ acrylamide (Parker 2012)",
-    "cys_glucose_150C_Farmer1999":                           r"Cys + glucose, $150\,^{\circ}$C (Farmer 1999)",
-    "cys_ribose_140C_Hofmann1998":                           r"Cys + ribose, $140\,^{\circ}$C (Hofmann 1998)",
-    "cys_ribose_150C_Mottram1994":                           r"Cys + ribose, $150\,^{\circ}$C (Mottram 1994)",
-    "pea_isolate_40C_PratapSingh2021":                       r"Pea isolate, $40\,^{\circ}$C (Pratap Singh 2021)",
-    "pea_isolate_ribose_cysteine_100C_45min_Internal2026":   r"Pea isolate + Rib/Cys, $100\,^{\circ}$C (internal)",
-    "pea_isolate_uht_140C_Trikusuma2019":                    r"Pea isolate UHT, $140\,^{\circ}$C (Trikusuma 2019)",
-    "soy_isolate_40C_PratapSingh2021":                       r"Soy isolate, $40\,^{\circ}$C (Pratap Singh 2021)",
-    "soy_isolate_ribose_cysteine_100C_45min_Internal2026":   r"Soy isolate + Rib/Cys, $100\,^{\circ}$C (internal)",
+    "fermentation_pretreatment":                 r"F10 \ Pretreatment",
+    "lipid_maillard_crosstalk":                  r"F11 \ Lipid crosstalk",
+    "protein_damage_markers":                    r"F12 \ Damage markers",
 }
 
 def _bench_label(benchmark_id: str) -> str:
-    return _BENCH_LABELS.get(benchmark_id, benchmark_id.replace("_", " "))
+    return benchmark_label(benchmark_id, style="latex")
 
 
 # ---------------------------------------------------------------------------
@@ -96,8 +98,20 @@ def _bench_label(benchmark_id: str) -> str:
 _FAMILY_COLORS: dict[str, str] = {
     "amino_acid_sugar_core":                     "#0077BB",
     "lipid_oxidation_and_carbonylic_crosstalk":  "#EE7733",
+    "thiamine_fragmentation_support":            "#228833",
+    "nucleotide_and_ribose_support":             "#AA4499",
+    "glutathione_and_peptide_support":           "#66A61E",
+    "alternative_protein_matrix_scope":          "#8C564B",
+    "carbonyl_donor_hierarchy":                  "#DDCC77",
     "off_note_and_maillard_suppression":         "#CC3311",
     "carbohydrate_pyrolysis_and_caramelization": "#009988",
+    "fermentation_pretreatment":                 "#CC79A7",
+    "lipid_maillard_crosstalk":                  "#4477AA",
+    "protein_damage_markers":                    "#882255",
+    "polyphenol_amino_capping":                  "#999999",
+    "ascorbic_acid_maillard":                    "#BBBBBB",
+    "phospholipid_amine_sink":                   "#A6A6A6",
+    "melanoidin_polymerization":                 "#C7C7C7",
 }
 _FAMILY_COLOR_NONE = "#BBBBBB"
 
@@ -203,17 +217,15 @@ def _render_parity(payload: dict[str, object], output_path: Path) -> None:
         )
         for ep in sorted(execution_paths_seen)
     ]
-    # Place legend inside the axes to avoid overlaying other content; use axes
-    # coordinates so the box scales correctly with figure size.
-    ax.legend(
-        handles=family_handles + band_handles + path_handles,
+    guide_legend = ax.legend(
+        handles=band_handles + path_handles,
         fontsize=_FS - 4,
         loc="upper left",
         bbox_to_anchor=(0.04, 0.96),
         bbox_transform=ax.transAxes,
         framealpha=0.9,
         edgecolor="0.75",
-        title=r"\textit{Family / execution lane}",
+        title=r"\textit{Guide}",
         title_fontsize=_FS - 4,
         labelspacing=0.12,
         handletextpad=0.3,
@@ -221,6 +233,21 @@ def _render_parity(payload: dict[str, object], output_path: Path) -> None:
         handlelength=1.0,
         columnspacing=0.6,
         ncol=1,
+    )
+    ax.add_artist(guide_legend)
+    ax.legend(
+        handles=family_handles,
+        fontsize=_FS - 4,
+        loc="lower right",
+        bbox_to_anchor=(0.98, 0.04),
+        bbox_transform=ax.transAxes,
+        framealpha=0.9,
+        edgecolor="0.75",
+        title=r"\textit{Chemistry families}",
+        title_fontsize=_FS - 4,
+        labelspacing=0.12,
+        handletextpad=0.3,
+        borderpad=0.2,
     )
 
     fig.savefig(output_path, dpi=300, bbox_inches="tight")
@@ -285,13 +312,14 @@ def _render_benchmark_accuracy(payload: dict[str, object], output_path: Path) ->
 
 
 # ---------------------------------------------------------------------------
-# Figure 3: 10-family benchmark coverage census
+# Figure 3: family benchmark coverage census
 # ---------------------------------------------------------------------------
 
 def _render_family_coverage(payload: dict[str, object], output_path: Path) -> None:
     """Standalone horizontal bar chart: quantitative compound points per family."""
-    families = payload["families"]  # ordered F01 → F10
-    plotted = list(reversed(families))  # F10 at top, F01 at bottom
+    families = payload["families"]
+    plotted = list(reversed(families))
+    family_count = len(families)
 
     pt_counts = [int(r["quantitative_point_count"]) for r in plotted]
     bar_colors = [_FAMILY_COLORS.get(str(r["chemistry_family"]), _FAMILY_COLOR_NONE) for r in plotted]
@@ -312,22 +340,20 @@ def _render_family_coverage(payload: dict[str, object], output_path: Path) -> No
     # Annotate gaps explicitly on the bar row
     for idx, r in enumerate(plotted):
         if int(r["quantitative_point_count"]) == 0:
-            ax.text(0.12, idx, r"\textit{no benchmark yet}", va="center",
+            status_text = r"\textit{runtime lane landed}" if bool(r.get("has_runtime_support", False)) else r"\textit{no runtime lane yet}"
+            ax.text(0.12, idx, status_text, va="center",
                     fontsize=_FS - 3, color="#777777", style="italic")
 
     ax.set_yticks(y_pos)
     ax.set_yticklabels(tick_labels, fontsize=_FS - 2)
     ax.set_xlabel(r"Number of matched compound points", fontsize=_FS)
-    ax.set_title(r"Benchmark coverage across all 10 chemistry families", fontsize=_FS)
+    ax.set_title(rf"Benchmark coverage across all {family_count} tracked chemistry families", fontsize=_FS)
     ax.tick_params(axis="x", labelsize=_FS - 1)
     ax.set_xlim(left=0)
 
     legend_handles = [
-        mpatches.Patch(facecolor="#0077BB", label=r"F01 \ Amino acid + sugar Maillard core"),
-        mpatches.Patch(facecolor="#EE7733", label=r"F02 \ Lipid oxidation"),
-        mpatches.Patch(facecolor="#CC3311", label=r"F08 \ Off-notes \& suppression"),
-        mpatches.Patch(facecolor="#009988", label=r"F09 \ Caramelisation"),
-        mpatches.Patch(facecolor=_FAMILY_COLOR_NONE, label=r"No benchmark data yet"),
+        mpatches.Patch(facecolor="#0077BB", label=r"Runtime-integrated family"),
+        mpatches.Patch(facecolor=_FAMILY_COLOR_NONE, label=r"No quantitative parity yet"),
     ]
     ax.legend(
         handles=legend_handles,

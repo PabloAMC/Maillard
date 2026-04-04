@@ -208,10 +208,12 @@ def test_pipeline_applies_family_upstream_contract_before_prediction(monkeypatch
     cysteine_smiles = "NC(CS)C(=O)O"
     thiamine_smiles = "Cc1ncc(C[n+]2csc(CCO)c2C)c(N)n1"
 
-    assert initial_concentrations[ribose_smiles] > initial_concentrations[glucose_smiles]
+    assert initial_concentrations[ribose_smiles] == pytest.approx(1.0)
+    assert initial_concentrations[glucose_smiles] == pytest.approx(1.0)
     assert initial_concentrations[cysteine_smiles] == pytest.approx(1.0)
     assert initial_concentrations[thiamine_smiles] > 0.0
     assert result.flavor_axis_summary["family_upstream_contract"]["effective_pH"] == pytest.approx(5.15)
+    assert result.flavor_axis_summary["family_upstream_contract"]["donor_pool_factors"]["ribose"] > result.flavor_axis_summary["family_upstream_contract"]["donor_pool_factors"]["glucose"]
 
 
 def test_projection_rows_preserve_panel_role_kind_and_modeling_regimes():

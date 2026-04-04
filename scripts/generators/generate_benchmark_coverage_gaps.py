@@ -13,6 +13,8 @@ if str(ROOT) not in sys.path:
 
 from src.benchmark_validation import build_matrix_benchmark_evidence_audit, get_benchmark_files, get_benchmark_metadata, load_benchmark
 
+INTAKE_REGISTRY_PATH = ROOT / "data" / "lit" / "benchmark_intake_registry.json"
+
 
 TARGET_PROTEINS = ["free", "pea_iso", "soy_iso", "pea_conc", "soy_conc", "myco"]
 TARGET_PROCESS_STATES = ["ambient_slurry", "aqueous_pre_extrusion_model", "heated_matrix"]
@@ -89,6 +91,31 @@ def _build_rows() -> list[dict[str, object]]:
         "status": "covered" if external_matrix_meaty else "gap",
         "note": "wet-lab quantitative meaty-positive matrix benchmarks are the main blocker for broad alt-protein validation",
     })
+
+    intake = json.loads(INTAKE_REGISTRY_PATH.read_text(encoding="utf-8")) if INTAKE_REGISTRY_PATH.exists() else {}
+    for gap in intake.get("structural_gaps", []):
+        gap_id = str(gap.get("id", "unknown"))
+        if gap_id not in {
+            "ppi_meaty_positive_matrix_benchmark",
+            "spi_meaty_positive_matrix_benchmark",
+            "meaty_off_flavour_safety_tradeoff_panel",
+        }:
+            continue
+        near_misses = ", ".join(
+            str(item.get("entry_id", "unknown"))
+            for item in gap.get("near_miss_candidates", [])
+            if isinstance(item, dict)
+        ) or "none"
+        rows.append({
+            "dimension": "structural_gap",
+            "category": gap_id,
+            "benchmark_count": 0,
+            "status": "gap",
+            "note": f"{str(gap.get('why', ''))} Near misses: {near_misses}.",
+            "requires_primary_data": bool(gap.get("requires_primary_data", True)),
+            "closure_outcome": str(gap.get("closure_outcome", "unknown")),
+            "evidence_state": str(gap.get("evidence_state", "unknown")),
+        })
     return rows
 
 

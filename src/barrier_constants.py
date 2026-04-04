@@ -23,7 +23,7 @@ import json
 import yaml
 import math
 from pathlib import Path
-from typing import Dict, Tuple, Optional
+from typing import Dict, Tuple, Optional, Sequence
 
 # Locate data files
 ROOT = Path(__file__).resolve().parents[1]
@@ -93,6 +93,136 @@ ARRHENIUS_R_KCAL: float = 0.001987
 # Heme catalyst barrier reduction (kcal/mol)
 HEME_CATALYST_REDUCTION: float = 5.0
 HEME_CATALYST_FAMILIES = frozenset({"Strecker_Degradation", "Aminoketone_Condensation", "Lipid_Strecker_Synergy"})
+
+DONOR_REACTIVITY_MULTIPLIERS: Dict[str, Dict[str, float]] = {
+    "schiff_condensation": {
+        "phosphorylated": 1.10,
+        "pentose": 1.00,
+        "fructose": 1.00,
+        "glucose": 0.94,
+    },
+    "amadori_rearrangement": {
+        "phosphorylated": 1.10,
+        "pentose": 1.00,
+        "fructose": 1.00,
+        "glucose": 0.94,
+    },
+    "heyns_rearrangement": {
+        "phosphorylated": 1.04,
+        "pentose": 1.00,
+        "fructose": 1.02,
+        "glucose": 0.98,
+    },
+    "enolisation_intermediate": {
+        "phosphorylated": 1.12,
+        "pentose": 1.00,
+        "fructose": 1.00,
+        "glucose": 0.92,
+    },
+    "1,2-enolisation": {
+        "phosphorylated": 1.12,
+        "pentose": 1.00,
+        "fructose": 1.00,
+        "glucose": 0.92,
+    },
+    "2,3-enolisation": {
+        "phosphorylated": 1.08,
+        "pentose": 1.00,
+        "fructose": 1.02,
+        "glucose": 0.95,
+    },
+    "dehydration": {
+        "phosphorylated": 1.10,
+        "pentose": 1.00,
+        "fructose": 1.02,
+        "glucose": 0.94,
+    },
+    "strecker_degradation": {
+        "phosphorylated": 1.10,
+        "pentose": 1.00,
+        "fructose": 0.98,
+        "glucose": 0.88,
+    },
+    "aminoketone_condensation": {
+        "phosphorylated": 1.10,
+        "pentose": 1.00,
+        "fructose": 1.02,
+        "glucose": 0.88,
+    },
+    "thiol_addition": {
+        "phosphorylated": 1.08,
+        "pentose": 1.00,
+        "fructose": 0.98,
+        "glucose": 0.90,
+    },
+    "thiohemiacetal_formation": {
+        "phosphorylated": 1.08,
+        "pentose": 1.00,
+        "fructose": 0.98,
+        "glucose": 0.92,
+    },
+    "thiol_dehydration": {
+        "phosphorylated": 1.08,
+        "pentose": 1.00,
+        "fructose": 0.98,
+        "glucose": 0.92,
+    },
+}
+
+_DONOR_PRIORITY = {
+    "phosphorylated": 4,
+    "pentose": 3,
+    "fructose": 2,
+    "glucose": 1,
+}
+
+
+def _normalize_donor_context_token(value: str) -> str:
+    return " ".join(str(value).strip().lower().replace("_", " ").replace("-", " ").split())
+
+
+def infer_carbohydrate_donor_identity(reactant_labels: Optional[Sequence[str]] = None) -> Optional[str]:
+    if not reactant_labels:
+        return None
+
+    detected: Dict[str, int] = {}
+    for raw_label in reactant_labels:
+        token = _normalize_donor_context_token(str(raw_label))
+        if not token:
+            continue
+        if any(item in token for item in ["ribose 5 phosphate", "glucose 6 phosphate", "fructose 6 phosphate", "r5p"]):
+            detected["phosphorylated"] = max(detected.get("phosphorylated", 0), _DONOR_PRIORITY["phosphorylated"])
+            continue
+        if any(item in token for item in ["ribose", "xylose", "arabinose"]):
+            detected["pentose"] = max(detected.get("pentose", 0), _DONOR_PRIORITY["pentose"])
+            continue
+        if "fructose" in token:
+            detected["fructose"] = max(detected.get("fructose", 0), _DONOR_PRIORITY["fructose"])
+            continue
+        if "glucose" in token:
+            detected["glucose"] = max(detected.get("glucose", 0), _DONOR_PRIORITY["glucose"])
+
+    if not detected:
+        return None
+    return max(detected.items(), key=lambda item: item[1])[0]
+
+
+def get_donor_reactivity_multiplier(
+    reaction_family: Optional[str],
+    *,
+    reactant_labels: Optional[Sequence[str]] = None,
+    donor_identity: Optional[str] = None,
+) -> float:
+    donor = str(donor_identity or infer_carbohydrate_donor_identity(reactant_labels) or "").strip().lower()
+    if not donor:
+        return 1.0
+
+    family_key = _canonical_fast_family(reaction_family)
+    if not family_key:
+        return 1.0
+
+    family_multipliers = DONOR_REACTIVITY_MULTIPLIERS.get(family_key, {})
+    return float(family_multipliers.get(donor, 1.0))
 
 
 def _normalize_family_key(reaction_family: Optional[str]) -> str:

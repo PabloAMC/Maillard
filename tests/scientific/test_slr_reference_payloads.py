@@ -36,7 +36,7 @@ def test_track0_and_track1_artifacts_exist_and_are_exposed_in_reporting():
     assert surface["reaction_benchmark_set"] == "data/lit/reaction_benchmark_set.json"
     assert surface["mlp_candidate_registry"] == "data/lit/mlp_candidate_registry.json"
     assert surface["mlp_external_benchmark_evidence"] == "data/lit/mlp_external_benchmark_evidence.json"
-    assert surface["p4_geometry_benchmark_set"] == "data/lit/p4_geometry_benchmark_set.json"
+    assert surface["geometry_benchmark_set"] == "data/lit/geometry_benchmark_set.json"
 
 
 def test_family_ingestion_plan_registry_prioritizes_first_wave_extension_lanes():
@@ -102,12 +102,41 @@ def test_benchmark_intake_registry_encodes_trikusuma_and_lincoln_artifacts():
     payload = _load("data/lit/benchmark_intake_registry.json")
     by_id = {entry["id"]: entry for entry in payload["eligible_references"]}
 
+    assert by_id["cerny_guntz_dubini_2008"]["runtime_artifacts"][0]["artifact_id"] == "thiamine_cys_xylose_145C_Cerny2008"
     assert by_id["trikusuma_2019"]["status"] == "ready_for_intake_encoding"
     assert by_id["trikusuma_2019"]["key_values"]["tracked_uht_markers_ug_per_l"]["hexanal"] == 782.0
     assert by_id["trikusuma_2019"]["runtime_artifacts"][0]["artifact_id"] == "pea_isolate_uht_140C_Trikusuma2019"
+    assert any(item["artifact_id"] == "li_2026_spi_wg_hme_hexanal_control_point" for item in by_id["pmc_2026_hme_hexanal_baseline"]["runtime_artifacts"])
+    assert any(item["artifact_id"] == "acs_2022_pba_lysine_loss" for item in by_id["acs_2022_pba_lysine_loss_benchmark"]["runtime_artifacts"])
     assert by_id["lincoln_2025"]["status"] == "ready_for_directional_prior_encoding"
     assert by_id["lincoln_2025"]["runtime_artifacts"][0]["artifact_id"] == "lincoln_2025_polyphenol_crosstalk_v1"
     assert "polyphenol" in json.dumps(by_id["lincoln_2025"]).lower()
+
+
+def test_hme_family11_intake_registry_captures_pdf_method_but_keeps_closure_blockers_explicit():
+    payload = _load("data/lit/benchmark_intake_registry.json")
+    by_id = {entry["id"]: entry for entry in payload["eligible_references"]}
+
+    hme = by_id["pmc_2026_hme_hexanal_baseline"]
+
+    assert hme["doi"] == "10.3390/foods15050912"
+    assert hme["key_values"]["extrusion_moisture_wt_pct"] == 57.0
+    assert hme["key_values"]["barrel_temp_profile_C"][-1] == 160.0
+    assert hme["key_values"]["wg_neutral_protease_u_per_g"] == 250.0
+    assert hme["key_values"]["flavour_optimum_pretreatment_time_min"] == 40.0
+    assert hme["key_values"]["2-pentylfuran_control_ug_per_kg"] == 221.51
+    assert hme["key_values"]["1-hexanol_control_ug_per_kg"] == 20.04
+    assert any("final-blend pH" in item for item in hme["what_it_does_not_support"])
+    assert any("water-activity" in item for item in hme["what_it_does_not_support"])
+
+
+def test_operational_benchmark_intake_registry_excludes_markdown_backlog_candidates():
+    payload = _load("data/lit/benchmark_intake_registry.json")
+
+    for entry in payload["eligible_references"]:
+        assert "extracted_from_markdown" not in (entry.get("observable_panel_tags") or [])
+        assert entry.get("status") != "pending_json_payload"
+        assert entry.get("matrix_family") != "unknown_see_details"
 
 
 def test_computational_priors_include_lincoln_crosstalk_prior():

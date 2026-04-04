@@ -23,10 +23,11 @@ from src.precursor_resolver import resolve_many
 from src.projection_metadata import ProjectionMetadataMap, make_projection_metadata_row
 from src.smirks_engine import SmirksEngine
 from src.validation_contract import BenchmarkThresholds, DEFAULT_VALIDATION_CONTRACT
-from src.safety import predict_acrylamide
+from src.safety import predict_acrylamide, predict_cel, predict_cml, predict_furosine
 from src.projection_utils import build_projection_rows
 from src.matrix_targets import get_compound_panel_entry
-from src.literature_family_registry import resolve_family_descriptor
+from src.literature_family_registry import iter_benchmark_intake_entries, resolve_family_descriptor
+from src.literature_runtime import build_family_upstream_contract
 from src.benchmark_types import (
     BenchmarkMetadata,
     BenchmarkIndexEntry,
@@ -53,7 +54,24 @@ MATRIX_NAMES = (
     "brown rice protein isolate",
     "pea protein",
     "soy protein",
+    "wheat gluten",
     "mycoprotein",
+)
+
+SUPPORT_ADDITIVE_TOKENS = (
+    "thiamine",
+    "vitamin b1",
+    "imp",
+    "gmp",
+    "inosinate",
+    "guanylate",
+    "yeast extract",
+    "ascorbic acid",
+    "ascorbate",
+    "vitamin c",
+    "lecithin",
+    "phospholipid",
+    "phosphatidyl",
 )
 
 BENCHMARK_NAME_ALIASES = {
@@ -133,6 +151,28 @@ THERMODYNAMIC_GATING_POLICIES = {
     "benchmark_facing",
     "not_applicable",
 }
+
+
+def _build_runtime_benchmark_family_map() -> tuple[Dict[str, str], Dict[str, List[str]]]:
+    benchmark_family_map: Dict[str, str] = {}
+    payload_roles_by_benchmark: Dict[str, set[str]] = defaultdict(set)
+    for entry in iter_benchmark_intake_entries():
+        chemistry_family = str(entry.get("chemistry_family", "")).strip()
+        if not chemistry_family:
+            continue
+        payload_role = str(entry.get("payload_role", "benchmark_intake")).strip() or "benchmark_intake"
+        for artifact in entry.get("runtime_artifacts", []) or []:
+            if str(artifact.get("artifact_type", "")).strip() != "benchmark":
+                continue
+            artifact_id = str(artifact.get("artifact_id", "")).strip()
+            if not artifact_id:
+                continue
+            benchmark_family_map[artifact_id] = chemistry_family
+            payload_roles_by_benchmark[artifact_id].add(payload_role)
+    return benchmark_family_map, {key: sorted(value) for key, value in payload_roles_by_benchmark.items()}
+
+
+_RUNTIME_BENCHMARK_FAMILY_MAP, _RUNTIME_BENCHMARK_PAYLOAD_ROLES = _build_runtime_benchmark_family_map()
 
 
 DEFAULT_BENCHMARK_THRESHOLDS = DEFAULT_VALIDATION_CONTRACT.thresholds
@@ -319,16 +359,39 @@ def load_benchmark(bench_file: Path | str) -> dict:
         return json.load(handle)
 
 
+def _get_condition_water_activity(conditions: Dict[str, Any], *, required: bool = False) -> Optional[float]:
+    aw = conditions.get("water_activity")
+    if aw is None:
+        aw = conditions.get("aw")
+    if aw is None:
+        if required:
+            raise KeyError("Benchmark conditions must include 'water_activity' or 'aw'.")
+        return None
+    return float(aw)
+
+
 def benchmark_to_conditions(bench: dict) -> ReactionConditions:
+    conditions = bench["conditions"]
     return ReactionConditions(
-        pH=bench["conditions"]["ph"],
-        temperature_celsius=bench["conditions"]["temp_C"],
-        water_activity=bench["conditions"]["water_activity"],
+        pH=conditions["ph"],
+        temperature_celsius=conditions["temp_C"],
+        water_activity=_get_condition_water_activity(conditions, required=True),
         protein_type=bench.get("protein_type", "free"),
+        sme_kj_per_kg=bench.get("sme_kj_per_kg", conditions.get("sme_kj_per_kg", 0.0)),
+        moisture_regime=bench.get("moisture_regime", conditions.get("moisture_regime")),
+        sterilization_temperature_celsius=bench.get(
+            "sterilization_temperature_celsius",
+            conditions.get("sterilization_temperature_celsius"),
+        ),
+        sterilization_time_minutes=bench.get(
+            "sterilization_time_minutes",
+            conditions.get("sterilization_time_minutes", 0.0),
+        ),
     )
 
 
 def benchmark_to_formulation(bench: dict) -> dict:
+    conditions = bench["conditions"]
     molar_ratios = {
         name: data["concentration_mM"]
         for name, data in bench["precursors"].items()
@@ -336,6 +399,7 @@ def benchmark_to_formulation(bench: dict) -> dict:
 
     sugars: List[str] = []
     amino_acids: List[str] = []
+    additives: List[str] = []
     lipids: List[str] = []
     skipped_matrix_precursors: List[str] = []
 
@@ -348,6 +412,8 @@ def benchmark_to_formulation(bench: dict) -> dict:
             sugars.append(name)
         elif any(token in name_lower for token in ["hexanal", "nonanal", "lipid", "fat", "furan"]):
             lipids.append(name)
+        elif any(token in name_lower for token in SUPPORT_ADDITIVE_TOKENS):
+            additives.append(name)
         else:
             amino_acids.append(name)
 
@@ -355,13 +421,16 @@ def benchmark_to_formulation(bench: dict) -> dict:
         "name": bench["benchmark_id"],
         "sugars": sugars,
         "amino_acids": amino_acids,
+        "additives": additives,
         "lipids": lipids,
         "molar_ratios": molar_ratios,
-        "ph": bench["conditions"]["ph"],
-        "temp": bench["conditions"]["temp_C"],
-        "aw": bench["conditions"]["water_activity"],
-        "time_minutes": bench["conditions"]["time_min"],
+        "ph": conditions["ph"],
+        "temp": conditions["temp_C"],
+        "aw": _get_condition_water_activity(conditions, required=True),
+        "time_minutes": conditions["time_min"],
         "protein_type": bench.get("protein_type", "free"),
+        "protein_source": bench.get("protein_source"),
+        "support_cues": skipped_matrix_precursors,
         "denaturation_state": bench.get("denaturation_state", 0.5),
         "_skipped_matrix_precursors": skipped_matrix_precursors,
     }
@@ -382,7 +451,7 @@ def _is_supported_formulation(formulation: dict) -> tuple[bool, Optional[str]]:
             return True, None
         return False, f"No executable matrix-only benchmark path for protein_type={protein_type}"
 
-    candidate_precursors = formulation["sugars"] + formulation["amino_acids"] + formulation["lipids"]
+    candidate_precursors = formulation["sugars"] + formulation["amino_acids"] + formulation.get("additives", []) + formulation["lipids"]
     if not candidate_precursors:
         skipped = ", ".join(formulation.get("_skipped_matrix_precursors", [])) or "none"
         return False, f"No resolvable free-precursor system in benchmark. Matrix-only precursors: {skipped}"
@@ -517,7 +586,46 @@ def _run_benchmark_recommendation(
     kinetics = KineticsEngine(temperature_k=conditions.temperature_kelvin)
     gating_mode = resolve_thermodynamic_gating_mode(bench, thermodynamic_gating)
 
-    names = formulation["sugars"] + formulation["amino_acids"] + formulation.get("additives", []) + formulation.get("lipids", [])
+    process_state = determine_matrix_process_state(
+        temperature_celsius=float(conditions.temperature_celsius),
+        time_minutes=float(formulation.get("time_minutes", 60.0)),
+        water_activity=conditions.water_activity,
+    )
+    protein_type = formulation.get("protein_type", "free")
+    family_upstream_contract = build_family_upstream_contract(
+        sugars=formulation.get("sugars", []),
+        amino_acids=formulation.get("amino_acids", []),
+        additives=formulation.get("additives", []),
+        lipids=formulation.get("lipids", []),
+        support_cues=formulation.get("support_cues", []),
+        interventions=formulation.get("interventions", []),
+        protein_type=protein_type,
+        pH=formulation.get("ph", conditions.pH),
+        molar_ratios=formulation.get("molar_ratios", {}),
+        process_state=process_state,
+        temperature_celsius=float(conditions.temperature_celsius),
+        time_minutes=float(formulation.get("time_minutes", 60.0)),
+        water_activity=conditions.water_activity,
+    )
+    effective_ratios = dict(family_upstream_contract.get("effective_molar_ratios", {})) or dict(formulation.get("molar_ratios", {}))
+    for precursor_name, ratio_value in (family_upstream_contract.get("added_precursor_ratios", {}) or {}).items():
+        effective_ratios.setdefault(str(precursor_name), float(ratio_value))
+    added_precursors = [
+        precursor_name
+        for precursor_name in (family_upstream_contract.get("added_precursors", []) or [])
+        if precursor_name not in formulation.get("sugars", [])
+        + formulation.get("amino_acids", [])
+        + formulation.get("additives", [])
+        + formulation.get("lipids", [])
+    ]
+
+    names = (
+        formulation["sugars"]
+        + formulation["amino_acids"]
+        + formulation.get("additives", [])
+        + formulation.get("lipids", [])
+        + added_precursors
+    )
     precursors = resolve_many(names)
     steps = SmirksEngine(conditions).enumerate(precursors, max_generations=4)
 
@@ -534,7 +642,11 @@ def _run_benchmark_recommendation(
                 barrier_for_rate = 99.0
             else:
                 barrier_for_rate = max(barrier_for_rate, max(0.5, dg + 0.5))
-        k = conditions.get_rate_constant(step.reaction_family or "unknown", ea_override_kcal=barrier_for_rate)
+        k = conditions.get_rate_constant(
+            step.reaction_family or "unknown",
+            ea_override_kcal=barrier_for_rate,
+            reactant_labels=[species.label for species in step.reactants],
+        )
         bar_eff = effective_barrier_from_rate_constant(
             k,
             conditions.temperature_kelvin,
@@ -548,7 +660,7 @@ def _run_benchmark_recommendation(
     from src.lipid_oxidation import predict_hexanal_generation
 
     initial_concentrations = {}
-    ratios = formulation.get("molar_ratios", {})
+    ratios = effective_ratios
     for precursor in precursors:
         qty = 1.0
         for key, value in ratios.items():
@@ -557,7 +669,6 @@ def _run_benchmark_recommendation(
                 break
         initial_concentrations[canonicalize_smiles(precursor.smiles, fallback_to_original=True, strip_salts=True)] = qty
 
-    protein_type = formulation.get("protein_type", "free")
     model = MATRIX_BENCHMARK_PROFILES.get(protein_type)
     if model is not None:
         oxidation = predict_hexanal_generation(
@@ -605,6 +716,8 @@ def _run_benchmark_recommendation(
         time_minutes=float(formulation.get("time_minutes", 60.0)),
         protein_type=protein_type,
         denaturation_state=float(bench.get("denaturation_state", 0.5)),
+        protein_source=formulation.get("protein_source"),
+        family_upstream_contract=family_upstream_contract,
     )
 
 
@@ -615,12 +728,13 @@ def _run_matrix_only_benchmark_prediction(bench: dict) -> dict:
         raise BenchmarkNotSupportedError(f"No matrix-only predictor for protein_type={protein_type}")
 
     conditions = bench["conditions"]
+    water_activity = _get_condition_water_activity(conditions)
     process_state = str((bench.get("process_metadata") or {}).get(
         "state",
         determine_matrix_process_state(
             temperature_celsius=float(conditions["temp_C"]),
             time_minutes=float(conditions["time_min"]),
-            water_activity=conditions.get("aw"),
+            water_activity=water_activity,
         ),
     ))
     oxidation = predict_hexanal_generation(
@@ -643,7 +757,7 @@ def _run_matrix_only_benchmark_prediction(bench: dict) -> dict:
             pH=pH,
             temperature_celsius=float(conditions["temp_C"]),
             time_minutes=float(conditions["time_min"]),
-            water_activity=conditions.get("aw"),
+            water_activity=water_activity,
         )
         calibration = describe_matrix_calibration(
             compound,
@@ -715,23 +829,68 @@ def _evaluate_loaded_benchmark(
         conditions = benchmark_to_conditions(bench)
         asn_conc = 0.0
         sugar_conc = 0.0
+        lysine_conc = 0.0
         for name, data in bench["precursors"].items():
             n_low = name.lower()
             if "asparagine" in n_low or "asn" in n_low:
                 asn_conc = data["concentration_mM"]
+            if "lysine" in n_low or "lys" in n_low:
+                lysine_conc += data["concentration_mM"]
             if any(s in n_low for s in ["ribose", "glucose", "fructose", "maltose", "xylose", "sugar"]):
                 sugar_conc += data["concentration_mM"]
-        
-        # We assume 180 min if not specified, but Parker 2012 has it in conditions
+
         time_min = bench["conditions"].get("time_min", 20.0)
-        safety_res = predict_acrylamide(
-            asparagine_mM=asn_conc,
-            reducing_sugar_mM=sugar_conc,
-            temp_C=conditions.temperature_celsius,
-            time_min=time_min,
-            pH=conditions.pH,
-        )
-        rec_result = {"predicted_ppb": {"acrylamide": safety_res.acrylamide_ppb}, "projection_metadata": {}}
+        signal_map = bench.get("measured_volatiles") or bench.get("reference_volatiles") or {}
+        signal_names = {str(name).strip().lower() for name in signal_map}
+        predicted_safety: Dict[str, float] = {}
+        if any("acrylamide" in name for name in signal_names):
+            safety_res = predict_acrylamide(
+                asparagine_mM=asn_conc,
+                reducing_sugar_mM=sugar_conc,
+                temp_C=conditions.temperature_celsius,
+                time_min=time_min,
+                pH=conditions.pH,
+                water_activity=conditions.water_activity,
+                moisture_regime=getattr(conditions, "moisture_regime", None),
+                effective_temp_c=conditions.effective_temperature_celsius,
+            )
+            predicted_safety["acrylamide"] = safety_res.acrylamide_ppb
+        if any(name in {"cml", "n carboxymethyl lysine", "carboxymethyllysine"} or "cml" in name for name in signal_names):
+            predicted_safety["Nε-(Carboxymethyl)lysine (CML)"] = predict_cml(
+                lysine_mM=lysine_conc,
+                reducing_sugar_mM=sugar_conc,
+                temp_C=conditions.temperature_celsius,
+                time_min=time_min,
+                water_activity=conditions.water_activity,
+                effective_temp_c=conditions.effective_temperature_celsius,
+            )
+        if any(name in {"cel", "n carboxyethyl lysine", "carboxyethyllysine"} or "cel" in name for name in signal_names):
+            predicted_safety["Nε-(Carboxyethyl)lysine (CEL)"] = predict_cel(
+                lysine_mM=lysine_conc,
+                reducing_sugar_mM=sugar_conc,
+                temp_C=conditions.temperature_celsius,
+                time_min=time_min,
+                water_activity=conditions.water_activity,
+                effective_temp_c=conditions.effective_temperature_celsius,
+            )
+        if any("furosine" in name for name in signal_names):
+            safety_context = bench.get("safety_context") or {}
+            damage_protein_type = str(
+                safety_context.get("protein_type")
+                or bench.get("damage_protein_type")
+                or bench.get("protein_type")
+                or "free"
+            )
+            predicted_safety["furosine"] = predict_furosine(
+                temp_C=conditions.temperature_celsius,
+                time_min=time_min,
+                lysine_mM=lysine_conc,
+                reducing_sugar_mM=sugar_conc,
+                protein_type=damage_protein_type,
+                water_activity=conditions.water_activity,
+                effective_temp_c=conditions.effective_temperature_celsius,
+            )
+        rec_result = {"predicted_ppb": predicted_safety, "projection_metadata": {}}
     elif metadata.execution_path == "matrix_only":
         rec_result = _run_matrix_only_benchmark_prediction(bench)
     else:
@@ -1084,11 +1243,45 @@ def _matrix_target_profile(bench: dict) -> str:
     return "untyped"
 
 
+def _is_internal_measured_matrix_source(source_origin: str) -> bool:
+    return str(source_origin).strip().lower() == "internal_experiment"
+
+
+def _is_internal_candidate_support_status(support_status: str) -> bool:
+    return str(support_status).strip().lower() in {
+        "internal_candidate",
+        "internal_measured_candidate",
+        "internal_reference_candidate",
+    }
+
+
+def _init_matrix_support_counts() -> Dict[str, int]:
+    return {
+        "quantitative_closed": 0,
+        "internal_candidate": 0,
+        "internal_measured_candidate": 0,
+        "internal_reference_candidate": 0,
+        "directional_support": 0,
+        "open_gap": 0,
+    }
+
+
+def _increment_matrix_support_counts(counts: Dict[str, int], support_status: str) -> None:
+    normalized = str(support_status).strip().lower()
+    if normalized not in counts:
+        counts[normalized] = 0
+    counts[normalized] += 1
+    if normalized in {"internal_measured_candidate", "internal_reference_candidate"}:
+        counts["internal_candidate"] = int(counts.get("internal_candidate", 0)) + 1
+
+
 def _matrix_external_data_status(bench: dict) -> str:
     source_origin = _matrix_source_origin(bench)
     has_measured = bool(bench.get("measured_volatiles"))
     if has_measured and (bench.get("source_doi") or source_origin.startswith("external")):
         return "external_quantitative"
+    if has_measured and _is_internal_measured_matrix_source(source_origin):
+        return "internal_measured_quantitative"
     if has_measured:
         return "quantitative_unspecified_origin"
     if bench.get("reference_volatiles"):
@@ -1118,6 +1311,10 @@ def assess_matrix_benchmark_evidence(bench: dict | Path | str) -> MatrixBenchmar
 
     if target_profile == "adverse_only":
         blocker = "benchmark only anchors adverse/off-flavour markers; no external meaty-positive targets are present"
+    elif external_data_status == "internal_measured_quantitative":
+        blocker = "missing external quantitative matrix evidence for meaty-positive targets; current comparator is an internal measured experiment"
+    elif external_data_status == "internal_reference_only":
+        blocker = "missing external quantitative matrix evidence for meaty-positive targets; current comparator is internal reference-only"
     elif external_data_status != "external_quantitative":
         blocker = "missing external quantitative matrix evidence for meaty-positive targets"
     elif reference_signal_origin != "measured_volatiles":
@@ -1381,7 +1578,11 @@ def _matrix_compound_support_status(
 
     if evidence == "externally_benchmarked" and signal_origin == "measured_volatiles" and origin.startswith("external"):
         return "quantitative_closed"
-    if evidence in {"internally_benchmarked", "conditional_calibration"} or signal_origin == "reference_volatiles":
+    if signal_origin == "reference_volatiles":
+        return "internal_reference_candidate"
+    if evidence in {"internally_benchmarked", "conditional_calibration"} and _is_internal_measured_matrix_source(origin):
+        return "internal_measured_candidate"
+    if evidence in {"internally_benchmarked", "conditional_calibration"}:
         return "internal_candidate"
     if evidence in {"transferred_prior", "safety_reference"} or strength in {"class_anchored", "directional_transferred"}:
         return "directional_support"
@@ -1395,12 +1596,7 @@ def build_matrix_target_status_artifact(
 ) -> Dict[str, Any]:
     bench_files = list(benchmark_files) if benchmark_files is not None else get_benchmark_files()
     benchmark_rows: List[Dict[str, Any]] = []
-    support_totals = {
-        "quantitative_closed": 0,
-        "internal_candidate": 0,
-        "directional_support": 0,
-        "open_gap": 0,
-    }
+    support_totals = _init_matrix_support_counts()
 
     for bench_file in bench_files:
         bench = load_benchmark(bench_file)
@@ -1414,12 +1610,7 @@ def build_matrix_target_status_artifact(
         contract = get_matrix_ranking_contract(bench)
         adverse_markers = {str(item).strip().lower() for item in contract.get("adverse_markers", [])}
         compounds: List[Dict[str, Any]] = []
-        benchmark_counts = {
-            "quantitative_closed": 0,
-            "internal_candidate": 0,
-            "directional_support": 0,
-            "open_gap": 0,
-        }
+        benchmark_counts = _init_matrix_support_counts()
 
         for item in contract.get("observable_targets", []):
             compound_name = str(item.get("name", "")).strip()
@@ -1442,8 +1633,8 @@ def build_matrix_target_status_artifact(
                 reference_signal_origin=summary.reference_signal_origin,
                 source_origin=evidence.source_origin,
             )
-            benchmark_counts[support_status] += 1
-            support_totals[support_status] += 1
+            _increment_matrix_support_counts(benchmark_counts, support_status)
+            _increment_matrix_support_counts(support_totals, support_status)
             compounds.append(
                 {
                     "compound": compound_name,
@@ -1474,9 +1665,19 @@ def build_matrix_target_status_artifact(
         elif summary.ranking_contract_status != "pass":
             promotion_blocker = "ranking contract not yet passing"
         elif benchmark_counts["quantitative_closed"] < 2:
-            promotion_blocker = "insufficient externally measured target closure"
+            if evidence.external_data_status == "internal_measured_quantitative":
+                promotion_blocker = "insufficient externally measured target closure; current comparator is internal measured only"
+            elif evidence.external_data_status == "internal_reference_only":
+                promotion_blocker = "insufficient externally measured target closure; current comparator is internal reference-only"
+            else:
+                promotion_blocker = "insufficient externally measured target closure"
         elif benchmark_counts["internal_candidate"] > 0 or benchmark_counts["directional_support"] > 0:
-            promotion_blocker = "depends on internal or transferred support"
+            if benchmark_counts["internal_measured_candidate"] > 0 and benchmark_counts["internal_reference_candidate"] == 0 and benchmark_counts["directional_support"] == 0:
+                promotion_blocker = "depends on internally measured support"
+            elif benchmark_counts["internal_reference_candidate"] > 0 and benchmark_counts["internal_measured_candidate"] == 0 and benchmark_counts["directional_support"] == 0:
+                promotion_blocker = "depends on internal reference-only support"
+            else:
+                promotion_blocker = "depends on internal or transferred support"
         else:
             promotion_blocker = "none"
 
@@ -1497,6 +1698,7 @@ def build_matrix_target_status_artifact(
                 "execution_path": summary.execution_path,
                 "process_state": summary.process_state,
                 "target_profile": evidence.target_profile,
+                "external_data_status": evidence.external_data_status,
                 "reference_signal_origin": summary.reference_signal_origin,
                 "source_origin": evidence.source_origin,
                 "ranking_contract_status": summary.ranking_contract_status,
@@ -1613,6 +1815,8 @@ def _select_matrix_promotion_target(
     rationale.append(f"same_protein_external_process_states={len(distinct_external_states.get(protein_type, set()))}")
     rationale.append(f"quantitative_closed={int(selected.get('support_counts', {}).get('quantitative_closed', 0))}")
     rationale.append(f"internal_candidate={int(selected.get('support_counts', {}).get('internal_candidate', 0))}")
+    rationale.append(f"internal_measured_candidate={int(selected.get('support_counts', {}).get('internal_measured_candidate', 0))}")
+    rationale.append(f"internal_reference_candidate={int(selected.get('support_counts', {}).get('internal_reference_candidate', 0))}")
     return {
         "benchmark_id": selected.get("benchmark_id"),
         "protein_type": protein_type,
@@ -1694,14 +1898,14 @@ def _matrix_closure_action(
         return "already_closed"
     if calibration_strength in {"literature_anchored", "conditional_literature_anchored"}:
         return "literature_anchor_available"
-    if support_status == "internal_candidate" and calibration_strength == "heuristic":
+    if _is_internal_candidate_support_status(support_status) and calibration_strength == "heuristic":
         return "mechanistic_blocker"
-    if support_status in {"internal_candidate", "directional_support"} and (
+    if (_is_internal_candidate_support_status(support_status) or support_status == "directional_support") and (
         calibration_strength in {"class_anchored", "directional_transferred"}
         or evidence_state in {"externally_benchmarked", "transferred_prior", "safety_reference"}
     ):
         return "class_level_transfer_acceptable"
-    if benchmark_row.get("mechanistic_priority_ready") and support_status == "internal_candidate":
+    if benchmark_row.get("mechanistic_priority_ready") and _is_internal_candidate_support_status(support_status):
         return "mechanistic_blocker"
     return "external_data_blocker"
 
@@ -2000,6 +2204,15 @@ def _enrich_benchmark_summary_family_metadata(summary: BenchmarkSummary, bench: 
             slr_families.append(str(descriptor.get("slr_family", "")).zfill(2))
             family_lane_names.append(str(descriptor.get("display_name", chemistry_family)))
         payload_roles.append(_payload_role_from_evidence_state(str(panel_entry.get("evidence_state", "still_missing"))))
+
+    mapped_family = _RUNTIME_BENCHMARK_FAMILY_MAP.get(summary.benchmark_id, "")
+    if mapped_family:
+        descriptor = resolve_family_descriptor(mapped_family)
+        chemistry_families.append(mapped_family)
+        if descriptor:
+            slr_families.append(str(descriptor.get("slr_family", "")).zfill(2))
+            family_lane_names.append(str(descriptor.get("display_name", mapped_family)))
+        payload_roles.extend(_RUNTIME_BENCHMARK_PAYLOAD_ROLES.get(summary.benchmark_id, ["benchmark_intake"]))
 
     return BenchmarkSummary(
         benchmark_id=summary.benchmark_id,

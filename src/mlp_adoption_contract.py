@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import json
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, fields
 from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional
 
@@ -34,8 +34,10 @@ class MLPModelCandidate:
     expected_speedup: float
     likely_failure_modes: List[str]
     fallback_comparator: str
+    backend_locator: Optional[str] = None
     benchmark_results_path: Optional[str] = None
     geometry_benchmark_path: Optional[str] = None
+    ts_seed_benchmark_path: Optional[str] = None
     external_evidence_id: Optional[str] = None
     status: str = "candidate_shortlist"
 
@@ -67,10 +69,14 @@ def load_mlp_candidate_registry(file_path: Optional[Path | str] = None) -> Dict[
 
 def load_mlp_candidates(file_path: Optional[Path | str] = None) -> List[MLPModelCandidate]:
     payload = load_mlp_candidate_registry(file_path)
-    candidates = [MLPModelCandidate(**row) for row in payload.get("candidates", [])]
+    supported_fields = {field.name for field in fields(MLPModelCandidate)}
+    candidates = [
+        MLPModelCandidate(**{key: value for key, value in row.items() if key in supported_fields})
+        for row in payload.get("candidates", [])
+    ]
     for candidate in candidates:
         if candidate.proposed_role not in OFFLINE_ACCELERATOR_ROLES:
-            raise ValueError(f"Unsupported P4 role for {candidate.candidate_id}: {candidate.proposed_role}")
+            raise ValueError(f"Unsupported MLP role for {candidate.candidate_id}: {candidate.proposed_role}")
     return candidates
 
 
@@ -93,7 +99,7 @@ def build_adoption_note_payload(
 
 def render_adoption_note_markdown(payload: Mapping[str, Any]) -> str:
     lines = [
-        "# P4 Adoption Notes",
+        "# MLP Adoption Notes",
         "",
         "| Candidate | Role | Decision | Coverage | Rank Correlation | MAE (kcal/mol) | Stop Reasons | Fallback |",
         "| --- | --- | --- | ---: | ---: | ---: | --- | --- |",

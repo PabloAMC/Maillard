@@ -25,3 +25,18 @@ def test_benchmark_coverage_gap_report_flags_missing_external_matrix_meaty_posit
 
     assert target["status"] == "gap"
     assert target["benchmark_count"] == 0
+
+    spi_gap = next(
+        row for row in rows
+        if row["dimension"] == "structural_gap" and row["category"] == "spi_meaty_positive_matrix_benchmark"
+    )
+    tradeoff_gap = next(
+        row for row in rows
+        if row["dimension"] == "structural_gap" and row["category"] == "meaty_off_flavour_safety_tradeoff_panel"
+    )
+
+    assert spi_gap["status"] == "gap"
+    assert spi_gap["closure_outcome"] == "wet_lab_only"
+    assert "nishimura_abe_2024" in spi_gap["note"]
+    assert tradeoff_gap["evidence_state"] == "still_missing"
+    assert "squeo_2023" in tradeoff_gap["note"]

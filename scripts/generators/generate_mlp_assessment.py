@@ -35,28 +35,28 @@ def main() -> None:
     )
 
     files = {
-        output_dir / "p4_reaction_benchmark.json": benchmark_payload,
-        output_dir / "p4_mlp_assessment.json": assessment_payload,
-        output_dir / "p4_external_mlp_landscape.json": external_payload,
-        output_dir / "p4_adoption_notes.json": adoption_payload,
+        output_dir / "mlp_reaction_benchmark.json": benchmark_payload,
+        output_dir / "mlp_assessment.json": assessment_payload,
+        output_dir / "mlp_external_mlp_landscape.json": external_payload,
+        output_dir / "mlp_adoption_notes.json": adoption_payload,
     }
     for path, payload in files.items():
         with open(path, "w", encoding="utf-8") as handle:
             json.dump(payload, handle, indent=2)
 
-    (output_dir / "p4_reaction_benchmark.md").write_text(
+    (output_dir / "mlp_reaction_benchmark.md").write_text(
         render_reaction_benchmark_markdown(benchmark_payload),
         encoding="utf-8",
     )
-    (output_dir / "p4_mlp_assessment.md").write_text(
+    (output_dir / "mlp_assessment.md").write_text(
         render_mlp_assessment_markdown(assessment_payload),
         encoding="utf-8",
     )
-    (output_dir / "p4_external_mlp_landscape.md").write_text(
+    (output_dir / "mlp_external_mlp_landscape.md").write_text(
         render_external_mlp_landscape_markdown(external_payload),
         encoding="utf-8",
     )
-    (output_dir / "p4_adoption_notes.md").write_text(
+    (output_dir / "mlp_adoption_notes.md").write_text(
         render_adoption_note_markdown(adoption_payload),
         encoding="utf-8",
     )

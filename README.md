@@ -20,14 +20,16 @@ If you want definitions for terms such as FAST mode, validated envelope, or benc
 
 If you want the current matrix-family scope and the experiment-ingestion workflow, see [results/validation/matrix_family_coverage.md](results/validation/matrix_family_coverage.md) and [docs/guides/MATRIX_EXPERIMENT_INGESTION.md](docs/guides/MATRIX_EXPERIMENT_INGESTION.md).
 
-## The Real Problem
+## The Goal and the Problem
 
-The most useful version of this tool is not a universal chemistry oracle. It is a scientist-facing decision system that can:
+The framework operates as a rigorous forward-prediction and optimization engine, rather than a static lookup database. It takes initial formulation conditions (precursors, protein matrix type, physical state) and deterministic process variables (pH, temperature, time), and computationally resolves the competitive kinetic pathways of the Maillard reaction. 
 
-- rank candidate formulations before the wet lab
-- explain why a prediction should be trusted or discounted
-- separate benchmark-backed claims from directional extrapolation
-- show which compounds are driven by free chemistry, matrix observability, or transferred priors
+The most useful version of this tool is a scientist-facing decision system that can:
+
+- rank candidate formulations prior to wet-lab campaigns
+- optimize targeted aromatic profiles (e.g., maximizing meaty thiols while minimizing beany off-notes) by computationally navigating the complex reaction network
+- separate benchmark-backed certainty from directional extrapolation
+- isolate which volatile markers are driven by free chemistry versus matrix retention
 
 That means the central problem is broader than matching one benchmark table. We need a model that is useful across three regimes of scientific confidence.
 
@@ -55,7 +57,7 @@ This repo therefore separates three cases:
 - families with **benchmark-linked calibration support** but not yet strict quantitative closure
 - families that remain **directional or gap-limited**, and are reported as such rather than being overclaimed
 
-The figures below are generated with `./scripts/docker_maillard.sh validation-figures` and are provided as three standalone PNGs so they can be embedded, cropped, or cited independently.
+The figures below are generated with `./scripts/docker_maillard.sh validation-figures` and are provided as standalone PNGs so they can be embedded, cropped, or cited independently.
 
 ![Compound parity](docs/assets/family_parity.png)
 
@@ -63,13 +65,23 @@ The figures below are generated with `./scripts/docker_maillard.sh validation-fi
 
 Captions:
 
-- **Compound parity:** Predicted vs measured concentrations (log–log). Colour = chemistry family; marker shape = execution lane. Green/yellow bands denote 1.5× and 2× tolerances.
+- **Compound parity:** Predicted vs measured concentrations (log–log). Colour = chemistry family; marker shape = execution lane. Green/yellow bands denote 1.5× and 2× tolerances. This figure is intentionally quantitative-only: a family appears here only when it already has executable numeric benchmarks with matched measured compounds.
 - **Per-benchmark accuracy:** Worst-case predicted/measured ratio per benchmark (human-readable study labels). Vertical lines mark strict-gate (1.5×) and matrix tolerance (2×).
-- **Family coverage:** Counts of matched quantitative compound points across all 10 families; families with no benchmark-backed points are annotated as explicit gaps.
+- **Family coverage:** Counts of matched quantitative compound points across all 16 tracked families; families with no parity points are still shown explicitly so runtime-only, support, and gap lanes do not disappear from the public surface.
 
 If your markdown viewer does not render images inline, open the files directly in `docs/assets`.
 
-For machine-readable artifacts, see [results/validation/family_validation_overview.md](results/validation/family_validation_overview.md). For the detailed per-benchmark drill-down see [docs/assets/validation_overview.png](docs/assets/validation_overview.png).
+For machine-readable artifacts, see [results/validation/family_validation_overview.md](results/validation/family_validation_overview.md). For the single-panel authoritative parity drill-down see [docs/assets/validation_overview.png](docs/assets/validation_overview.png).
+
+Why all families are not quantitative today:
+
+- A quantitative family needs at least one executable benchmark with direct measured compounds or markers that can be matched against predictions.
+- Several integrated families are upstream modifiers, guardrails, or support lanes rather than endpoint volatile panels, so they change the prediction context without yet having their own matched numeric compound surface.
+- Those families are still tracked explicitly in [docs/assets/family_coverage.png](docs/assets/family_coverage.png) and [results/validation/family_validation_overview.md](results/validation/family_validation_overview.md) instead of being over-claimed as quantitative.
+
+![Objective Progress](docs/assets/objective_progress.png)
+
+The objective-progress panel is the complement to the parity plots: it keeps internal calibration closure separate from external promotion closure. Today the Hexanal/Nonanal ambiguity route is closed internally, while mixed meaty-positive external closure and extrusion direct-damage closure remain explicitly blocked on external measurement packages.
 
 ## How To Use This For Alternative Protein Research
 
@@ -103,8 +115,8 @@ Primary artifacts for this workflow:
 - [results/validation/matrix_observable_closure_audit.md](results/validation/matrix_observable_closure_audit.md)
 - [results/validation/matrix_experiment_intake_schema.md](results/validation/matrix_experiment_intake_schema.md)
 - [results/validation/p3_refinement_governance.md](results/validation/p3_refinement_governance.md)
-- [results/validation/p4_mlp_assessment.md](results/validation/p4_mlp_assessment.md)
-- [results/validation/p4_adoption_notes.md](results/validation/p4_adoption_notes.md)
+- [results/validation/mlp_assessment.md](results/validation/mlp_assessment.md)
+- [results/validation/mlp_adoption_notes.md](results/validation/mlp_adoption_notes.md)
 - [results/validation/literature_learning_loop.md](results/validation/literature_learning_loop.md)
 - [results/validation/family_promotion_state.md](results/validation/family_promotion_state.md)
 
@@ -112,10 +124,10 @@ Primary artifacts for this workflow:
 
 Current artifact-backed status (from results/validation):
 
-- 10 chemistry families tracked in runtime scope
+- 16 chemistry families tracked in runtime scope
 - 4 families currently benchmark-linked
 - 4 families currently have compound-level quantitative parity points
-- 32 quantitative compound points in the current validation surface
+- 51 quantitative compound points in the current family validation surface
 
 Interpretation:
 
@@ -127,27 +139,33 @@ Interpretation:
 
 Current in-repo validation summary:
 
-- 9 supported benchmarks are tracked in Docker-validated artifacts
-- 4 benchmarks are strict-ready today, all inside the free-precursor envelope
-- 9 matched compounds define the current authoritative quantitative proof surface
-- the median matched-compound ratio in that proof surface is 1.118x
+- 16 supported benchmarks are tracked in Docker-validated artifacts
+- 9 benchmarks are strict-ready today, all inside the free-precursor envelope
+- all 16 quantitative benchmark summaries stay inside the 1.5x acceptance band today
+- the worst quantitative benchmark ratio currently exposed in-repo is 1.442x
+- 19 matched compounds define the current authoritative quantitative proof surface
+- the median matched-compound ratio in that proof surface is 1.055x
 
-The authoritative benchmark-level parity plot (per compound, per benchmark, coloured by study) is shown below.
+The authoritative benchmark-level parity plot (per compound, per benchmark, with formatted study references) is shown below.
 
 ![Validation Overview](docs/assets/validation_overview.png)
 
 How to interpret this trust surface:
 
 - Free-precursor benchmarks are the quantitative proof surface.
+- The current quantitative benchmark surface is fully inside the 1.5x and 2x tolerance envelopes, so the README parity plot is now a useful trust indicator instead of a decorative figure.
+- Not every runtime-integrated family appears in the benchmark-level scatter. That plot is intentionally restricted to numeric benchmark points; the cross-family status view lives in [docs/assets/family_coverage.png](docs/assets/family_coverage.png) and [results/validation/family_validation_overview.md](results/validation/family_validation_overview.md).
 - Pea and soy matrix paths are useful for prioritization, not yet for broad release-grade claims.
 - Soy and pea are not the only matrix families tracked by the repo, but they are the only plant-protein matrix lanes with executable benchmark-plus-calibration support today.
 - Family 07 carbonyl donor hierarchy is now promoted to benchmark-linked support, meaning sugar identity is no longer only a heuristic lane: existing benchmark-linked compounds constrain it with explicit uncertainty, but it is not yet near-quantitative as a standalone family.
+- Family 09 carbohydrate pyrolysis now acts as an evidence-bounded severity lane with explicit carbonyl and furanone anchors; it remains a failure-mode surface, not a generic route to boost browning.
+- Family 10 fermentation pretreatment now acts as an evidence-bounded upstream modifier with explicit hydrolysate, sulfur-reference, and nucleotide-release anchors; it remains support logic rather than a standalone benchmarked flavor family.
 - P3 mechanistic refinement is now explicitly gate-kept by benchmark-visible compounds and cheap-first screening; if [results/validation/p3_refinement_governance.md](results/validation/p3_refinement_governance.md) shows zero approved jobs, offline QM stays parked.
-- P4 MLP work remains an offline accelerator lane only. The current policy in [results/validation/p4_mlp_assessment.md](results/validation/p4_mlp_assessment.md) and [results/validation/p4_adoption_notes.md](results/validation/p4_adoption_notes.md) is no default MLP adoption until the reaction benchmark passes.
+- MLP work remains an offline accelerator lane only. The current policy in [results/validation/mlp_assessment.md](results/validation/mlp_assessment.md) and [results/validation/mlp_adoption_notes.md](results/validation/mlp_adoption_notes.md) is no default MLP adoption until the reaction benchmark passes.
 - Mycoprotein is currently bounded prior support, soy hydrolysate remains qualitative intake support, and other plant proteins remain explicit scope gaps until elevated into runtime-facing evidence.
 - P6 matrix expansion is intentionally bounded: [results/validation/matrix_family_coverage.md](results/validation/matrix_family_coverage.md) now separates bounded expansion candidates from evidence-blocked matrix families so scope cannot drift faster than the evidence surface.
 - Extrusion-heavy systems remain exploratory until benchmarked directly.
-- For the full 10-family strategic view including coverage gaps, see the **Family Validation Surface** section above.
+- For the full 16-family strategic view including coverage gaps, see the **Family Validation Surface** section above.
 
 ## What Accuracy Depends On
 
@@ -172,23 +190,48 @@ The current validation contract therefore uses two scale checks:
 
 ## Scientific Architecture
 
-The scientific stack is deliberately layered. Different tools serve different roles.
+The core framework pipelines computational chemistry through five stages: from precursor enumeration governed by mechanistic limits down to matrix-specific observable projection.
 
-| Layer                          | Main tool or model                                         | Role in the system                                                                                                      | Main dependency                                                             |
-| ------------------------------ | ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| Reaction enumeration           | SMIRKS rules and curated pathway families                  | Generate plausible Maillard and lipid-derived chemistry                                                                 | Coverage and correctness of the encoded reaction families                   |
-| Fast prediction core           | FAST observable path with empirical or cached barriers     | Daily screening, ranking, and benchmark-facing concentrations                                                           | Calibration quality of barrier tables and projection layers                 |
-| Diagnostic thermochemistry     | Cantera and thermodynamic gating                           | Diagnose whether a pathway family is physically plausible and whether gating would materially change benchmark behavior | Thermodynamic data and gating policy                                        |
-| Observable projection          | Headspace, retention, matrix, and process-state surrogates | Convert pathway signal into what a scientist would actually measure or smell                                            | Benchmark-anchored observable calibration                                   |
-| Offline mechanistic refinement | xTB first, selective DFT second                            | Refine decisive motif classes when cheap surrogates stop improving decisions                                            | Availability of narrow, benchmark-relevant refinement targets               |
-| Optional ML acceleration       | External state-of-the-art ML potentials, only offline      | Accelerate conformer or local motif refinement after the refinement task is well-defined                                | Quality and relevance of the external model for the motif class of interest |
+```mermaid
+graph TD
+    subgraph "1. Input & Accessibility"
+        A["Precursors (Sugars, AAs, Lipids)"] --> C["Matrix Correction"]
+        B["Process Conditions (pH, T, t, Matrix)"] --> C
+    end
+
+    subgraph "2. Reactive Core"
+        C -->| "Accessible Molarity" | D["SMIRKS Rule Engine"]
+        D -->| "Reaction Network" | E["Thermodynamic Gating (Joback)"]
+        E -->| "Feasible Paths" | F["Cantera ODE Solver"]
+        G["Literature Kinetics"] --> F
+    end
+
+    subgraph "3. Observability Projection"
+        F -->| "Aqueous Moles" | I["Projection Module"]
+        I -->| "Volatilization (Henry's Law)" | J["Headspace Calibration"]
+        I -->| "Surface Adsorption" | K["Matrix Retention"]
+    end
+
+    subgraph "4. Decision Layer"
+        J & K --> L["Validation Surface"]
+        L --> M["Bayesian Optimizer"]
+        M -->| "Formulation Candidate" | A
+    end
+```
+
+| Layer | Main tool or model | Role in the system | Main dependency |
+| --- | --- | --- | --- |
+| **Input & Matrix Correction** | Priors and heuristics | Determines *accessible* reactant molarity adjusting for protein folding and thermal state | Matrix-specific accessibility data |
+| **Reaction Enumeration** | Hybrid SMIRKS Rules | Autogenerates plausible intermediate and product pathways from inputs | Curated reaction family rules |
+| **Thermodynamic Gating** | Joback Estimator (+ xTB/DFT) | Diagnostics; prunes unphysical pathways if $\Delta G^\ddagger$ is too high | Thermodynamic parameters |
+| **Fast Prediction Core** | FAST Kinetics & Cantera | Integrates deterministic rate constants over time to solve intermediate competition | Literature-derived kinetic barriers |
+| **Observable Projection** | Headspace & Retention | Converts aqueous molar concentrations to measured headspace ppb via retention | Benchmark-anchored observable calibration |
+| **Offline Refinement** | xTB, DFT, ML Potentials | Offline acceleration and structural refinement | Narrow motif targets and external ML states |
 
 What this means in practice:
-
-- FAST is the day-to-day engine because it is cheap enough to screen formulations and calibrate against benchmarks.
-- Cantera is a diagnostic lane, not the main benchmark-facing prediction surface.
-- xTB and selective DFT are for targeted refinement, not routine production inference.
-- If ML potentials are used, the right default is to consume a state-of-the-art external model in an offline role, not to train a repository-specific model by default.
+- **FAST** handles day-to-day kinetic solutions because it is cheap enough to screen and calibrate efficiently.
+- **Cantera** provides rigorous network integration within the fast engine.
+- Expensive structural refinements (xTB, DFT, ML Potentials) occur strictly offline.
 
 ## Should ML Potentials Be The Main Missing Piece?
 
@@ -274,11 +317,28 @@ python scripts/optimize_formulation.py \
   --n-iterations 50
 ```
 
+## Literature Integration: Runtime vs. Benchmark
+
+Literature serves as the strict deterministic control system governing predictive accuracy, rather than mere citations. Every paper is rigorously evaluated through an 8-point Systematic Literature Review (SLR) checklist (scoring criteria like exact matrix tracking, absolute quantification, and internal standards). Literature data maps into two mutually exclusive functions:
+
+### 1. Runtime Integration (Parametrization)
+Runtime data drives the underlying scientific engine. These papers supply the chemical constants, activation configurations, and thermodynamic limits used to compute the paths.
+- **Data type:** Rate constants, activation energies ($E_a$), matrix retention multipliers.
+- **Example:** A structural study providing the dynamic, reversible binding affinity ($K_a$) of hexanal to a soy glycinin isolate. This is parameterized into the retention module to accurately constrain expected headspace release levels.
+
+### 2. Benchmark Integration (Validation)
+Benchmark data establishes the isolated "ground truth" used exclusively for quality control and structural validation. To strictly prevent overfitting ("circular validation"), benchmark targets are fully independent of runtime calibration parameters.
+- **Data type:** Absolute end-state product concentrations (e.g., ppb) measured under definitively constrained starting conditions.
+- **Example:** A study producing 45 ppb of 2-methyl-3-furanthiol isolated from 10 mM ribose and 10 mM cysteine in a pea protein isolate under 120°C for 30 minutes.
+
+### Current Implementation State
+Presently, **free-precursor chemistry is highly integrated** and tightly mapped throughout both datasets. Extending rigorous literature mappings to encompass **complex plant-matrix benchmarks defines the current development frontier**. While the architecture explicitly handles these variables natively, roughly 80% of defined plant-matrix target targets await extraction into formal quantitative payload encodings within the test suite.
+
 ## Scientific References
 
 The canonical human-readable reference list is [docs/reference/SCIENTIFIC_REFERENCE.md](docs/reference/SCIENTIFIC_REFERENCE.md).
 
-For the broader literature-screening and ingestion view, see [docs/slr_benchmark_evaluation.md](docs/slr_benchmark_evaluation.md).
+For the broader structured literature-screening and ingestion view, see [docs/slr_benchmark_evaluation.md](docs/slr_benchmark_evaluation.md).
 
 ## Current Boundary
 

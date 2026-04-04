@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import shutil
 import sys
 from collections import Counter
 from pathlib import Path
@@ -21,23 +22,57 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from scripts.generators.generate_benchmark_coverage_gaps import _build_rows as build_coverage_gap_rows
+from src.benchmark_labels import benchmark_label
 from src.benchmark_validation import build_matrix_promotion_family_status, evaluate_benchmark, summarize_benchmarks
+from src.family_validation_overview import build_family_validation_overview_artifact
 
-# Human-readable benchmark labels (LaTeX-safe)
-_BENCH_LABELS: dict[str, str] = {
-    "acrylamide_asparagine_glucose_Parker2012":                  r"Asn + glucose acrylamide (Parker 2012)",
-    "cys_glucose_150C_Farmer1999":                               r"Cys + glucose, $150\,^\circ$C (Farmer 1999)",
-    "cys_ribose_140C_Hofmann1998":                               r"Cys + ribose, $140\,^\circ$C (Hofmann 1998)",
-    "cys_ribose_150C_Mottram1994":                               r"Cys + ribose, $150\,^\circ$C (Mottram 1994)",
-    "pea_isolate_40C_PratapSingh2021":                           r"Pea isolate, $40\,^\circ$C (Pratap Singh 2021)",
-    "pea_isolate_ribose_cysteine_100C_45min_Internal2026":       r"Pea iso.\ + Rib/Cys, $100\,^\circ$C (internal)",
-    "pea_isolate_uht_140C_Trikusuma2019":                        r"Pea isolate UHT, $140\,^\circ$C (Trikusuma 2019)",
-    "soy_isolate_40C_PratapSingh2021":                           r"Soy isolate, $40\,^\circ$C (Pratap Singh 2021)",
-    "soy_isolate_ribose_cysteine_100C_45min_Internal2026":       r"Soy iso.\ + Rib/Cys, $100\,^\circ$C (internal)",
+_FAMILY_LABELS: dict[str, str] = {
+    "amino_acid_sugar_core": r"F01 Amino acid + sugar",
+    "lipid_oxidation_and_carbonylic_crosstalk": r"F02 Lipid oxidation",
+    "thiamine_fragmentation_support": r"F03 Thiamine",
+    "nucleotide_and_ribose_support": r"F04 Nucleotide support",
+    "glutathione_and_peptide_support": r"F05 Peptide support",
+    "alternative_protein_matrix_scope": r"F06 Matrix scope",
+    "carbonyl_donor_hierarchy": r"F07 Donor hierarchy",
+    "off_note_and_maillard_suppression": r"F08 Off-notes",
+    "carbohydrate_pyrolysis_and_caramelization": r"F09 Caramelisation",
+    "fermentation_pretreatment": r"F10 Pretreatment",
+    "lipid_maillard_crosstalk": r"F11 Lipid crosstalk",
+    "protein_damage_markers": r"F12 Damage markers",
 }
 
+_FAMILY_COLORS: dict[str, str] = {
+    "amino_acid_sugar_core": "#0077BB",
+    "lipid_oxidation_and_carbonylic_crosstalk": "#EE7733",
+    "thiamine_fragmentation_support": "#228833",
+    "nucleotide_and_ribose_support": "#AA4499",
+    "glutathione_and_peptide_support": "#66A61E",
+    "alternative_protein_matrix_scope": "#8C564B",
+    "carbonyl_donor_hierarchy": "#DDCC77",
+    "off_note_and_maillard_suppression": "#CC3311",
+    "carbohydrate_pyrolysis_and_caramelization": "#009988",
+    "fermentation_pretreatment": "#CC79A7",
+    "lipid_maillard_crosstalk": "#4477AA",
+    "protein_damage_markers": "#882255",
+}
+_FAMILY_COLOR_NONE = "#BBBBBB"
+
 def _bench_label(benchmark_id: str) -> str:
-    return _BENCH_LABELS.get(benchmark_id, benchmark_id.replace("_", r"\_"))
+    return benchmark_label(benchmark_id, style="latex")
+
+
+def _compact_point_summary(point: dict[str, object] | None) -> dict[str, object] | None:
+    if not point:
+        return None
+    return {
+        "benchmark_id": point["benchmark_id"],
+        "benchmark_label": _bench_label(str(point["benchmark_id"])),
+        "compound": point["compound"],
+        "measured_ppb": point["measured_ppb"],
+        "predicted_ppb": point["predicted_ppb"],
+        "max_ratio": point["max_ratio"],
+        "reference_signal_origin": point["reference_signal_origin"],
+    }
 
 
 def _status_color(status: str) -> str:
@@ -76,8 +111,15 @@ def _build_payload() -> dict[str, object]:
     summaries = summarize_benchmarks()
     readiness = build_matrix_promotion_family_status()
     coverage_rows = build_coverage_gap_rows()
+    family_overview = build_family_validation_overview_artifact()
     authoritative_benchmarks = [row for row in summaries if row.execution_path == "free_precursor"]
     quantitative_benchmarks = list(_iter_quantitative_benchmarks(summaries))
+    experimental_quantitative_benchmarks = [row for row in quantitative_benchmarks if row.reference_signal_origin == "measured_volatiles"]
+    reference_quantitative_benchmarks = [row for row in quantitative_benchmarks if row.reference_signal_origin != "measured_volatiles"]
+    inside_1_5x_benchmark_count = sum(1 for row in quantitative_benchmarks if float(row.max_ratio or 0.0) <= 1.5)
+    inside_2x_benchmark_count = sum(1 for row in quantitative_benchmarks if float(row.max_ratio or 0.0) <= 2.0)
+    experimental_inside_1_5x_benchmark_count = sum(1 for row in experimental_quantitative_benchmarks if float(row.max_ratio or 0.0) <= 1.5)
+    experimental_inside_2x_benchmark_count = sum(1 for row in experimental_quantitative_benchmarks if float(row.max_ratio or 0.0) <= 2.0)
     authoritative_points = []
     quantitative_points = []
 
@@ -88,6 +130,7 @@ def _build_payload() -> dict[str, object]:
                 continue
             point = {
                 "benchmark_id": summary.benchmark_id,
+                "benchmark_label": _bench_label(summary.benchmark_id),
                 "compound": comparison.compound,
                 "measured_ppb": comparison.measured_ppb,
                 "predicted_ppb": comparison.predicted_ppb,
@@ -96,21 +139,47 @@ def _build_payload() -> dict[str, object]:
                 "overall_status": summary.overall_status,
                 "strict_ready": summary.strict_ready,
                 "execution_path": summary.execution_path,
+                "reference_signal_origin": summary.reference_signal_origin,
             }
             quantitative_points.append(point)
             if summary.execution_path == "free_precursor":
                 authoritative_points.append(point)
 
+    worst_quantitative_point = max(quantitative_points, key=lambda row: float(row["max_ratio"]), default=None)
+    experimental_quantitative_points = [
+        row for row in quantitative_points if row["reference_signal_origin"] == "measured_volatiles"
+    ]
+    experimental_worst_quantitative_point = max(
+        experimental_quantitative_points,
+        key=lambda row: float(row["max_ratio"]),
+        default=None,
+    )
+
     return {
         "benchmark_count": len(summaries),
         "strict_ready_count": sum(1 for row in summaries if row.strict_ready),
         "status_counts": dict(Counter(row.overall_status for row in summaries)),
+        "inside_1_5x_benchmark_count": inside_1_5x_benchmark_count,
+        "inside_2x_benchmark_count": inside_2x_benchmark_count,
+        "outside_1_5x_benchmark_count": max(0, len(quantitative_benchmarks) - inside_1_5x_benchmark_count),
+        "outside_2x_benchmark_count": max(0, len(quantitative_benchmarks) - inside_2x_benchmark_count),
+        "worst_quantitative_ratio": max((float(row.max_ratio or 0.0) for row in quantitative_benchmarks), default=0.0),
+        "experimental_quantitative_benchmark_count": len(experimental_quantitative_benchmarks),
+        "reference_quantitative_benchmark_count": len(reference_quantitative_benchmarks),
+        "experimental_inside_1_5x_benchmark_count": experimental_inside_1_5x_benchmark_count,
+        "experimental_outside_1_5x_benchmark_count": max(0, len(experimental_quantitative_benchmarks) - experimental_inside_1_5x_benchmark_count),
+        "experimental_inside_2x_benchmark_count": experimental_inside_2x_benchmark_count,
+        "experimental_outside_2x_benchmark_count": max(0, len(experimental_quantitative_benchmarks) - experimental_inside_2x_benchmark_count),
+        "experimental_worst_quantitative_ratio": max((float(row.max_ratio or 0.0) for row in experimental_quantitative_benchmarks), default=0.0),
+        "worst_quantitative_point": _compact_point_summary(worst_quantitative_point),
+        "experimental_worst_quantitative_point": _compact_point_summary(experimental_worst_quantitative_point),
         "quantitative_benchmarks": [
             {
                 "benchmark_id": row.benchmark_id,
                 "execution_path": row.execution_path,
                 "overall_status": row.overall_status,
                 "strict_ready": row.strict_ready,
+                "reference_signal_origin": row.reference_signal_origin,
                 "coverage": row.coverage,
                 "pearson_r": row.pearson_r,
                 "max_ratio": row.max_ratio,
@@ -144,6 +213,8 @@ def _build_payload() -> dict[str, object]:
             }
             for row in readiness
         ],
+        "family_overview": family_overview,
+        "integrated_family_count": int(family_overview.get("summary", {}).get("integrated_family_count", 0)),
         "coverage_gaps": coverage_rows,
     }
 
@@ -158,6 +229,8 @@ def _render_markdown(payload: dict[str, object]) -> str:
     median_ratio = np.median([row["max_ratio"] for row in authoritative_points]) if authoritative_points else float("nan")
     matrix_quantitative = [row for row in quantitative_benchmarks if row["execution_path"] == "matrix_only"]
     augmented_quantitative = [row for row in quantitative_benchmarks if row["execution_path"] == "matrix_precursor_augmented"]
+    worst_point = payload.get("worst_quantitative_point")
+    experimental_worst_point = payload.get("experimental_worst_quantitative_point")
 
     lines = [
         "# Validation Overview",
@@ -167,20 +240,37 @@ def _render_markdown(payload: dict[str, object]) -> str:
         f"- Benchmarks summarized: {payload['benchmark_count']}",
         f"- Strict-ready benchmarks: {payload['strict_ready_count']}",
         f"- Quantitative benchmarks plotted: {len(quantitative_benchmarks)}",
+        f"- Experimental quantitative benchmarks: {payload['experimental_quantitative_benchmark_count']}",
+        f"- Reference-only quantitative anchors: {payload['reference_quantitative_benchmark_count']}",
+        f"- Experimental benchmarks inside 1.5x: {payload['experimental_inside_1_5x_benchmark_count']}",
+        f"- Experimental benchmarks outside 1.5x: {payload['experimental_outside_1_5x_benchmark_count']}",
+        f"- Experimental benchmarks outside 2x: {payload['experimental_outside_2x_benchmark_count']}",
+        f"- Worst experimental benchmark ratio: {float(payload['experimental_worst_quantitative_ratio']):.3f}x",
+        f"- Worst experimental point: {experimental_worst_point['benchmark_label']} / {experimental_worst_point['compound']} ({float(experimental_worst_point['max_ratio']):.3f}x)" if experimental_worst_point else "- Worst experimental point: n/a",
+        f"- Quantitative benchmarks inside 1.5x: {payload['inside_1_5x_benchmark_count']}",
+        f"- Quantitative benchmarks outside 1.5x: {payload['outside_1_5x_benchmark_count']}",
+        f"- Quantitative benchmarks outside 2x: {payload['outside_2x_benchmark_count']}",
+        f"- Worst quantitative benchmark ratio: {float(payload['worst_quantitative_ratio']):.3f}x",
+        f"- Worst quantitative point: {worst_point['benchmark_label']} / {worst_point['compound']} ({float(worst_point['max_ratio']):.3f}x; {worst_point['reference_signal_origin']})" if worst_point else "- Worst quantitative point: n/a",
         f"- Quantitative matched compounds plotted: {len(quantitative_points)}",
         f"- Authoritative free-precursor benchmarks: {len(authoritative_benchmarks)}",
         f"- Quantitative matrix-only benchmarks: {len(matrix_quantitative)}",
         f"- Quantitative matrix-augmented benchmarks: {len(augmented_quantitative)}",
+        f"- Integrated runtime families tracked in the overview artifact: {int(payload.get('integrated_family_count', 0))}",
         f"- Authoritative matched compounds: {len(authoritative_points)}",
         f"- Median compound max-ratio in authoritative set: {median_ratio:.3f}",
         f"- Coverage gaps still open: {gap_count}",
         "",
         "How to read the PNG:",
         "",
-        "- left: quantitative parity for all numeric benchmarks; circles are free-precursor, triangles are matrix-only, squares are matrix-augmented",
-        "- right: per-benchmark quantitative error; the 1.5x line is the strict free-precursor gate and the 2.0x line is the matrix benchmark tolerance",
+        "- single panel: quantitative parity for all numeric benchmarks",
+        "- colour: benchmark / literature system, using formatted study references rather than raw benchmark ids",
+        "- marker shape: circles are free-precursor, triangles are matrix-only, squares are matrix-augmented",
+        "- filled markers denote wet-lab measured comparators; hollow markers denote reference-only anchors",
+        "- green/yellow bands denote the 1.5x and 2x tolerance envelopes around ideal parity",
+        "- families without direct matched numeric compounds are tracked in the family overview artifact, not forced into this benchmark-level scatter",
         "",
-        "Matrix readiness, benchmark evidence, and coverage gaps remain in their own dedicated artifacts, but quantitative matrix benchmarks are no longer hidden from the overview.",
+        "Matrix readiness, benchmark evidence, family integration tiers, and per-benchmark worst-case error remain in their own dedicated artifacts, while this overview stays single-panel for README-safe embedding.",
     ]
     return "\n".join(lines) + "\n"
 
@@ -189,11 +279,8 @@ def _render_figure(payload: dict[str, object], output_path: Path) -> None:
     quantitative_benchmarks = payload["quantitative_benchmarks"]
     quantitative_points = payload["quantitative_points"]
 
-    fig, axes = plt.subplots(1, 2, figsize=(14, 6.5))
-    fig.suptitle(r"\textbf{Maillard model --- benchmark-level quantitative accuracy}", fontsize=12, y=0.99)
-    fig.subplots_adjust(left=0.06, right=0.97, top=0.93, bottom=0.10, wspace=0.30)
+    fig, ax = plt.subplots(figsize=(10.5, 6.5))
 
-    ax = axes[0]
     measured = np.array([row["measured_ppb"] for row in quantitative_points], dtype=float)
     predicted = np.array([row["predicted_ppb"] for row in quantitative_points], dtype=float)
     if len(measured) == 0:
@@ -209,6 +296,7 @@ def _render_figure(payload: dict[str, object], output_path: Path) -> None:
     for idx, benchmark_id in enumerate(benchmark_ids):
         subset = [row for row in quantitative_points if row["benchmark_id"] == benchmark_id]
         execution_path = subset[0]["execution_path"]
+        reference_only = subset[0]["reference_signal_origin"] != "measured_volatiles"
         ax.errorbar(
             [row["measured_ppb"] for row in subset],
             [row["predicted_ppb"] for row in subset],
@@ -219,6 +307,10 @@ def _render_figure(payload: dict[str, object], output_path: Path) -> None:
             capsize=2.5,
             markersize=6.5,
             linewidth=0.8,
+            markerfacecolor="white" if reference_only else palette[idx % len(palette)],
+            markeredgecolor=palette[idx % len(palette)],
+            markeredgewidth=1.0,
+            alpha=0.95 if reference_only else 0.90,
             label=_bench_label(benchmark_id),
         )
     ax.set_xscale("log")
@@ -227,43 +319,64 @@ def _render_figure(payload: dict[str, object], output_path: Path) -> None:
     ax.set_ylim(lower, upper)
     ax.set_xlabel(r"Measured concentration (ppb)")
     ax.set_ylabel(r"Predicted concentration (ppb)")
-    ax.set_title(r"Quantitative parity --- all benchmark compounds")
-    # Place legend inside the left panel without overlapping the parity markers.
-    ax.legend(fontsize=6.0, loc="upper left", bbox_to_anchor=(0.02, 0.98),
-              bbox_transform=ax.transAxes, framealpha=0.85, edgecolor="0.75")
+    ax.set_title(r"Predicted vs. measured concentration --- all benchmark compounds")
 
-    ax = axes[1]
-    ranked_benchmarks = sorted(
-        quantitative_benchmarks,
-        key=lambda row: float(row["max_ratio"] or 0.0),
-        reverse=True,
-    )
-    benchmark_labels = [_bench_label(row["benchmark_id"]) for row in ranked_benchmarks]
-    max_ratios = [row["max_ratio"] if row["max_ratio"] is not None else 0.0 for row in ranked_benchmarks]
-    bars = ax.barh(
-        benchmark_labels, max_ratios,
-        color=[_status_color(row["overall_status"]) for row in ranked_benchmarks],
-        edgecolor="white", linewidth=0.5,
-    )
-    for bar, row in zip(bars, ranked_benchmarks):
-        hatch = _path_hatch(row["execution_path"])
-        if hatch:
-            bar.set_hatch(hatch)
-            bar.set_edgecolor("#2f4858")
-            bar.set_linewidth(0.8)
-        ax.text(
-            (row["max_ratio"] or 0.0) + 0.04,
-            bar.get_y() + bar.get_height() / 2.0,
-            f"{row['max_ratio']:.2f}$\\times$" if row["max_ratio"] else "",
-            va="center", fontsize=6.5,
+    execution_handles = [
+        plt.Line2D([0], [0], marker="o", color="0.35", linestyle="None", markersize=6, label=r"Free precursor"),
+        plt.Line2D([0], [0], marker="^", color="0.35", linestyle="None", markersize=6, label=r"Matrix-only"),
+        plt.Line2D([0], [0], marker="s", color="0.35", linestyle="None", markersize=6, label=r"Matrix + precursor"),
+        plt.Line2D([0], [0], marker="o", color="0.35", markerfacecolor="white", markeredgecolor="0.35", linestyle="None", markersize=6, label=r"Reference-only anchor"),
+    ]
+    band_handles = [
+        matplotlib.patches.Patch(facecolor="#D9EAD3", alpha=0.70, label=r"Within $1.5\times$"),
+        matplotlib.patches.Patch(facecolor="#FFF3CD", alpha=0.55, label=r"Within $2\times$"),
+        plt.Line2D([0], [0], color="#2f4858", linewidth=1.5, label=r"Ideal parity ($y=x$)"),
+    ]
+    benchmark_handles = [
+        plt.Line2D(
+            [0],
+            [0],
+            marker=_path_marker(next(row["execution_path"] for row in quantitative_points if row["benchmark_id"] == benchmark_id)),
+            color=palette[idx % len(palette)],
+            markerfacecolor=(
+                "white"
+                if next(row["reference_signal_origin"] for row in quantitative_points if row["benchmark_id"] == benchmark_id) != "measured_volatiles"
+                else palette[idx % len(palette)]
+            ),
+            markeredgecolor=palette[idx % len(palette)],
+            markeredgewidth=1.0,
+            linestyle="None",
+            markersize=6,
+            label=_bench_label(benchmark_id),
         )
-    ax.axvline(1.5, color="#8c1c13", linestyle="--", linewidth=1.4, label=r"Strict gate ($1.5\times$)")
-    ax.axvline(2.0, color="#555555", linestyle=":",  linewidth=1.4, label=r"Matrix tolerance ($2\times$)")
-    ax.set_title(r"Worst-case ratio per benchmark")
-    ax.set_xlabel(r"Max ratio (predicted / measured)")
-    # Move the right-panel legend inside the axes in the top-right corner.
-    ax.legend(loc="upper right", fontsize=6.5, bbox_to_anchor=(0.98, 0.98),
-              bbox_transform=ax.transAxes, framealpha=0.85, edgecolor="0.75")
+        for idx, benchmark_id in enumerate(benchmark_ids)
+    ]
+    helper_legend = ax.legend(
+        handles=band_handles + execution_handles,
+        fontsize=6.0,
+        loc="upper left",
+        bbox_to_anchor=(0.02, 0.98),
+        bbox_transform=ax.transAxes,
+        framealpha=0.90,
+        edgecolor="0.75",
+        title=r"\textit{Guide}",
+        title_fontsize=6.0,
+    )
+    ax.add_artist(helper_legend)
+    ax.legend(
+        handles=benchmark_handles,
+        fontsize=5.7,
+        loc="center left",
+        bbox_to_anchor=(1.02, 0.50),
+        framealpha=0.90,
+        edgecolor="0.75",
+        title=r"\textit{Benchmarks / references}",
+        title_fontsize=6.0,
+        labelspacing=0.18,
+        handletextpad=0.30,
+        borderpad=0.25,
+        ncol=1,
+    )
 
     fig.savefig(output_path, dpi=300, bbox_inches="tight")
     plt.close(fig)
@@ -272,10 +385,13 @@ def _render_figure(payload: dict[str, object], output_path: Path) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output-dir", default="results/validation")
+    parser.add_argument("--docs-asset-dir", default="docs/assets")
     args = parser.parse_args()
 
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
+    docs_asset_dir = ROOT / args.docs_asset_dir
+    docs_asset_dir.mkdir(parents=True, exist_ok=True)
 
     payload = _build_payload()
     markdown = _render_markdown(payload)
@@ -287,9 +403,11 @@ def main() -> int:
     _render_figure(payload, png_path)
     md_path.write_text(markdown, encoding="utf-8")
     json_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    shutil.copyfile(png_path, docs_asset_dir / "validation_overview.png")
 
     print(markdown)
     print(f"Wrote {png_path}")
+    print(f"Copied validation_overview.png to {docs_asset_dir / 'validation_overview.png'}")
     print(f"Wrote {md_path}")
     print(f"Wrote {json_path}")
     return 0

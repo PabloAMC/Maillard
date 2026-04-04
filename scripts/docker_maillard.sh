@@ -50,14 +50,16 @@ Commands:
                Generate support-delta artifacts for a matrix experiment intake payload.
   literature-learning-loop
                Generate results/validation/literature_learning_loop.{md,json}.
+  family-ingestion-plan
+               Generate results/validation/family_ingestion_plan.{md,json}.
   family-promotion-state
                Generate results/validation/family_promotion_state.{md,json}.
   matrix-family-coverage
                Generate results/validation/matrix_family_coverage.{md,json}.
   p3-refinement
                Generate the P3 refinement artifact bundle including governance.
-  p4-mlp-assessment
-               Generate the P4 MLP assessment and adoption-note artifacts.
+  mlp-assessment
+               Generate the MLP assessment and adoption-note artifacts.
   matrix-branch-deltas [BASE_REF]
                Generate results/validation/matrix_branch_delta_report.{md,json} against BASE_REF (default: main).
   coverage-gaps
@@ -74,6 +76,8 @@ Commands:
                Run a shareable campaign spec and generate campaign artifacts.
   index        Generate results/validation/benchmark_index.{md,json}.
   summary      Generate results/validation/benchmark_summary.{md,json}.
+  deep-research-audit
+               Run the Deep Research backlog tracking script.
   notebook     Launch a Jupyter notebook server on port 8888.
   status       Show container and environment status.
 EOF
@@ -108,12 +112,12 @@ scientific_lane() {
   run_in_env "python scripts/generators/generate_matrix_experiment_intake_schema.py --output-dir results/validation"
   run_in_env "python scripts/generators/generate_matrix_family_coverage.py"
   run_in_env "python scripts/generators/generate_p3_refinement_campaign.py --output-dir results/validation"
-  run_in_env "python scripts/generators/generate_p4_mlp_assessment.py"
+  run_in_env "python scripts/generators/generate_mlp_assessment.py"
   run_in_env "python scripts/generators/generate_literature_learning_loop.py --output-dir results/validation"
   run_in_env "python scripts/generators/generate_family_promotion_state.py --output-dir results/validation"
   run_in_env "python scripts/generators/generate_family_lane_validation.py --output-dir results/validation"
   run_in_env "python scripts/generators/generate_family_deviation_audit.py --output-dir results/validation"
-  run_in_env "python scripts/generators/generate_validation_figures.py"
+  run_in_env "python scripts/generators/generate_validation_figures.py --docs-asset-dir docs/assets"
   run_in_env "python scripts/generators/generate_family_validation_figures.py --output-dir results/validation --docs-asset-dir docs/assets"
   run_in_env "python scripts/generators/generate_validated_envelope_report.py"
   run_in_env "python scripts/generators/generate_thermodynamic_gating_audit.py"
@@ -318,6 +322,9 @@ case "$cmd" in
   literature-learning-loop)
     run_in_env "python scripts/generators/generate_literature_learning_loop.py --output-dir results/validation"
     ;;
+  family-ingestion-plan)
+    run_in_env "python scripts/generators/generate_family_ingestion_plan.py --output-dir results/validation"
+    ;;
   family-promotion-state)
     run_in_env "python scripts/generators/generate_family_promotion_state.py --output-dir results/validation"
     ;;
@@ -327,8 +334,8 @@ case "$cmd" in
   p3-refinement)
     run_in_env "python scripts/generators/generate_p3_refinement_campaign.py --output-dir results/validation"
     ;;
-  p4-mlp-assessment)
-    run_in_env "python scripts/generators/generate_p4_mlp_assessment.py"
+  mlp-assessment|p4-mlp-assessment)
+    run_in_env "python scripts/generators/generate_mlp_assessment.py"
     ;;
   compare-experiment)
     shift
@@ -348,7 +355,7 @@ case "$cmd" in
   validation-figures)
     run_in_env "python scripts/generators/generate_family_lane_validation.py --output-dir results/validation"
     run_in_env "python scripts/generators/generate_family_deviation_audit.py --output-dir results/validation"
-    run_in_env "python scripts/generators/generate_validation_figures.py"
+    run_in_env "python scripts/generators/generate_validation_figures.py --docs-asset-dir docs/assets"
     run_in_env "python scripts/generators/generate_family_validation_figures.py --output-dir results/validation --docs-asset-dir docs/assets"
     run_in_env "python scripts/generators/generate_validated_envelope_report.py"
     ;;
@@ -383,6 +390,9 @@ case "$cmd" in
     ;;
   summary)
     run_in_env "python scripts/generators/generate_benchmark_summary.py"
+    ;;
+  deep-research-audit)
+    run_in_env "python scripts/deep_research_tracker.py"
     ;;
   notebook)
     run_in_env "jupyter notebook --ip 0.0.0.0 --port 8888 --no-browser --allow-root"

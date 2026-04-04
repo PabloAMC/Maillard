@@ -11,16 +11,16 @@ from src.reaction_benchmark import build_reaction_benchmark_artifact  # noqa: E4
 from src.reporting import _build_scientific_surface  # noqa: E402
 
 
-def test_p4_artifacts_and_registry_are_exposed_in_reporting_surface():
+def test_mlp_artifacts_and_registry_are_exposed_in_reporting_surface():
     surface = _build_scientific_surface(ROOT)
 
     assert surface["reaction_benchmark_set"] == "data/lit/reaction_benchmark_set.json"
     assert surface["mlp_candidate_registry"] == "data/lit/mlp_candidate_registry.json"
     assert surface["mlp_external_benchmark_evidence"] == "data/lit/mlp_external_benchmark_evidence.json"
-    assert surface["p4_geometry_benchmark_set"] == "data/lit/p4_geometry_benchmark_set.json"
+    assert surface["geometry_benchmark_set"] == "data/lit/geometry_benchmark_set.json"
 
 
-def test_p4_assessment_quarantines_current_barrier_surrogate_and_keeps_no_default_policy():
+def test_mlp_assessment_quarantines_current_barrier_surrogate_and_keeps_no_default_policy():
     benchmark_payload = build_reaction_benchmark_artifact()
     assessment_payload = build_mlp_assessment_artifact()
 

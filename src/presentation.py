@@ -7,6 +7,7 @@ from typing import Any, Dict, Iterable, List, Optional, Tuple, TYPE_CHECKING
 
 from src.pipeline import FormulationResult
 from src.usability_reports import ValidatedEnvelopeReport, DomainWarning
+from src.benchmark_labels import benchmark_label, format_benchmark_list
 from src.benchmark_types import (
     MatrixBenchmarkBranchDelta, 
     MatrixBenchmarkDelta, 
@@ -25,8 +26,8 @@ def render_validated_envelope_markdown(report: 'ValidatedEnvelopeReport') -> str
         "",
         f"Target tag: {report.target_tag}",
         f"Supported benchmarks: {report.supported_benchmarks}/{report.total_benchmarks}",
-        f"Strict-ready benchmarks: {', '.join(report.strict_ready_benchmarks) if report.strict_ready_benchmarks else 'none'}",
-        f"Matrix-only executable benchmarks: {', '.join(report.matrix_only_benchmarks) if report.matrix_only_benchmarks else 'none'}",
+        f"Strict-ready benchmarks: {format_benchmark_list(report.strict_ready_benchmarks)}",
+        f"Matrix-only executable benchmarks: {format_benchmark_list(report.matrix_only_benchmarks)}",
         "",
         "## Warnings",
     ]
@@ -203,11 +204,33 @@ def render_flavor_axis_markdown(
         lines.append(
             f"- **lipid_benchmark_ready_targets:** {', '.join(str(item) for item in lipid_lane.get('benchmark_ready_targets', [])) or 'none'}"
         )
+        benchmark_targets = lipid_lane.get("benchmark_marker_targets_ug_per_l", {})
+        if isinstance(benchmark_targets, dict) and benchmark_targets:
+            lines.append(
+                "- **lipid_benchmark_marker_targets_ug_per_l:** "
+                + ", ".join(f"{name}={float(value):.1f}" for name, value in benchmark_targets.items())
+            )
         lines.append(
             f"- **lipid_crosstalk_priors:** {', '.join(str(item) for item in lipid_lane.get('competition_prior_ids', [])) or 'none'}"
         )
         lines.append(
             f"- **lipid_maillard_closure_pressure:** {float(lipid_lane.get('maillard_closure_pressure', 0.0)):.2f}"
+        )
+    lipid_maillard_lane = family_lane_summary.get("11", {})
+    if lipid_maillard_lane:
+        lines.append(
+            f"- **lipid_maillard_kinetic_priors:** {', '.join(str(item) for item in lipid_maillard_lane.get('kinetic_prior_ids', [])) or 'none'}"
+        )
+        lines.append(
+            f"- **lipid_hexanal_suppression_fraction:** {float(lipid_maillard_lane.get('hexanal_suppression_fraction', 0.0)):.2f}"
+        )
+    protein_damage_lane = family_lane_summary.get("12", {})
+    if protein_damage_lane:
+        lines.append(
+            f"- **protein_damage_benchmark_anchors:** {', '.join(str(item) for item in protein_damage_lane.get('benchmark_anchor_ids', [])) or 'none'}"
+        )
+        lines.append(
+            f"- **protein_damage_burden_score:** {float(protein_damage_lane.get('damage_burden_score', 0.0)):.2f}"
         )
     for marker in flavor_axis.get("family_state_markers", []):
         lines.append(
@@ -592,7 +615,7 @@ def render_benchmark_summary_markdown(summaries: Iterable['BenchmarkSummary']) -
             strict_ready = "yes" if summary.strict_ready else "no"
 
         lines.append(
-            f"| {summary.benchmark_id} | {summary.tier} | {summary.family} | {', '.join(summary.chemistry_families) or 'none'} | {', '.join(summary.payload_roles) or 'none'} | {summary.protein_type} | {summary.process_state or 'n/a'} | {summary.execution_path} | {summary.benchmark_engine} | {summary.cantera_role} | {summary.thermodynamic_gating_policy} | {summary.ranking_contract_status} | {summary.overall_status} | {strict_ready} | {coverage} | {pearson} | {max_ratio} | {mean_log_error} | {mae} | {notes} |"
+            f"| {benchmark_label(summary.benchmark_id)} | {summary.tier} | {summary.family} | {', '.join(summary.chemistry_families) or 'none'} | {', '.join(summary.payload_roles) or 'none'} | {summary.protein_type} | {summary.process_state or 'n/a'} | {summary.execution_path} | {summary.benchmark_engine} | {summary.cantera_role} | {summary.thermodynamic_gating_policy} | {summary.ranking_contract_status} | {summary.overall_status} | {strict_ready} | {coverage} | {pearson} | {max_ratio} | {mean_log_error} | {mae} | {notes} |"
         )
 
     supported_count = sum(1 for summary in rows if summary.supported)
@@ -663,13 +686,13 @@ def render_matrix_target_status_markdown(payload: Mapping[str, Any]) -> str:
     lines = [
         "# Matrix Target Status",
         "",
-        "| Benchmark | Protein | Path | Process State | Target Profile | Ref Signal | Quant Closed | Internal | Directional | Open | External Decision Ready | Mechanistic Priority | Next Action |",
-        "| --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: | --- | --- | --- |",
+        "| Benchmark | Protein | Path | Process State | Target Profile | Data Status | Ref Signal | Quant Closed | Internal Measured | Internal Reference | Internal Total | Directional | Open | External Decision Ready | Mechanistic Priority | Next Action |",
+        "| --- | --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |",
     ]
     for row in benchmark_rows:
         counts = row.get("support_counts", {})
         lines.append(
-            f"| {row['benchmark_id']} | {row['protein_type']} | {row['execution_path']} | {row.get('process_state') or 'n/a'} | {row.get('target_profile', 'unknown')} | {row.get('reference_signal_origin', 'unknown')} | {int(counts.get('quantitative_closed', 0))} | {int(counts.get('internal_candidate', 0))} | {int(counts.get('directional_support', 0))} | {int(counts.get('open_gap', 0))} | {'yes' if row.get('promotion_ready', False) else 'no'} | {'yes' if row.get('mechanistic_priority_ready', False) else 'no'} | {row.get('next_best_action', 'unknown')} |"
+            f"| {row['benchmark_id']} | {row['protein_type']} | {row['execution_path']} | {row.get('process_state') or 'n/a'} | {row.get('target_profile', 'unknown')} | {row.get('external_data_status', 'unknown')} | {row.get('reference_signal_origin', 'unknown')} | {int(counts.get('quantitative_closed', 0))} | {int(counts.get('internal_measured_candidate', 0))} | {int(counts.get('internal_reference_candidate', 0))} | {int(counts.get('internal_candidate', 0))} | {int(counts.get('directional_support', 0))} | {int(counts.get('open_gap', 0))} | {'yes' if row.get('promotion_ready', False) else 'no'} | {'yes' if row.get('mechanistic_priority_ready', False) else 'no'} | {row.get('next_best_action', 'unknown')} |"
         )
 
     lines.extend([
@@ -692,6 +715,8 @@ def render_matrix_target_status_markdown(payload: Mapping[str, Any]) -> str:
         f"Quantitative-support-ready benchmarks: {int(summary.get('quantitative_support_ready', 0))}",
         f"External-decision-ready benchmarks: {int(summary.get('promotion_ready', 0))}",
         f"Mechanistic-priority benchmarks: {int(summary.get('mechanistic_priority_ready', 0))}",
+        f"internal_measured_candidate compounds: {int(summary.get('internal_measured_candidate', 0))}",
+        f"internal_reference_candidate compounds: {int(summary.get('internal_reference_candidate', 0))}",
     ])
     return "\n".join(lines) + "\n"
 

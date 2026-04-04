@@ -299,6 +299,26 @@ def _build_conditions_for_variant(
         matrix_fiber=float(getattr(baseline, "matrix_fiber", 0.0)),
         metal_catalyst=getattr(baseline, "metal_catalyst", None),
         protein_type=str(formulation.get("protein_type", getattr(baseline, "protein_type", "free"))),
+        sme_kj_per_kg=float(formulation.get("sme_kj_per_kg", getattr(baseline, "sme_kj_per_kg", 0.0))),
+        moisture_regime=formulation.get("moisture_regime", getattr(baseline, "moisture_regime", None)),
+        sterilization_temperature_celsius=formulation.get(
+            "sterilization_temperature_celsius",
+            getattr(baseline, "sterilization_temperature_celsius", None),
+        ),
+        sterilization_time_minutes=float(
+            formulation.get(
+                "sterilization_time_minutes",
+                getattr(baseline, "sterilization_time_minutes", 0.0),
+            )
+        ),
+        barrel_zone_temperatures=formulation.get(
+            "barrel_zone_temperatures",
+            getattr(baseline, "barrel_zone_temperatures", None),
+        ),
+        barrel_zone_time_fractions=formulation.get(
+            "barrel_zone_time_fractions",
+            getattr(baseline, "barrel_zone_time_fractions", None),
+        ),
     )
 
 
@@ -615,6 +635,10 @@ def build_confidence_package(
     payload["process_regime"] = process_regime.get("process_regime", "unknown")
     payload["process_neighborhood"] = process_regime.get("process_neighborhood", "unknown")
     payload["process_regime_summary"] = process_regime.get("summary", "")
+    if baseline_conditions is not None and hasattr(baseline_conditions, "extrusion_profile"):
+        extrusion_process = getattr(baseline_conditions, "extrusion_profile") or {}
+        if extrusion_process.get("active"):
+            payload["extrusion_process"] = extrusion_process
     payload["calibration_diagnostics"] = _build_calibration_diagnostics(assessment, result, warnings)
     payload["compound_confidence"] = _build_compound_confidence_rows(result, assessment)
     payload["aggregate_confidence"] = _build_aggregate_confidence_rows(result, assessment)

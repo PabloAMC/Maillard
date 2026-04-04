@@ -104,7 +104,7 @@ def build_geometry_assessment_artifact() -> Dict[str, Any]:
 
     return {
         "summary": {
-            "benchmark_id": "p4_geometry_benchmark_v1",
+            "benchmark_id": "mlp_geometry_benchmark_v1",
             "candidate_count": len(candidate_rows),
             "ground_state_entry_count": sum(1 for entry in entries if entry.benchmark_kind == "ground_state"),
             "ts_seed_entry_count": sum(1 for entry in entries if entry.benchmark_kind == "ts_seed"),
@@ -115,7 +115,7 @@ def build_geometry_assessment_artifact() -> Dict[str, Any]:
 
 def render_geometry_assessment_markdown(payload: Mapping[str, Any]) -> str:
     lines = [
-        "# P4 Geometry Assessment",
+        "# MLP Geometry Assessment",
         "",
         "| Candidate | Role | Available | Backend | Max RMSD (Å) | Mean RMSD (Å) | Reason |",
         "| --- | --- | --- | --- | ---: | ---: | --- |",

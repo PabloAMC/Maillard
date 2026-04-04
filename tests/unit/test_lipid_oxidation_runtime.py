@@ -19,3 +19,5 @@ def test_lipid_oxidation_context_surfaces_named_benchmark_ready_markers():
     assert context["dominant_marker"] == "Hexanal"
     assert "Hexanal" in context["generated_markers"]
     assert "2-Pentylfuran" in context["benchmark_ready_targets"]
+    assert context["runtime_split"]["runtime_sub_lanes"]["adverse_marker_generation_and_retention"]["dominant_marker"] == "Hexanal"
+    assert context["runtime_split"]["runtime_sub_lanes"]["carbonyl_competition_and_crosstalk"]["donor_pressure"] == 0.55

@@ -564,11 +564,26 @@ def build_literature_gap_review(root: Path = ROOT) -> Dict[str, List[Dict[str, A
     process_gaps = _load_json(root / _to_repo_relative(PROCESS_GAP_REGISTRY_PATH, ROOT))
     intake_rows = []
     for entry in intake.get("structural_gaps", []):
+        near_miss_candidates = []
+        for item in entry.get("near_miss_candidates", []) or []:
+            if not isinstance(item, Mapping):
+                continue
+            near_miss_candidates.append(
+                {
+                    "entry_id": str(item.get("entry_id", "unknown")),
+                    "reason": str(item.get("reason", "")),
+                }
+            )
         intake_rows.append(
             {
                 "gap_id": str(entry.get("id", "unknown")),
                 "priority": str(entry.get("priority", "unknown")),
                 "requires_primary_data": bool(entry.get("requires_primary_data", True)),
+                "closure_outcome": str(entry.get("closure_outcome", "unknown")),
+                "evidence_state": str(entry.get("evidence_state", "unknown")),
+                "triage_decision": str(entry.get("triage_decision", "")),
+                "benchmark_contract_missing": [str(item) for item in entry.get("benchmark_contract_missing", []) or []],
+                "near_miss_candidates": near_miss_candidates,
                 "why": str(entry.get("why", "")),
             }
         )
@@ -618,6 +633,11 @@ def build_literature_learning_loop_payload(root: Path = ROOT) -> Dict[str, Any]:
             "payload_type_queue": dict(payload_queue_review.get("queue_by_payload_type", {})),
             "selected_s11_c_family": (s11_c_family_promotion_queue.get("selected_family") or {}).get("family_id"),
             "intake_structural_gap_count": len(gap_review["intake_structural_gap_review"]),
+            "wet_lab_only_intake_gap_count": sum(
+                1
+                for row in gap_review["intake_structural_gap_review"]
+                if str(row.get("closure_outcome", "")) == "wet_lab_only"
+            ),
             "process_gap_count": len(gap_review["process_gap_review"]),
         },
     }
@@ -702,9 +722,23 @@ def render_literature_learning_loop_markdown(payload: Mapping[str, Any]) -> str:
         "",
         "## Structural Gaps",
         "",
+        "### Intake Structural Gaps",
+        "",
+        "| Gap | Priority | Outcome | Evidence | Near Misses | Missing Contract |",
+        "| --- | --- | --- | --- | --- | --- |",
     ])
     for row in payload.get("intake_structural_gap_review", []):
-        lines.append(f"- intake gap {row['gap_id']}: primary_data={row['requires_primary_data']} priority={row['priority']}")
+        near_misses = ", ".join(item.get("entry_id", "unknown") for item in row.get("near_miss_candidates", [])) or "none"
+        missing_contract = ", ".join(row.get("benchmark_contract_missing", [])[:3]) or "none"
+        lines.append(
+            f"| {row['gap_id']} | {row['priority']} | {row.get('closure_outcome', 'unknown')} | {row.get('evidence_state', 'unknown')} | {near_misses} | {missing_contract} |"
+        )
+
+    lines.extend([
+        "",
+        "### Process Gaps",
+        "",
+    ])
     for row in payload.get("process_gap_review", []):
         lines.append(f"- process gap {row['gap_id']}: wet_lab_requirement={row['wet_lab_requirement']}")
 

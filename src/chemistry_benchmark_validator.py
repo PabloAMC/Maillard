@@ -219,11 +219,11 @@ def evaluate_candidate_against_reaction_benchmark(
         decision = "adopt_offline"
 
     if decision == "adopt_offline":
-        rationale = "Candidate stays inside the P4 chemistry benchmark window and is suitable only for the proposed offline accelerator role."
+        rationale = "Candidate stays inside the MLP chemistry benchmark window and is suitable only for the proposed offline accelerator role."
     elif decision == "defer":
         rationale = "Candidate remains unapproved until missing benchmark evidence is collected for the proposed offline role."
     else:
-        rationale = "Candidate is quarantined because it fails core P4 stop rules and would reduce trust if integrated."
+        rationale = "Candidate is quarantined because it fails core MLP stop rules and would reduce trust if integrated."
 
     if external_prior["external_prior_strength"] in {"strong", "moderate"}:
         rationale += (
@@ -302,7 +302,7 @@ def build_adoption_decisions_from_assessment(payload: Mapping[str, Any]) -> List
 
 def render_mlp_assessment_markdown(payload: Mapping[str, Any]) -> str:
     lines = [
-        "# P4 MLP Assessment",
+        "# MLP Assessment",
         "",
         "| Candidate | Role | Decision | External Prior | Priority | Coverage | Rank Correlation | MAE (kcal/mol) | Nonphysical Reactions | Stop Reasons |",
         "| --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: | --- |",

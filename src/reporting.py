@@ -504,19 +504,19 @@ def _build_scientific_surface(root: Path) -> Dict[str, str]:
         "reaction_benchmark_set": root / "data/lit/reaction_benchmark_set.json",
         "mlp_candidate_registry": root / "data/lit/mlp_candidate_registry.json",
         "mlp_external_benchmark_evidence": root / "data/lit/mlp_external_benchmark_evidence.json",
-        "p4_geometry_benchmark_set": root / "data/lit/p4_geometry_benchmark_set.json",
-        "p4_geometry_benchmark": root / "results/validation/p4_geometry_benchmark.md",
-        "p4_geometry_benchmark_json": root / "results/validation/p4_geometry_benchmark.json",
-        "p4_geometry_assessment": root / "results/validation/p4_geometry_assessment.md",
-        "p4_geometry_assessment_json": root / "results/validation/p4_geometry_assessment.json",
-        "p4_reaction_benchmark": root / "results/validation/p4_reaction_benchmark.md",
-        "p4_reaction_benchmark_json": root / "results/validation/p4_reaction_benchmark.json",
-        "p4_mlp_assessment": root / "results/validation/p4_mlp_assessment.md",
-        "p4_mlp_assessment_json": root / "results/validation/p4_mlp_assessment.json",
-        "p4_external_mlp_landscape": root / "results/validation/p4_external_mlp_landscape.md",
-        "p4_external_mlp_landscape_json": root / "results/validation/p4_external_mlp_landscape.json",
-        "p4_adoption_notes": root / "results/validation/p4_adoption_notes.md",
-        "p4_adoption_notes_json": root / "results/validation/p4_adoption_notes.json",
+        "geometry_benchmark_set": root / "data/lit/geometry_benchmark_set.json",
+        "mlp_geometry_benchmark": root / "results/validation/mlp_geometry_benchmark.md",
+        "mlp_geometry_benchmark_json": root / "results/validation/mlp_geometry_benchmark.json",
+        "mlp_geometry_assessment": root / "results/validation/mlp_geometry_assessment.md",
+        "mlp_geometry_assessment_json": root / "results/validation/mlp_geometry_assessment.json",
+        "mlp_reaction_benchmark": root / "results/validation/mlp_reaction_benchmark.md",
+        "mlp_reaction_benchmark_json": root / "results/validation/mlp_reaction_benchmark.json",
+        "mlp_assessment": root / "results/validation/mlp_assessment.md",
+        "mlp_assessment_json": root / "results/validation/mlp_assessment.json",
+        "mlp_external_mlp_landscape": root / "results/validation/mlp_external_mlp_landscape.md",
+        "mlp_external_mlp_landscape_json": root / "results/validation/mlp_external_mlp_landscape.json",
+        "mlp_adoption_notes": root / "results/validation/mlp_adoption_notes.md",
+        "mlp_adoption_notes_json": root / "results/validation/mlp_adoption_notes.json",
     }
     payload: Dict[str, str] = {}
     for key, path in references.items():
@@ -741,6 +741,18 @@ def generate_report(
                         f"| {category.replace('_', ' ')} | {', '.join(row.get('present', [])) or '-'} | {', '.join(row.get('missing', [])) or '-'} | {'yes' if row.get('present') else '-'} |\n"
                     )
                 f.write(f"\n- **minimum_panel_ready:** {extrusion_panel.get('minimum_panel_ready', False)}\n\n")
+
+            extrusion_process = result.confidence_metadata.get("extrusion_process", {})
+            if extrusion_process:
+                total_damage = extrusion_process.get("total_damage_load", {})
+                f.write("### Extrusion Process Model\n")
+                f.write(f"- **model:** {extrusion_process.get('model', 'unknown')}\n")
+                f.write(f"- **moisture_regime:** {extrusion_process.get('moisture_regime', 'unknown')}\n")
+                f.write(f"- **jacket_temperature_celsius:** {float(extrusion_process.get('jacket_temperature_celsius', 0.0)):.1f}\n")
+                f.write(f"- **effective_temperature_celsius:** {float(extrusion_process.get('effective_temperature_celsius', 0.0)):.1f}\n")
+                f.write(f"- **sme_kj_per_kg:** {float(extrusion_process.get('sme_kj_per_kg', 0.0)):.1f}\n")
+                f.write(f"- **furosine_mg_per_kg:** {float(total_damage.get('furosine_mg_per_kg', 0.0)):.1f}\n")
+                f.write(f"- **lal_mg_per_kg:** {float(total_damage.get('lal_mg_per_kg', 0.0)):.1f}\n\n")
 
             compound_rows = result.confidence_metadata.get("compound_confidence", [])
             if compound_rows:

@@ -16,6 +16,7 @@ import pandas as pd
 from pathlib import Path
 from dataclasses import dataclass
 from typing import List, Dict, Set, Optional, Any, Tuple
+from typing import Mapping
 
 # Add project root to path
 ROOT = Path(__file__).resolve().parents[1]
@@ -43,6 +44,7 @@ from src.matrix_correction import (
     classify_accessibility_state,
     classify_volatile_matrix_family,
     describe_compound_matrix_retention,
+    get_protein_source_profile,
     get_volatile_class_retention_factor,
     resolve_compound_matrix_retention,
     resolve_matrix_correction,
@@ -390,6 +392,13 @@ _MELANOIDIN_TRAPPING_PROFILES = {
     _normalize_chemical_name("bis(2-methyl-3-furyl) disulfide"): {"slope": 0.55, "floor": 0.35},
 }
 
+_HYDROLYSATE_SULFUR_OBSERVABILITY_PROFILES = {
+    _normalize_chemical_name("Methional"): {"base_factor": 0.0045, "source_sensitive": False},
+    _normalize_chemical_name("2-Furfurylthiol"): {"base_factor": 0.13, "source_sensitive": True},
+    _normalize_chemical_name("2-Methyl-3-furanthiol"): {"base_factor": 0.13, "source_sensitive": True},
+    _normalize_chemical_name("bis(2-methyl-3-furyl) disulfide"): {"base_factor": 0.18, "source_sensitive": True},
+}
+
 
 def _resolve_melanoidin_trapping_factor(
     compound_name: str,
@@ -412,6 +421,33 @@ def _resolve_melanoidin_trapping_factor(
     return max(float(profile["floor"]), min(1.0, factor))
 
 
+def _resolve_upstream_observability_factor(
+    compound_name: str,
+    *,
+    protein_source: Optional[str],
+    family_upstream_contract: Optional[Mapping[str, Any]],
+) -> float:
+    if not family_upstream_contract:
+        return 1.0
+
+    family_lanes = family_upstream_contract.get("family_lanes", {}) or {}
+    sulfur_lane = family_lanes.get("05", {}) or {}
+    pretreatment_lane = family_lanes.get("10", {}) or {}
+    if not (bool(sulfur_lane.get("active", False)) or bool(pretreatment_lane.get("precursor_release_active", False))):
+        return 1.0
+
+    profile = _HYDROLYSATE_SULFUR_OBSERVABILITY_PROFILES.get(_normalize_chemical_name(compound_name))
+    if profile is None:
+        return 1.0
+
+    factor = float(profile.get("base_factor", 1.0))
+    if profile.get("source_sensitive"):
+        source_profile = get_protein_source_profile(protein_source)
+        if source_profile is not None:
+            factor *= float(source_profile.hydrolysate_observability_bias)
+    return max(1.0e-4, min(1.0, factor))
+
+
 def _apply_output_projection(
     raw_concentrations: Dict[str, float],
     species_catalog: Dict[str, Species],
@@ -426,6 +462,8 @@ def _apply_output_projection(
     projection_budget: Optional[ProjectionBudget] = None,
     projection_strategy: ProjectionStrategy = DEFAULT_PROJECTION_STRATEGY,
     species_name_lookup: Optional[Dict[str, str]] = None,
+    protein_source: Optional[str] = None,
+    family_upstream_contract: Optional[Mapping[str, Any]] = None,
 ) -> Tuple[Dict[str, float], ProjectionMetadataMap]:
     p_type = ProteinType(protein_type)
     fat_eff, protein_eff, explicit_matrix_fractions = _resolve_output_matrix_context(
@@ -529,6 +567,7 @@ def _apply_output_projection(
                 time_minutes=time_minutes,
                 water_activity=water_activity,
                 process_state=process_state,
+                protein_source=protein_source,
             )
             class_matrix_factor = float(retention_description.get("class_matrix_factor", 1.0))
             effective_matrix_factor = float(retention_description.get("matrix_factor", 1.0))
@@ -554,7 +593,19 @@ def _apply_output_projection(
             process_state=process_state,
             projection_severity=projection_severity,
         )
-        observable_value = raw_value * effective_matrix_factor * headspace_factor * calibration_factor * melanoidin_factor
+        upstream_observability_factor = _resolve_upstream_observability_factor(
+            compound_name,
+            protein_source=protein_source,
+            family_upstream_contract=family_upstream_contract,
+        )
+        observable_value = (
+            raw_value
+            * effective_matrix_factor
+            * headspace_factor
+            * calibration_factor
+            * melanoidin_factor
+            * upstream_observability_factor
+        )
         observable_ppb[canon] = observable_value
         projection_metadata[canon] = make_projection_metadata_row(
             compound=compound_name,
@@ -574,6 +625,7 @@ def _apply_output_projection(
                 "headspace_factor": float(headspace_factor),
                 "calibration_factor": float(calibration_factor),
                 "melanoidin_trapping_factor": float(melanoidin_factor),
+                "upstream_observability_factor": float(upstream_observability_factor),
                 "browning_index": float(projection_severity),
                 "browning_narrative": "melanoidin-linked sulfur trapping surrogate" if melanoidin_factor < 1.0 else "no explicit browning-linked sulfur penalty",
                 "volatile_class": classify_volatile_matrix_family(compound_name, smiles=species.smiles),
@@ -787,7 +839,9 @@ class Recommender:
                            denaturation_state: float = 0.5,
                            fat_fraction: float = 0.0,
                            protein_fraction: float = 0.0,
-                           temp_ramp_csv: Optional[str] = None):
+                           temp_ramp_csv: Optional[str] = None,
+                           protein_source: Optional[str] = None,
+                           family_upstream_contract: Optional[Mapping[str, Any]] = None):
         """
         Dynamically predict active pathways given a list of generated ElementarySteps
         and their computed barriers from xTB or Hammond fallback.
@@ -805,7 +859,8 @@ class Recommender:
             predicted_concentrations={}, 
             reactive_amino_acids={k: v for k, v in initial_concentrations.items()},
             protein_type=p_type,
-            denaturation_state=denaturation_state
+            denaturation_state=denaturation_state,
+            protein_source=protein_source
         )
         
         desirable = self._load_desirable()
@@ -1050,6 +1105,8 @@ class Recommender:
             projection_budget=projection_budget,
             projection_strategy=projection_strategy,
             species_name_lookup=species_name_lookup,
+            protein_source=protein_source,
+            family_upstream_contract=family_upstream_contract,
         )
         proxy_volatiles = dict(raw_concentrations)
         

@@ -8,6 +8,8 @@ import yaml
 
 from src.benchmark_validation import (
     DEFAULT_TARGET_TAG,
+    _increment_matrix_support_counts,
+    _init_matrix_support_counts,
     _matrix_compound_support_status,
     _projection_metadata_for_match,
     assess_matrix_benchmark_evidence,
@@ -31,8 +33,10 @@ _PROTEIN_TYPES = {"pea_iso", "soy_iso", "myco", "free"}
 _SUPPORT_RANK = {
     "open_gap": 0,
     "directional_support": 1,
-    "internal_candidate": 2,
-    "quantitative_closed": 3,
+    "internal_reference_candidate": 2,
+    "internal_candidate": 3,
+    "internal_measured_candidate": 3,
+    "quantitative_closed": 4,
 }
 
 
@@ -217,18 +221,29 @@ def select_aligned_matrix_benchmark(
 
     measured_names = {str(name).strip().lower() for name in normalized.get("measured_volatiles", {})}
     best_path: Optional[Path] = None
-    best_score: tuple[int, int, int, int, str] = (-1, -1, -1, -1, "")
+    best_score: tuple[int, int, int, int, int, int, str] = (-1, -1, -1, -1, -1, -1, "")
     for bench_file in bench_files:
         bench = load_benchmark(bench_file)
         metadata = get_benchmark_metadata(bench)
         if metadata.execution_path not in {"matrix_only", "matrix_precursor_augmented"}:
             continue
+        source_metadata = dict(bench.get("source_metadata") or {})
         same_protein = int(str(bench.get("protein_type", "")) == normalized.get("protein_type"))
         same_state = int(str((bench.get("process_metadata") or {}).get("state", "")) == normalized.get("process_state"))
         same_path = int(str(metadata.execution_path) == ("matrix_only" if len(normalized.get("formulation", {}).get("precursors", {})) == 1 else "matrix_precursor_augmented"))
         contract = get_matrix_ranking_contract(bench)
         overlap = len(measured_names.intersection({str(item.get("name", "")).strip().lower() for item in contract.get("observable_targets", [])}))
-        score = (same_protein, same_state, same_path, overlap, str(bench.get("benchmark_id", "")))
+        has_reference_panel = int(bool(bench.get("reference_volatiles")))
+        is_canonical_benchmark = int(str(source_metadata.get("generator", "")).strip() != "matrix_experiment_intake")
+        score = (
+            same_protein,
+            same_state,
+            same_path,
+            overlap,
+            has_reference_panel,
+            is_canonical_benchmark,
+            str(bench.get("benchmark_id", "")),
+        )
         if score > best_score:
             best_score = score
             best_path = Path(bench_file)
@@ -250,12 +265,7 @@ def _build_support_rows_for_benchmark(
     contract = get_matrix_ranking_contract(dict(bench))
     adverse_markers = {str(item).strip().lower() for item in contract.get("adverse_markers", [])}
     compounds = []
-    counts = {
-        "quantitative_closed": 0,
-        "internal_candidate": 0,
-        "directional_support": 0,
-        "open_gap": 0,
-    }
+    counts = _init_matrix_support_counts()
     for item in contract.get("observable_targets", []):
         compound_name = str(item.get("name", "")).strip()
         if not compound_name:
@@ -271,7 +281,7 @@ def _build_support_rows_for_benchmark(
             reference_signal_origin=summary.reference_signal_origin,
             source_origin=evidence.source_origin,
         )
-        counts[support_status] += 1
+        _increment_matrix_support_counts(counts, support_status)
         compounds.append(
             {
                 "compound": compound_name,
@@ -298,9 +308,19 @@ def _build_support_rows_for_benchmark(
     elif summary.ranking_contract_status != "pass":
         blocker = "ranking contract not yet passing"
     elif counts["quantitative_closed"] < 2:
-        blocker = "insufficient externally measured target closure"
+        if evidence.external_data_status == "internal_measured_quantitative":
+            blocker = "insufficient externally measured target closure; current comparator is internal measured only"
+        elif evidence.external_data_status == "internal_reference_only":
+            blocker = "insufficient externally measured target closure; current comparator is internal reference-only"
+        else:
+            blocker = "insufficient externally measured target closure"
     elif counts["internal_candidate"] > 0 or counts["directional_support"] > 0:
-        blocker = "depends on internal or transferred support"
+        if counts["internal_measured_candidate"] > 0 and counts["internal_reference_candidate"] == 0 and counts["directional_support"] == 0:
+            blocker = "depends on internally measured support"
+        elif counts["internal_reference_candidate"] > 0 and counts["internal_measured_candidate"] == 0 and counts["directional_support"] == 0:
+            blocker = "depends on internal reference-only support"
+        else:
+            blocker = "depends on internal or transferred support"
     else:
         blocker = "none"
 

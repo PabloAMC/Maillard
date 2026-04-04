@@ -15,6 +15,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Tuple, Optional
 
+from src.extrusion import normalize_moisture_regime
+
 
 ROOT = Path(__file__).resolve().parents[1]
 SAFETY_REFERENCE_PAYLOAD_PATH = ROOT / "data" / "lit" / "safety_reference_payloads.json"
@@ -45,6 +47,21 @@ def _normalize_safety_visibility(entry: Dict[str, Any]) -> str:
     return _DEFAULT_SAFETY_VISIBILITY_BY_KIND.get(kind, "extended")
 
 
+def _analyte_matches(entry_analyte: str, requested_analyte: Optional[str]) -> bool:
+    if not requested_analyte:
+        return True
+    normalized_entry = str(entry_analyte).strip().lower()
+    normalized_requested = str(requested_analyte).strip().lower()
+    if normalized_entry == normalized_requested:
+        return True
+    tokens = {
+        token.strip()
+        for token in normalized_entry.replace("+", "/").split("/")
+        if token.strip()
+    }
+    return normalized_requested in tokens
+
+
 def get_safety_reference_payload(reference_id: str = "squeo_2023_pbpi_acrylamide") -> Optional[dict]:
     for entry in SAFETY_REFERENCE_PAYLOADS.get("entries", []):
         if str(entry.get("id", "")) == reference_id:
@@ -61,7 +78,7 @@ def get_safety_reference_entries(
     entries: List[dict] = []
     for entry in SAFETY_REFERENCE_PAYLOADS.get("entries", []):
         entry_analyte = str(entry.get("analyte", "")).strip().lower()
-        if analyte and entry_analyte != str(analyte).strip().lower():
+        if not _analyte_matches(entry_analyte, analyte):
             continue
         entry_visibility = _normalize_safety_visibility(entry)
         if requested_visibility == "default" and entry_visibility != "default":
@@ -106,13 +123,239 @@ class SafetyResult:
     flagged: bool
     description: str
 
+
+def _acrylamide_moisture_factor(
+    water_activity: Optional[float],
+    moisture_regime: Optional[str],
+) -> float:
+    if water_activity is None:
+        return 1.0
+
+    aw = max(0.05, min(0.98, float(water_activity)))
+    regime = normalize_moisture_regime(moisture_regime, aw)
+    if regime == "lme":
+        progress = max(0.0, min(1.0, (aw - 0.20) / 0.20))
+        return 0.70 + 0.70 * progress
+
+    progress = max(0.0, min(1.0, (aw - 0.50) / 0.45))
+    return 1.20 - 0.50 * progress
+
+
+def _append_unique(flagged: List[str], marker: str) -> None:
+    if marker not in flagged:
+        flagged.append(marker)
+
+
+def _clamp(value: float, lower: float, upper: float) -> float:
+    return max(lower, min(upper, float(value)))
+
+
+def _sigmoid(value: float, center: float, width: float) -> float:
+    if width <= 0.0:
+        return 1.0 if value >= center else 0.0
+    exponent = _clamp((float(value) - center) / width, -60.0, 60.0)
+    return 1.0 / (1.0 + math.exp(-exponent))
+
+
+def _resolve_effective_temp_c(temp_C: float, effective_temp_c: Optional[float] = None) -> float:
+    return float(temp_C if effective_temp_c is None else effective_temp_c)
+
+
+def _arrhenius_rate(*, temp_c: float, pre_exponential: float, activation_energy_kj_mol: float) -> float:
+    temperature_kelvin = float(temp_c) + 273.15
+    return float(pre_exponential) * math.exp(-(float(activation_energy_kj_mol) * 1000.0) / (8.314 * temperature_kelvin))
+
+
+def _formation_elimination_signal(
+    precursor_drive: float,
+    *,
+    temp_c: float,
+    time_min: float,
+    formation_pre_exponential: float,
+    formation_ea_kj_mol: float,
+    elimination_pre_exponential: float,
+    elimination_ea_kj_mol: float,
+    scale: float = 1.0,
+) -> float:
+    if precursor_drive <= 0.0 or time_min <= 0.0:
+        return 0.0
+
+    time_seconds = float(time_min) * 60.0
+    k_form = _arrhenius_rate(
+        temp_c=temp_c,
+        pre_exponential=formation_pre_exponential,
+        activation_energy_kj_mol=formation_ea_kj_mol,
+    )
+    k_elim = _arrhenius_rate(
+        temp_c=temp_c,
+        pre_exponential=elimination_pre_exponential,
+        activation_energy_kj_mol=elimination_ea_kj_mol,
+    )
+    if k_elim < 1e-12:
+        signal = float(precursor_drive) * k_form * time_seconds
+    else:
+        signal = float(precursor_drive) * (k_form / k_elim) * (1.0 - math.exp(-k_elim * time_seconds))
+    return max(0.0, float(scale) * signal)
+
+
+def _estimate_dicarbonyl_pools(
+    *,
+    lysine_mM: float,
+    reducing_sugar_mM: float,
+    temp_C: float,
+    time_min: float,
+    water_activity: Optional[float] = None,
+    effective_temp_c: Optional[float] = None,
+    polyphenol_factor: float = 0.0,
+) -> Tuple[float, float, float]:
+    if lysine_mM <= 0.0 or reducing_sugar_mM <= 0.0 or time_min <= 0.0:
+        return 0.0, 0.0, 0.0
+
+    thermal_temp_c = _resolve_effective_temp_c(temp_C, effective_temp_c)
+    aw = 0.55 if water_activity is None else _clamp(water_activity, 0.05, 0.98)
+    aw_norm = _clamp((aw - 0.25) / 0.65, 0.0, 1.0)
+    precursor_drive = math.sqrt(float(lysine_mM) * float(reducing_sugar_mM)) / 45.0
+    amadori_pool = _formation_elimination_signal(
+        precursor_drive,
+        temp_c=thermal_temp_c,
+        time_min=time_min,
+        formation_pre_exponential=4.0e6,
+        formation_ea_kj_mol=52.0,
+        elimination_pre_exponential=2.5e9,
+        elimination_ea_kj_mol=74.0,
+        scale=260.0 * (0.92 + 0.22 * aw_norm),
+    )
+
+    high_temp_drive = _sigmoid(thermal_temp_c, 138.0, 8.0)
+    go_share = _clamp(0.62 + 0.20 * aw_norm - 0.34 * high_temp_drive, 0.12, 0.82)
+    mgo_share = _clamp(0.28 + 0.44 * high_temp_drive - 0.20 * aw_norm, 0.12, 0.82)
+    total_share = go_share + mgo_share
+    if total_share > 0.95:
+        scale = 0.95 / total_share
+        go_share *= scale
+        mgo_share *= scale
+
+    polyphenol_window = _clamp(polyphenol_factor, 0.0, 1.0)
+    go_pool = amadori_pool * go_share * (1.0 - 0.10 * polyphenol_window)
+    mgo_pool = amadori_pool * mgo_share * (1.0 - 0.247 * polyphenol_window)
+    return amadori_pool, go_pool, mgo_pool
+
+
+def predict_cml(
+    lysine_mM: float,
+    reducing_sugar_mM: float,
+    temp_C: float,
+    time_min: float,
+    *,
+    water_activity: Optional[float] = None,
+    effective_temp_c: Optional[float] = None,
+    polyphenol_factor: float = 0.0,
+) -> float:
+    thermal_temp_c = _resolve_effective_temp_c(temp_C, effective_temp_c)
+    aw = 0.55 if water_activity is None else _clamp(water_activity, 0.05, 0.98)
+    aw_norm = _clamp((aw - 0.25) / 0.65, 0.0, 1.0)
+    _amadori_pool, go_pool, _mgo_pool = _estimate_dicarbonyl_pools(
+        lysine_mM=lysine_mM,
+        reducing_sugar_mM=reducing_sugar_mM,
+        temp_C=temp_C,
+        time_min=time_min,
+        water_activity=water_activity,
+        effective_temp_c=effective_temp_c,
+        polyphenol_factor=polyphenol_factor,
+    )
+    formation_window = _sigmoid(thermal_temp_c, 122.0, 10.0)
+    degradation_window = _sigmoid(thermal_temp_c, 162.0, 7.0)
+    moisture_gain = 0.80 + 0.35 * aw_norm
+    return max(0.0, go_pool * 0.40 * formation_window * moisture_gain * (1.0 - 0.45 * degradation_window))
+
+
+def predict_cel(
+    lysine_mM: float,
+    reducing_sugar_mM: float,
+    temp_C: float,
+    time_min: float,
+    *,
+    water_activity: Optional[float] = None,
+    effective_temp_c: Optional[float] = None,
+    polyphenol_factor: float = 0.0,
+) -> float:
+    thermal_temp_c = _resolve_effective_temp_c(temp_C, effective_temp_c)
+    aw = 0.45 if water_activity is None else _clamp(water_activity, 0.05, 0.98)
+    aw_norm = _clamp((aw - 0.25) / 0.65, 0.0, 1.0)
+    _amadori_pool, _go_pool, mgo_pool = _estimate_dicarbonyl_pools(
+        lysine_mM=lysine_mM,
+        reducing_sugar_mM=reducing_sugar_mM,
+        temp_C=temp_C,
+        time_min=time_min,
+        water_activity=water_activity,
+        effective_temp_c=effective_temp_c,
+        polyphenol_factor=polyphenol_factor,
+    )
+    formation_window = _sigmoid(thermal_temp_c, 132.0, 9.0)
+    high_temp_gain = 0.90 + 0.30 * _sigmoid(thermal_temp_c, 142.0, 8.0)
+    moisture_penalty = 1.12 - 0.40 * aw_norm
+    return max(0.0, mgo_pool * 0.44 * formation_window * high_temp_gain * moisture_penalty)
+
+
+def predict_furosine(
+    temp_C: float,
+    time_min: float,
+    *,
+    lysine_mM: Optional[float] = None,
+    reducing_sugar_mM: Optional[float] = None,
+    protein_type: str = "free",
+    water_activity: Optional[float] = None,
+    effective_temp_c: Optional[float] = None,
+) -> float:
+    if time_min <= 0.0:
+        return 0.0
+
+    thermal_temp_c = _resolve_effective_temp_c(temp_C, effective_temp_c)
+    aw = 0.55 if water_activity is None else _clamp(water_activity, 0.05, 0.98)
+    aw_norm = _clamp((aw - 0.25) / 0.65, 0.0, 1.0)
+    protein_key = str(protein_type).strip().lower()
+    protein_factor = {
+        "free": 0.80,
+        "pea_conc": 0.95,
+        "pea_iso": 1.00,
+        "soy_conc": 1.05,
+        "soy_iso": 1.12,
+        "myco": 0.75,
+    }.get(protein_key, 1.0)
+    if lysine_mM is not None and reducing_sugar_mM is not None and lysine_mM > 0.0 and reducing_sugar_mM > 0.0:
+        amadori_pool, _go_pool, _mgo_pool = _estimate_dicarbonyl_pools(
+            lysine_mM=lysine_mM,
+            reducing_sugar_mM=reducing_sugar_mM,
+            temp_C=temp_C,
+            time_min=time_min,
+            water_activity=water_activity,
+            effective_temp_c=effective_temp_c,
+        )
+        moisture_gain = 0.94 + 0.12 * aw_norm
+        return max(0.0, amadori_pool * 0.435 * protein_factor * moisture_gain)
+
+    precursor_drive = protein_factor * (0.95 + 0.18 * aw_norm)
+    return _formation_elimination_signal(
+        precursor_drive,
+        temp_c=thermal_temp_c,
+        time_min=time_min,
+        formation_pre_exponential=8.0e5,
+        formation_ea_kj_mol=50.0,
+        elimination_pre_exponential=1.8e10,
+        elimination_ea_kj_mol=73.0,
+        scale=120.0,
+    )
+
 def predict_acrylamide(
     asparagine_mM: float,
     reducing_sugar_mM: float,
     temp_C: float,
     time_min: float,
     pH: float = 6.0,
-    ea_modifier_kcal: float = 0.0
+    ea_modifier_kcal: float = 0.0,
+    water_activity: Optional[float] = None,
+    moisture_regime: Optional[str] = None,
+    effective_temp_c: Optional[float] = None,
 ) -> SafetyResult:
     """
     Implements formation-elimination kinetics for acrylamide (Knol/Parker model).
@@ -132,7 +375,8 @@ def predict_acrylamide(
 
     # Constants
     R = 8.314 # J/mol/K
-    T_K = temp_C + 273.15
+    thermal_temp_c = temp_C if effective_temp_c is None else float(effective_temp_c)
+    T_K = thermal_temp_c + 273.15
     time_sec = time_min * 60.0
     MW_AA = 71.08
     
@@ -144,7 +388,8 @@ def predict_acrylamide(
     # pH effect on formation: Asparagine amine nucleophilicity (pKa ~8.8)
     # Most reactive in slightly alkaline, sharply drops below pH 5
     f_ph = 1.0 / (1.0 + 10**(8.8 - pH))
-    kf = A_f * math.exp(-Ea_f / (R * T_K)) * f_ph
+    moisture_factor = _acrylamide_moisture_factor(water_activity, moisture_regime)
+    kf = A_f * math.exp(-Ea_f / (R * T_K)) * f_ph * moisture_factor
     
     # 2. Elimination (ke)
     # Acrylamide degrades at high T. Ea_e typically ~90-110 kJ/mol
@@ -187,7 +432,7 @@ def evaluate_formulation_safety(
     temp_C: float,
     time_min: float,
     pH: float,
-    modifiers: Optional[Dict[str, float]] = None
+    modifiers: Optional[Dict[str, Any]] = None
 ) -> Tuple[float, List[str]]:
     """
     Aggregated safety score and flagged toxins.
@@ -196,6 +441,7 @@ def evaluate_formulation_safety(
     total_risk = 0.0
     flagged = []
     mods = modifiers or {}
+    extrusion_process = mods.get("__extrusion_process__", {}) if isinstance(mods.get("__extrusion_process__", {}), dict) else {}
     
     # 1. Acrylamide Check
     asn_conc = 0.0
@@ -215,14 +461,36 @@ def evaluate_formulation_safety(
                 ea_mod = v
                 break
                 
-        aa_res = predict_acrylamide(asn_conc, sugar_conc, temp_C, time_min, pH, ea_mod)
+        aa_res = predict_acrylamide(
+            asn_conc,
+            sugar_conc,
+            temp_C,
+            time_min,
+            pH,
+            ea_mod,
+            water_activity=extrusion_process.get("water_activity"),
+            moisture_regime=extrusion_process.get("moisture_regime"),
+            effective_temp_c=extrusion_process.get("effective_temperature_celsius"),
+        )
         # Threshold for detection - ensure it's high enough to be seen but low enough to catch precursors
         if aa_res.acrylamide_ppb > 1e-25:
-            flagged.append("Acrylamide")
+            _append_unique(flagged, "Acrylamide")
             # Logarithmic risk scaling: ensure we don't saturate for small differences
             # log10(1e-15 / 1e-20) / 10 = 0.5
             # log10(1.2e-16 / 1e-20) / 10 = 0.4
             risk_raw = math.log10(aa_res.acrylamide_ppb / 1e-20) / 10.0
             total_risk += max(0.01, risk_raw)
+
+    total_damage = extrusion_process.get("total_damage_load", {}) if isinstance(extrusion_process, dict) else {}
+    furosine = float(total_damage.get("furosine_mg_per_kg", 0.0) or 0.0)
+    lal = float(total_damage.get("lal_mg_per_kg", 0.0) or 0.0)
+
+    if furosine > 0.0:
+        _append_unique(flagged, "Furosine")
+        total_risk += min(1.0, furosine / 40.0)
+
+    if lal > 0.0:
+        _append_unique(flagged, "LAL")
+        total_risk += min(1.25, lal / 120.0)
             
     return total_risk, flagged

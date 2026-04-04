@@ -1,7 +1,8 @@
 from dataclasses import dataclass
-from typing import Optional
+from typing import Optional, Sequence
 
-from src.barrier_constants import arrhenius_rate_constant
+from src.barrier_constants import arrhenius_rate_constant, get_donor_reactivity_multiplier
+from src.extrusion import build_extrusion_process_profile, normalize_moisture_regime
 
 @dataclass
 class ReactionConditions:
@@ -18,7 +19,13 @@ class ReactionConditions:
                  solvent_name: str = "water",
                  matrix_fiber: float = 0.0, # Placeholder for blind spot
                  metal_catalyst: Optional[str] = None, # Placeholder for blind spot
-                 protein_type: str = "free"
+                 protein_type: str = "free",
+                 sme_kj_per_kg: float = 0.0,
+                 moisture_regime: Optional[str] = None,
+                 sterilization_temperature_celsius: Optional[float] = None,
+                 sterilization_time_minutes: float = 0.0,
+                 barrel_zone_temperatures: Optional[Sequence[float]] = None,
+                 barrel_zone_time_fractions: Optional[Sequence[float]] = None,
                  ):
         self.pH = pH
         self.temperature_celsius = temperature_celsius
@@ -30,6 +37,12 @@ class ReactionConditions:
         self.matrix_fiber = matrix_fiber
         self.metal_catalyst = metal_catalyst
         self.protein_type = protein_type
+        self.sme_kj_per_kg = float(sme_kj_per_kg)
+        self.moisture_regime = moisture_regime
+        self.sterilization_temperature_celsius = sterilization_temperature_celsius
+        self.sterilization_time_minutes = float(sterilization_time_minutes)
+        self.barrel_zone_temperatures = None if barrel_zone_temperatures is None else [float(value) for value in barrel_zone_temperatures]
+        self.barrel_zone_time_fractions = None if barrel_zone_time_fractions is None else [float(value) for value in barrel_zone_time_fractions]
         self.__post_init__()
 
     def __post_init__(self):
@@ -44,9 +57,32 @@ class ReactionConditions:
         }
         if self.solvent_name.lower() in presets:
             self.dielectric_constant = presets[self.solvent_name.lower()]
+        self.moisture_regime = normalize_moisture_regime(self.moisture_regime, self.water_activity)
+
+    @property
+    def extrusion_profile(self) -> dict[str, object]:
+        return build_extrusion_process_profile(
+            base_temperature_celsius=self.temperature_celsius,
+            water_activity=self.water_activity,
+            protein_type=self.protein_type,
+            sme_kj_per_kg=self.sme_kj_per_kg,
+            moisture_regime=self.moisture_regime,
+            sterilization_temperature_celsius=self.sterilization_temperature_celsius,
+            sterilization_time_minutes=self.sterilization_time_minutes,
+            zone_temperatures=self.barrel_zone_temperatures,
+            zone_time_fractions=self.barrel_zone_time_fractions,
+        )
+
+    @property
+    def effective_temperature_celsius(self) -> float:
+        return float(self.extrusion_profile.get("effective_temperature_celsius", self.temperature_celsius))
 
     @property
     def temperature_kelvin(self) -> float:
+        return self.effective_temperature_celsius + 273.15
+
+    @property
+    def nominal_temperature_kelvin(self) -> float:
         return self.temperature_celsius + 273.15
         
     def _sigmoid(self, x: float, center: float, k: float) -> float:
@@ -100,7 +136,13 @@ class ReactionConditions:
                 
         return mult
 
-    def get_rate_constant(self, pathway_type: str, ea_override_kcal: float = None) -> float:
+    def get_rate_constant(
+        self,
+        pathway_type: str,
+        ea_override_kcal: float = None,
+        *,
+        reactant_labels: Optional[Sequence[str]] = None,
+    ) -> float:
         """
         Arrhenius rate constant: k = A * exp(-Ea / RT)
         ea_override_kcal: barrier in kcal/mol from results_db.py
@@ -144,12 +186,13 @@ class ReactionConditions:
         
         # Apply water activity correction (Labuza)
         aw_factor = self._water_activity_correction(pathway_type)
+        donor_factor = get_donor_reactivity_multiplier(pathway_type, reactant_labels=reactant_labels)
         
         return arrhenius_rate_constant(
             barrier_kcal,
             T_K,
             family=pathway_type,
-            multiplier=ph_factor * aw_factor,
+            multiplier=ph_factor * aw_factor * donor_factor,
         )
 
     def _ionization_correction(self, pathway_type: str) -> float:

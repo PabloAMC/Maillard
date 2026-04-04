@@ -26,6 +26,6 @@ def test_geometry_benchmark_renders_markdown():
     payload = build_geometry_benchmark_artifact()
     markdown = render_geometry_benchmark_markdown(payload)
 
-    assert payload["summary"]["benchmark_id"] == "p4_geometry_benchmark_v1"
-    assert "P4 Geometry Benchmark" in markdown
+    assert payload["summary"]["benchmark_id"] == "mlp_geometry_benchmark_v1"
+    assert "MLP Geometry Benchmark" in markdown
     assert "cysteine_sulfur_probe" in markdown

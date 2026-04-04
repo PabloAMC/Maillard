@@ -55,6 +55,16 @@ def _status_score(status: str) -> int:
     }.get(str(status), 4)
 
 
+def _improves_benchmark_decision(row: Mapping[str, Any]) -> bool:
+    baseline_status = _status_score(str(row.get("baseline_status", row.get("scenario_status", "scale-gap"))))
+    scenario_status = _status_score(str(row.get("scenario_status", "scale-gap")))
+    if scenario_status < baseline_status:
+        return True
+    baseline_ranking = str(row.get("baseline_ranking_contract_status", "n/a"))
+    scenario_ranking = str(row.get("scenario_ranking_contract_status", "n/a"))
+    return baseline_ranking != "pass" and scenario_ranking == "pass"
+
+
 def _execution_weight(execution_path: str) -> float:
     normalized = str(execution_path).strip().lower()
     if normalized == "matrix_precursor_augmented":
@@ -389,11 +399,23 @@ def build_cheap_screening_artifact(
             scenario_trials,
             key=lambda item: (float(item[2].get("total_improvement", 0.0)), -float(item[2].get("total_score", 0.0))),
         )
-        touched_benchmarks = [item for item in performance["benchmarks"] if item["panel_shift_score"] > 0.05 or item["score_improvement"] != 0.0]
         linked_mechanistic = sorted(mechanistic_benchmarks.intersection(set(row.get("affected_benchmark_ids", []))))
+        touched_benchmarks = [item for item in performance["benchmarks"] if item["panel_shift_score"] > 0.05 or item["score_improvement"] != 0.0]
+        linked_benchmark_rows = [item for item in performance["benchmarks"] if item["benchmark_id"] in set(linked_mechanistic)]
+        linked_decision_change = any(_improves_benchmark_decision(item) for item in linked_benchmark_rows)
+        linked_activity = any(item["panel_shift_score"] > 0.05 or item["score_improvement"] != 0.0 for item in linked_benchmark_rows)
         if not touched_benchmarks:
             screen_decision = "reject"
             no_escalation_reason = "cheap-first perturbation does not move the target panel or benchmark diagnostics"
+        elif linked_mechanistic and linked_decision_change:
+            screen_decision = "advance"
+            no_escalation_reason = "none"
+        elif linked_mechanistic and linked_activity:
+            screen_decision = "defer"
+            no_escalation_reason = "cheap-first perturbation moves mechanistic-priority surrogates but does not change the mechanistic-priority benchmark decisions"
+        elif linked_mechanistic and performance["total_improvement"] > 0.05:
+            screen_decision = "defer"
+            no_escalation_reason = "cheap-first perturbation improves non-priority diagnostics but does not move the mechanistic-priority benchmark decisions"
         elif performance["total_improvement"] > 0.05:
             screen_decision = "advance"
             no_escalation_reason = "none"

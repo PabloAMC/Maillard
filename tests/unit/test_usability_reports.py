@@ -333,6 +333,7 @@ def test_build_confidence_package_surfaces_extrusion_panel_when_markers_are_pres
 
     panel = payload["extrusion_observable_panel"]
     assert payload["process_regime"] == "extrusion_like"
+    assert payload["extrusion_process"]["model"] == "sequential_isothermal_zones"
     assert panel["meaty_positive"]["present"] == ["2-Furfurylthiol (FFT)"]
     assert panel["off_notes"]["present"] == ["Hexanal"]
     assert panel["severity_markers"]["present"] == ["Furfural"]
@@ -542,7 +543,7 @@ def test_render_flavor_axis_markdown_surfaces_active_family_lanes():
                     "state_value_summary": "available=True, source=pbma_fortified",
                 }
             ],
-            "active_family_lanes": ["02", "10"],
+            "active_family_lanes": ["02", "10", "11"],
             "family_lane_summary": {
                 "02": {
                     "slr_family": "02",
@@ -550,6 +551,7 @@ def test_render_flavor_axis_markdown_surfaces_active_family_lanes():
                     "strategic_posture": "immediate_expansion_lane",
                     "summary": "Crosstalk is active.",
                     "benchmark_ready_targets": ["Hexanal", "2-Pentylfuran"],
+                    "benchmark_marker_targets_ug_per_l": {"hexanal": 782.0, "2-pentylfuran": 163.0},
                     "competition_prior_ids": ["lincoln_2025_polyphenol_crosstalk_v1"],
                     "maillard_closure_pressure": 1.10,
                 },
@@ -558,6 +560,14 @@ def test_render_flavor_axis_markdown_surfaces_active_family_lanes():
                     "display_name": "Microbial fermentation pretreatment",
                     "strategic_posture": "upstream_pretreatment_lane",
                     "summary": "Pretreatment is active.",
+                },
+                "11": {
+                    "slr_family": "11",
+                    "display_name": "Maillard/Lipid Crosstalk",
+                    "strategic_posture": "first_class_runtime_lane",
+                    "summary": "Hexanal/MFT competition is active.",
+                    "kinetic_prior_ids": ["hexanal_radical_quench"],
+                    "hexanal_suppression_fraction": 0.12,
                 },
             },
         },
@@ -571,6 +581,9 @@ def test_render_flavor_axis_markdown_surfaces_active_family_lanes():
     assert "family_target_score_delta" in markdown
     assert "family_maillard_closure_delta" in markdown
     assert "lipid_benchmark_ready_targets" in markdown
+    assert "lipid_benchmark_marker_targets_ug_per_l" in markdown
+    assert "lipid_maillard_kinetic_priors" in markdown
+    assert "lipid_hexanal_suppression_fraction" in markdown
     assert "state_marker_thiamineavailability" in markdown
     assert "family_prior_bundle" in markdown
 

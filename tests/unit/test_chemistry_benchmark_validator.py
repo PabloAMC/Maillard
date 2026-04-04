@@ -127,7 +127,7 @@ def test_validator_reads_candidate_indexed_geometry_assessment(tmp_path):
     assert row["stop_reasons"] == []
 
 
-def test_p4_assessment_and_adoption_notes_render_current_registry():
+def test_mlp_assessment_and_adoption_notes_render_current_registry():
     payload = build_mlp_assessment_artifact()
     markdown = render_mlp_assessment_markdown(payload)
     decisions = build_adoption_decisions_from_assessment(payload)
@@ -139,7 +139,7 @@ def test_p4_assessment_and_adoption_notes_render_current_registry():
 
     assert payload["summary"]["candidate_count"] >= 3
     assert any(row["decision"] == "quarantine" for row in payload["candidates"])
-    assert "P4 MLP Assessment" in markdown
+    assert "MLP Assessment" in markdown
     assert "External Prior" in markdown
     assert note_payload["summary"]["default_policy"] == "no_default_mlp_until_reaction_benchmark_passes"
-    assert "P4 Adoption Notes" in note_markdown
+    assert "MLP Adoption Notes" in note_markdown

@@ -4,6 +4,35 @@
 
 Build the most useful computational tool for scientists who want to imitate meat-like Maillard chemistry in plant-based systems.
 
+## Current Execution Slice
+
+### Active Slice: 2026-04-04 Literature Intake Priorities After Mixed-Matrix Cleanup
+
+- [x] Confirm the visible scatter outlier is the Cerny 2008 reference-only anchor, not an experimental benchmark regression.
+- [x] Standardize validation-overview benchmark labels and visually distinguish reference-only anchors from wet-lab measured comparators.
+- [x] Reclassify `pmc_2026_hme_hexanal_baseline` onto its honest runtime surface: encode the extracted HME control points as Family 11 flavor-reference payloads, keep the executable-benchmark blockers explicit, and stop short of inventing final-blend pH or water activity.
+- [x] Close the Family 12 intake loop for `acs_2022_pba_lysine_loss_benchmark` by wiring it to the already-encoded safety reference payload, so the learning loop reports it as encoded instead of template-required.
+- [x] Run a strict literature triage for an external pea/soy mixed meaty-positive benchmark package; the SLR still resolves this as a wet-lab-only structural gap, so the blocker now stays explicit instead of being backfilled from internal lanes.
+- [x] Reassess whether the next addition after those payload-state fixes should be runtime-only literature support or another benchmark lane, using the refreshed `literature_learning_loop` and objective-progress artifacts.
+
+Strict triage verdict: no external pea/soy mixed meaty-positive benchmark package currently satisfies the benchmark contract. The next addition should therefore stay on runtime or reference-support lanes, or on benchmark lanes outside this mixed pea/soy closure gap, until a real wet-lab package exists.
+
+### S12. Scaling the Literature Pipeline & Uncertainty
+
+Based on a structural reflection of the matrix-literature pipeline, the strict separation of Runtime vs. Benchmark data (and the 8-point SLR) successfully prevents overfitting but fundamentally bottlenecks progress because perfect alternative-protein literature is sparse. To ensure robust high-quality predictions moving forward, we must mathematically formalize uncertainty when literature is missing, scale ingestion, and establish a closed feedback loop with wet-lab scientists.
+
+#### S12.1: Formal Uncertainty Quantification (UQ)
+- [ ] Replace narrative "trust heuristics" (e.g., Extrusion Exploratory Mode) with explicit mathematical confidence intervals (e.g., via parametric variance or Gaussian Processes) for out-of-domain predictions.
+- [ ] Propagate UQ bounds into the predicted volatile headspace (ppb) figures so scientists know the exact variance of un-benchmarked estimates.
+
+#### S12.2: Automated LLM-Assisted Payload Extraction
+- [ ] Build an automated ingestion pipeline that parses eligible Deep Research summaries into canonical `benchmark_payload` JSONs to accelerate closing the ~150-paper backlog.
+- [ ] Include a strict human-in-the-loop review interface to guarantee the 8-point SLR criteria are strictly maintained before merging into the main pipeline.
+
+#### S12.3: Model-Guided Active Learning (DoE Feedback Loop)
+- [ ] Formalize the "Structural Gaps" into explicit Design of Experiments (DoE) workflows.
+- [ ] Implement an API so that when the system identifies a critical gap (e.g., lack of MFT/FFT data in SPI extrudates), it auto-generates a precise wet-lab protocol optimized for maximal model calibration gain.
+
 The product question remains:
 
 Which formulation and process changes are most worth testing next if the goal is meat-like aroma under plant-matrix constraints?
@@ -278,97 +307,7 @@ All 8 major foundation sprints are complete as of 2026-03-23. The work comprises
 - **S7** (Execution record): All planned phases (A–E) completed; family ingestion/runtime/validation/reporting now unified under family-lane architecture. ✓
 - **S8** (Definition of done): All criteria met; 10 numbered SLR families have explicit machine-readable lanes, no family relies on markdown-only narrative, reports explain active lanes with evidence strength, quantitative trunk intact, structural gaps remain explicit. ✓
 
-### S0–S0d: Script Quality Improvements (Completed)
-
-**Goal**: Refactor main orchestration scripts and deep library code quality without altering scientific logic.
-
-**Implementation closure**:
-- The 2026-03-23 audit found no remaining unchecked S0/S0b/S0c/S0d implementation work in the active codebase.
-- All three main scripts modularized with clear function boundaries, docstrings, type hints.
-- Logger, config, and typed exceptions centralized in `src/logger.py`, `src/config.py`, `src/exceptions.py`.
-- Removed `sys.exit(1)`, consolidated `_normalize_name` and `_canon` into `src/text_utils.py` and `src/chem_utils.py`.
-- Removed dead interactive `__main__` stubs, deprecated legacy `predict()` flow.
-- Scripts use logging instead of stdout; no hardcoded magic constants.
-- Tests pass via `docker_maillard.sh pytest`.
-
-### S1: Chemistry-Family Positioning (Completed)
-
-**Goal**: Expand beyond amino acid–sugar without losing the core; explicitly name which families are core/partial/bounded/gap.
-
-**Implementation closure**:
-- `src/family_strategy_policy.py` derives machine-readable strategy, fixes lipid oxidation and carbonylic crosstalk as next expansion.
-- Same artifact classifies families into first-class core, high-priority partial, bounded, and open gaps.
-- P4 archived as infrastructure; DFT reserved for TS-sensitive gaps; MLPs kept as bounded offline accelerators.
-- Amino acid–sugar core remains quantitative trunk.
-
-### S2: Literature Generalization to Family-Aware Execution (Completed)
-
-**Goal**: Every SLR family becomes first-class ingestible unit while preserving benchmark and reporting machinery.
-
-**Implementation closure**:
-- `data/lit/chemistry_family_scope_registry.json` and `data/lit/family_ingestion_plan.json` use canonical `family_id` keys.
-- All payload surfaces extended with family metadata: `benchmark_intake_registry.json`, `flavor_reference_payloads.json`, `retention_reference_payloads.json`, `computational_priors.json`, `process_gap_registry.json`, `matrix_decision_panel.json`.
-- `src/literature_learning_loop.py` generalized; template generation driven by declared payload role.
-- Generalized payload vocabulary: `benchmark_payload`, `flavor_reference_payload`, `retention_payload`, `process_state_calibration`, `computational_prior`, `safety_payload`, `structural_gap_entry`.
-- `results/validation/literature_learning_loop.{md,json}` and `results/validation/literature_runtime_templates.json` generated with family-aware summaries.
-
-### S3: Runtime Refactoring to Family-Aware Registries (Completed)
-
-**Goal**: Replace family-specific hardcoding with indexed family queries.
-
-**Implementation closure**:
-- `src/literature_runtime.py` exposes `query_family_runtime_priors(...)`, `query_flavor_reference_entries(...)`, `query_retention_reference_entries(...)`.
-- Legacy getters (`get_pyrazine_control_priors`, `get_furanone_priors`, etc.) remain as thin compatibility wrappers.
-- Three runtime concepts separated: reference payloads, retention payloads, family priors.
-- `src/matrix_prior_registry.py` extended with `query_family_prior_entries(...)` and `summarize_family_prior_bundle(...)`.
-- `build_flavor_axis_summary(...)` now exposes `family_prior_bundle` for scientist-facing diagnostics.
-
-### S4: Decision Panel Expansion (Completed)
-
-**Goal**: Observable panel now covers all family lanes, not just original targets.
-
-**Implementation closure**:
-- Decision panel split into 8 explicit family lanes with metadata: `panel_role`, `observable_kind`, `modeling_regimes`.
-- Non-volatile state variables (nucleotide enrichment, fermentation precursor loading, thiamine, process severity) now first-class outputs.
-- `build_flavor_axis_summary(...)` emits `family_state_markers` with influence modes (`upstream_state_only` vs `upstream_state_plus_marker_panel`).
-- `src/presentation.py` surfaces panel metadata in projection tables and diagnostics.
-
-### S5: New Family Lanes Implementation (Completed)
-
-**Goal**: Sequence work to maximize product value quickly.
-
-**Implementation closure** (lanes 1–5):
-- **Lane 1 (Lipid oxidation/crosstalk)**: Explicit dual-lane with benchmark targets + retention and crosstalk priors. `maillard_closure_pressure` surfaced. Off-note markers and closure delta wired into projection.
-- **Lane 2 (Donor hierarchy)**: Ribose, xylose, glucose, fructose, phosphorylated sugars, specialty donors no longer interchangeable. `src/precursor_resolver.py` updated; donor-family evidence in outputs.
-- **Lane 3 (Fermentation pretreatment)**: Bounded pretreatment node upstream of cooking; modifies precursor pools, nucleotide support, thiamine, off-note burden, pH. Uses literature-backed fold-change payloads.
-- **Lane 4 (Thiamine/nucleotides/glutathione)**: Support lanes once donor hierarchy and fermentation exist. Upstream availability modifiers + bounded thermal-routing priors.
-- **Lane 5 (Caramelization/degradation)**: Severity and failure-mode lane; alternative proteins primarily in matrix-family coverage.
-- `src/literature_runtime.py` exposes `build_family_upstream_contract(...)` for donor reweighting, pretreatment pH shifts, support activation.
-- `src/pipeline.py` applies upstream contract before pathway enumeration.
-- `src/presentation.py` surfaces effective runtime pH, donor routing, pretreatment interventions, upstream-added precursors.
-
-### S6: Family-Lane Validation and Reporting (Completed)
-
-**Goal**: User-facing trust surface shows what each family is doing.
-
-**Implementation closure**:
-- `src/benchmark_validation.py` enriched with chemistry-family, SLR-family, payload-role metadata; exposes `build_family_lane_validation_artifact(...)`.
-- `src/presentation.py` shows chemistry-family and payload-role columns in benchmark summaries.
-- `src/reporting.py` adds `family_evidence_ladder`, `family_runtime_support_summary`, `family_specific_open_gaps`, per-run `family_lane_sensitivity` to JSON and Markdown reports.
-- `src/family_lane_sensitivity.py` provides toggle-impact artifact distinct from barrier-offset sensitivity.
-
-### S7: Execution Sequence (Completed)
-
-**Goal**: Record implemented phases A–E for traceability.
-
-**Implementation closure** (all phases complete):
-- **Phase A** (Data model/ingestion): Family-aware metadata flows through registries; `src/family_ingestion_plan.py` builds and renders plan; `src/literature_learning_loop.py` summarizes by family/payload-role.
-- **Phase B** (Runtime refactor): Family-aware query helpers in `src/literature_runtime.py`; family-aware prior accessor in `src/matrix_prior_registry.py`; legacy wrappers stable.
-- **Phase C** (First new family): Lipid oxidation/crosstalk wired; family-level outputs in reporting and recommendation explanations.
-- **Phase D** (Upstream enabling): Donor hierarchy, fermentation pretreatment, thiamine/nucleotide/glutathione support all implemented.
-- **Phase E** (Coverage/trust): Decision panel expanded, family-aware validation summaries, family open-gap reporting.
-
-### S8: Definition of Done (Completed)
+*(Verbose closure artifacts for S0-S8 removed for brevity. See legacy commits for details on script quality refactors, early data model structures, and fundamental runtime refactorings).*
 
 ## The Three Modeling Regimes
 
@@ -458,31 +397,52 @@ Phase P0.2: Build benchmark-grade pea and soy targets
 
 ### Tier 1 — High-impact, literature-closable (no wet-lab)
 
-#### 5.1 Extrusion Process Model — **[L4 | Blocked on design decision]**
+#### 5.1 Extrusion Process Model — **[L3 | Implemented with sequential isothermal zone model]**
 The dominant commercial PBMA process (extrusion) is the weakest regime in the tool. Report 12 provides the calibration data.
 
-- [ ] **5.1a SME as independent process variable**: Add `sme_kj_per_kg` to `ReactionConditions`; compute `T_effective = T_jacket + f(SME)` correction from Report 12 SME–temperature offset data (5–40°C delta).
-- [ ] **5.1b Moisture regime classifier**: Add `moisture_regime: Literal['lme', 'hme']` to conditions; flip sign of `∂acrylamide/∂moisture` in `predict_acrylamide()` for LME (<40%) vs HME (>50%).
-- [ ] **5.1c Pre-extrusion damage base load**: Add `pre_extrusion_damage_load(protein_type)` returning baseline furosine and LAL from alkaline extraction + spray drying.
-- [ ] **5.1d Autoclave sterilization step**: Model as a discrete additive damage increment (121–126°C, 15–30 min) separate from extruder.
-- [ ] **5.1e Spatial discretization (pending scope decision)**: Either plug-flow reactor model or sequential isothermal zone model for barrel.
+- [x] **5.1a SME as independent process variable**: Added `sme_kj_per_kg` to `ReactionConditions`; effective extrusion temperature now applies an SME-driven correction with a 5–40°C bounded offset.
+- [x] **5.1b Moisture regime classifier**: Added `moisture_regime: Literal['lme', 'hme']`-style runtime handling in conditions and flipped `predict_acrylamide()` moisture dependence between LME and HME.
+- [x] **5.1c Pre-extrusion damage base load**: Added `pre_extrusion_damage_load(protein_type)` returning baseline furosine and LAL loads for concentrate/isolate regimes.
+- [x] **5.1d Autoclave sterilization step**: Added a discrete sterilization damage increment (121–126°C, 15–30 min) layered separately from the extruder barrel.
+- [x] **5.1e Spatial discretization**: Scoped to a sequential isothermal zone model for the barrel and surfaced through extrusion process metadata.
 
 #### 5.2 Protein Source Registry — **[L3]**
 Report 06 produced meaty potential multipliers for 14 protein sources. None are encoded at runtime.
 
-- [ ] Create `data/lit/protein_source_registry.json` with AA composition, meaty potential multiplier, off-note penalty, LOX activity flag, and methoxypyrazine ceiling per source.
-- [ ] Wire registry into `matrix_correction.py` so switching protein source auto-adjusts correction factors.
-- [ ] Add CLI `--protein-source` flag to `run_pipeline.py` that selects from the registry.
-- [ ] Include engineering heuristics from Report 06 (e.g., methoxypyrazine non-correctable flag for pea >50%, wheat gluten Cys advantage for MFT).
+- [x] Create `data/lit/protein_source_registry.json` with AA composition, meaty potential multiplier, off-note penalty, LOX activity flag, and methoxypyrazine ceiling per source.
+- [x] Wire registry into `matrix_correction.py` so switching protein source auto-adjusts correction factors.
+- [x] Add CLI `--protein-source` flag to `run_pipeline.py` that selects from the registry.
+- [x] Include engineering heuristics from Report 06 (e.g., methoxypyrazine non-correctable flag for pea >50%, wheat gluten Cys advantage for MFT).
 
 #### 5.3 Ingest Benchmark-Eligible Deep Research Data — **[L2]**
-~20 benchmark-eligible datasets exist in the Gemini Deep Research corpus but aren't wired into the runtime.
+Over 150 benchmark-eligible datasets exist in the Gemini Deep Research corpus (~176 tracked) but aren't wired into the runtime.
 
-- [ ] **SPI-HVP + xylose**: Ingest MFT OAV 450, FFT OAV 84 (120°C, 30 min, pH 6.0) as a matrix benchmark.
-- [ ] **Wheat gluten HVP + xylose**: Ingest MFT OAV 850 as the highest-MFT plant-source reference.
-- [ ] **Acrylamide fast kinetics**: Calibrate `predict_acrylamide()` against 22.36→62.62 µg/kg in 20–30s at 130°C.
-- [ ] **CML/CEL commercial PBA ranges**: Validate `predict_cml()` and `predict_cel()` against 20+ product dataset (Foods 2023).
-- [ ] **Furosine formation-elimination crossover**: Validate non-monotonic behavior (peak ~8.7 mg/100g at 140°C, fall above 150°C).
+- [x] **Deep Research Tracker Implementation**: Created `scripts/deep_research_tracker.py` to continuously parse `.md` files and track ingested vs backlog state.
+- [x] **SPI-HVP + xylose**: Ingested as `data/benchmarks/spi_hvp_xylose_120C_PMC9905368.json` with runtime protein-source wiring and Docker-validated benchmark execution.
+- [x] **Wheat gluten HVP + xylose**: Ingested as `data/benchmarks/wheat_gluten_hvp_xylose_120C_PMC9905368.json` and validated as the stronger MFT plant-source benchmark.
+- [x] **Acrylamide fast kinetics**: Added an extrusion-context benchmark and routed safety benchmarking through effective extrusion temperature so the 22.36→62.62 µg/kg short-residence point is runtime-bound.
+- [x] **CML/CEL commercial PBA ranges**: Added `predict_cml()` and `predict_cel()` proxy surfaces plus a Foods 2023 benchmark and safety reference payload bindings.
+- [x] **Furosine formation-elimination crossover**: Added `predict_furosine()` proxy behavior, a crossover benchmark, and reference payload wiring so the post-150°C decline is explicit rather than hidden.
+
+#### 5.3 Next Runtime Queue — **[L2 | Active]**
+The tracker now needs a machine-readable family queue so we stop selecting the next ingestion tranche manually.
+
+- [x] **5.3q1 Family-prioritized backlog artifact**: Extend `family_ingestion_plan` so it merges Deep Research backlog counts with family posture, implementation wave, and runtime module targets.
+- [x] **5.3q2 Docker entrypoint**: Expose a named Docker command for generating `results/validation/family_ingestion_plan.{md,json}` from the current audit state.
+- [x] **5.3q3 Next closure slice**: Execute Family 11 `lipid_maillard_crosstalk` as the next benchmark-facing slice, with Family 02 lipid adverse-marker vs carbonyl-competition cleanup as the prerequisite cut. Family 02 now exposes Trikusuma 2019 benchmark anchors and target values directly in the runtime lane, and Family 11 now exposes explicit hexanal/MFT competition priors plus xTB/HME anchor metadata in `build_flavor_axis_summary()`.
+- [x] **5.3q3a Family 11 HME intake hardening**: Corrected the Foods 2026 HME intake entry to the exact paper (`10.3390/foods15050912`), encoded the confirmed pretreatment and extrusion method details from `data/lit/foods-15-00912.pdf`, and kept the executable-benchmark blockers explicit (`final-blend pH` and direct `water_activity/aw` still missing).
+- [x] **5.3q3b Benchmark condition alias cleanup**: `src/benchmark_validation.py` now accepts both canonical `conditions.water_activity` and alias `conditions.aw`, so benchmark payloads and matrix-only paths do not silently diverge on moisture semantics. Docker validation passed on the touched subset.
+- [ ] **5.3q3c Family 11 closure follow-up**: Find a companion source for the same SPI/wheat-gluten HME system that reports final-blend pH or direct `aw`; if none exists, keep `pmc_2026_hme_hexanal_baseline` intake-only and route it only as a runtime/reference anchor.
+   - [x] Review candidate PDF `data/lit/1-s2.0-S0260877423001632-main.pdf` for exact-system pH/aw closure support. Result: useful process analogue for WG hydrolysate plasticization in SP-WG HME, but still no direct `aw` and no final extrudate pH for the exact Family 11 volatile anchor system.
+   - [x] Review candidate PDF `data/lit/foods-12-00912.pdf` for exact-system pH/aw closure support. Result: useful HSPI/SP-WG HME structural-process analogue, but it does not report direct `aw` and does not close final-blend pH for the Family 11 control.
+   - [x] If neither candidate closes Family 11, move immediately to the next literature-ingestion priority instead of stretching the HME claim.
+- [x] **5.3q4 Follow-on support lane**: Family 03 is now promoted from availability-only to calibrated sulfur-support runtime logic. The runtime lane uses Hofmann 1996 as a conservative synergy floor, Cerny 2008 as the mixed-system pH-calibrated benchmark anchor, and De Leyn 2019 as the extrusion-survival attenuation anchor; focused Docker validation passed on `tests/scientific/test_family03_benchmark.py` and `tests/unit/test_literature_runtime.py` (35 passed).
+
+Review 2026-04-03:
+- The Foods 2026 HME paper is now encoded as a stronger Family 11 intake anchor, but still does not justify executable benchmark promotion.
+- Local repo search did not surface a strong in-repo companion source already carrying the missing final-blend pH or water activity for this exact HME system.
+- Family 03 support-lane promotion is already landed and now validated as complete at the runtime and benchmark level; the next unresolved literature-ingestion blocker remains Family 11 closure, not thiamine support.
+- The two newly downloaded HME-adjacent candidates (`1-s2.0-S0260877423001632-main.pdf` and `foods-12-00912.pdf`) help on process analogues and moisture framing, but neither closes the exact Family 11 benchmark blockers (`final-blend pH`, direct `aw`).
 
 #### 5.4 Kinetic Mode Documentation & User Exposure — **[L1]**
 The ODE kinetics engine is a P1 deliverable but invisible to users.
@@ -505,9 +465,14 @@ Current onboarding is too terse and assumes computational background.
 #### 5.6 Explicit Carbonyl Donor Hierarchy — **[L3]**
 Ribose, xylose, glucose are not interchangeable (ribose generates 5–10× more MFT). Currently collapsed to near-generic treatment.
 
-- [ ] Add sugar reactivity multipliers to `barrier_constants.py` keyed on donor identity.
-- [ ] Wire donor identity into `ode_kinetics.py` rate constant computation.
-- [ ] Add benchmark test comparing ribose vs glucose MFT yield at equivalent conditions.
+- [x] Add sugar reactivity multipliers to `barrier_constants.py` keyed on donor identity.
+- [x] Wire donor identity into the shared kinetic rate path (`src/conditions.py`, `src/kinetics.py`, `src/pipeline.py`, `src/benchmark_validation.py`) so reactant labels can penalize slow hexose routing without inflating already-calibrated pentose baselines.
+- [x] Add benchmark test comparing ribose vs glucose MFT yield at equivalent conditions.
+
+Review 2026-04-03:
+- Carbonyl-donor identity is now passed from enumerated reactant labels into the rate-constant path, keeping ribose as the calibrated baseline and expressing hierarchy mainly as a glucose penalty plus a modest phosphorylated-donor uplift.
+- Focused validation passed for the new donor-hierarchy slice: `tests/unit/test_barrier_constants.py::TestDonorReactivityMultipliers`, `tests/unit/test_conditions.py::test_rate_constant_respects_carbohydrate_donor_identity_context`, and `tests/scientific/test_free_aa_quantitative_regression.py::test_ribose_beats_glucose_for_equal_condition_mft_prediction`.
+- A broader pre-existing regression still remains in `tests/scientific/test_free_aa_quantitative_regression.py::test_primary_free_amino_acid_benchmarks_stay_locally_calibrated` for `cys_ribose_150C_Mottram1994`; it was not reopened here because this slice was constrained to donor-discrimination wiring rather than full free-AA recalibration.
 
 #### 5.7 Bidirectional Lipid-Maillard Crosstalk — **[L4]**
 Currently one-directional (LOPs → Maillard). Missing: dicarbonyl → lipid oxidation catalysis, melanoidin → antioxidant protection.
@@ -748,10 +713,10 @@ Goal: ensure a scientist can see why a prediction should or should not be truste
 - [x] Matrix family coverage now generates data/lit/matrix_family_coverage_registry.json plus results/validation/matrix_family_coverage.{md,json}, explicitly separating direct matrix-family support from indirect generic support and making the coconut-oil co-matrix gap visible.
 - [x] Refinement watchlist now generates results/validation/refinement_watchlist.{md,json} plus results/validation/offline_dft_jobs.json to keep expensive refinement benchmark-facing and offline.
 - [x] Docker validation passed on the expanded L4/P0/P1 suite: 71 tests green across matrix status, refinement watchlist, benchmark evidence, target snapshots, accessibility, reporting, and projection contracts.
-- [x] P4 reaction-centered benchmarking now materializes data/lit/reaction_benchmark_set.json plus results/validation/p4_reaction_benchmark.{md,json}.
-- [x] P4 geometry benchmarking now materializes data/lit/p4_geometry_benchmark_set.json plus results/validation/p4_geometry_benchmark.{md,json} and results/validation/p4_geometry_assessment.{md,json}.
-- [x] P4 MLP governance now materializes data/lit/mlp_candidate_registry.json plus results/validation/p4_mlp_assessment.{md,json} and results/validation/p4_adoption_notes.{md,json}, with ResultsDB persistence for adoption decisions.
-- [x] P4 now also materializes data/lit/mlp_external_benchmark_evidence.json plus results/validation/p4_external_mlp_landscape.{md,json}, making external community evidence explicit as shortlist priority rather than as a substitute for local Maillard validation.
+- [x] Reaction-centered benchmarking now materializes data/lit/reaction_benchmark_set.json plus results/validation/mlp_reaction_benchmark.{md,json}.
+- [x] Geometry benchmarking now materializes data/lit/geometry_benchmark_set.json plus results/validation/mlp_geometry_benchmark.{md,json} and results/validation/mlp_geometry_assessment.{md,json}.
+- [x] MLP governance now materializes data/lit/mlp_candidate_registry.json plus results/validation/mlp_assessment.{md,json} and results/validation/mlp_adoption_notes.{md,json}, with ResultsDB persistence for adoption decisions.
+- [x] The external evidence lane now also materializes data/lit/mlp_external_benchmark_evidence.json plus results/validation/mlp_external_mlp_landscape.{md,json}, making external community evidence explicit as shortlist priority rather than as a substitute for local Maillard validation.
 - [x] The current P4 outcome is explicit: mace_off_medium is quarantined for barrier-surrogate use, while mace_mp_small is accepted only for bounded offline geometry pre-optimization with fallback to r2SCAN-3c plus wB97M-V.
 - [x] The current shortlist policy is explicit: AIMNet2, OrbMol, and MACE-OMOL are high-priority chemistry-first candidates because of external molecular evidence, but they remain deferred locally until geometry or TS benchmark evidence exists on Maillard-relevant systems.
 - [x] Docker validation passed on the expanded P4 suite: 23 tests green across geometry benchmarks, reaction benchmarks, chemistry benchmark validation, reporting surface exposure, and MLP adoption persistence.
