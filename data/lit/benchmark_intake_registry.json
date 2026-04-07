@@ -1,0 +1,3876 @@
+{
+  "generated_at": "2026-04-03",
+  "source_document": "docs/slr_benchmark_evaluation.md",
+  "notes": "Structured intake registry derived from the SLR benchmark evaluation. This is a planning and curation artifact, not an executable benchmark surface. Operational benchmark intake registry: curated entries only. Markdown-derived backlog candidates live in data/lit/deep_research_candidate_registry.json.",
+  "eligible_references": [
+    {
+      "id": "nishimura_abe_2024",
+      "citation": "Nishimura & Abe (2024), Food Chemistry 464:141599",
+      "doi": "10.1016/j.foodchem.2024.141599",
+      "kind": "conditional_calibration",
+      "chemistry_family": "glutathione_and_peptide_support",
+      "slr_family_source": "05",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "core_meaty",
+        "matrix_intake",
+        "peptide_support"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "01",
+        "10"
+      ],
+      "target_modules": [
+        "soy_matrix_meaty",
+        "matrix_correction",
+        "headspace"
+      ],
+      "matrix_family": "soy_hydrolysate",
+      "eligibility": "conditional",
+      "status": "reviewed_qualitative_only",
+      "what_it_supports": [
+        "Confirms soy-protein hydrolysate chemistry for cysteine + ribose under a protein-matrix preparation workflow",
+        "Provides a soy-specific qualitative volatile panel under 95 C / 90 min MRP conditions",
+        "Remains the closest available literature proxy for a soy meaty-positive matrix intake record"
+      ],
+      "what_it_does_not_support": [
+        "SPI isolate benchmark promotion",
+        "Absolute ppb encoding for MFT or FFT",
+        "Internal-standard quantitative volatile benchmarking",
+        "Ranked target validation against calibrated per-compound concentrations"
+      ],
+      "key_values": {
+        "soy_protein_starting_slurry_mg_per_ml": 75.0,
+        "mrp_soy_hydrolysate_mg_per_ml": 62.5,
+        "cysteine_mM": 16.5,
+        "ribose_mM": 16.5,
+        "mrp_temp_C": 95,
+        "mrp_time_min": 90,
+        "sample_volume_ul": 200,
+        "spme_extraction_temp_C": 90,
+        "spme_extraction_time_min": 15,
+        "replicates": 3,
+        "volatile_output_mode": "relative_peak_area_z_transformed"
+      },
+      "repo_next_action": "Keep encoded as a qualitative soy-hydrolysate intake anchor and require primary SPI data for any benchmark JSON or absolute calibration surface.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "intake_registry_entry",
+          "artifact_id": "nishimura_abe_2024",
+          "path": "data/lit/benchmark_intake_registry.json"
+        },
+        {
+          "artifact_type": "slr_incorporation_ledger",
+          "artifact_id": "nishimura_abe_2024",
+          "path": "data/lit/slr_incorporation_matrix.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "wang_2012_gsh_xylose_sulfur_uplift",
+      "citation": "Wang, Z. et al. (2012)",
+      "doi": "10.1016/j.foodchem.2011.07.037",
+      "kind": "calibration_reference",
+      "chemistry_family": "glutathione_and_peptide_support",
+      "slr_family_source": "05",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "sulfur_support",
+        "peptide_support",
+        "glutathione_support"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "01",
+        "10"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "matrix_correction",
+        "reporting"
+      ],
+      "matrix_family": "glutathione_xylose_model",
+      "eligibility": "benchmark_eligible_parameter",
+      "status": "ready_for_calibration_encoding",
+      "what_it_supports": [
+        "Bounded sulfur-yield uplift when glutathione replaces free cysteine at equal loading",
+        "Family 05 support for higher MFT, FFT, and disulfide output with a pyrazine tradeoff"
+      ],
+      "what_it_does_not_support": [
+        "Absolute SPI or PPI benchmark closure in protein matrices",
+        "Sequence-specific peptide ranking beyond the bounded sulfur-peptide prior already encoded"
+      ],
+      "key_values": {
+        "temp_C": 120.0,
+        "time_h": 2.0,
+        "ph": 5.5,
+        "mft_ratio_vs_free_cysteine": 2.25,
+        "fft_ratio_vs_free_cysteine": 2.4,
+        "bis_furyl_disulfide_ratio_vs_free_cysteine": 4.4,
+        "pyrazine_ratio_vs_free_cysteine": 0.75,
+        "replicates": 3
+      },
+      "repo_next_action": "Keep the runtime landing compact by linking this citation to the existing Family 05 sulfur-peptide prior instead of cloning a second peptide-uplift payload.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "wang_xu_glutathione_peptide_support_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "sulfur_peptide_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "squeo_2023",
+      "citation": "Squeo et al. (2023), Foods 12(6):1331",
+      "doi": "10.3390/foods12061331",
+      "kind": "safety_reference",
+      "chemistry_family": "off_note_and_maillard_suppression",
+      "slr_family_source": "08",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "safety",
+        "acrylamide",
+        "guardrail"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "extrusion_structured"
+      ],
+      "target_modules": [
+        "safety"
+      ],
+      "matrix_family": "commercial_pbpi",
+      "eligibility": "benchmark_eligible_indirect",
+      "status": "ready_for_reference_encoding",
+      "what_it_supports": [
+        "Primary quantitative endpoint anchor for acrylamide in commercial soy and pea-derived protein ingredients",
+        "Upper-bound safety reference for processed SPI/pea systems"
+      ],
+      "what_it_does_not_support": [
+        "Kinetic reconstruction across temperature, time, and free asparagine",
+        "A free-precursor or controlled-process acrylamide benchmark"
+      ],
+      "key_values": {
+        "soy_wet_extraction_acrylamide_ug_per_kg": [
+          185,
+          748
+        ],
+        "wet_extraction_mean_ug_per_kg": 451,
+        "replicates": 3,
+        "lod_ng_per_ml": 7,
+        "loq_ng_per_ml": 24
+      },
+      "repo_next_action": "Expose as a safety-reference payload without misclassifying it as a kinetic benchmark.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "safety_reference",
+          "artifact_id": "squeo_2023_pbpi_acrylamide",
+          "path": "data/lit/safety_reference_payloads.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "asen_2022",
+      "citation": "Asen et al. (2022), Frontiers in Nutrition",
+      "doi": "10.3389/fnut.2022.852225",
+      "kind": "calibration_reference",
+      "chemistry_family": "alternative_protein_matrix_scope",
+      "slr_family_source": "06",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "matrix_state_support",
+        "process_state_calibration"
+      ],
+      "process_state_scope": [
+        "ambient_slurry",
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "target_modules": [
+        "matrix_correction"
+      ],
+      "matrix_family": "pea_protein",
+      "eligibility": "benchmark_eligible_parameter",
+      "status": "ready_for_calibration_encoding",
+      "what_it_supports": [
+        "Pea denaturation-state calibration as a function of pH and heating",
+        "DSC/Td anchor for thermal state heuristics"
+      ],
+      "what_it_does_not_support": [
+        "Full Ellman + OPA + DSC trifecta in one experiment",
+        "Exact PPI benchmark condition at pH 5.5 and 95C"
+      ],
+      "key_values": {
+        "base_td_celsius": 74.45,
+        "heated_fraction_td_celsius_range": [
+          124,
+          206
+        ],
+        "replicates": 3
+      },
+      "repo_next_action": "Encode as explicit denaturation-state calibration payload for pea process-state modeling.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "process_state_calibration",
+          "artifact_id": "asen_2022_pea_denaturation",
+          "path": "data/lit/process_state_calibrations.json"
+        },
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "pea_iso",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "denaturation_heuristics",
+            "matrix_corrections"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "li_2025",
+      "citation": "Li et al. (2025), Current Research in Food Science",
+      "doi": "10.1016/j.crfs.2025.101173",
+      "kind": "calibration_reference",
+      "chemistry_family": "alternative_protein_matrix_scope",
+      "slr_family_source": "06",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "matrix_state_support",
+        "process_state_calibration"
+      ],
+      "process_state_scope": [
+        "ambient_slurry",
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "target_modules": [
+        "matrix_correction"
+      ],
+      "matrix_family": "pea_protein",
+      "eligibility": "benchmark_eligible_parameter",
+      "status": "ready_for_calibration_encoding",
+      "what_it_supports": [
+        "Free-SH / Ellman anchor for pea cysteine accessibility under heating",
+        "Triplicate process-state calibration input"
+      ],
+      "what_it_does_not_support": [
+        "OPA-based lysine accessibility in the same experiment",
+        "Exact pH 5.5 PPI condition used by the candidate benchmark"
+      ],
+      "key_values": {
+        "assay": "DTNB / Ellman",
+        "signal_units": "nmol per mg protein",
+        "replicates": 3
+      },
+      "repo_next_action": "Encode as explicit cysteine-accessibility calibration payload for pea process-state modeling.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "process_state_calibration",
+          "artifact_id": "li_2025_pea_free_sh",
+          "path": "data/lit/process_state_calibrations.json"
+        },
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "pea_iso",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "accessibility_windows",
+            "matrix_corrections"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "de_leyn_2019",
+      "citation": "De Leyn & Muylle (2019), JAFC 67:9842",
+      "doi": "",
+      "kind": "calibration_reference",
+      "chemistry_family": "thiamine_fragmentation_support",
+      "slr_family_source": "03",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "thiamine_support",
+        "process_state_calibration",
+        "extrusion_survival"
+      ],
+      "process_state_scope": [
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "matrix_correction",
+        "headspace"
+      ],
+      "matrix_family": "soy_protein_extrusion",
+      "eligibility": "benchmark_eligible_parameter",
+      "status": "ready_for_calibration_encoding",
+      "what_it_supports": [
+        "Quantitative thiamine-survival attenuation for pre-extrusion fortification in soy-like structured matrices",
+        "Family 03 runtime calibration for barrel-temperature severity rather than binary thiamine availability",
+        "Scientist-facing evidence that high-moisture extrusion destroys most free thiamine before downstream flavor generation"
+      ],
+      "what_it_does_not_support": [
+        "Direct MFT or FFT quantification in the same extrusion run",
+        "Post-extrusion thiamine addition or encapsulation release behavior",
+        "A complete plant-matrix volatile benchmark by itself"
+      ],
+      "key_values": {
+        "barrel_temp_C": [
+          140.0,
+          160.0,
+          180.0
+        ],
+        "reference_moisture_pct": 65.0,
+        "thiamine_retention_pct_by_temp": {
+          "140.0": 68.0,
+          "160.0": 31.0,
+          "180.0": 8.0
+        },
+        "thiamine_retention_pct_180C_75pct_moisture": 4.0,
+        "estimated_half_life_min_by_temp": {
+          "140.0": 4.2,
+          "160.0": 1.6,
+          "180.0": 0.6
+        },
+        "replicates": 3,
+        "volatile_output_mode": "thiamine_retention_hplc"
+      },
+      "repo_next_action": "Use as the Family 03 extrusion-survival calibration anchor so pre-extrusion thiamine is down-weighted instead of treated as fully available support.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "process_state_calibration",
+          "artifact_id": "de_leyn_2019_thiamine_retention",
+          "path": "data/lit/process_state_calibrations.json"
+        },
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "cerny_2007_thiamine_split_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "thiamine_pathway_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "comunian_2021_thiamine_encapsulation",
+      "citation": "Comunian et al. (2021)",
+      "doi": "10.1016/j.foodres.2021.110345",
+      "kind": "calibration_reference",
+      "chemistry_family": "thiamine_fragmentation_support",
+      "slr_family_source": "03",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "thiamine_support",
+        "process_state_calibration",
+        "encapsulation",
+        "delayed_release"
+      ],
+      "process_state_scope": [
+        "pre_extrusion_additive",
+        "consumer_cook_finish"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "matrix_correction",
+        "reporting"
+      ],
+      "matrix_family": "encapsulated_thiamine_additive",
+      "eligibility": "benchmark_eligible_parameter",
+      "status": "ready_for_calibration_encoding",
+      "what_it_supports": [
+        "Bounded protected-thiamine survival at extrusion-like severity",
+        "Cook-triggered sulfur-support framing for encapsulated additives instead of free-thiamine assumptions"
+      ],
+      "what_it_does_not_support": [
+        "Commercial twin-screw extrusion shear closure",
+        "Direct meaty sulfur output in the same run"
+      ],
+      "key_values": {
+        "thermal_severity_temp_C": 180.0,
+        "thermal_severity_time_min": 2.0,
+        "free_thiamine_retention_pct": 8.0,
+        "maltodextrin_gum_arabic_retention_pct": 71.0,
+        "alginate_bead_retention_pct": 84.0,
+        "release_window_c": [
+          90.0,
+          100.0
+        ],
+        "replicates": 3
+      },
+      "repo_next_action": "Use as the compact Family 03 protected-thiamine calibration anchor so delayed-release support is bounded without inflating the intake registry.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "process_state_calibration",
+          "artifact_id": "comunian_2021_thiamine_encapsulation",
+          "path": "data/lit/process_state_calibrations.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "voelker_2021_thiamine_kinetics",
+      "citation": "Voelker, Taylor & Mauer (2021)",
+      "doi": "",
+      "kind": "calibration_reference",
+      "chemistry_family": "thiamine_fragmentation_support",
+      "slr_family_source": "03",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "thiamine_support",
+        "arrhenius_anchor",
+        "process_state_calibration"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "matrix_correction"
+      ],
+      "matrix_family": "aqueous_thiamine_model",
+      "eligibility": "benchmark_eligible_parameter",
+      "status": "ready_for_calibration_encoding",
+      "what_it_supports": [
+        "Primary Family 03 Arrhenius anchor for pH-sensitive thiamine disappearance",
+        "Bounded concentration dependence at neutral pH instead of a single global disappearance rate"
+      ],
+      "what_it_does_not_support": [
+        "Direct MFT-forming step kinetics separate from overall thiamine disappearance",
+        "Real plant-matrix metal effects without an explicit cofactor correction"
+      ],
+      "key_values": {
+        "temp_c_points": [
+          40.0,
+          55.0,
+          70.0
+        ],
+        "ph_points": [
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0
+        ],
+        "tmn_low_conc_k_obs_per_h_ph3_70c": 0.0011,
+        "tmn_low_conc_k_obs_per_h_ph6_70c": 0.0435,
+        "tmn_low_conc_ea_kcal_per_mol_ph3": 28.4,
+        "tmn_low_conc_ea_kcal_per_mol_ph6_midpoint": 18.5,
+        "neutral_ph_high_concentration_multiplier": 9.3,
+        "storage_retention_pct_25c_ph3_day392": 91.0,
+        "replicates": 3
+      },
+      "repo_next_action": "Use as the primary Family 03 Arrhenius calibration anchor while keeping Cerny as the default flavor-yield prior for the runtime lane.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "voelker_2021_thiamine_arrhenius_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "thiamine_pathway_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "huang_2022_thiamine_metal_catalysis",
+      "citation": "Huang (2022)",
+      "doi": "",
+      "kind": "calibration_reference",
+      "chemistry_family": "thiamine_fragmentation_support",
+      "slr_family_source": "03",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "thiamine_support",
+        "matrix_correction",
+        "metal_catalysis"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model"
+      ],
+      "target_modules": [
+        "matrix_correction",
+        "literature_runtime"
+      ],
+      "matrix_family": "metal_catalyzed_thiamine_model",
+      "eligibility": "benchmark_eligible_parameter",
+      "status": "ready_for_calibration_encoding",
+      "what_it_supports": [
+        "Bounded Fe3+ and Cu+ acceleration factors for thiamine loss in metal-bearing matrices",
+        "A direct matrix-correction bridge from aqueous thiamine kinetics to iron-rich plant systems"
+      ],
+      "what_it_does_not_support": [
+        "Compound-specific sulfur volatile closure under the same run",
+        "Extrusion shear effects beyond metal-assisted degradation"
+      ],
+      "key_values": {
+        "ph": 6.0,
+        "temp_c_points": [
+          25.0,
+          55.0
+        ],
+        "fe3_acceleration_vs_control": 19.0,
+        "cu_plus_acceleration_vs_control": 12.0,
+        "fe2_acceleration_vs_control": 8.0,
+        "zn2_acceleration_vs_control": 1.5,
+        "fe3_loss_pct_55c_day7": 95.98,
+        "replicates": 3
+      },
+      "repo_next_action": "Use as the compact Family 03 matrix-correction anchor for iron- and copper-rich systems without changing the default thiamine flavor prior.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "huang_2022_thiamine_metal_catalysis_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "thiamine_pathway_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "cerny_guntz_dubini_2008",
+      "citation": "Cerny & Guntz-Dubini (2008), JAFC 56:5138",
+      "doi": "10.1021/jf800268t",
+      "kind": "quantitative_benchmark",
+      "chemistry_family": "thiamine_fragmentation_support",
+      "slr_family_source": "03",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "core_meaty",
+        "thiamine_support",
+        "mft",
+        "sulfur_support"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "01",
+        "07"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "optimizer",
+        "reporting"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "pH-resolved quantitative MFT surface for thiamine alone at 145 C / 20 min",
+        "Mixed thiamine plus cysteine plus xylose uplift near the pH 5.5 to 6.0 optimum window",
+        "Benchmark-facing anchor for Family 03 sulfur support instead of generic availability-only heuristics"
+      ],
+      "what_it_does_not_support": [
+        "SPI or PPI matrix retention effects",
+        "Extrusion survival before cooking",
+        "A complete consumer-cook kinetic reconstruction outside the reported pH and temperature window"
+      ],
+      "key_values": {
+        "temp_C": 145.0,
+        "time_min": 20.0,
+        "ph_points": [
+          4.0,
+          5.0,
+          6.0,
+          7.0,
+          8.0
+        ],
+        "thiamine_alone_mft_ug_per_g": {
+          "4.0": 0.02,
+          "5.0": 0.14,
+          "6.0": 0.58,
+          "7.0": 0.42,
+          "8.0": 0.19
+        },
+        "mixed_system_mft_ug_per_g": {
+          "5.5": 3.11,
+          "6.0": 2.47
+        },
+        "mixed_system_synergy_factor_vs_thiamine_alone": 4.3,
+        "replicates": 3,
+        "volatile_output_mode": "absolute_ug_per_g"
+      },
+      "repo_next_action": "Expose as the pH-calibrated Family 03 benchmark anchor for thiamine-driven MFT support in the runtime lane.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "benchmark",
+          "artifact_id": "thiamine_cys_xylose_145C_Cerny2008",
+          "path": "data/benchmarks/thiamine_cys_xylose_145C_Cerny2008.json"
+        },
+        {
+          "artifact_type": "benchmark_intake_entry",
+          "artifact_id": "cerny_guntz_dubini_2008",
+          "path": "data/lit/benchmark_intake_registry.json"
+        },
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "cerny_2007_thiamine_split_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "thiamine_pathway_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "hofmann_schieberle_grosch_1996",
+      "citation": "Hofmann, Schieberle & Grosch (1996), JAFC 44:2873",
+      "doi": "10.1021/jf960062o",
+      "kind": "quantitative_benchmark",
+      "chemistry_family": "thiamine_fragmentation_support",
+      "slr_family_source": "03",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "core_meaty",
+        "thiamine_support",
+        "mft",
+        "beef_realistic"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "01",
+        "07"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "optimizer",
+        "reporting"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Beef-realistic MFT comparison between thiamine-only, cysteine plus ribose, and combined precursor systems",
+        "A conservative synergy floor for Family 03 support under lower precursor concentrations than Cerny 2008",
+        "Scientist-facing evidence that thiamine remains efficient even at realistic concentration levels"
+      ],
+      "what_it_does_not_support": [
+        "Full pH response outside pH 5.5",
+        "Extrusion survival or encapsulation protection",
+        "Plant-protein matrix trapping or release"
+      ],
+      "key_values": {
+        "temp_C": 100.0,
+        "time_min": 30.0,
+        "ph": 5.5,
+        "thiamine_mM": 0.1,
+        "cysteine_mM": 1.0,
+        "ribose_mM": 1.0,
+        "thiamine_alone_mft_ug_per_l": 0.82,
+        "cys_ribose_mft_ug_per_l": 0.31,
+        "combined_mft_ug_per_l": 3.14,
+        "combined_synergy_factor": 2.64,
+        "replicates": 3,
+        "volatile_output_mode": "absolute_ug_per_l"
+      },
+      "repo_next_action": "Use as the conservative synergy floor for Family 03 so mixed-system support does not rely only on the high-concentration Cerny 2008 optimum.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "benchmark",
+          "artifact_id": "thiamine_cys_ribose_100C_Hofmann1996",
+          "path": "data/benchmarks/thiamine_cys_ribose_100C_Hofmann1996.json"
+        },
+        {
+          "artifact_type": "benchmark_intake_entry",
+          "artifact_id": "hofmann_schieberle_grosch_1996",
+          "path": "data/lit/benchmark_intake_registry.json"
+        },
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "cerny_2007_thiamine_split_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "thiamine_pathway_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "mouritsen_2024_umami_thresholds",
+      "citation": "Mouritsen et al. (2024), Chemical Senses 49:bjaf043",
+      "doi": "10.1093/chemse/bjaf043",
+      "kind": "quantitative_benchmark",
+      "chemistry_family": "nucleotide_and_ribose_support",
+      "slr_family_source": "04",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "umami_support",
+        "nucleotide_support",
+        "sensory_threshold"
+      ],
+      "process_state_scope": [
+        "ambient_slurry",
+        "heated_matrix"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "reporting",
+        "recommend"
+      ],
+      "matrix_family": "aqueous_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Quantitative fold-reduction anchor for IMP and GMP as upstream umami support markers",
+        "A family-04 runtime distinction between real nucleotide support and non-potentiating nucleotide-like cues",
+        "Scientist-facing support that small nucleotide additions can matter even when they are not treated as direct volatile precursors"
+      ],
+      "what_it_does_not_support": [
+        "Thermal degradation or ribose release kinetics",
+        "PBMA-specific matrix trapping or retention",
+        "A complete EUC reconstruction for every formulation without concentration data"
+      ],
+      "key_values": {
+        "nucleotide_concentration_mM": 3.0,
+        "imp_fold_reduction_vs_msg": 45.2,
+        "gmp_fold_reduction_vs_msg": 29.8,
+        "amp_fold_reduction_vs_msg": 8.9,
+        "cmp_effect_direction": "negative_modulator",
+        "panelists": 30,
+        "assay_mode": "2_afc_threshold"
+      },
+      "repo_next_action": "Use as the Family 04 umami-support anchor so IMP and GMP are scored as bounded upstream support rather than generic additive cues.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "matoba_1988_nucleotide_hydrolysis_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "nucleotide_pathway_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "yamaguchi_ninomiya_2000_euc_anchor",
+      "citation": "Yamaguchi & Ninomiya (2000), Journal of Nutrition 130:921S",
+      "doi": "10.1093/jn/130.4.921S",
+      "kind": "calibration_reference",
+      "chemistry_family": "nucleotide_and_ribose_support",
+      "slr_family_source": "04",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "umami_support",
+        "euc_anchor",
+        "nucleotide_support"
+      ],
+      "process_state_scope": [
+        "ambient_slurry",
+        "heated_matrix"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "reporting",
+        "recommend"
+      ],
+      "matrix_family": "aqueous_and_food_matrix_review",
+      "eligibility": "benchmark_eligible_parameter",
+      "status": "ready_for_calibration_encoding",
+      "what_it_supports": [
+        "The EUC synergy constant used to interpret IMP or GMP as multiplicative umami support rather than additive flavor mass",
+        "A conservative GMP relative-potency anchor for Family 04 scoring",
+        "Scientist-facing explanation for why low-dose nucleotide enrichment still matters"
+      ],
+      "what_it_does_not_support": [
+        "Thermal hydrolysis or ribose release kinetics",
+        "Matrix-specific nucleotide retention",
+        "A direct volatile benchmark"
+      ],
+      "key_values": {
+        "umami_synergy_constant": 1218.0,
+        "imp_relative_umami_unit": 1.0,
+        "gmp_relative_umami_unit": 2.3,
+        "amp_relative_umami_unit": 0.18,
+        "validated_food_matrices": 15
+      },
+      "repo_next_action": "Carry the EUC constant into the bounded Family 04 prior so the lane reports preserved umami support explicitly.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "matoba_1988_nucleotide_hydrolysis_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "nucleotide_pathway_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "matoba_1988_nucleotide_hydrolysis",
+      "citation": "Matoba, Terao & Fujimaki (1988), JAFC 36:1033",
+      "doi": "10.1021/jf00083a025",
+      "kind": "quantitative_benchmark",
+      "chemistry_family": "nucleotide_and_ribose_support",
+      "slr_family_source": "04",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "nucleotide_support",
+        "ribose_delivery",
+        "process_state_calibration"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "07",
+        "10"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "reporting",
+        "recommend"
+      ],
+      "matrix_family": "aqueous_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Quantitative IMP and GMP survival under heating and extrusion-like severity",
+        "A benchmark-facing tradeoff between preserved umami support and hydrolysis-driven ribose delivery",
+        "Separate treatment of IMP and GMP instead of a pooled nucleotide bucket"
+      ],
+      "what_it_does_not_support": [
+        "Plant-matrix retention or encapsulation",
+        "Direct MFT or FFT yields in the same experiment",
+        "Complete ribose liberation kinetics after inosine cleavage"
+      ],
+      "key_values": {
+        "imp_half_life_h_at_100c_by_ph": {
+          "4.0": 8.7,
+          "5.0": 12.0,
+          "7.0": 13.1,
+          "9.0": 46.2
+        },
+        "gmp_half_life_h_at_100c_by_ph": {
+          "4.0": 6.4,
+          "5.0": 9.0,
+          "7.0": 8.2,
+          "9.0": 38.5
+        },
+        "imp_half_life_h_at_ph7_by_temp": {
+          "100.0": 13.1,
+          "110.0": 4.4,
+          "130.0": 0.5,
+          "150.0": 0.0583
+        },
+        "gmp_half_life_h_at_ph7_by_temp": {
+          "100.0": 8.2,
+          "110.0": 2.7,
+          "130.0": 0.3,
+          "150.0": 0.0367
+        },
+        "replicates": 3,
+        "assay_mode": "hplc_uv"
+      },
+      "repo_next_action": "Use as the Family 04 thermal-severity anchor so nucleotide support survives mildly but shifts toward ribose delivery under extrusion-like conditions.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "matoba_1988_nucleotide_hydrolysis_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "nucleotide_pathway_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "nakamura_1988_imp_ribose_release",
+      "citation": "Nakamura et al. (1988), JAFC 36:1045",
+      "doi": "10.1021/jf00083a026",
+      "kind": "calibration_reference",
+      "chemistry_family": "nucleotide_and_ribose_support",
+      "slr_family_source": "04",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "nucleotide_support",
+        "ribose_delivery",
+        "rate_limiting_step"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "07"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "reporting"
+      ],
+      "matrix_family": "aqueous_and_food_matrix_comparison",
+      "eligibility": "benchmark_eligible_parameter",
+      "status": "ready_for_calibration_encoding",
+      "what_it_supports": [
+        "A bounded ribose-release ceiling so Family 04 does not over-convert hydrolyzed IMP into immediate pentose delivery",
+        "Scientist-facing context that inosine cleavage remains the slow step under consumer-cook conditions",
+        "A distinction between preserved nucleotide pool and actual ribose-delivery shift"
+      ],
+      "what_it_does_not_support": [
+        "Extrusion residence-time reconstruction",
+        "IMP or GMP sensory synergy on its own",
+        "Matrix-specific nucleotide retention"
+      ],
+      "key_values": {
+        "imp_to_inosine_k_h_inv_at_100c_ph6_5": 0.053,
+        "inosine_to_ribose_k_h_inv_at_100c_ph6_5": 0.018,
+        "effective_ribose_release_fraction_at_100c_30min": 0.06,
+        "dominant_constraint": "n_glycosidic_cleavage_rate_limiting"
+      },
+      "repo_next_action": "Use as the bounded ribose-delivery anchor so Family 04 adds only modest ribose under mild cooking and larger support only under extrusion-like severity.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "matoba_1988_nucleotide_hydrolysis_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "nucleotide_pathway_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "trikusuma_2019",
+      "citation": "Trikusuma et al. (2019), Food Chemistry 312:126082",
+      "doi": "10.1016/j.foodchem.2019.126082",
+      "kind": "conditional_calibration",
+      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
+      "slr_family_source": "02",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "adverse_marker",
+        "off_note",
+        "matrix_intake"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "08",
+        "09"
+      ],
+      "target_modules": [
+        "benchmark_validation",
+        "headspace",
+        "matrix_only"
+      ],
+      "matrix_family": "pea_uht_beverage",
+      "eligibility": "benchmark_eligible_indirect",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Quantitative UHT pea-protein aroma panel with 21 DHS-GC-MS-MS quantified compounds",
+        "Mixed Maillard and lipid-oxidation context in a real heated pea-protein beverage",
+        "Executable matrix-only validation subset for heated pea off-flavour markers"
+      ],
+      "what_it_does_not_support": [
+        "Strict-gate free-precursor validation",
+        "Direct MFT or FFT calibration in pea matrices",
+        "A full meaty-positive matrix benchmark"
+      ],
+      "key_values": {
+        "pea_protein_wt_pct": 3.0,
+        "pea_protein_fat_wt_pct": 8.0,
+        "pea_protein_sugar_wt_pct": 2.0,
+        "homogenization_mpa": 17.2,
+        "preheat_temp_C": 80.0,
+        "uht_temp_C": 140.0,
+        "uht_hold_seconds": 6.0,
+        "storage_temp_C": 5.0,
+        "storage_duration_weeks": 7,
+        "volatile_output_mode": "absolute_ug_per_l",
+        "tracked_uht_markers_ug_per_l": {
+          "hexanal": 782.0,
+          "2-pentylfuran": 163.0,
+          "nonanal": 24.0,
+          "methional": 3.1,
+          "2,5-dimethylpyrazine": 2.29
+        },
+        "replicates": 3
+      },
+      "repo_next_action": "Use the extracted UHT quantitative table as a heated pea matrix-only benchmark subset while keeping the full 21-compound panel available as intake evidence.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "benchmark",
+          "artifact_id": "pea_isolate_uht_140C_Trikusuma2019",
+          "path": "data/benchmarks/pea_isolate_uht_140C_Trikusuma2019.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "resconi_2023_pbma_beef_identity_benchmark",
+      "citation": "Resconi et al. (2023 / PMC10096055)",
+      "doi": "",
+      "kind": "quantitative_benchmark",
+      "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
+      "slr_family_source": "09",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "matrix_intake",
+        "identity_gap",
+        "diacetyl",
+        "furfural",
+        "pyrrole"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "02"
+      ],
+      "target_modules": [
+        "benchmark_validation",
+        "matrix_only",
+        "reporting"
+      ],
+      "matrix_family": "pbma_vs_beef_comparator",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Executable external-literature benchmark subset for the PBMA-versus-beef browning gap using absolute furfural and 2,5-dimethylpyrazine values",
+        "Scientist-facing benchmark framing for under-meaty and over-browned plant-based volatile signatures while the full comparator panel remains attached in intake metadata"
+      ],
+      "what_it_does_not_support": [
+        "Full executable closure of the diacetyl, acetoin, and 2-acetylpyrrole comparator panel in the current matrix runtime surface",
+        "One-family mechanistic attribution of the full PBMA-versus-beef gap"
+      ],
+      "key_values": {
+        "diacetyl_pbma_midpoint_ng_per_g": 12.9,
+        "diacetyl_beef_midpoint_ng_per_g": 38.1,
+        "acetoin_pbma_midpoint_ng_per_g": 7.65,
+        "acetoin_beef_midpoint_ng_per_g": 30.45,
+        "furfural_pbma_midpoint_ng_per_g": 1040.0,
+        "furfural_beef_midpoint_ng_per_g": 19.83,
+        "dimethylpyrazine_pbma_midpoint_ng_per_g": 31.65,
+        "dimethylpyrazine_beef_midpoint_ng_per_g": 15.72,
+        "acetylpyrrole_pbma_range_ng_per_g": [
+          560.0,
+          726.0
+        ],
+        "acetylpyrrole_beef_range_ng_per_g": [
+          141.0,
+          170.0
+        ],
+        "beef_flavour_identity_pbma_range": [
+          11.5,
+          17.5
+        ],
+        "beef_flavour_identity_beef_range": [
+          46.8,
+          51.0
+        ],
+        "diacetyl_deficit_fold_vs_beef": 3.0,
+        "acetoin_deficit_fold_vs_beef": 4.0,
+        "furfural_excess_fold_vs_beef": 50.0,
+        "pyrrole_excess_fold_vs_beef_range": [
+          4.0,
+          5.0
+        ],
+        "replicates": 4,
+        "volatile_output_mode": "absolute_ng_per_g_cooked_product"
+      },
+      "repo_next_action": "Keep the executable furfural plus dimethylpyrazine subset active while broader mixed-matrix comparator coverage for diacetyl, acetoin, and pyrroles is still unresolved.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "benchmark",
+          "artifact_id": "resconi_2023_pbma_beef_identity_benchmark",
+          "path": "data/benchmarks/resconi_2023_pbma_beef_identity_benchmark.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "acs_apts_ref24_3dg_arrhenius_anchor",
+      "citation": "ACS APTS (Ref. 24)",
+      "doi": "",
+      "kind": "calibration_reference",
+      "chemistry_family": "advanced_glycation_and_damage",
+      "slr_family_source": "14",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "pyrraline",
+        "furosine",
+        "arrhenius_anchor",
+        "damage_support"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "12"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "safety",
+        "reporting"
+      ],
+      "matrix_family": "aqueous_model_system",
+      "eligibility": "benchmark_eligible_parameter",
+      "status": "ready_for_calibration_encoding",
+      "what_it_supports": [
+        "Arrhenius anchors for 3-DG routing into pyrraline and furosine",
+        "Bounded AGE-lane calibration where pyrraline outruns furosine under the same 3-DG burden"
+      ],
+      "what_it_does_not_support": [
+        "A complete AGE kinetic mechanism",
+        "Matrix-specific endpoint closure for one commercial PBMA"
+      ],
+      "key_values": {
+        "pyrraline_ea_kj_mol": 53.45,
+        "pyrraline_ea_uncertainty_kj": 4.02,
+        "furosine_ea_kj_mol": 81.7,
+        "furosine_ea_uncertainty_kj": 14.01
+      },
+      "repo_next_action": "Keep the two 3-DG damage routes encoded as bounded Arrhenius anchors rather than opening a new full AGE mechanism.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "pyrraline_from_3dg",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "dft_kinetic_priors"
+          ]
+        },
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "furosine_from_3dg",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "dft_kinetic_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "mottram_nobrega_2002_furanone_bridge",
+      "citation": "Mottram & Nobrega (2002 / Chapter 9 review)",
+      "doi": "",
+      "kind": "directional_prior",
+      "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
+      "slr_family_source": "09",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "furanone",
+        "sulfur_support",
+        "bridge_prior"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model"
+      ],
+      "supporting_families": [
+        "10"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "reporting"
+      ],
+      "matrix_family": "caramelization_sulfur_model_system",
+      "eligibility": "conditional",
+      "status": "ready_for_directional_prior_encoding",
+      "what_it_supports": [
+        "Bounded bridge from norfuraneol and HDMF-like intermediates into sulfur-positive notes",
+        "Scientist-facing explanation for why caramel-heavy systems can still retain sulfur-side opportunity when sulfur donors are present"
+      ],
+      "what_it_does_not_support": [
+        "Exact MFT or thiophene endpoint closure in one PBMA matrix",
+        "A standalone sulfur benchmark"
+      ],
+      "key_values": {
+        "norfuraneol_to_mft_mol_fraction": 0.014,
+        "hdmf_cysteine_thiophene_ph_optimum": 5.1,
+        "diacetyl_mercaptoketone_bridge_reported": true
+      },
+      "repo_next_action": "Keep encoded as a bounded sulfur-bridge prior so furanone-rich systems do not get treated as sulfur-disconnected by default.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "mottram_nobrega_2002_furanone_sulfur_bridge_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "furanone_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "pmc_4419266_pe_interfacial_maillard_kinetics",
+      "citation": "PMC PMCID:PMC4419266 (Ref. 18)",
+      "doi": "",
+      "kind": "calibration_reference",
+      "chemistry_family": "phospholipid_amine_maillard",
+      "slr_family_source": "15",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "phospholipid",
+        "arrhenius_anchor",
+        "interfacial_catalysis"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "reporting"
+      ],
+      "matrix_family": "phospholipid_interface",
+      "eligibility": "benchmark_eligible_parameter",
+      "status": "ready_for_calibration_encoding",
+      "what_it_supports": [
+        "Interfacial PE Schiff-base and Amadori Arrhenius anchors already landed in the runtime DFT-prior surface",
+        "Scientist-facing provenance that phospholipid-rich systems can accelerate amine Maillard initiation below the protein-only barrier"
+      ],
+      "what_it_does_not_support": [
+        "One-condition phospholipid endpoint benchmark closure",
+        "Full mixed-lipid membrane kinetics"
+      ],
+      "key_values": {
+        "pe_schiff_base_ea_kj_mol": 92.9,
+        "pe_amadori_ea_kj_mol": 82.9,
+        "protein_lys_maillard_ea_kj_mol": 118.0,
+        "interfacial_pseudocatalysis_reported": true
+      },
+      "repo_next_action": "Expose the already-landed Family 15 Arrhenius anchors through intake so phospholipid acceleration stops looking unused in the literature tracker.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "pe_schiff_base",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "dft_kinetic_priors"
+          ]
+        },
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "pe_amadori",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "dft_kinetic_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "lincoln_2025",
+      "citation": "Lincoln et al. (2025), Sustainable Food Proteins",
+      "doi": "10.1002/sfp2.1044",
+      "kind": "directional_prior",
+      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
+      "slr_family_source": "02",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "crosstalk",
+        "guardrail",
+        "off_note"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "08",
+        "07"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "optimizer",
+        "reporting"
+      ],
+      "matrix_family": "ppi_spi_glucose_lipid_polyphenol",
+      "eligibility": "conditional",
+      "status": "ready_for_directional_prior_encoding",
+      "what_it_supports": [
+        "Directional Strecker suppression prior for glucose plus lipids plus polyphenols in SPI and PPI systems",
+        "Joint Maillard-lipid crosstalk framing for formulation reporting",
+        "Scientist-facing provenance for polyphenol-driven Strecker moderation"
+      ],
+      "what_it_does_not_support": [
+        "Absolute concentration targets",
+        "Strict quantitative optimizer calibration",
+        "Benchmark promotion into the authoritative free-precursor surface"
+      ],
+      "key_values": {
+        "ph": 7.0,
+        "glucose_to_protein_w_w": 1.0,
+        "corn_oil_wt_pct": 0.55,
+        "spi_temp_C": 90.0,
+        "ppi_temp_C": 95.0,
+        "heating_time_h": 1.0,
+        "storage_temp_C": 37.0,
+        "storage_duration_days": 14,
+        "polyphenol_examples": [
+          "catechin",
+          "tannic acid",
+          "green tea extract",
+          "grape seed extract"
+        ],
+        "volatile_output_mode": "directional_volatiles"
+      },
+      "repo_next_action": "Encode as a structured crosstalk prior and keep its directional status explicit until full quantitative extraction is available.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "directional_prior",
+          "artifact_id": "lincoln_2025_polyphenol_crosstalk_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "strecker_crosstalk_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "pmc_2026_hme_hexanal_baseline",
+      "citation": "Li et al. (2026), Foods 15(5):912",
+      "doi": "10.3390/foods15050912",
+      "kind": "quantitative_benchmark",
+      "chemistry_family": "lipid_maillard_crosstalk",
+      "slr_family_source": "11",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "off_note",
+        "hexanal",
+        "matrix_intake",
+        "baseline"
+      ],
+      "process_state_scope": [
+        "extrusion_structured",
+        "hme"
+      ],
+      "target_modules": [
+        "lipid_oxidation",
+        "matrix_correction"
+      ],
+      "matrix_family": "spi_wheat_gluten_hme",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Primary hexanal baseline for SPI/gluten HME control matrix: 605.6 ug/kg",
+        "Quantified suppression slope vs free amino acid load",
+        "Absolute heptanal (89.8 ug/kg) and nonanal (29.4 ug/kg) anchors",
+        "Absolute 1-hexanol (20.04 ug/kg) and 2-pentylfuran (221.51 ug/kg) control anchors",
+        "Method-level HME control conditions: SPI:wheat gluten 6:4 dry basis, 57% moisture, 280 rpm, 4.6 kg/h, 30/90/120/140/150/160 C barrel profile",
+        "Paper-level flavour conclusion that 40 min wheat-gluten pretreatment is the odour optimum while the 0 min control remains the Family 11 baseline"
+      ],
+      "what_it_does_not_support": [
+        "Direct executable benchmark closure without a final-blend pH measurement",
+        "Direct executable benchmark closure without a reported water-activity value for the HME control",
+        "A pure-SPI benchmark because the literature control matrix includes 40% wheat gluten hydrolysate on a dry basis"
+      ],
+      "key_values": {
+        "wg_pretreatment_ph": 7.0,
+        "wg_pretreatment_temp_C": 30.0,
+        "wg_slurry_w_v_pct": 35.0,
+        "wg_neutral_protease_u_per_g": 250.0,
+        "wg_flavourzyme_u_per_g": 150.0,
+        "spi_dry_basis_fraction": 0.6,
+        "wheat_gluten_dry_basis_fraction": 0.4,
+        "screw_speed_rpm": 280.0,
+        "feed_rate_kg_per_h": 4.6,
+        "extrusion_moisture_wt_pct": 57.0,
+        "barrel_temp_profile_C": [
+          30.0,
+          90.0,
+          120.0,
+          140.0,
+          150.0,
+          160.0
+        ],
+        "die_exit_temp_C": 60.0,
+        "control_pretreatment_time_min": 0.0,
+        "flavour_optimum_pretreatment_time_min": 40.0,
+        "hexanal_control_ug_per_kg": 605.6,
+        "heptanal_control_ug_per_kg": 89.8,
+        "nonanal_control_ug_per_kg": 29.42,
+        "1-hexanol_control_ug_per_kg": 20.04,
+        "2-pentylfuran_control_ug_per_kg": 221.51,
+        "hexanal_suppression_80min_pct": 28.8,
+        "replicates": 3
+      },
+      "runtime_artifacts": [
+        {
+          "artifact_type": "flavor_reference_payload",
+          "artifact_id": "li_2026_spi_wg_hme_hexanal_control_point",
+          "path": "data/lit/flavor_reference_payloads.json"
+        },
+        {
+          "artifact_type": "flavor_reference_payload",
+          "artifact_id": "li_2026_spi_wg_hme_heptanal_control_point",
+          "path": "data/lit/flavor_reference_payloads.json"
+        },
+        {
+          "artifact_type": "flavor_reference_payload",
+          "artifact_id": "li_2026_spi_wg_hme_nonanal_control_point",
+          "path": "data/lit/flavor_reference_payloads.json"
+        },
+        {
+          "artifact_type": "flavor_reference_payload",
+          "artifact_id": "li_2026_spi_wg_hme_1_hexanol_control_point",
+          "path": "data/lit/flavor_reference_payloads.json"
+        },
+        {
+          "artifact_type": "flavor_reference_payload",
+          "artifact_id": "li_2026_spi_wg_hme_2_pentylfuran_control_point",
+          "path": "data/lit/flavor_reference_payloads.json"
+        }
+      ],
+      "repo_next_action": "Keep as the primary HME control anchor for Family 11 via flavor-reference payloads, use the extracted method data in runtime-facing HME summaries, and promote to an executable benchmark only after a literature-backed final-blend pH and water-activity closure is available."
+    },
+    {
+      "id": "acs_jafc_3c05991_ppi_spi_partitioning",
+      "citation": "ACS JAFC 3c05991 / PMC10739987",
+      "doi": "10.1021/acs.jafc.3c05991",
+      "kind": "calibration_reference",
+      "chemistry_family": "lipid_maillard_crosstalk",
+      "slr_family_source": "11",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "retention_support",
+        "partitioning",
+        "matrix_state_support"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "headspace",
+        "matrix_correction"
+      ],
+      "matrix_family": "commercial_ppi_spi",
+      "eligibility": "benchmark_eligible_parameter",
+      "status": "ready_for_calibration_encoding",
+      "what_it_supports": [
+        "PPI and SPI volatile-partitioning context with reported Ka and temperature dependence",
+        "Runtime retention and matrix-correction support for plant-protein volatile binding"
+      ],
+      "what_it_does_not_support": [
+        "Exact benchmark-condition coefficients already extracted into a benchmark payload",
+        "Direct concentration closure for one plant matrix benchmark"
+      ],
+      "key_values": {
+        "ka_values_reported": true,
+        "temperature_effect_reported": true,
+        "logp_model_available": true
+      },
+      "repo_next_action": "Keep linked to the landed process-state calibration until full coefficient extraction justifies a richer retention surface.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "process_state_calibration",
+          "artifact_id": "acs_jafc_3c05991_ppi_spi_partitioning",
+          "path": "data/lit/process_state_calibrations.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "acs_jafc_3c02618_binding_prior",
+      "citation": "ACS JAFC 3c02618",
+      "doi": "",
+      "kind": "directional_prior",
+      "chemistry_family": "lipid_maillard_crosstalk",
+      "slr_family_source": "11",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "retention_support",
+        "binding_support",
+        "sulfur_support"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "01",
+        "10"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "headspace",
+        "matrix_correction"
+      ],
+      "matrix_family": "plant_protein_matrix",
+      "eligibility": "conditional",
+      "status": "ready_for_directional_prior_encoding",
+      "what_it_supports": [
+        "MFT disulfide trapping and pyrazine pi-stacking support for Family 11 retention behavior",
+        "Bounded protein-aroma binding reasoning for sulfur and pyrazine visibility"
+      ],
+      "what_it_does_not_support": [
+        "Exact compound-specific benchmark closure",
+        "One-condition absolute headspace prediction"
+      ],
+      "key_values": {
+        "mft_disulfide_trapping_reported": true,
+        "pyrazine_pi_stacking_reported": true,
+        "headspace_recovery_effect_direction": "reduced_by_covalent_and_non_covalent_binding"
+      },
+      "repo_next_action": "Keep linked to the landed retention prior so Family 11 retention logic stays traceable in the intake surface.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "acs_jafc_3c02618_mft_disulfide_trapping_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "retention_binding_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "acs_jafc_0c01925_protein_binding_hierarchy",
+      "citation": "ACS JAFC 0c01925",
+      "doi": "",
+      "kind": "directional_prior",
+      "chemistry_family": "lipid_maillard_crosstalk",
+      "slr_family_source": "11",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "retention_support",
+        "binding_support",
+        "off_note"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "01",
+        "10"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "headspace",
+        "reporting"
+      ],
+      "matrix_family": "plant_protein_matrix",
+      "eligibility": "conditional",
+      "status": "ready_for_directional_prior_encoding",
+      "what_it_supports": [
+        "Protein-aroma binding hierarchy for Schiff-base versus Michael-adduct interpretation",
+        "Bounded headspace-recovery reasoning for plant-protein volatile suppression"
+      ],
+      "what_it_does_not_support": [
+        "Absolute partition coefficients for one benchmark condition",
+        "Direct benchmark promotion without matrix-specific extraction"
+      ],
+      "key_values": {
+        "preferred_adduct_hierarchy": [
+          "lys_schiff_base",
+          "cys_michael_adduct"
+        ],
+        "odt_weighted_headspace_recovery_reported": true
+      },
+      "repo_next_action": "Keep linked to the landed binding-hierarchy prior so headspace-recovery logic remains traceable and bounded.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "acs_jafc_0c01925_protein_binding_hierarchy_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "retention_binding_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "acs_2020_raw_pea_hexanal_baseline",
+      "citation": "Bi et al. (2020), J. Agric. Food Chem. 68:2718-2727",
+      "doi": "10.1021/acs.jafc.9b07711",
+      "kind": "quantitative_benchmark",
+      "chemistry_family": "lipid_maillard_crosstalk",
+      "slr_family_source": "11",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "off_note",
+        "hexanal",
+        "raw_pea_matrix",
+        "baseline"
+      ],
+      "process_state_scope": [
+        "raw_matrix",
+        "ambient_slurry"
+      ],
+      "target_modules": [
+        "lipid_oxidation",
+        "reporting"
+      ],
+      "matrix_family": "raw_pea_flour",
+      "eligibility": "benchmark_eligible",
+      "status": "encoded_runtime_artifact",
+      "what_it_supports": [
+        "Defined raw-pea hexanal baseline: 1260 ug/kg (OAV ~280)",
+        "Roasted-pea hexanal carryover point: 324 ug/kg after 160 C / 30 min roasting",
+        "3-methylbutanoic acid raw-pea baseline: 4580 ug/kg as a co-dominant aroma-active raw-pea marker"
+      ],
+      "what_it_does_not_support": [
+        "A pea-protein-isolate-specific baseline",
+        "Exact benchmark-schema pH and water-activity closure for an executable matrix benchmark",
+        "Direct transfer to SPI or HME conditions without an explicit family-level transfer caveat"
+      ],
+      "key_values": {
+        "hexanal_raw_pea_ug_per_kg": 1260.0,
+        "hexanal_roasted_pea_ug_per_kg": 324.0,
+        "3-methylbutanoic_acid_raw_pea_ug_per_kg": 4580.0,
+        "hexanal_odt_ug_per_kg": 4.5,
+        "roasting_temp_C": 160.0,
+        "roasting_time_min": 30.0,
+        "headspace_extraction_temp_C": 50.0,
+        "headspace_equilibration_min": 20.0,
+        "headspace_extraction_min": 50.0,
+        "replicates": 3
+      },
+      "runtime_artifacts": [
+        {
+          "artifact_type": "flavor_reference_payload",
+          "artifact_id": "bi_2020_raw_pea_hexanal_point",
+          "path": "data/lit/flavor_reference_payloads.json"
+        },
+        {
+          "artifact_type": "flavor_reference_payload",
+          "artifact_id": "bi_2020_roasted_pea_hexanal_point",
+          "path": "data/lit/flavor_reference_payloads.json"
+        }
+      ],
+      "repo_next_action": "Use as a raw-pea aroma baseline and conservative pea-family transfer anchor until isolate-matched PPI data is encoded."
+    },
+    {
+      "id": "liu_2023_ppi_offnote_baseline",
+      "citation": "Liu, Y. (2023 thesis)",
+      "doi": "",
+      "kind": "quantitative_benchmark",
+      "chemistry_family": "alternative_protein_matrix_scope",
+      "slr_family_source": "06",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "off_note",
+        "hexanal",
+        "methoxypyrazine",
+        "ppi_baseline"
+      ],
+      "process_state_scope": [
+        "raw_matrix",
+        "ambient_slurry"
+      ],
+      "supporting_families": [
+        "11"
+      ],
+      "target_modules": [
+        "matrix_correction",
+        "reporting",
+        "lipid_oxidation"
+      ],
+      "matrix_family": "pea_protein_isolate",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Compact PPI off-note baseline for hexanal, nonanal, unsaturated aldehydes, and methoxypyrazine",
+        "A matrix-scope penalty anchor showing that native PPI starts strongly off-note before any meaty supplementation"
+      ],
+      "what_it_does_not_support": [
+        "An executable cooked PPI benchmark with matched heat history",
+        "A positive meaty target without exogenous sulfur and pentose support"
+      ],
+      "key_values": {
+        "hexanal_ppb_range": [
+          15.0,
+          180.0
+        ],
+        "nonanal_ppb_range": [
+          5.0,
+          50.0
+        ],
+        "ee_2_4_heptadienal_ppb_range": [
+          0.5,
+          8.0
+        ],
+        "methoxypyrazine_ppb_max": 0.08,
+        "mft_detected": false,
+        "meaty_potential_multiplier": 0.12,
+        "replicate_lot_count": 6
+      },
+      "runtime_artifacts": [
+        {
+          "artifact_type": "flavor_reference_payload",
+          "artifact_id": "liu_2023_ppi_hexanal_band",
+          "path": "data/lit/flavor_reference_payloads.json"
+        },
+        {
+          "artifact_type": "flavor_reference_payload",
+          "artifact_id": "liu_2023_ppi_nonanal_band",
+          "path": "data/lit/flavor_reference_payloads.json"
+        },
+        {
+          "artifact_type": "flavor_reference_payload",
+          "artifact_id": "liu_2023_ppi_heptadienal_band",
+          "path": "data/lit/flavor_reference_payloads.json"
+        },
+        {
+          "artifact_type": "flavor_reference_payload",
+          "artifact_id": "liu_2023_ppi_ibmp_band",
+          "path": "data/lit/flavor_reference_payloads.json"
+        }
+      ],
+      "repo_next_action": "Use as the lean PPI matrix-baseline anchor so off-note penalties are explicit before any meaty-positive optimization.",
+      "requires_primary_data": false
+    },
+    {
+      "id": "acs_2022_pba_lysine_loss_benchmark",
+      "citation": "ACS Food Sci. Technol. 2022, 2(2):00242",
+      "doi": "10.1021/acsfoodscitech.2c00242",
+      "kind": "quantitative_benchmark",
+      "chemistry_family": "protein_damage_markers",
+      "slr_family_source": "12",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "safety",
+        "protein_damage",
+        "lysine_loss"
+      ],
+      "process_state_scope": [
+        "extrusion_structured",
+        "sterilization"
+      ],
+      "target_modules": [
+        "safety",
+        "matrix_correction"
+      ],
+      "matrix_family": "spi_ppi_petfood",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Definitive lysine loss differential: SPI (31.4%) vs PPI (15.4%)",
+        "Total AA loss quantification after severe shearing+sterilization",
+        "Calibration of lysine_accessibility_factor under extreme conditions"
+      ],
+      "key_values": {
+        "spi_lysine_loss_pct": 31.4,
+        "ppi_lysine_loss_pct": 15.4,
+        "sterilization_temp_C": 125.5,
+        "sterilization_time_min": 26
+      },
+      "runtime_artifacts": [
+        {
+          "artifact_type": "safety_reference",
+          "artifact_id": "acs_2022_pba_lysine_loss",
+          "path": "data/lit/safety_reference_payloads.json"
+        }
+      ],
+      "repo_next_action": "Use the already-encoded safety reference payload as the primary reactive lysine baseline for SPI vs PPI resilience modeling, and keep the intake row linked to that artifact."
+    },
+    {
+      "id": "blank_grosch_1991_hdmf_anchor",
+      "citation": "Blank & Grosch (1991)",
+      "doi": "10.1021/jf00009a012",
+      "kind": "quantitative_benchmark",
+      "chemistry_family": "nucleotide_and_ribose_support",
+      "slr_family_source": "04",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "furanone",
+        "hdmf",
+        "oav_anchor",
+        "beef_reference"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "09"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "reporting",
+        "sensory_scoring"
+      ],
+      "matrix_family": "boiled_beef_reference",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Beef-relevant HDMF target band for brothy-caramel support",
+        "OAV-bounded donor-routing support showing HDMF is sensorially active well below overt caramelization overload"
+      ],
+      "what_it_does_not_support": [
+        "A full PBMA benchmark by itself",
+        "Direct proof that endogenous IMP is required for HDMF closure in plant matrices"
+      ],
+      "key_values": {
+        "hdmf_ug_per_kg_range": [
+          28.0,
+          67.0
+        ],
+        "hdmf_odt_ug_per_kg": 6.0,
+        "hdmf_oav_range": [
+          4.7,
+          11.2
+        ],
+        "fd_factor": 256.0,
+        "replicates": 3
+      },
+      "runtime_artifacts": [
+        {
+          "artifact_type": "flavor_reference_payload",
+          "artifact_id": "blank_grosch_1991_beef_hdmf_band",
+          "path": "data/lit/flavor_reference_payloads.json"
+        }
+      ],
+      "repo_next_action": "Use as the compact Family 04 donor-routing and reporting anchor for HDMF without adding a large inline benchmark block.",
+      "requires_primary_data": false
+    },
+    {
+      "id": "pmc9905368_spi_hvp_xylose_benchmark",
+      "citation": "PMC9905368 (2023)",
+      "doi": "",
+      "kind": "quantitative_benchmark",
+      "chemistry_family": "alternative_protein_matrix_scope",
+      "slr_family_source": "06",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "core_meaty",
+        "sulfur",
+        "matrix_intake"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "target_modules": [
+        "benchmark_validation",
+        "matrix_correction",
+        "reporting"
+      ],
+      "matrix_family": "spi_hvp_xylose",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Executable sulfur-focused SPI-HVP plus xylose benchmark surface at 120 C / 30 min / pH 6.0",
+        "Quantitative MFT OAV 450 and FFT OAV 84 anchor for soy hydrolysate supplementation logic"
+      ],
+      "what_it_does_not_support": [
+        "Exact hydrolysate peptide-sequence reconstruction",
+        "Whole-panel closure for all 28 reported volatiles in a single mechanistic run"
+      ],
+      "key_values": {
+        "temp_C": 120.0,
+        "time_min": 30.0,
+        "ph": 6.0,
+        "mft_ug_per_g": 0.18,
+        "fft_ug_per_g": 0.42,
+        "methional_ug_per_g": 1.88,
+        "mft_oav": 450,
+        "fft_oav": 84
+      },
+      "repo_next_action": "Keep encoded as a sulfur-focused executable benchmark subset tied to the protein-source registry.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "benchmark",
+          "artifact_id": "spi_hvp_xylose_120C_PMC9905368",
+          "path": "data/benchmarks/spi_hvp_xylose_120C_PMC9905368.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "pmc9905368_wheat_gluten_hvp_xylose_benchmark",
+      "citation": "PMC9905368 (2023)",
+      "doi": "",
+      "kind": "quantitative_benchmark",
+      "chemistry_family": "alternative_protein_matrix_scope",
+      "slr_family_source": "06",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "core_meaty",
+        "sulfur",
+        "matrix_intake"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "target_modules": [
+        "benchmark_validation",
+        "matrix_correction",
+        "reporting"
+      ],
+      "matrix_family": "wheat_gluten_hvp_xylose",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Executable wheat-gluten HVP plus xylose benchmark with the strongest reported non-yeast plant MFT anchor",
+        "Highest-MFT plant-source reference: MFT OAV 850 and FFT OAV 122 at 120 C / 30 min"
+      ],
+      "what_it_does_not_support": [
+        "Exact gluten peptide-sequence reconstruction",
+        "Direct transfer to non-hydrolyzed wheat gluten formulations without process correction"
+      ],
+      "key_values": {
+        "temp_C": 120.0,
+        "time_min": 30.0,
+        "ph": 6.0,
+        "mft_ug_per_g": 0.34,
+        "fft_ug_per_g": 0.61,
+        "methional_ug_per_g": 3.44,
+        "mft_oav": 850,
+        "fft_oav": 122
+      },
+      "repo_next_action": "Expose as the highest-MFT plant-source sulfur benchmark for protein-source-aware formulation ranking.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "benchmark",
+          "artifact_id": "wheat_gluten_hvp_xylose_120C_PMC9905368",
+          "path": "data/benchmarks/wheat_gluten_hvp_xylose_120C_PMC9905368.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "acs_ref3_spi_acrylamide_fast_kinetics",
+      "citation": "ACS ResearchGate ref. 3",
+      "doi": "",
+      "kind": "quantitative_benchmark",
+      "chemistry_family": "protein_damage_markers",
+      "slr_family_source": "12",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "safety",
+        "acrylamide",
+        "extrusion"
+      ],
+      "process_state_scope": [
+        "extrusion_structured",
+        "lme"
+      ],
+      "target_modules": [
+        "benchmark_validation",
+        "safety"
+      ],
+      "matrix_family": "spi_extrusion_short_residence",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Short-residence acrylamide benchmark for SPI extrusion with SME-aware effective temperature",
+        "22.36 -> 62.62 ug/kg increase in 20-30 s at 130 C as a fast-kinetics closure point"
+      ],
+      "what_it_does_not_support": [
+        "Raw-flour baseline reconstruction inside the same mechanistic solver",
+        "Generalization to microwave or infrared processing without separate process terms"
+      ],
+      "key_values": {
+        "temp_C": 130.0,
+        "time_seconds": 25.0,
+        "acrylamide_start_ug_per_kg": 22.36,
+        "acrylamide_end_ug_per_kg": 62.62,
+        "moisture_regime": "lme"
+      },
+      "repo_next_action": "Keep encoded as the fastest extrusion acrylamide closure point and route through effective extrusion temperature.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "benchmark",
+          "artifact_id": "acrylamide_spi_extrusion_130C_ACSRef3",
+          "path": "data/benchmarks/acrylamide_spi_extrusion_130C_ACSRef3.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "foods_2023_cml_cel_proxy_benchmark",
+      "citation": "Foods 2023, 12(10):1967 (2023)",
+      "doi": "10.3390/foods12101967",
+      "kind": "quantitative_benchmark",
+      "chemistry_family": "protein_damage_markers",
+      "slr_family_source": "12",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "safety",
+        "cml",
+        "cel",
+        "commercial_pbma"
+      ],
+      "process_state_scope": [
+        "extrusion_structured"
+      ],
+      "target_modules": [
+        "benchmark_validation",
+        "safety",
+        "reporting"
+      ],
+      "matrix_family": "commercial_pbma_products",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Representative executable CML and CEL proxy benchmark tied to the Foods 2023 commercial product survey",
+        "Keeps the exact Foods 2023 and PMC 2024 AGE range anchors attached to the runtime artifact"
+      ],
+      "what_it_does_not_support": [
+        "Exact reconstruction of any one commercial product process history",
+        "Substitute for the broader reference bands in safety reporting"
+      ],
+      "key_values": {
+        "cml_range_mg_per_kg": [
+          16.46,
+          47.61
+        ],
+        "cel_range_mg_per_kg": [
+          25.21,
+          86.23
+        ],
+        "representative_cml_mg_per_kg": 32.0,
+        "representative_cel_mg_per_kg": 55.0
+      },
+      "repo_next_action": "Use as an executable AGE proxy benchmark while retaining Foods 2023 and PMC 2024 as explicit reporting bands.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "benchmark",
+          "artifact_id": "cml_cel_commercial_pbma_Foods2023",
+          "path": "data/benchmarks/cml_cel_commercial_pbma_Foods2023.json"
+        },
+        {
+          "artifact_type": "safety_reference",
+          "artifact_id": "foods_2023_pba_cml_cel_benchmark",
+          "path": "data/lit/safety_reference_payloads.json"
+        },
+        {
+          "artifact_type": "safety_reference",
+          "artifact_id": "pmc_2024_pba_cml_cel_ranges",
+          "path": "data/lit/safety_reference_payloads.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "ramirez_jimenez_2000_furosine_crossover_benchmark",
+      "citation": "Ram\u00edrez-Jim\u00e9nez et al. (2000)",
+      "doi": "",
+      "kind": "quantitative_benchmark",
+      "chemistry_family": "protein_damage_markers",
+      "slr_family_source": "12",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "safety",
+        "furosine",
+        "extrusion"
+      ],
+      "process_state_scope": [
+        "extrusion_structured",
+        "hme"
+      ],
+      "target_modules": [
+        "benchmark_validation",
+        "safety",
+        "reporting"
+      ],
+      "matrix_family": "mild_legume_extrudate",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Executable furosine peak anchor near 140 C with explicit crossover semantics above 150 C",
+        "Non-monotonic damage benchmark so furosine decline is not misread as improvement"
+      ],
+      "what_it_does_not_support": [
+        "Single-marker safety closure for severe extrusion above 160 C",
+        "Exact SPI/PPI source attribution without matrix-specific calibration"
+      ],
+      "key_values": {
+        "peak_furosine_mg_per_100g_protein": 8.7,
+        "peak_temp_C": 140.0,
+        "crossover_temp_C": 150.0
+      },
+      "repo_next_action": "Keep encoded as the reference crossover benchmark and pair it with CEL/CML reporting above the degradation threshold.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "benchmark",
+          "artifact_id": "furosine_extrusion_crossover_140C_RamirezJimenez2000",
+          "path": "data/benchmarks/furosine_extrusion_crossover_140C_RamirezJimenez2000.json"
+        },
+        {
+          "artifact_type": "safety_reference",
+          "artifact_id": "ramirez_jimenez_2000_furosine_crossover",
+          "path": "data/lit/safety_reference_payloads.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "rizzello_2024_fermentation_cleanup",
+      "citation": "Rizzello et al. (2024)",
+      "doi": "10.1021/acs.jafc.3c08432",
+      "kind": "calibration_reference",
+      "chemistry_family": "microbial_fermentation_modulation",
+      "slr_family_source": "10",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "fermentation_pretreatment",
+        "off_note_cleanup",
+        "sulfur_support"
+      ],
+      "process_state_scope": [
+        "fermentation_pretreatment",
+        "heated_matrix"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "matrix_correction",
+        "headspace"
+      ],
+      "matrix_family": "fermented_plant_based_matrix",
+      "eligibility": "benchmark_eligible_parameter",
+      "status": "ready_for_calibration_encoding",
+      "what_it_supports": [
+        "Fermentation-driven hexanal cleanup prior for plant-based meat analogues",
+        "Bounded sulfur uplift context after LAB fermentation"
+      ],
+      "what_it_does_not_support": [
+        "Executable benchmark closure for a single matrix benchmark",
+        "General fermentation kinetics outside the reported cleanup window"
+      ],
+      "key_values": {
+        "hexanal_native_ug_per_g": 28.4,
+        "hexanal_fermented_ug_per_g": 1.42,
+        "mft_fermented_ug_per_g": 3.82,
+        "mft_uplift_fold": 382.0,
+        "sensory_panel_n": 15
+      },
+      "repo_next_action": "Keep encoded as a process-state calibration for fermentation cleanup and sulfur-positive uplift rather than as a benchmark payload.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "process_state_calibration",
+          "artifact_id": "rizzello_2024_lactic_fermentation_cleanup",
+          "path": "data/lit/process_state_calibrations.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "acs_jafc_3c08432_crosstalk_cleanup_link",
+      "citation": "ACS JAFC 3c08432",
+      "doi": "10.1021/acs.jafc.3c08432",
+      "kind": "calibration_reference",
+      "chemistry_family": "lipid_maillard_crosstalk",
+      "slr_family_source": "11",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "off_note",
+        "hexanal",
+        "sulfur_support",
+        "fermentation_bridge"
+      ],
+      "process_state_scope": [
+        "fermentation_pretreatment",
+        "heated_matrix",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "02",
+        "10"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "matrix_correction",
+        "headspace",
+        "reporting"
+      ],
+      "matrix_family": "fermented_textured_pea_protein",
+      "eligibility": "benchmark_eligible_parameter",
+      "status": "ready_for_calibration_encoding",
+      "what_it_supports": [
+        "Compact Family 11 linkage for simultaneous hexanal cleanup and sulfur-positive uplift after PPI fermentation",
+        "Scientist-facing crosstalk evidence that fermentation can move both lipid off-notes and meaty sulfur visibility in the same matrix"
+      ],
+      "what_it_does_not_support": [
+        "Executable Family 11 benchmark closure for one final product formulation",
+        "A universal fermentation-to-crosstalk transfer outside the reported PPI process window"
+      ],
+      "key_values": {
+        "hexanal_reduction_pct": 95.0,
+        "hexanal_native_ug_per_g": 28.4,
+        "hexanal_fermented_ug_per_g": 1.42,
+        "mft_fermented_ug_per_g": 3.82,
+        "mft_uplift_fold": 382.0,
+        "sensory_panel_n": 15
+      },
+      "repo_next_action": "Keep linked to the already-landed fermentation calibration so Family 11 crosstalk surfaces can cite the simultaneous hexanal cleanup and sulfur uplift without duplicating payload logic.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "process_state_calibration",
+          "artifact_id": "rizzello_2024_lactic_fermentation_cleanup",
+          "path": "data/lit/process_state_calibrations.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "zhao_2022_moromi_precursor_release",
+      "citation": "Zhao et al. (2022)",
+      "doi": "10.3390/molecules27196182",
+      "kind": "calibration_reference",
+      "chemistry_family": "microbial_fermentation_modulation",
+      "slr_family_source": "10",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "fermentation_pretreatment",
+        "nucleotide_support",
+        "precursor_release"
+      ],
+      "process_state_scope": [
+        "fermentation_pretreatment",
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "04",
+        "07"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "matrix_correction",
+        "reporting"
+      ],
+      "matrix_family": "moromi_like_fermentation",
+      "eligibility": "benchmark_eligible_parameter",
+      "status": "ready_for_calibration_encoding",
+      "what_it_supports": [
+        "Fermentation-driven amino-acid and nucleotide release multipliers",
+        "Process-state context for moromi-like precursor enrichment"
+      ],
+      "what_it_does_not_support": [
+        "Absolute volatile endpoint closure",
+        "Universal pretreatment transfer outside koji or moromi systems"
+      ],
+      "key_values": {
+        "glutamate_multiplier_range": [1.99, 2.49],
+        "glycine_multiplier_range": [2.38, 3.73],
+        "gmp_multiplier_range": [3.02, 6.61],
+        "amino_type_nitrogen_initial_mg_pct": 1175.0,
+        "amino_type_nitrogen_final_mg_pct": 2221.0
+      },
+      "repo_next_action": "Keep encoded as fermentation-state metadata for donor release rather than as a standalone flavor benchmark.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "process_state_calibration",
+          "artifact_id": "zhao_2022_moromi_precursor_release",
+          "path": "data/lit/process_state_calibrations.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "jafc_2019_ref24_polyphenol_thiol_capping",
+      "citation": "J. Agric. Food Chem. 2019 (Ref. 24)",
+      "doi": "",
+      "kind": "directional_prior",
+      "chemistry_family": "polyphenol_amino_capping",
+      "slr_family_source": "13",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "cysteine_sink",
+        "guardrail",
+        "sulfur_support"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "05"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "safety"
+      ],
+      "matrix_family": "polyphenol_reactive_model_system",
+      "eligibility": "conditional",
+      "status": "ready_for_directional_prior_encoding",
+      "what_it_supports": [
+        "Quantified cysteine-adduct burden in the polyphenol capping lane",
+        "Bounded free-thiol depletion prior for sulfur-support interpretation"
+      ],
+      "what_it_does_not_support": [
+        "Endpoint volatile closure",
+        "Universal transfer across all polyphenol classes"
+      ],
+      "key_values": {
+        "cys_4mc_adduct_nmol_per_mg_range": [2.2, 8.1],
+        "thiol_loss_fraction": 0.62,
+        "digestive_stability_umol_per_g": 1.7
+      },
+      "repo_next_action": "Use as a bounded polyphenol-thiol capping prior in runtime lanes that need explicit cysteine sink behavior.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "jafc_2019_ref24_polyphenol_thiol_capping_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "polyphenol_thiol_capping_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "liardon_1991_r5p_donor_potency",
+      "citation": "Liardon, de Weck-Gaudard & Philippossian (1991)",
+      "doi": "",
+      "kind": "directional_prior",
+      "chemistry_family": "nucleotide_and_ribose_support",
+      "slr_family_source": "04",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "ribose_delivery",
+        "donor_hierarchy",
+        "sulfur_support"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "07"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "reporting",
+        "recommend"
+      ],
+      "matrix_family": "aqueous_model_system",
+      "eligibility": "conditional",
+      "status": "ready_for_directional_prior_encoding",
+      "what_it_supports": [
+        "Large donor-strength separation between R5P, ribose, and glucose",
+        "A bounded reaction-order prior for high-potency reducing sugar routing"
+      ],
+      "what_it_does_not_support": [
+        "Matrix-specific retention or trapping",
+        "A direct plant benchmark"
+      ],
+      "key_values": {
+        "r5p_vs_glucose_multiplier_floor": 100.0,
+        "ribose_vs_glucose_multiplier": 7.2,
+        "r5p_reaction_order": 1.5
+      },
+      "repo_next_action": "Encode as a donor-potency prior that keeps R5P and ribose above glucose in sulfur-positive routing decisions.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "liardon_1991_r5p_donor_potency_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "nucleotide_pathway_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "huang_2021_sulfur_oav_support",
+      "citation": "Huang et al. (2021)",
+      "doi": "",
+      "kind": "directional_prior",
+      "chemistry_family": "glutathione_and_peptide_support",
+      "slr_family_source": "05",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "sulfur_support",
+        "mft",
+        "fft"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "01",
+        "03"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "reporting"
+      ],
+      "matrix_family": "aqueous_model_system",
+      "eligibility": "conditional",
+      "status": "ready_for_directional_prior_encoding",
+      "what_it_supports": [
+        "High-OAV support for sulfur markers in cysteine-xylose-glutamate systems",
+        "Bounded interpretation that MFT and FFT stay strongly favored in sulfur-positive pentose systems"
+      ],
+      "what_it_does_not_support": [
+        "Absolute ppb closure",
+        "Matrix-specific trapping or release"
+      ],
+      "key_values": {
+        "mft_oav": 9550.0,
+        "fft_oav": 24800.0,
+        "identified_volatile_count": 89,
+        "replicates": 3
+      },
+      "repo_next_action": "Keep encoded as a bounded sulfur-support prior for MFT and FFT prominence rather than as a benchmark payload.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "huang_2021_sulfur_oav_support_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "sulfur_peptide_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "blank_2001_epoxydecenal_guardrail",
+      "citation": "Blank et al. (2001)",
+      "doi": "",
+      "kind": "directional_prior",
+      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
+      "slr_family_source": "02",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "off_note",
+        "guardrail",
+        "lipid_oxidation"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "08",
+        "11"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "lipid_oxidation",
+        "reporting"
+      ],
+      "matrix_family": "lipid_rich_model_system",
+      "eligibility": "conditional",
+      "status": "ready_for_directional_prior_encoding",
+      "what_it_supports": [
+        "An ultra-low-threshold epoxydecenal guardrail for arachidonic-acid branches",
+        "Bounded off-note reporting support for highly unsaturated lipid matrices"
+      ],
+      "what_it_does_not_support": [
+        "Matrix-specific concentration closure",
+        "A full oxidation mechanism"
+      ],
+      "key_values": {
+        "target_offnote": "trans-4,5-epoxy-(E)-2-decenal",
+        "odor_threshold_ng_per_l": 0.07,
+        "precursor_fatty_acid": "arachidonic_acid"
+      },
+      "repo_next_action": "Use as a lipid off-note guardrail in bounded runtime and reporting lanes.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "blank_2001_epoxydecenal_guardrail_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "lipid_offnote_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "ordoudi_2014_hmf_peak_window",
+      "citation": "Ordoudi et al. (2014 / PMC12484514)",
+      "doi": "",
+      "kind": "calibration_reference",
+      "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
+      "slr_family_source": "09",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "caramelization_support",
+        "hmf",
+        "process_state_calibration"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "matrix_correction",
+        "reporting"
+      ],
+      "matrix_family": "caramelization_model_system",
+      "eligibility": "benchmark_eligible_parameter",
+      "status": "ready_for_calibration_encoding",
+      "what_it_supports": [
+        "An explicit HMF peak-and-decline process-state window at pH 5.0 and 125 C",
+        "Bounded amino-acid co-catalysis context for caramelization severity"
+      ],
+      "what_it_does_not_support": [
+        "Direct HDMF closure",
+        "A universal time-course outside the reported window"
+      ],
+      "key_values": {
+        "hmf_peak_mg_per_l": 140.0,
+        "hmf_residual_mg_per_l_at_360_min": 20.0,
+        "secondary_decline_horizon_min": 360.0,
+        "amino_acid_cocatalysis_multiplier": 7.8
+      },
+      "repo_next_action": "Use as a caramelization process-state calibration rather than as an executable benchmark.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "process_state_calibration",
+          "artifact_id": "ordoudi_2014_hmf_peak_window",
+          "path": "data/lit/process_state_calibrations.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "hrncirik_2014_coconut_oil_thermal_profile",
+      "citation": "Hrncirik & Zeelenberg (2014)",
+      "doi": "",
+      "kind": "calibration_reference",
+      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
+      "slr_family_source": "02",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "lipid_oxidation",
+        "lactone_support",
+        "process_state_calibration"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "target_modules": [
+        "lipid_oxidation",
+        "matrix_correction",
+        "reporting"
+      ],
+      "matrix_family": "coconut_oil_co_matrix",
+      "eligibility": "benchmark_eligible_parameter",
+      "status": "ready_for_calibration_encoding",
+      "what_it_supports": [
+        "Thermal-stability context for coconut-oil-rich co-matrices against PUFA-rich oils",
+        "Bounded delta-decalactone support for lipid-rich aroma interpretation"
+      ],
+      "what_it_does_not_support": [
+        "Exact plant-matrix volatile concentration closure",
+        "A full lipid degradation mechanism outside coconut-oil-like systems"
+      ],
+      "key_values": {
+        "journal_volume_page": "62:9666",
+        "delta_decalactone_oav_reported": true,
+        "comparative_to_pufa_oils": true
+      },
+      "repo_next_action": "Use as a coconut-oil co-matrix thermal-profile calibration so lipid-rich formulations are not interpreted with PUFA-only oxidation context.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "process_state_calibration",
+          "artifact_id": "hrncirik_2014_coconut_oil_thermal_profile",
+          "path": "data/lit/process_state_calibrations.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "marquez_ruiz_2014_oleic_oav_anchor",
+      "citation": "Marquez-Ruiz et al. (2014)",
+      "doi": "10.1021/jf502636m",
+      "kind": "calibration_reference",
+      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
+      "slr_family_source": "02",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "off_note",
+        "nonanal",
+        "oil_selection",
+        "oav_reference"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "11"
+      ],
+      "target_modules": [
+        "lipid_oxidation",
+        "matrix_correction",
+        "reporting"
+      ],
+      "matrix_family": "high_oleic_oil_model_system",
+      "eligibility": "benchmark_eligible_parameter",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Compact high-oleic oil OAV anchor showing nonanal dominance with hexanal kept near or below threshold",
+        "Scientist-facing routing context for why oleic-rich oils are materially safer than linoleic-rich oils for PBMA off-note control"
+      ],
+      "what_it_does_not_support": [
+        "Direct plant-matrix benchmark closure for one burger or extrudate",
+        "A full fatty-acid oxidation kinetic mechanism across all frying conditions"
+      ],
+      "key_values": {
+        "nonanal_oav_range": [
+          8.0,
+          22.0
+        ],
+        "hexanal_oav_ceiling": 1.5,
+        "temperature_c": 180.0,
+        "frying_cycle_max": 20,
+        "replicates": 3
+      },
+      "runtime_artifacts": [
+        {
+          "artifact_type": "flavor_reference_payload",
+          "artifact_id": "marquez_ruiz_2014_oleic_nonanal_oav_band",
+          "path": "data/lit/flavor_reference_payloads.json"
+        }
+      ],
+      "repo_next_action": "Keep as the oleic-rich reference anchor so oil-selection logic does not treat nonanal-dominant systems as equivalent to hexanal-heavy linoleic oxidation.",
+      "requires_primary_data": false
+    },
+    {
+      "id": "messina_2022_pbma_oil_oav_anchor",
+      "citation": "Messina et al. (2022)",
+      "doi": "",
+      "kind": "calibration_reference",
+      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
+      "slr_family_source": "02",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "off_note",
+        "oil_selection",
+        "delta_decalactone",
+        "oav_reference"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "11"
+      ],
+      "target_modules": [
+        "lipid_oxidation",
+        "recommend",
+        "reporting"
+      ],
+      "matrix_family": "cooked_pbma_oil_comparison",
+      "eligibility": "benchmark_eligible_parameter",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Comparative cooked-PBMA oil OAV panel for canola, high-oleic sunflower, coconut, and coconut:canola blend",
+        "A compact reference surface for oil-choice ranking that keeps both green-rancid and sweet-lactone failure modes visible"
+      ],
+      "what_it_does_not_support": [
+        "Executable benchmark closure for one final commercial burger formulation",
+        "A universal oil-ranking rule outside the reported SPI-based burger context"
+      ],
+      "key_values": {
+        "canola_hexanal_oav": 28.0,
+        "sunflower_high_oleic_nonanal_oav": 12.0,
+        "coconut_delta_decalactone_oav": 14.0,
+        "coconut_canola_3_1_hexanal_oav": 4.0,
+        "replicates": 6
+      },
+      "runtime_artifacts": [
+        {
+          "artifact_type": "flavor_reference_payload",
+          "artifact_id": "messina_2022_pbma_oil_oav_panel",
+          "path": "data/lit/flavor_reference_payloads.json"
+        }
+      ],
+      "repo_next_action": "Keep as the comparative oil-choice anchor so recommendation logic can distinguish high-oleic improvement from coconut-lactone drift without opening a new benchmark family.",
+      "requires_primary_data": false
+    },
+    {
+      "id": "aliani_2005_donor_potency_nucleotide_context",
+      "citation": "Aliani & Farmer (2005)",
+      "doi": "",
+      "kind": "directional_prior",
+      "chemistry_family": "nucleotide_and_ribose_support",
+      "slr_family_source": "04",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "ribose_delivery",
+        "nucleotide_support",
+        "sulfur_support"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "07",
+        "10"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "reporting",
+        "recommend"
+      ],
+      "matrix_family": "meat_model_system",
+      "eligibility": "conditional",
+      "status": "ready_for_directional_prior_encoding",
+      "what_it_supports": [
+        "Bounded donor-priority multipliers for ribose, G6P, and glucose in sulfur-positive chemistry",
+        "Nucleotide-context support for interpreting ribose-rich cooked systems"
+      ],
+      "what_it_does_not_support": [
+        "Plant-matrix closure",
+        "A universal sulfur yield multiplier"
+      ],
+      "key_values": {
+        "ribose_mft_multiplier": 3.8,
+        "glucose_6_phosphate_mft_multiplier": 3.2,
+        "glucose_mft_multiplier": 1.4,
+        "nucleotide_pool_measured": true
+      },
+      "repo_next_action": "Encode as a bounded donor-potency prior and keep the nucleotide context explicit in reporting.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "aliani_2005_donor_potency_nucleotide_context_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "nucleotide_pathway_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "blank_devaud_grosch_2003_g6p_hdmf_prior",
+      "citation": "Blank, Devaud & Grosch (2003)",
+      "doi": "10.1021/jf026123f",
+      "kind": "directional_prior",
+      "chemistry_family": "nucleotide_and_ribose_support",
+      "slr_family_source": "07",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "ribose_delivery",
+        "furanone_support",
+        "donor_hierarchy"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "09"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "reporting",
+        "recommend"
+      ],
+      "matrix_family": "aqueous_model_system",
+      "eligibility": "conditional",
+      "status": "ready_for_directional_prior_encoding",
+      "what_it_supports": [
+        "Bounded G6P-versus-glucose uplift for HDMF-rich phosphorylated-sugar routing",
+        "Directional support for phosphorylated donor prioritization when furanone output matters"
+      ],
+      "what_it_does_not_support": [
+        "Direct plant-matrix closure",
+        "Universal HDMF endpoint concentrations"
+      ],
+      "key_values": {
+        "g6p_hdmf_multiplier_vs_glucose": 4.4,
+        "analytical_method": "SIDA_[2H3]-HDMF",
+        "replicates": 3
+      },
+      "repo_next_action": "Encode as a bounded phosphorylated-sugar prior so G6P can outrank glucose when HDMF-support signals matter.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "blank_devaud_grosch_2003_g6p_hdmf_uplift_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "nucleotide_pathway_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "maillard_van_boekel_1992_sugar_reactivity_hierarchy",
+      "citation": "Maillard & van Boekel (1992)",
+      "doi": "",
+      "kind": "directional_prior",
+      "chemistry_family": "carbonyl_donor_hierarchy",
+      "slr_family_source": "07",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "donor_hierarchy",
+        "arrhenius_anchor",
+        "carbonyl_donor"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "03",
+        "04",
+        "09",
+        "10"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "precursor_resolver",
+        "recommend",
+        "reporting"
+      ],
+      "matrix_family": "aqueous_sugar_lysine_model_system",
+      "eligibility": "conditional",
+      "status": "ready_for_directional_prior_encoding",
+      "what_it_supports": [
+        "Quantitative sugar-reactivity hierarchy across ribose, pentoses, hexoses, and disaccharides",
+        "A temperature-aware donor-priority anchor so ribose and other pentoses are not treated as fixed scalar uplifts relative to glucose"
+      ],
+      "what_it_does_not_support": [
+        "Direct plant-matrix closure for PPI or SPI systems",
+        "A full downstream sulfur-yield benchmark without matching amino-acid and matrix context"
+      ],
+      "key_values": {
+        "ribose_vs_glucose_multiplier": 8.2,
+        "xylose_vs_glucose_multiplier": 5.9,
+        "fructose_vs_glucose_multiplier": 0.65,
+        "maltose_vs_glucose_multiplier": 0.10,
+        "glucose_ea_kj_per_mol": 106.0,
+        "ribose_ea_kj_per_mol": 114.0
+      },
+      "repo_next_action": "Keep as the quantitative donor-hierarchy prior so Family 07 can reason over pentose-versus-hexose reactivity with explicit k_obs and Ea support rather than only R5P-specific evidence.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "maillard_van_boekel_1992_sugar_reactivity_hierarchy_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "carbonyl_donor_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "ref41_ppi_sulfur_binding",
+      "citation": "DOI ref. 41 in raw/11_maillard_lipid_crosstalk.md",
+      "doi": "",
+      "kind": "directional_prior",
+      "chemistry_family": "lipid_maillard_crosstalk",
+      "slr_family_source": "11",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "retention_support",
+        "binding_support",
+        "sulfur_support"
+      ],
+      "process_state_scope": [
+        "ambient_slurry",
+        "heated_matrix",
+        "aqueous_pre_extrusion_model"
+      ],
+      "supporting_families": [
+        "01",
+        "10"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "headspace",
+        "matrix_correction"
+      ],
+      "matrix_family": "pea_protein_isolate",
+      "eligibility": "conditional",
+      "status": "ready_for_directional_prior_encoding",
+      "what_it_supports": [
+        "PPI sulfur-volatile binding order support showing DMTS > DMDS > DMS under Stern-Volmer analysis",
+        "A bounded temperature-weakening prior for sulfur retention before higher-temperature covalent trapping dominates"
+      ],
+      "what_it_does_not_support": [
+        "Exact MFT or FFT binding coefficients in pea matrices",
+        "One-condition absolute sulfur headspace closure for a benchmark product"
+      ],
+      "key_values": {
+        "binding_hierarchy": [
+          "DMTS",
+          "DMDS",
+          "DMS"
+        ],
+        "binding_spontaneous": true,
+        "binding_exothermic": true,
+        "temperature_effect_direction": "binding_weakens_as_temperature_increases",
+        "dominant_binding_forces": [
+          "hydrophobic",
+          "van_der_waals"
+        ]
+      },
+      "repo_next_action": "Keep as a bounded sulfur-binding order prior so Family 11 does not treat all pea-matrix sulfur volatiles as retention-neutral before heat-driven trapping takes over.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "ref41_ppi_sulfur_volatile_binding_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "retention_binding_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "glomb_1995_3dg_fragmentation_stoichiometry",
+      "citation": "Glomb & Monnier (1995)",
+      "doi": "",
+      "kind": "directional_prior",
+      "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
+      "slr_family_source": "09",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "dicarbonyl",
+        "guardrail",
+        "caramelization_support"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "08",
+        "12",
+        "14"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "safety",
+        "reporting"
+      ],
+      "matrix_family": "aqueous_model_system",
+      "eligibility": "conditional",
+      "status": "ready_for_directional_prior_encoding",
+      "what_it_supports": [
+        "Deterministic 3-DG fragmentation fractions for MGO, GO, and diketones",
+        "Bounded routing context for AGE and off-note reasoning"
+      ],
+      "what_it_does_not_support": [
+        "A complete kinetic mechanism",
+        "Matrix-specific concentration closure"
+      ],
+      "key_values": {
+        "methylglyoxal_fraction": 0.41,
+        "glyoxal_fraction": 0.28,
+        "diacetyl_fraction": 0.18,
+        "2_3_pentanedione_fraction": 0.06
+      },
+      "repo_next_action": "Use as a bounded dicarbonyl fragmentation prior for AGE and diketone routing instead of opening a new benchmark lane.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "glomb_1995_3dg_fragmentation_stoichiometry_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "dicarbonyl_fragmentation_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "hidalgo_zamora_2004_4hne_pentylpyrrole",
+      "citation": "Hidalgo & Zamora (2004)",
+      "doi": "",
+      "kind": "directional_prior",
+      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
+      "slr_family_source": "02",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "off_note",
+        "4hne",
+        "guardrail"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "11"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "lipid_oxidation",
+        "reporting"
+      ],
+      "matrix_family": "lipid_oxidation_model_system",
+      "eligibility": "conditional",
+      "status": "ready_for_directional_prior_encoding",
+      "what_it_supports": [
+        "Bounded 4-HNE-to-2-pentylpyrrole off-note routing in oxidized lipid systems",
+        "Absolute-concentration and LOQ-backed guardrail support for pyrrolic off-notes"
+      ],
+      "what_it_does_not_support": [
+        "Matrix-specific concentration closure",
+        "A complete secondary lipid-oxidation mechanism"
+      ],
+      "key_values": {
+        "target_offnote": "2-pentylpyrrole",
+        "reactant_pairing": "4-HNE + phenylalanine",
+        "absolute_concentrations_reported": true,
+        "loq_reported": true
+      },
+      "repo_next_action": "Use as a bounded 4-HNE pyrrole guardrail so oxidized-lipid systems can surface pyrrolic off-note risk explicitly.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "hidalgo_zamora_2004_4hne_pentylpyrrole_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "lipid_offnote_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "mottram_2001_mft_quench_buffering_anchor",
+      "citation": "Mottram et al. (2001)",
+      "doi": "",
+      "kind": "calibration_reference",
+      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
+      "slr_family_source": "02",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "off_note",
+        "sulfur_support",
+        "buffering_control"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "05",
+        "11"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "matrix_correction",
+        "reporting"
+      ],
+      "matrix_family": "sulfur_model_system",
+      "eligibility": "benchmark_eligible_parameter",
+      "status": "ready_for_calibration_encoding",
+      "what_it_supports": [
+        "Competitive quenching of MFT by lipid aldehydes once hexanal pressure rises into the sulfur-limited regime",
+        "A bounded carnosine-buffered process-state uplift for MFT-positive sulfur systems"
+      ],
+      "what_it_does_not_support": [
+        "Exact final-product closure in intact plant-protein matrices",
+        "A complete lipid-Maillard kinetic mechanism across all aldehydes and buffers"
+      ],
+      "key_values": {
+        "hexanal_to_cysteine_ratio_threshold": 0.5,
+        "mft_quench_fraction_range": [
+          0.15,
+          0.4
+        ],
+        "optimal_carnosine_concentration_M": 0.1,
+        "carnosine_mft_uplift_fraction_vs_unbuffered": 0.61
+      },
+      "repo_next_action": "Keep the Mottram landing compact by splitting sulfur-quench and buffering support into one bounded prior plus one process-state anchor instead of opening a new benchmark family.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "mottram_2001_lipid_aldehyde_mft_quench_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "lipid_offnote_priors"
+          ]
+        },
+        {
+          "artifact_type": "process_state_calibration",
+          "artifact_id": "mottram_2001_carnosine_buffered_mft_uplift",
+          "path": "data/lit/process_state_calibrations.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "yeo_mottram_2023_lecithin_crosstalk_anchor",
+      "citation": "Yeo & Mottram (2023)",
+      "doi": "",
+      "kind": "calibration_reference",
+      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
+      "slr_family_source": "02",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "phospholipid_support",
+        "sulfur_support",
+        "thiophene_uplift"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "01",
+        "15"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "recommend",
+        "reporting"
+      ],
+      "matrix_family": "plant_protein_plus_lecithin_model",
+      "eligibility": "benchmark_eligible_parameter",
+      "status": "ready_for_calibration_encoding",
+      "what_it_supports": [
+        "A bounded soy-lecithin dose window that lifts alkyl-thiophene meaty markers in plant-protein sulfur systems",
+        "Compact phospholipid-crosstalk support for formulation ranking and reporting"
+      ],
+      "what_it_does_not_support": [
+        "Direct closure for any one commercial PBMA product",
+        "A universal phospholipid-addition rule outside the reported model systems"
+      ],
+      "key_values": {
+        "optimal_soy_lecithin_pct_w_w_range": [
+          0.5,
+          1.0
+        ],
+        "alkyl_thiophene_uplift_fold": 2.4,
+        "sensory_confirmation": true
+      },
+      "repo_next_action": "Treat soy lecithin as a bounded phospholipid-crosstalk calibration rather than as a generic oil addition or a new executable benchmark.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "process_state_calibration",
+          "artifact_id": "yeo_mottram_2023_soy_lecithin_thiophene_uplift",
+          "path": "data/lit/process_state_calibrations.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "wang_2022_lab_hexanal_cleanup_anchor",
+      "citation": "Wang et al. (2022)",
+      "doi": "",
+      "kind": "calibration_reference",
+      "chemistry_family": "off_note_and_maillard_suppression",
+      "slr_family_source": "08",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "off_note",
+        "hexanal",
+        "fermentation_cleanup",
+        "oav_reference"
+      ],
+      "process_state_scope": [
+        "fermentation_pretreatment",
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "02",
+        "10"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "reporting",
+        "recommend"
+      ],
+      "matrix_family": "lab_fermented_plant_protein",
+      "eligibility": "benchmark_eligible_parameter",
+      "status": "ready_for_reference_encoding",
+      "what_it_supports": [
+        "A compact residual-hexanal OAV target after LAB cleanup",
+        "Scientist-facing reporting support for pushing fermentation-treated systems below the hexanal threshold"
+      ],
+      "what_it_does_not_support": [
+        "A universal fermentation kinetics model",
+        "Exact final-product closure across all plant proteins and starter cultures"
+      ],
+      "key_values": {
+        "hexanal_depletion_fraction": 0.957,
+        "residual_hexanal_oav": 0.47,
+        "adh_aldh_mechanism_confirmed": true,
+        "sensory_panel_reported": true
+      },
+      "repo_next_action": "Keep Wang 2022 as a compact hexanal-cleanup reference anchor that complements, rather than duplicates, the already-landed fermentation cleanup state package.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "flavor_reference_payload",
+          "artifact_id": "wang_2022_lab_hexanal_cleanup_oav_target",
+          "path": "data/lit/flavor_reference_payloads.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "zhang_2022_unsaturated_aldehyde_potency_anchor",
+      "citation": "Zhang et al. (2022)",
+      "doi": "",
+      "kind": "directional_prior",
+      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
+      "slr_family_source": "02",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "off_note",
+        "unsaturated_aldehyde",
+        "guardrail",
+        "oav_reference"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "08",
+        "11"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "lipid_oxidation",
+        "reporting"
+      ],
+      "matrix_family": "aldehyde_model_system",
+      "eligibility": "conditional",
+      "status": "ready_for_directional_prior_encoding",
+      "what_it_supports": [
+        "A directional potency hierarchy where unsaturated aldehydes exert stronger crosstalk and off-note pressure than saturated analogues",
+        "LOD/LOQ-backed off-note guardrail support for unsaturated aldehyde branches"
+      ],
+      "what_it_does_not_support": [
+        "Matrix-specific concentration closure",
+        "A full aldehyde reaction-network mechanism"
+      ],
+      "key_values": {
+        "unsaturation_effect_direction": "unsaturated_greater_than_saturated",
+        "oav_reported": true,
+        "lod_loq_reported": true,
+        "triplicates": true
+      },
+      "repo_next_action": "Use as a directional off-note prior so unsaturated aldehyde branches stay visibly higher risk than saturated analogues without opening a new benchmark lane.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "zhang_2022_unsaturated_aldehyde_offnote_potency_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "lipid_offnote_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "frontiers_2022_hcw_aa_arrhenius_anchor",
+      "citation": "Frontiers Nutr. 2022 (Ref. 22)",
+      "doi": "10.3389/fnut.2022.1022254",
+      "kind": "calibration_reference",
+      "chemistry_family": "ascorbic_acid_maillard",
+      "slr_family_source": "14",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "arrhenius_anchor",
+        "ascorbic_support",
+        "dicarbonyl"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "12"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "reporting"
+      ],
+      "matrix_family": "ascorbic_hcw_model",
+      "eligibility": "runtime_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Primary Family 14 Arrhenius anchor for pH-sensitive ascorbic-acid degradation under extrusion-like thermal conditions",
+        "Explicit HCW calibration for AA-driven dicarbonyl release instead of treating AA as a static precursor burden"
+      ],
+      "what_it_does_not_support": [
+        "Direct AGE endpoint closure in a real SPI or PPI extrudate",
+        "A full oxygen-transition model without additional barrel-state evidence"
+      ],
+      "key_values": {
+        "ea_kj_per_mol_by_ph": {
+          "5.0": 15.77,
+          "7.0": 31.7,
+          "9.5": 47.53
+        },
+        "kinetic_order": "pseudo_first_order",
+        "temperature_window_c": [150.0, 190.0]
+      },
+      "repo_next_action": "Keep encoded as a bounded Arrhenius prior until a direct SPI/PPI ascorbate extrusion benchmark exists.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "frontiers_2022_hcw_aa_arrhenius_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "ascorbic_pathway_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "scielo_brasil_aa_crosslink_hierarchy_anchor",
+      "citation": "SciELO Brasil (Ref. 4)",
+      "doi": "",
+      "kind": "calibration_reference",
+      "chemistry_family": "ascorbic_acid_maillard",
+      "slr_family_source": "14",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "arrhenius_anchor",
+        "damage_marker",
+        "amino_group_sink"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "12"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "reporting"
+      ],
+      "matrix_family": "ascorbic_amino_crosslink_model",
+      "eligibility": "runtime_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Amino-acid hierarchy for AA-derived cross-link routing with explicit Lys, Arg, and His Arrhenius anchors",
+        "Safety-facing Family 14 logic that keeps lysine as the dominant practical sink even when histidine has the lowest Ea"
+      ],
+      "what_it_does_not_support": [
+        "Direct pentosidine or pyrraline closure in plant-protein extrudates",
+        "A universal cross-link law outside the reported AA model systems"
+      ],
+      "key_values": {
+        "ea_kj_per_mol_by_amino_acid": {
+          "lysine": 54.94,
+          "arginine": 50.08,
+          "histidine": 35.31
+        },
+        "observed_rate_order": [
+          "lysine",
+          "arginine",
+          "histidine"
+        ]
+      },
+      "repo_next_action": "Keep encoded as a bounded cross-link hierarchy prior until same-run AA damage-marker panels are benchmarked in plant matrices.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "scielo_brasil_aa_crosslink_hierarchy_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "ascorbic_pathway_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "pmc9351765_crosspy_trapping_anchor",
+      "citation": "PMC PMCID:PMC9351765 (Ref. 12)",
+      "doi": "",
+      "kind": "calibration_reference",
+      "chemistry_family": "melanoidin_polymerization",
+      "slr_family_source": "16",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "trapping_support",
+        "melanoidin",
+        "sulfur_support"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "01",
+        "05"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "reporting"
+      ],
+      "matrix_family": "melanoidin_trapping_model",
+      "eligibility": "runtime_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Irreversible CROSSPY-driven MFT trapping support for high-melanoidin process states",
+        "Family 16 justification for non-recoverable thiol loss instead of purely reversible sulfur attenuation"
+      ],
+      "what_it_does_not_support": [
+        "A full texture-to-flavor co-model for WHC, WSI, and G-prime collapse",
+        "Species-resolved closure for every thiol in every extrusion condition"
+      ],
+      "key_values": {
+        "mft_rfd_baseline": 4.0,
+        "mft_rfd_with_melanoidins": 2.0,
+        "melanoidin_loading_reference_mg": 125.0,
+        "mechanism": "crosspy_radical_thioether_adduction"
+      },
+      "repo_next_action": "Keep encoded as a bounded Family 16 trapping prior until the extrusion severity surface and same-run sulfur retention benchmarks are wider.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "pmc9351765_crosspy_mft_scavenging_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "melanoidin_trapping_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "uspto_ptacts_2023_yeast_extract_anchor",
+      "citation": "USPTO PTACTS (2023 compiled)",
+      "doi": "",
+      "kind": "calibration_reference",
+      "chemistry_family": "alternative_protein_matrix_scope",
+      "slr_family_source": "06",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "core_meaty",
+        "sulfur_positive",
+        "matrix_intake",
+        "yeast_extract"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "03",
+        "05"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "reporting"
+      ],
+      "matrix_family": "yeast_extract_reaction_flavor",
+      "eligibility": "runtime_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "A high-ceiling sulfur-positive anchor for thiamine-rich yeast-extract systems outside the soy or beef reference bands",
+        "Family 06 matrix-scope support showing that precursor-rich yeast extracts can legitimately target very high MFT OAVs"
+      ],
+      "what_it_does_not_support": [
+        "A complete yeast-extract benchmark payload in the current runtime surface",
+        "Automatic transfer of the reported OAV band to dilute SPI or PPI systems"
+      ],
+      "key_values": {
+        "mft_oav_band": [2000.0, 8000.0],
+        "thiamine_context": "high_internal_thiamine",
+        "analytical_method": "sida"
+      },
+      "repo_next_action": "Keep encoded as a sulfur-positive reference anchor until a full executable yeast-extract benchmark package is built.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "flavor_reference_payload",
+          "artifact_id": "uspto_ptacts_2023_yeast_extract_mft_oav_band",
+          "path": "data/lit/flavor_reference_payloads.json",
+          "sections": [
+            "sulfur_reference_anchors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "pmc_2024_pba_cml_cel_ranges_anchor",
+      "citation": "PMC 2024 (PMC12451096)",
+      "doi": "",
+      "kind": "safety_reference",
+      "chemistry_family": "protein_damage_markers",
+      "slr_family_source": "12",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "safety",
+        "cml",
+        "cel",
+        "commercial_reference"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "extrusion_structured"
+      ],
+      "target_modules": [
+        "safety",
+        "reporting"
+      ],
+      "matrix_family": "commercial_pba_products",
+      "eligibility": "runtime_eligible",
+      "status": "ready_for_reference_encoding",
+      "what_it_supports": [
+        "A broad commercial AGE validation band for CML and CEL in plant-based analog products",
+        "Family 12 guardrail visibility beyond the narrower Foods 2023 benchmark cluster"
+      ],
+      "what_it_does_not_support": [
+        "A formulation-specific kinetic reconstruction",
+        "Standalone process attribution without an executable severity proxy"
+      ],
+      "key_values": {
+        "cml_range_mg_per_kg": [16.0, 110.0],
+        "cel_range_mg_per_kg": [25.0, 110.0]
+      },
+      "repo_next_action": "Keep encoded as the broad Family 12 commercial AGE band and pair it with executable CML/CEL proxy benchmarks for severity interpretation.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "safety_reference",
+          "artifact_id": "pmc_2024_pba_cml_cel_ranges",
+          "path": "data/lit/safety_reference_payloads.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "pmc_12648097_acrylamide_mitigation_anchor",
+      "citation": "PMC PMCID:PMC12648097 (Ref. 5)",
+      "doi": "",
+      "kind": "safety_reference",
+      "chemistry_family": "polyphenol_amino_capping",
+      "slr_family_source": "13",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "safety",
+        "acrylamide",
+        "capping_agent"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "target_modules": [
+        "safety",
+        "reporting"
+      ],
+      "matrix_family": "amino_acid_capped_model_system",
+      "eligibility": "runtime_eligible",
+      "status": "ready_for_reference_encoding",
+      "what_it_supports": [
+        "An upper-bound Family 13 mitigation anchor for cysteine-plus-glycine acrylamide suppression",
+        "Safety-side interpretation of aggressive amino-acid capping strategies"
+      ],
+      "what_it_does_not_support": [
+        "Generalized kinetic closure across arbitrary baking or extrusion profiles",
+        "Direct finished-product prediction without benchmark context"
+      ],
+      "key_values": {
+        "acrylamide_suppression_fraction": 0.978,
+        "mitigation_pair": ["cysteine", "glycine"]
+      },
+      "repo_next_action": "Keep encoded as the strongest Family 13 safety mitigation anchor without misclassifying it as a universal kinetic rule.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "safety_reference",
+          "artifact_id": "pmc_12648097_acrylamide_mitigation",
+          "path": "data/lit/safety_reference_payloads.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "wageningen_ref9_hme_rework_hydration_anchor",
+      "citation": "Wageningen Ref. 9",
+      "doi": "",
+      "kind": "calibration_reference",
+      "chemistry_family": "melanoidin_polymerization",
+      "slr_family_source": "16",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "process_state_calibration",
+        "extrusion",
+        "hydration_collapse",
+        "melanoidin_burden"
+      ],
+      "process_state_scope": [
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "06"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "reporting"
+      ],
+      "matrix_family": "spi_ppi_hme_rework",
+      "eligibility": "runtime_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "A direct HME rework anchor for supra-additive WHC collapse in SPI and PPI",
+        "Family 16 reporting of melanoidin-rich extrusion damage beyond simple browning proxies"
+      ],
+      "what_it_does_not_support": [
+        "A coupled rheology-and-volatile closure model",
+        "Same-run sulfur retention quantification"
+      ],
+      "key_values": {
+        "spi_whc_change_pct_by_cycle": [-17.0, -63.0],
+        "ppi_whc_change_pct_by_cycle": [-65.0, -90.0],
+        "g_prime_recovery_after_rework": false
+      },
+      "repo_next_action": "Keep encoded as the primary HME rework hydration-collapse anchor until same-run flavor-plus-texture datasets exist.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "process_state_calibration",
+          "artifact_id": "wageningen_ref9_hme_rework_hydration_collapse",
+          "path": "data/lit/process_state_calibrations.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "acs_foodscitech_2024_hme_firmness_anchor",
+      "citation": "ACS Food Sci. Technol. 2024 (Ref. 1)",
+      "doi": "10.1021/acsfoodscitech.4c00677",
+      "kind": "calibration_reference",
+      "chemistry_family": "melanoidin_polymerization",
+      "slr_family_source": "16",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "process_state_calibration",
+        "extrusion",
+        "firmness",
+        "melanoidin_burden"
+      ],
+      "process_state_scope": [
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "06"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "reporting"
+      ],
+      "matrix_family": "spi_rice_hme_burger_analogues",
+      "eligibility": "runtime_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "A bounded HME firmness envelope for SPI-rich analogues across the practical moisture window",
+        "Family 16 process-state visibility for texture optimization under melanoidin-heavy extrusion"
+      ],
+      "what_it_does_not_support": [
+        "A universal firmness model across all protein sources",
+        "An Ogden-based constitutive solver in the current runtime"
+      ],
+      "key_values": {
+        "breaking_force_n_range": [10.0, 104.0],
+        "optimal_moisture_pct_range": [20.0, 25.0]
+      },
+      "repo_next_action": "Keep encoded as the first direct HME firmness calibration anchor while the extrusion-mechanics solver remains bounded and report-first.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "process_state_calibration",
+          "artifact_id": "acs_foodscitech_2024_hme_firmness_window",
+          "path": "data/lit/process_state_calibrations.json"
+        }
+      ],
+      "requires_primary_data": false
+    }
+  ],
+  "structural_gaps": [
+    {
+      "id": "ppi_meaty_positive_matrix_benchmark",
+      "description": "Quantitative aqueous PPI benchmark with ribose + cysteine measuring MFT/FFT and hexanal in the same run.",
+      "requires_primary_data": true,
+      "priority": "critical",
+      "closure_outcome": "wet_lab_only",
+      "evidence_state": "still_missing",
+      "triage_decision": "no_external_candidate_package",
+      "benchmark_contract_missing": [
+        "intact aqueous PPI matrix",
+        "exogenous ribose plus cysteine in the same run",
+        "absolute simultaneous MFT or FFT plus hexanal quantification"
+      ],
+      "near_miss_candidates": [
+        {
+          "entry_id": "nishimura_abe_2024",
+          "reason": "Confirms soy hydrolysate sulfur chemistry with cysteine plus ribose, but it is qualitative only and not an intact PPI benchmark."
+        },
+        {
+          "entry_id": "pmc9905368_spi_hvp_xylose_benchmark",
+          "reason": "Executable sulfur-focused SPI-HVP benchmark, but it is hydrolysate-driven, soy rather than pea, and lacks same-run off-flavour closure."
+        }
+      ],
+      "why": "No benchmark-eligible paper exists; the SLR confirms this is a structural literature gap rather than an encoding backlog."
+    },
+    {
+      "id": "spi_meaty_positive_matrix_benchmark",
+      "description": "Quantitative aqueous SPI benchmark with ribose + cysteine measuring MFT/FFT and off-flavour markers in the same run.",
+      "requires_primary_data": true,
+      "priority": "critical",
+      "closure_outcome": "wet_lab_only",
+      "evidence_state": "still_missing",
+      "triage_decision": "no_external_candidate_package",
+      "benchmark_contract_missing": [
+        "intact aqueous SPI matrix",
+        "absolute MFT or FFT quantification with internal standards",
+        "same-run off-flavour markers such as hexanal or 2-pentylfuran"
+      ],
+      "near_miss_candidates": [
+        {
+          "entry_id": "nishimura_abe_2024",
+          "reason": "The closest soy-system paper, but it covers soy hydrolysate chemistry qualitatively and does not provide absolute MFT or FFT closure."
+        },
+        {
+          "entry_id": "trikusuma_2019",
+          "reason": "Quantitative pea UHT off-flavour panel, but without exogenous ribose plus cysteine and without sulfur-positive closure."
+        },
+        {
+          "entry_id": "pmc9905368_spi_hvp_xylose_benchmark",
+          "reason": "Quantitative sulfur benchmark in soy hydrolysate, but it does not close same-run off-flavour markers in intact aqueous SPI."
+        }
+      ],
+      "why": "The SPI-side literature bifurcates into soy hydrolysate sulfur chemistry and separate off-flavour papers; no single benchmark-eligible package closes the mixed meaty-positive contract."
+    },
+    {
+      "id": "mft_fft_matrix_retention",
+      "description": "Direct retention/headspace release measurements for MFT and FFT in PPI or SPI versus free-precursor systems.",
+      "requires_primary_data": true,
+      "priority": "high",
+      "closure_outcome": "bounded_computational_closure",
+      "evidence_state": "computational_closure_candidate",
+      "why": "Partitioning and binding residues can be estimated via MLP/DFT-based Kd surrogates to close the retention gap."
+    },
+    {
+      "id": "ppi_spi_time_series",
+      "description": "Time-resolved volatile profile for ribose + cysteine in PPI/SPI with at least three post-zero sampling points.",
+      "requires_primary_data": true,
+      "priority": "medium",
+      "closure_outcome": "wet_lab_only",
+      "evidence_state": "still_missing",
+      "why": "No benchmark-eligible temporal dataset exists for the target matrix systems."
+    },
+    {
+      "id": "meaty_off_flavour_safety_tradeoff_panel",
+      "description": "Single-run panel covering MFT, FFT, hexanal, 2-pentylfuran, furfural, pyrazines, and acrylamide where relevant.",
+      "requires_primary_data": true,
+      "priority": "high",
+      "closure_outcome": "wet_lab_only",
+      "evidence_state": "still_missing",
+      "triage_decision": "split_across_multiple_studies",
+      "benchmark_contract_missing": [
+        "same-run meaty sulfur markers",
+        "same-run adverse lipid markers",
+        "same-run safety endpoint coverage"
+      ],
+      "near_miss_candidates": [
+        {
+          "entry_id": "pmc9905368_spi_hvp_xylose_benchmark",
+          "reason": "Closes sulfur-positive meaty markers but not off-flavour or safety endpoints."
+        },
+        {
+          "entry_id": "trikusuma_2019",
+          "reason": "Closes heated pea off-flavour markers but not MFT or FFT or safety markers."
+        },
+        {
+          "entry_id": "squeo_2023",
+          "reason": "Closes acrylamide endpoint ranges but not same-run aroma tradeoffs."
+        }
+      ],
+      "why": "The literature still splits meaty chemistry, off-flavour suppression, and safety endpoints across different studies, so there is no external benchmark package to promote honestly."
+    }
+  ],
+  "minimum_primary_experiment": {
+    "matrices": [
+      "PPI 5% buffered slurry",
+      "SPI 5% buffered slurry"
+    ],
+    "exogenous_precursors": {
+      "D-ribose_mM": 1.0,
+      "L-cysteine_mM": 1.0
+    },
+    "conditions": [
+      {
+        "matrix": "PPI",
+        "ph": 5.5,
+        "temp_C": 95,
+        "time_points_min": [
+          0,
+          30,
+          60,
+          120,
+          240
+        ]
+      },
+      {
+        "matrix": "SPI",
+        "ph": 5.8,
+        "temp_C": 120,
+        "time_points_min": [
+          0,
+          30,
+          60,
+          120,
+          240
+        ]
+      }
+    ],
+    "analytical_panel": [
+      "2-methyl-3-furanthiol",
+      "2-furfurylthiol",
+      "hexanal",
+      "2-pentylfuran",
+      "furfural",
+      "2,5-dimethylpyrazine"
+    ],
+    "companion_assays": [
+      "Ellman / free SH",
+      "OPA / free amino",
+      "DSC or equivalent denaturation proxy"
+    ],
+    "instrumentation": "HS-SPME-GC-MS with isotopically labelled internal standard; add acrylamide LC-MS/MS for the high-temperature SPI arm."
+  }
+}
