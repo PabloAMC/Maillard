@@ -274,6 +274,7 @@ class MaillardPipeline:
                 temperature_celsius=form.get("temp", global_conditions.temperature_celsius),
                 time_minutes=form.get("time_minutes", 60.0),
                 water_activity=water_activity,
+                degree_of_hydrolysis=form.get("degree_of_hydrolysis"),
             )
             effective_ratios = dict(family_upstream_contract.get("effective_molar_ratios", {})) or raw_ratios.copy()
             if family_upstream_contract.get("pretreatment_active"):
@@ -461,6 +462,12 @@ class MaillardPipeline:
             safety_modifiers = dict(modifiers)
             if extrusion_process.get("active"):
                 safety_modifiers["__extrusion_process__"] = extrusion_process
+            safety_modifiers["__runtime_context__"] = {
+                "additives": additives,
+                "interventions": interventions,
+                "protein_type": protein_type,
+                "process_state": process_state,
+            }
 
             safety_val, flagged = evaluate_formulation_safety(
                 name_ratios, 

@@ -597,6 +597,7 @@ def render_benchmark_summary_markdown(summaries: Iterable['BenchmarkSummary']) -
     ]
 
     for summary in rows:
+        benchmark_display = f"{benchmark_label(summary.benchmark_id)} [{summary.benchmark_id}]"
         if not summary.supported:
             notes = summary.reason or "Unsupported"
             pearson = "n/a"
@@ -615,7 +616,7 @@ def render_benchmark_summary_markdown(summaries: Iterable['BenchmarkSummary']) -
             strict_ready = "yes" if summary.strict_ready else "no"
 
         lines.append(
-            f"| {benchmark_label(summary.benchmark_id)} | {summary.tier} | {summary.family} | {', '.join(summary.chemistry_families) or 'none'} | {', '.join(summary.payload_roles) or 'none'} | {summary.protein_type} | {summary.process_state or 'n/a'} | {summary.execution_path} | {summary.benchmark_engine} | {summary.cantera_role} | {summary.thermodynamic_gating_policy} | {summary.ranking_contract_status} | {summary.overall_status} | {strict_ready} | {coverage} | {pearson} | {max_ratio} | {mean_log_error} | {mae} | {notes} |"
+            f"| {benchmark_display} | {summary.tier} | {summary.family} | {', '.join(summary.chemistry_families) or 'none'} | {', '.join(summary.payload_roles) or 'none'} | {summary.protein_type} | {summary.process_state or 'n/a'} | {summary.execution_path} | {summary.benchmark_engine} | {summary.cantera_role} | {summary.thermodynamic_gating_policy} | {summary.ranking_contract_status} | {summary.overall_status} | {strict_ready} | {coverage} | {pearson} | {max_ratio} | {mean_log_error} | {mae} | {notes} |"
         )
 
     supported_count = sum(1 for summary in rows if summary.supported)

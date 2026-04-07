@@ -37,6 +37,10 @@ def test_track0_and_track1_artifacts_exist_and_are_exposed_in_reporting():
     assert surface["mlp_candidate_registry"] == "data/lit/mlp_candidate_registry.json"
     assert surface["mlp_external_benchmark_evidence"] == "data/lit/mlp_external_benchmark_evidence.json"
     assert surface["geometry_benchmark_set"] == "data/lit/geometry_benchmark_set.json"
+    assert surface["literature_backlog"] == "results/validation/literature_backlog.md"
+    assert surface["literature_backlog_json"] == "results/validation/literature_backlog.json"
+    assert surface["deep_research_runtime_queue"] == "results/validation/deep_research_runtime_queue.md"
+    assert surface["deep_research_runtime_queue_json"] == "results/validation/deep_research_runtime_queue.json"
 
 
 def test_family_ingestion_plan_registry_prioritizes_first_wave_extension_lanes():

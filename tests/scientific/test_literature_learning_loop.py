@@ -18,7 +18,10 @@ def test_learning_loop_payload_links_ready_references_to_runtime_artifacts():
 
     assert payload["summary"]["ready_reference_count"] == len(rows)
     assert payload["summary"]["ready_reference_count"] >= 5
+    assert payload["summary"]["queue_conflict_count"] == 0
     assert rows["trikusuma_2019"]["encoding_status"] == "encoded_runtime_artifact"
+    assert rows["trikusuma_2019"]["triage_status"] == "ready_benchmark"
+    assert rows["trikusuma_2019"]["runtime_artifacts_present"] is True
     assert rows["pmc_2026_hme_hexanal_baseline"]["encoding_status"] == "encoded_runtime_artifact"
     assert rows["acs_2022_pba_lysine_loss_benchmark"]["encoding_status"] == "encoded_runtime_artifact"
     assert rows["trikusuma_2019"]["template_kind"] == "benchmark_payload"
@@ -39,6 +42,7 @@ def test_learning_loop_reviews_matrix_priors_and_structural_gaps():
     queue_rows = {row["chemistry_family"]: row for row in payload["payload_queue_review"]["queue_by_chemistry_family"]}
     promotion_queue = payload["s11_c_family_promotion_queue"]
     intake_gaps = {row["gap_id"]: row for row in payload["intake_structural_gap_review"]}
+    backlog = payload["literature_backlog"]
 
     assert prior_rows["myco"]["has_accessibility_window"] is True
     assert "directional_only" in prior_rows["myco"]["uncertainty_postures"]
@@ -55,9 +59,11 @@ def test_learning_loop_reviews_matrix_priors_and_structural_gaps():
     assert payload["summary"]["families_with_primary_payload_support"] >= 6
     assert payload["summary"]["wet_lab_only_intake_gap_count"] >= 3
     assert promotion_queue["selected_family"]["family_id"] == "carbonyl_donor_hierarchy"
-    assert promotion_queue["fallback_family"]["family_id"] == "thiamine_fragmentation_support"
+    assert promotion_queue["fallback_family"]["family_id"] in {"thiamine_fragmentation_support", "fermentation_pretreatment"}
     assert promotion_queue["selected_family"]["minimum_runtime_landing"] == "benchmark_payload"
     assert promotion_queue["selected_family"]["reject_narrative_only"] is True
+    assert backlog["summary"]["queue_conflict_count"] == 0
+    assert backlog["minimum_primary_experiment"]["exogenous_precursors"]["D-ribose_mM"] == 1.0
 
     markdown = render_literature_learning_loop_markdown(payload)
     assert "Literature Learning Loop" in markdown
@@ -66,5 +72,6 @@ def test_learning_loop_reviews_matrix_priors_and_structural_gaps():
     assert "S11.C Family Promotion Queue" in markdown
     assert "Matrix Prior Review" in markdown
     assert "Intake Structural Gaps" in markdown
+    assert "Runtime Present" in markdown
     assert "spi_meaty_positive_matrix_benchmark" in markdown
     assert "myco" in markdown

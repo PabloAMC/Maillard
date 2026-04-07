@@ -406,12 +406,18 @@ def _resolve_melanoidin_trapping_factor(
     protein_type: ProteinType,
     process_state: str,
     projection_severity: float,
+    family_upstream_contract: Optional[Mapping[str, Any]] = None,
 ) -> float:
-    if protein_type == ProteinType.FREE_AMINO_ACID:
-        return 1.0
-
     profile = _MELANOIDIN_TRAPPING_PROFILES.get(_normalize_chemical_name(compound_name))
     if profile is None:
+        return 1.0
+
+    family_lanes = (family_upstream_contract or {}).get("family_lanes", {}) or {}
+    thiamine_lane = family_lanes.get("03", {}) or {}
+    sulfur_lane = family_lanes.get("05", {}) or {}
+    melanoidin_lane = family_lanes.get("16", {}) or {}
+    free_supported_context = bool(thiamine_lane.get("active", False) or sulfur_lane.get("active", False))
+    if protein_type == ProteinType.FREE_AMINO_ACID and not (bool(melanoidin_lane.get("active", False)) and free_supported_context):
         return 1.0
 
     severity = max(0.0, min(1.0, float(projection_severity)))
@@ -431,21 +437,38 @@ def _resolve_upstream_observability_factor(
         return 1.0
 
     family_lanes = family_upstream_contract.get("family_lanes", {}) or {}
+    thiamine_lane = family_lanes.get("03", {}) or {}
     sulfur_lane = family_lanes.get("05", {}) or {}
     pretreatment_lane = family_lanes.get("10", {}) or {}
-    if not (bool(sulfur_lane.get("active", False)) or bool(pretreatment_lane.get("precursor_release_active", False))):
+    thiamine_active = bool(thiamine_lane.get("active", False))
+    sulfur_active = bool(sulfur_lane.get("active", False)) or bool(pretreatment_lane.get("precursor_release_active", False))
+    if not (sulfur_active or thiamine_active):
         return 1.0
+
+    normalized_compound = _normalize_chemical_name(compound_name)
+    if thiamine_active and normalized_compound in {
+        _normalize_chemical_name("2-Methyl-3-furanthiol"),
+        _normalize_chemical_name("2-Furfurylthiol"),
+        _normalize_chemical_name("bis(2-methyl-3-furyl) disulfide"),
+    }:
+        thiamine_calibration = family_upstream_contract.get("thiamine_calibration", {}) or {}
+        thiamine_factor = float(thiamine_calibration.get("observable_efficiency_factor", 1.0) or 1.0)
+    else:
+        thiamine_factor = 1.0
+
+    if not sulfur_active:
+        return max(1.0e-4, min(1.0, thiamine_factor))
 
     profile = _HYDROLYSATE_SULFUR_OBSERVABILITY_PROFILES.get(_normalize_chemical_name(compound_name))
     if profile is None:
-        return 1.0
+        return max(1.0e-4, min(1.0, thiamine_factor))
 
     factor = float(profile.get("base_factor", 1.0))
     if profile.get("source_sensitive"):
         source_profile = get_protein_source_profile(protein_source)
         if source_profile is not None:
             factor *= float(source_profile.hydrolysate_observability_bias)
-    return max(1.0e-4, min(1.0, factor))
+    return max(1.0e-4, min(1.0, factor * thiamine_factor))
 
 
 def _apply_output_projection(
@@ -524,6 +547,7 @@ def _apply_output_projection(
                 protein_type=p_type,
                 process_state=process_state,
                 projection_severity=projection_severity,
+                family_upstream_contract=family_upstream_contract,
             )
             observable_ppb[canon] *= calibration_factor * melanoidin_factor
             projection_metadata[canon] = make_projection_metadata_row(
@@ -592,6 +616,7 @@ def _apply_output_projection(
             protein_type=p_type,
             process_state=process_state,
             projection_severity=projection_severity,
+            family_upstream_contract=family_upstream_contract,
         )
         upstream_observability_factor = _resolve_upstream_observability_factor(
             compound_name,

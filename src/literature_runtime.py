@@ -156,6 +156,21 @@ def _process_state_calibration_entry(entry_id: str) -> Dict[str, Any]:
     return {}
 
 
+def _computational_prior_entry(entry_id: str) -> Dict[str, Any]:
+    rows = query_family_runtime_priors(entry_id=entry_id)
+    return rows[0] if rows else {}
+
+
+def _runtime_source_label(entry: Mapping[str, Any]) -> str:
+    return str(
+        entry.get("source_citation")
+        or entry.get("source")
+        or entry.get("citation")
+        or entry.get("id")
+        or "unknown runtime reference"
+    )
+
+
 def _resolve_protein_source_id(protein_label: str) -> str:
     normalized = str(protein_label or "").strip().lower()
     if not normalized:
@@ -245,6 +260,7 @@ def _build_thiamine_calibration_context(
     thiamine_priors: Mapping[str, Any],
     baseline_fraction: float,
     thiamine_mode: str,
+    molar_ratios: Optional[Mapping[str, Any]],
     pH: Optional[float],
     process_state: Optional[str],
     temperature_celsius: Optional[float],
@@ -265,6 +281,17 @@ def _build_thiamine_calibration_context(
     mixed_peak = float(thiamine_priors.get("mixed_system_synergy_factor_peak", 4.3) or 4.3)
     synergy_floor = float(thiamine_priors.get("beef_realistic_synergy_factor", 2.64) or 2.64)
     synergy_factor = 1.0
+    precursor_loading_mM = 0.0
+    for key, value in (molar_ratios or {}).items():
+        normalized_key = _normalize_name(str(key))
+        try:
+            numeric_value = max(0.0, float(value))
+        except (TypeError, ValueError):
+            continue
+        if "thiamine" in normalized_key or "vitamin b1" in normalized_key:
+            precursor_loading_mM += numeric_value
+        elif any(token in normalized_key for token in ["cysteine", "ribose", "xylose", "arabinose"]):
+            precursor_loading_mM += numeric_value
     if mixed_system_active:
         if pH is None:
             synergy_factor = synergy_floor
@@ -285,6 +312,26 @@ def _build_thiamine_calibration_context(
                 pH_factor = max(0.05, min(1.3, float(mixed_factor)))
                 yield_mode = "mixed_system_optimal_window"
                 reference_yield_value = float(_interpolate_profile([optimal_ph, reference_mixed_ph], [optimal_yield, reference_mixed_yield], float(pH)) or reference_mixed_yield)
+
+    reference_loading_mM = float(thiamine_priors.get("thiamine_only_reference_total_precursor_mM", 10.0) or 10.0)
+    if mixed_system_active:
+        if yield_mode == "mixed_system_optimal_window":
+            reference_loading_mM = float(thiamine_priors.get("mixed_system_optimal_total_precursor_mM", 30.0) or 30.0)
+        else:
+            reference_loading_mM = float(thiamine_priors.get("mixed_system_reference_total_precursor_mM", 30.0) or 30.0)
+    precursor_loading_mM = float(precursor_loading_mM or reference_loading_mM)
+    beef_reference_yield = float(thiamine_priors.get("beef_reference_yield_ug_per_g", 3.14) or 3.14)
+    beef_reference_loading = float(thiamine_priors.get("beef_reference_total_precursor_mM", 2.1) or 2.1)
+    baseline_efficiency = beef_reference_yield / max(beef_reference_loading, 1.0e-6)
+    current_efficiency = float(reference_yield_value) / max(precursor_loading_mM, 1.0e-6)
+    observable_efficiency_factor = current_efficiency / max(baseline_efficiency, 1.0e-6)
+    observable_efficiency_factor = max(
+        float(thiamine_priors.get("observable_efficiency_floor", 0.03) or 0.03),
+        min(
+            float(thiamine_priors.get("observable_efficiency_ceiling", 1.1) or 1.1),
+            float(observable_efficiency_factor),
+        ),
+    )
 
     extrusion_context = _estimate_thiamine_extrusion_survival(
         thiamine_priors,
@@ -313,6 +360,9 @@ def _build_thiamine_calibration_context(
         "yield_mode": yield_mode,
         "synergy_factor": float(synergy_factor),
         "synergy_scaling": float(synergy_scaling),
+        "precursor_loading_mM": float(precursor_loading_mM),
+        "reference_loading_mM": float(reference_loading_mM),
+        "observable_efficiency_factor": float(observable_efficiency_factor),
         "benchmark_anchor_ids": [str(row.get("id", "unknown")) for row in benchmark_rows],
         "benchmark_anchor_citations": [str(row.get("citation", "unknown")) for row in benchmark_rows],
         **extrusion_context,
@@ -766,6 +816,16 @@ def describe_retention_runtime(
     sources: List[str] = []
     extrusion_moisture_factor = 1.0
     extrusion_structure_factor = 1.0
+    runtime_prior_ids: List[str] = []
+    process_state_calibration_ids: List[str] = []
+    sulfur_binding_factor = 1.0
+    partition_temperature_factor = 1.0
+
+    partition_calibration = _process_state_calibration_entry("acs_jafc_3c05991_ppi_spi_partitioning")
+    sulfur_binding_prior = _computational_prior_entry("acs_jafc_3c02618_mft_disulfide_trapping_v1")
+    protein_binding_prior = _computational_prior_entry("acs_jafc_0c01925_protein_binding_hierarchy_v1")
+    pea_sh_crosscheck = _process_state_calibration_entry("malia_2025_pea_free_sh_crosscheck")
+    extrusion_disulfide_calibration = _process_state_calibration_entry("raman_sds_extrusion_disulfide_severity")
 
     if protein.startswith("pea") and normalized == "hexanal":
         retention_mode = "direct_binding_plus_ph_release_reference"
@@ -778,6 +838,11 @@ def describe_retention_runtime(
                 ],
             )
         )
+        if partition_calibration:
+            partition_temperature_factor = 0.96 + 0.14 * _sigmoid(temperature, 52.0, 11.0)
+            dynamic_retention_factor *= partition_temperature_factor
+            sources.append(_runtime_source_label(partition_calibration))
+            process_state_calibration_ids.append(str(partition_calibration.get("id", "unknown")))
     elif protein.startswith("pea") and normalized in {"2 pentylfuran", "2 pentyl furan"}:
         retention_mode = "ph_release_reference"
         sources.append(_retention_source_label(_retention_entry_by_id("karolkowski_2021_ppi_2_pentylfuran_native_panel")))
@@ -797,6 +862,11 @@ def describe_retention_runtime(
             _retention_source_label(_retention_entry_by_id("ince_2024_glycinin_hexanal_binding")),
             _retention_source_label(_retention_entry_by_id("jafc_3c05991_ppi_hexanal_binding")),
         ])
+        if partition_calibration:
+            partition_temperature_factor = 0.94 + 0.18 * _sigmoid(temperature, 58.0, 10.0)
+            dynamic_retention_factor *= partition_temperature_factor
+            sources.append(_runtime_source_label(partition_calibration))
+            process_state_calibration_ids.append(str(partition_calibration.get("id", "unknown")))
         if temperature >= temperature_gate:
             sources.append(_retention_source_label(xu_hexanal))
     elif protein.startswith("soy") and normalized in {"2 pentylfuran", "2 pentyl furan"}:
@@ -816,6 +886,37 @@ def describe_retention_runtime(
     elif protein.startswith("soy") and any(token in normalized for token in ["thiol", "sulfide", "sulfur", "methional", "thiazole", "thiophene"]):
         retention_mode = "sulfur_proxy_reference"
         sources.append(_retention_source_label(_retention_entry_by_id("zhang_2026_spi_lenthionine_retention")))
+
+    sulfur_family = any(token in normalized for token in ["mft", "fft", "thiol", "sulfide", "sulfur", "methional", "thiazole", "thiophene"])
+    pyrazine_family = "pyrazine" in normalized
+    if protein.startswith(("pea", "soy")) and (sulfur_family or pyrazine_family):
+        thermal_binding_drive = _sigmoid(temperature, 102.0, 14.0)
+        residence_drive = 0.0 if duration is None else min(1.0, 0.28 * math.log1p(max(duration, 0.0)))
+        dryness = 0.0 if water_activity is None else max(0.0, min(1.0, (0.62 - max(0.05, min(0.98, float(water_activity)))) / 0.30))
+        process_drive = 1.0 if process_state == "extrusion_structured" else 0.72 if process_state == "aqueous_pre_extrusion_model" else 0.46 if process_state == "heated_matrix" else 0.0
+        disulfide_pressure = min(1.0, 0.60 * thermal_binding_drive + 0.22 * residence_drive + 0.18 * dryness)
+        binding_pressure = min(1.0, disulfide_pressure * process_drive)
+        hierarchy_bias = 0.22 if sulfur_family else 0.10
+        sulfur_binding_factor = max(0.22, 1.0 - binding_pressure * (0.44 + hierarchy_bias))
+        if protein.startswith("pea") and pea_sh_crosscheck:
+            sulfur_binding_factor = min(1.0, sulfur_binding_factor + 0.06)
+            sources.append(_runtime_source_label(pea_sh_crosscheck))
+            process_state_calibration_ids.append(str(pea_sh_crosscheck.get("id", "unknown")))
+        if process_state in {"aqueous_pre_extrusion_model", "extrusion_structured"} and extrusion_disulfide_calibration:
+            sulfur_binding_factor = max(0.18, sulfur_binding_factor - 0.08 * process_drive)
+            sources.append(_runtime_source_label(extrusion_disulfide_calibration))
+            process_state_calibration_ids.append(str(extrusion_disulfide_calibration.get("id", "unknown")))
+        if sulfur_binding_prior:
+            sources.append(_runtime_source_label(sulfur_binding_prior))
+            runtime_prior_ids.append(str(sulfur_binding_prior.get("id", "unknown")))
+        if protein_binding_prior:
+            sources.append(_runtime_source_label(protein_binding_prior))
+            runtime_prior_ids.append(str(protein_binding_prior.get("id", "unknown")))
+        dynamic_retention_factor *= sulfur_binding_factor
+        if sulfur_family:
+            retention_mode = "sulfur_binding_prior" if retention_mode == "static_class_profile" else f"{retention_mode}+sulfur_binding_prior"
+        elif pyrazine_family:
+            retention_mode = "pyrazine_binding_prior" if retention_mode == "static_class_profile" else f"{retention_mode}+pyrazine_binding_prior"
 
     if not sources and process_state == "heated_matrix" and protein.startswith("soy"):
         sources.append("heated soy process-state carryover")
@@ -845,6 +946,10 @@ def describe_retention_runtime(
         "reversible_release_factor": float(release_factor),
         "temporal_attenuation_factor": float(temporal_attenuation_factor),
         "dynamic_retention_factor": float(dynamic_retention_factor),
+        "partition_temperature_factor": float(partition_temperature_factor),
+        "sulfur_binding_factor": float(sulfur_binding_factor),
+        "runtime_prior_ids": sorted(set(runtime_prior_ids)),
+        "process_state_calibration_ids": sorted(set(process_state_calibration_ids)),
         "extrusion_moisture_factor": float(extrusion_moisture_factor),
         "extrusion_structure_factor": float(extrusion_structure_factor),
     }
@@ -1246,6 +1351,11 @@ def _build_protein_damage_markers_lane(
         for sugar in normalized_sugars
     )
     polyphenol_factor = 0.20 if any("polyphenol" in value or "grape seed" in value or "catechin" in value for value in normalized_additives) else 0.0
+    soy_isoflavone_prior = _computational_prior_entry("nakagawa_2004_isoflavone_dicarbonyl_sink_v1") if protein_label.startswith("soy") else {}
+    soy_isoflavone_factor = 0.0
+    if soy_isoflavone_prior:
+        soy_isoflavone_factor = float(soy_isoflavone_prior.get("age_inhibition_fraction_at_100uM", 0.0) or 0.0)
+        soy_isoflavone_factor = max(0.0, min(1.0, 0.45 * soy_isoflavone_factor))
     explicit_sugar_mM = _sum_effective_molar_ratios(
         effective_molar_ratios,
         tokens=["ribose", "glucose", "fructose", "xylose", "maltose", "sugar"],
@@ -1329,6 +1439,7 @@ def _build_protein_damage_markers_lane(
                 water_activity=water_activity,
                 effective_temp_c=temperature if process_label in {"extrusion_structured", "hme", "lme"} else None,
                 polyphenol_factor=polyphenol_factor,
+                soy_isoflavone_factor=soy_isoflavone_factor,
             )
         )
         predicted_cel_proxy = float(
@@ -1340,6 +1451,7 @@ def _build_protein_damage_markers_lane(
                 water_activity=water_activity,
                 effective_temp_c=temperature if process_label in {"extrusion_structured", "hme", "lme"} else None,
                 polyphenol_factor=polyphenol_factor,
+                soy_isoflavone_factor=soy_isoflavone_factor,
             )
         )
         predicted_furosine_proxy = float(
@@ -1418,11 +1530,13 @@ def _build_protein_damage_markers_lane(
                 "pmc_2024_pba_cml_cel_ranges",
                 "ramirez_jimenez_2000_furosine_crossover",
             ],
+            "runtime_prior_ids": [str(soy_isoflavone_prior.get("id", ""))] if soy_isoflavone_prior else [],
             "safety_reference_citations": [
                 str(foods_reference.get("source_citation", "")),
                 str((get_safety_reference_payload("pmc_2024_pba_cml_cel_ranges") or {}).get("source_citation", "")),
                 str(furosine_reference.get("source_citation", "")),
             ],
+            "runtime_prior_citations": [str(soy_isoflavone_prior.get("source", ""))] if soy_isoflavone_prior else [],
             "age_reference_ranges_mg_per_kg": {
                 "foods_2023_cml": dict(foods_cml_range),
                 "pmc_2024_cml_cel": dict(pmc_cml_range),
@@ -1436,6 +1550,7 @@ def _build_protein_damage_markers_lane(
             "damage_burden_score": float(damage_burden_score),
             "thermal_damage_window": float(thermal_damage_window),
             "extrusion_damage_window": float(extrusion_damage_window),
+            "soy_isoflavone_factor": float(soy_isoflavone_factor),
         },
     )
 
@@ -2341,12 +2456,18 @@ def _build_sulfur_peptide_support_lane(
     normalized_support_cues: List[str],
     normalized_interventions: List[str],
     protein_label: str,
+    degree_of_hydrolysis: Optional[float] = None,
 ) -> Dict[str, Any]:
     support_pool = normalized_additives + normalized_amino + normalized_support_cues + normalized_interventions
     glutathione_active = any("glutathione" in value for value in support_pool)
     hydrolysate_active = any("hydrolysate" in value for value in support_pool)
     autolysate_active = any("autolysate" in value for value in support_pool)
+    hydrolysis_fraction = None if degree_of_hydrolysis is None else max(0.0, min(1.0, float(degree_of_hydrolysis)))
     peptide_support_active = any(any(token in value for token in ["peptide", "hydrolysate", "autolysate"]) for value in support_pool)
+    if hydrolysis_fraction is not None and hydrolysis_fraction < 0.99:
+        peptide_support_active = True
+    if hydrolysis_fraction is not None and hydrolysis_fraction >= 0.55:
+        hydrolysate_active = True
     sulfur_peptide_priors = get_sulfur_peptide_priors()
     benchmark_rows = query_benchmark_intake_entries(
         family="05",
@@ -2376,10 +2497,25 @@ def _build_sulfur_peptide_support_lane(
         else:
             selected_peptide_ratio = generic_peptide_ratio
             peptide_mode = "generic_peptide"
+    if hydrolysis_fraction is not None and peptide_support_active and not glutathione_active:
+        if hydrolysate_active or autolysate_active:
+            selected_peptide_ratio = 1.0 + (hydrolysate_ratio - 1.0) * hydrolysis_fraction
+        else:
+            selected_peptide_ratio = 1.0 + (generic_peptide_ratio - 1.0) * hydrolysis_fraction
+
+    peptide_accessibility_factor = 1.0
+    if hydrolysis_fraction is not None:
+        peptide_accessibility_factor = 0.30 + 0.70 * hydrolysis_fraction
+    elif hydrolysate_active or autolysate_active:
+        peptide_accessibility_factor = 0.92
+    elif peptide_support_active:
+        peptide_accessibility_factor = 0.78
+
     selected_support_ratio = max(
         glutathione_support_ratio if glutathione_active else 1.0,
         selected_peptide_ratio,
     )
+    free_cysteine_equivalent_factor = selected_support_ratio * peptide_accessibility_factor
     sulfur_peptide_support_score = 0.0
     if glutathione_active or peptide_support_active:
         sulfur_peptide_support_score = max(
@@ -2419,6 +2555,9 @@ def _build_sulfur_peptide_support_lane(
             "selected_peptide_ratio": float(selected_peptide_ratio),
             "peak_sequence_ratio": float(peak_sequence_ratio),
             "peptide_mode": peptide_mode,
+            "degree_of_hydrolysis": hydrolysis_fraction,
+            "peptide_accessibility_factor": float(peptide_accessibility_factor),
+            "free_cysteine_equivalent_factor": float(free_cysteine_equivalent_factor),
             "pyrazine_tradeoff_ratio_vs_free_cysteine": float(pyrazine_tradeoff_ratio),
             "sulfur_proxy_retention_factor": float(sulfur_proxy_retention_factor),
             "benchmark_anchor_ids": [str(row.get("id", "unknown")) for row in benchmark_rows],
@@ -3040,6 +3179,7 @@ def build_family_upstream_contract(
     temperature_celsius: Optional[float] = None,
     time_minutes: Optional[float] = None,
     water_activity: Optional[float] = None,
+    degree_of_hydrolysis: Optional[float] = None,
 ) -> Dict[str, Any]:
     sugars = sugars or []
     amino_acids = amino_acids or []
@@ -3096,6 +3236,7 @@ def build_family_upstream_contract(
         normalized_support_cues=normalized_support_cues,
         normalized_interventions=normalized_interventions,
         protein_label=protein_label,
+        degree_of_hydrolysis=degree_of_hydrolysis,
     )
     matrix_scope_lane = _build_matrix_scope_lane(protein_label=protein_label)
     polyphenol_capping_lane = _build_polyphenol_amino_capping_lane(
@@ -3224,6 +3365,7 @@ def build_family_upstream_contract(
             thiamine_priors=thiamine_priors,
             baseline_fraction=base_thiamine_fraction,
             thiamine_mode=thiamine_mode,
+            molar_ratios=effective_molar_ratios,
             pH=effective_pH,
             process_state=process_state,
             temperature_celsius=temperature_celsius,
@@ -3263,6 +3405,25 @@ def build_family_upstream_contract(
         effective_molar_ratios[thiamine_ratio_key] = (
             float(effective_molar_ratios[thiamine_ratio_key]) * thiamine_reactivity_factor
         )
+
+    amino_accessibility_factor = float(sulfur_peptide_support_lane.get("peptide_accessibility_factor", 1.0) or 1.0)
+    cysteine_accessibility_factor = float(sulfur_peptide_support_lane.get("free_cysteine_equivalent_factor", 1.0) or 1.0)
+    melanoidin_thiol_retention_factor = 1.0
+    melanoidin_supported_context = bool(
+        protein_label != "free"
+        or thiamine_support_lane.get("active")
+        or sulfur_peptide_support_lane.get("active")
+    )
+    if melanoidin_polymerization_lane.get("active") and melanoidin_supported_context:
+        melanoidin_thiol_retention_factor = max(
+            0.18,
+            1.0 - 0.65 * float(melanoidin_polymerization_lane.get("thiol_scavenging_factor", 0.0)),
+        )
+
+    if cysteine_ratio_key is not None:
+        effective_molar_ratios[cysteine_ratio_key] = float(effective_molar_ratios[cysteine_ratio_key]) * cysteine_accessibility_factor * melanoidin_thiol_retention_factor
+    if lysine_ratio_key is not None and degree_of_hydrolysis is not None:
+        effective_molar_ratios[lysine_ratio_key] = float(effective_molar_ratios[lysine_ratio_key]) * amino_accessibility_factor
 
     added_precursors: List[str] = []
     added_precursor_ratios: Dict[str, float] = {}
@@ -3306,6 +3467,7 @@ def build_family_upstream_contract(
         "thiamine_mode": thiamine_mode,
         "thiamine_calibration": thiamine_calibration,
         "nucleotide_calibration": nucleotide_calibration,
+        "degree_of_hydrolysis": None if degree_of_hydrolysis is None else float(max(0.0, min(1.0, degree_of_hydrolysis))),
         "family_lanes": {
             "03": thiamine_support_lane,
             "04": nucleotide_support_lane,
@@ -3349,6 +3511,7 @@ def build_flavor_axis_summary(
     temperature_celsius: Optional[float] = None,
     time_minutes: Optional[float] = None,
     water_activity: Optional[float] = None,
+    degree_of_hydrolysis: Optional[float] = None,
 ) -> Dict[str, Any]:
     signal_map = _projection_rows_to_signal_map(projection_metadata)
     sugars = sugars or []
@@ -3424,6 +3587,7 @@ def build_flavor_axis_summary(
             temperature_celsius=temperature_celsius,
             time_minutes=time_minutes,
             water_activity=water_activity,
+            degree_of_hydrolysis=degree_of_hydrolysis,
         )
     )
     normalized_support_cues = [_normalize_name(value) for value in (upstream_contract.get("support_cues", []) or [])]

@@ -19,7 +19,7 @@ BENCHMARKS = [
 ]
 
 
-def test_p3_governance_holds_offline_compute_until_cheap_screening_moves_benchmarks():
+def test_offline_refinement_governance_holds_compute_until_cheap_screening_moves_benchmarks():
     payload = build_p3_refinement_governance_artifact(BENCHMARKS)
 
     assert payload["summary"]["governing_status"] == "hold_observable_first"
@@ -35,7 +35,7 @@ def test_p3_governance_holds_offline_compute_until_cheap_screening_moves_benchma
     assert "adverse-marker closure" in pea_row["expected_decision_change"]
 
 
-def test_p3_governance_markdown_surfaces_family_gate_and_blockers():
+def test_offline_refinement_governance_markdown_surfaces_family_gate_and_blockers():
     markdown = render_p3_refinement_governance_markdown(build_p3_refinement_governance_artifact(BENCHMARKS))
 
     assert "P3 Refinement Governance" in markdown

@@ -116,6 +116,46 @@ def get_safety_reference_range(matrix_family: str, reference_id: str = "squeo_20
             return item
     return None
 
+
+def _normalize_runtime_tokens(values: Any) -> List[str]:
+    if not isinstance(values, list):
+        return []
+    return [str(value).strip().lower() for value in values if str(value).strip()]
+
+
+def _resolve_acrylamide_runtime_adjustment(
+    precursors: Dict[str, float],
+    modifiers: Dict[str, Any],
+) -> Dict[str, Any]:
+    runtime_context = modifiers.get("__runtime_context__", {}) if isinstance(modifiers.get("__runtime_context__", {}), dict) else {}
+    additives = _normalize_runtime_tokens(runtime_context.get("additives", []))
+    interventions = _normalize_runtime_tokens(runtime_context.get("interventions", []))
+
+    precursor_names = [str(name).strip().lower() for name in precursors]
+    cys_present = any("cysteine" in name or name == "cys" for name in precursor_names)
+    gly_present = any("glycine" in name or name == "gly" for name in precursor_names)
+    saponin_active = any("saponin" in token or "quillaja" in token for token in additives + interventions)
+
+    mitigation_fraction = 0.0
+    reference_ids: List[str] = []
+    if cys_present and gly_present:
+        mitigation_fraction = 0.65
+        reference_ids.append("pmc_12648097_acrylamide_mitigation")
+    elif cys_present or gly_present:
+        mitigation_fraction = 0.20
+        reference_ids.append("pmc_12648097_acrylamide_mitigation")
+
+    process_modifier = 1.0
+    if saponin_active:
+        process_modifier = 0.88
+        reference_ids.append("kocadagli_2016_saponin_acrylamide_modifier")
+
+    return {
+        "mitigation_fraction": float(mitigation_fraction),
+        "process_modifier": float(process_modifier),
+        "reference_ids": reference_ids,
+    }
+
 @dataclass
 class SafetyResult:
     acrylamide_ppb: float
@@ -250,6 +290,7 @@ def predict_cml(
     water_activity: Optional[float] = None,
     effective_temp_c: Optional[float] = None,
     polyphenol_factor: float = 0.0,
+    soy_isoflavone_factor: float = 0.0,
 ) -> float:
     thermal_temp_c = _resolve_effective_temp_c(temp_C, effective_temp_c)
     aw = 0.55 if water_activity is None else _clamp(water_activity, 0.05, 0.98)
@@ -266,7 +307,8 @@ def predict_cml(
     formation_window = _sigmoid(thermal_temp_c, 122.0, 10.0)
     degradation_window = _sigmoid(thermal_temp_c, 162.0, 7.0)
     moisture_gain = 0.80 + 0.35 * aw_norm
-    return max(0.0, go_pool * 0.40 * formation_window * moisture_gain * (1.0 - 0.45 * degradation_window))
+    isoflavone_guardrail = 1.0 - 0.55 * _clamp(soy_isoflavone_factor, 0.0, 1.0)
+    return max(0.0, go_pool * 0.40 * formation_window * moisture_gain * (1.0 - 0.45 * degradation_window) * isoflavone_guardrail)
 
 
 def predict_cel(
@@ -278,6 +320,7 @@ def predict_cel(
     water_activity: Optional[float] = None,
     effective_temp_c: Optional[float] = None,
     polyphenol_factor: float = 0.0,
+    soy_isoflavone_factor: float = 0.0,
 ) -> float:
     thermal_temp_c = _resolve_effective_temp_c(temp_C, effective_temp_c)
     aw = 0.45 if water_activity is None else _clamp(water_activity, 0.05, 0.98)
@@ -294,7 +337,8 @@ def predict_cel(
     formation_window = _sigmoid(thermal_temp_c, 132.0, 9.0)
     high_temp_gain = 0.90 + 0.30 * _sigmoid(thermal_temp_c, 142.0, 8.0)
     moisture_penalty = 1.12 - 0.40 * aw_norm
-    return max(0.0, mgo_pool * 0.44 * formation_window * high_temp_gain * moisture_penalty)
+    isoflavone_guardrail = 1.0 - 0.65 * _clamp(soy_isoflavone_factor, 0.0, 1.0)
+    return max(0.0, mgo_pool * 0.44 * formation_window * high_temp_gain * moisture_penalty * isoflavone_guardrail)
 
 
 def predict_furosine(
@@ -472,13 +516,19 @@ def evaluate_formulation_safety(
             moisture_regime=extrusion_process.get("moisture_regime"),
             effective_temp_c=extrusion_process.get("effective_temperature_celsius"),
         )
+        runtime_adjustment = _resolve_acrylamide_runtime_adjustment(precursors, mods)
+        effective_acrylamide_ppb = (
+            aa_res.acrylamide_ppb
+            * (1.0 - float(runtime_adjustment.get("mitigation_fraction", 0.0)))
+            * float(runtime_adjustment.get("process_modifier", 1.0))
+        )
         # Threshold for detection - ensure it's high enough to be seen but low enough to catch precursors
-        if aa_res.acrylamide_ppb > 1e-25:
+        if effective_acrylamide_ppb > 1e-25:
             _append_unique(flagged, "Acrylamide")
             # Logarithmic risk scaling: ensure we don't saturate for small differences
             # log10(1e-15 / 1e-20) / 10 = 0.5
             # log10(1.2e-16 / 1e-20) / 10 = 0.4
-            risk_raw = math.log10(aa_res.acrylamide_ppb / 1e-20) / 10.0
+            risk_raw = math.log10(effective_acrylamide_ppb / 1e-20) / 10.0
             total_risk += max(0.01, risk_raw)
 
     total_damage = extrusion_process.get("total_damage_load", {}) if isinstance(extrusion_process, dict) else {}

@@ -17,24 +17,23 @@ def test_peptide_accessibility_blind_spot():
     # Formulation with a hypothetical 'degree_of_hydrolysis'
     low_hydrolysis = {
         "name": "IntactProtein",
+        "sugars": ["ribose"],
         "amino_acids": ["lysine", "cysteine"],
-        "molar_ratios": {"lysine": 1.0, "cysteine": 0.5},
+        "molar_ratios": {"ribose": 1.0, "lysine": 1.0, "cysteine": 0.5},
         "degree_of_hydrolysis": 0.1 # 10%
     }
     
     high_hydrolysis = {
         "name": "HydrolyzedProtein",
+        "sugars": ["ribose"],
         "amino_acids": ["lysine", "cysteine"],
-        "molar_ratios": {"lysine": 1.0, "cysteine": 0.5},
+        "molar_ratios": {"ribose": 1.0, "lysine": 1.0, "cysteine": 0.5},
         "degree_of_hydrolysis": 0.9 # 90%
     }
     
     res_low = designer.evaluate_single(low_hydrolysis, cond)
     res_high = designer.evaluate_single(high_hydrolysis, cond)
     
-    # This currently fails because the engine doesn't look at 'degree_of_hydrolysis'
-    # We use xfail to document this gap.
-    pytest.xfail("Engine does not yet support peptide accessibility scaling.")
     assert res_high.target_score > res_low.target_score
 
 def test_matrix_inhibition_blind_spot():

@@ -169,6 +169,32 @@ def test_describe_retention_runtime_for_extrusion_states_is_aw_sensitive():
     assert dry["extrusion_moisture_factor"] < hydrated["extrusion_moisture_factor"]
 
 
+def test_describe_retention_runtime_applies_landed_sulfur_binding_priors_under_heat_and_extrusion():
+    ambient = describe_retention_runtime(
+        "2-Methyl-3-furanthiol (MFT)",
+        protein_type="soy_iso",
+        temperature_celsius=35.0,
+        time_minutes=2.0,
+        water_activity=0.80,
+        process_state="ambient_slurry",
+    )
+    extruded = describe_retention_runtime(
+        "2-Methyl-3-furanthiol (MFT)",
+        protein_type="soy_iso",
+        temperature_celsius=165.0,
+        time_minutes=4.0,
+        water_activity=0.35,
+        process_state="extrusion_structured",
+    )
+
+    assert extruded["dynamic_retention_factor"] < ambient["dynamic_retention_factor"]
+    assert extruded["sulfur_binding_factor"] < 1.0
+    assert "acs_jafc_3c02618_mft_disulfide_trapping_v1" in extruded["runtime_prior_ids"]
+    assert "acs_jafc_0c01925_protein_binding_hierarchy_v1" in extruded["runtime_prior_ids"]
+    assert "raman_sds_extrusion_disulfide_severity" in extruded["process_state_calibration_ids"]
+    assert any("ACS JAFC 3c02618" in source for source in extruded["retention_reference_sources"])
+
+
 def test_build_flavor_axis_summary_surfaces_secondary_strecker_reference_markers():
     summary = build_flavor_axis_summary(
         projection_metadata={
@@ -343,6 +369,42 @@ def test_build_family_upstream_contract_calibrates_thiamine_by_ph_and_extrusion_
     assert "cerny_guntz_dubini_2008" in extruded["thiamine_calibration"]["benchmark_anchor_ids"]
     assert optimal["added_precursor_ratios"] == {}
     assert extruded["added_precursor_ratios"] == {}
+
+
+def test_build_family_upstream_contract_distinguishes_peptide_bound_and_hydrolyzed_accessibility():
+    low_hydrolysis = build_family_upstream_contract(
+        sugars=["ribose"],
+        amino_acids=["cysteine", "lysine"],
+        additives=[],
+        protein_type="soy_iso",
+        pH=6.0,
+        temperature_celsius=100.0,
+        time_minutes=30.0,
+        molar_ratios={"ribose": 1.0, "cysteine": 0.5, "lysine": 1.0},
+        degree_of_hydrolysis=0.1,
+    )
+    high_hydrolysis = build_family_upstream_contract(
+        sugars=["ribose"],
+        amino_acids=["cysteine", "lysine"],
+        additives=[],
+        protein_type="soy_iso",
+        pH=6.0,
+        temperature_celsius=100.0,
+        time_minutes=30.0,
+        molar_ratios={"ribose": 1.0, "cysteine": 0.5, "lysine": 1.0},
+        degree_of_hydrolysis=0.9,
+    )
+
+    low_lane = low_hydrolysis["family_lanes"]["05"]
+    high_lane = high_hydrolysis["family_lanes"]["05"]
+
+    assert low_lane["active"] is True
+    assert high_lane["active"] is True
+    assert low_lane["peptide_mode"] == "generic_peptide"
+    assert high_lane["peptide_mode"] == "hydrolysate_supported"
+    assert high_lane["free_cysteine_equivalent_factor"] > low_lane["free_cysteine_equivalent_factor"]
+    assert high_hydrolysis["effective_molar_ratios"]["cysteine"] > low_hydrolysis["effective_molar_ratios"]["cysteine"]
+    assert high_hydrolysis["effective_molar_ratios"]["lysine"] > low_hydrolysis["effective_molar_ratios"]["lysine"]
 
 
 def test_query_family_runtime_priors_returns_family_aware_strecker_prior():
@@ -630,6 +692,38 @@ def test_build_family_upstream_contract_surfaces_family_15_and_reweights_availab
     assert family_15["available_sugar_retention_factor"] < 1.0
     assert contract["effective_molar_ratios"]["ribose"] < 1.0
     assert contract["summary"]["phospholipid_sugar_sink_active"] is True
+
+
+def test_build_family_upstream_contract_applies_family_16_thiol_scavenging_to_upstream_cysteine_pool():
+    mild = build_family_upstream_contract(
+        sugars=["ribose"],
+        amino_acids=["cysteine"],
+        additives=[],
+        protein_type="free",
+        pH=5.7,
+        process_state="heated_matrix",
+        temperature_celsius=100.0,
+        time_minutes=10.0,
+        water_activity=0.98,
+        molar_ratios={"ribose": 1.0, "cysteine": 1.0},
+    )
+    severe = build_family_upstream_contract(
+        sugars=["xylose"],
+        amino_acids=["cysteine", "thiamine"],
+        additives=[],
+        protein_type="free",
+        pH=6.0,
+        process_state="heated_matrix",
+        temperature_celsius=145.0,
+        time_minutes=20.0,
+        water_activity=0.98,
+        molar_ratios={"xylose": 10.0, "cysteine": 10.0, "thiamine": 10.0},
+        thiamine_availability={"available": True, "source": "benchmark_native_default"},
+    )
+
+    assert severe["family_lanes"]["16"]["active"] is True
+    assert severe["family_lanes"]["16"]["thiol_scavenging_factor"] > mild["family_lanes"]["16"]["thiol_scavenging_factor"]
+    assert severe["effective_molar_ratios"]["cysteine"] < 10.0
 
 
 def test_build_flavor_axis_summary_surfaces_family_16_bounded_melanoidin_trapping_lane():

@@ -59,6 +59,32 @@ def test_acrylamide_moisture_dependency_flips_between_lme_and_hme():
     assert hme_high.acrylamide_ppb < hme_low.acrylamide_ppb
 
 
+def test_runtime_landed_acrylamide_references_reduce_contextual_safety_risk():
+    baseline_risk, _baseline_flagged = evaluate_formulation_safety(
+        {"Asparagine": 1.0, "Glucose": 5.0},
+        180,
+        15,
+        6.5,
+    )
+    adjusted_risk, adjusted_flagged = evaluate_formulation_safety(
+        {"Asparagine": 1.0, "Glucose": 5.0, "Cysteine": 1.0, "Glycine": 1.0},
+        180,
+        15,
+        6.5,
+        modifiers={
+            "__runtime_context__": {
+                "additives": ["quillaja saponin"],
+                "interventions": [],
+                "protein_type": "soy_iso",
+                "process_state": "heated_matrix",
+            }
+        },
+    )
+
+    assert adjusted_risk < baseline_risk
+    assert "Acrylamide" in adjusted_flagged
+
+
 def test_extrusion_damage_load_is_folded_into_safety_result():
     precursors = {"Asparagine": 1.0, "Glucose": 5.0}
     risk, flagged = evaluate_formulation_safety(
@@ -95,6 +121,16 @@ def test_cml_and_cel_follow_report12_directionality():
     assert cml_wet > cml_dry
     assert cel_high_temp > cel_low_temp
     assert cel_dry > cel_wet
+
+
+def test_soy_isoflavone_guardrail_suppresses_age_proxies():
+    cml_baseline = predict_cml(45.0, 45.0, 150.0, 20.0, water_activity=0.55)
+    cml_soy = predict_cml(45.0, 45.0, 150.0, 20.0, water_activity=0.55, soy_isoflavone_factor=0.37)
+    cel_baseline = predict_cel(45.0, 45.0, 150.0, 20.0, water_activity=0.45)
+    cel_soy = predict_cel(45.0, 45.0, 150.0, 20.0, water_activity=0.45, soy_isoflavone_factor=0.37)
+
+    assert cml_soy < cml_baseline
+    assert cel_soy < cel_baseline
 
 
 def test_furosine_exhibits_crossover_behavior():

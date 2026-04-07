@@ -3,6 +3,7 @@ from pathlib import Path
 import pytest
 import yaml
 
+from src.literature_runtime import build_family_upstream_contract
 from src.pathway_extractor import ElementaryStep, Species
 from src.recommend import (
     DEFAULT_PROJECTION_STRATEGY,
@@ -404,6 +405,39 @@ def test_melanoidin_trapping_penalizes_fft_more_than_mft_in_heated_soy_matrix():
     assert fft_row["process_state"] == "heated_matrix"
     assert fft_row["melanoidin_trapping_factor"] < mft_row["melanoidin_trapping_factor"] < 1.0
     assert observable[_canon(fft.smiles)] < observable[_canon(mft.smiles)]
+
+
+def test_melanoidin_trapping_can_penalize_free_thiamine_systems_when_family_16_is_active():
+    mft = Species("2-methyl-3-furanthiol", "Cc1occc1S")
+    canon = _canon(mft.smiles)
+    contract = build_family_upstream_contract(
+        sugars=["xylose"],
+        amino_acids=["cysteine", "thiamine"],
+        additives=[],
+        protein_type="free",
+        pH=6.0,
+        process_state="heated_matrix",
+        temperature_celsius=145.0,
+        time_minutes=20.0,
+        water_activity=0.98,
+        molar_ratios={"xylose": 10.0, "cysteine": 10.0, "thiamine": 10.0},
+        thiamine_availability={"available": True, "source": "benchmark_native_default"},
+    )
+
+    observable, metadata = _apply_output_projection(
+        {canon: 100.0},
+        {canon: mft},
+        {canon: {"name": "2-Methyl-3-furanthiol (MFT)", "type": "desirable", "data": {}}},
+        temperature_kelvin=418.15,
+        protein_type="free",
+        time_minutes=20.0,
+        water_activity=0.98,
+        family_upstream_contract=contract,
+    )
+
+    assert contract["family_lanes"]["16"]["active"] is True
+    assert metadata[canon]["melanoidin_trapping_factor"] < 1.0
+    assert observable[canon] < 100.0
 
 
 def test_output_projection_surfaces_extrusion_process_state_and_surrogates():

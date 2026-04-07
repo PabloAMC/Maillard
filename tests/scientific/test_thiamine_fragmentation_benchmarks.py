@@ -9,7 +9,7 @@ if str(ROOT) not in sys.path:
 from src.benchmark_validation import evaluate_benchmark  # noqa: E402
 
 
-def test_hofmann_1996_family03_benchmark_is_executable_and_inside_strict_band():
+def test_hofmann_1996_thiamine_fragmentation_benchmark_is_executable_and_inside_strict_band():
     evaluation = evaluate_benchmark(ROOT / "data" / "benchmarks" / "thiamine_cys_ribose_100C_Hofmann1996.json")
 
     assert evaluation.supported, evaluation.reason
@@ -21,7 +21,7 @@ def test_hofmann_1996_family03_benchmark_is_executable_and_inside_strict_band():
     assert comparison.ratio <= 1.5
 
 
-def test_cerny_2008_family03_benchmark_is_executable_and_produces_mft_signal():
+def test_cerny_2008_thiamine_fragmentation_benchmark_is_executable_and_inside_strict_band():
     evaluation = evaluate_benchmark(ROOT / "data" / "benchmarks" / "thiamine_cys_xylose_145C_Cerny2008.json")
 
     assert evaluation.supported, evaluation.reason
@@ -31,4 +31,4 @@ def test_cerny_2008_family03_benchmark_is_executable_and_produces_mft_signal():
 
     comparison = evaluation.comparisons[0]
     assert comparison.compound == "2-Methyl-3-furanthiol (MFT)"
-    assert comparison.predicted_ppb > 0.0
+    assert comparison.ratio <= 1.5
