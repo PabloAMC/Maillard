@@ -253,6 +253,7 @@ class MaillardPipeline:
             interventions = form.get("interventions", [])
             raw_ratios = dict(form.get("molar_ratios", {}))
             water_activity = form.get("aw")
+            explicit_time_minutes = form.get("time_minutes")
             process_state = determine_matrix_process_state(
                 temperature_celsius=form.get("temp", global_conditions.temperature_celsius),
                 time_minutes=form.get("time_minutes", 60.0),
@@ -272,7 +273,7 @@ class MaillardPipeline:
                 molar_ratios=raw_ratios,
                 process_state=process_state,
                 temperature_celsius=form.get("temp", global_conditions.temperature_celsius),
-                time_minutes=form.get("time_minutes", 60.0),
+                time_minutes=explicit_time_minutes,
                 water_activity=water_activity,
                 degree_of_hydrolysis=form.get("degree_of_hydrolysis"),
             )
@@ -518,7 +519,7 @@ class MaillardPipeline:
                 family_upstream_contract=family_upstream_contract,
                 process_state=process_state,
                 temperature_celsius=cond.temperature_celsius,
-                time_minutes=form.get("time_minutes", 60.0),
+                time_minutes=explicit_time_minutes,
                 water_activity=water_activity,
             )
             strecker_gap_penalty = float(flavor_axis_summary.get("strecker_gap_penalty", 0.0))

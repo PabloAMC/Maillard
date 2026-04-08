@@ -103,8 +103,16 @@ def _path_hatch(execution_path: str) -> str:
 
 def _iter_quantitative_benchmarks(summaries):
     for row in summaries:
-        if row.supported and row.matched_compounds > 0:
-            yield row
+        if not (row.supported and row.matched_compounds > 0):
+            continue
+        try:
+            benchmark_payload = json.loads(Path(row.bench_file).read_text(encoding="utf-8"))
+        except (FileNotFoundError, json.JSONDecodeError, OSError, TypeError):
+            benchmark_payload = {}
+        tier = str(benchmark_payload.get("metadata", {}).get("tier", "")).strip().upper()
+        if tier == "SECONDARY":
+            continue
+        yield row
 
 
 def _build_payload() -> dict[str, object]:
@@ -145,15 +153,27 @@ def _build_payload() -> dict[str, object]:
             if summary.execution_path == "free_precursor":
                 authoritative_points.append(point)
 
-    worst_quantitative_point = max(quantitative_points, key=lambda row: float(row["max_ratio"]), default=None)
+    points_by_benchmark = {}
+    for point in quantitative_points:
+        points_by_benchmark.setdefault(str(point["benchmark_id"]), []).append(point)
+
+    def _select_representative_point(summary_row, points):
+        if summary_row is None:
+            return None
+        benchmark_points = points_by_benchmark.get(str(summary_row.benchmark_id), [])
+        return max(benchmark_points, key=lambda row: float(row["max_ratio"]), default=None)
+
+    worst_quantitative_benchmark = max(reference_quantitative_benchmarks, key=lambda row: float(row.max_ratio or 0.0), default=None)
+    worst_quantitative_point = _select_representative_point(worst_quantitative_benchmark, quantitative_points)
     experimental_quantitative_points = [
         row for row in quantitative_points if row["reference_signal_origin"] == "measured_volatiles"
     ]
-    experimental_worst_quantitative_point = max(
-        experimental_quantitative_points,
-        key=lambda row: float(row["max_ratio"]),
+    experimental_worst_benchmark = max(
+        experimental_quantitative_benchmarks,
+        key=lambda row: float(row.max_ratio or 0.0),
         default=None,
     )
+    experimental_worst_quantitative_point = _select_representative_point(experimental_worst_benchmark, experimental_quantitative_points)
 
     return {
         "benchmark_count": len(summaries),

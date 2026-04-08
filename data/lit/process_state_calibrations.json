@@ -518,6 +518,70 @@
         "An Ogden-parameter solver in the current runtime surface"
       ],
       "comment": "Use as a compact firmness-state calibration so HME texture optimization is not reduced to narrative-only guidance."
+    },
+    {
+      "id": "jafc_2019_ref21_pea_gum_arabic_architecture_state",
+      "kind": "melanoidin_architecture_state",
+      "protein_type": "pea_iso",
+      "source_citation": "J. Agric. Food Chem. 2019 (Ref. 21)",
+      "doi": "10.1021/acs.jafc.9b04099",
+      "validated_status": "parameter_anchor",
+      "provenance_tier": "direct_measurement",
+      "conditions": {
+        "matrix_label": "pea_protein_hydrolysate_gum_arabic_conjugate",
+        "process_state": "heated_matrix",
+        "measurement_mode": "hpsec_mals_mark_houwink"
+      },
+      "numeric_anchors": {
+        "native_mw_kda": 290.0,
+        "conjugated_mw_kda_range": [340.0, 359.0],
+        "native_radius_of_gyration_nm": 29.5,
+        "conjugated_radius_of_gyration_nm_range": [30.5, 33.5],
+        "native_mark_houwink_exponent": 0.53,
+        "conjugated_mark_houwink_exponent": 0.40,
+        "native_pdi": 1.35,
+        "conjugated_pdi": 1.74
+      },
+      "what_it_supports": [
+        "A bounded Family 16 polymer-architecture shift for gum-arabic-mediated pea hydrolysate conjugation",
+        "Scientist-facing visibility that Maillard-driven polymer growth can increase trapping pressure without opening a full rheology solver"
+      ],
+      "what_it_does_not_support": [
+        "Universal transfer to every hydrolysate or polysaccharide system",
+        "A coupled texture-plus-volatile endpoint model in the current runtime"
+      ],
+      "comment": "Use as a compact Family 16 architecture calibration so polymer-growth and compaction cues are visible when hydrolysate plus gum arabic conditions are present."
+    },
+    {
+      "id": "pmc5992167_amadori_pe_food_matrix_burden",
+      "kind": "phospholipid_glycation_burden",
+      "protein_type": "plant_protein_generic",
+      "source_citation": "PMC PMCID:PMC5992167 (Refs. 16/17)",
+      "doi": "",
+      "validated_status": "parameter_anchor",
+      "provenance_tier": "direct_measurement",
+      "conditions": {
+        "matrix_label": "powdered_milk_and_buttermilk_food_matrices",
+        "process_state": "heated_matrix",
+        "processing_context": "spray_drying",
+        "measurement_mode": "lc_ms_ms_qtrap"
+      },
+      "numeric_anchors": {
+        "amadori_pe_nmol_per_ml_range": [10.0, 100.0],
+        "pe_glycation_fraction_ceiling_pct": 30.0,
+        "lac_pe_recovery_pct_range": [73.0, 87.8],
+        "positive_ion_glc_pe_mz": 326.1,
+        "positive_ion_lac_pe_mz": 488.1
+      },
+      "what_it_supports": [
+        "A bounded food-matrix burden for Amadori-PE accumulation that complements the Family 15 PE Arrhenius anchors",
+        "A practical ceiling for sugar sequestration by PE glycation before any dedicated HMEC lecithin experiment exists"
+      ],
+      "what_it_does_not_support": [
+        "A direct soy-lecithin HMEC endpoint benchmark under extrusion residence time and shear",
+        "A full shelf-life oxidation model for late-stage ALE progression"
+      ],
+      "comment": "Use as a compact Family 15 burden calibration so phospholipid glycation is not treated as a purely mechanistic lane without food-matrix magnitude."
     }
   ]
 }

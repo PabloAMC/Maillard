@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Optional
 
 from src.family_ingestion_plan import load_family_ingestion_plan
+from src.kokumi_scoring import build_kokumi_support_profile
 from src.literature_family_registry import (
     iter_benchmark_intake_entries,
     iter_computational_prior_entries as iter_family_computational_prior_entries,
@@ -80,6 +81,12 @@ _RUNTIME_LANE_PRIOR_REGISTRY = {
         "default_id": "wang_xu_glutathione_peptide_support_v1",
         "slr_family": "05",
     },
+}
+
+_PRIMARY_CONTRACT_TAGS_BY_FAMILY = {
+    "03": {"core_meaty", "mft", "extrusion_survival", "beef_realistic"},
+    "04": {"nucleotide_support", "ribose_delivery", "umami_support", "euc_anchor", "rate_limiting_step", "process_state_calibration", "sensory_threshold"},
+    "05": {"core_meaty", "matrix_intake"},
 }
 
 
@@ -268,6 +275,7 @@ def _build_thiamine_calibration_context(
     sulfur_partner_active: bool,
 ) -> Dict[str, Any]:
     benchmark_rows = query_benchmark_intake_entries(family="03", primary_only=True)
+    aw_support_prior = _computational_prior_entry("arabshahi_1988_aw_dependent_thiamine_ea_v1")
     alone_points = thiamine_priors.get("thiamine_alone_ph_points", []) or [4.0, 5.0, 6.0, 7.0, 8.0]
     alone_yields = thiamine_priors.get("thiamine_alone_mft_yield_ug_per_g", []) or [0.02, 0.14, 0.58, 0.42, 0.19]
     reference_ph = float(thiamine_priors.get("reference_ph", 6.0) or 6.0)
@@ -322,6 +330,20 @@ def _build_thiamine_calibration_context(
     precursor_loading_mM = float(precursor_loading_mM or reference_loading_mM)
     beef_reference_yield = float(thiamine_priors.get("beef_reference_yield_ug_per_g", 3.14) or 3.14)
     beef_reference_loading = float(thiamine_priors.get("beef_reference_total_precursor_mM", 2.1) or 2.1)
+    dilute_loading_uplift_factor = 1.0
+    if mixed_system_active:
+        dilute_loading_uplift_ceiling = float(
+            thiamine_priors.get("mixed_system_dilute_loading_uplift_ceiling", 1.0) or 1.0
+        )
+        if dilute_loading_uplift_ceiling > 1.0 and reference_loading_mM > beef_reference_loading:
+            dilute_loading_uplift_factor = float(
+                _interpolate_profile(
+                    [beef_reference_loading, reference_loading_mM],
+                    [dilute_loading_uplift_ceiling, 1.0],
+                    max(beef_reference_loading, min(reference_loading_mM, precursor_loading_mM)),
+                )
+                or 1.0
+            )
     baseline_efficiency = beef_reference_yield / max(beef_reference_loading, 1.0e-6)
     current_efficiency = float(reference_yield_value) / max(precursor_loading_mM, 1.0e-6)
     observable_efficiency_factor = current_efficiency / max(baseline_efficiency, 1.0e-6)
@@ -339,6 +361,27 @@ def _build_thiamine_calibration_context(
         temperature_celsius=temperature_celsius,
         water_activity=water_activity,
     )
+    aw = None if water_activity is None else max(0.05, min(0.98, float(water_activity)))
+    aw_support_active = False
+    aw_dependent_ea = 0.0
+    aw_modulation_factor = 1.0
+    aw_transfer_weight = 1.0
+    aw_reference = float(aw_support_prior.get("reference_aw", 0.65) or 0.65)
+    aw_reference_ea = _interpolate_numeric_mapping(
+        aw_support_prior.get("starch_ea_kcal_per_mol_by_aw", {}) if isinstance(aw_support_prior.get("starch_ea_kcal_per_mol_by_aw", {}), Mapping) else {},
+        aw_reference,
+    )
+    if aw is not None:
+        aw_dependent_ea_value = _interpolate_numeric_mapping(
+            aw_support_prior.get("starch_ea_kcal_per_mol_by_aw", {}) if isinstance(aw_support_prior.get("starch_ea_kcal_per_mol_by_aw", {}), Mapping) else {},
+            aw,
+        )
+        if aw_dependent_ea_value is not None and aw_reference_ea is not None:
+            aw_support_active = bool(aw_support_prior)
+            aw_dependent_ea = float(aw_dependent_ea_value)
+            aw_modulation_factor = max(0.75, min(1.15, aw_dependent_ea / max(float(aw_reference_ea), 1.0e-6)))
+            aw_transfer_weight = _thiamine_aw_transfer_weight(process_state)
+            aw_modulation_factor = 1.0 - aw_transfer_weight * (1.0 - aw_modulation_factor)
     synergy_scaling = 1.0
     if mixed_system_active:
         synergy_scaling = 0.85 + 0.15 * min(1.0, synergy_factor / max(mixed_peak, 1.0e-6))
@@ -349,6 +392,8 @@ def _build_thiamine_calibration_context(
             float(baseline_fraction)
             * float(pH_factor)
             * float(synergy_scaling)
+            * float(dilute_loading_uplift_factor)
+            * float(aw_modulation_factor)
             * float(extrusion_context.get("extrusion_survival_factor", 1.0)),
         ),
     )
@@ -362,9 +407,18 @@ def _build_thiamine_calibration_context(
         "synergy_scaling": float(synergy_scaling),
         "precursor_loading_mM": float(precursor_loading_mM),
         "reference_loading_mM": float(reference_loading_mM),
+        "dilute_loading_uplift_factor": float(dilute_loading_uplift_factor),
         "observable_efficiency_factor": float(observable_efficiency_factor),
         "benchmark_anchor_ids": [str(row.get("id", "unknown")) for row in benchmark_rows],
         "benchmark_anchor_citations": [str(row.get("citation", "unknown")) for row in benchmark_rows],
+        "aw_reference_active": bool(aw_support_active),
+        "aw_reference_id": str(aw_support_prior.get("id", "")) if aw_support_active else "",
+        "aw_reference_source": str(aw_support_prior.get("source", "")) if aw_support_active else "",
+        "aw_reference_matrix": str(aw_support_prior.get("reference_conditions", {}).get("matrix", "")) if aw_support_active and isinstance(aw_support_prior.get("reference_conditions", {}), Mapping) else "",
+        "aw_reference_value": float(aw) if aw is not None else 0.0,
+        "aw_reference_ea_kcal_per_mol": float(aw_dependent_ea),
+        "aw_modulation_factor": float(aw_modulation_factor),
+        "aw_transfer_weight": float(aw_transfer_weight),
         **extrusion_context,
     }
 
@@ -394,6 +448,18 @@ def _process_state_matches(entry: Mapping[str, Any], process_state: Optional[str
     if not isinstance(values, list) or not values:
         return True
     return requested in {_normalize_name(value) for value in values}
+
+def _thiamine_aw_transfer_weight(process_state: Optional[str]) -> float:
+    normalized = _normalize_name(process_state or "")
+    if normalized in {_normalize_name("heated_matrix"), _normalize_name("extrusion_structured")}:
+        return 1.0
+    if normalized == _normalize_name("aqueous_pre_extrusion_model"):
+        return 0.9
+    if normalized == _normalize_name("intermediate_matrix"):
+        return 0.8
+    if normalized == _normalize_name("ambient_slurry"):
+        return 0.7
+    return 1.0
 
 
 def _protein_type_matches_retention_matrix(matrix_family: str, protein_type: Optional[str]) -> bool:
@@ -457,8 +523,27 @@ def query_family_runtime_priors(
                 "strategic_posture": str(descriptor.get("strategic_posture", "unknown")),
             }
         rows.append(row)
-    rows.sort(key=lambda row: (_family_sort_key(str(row.get("slr_family_source", row.get("family", {}).get("slr_family", "99")))), str(row.get("id", "unknown"))))
+    default_id = str(lane_metadata.get("default_id", "")).strip()
+    rows.sort(
+        key=lambda row: (
+            _family_sort_key(str(row.get("slr_family_source", row.get("family", {}).get("slr_family", "99")))),
+            0 if default_id and str(row.get("id", "")).strip() == default_id else 1,
+            str(row.get("id", "unknown")),
+        )
+    )
     return rows
+
+
+def _matches_primary_contract_surface(row: Mapping[str, Any], target_slr: str) -> bool:
+    required_tags = _PRIMARY_CONTRACT_TAGS_BY_FAMILY.get(str(target_slr).zfill(2), set())
+    if not required_tags:
+        return True
+    row_tags = {
+        str(tag).strip()
+        for tag in (row.get("observable_panel_tags", []) or [])
+        if str(tag).strip()
+    }
+    return bool(row_tags.intersection(required_tags))
 
 
 def get_family_runtime_prior(
@@ -497,6 +582,10 @@ def query_benchmark_intake_entries(
             if target_slr and str(row.get("slr_family_source", "")).zfill(2) == target_slr:
                 is_primary = True
             if not is_primary:
+                continue
+            if str(row.get("kind", "")).strip() == "directional_prior":
+                continue
+            if target_slr and not _matches_primary_contract_surface(row, target_slr):
                 continue
         if matrix_family is not None and _normalize_name(str(row.get("matrix_family", ""))) != _normalize_name(matrix_family):
             continue
@@ -1859,8 +1948,10 @@ def _build_melanoidin_polymerization_lane(
     browning_core_active = bool(normalized_sugars and (normalized_amino or protein_label != "free"))
     support_pool = normalized_additives + normalized_amino
     sulfur_partner_active = any(any(token in value for token in ["cysteine", "methionine", "glutathione"]) for value in support_pool)
+    gum_arabic_active = any(any(token in value for token in ["gum arabic", "arabic gum"]) for value in normalized_additives)
+    hydrolysate_support_active = any(any(token in value for token in ["hydrolysate", "peptide", "autolysate"]) for value in support_pool)
     thermal_drive = _sigmoid(25.0 if temperature_celsius is None else float(temperature_celsius), 118.0, 15.0)
-    residence_factor = min(1.25, 0.40 + 0.19 * math.log1p(max(0.0, float(time_minutes or 0.0))))
+    residence_factor = 0.0 if time_minutes is None else min(1.25, 0.40 + 0.19 * math.log1p(max(0.0, float(time_minutes or 0.0))))
     aw = None if water_activity is None else max(0.05, min(0.98, float(water_activity)))
     browning_aw_factor = 0.82
     if aw is not None:
@@ -1873,6 +1964,20 @@ def _build_melanoidin_polymerization_lane(
         compound_name="2-Furfurylthiol",
         process_state=process_state,
     )
+    architecture_row = next(
+        (
+            row
+            for row in query_benchmark_intake_entries(family="16", primary_only=True)
+            if str(row.get("id", "")).strip() == "jafc_2019_ref21_pea_gum_arabic_architecture_anchor"
+        ),
+        {},
+    )
+    architecture_calibration = _process_state_calibration_entry("jafc_2019_ref21_pea_gum_arabic_architecture_state")
+    architecture_prior_rows = query_family_runtime_priors(
+        family="16",
+        entry_id="jafc_2019_ref21_pea_gum_arabic_architecture_v1",
+    )
+    architecture_prior = architecture_prior_rows[0] if architecture_prior_rows else {}
     fft_fold_reduction_anchor = max(
         [
             float(row.get("numeric_reference", {}).get("value", 0.0))
@@ -1888,8 +1993,38 @@ def _build_melanoidin_polymerization_lane(
         melanoidin_mass * (0.24 + 0.34 * min(1.0, fft_fold_reduction_anchor / 16.0)) * (1.15 if sulfur_partner_active else 0.85),
     )
     matrix_trapping_pressure = min(1.0, melanoidin_mass * (0.55 + 0.45 * float(sulfur_partner_active)))
+    architecture_anchors = architecture_calibration.get("numeric_anchors", {}) if isinstance(architecture_calibration.get("numeric_anchors", {}), Mapping) else {}
+    native_mw_kda = float(architecture_anchors.get("native_mw_kda", 0.0) or 0.0)
+    conjugated_mw_range = architecture_anchors.get("conjugated_mw_kda_range", [])
+    native_rg_nm = float(architecture_anchors.get("native_radius_of_gyration_nm", 0.0) or 0.0)
+    conjugated_rg_range = architecture_anchors.get("conjugated_radius_of_gyration_nm_range", [])
+    conjugated_mw_midpoint = 0.0
+    if isinstance(conjugated_mw_range, list) and len(conjugated_mw_range) == 2:
+        conjugated_mw_midpoint = 0.5 * (float(conjugated_mw_range[0]) + float(conjugated_mw_range[1]))
+    conjugated_rg_midpoint = 0.0
+    if isinstance(conjugated_rg_range, list) and len(conjugated_rg_range) == 2:
+        conjugated_rg_midpoint = 0.5 * (float(conjugated_rg_range[0]) + float(conjugated_rg_range[1]))
+    native_mark_houwink = float(architecture_anchors.get("native_mark_houwink_exponent", 0.0) or 0.0)
+    conjugated_mark_houwink = float(architecture_anchors.get("conjugated_mark_houwink_exponent", 0.0) or 0.0)
+    mark_houwink_drop_fraction = 0.0
+    if native_mark_houwink > 0.0 and conjugated_mark_houwink > 0.0:
+        mark_houwink_drop_fraction = max(0.0, (native_mark_houwink - conjugated_mark_houwink) / native_mark_houwink)
+    mw_growth_fraction = 0.0
+    if native_mw_kda > 0.0 and conjugated_mw_midpoint > 0.0:
+        mw_growth_fraction = max(0.0, (conjugated_mw_midpoint - native_mw_kda) / native_mw_kda)
+    rg_growth_fraction = 0.0
+    if native_rg_nm > 0.0 and conjugated_rg_midpoint > 0.0:
+        rg_growth_fraction = max(0.0, (conjugated_rg_midpoint - native_rg_nm) / native_rg_nm)
+    architecture_shift_active = bool(architecture_calibration and architecture_row and gum_arabic_active and hydrolysate_support_active)
+    architecture_shift_score = min(
+        1.0,
+        1.8 * mw_growth_fraction + 2.4 * rg_growth_fraction + 1.5 * mark_houwink_drop_fraction,
+    ) if architecture_shift_active else 0.0
+    if architecture_shift_active:
+        thiol_scavenging_factor = min(0.92, thiol_scavenging_factor + 0.10 * architecture_shift_score)
+        matrix_trapping_pressure = min(1.0, matrix_trapping_pressure + 0.12 * architecture_shift_score)
 
-    active = bool(browning_core_active and melanoidin_mass > 0.10)
+    active = bool(time_minutes is not None and browning_core_active and melanoidin_mass > 0.10)
     summary = "No explicit melanoidin-polymerization trapping lane active."
     if active:
         summary = (
@@ -1898,6 +2033,10 @@ def _build_melanoidin_polymerization_lane(
         if retention_rows:
             summary = (
                 "Browning burden is high enough that melanoidin build-up should be treated as a bounded trapping lane, anchored to the Family 16 FFT trapping reference instead of a generic dark-color heuristic."
+            )
+        if architecture_shift_active:
+            summary = (
+                "Browning burden is high enough that melanoidin build-up should be treated as a bounded trapping lane, and gum arabic plus hydrolysate cues now also activate the Ref. 21 architecture anchor for higher polymer-growth pressure."
             )
 
     return _build_family_lane_payload(
@@ -1912,7 +2051,18 @@ def _build_melanoidin_polymerization_lane(
             "residence_factor": float(residence_factor),
             "browning_aw_factor": float(browning_aw_factor),
             "sulfur_partner_active": bool(sulfur_partner_active),
+            "gum_arabic_active": bool(gum_arabic_active),
+            "hydrolysate_support_active": bool(hydrolysate_support_active),
+            "architecture_shift_active": bool(architecture_shift_active),
+            "architecture_shift_score": float(architecture_shift_score),
+            "mw_growth_fraction": float(mw_growth_fraction),
+            "radius_of_gyration_growth_fraction": float(rg_growth_fraction),
+            "mark_houwink_drop_fraction": float(mark_houwink_drop_fraction),
             "fft_fold_reduction_anchor": float(fft_fold_reduction_anchor),
+            "architecture_reference_ids": [str(architecture_row.get("id", "unknown"))] if architecture_row else [],
+            "architecture_reference_citations": [str(architecture_row.get("citation", "unknown"))] if architecture_row else [],
+            "architecture_prior_ids": [str(architecture_prior.get("id", "unknown"))] if architecture_prior else [],
+            "process_state_calibration_ids": [str(architecture_calibration.get("id", "unknown"))] if architecture_calibration else [],
             "retention_reference_ids": [str(row.get("id", "unknown")) for row in retention_rows],
             "retention_reference_citations": [str(row.get("source_citation", "unknown")) for row in retention_rows],
         },
@@ -2136,6 +2286,7 @@ def _classify_donor_family(normalized_sugar: str) -> str:
 def _build_donor_hierarchy_lane(
     normalized_sugars: List[str],
     *,
+    normalized_amino: Optional[List[str]] = None,
     normalized_additives: Optional[List[str]] = None,
     normalized_interventions: Optional[List[str]] = None,
     pH: Optional[float] = None,
@@ -2166,9 +2317,18 @@ def _build_donor_hierarchy_lane(
         any(token in value for token in ["hydrolysate", "peptide", "yeast extract", "protease hydrolysis", "autolysate"])
         for value in cue_pool
     )
+    normalized_amino = list(normalized_amino or [])
     prior_rows = query_family_runtime_priors(runtime_lane="pyrazine_control", family="07", process_state="heated_matrix")
     pyrazine_prior = dict(prior_rows[0]) if prior_rows else get_pyrazine_control_priors()
     anchor_rows = query_flavor_reference_entries(family="07", payload_section="pyrazine_reference_anchors")
+    rhamnose_hdmf_prior = _computational_prior_entry("blank_1997_rhamnose_proline_hdmf_uplift_v1")
+    rhamnose_active = any("rhamnose" in sugar for sugar in normalized_sugars)
+    proline_active = any("proline" in value for value in normalized_amino)
+    rhamnose_hdmf_reference_active = bool(rhamnose_active and proline_active and rhamnose_hdmf_prior)
+    rhamnose_hdmf_molar_yield = float(rhamnose_hdmf_prior.get("hdmf_molar_yield_fraction_lower_bound", 0.0) or 0.0)
+    rhamnose_hdmf_reference_score = 0.0
+    if rhamnose_hdmf_reference_active:
+        rhamnose_hdmf_reference_score = min(1.0, rhamnose_hdmf_molar_yield / 0.5)
 
     active = bool(normalized_sugars)
     donor_hierarchy_score = donor_strength.get(dominant_donor_class, 0.0)
@@ -2205,6 +2365,10 @@ def _build_donor_hierarchy_lane(
             summary = (
                 f"Dominant donor class is {dominant_donor_class}, but alkaline plus peptide-rich conditions move the lane into a pyrazine-pressure regime that must stay bounded by the literature control surface."
             )
+        elif rhamnose_hdmf_reference_active:
+            summary = (
+                "Rhamnose and proline are both active, so the lane now exposes a bounded HDMF-support reference rather than treating this donor pair like a generic low-priority reducing sugar."
+            )
     return _build_family_lane_payload(
         "07",
         active=active,
@@ -2220,6 +2384,13 @@ def _build_donor_hierarchy_lane(
             "benchmark_anchor_ids": [str(row.get("id", "unknown")) for row in anchor_rows],
             "benchmark_anchor_citations": [str(row.get("source_citation", "unknown")) for row in anchor_rows],
             "peptide_intensification_active": bool(peptide_intensification_active),
+            "rhamnose_hdmf_reference_active": bool(rhamnose_hdmf_reference_active),
+            "rhamnose_hdmf_prior_ids": [str(rhamnose_hdmf_prior.get("id", "unknown"))] if rhamnose_hdmf_reference_active else [],
+            "rhamnose_hdmf_reference_citations": [str(rhamnose_hdmf_prior.get("source", "unknown"))] if rhamnose_hdmf_reference_active else [],
+            "rhamnose_hdmf_reference_score": float(rhamnose_hdmf_reference_score),
+            "rhamnose_hdmf_molar_yield_fraction_lower_bound": float(rhamnose_hdmf_molar_yield),
+            "rhamnose_hdmf_odt_ug_per_l": float(rhamnose_hdmf_prior.get("hdmf_odt_ug_per_l", 0.0) or 0.0),
+            "rhamnose_hdmf_oav_lower_bound": float(rhamnose_hdmf_prior.get("hdmf_oav_lower_bound", 0.0) or 0.0),
             "alkaline_pyrazine_factor": float(alkaline_pyrazine_factor),
             "low_ph_suppression_factor": float(low_ph_suppression_factor),
             "pyrazine_pressure_score": float(pyrazine_pressure_score),
@@ -2240,6 +2411,8 @@ def _build_thiamine_support_lane(
         summary = "Thiamine support is active, so sulfur routing should be interpreted as augmented rather than purely core-derived."
         if float(calibration.get("extrusion_survival_factor", 1.0)) < 0.95:
             summary = "Thiamine support is active, but the De Leyn 2019 extrusion-retention anchor sharply attenuates pre-extrusion donor survival under this process state."
+        elif bool(calibration.get("aw_reference_active")) and float(calibration.get("aw_modulation_factor", 1.0)) < 0.97:
+            summary = "Thiamine support is active, but the Arabshahi 1988 aw-dependent anchor attenuates support under wetter starch-like conditions relative to the mid-aw reference state."
         elif str(calibration.get("yield_mode", "")) == "mixed_system_optimal_window":
             summary = "Thiamine support is active and sits inside the Cerny 2008 mixed-system pH window, so MFT amplification should be treated as benchmark-calibrated rather than availability-only."
     return _build_family_lane_payload(
@@ -2257,6 +2430,14 @@ def _build_thiamine_support_lane(
             "extrusion_survival_factor": float(calibration.get("extrusion_survival_factor", 1.0)),
             "extrusion_reference_id": str(calibration.get("extrusion_reference_id", "")),
             "extrusion_reference_source": str(calibration.get("extrusion_reference_source", "")),
+            "thiamine_aw_reference_active": bool(calibration.get("aw_reference_active", False)),
+            "thiamine_aw_reference_id": str(calibration.get("aw_reference_id", "")),
+            "thiamine_aw_reference_source": str(calibration.get("aw_reference_source", "")),
+            "thiamine_aw_reference_matrix": str(calibration.get("aw_reference_matrix", "")),
+            "thiamine_aw_reference_value": float(calibration.get("aw_reference_value", 0.0)),
+            "thiamine_aw_reference_ea_kcal_per_mol": float(calibration.get("aw_reference_ea_kcal_per_mol", 0.0)),
+            "thiamine_aw_modulation_factor": float(calibration.get("aw_modulation_factor", 1.0)),
+            "thiamine_aw_transfer_weight": float(calibration.get("aw_transfer_weight", 1.0)),
             "benchmark_anchor_ids": list(calibration.get("benchmark_anchor_ids", [])),
             "benchmark_anchor_citations": list(calibration.get("benchmark_anchor_citations", [])),
         },
@@ -2296,10 +2477,31 @@ def _build_nucleotide_calibration_context(
     time_minutes: Optional[float],
 ) -> Dict[str, Any]:
     benchmark_rows = query_benchmark_intake_entries(family="04", primary_only=True)
+    soladoye_row = next(
+        (row for row in benchmark_rows if str(row.get("id", "")).strip() == "soladoye_2020_sous_vide_euc_anchor"),
+        {},
+    )
+    soladoye_prior = get_family_runtime_prior(
+        runtime_lane="nucleotide_pathway",
+        entry_id="soladoye_2020_low_temp_euc_window_v1",
+    )
+    yeast_extract_grade_prior = get_family_runtime_prior(
+        runtime_lane="nucleotide_pathway",
+        entry_id="ahlberg_2021_yeast_extract_nucleotide_grade_window_v1",
+    )
+    mushroom_profile_prior = get_family_runtime_prior(
+        runtime_lane="nucleotide_pathway",
+        entry_id="cui_2022_mushroom_gmp_euc_window_v1",
+    )
     support_pool = normalized_sugars + normalized_additives + normalized_interventions
     imp_active = any(any(token in value for token in ["imp", "inosinate"]) for value in support_pool)
     gmp_active = any(any(token in value for token in ["gmp", "guanylate"]) for value in support_pool)
     yeast_extract_active = any("yeast extract" in value for value in support_pool)
+    mushroom_species = ""
+    for candidate in ["shiitake", "porcini", "enoki", "oyster"]:
+        if any(candidate in value for value in normalized_additives + normalized_interventions):
+            mushroom_species = candidate
+            break
     explicit_ribose_active = any(
         any(token in value for token in ["ribose", "ribose 5 phosphate", "ribose-5-phosphate", "r5p"])
         for value in normalized_sugars + normalized_additives
@@ -2362,12 +2564,41 @@ def _build_nucleotide_calibration_context(
             or (hydrolysis_fraction >= 0.35 and ribose_delivery_factor >= 0.25)
         )
     )
+    soladoye_key_values = soladoye_row.get("key_values", {}) if isinstance(soladoye_row.get("key_values", {}), Mapping) else {}
+    soladoye_euc_window = soladoye_key_values.get("euc_percent_msg_by_condition", {}) if isinstance(soladoye_key_values.get("euc_percent_msg_by_condition", {}), Mapping) else {}
+    yeast_extract_grade_reference_active = bool(yeast_extract_active and yeast_extract_grade_prior)
+    mushroom_profiles = mushroom_profile_prior.get("species_profiles", {}) if isinstance(mushroom_profile_prior.get("species_profiles", {}), Mapping) else {}
+    mushroom_profile = mushroom_profiles.get(mushroom_species, {}) if isinstance(mushroom_profiles.get(mushroom_species, {}), Mapping) else {}
+    mushroom_reference_active = bool(mushroom_species and mushroom_profile)
+    low_temp_euc_window_active = bool(
+        soladoye_row
+        and process_state == "heated_matrix"
+        and temperature_celsius is not None
+        and float(temperature_celsius) <= 75.0
+        and default_duration is not None
+        and float(default_duration) >= 120.0
+        and share_total > 0.0
+    )
 
     return {
         "active": bool(share_total > 0.0 or explicit_ribose_active),
         "imp_active": bool(imp_active),
         "gmp_active": bool(gmp_active),
         "yeast_extract_active": bool(yeast_extract_active),
+        "yeast_extract_grade_reference_active": bool(yeast_extract_grade_reference_active),
+        "yeast_extract_grade_prior_ids": [str(yeast_extract_grade_prior.get("id", "unknown"))] if yeast_extract_grade_reference_active else [],
+        "yeast_extract_grade_reference_citations": [str(yeast_extract_grade_prior.get("source", "unknown"))] if yeast_extract_grade_reference_active else [],
+        "yeast_extract_standard_imp_mg_per_100g_dw_range": list(yeast_extract_grade_prior.get("standard_autolysate_imp_mg_per_100g_dw_range", [])) if yeast_extract_grade_reference_active else [],
+        "yeast_extract_high_nucleotide_imp_mg_per_100g_dw_range": list(yeast_extract_grade_prior.get("high_nucleotide_imp_mg_per_100g_dw_range", [])) if yeast_extract_grade_reference_active else [],
+        "yeast_extract_high_nucleotide_gmp_mg_per_100g_dw_range": list(yeast_extract_grade_prior.get("high_nucleotide_gmp_mg_per_100g_dw_range", [])) if yeast_extract_grade_reference_active else [],
+        "yeast_extract_amp_deaminase_euc_uplift_factor_vs_standard_range": list(yeast_extract_grade_prior.get("amp_deaminase_euc_uplift_factor_vs_standard_range", [])) if yeast_extract_grade_reference_active else [],
+        "mushroom_reference_active": bool(mushroom_reference_active),
+        "mushroom_prior_ids": [str(mushroom_profile_prior.get("id", "unknown"))] if mushroom_reference_active else [],
+        "mushroom_reference_citations": [str(mushroom_profile_prior.get("source", "unknown"))] if mushroom_reference_active else [],
+        "mushroom_selected_species": str(mushroom_species),
+        "mushroom_gmp_mg_per_100g_dw": float(mushroom_profile.get("gmp_mg_per_100g_dw", 0.0) or 0.0),
+        "mushroom_nucleotide_only_euc_g_msg_per_100g": float(mushroom_profile.get("nucleotide_only_euc_g_msg_per_100g", 0.0) or 0.0),
+        "mushroom_total_euc_g_msg_per_100g": float(mushroom_profile.get("total_euc_g_msg_per_100g", 0.0) or 0.0),
         "explicit_ribose_active": bool(explicit_ribose_active),
         "nucleotide_support_active": bool(share_total > 0.0),
         "ribose_delivery_active": bool(explicit_ribose_active or ribose_delivery_factor > 0.0),
@@ -2391,6 +2622,16 @@ def _build_nucleotide_calibration_context(
         "imp_fold_reduction_at_3mm": float(nucleotide_priors.get("imp_fold_reduction_at_3mm", 45.2) or 45.2),
         "gmp_fold_reduction_at_3mm": float(nucleotide_priors.get("gmp_fold_reduction_at_3mm", 29.8) or 29.8),
         "umami_synergy_constant": float(nucleotide_priors.get("umami_synergy_constant", 1218.0) or 1218.0),
+        "low_temp_euc_window_active": bool(low_temp_euc_window_active),
+        "soladoye_reference_ids": [str(soladoye_row.get("id", "unknown"))] if soladoye_row else [],
+        "soladoye_reference_citations": [str(soladoye_row.get("citation", "unknown"))] if soladoye_row else [],
+        "soladoye_prior_ids": [str(soladoye_prior.get("id", "unknown"))] if soladoye_prior else [],
+        "soladoye_raw_euc_percent_msg": float(soladoye_key_values.get("raw_euc_percent_msg", 0.0) or 0.0),
+        "soladoye_euc_percent_msg_by_condition": {
+            str(key): float(value)
+            for key, value in soladoye_euc_window.items()
+            if value is not None
+        },
         "benchmark_anchor_ids": [str(row.get("id", "unknown")) for row in benchmark_rows],
         "benchmark_anchor_citations": [str(row.get("citation", "unknown")) for row in benchmark_rows],
     }
@@ -2419,6 +2660,10 @@ def _build_nucleotide_support_lane(
     if active:
         if bool(calibration.get("ribose_shift_active", False)):
             summary = "Thermal severity is shifting nucleotide support away from preserved IMP/GMP and toward ribose delivery for downstream Maillard chemistry."
+        elif bool(calibration.get("low_temp_euc_window_active", False)):
+            summary = "Low-temperature heating remains inside the Soladoye EUC-reference window, so preserved nucleotide support should stay visible instead of being treated as an automatic ribose-shift case."
+        elif bool(calibration.get("yeast_extract_grade_reference_active", False)) or bool(calibration.get("mushroom_reference_active", False)):
+            summary = "Nucleotide support is active, and the lane now carries ingredient-source references for yeast-extract grade and mushroom GMP content so formulation-facing EUC context stays explicit."
         elif bool(calibration.get("explicit_ribose_active", False)) and not bool(calibration.get("nucleotide_support_active", nucleotide_active)):
             summary = "Explicit ribose delivery is active, so Family 04 is supporting downstream chemistry without preserved nucleotide-driven umami support."
         else:
@@ -2432,6 +2677,20 @@ def _build_nucleotide_support_lane(
             "ribose_delivery_active": bool(calibration.get("ribose_delivery_active", ribose_delivery_active)),
             "nucleotide_support_score": float(nucleotide_support_score),
             "explicit_ribose_active": bool(calibration.get("explicit_ribose_active", ribose_delivery_active)),
+            "yeast_extract_grade_reference_active": bool(calibration.get("yeast_extract_grade_reference_active", False)),
+            "yeast_extract_grade_prior_ids": list(calibration.get("yeast_extract_grade_prior_ids", [])),
+            "yeast_extract_grade_reference_citations": list(calibration.get("yeast_extract_grade_reference_citations", [])),
+            "yeast_extract_standard_imp_mg_per_100g_dw_range": list(calibration.get("yeast_extract_standard_imp_mg_per_100g_dw_range", [])),
+            "yeast_extract_high_nucleotide_imp_mg_per_100g_dw_range": list(calibration.get("yeast_extract_high_nucleotide_imp_mg_per_100g_dw_range", [])),
+            "yeast_extract_high_nucleotide_gmp_mg_per_100g_dw_range": list(calibration.get("yeast_extract_high_nucleotide_gmp_mg_per_100g_dw_range", [])),
+            "yeast_extract_amp_deaminase_euc_uplift_factor_vs_standard_range": list(calibration.get("yeast_extract_amp_deaminase_euc_uplift_factor_vs_standard_range", [])),
+            "mushroom_reference_active": bool(calibration.get("mushroom_reference_active", False)),
+            "mushroom_prior_ids": list(calibration.get("mushroom_prior_ids", [])),
+            "mushroom_reference_citations": list(calibration.get("mushroom_reference_citations", [])),
+            "mushroom_selected_species": str(calibration.get("mushroom_selected_species", "")),
+            "mushroom_gmp_mg_per_100g_dw": float(calibration.get("mushroom_gmp_mg_per_100g_dw", 0.0)),
+            "mushroom_nucleotide_only_euc_g_msg_per_100g": float(calibration.get("mushroom_nucleotide_only_euc_g_msg_per_100g", 0.0)),
+            "mushroom_total_euc_g_msg_per_100g": float(calibration.get("mushroom_total_euc_g_msg_per_100g", 0.0)),
             "nucleotide_survival_factor": float(calibration.get("nucleotide_survival_factor", float(nucleotide_active))),
             "imp_survival_factor": float(calibration.get("imp_survival_factor", 0.0)),
             "gmp_survival_factor": float(calibration.get("gmp_survival_factor", 0.0)),
@@ -2443,6 +2702,12 @@ def _build_nucleotide_support_lane(
             "imp_fold_reduction_at_3mm": float(calibration.get("imp_fold_reduction_at_3mm", 0.0)),
             "gmp_fold_reduction_at_3mm": float(calibration.get("gmp_fold_reduction_at_3mm", 0.0)),
             "umami_synergy_constant": float(calibration.get("umami_synergy_constant", 0.0)),
+            "low_temp_euc_window_active": bool(calibration.get("low_temp_euc_window_active", False)),
+            "soladoye_reference_ids": list(calibration.get("soladoye_reference_ids", [])),
+            "soladoye_reference_citations": list(calibration.get("soladoye_reference_citations", [])),
+            "soladoye_prior_ids": list(calibration.get("soladoye_prior_ids", [])),
+            "soladoye_raw_euc_percent_msg": float(calibration.get("soladoye_raw_euc_percent_msg", 0.0)),
+            "soladoye_euc_percent_msg_by_condition": dict(calibration.get("soladoye_euc_percent_msg_by_condition", {})),
             "benchmark_anchor_ids": list(calibration.get("benchmark_anchor_ids", [])),
             "benchmark_anchor_citations": list(calibration.get("benchmark_anchor_citations", [])),
         },
@@ -2469,10 +2734,17 @@ def _build_sulfur_peptide_support_lane(
     if hydrolysis_fraction is not None and hydrolysis_fraction >= 0.55:
         hydrolysate_active = True
     sulfur_peptide_priors = get_sulfur_peptide_priors()
+    kokumi_priors = get_family_runtime_prior(
+        runtime_lane="sulfur_peptide_support",
+        entry_id="ohsu_2025_kokumi_casr_support_v1",
+    )
     benchmark_rows = query_benchmark_intake_entries(
         family="05",
         primary_only=True,
         process_state="heated_matrix",
+    )
+    kokumi_reference_rows = query_benchmark_intake_entries(
+        entry_id="ohsu_2025_kokumi_casr_anchor",
     )
     retention_rows = query_retention_reference_entries(
         family="05",
@@ -2536,11 +2808,25 @@ def _build_sulfur_peptide_support_lane(
         ]
         or [0.0]
     )
+    gamma_glutamyl_peptide_active = bool(hydrolysate_active or autolysate_active)
+    kokumi_profile = build_kokumi_support_profile(
+        glutathione_active=glutathione_active,
+        gamma_glutamyl_peptide_active=gamma_glutamyl_peptide_active,
+        peptide_accessibility_factor=peptide_accessibility_factor,
+        kokumi_priors=kokumi_priors,
+    )
+    kokumi_support_active = bool(kokumi_profile.get("kokumi_support_active", False))
     summary = "No explicit glutathione or peptide support lane active."
     if glutathione_active or peptide_support_active:
         summary = "Glutathione or peptide support is active, so sulfur intensity should be interpreted as a bounded GSH or hydrolysate-assisted lane rather than a purely free-cysteine signal."
         if benchmark_rows:
             summary = "Glutathione or peptide support is active, and the lane is anchored to the existing soy-hydrolysate intake record while using bounded GSH and peptide uplift priors for sulfur-positive interpretation."
+    if kokumi_support_active and kokumi_reference_rows:
+        summary = (
+            f"{summary} The same Family 05 cues also activate a bounded kokumi-support lane tied to the Ohsu CaSR reference, so mouthfulness support should be reported alongside volatile sulfur output."
+        )
+    prior_ids = [str(sulfur_peptide_priors.get("id", ""))] if sulfur_peptide_priors else []
+    kokumi_prior_ids = [str(kokumi_priors.get("id", ""))] if kokumi_priors else []
     return _build_family_lane_payload(
         "05",
         active=bool(glutathione_active or peptide_support_active),
@@ -2560,10 +2846,15 @@ def _build_sulfur_peptide_support_lane(
             "free_cysteine_equivalent_factor": float(free_cysteine_equivalent_factor),
             "pyrazine_tradeoff_ratio_vs_free_cysteine": float(pyrazine_tradeoff_ratio),
             "sulfur_proxy_retention_factor": float(sulfur_proxy_retention_factor),
+            "gamma_glutamyl_peptide_active": bool(gamma_glutamyl_peptide_active),
+            **kokumi_profile,
+            "kokumi_prior_ids": kokumi_prior_ids,
+            "kokumi_reference_ids": [str(row.get("id", "unknown")) for row in kokumi_reference_rows],
+            "kokumi_reference_citations": [str(row.get("citation", "unknown")) for row in kokumi_reference_rows],
             "benchmark_anchor_ids": [str(row.get("id", "unknown")) for row in benchmark_rows],
             "benchmark_anchor_citations": [str(row.get("citation", "unknown")) for row in benchmark_rows],
             "retention_reference_ids": [str(row.get("id", "unknown")) for row in retention_rows],
-            "prior_ids": [str(sulfur_peptide_priors.get("id", ""))] if sulfur_peptide_priors else [],
+            "prior_ids": prior_ids,
         },
     )
 
@@ -2584,6 +2875,25 @@ def _build_matrix_scope_lane(*, protein_label: str) -> Dict[str, Any]:
         primary_only=True,
         kind="calibration_reference",
     )
+    exact_benchmark_row = next(
+        (
+            row for row in quantitative_benchmarks
+            if source_id and source_id in str(row.get("matrix_family", "")).strip().lower()
+        ),
+        {},
+    )
+    transferable_benchmarks = [
+        row
+        for row in quantitative_benchmarks
+        if "benchmark_validation" in {
+            str(module).strip() for module in row.get("target_modules", []) if str(module).strip()
+        }
+    ]
+    if exact_benchmark_row and not any(
+        str(row.get("id", "")).strip() == str(exact_benchmark_row.get("id", "")).strip()
+        for row in transferable_benchmarks
+    ):
+        transferable_benchmarks = [exact_benchmark_row, *transferable_benchmarks]
     structural_gaps = [dict(entry) for entry in iter_family_process_gap_entries(family="06")]
     meaty_potential_multiplier = float(source_profile.get("meaty_potential_multiplier", 0.0) or 0.0)
     hydrolysate_observability_bias = float(source_profile.get("hydrolysate_observability_bias", 0.0) or 0.0)
@@ -2593,17 +2903,10 @@ def _build_matrix_scope_lane(*, protein_label: str) -> Dict[str, Any]:
         0.0,
         min(1.0, meaty_potential_multiplier * (1.0 - 0.5 * off_note_penalty)),
     )
-    exact_benchmark_row = next(
-        (
-            row for row in quantitative_benchmarks
-            if source_id and source_id in str(row.get("matrix_family", "")).strip().lower()
-        ),
-        {},
-    )
     nearest_benchmark_row: Dict[str, Any] = {}
-    if not exact_benchmark_row and quantitative_benchmarks and source_profile:
+    if not exact_benchmark_row and transferable_benchmarks and source_profile:
         nearest_benchmark_row = min(
-            quantitative_benchmarks,
+            transferable_benchmarks,
             key=lambda row: abs(
                 float(
                     _protein_source_profile(
@@ -2613,6 +2916,8 @@ def _build_matrix_scope_lane(*, protein_label: str) -> Dict[str, Any]:
             ),
         )
     selected_benchmark_row = exact_benchmark_row if exact_benchmark_row else nearest_benchmark_row
+    if not selected_benchmark_row and transferable_benchmarks:
+        selected_benchmark_row = transferable_benchmarks[0]
     if not selected_benchmark_row and quantitative_benchmarks:
         selected_benchmark_row = quantitative_benchmarks[0]
     benchmark_transfer_mode = "inactive"
@@ -2654,7 +2959,8 @@ def _build_matrix_scope_lane(*, protein_label: str) -> Dict[str, Any]:
             "lox_activity_flag": bool(lox_activity_flag),
             "matrix_source_support_score": float(matrix_source_support_score),
             "process_state_transfer_confidence": float(process_state_transfer_confidence),
-            "benchmark_anchor_ids": [str(row.get("id", "unknown")) for row in quantitative_benchmarks],
+            "benchmark_anchor_ids": [str(row.get("id", "unknown")) for row in transferable_benchmarks],
+            "matrix_reference_anchor_ids": [str(row.get("id", "unknown")) for row in quantitative_benchmarks],
             "selected_benchmark_anchor_id": str(selected_benchmark_row.get("id", "")) if selected_benchmark_row else "",
             "selected_benchmark_context": _build_benchmark_anchor_context(selected_benchmark_row) if selected_benchmark_row else {},
             "benchmark_transfer_mode": benchmark_transfer_mode,
@@ -2769,11 +3075,8 @@ def _build_fermentation_pretreatment_lane(
     ordered_benchmark_rows: List[Dict[str, Any]] = []
     if selected_benchmark_row:
         ordered_benchmark_rows.append(dict(selected_benchmark_row))
-    ordered_benchmark_rows.extend(
-        dict(row)
-        for row in benchmark_rows
-        if str(row.get("id", "")) != str(selected_benchmark_row.get("id", ""))
-    )
+    if matoba_row and str(matoba_row.get("id", "")) != str(selected_benchmark_row.get("id", "")):
+        ordered_benchmark_rows.append(dict(matoba_row))
     return _build_family_lane_payload(
         "10",
         active=active,
@@ -2805,8 +3108,11 @@ def _build_caramelization_lane(
     signal_map: Dict[str, float],
     furanone_expected: List[str],
     furanone_observed: List[str],
+    pH: Optional[float],
 ) -> Dict[str, Any]:
     prior_rows = query_family_runtime_priors(runtime_lane="furanone_support", family="09", process_state="heated_matrix")
+    default_prior = get_furanone_priors()
+    mgo_hdmf_prior = _computational_prior_entry("brands_2002_mgo_hdmf_c3_route_v1")
     carbonyl_anchor_rows = query_flavor_reference_entries(family="09", payload_section="carbonyl_reference_anchors")
     furanone_anchor_rows = query_flavor_reference_entries(family="09", payload_section="furanone_reference_anchors")
     severity_targets = iter_target_panel_entries(
@@ -2830,6 +3136,11 @@ def _build_caramelization_lane(
     severity_signal_ppb = sum(float(value) for value in severity_marker_signals.values())
     supportive_furanones_observed = len(furanone_observed)
     active = bool(severity_signal_ppb > 0.0 or furanone_expected)
+    fragmentation_bias = _sigmoid(float(pH if pH is not None else 6.0), 6.55, 0.35)
+    severity_bias = min(1.0, severity_signal_ppb / 40.0)
+    mgo_hdmf_fragmentation_context_score = min(1.0, 0.65 * fragmentation_bias + 0.35 * severity_bias)
+    mgo_hdmf_reference_active = bool(mgo_hdmf_prior and active and mgo_hdmf_fragmentation_context_score >= 0.45)
+    mgo_hdmf_reference_score = float(mgo_hdmf_fragmentation_context_score if mgo_hdmf_reference_active else 0.0)
     caramelization_support_score = min(
         1.0,
         0.30 * float(bool(furanone_expected))
@@ -2843,6 +3154,8 @@ def _build_caramelization_lane(
         summary = "Carbohydrate pyrolysis or caramelization markers are active, so helpful browning support must be separated from over-furan drift."
         if prior_rows or carbonyl_anchor_rows or furanone_anchor_rows:
             summary = "Carbohydrate pyrolysis or caramelization markers are active, and the lane now carries explicit furanone and carbonyl anchors so browning support is separated from benchmark-visible over-furan drift."
+        if mgo_hdmf_reference_active:
+            summary = "Carbohydrate pyrolysis or caramelization markers are active, and the lane now carries an explicit methylglyoxal-to-HDMF C3 anchor so fragmentation-heavy browning is not treated as amino-acid-dependent only."
     return _build_family_lane_payload(
         "09",
         active=active,
@@ -2853,7 +3166,15 @@ def _build_caramelization_lane(
             "caramelization_support_score": float(caramelization_support_score),
             "severity_penalty_factor": float(severity_penalty_factor),
             "furanone_support_active": bool(furanone_expected or furanone_observed),
-            "prior_ids": [str(row.get("id", "unknown")) for row in prior_rows],
+            "prior_ids": [str(default_prior.get("id", "unknown"))] if default_prior else [],
+            "mgo_hdmf_reference_active": bool(mgo_hdmf_reference_active),
+            "mgo_hdmf_prior_ids": [str(mgo_hdmf_prior.get("id", "unknown"))] if mgo_hdmf_reference_active else [],
+            "mgo_hdmf_reference_citations": [str(mgo_hdmf_prior.get("source", "unknown"))] if mgo_hdmf_reference_active else [],
+            "mgo_hdmf_fragmentation_context_score": float(mgo_hdmf_fragmentation_context_score),
+            "mgo_hdmf_reference_score": float(mgo_hdmf_reference_score),
+            "mgo_hdmf_reference_yield_ug_per_g": float(mgo_hdmf_prior.get("hdmf_reference_yield_ug_per_g", 0.0) or 0.0),
+            "mgo_hdmf_reference_mgo_mM": float(mgo_hdmf_prior.get("reference_conditions", {}).get("mgo_mM", 0.0) or 0.0) if isinstance(mgo_hdmf_prior.get("reference_conditions", {}), Mapping) else 0.0,
+            "mgo_hdmf_route_independent_of_amino_acids": bool(mgo_hdmf_prior.get("route_independent_of_amino_acids", False)),
             "carbonyl_anchor_ids": [str(row.get("id", "unknown")) for row in carbonyl_anchor_rows],
             "furanone_anchor_ids": [str(row.get("id", "unknown")) for row in furanone_anchor_rows],
             "severity_target_ids": [str(row.get("canonical_name", "unknown")) for row in severity_targets],
@@ -2865,6 +3186,7 @@ def _build_caramelization_lane(
 
 def _build_off_note_guardrail_lane(
     *,
+    signal_map: Dict[str, float],
     normalized_additives: List[str],
     normalized_interventions: List[str],
     normalized_sugars: List[str],
@@ -2878,10 +3200,41 @@ def _build_off_note_guardrail_lane(
         for value in guardrail_pool
     )
     calcium_guardrail_active = any("calcium carbonate" in value for value in guardrail_pool)
+    cyclodextrin_guardrail_active = any("cyclodextrin" in value for value in guardrail_pool)
     lipid_marker_signal_ppb = float(lipid_crosstalk_lane.get("lipid_marker_signal_ppb", 0.0))
     benchmark_rows = query_benchmark_intake_entries(family="08", primary_only=True)
     crosstalk_prior_rows = query_family_runtime_priors(runtime_lane="strecker_crosstalk", family="08", process_state="heated_matrix")
     crosstalk_prior = dict(crosstalk_prior_rows[0]) if crosstalk_prior_rows else get_strecker_crosstalk_priors()
+    cyclodextrin_prior = _computational_prior_entry("bhandari_1998_beta_cd_aldehyde_binding_v1")
+    cyclodextrin_observed_signals = {
+        "hexanal": _compound_signal(signal_map, ["hexanal"]),
+        "nonanal": _compound_signal(signal_map, ["nonanal"]),
+        "e_2_nonenal": _compound_signal(signal_map, ["(E)-2-Nonenal", "e-2-nonenal", "2-nonenal", "2 nonenal"]),
+        "2_pentylfuran": _compound_signal(signal_map, ["2-pentylfuran", "2 pentylfuran"]),
+        "1_octen_3_ol": _compound_signal(signal_map, ["1-octen-3-ol", "1 octen 3 ol"]),
+    }
+    cyclodextrin_target_compounds = [
+        compound
+        for compound, value in cyclodextrin_observed_signals.items()
+        if value > 0.0
+        and compound in (cyclodextrin_prior.get("oav_reduction_factor_at_1pct_w_w_by_compound", {}) or {})
+    ]
+    cyclodextrin_weighted_oav_reduction_factor = 0.0
+    cyclodextrin_weighted_headspace_reduction_fraction = 0.0
+    cyclodextrin_reference_active = bool(cyclodextrin_guardrail_active and cyclodextrin_prior and cyclodextrin_target_compounds)
+    if cyclodextrin_reference_active:
+        total_signal = sum(cyclodextrin_observed_signals[compound] for compound in cyclodextrin_target_compounds)
+        if total_signal > 0.0:
+            oav_map = cyclodextrin_prior.get("oav_reduction_factor_at_1pct_w_w_by_compound", {}) or {}
+            headspace_map = cyclodextrin_prior.get("headspace_reduction_fraction_at_1pct_w_w_by_compound", {}) or {}
+            cyclodextrin_weighted_oav_reduction_factor = sum(
+                cyclodextrin_observed_signals[compound] * float(oav_map.get(compound, 0.0) or 0.0)
+                for compound in cyclodextrin_target_compounds
+            ) / total_signal
+            cyclodextrin_weighted_headspace_reduction_fraction = sum(
+                cyclodextrin_observed_signals[compound] * float(headspace_map.get(compound, 0.0) or 0.0)
+                for compound in cyclodextrin_target_compounds
+            ) / total_signal
     required_sugars = [_normalize_name(str(item)) for item in crosstalk_prior.get("required_sugars", []) or []]
     sugar_requirement_met = not required_sugars or any(
         any(required in sugar for required in required_sugars)
@@ -2917,11 +3270,17 @@ def _build_off_note_guardrail_lane(
         + 0.35 * float(amino_group_blocking_factor)
         + 0.20 * float(acrylamide_guardrail_factor),
     )
+    if cyclodextrin_reference_active:
+        suppression_pressure_score = min(
+            1.0,
+            suppression_pressure_score + 0.18 * min(1.0, cyclodextrin_weighted_headspace_reduction_fraction / 0.74),
+        )
     suppression_pressure_active = bool(
         lipid_marker_signal_ppb > 0.0
         or antioxidant_guardrail_active
         or calcium_guardrail_active
         or polyphenol_active
+        or cyclodextrin_guardrail_active
     )
     summary = "No explicit off-note guardrail lane active."
     if suppression_pressure_active:
@@ -2932,6 +3291,10 @@ def _build_off_note_guardrail_lane(
             summary = (
                 "Plant-matrix guardrails are active and now carry explicit safety provenance from Squeo 2023 plus polyphenol crosstalk support, so suppression claims stay bounded by reference data instead of cue detection alone."
             )
+        if cyclodextrin_reference_active:
+            summary = (
+                "Plant-matrix guardrails are active and now also expose bounded beta-cyclodextrin sequestration support, so aldehyde suppression is treated as partial headspace reduction rather than complete cleanup."
+            )
     return _build_family_lane_payload(
         "08",
         active=suppression_pressure_active,
@@ -2941,6 +3304,7 @@ def _build_off_note_guardrail_lane(
             "antioxidant_guardrail_active": bool(antioxidant_guardrail_active),
             "polyphenol_guardrail_active": bool(polyphenol_active),
             "acrylamide_guardrail_active": bool(calcium_guardrail_active),
+            "cyclodextrin_guardrail_active": bool(cyclodextrin_guardrail_active),
             "dicarbonyl_trapping_factor": float(dicarbonyl_trapping_factor),
             "amino_group_blocking_factor": float(amino_group_blocking_factor),
             "suppression_pressure_score": float(suppression_pressure_score),
@@ -2949,6 +3313,12 @@ def _build_off_note_guardrail_lane(
             "benchmark_anchor_ids": [str(row.get("id", "unknown")) for row in benchmark_rows],
             "benchmark_anchor_citations": [str(row.get("citation", "unknown")) for row in benchmark_rows],
             "crosstalk_prior_ids": [str(row.get("id", "unknown")) for row in crosstalk_prior_rows] or ([str(crosstalk_prior.get("id", "unknown"))] if crosstalk_prior else []),
+            "cyclodextrin_prior_ids": [str(cyclodextrin_prior.get("id", "unknown"))] if cyclodextrin_reference_active else [],
+            "cyclodextrin_reference_active": bool(cyclodextrin_reference_active),
+            "cyclodextrin_target_compounds": cyclodextrin_target_compounds,
+            "cyclodextrin_weighted_oav_reduction_factor": float(cyclodextrin_weighted_oav_reduction_factor),
+            "cyclodextrin_weighted_headspace_reduction_fraction": float(cyclodextrin_weighted_headspace_reduction_fraction),
+            "cyclodextrin_reference_loading_wt_pct": float(cyclodextrin_prior.get("reference_conditions", {}).get("beta_cyclodextrin_loading_wt_pct", 0.0) or 0.0),
             "safety_reference_ids": [str(safety_reference.get("id", "unknown"))] if safety_reference else [],
             "safety_reference_citations": [str(safety_reference.get("source_citation", "unknown"))] if safety_reference else [],
             "acrylamide_reference_mean_ug_per_kg": float(safety_range.get("mean", safety_range.get("point", 0.0)) or 0.0),
@@ -3218,6 +3588,7 @@ def build_family_upstream_contract(
 
     donor_hierarchy_lane = _build_donor_hierarchy_lane(
         normalized_sugars,
+        normalized_amino=normalized_amino,
         normalized_additives=normalized_additives,
         normalized_interventions=normalized_interventions,
         pH=pH,
@@ -3744,6 +4115,7 @@ def build_flavor_axis_summary(
     )
     donor_hierarchy_lane = _build_donor_hierarchy_lane(
         normalized_sugars,
+        normalized_amino=normalized_amino,
         normalized_additives=normalized_additives,
         normalized_interventions=normalized_interventions,
         pH=pH,
@@ -3757,6 +4129,7 @@ def build_flavor_axis_summary(
         thiamine_active=thiamine_active,
     )
     off_note_guardrail_lane = _build_off_note_guardrail_lane(
+        signal_map=signal_map,
         normalized_additives=normalized_additives,
         normalized_interventions=normalized_interventions,
         normalized_sugars=normalized_sugars,
@@ -3794,6 +4167,7 @@ def build_flavor_axis_summary(
         signal_map=signal_map,
         furanone_expected=furanone_expected,
         furanone_observed=furanone_observed,
+        pH=pH,
     )
     protein_damage_lane = _build_protein_damage_markers_lane(
         normalized_sugars=normalized_sugars,
@@ -3937,6 +4311,9 @@ def build_flavor_axis_summary(
         "thiamine_inferred_from_inputs": bool(thiamine_metadata["inferred_from_inputs"]),
         "thiamine_mft_fraction_estimate": float(thiamine_fraction_estimate),
         "thiamine_provenance_mode": thiamine_mode,
+        "kokumi_support_active": bool(sulfur_peptide_support_lane.get("kokumi_support_active", False)),
+        "kokumi_support_signal": float(sulfur_peptide_support_lane.get("kokumi_signal_score", 0.0)),
+        "kokumi_signal_mode": str(sulfur_peptide_support_lane.get("kokumi_signal_mode", "inactive")),
         "lincoln_crosstalk_prior": lincoln_crosstalk_prior,
         "family_upstream_contract": upstream_contract,
         "family_lane_summary": family_lane_summary,

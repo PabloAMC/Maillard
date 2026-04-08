@@ -14,7 +14,7 @@ import math
 import numpy as np
 import pandas as pd
 from pathlib import Path
-from dataclasses import dataclass
+
 from typing import List, Dict, Set, Optional, Any, Tuple
 from typing import Mapping
 
@@ -109,41 +109,7 @@ def _trunc(s: str, max_len: int) -> str:
 # Imports moved to top
 
 
-@dataclass
-class PrecursorSystem:
-    name: str
-    precursors: List[str]
-    notes: str
 
-
-
-SYSTEMS = [
-    PrecursorSystem(
-        "Ribose + Cysteine (Savory Base)",
-        ["D-ribose", "L-cysteine"],
-        "Classic model system for meaty flavors."
-    ),
-    PrecursorSystem(
-        "Glucose + Glycine (Baked Base)",
-        ["D-glucose", "glycine"],
-        "Classic model for baked/roasted notes."
-    ),
-    PrecursorSystem(
-        "Ribose + Cysteine + Leucine",
-        ["D-ribose", "L-cysteine", "L-leucine"],
-        "Complex system targeting Strecker aldehydes."
-    ),
-    PrecursorSystem(
-        "Plant-Based Deficient (Glucose + Lysine + Hexanal)",
-        ["D-glucose", "L-lysine", "hexanal"],
-        "Mimics a legume base undergoing lipid oxidation."
-    ),
-    PrecursorSystem(
-        "Ribose + Cysteine + Lysine (DHA Penaly Test)",
-        ["D-ribose", "L-cysteine", "L-lysine"],
-        "Tests if the DHA cross-linking pathway penalises the FFT pathway."
-    )
-]
 
 
 # Build canonical SMILES lookup for targets
@@ -464,6 +430,12 @@ def _resolve_upstream_observability_factor(
         return max(1.0e-4, min(1.0, thiamine_factor))
 
     factor = float(profile.get("base_factor", 1.0))
+    sulfur_lane = family_lanes.get("05", {}) or {}
+    if profile.get("source_sensitive") and str(sulfur_lane.get("peptide_mode", "")) == "hydrolysate_supported":
+        selected_peptide_ratio = float(sulfur_lane.get("selected_peptide_ratio", 1.0) or 1.0)
+        peptide_accessibility_factor = float(sulfur_lane.get("peptide_accessibility_factor", 1.0) or 1.0)
+        hydrolysate_release_uplift = 1.0 + max(0.0, selected_peptide_ratio - 1.0) * peptide_accessibility_factor
+        factor *= max(1.0, min(selected_peptide_ratio, hydrolysate_release_uplift))
     if profile.get("source_sensitive"):
         source_profile = get_protein_source_profile(protein_source)
         if source_profile is not None:
@@ -838,20 +810,7 @@ class Recommender:
         # Map pathway name to span
         return {item["pathway"]: item["energetic_span_kcal"] for item in data}
 
-    def _get_pathway_requirements(self, pathway_name: str) -> Set[str]:
-        """Extract the exogenous reactants required for a pathway."""
-        steps = PATHWAYS[pathway_name]
-        produced_intermediates = set()
-        required_exogenous = set()
-        
-        for step in steps:
-            for reactant in step.reactants:
-                if reactant.label not in produced_intermediates:
-                    required_exogenous.add(reactant.label)
-            for product in step.products:
-                produced_intermediates.add(product.label)
-                
-        return required_exogenous
+
 
     def predict_from_steps(self, 
                            steps: List[Any], 
@@ -1374,163 +1333,5 @@ class Recommender:
             "species_names": species_name_lookup,
         }
 
-    def predict(self, pool: List[str]):
-        """
-        [DEPRECATED] Static pathway estimation logic from Phase 1.
-        Superseded by predict_from_steps() returning ElementaryStep flows.
-        """
-        logger.warning("Recommender.predict() is deprecated. Do not use for new implementations.")
-        available_species = set(pool)
-        
-        # Ubiquitous molecules present in Maillard reaction environments:
-        # water is the solvent, H2 and NH3 are common by-products that accumulate,
-        # CO2 is released in decarboxylation steps. These should not block pathway
-        # activation since they are always available in any food-chemistry system.
-        IMPLICIT_AMBIENT = {"water", "hydrogen", "ammonia", "CO2"}
-        available_species |= IMPLICIT_AMBIENT
-        
-        active_pathways = []
-        
-        # Iteratively activate pathways (since one pathway can feed another)
-        added_new = True
-        while added_new:
-            added_new = False
-            for p_name, steps in PATHWAYS.items():
-                if p_name in [p["name"] for p in active_pathways]:
-                    continue
-                    
-                reqs = self._get_pathway_requirements(p_name)
-                
-                if reqs.issubset(available_species):
-                    # Activate!
-                    span = self.screening_data.get(p_name, float('inf'))
-                    meta = PATHWAY_METADATA.get(p_name, {})
-                    
-                    active_pathways.append({
-                        "name": p_name,
-                        "span": span,
-                        "target": meta.get("target", None),
-                        "type": meta.get("type", "unknown")
-                    })
-                    
-                    # Add its products to the available pool (so Strecker can fire)
-                    for step in steps:
-                        for prod in step.products:
-                            if prod.label not in available_species:
-                                available_species.add(prod.label)
-                                added_new = True
-                                
-        # Sort active pathways by kinetic probability (energetic span)
-        active_pathways.sort(key=lambda x: x["span"])
-        
-        # Calculate penalties and extract toxicity
-        for p in active_pathways:
-            p["penalty"] = "LOW"
-            p["toxicity"] = None
-            
-            # Toxicity check
-            tox_flag = PATHWAY_METADATA.get(p["name"], {}).get("toxicity_flag")
-            if tox_flag:
-                marker = self.toxic_markers.get(tox_flag, {})
-                p["toxicity"] = {
-                    "name": tox_flag,
-                    "risk": marker.get("health_risk", "Unknown risk"),
-                    "priority": marker.get("priority", "medium").upper()
-                }
-            
-            # Penalty check for desirable pathways
-            if p["type"] == "desirable":
-                desirable_span = p["span"]
-                desirable_consumes = set(PATHWAY_METADATA.get(p["name"], {}).get("consumes", []))
-                
-                penalty_score = 0.0
-                for comp_p in active_pathways:
-                    if comp_p["type"] in ["competing", "masking"]:
-                        comp_consumes = set(PATHWAY_METADATA.get(comp_p["name"], {}).get("consumes", []))
-                        shared = desirable_consumes.intersection(comp_consumes)
-                        for _ in shared:
-                            # Faster competing pathway (lower span) = higher penalty
-                            penalty_score += desirable_span / max(0.1, comp_p["span"])
-                            
-                if penalty_score < 0.5:
-                    p["penalty"] = "LOW"
-                elif penalty_score <= 1.0:
-                    p["penalty"] = "MEDIUM"
-                else:
-                    p["penalty"] = "HIGH"
-        
-        return active_pathways
 
-
-def main():
-    print("======================================================")
-    print("      Maillard Formulation Recommender Engine")
-    print("======================================================\n")
-    
-    results_path = ROOT / "results" / "curated_screening_results.json"
-    recommender = Recommender(results_path)
-    
-    for system in SYSTEMS:
-        print("-" * 60)
-        print(f"System: {system.name}")
-        print(f"Input:  {', '.join(system.precursors)}")
-        print(f"Notes:  {system.notes}")
-        print("-" * 60)
-        
-        active = recommender.predict(system.precursors)
-        
-        if not active:
-            print("  [!] No pathways active. The precursors do not react under these rules.")
-            continue
-            
-        print("  Active Pathways:")
-        
-        # Table Header
-        print("    ┌" + "─"*24 + "┬" + "─"*18 + "┬" + "─"*15 + "┬" + "─"*15 + "┬" + "─"*22 + "┐")
-        print("    │ PREDICTED COMPOUND     │ PATHWAY TYPE     │ BARRIER (ΔE‡) │ PENALTY RISK  │ TOXICITY ALERT       │")
-        print("    ├" + "─"*24 + "┼" + "─"*18 + "┼" + "─"*15 + "┼" + "─"*15 + "┼" + "─"*22 + "┤")
-        
-        for p in active:
-            target_str = p['target'].label if p['target'] else "Unknown"
-            
-            # Formatting tags based on type
-            tag = ""
-            if p['type'] == 'desirable':
-                tag = "[✅ AROMA]"
-            elif p['type'] == 'competing':
-                tag = "[⚠️ COMPETING]"
-            elif p['type'] == 'masking':
-                tag = "[🛡️ MASKING]"
-            
-            barrier_str = f"{p['span']:.1f} kcal"
-            penalty_str = p['penalty']
-            
-            tox_str = "-"
-            if p.get('toxicity'):
-                meta = p['toxicity']
-                tox_str = f"[{meta['priority']}] {meta['name']}"
-                
-            # Note: emojis can throw off terminal alignment slightly due to double-width rendering,
-            # but we use a loose truncation to handle it fine in most modern terminals.
-            # Emojis take up 1 char in len() but 2 visual slots.
-            # We will pad manually accounting for the emojis in the tags.
-            # The exact visual alignment might be slightly off by 1 space per emoji.
-            
-            # Truncate and pad
-            col1 = _trunc(target_str, 22)
-            col2 = _trunc(tag, 16)
-            col3 = _trunc(barrier_str, 13)
-            col4 = _trunc(penalty_str, 13)
-            col5 = _trunc(tox_str, 20)
-            
-            print(f"    │ {col1} │ {col2} │ {col3} │ {col4} │ {col5} │")
-            
-        print("    └" + "─"*24 + "┴" + "─"*18 + "┴" + "─"*15 + "┴" + "─"*15 + "┴" + "─"*22 + "┘")
-
-    print("\n" + "═"*85)
-    print(" ℹ️  KNOWN LIMITATIONS:")
-    print("    - Confidence values (xTB ΔE‡ barriers) reflect relative kinetic rankings only.")
-    print("    - Absolute yield predictions require higher-level Tier 2 DFT (Skala) and Cantera")
-    print("      microkinetic modeling to account for temporal concentration profiles.")
-    print("═"*85 + "\n")
 

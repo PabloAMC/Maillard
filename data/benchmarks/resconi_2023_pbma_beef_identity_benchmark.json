@@ -1,0 +1,59 @@
+{
+  "benchmark_id": "resconi_2023_pbma_beef_identity_benchmark",
+  "source_metadata": {
+    "origin": "external_literature",
+    "generator": "Resconi 2023 commercial PBMA survey",
+    "notes": "Executable reference subset of the PBMA-versus-beef identity-gap panel. The current runtime surface closes only the furfural excess marker directly, using a glucose-plus-cysteine free-precursor surrogate that is already benchmarked by the engine; diacetyl, acetoin, and 2-acetylpyrrole remain attached in the intake metadata until broader mixed-matrix coverage is available."
+  },
+  "precursors": {
+    "D-Glucose": {
+      "concentration_mM": 40.0
+    },
+    "L-Cysteine": {
+      "concentration_mM": 10.0
+    }
+  },
+  "conditions": {
+    "temp_C": 150.0,
+    "ph": 5.5,
+    "water_activity": 0.95,
+    "time_min": 60.0
+  },
+  "metadata": {
+    "tier": "SECONDARY",
+    "family": "carbohydrate_pyrolysis_and_caramelization",
+    "execution_path": "free_precursor",
+    "notes": "Free-precursor executable reference subset for the Resconi 2023 PBMA browning gap. Uses the absolute PBMA midpoint furfural value as the executable benchmark marker while the broader mixed-matrix comparator remains in intake metadata. The surrogate chemistry envelope is intentionally carbonyl-loaded relative to the generic glucose-cysteine benchmark so the executable subset represents the over-browned PBMA state rather than a generic model-system load."
+  },
+  "process_metadata": {
+    "state": "heated_matrix",
+    "preheating": "none",
+    "extrusion_history": "commercial_pbma_unknown",
+    "matrix_format": "reference_subset"
+  },
+  "matrix_ranking_contract": {
+    "observable_targets": [
+      {
+        "name": "furfural",
+        "role": "adverse_marker",
+        "expected_rank": 1,
+        "direction": "higher"
+      }
+    ],
+    "adverse_markers": [
+      "furfural"
+    ],
+    "citation_provenance": [
+      "Resconi et al. (2023 / PMC10096055) commercial PBMA versus beef survey",
+      "Midpoint PBMA furfural value extracted from the absolute ng/g cooked-product table"
+    ],
+    "calibration_mode": "free_precursor_reference_anchor",
+    "notes": "Executable external benchmark subset for the over-browned PBMA signature. The surrogate intentionally uses a higher glucose load to represent the PBMA carbonyl burden that drives the reported furfural excess, while the broader diacetyl, acetoin, and pyrrole contrasts remain in intake metadata until the mixed-matrix comparator surface is wider."
+  },
+  "measured_volatiles": {
+    "furfural": {
+      "conc_ppb": 1040.0,
+      "uncertainty_pct": 5
+    }
+  }
+}

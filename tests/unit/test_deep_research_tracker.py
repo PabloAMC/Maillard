@@ -86,6 +86,51 @@ def test_collapse_occurrences_marks_registry_only_and_runtime_bound(tmp_path: Pa
     assert by_citation["Beta Study (2024)"]["status"] == "REGISTRY_ONLY"
 
 
+def test_collapse_occurrences_matches_registry_citation_aliases(tmp_path: Path):
+        artifact_path = tmp_path / "data" / "benchmarks" / "example.json"
+        artifact_path.parent.mkdir(parents=True)
+        artifact_path.write_text("{}", encoding="utf-8")
+
+        registry_path = tmp_path / "data" / "lit" / "benchmark_intake_registry.json"
+        registry_path.parent.mkdir(parents=True)
+        registry_path.write_text(
+                """
+                {
+                    "eligible_references": [
+                        {
+                            "id": "alias-bound",
+                            "citation": "Blank, Devaud & Grosch (2003)",
+                            "citation_aliases": ["JAFC DOI:10.1021/jf034037p (2003)"],
+                            "runtime_artifacts": [{"path": "data/benchmarks/example.json"}]
+                        }
+                    ]
+                }
+                """,
+                encoding="utf-8",
+        )
+
+        registry_entries = load_registry_entries(registry_path, root=tmp_path)
+        rows = collapse_occurrences(
+                [
+                        {
+                                "citation": "JAFC DOI:10.1021/jf034037p (2003)",
+                                "normalized_citation": "jafc doi 10 1021 jf034037p 2003",
+                                "author_year_key": "jafc doi 10 1021 jf034037p 2003",
+                                "score": "8/8",
+                                "score_value": 8,
+                                "file": "04_nucleotide_degradation.md",
+                                "line": 1,
+                                "description": "alias resolution",
+                                "raw_line": "raw",
+                        }
+                ],
+                registry_entries,
+        )
+
+        assert rows[0]["status"] == "RUNTIME_BOUND"
+        assert rows[0]["registry_id"] == "alias-bound"
+
+
 def test_priority_summary_flags_53_targets_as_runtime_bound_in_current_repo():
     payload = build_audit_payload(min_score=6)
     target_summary = summarize_priority_targets(payload["items"])

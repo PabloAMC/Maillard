@@ -49,7 +49,7 @@ def test_screen_pathways_ranking(monkeypatch):
         ElementaryStep([], [], reaction_family="Fast_Step"),   # bar: 5
         ElementaryStep([], [], reaction_family="Slow_Step"),   # bar: 30
     ]
-    p3_steps = [
+    medium_steps = [
         ElementaryStep([], [], reaction_family="Medium_Step1"),# bar: 15
         ElementaryStep([], [], reaction_family="Medium_Step2"),# bar: 15
     ]
@@ -57,7 +57,7 @@ def test_screen_pathways_ranking(monkeypatch):
     pathways = {
         "Pathway_Slow": p2_steps,
         "Pathway_Fast": p1_steps,
-        "Pathway_Medium": p3_steps
+        "Pathway_Medium": medium_steps
     }
     
     ranker = PathwayRanker(n_cores=1)

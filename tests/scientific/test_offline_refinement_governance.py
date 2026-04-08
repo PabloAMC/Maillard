@@ -6,9 +6,9 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src.p3_refinement_governance import (  # noqa: E402
-    build_p3_refinement_governance_artifact,
-    render_p3_refinement_governance_markdown,
+from src.offline_refinement_governance import (  # noqa: E402
+    build_offline_refinement_governance_artifact,
+    render_offline_refinement_governance_markdown,
 )
 
 
@@ -20,7 +20,7 @@ BENCHMARKS = [
 
 
 def test_offline_refinement_governance_holds_compute_until_cheap_screening_moves_benchmarks():
-    payload = build_p3_refinement_governance_artifact(BENCHMARKS)
+    payload = build_offline_refinement_governance_artifact(BENCHMARKS)
 
     assert payload["summary"]["governing_status"] == "hold_observable_first"
     assert payload["summary"]["mechanistic_priority_benchmark_count"] >= 1
@@ -36,8 +36,8 @@ def test_offline_refinement_governance_holds_compute_until_cheap_screening_moves
 
 
 def test_offline_refinement_governance_markdown_surfaces_family_gate_and_blockers():
-    markdown = render_p3_refinement_governance_markdown(build_p3_refinement_governance_artifact(BENCHMARKS))
+    markdown = render_offline_refinement_governance_markdown(build_offline_refinement_governance_artifact(BENCHMARKS))
 
-    assert "P3 Refinement Governance" in markdown
+    assert "Offline Refinement Governance" in markdown
     assert "Family Gate" in markdown
     assert "No selective DFT jobs are currently approved." in markdown

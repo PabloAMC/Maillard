@@ -39,6 +39,20 @@ _ACTION_TEMPLATES = {
     "14": "bound ascorbic-acid dicarbonyl source terms before they leak into safety claims",
 }
 
+_RUNTIME_QUEUE_POSTURE_PRIORITY = {
+    "immediate_expansion_lane": 0,
+    "first_class_runtime_lane": 1,
+    "high_value_support_lane": 2,
+    "guardrail_lane": 3,
+    "upstream_pretreatment_lane": 4,
+    "matrix_scope_lane": 5,
+    "failure_mode_lane": 6,
+    "upstream_precursor_sink": 7,
+    "bounded_upstream_source": 8,
+    "trapping_burden_modifier": 9,
+    "first_class_core": 10,
+}
+
 
 def load_family_ingestion_plan(file_path: Optional[Path | str] = None) -> Dict[str, Any]:
     path = Path(file_path) if file_path is not None else DEFAULT_FAMILY_INGESTION_PLAN
@@ -70,6 +84,17 @@ def _select_backlog_items_for_family(family_row: Mapping[str, Any], backlog_item
         item
         for item in backlog_items
         if item.get("status") == "BACKLOG" and source_file in {str(file_name) for file_name in item.get("files", [])}
+    ]
+
+
+def _select_all_items_for_family(family_row: Mapping[str, Any], backlog_items: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    source_file = _normalize_source_file(family_row.get("source_slr_file", ""))
+    if not source_file:
+        return []
+    return [
+        item
+        for item in backlog_items
+        if source_file in {str(file_name) for file_name in item.get("files", [])}
     ]
 
 
@@ -159,9 +184,10 @@ def build_family_ingestion_plan_artifact(
             payload_type_counts[key] = payload_type_counts.get(key, 0) + 1
 
         family_backlog_items = _select_backlog_items_for_family(row, backlog_items)
+        family_all_items = _select_all_items_for_family(row, backlog_items)
         backlog_count = len(family_backlog_items)
-        backlog_8_of_8_count = sum(1 for item in family_backlog_items if int(item.get("score_value", 0)) >= 8)
-        backlog_occurrence_count = sum(int(item.get("occurrence_count", 0)) for item in family_backlog_items)
+        backlog_8_of_8_count = sum(1 for item in family_all_items if int(item.get("score_value", 0)) >= 8)
+        backlog_occurrence_count = sum(int(item.get("occurrence_count", 0)) for item in family_all_items)
         if backlog_count > 0:
             backlog_family_count += 1
             total_family_backlog_citations += backlog_count
@@ -192,11 +218,17 @@ def build_family_ingestion_plan_artifact(
     ]
     active_sequence = [str(row.get("slr_family", "unknown")) for row in families]
     prioritized_families = sorted(
-        [row for row in families if int(row.get("deep_research_backlog", {}).get("citation_count", 0)) > 0],
+        [
+            row
+            for row in families
+            if int(row.get("implementation_wave", 99)) > 0
+            and int(row.get("deep_research_backlog", {}).get("citation_count", 0)) > 0
+        ],
         key=lambda row: (
-            -float(row.get("execution_priority", {}).get("priority_score", 0.0)),
+            int(_RUNTIME_QUEUE_POSTURE_PRIORITY.get(str(row.get("strategic_posture", "unknown")), 99)),
             int(row.get("implementation_wave", 99)),
-            str(row.get("slr_family", "99")),
+            int(row.get("order_in_wave", 99)),
+            -float(row.get("execution_priority", {}).get("priority_score", 0.0)),
         ),
     )
     recommended_runtime_queue = [str(row.get("slr_family", "unknown")) for row in prioritized_families[:5]]

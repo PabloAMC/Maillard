@@ -30,7 +30,17 @@ test_mech.yaml
 *.csv
 *.log
 *.hypothesis/
-data/
+data/*
+!data/lit/
+!data/geometries/
+!data/reactions/
+!data/rmg_extensions/
+!data/species/
+!data/benchmarks/
+
+# Ignore generated markdown pipeline outputs
+data/lit/deep_research_backlog.json
+data/lit/deep_research_candidate_registry.json
 .DS_Store
 
 # xTB outputs
@@ -47,8 +57,6 @@ manual_test_qcg/
 *.yaml
 !data/**/*.yml
 !data/**/*.yaml
-!data/lit/
-!data/lit/**
 
 # Test Reports
 reports/

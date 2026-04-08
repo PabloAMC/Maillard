@@ -21,9 +21,9 @@ from src.refinement_campaign import (
     render_refinement_impact_markdown,
     render_selective_dft_plan_markdown,
 )
-from src.p3_refinement_governance import (
-    build_p3_refinement_governance_artifact,
-    render_p3_refinement_governance_markdown,
+from src.offline_refinement_governance import (
+    build_offline_refinement_governance_artifact,
+    render_offline_refinement_governance_markdown,
 )
 
 
@@ -43,22 +43,22 @@ def main() -> int:
     cheap_payload = build_cheap_screening_artifact(target_tag=args.target_tag)
     dft_payload = build_selective_dft_plan(target_tag=args.target_tag)
     impact_payload = build_refinement_impact_artifact(target_tag=args.target_tag)
-    governance_payload = build_p3_refinement_governance_artifact(target_tag=args.target_tag)
+    governance_payload = build_offline_refinement_governance_artifact(target_tag=args.target_tag)
 
     files = {
-        output_dir / "p3_global_sensitivity.md": render_global_sensitivity_markdown(global_payload),
+        output_dir / "refinement_global_sensitivity.md": render_global_sensitivity_markdown(global_payload),
         output_dir / "cheap_refinement_screening.md": render_cheap_screening_markdown(cheap_payload),
         output_dir / "selective_dft_plan.md": render_selective_dft_plan_markdown(dft_payload),
         output_dir / "refinement_impact.md": render_refinement_impact_markdown(impact_payload),
-        output_dir / "p3_refinement_governance.md": render_p3_refinement_governance_markdown(governance_payload),
+        output_dir / "refinement_governance.md": render_offline_refinement_governance_markdown(governance_payload),
     }
     json_payloads = {
-        output_dir / "p3_global_sensitivity.json": global_payload,
+        output_dir / "refinement_global_sensitivity.json": global_payload,
         output_dir / "cheap_refinement_screening.json": cheap_payload,
         output_dir / "selective_dft_plan.json": dft_payload,
-        output_dir / "p3_offline_dft_jobs.json": dft_payload.get("offline_jobs", []),
+        output_dir / "refinement_offline_dft_jobs.json": dft_payload.get("offline_jobs", []),
         output_dir / "refinement_impact.json": impact_payload,
-        output_dir / "p3_refinement_governance.json": governance_payload,
+        output_dir / "refinement_governance.json": governance_payload,
     }
 
     for path, content in files.items():
@@ -68,22 +68,22 @@ def main() -> int:
 
     patch_path.write_text(json.dumps(impact_payload.get("patch", {}), indent=2), encoding="utf-8")
 
-    print(files[output_dir / "p3_global_sensitivity.md"])
+    print(files[output_dir / "refinement_global_sensitivity.md"])
     print(files[output_dir / "cheap_refinement_screening.md"])
     print(files[output_dir / "selective_dft_plan.md"])
     print(files[output_dir / "refinement_impact.md"])
-    print(files[output_dir / "p3_refinement_governance.md"])
-    print(f"Wrote {output_dir / 'p3_global_sensitivity.md'}")
-    print(f"Wrote {output_dir / 'p3_global_sensitivity.json'}")
+    print(files[output_dir / "refinement_governance.md"])
+    print(f"Wrote {output_dir / 'refinement_global_sensitivity.md'}")
+    print(f"Wrote {output_dir / 'refinement_global_sensitivity.json'}")
     print(f"Wrote {output_dir / 'cheap_refinement_screening.md'}")
     print(f"Wrote {output_dir / 'cheap_refinement_screening.json'}")
     print(f"Wrote {output_dir / 'selective_dft_plan.md'}")
     print(f"Wrote {output_dir / 'selective_dft_plan.json'}")
-    print(f"Wrote {output_dir / 'p3_offline_dft_jobs.json'}")
+    print(f"Wrote {output_dir / 'refinement_offline_dft_jobs.json'}")
     print(f"Wrote {output_dir / 'refinement_impact.md'}")
     print(f"Wrote {output_dir / 'refinement_impact.json'}")
-    print(f"Wrote {output_dir / 'p3_refinement_governance.md'}")
-    print(f"Wrote {output_dir / 'p3_refinement_governance.json'}")
+    print(f"Wrote {output_dir / 'refinement_governance.md'}")
+    print(f"Wrote {output_dir / 'refinement_governance.json'}")
     print(f"Wrote {patch_path}")
     return 0
 

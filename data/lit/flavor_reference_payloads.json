@@ -232,6 +232,46 @@
           "gen": 89.35
         }
       }
+    },
+    {
+      "id": "pmc12155365_sunflower_2_methylbutanal_fd_point",
+      "compound": "2-methylbutanal",
+      "source_citation": "PMC12155365 (2025)",
+      "doi": null,
+      "matrix_context": "roasted_sunflower_protein_140c_20min",
+      "analytical_method": "SAFE plus SPME GC-MS/O with internal standard, FD factors, and triplicates",
+      "units": "fd_factor",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "diagnostic_marker",
+      "target_direction": "keep_sunflower_as_a_roasted_strecker_positive_matrix_not_a_direct_meaty_proxy",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 2048.0,
+        "values": {
+          "descriptor": "malty_chocolate",
+          "origin": "ile_strecker_degradation"
+        }
+      }
+    },
+    {
+      "id": "pmc12155365_sunflower_3_methylbutanal_fd_point",
+      "compound": "3-methylbutanal",
+      "source_citation": "PMC12155365 (2025)",
+      "doi": null,
+      "matrix_context": "roasted_sunflower_protein_140c_20min",
+      "analytical_method": "SAFE plus SPME GC-MS/O with internal standard, FD factors, and triplicates",
+      "units": "fd_factor",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "diagnostic_marker",
+      "target_direction": "keep_sunflower_as_a_high_strecker_roasted_matrix_with_explicit_leucine_signal",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 2048.0,
+        "values": {
+          "descriptor": "malty_chocolate",
+          "origin": "leu_strecker_degradation"
+        }
+      }
     }
   ],
   "pyrazine_reference_anchors": [
@@ -534,6 +574,79 @@
           "max_ppb": 0.08,
           "odor_detection_threshold_ppb": 0.002,
           "oav_floor": 1.0
+        }
+      }
+    },
+    {
+      "id": "pmc11049305_spirulina_beta_ionone_oav_floor",
+      "compound": "beta-ionone",
+      "source_citation": "PMC11049305 (2024)",
+      "doi": null,
+      "matrix_context": "commercial_spirulina_food_supplements",
+      "analytical_method": "HS-SPME-GC-MS with internal standard, triplicates, and OAV calculation",
+      "units": "oav",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "treat_spirulina_as_a_high_penalty_marine_matrix_until_lipid_extraction_is_explicitly_modeled",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 100.0,
+        "values": {
+          "oav_floor": 100.0,
+          "descriptor": "seaweed_floral_fishy"
+        }
+      }
+    },
+    {
+      "id": "pmc11049305_spirulina_1_octen_3_ol_oav_point",
+      "compound": "1-octen-3-ol",
+      "source_citation": "PMC11049305 (2024)",
+      "doi": null,
+      "matrix_context": "commercial_spirulina_food_supplements",
+      "analytical_method": "HS-SPME-GC-MS with internal standard, triplicates, and OAV calculation",
+      "units": "oav",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "keep_the_mushroom_fishy_marker_visible_in_spirulina_matrix_scope_reporting",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 10.0
+      }
+    },
+    {
+      "id": "pmc11049305_spirulina_hexanal_oav_band",
+      "compound": "hexanal",
+      "source_citation": "PMC11049305 (2024)",
+      "doi": null,
+      "matrix_context": "commercial_spirulina_food_supplements",
+      "analytical_method": "HS-SPME-GC-MS with internal standard, triplicates, and OAV calculation",
+      "units": "oav",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "retain_hexanal_as_a_secondary_off_note_in_spirulina_below_the_beta_ionone_penalty",
+      "numeric_band_or_point": {
+        "type": "range",
+        "min": 2.0,
+        "max": 8.0
+      }
+    },
+    {
+      "id": "pmc12155365_sunflower_4_vinylguaiacol_fd_point",
+      "compound": "4-vinylguaiacol",
+      "source_citation": "PMC12155365 (2025)",
+      "doi": null,
+      "matrix_context": "roasted_sunflower_protein_140c_20min",
+      "analytical_method": "SAFE plus SPME GC-MS/O with internal standard, FD factors, and triplicates",
+      "units": "fd_factor",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "keep_chlorogenic_acid_derived_phenolic_interference_explicit_in_sunflower_reporting",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 512.0,
+        "values": {
+          "descriptor": "clove_smoky",
+          "origin": "chlorogenic_acid_degradation"
         }
       }
     },

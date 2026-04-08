@@ -64,6 +64,14 @@ def load_registry_entries(
     entries: List[Dict[str, Any]] = []
     for row in payload.get("eligible_references", []):
         citation = str(row.get("citation", "")).strip()
+        citation_aliases = [
+            str(alias).strip()
+            for alias in row.get("citation_aliases", []) or []
+            if str(alias).strip()
+        ]
+        all_citations = [citation, *citation_aliases]
+        normalized_citations = [normalized for normalized in (_normalize_text(value) for value in all_citations) if normalized]
+        author_year_keys = [key for key in (_author_year_key(value) for value in all_citations) if key]
         runtime_artifacts = list(row.get("runtime_artifacts", []) or [])
         runtime_bound = bool(runtime_artifacts) and all(
             (root / str(artifact.get("path", ""))).exists()
@@ -74,8 +82,10 @@ def load_registry_entries(
             {
                 "id": str(row.get("id", "unknown")),
                 "citation": citation,
-                "normalized_citation": _normalize_text(citation),
-                "author_year_key": _author_year_key(citation),
+                "normalized_citation": normalized_citations[0] if normalized_citations else "",
+                "normalized_citations": normalized_citations,
+                "author_year_key": author_year_keys[0] if author_year_keys else "",
+                "author_year_keys": author_year_keys,
                 "runtime_artifacts": runtime_artifacts,
                 "runtime_bound": runtime_bound,
             }
@@ -125,13 +135,22 @@ def resolve_registry_match(item: Dict[str, Any], registry_entries: List[Dict[str
     normalized = str(item.get("normalized_citation", ""))
     author_year = str(item.get("author_year_key", ""))
     for entry in registry_entries:
-        if normalized and (
-            normalized == entry["normalized_citation"]
-            or normalized in entry["normalized_citation"]
-            or entry["normalized_citation"] in normalized
+        normalized_candidates = [
+            str(value)
+            for value in entry.get("normalized_citations", [entry.get("normalized_citation", "")])
+            if str(value)
+        ]
+        if normalized and any(
+            normalized == candidate or normalized in candidate or candidate in normalized
+            for candidate in normalized_candidates
         ):
             return entry
-        if author_year and author_year == entry["author_year_key"]:
+        author_year_candidates = [
+            str(value)
+            for value in entry.get("author_year_keys", [entry.get("author_year_key", "")])
+            if str(value)
+        ]
+        if author_year and author_year in author_year_candidates:
             return entry
     return None
 

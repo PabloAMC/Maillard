@@ -1,0 +1,33 @@
+{
+  "benchmark_id": "acrylamide_spi_extrusion_130C_ACSRef3",
+  "benchmark_type": "safety",
+  "source_doi": "ACS ResearchGate ref. 3",
+  "precursors": {
+    "Soy protein isolate": {"concentration_mM": 50.0},
+    "L-Asparagine": {"concentration_mM": 42.0},
+    "D-Glucose": {"concentration_mM": 42.0}
+  },
+  "conditions": {
+    "temp_C": 130,
+    "ph": 6.0,
+    "water_activity": 0.35,
+    "time_min": 0.4167
+  },
+  "sme_kj_per_kg": 250.0,
+  "moisture_regime": "lme",
+  "metadata": {
+    "tier": "PRIMARY",
+    "family": "safety",
+    "execution_path": "free_precursor",
+    "notes": "Short-residence extrusion-context acrylamide benchmark. The literature point is wired through the SME-corrected effective temperature surface introduced in Priority 5.1."
+  },
+  "validation_contract": {
+    "scale_thresholds": {
+      "max_ratio": 1.5,
+      "mean_abs_log10_error": 0.20
+    }
+  },
+  "measured_volatiles": {
+    "acrylamide": {"conc_ppb": 62.62, "uncertainty_pct": 15}
+  }
+}

@@ -515,7 +515,7 @@ def build_selective_dft_plan(
             }
         rows.append(row)
         if row["decision"] == "run_now":
-            job = build_offline_dft_job(dft_candidate, artifact_prefix=f"p3_{family.lower()}")
+            job = build_offline_dft_job(dft_candidate, artifact_prefix=f"refinement_{family.lower()}")
             offline_jobs.append(
                 {
                     "reaction_id": job.reaction_id,

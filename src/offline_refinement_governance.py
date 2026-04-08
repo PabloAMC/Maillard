@@ -16,7 +16,7 @@ def _watchlist_lookup(payload: Mapping[str, Any]) -> Dict[str, Mapping[str, Any]
     }
 
 
-def build_p3_refinement_governance_artifact(
+def build_offline_refinement_governance_artifact(
     benchmark_files: Optional[Iterable[Path | str]] = None,
     *,
     target_tag: str = DEFAULT_TARGET_TAG,
@@ -125,10 +125,10 @@ def build_p3_refinement_governance_artifact(
     }
 
 
-def render_p3_refinement_governance_markdown(payload: Mapping[str, Any]) -> str:
+def render_offline_refinement_governance_markdown(payload: Mapping[str, Any]) -> str:
     summary = payload.get("summary", {})
     lines = [
-        "# P3 Refinement Governance",
+        "# Offline Refinement Governance",
         "",
         f"Governing status: {summary.get('governing_status', 'unknown')}",
         f"Mechanistic-priority benchmarks: {int(summary.get('mechanistic_priority_benchmark_count', 0))}",

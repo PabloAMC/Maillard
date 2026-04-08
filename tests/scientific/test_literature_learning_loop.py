@@ -19,21 +19,76 @@ def test_learning_loop_payload_links_ready_references_to_runtime_artifacts():
     assert payload["summary"]["ready_reference_count"] == len(rows)
     assert payload["summary"]["ready_reference_count"] >= 5
     assert payload["summary"]["queue_conflict_count"] == 0
-    assert rows["trikusuma_2019"]["encoding_status"] == "encoded_runtime_artifact"
     assert rows["trikusuma_2019"]["triage_status"] == "ready_benchmark"
     assert rows["trikusuma_2019"]["runtime_artifacts_present"] is True
-    assert rows["pmc_2026_hme_hexanal_baseline"]["encoding_status"] == "encoded_runtime_artifact"
-    assert rows["acs_2022_pba_lysine_loss_benchmark"]["encoding_status"] == "encoded_runtime_artifact"
+    for entry_id in {
+        "trikusuma_2019",
+        "pmc_2026_hme_hexanal_baseline",
+        "acs_2022_pba_lysine_loss_benchmark",
+        "acs_jafc_3c05991_ppi_spi_partitioning",
+        "acs_jafc_3c02618_binding_prior",
+        "acs_jafc_0c01925_protein_binding_hierarchy",
+        "acs_apts_ref24_3dg_arrhenius_anchor",
+        "mottram_nobrega_2002_furanone_bridge",
+        "pmc_4419266_pe_interfacial_maillard_kinetics",
+        "comunian_2021_thiamine_encapsulation",
+        "voelker_2021_thiamine_kinetics",
+        "huang_2022_thiamine_metal_catalysis",
+        "wang_2012_gsh_xylose_sulfur_uplift",
+        "blank_grosch_1991_hdmf_anchor",
+        "liu_2023_ppi_offnote_baseline",
+        "pmc11049305_spirulina_offnote_anchor",
+        "pmc12155365_sunflower_roasted_anchor",
+        "pmc_2024_pba_cml_cel_ranges_anchor",
+        "pmc_12648097_acrylamide_mitigation_anchor",
+        "frontiers_2022_hcw_aa_arrhenius_anchor",
+        "pmid_1904866_pentosidine_equivalence_anchor",
+        "scielo_brasil_aa_crosslink_hierarchy_anchor",
+        "pmc5992167_amadori_pe_burden_anchor",
+        "pmc9351765_crosspy_trapping_anchor",
+        "uspto_ptacts_2023_yeast_extract_anchor",
+        "wageningen_ref9_hme_rework_hydration_anchor",
+        "acs_foodscitech_2024_hme_firmness_anchor",
+    }:
+        assert rows[entry_id]["encoding_status"] == "encoded_runtime_artifact"
     assert rows["trikusuma_2019"]["template_kind"] == "benchmark_payload"
+    assert rows["resconi_2023_pbma_beef_identity_benchmark"]["template_kind"] == "benchmark_payload"
+    assert rows["resconi_2023_pbma_beef_identity_benchmark"]["runtime_artifacts_present"] is True
     assert rows["lincoln_2025"]["template_kind"] == "computational_prior"
     assert rows["asen_2022"]["source_payload_role"] == "benchmark_intake"
     assert "process_state_calibration" in rows["asen_2022"]["target_payload_types"]
     assert "computational_prior" in rows["asen_2022"]["target_payload_types"]
     assert rows["lincoln_2025"]["encoding_status"] == "encoded_runtime_artifact"
-    assert any(item["artifact_id"] == "pea_isolate_uht_140C_Trikusuma2019" for item in rows["trikusuma_2019"]["runtime_artifacts"])
-    assert any(item["artifact_id"] == "asen_2022_pea_denaturation" for item in rows["asen_2022"]["runtime_artifacts"])
-    assert any(item["artifact_id"] == "li_2026_spi_wg_hme_hexanal_control_point" for item in rows["pmc_2026_hme_hexanal_baseline"]["runtime_artifacts"])
-    assert any(item["artifact_id"] == "acs_2022_pba_lysine_loss" for item in rows["acs_2022_pba_lysine_loss_benchmark"]["runtime_artifacts"])
+    for entry_id, artifact_id in {
+        "trikusuma_2019": "pea_isolate_uht_140C_Trikusuma2019",
+        "asen_2022": "asen_2022_pea_denaturation",
+        "pmc_2026_hme_hexanal_baseline": "li_2026_spi_wg_hme_hexanal_control_point",
+        "acs_2022_pba_lysine_loss_benchmark": "acs_2022_pba_lysine_loss",
+        "acs_jafc_3c05991_ppi_spi_partitioning": "acs_jafc_3c05991_ppi_spi_partitioning",
+        "resconi_2023_pbma_beef_identity_benchmark": "resconi_2023_pbma_beef_identity_benchmark",
+        "acs_apts_ref24_3dg_arrhenius_anchor": "pyrraline_from_3dg",
+        "mottram_nobrega_2002_furanone_bridge": "mottram_nobrega_2002_furanone_sulfur_bridge_v1",
+        "pmc_4419266_pe_interfacial_maillard_kinetics": "pe_schiff_base",
+        "comunian_2021_thiamine_encapsulation": "comunian_2021_thiamine_encapsulation",
+        "voelker_2021_thiamine_kinetics": "voelker_2021_thiamine_arrhenius_v1",
+        "huang_2022_thiamine_metal_catalysis": "huang_2022_thiamine_metal_catalysis_v1",
+        "wang_2012_gsh_xylose_sulfur_uplift": "wang_xu_glutathione_peptide_support_v1",
+        "blank_grosch_1991_hdmf_anchor": "blank_grosch_1991_beef_hdmf_band",
+        "liu_2023_ppi_offnote_baseline": "liu_2023_ppi_ibmp_band",
+        "pmc11049305_spirulina_offnote_anchor": "pmc11049305_spirulina_beta_ionone_oav_floor",
+        "pmc12155365_sunflower_roasted_anchor": "pmc12155365_sunflower_4_vinylguaiacol_fd_point",
+        "pmc_2024_pba_cml_cel_ranges_anchor": "pmc_2024_pba_cml_cel_ranges",
+        "pmc_12648097_acrylamide_mitigation_anchor": "pmc_12648097_acrylamide_mitigation",
+        "frontiers_2022_hcw_aa_arrhenius_anchor": "frontiers_2022_hcw_aa_arrhenius_v1",
+        "pmid_1904866_pentosidine_equivalence_anchor": "pmid_1904866_aa_pentosidine_equivalence_v1",
+        "scielo_brasil_aa_crosslink_hierarchy_anchor": "scielo_brasil_aa_crosslink_hierarchy_v1",
+        "pmc5992167_amadori_pe_burden_anchor": "pmc5992167_amadori_pe_food_matrix_burden",
+        "pmc9351765_crosspy_trapping_anchor": "pmc9351765_crosspy_mft_scavenging_v1",
+        "uspto_ptacts_2023_yeast_extract_anchor": "uspto_ptacts_2023_yeast_extract_mft_oav_band",
+        "wageningen_ref9_hme_rework_hydration_anchor": "wageningen_ref9_hme_rework_hydration_collapse",
+        "acs_foodscitech_2024_hme_firmness_anchor": "acs_foodscitech_2024_hme_firmness_window",
+    }.items():
+        assert any(item["artifact_id"] == artifact_id for item in rows[entry_id]["runtime_artifacts"])
 
 
 def test_learning_loop_reviews_matrix_priors_and_structural_gaps():
@@ -63,6 +118,7 @@ def test_learning_loop_reviews_matrix_priors_and_structural_gaps():
     assert promotion_queue["selected_family"]["minimum_runtime_landing"] == "benchmark_payload"
     assert promotion_queue["selected_family"]["reject_narrative_only"] is True
     assert backlog["summary"]["queue_conflict_count"] == 0
+    assert any(row["id"] == "resconi_2023_pbma_beef_identity_benchmark" for row in backlog["encoded_reference_rows"])
     assert backlog["minimum_primary_experiment"]["exogenous_precursors"]["D-ribose_mM"] == 1.0
 
     markdown = render_literature_learning_loop_markdown(payload)

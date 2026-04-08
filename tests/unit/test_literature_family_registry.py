@@ -37,15 +37,27 @@ def test_family_payload_coverage_tracks_all_slr_families():
 
 
 def test_family_registry_returns_family_specific_prior_and_reference_entries():
+    donor_priors = get_family_prior_entries(family="07")
+    guardrail_priors = get_family_prior_entries(family="08")
     thiamine_priors = get_family_prior_entries(family="03")
+    furanone_priors = get_family_prior_entries(family="09")
     nucleotide_priors = get_family_prior_entries(family="04")
     sulfur_peptide_priors = get_family_prior_entries(family="05")
     sulfur_refs = list(iter_flavor_reference_entries(family="03"))
     nucleotide_panel = list(iter_matrix_decision_panel_entries(family="04"))
 
+    assert any(row["id"] == "maillard_van_boekel_1992_sugar_reactivity_hierarchy_v1" for row in donor_priors)
+    assert any(row["id"] == "blank_1997_rhamnose_proline_hdmf_uplift_v1" for row in donor_priors)
+    assert any(row["id"] == "bhandari_1998_beta_cd_aldehyde_binding_v1" for row in guardrail_priors)
     assert any(row["id"] == "cerny_2007_thiamine_split_v1" for row in thiamine_priors)
+    assert any(row["id"] == "arabshahi_1988_aw_dependent_thiamine_ea_v1" for row in thiamine_priors)
+    assert any(row["id"] == "brands_2002_mgo_hdmf_c3_route_v1" for row in furanone_priors)
     assert any(row["id"] == "matoba_1988_nucleotide_hydrolysis_v1" for row in nucleotide_priors)
+    assert any(row["id"] == "soladoye_2020_low_temp_euc_window_v1" for row in nucleotide_priors)
+    assert any(row["id"] == "ahlberg_2021_yeast_extract_nucleotide_grade_window_v1" for row in nucleotide_priors)
+    assert any(row["id"] == "cui_2022_mushroom_gmp_euc_window_v1" for row in nucleotide_priors)
     assert any(row["id"] == "wang_xu_glutathione_peptide_support_v1" for row in sulfur_peptide_priors)
+    assert any(row["id"] == "ohsu_2025_kokumi_casr_support_v1" for row in sulfur_peptide_priors)
     assert any(row["id"] == "hofmann_1997_beef_mft_band" for row in sulfur_refs)
     assert any(row["canonical_name"] == "imp" for row in nucleotide_panel)
 

@@ -48,6 +48,10 @@ _BENCHMARK_LABELS: dict[str, dict[str, str]] = {
         "plain": "Pea isolate UHT, 140 C (Trikusuma, 2019)",
         "latex": r"Pea isolate UHT, $140\,^{\circ}$C (Trikusuma, 2019)",
     },
+    "resconi_2023_pbma_beef_identity_benchmark": {
+        "plain": "PBMA vs beef comparator, 150 C (Resconi et al., 2023)",
+        "latex": r"PBMA vs beef comparator, $150\,^{\circ}$C (Resconi et al., 2023)",
+    },
     "soy_isolate_40C_PratapSingh2021": {
         "plain": "Soy isolate, 40 C (Pratap Singh, 2021)",
         "latex": r"Soy isolate, $40\,^{\circ}$C (Pratap Singh, 2021)",
@@ -61,8 +65,8 @@ _BENCHMARK_LABELS: dict[str, dict[str, str]] = {
         "latex": r"Soy isolate + ribose + cysteine, $100\,^{\circ}$C (Protocol Pilot, 2026)",
     },
     "spi_hvp_xylose_120C_PMC9905368": {
-        "plain": "SPI + HVP + xylose, 120 C (PMC9905368, 2023)",
-        "latex": r"SPI + HVP + xylose, $120\,^{\circ}$C (PMC9905368, 2023)",
+        "plain": "SPI hydrolysate + xylose, 120 C (Cho et al., 2023)",
+        "latex": r"SPI hydrolysate + xylose, $120\,^{\circ}$C (Cho et al., 2023)",
     },
     "thiamine_cys_ribose_100C_Hofmann1996": {
         "plain": "Thiamine + cysteine + ribose, 100 C (Hofmann, 1996)",
@@ -73,8 +77,8 @@ _BENCHMARK_LABELS: dict[str, dict[str, str]] = {
         "latex": r"Thiamine + cysteine + xylose, $145\,^{\circ}$C (Cerny, 2008) [reference anchor]",
     },
     "wheat_gluten_hvp_xylose_120C_PMC9905368": {
-        "plain": "Wheat gluten + HVP + xylose, 120 C (PMC9905368, 2023)",
-        "latex": r"Wheat gluten + HVP + xylose, $120\,^{\circ}$C (PMC9905368, 2023)",
+        "plain": "Wheat gluten hydrolysate + xylose, 120 C (Cho et al., 2023)",
+        "latex": r"Wheat gluten hydrolysate + xylose, $120\,^{\circ}$C (Cho et al., 2023)",
     },
 }
 

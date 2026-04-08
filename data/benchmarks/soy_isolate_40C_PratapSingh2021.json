@@ -1,0 +1,75 @@
+{
+  "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+  "source_doi": "10.3390/molecules26134104",
+  "precursors": {
+    "Soy Protein Isolate": {
+      "concentration_mM": 1000.0
+    }
+  },
+  "conditions": {
+    "temp_C": 40,
+    "ph": 6.0,
+    "water_activity": 0.95,
+    "time_min": 10
+  },
+  "metadata": {
+    "tier": "PRIMARY",
+    "family": "matrix_headspace",
+    "execution_path": "matrix_only",
+    "notes": "Executable intake benchmark for matrix-only headspace scope; not yet a predictive free-precursor benchmark."
+  },
+  "process_metadata": {
+    "state": "ambient_slurry",
+    "preheating": "none",
+    "extrusion_history": "none",
+    "matrix_format": "soy protein isolate slurry"
+  },
+  "matrix_ranking_contract": {
+    "observable_targets": [
+      {
+        "name": "2-pentylfuran",
+        "role": "adverse_marker",
+        "expected_rank": 1,
+        "direction": "higher"
+      },
+      {
+        "name": "hexanal",
+        "role": "adverse_marker",
+        "expected_rank": 2,
+        "direction": "higher"
+      },
+      {
+        "name": "hexanol",
+        "role": "adverse_marker",
+        "expected_rank": 3,
+        "direction": "higher"
+      }
+    ],
+    "adverse_markers": [
+      "2-pentylfuran",
+      "hexanal",
+      "hexanol"
+    ],
+    "citation_provenance": [
+      "Pratap-Singh 2021 ambient slurry GC-MS profile for soy protein isolate"
+    ],
+    "calibration_mode": "compound_specific_headspace",
+    "notes": "Off-flavour ranking contract for the ambient soy-isolate matrix lane; still outside the strict gate."
+  },
+  "measured_volatiles": {
+    "hexanal": {
+      "conc_ppb": 380,
+      "uncertainty_pct": 11
+    },
+    "2-pentylfuran": {
+      "conc_ppb": 2492,
+      "uncertainty_pct": 8
+    },
+    "hexanol": {
+      "conc_ppb": 120,
+      "uncertainty_pct": 15
+    }
+  },
+  "protein_type": "soy_iso",
+  "denaturation_state": 0.0
+}

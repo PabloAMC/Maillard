@@ -111,7 +111,7 @@ scientific_lane() {
   run_in_env "python scripts/generators/generate_matrix_observable_closure_audit.py --output-dir results/validation"
   run_in_env "python scripts/generators/generate_matrix_experiment_intake_schema.py --output-dir results/validation"
   run_in_env "python scripts/generators/generate_matrix_family_coverage.py"
-  run_in_env "python scripts/generators/generate_p3_refinement_campaign.py --output-dir results/validation"
+  run_in_env "python scripts/generators/generate_refinement_governance.py --output-dir results/validation"
   run_in_env "python scripts/generators/generate_mlp_assessment.py"
   run_in_env "python scripts/generators/generate_literature_learning_loop.py --output-dir results/validation"
   run_in_env "python scripts/generators/generate_family_promotion_state.py --output-dir results/validation"
@@ -332,7 +332,7 @@ case "$cmd" in
     run_in_env "python scripts/generators/generate_matrix_family_coverage.py"
     ;;
   p3-refinement)
-    run_in_env "python scripts/generators/generate_p3_refinement_campaign.py --output-dir results/validation"
+    run_in_env "python scripts/generators/generate_refinement_governance.py --output-dir results/validation"
     ;;
   mlp-assessment|p4-mlp-assessment)
     run_in_env "python scripts/generators/generate_mlp_assessment.py"

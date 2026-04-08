@@ -18,6 +18,12 @@ PROCESS_GAP_REGISTRY_PATH = DATA_LIT_DIR / "process_gap_registry.json"
 MATRIX_DECISION_PANEL_PATH = DATA_LIT_DIR / "matrix_decision_panel.json"
 PENDING_BENCHMARK_INTAKE_STATUSES = {"pending_json_payload"}
 
+_CANONICAL_FAMILY_ALIASES = {
+    "advanced_glycation_and_damage": "protein_damage_markers",
+    "microbial_fermentation_modulation": "fermentation_pretreatment",
+    "phospholipid_amine_maillard": "phospholipid_amine_sink",
+}
+
 
 def _load_json(path: Path) -> Dict[str, Any]:
     with open(path, "r", encoding="utf-8") as handle:
@@ -39,6 +45,7 @@ _FAMILY_BY_ID = {
 
 def resolve_family_descriptor(family_ref: Optional[str]) -> Dict[str, Any]:
     normalized = str(family_ref or "").strip()
+    normalized = _CANONICAL_FAMILY_ALIASES.get(normalized, normalized)
     if not normalized:
         return {}
     if normalized.isdigit():
@@ -68,11 +75,18 @@ def _family_matches(row: Mapping[str, Any], family_ref: Optional[str]) -> bool:
 def _apply_metadata_defaults(entry: Mapping[str, Any], defaults: Optional[Mapping[str, Any]] = None) -> Dict[str, Any]:
     row = dict(defaults or {})
     row.update(dict(entry))
+    chemistry_family = str(row.get("chemistry_family", "")).strip()
+    if chemistry_family:
+        row["chemistry_family"] = _CANONICAL_FAMILY_ALIASES.get(chemistry_family, chemistry_family)
     supporting = []
     for source in [defaults or {}, entry]:
         values = source.get("supporting_families", []) if isinstance(source, Mapping) else []
         if isinstance(values, list):
-            supporting.extend(str(item).strip() for item in values if str(item).strip())
+            supporting.extend(
+                _CANONICAL_FAMILY_ALIASES.get(str(item).strip(), str(item).strip())
+                for item in values
+                if str(item).strip()
+            )
     if supporting:
         row["supporting_families"] = list(dict.fromkeys(supporting))
     observable_tags = []

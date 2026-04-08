@@ -23,8 +23,8 @@ def test_hvp_xylose_benchmarks_are_executable_and_rank_wheat_above_spi():
     spi_mft = _comparison_map(spi_eval)["2-Methyl-3-furanthiol (MFT)"].predicted_ppb
     wheat_mft = _comparison_map(wheat_eval)["2-Methyl-3-furanthiol (MFT)"].predicted_ppb
     assert wheat_mft > spi_mft
-    assert max(comparison.ratio for comparison in spi_eval.comparisons) <= 8.0
-    assert max(comparison.ratio for comparison in wheat_eval.comparisons) <= 8.0
+    assert max(comparison.ratio for comparison in spi_eval.comparisons) <= 1.5
+    assert max(comparison.ratio for comparison in wheat_eval.comparisons) <= 1.5
 
 
 def test_fast_acrylamide_extrusion_benchmark_is_locally_calibrated():
@@ -53,3 +53,16 @@ def test_cml_cel_and_furosine_benchmarks_execute_with_expected_directionality():
     severe = predict_furosine(165.0, 20.0, lysine_mM=35.0, reducing_sugar_mM=35.0, protein_type="pea_iso", water_activity=0.55)
     assert peak > severe
     assert max(comparison.ratio for comparison in furosine_eval.comparisons) <= 2.0
+
+
+def test_resconi_identity_gap_subset_benchmark_executes_on_supported_marker_subset():
+    evaluation = evaluate_benchmark(ROOT / "data" / "benchmarks" / "resconi_2023_pbma_beef_identity_benchmark.json")
+
+    assert evaluation.supported, evaluation.reason
+    assert evaluation.coverage == 1.0
+    assert len(evaluation.comparisons) == 1
+
+    comparison = evaluation.comparisons[0]
+    assert comparison.compound == "furfural"
+    assert comparison.matched_name is not None
+    assert comparison.ratio <= 1.5

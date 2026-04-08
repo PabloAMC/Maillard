@@ -1,5 +1,6 @@
 import pytest
 
+from src.kokumi_scoring import build_kokumi_support_profile
 from src.literature_runtime import (
     build_family_upstream_contract,
     build_flavor_axis_summary,
@@ -288,7 +289,7 @@ def test_build_flavor_axis_summary_surfaces_all_family_lanes_and_adjustments():
     assert summary["family_lane_summary"]["05"]["pyrazine_tradeoff_ratio_vs_free_cysteine"] == pytest.approx(0.75)
     assert summary["family_lane_summary"]["06"]["matrix_scope_active"] is True
     assert summary["family_lane_summary"]["06"]["source_id"] == "mycoprotein"
-    assert summary["family_lane_summary"]["06"]["process_state_anchor_ids"] == ["asen_2022", "li_2025"]
+    assert summary["family_lane_summary"]["06"]["process_state_anchor_ids"] == ["asen_2022", "li_2025", "uspto_ptacts_2023_yeast_extract_anchor"]
     assert summary["family_lane_summary"]["06"]["structural_gap_ids"] == ["ellman_opa_dsc_same_experiment"]
     assert summary["family_lane_summary"]["06"]["matrix_uncertainty_factor"] < 0.75
     assert summary["family_lane_summary"]["13"]["polyphenol_active"] is True
@@ -359,12 +360,23 @@ def test_build_family_upstream_contract_calibrates_thiamine_by_ph_and_extrusion_
         water_activity=0.75,
         molar_ratios={"ribose": 1.0, "cysteine": 1.0, "thiamine": 0.1},
     )
+    concentrated = build_family_upstream_contract(
+        sugars=["xylose"],
+        amino_acids=["cysteine"],
+        additives=["thiamine"],
+        protein_type="soy_iso",
+        pH=6.0,
+        thiamine_availability={"available": True, "source": "pbma_fortified"},
+        molar_ratios={"xylose": 10.0, "cysteine": 10.0, "thiamine": 10.0},
+    )
 
     assert optimal["thiamine_fraction_baseline"] == pytest.approx(0.5)
     assert optimal["thiamine_fraction_estimate"] > alkaline["thiamine_fraction_estimate"]
     assert extruded["thiamine_fraction_estimate"] < optimal["thiamine_fraction_estimate"]
     assert optimal["effective_molar_ratios"]["thiamine"] > 0.1
     assert extruded["effective_molar_ratios"]["thiamine"] < optimal["effective_molar_ratios"]["thiamine"]
+    assert optimal["thiamine_calibration"]["dilute_loading_uplift_factor"] > 1.0
+    assert concentrated["thiamine_calibration"]["dilute_loading_uplift_factor"] == pytest.approx(1.0)
     assert extruded["thiamine_calibration"]["extrusion_survival_factor"] == pytest.approx(0.04)
     assert "cerny_guntz_dubini_2008" in extruded["thiamine_calibration"]["benchmark_anchor_ids"]
     assert optimal["added_precursor_ratios"] == {}
@@ -535,11 +547,57 @@ def test_build_flavor_axis_summary_calibrates_family_08_guardrail_lane_with_safe
     family_08 = summary["family_lane_summary"]["08"]
 
     assert family_08["suppression_pressure_active"] is True
-    assert family_08["benchmark_anchor_ids"] == ["squeo_2023"]
+    assert family_08["benchmark_anchor_ids"] == ["squeo_2023", "wang_2022_lab_hexanal_cleanup_anchor"]
     assert family_08["crosstalk_prior_ids"] == ["lincoln_2025_polyphenol_crosstalk_v1"]
     assert family_08["safety_reference_ids"] == ["squeo_2023_pbpi_acrylamide"]
     assert family_08["acrylamide_reference_mean_ug_per_kg"] == pytest.approx(451.0)
     assert family_08["suppression_pressure_score"] > 0.3
+
+
+def test_build_flavor_axis_summary_exposes_blank_1997_rhamnose_hdmf_reference():
+    summary = build_flavor_axis_summary(
+        projection_metadata={
+            "hdmf": {"compound": "HDMF", "observable_ppb": 4.2},
+        },
+        sugars=["rhamnose"],
+        amino_acids=["proline"],
+        additives=[],
+        lipids=[],
+        protein_type="soy_iso",
+        pH=5.4,
+    )
+
+    family_07 = summary["family_lane_summary"]["07"]
+
+    assert family_07["rhamnose_hdmf_reference_active"] is True
+    assert family_07["rhamnose_hdmf_prior_ids"] == ["blank_1997_rhamnose_proline_hdmf_uplift_v1"]
+    assert family_07["rhamnose_hdmf_molar_yield_fraction_lower_bound"] == pytest.approx(0.4)
+    assert family_07["rhamnose_hdmf_odt_ug_per_l"] == pytest.approx(0.6)
+    assert family_07["rhamnose_hdmf_oav_lower_bound"] == pytest.approx(80.0)
+
+
+def test_build_flavor_axis_summary_exposes_bhandari_beta_cyclodextrin_guardrail():
+    summary = build_flavor_axis_summary(
+        projection_metadata={
+            "hex": {"compound": "Hexanal", "observable_ppb": 65.0},
+            "non": {"compound": "Nonanal", "observable_ppb": 20.0},
+        },
+        sugars=["glucose"],
+        amino_acids=["cysteine"],
+        additives=["beta cyclodextrin"],
+        lipids=["sunflower oil"],
+        protein_type="soy_iso",
+        pH=6.2,
+    )
+
+    family_08 = summary["family_lane_summary"]["08"]
+
+    assert family_08["cyclodextrin_guardrail_active"] is True
+    assert family_08["cyclodextrin_reference_active"] is True
+    assert family_08["cyclodextrin_prior_ids"] == ["bhandari_1998_beta_cd_aldehyde_binding_v1"]
+    assert family_08["cyclodextrin_target_compounds"] == ["hexanal", "nonanal"]
+    assert family_08["cyclodextrin_weighted_oav_reduction_factor"] == pytest.approx(2.7176470588235295)
+    assert family_08["cyclodextrin_reference_loading_wt_pct"] == pytest.approx(1.0)
 
 
 def test_build_flavor_axis_summary_calibrates_family_09_with_furanone_and_carbonyl_anchors():
@@ -563,7 +621,33 @@ def test_build_flavor_axis_summary_calibrates_family_09_with_furanone_and_carbon
     assert "hernandez_2023_furfural_ratio_anchor" in family_09["carbonyl_anchor_ids"]
     assert "blank_fay_1996_hemf_mechanistic_anchor" in family_09["furanone_anchor_ids"]
     assert family_09["furanone_support_active"] is True
+    assert family_09["mgo_hdmf_reference_active"] is False
     assert family_09["furfural_reference_ratio"] > 1.0
+
+
+def test_build_flavor_axis_summary_exposes_brands_2002_mgo_hdmf_reference():
+    summary = build_flavor_axis_summary(
+        projection_metadata={
+            "furf": {"compound": "Furfural", "observable_ppb": 42.0},
+            "hmf": {"compound": "5-Hydroxymethylfurfural (HMF)", "observable_ppb": 10.0},
+            "acetyl": {"compound": "2-Acetylfuran", "observable_ppb": 12.0},
+        },
+        sugars=["glucose"],
+        amino_acids=["lysine"],
+        additives=[],
+        lipids=[],
+        protein_type="soy_iso",
+        pH=7.1,
+    )
+
+    family_09 = summary["family_lane_summary"]["09"]
+
+    assert family_09["mgo_hdmf_reference_active"] is True
+    assert family_09["mgo_hdmf_prior_ids"] == ["brands_2002_mgo_hdmf_c3_route_v1"]
+    assert family_09["mgo_hdmf_reference_yield_ug_per_g"] == pytest.approx(2.9)
+    assert family_09["mgo_hdmf_reference_mgo_mM"] == pytest.approx(50.0)
+    assert family_09["mgo_hdmf_route_independent_of_amino_acids"] is True
+    assert family_09["mgo_hdmf_fragmentation_context_score"] > 0.7
 
 
 def test_build_flavor_axis_summary_calibrates_family_10_with_pretreatment_anchors():
@@ -778,14 +862,83 @@ def test_query_benchmark_intake_and_dft_kinetic_priors_surface_family_02_and_11_
         "hofmann_schieberle_grosch_1996",
     }
     assert {row["id"] for row in family_04_rows} == {
+        "ahlberg_2021_yeast_extract_grade_anchor",
+        "cui_2022_mushroom_nucleotide_anchor",
         "matoba_1988_nucleotide_hydrolysis",
         "mouritsen_2024_umami_thresholds",
         "nakamura_1988_imp_ribose_release",
+        "soladoye_2020_sous_vide_euc_anchor",
         "yamaguchi_ninomiya_2000_euc_anchor",
     }
     assert family_11_kinetics
     assert family_11_kinetics[0]["id"] == "hexanal_radical_quench"
     assert family_11_kinetics[0]["active_arrhenius_key"] == "hexanal_radical_quench_xtb_derived"
+
+
+def test_query_family_runtime_priors_surfaces_ohsu_kokumi_prior_for_family_05():
+    rows = query_family_runtime_priors(
+        runtime_lane="sulfur_peptide_support",
+        entry_id="ohsu_2025_kokumi_casr_support_v1",
+    )
+
+    assert rows
+    assert rows[0]["prior_section"] == "sulfur_peptide_priors"
+    assert rows[0]["gsh_ec50_mM"] == pytest.approx(0.68)
+    assert rows[0]["gamma_glu_val_ec50_mM"] == pytest.approx(0.32)
+
+
+def test_build_flavor_axis_summary_surfaces_family_05_kokumi_support_when_gsh_and_hydrolysate_are_active():
+    summary = build_flavor_axis_summary(
+        projection_metadata={
+            "mft": {"compound": "2-Methyl-3-furanthiol (MFT)", "observable_ppb": 7.0},
+        },
+        sugars=["xylose"],
+        amino_acids=["cysteine"],
+        additives=["glutathione", "soy hydrolysate"],
+        lipids=[],
+        protein_type="soy_iso",
+        pH=5.8,
+        process_state="heated_matrix",
+        temperature_celsius=120.0,
+        time_minutes=30.0,
+        degree_of_hydrolysis=0.7,
+    )
+
+    family_05 = summary["family_lane_summary"]["05"]
+
+    assert family_05["active"] is True
+    assert family_05["glutathione_active"] is True
+    assert family_05["gamma_glutamyl_peptide_active"] is True
+    assert family_05["kokumi_support_active"] is True
+    assert family_05["kokumi_signal_mode"] == "combined_glutathione_and_gamma_glutamyl_peptide"
+    assert family_05["kokumi_signal_score"] > 0.8
+    assert family_05["gsh_casr_ec50_mM"] == pytest.approx(0.68)
+    assert family_05["kokumi_reference_ids"] == ["ohsu_2025_kokumi_casr_anchor"]
+    assert "Ohsu et al. (2025)" in family_05["kokumi_reference_citations"]
+    assert family_05["kokumi_prior_ids"] == ["ohsu_2025_kokumi_casr_support_v1"]
+    assert summary["kokumi_support_active"] is True
+    assert summary["kokumi_support_signal"] == pytest.approx(family_05["kokumi_signal_score"])
+
+
+def test_build_kokumi_support_profile_caps_combined_gsh_and_gamma_glu_signal():
+    profile = build_kokumi_support_profile(
+        glutathione_active=True,
+        gamma_glutamyl_peptide_active=True,
+        peptide_accessibility_factor=0.7,
+        kokumi_priors={
+            "msg_baseline_mouthfulness_score": 3.2,
+            "gsh_mouthfulness_score": 5.4,
+            "gamma_glu_val_mouthfulness_score": 6.8,
+            "gsh_ec50_mM": 0.68,
+            "gamma_glu_val_ec50_mM": 0.32,
+        },
+    )
+
+    assert profile["kokumi_support_active"] is True
+    assert profile["kokumi_signal_mode"] == "combined_glutathione_and_gamma_glutamyl_peptide"
+    assert 0.8 < profile["kokumi_signal_score"] <= 1.0
+    assert profile["gsh_casr_ec50_mM"] == pytest.approx(0.68)
+    assert profile["gamma_glu_val_casr_ec50_mM"] == pytest.approx(0.32)
 
 
 def test_build_family_upstream_contract_calibrates_family_04_tradeoff_and_adds_bounded_ribose():
@@ -818,12 +971,15 @@ def test_build_family_upstream_contract_calibrates_family_04_tradeoff_and_adds_b
     assert mild_family_04["umami_support_factor"] > severe_family_04["umami_support_factor"]
     assert severe_family_04["ribose_delivery_factor"] > mild_family_04["ribose_delivery_factor"]
     assert severe_family_04["ribose_shift_active"] is True
-    assert severe["nucleotide_calibration"]["benchmark_anchor_ids"] == [
+    assert set(severe["nucleotide_calibration"]["benchmark_anchor_ids"]) == {
+        "ahlberg_2021_yeast_extract_grade_anchor",
+        "cui_2022_mushroom_nucleotide_anchor",
         "matoba_1988_nucleotide_hydrolysis",
         "mouritsen_2024_umami_thresholds",
         "nakamura_1988_imp_ribose_release",
+        "soladoye_2020_sous_vide_euc_anchor",
         "yamaguchi_ninomiya_2000_euc_anchor",
-    ]
+    }
     assert severe["added_precursors"] == ["ribose"]
     assert severe["added_precursor_ratios"]["ribose"] > 0.1
 
@@ -851,7 +1007,86 @@ def test_build_flavor_axis_summary_surfaces_family_04_benchmark_context_and_ribo
     assert family_04["ribose_delivery_factor"] > 0.3
     assert family_04["ribose_shift_active"] is True
     assert family_04["umami_reference_mode"] == "hydrolyzing_nucleotide_pool"
+    assert family_04["soladoye_reference_ids"] == ["soladoye_2020_sous_vide_euc_anchor"]
+    assert family_04["soladoye_euc_percent_msg_by_condition"]["70C_12h"] == pytest.approx(0.15)
     assert "Matoba, Terao & Fujimaki (1988), JAFC 36:1033" in family_04["benchmark_anchor_citations"]
+
+
+def test_build_flavor_axis_summary_surfaces_family_04_low_temp_euc_context():
+    summary = build_flavor_axis_summary(
+        projection_metadata={
+            "mft": {"compound": "2-Methyl-3-furanthiol (MFT)", "observable_ppb": 4.0},
+        },
+        sugars=[],
+        amino_acids=["cysteine"],
+        additives=["IMP"],
+        lipids=[],
+        protein_type="soy_iso",
+        pH=6.2,
+        process_state="heated_matrix",
+        temperature_celsius=70.0,
+        time_minutes=720.0,
+    )
+
+    family_04 = summary["family_lane_summary"]["04"]
+
+    assert family_04["low_temp_euc_window_active"] is True
+    assert family_04["soladoye_reference_ids"] == ["soladoye_2020_sous_vide_euc_anchor"]
+    assert family_04["soladoye_raw_euc_percent_msg"] == pytest.approx(0.18)
+    assert "Soladoye et al. (2020)" in family_04["soladoye_reference_citations"]
+    
+def test_build_flavor_axis_summary_surfaces_family_04_source_profile_context():
+    summary = build_flavor_axis_summary(
+        projection_metadata={},
+        sugars=[],
+        amino_acids=[],
+        additives=["yeast extract", "shiitake powder", "IMP", "GMP"],
+        lipids=[],
+        protein_type="soy_iso",
+        pH=6.0,
+        process_state="heated_matrix",
+        temperature_celsius=95.0,
+        time_minutes=30.0,
+    )
+
+    family_04 = summary["family_lane_summary"]["04"]
+
+    assert family_04["yeast_extract_grade_reference_active"] is True
+    assert family_04["yeast_extract_grade_prior_ids"] == ["ahlberg_2021_yeast_extract_nucleotide_grade_window_v1"]
+    assert family_04["yeast_extract_high_nucleotide_imp_mg_per_100g_dw_range"] == [1200.0, 2400.0]
+    assert family_04["yeast_extract_amp_deaminase_euc_uplift_factor_vs_standard_range"] == [5.0, 6.0]
+    assert family_04["mushroom_reference_active"] is True
+    assert family_04["mushroom_prior_ids"] == ["cui_2022_mushroom_gmp_euc_window_v1"]
+    assert family_04["mushroom_selected_species"] == "shiitake"
+    assert family_04["mushroom_gmp_mg_per_100g_dw"] == pytest.approx(108.0)
+    assert family_04["mushroom_total_euc_g_msg_per_100g"] == pytest.approx(2.1)
+
+
+def test_build_flavor_axis_summary_surfaces_family_16_architecture_context_for_gum_arabic_hydrolysate():
+    summary = build_flavor_axis_summary(
+        projection_metadata={
+            "fft": {"compound": "2-Furfurylthiol (FFT)", "observable_ppb": 4.0},
+        },
+        sugars=["glucose"],
+        amino_acids=["cysteine"],
+        additives=["pea hydrolysate", "gum arabic"],
+        lipids=[],
+        protein_type="pea_iso",
+        pH=6.0,
+        process_state="heated_matrix",
+        temperature_celsius=95.0,
+        time_minutes=90.0,
+        water_activity=0.7,
+    )
+
+    family_16 = summary["family_lane_summary"]["16"]
+
+    assert family_16["architecture_shift_active"] is True
+    assert family_16["architecture_shift_score"] > 0.0
+    assert family_16["gum_arabic_active"] is True
+    assert family_16["hydrolysate_support_active"] is True
+    assert family_16["architecture_reference_ids"] == ["jafc_2019_ref21_pea_gum_arabic_architecture_anchor"]
+    assert family_16["process_state_calibration_ids"] == ["jafc_2019_ref21_pea_gum_arabic_architecture_state"]
 
 
 def test_build_flavor_axis_summary_surfaces_family_03_benchmark_context_and_extrusion_penalty():
@@ -877,7 +1112,39 @@ def test_build_flavor_axis_summary_surfaces_family_03_benchmark_context_and_extr
     assert "Cerny & Guntz-Dubini (2008), JAFC 56:5138" in family_03["benchmark_anchor_citations"]
     assert family_03["extrusion_survival_factor"] == pytest.approx(0.04)
     assert family_03["thiamine_reference_yield_mode"] == "mixed_system_optimal_window"
+    assert family_03["thiamine_aw_reference_active"] is True
+    assert family_03["thiamine_aw_reference_id"] == "arabshahi_1988_aw_dependent_thiamine_ea_v1"
+    assert family_03["thiamine_aw_reference_source"] == "Arabshahi & Lund (1988)"
+    assert family_03["thiamine_aw_reference_ea_kcal_per_mol"] == pytest.approx(22.08)
+    assert family_03["thiamine_aw_modulation_factor"] == pytest.approx(22.08 / 23.4)
+    assert family_03["thiamine_aw_transfer_weight"] == pytest.approx(1.0)
     assert family_03["thiamine_support_score"] < 0.1
+
+
+def test_build_flavor_axis_summary_partially_relaxes_family_03_aw_transfer_in_intermediate_matrix_state():
+    summary = build_flavor_axis_summary(
+        projection_metadata={
+            "mft": {"compound": "2-Methyl-3-furanthiol (MFT)", "observable_ppb": 8.0},
+        },
+        sugars=["ribose"],
+        amino_acids=["cysteine"],
+        additives=[],
+        lipids=[],
+        protein_type="free",
+        pH=5.5,
+        thiamine_availability={"available": True, "source": "benchmark_explicit"},
+        process_state="intermediate_matrix",
+        temperature_celsius=100.0,
+        time_minutes=30.0,
+        water_activity=0.98,
+    )
+
+    family_03 = summary["family_lane_summary"]["03"]
+    raw_aw_factor = 20.1 / 23.4
+
+    assert family_03["thiamine_aw_reference_active"] is True
+    assert family_03["thiamine_aw_transfer_weight"] == pytest.approx(0.8)
+    assert family_03["thiamine_aw_modulation_factor"] == pytest.approx(1.0 - 0.8 * (1.0 - raw_aw_factor))
 
 
 def test_query_flavor_reference_entries_separates_scoring_targets_from_reference_only_entries():
