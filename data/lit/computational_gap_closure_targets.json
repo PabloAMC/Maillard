@@ -56,6 +56,8 @@
       "barrier_kcal_mol": 7.58,
       "barrier_kj_mol": 31.72,
       "uncertainty_kj": 42.0,
+      "charge": 0,
+      "spin": 1,
       "promotion_ceiling": "ranking_only",
       "dft_status": "pending",
       "active_arrhenius_key": "hexanal_radical_quench_xtb_derived"
@@ -84,17 +86,28 @@
       "slr_family": "14",
       "gap": "Family 14: Arrhenius parameters for dehydroascorbic acid ring-opening into 3-deoxythreosone.",
       "decision_impact": "medium_high",
-      "cheap_first_method": "Literature Ea=31.7 kJ/mol (HCW anchor) + xTB-GFN2 mapping of the lactone hydrolysis path",
+      "cheap_first_method": "Balanced dehydroascorbic-acid hydration/ring-opening xTB seed plus HCW literature anchor retained as the bounded Family 14 surrogate until selective DFT lands",
       "upgrade_method": "DFT-based barrier refinement if AA-contributed browning dominates during extrusion",
       "acceptance_signal": "AA-derived dicarbonyl yield matches molar glucose equivalence benchmarks",
-      "method": "HCW literature transfer (Ea=31.7 kJ/mol)",
+      "method": "Family 14 HCW literature surrogate (bounded upstream dicarbonyl source)",
       "source_quality": "literature_derived_transfer",
       "barrier_kcal_mol": 7.58,
       "barrier_kj_mol": 31.70,
       "uncertainty_kj": 20.0,
       "promotion_ceiling": "bounded_calibration",
       "dft_status": "pending",
-      "active_arrhenius_key": "aa_ring_open_dicarbonyl_xtb_derived"
+      "active_arrhenius_key": "aa_ring_open_dicarbonyl_hcw_family14_surrogate",
+      "surrogate_kind": "ascorbic_upstream_dicarbonyl_source",
+      "surrogate_short_label": "Family 14 HCW surrogate",
+      "surrogate_reaction": "Dehydroascorbic-acid ring opening and hydration treated as a bounded upstream source of reactive dicarbonyl pressure rather than as a validated elementary xTB endpoint.",
+      "surrogate_assumption": "Assumes the Family 14 runtime lane is still controlled by the HCW-derived effective barrier until selective DFT confirms or narrows the balanced DHAA-plus-water surrogate pair.",
+      "surrogate_note": "Keep the literature-backed Family 14 source term as the bounded calibration authority while the regenerated balanced xTB pair is advanced through selective DFT.",
+      "surrogate_basis": [
+        "src/literature_runtime.py::_build_ascorbic_acid_maillard_lane",
+        "data/lit/computational_priors.json:dft_kinetic_priors.aa_ring_open_dicarbonyl"
+      ],
+      "surrogate_barrier_kcal_mol": 7.58,
+      "surrogate_barrier_kj_mol": 31.70
     },
     {
       "id": "pe_schiff_base_interface",
@@ -156,17 +169,29 @@
       "slr_family": "12",
       "gap": "Family 12: Absolute formation kinetics for lysinoalanine under alkaline HME conditions.",
       "decision_impact": "high",
-      "cheap_first_method": "MACE-OFF24 screen then GFN2-xTB NEB path search",
+      "cheap_first_method": "Balanced dehydroalanine-plus-lysine xTB seed, with the DHA_Crosslinking family rule retained as the bounded fallback until selective DFT lands",
       "upgrade_method": "selective_dft_anchor for absolute yield prediction in extrusion",
       "acceptance_signal": "LAL yield matches masked literature anchors from safety registries",
-      "method": "GFN2-xTB NEB path search",
-      "source_quality": "xtb_derived_gfn2",
-      "barrier_kcal_mol": 28.90,
-      "barrier_kj_mol": 120.93,
+      "method": "DHA_Crosslinking family-rule surrogate (ArrheniusEP E0=16 kcal/mol)",
+      "source_quality": "family_rule_surrogate",
+      "barrier_kcal_mol": 16.00,
+      "barrier_kj_mol": 66.95,
       "uncertainty_kj": 42.0,
       "promotion_ceiling": "ranking_only",
       "dft_status": "pending",
-      "active_arrhenius_key": "lysinoalanine_crosslink_xtb_derived"
+      "active_arrhenius_key": "lysinoalanine_crosslink_dha_family_surrogate",
+      "surrogate_kind": "dha_michael_addition",
+      "surrogate_short_label": "DHA+Lys family surrogate",
+      "surrogate_reaction": "Dehydroalanine plus lysine epsilon-amine Michael addition to form lysinoalanine.",
+      "surrogate_assumption": "Assumes dehydroalanine has already formed by beta-elimination; the balanced Michael-addition pair can now be screened with xTB, but the family rule remains the bounded authority until selective DFT is written back.",
+      "surrogate_note": "Keep the repo's DHA_Crosslinking family rule as fallback authority while the regenerated balanced pair advances through xTB and selective DFT.",
+      "surrogate_basis": [
+        "data/rmg_extensions/families/DHA_Crosslinking/rules.py",
+        "data/species/toxic_markers.yml",
+        "src/reaction_templates.py::_dha_competing_pathway"
+      ],
+      "surrogate_barrier_kcal_mol": 16.00,
+      "surrogate_barrier_kj_mol": 66.95
     }
   ]
 }

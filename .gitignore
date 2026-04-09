@@ -64,8 +64,5 @@ results/
 
 # Generated xTB artifacts (ignore generated path-search outputs)
 # Keep data/geometries tracked but ignore generated xTB results under xtb_inputs
-data/geometries/xtb_inputs/**/xtbpath*.xyz
-data/geometries/xtb_inputs/**/xtbpath_ts*.xyz
-data/geometries/xtb_inputs/**/xtbrestart*
-data/geometries/xtb_inputs/**/.sccnotconverged
-data/geometries/xtb_inputs/**/product*.xyz
+
+data/geometries/xtb_inputs/**/**.xyz

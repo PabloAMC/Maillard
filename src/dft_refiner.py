@@ -12,6 +12,7 @@ Thermodynamics incorporate Grimme quasi-harmonic corrections.
 import os
 import tempfile
 import numpy as np
+import re
 from dataclasses import dataclass
 from functools import lru_cache
 from typing import Dict, List, Optional, Any, Tuple
@@ -31,6 +32,29 @@ from .thermo import QuasiHarmonicCorrector
 from .solvation import SolvationEngine
 from .diffusion_ts import DiffusionTSEngine
 
+
+def _normalize_reaction_family(value: Any) -> str:
+    if isinstance(value, str):
+        return value
+    if isinstance(value, (list, tuple, set)):
+        items = [str(item) for item in value if str(item).strip()]
+        if not items:
+            return "unknown"
+        if len(items) == 1:
+            return items[0]
+        return ", ".join(items)
+    if value is None:
+        return "unknown"
+    return str(value)
+
+
+def _normalize_reaction_side(value: Any) -> List[str]:
+    if value is None:
+        return []
+    if isinstance(value, (list, tuple, set)):
+        return [str(item) for item in value]
+    return [str(value)]
+
 @dataclass
 class DFTResult:
     method: str
@@ -41,11 +65,49 @@ class DFTResult:
     converged: bool = False
     frequencies_cm1: Optional[List[float]] = None
 
+def _is_xyz_coordinate_line(line: str) -> bool:
+    parts = line.strip().split()
+    if len(parts) != 4:
+        return False
+    if not re.fullmatch(r"[A-Za-z][A-Za-z0-9]*", parts[0]):
+        return False
+    try:
+        float(parts[1])
+        float(parts[2])
+        float(parts[3])
+    except ValueError:
+        return False
+    return True
+
+
+def _extract_atom_string(xyz_content: str) -> str:
+    lines = [line.rstrip() for line in xyz_content.strip().splitlines() if line.strip()]
+    if not lines:
+        return ""
+    if lines[0].strip().isdigit():
+        atom_count = int(lines[0].strip())
+        remaining = lines[1:]
+        if remaining and not _is_xyz_coordinate_line(remaining[0]):
+            remaining = remaining[1:]
+        atom_lines = remaining[:atom_count]
+        return "\n".join(atom_lines)
+    return "\n".join(lines)
+
+
+def _molecule_to_xyz(mol: Any, comment: str = "") -> str:
+    coords_angstrom = mol.atom_coords() * nist.BOHR
+    lines = [str(mol.natm), comment]
+    for atom_index in range(mol.natm):
+        symbol = mol.atom_symbol(atom_index)
+        x_coord, y_coord, z_coord = coords_angstrom[atom_index]
+        lines.append(f"{symbol:<2} {x_coord: .12f} {y_coord: .12f} {z_coord: .12f}")
+    return "\n".join(lines) + "\n"
+
 class DFTRefiner:
     """Wrapper for running the tiered DFT composite workflow."""
-    
-    def __init__(self, solvent_name: Optional[str] = 'water', temp_k: float = 423.15, 
-                 use_explicit_solvent: bool = False, n_water: int = 3, 
+
+    def __init__(self, solvent_name: Optional[str] = 'water', temp_k: float = 423.15,
+                 use_explicit_solvent: bool = False, n_water: int = 3,
                  geometry_backend: str = 'pyscf', db_path: Optional[str] = None):
         self.solvent_name = solvent_name
         self.temp_k = temp_k # Default 150 C
@@ -53,18 +115,15 @@ class DFTRefiner:
         self.n_water = n_water
         self.geometry_backend = geometry_backend.lower()
         self.db_path = db_path
-        
-        # Phase 16: Initialize Results Database
+
         if self.db_path:
             from .results_db import ResultsDB
             self.db = ResultsDB(db_path=self.db_path)
         else:
             self.db = None
-        
-        # Phase 9: Initialize Solvation Engine with CREST/QCG discovery
+
         self.solvation_engine = SolvationEngine()
-        
-        # Phase 10: Initialize MLPOptimizer if requested
+
         if self.geometry_backend == 'mace':
             try:
                 from .mlp_optimizer import MLPOptimizer
@@ -74,46 +133,35 @@ class DFTRefiner:
                 self.geometry_backend = 'pyscf'
         else:
             self.mlp_optimizer = None
-        
-        # Phase 11: Initialize TSOptimizer
+
         try:
             from .ts_optimizer import TSOptimizer
             self.ts_optimizer = TSOptimizer()
         except Exception:
             self.ts_optimizer = None
-            
-        # Phase 14: Initialize Diffusion TS Engine
+
         self.diffusion_engine = DiffusionTSEngine()
-        
-        # Phase B: Initialize MLP Barrier (MACE-OFF24)
+
         try:
             from .mlp_barrier import MLPBarrier
             self.mlp_barrier = MLPBarrier()
         except ImportError:
             self.mlp_barrier = None
-        
-        # The tiered methods defined in the plan
+
         self.opt_method = 'r2SCAN'
-        self.opt_basis = 'def2-svp' # Close approximation to -3c base
-        
+        self.opt_basis = 'def2-svp'
         self.refinement_method = 'wB97M-V'
         self.refinement_basis = 'def2-tzvp'
-        
         self.verif_method = 'revDSD-PBEP86'
         self.verif_basis = 'def2-tzvp'
-        
-        # [PERFORMANCE] Enable multithreading using available CPU cores
+
         n_threads = os.cpu_count() or 1
         os.environ["OMP_NUM_THREADS"] = str(n_threads)
-        
+
     def _setup_mol(self, xyz_content: str, charge: int = 0, spin: int = 0, basis: str = 'def2-svp') -> Any:
         """Initialize PySCF GTO Mole object from XYZ."""
-        lines = xyz_content.strip().split('\n')
-        if len(lines) > 2 and lines[0].strip().isdigit():
-            atom_string = '\n'.join(lines[2:])
-        else:
-            atom_string = xyz_content
-            
+        atom_string = _extract_atom_string(xyz_content)
+
         mol = gto.M(
             atom=atom_string,
             basis=basis,
@@ -219,6 +267,7 @@ class DFTRefiner:
 
     def optimize_geometry(self, xyz_content: str, charge: int=0, spin: int=0, is_ts: bool=False, max_steps: int=200, use_explicit_solvent: Optional[bool] = None, n_water: Optional[int] = None) -> DFTResult:
         """Run geometry/TS optimization using the r2SCAN-3c base method and return frequencies."""
+        phase_label = "TS" if is_ts else "reactant"
         
         # Determine effective solvation settings
         eff_use_explicit = use_explicit_solvent if use_explicit_solvent is not None else self.use_explicit_solvent
@@ -364,7 +413,9 @@ class DFTRefiner:
                     finally:
                         os.chdir(pwd)
                         
-                opt_xyz = mol_opt.tostring(format='xyz')
+                opt_xyz = _molecule_to_xyz(mol_opt, comment="optimized geometry")
+
+            logger.info(f">>> [Phase 3.3] {phase_label} geometry converged; starting solvent SCF and thermochemistry...")
         
         # The geometric_solver returns the optimized molecule object.
         # It updates mol in-place as well. 
@@ -383,16 +434,20 @@ class DFTRefiner:
         # Check SCF convergence
         mf_opt.scf()
         if not mf_opt.converged:
-             logger.info("    WARNING: SCF failed to converge on the optimized geometry.")
-        
+            logger.info("    WARNING: SCF failed to converge on the optimized geometry.")
+
+        logger.info(f">>> [Phase 3.3] {phase_label} Hessian/frequency analysis in progress...")
         freqs, g_raw, g_qh = self._run_hessian_and_thermo(mf_opt)
-        
+
         # Single-point Refinement
+        logger.info(f">>> [Phase 3.3] {phase_label} high-level single-point refinement in progress...")
         sp_energy = self.single_point(opt_xyz, xc_method=self.refinement_method, basis=self.refinement_basis, charge=charge, spin=spin)
         
         # Calculate final refined Gibbs using SP energy + (G_qh - E_opt) thermal corrections
         thermal_corr_qh = g_qh - mf_opt.e_tot
         refined_gibbs = sp_energy + thermal_corr_qh
+
+        logger.info(f">>> [Phase 3.3] {phase_label} post-processing complete.")
         
         return DFTResult(
             method=f"{self.refinement_method}//{self.opt_method}",
@@ -470,7 +525,7 @@ class DFTRefiner:
                     os.chdir(td)
                     # Use standard optimization (not transition state)
                     opt_mol = geometric_solver.optimize(tmp_mf, maxsteps=100)
-                    endpoints.append(opt_mol.tostring(format='xyz'))
+                    endpoints.append(_molecule_to_xyz(opt_mol, comment=f"irc endpoint {label.lower()}"))
                 finally:
                     os.chdir(pwd)
         
@@ -485,7 +540,7 @@ class DFTRefiner:
         energy = self.single_point(optimized_xyz, xc_method=self.verif_method, basis=self.verif_basis, charge=charge, spin=spin)
         return energy
 
-    def calculate_barrier(self, reactant_xyz: str, ts_xyz: str, charge: int = 0, 
+    def calculate_barrier(self, reactant_xyz: str, ts_xyz: str, charge: int = 0, spin: int = 0,
                           run_irc: bool = False, reaction_meta: Optional[Dict] = None) -> float:
         """
         End-to-end composite calculation of a kinetic barrier in kcal/mol.
@@ -496,32 +551,35 @@ class DFTRefiner:
         """
         # 1. Optimize Reactant
         logger.info(">>> [Phase 3.3] Starting Reactant Optimization...")
-        res_r = self.optimize_geometry(reactant_xyz, charge=charge, is_ts=False)
+        res_r = self.optimize_geometry(reactant_xyz, charge=charge, spin=spin, is_ts=False)
         if not res_r.converged:
             raise RuntimeError("Reactant optimization failed to converge.")
+        logger.info(">>> [Phase 3.3] Reactant refinement complete.")
         
         # 2. Optimize TS
         logger.info(">>> [Phase 3.3] Starting Transition State (TS) Optimization...")
-        res_ts = self.optimize_geometry(ts_xyz, charge=charge, is_ts=True)
+        res_ts = self.optimize_geometry(ts_xyz, charge=charge, spin=spin, is_ts=True)
         if not res_ts.converged:
             raise RuntimeError("Transition State optimization failed to converge.")
+        logger.info(">>> [Phase 3.3] Transition State refinement complete.")
         
         # 3. IRC Validation (Phase 3.4)
         if run_irc:
-            self.generate_irc(res_ts.optimized_xyz, charge=charge)
+            self.generate_irc(res_ts.optimized_xyz, charge=charge, spin=spin)
             
         # 4. Delta G‡
         assert res_ts.quasi_harmonic_gibbs_hartree is not None
         assert res_r.quasi_harmonic_gibbs_hartree is not None
         delta_g_h = res_ts.quasi_harmonic_gibbs_hartree - res_r.quasi_harmonic_gibbs_hartree
         barrier_kcal = delta_g_h * 627.509
+        logger.info(f">>> [Phase 3.3] Barrier evaluation complete: {barrier_kcal:.2f} kcal/mol")
         
         # 5. Log to DB if available
         if self.db and reaction_meta:
             self.db.add_barrier(
-                reactants=reaction_meta.get('reactants', []),
-                products=reaction_meta.get('products', []),
-                family=reaction_meta.get('family', 'unknown'),
+                reactants=_normalize_reaction_side(reaction_meta.get('reactants', [])),
+                products=_normalize_reaction_side(reaction_meta.get('products', [])),
+                family=_normalize_reaction_family(reaction_meta.get('family', 'unknown')),
                 delta_g_kcal=barrier_kcal,
                 method=res_ts.method,
                 basis=self.refinement_basis,
@@ -543,9 +601,9 @@ class DFTRefiner:
         
         if barrier_kcal is not None and self.db and reaction_meta:
             self.db.add_barrier(
-                reactants=reaction_meta.get('reactants', []),
-                products=reaction_meta.get('products', []),
-                family=reaction_meta.get('family', 'unknown'),
+                reactants=_normalize_reaction_side(reaction_meta.get('reactants', [])),
+                products=_normalize_reaction_side(reaction_meta.get('products', [])),
+                family=_normalize_reaction_family(reaction_meta.get('family', 'unknown')),
                 delta_g_kcal=barrier_kcal,
                 method="mace-off",
                 basis="OFF23_medium", # Default model name

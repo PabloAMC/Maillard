@@ -279,7 +279,7 @@ def test_build_flavor_axis_summary_surfaces_all_family_lanes_and_adjustments():
     )
 
     assert summary["active_family_lanes"] == ["01", "02", "07", "10", "08", "11", "13", "03", "04", "05", "09", "06"]
-    assert summary["family_lane_summary"]["11"]["kinetic_prior"]["barrier_kj_mol"] == pytest.approx(31.72)
+    assert summary["family_lane_summary"]["11"]["kinetic_prior"]["barrier_kj_mol"] == pytest.approx(74.81)
     assert summary["family_lane_summary"]["11"]["hexanal_baseline_anchors_ug_per_kg"]["acs_2020_raw_pea_hexanal_baseline"] == pytest.approx(1260.0)
     assert summary["family_lane_summary"]["03"]["thiamine_support_score"] > 0.0
     assert summary["family_lane_summary"]["04"]["nucleotide_support_active"] is True

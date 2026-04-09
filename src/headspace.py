@@ -17,6 +17,7 @@ from src.matrix_calibration_registry import (
     get_matrix_calibration_record,
     get_matrix_runtime_composition_policy,
 )
+from src.extrusion import compute_extrusion_headspace_adjustment
 from src.literature_runtime import get_retention_ph_release_profile
 from src.matrix_correction import ProteinType, resolve_compound_matrix_retention, resolve_matrix_correction
 
@@ -248,7 +249,8 @@ class HeadspaceModel:
                           protein_fraction: float = 0.0,
                           protein_type: Optional[str] = None,
                           denaturation_state: float = 0.5,
-                          pH: Optional[float] = None) -> Dict[str, float]:
+                          pH: Optional[float] = None,
+                          extrusion_process: Optional[Dict[str, object]] = None) -> Dict[str, float]:
         """
         Predicts air-phase concentrations (ppm).
         
@@ -296,8 +298,10 @@ class HeadspaceModel:
                 # Effective Kaw accounting for matrix sequestration
                 denom = 1.0 + (k_fat * fat_fraction) + (k_prot * protein_fraction)
                 kaw_eff = kaw_base / denom
-                
-                air_concs[name] = c_total * kaw_eff * matrix_retention * ph_release_factor
+                extrusion_factor = 1.0
+                if extrusion_process and extrusion_process.get("active"):
+                    extrusion_factor = float(compute_extrusion_headspace_adjustment(name, extrusion_process).get("combined_headspace_factor", 1.0))
+                air_concs[name] = c_total * kaw_eff * matrix_retention * ph_release_factor * extrusion_factor
             else:
                 # Basic fallback
                 matrix_retention = base_matrix_retention
@@ -309,7 +313,10 @@ class HeadspaceModel:
                         temperature_celsius=temp_c,
                         time_minutes=None,
                     )
-                air_concs[name] = c_total * kaw_base * matrix_retention * ph_release_factor
+                extrusion_factor = 1.0
+                if extrusion_process and extrusion_process.get("active"):
+                    extrusion_factor = float(compute_extrusion_headspace_adjustment(name, extrusion_process).get("combined_headspace_factor", 1.0))
+                air_concs[name] = c_total * kaw_base * matrix_retention * ph_release_factor * extrusion_factor
                 
         return air_concs
 

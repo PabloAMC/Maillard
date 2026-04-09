@@ -19,6 +19,32 @@ The product question remains:
 
 > Which formulation and process changes are most worth testing next if the goal is meat-like aroma under plant-matrix constraints?
 
+## Active Follow-up — 2026-04-09 Surrogate Closure Pass
+
+- [x] Audit the blocked computational-gap targets against the live prior registry and runtime consumers.
+- [x] Replace the invalid lysinoalanine xTB-derived posture with an explicit DHA-plus-lysine mechanistic surrogate anchored in the repo's DHA_Crosslinking family.
+- [x] Make the ascorbic-acid ring-opening prior explicitly describe its bounded Family 14 surrogate posture rather than implying a blocked xTB path is the active authority.
+- [x] Regenerate the computational-gap refinement plan/manifests and add focused tests that lock the new surrogate metadata in place.
+
+Review 2026-04-09:
+- `lysinoalanine_crosslink` no longer pretends to be backed by a valid xTB elementary path. Its live prior is now an explicit DHA-plus-lysine family surrogate anchored to the repo's `DHA_Crosslinking` rule (`E0 = 16 kcal/mol`) and kept at `ranking_only` posture.
+- `aa_ring_open_dicarbonyl` remains a bounded-calibration prior, but the plan and prior registry now say explicitly that the active authority is the Family 14 HCW surrogate, not the blocked placeholder xTB pair.
+- The refinement plan and xTB/DFT manifests now surface surrogate metadata directly for blocked targets so the user sees both truths at once: the current geometries are unusable, and a bounded mechanistic fallback exists.
+- Focused validation passed in the `maillard` conda environment: `tests/scientific/test_computational_gap_refinement_plan.py` and the Family 14 runtime check in `tests/unit/test_literature_runtime.py`.
+
+## Active Follow-up — 2026-04-09 Balanced Geometry Recovery
+
+- [x] Replace the invalid placeholder XYZ pairs for `lysinoalanine_crosslink` and `aa_ring_open_dicarbonyl` with balanced mapped surrogate reactions.
+- [x] Regenerate xTB input geometries for both targets and verify reactant/product atom counts match.
+- [x] Execute the xTB wrapper for both targets and materialize `xtbpath.xyz` plus `xtbpath_ts.xyz` so the DFT manifest can advance.
+- [x] Regenerate the computational-gap refinement plan/manifests and align focused tests with the new ready/ready_for_dft state.
+
+Review 2026-04-09:
+- `lysinoalanine_crosslink` now uses a balanced dehydroalanine-plus-lysine mapped pair (`35/35` atoms) instead of the previous invalid placeholder.
+- `aa_ring_open_dicarbonyl` now uses a balanced dehydroascorbic-acid-plus-water to 2,3-diketogulonic-acid mapped pair (`21/21` atoms).
+- The xTB execution wrapper completed successfully for both regenerated targets and materialized `xtbpath.xyz` and `xtbpath_ts.xyz`, which moves both lanes from xTB-blocked to `ready_for_dft` in the live plan surface.
+- The published computational-gap plan/manifests were regenerated from source and focused validation now passes again in the `maillard` conda environment, including the stale Family 11 runtime expectation that had drifted behind the promoted hexanal prior.
+
 ---
 
 ## P1 — Immediate Execution Slice (2026-04-05)
@@ -31,219 +57,36 @@ The product question remains:
 
 **Highest Priority Now (2026-04-08):**
 
+- S20. No-Wet-Lab Computational Closure: formal UQ (S20.1) and leave-one-out cross-validation (S20.2) are the highest-leverage items because they transform every existing prediction from a point estimate into an honest uncertainty range, and validate transfer assumptions without needing new data.
 - S13. Scientist-Facing Visual Output: model credibility has overtaken report usability, so the next product bottleneck is turning validated predictions into charts and confidence views a food scientist can act on immediately.
+- S21/S22. Data Ingestion + Experiment Recommender: close the scientist-model feedback loop so that when data does arrive, it can be ingested frictionlessly and the most valuable next experiment is always visible.
 - S17. Extrusion Benchmark Validation: the extrusion lane is architecturally useful but still lacks an external-decision-ready benchmark surface.
 - S15 structural unlock triage: the compact queue is exhausted, so further literature work should only continue when it opens a blocked benchmark, matrix lane, or cross-family transfer.
 
-- [ ] Re-rank the remaining backlog by structural unlock potential, not just raw score, to isolate the few citations that can still move calibration or executable benchmark coverage.
+- [x] Re-rank the remaining backlog by structural unlock potential, not just raw score, to isolate the few citations that can still move calibration or executable benchmark coverage.
 - [ ] Extract only the constants that open a blocked runtime or benchmark surface; do not keep broadening compact transfer payloads with redundant priors.
 - [ ] Prefer landings that create a new executable benchmark or tighten a cross-family structural transfer instead of another single-benchmark local correction.
 - [ ] Update the Deep Research backlog state only when the landing is wired into runtime, benchmark, or governance surfaces that survive Docker validation.
 - [ ] Validate that no existing benchmark regresses after each structural batch of new payloads or contract changes.
 
-Papers with immediate high-value constants include:
-
-- Glomb & Monnier 1995 — 3-DG retro-aldol fragmentation stoichiometry (MGO 41%, GO 28%, diacetyl 18%)
-- Aliani & Farmer 2005 — ribose 3.8× MFT increase, G6P 3.2×
-- Ordoudi et al. 2014 — HMF peak kinetics at pH 5.0, 125°C
-- Hidalgo & Zamora 2004 — 4-HNE + Phe → 2-pentylpyrrole absolute concentrations
-- Blank et al. 2001 — trans-4,5-epoxy-(E)-2-decenal from C20:4, ODT 0.07 ng/L
-
-### S15.1. Land Staged Runtime Queue
-
-- [x] Publish a machine-readable Deep Research runtime-first queue (8 candidates across process-state, safety, computational-prior lanes).
-- [x] Land the first selected runtime-only citations from the curated queue into the operational registries without promoting any new benchmark payloads.
-- [x] Advance the curated queue to the next runtime-first batch automatically once the previously staged citations are already landed.
-
-### S15.2. Fix Cerny 2008 Benchmark Failure
-
-**Rationale:** This is likely a data ingestion gap, not a modeling gap. The backlog contains `Cerny & Guntz-Dubini (2008)` scored 8/8 with detailed pH-resolved MFT data (thiamine-alone MFT at pH 4–8, mixed-system synergy factor 4.3×) that hasn't been encoded into the runtime. The 30.58× failure ratio is the only out-of-tolerance validation point dragging the entire surface.
-
-- [x] Encode the Cerny 2008 key_values from the benchmark_intake_registry into the thiamine pathway priors.
-- [x] Validate that the thiamine benchmark moves within the 1.5× acceptance band.
-- [x] Confirm no regressions in the other 17 passing benchmarks.
-
-### S15.3. Implement SLR-Identified Model Corrections
-
-**Rationale:** The SLR (Section "Model corrections identified during the review") explicitly calls out 4 required corrections. Only 1 is implemented.
-
-- [x] MFT/furfural ratio as quality constraint — implemented.
-- [x] Make `volatile_retention[hexanal]` temperature-dependent (non-covalent, Ka 3.1×10²–3.1×10⁴ M⁻¹; currently scalar). Source: Ince et al. 2024.
-- [x] Make `volatile_retention[MFT/FFT]` dynamic based on degree of browning (melanoidin trapping, 16× reduction). Source: Hofmann et al. 2001. (Currently deferred as 5.7.)
-- [x] Add peptide-bound Cys reactivity distinction from free Cys. Source: Nishimura 2024 (17/18 consumed peptides contain Cys).
-
-### S15.1b. Prepare The Next Runtime Queue Slice
-
-- [x] Curate a third runtime-first batch behind the active batch so the queue can auto-advance again once batch 02 is landed.
-- [x] Expose the prepared next batch in the generated `deep_research_runtime_queue` artifact instead of keeping it implicit in source only.
-
-### S15.1c. Descriptive Test Naming And Runtime Registry Landing
-
-- [x] Rename opaque scientific test files so filenames describe their actual benchmark or governance scope instead of using shorthand labels like `family03` or `p3`.
-- [x] Land all six batch 02 runtime-only citations into the operational registries and update their Deep Research backlog state to `RUNTIME_BOUND`.
-- [x] Land the first half of batch 03 with `Ordoudi et al. (2014 / PMC12484514)`, `Glomb & Monnier (1995)`, and `Aliani & Farmer (2005)` so batch 03 becomes the active queue.
-- [x] Regenerate the Deep Research runtime queue artifact and validate the renamed scientific subset plus queue and registry landing tests in Docker.
-
-Review 2026-04-05:
-Batch 02 and batch 03 are now fully landed in runtime registries, the curated runtime-first queue is exhausted for the current three-batch set, and the scientific tests that previously used opaque filenames now use descriptive names.
-
-### S15.1r. Family 03 Dilute Mixed-Loading Closure (2026-04-08)
-
-- [x] Add a bounded dilute-loading uplift to the mixed thiamine-plus-pentose Family 03 contract so low-total-precursor systems are not forced to inherit the concentrated-model routing fraction unchanged.
-- [x] Keep the new uplift anchored to the existing Hofmann-versus-Cerny loading window instead of broadening the free sulfur family or changing global sulfur barriers.
-- [x] Re-run the focused Docker subset covering Family 03 runtime behavior, thiamine fragmentation benchmarks, and free sulfur regression guards.
-
 Review 2026-04-08:
-The remaining Family 03 error tail was not a dead-metadata bug: thiamine priors already propagated into observability and effective precursor ratios, but the contract still treated dilute mixed systems too much like the 30 mM model mixtures. The runtime now applies a bounded dilute-loading uplift only inside mixed thiamine-plus-pentose cases, interpolated between the Hofmann beef-realistic loading anchor and the Cerny concentrated reference instead of retuning the free sulfur family. This improves the Hofmann 1996 MFT ratio materially while leaving Cerny 2008 and the free-amino-acid sulfur guards stable, which is the right stopping point before any broader structural sulfur/thiamine work.
+`results/validation/structural_unlock_triage.{md,json}` now makes the post-backlog posture explicit: the curated citation queue is exhausted (`ready_runtime=0`, `ready_benchmark=0`), so the next leverage is not another compact extraction batch. The ranked structural sequence is now primary PPI/SPI benchmark package first, extrusion benchmark translation second, and retention follow-on third. Deferred modeling items `5.7`, `5.10`, and `5.11` stay deferred; `5.8` is the only adjacent follow-on worth revisiting immediately after the first extrusion benchmark lands.
+
+### S15.1. Active Entry Criteria After Runtime-First Exhaustion
+
+- [ ] Open a new S15 landing only when it unlocks a blocked benchmark, executable workbook, or cross-family transfer named in `results/validation/structural_unlock_triage.{md,json}` or the no-wet-lab computational gap plan.
+- [ ] Land the citation as a compact runtime, benchmark, or governance surface that survives focused Docker validation; do not keep expanding narrative-only payloads.
+- [ ] Stop a candidate immediately if it does not change benchmark coverage, benchmark accuracy, or an executable scientist workflow.
+
+Completed 2026-04-05 to 2026-04-08:
+
+- Runtime-first queue publishing, auto-advance, and registry landings are complete.
+- The Cerny 2008 failure repair and the SLR-identified runtime corrections are complete.
+- The structural continuation slices through Families 02-16 are complete, including the Family 03 dilute-loading closure and the final ingredient-source EUC slice.
+- The curated literature backlog now sits at `ready_runtime=0` and `ready_benchmark=0`, so S15 is no longer a broad sprint lane.
 
 Verification 2026-04-08:
-Re-ran `./scripts/docker_maillard.sh run pytest tests/unit/test_literature_runtime.py tests/unit/test_budget_projection.py tests/scientific/test_thiamine_fragmentation_benchmarks.py tests/scientific/test_free_aa_quantitative_regression.py tests/scientific/test_blind_spots.py -q` and the focused Family 03 subset passed at 74 passed, 2 xfailed.
-
-### S15.1d. Unused Literature File Triage (2026-04-07)
-
-Priority file list for literature that is still underused and could land as runtime or benchmark support:
-
-- [x] `11_maillard_lipid_crosstalk.md` — connect `ACS JAFC 3c05991 / PMC10739987`, `ACS JAFC 3c02618`, and `ACS JAFC 0c01925` to the intake registry so already-landed Family 11 runtime artifacts are visible to the backlog tracker.
-- [x] `09_carbohydrate_degradation.md` — promote `Resconi et al. (2023 / PMC10096055)` from benchmark-ready intake to an executable benchmark subset using the extracted absolute furfural and dimethylpyrazine values while keeping the broader identity-gap panel attached in metadata.
-- [x] `09_carbohydrate_degradation.md` — land `ACS APTS (Ref. 24)` as pyrraline and furosine Arrhenius anchors, and land `Mottram & Nobrega (2002 / Chapter 9 review)` as furanone-to-sulfur bridge support.
-- [x] `03_thiamine_degradation.md` — evaluate `Comunian et al. (2021)` as a thiamine-retention process-state calibration for protected or delayed-release sulfur support.
-- [x] `04_nucleotide_degradation.md` — evaluate `Blank & Grosch (1991)` for HDMF OAV benchmark support and donor-routing calibration.
-- [x] `15_phospholipid_amine_maillard.md` — link the interfacial PE Maillard kinetics package to the already-landed Family 15 Arrhenius priors so the tracker treats it as encoded runtime support.
-- [x] `06_alternative_proteins.md` — evaluate the `Liu (2023)` PPI OAV baseline as a benchmark-ready off-note matrix anchor.
-
-Review 2026-04-07:
-Tracker-closure batch landed with compact payloads only: Family 11 linkage rows, the Resconi executable furfural subset, APTS and Mottram runtime priors, Family 15 linkage, and the compact Comunian, Blank & Grosch, and Liu literature anchors.
-
-### S15.1e. Thiamine And Peptide Runtime Closure (2026-04-07)
-
-- [x] Encode `Voelker, Taylor & Mauer (2021)` as a bounded Family 03 Arrhenius prior instead of leaving it in BACKLOG.
-- [x] Encode `Huang (2022)` as a bounded Family 03 metal-catalysis correction prior for iron- and copper-rich matrices.
-- [x] Close `Wang, Z. et al. (2012)` through a compact intake row linked to the already-landed sulfur-peptide prior rather than duplicating payloads.
-
-Review 2026-04-07:
-The next literature slice advances the unfinished extraction sprint with three 8/8 citations and no new engine code: Voelker and Huang now extend the thiamine prior surface, and Wang 2012 is now visible to the tracker as runtime-bound Family 05 support.
-
-### S15.1f. Runtime Contract Regression Repair (2026-04-07)
-
-- [x] Reproduce the 10 failing runtime and validation-contract tests and isolate which expectations regressed.
-- [x] Repair the literature/runtime family contract surfaces without reintroducing bloated intake payloads.
-- [x] Re-run the targeted validation subset and confirm the repaired contract matches generated artifacts.
-
-Review 2026-04-07:
-The regression came from contract-surface overreach rather than broken chemistry: tracker-oriented intake rows and secondary benchmark subsets were leaking into canonical query surfaces, the runtime queue was over-weighting raw score instead of lane priority, and the pipeline was applying browning-driven thiol depletion without explicit residence time. The repaired subset now passes 51 focused tests in Docker.
-
-### S15.1g. Family 02 And 11 Reference Slice (2026-04-07)
-
-- [x] Encode `Marquez-Ruiz et al. (2014)` as a compact high-oleic nonanal-versus-hexanal OAV flavor anchor for Family 02.
-- [x] Encode `Messina et al. (2022)` as a comparative cooked-PBMA oil-profile OAV flavor anchor for Family 02.
-- [x] Encode `DOI ref. 41 in raw/11_maillard_lipid_crosstalk.md` as a bounded Family 11 sulfur-volatile binding prior for PPI.
-- [x] Link the new artifacts through compact intake rows and advance the matching Deep Research backlog entries to `RUNTIME_BOUND`.
-- [x] Regenerate backlog artifacts and validate the targeted literature scientific subset in Docker.
-
-Review 2026-04-07:
-The next compact literature batch is now landed without opening any new broad registry surface: Family 02 gained an oleic-rich nonanal/hexanal OAV anchor plus a cooked-PBMA comparative oil OAV panel, Family 11 gained a bounded sulfur-volatile binding prior for PPI, the matching Deep Research entries moved to `RUNTIME_BOUND`, and the focused Docker subset covering runtime landing, payload surfaces, backlog rendering, and family queue policy passed 55 tests.
-
-### S15.1h. Family 11 Crosstalk Link And Family 07 Donor Anchor (2026-04-07)
-
-- [x] Link `ACS JAFC 3c08432` into the Family 11 intake surface as crosstalk evidence without duplicating the already-landed fermentation calibration payload.
-- [x] Encode `Maillard & van Boekel (1992)` as a quantitative donor-hierarchy prior so Family 07 has a non-duplicative sugar-reactivity anchor beyond Liardon.
-- [x] Advance the matching Deep Research backlog entries to `RUNTIME_BOUND` and regenerate the derived backlog and queue artifacts.
-- [x] Re-run the focused scientific/runtime Docker subset that covers queueing, learning-loop wiring, intake landing, and Family 07/11 surfaces.
-
-Review 2026-04-07:
-The new slice keeps the runtime surface compact while closing two remaining tracker gaps: ACS JAFC 3c08432 is now visible from the Family 11 crosstalk intake surface via the already-landed Rizzello fermentation calibration, and Maillard & van Boekel (1992) now provides a quantitative Family 07 donor-hierarchy prior with explicit k_obs and Ea support. After regenerating the backlog and runtime-queue artifacts, the focused Docker subset spanning queue policy, learning-loop wiring, intake landing, Family 07/11 evidence, and runtime reporting passed 66 tests.
-
-### S15.1i. Figure Label Normalization And Point-1 Crosstalk Slice (2026-04-07)
-
-- [x] Normalize the README-facing benchmark labels for Resconi and the two PMC9905368 sulfur benchmarks to the same author-year format used elsewhere in validation figures.
-- [x] Encode `Mottram et al. (2001)` as a compact sulfur-quench prior plus a carnosine-buffering process-state anchor instead of opening a new benchmark family.
-- [x] Encode `Yeo & Mottram (2023)` as a phospholipid-crosstalk process-state calibration for soy-lecithin-driven alkyl-thiophene uplift.
-- [x] Encode `Wang et al. (2022)` as a residual-hexanal OAV cleanup anchor and `Zhang et al. (2022)` as an unsaturated-aldehyde off-note prior.
-- [x] Regenerate backlog and runtime-queue artifacts and re-run the focused Docker subset covering validation labels, payload surfaces, intake wiring, and runtime-bound backlog state.
-
-Review 2026-04-07:
-The visible benchmark naming in validation figures is now normalized to author-year for the Resconi and Cho sulfur anchors, and the first user-requested crosstalk/off-note cluster is now landed with compact runtime-native surfaces only: Mottram contributes sulfur-quench and buffering support, Yeo & Mottram adds a lecithin dose window for thiophene uplift, Wang adds a residual-hexanal cleanup OAV anchor, and Zhang adds an unsaturated-aldehyde potency prior. The matching backlog entries now resolve to runtime-bound after artifact regeneration.
-
-### S15.1j. Low-Concentration Sulfur Benchmark Closure (2026-04-07)
-
-- [x] Reproduce the remaining low-concentration quantitative outliers in the Cho et al. (2023) hydrolysate benchmarks and isolate the exact runtime attenuation path for MFT and FFT.
-- [x] Recalibrate the hydrolysate sulfur observability logic so SPI and wheat-gluten hydrolysate benchmarks move inside the current validation tolerance without broad sulfur-family regressions.
-- [x] Regenerate the validation summary and family-deviation artifacts after the runtime correction.
-- [x] Re-run the focused scientific subset covering the Cho benchmarks, validation summaries, and literature/runtime wiring.
-
-Review 2026-04-07:
-The remaining low-ppb sulfur error tail came from a contract mismatch rather than broken core chemistry: the Family 05 hydrolysate lane already encoded peptide-assisted sulfur release, but the output observability factor for source-sensitive thiols still treated hydrolysate benchmarks like a fixed low-observability lane. The runtime now applies a bounded hydrolysate-release uplift to MFT and FFT observability before source-specific biasing, bringing both Cho et al. (2023) benchmarks inside the 1.5x envelope while leaving methional stable. After regenerating the validation artifacts, the overview now reports 0 experimental benchmarks outside 1.5x and 0 outside 2x; the remaining prominent error tail is the secondary Resconi furfural surrogate, which remains a broader caramelization-surface gap rather than a low-concentration sulfur issue.
-
-### S15.1k. Safety Bands And HME Rheology Slice (2026-04-08)
-
-- [x] Land `PMC 2024 (PMC12451096)` as an explicit Family 12 commercial AGE safety-reference intake row instead of leaving it only as an untracked payload.
-- [x] Land `PMC PMCID:PMC12648097` as an explicit Family 13 acrylamide-mitigation intake row instead of leaving it only as an extended safety reference.
-- [x] Start the next highest-value open Family 16 slice with compact process-state calibrations for `Wageningen Ref. 9` and `ACS Food Sci. Technol. 2024` rather than opening a new rheology solver.
-- [x] Regenerate backlog and runtime-queue artifacts and re-run the focused literature scientific subset covering safety references, Family 16 calibrations, and backlog governance.
-
-Review 2026-04-08:
-The safety lanes for commercial AGE bounds and near-complete acrylamide suppression are now explicit runtime-bound intake surfaces rather than orphaned safety payloads, and the next open-value slice has started with two Family 16 HME state anchors: one for SPI/PPI hydration collapse under rework and one for the practical firmness window in SPI-rich HME analogues. After regenerating the backlog and runtime-queue artifacts, the focused Docker subset covering safety-reference landing, Family 16 calibrations, learning-loop wiring, and backlog governance passed 17 tests. This keeps the landing compact and tracker-visible while deferring any coupled texture-flavor solver work.
-
-### S15.1l. Alternative Protein And Hidden Sink Slice (2026-04-08)
-
-- [x] Land `PMC11049305 (2024)` as a compact Family 06 Spirulina off-note matrix anchor through flavor-reference payloads instead of leaving it as a markdown-only candidate.
-- [x] Land `PMC12155365 (2025)` as a compact Family 06 sunflower roasted-matrix anchor with explicit Strecker strength and phenolic interference markers.
-- [x] Land `PubMed PMID:1904866 (Ref. 5)` as a bounded Family 14 pentosidine-equivalence prior so ascorbic acid cross-link burden is runtime-visible.
-- [x] Land `PMC PMCID:PMC5992167 (Refs. 16/17)` as a Family 15 Amadori-PE burden calibration linked to the existing PE Arrhenius priors.
-- [x] Regenerate backlog and runtime-queue artifacts and re-run the focused literature scientific subset covering payload surfaces, learning-loop wiring, and backlog governance.
-
-Review 2026-04-08:
-The next double slice is now landed without opening any new broad solver surface: Family 06 gained two compact alternative-protein matrix anchors, one for Spirulina as a marine/fishy lower-bound off-note reference and one for roasted sunflower as a Strecker-strong but phenol-interfered matrix. Family 14 gained a bounded pentosidine-equivalence prior for ascorbic acid, and Family 15 gained a food-matrix Amadori-PE burden calibration that complements the already-landed PE kinetic priors. After regenerating the backlog and runtime-queue artifacts, the focused Docker subset covering payload exposure, intake landing, learning-loop wiring, and backlog governance passed 17 tests.
-
-### S15.1m. Citation Alias Closure And Family 05 Kokumi Slice (2026-04-08)
-
-- [x] Close `JAFC DOI:10.1021/jf034037p (2003)` without duplicating the existing G6P-to-HDMF science payload by teaching the Deep Research tracker to resolve intake citation aliases.
-- [x] Land `Ohsu et al. (2025)` as a compact Family 05 CaSR and mouthfulness prior plus a tracker-visible intake anchor rather than opening a standalone kokumi solver.
-- [x] Surface the new Family 05 kokumi support in `src/literature_runtime.py` without changing the default sulfur-peptide prior contract.
-- [x] Regenerate the Deep Research backlog and runtime-queue artifacts and re-run the focused Docker subset covering tracker aliasing, Family 05 runtime behavior, and scientific payload wiring.
-
-Review 2026-04-08:
-The next compact literature closure batch resolved one real tracker gap and one real runtime gap. The JAFC `jf034037p` citation now resolves to the already-landed Blank, Devaud & Grosch G6P-to-HDMF prior through explicit intake citation aliases, so the backlog closes without cloning a second directional prior. Family 05 now also exposes bounded kokumi support through an Ohsu 2025 intake anchor and CaSR prior carrying the reported EC50 and mouthfulness constants, while preserving the existing sulfur-peptide default contract by keeping the kokumi prior in a separate metric surface. After regenerating the backlog and runtime-queue artifacts, the focused Docker subset covering tracker matching, Family 05 runtime output, backlog rendering, queue policy, and payload governance passed 62 tests.
-
-### S15.1n. Family 04 Low-Temp EUC And Family 16 Architecture Slice (2026-04-08)
-
-- [x] Land `Soladoye et al. (2020)` as a compact Family 04 low-temperature EUC anchor with tracker-visible intake wiring plus bounded runtime context, without replacing the existing Matoba hydrolysis prior.
-- [x] Land `J. Agric. Food Chem. 2019 (Ref. 21)` as a compact Family 16 architecture anchor through process-state calibration and melanoidin prior wiring rather than opening a rheology solver.
-- [x] Extract the Ohsu-based bounded kokumi calculations into an explicit reusable module while preserving the existing Family 05 lane contract.
-- [x] Regenerate the Deep Research backlog and runtime-queue artifacts and re-run the focused Docker subset covering tracker state, runtime behavior, and payload surfaces.
-
-Review 2026-04-08:
-The next continuation slice closed the two highest-value open literature items while also making kokumi an explicit reusable scoring surface. Family 04 now carries Soladoye 2020 as a bounded low-temperature EUC reference so mild heated-matrix contexts can surface preserved-versus-collapsed nucleotide support explicitly without overriding the existing Matoba hydrolysis logic. Family 16 now carries the JAFC 2019 Ref. 21 pea-hydrolysate plus gum-arabic architecture anchor through a compact process-state calibration and melanoidin prior, which activates only when those cues are actually present. The former inline Ohsu kokumi math now lives in `src/kokumi_scoring.py`, while `src/literature_runtime.py` keeps the same Family 05 contract and additionally exposes a top-level kokumi support signal. After regenerating backlog and runtime-queue artifacts, the focused Docker subset covering the new module, Family 04/05/16 runtime surfaces, tracker wiring, and scientific payload governance passed 67 tests.
-
-### S15.1o. Family 07 Rhamnose Donor And Family 08 Cyclodextrin Slice (2026-04-08)
-
-- [x] Land `Blank et al. (1997)` as a compact Family 07 rhamnose-to-HDMF donor-strength prior plus a tracker-visible intake anchor, without duplicating the broader donor hierarchy already covered by Maillard & van Boekel.
-- [x] Land `Bhandari et al. (1998)` as a compact Family 08 cyclodextrin-binding prior for hexanal, nonanal, and `(E)-2-nonenal`, without conflating it with the already-landed protein-binding retention surface.
-- [x] Surface both compact payloads in `src/literature_runtime.py` through bounded runtime metrics rather than opening any new benchmark or encapsulation solver.
-- [x] Regenerate the Deep Research backlog and runtime-queue artifacts and re-run the focused Docker subset covering tracker wiring, Family 07/08 runtime behavior, and scientific payload governance.
-
-Review 2026-04-08:
-The next post-8/8 continuation slice closed two compact but still useful literature gaps without broadening the solver surface. Family 07 now carries Blank et al. (1997) as a bounded rhamnose-plus-proline HDMF reference, exposed only when that specific donor-amino pairing is present so the broader Maillard & van Boekel hierarchy stays intact. Family 08 now carries Bhandari et al. (1998) as a bounded beta-cyclodextrin sequestration prior, which surfaces weighted aldehyde headspace and OAV reduction for observed off-note compounds without confusing cyclodextrin encapsulation with the existing protein-binding retention surface. After regenerating backlog and runtime-queue artifacts, the Deep Research tracker advanced to runtime-bound=67 and backlog=105, and the focused Docker subset covering runtime behavior, tracker state, backlog rendering, and payload governance passed 67 tests.
-
-### S15.1p. Family 03 Aw Thiamine And Family 09 C3-HDMF Slice (2026-04-08)
-
-- [x] Land `Arabshahi & Lund (1988)` as a compact Family 03 aw-dependent thiamine Arrhenius support prior plus a tracker-visible intake anchor, without replacing the existing Cerny flavor-yield prior or the Voelker aqueous Arrhenius anchor.
-- [x] Land `Brands & van Boekel (2002)` as a compact Family 09 methylglyoxal-to-HDMF support prior plus a tracker-visible intake anchor, without replacing the existing Blank & Fay mechanistic expectation prior.
-- [x] Surface both payloads in `src/literature_runtime.py` through bounded runtime metrics only, keeping the Family 03 and Family 09 contracts backward-compatible.
-- [x] Regenerate the Deep Research backlog and runtime-queue artifacts and re-run the focused Docker subset covering tracker wiring, Family 03/09 runtime behavior, and scientific payload governance.
-
-Review 2026-04-08:
-The next continuation slice still paid off because both references extended existing lanes with narrow, runtime-visible context instead of opening new solvers. Family 03 now carries Arabshahi & Lund (1988) as an aw-dependent thiamine Arrhenius support prior, which exposes interpolated starch-matrix Ea and an explicit wet-versus-dry modulation factor alongside the existing Cerny yield surface and De Leyn extrusion penalty. Family 09 now carries Brands & van Boekel (2002) as a bounded methylglyoxal-to-HDMF C3-route prior, exposed only when caramelization markers and fragmentation-favoring conditions are present so the default Blank & Fay furanone expectation remains intact. After regenerating backlog and runtime-queue artifacts, the Deep Research tracker advanced to runtime-bound=69 and backlog=103, the curated literature backlog reported no remaining ready runtime or benchmark rows, and the focused Docker subset covering runtime behavior, tracker state, backlog rendering, and payload governance passed 68 tests.
-
-### S15.1q. Family 04 Ingredient-Source EUC Slice (2026-04-08)
-
-- [x] Land `Ahlberg & Mohammadi (2021)` as a compact Family 04 yeast-extract grade reference prior plus a tracker-visible intake anchor, without replacing the existing Matoba or Soladoye thermal support logic.
-- [x] Land `Cui et al. (2022)` as a compact Family 04 mushroom GMP and EUC source-profile prior plus a tracker-visible intake anchor, without opening a new combined PBMA umami solver.
-- [x] Surface both payloads in `src/literature_runtime.py` through bounded ingredient-source metrics only, keeping the Family 04 thermal and ribose-shift contract backward-compatible.
-- [x] Regenerate the Deep Research backlog and runtime-queue artifacts and re-run the focused Docker subset covering tracker wiring, Family 04 runtime behavior, and scientific payload governance.
-
-Review 2026-04-08:
-This is the last literature slice that still made clear product-facing sense without broadening the model surface. Family 04 now carries Ahlberg & Mohammadi (2021) as a bounded yeast-extract grade window and Cui et al. (2022) as a bounded mushroom GMP/EUC source-profile prior, so the runtime can expose whether nucleotide support is coming from generic IMP/GMP assumptions, from yeast-extract quality, or from clean-label mushroom ingredients. The existing Matoba kinetics, Nakamura ribose-limit logic, and Soladoye low-temperature EUC window remain the actual thermal backbone; the new references only add ingredient-source context on top. After regenerating backlog and runtime-queue artifacts, the Deep Research tracker advanced to runtime-bound=71 and backlog=101, the curated literature backlog still reported ready runtime=0 and ready benchmark=0, and the focused Docker subset covering runtime behavior, tracker state, backlog rendering, and payload governance passed 69 tests. At this point further literature ingestion no longer looks compact or high-yield; the remaining backlog is predominantly lower-return, more redundant, or blocked by broader solver and wet-lab gaps.
+Focused Docker subsets covering runtime landing, backlog governance, sulfur/thiamine closure, payload wiring, and benchmark guards passed across the final continuation batches. The roadmap no longer needs the historical per-slice checklist here; the active rule is exception-only literature landing.
 
 ---
 
@@ -277,28 +120,63 @@ This is the last literature slice that still made clear product-facing sense wit
 
 ### S17. Extrusion Benchmark Validation
 
-**Rationale:** Extrusion modeling is architecturally present (SME coupling, moisture-regime bifurcation, sequential isothermal zones, pre-extrusion damage baselines) but has zero benchmark validation. 0/2 extrusion matrices are closure-ready. For a tool aimed at alternative protein scientists, extrusion is literally the dominant production process.
+**Rationale:** The extrusion lane now has executable protocol, landing, follow-on, and diagnostic surfaces. The remaining gap is no longer architecture; it is the absence of real same-run SPI or PPI extrusion measurements. Without wet-lab access, the correct goal is to narrow mechanism and process uncertainty computationally while keeping benchmark-closure claims withheld.
 
-#### S17.1. Extrusion Benchmark Experiment Design
+#### S17.1. Extrusion Benchmark Landing Infrastructure
 
-- [ ] Specify the minimum viable extrusion benchmark: one protein type (PPI or SPI), two SME levels, one barrel temperature, measuring MFT + hexanal + furosine simultaneously.
-- [ ] Generate a complete DoE protocol from `doe_generator.py` with real lab specifications (equipment model, SPME fiber type, exact internal standard concentrations).
-- [ ] Publish the protocol as a shareable wet-lab request artifact in `results/validation/`.
+- [x] Specify the minimum viable extrusion benchmark: one protein type (PPI or SPI), two SME levels, one barrel temperature, measuring MFT + hexanal + furosine simultaneously.
+- [x] Publish the protocol, SOP lock register, closure package, and intake workbooks as shareable artifacts in `results/validation/`.
+- [x] Expose executable workbook processors and diagnostic example bundles in Docker for both external closure and item `5.8` follow-on analysis.
+- [ ] Land the first non-placeholder SPI or PPI extrusion workbook with real measurements; until then keep the lane explicitly non-closure.
+- [ ] Leave unresolved lab-SOP fields explicit until an external SOP fixes the exact extruder brand/model and isotope spike concentrations.
+
+Review 2026-04-08:
+`results/validation/extrusion_benchmark_protocol.{md,json}` now publishes a review-ready S17.1 artifact generated from `src/doe_generator.py`. The current minimum viable design selects `soy_iso` with a fixed `145 C` barrel temperature and `120/180 kJ/kg` SME arms, measuring `MFT`, `hexanal`, and `furosine` with same-run extensions for `FFT`, `2-pentylfuran`, `2,5-dimethylpyrazine`, and `acrylamide`. The protocol is now tightened with the closest structured HME translation anchor already present in the repo: `57%` moisture, `280 rpm`, `4.6 kg/h`, and a `30/90/120/140/150/160 C` barrel profile plus control off-note anchors from `Li et al. (2026)`. The remaining blocker is now narrower: the repo still does not canonize a specific extruder model or exact spike concentrations for `[2H2]-MFT`, `[2H2]-FFT`, `hexanal-d12`, and `13C3-acrylamide`.
+
+Review 2026-04-08, primary matrix package:
+`results/validation/matrix_primary_benchmark_campaign.{md,json}` and `results/validation/primary_matrix_external_package.{md,json}` are now regenerated from live source in `src/primary_benchmark_campaign.py` instead of surviving as orphaned output-only artifacts. The repo now explicitly materializes the dual-arm pea/soy benchmark campaign, the pea-first external package, the current adverse-only external anchor, and the exact promotion delta that the wet-lab package is expected to close.
+
+Review 2026-04-08, SOP and landing execution:
+`results/validation/extrusion_sop_lock_register.{md,json}` now separates what the repo truly locks from what remains unresolved in S17.1: the process envelope is canonized as a twin-screw HME translation with fixed moisture, rpm, feed rate, barrel profile, die-exit temperature, and analytical platform identities, while exact brand/model and exact isotope spike concentrations remain explicitly unresolved. `results/validation/extrusion_external_closure_package.{md,json}` and `results/validation/extrusion_external_closure_workbook.{md,yaml}` now convert the existing external-closure contract into an exact per-arm landing bundle for the first SPI extrusion panel, including direct damage markers, same-run sulfur/off-note tradeoff targets, and required extrusion metadata. `src/extrusion_benchmark_execution.py` plus `scripts/generators/process_extrusion_external_closure_workbook.py` now turn a filled workbook into per-arm intake payloads and support-delta artifacts, and `./scripts/docker_maillard.sh extrusion-closure-workbook ...` exposes that path directly inside Docker. `results/validation/primary_matrix_external_package_intake_template.{md,yaml}` now turns the pea-first package into a shareable landing template with placeholder measurement fields, so the next wet-lab package can be ingested without inventing values in-source.
+
+Review 2026-04-08, 5.8 landing package:
+`results/validation/extrusion_disulfide_follow_on_package.{md,json}` and `results/validation/extrusion_disulfide_follow_on_workbook.{md,yaml}` now pre-wire item `5.8` to the first measured SPI extrusion panel instead of leaving it as a narrative next step. The follow-on package is explicitly keyed to the runtime's existing disulfide context and retention priors (`raman_sds_extrusion_disulfide_severity`, `acs_jafc_3c02618_mft_disulfide_trapping_v1`, `acs_jafc_0c01925_protein_binding_hierarchy_v1`) and defines the exact same-run observables and derived ratios needed before any benchmark-fitted sulfur-retention coefficient is claimed. `src/extrusion_benchmark_execution.py` plus `scripts/generators/process_extrusion_disulfide_follow_on_workbook.py` now evaluate a filled workbook against the measured soy protocol-pilot reference, compute the 5.8 derived metrics, and expose the lane via `./scripts/docker_maillard.sh extrusion-follow-on-workbook ...`.
+
+Review 2026-04-08, diagnostic rehearsal:
+`results/validation/extrusion_diagnostic_examples_bundle.json` plus the paired diagnostic workbooks and execution reports now exercise both extrusion workbook lanes end-to-end without inventing wet-lab truth. This is the right stopping point until real measurements exist.
 
 #### S17.2. Extrusion Model Extensions
 
-- [ ] Add volatile stripping correction at the die (flash-vaporization loss based on die temperature and compound vapor pressure).
-- [ ] Add shear-volatile coupling beyond the simple linear SME→ΔT slope (cell-wall rupture → precursor release, protein aggregation → trapping landscape).
-- [ ] Evaluate whether a simple RTD (residence time distribution) model is needed or if the sequential-zone model is sufficient for the target use case.
+- [x] Add volatile stripping correction at the die (flash-vaporization loss based on die temperature and compound vapor pressure).
+- [x] Add shear-volatile coupling beyond the simple linear SME→ΔT slope (cell-wall rupture → precursor release, protein aggregation → trapping landscape).
+- [x] Evaluate whether a simple RTD (residence time distribution) model is needed or if the sequential-zone model is sufficient for the target use case.
 
-### S18. Selective xTB/DFT Unparking
+Review 2026-04-08, S17.2:
+`src/extrusion.py` now extends the sequential-zone extrusion profile with die-exit temperature, mean residence-time estimate, RTD spread, explicit RTD sufficiency evaluation, and compound-class transport modifiers that combine shear-driven precursor release with aggregation/trapping and die-loss pressure. `src/headspace.py`, `src/sensory.py`, and `src/pipeline.py` now consume that extrusion transport layer so extrusion-aware runs do not just report higher effective temperature; they also propagate bounded die stripping and class-specific release penalties into headspace-facing sensory predictions. For the current scientist-facing HME use case, the new RTD assessment keeps the sequential-zone model as sufficient until screw-geometry-specific benchmark data exists.
 
-**Rationale:** P3 refinement governance shows 0 approved jobs, but `why_not_closed.md` identifies 3 specific, narrow motif targets where xTB path search → r2SCAN-3c refinement is cost-effective and would meaningfully improve families 11, 12, and 14.
+#### S17.3. Computational Bridge Without Wet Lab
 
-- [ ] Run xTB path search then r2SCAN-3c refinement for `hexanal_radical_quench` (Family 11: off-note suppression).
-- [ ] Run r2SCAN-3c for `lysinoalanine_crosslink` (Family 12: AGE/ALE yield).
-- [ ] Generate seed structure for `aa_ring_open_dicarbonyl` (Family 14: stealth browning).
-- [ ] Evaluate asparagine-sugar transition state in explicit water cluster to computationally bound the matrix effect on acrylamide kinetics (narrows the wet-lab-only gap).
+- [ ] Keep extrusion status at `computationally narrowed` rather than `benchmark closed` until same-run extrusion observables exist.
+- [ ] Use xTB to generate motif-level path-search seeds for sulfur retention, hexanal suppression, lysinoalanine formation, and acrylamide explicit-water clusters that could modify extrusion-facing priors.
+- [ ] Use MLP only as an offline accelerator for geometry preoptimization where benchmarked (`mace_mp_small` today); do not use MLP barrier predictions as authority.
+- [ ] Run selective r2SCAN-3c plus the existing single-point refinement chain only for motifs that survive xTB screening and map cleanly to a runtime patch or uncertainty-band tightening.
+- [ ] Write back only cached correction deltas, uncertainty narrowing, and provenance artifacts; do not invent synthetic extrusion benchmark measurements.
+
+Review 2026-04-08:
+`results/validation/computational_gap_plan_no_wet_lab.md` now captures the no-wet-lab closure policy, the remaining irreducible wet-lab gaps, and the exact xTB, MLP, and DFT roles that are still honest for extrusion-adjacent uncertainty reduction.
+
+### S18. Selective xTB/DFT/MLP Computational Closure
+
+**Rationale:** Current refinement governance still says `hold_observable_first`, so selective QM should run only as a bounded prior-refinement lane, not as a substitute for missing matrix benchmarks. The useful no-wet-lab targets remain narrow and motif-specific.
+
+- [ ] Family 11: run `hexanal_radical_quench` as xTB path search → optional MLP geometry preopt → r2SCAN-3c refinement, then ingest only as a ranking-only off-note suppression anchor.
+- [ ] Family 12: run `lysinoalanine_crosslink` through xTB seed generation plus r2SCAN-3c refinement, then ingest only as a bounded AGE/ALE damage prior.
+- [ ] Family 14: generate and refine `aa_ring_open_dicarbonyl`, then ingest only as a bounded stealth-browning prior.
+- [ ] Safety lane: evaluate the asparagine-sugar transition state in a minimal explicit-water cluster and use the result only to tighten the acrylamide uncertainty band, not to claim matrix closure.
+- [ ] Expand geometry benchmark coverage before adopting any MLP `ts_initialization` role beyond the current `mace_mp_small` geometry-preopt allowance.
+
+Review 2026-04-08:
+`results/validation/refinement_governance.md` still reports `hold_observable_first` with `approved_offline_jobs=0`, `results/validation/selective_dft_plan.md` still reports `run_now=0`, and `results/validation/mlp_adoption_notes.md` adopts only `mace_mp_small` for offline geometry preoptimization while quarantining `mace_off_medium` barrier predictions. The computational closure lane should therefore update priors and uncertainty bands only after backtesting, never benchmark status.
 
 ### S19. Web Interface (Minimal)
 
@@ -308,10 +186,102 @@ This is the last literature slice that still made clear product-facing sense wit
 - [ ] Serve the radar chart, kinetic traces, and safety dashboard from S13 in the web response.
 - [ ] Include a "download report" button for shareable PDF/HTML export.
 
+### S20. No-Wet-Lab Computational Closure
+
+**Rationale:** External-decision-ready matrix benchmarks cannot be closed computationally. But the framework can still make significant, honest progress by: (1) replacing heuristic trust tiers with formal uncertainty quantification, (2) validating transfer assumptions via cross-validation, (3) mining existing literature for external validation points, and (4) identifying which parameters actually drive formulation decisions vs. which are noise. The gap between "directionally useful" and "quantitatively calibrated with explicit uncertainty" is closable without a single new experiment.
+
+**Strategic posture:** These items produce the maximum trust improvement per unit of effort without wet-lab access. They transform the tool from "the model says X" to "the model says X ± Y, and here's exactly what would need to be measured to shrink Y."
+
+#### S20.1. Formal Uncertainty Quantification
+
+- [ ] Build `src/uncertainty_propagation.py`: define prior distributions for each uncertain parameter (barrier heights: ±3 kcal/mol, matrix corrections: ±30%, retention factors: ±50%).
+- [ ] Implement Monte Carlo propagation (N=500–1000) through `MaillardPipeline.evaluate()` to produce per-compound percentile predictions (5th/25th/50th/75th/95th).
+- [ ] Add parametric sensitivity indices (Sobol or Morris method) to rank which parameters drive decision-relevant variance.
+- [ ] Store as `UncertaintyEnvelope` dataclass in `FormulationResult` and wire into `--report` output as `predicted: 0.038 ppb [0.012—0.089, 90% CI]`.
+
+#### S20.2. Leave-One-Out Cross-Validation
+
+- [ ] Build `src/cross_validation.py`: for each of the 19 benchmarks, exclude it from calibration and re-evaluate all remaining benchmarks.
+- [ ] Compare LOO residuals to full-model residuals per benchmark and per compound class.
+- [ ] Identify "load-bearing" benchmarks (removing them degrades generalization significantly).
+- [ ] Wire results into the validation surface so scientists see transfer robustness, not just accuracy.
+
+#### S20.3. Observable Projection Re-calibration
+
+- [ ] Systematically fit matrix correction offsets by minimizing prediction error across the 19 benchmarks per protein type.
+- [ ] Compare fitted offsets against current heuristic values in `calibration_offsets.json`.
+- [ ] Adopt improved offsets only if LOO (S20.2) confirms they generalize; otherwise document that current heuristics are already near-optimal.
+
+#### S20.4. Extended Sensitivity Analysis
+
+- [ ] Extend `family_sensitivity.py` barrier offset sweeps to also perturb matrix correction factors (per protein type), headspace partition coefficients (Henry constants), and retention/release factors.
+- [ ] Rank all parameters by decision impact: "which parameter change would flip a formulation recommendation?"
+- [ ] Output as a ranked importance chart for S13 visual dashboard.
+
+#### S20.5. Literature Mining for External Validation
+
+- [ ] Scan the 150-paper literature backlog for quantitative ppb measurements in plant protein matrices that can serve as hold-out external validation points.
+- [ ] For each usable measurement: create an external validation payload via `matrix_experiment_intake.py` WITHOUT fitting to it.
+- [ ] Report standalone external validation accuracy: "on N external measurements not used in calibration, the framework achieves X× median accuracy."
+
+---
+
+### S21. Data Ingestion Pipeline
+
+**Rationale:** The repo already has strong intake infrastructure (`matrix_experiment_intake.py`, extrusion workbook processors, intake templates with YAML placeholders). But a scientist with GC-MS results doesn't know which module to use, can't ingest raw instrument files, and can't see how new data changes the validation surface before committing. The ingestion path should be as frictionless as the prediction path.
+
+#### S21.1. Universal Intake CLI (`maillard ingest`)
+
+- [ ] Build `src/data_ingest.py` with a CLI entry point: `maillard ingest --file results.csv --protein-type soy_iso --process-state extrusion_structured`.
+- [ ] Auto-detect file format (CSV/Excel/YAML/JSON) and map column headers to the existing intake schema using fuzzy matching.
+- [ ] Present the scientist with a confirmation summary before generating a normalized YAML payload via `matrix_experiment_intake.py`.
+- [ ] Run `build_matrix_experiment_support_delta_artifact()` automatically to compute the ingestion impact.
+
+#### S21.2. Impact Preview
+
+- [ ] Before committing ingested data, display a clear summary: benchmarks added, validation surface change, promotion readiness change, compounds strengthened/weakened, median ratio shift.
+- [ ] Require explicit confirmation before persisting.
+- [ ] Log the full before/after state for audit.
+
+#### S21.3. Benchmark Versioning
+
+- [ ] Maintain `data/benchmarks/CHANGELOG.yaml` recording: when each benchmark was added, active calibration offsets at ingestion time, validation surface state before/after, and source provenance (DOI, lab, date).
+- [ ] Enable reproducibility: "this prediction was made with benchmark set v12, which included the following 20 external validations."
+
+---
+
+### S22. Most-Valuable-Experiment Recommender
+
+**Rationale:** The repo has static DoE templates (`doe_generator.py`) and specific benchmark campaign protocols (`primary_benchmark_campaign.py`). But there's no system that ranks experiments by expected calibration gain. A scientist with limited lab time needs the answer to: "Which single experiment will improve the model's predictions the most?" This is the feature that closes the loop between computational modeling and wet-lab prioritization.
+
+**Dependency:** Requires S20.1 (UQ) and S20.4 (extended sensitivity) to be implemented first.
+
+#### S22.1. Value-of-Information Engine
+
+- [ ] Build `src/experiment_value.py`: for each potential experiment in the gap registry, estimate Expected Calibration Gain (ECG) = Σ [ current_uncertainty × decision_relevance × probability_of_improvement ] per compound.
+- [ ] `current_uncertainty` from S20.1 UQ propagation.
+- [ ] `decision_relevance` from S20.4 sensitivity analysis (does this compound flip formulation recommendations?).
+- [ ] `probability_of_improvement` from how close the current evidence is to closing the gap.
+- [ ] Output a ranked experiment list with ECG scores and estimated lab time.
+
+#### S22.2. Experiment Protocol Generator
+
+- [ ] Wrap existing `doe_generator.py` + `primary_benchmark_campaign.py` with ECG ranking, budget-aware experiment selection (combine multiple cheap experiments vs. one expensive one), and protocol export as PDF/Markdown.
+- [ ] Auto-generate a pre-filled intake template (S21) for each recommended experiment so results can be directly ingested.
+- [ ] CLI entry point: `maillard request-experiment --budget "3 lab days" --protein-type soy_iso --goal "meaty aroma optimization"`.
+
+#### S22.3. Gap Visualization
+
+- [ ] Add to the `--report` dashboard: a Gap Heatmap showing Matrix types × Process states × Compound classes, color-coded by uncertainty level from S20.1.
+- [ ] Embed experiment suggestions in the report: "To improve this prediction from ±300% to ±50%, measure MFT headspace in SPI extrudate at 145°C."
+
+---
+
 ### S14. Codebase Health & Maintainability
 
-**Rationale:** `benchmark_validation.py` (117KB) and `recommend.py` (65KB) are monoliths that impede contribution and debugging. Test suite runtime (~1h40m) blocks iteration speed.
+**Rationale:** `benchmark_validation.py` (2,611 lines) and `recommend.py` (1,338 lines) are monoliths that impede contribution and debugging. `literature_runtime.py` (4,324 lines) is the largest source file and the hidden monolith. Test suite runtime (~1h40m) blocks iteration speed.
 
+- [ ] Decompose `literature_runtime.py` into modular components: loader, query, calibration, governance.
 - [ ] Decompose `benchmark_validation.py` into modular components: registry, evaluation, reporting, assertion.
 - [ ] Decompose `recommend.py` into modular components: concentration projection, observable mapping, scoring.
 - [ ] Triage the test suite for performance: identify and optimize the slowest 10 tests, introduce pytest marks for fast/slow/full lanes.
@@ -338,6 +308,8 @@ This is the last literature slice that still made clear product-facing sense wit
 - [ ] Implement an API so that when the system identifies a critical gap (e.g., lack of MFT/FFT data in SPI extrudates), it auto-generates a precise wet-lab protocol optimised for maximal model calibration gain.
 
 ### Deferred Scientific Modeling Backlog
+
+Status 2026-04-08: keep `5.7`, `5.10`, and `5.11` deferred until the first primary matrix and extrusion benchmark panels exist. Treat `5.8` as the only immediate follow-on once the SPI extrusion benchmark produces same-run SH, furosine, and volatile data.
 
 #### 5.7 Bidirectional Lipid-Maillard Crosstalk
 
@@ -428,16 +400,19 @@ Keep matrix-family coverage explicit in artifacts. Do not broaden family-level s
 
 ### Still blocking scientist value
 
-- **Structural literature triage**: the runtime-first compact queue is exhausted, so the remaining S15 value lies in selecting only citations that unlock blocked benchmark, matrix, or cross-family surfaces.
-- **No matrix benchmark** is yet external-decision-ready.
-- **Scientist-facing visual output** is still too thin in the main report surface: no intervention waterfall, confidence overlay, capabilities heatmap, or presentation-grade parity export.
-- **No web interface** — all interaction requires Docker + command-line, a major adoption barrier for food scientists.
-- **Extrusion modeling is not yet benchmark-calibrated enough for release-facing use** even though the process-state lane exists.
+- **No formal uncertainty quantification**: predictions carry heuristic trust tiers instead of explicit ±bounds, so scientists cannot distinguish "I can act on this" from "this is a guess" (S20.1).
+- **No matrix benchmark** is yet external-decision-ready; status is `computationally_narrowed` at best.
+- **No data ingestion path for non-experts**: a scientist with GC-MS results has no single-command way to feed data back into the model (S21).
+- **No experiment prioritization**: the repo knows its gaps but doesn't tell scientists which measurement would improve predictions the most (S22).
+- **Scientist-facing visual output** is still too thin in the main report surface: no intervention waterfall, confidence overlay, capabilities heatmap, or presentation-grade parity export (S13).
+- **No web interface** — all interaction requires Docker + command-line, a major adoption barrier for food scientists (S19).
+- **Extrusion modeling is not yet benchmark-calibrated enough for release-facing use** even though the process-state lane exists (S17).
+- **No cross-validation infrastructure**: transfer assumptions have not been validated via leave-one-out or holdout schemes (S20.2).
 - Mixed pea and soy meaty-positive targets still rely on transferred or internal-candidate observable support.
 - Six chemistry families still have zero benchmark-linked closure.
-- xTB/DFT pipeline is parked with 0 approved jobs despite 3 well-scoped motif targets identified.
-- No version-pinned reproducibility for peer review.
-- Test suite runtime (~1h40m) impedes development iteration.
+- `literature_runtime.py` (4,324 lines), `benchmark_validation.py` (2,611 lines), and `recommend.py` (1,338 lines) are monoliths that impede contribution and debugging (S14).
+- Test suite runtime (~1h40m) impedes development iteration (S14).
+- No version-pinned reproducibility or benchmark versioning for peer review (S21.3).
 
 ---
 
@@ -453,6 +428,10 @@ Keep matrix-family coverage explicit in artifacts. Do not broaden family-level s
 - [x] A food scientist can understand what the tool does and run a first prediction within 10 minutes of reading the README.
 - [ ] The runtime parametric surface grows by ≥2× through literature extraction before any wet-lab work.
 - [ ] Multi-objective tradeoffs (meaty vs. safe vs. off-note) are visible as Pareto frontiers, not collapsed scores.
+- [ ] Every prediction carries explicit uncertainty bounds (90% CI) from Monte Carlo propagation (S20.1).
+- [ ] A scientist can ingest new experimental data with a single command and see its impact before committing (S21).
+- [ ] The tool can rank candidate experiments by expected calibration gain and auto-generate protocols (S22).
+- [ ] Transfer assumptions are validated via leave-one-out cross-validation across the entire benchmark set (S20.2).
 
 ---
 

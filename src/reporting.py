@@ -504,6 +504,12 @@ def _build_scientific_surface(root: Path) -> Dict[str, str]:
         "refinement_offline_dft_jobs": root / "results/validation/refinement_offline_dft_jobs.json",
         "refinement_impact": root / "results/validation/refinement_impact.md",
         "refinement_impact_json": root / "results/validation/refinement_impact.json",
+        "computational_gap_refinement_plan": root / "results/validation/computational_gap_refinement_plan.md",
+        "computational_gap_refinement_plan_json": root / "results/validation/computational_gap_refinement_plan.json",
+        "computational_gap_dft_ingestion_report": root / "results/validation/computational_gap_dft_ingestion_report.md",
+        "computational_gap_dft_ingestion_report_json": root / "results/validation/computational_gap_dft_ingestion_report.json",
+        "computational_gap_dft_promotion_report": root / "results/validation/computational_gap_dft_promotion_report.md",
+        "computational_gap_dft_promotion_report_json": root / "results/validation/computational_gap_dft_promotion_report.json",
         "refinement_surrogate_patches": root / "data/lit/refinement_surrogate_patches.json",
         "reaction_benchmark_set": root / "data/lit/reaction_benchmark_set.json",
         "mlp_candidate_registry": root / "data/lit/mlp_candidate_registry.json",
@@ -754,9 +760,22 @@ def generate_report(
                 f.write(f"- **moisture_regime:** {extrusion_process.get('moisture_regime', 'unknown')}\n")
                 f.write(f"- **jacket_temperature_celsius:** {float(extrusion_process.get('jacket_temperature_celsius', 0.0)):.1f}\n")
                 f.write(f"- **effective_temperature_celsius:** {float(extrusion_process.get('effective_temperature_celsius', 0.0)):.1f}\n")
+                f.write(f"- **die_exit_temperature_celsius:** {float(extrusion_process.get('die_exit_temperature_celsius', 0.0)):.1f}\n")
                 f.write(f"- **sme_kj_per_kg:** {float(extrusion_process.get('sme_kj_per_kg', 0.0)):.1f}\n")
+                f.write(f"- **mean_residence_time_seconds:** {float(extrusion_process.get('mean_residence_time_seconds', 0.0)):.1f}\n")
+                f.write(f"- **rtd_decision:** {extrusion_process.get('rtd_assessment', {}).get('decision', 'unknown')}\n")
                 f.write(f"- **furosine_mg_per_kg:** {float(total_damage.get('furosine_mg_per_kg', 0.0)):.1f}\n")
                 f.write(f"- **lal_mg_per_kg:** {float(total_damage.get('lal_mg_per_kg', 0.0)):.1f}\n\n")
+
+                transport_panel = extrusion_process.get('volatile_transport', {}).get('panel', {})
+                if transport_panel:
+                    f.write("| Extrusion volatile transport | Class | Shear-release | Die stripping | Combined factor |\n")
+                    f.write("| :--- | :--- | ---: | ---: | ---: |\n")
+                    for compound, row in transport_panel.items():
+                        f.write(
+                            f"| {compound} | {row.get('compound_class', 'unknown')} | {float(row.get('shear_release_factor', 0.0)):.2f} | {float(row.get('die_stripping_fraction', 0.0)):.2f} | {float(row.get('combined_headspace_factor', 0.0)):.2f} |\n"
+                        )
+                    f.write("\n")
 
             compound_rows = result.confidence_metadata.get("compound_confidence", [])
             if compound_rows:

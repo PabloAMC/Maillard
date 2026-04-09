@@ -22,6 +22,9 @@ class ReactionConditions:
                  protein_type: str = "free",
                  sme_kj_per_kg: float = 0.0,
                  moisture_regime: Optional[str] = None,
+                 screw_speed_rpm: Optional[float] = None,
+                 feed_rate_kg_per_h: Optional[float] = None,
+                 die_exit_temperature_celsius: Optional[float] = None,
                  sterilization_temperature_celsius: Optional[float] = None,
                  sterilization_time_minutes: float = 0.0,
                  barrel_zone_temperatures: Optional[Sequence[float]] = None,
@@ -39,6 +42,9 @@ class ReactionConditions:
         self.protein_type = protein_type
         self.sme_kj_per_kg = float(sme_kj_per_kg)
         self.moisture_regime = moisture_regime
+        self.screw_speed_rpm = None if screw_speed_rpm is None else float(screw_speed_rpm)
+        self.feed_rate_kg_per_h = None if feed_rate_kg_per_h is None else float(feed_rate_kg_per_h)
+        self.die_exit_temperature_celsius = None if die_exit_temperature_celsius is None else float(die_exit_temperature_celsius)
         self.sterilization_temperature_celsius = sterilization_temperature_celsius
         self.sterilization_time_minutes = float(sterilization_time_minutes)
         self.barrel_zone_temperatures = None if barrel_zone_temperatures is None else [float(value) for value in barrel_zone_temperatures]
@@ -67,6 +73,9 @@ class ReactionConditions:
             protein_type=self.protein_type,
             sme_kj_per_kg=self.sme_kj_per_kg,
             moisture_regime=self.moisture_regime,
+            screw_speed_rpm=self.screw_speed_rpm,
+            feed_rate_kg_per_h=self.feed_rate_kg_per_h,
+            die_exit_temperature_celsius=self.die_exit_temperature_celsius,
             sterilization_temperature_celsius=self.sterilization_temperature_celsius,
             sterilization_time_minutes=self.sterilization_time_minutes,
             zone_temperatures=self.barrel_zone_temperatures,

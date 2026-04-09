@@ -48,6 +48,22 @@ Commands:
                Generate results/validation/matrix_experiment_intake_schema.{md,json}.
   compare-experiment INTAKE
                Generate support-delta artifacts for a matrix experiment intake payload.
+  extrusion-closure-workbook WORKBOOK
+               Convert an extrusion external-closure workbook into intake payloads and support-delta artifacts.
+  extrusion-follow-on-workbook WORKBOOK
+               Evaluate a filled 5.8 extrusion follow-on workbook and generate derived-metric artifacts.
+  extrusion-diagnostic-examples
+               Generate and execute synthetic diagnostic examples for both extrusion workbook flows.
+  computational-gap-refinement-plan
+               Generate the no-wet-lab computational-gap refinement plan and the xTB/DFT job manifests.
+  computational-gap-xtb [TARGET]
+               Execute the computational-gap xTB path-search job set (or a single TARGET id).
+  computational-gap-dft [TARGET]
+               Execute the computational-gap DFT refinement job set (or a single TARGET id).
+  computational-gap-dft-ingest
+               Generate the computational-gap DFT ingestion report from the current execution artifacts.
+  computational-gap-dft-promote
+               Promote completed non-fast computational-gap DFT results into computational priors.
   literature-learning-loop
                Generate results/validation/literature_learning_loop.{md,json}.
   family-ingestion-plan
@@ -56,8 +72,8 @@ Commands:
                Generate results/validation/family_promotion_state.{md,json}.
   matrix-family-coverage
                Generate results/validation/matrix_family_coverage.{md,json}.
-  p3-refinement
-               Generate the P3 refinement artifact bundle including governance.
+  refinement-governance
+               Generate the selective mechanistic refinement governance artifact bundle.
   mlp-assessment
                Generate the MLP assessment and adoption-note artifacts.
   matrix-branch-deltas [BASE_REF]
@@ -113,6 +129,8 @@ scientific_lane() {
   run_in_env "python scripts/generators/generate_matrix_family_coverage.py"
   run_in_env "python scripts/generators/generate_refinement_governance.py --output-dir results/validation"
   run_in_env "python scripts/generators/generate_mlp_assessment.py"
+  run_in_env "python scripts/generators/generate_computational_gap_refinement_plan.py --output-dir results/validation --manifest-dir results/computational_gap_refinement"
+  run_in_env "python scripts/generators/ingest_computational_gap_dft_results.py --output-dir results/validation"
   run_in_env "python scripts/generators/generate_literature_learning_loop.py --output-dir results/validation"
   run_in_env "python scripts/generators/generate_family_promotion_state.py --output-dir results/validation"
   run_in_env "python scripts/generators/generate_family_lane_validation.py --output-dir results/validation"
@@ -331,10 +349,10 @@ case "$cmd" in
   matrix-family-coverage)
     run_in_env "python scripts/generators/generate_matrix_family_coverage.py"
     ;;
-  p3-refinement)
+  refinement-governance)
     run_in_env "python scripts/generators/generate_refinement_governance.py --output-dir results/validation"
     ;;
-  mlp-assessment|p4-mlp-assessment)
+  mlp-assessment)
     run_in_env "python scripts/generators/generate_mlp_assessment.py"
     ;;
   compare-experiment)
@@ -344,6 +362,50 @@ case "$cmd" in
       exit 1
     fi
     run_in_env "python scripts/generators/compare_matrix_experiment_intake.py --experiment '$1' --output-dir results/validation"
+    ;;
+  extrusion-closure-workbook)
+    shift
+    if [ "$#" -lt 1 ]; then
+      echo "Usage: ./scripts/docker_maillard.sh extrusion-closure-workbook WORKBOOK_FILE" >&2
+      exit 1
+    fi
+    run_in_env "python scripts/generators/process_extrusion_external_closure_workbook.py --workbook '$1' --output-dir results/validation"
+    ;;
+  extrusion-follow-on-workbook)
+    shift
+    if [ "$#" -lt 1 ]; then
+      echo "Usage: ./scripts/docker_maillard.sh extrusion-follow-on-workbook WORKBOOK_FILE" >&2
+      exit 1
+    fi
+    run_in_env "python scripts/generators/process_extrusion_disulfide_follow_on_workbook.py --workbook '$1' --output-dir results/validation"
+    ;;
+  extrusion-diagnostic-examples)
+    run_in_env "python scripts/generators/generate_extrusion_diagnostic_examples.py"
+    ;;
+  computational-gap-refinement-plan)
+    run_in_env "python scripts/generators/generate_computational_gap_refinement_plan.py --output-dir results/validation --manifest-dir results/computational_gap_refinement"
+    ;;
+  computational-gap-xtb)
+    shift
+    if [ "$#" -ge 1 ]; then
+      run_in_env "python scripts/run_computational_gap_xtb.py --target '$1' --execute"
+    else
+      run_in_env "python scripts/run_computational_gap_xtb.py --execute"
+    fi
+    ;;
+  computational-gap-dft)
+    shift
+    if [ "$#" -ge 1 ]; then
+      run_in_env "exec python scripts/run_computational_gap_dft.py --target '$1' --execute"
+    else
+      run_in_env "exec python scripts/run_computational_gap_dft.py --execute"
+    fi
+    ;;
+  computational-gap-dft-ingest)
+    run_in_env "python scripts/generators/ingest_computational_gap_dft_results.py --output-dir results/validation"
+    ;;
+  computational-gap-dft-promote)
+    run_in_env "python scripts/generators/promote_computational_gap_dft_results.py --output-dir results/validation"
     ;;
   matrix-branch-deltas)
     shift

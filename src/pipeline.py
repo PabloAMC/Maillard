@@ -308,6 +308,12 @@ class MaillardPipeline:
                 protein_type=protein_type,
                 sme_kj_per_kg=form.get("sme_kj_per_kg", getattr(global_conditions, "sme_kj_per_kg", 0.0)),
                 moisture_regime=form.get("moisture_regime", getattr(global_conditions, "moisture_regime", None)),
+                screw_speed_rpm=form.get("screw_speed_rpm", getattr(global_conditions, "screw_speed_rpm", None)),
+                feed_rate_kg_per_h=form.get("feed_rate_kg_per_h", getattr(global_conditions, "feed_rate_kg_per_h", None)),
+                die_exit_temperature_celsius=form.get(
+                    "die_exit_temperature_celsius",
+                    getattr(global_conditions, "die_exit_temperature_celsius", None),
+                ),
                 sterilization_temperature_celsius=form.get(
                     "sterilization_temperature_celsius",
                     getattr(global_conditions, "sterilization_temperature_celsius", None),
@@ -331,6 +337,9 @@ class MaillardPipeline:
                 protein_type=protein_type,
                 sme_kj_per_kg=cond.sme_kj_per_kg,
                 moisture_regime=cond.moisture_regime,
+                screw_speed_rpm=cond.screw_speed_rpm,
+                feed_rate_kg_per_h=cond.feed_rate_kg_per_h,
+                die_exit_temperature_celsius=cond.die_exit_temperature_celsius,
                 sterilization_temperature_celsius=cond.sterilization_temperature_celsius,
                 sterilization_time_minutes=cond.sterilization_time_minutes,
                 zone_temperatures=cond.barrel_zone_temperatures,
@@ -495,7 +504,8 @@ class MaillardPipeline:
                 protein_type=protein_type,
                 temp_c=cond.temperature_celsius,
                 fat_fraction=cond.fat_fraction,
-                protein_fraction=cond.protein_fraction
+                protein_fraction=cond.protein_fraction,
+                extrusion_process=extrusion_process,
             )
             
             # Calculate average uncertainty for the optimizer
