@@ -1,5 +1,22 @@
 # Maillard Strategic Roadmap
 
+## Active Follow-up — 2026-04-09 Git Tracking Audit
+
+- [x] Inventory the files currently tracked even though they now match ignore rules.
+- [x] Quantify the largest tracked files and the heaviest historical blobs.
+- [x] Classify candidates into keep in git, move to releases/LFS, or stop tracking entirely.
+- [x] Document the exact untracking command set and any history-rewrite follow-up if the repo should be slimmed down on GitHub.
+
+Review 2026-04-09:
+- The immediate untracking surface is dominated by generated xTB path-search XYZ files under `data/geometries/xtb_inputs/`, solver CSV/PNG outputs under the RMG validation case, one notebook SQLite artifact, and the currently tracked `results/` outputs already covered by `.gitignore`.
+- The largest live tracked file is `data/lit/foods-15-00912.pdf` at about `2.0 MB`; the largest historical blob is a removed `Miniforge3-Darwin-arm64.sh` installer at about `65.6 MB`, which means the GitHub size concern is partly historical, not just the current tree.
+- Current tracked content is roughly `12.5 MB` under `data/`, `1.47 MB` under `docs/`, `1.45 MB` under `src/`, and `0.49 MB` under `results/`, so the highest-return cleanup target is generated scientific artifacts rather than source code.
+- Direct `git rm --cached` candidates already matched by ignore rules: `102` xTB path-search XYZ files (`~7.44 MB`), `24` solver CSV/PNG outputs (`~1.32 MB`), `7` `results/` artifacts (`~0.49 MB`), and `docs/notebooks/results/maillard_results.db` (`~28.7 KB`).
+- Recommended policy: keep source code, curated machine-readable inputs, and hand-maintained docs in git; stop tracking generated scientific artifacts and local notebook databases; consider moving literature PDFs to external storage or LFS only if offline archival is a real product requirement.
+- Minimal cleanup command for the current tree: `git ls-files -ci --exclude-standard -z | xargs -0 git rm --cached --`.
+- Executed cleanup on 2026-04-09: the working tree now has `135` staged untracking changes (`102` xTB XYZ artifacts, `24` solver outputs, `7` `results/` artifacts, `1` notebook DB, `1` literature PDF), and `git ls-files -ci --exclude-standard` now returns `0`.
+- If GitHub repo size still matters after that, the historical cleanup target is the removed `Miniforge3-Darwin-arm64.sh` blob (`b538bbc0986fd68c0c9e483670b3a529d96c7383`), which should be purged with `git filter-repo` or BFG rather than by changing the working tree alone.
+
 ## Mission
 
 Build the most useful computational tool for scientists who want to imitate meat-like Maillard chemistry in plant-based systems.

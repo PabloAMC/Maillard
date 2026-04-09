@@ -26,7 +26,6 @@ test_mech.yaml
 !docs/assets/validation_overview.png
 !docs/assets/family_parity.png
 !docs/assets/family_benchmark_accuracy.png
-!results/validation/validation_overview.png
 *.csv
 *.log
 *.hypothesis/
@@ -41,6 +40,8 @@ data/*
 # Ignore generated markdown pipeline outputs
 data/lit/deep_research_backlog.json
 data/lit/deep_research_candidate_registry.json
+data/lit/*.pdf
+data/lit/**/*.pdf
 .DS_Store
 
 # xTB outputs
