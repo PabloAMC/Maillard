@@ -36,9 +36,10 @@ data/*
 !data/rmg_extensions/
 !data/species/
 !data/benchmarks/
+!data/protocols/
+!data/protocols/**
 
 # Ignore generated markdown pipeline outputs
-data/lit/deep_research_backlog.json
 data/lit/deep_research_candidate_registry.json
 data/lit/*.pdf
 data/lit/**/*.pdf
@@ -66,5 +67,9 @@ results/
 
 # Generated xTB artifacts (ignore generated path-search outputs)
 # Keep data/geometries tracked but ignore generated xTB results under xtb_inputs
-
-data/geometries/xtb_inputs/**/**.xyz
+data/geometries/xtb_inputs/**/xtbpath*.xyz
+data/geometries/xtb_inputs/**/xtbpath_ts*.xyz
+data/geometries/xtb_inputs/**/product*.xyz
+data/geometries/xtb_inputs/**/reactant*.xyz
+data/geometries/xtb_inputs/**/xtbrestart*
+data/geometries/xtb_inputs/**/.sccnotconverged

@@ -1,10 +1,14 @@
 import sys
 from pathlib import Path
 
+import pytest
+
 
 ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
+
+import src.computational_gap_refinement as refinement  # noqa: E402
 
 from src.computational_gap_refinement import (  # noqa: E402
     build_computational_gap_dft_ingestion_artifact,
@@ -16,7 +20,41 @@ from src.computational_gap_refinement import (  # noqa: E402
 )
 
 
-def test_computational_gap_plan_surfaces_targets_ceilings_and_write_back_artifacts():
+@pytest.fixture
+def mocked_geometry_inputs(monkeypatch: pytest.MonkeyPatch) -> None:
+    available_paths = {
+        "data/geometries/xtb_inputs/hexanal_radical_quench/reactant.xyz",
+        "data/geometries/xtb_inputs/hexanal_radical_quench/product.xyz",
+        "data/geometries/xtb_inputs/hexanal_radical_quench/run_xtb.sh",
+        "data/geometries/xtb_inputs/hexanal_radical_quench/xtbpath_ts.xyz",
+        "data/geometries/xtb_inputs/lysinoalanine_crosslink/reactant.xyz",
+        "data/geometries/xtb_inputs/lysinoalanine_crosslink/product.xyz",
+        "data/geometries/xtb_inputs/lysinoalanine_crosslink/run_xtb.sh",
+        "data/geometries/xtb_inputs/lysinoalanine_crosslink/xtbpath_ts.xyz",
+        "data/geometries/xtb_inputs/aa_ring_open_dicarbonyl/reactant.xyz",
+        "data/geometries/xtb_inputs/aa_ring_open_dicarbonyl/product.xyz",
+        "data/geometries/xtb_inputs/aa_ring_open_dicarbonyl/run_xtb.sh",
+        "data/geometries/xtb_inputs/aa_ring_open_dicarbonyl/xtbpath_ts.xyz",
+    }
+    atom_counts = {
+        "data/geometries/xtb_inputs/hexanal_radical_quench/reactant.xyz": 21,
+        "data/geometries/xtb_inputs/hexanal_radical_quench/product.xyz": 21,
+        "data/geometries/xtb_inputs/lysinoalanine_crosslink/reactant.xyz": 35,
+        "data/geometries/xtb_inputs/lysinoalanine_crosslink/product.xyz": 35,
+        "data/geometries/xtb_inputs/aa_ring_open_dicarbonyl/reactant.xyz": 21,
+        "data/geometries/xtb_inputs/aa_ring_open_dicarbonyl/product.xyz": 21,
+    }
+
+    monkeypatch.setattr(refinement, "_path_exists", lambda relative_path: relative_path in available_paths)
+
+    def fake_xyz_atom_count(path: Path) -> int | None:
+        relative = path.resolve(strict=False).relative_to(refinement.ROOT).as_posix()
+        return atom_counts.get(relative)
+
+    monkeypatch.setattr(refinement, "_xyz_atom_count", fake_xyz_atom_count)
+
+
+def test_computational_gap_plan_surfaces_targets_ceilings_and_write_back_artifacts(mocked_geometry_inputs: None):
     payload = build_computational_gap_refinement_plan_artifact()
 
     assert payload["summary"]["target_count"] == 4
@@ -39,7 +77,7 @@ def test_computational_gap_plan_surfaces_targets_ceilings_and_write_back_artifac
     assert by_id["asparagine_sugar_explicit_water_cluster"]["dft"]["use_explicit_solvent"] is True
 
 
-def test_computational_gap_manifests_capture_xtb_and_dft_readiness_without_wet_lab_overclaim():
+def test_computational_gap_manifests_capture_xtb_and_dft_readiness_without_wet_lab_overclaim(mocked_geometry_inputs: None):
     xtb_manifest = build_computational_gap_xtb_job_manifest()
     dft_manifest = build_computational_gap_dft_job_manifest()
 

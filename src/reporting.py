@@ -530,8 +530,7 @@ def _build_scientific_surface(root: Path) -> Dict[str, str]:
     }
     payload: Dict[str, str] = {}
     for key, path in references.items():
-        if path.exists():
-            payload[key] = _to_repo_relative(path, root)
+        payload[key] = _to_repo_relative(path, root)
     return payload
 
 
