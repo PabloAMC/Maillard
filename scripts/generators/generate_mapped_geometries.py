@@ -190,6 +190,10 @@ def main():
             "r": "NC(CS)C(=O)O",               # Cysteine
             "p": "C=C(N)C(=O)O.S"              # DHA + H2S
         },
+        "hexanal_radical_quench": {
+            "r": "CCCCCC=O.[SH]",              # Hexanal + thiyl radical
+            "p": "CCCCCC(O)[S]"                # Radical thiohemiacetal adduct
+        },
         "lysinoalanine_crosslink": {
             "r": "C=C(C(=O)O)N.NCCCCC(N)C(=O)O",  # Dehydroalanine + Lysine
             "p": "C(CCNCC(C(=O)O)N)CC(C(=O)O)N"   # Lysinoalanine

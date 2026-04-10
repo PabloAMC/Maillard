@@ -171,7 +171,14 @@ class DFTRefiner:
         )
         return mol
 
-    def _build_mf(self, mol: Any, xc_method: str = 'r2SCAN', use_solvent: bool = True, conv_tol: float = 1e-7):
+    def _build_mf(
+        self,
+        mol: Any,
+        xc_method: str = 'r2SCAN',
+        use_solvent: bool = True,
+        conv_tol: float = 1e-7,
+        harden_scf: bool = False,
+    ):
         """Build the Mean-Field object with specified XC and implicit solvent."""
         from pyscf import scf, dft
         
@@ -200,13 +207,209 @@ class DFTRefiner:
                 
         # Enhanced convergence strategies for transition states
         mf.conv_tol = conv_tol
-        mf.max_cycle = 100
+        mf.max_cycle = 200 if harden_scf else 100
         
         # [SCRATCH MANAGEMENT] Prevent PySCF from creating .chk files in the 
         # current working directory, which clutters the workspace.
         mf.chkfile = None
+        if harden_scf:
+            if hasattr(mf, 'level_shift'):
+                mf.level_shift = 0.5
+            if hasattr(mf, 'damp'):
+                mf.damp = 0.2
+            if hasattr(mf, 'diis_space'):
+                mf.diis_space = 12
+            if hasattr(mf, 'direct_scf_tol'):
+                mf.direct_scf_tol = 1e-13
+            mf.init_guess = 'atom'
         
         return mf
+
+    @staticmethod
+    def _is_scf_gradient_failure(exc: Exception) -> bool:
+        text = str(exc).lower()
+        markers = (
+            'nuclear gradients',
+            'scf not converged',
+            'not converged',
+            'rks_scanner',
+        )
+        return any(marker in text for marker in markers)
+
+    def _optimize_with_geometric_kernel(
+        self,
+        mf: Any,
+        *,
+        max_steps: int,
+        is_ts_fallback: bool,
+        eff_use_explicit: bool,
+        n_atoms_solute: int,
+    ) -> Tuple[bool, Any]:
+        with tempfile.TemporaryDirectory() as td:
+            pwd = os.getcwd()
+            try:
+                os.chdir(td)
+                geome_kwargs = {'maxsteps': max_steps}
+                if is_ts_fallback:
+                    geome_kwargs['transition'] = True
+
+                if eff_use_explicit and is_ts_fallback:
+                    logger.info("    Pre-relaxing solvent molecules around the frozen core...")
+                    with open("constraints.txt", "w") as f:
+                        f.write("$freeze\n")
+                        f.write(f"xyz 1-{n_atoms_solute}\n")
+
+                    pre_relax_kwargs = {'maxsteps': 50, 'constraints': "constraints.txt"}
+                    conv, mol_opt = geometric_solver.kernel(mf, **pre_relax_kwargs)
+                else:
+                    conv, mol_opt = geometric_solver.kernel(mf, **geome_kwargs)
+            finally:
+                os.chdir(pwd)
+
+        return conv, mol_opt
+
+    def _preoptimize_seed_xyz(self, xyz_content: str, charge: int, spin: int, max_steps: int) -> str:
+        logger.info("    Retrying from a cheap HF/sto-3g pre-optimization seed...")
+        preopt_mol = self._setup_mol(xyz_content, charge, spin, basis='sto-3g')
+        preopt_mf = self._build_mf(
+            preopt_mol,
+            xc_method='hf',
+            use_solvent=False,
+            conv_tol=1e-5,
+            harden_scf=True,
+        )
+        conv, mol_opt = self._optimize_with_geometric_kernel(
+            preopt_mf,
+            max_steps=min(100, max_steps),
+            is_ts_fallback=False,
+            eff_use_explicit=False,
+            n_atoms_solute=0,
+        )
+        if not conv:
+            raise RuntimeError("Cheap pre-optimization failed to converge.")
+        return _molecule_to_xyz(mol_opt, comment="robust preoptimized geometry")
+
+    def _optimize_with_pyscf_backend(
+        self,
+        xyz_content: str,
+        charge: int,
+        spin: int,
+        is_ts: bool,
+        max_steps: int,
+        eff_use_explicit: bool,
+        n_atoms_solute: int,
+        *,
+        harden_scf: bool = False,
+        use_solvent_optimization: bool = False,
+    ) -> Tuple[bool, Any, str]:
+        mol = self._setup_mol(xyz_content, charge, spin, basis=self.opt_basis)
+        mf = self._build_mf(
+            mol,
+            xc_method=self.opt_method,
+            use_solvent=use_solvent_optimization,
+            conv_tol=1e-6,
+            harden_scf=harden_scf,
+        )
+
+        conv = False
+        if is_ts and self.ts_optimizer:
+            logger.info(">>> [Phase 11] Running Sella eigenvector-following TS search...")
+            try:
+                from ase import Atoms as ASEAtoms
+                from ase.calculators.calculator import Calculator, all_changes
+                from pyscf.data import nist as pyscf_nist
+
+                class BuiltinPySCFCalc(Calculator):
+                    implemented_properties = ['energy', 'forces', 'hessian']
+
+                    def __init__(self, mol, mf_class, xc):
+                        super().__init__()
+                        self.mol = mol
+                        self.mf_class = mf_class
+                        self.xc = xc
+
+                    def calculate(self, atoms=None, properties=['energy'], system_changes=all_changes):
+                        super().calculate(atoms, properties, system_changes)
+                        self.mol.set_geom_(atoms.positions / pyscf_nist.BOHR, unit='Bohr')
+                        mf = self.mf_class(self.mol)
+                        if hasattr(mf, 'xc'):
+                            mf.xc = self.xc
+
+                        mf.kernel()
+                        self.results['energy'] = float(mf.e_tot) * pyscf_nist.HARTREE2EV
+
+                        if 'forces' in properties:
+                            g = mf.nuc_grad_method().kernel()
+                            self.results['forces'] = -g * pyscf_nist.HARTREE2EV / pyscf_nist.BOHR
+
+                        if 'hessian' in properties:
+                            h_obj = mf.Hessian()
+                            h = h_obj.kernel()
+                            natm = self.mol.natm
+                            h_reshaped = h.transpose(0, 2, 1, 3).reshape(3 * natm, 3 * natm)
+                            self.results['hessian'] = h_reshaped * pyscf_nist.HARTREE2EV / (pyscf_nist.BOHR**2)
+
+                    def get_hessian(self, atoms):
+                        self.calculate(atoms, properties=['hessian'])
+                        return self.results['hessian']
+
+                coords_bohr = mol.atom_coords()
+                symbols = [mol.atom_symbol(i) for i in range(mol.natm)]
+                positions_ang = coords_bohr * pyscf_nist.BOHR
+                ase_atoms = ASEAtoms(symbols=symbols, positions=positions_ang)
+
+                calc = BuiltinPySCFCalc(mol=mol, mf_class=type(mf), xc=getattr(mf, 'xc', 'hf'))
+                ase_atoms.calc = calc
+
+                atoms = self.ts_optimizer.find_ts(ase_atoms, calc)
+                if self.ts_optimizer.is_converged(atoms):
+                    from ase.io import write as ase_write
+                    import io
+                    with io.StringIO() as f_xyz:
+                        ase_write(f_xyz, atoms, format='xyz')
+                        opt_xyz = f_xyz.getvalue()
+                    mol_opt = self._setup_mol(opt_xyz, charge, spin, basis=self.opt_basis)
+                    conv = True
+                else:
+                    logger.info("    WARNING: Sella failed to converge. Falling back to geomeTRIC...")
+            except (ImportError, AttributeError, Exception) as e:
+                logger.info(f"    WARNING: Sella/ASE bridge failed ({type(e).__name__}: {e}). Falling back to geomeTRIC...")
+
+            is_ts_fallback = is_ts and not conv
+        else:
+            is_ts_fallback = is_ts
+
+        if not is_ts or (is_ts and not self.ts_optimizer) or (is_ts and not conv):
+            conv, mol_opt = self._optimize_with_geometric_kernel(
+                mf,
+                max_steps=max_steps,
+                is_ts_fallback=is_ts_fallback,
+                eff_use_explicit=eff_use_explicit,
+                n_atoms_solute=n_atoms_solute,
+            )
+
+        opt_xyz = _molecule_to_xyz(mol_opt, comment="optimized geometry")
+        return conv, mol_opt, opt_xyz
+
+    def _run_solvent_scf_with_retry(self, mol_opt: Any, charge: int, spin: int, phase_label: str) -> Any:
+        mf_opt = self._build_mf(mol_opt, xc_method=self.opt_method, use_solvent=True)
+        mf_opt.scf()
+        if mf_opt.converged:
+            return mf_opt
+
+        logger.info(f"    WARNING: {phase_label} solvent SCF failed to converge. Retrying with hardened SCF settings...")
+        mol_retry = self._setup_mol(_molecule_to_xyz(mol_opt, comment=f"{phase_label} retry geometry"), charge, spin, basis=self.opt_basis)
+        mf_opt = self._build_mf(
+            mol_retry,
+            xc_method=self.opt_method,
+            use_solvent=True,
+            harden_scf=True,
+        )
+        mf_opt.scf()
+        if not mf_opt.converged:
+            raise RuntimeError(f"{phase_label} solvent SCF did not converge on the optimized geometry.")
+
+        return mf_opt
 
     def single_point(self, xyz_content: str, xc_method: str = 'wB97M-V', basis: str = 'def2-tzvp', charge: int = 0, spin: int = 0) -> float:
         """Run a high-level single-point energy calculation."""
@@ -312,108 +515,70 @@ class DFTRefiner:
             
         else:
             # Original PySCF / geomeTRIC backend
-            mol = self._setup_mol(xyz_content, charge, spin, basis=self.opt_basis)
-            mf = self._build_mf(mol, xc_method=self.opt_method, use_solvent=False, conv_tol=1e-6)
-            
-            # Phase 11: Specialized TS search via Sella
-            conv = False  # Initialize before potential Sella/geomeTRIC paths
-            if is_ts and self.ts_optimizer:
-                logger.info(">>> [Phase 11] Running Sella eigenvector-following TS search...")
-                try:
-                    # PySCF↔ASE bridge: convert Mole to ASE Atoms manually
-                    from ase import Atoms as ASEAtoms
-                    from ase.calculators.calculator import Calculator, all_changes
-                    from pyscf.data import nist as pyscf_nist
-                    
-                    class BuiltinPySCFCalc(Calculator):
-                        """Minimal ASE Calculator for PySCF to avoid ase-pyscf dependency gaps."""
-                        implemented_properties = ['energy', 'forces', 'hessian']
-                        def __init__(self, mol, mf_class, xc):
-                            super().__init__()
-                            self.mol = mol
-                            self.mf_class = mf_class
-                            self.xc = xc
-                        def calculate(self, atoms=None, properties=['energy'], system_changes=all_changes):
-                            super().calculate(atoms, properties, system_changes)
-                            # Update molecular coordinates
-                            self.mol.set_geom_(atoms.positions / pyscf_nist.BOHR, unit='Bohr')
-                            mf = self.mf_class(self.mol)
-                            if hasattr(mf, 'xc'): 
-                                mf.xc = self.xc
-                            
-                            mf.kernel()
-                            self.results['energy'] = float(mf.e_tot) * pyscf_nist.HARTREE2EV
-                            
-                            # Forces = -Gradient
-                            if 'forces' in properties:
-                                g = mf.nuc_grad_method().kernel()
-                                self.results['forces'] = -g * pyscf_nist.HARTREE2EV / pyscf_nist.BOHR
-                                
-                            if 'hessian' in properties:
-                                h_obj = mf.Hessian()
-                                h = h_obj.kernel()
-                                # PySCF returns (natm, natm, 3, 3). Sella/ASE expects (3*natm, 3*natm)
-                                natm = self.mol.natm
-                                h_reshaped = h.transpose(0, 2, 1, 3).reshape(3*natm, 3*natm)
-                                self.results['hessian'] = h_reshaped * pyscf_nist.HARTREE2EV / (pyscf_nist.BOHR**2)
-                        
-                        def get_hessian(self, atoms):
-                            self.calculate(atoms, properties=['hessian'])
-                            return self.results['hessian']
+            try:
+                conv, mol_opt, opt_xyz = self._optimize_with_pyscf_backend(
+                    xyz_content,
+                    charge,
+                    spin,
+                    is_ts,
+                    max_steps,
+                    eff_use_explicit,
+                    n_atoms_solute,
+                    harden_scf=False,
+                )
+            except Exception as exc:
+                if not self._is_scf_gradient_failure(exc):
+                    raise
 
-                    coords_bohr = mol.atom_coords()
-                    symbols = [mol.atom_symbol(i) for i in range(mol.natm)]
-                    positions_ang = coords_bohr * pyscf_nist.BOHR
-                    ase_atoms = ASEAtoms(symbols=symbols, positions=positions_ang)
-                    
-                    calc = BuiltinPySCFCalc(mol=mol, mf_class=type(mf), xc=getattr(mf, 'xc', 'hf'))
-                    ase_atoms.calc = calc
-                    
-                    atoms = self.ts_optimizer.find_ts(ase_atoms, calc)
-                    if self.ts_optimizer.is_converged(atoms):
-                        # Convert ASE Atoms back to XYZ string
-                        from ase.io import write as ase_write
-                        import io # Added import for io
-                        with io.StringIO() as f_xyz:
-                            ase_write(f_xyz, atoms, format='xyz')
-                            opt_xyz = f_xyz.getvalue()
-                        mol_opt = self._setup_mol(opt_xyz, charge, spin, basis=self.opt_basis)
-                        conv = True
-                    else:
-                        logger.info("    WARNING: Sella failed to converge. Falling back to geomeTRIC...")
-                except (ImportError, AttributeError, Exception) as e:
-                    logger.info(f"    WARNING: Sella/ASE bridge failed ({type(e).__name__}: {e}). Falling back to geomeTRIC...")
-                    
-                is_ts_fallback = is_ts and not conv
-            else:
-                is_ts_fallback = is_ts
-
-            if not is_ts or (is_ts and not self.ts_optimizer) or (is_ts and not conv):
-                # Optimization via geomeTRIC (Standard or Fallback)
-                with tempfile.TemporaryDirectory() as td:
-                    pwd = os.getcwd()
+                logger.info(
+                    f"    WARNING: {phase_label} optimization hit an SCF-gradient convergence failure ({exc}). Retrying with a hardened SCF path..."
+                )
+                retry_xyz = xyz_content
+                if not is_ts:
                     try:
-                        os.chdir(td)
-                        geome_kwargs = {'maxsteps': max_steps}
-                        if is_ts_fallback:
-                            geome_kwargs['transition'] = True
-                            
-                        if eff_use_explicit and is_ts_fallback:
-                            logger.info("    Pre-relaxing solvent molecules around the frozen core...")
-                            with open("constraints.txt", "w") as f:
-                                f.write("$freeze\n")
-                                f.write(f"xyz 1-{n_atoms_solute}\n")
-                            
-                            pre_relax_kwargs = {'maxsteps': 50, 'constraints': "constraints.txt"}
-                            conv_pre, mol_relaxed = geometric_solver.kernel(mf, **pre_relax_kwargs)
-                            mol_opt = mol_relaxed
-                            conv = conv_pre
-                        else:
-                            conv, mol_opt = geometric_solver.kernel(mf, **geome_kwargs)
-                    finally:
-                        os.chdir(pwd)
-                        
-                opt_xyz = _molecule_to_xyz(mol_opt, comment="optimized geometry")
+                        retry_xyz = self._preoptimize_seed_xyz(xyz_content, charge, spin, max_steps)
+                    except Exception as preopt_exc:
+                        logger.info(
+                            f"    WARNING: Cheap pre-optimization failed ({type(preopt_exc).__name__}: {preopt_exc}). Retrying hardened SCF from the original geometry..."
+                        )
+                try:
+                    conv, mol_opt, opt_xyz = self._optimize_with_pyscf_backend(
+                        retry_xyz,
+                        charge,
+                        spin,
+                        is_ts,
+                        max_steps,
+                        eff_use_explicit,
+                        n_atoms_solute,
+                        harden_scf=True,
+                        use_solvent_optimization=False,
+                    )
+                except Exception as retry_exc:
+                    if is_ts or not self._is_scf_gradient_failure(retry_exc):
+                        raise
+
+                    logger.info(
+                        f"    WARNING: {phase_label} hardened vacuum retry also failed ({retry_exc}). Retrying with implicit solvent during geometry optimization..."
+                    )
+                    retry_xyz = xyz_content
+                    try:
+                        retry_xyz = self._preoptimize_seed_xyz(xyz_content, charge, spin, max_steps)
+                    except Exception as preopt_exc:
+                        logger.info(
+                            f"    WARNING: Cheap pre-optimization before solvent retry failed ({type(preopt_exc).__name__}: {preopt_exc}). Continuing from the original geometry..."
+                        )
+
+                    conv, mol_opt, opt_xyz = self._optimize_with_pyscf_backend(
+                        retry_xyz,
+                        charge,
+                        spin,
+                        is_ts,
+                        max_steps,
+                        eff_use_explicit,
+                        n_atoms_solute,
+                        harden_scf=True,
+                        use_solvent_optimization=True,
+                    )
 
             logger.info(f">>> [Phase 3.3] {phase_label} geometry converged; starting solvent SCF and thermochemistry...")
         
@@ -430,11 +595,7 @@ class DFTRefiner:
         # SOTA-level fix: We check the mf_opt convergence after the scf() call.
         
         # Compute frequencies and solvent energy at the OPTIMIZED vacuum geometry
-        mf_opt = self._build_mf(mol_opt, xc_method=self.opt_method, use_solvent=True)
-        # Check SCF convergence
-        mf_opt.scf()
-        if not mf_opt.converged:
-            logger.info("    WARNING: SCF failed to converge on the optimized geometry.")
+        mf_opt = self._run_solvent_scf_with_retry(mol_opt, charge, spin, phase_label)
 
         logger.info(f">>> [Phase 3.3] {phase_label} Hessian/frequency analysis in progress...")
         freqs, g_raw, g_qh = self._run_hessian_and_thermo(mf_opt)

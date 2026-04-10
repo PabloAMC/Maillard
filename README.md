@@ -81,6 +81,7 @@ To explore all machine-readable reports, benchmarking artifacts, and matrix cove
 
 ## Documentation Hub
 - **Installation and basic usage:** [docs/guides/QUICKSTART.md](docs/guides/QUICKSTART.md)
+- **Copy-paste runbook for the three active computational-gap QM targets:** [docs/guides/COMPUTATIONAL_GAP_RUNBOOK.md](docs/guides/COMPUTATIONAL_GAP_RUNBOOK.md)
 - **Understanding terminology (FAST mode, bounds, etc):** [docs/guides/GLOSSARY.md](docs/guides/GLOSSARY.md)
 - **Detailed scientific positioning and constraints:** [docs/PHILOSOPHY.md](docs/PHILOSOPHY.md)
 - **Validation rules and benchmark testing:** [docs/VALIDATION_GUIDE.md](docs/VALIDATION_GUIDE.md)

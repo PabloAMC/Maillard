@@ -1,5 +1,27 @@
 # Maillard Strategic Roadmap
 
+## Active Follow-up — 2026-04-09 Maintainability Audit II
+
+- [x] Inventory structural duplication, stale wrappers, and scripts that still expose machine-specific or ad hoc execution patterns.
+- [x] Identify outdated code paths that are now bypassed by the current runtime, Docker entrypoints, or generator layout.
+- [ ] Propose the smallest safe structural reductions that improve discoverability without breaking active scientific workflows.
+- [ ] Validate any recommended removals or rewrites against the current test and execution surface before landing changes.
+
+Review 2026-04-09:
+- In progress. The first cleanup wave removed obvious dead files. This pass is focused on higher-value maintainability problems: duplicated entrypoints, hidden execution paths, legacy helper patterns, and modules whose structure no longer matches the current runtime surface.
+- Confirmed debt clusters after code archaeology: duplicated scientist-facing CLI/report wiring across `run_pipeline.py`, `optimize_formulation.py`, `compare_formulations.py`, and `run_campaign.py`; package-internal `sys.path` mutation inside `src/` and even `data/reactions/curated_pathways.py`; documentation that still promotes `python scripts/...` while the validated Docker wrapper exposes only part of that surface; and cross-generator imports such as `generate_validation_figures.py` importing `_build_rows` from `generate_benchmark_coverage_gaps.py`.
+- The next safe refactor target is not broad deletion. It is extracting a small shared scientist-facing execution helper, moving curated pathway Python definitions out of `data/`, and breaking generator-to-generator library imports by promoting shared builders into `src/`.
+
+## Active Follow-up — 2026-04-09 Public 3D Geometry Refresh
+
+- [ ] Download public 3D templates for the three active computational-gap targets and record provenance.
+- [ ] Preserve the mapped atom ordering required by xTB path search while replacing local surrogate coordinates with more realistic 3D seeds.
+- [ ] Re-run xTB for `hexanal_radical_quench`, `lysinoalanine_crosslink`, and `aa_ring_open_dicarbonyl` after refreshing the seeds.
+- [ ] Re-run per-target DFT jobs and capture whether the refreshed seeds reduce immediate SCF failures.
+
+Review 2026-04-09:
+- In progress. The current local XYZ files are balanced and xTB-ready, but they were built from simplified mapped SMILES. The refresh pass is using public PubChem 3D records where available, while keeping the local atom ordering invariant so `xtb --path` still interpolates the intended atoms.
+
 ## Active Follow-up — 2026-04-09 Git Tracking Audit
 
 - [x] Inventory the files currently tracked even though they now match ignore rules.
