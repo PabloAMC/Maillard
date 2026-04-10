@@ -7,7 +7,6 @@ Loads the Tier 1 xTB screening results and matches them against user-defined
 or canonical precursors to recommend actionable formulation adjustments.
 """
 
-import sys
 import json
 import yaml
 import math
@@ -18,9 +17,7 @@ from pathlib import Path
 from typing import List, Dict, Set, Optional, Any, Tuple
 from typing import Mapping
 
-# Add project root to path
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT))
 
 from src.logger import get_logger
 logger = get_logger(__name__)
@@ -34,7 +31,7 @@ from src.projection import (
 from src.matrix_targets import get_compound_panel_entry
 from src.projection_metadata import ProjectionMetadataMap, make_projection_metadata_row
 
-from data.reactions.curated_pathways import PATHWAYS, PATHWAY_METADATA
+from src.curated_pathways import PATHWAYS, PATHWAY_METADATA
 from src.barrier_constants import arrhenius_rate_constant, get_reference_pre_exponential
 from src.headspace import HeadspaceModel
 from src.matrix_calibration_registry import describe_matrix_calibration, determine_matrix_process_state
@@ -64,8 +61,6 @@ else:
     _CARBOXYLIC_ACID_SMARTS = None
     _PRIMARY_AMINE_SMARTS = None
     _IMINE_SMARTS = None
-
-# Add project root to path handled above
 
 _HENRY_CONSTANTS_PATH = ROOT / "data" / "lit" / "henry_constants.yml"
 _NON_OBSERVABLE_KAW_THRESHOLD = 1.0e-8

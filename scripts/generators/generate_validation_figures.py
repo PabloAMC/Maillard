@@ -21,7 +21,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from scripts.generators.generate_benchmark_coverage_gaps import _build_rows as build_coverage_gap_rows
+from src.benchmark_coverage_gaps import build_benchmark_coverage_gap_rows as build_coverage_gap_rows
 from src.benchmark_labels import benchmark_label
 from src.benchmark_validation import build_matrix_promotion_family_status, evaluate_benchmark, summarize_benchmarks
 from src.family_validation_overview import build_family_validation_overview_artifact

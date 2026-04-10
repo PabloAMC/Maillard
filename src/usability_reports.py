@@ -676,6 +676,41 @@ def build_confidence_package(
     return payload
 
 
+def prepare_cli_confidence(
+    result: "FormulationResult",
+    *,
+    target_tag: str,
+    precursor_names: List[str],
+    protein_type: str,
+    temp_c: float,
+    ph: float,
+    aw: float,
+    formulation: Dict[str, object],
+    baseline_conditions: Optional[ReactionConditions] = None,
+    designer: Optional[MaillardPipeline] = None,
+) -> List[DomainWarning]:
+    cleaned_precursors = [str(name).strip() for name in precursor_names if str(name).strip()]
+    checker = DomainOfValidityChecker(target_tag)
+    warnings = checker.check(
+        precursor_names=cleaned_precursors,
+        protein_type=protein_type,
+        temp_c=temp_c,
+        ph=ph,
+        aw=aw,
+        matrix_explainability=result.matrix_explainability,
+    )
+    result.confidence_metadata = build_confidence_package(
+        result,
+        warnings,
+        precursor_names=cleaned_precursors,
+        protein_type=protein_type,
+        formulation=formulation,
+        baseline_conditions=baseline_conditions,
+        designer=designer,
+    )
+    return warnings
+
+
 class DomainOfValidityChecker:
     """
     Checks if a formulation and conditions are within the "trusted envelope" 

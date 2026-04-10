@@ -11,7 +11,6 @@ The core Phase 7 orchestrator.
 
 import sys
 import argparse
-from dataclasses import asdict
 from pathlib import Path
 from typing import Dict, List, Any
 
@@ -32,14 +31,8 @@ from src.xtb_screener import XTBScreener  # noqa: E402
 from src.recommend import _trunc  # noqa: E402
 from src import precursor_resolver  # noqa: E402
 from src.barrier_constants import get_barrier, HEME_CATALYST_FAMILIES, HEME_CATALYST_REDUCTION  # noqa: E402
-from src.usability_reports import (
-    DomainOfValidityChecker, 
-    build_confidence_package
-)  # noqa: E402
-from src.presentation import (
-    render_decision_summary_cli,
-    render_deep_explainability_cli
-)  # noqa: E402
+from src.usability_reports import DomainOfValidityChecker, prepare_cli_confidence  # noqa: E402
+from src.presentation import render_decision_summary_cli, render_deep_explainability_cli  # noqa: E402
 from src.reporting import generate_report  # noqa: E402
 
 
@@ -124,47 +117,39 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def output_decision_summary_and_reports(
-    res: Any, 
-    args: argparse.Namespace, 
-    conditions: ReactionConditions, 
-    designer: MaillardPipeline, 
-    formulation: Dict[str, Any], 
-    precursor_names: List[str]
-) -> None:
-    """Consolidated helper to render reports and summaries for both modes."""
-    checker = DomainOfValidityChecker(args.target if args.target else DEFAULTS.default_target_tag)
-    
-    warnings = checker.check(
-        precursor_names=precursor_names,
-        protein_type=formulation.get("protein_type", args.protein_type),
-        temp_c=float(formulation.get("temp", conditions.temperature_celsius)),
-        ph=float(formulation.get("ph", conditions.pH)),
-        aw=float(formulation.get("aw", conditions.water_activity)),
-        matrix_explainability=res.matrix_explainability,
-    )
-    res.confidence_metadata = build_confidence_package(
+def _render_result_bundle(
+    res: Any,
+    *,
+    target_tag: str,
+    precursor_names: List[str],
+    protein_type: str,
+    temp_c: float,
+    ph: float,
+    aw: float,
+    formulation: Dict[str, Any],
+    baseline_conditions: ReactionConditions,
+    designer: MaillardPipeline,
+    report_enabled: bool,
+    conditions_dict: Dict[str, Any],
+    output_dir: Path | None,
+) -> Path | None:
+    warnings = prepare_cli_confidence(
         res,
-        warnings,
+        target_tag=target_tag,
         precursor_names=precursor_names,
-        protein_type=formulation.get("protein_type", args.protein_type),
+        protein_type=protein_type,
+        temp_c=temp_c,
+        ph=ph,
+        aw=aw,
         formulation=formulation,
-        baseline_conditions=conditions,
+        baseline_conditions=baseline_conditions,
         designer=designer,
     )
-    
-    # [10] Scientist-Facing Decision Summary
     render_decision_summary_cli(res, warnings)
     render_deep_explainability_cli(res)
-
-    if args.report:
-        report_dir = generate_report(
-            res, 
-            warnings, 
-            vars(args), 
-            output_dir=Path(args.output_dir) if args.output_dir else None
-        )
-        logger.info(f"📄 Report generated in: {report_dir}")
+    if not report_enabled:
+        return None
+    return generate_report(res, warnings, conditions_dict, output_dir=output_dir)
 
 
 def run_inverse_design(args: argparse.Namespace, conditions: ReactionConditions) -> None:
@@ -209,9 +194,23 @@ def run_inverse_design(args: argparse.Namespace, conditions: ReactionConditions)
             for key in ("sugars", "amino_acids", "additives", "lipids"):
                 best_precursors.extend(best_formulation.get(key, []))
             
-            output_decision_summary_and_reports(
-                best, args, conditions, designer, best_formulation, best_precursors
+            report_dir = _render_result_bundle(
+                best,
+                target_tag=args.target or DEFAULTS.default_target_tag,
+                precursor_names=best_precursors,
+                protein_type=str(best_formulation.get("protein_type", args.protein_type)),
+                temp_c=float(best_formulation.get("temp", conditions.temperature_celsius)),
+                ph=float(best_formulation.get("ph", conditions.pH)),
+                aw=float(best_formulation.get("aw", conditions.water_activity)),
+                formulation=best_formulation,
+                baseline_conditions=conditions,
+                designer=designer,
+                conditions_dict=vars(args),
+                report_enabled=bool(args.report),
+                output_dir=Path(args.output_dir) if args.output_dir else None,
             )
+            if report_dir is not None:
+                logger.info(f"📄 Report generated in: {report_dir}")
         
         sys.exit(0)
         
@@ -327,7 +326,23 @@ def run_forward_pipeline(args: argparse.Namespace, conditions: ReactionCondition
             if res.lysine_budget > 50.0:
                 print("    ⚠️  WARNING: High Lysine consumption by DHA pathway significantly reduces aroma yield.")
     
-    output_decision_summary_and_reports(res, args, conditions, designer, formulation, names)
+    report_dir = _render_result_bundle(
+        res,
+        target_tag=DEFAULTS.default_target_tag,
+        precursor_names=names,
+        protein_type=str(formulation.get("protein_type", args.protein_type)),
+        temp_c=float(formulation.get("temp", conditions.temperature_celsius)),
+        ph=float(formulation.get("ph", conditions.pH)),
+        aw=float(formulation.get("aw", conditions.water_activity)),
+        formulation=formulation,
+        baseline_conditions=conditions,
+        designer=designer,
+        conditions_dict=vars(args),
+        report_enabled=bool(args.report),
+        output_dir=Path(args.output_dir) if args.output_dir else None,
+    )
+    if report_dir is not None:
+        logger.info(f"📄 Report generated in: {report_dir}")
 
     print("\n" + "═"*85)
     print(" ℹ️  KNOWN LIMITATIONS:")

@@ -15,12 +15,9 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from src.bayesian_optimizer import FormulationOptimizer  # noqa: E402
-from src.usability_reports import (
-    DomainOfValidityChecker, 
-    build_confidence_package,
-    render_decision_summary_cli,
-    render_deep_explainability_cli
-)  # noqa: E402
+from src.presentation import render_decision_summary_cli, render_deep_explainability_cli  # noqa: E402
+from src.reporting import generate_report  # noqa: E402
+from src.usability_reports import prepare_cli_confidence  # noqa: E402
 
 
 def main():
@@ -131,35 +128,31 @@ def main():
     )
     res = designer.evaluate_single(best_formulation, cond)
     
-    checker = DomainOfValidityChecker(args.target_tag)
-    warnings = checker.check(
-        precursor_names=sugars + aas + lipids, 
-        protein_type=args.protein_type,
-        temp_c=res.matrix_explainability.get("temperature_celsius", 150.0),
-        ph=res.matrix_explainability.get("pH", 6.0),
-        aw=best_formulation.get("aw", cond.water_activity),
-        matrix_explainability=res.matrix_explainability,
-    )
-    res.confidence_metadata = build_confidence_package(
+    warnings = prepare_cli_confidence(
         res,
-        warnings,
+        target_tag=args.target_tag,
         precursor_names=sugars + aas + lipids,
         protein_type=args.protein_type,
+        temp_c=float(res.matrix_explainability.get("temperature_celsius", best_formulation["temp"])),
+        ph=float(res.matrix_explainability.get("pH", best_formulation["ph"])),
+        aw=float(best_formulation.get("aw", cond.water_activity)),
         formulation=best_formulation,
         baseline_conditions=cond,
         designer=designer,
     )
     render_decision_summary_cli(res, warnings)
     render_deep_explainability_cli(res)
-    
+
+    report_dir = None
     if args.report:
-        from src.reporting import generate_report
         report_dir = generate_report(
-            res, 
-            warnings, 
-            vars(args), 
-            output_dir=Path(args.output_dir) if args.output_dir else None
+            res,
+            warnings,
+            vars(args),
+            output_dir=Path(args.output_dir) if args.output_dir else None,
         )
+    
+    if report_dir is not None:
         print(f"📄 Best Trial Report generated in: {report_dir}")
     
     print("\n(Note: Optimization trace saved in memory. For persistent tracking, configure Optuna DB storage.)")

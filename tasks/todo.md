@@ -4,13 +4,19 @@
 
 - [x] Inventory structural duplication, stale wrappers, and scripts that still expose machine-specific or ad hoc execution patterns.
 - [x] Identify outdated code paths that are now bypassed by the current runtime, Docker entrypoints, or generator layout.
-- [ ] Propose the smallest safe structural reductions that improve discoverability without breaking active scientific workflows.
-- [ ] Validate any recommended removals or rewrites against the current test and execution surface before landing changes.
+- [x] Propose the smallest safe structural reductions that improve discoverability without breaking active scientific workflows.
+- [x] Validate any recommended removals or rewrites against the current test and execution surface before landing changes.
 
 Review 2026-04-09:
 - In progress. The first cleanup wave removed obvious dead files. This pass is focused on higher-value maintainability problems: duplicated entrypoints, hidden execution paths, legacy helper patterns, and modules whose structure no longer matches the current runtime surface.
 - Confirmed debt clusters after code archaeology: duplicated scientist-facing CLI/report wiring across `run_pipeline.py`, `optimize_formulation.py`, `compare_formulations.py`, and `run_campaign.py`; package-internal `sys.path` mutation inside `src/` and even `data/reactions/curated_pathways.py`; documentation that still promotes `python scripts/...` while the validated Docker wrapper exposes only part of that surface; and cross-generator imports such as `generate_validation_figures.py` importing `_build_rows` from `generate_benchmark_coverage_gaps.py`.
 - The next safe refactor target is not broad deletion. It is extracting a small shared scientist-facing execution helper, moving curated pathway Python definitions out of `data/`, and breaking generator-to-generator library imports by promoting shared builders into `src/`.
+- Landed 2026-04-10: `src/scientist_cli.py` now centralizes CLI-side confidence assessment, presentation rendering, and optional report generation so the four scientist-facing entrypoints no longer duplicate that wiring. `src/benchmark_coverage_gaps.py` now owns the reusable coverage-gap builder/markdown logic, while `generate_validation_figures.py` no longer imports private helpers from another generator script.
+- Follow-up 2026-04-10: that first helper extraction was then compacted to reduce total code size. The CLI confidence helper was absorbed into `src/usability_reports.py` and the extra `src/scientist_cli.py` module was removed. The current maintainability batch is net negative in size (`130` insertions, `230` deletions across the touched files).
+- Also landed 2026-04-10: removed unnecessary `sys.path` mutation from `src/recommend.py`, `src/smirks_engine.py`, and `data/reactions/curated_pathways.py`. Those modules now rely on the normal repo import surface instead of self-mutating package state.
+- Landed 2026-04-10: the hand-curated pathway module was moved from `data/reactions/curated_pathways.py` into `src/curated_pathways.py`, its ad hoc `__main__` block and decorative spacing were removed, and consumers were rewired to import from `src`. That step alone is net negative in size (`3` insertions, `266` deletions across the touched files) while removing Python code from the data tree.
+- Landed 2026-04-10: `scripts/docker_maillard.sh` was compacted without changing its public command surface. Generator dispatch now uses shared helpers and the `validation-figures` bundle is centralized in one lane. The wrapper refactor is net negative in size (`99` insertions, `109` deletions) and was validated with `bash -n`, `./scripts/docker_maillard.sh summary`, `./scripts/docker_maillard.sh coverage-gaps`, and `./scripts/docker_maillard.sh validation-figures`.
+- Focused Docker validation passed after the refactor: `tests/unit/test_cli_scripts.py`, `tests/unit/test_benchmark_coverage_gaps.py`, `tests/scientific/test_validation_figures.py`, `tests/unit/test_data_integrity.py`, `tests/unit/test_target_observability_metadata.py`, and `tests/unit/test_smirks_engine.py` (`68 passed`).
 
 ## Active Follow-up — 2026-04-09 Public 3D Geometry Refresh
 

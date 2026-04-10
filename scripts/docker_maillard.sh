@@ -14,88 +14,88 @@ usage() {
 Usage: ./scripts/docker_maillard.sh <command> [args...]
 
 Commands:
-  up           Create or start the Docker container.
-  bootstrap    Create/update the maillard conda env and apply required patches.
-  shell        Open an interactive shell in /workspace with the env activated.
-  run CMD...   Run an arbitrary command inside the activated env.
-  pytest ...   Run pytest inside the activated env.
-  stability    Run the Tier 0/1 stability gate.
-  core         Run the core correctness lane.
-  scientific-fast
-               Run the fast scientific regression lane selected by pytest markers.
-  kinetics-validation
-               Run the slower Cantera/kinetics validation lane selected by pytest markers.
-  scientific   Run the scientific validation lane.
-  qm-heavy     Run the QM / external-backend lane.
-  hofmann      Generate the Hofmann diagnostic snapshot.
-  targets BENCH [TYPE]
-               Generate a benchmark target snapshot (default TYPE=desirable; aliases: off_flavour, off-flavour, competing).
-  targets-report
-               Generate results/validation/benchmark_targets.{md,json}.
-  matrix-deltas
-               Generate results/validation/matrix_benchmark_deltas.{md,json}.
-  matrix-assertions
-               Generate results/validation/matrix_benchmark_assertions.{md,json}.
-  matrix-evidence
-               Generate results/validation/matrix_benchmark_evidence.{md,json}.
-  matrix-readiness
-               Generate results/validation/matrix_promotion_readiness.{md,json}.
+    scientific_lane
+    ;;
+  scientific-fast)
+    scientific_fast_lane
+    ;;
+  kinetics-validation)
+    kinetics_validation_lane
+    ;;
+  qm-heavy)
+    qm_heavy_lane
+    ;;
+  hofmann)
+    hofmann_diagnostic
+    ;;
+  targets)
+    shift
+    if [ "$#" -lt 1 ]; then
+      echo "Usage: ./scripts/docker_maillard.sh targets BENCHMARK_JSON [TYPE]" >&2
+      exit 1
+    fi
+    targets_snapshot "$1" "${2:-desirable}"
+    ;;
+  targets-report)
+    run_generator_script generate_benchmark_targets
   matrix-promotion-contract
                Generate results/validation/matrix_promotion_contract.{md,json}.
-  matrix-closure-audit
+    run_generator_script generate_matrix_benchmark_deltas
                Generate results/validation/matrix_observable_closure_audit.{md,json}.
   experiment-intake-schema
-               Generate results/validation/matrix_experiment_intake_schema.{md,json}.
+    run_generator_script generate_matrix_benchmark_assertions
   compare-experiment INTAKE
                Generate support-delta artifacts for a matrix experiment intake payload.
-  extrusion-closure-workbook WORKBOOK
+    run_generator_script generate_matrix_benchmark_evidence
                Convert an extrusion external-closure workbook into intake payloads and support-delta artifacts.
   extrusion-follow-on-workbook WORKBOOK
-               Evaluate a filled 5.8 extrusion follow-on workbook and generate derived-metric artifacts.
+    run_generator_script generate_matrix_promotion_readiness
   extrusion-diagnostic-examples
                Generate and execute synthetic diagnostic examples for both extrusion workbook flows.
-  computational-gap-refinement-plan
+    run_generator_script generate_matrix_promotion_contract --output-dir results/validation
                Generate the no-wet-lab computational-gap refinement plan and the xTB/DFT job manifests.
   computational-gap-xtb [TARGET]
-               Execute the computational-gap xTB path-search job set (or a single TARGET id).
+    run_generator_script generate_matrix_observable_closure_audit --output-dir results/validation
   computational-gap-dft [TARGET]
                Execute the computational-gap DFT refinement job set (or a single TARGET id).
-  computational-gap-dft-ingest
+    run_generator_script generate_matrix_experiment_intake_schema --output-dir results/validation
                Generate the computational-gap DFT ingestion report from the current execution artifacts.
   computational-gap-dft-promote
-               Promote completed non-fast computational-gap DFT results into computational priors.
+    run_generator_script generate_literature_learning_loop --output-dir results/validation
   literature-learning-loop
                Generate results/validation/literature_learning_loop.{md,json}.
-  family-ingestion-plan
+    run_generator_script generate_family_ingestion_plan --output-dir results/validation
                Generate results/validation/family_ingestion_plan.{md,json}.
   family-promotion-state
-               Generate results/validation/family_promotion_state.{md,json}.
+    run_generator_script generate_family_promotion_state --output-dir results/validation
   matrix-family-coverage
                Generate results/validation/matrix_family_coverage.{md,json}.
-  refinement-governance
+    run_generator_script generate_matrix_family_coverage
                Generate the selective mechanistic refinement governance artifact bundle.
   mlp-assessment
-               Generate the MLP assessment and adoption-note artifacts.
+    run_generator_script generate_refinement_governance --output-dir results/validation
   matrix-branch-deltas [BASE_REF]
                Generate results/validation/matrix_branch_delta_report.{md,json} against BASE_REF (default: main).
-  coverage-gaps
+    run_generator_script generate_mlp_assessment
                Generate results/validation/benchmark_coverage_gaps.{md,json}.
   validation-figures
-               Generate validation_overview, family_validation_overview, and validated_envelope artifacts.
+    shift
   thermo-gating
                Generate results/validation/thermodynamic_gating_audit.{md,json}.
-  validated-envelope
+      exit 1
                Generate results/validation/validated_envelope.{md,json}.
   explain-formulation NAME [TARGET_TAG] [MINIMIZE_TAG]
-               Generate a formulation explainability artifact in results/validation.
+    ;;
   campaign SPEC [OUTPUT_DIR]
                Run a shareable campaign spec and generate campaign artifacts.
-  index        Generate results/validation/benchmark_index.{md,json}.
+    if [ "$#" -lt 1 ]; then
   summary      Generate results/validation/benchmark_summary.{md,json}.
   deep-research-audit
-               Run the Deep Research backlog tracking script.
+    fi
   notebook     Launch a Jupyter notebook server on port 8888.
   status       Show container and environment status.
+  extrusion-follow-on-workbook)
+    shift
 EOF
 }
 
@@ -156,6 +156,54 @@ qm_heavy_lane() {
 
 hofmann_diagnostic() {
   run_in_env "python scripts/diagnose_benchmark_selectivity.py --lit data/benchmarks/cys_ribose_140C_Hofmann1998.json"
+}
+
+run_generator_script() {
+  local generator_name="$1"
+  shift || true
+  if [ "$#" -eq 0 ]; then
+    run_in_env "python scripts/generators/${generator_name}.py"
+  else
+    run_in_env "python scripts/generators/${generator_name}.py $*"
+  fi
+}
+
+validation_figures_lane() {
+  local commands=(
+    "generate_family_lane_validation --output-dir results/validation"
+    "generate_family_deviation_audit --output-dir results/validation"
+    "generate_validation_figures --docs-asset-dir docs/assets"
+    "generate_family_validation_figures --output-dir results/validation --docs-asset-dir docs/assets"
+    "generate_validated_envelope_report"
+  )
+  local command
+  for command in "${commands[@]}"; do
+    run_generator_script $command
+  done
+}
+
+run_generator_alias() {
+  case "$1" in
+    targets-report) run_generator_script generate_benchmark_targets ;;
+    matrix-deltas) run_generator_script generate_matrix_benchmark_deltas ;;
+    matrix-assertions) run_generator_script generate_matrix_benchmark_assertions ;;
+    matrix-evidence) run_generator_script generate_matrix_benchmark_evidence ;;
+    matrix-readiness) run_generator_script generate_matrix_promotion_readiness ;;
+    matrix-promotion-contract) run_generator_script generate_matrix_promotion_contract --output-dir results/validation ;;
+    matrix-closure-audit) run_generator_script generate_matrix_observable_closure_audit --output-dir results/validation ;;
+    experiment-intake-schema) run_generator_script generate_matrix_experiment_intake_schema --output-dir results/validation ;;
+    literature-learning-loop) run_generator_script generate_literature_learning_loop --output-dir results/validation ;;
+    family-ingestion-plan) run_generator_script generate_family_ingestion_plan --output-dir results/validation ;;
+    family-promotion-state) run_generator_script generate_family_promotion_state --output-dir results/validation ;;
+    matrix-family-coverage) run_generator_script generate_matrix_family_coverage ;;
+    refinement-governance) run_generator_script generate_refinement_governance --output-dir results/validation ;;
+    mlp-assessment) run_generator_script generate_mlp_assessment ;;
+    coverage-gaps) run_generator_script generate_benchmark_coverage_gaps ;;
+    thermo-gating) run_generator_script generate_thermodynamic_gating_audit ;;
+    validated-envelope) run_generator_script generate_validated_envelope_report ;;
+    index) run_generator_script generate_benchmark_index ;;
+    summary) run_generator_script generate_benchmark_summary ;;
+  esac
 }
 
 targets_snapshot() {
@@ -313,47 +361,8 @@ case "$cmd" in
     fi
     targets_snapshot "$1" "${2:-desirable}"
     ;;
-  targets-report)
-    run_in_env "python scripts/generators/generate_benchmark_targets.py"
-    ;;
-  matrix-deltas)
-    run_in_env "python scripts/generators/generate_matrix_benchmark_deltas.py"
-    ;;
-  matrix-assertions)
-    run_in_env "python scripts/generators/generate_matrix_benchmark_assertions.py"
-    ;;
-  matrix-evidence)
-    run_in_env "python scripts/generators/generate_matrix_benchmark_evidence.py"
-    ;;
-  matrix-readiness)
-    run_in_env "python scripts/generators/generate_matrix_promotion_readiness.py"
-    ;;
-  matrix-promotion-contract)
-    run_in_env "python scripts/generators/generate_matrix_promotion_contract.py --output-dir results/validation"
-    ;;
-  matrix-closure-audit)
-    run_in_env "python scripts/generators/generate_matrix_observable_closure_audit.py --output-dir results/validation"
-    ;;
-  experiment-intake-schema)
-    run_in_env "python scripts/generators/generate_matrix_experiment_intake_schema.py --output-dir results/validation"
-    ;;
-  literature-learning-loop)
-    run_in_env "python scripts/generators/generate_literature_learning_loop.py --output-dir results/validation"
-    ;;
-  family-ingestion-plan)
-    run_in_env "python scripts/generators/generate_family_ingestion_plan.py --output-dir results/validation"
-    ;;
-  family-promotion-state)
-    run_in_env "python scripts/generators/generate_family_promotion_state.py --output-dir results/validation"
-    ;;
-  matrix-family-coverage)
-    run_in_env "python scripts/generators/generate_matrix_family_coverage.py"
-    ;;
-  refinement-governance)
-    run_in_env "python scripts/generators/generate_refinement_governance.py --output-dir results/validation"
-    ;;
-  mlp-assessment)
-    run_in_env "python scripts/generators/generate_mlp_assessment.py"
+  targets-report|matrix-deltas|matrix-assertions|matrix-evidence|matrix-readiness|matrix-promotion-contract|matrix-closure-audit|experiment-intake-schema|literature-learning-loop|family-ingestion-plan|family-promotion-state|matrix-family-coverage|refinement-governance|mlp-assessment|coverage-gaps|thermo-gating|validated-envelope|index|summary)
+    run_generator_alias "$cmd"
     ;;
   compare-experiment)
     shift
@@ -380,10 +389,10 @@ case "$cmd" in
     run_in_env "python scripts/generators/process_extrusion_disulfide_follow_on_workbook.py --workbook '$1' --output-dir results/validation"
     ;;
   extrusion-diagnostic-examples)
-    run_in_env "python scripts/generators/generate_extrusion_diagnostic_examples.py"
+    run_generator_script generate_extrusion_diagnostic_examples
     ;;
   computational-gap-refinement-plan)
-    run_in_env "python scripts/generators/generate_computational_gap_refinement_plan.py --output-dir results/validation --manifest-dir results/computational_gap_refinement"
+    run_generator_script generate_computational_gap_refinement_plan --output-dir results/validation --manifest-dir results/computational_gap_refinement
     ;;
   computational-gap-xtb)
     shift
@@ -402,30 +411,17 @@ case "$cmd" in
     fi
     ;;
   computational-gap-dft-ingest)
-    run_in_env "python scripts/generators/ingest_computational_gap_dft_results.py --output-dir results/validation"
+    run_generator_script ingest_computational_gap_dft_results --output-dir results/validation
     ;;
   computational-gap-dft-promote)
-    run_in_env "python scripts/generators/promote_computational_gap_dft_results.py --output-dir results/validation"
+    run_generator_script promote_computational_gap_dft_results --output-dir results/validation
     ;;
   matrix-branch-deltas)
     shift
     run_in_env "python scripts/compare_matrix_benchmark_branches.py --base-ref '${1:-main}'"
     ;;
-  coverage-gaps)
-    run_in_env "python scripts/generators/generate_benchmark_coverage_gaps.py"
-    ;;
   validation-figures)
-    run_in_env "python scripts/generators/generate_family_lane_validation.py --output-dir results/validation"
-    run_in_env "python scripts/generators/generate_family_deviation_audit.py --output-dir results/validation"
-    run_in_env "python scripts/generators/generate_validation_figures.py --docs-asset-dir docs/assets"
-    run_in_env "python scripts/generators/generate_family_validation_figures.py --output-dir results/validation --docs-asset-dir docs/assets"
-    run_in_env "python scripts/generators/generate_validated_envelope_report.py"
-    ;;
-  thermo-gating)
-    run_in_env "python scripts/generators/generate_thermodynamic_gating_audit.py"
-    ;;
-  validated-envelope)
-    run_in_env "python scripts/generators/generate_validated_envelope_report.py"
+    validation_figures_lane
     ;;
   explain-formulation)
     shift
@@ -446,12 +442,6 @@ case "$cmd" in
     else
       run_in_env "python scripts/run_campaign.py --spec '$1'"
     fi
-    ;;
-  index)
-    run_in_env "python scripts/generators/generate_benchmark_index.py"
-    ;;
-  summary)
-    run_in_env "python scripts/generators/generate_benchmark_summary.py"
     ;;
   deep-research-audit)
     run_in_env "python scripts/deep_research_tracker.py"

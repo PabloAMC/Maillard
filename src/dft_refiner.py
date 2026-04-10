@@ -134,6 +134,15 @@ class DFTRefiner:
         else:
             self.mlp_optimizer = None
 
+        # Lightweight MLP for DFT starting-point pre-relaxation
+        self._prerelax_mlp = None
+        if self.geometry_backend != 'mace':
+            try:
+                from .mlp_optimizer import MLPOptimizer
+                self._prerelax_mlp = MLPOptimizer(model_name="small")
+            except (ImportError, Exception):
+                pass
+
         try:
             from .ts_optimizer import TSOptimizer
             self.ts_optimizer = TSOptimizer()
@@ -171,6 +180,21 @@ class DFTRefiner:
         )
         return mol
 
+    def _mlp_prerelax(self, xyz_content: str) -> str:
+        """Quick MLP geometry pre-relaxation to improve the DFT starting point."""
+        if self._prerelax_mlp is None:
+            return xyz_content
+        try:
+            logger.info("    Running MACE pre-relaxation...")
+            relaxed = self._prerelax_mlp.optimize_geometry(
+                xyz_content, fmax=0.1, max_steps=200, drift_threshold=1.5
+            )
+            logger.info("    MACE pre-relaxation complete.")
+            return relaxed
+        except Exception as exc:
+            logger.info(f"    WARNING: MACE pre-relaxation failed ({exc}). Using original geometry.")
+            return xyz_content
+
     def _build_mf(
         self,
         mol: Any,
@@ -178,6 +202,7 @@ class DFTRefiner:
         use_solvent: bool = True,
         conv_tol: float = 1e-7,
         harden_scf: bool = False,
+        use_soscf: bool = False,
     ):
         """Build the Mean-Field object with specified XC and implicit solvent."""
         from pyscf import scf, dft
@@ -205,9 +230,8 @@ class DFTRefiner:
             # Failsafe: ensure no solvent is attached if use_solvent is False
             delattr(mf, 'with_solvent')
                 
-        # Enhanced convergence strategies for transition states
         mf.conv_tol = conv_tol
-        mf.max_cycle = 200 if harden_scf else 100
+        mf.max_cycle = 200
         
         # [SCRATCH MANAGEMENT] Prevent PySCF from creating .chk files in the 
         # current working directory, which clutters the workspace.
@@ -222,6 +246,9 @@ class DFTRefiner:
             if hasattr(mf, 'direct_scf_tol'):
                 mf.direct_scf_tol = 1e-13
             mf.init_guess = 'atom'
+
+        if use_soscf:
+            mf = mf.newton()
         
         return mf
 
@@ -301,6 +328,7 @@ class DFTRefiner:
         *,
         harden_scf: bool = False,
         use_solvent_optimization: bool = False,
+        use_soscf: bool = False,
     ) -> Tuple[bool, Any, str]:
         mol = self._setup_mol(xyz_content, charge, spin, basis=self.opt_basis)
         mf = self._build_mf(
@@ -309,6 +337,7 @@ class DFTRefiner:
             use_solvent=use_solvent_optimization,
             conv_tol=1e-6,
             harden_scf=harden_scf,
+            use_soscf=use_soscf,
         )
 
         conv = False
@@ -397,13 +426,13 @@ class DFTRefiner:
         if mf_opt.converged:
             return mf_opt
 
-        logger.info(f"    WARNING: {phase_label} solvent SCF failed to converge. Retrying with hardened SCF settings...")
+        logger.info(f"    WARNING: {phase_label} solvent SCF failed. Retrying with SOSCF...")
         mol_retry = self._setup_mol(_molecule_to_xyz(mol_opt, comment=f"{phase_label} retry geometry"), charge, spin, basis=self.opt_basis)
         mf_opt = self._build_mf(
             mol_retry,
             xc_method=self.opt_method,
             use_solvent=True,
-            harden_scf=True,
+            use_soscf=True,
         )
         mf_opt.scf()
         if not mf_opt.converged:
@@ -501,6 +530,10 @@ class DFTRefiner:
                 if diffusion_ts_xyz:
                     xyz_content = diffusion_ts_xyz
 
+        # Phase A: MLP pre-relaxation for a better DFT starting point
+        if not is_ts:
+            xyz_content = self._mlp_prerelax(xyz_content)
+
         # Phase 10: Backend Selection for Geometry Optimization
         if self.geometry_backend == 'mace':
             logger.info(f">>> [Phase 10] Running MACE geometric optimization (is_ts={is_ts})...")
@@ -514,7 +547,7 @@ class DFTRefiner:
             conv = True # Assume converged if MLP didn't raise
             
         else:
-            # Original PySCF / geomeTRIC backend
+            # PySCF / geomeTRIC backend
             try:
                 conv, mol_opt, opt_xyz = self._optimize_with_pyscf_backend(
                     xyz_content,
@@ -524,61 +557,38 @@ class DFTRefiner:
                     max_steps,
                     eff_use_explicit,
                     n_atoms_solute,
-                    harden_scf=False,
                 )
             except Exception as exc:
                 if not self._is_scf_gradient_failure(exc):
                     raise
 
                 logger.info(
-                    f"    WARNING: {phase_label} optimization hit an SCF-gradient convergence failure ({exc}). Retrying with a hardened SCF path..."
+                    f"    WARNING: {phase_label} SCF failed ({exc}). "
+                    "Retrying with SOSCF (second-order SCF)..."
                 )
                 retry_xyz = xyz_content
                 if not is_ts:
                     try:
-                        retry_xyz = self._preoptimize_seed_xyz(xyz_content, charge, spin, max_steps)
+                        retry_xyz = self._preoptimize_seed_xyz(
+                            xyz_content, charge, spin, max_steps
+                        )
                     except Exception as preopt_exc:
                         logger.info(
-                            f"    WARNING: Cheap pre-optimization failed ({type(preopt_exc).__name__}: {preopt_exc}). Retrying hardened SCF from the original geometry..."
-                        )
-                try:
-                    conv, mol_opt, opt_xyz = self._optimize_with_pyscf_backend(
-                        retry_xyz,
-                        charge,
-                        spin,
-                        is_ts,
-                        max_steps,
-                        eff_use_explicit,
-                        n_atoms_solute,
-                        harden_scf=True,
-                        use_solvent_optimization=False,
-                    )
-                except Exception as retry_exc:
-                    if is_ts or not self._is_scf_gradient_failure(retry_exc):
-                        raise
-
-                    logger.info(
-                        f"    WARNING: {phase_label} hardened vacuum retry also failed ({retry_exc}). Retrying with implicit solvent during geometry optimization..."
-                    )
-                    retry_xyz = xyz_content
-                    try:
-                        retry_xyz = self._preoptimize_seed_xyz(xyz_content, charge, spin, max_steps)
-                    except Exception as preopt_exc:
-                        logger.info(
-                            f"    WARNING: Cheap pre-optimization before solvent retry failed ({type(preopt_exc).__name__}: {preopt_exc}). Continuing from the original geometry..."
+                            f"    WARNING: Pre-optimization failed ({preopt_exc}). "
+                            "Continuing from original geometry..."
                         )
 
-                    conv, mol_opt, opt_xyz = self._optimize_with_pyscf_backend(
-                        retry_xyz,
-                        charge,
-                        spin,
-                        is_ts,
-                        max_steps,
-                        eff_use_explicit,
-                        n_atoms_solute,
-                        harden_scf=True,
-                        use_solvent_optimization=True,
-                    )
+                conv, mol_opt, opt_xyz = self._optimize_with_pyscf_backend(
+                    retry_xyz,
+                    charge,
+                    spin,
+                    is_ts,
+                    max_steps,
+                    eff_use_explicit,
+                    n_atoms_solute,
+                    use_soscf=True,
+                    use_solvent_optimization=not is_ts,
+                )
 
             logger.info(f">>> [Phase 3.3] {phase_label} geometry converged; starting solvent SCF and thermochemistry...")
         
