@@ -1,47 +1,26 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Mapping, Optional
+from typing import Any, Dict, List, Mapping
 
-from src.artifact_io import load_optional_json_mapping
 from src.family_validation_overview import build_family_validation_overview_artifact
 from src.literature_family_registry import build_family_payload_coverage_artifact
 from src.literature_family_registry import iter_matrix_decision_panel_entries
 from src.family_ingestion_plan import load_family_ingestion_plan
 from src.family_promotion_state import build_family_promotion_state_artifact
+from src.literature_intake_registry import build_intake_reference_rows, build_literature_backlog_artifact, infer_target_payload_types, resolve_primary_template_kind as normalized_primary_template_kind
 from src.matrix_prior_registry import summarize_matrix_prior_bundle
 
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_LIT_DIR = ROOT / "data" / "lit"
-BENCHMARK_DIR = ROOT / "data" / "benchmarks"
 
 INTAKE_REGISTRY_PATH = DATA_LIT_DIR / "benchmark_intake_registry.json"
 PROCESS_GAP_REGISTRY_PATH = DATA_LIT_DIR / "process_gap_registry.json"
-PROCESS_STATE_CALIBRATIONS_PATH = DATA_LIT_DIR / "process_state_calibrations.json"
-COMPUTATIONAL_PRIORS_PATH = DATA_LIT_DIR / "computational_priors.json"
-SAFETY_REFERENCE_PAYLOADS_PATH = DATA_LIT_DIR / "safety_reference_payloads.json"
 
 
-READY_STATUS_DEFAULT_TEMPLATE_KIND = {
-    "ready_for_reference_encoding": "safety_payload",
-    "ready_for_calibration_encoding": "process_state_calibration",
-    "ready_for_intake_encoding": "benchmark_payload",
-    "ready_for_directional_prior_encoding": "computational_prior",
-}
-
-ARTIFACT_TYPE_TO_TEMPLATE_KIND = {
-    "benchmark": "benchmark_payload",
-    "process_state_calibration": "process_state_calibration",
-    "computational_prior": "computational_prior",
-    "directional_prior": "computational_prior",
-    "safety_reference": "safety_payload",
-    "flavor_reference_payload": "flavor_reference_payload",
-    "retention_payload": "retention_payload",
-    "structural_gap_entry": "structural_gap_entry",
-}
-
-PROMOTION_QUEUE_SLR_FAMILIES = {"03", "04", "05", "06", "07", "10", "11", "12", "13", "14", "15", "16"}
+PROMOTION_QUEUE_SLR_FAMILIES = {"03", "04", "05", "06", "07", "10"}
 
 PROMOTION_POSTURE_WEIGHTS = {
     "immediate_expansion_lane": 5.0,
@@ -49,143 +28,22 @@ PROMOTION_POSTURE_WEIGHTS = {
     "high_value_support_lane": 3.5,
     "matrix_scope_lane": 2.0,
 }
+
+
+def _load_json(path: Path) -> Dict[str, Any]:
+    if not path.exists():
+        return {}
+    with open(path, "r", encoding="utf-8") as handle:
+        return json.load(handle)
+
+
 def _to_repo_relative(path: Path, root: Path = ROOT) -> str:
     return path.resolve().relative_to(root.resolve()).as_posix()
 
 
-from src.text_utils import normalize_name_underscored as _normalize_name
-
-
-def _load_benchmark_payloads() -> Dict[str, Dict[str, Any]]:
-    payloads: Dict[str, Dict[str, Any]] = {}
-    for bench_path in sorted(BENCHMARK_DIR.glob("*.json")):
-        payload = load_optional_json_mapping(bench_path)
-        benchmark_id = str(payload.get("benchmark_id", bench_path.stem))
-        payloads[benchmark_id] = payload
-    return payloads
-
-
-def _iter_prior_entries(payload: Mapping[str, Any]) -> Iterable[Dict[str, Any]]:
-    for section_name, section_payload in payload.items():
-        if not isinstance(section_payload, list):
-            continue
-        for entry in section_payload:
-            if isinstance(entry, Mapping):
-                row = dict(entry)
-                row.setdefault("_section_name", str(section_name))
-                yield row
-
-
-def _iter_payload_entries(payload: Any, *, section_name: Optional[str] = None) -> Iterable[Dict[str, Any]]:
-    if isinstance(payload, list):
-        for entry in payload:
-            if isinstance(entry, Mapping):
-                row = dict(entry)
-                if section_name is not None:
-                    row.setdefault("_section_name", section_name)
-                yield row
-        return
-    if isinstance(payload, Mapping):
-        for key, value in payload.items():
-            if isinstance(value, list):
-                next_section = str(key) if section_name is None else section_name
-                yield from _iter_payload_entries(value, section_name=next_section)
-            elif isinstance(value, Mapping):
-                next_section = str(key) if section_name is None else section_name
-                yield from _iter_payload_entries(value, section_name=next_section)
-
-
-def _canonical_template_kind_for_artifact(artifact_type: str) -> str:
-    normalized = str(artifact_type).strip()
-    return ARTIFACT_TYPE_TO_TEMPLATE_KIND.get(normalized, normalized)
-
-
-def _infer_target_payload_types(entry: Mapping[str, Any]) -> List[str]:
-    payload_types: List[str] = []
-    for artifact in entry.get("runtime_artifacts", []) or []:
-        template_kind = _canonical_template_kind_for_artifact(str(artifact.get("artifact_type", "")))
-        if template_kind and template_kind not in payload_types:
-            payload_types.append(template_kind)
-    if payload_types:
-        return payload_types
-    fallback = READY_STATUS_DEFAULT_TEMPLATE_KIND.get(str(entry.get("status", "")), "reference_payload")
-    return [fallback]
-
-
-def _resolve_primary_template_kind(entry: Mapping[str, Any]) -> str:
-    payload_types = _infer_target_payload_types(entry)
-    return payload_types[0] if payload_types else "reference_payload"
-
-
-def _artifact_exists(artifact: Mapping[str, Any], *, root: Path = ROOT) -> bool:
-    path = root / str(artifact.get("path", ""))
-    if not path.exists():
-        return False
-    artifact_id = str(artifact.get("artifact_id", "")).strip()
-    artifact_type = str(artifact.get("artifact_type", "")).strip()
-    if not artifact_id or artifact_type == "benchmark":
-        return True
-    payload = load_optional_json_mapping(path)
-    if artifact_type == "intake_registry_entry":
-        return any(str(entry.get("id", "")) == artifact_id for entry in payload.get("eligible_references", []))
-    if artifact_type == "slr_incorporation_ledger":
-        return any(str(entry.get("paper_id", "")) == artifact_id for entry in payload.get("entries", []))
-    if artifact_type == "process_state_calibration":
-        return any(str(entry.get("id", "")) == artifact_id for entry in payload.get("entries", []))
-    if artifact_type == "safety_reference":
-        return any(str(entry.get("id", "")) == artifact_id for entry in payload.get("entries", []))
-
-    sections = artifact.get("sections", [])
-    if isinstance(sections, list) and sections:
-        for section_name in sections:
-            for entry in _iter_payload_entries(payload.get(str(section_name), []), section_name=str(section_name)):
-                if str(entry.get("id", entry.get("protein_type", ""))) == artifact_id:
-                    return True
-        return False
-
-    if isinstance(payload, Mapping):
-        for entry in _iter_payload_entries(payload):
-            if str(entry.get("id", entry.get("protein_type", ""))) == artifact_id:
-                return True
-    return False
-
-
-def _ready_reference_rows(root: Path = ROOT) -> List[Dict[str, Any]]:
-    intake = load_optional_json_mapping(root / _to_repo_relative(INTAKE_REGISTRY_PATH, ROOT))
-    rows: List[Dict[str, Any]] = []
-    for entry in intake.get("eligible_references", []):
-        status = str(entry.get("status", ""))
-        if status not in READY_STATUS_DEFAULT_TEMPLATE_KIND:
-            continue
-        runtime_artifacts = []
-        for artifact in entry.get("runtime_artifacts", []) or []:
-            artifact_row = dict(artifact)
-            artifact_row["template_kind"] = _canonical_template_kind_for_artifact(str(artifact_row.get("artifact_type", "")))
-            artifact_row["exists"] = _artifact_exists(artifact_row, root=root)
-            runtime_artifacts.append(artifact_row)
-        all_exist = bool(runtime_artifacts) and all(bool(item.get("exists", False)) for item in runtime_artifacts)
-        encoding_status = "encoded_runtime_artifact" if all_exist else "template_required"
-        target_payload_types = _infer_target_payload_types(entry)
-        rows.append(
-            {
-                "id": str(entry.get("id", "unknown")),
-                "citation": str(entry.get("citation", "unknown")),
-                "kind": str(entry.get("kind", "unknown")),
-                "chemistry_family": str(entry.get("chemistry_family", "")),
-                "slr_family_source": str(entry.get("slr_family_source", "")),
-                "source_payload_role": str(entry.get("payload_role", "unknown")),
-                "target_payload_types": target_payload_types,
-                "matrix_family": str(entry.get("matrix_family", "unknown")),
-                "status": status,
-                "template_kind": _resolve_primary_template_kind(entry),
-                "requires_primary_data": bool(entry.get("requires_primary_data", False)),
-                "target_modules": [str(item) for item in entry.get("target_modules", []) or []],
-                "encoding_status": encoding_status,
-                "runtime_artifacts": runtime_artifacts,
-            }
-        )
-    rows.sort(key=lambda row: (row["template_kind"], row["id"]))
-    return rows
+def _normalize_name(name: str) -> str:
+    lowered = str(name).strip().lower().replace("-", "_").replace(" ", "_")
+    return "_".join(part for part in lowered.split("_") if part)
 
 
 def _resolve_protein_type(matrix_family: str) -> str:
@@ -222,14 +80,14 @@ def _suggest_retention_section(entry: Mapping[str, Any]) -> str:
 
 def _build_template_for_entry(entry: Mapping[str, Any]) -> Dict[str, Any]:
     entry_id = str(entry.get("id", "unknown"))
-    template_kind = _resolve_primary_template_kind(entry)
+    template_kind = normalized_primary_template_kind(entry)
     key_values = dict(entry.get("key_values", {}))
     protein_type = _resolve_protein_type(str(entry.get("matrix_family", "unknown")))
     base_template = {
         "entry_id": entry_id,
         "template_kind": template_kind,
         "source_payload_role": str(entry.get("payload_role", "unknown")),
-        "target_payload_types": _infer_target_payload_types(entry),
+        "target_payload_types": infer_target_payload_types(entry),
         "chemistry_family": str(entry.get("chemistry_family", "")),
         "slr_family_source": str(entry.get("slr_family_source", "")),
         "matrix_family": str(entry.get("matrix_family", "unknown")),
@@ -322,9 +180,13 @@ def _build_template_for_entry(entry: Mapping[str, Any]) -> Dict[str, Any]:
 
 
 def build_runtime_templates(root: Path = ROOT) -> List[Dict[str, Any]]:
-    intake = load_optional_json_mapping(root / _to_repo_relative(INTAKE_REGISTRY_PATH, ROOT))
+    intake = _load_json(root / _to_repo_relative(INTAKE_REGISTRY_PATH, ROOT))
     templates: List[Dict[str, Any]] = []
-    ready_rows = {row["id"]: row for row in _ready_reference_rows(root)}
+    ready_rows = {
+        row["id"]: row
+        for row in build_intake_reference_rows(root)
+        if row.get("backlog_queue") in {"ready_runtime", "ready_benchmark"}
+    }
     for entry in intake.get("eligible_references", []):
         entry_id = str(entry.get("id", "unknown"))
         if entry_id not in ready_rows:
@@ -337,7 +199,7 @@ def build_runtime_templates(root: Path = ROOT) -> List[Dict[str, Any]]:
 
 
 def build_payload_queue_review(root: Path = ROOT) -> Dict[str, Any]:
-    ready_rows = _ready_reference_rows(root)
+    ready_rows = build_intake_reference_rows(root)
     queue_by_payload_type: Dict[str, int] = {}
     queue_by_chemistry_family: Dict[str, Dict[str, int]] = {}
     for row in ready_rows:
@@ -549,15 +411,30 @@ def build_matrix_prior_review() -> List[Dict[str, Any]]:
 
 
 def build_literature_gap_review(root: Path = ROOT) -> Dict[str, List[Dict[str, Any]]]:
-    intake = load_optional_json_mapping(root / _to_repo_relative(INTAKE_REGISTRY_PATH, ROOT))
-    process_gaps = load_optional_json_mapping(root / _to_repo_relative(PROCESS_GAP_REGISTRY_PATH, ROOT))
+    intake = _load_json(root / _to_repo_relative(INTAKE_REGISTRY_PATH, ROOT))
+    process_gaps = _load_json(root / _to_repo_relative(PROCESS_GAP_REGISTRY_PATH, ROOT))
     intake_rows = []
     for entry in intake.get("structural_gaps", []):
+        near_miss_candidates = []
+        for item in entry.get("near_miss_candidates", []) or []:
+            if not isinstance(item, Mapping):
+                continue
+            near_miss_candidates.append(
+                {
+                    "entry_id": str(item.get("entry_id", "unknown")),
+                    "reason": str(item.get("reason", "")),
+                }
+            )
         intake_rows.append(
             {
                 "gap_id": str(entry.get("id", "unknown")),
                 "priority": str(entry.get("priority", "unknown")),
                 "requires_primary_data": bool(entry.get("requires_primary_data", True)),
+                "closure_outcome": str(entry.get("closure_outcome", "unknown")),
+                "evidence_state": str(entry.get("evidence_state", "unknown")),
+                "triage_decision": str(entry.get("triage_decision", "")),
+                "benchmark_contract_missing": [str(item) for item in entry.get("benchmark_contract_missing", []) or []],
+                "near_miss_candidates": near_miss_candidates,
                 "why": str(entry.get("why", "")),
             }
         )
@@ -579,8 +456,9 @@ def build_literature_gap_review(root: Path = ROOT) -> Dict[str, List[Dict[str, A
 
 
 def build_literature_learning_loop_payload(root: Path = ROOT) -> Dict[str, Any]:
-    ready_rows = _ready_reference_rows(root)
+    ready_rows = build_intake_reference_rows(root)
     templates = build_runtime_templates(root)
+    backlog_payload = build_literature_backlog_artifact(root)
     prior_review = build_matrix_prior_review()
     gap_review = build_literature_gap_review(root)
     family_payload_coverage = build_family_payload_coverage_artifact()
@@ -592,6 +470,7 @@ def build_literature_learning_loop_payload(root: Path = ROOT) -> Dict[str, Any]:
         "source": _to_repo_relative(INTAKE_REGISTRY_PATH, root),
         "ready_reference_rows": ready_rows,
         "runtime_templates": templates,
+        "literature_backlog": backlog_payload,
         "matrix_prior_review": prior_review,
         "family_payload_coverage": family_payload_coverage,
         "payload_queue_review": payload_queue_review,
@@ -606,7 +485,15 @@ def build_literature_learning_loop_payload(root: Path = ROOT) -> Dict[str, Any]:
             "families_with_primary_payload_support": int(family_payload_coverage.get("summary", {}).get("families_with_primary_payload_support", 0)),
             "payload_type_queue": dict(payload_queue_review.get("queue_by_payload_type", {})),
             "selected_s11_c_family": (s11_c_family_promotion_queue.get("selected_family") or {}).get("family_id"),
+            "ready_runtime_backlog_count": int(backlog_payload.get("summary", {}).get("ready_runtime_count", 0)),
+            "ready_benchmark_backlog_count": int(backlog_payload.get("summary", {}).get("ready_benchmark_count", 0)),
+            "queue_conflict_count": int(backlog_payload.get("summary", {}).get("queue_conflict_count", 0)),
             "intake_structural_gap_count": len(gap_review["intake_structural_gap_review"]),
+            "wet_lab_only_intake_gap_count": sum(
+                1
+                for row in gap_review["intake_structural_gap_review"]
+                if str(row.get("closure_outcome", "")) == "wet_lab_only"
+            ),
             "process_gap_count": len(gap_review["process_gap_review"]),
         },
     }
@@ -618,8 +505,8 @@ def render_literature_learning_loop_markdown(payload: Mapping[str, Any]) -> str:
         "",
         "## Ready References",
         "",
-        "| ID | Kind | Chemistry Family | Source Payload Role | Target Payload Types | Matrix Family | Template Kind | Encoding Status | Runtime Artifacts |",
-        "| --- | --- | --- | --- | --- | --- | --- | --- | --- |",
+        "| ID | Kind | Chemistry Family | Source Payload Role | Target Payload Types | Matrix Family | Triage | Template Kind | Encoding Status | Runtime Present | Runtime Artifacts |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
     ]
     for row in payload.get("ready_reference_rows", []):
         artifact_labels = ", ".join(
@@ -627,7 +514,7 @@ def render_literature_learning_loop_markdown(payload: Mapping[str, Any]) -> str:
             for item in row.get("runtime_artifacts", [])
         ) or "none"
         lines.append(
-            f"| {row['id']} | {row['kind']} | {row['chemistry_family']} | {row['source_payload_role']} | {', '.join(row.get('target_payload_types', [])) or 'none'} | {row['matrix_family']} | {row['template_kind']} | {row['encoding_status']} | {artifact_labels} |"
+            f"| {row['id']} | {row['kind']} | {row['chemistry_family']} | {row['source_payload_role']} | {', '.join(row.get('target_payload_types', [])) or 'none'} | {row['matrix_family']} | {row.get('triage_status', row.get('legacy_status', 'unknown'))} | {row['template_kind']} | {row['encoding_status']} | {row.get('runtime_artifacts_present', False)} | {artifact_labels} |"
         )
 
     lines.extend([
@@ -691,9 +578,23 @@ def render_literature_learning_loop_markdown(payload: Mapping[str, Any]) -> str:
         "",
         "## Structural Gaps",
         "",
+        "### Intake Structural Gaps",
+        "",
+        "| Gap | Priority | Outcome | Evidence | Near Misses | Missing Contract |",
+        "| --- | --- | --- | --- | --- | --- |",
     ])
     for row in payload.get("intake_structural_gap_review", []):
-        lines.append(f"- intake gap {row['gap_id']}: primary_data={row['requires_primary_data']} priority={row['priority']}")
+        near_misses = ", ".join(item.get("entry_id", "unknown") for item in row.get("near_miss_candidates", [])) or "none"
+        missing_contract = ", ".join(row.get("benchmark_contract_missing", [])[:3]) or "none"
+        lines.append(
+            f"| {row['gap_id']} | {row['priority']} | {row.get('closure_outcome', 'unknown')} | {row.get('evidence_state', 'unknown')} | {near_misses} | {missing_contract} |"
+        )
+
+    lines.extend([
+        "",
+        "### Process Gaps",
+        "",
+    ])
     for row in payload.get("process_gap_review", []):
         lines.append(f"- process gap {row['gap_id']}: wet_lab_requirement={row['wet_lab_requirement']}")
 

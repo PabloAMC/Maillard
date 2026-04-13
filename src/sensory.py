@@ -136,7 +136,8 @@ class SensoryPredictor:
                         denaturation_state: float = 0.5,
                         temp_c: Optional[float] = None,
                         fat_fraction: float = 0.0,
-                        protein_fraction: float = 0.0) -> Dict[str, Tuple[float, float]]:
+                        protein_fraction: float = 0.0,
+                        extrusion_process: Optional[Dict[str, object]] = None) -> Dict[str, Tuple[float, float]]:
         """
         Calculate perceived intensity for each compound using Stevens' Power Law.
         Returns {name: (intensity, intensity_uncertainty)}
@@ -159,6 +160,7 @@ class SensoryPredictor:
                 protein_fraction,
                 protein_type=protein_type,
                 denaturation_state=denaturation_state,
+                extrusion_process=extrusion_process,
             )
         else:
             effective_concs = concentration_dict_ppb
@@ -295,7 +297,8 @@ class SensoryPredictor:
                        protein_type: str = "free",
                        temp_c: Optional[float] = None,
                        fat_fraction: float = 0.0,
-                       protein_fraction: float = 0.0) -> Dict[str, Tuple[float, float]]:
+                       protein_fraction: float = 0.0,
+                       extrusion_process: Optional[Dict[str, object]] = None) -> Dict[str, Tuple[float, float]]:
         """
         High-level entry for radar categories.
         """
@@ -304,7 +307,8 @@ class SensoryPredictor:
             protein_type=protein_type,
             temp_c=temp_c, 
             fat_fraction=fat_fraction, 
-            protein_fraction=protein_fraction
+            protein_fraction=protein_fraction,
+            extrusion_process=extrusion_process,
         )
         return self.get_radar_data_from_intensities(compound_intensities)
 

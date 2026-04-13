@@ -1,16 +1,21 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 from typing import Any, Dict, Mapping, Optional
 
-from src.artifact_io import load_json_mapping, repo_root, resolve_optional_path
+
+def _repo_root() -> Path:
+    return Path(__file__).resolve().parents[1]
 
 
-DEFAULT_CHEMISTRY_FAMILY_SCOPE_REGISTRY = repo_root() / "data" / "lit" / "chemistry_family_scope_registry.json"
+DEFAULT_CHEMISTRY_FAMILY_SCOPE_REGISTRY = _repo_root() / "data" / "lit" / "chemistry_family_scope_registry.json"
 
 
 def load_chemistry_family_scope_registry(file_path: Optional[Path | str] = None) -> Dict[str, Any]:
-    return load_json_mapping(resolve_optional_path(file_path, DEFAULT_CHEMISTRY_FAMILY_SCOPE_REGISTRY))
+    path = Path(file_path) if file_path is not None else DEFAULT_CHEMISTRY_FAMILY_SCOPE_REGISTRY
+    with open(path, "r", encoding="utf-8") as handle:
+        return json.load(handle)
 
 
 def build_chemistry_family_scope_artifact(file_path: Optional[Path | str] = None) -> Dict[str, Any]:

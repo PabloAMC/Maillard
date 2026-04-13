@@ -30,3 +30,20 @@ def test_family_validation_overview_tracks_quantitative_and_gap_families():
     assert "Family Validation Overview" in markdown
     assert "compound-level quantitative parity" in markdown
     assert "| 01 |" in markdown
+
+
+def test_family_validation_overview_tracks_integrated_family_runtime_support_and_family_12_benchmarks():
+    payload = build_family_validation_overview_artifact([
+        ROOT / "data" / "benchmarks" / "acrylamide_spi_extrusion_130C_ACSRef3.json",
+        ROOT / "data" / "benchmarks" / "cml_cel_commercial_pbma_Foods2023.json",
+        ROOT / "data" / "benchmarks" / "furosine_extrusion_crossover_140C_RamirezJimenez2000.json",
+    ])
+
+    assert payload["summary"]["integrated_family_count"] >= 14
+    by_slr = {row["slr_family"]: row for row in payload["families"]}
+
+    assert by_slr["11"]["has_runtime_support"] is True
+    assert by_slr["12"]["has_runtime_support"] is True
+    assert by_slr["13"]["has_runtime_support"] is True
+    assert by_slr["14"]["has_runtime_support"] is True
+    assert by_slr["12"]["benchmark_count"] >= 3

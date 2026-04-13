@@ -12,6 +12,7 @@ Thermodynamics incorporate Grimme quasi-harmonic corrections.
 import os
 import tempfile
 import numpy as np
+import re
 from dataclasses import dataclass
 from functools import lru_cache
 from typing import Dict, List, Optional, Any, Tuple
@@ -31,6 +32,29 @@ from .thermo import QuasiHarmonicCorrector
 from .solvation import SolvationEngine
 from .diffusion_ts import DiffusionTSEngine
 
+
+def _normalize_reaction_family(value: Any) -> str:
+    if isinstance(value, str):
+        return value
+    if isinstance(value, (list, tuple, set)):
+        items = [str(item) for item in value if str(item).strip()]
+        if not items:
+            return "unknown"
+        if len(items) == 1:
+            return items[0]
+        return ", ".join(items)
+    if value is None:
+        return "unknown"
+    return str(value)
+
+
+def _normalize_reaction_side(value: Any) -> List[str]:
+    if value is None:
+        return []
+    if isinstance(value, (list, tuple, set)):
+        return [str(item) for item in value]
+    return [str(value)]
+
 @dataclass
 class DFTResult:
     method: str
@@ -41,24 +65,49 @@ class DFTResult:
     converged: bool = False
     frequencies_cm1: Optional[List[float]] = None
 
+def _is_xyz_coordinate_line(line: str) -> bool:
+    parts = line.strip().split()
+    if len(parts) != 4:
+        return False
+    if not re.fullmatch(r"[A-Za-z][A-Za-z0-9]*", parts[0]):
+        return False
+    try:
+        float(parts[1])
+        float(parts[2])
+        float(parts[3])
+    except ValueError:
+        return False
+    return True
 
-@dataclass
-class IRCResult:
-    ts_xyz: str
-    path_type: str
-    energies: List[float]
-    backward_endpoint: Optional[str] = None
-    forward_endpoint: Optional[str] = None
-    backward_endpoint_energy: Optional[float] = None
-    forward_endpoint_energy: Optional[float] = None
-    max_energy: Optional[float] = None
-    max_point: Optional[str] = None
+
+def _extract_atom_string(xyz_content: str) -> str:
+    lines = [line.rstrip() for line in xyz_content.strip().splitlines() if line.strip()]
+    if not lines:
+        return ""
+    if lines[0].strip().isdigit():
+        atom_count = int(lines[0].strip())
+        remaining = lines[1:]
+        if remaining and not _is_xyz_coordinate_line(remaining[0]):
+            remaining = remaining[1:]
+        atom_lines = remaining[:atom_count]
+        return "\n".join(atom_lines)
+    return "\n".join(lines)
+
+
+def _molecule_to_xyz(mol: Any, comment: str = "") -> str:
+    coords_angstrom = mol.atom_coords() * nist.BOHR
+    lines = [str(mol.natm), comment]
+    for atom_index in range(mol.natm):
+        symbol = mol.atom_symbol(atom_index)
+        x_coord, y_coord, z_coord = coords_angstrom[atom_index]
+        lines.append(f"{symbol:<2} {x_coord: .12f} {y_coord: .12f} {z_coord: .12f}")
+    return "\n".join(lines) + "\n"
 
 class DFTRefiner:
     """Wrapper for running the tiered DFT composite workflow."""
-    
-    def __init__(self, solvent_name: Optional[str] = 'water', temp_k: float = 423.15, 
-                 use_explicit_solvent: bool = False, n_water: int = 3, 
+
+    def __init__(self, solvent_name: Optional[str] = 'water', temp_k: float = 423.15,
+                 use_explicit_solvent: bool = False, n_water: int = 3,
                  geometry_backend: str = 'pyscf', db_path: Optional[str] = None):
         self.solvent_name = solvent_name
         self.temp_k = temp_k # Default 150 C
@@ -66,71 +115,62 @@ class DFTRefiner:
         self.n_water = n_water
         self.geometry_backend = geometry_backend.lower()
         self.db_path = db_path
-        
-        # Phase 16: Initialize Results Database
+
         if self.db_path:
             from .results_db import ResultsDB
             self.db = ResultsDB(db_path=self.db_path)
         else:
             self.db = None
-        
-        # Phase 9: Initialize Solvation Engine with CREST/QCG discovery
+
         self.solvation_engine = SolvationEngine()
-        
-        # Phase 10: Initialize MLPOptimizer if requested
+
         if self.geometry_backend == 'mace':
             try:
                 from .mlp_optimizer import MLPOptimizer
-                self.mlp_optimizer = MLPOptimizer(
-                    model_name="small",
-                    model_family="mace_mp",
-                    backend_locator="builtin:small",
-                )
+                self.mlp_optimizer = MLPOptimizer()
             except ImportError:
                 logger.info("WARNING: ML properties requested but not available. Falling back to pyscf.")
                 self.geometry_backend = 'pyscf'
         else:
             self.mlp_optimizer = None
-        
-        # Phase 11: Initialize TSOptimizer
+
+        # Lightweight MLP for DFT starting-point pre-relaxation
+        self._prerelax_mlp = None
+        if self.geometry_backend != 'mace':
+            try:
+                from .mlp_optimizer import MLPOptimizer
+                self._prerelax_mlp = MLPOptimizer(model_name="small")
+            except (ImportError, Exception):
+                pass
+
         try:
             from .ts_optimizer import TSOptimizer
             self.ts_optimizer = TSOptimizer()
         except Exception:
             self.ts_optimizer = None
-            
-        # Phase 14: Initialize Diffusion TS Engine
+
         self.diffusion_engine = DiffusionTSEngine()
-        
-        # Phase B: Initialize MLP Barrier (MACE-OFF24)
+
         try:
             from .mlp_barrier import MLPBarrier
             self.mlp_barrier = MLPBarrier()
         except ImportError:
             self.mlp_barrier = None
-        
-        # The tiered methods defined in the plan
+
         self.opt_method = 'r2SCAN'
-        self.opt_basis = 'def2-svp' # Close approximation to -3c base
-        
+        self.opt_basis = 'def2-svp'
         self.refinement_method = 'wB97M-V'
         self.refinement_basis = 'def2-tzvp'
-        
         self.verif_method = 'revDSD-PBEP86'
         self.verif_basis = 'def2-tzvp'
-        
-        # [PERFORMANCE] Enable multithreading using available CPU cores
+
         n_threads = os.cpu_count() or 1
         os.environ["OMP_NUM_THREADS"] = str(n_threads)
-        
+
     def _setup_mol(self, xyz_content: str, charge: int = 0, spin: int = 0, basis: str = 'def2-svp') -> Any:
         """Initialize PySCF GTO Mole object from XYZ."""
-        lines = xyz_content.strip().split('\n')
-        if len(lines) > 2 and lines[0].strip().isdigit():
-            atom_string = '\n'.join(lines[2:])
-        else:
-            atom_string = xyz_content
-            
+        atom_string = _extract_atom_string(xyz_content)
+
         mol = gto.M(
             atom=atom_string,
             basis=basis,
@@ -140,7 +180,30 @@ class DFTRefiner:
         )
         return mol
 
-    def _build_mf(self, mol: Any, xc_method: str = 'r2SCAN', use_solvent: bool = True, conv_tol: float = 1e-7):
+    def _mlp_prerelax(self, xyz_content: str) -> str:
+        """Quick MLP geometry pre-relaxation to improve the DFT starting point."""
+        if self._prerelax_mlp is None:
+            return xyz_content
+        try:
+            logger.info("    Running MACE pre-relaxation...")
+            relaxed = self._prerelax_mlp.optimize_geometry(
+                xyz_content, fmax=0.1, max_steps=200, drift_threshold=1.5
+            )
+            logger.info("    MACE pre-relaxation complete.")
+            return relaxed
+        except Exception as exc:
+            logger.info(f"    WARNING: MACE pre-relaxation failed ({exc}). Using original geometry.")
+            return xyz_content
+
+    def _build_mf(
+        self,
+        mol: Any,
+        xc_method: str = 'r2SCAN',
+        use_solvent: bool = True,
+        conv_tol: float = 1e-7,
+        harden_scf: bool = False,
+        use_soscf: bool = False,
+    ):
         """Build the Mean-Field object with specified XC and implicit solvent."""
         from pyscf import scf, dft
         
@@ -167,15 +230,215 @@ class DFTRefiner:
             # Failsafe: ensure no solvent is attached if use_solvent is False
             delattr(mf, 'with_solvent')
                 
-        # Enhanced convergence strategies for transition states
         mf.conv_tol = conv_tol
-        mf.max_cycle = 100
+        mf.max_cycle = 200
         
         # [SCRATCH MANAGEMENT] Prevent PySCF from creating .chk files in the 
         # current working directory, which clutters the workspace.
         mf.chkfile = None
+        if harden_scf:
+            if hasattr(mf, 'level_shift'):
+                mf.level_shift = 0.5
+            if hasattr(mf, 'damp'):
+                mf.damp = 0.2
+            if hasattr(mf, 'diis_space'):
+                mf.diis_space = 12
+            if hasattr(mf, 'direct_scf_tol'):
+                mf.direct_scf_tol = 1e-13
+            mf.init_guess = 'atom'
+
+        if use_soscf:
+            mf = mf.newton()
         
         return mf
+
+    @staticmethod
+    def _is_scf_gradient_failure(exc: Exception) -> bool:
+        text = str(exc).lower()
+        markers = (
+            'nuclear gradients',
+            'scf not converged',
+            'not converged',
+            'rks_scanner',
+        )
+        return any(marker in text for marker in markers)
+
+    def _optimize_with_geometric_kernel(
+        self,
+        mf: Any,
+        *,
+        max_steps: int,
+        is_ts_fallback: bool,
+        eff_use_explicit: bool,
+        n_atoms_solute: int,
+    ) -> Tuple[bool, Any]:
+        with tempfile.TemporaryDirectory() as td:
+            pwd = os.getcwd()
+            try:
+                os.chdir(td)
+                geome_kwargs = {'maxsteps': max_steps}
+                if is_ts_fallback:
+                    geome_kwargs['transition'] = True
+
+                if eff_use_explicit and is_ts_fallback:
+                    logger.info("    Pre-relaxing solvent molecules around the frozen core...")
+                    with open("constraints.txt", "w") as f:
+                        f.write("$freeze\n")
+                        f.write(f"xyz 1-{n_atoms_solute}\n")
+
+                    pre_relax_kwargs = {'maxsteps': 50, 'constraints': "constraints.txt"}
+                    conv, mol_opt = geometric_solver.kernel(mf, **pre_relax_kwargs)
+                else:
+                    conv, mol_opt = geometric_solver.kernel(mf, **geome_kwargs)
+            finally:
+                os.chdir(pwd)
+
+        return conv, mol_opt
+
+    def _preoptimize_seed_xyz(self, xyz_content: str, charge: int, spin: int, max_steps: int) -> str:
+        logger.info("    Retrying from a cheap HF/sto-3g pre-optimization seed...")
+        preopt_mol = self._setup_mol(xyz_content, charge, spin, basis='sto-3g')
+        preopt_mf = self._build_mf(
+            preopt_mol,
+            xc_method='hf',
+            use_solvent=False,
+            conv_tol=1e-5,
+            harden_scf=True,
+        )
+        conv, mol_opt = self._optimize_with_geometric_kernel(
+            preopt_mf,
+            max_steps=min(100, max_steps),
+            is_ts_fallback=False,
+            eff_use_explicit=False,
+            n_atoms_solute=0,
+        )
+        if not conv:
+            raise RuntimeError("Cheap pre-optimization failed to converge.")
+        return _molecule_to_xyz(mol_opt, comment="robust preoptimized geometry")
+
+    def _optimize_with_pyscf_backend(
+        self,
+        xyz_content: str,
+        charge: int,
+        spin: int,
+        is_ts: bool,
+        max_steps: int,
+        eff_use_explicit: bool,
+        n_atoms_solute: int,
+        *,
+        harden_scf: bool = False,
+        use_solvent_optimization: bool = False,
+        use_soscf: bool = False,
+    ) -> Tuple[bool, Any, str]:
+        mol = self._setup_mol(xyz_content, charge, spin, basis=self.opt_basis)
+        mf = self._build_mf(
+            mol,
+            xc_method=self.opt_method,
+            use_solvent=use_solvent_optimization,
+            conv_tol=1e-6,
+            harden_scf=harden_scf,
+            use_soscf=use_soscf,
+        )
+
+        conv = False
+        if is_ts and self.ts_optimizer:
+            logger.info(">>> [Phase 11] Running Sella eigenvector-following TS search...")
+            try:
+                from ase import Atoms as ASEAtoms
+                from ase.calculators.calculator import Calculator, all_changes
+                from pyscf.data import nist as pyscf_nist
+
+                class BuiltinPySCFCalc(Calculator):
+                    implemented_properties = ['energy', 'forces', 'hessian']
+
+                    def __init__(self, mol, mf_class, xc):
+                        super().__init__()
+                        self.mol = mol
+                        self.mf_class = mf_class
+                        self.xc = xc
+
+                    def calculate(self, atoms=None, properties=['energy'], system_changes=all_changes):
+                        super().calculate(atoms, properties, system_changes)
+                        self.mol.set_geom_(atoms.positions / pyscf_nist.BOHR, unit='Bohr')
+                        mf = self.mf_class(self.mol)
+                        if hasattr(mf, 'xc'):
+                            mf.xc = self.xc
+
+                        mf.kernel()
+                        self.results['energy'] = float(mf.e_tot) * pyscf_nist.HARTREE2EV
+
+                        if 'forces' in properties:
+                            g = mf.nuc_grad_method().kernel()
+                            self.results['forces'] = -g * pyscf_nist.HARTREE2EV / pyscf_nist.BOHR
+
+                        if 'hessian' in properties:
+                            h_obj = mf.Hessian()
+                            h = h_obj.kernel()
+                            natm = self.mol.natm
+                            h_reshaped = h.transpose(0, 2, 1, 3).reshape(3 * natm, 3 * natm)
+                            self.results['hessian'] = h_reshaped * pyscf_nist.HARTREE2EV / (pyscf_nist.BOHR**2)
+
+                    def get_hessian(self, atoms):
+                        self.calculate(atoms, properties=['hessian'])
+                        return self.results['hessian']
+
+                coords_bohr = mol.atom_coords()
+                symbols = [mol.atom_symbol(i) for i in range(mol.natm)]
+                positions_ang = coords_bohr * pyscf_nist.BOHR
+                ase_atoms = ASEAtoms(symbols=symbols, positions=positions_ang)
+
+                calc = BuiltinPySCFCalc(mol=mol, mf_class=type(mf), xc=getattr(mf, 'xc', 'hf'))
+                ase_atoms.calc = calc
+
+                atoms = self.ts_optimizer.find_ts(ase_atoms, calc)
+                if self.ts_optimizer.is_converged(atoms):
+                    from ase.io import write as ase_write
+                    import io
+                    with io.StringIO() as f_xyz:
+                        ase_write(f_xyz, atoms, format='xyz')
+                        opt_xyz = f_xyz.getvalue()
+                    mol_opt = self._setup_mol(opt_xyz, charge, spin, basis=self.opt_basis)
+                    conv = True
+                else:
+                    logger.info("    WARNING: Sella failed to converge. Falling back to geomeTRIC...")
+            except (ImportError, AttributeError, Exception) as e:
+                logger.info(f"    WARNING: Sella/ASE bridge failed ({type(e).__name__}: {e}). Falling back to geomeTRIC...")
+
+            is_ts_fallback = is_ts and not conv
+        else:
+            is_ts_fallback = is_ts
+
+        if not is_ts or (is_ts and not self.ts_optimizer) or (is_ts and not conv):
+            conv, mol_opt = self._optimize_with_geometric_kernel(
+                mf,
+                max_steps=max_steps,
+                is_ts_fallback=is_ts_fallback,
+                eff_use_explicit=eff_use_explicit,
+                n_atoms_solute=n_atoms_solute,
+            )
+
+        opt_xyz = _molecule_to_xyz(mol_opt, comment="optimized geometry")
+        return conv, mol_opt, opt_xyz
+
+    def _run_solvent_scf_with_retry(self, mol_opt: Any, charge: int, spin: int, phase_label: str) -> Any:
+        mf_opt = self._build_mf(mol_opt, xc_method=self.opt_method, use_solvent=True)
+        mf_opt.scf()
+        if mf_opt.converged:
+            return mf_opt
+
+        logger.info(f"    WARNING: {phase_label} solvent SCF failed. Retrying with SOSCF...")
+        mol_retry = self._setup_mol(_molecule_to_xyz(mol_opt, comment=f"{phase_label} retry geometry"), charge, spin, basis=self.opt_basis)
+        mf_opt = self._build_mf(
+            mol_retry,
+            xc_method=self.opt_method,
+            use_solvent=True,
+            use_soscf=True,
+        )
+        mf_opt.scf()
+        if not mf_opt.converged:
+            raise RuntimeError(f"{phase_label} solvent SCF did not converge on the optimized geometry.")
+
+        return mf_opt
 
     def single_point(self, xyz_content: str, xc_method: str = 'wB97M-V', basis: str = 'def2-tzvp', charge: int = 0, spin: int = 0) -> float:
         """Run a high-level single-point energy calculation."""
@@ -236,6 +499,7 @@ class DFTRefiner:
 
     def optimize_geometry(self, xyz_content: str, charge: int=0, spin: int=0, is_ts: bool=False, max_steps: int=200, use_explicit_solvent: Optional[bool] = None, n_water: Optional[int] = None) -> DFTResult:
         """Run geometry/TS optimization using the r2SCAN-3c base method and return frequencies."""
+        phase_label = "TS" if is_ts else "reactant"
         
         # Determine effective solvation settings
         eff_use_explicit = use_explicit_solvent if use_explicit_solvent is not None else self.use_explicit_solvent
@@ -266,6 +530,10 @@ class DFTRefiner:
                 if diffusion_ts_xyz:
                     xyz_content = diffusion_ts_xyz
 
+        # Phase A: MLP pre-relaxation for a better DFT starting point
+        if not is_ts:
+            xyz_content = self._mlp_prerelax(xyz_content)
+
         # Phase 10: Backend Selection for Geometry Optimization
         if self.geometry_backend == 'mace':
             logger.info(f">>> [Phase 10] Running MACE geometric optimization (is_ts={is_ts})...")
@@ -273,119 +541,56 @@ class DFTRefiner:
             if is_ts:
                 opt_xyz = self.mlp_optimizer.optimize_ts(xyz_content, max_steps=max_steps)
             else:
-                opt_xyz = self.mlp_optimizer.optimize_geometry(
-                    xyz_content,
-                    max_steps=max_steps,
-                    bounded=True,
-                )
+                opt_xyz = self.mlp_optimizer.optimize_geometry(xyz_content, max_steps=max_steps)
                 
             mol_opt = self._setup_mol(opt_xyz, charge, spin, basis=self.opt_basis)
             conv = True # Assume converged if MLP didn't raise
             
         else:
-            # Original PySCF / geomeTRIC backend
-            mol = self._setup_mol(xyz_content, charge, spin, basis=self.opt_basis)
-            mf = self._build_mf(mol, xc_method=self.opt_method, use_solvent=False, conv_tol=1e-6)
-            
-            # Phase 11: Specialized TS search via Sella
-            conv = False  # Initialize before potential Sella/geomeTRIC paths
-            if is_ts and self.ts_optimizer:
-                logger.info(">>> [Phase 11] Running Sella eigenvector-following TS search...")
-                try:
-                    # PySCF↔ASE bridge: convert Mole to ASE Atoms manually
-                    from ase import Atoms as ASEAtoms
-                    from ase.calculators.calculator import Calculator, all_changes
-                    from pyscf.data import nist as pyscf_nist
-                    
-                    class BuiltinPySCFCalc(Calculator):
-                        """Minimal ASE Calculator for PySCF to avoid ase-pyscf dependency gaps."""
-                        implemented_properties = ['energy', 'forces', 'hessian']
-                        def __init__(self, mol, mf_class, xc):
-                            super().__init__()
-                            self.mol = mol
-                            self.mf_class = mf_class
-                            self.xc = xc
-                        def calculate(self, atoms=None, properties=['energy'], system_changes=all_changes):
-                            super().calculate(atoms, properties, system_changes)
-                            # Update molecular coordinates
-                            self.mol.set_geom_(atoms.positions / pyscf_nist.BOHR, unit='Bohr')
-                            mf = self.mf_class(self.mol)
-                            if hasattr(mf, 'xc'): 
-                                mf.xc = self.xc
-                            
-                            mf.kernel()
-                            self.results['energy'] = float(mf.e_tot) * pyscf_nist.HARTREE2EV
-                            
-                            # Forces = -Gradient
-                            if 'forces' in properties:
-                                g = mf.nuc_grad_method().kernel()
-                                self.results['forces'] = -g * pyscf_nist.HARTREE2EV / pyscf_nist.BOHR
-                                
-                            if 'hessian' in properties:
-                                h_obj = mf.Hessian()
-                                h = h_obj.kernel()
-                                # PySCF returns (natm, natm, 3, 3). Sella/ASE expects (3*natm, 3*natm)
-                                natm = self.mol.natm
-                                h_reshaped = h.transpose(0, 2, 1, 3).reshape(3*natm, 3*natm)
-                                self.results['hessian'] = h_reshaped * pyscf_nist.HARTREE2EV / (pyscf_nist.BOHR**2)
-                        
-                        def get_hessian(self, atoms):
-                            self.calculate(atoms, properties=['hessian'])
-                            return self.results['hessian']
+            # PySCF / geomeTRIC backend
+            try:
+                conv, mol_opt, opt_xyz = self._optimize_with_pyscf_backend(
+                    xyz_content,
+                    charge,
+                    spin,
+                    is_ts,
+                    max_steps,
+                    eff_use_explicit,
+                    n_atoms_solute,
+                )
+            except Exception as exc:
+                if not self._is_scf_gradient_failure(exc):
+                    raise
 
-                    coords_bohr = mol.atom_coords()
-                    symbols = [mol.atom_symbol(i) for i in range(mol.natm)]
-                    positions_ang = coords_bohr * pyscf_nist.BOHR
-                    ase_atoms = ASEAtoms(symbols=symbols, positions=positions_ang)
-                    
-                    calc = BuiltinPySCFCalc(mol=mol, mf_class=type(mf), xc=getattr(mf, 'xc', 'hf'))
-                    ase_atoms.calc = calc
-                    
-                    atoms = self.ts_optimizer.find_ts(ase_atoms, calc)
-                    if self.ts_optimizer.is_converged(atoms):
-                        # Convert ASE Atoms back to XYZ string
-                        from ase.io import write as ase_write
-                        import io # Added import for io
-                        with io.StringIO() as f_xyz:
-                            ase_write(f_xyz, atoms, format='xyz')
-                            opt_xyz = f_xyz.getvalue()
-                        mol_opt = self._setup_mol(opt_xyz, charge, spin, basis=self.opt_basis)
-                        conv = True
-                    else:
-                        logger.info("    WARNING: Sella failed to converge. Falling back to geomeTRIC...")
-                except (ImportError, AttributeError, Exception) as e:
-                    logger.info(f"    WARNING: Sella/ASE bridge failed ({type(e).__name__}: {e}). Falling back to geomeTRIC...")
-                    
-                is_ts_fallback = is_ts and not conv
-            else:
-                is_ts_fallback = is_ts
-
-            if not is_ts or (is_ts and not self.ts_optimizer) or (is_ts and not conv):
-                # Optimization via geomeTRIC (Standard or Fallback)
-                with tempfile.TemporaryDirectory() as td:
-                    pwd = os.getcwd()
+                logger.info(
+                    f"    WARNING: {phase_label} SCF failed ({exc}). "
+                    "Retrying with SOSCF (second-order SCF)..."
+                )
+                retry_xyz = xyz_content
+                if not is_ts:
                     try:
-                        os.chdir(td)
-                        geome_kwargs = {'maxsteps': max_steps}
-                        if is_ts_fallback:
-                            geome_kwargs['transition'] = True
-                            
-                        if eff_use_explicit and is_ts_fallback:
-                            logger.info("    Pre-relaxing solvent molecules around the frozen core...")
-                            with open("constraints.txt", "w") as f:
-                                f.write("$freeze\n")
-                                f.write(f"xyz 1-{n_atoms_solute}\n")
-                            
-                            pre_relax_kwargs = {'maxsteps': 50, 'constraints': "constraints.txt"}
-                            conv_pre, mol_relaxed = geometric_solver.kernel(mf, **pre_relax_kwargs)
-                            mol_opt = mol_relaxed
-                            conv = conv_pre
-                        else:
-                            conv, mol_opt = geometric_solver.kernel(mf, **geome_kwargs)
-                    finally:
-                        os.chdir(pwd)
-                        
-                opt_xyz = mol_opt.tostring(format='xyz')
+                        retry_xyz = self._preoptimize_seed_xyz(
+                            xyz_content, charge, spin, max_steps
+                        )
+                    except Exception as preopt_exc:
+                        logger.info(
+                            f"    WARNING: Pre-optimization failed ({preopt_exc}). "
+                            "Continuing from original geometry..."
+                        )
+
+                conv, mol_opt, opt_xyz = self._optimize_with_pyscf_backend(
+                    retry_xyz,
+                    charge,
+                    spin,
+                    is_ts,
+                    max_steps,
+                    eff_use_explicit,
+                    n_atoms_solute,
+                    use_soscf=True,
+                    use_solvent_optimization=not is_ts,
+                )
+
+            logger.info(f">>> [Phase 3.3] {phase_label} geometry converged; starting solvent SCF and thermochemistry...")
         
         # The geometric_solver returns the optimized molecule object.
         # It updates mol in-place as well. 
@@ -400,20 +605,20 @@ class DFTRefiner:
         # SOTA-level fix: We check the mf_opt convergence after the scf() call.
         
         # Compute frequencies and solvent energy at the OPTIMIZED vacuum geometry
-        mf_opt = self._build_mf(mol_opt, xc_method=self.opt_method, use_solvent=True)
-        # Check SCF convergence
-        mf_opt.scf()
-        if not mf_opt.converged:
-             logger.info("    WARNING: SCF failed to converge on the optimized geometry.")
-        
+        mf_opt = self._run_solvent_scf_with_retry(mol_opt, charge, spin, phase_label)
+
+        logger.info(f">>> [Phase 3.3] {phase_label} Hessian/frequency analysis in progress...")
         freqs, g_raw, g_qh = self._run_hessian_and_thermo(mf_opt)
-        
+
         # Single-point Refinement
+        logger.info(f">>> [Phase 3.3] {phase_label} high-level single-point refinement in progress...")
         sp_energy = self.single_point(opt_xyz, xc_method=self.refinement_method, basis=self.refinement_basis, charge=charge, spin=spin)
         
         # Calculate final refined Gibbs using SP energy + (G_qh - E_opt) thermal corrections
         thermal_corr_qh = g_qh - mf_opt.e_tot
         refined_gibbs = sp_energy + thermal_corr_qh
+
+        logger.info(f">>> [Phase 3.3] {phase_label} post-processing complete.")
         
         return DFTResult(
             method=f"{self.refinement_method}//{self.opt_method}",
@@ -491,7 +696,7 @@ class DFTRefiner:
                     os.chdir(td)
                     # Use standard optimization (not transition state)
                     opt_mol = geometric_solver.optimize(tmp_mf, maxsteps=100)
-                    endpoints.append(opt_mol.tostring(format='xyz'))
+                    endpoints.append(_molecule_to_xyz(opt_mol, comment=f"irc endpoint {label.lower()}"))
                 finally:
                     os.chdir(pwd)
         
@@ -506,7 +711,7 @@ class DFTRefiner:
         energy = self.single_point(optimized_xyz, xc_method=self.verif_method, basis=self.verif_basis, charge=charge, spin=spin)
         return energy
 
-    def calculate_barrier(self, reactant_xyz: str, ts_xyz: str, charge: int = 0, 
+    def calculate_barrier(self, reactant_xyz: str, ts_xyz: str, charge: int = 0, spin: int = 0,
                           run_irc: bool = False, reaction_meta: Optional[Dict] = None) -> float:
         """
         End-to-end composite calculation of a kinetic barrier in kcal/mol.
@@ -517,32 +722,35 @@ class DFTRefiner:
         """
         # 1. Optimize Reactant
         logger.info(">>> [Phase 3.3] Starting Reactant Optimization...")
-        res_r = self.optimize_geometry(reactant_xyz, charge=charge, is_ts=False)
+        res_r = self.optimize_geometry(reactant_xyz, charge=charge, spin=spin, is_ts=False)
         if not res_r.converged:
             raise RuntimeError("Reactant optimization failed to converge.")
+        logger.info(">>> [Phase 3.3] Reactant refinement complete.")
         
         # 2. Optimize TS
         logger.info(">>> [Phase 3.3] Starting Transition State (TS) Optimization...")
-        res_ts = self.optimize_geometry(ts_xyz, charge=charge, is_ts=True)
+        res_ts = self.optimize_geometry(ts_xyz, charge=charge, spin=spin, is_ts=True)
         if not res_ts.converged:
             raise RuntimeError("Transition State optimization failed to converge.")
+        logger.info(">>> [Phase 3.3] Transition State refinement complete.")
         
         # 3. IRC Validation (Phase 3.4)
         if run_irc:
-            self.generate_irc(res_ts.optimized_xyz, charge=charge)
+            self.generate_irc(res_ts.optimized_xyz, charge=charge, spin=spin)
             
         # 4. Delta G‡
         assert res_ts.quasi_harmonic_gibbs_hartree is not None
         assert res_r.quasi_harmonic_gibbs_hartree is not None
         delta_g_h = res_ts.quasi_harmonic_gibbs_hartree - res_r.quasi_harmonic_gibbs_hartree
         barrier_kcal = delta_g_h * 627.509
+        logger.info(f">>> [Phase 3.3] Barrier evaluation complete: {barrier_kcal:.2f} kcal/mol")
         
         # 5. Log to DB if available
         if self.db and reaction_meta:
             self.db.add_barrier(
-                reactants=reaction_meta.get('reactants', []),
-                products=reaction_meta.get('products', []),
-                family=reaction_meta.get('family', 'unknown'),
+                reactants=_normalize_reaction_side(reaction_meta.get('reactants', [])),
+                products=_normalize_reaction_side(reaction_meta.get('products', [])),
+                family=_normalize_reaction_family(reaction_meta.get('family', 'unknown')),
                 delta_g_kcal=barrier_kcal,
                 method=res_ts.method,
                 basis=self.refinement_basis,
@@ -564,9 +772,9 @@ class DFTRefiner:
         
         if barrier_kcal is not None and self.db and reaction_meta:
             self.db.add_barrier(
-                reactants=reaction_meta.get('reactants', []),
-                products=reaction_meta.get('products', []),
-                family=reaction_meta.get('family', 'unknown'),
+                reactants=_normalize_reaction_side(reaction_meta.get('reactants', [])),
+                products=_normalize_reaction_side(reaction_meta.get('products', [])),
+                family=_normalize_reaction_family(reaction_meta.get('family', 'unknown')),
                 delta_g_kcal=barrier_kcal,
                 method="mace-off",
                 basis="OFF23_medium", # Default model name
@@ -575,77 +783,3 @@ class DFTRefiner:
             )
             
         return barrier_kcal
-
-
-def compute_irc(
-    ts_xyz: str,
-    *,
-    charge: int = 0,
-    spin: int = 0,
-    step_size: float = 0.05,
-    solvent_name: Optional[str] = 'water',
-    temp_k: float = 423.15,
-    geometry_backend: str = 'pyscf',
-    forward: bool = True,
-    backward: bool = True,
-) -> Dict[str, Any]:
-    """
-    Stable IRC API used by benchmark/authority lanes.
-
-    This exposes the existing displacement-plus-optimization implementation in
-    a structured, importable form without requiring callers to know the
-    DFTRefiner class contract.
-    """
-    if not forward and not backward:
-        raise ValueError("At least one IRC direction must be requested")
-
-    refiner = DFTRefiner(
-        solvent_name=solvent_name,
-        temp_k=temp_k,
-        geometry_backend=geometry_backend,
-    )
-    backward_xyz, forward_xyz = refiner.generate_irc(
-        ts_xyz,
-        charge=charge,
-        spin=spin,
-        step_size=step_size,
-    )
-    ts_energy = float(refiner.single_point(ts_xyz, charge=charge, spin=spin))
-
-    backward_energy: Optional[float] = None
-    if backward:
-        backward_energy = float(refiner.single_point(backward_xyz, charge=charge, spin=spin))
-
-    forward_energy: Optional[float] = None
-    if forward:
-        forward_energy = float(refiner.single_point(forward_xyz, charge=charge, spin=spin))
-
-    energies: List[float] = []
-    if backward and backward_energy is not None:
-        energies.append(backward_energy)
-    energies.append(ts_energy)
-    if forward and forward_energy is not None:
-        energies.append(forward_energy)
-
-    result = IRCResult(
-        ts_xyz=ts_xyz,
-        path_type="double_optimization_proxy",
-        energies=energies,
-        backward_endpoint=backward_xyz if backward else None,
-        forward_endpoint=forward_xyz if forward else None,
-        backward_endpoint_energy=backward_energy,
-        forward_endpoint_energy=forward_energy,
-        max_energy=ts_energy,
-        max_point=ts_xyz,
-    )
-    return {
-        "ts_xyz": result.ts_xyz,
-        "path_type": result.path_type,
-        "energies": result.energies,
-        "backward_endpoint": result.backward_endpoint,
-        "forward_endpoint": result.forward_endpoint,
-        "backward_endpoint_energy": result.backward_endpoint_energy,
-        "forward_endpoint_energy": result.forward_endpoint_energy,
-        "max_energy": result.max_energy,
-        "max_point": result.max_point,
-    }

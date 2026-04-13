@@ -14,6 +14,7 @@ from src.benchmark_validation import (
     summarize_benchmarks,
 )
 from src.family_ingestion_plan import load_family_ingestion_plan
+from src.literature_family_registry import build_family_payload_coverage_artifact
 from src.literature_family_registry import resolve_family_descriptor
 from src.matrix_targets import get_compound_panel_entry
 from src.validation_contract import BenchmarkThresholds
@@ -39,6 +40,9 @@ def _base_family_row(plan_row: Dict[str, Any]) -> Dict[str, Any]:
         "execution_paths": defaultdict(int),
         "compound_ratios": [],
         "compound_abs_log10_errors": [],
+        "primary_payload_count": 0,
+        "supporting_payload_count": 0,
+        "has_runtime_support": False,
     }
 
 
@@ -65,8 +69,18 @@ def build_family_validation_overview_artifact(
     thresholds: BenchmarkThresholds = DEFAULT_BENCHMARK_THRESHOLDS,
 ) -> Dict[str, Any]:
     plan = load_family_ingestion_plan()
+    payload_coverage = build_family_payload_coverage_artifact()
+    coverage_by_family = {
+        str(row.get("family_id", "unknown")): dict(row)
+        for row in payload_coverage.get("families", [])
+    }
     family_rows: Dict[str, Dict[str, Any]] = {
-        str(row.get("family_id", "unknown")): _base_family_row(dict(row))
+        str(row.get("family_id", "unknown")): {
+            **_base_family_row(dict(row)),
+            "primary_payload_count": int(coverage_by_family.get(str(row.get("family_id", "unknown")), {}).get("total_primary_payload_count", 0)),
+            "supporting_payload_count": int(coverage_by_family.get(str(row.get("family_id", "unknown")), {}).get("total_supporting_payload_count", 0)),
+            "has_runtime_support": bool(coverage_by_family.get(str(row.get("family_id", "unknown")), {}).get("has_runtime_support", False)),
+        }
         for row in plan.get("families", [])
         if str(row.get("family_id", "")).strip()
     }
@@ -142,6 +156,9 @@ def build_family_validation_overview_artifact(
                 "supported_count": int(row["supported_count"]),
                 "quantitative_point_count": int(row["quantitative_point_count"]),
                 "quantitative_benchmark_count": len(row["quantitative_benchmark_ids"]),
+                "primary_payload_count": int(row["primary_payload_count"]),
+                "supporting_payload_count": int(row["supporting_payload_count"]),
+                "has_runtime_support": bool(row["has_runtime_support"]),
                 "benchmark_ids": sorted(row["benchmark_ids"]),
                 "execution_paths": dict(sorted(row["execution_paths"].items())),
                 "median_compound_ratio": median(row["compound_ratios"]) if row["compound_ratios"] else None,
@@ -152,23 +169,38 @@ def build_family_validation_overview_artifact(
                     else None
                 ),
                 "has_quantitative_parity": bool(row["compound_ratios"]),
+                "integration_status": (
+                    "quantitative_parity"
+                    if row["compound_ratios"]
+                    else "benchmark_linked"
+                    if row["benchmark_count"] > 0
+                    else "runtime_integrated"
+                    if row["has_runtime_support"]
+                    else "not_integrated"
+                ),
             }
         )
 
     quantitative_families = [row for row in rendered_rows if row["has_quantitative_parity"]]
     benchmark_backed_families = [row for row in rendered_rows if row["benchmark_count"] > 0]
+    integrated_families = [row for row in rendered_rows if row["has_runtime_support"]]
 
     return {
         "summary": {
             "family_count": len(rendered_rows),
+            "integrated_family_count": len(integrated_families),
             "benchmark_backed_family_count": len(benchmark_backed_families),
             "quantitative_family_count": len(quantitative_families),
             "quantitative_point_count": len(quantitative_points),
             "families_without_quantitative_parity": [
                 row["chemistry_family"] for row in rendered_rows if not row["has_quantitative_parity"]
             ],
+            "integrated_families_without_quantitative_parity": [
+                row["chemistry_family"] for row in integrated_families if not row["has_quantitative_parity"]
+            ],
         },
         "families": rendered_rows,
+        "integrated_families": integrated_families,
         "quantitative_families": quantitative_families,
         "quantitative_points": quantitative_points,
     }
@@ -182,25 +214,26 @@ def render_family_validation_overview_markdown(payload: Dict[str, Any]) -> str:
         "This artifact answers the product question directly: which chemistry families already have experiment-linked predictive closure, and which remain calibration-only or directional lanes.",
         "",
         f"- Families tracked: {int(summary.get('family_count', 0))}",
+        f"- Families with landed runtime integration: {int(summary.get('integrated_family_count', 0))}",
         f"- Families with benchmark-linked experimental support: {int(summary.get('benchmark_backed_family_count', 0))}",
         f"- Families with compound-level quantitative parity points: {int(summary.get('quantitative_family_count', 0))}",
         f"- Quantitative compound points plotted: {int(summary.get('quantitative_point_count', 0))}",
         "",
         "How to read the PNG:",
         "",
-        "- left: measured vs predicted compound parity, colored by chemistry family and shaped by execution path",
-        "- middle: per-family compound error summary for families that already have quantitative points",
-        "- right: benchmark closure by family, showing where strict-ready or benchmark-linked evidence exists and where it does not",
+        "- single panel: measured vs predicted compound parity, colored by chemistry family and shaped by execution path",
+        "- only families with executable numeric benchmarks and matched measured compounds can appear in this scatter",
+        "- integrated support or upstream lanes without direct measured compounds remain visible in the table below even when they have zero parity points",
         "",
-        "| SLR | Family | Posture | Benchmarks | Strict Ready | Quantitative Points | Median Ratio | Mean |log10 error| |",
-        "| --- | --- | --- | ---: | ---: | ---: | ---: | ---: |",
+        "| SLR | Family | Posture | Integrated | Benchmarks | Strict Ready | Quantitative Points | Median Ratio | Mean |log10 error| |",
+        "| --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: |",
     ]
     for row in payload.get("families", []):
         median_ratio = row.get("median_compound_ratio")
         mean_abs_log10_error = row.get("mean_abs_log10_error")
         lines.append(
-            f"| {row.get('slr_family', '99')} | {row.get('display_name', 'unknown')} | {row.get('strategic_posture', 'unknown')} | {int(row.get('benchmark_count', 0))} | {int(row.get('strict_ready_count', 0))} | {int(row.get('quantitative_point_count', 0))} | {median_ratio:.3f} | {mean_abs_log10_error:.3f} |"
+            f"| {row.get('slr_family', '99')} | {row.get('display_name', 'unknown')} | {row.get('strategic_posture', 'unknown')} | {bool(row.get('has_runtime_support', False))} | {int(row.get('benchmark_count', 0))} | {int(row.get('strict_ready_count', 0))} | {int(row.get('quantitative_point_count', 0))} | {median_ratio:.3f} | {mean_abs_log10_error:.3f} |"
             if median_ratio is not None and mean_abs_log10_error is not None
-            else f"| {row.get('slr_family', '99')} | {row.get('display_name', 'unknown')} | {row.get('strategic_posture', 'unknown')} | {int(row.get('benchmark_count', 0))} | {int(row.get('strict_ready_count', 0))} | {int(row.get('quantitative_point_count', 0))} | - | - |"
+            else f"| {row.get('slr_family', '99')} | {row.get('display_name', 'unknown')} | {row.get('strategic_posture', 'unknown')} | {bool(row.get('has_runtime_support', False))} | {int(row.get('benchmark_count', 0))} | {int(row.get('strict_ready_count', 0))} | {int(row.get('quantitative_point_count', 0))} | - | - |"
         )
     return "\n".join(lines) + "\n"

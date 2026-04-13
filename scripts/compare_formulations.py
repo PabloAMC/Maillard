@@ -11,13 +11,14 @@ import argparse
 from pathlib import Path
 from typing import List
 
+# Add project root to path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from src.pipeline import MaillardPipeline
 from src.conditions import ReactionConditions
 from src.reporting import generate_comparison_report
-from src.usability_reports import DomainOfValidityChecker, build_confidence_package
+from src.usability_reports import prepare_cli_confidence
 
 def main():
     parser = argparse.ArgumentParser(description="Compare multiple Maillard formulations.")
@@ -70,7 +71,6 @@ def main():
     results = designer.evaluate_all(conditions, grid_override=requested_forms)
     results_by_name = {result.name: result for result in results}
     ordered_results = [results_by_name[formulation["name"]] for formulation in requested_forms if formulation["name"] in results_by_name]
-    checker = DomainOfValidityChecker(args.target_tag)
     warnings_list = []
     for formulation in requested_forms:
         result = results_by_name.get(formulation["name"])
@@ -80,19 +80,14 @@ def main():
         for key in ("sugars", "amino_acids", "additives", "lipids"):
             precursor_names.extend(formulation.get(key, []))
         protein_type = formulation.get("protein_type", "free")
-        item_warnings = checker.check(
+        item_warnings = prepare_cli_confidence(
+            result,
+            target_tag=args.target_tag,
             precursor_names=precursor_names,
-            protein_type=protein_type,
+            protein_type=str(protein_type),
             temp_c=float(formulation.get("temp", args.temp)),
             ph=float(formulation.get("ph", args.ph)),
             aw=float(formulation.get("aw", args.aw)),
-            matrix_explainability=result.matrix_explainability,
-        )
-        result.confidence_metadata = build_confidence_package(
-            result,
-            item_warnings,
-            precursor_names=precursor_names,
-            protein_type=protein_type,
             formulation=formulation,
             baseline_conditions=conditions,
             designer=designer,

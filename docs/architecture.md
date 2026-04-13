@@ -61,6 +61,33 @@ For the review surface that should accompany external sharing, see [guides/SCIEN
 
 ## Architecture Layers
 
+```mermaid
+graph TD
+    subgraph "1. Input & Accessibility"
+        A["Precursors (Sugars, AAs, Lipids)"] --> C["Matrix Correction"]
+        B["Process Conditions (pH, T, t, Matrix)"] --> C
+    end
+
+    subgraph "2. Reactive Core"
+        C -->| "Accessible Molarity" | D["SMIRKS Rule Engine"]
+        D -->| "Reaction Network" | E["Thermodynamic Gating (Joback)"]
+        E -->| "Feasible Paths" | F["Cantera ODE Solver"]
+        G["Literature Kinetics"] --> F
+    end
+
+    subgraph "3. Observability Projection"
+        F -->| "Aqueous Moles" | I["Projection Module"]
+        I -->| "Volatilization (Henry's Law)" | J["Headspace Calibration"]
+        I -->| "Surface Adsorption" | K["Matrix Retention"]
+    end
+
+    subgraph "4. Decision Layer"
+        J & K --> L["Validation Surface"]
+        L --> M["Bayesian Optimizer"]
+        M -->| "Formulation Candidate" | A
+    end
+```
+
 The repository uses a layered architecture so benchmark-backed screening, explainability, and future higher-fidelity physics can coexist without pretending they are all equally validated.
 
 ### 1. Reaction Enumeration

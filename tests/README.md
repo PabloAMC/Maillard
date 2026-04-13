@@ -55,12 +55,9 @@ To ensure both rapid development and scientific accuracy, the Maillard test suit
 
 - `@pytest.mark.slow`: Deselect with `pytest -m "not slow"` for fast local iteration.
 - `@pytest.mark.skipif(...)`: Automatically skips tests if an external backend is unavailable or unsupported in the active environment.
-- `@pytest.mark.deterministic_helper_lane`: Pure-Python helper coverage that should stay executable in the default deterministic environment.
-- `@pytest.mark.optional_dft_authority_lane`: Optional DFT/IRC/data-backed authority lane. These tests must be gated by explicit datasets or backend capability, never by unconditional in-body skips.
-- `@pytest.mark.optional_mlp_acceleration_lane`: Optional ML-acceleration lane for MACE or similar backends.
 
 ## Expected Skips In Docker
 
-- `tests/benchmarks/`: Phase 3 authority-lane scaffolds remain intentional skips only when the declared dataset or backend contract is absent. Deterministic helper coverage such as quasi-harmonic correction should remain executable.
+- `tests/benchmarks/`: currently forward-looking Phase 3 placeholders and HPC-scale benchmark scaffolds. These skips are intentional and should not be treated as regressions until the underlying data or implementation exists.
 - Optional QM backend tests: skips are legitimate when they reflect a real capability probe, for example missing or unusable Sella/JAX, missing xTB, or unavailable CREST/QCG.
 - Environment-gated skips should probe the actual backend capability, not hard-code stale paths such as `conda_env/bin/...`.

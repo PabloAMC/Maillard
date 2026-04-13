@@ -1,15 +1,15 @@
 from __future__ import annotations
 
 import json
-import datetime as dt
 from pathlib import Path
 from typing import Any, Dict, Iterable, Mapping, Optional
 
 import yaml
 
-from src.artifact_io import load_json_mapping, resolve_optional_path
 from src.benchmark_validation import (
     DEFAULT_TARGET_TAG,
+    _increment_matrix_support_counts,
+    _init_matrix_support_counts,
     _matrix_compound_support_status,
     _projection_metadata_for_match,
     assess_matrix_benchmark_evidence,
@@ -33,13 +33,17 @@ _PROTEIN_TYPES = {"pea_iso", "soy_iso", "myco", "free"}
 _SUPPORT_RANK = {
     "open_gap": 0,
     "directional_support": 1,
-    "internal_candidate": 2,
-    "quantitative_closed": 3,
+    "internal_reference_candidate": 2,
+    "internal_candidate": 3,
+    "internal_measured_candidate": 3,
+    "quantitative_closed": 4,
 }
 
 
 def load_matrix_experiment_intake_schema(path: Optional[Path | str] = None) -> Dict[str, Any]:
-    return load_json_mapping(resolve_optional_path(path, DEFAULT_SCHEMA_PATH))
+    schema_path = Path(path) if path is not None else DEFAULT_SCHEMA_PATH
+    with open(schema_path, "r", encoding="utf-8") as handle:
+        return json.load(handle)
 
 
 def load_matrix_experiment_intake(path: Path | str) -> Dict[str, Any]:
@@ -106,9 +110,6 @@ def normalize_matrix_experiment_intake(payload: Mapping[str, Any]) -> Dict[str, 
     for field in schema.get("required_provenance_fields", []):
         if field not in provenance:
             raise ValueError(f"Missing provenance field: {field}")
-    for key, value in list(provenance.items()):
-        if isinstance(value, (dt.date, dt.datetime)):
-            provenance[key] = value.isoformat()
     normalized["provenance"] = provenance
 
     normalized["experiment_id"] = str(normalized.get("experiment_id", "matrix_experiment_payload")).strip()
@@ -205,24 +206,6 @@ def build_matrix_experiment_benchmark_payload(payload: Mapping[str, Any]) -> Dic
     }
 
 
-def materialize_matrix_experiment_benchmark(
-    payload_or_path: Mapping[str, Any] | Path | str,
-    *,
-    output_path: Optional[Path | str] = None,
-) -> Dict[str, Any]:
-    if isinstance(payload_or_path, (Path, str)):
-        payload = load_matrix_experiment_intake(payload_or_path)
-    else:
-        payload = dict(payload_or_path)
-
-    benchmark = build_matrix_experiment_benchmark_payload(payload)
-    if output_path is not None:
-        destination = Path(output_path)
-        destination.parent.mkdir(parents=True, exist_ok=True)
-        destination.write_text(json.dumps(benchmark, indent=2), encoding="utf-8")
-    return benchmark
-
-
 def select_aligned_matrix_benchmark(
     payload: Mapping[str, Any],
     benchmark_files: Optional[Iterable[Path | str]] = None,
@@ -237,29 +220,30 @@ def select_aligned_matrix_benchmark(
                 return Path(bench_file)
 
     measured_names = {str(name).strip().lower() for name in normalized.get("measured_volatiles", {})}
-
-    def _origin_priority(bench: Mapping[str, Any]) -> int:
-        origin = str((bench.get("source_metadata") or {}).get("origin", "")).strip().lower()
-        return {
-            "external_literature": 4,
-            "internal_reproducibility_candidate": 3,
-            "internal_experiment": 2,
-            "synthetic_diagnostic": 1,
-        }.get(origin, 0)
-
     best_path: Optional[Path] = None
-    best_score: tuple[int, int, int, int, int, str] = (-1, -1, -1, -1, -1, "")
+    best_score: tuple[int, int, int, int, int, int, str] = (-1, -1, -1, -1, -1, -1, "")
     for bench_file in bench_files:
         bench = load_benchmark(bench_file)
         metadata = get_benchmark_metadata(bench)
         if metadata.execution_path not in {"matrix_only", "matrix_precursor_augmented"}:
             continue
+        source_metadata = dict(bench.get("source_metadata") or {})
         same_protein = int(str(bench.get("protein_type", "")) == normalized.get("protein_type"))
         same_state = int(str((bench.get("process_metadata") or {}).get("state", "")) == normalized.get("process_state"))
         same_path = int(str(metadata.execution_path) == ("matrix_only" if len(normalized.get("formulation", {}).get("precursors", {})) == 1 else "matrix_precursor_augmented"))
         contract = get_matrix_ranking_contract(bench)
         overlap = len(measured_names.intersection({str(item.get("name", "")).strip().lower() for item in contract.get("observable_targets", [])}))
-        score = (same_protein, same_state, same_path, overlap, _origin_priority(bench), str(bench.get("benchmark_id", "")))
+        has_reference_panel = int(bool(bench.get("reference_volatiles")))
+        is_canonical_benchmark = int(str(source_metadata.get("generator", "")).strip() != "matrix_experiment_intake")
+        score = (
+            same_protein,
+            same_state,
+            same_path,
+            overlap,
+            has_reference_panel,
+            is_canonical_benchmark,
+            str(bench.get("benchmark_id", "")),
+        )
         if score > best_score:
             best_score = score
             best_path = Path(bench_file)
@@ -281,12 +265,7 @@ def _build_support_rows_for_benchmark(
     contract = get_matrix_ranking_contract(dict(bench))
     adverse_markers = {str(item).strip().lower() for item in contract.get("adverse_markers", [])}
     compounds = []
-    counts = {
-        "quantitative_closed": 0,
-        "internal_candidate": 0,
-        "directional_support": 0,
-        "open_gap": 0,
-    }
+    counts = _init_matrix_support_counts()
     for item in contract.get("observable_targets", []):
         compound_name = str(item.get("name", "")).strip()
         if not compound_name:
@@ -302,7 +281,7 @@ def _build_support_rows_for_benchmark(
             reference_signal_origin=summary.reference_signal_origin,
             source_origin=evidence.source_origin,
         )
-        counts[support_status] += 1
+        _increment_matrix_support_counts(counts, support_status)
         compounds.append(
             {
                 "compound": compound_name,
@@ -329,9 +308,19 @@ def _build_support_rows_for_benchmark(
     elif summary.ranking_contract_status != "pass":
         blocker = "ranking contract not yet passing"
     elif counts["quantitative_closed"] < 2:
-        blocker = "insufficient externally measured target closure"
+        if evidence.external_data_status == "internal_measured_quantitative":
+            blocker = "insufficient externally measured target closure; current comparator is internal measured only"
+        elif evidence.external_data_status == "internal_reference_only":
+            blocker = "insufficient externally measured target closure; current comparator is internal reference-only"
+        else:
+            blocker = "insufficient externally measured target closure"
     elif counts["internal_candidate"] > 0 or counts["directional_support"] > 0:
-        blocker = "depends on internal or transferred support"
+        if counts["internal_measured_candidate"] > 0 and counts["internal_reference_candidate"] == 0 and counts["directional_support"] == 0:
+            blocker = "depends on internally measured support"
+        elif counts["internal_reference_candidate"] > 0 and counts["internal_measured_candidate"] == 0 and counts["directional_support"] == 0:
+            blocker = "depends on internal reference-only support"
+        else:
+            blocker = "depends on internal or transferred support"
     else:
         blocker = "none"
 
@@ -398,15 +387,6 @@ def build_matrix_experiment_support_delta_artifact(
     promotion_after = bool(current.get("promotion_ready", False))
     blocker_before = str((baseline_row or {}).get("promotion_blocker", "none")) if baseline_row is not None else "none"
     blocker_after = str(current.get("promotion_blocker", "none"))
-    source_kind = str(normalized.get("source_kind", "internal_experiment"))
-    promotion_claim_allowed = source_kind == "external_literature"
-    if promotion_claim_allowed:
-        promotion_claim_policy = "external_literature_can_upgrade_promotion_readiness_if_the_benchmark_contract_is_satisfied"
-    elif source_kind == "internal_experiment":
-        promotion_claim_policy = "internal_measurements_strengthen_calibration_and_comparator_evidence_but_do_not_unlock_external_decision_ready_claims"
-    else:
-        promotion_claim_policy = "diagnostic_inputs_do_not_unlock_external_decision_ready_claims"
-
     if not promotion_before and promotion_after:
         readiness_change = "promoted_to_external_decision_ready"
     elif delta_counts["strengthened"] > 0:
@@ -416,12 +396,13 @@ def build_matrix_experiment_support_delta_artifact(
     else:
         readiness_change = "no_material_change"
 
+    source_kind = str(normalized.get("source_kind", "internal_experiment"))
     if source_kind == "external_literature" and promotion_after:
         landing_recommendation = "land_in_benchmark_payload_and_calibration_review"
     elif source_kind == "external_literature":
         landing_recommendation = "land_in_benchmark_candidate_or_blocker_registry"
     elif source_kind == "internal_experiment":
-        landing_recommendation = "land_in_internal_candidate_or_calibration_payload_not_promotion_claim"
+        landing_recommendation = "land_in_internal_candidate_or_calibration_payload"
     else:
         landing_recommendation = "retain_as_diagnostic_only"
 
@@ -442,10 +423,8 @@ def build_matrix_experiment_support_delta_artifact(
         "promotion_assessment": {
             "promotion_ready_before": promotion_before,
             "promotion_ready_after": promotion_after,
-            "promotion_claim_allowed": promotion_claim_allowed,
             "promotion_blocker_before": blocker_before,
             "promotion_blocker_after": blocker_after,
-            "promotion_claim_policy": promotion_claim_policy,
             "readiness_change": readiness_change,
             "landing_recommendation": landing_recommendation,
         },
@@ -456,26 +435,3 @@ def build_matrix_experiment_support_delta_artifact(
         },
         "compounds": delta_rows,
     }
-
-
-def calibrate_from_intake(
-    payload_or_path: Mapping[str, Any] | Path | str,
-    *,
-    dry_run: bool = False
-) -> Optional[Dict[str, Any]]:
-    from src.matrix_calibration_optimizer import calibrate_matrix_constants
-    
-    if isinstance(payload_or_path, (Path, str)):
-        payload = load_matrix_experiment_intake(payload_or_path)
-    else:
-        payload = dict(payload_or_path)
-        
-    benchmark = build_matrix_experiment_benchmark_payload(payload)
-    protein_type = str(benchmark.get("protein_type", "free"))
-    
-    if dry_run:
-        import logging
-        logging.getLogger(__name__).info(f"Dry run calibration for {protein_type} using experiment {benchmark.get('benchmark_id')}")
-        return {"dry_run": True, "benchmark_id": benchmark.get("benchmark_id")}
-        
-    return calibrate_matrix_constants([benchmark], protein_type)

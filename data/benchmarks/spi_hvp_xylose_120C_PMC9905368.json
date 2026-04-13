@@ -1,0 +1,35 @@
+{
+  "benchmark_id": "spi_hvp_xylose_120C_PMC9905368",
+  "source_doi": "PMC9905368",
+  "protein_source": "soy_isolate",
+  "precursors": {
+    "Soy protein isolate hydrolysate": {"concentration_mM": 50.0},
+    "L-Cysteine": {"concentration_mM": 3.0},
+    "L-Methionine": {"concentration_mM": 4.0},
+    "Glycine": {"concentration_mM": 8.0},
+    "D-Xylose": {"concentration_mM": 50.0}
+  },
+  "conditions": {
+    "temp_C": 120,
+    "ph": 6.0,
+    "water_activity": 0.92,
+    "time_min": 30
+  },
+  "metadata": {
+    "tier": "PRIMARY",
+    "family": "alternative_protein_matrix_scope",
+    "execution_path": "free_precursor",
+    "notes": "Sulfur-focused surrogate benchmark for SPI-HVP plus xylose. Measured values are literature ug/g anchors encoded into the generic comparator field for runtime benchmarking."
+  },
+  "validation_contract": {
+    "scale_thresholds": {
+      "max_ratio": 8.0,
+      "mean_abs_log10_error": 1.25
+    }
+  },
+  "measured_volatiles": {
+    "2-Furfurylthiol (FFT)": {"conc_ppb": 0.42, "uncertainty_pct": 12},
+    "2-Methyl-3-furanthiol (MFT)": {"conc_ppb": 0.18, "uncertainty_pct": 12},
+    "Methional": {"conc_ppb": 1.88, "uncertainty_pct": 10}
+  }
+}

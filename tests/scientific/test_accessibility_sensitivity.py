@@ -103,7 +103,6 @@ def _run_pea_predictions(denaturation_state: float) -> dict:
     return result
 
 
-@pytest.mark.slow
 def test_denaturation_rerankings_pea_isolate():
     """
     P1 exit gate: denaturation 0.3 → 0.8 on pea_iso must produce either:

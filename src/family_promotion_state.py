@@ -10,7 +10,8 @@ from src.literature_family_registry import build_family_payload_coverage_artifac
 from src.matrix_targets import get_compound_panel_entry
 
 
-from src.text_utils import normalize_name_spaced as _normalize_name
+def _normalize_name(name: str) -> str:
+    return " ".join(str(name).lower().replace("_", " ").replace("-", " ").split())
 
 
 def _benchmark_compound_names(bench: Mapping[str, Any], summary: Any) -> list[str]:

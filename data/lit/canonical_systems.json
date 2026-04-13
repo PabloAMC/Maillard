@@ -27,6 +27,7 @@
             "leucine": 0.05
         },
         "targets": [
+            "2-methyl-3-furanthiol",
             "3-methylbutanal",
             "2-methylthiazole",
             "isovaleraldehyde",

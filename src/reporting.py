@@ -19,7 +19,6 @@ from pathlib import Path
 from typing import List, Dict, Any, Optional, Iterable
 
 from src.pipeline import FormulationResult
-from src.artifact_io import repo_root
 from src.literature_learning_loop import build_literature_learning_loop_payload
 from src.family_lane_sensitivity import build_family_lane_sensitivity_payload
 from src.literature_family_registry import build_family_payload_coverage_artifact, resolve_family_descriptor
@@ -30,7 +29,6 @@ from src.usability_reports import DomainWarning
 from src.projection_utils import build_projection_rows, build_artifact_provenance
 from src.presentation import (
     render_decision_summary_cli,
-    render_family_role_explanation_markdown,
     render_flavor_axis_markdown,
     render_projection_rows_markdown,
     render_provenance_markdown,
@@ -65,23 +63,20 @@ def _evidence_ladder_flags(meta: Dict[str, Any]) -> Dict[str, bool]:
         ]
     )
 
-    direct_anchor = evidence_state in {"externally_benchmarked", "internally_benchmarked", "literature_anchor"} or (
+    direct_anchor = evidence_state in {"externally_benchmarked", "internally_benchmarked"} or (
         strength == "literature_anchored" and fallback == "compound_specific"
     )
-    transferred_prior = evidence_state in {"transferred_prior", "literature_derived_transfer"} or (
+    transferred_prior = evidence_state == "transferred_prior" or (
         strength in {"conditional_literature_anchored", "process_state_mismatch"}
         or fallback in {"nearest_process_state", "compound_specific_process_state"}
         or "transfer" in source
         or "carryover" in source
         or "ratio" in source
     )
-    computational_refinement = (
-        evidence_state in {"selective_dft_anchor", "xtb_derived_gfn2", "mlp_screen_mace"}
-        or any(token in notes_blob for token in ["dft", "xtb", "qm", "semiempirical", "computational", "refinement"])
-    )
+    computational_refinement = any(token in notes_blob for token in ["dft", "xtb", "qm", "semiempirical", "computational", "refinement"])
     mechanistic_surrogate = (
         not direct_anchor and not transferred_prior and not computational_refinement
-    ) or evidence_state in {"still_missing", "wet_lab_required"} or strength == "heuristic" or float(meta.get("melanoidin_trapping_factor", 1.0) or 1.0) < 1.0
+    ) or evidence_state == "still_missing" or strength == "heuristic" or float(meta.get("melanoidin_trapping_factor", 1.0) or 1.0) < 1.0
 
     return {
         "direct_anchor": bool(direct_anchor),
@@ -425,97 +420,8 @@ def _build_family_specific_open_gaps(result: FormulationResult) -> List[Dict[str
     return deduped
 
 
-def build_family_role_explanation(result: FormulationResult) -> Dict[str, Any]:
-    """
-    Builds a scientist-facing explanation of which reaction families drove the
-    formulation result, which acted as modifiers only, and which are still absent
-    or transferred.
-
-    Role classification:
-      - "driver"   : active lane with a non-trivial target_score_delta (|delta|>0.01)
-                     or a direct benchmark anchor in the evidence ladder.
-      - "modifier" : active lane that adjusts scores but doesn't anchor a primary target.
-      - "missing_or_transferred" : in the canonical family registry but not active
-                                   in this evaluation run.
-
-    Returns a dict ready for JSON serialisation and markdown rendering.
-    """
-    flavor_axis = result.flavor_axis_summary or {}
-    family_lane_summary = flavor_axis.get("family_lane_summary", {}) or {}
-    family_lane_adjustments = flavor_axis.get("family_lane_adjustments", {}) or {}
-    per_lane_adjustments = family_lane_adjustments.get("per_lane", {}) or {}
-    active_family_lanes = set(flavor_axis.get("active_family_lanes", []) or [])
-
-    # Pull family payload coverage for all canonical families
-    payload_coverage = build_family_payload_coverage_artifact()
-    all_canonical_families = {
-        str(row.get("slr_family", "")): row
-        for row in payload_coverage.get("families", [])
-        if str(row.get("slr_family", ""))
-    }
-
-    drivers: List[Dict[str, Any]] = []
-    modifiers: List[Dict[str, Any]] = []
-    missing_or_transferred: List[Dict[str, Any]] = []
-
-    for slr_family in sorted(all_canonical_families.keys()):
-        coverage_row = all_canonical_families[slr_family]
-        family_id = str(coverage_row.get("family_id", "unknown"))
-        display_name = str(coverage_row.get("display_name", family_id))
-        lane = family_lane_summary.get(slr_family, {})
-        is_active = slr_family in active_family_lanes
-
-        if not is_active:
-            missing_or_transferred.append({
-                "slr_family": slr_family,
-                "family_id": family_id,
-                "display_name": display_name,
-                "reason": "lane_not_active_in_this_evaluation",
-                "primary_payload_count": int(coverage_row.get("total_primary_payload_count", 0)),
-            })
-            continue
-
-        per_lane = per_lane_adjustments.get(slr_family, {}) or {}
-        target_delta = float(per_lane.get("target_score_delta", 0.0))
-        off_flavour_delta = float(per_lane.get("off_flavour_risk_delta", 0.0))
-        closure_delta = float(per_lane.get("maillard_closure_delta", 0.0))
-        primary_payload_count = int(coverage_row.get("total_primary_payload_count", 0))
-
-        # A lane is a "driver" if it has a non-trivial score delta OR benchmark anchors
-        is_driver = (
-            abs(target_delta) > 0.01
-            or abs(off_flavour_delta) > 0.01
-            or primary_payload_count > 0
-        )
-
-        entry = {
-            "slr_family": slr_family,
-            "family_id": family_id,
-            "display_name": display_name,
-            "strategic_posture": str(lane.get("strategic_posture", "unknown")),
-            "target_score_delta": round(target_delta, 4),
-            "off_flavour_risk_delta": round(off_flavour_delta, 4),
-            "maillard_closure_delta": round(closure_delta, 4),
-            "primary_payload_count": primary_payload_count,
-            "summary": str(lane.get("summary", "")),
-        }
-        if is_driver:
-            drivers.append(entry)
-        else:
-            modifiers.append(entry)
-
-    return {
-        "drivers": drivers,
-        "modifiers": modifiers,
-        "missing_or_transferred": missing_or_transferred,
-        "summary": {
-            "driver_count": len(drivers),
-            "modifier_count": len(modifiers),
-            "missing_or_transferred_count": len(missing_or_transferred),
-            "total_canonical_family_count": len(all_canonical_families),
-            "active_lane_count": len(active_family_lanes),
-        },
-    }
+def _repo_root() -> Path:
+    return Path(__file__).resolve().parents[1]
 
 
 def _to_repo_relative(path: Path, root: Path) -> str:
@@ -565,53 +471,21 @@ def _build_scientific_surface(root: Path) -> Dict[str, str]:
         "safety_reference_payloads": root / "data/lit/safety_reference_payloads.json",
         "primary_benchmark_protocol": root / "docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md",
         "primary_benchmark_contract": root / "data/protocols/ppi_spi_primary_benchmark_contract.json",
-        "extrusion_external_closure_contract": root / "data/protocols/extrusion_external_closure_contract.json",
-        "dha_lysinoalanine_external_package_contract": root / "data/protocols/dha_lysinoalanine_external_package_contract.json",
         "literature_learning_loop": root / "results/validation/literature_learning_loop.md",
         "literature_learning_loop_json": root / "results/validation/literature_learning_loop.json",
+        "literature_backlog": root / "results/validation/literature_backlog.md",
+        "literature_backlog_json": root / "results/validation/literature_backlog.json",
+        "deep_research_runtime_queue": root / "results/validation/deep_research_runtime_queue.md",
+        "deep_research_runtime_queue_json": root / "results/validation/deep_research_runtime_queue.json",
         "literature_runtime_templates": root / "results/validation/literature_runtime_templates.json",
         "family_ingestion_plan": root / "results/validation/family_ingestion_plan.md",
         "family_ingestion_plan_json": root / "results/validation/family_ingestion_plan.json",
         "matrix_target_status": root / "results/validation/matrix_target_status.md",
         "matrix_target_status_json": root / "results/validation/matrix_target_status.json",
-        "matrix_primary_benchmark_campaign": root / "results/validation/matrix_primary_benchmark_campaign.md",
-        "matrix_primary_benchmark_campaign_json": root / "results/validation/matrix_primary_benchmark_campaign.json",
-        "hexanal_nonanal_calibration_closure": root / "results/validation/hexanal_nonanal_calibration_closure.md",
-        "hexanal_nonanal_calibration_closure_json": root / "results/validation/hexanal_nonanal_calibration_closure.json",
         "chemistry_family_scope": root / "results/validation/chemistry_family_scope.md",
         "chemistry_family_scope_json": root / "results/validation/chemistry_family_scope.json",
         "matrix_family_coverage": root / "results/validation/matrix_family_coverage.md",
         "matrix_family_coverage_json": root / "results/validation/matrix_family_coverage.json",
-        "matrix_family_priority_ranking": root / "results/validation/matrix_family_priority_ranking.md",
-        "matrix_family_priority_ranking_json": root / "results/validation/matrix_family_priority_ranking.json",
-        "matrix_family_next_action": root / "results/validation/matrix_family_next_action.md",
-        "matrix_family_next_action_json": root / "results/validation/matrix_family_next_action.json",
-        "mycoprotein_reference": root / "results/validation/mycoprotein_reference.md",
-        "mycoprotein_reference_json": root / "results/validation/mycoprotein_reference.json",
-        "pea_soy_external_evidence": root / "results/validation/pea_soy_external_evidence.md",
-        "pea_soy_external_evidence_json": root / "results/validation/pea_soy_external_evidence.json",
-        "pea_soy_mixed_external_package_contract": root / "data/protocols/pea_soy_mixed_external_package_contract.json",
-        "pea_soy_mixed_external_package": root / "results/validation/pea_soy_mixed_external_package.md",
-        "pea_soy_mixed_external_package_json": root / "results/validation/pea_soy_mixed_external_package.json",
-        "extrusion_external_closure": root / "results/validation/extrusion_external_closure.md",
-        "extrusion_external_closure_json": root / "results/validation/extrusion_external_closure.json",
-        "dha_lysinoalanine_external_package": root / "results/validation/dha_lysinoalanine_external_package.md",
-        "dha_lysinoalanine_external_package_json": root / "results/validation/dha_lysinoalanine_external_package.json",
-        "objective_closure": root / "results/validation/objective_progress.md",
-        "objective_closure_json": root / "results/validation/objective_progress.json",
-        "objective_closure_figure": root / "docs/assets/objective_closure.png",
-        "primary_matrix_external_package": root / "results/validation/primary_matrix_external_package.md",
-        "primary_matrix_external_package_json": root / "results/validation/primary_matrix_external_package.json",
-        "hexanal_nonanal_resolution": root / "results/validation/hexanal_nonanal_resolution.md",
-        "hexanal_nonanal_resolution_json": root / "results/validation/hexanal_nonanal_resolution.json",
-        "scope_gap_guard": root / "results/validation/scope_gap_guard.md",
-        "scope_gap_guard_json": root / "results/validation/scope_gap_guard.json",
-        "family_barrier_progress": root / "results/validation/family_barrier_progress.md",
-        "family_barrier_progress_json": root / "results/validation/family_barrier_progress.json",
-        "family_barrier_progress_figure": root / "docs/assets/family_barrier_progress.png",
-        "dft_coverage_map_registry": root / "data/lit/dft_coverage_map.json",
-        "dft_coverage_map": root / "results/validation/dft_coverage_map.md",
-        "dft_coverage_map_json": root / "results/validation/dft_coverage_map.json",
         "refinement_watchlist": root / "results/validation/refinement_watchlist.md",
         "refinement_watchlist_json": root / "results/validation/refinement_watchlist.json",
         "offline_dft_jobs": root / "results/validation/offline_dft_jobs.json",
@@ -630,20 +504,21 @@ def _build_scientific_surface(root: Path) -> Dict[str, str]:
         "refinement_offline_dft_jobs": root / "results/validation/refinement_offline_dft_jobs.json",
         "refinement_impact": root / "results/validation/refinement_impact.md",
         "refinement_impact_json": root / "results/validation/refinement_impact.json",
+        "computational_gap_refinement_plan": root / "results/validation/computational_gap_refinement_plan.md",
+        "computational_gap_refinement_plan_json": root / "results/validation/computational_gap_refinement_plan.json",
+        "computational_gap_dft_ingestion_report": root / "results/validation/computational_gap_dft_ingestion_report.md",
+        "computational_gap_dft_ingestion_report_json": root / "results/validation/computational_gap_dft_ingestion_report.json",
+        "computational_gap_dft_promotion_report": root / "results/validation/computational_gap_dft_promotion_report.md",
+        "computational_gap_dft_promotion_report_json": root / "results/validation/computational_gap_dft_promotion_report.json",
         "refinement_surrogate_patches": root / "data/lit/refinement_surrogate_patches.json",
         "reaction_benchmark_set": root / "data/lit/reaction_benchmark_set.json",
         "mlp_candidate_registry": root / "data/lit/mlp_candidate_registry.json",
         "mlp_external_benchmark_evidence": root / "data/lit/mlp_external_benchmark_evidence.json",
-        "mlp_geometry_benchmark_set": root / "data/lit/geometry_benchmark_set.json",
-        "mlp_ts_seed_benchmark_set": root / "data/lit/ts_seed_benchmark_set.json",
+        "geometry_benchmark_set": root / "data/lit/geometry_benchmark_set.json",
         "mlp_geometry_benchmark": root / "results/validation/mlp_geometry_benchmark.md",
         "mlp_geometry_benchmark_json": root / "results/validation/mlp_geometry_benchmark.json",
         "mlp_geometry_assessment": root / "results/validation/mlp_geometry_assessment.md",
         "mlp_geometry_assessment_json": root / "results/validation/mlp_geometry_assessment.json",
-        "mlp_ts_seed_benchmark": root / "results/validation/mlp_ts_seed_benchmark.md",
-        "mlp_ts_seed_benchmark_json": root / "results/validation/mlp_ts_seed_benchmark.json",
-        "mlp_ts_seed_assessment": root / "results/validation/mlp_ts_seed_assessment.md",
-        "mlp_ts_seed_assessment_json": root / "results/validation/mlp_ts_seed_assessment.json",
         "mlp_reaction_benchmark": root / "results/validation/mlp_reaction_benchmark.md",
         "mlp_reaction_benchmark_json": root / "results/validation/mlp_reaction_benchmark.json",
         "mlp_assessment": root / "results/validation/mlp_assessment.md",
@@ -652,19 +527,16 @@ def _build_scientific_surface(root: Path) -> Dict[str, str]:
         "mlp_external_mlp_landscape_json": root / "results/validation/mlp_external_mlp_landscape.json",
         "mlp_adoption_notes": root / "results/validation/mlp_adoption_notes.md",
         "mlp_adoption_notes_json": root / "results/validation/mlp_adoption_notes.json",
-        "skip_registry": root / "results/validation/skip_registry.md",
-        "skip_registry_json": root / "results/validation/skip_registry.json",
     }
     payload: Dict[str, str] = {}
     for key, path in references.items():
-        if path.exists():
-            payload[key] = _to_repo_relative(path, root)
+        payload[key] = _to_repo_relative(path, root)
     return payload
 
 
 def _build_literature_evidence_summary(root: Optional[Path] = None) -> Dict[str, Any]:
-    repo_root_dir = root or repo_root()
-    intake_path = repo_root_dir / "data" / "lit" / "benchmark_intake_registry.json"
+    repo_root = root or _repo_root()
+    intake_path = repo_root / "data" / "lit" / "benchmark_intake_registry.json"
     if not intake_path.exists():
         return {}
 
@@ -686,7 +558,7 @@ def _build_literature_evidence_summary(root: Optional[Path] = None) -> Dict[str,
             modules[str(module)] += 1
 
     return {
-        "source": _to_repo_relative(intake_path, repo_root_dir),
+        "source": _to_repo_relative(intake_path, repo_root),
         "eligible_reference_count": len(eligible),
         "ready_reference_count": len(ready_refs),
         "closable_without_primary_data_count": len(no_primary_data_refs),
@@ -700,8 +572,8 @@ def _build_literature_evidence_summary(root: Optional[Path] = None) -> Dict[str,
 
 
 def _build_literature_learning_loop_summary(root: Optional[Path] = None) -> Dict[str, Any]:
-    repo_root_dir = root or repo_root()
-    payload = build_literature_learning_loop_payload(repo_root_dir)
+    repo_root = root or _repo_root()
+    payload = build_literature_learning_loop_payload(repo_root)
     return dict(payload.get("summary", {}))
 
 
@@ -740,7 +612,6 @@ def generate_report(
     family_runtime_support_summary = _build_family_runtime_support_summary(result)
     family_specific_open_gaps = _build_family_specific_open_gaps(result)
     family_lane_sensitivity = build_family_lane_sensitivity_payload(result.flavor_axis_summary or {})
-    family_role_explanation = build_family_role_explanation(result)
     
     # 1. Save JSON Report
     json_path = output_dir / "report.json"
@@ -780,7 +651,6 @@ def generate_report(
             "family_runtime_support_summary": family_runtime_support_summary,
             "family_specific_open_gaps": family_specific_open_gaps,
             "family_lane_sensitivity": family_lane_sensitivity,
-            "family_role_explanation": family_role_explanation,
             "projection_metadata": dict(result.projection_metadata),
             "flavor_axis_summary": result.flavor_axis_summary,
             "predicted_ppb": {k: float(v) for k, v in result.predicted_ppb.items()},
@@ -881,16 +751,30 @@ def generate_report(
                     )
                 f.write(f"\n- **minimum_panel_ready:** {extrusion_panel.get('minimum_panel_ready', False)}\n\n")
 
-            dha_panel = result.confidence_metadata.get("dha_extrusion_closure_panel", {})
-            if result.confidence_metadata.get("process_regime") in {"extrusion_like", "extrusion_heavy"} and dha_panel:
-                f.write("### DHA/LAL Extrusion Closure Panel\n")
-                f.write(f"- **lysine_budget_pct:** {float(dha_panel.get('lysine_budget_pct', 0.0)):.1f}\n")
-                f.write(f"- **risk_band:** {dha_panel.get('risk_band', 'unknown')}\n")
-                f.write(f"- **closure_ready:** {dha_panel.get('closure_ready', False)}\n")
-                f.write(f"- **evidence_mode:** {dha_panel.get('evidence_mode', 'unknown')}\n")
-                f.write(f"- **present_markers:** {', '.join(dha_panel.get('present_markers', [])) or '-'}\n")
-                f.write(f"- **missing_markers:** {', '.join(dha_panel.get('missing_markers', [])) or '-'}\n")
-                f.write(f"- **summary:** {dha_panel.get('summary', '')}\n\n")
+            extrusion_process = result.confidence_metadata.get("extrusion_process", {})
+            if extrusion_process:
+                total_damage = extrusion_process.get("total_damage_load", {})
+                f.write("### Extrusion Process Model\n")
+                f.write(f"- **model:** {extrusion_process.get('model', 'unknown')}\n")
+                f.write(f"- **moisture_regime:** {extrusion_process.get('moisture_regime', 'unknown')}\n")
+                f.write(f"- **jacket_temperature_celsius:** {float(extrusion_process.get('jacket_temperature_celsius', 0.0)):.1f}\n")
+                f.write(f"- **effective_temperature_celsius:** {float(extrusion_process.get('effective_temperature_celsius', 0.0)):.1f}\n")
+                f.write(f"- **die_exit_temperature_celsius:** {float(extrusion_process.get('die_exit_temperature_celsius', 0.0)):.1f}\n")
+                f.write(f"- **sme_kj_per_kg:** {float(extrusion_process.get('sme_kj_per_kg', 0.0)):.1f}\n")
+                f.write(f"- **mean_residence_time_seconds:** {float(extrusion_process.get('mean_residence_time_seconds', 0.0)):.1f}\n")
+                f.write(f"- **rtd_decision:** {extrusion_process.get('rtd_assessment', {}).get('decision', 'unknown')}\n")
+                f.write(f"- **furosine_mg_per_kg:** {float(total_damage.get('furosine_mg_per_kg', 0.0)):.1f}\n")
+                f.write(f"- **lal_mg_per_kg:** {float(total_damage.get('lal_mg_per_kg', 0.0)):.1f}\n\n")
+
+                transport_panel = extrusion_process.get('volatile_transport', {}).get('panel', {})
+                if transport_panel:
+                    f.write("| Extrusion volatile transport | Class | Shear-release | Die stripping | Combined factor |\n")
+                    f.write("| :--- | :--- | ---: | ---: | ---: |\n")
+                    for compound, row in transport_panel.items():
+                        f.write(
+                            f"| {compound} | {row.get('compound_class', 'unknown')} | {float(row.get('shear_release_factor', 0.0)):.2f} | {float(row.get('die_stripping_fraction', 0.0)):.2f} | {float(row.get('combined_headspace_factor', 0.0)):.2f} |\n"
+                        )
+                    f.write("\n")
 
             compound_rows = result.confidence_metadata.get("compound_confidence", [])
             if compound_rows:
@@ -987,12 +871,11 @@ def generate_report(
 
         if family_runtime_support_summary.get("family_lanes"):
             f.write("### Family Runtime Support Summary\n")
-            f.write("| SLR | Family | Active | Role | Evidence Posture | Payloads | Outcome |\n")
-            f.write("| :--- | :--- | :---: | :--- | :--- | ---: | :--- |\n")
+            f.write("| SLR | Family | Active | Posture | Evidence Posture | Primary Payloads | Supporting Payloads | Priors |\n")
+            f.write("| :--- | :--- | :---: | :--- | :--- | ---: | ---: | ---: |\n")
             for row in family_runtime_support_summary.get("family_lanes", []):
-                outcome = row.get("closure_outcome", "wet_lab_only")
                 f.write(
-                    f"| {row.get('slr_family', '') or 'n/a'} | {row.get('display_name', 'unknown')} | {'yes' if row.get('active') else '-'} | {row.get('strategic_posture', 'unknown')} | {row.get('evidence_posture', 'structural_gap_extrapolation')} | {int(row.get('primary_payload_count', 0))} | {outcome} |\n"
+                    f"| {row.get('slr_family', '') or 'n/a'} | {row.get('display_name', 'unknown')} | {'yes' if row.get('active') else '-'} | {row.get('strategic_posture', 'unknown')} | {row.get('evidence_posture', 'structural_gap_extrapolation')} | {int(row.get('primary_payload_count', 0))} | {int(row.get('supporting_payload_count', 0))} | {int(row.get('prior_count', 0))} |\n"
                 )
             f.write("\n")
 
@@ -1009,9 +892,8 @@ def generate_report(
         if family_specific_open_gaps:
             f.write("### Family Specific Open Gaps\n")
             for row in family_specific_open_gaps:
-                outcome = row.get("closure_outcome", "wet_lab_only")
                 f.write(
-                    f"- **{row.get('display_name', row.get('family_id', 'unknown'))}:** {row.get('gap_reason', 'unknown')} | Target: {outcome}\n"
+                    f"- **{row.get('display_name', row.get('family_id', 'unknown'))}:** {row.get('gap_reason', 'unknown')}\n"
                 )
             f.write("\n")
 
@@ -1067,10 +949,6 @@ def generate_report(
 
         if getattr(result, "flavor_axis_summary", None):
             f.write(render_flavor_axis_markdown(result.flavor_axis_summary, heading="### Flavor Axis Diagnostics", variant="detailed"))
-
-        if family_role_explanation:
-            f.write(render_family_role_explanation_markdown(family_role_explanation, heading="### Family Role Explanation"))
-            f.write("\n")
 
         f.write("## 4. Analytical Metadata\n")
         f.write("### Matrix Explainability\n")

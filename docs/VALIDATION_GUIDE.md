@@ -191,7 +191,7 @@ The validated execution contract now uses named Docker lanes instead of ad hoc c
 
 The repository now relies on a small set of figures that each have a distinct purpose.
 
-- `validation_overview.png` is the first-pass trust surface. It only shows the two panels that matter most for a skeptical scientific read: predicted-vs-measured parity for the authoritative free-precursor points, and per-benchmark quantitative error against the 1.5x contract.
+- `validation_overview.png` is the first-pass trust surface. It is now a single-panel parity figure for the authoritative benchmark points, with formatted study references instead of raw benchmark ids, so it can be embedded directly in the README without multi-panel cropping.
 - `validated_envelope.png` is the boundary figure. It shows how much of the benchmark set is strict-ready, how much is only directional, and which caveats still define the current edge of reliable use.
 - `*_comparison.png` files are benchmark cards. They show parity, absolute yields, and the benchmark summary for one literature system at a time.
 

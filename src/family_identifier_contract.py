@@ -14,7 +14,10 @@ from src.literature_family_registry import (
     iter_retention_reference_entries,
 )
 from src.matrix_family_coverage import load_matrix_family_coverage_registry
-from src.artifact_io import repo_root
+
+
+def _repo_root() -> Path:
+    return Path(__file__).resolve().parents[1]
 
 
 def _sorted_plan_families(plan: Mapping[str, Any]) -> List[Dict[str, Any]]:

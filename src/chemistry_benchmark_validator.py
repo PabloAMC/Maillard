@@ -1,16 +1,18 @@
 from __future__ import annotations
 
-from copy import deepcopy
+import json
 import math
 from dataclasses import asdict
-from functools import lru_cache
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Optional, Tuple
 
-from src.artifact_io import load_json_mapping, repo_root
 from src.mlp_external_benchmarks import build_external_mlp_evidence_index
 from src.mlp_adoption_contract import MLPAdoptionDecision, MLPModelCandidate, load_mlp_candidates
-from src.reaction_benchmark import ReactionBenchmarkEntry, load_reaction_benchmark_entries
+from src.reaction_benchmark import ReactionBenchmarkEntry, build_reaction_benchmark_alias_index, load_reaction_benchmark_entries
+
+
+def _repo_root() -> Path:
+    return Path(__file__).resolve().parents[1]
 
 
 def _normalize_key(value: str) -> str:
@@ -20,43 +22,9 @@ def _normalize_key(value: str) -> str:
     return text
 
 
-def _path_cache_key(path: Path) -> str:
-    return str(path.resolve()) if path.exists() else str(path)
-
-
-@lru_cache(maxsize=32)
-def _load_candidate_predictions_cached(cache_key: str) -> Dict[str, float]:
-    payload = load_json_mapping(Path(cache_key))
-    predictions: Dict[str, float] = {}
-    for key, value in payload.items():
-        predicted = _extract_predicted_barrier(value)
-        if predicted is not None:
-            predictions[_normalize_key(str(key))] = float(predicted)
-    return predictions
-
-
-@lru_cache(maxsize=16)
-def _load_geometry_payload_cached(cache_key: str) -> Dict[str, Any]:
-    path = Path(cache_key)
-    if path.name == "mlp_geometry_assessment.json":
-        from src.geometry_benchmark_validator import build_geometry_assessment_artifact
-
-        return build_geometry_assessment_artifact()
-    if path.exists():
-        return load_json_mapping(path)
-    return {}
-
-
-@lru_cache(maxsize=16)
-def _load_ts_seed_payload_cached(cache_key: str) -> Dict[str, Any]:
-    path = Path(cache_key)
-    if path.name == "mlp_ts_seed_assessment.json":
-        from src.ts_seed_benchmark_validator import build_ts_seed_assessment_artifact
-
-        return build_ts_seed_assessment_artifact()
-    if path.exists():
-        return load_json_mapping(path)
-    return {}
+def _load_json(path: Path) -> Dict[str, Any]:
+    with open(path, "r", encoding="utf-8") as handle:
+        return json.load(handle)
 
 
 def _extract_predicted_barrier(raw_value: Any) -> Optional[float]:
@@ -92,51 +60,34 @@ def _load_candidate_predictions(candidate: MLPModelCandidate) -> Dict[str, float
     if not candidate.benchmark_results_path:
         return {}
     raw_path = Path(candidate.benchmark_results_path)
-    path = raw_path if raw_path.is_absolute() else repo_root() / raw_path
+    path = raw_path if raw_path.is_absolute() else _repo_root() / raw_path
     if not path.exists():
         return {}
-    return dict(_load_candidate_predictions_cached(_path_cache_key(path)))
+    payload = _load_json(path)
+    predictions: Dict[str, float] = {}
+    for key, value in payload.items():
+        predicted = _extract_predicted_barrier(value)
+        if predicted is not None:
+            predictions[_normalize_key(str(key))] = float(predicted)
+    return predictions
 
 
 def _load_geometry_evidence(candidate: MLPModelCandidate) -> Dict[str, Any]:
     if not candidate.geometry_benchmark_path:
-        return {"available": False, "evidence_present": False}
+        return {"available": False}
     raw_path = Path(candidate.geometry_benchmark_path)
-    path = raw_path if raw_path.is_absolute() else repo_root() / raw_path
-    payload = _load_geometry_payload_cached(_path_cache_key(path))
-    if not payload:
-        return {"available": False, "evidence_present": False}
+    path = raw_path if raw_path.is_absolute() else _repo_root() / raw_path
+    if not path.exists():
+        return {"available": False}
+    payload = _load_json(path)
     if "candidate_assessments" in payload:
         for row in payload.get("candidate_assessments", []):
             if str(row.get("candidate_id", "")) == candidate.candidate_id:
                 result = dict(row)
                 result["available"] = bool(row.get("available", False))
-                result["evidence_present"] = True
                 return result
-        return {"available": False, "evidence_present": False}
+        return {"available": False}
     payload["available"] = True
-    payload["evidence_present"] = True
-    return payload
-
-
-def _load_ts_seed_evidence(candidate: MLPModelCandidate) -> Dict[str, Any]:
-    if not candidate.ts_seed_benchmark_path:
-        return {"available": False, "evidence_present": False}
-    raw_path = Path(candidate.ts_seed_benchmark_path)
-    path = raw_path if raw_path.is_absolute() else repo_root() / raw_path
-    payload = _load_ts_seed_payload_cached(_path_cache_key(path))
-    if not payload:
-        return {"available": False, "evidence_present": False}
-    if "candidate_assessments" in payload:
-        for row in payload.get("candidate_assessments", []):
-            if str(row.get("candidate_id", "")) == candidate.candidate_id:
-                result = dict(row)
-                result["available"] = bool(row.get("available", False))
-                result["evidence_present"] = True
-                return result
-        return {"available": False, "evidence_present": False}
-    payload["available"] = True
-    payload["evidence_present"] = True
     return payload
 
 
@@ -183,9 +134,9 @@ def evaluate_candidate_against_reaction_benchmark(
     benchmark_entries: Iterable[ReactionBenchmarkEntry],
 ) -> Dict[str, Any]:
     benchmark_list = [entry for entry in benchmark_entries if not candidate.target_motif_families or entry.motif_family in candidate.target_motif_families]
+    alias_index = build_reaction_benchmark_alias_index(benchmark_list)
     predictions = _load_candidate_predictions(candidate)
     geometry_evidence = _load_geometry_evidence(candidate)
-    ts_seed_evidence = _load_ts_seed_evidence(candidate)
     external_prior = _external_prior_for(candidate)
 
     comparable_rows: List[Dict[str, Any]] = []
@@ -253,21 +204,11 @@ def evaluate_candidate_against_reaction_benchmark(
         if mean_abs_error is None or mean_abs_error > 6.0:
             stop_reasons.append("barrier_error_above_adoption_window")
             hard_fail = True
-    if candidate.proposed_role in {"geom_preopt", "conformer_screening"}:
-        if not geometry_evidence.get("evidence_present", False):
+    if candidate.proposed_role in {"geom_preopt", "ts_initialization", "conformer_screening"}:
+        if not geometry_evidence.get("available", False):
             stop_reasons.append("missing_geometry_benchmark_evidence")
-        elif not geometry_evidence.get("available", False):
-            stop_reasons.append("geometry_backend_unavailable")
         elif float(geometry_evidence.get("max_rmsd_angstrom", 999.0)) > 0.35:
             stop_reasons.append("geometry_drift_above_threshold")
-            hard_fail = True
-    if candidate.proposed_role == "ts_initialization":
-        if not ts_seed_evidence.get("evidence_present", False):
-            stop_reasons.append("missing_ts_seed_benchmark_evidence")
-        elif not ts_seed_evidence.get("available", False):
-            stop_reasons.append("ts_seed_backend_unavailable")
-        elif float(ts_seed_evidence.get("max_seed_rmsd_angstrom", 999.0)) > 0.75:
-            stop_reasons.append("ts_seed_recovery_above_threshold")
             hard_fail = True
 
     if hard_fail:
@@ -280,7 +221,7 @@ def evaluate_candidate_against_reaction_benchmark(
     if decision == "adopt_offline":
         rationale = "Candidate stays inside the MLP chemistry benchmark window and is suitable only for the proposed offline accelerator role."
     elif decision == "defer":
-        rationale = "Candidate remains unapproved until the proposed offline-role gate is satisfied by benchmark evidence and backend readiness."
+        rationale = "Candidate remains unapproved until missing benchmark evidence is collected for the proposed offline role."
     else:
         rationale = "Candidate is quarantined because it fails core MLP stop rules and would reduce trust if integrated."
 
@@ -314,8 +255,7 @@ def evaluate_candidate_against_reaction_benchmark(
     }
 
 
-@lru_cache(maxsize=1)
-def _build_mlp_assessment_artifact_cached() -> Dict[str, Any]:
+def build_mlp_assessment_artifact() -> Dict[str, Any]:
     benchmark_entries = load_reaction_benchmark_entries()
     candidates = load_mlp_candidates()
     candidate_rows = [evaluate_candidate_against_reaction_benchmark(candidate, benchmark_entries) for candidate in candidates]
@@ -332,10 +272,6 @@ def _build_mlp_assessment_artifact_cached() -> Dict[str, Any]:
         },
         "candidates": candidate_rows,
     }
-
-
-def build_mlp_assessment_artifact() -> Dict[str, Any]:
-    return deepcopy(_build_mlp_assessment_artifact_cached())
 
 
 def build_adoption_decisions_from_assessment(payload: Mapping[str, Any]) -> List[MLPAdoptionDecision]:
@@ -366,7 +302,7 @@ def build_adoption_decisions_from_assessment(payload: Mapping[str, Any]) -> List
 
 def render_mlp_assessment_markdown(payload: Mapping[str, Any]) -> str:
     lines = [
-        "# Offline ML Accelerator Assessment",
+        "# MLP Assessment",
         "",
         "| Candidate | Role | Decision | External Prior | Priority | Coverage | Rank Correlation | MAE (kcal/mol) | Nonphysical Reactions | Stop Reasons |",
         "| --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: | --- |",

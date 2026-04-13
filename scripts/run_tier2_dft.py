@@ -92,13 +92,14 @@ def main():
         # Meta for DB
         meta = SMILES_DATA.get(t, {})
         if meta:
-            meta["family"] = [t]
+            meta["family"] = t
 
         try:
             barrier = refiner.calculate_barrier(
                 data["reactant_xyz"],
                 data["ts_xyz"],
                 charge=data.get("charge", 0),
+                spin=data.get("spin", 0),
                 run_irc=args.irc,
                 reaction_meta=meta
             )

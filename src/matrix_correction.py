@@ -14,17 +14,17 @@ Current legume-matrix anchoring inside the repo:
 - soy: repo literature synthesis around soy glycinin/beta-conglycinin burial,
   sulfur limitation, extrusion-driven accessibility changes, and soy
   protein-polysaccharide conjugate trapping documented in
-  docs/Maillard_Plant_based.md and
-  docs/Elicit - Maillard Pathways in Plant-Based Cooking - Report.md
+    docs/research/archives/Maillard_Plant_based.md and
+    docs/research/archives/Elicit - Maillard Pathways in Plant-Based Cooking - Report.md
 """
 
+import json
 import math
 from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path
 from typing import Optional
 
-from src.artifact_io import load_json_mapping
 from src.matrix_prior_registry import (
     get_accessibility_window_entry,
     get_denaturation_heuristic_entry,
@@ -40,10 +40,45 @@ DATA_LIT_DIR = ROOT / "data" / "lit"
 
 
 def _load_json_payload(file_name: str) -> dict:
-    return load_json_mapping(DATA_LIT_DIR / file_name)
+    payload_path = DATA_LIT_DIR / file_name
+    with open(payload_path, "r", encoding="utf-8") as handle:
+        return json.load(handle)
 
 
 PROCESS_STATE_CALIBRATION_PAYLOAD = _load_json_payload("process_state_calibrations.json")
+PROTEIN_SOURCE_REGISTRY_PAYLOAD = _load_json_payload("protein_source_registry.json")
+
+@dataclass(frozen=True)
+class ProteinSourceProfile:
+    source_id: str
+    meaty_potential_multiplier: float
+    hydrolysate_observability_bias: float
+    off_note_penalty: float
+    lox_activity_flag: bool
+    methoxypyrazine_ceiling: float
+    aa_composition: dict[str, float]
+
+def _build_protein_source_profiles() -> dict[str, ProteinSourceProfile]:
+    profiles = {}
+    for entry in PROTEIN_SOURCE_REGISTRY_PAYLOAD.get("sources", []):
+        profiles[entry["source_id"]] = ProteinSourceProfile(
+            source_id=entry["source_id"],
+            meaty_potential_multiplier=float(entry.get("meaty_potential_multiplier", 1.0)),
+            hydrolysate_observability_bias=float(entry.get("hydrolysate_observability_bias", 1.0)),
+            off_note_penalty=float(entry.get("off_note_penalty", 0.0)),
+            lox_activity_flag=bool(entry.get("lox_activity_flag", False)),
+            methoxypyrazine_ceiling=float(entry.get("methoxypyrazine_ceiling", 1.0)),
+            aa_composition={k: float(v) for k, v in entry.get("aa_composition", {}).items()},
+        )
+    return profiles
+
+PROTEIN_SOURCE_PROFILES = _build_protein_source_profiles()
+
+def get_protein_source_profile(source_id: str) -> ProteinSourceProfile | None:
+    if not source_id:
+        return None
+    return PROTEIN_SOURCE_PROFILES.get(str(source_id).strip().lower())
+
 
 
 def get_process_state_calibration_payload(protein_type: ProteinType | str) -> list[dict]:
@@ -388,6 +423,7 @@ def resolve_compound_matrix_retention(
     time_minutes: Optional[float] = None,
     water_activity: Optional[float] = None,
     process_state: Optional[str] = None,
+    protein_source: Optional[str] = None,
 ) -> float:
     p_type = _coerce_protein_type(protein_type)
     base = resolve_matrix_correction(p_type, denaturation_state).volatile_retention
@@ -406,7 +442,18 @@ def resolve_compound_matrix_retention(
         process_state=process_state,
     )
     dynamic_factor = float(runtime.get("dynamic_retention_factor", 1.0))
-    return max(0.01, min(1.0, base * class_factor * dynamic_factor))
+    
+    source_factor = 1.0
+    profile = get_protein_source_profile(protein_source)
+    if profile:
+        source_factor = profile.meaty_potential_multiplier
+        if "methoxypyrazine" in name.lower():
+            source_factor = min(source_factor, profile.methoxypyrazine_ceiling)
+        compound_family = classify_volatile_matrix_family(name, smiles=smiles)
+        if compound_family in ["aldehyde", "alcohol"] and profile.lox_activity_flag:
+            source_factor *= (1.0 + profile.off_note_penalty)
+
+    return max(0.01, min(1.0, base * class_factor * dynamic_factor * source_factor))
 
 
 def describe_compound_matrix_retention(
@@ -418,6 +465,7 @@ def describe_compound_matrix_retention(
     time_minutes: Optional[float] = None,
     water_activity: Optional[float] = None,
     process_state: Optional[str] = None,
+    protein_source: Optional[str] = None,
 ) -> dict[str, object]:
     p_type = _coerce_protein_type(protein_type)
     base = resolve_matrix_correction(p_type, denaturation_state).volatile_retention
@@ -436,11 +484,23 @@ def describe_compound_matrix_retention(
         process_state=process_state,
     )
     dynamic_factor = float(runtime.get("dynamic_retention_factor", 1.0))
-    matrix_factor = max(0.01, min(1.0, base * class_factor * dynamic_factor))
+    
+    source_factor = 1.0
+    profile = get_protein_source_profile(protein_source)
+    if profile:
+        source_factor = profile.meaty_potential_multiplier
+        if "methoxypyrazine" in name.lower():
+            source_factor = min(source_factor, profile.methoxypyrazine_ceiling)
+        compound_family = classify_volatile_matrix_family(name, smiles=smiles)
+        if compound_family in ["aldehyde", "alcohol"] and profile.lox_activity_flag:
+            source_factor *= (1.0 + profile.off_note_penalty)
+
+    matrix_factor = max(0.01, min(1.0, base * class_factor * dynamic_factor * source_factor))
     return {
         "base_matrix_factor": float(base),
         "class_matrix_factor": float(class_factor),
         "dynamic_retention_factor": float(dynamic_factor),
+        "source_heuristic_factor": float(source_factor),
         "matrix_factor": float(matrix_factor),
         **runtime,
     }
@@ -555,31 +615,57 @@ def apply_matrix_correction(
     reactive_amino_acids: dict[str, float],
     protein_type: ProteinType,
     denaturation_state: float = 0.5,  # 0=native, 1=fully denatured
+    protein_source: Optional[str] = None,
 ) -> tuple[dict[str, float], dict[str, float]]:
     """
     Scale predicted volatile concentrations and reactive AA concentrations
-    by matrix accessibility factors.
-
-    denaturation_state: extrusion/heating increases accessibility.
-    1.0 (fully denatured) approaches the free AA model system.
+    by matrix accessibility factors and specific protein source heuristics.
     """
     corr = resolve_matrix_correction(
         protein_type,
         denaturation_state=denaturation_state,
     )
+    
+    profile = get_protein_source_profile(protein_source)
 
     corrected_aa = {}
     for aa, conc in reactive_amino_acids.items():
         aa_class = _classify_reactive_aa_key(aa)
-        if aa_class == "lysine":
-            corrected_aa[aa] = conc * corr.lysine_accessibility
-        elif aa_class == "cysteine":
-            corrected_aa[aa] = conc * corr.cysteine_accessibility
-        else:
-            corrected_aa[aa] = conc * (corr.lysine_accessibility + corr.cysteine_accessibility) / 2.0
+        
+        aa_scaler = 1.0
+        if profile:
+            if aa_class and aa_class in profile.aa_composition:
+                aa_scaler = profile.aa_composition[aa_class]
+            elif "methionine" in profile.aa_composition and "methionine" in aa.lower():
+                aa_scaler = profile.aa_composition["methionine"]
 
-    corrected_volatiles = {
-        compound: conc * corr.volatile_retention
-        for compound, conc in predicted_concentrations.items()
-    }
+        if aa_class == "lysine":
+            corrected_aa[aa] = conc * corr.lysine_accessibility * aa_scaler
+        elif aa_class == "cysteine":
+            corrected_aa[aa] = conc * corr.cysteine_accessibility * aa_scaler
+        else:
+            corrected_aa[aa] = conc * ((corr.lysine_accessibility + corr.cysteine_accessibility) / 2.0) * aa_scaler
+
+    corrected_volatiles = {}
+    for compound, conc in predicted_concentrations.items():
+        base_retention = corr.volatile_retention
+        
+        if profile:
+            # Base capacity shift for desirable meatiness
+            scaler = profile.meaty_potential_multiplier
+            
+            # Heuristic: methoxypyrazine non-correctable
+            if "methoxypyrazine" in compound.lower():
+                scaler = min(scaler, profile.methoxypyrazine_ceiling)
+
+            # Heuristic: Off-note penalty + LOX flag
+            compound_family = classify_volatile_matrix_family(compound)
+            if compound_family in ["aldehyde", "alcohol"] and profile.lox_activity_flag:
+                scaler *= (1.0 + profile.off_note_penalty)
+
+            base_retention *= scaler
+
+        corrected_volatiles[compound] = conc * base_retention
+
     return corrected_volatiles, corrected_aa
+

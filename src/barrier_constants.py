@@ -16,14 +16,14 @@ Sources
 * Hofmann & Schieberle 2000 (Strecker degradation)
 * Wedzicha 1984 (Cysteine thermolysis)
 * Hodge 1953; Nursten 2005 (overall Maillard kinetics)
-* Maillard_meat.md, Maillard_Plant_based.md (project literature reviews)
+* docs/research/archives/Maillard_meat.md, docs/research/archives/Maillard_Plant_based.md (project literature reviews)
 """
 
 import json
 import yaml
 import math
 from pathlib import Path
-from typing import Dict, Tuple, Optional
+from typing import Dict, Tuple, Optional, Sequence
 
 # Locate data files
 ROOT = Path(__file__).resolve().parents[1]
@@ -83,167 +83,7 @@ FAST_BARRIERS: Dict[str, Tuple[float, str]] = {
     "lipid_homolysis":      (42.0,  "O-O bond cleavage in hydroperoxides; high barrier"),
     "beta_scission":        (22.0,  "β-scission of alkoxy radicals; moderate barrier"),
     "radical_crosstalk":    (15.0,  "Radical + H2S collisions; fast"),
-
-    # ── MACE-OFF24 Derived Barriers (Families 11-16) ───────────────
-    # Retained for reference; the routing table below prefers higher tiers.
-    "hexanal_radical_quench_mlp_derived": (7.89, "MACE-OFF24 screening estimate"),
-    "mft_protein_noncovalent_mlp_derived": (25.69, "MACE-OFF24 screening estimate"),
-    "quinone_cys_michael_mlp_derived": (20.33, "MACE-OFF24 screening estimate"),
-    "quinone_lys_schiff_mlp_derived": (7.41, "MACE-OFF24 screening estimate"),
-    "aa_ring_open_dicarbonyl_mlp_derived": (18.10, "MACE-OFF24 screening estimate"),
-    "pe_schiff_base_mlp_derived": (15.20, "MACE-OFF24 screening estimate"),
-    "pe_amadori_mlp_derived": (8.94, "MACE-OFF24 screening estimate"),
-    "melanoidin_radical_trapping_mlp_derived": (26.29, "MACE-OFF24 screening estimate"),
-    "lysinoalanine_crosslink_mlp_derived": (31.75, "MACE-OFF24 screening estimate"),
-    "furosine_amadori_hydrolysis_mlp_derived": (5.33, "MACE-OFF24 screening estimate"),
-
-    # ── xTB-derived Barriers (Step C4/C5 promotion — xtb_derived_gfn2 tier) ─
-    # These 4 reactions have xTB path searches in data/geometries/xtb_inputs/;
-    # the _dft entries will be written by ingest_dft_c4_c5_results.py once
-    # the wB97M-V//r2SCAN-3c jobs complete.  Until then these values represent
-    # the best available GFN2-xTB guided estimates from the path search.
-    # Uncertainty floor: ±10 kcal/mol (factor 3–8 in concentration).
-    "hexanal_radical_quench_xtb_derived": (
-        7.58,
-        "GFN2-xTB NEB path search (xtb_derived_gfn2); ±10 kcal/mol; use for ranking only"
-    ),
-    "quinone_cys_michael_xtb_derived": (
-        17.84,
-        "GFN2-xTB NEB path search (xtb_derived_gfn2); ±10 kcal/mol; use for ranking only"
-    ),
-    "aa_ring_open_dicarbonyl_xtb_derived": (
-        7.58,   # Ea=31.7 kJ/mol from HCW = 7.577 kcal/mol — literature anchor
-        "HCW literature Ea=31.7 kJ/mol (literature_derived_transfer); ±5 kcal/mol; bounded calibration"
-    ),
-    "lysinoalanine_crosslink_xtb_derived": (
-        28.90,
-        "GFN2-xTB NEB path search (xtb_derived_gfn2); ±10 kcal/mol; use for ranking only"
-    ),
-
-    # ── Literature-Derived Barriers (Step C4/C5 — literature_derived_transfer) ─
-    # pe_schiff_base and pe_amadori have well-established literature Ea values
-    # from SLR 15 (phospholipid-amine Maillard).  These are used directly and
-    # are better than the MACE estimates.  The DFT refinement will validate them.
-    # Uncertainty: ±5 kcal/mol on transfer from model compound literature.
-    "pe_schiff_base_lit_derived": (
-        22.21,  # 92.9 kJ/mol ÷ 4.184
-        "SLR 15 literature Ea=92.9 kJ/mol (literature_derived_transfer); ±5 kcal/mol; bounded calibration"
-    ),
-    "pe_amadori_lit_derived": (
-        19.81,  # 82.9 kJ/mol ÷ 4.184
-        "SLR 15 literature Ea=82.9 kJ/mol (literature_derived_transfer); ±5 kcal/mol; bounded calibration"
-    ),
-
-    # ── DFT-Anchor Placeholders (will be filled by ingest_dft_c4_c5_results.py) ─
-    # These keys are pre-registered so the routing table works before the DFT
-    # jobs complete.  Values are None-signalled via the special sentinel 99.0.
-    "hexanal_radical_quench_dft": (
-        99.0,  # sentinel: not yet available
-        "selective_dft_anchor pending: run scripts/run_dft_c4_c5.py"
-    ),
-    "quinone_cys_michael_dft": (
-        99.0,
-        "selective_dft_anchor pending: run scripts/run_dft_c4_c5.py"
-    ),
-    "aa_ring_open_dicarbonyl_dft": (
-        99.0,
-        "selective_dft_anchor pending: run scripts/run_dft_c4_c5.py"
-    ),
-    "pe_schiff_base_dft": (
-        99.0,
-        "selective_dft_anchor pending: run scripts/run_dft_c4_c5.py"
-    ),
-    "pe_amadori_dft": (
-        99.0,
-        "selective_dft_anchor pending: run scripts/run_dft_c4_c5.py"
-    ),
-    "lysinoalanine_crosslink_dft": (
-        99.0,
-        "selective_dft_anchor pending: run scripts/run_dft_c4_c5.py"
-    ),
 }
-
-# ── Evidence-tier metadata for the 6 C4/C5 DFT targets ─────────────────────
-# Provides machine-readable current_tier, target_tier, uncertainty_kj, and
-# promotion_ceiling per reaction.  Updated by ingest_dft_c4_c5_results.py
-# when wB97M-V//r2SCAN-3c jobs complete.
-DFT_ANCHOR_METADATA: Dict[str, Dict[str, object]] = {
-    "hexanal_radical_quench": {
-        "current_tier": "xtb_derived_gfn2",
-        "target_tier": "selective_dft_anchor",
-        "slr_family": "11",
-        "active_key": "hexanal_radical_quench_xtb_derived",
-        "dft_key": "hexanal_radical_quench_dft",
-        "uncertainty_kj": 42.0,
-        "promotion_ceiling": "ranking_only",
-        "honest_label": "GFN2-xTB estimate, ±factor 3–8 in concentration, ranking only",
-    },
-    "quinone_cys_michael": {
-        "current_tier": "xtb_derived_gfn2",
-        "target_tier": "selective_dft_anchor",
-        "slr_family": "13",
-        "active_key": "quinone_cys_michael_xtb_derived",
-        "dft_key": "quinone_cys_michael_dft",
-        "uncertainty_kj": 42.0,
-        "promotion_ceiling": "bounded_calibration",
-        "honest_label": "GFN2-xTB estimate, ±factor 3–8 in concentration, ranking only",
-    },
-    "aa_ring_open_dicarbonyl": {
-        "current_tier": "literature_derived_transfer",
-        "target_tier": "selective_dft_anchor",
-        "slr_family": "14",
-        "active_key": "aa_ring_open_dicarbonyl_xtb_derived",
-        "dft_key": "aa_ring_open_dicarbonyl_dft",
-        "uncertainty_kj": 20.0,
-        "promotion_ceiling": "bounded_calibration",
-        "honest_label": "HCW literature Ea=31.7 kJ/mol, ±factor 2–5; bounded calibration",
-    },
-    "pe_schiff_base": {
-        "current_tier": "literature_derived_transfer",
-        "target_tier": "selective_dft_anchor",
-        "slr_family": "15",
-        "active_key": "pe_schiff_base_lit_derived",
-        "dft_key": "pe_schiff_base_dft",
-        "uncertainty_kj": 20.9,
-        "promotion_ceiling": "bounded_calibration",
-        "honest_label": "SLR 15 literature Ea=92.9 kJ/mol, ±factor 2–5; bounded calibration",
-    },
-    "pe_amadori": {
-        "current_tier": "literature_derived_transfer",
-        "target_tier": "selective_dft_anchor",
-        "slr_family": "15",
-        "active_key": "pe_amadori_lit_derived",
-        "dft_key": "pe_amadori_dft",
-        "uncertainty_kj": 20.9,
-        "promotion_ceiling": "bounded_calibration",
-        "honest_label": "SLR 15 literature Ea=82.9 kJ/mol, ±factor 2–5; bounded calibration",
-    },
-    "lysinoalanine_crosslink": {
-        "current_tier": "xtb_derived_gfn2",
-        "target_tier": "selective_dft_anchor",
-        "slr_family": "12",
-        "active_key": "lysinoalanine_crosslink_xtb_derived",
-        "dft_key": "lysinoalanine_crosslink_dft",
-        "uncertainty_kj": 42.0,
-        "promotion_ceiling": "ranking_only",
-        "honest_label": "GFN2-xTB estimate, ±factor 3–8 in concentration, ranking only",
-    },
-}
-
-
-def evidence_tier(reaction_key: str) -> str:
-    """Return the current evidence tier for a C4/C5 reaction key, or 'unknown'."""
-    meta = DFT_ANCHOR_METADATA.get(reaction_key)
-    if meta is None:
-        return "unknown"
-    # If the DFT placeholder is no longer sentinel (99.0), it has been filled
-    dft_key = str(meta.get("dft_key", ""))
-    if dft_key and dft_key in FAST_BARRIERS:
-        val = FAST_BARRIERS[dft_key][0]
-        if val < 99.0:
-            return "selective_dft_anchor"
-    return str(meta.get("current_tier", "unknown"))
-
 
 # Default barrier when no family pattern matches
 DEFAULT_BARRIER: float = 45.0
@@ -253,6 +93,136 @@ ARRHENIUS_R_KCAL: float = 0.001987
 # Heme catalyst barrier reduction (kcal/mol)
 HEME_CATALYST_REDUCTION: float = 5.0
 HEME_CATALYST_FAMILIES = frozenset({"Strecker_Degradation", "Aminoketone_Condensation", "Lipid_Strecker_Synergy"})
+
+DONOR_REACTIVITY_MULTIPLIERS: Dict[str, Dict[str, float]] = {
+    "schiff_condensation": {
+        "phosphorylated": 1.10,
+        "pentose": 1.00,
+        "fructose": 1.00,
+        "glucose": 0.94,
+    },
+    "amadori_rearrangement": {
+        "phosphorylated": 1.10,
+        "pentose": 1.00,
+        "fructose": 1.00,
+        "glucose": 0.94,
+    },
+    "heyns_rearrangement": {
+        "phosphorylated": 1.04,
+        "pentose": 1.00,
+        "fructose": 1.02,
+        "glucose": 0.98,
+    },
+    "enolisation_intermediate": {
+        "phosphorylated": 1.12,
+        "pentose": 1.00,
+        "fructose": 1.00,
+        "glucose": 0.92,
+    },
+    "1,2-enolisation": {
+        "phosphorylated": 1.12,
+        "pentose": 1.00,
+        "fructose": 1.00,
+        "glucose": 0.92,
+    },
+    "2,3-enolisation": {
+        "phosphorylated": 1.08,
+        "pentose": 1.00,
+        "fructose": 1.02,
+        "glucose": 0.95,
+    },
+    "dehydration": {
+        "phosphorylated": 1.10,
+        "pentose": 1.00,
+        "fructose": 1.02,
+        "glucose": 0.94,
+    },
+    "strecker_degradation": {
+        "phosphorylated": 1.10,
+        "pentose": 1.00,
+        "fructose": 0.98,
+        "glucose": 0.88,
+    },
+    "aminoketone_condensation": {
+        "phosphorylated": 1.10,
+        "pentose": 1.00,
+        "fructose": 1.02,
+        "glucose": 0.88,
+    },
+    "thiol_addition": {
+        "phosphorylated": 1.08,
+        "pentose": 1.00,
+        "fructose": 0.98,
+        "glucose": 0.90,
+    },
+    "thiohemiacetal_formation": {
+        "phosphorylated": 1.08,
+        "pentose": 1.00,
+        "fructose": 0.98,
+        "glucose": 0.92,
+    },
+    "thiol_dehydration": {
+        "phosphorylated": 1.08,
+        "pentose": 1.00,
+        "fructose": 0.98,
+        "glucose": 0.92,
+    },
+}
+
+_DONOR_PRIORITY = {
+    "phosphorylated": 4,
+    "pentose": 3,
+    "fructose": 2,
+    "glucose": 1,
+}
+
+
+def _normalize_donor_context_token(value: str) -> str:
+    return " ".join(str(value).strip().lower().replace("_", " ").replace("-", " ").split())
+
+
+def infer_carbohydrate_donor_identity(reactant_labels: Optional[Sequence[str]] = None) -> Optional[str]:
+    if not reactant_labels:
+        return None
+
+    detected: Dict[str, int] = {}
+    for raw_label in reactant_labels:
+        token = _normalize_donor_context_token(str(raw_label))
+        if not token:
+            continue
+        if any(item in token for item in ["ribose 5 phosphate", "glucose 6 phosphate", "fructose 6 phosphate", "r5p"]):
+            detected["phosphorylated"] = max(detected.get("phosphorylated", 0), _DONOR_PRIORITY["phosphorylated"])
+            continue
+        if any(item in token for item in ["ribose", "xylose", "arabinose"]):
+            detected["pentose"] = max(detected.get("pentose", 0), _DONOR_PRIORITY["pentose"])
+            continue
+        if "fructose" in token:
+            detected["fructose"] = max(detected.get("fructose", 0), _DONOR_PRIORITY["fructose"])
+            continue
+        if "glucose" in token:
+            detected["glucose"] = max(detected.get("glucose", 0), _DONOR_PRIORITY["glucose"])
+
+    if not detected:
+        return None
+    return max(detected.items(), key=lambda item: item[1])[0]
+
+
+def get_donor_reactivity_multiplier(
+    reaction_family: Optional[str],
+    *,
+    reactant_labels: Optional[Sequence[str]] = None,
+    donor_identity: Optional[str] = None,
+) -> float:
+    donor = str(donor_identity or infer_carbohydrate_donor_identity(reactant_labels) or "").strip().lower()
+    if not donor:
+        return 1.0
+
+    family_key = _canonical_fast_family(reaction_family)
+    if not family_key:
+        return 1.0
+
+    family_multipliers = DONOR_REACTIVITY_MULTIPLIERS.get(family_key, {})
+    return float(family_multipliers.get(donor, 1.0))
 
 
 def _normalize_family_key(reaction_family: Optional[str]) -> str:
@@ -345,25 +315,7 @@ def _arrhenius_yaml_key(family: Optional[str]) -> Optional[str]:
         "ring_opening": "mutarotation",
         "mutarotation": "mutarotation",
         "lipid_thiazole": "pyrazine_condensation",
-        
-        # ── Families 11-16: tiered routing (prefer _dft > _lit/_xtb > _mlp) ──
-        # The ingest_dft_c4_c5_results.py script writes the _dft YAML entries.
-        # Until then, _lit_derived and _xtb_derived are used.
-        "hexanal_radical_quench": "hexanal_radical_quench_xtb_derived",
-        "mft_protein_noncovalent": "mft_protein_noncovalent_mlp_derived",
-        "quinone_cys_michael": "quinone_cys_michael_xtb_derived",
-        "quinone_lys_schiff": "quinone_lys_schiff_mlp_derived",
-        "aa_ring_open_dicarbonyl": "aa_ring_open_dicarbonyl_xtb_derived",
-        "pe_schiff_base": "pe_schiff_base_lit_derived",
-        "pe_amadori": "pe_amadori_lit_derived",
-        "melanoidin_radical_trapping": "melanoidin_radical_trapping_mlp_derived",
-        "lysinoalanine_crosslink": "lysinoalanine_crosslink_xtb_derived",
-        "furosine_amadori_hydrolysis": "furosine_amadori_hydrolysis_mlp_derived",
     }
-    # If the family key is already a fully-qualified FAST_BARRIERS key, map it to itself
-    if canonical_family in yaml_key_map.values():
-        return canonical_family
-
     return yaml_key_map.get(canonical_family)
 
 
@@ -491,13 +443,9 @@ def get_arrhenius_params(family: str) -> Optional[Tuple[float, float, str, float
             "literature": 2.0,
             "estimated_tst": 4.0,
             "heuristic": 5.0,
-            "estimated": 3.5,
-            "mlp_screen_mace": 15.0, # MACE-OFF24 derived uncertainty floor
-            "xtb_derived_gfn2": 10.0,
-            "selective_dft_anchor": 3.0
+            "estimated": 3.5
         }
-        # explicit YAML uncertainty trumps mapped quality uncertainty
-        uncertainty = float(entry.get("uncertainty_kj", quality_unc_map.get(quality, 3.5)))
+        uncertainty = quality_unc_map.get(quality, 3.5)
             
         return A, Ea_kcal, quality, uncertainty
         

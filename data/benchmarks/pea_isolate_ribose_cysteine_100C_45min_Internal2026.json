@@ -1,0 +1,127 @@
+{
+  "benchmark_id": "pea_isolate_ribose_cysteine_100C_45min_Internal2026",
+  "source_metadata": {
+    "origin": "internal_reproducibility_candidate",
+    "measurement_date": "2026-03-17",
+    "generator": "docker_frozen_model_candidate",
+    "notes": "Reference signal frozen from the Docker-valid run path to create a reproducible matrix target-ranking harness. This is not an external wet-lab measurement."
+  },
+  "precursors": {
+    "Pea Protein Isolate": {
+      "concentration_mM": 1000.0
+    },
+    "D-Ribose": {
+      "concentration_mM": 1.0
+    },
+    "L-Cysteine": {
+      "concentration_mM": 1.0
+    }
+  },
+  "conditions": {
+    "temp_C": 100.0,
+    "ph": 5.6,
+    "water_activity": 0.95,
+    "time_min": 45.0
+  },
+  "metadata": {
+    "tier": "SECONDARY",
+    "family": "matrix_precursor_augmented",
+    "execution_path": "matrix_precursor_augmented",
+    "notes": "Internal pea-isolate meaty-positive ranking harness with exogenous ribose and cysteine. Useful for reproducible integration checks; not strict-gate evidence."
+  },
+  "process_metadata": {
+    "state": "aqueous_pre_extrusion_model",
+    "preheating": "none",
+    "extrusion_history": "none",
+    "matrix_format": "pea isolate slurry with exogenous ribose and cysteine"
+  },
+  "matrix_ranking_contract": {
+    "observable_targets": [
+      {
+        "name": "2-furfurylthiol",
+        "role": "desirable_marker",
+        "expected_rank": 1,
+        "direction": "higher"
+      },
+      {
+        "name": "2-methyl-3-furanthiol",
+        "role": "desirable_marker",
+        "expected_rank": 2,
+        "direction": "higher"
+      },
+      {
+        "name": "bis(2-methyl-3-furyl) disulfide",
+        "role": "desirable_marker",
+        "expected_rank": 3,
+        "direction": "higher"
+      },
+      {
+        "name": "2,5-dimethylpyrazine",
+        "role": "desirable_marker",
+        "expected_rank": 4,
+        "direction": "higher"
+      },
+      {
+        "name": "Hexanal",
+        "role": "adverse_marker",
+        "expected_rank": 5,
+        "direction": "lower"
+      },
+      {
+        "name": "Nonanal",
+        "role": "adverse_marker",
+        "expected_rank": 6,
+        "direction": "lower"
+      }
+    ],
+    "adverse_markers": [
+      "furfural",
+      "Hexanal",
+      "Nonanal"
+    ],
+    "citation_provenance": [
+      "Internal Docker-frozen reproducibility candidate anchored to the repo's matrix accessibility and free-AA sulfur chemistry envelope",
+      "Hofmann 1998 / Cerny 2003 motivate the free-AA sulfur target family but do not constitute direct pea-matrix measurement"
+    ],
+    "calibration_mode": "class_fallback_plus_matrix_accessibility",
+    "notes": "Proof-of-use benchmark candidate for meaty-positive ranking in pea matrix. Reference signal is model-frozen, not external literature.",
+    "validation_contract": {
+      "scale_thresholds": {
+        "max_ratio": 2.5,
+        "mean_abs_log10_error": 0.4
+      }
+    }
+  },
+  "reference_volatiles": {
+    "furfural": {
+      "conc_ppb": 0.03167112122616593,
+      "uncertainty_pct": 0.0
+    },
+    "2-furfurylthiol": {
+      "conc_ppb": 0.005024215110674793,
+      "uncertainty_pct": 0.0
+    },
+    "2-methyl-3-furanthiol": {
+      "conc_ppb": 0.003421173184298469,
+      "uncertainty_pct": 0.0
+    },
+    "bis(2-methyl-3-furyl) disulfide": {
+      "conc_ppb": 0.0003237153767600219,
+      "uncertainty_pct": 0.0
+    },
+    "2,5-dimethylpyrazine": {
+      "conc_ppb": 0.00023376108663497553,
+      "uncertainty_pct": 0.0
+    },
+    "Hexanal": {
+      "conc_ppb": 0.00019561579937371347,
+      "uncertainty_pct": 0.0
+    },
+    "Nonanal": {
+      "conc_ppb": 0.00010157337516403879,
+      "uncertainty_pct": 0.0
+    }
+  },
+  "protein_type": "pea_iso",
+  "denaturation_state": 0.5
+}

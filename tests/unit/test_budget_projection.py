@@ -3,6 +3,7 @@ from pathlib import Path
 import pytest
 import yaml
 
+from src.literature_runtime import build_family_upstream_contract
 from src.pathway_extractor import ElementaryStep, Species
 from src.recommend import (
     DEFAULT_PROJECTION_STRATEGY,
@@ -15,6 +16,7 @@ from src.recommend import (
     _project_weighted_flux_to_ppb,
     _is_budget_relevant_species,
     _is_observable_target_species,
+    _resolve_upstream_observability_factor,
     _select_accumulating_projection_species,
 )
 
@@ -404,6 +406,78 @@ def test_melanoidin_trapping_penalizes_fft_more_than_mft_in_heated_soy_matrix():
     assert fft_row["process_state"] == "heated_matrix"
     assert fft_row["melanoidin_trapping_factor"] < mft_row["melanoidin_trapping_factor"] < 1.0
     assert observable[_canon(fft.smiles)] < observable[_canon(mft.smiles)]
+
+
+def test_melanoidin_trapping_can_penalize_free_thiamine_systems_when_family_16_is_active():
+    mft = Species("2-methyl-3-furanthiol", "Cc1occc1S")
+    canon = _canon(mft.smiles)
+    contract = build_family_upstream_contract(
+        sugars=["xylose"],
+        amino_acids=["cysteine", "thiamine"],
+        additives=[],
+        protein_type="free",
+        pH=6.0,
+        process_state="heated_matrix",
+        temperature_celsius=145.0,
+        time_minutes=20.0,
+        water_activity=0.98,
+        molar_ratios={"xylose": 10.0, "cysteine": 10.0, "thiamine": 10.0},
+        thiamine_availability={"available": True, "source": "benchmark_native_default"},
+    )
+
+    observable, metadata = _apply_output_projection(
+        {canon: 100.0},
+        {canon: mft},
+        {canon: {"name": "2-Methyl-3-furanthiol (MFT)", "type": "desirable", "data": {}}},
+        temperature_kelvin=418.15,
+        protein_type="free",
+        time_minutes=20.0,
+        water_activity=0.98,
+        family_upstream_contract=contract,
+    )
+
+    assert contract["family_lanes"]["16"]["active"] is True
+    assert metadata[canon]["melanoidin_trapping_factor"] < 1.0
+    assert observable[canon] < 100.0
+
+
+def test_hydrolysate_supported_sulfur_observability_uses_peptide_release_uplift_but_preserves_source_ranking():
+    contract = build_family_upstream_contract(
+        sugars=["xylose"],
+        amino_acids=["cysteine", "methionine", "glycine"],
+        additives=[],
+        support_cues=["soy protein isolate hydrolysate"],
+        protein_type="free",
+        pH=6.0,
+        process_state="heated_matrix",
+        temperature_celsius=120.0,
+        time_minutes=30.0,
+        water_activity=0.92,
+        molar_ratios={"xylose": 50.0, "cysteine": 3.0, "methionine": 4.0, "glycine": 8.0},
+    )
+
+    expected_hydrolysate_uplift = 1.0 + (1.6 - 1.0) * 0.92
+
+    soy_fft = _resolve_upstream_observability_factor(
+        "2-Furfurylthiol",
+        protein_source="soy_isolate",
+        family_upstream_contract=contract,
+    )
+    wheat_fft = _resolve_upstream_observability_factor(
+        "2-Furfurylthiol",
+        protein_source="wheat_gluten",
+        family_upstream_contract=contract,
+    )
+    soy_methional = _resolve_upstream_observability_factor(
+        "Methional",
+        protein_source="soy_isolate",
+        family_upstream_contract=contract,
+    )
+
+    assert soy_fft == pytest.approx(0.13 * expected_hydrolysate_uplift * 1.25)
+    assert wheat_fft == pytest.approx(soy_fft * (0.58 / 1.25))
+    assert soy_methional == pytest.approx(0.0045)
+    assert wheat_fft < soy_fft
 
 
 def test_output_projection_surfaces_extrusion_process_state_and_surrogates():

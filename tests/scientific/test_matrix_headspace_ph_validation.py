@@ -39,7 +39,6 @@ def test_pouvreau_pea_ph_family_is_reproduced_as_an_acidic_release_trend():
     assert pyrazine_ratio == pytest.approx(1.0, rel=0.02)
 
 
-@pytest.mark.slow
 def test_matrix_only_pratap_singh_baselines_remain_stable_at_reference_ph():
     pea = evaluate_benchmark(ROOT / "data" / "benchmarks" / "pea_isolate_40C_PratapSingh2021.json")
     soy = evaluate_benchmark(ROOT / "data" / "benchmarks" / "soy_isolate_40C_PratapSingh2021.json")

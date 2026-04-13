@@ -14,119 +14,88 @@ usage() {
 Usage: ./scripts/docker_maillard.sh <command> [args...]
 
 Commands:
-  up           Create or start the Docker container.
-  bootstrap    Create/update the maillard conda env and apply required patches.
-  shell        Open an interactive shell in /workspace with the env activated.
-  run CMD...   Run an arbitrary command inside the activated env.
-  pytest ...   Run pytest inside the activated env.
-  stability    Run the Tier 0/1 stability gate.
-  core         Run the core correctness lane.
-  scientific-fast
-               Run the fast scientific regression lane selected by pytest markers.
-  reporting-fast
-               Generate the lightweight matrix reporting bundle for fast product iteration.
-  ml-accelerator-quick-tests
-               Run the fast no-wet-lab iteration lane for ML accelerator adapters, drift guards, and TS-seed gating.
-  kinetics-validation
-               Run the slower Cantera/kinetics validation lane selected by pytest markers.
-  scientific   Run the scientific validation lane.
-  qm-heavy     Run the QM / external-backend lane.
-  hofmann      Generate the Hofmann diagnostic snapshot.
-  targets BENCH [TYPE]
-               Generate a benchmark target snapshot (default TYPE=desirable; aliases: off_flavour, off-flavour, competing).
-  targets-report
-               Generate results/validation/benchmark_targets.{md,json}.
-  matrix-deltas
-               Generate results/validation/matrix_benchmark_deltas.{md,json}.
-  matrix-assertions
-               Generate results/validation/matrix_benchmark_assertions.{md,json}.
-  matrix-evidence
-               Generate results/validation/matrix_benchmark_evidence.{md,json}.
-  matrix-readiness
-               Generate results/validation/matrix_promotion_readiness.{md,json}.
+    scientific_lane
+    ;;
+  scientific-fast)
+    scientific_fast_lane
+    ;;
+  kinetics-validation)
+    kinetics_validation_lane
+    ;;
+  qm-heavy)
+    qm_heavy_lane
+    ;;
+  hofmann)
+    hofmann_diagnostic
+    ;;
+  targets)
+    shift
+    if [ "$#" -lt 1 ]; then
+      echo "Usage: ./scripts/docker_maillard.sh targets BENCHMARK_JSON [TYPE]" >&2
+      exit 1
+    fi
+    targets_snapshot "$1" "${2:-desirable}"
+    ;;
+  targets-report)
+    run_generator_script generate_benchmark_targets
   matrix-promotion-contract
                Generate results/validation/matrix_promotion_contract.{md,json}.
-  matrix-closure-audit
+    run_generator_script generate_matrix_benchmark_deltas
                Generate results/validation/matrix_observable_closure_audit.{md,json}.
-  matrix-primary-benchmark-campaign
-               Generate results/validation/matrix_primary_benchmark_campaign.{md,json}.
-  extrusion-external-closure
-               Generate results/validation/extrusion_external_closure.{md,json}.
-  dha-lysinoalanine-external-package
-               Generate results/validation/dha_lysinoalanine_external_package.{md,json}.
-  hexanal-nonanal-calibration
-               Generate results/validation/hexanal_nonanal_calibration_closure.{md,json}.
   experiment-intake-schema
-               Generate results/validation/matrix_experiment_intake_schema.{md,json}.
+    run_generator_script generate_matrix_benchmark_assertions
   compare-experiment INTAKE
                Generate support-delta artifacts for a matrix experiment intake payload.
-  materialize-experiment-benchmark INTAKE OUTPUT
-               Convert a matrix experiment intake payload into a benchmark JSON artifact.
+    run_generator_script generate_matrix_benchmark_evidence
+               Convert an extrusion external-closure workbook into intake payloads and support-delta artifacts.
+  extrusion-follow-on-workbook WORKBOOK
+    run_generator_script generate_matrix_promotion_readiness
+  extrusion-diagnostic-examples
+               Generate and execute synthetic diagnostic examples for both extrusion workbook flows.
+    run_generator_script generate_matrix_promotion_contract --output-dir results/validation
+               Generate the no-wet-lab computational-gap refinement plan and the xTB/DFT job manifests.
+  computational-gap-xtb [TARGET]
+    run_generator_script generate_matrix_observable_closure_audit --output-dir results/validation
+  computational-gap-dft [TARGET]
+               Execute the computational-gap DFT refinement job set (or a single TARGET id).
+    run_generator_script generate_matrix_experiment_intake_schema --output-dir results/validation
+               Generate the computational-gap DFT ingestion report from the current execution artifacts.
+  computational-gap-dft-promote
+    run_generator_script generate_literature_learning_loop --output-dir results/validation
   literature-learning-loop
                Generate results/validation/literature_learning_loop.{md,json}.
+    run_generator_script generate_family_ingestion_plan --output-dir results/validation
+               Generate results/validation/family_ingestion_plan.{md,json}.
   family-promotion-state
-               Generate results/validation/family_promotion_state.{md,json}.
+    run_generator_script generate_family_promotion_state --output-dir results/validation
   matrix-family-coverage
                Generate results/validation/matrix_family_coverage.{md,json}.
-  matrix-family-ranking
-               Generate results/validation/matrix_family_priority_ranking.{md,json}.
-  matrix-family-next-action
-               Generate results/validation/matrix_family_next_action.{md,json}.
-  family-sensitivity [TARGET_TAG] [DELTA_KCAL]
-               Generate results/validation/family_sensitivity.{md,json}.
-  mycoprotein-reference
-               Generate results/validation/mycoprotein_reference.{md,json}.
-  pea-soy-external-evidence
-               Generate results/validation/pea_soy_external_evidence.{md,json}.
-  pea-soy-mixed-external-package
-               Generate results/validation/pea_soy_mixed_external_package.{md,json}.
-  objective-progress
-               Generate results/validation/objective_progress.{md,json} and docs/assets/objective_progress.png.
-  primary-matrix-external-package
-               Generate results/validation/primary_matrix_external_package.{md,json}.
-  hexanal-nonanal-resolution
-               Generate results/validation/hexanal_nonanal_resolution.{md,json}.
-  scope-gap-guard
-               Generate results/validation/scope_gap_guard.{md,json}.
-  family-barrier-progress
-               Generate results/validation/family_barrier_progress.{md,json} and docs/assets/family_barrier_progress.png.
-  dft-coverage-map
-               Generate data/lit/dft_coverage_map.json and results/validation/dft_coverage_map.{md,json}.
-  mechanistic-refinement
-               Generate the selective mechanistic refinement artifact bundle including governance.
-  geometry-preopt-assessment
-               Generate the geometry preoptimization benchmark and assessment artifacts.
-  ts-seed-recovery-assessment
-               Generate the TS-seed recovery benchmark and assessment artifacts.
-  ml-accelerator-assessment|mlp-assessment
-               Generate the full offline ML accelerator artifact bundle: reaction benchmark, geometry preoptimization benchmark, TS-seed recovery benchmark, geometry and TS-seed assessments, ML accelerator assessment, external landscape, and adoption notes.
-  Legacy aliases: p3-refinement, p4-geometry-assessment, p4-ts-seed-assessment, p4-mlp-assessment, p4-quick-tests
-  skip-registry
-               Generate results/validation/skip_registry.{md,json}.
+    run_generator_script generate_matrix_family_coverage
+               Generate the selective mechanistic refinement governance artifact bundle.
+  mlp-assessment
+    run_generator_script generate_refinement_governance --output-dir results/validation
   matrix-branch-deltas [BASE_REF]
                Generate results/validation/matrix_branch_delta_report.{md,json} against BASE_REF (default: main).
-  kinetics-timeseries ARGS...
-               Run scripts/run_cantera_kinetics.py inside Docker to generate CSV/plot time-series outputs.
-  coverage-gaps
+    run_generator_script generate_mlp_assessment
                Generate results/validation/benchmark_coverage_gaps.{md,json}.
   validation-figures
-               Generate validation_overview, family_validation_overview, and validated_envelope artifacts.
+    shift
   thermo-gating
                Generate results/validation/thermodynamic_gating_audit.{md,json}.
-  validated-envelope
+      exit 1
                Generate results/validation/validated_envelope.{md,json}.
   explain-formulation NAME [TARGET_TAG] [MINIMIZE_TAG]
-               Generate a formulation explainability artifact in results/validation.
+    ;;
   campaign SPEC [OUTPUT_DIR]
                Run a shareable campaign spec and generate campaign artifacts.
-  index        Generate results/validation/benchmark_index.{md,json}.
+    if [ "$#" -lt 1 ]; then
   summary      Generate results/validation/benchmark_summary.{md,json}.
-  scientist-report
-               Generate high-level transparency artifacts for food scientists (trust/blockers).
-  scientist-quickstart NAME
-               Run the high-level console quickstart for formulation NAME.
+  deep-research-audit
+    fi
   notebook     Launch a Jupyter notebook server on port 8888.
   status       Show container and environment status.
+  extrusion-follow-on-workbook)
+    shift
 EOF
 }
 
@@ -156,68 +125,25 @@ scientific_lane() {
   run_in_env "python scripts/generators/generate_matrix_promotion_readiness.py"
   run_in_env "python scripts/generators/generate_matrix_promotion_contract.py --output-dir results/validation"
   run_in_env "python scripts/generators/generate_matrix_observable_closure_audit.py --output-dir results/validation"
-  run_in_env "python scripts/generators/generate_matrix_primary_benchmark_campaign.py --output-dir results/validation"
-  run_in_env "python scripts/generators/generate_extrusion_external_closure.py --output-dir results/validation"
-  run_in_env "python scripts/generators/generate_hexanal_nonanal_calibration.py --output-dir results/validation"
   run_in_env "python scripts/generators/generate_matrix_experiment_intake_schema.py --output-dir results/validation"
   run_in_env "python scripts/generators/generate_matrix_family_coverage.py"
-  run_in_env "python scripts/generators/generate_matrix_family_priority_ranking.py"
-  run_in_env "python scripts/generators/generate_matrix_family_next_action.py"
-  run_in_env "python scripts/generators/generate_mycoprotein_reference.py"
-  run_in_env "python scripts/generators/generate_pea_soy_external_evidence.py"
-  run_in_env "python scripts/generators/generate_pea_soy_mixed_external_package.py"
-  run_in_env "python scripts/generators/generate_extrusion_external_closure.py --output-dir results/validation"
-  run_in_env "python scripts/generators/generate_dha_lysinoalanine_external_package.py"
-  run_in_env "python scripts/generators/generate_objective_progress.py --output-dir results/validation --docs-asset-dir docs/assets"
-  run_in_env "python scripts/generators/generate_primary_matrix_external_package.py"
-  run_in_env "python scripts/generators/generate_hexanal_nonanal_resolution.py"
-  run_in_env "python scripts/generators/generate_scope_gap_guard.py"
-  run_in_env "python scripts/generators/generate_family_barrier_progress.py --output-dir results/validation --docs-asset-dir docs/assets"
-  run_in_env "python scripts/generators/generate_refinement_campaign.py --output-dir results/validation"
-  run_in_env "python scripts/generators/generate_mlp_geometry_assessment.py"
-  run_in_env "python scripts/generators/generate_mlp_ts_seed_assessment.py"
+  run_in_env "python scripts/generators/generate_refinement_governance.py --output-dir results/validation"
   run_in_env "python scripts/generators/generate_mlp_assessment.py"
+  run_in_env "python scripts/generators/generate_computational_gap_refinement_plan.py --output-dir results/validation --manifest-dir results/computational_gap_refinement"
+  run_in_env "python scripts/generators/ingest_computational_gap_dft_results.py --output-dir results/validation"
   run_in_env "python scripts/generators/generate_literature_learning_loop.py --output-dir results/validation"
   run_in_env "python scripts/generators/generate_family_promotion_state.py --output-dir results/validation"
   run_in_env "python scripts/generators/generate_family_lane_validation.py --output-dir results/validation"
   run_in_env "python scripts/generators/generate_family_deviation_audit.py --output-dir results/validation"
-  run_in_env "python scripts/generators/generate_validation_figures.py"
+  run_in_env "python scripts/generators/generate_validation_figures.py --docs-asset-dir docs/assets"
   run_in_env "python scripts/generators/generate_family_validation_figures.py --output-dir results/validation --docs-asset-dir docs/assets"
   run_in_env "python scripts/generators/generate_validated_envelope_report.py"
   run_in_env "python scripts/generators/generate_thermodynamic_gating_audit.py"
-  s9_authority_lane
   scientific_fast_lane
 }
 
 scientific_fast_lane() {
-  run_in_env "python -m pytest -m 'scientific_regression and not slow' tests/scientific tests/unit/test_budget_projection.py tests/unit/test_safety_and_flux.py tests/integration/test_recommendation_engine.py"
-}
-
-reporting_fast_lane() {
-  run_in_env "python scripts/generators/generate_matrix_target_status.py"
-  run_in_env "python scripts/generators/generate_hexanal_nonanal_calibration.py --output-dir results/validation"
-  run_in_env "python scripts/generators/generate_matrix_family_coverage.py"
-  run_in_env "python scripts/generators/generate_matrix_family_priority_ranking.py"
-  run_in_env "python scripts/generators/generate_matrix_family_next_action.py"
-  run_in_env "python scripts/generators/generate_mycoprotein_reference.py"
-  run_in_env "python scripts/generators/generate_pea_soy_external_evidence.py"
-  run_in_env "python scripts/generators/generate_pea_soy_mixed_external_package.py"
-  run_in_env "python scripts/generators/generate_extrusion_external_closure.py --output-dir results/validation"
-  run_in_env "python scripts/generators/generate_dha_lysinoalanine_external_package.py"
-  run_in_env "python scripts/generators/generate_objective_progress.py --output-dir results/validation --docs-asset-dir docs/assets"
-  run_in_env "python scripts/generators/generate_primary_matrix_external_package.py"
-  run_in_env "python scripts/generators/generate_hexanal_nonanal_resolution.py"
-  run_in_env "python scripts/generators/generate_scope_gap_guard.py"
-  run_in_env "python scripts/generators/generate_family_barrier_progress.py --output-dir results/validation --docs-asset-dir docs/assets"
-}
-
-s9_authority_lane() {
-  run_in_env "python -m pytest tests/unit/test_authority_benchmark_data.py tests/benchmarks/test_quasi_harmonic_correction.py tests/benchmarks/test_barrier_benchmarks.py tests/benchmarks/test_irc_validation.py tests/unit/test_dft_refiner_irc_api.py tests/unit/test_skip_policy_registry.py"
-  run_in_env "python scripts/generators/generate_skip_registry.py --output-dir results/validation"
-}
-
-p4_quick_tests_lane() {
-  run_in_env "python -m pytest -m 'not slow' tests/unit/test_mlp_optimizer_unit.py tests/unit/test_mlp_backend_adapters.py tests/unit/test_chemistry_benchmark_validator.py tests/unit/test_ts_seed_benchmark.py tests/unit/test_ts_seed_benchmark_validator.py"
+  run_in_env "python -m pytest -m scientific_regression tests/scientific tests/unit/test_budget_projection.py tests/unit/test_safety_and_flux.py tests/integration/test_recommendation_engine.py"
 }
 
 kinetics_validation_lane() {
@@ -230,6 +156,54 @@ qm_heavy_lane() {
 
 hofmann_diagnostic() {
   run_in_env "python scripts/diagnose_benchmark_selectivity.py --lit data/benchmarks/cys_ribose_140C_Hofmann1998.json"
+}
+
+run_generator_script() {
+  local generator_name="$1"
+  shift || true
+  if [ "$#" -eq 0 ]; then
+    run_in_env "python scripts/generators/${generator_name}.py"
+  else
+    run_in_env "python scripts/generators/${generator_name}.py $*"
+  fi
+}
+
+validation_figures_lane() {
+  local commands=(
+    "generate_family_lane_validation --output-dir results/validation"
+    "generate_family_deviation_audit --output-dir results/validation"
+    "generate_validation_figures --docs-asset-dir docs/assets"
+    "generate_family_validation_figures --output-dir results/validation --docs-asset-dir docs/assets"
+    "generate_validated_envelope_report"
+  )
+  local command
+  for command in "${commands[@]}"; do
+    run_generator_script $command
+  done
+}
+
+run_generator_alias() {
+  case "$1" in
+    targets-report) run_generator_script generate_benchmark_targets ;;
+    matrix-deltas) run_generator_script generate_matrix_benchmark_deltas ;;
+    matrix-assertions) run_generator_script generate_matrix_benchmark_assertions ;;
+    matrix-evidence) run_generator_script generate_matrix_benchmark_evidence ;;
+    matrix-readiness) run_generator_script generate_matrix_promotion_readiness ;;
+    matrix-promotion-contract) run_generator_script generate_matrix_promotion_contract --output-dir results/validation ;;
+    matrix-closure-audit) run_generator_script generate_matrix_observable_closure_audit --output-dir results/validation ;;
+    experiment-intake-schema) run_generator_script generate_matrix_experiment_intake_schema --output-dir results/validation ;;
+    literature-learning-loop) run_generator_script generate_literature_learning_loop --output-dir results/validation ;;
+    family-ingestion-plan) run_generator_script generate_family_ingestion_plan --output-dir results/validation ;;
+    family-promotion-state) run_generator_script generate_family_promotion_state --output-dir results/validation ;;
+    matrix-family-coverage) run_generator_script generate_matrix_family_coverage ;;
+    refinement-governance) run_generator_script generate_refinement_governance --output-dir results/validation ;;
+    mlp-assessment) run_generator_script generate_mlp_assessment ;;
+    coverage-gaps) run_generator_script generate_benchmark_coverage_gaps ;;
+    thermo-gating) run_generator_script generate_thermodynamic_gating_audit ;;
+    validated-envelope) run_generator_script generate_validated_envelope_report ;;
+    index) run_generator_script generate_benchmark_index ;;
+    summary) run_generator_script generate_benchmark_summary ;;
+  esac
 }
 
 targets_snapshot() {
@@ -270,15 +244,6 @@ run_in_env() {
   local command="$1"
   # We use 'export MKL_INTERFACE_LAYER=LP64' and 'set +u' to bypass common Conda activation script bugs
   docker exec "$CONTAINER_NAME" bash -lc "set -eo pipefail; source '$CONDA_SH'; export MKL_INTERFACE_LAYER=LP64; set +u; conda activate '$ENV_NAME'; set -u; cd '$WORKSPACE_MOUNT'; $command"
-}
-
-shell_join() {
-  local quoted=()
-  local arg
-  for arg in "$@"; do
-    quoted+=("$(printf '%q' "$arg")")
-  done
-  printf '%s' "${quoted[*]}"
 }
 
 bootstrap_env() {
@@ -357,7 +322,7 @@ case "$cmd" in
     ;;
   run)
     shift
-    run_in_env "$(shell_join "$@")"
+    run_in_env "$*"
     ;;
   pytest)
     shift
@@ -379,16 +344,6 @@ case "$cmd" in
   scientific-fast)
     scientific_fast_lane
     ;;
-  reporting-fast)
-    reporting_fast_lane
-    ;;
-  family-sensitivity)
-    shift
-    run_in_env "python scripts/generators/generate_family_sensitivity.py --output-dir results/validation --target-tag '${1:-meaty}' --delta-kcal '${2:-3.0}'"
-    ;;
-  ml-accelerator-quick-tests|p4-quick-tests)
-    p4_quick_tests_lane
-    ;;
   kinetics-validation)
     kinetics_validation_lane
     ;;
@@ -406,98 +361,8 @@ case "$cmd" in
     fi
     targets_snapshot "$1" "${2:-desirable}"
     ;;
-  targets-report)
-    run_in_env "python scripts/generators/generate_benchmark_targets.py"
-    ;;
-  matrix-deltas)
-    run_in_env "python scripts/generators/generate_matrix_benchmark_deltas.py"
-    ;;
-  matrix-assertions)
-    run_in_env "python scripts/generators/generate_matrix_benchmark_assertions.py"
-    ;;
-  matrix-evidence)
-    run_in_env "python scripts/generators/generate_matrix_benchmark_evidence.py"
-    ;;
-  matrix-readiness)
-    run_in_env "python scripts/generators/generate_matrix_promotion_readiness.py"
-    ;;
-  matrix-promotion-contract)
-    run_in_env "python scripts/generators/generate_matrix_promotion_contract.py --output-dir results/validation"
-    ;;
-  matrix-closure-audit)
-    run_in_env "python scripts/generators/generate_matrix_observable_closure_audit.py --output-dir results/validation"
-    ;;
-  matrix-primary-benchmark-campaign)
-    run_in_env "python scripts/generators/generate_matrix_primary_benchmark_campaign.py --output-dir results/validation"
-    ;;
-  extrusion-external-closure)
-    run_in_env "python scripts/generators/generate_extrusion_external_closure.py --output-dir results/validation"
-    ;;
-  dha-lysinoalanine-external-package)
-    run_in_env "python scripts/generators/generate_dha_lysinoalanine_external_package.py"
-    ;;
-  hexanal-nonanal-calibration)
-    run_in_env "python scripts/generators/generate_hexanal_nonanal_calibration.py --output-dir results/validation"
-    ;;
-  experiment-intake-schema)
-    run_in_env "python scripts/generators/generate_matrix_experiment_intake_schema.py --output-dir results/validation"
-    ;;
-  literature-learning-loop)
-    run_in_env "python scripts/generators/generate_literature_learning_loop.py --output-dir results/validation"
-    ;;
-  family-promotion-state)
-    run_in_env "python scripts/generators/generate_family_promotion_state.py --output-dir results/validation"
-    ;;
-  matrix-family-coverage)
-    run_in_env "python scripts/generators/generate_matrix_family_coverage.py"
-    ;;
-  matrix-family-ranking)
-    run_in_env "python scripts/generators/generate_matrix_family_priority_ranking.py"
-    ;;
-  matrix-family-next-action)
-    run_in_env "python scripts/generators/generate_matrix_family_next_action.py"
-    ;;
-  mycoprotein-reference)
-    run_in_env "python scripts/generators/generate_mycoprotein_reference.py"
-    ;;
-  pea-soy-external-evidence)
-    run_in_env "python scripts/generators/generate_pea_soy_external_evidence.py"
-    ;;
-  pea-soy-mixed-external-package)
-    run_in_env "python scripts/generators/generate_pea_soy_mixed_external_package.py"
-    ;;
-  objective-progress)
-    run_in_env "python scripts/generators/generate_objective_progress.py --output-dir results/validation --docs-asset-dir docs/assets"
-    ;;
-  primary-matrix-external-package)
-    run_in_env "python scripts/generators/generate_primary_matrix_external_package.py"
-    ;;
-  hexanal-nonanal-resolution)
-    run_in_env "python scripts/generators/generate_hexanal_nonanal_resolution.py"
-    ;;
-  scope-gap-guard)
-    run_in_env "python scripts/generators/generate_scope_gap_guard.py"
-    ;;
-  family-barrier-progress)
-    run_in_env "python scripts/generators/generate_family_barrier_progress.py --output-dir results/validation --docs-asset-dir docs/assets"
-    ;;
-  dft-coverage-map)
-    run_in_env "python scripts/generators/generate_dft_coverage_map.py"
-    ;;
-  mechanistic-refinement|p3-refinement)
-    run_in_env "python scripts/generators/generate_refinement_campaign.py --output-dir results/validation"
-    ;;
-  geometry-preopt-assessment|p4-geometry-assessment)
-    run_in_env "python scripts/generators/generate_mlp_geometry_assessment.py"
-    ;;
-  ts-seed-recovery-assessment|p4-ts-seed-assessment)
-    run_in_env "python scripts/generators/generate_mlp_ts_seed_assessment.py"
-    ;;
-  ml-accelerator-assessment|mlp-assessment|p4-mlp-assessment)
-    run_in_env "python scripts/generators/generate_mlp_assessment.py"
-    ;;
-  skip-registry|s9-skip-registry)
-    run_in_env "python scripts/generators/generate_skip_registry.py --output-dir results/validation"
+  targets-report|matrix-deltas|matrix-assertions|matrix-evidence|matrix-readiness|matrix-promotion-contract|matrix-closure-audit|experiment-intake-schema|literature-learning-loop|family-ingestion-plan|family-promotion-state|matrix-family-coverage|refinement-governance|mlp-assessment|coverage-gaps|thermo-gating|validated-envelope|index|summary)
+    run_generator_alias "$cmd"
     ;;
   compare-experiment)
     shift
@@ -507,41 +372,56 @@ case "$cmd" in
     fi
     run_in_env "python scripts/generators/compare_matrix_experiment_intake.py --experiment '$1' --output-dir results/validation"
     ;;
-  materialize-experiment-benchmark)
+  extrusion-closure-workbook)
     shift
-    if [ "$#" -lt 2 ]; then
-      echo "Usage: ./scripts/docker_maillard.sh materialize-experiment-benchmark INTAKE_FILE OUTPUT_BENCHMARK" >&2
+    if [ "$#" -lt 1 ]; then
+      echo "Usage: ./scripts/docker_maillard.sh extrusion-closure-workbook WORKBOOK_FILE" >&2
       exit 1
     fi
-    run_in_env "python scripts/generators/materialize_matrix_experiment_benchmark.py $(shell_join "$1" "$2")"
+    run_in_env "python scripts/generators/process_extrusion_external_closure_workbook.py --workbook '$1' --output-dir results/validation"
+    ;;
+  extrusion-follow-on-workbook)
+    shift
+    if [ "$#" -lt 1 ]; then
+      echo "Usage: ./scripts/docker_maillard.sh extrusion-follow-on-workbook WORKBOOK_FILE" >&2
+      exit 1
+    fi
+    run_in_env "python scripts/generators/process_extrusion_disulfide_follow_on_workbook.py --workbook '$1' --output-dir results/validation"
+    ;;
+  extrusion-diagnostic-examples)
+    run_generator_script generate_extrusion_diagnostic_examples
+    ;;
+  computational-gap-refinement-plan)
+    run_generator_script generate_computational_gap_refinement_plan --output-dir results/validation --manifest-dir results/computational_gap_refinement
+    ;;
+  computational-gap-xtb)
+    shift
+    if [ "$#" -ge 1 ]; then
+      run_in_env "python scripts/run_computational_gap_xtb.py --target '$1' --execute"
+    else
+      run_in_env "python scripts/run_computational_gap_xtb.py --execute"
+    fi
+    ;;
+  computational-gap-dft)
+    shift
+    if [ "$#" -ge 1 ]; then
+      run_in_env "exec python scripts/run_computational_gap_dft.py --target '$1' --execute"
+    else
+      run_in_env "exec python scripts/run_computational_gap_dft.py --execute"
+    fi
+    ;;
+  computational-gap-dft-ingest)
+    run_generator_script ingest_computational_gap_dft_results --output-dir results/validation
+    ;;
+  computational-gap-dft-promote)
+    run_generator_script promote_computational_gap_dft_results --output-dir results/validation
     ;;
   matrix-branch-deltas)
     shift
     run_in_env "python scripts/compare_matrix_benchmark_branches.py --base-ref '${1:-main}'"
     ;;
-  kinetics-timeseries)
-    shift
-    if [ "$#" -lt 1 ]; then
-      echo "Usage: ./scripts/docker_maillard.sh kinetics-timeseries --precursors ribose:0.1,cysteine:0.1 [run_cantera_kinetics args...]" >&2
-      exit 1
-    fi
-    run_in_env "python scripts/run_cantera_kinetics.py $(shell_join "$@")"
-    ;;
-  coverage-gaps)
-    run_in_env "python scripts/generators/generate_benchmark_coverage_gaps.py"
-    ;;
   validation-figures)
-    run_in_env "python scripts/generators/generate_family_lane_validation.py --output-dir results/validation"
-    run_in_env "python scripts/generators/generate_family_deviation_audit.py --output-dir results/validation"
-    run_in_env "python scripts/generators/generate_validation_figures.py"
-    run_in_env "python scripts/generators/generate_family_validation_figures.py --output-dir results/validation --docs-asset-dir docs/assets"
-    run_in_env "python scripts/generators/generate_validated_envelope_report.py"
-    ;;
-  thermo-gating)
-    run_in_env "python scripts/generators/generate_thermodynamic_gating_audit.py"
-    ;;
-  validated-envelope)
-    run_in_env "python scripts/generators/generate_validated_envelope_report.py"
+    validation_figures_lane
     ;;
   explain-formulation)
     shift
@@ -549,7 +429,7 @@ case "$cmd" in
       echo "Usage: ./scripts/docker_maillard.sh explain-formulation NAME [TARGET_TAG] [MINIMIZE_TAG]" >&2
       exit 1
     fi
-    run_in_env "python3 -m src explain $(shell_join "$@")"
+    run_in_env "python scripts/explain_formulation.py --name '$1' --target-tag '${2:-meaty}' --minimize-tag '${3:-beany}'"
     ;;
   campaign)
     shift
@@ -563,32 +443,8 @@ case "$cmd" in
       run_in_env "python scripts/run_campaign.py --spec '$1'"
     fi
     ;;
-  index)
-    run_in_env "python scripts/generators/generate_benchmark_index.py"
-    ;;
-  summary)
-    run_in_env "python scripts/generators/generate_benchmark_summary.py"
-    ;;
-  scientist-report)
-    run_in_env "python -c \"import pathlib; print('Scientist transparency reports are up-to-date at results/validation/')\""
-    ;;
-  scientist-quickstart)
-    shift
-    if [ "$#" -lt 1 ]; then
-      echo "Usage: ./scripts/docker_maillard.sh scientist-quickstart NAME" >&2
-      exit 1
-    fi
-    run_in_env "python scripts/scientist_quickstart.py $(shell_join "$@")"
-    ;;
-  dft-c4-c5)
-    shift
-    # Step C4 (r2SCAN-3c geom+freq) + Step C5 (wB97M-V SP) runner
-    run_in_env "python scripts/run_dft_c4_c5.py $(shell_join "$@")"
-    ;;
-  ingest-dft-c4-c5)
-    shift
-    # Ingest completed DFT results and promote to selective_dft_anchor tier
-    run_in_env "python scripts/generators/ingest_dft_c4_c5_results.py --output-dir results/validation $(shell_join "$@")"
+  deep-research-audit)
+    run_in_env "python scripts/deep_research_tracker.py"
     ;;
   notebook)
     run_in_env "jupyter notebook --ip 0.0.0.0 --port 8888 --no-browser --allow-root"

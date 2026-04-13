@@ -15,7 +15,6 @@ from src.benchmark_validation import evaluate_benchmark, get_benchmark_files, lo
 STRICT_BENCHMARKS = os.getenv("MAILLARD_STRICT_BENCHMARKS", "0") == "1"
 
 
-@pytest.mark.slow
 @pytest.mark.parametrize("bench_file", get_benchmark_files())
 def test_benchmark_correlation(bench_file):
     evaluation = evaluate_benchmark(bench_file)

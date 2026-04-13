@@ -1,0 +1,296 @@
+{
+  "summary": {
+    "family_count": 10,
+    "benchmark_visible_family_count": 6,
+    "literature_first_family_count": 4,
+    "policy": "dft_and_mlp_coverage_must_follow_literature_first_then_xTB_then_selective_DFT_with_MLPs_limited_to_bounded_offline_roles"
+  },
+  "families": [
+    {
+      "slr_family": "01",
+      "family_id": "amino_acid_sugar_core",
+      "display_name": "Amino acid-sugar Maillard core",
+      "strategic_posture": "first_class_core",
+      "runtime_concept": "core_reaction_network",
+      "literature_status": "literature_arrhenius_available",
+      "benchmark_visibility": "benchmark_visible_reaction_family",
+      "benchmark_visible_lanes": [
+        "schiff_condensation",
+        "amadori_rearrangement",
+        "strecker_degradation",
+        "beta_elimination"
+      ],
+      "motif_families": [
+        "carbonyl_amine_condensation",
+        "carbonyl_fragmentation",
+        "proton_transfer_rearrangement"
+      ],
+      "explicit_fast_barrier_count": 7,
+      "arrhenius_anchor_count": 7,
+      "quantitative_point_count": 22,
+      "xtb_status": "reserve_for_reopened_benchmark_residuals",
+      "dft_status": "selective_only_if_residuals_reopen",
+      "mlp_roles": {
+        "local_barrier_surrogate": [
+          "mace_off_medium"
+        ],
+        "geom_preopt": [
+          "mace_mp_small",
+          "mace_omol_shortlist"
+        ],
+        "ts_initialization": [
+          "aimnet2_shortlist",
+          "orbmol_shortlist"
+        ]
+      },
+      "next_compute_action": "keep_the_family_literature_first_and_use_xTB_or_DFT_only_for_reopened_benchmark_residuals"
+    },
+    {
+      "slr_family": "02",
+      "family_id": "lipid_oxidation_and_carbonylic_crosstalk",
+      "display_name": "Lipid oxidation and carbonylic crosstalk",
+      "strategic_posture": "immediate_expansion_lane",
+      "runtime_concept": "lipid_crosstalk_lane",
+      "literature_status": "encoded_without_arrhenius_anchor",
+      "benchmark_visibility": "benchmark_visible_reaction_family",
+      "benchmark_visible_lanes": [
+        "lipid_strecker_synergy"
+      ],
+      "motif_families": [
+        "sulfur_addition"
+      ],
+      "explicit_fast_barrier_count": 5,
+      "arrhenius_anchor_count": 0,
+      "quantitative_point_count": 17,
+      "xtb_status": "screen_missing_or_unanchored_barriers_first",
+      "dft_status": "selective_dft_for_benchmark_visible_missing_or_unanchored_steps",
+      "mlp_roles": {
+        "local_barrier_surrogate": [
+          "mace_off_medium"
+        ],
+        "geom_preopt": [
+          "mace_mp_small",
+          "mace_omol_shortlist",
+          "materials_foundation_example"
+        ],
+        "ts_initialization": [
+          "orbmol_shortlist"
+        ]
+      },
+      "next_compute_action": "close_literature_and_observable_gaps_then_xTB_screen_lipid_crosstalk_steps_before_selective_DFT"
+    },
+    {
+      "slr_family": "03",
+      "family_id": "thiamine_fragmentation_support",
+      "display_name": "Thiamine degradation and sulfur support",
+      "strategic_posture": "high_value_support_lane",
+      "runtime_concept": "thiamine_fragmentation_support",
+      "literature_status": "partially_literature_anchored",
+      "benchmark_visibility": "benchmark_visible_reaction_family",
+      "benchmark_visible_lanes": [
+        "thiamine_degradation",
+        "thiol_addition"
+      ],
+      "motif_families": [
+        "sulfur_addition",
+        "sulfur_fragmentation"
+      ],
+      "explicit_fast_barrier_count": 3,
+      "arrhenius_anchor_count": 2,
+      "quantitative_point_count": 0,
+      "xtb_status": "screen_missing_or_unanchored_barriers_first",
+      "dft_status": "selective_dft_for_benchmark_visible_missing_or_unanchored_steps",
+      "mlp_roles": {
+        "local_barrier_surrogate": [
+          "mace_off_medium"
+        ],
+        "geom_preopt": [
+          "mace_mp_small",
+          "mace_omol_shortlist",
+          "materials_foundation_example"
+        ],
+        "ts_initialization": [
+          "orbmol_shortlist"
+        ]
+      },
+      "next_compute_action": "fill_missing_literature_anchors_then_xTB_screen_then_run_selective_DFT_only_for_decisive_steps"
+    },
+    {
+      "slr_family": "04",
+      "family_id": "nucleotide_and_ribose_support",
+      "display_name": "Nucleotide degradation and ribose support",
+      "strategic_posture": "high_value_support_lane",
+      "runtime_concept": "nucleotide_and_ribose_support",
+      "literature_status": "literature_arrhenius_available",
+      "benchmark_visibility": "support_or_state_lane_not_yet_reaction_benchmarked",
+      "benchmark_visible_lanes": [],
+      "motif_families": [],
+      "explicit_fast_barrier_count": 3,
+      "arrhenius_anchor_count": 3,
+      "quantitative_point_count": 0,
+      "xtb_status": "not_primary_use_case_for_xTB",
+      "dft_status": "not_primary_use_case_for_family_wide_dft",
+      "mlp_roles": {},
+      "next_compute_action": "stay_literature_and_calibration_first_no_family_wide_qm"
+    },
+    {
+      "slr_family": "05",
+      "family_id": "glutathione_and_peptide_support",
+      "display_name": "Glutathione and low-molecular-weight peptide support",
+      "strategic_posture": "high_value_support_lane",
+      "runtime_concept": "sulfur_peptide_support",
+      "literature_status": "partially_literature_anchored",
+      "benchmark_visibility": "benchmark_visible_reaction_family",
+      "benchmark_visible_lanes": [
+        "glutathione_cleavage",
+        "cysteine_thermolysis",
+        "thiol_addition"
+      ],
+      "motif_families": [
+        "sulfur_addition",
+        "sulfur_fragmentation"
+      ],
+      "explicit_fast_barrier_count": 3,
+      "arrhenius_anchor_count": 2,
+      "quantitative_point_count": 0,
+      "xtb_status": "screen_missing_or_unanchored_barriers_first",
+      "dft_status": "selective_dft_for_benchmark_visible_missing_or_unanchored_steps",
+      "mlp_roles": {
+        "local_barrier_surrogate": [
+          "mace_off_medium"
+        ],
+        "geom_preopt": [
+          "mace_mp_small",
+          "mace_omol_shortlist",
+          "materials_foundation_example"
+        ],
+        "ts_initialization": [
+          "orbmol_shortlist"
+        ]
+      },
+      "next_compute_action": "fill_missing_literature_anchors_then_xTB_screen_then_run_selective_DFT_only_for_decisive_steps"
+    },
+    {
+      "slr_family": "06",
+      "family_id": "alternative_protein_matrix_scope",
+      "display_name": "Alternative protein matrix scope",
+      "strategic_posture": "matrix_scope_lane",
+      "runtime_concept": "matrix_family_scope_extension",
+      "literature_status": "not_a_primary_barrier_family",
+      "benchmark_visibility": "support_or_state_lane_not_yet_reaction_benchmarked",
+      "benchmark_visible_lanes": [],
+      "motif_families": [],
+      "explicit_fast_barrier_count": 0,
+      "arrhenius_anchor_count": 0,
+      "quantitative_point_count": 0,
+      "xtb_status": "not_primary_use_case_for_xTB",
+      "dft_status": "not_primary_use_case_for_family_wide_dft",
+      "mlp_roles": {},
+      "next_compute_action": "stay_literature_and_calibration_first_no_family_wide_qm"
+    },
+    {
+      "slr_family": "07",
+      "family_id": "carbonyl_donor_hierarchy",
+      "display_name": "Reducing sugar and carbonyl donor hierarchy",
+      "strategic_posture": "immediate_expansion_lane",
+      "runtime_concept": "carbonyl_donor_hierarchy",
+      "literature_status": "literature_arrhenius_available",
+      "benchmark_visibility": "benchmark_visible_reaction_family",
+      "benchmark_visible_lanes": [
+        "schiff_condensation",
+        "amadori_rearrangement"
+      ],
+      "motif_families": [
+        "carbonyl_amine_condensation",
+        "proton_transfer_rearrangement"
+      ],
+      "explicit_fast_barrier_count": 6,
+      "arrhenius_anchor_count": 6,
+      "quantitative_point_count": 0,
+      "xtb_status": "reserve_for_reopened_benchmark_residuals",
+      "dft_status": "selective_dft_for_benchmark_visible_missing_or_unanchored_steps",
+      "mlp_roles": {
+        "local_barrier_surrogate": [
+          "mace_off_medium"
+        ],
+        "geom_preopt": [
+          "mace_mp_small",
+          "mace_omol_shortlist"
+        ],
+        "ts_initialization": [
+          "aimnet2_shortlist"
+        ]
+      },
+      "next_compute_action": "keep_the_family_literature_first_and_use_xTB_or_DFT_only_for_reopened_benchmark_residuals"
+    },
+    {
+      "slr_family": "08",
+      "family_id": "off_note_and_maillard_suppression",
+      "display_name": "Plant off-notes and Maillard suppression",
+      "strategic_posture": "guardrail_lane",
+      "runtime_concept": "off_note_and_maillard_suppression",
+      "literature_status": "encoded_without_arrhenius_anchor",
+      "benchmark_visibility": "not_yet_benchmark_visible",
+      "benchmark_visible_lanes": [],
+      "motif_families": [],
+      "explicit_fast_barrier_count": 4,
+      "arrhenius_anchor_count": 0,
+      "quantitative_point_count": 1,
+      "xtb_status": "defer_until_benchmark_visible",
+      "dft_status": "defer_until_benchmark_visible",
+      "mlp_roles": {},
+      "next_compute_action": "defer_compute_escalation_until_the_family_is_benchmark_visible"
+    },
+    {
+      "slr_family": "09",
+      "family_id": "carbohydrate_pyrolysis_and_caramelization",
+      "display_name": "Carbohydrate pyrolysis and caramelization",
+      "strategic_posture": "failure_mode_lane",
+      "runtime_concept": "carbohydrate_pyrolysis_lane",
+      "literature_status": "literature_arrhenius_available",
+      "benchmark_visibility": "benchmark_visible_reaction_family",
+      "benchmark_visible_lanes": [
+        "retro_aldol"
+      ],
+      "motif_families": [
+        "carbonyl_fragmentation"
+      ],
+      "explicit_fast_barrier_count": 3,
+      "arrhenius_anchor_count": 3,
+      "quantitative_point_count": 4,
+      "xtb_status": "reserve_for_reopened_benchmark_residuals",
+      "dft_status": "selective_only_if_residuals_reopen",
+      "mlp_roles": {
+        "local_barrier_surrogate": [
+          "mace_off_medium"
+        ],
+        "geom_preopt": [
+          "mace_mp_small",
+          "mace_omol_shortlist"
+        ],
+        "ts_initialization": [
+          "orbmol_shortlist"
+        ]
+      },
+      "next_compute_action": "keep_the_family_literature_first_and_use_xTB_or_DFT_only_for_reopened_benchmark_residuals"
+    },
+    {
+      "slr_family": "10",
+      "family_id": "fermentation_pretreatment",
+      "display_name": "Microbial fermentation pretreatment",
+      "strategic_posture": "upstream_pretreatment_lane",
+      "runtime_concept": "fermentation_pretreatment_node",
+      "literature_status": "not_a_primary_barrier_family",
+      "benchmark_visibility": "not_yet_benchmark_visible",
+      "benchmark_visible_lanes": [],
+      "motif_families": [],
+      "explicit_fast_barrier_count": 0,
+      "arrhenius_anchor_count": 0,
+      "quantitative_point_count": 0,
+      "xtb_status": "defer_until_benchmark_visible",
+      "dft_status": "defer_until_benchmark_visible",
+      "mlp_roles": {},
+      "next_compute_action": "defer_compute_escalation_until_the_family_is_benchmark_visible"
+    }
+  ]
+}

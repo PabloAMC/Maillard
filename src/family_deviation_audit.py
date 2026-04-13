@@ -3,6 +3,7 @@ from __future__ import annotations
 from collections import defaultdict
 from typing import Any, Dict, Iterable, List, Optional
 
+from src.benchmark_labels import benchmark_label
 from src.benchmark_validation import DEFAULT_BENCHMARK_THRESHOLDS, DEFAULT_TARGET_TAG
 from src.family_validation_overview import build_family_validation_overview_artifact
 from src.validation_contract import BenchmarkThresholds
@@ -77,15 +78,16 @@ def build_family_deviation_audit_artifact(
         row["recommended_action"] = _recommended_action(root_cause)
         root_cause_counts[root_cause] += 1
 
-    by_ratio = sorted(points, key=lambda row: float(row.get("compound_ratio", 0.0)), reverse=True)
-    by_log10 = sorted(points, key=lambda row: float(row.get("abs_log10_error", 0.0)), reverse=True)
-
     experimental_points = [
         row
         for row in points
         if str(row.get("reference_signal_origin", "")) == "measured_volatiles"
         and str(row.get("source_origin", "")) != "internal_reproducibility_candidate"
     ]
+    by_ratio = sorted(points, key=lambda row: float(row.get("compound_ratio", 0.0)), reverse=True)
+    by_log10 = sorted(points, key=lambda row: float(row.get("abs_log10_error", 0.0)), reverse=True)
+    experimental_by_ratio = sorted(experimental_points, key=lambda row: float(row.get("compound_ratio", 0.0)), reverse=True)
+    experimental_by_log10 = sorted(experimental_points, key=lambda row: float(row.get("abs_log10_error", 0.0)), reverse=True)
     experimental_high_ratio_count = sum(
         1 for row in experimental_points if float(row.get("compound_ratio", 0.0)) >= high_ratio_threshold
     )
@@ -137,7 +139,7 @@ def build_family_deviation_audit_artifact(
     )
 
     fix_queue_map: Dict[str, Dict[str, Any]] = {}
-    for row in by_ratio:
+    for row in experimental_by_ratio:
         if float(row.get("compound_ratio", 0.0)) < high_ratio_threshold:
             continue
         ticket_key = "{benchmark}|{cause}".format(
@@ -169,17 +171,19 @@ def build_family_deviation_audit_artifact(
             "families_with_quantitative_points": sum(1 for row in family_rows if int(row.get("quantitative_point_count", 0)) > 0),
             "high_ratio_threshold": float(high_ratio_threshold),
             "high_log10_error_threshold": float(high_log10_error_threshold),
-            "high_ratio_point_count": sum(1 for row in points if float(row.get("compound_ratio", 0.0)) >= high_ratio_threshold),
-            "high_log10_error_point_count": sum(1 for row in points if float(row.get("abs_log10_error", 0.0)) >= high_log10_error_threshold),
+            "high_ratio_point_count": sum(1 for row in experimental_points if float(row.get("compound_ratio", 0.0)) >= high_ratio_threshold),
+            "high_log10_error_point_count": sum(1 for row in experimental_points if float(row.get("abs_log10_error", 0.0)) >= high_log10_error_threshold),
             "root_cause_counts": dict(sorted(root_cause_counts.items())),
             "experimental_quantitative_point_count": len(experimental_points),
             "experimental_high_ratio_point_count": experimental_high_ratio_count,
-            "max_observed_ratio": float(by_ratio[0].get("compound_ratio", 0.0)) if by_ratio else None,
-            "worst_point": by_ratio[0] if by_ratio else None,
+            "max_observed_ratio": float(experimental_by_ratio[0].get("compound_ratio", 0.0)) if experimental_by_ratio else None,
+            "worst_point": experimental_by_ratio[0] if experimental_by_ratio else None,
         },
         "family_deviation_table": ranked_families,
         "top_outliers_by_ratio": by_ratio[:top_n_outliers],
         "top_outliers_by_abs_log10_error": by_log10[:top_n_outliers],
+        "experimental_top_outliers_by_ratio": experimental_by_ratio[:top_n_outliers],
+        "experimental_top_outliers_by_abs_log10_error": experimental_by_log10[:top_n_outliers],
         "fix_queue": list(fix_queue_map.values()),
     }
 
@@ -244,7 +248,7 @@ def render_family_deviation_audit_markdown(payload: Dict[str, Any]) -> str:
     ])
     for row in payload.get("fix_queue", []):
         lines.append(
-            f"| {row.get('ticket_id', 'FD-000')} | {row.get('benchmark_id', 'unknown')} | {row.get('root_cause', 'unknown')} | {row.get('recommended_action', 'none')} | {float(row.get('max_ratio_in_cluster', 0.0)):.3f} | {', '.join(sorted(set(row.get('compounds', []))))} |"
+            f"| {row.get('ticket_id', 'FD-000')} | {benchmark_label(str(row.get('benchmark_id', 'unknown')))} | {row.get('root_cause', 'unknown')} | {row.get('recommended_action', 'none')} | {float(row.get('max_ratio_in_cluster', 0.0)):.3f} | {', '.join(sorted(set(row.get('compounds', []))))} |"
         )
 
     lines.extend([
@@ -256,6 +260,6 @@ def render_family_deviation_audit_markdown(payload: Dict[str, Any]) -> str:
     ])
     for row in payload.get("top_outliers_by_ratio", [])[:20]:
         lines.append(
-            f"| {row.get('benchmark_id', 'unknown')} | {row.get('display_name', row.get('chemistry_family', 'unknown'))} | {row.get('compound', 'unknown')} | {row.get('execution_path', 'unknown')} | {float(row.get('compound_ratio', 0.0)):.3f} | {float(row.get('abs_log10_error', 0.0)):.3f} |"
+            f"| {benchmark_label(str(row.get('benchmark_id', 'unknown')))} | {row.get('display_name', row.get('chemistry_family', 'unknown'))} | {row.get('compound', 'unknown')} | {row.get('execution_path', 'unknown')} | {float(row.get('compound_ratio', 0.0)):.3f} | {float(row.get('abs_log10_error', 0.0)):.3f} |"
         )
     return "\n".join(lines) + "\n"

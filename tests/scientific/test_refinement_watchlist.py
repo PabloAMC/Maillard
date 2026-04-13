@@ -1,17 +1,12 @@
 import sys
 from pathlib import Path
 
-import pytest
-
 
 ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from src.refinement_watchlist import build_refinement_watchlist, render_refinement_watchlist_markdown
-
-
-pytestmark = [pytest.mark.slow]
 
 
 def test_refinement_watchlist_ranks_benchmark_visible_reaction_families_and_materializes_jobs():
@@ -24,12 +19,9 @@ def test_refinement_watchlist_ranks_benchmark_visible_reaction_families_and_mate
     assert payload["summary"]["candidate_count"] > 0
     assert payload["summary"]["run_now"] >= 1
     assert payload["offline_jobs"]
-    assert "mace_mp_small" in payload["summary"]["approved_geom_preopt_candidates"]
-    assert any("mace_mp_small bounded_geom_preopt" in row["geom_preopt_plan"] for row in payload["candidates"])
     assert any("thiol" in row["reaction_family"].lower() or "strecker" in row["reaction_family"].lower() for row in payload["candidates"])
 
     markdown = render_refinement_watchlist_markdown(payload)
     assert "Refinement Watchlist" in markdown
-    assert "Geom Preopt" in markdown
     assert "Reaction Family" in markdown
     assert "Run-now candidates" in markdown

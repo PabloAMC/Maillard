@@ -270,53 +270,6 @@ def _build_extrusion_observable_panel(result: "FormulationResult") -> Dict[str, 
     return panel
 
 
-def _build_dha_extrusion_closure_panel(result: "FormulationResult") -> Dict[str, object]:
-    rows = build_projection_rows(result)
-    observed_names = {
-        str(row.get("compound", "")).strip().lower()
-        for row in rows
-        if str(row.get("compound", "")).strip()
-    }
-    observed_names.update(
-        str(row.get("name", "")).strip().lower()
-        for row in getattr(result, "targets", []) or []
-        if isinstance(row, dict) and str(row.get("name", "")).strip()
-    )
-
-    direct_markers = [
-        "Lysinoalanine (LAL)",
-        "Lanthionine (LAN)",
-        "Furosine",
-    ]
-    present_markers = [marker for marker in direct_markers if marker.strip().lower() in observed_names]
-    missing_markers = [marker for marker in direct_markers if marker not in present_markers]
-
-    lysine_budget_pct = float(getattr(result, "lysine_budget", 0.0) or 0.0)
-    if lysine_budget_pct >= 35.0:
-        risk_band = "high"
-    elif lysine_budget_pct >= 15.0:
-        risk_band = "moderate"
-    else:
-        risk_band = "low"
-
-    closure_ready = bool(present_markers)
-    evidence_mode = "direct_observable_closure" if closure_ready else "competition_inference_only"
-    if closure_ready:
-        summary = "DHA/LAL risk is supported by direct closure markers, so extrusion competition is no longer inferred purely from lysine-budget loss."
-    else:
-        summary = "DHA/LAL risk remains inference-first: lysine-budget competition is available, but no direct lysinoalanine/reactive-lysine closure marker is present in this run."
-
-    return {
-        "lysine_budget_pct": lysine_budget_pct,
-        "risk_band": risk_band,
-        "closure_ready": closure_ready,
-        "evidence_mode": evidence_mode,
-        "present_markers": present_markers,
-        "missing_markers": missing_markers,
-        "summary": summary,
-    }
-
-
 def _decision_proxy(result: "FormulationResult") -> float:
     return float(result.target_score) - float(result.safety_score) - float(result.off_flavour_risk) - 0.01 * float(result.texture_risk)
 
@@ -346,6 +299,26 @@ def _build_conditions_for_variant(
         matrix_fiber=float(getattr(baseline, "matrix_fiber", 0.0)),
         metal_catalyst=getattr(baseline, "metal_catalyst", None),
         protein_type=str(formulation.get("protein_type", getattr(baseline, "protein_type", "free"))),
+        sme_kj_per_kg=float(formulation.get("sme_kj_per_kg", getattr(baseline, "sme_kj_per_kg", 0.0))),
+        moisture_regime=formulation.get("moisture_regime", getattr(baseline, "moisture_regime", None)),
+        sterilization_temperature_celsius=formulation.get(
+            "sterilization_temperature_celsius",
+            getattr(baseline, "sterilization_temperature_celsius", None),
+        ),
+        sterilization_time_minutes=float(
+            formulation.get(
+                "sterilization_time_minutes",
+                getattr(baseline, "sterilization_time_minutes", 0.0),
+            )
+        ),
+        barrel_zone_temperatures=formulation.get(
+            "barrel_zone_temperatures",
+            getattr(baseline, "barrel_zone_temperatures", None),
+        ),
+        barrel_zone_time_fractions=formulation.get(
+            "barrel_zone_time_fractions",
+            getattr(baseline, "barrel_zone_time_fractions", None),
+        ),
     )
 
 
@@ -662,15 +635,17 @@ def build_confidence_package(
     payload["process_regime"] = process_regime.get("process_regime", "unknown")
     payload["process_neighborhood"] = process_regime.get("process_neighborhood", "unknown")
     payload["process_regime_summary"] = process_regime.get("summary", "")
+    if baseline_conditions is not None and hasattr(baseline_conditions, "extrusion_profile"):
+        extrusion_process = getattr(baseline_conditions, "extrusion_profile") or {}
+        if extrusion_process.get("active"):
+            payload["extrusion_process"] = extrusion_process
     payload["calibration_diagnostics"] = _build_calibration_diagnostics(assessment, result, warnings)
     payload["compound_confidence"] = _build_compound_confidence_rows(result, assessment)
     payload["aggregate_confidence"] = _build_aggregate_confidence_rows(result, assessment)
     payload["extrusion_observable_panel"] = _build_extrusion_observable_panel(result)
-    payload["dha_extrusion_closure_panel"] = _build_dha_extrusion_closure_panel(result)
 
     if payload["process_regime"] in {"extrusion_like", "extrusion_heavy"}:
         panel = payload["extrusion_observable_panel"]
-        dha_panel = payload["dha_extrusion_closure_panel"]
         if not bool(panel.get("minimum_panel_ready", False)):
             missing_categories = [
                 category.replace("_", " ")
@@ -692,22 +667,6 @@ def build_confidence_package(
             diagnostics["summary"] = "Recommendation extrapolates beyond the strongest support on: " + ", ".join(diagnostics["extrapolation_axes"]) + "."
             payload["calibration_diagnostics"] = diagnostics
 
-        if not bool(dha_panel.get("closure_ready", False)):
-            factor = str(dha_panel.get("summary", "")).strip()
-            dominant_factors = list(payload.get("dominant_factors", []))
-            if factor and factor not in dominant_factors:
-                dominant_factors.append(factor)
-            payload["dominant_factors"] = dominant_factors[:3]
-
-            diagnostics = dict(payload.get("calibration_diagnostics", {}))
-            axes = list(diagnostics.get("extrapolation_axes", []))
-            if "dha_extrusion_closure" not in axes:
-                axes.append("dha_extrusion_closure")
-            diagnostics["extrapolation_axes"] = sorted(set(axes))
-            diagnostics["supported_envelope"] = False
-            diagnostics["summary"] = "Recommendation extrapolates beyond the strongest support on: " + ", ".join(diagnostics["extrapolation_axes"]) + "."
-            payload["calibration_diagnostics"] = diagnostics
-
     payload["sensitivity_summary"] = _analyze_formulation_sensitivity(
         result,
         formulation=formulation,
@@ -715,6 +674,41 @@ def build_confidence_package(
         designer=designer,
     )
     return payload
+
+
+def prepare_cli_confidence(
+    result: "FormulationResult",
+    *,
+    target_tag: str,
+    precursor_names: List[str],
+    protein_type: str,
+    temp_c: float,
+    ph: float,
+    aw: float,
+    formulation: Dict[str, object],
+    baseline_conditions: Optional[ReactionConditions] = None,
+    designer: Optional[MaillardPipeline] = None,
+) -> List[DomainWarning]:
+    cleaned_precursors = [str(name).strip() for name in precursor_names if str(name).strip()]
+    checker = DomainOfValidityChecker(target_tag)
+    warnings = checker.check(
+        precursor_names=cleaned_precursors,
+        protein_type=protein_type,
+        temp_c=temp_c,
+        ph=ph,
+        aw=aw,
+        matrix_explainability=result.matrix_explainability,
+    )
+    result.confidence_metadata = build_confidence_package(
+        result,
+        warnings,
+        precursor_names=cleaned_precursors,
+        protein_type=protein_type,
+        formulation=formulation,
+        baseline_conditions=baseline_conditions,
+        designer=designer,
+    )
+    return warnings
 
 
 class DomainOfValidityChecker:

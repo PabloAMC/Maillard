@@ -22,7 +22,7 @@ sys.path.insert(0, str(ROOT))
 from src.conditions import ReactionConditions  # noqa: E402
 from src.pipeline import MaillardPipeline  # noqa: E402
 from src.reporting import generate_campaign_report, generate_report  # noqa: E402
-from src.usability_reports import DomainOfValidityChecker, build_confidence_package  # noqa: E402
+from src.usability_reports import prepare_cli_confidence  # noqa: E402
 
 
 def _slugify(text: str) -> str:
@@ -65,8 +65,6 @@ def main() -> int:
     target_tag = str(campaign_meta.get("target_tag", "meaty"))
     minimize_tag = str(campaign_meta.get("minimize_tag", "beany"))
     designer = MaillardPipeline(target_tag, minimize_tag)
-    checker = DomainOfValidityChecker(target_tag)
-
     base_conditions = ReactionConditions(
         pH=float(shared_conditions.get("ph", 6.0)),
         temperature_celsius=float(shared_conditions.get("temp", 150.0)),
@@ -108,19 +106,14 @@ def main() -> int:
         for key in ("sugars", "amino_acids", "additives", "lipids"):
             precursor_names.extend(formulation.get(key, []))
         protein_type = str(formulation.get("protein_type", shared_conditions.get("protein_type", "free")))
-        item_warnings = checker.check(
+        item_warnings = prepare_cli_confidence(
+            result,
+            target_tag=target_tag,
             precursor_names=precursor_names,
             protein_type=protein_type,
             temp_c=float(formulation.get("temp", shared_conditions.get("temp", base_conditions.temperature_celsius))),
             ph=float(formulation.get("ph", shared_conditions.get("ph", base_conditions.pH))),
             aw=float(formulation.get("aw", shared_conditions.get("aw", base_conditions.water_activity))),
-            matrix_explainability=result.matrix_explainability,
-        )
-        result.confidence_metadata = build_confidence_package(
-            result,
-            item_warnings,
-            precursor_names=precursor_names,
-            protein_type=protein_type,
             formulation=formulation,
             baseline_conditions=base_conditions,
             designer=designer,

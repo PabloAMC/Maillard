@@ -15,7 +15,7 @@ from src.literature_learning_loop import (
     build_literature_learning_loop_payload,
     render_literature_learning_loop_markdown,
 )
-
+from src.doe_generator import export_doe_requests
 
 def main() -> int:
     parser = argparse.ArgumentParser()
@@ -36,10 +36,14 @@ def main() -> int:
     json_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
     template_path.write_text(json.dumps(payload.get("runtime_templates", []), indent=2), encoding="utf-8")
 
+    doe_output = output_dir / "active_learning_requests.json"
+    export_doe_requests(str(ROOT / "data" / "lit" / "process_gap_registry.json"), str(doe_output))
+
     print(markdown)
     print(f"Wrote {markdown_path}")
     print(f"Wrote {json_path}")
     print(f"Wrote {template_path}")
+    print(f"Wrote {doe_output}")
     return 0
 
 

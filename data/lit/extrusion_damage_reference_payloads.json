@@ -1,0 +1,107 @@
+{
+  "version": "1.0",
+  "name": "extrusion_damage_reference_payloads",
+  "description": "Empirical reference ranges for computational safety markers (Furosine, CML, CEL, LAL) generated during High-Moisture Meat Extrusion (HMME). Used to anchor physics-based gap fillers.",
+  "entries": [
+    {
+      "id": "extrusion_r12_furosine",
+      "analyte": "Furosine",
+      "kind": "industrial_endpoint_reference",
+      "report_visibility": "default",
+      "source_citation": "Literature Report 12: Protein Damage Markers",
+      "what_it_supports": [
+        "Furosine peaks at ~8.7 mg/100g protein during 140C HMME.",
+        "Validates early Amadori/Maillard behavior in plant protein isolates."
+      ],
+      "matrix_reference_ranges": [
+        {
+          "matrix_family": "pea_isolate",
+          "value_range": [5.0, 11.0],
+          "unit": "mg/100g",
+          "conditions": "140C, 30-40% moisture"
+        },
+        {
+          "matrix_family": "soy_isolate",
+          "value_range": [3.0, 9.0],
+          "unit": "mg/100g",
+          "conditions": "140C, 30-40% moisture"
+        }
+      ]
+    },
+    {
+      "id": "extrusion_r12_cml",
+      "analyte": "CML",
+      "kind": "industrial_endpoint_reference",
+      "report_visibility": "default",
+      "source_citation": "Literature Report 12: Protein Damage Markers",
+      "what_it_supports": [
+        "CML concentration ranges between 16 and 110 mg/kg at 140C extrusion.",
+        "Demonstrates moisture promotion and pathway shifting at T > 130C."
+      ],
+      "matrix_reference_ranges": [
+        {
+          "matrix_family": "pea_isolate",
+          "value_range": [16.0, 50.0],
+          "unit": "mg/kg",
+          "conditions": "140C, 30-40% moisture"
+        },
+        {
+          "matrix_family": "soy_isolate",
+          "value_range": [25.0, 110.0],
+          "unit": "mg/kg",
+          "conditions": "140C, 30-40% moisture"
+        }
+      ]
+    },
+    {
+      "id": "extrusion_r12_cel",
+      "analyte": "CEL",
+      "kind": "industrial_endpoint_reference",
+      "report_visibility": "default",
+      "source_citation": "Literature Report 12: Protein Damage Markers",
+      "what_it_supports": [
+        "CEL is generated from methylglyoxal and ranges from 25 to 110 mg/kg.",
+        "Demonstrates dry-heat favoring and exponential growth at T > 121C."
+      ],
+      "matrix_reference_ranges": [
+        {
+          "matrix_family": "pea_isolate",
+          "value_range": [25.0, 90.0],
+          "unit": "mg/kg",
+          "conditions": "140C, 30-40% moisture"
+        },
+        {
+          "matrix_family": "soy_isolate",
+          "value_range": [30.0, 110.0],
+          "unit": "mg/kg",
+          "conditions": "140C, 30-40% moisture"
+        }
+      ]
+    },
+    {
+      "id": "extrusion_r12_lal",
+      "analyte": "Lysinoalanine",
+      "kind": "industrial_endpoint_reference",
+      "report_visibility": "default",
+      "source_citation": "Literature Report 12: Protein Damage Markers",
+      "what_it_supports": [
+        "LAL generates severe lysine destruction (PPI ~15% vs SPI ~31%).",
+        "Driven by pH-catalyzed beta-elimination and intense thermal stress."
+      ],
+      "matrix_reference_ranges": [
+        {
+          "matrix_family": "pea_isolate",
+          "value_range": [5.0, 20.0],
+          "unit": "mg/100g",
+          "conditions": "140C, 30-40% moisture"
+        },
+        {
+          "matrix_family": "soy_isolate",
+          "value_range": [25.0, 40.0],
+          "unit": "mg/100g",
+          "conditions": "140C, 30-40% moisture"
+        }
+      ]
+    }
+  ]
+}

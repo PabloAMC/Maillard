@@ -2,7 +2,7 @@ import yaml
 import logging
 import math
 from pathlib import Path
-from typing import List, Dict, Tuple, Optional, Any
+from typing import List, Dict, Tuple, Optional
 from dataclasses import dataclass, field
 
 from src.smirks_engine import SmirksEngine, ReactionConditions, Species  # noqa: E402
@@ -13,12 +13,12 @@ from src.results_db import ResultsDB  # noqa: E402
 from src.sensory import SensoryPredictor  # noqa: E402
 from src.safety import evaluate_formulation_safety  # noqa: E402
 from src.lipid_oxidation import build_lipid_input_proxy_loads, predict_lop_generation  # noqa: E402
+from src.matrix_calibration_registry import determine_matrix_process_state
 from src.matrix_correction import build_matrix_explainability, resolve_effective_denaturation_state  # noqa: E402
+from src.extrusion import build_extrusion_process_profile
 from src.literature_runtime import build_family_upstream_contract, build_flavor_axis_summary
-from src.ode_kinetics import simulate_kinetic_trace
 from src.pre_processor import PreProcessor
 from src.projection_metadata import ProjectionMetadataMap
-from src.formulation import Formulation
 
 # Locate data files
 ROOT = Path(__file__).resolve().parents[1]
@@ -75,23 +75,22 @@ class FormulationResult:
     trapping_efficiency: float = 0.0
     detected_targets: List[str] = field(default_factory=list)
     detected_minimize: List[str] = field(default_factory=list)
-    radar: Dict[str, Tuple[float, float, float]] = field(default_factory=dict)
+    radar: Dict[str, tuple] = field(default_factory=dict)
     safety_score: float = 0.0
     flagged_toxics: List[str] = field(default_factory=list)
     texture_risk: float = 0.0
-    safety_metrics: Dict[str, float] = field(default_factory=dict)
     predicted_ppb: Dict[str, float] = field(default_factory=dict)
     predicted_proxy_ppb: Dict[str, float] = field(default_factory=dict)
     projection_metadata: ProjectionMetadataMap = field(default_factory=dict)
     avg_uncertainty: float = 5.0
     effective_denaturation_state: float = 0.5
-    matrix_explainability: Dict[str, Any] = field(default_factory=dict)
-    confidence_metadata: Dict[str, Any] = field(default_factory=dict)
-    targets: List[Dict[str, Any]] = field(default_factory=list)
+    matrix_explainability: Dict[str, object] = field(default_factory=dict)
+    confidence_metadata: Dict[str, object] = field(default_factory=dict)
+    targets: List[Dict] = field(default_factory=list)
     bottleneck_precursor: str = "none"
     bottleneck_severity: float = 0.0
     precursor_contributions: Dict[str, float] = field(default_factory=dict)
-    suppressed_compounds: List[Dict[str, Any]] = field(default_factory=list)
+    suppressed_compounds: List[Dict] = field(default_factory=list)
     mft_to_furfural_ratio: float = 0.0
     meaty_quality_penalty: float = 0.0
     strecker_balance_score: float = 0.0
@@ -101,7 +100,7 @@ class FormulationResult:
     pyrazine_penalty: float = 0.0
     furanone_penalty: float = 0.0
     ranking_score: float = 0.0
-    flavor_axis_summary: Dict[str, Any] = field(default_factory=dict)
+    flavor_axis_summary: Dict[str, object] = field(default_factory=dict)
 
 
 def compute_ranking_score(
@@ -138,13 +137,12 @@ class MaillardPipeline:
         self.sensory = SensoryPredictor()
         self.pre_processor = PreProcessor()
 
-    def _load_grid(self) -> List[Formulation]:
+    def _load_grid(self) -> List[Dict]:
         if not GRID_FILE.exists():
             return []
         with open(GRID_FILE, "r") as f:
             data = yaml.safe_load(f)
-            raw_forms = data.get("formulations", [])
-            return [Formulation.from_dict(f) for f in raw_forms]
+            return data.get("formulations", [])
             
     def _load_tags(self) -> Dict[str, List[str]]:
         if not TAGS_FILE.exists():
@@ -211,23 +209,21 @@ class MaillardPipeline:
         return risk
 
 
-    def evaluate_single(self, formulation: Formulation, global_conditions: ReactionConditions) -> FormulationResult:
+    def evaluate_single(self, formulation: Dict, global_conditions: ReactionConditions) -> FormulationResult:
         """
         R.8.2: Evaluate a single formulation without touching self.grid.
         """
-        if isinstance(formulation, dict):
-            formulation = Formulation.from_dict(formulation)
         old_grid = self.grid
         try:
             self.grid = [formulation]
             results = self.evaluate_all(global_conditions)
             if not results:
-                raise ValueError(f"Evaluation failed for formulation {formulation.name}")
+                raise ValueError("Evaluation failed for formulation")
             return results[0]
         finally:
             self.grid = old_grid
 
-    def evaluate_all(self, global_conditions: ReactionConditions, grid_override: Optional[List[Any]] = None) -> List[FormulationResult]:
+    def evaluate_all(self, global_conditions: ReactionConditions, grid_override: Optional[List[Dict]] = None) -> List[FormulationResult]:
         """
         Run the generative pipeline for every formulation in the grid.
         Returns a ranked list of results.
@@ -237,47 +233,49 @@ class MaillardPipeline:
         minimize_compounds = self.tags.get(self.minimize_tag, []) if self.minimize_tag else []
 
         eval_grid = grid_override if grid_override is not None else self.grid
-        preview_names = [
-            preview_form.get("name", "Unknown") if isinstance(preview_form, dict) else getattr(preview_form, "name", "Unknown")
-            for preview_form in eval_grid[:2]
-        ]
-        logging.getLogger(__name__).debug(
-            "evaluate_all starting for %d formulations. First 2 names: %s",
-            len(eval_grid),
-            preview_names,
-        )
+        logging.getLogger(__name__).debug("evaluate_all starting for %d formulations. First 2 names: %s", len(eval_grid), [f.get('name') for f in eval_grid[:2]])
         for form in eval_grid:
-            if isinstance(form, dict):
-                form = Formulation.from_dict(form)
-            name = form.name
-            protein_type = form.protein_type or global_conditions.protein_type
-            # Use global_conditions.pH as fallback when formulation does not specify pH
-            base_pH = form.ph if form.ph is not None else global_conditions.pH
+            name = form.get("name", "Unknown")
+            protein_type = form.get("protein_type", global_conditions.protein_type)
             denaturation_state = resolve_effective_denaturation_state(
                 protein_type=protein_type,
-                temperature_celsius=form.temperature,
-                time_minutes=getattr(form, "time_minutes", 60.0), # Adding a fallback for non-schema fields if any
-                pH=base_pH,
-                explicit_denaturation_state=getattr(form, "denaturation_state", None),
+                temperature_celsius=form.get("temp", global_conditions.temperature_celsius),
+                time_minutes=form.get("time_minutes", 60.0),
+                pH=form.get("ph", global_conditions.pH),
+                explicit_denaturation_state=form.get("denaturation_state"),
             )
             
-            sugars = form.sugars
-            amino_acids = form.amino_acids
-            additives = form.additives
-            lipids = form.lipids
-            catalyst = form.catalyst
-            interventions = form.interventions
-            raw_ratios = form.molar_ratios
+            sugars = form.get("sugars", [])
+            amino_acids = form.get("amino_acids", [])
+            additives = form.get("additives", [])
+            lipids = form.get("lipids", [])
+            catalyst = form.get("catalyst", None)
+            interventions = form.get("interventions", [])
+            raw_ratios = dict(form.get("molar_ratios", {}))
+            water_activity = form.get("aw")
+            explicit_time_minutes = form.get("time_minutes")
+            process_state = determine_matrix_process_state(
+                temperature_celsius=form.get("temp", global_conditions.temperature_celsius),
+                time_minutes=form.get("time_minutes", 60.0),
+                water_activity=water_activity,
+            )
 
             family_upstream_contract = build_family_upstream_contract(
                 sugars=sugars,
                 amino_acids=amino_acids,
                 additives=additives,
+                lipids=lipids,
+                support_cues=form.get("support_cues", []),
                 interventions=interventions,
                 protein_type=protein_type,
-                pH=base_pH,
-                thiamine_availability=form.thiamine_availability,
+                pH=form.get("ph", global_conditions.pH),
+                thiamine_availability=form.get("thiamine_availability"),
                 molar_ratios=raw_ratios,
+                process_state=process_state,
+                temperature_celsius=form.get("temp", global_conditions.temperature_celsius),
+                time_minutes=explicit_time_minutes,
+                water_activity=water_activity,
+                degree_of_hydrolysis=form.get("degree_of_hydrolysis"),
             )
             effective_ratios = dict(family_upstream_contract.get("effective_molar_ratios", {})) or raw_ratios.copy()
             if family_upstream_contract.get("pretreatment_active"):
@@ -300,15 +298,52 @@ class MaillardPipeline:
                 continue
                 
             # Create a localized conditions object (e.g. to apply catalyst override if specified)
-            effective_pH = family_upstream_contract.get("effective_pH", base_pH)
+            effective_pH = family_upstream_contract.get("effective_pH", form.get("ph", global_conditions.pH))
             cond = ReactionConditions(
                 pH=effective_pH,
-                temperature_celsius=form.temperature,
-                water_activity=form.water_activity,
+                temperature_celsius=form.get("temp", global_conditions.temperature_celsius),
+                water_activity=form.get("aw", global_conditions.water_activity),
                 fat_fraction=global_conditions.fat_fraction,
                 protein_fraction=global_conditions.protein_fraction,
                 protein_type=protein_type,
-                prediction_mode=getattr(global_conditions, "prediction_mode", "projection"),
+                sme_kj_per_kg=form.get("sme_kj_per_kg", getattr(global_conditions, "sme_kj_per_kg", 0.0)),
+                moisture_regime=form.get("moisture_regime", getattr(global_conditions, "moisture_regime", None)),
+                screw_speed_rpm=form.get("screw_speed_rpm", getattr(global_conditions, "screw_speed_rpm", None)),
+                feed_rate_kg_per_h=form.get("feed_rate_kg_per_h", getattr(global_conditions, "feed_rate_kg_per_h", None)),
+                die_exit_temperature_celsius=form.get(
+                    "die_exit_temperature_celsius",
+                    getattr(global_conditions, "die_exit_temperature_celsius", None),
+                ),
+                sterilization_temperature_celsius=form.get(
+                    "sterilization_temperature_celsius",
+                    getattr(global_conditions, "sterilization_temperature_celsius", None),
+                ),
+                sterilization_time_minutes=form.get(
+                    "sterilization_time_minutes",
+                    getattr(global_conditions, "sterilization_time_minutes", 0.0),
+                ),
+                barrel_zone_temperatures=form.get(
+                    "barrel_zone_temperatures",
+                    getattr(global_conditions, "barrel_zone_temperatures", None),
+                ),
+                barrel_zone_time_fractions=form.get(
+                    "barrel_zone_time_fractions",
+                    getattr(global_conditions, "barrel_zone_time_fractions", None),
+                ),
+            )
+            extrusion_process = build_extrusion_process_profile(
+                base_temperature_celsius=cond.temperature_celsius,
+                water_activity=cond.water_activity,
+                protein_type=protein_type,
+                sme_kj_per_kg=cond.sme_kj_per_kg,
+                moisture_regime=cond.moisture_regime,
+                screw_speed_rpm=cond.screw_speed_rpm,
+                feed_rate_kg_per_h=cond.feed_rate_kg_per_h,
+                die_exit_temperature_celsius=cond.die_exit_temperature_celsius,
+                sterilization_temperature_celsius=cond.sterilization_temperature_celsius,
+                sterilization_time_minutes=cond.sterilization_time_minutes,
+                zone_temperatures=cond.barrel_zone_temperatures,
+                zone_time_fractions=cond.barrel_zone_time_fractions,
             )
             
             # FAST mode heuristic barrier overrides
@@ -359,7 +394,11 @@ class MaillardPipeline:
                 # But even better: we can just use the rate constant directly in future iterations.
                 # For now, we adjust the barrier.
                 
-                k = cond.get_rate_constant(step.reaction_family or "unknown", ea_override_kcal=bar)
+                k = cond.get_rate_constant(
+                    step.reaction_family or "unknown",
+                    ea_override_kcal=bar,
+                    reactant_labels=[species.label for species in step.reactants],
+                )
                 
                 bar_eff = effective_barrier_from_rate_constant(
                     k,
@@ -381,10 +420,8 @@ class MaillardPipeline:
                 
             # Build canonical concentrations map
             from src.recommend import _canon
-            
             initial_concentrations = {}
             ratios = effective_ratios
-            
             for p in precursors:
                 # Default ratio is 1.0 if not specified
                 qty = 1.0
@@ -392,9 +429,6 @@ class MaillardPipeline:
                     if k.lower() in p.label.lower() or p.label.lower() in k.lower():
                         qty = float(v)
                         break
-                # Keep the historical raw precursor pool here. recommend.predict_from_steps()
-                # already owns matrix accessibility scaling, and pre-scaling in the pipeline
-                # double-applies corrections and breaks legacy benchmark contracts.
                 initial_concentrations[_canon(p.smiles)] = qty
                 
             # Create a name-to-concentration map for the safety module
@@ -405,7 +439,7 @@ class MaillardPipeline:
             generated_lops = predict_lop_generation(
                 lipids_input, 
                 cond.temperature_celsius, 
-                form.time_minutes,
+                form.get("time_minutes", 60.0),
                 cond.water_activity
             )
             
@@ -414,42 +448,19 @@ class MaillardPipeline:
                 initial_concentrations[_canon(lop_smi)] = initial_concentrations.get(_canon(lop_smi), 0.0) + lop_conc
                 
             recommender = Recommender()
-            kinetic_trace = None
-            kinetic_summary = None
-            prediction_mode = getattr(cond, "prediction_mode", "projection")
-            if prediction_mode == "kinetic":
-                kinetic_run = simulate_kinetic_trace(
-                    steps,
-                    heuristic_barriers,
-                    initial_concentrations,
-                    cond,
-                    float(form.time_minutes or 0.0),
-                )
-                if kinetic_run.summary.fallback_to_projection:
-                    logging.getLogger(__name__).warning(
-                        "Kinetic mode fell back to projection for %s: %s",
-                        name,
-                        kinetic_run.summary.fallback_reason,
-                    )
-                    prediction_mode = "projection"
-                else:
-                    kinetic_trace = kinetic_run
-                    kinetic_summary = kinetic_run.summary
             rec_result = recommender.predict_from_steps(
                 steps, 
                 heuristic_barriers, 
                 initial_concentrations, 
                 temperature_kelvin=cond.temperature_kelvin,
-                time_minutes=form.time_minutes,
+                time_minutes=form.get("time_minutes"),
                 water_activity=cond.water_activity,
                 protein_type=protein_type,
                 denaturation_state=denaturation_state,
                 fat_fraction=cond.fat_fraction,
                 protein_fraction=cond.protein_fraction,
-                prediction_mode=prediction_mode,
-                reaction_conditions=cond,
-                kinetic_trace=kinetic_trace,
-                kinetic_summary=kinetic_summary,
+                protein_source=form.get("protein_source"),
+                family_upstream_contract=family_upstream_contract,
             )
             
             # Score against tags
@@ -458,12 +469,22 @@ class MaillardPipeline:
             
             # PHASE F: Safety evaluation
             # Replace old heuristic with new quantitative model
-            safety_val, flagged, safety_result = evaluate_formulation_safety(
+            safety_modifiers = dict(modifiers)
+            if extrusion_process.get("active"):
+                safety_modifiers["__extrusion_process__"] = extrusion_process
+            safety_modifiers["__runtime_context__"] = {
+                "additives": additives,
+                "interventions": interventions,
+                "protein_type": protein_type,
+                "process_state": process_state,
+            }
+
+            safety_val, flagged = evaluate_formulation_safety(
                 name_ratios, 
                 cond.temperature_celsius, 
-                form.time_minutes, 
+                form.get("time_minutes", 60.0), 
                 cond.pH,
-                modifiers=modifiers
+                modifiers=safety_modifiers
             )
             s_penalty = safety_val * 2.0 # Weight for optimization
             
@@ -483,7 +504,8 @@ class MaillardPipeline:
                 protein_type=protein_type,
                 temp_c=cond.temperature_celsius,
                 fat_fraction=cond.fat_fraction,
-                protein_fraction=cond.protein_fraction
+                protein_fraction=cond.protein_fraction,
+                extrusion_process=extrusion_process,
             )
             
             # Calculate average uncertainty for the optimizer
@@ -502,9 +524,13 @@ class MaillardPipeline:
                 interventions=interventions,
                 protein_type=protein_type,
                 pH=cond.pH,
-                thiamine_availability=form.thiamine_availability,
+                thiamine_availability=form.get("thiamine_availability"),
                 molar_ratios=effective_ratios,
                 family_upstream_contract=family_upstream_contract,
+                process_state=process_state,
+                temperature_celsius=cond.temperature_celsius,
+                time_minutes=explicit_time_minutes,
+                water_activity=water_activity,
             )
             strecker_gap_penalty = float(flavor_axis_summary.get("strecker_gap_penalty", 0.0))
             pyrazine_penalty = float(flavor_axis_summary.get("pyrazine_penalty", 0.0))
@@ -519,6 +545,30 @@ class MaillardPipeline:
             # Use radar score for the minimize category as the official m_score
             m_score = max(0.0, (radar_scores.get(self.minimize_tag, (0.0, 0))[0] if self.minimize_tag else 0.0) + family_offnote_delta)
 
+            matrix_explainability = build_matrix_explainability(
+                protein_type=protein_type,
+                effective_denaturation_state=denaturation_state,
+                temperature_celsius=cond.effective_temperature_celsius,
+                time_minutes=form.get("time_minutes", 60.0),
+                pH=cond.pH,
+                dominant_source=(
+                    "denaturation_state_arg"
+                    if form.get("denaturation_state") is not None
+                    else "estimated_from_conditions"
+                ),
+            )
+            matrix_explainability.update(
+                {
+                    "jacket_temperature_celsius": float(cond.temperature_celsius),
+                    "effective_temperature_celsius": float(cond.effective_temperature_celsius),
+                    "moisture_regime": cond.moisture_regime,
+                    "sme_kj_per_kg": float(cond.sme_kj_per_kg),
+                    "sterilization_temperature_celsius": cond.sterilization_temperature_celsius,
+                    "sterilization_time_minutes": float(cond.sterilization_time_minutes),
+                    "extrusion_process": extrusion_process,
+                }
+            )
+
             result = FormulationResult(
                 name=name,
                 target_score=t_score,
@@ -531,34 +581,13 @@ class MaillardPipeline:
                 safety_score=s_penalty,
                 flagged_toxics=flagged,
                 texture_risk=self._score_texture_risk(precursors, sugars),
-                safety_metrics={
-                    "acrylamide_ppb": safety_result.acrylamide_ppb,
-                    "furosine_mg_100g": safety_result.furosine_mg_100g,
-                    "cml_mg_kg": safety_result.cml_mg_kg,
-                    "cel_mg_kg": safety_result.cel_mg_kg,
-                    "lal_mg_100g": safety_result.lal_mg_100g
-                },
                 predicted_ppb=conc_map,
                 predicted_proxy_ppb=rec_result.get("predicted_proxy_ppb", {}),
                 projection_metadata=rec_result.get("projection_metadata", {}),
                 avg_uncertainty=avg_unc,
                 effective_denaturation_state=denaturation_state,
-                matrix_explainability=build_matrix_explainability(
-                    protein_type=protein_type,
-                    effective_denaturation_state=denaturation_state,
-                    temperature_celsius=cond.temperature_celsius,
-                    time_minutes=form.time_minutes,
-                    pH=cond.pH,
-                    dominant_source=(
-                        "denaturation_state_arg"
-                        if form.denaturation_state is not None
-                        else "estimated_from_conditions"
-                    ),
-                ),
-                confidence_metadata={
-                    "prediction_engine": rec_result.get("kinetic_metadata", {}).get("prediction_engine", "path_span_projection"),
-                    "kinetics": rec_result.get("kinetic_metadata", {}),
-                },
+                matrix_explainability=matrix_explainability,
+                confidence_metadata={"extrusion_process": extrusion_process} if extrusion_process.get("active") else {},
                 targets=rec_result.get("targets", []),
                 bottleneck_precursor=rec_result["metrics"].get("bottleneck", {}).get("precursor", "none"),
                 bottleneck_severity=rec_result["metrics"].get("bottleneck", {}).get("severity", 0.0),

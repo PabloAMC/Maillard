@@ -1,0 +1,31 @@
+{
+  "benchmark_id": "cml_cel_commercial_pbma_Foods2023",
+  "benchmark_type": "safety",
+  "source_doi": "10.3390/foods12101967",
+  "precursors": {
+    "L-Lysine": {"concentration_mM": 45.0},
+    "D-Glucose": {"concentration_mM": 45.0}
+  },
+  "conditions": {
+    "temp_C": 150,
+    "ph": 6.1,
+    "water_activity": 0.45,
+    "time_min": 20
+  },
+  "metadata": {
+    "tier": "PRIMARY",
+    "family": "safety",
+    "execution_path": "free_precursor",
+    "notes": "Representative AGE proxy benchmark derived from the Foods 2023 commercial PBMA survey. Encodes a midpoint operating point while the full product-range bands remain attached through safety reference payloads."
+  },
+  "validation_contract": {
+    "scale_thresholds": {
+      "max_ratio": 1.8,
+      "mean_abs_log10_error": 0.25
+    }
+  },
+  "measured_volatiles": {
+    "Nε-(Carboxymethyl)lysine (CML)": {"conc_ppb": 32.0, "uncertainty_pct": 20},
+    "Nε-(Carboxyethyl)lysine (CEL)": {"conc_ppb": 55.0, "uncertainty_pct": 20}
+  }
+}

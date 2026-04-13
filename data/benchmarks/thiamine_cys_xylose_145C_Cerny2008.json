@@ -1,0 +1,33 @@
+{
+  "benchmark_id": "thiamine_cys_xylose_145C_Cerny2008",
+  "source_doi": "10.1021/jf800268t",
+  "precursors": {
+    "Thiamine": {
+      "concentration_mM": 10.0
+    },
+    "L-Cysteine": {
+      "concentration_mM": 10.0
+    },
+    "D-Xylose": {
+      "concentration_mM": 10.0
+    }
+  },
+  "conditions": {
+    "temp_C": 145.0,
+    "ph": 6.0,
+    "water_activity": 0.98,
+    "time_min": 20.0
+  },
+  "metadata": {
+    "tier": "PRIMARY",
+    "family": "thiamine_fragmentation_support",
+    "execution_path": "free_precursor",
+    "notes": "Family 03 reference anchor for the mixed thiamine, cysteine, and xylose system from Cerny & Guntz-Dubini 2008. The reported MFT value is retained as a reference-scale ug/g reaction-mixture anchor for directional and pH-window comparison, not as a strict ppb-equivalent quantitative benchmark."
+  },
+  "reference_volatiles": {
+    "2-Methyl-3-furanthiol (MFT)": {
+      "conc_ppb": 2.47,
+      "uncertainty_pct": 8
+    }
+  }
+}

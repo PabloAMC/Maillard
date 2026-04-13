@@ -1,0 +1,79 @@
+{
+  "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+  "source_doi": "10.1016/j.foodchem.2019.126082",
+  "precursors": {
+    "Pea Protein Isolate": {
+      "concentration_mM": 1000.0
+    }
+  },
+  "conditions": {
+    "temp_C": 140,
+    "ph": 7.1,
+    "water_activity": 0.98,
+    "time_min": 0.1
+  },
+  "metadata": {
+    "tier": "PRIMARY",
+    "family": "matrix_headspace",
+    "execution_path": "matrix_only",
+    "notes": "Executable intake benchmark subset for Trikusuma 2019 UHT pea-protein beverage. Uses only compounds supported by the current matrix-only predictor."
+  },
+  "source_metadata": {
+    "origin": "external_literature",
+    "generator": "Trikusuma 2019 DHS-GC-MS-MS quantitative table"
+  },
+  "process_metadata": {
+    "state": "heated_matrix",
+    "preheating": "80C",
+    "extrusion_history": "none",
+    "matrix_format": "pea protein isolate UHT beverage"
+  },
+  "matrix_ranking_contract": {
+    "observable_targets": [
+      {
+        "name": "hexanal",
+        "role": "adverse_marker",
+        "expected_rank": 1,
+        "direction": "higher"
+      },
+      {
+        "name": "2-pentylfuran",
+        "role": "adverse_marker",
+        "expected_rank": 2,
+        "direction": "higher"
+      },
+      {
+        "name": "nonanal",
+        "role": "adverse_marker",
+        "expected_rank": 3,
+        "direction": "higher"
+      }
+    ],
+    "adverse_markers": [
+      "hexanal",
+      "2-pentylfuran",
+      "nonanal"
+    ],
+    "citation_provenance": [
+      "Trikusuma 2019 UHT pea beverage DHS-GC-MS-MS quantitative table"
+    ],
+    "calibration_mode": "compound_specific_headspace",
+    "notes": "Heated pea UHT beverage off-flavour ranking contract. Full table contains 21 compounds, but only the modeled lipid-marker subset is executable today."
+  },
+  "measured_volatiles": {
+    "hexanal": {
+      "conc_ppb": 782.0,
+      "uncertainty_pct": 8
+    },
+    "2-pentylfuran": {
+      "conc_ppb": 163.0,
+      "uncertainty_pct": 9
+    },
+    "nonanal": {
+      "conc_ppb": 24.0,
+      "uncertainty_pct": 4
+    }
+  },
+  "protein_type": "pea_iso",
+  "denaturation_state": 1.0
+}

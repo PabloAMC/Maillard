@@ -1,9 +1,9 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Optional
 
-from src.artifact_io import load_json_mapping
 from src.family_ingestion_plan import load_family_ingestion_plan
 
 
@@ -16,6 +16,20 @@ RETENTION_REFERENCE_PAYLOADS_PATH = DATA_LIT_DIR / "retention_reference_payloads
 COMPUTATIONAL_PRIORS_PATH = DATA_LIT_DIR / "computational_priors.json"
 PROCESS_GAP_REGISTRY_PATH = DATA_LIT_DIR / "process_gap_registry.json"
 MATRIX_DECISION_PANEL_PATH = DATA_LIT_DIR / "matrix_decision_panel.json"
+PENDING_BENCHMARK_INTAKE_STATUSES = {"pending_json_payload"}
+
+_CANONICAL_FAMILY_ALIASES = {
+    "advanced_glycation_and_damage": "protein_damage_markers",
+    "microbial_fermentation_modulation": "fermentation_pretreatment",
+    "phospholipid_amine_maillard": "phospholipid_amine_sink",
+}
+
+
+def _load_json(path: Path) -> Dict[str, Any]:
+    with open(path, "r", encoding="utf-8") as handle:
+        return json.load(handle)
+
+
 _FAMILY_PLAN = load_family_ingestion_plan()
 _FAMILY_BY_SLR = {
     str(entry.get("slr_family", "")).zfill(2): dict(entry)
@@ -31,6 +45,7 @@ _FAMILY_BY_ID = {
 
 def resolve_family_descriptor(family_ref: Optional[str]) -> Dict[str, Any]:
     normalized = str(family_ref or "").strip()
+    normalized = _CANONICAL_FAMILY_ALIASES.get(normalized, normalized)
     if not normalized:
         return {}
     if normalized.isdigit():
@@ -60,11 +75,18 @@ def _family_matches(row: Mapping[str, Any], family_ref: Optional[str]) -> bool:
 def _apply_metadata_defaults(entry: Mapping[str, Any], defaults: Optional[Mapping[str, Any]] = None) -> Dict[str, Any]:
     row = dict(defaults or {})
     row.update(dict(entry))
+    chemistry_family = str(row.get("chemistry_family", "")).strip()
+    if chemistry_family:
+        row["chemistry_family"] = _CANONICAL_FAMILY_ALIASES.get(chemistry_family, chemistry_family)
     supporting = []
     for source in [defaults or {}, entry]:
         values = source.get("supporting_families", []) if isinstance(source, Mapping) else []
         if isinstance(values, list):
-            supporting.extend(str(item).strip() for item in values if str(item).strip())
+            supporting.extend(
+                _CANONICAL_FAMILY_ALIASES.get(str(item).strip(), str(item).strip())
+                for item in values
+                if str(item).strip()
+            )
     if supporting:
         row["supporting_families"] = list(dict.fromkeys(supporting))
     observable_tags = []
@@ -82,7 +104,13 @@ def _apply_metadata_defaults(entry: Mapping[str, Any], defaults: Optional[Mappin
     if process_states:
         row["process_state_scope"] = list(dict.fromkeys(process_states))
     family_descriptor = resolve_family_descriptor(str(row.get("chemistry_family", "")).strip())
+    if not family_descriptor:
+        slr_family_source = str(row.get("slr_family_source", row.get("slr_family", ""))).strip()
+        if slr_family_source:
+            family_descriptor = resolve_family_descriptor(slr_family_source)
     if family_descriptor:
+        row.setdefault("chemistry_family", str(family_descriptor.get("family_id", "unknown")))
+        row.setdefault("slr_family_source", str(family_descriptor.get("slr_family", "")).zfill(2))
         row["family_descriptor"] = {
             "slr_family": str(family_descriptor.get("slr_family", "")).zfill(2),
             "family_id": str(family_descriptor.get("family_id", "unknown")),
@@ -92,10 +120,16 @@ def _apply_metadata_defaults(entry: Mapping[str, Any], defaults: Optional[Mappin
     return row
 
 
-def iter_benchmark_intake_entries(*, family: Optional[str] = None) -> Iterable[Dict[str, Any]]:
-    payload = load_json_mapping(BENCHMARK_INTAKE_REGISTRY_PATH)
+def iter_benchmark_intake_entries(
+    *,
+    family: Optional[str] = None,
+    include_pending: bool = False,
+) -> Iterable[Dict[str, Any]]:
+    payload = _load_json(BENCHMARK_INTAKE_REGISTRY_PATH)
     for entry in payload.get("eligible_references", []):
         if not isinstance(entry, Mapping):
+            continue
+        if not include_pending and str(entry.get("status", "")).strip() in PENDING_BENCHMARK_INTAKE_STATUSES:
             continue
         row = _apply_metadata_defaults(entry)
         if _family_matches(row, family):
@@ -103,7 +137,7 @@ def iter_benchmark_intake_entries(*, family: Optional[str] = None) -> Iterable[D
 
 
 def iter_flavor_reference_entries(*, family: Optional[str] = None) -> Iterable[Dict[str, Any]]:
-    payload = load_json_mapping(FLAVOR_REFERENCE_PAYLOADS_PATH)
+    payload = _load_json(FLAVOR_REFERENCE_PAYLOADS_PATH)
     metadata = payload.get("section_family_metadata", {}) if isinstance(payload.get("section_family_metadata", {}), Mapping) else {}
     for section_name, entries in payload.items():
         if section_name == "section_family_metadata" or not isinstance(entries, list):
@@ -119,7 +153,7 @@ def iter_flavor_reference_entries(*, family: Optional[str] = None) -> Iterable[D
 
 
 def iter_retention_reference_entries(*, family: Optional[str] = None) -> Iterable[Dict[str, Any]]:
-    payload = load_json_mapping(RETENTION_REFERENCE_PAYLOADS_PATH)
+    payload = _load_json(RETENTION_REFERENCE_PAYLOADS_PATH)
     metadata = payload.get("section_family_metadata", {}) if isinstance(payload.get("section_family_metadata", {}), Mapping) else {}
     for section_name, section_payload in payload.items():
         if section_name == "section_family_metadata" or not isinstance(section_payload, Mapping):
@@ -143,11 +177,17 @@ def iter_computational_prior_entries(
     family: Optional[str] = None,
     protein_type: Optional[str] = None,
 ) -> Iterable[Dict[str, Any]]:
-    payload = load_json_mapping(COMPUTATIONAL_PRIORS_PATH)
+    payload = _load_json(COMPUTATIONAL_PRIORS_PATH)
     metadata = payload.get("section_family_metadata", {}) if isinstance(payload.get("section_family_metadata", {}), Mapping) else {}
     normalized_protein = str(protein_type).strip() if protein_type is not None else None
-    for section_name, entries in payload.items():
-        if section_name == "section_family_metadata" or not isinstance(entries, list):
+    for section_name, section_payload in payload.items():
+        if section_name == "section_family_metadata":
+            continue
+        if isinstance(section_payload, list):
+            entries = section_payload
+        elif isinstance(section_payload, Mapping) and isinstance(section_payload.get("entries"), list):
+            entries = section_payload.get("entries", [])
+        else:
             continue
         defaults = metadata.get(section_name, {}) if isinstance(metadata, Mapping) else {}
         for entry in entries:
@@ -162,7 +202,7 @@ def iter_computational_prior_entries(
 
 
 def iter_process_gap_entries(*, family: Optional[str] = None) -> Iterable[Dict[str, Any]]:
-    payload = load_json_mapping(PROCESS_GAP_REGISTRY_PATH)
+    payload = _load_json(PROCESS_GAP_REGISTRY_PATH)
     for entry in payload.get("entries", []):
         if not isinstance(entry, Mapping):
             continue
@@ -172,7 +212,7 @@ def iter_process_gap_entries(*, family: Optional[str] = None) -> Iterable[Dict[s
 
 
 def iter_matrix_decision_panel_entries(*, family: Optional[str] = None) -> Iterable[Dict[str, Any]]:
-    payload = load_json_mapping(MATRIX_DECISION_PANEL_PATH)
+    payload = _load_json(MATRIX_DECISION_PANEL_PATH)
     metadata = payload.get("target_class_family_metadata", {}) if isinstance(payload.get("target_class_family_metadata", {}), Mapping) else {}
     entries = payload.get("entries", {})
     if not isinstance(entries, Mapping):
@@ -226,7 +266,7 @@ def build_family_payload_coverage_artifact() -> Dict[str, Any]:
                 "supporting_payload_counts": supporting_counts,
                 "total_primary_payload_count": int(total_primary),
                 "total_supporting_payload_count": int(total_supporting),
-                "has_runtime_support": bool(total_primary > 0),
+                "has_runtime_support": bool(total_primary > 0 or total_supporting > 0),
             }
         )
 
