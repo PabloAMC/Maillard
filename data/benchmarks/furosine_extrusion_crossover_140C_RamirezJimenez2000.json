@@ -1,0 +1,34 @@
+{
+  "benchmark_id": "furosine_extrusion_crossover_140C_RamirezJimenez2000",
+  "benchmark_type": "safety",
+  "source_doi": "Ramírez-Jiménez et al. (2000)",
+  "damage_protein_type": "pea_iso",
+  "precursors": {
+    "L-Lysine": {"concentration_mM": 35.0},
+    "D-Glucose": {"concentration_mM": 35.0}
+  },
+  "conditions": {
+    "temp_C": 140,
+    "ph": 6.0,
+    "water_activity": 0.55,
+    "time_min": 20
+  },
+  "metadata": {
+    "tier": "PRIMARY",
+    "family": "safety",
+    "execution_path": "free_precursor",
+    "notes": "Furosine crossover anchor encoded as a representative mild-extrusion point. Use together with the safety payload and predictor directionality tests to enforce the post-150 C decline."
+  },
+  "validation_contract": {
+    "scale_thresholds": {
+      "max_ratio": 2.0,
+      "mean_abs_log10_error": 0.30
+    }
+  },
+  "measured_volatiles": {
+    "furosine": {"conc_ppb": 87.0, "uncertainty_pct": 20}
+  },
+  "safety_context": {
+    "protein_type": "pea_iso"
+  }
+}

@@ -7,11 +7,12 @@ Converts DFT barriers (Delta G‡) into rate constants and temporal fluxes.
 
 import numpy as np
 from scipy.constants import kilo, calorie_th, Planck, Boltzmann, gas_constant
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple, Sequence
 from src.logger import get_logger
 logger = get_logger(__name__)
 
 from src.conditions import ReactionConditions  # noqa: E402
+from src.barrier_constants import get_donor_reactivity_multiplier  # noqa: E402
 from src.thermo import JobackEstimator  # noqa: E402
 
 class KineticsEngine:
@@ -26,7 +27,8 @@ class KineticsEngine:
     def get_rate_constant(self, delta_g_kcal_mol: float, 
                           temperature_k: Optional[float] = None,
                           conditions: Optional[ReactionConditions] = None,
-                          reaction_family: Optional[str] = None) -> float:
+                          reaction_family: Optional[str] = None,
+                          reactant_labels: Optional[Sequence[str]] = None) -> float:
         """
         Calculate the first-order rate constant k using Eyring-Polanyi equation:
         k = (kB * T / h) * exp(-Delta G‡ / RT)
@@ -44,6 +46,8 @@ class KineticsEngine:
         if conditions and reaction_family:
             multiplier *= conditions.get_ph_multiplier(reaction_family)
             multiplier *= conditions.get_water_activity_multiplier()
+        if reaction_family:
+            multiplier *= get_donor_reactivity_multiplier(reaction_family, reactant_labels=reactant_labels)
             
         # 2. Kirkwood-Onsager Solvent Scaling (Phase 12.1 + O.1)
         # Simplified: Polar transitions (Maillard) are accelerated in polar solvents.

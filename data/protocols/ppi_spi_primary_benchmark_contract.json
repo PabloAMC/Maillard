@@ -1,0 +1,64 @@
+{
+  "protocol_id": "ppi_spi_ribose_cysteine_primary_benchmark_2026",
+  "description": "Machine-readable companion contract for the first dual pea and soy internal benchmark package.",
+  "matrices": [
+    {
+      "matrix": "pea_iso",
+      "temp_C": 95.0,
+      "ph": 5.5,
+      "time_points_min": [0, 30, 60, 120, 240],
+      "purpose": "First quantitative PPI meaty-positive matrix benchmark under moderate aqueous heating."
+    },
+    {
+      "matrix": "soy_iso",
+      "temp_C": 120.0,
+      "ph": 5.8,
+      "time_points_min": [0, 30, 60, 120, 240],
+      "purpose": "First quantitative SPI benchmark capturing meaty generation and off-flavour suppression under high-severity heating."
+    }
+  ],
+  "precursor_addition": {
+    "D-ribose_mM": 1.0,
+    "L-cysteine_mM": 1.0
+  },
+  "required_panel": {
+    "desirable": [
+      "2-methyl-3-furanthiol",
+      "2-furfurylthiol",
+      "bis(2-methyl-3-furyl) disulfide",
+      "2,5-dimethylpyrazine"
+    ],
+    "adverse": [
+      "Hexanal",
+      "2-pentylfuran",
+      "furfural",
+      "1-octen-3-ol"
+    ],
+    "safety": [
+      "acrylamide"
+    ]
+  },
+  "companion_assays": [
+    "Ellman free SH",
+    "OPA free amino groups",
+    "DSC or equivalent denaturation proxy",
+    "post-heating pH measurement"
+  ],
+  "analytical_requirements": {
+    "headspace_method": "HS-SPME-GC-MS",
+    "thiol_quantification": "thiol-specific derivatization plus an internal-standard route suitable for absolute quantification",
+    "aldehyde_quantification": "calibrated quantification with hexanal-d12 or equivalent internal standard",
+    "safety_method": "LC-MS/MS in the soy 120 C arm",
+    "replicates": 3,
+    "required_metadata": [
+      "matrix supplier and lot number",
+      "protein content and solids basis",
+      "exact pH before and after heating",
+      "process vessel or heating format",
+      "number of process replicates",
+      "LOD and LOQ where relevant",
+      "non-detect policy",
+      "internal-standard details"
+    ]
+  }
+}

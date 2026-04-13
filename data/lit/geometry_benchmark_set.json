@@ -1,0 +1,67 @@
+{
+  "entries": [
+    {
+      "benchmark_id": "water_fixture",
+      "benchmark_kind": "ground_state",
+      "chemistry_family": "small_molecule_reference",
+      "source_tier": "fixture_reference",
+      "source": "tests.conftest.dft_geometry_water",
+      "xyz": "3\nWater\nO 0.000000 0.000000 0.000000\nH 0.960000 0.000000 0.000000\nH -0.240000 0.930000 0.000000\n",
+      "recommended_roles": ["geom_preopt"]
+    },
+    {
+      "benchmark_id": "formaldehyde_fixture",
+      "benchmark_kind": "ground_state",
+      "chemistry_family": "carbonyl_reference",
+      "source_tier": "fixture_reference",
+      "source": "tests.conftest.dft_geometry_formaldehyde",
+      "xyz": "4\nFormaldehyde\nC 0.000000 0.000000 0.000000\nO 1.200000 0.000000 0.000000\nH -0.500000 0.890000 0.000000\nH -0.500000 -0.890000 0.000000\n",
+      "recommended_roles": ["geom_preopt"]
+    },
+    {
+      "benchmark_id": "ethane_fixture",
+      "benchmark_kind": "ground_state",
+      "chemistry_family": "hydrocarbon_reference",
+      "source_tier": "fixture_reference",
+      "source": "tests.conftest.dft_geometry_ethane",
+      "xyz": "8\nEthane\nC 0.000000 0.000000 0.000000\nC 1.540000 0.000000 0.000000\nH -0.510000 0.890000 0.000000\nH -0.510000 -0.440000 0.770000\nH -0.510000 -0.440000 -0.770000\nH 2.050000 0.890000 0.000000\nH 2.050000 -0.440000 0.770000\nH 2.050000 -0.440000 -0.770000\n",
+      "recommended_roles": ["geom_preopt"]
+    },
+    {
+      "benchmark_id": "cysteine_sulfur_probe",
+      "benchmark_kind": "ground_state",
+      "chemistry_family": "sulfur_reference",
+      "source_tier": "sulfur_stress_probe",
+      "source": "tests.qm.test_mlp_drift.CYSTEINE_XYZ",
+      "xyz": "14\nCysteine\nC -0.531 -0.103 0.093\nC 0.916 -0.345 -0.341\nO 1.309 -1.464 -0.627\nO 1.731 0.722 -0.380\nN -1.282 -1.328 -0.218\nC -0.643 0.211 1.587\nS -2.392 0.536 2.112\nH -1.002 0.724 -0.457\nH -2.227 -1.168 0.124\nH -1.341 -1.472 -1.229\nH 2.637 0.490 -0.655\nH -0.088 -0.627 2.036\nH -0.223 1.149 1.956\nH -2.325 1.761 1.528\n",
+      "recommended_roles": ["geom_preopt"]
+    },
+    {
+      "benchmark_id": "amadori_reactant_seed",
+      "benchmark_kind": "ground_state",
+      "chemistry_family": "proton_transfer_rearrangement",
+      "source_tier": "xtb_seed_reference",
+      "source": "data/geometries/amadori_test.json reactant_xyz",
+      "xyz": "27\nAmadori Reactant Seed\nO -4.169992 -1.904399 0.921056\nC -2.817460 -1.448277 0.953312\nC -2.679217 -0.207715 0.071166\nO -3.661022 0.752115 0.523686\nC -1.292049 0.453976 0.139025\nO -1.361820 1.636536 -0.690972\nC -0.153166 -0.441440 -0.357799\nO -0.350050 -0.713455 -1.744893\nC 1.187103 0.250226 -0.159941\nN 2.102322 0.138036 -1.065625\nC 3.367551 0.821730 -0.718423\nC 4.136024 0.054002 0.344736\nO 3.683866 -0.744371 1.151320\nO 5.442720 0.387384 0.376103\nH -4.710704 -1.089809 0.979701\nH -2.578603 -1.216747 1.996359\nH -2.177316 -2.266620 0.614837\nH -2.957805 -0.443359 -0.962394\nH -3.407613 1.594718 0.092958\nH -1.099510 0.808231 1.158363\nH -1.262242 1.312197 -1.611856\nH -0.113872 -1.384629 0.194795\nH 0.549197 -0.884967 -2.100060\nH 1.343912 0.782253 0.795940\nH 3.977868 0.866796 -1.626278\nH 3.186802 1.844244 -0.368798\nH 5.815075 -0.167277 1.093680\n",
+      "recommended_roles": ["geom_preopt"]
+    },
+    {
+      "benchmark_id": "amadori_ts_seed",
+      "benchmark_kind": "ts_seed",
+      "chemistry_family": "proton_transfer_rearrangement",
+      "source_tier": "xtb_ts_seed",
+      "source": "data/geometries/amadori_test.json ts_xyz",
+      "xyz": "27\nAmadori TS Seed\nO -4.169992 -1.904399 0.921056\nC -2.817460 -1.448277 0.953312\nC -2.679217 -0.207715 0.071166\nO -3.661022 0.752115 0.523686\nC -1.292049 0.453976 0.139025\nO -1.361820 1.636536 -0.690972\nC -0.153166 -0.441440 -0.357799\nO -0.350050 -0.713455 -1.744893\nC 1.187103 0.250226 -0.159941\nN 2.102322 0.138036 -1.065625\nC 3.367551 0.821730 -0.718423\nC 4.136024 0.054002 0.344736\nO 3.683866 -0.744371 1.151320\nO 5.442720 0.387384 0.376103\nH -4.710704 -1.089809 0.979701\nH -2.578603 -1.216747 1.996359\nH -2.177316 -2.266620 0.614837\nH -2.957805 -0.443359 -0.962394\nH -3.407613 1.594718 0.092958\nH -1.099510 0.808231 1.158363\nH -1.262242 1.312197 -1.611856\nH -0.113872 -1.384629 0.194795\nH 0.549197 -0.884967 -2.100060\nH 1.343912 0.782253 0.795940\nH 3.977868 0.866796 -1.626278\nH 3.186802 1.844244 -0.368798\nH 5.815075 -0.167277 1.093680\n",
+      "recommended_roles": ["ts_initialization"]
+    },
+    {
+      "benchmark_id": "hcn_toy_ts",
+      "benchmark_kind": "ts_seed",
+      "chemistry_family": "toy_h_transfer",
+      "source_tier": "toy_ts_reference",
+      "source": "tests.qm.test_ts_optimizer.HCN_TS_GUESS",
+      "xyz": "3\nHCN TS Guess\nH 0.000000 1.000000 0.000000\nC -1.000000 0.000000 0.000000\nN 1.000000 0.000000 0.000000\n",
+      "recommended_roles": ["ts_initialization"]
+    }
+  ]
+}

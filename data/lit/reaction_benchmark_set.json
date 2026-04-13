@@ -1,0 +1,136 @@
+{
+  "entries": [
+    {
+      "reaction_id": "schiff_base_formation",
+      "reaction_family": "schiff_condensation",
+      "motif_family": "carbonyl_amine_condensation",
+      "benchmark_visible_gap": "preserve relative ranking of early carbonyl-amine activation steps",
+      "reference_barrier_kcal": 15.0,
+      "barrier_uncertainty_kcal": 2.5,
+      "reference_method": "literature_dft_experiment",
+      "source": "Yaylayan & Huyghues-Despointes 1994",
+      "candidate_aliases": ["schiff", "schiff_base"],
+      "allowed_roles": ["geom_preopt", "ts_initialization", "local_barrier_surrogate"]
+    },
+    {
+      "reaction_id": "amadori_rearrangement",
+      "reaction_family": "amadori_rearrangement",
+      "motif_family": "proton_transfer_rearrangement",
+      "benchmark_visible_gap": "preserve benchmark-visible branching into rearrangement-limited sulfur chemistry",
+      "reference_barrier_kcal": 23.5,
+      "barrier_uncertainty_kcal": 2.0,
+      "reference_method": "literature_ccsdt_dft",
+      "source": "Martins & van Boekel 2003",
+      "candidate_aliases": ["amadori", "heyns"],
+      "allowed_roles": ["ts_initialization", "local_barrier_surrogate"]
+    },
+    {
+      "reaction_id": "enolisation_step",
+      "reaction_family": "1,2-enolisation",
+      "motif_family": "proton_transfer_dehydration",
+      "benchmark_visible_gap": "keep ordering of dehydration bottlenecks that drive furan and sulfur competition",
+      "reference_barrier_kcal": 28.0,
+      "barrier_uncertainty_kcal": 3.0,
+      "reference_method": "literature_kinetic_prior",
+      "source": "Nursten 2005",
+      "candidate_aliases": ["enolisation", "enol", "1_2_enolisation"],
+      "allowed_roles": ["ts_initialization", "local_barrier_surrogate"]
+    },
+    {
+      "reaction_id": "strecker_degradation",
+      "reaction_family": "strecker_degradation",
+      "motif_family": "carbonyl_fragmentation",
+      "benchmark_visible_gap": "preserve ordering of Strecker-supporting routes tied to meaty aldehydes",
+      "reference_barrier_kcal": 20.0,
+      "barrier_uncertainty_kcal": 2.5,
+      "reference_method": "literature_experiment_dft",
+      "source": "Hofmann & Schieberle 2000",
+      "candidate_aliases": ["strecker"],
+      "allowed_roles": ["geom_preopt", "ts_initialization", "local_barrier_surrogate"]
+    },
+    {
+      "reaction_id": "thiol_addition",
+      "reaction_family": "thiol_addition",
+      "motif_family": "sulfur_addition",
+      "benchmark_visible_gap": "retain relative accessibility of sulfur-positive generation pathways",
+      "reference_barrier_kcal": 15.0,
+      "barrier_uncertainty_kcal": 3.5,
+      "reference_method": "literature_bounded_estimate",
+      "source": "Maillard_meat synthesis prior",
+      "candidate_aliases": ["trapping", "thiol_capture"],
+      "allowed_roles": ["geom_preopt", "ts_initialization", "local_barrier_surrogate"]
+    },
+    {
+      "reaction_id": "trapping_hexanal",
+      "reaction_family": "lipid_strecker_synergy",
+      "motif_family": "sulfur_addition",
+      "benchmark_visible_gap": "screen the lipid-derived aldehyde trapping step that couples adverse-marker carbonyls to alkylthiazole recovery and sulfur-closure competition",
+      "reference_barrier_kcal": 18.0,
+      "barrier_uncertainty_kcal": 3.5,
+      "reference_method": "authority_fixture_bounded_literature_window",
+      "source": "Phase 3.3 trapping_hexanal authority fixture",
+      "candidate_aliases": ["trapping_hexanal", "lipid_trapping", "alkylthiazole_synergy", "lipid_strecker"],
+      "allowed_roles": ["geom_preopt", "ts_initialization", "local_barrier_surrogate"]
+    },
+    {
+      "reaction_id": "dha_elimination",
+      "reaction_family": "beta_elimination",
+      "motif_family": "carbonyl_fragmentation",
+      "benchmark_visible_gap": "screen the DHA-forming elimination step that governs lysine-loss competition and lysinoalanine risk under extrusion-heavy conditions",
+      "reference_barrier_kcal": 27.0,
+      "barrier_uncertainty_kcal": 3.0,
+      "reference_method": "authority_fixture_bounded_literature_window",
+      "source": "Phase 3.3 dha_elimination authority fixture",
+      "candidate_aliases": ["dha_elimination", "beta_elimination", "dehydroalanine", "lysinoalanine"],
+      "allowed_roles": ["geom_preopt", "ts_initialization", "local_barrier_surrogate"]
+    },
+    {
+      "reaction_id": "thiamine_fragmentation",
+      "reaction_family": "thiamine_degradation",
+      "motif_family": "sulfur_fragmentation",
+      "benchmark_visible_gap": "anchor thiamine-derived sulfur donor loss and sulfur-routing support with an explicit extrusion-retention reference instead of relying on generic sulfur-trapping aliases",
+      "reference_barrier_kcal": 25.0,
+      "barrier_uncertainty_kcal": 3.0,
+      "reference_method": "literature_extrusion_retention_anchor",
+      "source": "De Leyn & Muylle 2019 extrusion thiamine retention anchor; Family 03 SLR",
+      "candidate_aliases": ["thiamine_fragmentation", "thiamine_degradation", "thiamine_retention", "vitamin_b1"],
+      "allowed_roles": ["geom_preopt", "ts_initialization", "local_barrier_surrogate"]
+    },
+    {
+      "reaction_id": "glutathione_release",
+      "reaction_family": "glutathione_cleavage",
+      "motif_family": "sulfur_fragmentation",
+      "benchmark_visible_gap": "anchor peptide-bound sulfur release against free-cysteine references so glutathione support is benchmarked as its own scientist-facing lane",
+      "reference_barrier_kcal": 22.0,
+      "barrier_uncertainty_kcal": 3.0,
+      "reference_method": "literature_model_system_anchor",
+      "source": "Wang et al. 2012 and Lee, Jo & Kim 1998; Family 05 SLR",
+      "candidate_aliases": ["glutathione_release", "glutathione_cleavage", "gsh_cleavage", "gsh_release"],
+      "allowed_roles": ["geom_preopt", "ts_initialization", "local_barrier_surrogate"]
+    },
+    {
+      "reaction_id": "cysteine_thermolysis",
+      "reaction_family": "cysteine_thermolysis",
+      "motif_family": "sulfur_fragmentation",
+      "benchmark_visible_gap": "stabilize sulfur-release competition against Strecker and trapping channels",
+      "reference_barrier_kcal": 30.0,
+      "barrier_uncertainty_kcal": 4.0,
+      "reference_method": "literature_upper_bound",
+      "source": "Wedzicha 1984",
+      "candidate_aliases": ["cys_thermolysis"],
+      "allowed_roles": ["geom_preopt", "ts_initialization", "local_barrier_surrogate"]
+    },
+    {
+      "reaction_id": "retro_aldol_cleavage",
+      "reaction_family": "retro_aldol",
+      "motif_family": "carbonyl_fragmentation",
+      "benchmark_visible_gap": "preserve ranking of carbonyl fragmentation routes feeding furan severity markers",
+      "reference_barrier_kcal": 32.0,
+      "barrier_uncertainty_kcal": 4.0,
+      "reference_method": "literature_bounded_estimate",
+      "source": "Hodge 1953",
+      "candidate_aliases": ["retro_aldol"],
+      "allowed_roles": ["ts_initialization", "local_barrier_surrogate"]
+    }
+  ]
+}

@@ -1,0 +1,4063 @@
+{
+  "summary": {
+    "total_occurrences": 179,
+    "unique_citations": 172,
+    "runtime_bound": 71,
+    "registry_only": 0,
+    "backlog": 101,
+    "min_score": 6
+  },
+  "priority_53_targets": {
+    "spi_hvp_xylose": {
+      "status": "RUNTIME_BOUND",
+      "matches": [
+        "PMC9905368 (2023)"
+      ]
+    },
+    "wheat_gluten_hvp_xylose": {
+      "status": "RUNTIME_BOUND",
+      "matches": [
+        "PMC9905368 (2023)"
+      ]
+    },
+    "acrylamide_fast_kinetics": {
+      "status": "RUNTIME_BOUND",
+      "matches": [
+        "ACS ResearchGate ref. 3"
+      ]
+    },
+    "cml_cel_commercial_pba_ranges": {
+      "status": "RUNTIME_BOUND",
+      "matches": [
+        "ResearchGate (Ref. 9/12)",
+        "Henle (2005)",
+        "Poulsen et al. (2023)",
+        "Foods 2023, 12(10):1967",
+        "Huang (2022)",
+        "PMC 2024 (PMC12451096)",
+        "Foods 12(10):1967 (2023)"
+      ]
+    },
+    "furosine_crossover": {
+      "status": "RUNTIME_BOUND",
+      "matches": [
+        "Martins & van Boekel (2003)",
+        "ACS APTS (Ref. 24)",
+        "Ram\u00edrez-Jim\u00e9nez et al. (2000)"
+      ]
+    }
+  },
+  "items": [
+    {
+      "citation": "ACS JAFC 2020 (raw peas)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "11_maillard_lipid_crosstalk.md"
+      ],
+      "descriptions": [
+        "PPI hexanal baseline 1260 \u00b5g/kg; OAV calculations; SIDA."
+      ],
+      "occurrences": [
+        {
+          "file": "11_maillard_lipid_crosstalk.md",
+          "line": 561,
+          "description": "PPI hexanal baseline 1260 \u00b5g/kg; OAV calculations; SIDA.",
+          "raw_line": "5. ACS JAFC 2020 (raw peas) \u2014 PPI hexanal baseline 1260 \u00b5g/kg; OAV calculations; SIDA. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Amarita et al. (2004)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "10_microbial_fermentation.md"
+      ],
+      "descriptions": [
+        "ResearchGate ref. 49 \u2014 Met supplementation \u2192 methional dose-response linear (R\u00b2>0.97); methional 0.04\u21921.38 \u00b5g/g at 0\u20132 mM Met; SAFE GC-MS; IS stated."
+      ],
+      "occurrences": [
+        {
+          "file": "10_microbial_fermentation.md",
+          "line": 603,
+          "description": "ResearchGate ref. 49 \u2014 Met supplementation \u2192 methional dose-response linear (R\u00b2>0.97); methional 0.04\u21921.38 \u00b5g/g at 0\u20132 mM Met; SAFE GC-MS; IS stated.",
+          "raw_line": "8. `Amarita et al. (2004)` \u2014 ResearchGate ref. 49 \u2014 Met supplementation \u2192 methional dose-response linear (R\u00b2>0.97); methional 0.04\u21921.38 \u00b5g/g at 0\u20132 mM Met; SAFE GC-MS; IS stated. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Arntfield et al. (1994/compiled)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "08_off_note_chemistry.md"
+      ],
+      "descriptions": [
+        "Microwave inactivation; 98% LOX; 87% NSI; hexanal \u221271%; OAV 3.1 post-treatment."
+      ],
+      "occurrences": [
+        {
+          "file": "08_off_note_chemistry.md",
+          "line": 715,
+          "description": "Microwave inactivation; 98% LOX; 87% NSI; hexanal \u221271%; OAV 3.1 post-treatment.",
+          "raw_line": "13. `Arntfield et al. (1994/compiled)` \u2014 Microwave inactivation; 98% LOX; 87% NSI; hexanal \u221271%; OAV 3.1 post-treatment. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Bacher, Eberhardt & M\u00fcller (2023)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "10_microbial_fermentation.md"
+      ],
+      "descriptions": [
+        "PubMed 37930115 \u2014 thiamine yield ceiling 254.6 nmol/L; specific productivity 160.9 nmol/g DW; HPLC fluorometric; IS thiamine-d\u2083."
+      ],
+      "occurrences": [
+        {
+          "file": "10_microbial_fermentation.md",
+          "line": 599,
+          "description": "PubMed 37930115 \u2014 thiamine yield ceiling 254.6 nmol/L; specific productivity 160.9 nmol/g DW; HPLC fluorometric; IS thiamine-d\u2083.",
+          "raw_line": "4. `Bacher, Eberhardt & M\u00fcller (2023)` \u2014 PubMed 37930115 \u2014 thiamine yield ceiling 254.6 nmol/L; specific productivity 160.9 nmol/g DW; HPLC fluorometric; IS thiamine-d\u2083. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Davidek et al. (2006)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "01_amino_acid_sugar.md"
+      ],
+      "descriptions": [
+        "Thr + glucose \u2192 furan/methylfuran, absolute concentrations with IS, LOD/LOQ stated. SAFETY relevance."
+      ],
+      "occurrences": [
+        {
+          "file": "01_amino_acid_sugar.md",
+          "line": 607,
+          "description": "Thr + glucose \u2192 furan/methylfuran, absolute concentrations with IS, LOD/LOQ stated. SAFETY relevance.",
+          "raw_line": "2. `Davidek et al. (2006)` \u2014 Thr + glucose \u2192 furan/methylfuran, absolute concentrations with IS, LOD/LOQ stated. SAFETY relevance. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Degen et al. (2012)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "09_carbohydrate_degradation.md"
+      ],
+      "descriptions": [
+        "JAFC \u2014 3-DG concentrations in real matrices: up to 2622 mg/L (vinegar), 385 mg/kg (cookies); 3-DG > HMF in baked matrices; HPLC-SIDA."
+      ],
+      "occurrences": [
+        {
+          "file": "09_carbohydrate_degradation.md",
+          "line": 596,
+          "description": "JAFC \u2014 3-DG concentrations in real matrices: up to 2622 mg/L (vinegar), 385 mg/kg (cookies); 3-DG > HMF in baked matrices; HPLC-SIDA.",
+          "raw_line": "7. `Degen et al. (2012)` \u2014 JAFC \u2014 3-DG concentrations in real matrices: up to 2622 mg/L (vinegar), 385 mg/kg (cookies); 3-DG > HMF in baked matrices; HPLC-SIDA. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Deng et al. (2024)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "10_microbial_fermentation.md"
+      ],
+      "descriptions": [
+        "PMC12427843 \u2014 PPI + E. faecalis; GMP/AMP de novo appearance; FAA +1.6\u00d7; WHC/OHC +14\u201322%; HPLC; IS stated; triplicates."
+      ],
+      "occurrences": [
+        {
+          "file": "10_microbial_fermentation.md",
+          "line": 605,
+          "description": "PMC12427843 \u2014 PPI + E. faecalis; GMP/AMP de novo appearance; FAA +1.6\u00d7; WHC/OHC +14\u201322%; HPLC; IS stated; triplicates.",
+          "raw_line": "10. `Deng et al. (2024)` \u2014 PMC12427843 \u2014 PPI + E. faecalis; GMP/AMP de novo appearance; FAA +1.6\u00d7; WHC/OHC +14\u201322%; HPLC; IS stated; triplicates. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "DOI ref. 40 in raw/11_maillard_lipid_crosstalk.md",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "11_maillard_lipid_crosstalk.md"
+      ],
+      "descriptions": [
+        "Non-covalent Kp values for PPI; logP structure-activity."
+      ],
+      "occurrences": [
+        {
+          "file": "11_maillard_lipid_crosstalk.md",
+          "line": 562,
+          "description": "Non-covalent Kp values for PPI; logP structure-activity.",
+          "raw_line": "6. DOI ref. 40 in raw/11_maillard_lipid_crosstalk.md \u2014 Non-covalent Kp values for PPI; logP structure-activity. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Farmer & Patterson (1991)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "02_lipid_oxidation.md"
+      ],
+      "descriptions": [
+        "Food Chem 40:201 \u2014 aliphatic aldehyde + H\u2082S + NH\u2083 \u2192 alkyl thiazoles; OAV > 1 confirmed."
+      ],
+      "occurrences": [
+        {
+          "file": "02_lipid_oxidation.md",
+          "line": 597,
+          "description": "Food Chem 40:201 \u2014 aliphatic aldehyde + H\u2082S + NH\u2083 \u2192 alkyl thiazoles; OAV > 1 confirmed.",
+          "raw_line": "9. `Farmer & Patterson (1991)` \u2014 Food Chem 40:201 \u2014 aliphatic aldehyde + H\u2082S + NH\u2083 \u2192 alkyl thiazoles; OAV > 1 confirmed. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Finnigan et al. (2019)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "04_nucleotide_degradation.md"
+      ],
+      "descriptions": [
+        "Sustainable Food Technology \u2014 mycoprotein RNA reduction; residual IMP/GMP at 60\u201370\u00b0C; EUC impact."
+      ],
+      "occurrences": [
+        {
+          "file": "04_nucleotide_degradation.md",
+          "line": 616,
+          "description": "Sustainable Food Technology \u2014 mycoprotein RNA reduction; residual IMP/GMP at 60\u201370\u00b0C; EUC impact.",
+          "raw_line": "14. `Finnigan et al. (2019)` \u2014 Sustainable Food Technology \u2014 mycoprotein RNA reduction; residual IMP/GMP at 60\u201370\u00b0C; EUC impact. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Frankel et al. (1982)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "02_lipid_oxidation.md"
+      ],
+      "descriptions": [
+        "Lipids 17:9 \u2014 C18:2 \u2192 hexanal \u03b2-scission coefficients; isotopic confirmation; ODT for hexanal."
+      ],
+      "occurrences": [
+        {
+          "file": "02_lipid_oxidation.md",
+          "line": 594,
+          "description": "Lipids 17:9 \u2014 C18:2 \u2192 hexanal \u03b2-scission coefficients; isotopic confirmation; ODT for hexanal.",
+          "raw_line": "6. `Frankel et al. (1982)` \u2014 Lipids 17:9 \u2014 C18:2 \u2192 hexanal \u03b2-scission coefficients; isotopic confirmation; ODT for hexanal. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Grosch & Wieser (1999)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "02_lipid_oxidation.md"
+      ],
+      "descriptions": [
+        "JAFC \u2014 C18:3 \u2192 propanal/2,4-heptadienal \u03b2-scission; triplicates."
+      ],
+      "occurrences": [
+        {
+          "file": "02_lipid_oxidation.md",
+          "line": 596,
+          "description": "JAFC \u2014 C18:3 \u2192 propanal/2,4-heptadienal \u03b2-scission; triplicates.",
+          "raw_line": "8. `Grosch & Wieser (1999)` \u2014 JAFC \u2014 C18:3 \u2192 propanal/2,4-heptadienal \u03b2-scission; triplicates. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Grosch (1982)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "02_lipid_oxidation.md"
+      ],
+      "descriptions": [
+        "JAFC \u2014 hexanal ODT = 4.5 ppb; OAV framework; Aw-dependent rate."
+      ],
+      "occurrences": [
+        {
+          "file": "02_lipid_oxidation.md",
+          "line": 595,
+          "description": "JAFC \u2014 hexanal ODT = 4.5 ppb; OAV framework; Aw-dependent rate.",
+          "raw_line": "7. `Grosch (1982)` \u2014 JAFC \u2014 hexanal ODT = 4.5 ppb; OAV framework; Aw-dependent rate. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Hauck & Tressl (1999)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "09_carbohydrate_degradation.md"
+      ],
+      "descriptions": [
+        "ACS HDMF review \u2014 HDMF from iso-oligosaccharides at 140\u00b0C (3.8 \u00b5g/g), maltose (1.4 \u00b5g/g), MGO self-condensation (2.9 \u00b5g/g); no AA required; SIDA."
+      ],
+      "occurrences": [
+        {
+          "file": "09_carbohydrate_degradation.md",
+          "line": 598,
+          "description": "ACS HDMF review \u2014 HDMF from iso-oligosaccharides at 140\u00b0C (3.8 \u00b5g/g), maltose (1.4 \u00b5g/g), MGO self-condensation (2.9 \u00b5g/g); no AA required; SIDA.",
+          "raw_line": "9. `Hauck & Tressl (1999)` \u2014 ACS HDMF review \u2014 HDMF from iso-oligosaccharides at 140\u00b0C (3.8 \u00b5g/g), maltose (1.4 \u00b5g/g), MGO self-condensation (2.9 \u00b5g/g); no AA required; SIDA. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "J. Agric. Food Chem. 2000 (Ref. 22)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "15_phospholipid_amine_maillard.md"
+      ],
+      "descriptions": [
+        "Egg yolk PE: 9.2% glucose sequestered; MRM library for 5 soy-relevant Amadori-PE species. ** **"
+      ],
+      "occurrences": [
+        {
+          "file": "15_phospholipid_amine_maillard.md",
+          "line": 436,
+          "description": "Egg yolk PE: 9.2% glucose sequestered; MRM library for 5 soy-relevant Amadori-PE species. ** **",
+          "raw_line": "6. J. Agric. Food Chem. 2000 (Ref. 22) \u2014 Egg yolk PE: 9.2% glucose sequestered; MRM library for 5 soy-relevant Amadori-PE species. **7/8.**"
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "J. Agric. Food Chem. 2020 (Ref. 25)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "14_ascorbic_acid_maillard.md"
+      ],
+      "descriptions": [
+        "EGCG: Ea ARP formation 77.8 \u2192 62.8 kJ/mol (\u221215 kJ/mol). ** **"
+      ],
+      "occurrences": [
+        {
+          "file": "14_ascorbic_acid_maillard.md",
+          "line": 454,
+          "description": "EGCG: Ea ARP formation 77.8 \u2192 62.8 kJ/mol (\u221215 kJ/mol). ** **",
+          "raw_line": "5. J. Agric. Food Chem. 2020 (Ref. 25) \u2014 EGCG: Ea ARP formation 77.8 \u2192 62.8 kJ/mol (\u221215 kJ/mol). **7/8.**"
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "J. Agric. Food Chem. 2022 (Ref. 41) + Ref. 38",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "16_melanoidin_polymerization.md"
+      ],
+      "descriptions": [
+        "FFT \u00d716 depletion; IC\u2085\u2080 = 183 mg thiol/L melanoidin; binding saturation quantified. ** **"
+      ],
+      "occurrences": [
+        {
+          "file": "16_melanoidin_polymerization.md",
+          "line": 437,
+          "description": "FFT \u00d716 depletion; IC\u2085\u2080 = 183 mg thiol/L melanoidin; binding saturation quantified. ** **",
+          "raw_line": "7. J. Agric. Food Chem. 2022 (Ref. 41) + Ref. 38 \u2014 FFT \u00d716 depletion; IC\u2085\u2080 = 183 mg thiol/L melanoidin; binding saturation quantified. **7/8.**"
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "J. Agric. Food Chem. 2023 (Ref. 18)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "13_polyphenol_amino_capping.md"
+      ],
+      "descriptions": [
+        "Polyphenol-protein Kd hierarchy (ITC); procyanidin 0.54 \u00b5M to epicatechin 80.6 \u00b5M. ** **"
+      ],
+      "occurrences": [
+        {
+          "file": "13_polyphenol_amino_capping.md",
+          "line": 448,
+          "description": "Polyphenol-protein Kd hierarchy (ITC); procyanidin 0.54 \u00b5M to epicatechin 80.6 \u00b5M. ** **",
+          "raw_line": "7. J. Agric. Food Chem. 2023 (Ref. 18) \u2014 Polyphenol-protein Kd hierarchy (ITC); procyanidin 0.54 \u00b5M to epicatechin 80.6 \u00b5M. **7/8.**"
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Kocada\u011fl\u0131 & G\u00f6kmen (2016)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "08_off_note_chemistry.md"
+      ],
+      "descriptions": [
+        "PubMed PMID:35749878 \u2014 saponin dose\u2013acrylamide relationship; pyrazine skew >60%; DSC melting point shift \u22126\u00b0C; LOQ 10 \u00b5g/kg."
+      ],
+      "occurrences": [
+        {
+          "file": "08_off_note_chemistry.md",
+          "line": 706,
+          "description": "PubMed PMID:35749878 \u2014 saponin dose\u2013acrylamide relationship; pyrazine skew >60%; DSC melting point shift \u22126\u00b0C; LOQ 10 \u00b5g/kg.",
+          "raw_line": "6. `Kocada\u011fl\u0131 & G\u00f6kmen (2016)` \u2014 PubMed PMID:35749878 \u2014 saponin dose\u2013acrylamide relationship; pyrazine skew >60%; DSC melting point shift \u22126\u00b0C; LOQ 10 \u00b5g/kg. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Lee, Jo & Kim (1998)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "05_glutathione_peptides.md"
+      ],
+      "descriptions": [
+        "JAFC 46:1388 \u2014 GSH oxidation mechanism; pH optimum 7.0 for sulfur heterocycles; zero sulfur compounds from GSH-SO\u2083H."
+      ],
+      "occurrences": [
+        {
+          "file": "05_glutathione_peptides.md",
+          "line": 528,
+          "description": "JAFC 46:1388 \u2014 GSH oxidation mechanism; pH optimum 7.0 for sulfur heterocycles; zero sulfur compounds from GSH-SO\u2083H.",
+          "raw_line": "6. `Lee, Jo & Kim (1998)` \u2014 JAFC 46:1388 \u2014 GSH oxidation mechanism; pH optimum 7.0 for sulfur heterocycles; zero sulfur compounds from GSH-SO\u2083H. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Liu (2022)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "08_off_note_chemistry.md"
+      ],
+      "descriptions": [
+        "NC State Repository \u2014 Full PPI OAV table (12 compounds); methoxypyrazines ODT 0.002\u20130.006 ppb; n=6; AEDA/GC-MS/O."
+      ],
+      "occurrences": [
+        {
+          "file": "08_off_note_chemistry.md",
+          "line": 702,
+          "description": "NC State Repository \u2014 Full PPI OAV table (12 compounds); methoxypyrazines ODT 0.002\u20130.006 ppb; n=6; AEDA/GC-MS/O.",
+          "raw_line": "2. `Liu (2022)` \u2014 NC State Repository \u2014 Full PPI OAV table (12 compounds); methoxypyrazines ODT 0.002\u20130.006 ppb; n=6; AEDA/GC-MS/O. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Maehashi et al. (2008)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "05_glutathione_peptides.md"
+      ],
+      "descriptions": [
+        "BSB \u2014 TAV for anserine (6.19), carnosine (2.34) in chicken soup; taste contribution reference."
+      ],
+      "occurrences": [
+        {
+          "file": "05_glutathione_peptides.md",
+          "line": 530,
+          "description": "BSB \u2014 TAV for anserine (6.19), carnosine (2.34) in chicken soup; taste contribution reference.",
+          "raw_line": "8. `Maehashi et al. (2008)` \u2014 BSB \u2014 TAV for anserine (6.19), carnosine (2.34) in chicken soup; taste contribution reference. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Martins & van Boekel (2003)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "01_amino_acid_sugar.md"
+      ],
+      "descriptions": [
+        "Lys + glucose kinetics, Ea values for furosine/pyrraline via MGO and 3-DG pathways. First-order kinetics."
+      ],
+      "occurrences": [
+        {
+          "file": "01_amino_acid_sugar.md",
+          "line": 606,
+          "description": "Lys + glucose kinetics, Ea values for furosine/pyrraline via MGO and 3-DG pathways. First-order kinetics.",
+          "raw_line": "1. `Martins & van Boekel (2003)` \u2014 Lys + glucose kinetics, Ea values for furosine/pyrraline via MGO and 3-DG pathways. First-order kinetics. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "MDPI Foods 2023 Ref. 26 + CABI Ref. 27",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "16_melanoidin_polymerization.md"
+      ],
+      "descriptions": [
+        "Extractability \u22125\u201310% (Urea/DTT/SDS); PPI random coil 14.04%\u219219.36%; SPI/PPI architecture comparison. ** **"
+      ],
+      "occurrences": [
+        {
+          "file": "16_melanoidin_polymerization.md",
+          "line": 434,
+          "description": "Extractability \u22125\u201310% (Urea/DTT/SDS); PPI random coil 14.04%\u219219.36%; SPI/PPI architecture comparison. ** **",
+          "raw_line": "4. MDPI Foods 2023 Ref. 26 + CABI Ref. 27 \u2014 Extractability \u22125\u201310% (Urea/DTT/SDS); PPI random coil 14.04%\u219219.36%; SPI/PPI architecture comparison. **7/8.**"
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "MDPI Plants 14(2):274 (2024)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "06_alternative_proteins.md"
+      ],
+      "descriptions": [
+        "Hemp volatile profile; NADES vs. alkaline extraction; (E)-2-octenal OAV 35; \u03b2-caryophyllene identified."
+      ],
+      "occurrences": [
+        {
+          "file": "06_alternative_proteins.md",
+          "line": 761,
+          "description": "Hemp volatile profile; NADES vs. alkaline extraction; (E)-2-octenal OAV 35; \u03b2-caryophyllene identified.",
+          "raw_line": "12. `MDPI Plants 14(2):274 (2024)` \u2014 Hemp volatile profile; NADES vs. alkaline extraction; (E)-2-octenal OAV 35; \u03b2-caryophyllene identified. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Mottram et al. (2022)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "10_microbial_fermentation.md"
+      ],
+      "descriptions": [
+        "Massey University mro.massey.ac.nz \u2014 20% koji hydrolysate PBMA; sensory meaty aroma/taste vs. control; GC-MS/O; 3-methylbutanal OAV +3\u20135\u00d7."
+      ],
+      "occurrences": [
+        {
+          "file": "10_microbial_fermentation.md",
+          "line": 601,
+          "description": "Massey University mro.massey.ac.nz \u2014 20% koji hydrolysate PBMA; sensory meaty aroma/taste vs. control; GC-MS/O; 3-methylbutanal OAV +3\u20135\u00d7.",
+          "raw_line": "6. `Mottram et al. (2022)` \u2014 Massey University mro.massey.ac.nz \u2014 20% koji hydrolysate PBMA; sensory meaty aroma/taste vs. control; GC-MS/O; 3-methylbutanal OAV +3\u20135\u00d7. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Nakagawa et al. (2004)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "08_off_note_chemistry.md"
+      ],
+      "descriptions": [
+        "PubMed PMID:15165134 \u2014 Genistein IC\u2085\u2080 48 \u00b5M; 82% AGE inhibition at 100 \u00b5M; daidzein 68%; SPI isoflavone correction factor \u221280% for dicarbonyl pool."
+      ],
+      "occurrences": [
+        {
+          "file": "08_off_note_chemistry.md",
+          "line": 701,
+          "description": "PubMed PMID:15165134 \u2014 Genistein IC\u2085\u2080 48 \u00b5M; 82% AGE inhibition at 100 \u00b5M; daidzein 68%; SPI isoflavone correction factor \u221280% for dicarbonyl pool.",
+          "raw_line": "1. `Nakagawa et al. (2004)` \u2014 PubMed PMID:15165134 \u2014 Genistein IC\u2085\u2080 48 \u00b5M; 82% AGE inhibition at 100 \u00b5M; daidzein 68%; SPI isoflavone correction factor \u221280% for dicarbonyl pool. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Noda, Tanaka & Takahashi (2003)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "10_microbial_fermentation.md"
+      ],
+      "descriptions": [
+        "PMC8399179 / MDPI Fungi 7:658 \u2014 LAP I\u2013IV specificity; k_cat/K_M; debittering 65\u201380% reduction; HPLC amino acid IS."
+      ],
+      "occurrences": [
+        {
+          "file": "10_microbial_fermentation.md",
+          "line": 600,
+          "description": "PMC8399179 / MDPI Fungi 7:658 \u2014 LAP I\u2013IV specificity; k_cat/K_M; debittering 65\u201380% reduction; HPLC amino acid IS.",
+          "raw_line": "5. `Noda, Tanaka & Takahashi (2003)` \u2014 PMC8399179 / MDPI Fungi 7:658 \u2014 LAP I\u2013IV specificity; k_cat/K_M; debittering 65\u201380% reduction; HPLC amino acid IS. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Perdiguero et al. (2004)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "10_microbial_fermentation.md"
+      ],
+      "descriptions": [
+        "JAFC 52:7802 \u2014 yeast autolysis nucleotide kinetics; GMP 2.8 mg/g DW at 55\u00b0C/24h; HPLC-UV; IS AMP-d\u2084; triplicates."
+      ],
+      "occurrences": [
+        {
+          "file": "10_microbial_fermentation.md",
+          "line": 598,
+          "description": "JAFC 52:7802 \u2014 yeast autolysis nucleotide kinetics; GMP 2.8 mg/g DW at 55\u00b0C/24h; HPLC-UV; IS AMP-d\u2084; triplicates.",
+          "raw_line": "3. `Perdiguero et al. (2004)` \u2014 JAFC 52:7802 \u2014 yeast autolysis nucleotide kinetics; GMP 2.8 mg/g DW at 55\u00b0C/24h; HPLC-UV; IS AMP-d\u2084; triplicates. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "PMC PMCID:PMC12154226 (Ref. 2)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "13_polyphenol_amino_capping.md"
+      ],
+      "descriptions": [
+        "FFT 16\u00d7 reduction; QA/CQA/QAL-volatile adducts 5\u2013270 \u00b5g/L; CROSSPY mechanism. ** **"
+      ],
+      "occurrences": [
+        {
+          "file": "13_polyphenol_amino_capping.md",
+          "line": 447,
+          "description": "FFT 16\u00d7 reduction; QA/CQA/QAL-volatile adducts 5\u2013270 \u00b5g/L; CROSSPY mechanism. ** **",
+          "raw_line": "6. PMC PMCID:PMC12154226 (Ref. 2) \u2014 FFT 16\u00d7 reduction; QA/CQA/QAL-volatile adducts 5\u2013270 \u00b5g/L; CROSSPY mechanism. **7/8.**"
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "PMC PMCID:PMC12844103 (Ref. 3)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "13_polyphenol_amino_capping.md"
+      ],
+      "descriptions": [
+        "SPI EGCG conjugation: 86.9\u2192215.3 kDa; residue contacts Lys69/Ser116/Asn109; sensory outcome. ** **"
+      ],
+      "occurrences": [
+        {
+          "file": "13_polyphenol_amino_capping.md",
+          "line": 449,
+          "description": "SPI EGCG conjugation: 86.9\u2192215.3 kDa; residue contacts Lys69/Ser116/Asn109; sensory outcome. ** **",
+          "raw_line": "8. PMC PMCID:PMC12844103 (Ref. 3) \u2014 SPI EGCG conjugation: 86.9\u2192215.3 kDa; residue contacts Lys69/Ser116/Asn109; sensory outcome. **7/8.**"
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "PMC PMCID:PMC1329438 (Refs. 36/37)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "15_phospholipid_amine_maillard.md"
+      ],
+      "descriptions": [
+        "PE glycation k ~ 10\u207b\u00b3 M\u207b\u00b9s\u207b\u00b9 at interface; hydrolysis k ~ 10\u207b\u00b2 s\u207b\u00b9; intrasurface reaction dominance. ** **"
+      ],
+      "occurrences": [
+        {
+          "file": "15_phospholipid_amine_maillard.md",
+          "line": 432,
+          "description": "PE glycation k ~ 10\u207b\u00b3 M\u207b\u00b9s\u207b\u00b9 at interface; hydrolysis k ~ 10\u207b\u00b2 s\u207b\u00b9; intrasurface reaction dominance. ** **",
+          "raw_line": "2. PMC PMCID:PMC1329438 (Refs. 36/37) \u2014 PE glycation k ~ 10\u207b\u00b3 M\u207b\u00b9s\u207b\u00b9 at interface; hydrolysis k ~ 10\u207b\u00b2 s\u207b\u00b9; intrasurface reaction dominance. **7/8.**"
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "PMC PMCID:PMC3199460 (Ref. 2)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "14_ascorbic_acid_maillard.md"
+      ],
+      "descriptions": [
+        "Absolute dicarbonyl (OPD-LC-ESI-MS/MS): 3-deoxythreosone 9.1 pmol/mg; xylosone 0.5 pmol/mg; molar yields: DHA 28%, 2,3-DKG 4.7%, xylosone 5.8%. ** **"
+      ],
+      "occurrences": [
+        {
+          "file": "14_ascorbic_acid_maillard.md",
+          "line": 455,
+          "description": "Absolute dicarbonyl (OPD-LC-ESI-MS/MS): 3-deoxythreosone 9.1 pmol/mg; xylosone 0.5 pmol/mg; molar yields: DHA 28%, 2,3-DKG 4.7%, xylosone 5.8%. ** **",
+          "raw_line": "6. PMC PMCID:PMC3199460 (Ref. 2) \u2014 Absolute dicarbonyl (OPD-LC-ESI-MS/MS): 3-deoxythreosone 9.1 pmol/mg; xylosone 0.5 pmol/mg; molar yields: DHA 28%, 2,3-DKG 4.7%, xylosone 5.8%. **7/8.**"
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "PMC6104182 (2018)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "06_alternative_proteins.md"
+      ],
+      "descriptions": [
+        "A. oryzae soybean fermentation; Glu +2.49\u00d7, Gly +3.73\u00d7; Strecker aldehyde volatiles; IS."
+      ],
+      "occurrences": [
+        {
+          "file": "06_alternative_proteins.md",
+          "line": 757,
+          "description": "A. oryzae soybean fermentation; Glu +2.49\u00d7, Gly +3.73\u00d7; Strecker aldehyde volatiles; IS.",
+          "raw_line": "8. `PMC6104182 (2018)` \u2014 A. oryzae soybean fermentation; Glu +2.49\u00d7, Gly +3.73\u00d7; Strecker aldehyde volatiles; IS. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "PubMed PMID:11893788 (Ref. 14)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "15_phospholipid_amine_maillard.md"
+      ],
+      "descriptions": [
+        "Infant formula Amadori-PE 500\u20135000 nmol/mL; UV calibration method. ** **"
+      ],
+      "occurrences": [
+        {
+          "file": "15_phospholipid_amine_maillard.md",
+          "line": 437,
+          "description": "Infant formula Amadori-PE 500\u20135000 nmol/mL; UV calibration method. ** **",
+          "raw_line": "7. PubMed PMID:11893788 (Ref. 14) \u2014 Infant formula Amadori-PE 500\u20135000 nmol/mL; UV calibration method. **7/8.**"
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "PubMed PMID:20420424 (Ref. 35)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "14_ascorbic_acid_maillard.md"
+      ],
+      "descriptions": [
+        "Furfural from AA: 0\u2013236 \u00b5g/100 g; pH and protein density effects. ** **"
+      ],
+      "occurrences": [
+        {
+          "file": "14_ascorbic_acid_maillard.md",
+          "line": 457,
+          "description": "Furfural from AA: 0\u2013236 \u00b5g/100 g; pH and protein density effects. ** **",
+          "raw_line": "8. PubMed PMID:20420424 (Ref. 35) \u2014 Furfural from AA: 0\u2013236 \u00b5g/100 g; pH and protein density effects. **7/8.**"
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "PubMed PMID:24837915 (Ref. 24)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "15_phospholipid_amine_maillard.md"
+      ],
+      "descriptions": [
+        "Amadori-PE + advanced products at 160\u00b0C in food oil, 10 min; LC-TOF-MS confirmation. ** **"
+      ],
+      "occurrences": [
+        {
+          "file": "15_phospholipid_amine_maillard.md",
+          "line": 434,
+          "description": "Amadori-PE + advanced products at 160\u00b0C in food oil, 10 min; LC-TOF-MS confirmation. ** **",
+          "raw_line": "4. PubMed PMID:24837915 (Ref. 24) \u2014 Amadori-PE + advanced products at 160\u00b0C in food oil, 10 min; LC-TOF-MS confirmation. **7/8.**"
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "PubMed PMID:36878579 (Ref. 39)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "15_phospholipid_amine_maillard.md"
+      ],
+      "descriptions": [
+        "1:2 sugar:PE stoichiometry; pyridinium derivative UV 350 nm; Ca-stearate inhibition mechanism; 160\u00b0C 10 min oil model. ** **"
+      ],
+      "occurrences": [
+        {
+          "file": "15_phospholipid_amine_maillard.md",
+          "line": 433,
+          "description": "1:2 sugar:PE stoichiometry; pyridinium derivative UV 350 nm; Ca-stearate inhibition mechanism; 160\u00b0C 10 min oil model. ** **",
+          "raw_line": "3. PubMed PMID:36878579 (Ref. 39) \u2014 1:2 sugar:PE stoichiometry; pyridinium derivative UV 350 nm; Ca-stearate inhibition mechanism; 160\u00b0C 10 min oil model. **7/8.**"
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Quintas et al. (2000)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "09_carbohydrate_degradation.md"
+      ],
+      "descriptions": [
+        "J Food Engineering \u2014 Sucrose caramelisation k_obs and Ea vs. pH and T; HMF 48 mg/L at pH 5.0, 120\u00b0C, 60 min; HPLC-IS."
+      ],
+      "occurrences": [
+        {
+          "file": "09_carbohydrate_degradation.md",
+          "line": 595,
+          "description": "J Food Engineering \u2014 Sucrose caramelisation k_obs and Ea vs. pH and T; HMF 48 mg/L at pH 5.0, 120\u00b0C, 60 min; HPLC-IS.",
+          "raw_line": "6. `Quintas et al. (2000)` \u2014 J Food Engineering \u2014 Sucrose caramelisation k_obs and Ea vs. pH and T; HMF 48 mg/L at pH 5.0, 120\u00b0C, 60 min; HPLC-IS. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Refs. 10 + 33 (combined)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "14_ascorbic_acid_maillard.md"
+      ],
+      "descriptions": [
+        "Dilute aerobic Ea 44.4\u2013103.2 kJ/mol; intermediate aw Ea 58.6\u201371.1 kJ/mol; aw parabolic peak at 0.64. ** **"
+      ],
+      "occurrences": [
+        {
+          "file": "14_ascorbic_acid_maillard.md",
+          "line": 451,
+          "description": "Dilute aerobic Ea 44.4\u2013103.2 kJ/mol; intermediate aw Ea 58.6\u201371.1 kJ/mol; aw parabolic peak at 0.64. ** **",
+          "raw_line": "2. Refs. 10 + 33 (combined) \u2014 Dilute aerobic Ea 44.4\u2013103.2 kJ/mol; intermediate aw Ea 58.6\u201371.1 kJ/mol; aw parabolic peak at 0.64. **7/8.**"
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "ResearchGate (2023)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "06_alternative_proteins.md"
+      ],
+      "descriptions": [
+        "Pea protein AEDA + GC-O; (E,E)-2,4-heptadienal FD 4096; methoxypyrazine FD 256; OAV table."
+      ],
+      "occurrences": [
+        {
+          "file": "06_alternative_proteins.md",
+          "line": 755,
+          "description": "Pea protein AEDA + GC-O; (E,E)-2,4-heptadienal FD 4096; methoxypyrazine FD 256; OAV table.",
+          "raw_line": "6. `ResearchGate (2023)` \u2014 Pea protein AEDA + GC-O; (E,E)-2,4-heptadienal FD 4096; methoxypyrazine FD 256; OAV table. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "ResearchGate (Ref. 13)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "13_polyphenol_amino_capping.md"
+      ],
+      "descriptions": [
+        "Quinone-thiol/amine rate ratio \u226510\u2075; TBA structure; Cys competitive inhibition model. ** **"
+      ],
+      "occurrences": [
+        {
+          "file": "13_polyphenol_amino_capping.md",
+          "line": 444,
+          "description": "Quinone-thiol/amine rate ratio \u226510\u2075; TBA structure; Cys competitive inhibition model. ** **",
+          "raw_line": "3. ResearchGate (Ref. 13) \u2014 Quinone-thiol/amine rate ratio \u226510\u2075; TBA structure; Cys competitive inhibition model. **7/8.**"
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "ResearchGate (Ref. 14)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "13_polyphenol_amino_capping.md"
+      ],
+      "descriptions": [
+        "CGA-Cys, CA-Cys adduct SIDA quantification; m/z 474.1 MRM; stability at 90\u00b0C. ** **"
+      ],
+      "occurrences": [
+        {
+          "file": "13_polyphenol_amino_capping.md",
+          "line": 443,
+          "description": "CGA-Cys, CA-Cys adduct SIDA quantification; m/z 474.1 MRM; stability at 90\u00b0C. ** **",
+          "raw_line": "2. ResearchGate (Ref. 14) \u2014 CGA-Cys, CA-Cys adduct SIDA quantification; m/z 474.1 MRM; stability at 90\u00b0C. **7/8.**"
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "ResearchGate (Ref. 6)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "14_ascorbic_acid_maillard.md"
+      ],
+      "descriptions": [
+        "AA biphasic HMEC: AI 1.2\u20131.5; optimal dose 500\u20131000 ppm; fibrous pores confirmed by CLSM/SEM. ** **"
+      ],
+      "occurrences": [
+        {
+          "file": "14_ascorbic_acid_maillard.md",
+          "line": 458,
+          "description": "AA biphasic HMEC: AI 1.2\u20131.5; optimal dose 500\u20131000 ppm; fibrous pores confirmed by CLSM/SEM. ** **",
+          "raw_line": "9. ResearchGate (Ref. 6) \u2014 AA biphasic HMEC: AI 1.2\u20131.5; optimal dose 500\u20131000 ppm; fibrous pores confirmed by CLSM/SEM. **7/8.**"
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "ResearchGate (Ref. 9/12)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "13_polyphenol_amino_capping.md"
+      ],
+      "descriptions": [
+        "EGCG-mediated Strecker aldehyde suppression 95%; tea polyphenol 5-HMF/MGO/CEL reductions. ** **"
+      ],
+      "occurrences": [
+        {
+          "file": "13_polyphenol_amino_capping.md",
+          "line": 445,
+          "description": "EGCG-mediated Strecker aldehyde suppression 95%; tea polyphenol 5-HMF/MGO/CEL reductions. ** **",
+          "raw_line": "4. ResearchGate (Ref. 9/12) \u2014 EGCG-mediated Strecker aldehyde suppression 95%; tea polyphenol 5-HMF/MGO/CEL reductions. **7/8.**"
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "ResearchGate ref. 10 (ACRYLAMIDE/HEAT)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "12_protein_damage_markers.md"
+      ],
+      "descriptions": [
+        "Acrylamide range 31.81\u2013186.70 \u00b5g/kg; Pictet-Spengler mechanism above 150\u00b0C; in-matrix trapping."
+      ],
+      "occurrences": [
+        {
+          "file": "12_protein_damage_markers.md",
+          "line": 526,
+          "description": "Acrylamide range 31.81\u2013186.70 \u00b5g/kg; Pictet-Spengler mechanism above 150\u00b0C; in-matrix trapping.",
+          "raw_line": "5. ResearchGate ref. 10 (ACRYLAMIDE/HEAT) \u2014 Acrylamide range 31.81\u2013186.70 \u00b5g/kg; Pictet-Spengler mechanism above 150\u00b0C; in-matrix trapping. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "ResearchGate Ref. 3 (SPI",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "16_melanoidin_polymerization.md"
+      ],
+      "descriptions": [
+        "\u03b2glucan HME) \u2014 Pseudo-zero-order melanoidin kinetics; Mw 290\u2192340\u2013359 kDa; PDI 1.35\u21921.74; HPSEC-MALS. ** **"
+      ],
+      "occurrences": [
+        {
+          "file": "16_melanoidin_polymerization.md",
+          "line": 431,
+          "description": "\u03b2glucan HME) \u2014 Pseudo-zero-order melanoidin kinetics; Mw 290\u2192340\u2013359 kDa; PDI 1.35\u21921.74; HPSEC-MALS. ** **",
+          "raw_line": "1. ResearchGate Ref. 3 (SPI-\u03b2glucan HME) \u2014 Pseudo-zero-order melanoidin kinetics; Mw 290\u2192340\u2013359 kDa; PDI 1.35\u21921.74; HPSEC-MALS. **7/8.**"
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Rietjens et al. (2023)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "05_glutathione_peptides.md"
+      ],
+      "descriptions": [
+        "PMC10706403 \u2014 L. plantarum fermentation of cereal by-products; 23\u00d7 \u03b3-Glu-Val; mouthfulness +2 scale units."
+      ],
+      "occurrences": [
+        {
+          "file": "05_glutathione_peptides.md",
+          "line": 531,
+          "description": "PMC10706403 \u2014 L. plantarum fermentation of cereal by-products; 23\u00d7 \u03b3-Glu-Val; mouthfulness +2 scale units.",
+          "raw_line": "9. `Rietjens et al. (2023)` \u2014 PMC10706403 \u2014 L. plantarum fermentation of cereal by-products; 23\u00d7 \u03b3-Glu-Val; mouthfulness +2 scale units. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Rocha et al. (2024)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "05_glutathione_peptides.md"
+      ],
+      "descriptions": [
+        "Foods 13:1916 \u2014 PEF extraction; 61% intact GSH vs. 45% from boiling water; oxidation status flag."
+      ],
+      "occurrences": [
+        {
+          "file": "05_glutathione_peptides.md",
+          "line": 532,
+          "description": "Foods 13:1916 \u2014 PEF extraction; 61% intact GSH vs. 45% from boiling water; oxidation status flag.",
+          "raw_line": "10. `Rocha et al. (2024)` \u2014 Foods 13:1916 \u2014 PEF extraction; 61% intact GSH vs. 45% from boiling water; oxidation status flag. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Ruiz-Aceituno et al. (compiled 2016)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "05_glutathione_peptides.md"
+      ],
+      "descriptions": [
+        "H\u2082S release kinetics; free Cys 5.5\u00d7 faster than GSH; peak [H\u2082S] at < 2 min vs. 18\u201322 min."
+      ],
+      "occurrences": [
+        {
+          "file": "05_glutathione_peptides.md",
+          "line": 529,
+          "description": "H\u2082S release kinetics; free Cys 5.5\u00d7 faster than GSH; peak [H\u2082S] at < 2 min vs. 18\u201322 min.",
+          "raw_line": "7. `Ruiz-Aceituno et al. (compiled 2016)` \u2014 H\u2082S release kinetics; free Cys 5.5\u00d7 faster than GSH; peak [H\u2082S] at < 2 min vs. 18\u201322 min. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Smit, Smit & Engels (2005)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "10_microbial_fermentation.md"
+      ],
+      "descriptions": [
+        "FEMS Microbiology Reviews 29:591 \u2014 Met aminotransferase (18.4 nmol/min/mg) vs. \u03b2-lyase (6.2 nmol/min/mg); pathway kinetics; FPD-GC; SE reported."
+      ],
+      "occurrences": [
+        {
+          "file": "10_microbial_fermentation.md",
+          "line": 604,
+          "description": "FEMS Microbiology Reviews 29:591 \u2014 Met aminotransferase (18.4 nmol/min/mg) vs. \u03b2-lyase (6.2 nmol/min/mg); pathway kinetics; FPD-GC; SE reported.",
+          "raw_line": "9. `Smit, Smit & Engels (2005)` \u2014 FEMS Microbiology Reviews 29:591 \u2014 Met aminotransferase (18.4 nmol/min/mg) vs. \u03b2-lyase (6.2 nmol/min/mg); pathway kinetics; FPD-GC; SE reported. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Tang et al. (2013)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "03_thiamine_degradation.md"
+      ],
+      "descriptions": [
+        "J Sulfur Chem 34:38 \u2014 compiled MFT table across meat systems; OAV table; ODT confirmed."
+      ],
+      "occurrences": [
+        {
+          "file": "03_thiamine_degradation.md",
+          "line": 591,
+          "description": "J Sulfur Chem 34:38 \u2014 compiled MFT table across meat systems; OAV table; ODT confirmed.",
+          "raw_line": "10. `Tang et al. (2013)` \u2014 J Sulfur Chem 34:38 \u2014 compiled MFT table across meat systems; OAV table; ODT confirmed. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Tannenbaum, Archer & Young (1985)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "03_thiamine_degradation.md"
+      ],
+      "descriptions": [
+        "JAFC 33:985 \u2014 compiled Ea table for wide T/pH range; low-Aw Ea confirmed."
+      ],
+      "occurrences": [
+        {
+          "file": "03_thiamine_degradation.md",
+          "line": 587,
+          "description": "JAFC 33:985 \u2014 compiled Ea table for wide T/pH range; low-Aw Ea confirmed.",
+          "raw_line": "6. `Tannenbaum, Archer & Young (1985)` \u2014 JAFC 33:985 \u2014 compiled Ea table for wide T/pH range; low-Aw Ea confirmed. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Tran et al. (2023 / PMC9846454)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "09_carbohydrate_degradation.md"
+      ],
+      "descriptions": [
+        "WUR/PMC \u2014 Starch reducing-sugar liberation during HME; pea (18.4 \u00b5mol maltose/g) vs. waxy maize (31.8 \u00b5mol/g); TI starch 66% reduction; GC-MS-IS."
+      ],
+      "occurrences": [
+        {
+          "file": "09_carbohydrate_degradation.md",
+          "line": 599,
+          "description": "WUR/PMC \u2014 Starch reducing-sugar liberation during HME; pea (18.4 \u00b5mol maltose/g) vs. waxy maize (31.8 \u00b5mol/g); TI starch 66% reduction; GC-MS-IS.",
+          "raw_line": "10. `Tran et al. (2023 / PMC9846454)` \u2014 WUR/PMC \u2014 Starch reducing-sugar liberation during HME; pea (18.4 \u00b5mol maltose/g) vs. waxy maize (31.8 \u00b5mol/g); TI starch 66% reduction; GC-MS-IS. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "VTechWorks thesis",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "06_alternative_proteins.md"
+      ],
+      "descriptions": [
+        "Fava bean hydrolysate; 2-pentylfuran FD 8192 native, 16384 post-hydrolysis; LOX warning quantified."
+      ],
+      "occurrences": [
+        {
+          "file": "06_alternative_proteins.md",
+          "line": 756,
+          "description": "Fava bean hydrolysate; 2-pentylfuran FD 8192 native, 16384 post-hydrolysis; LOX warning quantified.",
+          "raw_line": "7. `VTechWorks thesis` \u2014 Fava bean hydrolysate; 2-pentylfuran FD 8192 native, 16384 post-hydrolysis; LOX warning quantified. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Wang et al. (2024)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 2,
+      "files": [
+        "07_reducing_sugars.md"
+      ],
+      "descriptions": [
+        "MDPI Foods 14:3453 \u2014 glucosamine synergy; 0.69 \u00b5mol/mL NH\u2082 depletion; 28.3 \u00b5g/g TVC; bitterness lowest.",
+        "Taylor & Francis DOI:10.1080/10942912.2024.2355888 \u2014 GCPs + amino acids; 30.8% TFC increase; OAVs."
+      ],
+      "occurrences": [
+        {
+          "file": "07_reducing_sugars.md",
+          "line": 742,
+          "description": "MDPI Foods 14:3453 \u2014 glucosamine synergy; 0.69 \u00b5mol/mL NH\u2082 depletion; 28.3 \u00b5g/g TVC; bitterness lowest.",
+          "raw_line": "10. `Wang et al. (2024)` \u2014 MDPI Foods 14:3453 \u2014 glucosamine synergy; 0.69 \u00b5mol/mL NH\u2082 depletion; 28.3 \u00b5g/g TVC; bitterness lowest. 7/8."
+        },
+        {
+          "file": "07_reducing_sugars.md",
+          "line": 743,
+          "description": "Taylor & Francis DOI:10.1080/10942912.2024.2355888 \u2014 GCPs + amino acids; 30.8% TFC increase; OAVs.",
+          "raw_line": "11. `Wang et al. (2024)` \u2014 Taylor & Francis DOI:10.1080/10942912.2024.2355888 \u2014 GCPs + amino acids; 30.8% TFC increase; OAVs. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Xu, H. et al. (2025)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "05_glutathione_peptides.md"
+      ],
+      "descriptions": [
+        "PMC11743841 \u2014 Peptide sequence hierarchy table; Cys-Gly-Val 2.68\u00d7, GSH 2.25\u00d7, Leu-Cys 1.60\u00d7, Val-Met 0.14\u00d7."
+      ],
+      "occurrences": [
+        {
+          "file": "05_glutathione_peptides.md",
+          "line": 522,
+          "description": "PMC11743841 \u2014 Peptide sequence hierarchy table; Cys-Gly-Val 2.68\u00d7, GSH 2.25\u00d7, Leu-Cys 1.60\u00d7, Val-Met 0.14\u00d7.",
+          "raw_line": "2. `Xu, H. et al. (2025)` \u2014 PMC11743841 \u2014 Peptide sequence hierarchy table; Cys-Gly-Val 2.68\u00d7, GSH 2.25\u00d7, Leu-Cys 1.60\u00d7, Val-Met 0.14\u00d7. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Zhang et al. (2009)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "04_nucleotide_degradation.md"
+      ],
+      "descriptions": [
+        "PNAS 106:5299 \u2014 T1R3 allosteric binding mechanism; K_D for IMP; CMP negative modulation confirmed."
+      ],
+      "occurrences": [
+        {
+          "file": "04_nucleotide_degradation.md",
+          "line": 612,
+          "description": "PNAS 106:5299 \u2014 T1R3 allosteric binding mechanism; K_D for IMP; CMP negative modulation confirmed.",
+          "raw_line": "10. `Zhang et al. (2009)` \u2014 PNAS 106:5299 \u2014 T1R3 allosteric binding mechanism; K_D for IMP; CMP negative modulation confirmed. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Zhao, Z. et al. (2023)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "05_glutathione_peptides.md"
+      ],
+      "descriptions": [
+        "JAFC DOI:10.1021/acs.jafc.3c07476 \u2014 MW fractionation; 1\u20135 kDa fraction best for MFT and palatability."
+      ],
+      "occurrences": [
+        {
+          "file": "05_glutathione_peptides.md",
+          "line": 525,
+          "description": "JAFC DOI:10.1021/acs.jafc.3c07476 \u2014 MW fractionation; 1\u20135 kDa fraction best for MFT and palatability.",
+          "raw_line": "5. `Zhao, Z. et al. (2023)` \u2014 JAFC DOI:10.1021/acs.jafc.3c07476 \u2014 MW fractionation; 1\u20135 kDa fraction best for MFT and palatability. 7/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "ACS JAFC 9b04099",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "11_maillard_lipid_crosstalk.md"
+      ],
+      "descriptions": [
+        "Maillard conjugation suppressing PPI hexanal; antioxidant MRPs."
+      ],
+      "occurrences": [
+        {
+          "file": "11_maillard_lipid_crosstalk.md",
+          "line": 564,
+          "description": "Maillard conjugation suppressing PPI hexanal; antioxidant MRPs.",
+          "raw_line": "8. ACS JAFC 9b04099 \u2014 Maillard conjugation suppressing PPI hexanal; antioxidant MRPs. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Blank & Mottram (Mercaptoketone labelling 2002)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "07_reducing_sugars.md"
+      ],
+      "descriptions": [
+        "JAFC DOI:10.1021/jf035265m \u2014 [1-\u00b9\u00b3C]ribose \u2192 3-mercapto-2-pentanone (90% labelled); branching ratio quantification."
+      ],
+      "occurrences": [
+        {
+          "file": "07_reducing_sugars.md",
+          "line": 749,
+          "description": "JAFC DOI:10.1021/jf035265m \u2014 [1-\u00b9\u00b3C]ribose \u2192 3-mercapto-2-pentanone (90% labelled); branching ratio quantification.",
+          "raw_line": "17. `Blank & Mottram (Mercaptoketone labelling 2002)` \u2014 JAFC DOI:10.1021/jf035265m \u2014 [1-\u00b9\u00b3C]ribose \u2192 3-mercapto-2-pentanone (90% labelled); branching ratio quantification. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Brash (1999)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "08_off_note_chemistry.md"
+      ],
+      "descriptions": [
+        "JBC 274:23679 \u2014 LOX isoform kinetics; k_cat and K_M for 13-LOX and 9-LOX; 13-LOX:9-LOX ratio 3.3:1."
+      ],
+      "occurrences": [
+        {
+          "file": "08_off_note_chemistry.md",
+          "line": 709,
+          "description": "JBC 274:23679 \u2014 LOX isoform kinetics; k_cat and K_M for 13-LOX and 9-LOX; 13-LOX:9-LOX ratio 3.3:1.",
+          "raw_line": "7. `Brash (1999)` \u2014 JBC 274:23679 \u2014 LOX isoform kinetics; k_cat and K_M for 13-LOX and 9-LOX; 13-LOX:9-LOX ratio 3.3:1. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Buera et al. (1987)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 2,
+      "files": [
+        "07_reducing_sugars.md",
+        "09_carbohydrate_degradation.md"
+      ],
+      "descriptions": [
+        "J Food Science \u2014 Ea for fructose, xylose, glucose + glycine (25\u201335 kcal/mol range); low-temperature conditions.",
+        "J Food Science \u2014 Ea for caramelisation: fructose/xylose 25\u201330 kcal/mol; glucose 33\u201336 kcal/mol; maltose/lactose 35\u201348 kcal/mol; triplicates."
+      ],
+      "occurrences": [
+        {
+          "file": "07_reducing_sugars.md",
+          "line": 738,
+          "description": "J Food Science \u2014 Ea for fructose, xylose, glucose + glycine (25\u201335 kcal/mol range); low-temperature conditions.",
+          "raw_line": "6. `Buera et al. (1987)` \u2014 J Food Science \u2014 Ea for fructose, xylose, glucose + glycine (25\u201335 kcal/mol range); low-temperature conditions. 6/8."
+        },
+        {
+          "file": "09_carbohydrate_degradation.md",
+          "line": 594,
+          "description": "J Food Science \u2014 Ea for caramelisation: fructose/xylose 25\u201330 kcal/mol; glucose 33\u201336 kcal/mol; maltose/lactose 35\u201348 kcal/mol; triplicates.",
+          "raw_line": "5. `Buera et al. (1987)` \u2014 J Food Science \u2014 Ea for caramelisation: fructose/xylose 25\u201330 kcal/mol; glucose 33\u201336 kcal/mol; maltose/lactose 35\u201348 kcal/mol; triplicates. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Choi et al. (2024)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "00_framework_scaffold.md"
+      ],
+      "descriptions": [
+        "PMC \u2014 acrylamide + asparagine in garden peas. LC-MS/MS."
+      ],
+      "occurrences": [
+        {
+          "file": "00_framework_scaffold.md",
+          "line": 608,
+          "description": "PMC \u2014 acrylamide + asparagine in garden peas. LC-MS/MS.",
+          "raw_line": "10. `Choi et al. (2024)` \u2014 PMC \u2014 acrylamide + asparagine in garden peas. LC-MS/MS. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Deakin University / ref. 42",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "11_maillard_lipid_crosstalk.md"
+      ],
+      "descriptions": [
+        "Temperature-dependent volatile release from PPI/SPI; Td transition."
+      ],
+      "occurrences": [
+        {
+          "file": "11_maillard_lipid_crosstalk.md",
+          "line": 563,
+          "description": "Temperature-dependent volatile release from PPI/SPI; Td transition.",
+          "raw_line": "7. Deakin University / ref. 42 \u2014 Temperature-dependent volatile release from PPI/SPI; Td transition. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Esterbauer et al. (1991)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "02_lipid_oxidation.md"
+      ],
+      "descriptions": [
+        "Free Rad Biol Med 11:81 \u2014 4-HNE rate constants; Cys >> His > Lys hierarchy."
+      ],
+      "occurrences": [
+        {
+          "file": "02_lipid_oxidation.md",
+          "line": 600,
+          "description": "Free Rad Biol Med 11:81 \u2014 4-HNE rate constants; Cys >> His > Lys hierarchy.",
+          "raw_line": "12. `Esterbauer et al. (1991)` \u2014 Free Rad Biol Med 11:81 \u2014 4-HNE rate constants; Cys >> His > Lys hierarchy. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Forssell et al. (1992)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "08_off_note_chemistry.md"
+      ],
+      "descriptions": [
+        "JAFC \u2014 1-octen-3-ol from C18:3; ODT 2.7 ng/L; molar yield 12.5% from C18:3."
+      ],
+      "occurrences": [
+        {
+          "file": "08_off_note_chemistry.md",
+          "line": 711,
+          "description": "JAFC \u2014 1-octen-3-ol from C18:3; ODT 2.7 ng/L; molar yield 12.5% from C18:3.",
+          "raw_line": "9. `Forssell et al. (1992)` \u2014 JAFC \u2014 1-octen-3-ol from C18:3; ODT 2.7 ng/L; molar yield 12.5% from C18:3. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Henle (2005)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "07_reducing_sugars.md"
+      ],
+      "descriptions": [
+        "Amino Acids 29:313 \u2014 2.3 \u00b5mol CML/g protein from heated soy glycinin; dicarbonyl consumption estimate."
+      ],
+      "occurrences": [
+        {
+          "file": "07_reducing_sugars.md",
+          "line": 746,
+          "description": "Amino Acids 29:313 \u2014 2.3 \u00b5mol CML/g protein from heated soy glycinin; dicarbonyl consumption estimate.",
+          "raw_line": "14. `Henle (2005)` \u2014 Amino Acids 29:313 \u2014 2.3 \u00b5mol CML/g protein from heated soy glycinin; dicarbonyl consumption estimate. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Hildebrand & Gardner (1990)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "08_off_note_chemistry.md"
+      ],
+      "descriptions": [
+        "Phytochemistry \u2014 HPL cleavage stoichiometry 1:1 HPOD \u2192 hexanal; isoform specificity."
+      ],
+      "occurrences": [
+        {
+          "file": "08_off_note_chemistry.md",
+          "line": 710,
+          "description": "Phytochemistry \u2014 HPL cleavage stoichiometry 1:1 HPOD \u2192 hexanal; isoform specificity.",
+          "raw_line": "8. `Hildebrand & Gardner (1990)` \u2014 Phytochemistry \u2014 HPL cleavage stoichiometry 1:1 HPOD \u2192 hexanal; isoform specificity. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Ince et al. (2024)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "00_framework_scaffold.md"
+      ],
+      "descriptions": [
+        "Int J Biol Macromol, PMC12969450 \u2014 Ka hexanal\u2013glycinin binding, non-covalent."
+      ],
+      "occurrences": [
+        {
+          "file": "00_framework_scaffold.md",
+          "line": 601,
+          "description": "Int J Biol Macromol, PMC12969450 \u2014 Ka hexanal\u2013glycinin binding, non-covalent.",
+          "raw_line": "5. `Ince et al. (2024)` \u2014 Int J Biol Macromol, PMC12969450 \u2014 Ka hexanal\u2013glycinin binding, non-covalent. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Ishii & Saito (1991)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "04_nucleotide_degradation.md"
+      ],
+      "descriptions": [
+        "JAFC \u2014 hypoxanthine bitterness threshold 0.5 mM; OAV framework for bitter metabolite."
+      ],
+      "occurrences": [
+        {
+          "file": "04_nucleotide_degradation.md",
+          "line": 613,
+          "description": "JAFC \u2014 hypoxanthine bitterness threshold 0.5 mM; OAV framework for bitter metabolite.",
+          "raw_line": "11. `Ishii & Saito (1991)` \u2014 JAFC \u2014 hypoxanthine bitterness threshold 0.5 mM; OAV framework for bitter metabolite. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "JAFC DOI:10.1021/acs.jafc.3c05991",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "00_framework_scaffold.md"
+      ],
+      "descriptions": [
+        "hexanal retention in PPI/SPI, 52.76%. Pending full text. Est. 5\u2013"
+      ],
+      "occurrences": [
+        {
+          "file": "00_framework_scaffold.md",
+          "line": 612,
+          "description": "hexanal retention in PPI/SPI, 52.76%. Pending full text. Est. 5\u2013",
+          "raw_line": "14. `JAFC DOI:10.1021/acs.jafc.3c05991` \u2014 hexanal retention in PPI/SPI, 52.76%. Pending full text. Est. 5\u20136/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Kamal-Eldin et al. (2003)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "02_lipid_oxidation.md"
+      ],
+      "descriptions": [
+        "Lipids \u2014 triolein oxidation; \u03b2-scission coefficients for C18:1; triplicates."
+      ],
+      "occurrences": [
+        {
+          "file": "02_lipid_oxidation.md",
+          "line": 603,
+          "description": "Lipids \u2014 triolein oxidation; \u03b2-scission coefficients for C18:1; triplicates.",
+          "raw_line": "15. `Kamal-Eldin et al. (2003)` \u2014 Lipids \u2014 triolein oxidation; \u03b2-scission coefficients for C18:1; triplicates. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "LAB pH routing compiled refs 34, 38\u201341",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "10_microbial_fermentation.md"
+      ],
+      "descriptions": [
+        "HMF/furfural 7.8\u20137.9\u00d7 at pH 4.5 vs. 7.0; melanoidin suppression 4\u00d7; UV spectrophotometry + GC-MS; triplicates."
+      ],
+      "occurrences": [
+        {
+          "file": "10_microbial_fermentation.md",
+          "line": 606,
+          "description": "HMF/furfural 7.8\u20137.9\u00d7 at pH 4.5 vs. 7.0; melanoidin suppression 4\u00d7; UV spectrophotometry + GC-MS; triplicates.",
+          "raw_line": "11. `LAB pH routing compiled refs 34, 38\u201341` \u2014 HMF/furfural 7.8\u20137.9\u00d7 at pH 4.5 vs. 7.0; melanoidin suppression 4\u00d7; UV spectrophotometry + GC-MS; triplicates. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Liu et al. (2023/2024)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "01_amino_acid_sugar.md"
+      ],
+      "descriptions": [
+        "Ala + Xyl ARP kinetics \u00b1 EGCG; Ea values with SE; stoichiometry constraint."
+      ],
+      "occurrences": [
+        {
+          "file": "01_amino_acid_sugar.md",
+          "line": 611,
+          "description": "Ala + Xyl ARP kinetics \u00b1 EGCG; Ea values with SE; stoichiometry constraint.",
+          "raw_line": "6. `Liu et al. (2023/2024)` \u2014 Ala + Xyl ARP kinetics \u00b1 EGCG; Ea values with SE; stoichiometry constraint. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Malia et al. (2025)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "00_framework_scaffold.md"
+      ],
+      "descriptions": [
+        "Food Res Int, PMC12745828 \u2014 free SH in pea protein. Ellman."
+      ],
+      "occurrences": [
+        {
+          "file": "00_framework_scaffold.md",
+          "line": 605,
+          "description": "Food Res Int, PMC12745828 \u2014 free SH in pea protein. Ellman.",
+          "raw_line": "7. `Malia et al. (2025)` \u2014 Food Res Int, PMC12745828 \u2014 free SH in pea protein. Ellman. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Mottram & Wedzicha (1990)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "01_amino_acid_sugar.md"
+      ],
+      "descriptions": [
+        "Met + MGO \u2192 methional, absolute \u00b5mol yields, triplicates, FPD."
+      ],
+      "occurrences": [
+        {
+          "file": "01_amino_acid_sugar.md",
+          "line": 610,
+          "description": "Met + MGO \u2192 methional, absolute \u00b5mol yields, triplicates, FPD.",
+          "raw_line": "5. `Mottram & Wedzicha (1990)` \u2014 Met + MGO \u2192 methional, absolute \u00b5mol yields, triplicates, FPD. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Mottram (1998)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "09_carbohydrate_degradation.md"
+      ],
+      "descriptions": [
+        "Food Chemistry review \u2014 diacetyl + H\u2082S \u2192 3-mercapto-2-butanone; OAV > 1; 2,3-pentanedione \u2192 3-mercapto-2-pentanone; GC-MS/O-SAFE."
+      ],
+      "occurrences": [
+        {
+          "file": "09_carbohydrate_degradation.md",
+          "line": 600,
+          "description": "Food Chemistry review \u2014 diacetyl + H\u2082S \u2192 3-mercapto-2-butanone; OAV > 1; 2,3-pentanedione \u2192 3-mercapto-2-pentanone; GC-MS/O-SAFE.",
+          "raw_line": "11. `Mottram (1998)` \u2014 Food Chemistry review \u2014 diacetyl + H\u2082S \u2192 3-mercapto-2-butanone; OAV > 1; 2,3-pentanedione \u2192 3-mercapto-2-pentanone; GC-MS/O-SAFE. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "PMC PMCID:PMC12386030 (Ref. 22)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "16_melanoidin_polymerization.md"
+      ],
+      "descriptions": [
+        "UV 470 nm formula: C_m = A\u2084\u2087\u2080 \u00d7 V_total / (V_sample \u00d7 0.269); rapid screening method. ** **"
+      ],
+      "occurrences": [
+        {
+          "file": "16_melanoidin_polymerization.md",
+          "line": 440,
+          "description": "UV 470 nm formula: C_m = A\u2084\u2087\u2080 \u00d7 V_total / (V_sample \u00d7 0.269); rapid screening method. ** **",
+          "raw_line": "8. PMC PMCID:PMC12386030 (Ref. 22) \u2014 UV 470 nm formula: C_m = A\u2084\u2087\u2080 \u00d7 V_total / (V_sample \u00d7 0.269); rapid screening method. **6/8.**"
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "PMC10056349 (2023)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "06_alternative_proteins.md"
+      ],
+      "descriptions": [
+        "Rubisco AA composition; Met 2.2%, Cys 1.9%, Gly 9.5%; Amadori product formation at 80\u00b0C; LC-MS."
+      ],
+      "occurrences": [
+        {
+          "file": "06_alternative_proteins.md",
+          "line": 758,
+          "description": "Rubisco AA composition; Met 2.2%, Cys 1.9%, Gly 9.5%; Amadori product formation at 80\u00b0C; LC-MS.",
+          "raw_line": "9. `PMC10056349 (2023)` \u2014 Rubisco AA composition; Met 2.2%, Cys 1.9%, Gly 9.5%; Amadori product formation at 80\u00b0C; LC-MS. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "PMC11353891 (2024)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "06_alternative_proteins.md"
+      ],
+      "descriptions": [
+        "Lentil volatile profiles; de-flavoring strategy comparison; residual hexanal OAV post-treatment."
+      ],
+      "occurrences": [
+        {
+          "file": "06_alternative_proteins.md",
+          "line": 762,
+          "description": "Lentil volatile profiles; de-flavoring strategy comparison; residual hexanal OAV post-treatment.",
+          "raw_line": "13. `PMC11353891 (2024)` \u2014 Lentil volatile profiles; de-flavoring strategy comparison; residual hexanal OAV post-treatment. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "PMC11889959 (2025)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "06_alternative_proteins.md"
+      ],
+      "descriptions": [
+        "SPI TVP volatile profile; pyrazines quantified; 2-pentylfuran."
+      ],
+      "occurrences": [
+        {
+          "file": "06_alternative_proteins.md",
+          "line": 760,
+          "description": "SPI TVP volatile profile; pyrazines quantified; 2-pentylfuran.",
+          "raw_line": "11. `PMC11889959 (2025)` \u2014 SPI TVP volatile profile; pyrazines quantified; 2-pentylfuran. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Poulsen et al. (2023)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "07_reducing_sugars.md"
+      ],
+      "descriptions": [
+        "PMC10217484 \u2014 CML 16\u201348 mg/kg, CEL 25\u201386 mg/kg in PBMA; LC-MS/MS; AGE sink quantification."
+      ],
+      "occurrences": [
+        {
+          "file": "07_reducing_sugars.md",
+          "line": 744,
+          "description": "PMC10217484 \u2014 CML 16\u201348 mg/kg, CEL 25\u201386 mg/kg in PBMA; LC-MS/MS; AGE sink quantification.",
+          "raw_line": "12. `Poulsen et al. (2023)` \u2014 PMC10217484 \u2014 CML 16\u201348 mg/kg, CEL 25\u201386 mg/kg in PBMA; LC-MS/MS; AGE sink quantification. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "PubMed PMID:16248560 (Ref. 23)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "16_melanoidin_polymerization.md"
+      ],
+      "descriptions": [
+        "MALDI scaffold masses 10.5\u201352.2 kDa; dialysis MWCO 3.5 vs. 10 kDa protocol. ** **"
+      ],
+      "occurrences": [
+        {
+          "file": "16_melanoidin_polymerization.md",
+          "line": 441,
+          "description": "MALDI scaffold masses 10.5\u201352.2 kDa; dialysis MWCO 3.5 vs. 10 kDa protocol. ** **",
+          "raw_line": "9. PubMed PMID:16248560 (Ref. 23) \u2014 MALDI scaffold masses 10.5\u201352.2 kDa; dialysis MWCO 3.5 vs. 10 kDa protocol. **6/8.**"
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Raman/SDS",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "12_protein_damage_markers.md"
+      ],
+      "descriptions": [
+        "PAGE synthesis \u2014 Disulfide bond increase post-extrusion; -SH drop by Ellman's; SME-dependent."
+      ],
+      "occurrences": [
+        {
+          "file": "12_protein_damage_markers.md",
+          "line": 532,
+          "description": "PAGE synthesis \u2014 Disulfide bond increase post-extrusion; -SH drop by Ellman's; SME-dependent.",
+          "raw_line": "9. Raman/SDS-PAGE synthesis \u2014 Disulfide bond increase post-extrusion; -SH drop by Ellman's; SME-dependent. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Ratsimba et al. (2001 / ref. 31 in 09_carbohydrate_degradation.md)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "09_carbohydrate_degradation.md"
+      ],
+      "descriptions": [
+        "J Food Science \u2014 pH bifurcation table; acid \u2192 HMF/thiols; pH 7 \u2192 pyrazines; 1 M glucose, 100\u00b0C; GC-MS with IS."
+      ],
+      "occurrences": [
+        {
+          "file": "09_carbohydrate_degradation.md",
+          "line": 601,
+          "description": "J Food Science \u2014 pH bifurcation table; acid \u2192 HMF/thiols; pH 7 \u2192 pyrazines; 1 M glucose, 100\u00b0C; GC-MS with IS.",
+          "raw_line": "12. `Ratsimba et al. (2001 / ref. 31 in 09_carbohydrate_degradation.md)` \u2014 J Food Science \u2014 pH bifurcation table; acid \u2192 HMF/thiols; pH 7 \u2192 pyrazines; 1 M glucose, 100\u00b0C; GC-MS with IS. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Rawel et al. (2002)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "08_off_note_chemistry.md"
+      ],
+      "descriptions": [
+        "JAFC 50:5343 \u2014 chlorogenic acid Cys blocking k_obs; 2.9\u00d7 faster than Lys; 43% Lys blocked at 10:1; LOQ stated."
+      ],
+      "occurrences": [
+        {
+          "file": "08_off_note_chemistry.md",
+          "line": 713,
+          "description": "JAFC 50:5343 \u2014 chlorogenic acid Cys blocking k_obs; 2.9\u00d7 faster than Lys; 43% Lys blocked at 10:1; LOQ stated.",
+          "raw_line": "11. `Rawel et al. (2002)` \u2014 JAFC 50:5343 \u2014 chlorogenic acid Cys blocking k_obs; 2.9\u00d7 faster than Lys; 43% Lys blocked at 10:1; LOQ stated. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Refs. 7 + 9 (TGase)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "12_protein_damage_markers.md"
+      ],
+      "descriptions": [
+        "Isopeptide quantification by \u00b9H-NMR; 3 \u00b5mol/100g at 0.03% TGase; lysine digestibility impact."
+      ],
+      "occurrences": [
+        {
+          "file": "12_protein_damage_markers.md",
+          "line": 527,
+          "description": "Isopeptide quantification by \u00b9H-NMR; 3 \u00b5mol/100g at 0.03% TGase; lysine digestibility impact.",
+          "raw_line": "6. Refs. 7 + 9 (TGase) \u2014 Isopeptide quantification by \u00b9H-NMR; 3 \u00b5mol/100g at 0.03% TGase; lysine digestibility impact. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "ResearchGate 2025 (six-source comparison)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "06_alternative_proteins.md"
+      ],
+      "descriptions": [
+        "Mung bean, chickpea, soy, pea, faba, peanut; HS-SPME-GC-MS + GC-IMS; hexanal \u00b5g/g for all sources."
+      ],
+      "occurrences": [
+        {
+          "file": "06_alternative_proteins.md",
+          "line": 759,
+          "description": "Mung bean, chickpea, soy, pea, faba, peanut; HS-SPME-GC-MS + GC-IMS; hexanal \u00b5g/g for all sources.",
+          "raw_line": "10. `ResearchGate 2025 (six-source comparison)` \u2014 Mung bean, chickpea, soy, pea, faba, peanut; HS-SPME-GC-MS + GC-IMS; hexanal \u00b5g/g for all sources. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Resmini & Pellegrino (1994)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "07_reducing_sugars.md"
+      ],
+      "descriptions": [
+        "Int Dairy J \u2014 Amadori stability constants; fructose ARP 10\u00d7 less stable than parent sugar."
+      ],
+      "occurrences": [
+        {
+          "file": "07_reducing_sugars.md",
+          "line": 739,
+          "description": "Int Dairy J \u2014 Amadori stability constants; fructose ARP 10\u00d7 less stable than parent sugar.",
+          "raw_line": "7. `Resmini & Pellegrino (1994)` \u2014 Int Dairy J \u2014 Amadori stability constants; fructose ARP 10\u00d7 less stable than parent sugar. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Sessa & Rackis (1977/compiled)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "08_off_note_chemistry.md"
+      ],
+      "descriptions": [
+        "Acid grinding pH 2.0 \u2192 >99% LOX; 91% solubility; hexanal < 2 mg/kg."
+      ],
+      "occurrences": [
+        {
+          "file": "08_off_note_chemistry.md",
+          "line": 716,
+          "description": "Acid grinding pH 2.0 \u2192 >99% LOX; 91% solubility; hexanal < 2 mg/kg.",
+          "raw_line": "14. `Sessa & Rackis (1977/compiled)` \u2014 Acid grinding pH 2.0 \u2192 >99% LOX; 91% solubility; hexanal < 2 mg/kg. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Shaw (1990)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "09_carbohydrate_degradation.md"
+      ],
+      "descriptions": [
+        "JAFC \u2014 Maltol yield: maltose/lactose 46\u201349\u00d7 glucose; 1,4-glycosidic linkage obligatory; sucrose gives near-zero maltol; GC-FID IS."
+      ],
+      "occurrences": [
+        {
+          "file": "09_carbohydrate_degradation.md",
+          "line": 597,
+          "description": "JAFC \u2014 Maltol yield: maltose/lactose 46\u201349\u00d7 glucose; 1,4-glycosidic linkage obligatory; sucrose gives near-zero maltol; GC-FID IS.",
+          "raw_line": "8. `Shaw (1990)` \u2014 JAFC \u2014 Maltol yield: maltose/lactose 46\u201349\u00d7 glucose; 1,4-glycosidic linkage obligatory; sucrose gives near-zero maltol; GC-FID IS. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Shibamoto et al. (1980)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "08_off_note_chemistry.md"
+      ],
+      "descriptions": [
+        "JAFC \u2014 2-pentylfuran from C18:2 conjugated dienes; ODT 6 ppb; triplicates."
+      ],
+      "occurrences": [
+        {
+          "file": "08_off_note_chemistry.md",
+          "line": 712,
+          "description": "JAFC \u2014 2-pentylfuran from C18:2 conjugated dienes; ODT 6 ppb; triplicates.",
+          "raw_line": "10. `Shibamoto et al. (1980)` \u2014 JAFC \u2014 2-pentylfuran from C18:2 conjugated dienes; ODT 6 ppb; triplicates. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Shu et al. (2024)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "00_framework_scaffold.md"
+      ],
+      "descriptions": [
+        "Food Chemistry \u2014 hexanal \u221270.60% in SPI at 120\u00b0C."
+      ],
+      "occurrences": [
+        {
+          "file": "00_framework_scaffold.md",
+          "line": 606,
+          "description": "Food Chemistry \u2014 hexanal \u221270.60% in SPI at 120\u00b0C.",
+          "raw_line": "8. `Shu et al. (2024)` \u2014 Food Chemistry \u2014 hexanal \u221270.60% in SPI at 120\u00b0C. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "van den Ouweland & Peer (1975)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "03_thiamine_degradation.md"
+      ],
+      "descriptions": [
+        "JAFC 23:501 \u2014 MFT in cooked pork by SIDA; species-level thiamine\u2013MFT correlation."
+      ],
+      "occurrences": [
+        {
+          "file": "03_thiamine_degradation.md",
+          "line": 590,
+          "description": "JAFC 23:501 \u2014 MFT in cooked pork by SIDA; species-level thiamine\u2013MFT correlation.",
+          "raw_line": "9. `van den Ouweland & Peer (1975)` \u2014 JAFC 23:501 \u2014 MFT in cooked pork by SIDA; species-level thiamine\u2013MFT correlation. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Van Ruth et al. (2002)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "08_off_note_chemistry.md"
+      ],
+      "descriptions": [
+        "JAFC \u2014 olfactory synergy factor 2.1\u00d7 for hexanal + 2-pentylfuran; 3-AFC methodology; n=20."
+      ],
+      "occurrences": [
+        {
+          "file": "08_off_note_chemistry.md",
+          "line": 703,
+          "description": "JAFC \u2014 olfactory synergy factor 2.1\u00d7 for hexanal + 2-pentylfuran; 3-AFC methodology; n=20.",
+          "raw_line": "3. `Van Ruth et al. (2002)` \u2014 JAFC \u2014 olfactory synergy factor 2.1\u00d7 for hexanal + 2-pentylfuran; 3-AFC methodology; n=20. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Wang et al. (2023)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "10_microbial_fermentation.md"
+      ],
+      "descriptions": [
+        "PMC12984349 \u2014 activation energy reduction ~15\u201320% esterification; ~10\u201312% Strecker; isoamyl acetate 4.2 \u00b5g/g vs. trace; GC-MS; IS stated."
+      ],
+      "occurrences": [
+        {
+          "file": "10_microbial_fermentation.md",
+          "line": 602,
+          "description": "PMC12984349 \u2014 activation energy reduction ~15\u201320% esterification; ~10\u201312% Strecker; isoamyl acetate 4.2 \u00b5g/g vs. trace; GC-MS; IS stated.",
+          "raw_line": "7. `Wang et al. (2023)` \u2014 PMC12984349 \u2014 activation energy reduction ~15\u201320% esterification; ~10\u201312% Strecker; isoamyl acetate 4.2 \u00b5g/g vs. trace; GC-MS; IS stated. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Xiang et al. (2025)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "00_framework_scaffold.md"
+      ],
+      "descriptions": [
+        "Food Chemistry 477:143559 \u2014 FA precursors \u2192 aldehydes."
+      ],
+      "occurrences": [
+        {
+          "file": "00_framework_scaffold.md",
+          "line": 607,
+          "description": "Food Chemistry 477:143559 \u2014 FA precursors \u2192 aldehydes.",
+          "raw_line": "9. `Xiang et al. (2025)` \u2014 Food Chemistry 477:143559 \u2014 FA precursors \u2192 aldehydes. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Xu et al. (2024)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "02_lipid_oxidation.md"
+      ],
+      "descriptions": [
+        "PMC12309933 \u2014 soybean PBMA storage hexanal; triplicates; IS."
+      ],
+      "occurrences": [
+        {
+          "file": "02_lipid_oxidation.md",
+          "line": 601,
+          "description": "PMC12309933 \u2014 soybean PBMA storage hexanal; triplicates; IS.",
+          "raw_line": "13. `Xu et al. (2024)` \u2014 PMC12309933 \u2014 soybean PBMA storage hexanal; triplicates; IS. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Yeo & Shibamoto (1991)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 2,
+      "files": [
+        "02_lipid_oxidation.md",
+        "08_off_note_chemistry.md"
+      ],
+      "descriptions": [
+        "JAFC 39:370 \u2014 PL fraction accounts for 82\u201388% of WOF hexanal; absolute values.",
+        "JAFC \u2014 LOX D-value table (70\u00b0C D=28 min, z~10\u00b0C); hexanal OAV comparison pre/post."
+      ],
+      "occurrences": [
+        {
+          "file": "02_lipid_oxidation.md",
+          "line": 602,
+          "description": "JAFC 39:370 \u2014 PL fraction accounts for 82\u201388% of WOF hexanal; absolute values.",
+          "raw_line": "14. `Yeo & Shibamoto (1991)` \u2014 JAFC 39:370 \u2014 PL fraction accounts for 82\u201388% of WOF hexanal; absolute values. 6/8."
+        },
+        {
+          "file": "08_off_note_chemistry.md",
+          "line": 714,
+          "description": "JAFC \u2014 LOX D-value table (70\u00b0C D=28 min, z~10\u00b0C); hexanal OAV comparison pre/post.",
+          "raw_line": "12. `Yeo & Shibamoto (1991)` \u2014 JAFC \u2014 LOX D-value table (70\u00b0C D=28 min, z~10\u00b0C); hexanal OAV comparison pre/post. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "Yu et al. (2021)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "BACKLOG",
+      "occurrence_count": 1,
+      "files": [
+        "01_amino_acid_sugar.md"
+      ],
+      "descriptions": [
+        "Xylose + corn protein hydrolysate, two-phase kinetics, absolute volatiles, triplicates."
+      ],
+      "occurrences": [
+        {
+          "file": "01_amino_acid_sugar.md",
+          "line": 609,
+          "description": "Xylose + corn protein hydrolysate, two-phase kinetics, absolute volatiles, triplicates.",
+          "raw_line": "4. `Yu et al. (2021)` \u2014 Xylose + corn protein hydrolysate, two-phase kinetics, absolute volatiles, triplicates. 6/8."
+        }
+      ],
+      "registry_id": null,
+      "runtime_artifact_count": 0
+    },
+    {
+      "citation": "ACS APTS (Ref. 24)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "14_ascorbic_acid_maillard.md"
+      ],
+      "descriptions": [
+        "3-DG \u2192 pyrraline: Ea 53.45 \u00b1 4.02 kJ/mol; 3-DG \u2192 furosine: Ea 81.70 \u00b1 14.01 kJ/mol. ** **"
+      ],
+      "occurrences": [
+        {
+          "file": "14_ascorbic_acid_maillard.md",
+          "line": 453,
+          "description": "3-DG \u2192 pyrraline: Ea 53.45 \u00b1 4.02 kJ/mol; 3-DG \u2192 furosine: Ea 81.70 \u00b1 14.01 kJ/mol. ** **",
+          "raw_line": "4. ACS APTS (Ref. 24) \u2014 3-DG \u2192 pyrraline: Ea 53.45 \u00b1 4.02 kJ/mol; 3-DG \u2192 furosine: Ea 81.70 \u00b1 14.01 kJ/mol. **8/8.**"
+        }
+      ],
+      "registry_id": "acs_apts_ref24_3dg_arrhenius_anchor",
+      "runtime_artifact_count": 2
+    },
+    {
+      "citation": "ACS JAFC 0c01925",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "11_maillard_lipid_crosstalk.md"
+      ],
+      "descriptions": [
+        "\u03b2-lg covalent adducts; Schiff base (Lys) vs. Michael (Cys) hierarchy; headspace recovery with ODTs."
+      ],
+      "occurrences": [
+        {
+          "file": "11_maillard_lipid_crosstalk.md",
+          "line": 558,
+          "description": "\u03b2-lg covalent adducts; Schiff base (Lys) vs. Michael (Cys) hierarchy; headspace recovery with ODTs.",
+          "raw_line": "2. ACS JAFC 0c01925 \u2014 \u03b2-lg covalent adducts; Schiff base (Lys) vs. Michael (Cys) hierarchy; headspace recovery with ODTs. 8/8."
+        }
+      ],
+      "registry_id": "acs_jafc_0c01925_protein_binding_hierarchy",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "ACS JAFC 3c02618",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "11_maillard_lipid_crosstalk.md"
+      ],
+      "descriptions": [
+        "Covalent/non-covalent binding constants; MFT disulfide trapping; pyrazine \u03c0-\u03c0 stacking."
+      ],
+      "occurrences": [
+        {
+          "file": "11_maillard_lipid_crosstalk.md",
+          "line": 557,
+          "description": "Covalent/non-covalent binding constants; MFT disulfide trapping; pyrazine \u03c0-\u03c0 stacking.",
+          "raw_line": "1. ACS JAFC 3c02618 \u2014 Covalent/non-covalent binding constants; MFT disulfide trapping; pyrazine \u03c0-\u03c0 stacking. 8/8."
+        }
+      ],
+      "registry_id": "acs_jafc_3c02618_binding_prior",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "ACS JAFC 3c05991 / PMC10739987",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "11_maillard_lipid_crosstalk.md"
+      ],
+      "descriptions": [
+        "Commercial PPI/SPI Ka values; logP model; temperature effect."
+      ],
+      "occurrences": [
+        {
+          "file": "11_maillard_lipid_crosstalk.md",
+          "line": 559,
+          "description": "Commercial PPI/SPI Ka values; logP model; temperature effect.",
+          "raw_line": "3. ACS JAFC 3c05991 / PMC10739987 \u2014 Commercial PPI/SPI Ka values; logP model; temperature effect. 8/8."
+        }
+      ],
+      "registry_id": "acs_jafc_3c05991_ppi_spi_partitioning",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "ACS JAFC 3c08432",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "11_maillard_lipid_crosstalk.md"
+      ],
+      "descriptions": [
+        "Post-HME PPI fermentation volatiles; simultaneous Maillard and lipid profile."
+      ],
+      "occurrences": [
+        {
+          "file": "11_maillard_lipid_crosstalk.md",
+          "line": 565,
+          "description": "Post-HME PPI fermentation volatiles; simultaneous Maillard and lipid profile.",
+          "raw_line": "9. ACS JAFC 3c08432 \u2014 Post-HME PPI fermentation volatiles; simultaneous Maillard and lipid profile. 8/8."
+        }
+      ],
+      "registry_id": "acs_jafc_3c08432_crosstalk_cleanup_link",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Aliani & Farmer (2005)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 2,
+      "files": [
+        "04_nucleotide_degradation.md",
+        "07_reducing_sugars.md"
+      ],
+      "descriptions": [
+        "JAFC 53:6067 \u2014 chicken nucleotide pool raw and cooked; SIDA; EUC.",
+        "JAFC 53:6067 \u2014 ribose 3.8\u00d7 MFT increase, G6P 3.2\u00d7, glucose 1.4\u00d7; SIDA; n=6; in meat matrix."
+      ],
+      "occurrences": [
+        {
+          "file": "04_nucleotide_degradation.md",
+          "line": 606,
+          "description": "JAFC 53:6067 \u2014 chicken nucleotide pool raw and cooked; SIDA; EUC.",
+          "raw_line": "6. `Aliani & Farmer (2005)` \u2014 JAFC 53:6067 \u2014 chicken nucleotide pool raw and cooked; SIDA; EUC. 8/8."
+        },
+        {
+          "file": "07_reducing_sugars.md",
+          "line": 732,
+          "description": "JAFC 53:6067 \u2014 ribose 3.8\u00d7 MFT increase, G6P 3.2\u00d7, glucose 1.4\u00d7; SIDA; n=6; in meat matrix.",
+          "raw_line": "2. `Aliani & Farmer (2005)` \u2014 JAFC 53:6067 \u2014 ribose 3.8\u00d7 MFT increase, G6P 3.2\u00d7, glucose 1.4\u00d7; SIDA; n=6; in meat matrix. 8/8."
+        }
+      ],
+      "registry_id": "aliani_2005_donor_potency_nucleotide_context",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Blank & Grosch (1991)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "04_nucleotide_degradation.md"
+      ],
+      "descriptions": [
+        "JAFC 39:1207 \u2014 HDMF in boiled beef 28\u201367 \u00b5g/kg; OAV 4.7\u201311.2; SIDA."
+      ],
+      "occurrences": [
+        {
+          "file": "04_nucleotide_degradation.md",
+          "line": 605,
+          "description": "JAFC 39:1207 \u2014 HDMF in boiled beef 28\u201367 \u00b5g/kg; OAV 4.7\u201311.2; SIDA.",
+          "raw_line": "5. `Blank & Grosch (1991)` \u2014 JAFC 39:1207 \u2014 HDMF in boiled beef 28\u201367 \u00b5g/kg; OAV 4.7\u201311.2; SIDA. 8/8."
+        }
+      ],
+      "registry_id": "blank_grosch_1991_hdmf_anchor",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Blank et al. (2001)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "02_lipid_oxidation.md"
+      ],
+      "descriptions": [
+        "JAFC 49:2959 \u2014 C20:4 \u2192 trans-4,5-epoxy-(E)-2-decenal; ODT 0.07 ng/L; SIDA; triplicates."
+      ],
+      "occurrences": [
+        {
+          "file": "02_lipid_oxidation.md",
+          "line": 587,
+          "description": "JAFC 49:2959 \u2014 C20:4 \u2192 trans-4,5-epoxy-(E)-2-decenal; ODT 0.07 ng/L; SIDA; triplicates.",
+          "raw_line": "1. `Blank et al. (2001)` \u2014 JAFC 49:2959 \u2014 C20:4 \u2192 trans-4,5-epoxy-(E)-2-decenal; ODT 0.07 ng/L; SIDA; triplicates. 8/8."
+        }
+      ],
+      "registry_id": "blank_2001_epoxydecenal_guardrail",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Blank, Devaud & Grosch (2003)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "07_reducing_sugars.md"
+      ],
+      "descriptions": [
+        "JAFC DOI:10.1021/jf026123f \u2014 G6P \u2192 HDMF 4.4\u00d7 vs. glucose; SIDA with [\u00b2H\u2083]-HDMF; triplicates."
+      ],
+      "occurrences": [
+        {
+          "file": "07_reducing_sugars.md",
+          "line": 733,
+          "description": "JAFC DOI:10.1021/jf026123f \u2014 G6P \u2192 HDMF 4.4\u00d7 vs. glucose; SIDA with [\u00b2H\u2083]-HDMF; triplicates.",
+          "raw_line": "3. `Blank, Devaud & Grosch (2003)` \u2014 JAFC DOI:10.1021/jf026123f \u2014 G6P \u2192 HDMF 4.4\u00d7 vs. glucose; SIDA with [\u00b2H\u2083]-HDMF; triplicates. 8/8."
+        }
+      ],
+      "registry_id": "blank_devaud_grosch_2003_g6p_hdmf_prior",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Cerny & Guntz-Dubini (2008)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "03_thiamine_degradation.md"
+      ],
+      "descriptions": [
+        "JAFC 56:5138 \u2014 quantitative MFT vs. pH from thiamine; SIDA; OAVs; optimal pH 5.5\u20136.0; 4.3\u00d7 synergy with Cys+Xyl."
+      ],
+      "occurrences": [
+        {
+          "file": "03_thiamine_degradation.md",
+          "line": 580,
+          "description": "JAFC 56:5138 \u2014 quantitative MFT vs. pH from thiamine; SIDA; OAVs; optimal pH 5.5\u20136.0; 4.3\u00d7 synergy with Cys+Xyl.",
+          "raw_line": "1. `Cerny & Guntz-Dubini (2008)` \u2014 JAFC 56:5138 \u2014 quantitative MFT vs. pH from thiamine; SIDA; OAVs; optimal pH 5.5\u20136.0; 4.3\u00d7 synergy with Cys+Xyl. 8/8."
+        }
+      ],
+      "registry_id": "cerny_guntz_dubini_2008",
+      "runtime_artifact_count": 3
+    },
+    {
+      "citation": "Comunian et al. (2021)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "03_thiamine_degradation.md"
+      ],
+      "descriptions": [
+        "Food Res Int 144:110345 \u2014 encapsulation comparison; alginate 84% retention; cook-triggered release."
+      ],
+      "occurrences": [
+        {
+          "file": "03_thiamine_degradation.md",
+          "line": 583,
+          "description": "Food Res Int 144:110345 \u2014 encapsulation comparison; alginate 84% retention; cook-triggered release.",
+          "raw_line": "4. `Comunian et al. (2021)` \u2014 Food Res Int 144:110345 \u2014 encapsulation comparison; alginate 84% retention; cook-triggered release. 8/8."
+        }
+      ],
+      "registry_id": "comunian_2021_thiamine_encapsulation",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "DOI ref. 41 in raw/11_maillard_lipid_crosstalk.md",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "11_maillard_lipid_crosstalk.md"
+      ],
+      "descriptions": [
+        "PPI \u00d7 sulfur volatile Ka (Stern-Volmer); \u0394G, \u0394H, \u0394S; MD binding sites."
+      ],
+      "occurrences": [
+        {
+          "file": "11_maillard_lipid_crosstalk.md",
+          "line": 560,
+          "description": "PPI \u00d7 sulfur volatile Ka (Stern-Volmer); \u0394G, \u0394H, \u0394S; MD binding sites.",
+          "raw_line": "4. DOI ref. 41 in raw/11_maillard_lipid_crosstalk.md \u2014 PPI \u00d7 sulfur volatile Ka (Stern-Volmer); \u0394G, \u0394H, \u0394S; MD binding sites. 8/8."
+        }
+      ],
+      "registry_id": "ref41_ppi_sulfur_binding",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Foods 2023, 12(10):1967",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "12_protein_damage_markers.md"
+      ],
+      "descriptions": [
+        "Simultaneous CML, CEL, Acrylamide in 20+ commercial products with UHPLC-MS/MS and isotopic standards."
+      ],
+      "occurrences": [
+        {
+          "file": "12_protein_damage_markers.md",
+          "line": 525,
+          "description": "Simultaneous CML, CEL, Acrylamide in 20+ commercial products with UHPLC-MS/MS and isotopic standards.",
+          "raw_line": "4. Foods 2023, 12(10):1967 \u2014 Simultaneous CML, CEL, Acrylamide in 20+ commercial products with UHPLC-MS/MS and isotopic standards. 8/8."
+        }
+      ],
+      "registry_id": "foods_2023_cml_cel_proxy_benchmark",
+      "runtime_artifact_count": 3
+    },
+    {
+      "citation": "Frontiers Nutr. 2022 (Ref. 22)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "14_ascorbic_acid_maillard.md"
+      ],
+      "descriptions": [
+        "HCW Ea: pH 5.0 = 15.77; pH 7.0 = 31.70; pH 9.5 = 47.53 kJ/mol; pseudo-first-order. ** **"
+      ],
+      "occurrences": [
+        {
+          "file": "14_ascorbic_acid_maillard.md",
+          "line": 450,
+          "description": "HCW Ea: pH 5.0 = 15.77; pH 7.0 = 31.70; pH 9.5 = 47.53 kJ/mol; pseudo-first-order. ** **",
+          "raw_line": "1. Frontiers Nutr. 2022 (Ref. 22) \u2014 HCW Ea: pH 5.0 = 15.77; pH 7.0 = 31.70; pH 9.5 = 47.53 kJ/mol; pseudo-first-order. **8/8.**"
+        }
+      ],
+      "registry_id": "frontiers_2022_hcw_aa_arrhenius_anchor",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Glomb & Monnier (1995)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "09_carbohydrate_degradation.md"
+      ],
+      "descriptions": [
+        "JAFC \u2014 3-DG retro-aldol fragmentation stoichiometry: MGO 41%, GO 28%, diacetyl 18%, 2,3-pentanedione 6%; isotope-confirmed; SIDA."
+      ],
+      "occurrences": [
+        {
+          "file": "09_carbohydrate_degradation.md",
+          "line": 589,
+          "description": "JAFC \u2014 3-DG retro-aldol fragmentation stoichiometry: MGO 41%, GO 28%, diacetyl 18%, 2,3-pentanedione 6%; isotope-confirmed; SIDA.",
+          "raw_line": "2. `Glomb & Monnier (1995)` \u2014 JAFC \u2014 3-DG retro-aldol fragmentation stoichiometry: MGO 41%, GO 28%, diacetyl 18%, 2,3-pentanedione 6%; isotope-confirmed; SIDA. 8/8."
+        }
+      ],
+      "registry_id": "glomb_1995_3dg_fragmentation_stoichiometry",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Hidalgo & Zamora (2004)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "02_lipid_oxidation.md"
+      ],
+      "descriptions": [
+        "JAFC 52:7126 \u2014 4-HNE + Phe \u2192 2-pentylpyrrole; absolute concentrations; LOQ."
+      ],
+      "occurrences": [
+        {
+          "file": "02_lipid_oxidation.md",
+          "line": 599,
+          "description": "JAFC 52:7126 \u2014 4-HNE + Phe \u2192 2-pentylpyrrole; absolute concentrations; LOQ.",
+          "raw_line": "11. `Hidalgo & Zamora (2004)` \u2014 JAFC 52:7126 \u2014 4-HNE + Phe \u2192 2-pentylpyrrole; absolute concentrations; LOQ. 8/8."
+        }
+      ],
+      "registry_id": "hidalgo_zamora_2004_4hne_pentylpyrrole",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Hofmann, Schieberle & Grosch (1996)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "03_thiamine_degradation.md"
+      ],
+      "descriptions": [
+        "JAFC 44:2873 \u2014 efficiency comparison thiamine vs. Cys/ribose at beef-realistic concentrations; SIDA; OAVs."
+      ],
+      "occurrences": [
+        {
+          "file": "03_thiamine_degradation.md",
+          "line": 581,
+          "description": "JAFC 44:2873 \u2014 efficiency comparison thiamine vs. Cys/ribose at beef-realistic concentrations; SIDA; OAVs.",
+          "raw_line": "2. `Hofmann, Schieberle & Grosch (1996)` \u2014 JAFC 44:2873 \u2014 efficiency comparison thiamine vs. Cys/ribose at beef-realistic concentrations; SIDA; OAVs. 8/8."
+        }
+      ],
+      "registry_id": "hofmann_schieberle_grosch_1996",
+      "runtime_artifact_count": 3
+    },
+    {
+      "citation": "Hrncirik & Zeelenberg (2014)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "02_lipid_oxidation.md"
+      ],
+      "descriptions": [
+        "JAFC 62:9666 \u2014 coconut oil thermal profile; \u03b4-decalactone OAV; comparative to PUFA oils."
+      ],
+      "occurrences": [
+        {
+          "file": "02_lipid_oxidation.md",
+          "line": 588,
+          "description": "JAFC 62:9666 \u2014 coconut oil thermal profile; \u03b4-decalactone OAV; comparative to PUFA oils.",
+          "raw_line": "2. `Hrncirik & Zeelenberg (2014)` \u2014 JAFC 62:9666 \u2014 coconut oil thermal profile; \u03b4-decalactone OAV; comparative to PUFA oils. 8/8."
+        }
+      ],
+      "registry_id": "hrncirik_2014_coconut_oil_thermal_profile",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Huang (2022)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "03_thiamine_degradation.md"
+      ],
+      "descriptions": [
+        "Clemson thesis \u2014 metal ion catalysis; Fe\u00b3\u207a ~19\u00d7 acceleration; Cu\u207a ~12\u00d7."
+      ],
+      "occurrences": [
+        {
+          "file": "03_thiamine_degradation.md",
+          "line": 589,
+          "description": "Clemson thesis \u2014 metal ion catalysis; Fe\u00b3\u207a ~19\u00d7 acceleration; Cu\u207a ~12\u00d7.",
+          "raw_line": "8. `Huang (2022)` \u2014 Clemson thesis \u2014 metal ion catalysis; Fe\u00b3\u207a ~19\u00d7 acceleration; Cu\u207a ~12\u00d7. 8/8."
+        }
+      ],
+      "registry_id": "huang_2022_thiamine_metal_catalysis",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Huang et al. (2021)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "07_reducing_sugars.md"
+      ],
+      "descriptions": [
+        "PMC9868338 \u2014 cysteine-xylose-glutamate GC\u00d7GC system; MFT OAV 9,550; FFT OAV 24,800; 89 volatiles identified; triplicates."
+      ],
+      "occurrences": [
+        {
+          "file": "07_reducing_sugars.md",
+          "line": 734,
+          "description": "PMC9868338 \u2014 cysteine-xylose-glutamate GC\u00d7GC system; MFT OAV 9,550; FFT OAV 24,800; 89 volatiles identified; triplicates.",
+          "raw_line": "4. `Huang et al. (2021)` \u2014 PMC9868338 \u2014 cysteine-xylose-glutamate GC\u00d7GC system; MFT OAV 9,550; FFT OAV 24,800; 89 volatiles identified; triplicates. 8/8."
+        }
+      ],
+      "registry_id": "huang_2021_sulfur_oav_support",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "J. Agric. Food Chem. 2019 (Ref. 21)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "16_melanoidin_polymerization.md"
+      ],
+      "descriptions": [
+        "Absolute Mw (MALS); Rg 29.5\u219230.5\u201333.5 nm; Mark-Houwink 'a' 0.53\u21920.40; pea protein conjugation. ** **"
+      ],
+      "occurrences": [
+        {
+          "file": "16_melanoidin_polymerization.md",
+          "line": 432,
+          "description": "Absolute Mw (MALS); Rg 29.5\u219230.5\u201333.5 nm; Mark-Houwink 'a' 0.53\u21920.40; pea protein conjugation. ** **",
+          "raw_line": "2. J. Agric. Food Chem. 2019 (Ref. 21) \u2014 Absolute Mw (MALS); Rg 29.5\u219230.5\u201333.5 nm; Mark-Houwink 'a' 0.53\u21920.40; pea protein conjugation. **8/8.**"
+        }
+      ],
+      "registry_id": "jafc_2019_ref21_pea_gum_arabic_architecture_anchor",
+      "runtime_artifact_count": 2
+    },
+    {
+      "citation": "J. Agric. Food Chem. 2019 (Ref. 24)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "13_polyphenol_amino_capping.md"
+      ],
+      "descriptions": [
+        "Cys-4MC adduct: 2.2\u20138.1 nmol/mg; 62% thiol loss from adducts; digestive stability 1.7 \u00b5mol/g. ** **"
+      ],
+      "occurrences": [
+        {
+          "file": "13_polyphenol_amino_capping.md",
+          "line": 442,
+          "description": "Cys-4MC adduct: 2.2\u20138.1 nmol/mg; 62% thiol loss from adducts; digestive stability 1.7 \u00b5mol/g. ** **",
+          "raw_line": "1. J. Agric. Food Chem. 2019 (Ref. 24) \u2014 Cys-4MC adduct: 2.2\u20138.1 nmol/mg; 62% thiol loss from adducts; digestive stability 1.7 \u00b5mol/g. **8/8.**"
+        }
+      ],
+      "registry_id": "jafc_2019_ref24_polyphenol_thiol_capping",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "JAFC DOI:10.1021/jf034037p (2003)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "04_nucleotide_degradation.md"
+      ],
+      "descriptions": [
+        "G6P \u2192 HDMF 4.4\u00d7 vs. glucose; phosphorylated sugar HDMF yields."
+      ],
+      "occurrences": [
+        {
+          "file": "04_nucleotide_degradation.md",
+          "line": 604,
+          "description": "G6P \u2192 HDMF 4.4\u00d7 vs. glucose; phosphorylated sugar HDMF yields.",
+          "raw_line": "4. `JAFC DOI:10.1021/jf034037p (2003)` \u2014 G6P \u2192 HDMF 4.4\u00d7 vs. glucose; phosphorylated sugar HDMF yields. 8/8."
+        }
+      ],
+      "registry_id": "blank_devaud_grosch_2003_g6p_hdmf_prior",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Liardon, de Weck-Gaudard & Philippossian (1991)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 2,
+      "files": [
+        "04_nucleotide_degradation.md",
+        "07_reducing_sugars.md"
+      ],
+      "descriptions": [
+        "JAFC 39:2152 \u2014 R5P >100\u00d7 glucose; ribose 7.2\u00d7; reaction order 1.5 for R5P.",
+        "JAFC 39:2152 \u2014 R5P >100\u00d7 glucose; ribose 7.2\u00d7; reaction order 1.5 for R5P; triplicates."
+      ],
+      "occurrences": [
+        {
+          "file": "04_nucleotide_degradation.md",
+          "line": 603,
+          "description": "JAFC 39:2152 \u2014 R5P >100\u00d7 glucose; ribose 7.2\u00d7; reaction order 1.5 for R5P.",
+          "raw_line": "3. `Liardon, de Weck-Gaudard & Philippossian (1991)` \u2014 JAFC 39:2152 \u2014 R5P >100\u00d7 glucose; ribose 7.2\u00d7; reaction order 1.5 for R5P. 8/8."
+        },
+        {
+          "file": "07_reducing_sugars.md",
+          "line": 731,
+          "description": "JAFC 39:2152 \u2014 R5P >100\u00d7 glucose; ribose 7.2\u00d7; reaction order 1.5 for R5P; triplicates.",
+          "raw_line": "1. `Liardon, de Weck-Gaudard & Philippossian (1991)` \u2014 JAFC 39:2152 \u2014 R5P >100\u00d7 glucose; ribose 7.2\u00d7; reaction order 1.5 for R5P; triplicates. 8/8."
+        }
+      ],
+      "registry_id": "liardon_1991_r5p_donor_potency",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Liu, Y. (2023 thesis)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "06_alternative_proteins.md"
+      ],
+      "descriptions": [
+        "NC State Repository \u2014 PPI volatile profile; OAVs for 8 key off-notes; methoxypyrazine confirmed."
+      ],
+      "occurrences": [
+        {
+          "file": "06_alternative_proteins.md",
+          "line": 748,
+          "description": "NC State Repository \u2014 PPI volatile profile; OAVs for 8 key off-notes; methoxypyrazine confirmed.",
+          "raw_line": "1. `Liu, Y. (2023 thesis)` \u2014 NC State Repository \u2014 PPI volatile profile; OAVs for 8 key off-notes; methoxypyrazine confirmed. 8/8."
+        }
+      ],
+      "registry_id": "liu_2023_ppi_offnote_baseline",
+      "runtime_artifact_count": 4
+    },
+    {
+      "citation": "Marquez-Ruiz et al. (2014)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "02_lipid_oxidation.md"
+      ],
+      "descriptions": [
+        "JAFC 62:10295 \u2014 high-oleic olive oil frying volatiles; OAVs for 8 compounds."
+      ],
+      "occurrences": [
+        {
+          "file": "02_lipid_oxidation.md",
+          "line": 589,
+          "description": "JAFC 62:10295 \u2014 high-oleic olive oil frying volatiles; OAVs for 8 compounds.",
+          "raw_line": "3. `Marquez-Ruiz et al. (2014)` \u2014 JAFC 62:10295 \u2014 high-oleic olive oil frying volatiles; OAVs for 8 compounds. 8/8."
+        }
+      ],
+      "registry_id": "marquez_ruiz_2014_oleic_oav_anchor",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Messina et al. (2022)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "02_lipid_oxidation.md"
+      ],
+      "descriptions": [
+        "ResearchGate ref. \u2014 comparative OAV table for 4 oil types in cooked PBMA; n=6."
+      ],
+      "occurrences": [
+        {
+          "file": "02_lipid_oxidation.md",
+          "line": 590,
+          "description": "ResearchGate ref. \u2014 comparative OAV table for 4 oil types in cooked PBMA; n=6.",
+          "raw_line": "4. `Messina et al. (2022)` \u2014 ResearchGate ref. \u2014 comparative OAV table for 4 oil types in cooked PBMA; n=6. 8/8."
+        }
+      ],
+      "registry_id": "messina_2022_pbma_oil_oav_anchor",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Mottram & Nobrega (2002 / Chapter 9 review)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "09_carbohydrate_degradation.md"
+      ],
+      "descriptions": [
+        "Norfuraneol + H\u2082S \u2192 MFT 1.4 mol%; HDMF + Cys \u2192 thiophene (pH 5.1 optimum); diacetyl + H\u2082S \u2192 3-mercapto-2-butanone; SIDA."
+      ],
+      "occurrences": [
+        {
+          "file": "09_carbohydrate_degradation.md",
+          "line": 591,
+          "description": "Norfuraneol + H\u2082S \u2192 MFT 1.4 mol%; HDMF + Cys \u2192 thiophene (pH 5.1 optimum); diacetyl + H\u2082S \u2192 3-mercapto-2-butanone; SIDA.",
+          "raw_line": "4. `Mottram & Nobrega (2002 / Chapter 9 review)` \u2014 Norfuraneol + H\u2082S \u2192 MFT 1.4 mol%; HDMF + Cys \u2192 thiophene (pH 5.1 optimum); diacetyl + H\u2082S \u2192 3-mercapto-2-butanone; SIDA. 8/8."
+        }
+      ],
+      "registry_id": "mottram_nobrega_2002_furanone_bridge",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Mottram et al. (2001)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 2,
+      "files": [
+        "02_lipid_oxidation.md",
+        "05_glutathione_peptides.md"
+      ],
+      "descriptions": [
+        "JAFC 49:3712 \u2014 competitive quenching of MFT by lipid aldehydes; SIDA; quantitative f_quench.",
+        "JAFC 49:4316 \u2014 Carnosine pH buffering; optimal 0.1 M; MFT +61% vs. unbuffered."
+      ],
+      "occurrences": [
+        {
+          "file": "02_lipid_oxidation.md",
+          "line": 598,
+          "description": "JAFC 49:3712 \u2014 competitive quenching of MFT by lipid aldehydes; SIDA; quantitative f_quench.",
+          "raw_line": "10. `Mottram et al. (2001)` \u2014 JAFC 49:3712 \u2014 competitive quenching of MFT by lipid aldehydes; SIDA; quantitative f_quench. 7/8."
+        },
+        {
+          "file": "05_glutathione_peptides.md",
+          "line": 523,
+          "description": "JAFC 49:4316 \u2014 Carnosine pH buffering; optimal 0.1 M; MFT +61% vs. unbuffered.",
+          "raw_line": "3. `Mottram et al. (2001)` \u2014 JAFC 49:4316 \u2014 Carnosine pH buffering; optimal 0.1 M; MFT +61% vs. unbuffered. 8/8."
+        }
+      ],
+      "registry_id": "mottram_2001_mft_quench_buffering_anchor",
+      "runtime_artifact_count": 2
+    },
+    {
+      "citation": "Ohsu et al. (2025)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "05_glutathione_peptides.md"
+      ],
+      "descriptions": [
+        "JAFC (Chem Senses) \u2014 Kokumi CaSR mechanism; \u03b3EV EC\u2085\u2080 0.32 mM; GSH EC\u2085\u2080 0.68 mM; CCK +141%; mouthfulness +2.2 scale units."
+      ],
+      "occurrences": [
+        {
+          "file": "05_glutathione_peptides.md",
+          "line": 524,
+          "description": "JAFC (Chem Senses) \u2014 Kokumi CaSR mechanism; \u03b3EV EC\u2085\u2080 0.32 mM; GSH EC\u2085\u2080 0.68 mM; CCK +141%; mouthfulness +2.2 scale units.",
+          "raw_line": "4. `Ohsu et al. (2025)` \u2014 JAFC (Chem Senses) \u2014 Kokumi CaSR mechanism; \u03b3EV EC\u2085\u2080 0.32 mM; GSH EC\u2085\u2080 0.68 mM; CCK +141%; mouthfulness +2.2 scale units. 8/8."
+        }
+      ],
+      "registry_id": "ohsu_2025_kokumi_casr_anchor",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Ordoudi et al. (2014 / PMC12484514)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "09_carbohydrate_degradation.md"
+      ],
+      "descriptions": [
+        "Systematic review caramel models; HMF peak at pH 5.0, 125\u00b0C = 140 mg/L; secondary decline to 20 mg/L by 360 min; amino acid co-catalysis 7.8\u00d7; HPLC-SIDA."
+      ],
+      "occurrences": [
+        {
+          "file": "09_carbohydrate_degradation.md",
+          "line": 588,
+          "description": "Systematic review caramel models; HMF peak at pH 5.0, 125\u00b0C = 140 mg/L; secondary decline to 20 mg/L by 360 min; amino acid co-catalysis 7.8\u00d7; HPLC-SIDA.",
+          "raw_line": "1. `Ordoudi et al. (2014 / PMC12484514)` \u2014 Systematic review caramel models; HMF peak at pH 5.0, 125\u00b0C = 140 mg/L; secondary decline to 20 mg/L by 360 min; amino acid co-catalysis 7.8\u00d7; HPLC-SIDA. 8/8."
+        }
+      ],
+      "registry_id": "ordoudi_2014_hmf_peak_window",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "PMC 2024 (PMC12451096)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "12_protein_damage_markers.md"
+      ],
+      "descriptions": [
+        "CML: 16.0\u2013110.0 mg/kg; CEL: 25.0\u2013110.0 mg/kg in commercial PBA."
+      ],
+      "occurrences": [
+        {
+          "file": "12_protein_damage_markers.md",
+          "line": 524,
+          "description": "CML: 16.0\u2013110.0 mg/kg; CEL: 25.0\u2013110.0 mg/kg in commercial PBA.",
+          "raw_line": "3. PMC 2024 (PMC12451096) \u2014 CML: 16.0\u2013110.0 mg/kg; CEL: 25.0\u2013110.0 mg/kg in commercial PBA. 8/8."
+        }
+      ],
+      "registry_id": "pmc_2024_pba_cml_cel_ranges_anchor",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "PMC PMCID:PMC12648097 (Ref. 5)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "13_polyphenol_amino_capping.md"
+      ],
+      "descriptions": [
+        "97.8% acrylamide suppression by Cys+Gly; UPLC-QqQ-MS/MS with IS. ** **"
+      ],
+      "occurrences": [
+        {
+          "file": "13_polyphenol_amino_capping.md",
+          "line": 446,
+          "description": "97.8% acrylamide suppression by Cys+Gly; UPLC-QqQ-MS/MS with IS. ** **",
+          "raw_line": "5. PMC PMCID:PMC12648097 (Ref. 5) \u2014 97.8% acrylamide suppression by Cys+Gly; UPLC-QqQ-MS/MS with IS. **8/8.**"
+        }
+      ],
+      "registry_id": "pmc_12648097_acrylamide_mitigation_anchor",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "PMC PMCID:PMC4419266 (Ref. 18)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "15_phospholipid_amine_maillard.md"
+      ],
+      "descriptions": [
+        "PE Schiff base Ea 92.9 kJ/mol; PE Amadori Ea 82.9 kJ/mol; protein Lys-Maillard Ea 118 kJ/mol; interfacial pseudo-catalysis. ** **"
+      ],
+      "occurrences": [
+        {
+          "file": "15_phospholipid_amine_maillard.md",
+          "line": 431,
+          "description": "PE Schiff base Ea 92.9 kJ/mol; PE Amadori Ea 82.9 kJ/mol; protein Lys-Maillard Ea 118 kJ/mol; interfacial pseudo-catalysis. ** **",
+          "raw_line": "1. PMC PMCID:PMC4419266 (Ref. 18) \u2014 PE Schiff base Ea 92.9 kJ/mol; PE Amadori Ea 82.9 kJ/mol; protein Lys-Maillard Ea 118 kJ/mol; interfacial pseudo-catalysis. **8/8.**"
+        }
+      ],
+      "registry_id": "pmc_4419266_pe_interfacial_maillard_kinetics",
+      "runtime_artifact_count": 2
+    },
+    {
+      "citation": "PMC PMCID:PMC5992167 (Refs. 16/17)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "15_phospholipid_amine_maillard.md"
+      ],
+      "descriptions": [
+        "Powdered milk Amadori-PE 10\u2013100 nmol/mL; 30% PE glycation; PIS m/z 326.1 (Glc-PE) and 488.1 (Lac-PE); MRM library; 73\u201387.8% recovery. ** **"
+      ],
+      "occurrences": [
+        {
+          "file": "15_phospholipid_amine_maillard.md",
+          "line": 435,
+          "description": "Powdered milk Amadori-PE 10\u2013100 nmol/mL; 30% PE glycation; PIS m/z 326.1 (Glc-PE) and 488.1 (Lac-PE); MRM library; 73\u201387.8% recovery. ** **",
+          "raw_line": "5. PMC PMCID:PMC5992167 (Refs. 16/17) \u2014 Powdered milk Amadori-PE 10\u2013100 nmol/mL; 30% PE glycation; PIS m/z 326.1 (Glc-PE) and 488.1 (Lac-PE); MRM library; 73\u201387.8% recovery. **8/8.**"
+        }
+      ],
+      "registry_id": "pmc5992167_amadori_pe_burden_anchor",
+      "runtime_artifact_count": 3
+    },
+    {
+      "citation": "PMC PMCID:PMC9351765 (Ref. 12)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "16_melanoidin_polymerization.md"
+      ],
+      "descriptions": [
+        "MFT rFD 4\u21922 (125 mg melanoidins); CROSSPY radical mechanism; thioether adduct (irreversible). ** **"
+      ],
+      "occurrences": [
+        {
+          "file": "16_melanoidin_polymerization.md",
+          "line": 436,
+          "description": "MFT rFD 4\u21922 (125 mg melanoidins); CROSSPY radical mechanism; thioether adduct (irreversible). ** **",
+          "raw_line": "6. PMC PMCID:PMC9351765 (Ref. 12) \u2014 MFT rFD 4\u21922 (125 mg melanoidins); CROSSPY radical mechanism; thioether adduct (irreversible). **8/8.**"
+        }
+      ],
+      "registry_id": "pmc9351765_crosspy_trapping_anchor",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "PMC11049305 (2024)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "06_alternative_proteins.md"
+      ],
+      "descriptions": [
+        "Spirulina volatile profiling; 128 VOCs; alkane 47.2%, ketone 25.7%; \u03b2-ionone OAV >100."
+      ],
+      "occurrences": [
+        {
+          "file": "06_alternative_proteins.md",
+          "line": 752,
+          "description": "Spirulina volatile profiling; 128 VOCs; alkane 47.2%, ketone 25.7%; \u03b2-ionone OAV >100.",
+          "raw_line": "5. `PMC11049305 (2024)` \u2014 Spirulina volatile profiling; 128 VOCs; alkane 47.2%, ketone 25.7%; \u03b2-ionone OAV >100. 8/8."
+        }
+      ],
+      "registry_id": "pmc11049305_spirulina_offnote_anchor",
+      "runtime_artifact_count": 3
+    },
+    {
+      "citation": "PMC12155365 (2025)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "06_alternative_proteins.md"
+      ],
+      "descriptions": [
+        "Sunflower protein roasted; Strecker aldehyde FD factors; 4-vinylguaiacol interference; SAFE+SPME; GC-O panel."
+      ],
+      "occurrences": [
+        {
+          "file": "06_alternative_proteins.md",
+          "line": 750,
+          "description": "Sunflower protein roasted; Strecker aldehyde FD factors; 4-vinylguaiacol interference; SAFE+SPME; GC-O panel.",
+          "raw_line": "3. `PMC12155365 (2025)` \u2014 Sunflower protein roasted; Strecker aldehyde FD factors; 4-vinylguaiacol interference; SAFE+SPME; GC-O panel. 8/8."
+        }
+      ],
+      "registry_id": "pmc12155365_sunflower_roasted_anchor",
+      "runtime_artifact_count": 3
+    },
+    {
+      "citation": "PMC9905368 (2023)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "06_alternative_proteins.md"
+      ],
+      "descriptions": [
+        "SPI-HVP + xylose, 120\u00b0C; MFT OAV 450, FFT OAV 84; SIDA; triplicates. Also covers wheat gluten HVP (MFT OAV 850 \u2014 highest plant source)."
+      ],
+      "occurrences": [
+        {
+          "file": "06_alternative_proteins.md",
+          "line": 749,
+          "description": "SPI-HVP + xylose, 120\u00b0C; MFT OAV 450, FFT OAV 84; SIDA; triplicates. Also covers wheat gluten HVP (MFT OAV 850 \u2014 highest plant source).",
+          "raw_line": "2. `PMC9905368 (2023)` \u2014 SPI-HVP + xylose, 120\u00b0C; MFT OAV 450, FFT OAV 84; SIDA; triplicates. 8/8. Also covers wheat gluten HVP (MFT OAV 850 \u2014 highest plant source)."
+        }
+      ],
+      "registry_id": "pmc9905368_spi_hvp_xylose_benchmark",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "PubMed PMID:1904866 (Ref. 5)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "14_ascorbic_acid_maillard.md"
+      ],
+      "descriptions": [
+        "Pentosidine 13.2\u201317.0 pmol/mg BSA from AA; equimolar to glucose. ** **"
+      ],
+      "occurrences": [
+        {
+          "file": "14_ascorbic_acid_maillard.md",
+          "line": 456,
+          "description": "Pentosidine 13.2\u201317.0 pmol/mg BSA from AA; equimolar to glucose. ** **",
+          "raw_line": "7. PubMed PMID:1904866 (Ref. 5) \u2014 Pentosidine 13.2\u201317.0 pmol/mg BSA from AA; equimolar to glucose. **8/8.**"
+        }
+      ],
+      "registry_id": "pmid_1904866_pentosidine_equivalence_anchor",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Resconi et al. (2023 / PMC10096055)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "09_carbohydrate_degradation.md"
+      ],
+      "descriptions": [
+        "Foods \u2014 PBMA vs. beef volatile comparison: diacetyl 3\u00d7 deficit, furfural 50\u00d7 excess, pyrrole 4\u20135\u00d7 excess; SIDA; n = 4; beef flavour identity score."
+      ],
+      "occurrences": [
+        {
+          "file": "09_carbohydrate_degradation.md",
+          "line": 590,
+          "description": "Foods \u2014 PBMA vs. beef volatile comparison: diacetyl 3\u00d7 deficit, furfural 50\u00d7 excess, pyrrole 4\u20135\u00d7 excess; SIDA; n = 4; beef flavour identity score.",
+          "raw_line": "3. `Resconi et al. (2023 / PMC10096055)` \u2014 Foods \u2014 PBMA vs. beef volatile comparison: diacetyl 3\u00d7 deficit, furfural 50\u00d7 excess, pyrrole 4\u20135\u00d7 excess; SIDA; n = 4; beef flavour identity score. 8/8."
+        }
+      ],
+      "registry_id": "resconi_2023_pbma_beef_identity_benchmark",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Rizzello et al. (2024)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "10_microbial_fermentation.md"
+      ],
+      "descriptions": [
+        "JAFC DOI:10.1021/acs.jafc.3c08432 \u2014 LAB ADH/ALDH; hexanal \u221295% (28.4\u21921.42 \u00b5g/g); MFT +382\u00d7 (\u21923.82 \u00b5g/g); full GC-MS/O volatilome; sensory panel n=15; IS specified."
+      ],
+      "occurrences": [
+        {
+          "file": "10_microbial_fermentation.md",
+          "line": 595,
+          "description": "JAFC DOI:10.1021/acs.jafc.3c08432 \u2014 LAB ADH/ALDH; hexanal \u221295% (28.4\u21921.42 \u00b5g/g); MFT +382\u00d7 (\u21923.82 \u00b5g/g); full GC-MS/O volatilome; sensory panel n=15; IS specified.",
+          "raw_line": "2. `Rizzello et al. (2024)` \u2014 JAFC DOI:10.1021/acs.jafc.3c08432 \u2014 LAB ADH/ALDH; hexanal \u221295% (28.4\u21921.42 \u00b5g/g); MFT +382\u00d7 (\u21923.82 \u00b5g/g); full GC-MS/O volatilome; sensory panel n=15; IS specified. 8/8."
+        }
+      ],
+      "registry_id": "rizzello_2024_fermentation_cleanup",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "SciELO Brasil (Ref. 4)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "14_ascorbic_acid_maillard.md"
+      ],
+      "descriptions": [
+        "Ea: Lys 54.94; Arg 50.08; His 35.31 kJ/mol; rate order Lys > Arg > His confirmed. ** **"
+      ],
+      "occurrences": [
+        {
+          "file": "14_ascorbic_acid_maillard.md",
+          "line": 452,
+          "description": "Ea: Lys 54.94; Arg 50.08; His 35.31 kJ/mol; rate order Lys > Arg > His confirmed. ** **",
+          "raw_line": "3. SciELO Brasil (Ref. 4) \u2014 Ea: Lys 54.94; Arg 50.08; His 35.31 kJ/mol; rate order Lys > Arg > His confirmed. **8/8.**"
+        }
+      ],
+      "registry_id": "scielo_brasil_aa_crosslink_hierarchy_anchor",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Soladoye et al. (2020)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "04_nucleotide_degradation.md"
+      ],
+      "descriptions": [
+        "Foods 9:251 \u2014 sous-vide EUC optimisation; 60\u00b0C vs. 70\u00b0C; IMP retention data."
+      ],
+      "occurrences": [
+        {
+          "file": "04_nucleotide_degradation.md",
+          "line": 607,
+          "description": "Foods 9:251 \u2014 sous-vide EUC optimisation; 60\u00b0C vs. 70\u00b0C; IMP retention data.",
+          "raw_line": "7. `Soladoye et al. (2020)` \u2014 Foods 9:251 \u2014 sous-vide EUC optimisation; 60\u00b0C vs. 70\u00b0C; IMP retention data. 8/8."
+        }
+      ],
+      "registry_id": "soladoye_2020_sous_vide_euc_anchor",
+      "runtime_artifact_count": 2
+    },
+    {
+      "citation": "USPTO PTACTS (2023 compiled)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "06_alternative_proteins.md"
+      ],
+      "descriptions": [
+        "Yeast extract full precursor composition + volatile profile; MFT OAV 2,000\u20138,000; thiamine content; SIDA."
+      ],
+      "occurrences": [
+        {
+          "file": "06_alternative_proteins.md",
+          "line": 751,
+          "description": "Yeast extract full precursor composition + volatile profile; MFT OAV 2,000\u20138,000; thiamine content; SIDA.",
+          "raw_line": "4. `USPTO PTACTS (2023 compiled)` \u2014 Yeast extract full precursor composition + volatile profile; MFT OAV 2,000\u20138,000; thiamine content; SIDA. 8/8."
+        }
+      ],
+      "registry_id": "uspto_ptacts_2023_yeast_extract_anchor",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Voelker, Taylor & Mauer (2021)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "03_thiamine_degradation.md"
+      ],
+      "descriptions": [
+        "BMC Chemistry 15:1 \u2014 full Arrhenius kinetics vs. pH and concentration; LOD/LOQ; 392-day stability."
+      ],
+      "occurrences": [
+        {
+          "file": "03_thiamine_degradation.md",
+          "line": 586,
+          "description": "BMC Chemistry 15:1 \u2014 full Arrhenius kinetics vs. pH and concentration; LOD/LOQ; 392-day stability.",
+          "raw_line": "5. `Voelker, Taylor & Mauer (2021)` \u2014 BMC Chemistry 15:1 \u2014 full Arrhenius kinetics vs. pH and concentration; LOD/LOQ; 392-day stability. 8/8."
+        }
+      ],
+      "registry_id": "voelker_2021_thiamine_kinetics",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Wageningen Ref. 9",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "16_melanoidin_polymerization.md"
+      ],
+      "descriptions": [
+        "WHC (SPI \u221217%/\u221263%; PPI \u221265%/\u221290%), WSI (SPI \u221274%); extractability \u22125\u201310%; G' intact; 1\u00d7 and 2\u00d7 HME. ** **"
+      ],
+      "occurrences": [
+        {
+          "file": "16_melanoidin_polymerization.md",
+          "line": 433,
+          "description": "WHC (SPI \u221217%/\u221263%; PPI \u221265%/\u221290%), WSI (SPI \u221274%); extractability \u22125\u201310%; G' intact; 1\u00d7 and 2\u00d7 HME. ** **",
+          "raw_line": "3. Wageningen Ref. 9 \u2014 WHC (SPI \u221217%/\u221263%; PPI \u221265%/\u221290%), WSI (SPI \u221274%); extractability \u22125\u201310%; G' intact; 1\u00d7 and 2\u00d7 HME. **8/8.**"
+        }
+      ],
+      "registry_id": "wageningen_ref9_hme_rework_hydration_anchor",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Wang et al. (2022)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "08_off_note_chemistry.md"
+      ],
+      "descriptions": [
+        "PMC9751450 \u2014 LAB fermentation; hexanal \u221295.7% \u2192 OAV 0.47; ADH/ALDH mechanism confirmed; SIDA; sensory panel."
+      ],
+      "occurrences": [
+        {
+          "file": "08_off_note_chemistry.md",
+          "line": 705,
+          "description": "PMC9751450 \u2014 LAB fermentation; hexanal \u221295.7% \u2192 OAV 0.47; ADH/ALDH mechanism confirmed; SIDA; sensory panel.",
+          "raw_line": "5. `Wang et al. (2022)` \u2014 PMC9751450 \u2014 LAB fermentation; hexanal \u221295.7% \u2192 OAV 0.47; ADH/ALDH mechanism confirmed; SIDA; sensory panel. 8/8."
+        }
+      ],
+      "registry_id": "wang_2022_lab_hexanal_cleanup_anchor",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Wang, Z. et al. (2012)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "05_glutathione_peptides.md"
+      ],
+      "descriptions": [
+        "Food Chem 130:316 \u2014 GSH+xylose vs. free Cys+xylose; MFT 2.25\u00d7, bis(furyl)disulfide 4.4\u00d7; CAMOLA; SIDA."
+      ],
+      "occurrences": [
+        {
+          "file": "05_glutathione_peptides.md",
+          "line": 521,
+          "description": "Food Chem 130:316 \u2014 GSH+xylose vs. free Cys+xylose; MFT 2.25\u00d7, bis(furyl)disulfide 4.4\u00d7; CAMOLA; SIDA.",
+          "raw_line": "1. `Wang, Z. et al. (2012)` \u2014 Food Chem 130:316 \u2014 GSH+xylose vs. free Cys+xylose; MFT 2.25\u00d7, bis(furyl)disulfide 4.4\u00d7; CAMOLA; SIDA. 8/8."
+        }
+      ],
+      "registry_id": "wang_2012_gsh_xylose_sulfur_uplift",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Yeo & Mottram (2023)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "02_lipid_oxidation.md"
+      ],
+      "descriptions": [
+        "CentAUR thesis \u2014 soy lecithin (PL) supplementation in PPI/SPI + Cys/Rib; sensory confirmed; SIDA."
+      ],
+      "occurrences": [
+        {
+          "file": "02_lipid_oxidation.md",
+          "line": 591,
+          "description": "CentAUR thesis \u2014 soy lecithin (PL) supplementation in PPI/SPI + Cys/Rib; sensory confirmed; SIDA.",
+          "raw_line": "5. `Yeo & Mottram (2023)` \u2014 CentAUR thesis \u2014 soy lecithin (PL) supplementation in PPI/SPI + Cys/Rib; sensory confirmed; SIDA. 8/8."
+        }
+      ],
+      "registry_id": "yeo_mottram_2023_lecithin_crosstalk_anchor",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Zhang et al. (2022)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "02_lipid_oxidation.md"
+      ],
+      "descriptions": [
+        "Food Chem 133961 \u2014 aldehyde unsaturation effect; LOD/LOQ; OAV; triplicates."
+      ],
+      "occurrences": [
+        {
+          "file": "02_lipid_oxidation.md",
+          "line": 604,
+          "description": "Food Chem 133961 \u2014 aldehyde unsaturation effect; LOD/LOQ; OAV; triplicates.",
+          "raw_line": "16. `Zhang et al. (2022)` \u2014 Food Chem 133961 \u2014 aldehyde unsaturation effect; LOD/LOQ; OAV; triplicates. 8/8."
+        }
+      ],
+      "registry_id": "zhang_2022_unsaturated_aldehyde_potency_anchor",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Zhao et al. (2022)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "10_microbial_fermentation.md"
+      ],
+      "descriptions": [
+        "Molecules 27:6182 \u2014 A. oryzae moromi metabolomics; Glu 1.99\u20132.49\u00d7, Gly 2.38\u20133.73\u00d7; GMP 3.02\u20136.61\u00d7; amino-type N 1175\u21922221 mg%; UHPLC-MS/MS; n=3; SD reported."
+      ],
+      "occurrences": [
+        {
+          "file": "10_microbial_fermentation.md",
+          "line": 594,
+          "description": "Molecules 27:6182 \u2014 A. oryzae moromi metabolomics; Glu 1.99\u20132.49\u00d7, Gly 2.38\u20133.73\u00d7; GMP 3.02\u20136.61\u00d7; amino-type N 1175\u21922221 mg%; UHPLC-MS/MS; n=3; SD reported.",
+          "raw_line": "1. `Zhao et al. (2022)` \u2014 Molecules 27:6182 \u2014 A. oryzae moromi metabolomics; Glu 1.99\u20132.49\u00d7, Gly 2.38\u20133.73\u00d7; GMP 3.02\u20136.61\u00d7; amino-type N 1175\u21922221 mg%; UHPLC-MS/MS; n=3; SD reported. 8/8."
+        }
+      ],
+      "registry_id": "zhao_2022_moromi_precursor_release",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "ACS Food Sci. Technol. 2022",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "12_protein_damage_markers.md"
+      ],
+      "descriptions": [
+        "SPI/PPI lysine loss (g/16gN), total AA loss, HMF at 140\u00b0C."
+      ],
+      "occurrences": [
+        {
+          "file": "12_protein_damage_markers.md",
+          "line": 522,
+          "description": "SPI/PPI lysine loss (g/16gN), total AA loss, HMF at 140\u00b0C.",
+          "raw_line": "1. ACS Food Sci. Technol. 2022 \u2014 SPI/PPI lysine loss (g/16gN), total AA loss, HMF at 140\u00b0C. 7/8."
+        }
+      ],
+      "registry_id": "acs_2022_pba_lysine_loss_benchmark",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "ACS Food Sci. Technol. 2024 (Ref. 1)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "16_melanoidin_polymerization.md"
+      ],
+      "descriptions": [
+        "Breaking force 10\u2013104 N; RSM-CCRD; moisture optimum 20\u201325%; firmness-melanoidin correlation. ** **"
+      ],
+      "occurrences": [
+        {
+          "file": "16_melanoidin_polymerization.md",
+          "line": 435,
+          "description": "Breaking force 10\u2013104 N; RSM-CCRD; moisture optimum 20\u201325%; firmness-melanoidin correlation. ** **",
+          "raw_line": "5. ACS Food Sci. Technol. 2024 (Ref. 1) \u2014 Breaking force 10\u2013104 N; RSM-CCRD; moisture optimum 20\u201325%; firmness-melanoidin correlation. **7/8.**"
+        }
+      ],
+      "registry_id": "acs_foodscitech_2024_hme_firmness_anchor",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "ACS ResearchGate ref. 3",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "12_protein_damage_markers.md"
+      ],
+      "descriptions": [
+        "Acrylamide at 130\u00b0C in SPI: 22.36 \u2192 62.62 \u00b5g/kg in 20\u201330s."
+      ],
+      "occurrences": [
+        {
+          "file": "12_protein_damage_markers.md",
+          "line": 523,
+          "description": "Acrylamide at 130\u00b0C in SPI: 22.36 \u2192 62.62 \u00b5g/kg in 20\u201330s.",
+          "raw_line": "2. ACS ResearchGate ref. 3 \u2014 Acrylamide at 130\u00b0C in SPI: 22.36 \u2192 62.62 \u00b5g/kg in 20\u201330s. 7/8."
+        }
+      ],
+      "registry_id": "acs_ref3_spi_acrylamide_fast_kinetics",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Ahlberg & Mohammadi (2021)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "04_nucleotide_degradation.md"
+      ],
+      "descriptions": [
+        "PMC9998214 \u2014 yeast extract nucleotide profiles by grade; AMP-deaminase treatment effect."
+      ],
+      "occurrences": [
+        {
+          "file": "04_nucleotide_degradation.md",
+          "line": 614,
+          "description": "PMC9998214 \u2014 yeast extract nucleotide profiles by grade; AMP-deaminase treatment effect.",
+          "raw_line": "12. `Ahlberg & Mohammadi (2021)` \u2014 PMC9998214 \u2014 yeast extract nucleotide profiles by grade; AMP-deaminase treatment effect. 7/8."
+        }
+      ],
+      "registry_id": "ahlberg_2021_yeast_extract_grade_anchor",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Arabshahi & Lund (1988)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "03_thiamine_degradation.md"
+      ],
+      "descriptions": [
+        "JAFC 36:328 \u2014 Aw-dependent Ea (0.30\u20130.90); starch matrix."
+      ],
+      "occurrences": [
+        {
+          "file": "03_thiamine_degradation.md",
+          "line": 588,
+          "description": "JAFC 36:328 \u2014 Aw-dependent Ea (0.30\u20130.90); starch matrix.",
+          "raw_line": "7. `Arabshahi & Lund (1988)` \u2014 JAFC 36:328 \u2014 Aw-dependent Ea (0.30\u20130.90); starch matrix. 7/8."
+        }
+      ],
+      "registry_id": "arabshahi_1988_aw_thiamine_kinetics",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Asen et al. (2022)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "00_framework_scaffold.md"
+      ],
+      "descriptions": [
+        "Frontiers in Nutrition \u2014 Td and free SH in PPC. DSC + Ellman."
+      ],
+      "occurrences": [
+        {
+          "file": "00_framework_scaffold.md",
+          "line": 600,
+          "description": "Frontiers in Nutrition \u2014 Td and free SH in PPC. DSC + Ellman.",
+          "raw_line": "4. `Asen et al. (2022)` \u2014 Frontiers in Nutrition \u2014 Td and free SH in PPC. DSC + Ellman. 7/8."
+        }
+      ],
+      "registry_id": "asen_2022",
+      "runtime_artifact_count": 2
+    },
+    {
+      "citation": "Bhandari et al. (1998)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "08_off_note_chemistry.md"
+      ],
+      "descriptions": [
+        "JAFC \u2014 \u03b2-CD K_assoc table (hexanal 1,840; nonanal 2,100; (E)-2-nonenal 3,200); headspace reductions; LOQ stated."
+      ],
+      "occurrences": [
+        {
+          "file": "08_off_note_chemistry.md",
+          "line": 704,
+          "description": "JAFC \u2014 \u03b2-CD K_assoc table (hexanal 1,840; nonanal 2,100; (E)-2-nonenal 3,200); headspace reductions; LOQ stated.",
+          "raw_line": "4. `Bhandari et al. (1998)` \u2014 JAFC \u2014 \u03b2-CD K_assoc table (hexanal 1,840; nonanal 2,100; (E)-2-nonenal 3,200); headspace reductions; LOQ stated. 7/8."
+        }
+      ],
+      "registry_id": "bhandari_1998_beta_cd_aldehyde_binding_anchor",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Blank et al. (1997)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 2,
+      "files": [
+        "01_amino_acid_sugar.md",
+        "07_reducing_sugars.md"
+      ],
+      "descriptions": [
+        "Pro + rhamnose \u2192 HDMF, molar yield >40%, SIDA, ODT and OAV cited.",
+        "JAFC 45:2642 \u2014 rhamnose + Pro \u2192 HDMF >40 mol%; SIDA; OAV > 80."
+      ],
+      "occurrences": [
+        {
+          "file": "01_amino_acid_sugar.md",
+          "line": 608,
+          "description": "Pro + rhamnose \u2192 HDMF, molar yield >40%, SIDA, ODT and OAV cited.",
+          "raw_line": "3. `Blank et al. (1997)` \u2014 Pro + rhamnose \u2192 HDMF, molar yield >40%, SIDA, ODT and OAV cited. 7/8."
+        },
+        {
+          "file": "07_reducing_sugars.md",
+          "line": 740,
+          "description": "JAFC 45:2642 \u2014 rhamnose + Pro \u2192 HDMF >40 mol%; SIDA; OAV > 80.",
+          "raw_line": "8. `Blank et al. (1997)` \u2014 JAFC 45:2642 \u2014 rhamnose + Pro \u2192 HDMF >40 mol%; SIDA; OAV > 80. 7/8."
+        }
+      ],
+      "registry_id": "blank_1997_rhamnose_proline_hdmf_anchor",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Brands & van Boekel (2002)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "07_reducing_sugars.md"
+      ],
+      "descriptions": [
+        "JAFC DOI:10.1021/jf015902m \u2014 MGO \u2192 HDMF independent C3 pathway; absolute yields with IS."
+      ],
+      "occurrences": [
+        {
+          "file": "07_reducing_sugars.md",
+          "line": 741,
+          "description": "JAFC DOI:10.1021/jf015902m \u2014 MGO \u2192 HDMF independent C3 pathway; absolute yields with IS.",
+          "raw_line": "9. `Brands & van Boekel (2002)` \u2014 JAFC DOI:10.1021/jf015902m \u2014 MGO \u2192 HDMF independent C3 pathway; absolute yields with IS. 7/8."
+        }
+      ],
+      "registry_id": "brands_2002_mgo_hdmf_anchor",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Cui et al. (2022)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "04_nucleotide_degradation.md"
+      ],
+      "descriptions": [
+        "J Food Bioactives \u2014 mushroom nucleotide profiles; shiitake GMP 108 mg/100g; EUC calculated."
+      ],
+      "occurrences": [
+        {
+          "file": "04_nucleotide_degradation.md",
+          "line": 615,
+          "description": "J Food Bioactives \u2014 mushroom nucleotide profiles; shiitake GMP 108 mg/100g; EUC calculated.",
+          "raw_line": "13. `Cui et al. (2022)` \u2014 J Food Bioactives \u2014 mushroom nucleotide profiles; shiitake GMP 108 mg/100g; EUC calculated. 7/8."
+        }
+      ],
+      "registry_id": "cui_2022_mushroom_nucleotide_anchor",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "De Leyn & Muylle (2019)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "03_thiamine_degradation.md"
+      ],
+      "descriptions": [
+        "JAFC 67:9842 \u2014 extrusion retention at 140\u2013180\u00b0C; t\u2081/\u2082 in barrel 0.4\u20134.2 min; three temperatures."
+      ],
+      "occurrences": [
+        {
+          "file": "03_thiamine_degradation.md",
+          "line": 582,
+          "description": "JAFC 67:9842 \u2014 extrusion retention at 140\u2013180\u00b0C; t\u2081/\u2082 in barrel 0.4\u20134.2 min; three temperatures.",
+          "raw_line": "3. `De Leyn & Muylle (2019)` \u2014 JAFC 67:9842 \u2014 extrusion retention at 140\u2013180\u00b0C; t\u2081/\u2082 in barrel 0.4\u20134.2 min; three temperatures. 7/8."
+        }
+      ],
+      "registry_id": "de_leyn_2019",
+      "runtime_artifact_count": 2
+    },
+    {
+      "citation": "Maillard & van Boekel (1992)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "07_reducing_sugars.md"
+      ],
+      "descriptions": [
+        "Food Chemistry \u2014 full reactivity hierarchy with k_obs and Ea for 9 sugars; triplicates."
+      ],
+      "occurrences": [
+        {
+          "file": "07_reducing_sugars.md",
+          "line": 737,
+          "description": "Food Chemistry \u2014 full reactivity hierarchy with k_obs and Ea for 9 sugars; triplicates.",
+          "raw_line": "5. `Maillard & van Boekel (1992)` \u2014 Food Chemistry \u2014 full reactivity hierarchy with k_obs and Ea for 9 sugars; triplicates. 7/8."
+        }
+      ],
+      "registry_id": "maillard_van_boekel_1992_sugar_reactivity_hierarchy",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Matoba, Terao & Fujimaki (1988)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "04_nucleotide_degradation.md"
+      ],
+      "descriptions": [
+        "JAFC 36:1033 \u2014 IMP/GMP half-lives vs. pH at 100\u00b0C; Ea table; complete kinetic reference."
+      ],
+      "occurrences": [
+        {
+          "file": "04_nucleotide_degradation.md",
+          "line": 610,
+          "description": "JAFC 36:1033 \u2014 IMP/GMP half-lives vs. pH at 100\u00b0C; Ea table; complete kinetic reference.",
+          "raw_line": "8. `Matoba, Terao & Fujimaki (1988)` \u2014 JAFC 36:1033 \u2014 IMP/GMP half-lives vs. pH at 100\u00b0C; Ea table; complete kinetic reference. 7/8."
+        }
+      ],
+      "registry_id": "matoba_1988_nucleotide_hydrolysis",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Mouritsen et al. (2024)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "04_nucleotide_degradation.md"
+      ],
+      "descriptions": [
+        "Chem Senses 49:bjaf043 \u2014 fold-reduction factors IMP 45.2\u00d7, GMP 29.8\u00d7, AMP 8.9\u00d7, CMP negative; n=30."
+      ],
+      "occurrences": [
+        {
+          "file": "04_nucleotide_degradation.md",
+          "line": 602,
+          "description": "Chem Senses 49:bjaf043 \u2014 fold-reduction factors IMP 45.2\u00d7, GMP 29.8\u00d7, AMP 8.9\u00d7, CMP negative; n=30.",
+          "raw_line": "2. `Mouritsen et al. (2024)` \u2014 Chem Senses 49:bjaf043 \u2014 fold-reduction factors IMP 45.2\u00d7, GMP 29.8\u00d7, AMP 8.9\u00d7, CMP negative; n=30. 7/8."
+        }
+      ],
+      "registry_id": "mouritsen_2024_umami_thresholds",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Nakamura et al. (1988)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "04_nucleotide_degradation.md"
+      ],
+      "descriptions": [
+        "JAFC 36:1045 \u2014 enzymatic vs. thermal IMP hydrolysis; inosine \u2192 ribose rate-limiting step."
+      ],
+      "occurrences": [
+        {
+          "file": "04_nucleotide_degradation.md",
+          "line": 611,
+          "description": "JAFC 36:1045 \u2014 enzymatic vs. thermal IMP hydrolysis; inosine \u2192 ribose rate-limiting step.",
+          "raw_line": "9. `Nakamura et al. (1988)` \u2014 JAFC 36:1045 \u2014 enzymatic vs. thermal IMP hydrolysis; inosine \u2192 ribose rate-limiting step. 7/8."
+        }
+      ],
+      "registry_id": "nakamura_1988_imp_ribose_release",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Squeo et al. (2023)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "00_framework_scaffold.md"
+      ],
+      "descriptions": [
+        "Foods 12(6):1331, PMC10048331 \u2014 acrylamide in SPI and pea. LC-MS/MS."
+      ],
+      "occurrences": [
+        {
+          "file": "00_framework_scaffold.md",
+          "line": 599,
+          "description": "Foods 12(6):1331, PMC10048331 \u2014 acrylamide in SPI and pea. LC-MS/MS.",
+          "raw_line": "3. `Squeo et al. (2023)` \u2014 Foods 12(6):1331, PMC10048331 \u2014 acrylamide in SPI and pea. LC-MS/MS. 7/8."
+        }
+      ],
+      "registry_id": "squeo_2023",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Yamaguchi & Ninomiya (2000)",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "04_nucleotide_degradation.md"
+      ],
+      "descriptions": [
+        "J Nutrition 130:921S \u2014 EUC equation with constants; validated across 15 matrices; synergy constant 1218."
+      ],
+      "occurrences": [
+        {
+          "file": "04_nucleotide_degradation.md",
+          "line": 601,
+          "description": "J Nutrition 130:921S \u2014 EUC equation with constants; validated across 15 matrices; synergy constant 1218.",
+          "raw_line": "1. `Yamaguchi & Ninomiya (2000)` \u2014 J Nutrition 130:921S \u2014 EUC equation with constants; validated across 15 matrices; synergy constant 1218. 7/8."
+        }
+      ],
+      "registry_id": "yamaguchi_ninomiya_2000_euc_anchor",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Foods 12(10):1967 (2023)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "00_framework_scaffold.md"
+      ],
+      "descriptions": [
+        "acrylamide + CML in pea protein PBMAs. LC-MS/MS."
+      ],
+      "occurrences": [
+        {
+          "file": "00_framework_scaffold.md",
+          "line": 602,
+          "description": "acrylamide + CML in pea protein PBMAs. LC-MS/MS.",
+          "raw_line": "6. `Foods 12(10):1967 (2023)` \u2014 acrylamide + CML in pea protein PBMAs. LC-MS/MS. 6/8."
+        }
+      ],
+      "registry_id": "foods_2023_cml_cel_proxy_benchmark",
+      "runtime_artifact_count": 3
+    },
+    {
+      "citation": "Ram\u00edrez-Jim\u00e9nez et al. (2000)",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "07_reducing_sugars.md"
+      ],
+      "descriptions": [
+        "JAFC \u2014 pre-glycation; 3\u20138% Lys blocked; 15\u201325% protease reduction; HPLC-furosine."
+      ],
+      "occurrences": [
+        {
+          "file": "07_reducing_sugars.md",
+          "line": 745,
+          "description": "JAFC \u2014 pre-glycation; 3\u20138% Lys blocked; 15\u201325% protease reduction; HPLC-furosine.",
+          "raw_line": "13. `Ram\u00edrez-Jim\u00e9nez et al. (2000)` \u2014 JAFC \u2014 pre-glycation; 3\u20138% Lys blocked; 15\u201325% protease reduction; HPLC-furosine. 6/8."
+        }
+      ],
+      "registry_id": "ramirez_jimenez_2000_furosine_crossover_benchmark",
+      "runtime_artifact_count": 2
+    }
+  ]
+}

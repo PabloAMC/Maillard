@@ -14,14 +14,10 @@ from src.chemistry_benchmark_validator import (
     build_mlp_assessment_artifact,
     render_mlp_assessment_markdown,
 )
-from src.geometry_benchmark import build_geometry_benchmark_artifact, render_geometry_benchmark_markdown
-from src.geometry_benchmark_validator import build_geometry_assessment_artifact, render_geometry_assessment_markdown
 from src.mlp_adoption_contract import build_adoption_note_payload, render_adoption_note_markdown
 from src.mlp_external_benchmarks import build_external_mlp_landscape_payload, render_external_mlp_landscape_markdown
 from src.reaction_benchmark import build_reaction_benchmark_artifact, render_reaction_benchmark_markdown
 from src.results_db import ResultsDB
-from src.ts_seed_benchmark import build_ts_seed_benchmark_artifact, render_ts_seed_benchmark_markdown
-from src.ts_seed_benchmark_validator import build_ts_seed_assessment_artifact, render_ts_seed_assessment_markdown
 
 
 def main() -> None:
@@ -30,10 +26,6 @@ def main() -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
 
     benchmark_payload = build_reaction_benchmark_artifact()
-    geometry_benchmark_payload = build_geometry_benchmark_artifact()
-    geometry_assessment_payload = build_geometry_assessment_artifact()
-    ts_seed_benchmark_payload = build_ts_seed_benchmark_artifact()
-    ts_seed_assessment_payload = build_ts_seed_assessment_artifact()
     assessment_payload = build_mlp_assessment_artifact()
     external_payload = build_external_mlp_landscape_payload()
     decisions = build_adoption_decisions_from_assessment(assessment_payload)
@@ -44,10 +36,6 @@ def main() -> None:
 
     files = {
         output_dir / "mlp_reaction_benchmark.json": benchmark_payload,
-        output_dir / "mlp_geometry_benchmark.json": geometry_benchmark_payload,
-        output_dir / "mlp_geometry_assessment.json": geometry_assessment_payload,
-        output_dir / "mlp_ts_seed_benchmark.json": ts_seed_benchmark_payload,
-        output_dir / "mlp_ts_seed_assessment.json": ts_seed_assessment_payload,
         output_dir / "mlp_assessment.json": assessment_payload,
         output_dir / "mlp_external_mlp_landscape.json": external_payload,
         output_dir / "mlp_adoption_notes.json": adoption_payload,
@@ -58,22 +46,6 @@ def main() -> None:
 
     (output_dir / "mlp_reaction_benchmark.md").write_text(
         render_reaction_benchmark_markdown(benchmark_payload),
-        encoding="utf-8",
-    )
-    (output_dir / "mlp_geometry_benchmark.md").write_text(
-        render_geometry_benchmark_markdown(geometry_benchmark_payload),
-        encoding="utf-8",
-    )
-    (output_dir / "mlp_geometry_assessment.md").write_text(
-        render_geometry_assessment_markdown(geometry_assessment_payload),
-        encoding="utf-8",
-    )
-    (output_dir / "mlp_ts_seed_benchmark.md").write_text(
-        render_ts_seed_benchmark_markdown(ts_seed_benchmark_payload),
-        encoding="utf-8",
-    )
-    (output_dir / "mlp_ts_seed_assessment.md").write_text(
-        render_ts_seed_assessment_markdown(ts_seed_assessment_payload),
         encoding="utf-8",
     )
     (output_dir / "mlp_assessment.md").write_text(

@@ -2,7 +2,6 @@ import pytest
 from src.bayesian_optimizer import FormulationOptimizer
 from src.pipeline import MaillardPipeline, ReactionConditions
 
-@pytest.mark.slow
 def test_intervention_barrier_shift():
     designer = MaillardPipeline(target_tag="meaty")
     cond = ReactionConditions(temperature_celsius=180)

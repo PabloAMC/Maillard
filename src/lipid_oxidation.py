@@ -5,7 +5,7 @@ Models generation of key off-flavor aldehydes from polyunsaturated fatty acids.
 
 import numpy as np
 from dataclasses import dataclass
-from typing import Mapping, Sequence
+from typing import Any, Mapping, Sequence
 
 @dataclass
 class LipidProfile:
@@ -55,6 +55,8 @@ GENERIC_LIPID_PROXY_LOADS = {
     "fat": 0.8,
 }
 
+_BENCHMARK_READY_LIPID_MARKERS = {"Hexanal", "2-Pentylfuran", "1-Hexanol", "Nonanal"}
+
 
 def _normalize_lipid_name(name: str) -> str:
     return " ".join(str(name).strip().lower().replace("_", " ").replace("-", " ").split())
@@ -87,6 +89,58 @@ def build_lipid_input_proxy_loads(
                 proxy_load = 0.5
         resolved[normalized] = resolved.get(normalized, 0.0) + float(proxy_load)
     return resolved
+
+
+def summarize_lipid_runtime_split(
+    named_markers: Mapping[str, float],
+    *,
+    lipid_input_count: int,
+    donor_pressure: float,
+    polyphenol_active: bool,
+) -> dict[str, Any]:
+    normalized_markers = {str(name): float(value) for name, value in named_markers.items()}
+    lipid_marker_signal_ppb = float(sum(normalized_markers.values()))
+    marker_count = sum(1 for value in normalized_markers.values() if value > 0.0)
+    dominant_marker = "none"
+    if normalized_markers:
+        dominant_marker = max(normalized_markers.items(), key=lambda item: float(item[1]))[0]
+    benchmark_ready_targets = [
+        name for name, value in normalized_markers.items() if name in _BENCHMARK_READY_LIPID_MARKERS and float(value) > 0.0
+    ]
+    carbonyl_competition_factor = min(1.75, 0.18 * int(lipid_input_count) + float(donor_pressure) * lipid_marker_signal_ppb / 120.0)
+    coupled_crosstalk = bool(polyphenol_active and (lipid_marker_signal_ppb > 0.0 or lipid_input_count > 0))
+    strecker_suppression_factor = min(
+        1.0,
+        (carbonyl_competition_factor / 1.75) * (1.15 if coupled_crosstalk else 1.0),
+    )
+    maillard_closure_pressure = min(2.0, carbonyl_competition_factor * (1.0 + 0.25 * float(coupled_crosstalk)))
+    active = bool(lipid_input_count or lipid_marker_signal_ppb > 0.0)
+    return {
+        "lipid_marker_signal_ppb": float(lipid_marker_signal_ppb),
+        "lipid_marker_count": int(marker_count),
+        "dominant_marker": dominant_marker,
+        "benchmark_ready_targets": benchmark_ready_targets,
+        "polyphenol_crosstalk_active": bool(coupled_crosstalk),
+        "carbonyl_competition_factor": float(carbonyl_competition_factor),
+        "strecker_suppression_factor": float(strecker_suppression_factor),
+        "maillard_closure_pressure": float(maillard_closure_pressure),
+        "runtime_sub_lanes": {
+            "adverse_marker_generation_and_retention": {
+                "active": bool(active),
+                "dominant_marker": dominant_marker,
+                "marker_count": int(marker_count),
+                "benchmark_ready_target_count": len(benchmark_ready_targets),
+                "benchmark_ready_targets": benchmark_ready_targets,
+            },
+            "carbonyl_competition_and_crosstalk": {
+                "active": bool(active),
+                "donor_pressure": float(donor_pressure),
+                "polyphenol_coupled": bool(coupled_crosstalk),
+                "strecker_suppression_factor": float(strecker_suppression_factor),
+                "maillard_closure_pressure": float(maillard_closure_pressure),
+            },
+        },
+    }
 
 
 def predict_lop_generation_named(
@@ -124,11 +178,18 @@ def build_lipid_oxidation_context(
         oxygen_availability=oxygen_availability,
     )
     ordered_markers = sorted(named_markers.items(), key=lambda item: float(item[1]), reverse=True)
+    runtime_split = summarize_lipid_runtime_split(
+        named_markers,
+        lipid_input_count=len(lipid_input),
+        donor_pressure=0.55,
+        polyphenol_active=False,
+    )
     return {
         "lipid_input_proxy_load": float(sum(float(value) for value in lipid_input.values())),
         "generated_markers": {name: float(value) for name, value in ordered_markers},
         "benchmark_ready_targets": [name for name, _value in ordered_markers if name in {"Hexanal", "2-Pentylfuran", "1-Hexanol", "Nonanal"}],
         "dominant_marker": ordered_markers[0][0] if ordered_markers else "none",
+        "runtime_split": runtime_split,
     }
 
 def predict_lop_generation(

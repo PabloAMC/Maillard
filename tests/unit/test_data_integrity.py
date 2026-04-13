@@ -1,6 +1,6 @@
 import pytest
 from rdkit import Chem  # noqa: E402
-from data.reactions.curated_pathways import PATHWAYS
+from src.curated_pathways import PATHWAYS
 
 def get_comp(smi):
     try:

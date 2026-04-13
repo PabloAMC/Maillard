@@ -1,0 +1,312 @@
+{
+  "generated_at": "2026-03-19",
+  "description": "Headspace retention and release references for volatile classes relevant to plant-protein Maillard systems.",
+  "section_family_metadata": {
+    "aldehydes": {
+      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
+      "slr_family_source": "02",
+      "payload_role": "retention_payload",
+      "observable_panel_tags": ["adverse_marker", "retention", "off_note"],
+      "process_state_scope": ["ambient_slurry", "heated_matrix", "aqueous_pre_extrusion_model", "extrusion_structured"],
+      "supporting_families": ["08"]
+    },
+    "furans": {
+      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
+      "slr_family_source": "02",
+      "payload_role": "retention_payload",
+      "observable_panel_tags": ["adverse_marker", "retention", "off_note"],
+      "process_state_scope": ["ambient_slurry", "heated_matrix", "aqueous_pre_extrusion_model", "extrusion_structured"],
+      "supporting_families": ["08", "09"]
+    },
+    "sulfur_proxies": {
+      "chemistry_family": "glutathione_and_peptide_support",
+      "slr_family_source": "05",
+      "payload_role": "retention_payload",
+      "observable_panel_tags": ["sulfur_support", "retention_proxy"],
+      "process_state_scope": ["heated_matrix", "aqueous_pre_extrusion_model", "extrusion_structured"],
+      "supporting_families": ["03"]
+    }
+  },
+  "aldehydes": {
+    "pea_protein": [
+      {
+        "id": "jafc_3c05991_ppi_hexanal_binding",
+        "compound": "hexanal",
+        "source_citation": "JAFC DOI:10.1021/acs.jafc.3c05991",
+        "doi": "10.1021/acs.jafc.3c05991",
+        "provenance_tier": "direct_measurement",
+        "matrix_context": "pea_protein_isolate_vs_protein_free_control",
+        "analytical_method": "static headspace GC-MS depletion versus protein-free control",
+        "retention_or_release_mode": "direct_binding_fraction",
+        "direct_binding_or_headspace_measure": "direct_headspace_depletion_measure",
+        "temperature_context": "not yet fully extracted from full text",
+        "time_context": "not yet fully extracted from full text",
+        "reversibility_assumption": "likely_non_covalent_reversible",
+        "transferability_notes": "High-value direct PPI anchor for hexanal retention, but still needs complete condition fields.",
+        "numeric_reference": {
+          "units": "percent_bound",
+          "value": 52.76,
+          "sd": 4.65
+        }
+      },
+      {
+        "id": "karolkowski_2021_ppi_hexanal_ph_release",
+        "compound": "hexanal",
+        "source_citation": "Karolkowski et al. (2021), HAL Open Science",
+        "doi": "hal-03463092",
+        "provenance_tier": "literature_derived_transfer",
+        "matrix_context": "pea_protein_isolate_10_percent_wv_buffered_native_release",
+        "analytical_method": "HS-SPME-GC-MS with external calibration across extraction pH conditions",
+        "retention_or_release_mode": "ph_dependent_headspace_release",
+        "direct_binding_or_headspace_measure": "headspace_release_measure",
+        "temperature_context": "ambient temperature",
+        "time_context": "native extraction benchmark",
+        "reversibility_assumption": "likely_non_covalent_reversible",
+        "transferability_notes": "Direct PPI pH-release anchor for native off-flavour release. The runtime still uses a bounded surrogate because the SLR summary does not yet encode full compound-wise ppm values.",
+        "numeric_reference": {
+          "units": "qualitative_release_order",
+          "value": "acidic release exceeds near-neutral release across the reported pH 2.0, 4.5, and 6.5 extraction conditions"
+        },
+        "runtime_surrogate": {
+          "type": "ph_release_modifier",
+          "reference_ph": 6.0,
+          "log_slope": 0.235,
+          "min_factor": 0.75,
+          "max_factor": 1.6,
+          "supported_ph_points": [2.0, 4.5, 6.5],
+          "surrogate_basis": "Repo-bounded release surrogate anchored to the Karolkowski 2021 qualitative pH trend while preserving the executable Pratap-Singh pH 6 ambient baseline."
+        }
+      }
+    ],
+    "soy_protein": [
+      {
+        "id": "ince_2024_glycinin_hexanal_binding",
+        "compound": "hexanal",
+        "source_citation": "Ince et al. (2024), Int J Biological Macromolecules",
+        "doi": "PMC12969450",
+        "provenance_tier": "direct_measurement",
+        "matrix_context": "purified_soy_11S_glycinin",
+        "analytical_method": "UV-Vis, fluorescence, MALDI-TOF-MS, docking",
+        "retention_or_release_mode": "binding_affinity_range",
+        "direct_binding_or_headspace_measure": "direct_binding_measure",
+        "temperature_context": "5 to 37 C",
+        "time_context": "equilibrium binding study",
+        "reversibility_assumption": "explicitly_reversible_non_covalent",
+        "transferability_notes": "Purified glycinin is narrower than commercial SPI; use as a mechanistic reversibility anchor, not as a finished-matrix scalar.",
+        "numeric_reference": {
+          "units": "M_inverse",
+          "min": 310.0,
+          "max": 31000.0,
+          "stoichiometry": "1:1"
+        }
+      },
+      {
+        "id": "shu_2024_heated_spi_hexanal_release",
+        "compound": "hexanal",
+        "source_citation": "Shu et al. (2024), Food Chemistry",
+        "doi": "",
+        "provenance_tier": "direct_measurement",
+        "matrix_context": "commercial_spi_after_ultrasonic_thermal_treatment",
+        "analytical_method": "HS-SPME-GC-MS",
+        "retention_or_release_mode": "heated_release_endpoint",
+        "direct_binding_or_headspace_measure": "headspace_endpoint_measure",
+        "temperature_context": "120 C vacuum treatment",
+        "time_context": "150 s",
+        "reversibility_assumption": "primarily_reversible_non_covalent_release",
+        "transferability_notes": "Useful as a high-severity endpoint carryover, not as a general low-temperature soy retention coefficient.",
+        "numeric_reference": {
+          "units": "fraction_change",
+          "value": -0.706
+        }
+      },
+      {
+        "id": "xu_2023_spi_hexanal_temporal_profile",
+        "compound": "hexanal",
+        "source_citation": "Xu et al. (2023), Food Chemistry",
+        "doi": "10.1016/j.foodchem.2023.137924",
+        "provenance_tier": "literature_derived_transfer",
+        "matrix_context": "heated_spi_time_temperature_off_flavour_profile",
+        "analytical_method": "GC-MS aggregate off-flavour profiling",
+        "retention_or_release_mode": "temporal_off_flavour_attenuation",
+        "direct_binding_or_headspace_measure": "aggregate_off_flavour_headspace_profile",
+        "temperature_context": "65 to 95 C with explicit time points at 95 C",
+        "time_context": "2, 15, and 30 min at 95 C",
+        "reversibility_assumption": "aggregate_release_then_entrapment",
+        "transferability_notes": "This study provides the only explicit temporal SPI heating profile in the SLR, but it is aggregate off-flavour rather than compound-specific absolute hexanal quantitation. The runtime therefore uses it as a bounded attenuation surrogate, not a direct scalar fit.",
+        "numeric_reference": {
+          "units": "qualitative_temporal_profile",
+          "value": "total off-flavour decreases between 2 and 30 min at 95 C"
+        },
+        "runtime_surrogate": {
+          "type": "temporal_attenuation",
+          "temperature_gate_celsius": 90.0,
+          "reference_minutes": 8.0,
+          "log_slope": 0.18,
+          "floor": 0.62,
+          "surrogate_basis": "Repo attenuation surrogate anchored to the Xu 2023 heated-SPI temporal decline while preserving stronger short-time release under the Ince/Shu soy hexanal context."
+        }
+      }
+    ]
+  },
+  "furans": {
+    "pea_protein": [
+      {
+        "id": "karolkowski_2021_ppi_2_pentylfuran_native_panel",
+        "compound": "2-pentylfuran",
+        "source_citation": "Karolkowski et al. (2021), HAL Open Science",
+        "doi": "hal-03463092",
+        "provenance_tier": "literature_derived_transfer",
+        "matrix_context": "pea_protein_isolate_10_percent_wv_buffered_native_release",
+        "analytical_method": "HS-SPME-GC-MS with external calibration across extraction pH conditions",
+        "retention_or_release_mode": "ph_dependent_headspace_release",
+        "direct_binding_or_headspace_measure": "headspace_release_measure",
+        "temperature_context": "ambient temperature",
+        "time_context": "native extraction benchmark",
+        "reversibility_assumption": "likely_non_covalent_reversible",
+        "transferability_notes": "Native PPI pH-release context for 2-pentylfuran. Used for release-direction provenance and bounded headspace interpolation only.",
+        "numeric_reference": {
+          "units": "qualitative_release_order",
+          "value": "acidic release exceeds near-neutral release across the reported pH 2.0, 4.5, and 6.5 extraction conditions"
+        },
+        "runtime_surrogate": {
+          "type": "ph_release_modifier",
+          "reference_ph": 6.0,
+          "log_slope": 0.235,
+          "min_factor": 0.75,
+          "max_factor": 1.6,
+          "supported_ph_points": [2.0, 4.5, 6.5],
+          "surrogate_basis": "Repo-bounded release surrogate anchored to the Karolkowski 2021 qualitative pH trend while preserving the executable Pratap-Singh pH 6 ambient baseline."
+        }
+      }
+    ],
+    "soy_protein": [
+      {
+        "id": "xu_2023_spi_2_pentylfuran_temporal_profile",
+        "compound": "2-pentylfuran",
+        "source_citation": "Xu et al. (2023), Food Chemistry",
+        "doi": "10.1016/j.foodchem.2023.137924",
+        "provenance_tier": "literature_derived_transfer",
+        "matrix_context": "heated_spi_time_temperature_off_flavour_profile",
+        "analytical_method": "GC-MS aggregate off-flavour profiling",
+        "retention_or_release_mode": "temporal_off_flavour_attenuation",
+        "direct_binding_or_headspace_measure": "aggregate_off_flavour_headspace_profile",
+        "temperature_context": "65 to 95 C with explicit time points at 95 C",
+        "time_context": "2, 15, and 30 min at 95 C",
+        "reversibility_assumption": "aggregate_release_then_entrapment",
+        "transferability_notes": "Used as a bounded time-domain attenuation prior for heated SPI furans because the SLR only exposes aggregate off-flavour decline rather than compound-specific absolute values.",
+        "numeric_reference": {
+          "units": "qualitative_temporal_profile",
+          "value": "total off-flavour decreases between 2 and 30 min at 95 C"
+        },
+        "runtime_surrogate": {
+          "type": "temporal_attenuation",
+          "temperature_gate_celsius": 90.0,
+          "reference_minutes": 8.0,
+          "log_slope": 0.24,
+          "floor": 0.55,
+          "surrogate_basis": "Repo attenuation surrogate anchored to the Xu 2023 heated-SPI temporal decline and aligned with the Shu 2024 below-detection endpoint for severe soy treatment."
+        }
+      },
+      {
+        "id": "shu_2024_heated_spi_2_pentylfuran_censored",
+        "compound": "2-pentylfuran",
+        "source_citation": "Shu et al. (2024), Food Chemistry",
+        "doi": "",
+        "provenance_tier": "direct_measurement",
+        "matrix_context": "commercial_spi_after_ultrasonic_thermal_treatment",
+        "analytical_method": "HS-SPME-GC-MS",
+        "retention_or_release_mode": "below_detection_endpoint",
+        "direct_binding_or_headspace_measure": "headspace_endpoint_measure",
+        "temperature_context": "120 C vacuum treatment",
+        "time_context": "150 s",
+        "reversibility_assumption": "unknown_censored_endpoint",
+        "transferability_notes": "Below-detection is useful for censoring strategy design but not for absolute release modeling.",
+        "numeric_reference": {
+          "units": "censored",
+          "value": "not_detected"
+        }
+      }
+    ]
+  },
+  "sulfur_proxies": {
+    "soy_protein": [
+      {
+        "id": "zhang_2026_spi_lenthionine_retention",
+        "compound": "lenthionine",
+        "source_citation": "Zhang et al. (2026), Food Hydrocolloids",
+        "doi": "",
+        "provenance_tier": "literature_derived_transfer",
+        "matrix_context": "spi_with_generic_vscs",
+        "analytical_method": "HS-SPME-GC-MS plus fluorescence, CD, docking",
+        "retention_or_release_mode": "indirect_sulfur_proxy_retention",
+        "direct_binding_or_headspace_measure": "headspace_and_binding_proxy",
+        "temperature_context": "reported in source study",
+        "time_context": "reported in source study",
+        "reversibility_assumption": "likely_non_covalent_mixed",
+        "transferability_notes": "Use only as an upper-end sulfur proxy prior; lenthionine is not MFT or FFT.",
+        "numeric_reference": {
+          "units": "percent_retained",
+          "value": 38.42
+        }
+      },
+      {
+        "id": "zhang_2026_spi_dmts_retention",
+        "compound": "dimethyl trisulfide",
+        "source_citation": "Zhang et al. (2026), Food Hydrocolloids",
+        "doi": "",
+        "provenance_tier": "literature_derived_transfer",
+        "matrix_context": "spi_with_generic_vscs",
+        "analytical_method": "HS-SPME-GC-MS plus fluorescence, CD, docking",
+        "retention_or_release_mode": "indirect_sulfur_proxy_retention",
+        "direct_binding_or_headspace_measure": "headspace_and_binding_proxy",
+        "temperature_context": "reported in source study",
+        "time_context": "reported in source study",
+        "reversibility_assumption": "likely_non_covalent_mixed",
+        "transferability_notes": "Proxy only for sulfur volatility attenuation.",
+        "numeric_reference": {
+          "units": "percent_retained",
+          "value": 14.53
+        }
+      },
+      {
+        "id": "zhang_2026_spi_dmds_retention",
+        "compound": "dimethyl disulfide",
+        "source_citation": "Zhang et al. (2026), Food Hydrocolloids",
+        "doi": "",
+        "provenance_tier": "literature_derived_transfer",
+        "matrix_context": "spi_with_generic_vscs",
+        "analytical_method": "HS-SPME-GC-MS plus fluorescence, CD, docking",
+        "retention_or_release_mode": "indirect_sulfur_proxy_retention",
+        "direct_binding_or_headspace_measure": "headspace_and_binding_proxy",
+        "temperature_context": "reported in source study",
+        "time_context": "reported in source study",
+        "reversibility_assumption": "likely_non_covalent_mixed",
+        "transferability_notes": "Proxy only for sulfur volatility attenuation.",
+        "numeric_reference": {
+          "units": "percent_retained",
+          "value": 10.43
+        }
+      },
+      {
+        "id": "hofmann_2001_melanoidin_fft_trapping",
+        "supporting_families": ["16"],
+        "compound": "2-furfurylthiol",
+        "source_citation": "Hofmann et al. (2001), JAFC",
+        "doi": "10.1021/jf010823n",
+        "provenance_tier": "direct_measurement",
+        "matrix_context": "coffee_melanoidins_plus_exogenous_fft",
+        "analytical_method": "SIDA and LC-MS adduct verification",
+        "retention_or_release_mode": "dynamic_melanoidin_trapping",
+        "direct_binding_or_headspace_measure": "direct_addition_and_loss_measure",
+        "temperature_context": "85 to 90 C",
+        "time_context": "reported in source study",
+        "reversibility_assumption": "covalent_scavenging_component_present",
+        "transferability_notes": "Not a soy or pea matrix, but the best mechanistic anchor for dynamic sulfur trapping by browning products.",
+        "numeric_reference": {
+          "units": "fold_reduction",
+          "value": 16.0
+        }
+      }
+    ]
+  }
+}

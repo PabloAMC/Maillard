@@ -260,5 +260,31 @@ def test_explicit_matrix_fractions_override_retention_fallback():
         air_with_fraction_only["Methional"]
     )
 
+
+def test_extrusion_process_headspace_factor_reduces_hexanal_but_preserves_some_pyrazine_release():
+    model = HeadspaceModel()
+    extrusion_process = {
+        "active": True,
+        "moisture_regime": "hme",
+        "water_activity": 0.75,
+        "sme_kj_per_kg": 180.0,
+        "jacket_temperature_celsius": 145.0,
+        "effective_temperature_celsius": 163.0,
+        "die_exit_temperature_celsius": 60.0,
+    }
+
+    baseline = model.predict_headspace({"Hexanal": 1.0, "2,5-Dimethylpyrazine": 1.0}, 145.0, protein_type="soy_iso")
+    extruded = model.predict_headspace(
+        {"Hexanal": 1.0, "2,5-Dimethylpyrazine": 1.0},
+        145.0,
+        protein_type="soy_iso",
+        extrusion_process=extrusion_process,
+    )
+
+    assert extruded["Hexanal"] < baseline["Hexanal"]
+    assert (extruded["2,5-Dimethylpyrazine"] / baseline["2,5-Dimethylpyrazine"]) > (
+        extruded["Hexanal"] / baseline["Hexanal"]
+    )
+
 if __name__ == "__main__":
     pytest.main([__file__])

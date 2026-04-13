@@ -18,6 +18,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from src.usability_reports import build_validated_envelope_report
+from src.benchmark_labels import benchmark_label_list
 from src.presentation import render_validated_envelope_markdown
 
 
@@ -26,38 +27,46 @@ def _render_validated_envelope_figure(report, output_path: Path) -> None:
     matrix_only_count = len(report.matrix_only_benchmarks)
     directional_count = max(report.supported_benchmarks - strict_count - matrix_only_count, 0)
 
-    fig, axes = plt.subplots(1, 2, figsize=(14, 5.6))
+    fig, ax = plt.subplots(figsize=(10.5, 5.8))
     fig.suptitle("Maillard Validated Envelope", fontsize=15)
 
-    ax = axes[0]
     categories = ["strict-ready\nfree-precursor", "directional\nsupported", "matrix-only\nexecutable"]
     values = [strict_count, directional_count, matrix_only_count]
     colors = ["#2a7f62", "#c98f3d", "#8c1c13"]
-    bars = ax.bar(categories, values, color=colors)
+    x_pos = [0.0, 1.0, 2.0]
+    bars = ax.bar(x_pos, values, width=0.72, color=colors)
+    ax.set_xticks(x_pos)
+    ax.set_xticklabels(categories)
     ax.set_ylabel("Benchmark count")
     ax.set_title("Current Trust Envelope")
     ax.set_ylim(0, max(max(values), 1) + 1)
+    ax.set_xlim(-0.5, 5.1)
     for bar, value in zip(bars, values):
         ax.text(bar.get_x() + bar.get_width() / 2, value + 0.05, str(value), ha="center", va="bottom", fontsize=10)
 
-    ax = axes[1]
-    ax.axis("off")
     lines = [
         f"Target tag: {report.target_tag}",
         f"Supported benchmarks: {report.supported_benchmarks}/{report.total_benchmarks}",
         "",
         "Strict-ready benchmarks:",
     ]
-    lines.extend(f"- {name}" for name in report.strict_ready_benchmarks)
+    lines.extend(f"- {name}" for name in benchmark_label_list(report.strict_ready_benchmarks))
     if report.matrix_only_benchmarks:
         lines.append("")
         lines.append("Matrix-only executable benchmarks:")
-        lines.extend(f"- {name}" for name in report.matrix_only_benchmarks)
+        lines.extend(f"- {name}" for name in benchmark_label_list(report.matrix_only_benchmarks))
     lines.append("")
     lines.append("Main caveats:")
     lines.extend(f"- {warning}" for warning in report.warnings[:3])
-    ax.text(0.0, 1.0, "\n".join(lines), va="top", ha="left", fontsize=10)
-    ax.set_title("Boundary Conditions")
+    ax.text(
+        3.15,
+        ax.get_ylim()[1],
+        "\n".join(lines),
+        va="top",
+        ha="left",
+        fontsize=9.6,
+        bbox={"boxstyle": "round,pad=0.35", "facecolor": "white", "edgecolor": "#cccccc", "alpha": 0.95},
+    )
 
     fig.tight_layout()
     fig.savefig(output_path, dpi=200, bbox_inches="tight")

@@ -1,11 +1,9 @@
 from __future__ import annotations
 
-from copy import deepcopy
 import json
 import os
 import tempfile
 from contextlib import contextmanager
-from functools import lru_cache
 from pathlib import Path
 from typing import Any, Dict, Iterable, Iterator, List, Mapping, Optional, Tuple
 
@@ -46,11 +44,6 @@ DEFAULT_FORMULATION_SCENARIOS: Tuple[Tuple[str, str, float], ...] = (
 CHEAP_SCREENING_MAGNITUDES: Tuple[float, ...] = (1.0, 2.0, 3.0)
 
 
-def _benchmark_cache_key(benchmark_files: Optional[Iterable[Path | str]]) -> tuple[str, ...]:
-    files = list(benchmark_files) if benchmark_files is not None else get_benchmark_files()
-    return tuple(str(Path(file_path).resolve()) for file_path in files)
-
-
 def _status_score(status: str) -> int:
     return {
         "pass": 0,
@@ -60,6 +53,16 @@ def _status_score(status: str) -> int:
         "scale-gap": 4,
         "unsupported": 5,
     }.get(str(status), 4)
+
+
+def _improves_benchmark_decision(row: Mapping[str, Any]) -> bool:
+    baseline_status = _status_score(str(row.get("baseline_status", row.get("scenario_status", "scale-gap"))))
+    scenario_status = _status_score(str(row.get("scenario_status", "scale-gap")))
+    if scenario_status < baseline_status:
+        return True
+    baseline_ranking = str(row.get("baseline_ranking_contract_status", "n/a"))
+    scenario_ranking = str(row.get("scenario_ranking_contract_status", "n/a"))
+    return baseline_ranking != "pass" and scenario_ranking == "pass"
 
 
 def _execution_weight(execution_path: str) -> float:
@@ -103,12 +106,12 @@ def _evaluate_benchmark_payload(bench: Mapping[str, Any], *, target_tag: str) ->
         return evaluation, summary
 
 
-@lru_cache(maxsize=8)
-def _build_benchmark_contexts_cached(
-    benchmark_file_keys: tuple[str, ...],
-    target_tag: str,
+def _build_benchmark_contexts(
+    benchmark_files: Optional[Iterable[Path | str]] = None,
+    *,
+    target_tag: str = DEFAULT_TARGET_TAG,
 ) -> List[Dict[str, Any]]:
-    bench_files = [Path(file_path) for file_path in benchmark_file_keys]
+    bench_files = list(benchmark_files) if benchmark_files is not None else get_benchmark_files()
     contexts: List[Dict[str, Any]] = []
     for bench_file in bench_files:
         bench = load_benchmark(bench_file)
@@ -130,14 +133,6 @@ def _build_benchmark_contexts_cached(
             }
         )
     return contexts
-
-
-def _build_benchmark_contexts(
-    benchmark_files: Optional[Iterable[Path | str]] = None,
-    *,
-    target_tag: str = DEFAULT_TARGET_TAG,
-) -> List[Dict[str, Any]]:
-    return _build_benchmark_contexts_cached(_benchmark_cache_key(benchmark_files), target_tag)
 
 
 def _observable_names(bench: Mapping[str, Any], evaluation: Any) -> List[str]:
@@ -302,13 +297,13 @@ def _aggregate_axis_sensitivity(contexts: List[Dict[str, Any]], *, target_tag: s
     return {"process_axes": process_rows, "formulation_axes": formulation_rows}
 
 
-@lru_cache(maxsize=8)
-def _build_global_sensitivity_artifact_cached(
-    benchmark_file_keys: tuple[str, ...],
-    target_tag: str,
+def build_global_sensitivity_artifact(
+    benchmark_files: Optional[Iterable[Path | str]] = None,
+    *,
+    target_tag: str = DEFAULT_TARGET_TAG,
 ) -> Dict[str, Any]:
-    contexts = _build_benchmark_contexts_cached(benchmark_file_keys, target_tag)
-    barrier_payload = build_family_sensitivity_artifact(benchmark_file_keys, target_tag=target_tag)
+    contexts = _build_benchmark_contexts(benchmark_files, target_tag=target_tag)
+    barrier_payload = build_family_sensitivity_artifact(benchmark_files, target_tag=target_tag)
     axis_payload = _aggregate_axis_sensitivity(contexts, target_tag=target_tag)
     return {
         "summary": {
@@ -324,14 +319,6 @@ def _build_global_sensitivity_artifact_cached(
         "process_axes": axis_payload["process_axes"],
         "formulation_axes": axis_payload["formulation_axes"],
     }
-
-
-def build_global_sensitivity_artifact(
-    benchmark_files: Optional[Iterable[Path | str]] = None,
-    *,
-    target_tag: str = DEFAULT_TARGET_TAG,
-) -> Dict[str, Any]:
-    return deepcopy(_build_global_sensitivity_artifact_cached(_benchmark_cache_key(benchmark_files), target_tag))
 
 
 def _evaluate_offsets(contexts: List[Dict[str, Any]], offsets: Mapping[str, float], *, target_tag: str) -> Dict[str, Any]:
@@ -371,15 +358,15 @@ def _evaluate_offsets(contexts: List[Dict[str, Any]], offsets: Mapping[str, floa
     }
 
 
-@lru_cache(maxsize=8)
-def _build_cheap_screening_artifact_cached(
-    benchmark_file_keys: tuple[str, ...],
-    target_tag: str,
+def build_cheap_screening_artifact(
+    benchmark_files: Optional[Iterable[Path | str]] = None,
+    *,
+    target_tag: str = DEFAULT_TARGET_TAG,
 ) -> Dict[str, Any]:
-    contexts = _build_benchmark_contexts_cached(benchmark_file_keys, target_tag)
-    global_payload = _build_global_sensitivity_artifact_cached(benchmark_file_keys, target_tag)
-    matrix_status = build_matrix_target_status_artifact(benchmark_file_keys, target_tag=target_tag)
-    watchlist = build_refinement_watchlist(benchmark_file_keys, target_tag=target_tag)
+    contexts = _build_benchmark_contexts(benchmark_files, target_tag=target_tag)
+    global_payload = build_global_sensitivity_artifact(benchmark_files, target_tag=target_tag)
+    matrix_status = build_matrix_target_status_artifact(benchmark_files, target_tag=target_tag)
+    watchlist = build_refinement_watchlist(benchmark_files, target_tag=target_tag)
     mechanistic_benchmarks = {
         str(row.get("benchmark_id"))
         for row in matrix_status.get("benchmarks", [])
@@ -412,11 +399,23 @@ def _build_cheap_screening_artifact_cached(
             scenario_trials,
             key=lambda item: (float(item[2].get("total_improvement", 0.0)), -float(item[2].get("total_score", 0.0))),
         )
-        touched_benchmarks = [item for item in performance["benchmarks"] if item["panel_shift_score"] > 0.05 or item["score_improvement"] != 0.0]
         linked_mechanistic = sorted(mechanistic_benchmarks.intersection(set(row.get("affected_benchmark_ids", []))))
+        touched_benchmarks = [item for item in performance["benchmarks"] if item["panel_shift_score"] > 0.05 or item["score_improvement"] != 0.0]
+        linked_benchmark_rows = [item for item in performance["benchmarks"] if item["benchmark_id"] in set(linked_mechanistic)]
+        linked_decision_change = any(_improves_benchmark_decision(item) for item in linked_benchmark_rows)
+        linked_activity = any(item["panel_shift_score"] > 0.05 or item["score_improvement"] != 0.0 for item in linked_benchmark_rows)
         if not touched_benchmarks:
             screen_decision = "reject"
             no_escalation_reason = "cheap-first perturbation does not move the target panel or benchmark diagnostics"
+        elif linked_mechanistic and linked_decision_change:
+            screen_decision = "advance"
+            no_escalation_reason = "none"
+        elif linked_mechanistic and linked_activity:
+            screen_decision = "defer"
+            no_escalation_reason = "cheap-first perturbation moves mechanistic-priority surrogates but does not change the mechanistic-priority benchmark decisions"
+        elif linked_mechanistic and performance["total_improvement"] > 0.05:
+            screen_decision = "defer"
+            no_escalation_reason = "cheap-first perturbation improves non-priority diagnostics but does not move the mechanistic-priority benchmark decisions"
         elif performance["total_improvement"] > 0.05:
             screen_decision = "advance"
             no_escalation_reason = "none"
@@ -462,20 +461,12 @@ def _build_cheap_screening_artifact_cached(
     }
 
 
-def build_cheap_screening_artifact(
+def build_selective_dft_plan(
     benchmark_files: Optional[Iterable[Path | str]] = None,
     *,
     target_tag: str = DEFAULT_TARGET_TAG,
 ) -> Dict[str, Any]:
-    return deepcopy(_build_cheap_screening_artifact_cached(_benchmark_cache_key(benchmark_files), target_tag))
-
-
-@lru_cache(maxsize=8)
-def _build_selective_dft_plan_cached(
-    benchmark_file_keys: tuple[str, ...],
-    target_tag: str,
-) -> Dict[str, Any]:
-    cheap_payload = _build_cheap_screening_artifact_cached(benchmark_file_keys, target_tag)
+    cheap_payload = build_cheap_screening_artifact(benchmark_files, target_tag=target_tag)
     rows: List[Dict[str, Any]] = []
     offline_jobs: List[Dict[str, Any]] = []
     for candidate_row in cheap_payload.get("candidates", []):
@@ -553,14 +544,6 @@ def _build_selective_dft_plan_cached(
     }
 
 
-def build_selective_dft_plan(
-    benchmark_files: Optional[Iterable[Path | str]] = None,
-    *,
-    target_tag: str = DEFAULT_TARGET_TAG,
-) -> Dict[str, Any]:
-    return deepcopy(_build_selective_dft_plan_cached(_benchmark_cache_key(benchmark_files), target_tag))
-
-
 def _has_severe_regression(baseline_rows: List[Dict[str, Any]], scenario_rows: List[Dict[str, Any]]) -> bool:
     baseline_lookup = {row["benchmark_id"]: row for row in baseline_rows}
     for row in scenario_rows:
@@ -576,13 +559,13 @@ def _has_severe_regression(baseline_rows: List[Dict[str, Any]], scenario_rows: L
     return False
 
 
-@lru_cache(maxsize=8)
-def _build_refinement_impact_artifact_cached(
-    benchmark_file_keys: tuple[str, ...],
-    target_tag: str,
+def build_refinement_impact_artifact(
+    benchmark_files: Optional[Iterable[Path | str]] = None,
+    *,
+    target_tag: str = DEFAULT_TARGET_TAG,
 ) -> Dict[str, Any]:
-    contexts = _build_benchmark_contexts_cached(benchmark_file_keys, target_tag)
-    cheap_payload = _build_cheap_screening_artifact_cached(benchmark_file_keys, target_tag)
+    contexts = _build_benchmark_contexts(benchmark_files, target_tag=target_tag)
+    cheap_payload = build_cheap_screening_artifact(benchmark_files, target_tag=target_tag)
     baseline = _evaluate_offsets(contexts, {}, target_tag=target_tag)
     accepted_offsets: Dict[str, float] = {}
     accepted_candidates: List[Dict[str, Any]] = []
@@ -630,17 +613,9 @@ def _build_refinement_impact_artifact_cached(
     }
 
 
-def build_refinement_impact_artifact(
-    benchmark_files: Optional[Iterable[Path | str]] = None,
-    *,
-    target_tag: str = DEFAULT_TARGET_TAG,
-) -> Dict[str, Any]:
-    return deepcopy(_build_refinement_impact_artifact_cached(_benchmark_cache_key(benchmark_files), target_tag))
-
-
 def render_global_sensitivity_markdown(payload: Mapping[str, Any]) -> str:
     lines = [
-        "# Selective Refinement Global Sensitivity",
+        "# P3 Global Sensitivity",
         "",
         "## Barrier Families",
         "",

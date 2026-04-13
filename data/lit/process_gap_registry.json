@@ -1,0 +1,71 @@
+{
+  "generated_at": "2026-03-19",
+  "description": "Structural literature gaps separated from codable literature payloads.",
+  "entries": [
+    {
+      "gap_id": "intact_spi_ppi_quantified_mft_fft",
+      "gap_type": "blocking_benchmark_gap",
+      "chemistry_family": "amino_acid_sugar_core",
+      "slr_family_source": "01",
+      "payload_role": "structural_gap_entry",
+      "observable_panel_tags": ["core_meaty", "benchmark_gap"],
+      "blocks_modules": ["benchmarking", "reporting", "optimizer_validation"],
+      "why_literature_cannot_close_it": "No benchmark-eligible paper reports intact aqueous SPI or PPI plus cysteine and ribose with absolute MFT and FFT quantification.",
+      "cheapest_next_step": "Run the primary wet-lab benchmark protocol already defined in the repo.",
+      "computational_fallback": "None authoritative; keep mechanistic and reference-anchor separation explicit.",
+      "wet_lab_requirement": "required"
+    },
+    {
+      "gap_id": "pipi_spi_pyrazine_absolute_quantitation",
+      "gap_type": "missing_absolute_anchor",
+      "chemistry_family": "amino_acid_sugar_core",
+      "slr_family_source": "01",
+      "payload_role": "structural_gap_entry",
+      "observable_panel_tags": ["pyrazine", "benchmark_gap"],
+      "blocks_modules": ["optimizer_constraints", "comparison_reporting"],
+      "why_literature_cannot_close_it": "PPI and SPI pyrazine studies in the SLR provide relative areas, OAVs, or non-matrix analogues rather than absolute internal-standard quantitation.",
+      "cheapest_next_step": "Add pyrazines to the same GC-MS internal-standard panel as the primary benchmark experiment.",
+      "computational_fallback": "Use directional pH and sugar-family constraints only.",
+      "wet_lab_requirement": "required"
+    },
+    {
+      "gap_id": "pipi_spi_furanone_reference_band",
+      "gap_type": "missing_positive_flavor_anchor",
+      "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
+      "slr_family_source": "09",
+      "payload_role": "structural_gap_entry",
+      "observable_panel_tags": ["furanone", "severity_marker", "benchmark_gap"],
+      "blocks_modules": ["future_furanone_reporting", "future_optimizer_targets"],
+      "why_literature_cannot_close_it": "HEMF and DMHF are mechanistically supported but not measured in PPI or SPI ribose systems.",
+      "cheapest_next_step": "Add HEMF and DMHF to the primary benchmark analytical panel.",
+      "computational_fallback": "Mechanistic-only expectation via Blank and Fay 1996 without numeric scoring.",
+      "wet_lab_requirement": "required"
+    },
+    {
+      "gap_id": "aqueous_pipi_spi_acrylamide_kinetics",
+      "gap_type": "missing_kinetic_dataset",
+      "chemistry_family": "off_note_and_maillard_suppression",
+      "slr_family_source": "08",
+      "payload_role": "structural_gap_entry",
+      "observable_panel_tags": ["safety", "acrylamide", "benchmark_gap"],
+      "blocks_modules": ["safety_calibration"],
+      "why_literature_cannot_close_it": "Acrylamide kinetics are available in free systems and dry matrices, not in aqueous SPI or PPI benchmark-like conditions.",
+      "cheapest_next_step": "Measure a small T and t design in wet SPI and PPI with acrylamide and free asparagine.",
+      "computational_fallback": "Keep Knol-based kinetics with matrix-aware reporting caveats.",
+      "wet_lab_requirement": "required"
+    },
+    {
+      "gap_id": "ellman_opa_dsc_same_experiment",
+      "gap_type": "missing_process_state_bundle",
+      "chemistry_family": "alternative_protein_matrix_scope",
+      "slr_family_source": "06",
+      "payload_role": "structural_gap_entry",
+      "observable_panel_tags": ["matrix_state_support", "process_state_gap"],
+      "blocks_modules": ["process_state_transfer_confidence"],
+      "why_literature_cannot_close_it": "No open study simultaneously measures free SH, free amino groups, and denaturation in the same non-hydrolyzed PPI or SPI thermal experiment.",
+      "cheapest_next_step": "Run a compact process-state calibration experiment with Ellman, OPA, and DSC or equivalent.",
+      "computational_fallback": "Continue using mixed-anchor transfers with explicit provenance tiers.",
+      "wet_lab_requirement": "required"
+    }
+  ]
+}

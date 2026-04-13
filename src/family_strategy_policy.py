@@ -5,7 +5,10 @@ from typing import Any, Dict, List, Mapping
 
 from src.chemistry_family_scope import load_chemistry_family_scope_registry
 from src.family_ingestion_plan import load_family_ingestion_plan
-from src.artifact_io import repo_root
+
+
+def _repo_root() -> Path:
+    return Path(__file__).resolve().parents[1]
 
 
 def _sorted_scope_rows(payload: Mapping[str, Any]) -> List[Dict[str, Any]]:
@@ -112,7 +115,7 @@ def build_family_strategy_policy_artifact() -> Dict[str, Any]:
                 "policy": "treat_lipid_oxidation_as_a_dual_lane_of_observable_adverse_markers_plus_carbonyl_competition_and_crosstalk_priors",
             },
             "compute_policy": {
-                "mlp_status": "infrastructure_not_active_product_objective",
+                "p4_status": "infrastructure_not_active_product_objective",
                 "dft_policy": "selective_dft_is_reserved_for_benchmark_visible_sulfur_carbonyl_transfer_and_ts_sensitive_gaps_after_cheap_first_screening",
                 "mlp_policy": "mlps_remain_bounded_offline_accelerators_until_local_geometry_or_ts_benchmarks_accept_them_on_maillard_relevant_systems",
             },
@@ -159,7 +162,7 @@ def render_family_strategy_policy_markdown(payload: Mapping[str, Any]) -> str:
         "",
         "## Compute Policy",
         "",
-        f"MLP status: {compute_policy.get('mlp_status', 'unknown')}",
+        f"P4 status: {compute_policy.get('p4_status', 'unknown')}",
         f"DFT policy: {compute_policy.get('dft_policy', 'unknown')}",
         f"MLP policy: {compute_policy.get('mlp_policy', 'unknown')}",
         "",

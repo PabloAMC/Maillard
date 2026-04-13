@@ -242,11 +242,6 @@ _MATRIX_RUNTIME_COMPOSITION_RULES = (
     ),
 )
 
-_AQUEOUS_PRE_EXTRUSION_AMBIENT_ATTENUATION = {
-    ("pea_iso", "hexanal"): 0.85,
-    ("pea_iso", "nonanal"): 0.85,
-}
-
 
 def _normalize_compound(name: str) -> str:
     return str(name).strip().lower()
@@ -257,7 +252,7 @@ def _process_state_fallback_order(requested_state: str) -> tuple[str, ...]:
     if requested == "extrusion_structured":
         return (requested, "aqueous_pre_extrusion_model", "heated_matrix", "intermediate_matrix", "ambient_slurry")
     if requested == "aqueous_pre_extrusion_model":
-        return (requested, "intermediate_matrix", "ambient_slurry")
+        return (requested, "heated_matrix", "intermediate_matrix", "ambient_slurry")
     if requested == "heated_matrix":
         return (requested, "intermediate_matrix", "ambient_slurry")
     if requested == "intermediate_matrix":
@@ -301,23 +296,15 @@ def get_matrix_calibration_record(
                 continue
             if candidate_state == requested_state:
                 return record
-            observable_factor = record.observable_factor
-            attenuation_key = (str(protein_type), normalized)
-            if requested_state == "aqueous_pre_extrusion_model" and candidate_state == "ambient_slurry":
-                observable_factor *= _AQUEOUS_PRE_EXTRUSION_AMBIENT_ATTENUATION.get(attenuation_key, 1.0)
             return MatrixCalibrationRecord(
                 protein_type=record.protein_type,
                 process_state=requested_state,
                 compound=record.compound,
-                observable_factor=observable_factor,
+                observable_factor=record.observable_factor,
                 evidence_strength="process_state_mismatch",
                 source=record.source,
                 fallback_mode="nearest_process_state",
-                notes=(
-                    f"Requested process state '{requested_state}' falls back to nearest calibrated state '{candidate_state}'."
-                    if observable_factor == record.observable_factor
-                    else f"Requested process state '{requested_state}' falls back to nearest calibrated state '{candidate_state}' with mild aqueous-pre-extrusion attenuation for this compound."
-                ),
+                notes=f"Requested process state '{requested_state}' falls back to nearest calibrated state '{candidate_state}'.",
             )
     return None
 

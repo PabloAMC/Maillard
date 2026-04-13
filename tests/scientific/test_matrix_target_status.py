@@ -10,8 +10,15 @@ from src.benchmark_validation import build_matrix_target_status_artifact
 from src.presentation import render_matrix_target_status_markdown
 
 
-def test_matrix_target_status_distinguishes_quantitative_from_internal_and_directional_support(matrix_target_status_payload):
-    payload = matrix_target_status_payload
+def test_matrix_target_status_distinguishes_quantitative_from_internal_and_directional_support():
+    payload = build_matrix_target_status_artifact([
+        ROOT / "data" / "benchmarks" / "pea_isolate_40C_PratapSingh2021.json",
+        ROOT / "data" / "benchmarks" / "soy_isolate_40C_PratapSingh2021.json",
+        ROOT / "data" / "benchmarks" / "pea_isolate_ribose_cysteine_100C_45min_Internal2026.json",
+        ROOT / "data" / "benchmarks" / "soy_isolate_ribose_cysteine_100C_45min_Internal2026.json",
+        ROOT / "data" / "benchmarks" / "pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026.json",
+        ROOT / "data" / "benchmarks" / "soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026.json",
+    ])
     by_id = {row["benchmark_id"]: row for row in payload["benchmarks"]}
 
     pea_off = by_id["pea_isolate_40C_PratapSingh2021"]
@@ -20,27 +27,30 @@ def test_matrix_target_status_distinguishes_quantitative_from_internal_and_direc
 
     pea_meaty = by_id["pea_isolate_ribose_cysteine_100C_45min_Internal2026"]
     assert pea_meaty["support_counts"]["internal_candidate"] >= 1
+    assert pea_meaty["support_counts"]["internal_reference_candidate"] >= 1
     assert pea_meaty["target_profile"] == "mixed"
     assert pea_meaty["promotion_ready"] is False
-    assert pea_meaty["evidence_or_calibration_priority_ready"] is True
-    assert pea_meaty["mechanistic_priority_ready"] is False
-    assert pea_meaty["blocker_class"] == "observable_or_calibration_blocker"
-    assert pea_meaty["promotion_claim_posture"] == "not_a_promotion_lane"
-    assert pea_meaty["next_best_action"] == "improve_observable_or_calibration"
-    assert pea_meaty["best_computational_action"] == "improve_observable_or_calibration_before_qm"
+    assert pea_meaty["mechanistic_priority_ready"] is True
+    assert pea_meaty["next_best_action"] == "prioritize_mechanistic_refinement"
+    assert pea_meaty["promotion_blocker"] == "insufficient externally measured target closure; current comparator is internal reference-only"
+
+    pea_protocol = by_id["pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026"]
+    assert pea_protocol["external_data_status"] == "internal_measured_quantitative"
+    assert pea_protocol["support_counts"]["internal_candidate"] == 0
+    assert pea_protocol["support_counts"]["directional_support"] >= 1
+    assert pea_protocol["mechanistic_priority_ready"] is True
+    assert pea_protocol["promotion_blocker"] == "insufficient externally measured target closure; current comparator is internal measured only"
 
     summary = payload["summary"]
     assert summary["quantitative_closed"] >= 1
     assert summary["internal_candidate"] >= 1
-    assert summary["evidence_or_calibration_priority_ready"] >= 1
+    assert summary["internal_reference_candidate"] >= 1
+    assert summary["mechanistic_priority_ready"] >= 1
 
     markdown = render_matrix_target_status_markdown(payload)
     assert "Matrix Target Status" in markdown
     assert "quantitative_closed" in markdown
-    assert "internal_candidate" in markdown
-    assert "observable_or_calibration_blocker" in markdown
-    assert "Evidence Origin" in markdown
-    assert "Claim Posture" in markdown
-    assert "Evidence/calibration-priority benchmarks" in markdown
-    assert "improve_observable_or_calibration" in markdown
-    assert "improve_observable_or_calibration_before_qm" in markdown
+    assert "internal_measured_candidate" in markdown
+    assert "internal_reference_candidate" in markdown
+    assert "internal_measured_quantitative" in markdown
+    assert "prioritize_mechanistic_refinement" in markdown

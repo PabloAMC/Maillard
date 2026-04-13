@@ -1,11 +1,12 @@
 import sys
 from pathlib import Path
 
+# Setup environment
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT))
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 from src.pre_processor import PreProcessor
-from src.bayesian_optimizer import FormulationOptimizer
 from src.pipeline import MaillardPipeline
 from src.conditions import ReactionConditions
 
@@ -13,7 +14,7 @@ def run_pea_protein_reproduction():
     print("\n[REPRODUCING] Premium Roast Pea Protein")
     pp = PreProcessor()
     raw_ppi = {"Hexanal": 1.2, "Nonanal": 0.8}
-    cleaned = pp.apply(raw_ppi, [{"yeast_fermentation": {"time_hours": 4}}])
+    pp.apply(raw_ppi, [{"yeast_fermentation": {"time_hours": 4}}])
     
     designer = MaillardPipeline(target_tag="meaty")
     cond = ReactionConditions(pH=5.6, temperature_celsius=105.0)

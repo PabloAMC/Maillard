@@ -13,6 +13,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from src.benchmark_validation import summarize_benchmarks
+from src.benchmark_labels import format_benchmark_list
 from src.presentation import render_benchmark_summary_markdown
 
 
@@ -43,7 +44,7 @@ def main() -> int:
     print(f"Wrote {json_path}")
     strict_ready = [summary.benchmark_id for summary in summaries if summary.strict_ready]
     if strict_ready:
-        print("Strict-ready benchmarks: " + ", ".join(strict_ready))
+        print("Strict-ready benchmarks: " + format_benchmark_list(strict_ready))
     else:
         print("Strict-ready benchmarks: none")
     return 0

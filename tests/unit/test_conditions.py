@@ -79,3 +79,38 @@ def test_effective_barrier_round_trip_reflects_environmental_multipliers():
         base_barrier - 0.001987 * cond.temperature_kelvin * math.log(multiplier)
     )
     assert effective_barrier > base_barrier
+
+
+def test_rate_constant_respects_carbohydrate_donor_identity_context():
+    cond = ReactionConditions(pH=5.5, temperature_celsius=150.0, water_activity=0.95)
+    barrier = 22.0
+
+    ribose_rate = cond.get_rate_constant(
+        "strecker_degradation",
+        ea_override_kcal=barrier,
+        reactant_labels=["L-Cysteine", "D-Ribose"],
+    )
+    glucose_rate = cond.get_rate_constant(
+        "strecker_degradation",
+        ea_override_kcal=barrier,
+        reactant_labels=["L-Cysteine", "D-Glucose"],
+    )
+
+    assert ribose_rate > glucose_rate
+
+
+def test_extrusion_conditions_add_effective_temperature_and_profile():
+    cond = ReactionConditions(
+        temperature_celsius=145.0,
+        water_activity=0.55,
+        protein_type="soy_iso",
+        sme_kj_per_kg=180.0,
+        moisture_regime="hme",
+        sterilization_temperature_celsius=123.0,
+        sterilization_time_minutes=20.0,
+    )
+
+    assert cond.effective_temperature_celsius > cond.temperature_celsius
+    assert cond.temperature_kelvin == pytest.approx(cond.effective_temperature_celsius + 273.15)
+    assert cond.extrusion_profile["moisture_regime"] == "hme"
+    assert cond.extrusion_profile["sterilization"]["enabled"] is True

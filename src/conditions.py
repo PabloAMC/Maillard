@@ -1,36 +1,8 @@
 from dataclasses import dataclass
-from typing import Iterable, Optional, Tuple
+from typing import Optional, Sequence
 
-from src.barrier_constants import arrhenius_rate_constant
-
-TimeProfile = Tuple[Tuple[float, float], ...]
-
-
-def _normalize_profile(
-    profile: Optional[Iterable[Tuple[float, float]]],
-    *,
-    name: str,
-) -> Optional[TimeProfile]:
-    if profile is None:
-        return None
-
-    normalized = []
-    previous_time: Optional[float] = None
-    for raw_time, raw_value in profile:
-        time_value = float(raw_time)
-        profile_value = float(raw_value)
-        if time_value < 0.0:
-            raise ValueError(f"{name} cannot contain negative times")
-        if previous_time is not None and time_value <= previous_time:
-            raise ValueError(f"{name} must be strictly increasing without repeated timestamps")
-        normalized.append((time_value, profile_value))
-        previous_time = time_value
-
-    if len(normalized) < 2:
-        raise ValueError(f"{name} must include an initial point and a terminal point")
-    if normalized[0][0] != 0.0:
-        raise ValueError(f"{name} must start at time 0.0 minutes")
-    return tuple(normalized)
+from src.barrier_constants import arrhenius_rate_constant, get_donor_reactivity_multiplier
+from src.extrusion import build_extrusion_process_profile, normalize_moisture_regime
 
 @dataclass
 class ReactionConditions:
@@ -48,10 +20,15 @@ class ReactionConditions:
                  matrix_fiber: float = 0.0, # Placeholder for blind spot
                  metal_catalyst: Optional[str] = None, # Placeholder for blind spot
                  protein_type: str = "free",
-                 prediction_mode: str = "projection",
-                 temperature_profile: Optional[Iterable[Tuple[float, float]]] = None,
-                 water_activity_profile: Optional[Iterable[Tuple[float, float]]] = None,
-                 pH_profile: Optional[Iterable[Tuple[float, float]]] = None,
+                 sme_kj_per_kg: float = 0.0,
+                 moisture_regime: Optional[str] = None,
+                 screw_speed_rpm: Optional[float] = None,
+                 feed_rate_kg_per_h: Optional[float] = None,
+                 die_exit_temperature_celsius: Optional[float] = None,
+                 sterilization_temperature_celsius: Optional[float] = None,
+                 sterilization_time_minutes: float = 0.0,
+                 barrel_zone_temperatures: Optional[Sequence[float]] = None,
+                 barrel_zone_time_fractions: Optional[Sequence[float]] = None,
                  ):
         self.pH = pH
         self.temperature_celsius = temperature_celsius
@@ -63,10 +40,15 @@ class ReactionConditions:
         self.matrix_fiber = matrix_fiber
         self.metal_catalyst = metal_catalyst
         self.protein_type = protein_type
-        self.prediction_mode = prediction_mode
-        self.temperature_profile = _normalize_profile(temperature_profile, name="temperature_profile")
-        self.water_activity_profile = _normalize_profile(water_activity_profile, name="water_activity_profile")
-        self.pH_profile = _normalize_profile(pH_profile, name="pH_profile")
+        self.sme_kj_per_kg = float(sme_kj_per_kg)
+        self.moisture_regime = moisture_regime
+        self.screw_speed_rpm = None if screw_speed_rpm is None else float(screw_speed_rpm)
+        self.feed_rate_kg_per_h = None if feed_rate_kg_per_h is None else float(feed_rate_kg_per_h)
+        self.die_exit_temperature_celsius = None if die_exit_temperature_celsius is None else float(die_exit_temperature_celsius)
+        self.sterilization_temperature_celsius = sterilization_temperature_celsius
+        self.sterilization_time_minutes = float(sterilization_time_minutes)
+        self.barrel_zone_temperatures = None if barrel_zone_temperatures is None else [float(value) for value in barrel_zone_temperatures]
+        self.barrel_zone_time_fractions = None if barrel_zone_time_fractions is None else [float(value) for value in barrel_zone_time_fractions]
         self.__post_init__()
 
     def __post_init__(self):
@@ -81,50 +63,36 @@ class ReactionConditions:
         }
         if self.solvent_name.lower() in presets:
             self.dielectric_constant = presets[self.solvent_name.lower()]
+        self.moisture_regime = normalize_moisture_regime(self.moisture_regime, self.water_activity)
+
+    @property
+    def extrusion_profile(self) -> dict[str, object]:
+        return build_extrusion_process_profile(
+            base_temperature_celsius=self.temperature_celsius,
+            water_activity=self.water_activity,
+            protein_type=self.protein_type,
+            sme_kj_per_kg=self.sme_kj_per_kg,
+            moisture_regime=self.moisture_regime,
+            screw_speed_rpm=self.screw_speed_rpm,
+            feed_rate_kg_per_h=self.feed_rate_kg_per_h,
+            die_exit_temperature_celsius=self.die_exit_temperature_celsius,
+            sterilization_temperature_celsius=self.sterilization_temperature_celsius,
+            sterilization_time_minutes=self.sterilization_time_minutes,
+            zone_temperatures=self.barrel_zone_temperatures,
+            zone_time_fractions=self.barrel_zone_time_fractions,
+        )
+
+    @property
+    def effective_temperature_celsius(self) -> float:
+        return float(self.extrusion_profile.get("effective_temperature_celsius", self.temperature_celsius))
 
     @property
     def temperature_kelvin(self) -> float:
-        return self.temperature_celsius + 273.15
+        return self.effective_temperature_celsius + 273.15
 
     @property
-    def has_dynamic_profile(self) -> bool:
-        return any(
-            profile is not None
-            for profile in (self.temperature_profile, self.water_activity_profile, self.pH_profile)
-        )
-
-    def _interpolate_profile(
-        self,
-        profile: Optional[TimeProfile],
-        time_minutes: Optional[float],
-        fallback: float,
-    ) -> float:
-        if profile is None or time_minutes is None:
-            return float(fallback)
-
-        current_time = float(time_minutes)
-        if current_time <= profile[0][0]:
-            return float(profile[0][1])
-        for (start_time, start_value), (end_time, end_value) in zip(profile, profile[1:]):
-            if current_time <= end_time:
-                span = end_time - start_time
-                if span <= 0.0:
-                    return float(end_value)
-                fraction = (current_time - start_time) / span
-                return float(start_value + fraction * (end_value - start_value))
-        return float(profile[-1][1])
-
-    def temperature_celsius_at(self, time_minutes: Optional[float] = None) -> float:
-        return self._interpolate_profile(self.temperature_profile, time_minutes, self.temperature_celsius)
-
-    def temperature_kelvin_at(self, time_minutes: Optional[float] = None) -> float:
-        return self.temperature_celsius_at(time_minutes) + 273.15
-
-    def water_activity_at(self, time_minutes: Optional[float] = None) -> float:
-        return self._interpolate_profile(self.water_activity_profile, time_minutes, self.water_activity)
-
-    def ph_at(self, time_minutes: Optional[float] = None) -> float:
-        return self._interpolate_profile(self.pH_profile, time_minutes, self.pH)
+    def nominal_temperature_kelvin(self) -> float:
+        return self.temperature_celsius + 273.15
         
     def _sigmoid(self, x: float, center: float, k: float) -> float:
         """Helper for sigmoid transitions."""
@@ -181,7 +149,8 @@ class ReactionConditions:
         self,
         pathway_type: str,
         ea_override_kcal: float = None,
-        time_minutes: Optional[float] = None,
+        *,
+        reactant_labels: Optional[Sequence[str]] = None,
     ) -> float:
         """
         Arrhenius rate constant: k = A * exp(-Ea / RT)
@@ -195,7 +164,7 @@ class ReactionConditions:
         - furfural_formation: 70.0
         - acrylamide_formation: 130.0
         """
-        T_K = self.temperature_kelvin_at(time_minutes)
+        T_K = self.temperature_kelvin
         
         # Ea in kJ/mol
         ACTIVATION_ENERGIES_KJ = {
@@ -222,43 +191,43 @@ class ReactionConditions:
         barrier_kcal = Ea_J / 4184.0
         
         # Apply pH ionization correction
-        ph_factor = self._ionization_correction(pathway_type, pH=self.ph_at(time_minutes))
+        ph_factor = self._ionization_correction(pathway_type)
         
         # Apply water activity correction (Labuza)
-        aw_factor = self._water_activity_correction(pathway_type, water_activity=self.water_activity_at(time_minutes))
+        aw_factor = self._water_activity_correction(pathway_type)
+        donor_factor = get_donor_reactivity_multiplier(pathway_type, reactant_labels=reactant_labels)
         
         return arrhenius_rate_constant(
             barrier_kcal,
             T_K,
             family=pathway_type,
-            multiplier=ph_factor * aw_factor,
+            multiplier=ph_factor * aw_factor * donor_factor,
         )
 
-    def _ionization_correction(self, pathway_type: str, *, pH: Optional[float] = None) -> float:
+    def _ionization_correction(self, pathway_type: str) -> float:
         """
         Henderson-Hasselbalch based correction for reactive species ionization.
         Replaces arbitrary sigmoids.
         """
         fam = pathway_type.lower()
-        ph_value = self.pH if pH is None else float(pH)
         # Amine reactions require the deprotonated form (R-NH2)
         if any(x in fam for x in ("amadori", "strecker", "schiff")):
             pKa = 8.0  # Common alpha-amino pKa
-            return 1.0 / (1.0 + 10**(pKa - ph_value))
+            return 1.0 / (1.0 + 10**(pKa - self.pH))
         
         # Pyrazines often peak at slightly alkaline pH
         elif "pyrazine" in fam:
-            return 1.0 / (1.0 + 10**(6.5 - ph_value))
+            return 1.0 / (1.0 + 10**(6.5 - self.pH))
             
         return 1.0
 
-    def _water_activity_correction(self, pathway_type: str, *, water_activity: Optional[float] = None) -> float:
+    def _water_activity_correction(self, pathway_type: str) -> float:
         """
         Correction for water activity effect on Maillard reaction rate.
         Based on Labuza & Saltmarch (1981).
         Rate peaks around aw=0.65, drops at both extremes.
         """
-        aw = self.water_activity if water_activity is None else float(water_activity)
+        aw = self.water_activity
         fam = pathway_type.lower()
         
         if any(x in fam for x in ("amadori", "strecker", "pyrazine")):

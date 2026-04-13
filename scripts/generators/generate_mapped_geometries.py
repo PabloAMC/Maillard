@@ -1,6 +1,7 @@
 import sys
 import types
 import pathlib
+import argparse
 
 # Monkeypatch pkg_resources for rxnmapper in Python 3.14
 dummy_pkg = types.ModuleType("pkg_resources")
@@ -155,6 +156,15 @@ def generate_mapped_pair(rxnmapper, name, reactant_smiles, product_smiles, outpu
     return True
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--reaction",
+        action="append",
+        default=[],
+        help="Generate only the named reaction(s). Repeat the flag to select multiple entries.",
+    )
+    args = parser.parse_args()
+
     base_dir = Path("data/geometries/xtb_inputs")
     rxnmapper = RXNMapper()
     
@@ -180,6 +190,18 @@ def main():
             "r": "NC(CS)C(=O)O",               # Cysteine
             "p": "C=C(N)C(=O)O.S"              # DHA + H2S
         },
+        "hexanal_radical_quench": {
+            "r": "CCCCCC=O.[SH]",              # Hexanal + thiyl radical
+            "p": "CCCCCC(O)[S]"                # Radical thiohemiacetal adduct
+        },
+        "lysinoalanine_crosslink": {
+            "r": "C=C(C(=O)O)N.NCCCCC(N)C(=O)O",  # Dehydroalanine + Lysine
+            "p": "C(CCNCC(C(=O)O)N)CC(C(=O)O)N"   # Lysinoalanine
+        },
+        "aa_ring_open_dicarbonyl": {
+            "r": "C(C(C1C(=O)C(=O)C(=O)O1)O)O.O",   # Dehydroascorbic acid + water
+            "p": "C(C(C(C(=O)C(=O)C(=O)O)O)O)O"     # 2,3-diketogulonic acid
+        },
         "pyrazine": {
             "r": "CC(=O)CN.CC(=O)CN",          # 2x Aminoacetone
             "p": "CC1=NCC(C)=NC1.O.O"          # Dihydropyrazine + 2x Water (balanced)
@@ -190,7 +212,15 @@ def main():
         }
     }
 
+    selected = set(args.reaction)
+    if selected:
+        missing = sorted(name for name in selected if name not in REACTIONS)
+        if missing:
+            raise SystemExit(f"Unknown reaction(s): {', '.join(missing)}")
+
     for name, s in REACTIONS.items():
+        if selected and name not in selected:
+            continue
         r_dir = base_dir / name
         generate_mapped_pair(rxnmapper, name, s['r'], s['p'], r_dir)
 

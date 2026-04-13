@@ -1,8 +1,6 @@
 import sys
 from pathlib import Path
 
-import pytest
-
 
 ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
@@ -21,7 +19,6 @@ PEA_MEATY = ROOT / "data" / "benchmarks" / "pea_isolate_ribose_cysteine_100C_45m
 SOY_MEATY = ROOT / "data" / "benchmarks" / "soy_isolate_ribose_cysteine_100C_45min_Internal2026.json"
 
 
-@pytest.mark.slow
 def test_matrix_precursor_augmented_benchmark_is_reproducible_but_not_strict_ready():
     evaluation = evaluate_benchmark(PEA_MEATY)
     summary = summarize_evaluation(evaluation, protein_type="pea_iso")
@@ -34,7 +31,6 @@ def test_matrix_precursor_augmented_benchmark_is_reproducible_but_not_strict_rea
     assert summary.reference_signal_origin == "reference_volatiles"
 
 
-@pytest.mark.slow
 def test_matrix_precursor_augmented_benchmark_exposes_target_snapshots():
     rows = snapshot_benchmark_targets(SOY_MEATY)
     names = {row.target_name for row in rows}
@@ -44,8 +40,13 @@ def test_matrix_precursor_augmented_benchmark_exposes_target_snapshots():
     assert "2-Methyl-3-furanthiol (MFT)" in names
 
 
-def test_matrix_benchmark_delta_report_covers_matrix_only_and_meaty_candidates(matrix_benchmark_delta_rows):
-    rows = matrix_benchmark_delta_rows
+def test_matrix_benchmark_delta_report_covers_matrix_only_and_meaty_candidates():
+    rows = build_matrix_benchmark_deltas([
+        ROOT / "data" / "benchmarks" / "pea_isolate_40C_PratapSingh2021.json",
+        ROOT / "data" / "benchmarks" / "soy_isolate_40C_PratapSingh2021.json",
+        PEA_MEATY,
+        SOY_MEATY,
+    ])
     markdown = render_matrix_benchmark_deltas_markdown(rows)
 
     benchmark_ids = {row.benchmark_id for row in rows}

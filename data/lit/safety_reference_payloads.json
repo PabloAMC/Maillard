@@ -1,0 +1,438 @@
+{
+  "generated_at": "2026-03-19",
+  "description": "Formal safety reference payloads. These are quantitative safety anchors for validation context and reporting, not kinetic benchmarks unless explicitly marked otherwise.",
+  "entries": [
+    {
+      "id": "squeo_2023_pbpi_acrylamide",
+      "kind": "industrial_endpoint_reference",
+      "report_visibility": "default",
+      "target_module": "safety",
+      "source_citation": "Squeo et al. (2023), Foods 12(6):1331",
+      "doi": "10.3390/foods12061331",
+      "validated_status": "reference_anchor",
+      "analyte": "acrylamide",
+      "method": {
+        "instrument": "LC-MS/MS",
+        "internal_standard": "d3-acrylamide",
+        "calibration_range_ng_per_ml": [1.0, 230.0],
+        "calibration_r_squared": 0.999,
+        "lod_ng_per_ml": 7.0,
+        "loq_ng_per_ml": 24.0,
+        "replicates": 3
+      },
+      "matrix_reference_ranges": [
+        {
+          "matrix_family": "soy_wet_extraction",
+          "units": "ug_per_kg",
+          "min": 185.0,
+          "max": 748.0,
+          "mean": 451.0
+        },
+        {
+          "matrix_family": "pea_tvp",
+          "units": "ug_per_kg",
+          "comment": "Reported by the SLR as in a similar industrial range to soy wet-extraction proteins, but the exact bounded range was not extracted into the repo."
+        }
+      ],
+      "what_it_supports": [
+        "Upper-bound reference context for acrylamide in processed plant-protein ingredients",
+        "Safety-surface reporting for plant matrices"
+      ],
+      "what_it_does_not_support": [
+        "Dynamic kinetic fitting across T, t, and free asparagine",
+        "A controlled-process free-precursor safety benchmark"
+      ],
+      "comment": "Use as a reporting and validation reference band, not as a replacement for Parker or Knol kinetics."
+    },
+    {
+      "id": "foods_2023_pbma_acrylamide_ages",
+      "kind": "finished_product_reference",
+      "report_visibility": "default",
+      "target_module": "safety",
+      "source_citation": "Foods 12(10):1967 (2023)",
+      "doi": "",
+      "validated_status": "reference_anchor",
+      "analyte": "acrylamide",
+      "method": {
+        "instrument": "LC-MS/MS",
+        "co_measured_analytes": ["CML", "CEL"],
+        "replicates": 3
+      },
+      "matrix_reference_ranges": [
+        {
+          "matrix_family": "pea_patty",
+          "units": "ug_per_kg",
+          "point": 43.07
+        },
+        {
+          "matrix_family": "pea_meatball",
+          "units": "ug_per_kg",
+          "point": 64.0
+        },
+        {
+          "matrix_family": "mixed_pbma_products",
+          "units": "ug_per_kg",
+          "min": 31.81,
+          "max": 186.70,
+          "mean": 68.55
+        }
+      ],
+      "what_it_supports": [
+        "Finished-product PBMA acrylamide reporting context",
+        "Protein and free-lysine correlation context for mitigation narratives"
+      ],
+      "what_it_does_not_support": [
+        "Controlled wet-system kinetics",
+        "Direct transfer of endpoint values to aqueous benchmark slurries"
+      ],
+      "comment": "Use as a finished-product safety band distinct from ingredient endpoints."
+    },
+    {
+      "id": "choi_2024_pea_acrylamide_asparagine",
+      "kind": "precursor_correlation_reference",
+      "report_visibility": "default",
+      "target_module": "safety",
+      "source_citation": "Choi et al. (2024), roasted garden peas",
+      "doi": "",
+      "validated_status": "reference_anchor",
+      "analyte": "acrylamide",
+      "method": {
+        "instrument": "UHPLC Nexera plus TQMS8040",
+        "internal_standard": "13C3-acrylamide",
+        "replicates": 3,
+        "notes": "MRM transitions and calibration stated in the source."
+      },
+      "matrix_reference_ranges": [
+        {
+          "matrix_family": "garden_pea",
+          "units": "ug_per_kg",
+          "comment": "Acrylamide quantified together with free asparagine; exact band not extracted into the repo summary."
+        }
+      ],
+      "what_it_supports": [
+        "Precursor-correlation explanation for pea safety outputs",
+        "Justification for linking safety risk to free asparagine availability"
+      ],
+      "what_it_does_not_support": [
+        "Wet-system kinetic fitting",
+        "Direct PPI slurry endpoint calibration"
+      ],
+      "comment": "Use as mechanistically honest precursor-correlation provenance."
+    },
+    {
+      "id": "knol_2009_acrylamide_kinetics",
+      "kind": "kinetic_model_reference",
+      "report_visibility": "extended",
+      "target_module": "safety",
+      "source_citation": "Knol et al. (2009), Food Chemistry 113:103",
+      "doi": "10.1016/j.foodchem.2009.11.049",
+      "validated_status": "model_reference",
+      "analyte": "acrylamide",
+      "method": {
+        "model_type": "Arrhenius formation model",
+        "validated_matrices": 8
+      },
+      "matrix_reference_ranges": [],
+      "what_it_supports": [
+        "Activation-energy provenance for predict_acrylamide",
+        "Field-standard free-system kinetic framing"
+      ],
+      "what_it_does_not_support": [
+        "Industrial endpoint bands",
+        "Aqueous SPI or PPI kinetic closure"
+      ],
+      "comment": "Model provenance only; do not display as if it were an endpoint benchmark band."
+    },
+    {
+      "id": "claeys_2005_acrylamide_temperature_time",
+      "kind": "kinetic_model_reference",
+      "report_visibility": "extended",
+      "target_module": "safety",
+      "source_citation": "Claeys et al. (2005), JAFC",
+      "doi": "10.1021/jf051197n",
+      "validated_status": "model_reference",
+      "analyte": "acrylamide",
+      "method": {
+        "model_type": "time_temperature_dependence"
+      },
+      "matrix_reference_ranges": [],
+      "what_it_supports": [
+        "Secondary time-temperature provenance for free-system acrylamide formation"
+      ],
+      "what_it_does_not_support": [
+        "Endpoint reporting band",
+        "Aqueous plant-protein kinetic closure"
+      ],
+      "comment": "Use only as supporting kinetic provenance."
+    },
+    {
+      "id": "sen_gokmen_2023_acrylamide_temperature_time",
+      "kind": "kinetic_model_reference",
+      "report_visibility": "extended",
+      "target_module": "safety",
+      "source_citation": "Sen & Gokmen (2023), ACS Food Sci Technol",
+      "doi": "10.1021/acsfoodscitech.3c00359",
+      "validated_status": "model_reference",
+      "analyte": "acrylamide",
+      "method": {
+        "model_type": "time_temperature_dependence"
+      },
+      "matrix_reference_ranges": [],
+      "what_it_supports": [
+        "Modern cross-check provenance for free-system acrylamide kinetics"
+      ],
+      "what_it_does_not_support": [
+        "Endpoint reporting band",
+        "Aqueous plant-protein kinetic closure"
+      ],
+      "comment": "Use only as supporting kinetic provenance."
+    },
+    {
+      "id": "zilic_2014_soy_heat_transfer_modifier",
+      "kind": "contextual_process_modifier",
+      "report_visibility": "extended",
+      "target_module": "safety",
+      "source_citation": "Zilic et al. (2014), J Sci Food Agric",
+      "doi": "10.1002/jsfa.6210",
+      "validated_status": "contextual_reference",
+      "analyte": "acrylamide",
+      "method": {
+        "matrix": "whole soybean",
+        "heating_modes": ["extrusion", "infrared", "microwave"]
+      },
+      "matrix_reference_ranges": [],
+      "what_it_supports": [
+        "Heat-transfer and water-activity caveats for safety interpretation"
+      ],
+      "what_it_does_not_support": [
+        "Endpoint benchmarking",
+        "Wet-system kinetics"
+      ],
+      "comment": "Contextual process modifier only; do not treat as a direct benchmark."
+    },
+    {
+      "id": "acs_2022_pba_lysine_loss",
+      "kind": "industrial_endpoint_reference",
+      "report_visibility": "default",
+      "target_module": "safety",
+      "chemistry_family": "safety_damage_lane",
+      "slr_family_source": "12",
+      "source_citation": "ACS Food Science & Technology 2022, 2(2):00242",
+      "doi": "10.1021/acsfoodscitech.2c00242",
+      "validated_status": "reference_anchor",
+      "analyte": "reactive_lysine",
+      "method": {
+        "instrument": "HPLC-UV",
+        "reagent": "FDNB",
+        "notes": "Sanger's reagent for reactive lysine vs total AA after 6N HCl hydrolysis"
+      },
+      "matrix_reference_ranges": [
+        {
+          "matrix_family": "soy_isolate_petfood",
+          "units": "g_per_16gN",
+          "at_T_C": 125.5,
+          "at_time_min": 26,
+          "start": 4.05,
+          "end": 2.78,
+          "percent_loss": 31.4
+        },
+        {
+          "matrix_family": "pea_isolate_petfood",
+          "units": "g_per_16gN",
+          "at_T_C": 125.5,
+          "at_time_min": 26,
+          "start": 4.43,
+          "end": 3.75,
+          "percent_loss": 15.4
+        }
+      ],
+      "what_it_supports": [
+        "Primary benchmark for reactive lysine loss in SPI vs PPI",
+        "Calibration of lysine_accessibility_factor under severe shear+heat"
+      ],
+      "comment": "PPI is significantly more resilient to lysine loss than SPI (15% vs 31%)."
+    },
+    {
+      "id": "foods_2023_pba_cml_cel_benchmark",
+      "kind": "finished_product_reference",
+      "report_visibility": "default",
+      "target_module": "safety",
+      "chemistry_family": "safety_damage_lane",
+      "slr_family_source": "12",
+      "source_citation": "Foods 2023, 12(10):1967",
+      "doi": "10.3390/foods12101967",
+      "validated_status": "reference_anchor",
+      "analyte": "CML/CEL",
+      "method": {
+        "instrument": "UHPLC-MS/MS",
+        "internal_standards": ["CML-d4", "CEL-d4"],
+        "notes": "Simultaneous quantification of CML, CEL, and acrylamide"
+      },
+      "matrix_reference_ranges": [
+        {
+          "matrix_family": "commercial_pbma_burgers",
+          "units": "mg_per_kg",
+          "analyte": "CML",
+          "min": 16.46,
+          "max": 47.61
+        },
+        {
+          "matrix_family": "commercial_pbma_burgers",
+          "units": "mg_per_kg",
+          "analyte": "CEL",
+          "min": 25.21,
+          "max": 86.23
+        }
+      ],
+      "what_it_supports": [
+        "Definitive AGE range in commercial plant-based meat analogs",
+        "Proof that CEL > CML in high-temperature extrusion (MGO > GO)"
+      ],
+      "comment": "CEL > CML reflects dominance of methylglyoxal pathway at extrusion temperatures."
+    },
+    {
+      "id": "pmc_2024_pba_cml_cel_ranges",
+      "kind": "finished_product_reference",
+      "report_visibility": "default",
+      "target_module": "safety",
+      "chemistry_family": "safety_damage_lane",
+      "slr_family_source": "12",
+      "source_citation": "PMC 2024 (PMC12451096)",
+      "doi": "",
+      "validated_status": "reference_anchor",
+      "analyte": "CML/CEL",
+      "method": {
+        "instrument": "UHPLC-MS/MS",
+        "internal_standards": ["CML-d4", "CEL-d4"],
+        "notes": "Commercial plant-based meat analog survey with isotopically labelled AGE standards"
+      },
+      "matrix_reference_ranges": [
+        {
+          "matrix_family": "commercial_pba_products",
+          "units": "mg_per_kg",
+          "analyte": "CML",
+          "min": 16.0,
+          "max": 110.0
+        },
+        {
+          "matrix_family": "commercial_pba_products",
+          "units": "mg_per_kg",
+          "analyte": "CEL",
+          "min": 25.0,
+          "max": 110.0
+        }
+      ],
+      "what_it_supports": [
+        "Broad commercial validation band for CML and CEL in plant-based analogs",
+        "Cross-check that CEL remains above CML across high-temperature plant-protein products"
+      ],
+      "what_it_does_not_support": [
+        "Exact process reconstruction for a single formulation",
+        "Standalone kinetic fitting without a representative process proxy"
+      ],
+      "comment": "Use alongside the Foods 2023 product cluster to keep broad AGE bands visible in runtime safety reporting."
+    },
+    {
+      "id": "pmc_12648097_acrylamide_mitigation",
+      "kind": "contextual_process_modifier",
+      "report_visibility": "extended",
+      "target_module": "safety",
+      "chemistry_family": "polyphenol_amino_capping",
+      "slr_family_source": "13",
+      "source_citation": "PMC PMCID:PMC12648097 (Ref. 5)",
+      "doi": "",
+      "validated_status": "reference_anchor",
+      "analyte": "acrylamide",
+      "method": {
+        "instrument": "UPLC-QqQ-MS/MS",
+        "internal_standard": true,
+        "notes": "Amino-acid capping mitigation study reporting near-complete acrylamide suppression"
+      },
+      "matrix_reference_ranges": [
+        {
+          "matrix_family": "amino_acid_capped_model_system",
+          "units": "suppression_fraction",
+          "point": 0.978,
+          "comment": "Reported suppression of acrylamide by cysteine plus glycine relative to the uncontrolled reference"
+        }
+      ],
+      "what_it_supports": [
+        "Mitigation-side safety context for amino-acid capping strategies",
+        "Upper-bound suppression reference for acrylamide guardrail interpretation"
+      ],
+      "what_it_does_not_support": [
+        "Standalone kinetic fitting across arbitrary formulation conditions",
+        "Direct transfer to finished-product endpoint prediction without context"
+      ],
+      "comment": "Use as an extended mitigation reference for safety interpretation, not as a substitute for temperature-time kinetics."
+    },
+    {
+      "id": "kocadagli_2016_saponin_acrylamide_modifier",
+      "kind": "contextual_process_modifier",
+      "report_visibility": "extended",
+      "target_module": "safety",
+      "chemistry_family": "off_note_and_maillard_suppression",
+      "slr_family_source": "08",
+      "source_citation": "Kocadağlı & Gökmen (2016)",
+      "doi": "",
+      "validated_status": "contextual_reference",
+      "analyte": "acrylamide",
+      "method": {
+        "instrument": "reported in source summary",
+        "lod_units": "ug_per_kg",
+        "lod_point": 10.0,
+        "notes": "Backlog summary reports a saponin dose-acrylamide relationship plus DSC shift and pyrazine skew"
+      },
+      "matrix_reference_ranges": [
+        {
+          "matrix_family": "saponin_modified_model_system",
+          "units": "qualitative_modifier",
+          "comment": "Dose-responsive acrylamide modulation with simultaneous pyrazine skew and approximately 6 C thermal shift"
+        }
+      ],
+      "what_it_supports": [
+        "Bounded process-modifier context linking saponin load to acrylamide interpretation",
+        "Safety and flavour trade-off framing where pyrazine skew accompanies the acrylamide response"
+      ],
+      "what_it_does_not_support": [
+        "Direct finished-product endpoint benchmarking",
+        "Exact process reconstruction for SPI or PPI matrices"
+      ],
+      "comment": "Use as an extended process-modifier reference when additive composition or foaming-active fractions are expected to move both acrylamide and pyrazine posture."
+    },
+    {
+      "id": "ramirez_jimenez_2000_furosine_crossover",
+      "kind": "kinetic_model_reference",
+      "report_visibility": "default",
+      "target_module": "safety",
+      "chemistry_family": "safety_damage_lane",
+      "slr_family_source": "12",
+      "source_citation": "Ramírez-Jiménez et al. (2000)",
+      "doi": "",
+      "validated_status": "reference_anchor",
+      "analyte": "furosine",
+      "method": {
+        "model_type": "formation_elimination_crossover",
+        "notes": "Mild extrusion proxy summarized in Report 12: furosine peaks near 140 C and declines once degradation dominates above 150 C"
+      },
+      "matrix_reference_ranges": [
+        {
+          "matrix_family": "mild_legume_extrudate",
+          "units": "mg_per_100g_protein",
+          "point": 8.7,
+          "at_T_C": 140.0,
+          "comment": "Peak mild-extrusion furosine anchor before high-temperature degradation dominates"
+        }
+      ],
+      "what_it_supports": [
+        "Reference anchor for non-monotonic furosine behavior across extrusion temperature",
+        "Runtime reporting that a drop above 150 C reflects degradation into downstream damage markers, not reduced damage"
+      ],
+      "what_it_does_not_support": [
+        "Single-marker safety interpretation above 160 C",
+        "Exact SPI/PPI process reconstruction without matrix-specific calibration"
+      ],
+      "comment": "Use with CEL and CML context so severe-extrusion damage is not under-read when furosine declines."
+    }
+  ]
+}

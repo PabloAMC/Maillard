@@ -1,0 +1,262 @@
+{
+  "panel_version": "2026-03-20",
+  "notes": "Canonical literature-backed decision panel for plant-matrix runs. This is a scientist-facing evidence contract, not a claim that all compounds are equally benchmark-closed in every regime. The panel distinguishes direct volatile observables from upstream state variables so support lanes can remain explicit without overclaiming direct benchmark closure.",
+  "target_class_family_metadata": {
+    "sulfur_positives": {
+      "chemistry_family": "amino_acid_sugar_core",
+      "panel_role": "scored",
+      "observable_kind": "volatile",
+      "modeling_regimes": ["free_aqueous", "matrix_hydrated", "extrusion_like"],
+      "observable_panel_tags": ["core_meaty", "sulfur_positive"],
+      "supporting_families": ["03", "05", "07", "10"]
+    },
+    "strecker_aldehydes": {
+      "chemistry_family": "amino_acid_sugar_core",
+      "panel_role": "scored",
+      "observable_kind": "volatile",
+      "modeling_regimes": ["free_aqueous", "matrix_hydrated", "extrusion_like"],
+      "observable_panel_tags": ["core_meaty", "strecker_marker"],
+      "supporting_families": ["02"]
+    },
+    "pyrazines": {
+      "chemistry_family": "amino_acid_sugar_core",
+      "panel_role": "constrained",
+      "observable_kind": "volatile",
+      "modeling_regimes": ["free_aqueous", "matrix_hydrated", "extrusion_like"],
+      "observable_panel_tags": ["pyrazine", "optimization_constraint"],
+      "supporting_families": ["07"]
+    },
+    "furans_furanones": {
+      "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
+      "panel_role": "diagnostic",
+      "observable_kind": "volatile",
+      "modeling_regimes": ["free_aqueous", "matrix_hydrated", "extrusion_like"],
+      "observable_panel_tags": ["caramelization_support", "furanone"],
+      "supporting_families": ["01"]
+    },
+    "severity_markers": {
+      "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
+      "panel_role": "constrained",
+      "observable_kind": "volatile",
+      "modeling_regimes": ["free_aqueous", "matrix_hydrated", "extrusion_like", "extrusion_heavy"],
+      "observable_panel_tags": ["severity_marker"],
+      "supporting_families": ["07", "08"]
+    },
+    "adverse_lipid_markers": {
+      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
+      "panel_role": "constrained",
+      "observable_kind": "volatile",
+      "modeling_regimes": ["matrix_hydrated", "extrusion_like", "extrusion_heavy"],
+      "observable_panel_tags": ["adverse_marker", "off_note"],
+      "supporting_families": ["08"]
+    },
+    "umami_support_markers": {
+      "chemistry_family": "nucleotide_and_ribose_support",
+      "panel_role": "report_only",
+      "observable_kind": "state_variable",
+      "modeling_regimes": ["matrix_hydrated", "extrusion_like", "extrusion_heavy"],
+      "observable_panel_tags": ["umami_support", "pretreatment_support"],
+      "supporting_families": ["10"]
+    },
+    "pretreatment_state_markers": {
+      "chemistry_family": "fermentation_pretreatment",
+      "panel_role": "report_only",
+      "observable_kind": "state_variable",
+      "modeling_regimes": ["matrix_hydrated", "extrusion_like", "extrusion_heavy"],
+      "observable_panel_tags": ["upstream_state", "pretreatment_support"],
+      "supporting_families": ["10"]
+    },
+    "safety_markers": {
+      "chemistry_family": "off_note_and_maillard_suppression",
+      "panel_role": "constrained",
+      "observable_kind": "volatile",
+      "modeling_regimes": ["free_aqueous", "matrix_hydrated", "extrusion_like", "extrusion_heavy"],
+      "observable_panel_tags": ["safety", "guardrail"]
+    }
+  },
+  "entries": {
+    "2methyl3furanthiol": {
+      "display_name": "2-Methyl-3-furanthiol (MFT)",
+      "target_class": "sulfur_positives",
+      "evidence_state": "externally_benchmarked",
+      "aliases": ["2methyl3furanthiolmft", "2methyl3furylthiol", "2methylfuran3thiol", "mft"]
+    },
+    "2furfurylthiol": {
+      "display_name": "2-Furfurylthiol (FFT)",
+      "target_class": "sulfur_positives",
+      "evidence_state": "externally_benchmarked",
+      "aliases": ["2furfurylthiolfft", "2furylmethanethiol", "fft"]
+    },
+    "methional": {
+      "display_name": "Methional",
+      "target_class": "sulfur_positives",
+      "evidence_state": "externally_benchmarked",
+      "aliases": ["3methylthiopropanal", "methional"]
+    },
+    "bis2methyl3furyldisulfide": {
+      "display_name": "bis(2-methyl-3-furyl) disulfide",
+      "target_class": "sulfur_positives",
+      "evidence_state": "transferred_prior",
+      "aliases": ["bis2methyl3furyldisulfide", "2methyl3furyl2methyl3furyldisulfide"]
+    },
+    "3methylbutanal": {
+      "display_name": "3-Methylbutanal",
+      "target_class": "strecker_aldehydes",
+      "evidence_state": "externally_benchmarked",
+      "aliases": ["3methylbutanal", "isovaleraldehyde"]
+    },
+    "2methylbutanal": {
+      "display_name": "2-Methylbutanal",
+      "target_class": "strecker_aldehydes",
+      "evidence_state": "externally_benchmarked",
+      "aliases": ["2methylbutanal", "2methylbutyraldehyde"]
+    },
+    "25dimethylpyrazine": {
+      "display_name": "2,5-Dimethylpyrazine",
+      "target_class": "pyrazines",
+      "evidence_state": "externally_benchmarked",
+      "aliases": ["25dimethylpyrazine", "dimethylpyrazine"]
+    },
+    "23dimethylpyrazine": {
+      "display_name": "2,3-Dimethylpyrazine",
+      "target_class": "pyrazines",
+      "evidence_state": "transferred_prior",
+      "aliases": ["23dimethylpyrazine"]
+    },
+    "2ethyl35dimethylpyrazine": {
+      "display_name": "2-Ethyl-3,5-dimethylpyrazine",
+      "target_class": "pyrazines",
+      "evidence_state": "transferred_prior",
+      "aliases": ["2ethyl35dimethylpyrazine"]
+    },
+    "tetramethylpyrazine": {
+      "display_name": "Tetramethylpyrazine",
+      "target_class": "pyrazines",
+      "evidence_state": "still_missing",
+      "aliases": ["tetramethylpyrazine"]
+    },
+    "4hydroxy25dimethyl32hfuranone": {
+      "display_name": "4-Hydroxy-2,5-dimethyl-3(2H)-furanone",
+      "target_class": "furans_furanones",
+      "evidence_state": "transferred_prior",
+      "aliases": ["4hydroxy25dimethyl32hfuranone", "furaneol"]
+    },
+    "2methyltetrahydrofuran3one": {
+      "display_name": "2-Methyltetrahydrofuran-3-one",
+      "target_class": "furans_furanones",
+      "evidence_state": "transferred_prior",
+      "aliases": ["2methyltetrahydrofuran3one"]
+    },
+    "furfural": {
+      "display_name": "Furfural",
+      "target_class": "severity_markers",
+      "evidence_state": "conditional_calibration",
+      "aliases": ["furfural"]
+    },
+    "5hydroxymethylfurfural": {
+      "display_name": "5-Hydroxymethylfurfural (HMF)",
+      "target_class": "severity_markers",
+      "evidence_state": "conditional_calibration",
+      "aliases": ["5hydroxymethylfurfuralhmf", "5hydroxymethylfurfural", "hmf"]
+    },
+    "2acetylfuran": {
+      "display_name": "2-Acetylfuran",
+      "target_class": "severity_markers",
+      "evidence_state": "conditional_calibration",
+      "aliases": ["2acetylfuran"]
+    },
+    "hexanal": {
+      "display_name": "Hexanal",
+      "target_class": "adverse_lipid_markers",
+      "evidence_state": "externally_benchmarked",
+      "aliases": ["hexanal"]
+    },
+    "nonanal": {
+      "display_name": "Nonanal",
+      "target_class": "adverse_lipid_markers",
+      "evidence_state": "externally_benchmarked",
+      "aliases": ["nonanal"]
+    },
+    "2pentylfuran": {
+      "display_name": "2-Pentylfuran",
+      "target_class": "adverse_lipid_markers",
+      "evidence_state": "externally_benchmarked",
+      "aliases": ["2pentylfuran"]
+    },
+    "1hexanol": {
+      "display_name": "1-Hexanol",
+      "target_class": "adverse_lipid_markers",
+      "evidence_state": "externally_benchmarked",
+      "aliases": ["1hexanol"]
+    },
+    "acrylamide": {
+      "display_name": "Acrylamide",
+      "target_class": "safety_markers",
+      "evidence_state": "safety_reference",
+      "aliases": ["acrylamide", "2propenamide"]
+    },
+    "imp": {
+      "display_name": "IMP",
+      "target_class": "umami_support_markers",
+      "evidence_state": "transferred_prior",
+      "aliases": ["imp", "inosine monophosphate", "inosinate"]
+    },
+    "gmp": {
+      "display_name": "GMP",
+      "target_class": "umami_support_markers",
+      "evidence_state": "transferred_prior",
+      "aliases": ["gmp", "guanosine monophosphate", "guanylate"]
+    },
+    "thiamineavailability": {
+      "display_name": "Thiamine availability",
+      "target_class": "pretreatment_state_markers",
+      "evidence_state": "transferred_prior",
+      "chemistry_family": "thiamine_fragmentation_support",
+      "supporting_families": ["03", "10"],
+      "panel_role": "diagnostic",
+      "observable_kind": "state_variable",
+      "aliases": ["thiamine availability", "thiamine_availability"]
+    },
+    "nucleotideenrichment": {
+      "display_name": "Nucleotide enrichment",
+      "target_class": "pretreatment_state_markers",
+      "evidence_state": "transferred_prior",
+      "chemistry_family": "nucleotide_and_ribose_support",
+      "supporting_families": ["04", "10"],
+      "panel_role": "diagnostic",
+      "observable_kind": "state_variable",
+      "aliases": ["nucleotide enrichment", "nucleotide_enrichment"]
+    },
+    "freeaminoacidenrichment": {
+      "display_name": "Free amino acid enrichment",
+      "target_class": "pretreatment_state_markers",
+      "evidence_state": "transferred_prior",
+      "chemistry_family": "fermentation_pretreatment",
+      "supporting_families": ["10", "05"],
+      "panel_role": "diagnostic",
+      "observable_kind": "state_variable",
+      "aliases": ["free amino acid enrichment", "free_amino_acid_enrichment"]
+    },
+    "pretreatmentphshift": {
+      "display_name": "Pretreatment pH shift",
+      "target_class": "pretreatment_state_markers",
+      "evidence_state": "conditional_calibration",
+      "chemistry_family": "fermentation_pretreatment",
+      "supporting_families": ["10"],
+      "panel_role": "diagnostic",
+      "observable_kind": "state_variable",
+      "aliases": ["pretreatment pH shift", "pretreatment_ph_shift"]
+    },
+    "caramelizationseverity": {
+      "display_name": "Caramelization severity",
+      "target_class": "severity_markers",
+      "evidence_state": "conditional_calibration",
+      "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
+      "supporting_families": ["09"],
+      "panel_role": "diagnostic",
+      "observable_kind": "state_variable",
+      "modeling_regimes": ["free_aqueous", "matrix_hydrated", "extrusion_like", "extrusion_heavy"],
+      "aliases": ["caramelization severity", "caramelization_severity"]
+    }
+  }
+}

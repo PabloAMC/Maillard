@@ -1,0 +1,48 @@
+{
+  "protocol_id": "extrusion_external_closure_2026",
+  "process_state": "extrusion_structured",
+  "promotion_requirements": [
+    "direct_damage_panel_complete",
+    "same_run_tradeoff_panel_complete",
+    "traceable_source_metadata"
+  ],
+  "matrices": [
+    {
+      "matrix": "soy_iso",
+      "direct_marker_panel": [
+        {
+          "marker_id": "reactive_lysine_fraction",
+          "display_name": "Reactive lysine fraction",
+          "closure_role": "direct_damage_marker",
+          "preferred_assays": ["OPA or equivalent lysine-reactivity assay"],
+          "required": true,
+          "repo_direct_anchor_available": false
+        },
+        {
+          "marker_id": "furosine",
+          "display_name": "Furosine",
+          "closure_role": "direct_damage_marker",
+          "preferred_assays": ["LC-MS/MS or HPLC furosine assay"],
+          "required": true,
+          "repo_direct_anchor_available": true
+        },
+        {
+          "marker_id": "lysinoalanine",
+          "display_name": "Lysinoalanine",
+          "closure_role": "crosslink_damage_marker",
+          "preferred_assays": ["Targeted amino-acid crosslink assay"],
+          "required": true,
+          "repo_direct_anchor_available": false
+        }
+      ],
+      "supportive_anchor_ids": [
+        "pmc_2026_hme_hexanal_baseline",
+        "acs_2022_pba_lysine_loss_benchmark"
+      ],
+      "contextual_anchor_ids": [
+        "pmc_12648097_acrylamide_mitigation_anchor",
+        "pmc_2024_pba_cml_cel_ranges_anchor"
+      ]
+    }
+  ]
+}

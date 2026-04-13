@@ -18,8 +18,8 @@ from typing import Dict, List, Any, Tuple
 import subprocess
 import concurrent.futures
 
+# Add project root to sys.path
 import sys
-
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 

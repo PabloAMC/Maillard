@@ -48,7 +48,13 @@ This reference focuses on the commands a scientist or reviewer is most likely to
 | `./scripts/docker_maillard.sh matrix-assertions` | Ranking assertions for current matrix benchmarks |
 | `./scripts/docker_maillard.sh matrix-readiness` | Family-level readiness for matrix promotion |
 | `./scripts/docker_maillard.sh matrix-branch-deltas main` | Compare current branch matrix outputs against main |
-| `./scripts/docker_maillard.sh coverage-gaps` | Coverage-gap report for P3-style expansion work |
+| `./scripts/docker_maillard.sh coverage-gaps` | Coverage-gap report for selective mechanistic expansion work |
+| `./scripts/docker_maillard.sh computational-gap-refinement-plan` | Generate the descriptive computational-gap refinement plan and manifests |
+| `./scripts/docker_maillard.sh computational-gap-xtb` | Run xTB seed generation for the named computational-gap targets |
+| `./scripts/docker_maillard.sh computational-gap-dft` | Run DFT refinement for computational-gap targets with xTB seeds |
+| `./scripts/docker_maillard.sh computational-gap-dft-ingest` | Build the DFT ingestion report for computational-gap refinement |
+| `./scripts/docker_maillard.sh computational-gap-dft-promote` | Promote completed computational-gap DFT results into priors |
+| `./scripts/docker_maillard.sh refinement-governance` | Generate the selective mechanistic refinement governance artifact |
 | `./scripts/docker_maillard.sh campaign data/campaigns/shareable_meaty_screen.yml` | Generate a review-ready campaign package with run-level and campaign-level artifacts |
 
 ## CLI Workflows Outside Docker

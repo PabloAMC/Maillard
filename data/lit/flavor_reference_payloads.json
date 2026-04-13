@@ -1,0 +1,823 @@
+{
+  "generated_at": "2026-03-19",
+  "description": "Flavor reference payloads for sulfur, Strecker, pyrazine, carbonyl, and furanone anchors. These are reporting and calibration references, not direct kinetic fits unless stated otherwise.",
+  "section_family_metadata": {
+    "sulfur_reference_anchors": {
+      "chemistry_family": "amino_acid_sugar_core",
+      "slr_family_source": "01",
+      "payload_role": "flavor_reference_payload",
+      "observable_panel_tags": ["core_meaty", "sulfur_positive", "benchmark_anchor"],
+      "process_state_scope": ["ambient_slurry", "heated_matrix"],
+      "supporting_families": ["03", "05", "07", "10"]
+    },
+    "strecker_reference_anchors": {
+      "chemistry_family": "amino_acid_sugar_core",
+      "slr_family_source": "01",
+      "payload_role": "flavor_reference_payload",
+      "observable_panel_tags": ["core_meaty", "strecker_marker", "diagnostic_marker"],
+      "process_state_scope": ["ambient_slurry", "heated_matrix"],
+      "supporting_families": ["02"]
+    },
+    "pyrazine_reference_anchors": {
+      "chemistry_family": "amino_acid_sugar_core",
+      "slr_family_source": "01",
+      "payload_role": "flavor_reference_payload",
+      "observable_panel_tags": ["core_meaty", "pyrazine", "optimization_constraint"],
+      "process_state_scope": ["ambient_slurry", "heated_matrix"],
+      "supporting_families": ["07"]
+    },
+    "carbonyl_reference_anchors": {
+      "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
+      "slr_family_source": "09",
+      "payload_role": "flavor_reference_payload",
+      "observable_panel_tags": ["severity_marker", "carbonyl_marker", "diagnostic_marker"],
+      "process_state_scope": ["heated_matrix", "aqueous_pre_extrusion_model", "extrusion_structured"],
+      "supporting_families": ["07", "08"]
+    },
+    "furanone_reference_anchors": {
+      "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
+      "slr_family_source": "09",
+      "payload_role": "flavor_reference_payload",
+      "observable_panel_tags": ["caramelization_support", "furanone", "diagnostic_marker"],
+      "process_state_scope": ["heated_matrix"],
+      "supporting_families": ["01"]
+    },
+    "off_note_reference_anchors": {
+      "chemistry_family": "lipid_maillard_crosstalk",
+      "slr_family_source": "11",
+      "payload_role": "flavor_reference_payload",
+      "observable_panel_tags": ["off_note", "ingredient_baseline", "hexanal"],
+      "process_state_scope": ["ambient_slurry", "heated_matrix"],
+      "supporting_families": ["02", "08"]
+    }
+  },
+  "sulfur_reference_anchors": [
+    {
+      "id": "hofmann_1997_beef_mft_band",
+      "compound": "2-methyl-3-furanthiol",
+      "source_citation": "Hofmann & Schieberle (1997/1998), JAFC",
+      "doi": "10.1021/jf970892v",
+      "matrix_context": "cooked_beef",
+      "analytical_method": "SIDA with deuterated internal standards",
+      "units": "ug_per_kg",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "primary_target",
+      "target_direction": "inside_meat_band",
+      "numeric_band_or_point": {
+        "type": "band",
+        "min": 7.0,
+        "max": 28.0
+      }
+    },
+    {
+      "id": "hofmann_1997_beef_fft_band",
+      "compound": "2-furfurylthiol",
+      "source_citation": "Hofmann & Schieberle (1997/1998), JAFC",
+      "doi": "10.1021/jf970892v",
+      "matrix_context": "cooked_beef",
+      "analytical_method": "SIDA with deuterated internal standards",
+      "units": "ug_per_kg",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "primary_target",
+      "target_direction": "inside_meat_band",
+      "numeric_band_or_point": {
+        "type": "band",
+        "min": 13.0,
+        "max": 42.0
+      }
+    },
+    {
+      "id": "hernandez_2023_gen_mft_point",
+      "compound": "2-methyl-3-furanthiol",
+      "source_citation": "Hernandez et al. (2023), Molecules 28:3151",
+      "doi": "10.3390/molecules28073151",
+      "matrix_context": "commercial_pbma_gen_brand",
+      "analytical_method": "HS-SPME-GC-MS with 1,2-dichlorobenzene internal standard and 5-point calibration",
+      "units": "ng_per_g",
+      "benchmark_role": "pbma_counterexample",
+      "pipeline_role": "reference_only",
+      "target_direction": "avoid_pbma_overfit",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 41.09
+      }
+    },
+    {
+      "id": "uspto_ptacts_2023_yeast_extract_mft_oav_band",
+      "compound": "2-methyl-3-furanthiol",
+      "source_citation": "USPTO PTACTS (2023 compiled)",
+      "doi": "",
+      "matrix_context": "thiamine_rich_yeast_extract_reaction_flavor",
+      "analytical_method": "SIDA and precursor-composition panel",
+      "units": "oav",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "primary_target",
+      "target_direction": "allow_yeast_extract_systems_to_reach_high_meaty_sulfur_ceiling_when_internal_thiamine_is_explicitly_available",
+      "numeric_band_or_point": {
+        "type": "band",
+        "min": 2000.0,
+        "max": 8000.0
+      },
+      "thiamine_context": "high_internal_thiamine",
+      "notes": "Family 06 sulfur-positive reference anchor for yeast-extract systems. Use as a high-ceiling meaty target when a formulation includes yeast-extract-like precursor richness instead of forcing those systems onto soy or beef-only sulfur bands."
+    }
+  ],
+  "strecker_reference_anchors": [
+    {
+      "id": "hernandez_2023_2_methylbutanal_panel",
+      "compound": "2-methylbutanal",
+      "source_citation": "Hernandez et al. (2023), Molecules 28:3151",
+      "doi": "10.3390/molecules28073151",
+      "matrix_context": "pbma_vs_beef_panel",
+      "analytical_method": "HS-SPME-GC-MS with 1,2-dichlorobenzene internal standard and 5-point calibration",
+      "units": "ng_per_g",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "secondary_marker",
+      "target_direction": "approach_beef_high_end",
+      "numeric_band_or_point": {
+        "type": "panel_values",
+        "values": {
+          "lean_ground_beef": 18.10,
+          "regular_ground_beef": 23.51,
+          "beyond": 12.74,
+          "impossible": 20.74,
+          "gen": 15.56
+        }
+      }
+    },
+    {
+      "id": "hernandez_2023_methional_panel",
+      "compound": "methional",
+      "source_citation": "Hernandez et al. (2023), Molecules 28:3151",
+      "doi": "10.3390/molecules28073151",
+      "matrix_context": "pbma_vs_beef_panel",
+      "analytical_method": "HS-SPME-GC-MS with 1,2-dichlorobenzene internal standard and 5-point calibration",
+      "units": "ng_per_g",
+      "benchmark_role": "directional_comparison_anchor",
+      "pipeline_role": "diagnostic_marker",
+      "target_direction": "report_only_until_strecker_runtime_exists",
+      "numeric_band_or_point": {
+        "type": "panel_values",
+        "values": {
+          "lean_ground_beef": 2.28,
+          "regular_ground_beef": 4.66,
+          "beyond": 8.38,
+          "impossible": 4.89,
+          "gen": 3.77
+        }
+      }
+    },
+    {
+      "id": "hernandez_2023_3_methylbutanal_panel",
+      "compound": "3-methylbutanal",
+      "source_citation": "Hernandez et al. (2023), Molecules 28:3151",
+      "doi": "10.3390/molecules28073151",
+      "matrix_context": "pbma_vs_beef_panel",
+      "analytical_method": "HS-SPME-GC-MS with 1,2-dichlorobenzene internal standard and 5-point calibration",
+      "units": "ng_per_g",
+      "benchmark_role": "directional_comparison_anchor",
+      "target_direction": "maintain_meat_like_strecker_presence_without_overweighting_it",
+      "pipeline_role": "diagnostic_marker",
+      "numeric_band_or_point": {
+        "type": "panel_values",
+        "values": {
+          "lean_ground_beef": 15.69,
+          "regular_ground_beef": 16.91,
+          "beyond": 16.61,
+          "impossible": 16.22,
+          "gen": 16.26
+        }
+      }
+    },
+    {
+      "id": "hernandez_2023_phenylacetaldehyde_panel",
+      "compound": "phenylacetaldehyde",
+      "source_citation": "Hernandez et al. (2023), Molecules 28:3151",
+      "doi": "10.3390/molecules28073151",
+      "matrix_context": "pbma_vs_beef_panel",
+      "analytical_method": "HS-SPME-GC-MS with 1,2-dichlorobenzene internal standard and 5-point calibration",
+      "units": "ng_per_g",
+      "benchmark_role": "directional_comparison_anchor",
+      "pipeline_role": "diagnostic_marker",
+      "target_direction": "report_only_until_strecker_runtime_exists",
+      "numeric_band_or_point": {
+        "type": "panel_values",
+        "values": {
+          "lean_ground_beef": 8.54,
+          "regular_ground_beef": 11.85,
+          "beyond": 6.10,
+          "impossible": 18.21,
+          "gen": 10.10
+        }
+      }
+    },
+    {
+      "id": "hernandez_2023_benzaldehyde_panel",
+      "compound": "benzaldehyde",
+      "source_citation": "Hernandez et al. (2023), Molecules 28:3151",
+      "doi": "10.3390/molecules28073151",
+      "matrix_context": "pbma_vs_beef_panel",
+      "analytical_method": "HS-SPME-GC-MS with 1,2-dichlorobenzene internal standard and 5-point calibration",
+      "units": "ng_per_g",
+      "benchmark_role": "directional_comparison_anchor",
+      "target_direction": "diagnose_pbma_strecker_or_heme_skew_without_using_it_as_a_primary_meat_target",
+      "pipeline_role": "reference_only",
+      "numeric_band_or_point": {
+        "type": "panel_values",
+        "values": {
+          "lean_ground_beef": 36.67,
+          "regular_ground_beef": 23.65,
+          "beyond": 62.07,
+          "impossible": 164.42,
+          "gen": 89.35
+        }
+      }
+    },
+    {
+      "id": "pmc12155365_sunflower_2_methylbutanal_fd_point",
+      "compound": "2-methylbutanal",
+      "source_citation": "PMC12155365 (2025)",
+      "doi": null,
+      "matrix_context": "roasted_sunflower_protein_140c_20min",
+      "analytical_method": "SAFE plus SPME GC-MS/O with internal standard, FD factors, and triplicates",
+      "units": "fd_factor",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "diagnostic_marker",
+      "target_direction": "keep_sunflower_as_a_roasted_strecker_positive_matrix_not_a_direct_meaty_proxy",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 2048.0,
+        "values": {
+          "descriptor": "malty_chocolate",
+          "origin": "ile_strecker_degradation"
+        }
+      }
+    },
+    {
+      "id": "pmc12155365_sunflower_3_methylbutanal_fd_point",
+      "compound": "3-methylbutanal",
+      "source_citation": "PMC12155365 (2025)",
+      "doi": null,
+      "matrix_context": "roasted_sunflower_protein_140c_20min",
+      "analytical_method": "SAFE plus SPME GC-MS/O with internal standard, FD factors, and triplicates",
+      "units": "fd_factor",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "diagnostic_marker",
+      "target_direction": "keep_sunflower_as_a_high_strecker_roasted_matrix_with_explicit_leucine_signal",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 2048.0,
+        "values": {
+          "descriptor": "malty_chocolate",
+          "origin": "leu_strecker_degradation"
+        }
+      }
+    }
+  ],
+  "pyrazine_reference_anchors": [
+    {
+      "id": "hernandez_2023_methylpyrazine_pbma_vs_beef",
+      "compound": "methylpyrazine",
+      "source_citation": "Hernandez et al. (2023), Molecules 28:3151",
+      "doi": "10.3390/molecules28073151",
+      "matrix_context": "pbma_vs_beef_panel",
+      "analytical_method": "HS-SPME-GC-MS with internal standard and calibration curve",
+      "units": "ng_per_g",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "optimization_constraint",
+      "target_direction": "avoid_pbma_overproduction",
+      "numeric_band_or_point": {
+        "type": "band_comparison",
+        "beef_band": [10.0, 13.0],
+        "pbma_band": [24.0, 39.0]
+      }
+    },
+    {
+      "id": "laemont_2023_pyrazine_ph_direction",
+      "compound": "pyrazine_family",
+      "source_citation": "Laemont & Barringer (2023), Foods 12(22):4155",
+      "doi": "10.3390/foods12224155",
+      "matrix_context": "sunflower_seed_plus_sugars",
+      "analytical_method": "SIFT-MS",
+      "units": "relative_units",
+      "benchmark_role": "directional_comparison_anchor",
+      "pipeline_role": "optimization_constraint",
+      "target_direction": "lower_pH_suppresses_pyrazines",
+      "numeric_band_or_point": {
+        "type": "directional_only",
+        "value": "pH 4 < pH 7 < pH 9 for total pyrazines; fructose > glucose for pyrazines"
+      }
+    },
+    {
+      "id": "arsa_2022_pyrazine_pH9_optimum",
+      "compound": "2-ethyl-3,5-dimethylpyrazine",
+      "source_citation": "Arsa & Theerakulkait (2022), J Food Science and Technology",
+      "doi": "PMC8814217",
+      "matrix_context": "rice_bran_hydrolysate_plus_fructose",
+      "analytical_method": "HS-SPME-GC-MS with odor activity value analysis",
+      "units": "oav",
+      "benchmark_role": "directional_comparison_anchor",
+      "pipeline_role": "optimization_constraint",
+      "target_direction": "avoid_alkaline_pyrazine_peak",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 26.26
+      }
+    },
+    {
+      "id": "wang_2021_arg_lys_pyrazine_yield",
+      "compound": "pyrazine_family",
+      "source_citation": "Wang et al. (2021), Foods 10:273",
+      "doi": "PMC7910932",
+      "matrix_context": "glucose_plus_lys_peptides_model_system",
+      "analytical_method": "HS-SPME-GC-MS",
+      "units": "percent_of_total_volatiles",
+      "benchmark_role": "low_confidence_mechanistic_anchor",
+      "pipeline_role": "optimization_constraint",
+      "target_direction": "peptide_sequence_can_raise_pyrazines",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 73.83
+      }
+    }
+  ],
+  "carbonyl_reference_anchors": [
+    {
+      "id": "hernandez_2023_furfural_ratio_anchor",
+      "compound": "furfural",
+      "source_citation": "Hernandez et al. (2023), Molecules 28:3151",
+      "doi": "10.3390/molecules28073151",
+      "matrix_context": "pbma_vs_meat_panel",
+      "analytical_method": "HS-SPME-GC-MS with internal standard and calibration curve",
+      "units": "ng_per_g",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "optimization_constraint",
+      "target_direction": "keep_low_relative_to_mft",
+      "numeric_band_or_point": {
+        "type": "band_comparison",
+        "meat_reference": 20.0,
+        "pbma_band": [987.0, 1093.0],
+        "preferred_ratio": 1.0
+      }
+    },
+    {
+      "id": "hernandez_2023_23_butanedione_direction",
+      "compound": "2,3-butanedione",
+      "source_citation": "Hernandez et al. (2023), Molecules 28:3151",
+      "doi": "10.3390/molecules28073151",
+      "matrix_context": "pbma_vs_meat_panel",
+      "analytical_method": "HS-SPME-GC-MS with internal standard and calibration curve",
+      "units": "directional",
+      "benchmark_role": "directional_comparison_anchor",
+      "pipeline_role": "diagnostic_marker",
+      "target_direction": "real_meat_higher_than_pbma",
+      "numeric_band_or_point": {
+        "type": "directional_only",
+        "value": "higher in real meat than in PBMA"
+      }
+    },
+    {
+      "id": "hernandez_2023_acetoin_direction",
+      "compound": "acetoin",
+      "source_citation": "Hernandez et al. (2023), Molecules 28:3151",
+      "doi": "10.3390/molecules28073151",
+      "matrix_context": "pbma_vs_meat_panel",
+      "analytical_method": "HS-SPME-GC-MS with internal standard and calibration curve",
+      "units": "directional",
+      "benchmark_role": "directional_comparison_anchor",
+      "pipeline_role": "diagnostic_marker",
+      "target_direction": "real_meat_higher_than_pbma",
+      "numeric_band_or_point": {
+        "type": "directional_only",
+        "value": "higher in real meat than in PBMA"
+      }
+    }
+  ],
+  "furanone_reference_anchors": [
+    {
+      "id": "blank_fay_1996_hemf_mechanistic_anchor",
+      "compound": "HEMF",
+      "source_citation": "Blank & Fay (1996), JAFC 44:531",
+      "doi": "10.1021/jf950439o",
+      "matrix_context": "free_pentose_plus_alanine_model_system",
+      "analytical_method": "GC-MS and GC-MS/MS with isotope labeling",
+      "units": "semi_quantitative",
+      "benchmark_role": "low_confidence_mechanistic_anchor",
+      "pipeline_role": "optimization_constraint",
+      "target_direction": "report_expected_positive_furanone_formation",
+      "numeric_band_or_point": {
+        "type": "directional_only",
+        "value": "forms from pentose plus alanine"
+      }
+    },
+    {
+      "id": "watanabe_2015_dmhf_meat_reference",
+      "compound": "DMHF",
+      "source_citation": "Watanabe et al. (2015), Meat Science",
+      "doi": null,
+      "matrix_context": "cooked_meat_multi_species",
+      "analytical_method": "GC-MS quantitative method",
+      "units": "pending_full_text",
+      "benchmark_role": "low_confidence_mechanistic_anchor",
+      "pipeline_role": "optimization_constraint",
+      "target_direction": "future_meat_like_positive_furanone_target",
+      "numeric_band_or_point": {
+        "type": "directional_only",
+        "value": "detected and quantified across species; exact values pending extraction"
+      }
+    },
+    {
+      "id": "blank_grosch_1991_beef_hdmf_band",
+      "compound": "HDMF",
+      "source_citation": "Blank & Grosch (1991)",
+      "doi": "10.1021/jf00009a012",
+      "matrix_context": "boiled_beef_100c_1h",
+      "analytical_method": "SAFE, GC-MS/O, AEDA, and SIDA with [2H4]-HDMF internal standard",
+      "units": "ug_per_kg",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "optimization_constraint",
+      "target_direction": "keep_hdmf_within_beef_relevant_brothy_caramel_band",
+      "numeric_band_or_point": {
+        "type": "range",
+        "min": 28.0,
+        "max": 67.0,
+        "values": {
+          "min_ug_per_kg": 28.0,
+          "max_ug_per_kg": 67.0,
+          "odor_detection_threshold_ug_per_kg": 6.0,
+          "oav_min": 4.7,
+          "oav_max": 11.2,
+          "fd_factor": 256.0
+        }
+      }
+    }
+  ],
+  "off_note_reference_anchors": [
+    {
+      "id": "bi_2020_raw_pea_hexanal_point",
+      "compound": "hexanal",
+      "source_citation": "Bi et al. (2020), J. Agric. Food Chem. 68:2718-2727",
+      "doi": "10.1021/acs.jafc.9b07711",
+      "matrix_context": "raw_pea_flour",
+      "analytical_method": "HS-SPME-GC-SIM with 2,4,6-trimethylpyridine internal standard",
+      "units": "ug_per_kg",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "track_raw_pea_off_note_burden_without_claiming_isolate_specificity",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 1260.0
+      }
+    },
+    {
+      "id": "bi_2020_roasted_pea_hexanal_point",
+      "compound": "hexanal",
+      "source_citation": "Bi et al. (2020), J. Agric. Food Chem. 68:2718-2727",
+      "doi": "10.1021/acs.jafc.9b07711",
+      "matrix_context": "roasted_pea_flour_160c_30min",
+      "analytical_method": "HS-SPME-GC-SIM with 2,4,6-trimethylpyridine internal standard",
+      "units": "ug_per_kg",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "report_roasting_driven_hexanal_drop_in_raw_pea_ingredients",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 324.0
+      }
+    },
+    {
+      "id": "liu_2023_ppi_hexanal_band",
+      "compound": "hexanal",
+      "source_citation": "Liu, Y. (2023 thesis)",
+      "doi": null,
+      "matrix_context": "native_pea_protein_isolate_aqueous_slurry",
+      "analytical_method": "HS-SPME-GC-MS with internal standard plus GC-O confirmation across commercial PPI lots",
+      "units": "ppb",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "retain_ppi_hexanal_baseline_as_structural_off_note_penalty",
+      "numeric_band_or_point": {
+        "type": "range",
+        "min": 15.0,
+        "max": 180.0,
+        "values": {
+          "min_ppb": 15.0,
+          "max_ppb": 180.0,
+          "oav_min": 3.0,
+          "oav_max": 40.0
+        }
+      }
+    },
+    {
+      "id": "liu_2023_ppi_nonanal_band",
+      "compound": "nonanal",
+      "source_citation": "Liu, Y. (2023 thesis)",
+      "doi": null,
+      "matrix_context": "native_pea_protein_isolate_aqueous_slurry",
+      "analytical_method": "HS-SPME-GC-MS with internal standard plus GC-O confirmation across commercial PPI lots",
+      "units": "ppb",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "retain_ppi_nonanal_baseline_as_secondary_fatty_off_note_anchor",
+      "numeric_band_or_point": {
+        "type": "range",
+        "min": 5.0,
+        "max": 50.0,
+        "values": {
+          "min_ppb": 5.0,
+          "max_ppb": 50.0,
+          "oav_min": 5.0,
+          "oav_max": 50.0
+        }
+      }
+    },
+    {
+      "id": "liu_2023_ppi_heptadienal_band",
+      "compound": "(E,E)-2,4-heptadienal",
+      "source_citation": "Liu, Y. (2023 thesis)",
+      "doi": null,
+      "matrix_context": "native_pea_protein_isolate_aqueous_slurry",
+      "analytical_method": "HS-SPME-GC-MS with internal standard plus GC-O confirmation across commercial PPI lots",
+      "units": "ppb",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "retain_ppi_rancid_unsaturated_aldehyde_band_as_structural_off_note_anchor",
+      "numeric_band_or_point": {
+        "type": "range",
+        "min": 0.5,
+        "max": 8.0,
+        "values": {
+          "min_ppb": 0.5,
+          "max_ppb": 8.0,
+          "oav_min": 7.0,
+          "oav_max": 114.0
+        }
+      }
+    },
+    {
+      "id": "liu_2023_ppi_ibmp_band",
+      "compound": "3-isobutyl-2-methoxypyrazine",
+      "source_citation": "Liu, Y. (2023 thesis)",
+      "doi": null,
+      "matrix_context": "native_pea_protein_isolate_aqueous_slurry",
+      "analytical_method": "HS-SPME-GC-MS with internal standard plus GC-O confirmation across commercial PPI lots",
+      "units": "ppb",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "treat_methoxypyrazine_as_persistent_raw_pea_penalty_not_removed_by_maillard_support",
+      "numeric_band_or_point": {
+        "type": "range",
+        "min": 0.0,
+        "max": 0.08,
+        "values": {
+          "min_ppb": 0.0,
+          "max_ppb": 0.08,
+          "odor_detection_threshold_ppb": 0.002,
+          "oav_floor": 1.0
+        }
+      }
+    },
+    {
+      "id": "pmc11049305_spirulina_beta_ionone_oav_floor",
+      "compound": "beta-ionone",
+      "source_citation": "PMC11049305 (2024)",
+      "doi": null,
+      "matrix_context": "commercial_spirulina_food_supplements",
+      "analytical_method": "HS-SPME-GC-MS with internal standard, triplicates, and OAV calculation",
+      "units": "oav",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "treat_spirulina_as_a_high_penalty_marine_matrix_until_lipid_extraction_is_explicitly_modeled",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 100.0,
+        "values": {
+          "oav_floor": 100.0,
+          "descriptor": "seaweed_floral_fishy"
+        }
+      }
+    },
+    {
+      "id": "pmc11049305_spirulina_1_octen_3_ol_oav_point",
+      "compound": "1-octen-3-ol",
+      "source_citation": "PMC11049305 (2024)",
+      "doi": null,
+      "matrix_context": "commercial_spirulina_food_supplements",
+      "analytical_method": "HS-SPME-GC-MS with internal standard, triplicates, and OAV calculation",
+      "units": "oav",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "keep_the_mushroom_fishy_marker_visible_in_spirulina_matrix_scope_reporting",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 10.0
+      }
+    },
+    {
+      "id": "pmc11049305_spirulina_hexanal_oav_band",
+      "compound": "hexanal",
+      "source_citation": "PMC11049305 (2024)",
+      "doi": null,
+      "matrix_context": "commercial_spirulina_food_supplements",
+      "analytical_method": "HS-SPME-GC-MS with internal standard, triplicates, and OAV calculation",
+      "units": "oav",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "retain_hexanal_as_a_secondary_off_note_in_spirulina_below_the_beta_ionone_penalty",
+      "numeric_band_or_point": {
+        "type": "range",
+        "min": 2.0,
+        "max": 8.0
+      }
+    },
+    {
+      "id": "pmc12155365_sunflower_4_vinylguaiacol_fd_point",
+      "compound": "4-vinylguaiacol",
+      "source_citation": "PMC12155365 (2025)",
+      "doi": null,
+      "matrix_context": "roasted_sunflower_protein_140c_20min",
+      "analytical_method": "SAFE plus SPME GC-MS/O with internal standard, FD factors, and triplicates",
+      "units": "fd_factor",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "keep_chlorogenic_acid_derived_phenolic_interference_explicit_in_sunflower_reporting",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 512.0,
+        "values": {
+          "descriptor": "clove_smoky",
+          "origin": "chlorogenic_acid_degradation"
+        }
+      }
+    },
+    {
+      "id": "li_2026_spi_wg_hme_hexanal_control_point",
+      "compound": "hexanal",
+      "source_citation": "Li et al. (2026), Foods 15(5):912",
+      "doi": "10.3390/foods15050912",
+      "matrix_context": "spi_wheat_gluten_hme_control_57pct_moisture",
+      "analytical_method": "HS-SPME-GC-MS with isotopic internal standards across HME control and pretreated WG runs",
+      "units": "ug_per_kg",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "track_family_11_hme_hexanal_baseline_without_claiming_executable_benchmark_closure",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 605.6
+      }
+    },
+    {
+      "id": "li_2026_spi_wg_hme_heptanal_control_point",
+      "compound": "heptanal",
+      "source_citation": "Li et al. (2026), Foods 15(5):912",
+      "doi": "10.3390/foods15050912",
+      "matrix_context": "spi_wheat_gluten_hme_control_57pct_moisture",
+      "analytical_method": "HS-SPME-GC-MS with isotopic internal standards across HME control and pretreated WG runs",
+      "units": "ug_per_kg",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "retain_family_11_heptanal_baseline_as_supporting_off_note_panel_evidence",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 89.8
+      }
+    },
+    {
+      "id": "li_2026_spi_wg_hme_nonanal_control_point",
+      "compound": "nonanal",
+      "source_citation": "Li et al. (2026), Foods 15(5):912",
+      "doi": "10.3390/foods15050912",
+      "matrix_context": "spi_wheat_gluten_hme_control_57pct_moisture",
+      "analytical_method": "HS-SPME-GC-MS with isotopic internal standards across HME control and pretreated WG runs",
+      "units": "ug_per_kg",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "retain_family_11_nonanal_baseline_as_supporting_off_note_panel_evidence",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 29.42
+      }
+    },
+    {
+      "id": "li_2026_spi_wg_hme_1_hexanol_control_point",
+      "compound": "1-hexanol",
+      "source_citation": "Li et al. (2026), Foods 15(5):912",
+      "doi": "10.3390/foods15050912",
+      "matrix_context": "spi_wheat_gluten_hme_control_57pct_moisture",
+      "analytical_method": "HS-SPME-GC-MS with isotopic internal standards across HME control and pretreated WG runs",
+      "units": "ug_per_kg",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "retain_family_11_1_hexanol_baseline_as_supporting_off_note_panel_evidence",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 20.04
+      }
+    },
+    {
+      "id": "li_2026_spi_wg_hme_2_pentylfuran_control_point",
+      "compound": "2-pentylfuran",
+      "source_citation": "Li et al. (2026), Foods 15(5):912",
+      "doi": "10.3390/foods15050912",
+      "matrix_context": "spi_wheat_gluten_hme_control_57pct_moisture",
+      "analytical_method": "HS-SPME-GC-MS with isotopic internal standards across HME control and pretreated WG runs",
+      "units": "ug_per_kg",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "retain_family_11_2_pentylfuran_baseline_as_supporting_off_note_panel_evidence",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 221.51
+      }
+    },
+    {
+      "id": "wang_2022_lab_hexanal_cleanup_oav_target",
+      "compound": "hexanal",
+      "source_citation": "Wang et al. (2022), PMC9751450",
+      "doi": null,
+      "matrix_context": "lab_fermented_plant_protein",
+      "analytical_method": "SIDA-guided volatile profiling with ADH/ALDH mechanism confirmation and sensory panel",
+      "units": "oav",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "optimization_constraint",
+      "target_direction": "push_hexanal_below_threshold_after_fermentation_cleanup",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 0.47,
+        "values": {
+          "residual_hexanal_oav": 0.47,
+          "hexanal_depletion_fraction": 0.957
+        }
+      }
+    },
+    {
+      "id": "marquez_ruiz_2014_oleic_nonanal_oav_band",
+      "compound": "nonanal",
+      "source_citation": "Marquez-Ruiz et al. (2014), JAFC 62:10295",
+      "doi": "10.1021/jf502636m",
+      "matrix_context": "high_oleic_olive_oil_deep_frying_180c",
+      "analytical_method": "HS-SPME-GC-MS with hexanal-d12 internal standard across frying-cycle samples",
+      "units": "oav",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "optimization_constraint",
+      "target_direction": "favor_oleic_rich_oils_where_nonanal_dominates_while_hexanal_stays_near_or_below_threshold",
+      "numeric_band_or_point": {
+        "type": "range",
+        "min": 8.0,
+        "max": 22.0,
+        "values": {
+          "nonanal_oav_min": 8.0,
+          "nonanal_oav_max": 22.0,
+          "hexanal_oav_ceiling": 1.5,
+          "temperature_c": 180.0,
+          "frying_cycle_range": [0, 20]
+        }
+      }
+    },
+    {
+      "id": "messina_2022_pbma_oil_oav_panel",
+      "compound": "oil_volatile_profile",
+      "source_citation": "Messina et al. (2022)",
+      "doi": null,
+      "matrix_context": "spi_based_burger_oil_comparison_cooked_to_72c_internal",
+      "analytical_method": "HS-SPME-GC-MS with internal standard across cooked burger oil treatments",
+      "units": "oav",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "optimization_constraint",
+      "target_direction": "prefer_high_oleic_or_balanced_blend_oils_over_canola_or_coconut_extremes_for_pbma_off_note_control",
+      "numeric_band_or_point": {
+        "type": "panel_values",
+        "values": {
+          "canola": {
+            "hexanal_oav_mean": 28.0,
+            "hexanal_oav_sd": 4.0,
+            "nonanal_oav_mean": 6.0,
+            "nonanal_oav_sd": 1.0,
+            "delta_decalactone_oav_max": 1.0
+          },
+          "sunflower_high_oleic": {
+            "hexanal_oav_mean": 9.0,
+            "hexanal_oav_sd": 2.0,
+            "nonanal_oav_mean": 12.0,
+            "nonanal_oav_sd": 2.0,
+            "delta_decalactone_oav_max": 1.0
+          },
+          "coconut": {
+            "hexanal_oav_max": 1.0,
+            "nonanal_oav_max": 1.0,
+            "delta_decalactone_oav_mean": 14.0,
+            "delta_decalactone_oav_sd": 3.0
+          },
+          "coconut_canola_3_1": {
+            "hexanal_oav_mean": 4.0,
+            "hexanal_oav_sd": 1.0,
+            "nonanal_oav_mean": 5.0,
+            "nonanal_oav_sd": 1.0,
+            "delta_decalactone_oav_mean": 4.0,
+            "delta_decalactone_oav_sd": 1.0
+          }
+        }
+      }
+    }
+  ]
+}

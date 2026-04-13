@@ -17,8 +17,12 @@ from src.benchmark_types import BenchmarkEvaluation, CompoundComparison
 from src.presentation import render_benchmark_summary_markdown
 
 
-def test_benchmark_summary_separates_supported_and_unsupported_cases(benchmark_summary_matrix_scope):
-    summaries = benchmark_summary_matrix_scope
+def test_benchmark_summary_separates_supported_and_unsupported_cases():
+    summaries = summarize_benchmarks([
+        ROOT / "data" / "benchmarks" / "cys_glucose_150C_Farmer1999.json",
+        ROOT / "data" / "benchmarks" / "pea_isolate_40C_PratapSingh2021.json",
+        ROOT / "data" / "benchmarks" / "soy_isolate_40C_PratapSingh2021.json",
+    ])
 
     by_id = {summary.benchmark_id: summary for summary in summaries}
 
@@ -46,8 +50,12 @@ def test_benchmark_summary_separates_supported_and_unsupported_cases(benchmark_s
     assert by_id["soy_isolate_40C_PratapSingh2021"].overall_status in {"pass", "pass-no-ranking", "scale-gap", "ranking-gap"}
 
 
-def test_benchmark_summary_markdown_includes_gap_labels(benchmark_summary_matrix_scope):
-    summaries = benchmark_summary_matrix_scope
+def test_benchmark_summary_markdown_includes_gap_labels():
+    summaries = summarize_benchmarks([
+        ROOT / "data" / "benchmarks" / "cys_glucose_150C_Farmer1999.json",
+        ROOT / "data" / "benchmarks" / "pea_isolate_40C_PratapSingh2021.json",
+        ROOT / "data" / "benchmarks" / "soy_isolate_40C_PratapSingh2021.json",
+    ])
 
     markdown = render_benchmark_summary_markdown(summaries)
 
@@ -67,8 +75,12 @@ def test_benchmark_summary_markdown_includes_gap_labels(benchmark_summary_matrix
     assert "Payload Roles" in markdown
 
 
-def test_family_lane_validation_artifact_groups_benchmarks_by_family_and_lane(family_lane_validation_payload):
-    payload = family_lane_validation_payload
+def test_family_lane_validation_artifact_groups_benchmarks_by_family_and_lane():
+    payload = build_family_lane_validation_artifact([
+        ROOT / "data" / "benchmarks" / "cys_glucose_150C_Farmer1999.json",
+        ROOT / "data" / "benchmarks" / "pea_isolate_40C_PratapSingh2021.json",
+        ROOT / "data" / "benchmarks" / "soy_isolate_40C_PratapSingh2021.json",
+    ])
 
     assert payload["summary"]["benchmark_count"] == 3
     assert payload["summary"]["lane_count"] >= 2

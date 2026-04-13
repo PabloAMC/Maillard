@@ -1,10 +1,8 @@
 from __future__ import annotations
 
-from copy import deepcopy
 import json
 import os
 from contextlib import contextmanager
-from functools import lru_cache
 from pathlib import Path
 from typing import Any, Dict, Iterable, Iterator, List, Mapping, Optional
 
@@ -22,11 +20,6 @@ DEFAULT_FAMILY_OFFSET_KEYS: Dict[str, str] = {
     "aminoketone_condensation": "aminoketone_condensation",
     "retro_aldol": "retro_aldol",
 }
-
-
-def _benchmark_cache_key(benchmark_files: Optional[Iterable[Path | str]]) -> tuple[str, ...]:
-    files = list(benchmark_files) if benchmark_files is not None else get_benchmark_files()
-    return tuple(str(Path(file_path).resolve()) for file_path in files)
 
 
 def _status_score(status: str) -> int:
@@ -62,15 +55,15 @@ def _barrier_offsets(offsets: Mapping[str, float]) -> Iterator[None]:
             os.environ["BARRIER_OFFSETS"] = previous
 
 
-@lru_cache(maxsize=8)
-def _build_family_sensitivity_artifact_cached(
-    benchmark_file_keys: tuple[str, ...],
-    target_tag: str,
-    delta_kcal: float,
-    family_offset_items: tuple[tuple[str, str], ...],
+def build_family_sensitivity_artifact(
+    benchmark_files: Optional[Iterable[Path | str]] = None,
+    *,
+    target_tag: str = DEFAULT_TARGET_TAG,
+    delta_kcal: float = 3.0,
+    family_offset_keys: Optional[Mapping[str, str]] = None,
 ) -> Dict[str, Any]:
-    family_map = dict(family_offset_items)
-    bench_files = [Path(file_path) for file_path in benchmark_file_keys]
+    family_map = dict(family_offset_keys or DEFAULT_FAMILY_OFFSET_KEYS)
+    bench_files = list(benchmark_files) if benchmark_files is not None else get_benchmark_files()
     benchmark_contexts: List[Dict[str, Any]] = []
 
     for bench_file in bench_files:
@@ -200,24 +193,6 @@ def _build_family_sensitivity_artifact_cached(
         },
         "families": family_rows,
     }
-
-
-def build_family_sensitivity_artifact(
-    benchmark_files: Optional[Iterable[Path | str]] = None,
-    *,
-    target_tag: str = DEFAULT_TARGET_TAG,
-    delta_kcal: float = 3.0,
-    family_offset_keys: Optional[Mapping[str, str]] = None,
-) -> Dict[str, Any]:
-    family_map = dict(family_offset_keys or DEFAULT_FAMILY_OFFSET_KEYS)
-    return deepcopy(
-        _build_family_sensitivity_artifact_cached(
-            _benchmark_cache_key(benchmark_files),
-            target_tag,
-            float(delta_kcal),
-            tuple(sorted((str(key), str(value)) for key, value in family_map.items())),
-        )
-    )
 
 
 def render_family_sensitivity_markdown(payload: Mapping[str, Any]) -> str:

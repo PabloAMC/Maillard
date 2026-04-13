@@ -1,0 +1,1921 @@
+{
+  "generated_at": "2026-03-28",
+  "description": "Computational prior registry for matrix accessibility, retention, and process-state behavior. These priors are the cheap-first calibration layer used before any expensive QM refinement.",
+  "section_family_metadata": {
+    "accessibility_windows": {
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "matrix_state_support"
+      ],
+      "supporting_families": [
+        "06"
+      ]
+    },
+    "denaturation_heuristics": {
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "matrix_state_support"
+      ],
+      "supporting_families": [
+        "06"
+      ]
+    },
+    "volatile_class_profiles": {
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "matrix_state_support",
+        "retention_support"
+      ],
+      "supporting_families": [
+        "06"
+      ]
+    },
+    "matrix_corrections": {
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "matrix_state_support",
+        "calibration_anchor"
+      ],
+      "supporting_families": [
+        "06"
+      ]
+    },
+    "pyrazine_control_priors": {
+      "chemistry_family": "amino_acid_sugar_core",
+      "slr_family_source": "01",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "pyrazine",
+        "optimization_constraint"
+      ],
+      "process_state_scope": [
+        "ambient_slurry",
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "07"
+      ]
+    },
+    "strecker_crosstalk_priors": {
+      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
+      "slr_family_source": "02",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "crosstalk",
+        "guardrail",
+        "off_note"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "08"
+      ]
+    },
+    "furanone_priors": {
+      "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
+      "slr_family_source": "09",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "furanone",
+        "caramelization_support"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "01"
+      ]
+    },
+    "thiamine_pathway_priors": {
+      "chemistry_family": "thiamine_fragmentation_support",
+      "slr_family_source": "03",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "thiamine_support",
+        "sulfur_support"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "10"
+      ]
+    },
+    "nucleotide_pathway_priors": {
+      "chemistry_family": "nucleotide_and_ribose_support",
+      "slr_family_source": "04",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "nucleotide_support",
+        "umami_support",
+        "ribose_delivery"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "07",
+        "10"
+      ]
+    },
+    "carbonyl_donor_priors": {
+      "chemistry_family": "carbonyl_donor_hierarchy",
+      "slr_family_source": "07",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "donor_hierarchy",
+        "carbonyl_donor",
+        "arrhenius_anchor"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "03",
+        "04",
+        "09",
+        "10"
+      ]
+    },
+    "sulfur_peptide_priors": {
+      "chemistry_family": "glutathione_and_peptide_support",
+      "slr_family_source": "05",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "sulfur_support",
+        "peptide_support",
+        "matrix_intake"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "01",
+        "10"
+      ]
+    },
+    "retention_binding_priors": {
+      "chemistry_family": "lipid_maillard_crosstalk",
+      "slr_family_source": "11",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "retention_support",
+        "binding_support",
+        "sulfur_support"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "01",
+        "10"
+      ]
+    },
+    "dicarbonyl_sink_priors": {
+      "chemistry_family": "polyphenol_amino_capping",
+      "slr_family_source": "13",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "guardrail",
+        "safety",
+        "dicarbonyl_sink"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "08",
+        "12"
+      ]
+    },
+    "polyphenol_thiol_capping_priors": {
+      "chemistry_family": "polyphenol_amino_capping",
+      "slr_family_source": "13",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "guardrail",
+        "sulfur_support",
+        "cysteine_sink"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "05",
+        "13"
+      ]
+    },
+    "lipid_offnote_priors": {
+      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
+      "slr_family_source": "02",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "off_note",
+        "guardrail",
+        "lipid_oxidation"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "08",
+        "11"
+      ]
+    },
+    "dicarbonyl_fragmentation_priors": {
+      "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
+      "slr_family_source": "09",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "dicarbonyl",
+        "caramelization_support",
+        "guardrail"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "08",
+        "12",
+        "14"
+      ]
+    },
+    "ascorbic_pathway_priors": {
+      "chemistry_family": "ascorbic_acid_maillard",
+      "slr_family_source": "14",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "ascorbic_support",
+        "arrhenius_anchor",
+        "dicarbonyl"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "12",
+        "14"
+      ]
+    },
+    "melanoidin_trapping_priors": {
+      "chemistry_family": "melanoidin_polymerization",
+      "slr_family_source": "16",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "trapping_support",
+        "melanoidin",
+        "sulfur_support"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "01",
+        "05",
+        "16"
+      ]
+    }
+  },
+  "accessibility_windows": [
+    {
+      "protein_type": "pea_iso",
+      "lysine_min": 0.3,
+      "lysine_max": 0.45,
+      "cysteine_min": 0.0,
+      "cysteine_max": 0.08,
+      "source": "Asen 2022 DSC/DTNB + Li 2025 Ellman SH envelope, retained as a conservative pea-isolate interpolation while exact benchmark-condition values remain unmeasured",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "calibration_grade_transfer",
+      "process_state_applicability": [
+        "ambient_slurry",
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "notes": "Directly informed by validated pea process-state anchors, but still transferred to the benchmark condition rather than measured there."
+    },
+    {
+      "protein_type": "soy_iso",
+      "lysine_min": 0.36,
+      "lysine_max": 0.5,
+      "cysteine_min": 0.1,
+      "cysteine_max": 0.24,
+      "source": "Foods 11(21):3505 soy free-SH anchor for native versus 70 C SPI plus repo synthesis from Kutzli 2020 / Naik 2021 on glycinin and beta-conglycinin burial",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "calibration_grade_transfer",
+      "process_state_applicability": [
+        "ambient_slurry",
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "notes": "Soy isolate accessibility is now tied to a direct SPI Ellman anchor, while exact benchmark-condition transfer still remains unresolved."
+    },
+    {
+      "protein_type": "myco",
+      "lysine_min": 0.42,
+      "lysine_max": 0.58,
+      "cysteine_min": 0.18,
+      "cysteine_max": 0.3,
+      "source": "Bounded mycoprotein accessibility prior from fungal cell-wall entrapment and heat-softening literature synthesis retained as a directional planning prior",
+      "provenance_tier": "literature_bounded_provisional",
+      "confidence_tier": "low_medium",
+      "uncertainty_posture": "directional_only",
+      "process_state_applicability": [
+        "ambient_slurry",
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "notes": "Mycoprotein is now a first-class matrix family with explicit bounded priors, but the window remains directional until direct free-SH / free-amino anchors are encoded."
+    }
+  ],
+  "denaturation_heuristics": [
+    {
+      "protein_type": "pea_iso",
+      "midpoint_celsius": 82.0,
+      "width_celsius": 14.0,
+      "time_gain_celsius": 6.0,
+      "time_reference_minutes": 10.0,
+      "acidic_ph_gain_celsius": 2.5,
+      "reference_ph": 6.0,
+      "source": "Asen 2022 DSC/DTNB thermal window + Li 2025 free-SH response; calibrated so pea isolate stays mostly native at 40C but opens progressively by 90-140C",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "calibration_grade_transfer",
+      "process_state_applicability": [
+        "ambient_slurry",
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "notes": "This is a low-cost interpolation heuristic derived from pea literature anchors, not a direct benchmark fit."
+    },
+    {
+      "protein_type": "pea_conc",
+      "midpoint_celsius": 84.0,
+      "width_celsius": 14.0,
+      "time_gain_celsius": 5.5,
+      "time_reference_minutes": 10.0,
+      "acidic_ph_gain_celsius": 2.0,
+      "reference_ph": 6.0,
+      "source": "Pea concentrate inherits the Asen 2022 / Li 2025 pea thermal envelope with a modest fiber-burial penalty",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "directional_transfer",
+      "process_state_applicability": [
+        "ambient_slurry",
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "notes": "Concentrate values remain transferred from isolate-scale anchors with an explicit burial penalty."
+    },
+    {
+      "protein_type": "soy_iso",
+      "midpoint_celsius": 84.0,
+      "width_celsius": 14.0,
+      "time_gain_celsius": 5.0,
+      "time_reference_minutes": 10.0,
+      "acidic_ph_gain_celsius": 2.0,
+      "reference_ph": 6.0,
+      "source": "Foods 11(21):3505 free-SH increase at 70 C plus soy globulin burial synthesis from Kutzli 2020 / Naik 2021",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "calibration_grade_transfer",
+      "process_state_applicability": [
+        "ambient_slurry",
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "notes": "Soy process-state realism now includes a direct SPI free-SH anchor, but exact benchmark-condition denaturation still remains transferred rather than measured."
+    },
+    {
+      "protein_type": "soy_conc",
+      "midpoint_celsius": 86.0,
+      "width_celsius": 14.0,
+      "time_gain_celsius": 4.5,
+      "time_reference_minutes": 10.0,
+      "acidic_ph_gain_celsius": 1.8,
+      "reference_ph": 6.0,
+      "source": "Soy concentrate inherits the soy-isolate thermal envelope with added concentrate burial",
+      "provenance_tier": "repo_literature_synthesis",
+      "confidence_tier": "low_medium",
+      "uncertainty_posture": "directional_transfer",
+      "process_state_applicability": [
+        "ambient_slurry",
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "notes": "Concentrate state is an explicit prior, not a measured calibration."
+    },
+    {
+      "protein_type": "myco",
+      "midpoint_celsius": 78.0,
+      "width_celsius": 12.0,
+      "time_gain_celsius": 5.0,
+      "time_reference_minutes": 10.0,
+      "acidic_ph_gain_celsius": 1.5,
+      "reference_ph": 6.0,
+      "source": "Bounded mycoprotein thermal-opening prior derived from fungal-protein heat-softening literature synthesis",
+      "provenance_tier": "literature_bounded_provisional",
+      "confidence_tier": "low_medium",
+      "uncertainty_posture": "directional_only",
+      "process_state_applicability": [
+        "ambient_slurry",
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "notes": "Directional mycoprotein process-state prior only; use for planning and trust reporting rather than quantitative closure."
+    }
+  ],
+  "volatile_class_profiles": [
+    {
+      "protein_type": "pea_iso",
+      "native_factors": {
+        "aldehyde": 0.82,
+        "furan": 0.92,
+        "alcohol": 1.05,
+        "sulfur": 1.08,
+        "pyrazine": 1.02,
+        "other": 1.0
+      },
+      "denatured_factors": {
+        "aldehyde": 0.92,
+        "furan": 0.97,
+        "alcohol": 1.02,
+        "sulfur": 1.04,
+        "pyrazine": 1.0,
+        "other": 1.0
+      },
+      "source": "Conservative class-aware trapping overlay: aldehydes bind most strongly, sulfur volatiles and alcohols escape somewhat more readily",
+      "provenance_tier": "mechanistic_surrogate",
+      "confidence_tier": "low_medium",
+      "uncertainty_posture": "class_surrogate",
+      "process_state_applicability": [
+        "ambient_slurry",
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "notes": "Used as a class-level surrogate until compound-specific matrix retention data exists for meaty sulfur targets."
+    },
+    {
+      "protein_type": "pea_conc",
+      "native_factors": {
+        "aldehyde": 0.78,
+        "furan": 0.88,
+        "alcohol": 1.03,
+        "sulfur": 1.05,
+        "pyrazine": 1.0,
+        "other": 1.0
+      },
+      "denatured_factors": {
+        "aldehyde": 0.88,
+        "furan": 0.94,
+        "alcohol": 1.01,
+        "sulfur": 1.03,
+        "pyrazine": 1.0,
+        "other": 1.0
+      },
+      "source": "Pea concentrate inherits stronger aldehyde/furan trapping from the pea family plus a concentrate penalty",
+      "provenance_tier": "mechanistic_surrogate",
+      "confidence_tier": "low_medium",
+      "uncertainty_posture": "class_surrogate",
+      "process_state_applicability": [
+        "ambient_slurry",
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "notes": "Concentrate trapping remains a structured prior."
+    },
+    {
+      "protein_type": "soy_iso",
+      "native_factors": {
+        "aldehyde": 0.88,
+        "furan": 0.96,
+        "alcohol": 1.04,
+        "sulfur": 1.06,
+        "pyrazine": 1.01,
+        "other": 1.0
+      },
+      "denatured_factors": {
+        "aldehyde": 0.95,
+        "furan": 0.99,
+        "alcohol": 1.02,
+        "sulfur": 1.03,
+        "pyrazine": 1.0,
+        "other": 1.0
+      },
+      "source": "Conservative soy overlay: aldehydes still bind more strongly than sulfur/alcohol classes, but less severely than pea",
+      "provenance_tier": "mechanistic_surrogate",
+      "confidence_tier": "low_medium",
+      "uncertainty_posture": "class_surrogate",
+      "process_state_applicability": [
+        "ambient_slurry",
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "notes": "Useful for relative ranking, not for direct quantitative release claims."
+    },
+    {
+      "protein_type": "soy_conc",
+      "native_factors": {
+        "aldehyde": 0.84,
+        "furan": 0.93,
+        "alcohol": 1.03,
+        "sulfur": 1.04,
+        "pyrazine": 1.0,
+        "other": 1.0
+      },
+      "denatured_factors": {
+        "aldehyde": 0.91,
+        "furan": 0.97,
+        "alcohol": 1.01,
+        "sulfur": 1.02,
+        "pyrazine": 1.0,
+        "other": 1.0
+      },
+      "source": "Soy concentrate inherits the soy family overlay with added burial",
+      "provenance_tier": "mechanistic_surrogate",
+      "confidence_tier": "low_medium",
+      "uncertainty_posture": "class_surrogate",
+      "process_state_applicability": [
+        "ambient_slurry",
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "notes": "Still a cheap-first surrogate layer."
+    },
+    {
+      "protein_type": "myco",
+      "native_factors": {
+        "aldehyde": 0.92,
+        "furan": 0.98,
+        "alcohol": 1.02,
+        "sulfur": 1.03,
+        "pyrazine": 1.0,
+        "other": 1.0
+      },
+      "denatured_factors": {
+        "aldehyde": 0.97,
+        "furan": 1.0,
+        "alcohol": 1.01,
+        "sulfur": 1.01,
+        "pyrazine": 1.0,
+        "other": 1.0
+      },
+      "source": "Bounded mycoprotein class overlay retained as a literature-bounded directional surrogate",
+      "provenance_tier": "literature_bounded_provisional",
+      "confidence_tier": "low_medium",
+      "uncertainty_posture": "directional_only",
+      "process_state_applicability": [
+        "ambient_slurry",
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "notes": "Use for directional matrix-family comparisons until direct mycoprotein release data is encoded."
+    }
+  ],
+  "matrix_corrections": [
+    {
+      "protein_type": "free",
+      "lysine_accessibility_mid": 1.0,
+      "cysteine_accessibility_mid": 1.0,
+      "lysine_accessibility_native": 1.0,
+      "lysine_accessibility_denatured": 1.0,
+      "cysteine_accessibility_native": 1.0,
+      "cysteine_accessibility_denatured": 1.0,
+      "volatile_retention_mid": 1.0,
+      "volatile_retention_native": 1.0,
+      "volatile_retention_denatured": 1.0,
+      "source": "Model system, no matrix correction",
+      "provenance_tier": "direct_model_assumption",
+      "confidence_tier": "high",
+      "uncertainty_posture": "direct_reference",
+      "process_state_applicability": [
+        "ambient_slurry",
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "notes": "Reference free-amino-acid baseline."
+    },
+    {
+      "protein_type": "pea_iso",
+      "lysine_accessibility_mid": 0.38,
+      "cysteine_accessibility_mid": 0.04,
+      "lysine_accessibility_native": 0.32,
+      "lysine_accessibility_denatured": 0.44,
+      "cysteine_accessibility_native": 0.01,
+      "cysteine_accessibility_denatured": 0.07,
+      "volatile_retention_mid": 0.5,
+      "volatile_retention_native": 0.42,
+      "volatile_retention_denatured": 0.58,
+      "source": "Asen 2022 DSC/DTNB + Li 2025 Ellman SH envelope; values remain a conservative PPI interpolation because the exact 95C pH 5.5 benchmark condition still lacks direct wet-lab measurement",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "calibration_grade_transfer",
+      "process_state_applicability": [
+        "ambient_slurry",
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "notes": "This is a reliability improvement over a generic heuristic because the numbers now explicitly track the validated pea process-state literature."
+    },
+    {
+      "protein_type": "pea_conc",
+      "lysine_accessibility_mid": 0.28,
+      "cysteine_accessibility_mid": 0.03,
+      "lysine_accessibility_native": 0.22,
+      "lysine_accessibility_denatured": 0.34,
+      "cysteine_accessibility_native": 0.005,
+      "cysteine_accessibility_denatured": 0.055,
+      "volatile_retention_mid": 0.35,
+      "volatile_retention_native": 0.27,
+      "volatile_retention_denatured": 0.43,
+      "source": "Pea-isolate accessibility envelope with added fiber burial penalty",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "directional_transfer",
+      "process_state_applicability": [
+        "ambient_slurry",
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "notes": "Concentrate values remain transferred from isolate anchors."
+    },
+    {
+      "protein_type": "soy_iso",
+      "lysine_accessibility_mid": 0.43,
+      "cysteine_accessibility_mid": 0.17,
+      "lysine_accessibility_native": 0.38,
+      "lysine_accessibility_denatured": 0.48,
+      "cysteine_accessibility_native": 0.14,
+      "cysteine_accessibility_denatured": 0.2,
+      "volatile_retention_mid": 0.55,
+      "volatile_retention_native": 0.47,
+      "volatile_retention_denatured": 0.63,
+      "source": "Soy isolate envelope anchored to Foods 11(21):3505 free-SH shift plus repo literature on glycinin and beta-conglycinin burial and accessibility transfer",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "calibration_grade_transfer",
+      "process_state_applicability": [
+        "ambient_slurry",
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "notes": "Still a transferred correction rather than a direct benchmark-condition fit, but no longer a pure repo-only synthesis."
+    },
+    {
+      "protein_type": "soy_conc",
+      "lysine_accessibility_mid": 0.34,
+      "cysteine_accessibility_mid": 0.15,
+      "lysine_accessibility_native": 0.3,
+      "lysine_accessibility_denatured": 0.38,
+      "cysteine_accessibility_native": 0.11,
+      "cysteine_accessibility_denatured": 0.19,
+      "volatile_retention_mid": 0.45,
+      "volatile_retention_native": 0.37,
+      "volatile_retention_denatured": 0.53,
+      "source": "Soy concentrate envelope derived from soy-isolate globulin burial (glycinin/beta-conglycinin) with added fiber/concentrate penalty; repo anchors: Kutzli 2020 / Naik 2021 synthesis plus soy-polysaccharide conjugation trapping notes in docs/Maillard_Plant_based.md",
+      "provenance_tier": "repo_literature_synthesis",
+      "confidence_tier": "low_medium",
+      "uncertainty_posture": "directional_transfer",
+      "process_state_applicability": [
+        "ambient_slurry",
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "notes": "Explicit prior rather than direct calibration."
+    },
+    {
+      "protein_type": "myco",
+      "lysine_accessibility_mid": 0.5,
+      "cysteine_accessibility_mid": 0.24,
+      "lysine_accessibility_native": 0.42,
+      "lysine_accessibility_denatured": 0.58,
+      "cysteine_accessibility_native": 0.18,
+      "cysteine_accessibility_denatured": 0.3,
+      "volatile_retention_mid": 0.6,
+      "volatile_retention_native": 0.54,
+      "volatile_retention_denatured": 0.66,
+      "source": "Bounded mycoprotein correction prior from fungal-matrix accessibility and release literature synthesis",
+      "provenance_tier": "literature_bounded_provisional",
+      "confidence_tier": "low_medium",
+      "uncertainty_posture": "directional_only",
+      "process_state_applicability": [
+        "ambient_slurry",
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "notes": "Directional mycoprotein prior only; intended for bounded ranking support and trust reporting rather than quantitative closure."
+    }
+  ],
+  "pyrazine_control_priors": [
+    {
+      "id": "slr_pyrazine_control_surface_v1",
+      "source": "Laemont 2023, Arsa 2022, Wang 2021, Hao 2025",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "propensity_cap": 1.75,
+      "notes": "Directional pyrazine control surface: pH dominates, fructose and pentoses increase pyrazines, peptide-rich systems can intensify pyrazine formation."
+    }
+  ],
+  "strecker_crosstalk_priors": [
+    {
+      "id": "lincoln_2025_polyphenol_crosstalk_v1",
+      "source": "Lincoln et al. (2025), Sustainable Food Proteins 10.1002/sfp2.1044",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium_low",
+      "applicable_protein_types": [
+        "pea_iso",
+        "soy_iso",
+        "pea_conc",
+        "soy_conc"
+      ],
+      "required_sugars": [
+        "glucose"
+      ],
+      "required_context": [
+        "lipids",
+        "polyphenols"
+      ],
+      "polyphenol_examples": [
+        "catechin",
+        "tannic acid",
+        "green tea extract",
+        "grape seed extract"
+      ],
+      "effect_direction": "suppress_strecker_and_moderate_oxidative_crosstalk",
+      "summary": "Glucose plus lipid plus polyphenol systems in SPI/PPI can suppress Strecker aldehydes through alpha-dicarbonyl competition while altering post-heating oxidative stability.",
+      "notes": "Directional prior only; full quantitative volatile units and internal-standard details remain unresolved in the repo."
+    }
+  ],
+  "furanone_priors": [
+    {
+      "id": "blank_fay_1996_furanone_expectation_v1",
+      "source": "Blank and Fay 1996 plus Watanabe 2015 meat-side reference context",
+      "provenance_tier": "mechanistic_surrogate",
+      "confidence_tier": "low",
+      "notes": "Mechanistic expectation only: pentose plus alanine supports HEMF; pentose plus glycine or alanine supports DMHF."
+    },
+    {
+      "id": "mottram_nobrega_2002_furanone_sulfur_bridge_v1",
+      "source": "Mottram & Nobrega (2002 / Chapter 9 review)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "bounded_calibration",
+      "norfuraneol_to_mft_mol_fraction": 0.014,
+      "hdmf_cysteine_thiophene_ph_optimum": 5.1,
+      "diacetyl_mercaptoketone_bridge_reported": true,
+      "analytical_method": "SIDA",
+      "notes": "Bounded bridge prior tying caramel/furanone intermediates to sulfur-positive branches. Use for Family 09 reporting and routing support without claiming one-condition endpoint closure."
+    },
+    {
+      "id": "brands_2002_mgo_hdmf_c3_route_v1",
+      "source": "Brands & van Boekel (2002) with bounded absolute-yield context carried forward from the repo's Hauck & Tressl 1999 HDMF synthesis cross-reference",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "bounded_calibration",
+      "route_type": "methylglyoxal_self_condensation",
+      "reference_conditions": {
+        "mgo_mM": 50.0,
+        "temperature_c": 120.0,
+        "pH": 6.0,
+        "time_minutes": 120.0,
+        "matrix": "aqueous_model"
+      },
+      "hdmf_reference_yield_ug_per_g": 2.9,
+      "route_independent_of_amino_acids": true,
+      "analytical_method": "GC-MS with internal standard",
+      "notes": "Bounded Family 09 support prior showing that HDMF can arise directly from methylglyoxal-rich fragmentation chemistry without an amino-acid partner. Use for runtime-visible C3-route context only; do not treat this as a full standalone caramelization closure model."
+    }
+  ],
+  "thiamine_pathway_priors": [
+    {
+      "id": "cerny_2007_thiamine_split_v1",
+      "source": "Cerny 2007 isotope-labeled thiamine partitioning plus Cerny & Guntz-Dubini 2008 pH-resolved MFT yields and Hofmann et al. 1996 beef-realistic synergy context",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "mixed_pentose_fraction": 0.5,
+      "thiamine_only_fraction": 1.0,
+      "thiamine_only_reference_total_precursor_mM": 10.0,
+      "thiamine_alone_ph_points": [
+        4.0,
+        5.0,
+        6.0,
+        7.0,
+        8.0
+      ],
+      "thiamine_alone_mft_yield_ug_per_g": [
+        0.02,
+        0.14,
+        0.58,
+        0.42,
+        0.19
+      ],
+      "reference_ph": 6.0,
+      "reference_yield_ug_per_g": 0.58,
+      "mixed_system_reference_ph": 6.0,
+      "mixed_system_reference_yield_ug_per_g": 2.47,
+      "mixed_system_reference_total_precursor_mM": 30.0,
+      "mixed_system_optimal_ph": 5.5,
+      "mixed_system_optimal_yield_ug_per_g": 3.11,
+      "mixed_system_optimal_total_precursor_mM": 30.0,
+      "mixed_system_synergy_factor_peak": 4.3,
+      "mixed_system_dilute_loading_uplift_ceiling": 1.15,
+      "beef_realistic_synergy_factor": 2.64,
+      "beef_reference_yield_ug_per_g": 3.14,
+      "beef_reference_total_precursor_mM": 2.1,
+      "observable_efficiency_floor": 0.03,
+      "observable_efficiency_ceiling": 1.1,
+      "extrusion_retention_reference_id": "de_leyn_2019_thiamine_retention",
+      "notes": "Use for bounded Family 03 support scoring: Cerny 2007 sets mixed-source attribution, Cerny 2008 sets the pH-sensitive MFT window, Hofmann 1996 sets a conservative mixed-system synergy floor plus a dilute mixed-system uplift ceiling for low-total-precursor cases, and De Leyn 2019 attenuates pre-extrusion thiamine survival."
+    },
+    {
+      "id": "voelker_2021_thiamine_arrhenius_v1",
+      "source": "Voelker, Taylor & Mauer (2021)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "bounded_calibration",
+      "reference_conditions": {
+        "temperature_c_points": [
+          40.0,
+          55.0,
+          70.0
+        ],
+        "ph_points": [
+          3.0,
+          4.0,
+          5.0,
+          6.0,
+          7.0
+        ],
+        "low_concentration_mg_per_ml": 1.0,
+        "high_concentration_mg_per_ml": 20.0,
+        "salt_forms": [
+          "thiamine_mononitrate",
+          "thiamine_hcl"
+        ]
+      },
+      "tmn_low_conc_k_obs_per_hour_at_70c_by_ph": {
+        "3.0": 0.0011,
+        "6.0": 0.0435,
+        "7.0": 0.055
+      },
+      "tcl_low_conc_k_obs_per_hour_at_70c_by_ph": {
+        "3.0": 0.0009
+      },
+      "tmn_low_conc_ea_kcal_per_mol_by_ph": {
+        "3.0": 28.4,
+        "6.0": 18.5,
+        "7.0": 19.5
+      },
+      "tcl_low_conc_ea_kcal_per_mol_by_ph": {
+        "3.0": 31.6
+      },
+      "neutral_ph_high_concentration_multiplier_vs_low_concentration": 9.3,
+      "storage_retention_pct_25c_ph3_day392": 91.0,
+      "notes": "Primary aqueous Arrhenius anchor for Family 03. Use to keep acidic thiamine systems slow, neutral systems fast, and neutral high-concentration systems explicitly super-linear instead of treating thiamine disappearance as a single global first-order constant."
+    },
+    {
+      "id": "arabshahi_1988_aw_dependent_thiamine_ea_v1",
+      "source": "Arabshahi & Lund (1988)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "bounded_calibration",
+      "reference_conditions": {
+        "temperature_c_points": [
+          110.0,
+          130.0,
+          150.0
+        ],
+        "water_activity_points": [
+          0.3,
+          0.65,
+          0.9
+        ],
+        "matrix": "starch_model",
+        "thiamine_form": "thiamine_hcl"
+      },
+      "reference_aw": 0.65,
+      "starch_ea_kcal_per_mol_by_aw": {
+        "0.3": 26.8,
+        "0.65": 23.4,
+        "0.9": 20.1
+      },
+      "starch_ea_standard_error_kcal_per_mol_by_aw": {
+        "0.3": 2.1,
+        "0.65": 1.8,
+        "0.9": 1.5
+      },
+      "cellulose_ea_kcal_per_mol_at_aw_0_65": 24.1,
+      "pbma_high_moisture_aw_window": [
+        0.75,
+        0.95
+      ],
+      "notes": "Bounded Family 03 aw-dependent Arrhenius support prior for starch-like matrices. Use to attenuate thiamine survival under wetter extrusion-like conditions and modestly relax that penalty under drier low-moisture conditions without replacing the Cerny yield surface or the Voelker aqueous pH anchor."
+    },
+    {
+      "id": "huang_2022_thiamine_metal_catalysis_v1",
+      "source": "Huang (2022)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "bounded_calibration",
+      "reference_conditions": {
+        "ph": 6.0,
+        "temperature_c_points": [
+          25.0,
+          55.0
+        ],
+        "incubation_days": 7.0,
+        "thiamine_mM": 0.1
+      },
+      "metal_acceleration_vs_control": {
+        "cu_plus": 12.0,
+        "fe2_plus": 8.0,
+        "fe3_plus": 19.0,
+        "zn2_plus": 1.5
+      },
+      "loss_pct_day7_by_temp_c": {
+        "25.0": {
+          "control": 5.0,
+          "cu_plus": 64.0,
+          "fe2_plus": 45.0,
+          "fe3_plus": 78.34,
+          "zn2_plus": 12.0
+        },
+        "55.0": {
+          "control": 18.0,
+          "cu_plus": 61.94,
+          "fe2_plus": 72.0,
+          "fe3_plus": 95.98,
+          "zn2_plus": 25.0
+        }
+      },
+      "dominant_matrix_risk_metals": [
+        "fe3_plus",
+        "cu_plus"
+      ],
+      "notes": "Bounded metal-catalysis correction for Family 03. Use to accelerate thiamine loss when iron-rich or copper-rich plant matrices are present, with Fe3+ as the strongest practical catalyst in the curated literature surface."
+    }
+  ],
+  "nucleotide_pathway_priors": [
+    {
+      "id": "matoba_1988_nucleotide_hydrolysis_v1",
+      "source": "Matoba, Terao & Fujimaki 1988 IMP/GMP hydrolysis kinetics plus Mouritsen 2024 threshold-fold data, Yamaguchi & Ninomiya 2000 EUC constants, and Nakamura 1988 ribose-liberation context",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "yeast_extract_imp_share": 0.6,
+      "yeast_extract_gmp_share": 0.4,
+      "umami_weight": 0.6,
+      "ribose_weight": 0.4,
+      "imp_fold_reduction_at_3mm": 45.2,
+      "gmp_fold_reduction_at_3mm": 29.8,
+      "imp_relative_umami_unit": 1.0,
+      "gmp_relative_umami_unit": 2.3,
+      "umami_synergy_constant": 1218.0,
+      "imp_half_life_hours_at_100c_by_ph": {
+        "4.0": 8.7,
+        "5.0": 12.0,
+        "7.0": 13.1,
+        "9.0": 46.2
+      },
+      "gmp_half_life_hours_at_100c_by_ph": {
+        "4.0": 6.4,
+        "5.0": 9.0,
+        "7.0": 8.2,
+        "9.0": 38.5
+      },
+      "imp_half_life_hours_at_ph7_by_temp_c": {
+        "100.0": 13.1,
+        "110.0": 4.4,
+        "130.0": 0.5,
+        "150.0": 0.0583
+      },
+      "gmp_half_life_hours_at_ph7_by_temp_c": {
+        "100.0": 8.2,
+        "110.0": 2.7,
+        "130.0": 0.3,
+        "150.0": 0.0367
+      },
+      "default_extrusion_residence_minutes": 2.0,
+      "ribose_release_efficiency_multiplier": 2.3,
+      "max_ribose_delivery_fraction": 0.4,
+      "ribose_addition_threshold": 0.08,
+      "ribose_addition_ratio_scale": 0.35,
+      "reference_ribose_release_fraction_100c_30min": 0.06,
+      "notes": "Use for bounded Family 04 support scoring: preserve IMP/GMP as upstream umami support at mild thermal load, then shift part of that support toward ribose delivery as hydrolysis accelerates under extrusion-like severity."
+    },
+    {
+      "id": "liardon_1991_r5p_donor_potency_v1",
+      "source": "Liardon, de Weck-Gaudard & Philippossian (1991)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "r5p_vs_glucose_multiplier_floor": 100.0,
+      "ribose_vs_glucose_multiplier": 7.2,
+      "r5p_reaction_order": 1.5,
+      "reference_system": "aqueous sulfur-containing Maillard model",
+      "notes": "Directional donor-potency prior for upstream sugar routing. Use to keep ribose and especially R5P clearly above glucose when prioritizing sulfur-positive routes."
+    },
+    {
+      "id": "aliani_2005_donor_potency_nucleotide_context_v1",
+      "source": "Aliani & Farmer (2005)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "mft_multiplier_by_donor": {
+        "ribose": 3.8,
+        "glucose_6_phosphate": 3.2,
+        "glucose": 1.4
+      },
+      "nucleotide_context_reported": true,
+      "reference_matrix": "meat model system",
+      "notes": "Bounded donor-priority prior that ties stronger sulfur output from ribose and G6P to the same literature context that reported nucleotide-pool relevance in cooked meat systems."
+    },
+    {
+      "id": "blank_devaud_grosch_2003_g6p_hdmf_uplift_v1",
+      "source": "Blank, Devaud & Grosch (2003), DOI:10.1021/jf026123f",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "bounded_calibration",
+      "g6p_hdmf_multiplier_vs_glucose": 4.4,
+      "analytical_method": "SIDA with [2H3]-HDMF",
+      "replicates": 3,
+      "reference_system": "aqueous phosphorylated sugar model",
+      "notes": "Bounded phosphorylated-sugar prior for HDMF-rich routing. Use to keep G6P above glucose when furanone-support signals matter, without claiming endpoint closure in plant matrices."
+    },
+    {
+      "id": "soladoye_2020_low_temp_euc_window_v1",
+      "source": "Soladoye et al. (2020), DOI:10.3390/foods9030251",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium_low",
+      "uncertainty_posture": "bounded_contextual_transfer",
+      "reference_conditions": {
+        "matrix": "beef_steak_sous_vide",
+        "temperature_c_points": [
+          60.0,
+          70.0
+        ],
+        "hold_time_h_points": [
+          2.0,
+          12.0
+        ],
+        "endpoint": "equivalent_umami_concentration"
+      },
+      "raw_euc_percent_msg": 0.18,
+      "euc_percent_msg_by_condition": {
+        "60C_2h": 0.13,
+        "60C_12h": 0.04,
+        "70C_12h": 0.15
+      },
+      "imp_mg_per_100g_by_condition": {
+        "60C_2h": 38.0,
+        "60C_12h": 6.0,
+        "70C_12h": 51.0
+      },
+      "glutamate_mg_per_100g_by_condition": {
+        "60C_2h": 14.0,
+        "60C_12h": 18.0,
+        "70C_12h": 15.0
+      },
+      "best_case_euc_fraction_of_raw": 0.83,
+      "notes": "Low-temperature EUC window anchor for Family 04. Use for scientist-facing mild-heating context and bounded PBMA transfer reasoning, not as a universal kinetic override for nucleotide hydrolysis."
+    },
+    {
+      "id": "ahlberg_2021_yeast_extract_nucleotide_grade_window_v1",
+      "source": "Ahlberg & Mohammadi (2021), PMC9998214",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium_low",
+      "uncertainty_posture": "bounded_contextual_transfer",
+      "reference_basis": "commercial_yeast_extract_dry_weight",
+      "standard_autolysate_imp_mg_per_100g_dw_range": [
+        120.0,
+        250.0
+      ],
+      "standard_autolysate_gmp_mg_per_100g_dw_range": [
+        45.0,
+        90.0
+      ],
+      "high_nucleotide_imp_mg_per_100g_dw_range": [
+        1200.0,
+        2400.0
+      ],
+      "high_nucleotide_gmp_mg_per_100g_dw_range": [
+        300.0,
+        650.0
+      ],
+      "amp_deaminase_euc_uplift_factor_vs_standard_range": [
+        5.0,
+        6.0
+      ],
+      "cmp_penalty_mg_per_100g_dw_range": [
+        90.0,
+        200.0
+      ],
+      "notes": "Ingredient-source reference window for Family 04. Use to expose how strongly yeast-extract grade and AMP-deaminase treatment can change practical nucleotide support without replacing the existing Matoba or Soladoye thermal logic."
+    },
+    {
+      "id": "cui_2022_mushroom_gmp_euc_window_v1",
+      "source": "Cui et al. (2022), DOI:10.31665/JFB.2022.18309",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium_low",
+      "uncertainty_posture": "bounded_contextual_transfer",
+      "reference_basis": "commercial_dried_mushroom_powder",
+      "species_profiles": {
+        "shiitake": {
+          "imp_mg_per_100g_dw": 36.0,
+          "gmp_mg_per_100g_dw": 108.0,
+          "amp_mg_per_100g_dw": 24.0,
+          "nucleotide_only_euc_g_msg_per_100g": 0.34,
+          "total_euc_g_msg_per_100g": 2.1
+        },
+        "porcini": {
+          "imp_mg_per_100g_dw": 12.0,
+          "gmp_mg_per_100g_dw": 82.0,
+          "amp_mg_per_100g_dw": 18.0,
+          "nucleotide_only_euc_g_msg_per_100g": 0.21,
+          "total_euc_g_msg_per_100g": 1.8
+        },
+        "enoki": {
+          "imp_mg_per_100g_dw": 8.0,
+          "gmp_mg_per_100g_dw": 45.0,
+          "amp_mg_per_100g_dw": 32.0,
+          "nucleotide_only_euc_g_msg_per_100g": 0.12,
+          "total_euc_g_msg_per_100g": 1.2
+        },
+        "oyster": {
+          "imp_mg_per_100g_dw": 6.0,
+          "gmp_mg_per_100g_dw": 28.0,
+          "amp_mg_per_100g_dw": 48.0,
+          "nucleotide_only_euc_g_msg_per_100g": 0.09,
+          "total_euc_g_msg_per_100g": 0.8
+        }
+      },
+      "notes": "Ingredient-source reference window for Family 04. Use to expose species-specific mushroom GMP and EUC context when clean-label nucleotide support is supplied by shiitake, porcini, enoki, or oyster powders."
+    }
+  ],
+  "carbonyl_donor_priors": [
+    {
+      "id": "maillard_van_boekel_1992_sugar_reactivity_hierarchy_v1",
+      "source": "Maillard & van Boekel (1992)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "bounded_calibration",
+      "reference_conditions": {
+        "ph": 6.0,
+        "sugar_molarity_M": 0.5,
+        "lysine_molarity_M": 0.5,
+        "temperature_c_points": [
+          50.0,
+          60.0,
+          70.0
+        ]
+      },
+      "k_obs_milliper_hour_at_60c_by_sugar": {
+        "ribose": 98.4,
+        "xylose": 71.3,
+        "arabinose": 54.7,
+        "galactose": 18.2,
+        "glucose": 12.0,
+        "mannose": 10.4,
+        "fructose": 7.8,
+        "maltose": 1.2,
+        "lactose": 0.9
+      },
+      "relative_reactivity_vs_glucose_by_sugar": {
+        "ribose": 8.2,
+        "xylose": 5.9,
+        "arabinose": 4.6,
+        "galactose": 1.5,
+        "glucose": 1.0,
+        "mannose": 0.87,
+        "fructose": 0.65,
+        "maltose": 0.1,
+        "lactose": 0.075
+      },
+      "ea_kj_per_mol_by_sugar": {
+        "ribose": 114.0,
+        "xylose": 118.0,
+        "arabinose": 121.0,
+        "galactose": 108.0,
+        "glucose": 106.0,
+        "mannose": 104.0,
+        "fructose": 96.0,
+        "maltose": 132.0,
+        "lactose": 138.0
+      },
+      "temperature_effect_direction": "pentose_advantage_increases_with_temperature",
+      "notes": "Quantitative donor-hierarchy prior for Family 07. Use to keep pentoses and especially ribose clearly above glucose/fructose while preserving the strong disaccharide penalty, without claiming matrix-specific endpoint closure in plant proteins."
+    },
+    {
+      "id": "blank_1997_rhamnose_proline_hdmf_uplift_v1",
+      "source": "Blank et al. (1997), DOI:10.1021/jf960777q",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "bounded_calibration",
+      "reference_conditions": {
+        "temperature_c": 145.0,
+        "amino_acid_partner": "proline",
+        "sugar_partner": "rhamnose",
+        "analytical_method": "SIDA with [2H3]-HDMF"
+      },
+      "supporting_families": [
+        "09"
+      ],
+      "observable_panel_tags": [
+        "donor_hierarchy",
+        "carbonyl_donor",
+        "hdmf",
+        "furanone_support"
+      ],
+      "hdmf_molar_yield_fraction_lower_bound": 0.4,
+      "hdmf_odt_ug_per_l": 0.6,
+      "hdmf_oav_lower_bound": 80.0,
+      "replicates": 3,
+      "notes": "Bounded rhamnose-plus-proline HDMF prior for Family 07. Use to expose that rhamnose can drive unusually strong HDMF support when proline is present, without reclassifying rhamnose as a universal fast donor across plant matrices."
+    }
+  ],
+  "sulfur_peptide_priors": [
+    {
+      "id": "wang_xu_glutathione_peptide_support_v1",
+      "protein_type": "soy_iso",
+      "reference_conditions": {
+        "temp_C": 120.0,
+        "time_min": 30.0,
+        "ph": 6.0,
+        "carbonyl_partner": "xylose"
+      },
+      "gsh_mft_ratio_vs_free_cysteine": 2.25,
+      "gsh_fft_ratio_vs_free_cysteine": 2.4,
+      "generic_peptide_ratio_vs_free_cysteine": 1.41,
+      "hydrolysate_ratio_vs_free_cysteine": 1.6,
+      "peak_sequence_ratio_vs_free_cysteine": 2.68,
+      "pyrazine_tradeoff_ratio_vs_free_cysteine": 0.75,
+      "gsh_buffered_release_bonus": 0.08,
+      "qualitative_intake_anchor_id": "nishimura_abe_2024",
+      "retention_proxy_ids": [
+        "zhang_2026_spi_lenthionine_retention",
+        "hofmann_2001_melanoidin_fft_trapping"
+      ],
+      "source": "Bounded sulfur-support prior distilled from Wang et al. GSH vs cysteine sulfur yields, Xu et al. peptide hierarchy, and Nishimura & Abe soy hydrolysate intake support",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "bounded_calibration",
+      "process_state_applicability": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "notes": "Use for Family 05 runtime scoring as a bounded uplift prior. It supports sulfur-positive interpretation, not absolute MFT or FFT concentration claims in SPI benchmarks."
+    },
+    {
+      "id": "ohsu_2025_kokumi_casr_support_v1",
+      "source": "Ohsu et al. (2025), DOI:10.1021/acs.jafc.2c04919",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "bounded_calibration",
+      "reference_conditions": {
+        "temperature_c": 37.0,
+        "msg_mM": 10.0,
+        "assay_mode": "human_CaSR_HEK293_and_trained_sensory_panel"
+      },
+      "observable_panel_tags": [
+        "kokumi_support",
+        "mouthfulness",
+        "palatability"
+      ],
+      "gamma_glu_val_ec50_mM": 0.32,
+      "gamma_glu_leu_ec50_mM": 0.45,
+      "gsh_ec50_mM": 0.68,
+      "alpha_glu_val_ec50_lower_bound_mM": 10.0,
+      "gamma_glu_val_calcium_increase_percent": 142.0,
+      "gamma_glu_leu_calcium_increase_percent": 128.0,
+      "gsh_calcium_increase_percent": 111.0,
+      "gamma_glu_val_cck_secretion_increase_percent": 187.0,
+      "gamma_glu_leu_cck_secretion_increase_percent": 163.0,
+      "gsh_cck_secretion_increase_percent": 141.0,
+      "gamma_glu_val_mouthfulness_score": 6.8,
+      "gamma_glu_leu_mouthfulness_score": 6.1,
+      "gsh_mouthfulness_score": 5.4,
+      "msg_baseline_mouthfulness_score": 3.2,
+      "yeast_extract_aqueous_phase_gsh_range_mM": [
+        0.3,
+        1.5
+      ],
+      "notes": "Bounded Family 05 kokumi prior for CaSR-active glutathione and gamma-glutamyl peptides. Use to expose mouthfulness support alongside sulfur-positive interpretation without claiming full sensory closure in plant matrices."
+    },
+    {
+      "id": "huang_2021_sulfur_oav_support_v1",
+      "source": "Huang et al. (2021)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "bounded_calibration",
+      "reference_conditions": {
+        "temp_C": 100.0,
+        "carbonyl_partner": "xylose",
+        "sulfur_source": "cysteine",
+        "amino_acid_support": "glutamate"
+      },
+      "mft_oav": 9550.0,
+      "fft_oav": 24800.0,
+      "identified_volatile_count": 89,
+      "replicates": 3,
+      "notes": "High-OAV sulfur-support prior for pentose plus sulfur model systems. Use as bounded evidence that MFT and FFT remain strongly favored when sulfur donors are paired with xylose and glutamate support."
+    }
+  ],
+  "retention_binding_priors": [
+    {
+      "id": "acs_jafc_3c02618_mft_disulfide_trapping_v1",
+      "source": "ACS JAFC 3c02618",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "bounded_calibration",
+      "applicable_protein_types": [
+        "pea_iso",
+        "soy_iso",
+        "pea_conc",
+        "soy_conc"
+      ],
+      "reference_conditions": {
+        "process_state": "heated_matrix",
+        "temperature_variable": true
+      },
+      "mft_disulfide_trapping_reported": true,
+      "pyrazine_pi_stacking_reported": true,
+      "headspace_recovery_effect_direction": "reduced_by_covalent_and_non_covalent_binding",
+      "notes": "Bounded retention prior from protein-aroma binding literature. Use to support Family 11 retention reasoning without pretending compound-specific benchmark closure."
+    },
+    {
+      "id": "acs_jafc_0c01925_protein_binding_hierarchy_v1",
+      "source": "ACS JAFC 0c01925",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium_low",
+      "uncertainty_posture": "directional_transfer",
+      "applicable_protein_types": [
+        "pea_iso",
+        "soy_iso",
+        "pea_conc",
+        "soy_conc"
+      ],
+      "reference_conditions": {
+        "process_state": "heated_matrix",
+        "temperature_variable": true
+      },
+      "preferred_adduct_hierarchy": [
+        "lys_schiff_base",
+        "cys_michael_adduct"
+      ],
+      "odt_weighted_headspace_recovery_reported": true,
+      "notes": "Directional binding prior for protein-aroma interaction hierarchy. Use for bounded headspace-recovery interpretation, not absolute calibration."
+    },
+    {
+      "id": "ref41_ppi_sulfur_volatile_binding_v1",
+      "source": "DOI ref. 41 in raw/11_maillard_lipid_crosstalk.md",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "directional_transfer",
+      "applicable_protein_types": [
+        "pea_iso",
+        "pea_conc"
+      ],
+      "reference_conditions": {
+        "process_state": "ambient_slurry",
+        "temperature_c": 25.0,
+        "ph": 7.0
+      },
+      "sulfur_volatile_binding_hierarchy": [
+        "DMTS",
+        "DMDS",
+        "DMS"
+      ],
+      "binding_spontaneity": "delta_g_negative",
+      "binding_enthalpy": "delta_h_negative",
+      "dominant_binding_forces": [
+        "hydrophobic",
+        "van_der_waals"
+      ],
+      "binding_site_count_by_compound": {
+        "DMTS": 1.0,
+        "DMDS": 1.0,
+        "DMS": "multiple_low_affinity"
+      },
+      "temperature_effect_direction": "binding_weakens_as_temperature_increases",
+      "notes": "Directional PPI sulfur-volatile binding prior for Family 11. Use to keep sulfur retention non-neutral in pea systems and to interpolate initial non-covalent binding posture before higher-temperature trapping pathways dominate."
+    },
+    {
+      "id": "bhandari_1998_beta_cd_aldehyde_binding_v1",
+      "source": "Bhandari et al. (1998)",
+      "chemistry_family": "off_note_and_maillard_suppression",
+      "slr_family_source": "08",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "off_note",
+        "guardrail",
+        "binding_support",
+        "encapsulation"
+      ],
+      "process_state_scope": [
+        "ambient_slurry",
+        "aqueous_pre_extrusion_model",
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "02",
+        "08",
+        "11"
+      ],
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "bounded_guardrail",
+      "reference_conditions": {
+        "temperature_c": 25.0,
+        "beta_cyclodextrin_loading_wt_pct": 1.0,
+        "complexation_time_h_range": [
+          2.0,
+          24.0
+        ],
+        "internal_standard": "2-heptanone"
+      },
+      "k_assoc_m_inverse_by_compound": {
+        "hexanal": 1840.0,
+        "nonanal": 2100.0,
+        "e_2_nonenal": 3200.0,
+        "2_pentylfuran": 1100.0,
+        "1_octen_3_ol": 890.0
+      },
+      "headspace_reduction_fraction_at_1pct_w_w_by_compound": {
+        "hexanal": 0.62,
+        "nonanal": 0.68,
+        "e_2_nonenal": 0.74,
+        "2_pentylfuran": 0.44,
+        "1_octen_3_ol": 0.38
+      },
+      "oav_reduction_factor_at_1pct_w_w_by_compound": {
+        "hexanal": 2.6,
+        "nonanal": 3.1,
+        "e_2_nonenal": 3.8,
+        "2_pentylfuran": 1.8,
+        "1_octen_3_ol": 1.6
+      },
+      "notes": "Bounded beta-cyclodextrin encapsulation prior for Family 08 guardrails. Use as a partial aldehyde-suppression surface for hexanal, nonanal, and unsaturated aldehydes, not as a complete off-note elimination model."
+    }
+  ],
+  "dicarbonyl_sink_priors": [
+    {
+      "id": "nakagawa_2004_isoflavone_dicarbonyl_sink_v1",
+      "source": "Nakagawa et al. (2004), PubMed PMID:15165134",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium_low",
+      "uncertainty_posture": "bounded_guardrail",
+      "supporting_families": [
+        "08",
+        "12"
+      ],
+      "genistein_ic50_uM": 48.0,
+      "age_inhibition_fraction_at_100uM": 0.82,
+      "daidzein_inhibition_fraction_at_100uM": 0.68,
+      "spi_dicarbonyl_pool_multiplier": 0.2,
+      "effect_direction": "suppress_age_formation_and_dicarbonyl_burden",
+      "notes": "Bounded soy-isoflavone prior for AGE and dicarbonyl suppression. Use as a guardrail-side modifier with explicit uncertainty, not as endpoint closure."
+    }
+  ],
+  "polyphenol_thiol_capping_priors": [
+    {
+      "id": "jafc_2019_ref24_polyphenol_thiol_capping_v1",
+      "source": "J. Agric. Food Chem. 2019 (Ref. 24)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "bounded_guardrail",
+      "cys_4mc_adduct_nmol_per_mg_range": [
+        2.2,
+        8.1
+      ],
+      "thiol_loss_fraction_from_adducts": 0.62,
+      "digestive_stability_umol_per_g": 1.7,
+      "effect_direction": "increase_cysteine_sink_and_reduce_free_thiol_budget",
+      "notes": "Bounded polyphenol-thiol capping prior for Family 13. Use to reduce free-thiol availability when strong catechol-type capping cues are active, without claiming endpoint closure."
+    }
+  ],
+  "lipid_offnote_priors": [
+    {
+      "id": "blank_2001_epoxydecenal_guardrail_v1",
+      "source": "Blank et al. (2001)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium_low",
+      "uncertainty_posture": "bounded_guardrail",
+      "precursor_fatty_acid": "arachidonic_acid",
+      "target_offnote": "trans-4,5-epoxy-(E)-2-decenal",
+      "odor_threshold_ng_per_l": 0.07,
+      "sida_triplicates": true,
+      "effect_direction": "flag_ultra_potent_lipid_offnote_risk",
+      "notes": "Bounded lipid off-note prior for highly unsaturated systems. Use as a guardrail for arachidonic-acid-rich oxidative branches and reporting, not as a concentration closure claim."
+    },
+    {
+      "id": "hidalgo_zamora_2004_4hne_pentylpyrrole_v1",
+      "source": "Hidalgo & Zamora (2004), JAFC 52:7126",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium_low",
+      "uncertainty_posture": "bounded_guardrail",
+      "precursor_fatty_acid": "4_hydroxynonenal",
+      "target_offnote": "2-pentylpyrrole",
+      "reactant_pairing": "4-HNE + phenylalanine",
+      "absolute_concentrations_reported": true,
+      "loq_reported": true,
+      "effect_direction": "flag_4hne_derived_pyrrole_risk",
+      "notes": "Bounded off-note prior for oxidized-lipid systems where 4-HNE can route into pyrrolic aroma defects. Use as a reporting and guardrail prior, not as endpoint concentration closure."
+    },
+    {
+      "id": "mottram_2001_lipid_aldehyde_mft_quench_v1",
+      "source": "Mottram et al. (2001), JAFC 49:3712",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "bounded_calibration",
+      "competitive_target": "2-methyl-3-furanthiol",
+      "competing_offnote_family": "lipid_aldehydes",
+      "hexanal_to_cysteine_ratio_threshold": 0.5,
+      "mft_quench_fraction_range": [
+        0.15,
+        0.4
+      ],
+      "effect_direction": "lipid_aldehydes_compete_for_sulfur_and_suppress_mft",
+      "notes": "Bounded sulfur-quench prior for Family 02. Use to penalize MFT expectations when lipid-derived aldehydes rise into the competitive regime instead of treating sulfur yield as independent from off-note burden."
+    },
+    {
+      "id": "zhang_2022_unsaturated_aldehyde_offnote_potency_v1",
+      "source": "Zhang et al. (2022), Food Chemistry 133961",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium_low",
+      "uncertainty_posture": "directional_transfer",
+      "target_offnote": "unsaturated_aldehydes",
+      "comparison_baseline": "saturated_aldehydes",
+      "oav_reported": true,
+      "lod_loq_reported": true,
+      "triplicates": true,
+      "effect_direction": "unsaturated_aldehydes_carry_stronger_cross_reaction_and_offnote_pressure_than_saturated_analogues",
+      "notes": "Directional lipid-off-note prior for Family 02. Use to weight unsaturated aldehyde branches above saturated analogues in guardrail and crosstalk reporting without claiming a full kinetic mechanism."
+    }
+  ],
+  "dicarbonyl_fragmentation_priors": [
+    {
+      "id": "glomb_1995_3dg_fragmentation_stoichiometry_v1",
+      "source": "Glomb & Monnier (1995)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "bounded_calibration",
+      "precursor": "3-deoxyglucosone",
+      "branching_fraction": {
+        "methylglyoxal": 0.41,
+        "glyoxal": 0.28,
+        "diacetyl": 0.18,
+        "2_3_pentanedione": 0.06
+      },
+      "notes": "Deterministic 3-DG retro-aldol branching prior for AGE and diketone reasoning. Use as a bounded routing prior rather than a full kinetic mechanism."
+    }
+  ],
+  "ascorbic_pathway_priors": [
+    {
+      "id": "frontiers_2022_hcw_aa_arrhenius_v1",
+      "source": "Frontiers in Nutrition 2022, DOI:10.3389/fnut.2022.1022254",
+      "provenance_tier": "direct_measurement",
+      "confidence_tier": "medium_high",
+      "uncertainty_posture": "bounded_calibration",
+      "reference_conditions": {
+        "matrix_context": "hot_compressed_water",
+        "temperature_window_c": [
+          150.0,
+          190.0
+        ],
+        "kinetic_order": "pseudo_first_order"
+      },
+      "ea_kj_per_mol_by_ph": {
+        "5.0": 15.77,
+        "7.0": 31.7,
+        "9.5": 47.53
+      },
+      "recommended_interpolation": "linear_between_pH_5_and_9_5",
+      "effect_direction": "acidic_high_temperature_conditions_accelerate_ascorbic_breakdown_and_dicarbonyl_release",
+      "notes": "Primary Family 14 Arrhenius anchor for extrusion-like AA degradation. Use to keep ascorbic-acid dicarbonyl release explicitly pH-sensitive instead of treating AA as a fixed generic precursor source."
+    },
+    {
+      "id": "scielo_brasil_aa_crosslink_hierarchy_v1",
+      "source": "SciELO Brasil (Ref. 4)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "bounded_calibration",
+      "reference_conditions": {
+        "matrix_context": "ascorbic_acid_amino_acid_model_system",
+        "kinetic_order": "pseudo_first_order"
+      },
+      "ea_kj_per_mol_by_amino_acid": {
+        "lysine": 54.94,
+        "arginine": 50.08,
+        "histidine": 35.31
+      },
+      "observed_rate_order": [
+        "lysine",
+        "arginine",
+        "histidine"
+      ],
+      "effect_direction": "lysine_remains_the_dominant_practical_crosslink_sink_even_when_histidine_has_the_lowest_ea",
+      "notes": "Family 14 cross-link hierarchy prior for AA-derived dicarbonyl trapping. Use to preserve Lys > Arg > His routing in safety-facing AGE reasoning rather than relying on Ea alone."
+    },
+    {
+      "id": "pmid_1904866_aa_pentosidine_equivalence_v1",
+      "source": "PubMed PMID:1904866 (Ref. 5)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "bounded_calibration",
+      "reference_conditions": {
+        "matrix_context": "bsa_ascorbic_acid_vs_glucose_model",
+        "temperature_c": 37.0,
+        "kinetic_observable": "pentosidine_fluorescence_hplc"
+      },
+      "pentosidine_yield_pmol_per_mg_protein_range": {
+        "glucose": [
+          13.2,
+          17.0
+        ],
+        "ascorbic_acid_equivalent": [
+          13.2,
+          17.0
+        ]
+      },
+      "molar_equivalence_to_glucose": true,
+      "saturation_ceiling_pmol_per_mg_protein": 17.0,
+      "effect_direction": "ascorbic_acid_can_match_glucose_as_a_pentosidine_precursor_on_a_molar_basis",
+      "notes": "Family 14 pentosidine-equivalence prior for AA-driven cross-link burden. Use to keep antioxidant ascorbate additions visible as a bounded AGE source term instead of treating AA as chemically benign once dicarbonyl formation starts."
+    }
+  ],
+  "melanoidin_trapping_priors": [
+    {
+      "id": "pmc9351765_crosspy_mft_scavenging_v1",
+      "source": "PMC PMCID:PMC9351765 (Ref. 12)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "bounded_calibration",
+      "target_compound": "2-methyl-3-furanthiol",
+      "mechanism": "crosspy_radical_thioether_adduction",
+      "melanoidin_loading_reference_mg": 125.0,
+      "relative_fd_drop": {
+        "baseline": 4.0,
+        "with_melanoidins": 2.0
+      },
+      "irreversible_trapping": true,
+      "effect_direction": "dense_melanoidin_networks_irreversibly_scavenge_mft_before_headspace_release",
+      "notes": "Family 16 trapping prior for CROSSPY-driven thioether adduction. Use to justify non-recoverable MFT loss when melanoidin burden is already high, rather than treating thiol suppression as purely reversible binding."
+    },
+    {
+      "id": "jafc_2019_ref21_pea_gum_arabic_architecture_v1",
+      "source": "J. Agric. Food Chem. 2019 (Ref. 21), DOI:10.1021/acs.jafc.9b04099",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium_low",
+      "uncertainty_posture": "bounded_contextual_transfer",
+      "reference_conditions": {
+        "matrix": "pea_protein_hydrolysate_gum_arabic_conjugate",
+        "process_state": "heated_matrix",
+        "measurement_mode": "hpsec_mals_mark_houwink"
+      },
+      "native_mw_kda": 290.0,
+      "conjugated_mw_kda_range": [
+        340.0,
+        359.0
+      ],
+      "native_radius_of_gyration_nm": 29.5,
+      "conjugated_radius_of_gyration_nm_range": [
+        30.5,
+        33.5
+      ],
+      "native_mark_houwink_exponent": 0.53,
+      "conjugated_mark_houwink_exponent": 0.4,
+      "native_pdi": 1.35,
+      "conjugated_pdi": 1.74,
+      "notes": "Compact Family 16 architecture prior for Maillard-conjugated pea hydrolysate systems. Use to surface polymer-growth and trapping-risk direction when gum arabic and hydrolysate cues are present, not as a universal rheology solver."
+    }
+  ],
+  "dft_kinetic_priors": {
+    "description": "Per-reaction kinetic priors for the priority computational-gap DFT targets (families 11-16). Current tier is the best available estimate; target tier is selective_dft_anchor after wB97M-V//r2SCAN-3c completes. Run scripts/run_computational_gap_dft.py, then scripts/generators/ingest_computational_gap_dft_results.py, then scripts/generators/promote_computational_gap_dft_results.py to promote completed non-fast entries.",
+    "entries": [
+      {
+        "reaction_key": "hexanal_radical_quench",
+        "slr_family": "11",
+        "current_tier": "selective_dft_anchor",
+        "target_tier": "selective_dft_anchor",
+        "barrier_kcal_mol": 17.88,
+        "barrier_kj_mol": 74.81,
+        "uncertainty_kj": 42.0,
+        "rate_uncertainty_factor": "\u00d73-8 at 150\u00b0C",
+        "concentration_uncertainty": "\u00d73-8 in ppb",
+        "ranking_reliability": "medium",
+        "promotion_ceiling": "ranking_only",
+        "honest_label": "Selective DFT anchor, ranking support only until matrix benchmark closure",
+        "computational_method": "wB97M-V/def2-tzvp // r2SCAN-3c/def2-svp + ddCOSMO(water)",
+        "active_arrhenius_key": "hexanal_radical_quench_xtb_derived",
+        "process_state_applicability": [
+          "heated_matrix",
+          "aqueous_pre_extrusion_model"
+        ],
+        "promotion_note": "Promoted from completed computational-gap DFT execution; benchmark closure remains gated by matrix observables.",
+        "last_refined_at": "2026-04-09T06:29:19+00:00"
+      },
+      {
+        "reaction_key": "quinone_cys_michael",
+        "slr_family": "13",
+        "current_tier": "xtb_derived_gfn2",
+        "target_tier": "selective_dft_anchor",
+        "barrier_kcal_mol": 17.84,
+        "barrier_kj_mol": 74.65,
+        "uncertainty_kj": 42.0,
+        "rate_uncertainty_factor": "\u00d73-8 at 150\u00b0C",
+        "concentration_uncertainty": "\u00d73-8 in ppb",
+        "ranking_reliability": "medium",
+        "promotion_ceiling": "bounded_calibration",
+        "honest_label": "GFN2-xTB estimate, \u00b1factor 3-8 in concentration, ranking only",
+        "computational_method": "GFN2-xTB NEB path search",
+        "active_arrhenius_key": "quinone_cys_michael_xtb_derived",
+        "process_state_applicability": [
+          "heated_matrix",
+          "aqueous_pre_extrusion_model"
+        ]
+      },
+      {
+        "reaction_key": "aa_ring_open_dicarbonyl",
+        "slr_family": "14",
+        "current_tier": "literature_derived_transfer",
+        "target_tier": "selective_dft_anchor",
+        "barrier_kcal_mol": 7.58,
+        "barrier_kj_mol": 31.7,
+        "uncertainty_kj": 20.0,
+        "rate_uncertainty_factor": "\u00d72-5 at 150\u00b0C",
+        "concentration_uncertainty": "\u00d72-5 in ppb",
+        "ranking_reliability": "medium-high",
+        "promotion_ceiling": "bounded_calibration",
+        "honest_label": "HCW Family 14 surrogate for an upstream ascorbic-acid dicarbonyl source, DFT validation pending, \u00b1factor 2-5; bounded calibration",
+        "computational_method": "Family 14 HCW literature surrogate (bounded upstream dicarbonyl source)",
+        "active_arrhenius_key": "aa_ring_open_dicarbonyl_hcw_family14_surrogate",
+        "surrogate_kind": "ascorbic_upstream_dicarbonyl_source",
+        "surrogate_reaction": "Dehydroascorbic-acid ring opening and hydration are treated as a bounded upstream source of reactive dicarbonyl pressure rather than as a validated elementary xTB endpoint.",
+        "surrogate_assumption": "The Family 14 runtime lane stays anchored to the HCW effective barrier until a balanced dehydroascorbic-acid ring-opening pair is regenerated for xTB/DFT.",
+        "surrogate_basis": [
+          "src/literature_runtime.py::_build_ascorbic_acid_maillard_lane",
+          "data/lit/computational_gap_closure_targets.json:aa_ring_open_dicarbonyl"
+        ],
+        "process_state_applicability": [
+          "heated_matrix",
+          "aqueous_pre_extrusion_model",
+          "extrusion_structured"
+        ]
+      },
+      {
+        "id": "pe_schiff_base",
+        "reaction_key": "pe_schiff_base",
+        "slr_family": "15",
+        "current_tier": "literature_derived_transfer",
+        "target_tier": "selective_dft_anchor",
+        "barrier_kcal_mol": 22.21,
+        "barrier_kj_mol": 92.9,
+        "uncertainty_kj": 20.9,
+        "rate_uncertainty_factor": "\u00d72-5 at 150\u00b0C",
+        "concentration_uncertainty": "\u00d72-5 in ppb",
+        "ranking_reliability": "medium-high",
+        "promotion_ceiling": "bounded_calibration",
+        "honest_label": "SLR 15 literature Ea=92.9 kJ/mol, \u00b1factor 2-5; bounded calibration",
+        "computational_method": "Literature transfer (SLR 15, phospholipid-amine Maillard)",
+        "active_arrhenius_key": "pe_schiff_base_lit_derived",
+        "process_state_applicability": [
+          "heated_matrix",
+          "aqueous_pre_extrusion_model",
+          "extrusion_structured"
+        ]
+      },
+      {
+        "id": "pe_amadori",
+        "reaction_key": "pe_amadori",
+        "slr_family": "15",
+        "current_tier": "literature_derived_transfer",
+        "target_tier": "selective_dft_anchor",
+        "barrier_kcal_mol": 19.81,
+        "barrier_kj_mol": 82.9,
+        "uncertainty_kj": 20.9,
+        "rate_uncertainty_factor": "\u00d72-5 at 150\u00b0C",
+        "concentration_uncertainty": "\u00d72-5 in ppb",
+        "ranking_reliability": "medium-high",
+        "promotion_ceiling": "bounded_calibration",
+        "honest_label": "SLR 15 literature Ea=82.9 kJ/mol, \u00b1factor 2-5; bounded calibration",
+        "computational_method": "Literature transfer (SLR 15, phospholipid-amine Maillard)",
+        "active_arrhenius_key": "pe_amadori_lit_derived",
+        "process_state_applicability": [
+          "heated_matrix",
+          "aqueous_pre_extrusion_model",
+          "extrusion_structured"
+        ]
+      },
+      {
+        "id": "pyrraline_from_3dg",
+        "reaction_key": "pyrraline_from_3dg",
+        "slr_family": "14",
+        "current_tier": "literature_derived_transfer",
+        "target_tier": "selective_dft_anchor",
+        "barrier_kcal_mol": 12.77,
+        "barrier_kj_mol": 53.45,
+        "uncertainty_kj": 4.02,
+        "rate_uncertainty_factor": "\u00d72-4 at 150\u00b0C",
+        "concentration_uncertainty": "\u00d72-4 in ppb-equivalent damage markers",
+        "ranking_reliability": "medium-high",
+        "promotion_ceiling": "bounded_calibration",
+        "honest_label": "ACS APTS Ref. 24 Ea=53.45 \u00b1 4.02 kJ/mol for 3-DG to pyrraline; bounded calibration",
+        "computational_method": "Literature transfer (ACS APTS Ref. 24)",
+        "active_arrhenius_key": "pyrraline_from_3dg_lit_derived",
+        "process_state_applicability": [
+          "heated_matrix",
+          "aqueous_pre_extrusion_model",
+          "extrusion_structured"
+        ]
+      },
+      {
+        "id": "furosine_from_3dg",
+        "reaction_key": "furosine_from_3dg",
+        "slr_family": "14",
+        "current_tier": "literature_derived_transfer",
+        "target_tier": "selective_dft_anchor",
+        "barrier_kcal_mol": 19.53,
+        "barrier_kj_mol": 81.7,
+        "uncertainty_kj": 14.01,
+        "rate_uncertainty_factor": "\u00d73-6 at 150\u00b0C",
+        "concentration_uncertainty": "\u00d73-6 in ppb-equivalent damage markers",
+        "ranking_reliability": "medium",
+        "promotion_ceiling": "bounded_calibration",
+        "honest_label": "ACS APTS Ref. 24 Ea=81.70 \u00b1 14.01 kJ/mol for 3-DG to furosine; bounded calibration",
+        "computational_method": "Literature transfer (ACS APTS Ref. 24)",
+        "active_arrhenius_key": "furosine_from_3dg_lit_derived",
+        "process_state_applicability": [
+          "heated_matrix",
+          "aqueous_pre_extrusion_model",
+          "extrusion_structured"
+        ]
+      },
+      {
+        "reaction_key": "lysinoalanine_crosslink",
+        "slr_family": "12",
+        "current_tier": "family_rule_surrogate",
+        "target_tier": "selective_dft_anchor",
+        "barrier_kcal_mol": 16.0,
+        "barrier_kj_mol": 66.95,
+        "uncertainty_kj": 42.0,
+        "rate_uncertainty_factor": "\u00d75-15 at 150\u00b0C",
+        "concentration_uncertainty": "\u00d75-15 in damage-marker equivalents",
+        "ranking_reliability": "medium-low",
+        "promotion_ceiling": "ranking_only",
+        "honest_label": "DHA-plus-lysine family surrogate, assumes prior dehydroalanine formation, \u00b1factor 5-15; ranking only",
+        "computational_method": "DHA_Crosslinking family-rule surrogate (ArrheniusEP E0=16 kcal/mol)",
+        "active_arrhenius_key": "lysinoalanine_crosslink_dha_family_surrogate",
+        "surrogate_kind": "dha_michael_addition",
+        "surrogate_reaction": "Dehydroalanine plus lysine epsilon-amine Michael addition to form lysinoalanine.",
+        "surrogate_assumption": "The previous xTB pair is discarded as a non-elementary placeholder; this prior assumes dehydroalanine has already formed via beta-elimination before lysine capture.",
+        "surrogate_basis": [
+          "data/rmg_extensions/families/DHA_Crosslinking/rules.py",
+          "data/species/toxic_markers.yml",
+          "src/reaction_templates.py::_dha_competing_pathway"
+        ],
+        "process_state_applicability": [
+          "extrusion_structured"
+        ]
+      }
+    ]
+  }
+}

@@ -3,15 +3,16 @@ import json
 from pathlib import Path
 from src.cantera_export import CanteraExporter  # noqa: E402
 
-def test_cantera_yaml_format_validity():
+def test_cantera_yaml_format_validity(tmp_path):
     """Verify that CanteraExporter generates valid YAML 1.2."""
     exporter = CanteraExporter()
     reactants = ["C", "[O]"] # Graphite atom + Oxygen atom -> CO
     products = ["CO"]
     exporter.add_reaction(reactants, products, 10.0)
-    
-    exporter.export_yaml(output_path="tmp_mech.yaml")
-    yaml_str = Path("tmp_mech.yaml").read_text()
+
+    output_path = tmp_path / "tmp_mech.yaml"
+    exporter.export_yaml(output_path=str(output_path))
+    yaml_str = output_path.read_text()
     assert yaml_str.strip().startswith("generator: Maillard")
     
     # Attempt to parse with standard PyYAML to ensure it's valid YAML

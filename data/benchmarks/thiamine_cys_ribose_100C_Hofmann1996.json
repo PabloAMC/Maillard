@@ -1,0 +1,39 @@
+{
+  "benchmark_id": "thiamine_cys_ribose_100C_Hofmann1996",
+  "source_doi": "10.1021/jf960062o",
+  "precursors": {
+    "Thiamine": {
+      "concentration_mM": 0.1
+    },
+    "L-Cysteine": {
+      "concentration_mM": 1.0
+    },
+    "D-Ribose": {
+      "concentration_mM": 1.0
+    }
+  },
+  "conditions": {
+    "temp_C": 100,
+    "ph": 5.5,
+    "water_activity": 0.98,
+    "time_min": 30
+  },
+  "metadata": {
+    "tier": "PRIMARY",
+    "family": "thiamine_fragmentation_support",
+    "execution_path": "free_precursor",
+    "notes": "Quantitative Family 03 benchmark for the combined thiamine, cysteine, and ribose system from Hofmann 1996. The measured MFT value is encoded as the reported aqueous ug/L anchor, which is numerically comparable to ppb in this dilute model system."
+  },
+  "validation_contract": {
+    "scale_thresholds": {
+      "max_ratio": 1.5,
+      "mean_abs_log10_error": 0.18
+    }
+  },
+  "measured_volatiles": {
+    "2-Methyl-3-furanthiol (MFT)": {
+      "conc_ppb": 3.14,
+      "uncertainty_pct": 20
+    }
+  }
+}

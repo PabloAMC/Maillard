@@ -1,0 +1,14 @@
+interventions:
+  - name: rosemary_extract
+    class: antioxidant
+    active_compound: carnosic_acid
+    mechanisms:
+      - target_family: Lipid_Homolysis
+        delta_barrier_per_unit: 8.0 # kcal/mol shift per 1.0 dose
+      - target_family: Beta_Scission
+        delta_barrier_per_unit: 3.0
+  - name: calcium_carbonate
+    class: mineral_salt
+    mechanisms:
+      - target_family: Safety_Risk_Acrylamide
+        delta_barrier_per_unit: 5.0
