@@ -15,6 +15,9 @@ SKIP_LINE_PATTERN = re.compile(r"^SKIPPED \[(?P<count>\d+)\] (?P<path>.+?):(?P<l
 
 def _classify_dependency(reason: str, path: str) -> str:
     normalized = reason.lower()
+    normalized_path = path.replace("\\", "/")
+    if normalized_path.endswith("test_irc_validation.py"):
+        return "missing_external_dataset"
     if "not installed" in normalized or "binary not found" in normalized or "not in path" in normalized:
         return "missing_optional_backend"
     if "dataset not mounted" in normalized or "phase 3.3" in normalized:

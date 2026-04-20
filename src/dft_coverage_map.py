@@ -9,6 +9,13 @@ from src.mlp_adoption_contract import load_mlp_candidates
 from src.reaction_benchmark import load_reaction_benchmark_entries
 
 
+def _normalize_reaction_tier(value: Any) -> str:
+    tier = str(value or "unknown")
+    if tier == "family_rule_surrogate":
+        return "literature_derived_transfer"
+    return tier
+
+
 def _plan_lookup() -> Dict[str, Mapping[str, Any]]:
     payload = load_family_ingestion_plan()
     return {
@@ -119,7 +126,7 @@ def build_c4_c5_dft_status() -> List[Dict[str, Any]]:
     for reaction_key, meta in DFT_ANCHOR_METADATA.items():
         dft_key = str(meta.get("dft_key", ""))
         dft_filled = False
-        dft_barrier_kcal: Any = None
+        dft_barrier_kcal: Any = meta.get("dft_barrier_kcal")
         if dft_key and dft_key in FAST_BARRIERS:
             val = FAST_BARRIERS[dft_key][0]
             if val < 99.0:
@@ -128,14 +135,14 @@ def build_c4_c5_dft_status() -> List[Dict[str, Any]]:
 
         # Resolve the active barrier from the routing table
         active_key = str(meta.get("active_key", ""))
-        active_barrier_kcal: Any = None
+        active_barrier_kcal: Any = meta.get("active_barrier_kcal")
         if active_key and active_key in FAST_BARRIERS:
             active_barrier_kcal = FAST_BARRIERS[active_key][0]
 
         rows.append({
             "reaction_key":       reaction_key,
             "slr_family":         str(meta.get("slr_family", "??")).zfill(2),
-            "current_tier":       str(meta.get("current_tier", "unknown")),
+            "current_tier":       _normalize_reaction_tier(meta.get("current_tier", "unknown")),
             "target_tier":        str(meta.get("target_tier", "selective_dft_anchor")),
             "active_key":         active_key,
             "active_barrier_kcal": active_barrier_kcal,

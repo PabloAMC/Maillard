@@ -23,12 +23,13 @@ import json
 import yaml
 import math
 from pathlib import Path
-from typing import Dict, Tuple, Optional, Sequence
+from typing import Any, Dict, Tuple, Optional, Sequence
 
 # Locate data files
 ROOT = Path(__file__).resolve().parents[1]
 ARRHENIUS_FILE = ROOT / "data" / "lit" / "arrhenius_params.yml"
 REFINEMENT_PATCH_FILE = ROOT / "data" / "lit" / "refinement_surrogate_patches.json"
+COMPUTATIONAL_PRIORS_FILE = ROOT / "data" / "lit" / "computational_priors.json"
 
 # Exact Mapping: normalized reaction family name → barrier in kcal/mol.
 # Replaces fragile substring matching.
@@ -175,6 +176,123 @@ _DONOR_PRIORITY = {
     "fructose": 2,
     "glucose": 1,
 }
+
+_DFT_ANCHOR_REACTION_KEYS = (
+    "hexanal_radical_quench",
+    "quinone_cys_michael",
+    "aa_ring_open_dicarbonyl",
+    "pe_schiff_base",
+    "pe_amadori",
+    "lysinoalanine_crosslink",
+)
+
+
+def _fallback_dft_anchor_metadata() -> Dict[str, Dict[str, Any]]:
+    return {
+        "hexanal_radical_quench": {
+            "slr_family": "11",
+            "current_tier": "xtb_derived_gfn2",
+            "target_tier": "selective_dft_anchor",
+            "active_key": "hexanal_radical_quench_xtb_derived",
+            "active_barrier_kcal": 17.88,
+            "dft_key": "hexanal_radical_quench_dft",
+            "uncertainty_kj": 42.0,
+            "promotion_ceiling": "ranking_only",
+            "honest_label": "Selective DFT anchor, ranking support only until matrix benchmark closure",
+        },
+        "quinone_cys_michael": {
+            "slr_family": "13",
+            "current_tier": "xtb_derived_gfn2",
+            "target_tier": "selective_dft_anchor",
+            "active_key": "quinone_cys_michael_xtb_derived",
+            "active_barrier_kcal": 17.84,
+            "dft_key": "quinone_cys_michael_dft",
+            "uncertainty_kj": 42.0,
+            "promotion_ceiling": "bounded_calibration",
+            "honest_label": "GFN2-xTB estimate, ±factor 3-8 in concentration, ranking only",
+        },
+        "aa_ring_open_dicarbonyl": {
+            "slr_family": "14",
+            "current_tier": "literature_derived_transfer",
+            "target_tier": "selective_dft_anchor",
+            "active_key": "aa_ring_open_dicarbonyl_hcw_family14_surrogate",
+            "active_barrier_kcal": 7.58,
+            "dft_key": "aa_ring_open_dicarbonyl_dft",
+            "uncertainty_kj": 20.0,
+            "promotion_ceiling": "bounded_calibration",
+            "honest_label": "HCW Family 14 surrogate for an upstream ascorbic-acid dicarbonyl source, DFT validation pending, ±factor 2-5; bounded calibration",
+        },
+        "pe_schiff_base": {
+            "slr_family": "15",
+            "current_tier": "literature_derived_transfer",
+            "target_tier": "selective_dft_anchor",
+            "active_key": "pe_schiff_base_lit_derived",
+            "active_barrier_kcal": 22.21,
+            "dft_key": "pe_schiff_base_dft",
+            "uncertainty_kj": 20.9,
+            "promotion_ceiling": "bounded_calibration",
+            "honest_label": "SLR 15 literature Ea=92.9 kJ/mol, ±factor 2-5; bounded calibration",
+        },
+        "pe_amadori": {
+            "slr_family": "15",
+            "current_tier": "literature_derived_transfer",
+            "target_tier": "selective_dft_anchor",
+            "active_key": "pe_amadori_lit_derived",
+            "active_barrier_kcal": 19.81,
+            "dft_key": "pe_amadori_dft",
+            "uncertainty_kj": 20.9,
+            "promotion_ceiling": "bounded_calibration",
+            "honest_label": "SLR 15 literature Ea=82.9 kJ/mol, ±factor 2-5; bounded calibration",
+        },
+        "lysinoalanine_crosslink": {
+            "slr_family": "12",
+            "current_tier": "family_rule_surrogate",
+            "target_tier": "selective_dft_anchor",
+            "active_key": "lysinoalanine_crosslink_dha_family_surrogate",
+            "active_barrier_kcal": 16.0,
+            "dft_key": "lysinoalanine_crosslink_dft",
+            "uncertainty_kj": 42.0,
+            "promotion_ceiling": "ranking_only",
+            "honest_label": "DHA-plus-lysine family surrogate, assumes prior dehydroalanine formation, ±factor 5-15; ranking only",
+        },
+    }
+
+
+def _load_dft_anchor_metadata() -> Dict[str, Dict[str, Any]]:
+    fallback = _fallback_dft_anchor_metadata()
+    try:
+        with open(COMPUTATIONAL_PRIORS_FILE, "r", encoding="utf-8") as handle:
+            payload = json.load(handle)
+    except Exception:
+        return fallback
+
+    entries = {
+        str(row.get("reaction_key", "")).strip(): row
+        for row in payload.get("dft_kinetic_priors", {}).get("entries", [])
+        if str(row.get("reaction_key", "")).strip()
+    }
+    metadata: Dict[str, Dict[str, Any]] = {}
+    for reaction_key in _DFT_ANCHOR_REACTION_KEYS:
+        row = entries.get(reaction_key)
+        if row is None:
+            metadata[reaction_key] = dict(fallback[reaction_key])
+            continue
+        barrier_kcal = row.get("barrier_kcal_mol")
+        metadata[reaction_key] = {
+            "slr_family": str(row.get("slr_family", fallback[reaction_key]["slr_family"])),
+            "current_tier": str(row.get("current_tier", fallback[reaction_key]["current_tier"])),
+            "target_tier": str(row.get("target_tier", "selective_dft_anchor")),
+            "active_key": str(row.get("active_arrhenius_key", fallback[reaction_key]["active_key"])),
+            "active_barrier_kcal": float(barrier_kcal) if barrier_kcal is not None else fallback[reaction_key]["active_barrier_kcal"],
+            "dft_key": f"{reaction_key}_dft",
+            "uncertainty_kj": float(row.get("uncertainty_kj", fallback[reaction_key]["uncertainty_kj"])),
+            "promotion_ceiling": str(row.get("promotion_ceiling", fallback[reaction_key]["promotion_ceiling"])),
+            "honest_label": str(row.get("honest_label", fallback[reaction_key]["honest_label"])),
+        }
+    return metadata
+
+
+DFT_ANCHOR_METADATA = _load_dft_anchor_metadata()
 
 
 def _normalize_donor_context_token(value: str) -> str:

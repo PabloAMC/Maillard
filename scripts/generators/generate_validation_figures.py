@@ -9,13 +9,9 @@ import sys
 from collections import Counter
 from pathlib import Path
 
-import matplotlib
+import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
 import numpy as np
-import scienceplots  # noqa: F401
-
-matplotlib.use("Agg")
-plt.style.use(["science"])  # full LaTeX rendering
 
 ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
@@ -25,6 +21,7 @@ from src.benchmark_coverage_gaps import build_benchmark_coverage_gap_rows as bui
 from src.benchmark_labels import benchmark_label
 from src.benchmark_validation import build_matrix_promotion_family_status, evaluate_benchmark, summarize_benchmarks
 from src.family_validation_overview import build_family_validation_overview_artifact
+from src.plot_style import configure_science_plot_style
 
 _FAMILY_LABELS: dict[str, str] = {
     "amino_acid_sugar_core": r"F01 Amino acid + sugar",
@@ -296,6 +293,7 @@ def _render_markdown(payload: dict[str, object]) -> str:
 
 
 def _render_figure(payload: dict[str, object], output_path: Path) -> None:
+    configure_science_plot_style()
     quantitative_benchmarks = payload["quantitative_benchmarks"]
     quantitative_points = payload["quantitative_points"]
 
@@ -348,8 +346,8 @@ def _render_figure(payload: dict[str, object], output_path: Path) -> None:
         plt.Line2D([0], [0], marker="o", color="0.35", markerfacecolor="white", markeredgecolor="0.35", linestyle="None", markersize=6, label=r"Reference-only anchor"),
     ]
     band_handles = [
-        matplotlib.patches.Patch(facecolor="#D9EAD3", alpha=0.70, label=r"Within $1.5\times$"),
-        matplotlib.patches.Patch(facecolor="#FFF3CD", alpha=0.55, label=r"Within $2\times$"),
+        mpatches.Patch(facecolor="#D9EAD3", alpha=0.70, label=r"Within $1.5\times$"),
+        mpatches.Patch(facecolor="#FFF3CD", alpha=0.55, label=r"Within $2\times$"),
         plt.Line2D([0], [0], color="#2f4858", linewidth=1.5, label=r"Ideal parity ($y=x$)"),
     ]
     benchmark_handles = [

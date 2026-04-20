@@ -23,6 +23,28 @@ def _process_state_lookup() -> Dict[str, Mapping[str, Any]]:
     }
 
 
+def _normalize_promotion_requirement_rows(raw_rows: List[Any]) -> List[Dict[str, str]]:
+    rows: List[Dict[str, str]] = []
+    for item in raw_rows:
+        if isinstance(item, Mapping):
+            key = str(item.get("key", "")).strip()
+            if not key:
+                continue
+            rows.append(
+                {
+                    "key": key,
+                    "label": str(item.get("label", key)),
+                    "description": str(item.get("description", "")),
+                }
+            )
+            continue
+        key = str(item).strip()
+        if not key:
+            continue
+        rows.append({"key": key, "label": key, "description": ""})
+    return rows
+
+
 def _requirement_passed(requirement_key: str, markers: List[Mapping[str, Any]]) -> bool:
     if requirement_key == "direct_crosslink_marker_external_quantified":
         return any(
@@ -42,7 +64,7 @@ def _requirement_passed(requirement_key: str, markers: List[Mapping[str, Any]]) 
 def build_extrusion_external_closure_artifact(file_path: Optional[Path | str] = None) -> Dict[str, Any]:
     contract = load_extrusion_external_closure_contract(file_path)
     process_lookup = _process_state_lookup()
-    promotion_requirements = list(contract.get("promotion_requirements", []))
+    promotion_requirements = _normalize_promotion_requirement_rows(list(contract.get("promotion_requirements", [])))
 
     backfill_rows = []
     backfill_by_matrix: Dict[str, Dict[str, List[str]]] = {}

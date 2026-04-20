@@ -9,9 +9,6 @@ from dataclasses import asdict
 from pathlib import Path
 
 import matplotlib.pyplot as plt
-import scienceplots
-
-plt.style.use(["science", "no-latex"])
 
 ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
@@ -19,7 +16,10 @@ if str(ROOT) not in sys.path:
 
 from src.usability_reports import build_validated_envelope_report
 from src.benchmark_labels import benchmark_label_list
+from src.plot_style import configure_science_plot_style
 from src.presentation import render_validated_envelope_markdown
+
+configure_science_plot_style()
 
 
 def _render_validated_envelope_figure(report, output_path: Path) -> None:

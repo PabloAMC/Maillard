@@ -55,7 +55,7 @@ def test_validation_overview_uses_standardized_benchmark_labels():
     assert _bench_label("wheat_gluten_hvp_xylose_120C_PMC9905368") == r"Wheat gluten hydrolysate + xylose, $120\,^{\circ}$C (Cho et al., 2023)"
 
 
-def test_validation_overview_payload_surfaces_integrated_families_11_and_12():
+def test_validation_overview_payload_surfaces_integrated_families_11_to_16():
     payload = _build_payload()
 
     assert payload["integrated_family_count"] >= 14
@@ -65,4 +65,8 @@ def test_validation_overview_payload_surfaces_integrated_families_11_and_12():
     assert by_slr["12"]["has_runtime_support"] is True
     assert by_slr["13"]["has_runtime_support"] is True
     assert by_slr["14"]["has_runtime_support"] is True
+    assert by_slr["15"]["has_runtime_support"] is True
+    assert by_slr["16"]["has_runtime_support"] is True
     assert by_slr["12"]["benchmark_count"] >= 3
+    assert by_slr["15"]["benchmark_count"] == 0
+    assert by_slr["16"]["benchmark_count"] == 0

@@ -24,18 +24,20 @@ def test_optimize_geometry_retries_with_soscf_after_scf_failure(monkeypatch):
         eff_use_explicit,
         n_atoms_solute,
         *,
+        label="default",
         harden_scf=False,
         use_solvent_optimization=False,
         use_soscf=False,
+        smearing_sigma=None,
+        level_shift=0.0, **kwargs,
     ):
-        calls.append((use_soscf, use_solvent_optimization))
+        calls.append((use_soscf, harden_scf, smearing_sigma))
         if len(calls) == 1:
             raise RuntimeError("Nuclear gradients of <pyscf.scf.hf.RKS_Scanner object at 0x0> not converged")
         return True, object(), MINIMAL_XYZ
 
     monkeypatch.setattr(refiner, "_optimize_with_pyscf_backend", fake_opt_backend)
-    monkeypatch.setattr(refiner, "_preoptimize_seed_xyz", lambda *args, **kwargs: MINIMAL_XYZ)
-    monkeypatch.setattr(refiner, "_run_solvent_scf_with_retry", lambda *args, **kwargs: SimpleNamespace(e_tot=-1.0))
+    monkeypatch.setattr(refiner, "_build_mf", lambda *args, **kwargs: SimpleNamespace(e_tot=-1.0))
     monkeypatch.setattr(refiner, "_run_hessian_and_thermo", lambda *args, **kwargs: ([100.0], -0.9, -0.8))
     monkeypatch.setattr(refiner, "single_point", lambda *args, **kwargs: -0.7)
 
@@ -43,10 +45,10 @@ def test_optimize_geometry_retries_with_soscf_after_scf_failure(monkeypatch):
 
     assert result.converged is True
     assert len(calls) == 2
-    # First call: normal SCF, no SOSCF, no solvent
-    assert calls[0] == (False, False)
-    # Second call: SOSCF + solvent for non-TS retry
-    assert calls[1] == (True, True)
+    # First call: standard-DIIS (no SOSCF, no hardening, no smearing)
+    assert calls[0] == (False, False, None)
+    # Second call: hardened-DIIS+smearing
+    assert calls[1] == (False, True, 0.005)
 
 
 def test_detects_scf_gradient_failure_pattern():
@@ -68,14 +70,15 @@ def test_mlp_prerelax_called_for_non_ts(monkeypatch):
 
     def fake_opt_backend(
         xyz_content, charge, spin, is_ts, max_steps,
-        eff_use_explicit, n_atoms_solute, *, harden_scf=False,
-        use_solvent_optimization=False, use_soscf=False,
+        eff_use_explicit, n_atoms_solute, *, label="default",
+        harden_scf=False, use_solvent_optimization=False,
+        use_soscf=False, smearing_sigma=None, level_shift=0.0, **kwargs,
     ):
         return True, object(), xyz_content
 
     monkeypatch.setattr(refiner, "_mlp_prerelax", fake_mlp_prerelax)
     monkeypatch.setattr(refiner, "_optimize_with_pyscf_backend", fake_opt_backend)
-    monkeypatch.setattr(refiner, "_run_solvent_scf_with_retry", lambda *args, **kwargs: SimpleNamespace(e_tot=-1.0))
+    monkeypatch.setattr(refiner, "_build_mf", lambda *args, **kwargs: SimpleNamespace(e_tot=-1.0))
     monkeypatch.setattr(refiner, "_run_hessian_and_thermo", lambda *args, **kwargs: ([100.0], -0.9, -0.8))
     monkeypatch.setattr(refiner, "single_point", lambda *args, **kwargs: -0.7)
 
@@ -84,8 +87,8 @@ def test_mlp_prerelax_called_for_non_ts(monkeypatch):
     assert len(prerelax_calls) == 1
 
 
-def test_mlp_prerelax_skipped_for_ts(monkeypatch):
-    """MLP pre-relaxation is skipped for TS optimizations."""
+def test_mlp_prerelax_runs_for_ts(monkeypatch):
+    """MLP pre-relaxation also runs for TS (geometry cleanup)."""
     refiner = DFTRefiner(solvent_name=None)
     prerelax_calls = []
 
@@ -95,17 +98,20 @@ def test_mlp_prerelax_skipped_for_ts(monkeypatch):
 
     def fake_opt_backend(
         xyz_content, charge, spin, is_ts, max_steps,
-        eff_use_explicit, n_atoms_solute, *, harden_scf=False,
-        use_solvent_optimization=False, use_soscf=False,
+        eff_use_explicit, n_atoms_solute, *, label="default",
+        harden_scf=False, use_solvent_optimization=False,
+        use_soscf=False, smearing_sigma=None, level_shift=0.0, **kwargs,
     ):
         return True, object(), xyz_content
 
     monkeypatch.setattr(refiner, "_mlp_prerelax", fake_mlp_prerelax)
     monkeypatch.setattr(refiner, "_optimize_with_pyscf_backend", fake_opt_backend)
-    monkeypatch.setattr(refiner, "_run_solvent_scf_with_retry", lambda *args, **kwargs: SimpleNamespace(e_tot=-1.0))
+    monkeypatch.setattr(refiner, "_build_mf", lambda *args, **kwargs: SimpleNamespace(e_tot=-1.0))
     monkeypatch.setattr(refiner, "_run_hessian_and_thermo", lambda *args, **kwargs: ([100.0], -0.9, -0.8))
     monkeypatch.setattr(refiner, "single_point", lambda *args, **kwargs: -0.7)
 
     refiner.optimize_geometry(MINIMAL_XYZ, is_ts=True, max_steps=5)
 
-    assert len(prerelax_calls) == 0
+    assert len(prerelax_calls) == 1
+
+    assert len(prerelax_calls) == 1

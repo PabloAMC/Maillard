@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import datetime as dt
 import json
 from pathlib import Path
 from typing import Any, Dict, Iterable, Mapping, Optional
@@ -110,6 +111,9 @@ def normalize_matrix_experiment_intake(payload: Mapping[str, Any]) -> Dict[str, 
     for field in schema.get("required_provenance_fields", []):
         if field not in provenance:
             raise ValueError(f"Missing provenance field: {field}")
+    measurement_date = provenance.get("measurement_date")
+    if isinstance(measurement_date, (dt.date, dt.datetime)):
+        provenance["measurement_date"] = measurement_date.isoformat()
     normalized["provenance"] = provenance
 
     normalized["experiment_id"] = str(normalized.get("experiment_id", "matrix_experiment_payload")).strip()
@@ -204,6 +208,43 @@ def build_matrix_experiment_benchmark_payload(payload: Mapping[str, Any]) -> Dic
         "protein_type": normalized.get("protein_type"),
         "denaturation_state": normalized.get("denaturation_state", 0.5),
     }
+
+
+def materialize_matrix_experiment_benchmark(payload_or_path: Mapping[str, Any] | Path | str) -> Dict[str, Any]:
+    """Backwards-compatible public API for intake -> benchmark materialization."""
+    payload = load_matrix_experiment_intake(payload_or_path) if isinstance(payload_or_path, (Path, str)) else dict(payload_or_path)
+    return build_matrix_experiment_benchmark_payload(payload)
+
+
+def calibrate_from_intake(
+    payload_or_path: Mapping[str, Any] | Path | str,
+    *,
+    dry_run: bool = False,
+) -> Optional[Dict[str, Any]]:
+    """Compatibility wrapper for calibrating matrix constants from a single intake payload."""
+    payload = load_matrix_experiment_intake(payload_or_path) if isinstance(payload_or_path, (Path, str)) else dict(payload_or_path)
+    provenance = dict(payload.get("provenance") or {})
+    provenance.setdefault("origin", str(payload.get("source_kind", "internal_experiment") or "internal_experiment"))
+    provenance.setdefault("source_reference", str(payload.get("experiment_id", "matrix_calibration_intake") or "matrix_calibration_intake"))
+    provenance.setdefault("source_doi", None)
+    provenance.setdefault("measurement_date", "unspecified")
+    provenance.setdefault("notes", "Calibration intake payload")
+
+    hydrated_payload = dict(payload)
+    hydrated_payload["provenance"] = provenance
+    benchmark_payload = build_matrix_experiment_benchmark_payload(hydrated_payload)
+    if dry_run:
+        return {
+            "benchmark_payload": benchmark_payload,
+            "protein_type": benchmark_payload.get("protein_type"),
+        }
+
+    from src.matrix_calibration_optimizer import calibrate_matrix_constants
+
+    return calibrate_matrix_constants(
+        [benchmark_payload],
+        str(benchmark_payload.get("protein_type", "free")),
+    )
 
 
 def select_aligned_matrix_benchmark(

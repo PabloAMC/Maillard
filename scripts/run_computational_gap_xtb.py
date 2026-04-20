@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import re
 import subprocess
 import sys
 from pathlib import Path
@@ -15,6 +14,11 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from src.computational_gap_refinement import build_computational_gap_xtb_job_manifest  # noqa: E402
+from src.computational_gap_proxy_readiness import PROXY_LANES  # noqa: E402
+from src.xtb_path_quality import assess_xtb_path_quality  # noqa: E402
+
+
+DEFAULT_OUTPUT_PATH = "results/computational_gap_refinement/computational_gap_xtb_execution.json"
 
 
 def _load_manifest(path: Path) -> Dict[str, Any]:
@@ -27,6 +31,34 @@ def _resolve(relative_path: str | None) -> Path | None:
     if not relative_path:
         return None
     return ROOT / relative_path
+
+
+def _proxy_job(target_id: str) -> Dict[str, Any] | None:
+    for lane in PROXY_LANES:
+        if lane.get("target_id") != target_id:
+            continue
+        geometry_dir = str(lane["geometry_dir"])
+        return {
+            "target_id": target_id,
+            "reaction_key": target_id,
+            "status": "proxy_ready",
+            "runner_script": f"{geometry_dir}/run_xtb.sh",
+            "required_inputs": [
+                f"{geometry_dir}/reactant.xyz",
+                f"{geometry_dir}/product.xyz",
+            ],
+            "expected_outputs": [
+                f"{geometry_dir}/xtbpath.xyz",
+                f"{geometry_dir}/xtbpath_ts.xyz",
+            ],
+        }
+    return None
+
+
+def _output_path_for_target(output_arg: str, target_id: str) -> Path:
+    if target_id != "all" and output_arg == DEFAULT_OUTPUT_PATH:
+        return Path(f"results/computational_gap_refinement/{target_id}_xtb_execution.json")
+    return Path(output_arg)
 
 
 def _xyz_atom_count(path: Path | None) -> int | None:
@@ -44,43 +76,23 @@ def _xyz_atom_count(path: Path | None) -> int | None:
     return None
 
 
-def _path_frame_index(path: Path) -> int:
-    match = re.search(r"xtbpath_(\d+)\.xyz$", path.name)
-    return int(match.group(1)) if match else -1
-
-
-def _materialize_xtb_outputs(runner_dir: Path) -> List[Path]:
-    frame_paths = sorted(runner_dir.glob("xtbpath_*.xyz"), key=_path_frame_index)
-    if not frame_paths:
-        return []
-
-    path_bundle = runner_dir / "xtbpath.xyz"
-    ts_guess = runner_dir / "xtbpath_ts.xyz"
-
-    if not path_bundle.exists():
-        frame_chunks = [frame_path.read_text(encoding="utf-8").strip() for frame_path in frame_paths]
-        path_bundle.write_text("\n".join(chunk for chunk in frame_chunks if chunk) + "\n", encoding="utf-8")
-
-    if not ts_guess.exists():
-        midpoint_frame = frame_paths[len(frame_paths) // 2]
-        ts_guess.write_text(midpoint_frame.read_text(encoding="utf-8"), encoding="utf-8")
-
-    return [path_bundle, ts_guess]
-
-
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--manifest", default="results/computational_gap_refinement/computational_gap_xtb_job_manifest.json")
-    parser.add_argument("--output", default="results/computational_gap_refinement/computational_gap_xtb_execution.json")
+    parser.add_argument("--output", default=DEFAULT_OUTPUT_PATH)
     parser.add_argument("--target", default="all")
     parser.add_argument("--execute", action="store_true")
-    parser.add_argument("--timeout", type=int, default=600)
+    parser.add_argument("--timeout", type=int, default=10800)
     args = parser.parse_args()
 
     manifest = _load_manifest(Path(args.manifest))
     jobs = list(manifest.get("jobs", []))
     if args.target != "all":
         jobs = [job for job in jobs if str(job.get("target_id", "")) == args.target]
+        if not jobs:
+            proxy_job = _proxy_job(str(args.target))
+            if proxy_job is not None:
+                jobs = [proxy_job]
 
     results: List[Dict[str, Any]] = []
     for job in jobs:
@@ -120,8 +132,11 @@ def main() -> int:
             path is not None and path.exists() for path in expected_outputs
         )
         if args.execute and cached_outputs_complete:
+            xtb_quality = assess_xtb_path_quality(runner_path.parent, materialize_missing=True)
             row["status"] = "completed_cached"
             row["cached_outputs_used"] = True
+            row["quality_gate_passed"] = bool(xtb_quality["quality_gate_passed"])
+            row["failure_markers"] = list(xtb_quality["failure_markers"])
             results.append(row)
             continue
         if not args.execute:
@@ -142,11 +157,16 @@ def main() -> int:
             row["returncode"] = int(completed.returncode)
             row["stdout_tail"] = "\n".join(completed.stdout.splitlines()[-10:])
             row["stderr_tail"] = "\n".join(completed.stderr.splitlines()[-10:])
-            synthesized_outputs = _materialize_xtb_outputs(runner_path.parent)
-            if synthesized_outputs:
-                expected_outputs = list(dict.fromkeys([*expected_outputs, *synthesized_outputs]))
+            xtb_quality = assess_xtb_path_quality(runner_path.parent, materialize_missing=True)
+            if xtb_quality["synthesized_outputs"]:
+                expected_outputs = list(dict.fromkeys([*expected_outputs, *xtb_quality["synthesized_outputs"]]))
+                row["synthesized_outputs"] = [
+                    str(path.relative_to(ROOT)) for path in xtb_quality["synthesized_outputs"]
+                ]
+            row["quality_gate_passed"] = bool(xtb_quality["quality_gate_passed"])
+            row["failure_markers"] = list(xtb_quality["failure_markers"])
             if completed.returncode == 0 and any(path is not None and path.exists() for path in expected_outputs):
-                row["status"] = "completed"
+                row["status"] = "completed" if xtb_quality["quality_gate_passed"] else "completed_with_quality_warnings"
             elif completed.returncode == 0:
                 row["status"] = "completed_missing_expected_outputs"
             else:
@@ -160,6 +180,7 @@ def main() -> int:
             "job_count": len(results),
             "completed_count": sum(1 for row in results if row.get("status") in {"completed", "completed_cached"}),
             "completed_cached_count": sum(1 for row in results if row.get("status") == "completed_cached"),
+            "completed_with_quality_warnings_count": sum(1 for row in results if row.get("status") == "completed_with_quality_warnings"),
             "seed_required_count": sum(1 for row in results if row.get("status") == "seed_required"),
             "blocked_atom_count_mismatch_count": sum(1 for row in results if row.get("status") == "blocked_atom_count_mismatch"),
             "failed_count": sum(1 for row in results if row.get("status") in {"failed", "timeout"}),
@@ -167,7 +188,7 @@ def main() -> int:
         },
         "jobs": results,
     }
-    output_path = Path(args.output)
+    output_path = _output_path_for_target(str(args.output), str(args.target))
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
 

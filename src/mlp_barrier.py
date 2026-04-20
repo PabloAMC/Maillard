@@ -82,7 +82,6 @@ class MLPBarrier:
             return None
 
         if r_atoms != p_atoms:
-            # print(f"[MLPBarrier] Stoichiometry mismatch: {r_atoms} != {p_atoms}. Skipping.")
             return None
 
         e_reac = self.get_energy(reactant_xyz)

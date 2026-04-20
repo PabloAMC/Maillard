@@ -162,8 +162,8 @@ class UnsupportedBackendAdapter(_BaseAdapter):
 
 
 def build_candidate_adapter(candidate: MLPModelCandidate) -> MLPBackendAdapter:
-    if candidate.model_family == "mace_mp":
-        return MACEBackendAdapter(candidate, model_family="mace_mp")
+    if candidate.model_family in {"mace_mp", "mace_off"}:
+        return MACEBackendAdapter(candidate, model_family=candidate.model_family)
     if candidate.model_family == "mace_omol":
         return MACEBackendAdapter(candidate, model_family="mace_omol")
     if candidate.model_family == "aimnet2":

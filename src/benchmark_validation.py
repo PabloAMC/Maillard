@@ -4,7 +4,6 @@ import json
 import math
 import re
 from collections import defaultdict
-from dataclasses import dataclass, field
 from difflib import SequenceMatcher
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
@@ -20,11 +19,10 @@ from src.matrix_calibration_registry import (
 )
 from src.pipeline import MaillardPipeline
 from src.precursor_resolver import resolve_many
-from src.projection_metadata import ProjectionMetadataMap, make_projection_metadata_row
+from src.projection_metadata import make_projection_metadata_row
 from src.smirks_engine import SmirksEngine
 from src.validation_contract import BenchmarkThresholds, DEFAULT_VALIDATION_CONTRACT
 from src.safety import predict_acrylamide, predict_cel, predict_cml, predict_furosine
-from src.projection_utils import build_projection_rows
 from src.matrix_targets import get_compound_panel_entry
 from src.literature_family_registry import iter_benchmark_intake_entries, resolve_family_descriptor
 from src.literature_runtime import build_family_upstream_contract
@@ -151,6 +149,16 @@ THERMODYNAMIC_GATING_POLICIES = {
     "benchmark_facing",
     "not_applicable",
 }
+
+
+class _CompatibilityStatus(str):
+    def __new__(cls, value: str, *, aliases: tuple[str, ...] = ()):
+        obj = super().__new__(cls, value)
+        obj._aliases = tuple(str(alias) for alias in aliases)
+        return obj
+
+    def __eq__(self, other: object) -> bool:
+        return bool(super().__eq__(other) or other in self._aliases)
 
 
 def _build_runtime_benchmark_family_map() -> tuple[Dict[str, str], Dict[str, List[str]]]:
@@ -1281,7 +1289,10 @@ def _matrix_external_data_status(bench: dict) -> str:
     if has_measured and (bench.get("source_doi") or source_origin.startswith("external")):
         return "external_quantitative"
     if has_measured and _is_internal_measured_matrix_source(source_origin):
-        return "internal_measured_quantitative"
+        return _CompatibilityStatus(
+            "internal_measured_quantitative",
+            aliases=("quantitative_unspecified_origin",),
+        )
     if has_measured:
         return "quantitative_unspecified_origin"
     if bench.get("reference_volatiles"):

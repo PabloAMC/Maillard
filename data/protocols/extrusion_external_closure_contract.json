@@ -2,46 +2,111 @@
   "protocol_id": "extrusion_external_closure_2026",
   "process_state": "extrusion_structured",
   "promotion_requirements": [
-    "direct_damage_panel_complete",
-    "same_run_tradeoff_panel_complete",
-    "traceable_source_metadata"
+    {
+      "key": "direct_crosslink_marker_external_quantified",
+      "label": "Direct crosslink marker externally quantified",
+      "description": "An external quantitative extrusion run must include a direct crosslink marker such as LAL."
+    },
+    {
+      "key": "lysine_damage_marker_external_quantified",
+      "label": "Lysine damage marker externally quantified",
+      "description": "An external quantitative extrusion run must include a lysine-damage assay such as reactive lysine fraction."
+    },
+    {
+      "key": "traceable_source_metadata",
+      "label": "Traceable extrusion metadata",
+      "description": "Extrusion severity, feed, moisture, and assay provenance must be encoded with the run."
+    }
+  ],
+  "literature_backfill": [
+    {
+      "anchor_id": "de_leyn_2019_thiamine_retention",
+      "matrix_scope": ["soy_iso"],
+      "support_level": "supportive_anchor",
+      "source_kind": "process_state_calibration",
+      "what_it_supports": ["extrusion_severity_context", "donor_loss_context"],
+      "why_not_sufficient": "Supports thermal-severity framing but does not directly quantify DHA/LAL or reactive lysine under the same extrusion run.",
+      "source_artifact": "data/lit/process_state_calibrations.json"
+    },
+    {
+      "anchor_id": "troise_2018_soy_thermal_history",
+      "matrix_scope": ["soy_iso"],
+      "support_level": "contextual_anchor",
+      "source_kind": "lysine_damage_context",
+      "what_it_supports": ["soy_thermal_history", "lysine_damage_provenance"],
+      "why_not_sufficient": "Provides soy thermal-history context but not direct extrusion-marker closure.",
+      "source_artifact": "data/lit/process_state_calibrations.json"
+    }
   ],
   "matrices": [
     {
-      "matrix": "soy_iso",
+      "matrix": "pea_iso",
+      "display_name": "Pea isolate extrusion closure package",
+      "temperature_window_c": [140, 180],
+      "companion_contract_id": "dha_lysinoalanine_external_package",
       "direct_marker_panel": [
         {
           "marker_id": "reactive_lysine_fraction",
           "display_name": "Reactive lysine fraction",
-          "closure_role": "direct_damage_marker",
+          "closure_role": "lysine_damage_marker",
           "preferred_assays": ["OPA or equivalent lysine-reactivity assay"],
           "required": true,
-          "repo_direct_anchor_available": false
+          "repo_direct_anchor_available": false,
+          "missing_reason": "external_extrusion_damage_package_not_landed"
         },
         {
           "marker_id": "furosine",
           "display_name": "Furosine",
-          "closure_role": "direct_damage_marker",
+          "closure_role": "supporting_damage_marker",
           "preferred_assays": ["LC-MS/MS or HPLC furosine assay"],
-          "required": true,
-          "repo_direct_anchor_available": true
+          "required": false,
+          "repo_direct_anchor_available": false,
+          "missing_reason": "best_as_companion_not_primary_gate"
         },
         {
           "marker_id": "lysinoalanine",
-          "display_name": "Lysinoalanine",
-          "closure_role": "crosslink_damage_marker",
+          "display_name": "Lysinoalanine (LAL)",
+          "closure_role": "direct_crosslink_marker",
           "preferred_assays": ["Targeted amino-acid crosslink assay"],
           "required": true,
-          "repo_direct_anchor_available": false
+          "repo_direct_anchor_available": false,
+          "missing_reason": "external_extrusion_damage_package_not_landed"
         }
-      ],
-      "supportive_anchor_ids": [
-        "pmc_2026_hme_hexanal_baseline",
-        "acs_2022_pba_lysine_loss_benchmark"
-      ],
-      "contextual_anchor_ids": [
-        "pmc_12648097_acrylamide_mitigation_anchor",
-        "pmc_2024_pba_cml_cel_ranges_anchor"
+      ]
+    },
+    {
+      "matrix": "soy_iso",
+      "display_name": "Soy isolate extrusion closure package",
+      "temperature_window_c": [140, 180],
+      "companion_contract_id": "dha_lysinoalanine_external_package",
+      "direct_marker_panel": [
+        {
+          "marker_id": "reactive_lysine_fraction",
+          "display_name": "Reactive lysine fraction",
+          "closure_role": "lysine_damage_marker",
+          "preferred_assays": ["OPA or equivalent lysine-reactivity assay"],
+          "required": true,
+          "repo_direct_anchor_available": false,
+          "missing_reason": "external_extrusion_damage_package_not_landed"
+        },
+        {
+          "marker_id": "furosine",
+          "display_name": "Furosine",
+          "closure_role": "supporting_damage_marker",
+          "preferred_assays": ["LC-MS/MS or HPLC furosine assay"],
+          "required": false,
+          "repo_direct_anchor_available": true,
+          "missing_reason": "available_as_partial_anchor_only"
+        },
+        {
+          "marker_id": "lysinoalanine",
+          "display_name": "Lysinoalanine (LAL)",
+          "closure_role": "direct_crosslink_marker",
+          "preferred_assays": ["Targeted amino-acid crosslink assay"],
+          "required": true,
+          "repo_direct_anchor_available": false,
+          "missing_reason": "external_extrusion_damage_package_not_landed"
+        }
       ]
     }
   ]

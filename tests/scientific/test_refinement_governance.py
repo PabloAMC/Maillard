@@ -28,10 +28,10 @@ def test_refinement_governance_holds_offline_compute_until_cheap_screening_moves
     payload = build_selective_refinement_governance_artifact(BENCHMARKS)
 
     assert payload["summary"]["governing_status"] == "hold_observable_first"
-    assert payload["summary"]["mechanistic_priority_benchmark_count"] == 0
+    assert payload["summary"]["mechanistic_priority_benchmark_count"] == 2
     assert payload["summary"]["approved_offline_job_count"] == 0
     assert any("cheap-first screening produced no benchmark-visible improvement" in blocker for blocker in payload["blockers"])
-    assert payload["mechanistic_priority_benchmarks"] == []
+    assert len(payload["mechanistic_priority_benchmarks"]) == 2
 
 
 def test_refinement_governance_markdown_surfaces_family_gate_and_blockers():

@@ -1,0 +1,47 @@
+{
+  "package_id": "pea_soy_mixed_external_package_2026",
+  "sprint_name": "pea_soy_mixed_external_package",
+  "objective_id": "external_mixed_meaty_positive_package",
+  "package_status": "specified_not_yet_measured",
+  "root_blocker": "external_quantitative_measured_volatiles_for_mixed_matrix_lane",
+  "purpose": "Name the exact external measurement bundle needed to close the mixed meaty-positive pea and soy package without overclaiming closure today.",
+  "required_replicates": 3,
+  "global_desirable_targets": [
+    "2-methyl-3-furanthiol",
+    "2-furfurylthiol",
+    "bis(2-methyl-3-furyl) disulfide",
+    "2,5-dimethylpyrazine"
+  ],
+  "global_adverse_targets": [
+    "Hexanal",
+    "2-pentylfuran",
+    "furfural",
+    "1-octen-3-ol"
+  ],
+  "global_companion_assays": [
+    "Ellman free SH",
+    "OPA free amino groups",
+    "DSC or equivalent denaturation proxy",
+    "post-heating pH measurement"
+  ],
+  "would_close_requirements": [
+    "external_quantitative_origin",
+    "comparator_is_measured_volatiles",
+    "minimum_quantitative_closed_targets"
+  ],
+  "remaining_after_package": [
+    "no_internal_or_directional_dependencies"
+  ],
+  "matrices": [
+    {
+      "matrix": "pea_iso",
+      "display_name": "Pea isolate mixed meaty-positive package",
+      "selection_reason": "Pea remains a primary matrix lane and needs an external mixed meaty-positive package that mirrors the current internal benchmark candidate."
+    },
+    {
+      "matrix": "soy_iso",
+      "display_name": "Soy isolate mixed meaty-positive package",
+      "selection_reason": "Soy remains a primary matrix lane and needs the same external mixed meaty-positive package so promotion can stop leaning on ambient anchors."
+    }
+  ]
+}

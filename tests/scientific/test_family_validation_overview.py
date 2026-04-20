@@ -32,7 +32,7 @@ def test_family_validation_overview_tracks_quantitative_and_gap_families():
     assert "| 01 |" in markdown
 
 
-def test_family_validation_overview_tracks_integrated_family_runtime_support_and_family_12_benchmarks():
+def test_family_validation_overview_tracks_integrated_family_runtime_support_and_late_qm_lanes():
     payload = build_family_validation_overview_artifact([
         ROOT / "data" / "benchmarks" / "acrylamide_spi_extrusion_130C_ACSRef3.json",
         ROOT / "data" / "benchmarks" / "cml_cel_commercial_pbma_Foods2023.json",
@@ -46,4 +46,8 @@ def test_family_validation_overview_tracks_integrated_family_runtime_support_and
     assert by_slr["12"]["has_runtime_support"] is True
     assert by_slr["13"]["has_runtime_support"] is True
     assert by_slr["14"]["has_runtime_support"] is True
+    assert by_slr["15"]["has_runtime_support"] is True
+    assert by_slr["16"]["has_runtime_support"] is True
     assert by_slr["12"]["benchmark_count"] >= 3
+    assert by_slr["15"]["benchmark_count"] == 0
+    assert by_slr["16"]["benchmark_count"] == 0

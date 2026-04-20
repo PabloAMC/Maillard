@@ -21,8 +21,8 @@ def test_matrix_primary_benchmark_campaign_targets_selected_mixed_lane():
     pea_row = next(row for row in payload["arms"] if row["matrix"] == "pea_iso")
     assert "comparator_is_measured_volatiles" in pea_row["would_close_requirements"]
     assert "external_quantitative_origin" in pea_row["would_close_requirements"]
-    assert "Hexanal" in pea_row["evidence_or_calibration_blockers"]
-    assert pea_row["mechanistic_blockers"] == []
+    assert pea_row["evidence_or_calibration_blockers"] == []
+    assert "Hexanal" in pea_row["mechanistic_blockers"]
     assert pea_row["calibration_closure_action"] == "calibration_closed"
     assert pea_row["calibration_passed"] is True
     assert pea_row["hexanal_ratio"] is not None

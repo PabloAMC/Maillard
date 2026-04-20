@@ -59,8 +59,12 @@
       "charge": 0,
       "spin": 1,
       "promotion_ceiling": "ranking_only",
-      "dft_status": "pending",
-      "active_arrhenius_key": "hexanal_radical_quench_xtb_derived"
+      "dft_status": "barrierless_confirmed",
+      "active_arrhenius_key": "hexanal_radical_quench_xtb_derived",
+      "feasibility_category": "barrierless_electronic",
+      "feasibility_notes": "Radical-radical C-S recombination. xTB (4 methods) and DFT (r2SCAN/def2-svp) node scan both confirm monotonically decreasing PES. The 7.58 kcal/mol surrogate is effective Arrhenius Ea from diffusion+cage effects, not an electronic barrier. No saddle point exists.",
+      "electronic_barrier": "none",
+      "audit_date": "2026-04-20"
     },
     {
       "id": "quinone_cys_michael",
@@ -77,8 +81,13 @@
       "barrier_kj_mol": 74.65,
       "uncertainty_kj": 42.0,
       "promotion_ceiling": "bounded_calibration",
-      "dft_status": "pending",
-      "active_arrhenius_key": "quinone_cys_michael_xtb_derived"
+      "dft_status": "invalid_saddle",
+      "active_arrhenius_key": "quinone_cys_michael_xtb_derived",
+      "feasibility_category": "tractable_single_step",
+      "feasibility_notes": "robust_sp attempt: Sella converged but n_imag=0 (not a real TS). DFT electronic barrier 90.85 kcal/mol (vs xTB surrogate 17.84). TS guess is an interpolated NEB node, not a saddle point. Needs GSM path search or constrained scan to find real TS.",
+      "robust_sp_barrier_kcal": 96.01,
+      "robust_sp_quality": "invalid_saddle",
+      "audit_date": "2026-04-20"
     },
     {
       "id": "aa_ring_open_dicarbonyl",
@@ -107,7 +116,10 @@
         "data/lit/computational_priors.json:dft_kinetic_priors.aa_ring_open_dicarbonyl"
       ],
       "surrogate_barrier_kcal_mol": 7.58,
-      "surrogate_barrier_kj_mol": 31.70
+      "surrogate_barrier_kj_mol": 31.70,
+      "feasibility_category": "tractable_single_step",
+      "feasibility_notes": "Closed-shell ring-opening hydration. Intramolecular, well-defined TS. xTB TS guess fmax=10.03 eV/A (high — needs careful refinement). Routine DFT problem.",
+      "audit_date": "2026-04-20"
     },
     {
       "id": "pe_schiff_base_interface",
@@ -125,7 +137,10 @@
       "uncertainty_kj": 20.9,
       "promotion_ceiling": "bounded_calibration",
       "dft_status": "pending",
-      "active_arrhenius_key": "pe_schiff_base_lit_derived"
+      "active_arrhenius_key": "pe_schiff_base_lit_derived",
+      "feasibility_category": "tractable_single_step",
+      "feasibility_notes": "Closed-shell Schiff base condensation. Intramolecular, 31 atoms. xTB TS guess fmax=4.43 eV/A. Literature-backed barrier 22.2 kcal/mol.",
+      "audit_date": "2026-04-20"
     },
     {
       "id": "pe_amadori",
@@ -143,7 +158,31 @@
       "uncertainty_kj": 20.9,
       "promotion_ceiling": "bounded_calibration",
       "dft_status": "pending",
-      "active_arrhenius_key": "pe_amadori_lit_derived"
+      "active_arrhenius_key": "pe_amadori_lit_derived",
+      "feasibility_category": "multi_step_decomposable",
+      "feasibility_notes": "NOT elementary — involves skeletal reorganization beyond simple H transfer. xTB gives 73 kcal/mol (vs lit 19.8). Needs decomposition into 2 elementary steps with water shuttle. See pe_amadori_water_shuttle in multistep registry.",
+      "audit_date": "2026-04-20"
+    },
+    {
+      "id": "pe_amadori_water",
+      "reaction_key": "pe_amadori_water",
+      "slr_family": "15",
+      "gap": "Family 15: PE Amadori rearrangement with 2 explicit waters as proton shuttle (Grotthuss relay) — addresses dry-mechanism barrier overestimation.",
+      "decision_impact": "high",
+      "cheap_first_method": "DE-GSM with explicit-water seed geometries",
+      "upgrade_method": "wB97M-V//r2SCAN-3c DFT robust_sp on water-shuttled TS",
+      "acceptance_signal": "Barrier within ~10 kcal/mol of literature 19.81 kcal/mol; clean 5-membered TS",
+      "method": "explicit-water cluster + DE-GSM + DFT robust_sp",
+      "source_quality": "literature_derived_transfer",
+      "barrier_kcal_mol": 19.81,
+      "barrier_kj_mol": 82.9,
+      "uncertainty_kj": 20.9,
+      "promotion_ceiling": "bounded_calibration",
+      "dft_status": "pending",
+      "active_arrhenius_key": "pe_amadori_lit_derived",
+      "feasibility_category": "solvent_dependent",
+      "feasibility_notes": "Water-shuttled Amadori rearrangement. 39-atom cluster with 3 explicit waters. Requires cluster-continuum approach + careful path search. Moderate-high difficulty.",
+      "audit_date": "2026-04-20"
     },
     {
       "id": "melanoidin_radical_trapping",
@@ -161,7 +200,10 @@
       "uncertainty_kj": 62.8,
       "promotion_ceiling": "ranking_only",
       "dft_status": "not_in_c4_c5_scope",
-      "active_arrhenius_key": "melanoidin_radical_trapping_mlp_derived"
+      "active_arrhenius_key": "melanoidin_radical_trapping_mlp_derived",
+      "feasibility_category": "barrierless_electronic",
+      "feasibility_notes": "Radical addition (sulfur-radical to melanoidin fragment). Likely barrierless electronic, similar to hexanal_radical_quench. The 26.3 kcal/mol is MLP-derived and probably an artifact. Needs confirmation but low priority.",
+      "audit_date": "2026-04-20"
     },
     {
       "id": "lysinoalanine_crosslink",
@@ -191,7 +233,10 @@
         "src/reaction_templates.py::_dha_competing_pathway"
       ],
       "surrogate_barrier_kcal_mol": 16.00,
-      "surrogate_barrier_kj_mol": 66.95
+      "surrogate_barrier_kj_mol": 66.95,
+      "feasibility_category": "tractable_single_step",
+      "feasibility_notes": "Closed-shell Michael addition (DHA + lysine). Intramolecular, 35 atoms. Best TS quality of all candidates (fmax=1.43 eV/A). Textbook DFT problem — BEST candidate for first validated barrier.",
+      "audit_date": "2026-04-20"
     }
   ]
 }

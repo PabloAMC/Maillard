@@ -54,7 +54,8 @@ Commands:
                Generate and execute synthetic diagnostic examples for both extrusion workbook flows.
     run_generator_script generate_matrix_promotion_contract --output-dir results/validation
                Generate the no-wet-lab computational-gap refinement plan and the xTB/DFT job manifests.
-  computational-gap-xtb [TARGET]
+    computational-gap-dft-preflight [TARGET]
+    computational-gap-xtb [TARGET]
     run_generator_script generate_matrix_observable_closure_audit --output-dir results/validation
   computational-gap-dft [TARGET]
                Execute the computational-gap DFT refinement job set (or a single TARGET id).
@@ -168,6 +169,21 @@ run_generator_script() {
   fi
 }
 
+run_computational_gap_job() {
+  local script_name="$1"
+  local output_suffix="$2"
+  local extra_args="$3"
+  local target="${4:-}"
+  local prefix="${5:-}"
+  local command="python scripts/run_${script_name}.py ${extra_args}"
+
+  if [ -n "$target" ]; then
+    command="$command --target '$target' --output 'results/computational_gap_refinement/${target}_${output_suffix}_execution.json'"
+  fi
+
+  run_in_env "${prefix}${command}"
+}
+
 validation_figures_lane() {
   local commands=(
     "generate_family_lane_validation --output-dir results/validation"
@@ -225,7 +241,10 @@ ensure_container() {
     docker run -d \
       --platform linux/amd64 \
       --name "$CONTAINER_NAME" \
+      --memory=10g \
+      --memory-swap=10g \
       -p 8888:8888 \
+      -v maillard_conda:/opt/conda \
       -v "$WORKSPACE_DIR:$WORKSPACE_MOUNT" \
       -w "$WORKSPACE_MOUNT" \
       "$IMAGE_NAME" \
@@ -396,19 +415,15 @@ case "$cmd" in
     ;;
   computational-gap-xtb)
     shift
-    if [ "$#" -ge 1 ]; then
-      run_in_env "python scripts/run_computational_gap_xtb.py --target '$1' --execute"
-    else
-      run_in_env "python scripts/run_computational_gap_xtb.py --execute"
-    fi
+    run_computational_gap_job computational_gap_xtb xtb "--execute" "${1:-}"
+    ;;
+  computational-gap-dft-preflight)
+    shift
+    run_computational_gap_job computational_gap_dft dft "--preflight-only" "${1:-}"
     ;;
   computational-gap-dft)
     shift
-    if [ "$#" -ge 1 ]; then
-      run_in_env "exec python scripts/run_computational_gap_dft.py --target '$1' --execute"
-    else
-      run_in_env "exec python scripts/run_computational_gap_dft.py --execute"
-    fi
+    run_computational_gap_job computational_gap_dft dft "--execute" "${1:-}" "exec "
     ;;
   computational-gap-dft-ingest)
     run_generator_script ingest_computational_gap_dft_results --output-dir results/validation

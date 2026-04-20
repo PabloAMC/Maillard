@@ -31,7 +31,6 @@ from src.projection import (
 from src.matrix_targets import get_compound_panel_entry
 from src.projection_metadata import ProjectionMetadataMap, make_projection_metadata_row
 
-from src.curated_pathways import PATHWAYS, PATHWAY_METADATA
 from src.barrier_constants import arrhenius_rate_constant, get_reference_pre_exponential
 from src.headspace import HeadspaceModel
 from src.matrix_calibration_registry import describe_matrix_calibration, determine_matrix_process_state

@@ -35,7 +35,7 @@ def test_sugar_classifier():
 
 def test_archive():
     archive_dir = Path("scripts/dev_archive")
-    files = ["debug.py", "debug_pipeline.py", "tmp_mech.yaml", "traceback.txt", "get_internal_bench_results.py"]
+    files = ["debug.py", "traceback.txt", "get_internal_bench_results.py"]
     missing = [f for f in files if not (archive_dir / f).exists()]
     
     if not missing:

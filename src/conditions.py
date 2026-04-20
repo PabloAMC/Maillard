@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from typing import Optional, Sequence
 
+import numpy as np
+
 from src.barrier_constants import arrhenius_rate_constant, get_donor_reactivity_multiplier
 from src.extrusion import build_extrusion_process_profile, normalize_moisture_regime
 
@@ -29,6 +31,8 @@ class ReactionConditions:
                  sterilization_time_minutes: float = 0.0,
                  barrel_zone_temperatures: Optional[Sequence[float]] = None,
                  barrel_zone_time_fractions: Optional[Sequence[float]] = None,
+                 temperature_profile: Optional[Sequence[Sequence[float]]] = None,
+                 water_activity_profile: Optional[Sequence[Sequence[float]]] = None,
                  ):
         self.pH = pH
         self.temperature_celsius = temperature_celsius
@@ -49,6 +53,12 @@ class ReactionConditions:
         self.sterilization_time_minutes = float(sterilization_time_minutes)
         self.barrel_zone_temperatures = None if barrel_zone_temperatures is None else [float(value) for value in barrel_zone_temperatures]
         self.barrel_zone_time_fractions = None if barrel_zone_time_fractions is None else [float(value) for value in barrel_zone_time_fractions]
+        self.temperature_profile = None if temperature_profile is None else [
+            (float(pair[0]), float(pair[1])) for pair in temperature_profile
+        ]
+        self.water_activity_profile = None if water_activity_profile is None else [
+            (float(pair[0]), float(pair[1])) for pair in water_activity_profile
+        ]
         self.__post_init__()
 
     def __post_init__(self):
@@ -64,6 +74,21 @@ class ReactionConditions:
         if self.solvent_name.lower() in presets:
             self.dielectric_constant = presets[self.solvent_name.lower()]
         self.moisture_regime = normalize_moisture_regime(self.moisture_regime, self.water_activity)
+        self._validate_profile(self.temperature_profile, "temperature_profile")
+        self._validate_profile(self.water_activity_profile, "water_activity_profile")
+
+    @staticmethod
+    def _validate_profile(profile: Optional[Sequence[Sequence[float]]], profile_name: str) -> None:
+        if profile is None:
+            return
+        if len(profile) < 2:
+            raise ValueError(f"{profile_name} must include at least an initial point and a terminal point")
+        last_time = None
+        for pair in profile:
+            time_point = float(pair[0])
+            if last_time is not None and time_point <= last_time:
+                raise ValueError(f"{profile_name} time points must be strictly increasing")
+            last_time = time_point
 
     @property
     def extrusion_profile(self) -> dict[str, object]:
@@ -93,6 +118,29 @@ class ReactionConditions:
     @property
     def nominal_temperature_kelvin(self) -> float:
         return self.temperature_celsius + 273.15
+
+    @property
+    def has_dynamic_profile(self) -> bool:
+        return bool(self.temperature_profile and len(self.temperature_profile) >= 2)
+
+    def temperature_celsius_at_time(self, time_minutes: float) -> float:
+        if not self.has_dynamic_profile:
+            return float(self.temperature_celsius)
+        profile = sorted(self.temperature_profile, key=lambda item: item[0])
+        time_points = [point[0] for point in profile]
+        temp_points = [point[1] for point in profile]
+        return float(np.interp(float(time_minutes), time_points, temp_points))
+
+    def temperature_celsius_at(self, time_minutes: float) -> float:
+        return self.temperature_celsius_at_time(time_minutes)
+
+    def water_activity_at(self, time_minutes: float) -> float:
+        if not self.water_activity_profile or len(self.water_activity_profile) < 2:
+            return float(self.water_activity)
+        profile = sorted(self.water_activity_profile, key=lambda item: item[0])
+        time_points = [point[0] for point in profile]
+        aw_points = [point[1] for point in profile]
+        return float(np.interp(float(time_minutes), time_points, aw_points))
         
     def _sigmoid(self, x: float, center: float, k: float) -> float:
         """Helper for sigmoid transitions."""
@@ -151,6 +199,7 @@ class ReactionConditions:
         ea_override_kcal: float = None,
         *,
         reactant_labels: Optional[Sequence[str]] = None,
+        time_minutes: Optional[float] = None,
     ) -> float:
         """
         Arrhenius rate constant: k = A * exp(-Ea / RT)
@@ -164,7 +213,10 @@ class ReactionConditions:
         - furfural_formation: 70.0
         - acrylamide_formation: 130.0
         """
-        T_K = self.temperature_kelvin
+        if time_minutes is not None and self.has_dynamic_profile:
+            T_K = self.temperature_celsius_at_time(float(time_minutes)) + 273.15
+        else:
+            T_K = self.temperature_kelvin
         
         # Ea in kJ/mol
         ACTIVATION_ENERGIES_KJ = {

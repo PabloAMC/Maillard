@@ -27,14 +27,9 @@ import shutil
 import sys
 from pathlib import Path
 
-import matplotlib
 import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
 import numpy as np
-import scienceplots  # noqa: F401  imported for side-effect (style registration)
-
-matplotlib.use("Agg")
-plt.style.use(["science"])  # enables LaTeX typography via text.usetex=True
 
 ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
@@ -42,10 +37,13 @@ if str(ROOT) not in sys.path:
 
 from src.benchmark_validation import summarize_benchmarks  # noqa: E402
 from src.benchmark_labels import benchmark_label  # noqa: E402
+from src.plot_style import configure_science_plot_style  # noqa: E402
 from src.family_validation_overview import (  # noqa: E402
     build_family_validation_overview_artifact,
     render_family_validation_overview_markdown,
 )
+
+configure_science_plot_style()
 
 # ---------------------------------------------------------------------------
 # Human-readable label tables (LaTeX-safe: & → \&, % → \%)

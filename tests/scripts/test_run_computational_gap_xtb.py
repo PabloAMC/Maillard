@@ -70,3 +70,38 @@ def test_runner_reuses_cached_outputs_in_execute_mode(tmp_path, monkeypatch):
     assert payload["summary"]["failed_count"] == 0
     assert payload["jobs"][0]["status"] == "completed_cached"
     assert payload["jobs"][0]["cached_outputs_used"] is True
+    assert payload["jobs"][0]["quality_gate_passed"] is True
+
+
+def test_runner_supports_explicit_proxy_target_and_target_specific_output(tmp_path, monkeypatch):
+    monkeypatch.setattr(runner, "ROOT", tmp_path)
+    monkeypatch.chdir(tmp_path)
+
+    proxy_dir = tmp_path / "data/geometries/xtb_inputs/pe_amadori"
+    proxy_dir.mkdir(parents=True)
+    (proxy_dir / "reactant.xyz").write_text("2\nreactant\nH 0.0 0.0 0.0\nH 0.0 0.0 0.7\n", encoding="utf-8")
+    (proxy_dir / "product.xyz").write_text("2\nproduct\nH 0.0 0.0 0.0\nH 0.0 0.0 0.8\n", encoding="utf-8")
+    (proxy_dir / "run_xtb.sh").write_text("#!/bin/bash\nexit 1\n", encoding="utf-8")
+    (proxy_dir / "xtbpath.xyz").write_text("2\npath\nH 0.0 0.0 0.0\nH 0.0 0.0 0.7\n", encoding="utf-8")
+    (proxy_dir / "xtbpath_ts.xyz").write_text("2\nts\nH 0.0 0.0 0.0\nH 0.0 0.0 0.75\n", encoding="utf-8")
+
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "run_computational_gap_xtb.py",
+            "--manifest",
+            str(tmp_path / "missing_manifest.json"),
+            "--target",
+            "pe_amadori",
+            "--execute",
+        ],
+    )
+
+    assert runner.main() == 0
+
+    output_path = tmp_path / "results/computational_gap_refinement/pe_amadori_xtb_execution.json"
+    payload = json.loads(output_path.read_text(encoding="utf-8"))
+    assert payload["summary"]["job_count"] == 1
+    assert payload["jobs"][0]["target_id"] == "pe_amadori"
+    assert payload["jobs"][0]["status"] == "completed_cached"
