@@ -89,6 +89,8 @@ Commands:
     ;;
   campaign SPEC [OUTPUT_DIR]
                Run a shareable campaign spec and generate campaign artifacts.
+  campaign --names "A,B" [--ph 5.5 --temp 105 --output-dir results/share/compare]
+               Run a named comparison through the same campaign packaging path.
     if [ "$#" -lt 1 ]; then
   summary      Generate results/validation/benchmark_summary.{md,json}.
   deep-research-audit
@@ -450,9 +452,17 @@ case "$cmd" in
     shift
     if [ "$#" -lt 1 ]; then
       echo "Usage: ./scripts/docker_maillard.sh campaign SPEC [OUTPUT_DIR]" >&2
+      echo "   or: ./scripts/docker_maillard.sh campaign --names \"A,B\" [extra run_campaign args]" >&2
       exit 1
     fi
-    if [ "$#" -ge 2 ]; then
+    if [ "${1#--}" != "$1" ]; then
+      cmd="python scripts/run_campaign.py"
+      for arg in "$@"; do
+        printf -v quoted_arg '%q' "$arg"
+        cmd+=" $quoted_arg"
+      done
+      run_in_env "$cmd"
+    elif [ "$#" -ge 2 ]; then
       run_in_env "python scripts/run_campaign.py --spec '$1' --output-dir '$2'"
     else
       run_in_env "python scripts/run_campaign.py --spec '$1'"

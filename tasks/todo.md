@@ -1,5 +1,90 @@
 # Maillard Strategic Roadmap
 
+## Active Follow-up — 2026-04-21 Family 14 TS Recovery
+
+Status 2026-04-22: **both recovery strategies failed to produce a first-order DFT saddle.** Family 14 `aa_ring_open_dicarbonyl` reverts to the literature HCW surrogate (7.58 kcal/mol, bounded_calibration).
+
+- [x] Re-audit GPT-5.4's plan. Key findings:
+	- The reaction is a **2-coordinate concerted** process (O0–C4 forming + H2 transfer from O3 to O14), not the single O0–C4 coordinate GPT-5.4 tracked.
+	- The GSM+Sella TS had H2 in the wrong proton basin (on O3, not in flight).
+	- The xTB NEB path (`xtbpath_*.xyz`) was corrupt (16/21 images dissociated 9–13 Å).
+	- A single-coordinate scan would have produced the same wrong-basin artifact.
+- [x] Strategy A — xTB-constrained-relaxed linear-interpolation seed (both forming bonds constrained) + DFT mode inspection + Sella DFT. Script: `scripts/recover_ts_interpolated_seed.py`.
+	- Seed clean: d(O0,C4)=2.57, d(H2,O14)=1.40, d(H2,O3)=3.00, min NN=0.96 Å.
+	- DFT Hessian mode 5 at **−192.58 cm⁻¹, score 0.78** (consistent direction but mediocre magnitude).
+	- **Sella DFT verdict: `minimum` (`invalid_saddle`).** See `results/computational_gap_refinement/aa_ring_open_dicarbonyl_interp_recovery.json`. The seed, while clash-free, was not in a quadratic saddle basin at r2SCAN/def2-svp.
+- [x] Strategy B — xTB-CI-NEB (IDPP interpolation, LBFGS, TBLite w/ tuned SCF: acc=2.0, max_iter=500, e_temp=1500 K, mixer_damping=0.2) + DFT mode inspection + Sella DFT. Script: `scripts/recover_ts_neb_seed.py`.
+	- Pre-opt LBFGS oscillated (fmax 0.36–0.82 eV/Å over 120 steps, target 0.10); CI-NEB then exploded to fmax >12 eV/Å. GFN2-xTB with 9 IDPP images cannot hold a stable MEP for this concerted two-bond reaction.
+- [x] Decision: **keep the bounded_calibration literature surrogate (7.58 kcal/mol) for Family 14.** Family 14 TS is not refinable with the current GFN2-xTB seeding + r2SCAN/def2-svp Sella stack; a higher-level seed (DFT 2D relaxed scan over d(O0,C4) × d(H2,O14), or MACE-MP0-seeded NEB) would be required before retrying.
+- [ ] (Future, low priority) If Family 14 becomes rate-limiting for any use case, re-attempt with a 2D DFT relaxed scan over the two forming bonds. Until then, do not spend further DFT compute on this target.
+
+## Active Plan — 2026-04-22 Triangulated Barrier Strategy for Families 11–15
+
+### TL;DR
+Sella+GFN2 está al límite (Family 14 falló con dos estrategias). El "impacto cero" del generador de sensibilidad sobre los 7 targets es **artefacto del panel de benchmarks** (Cys/ribosa flavor no estresa Families 11–15), no irrelevancia química. El plan operativo cambia: **B auditoría de evidencia + React-OT primero sobre el subconjunto elegible por composición**, **A OA-ReactDiff sólo como segunda línea si React-OT no alcanza**, **C wet-lab como backlog documentado**, **D promoción sin atajos**.
+
+### Contexto duro
+- 7 targets en scope (Families 11–15): `hexanal_radical_quench`, `quinone_cys_michael`, `lysinoalanine_crosslink`, `aa_ring_open_dicarbonyl`, `pe_schiff_base`, `pe_amadori`, `asparagine_sugar_explicit_water_cluster`.
+- Sensibilidad global (`results/validation/refinement_global_sensitivity.json`) ranking top: `amadori_rearrangement` (46.04), `thiol_addition` (38.94), `aminoketone_condensation` (34.23), `strecker_degradation` (32.48), `thiol_oxidation` (22.89). Los 7 targets aparecen impacto 0 **porque el panel de benchmarks no los mide**, no por irrelevancia química.
+- `selective_dft_plan.md` actual: `Run-now jobs: 0`. Todos `defer/cheap_first_hold` → ningún DFT mejora benchmarks visibles.
+- Cobertura de evidencia auditada a 2026-04-22: de los 7 targets, sólo `aa_ring_open_dicarbonyl`, `pe_schiff_base` y `pe_amadori` tienen transferencia/literatura explícita en repo; `lysinoalanine_crosslink` es surrogate de familia; `hexanal_radical_quench`, `quinone_cys_michael` y `asparagine_sugar_explicit_water_cluster` no tienen paper directo en el repo. De las 5 familias dominantes del benchmark, `amadori_rearrangement` y `strecker_degradation` sí tienen referencia explícita; `thiol_addition` es prior acotado; `aminoketone_condensation` y `thiol_oxidation` siguen como constantes calibradas sin DOI explícito en repo.
+- React-OT público es utilizable sólo sobre targets CHON y tamaño moderado. Elegibles hoy: `lysinoalanine_crosslink`, `aa_ring_open_dicarbonyl`, `pe_schiff_base`, `asparagine_sugar_explicit_water_cluster`. Bloqueados por composición: `hexanal_radical_quench` (S), `quinone_cys_michael` (S), `pe_amadori` (P).
+- Stack instalado: torch, mace-torch, sella, ase, pyscf, xtb, tblite, rdkit, geometric. **Falta**: React-OT, OA-ReactDiff. `chemprop` queda fuera del camino principal por OOD severo + falta de SMILES balanceadas/mapeadas para 6/7 targets.
+
+### Vía B — Auditoría de evidencia + piloto React-OT (ARRANCA YA, ~1-2 días)
+- [ ] B.1 Consolidar una matriz de procedencia para los 7 targets + 5 familias dominantes en `results/validation/qm_barrier_provenance.{md,json}`: `paper_directo`, `transferencia_literatura`, `surrogate_familia`, `xtb_derived`, `sin_fuente_directa`.
+- [ ] B.2 Añadir React-OT al entorno (`environment.yml`/`Dockerfile`) en modo reproducible y registrar checkpoint/procedencia bajo `models/external/react_ot/`.
+- [ ] B.3 Crear wrapper `scripts/recover_ts_react_ot_seed.py` que consume `reactant.xyz` + `product.xyz`, ejecuta inferencia React-OT y materializa `react_ot_ts_guess.xyz` + `react_ot_summary.json` por target. No autoridad energética: sólo semilla geométrica.
+- [ ] B.4 Ejecutar React-OT sobre el subconjunto elegible (`lysinoalanine_crosslink`, `aa_ring_open_dicarbonyl`, `pe_schiff_base`, `asparagine_sugar_explicit_water_cluster`) y pasar cada seed por `inspect_ts_imag_modes` + Sella DFT corto cuando el modo score supere el gate.
+- [ ] B.5 Documentar explícitamente los bloqueos de composición para `hexanal_radical_quench`, `quinone_cys_michael` y `pe_amadori`; no fingir cobertura ML donde no la hay.
+- [ ] B.6 Triage por target post-React-OT:
+  - `seed válida + DFT converge` → **PROMOVER candidato**.
+  - `seed válida pero DFT cae a minimum/invalid_saddle` → **REVISAR con Vía A**.
+  - `inferencia bloqueada u OOD` → **wet-lab o surrogate honesto**.
+- **Acceptance**: matriz de procedencia completa para 7+5; React-OT corre sobre 4/7 targets elegibles; al menos 2/4 generan una seed que merece inspección DFT o todos los fallos quedan clasificados con razón explícita.
+
+### Vía A — OA-ReactDiff o segunda alternativa geométrica (SÓLO si React-OT no alcanza)
+- [ ] A.1 Clonar e instalar OA-ReactDiff (`chenruduan/OAReactDiff`) con `--no-deps`; persistir checkpoint bajo `models/external/oa_reactdiff/` con `provenance.json`. Smoke sobre 1 reacción in-distribution → confirmar que la inferencia genera una geometría TS utilizable.
+- [ ] A.2 Crear `scripts/recover_ts_diffusion.py`: input `target_id` + N=10 candidatos; pipeline `OA-ReactDiff → inspect_ts_imag_modes → mejor (|ω|×score) → Sella DFT con ts_v0` y `policy:"off"`. Output `results/computational_gap_refinement/<target>_diffusion_recovery.json`. Reutilizar bypass MLP/xTB de `recover_ts_interpolated_seed.py`.
+- [ ] A.3 Ejecutar A.2 sólo sobre targets donde React-OT haya producido `minimum`, `invalid_saddle` o `blocked_by_composition`, y donde siga habiendo valor científico (`aa_ring_open_dicarbonyl`, `asparagine_sugar_explicit_water_cluster`, safety-critical).
+- [ ] A.4 Cierre por target en uno de tres estados: `promoted_dft_diffusion` (TS válido + DFT converge), `confirmed_surrogate_via_failure_bound` (sin seed útil, surrogate queda con racional explícito), o `escalated_to_wet_lab`.
+- **Acceptance**: OA-ReactDiff se ejecuta sólo donde React-OT no resolvió; no se duplica compute sobre targets ya cerrados por Vía B.
+
+### Vía C — Wet-lab backlog Families 11–15 (PARALELO, no bloquea)
+- [ ] C.1 Documentar formalmente el gap del panel: el set de benchmarks no contiene mediciones para Families 11–15; ése es el origen del "impacto cero".
+- [ ] C.2 Inventariar observables por familia: F11 hexanal/nonanal headspace; F12 lisinoalanina LC-MS; F13 quinona-Cys adductos LC-MS + acrilamida GC-MS; F14 ácido 2,3-DKG + browning A294/A420; F15 piridinas/pirroles PE-Maillard headspace.
+- [ ] C.3 Usar `src/experiment_request.py` (S22.2) con valor = "información independiente sobre familia previamente no observada" (no benchmark fit). Output `results/validation/wet_lab_backlog_families_11_15.{md,json}` ranked por familia × coste × discriminación.
+- [ ] C.4 Triggers de ejecución: (a) Vía B/A escaló a wet-lab, (b) target rate-limiting para algún use case en `data/use_cases/`, (c) target sin paper directo y además bloqueado por composición/OOD para los generadores geométricos.
+- **Acceptance**: cada Family 11–15 tiene ≥ 1 spec wet-lab redactada; ningún experimento se lanza sin trigger explícito.
+
+### Vía D — Gobierno y trazabilidad (CONTINUO)
+- [ ] D.1 Marcar `aa_ring_open_dicarbonyl.refinability_status = "stack_limit_reached"` en `data/lit/computational_priors.json` con racional explícito.
+- [ ] D.2 Política de promoción: ningún target sube a `selective_dft_anchor` sin triangulación. Reglas en B.5/A.4.
+- [ ] D.3 Log único `results/validation/qm_barrier_provenance.{md,json}` por target: `{target_id, evidence_class, surrogate_kcal, react_ot_status, react_ot_kcal, oa_reactdiff_status, oa_reactdiff_kcal, wet_lab_kcal, final_kcal, final_tier, final_confidence, decision_rationale, evidence_paths[]}`.
+
+### Sequencing & gates
+- B termina antes de empezar A (B reduce el scope de A).
+- A se lanza sólo sobre subconjunto donde React-OT haya fallado o no aplique.
+- C documenta en paralelo desde día 1; no bloquea.
+- D se aplica continuamente.
+- **Hard stop**: si React-OT produce seeds útiles para ≥2/4 elegibles y el resto queda bien clasificado por procedencia, A queda opcional y la triangulación geométrica se considera suficiente.
+- `pytest tests/scripts/test_run_computational_gap_dft.py tests/unit/test_literature_runtime.py` verde tras cualquier promoción.
+
+### Riesgos
+- **React-OT composición**: el checkpoint público práctico está restringido a CHON y tamaño moderado. Mitigación: bloquear explícitamente `hexanal_radical_quench`, `quinone_cys_michael`, `pe_amadori` y no fingir cobertura.
+- **OA-ReactDiff entrenado en Transition1x (ωB97X/6-31G(d), gas phase)**: transferencia ruidosa a sistemas con disolvente. Mitigación: usar como semilla DFT-Sella (ddCOSMO water), no como energía final.
+- **Coste compute A**: 7×N=10 + Hessianos puede tardar días. Mitigación: tiempo-box estricto (A.3).
+- **Falsa triangulación**: React-OT/OA-ReactDiff generan geometría, no barrera. Mitigación: nunca usar la energía ML como autoridad final; sólo seeds + DFT o surrogate honesto.
+
+### Excluido del scope
+- Reentrenamiento de modelos ML de barrera (Chemprop/EquiReact quedan fuera del camino principal).
+- Mejoras al pipeline DFT-Sella nativo (probadamente al límite).
+- Ampliación del panel de benchmarks por nuestra cuenta (es C, requiere wet-lab externo).
+- pyGSM (paralelo, ya tiene su propio Active Plan más abajo).
+
+### Review
+- _pendiente_
+
 ## Active Plan — 2026-04-19 pyGSM integration & global barrier run
 
 ### Objetivos del usuario

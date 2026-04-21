@@ -43,8 +43,7 @@ This is the shortest useful map of the repository.
 | Path | Role |
 | --- | --- |
 | `scripts/run_pipeline.py` | Single-run scientist-facing prediction and report generation |
-| `scripts/compare_formulations.py` | Side-by-side comparison for a small named set of formulations |
-| `scripts/run_campaign.py` | Campaign-level package generation with run artifacts and provenance |
+| `scripts/run_campaign.py` | Campaign-level package generation with run artifacts, named comparisons, and provenance |
 
 ## Test Layout
 

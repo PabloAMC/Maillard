@@ -149,7 +149,7 @@ def build_c4_c5_dft_status() -> List[Dict[str, Any]]:
             "dft_key":            dft_key,
             "dft_filled":         dft_filled,
             "dft_barrier_kcal":   dft_barrier_kcal,
-            "uncertainty_kj":     float(meta.get("uncertainty_kj", 42.0)),
+            "uncertainty_kj":     (float(meta["uncertainty_kj"]) if meta.get("uncertainty_kj") is not None else None),
             "promotion_ceiling":  str(meta.get("promotion_ceiling", "ranking_only")),
             "honest_label":       str(meta.get("honest_label", "")),
         })

@@ -1483,17 +1483,32 @@ class DFTRefiner:
             except Exception as e:
                 logger.warning(f"    [RESUME] Failed to parse trajectory: {e}")
 
-        # Determine effective solvation settings
-        if use_explicit_solvent is None:
-            eff_use_explicit = (n_water is not None and n_water > 0)
-        else:
-            eff_use_explicit = use_explicit_solvent
-        
-        n_atoms_solute = 0
-        if eff_use_explicit:
-            n_atoms_solute = len(_extract_atom_string(xyz_content).splitlines())
-
         current_xyz = xyz_content
+        # Determine effective solvation settings from call-time overrides first,
+        # then fall back to the instance defaults configured on the refiner.
+        effective_n_water = self.n_water if n_water is None else n_water
+        if use_explicit_solvent is None:
+            eff_use_explicit = bool(self.use_explicit_solvent or (n_water is not None and n_water > 0))
+        else:
+            eff_use_explicit = bool(use_explicit_solvent)
+        if effective_n_water is None:
+            effective_n_water = 0
+        if effective_n_water <= 0:
+            eff_use_explicit = False
+
+        n_atoms_solute = len(_extract_atom_string(xyz_content).splitlines()) if eff_use_explicit else 0
+        current_atom_count = len(_extract_atom_string(current_xyz).splitlines())
+        if eff_use_explicit and current_atom_count <= n_atoms_solute:
+            logger.info(
+                "    [SOLVATION] Generating explicit solvent cluster with %d water molecules.",
+                effective_n_water,
+            )
+            current_xyz = self.solvation_engine.generate_solvated_cluster(
+                current_xyz,
+                n_water=effective_n_water,
+                freeze_core=is_ts,
+            )
+
         conv = False
         mol_opt = None
         opt_xyz = None

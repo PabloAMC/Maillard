@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Any, Dict, Mapping, Optional
 
 from src.artifact_io import load_json_mapping, repo_root, resolve_optional_path
-from src.matrix_primary_benchmark_campaign import build_matrix_primary_benchmark_campaign_artifact
+from src.primary_benchmark_campaign import build_matrix_primary_benchmark_campaign
 from src.pea_soy_external_evidence import build_pea_soy_external_evidence_artifact
 
 
@@ -19,7 +19,7 @@ def load_pea_soy_mixed_external_package_contract(file_path: Optional[Path | str]
 
 def build_pea_soy_mixed_external_package_artifact(file_path: Optional[Path | str] = None) -> Dict[str, Any]:
     contract = load_pea_soy_mixed_external_package_contract(file_path)
-    campaign = build_matrix_primary_benchmark_campaign_artifact()
+    campaign = build_matrix_primary_benchmark_campaign()
     external = build_pea_soy_external_evidence_artifact()
 
     campaign_by_matrix = {str(row.get("matrix", "")): row for row in campaign.get("arms", [])}

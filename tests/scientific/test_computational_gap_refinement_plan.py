@@ -89,7 +89,7 @@ def mocked_geometry_inputs(monkeypatch: pytest.MonkeyPatch) -> None:
 def test_computational_gap_plan_surfaces_targets_ceilings_and_write_back_artifacts(mocked_geometry_inputs: None):
     payload = build_computational_gap_refinement_plan_artifact()
 
-    assert payload["summary"]["target_count"] == 7
+    assert payload["summary"]["target_count"] == 8
     by_id = {row["id"]: row for row in payload["targets"]}
 
     assert by_id["hexanal_radical_quench"]["promotion_ceiling"] == "ranking_only"
@@ -127,9 +127,9 @@ def test_computational_gap_manifests_capture_xtb_and_dft_readiness_without_wet_l
     xtb_by_id = {job["target_id"]: job for job in xtb_manifest["jobs"]}
     dft_by_id = {job["target_id"]: job for job in dft_manifest["jobs"]}
 
-    assert xtb_manifest["summary"]["job_count"] == 7
+    assert xtb_manifest["summary"]["job_count"] == 8
     assert xtb_manifest["summary"]["ready_count"] == 6
-    assert xtb_manifest["summary"]["seed_required_count"] == 1
+    assert xtb_manifest["summary"]["seed_required_count"] == 2
     assert xtb_manifest["summary"]["blocked_atom_count_mismatch_count"] == 0
     assert xtb_by_id["hexanal_radical_quench"]["status"] == "ready"
     assert xtb_by_id["hexanal_radical_quench"]["surrogate_available"] is False
@@ -143,8 +143,8 @@ def test_computational_gap_manifests_capture_xtb_and_dft_readiness_without_wet_l
     assert xtb_by_id["pe_schiff_base"]["status"] == "ready"
     assert xtb_by_id["pe_amadori"]["status"] == "ready"
 
-    assert dft_manifest["summary"]["job_count"] == 7
-    assert dft_manifest["summary"]["seed_required_count"] == 1
+    assert dft_manifest["summary"]["job_count"] == 8
+    assert dft_manifest["summary"]["seed_required_count"] == 2
     assert dft_manifest["summary"]["blocked_atom_count_mismatch_count"] == 0
     assert dft_manifest["summary"]["ready_for_dft_count"] == 6
     assert dft_by_id["hexanal_radical_quench"]["status"] == "ready_for_dft"

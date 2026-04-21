@@ -104,17 +104,18 @@ The optimizer sweeps through parameter variants and returns the formulation with
 
 ## 7. Comparing Head-to-Head
 
-Before finalizing your lab order, you want to see exactly how Hypothesis A and B stack up against each other in a single report. You can use the `compare_formulations.py` tool for this.
+Before finalizing your lab order, you want to see exactly how Hypothesis A and B stack up against each other in a single report. You can use the named comparison mode of `run_campaign.py` for this.
 
 Note: This tool compares formulations already defined in the system's "grid" or provided via standard names.
 
 ```bash
-python scripts/compare_formulations.py \
+python scripts/run_campaign.py \
   --names "Hypothesis A (Glucose+Glycine),Hypothesis B (Ribose+Cysteine)" \
   --ph 6.5 \
   --temp 130 \
   --target-tag meaty \
   --minimize-tag beany \
+  --campaign-name "Hypothesis A vs B" \
   --output-dir results/comparison_report
 ```
 

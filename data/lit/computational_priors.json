@@ -1734,44 +1734,50 @@
       {
         "reaction_key": "hexanal_radical_quench",
         "slr_family": "11",
-        "current_tier": "selective_dft_anchor",
-        "target_tier": "selective_dft_anchor",
-        "barrier_kcal_mol": 17.88,
-        "barrier_kj_mol": 74.81,
-        "uncertainty_kj": 42.0,
-        "rate_uncertainty_factor": "\u00d73-8 at 150\u00b0C",
+        "current_tier": "no_literature_anchor",
+        "target_tier": "wet_lab_anchor",
+        "barrier_kcal_mol": null,
+        "barrier_kj_mol": null,
+        "uncertainty_kj": null,
+        "rate_uncertainty_factor": null,
         "concentration_uncertainty": "\u00d73-8 in ppb",
-        "ranking_reliability": "medium",
-        "promotion_ceiling": "ranking_only",
-        "honest_label": "Selective DFT anchor, ranking support only until matrix benchmark closure",
-        "computational_method": "wB97M-V/def2-tzvp // r2SCAN-3c/def2-svp + ddCOSMO(water)",
-        "active_arrhenius_key": "hexanal_radical_quench_xtb_derived",
+        "ranking_reliability": "no_anchor",
+        "promotion_ceiling": "wet_lab_required",
+        "honest_label": "Hexanal radical quench has no reliable kinetic anchor. Runtime falls back to literature_runtime barrier_kj_mol=31.72 default; treat any prediction qualitatively only.",
+        "computational_method": "No reliable anchor available. xTB-derived value (17.88 kcal/mol) retired 2026-04-21 because (i) GFN2 H-abstraction barriers for radical quench reactions are systematically biased and (ii) no direct literature Ea exists in repo for hexanal-quench by phenoxyl/thiyl radicals.",
+        "active_arrhenius_key": "hexanal_radical_quench_no_anchor",
         "process_state_applicability": [
           "heated_matrix",
           "aqueous_pre_extrusion_model"
         ],
-        "promotion_note": "Promoted from completed computational-gap DFT execution; benchmark closure remains gated by matrix observables.",
-        "last_refined_at": "2026-04-09T06:29:19+00:00"
+        "promotion_note": "Removed xTB-derived 17.88 kcal/mol; escalated to wet-lab backlog per V\u00eda C of tasks/todo.md (active plan 2026-04-22).",
+        "last_refined_at": "2026-04-21",
+        "refinability_status": "wet_lab_pending",
+        "refinability_note": "Requires either: (a) hexanal H-abstraction Ea from radical-trapping literature ingestion, or (b) wet-lab measurement of hexanal suppression vs cysteine/sulfur partner concentration in oxidized-oil pre-cooking. See data/lit/deep_research_backlog.json for ResearchGate Ref 11 (lipid off-notes) ingestion."
       },
       {
         "reaction_key": "quinone_cys_michael",
         "slr_family": "13",
-        "current_tier": "xtb_derived_gfn2",
-        "target_tier": "selective_dft_anchor",
-        "barrier_kcal_mol": 17.84,
-        "barrier_kj_mol": 74.65,
-        "uncertainty_kj": 42.0,
-        "rate_uncertainty_factor": "\u00d73-8 at 150\u00b0C",
-        "concentration_uncertainty": "\u00d73-8 in ppb",
-        "ranking_reliability": "medium",
+        "current_tier": "literature_family_surrogate",
+        "target_tier": "literature_derived_transfer",
+        "barrier_kcal_mol": 6.93,
+        "barrier_kj_mol": 29.0,
+        "uncertainty_kj": 15.0,
+        "rate_uncertainty_factor": 8.0,
+        "concentration_uncertainty": "factor_3_8",
+        "ranking_reliability": "ranking_only",
         "promotion_ceiling": "bounded_calibration",
-        "honest_label": "GFN2-xTB estimate, \u00b1factor 3-8 in concentration, ranking only",
-        "computational_method": "GFN2-xTB NEB path search",
-        "active_arrhenius_key": "quinone_cys_michael_xtb_derived",
+        "honest_label": "Family surrogate (Michael thiol addition, ~29 kJ/mol literature). Same mechanism class as o-quinone + Cys; bounded calibration, +/- factor 3-8.",
+        "computational_method": "Literature family surrogate: thiol Michael addition to alpha,beta-unsaturated carbonyl (acrylamide-removal review, ResearchGate, ~29 kJ/mol). xTB-derived value was unreliable and has been retired.",
+        "active_arrhenius_key": "quinone_cys_michael_thiol_addition_family",
         "process_state_applicability": [
           "heated_matrix",
           "aqueous_pre_extrusion_model"
-        ]
+        ],
+        "promotion_note": "Replaces unreliable GFN2-xTB derived 17.84 kcal/mol (74.65 kJ/mol). xTB-derived value retired 2026-04-21 per scientific judgment.",
+        "refinability_status": "literature_anchor_only",
+        "refinability_note": "Direct ingestion of 13_polyphenol_amino_capping deep-research source (currently in deep_research_backlog) would close this gap with a primary measurement.",
+        "last_refined_at": "2026-04-21"
       },
       {
         "reaction_key": "aa_ring_open_dicarbonyl",
@@ -1799,6 +1805,22 @@
           "heated_matrix",
           "aqueous_pre_extrusion_model",
           "extrusion_structured"
+        ],
+        "refinability_status": "stack_limit_reached",
+        "refinability_note": "Family 14 selective-DFT closure attempted with two strategies (interpolation+xTB constrained relax, xTB-CI-NEB+TBLite). Sella DFT verdict: minimum on both seeds; mode-match score 0.78 / |omega|=193 cm-1 below acceptance gate. Stack limit reached for concerted multi-coordinate TS at GFN2-xTB seed quality. Surrogate retained as bounded_calibration; do not re-attempt without substantially improved seed (e.g., diffusion-based geometry generator with public CHON checkpoint that supports this composition).",
+        "refinability_attempts": [
+          {
+            "method": "interp+xtb_constrained_relax",
+            "date": "2026-04-21",
+            "log": "data/logs/aa_ring_open_dicarbonyl_interp_recovery.log",
+            "verdict": "minimum"
+          },
+          {
+            "method": "xtb_ci_neb+tblite",
+            "date": "2026-04-21",
+            "log": "data/logs/aa_ring_open_dicarbonyl_neb_recovery.log",
+            "verdict": "minimum"
+          }
         ]
       },
       {

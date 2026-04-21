@@ -3,6 +3,6 @@
   "description": "Accepted surrogate barrier offsets selected only when they improve benchmark-visible diagnostics without severe regressions.",
   "accepted_offsets": {},
   "accepted_candidates": [],
-  "baseline_total_score": 27.75750550435715,
-  "patched_total_score": 27.75750550435715
+  "baseline_total_score": 18.75739054050905,
+  "patched_total_score": 18.75739054050905
 }

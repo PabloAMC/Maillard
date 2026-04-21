@@ -59,6 +59,36 @@ def test_run_cantera_help():
     assert result.returncode == 0
     assert "Run Cantera microkinetic simulation" in result.stdout
 
+
+@pytest.mark.slow
+def test_run_campaign_help():
+    cmd = ["python", "scripts/run_campaign.py", "--help"]
+    result = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
+    assert result.returncode == 0
+    assert "--spec" in result.stdout
+    assert "--names" in result.stdout
+
+
+@pytest.mark.slow
+def test_run_campaign_named_comparison_mode(tmp_path):
+    out_dir = tmp_path / "campaign_compare"
+    cmd = [
+        "python", "scripts/run_campaign.py",
+        "--names", "Soy/Pea Base (Untreated),Soy/Pea Base + Reducing Sugar",
+        "--ph", "5.5",
+        "--temp", "105",
+        "--target-tag", "meaty",
+        "--minimize-tag", "beany",
+        "--campaign-name", "CLI comparison smoke",
+        "--output-dir", str(out_dir),
+    ]
+    result = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
+    assert result.returncode == 0, result.stderr
+    assert (out_dir / "comparison.md").exists()
+    assert (out_dir / "comparison.json").exists()
+    assert (out_dir / "campaign.md").exists()
+    assert (out_dir / "campaign.json").exists()
+
 @pytest.mark.slow
 def test_calibrate_barriers_importable():
     """Verify calibrate_barriers.py can be loaded without syntax or config errors."""
