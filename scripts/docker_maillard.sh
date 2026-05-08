@@ -26,7 +26,8 @@ stage_into_workspace() {
   abs_src="$(cd "$(dirname "$src")" && pwd)/$(basename "$src")"
   case "$abs_src" in
     "$WORKSPACE_DIR"/*)
-      echo "$abs_src"
+      # Translate host path to the container mount.
+      echo "$WORKSPACE_MOUNT${abs_src#$WORKSPACE_DIR}"
       return 0
       ;;
   esac
@@ -35,7 +36,7 @@ stage_into_workspace() {
   local dest="$stage_dir/$(basename "$abs_src")"
   cp "$abs_src" "$dest"
   echo >&2 "[docker_maillard.sh] staged $abs_src -> $dest (mounted as $WORKSPACE_MOUNT/.cache/react_ot_uploads/$(basename "$abs_src"))"
-  echo "$dest"
+  echo "$WORKSPACE_MOUNT/.cache/react_ot_uploads/$(basename "$abs_src")"
 }
 
 usage() {
