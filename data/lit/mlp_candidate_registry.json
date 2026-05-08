@@ -132,6 +132,34 @@
       "status": "registry_only"
     },
     {
+      "candidate_id": "react_ot_ts_v1",
+      "model_family": "react_ot",
+      "model_name": "deepprinciple_react_ot_sb_pretrained",
+      "backend_locator": "python:src.react_ot_backend",
+      "chemistry_domain": "general_organic",
+      "materials_first": false,
+      "proposed_role": "ts_initialization",
+      "target_motif_families": [
+        "carbonyl_amine_condensation",
+        "carbonyl_fragmentation",
+        "proton_transfer_rearrangement"
+      ],
+      "benchmark_visible_gap": "test whether a diffusion-based optimal-transport TS generator can produce credible TS seeds for CHON-only computational-gap targets without contaminating the main maillard env",
+      "expected_speedup": 5.0,
+      "likely_failure_modes": [
+        "out_of_domain_sulfur_phosphorus",
+        "torch_geometric_cpu_install_blocked",
+        "transition1x_gas_phase_only",
+        "ts_seed_benchmark_contract_gap"
+      ],
+      "fallback_comparator": "sella_plus_pyscf",
+      "benchmark_results_path": null,
+      "geometry_benchmark_path": null,
+      "ts_seed_benchmark_path": "results/validation/mlp_ts_seed_assessment.json",
+      "external_evidence_id": "react_ot_external_2026q2",
+      "status": "secondary_env_required"
+    },
+    {
       "candidate_id": "materials_foundation_example",
       "model_family": "materials_foundation_model",
       "model_name": "placeholder",

@@ -14,6 +14,10 @@ usage() {
 Usage: ./scripts/docker_maillard.sh <command> [args...]
 
 Commands:
+  react-ot-setup
+  react-ot-smoke [ARGS...]
+  react-ot-pilot [ARGS...]
+  react-ot-import-colab ARCHIVE [--out-dir DIR]
     scientific_lane
     ;;
   scientific-fast)
@@ -470,6 +474,42 @@ case "$cmd" in
     ;;
   deep-research-audit)
     run_in_env "python scripts/deep_research_tracker.py"
+    ;;
+  react-ot-setup)
+    ensure_container
+    REACT_OT_SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+    bash "${REACT_OT_SCRIPT_DIR}/setup_react_ot_env.sh"
+    ;;
+  react-ot-smoke)
+    shift
+    cmd="python scripts/run_react_ot_smoke.py"
+    for arg in "$@"; do
+      printf -v quoted_arg '%q' "$arg"
+      cmd+=" $quoted_arg"
+    done
+    run_in_env "$cmd"
+    ;;
+  react-ot-pilot)
+    shift
+    cmd="python scripts/recover_ts_react_ot_seed.py"
+    for arg in "$@"; do
+      printf -v quoted_arg '%q' "$arg"
+      cmd+=" $quoted_arg"
+    done
+    run_in_env "$cmd"
+    ;;
+  react-ot-import-colab)
+    shift
+    if [ "$#" -lt 1 ]; then
+      echo "Usage: ./scripts/docker_maillard.sh react-ot-import-colab ARCHIVE [--out-dir DIR]" >&2
+      exit 1
+    fi
+    cmd="python scripts/import_react_ot_colab_artifacts.py"
+    for arg in "$@"; do
+      printf -v quoted_arg '%q' "$arg"
+      cmd+=" $quoted_arg"
+    done
+    run_in_env "$cmd"
     ;;
   notebook)
     run_in_env "jupyter notebook --ip 0.0.0.0 --port 8888 --no-browser --allow-root"

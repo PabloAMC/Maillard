@@ -152,6 +152,58 @@ class OrbMolBackendAdapter(_BaseAdapter):
         return plugin_module.prepare_ts_seed(xyz_string, self.model_name, self.backend_locator, fmax, max_steps)
 
 
+class ReactOTBackendAdapter(_BaseAdapter):
+    """Adapter for React-OT (deepprinciple/react-ot).
+
+    React-OT is installed in a *secondary* conda env (see
+    ``scripts/setup_react_ot_env.sh``) and reached via ``subprocess`` from
+    the plugin module ``src.react_ot_backend``. It requires both reactant
+    and product geometries, so it cannot satisfy the single-seed
+    ``prepare_ts_seed`` contract used by the TS-seed-benchmark validator;
+    ``probe_availability`` therefore reports ``available=False`` with an
+    explicit contract-gap reason whenever the adapter is consulted from
+    that lane. The pilot wrapper
+    ``scripts/recover_ts_react_ot_seed.py`` calls
+    ``predict_ts_from_reactant_product`` from the plugin module directly.
+    """
+
+    def probe_availability(self) -> BackendAvailability:
+        try:
+            plugin_module = self._load_python_backend_module()
+        except ImportError as exc:
+            return BackendAvailability(False, False, str(exc))
+        if plugin_module is None:
+            return BackendAvailability(
+                False,
+                False,
+                "react_ot adapter requires backend_locator='python:src.react_ot_backend'",
+            )
+        if not hasattr(plugin_module, "probe_backend"):
+            return BackendAvailability(
+                False,
+                False,
+                "Configured React-OT python backend does not expose probe_backend",
+            )
+        try:
+            ok, reason = plugin_module.probe_backend(self.model_name, self.backend_locator)
+        except Exception as exc:  # noqa: BLE001
+            return BackendAvailability(False, False, f"react_ot probe_backend raised: {exc}")
+        if not ok:
+            return BackendAvailability(False, False, str(reason))
+        return BackendAvailability(
+            False,
+            True,
+            "react_ot backend present, but TS-seed benchmark contract requires reactant+product; "
+            "use scripts/recover_ts_react_ot_seed.py",
+        )
+
+    def prepare_ts_seed(self, xyz_string: str, *, fmax: float = 0.05, max_steps: int = 100) -> str:
+        raise NotImplementedError(
+            "React-OT requires reactant and product XYZ inputs. Use the pilot wrapper "
+            "scripts/recover_ts_react_ot_seed.py instead of the TS-seed benchmark contract."
+        )
+
+
 class UnsupportedBackendAdapter(_BaseAdapter):
     def __init__(self, candidate: MLPModelCandidate, reason: str):
         super().__init__(candidate)
@@ -170,6 +222,8 @@ def build_candidate_adapter(candidate: MLPModelCandidate) -> MLPBackendAdapter:
         return AIMNet2BackendAdapter(candidate)
     if candidate.model_family == "orbmol":
         return OrbMolBackendAdapter(candidate)
+    if candidate.model_family == "react_ot":
+        return ReactOTBackendAdapter(candidate)
     return UnsupportedBackendAdapter(candidate, f"No explicit backend adapter is registered for {candidate.model_family}")
 
 
