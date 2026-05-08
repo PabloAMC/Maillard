@@ -9,6 +9,35 @@ WORKSPACE_MOUNT="/workspace"
 CONDA_SH="/opt/conda/etc/profile.d/conda.sh"
 ENV_NAME="maillard"
 
+# Stage a host file into the workspace so it is visible inside the container.
+# Echoes the path (workspace-relative) that the container should use.
+stage_into_workspace() {
+  local src="$1"
+  # Expand a leading ~ if the caller passed a literal tilde.
+  case "$src" in
+    "~"|"~/"*) src="${HOME}${src:1}" ;;
+  esac
+  if [ ! -e "$src" ]; then
+    echo >&2 "[docker_maillard.sh] ERROR: file not found on host: $src"
+    echo >&2 "  Hint: list candidates with:  ls -lt ~/Downloads | grep -i react_ot"
+    exit 2
+  fi
+  local abs_src
+  abs_src="$(cd "$(dirname "$src")" && pwd)/$(basename "$src")"
+  case "$abs_src" in
+    "$WORKSPACE_DIR"/*)
+      echo "$abs_src"
+      return 0
+      ;;
+  esac
+  local stage_dir="$WORKSPACE_DIR/.cache/react_ot_uploads"
+  mkdir -p "$stage_dir"
+  local dest="$stage_dir/$(basename "$abs_src")"
+  cp "$abs_src" "$dest"
+  echo >&2 "[docker_maillard.sh] staged $abs_src -> $dest (mounted as $WORKSPACE_MOUNT/.cache/react_ot_uploads/$(basename "$abs_src"))"
+  echo "$dest"
+}
+
 usage() {
   cat <<'EOF'
 Usage: ./scripts/docker_maillard.sh <command> [args...]
@@ -18,6 +47,9 @@ Commands:
   react-ot-smoke [ARGS...]
   react-ot-pilot [ARGS...]
   react-ot-import-colab ARCHIVE [--out-dir DIR]
+  react-ot-open-colab [--github] [--open]
+  react-ot-coverage [--target TARGET ...]
+  react-ot-orchestrate [--prepare-only|--finish] [--archive PATH] [--target TARGET ...]
     scientific_lane
     ;;
   scientific-fast)
@@ -505,7 +537,42 @@ case "$cmd" in
       exit 1
     fi
     cmd="python scripts/import_react_ot_colab_artifacts.py"
+    first=1
     for arg in "$@"; do
+      if [ "$first" = "1" ]; then
+        arg="$(stage_into_workspace "$arg")"
+        first=0
+      fi
+      printf -v quoted_arg '%q' "$arg"
+      cmd+=" $quoted_arg"
+    done
+    run_in_env "$cmd"
+    ;;
+  react-ot-open-colab)
+    shift
+    # Runs on the host so a browser can actually be opened.
+    python3 "$(cd "$(dirname "$0")" && pwd)/open_react_ot_colab.py" "$@"
+    ;;
+  react-ot-coverage)
+    shift
+    cmd="python scripts/report_react_ot_seed_coverage.py"
+    for arg in "$@"; do
+      printf -v quoted_arg '%q' "$arg"
+      cmd+=" $quoted_arg"
+    done
+    run_in_env "$cmd"
+    ;;
+  react-ot-orchestrate)
+    shift
+    cmd="python scripts/orchestrate_react_ot_colab.py"
+    next_is_archive=0
+    for arg in "$@"; do
+      if [ "$next_is_archive" = "1" ]; then
+        arg="$(stage_into_workspace "$arg")"
+        next_is_archive=0
+      elif [ "$arg" = "--archive" ]; then
+        next_is_archive=1
+      fi
       printf -v quoted_arg '%q' "$arg"
       cmd+=" $quoted_arg"
     done
