@@ -1,0 +1,47 @@
+experiment_id: requested_wheat_gluten_hvp_xylose_120c_pmc9905368_2_methyl_3_furanthiol_mft_rank2
+status: pending_lab
+source_kind: model_requested_experiment
+protein_type: free
+process_state: aqueous_pre_extrusion_model
+matrix_format: null
+conditions:
+  temp_C: 120
+  ph: 6.0
+  water_activity: 0.92
+  time_min: 30
+formulation:
+  precursors:
+    Wheat gluten hydrolysate:
+      concentration_mM: 50.0
+    L-Cysteine:
+      concentration_mM: 5.0
+    L-Methionine:
+      concentration_mM: 6.0
+    Glycine:
+      concentration_mM: 10.0
+    D-Xylose:
+      concentration_mM: 50.0
+measured_volatiles:
+  2-Methyl-3-furanthiol (MFT):
+    conc_ppb: null
+    uncertainty_pct: null
+    _target_role: primary_request_target
+request_metadata:
+  originating_voi_rank: 2
+  voi_score: 7.02089704199347
+  voi_rationale: CI width 6.10 dex; ≈7e+03× ODT (decision_relevance=3.84); critical
+    meaty odorant — multi-factor SIDA closes precursor × matrix gap
+  envelope_miss_log10: 0.0
+  ci_width_log10: 6.096831750024513
+  decision_relevance: 3.8385494465849646
+  p5_predicted_ppb: 3.9971437822531404e-05
+  p50_predicted_ppb: 0.6895240944466583
+  p95_predicted_ppb: 49.9552941643262
+  previous_measured_ppb: 0.34
+  odour_threshold_ug_per_kg: 0.0001
+  suggested_doe_template: blocking_benchmark_gap
+  goal: expand model coverage
+  budget_label: TBD
+benchmark_alignment:
+  target_benchmark_id: wheat_gluten_hvp_xylose_120C_PMC9905368
+  notes: Re-measure to constrain the model envelope at this benchmark.
