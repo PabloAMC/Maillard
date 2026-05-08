@@ -22,7 +22,11 @@ Computational screening framework for meat-like Maillard chemistry in plant-base
 - `models/external/` — third-party ML checkpoints with `provenance.json`.
 
 ## Execution Environment
-**Run validation, QM, and benchmark workflows inside Docker** (`maillard` conda env, Python 3.12). Host Python is for editing only.
+**ALWAYS run code inside the Docker container with the `maillard` conda env (Python 3.12).** No exceptions:
+- Tests, scripts, validation, QM, benchmarks, smoke checks, and one-off `python -c '...'` invocations all go through `./scripts/docker_maillard.sh run "<cmd>"`.
+- Host Python is for editing/static analysis only — never `pytest`, `python`, or `pip` directly on the host.
+- If the container is not up yet, run `./scripts/docker_maillard.sh up && ./scripts/docker_maillard.sh bootstrap` first.
+- Subagents and execution helpers must follow the same rule; wrap every command in `./scripts/docker_maillard.sh run "..."`.
 
 ```bash
 ./scripts/docker_maillard.sh up           # boot container

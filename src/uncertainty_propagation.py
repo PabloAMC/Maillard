@@ -1,0 +1,447 @@
+"""S20.1 — Monte Carlo uncertainty propagation through the benchmark surface.
+
+Reuses the BARRIER_OFFSETS environment-variable hook already understood by
+`src.barrier_constants.get_barrier()` so we do not duplicate evaluator logic.
+
+Per benchmark / matched compound we report P5 / P50 / P95 predicted ppb plus
+whether the measured value lies inside the 90% CI. The headline metric is the
+fraction of matched compounds across the panel whose measured value sits
+inside their MC envelope: a stronger contract than the existing 1.5x-band
+ratio test because it integrates the effect of the prior uncertainty on each
+upstream barrier.
+
+The propagation is intentionally cheap (single-shot, family-uncorrelated
+Gaussian offsets) so it can be re-run inside CI; it is *not* a Sobol sweep
+and does not attempt to capture covariance between calibrated families.
+"""
+
+from __future__ import annotations
+
+import json
+import math
+import os
+import random
+import statistics
+from contextlib import contextmanager
+from dataclasses import dataclass, field
+from pathlib import Path
+from typing import Any, Dict, Iterable, Iterator, List, Mapping, Optional, Sequence, Tuple
+
+from src.benchmark_types import BenchmarkEvaluation
+from src.benchmark_validation import (
+    DEFAULT_TARGET_TAG,
+    evaluate_benchmark,
+    get_benchmark_files,
+    get_benchmark_metadata,
+    load_benchmark,
+)
+
+
+ROOT = Path(__file__).resolve().parents[1]
+QM_PROVENANCE_PATH = ROOT / "results" / "validation" / "qm_barrier_provenance.json"
+
+# Default Gaussian sigma (kcal/mol) per barrier-family offset key. The keys
+# match the ones already accepted by BARRIER_OFFSETS via barrier_constants.
+# Sigmas come from `get_barrier()` returning ±3.5 kcal/mol for FAST_BARRIERS
+# entries and ±5.0 for the heuristic default, divided by 2 so ±2σ ≈ ±band.
+DEFAULT_FAMILY_PRIORS: Dict[str, float] = {
+    "schiff_condensation": 1.5,
+    "amadori_rearrangement": 1.5,
+    "1,2-enolisation": 1.5,
+    "2,3-enolisation": 1.5,
+    "strecker_degradation": 1.5,
+    "cysteine_thermolysis": 1.5,
+    "thiol_addition": 1.5,
+    "thiol_addition_hexose": 1.5,
+    "thiol_oxidation": 1.5,
+    "aminoketone_condensation": 1.5,
+    "retro_aldol": 1.5,
+    "dehydration": 1.5,
+    "beta_elimination": 1.5,
+    "lipid_thiazole": 1.5,
+}
+
+
+@dataclass(frozen=True)
+class ParameterPrior:
+    """A prior distribution over an additive offset to one barrier family.
+
+    `key` matches the BARRIER_OFFSETS dictionary keys consumed by
+    `src.barrier_constants.get_barrier()`. `sigma_kcal` is the standard
+    deviation of an additive Gaussian offset (mean zero) applied to the
+    central barrier height.
+    """
+
+    key: str
+    sigma_kcal: float
+    source: str = "barrier_constants_default"
+
+
+@dataclass(frozen=True)
+class CompoundEnvelope:
+    benchmark_id: str
+    compound: str
+    measured_ppb: float
+    predicted_p5: float
+    predicted_p50: float
+    predicted_p95: float
+    predicted_mean: float
+    predicted_std: float
+    inside_ci: bool
+
+
+@dataclass(frozen=True)
+class BenchmarkEnvelope:
+    benchmark_id: str
+    bench_file: str
+    execution_path: str
+    matched_compounds: int
+    coverage_rate: float
+    compounds: List[CompoundEnvelope] = field(default_factory=list)
+
+
+@contextmanager
+def _barrier_offsets(offsets: Mapping[str, float]) -> Iterator[None]:
+    previous = os.environ.get("BARRIER_OFFSETS")
+    try:
+        os.environ["BARRIER_OFFSETS"] = json.dumps(dict(offsets))
+        yield
+    finally:
+        if previous is None:
+            os.environ.pop("BARRIER_OFFSETS", None)
+        else:
+            os.environ["BARRIER_OFFSETS"] = previous
+
+
+def default_priors() -> List[ParameterPrior]:
+    """Build the default prior set, overriding sigmas where qm_barrier_provenance
+    has narrowed the bound for a specific anchor target.
+
+    qm_barrier_provenance currently catalogues per-target literature anchors
+    rather than per-family runtime offsets, so we apply its evidence by
+    *narrowing* (never widening) the family sigma if the provenance states a
+    bounded-calibration tier.
+    """
+
+    priors: Dict[str, ParameterPrior] = {
+        key: ParameterPrior(key=key, sigma_kcal=sigma, source="barrier_constants_default")
+        for key, sigma in DEFAULT_FAMILY_PRIORS.items()
+    }
+
+    if not QM_PROVENANCE_PATH.exists():
+        return list(priors.values())
+
+    try:
+        provenance = json.loads(QM_PROVENANCE_PATH.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return list(priors.values())
+
+    # Map provenance reaction families -> family-offset keys we propagate over.
+    family_to_key = {
+        "thiol_addition_family": "thiol_addition",
+        "amadori_rearrangement": "amadori_rearrangement",
+        "schiff_condensation": "schiff_condensation",
+        "strecker_degradation": "strecker_degradation",
+        "thiol_oxidation": "thiol_oxidation",
+        "aminoketone_condensation": "aminoketone_condensation",
+    }
+    entries = provenance.get("entries") if isinstance(provenance, Mapping) else None
+    if not isinstance(entries, list):
+        return list(priors.values())
+
+    for entry in entries:
+        if not isinstance(entry, Mapping):
+            continue
+        family = str(entry.get("active_arrhenius_key", ""))
+        tier = str(entry.get("tier", ""))
+        target_key = None
+        for needle, key in family_to_key.items():
+            if needle in family:
+                target_key = key
+                break
+        if not target_key or target_key not in priors:
+            continue
+        # bounded_calibration entries have explicit literature anchors;
+        # narrow the family sigma to 1.0 kcal/mol when they exist.
+        if tier == "bounded_calibration":
+            current = priors[target_key]
+            if current.sigma_kcal > 1.0:
+                priors[target_key] = ParameterPrior(
+                    key=target_key,
+                    sigma_kcal=1.0,
+                    source="qm_barrier_provenance",
+                )
+
+    return list(priors.values())
+
+
+def sample_offset_vectors(
+    priors: Sequence[ParameterPrior],
+    *,
+    n: int,
+    seed: int = 0,
+) -> List[Dict[str, float]]:
+    """Independent Gaussian samples per family. Mean zero, sigma=prior.sigma_kcal."""
+
+    rng = random.Random(seed)
+    samples: List[Dict[str, float]] = []
+    for _ in range(n):
+        sample: Dict[str, float] = {}
+        for prior in priors:
+            sample[prior.key] = rng.gauss(0.0, prior.sigma_kcal)
+        samples.append(sample)
+    return samples
+
+
+def _percentile(sorted_values: Sequence[float], pct: float) -> float:
+    if not sorted_values:
+        return float("nan")
+    if len(sorted_values) == 1:
+        return float(sorted_values[0])
+    idx = (len(sorted_values) - 1) * (pct / 100.0)
+    lo = int(math.floor(idx))
+    hi = int(math.ceil(idx))
+    if lo == hi:
+        return float(sorted_values[lo])
+    frac = idx - lo
+    return float(sorted_values[lo] + (sorted_values[hi] - sorted_values[lo]) * frac)
+
+
+def _baseline_targets(evaluation: BenchmarkEvaluation) -> List[Tuple[str, float]]:
+    """Return (compound, measured_ppb) for matched comparisons in the
+    baseline (zero-offset) evaluation. We only track compounds the
+    evaluator already maps to a prediction at baseline; new matches
+    appearing under perturbed offsets would not have a stable identity."""
+
+    targets: List[Tuple[str, float]] = []
+    for comparison in evaluation.comparisons:
+        if comparison.matched_name is None:
+            continue
+        try:
+            measured = float(comparison.measured_ppb)
+        except (TypeError, ValueError):
+            continue
+        if measured <= 0.0 or not math.isfinite(measured):
+            continue
+        targets.append((comparison.compound, measured))
+    return targets
+
+
+def _comparison_predicted(evaluation: BenchmarkEvaluation, compound: str) -> Optional[float]:
+    for comparison in evaluation.comparisons:
+        if comparison.compound == compound and comparison.matched_name is not None:
+            return float(comparison.predicted_ppb)
+    return None
+
+
+def propagate_benchmarks(
+    benchmark_files: Optional[Iterable[Path | str]] = None,
+    *,
+    n_samples: int = 200,
+    seed: int = 0,
+    priors: Optional[Sequence[ParameterPrior]] = None,
+    target_tag: str = DEFAULT_TARGET_TAG,
+) -> Dict[str, Any]:
+    """Run Monte Carlo barrier-offset propagation across the benchmark panel.
+
+    Returns a JSON-serialisable payload with per-compound P5/P50/P95 envelopes
+    and an aggregate 90% CI coverage rate.
+    """
+
+    if priors is None:
+        priors = default_priors()
+    bench_files = list(benchmark_files) if benchmark_files is not None else list(get_benchmark_files())
+
+    # Pre-load benchmarks and decide which compounds to track per benchmark
+    # using the baseline (zero-offset) evaluation.
+    bench_index: List[Dict[str, Any]] = []
+    for bench_file in bench_files:
+        bench = load_benchmark(bench_file)
+        metadata = get_benchmark_metadata(bench)
+        if metadata.execution_path not in {"free_precursor", "matrix_precursor_augmented"}:
+            continue
+        baseline = evaluate_benchmark(bench_file, target_tag=target_tag)
+        targets = _baseline_targets(baseline)
+        if not targets:
+            continue
+        bench_index.append(
+            {
+                "bench_file": Path(bench_file),
+                "benchmark_id": str(bench.get("benchmark_id") or Path(bench_file).stem),
+                "execution_path": metadata.execution_path,
+                "targets": targets,
+            }
+        )
+
+    samples = sample_offset_vectors(priors, n=n_samples, seed=seed)
+
+    # accumulator[(bench_id, compound)] = list[predicted_ppb]
+    accumulator: Dict[Tuple[str, str], List[float]] = {}
+
+    for offsets in samples:
+        with _barrier_offsets(offsets):
+            for entry in bench_index:
+                evaluation = evaluate_benchmark(entry["bench_file"], target_tag=target_tag)
+                for compound, _measured in entry["targets"]:
+                    predicted = _comparison_predicted(evaluation, compound)
+                    if predicted is None or not math.isfinite(predicted):
+                        continue
+                    accumulator.setdefault((entry["benchmark_id"], compound), []).append(predicted)
+
+    benchmark_envelopes: List[BenchmarkEnvelope] = []
+    coverage_hits = 0
+    coverage_total = 0
+
+    for entry in bench_index:
+        compound_envelopes: List[CompoundEnvelope] = []
+        matched = 0
+        for compound, measured in entry["targets"]:
+            samples_for_compound = accumulator.get((entry["benchmark_id"], compound), [])
+            if len(samples_for_compound) < max(5, n_samples // 4):
+                # Too few finite samples to form a meaningful envelope.
+                continue
+            sorted_values = sorted(samples_for_compound)
+            p5 = _percentile(sorted_values, 5.0)
+            p50 = _percentile(sorted_values, 50.0)
+            p95 = _percentile(sorted_values, 95.0)
+            mean_val = statistics.fmean(samples_for_compound)
+            std_val = statistics.pstdev(samples_for_compound) if len(samples_for_compound) > 1 else 0.0
+            inside = bool(p5 <= measured <= p95)
+            compound_envelopes.append(
+                CompoundEnvelope(
+                    benchmark_id=entry["benchmark_id"],
+                    compound=compound,
+                    measured_ppb=measured,
+                    predicted_p5=p5,
+                    predicted_p50=p50,
+                    predicted_p95=p95,
+                    predicted_mean=mean_val,
+                    predicted_std=std_val,
+                    inside_ci=inside,
+                )
+            )
+            matched += 1
+            coverage_total += 1
+            if inside:
+                coverage_hits += 1
+        coverage_rate = (matched / max(len(entry["targets"]), 1)) if entry["targets"] else 0.0
+        benchmark_envelopes.append(
+            BenchmarkEnvelope(
+                benchmark_id=entry["benchmark_id"],
+                bench_file=str(entry["bench_file"]),
+                execution_path=entry["execution_path"],
+                matched_compounds=matched,
+                coverage_rate=coverage_rate,
+                compounds=compound_envelopes,
+            )
+        )
+
+    payload: Dict[str, Any] = {
+        "summary": {
+            "n_samples": n_samples,
+            "seed": seed,
+            "benchmark_count": len(benchmark_envelopes),
+            "matched_compound_count": coverage_total,
+            "ci_coverage_hits": coverage_hits,
+            "ci_coverage_rate": (coverage_hits / coverage_total) if coverage_total else None,
+            "ci_level_pct": 90,
+        },
+        "priors": [
+            {"key": p.key, "sigma_kcal": p.sigma_kcal, "source": p.source}
+            for p in priors
+        ],
+        "benchmarks": [
+            {
+                "benchmark_id": env.benchmark_id,
+                "bench_file": env.bench_file,
+                "execution_path": env.execution_path,
+                "matched_compounds": env.matched_compounds,
+                "coverage_rate": env.coverage_rate,
+                "compounds": [
+                    {
+                        "compound": c.compound,
+                        "measured_ppb": c.measured_ppb,
+                        "predicted_p5": c.predicted_p5,
+                        "predicted_p50": c.predicted_p50,
+                        "predicted_p95": c.predicted_p95,
+                        "predicted_mean": c.predicted_mean,
+                        "predicted_std": c.predicted_std,
+                        "inside_ci": c.inside_ci,
+                        "ci_width_log10": (
+                            math.log10(c.predicted_p95 / c.predicted_p5)
+                            if c.predicted_p5 > 0.0 and c.predicted_p95 > 0.0
+                            else None
+                        ),
+                    }
+                    for c in env.compounds
+                ],
+            }
+            for env in benchmark_envelopes
+        ],
+    }
+    return payload
+
+
+def render_markdown(payload: Mapping[str, Any]) -> str:
+    summary = payload.get("summary", {})
+    coverage_rate = summary.get("ci_coverage_rate")
+    coverage_str = f"{coverage_rate * 100:.1f}%" if coverage_rate is not None else "n/a"
+    lines = [
+        "# Prediction Uncertainty Envelope",
+        "",
+        "_Monte Carlo propagation of barrier-family offset priors (additive Gaussian, kcal/mol) through the benchmark evaluator. CI = 90% (P5–P95)._",
+        "",
+        f"**Headline trust metric**: measured value lies inside 90% CI for **{summary.get('ci_coverage_hits', 0)} / {summary.get('matched_compound_count', 0)}** matched compounds (**{coverage_str}**).",
+        "",
+        f"Samples per benchmark: {summary.get('n_samples', 0)}; seed {summary.get('seed', 0)}; benchmarks evaluated: {summary.get('benchmark_count', 0)}.",
+        "",
+        "## Priors",
+        "",
+        "| Family offset key | σ (kcal/mol) | Source |",
+        "| --- | --- | --- |",
+    ]
+    for prior in payload.get("priors", []):
+        lines.append(
+            f"| `{prior.get('key')}` | {float(prior.get('sigma_kcal', 0.0)):.2f} | {prior.get('source')} |"
+        )
+    lines.append("")
+    lines.append("## Per-benchmark envelopes")
+    lines.append("")
+    for benchmark in payload.get("benchmarks", []):
+        lines.append(f"### `{benchmark.get('benchmark_id')}`")
+        lines.append("")
+        lines.append(
+            f"- Execution path: `{benchmark.get('execution_path')}`"
+        )
+        lines.append(
+            f"- Matched compounds with envelope: {benchmark.get('matched_compounds', 0)}"
+        )
+        lines.append("")
+        lines.append("| Compound | Measured (ppb) | P5 | P50 | P95 | log₁₀ width | Inside 90% CI |")
+        lines.append("| --- | --- | --- | --- | --- | --- | --- |")
+        for compound in benchmark.get("compounds", []):
+            inside = "✓" if compound.get("inside_ci") else "✗"
+            width = compound.get("ci_width_log10")
+            width_str = f"{float(width):.2f}" if width is not None else "n/a"
+            lines.append(
+                f"| {compound.get('compound')} | {float(compound.get('measured_ppb', 0.0)):.3g} | "
+                f"{float(compound.get('predicted_p5', 0.0)):.3g} | {float(compound.get('predicted_p50', 0.0)):.3g} | "
+                f"{float(compound.get('predicted_p95', 0.0)):.3g} | {width_str} | {inside} |"
+            )
+        lines.append("")
+    return "\n".join(lines).rstrip() + "\n"
+
+
+def write_artifact(
+    payload: Mapping[str, Any],
+    *,
+    output_dir: Path | str = ROOT / "results" / "validation",
+    basename: str = "prediction_uncertainty",
+) -> Dict[str, Path]:
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    json_path = output_dir / f"{basename}.json"
+    md_path = output_dir / f"{basename}.md"
+    json_path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
+    md_path.write_text(render_markdown(payload), encoding="utf-8")
+    return {"json": json_path, "md": md_path}
