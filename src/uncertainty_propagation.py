@@ -61,20 +61,42 @@ DEFAULT_FAMILY_PRIORS: Dict[str, float] = {
     "lipid_thiazole": 1.5,
 }
 
+# Default observable-multiplier priors. `sigma` is the natural-log standard
+# deviation of a lognormal multiplier (mean=1.0). 0.3 ≈ ±35% one-sigma —
+# wide enough to register matrix/headspace/retention uncertainty as a
+# competing source of variance, narrow enough to keep the MC stable.
+DEFAULT_OBSERVABLE_PRIORS: Dict[str, float] = {
+    "matrix_headspace": 0.30,
+    "henry_kaw": 0.30,
+    "matrix_retention": 0.20,
+}
+
+# Hard clamps on the sampled multipliers — guard against absurd MC tails.
+_OBSERVABLE_CLAMP: Dict[str, Tuple[float, float]] = {
+    "matrix_headspace": (0.1, 10.0),
+    "henry_kaw": (0.1, 10.0),
+    "matrix_retention": (0.05, 1.0),  # retention factor itself is bounded [0.01, 1]
+}
+
 
 @dataclass(frozen=True)
 class ParameterPrior:
-    """A prior distribution over an additive offset to one barrier family.
+    """A prior distribution over either a barrier-family offset or an
+    observable multiplier.
 
-    `key` matches the BARRIER_OFFSETS dictionary keys consumed by
-    `src.barrier_constants.get_barrier()`. `sigma_kcal` is the standard
-    deviation of an additive Gaussian offset (mean zero) applied to the
-    central barrier height.
+    For `kind == "barrier"`: `key` matches the BARRIER_OFFSETS dictionary
+    consumed by `src.barrier_constants.get_barrier()`; `sigma_kcal` is the
+    standard deviation of an additive Gaussian offset (mean 0).
+
+    For `kind == "observable"`: `key` is one of the observable multiplier
+    names (matrix_headspace, henry_kaw, matrix_retention); `sigma_kcal`
+    becomes the lognormal log-sigma of a multiplier with mean 1.0.
     """
 
     key: str
     sigma_kcal: float
     source: str = "barrier_constants_default"
+    kind: str = "barrier"
 
 
 @dataclass(frozen=True)
@@ -113,30 +135,104 @@ def _barrier_offsets(offsets: Mapping[str, float]) -> Iterator[None]:
             os.environ["BARRIER_OFFSETS"] = previous
 
 
-def default_priors() -> List[ParameterPrior]:
+@contextmanager
+def _observable_multipliers(
+    *,
+    matrix_headspace: float = 1.0,
+    henry_kaw: float = 1.0,
+    matrix_retention: float = 1.0,
+) -> Iterator[None]:
+    """Context-managed monkey-patches for matrix-headspace, Henry, and
+    matrix-retention multipliers. The wrapped functions receive the same
+    arguments and return ``original_value * multiplier`` (clamped where
+    the underlying function clamps). Restored on exit.
+
+    This is **diagnostic only**: it never persists, never writes back to
+    calibration tables, and is never used in production prediction paths.
+    """
+
+    # Local imports keep the propagation module importable even if these
+    # heavyweight evaluator modules fail to import in some lanes.
+    from src import headspace as _headspace_module
+    from src import matrix_correction as _matrix_module
+
+    original_headspace = _headspace_module.HeadspaceModel.get_matrix_benchmark_headspace_factor
+    original_kaw = _headspace_module.HeadspaceModel.get_kaw_at_temp
+    original_retention = _matrix_module.resolve_compound_matrix_retention
+
+    def _wrapped_headspace(self, *args, **kwargs):  # type: ignore[no-untyped-def]
+        return float(original_headspace(self, *args, **kwargs)) * matrix_headspace
+
+    def _wrapped_kaw(self, *args, **kwargs):  # type: ignore[no-untyped-def]
+        return float(original_kaw(self, *args, **kwargs)) * henry_kaw
+
+    def _wrapped_retention(*args, **kwargs):  # type: ignore[no-untyped-def]
+        # resolve_compound_matrix_retention already clamps to [0.01, 1.0];
+        # we re-clamp after multiplication so a perturbed retention factor
+        # cannot leak above the physical bound.
+        value = float(original_retention(*args, **kwargs)) * matrix_retention
+        return max(0.01, min(1.0, value))
+
+    try:
+        _headspace_module.HeadspaceModel.get_matrix_benchmark_headspace_factor = _wrapped_headspace  # type: ignore[assignment]
+        _headspace_module.HeadspaceModel.get_kaw_at_temp = _wrapped_kaw  # type: ignore[assignment]
+        _matrix_module.resolve_compound_matrix_retention = _wrapped_retention  # type: ignore[assignment]
+        yield
+    finally:
+        _headspace_module.HeadspaceModel.get_matrix_benchmark_headspace_factor = original_headspace  # type: ignore[assignment]
+        _headspace_module.HeadspaceModel.get_kaw_at_temp = original_kaw  # type: ignore[assignment]
+        _matrix_module.resolve_compound_matrix_retention = original_retention  # type: ignore[assignment]
+
+
+def default_priors(*, include_observable: bool = True) -> List[ParameterPrior]:
     """Build the default prior set, overriding sigmas where qm_barrier_provenance
     has narrowed the bound for a specific anchor target.
 
     qm_barrier_provenance currently catalogues per-target literature anchors
     rather than per-family runtime offsets, so we apply its evidence by
     *narrowing* (never widening) the family sigma if the provenance states a
-    bounded-calibration tier.
+    bounded-calibration tier. When ``include_observable`` is True we also
+    add lognormal priors over the matrix-headspace, Henry, and matrix-
+    retention multipliers (S20.4).
     """
 
     priors: Dict[str, ParameterPrior] = {
-        key: ParameterPrior(key=key, sigma_kcal=sigma, source="barrier_constants_default")
+        key: ParameterPrior(
+            key=key,
+            sigma_kcal=sigma,
+            source="barrier_constants_default",
+            kind="barrier",
+        )
         for key, sigma in DEFAULT_FAMILY_PRIORS.items()
     }
 
-    if not QM_PROVENANCE_PATH.exists():
-        return list(priors.values())
+    _apply_qm_provenance_narrowing(priors)
 
+    result: List[ParameterPrior] = list(priors.values())
+    if include_observable:
+        for key, sigma in DEFAULT_OBSERVABLE_PRIORS.items():
+            result.append(
+                ParameterPrior(
+                    key=key,
+                    sigma_kcal=sigma,
+                    source="observable_multiplier_default",
+                    kind="observable",
+                )
+            )
+    return result
+
+
+def _apply_qm_provenance_narrowing(priors: Dict[str, ParameterPrior]) -> None:
+    """Narrow (never widen) family sigmas using qm_barrier_provenance.json.
+    Mutates `priors` in place. Silently no-ops if the file is missing or
+    malformed — the wider default sigma is the safe fallback.
+    """
+    if not QM_PROVENANCE_PATH.exists():
+        return
     try:
         provenance = json.loads(QM_PROVENANCE_PATH.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError):
-        return list(priors.values())
-
-    # Map provenance reaction families -> family-offset keys we propagate over.
+        return
     family_to_key = {
         "thiol_addition_family": "thiol_addition",
         "amadori_rearrangement": "amadori_rearrangement",
@@ -147,8 +243,7 @@ def default_priors() -> List[ParameterPrior]:
     }
     entries = provenance.get("entries") if isinstance(provenance, Mapping) else None
     if not isinstance(entries, list):
-        return list(priors.values())
-
+        return
     for entry in entries:
         if not isinstance(entry, Mapping):
             continue
@@ -161,8 +256,6 @@ def default_priors() -> List[ParameterPrior]:
                 break
         if not target_key or target_key not in priors:
             continue
-        # bounded_calibration entries have explicit literature anchors;
-        # narrow the family sigma to 1.0 kcal/mol when they exist.
         if tier == "bounded_calibration":
             current = priors[target_key]
             if current.sigma_kcal > 1.0:
@@ -170,9 +263,8 @@ def default_priors() -> List[ParameterPrior]:
                     key=target_key,
                     sigma_kcal=1.0,
                     source="qm_barrier_provenance",
+                    kind="barrier",
                 )
-
-    return list(priors.values())
 
 
 def sample_offset_vectors(
@@ -180,16 +272,28 @@ def sample_offset_vectors(
     *,
     n: int,
     seed: int = 0,
-) -> List[Dict[str, float]]:
-    """Independent Gaussian samples per family. Mean zero, sigma=prior.sigma_kcal."""
+) -> List[Dict[str, Dict[str, float]]]:
+    """Independent samples per prior. Returns a list of
+    ``{"barrier": {key: kcal_offset}, "observable": {key: multiplier}}``.
+
+    Barrier priors yield additive Gaussian offsets (mean 0, sigma=sigma_kcal).
+    Observable priors yield lognormal multipliers (mean 1.0, log-sigma=sigma_kcal),
+    clamped to a per-key safe range.
+    """
 
     rng = random.Random(seed)
-    samples: List[Dict[str, float]] = []
+    samples: List[Dict[str, Dict[str, float]]] = []
     for _ in range(n):
-        sample: Dict[str, float] = {}
+        barriers: Dict[str, float] = {}
+        observables: Dict[str, float] = {}
         for prior in priors:
-            sample[prior.key] = rng.gauss(0.0, prior.sigma_kcal)
-        samples.append(sample)
+            if prior.kind == "observable":
+                multiplier = math.exp(rng.gauss(0.0, prior.sigma_kcal))
+                lo, hi = _OBSERVABLE_CLAMP.get(prior.key, (0.01, 100.0))
+                observables[prior.key] = max(lo, min(hi, multiplier))
+            else:
+                barriers[prior.key] = rng.gauss(0.0, prior.sigma_kcal)
+        samples.append({"barrier": barriers, "observable": observables})
     return samples
 
 
@@ -278,8 +382,13 @@ def propagate_benchmarks(
     # accumulator[(bench_id, compound)] = list[predicted_ppb]
     accumulator: Dict[Tuple[str, str], List[float]] = {}
 
-    for offsets in samples:
-        with _barrier_offsets(offsets):
+    for sample in samples:
+        observable = sample.get("observable", {}) or {}
+        with _barrier_offsets(sample.get("barrier", {}) or {}), _observable_multipliers(
+            matrix_headspace=float(observable.get("matrix_headspace", 1.0)),
+            henry_kaw=float(observable.get("henry_kaw", 1.0)),
+            matrix_retention=float(observable.get("matrix_retention", 1.0)),
+        ):
             for entry in bench_index:
                 evaluation = evaluate_benchmark(entry["bench_file"], target_tag=target_tag)
                 for compound, _measured in entry["targets"]:
@@ -347,7 +456,12 @@ def propagate_benchmarks(
             "ci_level_pct": 90,
         },
         "priors": [
-            {"key": p.key, "sigma_kcal": p.sigma_kcal, "source": p.source}
+            {
+                "key": p.key,
+                "sigma_kcal": p.sigma_kcal,
+                "source": p.source,
+                "kind": p.kind,
+            }
             for p in priors
         ],
         "benchmarks": [
@@ -397,12 +511,13 @@ def render_markdown(payload: Mapping[str, Any]) -> str:
         "",
         "## Priors",
         "",
-        "| Family offset key | σ (kcal/mol) | Source |",
-        "| --- | --- | --- |",
+        "| Key | Kind | σ (kcal/mol or log) | Source |",
+        "| --- | --- | --- | --- |",
     ]
     for prior in payload.get("priors", []):
         lines.append(
-            f"| `{prior.get('key')}` | {float(prior.get('sigma_kcal', 0.0)):.2f} | {prior.get('source')} |"
+            f"| `{prior.get('key')}` | {prior.get('kind', 'barrier')} | "
+            f"{float(prior.get('sigma_kcal', 0.0)):.2f} | {prior.get('source')} |"
         )
     lines.append("")
     lines.append("## Per-benchmark envelopes")

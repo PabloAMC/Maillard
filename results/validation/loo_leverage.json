@@ -7,8 +7,8 @@
       "inside_ci": 7,
       "leverage": 0.03201219512195119,
       "matched_compounds": 7,
-      "max_abs_log10_residual": 0.6640965063667315,
-      "mean_abs_log10_residual": 0.169588648547008
+      "max_abs_log10_residual": 0.6122180431331604,
+      "mean_abs_log10_residual": 0.1806399730335175
     },
     {
       "benchmark_id": "soy_isolate_ribose_cysteine_100C_45min_Internal2026",
@@ -17,8 +17,8 @@
       "inside_ci": 7,
       "leverage": 0.03201219512195119,
       "matched_compounds": 7,
-      "max_abs_log10_residual": 0.6640965063667315,
-      "mean_abs_log10_residual": 0.1695886485470081
+      "max_abs_log10_residual": 0.6122180431331604,
+      "mean_abs_log10_residual": 0.1806399730335176
     },
     {
       "benchmark_id": "soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026",
@@ -27,8 +27,8 @@
       "inside_ci": 6,
       "leverage": 0.0267857142857143,
       "matched_compounds": 6,
-      "max_abs_log10_residual": 0.6640965063667315,
-      "mean_abs_log10_residual": 0.18695502469184352
+      "max_abs_log10_residual": 0.6122180431331604,
+      "mean_abs_log10_residual": 0.2010230867199898
     },
     {
       "benchmark_id": "cys_glucose_150C_Farmer1999",
@@ -37,8 +37,8 @@
       "inside_ci": 3,
       "leverage": 0.012499999999999956,
       "matched_compounds": 3,
-      "max_abs_log10_residual": 0.3678835029728945,
-      "mean_abs_log10_residual": 0.1708570237729584
+      "max_abs_log10_residual": 0.3254434931525712,
+      "mean_abs_log10_residual": 0.185067368891961
     },
     {
       "benchmark_id": "spi_hvp_xylose_120C_PMC9905368",
@@ -47,8 +47,8 @@
       "inside_ci": 3,
       "leverage": 0.012499999999999956,
       "matched_compounds": 3,
-      "max_abs_log10_residual": 0.3720080636272845,
-      "mean_abs_log10_residual": 0.2440614991873488
+      "max_abs_log10_residual": 0.20397083175738967,
+      "mean_abs_log10_residual": 0.1400886225740703
     },
     {
       "benchmark_id": "wheat_gluten_hvp_xylose_120C_PMC9905368",
@@ -57,8 +57,8 @@
       "inside_ci": 3,
       "leverage": 0.012499999999999956,
       "matched_compounds": 3,
-      "max_abs_log10_residual": 0.30707052954270947,
-      "mean_abs_log10_residual": 0.21374168074236397
+      "max_abs_log10_residual": 0.14739653143084389,
+      "mean_abs_log10_residual": 0.1033991581324103
     },
     {
       "benchmark_id": "cys_ribose_140C_Hofmann1998",
@@ -67,8 +67,8 @@
       "inside_ci": 2,
       "leverage": 0.008152173913043459,
       "matched_compounds": 2,
-      "max_abs_log10_residual": 0.08345147028491139,
-      "mean_abs_log10_residual": 0.07379816467860578
+      "max_abs_log10_residual": 0.1236165038408771,
+      "mean_abs_log10_residual": 0.09185181675302062
     },
     {
       "benchmark_id": "thiamine_cys_ribose_100C_Hofmann1996",
@@ -77,8 +77,8 @@
       "inside_ci": 1,
       "leverage": 0.003989361702127714,
       "matched_compounds": 1,
-      "max_abs_log10_residual": 0.09646221736248517,
-      "mean_abs_log10_residual": 0.09646221736248517
+      "max_abs_log10_residual": 0.07050085137621803,
+      "mean_abs_log10_residual": 0.07050085137621803
     },
     {
       "benchmark_id": "thiamine_cys_xylose_145C_Cerny2008",
@@ -87,8 +87,8 @@
       "inside_ci": 1,
       "leverage": 0.003989361702127714,
       "matched_compounds": 1,
-      "max_abs_log10_residual": 0.14231664150122703,
-      "mean_abs_log10_residual": 0.14231664150122703
+      "max_abs_log10_residual": 0.08211612891687572,
+      "mean_abs_log10_residual": 0.08211612891687572
     },
     {
       "benchmark_id": "cys_ribose_150C_Mottram1994",
@@ -97,8 +97,8 @@
       "inside_ci": 2,
       "leverage": -0.009722222222222188,
       "matched_compounds": 3,
-      "max_abs_log10_residual": 0.4065059900621334,
-      "mean_abs_log10_residual": 0.31368272755406407
+      "max_abs_log10_residual": 0.45144248519959673,
+      "mean_abs_log10_residual": 0.30138337718223523
     },
     {
       "benchmark_id": "acrylamide_asparagine_glucose_Parker2012",
@@ -137,8 +137,8 @@
       "inside_ci": 0,
       "leverage": -0.017287234042553168,
       "matched_compounds": 1,
-      "max_abs_log10_residual": 0.1050501234648455,
-      "mean_abs_log10_residual": 0.1050501234648455
+      "max_abs_log10_residual": 0.10108552517130513,
+      "mean_abs_log10_residual": 0.10108552517130513
     },
     {
       "benchmark_id": "pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026",
@@ -147,8 +147,8 @@
       "inside_ci": 4,
       "leverage": -0.02083333333333337,
       "matched_compounds": 6,
-      "max_abs_log10_residual": 0.6452948709454246,
-      "mean_abs_log10_residual": 0.1893895493576465
+      "max_abs_log10_residual": 0.5934164077118536,
+      "mean_abs_log10_residual": 0.20345761138579274
     },
     {
       "benchmark_id": "cml_cel_commercial_pbma_Foods2023",
@@ -165,7 +165,7 @@
     "coverage": 0.8125,
     "inside_ci_count": 39,
     "matched_compound_count": 48,
-    "max_abs_log10_residual": 0.6640965063667315,
-    "mean_abs_log10_residual": 0.16840655614386058
+    "max_abs_log10_residual": 0.6122180431331604,
+    "mean_abs_log10_residual": 0.16074619991480607
   }
 }
