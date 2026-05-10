@@ -4,6 +4,7 @@
 [![Docker Recommended](https://img.shields.io/badge/docker-recommended-blue.svg)](https://www.docker.com/)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Trust: 39/48 inside 90% CI](https://img.shields.io/badge/trust-39%2F48%20inside%2090%25%20CI-brightgreen.svg)](results/validation/prediction_uncertainty.md)
+[![External hold-out: 0/8 inside 90% CI](https://img.shields.io/badge/external%20hold--out-0%2F8%20inside%2090%25%20CI-red.svg)](results/validation/external_validation_report.md)
 
 ## In one paragraph
 
@@ -73,11 +74,12 @@ Open `results/first_run/report.md` for a per-compound table, the matched literat
 
 ## 📊 How good are the predictions, really?
 
-We refuse to publish a single "accuracy %". Instead we publish **three orthogonal evidence surfaces**, each answering a different honest question.
+We refuse to publish a single "accuracy %". Instead we publish **four orthogonal evidence surfaces**, each answering a different honest question.
 
 | Surface | Question it answers | Headline number today |
 | --- | --- | --- |
 | **Parity** ([validation_overview.png](docs/assets/validation_overview.png)) | *On the literature systems we can match compound-for-compound, how close is predicted ppb to measured ppb?* | 16 benchmarks · 48 matched compound rows |
+| **External hold-out** ([external_validation_report.md](results/validation/external_validation_report.md)) | *On isolated literature systems we explicitly did not calibrate to, does the frozen model still cover the measurement?* | 4 bundles · **0/8 inside 90 % CI** · median **36.02x** |
 | **Coverage** ([family_coverage.png](docs/assets/family_coverage.png)) | *Which of the 16 reaction families are wired into the runtime, calibrated against data, or anchored by DFT?* | 16/16 wired · 7 with DFT anchors |
 | **Gaps** ([gap_heatmap.png](results/validation/gap_heatmap.png)) | *Where would the next wet-lab experiment move our confidence the most?* | **9/48 cells outside 90 % CI** — all queued as bookable requests |
 
@@ -89,7 +91,7 @@ We refuse to publish a single "accuracy %". Instead we publish **three orthogona
 </tr>
 </table>
 
-> **How to read these together.** Parity and coverage are *not* the same thing. A reaction family can be wired and calibrated but still have no compound that we can match against a published numeric ppb — those families show in coverage but not yet in parity. The gap heatmap closes the loop: every `*` cell is already converted into a ranked, bookable wet-lab request below.
+> **How to read these together.** Parity and coverage are *not* the same thing, and the external hold-out row is a stricter stress test than either: those 8 points are intentionally excluded from calibration, so they tell you how far the frozen model still has to go on adjacent matrix surfaces. The gap heatmap closes the loop: every `*` cell is already converted into a ranked, bookable wet-lab request below.
 
 ### What the trust loop is recommending right now
 
@@ -97,9 +99,10 @@ We refuse to publish a single "accuracy %". Instead we publish **three orthogona
 2. **Most influential existing benchmark**: `cml_cel_commercial_pbma_Foods2023` — currently drags the panel by –0.035 dex; flagged for a re-anchor pass.
 3. **Widest envelope**: matched MFT predictions span up to ~6 dex of Monte-Carlo width on HVP-spiked systems, driven jointly by barrier and headspace priors.
 
-Full machine-readable artifacts (regenerated in Docker, never hand-edited — run `make trust-loop` to refresh all four):
+Full machine-readable artifacts (regenerated in Docker, never hand-edited — run `make trust-loop` to refresh all five):
 
 - 90 % envelope per matched compound: [results/validation/prediction_uncertainty.md](results/validation/prediction_uncertainty.md)
+- External hold-out panel vs frozen calibration: [results/validation/external_validation_report.md](results/validation/external_validation_report.md)
 - Ranked experiment requests + DOE templates: [results/validation/experiment_value_ranking.md](results/validation/experiment_value_ranking.md), [results/validation/experiment_requests/index.md](results/validation/experiment_requests/index.md)
 - Leave-one-benchmark-out leverage: [results/validation/loo_leverage.md](results/validation/loo_leverage.md)
 - Per-cell value-of-information heatmap: [results/validation/gap_heatmap.png](results/validation/gap_heatmap.png)

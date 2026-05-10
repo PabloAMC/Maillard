@@ -29,6 +29,8 @@ no offset is fitted, no benchmark file is mutated.
 from __future__ import annotations
 
 import json
+import math
+import statistics
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Optional, Sequence, Tuple
@@ -796,6 +798,201 @@ def write_holdout_bundles(
     return {"protocols": protocol_paths, "benchmarks": benchmark_paths}
 
 
+def get_holdout_benchmark_files(
+    benchmark_dir: Path = EXTERNAL_VALIDATION_BENCHMARK_DIR,
+) -> List[Path]:
+    """Return the isolated external-validation benchmark JSON files.
+
+    These files live under data/benchmarks/external_validation so they stay
+    outside the default top-level calibration panel.
+    """
+
+    if not benchmark_dir.exists():
+        return []
+    return sorted(benchmark_dir.glob("*.json"))
+
+
+def build_external_validation_report(
+    *,
+    benchmark_files: Optional[Iterable[Path | str]] = None,
+    n_samples: int = 200,
+    seed: int = 0,
+    target_tag: str = "meaty",
+) -> Dict[str, Any]:
+    """Run the uncertainty propagation over the isolated hold-out panel.
+
+    Returns a JSON-serialisable report with the same per-compound envelope
+    statistics as S20.1 plus external-hold-out accuracy summaries computed from
+    the P50 prediction against the measured value.
+    """
+
+    from src.uncertainty_propagation import default_priors, propagate_benchmarks
+
+    holdout_files = [Path(item) for item in (benchmark_files or get_holdout_benchmark_files())]
+    envelope_payload = propagate_benchmarks(
+        benchmark_files=holdout_files,
+        n_samples=n_samples,
+        seed=seed,
+        priors=default_priors(),
+        target_tag=target_tag,
+        execution_paths=("free_precursor", "matrix_precursor_augmented", "matrix_only"),
+    )
+
+    benchmark_rows: List[Dict[str, Any]] = []
+    abs_log10_errors: List[float] = []
+    fold_errors: List[float] = []
+
+    for benchmark in envelope_payload.get("benchmarks", []):
+        compound_rows: List[Dict[str, Any]] = []
+        inside_ci_count = 0
+        local_errors: List[float] = []
+        local_folds: List[float] = []
+
+        for compound in benchmark.get("compounds", []):
+            measured = float(compound.get("measured_ppb", 0.0) or 0.0)
+            predicted_p50 = float(compound.get("predicted_p50", 0.0) or 0.0)
+            abs_log10_error = None
+            fold_error = None
+            if measured > 0.0 and predicted_p50 > 0.0 and math.isfinite(measured) and math.isfinite(predicted_p50):
+                ratio = predicted_p50 / measured
+                abs_log10_error = abs(math.log10(ratio))
+                fold_error = max(ratio, 1.0 / ratio)
+                abs_log10_errors.append(abs_log10_error)
+                fold_errors.append(fold_error)
+                local_errors.append(abs_log10_error)
+                local_folds.append(fold_error)
+            inside_ci = bool(compound.get("inside_ci", False))
+            inside_ci_count += int(inside_ci)
+            compound_rows.append(
+                {
+                    **dict(compound),
+                    "abs_log10_error": abs_log10_error,
+                    "fold_error": fold_error,
+                }
+            )
+
+        matched_compounds = int(benchmark.get("matched_compounds", 0) or 0)
+        median_abs_log10_error = statistics.median(local_errors) if local_errors else None
+        median_accuracy_fold = (10 ** median_abs_log10_error) if median_abs_log10_error is not None else None
+        benchmark_rows.append(
+            {
+                "benchmark_id": benchmark.get("benchmark_id"),
+                "bench_file": benchmark.get("bench_file"),
+                "execution_path": benchmark.get("execution_path"),
+                "matched_compounds": matched_compounds,
+                "inside_ci_count": inside_ci_count,
+                "inside_ci_rate": (inside_ci_count / matched_compounds) if matched_compounds else None,
+                "median_abs_log10_error": median_abs_log10_error,
+                "median_accuracy_fold": median_accuracy_fold,
+                "compounds": compound_rows,
+            }
+        )
+
+    summary = dict(envelope_payload.get("summary", {}))
+    median_abs_log10_error = statistics.median(abs_log10_errors) if abs_log10_errors else None
+    median_accuracy_fold = (10 ** median_abs_log10_error) if median_abs_log10_error is not None else None
+    summary.update(
+        {
+            "holdout_benchmark_count": len(holdout_files),
+            "median_abs_log10_error": median_abs_log10_error,
+            "median_accuracy_fold": median_accuracy_fold,
+            "max_fold_error": max(fold_errors) if fold_errors else None,
+            "evidence_class": EXTERNAL_VALIDATION_EVIDENCE_CLASS,
+            "benchmark_dir": str(EXTERNAL_VALIDATION_BENCHMARK_DIR),
+        }
+    )
+
+    return {
+        "source": {
+            "benchmark_dir": str(EXTERNAL_VALIDATION_BENCHMARK_DIR),
+            "evidence_class": EXTERNAL_VALIDATION_EVIDENCE_CLASS,
+            "description": "Hold-out matrix benchmarks synthesized from flavor_reference_payloads.json and excluded from the default calibration panel.",
+        },
+        "summary": summary,
+        "priors": list(envelope_payload.get("priors", [])),
+        "benchmarks": benchmark_rows,
+    }
+
+
+def render_external_validation_markdown(payload: Mapping[str, Any]) -> str:
+    summary = payload.get("summary", {})
+    coverage_rate = summary.get("ci_coverage_rate")
+    coverage_str = f"{coverage_rate * 100:.1f}%" if coverage_rate is not None else "n/a"
+    median_abs_log10_error = summary.get("median_abs_log10_error")
+    median_abs_str = f"{float(median_abs_log10_error):.3f}" if median_abs_log10_error is not None else "n/a"
+    median_accuracy_fold = summary.get("median_accuracy_fold")
+    median_accuracy_str = f"{float(median_accuracy_fold):.2f}x" if median_accuracy_fold is not None else "n/a"
+    lines = [
+        '<!-- Auto-regenerated by ./scripts/docker_maillard.sh run "python scripts/generators/generate_external_validation_report.py". Manual edits will be overwritten. -->',
+        "",
+        "# External Validation Report",
+        "",
+        "_Monte Carlo envelope evaluation on isolated hold-out matrix bundles that are explicitly excluded from calibration via evidence_class = external_validation_only._",
+        "",
+        f"**Headline external trust metric**: measured value lies inside 90% CI for **{summary.get('ci_coverage_hits', 0)} / {summary.get('matched_compound_count', 0)}** matched hold-out compounds (**{coverage_str}**).",
+        "",
+        f"**Median accuracy on hold-outs**: **{median_accuracy_str}** median fold error (median |log10 error| = **{median_abs_str}** dex).",
+        "",
+        f"Samples per hold-out bundle: {summary.get('n_samples', 0)}; seed {summary.get('seed', 0)}; bundles evaluated: {summary.get('holdout_benchmark_count', 0)}.",
+        "",
+        "## Hold-out bundles",
+        "",
+        "| Benchmark | Matched compounds | Inside 90% CI | Median accuracy |",
+        "| --- | ---: | ---: | ---: |",
+    ]
+    for benchmark in payload.get("benchmarks", []):
+        inside_rate = benchmark.get("inside_ci_rate")
+        inside_str = (
+            f"{benchmark.get('inside_ci_count', 0)}/{benchmark.get('matched_compounds', 0)} ({inside_rate * 100:.1f}%)"
+            if inside_rate is not None
+            else f"{benchmark.get('inside_ci_count', 0)}/{benchmark.get('matched_compounds', 0)}"
+        )
+        benchmark_median = benchmark.get("median_accuracy_fold")
+        benchmark_median_str = f"{float(benchmark_median):.2f}x" if benchmark_median is not None else "n/a"
+        lines.append(
+            f"| {benchmark.get('benchmark_id')} | {benchmark.get('matched_compounds', 0)} | {inside_str} | {benchmark_median_str} |"
+        )
+    lines.extend([
+        "",
+        "## Per-compound envelopes",
+        "",
+    ])
+    for benchmark in payload.get("benchmarks", []):
+        lines.append(f"### {benchmark.get('benchmark_id')}")
+        lines.append("")
+        lines.append(f"- Execution path: {benchmark.get('execution_path')}")
+        lines.append(f"- Matched compounds: {benchmark.get('matched_compounds', 0)}")
+        lines.append("")
+        lines.append("| Compound | Measured (ppb) | P5 | P50 | P95 | Fold error | Inside 90% CI |")
+        lines.append("| --- | --- | --- | --- | --- | --- | --- |")
+        for compound in benchmark.get("compounds", []):
+            inside = "yes" if compound.get("inside_ci") else "no"
+            fold_error = compound.get("fold_error")
+            fold_error_str = f"{float(fold_error):.2f}x" if fold_error is not None else "n/a"
+            lines.append(
+                f"| {compound.get('compound')} | {float(compound.get('measured_ppb', 0.0)):.3g} | "
+                f"{float(compound.get('predicted_p5', 0.0)):.3g} | {float(compound.get('predicted_p50', 0.0)):.3g} | "
+                f"{float(compound.get('predicted_p95', 0.0)):.3g} | {fold_error_str} | {inside} |"
+            )
+        lines.append("")
+    return "\n".join(lines).rstrip() + "\n"
+
+
+def write_external_validation_artifact(
+    payload: Mapping[str, Any],
+    *,
+    output_dir: Path | str = ROOT / "results" / "validation",
+    basename: str = "external_validation_report",
+) -> Dict[str, Path]:
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    json_path = output_dir / f"{basename}.json"
+    md_path = output_dir / f"{basename}.md"
+    json_path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
+    md_path.write_text(render_external_validation_markdown(payload), encoding="utf-8")
+    return {"json": json_path, "md": md_path}
+
+
 __all__ = [
     "BENCHMARK_INTAKE_REGISTRY_PATH",
     "ExternalCandidate",
@@ -804,9 +1001,13 @@ __all__ = [
     "EXTERNAL_VALIDATION_EVIDENCE_CLASS",
     "EXTERNAL_VALIDATION_PROTOCOL_DIR",
     "build_inventory",
+    "build_external_validation_report",
     "build_holdout_bundles",
+    "get_holdout_benchmark_files",
     "render_markdown",
+    "render_external_validation_markdown",
     "write_artifact",
+    "write_external_validation_artifact",
     "write_holdout_bundles",
     "FLAVOR_REFERENCE_PATH",
     "BENCHMARK_DIR",

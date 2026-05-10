@@ -345,6 +345,7 @@ def propagate_benchmarks(
     seed: int = 0,
     priors: Optional[Sequence[ParameterPrior]] = None,
     target_tag: str = DEFAULT_TARGET_TAG,
+    execution_paths: Optional[Iterable[str]] = None,
 ) -> Dict[str, Any]:
     """Run Monte Carlo barrier-offset propagation across the benchmark panel.
 
@@ -355,6 +356,15 @@ def propagate_benchmarks(
     if priors is None:
         priors = default_priors()
     bench_files = list(benchmark_files) if benchmark_files is not None else list(get_benchmark_files())
+    allowed_execution_paths = {
+        str(path).strip()
+        for path in (
+            execution_paths
+            if execution_paths is not None
+            else ("free_precursor", "matrix_precursor_augmented")
+        )
+        if str(path).strip()
+    }
 
     # Pre-load benchmarks and decide which compounds to track per benchmark
     # using the baseline (zero-offset) evaluation.
@@ -362,7 +372,7 @@ def propagate_benchmarks(
     for bench_file in bench_files:
         bench = load_benchmark(bench_file)
         metadata = get_benchmark_metadata(bench)
-        if metadata.execution_path not in {"free_precursor", "matrix_precursor_augmented"}:
+        if metadata.execution_path not in allowed_execution_paths:
             continue
         baseline = evaluate_benchmark(bench_file, target_tag=target_tag)
         targets = _baseline_targets(baseline)
