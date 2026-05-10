@@ -1,5 +1,52 @@
 # Maillard Strategic Roadmap
 
+## Active Plan — 2026-05-10 Trust loop → scientist's hands
+
+**Branch**: `trust-loop-actionability`. **TL;DR**: the S20/S22 trust loop is wired but only visible to a developer who runs `make trust-loop` and reads `results/validation/`. This sprint puts that machinery into the scientist's report and makes the loop close round-trip when wet-lab data arrives — all without any new wet-lab dependency.
+
+### Lane A — S20.5 External literature validation (start here)
+- [ ] A.1 Inventory the literature backlog (`results/validation/literature_backlog*.{md,json}`, `data/lit/*`) for quantitative ppb measurements in plant-protein matrices that are NOT already used as calibration benchmarks. Output: `results/validation/external_validation_candidates.{md,json}` with one row per (paper, matrix, compound, ppb, conditions) and an `eligibility` column.
+- [ ] A.2 For each eligible measurement, materialize an external validation payload via `matrix_experiment_intake.py` with `evidence_class="external_validation_only"` so it is never absorbed into calibration.
+- [ ] A.3 Extend `src/uncertainty_propagation.py` (or a sibling) to evaluate the panel against the external-only payloads using the *frozen* current calibration. Output: `results/validation/external_validation_report.{md,json}` reporting "on N external measurements not used in calibration: K/N inside 90 % CI, median |log10 error| = X".
+- [ ] A.4 Add the headline (`external coverage K/N`) to the README trust dashboard and to the trust badge.
+- **Acceptance**: ≥ 5 external measurements landed; Docker test covering at least one external-validation payload round-trip; README badge updated only if K/N is honest.
+
+### Lane B — S13.1+S13.2 Confidence overlay + intervention waterfall in --report
+- [ ] B.1 Wire the per-compound 90 % envelope from `src/uncertainty_propagation.py` into `FormulationResult` so `--report` can render `predicted: 0.038 ppb [0.012–0.089, 90 % CI]`. No recompute on the report path; cache the envelope at evaluation time.
+- [ ] B.2 Add a `--report` PNG plot showing predicted ppb with whiskers per compound, color-coded by evidence class (calibration / external / surrogate).
+- [ ] B.3 Add the **intervention waterfall**: when `--report` is run with two formulations (or one + a baseline), surface "adding glutathione raised thiols +X %, lowered aldehydes –Y %" with the same envelope semantics.
+- [ ] B.4 Update [docs/scientist_workflow_guide.md](docs/scientist_workflow_guide.md) and the README report-screenshot to show the new visuals.
+- **Acceptance**: a `--report` run for one of the use-case formulations produces both visuals; unit test pins the envelope→report wiring; LaTeX-fallback contract preserved (no silent fallback).
+
+### Lane C — S21.1+S21.2 `maillard ingest` CLI
+- [ ] C.1 Build `scripts/ingest_results.py` (CLI: `./scripts/docker_maillard.sh ingest --file results.csv --protein-type soy_iso --process-state extrusion_structured`). Auto-detect CSV/Excel/YAML/JSON; fuzzy-map column headers to the existing intake schema.
+- [ ] C.2 Print an **impact preview** before persisting: benchmarks added, K/N envelope coverage delta, top compounds whose envelope tightens, top whose median shifts > 0.3 dex. Require explicit `--confirm` to write.
+- [ ] C.3 Round-trip test: feed a CSV synthesized from one existing benchmark, verify the canonical YAML payload matches; ensure ingestion is idempotent.
+- [ ] C.4 Document the ingestion path in [docs/scientist_workflow_guide.md](docs/scientist_workflow_guide.md) and link from README.
+- **Acceptance**: a fresh CSV (one row per compound) ingests cleanly in Docker, generates the impact preview, and emits the same YAML payload that a hand-edited intake would produce.
+
+### Lane D — S20.3 Observable projection re-calibration (last, gated by Lane A)
+- [ ] D.1 Use `src/cross_validation.py` (S20.2) as the guard: refit matrix correction offsets per protein type by minimizing prediction error on the panel; accept the new offsets only if LOO median |log10 error| improves AND no benchmark moves outside its 90 % CI.
+- [ ] D.2 If accepted, write deltas to `data/lit/calibration_offsets.json` with provenance (`refit_2026-05-10`, LOO improvement metric). If rejected, document in `results/validation/calibration_refit_decision.{md,json}` why current heuristics already win.
+- [ ] D.3 Re-run `make trust-loop` and confirm the headline 39/48 either improves or holds.
+- **Acceptance**: explicit accept/reject decision committed with evidence; coverage % monotonically non-decreasing.
+
+### Sequencing & gates
+- A → B → C → D. A and B can overlap (A is data, B is plumbing). C is independent of A/B but depends on the existing intake module. D runs last because it can shift everything.
+- Every lane: green Docker tests + `make trust-loop` regenerates artifacts unchanged in headline numbers (until D).
+- One commit per lettered subtask; PR opens after Lane B lands and incrementally as each lane closes.
+
+### Out of scope this sprint
+- S14 monolith decomposition (separate sprint).
+- S18 / pyGSM Family 11 DFT push (compute-heavy, parallel sprint).
+- S17.1 real SPI extrusion workbook (waits on wet-lab).
+- S19 web interface (separate sprint).
+
+### Review
+- _pendiente_
+
+---
+
 ## Active Follow-up — 2026-04-21 Family 14 TS Recovery
 
 Status 2026-04-22: **both recovery strategies failed to produce a first-order DFT saddle.** Family 14 `aa_ring_open_dicarbonyl` reverts to the literature HCW surrogate (7.58 kcal/mol, bounded_calibration).
