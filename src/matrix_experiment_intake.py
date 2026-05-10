@@ -30,6 +30,7 @@ DEFAULT_SCHEMA_PATH = ROOT / "data" / "protocols" / "matrix_experiment_intake_sc
 DEFAULT_EXAMPLE_PATH = ROOT / "data" / "protocols" / "example_matrix_experiment_intake.yaml"
 
 _SOURCE_KINDS = {"external_literature", "internal_experiment", "synthetic_diagnostic"}
+_EVIDENCE_CLASSES = {"calibration_candidate", "external_validation_only", "diagnostic_only"}
 _PROTEIN_TYPES = {"pea_iso", "soy_iso", "myco", "free"}
 _SUPPORT_RANK = {
     "open_gap": 0,
@@ -70,6 +71,9 @@ def normalize_matrix_experiment_intake(payload: Mapping[str, Any]) -> Dict[str, 
     source_kind = str(normalized.get("source_kind", "")).strip()
     if source_kind not in _SOURCE_KINDS:
         raise ValueError(f"Unsupported source_kind: {source_kind}")
+    evidence_class = str(normalized.get("evidence_class", "calibration_candidate")).strip()
+    if evidence_class not in _EVIDENCE_CLASSES:
+        raise ValueError(f"Unsupported evidence_class: {evidence_class}")
     protein_type = str(normalized.get("protein_type", "")).strip()
     if protein_type not in _PROTEIN_TYPES:
         raise ValueError(f"Unsupported protein_type: {protein_type}")
@@ -118,6 +122,7 @@ def normalize_matrix_experiment_intake(payload: Mapping[str, Any]) -> Dict[str, 
 
     normalized["experiment_id"] = str(normalized.get("experiment_id", "matrix_experiment_payload")).strip()
     normalized["source_kind"] = source_kind
+    normalized["evidence_class"] = evidence_class
     normalized["protein_type"] = protein_type
     normalized["process_state"] = str(normalized.get("process_state", "unknown")).strip()
     normalized["matrix_format"] = str(normalized.get("matrix_format", "unspecified")).strip()
@@ -174,14 +179,17 @@ def build_matrix_experiment_benchmark_payload(payload: Mapping[str, Any]) -> Dic
     family = "matrix_headspace" if matrix_only else "matrix_precursor_augmented"
     tier = "PRIMARY" if normalized.get("source_kind") == "external_literature" else "SECONDARY"
     provenance = normalized.get("provenance", {})
+    evidence_class = str(normalized.get("evidence_class", "calibration_candidate"))
 
     return {
         "benchmark_id": normalized.get("experiment_id"),
+        "evidence_class": evidence_class,
         "source_doi": provenance.get("source_doi") if normalized.get("source_kind") == "external_literature" else None,
         "source_metadata": {
             "origin": provenance.get("origin", normalized.get("source_kind")),
             "measurement_date": provenance.get("measurement_date"),
             "generator": "matrix_experiment_intake",
+            "evidence_class": evidence_class,
             "notes": provenance.get("notes") or normalized.get("analytical_context", {}).get("notes"),
         },
         "precursors": precursors,
@@ -195,6 +203,7 @@ def build_matrix_experiment_benchmark_payload(payload: Mapping[str, Any]) -> Dic
             "tier": tier,
             "family": family,
             "execution_path": execution_path,
+            "evidence_class": evidence_class,
             "notes": "Generated from matrix experiment intake payload.",
         },
         "process_metadata": {

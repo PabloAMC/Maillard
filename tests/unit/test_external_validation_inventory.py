@@ -11,9 +11,12 @@ from src.external_validation import (
     BENCHMARK_DIR,
     FLAVOR_REFERENCE_PATH,
     build_inventory,
+    build_holdout_bundles,
+    EXTERNAL_VALIDATION_EVIDENCE_CLASS,
     render_markdown,
     write_artifact,
 )
+from src.benchmark_validation import assess_matrix_benchmark_evidence, evaluate_benchmark_payload
 
 
 @pytest.fixture(scope="module")
@@ -30,9 +33,21 @@ def test_inventory_has_at_least_one_executable_candidate(inventory):
     groups = inventory.by_eligibility()
     assert len(groups.get("executable_candidate", [])) >= 1, (
         "expected at least one executable_candidate; "
-        "check src.external_validation._EXECUTABLE_MATRIX_TAGS and "
-        "_COMPOUND_ALIASES against data/lit/flavor_reference_payloads.json"
+        "check the Lane A.2 hold-out bundle specs and compound aliases "
+        "against data/lit/flavor_reference_payloads.json"
     )
+
+
+def test_inventory_marks_already_benchmarked_pbma_furfural_as_redundant(inventory):
+    row = next(c for c in inventory.candidates if c.anchor_id == "hernandez_2023_furfural_ratio_anchor")
+    assert row.eligibility == "redundant_with_panel"
+
+
+def test_inventory_promotes_registry_backed_holdouts_to_executable(inventory):
+    anchor_ids = {c.anchor_id for c in inventory.by_eligibility().get("executable_candidate", [])}
+    assert "bi_2020_raw_pea_hexanal_point" in anchor_ids
+    assert "liu_2023_ppi_hexanal_band" in anchor_ids
+    assert "li_2026_spi_wg_hme_2_pentylfuran_control_point" in anchor_ids
 
 
 def test_every_candidate_has_provenance(inventory):
@@ -97,3 +112,28 @@ def test_write_artifact_creates_paired_files(inventory, tmp_path: Path):
 def test_source_paths_resolve():
     assert FLAVOR_REFERENCE_PATH.exists(), FLAVOR_REFERENCE_PATH
     assert BENCHMARK_DIR.exists(), BENCHMARK_DIR
+
+
+def test_holdout_bundles_materialize_as_external_validation_only():
+    bundles = build_holdout_bundles()
+    assert len(bundles) >= 4
+    assert sum(bundle.matched_compound_count() for bundle in bundles) >= 7
+
+    for bundle in bundles:
+        assert bundle.intake_payload["evidence_class"] == EXTERNAL_VALIDATION_EVIDENCE_CLASS
+        assert bundle.benchmark_payload["evidence_class"] == EXTERNAL_VALIDATION_EVIDENCE_CLASS
+        assert bundle.benchmark_payload["source_metadata"]["evidence_class"] == EXTERNAL_VALIDATION_EVIDENCE_CLASS
+        assert bundle.benchmark_payload["metadata"]["evidence_class"] == EXTERNAL_VALIDATION_EVIDENCE_CLASS
+
+        evidence = assess_matrix_benchmark_evidence(bundle.benchmark_payload)
+        assert evidence.external_data_status == EXTERNAL_VALIDATION_EVIDENCE_CLASS
+        assert evidence.promotable is False
+
+
+def test_holdout_bundles_evaluate_against_runtime_surface():
+    bundles = build_holdout_bundles()
+    for bundle in bundles:
+        evaluation = evaluate_benchmark_payload(bundle.benchmark_payload, benchmark_id=bundle.bundle_id)
+        assert evaluation.supported is True, bundle.bundle_id
+        assert evaluation.comparisons, bundle.bundle_id
+        assert any(row.matched_name is not None for row in evaluation.comparisons), bundle.bundle_id

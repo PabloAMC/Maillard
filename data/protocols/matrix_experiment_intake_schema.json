@@ -12,6 +12,9 @@
     "measured_volatiles",
     "provenance"
   ],
+  "optional_top_level_fields": [
+    "evidence_class"
+  ],
   "required_conditions": [
     "temp_C",
     "ph",
@@ -33,6 +36,11 @@
     "internal_experiment",
     "synthetic_diagnostic"
   ],
+  "allowed_evidence_classes": [
+    "calibration_candidate",
+    "external_validation_only",
+    "diagnostic_only"
+  ],
   "allowed_protein_types": [
     "pea_iso",
     "soy_iso",
@@ -42,6 +50,7 @@
   "policies": [
     "Partial compound panels are allowed. Do not backfill unmeasured compounds.",
     "The comparison artifact is not itself a promotion decision.",
-    "External decision readiness still depends on the matrix promotion contract and closure audit."
+    "External decision readiness still depends on the matrix promotion contract and closure audit.",
+    "evidence_class=external_validation_only means the payload is a hold-out surface: materialize it, evaluate it, but never absorb it into calibration or promotion counts."
   ]
 }

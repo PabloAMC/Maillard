@@ -33,9 +33,15 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Optional, Sequence, Tuple
 
+import yaml
+
 ROOT = Path(__file__).resolve().parents[1]
 FLAVOR_REFERENCE_PATH = ROOT / "data" / "lit" / "flavor_reference_payloads.json"
+BENCHMARK_INTAKE_REGISTRY_PATH = ROOT / "data" / "lit" / "benchmark_intake_registry.json"
 BENCHMARK_DIR = ROOT / "data" / "benchmarks"
+EXTERNAL_VALIDATION_PROTOCOL_DIR = ROOT / "data" / "protocols" / "external_validation"
+EXTERNAL_VALIDATION_BENCHMARK_DIR = ROOT / "data" / "benchmarks" / "external_validation"
+EXTERNAL_VALIDATION_EVIDENCE_CLASS = "external_validation_only"
 
 # Compound aliases used to detect overlap between flavor-anchor compound names
 # and the calibration panel compound names. Keep this list short and only
@@ -48,25 +54,140 @@ _COMPOUND_ALIASES: Mapping[str, Tuple[str, ...]] = {
     "nε-(carboxyethyl)lysine (cel)": ("cel", "carboxyethyl lysine"),
 }
 
-# Matrix tags that we currently know how to express as an executable
-# benchmark precursor / process-state pair. Anchors whose matrix_context is
-# in this set are flagged ``executable_candidate``; the rest are
-# ``narrative_only`` for now and become eligible once matrix mapping is
-# extended in Lane A.2.
-_EXECUTABLE_MATRIX_TAGS: frozenset[str] = frozenset(
+# Registry-backed Lane A.2 synthesis specs. Each bundle becomes one intake YAML
+# plus one isolated benchmark JSON under data/benchmarks/external_validation/.
+_HOLDOUT_BUNDLE_SPECS: Tuple[Dict[str, Any], ...] = (
     {
-        "pea_protein_isolate",
-        "soy_protein_isolate",
-        "pbma_vs_meat_panel",
-        "pbma_vs_beef_comparator",
-        "spi_wheat_gluten_hme",
-        "raw_pea_flour",
-        "boiled_beef_reference",
-        "cooked_pbma_oil_comparison",
-        "high_oleic_oil_model_system",
-        "yeast_extract_reaction_flavor",
-    }
+        "bundle_id": "external_validation_bi_2020_raw_pea_hexanal",
+        "anchor_ids": ("bi_2020_raw_pea_hexanal_point",),
+        "matrix_context": "raw_pea_flour",
+        "protein_type": "pea_iso",
+        "process_state": "ambient_slurry",
+        "matrix_format": "raw pea flour external hold-out, proxied onto the pea-isolate matrix-only lane",
+        "conditions": {
+            "temp_C": 40.0,
+            "ph": 6.0,
+            "water_activity": 0.95,
+            "time_min": 10.0,
+        },
+        "precursors": {
+            "Pea Protein Isolate": {"concentration_mM": 1000.0},
+        },
+        "benchmark_alignment": {
+            "target_benchmark_id": "pea_isolate_40C_PratapSingh2021",
+            "notes": "Proxy the raw-pea literature baseline onto the closest executable pea matrix-only lane. evidence_class=external_validation_only keeps it out of calibration.",
+        },
+        "analytical_context": {
+            "headspace_method": "HS-SPME-GC-SIM",
+            "quantification_mode": "internal_standard_calibrated",
+            "replicates": 3,
+            "notes": "Raw-pea flour baseline from Bi et al. (2020). Benchmark conditions are copied from the closest executable pea matrix-only lane because the literature point is a structural hold-out, not a closure benchmark.",
+        },
+        "denaturation_state": 0.0,
+    },
+    {
+        "bundle_id": "external_validation_bi_2020_roasted_pea_hexanal",
+        "anchor_ids": ("bi_2020_roasted_pea_hexanal_point",),
+        "matrix_context": "roasted_pea_flour_160c_30min",
+        "protein_type": "pea_iso",
+        "process_state": "heated_matrix",
+        "matrix_format": "roasted pea flour external hold-out, proxied onto the pea-isolate heated matrix lane",
+        "conditions": {
+            "temp_C": 160.0,
+            "ph": 6.0,
+            "water_activity": 0.35,
+            "time_min": 30.0,
+        },
+        "precursors": {
+            "Pea Protein Isolate": {"concentration_mM": 1000.0},
+        },
+        "benchmark_alignment": {
+            "target_benchmark_id": "pea_isolate_40C_PratapSingh2021",
+            "notes": "Roasted-pea carryover point from Bi et al. (2020). The thermal condition comes from the paper; the matrix proxy remains the pea-isolate matrix-only lane and stays external_validation_only.",
+        },
+        "analytical_context": {
+            "headspace_method": "HS-SPME-GC-SIM",
+            "quantification_mode": "internal_standard_calibrated",
+            "replicates": 3,
+            "notes": "Roasted-pea flour anchor after 160 C / 30 min roasting. Water activity is carried as an extrusion-style low-moisture proxy because the paper does not report a benchmark-ready aw.",
+        },
+        "denaturation_state": 0.2,
+    },
+    {
+        "bundle_id": "external_validation_liu_2023_ppi_offnote_baseline",
+        "anchor_ids": (
+            "liu_2023_ppi_hexanal_band",
+            "liu_2023_ppi_nonanal_band",
+        ),
+        "matrix_context": "native_pea_protein_isolate_aqueous_slurry",
+        "protein_type": "pea_iso",
+        "process_state": "ambient_slurry",
+        "matrix_format": "native commercial pea protein isolate aqueous slurry external hold-out",
+        "conditions": {
+            "temp_C": 40.0,
+            "ph": 6.0,
+            "water_activity": 0.95,
+            "time_min": 10.0,
+        },
+        "precursors": {
+            "Pea Protein Isolate": {"concentration_mM": 1000.0},
+        },
+        "benchmark_alignment": {
+            "target_benchmark_id": "pea_isolate_40C_PratapSingh2021",
+            "notes": "Lot-to-lot PPI off-note baseline from Liu (2023). Conditions are proxied onto the existing ambient pea-isolate matrix-only lane so the bundle stays executable but external-only.",
+        },
+        "analytical_context": {
+            "headspace_method": "HS-SPME-GC-MS plus GC-O",
+            "quantification_mode": "internal_standard_calibrated",
+            "replicates": 6,
+            "notes": "Band midpoints are used as hold-out reference values; uncertainty is derived from the reported band width.",
+        },
+        "denaturation_state": 0.0,
+    },
+    {
+        "bundle_id": "external_validation_li_2026_spi_wg_hme_control",
+        "anchor_ids": (
+            "li_2026_spi_wg_hme_hexanal_control_point",
+            "li_2026_spi_wg_hme_nonanal_control_point",
+            "li_2026_spi_wg_hme_1_hexanol_control_point",
+            "li_2026_spi_wg_hme_2_pentylfuran_control_point",
+        ),
+        "matrix_context": "spi_wheat_gluten_hme_control_57pct_moisture",
+        "protein_type": "soy_iso",
+        "process_state": "extrusion_structured",
+        "matrix_format": "SPI:wheat gluten 6:4 dry-basis HME control, proxied onto the soy-isolate extrusion lane",
+        "conditions": {
+            "temp_C": 160.0,
+            "ph": 7.0,
+            "water_activity": 0.35,
+            "time_min": 0.4167,
+        },
+        "precursors": {
+            "Soy Protein Isolate": {"concentration_mM": 1000.0},
+        },
+        "benchmark_alignment": {
+            "notes": "Li et al. (2026) HME control anchor. The paper does not publish a final-blend pH or water-activity closure, so this bundle stays external_validation_only and never enters calibration.",
+        },
+        "analytical_context": {
+            "headspace_method": "HS-SPME-GC-MS with isotopic internal standards",
+            "quantification_mode": "isotope_dilution_calibrated",
+            "replicates": 3,
+            "notes": "The control matrix includes 40% wheat gluten hydrolysate on a dry basis. The executable proxy uses soy_iso only so the hold-out remains a narrow external check, not a benchmark-closure claim.",
+        },
+        "denaturation_state": 0.8,
+    },
 )
+_HOLDOUT_ANCHOR_IDS: frozenset[str] = frozenset(
+    anchor_id
+    for spec in _HOLDOUT_BUNDLE_SPECS
+    for anchor_id in spec["anchor_ids"]
+)
+_MAPPED_MATRIX_TAGS: frozenset[str] = frozenset(spec["matrix_context"] for spec in _HOLDOUT_BUNDLE_SPECS)
+_TOP_LEVEL_BENCHMARK_EQUIVALENTS: Mapping[str, str] = {
+    # The Hernandez PBMA furfural panel point is already represented by the
+    # executable Resconi benchmark subset at the top-level calibration panel.
+    "hernandez_2023_furfural_ratio_anchor": "resconi_2023_pbma_beef_identity_benchmark",
+}
 
 
 @dataclass(frozen=True)
@@ -160,6 +281,17 @@ class CandidateInventory:
         }
 
 
+@dataclass(frozen=True)
+class HoldoutBundle:
+    bundle_id: str
+    anchor_ids: Tuple[str, ...]
+    intake_payload: Dict[str, Any]
+    benchmark_payload: Dict[str, Any]
+
+    def matched_compound_count(self) -> int:
+        return len(self.benchmark_payload.get("measured_volatiles", {}))
+
+
 # --- numeric extraction --------------------------------------------------
 
 def _geo_mid(low: float, high: float) -> Optional[float]:
@@ -194,16 +326,19 @@ def _extract_numeric(numeric: Mapping[str, Any]) -> Tuple[Optional[float], Optio
         if isinstance(v, (int, float)):
             return float(v), None, None
         return None, None, None
-    if kind in {"band", "oav_band"}:
+    if kind in {"band", "oav_band", "range"}:
         lo = numeric.get("low")
         hi = numeric.get("high")
+        if lo is None and hi is None:
+            lo = numeric.get("min")
+            hi = numeric.get("max")
         if isinstance(lo, (int, float)) and isinstance(hi, (int, float)):
             mid = _geo_mid(float(lo), float(hi))
             return mid, float(lo), float(hi)
         return None, None, None
     if kind == "band_comparison":
         band = numeric.get("pbma_band") or numeric.get("band")
-        if isinstance(band, Sequence) and len(band) == 2 and all(isinstance(x, (int, float)) for x in band):
+        if isinstance(band, (list, tuple)) and len(band) == 2 and all(isinstance(x, (int, float)) for x in band):
             lo = float(band[0])
             hi = float(band[1])
             return _geo_mid(lo, hi), lo, hi
@@ -265,6 +400,90 @@ def _compound_in_panel(canonical: str, panel: Iterable[str]) -> bool:
     return any(canonical in p for p in panel_norm)
 
 
+def _load_flavor_anchor_lookup(
+    flavor_reference_path: Path = FLAVOR_REFERENCE_PATH,
+) -> Dict[str, Dict[str, Any]]:
+    raw = json.loads(flavor_reference_path.read_text(encoding="utf-8"))
+    lookup: Dict[str, Dict[str, Any]] = {}
+    for section, body in raw.items():
+        if not isinstance(body, list) or not section.endswith("_anchors"):
+            continue
+        for anchor in body:
+            if not isinstance(anchor, Mapping):
+                continue
+            anchor_id = str(anchor.get("id", "")).strip()
+            if not anchor_id:
+                continue
+            lookup[anchor_id] = {"section": section, **anchor}
+    return lookup
+
+
+def _load_registry_artifact_lookup(
+    registry_path: Path = BENCHMARK_INTAKE_REGISTRY_PATH,
+) -> Dict[str, Dict[str, Any]]:
+    raw = json.loads(registry_path.read_text(encoding="utf-8"))
+    lookup: Dict[str, Dict[str, Any]] = {}
+    for row in raw.get("eligible_references", []):
+        if not isinstance(row, Mapping):
+            continue
+        for artifact in row.get("runtime_artifacts", []) or []:
+            if not isinstance(artifact, Mapping):
+                continue
+            artifact_id = str(artifact.get("artifact_id", "")).strip()
+            if artifact_id:
+                lookup[artifact_id] = dict(row)
+    return lookup
+
+
+def _anchor_has_top_level_benchmark_artifact(row: Mapping[str, Any]) -> bool:
+    for artifact in row.get("runtime_artifacts", []) or []:
+        if not isinstance(artifact, Mapping):
+            continue
+        if str(artifact.get("artifact_type", "")).strip() != "benchmark":
+            continue
+        path = str(artifact.get("path", "")).strip()
+        if path.startswith("data/benchmarks/") and "/external_validation/" not in path:
+            return True
+    return False
+
+
+def _bundle_spec_for_anchor(anchor_id: str) -> Optional[Dict[str, Any]]:
+    for spec in _HOLDOUT_BUNDLE_SPECS:
+        if anchor_id in spec["anchor_ids"]:
+            return dict(spec)
+    return None
+
+
+def _publication_year_proxy(citation: str) -> str:
+    digits = [part for part in str(citation).split() if part.strip("(),")[:4].isdigit()]
+    for part in digits:
+        cleaned = "".join(ch for ch in part if ch.isdigit())
+        if len(cleaned) >= 4:
+            return f"{cleaned[:4]}-01-01"
+    return "unspecified"
+
+
+def _measurement_row(candidate: ExternalCandidate) -> Dict[str, Any]:
+    if candidate.point_value is None:
+        raise ValueError(f"Candidate {candidate.anchor_id} has no numeric point value")
+    row: Dict[str, Any] = {"conc_ppb": float(candidate.point_value)}
+    if (
+        candidate.band_low is not None
+        and candidate.band_high is not None
+        and candidate.point_value > 0.0
+    ):
+        half_span = max(
+            abs(candidate.point_value - candidate.band_low),
+            abs(candidate.band_high - candidate.point_value),
+        )
+        row["uncertainty_pct"] = round((half_span / candidate.point_value) * 100.0, 1)
+    return row
+
+
+def _unit_is_ppb_equivalent(units: str) -> bool:
+    return str(units).strip().lower() in {"ppb", "ug_per_kg", "ng_per_g"}
+
+
 # --- inventory builder ---------------------------------------------------
 
 def build_inventory(
@@ -277,6 +496,7 @@ def build_inventory(
 
     panel = _load_panel_compounds() if benchmark_dir == BENCHMARK_DIR else _load_panel_compounds()
     raw = json.loads(flavor_reference_path.read_text(encoding="utf-8"))
+    registry_lookup = _load_registry_artifact_lookup()
     candidates: List[ExternalCandidate] = []
 
     for section, body in raw.items():
@@ -298,37 +518,46 @@ def build_inventory(
             canonical = _canonicalise_compound(compound)
 
             in_panel = _compound_in_panel(canonical, panel)
-            executable_matrix = matrix_context in _EXECUTABLE_MATRIX_TAGS
+            registry_row = registry_lookup.get(anchor_id, {})
+            has_top_level_benchmark = _anchor_has_top_level_benchmark_artifact(registry_row) or (
+                anchor_id in _TOP_LEVEL_BENCHMARK_EQUIVALENTS
+            )
+            executable_bundle = _bundle_spec_for_anchor(anchor_id)
 
             # Decide eligibility. The strictest classification wins.
             if point is None and lo is None and hi is None:
                 eligibility = "narrative_only"
                 reason = "numeric block has no recognised point or band shape"
+            elif has_top_level_benchmark:
+                eligibility = "redundant_with_panel"
+                reason = (
+                    f"anchor '{anchor_id}' already has a top-level benchmark runtime artifact in "
+                    f"data/benchmarks ({_TOP_LEVEL_BENCHMARK_EQUIVALENTS.get(anchor_id, 'registry-backed benchmark')}); "
+                    "it is not an external hold-out"
+                )
+            elif not _unit_is_ppb_equivalent(units):
+                eligibility = "narrative_only"
+                reason = (
+                    f"units '{units}' are not directly ppb-equivalent; an explicit conversion contract "
+                    "is required before this anchor can be scored"
+                )
+            elif executable_bundle is not None:
+                eligibility = "executable_candidate"
+                reason = (
+                    f"anchor '{anchor_id}' is wired to hold-out bundle '{executable_bundle['bundle_id']}' "
+                    "and stays isolated from the default calibration panel"
+                )
             elif not in_panel:
                 eligibility = "narrative_only"
                 reason = (
                     f"compound '{compound}' (canonical '{canonical}') is not in the "
-                    f"current calibration panel; cannot be scored against it"
-                )
-            elif not executable_matrix:
-                eligibility = "narrative_only"
-                reason = (
-                    f"matrix_context '{matrix_context}' is not yet mapped to an "
-                    f"executable benchmark precursor / process-state set"
+                    f"current calibration panel and does not yet have a curated hold-out bundle"
                 )
             else:
-                # Compound is in panel AND matrix is executable: it is an
-                # external validation candidate. We do not flag it as
-                # ``redundant_with_panel`` purely on compound match because
-                # the existing panel benchmarks at this matrix are tied to
-                # specific (T, time, pH) conditions that the anchor may
-                # not duplicate; full redundancy detection is Lane A.2's
-                # responsibility once a synthesized payload exists.
-                eligibility = "executable_candidate"
+                eligibility = "narrative_only"
                 reason = (
-                    f"compound '{canonical}' is in panel and matrix "
-                    f"'{matrix_context}' is mappable to an executable "
-                    f"precursor / process-state set"
+                    f"anchor '{anchor_id}' has no Lane A.2 synthesis bundle yet; matrix_context "
+                    f"'{matrix_context}' may still need a dedicated executable mapping"
                 )
 
             candidates.append(
@@ -426,10 +655,10 @@ def render_markdown(inventory: CandidateInventory) -> str:
         lines.append("")
         if label == "narrative_only":
             # Show distinct unmapped matrix tags so a follow-up can
-            # extend ``_EXECUTABLE_MATRIX_TAGS`` if appropriate.
-            unmapped = sorted({c.matrix_context for c in rows if c.matrix_context not in _EXECUTABLE_MATRIX_TAGS})
+            # extend the Lane A.2 bundle table if appropriate.
+            unmapped = sorted({c.matrix_context for c in rows if c.matrix_context not in _MAPPED_MATRIX_TAGS})
             if unmapped:
-                lines.append("Unmapped matrix tags (extend `_EXECUTABLE_MATRIX_TAGS` if any of these become executable):")
+                lines.append("Unmapped matrix tags (extend the hold-out bundle specs if any of these become executable):")
                 lines.append("")
                 for tag in unmapped:
                     lines.append(f"- `{tag}`")
@@ -457,12 +686,128 @@ def write_artifact(
     return {"markdown": md_path, "json": json_path}
 
 
+def build_holdout_bundles(
+    *,
+    flavor_reference_path: Path = FLAVOR_REFERENCE_PATH,
+) -> List[HoldoutBundle]:
+    """Build the Lane A.2 external-validation-only intake + benchmark bundles.
+
+    The resulting benchmark JSONs are meant to live under
+    data/benchmarks/external_validation/ so they remain outside the default
+    calibration panel loaded by get_benchmark_files().
+    """
+
+    from src.matrix_experiment_intake import materialize_matrix_experiment_benchmark
+
+    inventory = build_inventory(flavor_reference_path=flavor_reference_path)
+    by_anchor = {row.anchor_id: row for row in inventory.candidates}
+    anchor_lookup = _load_flavor_anchor_lookup(flavor_reference_path)
+    bundles: List[HoldoutBundle] = []
+
+    for spec in _HOLDOUT_BUNDLE_SPECS:
+        measured_volatiles: Dict[str, Dict[str, Any]] = {}
+        citations: List[str] = []
+        dois: List[str] = []
+        notes: List[str] = []
+
+        for anchor_id in spec["anchor_ids"]:
+            candidate = by_anchor.get(anchor_id)
+            if candidate is None:
+                raise KeyError(f"Unknown external-validation anchor: {anchor_id}")
+            if candidate.eligibility != "executable_candidate":
+                raise ValueError(
+                    f"Anchor {anchor_id} must be executable_candidate to materialize; got {candidate.eligibility}"
+                )
+            anchor_row = anchor_lookup.get(anchor_id, {})
+            measured_volatiles[candidate.compound] = _measurement_row(candidate)
+            citations.append(str(anchor_row.get("source_citation", candidate.citation)))
+            doi = str(anchor_row.get("doi", candidate.doi) or "")
+            if doi:
+                dois.append(doi)
+            target_direction = str(anchor_row.get("target_direction", "")).strip()
+            if target_direction:
+                notes.append(f"{anchor_id}: {target_direction}")
+
+        primary_citation = citations[0] if citations else spec["bundle_id"]
+        intake_payload: Dict[str, Any] = {
+            "experiment_id": spec["bundle_id"],
+            "source_kind": "external_literature",
+            "evidence_class": EXTERNAL_VALIDATION_EVIDENCE_CLASS,
+            "protein_type": spec["protein_type"],
+            "process_state": spec["process_state"],
+            "matrix_format": spec["matrix_format"],
+            "conditions": dict(spec["conditions"]),
+            "formulation": {"precursors": dict(spec["precursors"]),},
+            "measured_volatiles": measured_volatiles,
+            "provenance": {
+                "origin": "external_literature",
+                "source_reference": primary_citation,
+                "source_doi": dois[0] if dois else "",
+                "measurement_date": _publication_year_proxy(primary_citation),
+                "notes": (
+                    "External validation hold-out synthesized from flavor_reference_payloads.json; "
+                    "never use for calibration or promotion. "
+                    + " ".join(notes)
+                ).strip(),
+            },
+            "benchmark_alignment": dict(spec.get("benchmark_alignment", {})),
+            "analytical_context": {
+                **dict(spec.get("analytical_context", {})),
+                "citation_provenance": citations,
+            },
+            "denaturation_state": float(spec.get("denaturation_state", 0.5)),
+        }
+        benchmark_payload = materialize_matrix_experiment_benchmark(intake_payload)
+        bundles.append(
+            HoldoutBundle(
+                bundle_id=spec["bundle_id"],
+                anchor_ids=tuple(spec["anchor_ids"]),
+                intake_payload=intake_payload,
+                benchmark_payload=benchmark_payload,
+            )
+        )
+    return bundles
+
+
+def write_holdout_bundles(
+    bundles: Sequence[HoldoutBundle],
+    *,
+    protocol_dir: Path = EXTERNAL_VALIDATION_PROTOCOL_DIR,
+    benchmark_dir: Path = EXTERNAL_VALIDATION_BENCHMARK_DIR,
+) -> Dict[str, List[Path]]:
+    protocol_dir.mkdir(parents=True, exist_ok=True)
+    benchmark_dir.mkdir(parents=True, exist_ok=True)
+
+    protocol_paths: List[Path] = []
+    benchmark_paths: List[Path] = []
+    for bundle in bundles:
+        protocol_path = protocol_dir / f"{bundle.bundle_id}.yaml"
+        benchmark_path = benchmark_dir / f"{bundle.bundle_id}.json"
+        protocol_path.write_text(
+            yaml.safe_dump(bundle.intake_payload, sort_keys=False, allow_unicode=False),
+            encoding="utf-8",
+        )
+        benchmark_path.write_text(
+            json.dumps(bundle.benchmark_payload, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+        protocol_paths.append(protocol_path)
+        benchmark_paths.append(benchmark_path)
+    return {"protocols": protocol_paths, "benchmarks": benchmark_paths}
+
+
 __all__ = [
+    "BENCHMARK_INTAKE_REGISTRY_PATH",
     "ExternalCandidate",
     "CandidateInventory",
+    "EXTERNAL_VALIDATION_BENCHMARK_DIR",
+    "EXTERNAL_VALIDATION_EVIDENCE_CLASS",
+    "EXTERNAL_VALIDATION_PROTOCOL_DIR",
     "build_inventory",
+    "build_holdout_bundles",
     "render_markdown",
     "write_artifact",
+    "write_holdout_bundles",
     "FLAVOR_REFERENCE_PATH",
     "BENCHMARK_DIR",
 ]
