@@ -23,12 +23,13 @@ import json
 import yaml
 import math
 from pathlib import Path
-from typing import Dict, Tuple, Optional, Sequence
+from typing import Any, Dict, Tuple, Optional, Sequence
 
 # Locate data files
 ROOT = Path(__file__).resolve().parents[1]
 ARRHENIUS_FILE = ROOT / "data" / "lit" / "arrhenius_params.yml"
 REFINEMENT_PATCH_FILE = ROOT / "data" / "lit" / "refinement_surrogate_patches.json"
+COMPUTATIONAL_PRIORS_FILE = ROOT / "data" / "lit" / "computational_priors.json"
 
 # Exact Mapping: normalized reaction family name → barrier in kcal/mol.
 # Replaces fragile substring matching.
@@ -175,6 +176,149 @@ _DONOR_PRIORITY = {
     "fructose": 2,
     "glucose": 1,
 }
+
+# Reaction keys for which a literature- or family-anchored barrier is
+# carried as part of the computational-gap kinetic priors.  Originally
+# these were intended as DFT anchors; after retirement of unreliable
+# xTB/DFT-derived values (2026-04-21) the keys are kept for runtime
+# wiring but the underlying tiers are literature/family/surrogate.
+# `asparagine_sugar_explicit_water_cluster` is excluded here because it
+# is wired through the safety pipeline (`src/safety.py`) using the
+# Knol 2009 lumped Ea, not through the DFT anchor metadata.
+_DFT_ANCHOR_REACTION_KEYS = (
+    "hexanal_radical_quench",
+    "quinone_cys_michael",
+    "aa_ring_open_dicarbonyl",
+    "pe_schiff_base",
+    "pe_amadori",
+    "lysinoalanine_crosslink",
+)
+
+
+def _fallback_dft_anchor_metadata() -> Dict[str, Dict[str, Any]]:
+    return {
+        "hexanal_radical_quench": {
+            "slr_family": "11",
+            "current_tier": "no_literature_anchor",
+            "target_tier": "wet_lab_anchor",
+            "active_key": "hexanal_radical_quench_no_anchor",
+            "active_barrier_kcal": None,
+            "dft_key": "hexanal_radical_quench_dft",
+            "uncertainty_kj": None,
+            "promotion_ceiling": "wet_lab_required",
+            "honest_label": "No reliable kinetic anchor; xTB-derived value retired 2026-04-21. Runtime falls back to literature_runtime barrier_kj_mol=31.72 default.",
+        },
+        "quinone_cys_michael": {
+            "slr_family": "13",
+            "current_tier": "literature_family_surrogate",
+            "target_tier": "literature_derived_transfer",
+            "active_key": "quinone_cys_michael_thiol_addition_family",
+            "active_barrier_kcal": 6.93,
+            "dft_key": "quinone_cys_michael_dft",
+            "uncertainty_kj": 15.0,
+            "promotion_ceiling": "bounded_calibration",
+            "honest_label": "Family surrogate (Michael thiol addition, ~29 kJ/mol literature); xTB value retired 2026-04-21",
+        },
+        "aa_ring_open_dicarbonyl": {
+            "slr_family": "14",
+            "current_tier": "literature_derived_transfer",
+            "target_tier": "selective_dft_anchor",
+            "active_key": "aa_ring_open_dicarbonyl_hcw_family14_surrogate",
+            "active_barrier_kcal": 7.58,
+            "dft_key": "aa_ring_open_dicarbonyl_dft",
+            "uncertainty_kj": 20.0,
+            "promotion_ceiling": "bounded_calibration",
+            "honest_label": "HCW Family 14 surrogate for an upstream ascorbic-acid dicarbonyl source, DFT validation pending, ±factor 2-5; bounded calibration",
+        },
+        "pe_schiff_base": {
+            "slr_family": "15",
+            "current_tier": "literature_derived_transfer",
+            "target_tier": "selective_dft_anchor",
+            "active_key": "pe_schiff_base_lit_derived",
+            "active_barrier_kcal": 22.21,
+            "dft_key": "pe_schiff_base_dft",
+            "uncertainty_kj": 20.9,
+            "promotion_ceiling": "bounded_calibration",
+            "honest_label": "SLR 15 literature Ea=92.9 kJ/mol, ±factor 2-5; bounded calibration",
+        },
+        "pe_amadori": {
+            "slr_family": "15",
+            "current_tier": "literature_derived_transfer",
+            "target_tier": "selective_dft_anchor",
+            "active_key": "pe_amadori_lit_derived",
+            "active_barrier_kcal": 19.81,
+            "dft_key": "pe_amadori_dft",
+            "uncertainty_kj": 20.9,
+            "promotion_ceiling": "bounded_calibration",
+            "honest_label": "SLR 15 literature Ea=82.9 kJ/mol, ±factor 2-5; bounded calibration",
+        },
+        "lysinoalanine_crosslink": {
+            "slr_family": "12",
+            "current_tier": "family_rule_surrogate",
+            "target_tier": "selective_dft_anchor",
+            "active_key": "lysinoalanine_crosslink_dha_family_surrogate",
+            "active_barrier_kcal": 16.0,
+            "dft_key": "lysinoalanine_crosslink_dft",
+            "uncertainty_kj": 42.0,
+            "promotion_ceiling": "ranking_only",
+            "honest_label": "DHA-plus-lysine family surrogate, assumes prior dehydroalanine formation, ±factor 5-15; ranking only",
+        },
+        "asparagine_sugar_explicit_water_cluster": {
+            "slr_family": "13_safety",
+            "current_tier": "literature_derived_transfer",
+            "target_tier": "literature_derived_transfer",
+            "active_key": "asparagine_sugar_explicit_water_cluster_knol2009",
+            "active_barrier_kcal": 30.83,
+            "dft_key": "asparagine_sugar_explicit_water_cluster_dft",
+            "uncertainty_kj": 10.0,
+            "promotion_ceiling": "literature_anchor",
+            "honest_label": "Knol et al. 2009 Ea=129 kJ/mol (DOI 10.1016/j.foodchem.2009.11.049); direct lumped Asn+sugar->acrylamide literature anchor",
+        },
+    }
+
+
+def _load_dft_anchor_metadata() -> Dict[str, Dict[str, Any]]:
+    fallback = _fallback_dft_anchor_metadata()
+    try:
+        with open(COMPUTATIONAL_PRIORS_FILE, "r", encoding="utf-8") as handle:
+            payload = json.load(handle)
+    except Exception:
+        return fallback
+
+    entries = {
+        str(row.get("reaction_key", "")).strip(): row
+        for row in payload.get("dft_kinetic_priors", {}).get("entries", [])
+        if str(row.get("reaction_key", "")).strip()
+    }
+    metadata: Dict[str, Dict[str, Any]] = {}
+    for reaction_key in _DFT_ANCHOR_REACTION_KEYS:
+        row = entries.get(reaction_key)
+        if row is None:
+            metadata[reaction_key] = dict(fallback[reaction_key])
+            continue
+        barrier_kcal = row.get("barrier_kcal_mol")
+        active_barrier_kcal = (
+            float(barrier_kcal)
+            if barrier_kcal is not None
+            else fallback[reaction_key]["active_barrier_kcal"]
+        )
+        uncertainty_raw = row.get("uncertainty_kj", fallback[reaction_key]["uncertainty_kj"])
+        uncertainty_kj = float(uncertainty_raw) if uncertainty_raw is not None else None
+        metadata[reaction_key] = {
+            "slr_family": str(row.get("slr_family", fallback[reaction_key]["slr_family"])),
+            "current_tier": str(row.get("current_tier", fallback[reaction_key]["current_tier"])),
+            "target_tier": str(row.get("target_tier", fallback[reaction_key]["target_tier"])),
+            "active_key": str(row.get("active_arrhenius_key", fallback[reaction_key]["active_key"])),
+            "active_barrier_kcal": active_barrier_kcal,
+            "dft_key": f"{reaction_key}_dft",
+            "uncertainty_kj": uncertainty_kj,
+            "promotion_ceiling": str(row.get("promotion_ceiling", fallback[reaction_key]["promotion_ceiling"])),
+            "honest_label": str(row.get("honest_label", fallback[reaction_key]["honest_label"])),
+        }
+    return metadata
+
+
+DFT_ANCHOR_METADATA = _load_dft_anchor_metadata()
 
 
 def _normalize_donor_context_token(value: str) -> str:

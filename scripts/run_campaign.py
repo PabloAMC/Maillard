@@ -51,14 +51,67 @@ def _load_campaign_spec(path: Path) -> Dict[str, object]:
     return payload
 
 
+def _build_named_campaign_spec(
+    names: List[str],
+    *,
+    ph: float,
+    temp: float,
+    aw: float,
+    protein_type: str,
+    target_tag: str,
+    minimize_tag: str,
+    campaign_name: str,
+) -> Dict[str, object]:
+    cleaned_names = [name.strip() for name in names if str(name).strip()]
+    if len(cleaned_names) < 2:
+        raise ValueError("Named comparison mode requires at least two formulation names.")
+    return {
+        "campaign": {
+            "name": campaign_name,
+            "target_tag": target_tag,
+            "minimize_tag": minimize_tag,
+        },
+        "shared_conditions": {
+            "ph": float(ph),
+            "temp": float(temp),
+            "aw": float(aw),
+            "protein_type": protein_type,
+        },
+        "formulations": [{"name": name} for name in cleaned_names],
+    }
+
+
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Run a shareable Maillard screening campaign.")
-    parser.add_argument("--spec", required=True, help="Path to a campaign YAML specification")
+    parser = argparse.ArgumentParser(description="Run a shareable Maillard screening campaign or named comparison package.")
+    input_group = parser.add_mutually_exclusive_group(required=True)
+    input_group.add_argument("--spec", help="Path to a campaign YAML specification")
+    input_group.add_argument("--names", help="Comma-separated formulation names to compare via the campaign pipeline")
     parser.add_argument("--output-dir", default=None, help="Directory where campaign artifacts should be written")
+    parser.add_argument("--ph", type=float, default=6.0, help="Reaction pH for named comparison mode (default 6.0)")
+    parser.add_argument("--temp", type=float, default=150.0, help="Temperature in Celsius for named comparison mode (default 150)")
+    parser.add_argument("--aw", type=float, default=1.0, help="Water activity for named comparison mode (default 1.0)")
+    parser.add_argument("--protein-type", default="free", help="Protein type for named comparison mode (default free)")
+    parser.add_argument("--target-tag", default="meaty", help="Target flavor profile for named comparison mode")
+    parser.add_argument("--minimize-tag", default="beany", help="Flavor profile to minimize for named comparison mode")
+    parser.add_argument("--campaign-name", default="Named formulation comparison", help="Campaign label for named comparison mode")
     args = parser.parse_args()
 
-    spec_path = Path(args.spec).resolve()
-    campaign_spec = _load_campaign_spec(spec_path)
+    spec_path = None
+    if args.spec:
+        spec_path = Path(args.spec).resolve()
+        campaign_spec = _load_campaign_spec(spec_path)
+    else:
+        campaign_spec = _build_named_campaign_spec(
+            args.names.split(","),
+            ph=args.ph,
+            temp=args.temp,
+            aw=args.aw,
+            protein_type=str(args.protein_type),
+            target_tag=str(args.target_tag),
+            minimize_tag=str(args.minimize_tag),
+            campaign_name=str(args.campaign_name),
+        )
+
     campaign_meta = campaign_spec.get("campaign", {})
     shared_conditions = campaign_spec.get("shared_conditions", {}) or {}
 
@@ -89,7 +142,10 @@ def main() -> int:
     print(f"Campaign:  {campaign_meta.get('name', 'Unnamed campaign')}")
     print(f"Target:    {target_tag}")
     print(f"Minimize:  {minimize_tag}")
-    print(f"Spec:      {spec_path}")
+    if spec_path is not None:
+        print(f"Spec:      {spec_path}")
+    else:
+        print(f"Names:     {', '.join(str(row.get('name', 'unknown')) for row in campaign_spec.get('formulations', []))}")
     print(f"Runs:      {len(requested_formulations)}")
     print("-" * 54)
 

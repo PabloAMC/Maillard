@@ -194,6 +194,10 @@ def main():
             "r": "CCCCCC=O.[SH]",              # Hexanal + thiyl radical
             "p": "CCCCCC(O)[S]"                # Radical thiohemiacetal adduct
         },
+        "quinone_cys_michael": {
+            "r": "O=C1C=CC(=O)C=C1.NC(CS)C(=O)O",   # p-Benzoquinone + cysteine
+            "p": "NC(CSc1ccc(O)cc1O)C(=O)O"         # Cysteinyl-hydroquinone minimal adduct
+        },
         "lysinoalanine_crosslink": {
             "r": "C=C(C(=O)O)N.NCCCCC(N)C(=O)O",  # Dehydroalanine + Lysine
             "p": "C(CCNCC(C(=O)O)N)CC(C(=O)O)N"   # Lysinoalanine
@@ -201,6 +205,14 @@ def main():
         "aa_ring_open_dicarbonyl": {
             "r": "C(C(C1C(=O)C(=O)C(=O)O1)O)O.O",   # Dehydroascorbic acid + water
             "p": "C(C(C(C(=O)C(=O)C(=O)O)O)O)O"     # 2,3-diketogulonic acid
+        },
+        "pe_schiff_base": {
+            "r": "NCCOP(=O)(O)O.O=CC(O)C(O)C(O)CO",   # 2-aminoethyl phosphate + open-chain sugar proxy
+            "p": "OCC(O)C(O)C(O)C=NCCOP(=O)(O)O.O"     # Headgroup Schiff base proxy + water
+        },
+        "pe_amadori": {
+            "r": "OCC(O)C(O)C(O)C=NCCOP(=O)(O)O",      # Headgroup Schiff base proxy
+            "p": "O=C(CNCCOP(=O)(O)O)C(O)C(O)CO"       # Balanced headgroup Amadori proxy
         },
         "pyrazine": {
             "r": "CC(=O)CN.CC(=O)CN",          # 2x Aminoacetone

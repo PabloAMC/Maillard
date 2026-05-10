@@ -1,5 +1,333 @@
 # Maillard Strategic Roadmap
 
+## Active Follow-up — 2026-04-21 Family 14 TS Recovery
+
+Status 2026-04-22: **both recovery strategies failed to produce a first-order DFT saddle.** Family 14 `aa_ring_open_dicarbonyl` reverts to the literature HCW surrogate (7.58 kcal/mol, bounded_calibration).
+
+- [x] Re-audit GPT-5.4's plan. Key findings:
+	- The reaction is a **2-coordinate concerted** process (O0–C4 forming + H2 transfer from O3 to O14), not the single O0–C4 coordinate GPT-5.4 tracked.
+	- The GSM+Sella TS had H2 in the wrong proton basin (on O3, not in flight).
+	- The xTB NEB path (`xtbpath_*.xyz`) was corrupt (16/21 images dissociated 9–13 Å).
+	- A single-coordinate scan would have produced the same wrong-basin artifact.
+- [x] Strategy A — xTB-constrained-relaxed linear-interpolation seed (both forming bonds constrained) + DFT mode inspection + Sella DFT. Script: `scripts/recover_ts_interpolated_seed.py`.
+	- Seed clean: d(O0,C4)=2.57, d(H2,O14)=1.40, d(H2,O3)=3.00, min NN=0.96 Å.
+	- DFT Hessian mode 5 at **−192.58 cm⁻¹, score 0.78** (consistent direction but mediocre magnitude).
+	- **Sella DFT verdict: `minimum` (`invalid_saddle`).** See `results/computational_gap_refinement/aa_ring_open_dicarbonyl_interp_recovery.json`. The seed, while clash-free, was not in a quadratic saddle basin at r2SCAN/def2-svp.
+- [x] Strategy B — xTB-CI-NEB (IDPP interpolation, LBFGS, TBLite w/ tuned SCF: acc=2.0, max_iter=500, e_temp=1500 K, mixer_damping=0.2) + DFT mode inspection + Sella DFT. Script: `scripts/recover_ts_neb_seed.py`.
+	- Pre-opt LBFGS oscillated (fmax 0.36–0.82 eV/Å over 120 steps, target 0.10); CI-NEB then exploded to fmax >12 eV/Å. GFN2-xTB with 9 IDPP images cannot hold a stable MEP for this concerted two-bond reaction.
+- [x] Decision: **keep the bounded_calibration literature surrogate (7.58 kcal/mol) for Family 14.** Family 14 TS is not refinable with the current GFN2-xTB seeding + r2SCAN/def2-svp Sella stack; a higher-level seed (DFT 2D relaxed scan over d(O0,C4) × d(H2,O14), or MACE-MP0-seeded NEB) would be required before retrying.
+- [ ] (Future, low priority) If Family 14 becomes rate-limiting for any use case, re-attempt with a 2D DFT relaxed scan over the two forming bonds. Until then, do not spend further DFT compute on this target.
+
+## Active Plan — 2026-04-22 Triangulated Barrier Strategy for Families 11–15
+
+### TL;DR
+Sella+GFN2 está al límite (Family 14 falló con dos estrategias). El "impacto cero" del generador de sensibilidad sobre los 7 targets es **artefacto del panel de benchmarks** (Cys/ribosa flavor no estresa Families 11–15), no irrelevancia química. El plan operativo cambia: **B auditoría de evidencia + React-OT primero sobre el subconjunto elegible por composición**, **A OA-ReactDiff sólo como segunda línea si React-OT no alcanza**, **C wet-lab como backlog documentado**, **D promoción sin atajos**.
+
+### Contexto duro
+- 7 targets en scope (Families 11–15): `hexanal_radical_quench`, `quinone_cys_michael`, `lysinoalanine_crosslink`, `aa_ring_open_dicarbonyl`, `pe_schiff_base`, `pe_amadori`, `asparagine_sugar_explicit_water_cluster`.
+- Sensibilidad global (`results/validation/refinement_global_sensitivity.json`) ranking top: `amadori_rearrangement` (46.04), `thiol_addition` (38.94), `aminoketone_condensation` (34.23), `strecker_degradation` (32.48), `thiol_oxidation` (22.89). Los 7 targets aparecen impacto 0 **porque el panel de benchmarks no los mide**, no por irrelevancia química.
+- `selective_dft_plan.md` actual: `Run-now jobs: 0`. Todos `defer/cheap_first_hold` → ningún DFT mejora benchmarks visibles.
+- Cobertura de evidencia auditada a 2026-04-22: de los 7 targets, sólo `aa_ring_open_dicarbonyl`, `pe_schiff_base` y `pe_amadori` tienen transferencia/literatura explícita en repo; `lysinoalanine_crosslink` es surrogate de familia; `hexanal_radical_quench`, `quinone_cys_michael` y `asparagine_sugar_explicit_water_cluster` no tienen paper directo en el repo. De las 5 familias dominantes del benchmark, `amadori_rearrangement` y `strecker_degradation` sí tienen referencia explícita; `thiol_addition` es prior acotado; `aminoketone_condensation` y `thiol_oxidation` siguen como constantes calibradas sin DOI explícito en repo.
+- React-OT público es utilizable sólo sobre targets CHON y tamaño moderado. Elegibles hoy: `lysinoalanine_crosslink`, `aa_ring_open_dicarbonyl`, `pe_schiff_base`, `asparagine_sugar_explicit_water_cluster`. Bloqueados por composición: `hexanal_radical_quench` (S), `quinone_cys_michael` (S), `pe_amadori` (P).
+- Stack instalado: torch, mace-torch, sella, ase, pyscf, xtb, tblite, rdkit, geometric. **Falta**: React-OT, OA-ReactDiff. `chemprop` queda fuera del camino principal por OOD severo + falta de SMILES balanceadas/mapeadas para 6/7 targets.
+
+### Vía B — Auditoría de evidencia + piloto React-OT (ARRANCA YA, ~1-2 días)
+- [ ] B.1 Consolidar una matriz de procedencia para los 7 targets + 5 familias dominantes en `results/validation/qm_barrier_provenance.{md,json}`: `paper_directo`, `transferencia_literatura`, `surrogate_familia`, `xtb_derived`, `sin_fuente_directa`.
+- [ ] B.2 Añadir React-OT al entorno (`environment.yml`/`Dockerfile`) en modo reproducible y registrar checkpoint/procedencia bajo `models/external/react_ot/`.
+- [ ] B.3 Crear wrapper `scripts/recover_ts_react_ot_seed.py` que consume `reactant.xyz` + `product.xyz`, ejecuta inferencia React-OT y materializa `react_ot_ts_guess.xyz` + `react_ot_summary.json` por target. No autoridad energética: sólo semilla geométrica.
+- [ ] B.4 Ejecutar React-OT sobre el subconjunto elegible (`lysinoalanine_crosslink`, `aa_ring_open_dicarbonyl`, `pe_schiff_base`, `asparagine_sugar_explicit_water_cluster`) y pasar cada seed por `inspect_ts_imag_modes` + Sella DFT corto cuando el modo score supere el gate.
+- [ ] B.5 Documentar explícitamente los bloqueos de composición para `hexanal_radical_quench`, `quinone_cys_michael` y `pe_amadori`; no fingir cobertura ML donde no la hay.
+- [ ] B.6 Triage por target post-React-OT:
+  - `seed válida + DFT converge` → **PROMOVER candidato**.
+  - `seed válida pero DFT cae a minimum/invalid_saddle` → **REVISAR con Vía A**.
+  - `inferencia bloqueada u OOD` → **wet-lab o surrogate honesto**.
+- **Acceptance**: matriz de procedencia completa para 7+5; React-OT corre sobre 4/7 targets elegibles; al menos 2/4 generan una seed que merece inspección DFT o todos los fallos quedan clasificados con razón explícita.
+
+### Vía A — OA-ReactDiff o segunda alternativa geométrica (SÓLO si React-OT no alcanza)
+- [ ] A.1 Clonar e instalar OA-ReactDiff (`chenruduan/OAReactDiff`) con `--no-deps`; persistir checkpoint bajo `models/external/oa_reactdiff/` con `provenance.json`. Smoke sobre 1 reacción in-distribution → confirmar que la inferencia genera una geometría TS utilizable.
+- [ ] A.2 Crear `scripts/recover_ts_diffusion.py`: input `target_id` + N=10 candidatos; pipeline `OA-ReactDiff → inspect_ts_imag_modes → mejor (|ω|×score) → Sella DFT con ts_v0` y `policy:"off"`. Output `results/computational_gap_refinement/<target>_diffusion_recovery.json`. Reutilizar bypass MLP/xTB de `recover_ts_interpolated_seed.py`.
+- [ ] A.3 Ejecutar A.2 sólo sobre targets donde React-OT haya producido `minimum`, `invalid_saddle` o `blocked_by_composition`, y donde siga habiendo valor científico (`aa_ring_open_dicarbonyl`, `asparagine_sugar_explicit_water_cluster`, safety-critical).
+- [ ] A.4 Cierre por target en uno de tres estados: `promoted_dft_diffusion` (TS válido + DFT converge), `confirmed_surrogate_via_failure_bound` (sin seed útil, surrogate queda con racional explícito), o `escalated_to_wet_lab`.
+- **Acceptance**: OA-ReactDiff se ejecuta sólo donde React-OT no resolvió; no se duplica compute sobre targets ya cerrados por Vía B.
+
+### Vía C — Wet-lab backlog Families 11–15 (PARALELO, no bloquea)
+- [ ] C.1 Documentar formalmente el gap del panel: el set de benchmarks no contiene mediciones para Families 11–15; ése es el origen del "impacto cero".
+- [ ] C.2 Inventariar observables por familia: F11 hexanal/nonanal headspace; F12 lisinoalanina LC-MS; F13 quinona-Cys adductos LC-MS + acrilamida GC-MS; F14 ácido 2,3-DKG + browning A294/A420; F15 piridinas/pirroles PE-Maillard headspace.
+- [ ] C.3 Usar `src/experiment_request.py` (S22.2) con valor = "información independiente sobre familia previamente no observada" (no benchmark fit). Output `results/validation/wet_lab_backlog_families_11_15.{md,json}` ranked por familia × coste × discriminación.
+- [ ] C.4 Triggers de ejecución: (a) Vía B/A escaló a wet-lab, (b) target rate-limiting para algún use case en `data/use_cases/`, (c) target sin paper directo y además bloqueado por composición/OOD para los generadores geométricos.
+- **Acceptance**: cada Family 11–15 tiene ≥ 1 spec wet-lab redactada; ningún experimento se lanza sin trigger explícito.
+
+### Vía D — Gobierno y trazabilidad (CONTINUO)
+- [ ] D.1 Marcar `aa_ring_open_dicarbonyl.refinability_status = "stack_limit_reached"` en `data/lit/computational_priors.json` con racional explícito.
+- [ ] D.2 Política de promoción: ningún target sube a `selective_dft_anchor` sin triangulación. Reglas en B.5/A.4.
+- [ ] D.3 Log único `results/validation/qm_barrier_provenance.{md,json}` por target: `{target_id, evidence_class, surrogate_kcal, react_ot_status, react_ot_kcal, oa_reactdiff_status, oa_reactdiff_kcal, wet_lab_kcal, final_kcal, final_tier, final_confidence, decision_rationale, evidence_paths[]}`.
+
+### Sequencing & gates
+- B termina antes de empezar A (B reduce el scope de A).
+- A se lanza sólo sobre subconjunto donde React-OT haya fallado o no aplique.
+- C documenta en paralelo desde día 1; no bloquea.
+- D se aplica continuamente.
+- **Hard stop**: si React-OT produce seeds útiles para ≥2/4 elegibles y el resto queda bien clasificado por procedencia, A queda opcional y la triangulación geométrica se considera suficiente.
+- `pytest tests/scripts/test_run_computational_gap_dft.py tests/unit/test_literature_runtime.py` verde tras cualquier promoción.
+
+### Riesgos
+- **React-OT composición**: el checkpoint público práctico está restringido a CHON y tamaño moderado. Mitigación: bloquear explícitamente `hexanal_radical_quench`, `quinone_cys_michael`, `pe_amadori` y no fingir cobertura.
+- **OA-ReactDiff entrenado en Transition1x (ωB97X/6-31G(d), gas phase)**: transferencia ruidosa a sistemas con disolvente. Mitigación: usar como semilla DFT-Sella (ddCOSMO water), no como energía final.
+- **Coste compute A**: 7×N=10 + Hessianos puede tardar días. Mitigación: tiempo-box estricto (A.3).
+- **Falsa triangulación**: React-OT/OA-ReactDiff generan geometría, no barrera. Mitigación: nunca usar la energía ML como autoridad final; sólo seeds + DFT o surrogate honesto.
+
+### Excluido del scope
+- Reentrenamiento de modelos ML de barrera (Chemprop/EquiReact quedan fuera del camino principal).
+- Mejoras al pipeline DFT-Sella nativo (probadamente al límite).
+- Ampliación del panel de benchmarks por nuestra cuenta (es C, requiere wet-lab externo).
+- pyGSM (paralelo, ya tiene su propio Active Plan más abajo).
+
+### Review
+- _pendiente_
+
+## Active Plan — 2026-04-19 pyGSM integration & global barrier run
+
+### Objetivos del usuario
+1. Integrar pyGSM y conectarlo con el resto del pipeline (TS-guess → DFT).
+2. Probar utilidad sobre los 7 targets de computational gap, no sólo los 3 ya validados.
+3. Pulir todo y lanzar la corrida global para obtener barreras finales.
+
+### Contexto duro (ya verificado)
+- `pyGSM` no está en PyPI; instalable sólo desde `git+https://github.com/ZimmermanGroup/pyGSM.git`. Su `xtb` (xtb-python) transitivo no compila en el container actual → instalar con `--no-deps` y reutilizar `get_xtb_ase_calculator()` (tblite).
+- Validación dura ya en producción (`_classify_ts_frequencies`, floor 50 cm⁻¹, `ts_validation.json` consumido por la promotion gate). Todo lo nuevo debe seguir pasando esa puerta.
+- xTB sirve sólo como pathfinder; las magnitudes son inflated. DFT sigue siendo la única fuente de la altura final.
+- 7 targets en scope: `hexanal_radical_quench`, `lysinoalanine_crosslink`, `aa_ring_open_dicarbonyl`, `quinone_cys_michael`, `pe_schiff_base`, `pe_amadori`, `asparagine_sugar_explicit_water_cluster`.
+- Estado actual: hexanal y lysino flagueados `invalid_saddle`; aa_ring interrumpido; los otros 4 con seeds xTB pero sin DFT corrido.
+
+### Fase 1 — pyGSM backend (núcleo)
+- [ ] **1.1** Instalar pyGSM con `--no-deps` en el container y persistirlo en `environment.yml`/`Dockerfile`. Smoke test: import + ejemplo Müller-Brown.
+- [ ] **1.2** Crear `src/gsm_backend.py` con `GSMRunner.run_de_gsm(reactant_xyz, product_xyz, *, charge, spin, n_nodes, max_iters, work_dir, timeout_s) -> GSMResult`. LOT delgado sobre `get_xtb_ase_calculator()`. Mover `_suppress_native_output` desde `scripts/diagnose_xtb_gsm_viability.py` a `src/_native_io.py`.
+- [ ] **1.3** Conectar como cuarto escalón en el cascade de `src/ts_guess_refiner.py` (gobernado por `enable_gsm_fallback: bool = False`).
+- [ ] **1.4** Conectar como fallback duro en `src/dft_refiner.py`: si `ts_validation.is_true_saddle == False` → relanzar Phase 3.2+3.3 con guess GSM. Persistir `gsm_attempt.json` en el checkpoint dir. Nunca usar la energía xTB como barrera final.
+- [ ] **1.5** Exponer flags en `scripts/run_computational_gap_dft.py`: `--enable-gsm-fallback`, `--gsm-nodes`, `--gsm-max-iters`, `--gsm-timeout-s`. Counters en summary.
+
+### Fase 2 — Validación contra los 3 targets ya estudiados
+- [ ] **2.1** Tests unitarios en `tests/unit/test_gsm_backend.py` con potencial Müller-Brown analítico (saddle conocido).
+- [ ] **2.2** Smoke real con xTB sobre `hexanal_radical_quench`, `lysinoalanine_crosslink`, `aa_ring_open_dicarbonyl`. Criterio Fase 2: ≥ 2/3 generan guess que pasa el gate xTB. Si no, **STOP & re-plan**.
+- [ ] **2.3** Validación DFT light (`--fast`, sin IRC) sobre los que pasen 2.2: comprobar `is_true_saddle == True` y barrera plausible (5–80 kcal/mol).
+
+### Fase 3 — Extensión a los 7 targets y diagnóstico de utilidad
+- [ ] **3.1** Extender `scripts/diagnose_xtb_gsm_viability.py` a los 4 restantes; agregar a panel `xtb_gsm_viability_2026_04_19_full.json` y actualizar memory.
+- [ ] **3.2** Smoke pyGSM sobre los 4 nuevos. Documentar honestamente cuáles fallan (Schiff base/Amadori probablemente requieren proton-transfer concertado).
+- [ ] **3.3** Asignar tier por target: `tier_A` (entra en corrida global), `tier_B` (necesita ajuste), `tier_C` (intractable, etiquetado).
+
+### Fase 4 — Pulido y corrida global
+- [ ] **4.1** Limpieza de logging/dead code; docstrings sólo en superficie pública nueva.
+- [ ] **4.2** `pytest tests/` completo en Docker, 0 fallos.
+- [ ] **4.3** Borrar `_dft_execution.json` stale de hexanal/lysino. Lanzar `run_computational_gap_dft.py --execute --enable-gsm-fallback` sobre `tier_A` (+ `tier_B` con seguimiento). Recolectar en `results/computational_gap_refinement/computational_gap_dft_global_2026_04_19.json`.
+- [ ] **4.4** Reporte: tabla por target (barrier, verdict, GSM sí/no, tier). Memory `/memories/repo/pygsm_global_run_2026_04_19.md`.
+
+### Riesgos
+- pyGSM puede tropezar con `asparagine_sugar_explicit_water_cluster` (muchos átomos).
+- xTB con tblite es inestable en multiplicidades altas; saltar si aplica.
+- Mapping de `forming_bond_pair` al sistema de constraints de pyGSM (DLC vs Cartesian).
+- `--no-deps` requiere verificar que numpy/scipy/ase/networkx estén ya cubiertos por `environment.yml`.
+
+### Política de ejecución
+- Validar Fase 1 + Fase 2 antes de tocar la corrida global.
+- Si Fase 2 < 2/3, parar y re-planear.
+- Correcciones del usuario → `tasks/lessons.md`.
+
+### Review
+- _pendiente_
+
+---
+
+## Active Follow-up — 2026-04-17 DFT Ladder Bulletproofing Plan
+
+- [ ] Preserve best-available geometry fallback for non-TS optimizations instead of raising the last DFT exception after all strategies exhaust.
+- [ ] Make trajectory resume authoritative: if a persistent DFT trajectory or checkpoint is recovered, skip MLP/xTB re-relaxation unless explicitly requested.
+- [ ] Harden the high-level single-point stage against hard runtime exceptions, not only SCF non-convergence, so recovered geometries still yield an energy artifact when scientifically defensible.
+- [ ] Add focused unit coverage for: non-TS best-geometry single-point fallback, authoritative resume semantics, and single-point exception fallback behavior.
+- [ ] Revalidate in Docker on the computational-gap lane before any new long DFT restart is considered complete.
+
+Implementation notes 2026-04-17:
+
+- Change order must be conservative:
+	1. encode the intended contracts in tests first,
+	2. unify fallback semantics for TS and non-TS,
+	3. make resume skip upstream relaxers only when the recovered geometry is DFT-derived,
+	4. harden single-point error handling without silently changing scientific meaning,
+	5. rerun the targeted Docker/unit validation lane,
+	6. only then trust the next heavy execution result.
+- Scientific guardrail: fallback energies are acceptable only when surfaced as best-effort artifacts; they must not be mislabeled as fully converged solvent-corrected thermochemistry.
+
+## Active Follow-up — 2026-04-16 SCF Engine Stabilization
+
+- [x] Diagnose the SOSCF / Fermi-smearing engine-construction failure in the DFT builder.
+- [x] Enforce a hard compatibility rule that disables Newton / SOSCF whenever Fermi smearing is active.
+- [x] Split the ladder into a Stage 3 warm-up with DIIS + Fermi smearing and a Stage 4 refinement with Newton and no smearing.
+- [x] Add focused unit coverage for the builder compatibility rule, the Newton-only refinement path, and the staged ladder behavior.
+- [x] **V6 architecture overhaul**: replace the monolithic warm-up + refinement split with SCF strategy escalation.
+
+Review 2026-04-16 (V6 — final):
+
+- Root cause (v1–v3): smearing + Newton/SOSCF are fundamentally incompatible in PySCF for meta-GGAs like r2SCAN.
+- Root cause (v4–v5): even after separating them, the warm-up stage used extreme settings (level_shift=1.0, conv_tol=1e-6, 200 cycles) that still failed to converge — and `_optimize_with_geometric_kernel` crashed fatally on unconverged SCF instead of recovering partial geometry.
+- Architecture fix (two layers):
+  1. `_optimize_with_geometric_kernel` now catches SCF gradient RuntimeErrors and recovers the best geometry from the geomeTRIC trajectory instead of crashing.
+  2. `optimize_geometry` replaced the fixed Stage 3/4 warm-up+refinement with a **strategy escalation loop**: standard-DIIS → hardened-DIIS+smearing → SOSCF/Newton → vacuum-SOSCF. Each failed strategy passes its best partial geometry to the next.
+- Also fixed a `DFTResult` dataclass construction bug (`electronic_energy_hartree` → `energy_hartree`).
+- Focused Docker validation: 20 tests passed across `test_dft_refiner_scf_builder.py`, `test_dft_refiner_fallback.py`, `test_dft_refiner_irc_api.py`, and `test_run_computational_gap_dft.py`.
+
+## Active Follow-up — 2026-04-16 Barrier Readiness Validation & Low-Risk Runtime Cleanup
+
+- [x] Refresh the live DFT preflight state in Docker instead of trusting stale execution JSON.
+- [x] Re-run the targeted computational-gap Docker tests before pruning runtime helpers.
+- [x] Confirm whether the barrier workflow is actually launch-ready at the preflight layer.
+- [x] Remove only low-risk duplicated XYZ helper logic in the runtime and support modules.
+- [x] Re-run the targeted Docker validation lane after the helper cleanup.
+
+Review 2026-04-16:
+
+- Docker preflight now refreshes all seven computational-gap targets to `ready_for_dft`, replacing stale `running` statuses in per-target execution JSON artifacts.
+- The targeted computational-gap validation lane is green in Docker: 19 tests passed across the DFT runner, xTB runner, forming-bond inference, xTB quality gates, proxy readiness, and the scientific refinement-plan artifact.
+- The runtime remains only preflight-ready, not universally execution-proven: `lysinoalanine_crosslink` still has a recorded full DFT gradient-convergence failure, so the cleanup pass must stay behavior-preserving.
+- The first cleanup pass is limited to low-risk deduplication of XYZ helper logic and similar non-scientific surface area.
+- Post-cleanup validation stayed green: the same 19 Docker tests still pass, and representative preflight reruns for `lysinoalanine_crosslink`, `pe_schiff_base`, and `quinone_cys_michael` still return `ready_for_dft`.
+
+## Active Follow-up — 2026-04-16 Technical-Debt Reduction Pass
+
+- [x] Audit the newest standalone scripts and probes for real references before keeping them.
+- [x] Delete clearly orphaned code and redundant wrappers when the core runtime already exposes the same behavior.
+- [x] Re-run targeted reference checks to make sure the cleanup did not break active imports or documented lanes.
+- [x] Record which recent additions remain intentionally active so the next cleanup pass does not revisit settled files.
+
+Review 2026-04-16:
+
+- The active `src/` hardening modules remain justified: they are still wired into runtime or tests.
+- Removed the root-level callback probe and the manual `fix_lysinoalanine_docking.py` helper because neither had live references.
+- Kept `generate_explicit_water_seed.py` because the Family 13 explicit-water lane is still an open roadmap item, and kept `run_dft_queue.sh` because it is an operational wrapper rather than a proven orphan.
+- Targeted post-cleanup checks found no remaining references to the deleted files, and the touched explicit-water generator is error-free.
+
+## Active Follow-up — 2026-04-16 Import Recovery And MLP Fallback Audit
+
+- [x] Restore compatibility imports required by the remaining collection failures.
+- [x] Repair the partially applied `dft_refiner.py` / `mlp_optimizer.py` backend-fallback changes and revalidate static analysis.
+- [ ] Re-run the previously failing unit/scientific tests and confirm collection is clean.
+- [ ] Decide the safe runtime posture for non-MACE MLP fallback candidates when MACE and xTB fail.
+- [ ] Remove or keep explicitly dead code paths only after test confirmation.
+
+Review 2026-04-16:
+- Restored the missing compatibility surfaces for matrix benchmark materialization, DFT coverage metadata, projection canonicalization, and MLP backend helper APIs.
+- Repaired the broken intermediate state in `src/dft_refiner.py` so the pre-relax/TS-recovery path is coherent again and a structured `compute_irc(...)` API is exported for tests.
+- Static validation is clean on the touched files; test reruns and the final code-pruning decision are the remaining gates.
+
+## Active Follow-up — 2026-04-13 Steric Clash Fix & DFT Queue Update
+
+- [x] Diagnose `lysinoalanine_crosslink` and `pe_schiff_base` DFT preflight steric clash blockers.
+- [x] Root-cause identified: multi-fragment RDKit embeddings produced overlapping fragments (0.47 Å H–C clash in lysinoalanine, 0.30 Å O–H clash in pe_schiff_base). The xTB path search returned identity paths (reactant ≈ TS), making the previously reported ~3 kcal/mol barrier for lysinoalanine invalid.
+- [x] Sanity-checked the three passing targets (`hexanal_radical_quench`, `quinone_cys_michael`, `pe_amadori`). Result: `quinone_cys_michael` also has an identity path (pairwise RMS delta = 0.0000 Å) despite passing the 0.6 Å gate — its xTB path is fake too.
+- [x] Regenerated reactant/product geometries for all three broken targets with proper fragment separation (`scripts/fix_steric_clashes.py`). All three now pass the 0.6 Å minimum distance gate with balanced atom counts preserved.
+- [ ] Re-run xTB path search for `lysinoalanine_crosslink`, `pe_schiff_base`, and `quinone_cys_michael` after the geometry fix (requires Docker):
+	```
+	./scripts/docker_maillard.sh computational-gap-xtb lysinoalanine_crosslink
+	./scripts/docker_maillard.sh computational-gap-xtb pe_schiff_base
+	./scripts/docker_maillard.sh computational-gap-xtb quinone_cys_michael
+	```
+- [ ] After xTB completes, verify the new TS guesses pass the DFT preflight gate (pairwise RMS delta >> 0.01 Å, confirming a real reaction path).
+- [ ] Re-run DFT preflight to confirm DFT-readiness:
+	```
+	./scripts/docker_maillard.sh computational-gap-dft-preflight lysinoalanine_crosslink
+	./scripts/docker_maillard.sh computational-gap-dft-preflight pe_schiff_base
+	./scripts/docker_maillard.sh computational-gap-dft-preflight quinone_cys_michael
+	```
+
+Review 2026-04-13 (steric clash):
+- The stale xTB path outputs for all three targets have been removed. The reactant and product XYZ files have been regenerated from corrected SMILES with proper multi-fragment spacing.
+- `aa_ring_open_dicarbonyl` remains actively running in DFT (TS geometry optimization phase, 4+ hours elapsed).
+- `hexanal_radical_quench` and `pe_amadori` remain the only two targets with both clean preflight AND real xTB paths. They should be the first post-Family-14 DFT launches.
+- The updated DFT queue priority is: (1) wait for `aa_ring_open_dicarbonyl` to complete, (2) launch `hexanal_radical_quench`, (3) launch `pe_amadori`, (4) after xTB reruns: `lysinoalanine_crosslink`, `pe_schiff_base`, `quinone_cys_michael`.
+
+
+## Active Follow-up — 2026-04-13 QM Queue Realignment
+
+- [x] Confirm whether the rerun of `pe_schiff_base` produces a usable xTB TS guess or remains proxy-only.
+- [x] Confirm whether `aa_ring_open_dicarbonyl` is still actively running in DFT before launching any additional heavy job.
+- [x] Decide whether Family 15 PE lanes should enter the formal DFT manifest or stay as proxy lanes.
+- [x] Align README and the computational-gap runbook with the real selective-QM queue and with the semantics of the embedded validation plot.
+
+Review 2026-04-13:
+- `aa_ring_open_dicarbonyl` remains actively running in DFT, so `hexanal_radical_quench` should not be launched yet.
+- Managed Docker xTB artifacts now exist for both `pe_schiff_base` and `pe_amadori`, and the Family 15 pair gate passes cleanly in `results/validation/computational_gap_proxy_readiness.{md,json}`.
+- The formal queue is therefore `hexanal_radical_quench`, `lysinoalanine_crosslink`, `aa_ring_open_dicarbonyl`, `quinone_cys_michael`, `pe_schiff_base`, and `pe_amadori`, while `asparagine_sugar_explicit_water_cluster` and `melanoidin_radical_trapping` remain outside the copy-paste DFT-ready set.
+- The README plot `docs/assets/validation_overview.png` is intentionally a benchmark-parity plot, not a direct visualization of every computational-gap target, so the README and runbook were updated to state that explicitly.
+
+## Active Follow-up — 2026-04-13 Scientific Delivery Sequence
+
+- [ ] Finish the restarted controlled `aa_ring_open_dicarbonyl` DFT run, ingest the result, and decide whether the Family 14 surrogate can be narrowed or promoted.
+- [ ] Family 14 completion contract:
+	- preflight rule: require `results/computational_gap_refinement/aa_ring_open_dicarbonyl_dft_execution.json` to report a clean geometry gate before any heavy DFT restart
+	- current restart state: the legacy uncontrolled run was stopped and the target was relaunched through the phase-tracked runner using repaired seed `data/geometries/xtb_inputs/aa_ring_open_dicarbonyl/xtbpath_0.xyz`
+	- execution artifact to inspect: `results/computational_gap_refinement/aa_ring_open_dicarbonyl_dft_execution.json`
+	- post-run actions: ingest DFT result, compare against the HCW surrogate, and decide whether the live prior stays bounded-calibration or gets narrowed
+	- acceptance rule: no write-back if the result only reproduces the current surrogate uncertainty without tightening it
+- [ ] Launch `hexanal_radical_quench` DFT immediately after Family 14 finishes; keep it ranking-only unless the ingestion artifacts remain benchmark-honest.
+- [ ] Family 11 execution contract:
+	- only start after Family 14 frees the machine
+	- ingest as ranking-only support even if the barrier is chemically plausible
+	- require the write-back artifact to keep observable-first governance explicit
+- [ ] Re-run or stabilize `lysinoalanine_crosslink` only after the geometry-refresh pass so we do not waste DFT cycles on fragile surrogate coordinates.
+- [ ] Family 12 stabilization contract:
+	- complete the public-geometry refresh first
+	- compare SCF stability against the current surrogate seeds before spending new DFT cycles
+	- only then rerun xTB and DFT
+- [x] Decide the Family 15 promotion rule from evidence, not convenience: the managed pair gate now passes, so `pe_schiff_base` and `pe_amadori` enter the official DFT-ready manifest as bounded-calibration candidates.
+- [ ] Family 15 promotion contract:
+	- artifact of record: `results/validation/computational_gap_proxy_readiness.{md,json}`
+	- pair gate: both `pe_schiff_base` and `pe_amadori` need `xtbpath.xyz`, `xtbpath_ts.xyz`, and a clean xTB quality gate
+	- managed rule: `completed` or `completed_cached` execution artifacts are acceptable only when the managed quality gate also passes
+	- proxy rule: synthesized outputs with SCF warnings remain proxy-only and must not be treated as formal DFT-ready evidence
+- [ ] Generate the explicit-water seed for `asparagine_sugar_explicit_water_cluster` and keep its ceiling at uncertainty narrowing only.
+- [ ] Family 13 safety-lane contract:
+	- generate the explicit-water seed as a separate preparatory job
+	- do not merge it into the standard xTB path-search queue
+	- keep all downstream claims capped at uncertainty narrowing only
+- [ ] Keep Family 16 (`melanoidin_radical_trapping`) MLP-first unless a smaller fragment proxy yields a cleaner xTB path than the current polymer proxy.
+- [ ] Family 16 triage contract:
+	- shortlist smaller fragment proxies first
+	- only escalate to xTB if a fragment produces a cleaner path than the current polymer proxy
+	- keep the lane out of the formal DFT queue until that fragment screen exists
+- [ ] After the QM queue stabilizes, write back only the deltas that genuinely tighten priors or uncertainty bands in the live runtime.
+
+Review 2026-04-13:
+- The scientific order is now explicit: Family 14 completion, then Family 11, then Family 13/15 expansion, then a refreshed Family 12 attempt, while Family 16 stays outside the formal queue until a smaller-fragment screen exists.
+- Family 14 is no longer running as an opaque legacy job. The old host-side DFT process was stopped after the new geometry gate flagged the original TS guess as unsafe, the runner auto-repaired the seed to `xtbpath_0.xyz`, and the target was relaunched through the controlled Docker flow with phase tracking.
+- Family 13 to 16 are already present in the runtime surface; the remaining scientific work is promotion quality and uncertainty narrowing, not basic model inclusion.
+
+## Active Follow-up — 2026-04-13 Architecture Hardening
+
+- [ ] Remove hidden environment assumptions from scientific generators: LaTeX-backed figure generation should be configured once and fail explicitly if the required toolchain is absent.
+- [ ] Reduce duplicated plot-style bootstrapping across validation generators by using one shared helper and one environment contract.
+- [ ] Split computational-gap execution state from scientific promotion state more cleanly: a synthesized xTB path with SCF warnings must not look equivalent to a clean path in downstream tooling.
+- [ ] Promote proxy-readiness diagnostics into machine-readable artifacts so Family 15 and future lanes are not tracked only in chat or ad hoc shell output.
+- [ ] Continue shrinking duplicated script-local helper logic when a shared `src/` helper makes the contract clearer without expanding the public surface.
+- [ ] Keep public docs aligned with machine-readable artifacts; README should distinguish benchmark parity, runtime family coverage, and selective-QM queue state.
+
+Detailed implementation sequence:
+
+- [ ] Plotting contract hardening:
+	- shared helper in `src/plot_style.py`
+	- explicit failure if the LaTeX toolchain is incomplete
+	- no script-local style bootstrapping or silent fallback
+- [ ] xTB quality-state hardening:
+	- shared helper for path materialization and log-health inspection
+	- explicit `completed_with_quality_warnings` state in xTB execution outputs
+	- downstream promotion logic must read quality, not just file presence
+- [ ] Proxy artifact generation:
+	- write `computational_gap_proxy_readiness.{md,json}` from source
+	- encode pair-level promotion rules for Family 15
+	- keep public docs and runbooks tied to that artifact instead of shell transcripts
+
+Review 2026-04-13:
+- The next architecture wins are not broad rewrites. They are contract hardening and duplication removal around plotting, computational-gap status encoding, and public artifact generation.
+- The maintainability bar for new scientific scripts is now stricter: less local setup, fewer environment assumptions, and clearer machine-readable status transitions.
+
 ## Active Follow-up — 2026-04-09 Maintainability Audit II
 
 - [x] Inventory structural duplication, stale wrappers, and scripts that still expose machine-specific or ad hoc execution patterns.
@@ -483,3 +811,140 @@ Keep matrix-family coverage explicit in artifacts. Do not broaden family-level s
 ## Completed Foundations
 
 Sprints S0–S11 are complete as of 2026-04-05. All foundational architecture, family-aware ingestion and runtime, matrix observable closure, scientist experiment intake loop, family promotion contracts, intake-registry normalisation, Deep Research runtime queue publishing, extrusion process modeling (SME/moisture), safety marker integration (acrylamide, furosine, CML/CEL, LAL), cheap-first refinement screening, and DoE generator templates have been implemented and validated.
+
+---
+
+## Active Plan — 2026-04-21 SOTA TS pipeline + elementary-step decomposition (method B)
+
+### Contexto
+- `pe_amadori` con un solo TS dry: 73.6 kcal/mol (gap ~54 vs lit 19.8).
+- Mecanismo real: dos transferencias 1,3-H acopladas (O0→C2, C1→N3). DE-GSM no encuentra TS razonable porque busca un único saddle para dos eventos simultáneos en un anillo de 3.
+- Intentos con agua explícita (4 iteraciones, ver `memories/repo/pe_amadori_water_shuttle_attempt_2026_04_21.md`): chocan por geometría (waters de R chocan con N3 desplazado en P) y por pyGSM TRIC en sistemas con fragmentos desconectados.
+- **Decisión estratégica del usuario**: implementar opción B (decomposición secuencial) y hacerlo *general*, no ad-hoc. Además: revisar si el pipeline de búsqueda de TS está al estado del arte.
+
+### Auditoría del estado del arte (¿estamos SOTA?)
+
+**Lo que tenemos**:
+| Etapa | Implementación | Estado SOTA |
+|---|---|---|
+| Endpoints | RDKit ETKDG (1 confórmero) + xTB opt | ⚠️ No ensemble. Riesgo de basin-hopping. |
+| Path search | xTB `--path` + DE-GSM (fallback) | ✅ DE-GSM es SOTA para concerted; ⚠️ no CI-NEB ni AFIR |
+| TS guess | Pico de energía del string | ⚠️ Sin validación n_imag intermedia |
+| TS refine | Sella (eigenvector following) + v0 de xTB Hessian | ✅ Cerca del SOTA |
+| Validación | n_imag, magnitud, IRC opcional (proxy ±desplazamiento) | ⚠️ IRC no analítico; sin visualización del modo |
+| Solvación | ddCOSMO/ALPB implícito; CREST-QCG existe pero **no integrado** | ⚠️ Para protones móviles, cluster-continuum es gold standard |
+| Multi-step | **No existe**; cada `target` = 1 TS | ❌ Bloqueante para reacciones acopladas |
+
+**Gaps relevantes para Maillard** (proton transfers, reacciones acopladas, agua catalítica):
+1. **Decomposición de pasos elementales** — bloqueador #1 para `pe_amadori`. Sin esto, ninguna mejora del refinamiento ayuda.
+2. **Cluster-continuum solvation generalizable** — la lógica ad-hoc de `generate_pe_amadori_water_seed.py` debe promoverse a módulo.
+3. **Mode-coordinate sanity check** — comparar el vector imaginario del TS con los átomos esperados (donor, acceptor, H transferido). Cheap, pero hoy no existe.
+4. **CI-NEB como segundo path-method** — útil cuando GSM falla. Disponible en ASE (`ase.neb.NEB` con `climb=True`).
+5. **GP-NEB / ML surrogate** — no necesario hoy (los pasos elementales son baratos en xTB).
+
+### Plan de implementación
+
+#### Fase A — Limpieza (preparar terreno)
+- [ ] **A.1** Identificar y borrar dead code:
+  - `scripts/_tmp_trim_recommend.py`, `scripts/get_benchmark_lipids_tmp.py` (one-offs evidentes por nombre)
+  - `scripts/generate_explicit_water_seed.py` (será reemplazado por módulo general)
+  - `scripts/generate_pe_amadori_water_seed.py` (idem; conservar como referencia hasta que módulo nuevo esté validado)
+  - Verificar `src/diffusion_ts.py`, `src/mlp_barrier.py` — si son scaffolding sin uso real, borrar
+  - Auditar `calculate_barrier()` vs `calculate_robust_barrier()` en `src/dft_refiner.py`: si el primero ya no se llama desde nada activo, eliminarlo (solo quedará robust_sp como camino oficial)
+- [ ] **A.2** Tests siguen verdes (pytest unit lane).
+
+#### Fase B — Microsolvation generalizable
+- [ ] **B.1** Crear `src/microsolvation.py`. API:
+  ```python
+  def place_proton_shuttle_water(coords, syms, donor_idx, acceptor_idx, h_idx, *, oh_bond=0.97, hoh_deg=104.5, offset=1.6) -> tuple[np.ndarray, list[str]]:
+      """Place 1 explicit water bridging donor→H→acceptor in a 5-membered TS topology."""
+  
+  def place_water_shell(coords, syms, hot_atoms, n_waters, *, frozen_solute=True) -> ...:
+      """Generic water placement: drop n waters near `hot_atoms`, seeded by molecular normal + perturbation."""
+  
+  def kabsch_align(P, Q) -> tuple[rot, t_p, t_q]:
+      """Heavy-atom RMSD alignment (move into shared utils)."""
+  
+  def relax_solvent(xyz_path, solute_atoms, *, level='xtb-alpb', work_dir) -> Path:
+      """Constrained xTB opt: solute frozen, waters relaxed."""
+  ```
+- [ ] **B.2** Tests unitarios: water geometry sanity (OH=0.97±0.02, HOH≈104.5±2°, no clashes).
+
+#### Fase C — Decomposición de pasos elementales (corazón de método B)
+- [ ] **C.1** Schema en `data/lit/computational_gap_closure_targets.json`:
+  ```json
+  {
+    "reaction_key": "pe_amadori_decomposed",
+    "type": "multi_step",
+    "elementary_steps": [
+      {
+        "step_id": "step1_oh_to_c2",
+        "name": "1,3-H shift O0→C2 (water-shuttled)",
+        "reactant_xyz": "data/geometries/.../step1/reactant.xyz",
+        "product_xyz":  "data/geometries/.../step1/product.xyz",
+        "donor_atom": 0, "acceptor_atom": 2, "h_atom": 17,
+        "microsolvation": {"n_waters": 1, "topology": "proton_shuttle"}
+      },
+      {
+        "step_id": "step2_ch_to_n3",
+        "name": "1,3-H shift C1→N3 (water-shuttled)",
+        ...
+      }
+    ],
+    "literature": {"barrier_kcal_mol": 19.81, "source": "..."},
+    "aggregation": "max_step"
+  }
+  ```
+- [ ] **C.2** `src/elementary_step_runner.py`:
+  ```python
+  class ElementaryStepRunner:
+      def run_step(self, step_spec) -> StepResult:
+          # 1. apply microsolvation
+          # 2. xTB --path or DE-GSM
+          # 3. xTB-Sella refine
+          # 4. validate n_imag + mode-coordinate sanity
+          # 5. DFT SP (robust_sp)
+          # 6. return ΔG‡_step
+      
+      def run_target(self, target_spec) -> TargetResult:
+          # iterate elementary_steps; aggregate
+  ```
+- [ ] **C.3** Wire en `scripts/run_computational_gap_dft.py`: detectar `type: multi_step` y dispatch a `ElementaryStepRunner.run_target()` en lugar del flujo single-step.
+- [ ] **C.4** Mantener compatibilidad: targets sin `type: multi_step` siguen al pipeline existente.
+
+#### Fase D — Mode-coordinate sanity check (cheap SOTA win)
+- [ ] **D.1** En `src/xtb_backend.py`, función nueva:
+  ```python
+  def validate_ts_mode(coords, syms, imag_vector, expected_atoms, *, threshold=0.3) -> dict:
+      """Check that |imag_vector[expected_atoms]| / |imag_vector|_total > threshold.
+      
+      Returns {'pass': bool, 'concentration': float, 'top_atoms': [...]}.
+      """
+  ```
+- [ ] **D.2** Llamar en `ElementaryStepRunner.run_step()` después de validar n_imag. Si falla → marcar el TS como `mode_mismatch` (no es el TS esperado aunque sea saddle válido).
+
+#### Fase E — Aplicar a pe_amadori
+- [ ] **E.1** Definir `pe_amadori_decomposed` con dos pasos:
+  - Step 1: Schiff base hidratado → enol intermediario (H17 transfer O→C2)
+  - Step 2: enol → Amadori (H18 transfer C1→N3)
+- [ ] **E.2** Ejecutar `python scripts/run_computational_gap_dft.py --target pe_amadori_decomposed --strategy robust_sp --execute`.
+- [ ] **E.3** Verificar: cada paso n_imag=1, mode-coordinate-sanity OK, ΔG‡_max comparado con lit 19.8 kcal/mol.
+
+#### Fase F — Cierre
+- [ ] **F.1** Tests unitarios: mock target multi-step + step runner.
+- [ ] **F.2** Update README "validation" section con resultado pe_amadori antes/después.
+- [ ] **F.3** Memoria de repo: `pe_amadori_decomposed_validation_2026_04_2X.md`.
+
+### Criterios de éxito
+1. ✅ `pe_amadori_decomposed` ΔG‡_max dentro de 5 kcal/mol de lit 19.8 (vs gap 54 actual).
+2. ✅ Mismo schema funciona para registrar futuras reacciones acopladas (ej. `aa_ring_open_dicarbonyl` si tiene mecanismo multipaso).
+3. ✅ Suite unit tests sigue verde (≥531 pass).
+4. ✅ ≥3 archivos/scripts dead code eliminados.
+5. ✅ Validación n_imag + mode-coordinate sanity en cada TS.
+
+### Lo que NO hacemos en este sprint (parking lot)
+- CI-NEB como segundo path-method (pyGSM ya cubre bien si endpoints están bien planteados).
+- ML-NEB / GP-NEB (overkill para pasos elementales en xTB).
+- Ensemble de confórmeros (CREST conformational sampling) — defer hasta que sea bottleneck demostrado.
+- Refactor de `dft_refiner.py` (2980 líneas) — bigger fish a aguas fuera del foco.
+

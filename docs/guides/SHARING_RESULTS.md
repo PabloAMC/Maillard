@@ -35,21 +35,22 @@ The output directory contains:
 - `report.json` for machine-readable downstream use
 - a provenance block with branch, commit, dirty-state flag, command, and scientific reference surface
 
-## 2. Small Comparison Report
+## 2. Small Comparison Package
 
 Use this when the question is comparative.
 
 ```bash
-python scripts/compare_formulations.py \
+python scripts/run_campaign.py \
   --names "Cysteine Enrichment (Basic),Premium Meaty Mix,Soy-Specific Masking" \
   --ph 5.5 \
   --temp 105 \
   --target-tag meaty \
   --minimize-tag beany \
+  --campaign-name "Meaty head-to-head" \
   --output-dir results/share/comparison_meaty
 ```
 
-This creates `comparison.md` and `comparison.json` with the same provenance surface.
+This creates `comparison.md` and `comparison.json`, plus the matching campaign metadata bundle, with the same provenance surface.
 
 ## 3. Review-Ready Campaign Package
 

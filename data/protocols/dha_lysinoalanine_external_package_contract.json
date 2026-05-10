@@ -1,0 +1,52 @@
+{
+  "package_id": "dha_lysinoalanine_external_package_2026",
+  "sprint_name": "dha_lysinoalanine_external_package",
+  "objective_id": "extrusion_direct_damage_package",
+  "package_status": "specified_not_yet_measured",
+  "root_blocker": "external_quantitative_direct_damage_markers_under_extrusion",
+  "purpose": "Specify the direct-damage extrusion measurement bundle needed to close DHA and lysinoalanine reporting without claiming direct closure today.",
+  "required_replicates": 3,
+  "extrusion_metadata_fields": [
+    "extruder_configuration",
+    "specific_mechanical_energy_kj_per_kg",
+    "feed_moisture_pct",
+    "die_exit_temperature_celsius",
+    "residence_time_seconds",
+    "post-process_sampling_delay_minutes"
+  ],
+  "paired_meaty_positive_targets": [
+    "2-methyl-3-furanthiol",
+    "2-furfurylthiol"
+  ],
+  "would_close_requirements": [
+    "direct_crosslink_marker_external_quantified",
+    "lysine_damage_marker_external_quantified"
+  ],
+  "remaining_after_package": [
+    "promotion_review_with_same_run_tradeoff_panel"
+  ],
+  "matrices": [
+    {
+      "matrix": "pea_iso",
+      "display_name": "Pea isolate DHA/LAL package",
+      "benchmark_candidate": "pea_isolate_ribose_cysteine_100C_45min_Internal2026",
+      "temperature_window_c": [140, 180],
+      "direct_damage_targets": [
+        "reactive_lysine_fraction",
+        "lysinoalanine"
+      ],
+      "selection_reason": "Pea extrusion claims need direct reactive-lysine and LAL quantification before any closure upgrade can be justified."
+    },
+    {
+      "matrix": "soy_iso",
+      "display_name": "Soy isolate DHA/LAL package",
+      "benchmark_candidate": "soy_isolate_ribose_cysteine_100C_45min_Internal2026",
+      "temperature_window_c": [140, 180],
+      "direct_damage_targets": [
+        "reactive_lysine_fraction",
+        "lysinoalanine"
+      ],
+      "selection_reason": "Soy extrusion closure still depends on the same direct-damage bundle even though supportive thiamine-retention context already exists in the repo."
+    }
+  ]
+}

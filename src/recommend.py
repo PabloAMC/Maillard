@@ -31,7 +31,6 @@ from src.projection import (
 from src.matrix_targets import get_compound_panel_entry
 from src.projection_metadata import ProjectionMetadataMap, make_projection_metadata_row
 
-from src.curated_pathways import PATHWAYS, PATHWAY_METADATA
 from src.barrier_constants import arrhenius_rate_constant, get_reference_pre_exponential
 from src.headspace import HeadspaceModel
 from src.matrix_calibration_registry import describe_matrix_calibration, determine_matrix_process_state
@@ -773,6 +772,40 @@ class Recommender:
         self.results_path = results_path
         self.screening_data = self._load_results() if results_path else {}
         self.toxic_markers = self._load_toxic_markers()
+
+    def predict(self, precursor_names: List[str]) -> List[str]:
+        """Backward-compatible lightweight recommendation entrypoint."""
+        if not precursor_names:
+            return []
+
+        from src.conditions import ReactionConditions
+        from src.precursor_resolver import resolve
+        from src.smirks_engine import SmirksEngine
+
+        precursors = [resolve(name) for name in precursor_names]
+        conditions = ReactionConditions()
+        engine = SmirksEngine(conditions)
+        steps = engine.enumerate(precursors, max_generations=4)
+
+        heuristic_barriers: Dict[str, Tuple[float, float]] = {}
+        for step in steps:
+            rxn_key = f"{'+'.join(sorted(r.smiles for r in step.reactants))}->{'+'.join(sorted(p.smiles for p in step.products))}"
+            heuristic_barriers[rxn_key] = (40.0, 5.0)
+
+        initial_concentrations = {_canon(species.smiles): 1.0 for species in precursors}
+        result = self.predict_from_steps(
+            steps,
+            heuristic_barriers,
+            initial_concentrations,
+            temperature_kelvin=conditions.temperature_kelvin,
+        )
+
+        summaries = [f"Precursors: {', '.join(precursor_names)}"]
+        summaries.extend(
+            f"{target['name']} ({target['type']}, span={target['span']:.2f} kcal/mol)"
+            for target in result.get("targets", [])
+        )
+        return summaries
         
         
     def _load_yaml_db(self, filename: str) -> dict:

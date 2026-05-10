@@ -26,6 +26,7 @@ test_mech.yaml
 !docs/assets/validation_overview.png
 !docs/assets/family_parity.png
 !docs/assets/family_benchmark_accuracy.png
+!docs/assets/family_coverage.png
 *.csv
 *.log
 *.hypothesis/
@@ -73,3 +74,4 @@ data/geometries/xtb_inputs/**/product*.xyz
 data/geometries/xtb_inputs/**/reactant*.xyz
 data/geometries/xtb_inputs/**/xtbrestart*
 data/geometries/xtb_inputs/**/.sccnotconverged
+data/geometries/

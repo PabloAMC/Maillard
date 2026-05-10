@@ -9,6 +9,7 @@ import numpy as np
 
 from src.geometry_benchmark import GeometryBenchmarkEntry, load_geometry_benchmark_entries
 from src.mlp_adoption_contract import load_mlp_candidates
+from src.mlp_backend_adapters import build_candidate_adapter
 
 
 def _calculate_rmsd(reference_xyz: str, test_xyz: str) -> float:
@@ -35,21 +36,26 @@ def _calculate_rmsd(reference_xyz: str, test_xyz: str) -> float:
     return float(np.sqrt(np.mean(np.sum(delta**2, axis=1))))
 
 
-def _assess_mace_geometry_candidate(entries: List[GeometryBenchmarkEntry], model_name: str) -> Dict[str, Any]:
-    try:
-        from src.mlp_optimizer import MLPOptimizer
-    except ImportError:
+def _assess_geometry_candidate(entries: List[GeometryBenchmarkEntry], candidate) -> Dict[str, Any]:
+    adapter = build_candidate_adapter(candidate)
+    availability = adapter.probe_availability()
+    if not availability.backend_available:
         return {
             "available": False,
             "backend_available": False,
-            "reason": "mace_backend_unavailable",
+            "reason": availability.reason,
+        }
+    if not availability.available:
+        return {
+            "available": False,
+            "backend_available": True,
+            "reason": availability.reason,
         }
 
-    optimizer = MLPOptimizer(model_name=model_name, device="cpu")
     ground_state_entries = [entry for entry in entries if entry.benchmark_kind == "ground_state"]
     rmsd_rows: List[Dict[str, Any]] = []
     for entry in ground_state_entries:
-        optimized_xyz = optimizer.optimize_geometry(entry.xyz, fmax=0.05, max_steps=100, drift_threshold=2.0)
+        optimized_xyz = adapter.optimize_geometry(entry.xyz, fmax=0.05, max_steps=100)
         rmsd = _calculate_rmsd(entry.xyz, optimized_xyz)
         rmsd_rows.append(
             {
@@ -84,8 +90,8 @@ def build_geometry_assessment_artifact() -> Dict[str, Any]:
     candidates = load_mlp_candidates()
     candidate_rows: List[Dict[str, Any]] = []
     for candidate in candidates:
-        if candidate.proposed_role == "geom_preopt" and candidate.model_family == "mace_mp":
-            row = _assess_mace_geometry_candidate(entries, candidate.model_name)
+        if candidate.proposed_role == "geom_preopt":
+            row = _assess_geometry_candidate(entries, candidate)
         else:
             row = {
                 "available": False,

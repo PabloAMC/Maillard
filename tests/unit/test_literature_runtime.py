@@ -248,7 +248,8 @@ def test_build_flavor_axis_summary_surfaces_priority_family_lanes():
     assert summary["family_lane_summary"]["02"]["maillard_closure_pressure"] > 0.0
     assert summary["family_lane_summary"]["11"]["competition_window_active"] is True
     assert summary["family_lane_summary"]["11"]["kinetic_prior_ids"] == ["hexanal_radical_quench"]
-    assert summary["family_lane_summary"]["11"]["kinetic_prior"]["active_arrhenius_key"] == "hexanal_radical_quench_xtb_derived"
+    # 2026-04-21: xTB-derived value retired; runtime now uses no_anchor literature default (31.72 kJ/mol).
+    assert summary["family_lane_summary"]["11"]["kinetic_prior"]["active_arrhenius_key"] == "hexanal_radical_quench_no_anchor"
     assert set(summary["family_lane_summary"]["11"]["benchmark_anchor_ids"]) == {"pmc_2026_hme_hexanal_baseline", "acs_2020_raw_pea_hexanal_baseline"}
     assert summary["family_lane_summary"]["11"]["selected_benchmark_anchor_id"] == "pmc_2026_hme_hexanal_baseline"
     assert summary["family_lane_summary"]["11"]["hexanal_suppression_fraction"] > 0.0
@@ -279,7 +280,8 @@ def test_build_flavor_axis_summary_surfaces_all_family_lanes_and_adjustments():
     )
 
     assert summary["active_family_lanes"] == ["01", "02", "07", "10", "08", "11", "13", "03", "04", "05", "09", "06"]
-    assert summary["family_lane_summary"]["11"]["kinetic_prior"]["barrier_kj_mol"] == pytest.approx(74.81)
+    # 2026-04-21: xTB-derived 74.81 kJ/mol retired; runtime falls back to literature default 31.72.
+    assert summary["family_lane_summary"]["11"]["kinetic_prior"]["barrier_kj_mol"] == pytest.approx(31.72)
     assert summary["family_lane_summary"]["11"]["hexanal_baseline_anchors_ug_per_kg"]["acs_2020_raw_pea_hexanal_baseline"] == pytest.approx(1260.0)
     assert summary["family_lane_summary"]["03"]["thiamine_support_score"] > 0.0
     assert summary["family_lane_summary"]["04"]["nucleotide_support_active"] is True
@@ -872,7 +874,8 @@ def test_query_benchmark_intake_and_dft_kinetic_priors_surface_family_02_and_11_
     }
     assert family_11_kinetics
     assert family_11_kinetics[0]["id"] == "hexanal_radical_quench"
-    assert family_11_kinetics[0]["active_arrhenius_key"] == "hexanal_radical_quench_xtb_derived"
+    # 2026-04-21: xTB-derived anchor retired; entry now flagged as no_anchor.
+    assert family_11_kinetics[0]["active_arrhenius_key"] == "hexanal_radical_quench_no_anchor"
 
 
 def test_query_family_runtime_priors_surfaces_ohsu_kokumi_prior_for_family_05():

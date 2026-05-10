@@ -50,6 +50,18 @@ def _expansion_status(row: Mapping[str, Any]) -> str:
     return "unknown"
 
 
+def _scope_priority(row: Mapping[str, Any]) -> str:
+    expansion_status = str(row.get("expansion_status", "unknown"))
+    matrix_family = str(row.get("matrix_family", "unknown"))
+    if expansion_status == "promote_primary_benchmark":
+        return "active_matrix_priority"
+    if expansion_status == "bounded_expansion_candidate":
+        return "bounded_next_candidate"
+    if matrix_family in {"coconut_oil_co_matrix", "other_plant_proteins"}:
+        return "scope_gap_to_rank"
+    return "hold_current_posture"
+
+
 def _primary_blocker(row: Mapping[str, Any]) -> str:
     unsupported = row.get("what_is_not_supported", [])
     if isinstance(unsupported, list) and unsupported:
@@ -64,6 +76,7 @@ def build_matrix_family_coverage_artifact(file_path: Optional[Path | str] = None
         row = dict(raw_row)
         row["support_class"] = _support_class(row)
         row["expansion_status"] = _expansion_status(row)
+        row["scope_priority"] = _scope_priority(row)
         row["primary_blocker"] = _primary_blocker(row)
         row["artifact_count"] = len(row.get("artifacts", []))
         families.append(row)

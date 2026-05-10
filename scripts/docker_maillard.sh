@@ -9,11 +9,48 @@ WORKSPACE_MOUNT="/workspace"
 CONDA_SH="/opt/conda/etc/profile.d/conda.sh"
 ENV_NAME="maillard"
 
+# Stage a host file into the workspace so it is visible inside the container.
+# Echoes the path (workspace-relative) that the container should use.
+stage_into_workspace() {
+  local src="$1"
+  # Expand a leading ~ if the caller passed a literal tilde.
+  case "$src" in
+    "~"|"~/"*) src="${HOME}${src:1}" ;;
+  esac
+  if [ ! -e "$src" ]; then
+    echo >&2 "[docker_maillard.sh] ERROR: file not found on host: $src"
+    echo >&2 "  Hint: list candidates with:  ls -lt ~/Downloads | grep -i react_ot"
+    exit 2
+  fi
+  local abs_src
+  abs_src="$(cd "$(dirname "$src")" && pwd)/$(basename "$src")"
+  case "$abs_src" in
+    "$WORKSPACE_DIR"/*)
+      # Translate host path to the container mount.
+      echo "$WORKSPACE_MOUNT${abs_src#$WORKSPACE_DIR}"
+      return 0
+      ;;
+  esac
+  local stage_dir="$WORKSPACE_DIR/.cache/react_ot_uploads"
+  mkdir -p "$stage_dir"
+  local dest="$stage_dir/$(basename "$abs_src")"
+  cp "$abs_src" "$dest"
+  echo >&2 "[docker_maillard.sh] staged $abs_src -> $dest (mounted as $WORKSPACE_MOUNT/.cache/react_ot_uploads/$(basename "$abs_src"))"
+  echo "$WORKSPACE_MOUNT/.cache/react_ot_uploads/$(basename "$abs_src")"
+}
+
 usage() {
   cat <<'EOF'
 Usage: ./scripts/docker_maillard.sh <command> [args...]
 
 Commands:
+  react-ot-setup
+  react-ot-smoke [ARGS...]
+  react-ot-pilot [ARGS...]
+  react-ot-import-colab ARCHIVE [--out-dir DIR]
+  react-ot-open-colab [--github] [--open]
+  react-ot-coverage [--target TARGET ...]
+  react-ot-orchestrate [--prepare-only|--finish] [--archive PATH] [--target TARGET ...]
     scientific_lane
     ;;
   scientific-fast)
@@ -54,7 +91,8 @@ Commands:
                Generate and execute synthetic diagnostic examples for both extrusion workbook flows.
     run_generator_script generate_matrix_promotion_contract --output-dir results/validation
                Generate the no-wet-lab computational-gap refinement plan and the xTB/DFT job manifests.
-  computational-gap-xtb [TARGET]
+    computational-gap-dft-preflight [TARGET]
+    computational-gap-xtb [TARGET]
     run_generator_script generate_matrix_observable_closure_audit --output-dir results/validation
   computational-gap-dft [TARGET]
                Execute the computational-gap DFT refinement job set (or a single TARGET id).
@@ -88,6 +126,8 @@ Commands:
     ;;
   campaign SPEC [OUTPUT_DIR]
                Run a shareable campaign spec and generate campaign artifacts.
+  campaign --names "A,B" [--ph 5.5 --temp 105 --output-dir results/share/compare]
+               Run a named comparison through the same campaign packaging path.
     if [ "$#" -lt 1 ]; then
   summary      Generate results/validation/benchmark_summary.{md,json}.
   deep-research-audit
@@ -168,6 +208,21 @@ run_generator_script() {
   fi
 }
 
+run_computational_gap_job() {
+  local script_name="$1"
+  local output_suffix="$2"
+  local extra_args="$3"
+  local target="${4:-}"
+  local prefix="${5:-}"
+  local command="python scripts/run_${script_name}.py ${extra_args}"
+
+  if [ -n "$target" ]; then
+    command="$command --target '$target' --output 'results/computational_gap_refinement/${target}_${output_suffix}_execution.json'"
+  fi
+
+  run_in_env "${prefix}${command}"
+}
+
 validation_figures_lane() {
   local commands=(
     "generate_family_lane_validation --output-dir results/validation"
@@ -225,7 +280,10 @@ ensure_container() {
     docker run -d \
       --platform linux/amd64 \
       --name "$CONTAINER_NAME" \
+      --memory=10g \
+      --memory-swap=10g \
       -p 8888:8888 \
+      -v maillard_conda:/opt/conda \
       -v "$WORKSPACE_DIR:$WORKSPACE_MOUNT" \
       -w "$WORKSPACE_MOUNT" \
       "$IMAGE_NAME" \
@@ -396,19 +454,15 @@ case "$cmd" in
     ;;
   computational-gap-xtb)
     shift
-    if [ "$#" -ge 1 ]; then
-      run_in_env "python scripts/run_computational_gap_xtb.py --target '$1' --execute"
-    else
-      run_in_env "python scripts/run_computational_gap_xtb.py --execute"
-    fi
+    run_computational_gap_job computational_gap_xtb xtb "--execute" "${1:-}"
+    ;;
+  computational-gap-dft-preflight)
+    shift
+    run_computational_gap_job computational_gap_dft dft "--preflight-only" "${1:-}"
     ;;
   computational-gap-dft)
     shift
-    if [ "$#" -ge 1 ]; then
-      run_in_env "exec python scripts/run_computational_gap_dft.py --target '$1' --execute"
-    else
-      run_in_env "exec python scripts/run_computational_gap_dft.py --execute"
-    fi
+    run_computational_gap_job computational_gap_dft dft "--execute" "${1:-}" "exec "
     ;;
   computational-gap-dft-ingest)
     run_generator_script ingest_computational_gap_dft_results --output-dir results/validation
@@ -435,9 +489,17 @@ case "$cmd" in
     shift
     if [ "$#" -lt 1 ]; then
       echo "Usage: ./scripts/docker_maillard.sh campaign SPEC [OUTPUT_DIR]" >&2
+      echo "   or: ./scripts/docker_maillard.sh campaign --names \"A,B\" [extra run_campaign args]" >&2
       exit 1
     fi
-    if [ "$#" -ge 2 ]; then
+    if [ "${1#--}" != "$1" ]; then
+      cmd="python scripts/run_campaign.py"
+      for arg in "$@"; do
+        printf -v quoted_arg '%q' "$arg"
+        cmd+=" $quoted_arg"
+      done
+      run_in_env "$cmd"
+    elif [ "$#" -ge 2 ]; then
       run_in_env "python scripts/run_campaign.py --spec '$1' --output-dir '$2'"
     else
       run_in_env "python scripts/run_campaign.py --spec '$1'"
@@ -445,6 +507,77 @@ case "$cmd" in
     ;;
   deep-research-audit)
     run_in_env "python scripts/deep_research_tracker.py"
+    ;;
+  react-ot-setup)
+    ensure_container
+    REACT_OT_SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+    bash "${REACT_OT_SCRIPT_DIR}/setup_react_ot_env.sh"
+    ;;
+  react-ot-smoke)
+    shift
+    cmd="python scripts/run_react_ot_smoke.py"
+    for arg in "$@"; do
+      printf -v quoted_arg '%q' "$arg"
+      cmd+=" $quoted_arg"
+    done
+    run_in_env "$cmd"
+    ;;
+  react-ot-pilot)
+    shift
+    cmd="python scripts/recover_ts_react_ot_seed.py"
+    for arg in "$@"; do
+      printf -v quoted_arg '%q' "$arg"
+      cmd+=" $quoted_arg"
+    done
+    run_in_env "$cmd"
+    ;;
+  react-ot-import-colab)
+    shift
+    if [ "$#" -lt 1 ]; then
+      echo "Usage: ./scripts/docker_maillard.sh react-ot-import-colab ARCHIVE [--out-dir DIR]" >&2
+      exit 1
+    fi
+    cmd="python scripts/import_react_ot_colab_artifacts.py"
+    first=1
+    for arg in "$@"; do
+      if [ "$first" = "1" ]; then
+        arg="$(stage_into_workspace "$arg")"
+        first=0
+      fi
+      printf -v quoted_arg '%q' "$arg"
+      cmd+=" $quoted_arg"
+    done
+    run_in_env "$cmd"
+    ;;
+  react-ot-open-colab)
+    shift
+    # Runs on the host so a browser can actually be opened.
+    python3 "$(cd "$(dirname "$0")" && pwd)/open_react_ot_colab.py" "$@"
+    ;;
+  react-ot-coverage)
+    shift
+    cmd="python scripts/report_react_ot_seed_coverage.py"
+    for arg in "$@"; do
+      printf -v quoted_arg '%q' "$arg"
+      cmd+=" $quoted_arg"
+    done
+    run_in_env "$cmd"
+    ;;
+  react-ot-orchestrate)
+    shift
+    cmd="python scripts/orchestrate_react_ot_colab.py"
+    next_is_archive=0
+    for arg in "$@"; do
+      if [ "$next_is_archive" = "1" ]; then
+        arg="$(stage_into_workspace "$arg")"
+        next_is_archive=0
+      elif [ "$arg" = "--archive" ]; then
+        next_is_archive=1
+      fi
+      printf -v quoted_arg '%q' "$arg"
+      cmd+=" $quoted_arg"
+    done
+    run_in_env "$cmd"
     ;;
   notebook)
     run_in_env "jupyter notebook --ip 0.0.0.0 --port 8888 --no-browser --allow-root"

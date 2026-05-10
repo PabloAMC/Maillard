@@ -33,13 +33,9 @@ def _classify_dependency(reason: str, path: str) -> str:
 def _classify_lane(path: str, reason: str) -> str:
     normalized_path = path.replace("\\", "/")
     normalized_reason = reason.lower()
-    if normalized_path.endswith("test_quasi_harmonic_correction.py"):
-        return "deterministic_helper_lane"
     if "/tests/qm/" in normalized_path and "mace" in normalized_reason:
         return "optional_mlp_acceleration_lane"
     if "/tests/qm/" in normalized_path and any(token in normalized_reason for token in ["xtb", "crest", "pyscf", "sella", "solvation"]):
-        return "optional_dft_authority_lane"
-    if normalized_path.endswith("test_barrier_benchmarks.py") or normalized_path.endswith("test_irc_validation.py"):
         return "optional_dft_authority_lane"
     return "default_deterministic_lane"
 
@@ -126,7 +122,7 @@ def build_skip_policy_registry(test_targets: Optional[Iterable[str]] = None) -> 
             "skip_cluster_count": len(rows),
             "dependency_class_counts": dict(sorted(class_counts.items())),
             "lane_counts": dict(sorted(lane_counts.items())),
-            "quasi_harmonic_helper_active": True,
+            "quasi_harmonic_helper_active": False,
             "default_ci_contract": "default lanes stay deterministic; optional QM and MLP lanes remain explicitly gated",
         },
         "rows": rows,

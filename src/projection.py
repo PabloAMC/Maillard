@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from typing import Dict, Any, Optional
 
+from src.chem_utils import canonicalize_smiles
+
 @dataclass(frozen=True)
 class ProjectionBudget:
     limiting_precursor_molar: float
@@ -38,6 +40,10 @@ DEFAULT_PROJECTION_STRATEGY = ProjectionStrategy(
         "M to ppb via MW assuming dilute aqueous density (~1 kg/L) before matrix/headspace projection."
     ),
 )
+
+
+def _canon(smi: str) -> str:
+    return canonicalize_smiles(smi, fallback_to_original=True, strip_salts=True) or smi
 
 def _thermal_severity(temperature_kelvin: float, time_minutes: Optional[float]) -> float:
     return _projection_temperature_factor(temperature_kelvin) * _projection_time_factor(time_minutes)

@@ -1,0 +1,12 @@
+name: react_ot
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - setuptools
+  - wheel
+  - git
+  - wget
+  - rdkit
+  - ase=3.23.0

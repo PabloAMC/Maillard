@@ -67,36 +67,49 @@ def test_c4_c5_dft_status_returns_all_six_reactions():
 
 
 def test_c4_c5_dft_status_sentinel_logic():
-    """Before real DFT runs, dft_filled must be False (sentinel 99.0 in FAST_BARRIERS[*_dft])."""
+    """Before real DFT runs, dft_filled must be False (sentinel 99.0 in FAST_BARRIERS[*_dft]).
+
+    2026-04-21: hexanal_radical_quench has had its xTB-derived value retired and
+    carries `active_barrier_kcal=None`; all other targets retain a literature/
+    family-anchored numeric value.
+    """
     rows = build_c4_c5_dft_status()
     for row in rows:
         assert not row["dft_filled"], (
             f"Reaction {row['reaction_key']} reports dft_filled=True before DFT completes"
         )
         assert row["dft_barrier_kcal"] is None
-        # active_barrier must be a real number from xTB or literature anchors
+        if row["reaction_key"] == "hexanal_radical_quench":
+            assert row["active_barrier_kcal"] is None
+            continue
+        # active_barrier must be a real number from literature/family anchors
         assert row["active_barrier_kcal"] is not None
         assert isinstance(row["active_barrier_kcal"], float)
         assert 0 < row["active_barrier_kcal"] < 50
 
 
 def test_c4_c5_dft_status_tiers_are_consistent():
-    """Evidence tiers must be recognised values and target_tier must be selective_dft_anchor."""
+    """Evidence tiers must be recognised values; target_tier may be selective_dft_anchor or wet_lab_anchor."""
     valid_tiers = {
         "xtb_derived_gfn2",
         "literature_derived_transfer",
+        "literature_family_surrogate",
+        "family_rule_surrogate",
         "mlp_screen_mace",
         "selective_dft_anchor",
+        "no_literature_anchor",
     }
+    valid_targets = {"selective_dft_anchor", "wet_lab_anchor", "literature_derived_transfer"}
     rows = build_c4_c5_dft_status()
     for row in rows:
         assert row["current_tier"] in valid_tiers, (
             f"{row['reaction_key']}: unexpected current_tier={row['current_tier']!r}"
         )
-        assert row["target_tier"] == "selective_dft_anchor", (
-            f"{row['reaction_key']}: target_tier should be selective_dft_anchor"
+        assert row["target_tier"] in valid_targets, (
+            f"{row['reaction_key']}: unexpected target_tier={row['target_tier']!r}"
         )
-        assert row["uncertainty_kj"] > 0
+        if row["reaction_key"] != "hexanal_radical_quench":
+            assert row["uncertainty_kj"] is not None and row["uncertainty_kj"] > 0
 
 
 def test_c4_c5_summary_fields_in_artifact():

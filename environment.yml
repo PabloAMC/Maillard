@@ -36,6 +36,7 @@ dependencies:
   - pip:
       - sella
       - mace-torch
+      - e3nn==0.4.4  # pinned: mace-torch 0.3.x requires <=0.5.x; 0.6.0 breaks __setstate__ unpacking
       - rxn-chem-utils
       - rxnmapper
       - huggingface_hub

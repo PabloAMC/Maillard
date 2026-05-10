@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Any, Dict, Mapping
 
 from src.benchmark_validation import assess_matrix_benchmark_evidence, load_benchmark
-from src.matrix_primary_benchmark_campaign import build_matrix_primary_benchmark_campaign_artifact
+from src.primary_benchmark_campaign import build_matrix_primary_benchmark_campaign
 
 
 EXTERNAL_BENCHMARKS = {
@@ -17,7 +17,7 @@ def _repo_benchmark_path(benchmark_id: str) -> str:
 
 
 def build_pea_soy_external_evidence_artifact() -> Dict[str, Any]:
-    campaign = build_matrix_primary_benchmark_campaign_artifact()
+    campaign = build_matrix_primary_benchmark_campaign()
     campaign_by_matrix = {row["matrix"]: row for row in campaign.get("arms", [])}
 
     lanes = []

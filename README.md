@@ -3,86 +3,134 @@
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
 [![Docker Recommended](https://img.shields.io/badge/docker-recommended-blue.svg)](https://www.docker.com/)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Trust: 39/48 inside 90% CI](https://img.shields.io/badge/trust-39%2F48%20inside%2090%25%20CI-brightgreen.svg)](results/validation/prediction_uncertainty.md)
 
-Maillard is a computational screening framework designed for food scientists who want to predict and optimize meat-like Maillard chemistry in plant-based matrices (pea, soy, mycoprotein) *before* running expensive wet-lab campaigns.
+## In one paragraph
 
-Our philosophy: **A model is useful when it separates known bounds from structural gaps.** By combining determinisic kinetic ODEs with matrix-aware retention and headspace physics, Maillard helps answer: *Which formulation and process changes are most worth testing next if the goal is meaty aroma under plant-matrix constraints?*
+Plant-based meat tastes "beany" because the **Maillard reactions** that produce real meat aroma behave very differently inside a soy or pea matrix than in water. **Maillard** is a computational screening tool that predicts which sugars, amino acids, temperatures, pH and matrix choices will produce **meat-like aroma molecules** (such as 2-methyl-3-furanthiol, the "roasted-meat" thiol) versus **off-notes** — *before* you run a single wet-lab experiment. It does this by simulating the underlying chemistry (kinetic ODEs over 16 reaction families), correcting for how the matrix traps or releases each volatile, and refining the most uncertain reaction barriers with quantum chemistry (DFT). Today it predicts **39 out of 48** literature data points within their 90 % confidence envelope, and it tells you exactly which **9** are still wrong and **what experiment would fix them next**.
 
-For a deeper dive into the physics and framework rationale, see [docs/PHILOSOPHY.md](docs/PHILOSOPHY.md).
+> **Who is this for?** Food scientists who want to triage formulations *before* burning lab time, and computational chemists who want a transparent benchmark surface for matrix-aware Maillard chemistry.
 
-## What This Does (Vs. Existing Tools)
+---
 
-Unlike general databases (like NIST WebBook) that only store static spectra, or raw chemical kinetics solvers (like RMG) that assume free chemistry environments, Maillard specifically translates:
-1. **Ingredients + Process** (precursors, protein matrix type, physical state, pH, temp, time)
-2. **Into actionable, benchmark-calibrated aroma outputs** (meaty thiols vs. beany off-notes, retention effects, and safety limits).
+## Why this is hard (and why a simple lookup won't do)
+
+| Existing tool | What it gives you | What it misses |
+| --- | --- | --- |
+| NIST WebBook, FlavorDB | Static spectra & odor descriptors of *isolated* compounds | No yields. No matrix. No process. Cannot answer "how much MFT do I get from this recipe?" |
+| RMG, Cantera, generic kinetics | Free-radical / gas-phase chemistry solvers | Assume free chemistry — no protein binding, no headspace partitioning, no plant-matrix retention |
+| Sensory panels | Ground truth for finished products | Slow, expensive, late in the design loop |
+
+Maillard fills the middle. It maps **(ingredients + process + matrix) → (per-compound concentrations + headspace + confidence)** so you can rank candidate formulations *cheaply*, then spend wet-lab time on the few that truly matter.
+
+---
+
+## What you put in, what you get out
 
 ```mermaid
 graph LR
-    A[Inputs: Sugars, AAs, Matrix, T, pH] -->|Maillard Engine\n(ODEs + Matrix Correction)| B[Predictions: Aroma Profile, Off-Notes]
-    B -.-> C[Decision Dashboard:\nConfidence & Interventions]
+    A[Inputs<br/>sugars, amino acids,<br/>matrix, T, pH, time] --> B[Kinetic ODEs<br/>16 reaction families]
+    B --> C[Matrix correction<br/>retention + headspace<br/>+ Henry's law]
+    C --> D[Selective DFT refinement<br/>for uncertain barriers]
+    D --> E[Outputs<br/>per-compound ppb,<br/>aroma vs. off-note,<br/>confidence envelope]
     style A fill:#e6f3ff,stroke:#4a90e2,stroke-width:2px;
-    style B fill:#e6ffea,stroke:#2ecc71,stroke-width:2px;
-    style C fill:#fff3e6,stroke:#f39c12,stroke-width:2px;
+    style E fill:#e6ffea,stroke:#2ecc71,stroke-width:2px;
 ```
-For a detailed diagram of the pipeline's SMIRKS, thermodynamic gating, and retention layers, read [docs/architecture.md](docs/architecture.md).
 
-## 🚀 Quick Start
+Full pipeline: [docs/architecture.md](docs/architecture.md). Philosophy (why we separate *known bounds* from *structural gaps*): [docs/PHILOSOPHY.md](docs/PHILOSOPHY.md).
 
-This project requires conda or Docker.
+---
 
-**Install and Boot:**
+## 🚀 Quick start (5 minutes)
+
+Requires Docker (recommended) or conda.
+
 ```bash
-# Bring up the validated Linux container
+# 1. Boot the validated container (one-time)
 ./scripts/docker_maillard.sh up
 ./scripts/docker_maillard.sh bootstrap
-```
 
-**Run a Screening Prediction:**
-```bash
+# 2. Predict the aroma profile of a formulation
 python scripts/run_pipeline.py \
   --sugars ribose,glucose \
   --amino-acids cysteine,leucine \
   --ratios ribose:0.5,glucose:0.2,cysteine:0.2,leucine:0.1 \
-  --ph 5.5 \
-  --temp 105 \
-  --time-minutes 45 \
+  --ph 5.5 --temp 105 --time-minutes 45 \
   --protein-type pea_iso \
-  --target meaty \
-  --minimize beany \
-  --report \
-  --output-dir results/first_run
-```
+  --target meaty --minimize beany \
+  --report --output-dir results/first_run
 
-**Optimize a Formulation:**
-```bash
+# 3. Or have the optimizer search the design space for you
 python scripts/optimize_formulation.py \
-  --sugars ribose,glucose \
-  --amino-acids cysteine,leucine \
-  --target-tag meaty \
-  --minimize-tag beany \
-  --protein-type pea_iso \
-  --n-iterations 50
+  --sugars ribose,glucose --amino-acids cysteine,leucine \
+  --target-tag meaty --minimize-tag beany \
+  --protein-type pea_iso --n-iterations 50
 ```
 
-## 📊 Example Output & Scientific Validation
+Open `results/first_run/report.md` for a per-compound table, the matched literature benchmark, and a confidence label on every prediction.
 
-Maillard intentionally distances itself from arbitrary "sensory scores". The `--report` output yields highly actionable **Decision-Risk Dashboards**:
-- **Relative Intervention Results:** e.g., "Increasing pH shifted meaty thiols +20% but triggered acrylamide bounds."
-- **Confidence Overlays:** Explicit bounding telling you whether the prediction relies on a known experimental anchor or is a purely directional extrapolation.
+---
 
-### What is Validated Today?
-We track 16 distinct reaction families internally. Quantitative accuracy relies strictly on extracted literature benchmarks where exact headspace (ppb) measurements were taken under bounded conditions.
+## 📊 How good are the predictions, really?
 
-A snapshot of our current quantitative proof surface:
-![Validation Overview](docs/assets/validation_overview.png)
+We refuse to publish a single "accuracy %". Instead we publish **three orthogonal evidence surfaces**, each answering a different honest question.
 
-Check [docs/VALIDATION_GUIDE.md](docs/VALIDATION_GUIDE.md) to explore the most current accuracy snapshot, execution coverage gaps, and explicit proof contracts.
-To explore all machine-readable reports, benchmarking artifacts, and matrix coverage metrics generated by the framework, dive into the `results/validation/` directory.
+| Surface | Question it answers | Headline number today |
+| --- | --- | --- |
+| **Parity** ([validation_overview.png](docs/assets/validation_overview.png)) | *On the literature systems we can match compound-for-compound, how close is predicted ppb to measured ppb?* | 16 benchmarks · 48 matched compound rows |
+| **Coverage** ([family_coverage.png](docs/assets/family_coverage.png)) | *Which of the 16 reaction families are wired into the runtime, calibrated against data, or anchored by DFT?* | 16/16 wired · 7 with DFT anchors |
+| **Gaps** ([gap_heatmap.png](results/validation/gap_heatmap.png)) | *Where would the next wet-lab experiment move our confidence the most?* | **9/48 cells outside 90 % CI** — all queued as bookable requests |
 
-## Documentation Hub
-- **Installation and basic usage:** [docs/guides/QUICKSTART.md](docs/guides/QUICKSTART.md)
-- **Copy-paste runbook for the three active computational-gap QM targets:** [docs/guides/COMPUTATIONAL_GAP_RUNBOOK.md](docs/guides/COMPUTATIONAL_GAP_RUNBOOK.md)
-- **Understanding terminology (FAST mode, bounds, etc):** [docs/guides/GLOSSARY.md](docs/guides/GLOSSARY.md)
-- **Detailed scientific positioning and constraints:** [docs/PHILOSOPHY.md](docs/PHILOSOPHY.md)
-- **Validation rules and benchmark testing:** [docs/VALIDATION_GUIDE.md](docs/VALIDATION_GUIDE.md)
-- **Complete framework architecture:** [docs/architecture.md](docs/architecture.md)
+<table>
+<tr>
+<td width="33%" valign="top"><a href="docs/assets/validation_overview.png"><img src="docs/assets/validation_overview.png" alt="Parity plot"/></a><br/><sub><b>Parity.</b> Each dot is one (literature benchmark × compound). The closer to the diagonal, the better the prediction.</sub></td>
+<td width="33%" valign="top"><a href="docs/assets/family_coverage.png"><img src="docs/assets/family_coverage.png" alt="Family coverage"/></a><br/><sub><b>Coverage.</b> Green = wired & calibrated, blue = DFT-anchored, grey = surrogate prior only. Tells you what the model is allowed to claim.</sub></td>
+<td width="33%" valign="top"><a href="results/validation/gap_heatmap.png"><img src="results/validation/gap_heatmap.png" alt="Gap heatmap"/></a><br/><sub><b>Gaps.</b> Hotter = higher value-of-information. <code>*</code> marks cells where measurement falls outside the 90 % envelope — the next experiments worth booking.</sub></td>
+</tr>
+</table>
+
+> **How to read these together.** Parity and coverage are *not* the same thing. A reaction family can be wired and calibrated but still have no compound that we can match against a published numeric ppb — those families show in coverage but not yet in parity. The gap heatmap closes the loop: every `*` cell is already converted into a ranked, bookable wet-lab request below.
+
+### What the trust loop is recommending right now
+
+1. **Top experiment to book**: 2-methyl-3-furanthiol from cysteine + glucose at 150 °C (Farmer 1999) — value-of-information = 7.70. A multi-factor SIDA campaign would close the precursor × matrix gap on the most decision-relevant meaty odorant.
+2. **Most influential existing benchmark**: `cml_cel_commercial_pbma_Foods2023` — currently drags the panel by –0.035 dex; flagged for a re-anchor pass.
+3. **Widest envelope**: matched MFT predictions span up to ~6 dex of Monte-Carlo width on HVP-spiked systems, driven jointly by barrier and headspace priors.
+
+Full machine-readable artifacts (regenerated in Docker, never hand-edited — run `make trust-loop` to refresh all four):
+
+- 90 % envelope per matched compound: [results/validation/prediction_uncertainty.md](results/validation/prediction_uncertainty.md)
+- Ranked experiment requests + DOE templates: [results/validation/experiment_value_ranking.md](results/validation/experiment_value_ranking.md), [results/validation/experiment_requests/index.md](results/validation/experiment_requests/index.md)
+- Leave-one-benchmark-out leverage: [results/validation/loo_leverage.md](results/validation/loo_leverage.md)
+- Per-cell value-of-information heatmap: [results/validation/gap_heatmap.png](results/validation/gap_heatmap.png)
+
+<details>
+<summary><b>Computational-gap parametrization queue</b> (offline DFT/xTB targets — not yet in the parity plot)</summary>
+
+These are formal selective-QM targets plus prep-only companion lanes:
+
+- Family 11: `hexanal_radical_quench`
+- Family 12: `lysinoalanine_crosslink`
+- Family 13: `quinone_cys_michael`
+- Family 13 safety lane: `asparagine_sugar_explicit_water_cluster`
+- Family 14: `aa_ring_open_dicarbonyl`
+- Family 15: `pe_schiff_base`, `pe_amadori`
+- Family 16: `melanoidin_radical_trapping`
+
+Runbook: [docs/guides/COMPUTATIONAL_GAP_RUNBOOK.md](docs/guides/COMPUTATIONAL_GAP_RUNBOOK.md).
+
+</details>
+
+---
+
+## 📚 Where to look next
+
+| If you are a… | Start with |
+| --- | --- |
+| **Food scientist** running a screening or optimization | [docs/guides/QUICKSTART.md](docs/guides/QUICKSTART.md) → [docs/scientist_workflow_guide.md](docs/scientist_workflow_guide.md) |
+| **Skeptic** auditing what is actually verified | [docs/VALIDATION_GUIDE.md](docs/VALIDATION_GUIDE.md) → [results/validation/](results/validation/) |
+| **Maintainer** extending reaction families or refinement | [docs/PHILOSOPHY.md](docs/PHILOSOPHY.md) → [docs/architecture.md](docs/architecture.md) → [docs/SMIRKS_SYSTEM.md](docs/SMIRKS_SYSTEM.md) |
+| **QM operator** running the selective-DFT queue | [docs/guides/COMPUTATIONAL_GAP_RUNBOOK.md](docs/guides/COMPUTATIONAL_GAP_RUNBOOK.md) |
+| **New contributor** chasing terminology | [docs/guides/GLOSSARY.md](docs/guides/GLOSSARY.md) → [agents.md](agents.md) |
+
+All trust-dashboard artifacts can be regenerated with `./scripts/docker_maillard.sh summary`.

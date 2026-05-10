@@ -1,0 +1,34 @@
+{
+  "version": "1.1",
+  "description": "Multi-step (elementary-step decomposition) DFT targets. Each target is split into ordered elementary steps; each step has its own dry R/P endpoints and an optional explicit-water microsolvation spec. N=1 step is allowed (single-TS run with built-in microsolvation).",
+  "targets": [
+    {
+      "target_id": "pe_amadori_water_shuttle",
+      "type": "multi_step",
+      "literature": {
+        "barrier_kcal_mol": 19.81,
+        "source": "Hofmann/Lederer aqueous Amadori review; water-catalysed regime",
+        "regime": "water-catalysed (single explicit water proton shuttle)"
+      },
+      "aggregation": "max_step",
+      "notes": "Schiff-base -> ketoamine (Amadori) via 1,3-prototropic H transfer from the hydroxyl O0 to the imine N3. Dry concerted barrier ~73 kcal/mol (strained 5-membered TS); with one explicit water as proton shuttle the topology becomes a 7-membered ring and the barrier drops to ~20 kcal/mol (literature regime). After microsolvation the new water atoms are appended to the existing 33-atom solute, so indices 33 (Ow), 34, 35 (Hw) belong to the bridging water. The TS imaginary mode should be concentrated on the donor (0), acceptor (3), the migrating H (17), and the water (33-35).",
+      "elementary_steps": [
+        {
+          "step_id": "h_transfer_O0_to_N3",
+          "name": "Water-shuttled 1,3-H transfer O0 -> N3 (Schiff-base -> ketoamine)",
+          "dry_reactant_xyz": "data/geometries/xtb_inputs/pe_amadori/reactant.xyz",
+          "dry_product_xyz": "data/geometries/xtb_inputs/pe_amadori/product.xyz",
+          "charge": 0,
+          "spin": 0,
+          "microsolvation": {
+            "topology": "proton_shuttle",
+            "shuttles": [
+              {"donor_atom": 0, "acceptor_atom": 3, "h_atom": 17}
+            ]
+          },
+          "ts_mode_expected_atoms": [0, 3, 17, 33, 34, 35]
+        }
+      ]
+    }
+  ]
+}

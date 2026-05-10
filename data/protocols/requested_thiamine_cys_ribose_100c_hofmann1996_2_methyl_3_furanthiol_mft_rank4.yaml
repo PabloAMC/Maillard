@@ -1,0 +1,43 @@
+experiment_id: requested_thiamine_cys_ribose_100c_hofmann1996_2_methyl_3_furanthiol_mft_rank4
+status: pending_lab
+source_kind: model_requested_experiment
+protein_type: free
+process_state: aqueous_pre_extrusion_model
+matrix_format: null
+conditions:
+  temp_C: 100
+  ph: 5.5
+  water_activity: 0.98
+  time_min: 30
+formulation:
+  precursors:
+    Thiamine:
+      concentration_mM: 0.1
+    L-Cysteine:
+      concentration_mM: 1.0
+    D-Ribose:
+      concentration_mM: 1.0
+measured_volatiles:
+  2-Methyl-3-furanthiol (MFT):
+    conc_ppb: null
+    uncertainty_pct: null
+    _target_role: primary_request_target
+request_metadata:
+  originating_voi_rank: 4
+  voi_score: 5.853034046604662
+  voi_rationale: CI width 4.25 dex; ≈4e+04× ODT (decision_relevance=4.59); critical
+    meaty odorant — multi-factor SIDA closes precursor × matrix gap
+  envelope_miss_log10: 0.0
+  ci_width_log10: 4.2474306700222275
+  decision_relevance: 4.5933918654357
+  p5_predicted_ppb: 0.0011927130418250525
+  p50_predicted_ppb: 3.9209550669540354
+  p95_predicted_ppb: 21.084661744238108
+  previous_measured_ppb: 3.14
+  odour_threshold_ug_per_kg: 0.0001
+  suggested_doe_template: blocking_benchmark_gap
+  goal: expand model coverage
+  budget_label: TBD
+benchmark_alignment:
+  target_benchmark_id: thiamine_cys_ribose_100C_Hofmann1996
+  notes: Re-measure to constrain the model envelope at this benchmark.

@@ -5,6 +5,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Mapping, Optional
 
+from src.forming_bond import infer_forming_bond_metadata
+
 
 def _repo_root() -> Path:
     return Path(__file__).resolve().parents[1]
@@ -21,6 +23,10 @@ COMPUTATIONAL_GAP_PRIORITY_TARGET_IDS = (
     "hexanal_radical_quench",
     "lysinoalanine_crosslink",
     "aa_ring_open_dicarbonyl",
+    "quinone_cys_michael",
+    "pe_schiff_base",
+    "pe_amadori",
+    "pe_amadori_water",
     "asparagine_sugar_explicit_water_cluster",
 )
 
@@ -162,16 +168,12 @@ def _build_target_row(source_row: Mapping[str, Any], *, priority_rank: int) -> D
     )
 
     xtb_ready = (
-        not is_explicit_water
-        and _path_exists(reactant_relative)
+        _path_exists(reactant_relative)
         and _path_exists(product_relative)
         and _path_exists(run_script_relative)
         and atom_count_match
     )
-    if is_explicit_water:
-        xtb_status = "seed_required"
-        xtb_blocker = "Explicit-water cluster seed generation is still required before xTB path search."
-    elif not _path_exists(reactant_relative) or not _path_exists(product_relative) or not _path_exists(run_script_relative):
+    if not _path_exists(reactant_relative) or not _path_exists(product_relative) or not _path_exists(run_script_relative):
         xtb_status = "seed_required"
         xtb_blocker = "Reactant/product geometries or the xTB runner script are still missing."
     elif not atom_count_match:
@@ -185,7 +187,7 @@ def _build_target_row(source_row: Mapping[str, Any], *, priority_rank: int) -> D
         xtb_blocker = None
 
     dft_ready = xtb_ready and _path_exists(ts_guess_relative)
-    if is_explicit_water:
+    if xtb_status == "seed_required":
         dft_status = "seed_required"
     elif xtb_status == "blocked_atom_count_mismatch":
         dft_status = "blocked_atom_count_mismatch"
@@ -196,6 +198,11 @@ def _build_target_row(source_row: Mapping[str, Any], *, priority_rank: int) -> D
 
     promotion_ceiling = str(source_row.get("promotion_ceiling", "ranking_only")).strip() or "ranking_only"
     surrogate = _build_surrogate_payload(source_row)
+    forming_bond = infer_forming_bond_metadata(
+        source_row,
+        reactant_relative_path=reactant_relative,
+        product_relative_path=product_relative,
+    )
 
     return {
         "id": target_id,
@@ -215,6 +222,7 @@ def _build_target_row(source_row: Mapping[str, Any], *, priority_rank: int) -> D
         "promotion_ceiling": promotion_ceiling,
         "maximum_claim_level": DEFAULT_INGESTION_CEILING_BY_PROMOTION.get(promotion_ceiling, promotion_ceiling),
         "active_arrhenius_key": str(source_row.get("active_arrhenius_key", "")),
+        "forming_bond": forming_bond,
         "surrogate": surrogate,
         "governance_status": "hold_observable_first",
         "governance_note": "Computational-gap refinement jobs can narrow priors and uncertainty only; they do not promote benchmark closure while observable-first governance remains active.",
@@ -225,7 +233,7 @@ def _build_target_row(source_row: Mapping[str, Any], *, priority_rank: int) -> D
             "blocker_note": xtb_blocker,
             "surrogate_available": bool(surrogate.get("available", False)),
             "geometry_dir": geometry_dir_relative,
-            "runner_script": None if is_explicit_water else run_script_relative,
+            "runner_script": run_script_relative,
             "required_inputs": [reactant_relative, product_relative],
             "reactant_atom_count": reactant_atom_count,
             "product_atom_count": product_atom_count,
@@ -246,7 +254,9 @@ def _build_target_row(source_row: Mapping[str, Any], *, priority_rank: int) -> D
             "surrogate_available": bool(surrogate.get("available", False)),
             "runner_script": "scripts/run_computational_gap_dft.py",
             "reactant_path": reactant_relative,
+            "product_path": product_relative,
             "ts_guess_path": ts_guess_relative,
+            "forming_bond": forming_bond,
             "solvent_name": "water",
             "temperature_k": 423.15,
             "charge": int(source_row.get("charge", 0) or 0),
@@ -274,6 +284,9 @@ def build_computational_gap_refinement_plan_artifact(
         for row in registry.get("targets", [])
         if str(row.get("id", "")).strip()
     }
+    pe_schiff_source = source_lookup.get("pe_schiff_base_interface")
+    if pe_schiff_source and "pe_schiff_base" not in source_lookup:
+        source_lookup["pe_schiff_base"] = {**pe_schiff_source, "id": "pe_schiff_base"}
     source_lookup["asparagine_sugar_explicit_water_cluster"] = _explicit_water_target()
 
     rows = [
@@ -361,7 +374,10 @@ def build_computational_gap_dft_job_manifest(
                 "slr_family": row.get("slr_family"),
                 "status": dft.get("status"),
                 "reactant_path": dft.get("reactant_path"),
+                "product_path": dft.get("product_path"),
                 "ts_guess_path": dft.get("ts_guess_path"),
+                "forming_bond": dft.get("forming_bond"),
+                "forming_bond_atoms": list((dft.get("forming_bond") or {}).get("atom_indices_zero_based", [])),
                 "runner_script": dft.get("runner_script"),
                 "solvent_name": dft.get("solvent_name"),
                 "temperature_k": dft.get("temperature_k"),
