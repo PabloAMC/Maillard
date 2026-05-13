@@ -30,7 +30,7 @@ from src.benchmark_validation import (
     load_benchmark,
 )
 from src.doe_generator import DOE_TEMPLATES
-from src.experiment_value import ExperimentCandidate
+from src.experiment_value import ExperimentCandidate, infer_matrix_family
 
 ROOT = Path(__file__).resolve().parents[1]
 PROTOCOLS_DIR = ROOT / "data" / "protocols"
@@ -89,6 +89,110 @@ def _matches_filter(value: Optional[str], needle: Optional[str]) -> bool:
     return needle.lower() in str(value).lower()
 
 
+# ---------------------------------------------------------------------------
+# Analytical-context defaults (mirror intake schema's `analytical_context`)
+# ---------------------------------------------------------------------------
+#
+# These keep the CRO loop tight: the protocol Markdown asks for exactly the
+# fields that `data/protocols/matrix_experiment_intake_schema.json` already
+# accepts, and the pre-filled intake YAML carries the same defaults so a
+# returned payload lands cleanly via `scripts/ingest_results.py` without
+# extra translation. We never claim a measurement here; status stays
+# `pending_lab` until the lab fills `measured_volatiles`.
+
+# Map DoE template -> default analytical_context block. Each entry is a
+# best-default starting point; the lab is expected to confirm or override
+# in the returned YAML, not us.
+_TEMPLATE_ANALYTICAL_CONTEXT: Dict[str, Dict[str, Any]] = {
+    "blocking_benchmark_gap": {
+        "headspace_method": "HS-SPME-GC-MS",
+        "quantification_mode": "internal_standard_calibrated",
+        "replicates": 3,
+        "non_detect_policy": "report_lod_and_do_not_backfill",
+    },
+    "missing_absolute_anchor": {
+        "headspace_method": "HS-SPME-GC-MS",
+        "quantification_mode": "internal_standard_calibrated",
+        "replicates": 3,
+        "non_detect_policy": "report_lod_and_do_not_backfill",
+    },
+    "missing_positive_flavor_anchor": {
+        "headspace_method": "SPME-GC-MS_polar_fiber",
+        "quantification_mode": "internal_standard_calibrated",
+        "replicates": 3,
+        "non_detect_policy": "report_lod_and_do_not_backfill",
+    },
+    "missing_kinetic_dataset": {
+        "headspace_method": "LC-MS_MS_timecourse_quench",
+        "quantification_mode": "internal_standard_calibrated",
+        "replicates": 3,
+        "non_detect_policy": "report_lod_and_do_not_backfill",
+    },
+    "missing_process_state_bundle": {
+        "headspace_method": "simultaneous_DSC_OPA_Ellman",
+        "quantification_mode": "absolute_calibrated_reagent_assay",
+        "replicates": 3,
+        "non_detect_policy": "report_lod_and_do_not_backfill",
+    },
+}
+
+_DEFAULT_ANALYTICAL_CONTEXT: Dict[str, Any] = {
+    "headspace_method": "HS-SPME-GC-MS",
+    "quantification_mode": "internal_standard_calibrated",
+    "replicates": 3,
+    "non_detect_policy": "report_lod_and_do_not_backfill",
+}
+
+# Suggest matched isotopically-labeled internal standards based on compound
+# name substrings. Conservative on purpose — when nothing matches we ask the
+# CRO to nominate one rather than guessing wrong.
+_INTERNAL_STANDARD_HINTS: Sequence[tuple[str, str]] = (
+    ("furanthiol", "13C-2-methyl-3-furanthiol"),
+    ("furfurylthiol", "13C-2-furfurylthiol"),
+    ("methional", "d3-methional"),
+    ("hexanal", "hexanal-d12"),
+    ("nonanal", "nonanal-d17"),
+    ("pyrazine", "13C-2,5-dimethylpyrazine"),
+    ("hemf", "13C-HEMF"),
+    ("dmhf", "13C-DMHF"),
+    ("furosine", "13C6-furosine"),
+    ("acrylamide", "13C3-acrylamide"),
+)
+
+
+def _suggest_internal_standards(compound: str, template_key: str) -> List[str]:
+    """Return suggested isotopically-labeled internal standards for `compound`.
+
+    Falls back to a generic placeholder so the CRO row is never silently
+    empty — silence here would let a returned payload skip the calibration
+    contract entirely.
+    """
+    name = (compound or "").lower()
+    matched: List[str] = []
+    for needle, label in _INTERNAL_STANDARD_HINTS:
+        if needle in name and label not in matched:
+            matched.append(label)
+    if not matched:
+        matched = [f"compound_specific_internal_standard_for_{_slug(compound)}"]
+    if template_key == "blocking_benchmark_gap" and "hexanal-d12" not in matched:
+        # Multi-factorial template covers both meaty + lipid bands; ensure
+        # the lipid anchor is present.
+        matched.append("hexanal-d12")
+    return matched
+
+
+def _default_analytical_context(
+    *, template_key: str, compound: str
+) -> Dict[str, Any]:
+    base = dict(_TEMPLATE_ANALYTICAL_CONTEXT.get(template_key, _DEFAULT_ANALYTICAL_CONTEXT))
+    base["internal_standards"] = _suggest_internal_standards(compound, template_key)
+    base["notes"] = (
+        "Defaults emitted by next-experiment; lab is expected to confirm or "
+        "override before returning the intake YAML."
+    )
+    return base
+
+
 def _build_intake_payload(
     *,
     request_id: str,
@@ -137,6 +241,10 @@ def _build_intake_payload(
             "target_benchmark_id": candidate.benchmark_id,
             "notes": "Re-measure to constrain the model envelope at this benchmark.",
         },
+        "analytical_context": _default_analytical_context(
+            template_key=candidate.suggested_doe_template,
+            compound=candidate.compound,
+        ),
     }
     return payload
 
@@ -184,6 +292,37 @@ def _render_protocol_markdown(
     goal_line = f"- Goal: {goal}" if goal else ""
     budget_line = f"- Budget label: {budget_label}" if budget_label else ""
 
+    analytical = _default_analytical_context(
+        template_key=template_key, compound=candidate.compound
+    )
+    is_lines = "\n".join(f"  - `{label}`" for label in analytical["internal_standards"])
+    analytical_block = (
+        f"- `headspace_method`: `{analytical['headspace_method']}`\n"
+        f"- `quantification_mode`: `{analytical['quantification_mode']}`\n"
+        f"- `replicates`: `{analytical['replicates']}` (minimum)\n"
+        f"- `non_detect_policy`: `{analytical['non_detect_policy']}`\n"
+        f"- `internal_standards`:\n{is_lines}"
+    )
+
+    cro_checklist = (
+        "- [ ] Confirm target compound identity and expected dynamic range "
+        f"(model 90% CI midpoint ≈ {candidate.predicted_p50:g} ppb).\n"
+        "- [ ] Procure or confirm availability of the suggested isotopically-labeled "
+        "internal standards above; substitute and **note the swap** in `analytical_context.notes`.\n"
+        f"- [ ] Run ≥ {analytical['replicates']} biological replicates plus a process blank and a "
+        "matrix blank.\n"
+        "- [ ] Measure and report LoD and LoQ; do **not** backfill non-detects "
+        "(`non_detect_policy: report_lod_and_do_not_backfill`).\n"
+        "- [ ] Quantify against the internal standards (NOT semi-quant external "
+        "calibration); set `quantification_mode: internal_standard_calibrated`.\n"
+        "- [ ] Record the measured `conc_ppb` and `uncertainty_pct` (1σ relative) "
+        f"under `measured_volatiles.{candidate.compound}` in the pre-filled intake YAML.\n"
+        "- [ ] Fill `provenance.source_doi` (or internal lab batch ID), "
+        "`provenance.measurement_date`, and `provenance.notes` (instrument, method file).\n"
+        "- [ ] Set `status: measured` and return the YAML; do not edit `request_metadata` "
+        "(it carries the upstream VoI rationale)."
+    )
+
     return f"""# Experiment Request `{request_id}`
 
 VoI rank **#{candidate.rank}**, score **{candidate.voi_score:.2f}**.
@@ -213,6 +352,14 @@ Generated from the current Monte-Carlo benchmark envelope.
 
 {instructions}
 
+## Analytical context (mirror in intake YAML `analytical_context`)
+
+{analytical_block}
+
+## CRO send-to-lab checklist
+
+{cro_checklist}
+
 ## Data return
 
 - Pre-filled intake YAML: `{_display_path(intake_path)}`
@@ -231,6 +378,7 @@ def build_requests(
     *,
     top_n: int = 5,
     protein_type: Optional[str] = None,
+    matrix_filter: Optional[Sequence[str]] = None,
     goal: Optional[str] = None,
     budget_label: Optional[str] = None,
     protocols_dir: Path = PROTOCOLS_DIR,
@@ -243,6 +391,12 @@ def build_requests(
     protocols_dir.mkdir(parents=True, exist_ok=True)
     requests_dir.mkdir(parents=True, exist_ok=True)
 
+    wanted_matrices = (
+        {str(m).strip().lower() for m in matrix_filter if str(m).strip()}
+        if matrix_filter
+        else set()
+    )
+
     requests: List[ExperimentRequest] = []
     for candidate in candidates:
         if len(requests) >= top_n:
@@ -253,6 +407,10 @@ def build_requests(
             protein_type,
         ):
             continue
+        if wanted_matrices:
+            inferred = infer_matrix_family(candidate.benchmark_id, bench)
+            if inferred.lower() not in wanted_matrices:
+                continue
         request_id = _slug(
             f"requested_{candidate.benchmark_id}_{candidate.compound}_rank{candidate.rank}"
         )

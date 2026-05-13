@@ -44,31 +44,53 @@ Full pipeline: [docs/architecture.md](docs/architecture.md). Philosophy (why we 
 
 ## 🚀 Quick start (5 minutes)
 
-Requires Docker (recommended) or conda.
+Requires Docker.
 
 ```bash
 # 1. Boot the validated container (one-time)
 ./scripts/docker_maillard.sh up
 ./scripts/docker_maillard.sh bootstrap
 
-# 2. Predict the aroma profile of a formulation
-python scripts/run_pipeline.py \
+# 2. One-command demo: runs a pea-isolate baseline and a cysteine-enrichment
+#    comparison, then points at the resulting report bundles.
+./scripts/docker_maillard.sh quickstart
+
+# 3. Or assemble a custom formulation by hand:
+./scripts/docker_maillard.sh run "python scripts/run_pipeline.py \
   --sugars ribose,glucose \
   --amino-acids cysteine,leucine \
   --ratios ribose:0.5,glucose:0.2,cysteine:0.2,leucine:0.1 \
   --ph 5.5 --temp 105 --time-minutes 45 \
   --protein-type pea_iso \
   --target meaty --minimize beany \
-  --report --output-dir results/first_run
+  --report --output-dir results/first_run"
 
-# 3. Or have the optimizer search the design space for you
-python scripts/optimize_formulation.py \
+# 4. Or have the optimizer search the design space for you
+./scripts/docker_maillard.sh run "python scripts/optimize_formulation.py \
   --sugars ribose,glucose --amino-acids cysteine,leucine \
   --target-tag meaty --minimize-tag beany \
-  --protein-type pea_iso --n-iterations 50
+  --protein-type pea_iso --n-iterations 50"
 ```
 
-Open `results/first_run/report.md` for a per-compound table, the matched literature benchmark, and a confidence label on every prediction.
+Open `results/quickstart/baseline/report.md` (or `results/first_run/report.md`) for a per-compound table, the matched literature benchmark, a confidence label on every prediction, a plain-language glossary, **`## 7. Recommended next experiment`** (the top-N value-of-information rows scoped to the formulation's matrix when known; each per-target protocol Markdown ships with a `## CRO send-to-lab checklist` and an `analytical_context` block that mirrors `data/protocols/matrix_experiment_intake_schema.json`, so a returned YAML lands cleanly via `maillard ingest`), and **`## 8. Sensory readout`** (per-compound OAV with 90 % CI and a meaty / off-note / safety axis roll-up).
+
+Run `./scripts/docker_maillard.sh help` for the full audience-grouped command surface.
+
+The report bundle now also writes scientist-facing visuals:
+
+- `compound_confidence_overlay.png`: per-compound 90 % envelope whiskers colored by evidence class
+- `intervention_waterfall.png`: class-level delta summary when a baseline is supplied
+- `comparison_intervention_waterfall.png`: the same waterfall surface for two-formulation campaign reports
+
+![Compound confidence overlay](docs/assets/report_compound_confidence_overlay.png)
+
+Confidence overlay: each point is the p50 observable ppb with p5-p95 whiskers, colored by evidence class.
+
+![Comparison intervention waterfall](docs/assets/report_comparison_intervention_waterfall.png)
+
+Intervention waterfall: the comparison report aggregates compound deltas into class-level gains and losses between two candidates.
+
+If you want the scientist-facing ingest loop as well, see [docs/scientist_workflow_guide.md](docs/scientist_workflow_guide.md). The new `./scripts/docker_maillard.sh ingest ...` path previews benchmark additions, trust-loop deltas, and support-strengthening before it writes a canonical intake YAML.
 
 ---
 
@@ -82,6 +104,7 @@ We refuse to publish a single "accuracy %". Instead we publish **four orthogonal
 | **External hold-out** ([external_validation_report.md](results/validation/external_validation_report.md)) | *On isolated literature systems we explicitly did not calibrate to, does the frozen model still cover the measurement?* | 4 bundles · **0/8 inside 90 % CI** · median **36.02x** |
 | **Coverage** ([family_coverage.png](docs/assets/family_coverage.png)) | *Which of the 16 reaction families are wired into the runtime, calibrated against data, or anchored by DFT?* | 16/16 wired · 7 with DFT anchors |
 | **Gaps** ([gap_heatmap.png](results/validation/gap_heatmap.png)) | *Where would the next wet-lab experiment move our confidence the most?* | **9/48 cells outside 90 % CI** — all queued as bookable requests |
+| **Matrix refit decision** ([calibration_refit_decision.md](results/validation/calibration_refit_decision.md)) | *Did the latest matrix observable recalibration actually improve the panel enough to justify changing runtime factors?* | 2026-05-10 refit **rejected** · matrix median residual unchanged · trust headline holds at **39/48** |
 
 <table>
 <tr>
@@ -106,6 +129,8 @@ Full machine-readable artifacts (regenerated in Docker, never hand-edited — ru
 - Ranked experiment requests + DOE templates: [results/validation/experiment_value_ranking.md](results/validation/experiment_value_ranking.md), [results/validation/experiment_requests/index.md](results/validation/experiment_requests/index.md)
 - Leave-one-benchmark-out leverage: [results/validation/loo_leverage.md](results/validation/loo_leverage.md)
 - Per-cell value-of-information heatmap: [results/validation/gap_heatmap.png](results/validation/gap_heatmap.png)
+
+**Want the next experiment for *your* matrix, not the global top miss?** Run `./scripts/docker_maillard.sh next-experiment --top 5 --matrix soy_iso` (or `pea_iso`, `wheat_gluten`, `myco`). Each row drops a pre-filled intake YAML into `data/protocols/` and a SIDA-grade protocol Markdown into `results/validation/experiment_requests/`. After a wet-lab measurement comes back, `./scripts/docker_maillard.sh ingest --file results.csv ...` previews the trust-loop delta before landing the benchmark.
 
 <details>
 <summary><b>Computational-gap parametrization queue</b> (offline DFT/xTB targets — not yet in the parity plot)</summary>
