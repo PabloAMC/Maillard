@@ -38,6 +38,15 @@ def main() -> int:
         help="Substring filter against benchmark.protein_type (e.g. 'soy', 'pea').",
     )
     parser.add_argument(
+        "--matrix",
+        default=None,
+        help=(
+            "Comma-separated matrix families inferred from benchmark IDs "
+            "(e.g. 'soy_iso,wheat_gluten'). Useful when benchmarks lack an "
+            "explicit protein_type field."
+        ),
+    )
+    parser.add_argument(
         "--goal",
         default=None,
         help="Free-text scientist intent recorded with the request (e.g. 'meaty aroma').",
@@ -51,10 +60,16 @@ def main() -> int:
 
     payload = load_prediction_payload(args.prediction_path)
     candidates = rank_experiments(payload)
+    matrix_filter = (
+        [m.strip() for m in args.matrix.split(",") if m.strip()]
+        if args.matrix
+        else None
+    )
     requests = build_requests(
         candidates,
         top_n=args.top,
         protein_type=args.protein_type,
+        matrix_filter=matrix_filter,
         goal=args.goal,
         budget_label=args.budget,
     )

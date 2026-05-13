@@ -1,17 +1,17 @@
 # Experiment Request `requested_cys_glucose_150c_farmer1999_2_methyl_3_furanthiol_rank1`
 
-VoI rank **#1**, score **7.69**.
+VoI rank **#1**, score **7.70**.
 Generated from the current Monte-Carlo benchmark envelope.
 
 ## Why this experiment
 
 - Compound: **2-methyl-3-furanthiol**
 - Envelope miss: inside 90% CI
-- 90% CI width: 5.12 dex
+- 90% CI width: 5.14 dex
 - ODT: 0.0001 µg/kg; decision relevance 5.00
-- Rationale: CI width 5.12 dex; ≈3e+05× ODT (decision_relevance=5.00); critical meaty odorant — multi-factor SIDA closes precursor × matrix gap
-- Goal: expand model coverage
-- Budget label: TBD
+- Rationale: CI width 5.14 dex; ≈3e+05× ODT (decision_relevance=5.00); critical meaty odorant — multi-factor SIDA closes precursor × matrix gap
+
+
 
 ## Benchmark context
 

@@ -106,7 +106,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--target", type=str, default=None, help="Inverse design target sensory tag (e.g. meaty, roasted)")
     parser.add_argument("--minimize", type=str, default=DEFAULTS.default_minimize_tag, help="Inverse design off-flavour tag to minimize (default: beany)")
     parser.add_argument("--xtb", action="store_true", help="Run full GFN2-xTB structural optimizations (SLOW!). Defaults to fast Hammond estimating.")
-    parser.add_argument("--protein-type", choices=["free", "pea_conc", "pea_iso", "soy_conc", "soy_iso", "myco"], default=DEFAULTS.default_protein_type, help="Protein matrix type for accessibility corrections.")
+    parser.add_argument("--protein-type", choices=["free", "pea_conc", "pea_iso", "soy_conc", "soy_iso", "wheat_gluten", "myco"], default=DEFAULTS.default_protein_type, help="Protein matrix type for accessibility corrections.")
     parser.add_argument("--protein-source", type=str, default=None, help="Explicit registry-backed protein source for MEATY multipliers (e.g. pea_isolate, wheat_gluten).")
     parser.add_argument("--denaturation-state", type=float, default=DEFAULTS.default_denaturation_state, help="Protein denaturation level (0.0 to 1.0). Default 0.5.")
     parser.add_argument("--list-precursors", action="store_true", help="List available precursors and exit")

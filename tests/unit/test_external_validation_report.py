@@ -41,3 +41,28 @@ def test_external_validation_markdown_and_json_write(report_payload, tmp_path: P
     assert paths["json"].exists()
     payload = json.loads(paths["json"].read_text(encoding="utf-8"))
     assert payload["summary"]["holdout_benchmark_count"] == report_payload["summary"]["holdout_benchmark_count"]
+
+
+def test_lane_f_failing_compounds_flagged(report_payload):
+    """Lane F (sprint 2026-05-10b): hexanal/nonanal should land in
+    `external_failing_compounds` (mean |log10 error| > 1 dex)."""
+    failing = {
+        str(row["compound"]).strip().lower()
+        for row in report_payload.get("external_failing_compounds", []) or []
+    }
+    assert "hexanal" in failing
+    assert "nonanal" in failing
+    assert report_payload.get("external_failing_threshold_dex", 0.0) > 0.0
+
+
+def test_lane_f_sidecar_is_written(report_payload, tmp_path: Path):
+    paths = write_external_validation_artifact(report_payload, output_dir=tmp_path)
+    assert "failing_sidecar" in paths
+    sidecar = paths["failing_sidecar"]
+    assert sidecar.exists()
+    sidecar_payload = json.loads(sidecar.read_text(encoding="utf-8"))
+    failing = {
+        str(row["compound"]).strip().lower()
+        for row in sidecar_payload.get("external_failing_compounds", []) or []
+    }
+    assert "hexanal" in failing

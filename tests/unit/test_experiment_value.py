@@ -14,6 +14,8 @@ from src.experiment_value import (
     _suggest_template,
     _voi_score,
     build_ranking_payload,
+    filter_by_matrix,
+    infer_matrix_family,
     load_compound_specs,
     lookup_spec,
     rank_experiments,
@@ -127,3 +129,106 @@ def test_rank_experiments_sorted_descending_with_full_payload(tmp_path: Path):
     assert "acrylamide" in md
     paths = write_artifact(out, output_dir=tmp_path, basename="evr_smoke")
     assert paths["json"].exists() and paths["md"].exists()
+
+
+# ---------------------------------------------------------------------------
+# S23 — matrix-family attribution and filtering
+# ---------------------------------------------------------------------------
+
+def test_infer_matrix_family_explicit_protein_type_wins():
+    bench = {"benchmark_id": "some_irrelevant_id", "protein_type": "pea_iso"}
+    assert infer_matrix_family(bench["benchmark_id"], bench) == "pea_iso"
+
+
+def test_infer_matrix_family_id_prefix_for_unattributed_benchmark():
+    # wheat_gluten and SPI HVP benchmarks ship without protein_type today;
+    # the helper must still resolve them via benchmark_id substring matching.
+    assert (
+        infer_matrix_family("wheat_gluten_hvp_xylose_120C_PMC9905368", {})
+        == "wheat_gluten"
+    )
+    assert (
+        infer_matrix_family("spi_hvp_xylose_120C_PMC9905368", {}) == "soy_iso"
+    )
+
+
+def test_infer_matrix_family_free_precursor_and_unknown():
+    assert infer_matrix_family("cys_glucose_150C_Farmer1999", {}) == "free"
+    assert infer_matrix_family("thiamine_thermal_120C", {}) == "free"
+    assert infer_matrix_family("completely_novel_id", {}) == "unknown"
+
+
+def _three_matrix_payload():
+    return {
+        "benchmarks": [
+            {
+                "benchmark_id": "pea_isolate_uht_140C_demo",
+                "protein_type": "pea_iso",
+                "compounds": [
+                    {
+                        "compound": "2-furfurylthiol",
+                        "measured_ppb": 50.0,
+                        "predicted_p5": 1.0,
+                        "predicted_p50": 5.0,
+                        "predicted_p95": 10.0,
+                        "inside_ci": False,
+                        "ci_width_log10": 1.0,
+                    }
+                ],
+            },
+            {
+                "benchmark_id": "wheat_gluten_hvp_xylose_120C_demo",
+                "compounds": [
+                    {
+                        "compound": "methional",
+                        "measured_ppb": 200.0,
+                        "predicted_p5": 1.0,
+                        "predicted_p50": 5.0,
+                        "predicted_p95": 20.0,
+                        "inside_ci": False,
+                        "ci_width_log10": 1.3,
+                    }
+                ],
+            },
+            {
+                "benchmark_id": "cys_glucose_150C_demo",
+                "compounds": [
+                    {
+                        "compound": "hexanal",
+                        "measured_ppb": 30.0,
+                        "predicted_p5": 10.0,
+                        "predicted_p50": 25.0,
+                        "predicted_p95": 80.0,
+                        "inside_ci": True,
+                        "ci_width_log10": 0.9,
+                    }
+                ],
+            },
+        ],
+    }
+
+
+def test_rank_experiments_attaches_matrix_family_and_payload_exposes_it():
+    ranked = rank_experiments(_three_matrix_payload())
+    families = {c.matrix_family for c in ranked}
+    assert families == {"pea_iso", "wheat_gluten", "free"}
+    payload = build_ranking_payload(ranked, matrix_filter=["pea_iso"])
+    assert payload["matrix_filter"] == ["pea_iso"]
+    assert all("matrix_family" in row for row in payload["candidates"])
+    md = render_markdown(payload)
+    assert "Matrix filter:" in md
+    assert "| Matrix |" in md
+
+
+def test_filter_by_matrix_keeps_only_requested_and_renumbers():
+    ranked = rank_experiments(_three_matrix_payload())
+    soy_only = filter_by_matrix(ranked, ["wheat_gluten"])
+    assert len(soy_only) == 1
+    assert soy_only[0].matrix_family == "wheat_gluten"
+    assert soy_only[0].rank == 1
+
+
+def test_filter_by_matrix_empty_filter_returns_all():
+    ranked = rank_experiments(_three_matrix_payload())
+    assert len(filter_by_matrix(ranked, None)) == len(ranked)
+    assert len(filter_by_matrix(ranked, [])) == len(ranked)

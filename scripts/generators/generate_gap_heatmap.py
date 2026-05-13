@@ -58,7 +58,7 @@ def build_grid(payload: dict) -> Tuple[List[str], List[str], np.ndarray, np.ndar
     comp_max: Dict[str, float] = {}
     for cand in candidates:
         b = str(cand["benchmark_id"])
-        c = _short_compound(str(cand["compound"]))
+        c = str(cand["compound"])
         v = float(cand.get("voi_score", 0.0))
         bench_max[b] = max(bench_max.get(b, 0.0), v)
         comp_max[c] = max(comp_max.get(c, 0.0), v)
@@ -72,7 +72,7 @@ def build_grid(payload: dict) -> Tuple[List[str], List[str], np.ndarray, np.ndar
     cidx = {c: i for i, c in enumerate(comp_order)}
     for cand in candidates:
         b = str(cand["benchmark_id"])
-        c = _short_compound(str(cand["compound"]))
+        c = str(cand["compound"])
         i, j = bidx[b], cidx[c]
         voi[i, j] = float(cand.get("voi_score", 0.0))
         if not bool(cand.get("inside_ci", True)):

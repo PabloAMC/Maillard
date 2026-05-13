@@ -9,16 +9,20 @@ import datetime
 import hashlib
 import io
 import json
+import math
 import platform
+import re
 import shlex
 import subprocess
 import sys
 from collections import defaultdict
 from contextlib import redirect_stdout
+from typing import Any, Dict, List, Optional, Sequence, Mapping
+from functools import lru_cache
 from pathlib import Path
 from typing import List, Dict, Any, Optional, Iterable
 
-from src.pipeline import FormulationResult
+from src.pipeline import FormulationResult, UncertaintyEnvelope
 from src.literature_learning_loop import build_literature_learning_loop_payload
 from src.family_lane_sensitivity import build_family_lane_sensitivity_payload
 from src.literature_family_registry import build_family_payload_coverage_artifact, resolve_family_descriptor
@@ -35,6 +39,38 @@ from src.presentation import (
 )
 
 SCHEMA_VERSION = "2026-03-18"
+
+
+def _get_uncertainty_envelope(result: FormulationResult, compound: str) -> Optional[UncertaintyEnvelope]:
+    envelopes = getattr(result, "uncertainty_envelopes", {}) or {}
+    return envelopes.get(compound)
+
+
+def _format_compound_prediction(result: FormulationResult, compound: str, observable_ppb: float) -> str:
+    envelope = _get_uncertainty_envelope(result, compound)
+    if envelope is None:
+        return f"{float(observable_ppb):.3g} ppb"
+    return (
+        f"{float(envelope.predicted_p50):.3g} ppb "
+        f"[{float(envelope.predicted_p5):.3g}-{float(envelope.predicted_p95):.3g}, {int(envelope.ci_level_pct)}% CI]"
+    )
+
+
+def _serialize_uncertainty_envelopes(result: FormulationResult) -> Dict[str, Dict[str, Any]]:
+    envelopes = getattr(result, "uncertainty_envelopes", {}) or {}
+    return {
+        compound: {
+            "compound": envelope.compound,
+            "predicted_ppb": float(envelope.predicted_ppb),
+            "predicted_p5": float(envelope.predicted_p5),
+            "predicted_p50": float(envelope.predicted_p50),
+            "predicted_p95": float(envelope.predicted_p95),
+            "ci_level_pct": int(envelope.ci_level_pct),
+            "support_count": int(envelope.support_count),
+            "envelope_source": str(envelope.envelope_source),
+        }
+        for compound, envelope in envelopes.items()
+    }
 
 
 def _sorted_projection_metadata(result: FormulationResult) -> List[Dict[str, Any]]:
@@ -104,10 +140,44 @@ def _support_origin(meta: Dict[str, Any]) -> str:
     return "standard_matrix_support"
 
 
+def _build_scope_assessment_payload(result: FormulationResult) -> Dict[str, Any]:
+    """Lane E (sprint 2026-05-10b): expose the calibration scope verdict.
+
+    Returns ``{"in_scope": True, ...}`` when the formulation lives inside the
+    calibration convex hull. When out of scope, the payload carries the
+    human-readable reasons and the nearest calibrated (protein_type,
+    process_state) so the report can render a banner and downgrade tiers.
+    """
+    confidence = result.confidence_metadata or {}
+    raw = confidence.get("scope_assessment") or {}
+    if not isinstance(raw, dict):
+        raw = {}
+    in_scope = bool(raw.get("in_scope", True))
+    reasons = list(raw.get("reasons", []))
+    nearest = dict(raw.get("nearest_calibrated", {}))
+    return {
+        "in_scope": in_scope,
+        "reasons": [str(r) for r in reasons],
+        "nearest_calibrated": {str(k): str(v) for k, v in nearest.items()},
+    }
+
+
 def _build_compound_evidence_ladder(result: FormulationResult, *, top_n: int = 8) -> List[Dict[str, Any]]:
+    scope = _build_scope_assessment_payload(result)
+    out_of_scope = not scope["in_scope"]
     ladder_rows: List[Dict[str, Any]] = []
     for meta in _sorted_projection_metadata(result)[:top_n]:
         flags = _evidence_ladder_flags(meta)
+        original_strength = str(meta.get("calibration_evidence_strength", "heuristic"))
+        # Lane E: visible tier label is downgraded one notch when we're outside
+        # the calibration convex hull. The original tier is preserved in
+        # `scope_demoted_from` so the audit trail is intact.
+        if out_of_scope:
+            displayed_strength = _demote_evidence_strength(original_strength)
+            scope_demoted_from: Optional[str] = original_strength if displayed_strength != original_strength else None
+        else:
+            displayed_strength = original_strength
+            scope_demoted_from = None
         ladder_rows.append(
             {
                 "compound": str(meta.get("compound", "unknown")),
@@ -122,11 +192,30 @@ def _build_compound_evidence_ladder(result: FormulationResult, *, top_n: int = 8
                 "decision_panel_source": str(meta.get("decision_panel_source", "")),
                 "support_origin": _support_origin(meta),
                 "calibration_source": str(meta.get("calibration_source", "class_fallback")),
-                "calibration_evidence_strength": str(meta.get("calibration_evidence_strength", "heuristic")),
+                "calibration_evidence_strength": displayed_strength,
                 "calibration_fallback_mode": str(meta.get("calibration_fallback_mode", "class_level")),
+                "scope_demoted_from": scope_demoted_from,
             }
         )
     return ladder_rows
+
+
+_SCOPE_DEMOTION_MAP: Dict[str, str] = {
+    "literature_anchored": "transferred_literature",
+    "conditional_literature_anchored": "transferred_literature",
+    "class_anchored": "surrogate_family",
+    "directional_transferred": "surrogate_family",
+    "transferred_literature": "surrogate_family",
+    "bounded_calibration": "surrogate_family",
+    "surrogate_family": "surrogate_only",
+    "process_state_mismatch": "surrogate_only",
+    "heuristic": "surrogate_only",
+}
+
+
+def _demote_evidence_strength(strength: str) -> str:
+    return _SCOPE_DEMOTION_MAP.get(strength, "surrogate_only")
+
 
 
 def _build_calibration_summary(result: FormulationResult, *, top_n: int = 5) -> List[Dict[str, Any]]:
@@ -431,6 +520,588 @@ def _to_repo_relative(path: Path, root: Path) -> str:
         return str(path)
 
 
+def _normalize_compound_key(name: str) -> str:
+    if not name:
+        return ""
+    stripped = re.sub(r"\([^)]*\)", " ", str(name))
+    return re.sub(r"[^a-z0-9]+", " ", stripped.lower()).strip()
+
+
+def _configure_report_plot_style() -> None:
+    from src.plot_style import configure_science_plot_style
+
+    configure_science_plot_style()
+
+
+@lru_cache(maxsize=4)
+def _load_external_validation_compounds(root_str: str) -> set[str]:
+    path = Path(root_str) / "results" / "validation" / "external_validation_report.json"
+    if not path.exists():
+        return set()
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return set()
+
+    compounds: set[str] = set()
+    for benchmark in payload.get("benchmarks", []) or []:
+        for row in benchmark.get("compounds", []) or []:
+            compound_key = _normalize_compound_key(str(row.get("compound", "")))
+            if compound_key:
+                compounds.add(compound_key)
+    return compounds
+
+
+@lru_cache(maxsize=4)
+def _load_external_failing_compounds(root_str: str) -> set[str]:
+    """Lane F (sprint 2026-05-10b): compounds whose mean |log10 error| exceeds
+    the failing threshold on the external hold-out. Returned as normalized keys.
+    """
+    path = Path(root_str) / "results" / "validation" / "external_failing_compounds.json"
+    if not path.exists():
+        return set()
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return set()
+    compounds: set[str] = set()
+    for row in payload.get("external_failing_compounds", []) or []:
+        key = _normalize_compound_key(str(row.get("compound", "")))
+        if key:
+            compounds.add(key)
+    return compounds
+
+
+def _resolve_plot_evidence_class(meta: Dict[str, Any], *, root: Path) -> str:
+    compound_key = _normalize_compound_key(str(meta.get("compound", "")))
+    # Lane F: external_failing wins over calibration/external/surrogate so the
+    # report is honest about hexanal/nonanal-class over-prediction.
+    if compound_key in _load_external_failing_compounds(str(root)):
+        return "external_failing"
+    flags = _evidence_ladder_flags(meta)
+    if flags.get("direct_anchor", False):
+        return "calibration"
+    if compound_key in _load_external_validation_compounds(str(root)):
+        return "external"
+    return "surrogate"
+
+
+def _build_compound_overlay_rows(
+    result: FormulationResult,
+    *,
+    top_n: int = 8,
+    root: Optional[Path] = None,
+) -> List[Dict[str, Any]]:
+    repo_root = root or _repo_root()
+    confidence_rows = {
+        _normalize_compound_key(str(row.get("compound", ""))): row
+        for row in (result.confidence_metadata or {}).get("compound_confidence", [])
+    }
+
+    rows: List[Dict[str, Any]] = []
+    for meta in _sorted_projection_metadata(result)[:top_n]:
+        compound = str(meta.get("compound", "unknown"))
+        envelope = _get_uncertainty_envelope(result, compound)
+        observable_ppb = float(meta.get("observable_ppb", 0.0) or 0.0)
+        predicted_p50 = float(envelope.predicted_p50) if envelope is not None else observable_ppb
+        predicted_p5 = float(envelope.predicted_p5) if envelope is not None else predicted_p50
+        predicted_p95 = float(envelope.predicted_p95) if envelope is not None else predicted_p50
+        if predicted_p50 <= 0.0:
+            continue
+        confidence_row = confidence_rows.get(_normalize_compound_key(compound), {})
+        rows.append(
+            {
+                "compound": compound,
+                "predicted_p5": predicted_p5,
+                "predicted_p50": predicted_p50,
+                "predicted_p95": predicted_p95,
+                "tier": str(confidence_row.get("tier", "unknown")),
+                "evidence_class": _resolve_plot_evidence_class(meta, root=repo_root),
+            }
+        )
+
+    if rows:
+        return rows
+
+    for compound, envelope in sorted(
+        (getattr(result, "uncertainty_envelopes", {}) or {}).items(),
+        key=lambda item: float(item[1].predicted_p50),
+        reverse=True,
+    )[:top_n]:
+        rows.append(
+            {
+                "compound": compound,
+                "predicted_p5": float(envelope.predicted_p5),
+                "predicted_p50": float(envelope.predicted_p50),
+                "predicted_p95": float(envelope.predicted_p95),
+                "tier": "unknown",
+                "evidence_class": "external_failing"
+                if _normalize_compound_key(compound) in _load_external_failing_compounds(str(repo_root))
+                else (
+                    "external"
+                    if _normalize_compound_key(compound) in _load_external_validation_compounds(str(repo_root))
+                    else "surrogate"
+                ),
+            }
+        )
+    return rows
+
+
+def _write_compound_confidence_overlay(
+    result: FormulationResult,
+    *,
+    output_dir: Path,
+    root: Optional[Path] = None,
+) -> Optional[Path]:
+    if not (getattr(result, "uncertainty_envelopes", {}) or {}):
+        return None
+
+    rows = _build_compound_overlay_rows(result, root=root)
+    if not rows:
+        return None
+
+    import matplotlib
+
+    matplotlib.use("Agg")
+    _configure_report_plot_style()
+
+    import matplotlib.pyplot as plt
+    from matplotlib.patches import Patch
+
+    palette = {
+        "calibration": "#2f855a",
+        "external": "#d97706",
+        "external_failing": "#dc2626",
+        "surrogate": "#4b5563",
+    }
+    rows = list(reversed(rows))
+    fig, ax = plt.subplots(figsize=(8.4, max(3.5, 0.65 * len(rows) + 1.6)))
+
+    min_x = min(max(float(row["predicted_p5"]), 1.0e-6) for row in rows)
+    max_x = max(max(float(row["predicted_p95"]), float(row["predicted_p50"])) for row in rows)
+
+    for idx, row in enumerate(rows):
+        color = palette.get(str(row.get("evidence_class", "surrogate")), palette["surrogate"])
+        p5 = float(row["predicted_p5"])
+        p50 = float(row["predicted_p50"])
+        p95 = float(row["predicted_p95"])
+        lower = max(p50 - p5, 0.0)
+        upper = max(p95 - p50, 0.0)
+        ax.errorbar(
+            p50,
+            idx,
+            xerr=[[lower], [upper]],
+            fmt="o",
+            color=color,
+            ecolor=color,
+            capsize=3,
+            elinewidth=1.8,
+            markersize=6,
+        )
+        ax.text(max(p95, p50) * 1.08, idx, str(row.get("tier", "unknown")).upper(), va="center", fontsize=8)
+
+    ax.set_xscale("log")
+    ax.set_xlim(min_x * 0.8, max_x * 1.6)
+    ax.set_yticks(list(range(len(rows))))
+    ax.set_yticklabels([str(row["compound"]) for row in rows])
+    ax.set_xlabel("Predicted observable ppb (P50 with 90% CI)")
+    ax.set_title(f"Compound Confidence Overlay: {result.name}")
+    ax.grid(True, axis="x", alpha=0.25)
+    ax.legend(
+        handles=[
+            Patch(facecolor=color, edgecolor=color, label=label.title())
+            for label, color in palette.items()
+        ],
+        loc="lower right",
+        frameon=True,
+    )
+    fig.tight_layout()
+
+    output_path = output_dir / "compound_confidence_overlay.png"
+    fig.savefig(output_path, dpi=220, bbox_inches="tight")
+    plt.close(fig)
+    return output_path
+
+
+def _format_intervention_class_label(raw_value: str) -> str:
+    normalized = str(raw_value or "other").strip().lower()
+    aliases = {
+        "sulfur": "Sulfur / Thiols",
+        "aldehyde": "Aldehydes",
+        "alcohol": "Alcohols",
+        "furan": "Furans",
+        "pyrazine": "Pyrazines",
+        "severity_markers": "Severity Markers",
+        "adverse_lipid_markers": "Adverse Lipid Markers",
+    }
+    return aliases.get(normalized, normalized.replace("_", " ").title())
+
+
+def _aggregate_intervention_class_totals(result: FormulationResult) -> Dict[str, float]:
+    totals: Dict[str, float] = defaultdict(float)
+    for meta in _sorted_projection_metadata(result):
+        compound = str(meta.get("compound", "unknown"))
+        envelope = _get_uncertainty_envelope(result, compound)
+        signal_ppb = float(envelope.predicted_p50) if envelope is not None else float(meta.get("observable_ppb", 0.0) or 0.0)
+        if signal_ppb <= 0.0:
+            continue
+        class_key = str(meta.get("volatile_class") or meta.get("target_class") or "other")
+        totals[class_key] += signal_ppb
+    return dict(totals)
+
+
+def _normalize_precursor_key(name: str) -> str:
+    return re.sub(r"[^a-z0-9]+", " ", str(name or "").lower()).strip()
+
+
+def _extract_precursor_ratios(formulation_inputs: Optional[Mapping[str, Any]]) -> Dict[str, Dict[str, Any]]:
+    if not isinstance(formulation_inputs, Mapping):
+        return {}
+
+    extracted: Dict[str, Dict[str, Any]] = {}
+    raw_ratios = formulation_inputs.get("molar_ratios", {}) or {}
+    if isinstance(raw_ratios, Mapping):
+        for raw_name, raw_ratio in raw_ratios.items():
+            key = _normalize_precursor_key(str(raw_name))
+            if not key:
+                continue
+            try:
+                ratio = float(raw_ratio)
+            except (TypeError, ValueError):
+                continue
+            extracted[key] = {"precursor": str(raw_name), "ratio": ratio}
+
+    for family_key in ("sugars", "amino_acids", "additives", "lipids"):
+        values = formulation_inputs.get(family_key, ()) or ()
+        if isinstance(values, str):
+            values = [values]
+        for raw_name in values:
+            key = _normalize_precursor_key(str(raw_name))
+            if not key or key in extracted:
+                continue
+            extracted[key] = {"precursor": str(raw_name), "ratio": 1.0}
+    return extracted
+
+
+def _build_intervention_compound_rows(result: FormulationResult) -> Dict[str, Dict[str, Any]]:
+    rows: Dict[str, Dict[str, Any]] = {}
+    for meta in _sorted_projection_metadata(result):
+        compound = str(meta.get("compound", "unknown"))
+        key = _normalize_compound_key(compound)
+        if not key:
+            continue
+        envelope = _get_uncertainty_envelope(result, compound)
+        predicted_p50 = float(envelope.predicted_p50) if envelope is not None else float(meta.get("observable_ppb", 0.0) or 0.0)
+        rows[key] = {
+            "compound": compound,
+            "volatile_class": str(meta.get("volatile_class") or meta.get("target_class") or "other"),
+            "predicted_p50": predicted_p50,
+        }
+
+    if rows:
+        return rows
+
+    for compound, envelope in (getattr(result, "uncertainty_envelopes", {}) or {}).items():
+        key = _normalize_compound_key(compound)
+        if not key:
+            continue
+        rows[key] = {
+            "compound": str(compound),
+            "volatile_class": "other",
+            "predicted_p50": float(envelope.predicted_p50),
+        }
+    return rows
+
+
+def _build_precursor_intervention_summary(
+    current: FormulationResult,
+    baseline: FormulationResult,
+    *,
+    current_inputs: Optional[Mapping[str, Any]] = None,
+    baseline_inputs: Optional[Mapping[str, Any]] = None,
+) -> Optional[Dict[str, Any]]:
+    current_precursors = _extract_precursor_ratios(current_inputs)
+    baseline_precursors = _extract_precursor_ratios(baseline_inputs)
+    changed_precursors: List[Dict[str, Any]] = []
+
+    for precursor_key in sorted(set(current_precursors) | set(baseline_precursors)):
+        baseline_row = baseline_precursors.get(precursor_key, {})
+        current_row = current_precursors.get(precursor_key, {})
+        baseline_ratio = float(baseline_row.get("ratio", 0.0) or 0.0)
+        current_ratio = float(current_row.get("ratio", 0.0) or 0.0)
+        if math.isclose(baseline_ratio, current_ratio, rel_tol=1e-9, abs_tol=1e-9):
+            continue
+        changed_precursors.append(
+            {
+                "precursor": str(current_row.get("precursor") or baseline_row.get("precursor") or precursor_key),
+                "baseline_ratio": baseline_ratio,
+                "current_ratio": current_ratio,
+                "delta_ratio": current_ratio - baseline_ratio,
+            }
+        )
+
+    if not changed_precursors:
+        return None
+
+    current_compounds = _build_intervention_compound_rows(current)
+    baseline_compounds = _build_intervention_compound_rows(baseline)
+    compound_rows: List[Dict[str, Any]] = []
+    precursor_totals: Dict[str, Dict[str, Any]] = {
+        row["precursor"]: {
+            **dict(row),
+            "attributed_delta_ppb": 0.0,
+            "compound_count": 0,
+            "top_compounds": [],
+        }
+        for row in changed_precursors
+    }
+
+    if len(changed_precursors) == 1:
+        weighted_precursors = [(changed_precursors[0], 1.0)]
+        attribution_mode = "single_changed_precursor"
+    else:
+        total_shift = sum(abs(float(row["delta_ratio"])) for row in changed_precursors)
+        if total_shift <= 0.0:
+            return None
+        weighted_precursors = [
+            (row, abs(float(row["delta_ratio"])) / total_shift)
+            for row in changed_precursors
+        ]
+        attribution_mode = "proportional_ratio_shift"
+
+    for compound_key in sorted(set(current_compounds) | set(baseline_compounds)):
+        baseline_row = baseline_compounds.get(compound_key, {})
+        current_row = current_compounds.get(compound_key, {})
+        baseline_ppb = float(baseline_row.get("predicted_p50", 0.0) or 0.0)
+        current_ppb = float(current_row.get("predicted_p50", 0.0) or 0.0)
+        delta_ppb = current_ppb - baseline_ppb
+        if math.isclose(delta_ppb, 0.0, rel_tol=1e-9, abs_tol=1e-9):
+            continue
+        compound_name = str(current_row.get("compound") or baseline_row.get("compound") or compound_key)
+        volatile_class = str(current_row.get("volatile_class") or baseline_row.get("volatile_class") or "other")
+
+        for precursor_row, attribution_weight in weighted_precursors:
+            attributed_delta_ppb = delta_ppb * attribution_weight
+            compound_rows.append(
+                {
+                    "precursor": str(precursor_row["precursor"]),
+                    "compound": compound_name,
+                    "volatile_class": volatile_class,
+                    "baseline_ppb": baseline_ppb,
+                    "current_ppb": current_ppb,
+                    "delta_ppb": delta_ppb,
+                    "attribution_weight": attribution_weight,
+                    "attributed_delta_ppb": attributed_delta_ppb,
+                }
+            )
+            precursor_total = precursor_totals[str(precursor_row["precursor"])]
+            precursor_total["attributed_delta_ppb"] += attributed_delta_ppb
+            precursor_total["compound_count"] += 1
+            precursor_total["top_compounds"].append(
+                {
+                    "compound": compound_name,
+                    "attributed_delta_ppb": attributed_delta_ppb,
+                }
+            )
+
+    if not compound_rows:
+        return None
+
+    compound_rows.sort(key=lambda row: abs(float(row["attributed_delta_ppb"])), reverse=True)
+    precursor_summary_rows: List[Dict[str, Any]] = []
+    for row in changed_precursors:
+        precursor_name = str(row["precursor"])
+        total_row = precursor_totals[precursor_name]
+        top_compounds = sorted(
+            list(total_row["top_compounds"]),
+            key=lambda item: abs(float(item["attributed_delta_ppb"])),
+            reverse=True,
+        )[:3]
+        precursor_summary_rows.append(
+            {
+                **dict(row),
+                "attributed_delta_ppb": float(total_row["attributed_delta_ppb"]),
+                "compound_count": int(total_row["compound_count"]),
+                "top_compounds": top_compounds,
+            }
+        )
+
+    total_compound_delta = sum(
+        float(current_compounds.get(key, {}).get("predicted_p50", 0.0) or 0.0)
+        - float(baseline_compounds.get(key, {}).get("predicted_p50", 0.0) or 0.0)
+        for key in set(current_compounds) | set(baseline_compounds)
+    )
+
+    return {
+        "attribution_mode": attribution_mode,
+        "changed_precursors": changed_precursors,
+        "precursor_totals": precursor_summary_rows,
+        "rows": compound_rows,
+        "total_compound_delta_ppb": float(total_compound_delta),
+        "attributed_total_ppb": float(sum(float(row["attributed_delta_ppb"]) for row in compound_rows)),
+    }
+
+
+def _build_intervention_waterfall_summary(
+    current: FormulationResult,
+    baseline: FormulationResult,
+    *,
+    current_inputs: Optional[Mapping[str, Any]] = None,
+    baseline_inputs: Optional[Mapping[str, Any]] = None,
+    max_steps: int = 6,
+) -> Optional[Dict[str, Any]]:
+    current_totals = _aggregate_intervention_class_totals(current)
+    baseline_totals = _aggregate_intervention_class_totals(baseline)
+    step_rows: List[Dict[str, Any]] = []
+
+    for class_key in sorted(set(current_totals) | set(baseline_totals)):
+        baseline_ppb = float(baseline_totals.get(class_key, 0.0))
+        current_ppb = float(current_totals.get(class_key, 0.0))
+        delta_ppb = current_ppb - baseline_ppb
+        if abs(delta_ppb) < 1.0e-9:
+            continue
+        step_rows.append(
+            {
+                "class_key": class_key,
+                "display_name": _format_intervention_class_label(class_key),
+                "baseline_ppb": baseline_ppb,
+                "current_ppb": current_ppb,
+                "delta_ppb": delta_ppb,
+                "delta_pct": None if baseline_ppb <= 0.0 else (100.0 * delta_ppb / baseline_ppb),
+            }
+        )
+
+    if not step_rows:
+        return None
+
+    step_rows.sort(key=lambda row: abs(float(row["delta_ppb"])), reverse=True)
+    if len(step_rows) > max_steps:
+        kept_rows = step_rows[: max_steps - 1]
+        remainder_rows = step_rows[max_steps - 1 :]
+        remainder_baseline = sum(float(row["baseline_ppb"]) for row in remainder_rows)
+        remainder_current = sum(float(row["current_ppb"]) for row in remainder_rows)
+        remainder_delta = remainder_current - remainder_baseline
+        kept_rows.append(
+            {
+                "class_key": "other",
+                "display_name": "Other",
+                "baseline_ppb": remainder_baseline,
+                "current_ppb": remainder_current,
+                "delta_ppb": remainder_delta,
+                "delta_pct": None if remainder_baseline <= 0.0 else (100.0 * remainder_delta / remainder_baseline),
+            }
+        )
+        step_rows = kept_rows
+
+    return {
+        "baseline_name": baseline.name,
+        "current_name": current.name,
+        "baseline_total_ppb": sum(float(value) for value in baseline_totals.values()),
+        "current_total_ppb": sum(float(value) for value in current_totals.values()),
+        "steps": step_rows,
+        "precursor_attribution": _build_precursor_intervention_summary(
+            current,
+            baseline,
+            current_inputs=current_inputs,
+            baseline_inputs=baseline_inputs,
+        ),
+    }
+
+
+def _write_intervention_waterfall(
+    summary: Mapping[str, Any],
+    *,
+    output_dir: Path,
+    filename: str,
+) -> Path:
+    import matplotlib
+
+    matplotlib.use("Agg")
+    _configure_report_plot_style()
+
+    import matplotlib.pyplot as plt
+
+    steps = list(summary.get("steps", []) or [])
+    baseline_total = float(summary.get("baseline_total_ppb", 0.0) or 0.0)
+    current_total = float(summary.get("current_total_ppb", 0.0) or 0.0)
+    labels = [str(summary.get("baseline_name", "Baseline"))] + [str(step.get("display_name", "unknown")) for step in steps] + [str(summary.get("current_name", "Current"))]
+
+    bottoms = [0.0]
+    heights = [baseline_total]
+    colors = ["#6b7280"]
+    annotations = [f"{baseline_total:.2f} ppb"]
+    cumulative = baseline_total
+
+    for step in steps:
+        delta_ppb = float(step.get("delta_ppb", 0.0) or 0.0)
+        next_total = cumulative + delta_ppb
+        bottoms.append(min(cumulative, next_total))
+        heights.append(abs(delta_ppb))
+        colors.append("#2f855a" if delta_ppb >= 0.0 else "#c53030")
+        delta_pct = step.get("delta_pct")
+        pct_label = "" if delta_pct is None else f" ({float(delta_pct):+.0f}%)"
+        annotations.append(f"{delta_ppb:+.2f} ppb{pct_label}")
+        cumulative = next_total
+
+    bottoms.append(0.0)
+    heights.append(current_total)
+    colors.append("#1f2937")
+    annotations.append(f"{current_total:.2f} ppb")
+
+    fig, ax = plt.subplots(figsize=(max(7.5, 1.15 * len(labels)), 4.6))
+    max_height = max([baseline_total, current_total] + [abs(float(step.get("delta_ppb", 0.0) or 0.0)) for step in steps] + [1.0])
+    for idx, (bottom, height, color, annotation) in enumerate(zip(bottoms, heights, colors, annotations)):
+        ax.bar(idx, height, bottom=bottom, color=color, width=0.72)
+        ax.text(idx, bottom + height + (0.04 * max_height), annotation, ha="center", va="bottom", fontsize=8)
+
+    ax.set_xticks(list(range(len(labels))))
+    ax.set_xticklabels(labels, rotation=22, ha="right")
+    ax.set_ylabel("Observable ppb contribution")
+    ax.set_title(f"Intervention Waterfall: {summary.get('baseline_name', 'Baseline')} -> {summary.get('current_name', 'Current')}")
+    ax.grid(True, axis="y", alpha=0.25)
+    fig.tight_layout()
+
+    output_path = output_dir / filename
+    fig.savefig(output_path, dpi=220, bbox_inches="tight")
+    plt.close(fig)
+    return output_path
+
+
+def load_report_result(report_json_path: Path | str) -> FormulationResult:
+    payload = json.loads(Path(report_json_path).read_text(encoding="utf-8"))
+    results = dict(payload.get("results", {}) or {})
+    uncertainty_envelopes = {
+        compound: UncertaintyEnvelope(**dict(row))
+        for compound, row in dict(results.get("uncertainty_envelopes", {}) or {}).items()
+    }
+    return FormulationResult(
+        name=str(results.get("name", Path(report_json_path).stem)),
+        target_score=float(results.get("target_score", 0.0) or 0.0),
+        off_flavour_risk=float(results.get("off_flavour_risk", 0.0) or 0.0),
+        safety_score=float(results.get("safety_score", 0.0) or 0.0),
+        lysine_budget=float(results.get("lysine_budget", 0.0) or 0.0),
+        trapping_efficiency=float(results.get("trapping_efficiency", 0.0) or 0.0),
+        mft_to_furfural_ratio=float(results.get("mft_to_furfural_ratio", 0.0) or 0.0),
+        meaty_quality_penalty=float(results.get("meaty_quality_penalty", 0.0) or 0.0),
+        strecker_balance_score=float(results.get("strecker_balance_score", 0.0) or 0.0),
+        strecker_gap_penalty=float(results.get("strecker_gap_penalty", 0.0) or 0.0),
+        pyrazine_propensity=float(results.get("pyrazine_propensity", 0.0) or 0.0),
+        pyrazine_burden=float(results.get("pyrazine_burden", 0.0) or 0.0),
+        pyrazine_penalty=float(results.get("pyrazine_penalty", 0.0) or 0.0),
+        furanone_penalty=float(results.get("furanone_penalty", 0.0) or 0.0),
+        flagged_toxics=list(results.get("flagged_toxics", []) or []),
+        radar=dict(results.get("radar", {}) or {}),
+        predicted_ppb={str(key): float(value) for key, value in dict(results.get("predicted_ppb", {}) or {}).items()},
+        uncertainty_envelopes=uncertainty_envelopes,
+        projection_metadata=dict(results.get("projection_metadata", {}) or {}),
+        matrix_explainability=dict(results.get("matrix_explainability", {}) or {}),
+        confidence_metadata=dict(results.get("confidence_metadata", {}) or {}),
+        flavor_axis_summary=dict(results.get("flavor_axis_summary", {}) or {}),
+        detected_targets=list(results.get("detected_targets", []) or []),
+        detected_minimize=list(results.get("detected_minimize", []) or []),
+    )
+
+
 def _safe_git_output(root: Path, args: List[str]) -> Optional[str]:
     try:
         completed = subprocess.run(
@@ -577,12 +1248,281 @@ def _build_literature_learning_loop_summary(root: Optional[Path] = None) -> Dict
     return dict(payload.get("summary", {}))
 
 
+def _render_glossary_markdown() -> str:
+    """Plain-language glossary footer for scientist-facing reports.
+
+    Keeps a single source of truth for the evidence-tier vocabulary that appears
+    inline in `report.md` and `comparison.md`, so a reader of the markdown alone
+    never has to leave the file to decode a label.
+    """
+    return (
+        "## 6. Glossary\n"
+        "Plain-language meaning of the labels used above. The model is honest about *how* it knows what it claims; this section names that vocabulary.\n\n"
+        "**Scope banner.** A `⚠️ Out of calibration scope` banner at the top of the report means the matrix or process you asked about lies outside the convex hull of formulations the model has been calibrated against. The predictions are still emitted, but every compound's evidence tier is demoted one notch.\n\n"
+        "**Evidence tiers** (strongest to weakest):\n"
+        "- `bounded_calibration` — the prediction sits inside a benchmark we matched compound-for-compound; the residual is bounded by literature data on a directly comparable system.\n"
+        "- `transferred_literature` — the prediction is anchored by published kinetics or partition data from an adjacent system, transferred to your formulation under explicit assumptions.\n"
+        "- `surrogate_family` — no direct anchor; the prediction inherits a family-level prior (same reaction class, related precursor or matrix). Treat as directional, not quantitative.\n"
+        "- `surrogate_only` — the weakest tier. The prediction is a structural plausibility, not a measurement-backed estimate. Use for ranking, not for absolute concentration claims.\n"
+        "- `external_failing` — the compound is on the lipid-oxidation external hold-out where the frozen model is currently outside the 90 % CI (median > 1.0 dex error). Render in red; do not act on absolute ppb until a matrix-specific anchor lands.\n"
+        "- `xtb_derived` — barrier prior comes from a GFN2-xTB pathfinder that has not been promoted to a DFT anchor. Pathfinder, not authority.\n\n"
+        "**Confidence envelope.** `0.038 ppb [0.012-0.089, 90% CI]` means the p50 (median) Monte-Carlo prediction is `0.038 ppb`, with the central 90 % of samples between `0.012` and `0.089 ppb`. Wider envelopes signal weaker tiers.\n\n"
+        "**Intervention waterfall.** When two formulations are compared, the per-compound delta is decomposed into class-level (e.g. \"thiols\", \"aldehydes\") and per-precursor (e.g. \"cysteine\", \"glutathione\") contributions. Per-precursor attribution sums to the compound delta and is explicit about attribution mode.\n\n"
+        "Full machine-readable trust artifacts: `results/validation/`. Per-compound 90 % envelope: `results/validation/prediction_uncertainty.md`. External hold-out: `results/validation/external_validation_report.md`.\n\n"
+    )
+
+
+def _render_next_experiment_markdown(
+    *,
+    ranking_path: Optional[Path] = None,
+    prediction_path: Optional[Path] = None,
+    top_n: int = 3,
+    matrix_filter: Optional[Sequence[str]] = None,
+) -> str:
+    """Top-N value-of-information experiment recommendations.
+
+    Sourced from `results/validation/experiment_value_ranking.json` when
+    available, otherwise re-ranked on the fly via `src.experiment_value`. Emits
+    a graceful stub when neither source is available — never raises.
+
+    When ``matrix_filter`` is supplied, the table is restricted to candidates
+    whose inferred ``matrix_family`` falls in the filter set. If no candidate
+    matches, we fall back to the global top-N with an explicit one-line note
+    so the scientist still sees actionable rows.
+    """
+    repo_root = _repo_root()
+    default_ranking = repo_root / "results" / "validation" / "experiment_value_ranking.json"
+    default_prediction = repo_root / "results" / "validation" / "prediction_uncertainty.json"
+    ranking_path = Path(ranking_path) if ranking_path else default_ranking
+    prediction_path = Path(prediction_path) if prediction_path else default_prediction
+
+    payload: Optional[Dict[str, Any]] = None
+    source_label = ""
+
+    def _display(p: Path) -> str:
+        try:
+            return str(p.relative_to(repo_root))
+        except ValueError:
+            return str(p)
+
+    if ranking_path.exists():
+        try:
+            payload = json.loads(ranking_path.read_text(encoding="utf-8"))
+            source_label = _display(ranking_path)
+        except (OSError, ValueError):
+            payload = None
+
+    if payload is None and prediction_path.exists():
+        try:
+            from src.experiment_value import (
+                build_ranking_payload,
+                load_prediction_payload,
+                rank_experiments,
+            )
+
+            prediction_payload = load_prediction_payload(prediction_path)
+            candidates = rank_experiments(prediction_payload, top_n=None)
+            payload = build_ranking_payload(candidates, source_path=prediction_path)
+            source_label = f"{_display(prediction_path)} (re-ranked at report time)"
+        except Exception:
+            payload = None
+
+    header = "## 7. Recommended next experiment\n"
+    how_to = (
+        "_How to use this: run `./scripts/docker_maillard.sh next-experiment --top "
+        f"{top_n}` to materialise pre-filled intake YAMLs and protocol Markdown "
+        "for each row. Ingest the resulting measurement via "
+        "`./scripts/docker_maillard.sh ingest --file results.csv ...`._\n\n"
+    )
+
+    if payload is None:
+        return (
+            header
+            + "_No value-of-information ranking is available yet. Generate one with_ "
+            "`./scripts/docker_maillard.sh experiment-value-ranking` _(requires "
+            "`results/validation/prediction_uncertainty.json`)._\n\n"
+        )
+
+    candidates = list(payload.get("candidates", []) or [])
+    matrix_note = ""
+    wanted = (
+        {str(m).strip().lower() for m in matrix_filter if str(m).strip()}
+        if matrix_filter
+        else set()
+    )
+    if wanted:
+        scoped = [
+            c for c in candidates
+            if str(c.get("matrix_family", "unknown")).lower() in wanted
+        ]
+        if scoped:
+            candidates = scoped
+            matrix_note = (
+                f"Scoped to matrix `{', '.join(sorted(wanted))}` (filtered from the global ranking).\n\n"
+            )
+        else:
+            matrix_note = (
+                f"_No `{', '.join(sorted(wanted))}` candidates currently above the VoI floor; "
+                "showing the global top-N instead._\n\n"
+            )
+    candidates = candidates[: max(int(top_n), 0)]
+    if not candidates:
+        return (
+            header
+            + "_The current model has no candidate (benchmark, compound) pairs above "
+            "the value-of-information floor. The trust loop is closed for now._\n\n"
+        )
+
+    lines = [
+        header,
+        "Ranked by value-of-information (envelope miss × CI width × ODT-anchored decision relevance). "
+        f"Source: `{source_label}`.\n\n",
+    ]
+    if matrix_note:
+        lines.append(matrix_note)
+    lines.extend([
+        "| Rank | VoI | Benchmark | Matrix | Compound | DoE template | Why this one |\n",
+        "| ---: | ---: | --- | --- | --- | --- | --- |\n",
+    ])
+    for cand in candidates:
+        rationale = str(cand.get("rationale", "")).replace("|", "\\|").strip()
+        if len(rationale) > 220:
+            rationale = rationale[:217].rstrip() + "..."
+        lines.append(
+            f"| {cand.get('rank')} | {float(cand.get('voi_score', 0.0)):.2f} | "
+            f"`{cand.get('benchmark_id')}` | `{cand.get('matrix_family', 'unknown')}` | "
+            f"{cand.get('compound')} | "
+            f"`{cand.get('suggested_doe_template')}` | {rationale} |\n"
+        )
+    lines.append("\n")
+    lines.append(how_to)
+    return "".join(lines)
+
+
+def _format_oav(value: Optional[float]) -> str:
+    if value is None:
+        return "n/a"
+    if value <= 0.0:
+        return "0"
+    if value >= 100.0:
+        return f"{value:.0f}"
+    if value >= 10.0:
+        return f"{value:.1f}"
+    if value >= 1.0:
+        return f"{value:.2f}"
+    if value >= 0.01:
+        return f"{value:.3f}"
+    return f"{value:.2e}"
+
+
+def _render_sensory_readout_markdown(
+    result: FormulationResult,
+    *,
+    heading: str = "## 8. Sensory readout",
+) -> str:
+    """`## 8. Sensory readout` — per-axis OAV summary + per-compound table.
+
+    OAV = predicted_ppb / odour_threshold_ug_per_kg using curated thresholds
+    from ``data/species/{desirable_targets,off_flavour_targets}.yml``. Rows
+    inherit the kernel's 90 % CI envelope (``predicted_p5/p50/p95``). Compounds
+    without a curated ODT are surfaced but excluded from axis roll-ups.
+    Never raises — falls back to a one-line stub on any internal error.
+
+    Pass a different ``heading`` (e.g. ``"### Soy iso 1.0% — sensory readout"``)
+    when embedding inside a comparison report so the heading hierarchy stays
+    sane.
+    """
+    header = heading.rstrip() + "\n"
+    explanation = (
+        "Per-compound odour activity value (OAV = predicted ppb ÷ curated odour threshold). "
+        "An axis is *above threshold* when at least one of its compounds reaches OAV ≥ 1. "
+        "Compounds without a curated odour threshold are listed but excluded from axis roll-ups. "
+        "Source thresholds: `data/species/desirable_targets.yml`, `data/species/off_flavour_targets.yml`.\n\n"
+    )
+    try:
+        from src.sensory_readout import (
+            AXIS_MEATY,
+            AXIS_OFF_NOTE,
+            AXIS_SAFETY,
+            build_sensory_readout,
+        )
+
+        readout = build_sensory_readout(result)
+    except Exception as exc:  # pragma: no cover - defensive
+        return (
+            header
+            + f"_Sensory readout unavailable for this run ({exc.__class__.__name__})._\n\n"
+        )
+
+    if not readout.per_compound:
+        return (
+            header
+            + "_FormulationResult has no predicted ppb — nothing to score._\n\n"
+        )
+
+    lines: List[str] = [header, explanation]
+    lines.append(f"**Headline:** {readout.headline}.\n\n")
+
+    lines.append("### Axis roll-up\n")
+    lines.append("| Axis | Compounds (with ODT) | Above threshold | Max OAV | Top contributor |\n")
+    lines.append("| --- | ---: | ---: | ---: | --- |\n")
+    axis_labels = {
+        AXIS_MEATY: "meaty",
+        AXIS_OFF_NOTE: "off-note",
+        AXIS_SAFETY: "safety",
+    }
+    for axis_key, label in axis_labels.items():
+        rollup = readout.axes.get(axis_key)
+        if rollup is None or rollup.compounds_with_odt == 0:
+            lines.append(
+                f"| {label} | 0 | 0 | n/a | _no compound with curated ODT in this run_ |\n"
+            )
+            continue
+        lines.append(
+            f"| {label} | {rollup.compounds_with_odt} | "
+            f"{rollup.above_threshold_count} | {_format_oav(rollup.max_oav)} | "
+            f"{rollup.top_contributor or '-'} |\n"
+        )
+    lines.append("\n")
+
+    lines.append("### Per-compound OAV (90 % CI)\n")
+    lines.append("| Compound | Axis | ODT (μg/kg) | Predicted ppb (p50) | OAV (p50) | OAV p5 | OAV p95 | ≥1? |\n")
+    lines.append("| --- | --- | ---: | ---: | ---: | ---: | ---: | :---: |\n")
+    sorted_rows = sorted(
+        readout.per_compound,
+        key=lambda r: (r.oav is None, -(r.oav or 0.0)),
+    )
+    for row in sorted_rows:
+        odt_str = (
+            f"{row.odour_threshold_ug_per_kg:.4g}"
+            if row.odour_threshold_ug_per_kg is not None
+            else "n/a"
+        )
+        ppb_basis = row.predicted_p50 if row.predicted_p50 is not None else row.predicted_ppb
+        ppb_str = f"{ppb_basis:.3g}" if ppb_basis is not None else "n/a"
+        flag = "✅" if row.above_threshold else ("·" if row.oav is not None else "—")
+        lines.append(
+            f"| {row.compound} | {row.axis} | {odt_str} | {ppb_str} | "
+            f"{_format_oav(row.oav)} | {_format_oav(row.oav_p5)} | "
+            f"{_format_oav(row.oav_p95)} | {flag} |\n"
+        )
+    lines.append("\n")
+
+    for note in readout.notes:
+        lines.append(f"_{note}_\n")
+    if readout.notes:
+        lines.append("\n")
+
+    return "".join(lines)
+
+
 def generate_report(
     result: FormulationResult, 
     warnings: List[DomainWarning], 
     conditions_dict: Dict[str, Any],
     output_dir: Optional[Path] = None,
     campaign_metadata: Optional[Dict[str, Any]] = None,
+    baseline_result: Optional[FormulationResult] = None,
 ) -> Path:
     """
     Generates a consolidated report (JSON + MD) for a formulation result.
@@ -612,6 +1552,21 @@ def generate_report(
     family_runtime_support_summary = _build_family_runtime_support_summary(result)
     family_specific_open_gaps = _build_family_specific_open_gaps(result)
     family_lane_sensitivity = build_family_lane_sensitivity_payload(result.flavor_axis_summary or {})
+    generated_assets: Dict[str, str] = {}
+    compound_overlay_path = _write_compound_confidence_overlay(result, output_dir=output_dir, root=_repo_root())
+    if compound_overlay_path is not None:
+        generated_assets["compound_confidence_overlay_png"] = str(compound_overlay_path)
+    intervention_waterfall = None
+    intervention_waterfall_path = None
+    if baseline_result is not None:
+        intervention_waterfall = _build_intervention_waterfall_summary(result, baseline_result)
+        if intervention_waterfall is not None:
+            intervention_waterfall_path = _write_intervention_waterfall(
+                intervention_waterfall,
+                output_dir=output_dir,
+                filename="intervention_waterfall.png",
+            )
+            generated_assets["intervention_waterfall_png"] = str(intervention_waterfall_path)
     
     # 1. Save JSON Report
     json_path = output_dir / "report.json"
@@ -639,6 +1594,7 @@ def generate_report(
             "radar": {k: float(v[0]) for k, v in result.radar.items()},
             "matrix_explainability": result.matrix_explainability,
             "confidence_metadata": result.confidence_metadata,
+            "scope_assessment": _build_scope_assessment_payload(result),
             "compound_evidence_ladder": compound_evidence_ladder,
             "calibration_summary": calibration_summary,
             "missing_data_summary": missing_data_summary,
@@ -652,6 +1608,14 @@ def generate_report(
             "family_specific_open_gaps": family_specific_open_gaps,
             "family_lane_sensitivity": family_lane_sensitivity,
             "projection_metadata": dict(result.projection_metadata),
+            "uncertainty_envelopes": _serialize_uncertainty_envelopes(result),
+            "generated_assets": generated_assets,
+            "intervention_waterfall": {
+                **dict(intervention_waterfall),
+                "png": str(intervention_waterfall_path),
+            }
+            if intervention_waterfall is not None and intervention_waterfall_path is not None
+            else None,
             "flavor_axis_summary": result.flavor_axis_summary,
             "predicted_ppb": {k: float(v) for k, v in result.predicted_ppb.items()},
             "detected_targets": result.detected_targets,
@@ -671,7 +1635,19 @@ def generate_report(
     with open(md_path, "w") as f:
         f.write(f"# Maillard Simulation Report - {result.name}\n\n")
         f.write(f"**Date:** {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
-        
+
+        scope_payload = _build_scope_assessment_payload(result)
+        if not scope_payload["in_scope"]:
+            nearest = scope_payload.get("nearest_calibrated", {}) or {}
+            nearest_label = (
+                f"{nearest.get('protein_type', 'unknown')} / {nearest.get('process_state', 'unknown')}"
+                if nearest else "no calibrated neighbor"
+            )
+            f.write("> ⚠️ **Out of calibration scope.** This formulation lies outside the convex hull of matrices we have calibrated against, so all per-compound tier labels below are downgraded one notch (see `scope_demoted_from` in the JSON). Treat the predicted ppb values as directional only.\n>\n")
+            for reason in scope_payload.get("reasons", []):
+                f.write(f"> - {reason}\n")
+            f.write(f">\n> Nearest calibrated regime: **{nearest_label}**.\n\n")
+
         f.write("## 1. Input Formulation & Conditions\n")
         f.write("| Parameter | Value |\n")
         f.write("| :--- | :--- |\n")
@@ -779,13 +1755,18 @@ def generate_report(
             compound_rows = result.confidence_metadata.get("compound_confidence", [])
             if compound_rows:
                 f.write("### Compound Confidence\n")
-                f.write("| Compound | Observable ppb | Tier | Score | Mode | Reachability | Calibration Source | Observable Assumption |\n")
-                f.write("| :--- | ---: | :---: | ---: | :--- | :--- | :--- | :--- |\n")
+                f.write("| Compound | Predicted | Tier | Score | Mode | Reachability | Calibration Source | Observable Assumption |\n")
+                f.write("| :--- | :--- | :---: | ---: | :--- | :--- | :--- | :--- |\n")
                 for row in compound_rows:
                     f.write(
-                        f"| {row.get('compound', 'unknown')} | {float(row.get('observable_ppb', 0.0)):.2f} | {row.get('tier', 'unknown')} | {float(row.get('score', 0.0)):.1f} | {row.get('prediction_mode', 'unknown')} | {row.get('reachability_status', 'merely_plausible')} | {row.get('calibration_source', 'unknown')} | {row.get('observable_assumption_summary', 'unknown')} |\n"
+                        f"| {row.get('compound', 'unknown')} | {_format_compound_prediction(result, str(row.get('compound', 'unknown')), float(row.get('observable_ppb', 0.0)))} | {row.get('tier', 'unknown')} | {float(row.get('score', 0.0)):.1f} | {row.get('prediction_mode', 'unknown')} | {row.get('reachability_status', 'merely_plausible')} | {row.get('calibration_source', 'unknown')} | {row.get('observable_assumption_summary', 'unknown')} |\n"
                     )
                 f.write("\n")
+
+            if compound_overlay_path is not None:
+                f.write("### Compound Confidence Overlay\n")
+                f.write(f"- **figure:** {compound_overlay_path.name}\n")
+                f.write("- **evidence classes:** calibration = green, external = amber, surrogate = slate.\n\n")
 
             aggregate_rows = result.confidence_metadata.get("aggregate_confidence", {})
             if aggregate_rows:
@@ -797,6 +1778,20 @@ def generate_report(
                         f"| {tag} | {float(row.get('score', 0.0)):.2f} | {int(row.get('support_count', 0))} | {row.get('tier', 'unknown')} | {row.get('prediction_mode', 'unknown')} |\n"
                     )
                 f.write("\n")
+
+        if intervention_waterfall is not None and intervention_waterfall_path is not None:
+            f.write("### Intervention Waterfall\n")
+            f.write(f"- **baseline:** {intervention_waterfall.get('baseline_name', 'Baseline')}\n")
+            f.write(f"- **current:** {intervention_waterfall.get('current_name', result.name)}\n")
+            for step in (intervention_waterfall.get("steps", []) or [])[:3]:
+                delta_ppb = float(step.get("delta_ppb", 0.0) or 0.0)
+                direction = "raised" if delta_ppb >= 0.0 else "lowered"
+                delta_pct = step.get("delta_pct")
+                pct_text = "" if delta_pct is None else f" ({float(delta_pct):+.0f}%)"
+                f.write(
+                    f"- **{step.get('display_name', 'unknown')}:** {direction} {abs(delta_ppb):.2f} ppb{pct_text}\n"
+                )
+            f.write(f"- **figure:** {intervention_waterfall_path.name}\n\n")
 
         if compound_evidence_ladder:
             f.write("### Compound Evidence Ladder\n")
@@ -956,7 +1951,19 @@ def generate_report(
             f.write(f"- **{k}:** {v}\n")
         f.write("\n")
         f.write(render_provenance_markdown(provenance))
-            
+        f.write(_render_glossary_markdown())
+        formulation_matrix = (
+            str(conditions_dict.get("protein_type")).strip()
+            if conditions_dict.get("protein_type")
+            else None
+        )
+        f.write(
+            _render_next_experiment_markdown(
+                matrix_filter=[formulation_matrix] if formulation_matrix else None
+            )
+        )
+        f.write(_render_sensory_readout_markdown(result))
+
     return output_dir
 
 def generate_comparison_report(
@@ -1041,6 +2048,26 @@ def generate_comparison_report(
             "family_lane_sensitivity": family_lane_sensitivity,
             "flavor_axis_summary": res.flavor_axis_summary,
         })
+
+    comparison_waterfall = None
+    comparison_waterfall_path = None
+    if len(results) == 2:
+        comparison_waterfall = _build_intervention_waterfall_summary(
+            results[1],
+            results[0],
+            current_inputs=conditions_list[1],
+            baseline_inputs=conditions_list[0],
+        )
+        if comparison_waterfall is not None:
+            comparison_waterfall_path = _write_intervention_waterfall(
+                comparison_waterfall,
+                output_dir=output_dir,
+                filename="comparison_intervention_waterfall.png",
+            )
+            comparison_data["intervention_waterfall"] = {
+                **dict(comparison_waterfall),
+                "png": str(comparison_waterfall_path),
+            }
     
     with open(json_path, "w") as f:
         json.dump(comparison_data, f, indent=4, default=str)
@@ -1079,6 +2106,45 @@ def generate_comparison_report(
         f.write(f"- 🏆 **Highest Target Score:** {best_target.name} ({best_target.target_score:.2f})\n")
         f.write(f"- 🛡️ **Safest Formulation:** {best_safety.name} ({best_safety.safety_score:.2f})\n")
         f.write(f"- 🍃 **Lowest Off-Flavour Risk:** {best_risk.name} ({best_risk.off_flavour_risk:.2f})\n\n")
+
+        if comparison_waterfall is not None and comparison_waterfall_path is not None:
+            f.write("## Intervention Waterfall\n")
+            f.write(f"- **baseline:** {comparison_waterfall.get('baseline_name', results[0].name)}\n")
+            f.write(f"- **current:** {comparison_waterfall.get('current_name', results[1].name)}\n")
+            for step in (comparison_waterfall.get("steps", []) or [])[:3]:
+                delta_ppb = float(step.get("delta_ppb", 0.0) or 0.0)
+                direction = "raised" if delta_ppb >= 0.0 else "lowered"
+                delta_pct = step.get("delta_pct")
+                pct_text = "" if delta_pct is None else f" ({float(delta_pct):+.0f}%)"
+                f.write(f"- **{step.get('display_name', 'unknown')}:** {direction} {abs(delta_ppb):.2f} ppb{pct_text}\n")
+            f.write(f"- **figure:** {comparison_waterfall_path.name}\n\n")
+
+            precursor_attribution = comparison_waterfall.get("precursor_attribution") or {}
+            precursor_totals = list(precursor_attribution.get("precursor_totals", []) or [])
+            if precursor_totals:
+                f.write("### Per-precursor intervention deltas\n")
+                f.write(f"- **attribution mode:** {precursor_attribution.get('attribution_mode', 'unknown')}\n\n")
+                f.write("| Precursor | Baseline Ratio | Current Ratio | Δ Ratio | Attributed Δ ppb | Top Compounds |\n")
+                f.write("| :--- | ---: | ---: | ---: | ---: | :--- |\n")
+                for row in precursor_totals:
+                    top_compounds = ", ".join(
+                        f"{item.get('compound', 'unknown')} ({float(item.get('attributed_delta_ppb', 0.0) or 0.0):+.2f})"
+                        for item in (row.get("top_compounds", []) or [])[:3]
+                    ) or "-"
+                    f.write(
+                        f"| {row.get('precursor', 'unknown')} | {float(row.get('baseline_ratio', 0.0) or 0.0):.2f} | {float(row.get('current_ratio', 0.0) or 0.0):.2f} | {float(row.get('delta_ratio', 0.0) or 0.0):+.2f} | {float(row.get('attributed_delta_ppb', 0.0) or 0.0):+.2f} | {top_compounds} |\n"
+                    )
+                f.write("\n")
+
+                precursor_rows = list(precursor_attribution.get("rows", []) or [])
+                if precursor_rows:
+                    f.write("| Precursor | Compound | Class | Baseline ppb | Current ppb | Δ ppb | Attributed Δ ppb |\n")
+                    f.write("| :--- | :--- | :--- | ---: | ---: | ---: | ---: |\n")
+                    for row in precursor_rows[:12]:
+                        f.write(
+                            f"| {row.get('precursor', 'unknown')} | {row.get('compound', 'unknown')} | {_format_intervention_class_label(str(row.get('volatile_class', 'other')))} | {float(row.get('baseline_ppb', 0.0) or 0.0):.2f} | {float(row.get('current_ppb', 0.0) or 0.0):.2f} | {float(row.get('delta_ppb', 0.0) or 0.0):+.2f} | {float(row.get('attributed_delta_ppb', 0.0) or 0.0):+.2f} |\n"
+                        )
+                    f.write("\n")
 
         f.write("## 3. Cross-Marker Context\n")
         f.write("| Formulation | Strecker Balance | Strecker Support | Pyrazine Burden | Sulfur Trapping | Furanone Penalty | Benchmark Neighborhood | Thiamine Pathway | Thiamine Source | Expected Furanones | Missing Furanones |\n")
@@ -1131,7 +2197,26 @@ def generate_comparison_report(
                 f.write(buf.getvalue())
             f.write("```\n\n")
         f.write(render_provenance_markdown(provenance))
-            
+        f.write(_render_glossary_markdown())
+        comparison_matrices = sorted({
+            str(cond.get("protein_type")).strip()
+            for cond in conditions_list
+            if cond.get("protein_type")
+        })
+        # Only narrow when every formulation in the comparison shares one matrix;
+        # otherwise show the global ranking so cross-matrix studies stay unbiased.
+        comparison_filter = comparison_matrices if len(comparison_matrices) == 1 else None
+        f.write(
+            _render_next_experiment_markdown(matrix_filter=comparison_filter)
+        )
+        for res in results:
+            f.write(
+                _render_sensory_readout_markdown(
+                    res,
+                    heading=f"### {res.name} — sensory readout",
+                )
+            )
+
     return output_dir
 
 

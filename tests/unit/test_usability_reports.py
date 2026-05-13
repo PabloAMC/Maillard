@@ -1,8 +1,10 @@
 import json
 from pathlib import Path
 
+import pytest
+
 from src.conditions import ReactionConditions
-from src.pipeline import FormulationResult
+from src.pipeline import FormulationResult, UncertaintyEnvelope
 from src.projection_metadata import normalize_projection_metadata_row
 from src.reporting import generate_comparison_report, generate_report
 from src.usability_reports import (
@@ -340,12 +342,25 @@ def test_build_confidence_package_surfaces_extrusion_panel_when_markers_are_pres
     assert panel["minimum_panel_ready"] is True
 
 
-def test_generate_report_includes_confidence_metadata(tmp_path: Path):
+def test_generate_report_includes_confidence_metadata(tmp_path: Path, monkeypatch):
+    monkeypatch.setattr("src.reporting._configure_report_plot_style", lambda: None)
+
     result = FormulationResult(
         name="report confidence probe",
         target_score=12.0,
         off_flavour_risk=0.0,
         matrix_explainability={"protein_type": "free", "effective_denaturation_state": 1.0},
+        uncertainty_envelopes={
+            "furfural": UncertaintyEnvelope(
+                compound="furfural",
+                predicted_ppb=12.0,
+                predicted_p5=3.0,
+                predicted_p50=12.0,
+                predicted_p95=22.0,
+                ci_level_pct=90,
+                support_count=4,
+            )
+        },
         confidence_metadata={
             "tier": "medium",
             "score": 72.0,
@@ -471,6 +486,8 @@ def test_generate_report_includes_confidence_metadata(tmp_path: Path):
     assert "free_precursor_partial_analogy" in markdown_text
     assert "Calibration Diagnostics" in markdown_text
     assert "Compound Confidence" in markdown_text
+    assert "12 ppb [3-22, 90% CI]" in markdown_text
+    assert "Compound Confidence Overlay" in markdown_text
     assert "Aggregate Sensory Confidence" in markdown_text
     assert "Sensitivity Summary" in markdown_text
     assert "Benchmark Neighborhood" in markdown_text
@@ -492,6 +509,8 @@ def test_generate_report_includes_confidence_metadata(tmp_path: Path):
     assert "top_reachability_status" in markdown_text
     assert "Flavor Axis Diagnostics" in markdown_text
     assert "projection_metadata" in json_text
+    assert "uncertainty_envelopes" in json_text
+    assert "generated_assets" in json_text
     assert "compound_evidence_ladder" in json_text
     assert "calibration_summary" in json_text
     assert "missing_data_summary" in json_text
@@ -506,11 +525,153 @@ def test_generate_report_includes_confidence_metadata(tmp_path: Path):
     assert "family_lane_sensitivity" in json_text
     assert '"provenance"' in json_text
     assert "## 5. Provenance" in markdown_text
+    assert "## 6. Glossary" in markdown_text
+    assert "bounded_calibration" in markdown_text
+    assert "external_failing" in markdown_text
+    assert "## 7. Recommended next experiment" in markdown_text
     assert "Extrusion Observable Panel" in markdown_text
     assert "Support Origin" in markdown_text
     assert "Family Runtime Support Summary" in markdown_text
     assert "Family Evidence Ladder" in markdown_text
     assert "Family Lane Sensitivity" in markdown_text
+    assert "## 8. Sensory readout" in markdown_text
+    assert markdown_text.index("## 7. Recommended next experiment") < markdown_text.index("## 8. Sensory readout")
+    assert (out_dir / "compound_confidence_overlay.png").exists()
+
+
+def test_generate_report_preserves_plot_style_contract(tmp_path: Path, monkeypatch):
+    def _boom() -> None:
+        raise RuntimeError("latex contract failure")
+
+    monkeypatch.setattr("src.reporting._configure_report_plot_style", _boom)
+
+    result = FormulationResult(
+        name="plot contract probe",
+        target_score=1.0,
+        off_flavour_risk=0.0,
+        uncertainty_envelopes={
+            "furfural": UncertaintyEnvelope(
+                compound="furfural",
+                predicted_ppb=10.0,
+                predicted_p5=4.0,
+                predicted_p50=10.0,
+                predicted_p95=25.0,
+                ci_level_pct=90,
+                support_count=2,
+            )
+        },
+        projection_metadata={
+            "furfural": {
+                "compound": "furfural",
+                "observable_ppb": 10.0,
+                "calibration_source": "class_fallback",
+                "calibration_evidence_strength": "heuristic",
+                "calibration_fallback_mode": "class_level",
+            }
+        },
+    )
+
+    with pytest.raises(RuntimeError, match="latex contract failure"):
+        generate_report(result, [], {"sugars": "glucose"}, output_dir=tmp_path / "contract")
+
+
+def test_generate_report_with_baseline_adds_intervention_waterfall(tmp_path: Path, monkeypatch):
+    monkeypatch.setattr("src.reporting._configure_report_plot_style", lambda: None)
+
+    baseline = FormulationResult(
+        name="baseline",
+        target_score=2.0,
+        off_flavour_risk=1.0,
+        uncertainty_envelopes={
+            "Hexanal": UncertaintyEnvelope(
+                compound="Hexanal",
+                predicted_ppb=14.0,
+                predicted_p5=10.0,
+                predicted_p50=14.0,
+                predicted_p95=18.0,
+            ),
+            "2-Methyl-3-furanthiol (MFT)": UncertaintyEnvelope(
+                compound="2-Methyl-3-furanthiol (MFT)",
+                predicted_ppb=6.0,
+                predicted_p5=3.0,
+                predicted_p50=6.0,
+                predicted_p95=9.0,
+            ),
+        },
+        projection_metadata={
+            "hexanal": {
+                "compound": "Hexanal",
+                "observable_ppb": 14.0,
+                "volatile_class": "aldehyde",
+                "calibration_source": "class_fallback",
+                "calibration_evidence_strength": "heuristic",
+                "calibration_fallback_mode": "class_level",
+            },
+            "mft": {
+                "compound": "2-Methyl-3-furanthiol (MFT)",
+                "observable_ppb": 6.0,
+                "volatile_class": "sulfur",
+                "calibration_source": "Pratap-Singh 2021 soy-vs-pea ambient slurry release ratio",
+                "calibration_evidence_strength": "literature_anchored",
+                "calibration_fallback_mode": "compound_specific",
+            },
+        },
+    )
+    current = FormulationResult(
+        name="current",
+        target_score=3.0,
+        off_flavour_risk=0.6,
+        uncertainty_envelopes={
+            "Hexanal": UncertaintyEnvelope(
+                compound="Hexanal",
+                predicted_ppb=7.0,
+                predicted_p5=5.0,
+                predicted_p50=7.0,
+                predicted_p95=10.0,
+            ),
+            "2-Methyl-3-furanthiol (MFT)": UncertaintyEnvelope(
+                compound="2-Methyl-3-furanthiol (MFT)",
+                predicted_ppb=11.0,
+                predicted_p5=8.0,
+                predicted_p50=11.0,
+                predicted_p95=15.0,
+            ),
+        },
+        projection_metadata={
+            "hexanal": {
+                "compound": "Hexanal",
+                "observable_ppb": 7.0,
+                "volatile_class": "aldehyde",
+                "calibration_source": "class_fallback",
+                "calibration_evidence_strength": "heuristic",
+                "calibration_fallback_mode": "class_level",
+            },
+            "mft": {
+                "compound": "2-Methyl-3-furanthiol (MFT)",
+                "observable_ppb": 11.0,
+                "volatile_class": "sulfur",
+                "calibration_source": "Pratap-Singh 2021 soy-vs-pea ambient slurry release ratio",
+                "calibration_evidence_strength": "literature_anchored",
+                "calibration_fallback_mode": "compound_specific",
+            },
+        },
+    )
+
+    out_dir = generate_report(
+        current,
+        [],
+        {"name": "current"},
+        output_dir=tmp_path / "baseline-report",
+        baseline_result=baseline,
+    )
+
+    payload = json.loads((out_dir / "report.json").read_text())
+    markdown_text = (out_dir / "report.md").read_text()
+
+    assert payload["results"]["intervention_waterfall"]["baseline_name"] == "baseline"
+    assert "Intervention Waterfall" in markdown_text
+    assert "Sulfur / Thiols" in markdown_text
+    assert (out_dir / "intervention_waterfall.png").exists()
 
 
 def test_render_flavor_axis_markdown_surfaces_active_family_lanes():
@@ -686,7 +847,9 @@ def test_projection_rows_surface_explicit_panel_contract_fields():
     assert rows[0]["observable_assumption_summary"] == "static_class_profile | class_level | standard_matrix_support"
 
 
-def test_generate_comparison_report_includes_provenance(tmp_path: Path):
+def test_generate_comparison_report_includes_provenance(tmp_path: Path, monkeypatch):
+    monkeypatch.setattr("src.reporting._configure_report_plot_style", lambda: None)
+
     first = FormulationResult(
         name="A",
         target_score=5.0,
@@ -698,6 +861,22 @@ def test_generate_comparison_report_includes_provenance(tmp_path: Path):
         strecker_gap_penalty=0.8,
         pyrazine_burden=35.0,
         pyrazine_penalty=0.7,
+        uncertainty_envelopes={
+            "2-Methyl-3-furanthiol (MFT)": UncertaintyEnvelope(
+                compound="2-Methyl-3-furanthiol (MFT)",
+                predicted_ppb=8.0,
+                predicted_p5=5.0,
+                predicted_p50=8.0,
+                predicted_p95=11.0,
+            ),
+            "Hexanal": UncertaintyEnvelope(
+                compound="Hexanal",
+                predicted_ppb=15.0,
+                predicted_p5=11.0,
+                predicted_p50=15.0,
+                predicted_p95=19.0,
+            ),
+        },
         projection_metadata={
             "mft": {
                 "compound": "2-Methyl-3-furanthiol (MFT)",
@@ -707,6 +886,14 @@ def test_generate_comparison_report_includes_provenance(tmp_path: Path):
                 "calibration_source": "Pratap-Singh 2021 soy-vs-pea ambient slurry release ratio",
                 "calibration_evidence_strength": "literature_anchored",
                 "calibration_fallback_mode": "compound_specific",
+            },
+            "hex": {
+                "compound": "Hexanal",
+                "observable_ppb": 15.0,
+                "volatile_class": "aldehyde",
+                "calibration_source": "class_fallback",
+                "calibration_evidence_strength": "heuristic",
+                "calibration_fallback_mode": "class_level",
             }
         },
         confidence_metadata={"benchmark_neighborhood": "matrix_intake_only", "prediction_mode": "directional_only"},
@@ -723,12 +910,36 @@ def test_generate_comparison_report_includes_provenance(tmp_path: Path):
         strecker_gap_penalty=0.0,
         pyrazine_burden=8.0,
         pyrazine_penalty=0.0,
+        uncertainty_envelopes={
+            "2-Furfurylthiol (FFT)": UncertaintyEnvelope(
+                compound="2-Furfurylthiol (FFT)",
+                predicted_ppb=11.0,
+                predicted_p5=8.0,
+                predicted_p50=11.0,
+                predicted_p95=14.0,
+            ),
+            "Hexanal": UncertaintyEnvelope(
+                compound="Hexanal",
+                predicted_ppb=6.0,
+                predicted_p5=4.0,
+                predicted_p50=6.0,
+                predicted_p95=8.5,
+            ),
+        },
         projection_metadata={
             "fft": {
                 "compound": "2-Furfurylthiol (FFT)",
                 "observable_ppb": 11.0,
                 "melanoidin_trapping_factor": 0.91,
                 "volatile_class": "sulfur",
+                "calibration_source": "class_fallback",
+                "calibration_evidence_strength": "heuristic",
+                "calibration_fallback_mode": "class_level",
+            },
+            "hex": {
+                "compound": "Hexanal",
+                "observable_ppb": 6.0,
+                "volatile_class": "aldehyde",
                 "calibration_source": "class_fallback",
                 "calibration_evidence_strength": "heuristic",
                 "calibration_fallback_mode": "class_level",
@@ -759,7 +970,9 @@ def test_generate_comparison_report_includes_provenance(tmp_path: Path):
     assert '"family_runtime_support_summary"' in json_text
     assert '"family_specific_open_gaps"' in json_text
     assert '"family_lane_sensitivity"' in json_text
+    assert '"intervention_waterfall"' in json_text
     assert "Cross-Marker Context" in markdown_text
+    assert "Intervention Waterfall" in markdown_text
     assert "Calibration Contrast" in markdown_text
     assert "Decision Mode" in markdown_text
     assert "MFT/Furfural Ratio" in markdown_text
@@ -770,6 +983,87 @@ def test_generate_comparison_report_includes_provenance(tmp_path: Path):
     assert "Extrapolation Axes" in markdown_text
     assert "Trust Surface" in markdown_text
     assert "## 5. Provenance" in markdown_text
+    assert "## 6. Glossary" in markdown_text
+    assert "bounded_calibration" in markdown_text
+    assert "external_failing" in markdown_text
+    assert "## 7. Recommended next experiment" in markdown_text
+    assert "— sensory readout" in markdown_text
+    assert (out_dir / "comparison_intervention_waterfall.png").exists()
+
+
+def test_generate_comparison_report_adds_precursor_delta_table(tmp_path: Path, monkeypatch):
+    monkeypatch.setattr("src.reporting._configure_report_plot_style", lambda: None)
+
+    baseline = FormulationResult(
+        name="baseline",
+        target_score=2.0,
+        off_flavour_risk=1.0,
+        uncertainty_envelopes={
+            "2-Methyl-3-furanthiol (MFT)": UncertaintyEnvelope(
+                compound="2-Methyl-3-furanthiol (MFT)",
+                predicted_ppb=4.0,
+                predicted_p5=2.0,
+                predicted_p50=4.0,
+                predicted_p95=6.0,
+            ),
+        },
+        projection_metadata={
+            "mft": {
+                "compound": "2-Methyl-3-furanthiol (MFT)",
+                "observable_ppb": 4.0,
+                "volatile_class": "sulfur",
+                "calibration_source": "class_fallback",
+                "calibration_evidence_strength": "heuristic",
+                "calibration_fallback_mode": "class_level",
+            }
+        },
+    )
+    current = FormulationResult(
+        name="current",
+        target_score=3.0,
+        off_flavour_risk=0.5,
+        uncertainty_envelopes={
+            "2-Methyl-3-furanthiol (MFT)": UncertaintyEnvelope(
+                compound="2-Methyl-3-furanthiol (MFT)",
+                predicted_ppb=9.0,
+                predicted_p5=6.0,
+                predicted_p50=9.0,
+                predicted_p95=12.0,
+            ),
+        },
+        projection_metadata={
+            "mft": {
+                "compound": "2-Methyl-3-furanthiol (MFT)",
+                "observable_ppb": 9.0,
+                "volatile_class": "sulfur",
+                "calibration_source": "class_fallback",
+                "calibration_evidence_strength": "heuristic",
+                "calibration_fallback_mode": "class_level",
+            }
+        },
+    )
+
+    out_dir = generate_comparison_report(
+        [baseline, current],
+        [
+            {"name": "baseline", "molar_ratios": {"ribose": 1.0, "cysteine": 0.2}},
+            {"name": "current", "molar_ratios": {"ribose": 1.0, "cysteine": 0.4}},
+        ],
+        output_dir=tmp_path / "comparison_precursor",
+        campaign_metadata={"name": "precursor-attribution"},
+    )
+
+    payload = json.loads((out_dir / "comparison.json").read_text(encoding="utf-8"))
+    markdown_text = (out_dir / "comparison.md").read_text(encoding="utf-8")
+    precursor_attribution = payload["intervention_waterfall"]["precursor_attribution"]
+
+    assert precursor_attribution["attribution_mode"] == "single_changed_precursor"
+    assert precursor_attribution["precursor_totals"][0]["precursor"] == "cysteine"
+    assert precursor_attribution["rows"][0]["precursor"] == "cysteine"
+    assert precursor_attribution["rows"][0]["compound"] == "2-Methyl-3-furanthiol (MFT)"
+    assert precursor_attribution["rows"][0]["attributed_delta_ppb"] == pytest.approx(5.0)
+    assert "Per-precursor intervention deltas" in markdown_text
+    assert "cysteine" in markdown_text
 
 
 def test_build_confidence_package_adds_compound_aggregate_and_sensitivity_sections():
@@ -845,3 +1139,101 @@ def test_build_confidence_package_adds_compound_aggregate_and_sensitivity_sectio
     assert payload["sensitivity_summary"]["mode"] == "local_oat"
     assert payload["sensitivity_summary"]["evaluated_perturbations"] >= 4
     assert payload["sensitivity_summary"]["ranking_drivers"][0]["input"] in {"cysteine", "temp", "ph", "time_minutes"}
+
+# ---------------------------------------------------------------------------
+# S23 — matrix-aware "next experiment" recommendation
+# ---------------------------------------------------------------------------
+
+def test_next_experiment_renderer_scopes_to_requested_matrix(tmp_path: Path):
+    """The matrix_filter argument must trim the table to the requested family."""
+    from src.reporting import _render_next_experiment_markdown
+
+    ranking = {
+        "source": "synthetic",
+        "candidate_count": 3,
+        "miss_count": 2,
+        "candidates": [
+            {
+                "rank": 1,
+                "benchmark_id": "wheat_gluten_demo",
+                "matrix_family": "wheat_gluten",
+                "compound": "methional",
+                "voi_score": 4.2,
+                "inside_ci": False,
+                "envelope_miss_log10": 1.0,
+                "ci_width_log10": 1.3,
+                "decision_relevance": 2.0,
+                "suggested_doe_template": "blocking_benchmark_gap",
+                "rationale": "Top wheat-gluten miss",
+            },
+            {
+                "rank": 2,
+                "benchmark_id": "soy_isolate_demo",
+                "matrix_family": "soy_iso",
+                "compound": "2-furfurylthiol",
+                "voi_score": 3.9,
+                "inside_ci": False,
+                "envelope_miss_log10": 0.8,
+                "ci_width_log10": 1.1,
+                "decision_relevance": 2.0,
+                "suggested_doe_template": "blocking_benchmark_gap",
+                "rationale": "Top soy miss",
+            },
+            {
+                "rank": 3,
+                "benchmark_id": "pea_isolate_demo",
+                "matrix_family": "pea_iso",
+                "compound": "hexanal",
+                "voi_score": 1.0,
+                "inside_ci": True,
+                "envelope_miss_log10": 0.0,
+                "ci_width_log10": 0.9,
+                "decision_relevance": 1.0,
+                "suggested_doe_template": "missing_kinetic_dataset",
+                "rationale": "Pea hexanal width",
+            },
+        ],
+    }
+    ranking_path = tmp_path / "experiment_value_ranking.json"
+    ranking_path.write_text(json.dumps(ranking), encoding="utf-8")
+
+    md = _render_next_experiment_markdown(
+        ranking_path=ranking_path, matrix_filter=["soy_iso"], top_n=3
+    )
+    assert "Scoped to matrix `soy_iso`" in md
+    assert "soy_isolate_demo" in md
+    assert "wheat_gluten_demo" not in md
+    assert "pea_isolate_demo" not in md
+
+
+def test_next_experiment_renderer_falls_back_when_matrix_absent(tmp_path: Path):
+    from src.reporting import _render_next_experiment_markdown
+
+    ranking = {
+        "source": "synthetic",
+        "candidate_count": 1,
+        "miss_count": 1,
+        "candidates": [
+            {
+                "rank": 1,
+                "benchmark_id": "pea_isolate_demo",
+                "matrix_family": "pea_iso",
+                "compound": "hexanal",
+                "voi_score": 1.0,
+                "inside_ci": False,
+                "envelope_miss_log10": 0.5,
+                "ci_width_log10": 0.9,
+                "decision_relevance": 1.0,
+                "suggested_doe_template": "missing_absolute_anchor",
+                "rationale": "fallback probe",
+            }
+        ],
+    }
+    ranking_path = tmp_path / "experiment_value_ranking.json"
+    ranking_path.write_text(json.dumps(ranking), encoding="utf-8")
+
+    md = _render_next_experiment_markdown(
+        ranking_path=ranking_path, matrix_filter=["myco"], top_n=3
+    )
+    assert "No `myco` candidates currently above the VoI floor" in md
+    assert "pea_isolate_demo" in md  # global fallback

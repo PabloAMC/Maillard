@@ -28,20 +28,20 @@ measured_volatiles:
     _target_role: primary_request_target
 request_metadata:
   originating_voi_rank: 2
-  voi_score: 7.02089704199347
-  voi_rationale: CI width 6.10 dex; ≈7e+03× ODT (decision_relevance=3.84); critical
+  voi_score: 6.41452772823203
+  voi_rationale: CI width 5.92 dex; ≈4e+03× ODT (decision_relevance=3.61); critical
     meaty odorant — multi-factor SIDA closes precursor × matrix gap
   envelope_miss_log10: 0.0
-  ci_width_log10: 6.096831750024513
-  decision_relevance: 3.8385494465849646
-  p5_predicted_ppb: 3.9971437822531404e-05
-  p50_predicted_ppb: 0.6895240944466583
-  p95_predicted_ppb: 49.9552941643262
+  ci_width_log10: 5.9238387269778
+  decision_relevance: 3.6094431465076746
+  p5_predicted_ppb: 5.069036158332543e-05
+  p50_predicted_ppb: 0.40685826850527007
+  p95_predicted_ppb: 42.53673152171823
   previous_measured_ppb: 0.34
   odour_threshold_ug_per_kg: 0.0001
   suggested_doe_template: blocking_benchmark_gap
-  goal: expand model coverage
-  budget_label: TBD
+  goal: null
+  budget_label: null
 benchmark_alignment:
   target_benchmark_id: wheat_gluten_hvp_xylose_120C_PMC9905368
   notes: Re-measure to constrain the model envelope at this benchmark.

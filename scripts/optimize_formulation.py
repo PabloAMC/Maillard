@@ -30,7 +30,7 @@ def main():
     parser.add_argument("--n-iterations", type=int, default=50, help="Number of Optuna trials (default: 50)")
     parser.add_argument("--risk-aversion", type=float, default=1.0, help="Penalty weight for toxic markers (default: 1.0)")
     parser.add_argument("--pre-process", type=str, choices=["none", "yeast", "protease", "both"], default="none", help="Biological pre-processing step")
-    parser.add_argument("--protein-type", choices=["free", "pea_conc", "pea_iso", "soy_conc", "soy_iso", "myco"], default="free", help="Protein matrix type (default: free)")
+    parser.add_argument("--protein-type", choices=["free", "pea_conc", "pea_iso", "soy_conc", "soy_iso", "wheat_gluten", "myco"], default="free", help="Protein matrix type (default: free)")
     parser.add_argument("--denaturation-state", type=float, default=None, help="Optional denaturation state 0-1. If omitted, infer from temperature/time/pH.")
     parser.add_argument("--report", action="store_true", help="Generate consolidated JSON/Markdown report for the best trial")
     parser.add_argument("--output-dir", type=str, default=None, help="Directory to save the report")

@@ -43,99 +43,108 @@ usage() {
   cat <<'EOF'
 Usage: ./scripts/docker_maillard.sh <command> [args...]
 
-Commands:
+Single Docker entrypoint for the Maillard workbench. All commands run inside
+the maillard conda env (Python 3.12) in the validated container.
+
+══ Container lifecycle ══
+  up                                 Boot the validated container (one-time).
+  bootstrap                          Install the conda env + dependencies.
+  shell                              Open an interactive bash shell in the env.
+  status                             Show container + env status.
+  notebook                           Launch Jupyter on port 8888.
+
+══ Scientist quickstart ══
+  help                               Print this help screen.
+  quickstart                         End-to-end demo: run a pea-isolate baseline
+                                     and a cysteine-enrichment comparison, then
+                                     point at the resulting report bundles.
+
+══ Scientist daily loop ══
+  run "<command>"                    Run any command inside the env.
+  pytest [PYTEST_ARGS...]            Run pytest inside the env (default: tests/).
+  ingest --file RESULTS.csv [...]    Preview + (with --confirm) land GC-MS data
+                                     through scripts/ingest_results.py.
+  campaign SPEC [OUTPUT_DIR]         Run a shareable campaign spec.
+  campaign --names "A,B" [args...]   Run a named comparison through run_campaign.
+  explain-formulation NAME [TARGET]  Explain a formulation result.
+                  [MINIMIZE]
+  compare-experiment INTAKE          Support-delta artifacts for a matrix
+                                     experiment intake payload.
+
+══ Trust-loop artifacts (regenerate published evidence) ══
+  summary                            Benchmark summary (md + json).
+  index                              Benchmark index.
+  validated-envelope                 Per-compound 90% envelope report.
+  validation-figures                 All validation figures + report visual
+                                     examples in one bundle.
+  coverage-gaps                      Benchmark coverage gaps.
+  thermo-gating                      Thermodynamic gating audit.
+  literature-learning-loop           Literature learning loop summary.
+  external-inventory                 External validation inventory.
+  refinement-watchlist               Refinement watchlist.
+  objective-progress                 Strategic objective progress.
+  scope-guard                        Out-of-scope demotion guard.
+  family-priority                    Matrix family priority ranking.
+  family-next-action                 Per-family next-action recommendation.
+  family-promotion-state             Family promotion state.
+  family-ingestion-plan              Family ingestion plan.
+  matrix-family-coverage             Matrix × family coverage.
+  matrix-deltas                      Matrix benchmark deltas.
+  matrix-assertions                  Matrix benchmark assertions.
+  matrix-evidence                    Matrix benchmark evidence summary.
+  matrix-readiness                   Matrix promotion readiness.
+  matrix-promotion-contract          Matrix promotion contract.
+  matrix-closure-audit               Matrix observable closure audit.
+  matrix-calibration-refit [...]     Re-run the matrix observable recalibration.
+  matrix-branch-deltas [BASE_REF]    Matrix branch delta report (default: main).
+  refinement-governance              Selective mechanistic refinement governance.
+  mlp-assessment                     MLP backend assessment.
+  experiment-intake-schema           Matrix experiment intake schema.
+  experiment-value-ranking [...]     Rank (benchmark, compound) pairs by VoI;
+                                     emits results/validation/experiment_value_ranking.{md,json}.
+  next-experiment [--top N] [...]    Top-N experiment recommendations: prints
+                                     ranked list and writes per-candidate intake
+                                     YAML + protocol Markdown under
+                                     data/protocols/ and results/validation/experiment_requests/.
+  targets-report                     Benchmark targets report.
+  targets BENCHMARK_JSON [TYPE]      Per-benchmark target snapshot.
+  hofmann                            Hofmann 1998 selectivity diagnostic.
+  deep-research-audit                Deep-research backlog audit.
+
+══ Test lanes ══
+  core                               Unit + integration tests.
+  scientific                         Full scientific generator + regression lane.
+  scientific-fast                    Scientific regression tests only.
+  stability                          Targeted kinetics + safety tests.
+  kinetics-validation                Cantera + temperature-profile tests.
+  qm-heavy                           QM lane tests.
+
+══ QM operator (selective DFT queue) ══
+  computational-gap-refinement-plan  Regenerate the selective-DFT plan + manifests.
+  computational-gap-xtb [TARGET]     Run xTB pathfinder for one or all targets.
+  computational-gap-dft-preflight    Preflight a target before DFT.
+                  [TARGET]
+  computational-gap-dft [TARGET]     Execute DFT refinement.
+  computational-gap-dft-ingest       Ingest finished DFT results.
+  computational-gap-dft-promote      Promote DFT-validated barriers.
+
+══ Extrusion observable ingestion ══
+  extrusion-closure-workbook FILE    Convert an external-closure workbook.
+  extrusion-follow-on-workbook FILE  Convert a 5.8 disulfide follow-on workbook.
+  extrusion-diagnostic-examples      Run synthetic diagnostic example bundles.
+
+══ React-OT pilot (TS guess generation) ══
   react-ot-setup
   react-ot-smoke [ARGS...]
   react-ot-pilot [ARGS...]
   react-ot-import-colab ARCHIVE [--out-dir DIR]
   react-ot-open-colab [--github] [--open]
   react-ot-coverage [--target TARGET ...]
-  react-ot-orchestrate [--prepare-only|--finish] [--archive PATH] [--target TARGET ...]
-    scientific_lane
-    ;;
-  scientific-fast)
-    scientific_fast_lane
-    ;;
-  kinetics-validation)
-    kinetics_validation_lane
-    ;;
-  qm-heavy)
-    qm_heavy_lane
-    ;;
-  hofmann)
-    hofmann_diagnostic
-    ;;
-  targets)
-    shift
-    if [ "$#" -lt 1 ]; then
-      echo "Usage: ./scripts/docker_maillard.sh targets BENCHMARK_JSON [TYPE]" >&2
-      exit 1
-    fi
-    targets_snapshot "$1" "${2:-desirable}"
-    ;;
-  targets-report)
-    run_generator_script generate_benchmark_targets
-  matrix-promotion-contract
-               Generate results/validation/matrix_promotion_contract.{md,json}.
-    run_generator_script generate_matrix_benchmark_deltas
-               Generate results/validation/matrix_observable_closure_audit.{md,json}.
-  experiment-intake-schema
-    run_generator_script generate_matrix_benchmark_assertions
-  compare-experiment INTAKE
-               Generate support-delta artifacts for a matrix experiment intake payload.
-    run_generator_script generate_matrix_benchmark_evidence
-               Convert an extrusion external-closure workbook into intake payloads and support-delta artifacts.
-  extrusion-follow-on-workbook WORKBOOK
-    run_generator_script generate_matrix_promotion_readiness
-  extrusion-diagnostic-examples
-               Generate and execute synthetic diagnostic examples for both extrusion workbook flows.
-    run_generator_script generate_matrix_promotion_contract --output-dir results/validation
-               Generate the no-wet-lab computational-gap refinement plan and the xTB/DFT job manifests.
-    computational-gap-dft-preflight [TARGET]
-    computational-gap-xtb [TARGET]
-    run_generator_script generate_matrix_observable_closure_audit --output-dir results/validation
-  computational-gap-dft [TARGET]
-               Execute the computational-gap DFT refinement job set (or a single TARGET id).
-    run_generator_script generate_matrix_experiment_intake_schema --output-dir results/validation
-               Generate the computational-gap DFT ingestion report from the current execution artifacts.
-  computational-gap-dft-promote
-    run_generator_script generate_literature_learning_loop --output-dir results/validation
-  literature-learning-loop
-               Generate results/validation/literature_learning_loop.{md,json}.
-    run_generator_script generate_family_ingestion_plan --output-dir results/validation
-               Generate results/validation/family_ingestion_plan.{md,json}.
-  family-promotion-state
-    run_generator_script generate_family_promotion_state --output-dir results/validation
-  matrix-family-coverage
-               Generate results/validation/matrix_family_coverage.{md,json}.
-    run_generator_script generate_matrix_family_coverage
-               Generate the selective mechanistic refinement governance artifact bundle.
-  mlp-assessment
-    run_generator_script generate_refinement_governance --output-dir results/validation
-  matrix-branch-deltas [BASE_REF]
-               Generate results/validation/matrix_branch_delta_report.{md,json} against BASE_REF (default: main).
-    run_generator_script generate_mlp_assessment
-               Generate results/validation/benchmark_coverage_gaps.{md,json}.
-  validation-figures
-    shift
-  thermo-gating
-               Generate results/validation/thermodynamic_gating_audit.{md,json}.
-      exit 1
-               Generate results/validation/validated_envelope.{md,json}.
-  explain-formulation NAME [TARGET_TAG] [MINIMIZE_TAG]
-    ;;
-  campaign SPEC [OUTPUT_DIR]
-               Run a shareable campaign spec and generate campaign artifacts.
-  campaign --names "A,B" [--ph 5.5 --temp 105 --output-dir results/share/compare]
-               Run a named comparison through the same campaign packaging path.
-    if [ "$#" -lt 1 ]; then
-  summary      Generate results/validation/benchmark_summary.{md,json}.
-  deep-research-audit
-    fi
-  notebook     Launch a Jupyter notebook server on port 8888.
-  status       Show container and environment status.
-  extrusion-follow-on-workbook)
-    shift
+  react-ot-orchestrate [--prepare-only|--finish] [--archive PATH]
+                       [--target TARGET ...]
+
+See README.md and docs/scientist_workflow_guide.md for the recommended scientist
+flow. Trust artifacts live under results/validation/.
 EOF
 }
 
@@ -177,6 +186,7 @@ scientific_lane() {
   run_in_env "python scripts/generators/generate_family_deviation_audit.py --output-dir results/validation"
   run_in_env "python scripts/generators/generate_validation_figures.py --docs-asset-dir docs/assets"
   run_in_env "python scripts/generators/generate_family_validation_figures.py --output-dir results/validation --docs-asset-dir docs/assets"
+  run_in_env "python scripts/generators/generate_report_visual_examples.py --output-dir results/validation/report_visual_examples --docs-asset-dir docs/assets"
   run_in_env "python scripts/generators/generate_validated_envelope_report.py"
   run_in_env "python scripts/generators/generate_thermodynamic_gating_audit.py"
   scientific_fast_lane
@@ -229,6 +239,7 @@ validation_figures_lane() {
     "generate_family_deviation_audit --output-dir results/validation"
     "generate_validation_figures --docs-asset-dir docs/assets"
     "generate_family_validation_figures --output-dir results/validation --docs-asset-dir docs/assets"
+    "generate_report_visual_examples --output-dir results/validation/report_visual_examples --docs-asset-dir docs/assets"
     "generate_validated_envelope_report"
   )
   local command
@@ -258,6 +269,12 @@ run_generator_alias() {
     validated-envelope) run_generator_script generate_validated_envelope_report ;;
     index) run_generator_script generate_benchmark_index ;;
     summary) run_generator_script generate_benchmark_summary ;;
+    objective-progress) run_generator_script generate_objective_progress ;;
+    refinement-watchlist) run_generator_script generate_refinement_watchlist --output-dir results/validation ;;
+    external-inventory) run_generator_script generate_external_validation_inventory --output-dir results/validation ;;
+    family-priority) run_generator_script generate_matrix_family_priority_ranking ;;
+    family-next-action) run_generator_script generate_matrix_family_next_action ;;
+    scope-guard) run_generator_script generate_scope_gap_guard ;;
   esac
 }
 
@@ -366,8 +383,44 @@ status() {
   fi
 }
 
+quickstart_lane() {
+  echo "[quickstart] 1/2 baseline run -> results/quickstart/baseline/"
+  run_in_env "python scripts/run_pipeline.py \
+    --sugars ribose,glucose \
+    --amino-acids cysteine,leucine \
+    --ratios ribose:0.5,glucose:0.2,cysteine:0.2,leucine:0.1 \
+    --ph 5.5 --temp 105 --time-minutes 45 \
+    --protein-type pea_iso \
+    --target meaty --minimize beany \
+    --report --output-dir results/quickstart/baseline"
+  echo "[quickstart] 2/2 baseline vs cysteine-enrichment comparison -> results/quickstart/comparison/"
+  run_in_env "python scripts/run_campaign.py \
+    --names 'Baseline,Cysteine Enrichment' \
+    --ph 5.5 --temp 105 \
+    --target-tag meaty --minimize-tag beany \
+    --campaign-name 'Quickstart pea-isolate head-to-head' \
+    --output-dir results/quickstart/comparison"
+  cat <<'MSG'
+
+[quickstart] Done. Inspect:
+  - results/quickstart/baseline/report.md                   (per-compound table + confidence + glossary)
+  - results/quickstart/baseline/compound_confidence_overlay.png
+  - results/quickstart/comparison/comparison.md             (side-by-side + intervention waterfall)
+  - results/quickstart/comparison/comparison_intervention_waterfall.png
+
+Next: ./scripts/docker_maillard.sh help        # full command surface
+      docs/scientist_workflow_guide.md         # the daily loop, including ingest
+MSG
+}
+
 cmd="${1:-}"
 case "$cmd" in
+  help|--help|-h)
+    usage
+    ;;
+  quickstart)
+    quickstart_lane
+    ;;
   up)
     ensure_container
     ;;
@@ -419,8 +472,48 @@ case "$cmd" in
     fi
     targets_snapshot "$1" "${2:-desirable}"
     ;;
-  targets-report|matrix-deltas|matrix-assertions|matrix-evidence|matrix-readiness|matrix-promotion-contract|matrix-closure-audit|experiment-intake-schema|literature-learning-loop|family-ingestion-plan|family-promotion-state|matrix-family-coverage|refinement-governance|mlp-assessment|coverage-gaps|thermo-gating|validated-envelope|index|summary)
+  targets-report|matrix-deltas|matrix-assertions|matrix-evidence|matrix-readiness|matrix-promotion-contract|matrix-closure-audit|experiment-intake-schema|literature-learning-loop|family-ingestion-plan|family-promotion-state|matrix-family-coverage|refinement-governance|mlp-assessment|coverage-gaps|thermo-gating|validated-envelope|index|summary|objective-progress|refinement-watchlist|external-inventory|family-priority|family-next-action|scope-guard)
     run_generator_alias "$cmd"
+    ;;
+  ingest)
+    shift
+    if [ "$#" -lt 1 ]; then
+      echo "Usage: ./scripts/docker_maillard.sh ingest --file RESULTS.csv [INGEST_ARGS...]" >&2
+      exit 1
+    fi
+    ingest_cmd="python scripts/ingest_results.py"
+    for arg in "$@"; do
+      printf -v quoted_arg '%q' "$arg"
+      ingest_cmd+=" $quoted_arg"
+    done
+    run_in_env "$ingest_cmd"
+    ;;
+  matrix-calibration-refit)
+    shift
+    refit_cmd="python scripts/generators/generate_matrix_calibration_refit.py"
+    for arg in "$@"; do
+      printf -v quoted_arg '%q' "$arg"
+      refit_cmd+=" $quoted_arg"
+    done
+    run_in_env "$refit_cmd"
+    ;;
+  experiment-value-ranking)
+    shift
+    rank_cmd="python scripts/generators/generate_experiment_value_ranking.py"
+    for arg in "$@"; do
+      printf -v quoted_arg '%q' "$arg"
+      rank_cmd+=" $quoted_arg"
+    done
+    run_in_env "$rank_cmd"
+    ;;
+  next-experiment)
+    shift
+    next_cmd="python scripts/request_experiment.py"
+    for arg in "$@"; do
+      printf -v quoted_arg '%q' "$arg"
+      next_cmd+=" $quoted_arg"
+    done
+    run_in_env "$next_cmd"
     ;;
   compare-experiment)
     shift

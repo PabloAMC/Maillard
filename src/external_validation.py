@@ -902,6 +902,36 @@ def build_external_validation_report(
         }
     )
 
+    # Lane F (sprint 2026-05-10b): per-compound failing aggregate. A compound is
+    # "external_failing" when its mean |log10 error| across the hold-out exceeds
+    # 1.0 dex (~10x error). The runtime report layer reads this list to colour
+    # the affected compounds amber regardless of inside-CI status.
+    compound_errors: Dict[str, List[float]] = {}
+    for benchmark in benchmark_rows:
+        for compound in benchmark.get("compounds", []) or []:
+            err = compound.get("abs_log10_error")
+            if err is None:
+                continue
+            name = str(compound.get("compound", "")).strip().lower()
+            if not name:
+                continue
+            compound_errors.setdefault(name, []).append(float(err))
+
+    failing_compounds: List[Dict[str, Any]] = []
+    failure_threshold_dex = 1.0
+    for name, errors in sorted(compound_errors.items()):
+        if not errors:
+            continue
+        mean_err = sum(errors) / len(errors)
+        if mean_err > failure_threshold_dex:
+            failing_compounds.append(
+                {
+                    "compound": name,
+                    "mean_abs_log10_error": mean_err,
+                    "n_holdout_observations": len(errors),
+                }
+            )
+
     return {
         "source": {
             "benchmark_dir": str(EXTERNAL_VALIDATION_BENCHMARK_DIR),
@@ -909,6 +939,8 @@ def build_external_validation_report(
             "description": "Hold-out matrix benchmarks synthesized from flavor_reference_payloads.json and excluded from the default calibration panel.",
         },
         "summary": summary,
+        "external_failing_compounds": failing_compounds,
+        "external_failing_threshold_dex": failure_threshold_dex,
         "priors": list(envelope_payload.get("priors", [])),
         "benchmarks": benchmark_rows,
     }
@@ -990,7 +1022,15 @@ def write_external_validation_artifact(
     md_path = output_dir / f"{basename}.md"
     json_path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
     md_path.write_text(render_external_validation_markdown(payload), encoding="utf-8")
-    return {"json": json_path, "md": md_path}
+    # Lane F sidecar: small file the runtime report layer reads to flag
+    # external-failing compounds without parsing the full report.
+    failing_path = output_dir / "external_failing_compounds.json"
+    failing_payload = {
+        "external_failing_compounds": list(payload.get("external_failing_compounds", []) or []),
+        "external_failing_threshold_dex": payload.get("external_failing_threshold_dex", 1.0),
+    }
+    failing_path.write_text(json.dumps(failing_payload, indent=2, sort_keys=True), encoding="utf-8")
+    return {"json": json_path, "md": md_path, "failing_sidecar": failing_path}
 
 
 __all__ = [

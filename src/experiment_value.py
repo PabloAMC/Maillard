@@ -41,6 +41,57 @@ _MEATY_KEYWORDS = ("furanthiol", "furfurylthiol", "methional", "thiazole", "mft"
 _OFFNOTE_KEYWORDS = ("hexanal", "nonanal", "octenal", "pentylfuran", "hexanol")
 _SAFETY_KEYWORDS = ("acrylamide", "cml", "cel", "furosine", "hmf")
 
+# Canonical short matrix families (must align with `src.matrix_experiment_intake._PROTEIN_TYPES`
+# and the matrix-family registry under data/lit/matrix_family_coverage_registry.json).
+# We intentionally use the short protein-type names because that is what the formulation
+# pipeline already emits via `FormulationResult.confidence_metadata['scope_assessment']`.
+# End-to-end filtering then needs no translation table.
+MATRIX_FAMILIES: Tuple[str, ...] = ("free", "pea_iso", "soy_iso", "wheat_gluten", "myco", "unknown")
+
+# Substring -> canonical matrix family. Order matters: more specific tokens first.
+_BENCHMARK_ID_MATRIX_RULES: Tuple[Tuple[str, str], ...] = (
+    ("pea_isolate", "pea_iso"),
+    ("pea_iso", "pea_iso"),
+    ("soy_isolate", "soy_iso"),
+    ("soy_iso", "soy_iso"),
+    ("spi_", "soy_iso"),
+    ("wheat_gluten", "wheat_gluten"),
+    ("mycoprotein", "myco"),
+    ("myco_", "myco"),
+    # free-precursor / model-aqueous benchmarks (match by typical precursor naming)
+    ("cys_", "free"),
+    ("thiamine_", "free"),
+    ("acrylamide_asparagine", "free"),
+    ("furosine_extrusion", "free"),
+    ("cml_cel_commercial", "free"),
+)
+
+
+def infer_matrix_family(
+    benchmark_id: str,
+    benchmark: Optional[Mapping[str, Any]] = None,
+) -> str:
+    """Return the canonical short matrix family for a benchmark.
+
+    Resolution order:
+    1. Explicit ``protein_type`` field on the benchmark JSON when present.
+    2. Substring match on ``benchmark_id`` against ``_BENCHMARK_ID_MATRIX_RULES``.
+    3. Fallback ``"unknown"``.
+
+    Returned values use the same short-name convention as
+    ``src.matrix_experiment_intake._PROTEIN_TYPES`` so a formulation's
+    ``protein_type`` can be passed through unchanged as a filter.
+    """
+    if benchmark is not None:
+        explicit = benchmark.get("protein_type")
+        if explicit:
+            return str(explicit).strip() or "unknown"
+    bid = (benchmark_id or "").lower()
+    for token, family in _BENCHMARK_ID_MATRIX_RULES:
+        if token in bid:
+            return family
+    return "unknown"
+
 
 @dataclass(frozen=True)
 class CompoundSpec:
@@ -66,6 +117,9 @@ class ExperimentCandidate:
     voi_score: float
     suggested_doe_template: str
     rationale: str
+    # S23 — matrix-family attribution. Defaulted so legacy callers/fixtures
+    # constructing ExperimentCandidate directly without the field keep working.
+    matrix_family: str = "unknown"
 
 
 # ---------------------------------------------------------------------------
@@ -268,6 +322,7 @@ def rank_experiments(
     rows: List[Tuple[float, ExperimentCandidate]] = []
     for benchmark in payload.get("benchmarks", []) or []:
         bench_id = str(benchmark.get("benchmark_id") or "unknown")
+        matrix_family = infer_matrix_family(bench_id, benchmark)
         for compound in benchmark.get("compounds", []) or []:
             measured = float(compound.get("measured_ppb", 0.0) or 0.0)
             p5 = float(compound.get("predicted_p5", 0.0) or 0.0)
@@ -306,6 +361,7 @@ def rank_experiments(
             candidate = ExperimentCandidate(
                 rank=0,  # filled after sort
                 benchmark_id=bench_id,
+                matrix_family=matrix_family,
                 compound=str(compound.get("compound", "")),
                 measured_ppb=measured,
                 predicted_p5=p5,
@@ -329,6 +385,7 @@ def rank_experiments(
             ExperimentCandidate(
                 rank=idx,
                 benchmark_id=candidate.benchmark_id,
+                matrix_family=candidate.matrix_family,
                 compound=candidate.compound,
                 measured_ppb=candidate.measured_ppb,
                 predicted_p5=candidate.predicted_p5,
@@ -349,20 +406,64 @@ def rank_experiments(
     return ranked
 
 
+def filter_by_matrix(
+    candidates: Sequence[ExperimentCandidate],
+    matrix_filter: Optional[Sequence[str]],
+) -> List[ExperimentCandidate]:
+    """Restrict candidates to the requested matrix families and re-rank.
+
+    ``matrix_filter`` accepts the canonical short names (``pea_iso``,
+    ``soy_iso``, ``wheat_gluten``, ``myco``, ``free``). Empty / ``None``
+    returns the input unchanged.
+    """
+    if not matrix_filter:
+        return list(candidates)
+    wanted = {str(m).strip().lower() for m in matrix_filter if str(m).strip()}
+    if not wanted:
+        return list(candidates)
+    kept = [c for c in candidates if c.matrix_family.lower() in wanted]
+    re_ranked: List[ExperimentCandidate] = []
+    for idx, c in enumerate(kept, start=1):
+        re_ranked.append(
+            ExperimentCandidate(
+                rank=idx,
+                benchmark_id=c.benchmark_id,
+                matrix_family=c.matrix_family,
+                compound=c.compound,
+                measured_ppb=c.measured_ppb,
+                predicted_p5=c.predicted_p5,
+                predicted_p50=c.predicted_p50,
+                predicted_p95=c.predicted_p95,
+                inside_ci=c.inside_ci,
+                envelope_miss_log10=c.envelope_miss_log10,
+                ci_width_log10=c.ci_width_log10,
+                odour_threshold_ug_per_kg=c.odour_threshold_ug_per_kg,
+                decision_relevance=c.decision_relevance,
+                voi_score=c.voi_score,
+                suggested_doe_template=c.suggested_doe_template,
+                rationale=c.rationale,
+            )
+        )
+    return re_ranked
+
+
 def build_ranking_payload(
     candidates: Sequence[ExperimentCandidate],
     *,
     source_path: Optional[Path] = None,
+    matrix_filter: Optional[Sequence[str]] = None,
 ) -> Dict[str, Any]:
     """Convert ranked candidates into a JSON-serialisable dict."""
     return {
         "source": str(source_path) if source_path else None,
+        "matrix_filter": list(matrix_filter) if matrix_filter else None,
         "candidate_count": len(candidates),
         "miss_count": sum(1 for c in candidates if not c.inside_ci),
         "candidates": [
             {
                 "rank": c.rank,
                 "benchmark_id": c.benchmark_id,
+                "matrix_family": c.matrix_family,
                 "compound": c.compound,
                 "voi_score": c.voi_score,
                 "inside_ci": c.inside_ci,
@@ -384,6 +485,7 @@ def build_ranking_payload(
 
 def render_markdown(payload: Mapping[str, Any]) -> str:
     candidates = payload.get("candidates", []) or []
+    matrix_filter = payload.get("matrix_filter")
     lines = [
         '<!-- Auto-regenerated by ./scripts/docker_maillard.sh run "python scripts/generators/generate_experiment_value_ranking.py". Manual edits will be overwritten. -->',
         "",
@@ -395,16 +497,25 @@ def render_markdown(payload: Mapping[str, Any]) -> str:
         f"(out-of-CI: **{payload.get('miss_count', 0)}**). "
         f"Source: `{payload.get('source') or 'in-memory'}`.",
         "",
-        "| Rank | VoI | Benchmark | Compound | In CI | Miss (dex) | Width (dex) | Meas (ppb) | P50 (ppb) | DoE template | Rationale |",
-        "| ---: | ---: | --- | --- | :---: | ---: | ---: | ---: | ---: | --- | --- |",
     ]
+    if matrix_filter:
+        lines.append(
+            f"Matrix filter: **{', '.join(matrix_filter)}** "
+            "(pass `--matrix '<family>'` to `experiment-value-ranking` / `next-experiment` to change)."
+        )
+        lines.append("")
+    lines.extend([
+        "| Rank | VoI | Benchmark | Matrix | Compound | In CI | Miss (dex) | Width (dex) | Meas (ppb) | P50 (ppb) | DoE template | Rationale |",
+        "| ---: | ---: | --- | --- | --- | :---: | ---: | ---: | ---: | ---: | --- | --- |",
+    ])
     for c in candidates:
         in_ci = "✓" if c.get("inside_ci") else "✗"
         width = c.get("ci_width_log10")
         width_str = f"{float(width):.2f}" if width is not None else "n/a"
         lines.append(
             f"| {c.get('rank')} | {float(c.get('voi_score', 0.0)):.2f} | "
-            f"`{c.get('benchmark_id')}` | {c.get('compound')} | {in_ci} | "
+            f"`{c.get('benchmark_id')}` | `{c.get('matrix_family', 'unknown')}` | "
+            f"{c.get('compound')} | {in_ci} | "
             f"{float(c.get('envelope_miss_log10', 0.0)):.2f} | {width_str} | "
             f"{float(c.get('measured_ppb', 0.0)):.3g} | {float(c.get('predicted_p50', 0.0)):.3g} | "
             f"`{c.get('suggested_doe_template')}` | {c.get('rationale')} |"

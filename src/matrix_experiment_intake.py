@@ -31,7 +31,7 @@ DEFAULT_EXAMPLE_PATH = ROOT / "data" / "protocols" / "example_matrix_experiment_
 
 _SOURCE_KINDS = {"external_literature", "internal_experiment", "synthetic_diagnostic"}
 _EVIDENCE_CLASSES = {"calibration_candidate", "external_validation_only", "diagnostic_only"}
-_PROTEIN_TYPES = {"pea_iso", "soy_iso", "myco", "free"}
+_PROTEIN_TYPES = {"pea_iso", "soy_iso", "wheat_gluten", "myco", "free"}
 _SUPPORT_RANK = {
     "open_gap": 0,
     "directional_support": 1,
@@ -429,6 +429,15 @@ def build_matrix_experiment_support_delta_artifact(
             {
                 **row,
                 "baseline_support_status": baseline_status,
+                "baseline_measured_ppb": float((baseline_compound or {}).get("measured_ppb", 0.0) or 0.0)
+                if baseline_compound is not None
+                else None,
+                "baseline_predicted_ppb": float((baseline_compound or {}).get("predicted_ppb", 0.0) or 0.0)
+                if baseline_compound is not None
+                else None,
+                "baseline_ratio": float((baseline_compound or {}).get("ratio", 0.0) or 0.0)
+                if baseline_compound is not None
+                else None,
                 "support_delta": delta_kind,
             }
         )

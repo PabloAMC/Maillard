@@ -1,17 +1,17 @@
 # Experiment Request `requested_wheat_gluten_hvp_xylose_120c_pmc9905368_2_methyl_3_furanthiol_mft_rank2`
 
-VoI rank **#2**, score **7.02**.
+VoI rank **#2**, score **6.41**.
 Generated from the current Monte-Carlo benchmark envelope.
 
 ## Why this experiment
 
 - Compound: **2-Methyl-3-furanthiol (MFT)**
 - Envelope miss: inside 90% CI
-- 90% CI width: 6.10 dex
-- ODT: 0.0001 µg/kg; decision relevance 3.84
-- Rationale: CI width 6.10 dex; ≈7e+03× ODT (decision_relevance=3.84); critical meaty odorant — multi-factor SIDA closes precursor × matrix gap
-- Goal: expand model coverage
-- Budget label: TBD
+- 90% CI width: 5.92 dex
+- ODT: 0.0001 µg/kg; decision relevance 3.61
+- Rationale: CI width 5.92 dex; ≈4e+03× ODT (decision_relevance=3.61); critical meaty odorant — multi-factor SIDA closes precursor × matrix gap
+
+
 
 ## Benchmark context
 
