@@ -123,12 +123,12 @@ Samples per benchmark: 200; seed 0; benchmarks evaluated: 16.
 
 | Compound | Measured (ppb) | P5 | P50 | P95 | log₁₀ width | Inside 90% CI |
 | --- | --- | --- | --- | --- | --- | --- |
+| 2,5-dimethylpyrazine | 0.00024 | 7.15e-08 | 0.000114 | 0.0058 | 4.91 | ✓ |
 | 2-furfurylthiol | 0.0051 | 0.000172 | 0.00443 | 0.00608 | 1.55 | ✓ |
 | 2-methyl-3-furanthiol | 0.0036 | 2.13e-06 | 0.0058 | 0.0378 | 4.25 | ✓ |
-| bis(2-methyl-3-furyl) disulfide | 0.00031 | 2.82e-08 | 7.91e-05 | 0.0114 | 5.61 | ✓ |
-| 2,5-dimethylpyrazine | 0.00024 | 7.15e-08 | 0.000114 | 0.0058 | 4.91 | ✓ |
 | Hexanal | 0.00021 | 0.000196 | 0.000196 | 0.000196 | 0.00 | ✗ |
 | Nonanal | 0.0001 | 0.000102 | 0.000102 | 0.000102 | 0.00 | ✗ |
+| bis(2-methyl-3-furyl) disulfide | 0.00031 | 2.82e-08 | 7.91e-05 | 0.0114 | 5.61 | ✓ |
 
 ### `resconi_2023_pbma_beef_identity_benchmark`
 
@@ -161,12 +161,12 @@ Samples per benchmark: 200; seed 0; benchmarks evaluated: 16.
 
 | Compound | Measured (ppb) | P5 | P50 | P95 | log₁₀ width | Inside 90% CI |
 | --- | --- | --- | --- | --- | --- | --- |
+| 2,5-dimethylpyrazine | 0.000332 | 1.02e-07 | 0.000163 | 0.00824 | 4.91 | ✓ |
 | 2-furfurylthiol | 0.00707 | 0.000242 | 0.00624 | 0.00855 | 1.55 | ✓ |
 | 2-methyl-3-furanthiol | 0.00482 | 3e-06 | 0.00816 | 0.0532 | 4.25 | ✓ |
-| bis(2-methyl-3-furyl) disulfide | 0.000456 | 3.96e-08 | 0.000111 | 0.0161 | 5.61 | ✓ |
-| 2,5-dimethylpyrazine | 0.000332 | 1.02e-07 | 0.000163 | 0.00824 | 4.91 | ✓ |
 | Hexanal | 0.000203 | 0.000203 | 0.000203 | 0.000203 | 0.00 | ✓ |
 | Nonanal | 0.000105 | 0.000105 | 0.000105 | 0.000105 | 0.00 | ✓ |
+| bis(2-methyl-3-furyl) disulfide | 0.000456 | 3.96e-08 | 0.000111 | 0.0161 | 5.61 | ✓ |
 
 ### `spi_hvp_xylose_120C_PMC9905368`
 

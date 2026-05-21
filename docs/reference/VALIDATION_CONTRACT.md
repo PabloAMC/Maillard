@@ -1,6 +1,6 @@
 # Scientific Validation Guide
 
-If you are new to the repository, read [guides/SCIENTIFIC_RELIABILITY.md](guides/SCIENTIFIC_RELIABILITY.md) first. This document is the deeper contract and methodology reference.
+If you are new to the repository, read [architecture.md](../architecture.md) first. This document is the deeper contract and methodology reference.
 
 ## 1. Validation Contract
 

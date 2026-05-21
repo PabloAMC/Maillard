@@ -14,8 +14,8 @@ Current legume-matrix anchoring inside the repo:
 - soy: repo literature synthesis around soy glycinin/beta-conglycinin burial,
   sulfur limitation, extrusion-driven accessibility changes, and soy
   protein-polysaccharide conjugate trapping documented in
-    docs/research/archives/Maillard_Plant_based.md and
-    docs/research/archives/Elicit - Maillard Pathways in Plant-Based Cooking - Report.md
+    data/Gemini_Deep_Research/maillard_plant_based.md and
+    data/Gemini_Deep_Research/elicit_plant_based_cooking.md
 """
 
 import json

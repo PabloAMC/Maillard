@@ -297,6 +297,17 @@
       "benchmark_id": "pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026",
       "compounds": [
         {
+          "ci_width_log10": 4.908720607468118,
+          "compound": "2,5-dimethylpyrazine",
+          "inside_ci": true,
+          "measured_ppb": 0.00024,
+          "predicted_mean": 0.0012881330624560997,
+          "predicted_p5": 7.151565858912253e-08,
+          "predicted_p50": 0.00011437391093403518,
+          "predicted_p95": 0.005795911559367094,
+          "predicted_std": 0.0020898321448645507
+        },
+        {
           "ci_width_log10": 1.5475602603544911,
           "compound": "2-furfurylthiol",
           "inside_ci": true,
@@ -319,28 +330,6 @@
           "predicted_std": 0.012739149184927804
         },
         {
-          "ci_width_log10": 5.608574536546103,
-          "compound": "bis(2-methyl-3-furyl) disulfide",
-          "inside_ci": true,
-          "measured_ppb": 0.00031,
-          "predicted_mean": 0.002024736145463603,
-          "predicted_p5": 2.8157762753539e-08,
-          "predicted_p50": 7.905790219249467e-05,
-          "predicted_p95": 0.011433328506067514,
-          "predicted_std": 0.0038624041072058586
-        },
-        {
-          "ci_width_log10": 4.908720607468118,
-          "compound": "2,5-dimethylpyrazine",
-          "inside_ci": true,
-          "measured_ppb": 0.00024,
-          "predicted_mean": 0.0012881330624560997,
-          "predicted_p5": 7.151565858912253e-08,
-          "predicted_p50": 0.00011437391093403518,
-          "predicted_p95": 0.005795911559367094,
-          "predicted_std": 0.0020898321448645507
-        },
-        {
           "ci_width_log10": 0.0,
           "compound": "Hexanal",
           "inside_ci": false,
@@ -361,6 +350,17 @@
           "predicted_p50": 0.00010157337516403879,
           "predicted_p95": 0.00010157337516403879,
           "predicted_std": 0.0
+        },
+        {
+          "ci_width_log10": 5.608574536546103,
+          "compound": "bis(2-methyl-3-furyl) disulfide",
+          "inside_ci": true,
+          "measured_ppb": 0.00031,
+          "predicted_mean": 0.002024736145463603,
+          "predicted_p5": 2.8157762753539e-08,
+          "predicted_p50": 7.905790219249467e-05,
+          "predicted_p95": 0.011433328506067514,
+          "predicted_std": 0.0038624041072058586
         }
       ],
       "coverage_rate": 1.0,
@@ -478,6 +478,17 @@
       "benchmark_id": "soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026",
       "compounds": [
         {
+          "ci_width_log10": 4.908720607468117,
+          "compound": "2,5-dimethylpyrazine",
+          "inside_ci": true,
+          "measured_ppb": 0.0003321444251217266,
+          "predicted_mean": 0.0018302713324474923,
+          "predicted_p5": 1.0161454864546198e-07,
+          "predicted_p50": 0.0001625106104825266,
+          "predicted_p95": 0.008235244542426424,
+          "predicted_std": 0.00296938257067926
+        },
+        {
           "ci_width_log10": 1.5475602603544913,
           "compound": "2-furfurylthiol",
           "inside_ci": true,
@@ -500,28 +511,6 @@
           "predicted_std": 0.017933328784178686
         },
         {
-          "ci_width_log10": 5.608574536546103,
-          "compound": "bis(2-methyl-3-furyl) disulfide",
-          "inside_ci": true,
-          "measured_ppb": 0.00045570502391166165,
-          "predicted_mean": 0.0028502891732180634,
-          "predicted_p5": 3.9638629704058775e-08,
-          "predicted_p50": 0.0001112924679995796,
-          "predicted_p95": 0.016095081093753065,
-          "predicted_std": 0.00543723617224264
-        },
-        {
-          "ci_width_log10": 4.908720607468117,
-          "compound": "2,5-dimethylpyrazine",
-          "inside_ci": true,
-          "measured_ppb": 0.0003321444251217266,
-          "predicted_mean": 0.0018302713324474923,
-          "predicted_p5": 1.0161454864546198e-07,
-          "predicted_p50": 0.0001625106104825266,
-          "predicted_p95": 0.008235244542426424,
-          "predicted_std": 0.00296938257067926
-        },
-        {
           "ci_width_log10": 0.0,
           "compound": "Hexanal",
           "inside_ci": true,
@@ -542,6 +531,17 @@
           "predicted_p50": 0.00010527516039223936,
           "predicted_p95": 0.00010527516039223936,
           "predicted_std": 0.0
+        },
+        {
+          "ci_width_log10": 5.608574536546103,
+          "compound": "bis(2-methyl-3-furyl) disulfide",
+          "inside_ci": true,
+          "measured_ppb": 0.00045570502391166165,
+          "predicted_mean": 0.0028502891732180634,
+          "predicted_p5": 3.9638629704058775e-08,
+          "predicted_p50": 0.0001112924679995796,
+          "predicted_p95": 0.016095081093753065,
+          "predicted_std": 0.00543723617224264
         }
       ],
       "coverage_rate": 1.0,

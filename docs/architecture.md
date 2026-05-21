@@ -1,63 +1,67 @@
-# Maillard Reaction Computational Framework
+# Maillard — Architecture & Design
 
 ## Purpose
 
-Maillard exists to help alternative-protein scientists narrow the wet-lab search space before committing to GC-MS or process work.
+Maillard helps alternative-protein scientists narrow the wet-lab search space before committing
+to GC-MS runs or process trials. It answers:
 
-The repository is designed to answer questions like these:
+- Which precursor combinations are most promising for meaty sulfur chemistry?
+- Which changes improve desirable aroma without worsening off-flavour or safety risk?
+- Which predictions are benchmark-backed and which are only directional?
 
-- which precursor combinations are directionally most promising for meaty sulfur chemistry
-- which changes improve desirable aroma without worsening off-flavour or safety risk
-- which predictions are benchmark-backed and which are only heuristic or matrix-directional
+The framework is useful when it improves prioritisation. It is not useful if it produces
+confident-looking but weakly anchored quantitative claims.
 
-The framework is useful when it improves prioritization. It is not useful if it creates confident-looking but weakly anchored quantitative claims.
+---
 
-## Current Validated Scope
+## Design Principles
 
-The most important distinction in this repository is between:
+**Observable-first.** Every model tier must eventually face an observable. Claims that cannot
+be reduced to a measurable headspace concentration, benchmark ratio, or kinetic observable are
+kept explicitly labelled as exploratory.
 
-- the current validated operating surface
-- the broader architecture the codebase is capable of growing into
+**Tiered confidence, not a single model.** The system treats free-precursor FAST kinetics,
+matrix physics, and selective QM as separate, independently validated layers — not a single
+monolithic pipeline. Each layer has its own trust tier; results are never silently promoted
+across tiers.
 
-Those are not the same thing.
+**Speed vs. rigour as a dial, not a binary.** Laptop-speed FAST-mode screening (< 1 s) and
+multi-hour DFT refinement coexist in the same codebase. Scientists pick the appropriate level
+for each decision; the tool makes the tradeoffs visible.
 
-### What Is Shareable Today
+**Three operating regimes**
 
-- free-precursor screening inside the strict benchmark envelope
-- scientist-facing run reports with confidence and provenance
-- side-by-side comparison artifacts for named formulations
-- campaign-level shareable packages with per-run bundles and review context
-- matrix intake and directional ranking for pea and soy with explicit caveats
+| Regime | Timescale | Primary use | Trust level |
+|--------|-----------|-------------|-------------|
+| FAST screening | < 1 s | Formulation ranking, what-if questions | Calibrated heuristics from literature |
+| Matrix physics | seconds | Headspace / retention / pea-soy translation | Directional; benchmark-partial |
+| Selective QM | hours–days | Barrier refinement on specific rate-limiting steps | xtb_derived → DFT → literature surrogate |
 
-### What Is Not Yet Closed Scientifically
+---
 
-- broad quantitative matrix prediction across plant-protein systems
-- strict-gate meaty-positive promotion for pea or soy matrices
-- benchmark-closed transfer across real process states such as extrusion-heavy histories
-- internal experiment-ingestion loops that automatically convert wet-lab data into new benchmark and calibration surfaces
+## Trust Surface
 
-## Current Trust Surface
+### High trust — use freely
+- Free-precursor comparative screening inside the benchmark envelope
+- Benchmark-aware ranking (literature barrier constants; see `src/barrier_constants.py`)
+- Safety-aware comparisons close to the validated benchmark neighbourhood
 
-### High trust
+### Moderate trust — useful for prioritisation, verify before deciding
+- Pea and soy matrix directional comparisons
+- Matrix explainability and off-flavour triage
+- Deciding what to test next in the wet lab
 
-- free-precursor comparative screening
-- benchmark-aware ranking inside the strict-ready literature envelope
-- safety-aware comparisons that stay close to the validated benchmark neighborhood
+### Low trust — exploratory only
+- New protein families without nearby benchmarks
+- Intact-protein or peptide-bound systems
+- Extrusion-heavy process claims without dedicated evidence
+- Absolute matrix concentration claims beyond the validated envelope
 
-### Moderate trust
+> **Confidence tiers in code**: priors carry `bounded_calibration` / `transferred_literature` /
+> `surrogate_family` / `xtb_derived` labels. These propagate through the pipeline and surface
+> in every report. Never silently upgrade a tier.
 
-- pea and soy matrix comparisons when used as directional prioritization
-- matrix explainability and off-flavour triage
-- deciding what to test next in the wet lab
-
-### Low trust
-
-- new protein families without nearby benchmarks
-- intact-protein or peptide-bound systems
-- extrusion-heavy process claims without dedicated evidence
-- absolute matrix concentration claims beyond the validated envelope
-
-For the review surface that should accompany external sharing, see [guides/SCIENTIFIC_RELIABILITY.md](guides/SCIENTIFIC_RELIABILITY.md), [reference/SCIENTIFIC_REFERENCE.md](reference/SCIENTIFIC_REFERENCE.md), and [guides/SHARING_RESULTS.md](guides/SHARING_RESULTS.md).
+---
 
 ## Architecture Layers
 
@@ -69,162 +73,115 @@ graph TD
     end
 
     subgraph "2. Reactive Core"
-        C -->| "Accessible Molarity" | D["SMIRKS Rule Engine"]
-        D -->| "Reaction Network" | E["Thermodynamic Gating (Joback)"]
-        E -->| "Feasible Paths" | F["Cantera ODE Solver"]
+        C --> | "Accessible Molarity" | D["SMIRKS Rule Engine"]
+        D --> | "Reaction Network" | E["Thermodynamic Gating (Joback)"]
+        E --> | "Feasible Paths" | F["Cantera ODE Solver"]
         G["Literature Kinetics"] --> F
     end
 
     subgraph "3. Observability Projection"
-        F -->| "Aqueous Moles" | I["Projection Module"]
-        I -->| "Volatilization (Henry's Law)" | J["Headspace Calibration"]
-        I -->| "Surface Adsorption" | K["Matrix Retention"]
+        F --> | "Aqueous Moles" | I["Projection Module"]
+        I --> | "Volatilization (Henry's Law)" | J["Headspace Calibration"]
+        I --> | "Surface Adsorption" | K["Matrix Retention"]
     end
 
     subgraph "4. Decision Layer"
         J & K --> L["Validation Surface"]
         L --> M["Bayesian Optimizer"]
-        M -->| "Formulation Candidate" | A
+        M --> | "Formulation Candidate" | A
     end
 ```
 
-The repository uses a layered architecture so benchmark-backed screening, explainability, and future higher-fidelity physics can coexist without pretending they are all equally validated.
+### Layer 1 — Reaction Enumeration
 
-### 1. Reaction Enumeration
+**Module:** `src/smirks_engine.py`
 
-Main module: `src/smirks_engine.py`
+Generates deterministic, atom-balanced reaction candidates from precursor sets. The chemistry
+surface is kept explicit and inspectable — if the reaction graph is not chemically coherent,
+no later scoring or QM work is trustworthy.
 
-Role:
+### Layer 2 — FAST Screening & Ranking
 
-- generate deterministic, atom-balanced reaction candidates from precursor sets
-- keep the chemistry surface explicit and inspectable
+**Modules:** `src/recommend.py`, `src/pipeline.py`, `src/barrier_constants.py`
 
-Why it matters:
+Produces laptop-feasible rankings in < 1 s using literature-calibrated barrier constants
+(Schiff base 15 kcal/mol → enolisation 28 kcal/mol; anchored to Hofmann/Martins/Nursten
+references). This is the main validated daily-use surface.
 
-- if the reaction graph is not chemically coherent, no later scoring or DFT work is trustworthy
+### Layer 3 — Matrix & Headspace Translation
 
-### 2. FAST Screening And Ranking
+**Modules:** `src/matrix_correction.py`, `src/headspace.py`, `src/matrix_calibration_registry.py`
 
-Main modules:
+Translates beaker chemistry into plant-matrix observability: accessibility, denaturation,
+retention, and headspace release. Useful for directional pea/soy work; not yet
+benchmark-closed for release-grade quantitative claims.
 
-- `src/recommend.py`
-- `src/pipeline.py`
-- `src/barrier_constants.py`
+**Calibration single-application rule:** `HeadspaceModel.get_matrix_benchmark_headspace_factor()`
+already applies the matrix observable factor — never multiply `calibration_observable_factor`
+again downstream.
 
-Role:
+### Layer 4 — Safety & Decision Support
 
-- produce fast laptop-feasible rankings
-- propagate literature-calibrated barrier assumptions into a formulation score
-- support forward prediction, inverse design, and scientist-facing summaries
+**Modules:** `src/safety.py`, `src/sensory.py`, `src/usability_reports.py`, `src/reporting.py`
 
-Current state:
+Maps chemistry into scientist-facing decisions. Exposes confidence, calibration diagnostics,
+and reportable artifacts. The trust boundary is visible in every result surface.
 
-- this is the main validated daily-use surface inside the free-precursor benchmark envelope
+### Layer 5 — Validation & Benchmark Surfaces
 
-### 3. Matrix And Headspace Translation
+**Modules:** `src/benchmark_validation.py`, `src/validation_contract.py`
 
-Main modules:
+**Key artifacts:** `results/validation/benchmark_summary.md`, `results/validation/validated_envelope.md`
 
-- `src/matrix_correction.py`
-- `src/headspace.py`
-- `src/matrix_calibration_registry.py`
+Defines what counts as benchmark-backed evidence. Keeps matrix evidence, internal
+reproducibility harnesses, and strict-ready benchmarks separate.
+Observable-first governance: never promote a target without a justifying artifact in
+`results/validation/`.
 
-Role:
+### Layer 6 — Selective QM (xTB → DFT)
 
-- translate beaker chemistry into plant-matrix observability
-- model accessibility, denaturation, retention, and release effects
+**Modules:** `src/mlp_barrier.py`, `src/dft_refiner.py`, `src/skala_refiner.py`
 
-Current state:
+Refines barrier quality for selected high-value steps. Not the main reason the tool is
+scientist-shareable today, but architecturally critical for the next tier of confidence.
 
-- useful for directional pea/soy work
-- not yet benchmark-closed for release-grade quantitative claims
+---
 
-### 4. Safety And Decision Support
+## xTB: Role & Known Limitations
 
-Main modules:
+GFN2-xTB (Tier 1) identifies which pathways are kinetically viable out of thousands generated
+by RMG. **It is a pathfinder, not a barrier authority.** Final barriers come from DFT
+(r2SCAN/def2-svp + ddCOSMO water via PySCF/Sella) or explicit literature surrogates.
 
-- `src/safety.py`
-- `src/sensory.py`
-- `src/usability_reports.py`
-- `src/reporting.py`
+| Limitation | Impact | Mitigation |
+|------------|--------|------------|
+| Implicit solvation — no explicit water proton shuttles | Proton-transfer barriers overestimated 10–25 kcal/mol | Refine Amadori/enolisation steps with 1–2 explicit H₂O in DFT |
+| Zwitterionic intermediates (amino acids at pH 5–8) | Schiff base energetics slightly distorted | DFT required for initial nucleophilic-attack steps |
+| β-elimination (DHA pathway) | Barriers off by 5–15 kcal/mol | DHA elimination flagged for Tier 2 refinement |
+| Open-shell sulfur radicals | Less accurate than closed-shell | MLP-first for radical-trapping lanes |
 
-Role:
+See the [Computational Gap Runbook](guides/COMPUTATIONAL_GAP_RUNBOOK.md) for the current
+selective-QM queue and copy-paste commands.
 
-- map chemistry into scientist-facing decisions
-- expose confidence, calibration diagnostics, and reportable artifacts
-- keep the trust boundary visible in every result surface
+---
 
-Current state:
+## What Still Blocks State-of-the-Art Status
 
-- this layer is mature enough for sharing and review
-- its quality still depends on the scientific support level of the underlying prediction mode
+**Scientifically:**
+- No primary quantitative pea or soy meaty-positive matrix benchmark with desirable and adverse targets in the same run
+- No benchmark-closed time-series matrix data for target PPI/SPI systems
+- Incomplete process-state calibration for real matrix release behaviour
 
-### 5. Validation And Benchmark Surfaces
+**Architecturally:**
+- No full experiment-ingestion path for internal wet-lab data
+- No external-team API layer beyond scripts and report artifacts
 
-Main modules:
+The highest-value missing experiment is documented in
+[protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md](protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md).
 
-- `src/benchmark_validation.py`
-- `src/validation_contract.py`
+---
 
-Main artifacts:
-
-- `results/validation/benchmark_summary.md`
-- `results/validation/validated_envelope.md`
-- `results/validation/validation_overview.png`
-- `results/validation/matrix_benchmark_assertions.md`
-
-Role:
-
-- define what counts as benchmark-backed evidence
-- keep matrix evidence, internal reproducibility harnesses, and strict-ready benchmarks separate
-
-### 6. Future Higher-Fidelity Physics
-
-Main modules:
-
-- `src/mlp_barrier.py`
-- `src/diffusion_ts.py`
-- `src/dft_refiner.py`
-- `src/skala_refiner.py`
-
-Role:
-
-- improve barrier quality and structural fidelity for selected high-value steps
-- support future expansion of the chemistry surface and higher-fidelity rate estimation
-
-Current state:
-
-- architecturally important
-- not the main reason the tool is or is not scientist-shareable today
-
-## What Makes The Tool Useful In Practice
-
-The repository is most useful when it does four things well:
-
-- ranks candidate formulations inside a known trust boundary
-- exposes why a result looks the way it does
-- shows confidence and calibration posture explicitly
-- produces artifacts that can be reviewed without re-running the whole CLI by hand
-
-That is why the reporting and validation surfaces matter as much as the chemistry internals.
-
-## What Still Blocks State-Of-The-Art Status
-
-Scientifically, the main blockers are:
-
-- no primary quantitative pea or soy meaty-positive matrix benchmark with desirable and adverse targets in the same run
-- no benchmark-closed time-series matrix data for the target PPI and SPI systems
-- incomplete process-state calibration for real matrix release behavior
-
-Architecturally, the main blockers are:
-
-- no full experiment-ingestion path for internal wet-lab data
-- no external-team API layer beyond scripts and report artifacts
-- no automatic loop from new experiments to benchmark promotion review
-
-## Review Sequence For External Sharing
-
-If the goal is to share repository state with scientists, reviewers, or collaborators, the shortest honest review sequence is:
+## Review Sequence for External Sharing
 
 ```bash
 ./scripts/docker_maillard.sh summary
@@ -234,16 +191,5 @@ If the goal is to share repository state with scientists, reviewers, or collabor
 ./scripts/docker_maillard.sh campaign data/campaigns/shareable_meaty_screen.yml
 ```
 
-That sequence gives:
-
-- benchmark status
-- the validated boundary
-- the current reliability visuals
-- matrix readiness posture
-- a reproducible campaign package with provenance
-
-## Immediate Scientific Contract Gap
-
-The highest-value missing experiment is now explicit and documented in [protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md](protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md).
-
-That protocol is the bridge between the current directional matrix surface and the next benchmark-backed scientific upgrade.
+For the full validation contract see
+[reference/VALIDATION_CONTRACT.md](reference/VALIDATION_CONTRACT.md).

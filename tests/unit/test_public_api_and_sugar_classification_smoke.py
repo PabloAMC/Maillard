@@ -1,10 +1,3 @@
-import sys
-from pathlib import Path
-
-
-# Add src to path
-sys.path.append(str(Path.cwd()))
-
 
 def test_public_api_imports_smoke():
     try:

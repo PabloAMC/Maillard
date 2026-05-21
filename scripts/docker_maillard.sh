@@ -143,7 +143,7 @@ the maillard conda env (Python 3.12) in the validated container.
   react-ot-orchestrate [--prepare-only|--finish] [--archive PATH]
                        [--target TARGET ...]
 
-See README.md and docs/scientist_workflow_guide.md for the recommended scientist
+See README.md and docs/guides/QUICKSTART.md for the recommended scientist
 flow. Trust artifacts live under results/validation/.
 EOF
 }
@@ -409,7 +409,7 @@ quickstart_lane() {
   - results/quickstart/comparison/comparison_intervention_waterfall.png
 
 Next: ./scripts/docker_maillard.sh help        # full command surface
-      docs/scientist_workflow_guide.md         # the daily loop, including ingest
+      docs/guides/QUICKSTART.md                # the daily loop, including ingest
 MSG
 }
 

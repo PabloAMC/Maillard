@@ -16,7 +16,7 @@ Sources
 * Hofmann & Schieberle 2000 (Strecker degradation)
 * Wedzicha 1984 (Cysteine thermolysis)
 * Hodge 1953; Nursten 2005 (overall Maillard kinetics)
-* docs/research/archives/Maillard_meat.md, docs/research/archives/Maillard_Plant_based.md (project literature reviews)
+* data/Gemini_Deep_Research/maillard_meat.md, data/Gemini_Deep_Research/maillard_plant_based.md (project literature reviews)
 """
 
 import json
