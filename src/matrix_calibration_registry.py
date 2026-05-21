@@ -1,7 +1,16 @@
 from __future__ import annotations
 
+import json
+import math
+import os
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Dict, Optional
+
+
+ROOT = Path(__file__).resolve().parents[1]
+MATRIX_CALIBRATION_OFFSETS_PATH = ROOT / "data" / "lit" / "matrix_calibration_offsets.json"
+_RUNTIME_MULTIPLIER_ENV = "MAILLARD_MATRIX_CALIBRATION_MULTIPLIERS"
 
 
 @dataclass(frozen=True)
@@ -229,6 +238,82 @@ _MATRIX_CLASS_ANCHORS = (
         source="Interpolated base pyrazine yield matching internal benchmark limits",
         fallback_mode="class_level",
     ),
+    # --- Surrogate-only placeholders (Lane G, 2026-05-10b). No matrix-specific
+    # calibration data exists for these protein types; class-level fallback only
+    # so they are recognised as targets and the scope-check (Lane E) flags them
+    # as out of scope instead of silently inheriting pea_iso/soy_iso factors.
+    MatrixCalibrationAnchor(
+        protein_type="wheat_gluten",
+        target_class="aldehyde",
+        observable_factor=1.0,
+        evidence_strength="surrogate_family",
+        source="Placeholder: no wheat_gluten matrix calibration data yet",
+        fallback_mode="class_level",
+        notes="No matrix-specific calibration data; flagged out of scope by scope-check.",
+    ),
+    MatrixCalibrationAnchor(
+        protein_type="wheat_gluten",
+        target_class="furan",
+        observable_factor=1.0,
+        evidence_strength="surrogate_family",
+        source="Placeholder: no wheat_gluten matrix calibration data yet",
+        fallback_mode="class_level",
+        notes="No matrix-specific calibration data; flagged out of scope by scope-check.",
+    ),
+    MatrixCalibrationAnchor(
+        protein_type="wheat_gluten",
+        target_class="sulfur",
+        observable_factor=1.0,
+        evidence_strength="surrogate_family",
+        source="Placeholder: no wheat_gluten matrix calibration data yet",
+        fallback_mode="class_level",
+        notes="No matrix-specific calibration data; flagged out of scope by scope-check.",
+    ),
+    MatrixCalibrationAnchor(
+        protein_type="wheat_gluten",
+        target_class="pyrazine",
+        observable_factor=1.0,
+        evidence_strength="surrogate_family",
+        source="Placeholder: no wheat_gluten matrix calibration data yet",
+        fallback_mode="class_level",
+        notes="No matrix-specific calibration data; flagged out of scope by scope-check.",
+    ),
+    MatrixCalibrationAnchor(
+        protein_type="myco",
+        target_class="aldehyde",
+        observable_factor=1.0,
+        evidence_strength="surrogate_family",
+        source="Placeholder: no mycoprotein matrix calibration data yet",
+        fallback_mode="class_level",
+        notes="No matrix-specific calibration data; flagged out of scope by scope-check.",
+    ),
+    MatrixCalibrationAnchor(
+        protein_type="myco",
+        target_class="furan",
+        observable_factor=1.0,
+        evidence_strength="surrogate_family",
+        source="Placeholder: no mycoprotein matrix calibration data yet",
+        fallback_mode="class_level",
+        notes="No matrix-specific calibration data; flagged out of scope by scope-check.",
+    ),
+    MatrixCalibrationAnchor(
+        protein_type="myco",
+        target_class="sulfur",
+        observable_factor=1.0,
+        evidence_strength="surrogate_family",
+        source="Placeholder: no mycoprotein matrix calibration data yet",
+        fallback_mode="class_level",
+        notes="No matrix-specific calibration data; flagged out of scope by scope-check.",
+    ),
+    MatrixCalibrationAnchor(
+        protein_type="myco",
+        target_class="pyrazine",
+        observable_factor=1.0,
+        evidence_strength="surrogate_family",
+        source="Placeholder: no mycoprotein matrix calibration data yet",
+        fallback_mode="class_level",
+        notes="No matrix-specific calibration data; flagged out of scope by scope-check.",
+    ),
 )
 
 _MATRIX_RUNTIME_COMPOSITION_RULES = (
@@ -241,6 +326,88 @@ _MATRIX_RUNTIME_COMPOSITION_RULES = (
         notes="Ambient slurry remains frozen to preserve the historical Pratap-Singh benchmark calibration.",
     ),
 )
+
+
+def _load_persisted_matrix_multipliers() -> Dict[str, Dict[str, object]]:
+    if not MATRIX_CALIBRATION_OFFSETS_PATH.exists():
+        return {}
+    try:
+        payload = json.loads(MATRIX_CALIBRATION_OFFSETS_PATH.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    entries = payload.get("entries", {}) if isinstance(payload, dict) else {}
+    if not isinstance(entries, dict):
+        return {}
+    normalized: Dict[str, Dict[str, object]] = {}
+    for protein_type, row in entries.items():
+        if not isinstance(row, dict):
+            continue
+        normalized[str(protein_type)] = dict(row)
+    return normalized
+
+
+def _runtime_matrix_multipliers() -> Dict[str, float]:
+    raw = os.environ.get(_RUNTIME_MULTIPLIER_ENV)
+    if not raw:
+        return {}
+    try:
+        payload = json.loads(raw)
+    except json.JSONDecodeError:
+        return {}
+    if not isinstance(payload, dict):
+        return {}
+    multipliers: Dict[str, float] = {}
+    for protein_type, value in payload.items():
+        try:
+            multipliers[str(protein_type)] = float(value)
+        except (TypeError, ValueError):
+            continue
+    return multipliers
+
+
+def get_matrix_observable_multiplier(protein_type: Optional[str]) -> Dict[str, object]:
+    normalized = str(protein_type or "").strip()
+    runtime = _runtime_matrix_multipliers()
+    if normalized in runtime:
+        return {
+            "multiplier": float(runtime[normalized]),
+            "source": "runtime_override",
+        }
+
+    persisted = _load_persisted_matrix_multipliers().get(normalized, {})
+    if persisted:
+        try:
+            multiplier = float(persisted.get("observable_factor_multiplier", 1.0) or 1.0)
+        except (TypeError, ValueError):
+            multiplier = 1.0
+        return {
+            "multiplier": multiplier,
+            "source": str(persisted.get("source", "matrix_calibration_offsets")),
+            "provenance": str(persisted.get("provenance", "matrix_calibration_offsets")),
+        }
+
+    return {
+        "multiplier": 1.0,
+        "source": "baseline_registry",
+    }
+
+
+def _apply_observable_multiplier_to_record(record: MatrixCalibrationRecord) -> MatrixCalibrationRecord:
+    multiplier_info = get_matrix_observable_multiplier(record.protein_type)
+    multiplier = float(multiplier_info.get("multiplier", 1.0) or 1.0)
+    if math.isclose(multiplier, 1.0, rel_tol=1e-9, abs_tol=1e-9):
+        return record
+    extra_note = f" Observable multiplier {multiplier:.3f} from {multiplier_info.get('source', 'unknown')}."
+    return MatrixCalibrationRecord(
+        protein_type=record.protein_type,
+        process_state=record.process_state,
+        compound=record.compound,
+        observable_factor=float(record.observable_factor) * multiplier,
+        evidence_strength=record.evidence_strength,
+        source=record.source,
+        fallback_mode=record.fallback_mode,
+        notes=f"{record.notes}{extra_note}".strip(),
+    )
 
 
 def _normalize_compound(name: str) -> str:
@@ -275,6 +442,113 @@ def determine_matrix_process_state(*, temperature_celsius: float, time_minutes: 
     return "intermediate_matrix"
 
 
+# (protein_type, process_state) pairs for which we hold compound-specific
+# observable calibration anchors. Used by is_formulation_in_calibration_scope().
+_CALIBRATED_PROTEIN_PROCESS_PAIRS = frozenset(
+    (record.protein_type, record.process_state) for record in _MATRIX_CALIBRATION_RECORDS
+)
+
+
+@dataclass(frozen=True)
+class ScopeAssessment:
+    """Result of comparing a formulation against the calibration convex hull.
+
+    Attributes
+    ----------
+    in_scope:
+        True iff the (protein_type, process_state) pair is present in the
+        compound-specific calibration anchor set AND the temperature/pH/time
+        envelope falls within the calibrated range for that pair.
+    reasons:
+        Human-readable list of *why* the formulation was flagged out of scope.
+        Empty when ``in_scope`` is True.
+    nearest_calibrated:
+        The closest calibrated (protein_type, process_state) pair, used by the
+        report banner to suggest a comparable in-scope formulation.
+    """
+
+    in_scope: bool
+    reasons: tuple[str, ...]
+    nearest_calibrated: Dict[str, str]
+
+    def to_dict(self) -> Dict[str, object]:
+        return {
+            "in_scope": bool(self.in_scope),
+            "reasons": list(self.reasons),
+            "nearest_calibrated": dict(self.nearest_calibrated),
+        }
+
+
+# Calibrated envelope per (protein_type, process_state). Derived from the
+# benchmark + anchor coverage actually used by the matrix panel today; kept
+# explicit (rather than inferred at runtime) so the scope check is auditable.
+_CALIBRATED_ENVELOPES: Dict[tuple[str, str], Dict[str, tuple[float, float]]] = {
+    ("pea_iso", "ambient_slurry"): {"temperature_c": (4.0, 55.0), "pH": (5.5, 8.5), "time_min": (0.0, 60.0)},
+    ("pea_iso", "heated_matrix"): {"temperature_c": (90.0, 145.0), "pH": (5.5, 8.5), "time_min": (5.0, 240.0)},
+    ("soy_iso", "ambient_slurry"): {"temperature_c": (4.0, 55.0), "pH": (5.5, 8.5), "time_min": (0.0, 60.0)},
+    ("soy_iso", "heated_matrix"): {"temperature_c": (90.0, 145.0), "pH": (5.5, 8.5), "time_min": (5.0, 240.0)},
+}
+
+
+def is_formulation_in_calibration_scope(
+    *,
+    protein_type: Optional[str],
+    process_state: Optional[str],
+    temperature_celsius: Optional[float] = None,
+    time_minutes: Optional[float] = None,
+    pH: Optional[float] = None,
+) -> ScopeAssessment:
+    """Return whether a formulation falls inside the calibration convex hull.
+
+    The hull is intentionally conservative: only (protein_type, process_state)
+    pairs with explicit `MatrixCalibrationRecord` anchors count as in-scope, and
+    only when temperature/pH/time fall inside the envelope observed during
+    calibration. Anything else is flagged so the report can downgrade tiers
+    (Lane E, sprint 2026-05-10b).
+    """
+    reasons: list[str] = []
+    nearest: Dict[str, str] = {
+        "protein_type": str(protein_type or "unknown"),
+        "process_state": str(process_state or "unknown"),
+    }
+
+    if not protein_type:
+        return ScopeAssessment(in_scope=False, reasons=("protein_type is missing",), nearest_calibrated=nearest)
+    if not process_state:
+        return ScopeAssessment(in_scope=False, reasons=("process_state is missing",), nearest_calibrated=nearest)
+
+    pair = (str(protein_type), str(process_state))
+    if pair not in _CALIBRATED_PROTEIN_PROCESS_PAIRS:
+        # Suggest the nearest calibrated process_state for the same protein type.
+        same_protein = [ps for (pt, ps) in _CALIBRATED_PROTEIN_PROCESS_PAIRS if pt == protein_type]
+        if same_protein:
+            nearest = {"protein_type": str(protein_type), "process_state": same_protein[0]}
+            reasons.append(
+                f"No calibration anchor for ({protein_type}, {process_state}); nearest calibrated process_state is {same_protein[0]}"
+            )
+        else:
+            reasons.append(
+                f"No calibration anchor for protein_type '{protein_type}' (calibrated set: pea_iso, soy_iso)"
+            )
+        return ScopeAssessment(in_scope=False, reasons=tuple(reasons), nearest_calibrated=nearest)
+
+    envelope = _CALIBRATED_ENVELOPES.get(pair, {})
+    if temperature_celsius is not None and "temperature_c" in envelope:
+        lo, hi = envelope["temperature_c"]
+        if not (lo <= float(temperature_celsius) <= hi):
+            reasons.append(f"temperature {temperature_celsius:.1f} °C outside calibrated range [{lo:.0f}, {hi:.0f}]")
+    if time_minutes is not None and "time_min" in envelope:
+        lo, hi = envelope["time_min"]
+        if not (lo <= float(time_minutes) <= hi):
+            reasons.append(f"time {time_minutes:.1f} min outside calibrated range [{lo:.0f}, {hi:.0f}]")
+    if pH is not None and "pH" in envelope:
+        lo, hi = envelope["pH"]
+        if not (lo <= float(pH) <= hi):
+            reasons.append(f"pH {pH:.2f} outside calibrated range [{lo:.1f}, {hi:.1f}]")
+
+    return ScopeAssessment(in_scope=not reasons, reasons=tuple(reasons), nearest_calibrated=nearest)
+
+
 def get_matrix_calibration_record(
     compound: str,
     *,
@@ -295,8 +569,8 @@ def get_matrix_calibration_record(
             if _normalize_compound(record.compound) != normalized:
                 continue
             if candidate_state == requested_state:
-                return record
-            return MatrixCalibrationRecord(
+                return _apply_observable_multiplier_to_record(record)
+            return _apply_observable_multiplier_to_record(MatrixCalibrationRecord(
                 protein_type=record.protein_type,
                 process_state=requested_state,
                 compound=record.compound,
@@ -305,7 +579,7 @@ def get_matrix_calibration_record(
                 source=record.source,
                 fallback_mode="nearest_process_state",
                 notes=f"Requested process state '{requested_state}' falls back to nearest calibrated state '{candidate_state}'.",
-            )
+            ))
     return None
 
 
@@ -349,6 +623,8 @@ def describe_matrix_calibration(
     protein_type: Optional[str],
     process_state: Optional[str],
 ) -> Dict[str, object]:
+    multiplier_info = get_matrix_observable_multiplier(protein_type)
+    multiplier = float(multiplier_info.get("multiplier", 1.0) or 1.0)
     record = get_matrix_calibration_record(
         compound,
         protein_type=protein_type,
@@ -364,7 +640,9 @@ def describe_matrix_calibration(
                     "calibration_process_state": process_state or "unknown",
                     "calibration_evidence_strength": anchor.evidence_strength,
                     "calibration_fallback_mode": anchor.fallback_mode,
-                    "calibration_observable_factor": float(anchor.observable_factor),
+                    "calibration_observable_factor": float(anchor.observable_factor) * multiplier,
+                    "calibration_observable_multiplier": multiplier,
+                    "calibration_observable_multiplier_source": multiplier_info.get("source", "baseline_registry"),
                     "calibration_notes": anchor.notes,
                 }
         return {
@@ -373,6 +651,8 @@ def describe_matrix_calibration(
             "calibration_evidence_strength": "heuristic",
             "calibration_fallback_mode": "class_level",
             "calibration_observable_factor": None,
+            "calibration_observable_multiplier": multiplier,
+            "calibration_observable_multiplier_source": multiplier_info.get("source", "baseline_registry"),
             "calibration_notes": "No compound-specific matrix calibration is registered for this compound/process state.",
         }
     return {
@@ -381,5 +661,7 @@ def describe_matrix_calibration(
         "calibration_evidence_strength": record.evidence_strength,
         "calibration_fallback_mode": record.fallback_mode,
         "calibration_observable_factor": float(record.observable_factor),
+        "calibration_observable_multiplier": multiplier,
+        "calibration_observable_multiplier_source": multiplier_info.get("source", "baseline_registry"),
         "calibration_notes": record.notes,
     }

@@ -1,0 +1,40 @@
+experiment_id: external_validation_bi_2020_raw_pea_hexanal
+source_kind: external_literature
+evidence_class: external_validation_only
+protein_type: pea_iso
+process_state: ambient_slurry
+matrix_format: raw pea flour external hold-out, proxied onto the pea-isolate matrix-only
+  lane
+conditions:
+  temp_C: 40.0
+  ph: 6.0
+  water_activity: 0.95
+  time_min: 10.0
+formulation:
+  precursors:
+    Pea Protein Isolate:
+      concentration_mM: 1000.0
+measured_volatiles:
+  hexanal:
+    conc_ppb: 1260.0
+provenance:
+  origin: external_literature
+  source_reference: Bi et al. (2020), J. Agric. Food Chem. 68:2718-2727
+  source_doi: 10.1021/acs.jafc.9b07711
+  measurement_date: '2020-01-01'
+  notes: 'External validation hold-out synthesized from flavor_reference_payloads.json;
+    never use for calibration or promotion. bi_2020_raw_pea_hexanal_point: track_raw_pea_off_note_burden_without_claiming_isolate_specificity'
+benchmark_alignment:
+  target_benchmark_id: pea_isolate_40C_PratapSingh2021
+  notes: Proxy the raw-pea literature baseline onto the closest executable pea matrix-only
+    lane. evidence_class=external_validation_only keeps it out of calibration.
+analytical_context:
+  headspace_method: HS-SPME-GC-SIM
+  quantification_mode: internal_standard_calibrated
+  replicates: 3
+  notes: Raw-pea flour baseline from Bi et al. (2020). Benchmark conditions are copied
+    from the closest executable pea matrix-only lane because the literature point
+    is a structural hold-out, not a closure benchmark.
+  citation_provenance:
+  - Bi et al. (2020), J. Agric. Food Chem. 68:2718-2727
+denaturation_state: 0.0

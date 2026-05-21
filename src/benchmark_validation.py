@@ -1284,6 +1284,15 @@ def _increment_matrix_support_counts(counts: Dict[str, int], support_status: str
 
 
 def _matrix_external_data_status(bench: dict) -> str:
+    evidence_class = str(
+        (bench.get("source_metadata") or {}).get(
+            "evidence_class",
+            (bench.get("metadata") or {}).get("evidence_class", bench.get("evidence_class", "calibration_candidate")),
+        )
+    ).strip()
+    if evidence_class == "external_validation_only":
+        return "external_validation_only"
+
     source_origin = _matrix_source_origin(bench)
     has_measured = bool(bench.get("measured_volatiles"))
     if has_measured and (bench.get("source_doi") or source_origin.startswith("external")):
@@ -1322,6 +1331,8 @@ def assess_matrix_benchmark_evidence(bench: dict | Path | str) -> MatrixBenchmar
 
     if target_profile == "adverse_only":
         blocker = "benchmark only anchors adverse/off-flavour markers; no external meaty-positive targets are present"
+    elif external_data_status == "external_validation_only":
+        blocker = "external-validation hold-out only; explicitly excluded from calibration and promotion"
     elif external_data_status == "internal_measured_quantitative":
         blocker = "missing external quantitative matrix evidence for meaty-positive targets; current comparator is an internal measured experiment"
     elif external_data_status == "internal_reference_only":

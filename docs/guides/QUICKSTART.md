@@ -99,6 +99,6 @@ This creates run-level reports plus campaign-level Markdown and JSON summaries.
 
 ## Before You Trust A Result
 
-Read [SCIENTIFIC_RELIABILITY.md](SCIENTIFIC_RELIABILITY.md).
+Read [architecture.md](../architecture.md).
 
-That document explains what the tool can support today, what remains directional only, and where wet-lab confirmation is still mandatory.
+That document explains the trust tiers: what the tool can support today, what remains directional only, and where wet-lab confirmation is still mandatory.

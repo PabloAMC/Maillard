@@ -1921,6 +1921,37 @@ class DFTRefiner:
                             )
                             strat_idx += 1
                             continue
+                        if not is_ts:
+                            logger.warning(
+                                f"    [LADDER] Strategy '{strat_name}' raised a non-recoverable "
+                                f"reactant optimisation error: {exc}. Proceeding with best available geometry."
+                            )
+                            conv, mol_opt, opt_xyz = self._best_available_geometry_fallback(
+                                current_xyz,
+                                charge=charge,
+                                spin=spin,
+                                basis=self.opt_basis,
+                                label=f"{phase_label} refinement",
+                            )
+                            if opt_xyz:
+                                current_xyz = opt_xyz
+                            _save_named_geometry("best_available", current_xyz)
+                            _save_phase_progress(
+                                xyz=current_xyz,
+                                current_stage="geometry_complete",
+                                current_strategy_index=strat_idx,
+                                current_strategy_name=strat_name,
+                                last_strategy_index=strat_idx,
+                                last_strategy_name=strat_name,
+                                last_strategy_status="exception_fallback",
+                                last_error=str(exc),
+                                next_strategy_index=len(_SCF_STRATEGIES),
+                                geometry_ready_for_postprocessing=True,
+                                converged=False,
+                                mlp_completed=resume_mlp_completed,
+                                xtb_completed=resume_xtb_completed,
+                            )
+                            break
                         _save_phase_progress(
                             xyz=current_xyz,
                             current_stage="dft_geometry_optimization",

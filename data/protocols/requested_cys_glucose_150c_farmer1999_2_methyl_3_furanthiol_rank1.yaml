@@ -22,20 +22,20 @@ measured_volatiles:
     _target_role: primary_request_target
 request_metadata:
   originating_voi_rank: 1
-  voi_score: 7.685962235498726
-  voi_rationale: CI width 5.12 dex; ≈3e+05× ODT (decision_relevance=5.00); critical
+  voi_score: 7.702547770745354
+  voi_rationale: CI width 5.14 dex; ≈3e+05× ODT (decision_relevance=5.00); critical
     meaty odorant — multi-factor SIDA closes precursor × matrix gap
   envelope_miss_log10: 0.0
-  ci_width_log10: 5.123974823665818
+  ci_width_log10: 5.135031847163569
   decision_relevance: 5.0
-  p5_predicted_ppb: 0.005903187149498322
-  p50_predicted_ppb: 34.99248314038534
-  p95_predicted_ppb: 785.3466139454246
+  p5_predicted_ppb: 0.004300775560912108
+  p50_predicted_ppb: 31.73472594688829
+  p95_predicted_ppb: 586.9196181769656
   previous_measured_ppb: 15.0
   odour_threshold_ug_per_kg: 0.0001
   suggested_doe_template: blocking_benchmark_gap
-  goal: expand model coverage
-  budget_label: TBD
+  goal: null
+  budget_label: null
 benchmark_alignment:
   target_benchmark_id: cys_glucose_150C_Farmer1999
   notes: Re-measure to constrain the model envelope at this benchmark.

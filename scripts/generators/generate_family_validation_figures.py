@@ -338,7 +338,7 @@ def _render_family_coverage(payload: dict[str, object], output_path: Path) -> No
     # Annotate gaps explicitly on the bar row
     for idx, r in enumerate(plotted):
         if int(r["quantitative_point_count"]) == 0:
-            status_text = r"\textit{runtime lane landed}" if bool(r.get("has_runtime_support", False)) else r"\textit{no runtime lane yet}"
+            status_text = r"\textit{Active in simulation}" if bool(r.get("has_runtime_support", False)) else r"\textit{Not yet modeled}"
             ax.text(0.12, idx, status_text, va="center",
                     fontsize=_FS - 3, color="#777777", style="italic")
 
@@ -350,19 +350,21 @@ def _render_family_coverage(payload: dict[str, object], output_path: Path) -> No
     ax.set_xlim(left=0)
 
     legend_handles = [
-        mpatches.Patch(facecolor="#0077BB", label=r"Runtime-integrated family"),
-        mpatches.Patch(facecolor=_FAMILY_COLOR_NONE, label=r"No quantitative parity yet"),
+        mpatches.Patch(facecolor="#555555", label=r"Reaction family with matched data"),
+        mpatches.Patch(facecolor=_FAMILY_COLOR_NONE, label=r"No quantitative data points yet"),
     ]
     ax.legend(
         handles=legend_handles,
         fontsize=_FS - 3,
-        loc="upper right",
-        bbox_to_anchor=(0.98, 0.98),
+        loc="lower right",
+        bbox_to_anchor=(0.98, 0.02),
         bbox_transform=ax.transAxes,
         framealpha=0.9,
         edgecolor="0.75",
         labelspacing=0.2,
     )
+
+
 
     fig.savefig(output_path, dpi=300, bbox_inches="tight")
     plt.close(fig)

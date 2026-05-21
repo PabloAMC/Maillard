@@ -43,9 +43,108 @@ def _short_compound(name: str) -> str:
 
 
 def _short_benchmark(name: str) -> str:
-    if len(name) > 38:
-        name = name[:36] + "…"
-    return name
+    # Explicit clean formatting map for existing benchmarks
+    clean_map = {
+        "cys_glucose_150C_Farmer1999": "Farmer 1999 (Cys + Glucose, 150°C)",
+        "wheat_gluten_hvp_xylose_120C_PMC9905368": "PMC9905368 (Wheat Gluten + HVP + Xylose, 120°C)",
+        "spi_hvp_xylose_120C_PMC9905368": "PMC9905368 (SPI + HVP + Xylose, 120°C)",
+        "acrylamide_asparagine_glucose_Parker2012": "Parker 2012 (Asparagine + Glucose)",
+        "acrylamide_spi_extrusion_130C_ACSRef3": "ACSRef3 (SPI Extrusion, 130°C)",
+        "cml_cel_commercial_pbma_Foods2023": "Foods 2023 (Commercial PBMA)",
+        "cys_ribose_140C_Hofmann1998": "Hofmann 1998 (Cys + Ribose, 140°C)",
+        "cys_ribose_150C_Mottram1994": "Mottram 1994 (Cys + Ribose, 150°C)",
+        "furosine_extrusion_crossover_140C_RamirezJimenez2000": "Ramirez-Jimenez 2000 (Extrusion, 140°C)",
+        "pea_isolate_40C_PratapSingh2021": "Pratap Singh 2021 (Pea Isolate, 40°C)",
+        "pea_isolate_ribose_cysteine_100C_45min_Internal2026": "Internal 2026 (Pea Isolate + Ribose + Cys, 100°C)",
+        "pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026": "Protocol Pilot 2026 (Pea Isolate + Ribose + Cys, 100°C)",
+        "pea_isolate_uht_140C_Trikusuma2019": "Trikusuma 2019 (Pea Isolate UHT, 140°C)",
+        "resconi_2023_pbma_beef_identity_benchmark": "Resconi 2023 (PBMA Beef Identity)",
+        "soy_isolate_40C_PratapSingh2021": "Pratap Singh 2021 (Soy Isolate, 40°C)",
+        "soy_isolate_ribose_cysteine_100C_45min_Internal2026": "Internal 2026 (Soy Isolate + Ribose + Cys, 100°C)",
+        "soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026": "Protocol Pilot 2026 (Soy Isolate + Ribose + Cys, 100°C)",
+        "thiamine_cys_ribose_100C_Hofmann1996": "Hofmann 1996 (Thiamine + Cys + Ribose, 100°C)",
+        "thiamine_cys_xylose_145C_Cerny2008": "Cerny 2008 (Thiamine + Cys + Xylose, 145°C)",
+    }
+    if name in clean_map:
+        return clean_map[name]
+    
+    # Fallback parser for new/unlisted benchmarks
+    import re
+    # Remove '_benchmark' suffix if present
+    clean_name = re.sub(r"_benchmark$", "", name)
+    parts = clean_name.split("_")
+    
+    # Try to find reference/year info
+    year_regex = re.compile(r"^(19|20)\d{2}$")
+    temp_regex = re.compile(r"^\d+C$")
+    
+    year_part = ""
+    author_part = ""
+    temp_part = ""
+    rest_parts = []
+    
+    # Standard mapping for common terms
+    term_map = {
+        "cys": "Cys",
+        "cysteine": "Cys",
+        "glucose": "Glucose",
+        "ribose": "Ribose",
+        "xylose": "Xylose",
+        "spi": "SPI",
+        "hvp": "HVP",
+        "pbma": "PBMA",
+        "pea": "Pea",
+        "soy": "Soy",
+        "isolate": "Isolate",
+        "asparagine": "Asparagine",
+        "wheat": "Wheat",
+        "gluten": "Gluten",
+        "thiamine": "Thiamine",
+    }
+    
+    for part in parts:
+        if temp_regex.match(part):
+            temp_part = part.replace("C", "°C")
+        elif year_regex.match(part):
+            year_part = part
+        else:
+            # Check if it has year inside it, like Farmer1999
+            m = re.match(r"^([a-zA-Z\-]+)((19|20)\d{2})$", part)
+            if m:
+                author_part = m.group(1).capitalize()
+                year_part = m.group(2)
+            else:
+                lpart = part.lower()
+                if lpart in term_map:
+                    rest_parts.append(term_map[lpart])
+                elif lpart not in ["min", "45min", "only", "validation"]:
+                    rest_parts.append(part.capitalize())
+                    
+    citation = ""
+    if author_part and year_part:
+        citation = f"{author_part} {year_part}"
+    elif year_part:
+        # Look for potential author at the end
+        if parts:
+            potential_author = parts[-1]
+            potential_author = re.sub(r"\d+", "", potential_author)
+            if potential_author and potential_author.lower() not in ["benchmark", "validation", "only"]:
+                citation = f"{potential_author.capitalize()} {year_part}"
+            else:
+                citation = year_part
+        else:
+            citation = year_part
+    else:
+        citation = name
+        
+    system = " + ".join(rest_parts)
+    if temp_part:
+        system = f"{system}, {temp_part}" if system else temp_part
+        
+    if system and citation != name:
+        return f"{citation} ({system})"
+    return citation
+
 
 
 def build_grid(payload: dict) -> Tuple[List[str], List[str], np.ndarray, np.ndarray]:
@@ -58,7 +157,7 @@ def build_grid(payload: dict) -> Tuple[List[str], List[str], np.ndarray, np.ndar
     comp_max: Dict[str, float] = {}
     for cand in candidates:
         b = str(cand["benchmark_id"])
-        c = _short_compound(str(cand["compound"]))
+        c = str(cand["compound"])
         v = float(cand.get("voi_score", 0.0))
         bench_max[b] = max(bench_max.get(b, 0.0), v)
         comp_max[c] = max(comp_max.get(c, 0.0), v)
@@ -72,7 +171,7 @@ def build_grid(payload: dict) -> Tuple[List[str], List[str], np.ndarray, np.ndar
     cidx = {c: i for i, c in enumerate(comp_order)}
     for cand in candidates:
         b = str(cand["benchmark_id"])
-        c = _short_compound(str(cand["compound"]))
+        c = str(cand["compound"])
         i, j = bidx[b], cidx[c]
         voi[i, j] = float(cand.get("voi_score", 0.0))
         if not bool(cand.get("inside_ci", True)):

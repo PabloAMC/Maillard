@@ -1,0 +1,72 @@
+{
+  "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+  "conditions": {
+    "ph": 6.0,
+    "temp_C": 40.0,
+    "time_min": 10.0,
+    "water_activity": 0.95
+  },
+  "denaturation_state": 0.0,
+  "evidence_class": "external_validation_only",
+  "matrix_ranking_contract": {
+    "adverse_markers": [
+      "hexanal",
+      "nonanal"
+    ],
+    "citation_provenance": [
+      "Liu, Y. (2023 thesis)"
+    ],
+    "notes": "Auto-derived from the measured panel because no explicit comparison_contract was supplied.",
+    "observable_targets": [
+      {
+        "direction": "lower",
+        "expected_rank": 1,
+        "name": "hexanal",
+        "role": "adverse_marker"
+      },
+      {
+        "direction": "lower",
+        "expected_rank": 2,
+        "name": "nonanal",
+        "role": "adverse_marker"
+      }
+    ]
+  },
+  "measured_volatiles": {
+    "hexanal": {
+      "conc_ppb": 51.96152422706632,
+      "uncertainty_pct": 246.4
+    },
+    "nonanal": {
+      "conc_ppb": 15.811388300841896,
+      "uncertainty_pct": 216.2
+    }
+  },
+  "metadata": {
+    "evidence_class": "external_validation_only",
+    "execution_path": "matrix_only",
+    "family": "matrix_headspace",
+    "notes": "Generated from matrix experiment intake payload.",
+    "tier": "PRIMARY"
+  },
+  "precursors": {
+    "Pea Protein Isolate": {
+      "concentration_mM": 1000.0
+    }
+  },
+  "process_metadata": {
+    "extrusion_history": "unspecified",
+    "matrix_format": "native commercial pea protein isolate aqueous slurry external hold-out",
+    "preheating": "unspecified",
+    "state": "ambient_slurry"
+  },
+  "protein_type": "pea_iso",
+  "source_doi": "",
+  "source_metadata": {
+    "evidence_class": "external_validation_only",
+    "generator": "matrix_experiment_intake",
+    "measurement_date": "2023-01-01",
+    "notes": "External validation hold-out synthesized from flavor_reference_payloads.json; never use for calibration or promotion. liu_2023_ppi_hexanal_band: retain_ppi_hexanal_baseline_as_structural_off_note_penalty liu_2023_ppi_nonanal_band: retain_ppi_nonanal_baseline_as_secondary_fatty_off_note_anchor",
+    "origin": "external_literature"
+  }
+}

@@ -39,3 +39,33 @@ def test_render_writes_png(tmp_path: Path):
     generate_gap_heatmap.render(bench_labels, comp_labels, voi, outside, out)
     assert out.exists()
     assert out.stat().st_size > 1000  # non-trivial PNG
+
+
+def test_build_grid_keeps_distinct_compounds_when_short_labels_collide():
+    from scripts.generators import generate_gap_heatmap
+
+    payload = {
+        "candidates": [
+            {
+                "benchmark_id": "cml_cel_commercial_pbma_Foods2023",
+                "compound": "Nε-(Carboxymethyl)lysine (CML)",
+                "voi_score": 1.5,
+                "inside_ci": False,
+            },
+            {
+                "benchmark_id": "cml_cel_commercial_pbma_Foods2023",
+                "compound": "Nε-(Carboxyethyl)lysine (CEL)",
+                "voi_score": 1.2,
+                "inside_ci": False,
+            },
+        ]
+    }
+
+    bench_labels, comp_labels, voi, outside = generate_gap_heatmap.build_grid(payload)
+
+    assert bench_labels == ["cml_cel_commercial_pbma_Foods2023"]
+    assert len(comp_labels) == 2
+    assert comp_labels[0] == "Nε-(Carboxymethyl)lysine (CML)"
+    assert comp_labels[1] == "Nε-(Carboxyethyl)lysine (CEL)"
+    assert voi.shape == (1, 2)
+    assert int(outside.sum()) == 2

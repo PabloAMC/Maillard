@@ -22,7 +22,9 @@ def main() -> int:
 
     payload_path = Path(args.input_payload)
     output_path = Path(args.output_benchmark)
-    benchmark = materialize_matrix_experiment_benchmark(payload_path, output_path=output_path)
+    benchmark = materialize_matrix_experiment_benchmark(payload_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(json.dumps(benchmark, indent=2, sort_keys=True), encoding="utf-8")
 
     print(json.dumps(benchmark, indent=2))
     print(f"Wrote {output_path}")

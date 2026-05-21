@@ -13,7 +13,7 @@ from src.results_db import ResultsDB  # noqa: E402
 from src.sensory import SensoryPredictor  # noqa: E402
 from src.safety import evaluate_formulation_safety  # noqa: E402
 from src.lipid_oxidation import build_lipid_input_proxy_loads, predict_lop_generation  # noqa: E402
-from src.matrix_calibration_registry import determine_matrix_process_state
+from src.matrix_calibration_registry import determine_matrix_process_state, is_formulation_in_calibration_scope
 from src.matrix_correction import build_matrix_explainability, resolve_effective_denaturation_state  # noqa: E402
 from src.extrusion import build_extrusion_process_profile
 from src.literature_runtime import build_family_upstream_contract, build_flavor_axis_summary
@@ -66,6 +66,24 @@ def _compute_meaty_quality_constraint(predicted_ppb: Dict[str, float]) -> Tuple[
     penalty = max(0.0, math.log10(target_ratio / max(ratio, 1.0e-9))) * 1.25
     return ratio, penalty
 
+
+def build_formulation_uncertainty_envelopes(predicted_ppb: Dict[str, float]) -> Dict[str, Dict[str, object]]:
+    from src.uncertainty_propagation import build_formulation_uncertainty_envelopes as _build_formulation_uncertainty_envelopes
+
+    return _build_formulation_uncertainty_envelopes(predicted_ppb)
+
+@dataclass
+class UncertaintyEnvelope:
+    compound: str
+    predicted_ppb: float
+    predicted_p5: float
+    predicted_p50: float
+    predicted_p95: float
+    ci_level_pct: int = 90
+    support_count: int = 0
+    envelope_source: str = "prediction_uncertainty"
+
+
 @dataclass
 class FormulationResult:
     name: str
@@ -81,6 +99,7 @@ class FormulationResult:
     texture_risk: float = 0.0
     predicted_ppb: Dict[str, float] = field(default_factory=dict)
     predicted_proxy_ppb: Dict[str, float] = field(default_factory=dict)
+    uncertainty_envelopes: Dict[str, UncertaintyEnvelope] = field(default_factory=dict)
     projection_metadata: ProjectionMetadataMap = field(default_factory=dict)
     avg_uncertainty: float = 5.0
     effective_denaturation_state: float = 0.5
@@ -118,6 +137,40 @@ def compute_ranking_score(
         - float(result.pyrazine_penalty)
         - float(result.furanone_penalty)
     )
+
+
+def _build_confidence_metadata(
+    *,
+    extrusion_process: Dict,
+    protein_type: Optional[str],
+    process_state: Optional[str],
+    temperature_celsius: Optional[float],
+    time_minutes: Optional[float],
+    pH: Optional[float],
+) -> Dict[str, object]:
+    """Assemble the confidence metadata payload for FormulationResult.
+
+    Sprint 2026-05-10b Lane E: always include the calibration scope assessment
+    so the report layer can downgrade tier labels for out-of-scope formulations.
+    """
+    metadata: Dict[str, object] = {}
+    if extrusion_process and extrusion_process.get("active"):
+        metadata["extrusion_process"] = extrusion_process
+    try:
+        scope = is_formulation_in_calibration_scope(
+            protein_type=protein_type,
+            process_state=process_state,
+            temperature_celsius=temperature_celsius,
+            time_minutes=time_minutes,
+            pH=pH,
+        )
+        metadata["scope_assessment"] = scope.to_dict()
+    except Exception:
+        # Defensive: scope-check must never break the pipeline. Failure is
+        # equivalent to "unknown scope" and the report falls back to the
+        # existing tier semantics.
+        metadata["scope_assessment"] = {"in_scope": True, "reasons": [], "nearest_calibrated": {}}
+    return metadata
 
 
 class MaillardPipeline:
@@ -583,11 +636,22 @@ class MaillardPipeline:
                 texture_risk=self._score_texture_risk(precursors, sugars),
                 predicted_ppb=conc_map,
                 predicted_proxy_ppb=rec_result.get("predicted_proxy_ppb", {}),
+                uncertainty_envelopes={
+                    compound: UncertaintyEnvelope(**row)
+                    for compound, row in build_formulation_uncertainty_envelopes(conc_map).items()
+                },
                 projection_metadata=rec_result.get("projection_metadata", {}),
                 avg_uncertainty=avg_unc,
                 effective_denaturation_state=denaturation_state,
                 matrix_explainability=matrix_explainability,
-                confidence_metadata={"extrusion_process": extrusion_process} if extrusion_process.get("active") else {},
+                confidence_metadata=_build_confidence_metadata(
+                    extrusion_process=extrusion_process,
+                    protein_type=protein_type,
+                    process_state=process_state,
+                    temperature_celsius=cond.effective_temperature_celsius,
+                    time_minutes=form.get("time_minutes", 60.0),
+                    pH=cond.pH,
+                ),
                 targets=rec_result.get("targets", []),
                 bottleneck_precursor=rec_result["metrics"].get("bottleneck", {}).get("precursor", "none"),
                 bottleneck_severity=rec_result["metrics"].get("bottleneck", {}).get("severity", 0.0),

@@ -1,0 +1,53 @@
+experiment_id: external_validation_li_2026_spi_wg_hme_control
+source_kind: external_literature
+evidence_class: external_validation_only
+protein_type: soy_iso
+process_state: extrusion_structured
+matrix_format: SPI:wheat gluten 6:4 dry-basis HME control, proxied onto the soy-isolate
+  extrusion lane
+conditions:
+  temp_C: 160.0
+  ph: 7.0
+  water_activity: 0.35
+  time_min: 0.4167
+formulation:
+  precursors:
+    Soy Protein Isolate:
+      concentration_mM: 1000.0
+measured_volatiles:
+  hexanal:
+    conc_ppb: 605.6
+  nonanal:
+    conc_ppb: 29.42
+  1-hexanol:
+    conc_ppb: 20.04
+  2-pentylfuran:
+    conc_ppb: 221.51
+provenance:
+  origin: external_literature
+  source_reference: Li et al. (2026), Foods 15(5):912
+  source_doi: 10.3390/foods15050912
+  measurement_date: '2026-01-01'
+  notes: 'External validation hold-out synthesized from flavor_reference_payloads.json;
+    never use for calibration or promotion. li_2026_spi_wg_hme_hexanal_control_point:
+    track_family_11_hme_hexanal_baseline_without_claiming_executable_benchmark_closure
+    li_2026_spi_wg_hme_nonanal_control_point: retain_family_11_nonanal_baseline_as_supporting_off_note_panel_evidence
+    li_2026_spi_wg_hme_1_hexanol_control_point: retain_family_11_1_hexanol_baseline_as_supporting_off_note_panel_evidence
+    li_2026_spi_wg_hme_2_pentylfuran_control_point: retain_family_11_2_pentylfuran_baseline_as_supporting_off_note_panel_evidence'
+benchmark_alignment:
+  notes: Li et al. (2026) HME control anchor. The paper does not publish a final-blend
+    pH or water-activity closure, so this bundle stays external_validation_only and
+    never enters calibration.
+analytical_context:
+  headspace_method: HS-SPME-GC-MS with isotopic internal standards
+  quantification_mode: isotope_dilution_calibrated
+  replicates: 3
+  notes: The control matrix includes 40% wheat gluten hydrolysate on a dry basis.
+    The executable proxy uses soy_iso only so the hold-out remains a narrow external
+    check, not a benchmark-closure claim.
+  citation_provenance:
+  - Li et al. (2026), Foods 15(5):912
+  - Li et al. (2026), Foods 15(5):912
+  - Li et al. (2026), Foods 15(5):912
+  - Li et al. (2026), Foods 15(5):912
+denaturation_state: 0.8

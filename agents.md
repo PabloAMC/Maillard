@@ -7,10 +7,10 @@
 ## Project Snapshot
 Computational screening framework for meat-like Maillard chemistry in plant-based matrices. Combines deterministic kinetic ODEs (SMIRKS-based reaction families), matrix-aware retention/headspace physics, and selective QM (xTB → DFT via Sella/PySCF) for barrier refinement.
 
-- Mission, philosophy, architecture: [README.md](README.md), [docs/PHILOSOPHY.md](docs/PHILOSOPHY.md), [docs/architecture.md](docs/architecture.md)
-- Validation contract & benchmark surface: [docs/VALIDATION_GUIDE.md](docs/VALIDATION_GUIDE.md)
+- Mission, architecture: [README.md](README.md), [docs/architecture.md](docs/architecture.md)
+- Validation contract & benchmark surface: [docs/reference/VALIDATION_CONTRACT.md](docs/reference/VALIDATION_CONTRACT.md)
 - Selective-QM runbook: [docs/guides/COMPUTATIONAL_GAP_RUNBOOK.md](docs/guides/COMPUTATIONAL_GAP_RUNBOOK.md)
-- SMIRKS conventions: [docs/SMIRKS_SYSTEM.md](docs/SMIRKS_SYSTEM.md)
+- SMIRKS conventions: [docs/reference/SMIRKS_SYSTEM.md](docs/reference/SMIRKS_SYSTEM.md)
 - Active roadmap & lessons: [tasks/todo.md](tasks/todo.md), [tasks/lessons.md](tasks/lessons.md)
 
 ## Layout

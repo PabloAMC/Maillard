@@ -35,6 +35,21 @@ def test_pipeline_preserves_proxy_and_projection_metadata(monkeypatch):
         "src.pipeline.evaluate_formulation_safety",
         lambda *args, **kwargs: (0.0, []),
     )
+    monkeypatch.setattr(
+        "src.pipeline.build_formulation_uncertainty_envelopes",
+        lambda predicted_ppb: {
+            "furfural": {
+                "compound": "furfural",
+                "predicted_ppb": 48.0,
+                "predicted_p5": 16.0,
+                "predicted_p50": 48.0,
+                "predicted_p95": 72.0,
+                "ci_level_pct": 90,
+                "support_count": 3,
+                "envelope_source": "prediction_uncertainty",
+            }
+        },
+    )
 
     projection_metadata = {
         "furfural": {
@@ -68,6 +83,8 @@ def test_pipeline_preserves_proxy_and_projection_metadata(monkeypatch):
     assert result.predicted_proxy_ppb["furfural"] == 120.0
     assert result.projection_metadata["furfural"]["observable_ppb"] == 48.0
     assert result.projection_metadata["furfural"]["proxy_ppb"] == 120.0
+    assert result.uncertainty_envelopes["furfural"].predicted_p95 == 72.0
+    assert result.uncertainty_envelopes["furfural"].support_count == 3
 
 
 def test_output_projection_applies_compound_specific_matrix_calibration():

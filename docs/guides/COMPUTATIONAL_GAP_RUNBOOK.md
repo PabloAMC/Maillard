@@ -1,6 +1,43 @@
 # Computational Gap Runbook
 
-This guide is for the official selective-QM queue plus the closely related proxy lanes that are being triaged for later promotion.
+This guide covers the selective-QM queue (xTB → DFT) and explains how to decide which
+reaction steps need barrier refinement beyond the FAST-mode heuristics.
+
+## Calibrated FAST-Mode Barrier Constants
+
+The FAST screening mode (`src/barrier_constants.py`) uses hand-calibrated barrier constants
+anchored to published high-level DFT or experimental data — not raw xTB. These are the
+primary authority for laptop-speed ranking.
+
+| Reaction Family | FAST Barrier | Primary Literature Source |
+|---|---|---|
+| **Schiff Base Formation** | 15.0 kcal/mol | Yaylayan & Huyghues-Despointes 1994 (DFT B3LYP) |
+| **Thiol Addition** | 15.0 kcal/mol | Maillard_meat estimates |
+| **Strecker Degradation** | 20.0 kcal/mol | Hofmann & Schieberle 2000 (Experimental/DFT) |
+| **Amadori / Heyns** | 23.0–24.0 kcal/mol | Martins & van Boekel 2003 (CCSD(T) benchmarks) |
+| **Enolisation** | 28.0 kcal/mol | Nursten 2005 (rate-limiting in advanced Maillard) |
+| **Cysteine Thermolysis** | 30.0 kcal/mol | Wedzicha 1984 (upper bound) |
+| **Retro-Aldol Cleavage** | 32.0 kcal/mol | Hodge 1953 (high barrier estimated) |
+
+When a decision is sensitive to a specific barrier in this table, that step becomes a
+selective-QM candidate. The goal of the QM queue is to replace the heuristic with a
+DFT-derived value for that step only.
+
+## Known GFN2-xTB Limitations Relevant to Maillard
+
+xTB is a pathfinder, not a barrier authority. Its key failure modes for this chemistry are:
+
+- **Proton transfer / explicit water** — implicit ALPB solvation misses the Grotthuss
+  mechanism. Uncatalyzed proton-transfer barriers are overestimated by 10–25 kcal/mol.
+  Amadori/Heyns and enolisation steps require 1–2 explicit H₂O molecules in the TS for DFT.
+- **Zwitterionic intermediates** — amino acids at cooking pH (5–8) exist as zwitterions; xTB
+  energy balance between neutral/zwitterionic tautomers can be distorted.
+- **β-elimination (DHA pathway)** — C–O or C–S concerted eliminations are off by 5–15 kcal/mol
+  depending on leaving-group parametrisation.
+- **Open-shell sulfur radicals** — disulfide/trisulfide radical recombination is GFN2-xTB's
+  weakest lane; treat as MLP-first.
+
+See `docs/architecture.md` for the full trust-tier context.
 
 The current official DFT-ready queue is:
 

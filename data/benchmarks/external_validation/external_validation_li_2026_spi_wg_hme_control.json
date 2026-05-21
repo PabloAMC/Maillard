@@ -1,0 +1,90 @@
+{
+  "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+  "conditions": {
+    "ph": 7.0,
+    "temp_C": 160.0,
+    "time_min": 0.4167,
+    "water_activity": 0.35
+  },
+  "denaturation_state": 0.8,
+  "evidence_class": "external_validation_only",
+  "matrix_ranking_contract": {
+    "adverse_markers": [
+      "hexanal",
+      "2-pentylfuran",
+      "nonanal",
+      "1-hexanol"
+    ],
+    "citation_provenance": [
+      "Li et al. (2026), Foods 15(5):912"
+    ],
+    "notes": "Auto-derived from the measured panel because no explicit comparison_contract was supplied.",
+    "observable_targets": [
+      {
+        "direction": "lower",
+        "expected_rank": 1,
+        "name": "hexanal",
+        "role": "adverse_marker"
+      },
+      {
+        "direction": "lower",
+        "expected_rank": 2,
+        "name": "2-pentylfuran",
+        "role": "adverse_marker"
+      },
+      {
+        "direction": "lower",
+        "expected_rank": 3,
+        "name": "nonanal",
+        "role": "adverse_marker"
+      },
+      {
+        "direction": "lower",
+        "expected_rank": 4,
+        "name": "1-hexanol",
+        "role": "adverse_marker"
+      }
+    ]
+  },
+  "measured_volatiles": {
+    "1-hexanol": {
+      "conc_ppb": 20.04
+    },
+    "2-pentylfuran": {
+      "conc_ppb": 221.51
+    },
+    "hexanal": {
+      "conc_ppb": 605.6
+    },
+    "nonanal": {
+      "conc_ppb": 29.42
+    }
+  },
+  "metadata": {
+    "evidence_class": "external_validation_only",
+    "execution_path": "matrix_only",
+    "family": "matrix_headspace",
+    "notes": "Generated from matrix experiment intake payload.",
+    "tier": "PRIMARY"
+  },
+  "precursors": {
+    "Soy Protein Isolate": {
+      "concentration_mM": 1000.0
+    }
+  },
+  "process_metadata": {
+    "extrusion_history": "unspecified",
+    "matrix_format": "SPI:wheat gluten 6:4 dry-basis HME control, proxied onto the soy-isolate extrusion lane",
+    "preheating": "unspecified",
+    "state": "extrusion_structured"
+  },
+  "protein_type": "soy_iso",
+  "source_doi": "10.3390/foods15050912",
+  "source_metadata": {
+    "evidence_class": "external_validation_only",
+    "generator": "matrix_experiment_intake",
+    "measurement_date": "2026-01-01",
+    "notes": "External validation hold-out synthesized from flavor_reference_payloads.json; never use for calibration or promotion. li_2026_spi_wg_hme_hexanal_control_point: track_family_11_hme_hexanal_baseline_without_claiming_executable_benchmark_closure li_2026_spi_wg_hme_nonanal_control_point: retain_family_11_nonanal_baseline_as_supporting_off_note_panel_evidence li_2026_spi_wg_hme_1_hexanol_control_point: retain_family_11_1_hexanol_baseline_as_supporting_off_note_panel_evidence li_2026_spi_wg_hme_2_pentylfuran_control_point: retain_family_11_2_pentylfuran_baseline_as_supporting_off_note_panel_evidence",
+    "origin": "external_literature"
+  }
+}

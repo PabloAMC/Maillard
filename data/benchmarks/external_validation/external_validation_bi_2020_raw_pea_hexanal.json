@@ -1,0 +1,60 @@
+{
+  "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
+  "conditions": {
+    "ph": 6.0,
+    "temp_C": 40.0,
+    "time_min": 10.0,
+    "water_activity": 0.95
+  },
+  "denaturation_state": 0.0,
+  "evidence_class": "external_validation_only",
+  "matrix_ranking_contract": {
+    "adverse_markers": [
+      "hexanal"
+    ],
+    "citation_provenance": [
+      "Bi et al. (2020), J. Agric. Food Chem. 68:2718-2727"
+    ],
+    "notes": "Auto-derived from the measured panel because no explicit comparison_contract was supplied.",
+    "observable_targets": [
+      {
+        "direction": "lower",
+        "expected_rank": 1,
+        "name": "hexanal",
+        "role": "adverse_marker"
+      }
+    ]
+  },
+  "measured_volatiles": {
+    "hexanal": {
+      "conc_ppb": 1260.0
+    }
+  },
+  "metadata": {
+    "evidence_class": "external_validation_only",
+    "execution_path": "matrix_only",
+    "family": "matrix_headspace",
+    "notes": "Generated from matrix experiment intake payload.",
+    "tier": "PRIMARY"
+  },
+  "precursors": {
+    "Pea Protein Isolate": {
+      "concentration_mM": 1000.0
+    }
+  },
+  "process_metadata": {
+    "extrusion_history": "unspecified",
+    "matrix_format": "raw pea flour external hold-out, proxied onto the pea-isolate matrix-only lane",
+    "preheating": "unspecified",
+    "state": "ambient_slurry"
+  },
+  "protein_type": "pea_iso",
+  "source_doi": "10.1021/acs.jafc.9b07711",
+  "source_metadata": {
+    "evidence_class": "external_validation_only",
+    "generator": "matrix_experiment_intake",
+    "measurement_date": "2020-01-01",
+    "notes": "External validation hold-out synthesized from flavor_reference_payloads.json; never use for calibration or promotion. bi_2020_raw_pea_hexanal_point: track_raw_pea_off_note_burden_without_claiming_isolate_specificity",
+    "origin": "external_literature"
+  }
+}

@@ -1,5 +1,6 @@
 experiment_id: pea_iso_external_matrix_intake_example_2026
 source_kind: external_literature
+evidence_class: calibration_candidate
 protein_type: pea_iso
 process_state: aqueous_pre_extrusion_model
 matrix_format: pea isolate slurry with exogenous ribose and cysteine
