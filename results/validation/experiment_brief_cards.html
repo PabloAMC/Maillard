@@ -653,6 +653,7 @@
                         <option value="missing_absolute_anchor">Missing absolute concentration anchor</option>
                         <option value="missing_kinetic_dataset">Missing kinetic time-course data</option>
                         <option value="missing_positive_flavor_anchor">Missing positive flavour anchor</option>
+                        <option value="family_bottleneck">Family Bottleneck — Missing fundamental kinetic data</option>
                     </select>
                 </div>
             </div>
@@ -2689,6 +2690,366 @@
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                     View PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md
                 </a>
+            </div>
+        </div>
+        
+
+        <div class="card gap-card family-bottleneck-card" data-matrix="all" data-template="family_bottleneck" data-class="family">
+            <div class="card-header">
+                <div class="card-rank planned-mark">06</div>
+                <div class="card-title-group">
+                    <h3>Family 06: Alternative protein matrix scope</h3>
+                    <div class="card-subtitle">Targets: matrix_family_support_posture, sulfur_deficiency_risk</div>
+                </div>
+                <div class="card-voi" title="Family bottlenecks block full mechanistic closure.">Data Bottleneck</div>
+            </div>
+            
+            <div class="card-body">
+                <div class="badges-row">
+                    <span class="badge badge-matrix">System Scope</span>
+                    <span class="badge badge-missing">Directional</span>
+                    <span class="badge badge-template" title="Gap type: missing experimental data">Family Bottleneck</span>
+                </div>
+                
+                <p class="rationale-text"><strong>Bottleneck Action</strong>: Use to extend matrix scope artifacts and bounded priors.</p>
+                
+                
+                <div class="chemistry-brief" style="margin-top: 1rem;">
+                    <h4 class="chem-title">Missing Kinetic Benchmarks (Matrix-specific physical parameters)</h4>
+                    <ul class="chem-steps">
+                        <li><strong>Denaturation / Unfolding</strong>: Native Protein &rarr; Unfolded Protein (determines reactive site exposure rate)</li><li><strong>Volatile Retention</strong>: Free Volatile &harr; Matrix-bound Volatile (Henry's law partition coefficients for specific polymer structures)</li>
+                    </ul>
+                </div>
+            
+                
+                <div class="chemistry-brief" style="margin-top: auto;">
+                    <h4 class="chem-title">Dependencies & Target State</h4>
+                    <ul class="chem-steps">
+                        <li><strong>Depends On Families</strong>: None</li>
+                        <li><strong>Internal Status</strong>: Mostly Directional Matrix Scope</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card-footer">
+                <span class="btn-protocol" style="cursor:default; color:var(--text-secondary);">
+                    Needs fundamental kinetic data
+                </span>
+            </div>
+        </div>
+        
+
+        <div class="card gap-card family-bottleneck-card" data-matrix="all" data-template="family_bottleneck" data-class="family">
+            <div class="card-header">
+                <div class="card-rank planned-mark">09</div>
+                <div class="card-title-group">
+                    <h3>Family 09: Carbohydrate pyrolysis and caramelization</h3>
+                    <div class="card-subtitle">Targets: HMF, furfural, caramelization_severity</div>
+                </div>
+                <div class="card-voi" title="Family bottlenecks block full mechanistic closure.">Data Bottleneck</div>
+            </div>
+            
+            <div class="card-body">
+                <div class="badges-row">
+                    <span class="badge badge-matrix">System Scope</span>
+                    <span class="badge badge-missing">Directional</span>
+                    <span class="badge badge-template" title="Gap type: missing experimental data">Family Bottleneck</span>
+                </div>
+                
+                <p class="rationale-text"><strong>Bottleneck Action</strong>: Use first as a severity and failure-mode lane.</p>
+                
+                
+                <div class="chemistry-brief" style="margin-top: 1rem;">
+                    <h4 class="chem-title">Missing Kinetic Benchmarks (High-severity pyrolytic degradation)</h4>
+                    <ul class="chem-steps">
+                        <li><strong>Direct Sugar Dehydration</strong>: Hexose / Pentose &rarr; HMF / Furfural + 3H<sub>2</sub>O (activation energies for pure pyrolysis without amino catalysis)</li><li><strong>Caramelization Polymerisation</strong>: Dicarbonyls &rarr; High-MW Caramel Polymers (rate constants for non-nitrogenous browning)</li>
+                    </ul>
+                </div>
+            
+                
+                <div class="chemistry-brief" style="margin-top: auto;">
+                    <h4 class="chem-title">Dependencies & Target State</h4>
+                    <ul class="chem-steps">
+                        <li><strong>Depends On Families</strong>: 07</li>
+                        <li><strong>Internal Status</strong>: Severity And Failure Mode Lane</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card-footer">
+                <span class="btn-protocol" style="cursor:default; color:var(--text-secondary);">
+                    Needs fundamental kinetic data
+                </span>
+            </div>
+        </div>
+        
+
+        <div class="card gap-card family-bottleneck-card" data-matrix="all" data-template="family_bottleneck" data-class="family">
+            <div class="card-header">
+                <div class="card-rank planned-mark">11</div>
+                <div class="card-title-group">
+                    <h3>Family 11: Maillard/Lipid Crosstalk</h3>
+                    <div class="card-subtitle">Targets: hexanal, MDA, 4-HNE, radical_quenching_rate</div>
+                </div>
+                <div class="card-voi" title="Family bottlenecks block full mechanistic closure.">Data Bottleneck</div>
+            </div>
+            
+            <div class="card-body">
+                <div class="badges-row">
+                    <span class="badge badge-matrix">System Scope</span>
+                    <span class="badge badge-missing">Rate-closure queued</span>
+                    <span class="badge badge-template" title="Gap type: missing experimental data">Family Bottleneck</span>
+                </div>
+                
+                <p class="rationale-text"><strong>Bottleneck Action</strong>: Implement the hexanal/MFT competition surface.</p>
+                
+                
+                <div class="chemistry-brief" style="margin-top: 1rem;">
+                    <h4 class="chem-title">Missing Kinetic Benchmarks (Lipid-thiol radical quenching)</h4>
+                    <ul class="chem-steps">
+                        <li><strong>Thiol Scavenging</strong>: 2-Methyl-3-furanthiol (MFT) + Lipid Peroxyl Radical (ROO&bull;) &rarr; MFT-thiyl Radical + Lipid Hydroperoxide (ROOH)</li><li><strong>Disulfide Termination</strong>: 2 MFT-thiyl Radical &rarr; Bis(2-methyl-3-furyl) disulfide</li>
+                    </ul>
+                </div>
+            
+                
+                <div class="chemistry-brief" style="margin-top: auto;">
+                    <h4 class="chem-title">Dependencies & Target State</h4>
+                    <ul class="chem-steps">
+                        <li><strong>Depends On Families</strong>: 01, 02</li>
+                        <li><strong>Internal Status</strong>: Benchmark Linked Suppression Surface</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card-footer">
+                <span class="btn-protocol" style="cursor:default; color:var(--text-secondary);">
+                    Needs fundamental kinetic data
+                </span>
+            </div>
+        </div>
+        
+
+        <div class="card gap-card family-bottleneck-card" data-matrix="all" data-template="family_bottleneck" data-class="family">
+            <div class="card-header">
+                <div class="card-rank planned-mark">12</div>
+                <div class="card-title-group">
+                    <h3>Family 12: Protein Damage Markers</h3>
+                    <div class="card-subtitle">Targets: CML, CEL, furosine, lysinoalanine</div>
+                </div>
+                <div class="card-voi" title="Family bottlenecks block full mechanistic closure.">Data Bottleneck</div>
+            </div>
+            
+            <div class="card-body">
+                <div class="badges-row">
+                    <span class="badge badge-matrix">System Scope</span>
+                    <span class="badge badge-missing">Rate-closure queued</span>
+                    <span class="badge badge-template" title="Gap type: missing experimental data">Family Bottleneck</span>
+                </div>
+                
+                <p class="rationale-text"><strong>Bottleneck Action</strong>: Integrate AGE/ALE kinetics into the safety module.</p>
+                
+                
+                <div class="chemistry-brief" style="margin-top: 1rem;">
+                    <h4 class="chem-title">Missing Kinetic Benchmarks (Crosslinking & damage markers)</h4>
+                    <ul class="chem-steps">
+                        <li><strong>CML Formation</strong>: L-Lysine + Glyoxal &rarr; N&epsilon;-(Carboxymethyl)lysine (CML)</li><li><strong>DHA Crosslinking</strong>: Dehydroascorbic Acid + L-Lysine &rarr; Advanced Glycation End-products (crosslinking rate constants)</li>
+                    </ul>
+                </div>
+            
+                
+                <div class="chemistry-brief" style="margin-top: auto;">
+                    <h4 class="chem-title">Dependencies & Target State</h4>
+                    <ul class="chem-steps">
+                        <li><strong>Depends On Families</strong>: 01</li>
+                        <li><strong>Internal Status</strong>: Guardrail Severity Surface</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card-footer">
+                <span class="btn-protocol" style="cursor:default; color:var(--text-secondary);">
+                    Needs fundamental kinetic data
+                </span>
+            </div>
+        </div>
+        
+
+        <div class="card gap-card family-bottleneck-card" data-matrix="all" data-template="family_bottleneck" data-class="family">
+            <div class="card-header">
+                <div class="card-rank planned-mark">13</div>
+                <div class="card-title-group">
+                    <h3>Family 13: Polyphenol-Amino Capping</h3>
+                    <div class="card-subtitle">Targets: quinone_budget, cysteine_depletion_factor</div>
+                </div>
+                <div class="card-voi" title="Family bottlenecks block full mechanistic closure.">Data Bottleneck</div>
+            </div>
+            
+            <div class="card-body">
+                <div class="badges-row">
+                    <span class="badge badge-matrix">System Scope</span>
+                    <span class="badge badge-missing">Rate-closure queued</span>
+                    <span class="badge badge-template" title="Gap type: missing experimental data">Family Bottleneck</span>
+                </div>
+                
+                <p class="rationale-text"><strong>Bottleneck Action</strong>: Implement the pH-dependent quinone-thiol kinetics.</p>
+                
+                
+                <div class="chemistry-brief" style="margin-top: 1rem;">
+                    <h4 class="chem-title">Missing Kinetic Benchmarks (Polyphenol-mediated precursor sinks)</h4>
+                    <ul class="chem-steps">
+                        <li><strong>Quinone Generation</strong>: Polyphenols + O<sub>2</sub> &rarr; o-Quinones (polyphenol oxidase or thermal auto-oxidation)</li><li><strong>Michael Addition Capping</strong>: o-Quinone + L-Cysteine &rarr; Cysteaminyl-hydroquinone Adduct (irreversible sulfur sink)</li>
+                    </ul>
+                </div>
+            
+                
+                <div class="chemistry-brief" style="margin-top: auto;">
+                    <h4 class="chem-title">Dependencies & Target State</h4>
+                    <ul class="chem-steps">
+                        <li><strong>Depends On Families</strong>: 01</li>
+                        <li><strong>Internal Status</strong>: Mechanistic Modifier</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card-footer">
+                <span class="btn-protocol" style="cursor:default; color:var(--text-secondary);">
+                    Needs fundamental kinetic data
+                </span>
+            </div>
+        </div>
+        
+
+        <div class="card gap-card family-bottleneck-card" data-matrix="all" data-template="family_bottleneck" data-class="family">
+            <div class="card-header">
+                <div class="card-rank planned-mark">14</div>
+                <div class="card-title-group">
+                    <h3>Family 14: Ascorbic Acid Maillard</h3>
+                    <div class="card-subtitle">Targets: ascorbic_acid_loss, 3-deoxythreosone, pentosidine_load</div>
+                </div>
+                <div class="card-voi" title="Family bottlenecks block full mechanistic closure.">Data Bottleneck</div>
+            </div>
+            
+            <div class="card-body">
+                <div class="badges-row">
+                    <span class="badge badge-matrix">System Scope</span>
+                    <span class="badge badge-missing">Rate-closure queued</span>
+                    <span class="badge badge-template" title="Gap type: missing experimental data">Family Bottleneck</span>
+                </div>
+                
+                <p class="rationale-text"><strong>Bottleneck Action</strong>: Implement the biphasic AA functionality.</p>
+                
+                
+                <div class="chemistry-brief" style="margin-top: 1rem;">
+                    <h4 class="chem-title">Missing Kinetic Benchmarks (Ascorbic acid degradation pathways)</h4>
+                    <ul class="chem-steps">
+                        <li><strong>Ring-opening Hydration</strong>: Dehydroascorbic Acid (DHA) + H<sub>2</sub>O &rarr; 2,3-Diketogulonic Acid (rate-limiting step for dicarbonyl generation)</li><li><strong>Dicarbonyl Cleavage</strong>: 2,3-Diketogulonic Acid &rarr; Xylosone + Reductones (upstream precursors)</li>
+                    </ul>
+                </div>
+            
+                
+                <div class="chemistry-brief" style="margin-top: auto;">
+                    <h4 class="chem-title">Dependencies & Target State</h4>
+                    <ul class="chem-steps">
+                        <li><strong>Depends On Families</strong>: 01, 07, 12</li>
+                        <li><strong>Internal Status</strong>: Bounded Source Term</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card-footer">
+                <span class="btn-protocol" style="cursor:default; color:var(--text-secondary);">
+                    Needs fundamental kinetic data
+                </span>
+            </div>
+        </div>
+        
+
+        <div class="card gap-card family-bottleneck-card" data-matrix="all" data-template="family_bottleneck" data-class="family">
+            <div class="card-header">
+                <div class="card-rank planned-mark">15</div>
+                <div class="card-title-group">
+                    <h3>Family 15: PE Stealth Sugar Sink</h3>
+                    <div class="card-subtitle">Targets: PE_glycation_fraction, available_sugar_subtraction</div>
+                </div>
+                <div class="card-voi" title="Family bottlenecks block full mechanistic closure.">Data Bottleneck</div>
+            </div>
+            
+            <div class="card-body">
+                <div class="badges-row">
+                    <span class="badge badge-matrix">System Scope</span>
+                    <span class="badge badge-missing">Rate-closure queued</span>
+                    <span class="badge badge-template" title="Gap type: missing experimental data">Family Bottleneck</span>
+                </div>
+                
+                <p class="rationale-text"><strong>Bottleneck Action</strong>: Implement the 1:2 sugar-PE stoichiometry multiplier.</p>
+                
+                
+                <div class="chemistry-brief" style="margin-top: 1rem;">
+                    <h4 class="chem-title">Missing Kinetic Benchmarks (Phospholipid-amine Maillard (Stealth Sink))</h4>
+                    <ul class="chem-steps">
+                        <li><strong>Lipid Amadori Formation</strong>: Phosphatidylethanolamine (PE) + Reducing Sugar &rarr; PE-Amadori Adduct</li><li><strong>1,2-Enolization / Shift</strong>: PE-Amadori &rarr; 1,2-Eneaminol &rarr; Degraded PE-products (rate constants for sugar depletion via lipid amines)</li>
+                    </ul>
+                </div>
+            
+                
+                <div class="chemistry-brief" style="margin-top: auto;">
+                    <h4 class="chem-title">Dependencies & Target State</h4>
+                    <ul class="chem-steps">
+                        <li><strong>Depends On Families</strong>: 01, 07</li>
+                        <li><strong>Internal Status</strong>: Mechanistic To Bounded Closure</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card-footer">
+                <span class="btn-protocol" style="cursor:default; color:var(--text-secondary);">
+                    Needs fundamental kinetic data
+                </span>
+            </div>
+        </div>
+        
+
+        <div class="card gap-card family-bottleneck-card" data-matrix="all" data-template="family_bottleneck" data-class="family">
+            <div class="card-header">
+                <div class="card-rank planned-mark">16</div>
+                <div class="card-title-group">
+                    <h3>Family 16: Melanoidin Polymerization</h3>
+                    <div class="card-subtitle">Targets: melanoidin_mass, TH_scavenging_factor</div>
+                </div>
+                <div class="card-voi" title="Family bottlenecks block full mechanistic closure.">Data Bottleneck</div>
+            </div>
+            
+            <div class="card-body">
+                <div class="badges-row">
+                    <span class="badge badge-matrix">System Scope</span>
+                    <span class="badge badge-missing">Rate-closure queued</span>
+                    <span class="badge badge-template" title="Gap type: missing experimental data">Family Bottleneck</span>
+                </div>
+                
+                <p class="rationale-text"><strong>Bottleneck Action</strong>: Implement pseudo-zero-order melanoidin accumulation.</p>
+                
+                
+                <div class="chemistry-brief" style="margin-top: 1rem;">
+                    <h4 class="chem-title">Missing Kinetic Benchmarks (Melanoidin radical trapping)</h4>
+                    <ul class="chem-steps">
+                        <li><strong>Polymerization</strong>: Late-stage intermediates &rarr; High-MW Nitrogenous Melanoidins</li><li><strong>Sulfur-Radical Trapping</strong>: Melanoidin Polymer + Volatile Thiol &rarr; Polymer-bound Thiol (pseudo-zero-order trapping burden)</li>
+                    </ul>
+                </div>
+            
+                
+                <div class="chemistry-brief" style="margin-top: auto;">
+                    <h4 class="chem-title">Dependencies & Target State</h4>
+                    <ul class="chem-steps">
+                        <li><strong>Depends On Families</strong>: 01, 12</li>
+                        <li><strong>Internal Status</strong>: Bounded Trapping Modifier</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card-footer">
+                <span class="btn-protocol" style="cursor:default; color:var(--text-secondary);">
+                    Needs fundamental kinetic data
+                </span>
             </div>
         </div>
         

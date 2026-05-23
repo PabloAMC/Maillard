@@ -34,6 +34,7 @@ ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_INPUT = ROOT / "results" / "validation" / "experiment_value_ranking.json"
 DEFAULT_OUTPUT = ROOT / "results" / "validation" / "gap_heatmap.png"
 DEFAULT_HTML_OUTPUT = ROOT / "results" / "validation" / "experiment_brief_cards.html"
+DEFAULT_FAMILY_PLAN = ROOT / "data" / "lit" / "family_ingestion_plan.json"
 
 _MEATY_KEYWORDS = ("furanthiol", "furfurylthiol", "methional", "thiazole", "mft", "fft")
 _OFFNOTE_KEYWORDS = ("hexanal", "nonanal", "octenal", "pentylfuran", "hexanol")
@@ -173,6 +174,65 @@ REACTION_MAPPINGS = {
             "<strong>Sugar Fragmentation</strong>: Sugar &rarr; Dicarbonyl (Glyoxal / Methylglyoxal)",
             "<strong>Strecker-like Condensation</strong>: Dicarbonyl + Amino Acid &rarr; Aminoketone + CO<sub>2</sub>",
             "<strong>Dimerization</strong>: 2 Aminoketone &rarr; Pyrazine + 2 H<sub>2</sub>O"
+        ]
+    }
+}
+
+FAMILY_BOTTLENECK_REACTIONS = {
+    "06": {
+        "title": "Matrix-specific physical parameters",
+        "reactions": [
+            "<strong>Denaturation / Unfolding</strong>: Native Protein &rarr; Unfolded Protein (determines reactive site exposure rate)",
+            "<strong>Volatile Retention</strong>: Free Volatile &harr; Matrix-bound Volatile (Henry's law partition coefficients for specific polymer structures)"
+        ]
+    },
+    "09": {
+        "title": "High-severity pyrolytic degradation",
+        "reactions": [
+            "<strong>Direct Sugar Dehydration</strong>: Hexose / Pentose &rarr; HMF / Furfural + 3H<sub>2</sub>O (activation energies for pure pyrolysis without amino catalysis)",
+            "<strong>Caramelization Polymerisation</strong>: Dicarbonyls &rarr; High-MW Caramel Polymers (rate constants for non-nitrogenous browning)"
+        ]
+    },
+    "11": {
+        "title": "Lipid-thiol radical quenching",
+        "reactions": [
+            "<strong>Thiol Scavenging</strong>: 2-Methyl-3-furanthiol (MFT) + Lipid Peroxyl Radical (ROO&bull;) &rarr; MFT-thiyl Radical + Lipid Hydroperoxide (ROOH)",
+            "<strong>Disulfide Termination</strong>: 2 MFT-thiyl Radical &rarr; Bis(2-methyl-3-furyl) disulfide"
+        ]
+    },
+    "12": {
+        "title": "Crosslinking & damage markers",
+        "reactions": [
+            "<strong>CML Formation</strong>: L-Lysine + Glyoxal &rarr; N&epsilon;-(Carboxymethyl)lysine (CML)",
+            "<strong>DHA Crosslinking</strong>: Dehydroascorbic Acid + L-Lysine &rarr; Advanced Glycation End-products (crosslinking rate constants)"
+        ]
+    },
+    "13": {
+        "title": "Polyphenol-mediated precursor sinks",
+        "reactions": [
+            "<strong>Quinone Generation</strong>: Polyphenols + O<sub>2</sub> &rarr; o-Quinones (polyphenol oxidase or thermal auto-oxidation)",
+            "<strong>Michael Addition Capping</strong>: o-Quinone + L-Cysteine &rarr; Cysteaminyl-hydroquinone Adduct (irreversible sulfur sink)"
+        ]
+    },
+    "14": {
+        "title": "Ascorbic acid degradation pathways",
+        "reactions": [
+            "<strong>Ring-opening Hydration</strong>: Dehydroascorbic Acid (DHA) + H<sub>2</sub>O &rarr; 2,3-Diketogulonic Acid (rate-limiting step for dicarbonyl generation)",
+            "<strong>Dicarbonyl Cleavage</strong>: 2,3-Diketogulonic Acid &rarr; Xylosone + Reductones (upstream precursors)"
+        ]
+    },
+    "15": {
+        "title": "Phospholipid-amine Maillard (Stealth Sink)",
+        "reactions": [
+            "<strong>Lipid Amadori Formation</strong>: Phosphatidylethanolamine (PE) + Reducing Sugar &rarr; PE-Amadori Adduct",
+            "<strong>1,2-Enolization / Shift</strong>: PE-Amadori &rarr; 1,2-Eneaminol &rarr; Degraded PE-products (rate constants for sugar depletion via lipid amines)"
+        ]
+    },
+    "16": {
+        "title": "Melanoidin radical trapping",
+        "reactions": [
+            "<strong>Polymerization</strong>: Late-stage intermediates &rarr; High-MW Nitrogenous Melanoidins",
+            "<strong>Sulfur-Radical Trapping</strong>: Melanoidin Polymer + Volatile Thiol &rarr; Polymer-bound Thiol (pseudo-zero-order trapping burden)"
         ]
     }
 }
@@ -462,9 +522,10 @@ def _get_log_pcts(p5: float, p50: float, p95: float, measured: float) -> Tuple[f
     return to_pct(p5), to_pct(p50), to_pct(p95), to_pct(measured), log_min, log_max
 
 
-def generate_html_briefs(payload: dict, output_html_path: Path) -> Path:
+def generate_html_briefs(payload: dict, family_payload: dict, output_html_path: Path) -> Path:
     """Generate a premium glassmorphic HTML dashboard with interactive briefs cards."""
     candidates = payload.get("candidates", []) or []
+    families = family_payload.get("families", []) or []
     
     # Select top 15 highest-value gaps, plus any other candidates that are outside the 90% CI
     selected_candidates = []
@@ -625,6 +686,75 @@ def generate_html_briefs(payload: dict, output_html_path: Path) -> Path:
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                     View {protocol_name}
                 </a>
+            </div>
+        </div>
+        """
+        gap_cards_html.append(card_html)
+        
+    # Generate Family Bottleneck Cards
+    bottleneck_ids = ["06", "09", "11", "12", "13", "14", "15", "16"]
+    for f in families:
+        slr_id = f.get("slr_family", "")
+        if slr_id not in bottleneck_ids:
+            continue
+            
+        title = f.get("display_name", "")
+        status = f.get("benchmarkability_status", "").replace("_", " ").title()
+        actions = " ".join(f.get("next_curation_actions", []))
+        targets = ", ".join(f.get("target_compounds_or_state_variables", []))
+        deps = ", ".join(f.get("depends_on", []))
+        
+        badge_text = "Directional" if slr_id in ["06", "09"] else "Rate-closure queued"
+        badge_class = "badge-missing"
+        
+        bottleneck_info = FAMILY_BOTTLENECK_REACTIONS.get(slr_id, {})
+        missing_reactions_html = ""
+        if bottleneck_info:
+            reactions_list = "".join([f"<li>{r}</li>" for r in bottleneck_info.get("reactions", [])])
+            missing_reactions_html = f"""
+                <div class="chemistry-brief" style="margin-top: 1rem;">
+                    <h4 class="chem-title">Missing Kinetic Benchmarks ({bottleneck_info.get('title', 'Unknown')})</h4>
+                    <ul class="chem-steps">
+                        {reactions_list}
+                    </ul>
+                </div>
+            """
+        
+        card_html = f"""
+        <div class="card gap-card family-bottleneck-card" data-matrix="all" data-template="family_bottleneck" data-class="family">
+            <div class="card-header">
+                <div class="card-rank planned-mark">{slr_id}</div>
+                <div class="card-title-group">
+                    <h3>Family {slr_id}: {title}</h3>
+                    <div class="card-subtitle">Targets: {targets}</div>
+                </div>
+                <div class="card-voi" title="Family bottlenecks block full mechanistic closure.">Data Bottleneck</div>
+            </div>
+            
+            <div class="card-body">
+                <div class="badges-row">
+                    <span class="badge badge-matrix">System Scope</span>
+                    <span class="badge {badge_class}">{badge_text}</span>
+                    <span class="badge badge-template" title="Gap type: missing experimental data">Family Bottleneck</span>
+                </div>
+                
+                <p class="rationale-text"><strong>Bottleneck Action</strong>: {actions}</p>
+                
+                {missing_reactions_html}
+                
+                <div class="chemistry-brief" style="margin-top: auto;">
+                    <h4 class="chem-title">Dependencies & Target State</h4>
+                    <ul class="chem-steps">
+                        <li><strong>Depends On Families</strong>: {deps if deps else 'None'}</li>
+                        <li><strong>Internal Status</strong>: {status}</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card-footer">
+                <span class="btn-protocol" style="cursor:default; color:var(--text-secondary);">
+                    Needs fundamental kinetic data
+                </span>
             </div>
         </div>
         """
@@ -1335,6 +1465,7 @@ def generate_html_briefs(payload: dict, output_html_path: Path) -> Path:
                         <option value="missing_absolute_anchor">Missing absolute concentration anchor</option>
                         <option value="missing_kinetic_dataset">Missing kinetic time-course data</option>
                         <option value="missing_positive_flavor_anchor">Missing positive flavour anchor</option>
+                        <option value="family_bottleneck">Family Bottleneck — Missing fundamental kinetic data</option>
                     </select>
                 </div>
             </div>
@@ -1381,12 +1512,14 @@ def main(argv: List[str] | None = None) -> int:
     parser.add_argument("--input", type=Path, default=DEFAULT_INPUT)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--output-html", type=Path, default=DEFAULT_HTML_OUTPUT)
+    parser.add_argument("--family-plan", type=Path, default=DEFAULT_FAMILY_PLAN)
     args = parser.parse_args(argv)
 
     payload = json.loads(args.input.read_text(encoding="utf-8"))
+    family_payload = json.loads(args.family_plan.read_text(encoding="utf-8"))
     bench_labels, comp_labels, voi, outside, planned_mask = build_grid(payload)
     output = render(bench_labels, comp_labels, voi, outside, planned_mask, args.output)
-    output_html = generate_html_briefs(payload, args.output_html)
+    output_html = generate_html_briefs(payload, family_payload, args.output_html)
     
     finite_voi = voi[np.isfinite(voi)]
     print(
