@@ -64,7 +64,10 @@ manual_test_qcg/
 
 # Test Reports
 reports/
-results/
+results/*
+!results/validation/
+results/validation/*
+!results/validation/experiment_brief_cards.html
 
 # Generated xTB artifacts (ignore generated path-search outputs)
 # Keep data/geometries tracked but ignore generated xTB results under xtb_inputs
