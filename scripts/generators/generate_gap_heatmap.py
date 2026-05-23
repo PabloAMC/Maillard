@@ -466,9 +466,17 @@ def generate_html_briefs(payload: dict, output_html_path: Path) -> Path:
     """Generate a premium glassmorphic HTML dashboard with interactive briefs cards."""
     candidates = payload.get("candidates", []) or []
     
-    # Render interactive top calibration cards
+    # Select top 15 highest-value gaps, plus any other candidates that are outside the 90% CI
+    selected_candidates = []
+    for cand in candidates:
+        is_top_15 = (cand.get("rank", 99) <= 15)
+        is_outside_ci = not cand.get("inside_ci", True)
+        if is_top_15 or is_outside_ci:
+            selected_candidates.append(cand)
+
+    # Render interactive calibration cards
     gap_cards_html = []
-    for cand in candidates[:15]:  # Display top 15 highest-value gaps
+    for cand in selected_candidates:
         comp = cand.get("compound", "")
         comp_lower = comp.lower().strip()
         comp_clean = _short_compound(comp)
@@ -1279,11 +1287,11 @@ def generate_html_briefs(payload: dict, output_html_path: Path) -> Path:
                 </div>
                 <div class="header-stats">
                     <div class="stat-badge">
-                        <div class="stat-val">{len(candidates)}</div>
-                        <div class="stat-lbl">Calibration Gaps Ranked</div>
+                        <div class="stat-val">{len(selected_candidates)}</div>
+                        <div class="stat-lbl">Calibration Gaps Displayed</div>
                     </div>
                     <div class="stat-badge">
-                        <div class="stat-val">{sum(1 for c in candidates if not c.get('inside_ci'))}</div>
+                        <div class="stat-val">{sum(1 for c in selected_candidates if not c.get('inside_ci'))}</div>
                         <div class="stat-lbl">Mismatches (Outside 90% CI)</div>
                     </div>
                 </div>
