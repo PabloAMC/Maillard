@@ -180,59 +180,71 @@ REACTION_MAPPINGS = {
 
 FAMILY_BOTTLENECK_REACTIONS = {
     "06": {
-        "title": "Matrix-specific physical parameters",
+        "title": "Alternative protein matrix scope",
         "reactions": [
-            "<strong>Denaturation / Unfolding</strong>: Native Protein &rarr; Unfolded Protein (determines reactive site exposure rate)",
-            "<strong>Volatile Retention</strong>: Free Volatile &harr; Matrix-bound Volatile (Henry's law partition coefficients for specific polymer structures)"
+            "<strong>Thermal Denaturation Transition</strong>: Native Pea/Soy Protein &rarr; Denatured State (DSC anchor $T_d$ = 74.45&deg;C from Asen et al. 2022; heated fraction denaturation range 124&ndash;206&deg;C).",
+            "<strong>Free Thiol accessibility</strong>: Heat-exposed active &ndash;SH groups tracked via DTNB/Ellman assay (expressed in nmol/mg protein, Li et al. 2025).",
+            "<strong>Matrix Off-note carryover</strong>: Native Pea Protein Isolate (PPI) off-note profiles before formulation reactions (Hexanal range: 15.0&ndash;180.0 ppb, Nonanal range: 5.0&ndash;50.0 ppb from Liu 2023).",
+            "<strong>Phenolic amine-capping</strong>: Chlorogenic-acid-derived steric amine interference in sunflower matrix limits active lysine availability (PMC12155365)."
         ]
     },
     "09": {
-        "title": "High-severity pyrolytic degradation",
+        "title": "Carbohydrate pyrolysis and caramelization",
         "reactions": [
-            "<strong>Direct Sugar Dehydration</strong>: Hexose / Pentose &rarr; HMF / Furfural + 3H<sub>2</sub>O (activation energies for pure pyrolysis without amino catalysis)",
-            "<strong>Caramelization Polymerisation</strong>: Dicarbonyls &rarr; High-MW Caramel Polymers (rate constants for non-nitrogenous browning)"
+            "<strong>Over-browned Furfural excess</strong>: Non-nitrogenous pentose/hexose dehydration (producing PBMA furfural excess of 1040 ng/g cooked vs 19.8 ng/g in beef; Resconi et al. 2023).",
+            "<strong>HMF formation and secondary decline</strong>: 5-Hydroxymethylfurfural thermal generation peaking at 140 mg/L followed by secondary decline to 20 mg/L at 360 min (pH 5.0, 125&deg;C) with 7.8-fold amino-acid co-catalysis (Ordoudi et al. 2014).",
+            "<strong>Methylglyoxal (MGO) pathway to HDMF</strong>: C3 triose phosphate/MGO degradation route yielding Furaneol/HDMF (2.9 &mu;g/g at 120&deg;C, pH 6.0; Brands & van Boekel 2002).",
+            "<strong>Dicarbonyl cleavage fractions</strong>: 3-Deoxyglucosone dehydration splitting into Methylglyoxal (41%), Glyoxal (28%), Diacetyl (18%), and 2,3-pentanedione (6%) (Glomb & Monnier 1995)."
         ]
     },
     "11": {
-        "title": "Lipid-thiol radical quenching",
+        "title": "Maillard/Lipid Crosstalk",
         "reactions": [
-            "<strong>Thiol Scavenging</strong>: 2-Methyl-3-furanthiol (MFT) + Lipid Peroxyl Radical (ROO&bull;) &rarr; MFT-thiyl Radical + Lipid Hydroperoxide (ROOH)",
-            "<strong>Disulfide Termination</strong>: 2 MFT-thiyl Radical &rarr; Bis(2-methyl-3-furyl) disulfide"
+            "<strong>Hexanal-MFT competition</strong>: 2-Methyl-3-furanthiol (MFT) scavenging reactive lipid peroxyl radicals (ROO&bull;) to form MFT-thiyl radicals, terminating in disulfide dimer vs hexanal off-note synthesis.",
+            "<strong>HME control off-note baseline</strong>: Absolute hexanal (605.6 &mu;g/kg), heptanal (89.8 &mu;g/kg), nonanal (29.4 &mu;g/kg), and 2-pentylfuran (221.5 &mu;g/kg) baseline in extruded SPI:wheat gluten (6:4) (Li et al. 2026).",
+            "<strong>Interfacial protein-aroma binding</strong>: Non-covalent volatile retention on Pea/Soy protein interfaces following hydrophobic/van der Waals binding order: DMTS &gt; DMDS &gt; DMS (PMC10739987, PMC12451096).",
+            "<strong>Simultaneous suppression and uplift</strong>: Pretreatment/fermentation reducing hexanal off-notes by 95% (28.4 &mu;g/g &rarr; 1.42 &mu;g/g) while boosting active MFT 382-fold to 3.82 &mu;g/g (ACS JAFC 3c08432)."
         ]
     },
     "12": {
-        "title": "Crosslinking & damage markers",
+        "title": "Protein Damage Markers",
         "reactions": [
-            "<strong>CML Formation</strong>: L-Lysine + Glyoxal &rarr; N&epsilon;-(Carboxymethyl)lysine (CML)",
-            "<strong>DHA Crosslinking</strong>: Dehydroascorbic Acid + L-Lysine &rarr; Advanced Glycation End-products (crosslinking rate constants)"
+            "<strong>Amadori oxidative cleavage (CML/CEL)</strong>: Thermal degradation of lysine Schiff bases yielding N&epsilon;-(carboxymethyl)lysine (CML) and N&epsilon;-(carboxyethyl)lysine (CEL) (commercial PBMA range: 16&ndash;110 mg/kg; Foods 2023, PMC12451096).",
+            "<strong>Extrusion lysine loss</strong>: Shearing and thermal degradation causing reactive lysine availability loss: 31.4% in SPI vs 15.4% in PPI under sterilization conditions (125.5&deg;C, 26 min) (ACS foodscitech.2c00242).",
+            "<strong>Non-monotonic furosine crossover</strong>: Amadori acid hydrolysis marker peaking at 8.7 mg/100g protein at 140&deg;C, followed by degradation/crossover above 150&deg;C (Ram&iacute;rez-Jim&eacute;nez 2000).",
+            "<strong>Acrylamide extrusion kinetics</strong>: Fast-residence asparagine-glucose Schiff-base elimination increasing acrylamide from 22.36 to 62.62 &mu;g/kg in 25 seconds at 130&deg;C (ACS ResearchGate ref. 3)."
         ]
     },
     "13": {
-        "title": "Polyphenol-mediated precursor sinks",
+        "title": "Polyphenol-Amino Capping",
         "reactions": [
-            "<strong>Quinone Generation</strong>: Polyphenols + O<sub>2</sub> &rarr; o-Quinones (polyphenol oxidase or thermal auto-oxidation)",
-            "<strong>Michael Addition Capping</strong>: o-Quinone + L-Cysteine &rarr; Cysteaminyl-hydroquinone Adduct (irreversible sulfur sink)"
+            "<strong>Thiol-quinone Michael addition capping</strong>: Autoxidative o-quinone generation from matrix polyphenols reacting with active L-cysteine (causing 62% free thiol depletion; J. Agric. Food Chem. 2019 ref. 24).",
+            "<strong>Dicarbonyl amine capping (Acrylamide mitigation)</strong>: Exogenous cysteine/glycine capping active sugar dicarbonyls to suppress acrylamide formation by up to 97.8% (PMC12648097 ref. 5)."
         ]
     },
     "14": {
-        "title": "Ascorbic acid degradation pathways",
+        "title": "Ascorbic Acid Maillard",
         "reactions": [
-            "<strong>Ring-opening Hydration</strong>: Dehydroascorbic Acid (DHA) + H<sub>2</sub>O &rarr; 2,3-Diketogulonic Acid (rate-limiting step for dicarbonyl generation)",
-            "<strong>Dicarbonyl Cleavage</strong>: 2,3-Diketogulonic Acid &rarr; Xylosone + Reductones (upstream precursors)"
+            "<strong>Dehydroascorbic Acid (DHA) thermal degradation</strong>: Pseudo-first-order DHA ring-opening hydration to 2,3-diketogulonic acid (Arrhenius activation energies: 15.77 kJ/mol at pH 5.0, 31.7 kJ/mol at pH 7.0, 47.53 kJ/mol at pH 9.5; Frontiers Nutr. 2022).",
+            "<strong>3-DG routing Arrhenius parameters</strong>: Ascorbic-derived 3-deoxyglucosone (3-DG) conversion to pyrraline (E_a = 53.45 kJ/mol) vs furosine (E_a = 81.7 kJ/mol) (ACS APTS ref. 24).",
+            "<strong>Pentosidine crosslinking burden</strong>: Ascorbic-acid-driven pentosidine crosslinking matching glucose on a molar basis (13.2&ndash;17.0 pmol/mg protein yield at 37&deg;C; PubMed PMID:1904866).",
+            "<strong>Amino reaction hierarchy</strong>: Ascorbate-derived dicarbonyl condensation rates with side chains (Lysine &gt; Arginine &gt; Histidine; E_a(Lys) = 54.94 kJ/mol, E_a(His) = 35.31 kJ/mol; SciELO Brasil)."
         ]
     },
     "15": {
-        "title": "Phospholipid-amine Maillard (Stealth Sink)",
+        "title": "PE Stealth Sugar Sink",
         "reactions": [
-            "<strong>Lipid Amadori Formation</strong>: Phosphatidylethanolamine (PE) + Reducing Sugar &rarr; PE-Amadori Adduct",
-            "<strong>1,2-Enolization / Shift</strong>: PE-Amadori &rarr; 1,2-Eneaminol &rarr; Degraded PE-products (rate constants for sugar depletion via lipid amines)"
+            "<strong>Interfacial phospholipid Schiff-base initiation</strong>: Phosphatidylethanolamine (PE) glycation initiation (E_a = 92.9 kJ/mol for PE Schiff base, E_a = 82.9 kJ/mol for PE Amadori vs protein Lysine 118.0 kJ/mol, demonstrating interfacial pseudocatalysis; PMC4419266).",
+            "<strong>Amine sugar sequestration ceiling</strong>: Amadori-PE accumulation in food matrices reaching a glycation ceiling of 30.0% (positive ion markers: m/z 326.1 for Glc-PE, m/z 488.1 for Lac-PE; PMC5992167)."
         ]
     },
     "16": {
-        "title": "Melanoidin radical trapping",
+        "title": "Melanoidin Polymerization",
         "reactions": [
-            "<strong>Polymerization</strong>: Late-stage intermediates &rarr; High-MW Nitrogenous Melanoidins",
-            "<strong>Sulfur-Radical Trapping</strong>: Melanoidin Polymer + Volatile Thiol &rarr; Polymer-bound Thiol (pseudo-zero-order trapping burden)"
+            "<strong>Melanoidin thiol trapping</strong>: Covalent thiol loss via radical/thioether adduction to high-MW nitrogenous melanoidins (MFT recovery baseline of 4.0 drops to 2.0 under 125 mg melanoidin loading; PMC9351765).",
+            "<strong>Supra-additive WHC collapse</strong>: Supra-additive water-holding capacity (WHC) reduction (-17% to -63% in SPI, -65% to -90% in PPI) under repeated extrusion thermal shear (Wageningen Ref. 9).",
+            "<strong>HME firmness boundaries</strong>: Extrusion texturisation breaking force ranges (10.0&ndash;104.0 N) under optimal moisture regimes (20&ndash;25% moisture; ACS foodscitech.4c00677).",
+            "<strong>Hydrocolloid-hydrolysate conjugation</strong>: Gum-arabic Maillard conjugate size growth from 290 kDa to 340&ndash;359 kDa (radius of gyration 29.5 &rarr; 33.5 nm, Mark-Houwink exponent 0.53 &rarr; 0.4, PDI 1.35 &rarr; 1.74; J. Agric. Food Chem. 2019)."
         ]
     }
 }
@@ -522,8 +534,14 @@ def _get_log_pcts(p5: float, p50: float, p95: float, measured: float) -> Tuple[f
     return to_pct(p5), to_pct(p50), to_pct(p95), to_pct(measured), log_min, log_max
 
 
-def generate_html_briefs(payload: dict, family_payload: dict, output_html_path: Path) -> Path:
+def generate_html_briefs(payload: dict, family_payload: dict | Path, output_html_path: Path | None = None) -> Path:
     """Generate a premium glassmorphic HTML dashboard with interactive briefs cards."""
+    if isinstance(family_payload, (str, Path)):
+        output_html_path = Path(family_payload)
+        family_payload = {}
+    elif output_html_path is None:
+        raise ValueError("output_html_path must be specified when family_payload is a dict")
+
     candidates = payload.get("candidates", []) or []
     families = family_payload.get("families", []) or []
     
@@ -1075,25 +1093,22 @@ def generate_html_briefs(payload: dict, family_payload: dict, output_html_path: 
 
         .card-title-group {{
             flex-grow: 1;
-            min-width: 0;
         }}
 
         .card-title-group h3 {{
             font-family: var(--font-header);
             font-size: 1.1rem;
             font-weight: 600;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            white-space: normal;
+            word-wrap: break-word;
             color: var(--text-primary);
         }}
 
         .card-subtitle {{
             font-size: 0.8rem;
             color: var(--text-secondary);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            white-space: normal;
+            word-wrap: break-word;
             margin-top: 0.15rem;
         }}
 
