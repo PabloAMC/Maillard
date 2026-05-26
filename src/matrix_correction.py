@@ -74,7 +74,7 @@ def _build_protein_source_profiles() -> dict[str, ProteinSourceProfile]:
 
 PROTEIN_SOURCE_PROFILES = _build_protein_source_profiles()
 
-def get_protein_source_profile(source_id: str) -> ProteinSourceProfile | None:
+def get_protein_source_profile(source_id: Optional[str]) -> ProteinSourceProfile | None:
     if not source_id:
         return None
     return PROTEIN_SOURCE_PROFILES.get(str(source_id).strip().lower())

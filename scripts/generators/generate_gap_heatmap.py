@@ -507,21 +507,27 @@ def render(
     return output
 
 
-def _get_log_pcts(p5: float, p50: float, p95: float, measured: float) -> Tuple[float, float, float, float, int, int]:
-    epsilon = 1e-6
+def _get_log_pcts(p5: float, p50: float, p95: float, measured: float) -> Tuple[float, float, float, float, float, float]:
     vals = [v for v in [p5, p50, p95, measured] if v > 0.0]
     if not vals:
-        return 0.0, 0.0, 0.0, 0.0, -4, 4
+        return 0.0, 0.0, 0.0, 0.0, 0.1, 10.0
     
     min_val = min(vals)
     max_val = max(vals)
     
-    log_min = math.floor(math.log10(min_val)) - 1
-    log_max = math.ceil(math.log10(max_val)) + 1
-    
-    if log_max - log_min < 4:
-        log_max = log_min + 4
-        
+    ratio = max_val / min_val
+    if ratio < 3.0:
+        # Geometrically expand range around geometric mean of min/max to ensure breathing room
+        geo_mean = math.sqrt(min_val * max_val)
+        min_bound = geo_mean / math.sqrt(3.0)
+        max_bound = geo_mean * math.sqrt(3.0)
+    else:
+        # Extend lower bound by 2x down, upper bound by 2x up
+        min_bound = min_val / 2.0
+        max_bound = max_val * 2.0
+
+    log_min = math.log10(min_bound)
+    log_max = math.log10(max_bound)
     log_range = log_max - log_min
     
     def to_pct(val: float) -> float:
@@ -531,7 +537,7 @@ def _get_log_pcts(p5: float, p50: float, p95: float, measured: float) -> Tuple[f
         pct = 100.0 * (log_v - log_min) / log_range
         return min(100.0, max(0.0, pct))
         
-    return to_pct(p5), to_pct(p50), to_pct(p95), to_pct(measured), log_min, log_max
+    return to_pct(p5), to_pct(p50), to_pct(p95), to_pct(measured), min_bound, max_bound
 
 
 def generate_html_briefs(payload: dict, family_payload: dict | Path, output_html_path: Path | None = None) -> Path:
@@ -593,8 +599,18 @@ def generate_html_briefs(payload: dict, family_payload: dict | Path, output_html
         measured = float(cand.get("measured_ppb", 0.0))
         inside_ci = bool(cand.get("inside_ci", True))
         
-        p5_pct, p50_pct, p95_pct, measured_pct, log_min, log_max = _get_log_pcts(p5, p50, p95, measured)
-        ci_width_pct = max(1.0, p95_pct - p5_pct)
+        p5_pct, p50_pct, p95_pct, measured_pct, display_min, display_max = _get_log_pcts(p5, p50, p95, measured)
+        display_mid = math.sqrt(display_min * display_max)
+        
+        is_point = (p95 - p5) < 1e-9 * (p50 + 1e-6)
+        if is_point:
+            ci_label = f"Point Estimate ({p50:.3g} ppb)"
+            ci_width_pct = 3.0
+            ci_left_pct = max(0.0, min(97.0, p50_pct - 1.5))
+        else:
+            ci_label = f"90% CI ({p5:.3g} - {p95:.3g} ppb)"
+            ci_left_pct = p5_pct
+            ci_width_pct = max(1.0, p95_pct - p5_pct)
         
         # Rationale & DoE template info
         rationale = cand.get("rationale", "")
@@ -681,17 +697,17 @@ def generate_html_briefs(payload: dict, family_payload: dict | Path, output_html
                     </div>
                     <div class="scale-container">
                         <div class="scale-bounds">
-                            <span>10<sup>{log_min}</sup></span>
-                            <span>10<sup>{log_min + (log_max-log_min)//2}</sup></span>
-                            <span>10<sup>{log_max}</sup></span>
+                            <span>{display_min:.3g} ppb</span>
+                            <span>{display_mid:.3g} ppb</span>
+                            <span>{display_max:.3g} ppb</span>
                         </div>
                         <div class="scale-bar-track">
-                            <div class="scale-bar-ci {status_class}" style="left: {p5_pct}%; width: {ci_width_pct}%;"></div>
+                            {"" if is_point else f'<div class="scale-bar-ci {status_class}" style="left: {ci_left_pct}%; width: {ci_width_pct}%;"></div>'}
                             <div class="scale-p50" style="left: {p50_pct}%;" title="Model Median (P50): {p50:.3g} ppb"></div>
                             <div class="scale-marker" style="left: {measured_pct}%;" title="Measured: {measured:.3g} ppb"></div>
                         </div>
                         <div class="scale-legend">
-                            <span class="legend-item"><span class="legend-dot ci-dot {status_class}"></span>90% CI ({p5:.3g} - {p95:.3g} ppb)</span>
+                            <span class="legend-item"><span class="legend-dot ci-dot {status_class}"></span>{ci_label}</span>
                             <span class="legend-item"><span class="legend-dot p50-dot"></span>Median ({p50:.3g} ppb)</span>
                             <span class="legend-item"><span class="legend-dot measured-dot"></span>Measured ({measured:.3g} ppb)</span>
                         </div>
@@ -1309,6 +1325,19 @@ def generate_html_briefs(payload: dict, family_payload: dict | Path, output_html
         .scale-bar-ci.outside {{
             background: var(--accent-danger);
             opacity: 0.3;
+        }}
+
+        .scale-bar-ci.point-estimate {{
+            opacity: 0.85 !important;
+            border-radius: 2px;
+        }}
+
+        .scale-bar-ci.point-estimate.inside {{
+            background: var(--accent-success) !important;
+        }}
+
+        .scale-bar-ci.point-estimate.outside {{
+            background: var(--accent-danger) !important;
         }}
 
         .scale-p50 {{

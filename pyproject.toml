@@ -3,7 +3,7 @@ name = "Maillard"
 version = "0.1.0"
 description = "Computational Maillard Reaction Network Explorer for Alt-Protein Science"
 authors = [
-    { name = "PabloAMC", email = "" }
+    { name = "PabloAMC" }
 ]
 dependencies = [
     "rdkit>=2023.9.1",

@@ -14,7 +14,10 @@
       "method": {
         "instrument": "LC-MS/MS",
         "internal_standard": "d3-acrylamide",
-        "calibration_range_ng_per_ml": [1.0, 230.0],
+        "calibration_range_ng_per_ml": [
+          1.0,
+          230.0
+        ],
         "calibration_r_squared": 0.999,
         "lod_ng_per_ml": 7.0,
         "loq_ng_per_ml": 24.0,
@@ -55,7 +58,10 @@
       "analyte": "acrylamide",
       "method": {
         "instrument": "LC-MS/MS",
-        "co_measured_analytes": ["CML", "CEL"],
+        "co_measured_analytes": [
+          "CML",
+          "CEL"
+        ],
         "replicates": 3
       },
       "matrix_reference_ranges": [
@@ -73,7 +79,7 @@
           "matrix_family": "mixed_pbma_products",
           "units": "ug_per_kg",
           "min": 31.81,
-          "max": 186.70,
+          "max": 186.7,
           "mean": 68.55
         }
       ],
@@ -198,7 +204,11 @@
       "analyte": "acrylamide",
       "method": {
         "matrix": "whole soybean",
-        "heating_modes": ["extrusion", "infrared", "microwave"]
+        "heating_modes": [
+          "extrusion",
+          "infrared",
+          "microwave"
+        ]
       },
       "matrix_reference_ranges": [],
       "what_it_supports": [
@@ -265,7 +275,10 @@
       "analyte": "CML/CEL",
       "method": {
         "instrument": "UHPLC-MS/MS",
-        "internal_standards": ["CML-d4", "CEL-d4"],
+        "internal_standards": [
+          "CML-d4",
+          "CEL-d4"
+        ],
         "notes": "Simultaneous quantification of CML, CEL, and acrylamide"
       },
       "matrix_reference_ranges": [
@@ -303,7 +316,10 @@
       "analyte": "CML/CEL",
       "method": {
         "instrument": "UHPLC-MS/MS",
-        "internal_standards": ["CML-d4", "CEL-d4"],
+        "internal_standards": [
+          "CML-d4",
+          "CEL-d4"
+        ],
         "notes": "Commercial plant-based meat analog survey with isotopically labelled AGE standards"
       },
       "matrix_reference_ranges": [
@@ -433,6 +449,474 @@
         "Exact SPI/PPI process reconstruction without matrix-specific calibration"
       ],
       "comment": "Use with CEL and CML context so severe-extrusion damage is not under-read when furosine declines."
+    },
+    {
+      "id": "davidek_2006_thr_glucose_furan_safety",
+      "kind": "safety_reference",
+      "report_visibility": "default",
+      "target_module": "safety",
+      "source_citation": "Davidek et al. (2006)",
+      "doi": "10.1021/jf053246m",
+      "validated_status": "reference_anchor",
+      "analyte": "furan",
+      "method": {
+        "instrument": "GC-MS",
+        "internal_standard": "d4-furan",
+        "replicates": 3
+      },
+      "matrix_reference_ranges": [
+        {
+          "matrix_family": "free_model_system",
+          "units": "mol_pct",
+          "point": 0.045,
+          "at_T_C": 120.0,
+          "at_time_min": 30.0,
+          "ph": 6.0
+        }
+      ],
+      "what_it_supports": [
+        "Safety furan/methylfuran absolute yield ceiling from Threonine + Glucose at 120 C"
+      ],
+      "what_it_does_not_support": [
+        "SPI or PPI matrix encapsulation",
+        "Extrusion shear effects"
+      ],
+      "comment": "Use as safety ceiling for furan formation from threonine."
+    },
+    {
+      "id": "henle_2005_glycinin_cml",
+      "kind": "finished_product_reference",
+      "report_visibility": "default",
+      "target_module": "safety",
+      "chemistry_family": "safety_damage_lane",
+      "slr_family_source": "12",
+      "source_citation": "Henle (2005)",
+      "doi": "10.1007/s00726-005-0187-z",
+      "validated_status": "reference_anchor",
+      "analyte": "CML",
+      "method": {
+        "instrument": "GC-MS",
+        "notes": "Heated soy glycinin model system CML quantification"
+      },
+      "matrix_reference_ranges": [
+        {
+          "matrix_family": "soy_glycinin",
+          "units": "umol_per_g_protein",
+          "point": 2.3
+        }
+      ],
+      "what_it_supports": [
+        "Upper-bound CML yield (2.3 umol/g protein) in heated soy glycinin matrices",
+        "Dicarbonyl consumption estimation baseline for soy glycinin"
+      ],
+      "comment": "Heated soy glycinin model system."
+    },
+    {
+      "id": "acrylamide_heat_trapping_2024",
+      "kind": "industrial_endpoint_reference",
+      "report_visibility": "default",
+      "target_module": "safety",
+      "source_citation": "ResearchGate ref. 10 (ACRYLAMIDE/HEAT)",
+      "doi": "",
+      "validated_status": "reference_anchor",
+      "analyte": "acrylamide",
+      "method": {
+        "instrument": "GC-MS",
+        "replicates": 3
+      },
+      "matrix_reference_ranges": [
+        {
+          "matrix_family": "heated_matrix",
+          "units": "ug_per_kg",
+          "min": 31.81,
+          "max": 186.7
+        }
+      ],
+      "what_it_supports": [
+        "Acrylamide concentration range of 31.81-186.70 ug/kg under heating above 150 C",
+        "Pictet-Spengler mechanism pathway validation above 150 C",
+        "In-matrix trapping and mitigation dynamics"
+      ],
+      "what_it_does_not_support": [
+        "Low temperature ambient slurry kinetics"
+      ],
+      "comment": "Key safety reference for high-temperature acrylamide formation and trapping."
+    },
+    {
+      "id": "de_vleeschouwer_2006_acrylamide_aqueous",
+      "kind": "kinetic_model_reference",
+      "report_visibility": "default",
+      "target_module": "safety",
+      "source_citation": "De Vleeschouwer et al. (2006)",
+      "doi": "10.1021/jf051197n",
+      "validated_status": "reference_anchor",
+      "analyte": "acrylamide",
+      "method": {
+        "instrument": "HPLC-MS/MS",
+        "replicates": 3
+      },
+      "matrix_reference_ranges": [
+        {
+          "matrix_family": "free_model_system",
+          "units": "mol_pct",
+          "comment": "Formation and elimination rate constants evaluated at reference temperature of 160 C under varying pH and temperature."
+        }
+      ],
+      "what_it_supports": [
+        "Pseudo-first-order formation/elimination kinetics model",
+        "Acrylamide kinetics across pH and temperature gradients"
+      ],
+      "what_it_does_not_support": [
+        "Low temperature ambient slurry kinetics"
+      ],
+      "comment": "Fundamental aqueous system kinetics study."
+    },
+    {
+      "id": "zhu_2022_acrylamide_lipid_crosstalk",
+      "kind": "kinetic_model_reference",
+      "report_visibility": "default",
+      "target_module": "safety",
+      "source_citation": "Zhu et al. (2022)",
+      "doi": "10.3389/fnut.2022.940202",
+      "validated_status": "reference_anchor",
+      "analyte": "acrylamide",
+      "method": {
+        "instrument": "GC-MS",
+        "replicates": 3
+      },
+      "matrix_reference_ranges": [
+        {
+          "matrix_family": "free_model_system",
+          "units": "ug_per_kg",
+          "comment": "Ternary system showing dramatic activation energy drop to 12.87 kJ/mol due to lipid decomposition carbonyls."
+        }
+      ],
+      "what_it_supports": [
+        "Demonstration of lipid oxidation carbonyl crosstalk in accelerating acrylamide formation",
+        "First-order rate constants and low activation energy barriers in lipid-rich model systems"
+      ],
+      "what_it_does_not_support": [
+        "Aqueous systems without lipids"
+      ],
+      "comment": "Key lipid-Maillard crosstalk safety reference."
+    },
+    {
+      "id": "sun_2015_ground_beef_ages",
+      "kind": "finished_product_reference",
+      "report_visibility": "default",
+      "target_module": "safety",
+      "source_citation": "Sun et al. (2015)",
+      "doi": "10.1016/j.foodchem.2014.09.129",
+      "validated_status": "reference_anchor",
+      "analyte": "CML/CEL",
+      "method": {
+        "instrument": "HPLC-MS/MS",
+        "replicates": 3
+      },
+      "matrix_reference_ranges": [
+        {
+          "matrix_family": "beef",
+          "units": "ug_per_kg",
+          "comment": "Zero-order accumulation kinetics for CML (Ea 61.01 kJ/mol) and CEL (Ea 29.21 kJ/mol) in pasteurized ground beef."
+        }
+      ],
+      "what_it_supports": [
+        "Zero-order AGE formation kinetics in real meat matrices",
+        "Lower activation energy barrier for CEL compared to CML"
+      ],
+      "what_it_does_not_support": [
+        "High temperature dry extrusion kinetics"
+      ],
+      "comment": "Ground beef pasteurization safety reference."
+    },
+    {
+      "id": "zhu_2021_braised_chicken_ages",
+      "kind": "finished_product_reference",
+      "report_visibility": "default",
+      "target_module": "safety",
+      "source_citation": "Zhu et al. (2021)",
+      "doi": "10.1002/jsfa.10528",
+      "validated_status": "reference_anchor",
+      "analyte": "CML/CEL",
+      "method": {
+        "instrument": "HPLC-MS/MS",
+        "replicates": 3
+      },
+      "matrix_reference_ranges": [
+        {
+          "matrix_family": "chicken",
+          "units": "ug_per_kg",
+          "comment": "Zero-order kinetics differentiating free vs bound CML (Ea 74.87 vs 68.21 kJ/mol) and CEL (Ea 42.45 vs 41.52 kJ/mol)."
+        }
+      ],
+      "what_it_supports": [
+        "Free vs protein-bound CML and CEL kinetics mapping in solid meat matrices"
+      ],
+      "what_it_does_not_support": [
+        "Dairy model systems"
+      ],
+      "comment": "Braised chicken matrix AGE kinetics reference."
+    },
+    {
+      "id": "hamzalioglu_2026_milk_uht_ages",
+      "kind": "finished_product_reference",
+      "report_visibility": "default",
+      "target_module": "safety",
+      "source_citation": "Hamzalioglu et al. (2026)",
+      "doi": "10.1021/acs.jafc.5c14296",
+      "validated_status": "reference_anchor",
+      "analyte": "CML/CEL",
+      "method": {
+        "instrument": "HPLC-MS/MS",
+        "replicates": 3
+      },
+      "matrix_reference_ranges": [
+        {
+          "matrix_family": "milk",
+          "units": "ug_per_kg",
+          "comment": "First-order kinetics modeling lactulosyllysine degradation to CML and CEL under UHT conditions."
+        }
+      ],
+      "what_it_supports": [
+        "First-order conversion kinetics from lactulosyllysine to AGEs in liquid dairy model systems",
+        "Lactulosyllysine formation as the global rate-limiting step"
+      ],
+      "what_it_does_not_support": [
+        "Solid meat analog matrices"
+      ],
+      "comment": "Multi-response kinetic modeling of milk UHT AGEs."
+    },
+    {
+      "id": "hidalgo_2000_tomato_furosine",
+      "kind": "finished_product_reference",
+      "report_visibility": "default",
+      "target_module": "safety",
+      "source_citation": "Hidalgo & Pompei (2000)",
+      "doi": "10.1021/jf990120u",
+      "validated_status": "reference_anchor",
+      "analyte": "furosine",
+      "method": {
+        "instrument": "HPLC-UV",
+        "replicates": 3
+      },
+      "matrix_reference_ranges": [
+        {
+          "matrix_family": "tomato",
+          "units": "mg_per_100g_protein",
+          "comment": "Zero-order furosine formation kinetics (Ea 93.9 kJ/mol) in tomato products."
+        }
+      ],
+      "what_it_supports": [
+        "Zero-order furosine formation kinetics under moderate thermal load in acidic plant matrices"
+      ],
+      "what_it_does_not_support": [
+        "Meat matrices"
+      ],
+      "comment": "Furosine formation kinetics in tomato products."
+    },
+    {
+      "id": "cantre_2007_corned_beef_furosine",
+      "kind": "finished_product_reference",
+      "report_visibility": "default",
+      "target_module": "safety",
+      "source_citation": "Cantre et al. (2007)",
+      "doi": "",
+      "validated_status": "reference_anchor",
+      "analyte": "furosine",
+      "method": {
+        "instrument": "HPLC-UV",
+        "replicates": 3
+      },
+      "matrix_reference_ranges": [
+        {
+          "matrix_family": "beef",
+          "units": "mg_per_100g_protein",
+          "comment": "First-order furosine formation kinetics (Ea 95.7 kJ/mol) during commercial sterilization of corned beef."
+        }
+      ],
+      "what_it_supports": [
+        "First-order crossover kinetics of furosine formation at high sterilization temperatures"
+      ],
+      "what_it_does_not_support": [
+        "Fluid milk model systems"
+      ],
+      "comment": "Corned beef sterilization furosine reference."
+    },
+    {
+      "id": "yu_2017_cml_cel_meat_review",
+      "kind": "industrial_endpoint_reference",
+      "report_visibility": "default",
+      "target_module": "safety",
+      "source_citation": "Yu et al. (2017), Trends Food Sci. Technol. 98:30-40",
+      "doi": "10.1016/j.tifs.2020.01.021",
+      "validated_status": "reference_anchor",
+      "analyte": "cml_cel",
+      "method": {
+        "instrument": "LC-MS/MS",
+        "replicates": 3
+      },
+      "matrix_reference_ranges": [
+        {
+          "matrix_family": "free_model_system",
+          "units": "activation_energy_kj_mol",
+          "cml_formation_ea": 61.01,
+          "cel_formation_ea": 29.21
+        }
+      ],
+      "what_it_supports": [
+        "Differential thermodynamics for advanced glycation endproducts: CML activation energy of 61.01 kJ/mol versus CEL activation energy of 29.21 kJ/mol."
+      ],
+      "what_it_does_not_support": [
+        "Extrusion mechanical shear effects"
+      ],
+      "comment": "Provides a reference for comparative CML vs CEL activation energy barriers."
+    },
+    {
+      "id": "charissou_2007_cookie_cml_furosine",
+      "kind": "industrial_endpoint_reference",
+      "report_visibility": "default",
+      "target_module": "safety",
+      "source_citation": "Charissou et al. (2007), J. Agric. Food Chem. 55(11):4532-4539",
+      "doi": "10.1021/jf063024j",
+      "validated_status": "reference_anchor",
+      "analyte": "furosine_cml",
+      "method": {
+        "instrument": "GC-MS",
+        "replicates": 3
+      },
+      "matrix_reference_ranges": [
+        {
+          "matrix_family": "cookie_model",
+          "units": "temperature_range_C",
+          "min": 180.0,
+          "max": 220.0
+        }
+      ],
+      "what_it_supports": [
+        "Transient curve of furosine decay and stable zero-order accumulation of CML in dry cookie baking model (180 to 220 C)."
+      ],
+      "what_it_does_not_support": [
+        "High moisture extrusion mechanical effects"
+      ],
+      "comment": "Cookie system showing CML/furosine crossover dynamics."
+    },
+    {
+      "id": "fratianni_2016_apricot_furosine",
+      "kind": "industrial_endpoint_reference",
+      "report_visibility": "default",
+      "target_module": "safety",
+      "source_citation": "Fratianni et al. (2016), Food Res. Int. 99:862-867",
+      "doi": "10.1016/j.foodres.2016.12.009",
+      "validated_status": "reference_anchor",
+      "analyte": "furosine",
+      "method": {
+        "instrument": "HPLC",
+        "replicates": 3
+      },
+      "matrix_reference_ranges": [
+        {
+          "matrix_family": "apricot",
+          "units": "activation_energy_kj_mol",
+          "ea": 83.3
+        }
+      ],
+      "what_it_supports": [
+        "Zero-order kinetics for furosine formation in apricot matrices (Ea 83.3 kJ/mol)."
+      ],
+      "what_it_does_not_support": [
+        "Dry extrusion kinetics"
+      ],
+      "comment": "Apricot model system for furosine."
+    },
+    {
+      "id": "ma_2024_pbma_extrusion_damage",
+      "kind": "industrial_endpoint_reference",
+      "report_visibility": "default",
+      "target_module": "safety",
+      "source_citation": "Ma et al. (2024), Int. J. Mol. Sci. 25:8408",
+      "doi": "10.3390/ijms25158408",
+      "validated_status": "reference_anchor",
+      "analyte": "cml_cel_acrylamide",
+      "method": {
+        "instrument": "LC-MS/MS",
+        "replicates": 3
+      },
+      "matrix_reference_ranges": [
+        {
+          "matrix_family": "plant_based_meat_analogue",
+          "units": "temperature_C",
+          "cel_increase_pct_min": 39.0,
+          "cel_increase_pct_max": 101.0,
+          "barrel_temp": 160.0
+        }
+      ],
+      "what_it_supports": [
+        "CML and CEL selective generation under extrusion barrel temperatures of 160 C."
+      ],
+      "what_it_does_not_support": [
+        "Aqueous buffer without protein matrix"
+      ],
+      "comment": "Important PBMA extrusion safety reference payload for CML, CEL and acrylamide."
+    },
+    {
+      "id": "knol_2005_acrylamide_kinetics",
+      "kind": "industrial_endpoint_reference",
+      "report_visibility": "default",
+      "target_module": "safety",
+      "source_citation": "Knol et al. (2005)",
+      "doi": "10.1021/jf050504m",
+      "validated_status": "reference_anchor",
+      "analyte": "acrylamide",
+      "method": {
+        "instrument": "LC-MS",
+        "replicates": 3
+      },
+      "what_it_supports": [
+        "Bifurcated acrylamide formation (Ea 52.1 kJ/mol) and degradation (Ea 72.9 kJ/mol) kinetic parameters."
+      ],
+      "what_it_does_not_support": [
+        "Solid-state high-moisture extrusion without Aw corrections."
+      ]
+    },
+    {
+      "id": "de_vleeschouwer_2008_acrylamide_aw",
+      "kind": "industrial_endpoint_reference",
+      "report_visibility": "default",
+      "target_module": "safety",
+      "source_citation": "De Vleeschouwer et al. (2008)",
+      "doi": "10.1021/bp060389f",
+      "validated_status": "reference_anchor",
+      "analyte": "acrylamide",
+      "method": {
+        "instrument": "HPLC",
+        "replicates": 3
+      },
+      "what_it_supports": [
+        "Moisture-dependent acrylamide degradation with minimum elimination at Aw 0.82."
+      ],
+      "what_it_does_not_support": [
+        "Aqueous solution systems."
+      ]
+    },
+    {
+      "id": "ishak_2022_phip_hca_kinetics",
+      "kind": "industrial_endpoint_reference",
+      "report_visibility": "default",
+      "target_module": "safety",
+      "source_citation": "Ishak et al. (2022)",
+      "doi": "10.1016/j.foodchem.2022.132372",
+      "validated_status": "reference_anchor",
+      "analyte": "PhIP",
+      "method": {
+        "instrument": "HPLC",
+        "replicates": 3
+      },
+      "what_it_supports": [
+        "PhIP HCA formation kinetics (Ea 95.36 kJ/mol Phe vs 114.12 kJ/mol Pro)."
+      ],
+      "what_it_does_not_support": [
+        "Low temperature processes."
+      ]
     }
   ]
 }

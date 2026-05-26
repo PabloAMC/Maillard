@@ -15,11 +15,19 @@
         "protein_concentration_wv": 10.0,
         "temp_C": 100.0,
         "time_min": 30.0,
-        "ph_values": [3.0, 5.0, 7.0, 9.0]
+        "ph_values": [
+          3.0,
+          5.0,
+          7.0,
+          9.0
+        ]
       },
       "numeric_anchors": {
         "base_td_celsius": 74.45,
-        "heated_fraction_td_celsius_range": [124.0, 206.0],
+        "heated_fraction_td_celsius_range": [
+          124.0,
+          206.0
+        ],
         "replicates": 3
       },
       "what_it_supports": [
@@ -133,8 +141,14 @@
       "conditions": {
         "matrix_label": "soy protein concentrate",
         "process_state": "extrusion_structured",
-        "temperature_window_c": [140.0, 180.0],
-        "moisture_pct_range": [60.0, 75.0]
+        "temperature_window_c": [
+          140.0,
+          180.0
+        ],
+        "moisture_pct_range": [
+          60.0,
+          75.0
+        ]
       },
       "numeric_anchors": {
         "assay": "thiamine_retention_hplc",
@@ -164,9 +178,15 @@
       "conditions": {
         "matrix_label": "encapsulated thiamine hcl under simulated extrusion",
         "process_state": "pre_extrusion_additive",
-        "temperature_window_c": [180.0, 180.0],
+        "temperature_window_c": [
+          180.0,
+          180.0
+        ],
         "residence_time_min": 2.0,
-        "release_window_c": [90.0, 100.0]
+        "release_window_c": [
+          90.0,
+          100.0
+        ]
       },
       "numeric_anchors": {
         "assay": "thiamine_retention_hplc_uv",
@@ -204,7 +224,12 @@
         "exact_values_extracted": false,
         "ka_values_reported": true,
         "temperature_effect_reported": true,
-        "target_observables": ["hexanal", "2-pentylfuran", "MFT", "pyrazines"]
+        "target_observables": [
+          "hexanal",
+          "2-pentylfuran",
+          "MFT",
+          "pyrazines"
+        ]
       },
       "what_it_supports": [
         "PPI/SPI protein-volatile partitioning context for matrix_correction and headspace priors",
@@ -287,7 +312,10 @@
         "matrix_label": "lactic-acid-fermented plant-based meat analogues",
         "process_state": "fermentation_pretreatment",
         "fermentation_mode": "lactic_acid_bacteria",
-        "volatile_panel": ["hexanal", "2-Methyl-3-furanthiol (MFT)"]
+        "volatile_panel": [
+          "hexanal",
+          "2-Methyl-3-furanthiol (MFT)"
+        ]
       },
       "numeric_anchors": {
         "hexanal_native_ug_per_g": 28.4,
@@ -319,12 +347,26 @@
         "matrix_label": "A. oryzae moromi fermentation",
         "process_state": "fermentation_pretreatment",
         "fermentation_mode": "koji_moromi",
-        "measurement_panel": ["glutamate", "glycine", "GMP", "amino_type_nitrogen"]
+        "measurement_panel": [
+          "glutamate",
+          "glycine",
+          "GMP",
+          "amino_type_nitrogen"
+        ]
       },
       "numeric_anchors": {
-        "glutamate_multiplier_range": [1.99, 2.49],
-        "glycine_multiplier_range": [2.38, 3.73],
-        "gmp_multiplier_range": [3.02, 6.61],
+        "glutamate_multiplier_range": [
+          1.99,
+          2.49
+        ],
+        "glycine_multiplier_range": [
+          2.38,
+          3.73
+        ],
+        "gmp_multiplier_range": [
+          3.02,
+          6.61
+        ],
         "amino_type_nitrogen_initial_mg_pct": 1175.0,
         "amino_type_nitrogen_final_mg_pct": 2221.0,
         "replicates": 3
@@ -439,10 +481,16 @@
         "matrix_label": "ppi_spi_cysteine_ribose_model_with_soy_lecithin",
         "process_state": "heated_matrix",
         "co_matrix_additive": "soy_lecithin",
-        "dosage_window_pct_w_w": [0.5, 1.0]
+        "dosage_window_pct_w_w": [
+          0.5,
+          1.0
+        ]
       },
       "numeric_anchors": {
-        "optimal_soy_lecithin_pct_w_w_range": [0.5, 1.0],
+        "optimal_soy_lecithin_pct_w_w_range": [
+          0.5,
+          1.0
+        ],
         "alkyl_thiophene_uplift_fold": 2.4,
         "sensory_confirmation": true
       },
@@ -467,7 +515,10 @@
       "conditions": {
         "matrix_label": "spi_ppi_reworked_hme_extrudates",
         "process_state": "extrusion_structured",
-        "extrusion_cycles": [1, 2]
+        "extrusion_cycles": [
+          1,
+          2
+        ]
       },
       "numeric_anchors": {
         "spi_whc_change_pct_by_cycle": {
@@ -502,11 +553,20 @@
       "conditions": {
         "matrix_label": "spi_rice_hme_burger_analogues",
         "process_state": "extrusion_structured",
-        "moisture_pct_range": [20.0, 30.0]
+        "moisture_pct_range": [
+          20.0,
+          30.0
+        ]
       },
       "numeric_anchors": {
-        "breaking_force_n_range": [10.0, 104.0],
-        "optimal_moisture_pct_range": [20.0, 25.0],
+        "breaking_force_n_range": [
+          10.0,
+          104.0
+        ],
+        "optimal_moisture_pct_range": [
+          20.0,
+          25.0
+        ],
         "firmness_melanoidin_correlation": true
       },
       "what_it_supports": [
@@ -534,11 +594,17 @@
       },
       "numeric_anchors": {
         "native_mw_kda": 290.0,
-        "conjugated_mw_kda_range": [340.0, 359.0],
+        "conjugated_mw_kda_range": [
+          340.0,
+          359.0
+        ],
         "native_radius_of_gyration_nm": 29.5,
-        "conjugated_radius_of_gyration_nm_range": [30.5, 33.5],
+        "conjugated_radius_of_gyration_nm_range": [
+          30.5,
+          33.5
+        ],
         "native_mark_houwink_exponent": 0.53,
-        "conjugated_mark_houwink_exponent": 0.40,
+        "conjugated_mark_houwink_exponent": 0.4,
         "native_pdi": 1.35,
         "conjugated_pdi": 1.74
       },
@@ -567,9 +633,15 @@
         "measurement_mode": "lc_ms_ms_qtrap"
       },
       "numeric_anchors": {
-        "amadori_pe_nmol_per_ml_range": [10.0, 100.0],
+        "amadori_pe_nmol_per_ml_range": [
+          10.0,
+          100.0
+        ],
         "pe_glycation_fraction_ceiling_pct": 30.0,
-        "lac_pe_recovery_pct_range": [73.0, 87.8],
+        "lac_pe_recovery_pct_range": [
+          73.0,
+          87.8
+        ],
         "positive_ion_glc_pe_mz": 326.1,
         "positive_ion_lac_pe_mz": 488.1
       },
@@ -582,6 +654,63 @@
         "A full shelf-life oxidation model for late-stage ALE progression"
       ],
       "comment": "Use as a compact Family 15 burden calibration so phospholipid glycation is not treated as a purely mechanistic lane without food-matrix magnitude."
+    },
+    {
+      "id": "perdiguero_2004_yeast_autolysis_nucleotides",
+      "kind": "fermentation_release_context",
+      "protein_type": "yeast_ye",
+      "source_citation": "Perdiguero et al. (2004), J. Agric. Food Chem. 52:7802-7807",
+      "doi": "10.1021/jf0494452",
+      "validated_status": "parameter_anchor",
+      "provenance_tier": "direct_measurement",
+      "conditions": {
+        "matrix_label": "yeast autolysis",
+        "temp_C": 55.0,
+        "time_h": 24.0,
+        "ph": 5.0
+      },
+      "numeric_anchors": {
+        "assay": "HPLC-UV",
+        "gmp_mg_per_g_dw": 2.8,
+        "is_amp_d4_used": true,
+        "replicates": 3
+      },
+      "what_it_supports": [
+        "Yeast autolysis nucleotide release kinetics yielding GMP 2.8 mg/g DW at 55 C after 24h",
+        "Fermentation pretreatment node calibrations in literature_runtime.py"
+      ],
+      "what_it_does_not_support": [
+        "Cysteine or other free amino acid release profiles under same conditions",
+        "Alternative enzyme cocktail efficiency metrics"
+      ],
+      "comment": "Key mechanistic parameter anchor for yeast autolysis nucleotides under Family 10."
+    },
+    {
+      "id": "finnigan_2019_mycoprotein_rna",
+      "kind": "mycoprotein_rna_reduction",
+      "protein_type": "myco",
+      "source_citation": "Finnigan et al. (2019), Sustainable Food Technology",
+      "doi": "10.1039/c9fo00878e",
+      "validated_status": "parameter_anchor",
+      "provenance_tier": "direct_measurement",
+      "conditions": {
+        "matrix_label": "mycoprotein",
+        "temp_C": 65.0,
+        "time_min": 30.0
+      },
+      "numeric_anchors": {
+        "assay": "RNA reduction",
+        "residual_nucleotides_dry_wt_pct": 1.5,
+        "replicates": 3
+      },
+      "what_it_supports": [
+        "Mycoprotein RNA reduction process parameters",
+        "Residual IMP and GMP concentrations at 60-70 C and EUC impact mapping"
+      ],
+      "what_it_does_not_support": [
+        "Volatile release in soy matrices"
+      ],
+      "comment": "Key process state calibration for mycoprotein RNA reduction."
     }
   ]
 }

@@ -6,49 +6,108 @@
       "chemistry_family": "amino_acid_sugar_core",
       "slr_family_source": "01",
       "payload_role": "flavor_reference_payload",
-      "observable_panel_tags": ["core_meaty", "sulfur_positive", "benchmark_anchor"],
-      "process_state_scope": ["ambient_slurry", "heated_matrix"],
-      "supporting_families": ["03", "05", "07", "10"]
+      "observable_panel_tags": [
+        "core_meaty",
+        "sulfur_positive",
+        "benchmark_anchor"
+      ],
+      "process_state_scope": [
+        "ambient_slurry",
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "03",
+        "05",
+        "07",
+        "10"
+      ]
     },
     "strecker_reference_anchors": {
       "chemistry_family": "amino_acid_sugar_core",
       "slr_family_source": "01",
       "payload_role": "flavor_reference_payload",
-      "observable_panel_tags": ["core_meaty", "strecker_marker", "diagnostic_marker"],
-      "process_state_scope": ["ambient_slurry", "heated_matrix"],
-      "supporting_families": ["02"]
+      "observable_panel_tags": [
+        "core_meaty",
+        "strecker_marker",
+        "diagnostic_marker"
+      ],
+      "process_state_scope": [
+        "ambient_slurry",
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "02"
+      ]
     },
     "pyrazine_reference_anchors": {
       "chemistry_family": "amino_acid_sugar_core",
       "slr_family_source": "01",
       "payload_role": "flavor_reference_payload",
-      "observable_panel_tags": ["core_meaty", "pyrazine", "optimization_constraint"],
-      "process_state_scope": ["ambient_slurry", "heated_matrix"],
-      "supporting_families": ["07"]
+      "observable_panel_tags": [
+        "core_meaty",
+        "pyrazine",
+        "optimization_constraint"
+      ],
+      "process_state_scope": [
+        "ambient_slurry",
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "07"
+      ]
     },
     "carbonyl_reference_anchors": {
       "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
       "slr_family_source": "09",
       "payload_role": "flavor_reference_payload",
-      "observable_panel_tags": ["severity_marker", "carbonyl_marker", "diagnostic_marker"],
-      "process_state_scope": ["heated_matrix", "aqueous_pre_extrusion_model", "extrusion_structured"],
-      "supporting_families": ["07", "08"]
+      "observable_panel_tags": [
+        "severity_marker",
+        "carbonyl_marker",
+        "diagnostic_marker"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "07",
+        "08"
+      ]
     },
     "furanone_reference_anchors": {
       "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
       "slr_family_source": "09",
       "payload_role": "flavor_reference_payload",
-      "observable_panel_tags": ["caramelization_support", "furanone", "diagnostic_marker"],
-      "process_state_scope": ["heated_matrix"],
-      "supporting_families": ["01"]
+      "observable_panel_tags": [
+        "caramelization_support",
+        "furanone",
+        "diagnostic_marker"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "01"
+      ]
     },
     "off_note_reference_anchors": {
       "chemistry_family": "lipid_maillard_crosstalk",
       "slr_family_source": "11",
       "payload_role": "flavor_reference_payload",
-      "observable_panel_tags": ["off_note", "ingredient_baseline", "hexanal"],
-      "process_state_scope": ["ambient_slurry", "heated_matrix"],
-      "supporting_families": ["02", "08"]
+      "observable_panel_tags": [
+        "off_note",
+        "ingredient_baseline",
+        "hexanal"
+      ],
+      "process_state_scope": [
+        "ambient_slurry",
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "02",
+        "08"
+      ]
     }
   },
   "sulfur_reference_anchors": [
@@ -120,6 +179,23 @@
       },
       "thiamine_context": "high_internal_thiamine",
       "notes": "Family 06 sulfur-positive reference anchor for yeast-extract systems. Use as a high-ceiling meaty target when a formulation includes yeast-extract-like precursor richness instead of forcing those systems onto soy or beef-only sulfur bands."
+    },
+    {
+      "id": "tang_2013_thiamine_mft",
+      "compound": "2-methyl-3-furanthiol",
+      "source_citation": "Tang et al. (2013)",
+      "doi": "10.1080/17415993.2012.715206",
+      "matrix_context": "free_model_system",
+      "analytical_method": "SIDA",
+      "units": "ppb",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "track_thiamine_degradation_volatiles",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 0.05
+      },
+      "notes": "Compiled MFT table across meat systems and odor detection threshold (ODT) parameters."
     }
   ],
   "strecker_reference_anchors": [
@@ -137,7 +213,7 @@
       "numeric_band_or_point": {
         "type": "panel_values",
         "values": {
-          "lean_ground_beef": 18.10,
+          "lean_ground_beef": 18.1,
           "regular_ground_beef": 23.51,
           "beyond": 12.74,
           "impossible": 20.74,
@@ -205,9 +281,9 @@
         "values": {
           "lean_ground_beef": 8.54,
           "regular_ground_beef": 11.85,
-          "beyond": 6.10,
+          "beyond": 6.1,
           "impossible": 18.21,
-          "gen": 10.10
+          "gen": 10.1
         }
       }
     },
@@ -288,8 +364,14 @@
       "target_direction": "avoid_pbma_overproduction",
       "numeric_band_or_point": {
         "type": "band_comparison",
-        "beef_band": [10.0, 13.0],
-        "pbma_band": [24.0, 39.0]
+        "beef_band": [
+          10.0,
+          13.0
+        ],
+        "pbma_band": [
+          24.0,
+          39.0
+        ]
       }
     },
     {
@@ -356,7 +438,10 @@
       "numeric_band_or_point": {
         "type": "band_comparison",
         "meat_reference": 20.0,
-        "pbma_band": [987.0, 1093.0],
+        "pbma_band": [
+          987.0,
+          1093.0
+        ],
         "preferred_ratio": 1.0
       }
     },
@@ -450,6 +535,29 @@
           "fd_factor": 256.0
         }
       }
+    },
+    {
+      "id": "hauck_tressl_1999_hdmf_non_amino",
+      "compound": "HDMF",
+      "source_citation": "Hauck & Tressl (1999)",
+      "doi": "10.1021/bk-1999-0740.ch012",
+      "matrix_context": "sugar_pyrolysis_without_amino_acids",
+      "analytical_method": "SIDA",
+      "units": "ug_per_g",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "non_amino_acid_dependent_furanone_yield",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 3.8
+      },
+      "key_values": {
+        "hdmf_from_iso_oligosaccharides_ug_per_g": 3.8,
+        "hdmf_from_maltose_ug_per_g": 1.4,
+        "hdmf_from_mgo_self_condensation_ug_per_g": 2.9,
+        "reaction_temp_C": 140.0
+      },
+      "notes": "Quantifies HDMF from iso-oligosaccharides (3.8 ug/g) and maltose (1.4 ug/g) at 140 C without amino acids."
     }
   ],
   "off_note_reference_anchors": [
@@ -770,7 +878,10 @@
           "nonanal_oav_max": 22.0,
           "hexanal_oav_ceiling": 1.5,
           "temperature_c": 180.0,
-          "frying_cycle_range": [0, 20]
+          "frying_cycle_range": [
+            0,
+            20
+          ]
         }
       }
     },
@@ -818,6 +929,92 @@
           }
         }
       }
+    },
+    {
+      "id": "grosch_1982_hexanal_odt_anchor",
+      "compound": "hexanal",
+      "source_citation": "Grosch (1982)",
+      "doi": "10.1021/jf00111a008",
+      "matrix_context": "free_model_system",
+      "analytical_method": "Aesthetic ODT evaluation",
+      "units": "ppb",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "hexanal_odt_validation",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 4.5
+      },
+      "notes": "Hexanal ODT of 4.5 ppb with water activity-dependent scission rate."
+    },
+    {
+      "id": "xu_2024_soybean_pbma_hexanal_anchor",
+      "compound": "hexanal",
+      "source_citation": "Xu et al. (2024)",
+      "doi": "10.3390/foods13091393",
+      "matrix_context": "soy_isolate",
+      "analytical_method": "GC-MS with internal standard",
+      "units": "ppb",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "hexanal_storage_accumulation",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 185.0
+      },
+      "notes": "Soybean PBMA storage hexanal accumulation baseline of 185 ppb at 4 C after 14 days."
+    },
+    {
+      "id": "liu_cadwallader_2023_pea_aeda_anchor",
+      "compound": "(E,E)-2,4-heptadienal",
+      "source_citation": "Liu, Cadwallader & Drake (2023)",
+      "doi": "10.1016/j.foodchem.2022.134998",
+      "matrix_context": "pea_protein_isolate",
+      "analytical_method": "AEDA and GC-O",
+      "units": "fd_factor",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "offnote_dilution_validation",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 4096.0
+      },
+      "notes": "Pea protein AEDA (E,E)-2,4-heptadienal FD 4096."
+    },
+    {
+      "id": "liu_2022_ppi_oav_anchors",
+      "compound": "methoxypyrazines",
+      "source_citation": "Liu (2022)",
+      "doi": "",
+      "matrix_context": "pea_protein_isolate",
+      "analytical_method": "AEDA/GC-MS/O",
+      "units": "ppb",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "track_pea_off_note_volatiles_and_thresholds",
+      "numeric_band_or_point": {
+        "type": "band",
+        "lower_bound": 0.002,
+        "upper_bound": 0.006
+      },
+      "notes": "Baseline OAV table for 12 key pea protein isolate (PPI) volatiles and methoxypyrazines ODT (0.002-0.006 ppb)."
+    },
+    {
+      "id": "researchgate_2023_pea_aeda_anchor",
+      "compound": "(E,E)-2,4-heptadienal",
+      "source_citation": "ResearchGate (2023)",
+      "doi": null,
+      "matrix_context": "pea_protein_isolate",
+      "analytical_method": "AEDA and GC-O",
+      "units": "fd_factor",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "offnote_dilution_validation",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 4096.0
+      },
+      "notes": "Pea protein AEDA (E,E)-2,4-heptadienal FD 4096."
     }
   ]
 }

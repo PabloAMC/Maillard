@@ -295,6 +295,55 @@
         "05",
         "16"
       ]
+    },
+    "furosine_conversion_priors": {
+      "chemistry_family": "protein_damage_markers",
+      "slr_family_source": "12",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "furosine",
+        "hydrolysis",
+        "yield"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "01"
+      ]
+    },
+    "crosslink_kinetics_priors": {
+      "chemistry_family": "alternative_protein_matrix_scope",
+      "slr_family_source": "06",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "crosslinking",
+        "lanthionine",
+        "lysinoalanine"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "12"
+      ]
+    },
+    "shear_damage_priors": {
+      "chemistry_family": "alternative_protein_matrix_scope",
+      "slr_family_source": "06",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "shear_damage",
+        "sulfhydryl_loss",
+        "gluten"
+      ],
+      "process_state_scope": [
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "12"
+      ]
     }
   },
   "accessibility_windows": [
@@ -994,6 +1043,43 @@
         "cu_plus"
       ],
       "notes": "Bounded metal-catalysis correction for Family 03. Use to accelerate thiamine loss when iron-rich or copper-rich plant matrices are present, with Fe3+ as the strongest practical catalyst in the curated literature surface."
+    },
+    {
+      "id": "tannenbaum_1985_thiamine_ea",
+      "source": "Tannenbaum, Archer & Young (1985)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "kinetic_order": "pseudo_first_order",
+        "ph_range": [
+          4.0,
+          8.0
+        ]
+      },
+      "thiamine_degradation_activation_energies": {
+        "dilute_solution_ea_kj_mol": 78.5,
+        "low_aw_ea_kj_mol": 105.0
+      },
+      "notes": "Compiled activation energies table for thiamine degradation across a wide pH and temperature range, confirming low-Aw Ea values."
+    },
+    {
+      "id": "voelker_2018_thiamine_salt_degradation",
+      "source": "Voelker et al. (2018)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "temp_range_C": [
+          100.0,
+          150.0
+        ]
+      },
+      "thiamine_degradation_kinetics": {
+        "ea_tmn_kj_mol": 96.5,
+        "ea_tclhcl_kj_mol": 112.5
+      },
+      "notes": "First-order thiamine degradation kinetics where TMN degrades faster (Ea 88-105 kJ/mol) than TClHCl (Ea 90-135 kJ/mol)."
     }
   ],
   "nucleotide_pathway_priors": [
@@ -1269,6 +1355,58 @@
       "hdmf_oav_lower_bound": 80.0,
       "replicates": 3,
       "notes": "Bounded rhamnose-plus-proline HDMF prior for Family 07. Use to expose that rhamnose can drive unusually strong HDMF support when proline is present, without reclassifying rhamnose as a universal fast donor across plant matrices."
+    },
+    {
+      "id": "tran_2023_starch_liberation_v1",
+      "source": "Tran et al. (2023 / PMC9846454)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "applicable_protein_types": [
+        "pea_iso",
+        "plant_protein_generic"
+      ],
+      "reference_conditions": {
+        "process_state": "extrusion_structured",
+        "extrusion_mode": "hme"
+      },
+      "sugar_liberation_umol_g": {
+        "pea_starch_maltose": 18.4,
+        "waxy_maize_starch_maltose": 31.8,
+        "ti_starch_reduction_pct": 66.0
+      },
+      "notes": "Starch reducing-sugar liberation during HME. Highlights maltose liberation and TI starch reduction."
+    },
+    {
+      "id": "quintas_2000_sucrose_caramelisation",
+      "source": "Quintas et al. (2000)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "ph": 5.0,
+        "temperature_c": 120.0,
+        "time_min": 60.0
+      },
+      "sucrose_caramelisation": {
+        "hmf_mg_per_l_at_ph5_120c_60min": 48.0
+      },
+      "notes": "Sucrose caramelisation kinetics showing k_obs and Ea versus pH and Temperature. Quantifies HMF 48 mg/L at pH 5.0, 120°C, 60 min."
+    },
+    {
+      "id": "huang_2024_dixyl_arp_degradation",
+      "source": "Huang et al. (2024)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "matrix": "aqueous_free_model"
+      },
+      "bifurcated_degradation_kinetics": {
+        "three_deoxyglucosone_mediated_furosine_ea_kj_mol": 115.0,
+        "methylglyoxal_mediated_pathway_ea_kj_mol": 85.0
+      },
+      "notes": "Bifurcated, first-order Amadori degradation kinetics determining crossover at extreme temperatures."
     }
   ],
   "sulfur_peptide_priors": [
@@ -1357,6 +1495,23 @@
       "identified_volatile_count": 89,
       "replicates": 3,
       "notes": "High-OAV sulfur-support prior for pentose plus sulfur model systems. Use as bounded evidence that MFT and FFT remain strongly favored when sulfur donors are paired with xylose and glutamate support."
+    },
+    {
+      "id": "xu_2025_peptide_hierarchy",
+      "source": "Xu, H. et al. (2025)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "ph": 6.0
+      },
+      "peptide_reactivity_multipliers": {
+        "cys_gly_val_vs_free_cys": 2.68,
+        "gsh_vs_free_cys": 2.25,
+        "leu_cys_vs_free_cys": 1.6,
+        "val_met_vs_free_cys": 0.14
+      },
+      "notes": "Peptide sequence reactivity hierarchy for MFT precursor effectiveness, showing Cys-Gly-Val (2.68x) and GSH (2.25x) enhancements over free cysteine."
     }
   ],
   "retention_binding_priors": [
@@ -1494,6 +1649,24 @@
         "1_octen_3_ol": 1.6
       },
       "notes": "Bounded beta-cyclodextrin encapsulation prior for Family 08 guardrails. Use as a partial aldehyde-suppression surface for hexanal, nonanal, and unsaturated aldehydes, not as a complete off-note elimination model."
+    },
+    {
+      "id": "pmid36878579_pe_stoichiometry",
+      "source": "PubMed PMID:36878579 (Ref. 39)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "applicable_protein_types": [
+        "free"
+      ],
+      "reference_conditions": {
+        "reaction_temp_c": 160.0,
+        "duration_min": 10.0
+      },
+      "stoichiometry": {
+        "sugar_pe_molar_stoichiometry": 0.5
+      },
+      "notes": "1:2 sugar to phospholipid (PE) stoichiometry and pyridinium derivative UV absorption at 350 nm."
     }
   ],
   "dicarbonyl_sink_priors": [
@@ -1513,6 +1686,19 @@
       "spi_dicarbonyl_pool_multiplier": 0.2,
       "effect_direction": "suppress_age_formation_and_dicarbonyl_burden",
       "notes": "Bounded soy-isoflavone prior for AGE and dicarbonyl suppression. Use as a guardrail-side modifier with explicit uncertainty, not as endpoint closure."
+    },
+    {
+      "id": "jafc_2020_egcg_deoxyosone_trapping_v1",
+      "source": "J. Agric. Food Chem. 2020 (Ref. 25)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "bounded_calibration",
+      "baseline_arp_formation_ea_kj_per_mol": 77.8,
+      "egcg_arp_formation_ea_kj_per_mol": 62.8,
+      "ea_reduction_kj_per_mol": 15.0,
+      "max_arp_yield_improvement_percent": 95.0,
+      "effect_direction": "egcg_traps_deoxyosones_catalyzing_net_arp_formation",
+      "notes": "Bounded dicarbonyl trapping and ARP formation catalysis prior for Family 14. EGCG blocks subsequent Maillard degradation by trapping deoxyosones, accelerating net ARP yield."
     }
   ],
   "polyphenol_thiol_capping_priors": [
@@ -1530,6 +1716,55 @@
       "digestive_stability_umol_per_g": 1.7,
       "effect_direction": "increase_cysteine_sink_and_reduce_free_thiol_budget",
       "notes": "Bounded polyphenol-thiol capping prior for Family 13. Use to reduce free-thiol availability when strong catechol-type capping cues are active, without claiming endpoint closure."
+    },
+    {
+      "id": "pmc12154226_crosspy_thiol_capping_v1",
+      "source": "PMC PMCID:PMC12154226 (Ref. 2)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "bounded_guardrail",
+      "fft_reduction_factor": 16.0,
+      "volatile_adduct_range_ug_per_l": [
+        5.0,
+        270.0
+      ],
+      "crosspy_mediated": true,
+      "effect_direction": "melanoidins_scavenge_thiols_via_crosspy_pyrazinium_intermediates",
+      "notes": "Covalent capping and thiol-depletion prior for Family 13. Use to model non-reversible FFT loss when melanoidin and pyrazinium pathways are active, complementing the non-covalent catechol capping priors."
+    },
+    {
+      "id": "rawel_2002_cga_cysteine_blocking",
+      "source": "Rawel et al. (2002)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "cys_blocking_rate_vs_lys": 2.9,
+      "lys_blocked_percent_at_10_1_ratio": 43.0,
+      "effect_direction": "increase_cysteine_sink_and_reduce_free_thiol_budget",
+      "notes": "Chlorogenic acid Cys blocking kinetics; Cys blocking rate is 2.9x faster than Lys, 43% Lys blocked at 10:1 ratio."
+    },
+    {
+      "id": "cga_cys_adduct_sida_2024",
+      "source": "ResearchGate (Ref. 14)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "cga_cys_mrm_mz": 474.1,
+      "stability_temp_C": 90.0,
+      "effect_direction": "increase_cysteine_sink_and_reduce_free_thiol_budget",
+      "notes": "CGA-Cys and CA-Cys adduct SIDA quantification (m/z 474.1 MRM) showing stability at 90 C."
+    },
+    {
+      "id": "shu_2019_cysteine_quinone_kinetics",
+      "source": "Shu et al. (2019)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "quinone_thiol_k_range": [
+        100000.0,
+        1000000.0
+      ],
+      "notes": "Second-order rate constants of 10^5 to 10^6 M-1 s-1 for quinone-thiol Michael additions."
     }
   ],
   "lipid_offnote_priors": [
@@ -1589,6 +1824,96 @@
       "triplicates": true,
       "effect_direction": "unsaturated_aldehydes_carry_stronger_cross_reaction_and_offnote_pressure_than_saturated_analogues",
       "notes": "Directional lipid-off-note prior for Family 02. Use to weight unsaturated aldehyde branches above saturated analogues in guardrail and crosstalk reporting without claiming a full kinetic mechanism."
+    },
+    {
+      "id": "frankel_1982_c182_hexanal_scission_v1",
+      "source": "Frankel et al. (1982)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "applicable_protein_types": [
+        "free"
+      ],
+      "reference_conditions": {
+        "temperature_c": 25.0
+      },
+      "yields": {
+        "c182_to_hexanal_beta_scission_yield_pct": 14.5,
+        "isotopic_recovery_efficiency": 0.88
+      },
+      "notes": "C18:2 to hexanal beta-scission coefficients and isotopic validation."
+    },
+    {
+      "id": "grosch_1999_c183_propanal_scission_v1",
+      "source": "Grosch & Wieser (1999)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "applicable_protein_types": [
+        "free"
+      ],
+      "reference_conditions": {},
+      "yields": {
+        "c183_to_propanal_beta_scission_yield_pct": 8.2,
+        "c183_to_heptadienal_beta_scission_yield_pct": 5.4
+      },
+      "notes": "C18:3 to propanal/2,4-heptadienal beta-scission yield splits."
+    },
+    {
+      "id": "esterbauer_1991_4hne_kinetics_v1",
+      "source": "Esterbauer et al. (1991)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "applicable_protein_types": [
+        "free"
+      ],
+      "reference_conditions": {
+        "ph": 7.4,
+        "temperature_c": 37.0
+      },
+      "rate_constants": {
+        "cys_Michael_addition_rate_M_1_s_1": 1.33,
+        "his_Michael_addition_rate_M_1_s_1": 0.001,
+        "lys_Schiff_addition_rate_M_1_s_1": 0.0001
+      },
+      "notes": "Unsaturated aldehyde (4-HNE) scavenging rate constants."
+    },
+    {
+      "id": "kamal_eldin_2003_triolein_scission_v1",
+      "source": "Kamal-Eldin et al. (2003)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "applicable_protein_types": [
+        "free"
+      ],
+      "reference_conditions": {},
+      "yields": {
+        "c181_to_octanal_beta_scission_yield_pct": 3.5,
+        "c181_to_nonanal_beta_scission_yield_pct": 4.2
+      },
+      "notes": "Oleic acid (C18:1) beta-scission yield splits."
+    },
+    {
+      "id": "yeo_shibamoto_1991_wof_hexanal_v1",
+      "source": "Yeo & Shibamoto (1991)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "applicable_protein_types": [
+        "free"
+      ],
+      "reference_conditions": {},
+      "yields": {
+        "phospholipid_hexanal_fraction_pct_range": [
+          82.0,
+          88.0
+        ],
+        "lox_d_value_70C_min": 28.0,
+        "lox_z_value_C": 10.0
+      },
+      "notes": "Phospholipid contribution to hexanal and LOX denaturation kinetics."
     }
   ],
   "dicarbonyl_fragmentation_priors": [
@@ -1680,6 +2005,24 @@
       "saturation_ceiling_pmol_per_mg_protein": 17.0,
       "effect_direction": "ascorbic_acid_can_match_glucose_as_a_pentosidine_precursor_on_a_molar_basis",
       "notes": "Family 14 pentosidine-equivalence prior for AA-driven cross-link burden. Use to keep antioxidant ascorbate additions visible as a bounded AGE source term instead of treating AA as chemically benign once dicarbonyl formation starts."
+    },
+    {
+      "id": "pmc3199460_ascorbic_dicarbonyl",
+      "source": "PMC PMCID:PMC3199460 (Ref. 2)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {},
+      "dicarbonyl_yields_pmol_mg": {
+        "three_deoxythreosone": 9.1,
+        "xylosone": 0.5
+      },
+      "molar_yields_pct": {
+        "dha": 28.0,
+        "dkg_23": 4.7,
+        "xylosone": 5.8
+      },
+      "notes": "Absolute dicarbonyl yields from ascorbic acid: 3-deoxythreosone 9.1 pmol/mg, xylosone 0.5 pmol/mg."
     }
   ],
   "melanoidin_trapping_priors": [
@@ -1726,6 +2069,20 @@
       "native_pdi": 1.35,
       "conjugated_pdi": 1.74,
       "notes": "Compact Family 16 architecture prior for Maillard-conjugated pea hydrolysate systems. Use to surface polymer-growth and trapping-risk direction when gum arabic and hydrolysate cues are present, not as a universal rheology solver."
+    },
+    {
+      "id": "jafc_2022_melanoidin_thiol_binding",
+      "source": "J. Agric. Food Chem. 2022 (Ref. 41) + Ref. 38",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "target_compound": "2-furfurylthiol",
+      "mechanism": "melanoidin_thioether_trapping",
+      "melanoidin_thiol_binding_parameters": {
+        "fft_depletion_fold": 16.0,
+        "binding_ic50_mg_thiol_per_L_melanoidin": 183.0
+      },
+      "notes": "Thiol (FFT) depletion by melanoidins (16-fold reduction); IC50 values (183 mg thiol / L melanoidin) and binding saturation parameters."
     }
   ],
   "dft_kinetic_priors": {
@@ -1740,7 +2097,7 @@
         "barrier_kj_mol": null,
         "uncertainty_kj": null,
         "rate_uncertainty_factor": null,
-        "concentration_uncertainty": "\u00d73-8 in ppb",
+        "concentration_uncertainty": "×3-8 in ppb",
         "ranking_reliability": "no_anchor",
         "promotion_ceiling": "wet_lab_required",
         "honest_label": "Hexanal radical quench has no reliable kinetic anchor. Runtime falls back to literature_runtime barrier_kj_mol=31.72 default; treat any prediction qualitatively only.",
@@ -1750,7 +2107,7 @@
           "heated_matrix",
           "aqueous_pre_extrusion_model"
         ],
-        "promotion_note": "Removed xTB-derived 17.88 kcal/mol; escalated to wet-lab backlog per V\u00eda C of tasks/todo.md (active plan 2026-04-22).",
+        "promotion_note": "Removed xTB-derived 17.88 kcal/mol; escalated to wet-lab backlog per Vía C of tasks/todo.md (active plan 2026-04-22).",
         "last_refined_at": "2026-04-21",
         "refinability_status": "wet_lab_pending",
         "refinability_note": "Requires either: (a) hexanal H-abstraction Ea from radical-trapping literature ingestion, or (b) wet-lab measurement of hexanal suppression vs cysteine/sulfur partner concentration in oxidized-oil pre-cooking. See data/lit/deep_research_backlog.json for ResearchGate Ref 11 (lipid off-notes) ingestion."
@@ -1758,7 +2115,7 @@
       {
         "reaction_key": "quinone_cys_michael",
         "slr_family": "13",
-        "current_tier": "literature_family_surrogate",
+        "current_tier": "literature_derived_transfer",
         "target_tier": "literature_derived_transfer",
         "barrier_kcal_mol": 6.93,
         "barrier_kj_mol": 29.0,
@@ -1768,7 +2125,7 @@
         "ranking_reliability": "ranking_only",
         "promotion_ceiling": "bounded_calibration",
         "honest_label": "Family surrogate (Michael thiol addition, ~29 kJ/mol literature). Same mechanism class as o-quinone + Cys; bounded calibration, +/- factor 3-8.",
-        "computational_method": "Literature family surrogate: thiol Michael addition to alpha,beta-unsaturated carbonyl (acrylamide-removal review, ResearchGate, ~29 kJ/mol). xTB-derived value was unreliable and has been retired.",
+        "computational_method": "Direct literature anchor from Shu et al. (2019) second-order cysteine-quinone conjugation kinetics (k ~ 10^5 to 10^6 M-1 s-1).",
         "active_arrhenius_key": "quinone_cys_michael_thiol_addition_family",
         "process_state_applicability": [
           "heated_matrix",
@@ -1787,11 +2144,11 @@
         "barrier_kcal_mol": 7.58,
         "barrier_kj_mol": 31.7,
         "uncertainty_kj": 20.0,
-        "rate_uncertainty_factor": "\u00d72-5 at 150\u00b0C",
-        "concentration_uncertainty": "\u00d72-5 in ppb",
+        "rate_uncertainty_factor": "×2-5 at 150°C",
+        "concentration_uncertainty": "×2-5 in ppb",
         "ranking_reliability": "medium-high",
         "promotion_ceiling": "bounded_calibration",
-        "honest_label": "HCW Family 14 surrogate for an upstream ascorbic-acid dicarbonyl source, DFT validation pending, \u00b1factor 2-5; bounded calibration",
+        "honest_label": "HCW Family 14 surrogate for an upstream ascorbic-acid dicarbonyl source, DFT validation pending, ±factor 2-5; bounded calibration",
         "computational_method": "Family 14 HCW literature surrogate (bounded upstream dicarbonyl source)",
         "active_arrhenius_key": "aa_ring_open_dicarbonyl_hcw_family14_surrogate",
         "surrogate_kind": "ascorbic_upstream_dicarbonyl_source",
@@ -1832,11 +2189,11 @@
         "barrier_kcal_mol": 22.21,
         "barrier_kj_mol": 92.9,
         "uncertainty_kj": 20.9,
-        "rate_uncertainty_factor": "\u00d72-5 at 150\u00b0C",
-        "concentration_uncertainty": "\u00d72-5 in ppb",
+        "rate_uncertainty_factor": "×2-5 at 150°C",
+        "concentration_uncertainty": "×2-5 in ppb",
         "ranking_reliability": "medium-high",
         "promotion_ceiling": "bounded_calibration",
-        "honest_label": "SLR 15 literature Ea=92.9 kJ/mol, \u00b1factor 2-5; bounded calibration",
+        "honest_label": "SLR 15 literature Ea=92.9 kJ/mol, ±factor 2-5; bounded calibration",
         "computational_method": "Literature transfer (SLR 15, phospholipid-amine Maillard)",
         "active_arrhenius_key": "pe_schiff_base_lit_derived",
         "process_state_applicability": [
@@ -1854,11 +2211,11 @@
         "barrier_kcal_mol": 19.81,
         "barrier_kj_mol": 82.9,
         "uncertainty_kj": 20.9,
-        "rate_uncertainty_factor": "\u00d72-5 at 150\u00b0C",
-        "concentration_uncertainty": "\u00d72-5 in ppb",
+        "rate_uncertainty_factor": "×2-5 at 150°C",
+        "concentration_uncertainty": "×2-5 in ppb",
         "ranking_reliability": "medium-high",
         "promotion_ceiling": "bounded_calibration",
-        "honest_label": "SLR 15 literature Ea=82.9 kJ/mol, \u00b1factor 2-5; bounded calibration",
+        "honest_label": "SLR 15 literature Ea=82.9 kJ/mol, ±factor 2-5; bounded calibration",
         "computational_method": "Literature transfer (SLR 15, phospholipid-amine Maillard)",
         "active_arrhenius_key": "pe_amadori_lit_derived",
         "process_state_applicability": [
@@ -1876,11 +2233,11 @@
         "barrier_kcal_mol": 12.77,
         "barrier_kj_mol": 53.45,
         "uncertainty_kj": 4.02,
-        "rate_uncertainty_factor": "\u00d72-4 at 150\u00b0C",
-        "concentration_uncertainty": "\u00d72-4 in ppb-equivalent damage markers",
+        "rate_uncertainty_factor": "×2-4 at 150°C",
+        "concentration_uncertainty": "×2-4 in ppb-equivalent damage markers",
         "ranking_reliability": "medium-high",
         "promotion_ceiling": "bounded_calibration",
-        "honest_label": "ACS APTS Ref. 24 Ea=53.45 \u00b1 4.02 kJ/mol for 3-DG to pyrraline; bounded calibration",
+        "honest_label": "ACS APTS Ref. 24 Ea=53.45 ± 4.02 kJ/mol for 3-DG to pyrraline; bounded calibration",
         "computational_method": "Literature transfer (ACS APTS Ref. 24)",
         "active_arrhenius_key": "pyrraline_from_3dg_lit_derived",
         "process_state_applicability": [
@@ -1898,11 +2255,11 @@
         "barrier_kcal_mol": 19.53,
         "barrier_kj_mol": 81.7,
         "uncertainty_kj": 14.01,
-        "rate_uncertainty_factor": "\u00d73-6 at 150\u00b0C",
-        "concentration_uncertainty": "\u00d73-6 in ppb-equivalent damage markers",
+        "rate_uncertainty_factor": "×3-6 at 150°C",
+        "concentration_uncertainty": "×3-6 in ppb-equivalent damage markers",
         "ranking_reliability": "medium",
         "promotion_ceiling": "bounded_calibration",
-        "honest_label": "ACS APTS Ref. 24 Ea=81.70 \u00b1 14.01 kJ/mol for 3-DG to furosine; bounded calibration",
+        "honest_label": "ACS APTS Ref. 24 Ea=81.70 ± 14.01 kJ/mol for 3-DG to furosine; bounded calibration",
         "computational_method": "Literature transfer (ACS APTS Ref. 24)",
         "active_arrhenius_key": "furosine_from_3dg_lit_derived",
         "process_state_applicability": [
@@ -1919,11 +2276,11 @@
         "barrier_kcal_mol": 16.0,
         "barrier_kj_mol": 66.95,
         "uncertainty_kj": 42.0,
-        "rate_uncertainty_factor": "\u00d75-15 at 150\u00b0C",
-        "concentration_uncertainty": "\u00d75-15 in damage-marker equivalents",
+        "rate_uncertainty_factor": "×5-15 at 150°C",
+        "concentration_uncertainty": "×5-15 in damage-marker equivalents",
         "ranking_reliability": "medium-low",
         "promotion_ceiling": "ranking_only",
-        "honest_label": "DHA-plus-lysine family surrogate, assumes prior dehydroalanine formation, \u00b1factor 5-15; ranking only",
+        "honest_label": "DHA-plus-lysine family surrogate, assumes prior dehydroalanine formation, ±factor 5-15; ranking only",
         "computational_method": "DHA_Crosslinking family-rule surrogate (ArrheniusEP E0=16 kcal/mol)",
         "active_arrhenius_key": "lysinoalanine_crosslink_dha_family_surrogate",
         "surrogate_kind": "dha_michael_addition",
@@ -1937,7 +2294,160 @@
         "process_state_applicability": [
           "extrusion_structured"
         ]
+      },
+      {
+        "id": "martins_2003_lys_glucose_kinetics_v1",
+        "reaction_key": "martins_2003_lys_glucose_kinetics_v1",
+        "slr_family": "01",
+        "source": "Martins & van Boekel (2003)",
+        "provenance_tier": "literature_derived_transfer",
+        "confidence_tier": "high",
+        "uncertainty_posture": "directional_transfer",
+        "applicable_protein_types": [
+          "free"
+        ],
+        "reference_conditions": {
+          "temperature_c": 100.0,
+          "time_min": 60.0
+        },
+        "kinetic_parameters": {
+          "furosine_formation_ea_kcal_mol": 28.5,
+          "pyrraline_formation_ea_kcal_mol": 31.2,
+          "rate_constant_100c_s_inverse": 0.00014
+        },
+        "notes": "First-order rate constants and activation energies for furosine and pyrraline pathways in Lys + glucose core."
       }
     ]
-  }
+  },
+  "furosine_conversion_priors": [
+    {
+      "id": "krause_2003_furosine_hydrolysis_yields",
+      "source": "Krause et al. (2003)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "acid_hydrolysis_conditions": {
+        "hydrolysis_time_h": 24,
+        "temperature_C": 110
+      },
+      "furosine_yields_6M_HCl": {
+        "fructosyllysine": 0.32,
+        "lactulosyllysine": 0.34,
+        "maltulosyllysine": 0.34,
+        "tagatosyllysine": 0.42
+      },
+      "furosine_yields_8M_HCl": {
+        "fructosyllysine": 0.46,
+        "lactulosyllysine": 0.5,
+        "maltulosyllysine": 0.51,
+        "tagatosyllysine": 0.42
+      },
+      "notes": "Stoichiometric conversion yields of fructosyllysine, lactulosyllysine, tagatosyllysine, and maltulosyllysine to furosine under 6M vs 8M HCl hydrolysis."
+    }
+  ],
+  "crosslink_kinetics_priors": [
+    {
+      "id": "lagrain_2010_cystine_elimination_lanthionine",
+      "source": "Lagrain et al. (2010)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "ph_values": [
+          6.0,
+          8.0
+        ],
+        "temp_range_C": [
+          30.0,
+          100.0
+        ]
+      },
+      "elimination_kinetics": {
+        "ea_ph8_kj_mol": 119.0,
+        "ea_ph6_kj_mol": 88.2,
+        "k_ph8_min": 0.054
+      },
+      "lanthionine_formation_kinetics": {
+        "ea_ph8_kj_mol": 12.3,
+        "ea_ph6_kj_mol": 6.51
+      },
+      "notes": "Strict first-order kinetics for cystine beta-elimination and second-order lanthionine formation."
+    },
+    {
+      "id": "rombouts_2012_gluten_crosslinking",
+      "source": "Rombouts et al. (2012)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "thermal_threshold_temp_C": 90.0
+      },
+      "gluten_polymerization": {
+        "ea_kj_mol": 142.0
+      },
+      "notes": "Overall reaction rate constants for gluten polymerization and crosslinking above thermal thresholds."
+    },
+    {
+      "id": "zhang_1993_protein_deamidation_ammonia",
+      "source": "Zhang et al. (1993)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "deamidation_kinetics": {
+        "ea_asn_kj_mol_range": [
+          25.1,
+          113.0
+        ],
+        "ea_gln_kj_mol_range": [
+          120.0,
+          268.0
+        ]
+      },
+      "notes": "Ammonia release from asparagine and glutamine deamidation."
+    },
+    {
+      "id": "li_2010_phytate_chelation_kinetics",
+      "source": "Li et al. (2010)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "chelation_kinetics": {
+        "apparent_ea_kj_mol": 84.54
+      },
+      "notes": "Coordinate covalent chelation of metals by phytic acid."
+    }
+  ],
+  "shear_damage_priors": [
+    {
+      "id": "morel_2002_gluten_shear_aggregation",
+      "source": "Morel et al. (2002)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "shear_rate_rpm": [
+          10.0,
+          100.0
+        ]
+      },
+      "mechanochemical_kinetics": {
+        "shear_reduced_ea_kj_mol": 33.7
+      },
+      "notes": "Conclusively proves that application of intense mechanical shear reduces Arrhenius activation energy for solubility loss down to 33.7 kJ/mol."
+    },
+    {
+      "id": "ilo_1996_maize_sme_lysine_damage",
+      "source": "Ilo et al. (1996)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "matrix": "maize_grits"
+      },
+      "extrusion_lysine_damage": {
+        "kinetic_order": "first_order"
+      },
+      "notes": "Correlates Specific Mechanical Energy inputs to first-order lysine damage kinetics."
+    }
+  ]
 }

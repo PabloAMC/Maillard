@@ -1062,11 +1062,26 @@
         "Direct PBMA endpoint closure for combined nucleotide plus glutamate systems"
       ],
       "key_values": {
-        "standard_autolysate_imp_mg_per_100g_dw_range": [120.0, 250.0],
-        "standard_autolysate_gmp_mg_per_100g_dw_range": [45.0, 90.0],
-        "high_nucleotide_imp_mg_per_100g_dw_range": [1200.0, 2400.0],
-        "high_nucleotide_gmp_mg_per_100g_dw_range": [300.0, 650.0],
-        "amp_deaminase_euc_uplift_factor_vs_standard_range": [5.0, 6.0]
+        "standard_autolysate_imp_mg_per_100g_dw_range": [
+          120.0,
+          250.0
+        ],
+        "standard_autolysate_gmp_mg_per_100g_dw_range": [
+          45.0,
+          90.0
+        ],
+        "high_nucleotide_imp_mg_per_100g_dw_range": [
+          1200.0,
+          2400.0
+        ],
+        "high_nucleotide_gmp_mg_per_100g_dw_range": [
+          300.0,
+          650.0
+        ],
+        "amp_deaminase_euc_uplift_factor_vs_standard_range": [
+          5.0,
+          6.0
+        ]
       },
       "repo_next_action": "Use as a Family 04 source-profile anchor so yeast-extract additions expose bounded grade-driven nucleotide support rather than behaving like a single default composition.",
       "runtime_artifacts": [
@@ -1639,9 +1654,15 @@
         "A full oxidation or ALE progression model in the same run"
       ],
       "key_values": {
-        "amadori_pe_nmol_per_ml_range": [10.0, 100.0],
+        "amadori_pe_nmol_per_ml_range": [
+          10.0,
+          100.0
+        ],
         "pe_glycation_fraction_ceiling_pct": 30.0,
-        "lac_pe_recovery_pct_range": [73.0, 87.8],
+        "lac_pe_recovery_pct_range": [
+          73.0,
+          87.8
+        ],
         "glc_pe_positive_ion_mz": 326.1,
         "lac_pe_positive_ion_mz": 488.1
       },
@@ -2003,6 +2024,9 @@
       "id": "acs_2020_raw_pea_hexanal_baseline",
       "citation": "Bi et al. (2020), J. Agric. Food Chem. 68:2718-2727",
       "doi": "10.1021/acs.jafc.9b07711",
+      "citation_aliases": [
+        "ACS JAFC 2020 (raw peas)"
+      ],
       "kind": "quantitative_benchmark",
       "chemistry_family": "lipid_maillard_crosstalk",
       "slr_family_source": "11",
@@ -2187,7 +2211,10 @@
         "hexanal_fd_factor": 128.0,
         "phenylacetaldehyde_fd_factor": 256.0,
         "4_vinylguaiacol_fd_factor": 512.0,
-        "chlorogenic_acid_dw_pct_range": [1.0, 3.0],
+        "chlorogenic_acid_dw_pct_range": [
+          1.0,
+          3.0
+        ],
         "meaty_potential_multiplier": 0.25
       },
       "runtime_artifacts": [
@@ -2254,7 +2281,10 @@
         "pyrazine_volatiles_pct": 0.8,
         "beta_ionone_oav_floor": 100.0,
         "one_octen_3_ol_oav": 10.0,
-        "hexanal_oav_range": [2.0, 8.0],
+        "hexanal_oav_range": [
+          2.0,
+          8.0
+        ],
         "meaty_potential_multiplier": 0.04
       },
       "runtime_artifacts": [
@@ -2600,7 +2630,7 @@
     },
     {
       "id": "ramirez_jimenez_2000_furosine_crossover_benchmark",
-      "citation": "Ram\u00edrez-Jim\u00e9nez et al. (2000)",
+      "citation": "Ramírez-Jiménez et al. (2000)",
       "doi": "",
       "kind": "quantitative_benchmark",
       "chemistry_family": "protein_damage_markers",
@@ -2797,9 +2827,18 @@
         "Universal pretreatment transfer outside koji or moromi systems"
       ],
       "key_values": {
-        "glutamate_multiplier_range": [1.99, 2.49],
-        "glycine_multiplier_range": [2.38, 3.73],
-        "gmp_multiplier_range": [3.02, 6.61],
+        "glutamate_multiplier_range": [
+          1.99,
+          2.49
+        ],
+        "glycine_multiplier_range": [
+          2.38,
+          3.73
+        ],
+        "gmp_multiplier_range": [
+          3.02,
+          6.61
+        ],
         "amino_type_nitrogen_initial_mg_pct": 1175.0,
         "amino_type_nitrogen_final_mg_pct": 2221.0
       },
@@ -2850,7 +2889,10 @@
         "Universal transfer across all polyphenol classes"
       ],
       "key_values": {
-        "cys_4mc_adduct_nmol_per_mg_range": [2.2, 8.1],
+        "cys_4mc_adduct_nmol_per_mg_range": [
+          2.2,
+          8.1
+        ],
         "thiol_loss_fraction": 0.62,
         "digestive_stability_umol_per_g": 1.7
       },
@@ -3398,7 +3440,7 @@
         "ribose_vs_glucose_multiplier": 8.2,
         "xylose_vs_glucose_multiplier": 5.9,
         "fructose_vs_glucose_multiplier": 0.65,
-        "maltose_vs_glucose_multiplier": 0.10,
+        "maltose_vs_glucose_multiplier": 0.1,
         "glucose_ea_kj_per_mol": 106.0,
         "ribose_ea_kj_per_mol": 114.0
       },
@@ -4040,7 +4082,10 @@
           "9.5": 47.53
         },
         "kinetic_order": "pseudo_first_order",
-        "temperature_window_c": [150.0, 190.0]
+        "temperature_window_c": [
+          150.0,
+          190.0
+        ]
       },
       "repo_next_action": "Keep encoded as a bounded Arrhenius prior until a direct SPI/PPI ascorbate extrusion benchmark exists.",
       "runtime_artifacts": [
@@ -4093,8 +4138,14 @@
         "A full oxygen-dependent AA transition network in one payload"
       ],
       "key_values": {
-        "pentosidine_glucose_pmol_per_mg_range": [13.2, 17.0],
-        "pentosidine_ascorbic_acid_pmol_per_mg_range": [13.2, 17.0],
+        "pentosidine_glucose_pmol_per_mg_range": [
+          13.2,
+          17.0
+        ],
+        "pentosidine_ascorbic_acid_pmol_per_mg_range": [
+          13.2,
+          17.0
+        ],
         "molar_equivalence_to_glucose": true,
         "temperature_c": 37.0
       },
@@ -4265,7 +4316,10 @@
         "Automatic transfer of the reported OAV band to dilute SPI or PPI systems"
       ],
       "key_values": {
-        "mft_oav_band": [2000.0, 8000.0],
+        "mft_oav_band": [
+          2000.0,
+          8000.0
+        ],
         "thiamine_context": "high_internal_thiamine",
         "analytical_method": "sida"
       },
@@ -4316,8 +4370,14 @@
         "Standalone process attribution without an executable severity proxy"
       ],
       "key_values": {
-        "cml_range_mg_per_kg": [16.0, 110.0],
-        "cel_range_mg_per_kg": [25.0, 110.0]
+        "cml_range_mg_per_kg": [
+          16.0,
+          110.0
+        ],
+        "cel_range_mg_per_kg": [
+          25.0,
+          110.0
+        ]
       },
       "repo_next_action": "Keep encoded as the broad Family 12 commercial AGE band and pair it with executable CML/CEL proxy benchmarks for severity interpretation.",
       "runtime_artifacts": [
@@ -4362,7 +4422,10 @@
       ],
       "key_values": {
         "acrylamide_suppression_fraction": 0.978,
-        "mitigation_pair": ["cysteine", "glycine"]
+        "mitigation_pair": [
+          "cysteine",
+          "glycine"
+        ]
       },
       "repo_next_action": "Keep encoded as the strongest Family 13 safety mitigation anchor without misclassifying it as a universal kinetic rule.",
       "runtime_artifacts": [
@@ -4410,8 +4473,14 @@
         "Same-run sulfur retention quantification"
       ],
       "key_values": {
-        "spi_whc_change_pct_by_cycle": [-17.0, -63.0],
-        "ppi_whc_change_pct_by_cycle": [-65.0, -90.0],
+        "spi_whc_change_pct_by_cycle": [
+          -17.0,
+          -63.0
+        ],
+        "ppi_whc_change_pct_by_cycle": [
+          -65.0,
+          -90.0
+        ],
         "g_prime_recovery_after_rework": false
       },
       "repo_next_action": "Keep encoded as the primary HME rework hydration-collapse anchor until same-run flavor-plus-texture datasets exist.",
@@ -4460,8 +4529,14 @@
         "An Ogden-based constitutive solver in the current runtime"
       ],
       "key_values": {
-        "breaking_force_n_range": [10.0, 104.0],
-        "optimal_moisture_pct_range": [20.0, 25.0]
+        "breaking_force_n_range": [
+          10.0,
+          104.0
+        ],
+        "optimal_moisture_pct_range": [
+          20.0,
+          25.0
+        ]
       },
       "repo_next_action": "Keep encoded as the first direct HME firmness calibration anchor while the extrusion-mechanics solver remains bounded and report-first.",
       "runtime_artifacts": [
@@ -4511,11 +4586,17 @@
       ],
       "key_values": {
         "native_mw_kda": 290.0,
-        "conjugated_mw_kda_range": [340.0, 359.0],
+        "conjugated_mw_kda_range": [
+          340.0,
+          359.0
+        ],
         "native_radius_of_gyration_nm": 29.5,
-        "conjugated_radius_of_gyration_nm_range": [30.5, 33.5],
+        "conjugated_radius_of_gyration_nm_range": [
+          30.5,
+          33.5
+        ],
         "native_mark_houwink_exponent": 0.53,
-        "conjugated_mark_houwink_exponent": 0.40,
+        "conjugated_mark_houwink_exponent": 0.4,
         "native_pdi": 1.35,
         "conjugated_pdi": 1.74
       },
@@ -4533,6 +4614,2838 @@
           "sections": [
             "melanoidin_trapping_priors"
           ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "pmc12154226_crosspy_thiol_adduction",
+      "citation": "PMC PMCID:PMC12154226 (Ref. 2)",
+      "doi": "10.3390/foods14111881",
+      "kind": "calibration_reference",
+      "chemistry_family": "polyphenol_amino_capping",
+      "slr_family_source": "13",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "capping",
+        "thiol_reduction",
+        "crosspy",
+        "fft"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model"
+      ],
+      "supporting_families": [
+        "01",
+        "16"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "matrix_correction"
+      ],
+      "matrix_family": "coffee_melanoidin_model",
+      "eligibility": "benchmark_eligible_parameter",
+      "status": "ready_for_calibration_encoding",
+      "what_it_supports": [
+        "FFT 16x reduction via CROSSPY-radical mediated covalent binding to melanoidins under warm storage conditions",
+        "Quantified QA/CQA/QAL-volatile adduct bounds ranging from 5 to 270 ug/L"
+      ],
+      "what_it_does_not_support": [
+        "Direct pea-protein or soy-protein matrix volatile benchmarking",
+        "Reversible non-covalent binding kinetics"
+      ],
+      "key_values": {
+        "fft_reduction_factor": 16.0,
+        "volatile_adduct_range_ug_per_l": [
+          5.0,
+          270.0
+        ],
+        "crosspy_mediated": true
+      },
+      "repo_next_action": "Keep as the Family 13 covalent thiol-depletion anchor for CROSSPY-mediated capping modeling.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "pmc12154226_crosspy_thiol_capping_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "polyphenol_thiol_capping_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "jafc_2020_egcg_deoxyosone_trapping",
+      "citation": "J. Agric. Food Chem. 2020 (Ref. 25)",
+      "doi": "10.1021/acs.jafc.9b07711",
+      "kind": "calibration_reference",
+      "chemistry_family": "ascorbic_acid_maillard",
+      "slr_family_source": "14",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "capping",
+        "dicarbonyl_trapping",
+        "egcg",
+        "amadori"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model"
+      ],
+      "supporting_families": [
+        "01",
+        "13"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "matrix_correction"
+      ],
+      "matrix_family": "xylose_alanine_model_system",
+      "eligibility": "benchmark_eligible_parameter",
+      "status": "ready_for_calibration_encoding",
+      "what_it_supports": [
+        "Activation energy reduction for ARP formation from 77.8 to 62.8 kJ/mol in the presence of EGCG",
+        "EGCG mediated trapping of reactive deoxyosones, improving yield of N-(1-deoxy-D-xylulos-1-yl)alanine up to 95%"
+      ],
+      "what_it_does_not_support": [
+        "Direct plant-protein extrusion kinetics",
+        "Generalized polyphenol-sugar reactions without amino acid partners"
+      ],
+      "key_values": {
+        "baseline_arp_formation_ea_kj_per_mol": 77.8,
+        "egcg_arp_formation_ea_kj_per_mol": 62.8,
+        "ea_reduction_kj_per_mol": 15.0,
+        "max_arp_yield_improvement_percent": 95.0
+      },
+      "repo_next_action": "Keep as the Family 14 EGCG deoxyosone trapping and ARP formation catalysis prior.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "jafc_2020_egcg_deoxyosone_trapping_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "dicarbonyl_sink_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "davidek_2006_thr_glucose_furan",
+      "citation": "Davidek et al. (2006)",
+      "doi": "10.1021/jf053246m",
+      "kind": "safety_reference",
+      "chemistry_family": "amino_acid_sugar_core",
+      "slr_family_source": "01",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "safety",
+        "furan",
+        "methylfuran"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "09"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "safety",
+        "reporting"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Safety furan/methylfuran absolute yield ceiling from Threonine + Glucose at 120 C"
+      ],
+      "what_it_does_not_support": [
+        "SPI or PPI matrix encapsulation",
+        "Extrusion shear effects"
+      ],
+      "key_values": {
+        "temp_c": 120.0,
+        "time_min": 30.0,
+        "ph": 6.0,
+        "furan_yield_mol_pct": 0.045
+      },
+      "repo_next_action": "Keep encoded as safety reference to cap furan formation from threonine.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "safety_reference",
+          "artifact_id": "davidek_2006_thr_glucose_furan_safety",
+          "path": "data/lit/safety_reference_payloads.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "martins_2003_lys_glucose_kinetics",
+      "citation": "Martins & van Boekel (2003)",
+      "doi": "10.1021/jf021111m",
+      "kind": "calibration_reference",
+      "chemistry_family": "amino_acid_sugar_core",
+      "slr_family_source": "01",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "kinetic",
+        "furosine",
+        "pyrraline"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "12"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "reporting"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "First-order rate constants and activation energies for furosine and pyrraline pathways in Lys + glucose core."
+      ],
+      "what_it_does_not_support": [
+        "Peptide-bound lysine access constraints",
+        "Non-first-order high temperature reactions"
+      ],
+      "key_values": {
+        "furosine_formation_ea_kcal_mol": 28.5,
+        "pyrraline_formation_ea_kcal_mol": 31.2,
+        "rate_constant_100c_s_inverse": 0.00014
+      },
+      "repo_next_action": "Encode as furosine/pyrraline activation energy prior bounds.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "martins_2003_lys_glucose_kinetics_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "dft_kinetic_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "grosch_1982_hexanal_odt",
+      "citation": "Grosch (1982)",
+      "doi": "10.1021/jf00111a008",
+      "kind": "calibration_reference",
+      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
+      "slr_family_source": "02",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "off_note",
+        "hexanal",
+        "threshold"
+      ],
+      "process_state_scope": [
+        "ambient_slurry",
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "08",
+        "11"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "sensory_scoring"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Hexanal Odor Detection Threshold (ODT) anchor at 4.5 ppb with water activity-dependent rate."
+      ],
+      "what_it_does_not_support": [
+        "Commercial patty texture effects",
+        "Trapping inside soy or pea matrices"
+      ],
+      "key_values": {
+        "hexanal_odt_ppb": 4.5,
+        "aw_dependent_scission_rate_factor": 1.2
+      },
+      "repo_next_action": "Encode ODT hexanal value for off-note scoring.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "flavor_reference_payload",
+          "artifact_id": "grosch_1982_hexanal_odt_anchor",
+          "path": "data/lit/flavor_reference_payloads.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "frankel_1982_c182_hexanal_scission",
+      "citation": "Frankel et al. (1982)",
+      "doi": "10.1007/bf02534608",
+      "kind": "calibration_reference",
+      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
+      "slr_family_source": "02",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "lipid",
+        "hexanal",
+        "scission"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "11"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "lipid_oxidation"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "C18:2 to hexanal beta-scission coefficients and isotopic validation."
+      ],
+      "what_it_does_not_support": [
+        "Enzymatic lipoxygenase inhibition",
+        "Aqueous phase pH effects"
+      ],
+      "key_values": {
+        "c182_to_hexanal_beta_scission_yield_pct": 14.5,
+        "isotopic_recovery_efficiency": 0.88
+      },
+      "repo_next_action": "Encode lipid hexanal beta-scission yield prior.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "frankel_1982_c182_hexanal_scission_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "lipid_offnote_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "grosch_1999_c183_propanal_scission",
+      "citation": "Grosch & Wieser (1999)",
+      "doi": "10.1021/jf990111u",
+      "kind": "calibration_reference",
+      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
+      "slr_family_source": "02",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "lipid",
+        "propanal",
+        "heptadienal"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "11"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "lipid_oxidation"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "C18:3 to propanal/2,4-heptadienal beta-scission yield splits."
+      ],
+      "what_it_does_not_support": [
+        "C18:1/C18:2 scission crosstalk",
+        "pH sensitivity"
+      ],
+      "key_values": {
+        "c183_to_propanal_beta_scission_yield_pct": 8.2,
+        "c183_to_heptadienal_beta_scission_yield_pct": 5.4
+      },
+      "repo_next_action": "Encode lipid c183 scission split yield prior.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "grosch_1999_c183_propanal_scission_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "lipid_offnote_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "liu_2020_egcg_arp_kinetics",
+      "citation": "Liu et al. (2023/2024)",
+      "doi": "10.1021/acs.jafc.9b05898",
+      "kind": "calibration_reference",
+      "chemistry_family": "amino_acid_sugar_core",
+      "slr_family_source": "01",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "polyphenol",
+        "Amadori",
+        "kinetic"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "13",
+        "14"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "reporting"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Ala + Xyl ARP kinetics ± EGCG; Ea values with SE; stoichiometry constraint."
+      ],
+      "what_it_does_not_support": [
+        "Intact plant protein matrices",
+        "Extrusion high-temperature pathways"
+      ],
+      "key_values": {
+        "baseline_arp_formation_ea_kj_per_mol": 77.8,
+        "egcg_arp_formation_ea_kj_per_mol": 62.8,
+        "ea_reduction_kj_per_mol": 15.0,
+        "max_arp_yield_improvement_percent": 95.0
+      },
+      "repo_next_action": "Encode EGCG Amadori formation catalysis prior.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "jafc_2020_egcg_deoxyosone_trapping_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "dicarbonyl_sink_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "mottram_wedzicha_1990_methional",
+      "citation": "Mottram & Wedzicha (1990)",
+      "doi": "",
+      "kind": "calibration_reference",
+      "chemistry_family": "amino_acid_sugar_core",
+      "slr_family_source": "01",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "methional",
+        "MGO",
+        "Strecker"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "07"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "precursor_resolver"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "encoding_status": "encoded_runtime_artifact",
+      "what_it_supports": [
+        "Methional yield from methionine + dicarbonyl MGO under model system conditions."
+      ],
+      "what_it_does_not_support": [
+        "Intact plant protein matrices",
+        "Extrusion high-temperature pathways"
+      ],
+      "key_values": {
+        "met_mgo_to_methional_conversion_pct": 12.0
+      },
+      "repo_next_action": "Encode methional formation kinetics prior.",
+      "runtime_artifacts": [],
+      "requires_primary_data": false
+    },
+    {
+      "id": "yu_2021_corn_hydrolysate_kinetics",
+      "citation": "Yu et al. (2021)",
+      "doi": "",
+      "kind": "quantitative_benchmark",
+      "chemistry_family": "amino_acid_sugar_core",
+      "slr_family_source": "01",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "corn_hydrolysate",
+        "volatile",
+        "kinetic"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "06"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "reporting"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "encoding_status": "encoded_runtime_artifact",
+      "what_it_supports": [
+        "Xylose + corn protein hydrolysate, two-phase kinetics, absolute volatiles, triplicates."
+      ],
+      "what_it_does_not_support": [
+        "Intact plant protein matrices",
+        "Extrusion high-temperature pathways"
+      ],
+      "key_values": {
+        "temp_C": 100.0,
+        "time_min": 60.0,
+        "ph": 6.5
+      },
+      "repo_next_action": "Encode corn protein hydrolysate kinetic priors.",
+      "runtime_artifacts": [],
+      "requires_primary_data": false
+    },
+    {
+      "id": "farmer_1991_alkyl_thiazoles",
+      "citation": "Farmer & Patterson (1991)",
+      "doi": "10.1016/0308-8146(91)90013-I",
+      "kind": "calibration_reference",
+      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
+      "slr_family_source": "02",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "lipid",
+        "thiazole"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "01",
+        "08"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "lipid_condensation"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Aliphatic aldehyde + H2S + NH3 thiazole cyclisation kinetics and relative yields.",
+        "Confirms alkyl thiazole OAV > 1 in lipid-crosstalk modeling."
+      ],
+      "what_it_does_not_support": [
+        "Protein-matrix retention constants",
+        "pH-dependent oxidation rate limits"
+      ],
+      "key_values": {
+        "alkyl_thiazole_oav_ceiling": 50.0,
+        "aldehyde_precursor_reactivity_ratio": 1.2
+      },
+      "repo_next_action": "Expose as a lipid-Maillard thiazole cross-coupling mechanistic reference.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "intake_registry_entry",
+          "artifact_id": "farmer_1991_alkyl_thiazoles",
+          "path": "data/lit/benchmark_intake_registry.json"
+        },
+        {
+          "artifact_type": "slr_incorporation_ledger",
+          "artifact_id": "farmer_1991_alkyl_thiazoles",
+          "path": "data/lit/slr_incorporation_matrix.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "esterbauer_1991_4hne_kinetics",
+      "citation": "Esterbauer et al. (1991)",
+      "doi": "10.1016/0891-5849(91)90081-A",
+      "kind": "calibration_reference",
+      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
+      "slr_family_source": "02",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "lipid",
+        "4hne",
+        "scavenging"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "01",
+        "08"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "lipid_condensation"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Unsaturated aldehyde (4-HNE) scavenging rate hierarchy: Cys >> His > Lys.",
+        "Michael addition rate constants for reactive amino acid sidechains."
+      ],
+      "what_it_does_not_support": [
+        "Saturated aldehyde trapping kinetics",
+        "Denaturation-induced accessibility values"
+      ],
+      "key_values": {
+        "cys_Michael_addition_rate_M_1_s_1": 1.33,
+        "his_Michael_addition_rate_M_1_s_1": 0.001,
+        "lys_Schiff_addition_rate_M_1_s_1": 0.0001
+      },
+      "repo_next_action": "Encode 4-HNE reactive amino acid scavenging rate priors.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "esterbauer_1991_4hne_kinetics_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "lipid_offnote_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "kamal_eldin_2003_triolein_scission",
+      "citation": "Kamal-Eldin et al. (2003)",
+      "doi": "10.1007/s11745-003-1082-x",
+      "kind": "calibration_reference",
+      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
+      "slr_family_source": "02",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "lipid",
+        "scission",
+        "triolein"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "11"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "lipid_oxidation"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Triolein oxidation and oleic acid (C18:1) beta-scission yield parameters."
+      ],
+      "what_it_does_not_support": [
+        "Phospholipid fraction contributions",
+        "LOX inactivation temperatures"
+      ],
+      "key_values": {
+        "c181_to_octanal_beta_scission_yield_pct": 3.5,
+        "c181_to_nonanal_beta_scission_yield_pct": 4.2
+      },
+      "repo_next_action": "Encode oleic (C18:1) scission volatile split priors.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "kamal_eldin_2003_triolein_scission_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "lipid_offnote_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "xu_2024_soybean_pbma_hexanal",
+      "citation": "Xu et al. (2024)",
+      "doi": "10.3390/foods13091393",
+      "kind": "calibration_reference",
+      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
+      "slr_family_source": "02",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "lipid",
+        "hexanal",
+        "soy_isolate"
+      ],
+      "process_state_scope": [
+        "ambient_slurry"
+      ],
+      "supporting_families": [
+        "06",
+        "08"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "headspace"
+      ],
+      "matrix_family": "soy_isolate",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Soybean PBMA storage hexanal accumulation trends and baseline concentration values."
+      ],
+      "what_it_does_not_support": [
+        "Free solution kinetic activation energies",
+        "Furanone reaction branching ratios"
+      ],
+      "key_values": {
+        "soy_pbma_storage_hexanal_ppb": 185.0,
+        "storage_temp_C": 4.0,
+        "storage_time_days": 14.0
+      },
+      "repo_next_action": "Expose as a soybean PBMA storage flavor reference payload.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "flavor_reference_payload",
+          "artifact_id": "xu_2024_soybean_pbma_hexanal_anchor",
+          "path": "data/lit/flavor_reference_payloads.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "yeo_shibamoto_1991_wof_hexanal",
+      "citation": "Yeo & Shibamoto (1991)",
+      "doi": "10.1021/jf00002a024",
+      "kind": "calibration_reference",
+      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
+      "slr_family_source": "02",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "lipid",
+        "hexanal",
+        "lox"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "06",
+        "08"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "lipid_oxidation"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Phospholipid fraction contribution (82-88%) to warmed-over flavor (WOF) hexanal.",
+        "LOX denaturation D-value table (70 C D=28 min, z~10 C)."
+      ],
+      "what_it_does_not_support": [
+        "Direct peptide-cysteine nucleophilicity indices",
+        "Absolute volatile release in non-meat systems"
+      ],
+      "key_values": {
+        "phospholipid_hexanal_fraction_pct_range": [
+          82.0,
+          88.0
+        ],
+        "lox_d_value_70C_min": 28.0,
+        "lox_z_value_C": 10.0
+      },
+      "repo_next_action": "Encode phospholipid hexanal contribution and LOX denaturation priors.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "yeo_shibamoto_1991_wof_hexanal_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "lipid_offnote_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "liu_cadwallader_2023_pea_aeda",
+      "citation": "Liu, Cadwallader & Drake (2023)",
+      "doi": "10.1016/j.foodchem.2022.134998",
+      "kind": "calibration_reference",
+      "chemistry_family": "alternative_protein_matrix_scope",
+      "slr_family_source": "06",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "pea_protein",
+        "aeda",
+        "gc-o"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "08"
+      ],
+      "target_modules": [
+        "matrix_correction",
+        "reporting"
+      ],
+      "matrix_family": "pea_protein_isolate",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Pea protein heated slurry AEDA and GC-O volatile ranking.",
+        "Identifies (E,E)-2,4-heptadienal (FD 4096) and methoxypyrazine (FD 256) as active off-notes."
+      ],
+      "what_it_does_not_support": [
+        "Absolute concentration values for meaty sulfur markers",
+        "Extrusion process-shear texturization parameters"
+      ],
+      "key_values": {
+        "ee_2_4_heptadienal_fd_factor": 4096.0,
+        "methoxypyrazine_fd_factor": 256.0
+      },
+      "repo_next_action": "Expose as a pea protein heating volatile AEDA reference payload.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "flavor_reference_payload",
+          "artifact_id": "liu_cadwallader_2023_pea_aeda_anchor",
+          "path": "data/lit/flavor_reference_payloads.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "malia_2025_pea_free_sh_crosscheck",
+      "citation": "Malia et al. (2025)",
+      "doi": "",
+      "kind": "calibration_reference",
+      "chemistry_family": "alternative_protein_matrix_scope",
+      "slr_family_source": "06",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "pea_protein",
+        "free_sh"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "12"
+      ],
+      "target_modules": [
+        "matrix_correction",
+        "literature_runtime"
+      ],
+      "matrix_family": "pea_protein_isolate",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Pea protein free-SH levels and DSC thermal denaturation crosscheck.",
+        "Cysteine accessibility baseline in heated matrices."
+      ],
+      "what_it_does_not_support": [
+        "Absolute volatile yield curves",
+        "Lysine-loss kinetics"
+      ],
+      "key_values": {
+        "assay": "DTNB / Ellman",
+        "free_sh_reported": true
+      },
+      "repo_next_action": "Use as a supportive pea free-SH behavior crosscheck.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "process_state_calibration",
+          "artifact_id": "malia_2025_pea_free_sh_crosscheck",
+          "path": "data/lit/process_state_calibrations.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "tran_2023_reducing_sugar_hme",
+      "citation": "Tran et al. (2023 / PMC9846454)",
+      "doi": "10.1016/j.carbpol.2022.120468",
+      "kind": "calibration_reference",
+      "chemistry_family": "carbonyl_donor_hierarchy",
+      "slr_family_source": "07",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "reducing_sugar",
+        "starch",
+        "hme"
+      ],
+      "process_state_scope": [
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "09"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "matrix_correction"
+      ],
+      "matrix_family": "pea_protein_isolate",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Starch reducing-sugar liberation during HME (maltose generation)",
+        "Compares pea starch (18.4 umol/g) versus waxy maize starch (31.8 umol/g) yield parameters"
+      ],
+      "what_it_does_not_support": [
+        "Free ribose or glucose addition rates",
+        "Volatile recovery yields under vacuum packaging"
+      ],
+      "key_values": {
+        "pea_maltose_liberation_umol_g": 18.4,
+        "waxy_maize_maltose_liberation_umol_g": 31.8,
+        "ti_starch_reduction_pct": 66.0
+      },
+      "repo_next_action": "Encode starch reducing-sugar liberation priors during HME.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "tran_2023_starch_liberation_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "carbonyl_donor_priors"
+          ]
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "henle_2005_glycinin_cml",
+      "citation": "Henle (2005)",
+      "doi": "10.1007/s00726-005-0187-z",
+      "kind": "calibration_reference",
+      "chemistry_family": "protein_damage_markers",
+      "slr_family_source": "12",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "safety",
+        "cml",
+        "glycinin"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "07"
+      ],
+      "target_modules": [
+        "safety",
+        "matrix_correction"
+      ],
+      "matrix_family": "soy_isolate",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Quantified CML formation (2.3 umol/g protein) from heated soy glycinin.",
+        "Dicarbonyl consumption modeling."
+      ],
+      "what_it_does_not_support": [
+        "Acrylamide kinetics on wheat gluten matrices",
+        "Free volatile headspace partition factors"
+      ],
+      "key_values": {
+        "glycinin_cml_umol_g": 2.3
+      },
+      "repo_next_action": "Encode soy glycinin dicarbonyl consumption safety reference.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "safety_reference",
+          "artifact_id": "henle_2005_glycinin_cml",
+          "path": "data/lit/safety_reference_payloads.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "liu_2022_ppi_oav_anchors",
+      "citation": "Liu (2022), NC State Repository",
+      "doi": "",
+      "citation_aliases": [
+        "Liu (2022)"
+      ],
+      "kind": "calibration_reference",
+      "chemistry_family": "off_note_and_maillard_suppression",
+      "slr_family_source": "08",
+      "payload_role": "flavor_reference_payload",
+      "observable_panel_tags": [
+        "off_note",
+        "methoxypyrazine",
+        "threshold"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "02"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "safety"
+      ],
+      "matrix_family": "pea_isolate",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Baseline OAV table for 12 key pea protein isolate (PPI) volatiles",
+        "Methoxypyrazines odor detection threshold (ODT) of 0.002-0.006 ppb"
+      ],
+      "what_it_does_not_support": [
+        "Free solution kinetic activation energies",
+        "Browning index evolution rates"
+      ],
+      "key_values": {
+        "methoxypyrazine_odt_ppb_range": [
+          0.002,
+          0.006
+        ],
+        "volatiles_count": 12
+      },
+      "repo_next_action": "Expose as a pea isolate off-note flavor reference payload.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "flavor_reference_payload",
+          "artifact_id": "liu_2022_ppi_oav_anchors",
+          "path": "data/lit/flavor_reference_payloads.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "rawel_2002_cga_cysteine_blocking",
+      "citation": "Rawel et al. (2002), JAFC 50:5343-5350",
+      "doi": "10.1021/jf020082z",
+      "kind": "calibration_reference",
+      "chemistry_family": "off_note_and_maillard_suppression",
+      "slr_family_source": "08",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "guardrail",
+        "cysteine_sink",
+        "polyphenol_capping"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "05",
+        "13"
+      ],
+      "target_modules": [
+        "literature_runtime"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Chlorogenic acid (CGA) Cys blocking k_obs is 2.9x faster than Lys",
+        "Lysine blocking efficiency of 43% at a 10:1 polyphenol-to-protein ratio"
+      ],
+      "what_it_does_not_support": [
+        "Matrix-assisted cysteine release rates",
+        "Radical scavenging mechanism validation"
+      ],
+      "key_values": {
+        "cys_blocking_rate_vs_lys": 2.9,
+        "lys_blocked_pct_at_10_1": 43.0
+      },
+      "repo_next_action": "Encode CGA Cys and Lys blocking rate priors.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "rawel_2002_cga_cysteine_blocking",
+          "path": "data/lit/computational_priors.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "quintas_2000_sucrose_caramelisation",
+      "citation": "Quintas et al. (2000), J Food Engineering",
+      "doi": "10.1016/S0260-8774(00)00047-9",
+      "kind": "calibration_reference",
+      "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
+      "slr_family_source": "09",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "caramelization",
+        "hmf",
+        "kinetics"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "07"
+      ],
+      "target_modules": [
+        "literature_runtime"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Sucrose caramelisation k_obs and Ea versus pH and Temperature",
+        "HMF generation of 48 mg/L at pH 5.0, 120 C after 60 min"
+      ],
+      "what_it_does_not_support": [
+        "Free amino acid condensation mechanisms",
+        "Extruded texture impact parameters"
+      ],
+      "key_values": {
+        "hmf_mg_per_l_at_ph5_120c_60min": 48.0
+      },
+      "repo_next_action": "Encode sucrose caramelisation kinetics priors.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "quintas_2000_sucrose_caramelisation",
+          "path": "data/lit/computational_priors.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "hauck_tressl_1999_hdmf_non_amino",
+      "citation": "Hauck & Tressl (1999), ACS review",
+      "doi": "10.1021/bk-1999-0740.ch012",
+      "kind": "calibration_reference",
+      "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
+      "slr_family_source": "09",
+      "payload_role": "flavor_reference_payload",
+      "observable_panel_tags": [
+        "furanone",
+        "hdmf",
+        "caramelization"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "01"
+      ],
+      "target_modules": [
+        "literature_runtime"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "HDMF generation from iso-oligosaccharides (3.8 ug/g) and maltose (1.4 ug/g) at 140 C without amino acids",
+        "Methylglyoxal (MGO) self-condensation HDMF route yield (2.9 ug/g)"
+      ],
+      "what_it_does_not_support": [
+        "Amadori rearrangement activation barriers",
+        "Peptide-bound lysine trapping kinetics"
+      ],
+      "key_values": {
+        "hdmf_from_iso_oligosaccharides_ug_per_g": 3.8,
+        "hdmf_from_maltose_ug_per_g": 1.4,
+        "hdmf_from_mgo_self_condensation_ug_per_g": 2.9,
+        "reaction_temp_C": 140.0
+      },
+      "repo_next_action": "Expose as a non-amino acid dependent furanone flavor reference payload.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "flavor_reference_payload",
+          "artifact_id": "hauck_tressl_1999_hdmf_non_amino",
+          "path": "data/lit/flavor_reference_payloads.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "perdiguero_2004_yeast_autolysis_nucleotides",
+      "citation": "Perdiguero et al. (2004), JAFC 52:7802-7807",
+      "doi": "10.1021/jf0494452",
+      "kind": "calibration_reference",
+      "chemistry_family": "fermentation_pretreatment",
+      "slr_family_source": "10",
+      "payload_role": "process_state_calibration",
+      "observable_panel_tags": [
+        "fermentation",
+        "nucleotide",
+        "yeast"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "04"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "recommend"
+      ],
+      "matrix_family": "yeast_ye",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Yeast autolysis nucleotide release kinetics yielding GMP 2.8 mg/g DW at 55 C after 24h"
+      ],
+      "what_it_does_not_support": [
+        "Free amino acid extraction scaling parameters",
+        "Browning intensity at high temperature"
+      ],
+      "key_values": {
+        "gmp_mg_per_g_dw": 2.8,
+        "temp_C": 55.0,
+        "time_h": 24.0
+      },
+      "repo_next_action": "Expose as a fermentation process state calibration payload.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "process_state_calibration",
+          "artifact_id": "perdiguero_2004_yeast_autolysis_nucleotides",
+          "path": "data/lit/process_state_calibrations.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "tang_2013_thiamine_mft",
+      "citation": "Tang et al. (2013), J Sulfur Chem 34:38",
+      "doi": "10.1080/17415993.2012.715206",
+      "kind": "calibration_reference",
+      "chemistry_family": "thiamine_fragmentation_support",
+      "slr_family_source": "03",
+      "payload_role": "flavor_reference_payload",
+      "observable_panel_tags": [
+        "thiamine",
+        "mft",
+        "sulfur_positive"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "01",
+        "10"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "flavor"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Compiled MFT table across meat systems and odor detection threshold (ODT) parameters."
+      ],
+      "what_it_does_not_support": [
+        "Radical scavenging rate constants",
+        "Extruded fiber size distribution"
+      ],
+      "key_values": {
+        "mft_odt_ppb": 0.05
+      },
+      "repo_next_action": "Expose as a thiamine-MFT flavor reference payload.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "flavor_reference_payload",
+          "artifact_id": "tang_2013_thiamine_mft",
+          "path": "data/lit/flavor_reference_payloads.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "tannenbaum_1985_thiamine_ea",
+      "citation": "Tannenbaum, Archer & Young (1985), JAFC 33:985",
+      "doi": "",
+      "kind": "calibration_reference",
+      "chemistry_family": "thiamine_fragmentation_support",
+      "slr_family_source": "03",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "thiamine",
+        "kinetics",
+        "activation_energy"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "10"
+      ],
+      "target_modules": [
+        "literature_runtime"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Compiled activation energies (Ea) for thiamine degradation over wide T and pH range",
+        "Low-Aw Ea values (105.0 kJ/mol) compared to dilute solutions (78.5 kJ/mol)"
+      ],
+      "what_it_does_not_support": [
+        "Cysteine-accessible nucleophilicity indices"
+      ],
+      "key_values": {
+        "dilute_solution_ea_kj_mol": 78.5,
+        "low_aw_ea_kj_mol": 105.0
+      },
+      "repo_next_action": "Encode thiamine activation energy priors.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "tannenbaum_1985_thiamine_ea",
+          "path": "data/lit/computational_priors.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "finnigan_2019_mycoprotein_rna",
+      "citation": "Finnigan et al. (2019), Sustainable Food Technology",
+      "doi": "10.1039/c9fo00878e",
+      "kind": "calibration_reference",
+      "chemistry_family": "nucleotide_and_ribose_support",
+      "slr_family_source": "04",
+      "payload_role": "process_state_calibration",
+      "observable_panel_tags": [
+        "mycoprotein",
+        "rna_reduction",
+        "imp",
+        "gmp"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "10"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "recommend"
+      ],
+      "matrix_family": "mycoprotein",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Mycoprotein RNA reduction process parameters",
+        "Residual IMP and GMP concentrations at 60-70 C and EUC impact mapping"
+      ],
+      "what_it_does_not_support": [
+        "Volatile release in soy matrices"
+      ],
+      "key_values": {
+        "rna_reduction_temp_C": 65.0,
+        "residual_nucleotides_dry_wt_pct": 1.5
+      },
+      "repo_next_action": "Expose as mycoprotein RNA reduction process state calibration.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "process_state_calibration",
+          "artifact_id": "finnigan_2019_mycoprotein_rna",
+          "path": "data/lit/process_state_calibrations.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "xu_2025_peptide_hierarchy",
+      "citation": "Xu, H. et al. (2025), PMC11743841",
+      "doi": "10.1186/s12934-025-02688-w",
+      "kind": "calibration_reference",
+      "chemistry_family": "glutathione_and_peptide_support",
+      "slr_family_source": "05",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "peptide",
+        "reactivity",
+        "cysteine_source"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "01",
+        "10"
+      ],
+      "target_modules": [
+        "literature_runtime"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Peptide sequence reactivity hierarchy for MFT precursor effectiveness: Cys-Gly-Val (2.68x), GSH (2.25x), Leu-Cys (1.60x), Val-Met (0.14x) vs free cysteine."
+      ],
+      "what_it_does_not_support": [
+        "Absolute volatile partitioning values"
+      ],
+      "key_values": {
+        "cys_gly_val_vs_free_cys": 2.68,
+        "gsh_vs_free_cys": 2.25,
+        "leu_cys_vs_free_cys": 1.6,
+        "val_met_vs_free_cys": 0.14
+      },
+      "repo_next_action": "Encode peptide sequence reactivity hierarchy priors.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "xu_2025_peptide_hierarchy",
+          "path": "data/lit/computational_priors.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "acrylamide_heat_trapping_2024",
+      "citation": "ResearchGate ref. 10 (ACRYLAMIDE/HEAT)",
+      "doi": "",
+      "kind": "calibration_reference",
+      "chemistry_family": "protein_damage_markers",
+      "slr_family_source": "12",
+      "payload_role": "safety_payload",
+      "observable_panel_tags": [
+        "safety",
+        "acrylamide",
+        "trapping"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "01"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "safety"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Acrylamide concentration range of 31.81-186.70 ug/kg under heating above 150 C",
+        "Pictet-Spengler mechanism pathway validation above 150 C",
+        "In-matrix trapping and mitigation dynamics"
+      ],
+      "what_it_does_not_support": [
+        "Low temperature ambient slurry kinetics"
+      ],
+      "key_values": {
+        "acrylamide_range_ug_kg": [
+          31.81,
+          186.7
+        ]
+      },
+      "repo_next_action": "Expose as a high-temperature acrylamide safety reference payload.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "safety_reference_payload",
+          "artifact_id": "acrylamide_heat_trapping_2024",
+          "path": "data/lit/safety_reference_payloads.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "cga_cys_adduct_sida_2024",
+      "citation": "ResearchGate (Ref. 14)",
+      "doi": "",
+      "kind": "calibration_reference",
+      "chemistry_family": "polyphenol_amino_capping",
+      "slr_family_source": "13",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "polyphenol",
+        "cga_cys",
+        "adduct"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "05",
+        "13"
+      ],
+      "target_modules": [
+        "literature_runtime"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "CGA-Cys and CA-Cys adduct SIDA quantification (m/z 474.1 MRM) showing stability at 90 C"
+      ],
+      "what_it_does_not_support": [
+        "Alternative sensory descriptor mapping"
+      ],
+      "key_values": {
+        "cga_cys_mrm_mz": 474.1,
+        "stability_temp_C": 90.0
+      },
+      "repo_next_action": "Encode CGA-Cys adduct SIDA stability priors.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "cga_cys_adduct_sida_2024",
+          "path": "data/lit/computational_priors.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "pmc3199460_ascorbic_dicarbonyl",
+      "citation": "PMC PMCID:PMC3199460 (Ref. 2)",
+      "doi": "",
+      "kind": "calibration_reference",
+      "chemistry_family": "ascorbic_acid_maillard",
+      "slr_family_source": "14",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "ascorbic",
+        "dicarbonyl",
+        "deoxythreosone"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "12"
+      ],
+      "target_modules": [
+        "literature_runtime"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Absolute dicarbonyl yields from ascorbic acid: 3-deoxythreosone 9.1 pmol/mg, xylosone 0.5 pmol/mg",
+        "Molar yields: DHA 28%, 2,3-DKG 4.7%, xylosone 5.8%"
+      ],
+      "what_it_does_not_support": [
+        "Acrylamide accumulation rates at 160 C"
+      ],
+      "key_values": {
+        "three_deoxythreosone_pmol_mg": 9.1,
+        "xylosone_pmol_mg": 0.5,
+        "dha_molar_yield_pct": 28.0,
+        "dkg_23_molar_yield_pct": 4.7,
+        "xylosone_molar_yield_pct": 5.8
+      },
+      "repo_next_action": "Encode ascorbic dicarbonyl release priors.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "pmc3199460_ascorbic_dicarbonyl",
+          "path": "data/lit/computational_priors.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "pmid36878579_pe_stoichiometry",
+      "citation": "PubMed PMID:36878579 (Ref. 39)",
+      "doi": "",
+      "kind": "calibration_reference",
+      "chemistry_family": "lipid_maillard_crosstalk",
+      "slr_family_source": "15",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "PE_glycation",
+        "stoichiometry",
+        "retention"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "01",
+        "07"
+      ],
+      "target_modules": [
+        "literature_runtime"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "1:2 sugar to phospholipid (PE) stoichiometry and pyridinium derivative UV absorption at 350 nm",
+        "Calcium stearate inhibition mechanism parameters in 160 C oil models"
+      ],
+      "what_it_does_not_support": [
+        "Alternative headspace retention coefficients"
+      ],
+      "key_values": {
+        "sugar_pe_molar_stoichiometry": 0.5,
+        "uv_absorbance_nm": 350.0
+      },
+      "repo_next_action": "Encode PE glycation stoichiometry priors.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "pmid36878579_pe_stoichiometry",
+          "path": "data/lit/computational_priors.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "jafc_2022_melanoidin_thiol_binding",
+      "citation": "J. Agric. Food Chem. 2022 (Ref. 41) + Ref. 38",
+      "doi": "",
+      "kind": "calibration_reference",
+      "chemistry_family": "melanoidin_polymerization",
+      "slr_family_source": "16",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "melanoidin",
+        "thiol_binding",
+        "trapping"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "01",
+        "05"
+      ],
+      "target_modules": [
+        "literature_runtime"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Thiol (FFT) depletion by melanoidins (16-fold reduction)",
+        "IC50 values (183 mg thiol / L melanoidin) and binding saturation parameters"
+      ],
+      "what_it_does_not_support": [
+        "Lysine accessibility changes"
+      ],
+      "key_values": {
+        "fft_depletion_fold": 16.0,
+        "binding_ic50_mg_thiol_per_L_melanoidin": 183.0
+      },
+      "repo_next_action": "Encode melanoidin thiol trapping priors.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "jafc_2022_melanoidin_thiol_binding",
+          "path": "data/lit/computational_priors.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "de_vleeschouwer_2006_acrylamide_aqueous",
+      "citation": "De Vleeschouwer et al. (2006)",
+      "doi": "10.1021/jf051197n",
+      "kind": "calibration_reference",
+      "chemistry_family": "protein_damage_markers",
+      "slr_family_source": "12",
+      "payload_role": "safety_payload",
+      "observable_panel_tags": [
+        "safety",
+        "acrylamide",
+        "kinetics"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "01"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "safety"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Kinetics of acrylamide formation and elimination in aqueous model system under varying pH and temperature."
+      ],
+      "what_it_does_not_support": [
+        "Low temperature ambient slurry kinetics"
+      ],
+      "key_values": {
+        "kinetic_order_formation": "first_order",
+        "kinetic_order_elimination": "first_order",
+        "replicates": 3
+      },
+      "repo_next_action": "Expose as acrylamide aqueous kinetics safety payload.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "safety_reference_payload",
+          "artifact_id": "de_vleeschouwer_2006_acrylamide_aqueous",
+          "path": "data/lit/safety_reference_payloads.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "zhu_2022_acrylamide_lipid_crosstalk",
+      "citation": "Zhu et al. (2022)",
+      "doi": "10.3389/fnut.2022.940202",
+      "kind": "calibration_reference",
+      "chemistry_family": "protein_damage_markers",
+      "slr_family_source": "12",
+      "payload_role": "safety_payload",
+      "observable_panel_tags": [
+        "safety",
+        "acrylamide",
+        "lipid_crosstalk"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "11",
+        "02"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "safety"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Acrylamide and HMF kinetics in glucose-asparagine-linoleic acid model system showing lipid-Maillard crosstalk acceleration."
+      ],
+      "what_it_does_not_support": [
+        "Aqueous buffer without lipids"
+      ],
+      "key_values": {
+        "acrylamide_formation_ea_kj_mol": 12.87,
+        "hmf_formation_ea_kj_mol": 14.85,
+        "replicates": 3
+      },
+      "repo_next_action": "Expose as lipid-crosstalk acrylamide safety payload.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "safety_reference_payload",
+          "artifact_id": "zhu_2022_acrylamide_lipid_crosstalk",
+          "path": "data/lit/safety_reference_payloads.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "sun_2015_ground_beef_ages",
+      "citation": "Sun et al. (2015)",
+      "doi": "10.1016/j.foodchem.2014.09.129",
+      "kind": "calibration_reference",
+      "chemistry_family": "protein_damage_markers",
+      "slr_family_source": "12",
+      "payload_role": "safety_payload",
+      "observable_panel_tags": [
+        "safety",
+        "cml",
+        "cel",
+        "beef"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "01"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "safety"
+      ],
+      "matrix_family": "beef",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "CML and CEL zero-order formation kinetics in ground beef under pasteurisation conditions."
+      ],
+      "what_it_does_not_support": [
+        "High temperature dry extrusion kinetics"
+      ],
+      "key_values": {
+        "cml_formation_ea_kj_mol": 61.01,
+        "cel_formation_ea_kj_mol": 29.21,
+        "replicates": 3
+      },
+      "repo_next_action": "Expose as beef AGEs safety reference payload.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "safety_reference_payload",
+          "artifact_id": "sun_2015_ground_beef_ages",
+          "path": "data/lit/safety_reference_payloads.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "zhu_2021_braised_chicken_ages",
+      "citation": "Zhu et al. (2021)",
+      "doi": "10.1002/jsfa.10528",
+      "kind": "calibration_reference",
+      "chemistry_family": "protein_damage_markers",
+      "slr_family_source": "12",
+      "payload_role": "safety_payload",
+      "observable_panel_tags": [
+        "safety",
+        "cml",
+        "cel",
+        "chicken"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "01"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "safety"
+      ],
+      "matrix_family": "chicken",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Free and bound CML/CEL kinetics in braised chicken matrix."
+      ],
+      "what_it_does_not_support": [
+        "Dairy model systems"
+      ],
+      "key_values": {
+        "free_cml_ea_kj_mol": 74.87,
+        "bound_cml_ea_kj_mol": 68.21,
+        "free_cel_ea_kj_mol": 42.45,
+        "bound_cel_ea_kj_mol": 41.52,
+        "replicates": 3
+      },
+      "repo_next_action": "Expose as chicken AGEs safety reference payload.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "safety_reference_payload",
+          "artifact_id": "zhu_2021_braised_chicken_ages",
+          "path": "data/lit/safety_reference_payloads.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "hamzalioglu_2026_milk_uht_ages",
+      "citation": "Hamzalioglu et al. (2026)",
+      "doi": "10.1021/acs.jafc.5c14296",
+      "kind": "calibration_reference",
+      "chemistry_family": "protein_damage_markers",
+      "slr_family_source": "12",
+      "payload_role": "safety_payload",
+      "observable_panel_tags": [
+        "safety",
+        "cml",
+        "cel",
+        "milk"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "01"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "safety"
+      ],
+      "matrix_family": "milk",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Multi-response kinetic modeling of lactulosyllysine conversion to CML/CEL in UHT milk."
+      ],
+      "what_it_does_not_support": [
+        "Solid meat analog matrices"
+      ],
+      "key_values": {
+        "lactulosyllysine_formation_ea_md_mol": 52.1,
+        "replicates": 3
+      },
+      "repo_next_action": "Expose as milk UHT AGEs safety reference payload.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "safety_reference_payload",
+          "artifact_id": "hamzalioglu_2026_milk_uht_ages",
+          "path": "data/lit/safety_reference_payloads.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "krause_2003_furosine_hydrolysis_yields",
+      "citation": "Krause et al. (2003)",
+      "doi": "10.1007/s00217-003-0685-6",
+      "kind": "calibration_reference",
+      "chemistry_family": "protein_damage_markers",
+      "slr_family_source": "12",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "safety",
+        "furosine",
+        "yields"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "01"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "safety"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Stoichiometric conversion yields of fructosyllysine, lactulosyllysine, tagatosyllysine, and maltulosyllysine to furosine under 6M vs 8M HCl hydrolysis."
+      ],
+      "what_it_does_not_support": [
+        "In vivo biological degradation kinetics"
+      ],
+      "key_values": {
+        "fructosyllysine_yield_6M_pct": 32.0,
+        "fructosyllysine_yield_8M_pct": 46.0,
+        "lactulosyllysine_yield_6M_pct": 34.0,
+        "lactulosyllysine_yield_8M_pct": 50.0,
+        "tagatosyllysine_yield_6M_pct": 42.0,
+        "tagatosyllysine_yield_8M_pct": 42.0,
+        "replicates": 3
+      },
+      "repo_next_action": "Encode furosine hydrolysis yields computational priors.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "krause_2003_furosine_hydrolysis_yields",
+          "path": "data/lit/computational_priors.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "hidalgo_2000_tomato_furosine",
+      "citation": "Hidalgo & Pompei (2000)",
+      "doi": "10.1021/jf990120u",
+      "kind": "calibration_reference",
+      "chemistry_family": "protein_damage_markers",
+      "slr_family_source": "12",
+      "payload_role": "safety_payload",
+      "observable_panel_tags": [
+        "safety",
+        "furosine",
+        "tomato"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "01"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "safety"
+      ],
+      "matrix_family": "tomato",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Furosine zero-order kinetics in tomato products."
+      ],
+      "what_it_does_not_support": [
+        "Meat matrices"
+      ],
+      "key_values": {
+        "furosine_formation_ea_kj_mol": 93.9,
+        "replicates": 3
+      },
+      "repo_next_action": "Expose as tomato furosine safety reference payload.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "safety_reference_payload",
+          "artifact_id": "hidalgo_2000_tomato_furosine",
+          "path": "data/lit/safety_reference_payloads.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "cantre_2007_corned_beef_furosine",
+      "citation": "Cantre et al. (2007)",
+      "doi": "",
+      "kind": "calibration_reference",
+      "chemistry_family": "protein_damage_markers",
+      "slr_family_source": "12",
+      "payload_role": "safety_payload",
+      "observable_panel_tags": [
+        "safety",
+        "furosine",
+        "beef"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "01"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "safety"
+      ],
+      "matrix_family": "beef",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Furosine first-order kinetics during commercial sterilization of corned beef."
+      ],
+      "what_it_does_not_support": [
+        "Fluid milk model systems"
+      ],
+      "key_values": {
+        "furosine_formation_ea_kj_mol": 95.7,
+        "replicates": 3
+      },
+      "repo_next_action": "Expose as beef furosine safety reference payload.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "safety_reference_payload",
+          "artifact_id": "cantre_2007_corned_beef_furosine",
+          "path": "data/lit/safety_reference_payloads.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "lagrain_2010_cystine_elimination_lanthionine",
+      "citation": "Lagrain et al. (2010)",
+      "doi": "10.1021/jf102575r",
+      "kind": "calibration_reference",
+      "chemistry_family": "alternative_protein_matrix_scope",
+      "slr_family_source": "06",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "crosslinking",
+        "lanthionine",
+        "cysteine_loss"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "12"
+      ],
+      "target_modules": [
+        "literature_runtime"
+      ],
+      "matrix_family": "wheat_gliadin",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Derived strict first-order kinetics for cystine beta-elimination (Ea 119 kJ/mol at pH 8.0, 88.2 kJ/mol at pH 6.0).",
+        "Second-order kinetics for lanthionine formation (Ea 12.3 kJ/mol at pH 8.0, 6.51 kJ/mol at pH 6.0)."
+      ],
+      "what_it_does_not_support": [
+        "High-moisture extrusion shear cells"
+      ],
+      "key_values": {
+        "cystine_elimination_ea_ph8_kj_mol": 119.0,
+        "cystine_elimination_ea_ph6_kj_mol": 88.2,
+        "lanthionine_formation_ea_ph8_kj_mol": 12.3,
+        "lanthionine_formation_ea_ph6_kj_mol": 6.51,
+        "cystine_elimination_k_ph8_min": 0.054,
+        "replicates": 3
+      },
+      "repo_next_action": "Encode lanthionine and cystine elimination kinetics priors.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "lagrain_2010_cystine_elimination_lanthionine",
+          "path": "data/lit/computational_priors.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "morel_2002_gluten_shear_aggregation",
+      "citation": "Morel et al. (2002)",
+      "doi": "10.1021/bm015639p",
+      "kind": "calibration_reference",
+      "chemistry_family": "alternative_protein_matrix_scope",
+      "slr_family_source": "06",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "shear_damage",
+        "sulfhydryl_loss",
+        "gluten"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "12"
+      ],
+      "target_modules": [
+        "literature_runtime"
+      ],
+      "matrix_family": "wheat_gluten",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Mechanochemical shift reducing apparent Arrhenius activation energy for protein solubility loss under intense mechanical shear from thermally dominated down to 33.7 kJ/mol."
+      ],
+      "what_it_does_not_support": [
+        "Free amino acid kinetics in solution"
+      ],
+      "key_values": {
+        "shear_reduced_ea_kj_mol": 33.7,
+        "replicates": 3
+      },
+      "repo_next_action": "Encode shear-induced aggregation priors.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "morel_2002_gluten_shear_aggregation",
+          "path": "data/lit/computational_priors.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "yu_2017_cml_cel_meat_review",
+      "citation": "Yu et al. (2017)",
+      "doi": "10.1016/j.tifs.2020.01.021",
+      "kind": "calibration_reference",
+      "chemistry_family": "protein_damage_markers",
+      "slr_family_source": "12",
+      "payload_role": "safety_payload",
+      "observable_panel_tags": [
+        "safety",
+        "cml",
+        "cel",
+        "activation_energy"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "01"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "safety"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Differential thermodynamics for advanced glycation endproducts: CML activation energy of 61.01 kJ/mol versus CEL activation energy of 29.21 kJ/mol."
+      ],
+      "what_it_does_not_support": [
+        "Extrusion mechanical shear effects"
+      ],
+      "key_values": {
+        "cml_formation_ea_kj_mol": 61.01,
+        "cel_formation_ea_kj_mol": 29.21,
+        "replicates": 3
+      },
+      "repo_next_action": "Expose as CML/CEL activation energy safety reference payload.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "safety_reference_payload",
+          "artifact_id": "yu_2017_cml_cel_meat_review",
+          "path": "data/lit/safety_reference_payloads.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "huang_2024_dixyl_arp_degradation",
+      "citation": "Huang et al. (2024)",
+      "doi": "10.1021/acs.jafc.4c05736",
+      "kind": "calibration_reference",
+      "chemistry_family": "carbonyl_donor_hierarchy",
+      "slr_family_source": "07",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "arp_degradation",
+        "dicarbonyl",
+        "furosine",
+        "kinetics"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "12"
+      ],
+      "target_modules": [
+        "literature_runtime"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Bifurcated, first-order Amadori degradation kinetics: 3-deoxyglucosone-mediated pathway (Ea 115.0 kJ/mol) versus methylglyoxal-mediated pathway (Ea 85.0 kJ/mol)."
+      ],
+      "what_it_does_not_support": [
+        "High moisture extrusion mechanical effects"
+      ],
+      "key_values": {
+        "three_dg_mediated_ea_kj_mol": 115.0,
+        "mgo_mediated_ea_kj_mol": 85.0,
+        "replicates": 3
+      },
+      "repo_next_action": "Encode bifurcated Amadori degradation pathway priors.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "huang_2024_dixyl_arp_degradation",
+          "path": "data/lit/computational_priors.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "charissou_2007_cookie_cml_furosine",
+      "citation": "Charissou et al. (2007)",
+      "doi": "10.1021/jf063024j",
+      "kind": "calibration_reference",
+      "chemistry_family": "protein_damage_markers",
+      "slr_family_source": "12",
+      "payload_role": "safety_payload",
+      "observable_panel_tags": [
+        "safety",
+        "cml",
+        "furosine",
+        "cookie"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "01"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "safety"
+      ],
+      "matrix_family": "cookie_model",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "CML acts as a stable, linear (zero-order) accumulator marker under low moisture, while furosine shows a transient, bell-shaped decay curve dependent on temperature (180 to 220 C)."
+      ],
+      "what_it_does_not_support": [
+        "High moisture extrusion mechanical shear effects"
+      ],
+      "key_values": {
+        "temp_range_C": [
+          180.0,
+          220.0
+        ],
+        "replicates": 3
+      },
+      "repo_next_action": "Expose as cookie CML/furosine safety reference payload.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "safety_reference_payload",
+          "artifact_id": "charissou_2007_cookie_cml_furosine",
+          "path": "data/lit/safety_reference_payloads.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "fratianni_2016_apricot_furosine",
+      "citation": "Fratianni et al. (2016)",
+      "doi": "10.1016/j.foodres.2016.12.009",
+      "kind": "calibration_reference",
+      "chemistry_family": "protein_damage_markers",
+      "slr_family_source": "12",
+      "payload_role": "safety_payload",
+      "observable_panel_tags": [
+        "safety",
+        "furosine",
+        "apricot"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "01"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "safety"
+      ],
+      "matrix_family": "apricot",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Zero-order reaction kinetics for furosine formation in low-moisture apricot matrices governed by an activation energy of 83.3 kJ/mol."
+      ],
+      "what_it_does_not_support": [
+        "High temperature dry extrusion kinetics"
+      ],
+      "key_values": {
+        "furosine_formation_ea_kj_mol": 83.3,
+        "replicates": 3
+      },
+      "repo_next_action": "Expose as apricot furosine safety reference payload.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "safety_reference_payload",
+          "artifact_id": "fratianni_2016_apricot_furosine",
+          "path": "data/lit/safety_reference_payloads.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "rombouts_2012_gluten_crosslinking",
+      "citation": "Rombouts et al. (2012)",
+      "doi": "10.1021/jf3024672",
+      "kind": "calibration_reference",
+      "chemistry_family": "alternative_protein_matrix_scope",
+      "slr_family_source": "06",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "crosslinking",
+        "lanthionine",
+        "lysinoalanine",
+        "gluten"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "12"
+      ],
+      "target_modules": [
+        "literature_runtime"
+      ],
+      "matrix_family": "wheat_gluten",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Overall reaction rate constants for wheat gluten heat-induced polymerization and non-disulfide cross-linking (lanthionine/lysinoalanine) with activation energy of 142.0 kJ/mol above thermal threshold of 90.0 C."
+      ],
+      "what_it_does_not_support": [
+        "Low moisture extrusion Apparent Viscosity"
+      ],
+      "key_values": {
+        "gluten_polymerization_ea_kj_mol": 142.0,
+        "thermal_threshold_temp_C": 90.0,
+        "replicates": 3
+      },
+      "repo_next_action": "Encode gluten cross-linking priors.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "rombouts_2012_gluten_crosslinking",
+          "path": "data/lit/computational_priors.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "ma_2024_pbma_extrusion_damage",
+      "citation": "Ma et al. (2024)",
+      "doi": "10.3390/ijms25158408",
+      "kind": "calibration_reference",
+      "chemistry_family": "protein_damage_markers",
+      "slr_family_source": "12",
+      "payload_role": "safety_payload",
+      "observable_panel_tags": [
+        "safety",
+        "cml",
+        "cel",
+        "acrylamide",
+        "extrusion"
+      ],
+      "process_state_scope": [
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "01",
+        "07"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "safety"
+      ],
+      "matrix_family": "plant_based_meat_analogue",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "High-moisture extrusion selective acceleration of CML via glyoxal transport.",
+        "Elevated barrel temperatures up to 160 C spikes CEL concentration by 39-101% due to rapid thermochemical cycling of methylglyoxal."
+      ],
+      "what_it_does_not_support": [
+        "Low temperature ambient slurry kinetics"
+      ],
+      "key_values": {
+        "temp_threshold_C": 160.0,
+        "cel_increase_pct_range": [
+          39,
+          101
+        ],
+        "replicates": 3
+      },
+      "repo_next_action": "Expose as PBMA extrusion safety reference payload.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "safety_reference_payload",
+          "artifact_id": "ma_2024_pbma_extrusion_damage",
+          "path": "data/lit/safety_reference_payloads.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "ilo_1996_maize_sme_lysine_damage",
+      "citation": "Ilo et al. (1996)",
+      "doi": "10.1006/fstl.1996.0090",
+      "kind": "calibration_reference",
+      "chemistry_family": "alternative_protein_matrix_scope",
+      "slr_family_source": "06",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "shear_damage",
+        "lysine_damage",
+        "maize_grits",
+        "extrusion"
+      ],
+      "process_state_scope": [
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "12"
+      ],
+      "target_modules": [
+        "literature_runtime"
+      ],
+      "matrix_family": "maize_grits",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Specific mechanical energy (SME) inputs correlate to chemical breakdown.",
+        "Lysine damage adheres to first-order kinetics and is suppressed by higher moisture acting as a lubricant."
+      ],
+      "what_it_does_not_support": [
+        "Free amino acid kinetics in solution"
+      ],
+      "key_values": {
+        "kinetic_order": "first_order",
+        "replicates": 3
+      },
+      "repo_next_action": "Encode maize extrusion shear damage priors.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "ilo_1996_maize_sme_lysine_damage",
+          "path": "data/lit/computational_priors.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "researchgate_2023_pea_aeda",
+      "citation": "ResearchGate (2023)",
+      "doi": "",
+      "kind": "calibration_reference",
+      "chemistry_family": "alternative_protein_matrix_scope",
+      "slr_family_source": "06",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "pea_protein",
+        "aeda",
+        "gc-o"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "08"
+      ],
+      "target_modules": [
+        "matrix_correction",
+        "reporting"
+      ],
+      "matrix_family": "pea_protein_isolate",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Pea protein heated slurry AEDA and GC-O volatile ranking.",
+        "Identifies (E,E)-2,4-heptadienal (FD 4096) and methoxypyrazine (FD 256) as active off-notes."
+      ],
+      "what_it_does_not_support": [
+        "Absolute concentration values for meaty sulfur markers",
+        "Extrusion process-shear texturization parameters"
+      ],
+      "key_values": {
+        "ee_2_4_heptadienal_fd_factor": 4096.0,
+        "methoxypyrazine_fd_factor": 256.0
+      },
+      "repo_next_action": "Expose as a pea protein heating volatile AEDA reference payload.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "flavor_reference_payload",
+          "artifact_id": "researchgate_2023_pea_aeda_anchor",
+          "path": "data/lit/flavor_reference_payloads.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "voelker_2018_thiamine_salt_degradation",
+      "citation": "Voelker et al. (2018)",
+      "doi": "10.1016/j.foodres.2018.06.056",
+      "kind": "calibration_reference",
+      "chemistry_family": "thiamine_fragmentation_support",
+      "slr_family_source": "03",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "thiamine_degradation",
+        "mononitrate",
+        "chloride_hydrochloride"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "03"
+      ],
+      "target_modules": [
+        "literature_runtime"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "First-order thiamine degradation kinetics where TMN degrades faster (Ea 88-105 kJ/mol) than TClHCl (Ea 90-135 kJ/mol) due to pyrimidine protonation."
+      ],
+      "what_it_does_not_support": [
+        "Solid-state high-moisture extrusion without pH validation"
+      ],
+      "key_values": {
+        "TMN_Ea_range_kj_mol": [
+          88.0,
+          105.0
+        ],
+        "TClHCl_Ea_range_kj_mol": [
+          90.0,
+          135.0
+        ],
+        "replicates": 3
+      },
+      "repo_next_action": "Encode thiamine salt form Arrhenius kinetics.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "voelker_2018_thiamine_salt_degradation",
+          "path": "data/lit/computational_priors.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "knol_2005_acrylamide_kinetics",
+      "citation": "Knol et al. (2005)",
+      "doi": "10.1021/jf050504m",
+      "kind": "calibration_reference",
+      "chemistry_family": "protein_damage_markers",
+      "slr_family_source": "12",
+      "payload_role": "safety_reference_payload",
+      "observable_panel_tags": [
+        "acrylamide",
+        "toxicological_safety"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "12"
+      ],
+      "target_modules": [
+        "literature_runtime"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Bifurcated acrylamide formation (Ea 52.1 kJ/mol) and thermal degradation (Ea 72.9 kJ/mol) kinetics."
+      ],
+      "what_it_does_not_support": [
+        "Low moisture solid-state matrices without water activity correction"
+      ],
+      "key_values": {
+        "formation_Ea_kj_mol": 52.1,
+        "degradation_Ea_kj_mol": 72.9,
+        "replicates": 3
+      },
+      "repo_next_action": "Encode as acrylamide safety reference payload.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "safety_reference_payload",
+          "artifact_id": "knol_2005_acrylamide_kinetics",
+          "path": "data/lit/safety_reference_payloads.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "de_vleeschouwer_2008_acrylamide_aw",
+      "citation": "De Vleeschouwer et al. (2008)",
+      "doi": "10.1021/bp060389f",
+      "kind": "calibration_reference",
+      "chemistry_family": "protein_damage_markers",
+      "slr_family_source": "12",
+      "payload_role": "safety_reference_payload",
+      "observable_panel_tags": [
+        "acrylamide",
+        "water_activity",
+        "moisture_dependency"
+      ],
+      "process_state_scope": [
+        "extrusion_structured",
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "12"
+      ],
+      "target_modules": [
+        "literature_runtime"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Acrylamide moisture-dependent kinetics showing minimum elimination rate at Aw of 0.82."
+      ],
+      "what_it_does_not_support": [
+        "Aqueous solution systems without starch-like structural water restrictions"
+      ],
+      "key_values": {
+        "min_elimination_Aw": 0.82,
+        "replicates": 3
+      },
+      "repo_next_action": "Encode as water activity dependent acrylamide safety reference payload.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "safety_reference_payload",
+          "artifact_id": "de_vleeschouwer_2008_acrylamide_aw",
+          "path": "data/lit/safety_reference_payloads.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "ishak_2022_phip_hca_kinetics",
+      "citation": "Ishak et al. (2022)",
+      "doi": "10.1016/j.foodchem.2022.132372",
+      "kind": "calibration_reference",
+      "chemistry_family": "protein_damage_markers",
+      "slr_family_source": "12",
+      "payload_role": "safety_reference_payload",
+      "observable_panel_tags": [
+        "PhIP",
+        "HCAs",
+        "toxicological_safety"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "12"
+      ],
+      "target_modules": [
+        "literature_runtime"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "PhIP heterocyclic amine formation kinetics from phenylalanine (Ea 95.36 kJ/mol) vs. proline (Ea 114.12 kJ/mol) precursor pools."
+      ],
+      "what_it_does_not_support": [
+        "Low-temperature extrusion texturization below 100 C"
+      ],
+      "key_values": {
+        "phenylalanine_Ea_kj_mol": 95.36,
+        "proline_Ea_kj_mol": 114.12,
+        "replicates": 3
+      },
+      "repo_next_action": "Encode as PhIP HCA safety reference payload.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "safety_reference_payload",
+          "artifact_id": "ishak_2022_phip_hca_kinetics",
+          "path": "data/lit/safety_reference_payloads.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "shu_2019_cysteine_quinone_kinetics",
+      "citation": "Shu et al. (2019)",
+      "doi": "10.1016/j.freeradbiomed.2019.04.026",
+      "kind": "calibration_reference",
+      "chemistry_family": "polyphenol_amino_capping",
+      "slr_family_source": "13",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "polyphenols",
+        "cysteine_loss",
+        "quinone"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "13"
+      ],
+      "target_modules": [
+        "literature_runtime"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Second-order rate constants of 10^5 to 10^6 M-1 s-1 for quinone-thiol Michael additions representing rapid cysteine depletion by oxidized polyphenols."
+      ],
+      "what_it_does_not_support": [
+        "Non-oxidizing environments without electron-acceptor or metal catalysts"
+      ],
+      "key_values": {
+        "quinone_thiol_k_range": [
+          100000.0,
+          1000000.0
+        ],
+        "replicates": 3
+      },
+      "repo_next_action": "Encode cysteine-quinone Michael adduct kinetics.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "shu_2019_cysteine_quinone_kinetics",
+          "path": "data/lit/computational_priors.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "zhang_1993_protein_deamidation_ammonia",
+      "citation": "Zhang et al. (1993)",
+      "doi": "10.1111/j.1745-4530.1993.tb00179.x",
+      "kind": "calibration_reference",
+      "chemistry_family": "alternative_protein_matrix_scope",
+      "slr_family_source": "06",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "deamidation",
+        "ammonia",
+        "asparagine",
+        "glutamine"
+      ],
+      "process_state_scope": [
+        "extrusion_structured",
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "06"
+      ],
+      "target_modules": [
+        "literature_runtime"
+      ],
+      "matrix_family": "soy_protein",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Deamidation of asparagine (Ea 25.1-113 kJ/mol) vs. glutamine (Ea 120-268 kJ/mol) in protein melts yielding free ammonia."
+      ],
+      "what_it_does_not_support": [
+        "Free amino acid solutions without protein structural constraints"
+      ],
+      "key_values": {
+        "asn_deamidation_Ea_range_kj_mol": [
+          25.1,
+          113.0
+        ],
+        "gln_deamidation_Ea_range_kj_mol": [
+          120.0,
+          268.0
+        ],
+        "replicates": 3
+      },
+      "repo_next_action": "Encode thermal deamidation kinetics.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "zhang_1993_protein_deamidation_ammonia",
+          "path": "data/lit/computational_priors.json"
+        }
+      ],
+      "requires_primary_data": false
+    },
+    {
+      "id": "li_2010_phytate_chelation_kinetics",
+      "citation": "Li et al. (2010)",
+      "doi": "10.1016/j.mineng.2010.05.003",
+      "kind": "calibration_reference",
+      "chemistry_family": "alternative_protein_matrix_scope",
+      "slr_family_source": "06",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "phytate",
+        "chelation",
+        "metal_catalysis"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "06"
+      ],
+      "target_modules": [
+        "literature_runtime"
+      ],
+      "matrix_family": "free_model_system",
+      "eligibility": "benchmark_eligible",
+      "status": "ready_for_intake_encoding",
+      "what_it_supports": [
+        "Adsorption and coordinate covalent chelation activation energy of phytic acid binding metal ions (Ea 84.54 kJ/mol)."
+      ],
+      "what_it_does_not_support": [
+        "Divalent cation complexes without phosphate ester coordination"
+      ],
+      "key_values": {
+        "chelation_Ea_kj_mol": 84.54,
+        "replicates": 3
+      },
+      "repo_next_action": "Encode phytate chelation kinetics prior.",
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "li_2010_phytate_chelation_kinetics",
+          "path": "data/lit/computational_priors.json"
         }
       ],
       "requires_primary_data": false

@@ -140,10 +140,16 @@ def test_describe_retention_runtime_for_pea_markers_carries_structured_ph_releas
         process_state="ambient_slurry",
     )
 
-    assert hexanal["retention_runtime_mode"] == "direct_binding_plus_ph_release_reference"
-    assert "Karolkowski et al. (2021)" in " ".join(hexanal["retention_reference_sources"])
+    assert (
+        hexanal["retention_runtime_mode"] == "direct_binding_plus_ph_release_reference"
+    )
+    assert "Karolkowski et al. (2021)" in " ".join(
+        hexanal["retention_reference_sources"]
+    )
     assert pentylfuran["retention_runtime_mode"] == "ph_release_reference"
-    assert "Karolkowski et al. (2021)" in " ".join(pentylfuran["retention_reference_sources"])
+    assert "Karolkowski et al. (2021)" in " ".join(
+        pentylfuran["retention_reference_sources"]
+    )
 
 
 def test_describe_retention_runtime_for_extrusion_states_is_aw_sensitive():
@@ -191,9 +197,17 @@ def test_describe_retention_runtime_applies_landed_sulfur_binding_priors_under_h
     assert extruded["dynamic_retention_factor"] < ambient["dynamic_retention_factor"]
     assert extruded["sulfur_binding_factor"] < 1.0
     assert "acs_jafc_3c02618_mft_disulfide_trapping_v1" in extruded["runtime_prior_ids"]
-    assert "acs_jafc_0c01925_protein_binding_hierarchy_v1" in extruded["runtime_prior_ids"]
-    assert "raman_sds_extrusion_disulfide_severity" in extruded["process_state_calibration_ids"]
-    assert any("ACS JAFC 3c02618" in source for source in extruded["retention_reference_sources"])
+    assert (
+        "acs_jafc_0c01925_protein_binding_hierarchy_v1" in extruded["runtime_prior_ids"]
+    )
+    assert (
+        "raman_sds_extrusion_disulfide_severity"
+        in extruded["process_state_calibration_ids"]
+    )
+    assert any(
+        "ACS JAFC 3c02618" in source
+        for source in extruded["retention_reference_sources"]
+    )
 
 
 def test_build_flavor_axis_summary_surfaces_secondary_strecker_reference_markers():
@@ -237,21 +251,58 @@ def test_build_flavor_axis_summary_surfaces_priority_family_lanes():
     assert summary["family_lane_summary"]["02"]["lipid_marker_signal_ppb"] > 0.0
     assert summary["family_lane_summary"]["02"]["dominant_marker"] == "Hexanal"
     assert "Hexanal" in summary["family_lane_summary"]["02"]["benchmark_ready_targets"]
-    assert summary["family_lane_summary"]["02"]["primary_benchmark_id"] == "trikusuma_2019"
-    assert summary["family_lane_summary"]["02"]["benchmark_marker_targets_ug_per_l"]["hexanal"] == pytest.approx(782.0)
-    assert "lincoln_2025_polyphenol_crosstalk_v1" in summary["family_lane_summary"]["02"]["competition_prior_ids"]
-    assert summary["family_lane_summary"]["02"]["runtime_sub_lanes"]["adverse_marker_generation_and_retention"]["retention_reference_count"] > 0
-    assert summary["family_lane_summary"]["02"]["runtime_sub_lanes"]["adverse_marker_generation_and_retention"]["benchmark_anchor_ids"] == ["trikusuma_2019"]
-    assert summary["family_lane_summary"]["02"]["runtime_sub_lanes"]["adverse_marker_generation_and_retention"]["dominant_marker"] == "Hexanal"
-    assert summary["family_lane_summary"]["02"]["runtime_sub_lanes"]["carbonyl_competition_and_crosstalk"]["active"] is True
-    assert summary["family_lane_summary"]["02"]["runtime_sub_lanes"]["carbonyl_competition_and_crosstalk"]["donor_pressure"] == pytest.approx(1.0)
+    assert (
+        summary["family_lane_summary"]["02"]["primary_benchmark_id"] == "trikusuma_2019"
+    )
+    assert summary["family_lane_summary"]["02"]["benchmark_marker_targets_ug_per_l"][
+        "hexanal"
+    ] == pytest.approx(782.0)
+    assert (
+        "lincoln_2025_polyphenol_crosstalk_v1"
+        in summary["family_lane_summary"]["02"]["competition_prior_ids"]
+    )
+    assert (
+        summary["family_lane_summary"]["02"]["runtime_sub_lanes"][
+            "adverse_marker_generation_and_retention"
+        ]["retention_reference_count"]
+        > 0
+    )
+    assert summary["family_lane_summary"]["02"]["runtime_sub_lanes"][
+        "adverse_marker_generation_and_retention"
+    ]["benchmark_anchor_ids"] == ["trikusuma_2019"]
+    assert (
+        summary["family_lane_summary"]["02"]["runtime_sub_lanes"][
+            "adverse_marker_generation_and_retention"
+        ]["dominant_marker"]
+        == "Hexanal"
+    )
+    assert (
+        summary["family_lane_summary"]["02"]["runtime_sub_lanes"][
+            "carbonyl_competition_and_crosstalk"
+        ]["active"]
+        is True
+    )
+    assert summary["family_lane_summary"]["02"]["runtime_sub_lanes"][
+        "carbonyl_competition_and_crosstalk"
+    ]["donor_pressure"] == pytest.approx(1.0)
     assert summary["family_lane_summary"]["02"]["maillard_closure_pressure"] > 0.0
     assert summary["family_lane_summary"]["11"]["competition_window_active"] is True
-    assert summary["family_lane_summary"]["11"]["kinetic_prior_ids"] == ["hexanal_radical_quench"]
+    assert summary["family_lane_summary"]["11"]["kinetic_prior_ids"] == [
+        "hexanal_radical_quench"
+    ]
     # 2026-04-21: xTB-derived value retired; runtime now uses no_anchor literature default (31.72 kJ/mol).
-    assert summary["family_lane_summary"]["11"]["kinetic_prior"]["active_arrhenius_key"] == "hexanal_radical_quench_no_anchor"
-    assert set(summary["family_lane_summary"]["11"]["benchmark_anchor_ids"]) == {"pmc_2026_hme_hexanal_baseline", "acs_2020_raw_pea_hexanal_baseline"}
-    assert summary["family_lane_summary"]["11"]["selected_benchmark_anchor_id"] == "pmc_2026_hme_hexanal_baseline"
+    assert (
+        summary["family_lane_summary"]["11"]["kinetic_prior"]["active_arrhenius_key"]
+        == "hexanal_radical_quench_no_anchor"
+    )
+    assert set(summary["family_lane_summary"]["11"]["benchmark_anchor_ids"]) == {
+        "pmc_2026_hme_hexanal_baseline",
+        "acs_2020_raw_pea_hexanal_baseline",
+    }
+    assert (
+        summary["family_lane_summary"]["11"]["selected_benchmark_anchor_id"]
+        == "pmc_2026_hme_hexanal_baseline"
+    )
     assert summary["family_lane_summary"]["11"]["hexanal_suppression_fraction"] > 0.0
     assert summary["family_lane_summary"]["07"]["dominant_donor_class"] == "pentose"
     assert summary["family_lane_summary"]["08"]["suppression_pressure_active"] is True
@@ -266,7 +317,10 @@ def test_build_flavor_axis_summary_surfaces_all_family_lanes_and_adjustments():
             "hex": {"compound": "Hexanal", "observable_ppb": 65.0},
             "furan": {"compound": "2-Pentylfuran", "observable_ppb": 18.0},
             "mft": {"compound": "2-Methyl-3-furanthiol (MFT)", "observable_ppb": 7.0},
-            "hmf": {"compound": "5-Hydroxymethylfurfural (HMF)", "observable_ppb": 22.0},
+            "hmf": {
+                "compound": "5-Hydroxymethylfurfural (HMF)",
+                "observable_ppb": 22.0,
+            },
             "hemf": {"compound": "HEMF", "observable_ppb": 3.5},
         },
         sugars=["ribose", "glucose"],
@@ -279,29 +333,73 @@ def test_build_flavor_axis_summary_surfaces_all_family_lanes_and_adjustments():
         thiamine_availability={"available": True, "source": "pbma_fortified"},
     )
 
-    assert summary["active_family_lanes"] == ["01", "02", "07", "10", "08", "11", "13", "03", "04", "05", "09", "06"]
+    assert summary["active_family_lanes"] == [
+        "01",
+        "02",
+        "07",
+        "10",
+        "08",
+        "11",
+        "13",
+        "03",
+        "04",
+        "05",
+        "09",
+        "06",
+    ]
     # 2026-04-21: xTB-derived 74.81 kJ/mol retired; runtime falls back to literature default 31.72.
-    assert summary["family_lane_summary"]["11"]["kinetic_prior"]["barrier_kj_mol"] == pytest.approx(31.72)
-    assert summary["family_lane_summary"]["11"]["hexanal_baseline_anchors_ug_per_kg"]["acs_2020_raw_pea_hexanal_baseline"] == pytest.approx(1260.0)
+    assert summary["family_lane_summary"]["11"]["kinetic_prior"][
+        "barrier_kj_mol"
+    ] == pytest.approx(31.72)
+    assert summary["family_lane_summary"]["11"]["hexanal_baseline_anchors_ug_per_kg"][
+        "acs_2020_raw_pea_hexanal_baseline"
+    ] == pytest.approx(1260.0)
     assert summary["family_lane_summary"]["03"]["thiamine_support_score"] > 0.0
     assert summary["family_lane_summary"]["04"]["nucleotide_support_active"] is True
     assert summary["family_lane_summary"]["05"]["glutathione_active"] is True
-    assert summary["family_lane_summary"]["05"]["benchmark_anchor_ids"] == ["nishimura_abe_2024"]
+    assert summary["family_lane_summary"]["05"]["benchmark_anchor_ids"] == [
+        "nishimura_abe_2024"
+    ]
     assert summary["family_lane_summary"]["05"]["sulfur_peptide_support_score"] > 0.75
-    assert summary["family_lane_summary"]["05"]["pyrazine_tradeoff_ratio_vs_free_cysteine"] == pytest.approx(0.75)
+    assert summary["family_lane_summary"]["05"][
+        "pyrazine_tradeoff_ratio_vs_free_cysteine"
+    ] == pytest.approx(0.75)
     assert summary["family_lane_summary"]["06"]["matrix_scope_active"] is True
     assert summary["family_lane_summary"]["06"]["source_id"] == "mycoprotein"
-    assert summary["family_lane_summary"]["06"]["process_state_anchor_ids"] == ["asen_2022", "li_2025", "uspto_ptacts_2023_yeast_extract_anchor"]
-    assert summary["family_lane_summary"]["06"]["structural_gap_ids"] == ["ellman_opa_dsc_same_experiment"]
+    assert set(summary["family_lane_summary"]["06"]["process_state_anchor_ids"]) == {
+        "asen_2022",
+        "li_2025",
+        "uspto_ptacts_2023_yeast_extract_anchor",
+        "malia_2025_pea_free_sh_crosscheck",
+        "liu_cadwallader_2023_pea_aeda",
+        "rombouts_2012_gluten_crosslinking",
+        "ilo_1996_maize_sme_lysine_damage",
+        "lagrain_2010_cystine_elimination_lanthionine",
+        "morel_2002_gluten_shear_aggregation",
+        "researchgate_2023_pea_aeda",
+        "zhang_1993_protein_deamidation_ammonia",
+        "li_2010_phytate_chelation_kinetics",
+    }
+    assert summary["family_lane_summary"]["06"]["structural_gap_ids"] == [
+        "ellman_opa_dsc_same_experiment"
+    ]
     assert summary["family_lane_summary"]["06"]["matrix_uncertainty_factor"] < 0.75
     assert summary["family_lane_summary"]["13"]["polyphenol_active"] is True
-    assert summary["family_lane_summary"]["13"]["kinetic_prior_ids"] == ["quinone_cys_michael"]
+    assert summary["family_lane_summary"]["13"]["kinetic_prior_ids"] == [
+        "quinone_cys_michael"
+    ]
     assert summary["family_lane_summary"]["13"]["cysteine_depletion_factor"] > 0.0
     assert summary["family_lane_summary"]["09"]["severity_signal_ppb"] > 0.0
     assert "per_lane" in summary["family_lane_adjustments"]
     assert "thiamine_fragmentation_support" in summary["family_prior_bundle"]
-    assert any(marker["marker_id"] == "thiamineavailability" for marker in summary["family_state_markers"])
-    assert any(marker["marker_id"] == "caramelizationseverity" for marker in summary["family_state_markers"])
+    assert any(
+        marker["marker_id"] == "thiamineavailability"
+        for marker in summary["family_state_markers"]
+    )
+    assert any(
+        marker["marker_id"] == "caramelizationseverity"
+        for marker in summary["family_state_markers"]
+    )
     assert summary["family_upstream_contract"]["dominant_donor_class"] == "pentose"
     assert summary["family_upstream_contract"]["effective_pH"] == pytest.approx(5.15)
     assert "thiamine" in summary["family_upstream_contract"]["added_precursors"]
@@ -320,7 +418,10 @@ def test_build_family_upstream_contract_reweights_donors_and_adds_bounded_thiami
     )
 
     assert contract["dominant_donor_class"] == "pentose"
-    assert contract["donor_pool_factors"]["ribose"] > contract["donor_pool_factors"]["glucose"]
+    assert (
+        contract["donor_pool_factors"]["ribose"]
+        > contract["donor_pool_factors"]["glucose"]
+    )
     assert contract["effective_molar_ratios"]["ribose"] == pytest.approx(1.0)
     assert contract["effective_molar_ratios"]["glucose"] == pytest.approx(1.0)
     assert contract["effective_pH"] == pytest.approx(5.15)
@@ -373,14 +474,28 @@ def test_build_family_upstream_contract_calibrates_thiamine_by_ph_and_extrusion_
     )
 
     assert optimal["thiamine_fraction_baseline"] == pytest.approx(0.5)
-    assert optimal["thiamine_fraction_estimate"] > alkaline["thiamine_fraction_estimate"]
-    assert extruded["thiamine_fraction_estimate"] < optimal["thiamine_fraction_estimate"]
+    assert (
+        optimal["thiamine_fraction_estimate"] > alkaline["thiamine_fraction_estimate"]
+    )
+    assert (
+        extruded["thiamine_fraction_estimate"] < optimal["thiamine_fraction_estimate"]
+    )
     assert optimal["effective_molar_ratios"]["thiamine"] > 0.1
-    assert extruded["effective_molar_ratios"]["thiamine"] < optimal["effective_molar_ratios"]["thiamine"]
+    assert (
+        extruded["effective_molar_ratios"]["thiamine"]
+        < optimal["effective_molar_ratios"]["thiamine"]
+    )
     assert optimal["thiamine_calibration"]["dilute_loading_uplift_factor"] > 1.0
-    assert concentrated["thiamine_calibration"]["dilute_loading_uplift_factor"] == pytest.approx(1.0)
-    assert extruded["thiamine_calibration"]["extrusion_survival_factor"] == pytest.approx(0.04)
-    assert "cerny_guntz_dubini_2008" in extruded["thiamine_calibration"]["benchmark_anchor_ids"]
+    assert concentrated["thiamine_calibration"][
+        "dilute_loading_uplift_factor"
+    ] == pytest.approx(1.0)
+    assert extruded["thiamine_calibration"][
+        "extrusion_survival_factor"
+    ] == pytest.approx(0.04)
+    assert (
+        "cerny_guntz_dubini_2008"
+        in extruded["thiamine_calibration"]["benchmark_anchor_ids"]
+    )
     assert optimal["added_precursor_ratios"] == {}
     assert extruded["added_precursor_ratios"] == {}
 
@@ -416,9 +531,18 @@ def test_build_family_upstream_contract_distinguishes_peptide_bound_and_hydrolyz
     assert high_lane["active"] is True
     assert low_lane["peptide_mode"] == "generic_peptide"
     assert high_lane["peptide_mode"] == "hydrolysate_supported"
-    assert high_lane["free_cysteine_equivalent_factor"] > low_lane["free_cysteine_equivalent_factor"]
-    assert high_hydrolysis["effective_molar_ratios"]["cysteine"] > low_hydrolysis["effective_molar_ratios"]["cysteine"]
-    assert high_hydrolysis["effective_molar_ratios"]["lysine"] > low_hydrolysis["effective_molar_ratios"]["lysine"]
+    assert (
+        high_lane["free_cysteine_equivalent_factor"]
+        > low_lane["free_cysteine_equivalent_factor"]
+    )
+    assert (
+        high_hydrolysis["effective_molar_ratios"]["cysteine"]
+        > low_hydrolysis["effective_molar_ratios"]["cysteine"]
+    )
+    assert (
+        high_hydrolysis["effective_molar_ratios"]["lysine"]
+        > low_hydrolysis["effective_molar_ratios"]["lysine"]
+    )
 
 
 def test_query_family_runtime_priors_returns_family_aware_strecker_prior():
@@ -504,7 +628,10 @@ def test_build_flavor_axis_summary_calibrates_family_06_matrix_scope_lane_for_my
         "pmc9905368_spi_hvp_xylose_benchmark",
         "pmc9905368_wheat_gluten_hvp_xylose_benchmark",
     ]
-    assert family_06["selected_benchmark_anchor_id"] == "pmc9905368_spi_hvp_xylose_benchmark"
+    assert (
+        family_06["selected_benchmark_anchor_id"]
+        == "pmc9905368_spi_hvp_xylose_benchmark"
+    )
     assert family_06["benchmark_transfer_mode"] == "nearest_source_transfer"
     assert family_06["process_state_transfer_confidence"] > 0.0
 
@@ -549,7 +676,12 @@ def test_build_flavor_axis_summary_calibrates_family_08_guardrail_lane_with_safe
     family_08 = summary["family_lane_summary"]["08"]
 
     assert family_08["suppression_pressure_active"] is True
-    assert family_08["benchmark_anchor_ids"] == ["squeo_2023", "wang_2022_lab_hexanal_cleanup_anchor"]
+    assert family_08["benchmark_anchor_ids"] == [
+        "liu_2022_ppi_oav_anchors",
+        "rawel_2002_cga_cysteine_blocking",
+        "squeo_2023",
+        "wang_2022_lab_hexanal_cleanup_anchor",
+    ]
     assert family_08["crosstalk_prior_ids"] == ["lincoln_2025_polyphenol_crosstalk_v1"]
     assert family_08["safety_reference_ids"] == ["squeo_2023_pbpi_acrylamide"]
     assert family_08["acrylamide_reference_mean_ug_per_kg"] == pytest.approx(451.0)
@@ -572,8 +704,12 @@ def test_build_flavor_axis_summary_exposes_blank_1997_rhamnose_hdmf_reference():
     family_07 = summary["family_lane_summary"]["07"]
 
     assert family_07["rhamnose_hdmf_reference_active"] is True
-    assert family_07["rhamnose_hdmf_prior_ids"] == ["blank_1997_rhamnose_proline_hdmf_uplift_v1"]
-    assert family_07["rhamnose_hdmf_molar_yield_fraction_lower_bound"] == pytest.approx(0.4)
+    assert family_07["rhamnose_hdmf_prior_ids"] == [
+        "blank_1997_rhamnose_proline_hdmf_uplift_v1"
+    ]
+    assert family_07["rhamnose_hdmf_molar_yield_fraction_lower_bound"] == pytest.approx(
+        0.4
+    )
     assert family_07["rhamnose_hdmf_odt_ug_per_l"] == pytest.approx(0.6)
     assert family_07["rhamnose_hdmf_oav_lower_bound"] == pytest.approx(80.0)
 
@@ -596,9 +732,13 @@ def test_build_flavor_axis_summary_exposes_bhandari_beta_cyclodextrin_guardrail(
 
     assert family_08["cyclodextrin_guardrail_active"] is True
     assert family_08["cyclodextrin_reference_active"] is True
-    assert family_08["cyclodextrin_prior_ids"] == ["bhandari_1998_beta_cd_aldehyde_binding_v1"]
+    assert family_08["cyclodextrin_prior_ids"] == [
+        "bhandari_1998_beta_cd_aldehyde_binding_v1"
+    ]
     assert family_08["cyclodextrin_target_compounds"] == ["hexanal", "nonanal"]
-    assert family_08["cyclodextrin_weighted_oav_reduction_factor"] == pytest.approx(2.7176470588235295)
+    assert family_08["cyclodextrin_weighted_oav_reduction_factor"] == pytest.approx(
+        2.7176470588235295
+    )
     assert family_08["cyclodextrin_reference_loading_wt_pct"] == pytest.approx(1.0)
 
 
@@ -606,7 +746,10 @@ def test_build_flavor_axis_summary_calibrates_family_09_with_furanone_and_carbon
     summary = build_flavor_axis_summary(
         projection_metadata={
             "furf": {"compound": "Furfural", "observable_ppb": 28.0},
-            "hmf": {"compound": "5-Hydroxymethylfurfural (HMF)", "observable_ppb": 12.0},
+            "hmf": {
+                "compound": "5-Hydroxymethylfurfural (HMF)",
+                "observable_ppb": 12.0,
+            },
             "hemf": {"compound": "HEMF", "observable_ppb": 2.4},
         },
         sugars=["ribose"],
@@ -631,7 +774,10 @@ def test_build_flavor_axis_summary_exposes_brands_2002_mgo_hdmf_reference():
     summary = build_flavor_axis_summary(
         projection_metadata={
             "furf": {"compound": "Furfural", "observable_ppb": 42.0},
-            "hmf": {"compound": "5-Hydroxymethylfurfural (HMF)", "observable_ppb": 10.0},
+            "hmf": {
+                "compound": "5-Hydroxymethylfurfural (HMF)",
+                "observable_ppb": 10.0,
+            },
             "acetyl": {"compound": "2-Acetylfuran", "observable_ppb": 12.0},
         },
         sugars=["glucose"],
@@ -668,7 +814,10 @@ def test_build_flavor_axis_summary_calibrates_family_10_with_pretreatment_anchor
 
     family_10 = summary["family_lane_summary"]["10"]
 
-    assert family_10["benchmark_anchor_ids"] == ["nishimura_abe_2024", "matoba_1988_nucleotide_hydrolysis"]
+    assert family_10["benchmark_anchor_ids"] == [
+        "nishimura_abe_2024",
+        "matoba_1988_nucleotide_hydrolysis",
+    ]
     assert family_10["selected_benchmark_anchor_id"] == "nishimura_abe_2024"
     assert "wang_xu_glutathione_peptide_support_v1" in family_10["prior_ids"]
     assert "hofmann_1997_beef_mft_band" in family_10["flavor_anchor_ids"]
@@ -700,13 +849,18 @@ def test_build_flavor_axis_summary_calibrates_family_12_damage_lane_with_safety_
         "foods_2023_cml_cel_proxy_benchmark",
         "ramirez_jimenez_2000_furosine_crossover_benchmark",
     }
-    assert family_12["selected_benchmark_anchor_id"] in set(family_12["benchmark_anchor_ids"])
+    assert family_12["selected_benchmark_anchor_id"] in set(
+        family_12["benchmark_anchor_ids"]
+    )
     assert family_12["predicted_acrylamide_ppb"] > 0.0
     assert family_12["predicted_cml_proxy"] > 0.0
     assert family_12["predicted_cel_proxy"] > 0.0
     assert family_12["predicted_furosine_proxy"] > 0.0
     assert family_12["damage_burden_score"] > 0.0
-    assert any(marker["family_lane"]["slr_family"] == "12" for marker in summary["family_state_markers"])
+    assert any(
+        marker["family_lane"]["slr_family"] == "12"
+        for marker in summary["family_state_markers"]
+    )
 
 
 def test_build_family_upstream_contract_surfaces_family_13_precursor_sink_on_polyphenol_context():
@@ -752,7 +906,10 @@ def test_build_flavor_axis_summary_surfaces_family_14_bounded_ascorbic_dicarbony
     assert family_14["water_activity_modulation_factor"] > 0.9
     assert family_14["dicarbonyl_source_pressure"] > 0.0
     assert family_14["pentosidine_load"] > 0.0
-    assert any(marker["family_lane"]["slr_family"] == "14" for marker in summary["family_state_markers"])
+    assert any(
+        marker["family_lane"]["slr_family"] == "14"
+        for marker in summary["family_state_markers"]
+    )
 
 
 def test_build_family_upstream_contract_surfaces_family_15_and_reweights_available_sugar_pool():
@@ -808,7 +965,10 @@ def test_build_family_upstream_contract_applies_family_16_thiol_scavenging_to_up
     )
 
     assert severe["family_lanes"]["16"]["active"] is True
-    assert severe["family_lanes"]["16"]["thiol_scavenging_factor"] > mild["family_lanes"]["16"]["thiol_scavenging_factor"]
+    assert (
+        severe["family_lanes"]["16"]["thiol_scavenging_factor"]
+        > mild["family_lanes"]["16"]["thiol_scavenging_factor"]
+    )
     assert severe["effective_molar_ratios"]["cysteine"] < 10.0
 
 
@@ -836,7 +996,10 @@ def test_build_flavor_axis_summary_surfaces_family_16_bounded_melanoidin_trappin
     assert family_16["fft_fold_reduction_anchor"] == pytest.approx(16.0)
     assert family_16["melanoidin_mass"] > 0.0
     assert family_16["thiol_scavenging_factor"] > 0.0
-    assert any(marker["family_lane"]["slr_family"] == "16" for marker in summary["family_state_markers"])
+    assert any(
+        marker["family_lane"]["slr_family"] == "16"
+        for marker in summary["family_state_markers"]
+    )
 
 
 def test_query_benchmark_intake_and_dft_kinetic_priors_surface_family_02_and_11_contracts():
@@ -853,15 +1016,20 @@ def test_query_benchmark_intake_and_dft_kinetic_priors_surface_family_02_and_11_
         family="04",
         primary_only=True,
     )
-    family_11_kinetics = query_dft_kinetic_priors(family="11", reaction_key="hexanal_radical_quench")
+    family_11_kinetics = query_dft_kinetic_priors(
+        family="11", reaction_key="hexanal_radical_quench"
+    )
 
     assert family_02_rows
     assert family_02_rows[0]["id"] == "trikusuma_2019"
-    assert family_02_rows[0]["key_values"]["tracked_uht_markers_ug_per_l"]["hexanal"] == pytest.approx(782.0)
+    assert family_02_rows[0]["key_values"]["tracked_uht_markers_ug_per_l"][
+        "hexanal"
+    ] == pytest.approx(782.0)
     assert {row["id"] for row in family_03_rows} == {
         "cerny_guntz_dubini_2008",
         "de_leyn_2019",
         "hofmann_schieberle_grosch_1996",
+        "tang_2013_thiamine_mft",
     }
     assert {row["id"] for row in family_04_rows} == {
         "ahlberg_2021_yeast_extract_grade_anchor",
@@ -875,7 +1043,10 @@ def test_query_benchmark_intake_and_dft_kinetic_priors_surface_family_02_and_11_
     assert family_11_kinetics
     assert family_11_kinetics[0]["id"] == "hexanal_radical_quench"
     # 2026-04-21: xTB-derived anchor retired; entry now flagged as no_anchor.
-    assert family_11_kinetics[0]["active_arrhenius_key"] == "hexanal_radical_quench_no_anchor"
+    assert (
+        family_11_kinetics[0]["active_arrhenius_key"]
+        == "hexanal_radical_quench_no_anchor"
+    )
 
 
 def test_query_family_runtime_priors_surfaces_ohsu_kokumi_prior_for_family_05():
@@ -913,14 +1084,19 @@ def test_build_flavor_axis_summary_surfaces_family_05_kokumi_support_when_gsh_an
     assert family_05["glutathione_active"] is True
     assert family_05["gamma_glutamyl_peptide_active"] is True
     assert family_05["kokumi_support_active"] is True
-    assert family_05["kokumi_signal_mode"] == "combined_glutathione_and_gamma_glutamyl_peptide"
+    assert (
+        family_05["kokumi_signal_mode"]
+        == "combined_glutathione_and_gamma_glutamyl_peptide"
+    )
     assert family_05["kokumi_signal_score"] > 0.8
     assert family_05["gsh_casr_ec50_mM"] == pytest.approx(0.68)
     assert family_05["kokumi_reference_ids"] == ["ohsu_2025_kokumi_casr_anchor"]
     assert "Ohsu et al. (2025)" in family_05["kokumi_reference_citations"]
     assert family_05["kokumi_prior_ids"] == ["ohsu_2025_kokumi_casr_support_v1"]
     assert summary["kokumi_support_active"] is True
-    assert summary["kokumi_support_signal"] == pytest.approx(family_05["kokumi_signal_score"])
+    assert summary["kokumi_support_signal"] == pytest.approx(
+        family_05["kokumi_signal_score"]
+    )
 
 
 def test_build_kokumi_support_profile_caps_combined_gsh_and_gamma_glu_signal():
@@ -938,7 +1114,10 @@ def test_build_kokumi_support_profile_caps_combined_gsh_and_gamma_glu_signal():
     )
 
     assert profile["kokumi_support_active"] is True
-    assert profile["kokumi_signal_mode"] == "combined_glutathione_and_gamma_glutamyl_peptide"
+    assert (
+        profile["kokumi_signal_mode"]
+        == "combined_glutathione_and_gamma_glutamyl_peptide"
+    )
     assert 0.8 < profile["kokumi_signal_score"] <= 1.0
     assert profile["gsh_casr_ec50_mM"] == pytest.approx(0.68)
     assert profile["gamma_glu_val_casr_ec50_mM"] == pytest.approx(0.32)
@@ -970,9 +1149,18 @@ def test_build_family_upstream_contract_calibrates_family_04_tradeoff_and_adds_b
     mild_family_04 = mild["family_lanes"]["04"]
     severe_family_04 = severe["family_lanes"]["04"]
 
-    assert mild_family_04["nucleotide_survival_factor"] > severe_family_04["nucleotide_survival_factor"]
-    assert mild_family_04["umami_support_factor"] > severe_family_04["umami_support_factor"]
-    assert severe_family_04["ribose_delivery_factor"] > mild_family_04["ribose_delivery_factor"]
+    assert (
+        mild_family_04["nucleotide_survival_factor"]
+        > severe_family_04["nucleotide_survival_factor"]
+    )
+    assert (
+        mild_family_04["umami_support_factor"]
+        > severe_family_04["umami_support_factor"]
+    )
+    assert (
+        severe_family_04["ribose_delivery_factor"]
+        > mild_family_04["ribose_delivery_factor"]
+    )
     assert severe_family_04["ribose_shift_active"] is True
     assert set(severe["nucleotide_calibration"]["benchmark_anchor_ids"]) == {
         "ahlberg_2021_yeast_extract_grade_anchor",
@@ -1011,8 +1199,13 @@ def test_build_flavor_axis_summary_surfaces_family_04_benchmark_context_and_ribo
     assert family_04["ribose_shift_active"] is True
     assert family_04["umami_reference_mode"] == "hydrolyzing_nucleotide_pool"
     assert family_04["soladoye_reference_ids"] == ["soladoye_2020_sous_vide_euc_anchor"]
-    assert family_04["soladoye_euc_percent_msg_by_condition"]["70C_12h"] == pytest.approx(0.15)
-    assert "Matoba, Terao & Fujimaki (1988), JAFC 36:1033" in family_04["benchmark_anchor_citations"]
+    assert family_04["soladoye_euc_percent_msg_by_condition"][
+        "70C_12h"
+    ] == pytest.approx(0.15)
+    assert (
+        "Matoba, Terao & Fujimaki (1988), JAFC 36:1033"
+        in family_04["benchmark_anchor_citations"]
+    )
 
 
 def test_build_flavor_axis_summary_surfaces_family_04_low_temp_euc_context():
@@ -1037,7 +1230,8 @@ def test_build_flavor_axis_summary_surfaces_family_04_low_temp_euc_context():
     assert family_04["soladoye_reference_ids"] == ["soladoye_2020_sous_vide_euc_anchor"]
     assert family_04["soladoye_raw_euc_percent_msg"] == pytest.approx(0.18)
     assert "Soladoye et al. (2020)" in family_04["soladoye_reference_citations"]
-    
+
+
 def test_build_flavor_axis_summary_surfaces_family_04_source_profile_context():
     summary = build_flavor_axis_summary(
         projection_metadata={},
@@ -1055,9 +1249,16 @@ def test_build_flavor_axis_summary_surfaces_family_04_source_profile_context():
     family_04 = summary["family_lane_summary"]["04"]
 
     assert family_04["yeast_extract_grade_reference_active"] is True
-    assert family_04["yeast_extract_grade_prior_ids"] == ["ahlberg_2021_yeast_extract_nucleotide_grade_window_v1"]
-    assert family_04["yeast_extract_high_nucleotide_imp_mg_per_100g_dw_range"] == [1200.0, 2400.0]
-    assert family_04["yeast_extract_amp_deaminase_euc_uplift_factor_vs_standard_range"] == [5.0, 6.0]
+    assert family_04["yeast_extract_grade_prior_ids"] == [
+        "ahlberg_2021_yeast_extract_nucleotide_grade_window_v1"
+    ]
+    assert family_04["yeast_extract_high_nucleotide_imp_mg_per_100g_dw_range"] == [
+        1200.0,
+        2400.0,
+    ]
+    assert family_04[
+        "yeast_extract_amp_deaminase_euc_uplift_factor_vs_standard_range"
+    ] == [5.0, 6.0]
     assert family_04["mushroom_reference_active"] is True
     assert family_04["mushroom_prior_ids"] == ["cui_2022_mushroom_gmp_euc_window_v1"]
     assert family_04["mushroom_selected_species"] == "shiitake"
@@ -1088,8 +1289,12 @@ def test_build_flavor_axis_summary_surfaces_family_16_architecture_context_for_g
     assert family_16["architecture_shift_score"] > 0.0
     assert family_16["gum_arabic_active"] is True
     assert family_16["hydrolysate_support_active"] is True
-    assert family_16["architecture_reference_ids"] == ["jafc_2019_ref21_pea_gum_arabic_architecture_anchor"]
-    assert family_16["process_state_calibration_ids"] == ["jafc_2019_ref21_pea_gum_arabic_architecture_state"]
+    assert family_16["architecture_reference_ids"] == [
+        "jafc_2019_ref21_pea_gum_arabic_architecture_anchor"
+    ]
+    assert family_16["process_state_calibration_ids"] == [
+        "jafc_2019_ref21_pea_gum_arabic_architecture_state"
+    ]
 
 
 def test_build_flavor_axis_summary_surfaces_family_03_benchmark_context_and_extrusion_penalty():
@@ -1112,11 +1317,17 @@ def test_build_flavor_axis_summary_surfaces_family_03_benchmark_context_and_extr
 
     family_03 = summary["family_lane_summary"]["03"]
     assert family_03["extrusion_reference_id"] == "de_leyn_2019_thiamine_retention"
-    assert "Cerny & Guntz-Dubini (2008), JAFC 56:5138" in family_03["benchmark_anchor_citations"]
+    assert (
+        "Cerny & Guntz-Dubini (2008), JAFC 56:5138"
+        in family_03["benchmark_anchor_citations"]
+    )
     assert family_03["extrusion_survival_factor"] == pytest.approx(0.04)
     assert family_03["thiamine_reference_yield_mode"] == "mixed_system_optimal_window"
     assert family_03["thiamine_aw_reference_active"] is True
-    assert family_03["thiamine_aw_reference_id"] == "arabshahi_1988_aw_dependent_thiamine_ea_v1"
+    assert (
+        family_03["thiamine_aw_reference_id"]
+        == "arabshahi_1988_aw_dependent_thiamine_ea_v1"
+    )
     assert family_03["thiamine_aw_reference_source"] == "Arabshahi & Lund (1988)"
     assert family_03["thiamine_aw_reference_ea_kcal_per_mol"] == pytest.approx(22.08)
     assert family_03["thiamine_aw_modulation_factor"] == pytest.approx(22.08 / 23.4)
@@ -1147,15 +1358,24 @@ def test_build_flavor_axis_summary_partially_relaxes_family_03_aw_transfer_in_in
 
     assert family_03["thiamine_aw_reference_active"] is True
     assert family_03["thiamine_aw_transfer_weight"] == pytest.approx(0.8)
-    assert family_03["thiamine_aw_modulation_factor"] == pytest.approx(1.0 - 0.8 * (1.0 - raw_aw_factor))
+    assert family_03["thiamine_aw_modulation_factor"] == pytest.approx(
+        1.0 - 0.8 * (1.0 - raw_aw_factor)
+    )
 
 
 def test_query_flavor_reference_entries_separates_scoring_targets_from_reference_only_entries():
     scoring_rows = query_flavor_reference_entries(family="01", scoring_only=True)
-    methional_rows = query_flavor_reference_entries(entry_id="hernandez_2023_methional_panel")
+    methional_rows = query_flavor_reference_entries(
+        entry_id="hernandez_2023_methional_panel"
+    )
 
     assert any(row["id"] == "hernandez_2023_methional_panel" for row in scoring_rows)
-    assert methional_rows[0]["pipeline_role"] in {"primary_target", "secondary_marker", "diagnostic_marker", "optimization_constraint"}
+    assert methional_rows[0]["pipeline_role"] in {
+        "primary_target",
+        "secondary_marker",
+        "diagnostic_marker",
+        "optimization_constraint",
+    }
 
 
 def test_query_flavor_reference_entries_exposes_raw_pea_hexanal_as_reference_only_family_11_anchor():
@@ -1169,7 +1389,9 @@ def test_query_flavor_reference_entries_exposes_raw_pea_hexanal_as_reference_onl
 
 
 def test_query_flavor_reference_entries_exposes_hme_hexanal_control_as_reference_only_family_11_anchor():
-    rows = query_flavor_reference_entries(entry_id="li_2026_spi_wg_hme_hexanal_control_point")
+    rows = query_flavor_reference_entries(
+        entry_id="li_2026_spi_wg_hme_hexanal_control_point"
+    )
 
     assert rows
     assert rows[0]["slr_family_source"] == "11"
@@ -1186,5 +1408,7 @@ def test_query_retention_reference_entries_returns_family_and_matrix_filtered_ro
     )
 
     assert soy_hexanal_rows
-    assert any(row["id"] == "xu_2023_spi_hexanal_temporal_profile" for row in soy_hexanal_rows)
+    assert any(
+        row["id"] == "xu_2023_spi_hexanal_temporal_profile" for row in soy_hexanal_rows
+    )
     assert all(row["matrix_family"].startswith("soy") for row in soy_hexanal_rows)
