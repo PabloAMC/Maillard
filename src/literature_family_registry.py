@@ -22,6 +22,8 @@ _CANONICAL_FAMILY_ALIASES = {
     "advanced_glycation_and_damage": "protein_damage_markers",
     "microbial_fermentation_modulation": "fermentation_pretreatment",
     "phospholipid_amine_maillard": "phospholipid_amine_sink",
+    "lipid_oxidation_crosstalk": "lipid_oxidation_and_carbonylic_crosstalk",
+    "carbohydrate_pyrolysis_caramelization": "carbohydrate_pyrolysis_and_caramelization",
 }
 
 

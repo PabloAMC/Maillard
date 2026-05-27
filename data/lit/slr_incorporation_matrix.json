@@ -2788,6 +2788,1781 @@
       "next_action": "Encode phytate chelation kinetics prior.",
       "confidence_tier": "high",
       "notes_on_limits": "Aqueous solution."
+    },
+    {
+      "slr_section": "2.0",
+      "paper_id": "tan_2001_oil_dsc_oxidation",
+      "citation": "Tan et al. (2001)",
+      "doi": "10.1007/s11746-001-0402-y",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "peroxides",
+        "hexanal"
+      ],
+      "parameters_supported": [
+        "lipid_oxidation_kinetics",
+        "hydroperoxide_decomposition_activation_energy"
+      ],
+      "exact_numeric_anchors": [],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode lipid oxidation Arrhenius prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "2.0",
+      "paper_id": "bayram_2023_stripped_soybean_oil_hexanal",
+      "citation": "Bayram et al. (2023)",
+      "doi": "10.3989/gya.1051211",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "peroxides",
+        "hexanal"
+      ],
+      "parameters_supported": [
+        "lipid_oxidation_kinetics",
+        "hydroperoxide_decomposition_activation_energy"
+      ],
+      "exact_numeric_anchors": [
+        "Ea: 1.62-89.4 kJ/mol"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode hexanal accumulation Arrhenius prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "2.0",
+      "paper_id": "spier_2010_metal_naphthenate_peroxide_decomp",
+      "citation": "Spier et al. (2010)",
+      "doi": "10.1021/ef101678s",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "peroxides",
+        "hexanal"
+      ],
+      "parameters_supported": [
+        "lipid_oxidation_kinetics",
+        "hydroperoxide_decomposition_activation_energy"
+      ],
+      "exact_numeric_anchors": [
+        "Ea: 11-26 kcal/mol"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode catalytic peroxide decomposition prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "6.0",
+      "paper_id": "zha_2020_ppi_glycation_aggregation",
+      "citation": "Zha et al. (2020)",
+      "doi": "10.1021/acs.jafc.0c04281",
+      "matrix_family": "plant_protein_matrix",
+      "compounds_supported": [
+        "glyco-conjugates",
+        "dityrosine",
+        "CML",
+        "CEL"
+      ],
+      "parameters_supported": [
+        "protein_glycation_kinetics",
+        "dityrosine_diffusion_limited_kinetics"
+      ],
+      "exact_numeric_anchors": [],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode PPI glycation prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "6.0",
+      "paper_id": "kutzli_2020_pea_maltodextrin_electrospun_glycation",
+      "citation": "Kutzli et al. (2020)",
+      "doi": "10.1039/D0FO00292E",
+      "matrix_family": "plant_protein_matrix",
+      "compounds_supported": [
+        "glyco-conjugates",
+        "dityrosine",
+        "CML",
+        "CEL"
+      ],
+      "parameters_supported": [
+        "protein_glycation_kinetics",
+        "dityrosine_diffusion_limited_kinetics"
+      ],
+      "exact_numeric_anchors": [],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode fiber glycation prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "6.0",
+      "paper_id": "nguyen_2025_ppi_microencapsulated_oil_stabilization",
+      "citation": "Nguyen et al. (2025)",
+      "doi": "10.1016/j.foodchem.2025.146396",
+      "matrix_family": "plant_protein_matrix",
+      "compounds_supported": [
+        "glyco-conjugates",
+        "dityrosine",
+        "CML",
+        "CEL"
+      ],
+      "parameters_supported": [
+        "protein_glycation_kinetics",
+        "dityrosine_diffusion_limited_kinetics"
+      ],
+      "exact_numeric_anchors": [],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode oil stabilization barrier prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "6.0",
+      "paper_id": "pereira_2020_metal_pm_haber_weiss_chelation",
+      "citation": "Pereira et al. (2020)",
+      "doi": "10.3390/antiox9080756",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "glyco-conjugates",
+        "dityrosine",
+        "CML",
+        "CEL"
+      ],
+      "parameters_supported": [
+        "protein_glycation_kinetics",
+        "dityrosine_diffusion_limited_kinetics"
+      ],
+      "exact_numeric_anchors": [
+        "Cu-PM free energy: -35.8 kcal/mol"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode metal chelation thermodynamic prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "6.0",
+      "paper_id": "sun_2020_solid_matrix_cml_cel_accumulation",
+      "citation": "Sun et al. (2020)",
+      "doi": "10.1016/j.meatsci.2020.108151",
+      "matrix_family": "high_moisture_melt",
+      "compounds_supported": [
+        "glyco-conjugates",
+        "dityrosine",
+        "CML",
+        "CEL"
+      ],
+      "parameters_supported": [
+        "protein_glycation_kinetics",
+        "dityrosine_diffusion_limited_kinetics"
+      ],
+      "exact_numeric_anchors": [
+        "Ea free CML: 44.16 kJ/mol",
+        "Ea free CEL: 40.97 kJ/mol"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode solid matrix CML/CEL accumulation prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "6.0",
+      "paper_id": "shirai_2015_bsa_dityrosine_diffusion_limited",
+      "citation": "Shirai et al. (2015)",
+      "doi": "10.1021/acs.est.5b02902",
+      "matrix_family": "plant_protein_matrix",
+      "compounds_supported": [
+        "glyco-conjugates",
+        "dityrosine",
+        "CML",
+        "CEL"
+      ],
+      "parameters_supported": [
+        "protein_glycation_kinetics",
+        "dityrosine_diffusion_limited_kinetics"
+      ],
+      "exact_numeric_anchors": [],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode dityrosine formation prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "7.0",
+      "paper_id": "martins_boekel_2003_dfg_amadori_degradation",
+      "citation": "Martins & van Boekel (2003)",
+      "doi": "10.1021/jf025830v",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "Amadori",
+        "decarboxylated_complexes"
+      ],
+      "parameters_supported": [
+        "Amadori_degradation_kinetics",
+        "decarboxylation_rate_constants"
+      ],
+      "exact_numeric_anchors": [],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode Amadori degradation prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "7.0",
+      "paper_id": "nashalian_yaylayan_2014_cu_catalyzed_strecker",
+      "citation": "Nashalian & Yaylayan (2014)",
+      "doi": "10.1021/acsomega.7b00321",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "Amadori",
+        "decarboxylated_complexes"
+      ],
+      "parameters_supported": [
+        "Amadori_degradation_kinetics",
+        "decarboxylation_rate_constants"
+      ],
+      "exact_numeric_anchors": [
+        "decarboxylation rate k: 0.41 s-1"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode catalyzed Strecker enolization prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "9.0",
+      "paper_id": "de_bruijn_1987_monosaccharide_alkaline_degradation",
+      "citation": "de Bruijn et al. (1987)",
+      "doi": "10.1002/recl.19871060202",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "furanones",
+        "retro_aldol_intermediates"
+      ],
+      "parameters_supported": [
+        "caramelization_kinetics",
+        "molten_sugar_color_activation_energy"
+      ],
+      "exact_numeric_anchors": [],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode alkaline retro-aldol prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "9.0",
+      "paper_id": "luna_aguilera_2014_molten_sugar_color_kinetics",
+      "citation": "Luna & Aguilera (2014)",
+      "doi": "10.1016/j.jfoodeng.2014.06.032",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "furanones",
+        "retro_aldol_intermediates"
+      ],
+      "parameters_supported": [
+        "caramelization_kinetics",
+        "molten_sugar_color_activation_energy"
+      ],
+      "exact_numeric_anchors": [],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode caramelization color kinetics prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "9.0",
+      "paper_id": "bao_2022_xylose_glycylglycine_3_deoxyosone_cleavage",
+      "citation": "Bao et al. (2022)",
+      "doi": "10.1021/acs.jafc.2c03427",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "furanones",
+        "retro_aldol_intermediates"
+      ],
+      "parameters_supported": [
+        "caramelization_kinetics",
+        "molten_sugar_color_activation_energy"
+      ],
+      "exact_numeric_anchors": [],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode dipeptide Amadori cleavage prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "11.0",
+      "paper_id": "hidalgo_2007_decadienal_phenylalanine_styrene",
+      "citation": "Hidalgo et al. (2007)",
+      "doi": "10.1021/jf070527w",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "styrene",
+        "2-pentylpyridine",
+        "acrylamide",
+        "met-leghemoglobin"
+      ],
+      "parameters_supported": [
+        "decadienal_amino_crosstalk_kinetics",
+        "leghemoglobin_oxygen_dissociation"
+      ],
+      "exact_numeric_anchors": [
+        "Ea styrene: 150.4 kJ/mol"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode lipid-amino crosstalk prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "11.0",
+      "paper_id": "zamora_2010_decadienal_asparagine_decarboxylation",
+      "citation": "Zamora et al. (2010)",
+      "doi": "10.1021/jf102026c",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "styrene",
+        "2-pentylpyridine",
+        "acrylamide",
+        "met-leghemoglobin"
+      ],
+      "parameters_supported": [
+        "decadienal_amino_crosstalk_kinetics",
+        "leghemoglobin_oxygen_dissociation"
+      ],
+      "exact_numeric_anchors": [
+        "Ea asparagine: 81.0 kJ/mol"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode lipid-catalyzed decarboxylation prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "11.0",
+      "paper_id": "ding_2020_schiff_base_amadori_emulsion_rates",
+      "citation": "Ding et al. (2020)",
+      "doi": "10.1021/acs.jafc.0c04738",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "styrene",
+        "2-pentylpyridine",
+        "acrylamide",
+        "met-leghemoglobin"
+      ],
+      "parameters_supported": [
+        "decadienal_amino_crosstalk_kinetics",
+        "leghemoglobin_oxygen_dissociation"
+      ],
+      "exact_numeric_anchors": [],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode micellar Schiff base prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "11.0",
+      "paper_id": "richards_2009_hemoglobin_liposome_oxidation",
+      "citation": "Richards et al. (2009)",
+      "doi": "10.1021/jf9013394",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "styrene",
+        "2-pentylpyridine",
+        "acrylamide",
+        "met-leghemoglobin"
+      ],
+      "parameters_supported": [
+        "decadienal_amino_crosstalk_kinetics",
+        "leghemoglobin_oxygen_dissociation"
+      ],
+      "exact_numeric_anchors": [],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode Hb-mediated oxidation prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "11.0",
+      "paper_id": "smagghe_2006_leghemoglobin_oxygen_dissociation",
+      "citation": "Smagghe et al. (2006)",
+      "doi": "10.1021/bi051902l",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "styrene",
+        "2-pentylpyridine",
+        "acrylamide",
+        "met-leghemoglobin"
+      ],
+      "parameters_supported": [
+        "decadienal_amino_crosstalk_kinetics",
+        "leghemoglobin_oxygen_dissociation"
+      ],
+      "exact_numeric_anchors": [
+        "dissociation rate k: 5.6 s-1"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode leghemoglobin dissociation prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "12.0",
+      "paper_id": "urugo_2024_plant_milk_hca_quantification",
+      "citation": "Urugo et al. (2024)",
+      "doi": "10.3390/foods14193295",
+      "matrix_family": "plant_protein_matrix",
+      "compounds_supported": [
+        "HCAs",
+        "CML",
+        "CEL",
+        "acrylamide"
+      ],
+      "parameters_supported": [
+        "HCA_formation_kinetics",
+        "CML_CEL_accumulation_kinetics",
+        "browning_activation_energy"
+      ],
+      "exact_numeric_anchors": [],
+      "current_repo_artifacts": [
+        "data/lit/safety_reference_payloads.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode HCA safety reference prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "12.0",
+      "paper_id": "chen_2016_carbohydrate_meat_cml_cel_sterilization",
+      "citation": "Chen et al. (2016)",
+      "doi": "10.1007/s10068-016-0185-5",
+      "matrix_family": "high_moisture_melt",
+      "compounds_supported": [
+        "HCAs",
+        "CML",
+        "CEL",
+        "acrylamide"
+      ],
+      "parameters_supported": [
+        "HCA_formation_kinetics",
+        "CML_CEL_accumulation_kinetics",
+        "browning_activation_energy"
+      ],
+      "exact_numeric_anchors": [
+        "glucose doping acceleration: 4.0x"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/safety_reference_payloads.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode sterilization AGE safety prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "12.0",
+      "paper_id": "pruteanu_2023_glucose_phe_arrhenius_browning",
+      "citation": "Pruteanu et al. (2023)",
+      "doi": "10.1016/j.lwt.2024.117316",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "HCAs",
+        "CML",
+        "CEL",
+        "acrylamide"
+      ],
+      "parameters_supported": [
+        "HCA_formation_kinetics",
+        "CML_CEL_accumulation_kinetics",
+        "browning_activation_energy"
+      ],
+      "exact_numeric_anchors": [
+        "Ea Phe model: 145 kJ/mol",
+        "Ea Gly model: 109 kJ/mol"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/safety_reference_payloads.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode browning activation energy safety prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "13.0",
+      "paper_id": "zhu_2020_epicatechin_mgo_go_scavenging",
+      "citation": "Zhu H. et al. (2020)",
+      "doi": "10.1021/acs.jafc.0c01761",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "epicatechin-adducts",
+        "quinone-conjugates",
+        "phenylacetaldehyde"
+      ],
+      "parameters_supported": [
+        "quinone_Michael_addition_kinetics",
+        "dicarbonyl_trapping_rates",
+        "Strecker_catalysis"
+      ],
+      "exact_numeric_anchors": [
+        "MGO k: 1.6 M-1 s-1",
+        "GO k: 0.059 M-1 s-1"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode epicatechin dicarbonyl trapping prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "13.0",
+      "paper_id": "zhu_2020_polyphenol_mgo_structure_kinetics",
+      "citation": "Zhu H. et al. (2020b)",
+      "doi": "10.1016/j.foodchem.2020.126500",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "epicatechin-adducts",
+        "quinone-conjugates",
+        "phenylacetaldehyde"
+      ],
+      "parameters_supported": [
+        "quinone_Michael_addition_kinetics",
+        "dicarbonyl_trapping_rates",
+        "Strecker_catalysis"
+      ],
+      "exact_numeric_anchors": [],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode structural polyphenol trapping prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "13.0",
+      "paper_id": "liu_2023_benzoquinone_lysine_kinetics",
+      "citation": "Liu J. et al. (2023)",
+      "doi": "10.1016/j.foodres.2022.112187",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "epicatechin-adducts",
+        "quinone-conjugates",
+        "phenylacetaldehyde"
+      ],
+      "parameters_supported": [
+        "quinone_Michael_addition_kinetics",
+        "dicarbonyl_trapping_rates",
+        "Strecker_catalysis"
+      ],
+      "exact_numeric_anchors": [
+        "Ea 4MBQ-Lys: 19.00 kJ/mol"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode benzoquinone-lysine conjugation prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "13.0",
+      "paper_id": "comert_gokmen_2019_digestive_mgo_scavenging",
+      "citation": "Cömert & Gökmen (2019)",
+      "doi": "10.1016/j.foodres.2019.03.046",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "epicatechin-adducts",
+        "quinone-conjugates",
+        "phenylacetaldehyde"
+      ],
+      "parameters_supported": [
+        "quinone_Michael_addition_kinetics",
+        "dicarbonyl_trapping_rates",
+        "Strecker_catalysis"
+      ],
+      "exact_numeric_anchors": [],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode digestive dicarbonyl scavenging prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "13.0",
+      "paper_id": "munoz_2007_chlorogenic_oxidase_quinone",
+      "citation": "Munoz et al. (2007)",
+      "doi": "10.1021/jf062081+",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "epicatechin-adducts",
+        "quinone-conjugates",
+        "phenylacetaldehyde"
+      ],
+      "parameters_supported": [
+        "quinone_Michael_addition_kinetics",
+        "dicarbonyl_trapping_rates",
+        "Strecker_catalysis"
+      ],
+      "exact_numeric_anchors": [
+        "k CQA_Q: 2.73 M-1 s-1"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode chlorogenic o-quinone prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "13.0",
+      "paper_id": "comert_gokmen_2021_epicatechin_cysteine_mgo_synergy",
+      "citation": "Cömert & Gökmen (2021)",
+      "doi": "10.1016/j.foodchem.2020.128670",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "epicatechin-adducts",
+        "quinone-conjugates",
+        "phenylacetaldehyde"
+      ],
+      "parameters_supported": [
+        "quinone_Michael_addition_kinetics",
+        "dicarbonyl_trapping_rates",
+        "Strecker_catalysis"
+      ],
+      "exact_numeric_anchors": [],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode EC-Cys synergistic scavenging prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "13.0",
+      "paper_id": "song_2009_benzoquinone_gsh_conjugation",
+      "citation": "Song et al. (2009)",
+      "doi": "10.1073/pnas.0810352106",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "epicatechin-adducts",
+        "quinone-conjugates",
+        "phenylacetaldehyde"
+      ],
+      "parameters_supported": [
+        "quinone_Michael_addition_kinetics",
+        "dicarbonyl_trapping_rates",
+        "Strecker_catalysis"
+      ],
+      "exact_numeric_anchors": [
+        "k forward: 1547 M-1 s-1"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode quinone-GSH conjugation prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "13.0",
+      "paper_id": "li_2017_quercetin_mgo_adduct_browning_mitigation",
+      "citation": "Li et al. (2017)",
+      "doi": "10.1021/acs.jafc.6b05811",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "epicatechin-adducts",
+        "quinone-conjugates",
+        "phenylacetaldehyde"
+      ],
+      "parameters_supported": [
+        "quinone_Michael_addition_kinetics",
+        "dicarbonyl_trapping_rates",
+        "Strecker_catalysis"
+      ],
+      "exact_numeric_anchors": [],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode quercetin MGO adduction prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "13.0",
+      "paper_id": "monforte_2018_phenylacetaldehyde_quinones",
+      "citation": "Monforte et al. (2018)",
+      "doi": "10.1021/acs.jafc.7b00264",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "epicatechin-adducts",
+        "quinone-conjugates",
+        "phenylacetaldehyde"
+      ],
+      "parameters_supported": [
+        "quinone_Michael_addition_kinetics",
+        "dicarbonyl_trapping_rates",
+        "Strecker_catalysis"
+      ],
+      "exact_numeric_anchors": [],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode polyphenol-catalyzed Strecker prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "15.0",
+      "paper_id": "solis_calero_2015_pe_glyoxal",
+      "citation": "Solís-Calero et al. (2015)",
+      "doi": "10.1039/C4CP05360E",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "phosphatidylethanolamine",
+        "glyoxal",
+        "Amadori-PE",
+        "dihydropyridines"
+      ],
+      "parameters_supported": [
+        "glycation_kinetics",
+        "dehydration_barrier",
+        "radical_scavenging"
+      ],
+      "exact_numeric_anchors": [
+        "Ea dehydration: 17.50 kcal/mol"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting",
+        "scientific_surface"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode phospholipid surface dehydration catalyst prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "15.0",
+      "paper_id": "solis_calero_2013_pe_amadori",
+      "citation": "Solís-Calero et al. (2013)",
+      "doi": "10.1021/jp401488j",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "phosphatidylethanolamine",
+        "glyoxal",
+        "Amadori-PE",
+        "dihydropyridines"
+      ],
+      "parameters_supported": [
+        "glycation_kinetics",
+        "dehydration_barrier",
+        "radical_scavenging"
+      ],
+      "exact_numeric_anchors": [
+        "Ea condensation: 8.76 kcal/mol",
+        "Ea enaminol: 16.78 kcal/mol"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting",
+        "scientific_surface"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode PE surface sugar condensation prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "15.0",
+      "paper_id": "lertsiri_1998_pe_glycation",
+      "citation": "Lertsiri et al. (1998)",
+      "doi": "10.1271/bbb.62.893",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "phosphatidylethanolamine",
+        "glyoxal",
+        "Amadori-PE",
+        "dihydropyridines"
+      ],
+      "parameters_supported": [
+        "glycation_kinetics",
+        "dehydration_barrier",
+        "radical_scavenging"
+      ],
+      "exact_numeric_anchors": [],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting",
+        "scientific_surface"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode Amadori-PE accumulation prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "15.0",
+      "paper_id": "hidalgo_2005_pe_ribose_lysine",
+      "citation": "Hidalgo et al. (2005)",
+      "doi": "10.1007/s00217-004-1065-x",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "phosphatidylethanolamine",
+        "glyoxal",
+        "Amadori-PE",
+        "dihydropyridines"
+      ],
+      "parameters_supported": [
+        "glycation_kinetics",
+        "dehydration_barrier",
+        "radical_scavenging"
+      ],
+      "exact_numeric_anchors": [
+        "Ea browning: 66.5 kJ/mol",
+        "Ea fluorescence: 50.0 kJ/mol"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting",
+        "scientific_surface"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode PE-ribose-lysine global browning prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "15.0",
+      "paper_id": "zamora_2020_pe_dihydropyridine",
+      "citation": "Zamora et al. (2020)",
+      "doi": "10.3390/molecules25020373",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "phosphatidylethanolamine",
+        "glyoxal",
+        "Amadori-PE",
+        "dihydropyridines"
+      ],
+      "parameters_supported": [
+        "glycation_kinetics",
+        "dehydration_barrier",
+        "radical_scavenging"
+      ],
+      "exact_numeric_anchors": [],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting",
+        "scientific_surface"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode dihydropyridine adduct radical scavenging prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "15.0",
+      "paper_id": "hidalgo_2006_pe_lysine_antioxidant",
+      "citation": "Hidalgo et al. (2006)",
+      "doi": "10.1021/jf060848s",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "phosphatidylethanolamine",
+        "glyoxal",
+        "Amadori-PE",
+        "dihydropyridines"
+      ],
+      "parameters_supported": [
+        "glycation_kinetics",
+        "dehydration_barrier",
+        "radical_scavenging"
+      ],
+      "exact_numeric_anchors": [],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting",
+        "scientific_surface"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode PE-lysine Rancimat oxidative synergy prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "15.0",
+      "paper_id": "vilanova_2012_pe_schiff_base",
+      "citation": "Vilanova et al. (2012)",
+      "doi": "10.1021/jp2116033",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "phosphatidylethanolamine",
+        "glyoxal",
+        "Amadori-PE",
+        "dihydropyridines"
+      ],
+      "parameters_supported": [
+        "glycation_kinetics",
+        "dehydration_barrier",
+        "radical_scavenging"
+      ],
+      "exact_numeric_anchors": [
+        "Ea dehydration: 13.08 kcal/mol"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting",
+        "scientific_surface"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode Schiff base dehydration rate prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "15.0",
+      "paper_id": "biondi_2010_oil_microwave_degradation",
+      "citation": "Biondi et al. (2010)",
+      "doi": "10.1016/j.lwt.2010.02.016",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "phosphatidylethanolamine",
+        "glyoxal",
+        "Amadori-PE",
+        "dihydropyridines"
+      ],
+      "parameters_supported": [
+        "glycation_kinetics",
+        "dehydration_barrier",
+        "radical_scavenging"
+      ],
+      "exact_numeric_anchors": [],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting",
+        "scientific_surface"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode microwave thermal stress lipid oxidation prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "16.0",
+      "paper_id": "brands_2002_casein_sugar_melanoidin",
+      "citation": "Brands et al. (2002)",
+      "doi": "10.1021/jf010789c",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "melanoidins",
+        "thiols",
+        "pyrazines"
+      ],
+      "parameters_supported": [
+        "polymerization_kinetics",
+        "covalent_binding",
+        "aroma_staling"
+      ],
+      "exact_numeric_anchors": [
+        "Ea polymerization: 128 kJ/mol",
+        "rate k: 1.14 h-1"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting",
+        "scientific_surface"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode casein-sugar melanoidin polymerization prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "16.0",
+      "paper_id": "gigl_2021_coffee_thiol_binding",
+      "citation": "Gigl et al. (2021)",
+      "doi": "10.1021/acs.jafc.1c06163",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "melanoidins",
+        "thiols",
+        "pyrazines"
+      ],
+      "parameters_supported": [
+        "polymerization_kinetics",
+        "covalent_binding",
+        "aroma_staling"
+      ],
+      "exact_numeric_anchors": [],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting",
+        "scientific_surface"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode melanoidin covalent thiol staling prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "16.0",
+      "paper_id": "suzuki_philp_1990_sulfur_melanoidin",
+      "citation": "Suzuki & Philp (1990)",
+      "doi": "10.1016/0146-6380(90)90162-s",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "melanoidins",
+        "thiols",
+        "pyrazines"
+      ],
+      "parameters_supported": [
+        "polymerization_kinetics",
+        "covalent_binding",
+        "aroma_staling"
+      ],
+      "exact_numeric_anchors": [],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting",
+        "scientific_surface"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode sulfur-incorporated melanoidin prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "16.0",
+      "paper_id": "mundt_wedzicha_2007_biscuit_browning",
+      "citation": "Mundt & Wedzicha (2007)",
+      "doi": "10.1016/j.lwt.2006.07.014",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "melanoidins",
+        "thiols",
+        "pyrazines"
+      ],
+      "parameters_supported": [
+        "polymerization_kinetics",
+        "covalent_binding",
+        "aroma_staling"
+      ],
+      "exact_numeric_anchors": [
+        "Ea browning: 105 kJ/mol"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting",
+        "scientific_surface"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode biscuit surface browning rate prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "16.0",
+      "paper_id": "cao_2024_carp_myoglobin_mrp",
+      "citation": "Cao et al. (2024)",
+      "doi": "10.1111/1750-3841.17378",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "melanoidins",
+        "thiols",
+        "pyrazines"
+      ],
+      "parameters_supported": [
+        "polymerization_kinetics",
+        "covalent_binding",
+        "aroma_staling"
+      ],
+      "exact_numeric_anchors": [],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting",
+        "scientific_surface"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode myoglobin-MRP lipid oxidation protection prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "16.0",
+      "paper_id": "hofmann_2001_melanoidin_thioether",
+      "citation": "Hofmann et al. (2001)",
+      "doi": "10.1021/jf001302l",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "melanoidins",
+        "thiols",
+        "pyrazines"
+      ],
+      "parameters_supported": [
+        "polymerization_kinetics",
+        "covalent_binding",
+        "aroma_staling"
+      ],
+      "exact_numeric_anchors": [],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting",
+        "scientific_surface"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode irreversible melanoidin-thioether staling prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "16.0",
+      "paper_id": "martins_van_boekel_2005_ascorbic_amino_browning",
+      "citation": "Martins & van Boekel (2005)",
+      "doi": "10.1021/jf047903m",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "melanoidins",
+        "thiols",
+        "pyrazines"
+      ],
+      "parameters_supported": [
+        "polymerization_kinetics",
+        "covalent_binding",
+        "aroma_staling"
+      ],
+      "exact_numeric_anchors": [
+        "Ea histidine: 35.31 kJ/mol",
+        "Ea lysine: 54.94 kJ/mol"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting",
+        "scientific_surface"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode ascorbic-basic-amino browning prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "14.0",
+      "paper_id": "smuda_glomb_2013_aa_degradation_pathways",
+      "citation": "Smuda & Glomb (2013)",
+      "doi": "10.1002/anie.201300399",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "ascorbic_acid",
+        "dehydroascorbic_acid",
+        "CML",
+        "xylosone",
+        "threose"
+      ],
+      "parameters_supported": [
+        "degradation_kinetics",
+        "mass_balance",
+        "browning_activation_energy"
+      ],
+      "exact_numeric_anchors": [
+        "oxidative alpha-fragmentation: 31%",
+        "beta-cleavage: 32%"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/safety_reference_payloads.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting",
+        "scientific_surface"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode vitamin C degradation mass balance prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "14.0",
+      "paper_id": "serpen_gokmen_2007_ascorbic_redox_kinetics",
+      "citation": "Serpen & Gökmen (2007)",
+      "doi": "10.1016/j.foodchem.2006.11.073",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "ascorbic_acid",
+        "dehydroascorbic_acid",
+        "CML",
+        "xylosone",
+        "threose"
+      ],
+      "parameters_supported": [
+        "degradation_kinetics",
+        "mass_balance",
+        "browning_activation_energy"
+      ],
+      "exact_numeric_anchors": [
+        "copper acceleration: 88-fold",
+        "iron acceleration: 14-fold"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting",
+        "scientific_surface"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode metal-catalyzed ascorbic acid oxidation prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "14.0",
+      "paper_id": "yang_2021_ascorbic_glycine_kinetics",
+      "citation": "Yang et al. (2021)",
+      "doi": "10.47836/ifrj.28.3.16",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "ascorbic_acid",
+        "dehydroascorbic_acid",
+        "CML",
+        "xylosone",
+        "threose"
+      ],
+      "parameters_supported": [
+        "degradation_kinetics",
+        "mass_balance",
+        "browning_activation_energy"
+      ],
+      "exact_numeric_anchors": [
+        "Ea (4:1 AA:Gly): 60.76 kJ/mol",
+        "Ea (1:4 AA:Gly): 70.16 kJ/mol"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting",
+        "scientific_surface"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode AA-glycine browning activation energy prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "14.0",
+      "paper_id": "yu_2018_ascorbic_basic_amino_browning",
+      "citation": "Yu et al. (2018)",
+      "doi": "10.1590/1678-457x.08717",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "ascorbic_acid",
+        "dehydroascorbic_acid",
+        "CML",
+        "xylosone",
+        "threose"
+      ],
+      "parameters_supported": [
+        "degradation_kinetics",
+        "mass_balance",
+        "browning_activation_energy"
+      ],
+      "exact_numeric_anchors": [
+        "Ea lysine: 54.94 kJ/mol",
+        "Ea arginine: 50.08 kJ/mol",
+        "Ea histidine: 35.31 kJ/mol"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/safety_reference_payloads.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting",
+        "scientific_surface"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode basic amino acid AA-browning prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "14.0",
+      "paper_id": "manso_2001_orange_juice_ascorbic_degradation",
+      "citation": "Manso et al. (2001)",
+      "doi": "10.1046/j.1365-2621.2001.t01-1-00460.x",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "ascorbic_acid",
+        "dehydroascorbic_acid",
+        "CML",
+        "xylosone",
+        "threose"
+      ],
+      "parameters_supported": [
+        "degradation_kinetics",
+        "mass_balance",
+        "browning_activation_energy"
+      ],
+      "exact_numeric_anchors": [
+        "Ea degradation: 55.6 kJ/mol"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting",
+        "scientific_surface"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode orange juice ascorbic degradation Weibull prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "14.0",
+      "paper_id": "takase_2025_lemon_juice_ascorbic_dicarbonyl",
+      "citation": "Takase et al. (2025)",
+      "doi": "10.1021/acsfoodscitech.4c00956",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "ascorbic_acid",
+        "dehydroascorbic_acid",
+        "CML",
+        "xylosone",
+        "threose"
+      ],
+      "parameters_supported": [
+        "degradation_kinetics",
+        "mass_balance",
+        "browning_activation_energy"
+      ],
+      "exact_numeric_anchors": [],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting",
+        "scientific_surface"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode anaerobic DHAA degradation prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "14.0",
+      "paper_id": "hendrickx_1998_ascorbic_isobaric_degradation",
+      "citation": "Hendrickx et al. (1998)",
+      "doi": "10.1021/jf9708251",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "ascorbic_acid",
+        "dehydroascorbic_acid",
+        "CML",
+        "xylosone",
+        "threose"
+      ],
+      "parameters_supported": [
+        "degradation_kinetics",
+        "mass_balance",
+        "browning_activation_energy"
+      ],
+      "exact_numeric_anchors": [
+        "Ea degradation: 54.8 kJ/mol",
+        "D-value 121C: 246 min"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting",
+        "scientific_surface"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode squeezed tomato isobaric degradation prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "14.0",
+      "paper_id": "jian_2012_ascorbic_ethanolic_degradation",
+      "citation": "Jian et al. (2012)",
+      "doi": "10.1021/jf3032342",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "ascorbic_acid",
+        "dehydroascorbic_acid",
+        "CML",
+        "xylosone",
+        "threose"
+      ],
+      "parameters_supported": [
+        "degradation_kinetics",
+        "mass_balance",
+        "browning_activation_energy"
+      ],
+      "exact_numeric_anchors": [],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting",
+        "scientific_surface"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Encode ethanolic ascorbic degradation prior.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Surrogate literature transfer limits."
     }
   ]
 }

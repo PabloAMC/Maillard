@@ -561,20 +561,20 @@
       "status": "RUNTIME_BOUND",
       "occurrence_count": 1,
       "files": [
-        "01_amino_acid_sugar.md"
+        "07_reducing_sugars.md"
       ],
       "descriptions": [
         "Lys + glucose kinetics, Ea values for furosine/pyrraline via MGO and 3-DG pathways. First-order kinetics."
       ],
       "occurrences": [
         {
-          "file": "01_amino_acid_sugar.md",
+          "file": "07_reducing_sugars.md",
           "line": 606,
           "description": "Lys + glucose kinetics, Ea values for furosine/pyrraline via MGO and 3-DG pathways. First-order kinetics.",
           "raw_line": "1. `Martins & van Boekel (2003)` — Lys + glucose kinetics, Ea values for furosine/pyrraline via MGO and 3-DG pathways. First-order kinetics. 7/8."
         }
       ],
-      "registry_id": "martins_2003_lys_glucose_kinetics",
+      "registry_id": "martins_boekel_2003_dfg_amadori_degradation",
       "runtime_artifact_count": 1
     },
     {
@@ -4425,6 +4425,1278 @@
         }
       ],
       "registry_id": "li_2010_phytate_chelation_kinetics",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Tan et al. (2001)",
+      "doi": "10.1007/s11746-001-0402-y",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "02_lipid_oxidation_and_carbonylic_crosstalk.md"
+      ],
+      "descriptions": [
+        "Isothermal peroxide formation activation energy parameters derived via DSC."
+      ],
+      "occurrences": [
+        {
+          "file": "02_lipid_oxidation_and_carbonylic_crosstalk.md",
+          "line": 999,
+          "description": "Isothermal peroxide formation activation energy parameters derived via DSC.",
+          "raw_line": "1. `Tan et al. (2001)` — Bounded priors."
+        }
+      ],
+      "registry_id": "tan_2001_oil_dsc_oxidation",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Bayram et al. (2023)",
+      "doi": "10.3989/gya.1051211",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "02_lipid_oxidation_and_carbonylic_crosstalk.md"
+      ],
+      "descriptions": [
+        "Arrhenius hexanal kinetics modulated by antioxidants like ascorbyl palmitate (Ea 1.62 to 89.40 kJ/mol)."
+      ],
+      "occurrences": [
+        {
+          "file": "02_lipid_oxidation_and_carbonylic_crosstalk.md",
+          "line": 999,
+          "description": "Arrhenius hexanal kinetics modulated by antioxidants like ascorbyl palmitate (Ea 1.62 to 89.40 kJ/mol).",
+          "raw_line": "1. `Bayram et al. (2023)` — Bounded priors."
+        }
+      ],
+      "registry_id": "bayram_2023_stripped_soybean_oil_hexanal",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Spier et al. (2010)",
+      "doi": "10.1021/ef101678s",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "02_lipid_oxidation_and_carbonylic_crosstalk.md"
+      ],
+      "descriptions": [
+        "Apparent Ea for transition-metal catalyzed peroxide decomposition (11.0 to 26.0 kcal/mol)."
+      ],
+      "occurrences": [
+        {
+          "file": "02_lipid_oxidation_and_carbonylic_crosstalk.md",
+          "line": 999,
+          "description": "Apparent Ea for transition-metal catalyzed peroxide decomposition (11.0 to 26.0 kcal/mol).",
+          "raw_line": "1. `Spier et al. (2010)` — Bounded priors."
+        }
+      ],
+      "registry_id": "spier_2010_metal_naphthenate_peroxide_decomp",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Zha et al. (2020)",
+      "doi": "10.1021/acs.jafc.0c04281",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "06_alternative_proteins.md"
+      ],
+      "descriptions": [
+        "Pea protein isolate glycation aggregation kinetics and lysine blockage parameters."
+      ],
+      "occurrences": [
+        {
+          "file": "06_alternative_proteins.md",
+          "line": 999,
+          "description": "Pea protein isolate glycation aggregation kinetics and lysine blockage parameters.",
+          "raw_line": "1. `Zha et al. (2020)` — Bounded priors."
+        }
+      ],
+      "registry_id": "zha_2020_ppi_glycation_aggregation",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Kutzli et al. (2020)",
+      "doi": "10.1039/D0FO00292E",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "06_alternative_proteins.md"
+      ],
+      "descriptions": [
+        "Pseudo-first order glycation within electrospun pea protein-maltodextrin fibers under relative humidity control."
+      ],
+      "occurrences": [
+        {
+          "file": "06_alternative_proteins.md",
+          "line": 999,
+          "description": "Pseudo-first order glycation within electrospun pea protein-maltodextrin fibers under relative humidity control.",
+          "raw_line": "1. `Kutzli et al. (2020)` — Bounded priors."
+        }
+      ],
+      "registry_id": "kutzli_2020_pea_maltodextrin_electrospun_glycation",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Nguyen et al. (2025)",
+      "doi": "10.1016/j.foodchem.2025.146396",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "06_alternative_proteins.md"
+      ],
+      "descriptions": [
+        "Pea protein isolate physical barrier coefficients limiting microencapsulated oil self-oxidation."
+      ],
+      "occurrences": [
+        {
+          "file": "06_alternative_proteins.md",
+          "line": 999,
+          "description": "Pea protein isolate physical barrier coefficients limiting microencapsulated oil self-oxidation.",
+          "raw_line": "1. `Nguyen et al. (2025)` — Bounded priors."
+        }
+      ],
+      "registry_id": "nguyen_2025_ppi_microencapsulated_oil_stabilization",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Pereira et al. (2020)",
+      "doi": "10.3390/antiox9080756",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "06_alternative_proteins.md"
+      ],
+      "descriptions": [
+        "Transition metal coordination free energy calculations for Cu(II) and Fe(III) complexes (Cu-PM: -35.8 kcal/mol, Fe-PM: -58.9 kcal/mol)."
+      ],
+      "occurrences": [
+        {
+          "file": "06_alternative_proteins.md",
+          "line": 999,
+          "description": "Transition metal coordination free energy calculations for Cu(II) and Fe(III) complexes (Cu-PM: -35.8 kcal/mol, Fe-PM: -58.9 kcal/mol).",
+          "raw_line": "1. `Pereira et al. (2020)` — Bounded priors."
+        }
+      ],
+      "registry_id": "pereira_2020_metal_pm_haber_weiss_chelation",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Sun et al. (2020)",
+      "doi": "10.1016/j.meatsci.2020.108151",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "06_alternative_proteins.md"
+      ],
+      "descriptions": [
+        "Zero-order free CML (Ea = 44.158 kJ/mol) and free CEL (Ea = 40.971 kJ/mol) accumulation in a solid matrix during sterilization."
+      ],
+      "occurrences": [
+        {
+          "file": "06_alternative_proteins.md",
+          "line": 999,
+          "description": "Zero-order free CML (Ea = 44.158 kJ/mol) and free CEL (Ea = 40.971 kJ/mol) accumulation in a solid matrix during sterilization.",
+          "raw_line": "1. `Sun et al. (2020)` — Bounded priors."
+        }
+      ],
+      "registry_id": "sun_2020_solid_matrix_cml_cel_accumulation",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Shirai et al. (2015)",
+      "doi": "10.1021/acs.est.5b02902",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "06_alternative_proteins.md"
+      ],
+      "descriptions": [
+        "Diffusion-limited dityrosine formation modeling using kinetic multilayer surface/bulk approaches."
+      ],
+      "occurrences": [
+        {
+          "file": "06_alternative_proteins.md",
+          "line": 999,
+          "description": "Diffusion-limited dityrosine formation modeling using kinetic multilayer surface/bulk approaches.",
+          "raw_line": "1. `Shirai et al. (2015)` — Bounded priors."
+        }
+      ],
+      "registry_id": "shirai_2015_bsa_dityrosine_diffusion_limited",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Nashalian & Yaylayan (2014)",
+      "doi": "10.1021/acsomega.7b00321",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "07_reducing_sugars.md"
+      ],
+      "descriptions": [
+        "Copper-catalyzed enolization (rate k = 0.41 s-1) and decarboxylation kinetics in model systems."
+      ],
+      "occurrences": [
+        {
+          "file": "07_reducing_sugars.md",
+          "line": 999,
+          "description": "Copper-catalyzed enolization (rate k = 0.41 s-1) and decarboxylation kinetics in model systems.",
+          "raw_line": "1. `Nashalian & Yaylayan (2014)` — Bounded priors."
+        }
+      ],
+      "registry_id": "nashalian_yaylayan_2014_cu_catalyzed_strecker",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "de Bruijn et al. (1987)",
+      "doi": "10.1002/recl.19871060202",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "09_carbohydrate_pyrolysis.md"
+      ],
+      "descriptions": [
+        "Alkaline-driven retro-aldolization isomerization kinetics of hexose monosaccharides."
+      ],
+      "occurrences": [
+        {
+          "file": "09_carbohydrate_pyrolysis.md",
+          "line": 999,
+          "description": "Alkaline-driven retro-aldolization isomerization kinetics of hexose monosaccharides.",
+          "raw_line": "1. `de Bruijn et al. (1987)` — Bounded priors."
+        }
+      ],
+      "registry_id": "de_bruijn_1987_monosaccharide_alkaline_degradation",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Luna & Aguilera (2014)",
+      "doi": "10.1016/j.jfoodeng.2014.06.032",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "09_carbohydrate_pyrolysis.md"
+      ],
+      "descriptions": [
+        "Arrhenius activation energies for color development in caramelizing molten hexose systems."
+      ],
+      "occurrences": [
+        {
+          "file": "09_carbohydrate_pyrolysis.md",
+          "line": 999,
+          "description": "Arrhenius activation energies for color development in caramelizing molten hexose systems.",
+          "raw_line": "1. `Luna & Aguilera (2014)` — Bounded priors."
+        }
+      ],
+      "registry_id": "luna_aguilera_2014_molten_sugar_color_kinetics",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Bao et al. (2022)",
+      "doi": "10.1021/acs.jafc.2c03427",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "09_carbohydrate_pyrolysis.md"
+      ],
+      "descriptions": [
+        "Glycylglycine catalytic cleavage of Amadori products and 3-deoxyosone accumulation at 120 C."
+      ],
+      "occurrences": [
+        {
+          "file": "09_carbohydrate_pyrolysis.md",
+          "line": 999,
+          "description": "Glycylglycine catalytic cleavage of Amadori products and 3-deoxyosone accumulation at 120 C.",
+          "raw_line": "1. `Bao et al. (2022)` — Bounded priors."
+        }
+      ],
+      "registry_id": "bao_2022_xylose_glycylglycine_3_deoxyosone_cleavage",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Hidalgo et al. (2007)",
+      "doi": "10.1021/jf070527w",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "11_maillard_lipid_crosstalk.md"
+      ],
+      "descriptions": [
+        "Phenylalanine degradation kinetics by 2,4-decadienal to yield styrene (Ea = 150.4 kJ/mol)."
+      ],
+      "occurrences": [
+        {
+          "file": "11_maillard_lipid_crosstalk.md",
+          "line": 999,
+          "description": "Phenylalanine degradation kinetics by 2,4-decadienal to yield styrene (Ea = 150.4 kJ/mol).",
+          "raw_line": "1. `Hidalgo et al. (2007)` — Bounded priors."
+        }
+      ],
+      "registry_id": "hidalgo_2007_decadienal_phenylalanine_styrene",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Zamora et al. (2010)",
+      "doi": "10.1021/jf102026c",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "11_maillard_lipid_crosstalk.md"
+      ],
+      "descriptions": [
+        "Decarboxylation kinetics of asparagine in O/W emulsion in the presence of decadienal (Ea = 81.0 kJ/mol)."
+      ],
+      "occurrences": [
+        {
+          "file": "11_maillard_lipid_crosstalk.md",
+          "line": 999,
+          "description": "Decarboxylation kinetics of asparagine in O/W emulsion in the presence of decadienal (Ea = 81.0 kJ/mol).",
+          "raw_line": "1. `Zamora et al. (2010)` — Bounded priors."
+        }
+      ],
+      "registry_id": "zamora_2010_decadienal_asparagine_decarboxylation",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Ding et al. (2020)",
+      "doi": "10.1021/acs.jafc.0c04738",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "11_maillard_lipid_crosstalk.md"
+      ],
+      "descriptions": [
+        "Emulsion Tween-20 micellar rates where reverse Schiff base and Amadori constants are 10^3 times forward constants."
+      ],
+      "occurrences": [
+        {
+          "file": "11_maillard_lipid_crosstalk.md",
+          "line": 999,
+          "description": "Emulsion Tween-20 micellar rates where reverse Schiff base and Amadori constants are 10^3 times forward constants.",
+          "raw_line": "1. `Ding et al. (2020)` — Bounded priors."
+        }
+      ],
+      "registry_id": "ding_2020_schiff_base_amadori_emulsion_rates",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Richards et al. (2009)",
+      "doi": "10.1021/jf9013394",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "11_maillard_lipid_crosstalk.md"
+      ],
+      "descriptions": [
+        "Michaelis-Menten kinetic parameters for cod and bovine hemoglobin-induced lipid oxidation in liposomes."
+      ],
+      "occurrences": [
+        {
+          "file": "11_maillard_lipid_crosstalk.md",
+          "line": 999,
+          "description": "Michaelis-Menten kinetic parameters for cod and bovine hemoglobin-induced lipid oxidation in liposomes.",
+          "raw_line": "1. `Richards et al. (2009)` — Bounded priors."
+        }
+      ],
+      "registry_id": "richards_2009_hemoglobin_liposome_oxidation",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Smagghe et al. (2006)",
+      "doi": "10.1021/bi051902l",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "11_maillard_lipid_crosstalk.md"
+      ],
+      "descriptions": [
+        "Recombinant soy leghemoglobin autoxidation and oxygen dissociation kinetics (rate constant = 5.6 s-1)."
+      ],
+      "occurrences": [
+        {
+          "file": "11_maillard_lipid_crosstalk.md",
+          "line": 999,
+          "description": "Recombinant soy leghemoglobin autoxidation and oxygen dissociation kinetics (rate constant = 5.6 s-1).",
+          "raw_line": "1. `Smagghe et al. (2006)` — Bounded priors."
+        }
+      ],
+      "registry_id": "smagghe_2006_leghemoglobin_oxygen_dissociation",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Urugo et al. (2024)",
+      "doi": "10.3390/foods14193295",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "12_protein_damage_markers.md"
+      ],
+      "descriptions": [
+        "Quantitation and extraction profile of 10 HCA variants in soy and almond milk beverages."
+      ],
+      "occurrences": [
+        {
+          "file": "12_protein_damage_markers.md",
+          "line": 999,
+          "description": "Quantitation and extraction profile of 10 HCA variants in soy and almond milk beverages.",
+          "raw_line": "1. `Urugo et al. (2024)` — Bounded priors."
+        }
+      ],
+      "registry_id": "urugo_2024_plant_milk_hca_quantification",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Chen et al. (2016)",
+      "doi": "10.1007/s10068-016-0185-5",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "12_protein_damage_markers.md"
+      ],
+      "descriptions": [
+        "Zero-order CML and CEL formation rates during high-moisture sterilization accelerated 4x by glucose doping."
+      ],
+      "occurrences": [
+        {
+          "file": "12_protein_damage_markers.md",
+          "line": 999,
+          "description": "Zero-order CML and CEL formation rates during high-moisture sterilization accelerated 4x by glucose doping.",
+          "raw_line": "1. `Chen et al. (2016)` — Bounded priors."
+        }
+      ],
+      "registry_id": "chen_2016_carbohydrate_meat_cml_cel_sterilization",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Pruteanu et al. (2023)",
+      "doi": "10.1016/j.lwt.2024.117316",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "12_protein_damage_markers.md"
+      ],
+      "descriptions": [
+        "Apparent Arrhenius activation energy comparison for glucose/glycine (Ea = 109 kJ/mol) and glucose/phenylalanine (Ea = 145 kJ/mol)."
+      ],
+      "occurrences": [
+        {
+          "file": "12_protein_damage_markers.md",
+          "line": 999,
+          "description": "Apparent Arrhenius activation energy comparison for glucose/glycine (Ea = 109 kJ/mol) and glucose/phenylalanine (Ea = 145 kJ/mol).",
+          "raw_line": "1. `Pruteanu et al. (2023)` — Bounded priors."
+        }
+      ],
+      "registry_id": "pruteanu_2023_glucose_phe_arrhenius_browning",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Zhu H. et al. (2020)",
+      "doi": "10.1021/acs.jafc.0c01761",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "13_polyphenol_amino_capping.md"
+      ],
+      "descriptions": [
+        "Second-order epicatechin methylglyoxal (k = 1.6 M-1 s-1) and glyoxal (k = 0.059 M-1 s-1) trapping in stored milk models."
+      ],
+      "occurrences": [
+        {
+          "file": "13_polyphenol_amino_capping.md",
+          "line": 999,
+          "description": "Second-order epicatechin methylglyoxal (k = 1.6 M-1 s-1) and glyoxal (k = 0.059 M-1 s-1) trapping in stored milk models.",
+          "raw_line": "1. `Zhu H. et al. (2020)` — Bounded priors."
+        }
+      ],
+      "registry_id": "zhu_2020_epicatechin_mgo_go_scavenging",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Zhu H. et al. (2020b)",
+      "doi": "10.1016/j.foodchem.2020.126500",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "13_polyphenol_amino_capping.md"
+      ],
+      "descriptions": [
+        "Structure-dependent MGO trapping kinetics for kaempferol (k = 0.063 M-1 s-1) and resveratrol (k = 0.027 M-1 s-1)."
+      ],
+      "occurrences": [
+        {
+          "file": "13_polyphenol_amino_capping.md",
+          "line": 999,
+          "description": "Structure-dependent MGO trapping kinetics for kaempferol (k = 0.063 M-1 s-1) and resveratrol (k = 0.027 M-1 s-1).",
+          "raw_line": "1. `Zhu H. et al. (2020b)` — Bounded priors."
+        }
+      ],
+      "registry_id": "zhu_2020_polyphenol_mgo_structure_kinetics",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Liu J. et al. (2023)",
+      "doi": "10.1016/j.foodres.2022.112187",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "13_polyphenol_amino_capping.md"
+      ],
+      "descriptions": [
+        "Second-order 4-methylbenzoquinone-lysine conjugation kinetics (Ea = 19.00 kJ/mol)."
+      ],
+      "occurrences": [
+        {
+          "file": "13_polyphenol_amino_capping.md",
+          "line": 999,
+          "description": "Second-order 4-methylbenzoquinone-lysine conjugation kinetics (Ea = 19.00 kJ/mol).",
+          "raw_line": "1. `Liu J. et al. (2023)` — Bounded priors."
+        }
+      ],
+      "registry_id": "liu_2023_benzoquinone_lysine_kinetics",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Cömert & Gökmen (2019)",
+      "doi": "10.1016/j.foodres.2019.03.046",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "13_polyphenol_amino_capping.md"
+      ],
+      "descriptions": [
+        "Methylglyoxal scavenging kinetics under simulated gastrointestinal digestion fluid (egg-MGO rate k = 26.6 L/mol/min)."
+      ],
+      "occurrences": [
+        {
+          "file": "13_polyphenol_amino_capping.md",
+          "line": 999,
+          "description": "Methylglyoxal scavenging kinetics under simulated gastrointestinal digestion fluid (egg-MGO rate k = 26.6 L/mol/min).",
+          "raw_line": "1. `Cömert & Gökmen (2019)` — Bounded priors."
+        }
+      ],
+      "registry_id": "comert_gokmen_2019_digestive_mgo_scavenging",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Munoz et al. (2007)",
+      "doi": "10.1021/jf062081+",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "13_polyphenol_amino_capping.md"
+      ],
+      "descriptions": [
+        "Chlorogenic acid enzymatically oxidized to o-quinone reacting with substrate (k = 2.73 M-1 s-1)."
+      ],
+      "occurrences": [
+        {
+          "file": "13_polyphenol_amino_capping.md",
+          "line": 999,
+          "description": "Chlorogenic acid enzymatically oxidized to o-quinone reacting with substrate (k = 2.73 M-1 s-1).",
+          "raw_line": "1. `Munoz et al. (2007)` — Bounded priors."
+        }
+      ],
+      "registry_id": "munoz_2007_chlorogenic_oxidase_quinone",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Cömert & Gökmen (2021)",
+      "doi": "10.1016/j.foodchem.2020.128670",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "13_polyphenol_amino_capping.md"
+      ],
+      "descriptions": [
+        "Synergistic rate augmentation between epicatechin and cysteine in trapping methylglyoxal."
+      ],
+      "occurrences": [
+        {
+          "file": "13_polyphenol_amino_capping.md",
+          "line": 999,
+          "description": "Synergistic rate augmentation between epicatechin and cysteine in trapping methylglyoxal.",
+          "raw_line": "1. `Cömert & Gökmen (2021)` — Bounded priors."
+        }
+      ],
+      "registry_id": "comert_gokmen_2021_epicatechin_cysteine_mgo_synergy",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Song et al. (2009)",
+      "doi": "10.1073/pnas.0810352106",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "13_polyphenol_amino_capping.md"
+      ],
+      "descriptions": [
+        "Benzoquinone conjugation with GSH rate parameters (forward k = 1547 M-1 s-1, reverse Ea = 11.2 kcal/mol)."
+      ],
+      "occurrences": [
+        {
+          "file": "13_polyphenol_amino_capping.md",
+          "line": 999,
+          "description": "Benzoquinone conjugation with GSH rate parameters (forward k = 1547 M-1 s-1, reverse Ea = 11.2 kcal/mol).",
+          "raw_line": "1. `Song et al. (2009)` — Bounded priors."
+        }
+      ],
+      "registry_id": "song_2009_benzoquinone_gsh_conjugation",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Li et al. (2017)",
+      "doi": "10.1021/acs.jafc.6b05811",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "13_polyphenol_amino_capping.md"
+      ],
+      "descriptions": [
+        "Quercetin-MGO dicarbonyl trapping kinetics mitigating browning in lysine/glucose Maillard models."
+      ],
+      "occurrences": [
+        {
+          "file": "13_polyphenol_amino_capping.md",
+          "line": 999,
+          "description": "Quercetin-MGO dicarbonyl trapping kinetics mitigating browning in lysine/glucose Maillard models.",
+          "raw_line": "1. `Li et al. (2017)` — Bounded priors."
+        }
+      ],
+      "registry_id": "li_2017_quercetin_mgo_adduct_browning_mitigation",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Monforte et al. (2018)",
+      "doi": "10.1021/acs.jafc.7b00264",
+      "score": "7/8",
+      "score_value": 7,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "13_polyphenol_amino_capping.md"
+      ],
+      "descriptions": [
+        "Phenylacetaldehyde formation activation energy catalyzed by hydroquinone (Ea = 32.9 kJ/mol) or trihydroxybenzene (Ea = 31.5 kJ/mol)."
+      ],
+      "occurrences": [
+        {
+          "file": "13_polyphenol_amino_capping.md",
+          "line": 999,
+          "description": "Phenylacetaldehyde formation activation energy catalyzed by hydroquinone (Ea = 32.9 kJ/mol) or trihydroxybenzene (Ea = 31.5 kJ/mol).",
+          "raw_line": "1. `Monforte et al. (2018)` — Bounded priors."
+        }
+      ],
+      "registry_id": "monforte_2018_phenylacetaldehyde_quinones",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Solís-Calero et al. (2015)",
+      "doi": "10.1039/C4CP05360E",
+      "score": "5/8",
+      "score_value": 5,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "slr_family_15_phospholipid_amine_sink.md"
+      ],
+      "descriptions": [
+        "Kinetic dehydration barrier reduction (by 5.3 kcal/mol / 22.2 kJ/mol vs free L-lysine) on organized PE surface during CM-PE formation."
+      ],
+      "occurrences": [
+        {
+          "file": "slr_family_15_phospholipid_amine_sink.md",
+          "line": 999,
+          "description": "Kinetic dehydration barrier reduction (by 5.3 kcal/mol / 22.2 kJ/mol vs free L-lysine) on organized PE surface during CM-PE formation.",
+          "raw_line": "1. `Solís-Calero et al. (2015)` — Bounded priors."
+        }
+      ],
+      "registry_id": "solis_calero_2015_pe_glyoxal",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Solís-Calero et al. (2013)",
+      "doi": "10.1021/jp401488j",
+      "score": "5/8",
+      "score_value": 5,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "slr_family_15_phospholipid_amine_sink.md"
+      ],
+      "descriptions": [
+        "Catalytic reduction of the initial sugar-PE condensation barrier to 8.76 kcal/mol (36.7 kJ/mol), with subsequent 1,2-enaminol formation at 16.78 kcal/mol (70.2 kJ/mol)."
+      ],
+      "occurrences": [
+        {
+          "file": "slr_family_15_phospholipid_amine_sink.md",
+          "line": 999,
+          "description": "Catalytic reduction of the initial sugar-PE condensation barrier to 8.76 kcal/mol (36.7 kJ/mol), with subsequent 1,2-enaminol formation at 16.78 kcal/mol (70.2 kJ/mol).",
+          "raw_line": "1. `Solís-Calero et al. (2013)` — Bounded priors."
+        }
+      ],
+      "registry_id": "solis_calero_2013_pe_amadori",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Lertsiri et al. (1998)",
+      "doi": "10.1271/bbb.62.893",
+      "score": "5/8",
+      "score_value": 5,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "slr_family_15_phospholipid_amine_sink.md"
+      ],
+      "descriptions": [
+        "Pseudo-first-order accumulation of Amadori-PE under excess glucose, with physiological accumulation rates of 0.05 to 0.12 mol%."
+      ],
+      "occurrences": [
+        {
+          "file": "slr_family_15_phospholipid_amine_sink.md",
+          "line": 999,
+          "description": "Pseudo-first-order accumulation of Amadori-PE under excess glucose, with physiological accumulation rates of 0.05 to 0.12 mol%.",
+          "raw_line": "1. `Lertsiri et al. (1998)` — Bounded priors."
+        }
+      ],
+      "registry_id": "lertsiri_1998_pe_glycation",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Hidalgo et al. (2005)",
+      "doi": "10.1007/s00217-004-1065-x",
+      "score": "5/8",
+      "score_value": 5,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "slr_family_15_phospholipid_amine_sink.md"
+      ],
+      "descriptions": [
+        "Global activation energy for non-enzymatic browning (66.5 kJ/mol) and advanced fluorescence development (50.0 kJ/mol) in lipid/amine systems."
+      ],
+      "occurrences": [
+        {
+          "file": "slr_family_15_phospholipid_amine_sink.md",
+          "line": 999,
+          "description": "Global activation energy for non-enzymatic browning (66.5 kJ/mol) and advanced fluorescence development (50.0 kJ/mol) in lipid/amine systems.",
+          "raw_line": "1. `Hidalgo et al. (2005)` — Bounded priors."
+        }
+      ],
+      "registry_id": "hidalgo_2005_pe_ribose_lysine",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Zamora et al. (2020)",
+      "doi": "10.3390/molecules25020373",
+      "score": "5/8",
+      "score_value": 5,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "slr_family_15_phospholipid_amine_sink.md"
+      ],
+      "descriptions": [
+        "Secondary radical scavenging capacity increase of 85.1% via 2-pentyl-3,5-dibutyl-dihydropyridine adduct formation in soybean oil emulsions."
+      ],
+      "occurrences": [
+        {
+          "file": "slr_family_15_phospholipid_amine_sink.md",
+          "line": 999,
+          "description": "Secondary radical scavenging capacity increase of 85.1% via 2-pentyl-3,5-dibutyl-dihydropyridine adduct formation in soybean oil emulsions.",
+          "raw_line": "1. `Zamora et al. (2020)` — Bounded priors."
+        }
+      ],
+      "registry_id": "zamora_2020_pe_dihydropyridine",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Hidalgo et al. (2006)",
+      "doi": "10.1021/jf060848s",
+      "score": "5/8",
+      "score_value": 5,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "slr_family_15_phospholipid_amine_sink.md"
+      ],
+      "descriptions": [
+        "Synergistic 185% increase in oxidative induction period utilizing 300 ppm PE and 100 ppm lysine, illustrating polar paradox kinetics."
+      ],
+      "occurrences": [
+        {
+          "file": "slr_family_15_phospholipid_amine_sink.md",
+          "line": 999,
+          "description": "Synergistic 185% increase in oxidative induction period utilizing 300 ppm PE and 100 ppm lysine, illustrating polar paradox kinetics.",
+          "raw_line": "1. `Hidalgo et al. (2006)` — Bounded priors."
+        }
+      ],
+      "registry_id": "hidalgo_2006_pe_lysine_antioxidant",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Vilanova et al. (2012)",
+      "doi": "10.1021/jp2116033",
+      "score": "5/8",
+      "score_value": 5,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "slr_family_15_phospholipid_amine_sink.md"
+      ],
+      "descriptions": [
+        "Second-order rates and dehydration barrier evaluation of 13.08 kcal/mol (54.7 kJ/mol) for Schiff base formation."
+      ],
+      "occurrences": [
+        {
+          "file": "slr_family_15_phospholipid_amine_sink.md",
+          "line": 999,
+          "description": "Second-order rates and dehydration barrier evaluation of 13.08 kcal/mol (54.7 kJ/mol) for Schiff base formation.",
+          "raw_line": "1. `Vilanova et al. (2012)` — Bounded priors."
+        }
+      ],
+      "registry_id": "vilanova_2012_pe_schiff_base",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Biondi et al. (2010)",
+      "doi": "10.1016/j.lwt.2010.02.016",
+      "score": "5/8",
+      "score_value": 5,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "slr_family_15_phospholipid_amine_sink.md"
+      ],
+      "descriptions": [
+        "Microwave thermal-stress degradation rates of vegetable oils correlated with volatile hexanal accumulation and diene formation."
+      ],
+      "occurrences": [
+        {
+          "file": "slr_family_15_phospholipid_amine_sink.md",
+          "line": 999,
+          "description": "Microwave thermal-stress degradation rates of vegetable oils correlated with volatile hexanal accumulation and diene formation.",
+          "raw_line": "1. `Biondi et al. (2010)` — Bounded priors."
+        }
+      ],
+      "registry_id": "biondi_2010_oil_microwave_degradation",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Brands et al. (2002)",
+      "doi": "10.1021/jf010789c",
+      "score": "5/8",
+      "score_value": 5,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "slr_family_16_melanoidin_polymerization.md"
+      ],
+      "descriptions": [
+        "Zero-order terminal polymerization kinetics (k = 1.14 h-1, Ea = 128 kJ/mol) and molar extinction coefficients for casein-sugar systems."
+      ],
+      "occurrences": [
+        {
+          "file": "slr_family_16_melanoidin_polymerization.md",
+          "line": 999,
+          "description": "Zero-order terminal polymerization kinetics (k = 1.14 h-1, Ea = 128 kJ/mol) and molar extinction coefficients for casein-sugar systems.",
+          "raw_line": "1. `Brands et al. (2002)` — Bounded priors."
+        }
+      ],
+      "registry_id": "brands_2002_casein_sugar_melanoidin",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Gigl et al. (2021)",
+      "doi": "10.1021/acs.jafc.1c06163",
+      "score": "5/8",
+      "score_value": 5,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "slr_family_16_melanoidin_polymerization.md"
+      ],
+      "descriptions": [
+        "Covalent trapping of volatile thiols (FWHM line broadening of 2.14 Hz, ~50% loss in 20 min) by coffee melanoidins."
+      ],
+      "occurrences": [
+        {
+          "file": "slr_family_16_melanoidin_polymerization.md",
+          "line": 999,
+          "description": "Covalent trapping of volatile thiols (FWHM line broadening of 2.14 Hz, ~50% loss in 20 min) by coffee melanoidins.",
+          "raw_line": "1. `Gigl et al. (2021)` — Bounded priors."
+        }
+      ],
+      "registry_id": "gigl_2021_coffee_thiol_binding",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Suzuki & Philp (1990)",
+      "doi": "10.1016/0146-6380(90)90162-s",
+      "score": "5/8",
+      "score_value": 5,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "slr_family_16_melanoidin_polymerization.md"
+      ],
+      "descriptions": [
+        "Zero-order accumulation of sulfur-incorporated high-molecular-weight melanoidin precipitates in the presence of hydrogen sulfide."
+      ],
+      "occurrences": [
+        {
+          "file": "slr_family_16_melanoidin_polymerization.md",
+          "line": 999,
+          "description": "Zero-order accumulation of sulfur-incorporated high-molecular-weight melanoidin precipitates in the presence of hydrogen sulfide.",
+          "raw_line": "1. `Suzuki & Philp (1990)` — Bounded priors."
+        }
+      ],
+      "registry_id": "suzuki_philp_1990_sulfur_melanoidin",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Mundt & Wedzicha (2007)",
+      "doi": "10.1016/j.lwt.2006.07.014",
+      "score": "5/8",
+      "score_value": 5,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "slr_family_16_melanoidin_polymerization.md"
+      ],
+      "descriptions": [
+        "First-order surface browning rate (Ea = 105 kJ/mol) independent of water activity (Aw 0.04-0.4) during dough baking."
+      ],
+      "occurrences": [
+        {
+          "file": "slr_family_16_melanoidin_polymerization.md",
+          "line": 999,
+          "description": "First-order surface browning rate (Ea = 105 kJ/mol) independent of water activity (Aw 0.04-0.4) during dough baking.",
+          "raw_line": "1. `Mundt & Wedzicha (2007)` — Bounded priors."
+        }
+      ],
+      "registry_id": "mundt_wedzicha_2007_biscuit_browning",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Cao et al. (2024)",
+      "doi": "10.1111/1750-3841.17378",
+      "score": "5/8",
+      "score_value": 5,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "slr_family_16_melanoidin_polymerization.md"
+      ],
+      "descriptions": [
+        "Melanoidins (1% MRPs) inhibit lipid oxidation secondary metabolites by 68.19% and protect myoglobin stability by reducing aggregation by 36.95%."
+      ],
+      "occurrences": [
+        {
+          "file": "slr_family_16_melanoidin_polymerization.md",
+          "line": 999,
+          "description": "Melanoidins (1% MRPs) inhibit lipid oxidation secondary metabolites by 68.19% and protect myoglobin stability by reducing aggregation by 36.95%.",
+          "raw_line": "1. `Cao et al. (2024)` — Bounded priors."
+        }
+      ],
+      "registry_id": "cao_2024_carp_myoglobin_mrp",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Hofmann et al. (2001)",
+      "doi": "10.1021/jf001302l",
+      "score": "5/8",
+      "score_value": 5,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "slr_family_16_melanoidin_polymerization.md"
+      ],
+      "descriptions": [
+        "Irreversible covalent thioether formation of volatile thiols (FWHM >90% loss in 30 min) directly into coffee melanoidins."
+      ],
+      "occurrences": [
+        {
+          "file": "slr_family_16_melanoidin_polymerization.md",
+          "line": 999,
+          "description": "Irreversible covalent thioether formation of volatile thiols (FWHM >90% loss in 30 min) directly into coffee melanoidins.",
+          "raw_line": "1. `Hofmann et al. (2001)` — Bounded priors."
+        }
+      ],
+      "registry_id": "hofmann_2001_melanoidin_thioether",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Martins & van Boekel (2005)",
+      "doi": "10.1021/jf047903m",
+      "score": "5/8",
+      "score_value": 5,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "slr_family_16_melanoidin_polymerization.md"
+      ],
+      "descriptions": [
+        "Browning product (A420) formation rate activation energies for ascorbic acid systems with basic amino acids (Ea = 35.31 kJ/mol for histidine, 54.94 kJ/mol for lysine)."
+      ],
+      "occurrences": [
+        {
+          "file": "slr_family_16_melanoidin_polymerization.md",
+          "line": 999,
+          "description": "Browning product (A420) formation rate activation energies for ascorbic acid systems with basic amino acids (Ea = 35.31 kJ/mol for histidine, 54.94 kJ/mol for lysine).",
+          "raw_line": "1. `Martins & van Boekel (2005)` — Bounded priors."
+        }
+      ],
+      "registry_id": "martins_van_boekel_2005_ascorbic_amino_browning",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Smuda & Glomb (2013)",
+      "doi": "10.1002/anie.201300399",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "slr_family_14_ascorbic_acid_maillard.md"
+      ],
+      "descriptions": [
+        "Degradation mass balance of vitamin C (75% accounted for) producing CML (carboxymethyl-lysine) via threose and xylosone intermediates."
+      ],
+      "occurrences": [
+        {
+          "file": "slr_family_14_ascorbic_acid_maillard.md",
+          "line": 999,
+          "description": "Degradation mass balance of vitamin C (75% accounted for) producing CML (carboxymethyl-lysine) via threose and xylosone intermediates.",
+          "raw_line": "1. `Smuda & Glomb (2013)` — Bounded priors."
+        }
+      ],
+      "registry_id": "smuda_glomb_2013_aa_degradation_pathways",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Serpen & Gökmen (2007)",
+      "doi": "10.1016/j.foodchem.2006.11.073",
+      "score": "5/8",
+      "score_value": 5,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "slr_family_14_ascorbic_acid_maillard.md"
+      ],
+      "descriptions": [
+        "Reversible first-order consecutive degradation kinetics of ascorbic acid, showing 88-fold copper and 14-fold iron catalytic acceleration."
+      ],
+      "occurrences": [
+        {
+          "file": "slr_family_14_ascorbic_acid_maillard.md",
+          "line": 999,
+          "description": "Reversible first-order consecutive degradation kinetics of ascorbic acid, showing 88-fold copper and 14-fold iron catalytic acceleration.",
+          "raw_line": "1. `Serpen & Gökmen (2007)` — Bounded priors."
+        }
+      ],
+      "registry_id": "serpen_gokmen_2007_ascorbic_redox_kinetics",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Yang et al. (2021)",
+      "doi": "10.47836/ifrj.28.3.16",
+      "score": "5/8",
+      "score_value": 5,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "slr_family_14_ascorbic_acid_maillard.md"
+      ],
+      "descriptions": [
+        "Pseudo-first-order non-enzymatic browning kinetics between AA and glycine (Ea = 60.76 kJ/mol at 4:1 AA:Gly, 70.16 kJ/mol at 1:4 AA:Gly)."
+      ],
+      "occurrences": [
+        {
+          "file": "slr_family_14_ascorbic_acid_maillard.md",
+          "line": 999,
+          "description": "Pseudo-first-order non-enzymatic browning kinetics between AA and glycine (Ea = 60.76 kJ/mol at 4:1 AA:Gly, 70.16 kJ/mol at 1:4 AA:Gly).",
+          "raw_line": "1. `Yang et al. (2021)` — Bounded priors."
+        }
+      ],
+      "registry_id": "yang_2021_ascorbic_glycine_kinetics",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Yu et al. (2018)",
+      "doi": "10.1590/1678-457x.08717",
+      "score": "6/8",
+      "score_value": 6,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "slr_family_14_ascorbic_acid_maillard.md"
+      ],
+      "descriptions": [
+        "Zero-order macroscopic browning kinetics of AA with basic amino acids, with lysine producing the fastest rate despite a higher Ea of 54.94 kJ/mol."
+      ],
+      "occurrences": [
+        {
+          "file": "slr_family_14_ascorbic_acid_maillard.md",
+          "line": 999,
+          "description": "Zero-order macroscopic browning kinetics of AA with basic amino acids, with lysine producing the fastest rate despite a higher Ea of 54.94 kJ/mol.",
+          "raw_line": "1. `Yu et al. (2018)` — Bounded priors."
+        }
+      ],
+      "registry_id": "yu_2018_ascorbic_basic_amino_browning",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Manso et al. (2001)",
+      "doi": "10.1046/j.1365-2621.2001.t01-1-00460.x",
+      "score": "5/8",
+      "score_value": 5,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "slr_family_14_ascorbic_acid_maillard.md"
+      ],
+      "descriptions": [
+        "Weibullian degradation kinetics of ascorbic acid in orange juice (Ea = 55.6 kJ/mol) under aerobic storage conditions."
+      ],
+      "occurrences": [
+        {
+          "file": "slr_family_14_ascorbic_acid_maillard.md",
+          "line": 999,
+          "description": "Weibullian degradation kinetics of ascorbic acid in orange juice (Ea = 55.6 kJ/mol) under aerobic storage conditions.",
+          "raw_line": "1. `Manso et al. (2001)` — Bounded priors."
+        }
+      ],
+      "registry_id": "manso_2001_orange_juice_ascorbic_degradation",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Takase et al. (2025)",
+      "doi": "10.1021/acsfoodscitech.4c00956",
+      "score": "5/8",
+      "score_value": 5,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "slr_family_14_ascorbic_acid_maillard.md"
+      ],
+      "descriptions": [
+        "Anaerobic degradation pathway of dehydroascorbic acid to xylosone and threosone in lemon juice under oxygen-excluded conditions."
+      ],
+      "occurrences": [
+        {
+          "file": "slr_family_14_ascorbic_acid_maillard.md",
+          "line": 999,
+          "description": "Anaerobic degradation pathway of dehydroascorbic acid to xylosone and threosone in lemon juice under oxygen-excluded conditions.",
+          "raw_line": "1. `Takase et al. (2025)` — Bounded priors."
+        }
+      ],
+      "registry_id": "takase_2025_lemon_juice_ascorbic_dicarbonyl",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Hendrickx et al. (1998)",
+      "doi": "10.1021/jf9708251",
+      "score": "5/8",
+      "score_value": 5,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "slr_family_14_ascorbic_acid_maillard.md"
+      ],
+      "descriptions": [
+        "Isobaric-isothermal degradation kinetics of L-ascorbic acid, yielding a D-value at 121C of 246 min, z-value of 27.15C, and Ea of 54.8 kJ/mol."
+      ],
+      "occurrences": [
+        {
+          "file": "slr_family_14_ascorbic_acid_maillard.md",
+          "line": 999,
+          "description": "Isobaric-isothermal degradation kinetics of L-ascorbic acid, yielding a D-value at 121C of 246 min, z-value of 27.15C, and Ea of 54.8 kJ/mol.",
+          "raw_line": "1. `Hendrickx et al. (1998)` — Bounded priors."
+        }
+      ],
+      "registry_id": "hendrickx_1998_ascorbic_isobaric_degradation",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "Jian et al. (2012)",
+      "doi": "10.1021/jf3032342",
+      "score": "5/8",
+      "score_value": 5,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "slr_family_14_ascorbic_acid_maillard.md"
+      ],
+      "descriptions": [
+        "Ascorbic acid degradation kinetics in ethanolic solutions, where lower water activity accelerates L-xylosone dehydration (Ea = 43.3 to 96.6 kJ/mol)."
+      ],
+      "occurrences": [
+        {
+          "file": "slr_family_14_ascorbic_acid_maillard.md",
+          "line": 999,
+          "description": "Ascorbic acid degradation kinetics in ethanolic solutions, where lower water activity accelerates L-xylosone dehydration (Ea = 43.3 to 96.6 kJ/mol).",
+          "raw_line": "1. `Jian et al. (2012)` — Bounded priors."
+        }
+      ],
+      "registry_id": "jian_2012_ascorbic_ethanolic_degradation",
       "runtime_artifact_count": 1
     }
   ]

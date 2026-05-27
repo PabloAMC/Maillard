@@ -344,6 +344,25 @@
       "supporting_families": [
         "12"
       ]
+    },
+    "phospholipid_amine_sink_priors": {
+      "chemistry_family": "phospholipid_amine_sink",
+      "slr_family_source": "15",
+      "payload_role": "computational_prior",
+      "observable_panel_tags": [
+        "phospholipid_amine_sink",
+        "surface_catalysis",
+        "polar_paradox"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "02",
+        "15"
+      ]
     }
   },
   "accessibility_windows": [
@@ -834,6 +853,68 @@
       "effect_direction": "suppress_strecker_and_moderate_oxidative_crosstalk",
       "summary": "Glucose plus lipid plus polyphenol systems in SPI/PPI can suppress Strecker aldehydes through alpha-dicarbonyl competition while altering post-heating oxidative stability.",
       "notes": "Directional prior only; full quantitative volatile units and internal-standard details remain unresolved in the repo."
+    },
+    {
+      "id": "hidalgo_2007_decadienal_phenylalanine_styrene",
+      "source": "Hidalgo et al. (2007)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3,
+        "Ea_styrene_formation_kj_mol": 150.4
+      },
+      "notes": "Phenylalanine degradation kinetics by 2,4-decadienal to yield styrene (Ea = 150.4 kJ/mol)."
+    },
+    {
+      "id": "zamora_2010_decadienal_asparagine_decarboxylation",
+      "source": "Zamora et al. (2010)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3,
+        "Ea_asparagine_decarboxylation_kj_mol": 81.0
+      },
+      "notes": "Decarboxylation kinetics of asparagine in O/W emulsion in the presence of decadienal (Ea = 81.0 kJ/mol)."
+    },
+    {
+      "id": "ding_2020_schiff_base_amadori_emulsion_rates",
+      "source": "Ding et al. (2020)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3
+      },
+      "notes": "Emulsion Tween-20 micellar rates where reverse Schiff base and Amadori constants are 10^3 times forward constants."
+    },
+    {
+      "id": "richards_2009_hemoglobin_liposome_oxidation",
+      "source": "Richards et al. (2009)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3,
+        "cod_Hb_Vmax_uM_min": 66.2,
+        "cod_Hb_Km_uM": 0.67,
+        "bovine_Hb_Vmax_uM_min": 56.6,
+        "bovine_Hb_Km_uM": 1.2
+      },
+      "notes": "Michaelis-Menten kinetic parameters for cod and bovine hemoglobin-induced lipid oxidation in liposomes."
+    },
+    {
+      "id": "smagghe_2006_leghemoglobin_oxygen_dissociation",
+      "source": "Smagghe et al. (2006)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3,
+        "soy_leghemoglobin_dissociation_s1": 5.6
+      },
+      "notes": "Recombinant soy leghemoglobin autoxidation and oxygen dissociation kinetics (rate constant = 5.6 s-1)."
     }
   ],
   "furanone_priors": [
@@ -874,6 +955,39 @@
       "route_independent_of_amino_acids": true,
       "analytical_method": "GC-MS with internal standard",
       "notes": "Bounded Family 09 support prior showing that HDMF can arise directly from methylglyoxal-rich fragmentation chemistry without an amino-acid partner. Use for runtime-visible C3-route context only; do not treat this as a full standalone caramelization closure model."
+    },
+    {
+      "id": "de_bruijn_1987_monosaccharide_alkaline_degradation",
+      "source": "de Bruijn et al. (1987)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3
+      },
+      "notes": "Alkaline-driven retro-aldolization isomerization kinetics of hexose monosaccharides."
+    },
+    {
+      "id": "luna_aguilera_2014_molten_sugar_color_kinetics",
+      "source": "Luna & Aguilera (2014)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3
+      },
+      "notes": "Arrhenius activation energies for color development in caramelizing molten hexose systems."
+    },
+    {
+      "id": "bao_2022_xylose_glycylglycine_3_deoxyosone_cleavage",
+      "source": "Bao et al. (2022)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3
+      },
+      "notes": "Glycylglycine catalytic cleavage of Amadori products and 3-deoxyosone accumulation at 120 C."
     }
   ],
   "thiamine_pathway_priors": [
@@ -1407,6 +1521,28 @@
         "methylglyoxal_mediated_pathway_ea_kj_mol": 85.0
       },
       "notes": "Bifurcated, first-order Amadori degradation kinetics determining crossover at extreme temperatures."
+    },
+    {
+      "id": "martins_boekel_2003_dfg_amadori_degradation",
+      "source": "Martins & van Boekel (2003)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3
+      },
+      "notes": "Multiresponse kinetic modeling of DFG Amadori enolization and degradation."
+    },
+    {
+      "id": "nashalian_yaylayan_2014_cu_catalyzed_strecker",
+      "source": "Nashalian & Yaylayan (2014)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "decarboxylation_k_s1": 0.41
+      },
+      "notes": "Copper-catalyzed enolization (rate k = 0.41 s-1) and decarboxylation kinetics in model systems."
     }
   ],
   "sulfur_peptide_priors": [
@@ -1765,6 +1901,116 @@
         1000000.0
       ],
       "notes": "Second-order rate constants of 10^5 to 10^6 M-1 s-1 for quinone-thiol Michael additions."
+    },
+    {
+      "id": "zhu_2020_epicatechin_mgo_go_scavenging",
+      "source": "Zhu H. et al. (2020)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 4,
+        "MGO_trapping_k_M1_s1": 1.6,
+        "GO_trapping_k_M1_s1": 0.059
+      },
+      "notes": "Second-order epicatechin methylglyoxal (k = 1.6 M-1 s-1) and glyoxal (k = 0.059 M-1 s-1) trapping in stored milk models."
+    },
+    {
+      "id": "zhu_2020_polyphenol_mgo_structure_kinetics",
+      "source": "Zhu H. et al. (2020b)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3,
+        "kaempferol_MGO_k_M1_s1": 0.063,
+        "resveratrol_MGO_k_M1_s1": 0.027
+      },
+      "notes": "Structure-dependent MGO trapping kinetics for kaempferol (k = 0.063 M-1 s-1) and resveratrol (k = 0.027 M-1 s-1)."
+    },
+    {
+      "id": "liu_2023_benzoquinone_lysine_kinetics",
+      "source": "Liu J. et al. (2023)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3,
+        "Ea_4MBQ_Lysine_kj_mol": 19.0
+      },
+      "notes": "Second-order 4-methylbenzoquinone-lysine conjugation kinetics (Ea = 19.00 kJ/mol)."
+    },
+    {
+      "id": "comert_gokmen_2019_digestive_mgo_scavenging",
+      "source": "Cömert & Gökmen (2019)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3,
+        "egg_MGO_rate_k_L_mol_min": 26.6
+      },
+      "notes": "Methylglyoxal scavenging kinetics under simulated gastrointestinal digestion fluid (egg-MGO rate k = 26.6 L/mol/min)."
+    },
+    {
+      "id": "munoz_2007_chlorogenic_oxidase_quinone",
+      "source": "Munoz et al. (2007)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3,
+        "CQA_Q_reaction_rate_k_M1_s1": 2.73
+      },
+      "notes": "Chlorogenic acid enzymatically oxidized to o-quinone reacting with substrate (k = 2.73 M-1 s-1)."
+    },
+    {
+      "id": "comert_gokmen_2021_epicatechin_cysteine_mgo_synergy",
+      "source": "Cömert & Gökmen (2021)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3
+      },
+      "notes": "Synergistic rate augmentation between epicatechin and cysteine in trapping methylglyoxal."
+    },
+    {
+      "id": "song_2009_benzoquinone_gsh_conjugation",
+      "source": "Song et al. (2009)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3,
+        "forward_rate_k_M1_s1": 1547.0,
+        "reverse_Ea_kcal_mol": 11.2
+      },
+      "notes": "Benzoquinone conjugation with GSH rate parameters (forward k = 1547 M-1 s-1, reverse Ea = 11.2 kcal/mol)."
+    },
+    {
+      "id": "li_2017_quercetin_mgo_adduct_browning_mitigation",
+      "source": "Li et al. (2017)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3
+      },
+      "notes": "Quercetin-MGO dicarbonyl trapping kinetics mitigating browning in lysine/glucose Maillard models."
+    },
+    {
+      "id": "monforte_2018_phenylacetaldehyde_quinones",
+      "source": "Monforte et al. (2018)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3,
+        "Ea_hydroquinone_catalyzed_kj_mol": 32.9,
+        "Ea_trihydroxybenzene_catalyzed_kj_mol": 31.5
+      },
+      "notes": "Phenylacetaldehyde formation activation energy catalyzed by hydroquinone (Ea = 32.9 kJ/mol) or trihydroxybenzene (Ea = 31.5 kJ/mol)."
     }
   ],
   "lipid_offnote_priors": [
@@ -1914,6 +2160,43 @@
         "lox_z_value_C": 10.0
       },
       "notes": "Phospholipid contribution to hexanal and LOX denaturation kinetics."
+    },
+    {
+      "id": "tan_2001_oil_dsc_oxidation",
+      "source": "Tan et al. (2001)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3
+      },
+      "notes": "Isothermal peroxide formation activation energy parameters derived via DSC."
+    },
+    {
+      "id": "bayram_2023_stripped_soybean_oil_hexanal",
+      "source": "Bayram et al. (2023)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3
+      },
+      "notes": "Arrhenius hexanal kinetics modulated by antioxidants like ascorbyl palmitate (Ea 1.62 to 89.40 kJ/mol)."
+    },
+    {
+      "id": "spier_2010_metal_naphthenate_peroxide_decomp",
+      "source": "Spier et al. (2010)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3,
+        "Fe_Ea_kcal_mol": 23.0,
+        "Zn_Ea_kcal_mol": 26.0,
+        "Cu_Ea_kcal_mol": 14.0,
+        "Mn_Ea_kcal_mol": 11.0
+      },
+      "notes": "Apparent Ea for transition-metal catalyzed peroxide decomposition (11.0 to 26.0 kcal/mol)."
     }
   ],
   "dicarbonyl_fragmentation_priors": [
@@ -2023,6 +2306,82 @@
         "xylosone": 5.8
       },
       "notes": "Absolute dicarbonyl yields from ascorbic acid: 3-deoxythreosone 9.1 pmol/mg, xylosone 0.5 pmol/mg."
+    },
+    {
+      "id": "serpen_gokmen_2007_ascorbic_redox_kinetics",
+      "source": "Serpen & Gökmen (2007)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3,
+        "oxidation_acceleration_copper_fold": 88.0,
+        "oxidation_acceleration_iron_fold": 14.0
+      },
+      "notes": "Reversible first-order consecutive degradation kinetics of ascorbic acid, showing 88-fold copper and 14-fold iron catalytic acceleration."
+    },
+    {
+      "id": "yang_2021_ascorbic_glycine_kinetics",
+      "source": "Yang et al. (2021)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3,
+        "Ea_excess_ascorbate_kj_mol": 60.76,
+        "Ea_excess_glycine_kj_mol": 70.16
+      },
+      "notes": "Pseudo-first-order non-enzymatic browning kinetics between AA and glycine (Ea = 60.76 kJ/mol at 4:1 AA:Gly, 70.16 kJ/mol at 1:4 AA:Gly)."
+    },
+    {
+      "id": "manso_2001_orange_juice_ascorbic_degradation",
+      "source": "Manso et al. (2001)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3,
+        "Ea_ascorbic_degradation_kj_mol": 55.6
+      },
+      "notes": "Weibullian degradation kinetics of ascorbic acid in orange juice (Ea = 55.6 kJ/mol) under aerobic storage conditions."
+    },
+    {
+      "id": "takase_2025_lemon_juice_ascorbic_dicarbonyl",
+      "source": "Takase et al. (2025)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3
+      },
+      "notes": "Anaerobic degradation pathway of dehydroascorbic acid to xylosone and threosone in lemon juice under oxygen-excluded conditions."
+    },
+    {
+      "id": "hendrickx_1998_ascorbic_isobaric_degradation",
+      "source": "Hendrickx et al. (1998)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3,
+        "Ea_ascorbic_degradation_kj_mol": 54.8,
+        "D_value_121C_min": 246.0,
+        "z_value_C": 27.15
+      },
+      "notes": "Isobaric-isothermal degradation kinetics of L-ascorbic acid, yielding a D-value at 121C of 246 min, z-value of 27.15C, and Ea of 54.8 kJ/mol."
+    },
+    {
+      "id": "jian_2012_ascorbic_ethanolic_degradation",
+      "source": "Jian et al. (2012)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3,
+        "Ea_ethanolic_min_kj_mol": 43.3,
+        "Ea_ethanolic_max_kj_mol": 96.6
+      },
+      "notes": "Ascorbic acid degradation kinetics in ethanolic solutions, where lower water activity accelerates L-xylosone dehydration (Ea = 43.3 to 96.6 kJ/mol)."
     }
   ],
   "melanoidin_trapping_priors": [
@@ -2083,6 +2442,94 @@
         "binding_ic50_mg_thiol_per_L_melanoidin": 183.0
       },
       "notes": "Thiol (FFT) depletion by melanoidins (16-fold reduction); IC50 values (183 mg thiol / L melanoidin) and binding saturation parameters."
+    },
+    {
+      "id": "brands_2002_casein_sugar_melanoidin",
+      "source": "Brands et al. (2002)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3,
+        "rate_k_h1": 1.14,
+        "Ea_kj_mol": 128.0,
+        "extinction_coefficient_glucose_casein": 1200.0
+      },
+      "notes": "Zero-order terminal polymerization kinetics (k = 1.14 h-1, Ea = 128 kJ/mol) and molar extinction coefficients for casein-sugar systems."
+    },
+    {
+      "id": "gigl_2021_coffee_thiol_binding",
+      "source": "Gigl et al. (2021)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3,
+        "thiol_loss_20min_pct": 50.0,
+        "line_broadening_hz": 2.14
+      },
+      "notes": "Covalent trapping of volatile thiols (FWHM line broadening of 2.14 Hz, ~50% loss in 20 min) by coffee melanoidins."
+    },
+    {
+      "id": "suzuki_philp_1990_sulfur_melanoidin",
+      "source": "Suzuki & Philp (1990)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3
+      },
+      "notes": "Zero-order accumulation of sulfur-incorporated high-molecular-weight melanoidin precipitates in the presence of hydrogen sulfide."
+    },
+    {
+      "id": "mundt_wedzicha_2007_biscuit_browning",
+      "source": "Mundt & Wedzicha (2007)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3,
+        "Ea_browning_kj_mol": 105.0
+      },
+      "notes": "First-order surface browning rate (Ea = 105 kJ/mol) independent of water activity (Aw 0.04-0.4) during dough baking."
+    },
+    {
+      "id": "cao_2024_carp_myoglobin_mrp",
+      "source": "Cao et al. (2024)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3,
+        "secondary_metabolite_inhibition_pct": 68.19,
+        "aggregation_reduction_pct": 36.95
+      },
+      "notes": "Melanoidins (1% MRPs) inhibit lipid oxidation secondary metabolites by 68.19% and protect myoglobin stability by reducing aggregation by 36.95%."
+    },
+    {
+      "id": "hofmann_2001_melanoidin_thioether",
+      "source": "Hofmann et al. (2001)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3,
+        "thiol_loss_30min_pct": 90.0
+      },
+      "notes": "Irreversible covalent thioether formation of volatile thiols (FWHM >90% loss in 30 min) directly into coffee melanoidins."
+    },
+    {
+      "id": "martins_van_boekel_2005_ascorbic_amino_browning",
+      "source": "Martins & van Boekel (2005)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3,
+        "Ea_histidine_kj_mol": 35.31,
+        "Ea_lysine_kj_mol": 54.94
+      },
+      "notes": "Browning product (A420) formation rate activation energies for ascorbic acid systems with basic amino acids (Ea = 35.31 kJ/mol for histidine, 54.94 kJ/mol for lysine)."
     }
   ],
   "dft_kinetic_priors": {
@@ -2415,6 +2862,75 @@
         "apparent_ea_kj_mol": 84.54
       },
       "notes": "Coordinate covalent chelation of metals by phytic acid."
+    },
+    {
+      "id": "zha_2020_ppi_glycation_aggregation",
+      "source": "Zha et al. (2020)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3
+      },
+      "notes": "Pea protein isolate glycation aggregation kinetics and lysine blockage parameters."
+    },
+    {
+      "id": "kutzli_2020_pea_maltodextrin_electrospun_glycation",
+      "source": "Kutzli et al. (2020)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3
+      },
+      "notes": "Pseudo-first order glycation within electrospun pea protein-maltodextrin fibers under relative humidity control."
+    },
+    {
+      "id": "nguyen_2025_ppi_microencapsulated_oil_stabilization",
+      "source": "Nguyen et al. (2025)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3
+      },
+      "notes": "Pea protein isolate physical barrier coefficients limiting microencapsulated oil self-oxidation."
+    },
+    {
+      "id": "pereira_2020_metal_pm_haber_weiss_chelation",
+      "source": "Pereira et al. (2020)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "Cu_PM_formation_free_energy_kcal_mol": -35.8,
+        "Fe_PM_formation_free_energy_kcal_mol": -58.9
+      },
+      "notes": "Transition metal coordination free energy calculations for Cu(II) and Fe(III) complexes (Cu-PM: -35.8 kcal/mol, Fe-PM: -58.9 kcal/mol)."
+    },
+    {
+      "id": "sun_2020_solid_matrix_cml_cel_accumulation",
+      "source": "Sun et al. (2020)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3,
+        "Ea_free_CML_kj_mol": 44.158,
+        "Ea_free_CEL_kj_mol": 40.971
+      },
+      "notes": "Zero-order free CML (Ea = 44.158 kJ/mol) and free CEL (Ea = 40.971 kJ/mol) accumulation in a solid matrix during sterilization."
+    },
+    {
+      "id": "shirai_2015_bsa_dityrosine_diffusion_limited",
+      "source": "Shirai et al. (2015)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3
+      },
+      "notes": "Diffusion-limited dityrosine formation modeling using kinetic multilayer surface/bulk approaches."
     }
   ],
   "shear_damage_priors": [
@@ -2448,6 +2964,191 @@
         "kinetic_order": "first_order"
       },
       "notes": "Correlates Specific Mechanical Energy inputs to first-order lysine damage kinetics."
+    }
+  ],
+  "catalytic_browning_priors": [
+    {
+      "id": "spier_2010_metal_naphthenate_peroxide_decomp",
+      "source": "Spier et al. (2010)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3,
+        "Fe_Ea_kcal_mol": 23.0,
+        "Zn_Ea_kcal_mol": 26.0,
+        "Cu_Ea_kcal_mol": 14.0,
+        "Mn_Ea_kcal_mol": 11.0
+      },
+      "notes": "Apparent Ea for transition-metal catalyzed peroxide decomposition (11.0 to 26.0 kcal/mol)."
+    },
+    {
+      "id": "pereira_2020_metal_pm_haber_weiss_chelation",
+      "source": "Pereira et al. (2020)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "Cu_PM_formation_free_energy_kcal_mol": -35.8,
+        "Fe_PM_formation_free_energy_kcal_mol": -58.9
+      },
+      "notes": "Transition metal coordination free energy calculations for Cu(II) and Fe(III) complexes (Cu-PM: -35.8 kcal/mol, Fe-PM: -58.9 kcal/mol)."
+    },
+    {
+      "id": "nashalian_yaylayan_2014_cu_catalyzed_strecker",
+      "source": "Nashalian & Yaylayan (2014)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "decarboxylation_k_s1": 0.41
+      },
+      "notes": "Copper-catalyzed enolization (rate k = 0.41 s-1) and decarboxylation kinetics in model systems."
+    },
+    {
+      "id": "richards_2009_hemoglobin_liposome_oxidation",
+      "source": "Richards et al. (2009)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3,
+        "cod_Hb_Vmax_uM_min": 66.2,
+        "cod_Hb_Km_uM": 0.67,
+        "bovine_Hb_Vmax_uM_min": 56.6,
+        "bovine_Hb_Km_uM": 1.2
+      },
+      "notes": "Michaelis-Menten kinetic parameters for cod and bovine hemoglobin-induced lipid oxidation in liposomes."
+    },
+    {
+      "id": "smagghe_2006_leghemoglobin_oxygen_dissociation",
+      "source": "Smagghe et al. (2006)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3,
+        "soy_leghemoglobin_dissociation_s1": 5.6
+      },
+      "notes": "Recombinant soy leghemoglobin autoxidation and oxygen dissociation kinetics (rate constant = 5.6 s-1)."
+    },
+    {
+      "id": "serpen_gokmen_2007_ascorbic_redox_kinetics",
+      "source": "Serpen & Gökmen (2007)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3,
+        "oxidation_acceleration_copper_fold": 88.0,
+        "oxidation_acceleration_iron_fold": 14.0
+      },
+      "notes": "Reversible first-order consecutive degradation kinetics of ascorbic acid, showing 88-fold copper and 14-fold iron catalytic acceleration."
+    }
+  ],
+  "phospholipid_amine_sink_priors": [
+    {
+      "id": "solis_calero_2015_pe_glyoxal",
+      "source": "Solís-Calero et al. (2015)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3,
+        "Ea_dehydration_kcal_mol": 17.5,
+        "Ea_dehydration_kj_mol": 73.2,
+        "lysine_dehydration_Ea_diff_kcal_mol": -5.3
+      },
+      "notes": "Kinetic dehydration barrier reduction (by 5.3 kcal/mol / 22.2 kJ/mol vs free L-lysine) on organized PE surface during CM-PE formation."
+    },
+    {
+      "id": "solis_calero_2013_pe_amadori",
+      "source": "Solís-Calero et al. (2013)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3,
+        "Ea_condensation_kcal_mol": 8.76,
+        "Ea_condensation_kj_mol": 36.7,
+        "Ea_enaminol_kcal_mol": 16.78,
+        "Ea_enaminol_kj_mol": 70.2
+      },
+      "notes": "Catalytic reduction of the initial sugar-PE condensation barrier to 8.76 kcal/mol (36.7 kJ/mol), with subsequent 1,2-enaminol formation at 16.78 kcal/mol (70.2 kJ/mol)."
+    },
+    {
+      "id": "lertsiri_1998_pe_glycation",
+      "source": "Lertsiri et al. (1998)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3,
+        "glycation_rate_mol_pct_min": 0.05,
+        "glycation_rate_mol_pct_max": 0.12
+      },
+      "notes": "Pseudo-first-order accumulation of Amadori-PE under excess glucose, with physiological accumulation rates of 0.05 to 0.12 mol%."
+    },
+    {
+      "id": "hidalgo_2005_pe_ribose_lysine",
+      "source": "Hidalgo et al. (2005)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3,
+        "Ea_browning_kj_mol": 66.5,
+        "Ea_fluorescence_kj_mol": 50.0
+      },
+      "notes": "Global activation energy for non-enzymatic browning (66.5 kJ/mol) and advanced fluorescence development (50.0 kJ/mol) in lipid/amine systems."
+    },
+    {
+      "id": "zamora_2020_pe_dihydropyridine",
+      "source": "Zamora et al. (2020)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3,
+        "dpph_scavenging_increase_pct": 85.1
+      },
+      "notes": "Secondary radical scavenging capacity increase of 85.1% via 2-pentyl-3,5-dibutyl-dihydropyridine adduct formation in soybean oil emulsions."
+    },
+    {
+      "id": "hidalgo_2006_pe_lysine_antioxidant",
+      "source": "Hidalgo et al. (2006)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3,
+        "induction_period_synergy_pct": 185.0
+      },
+      "notes": "Synergistic 185% increase in oxidative induction period utilizing 300 ppm PE and 100 ppm lysine, illustrating polar paradox kinetics."
+    },
+    {
+      "id": "vilanova_2012_pe_schiff_base",
+      "source": "Vilanova et al. (2012)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3,
+        "Ea_dehydration_kcal_mol": 13.08,
+        "Ea_dehydration_kj_mol": 54.7
+      },
+      "notes": "Second-order rates and dehydration barrier evaluation of 13.08 kcal/mol (54.7 kJ/mol) for Schiff base formation."
+    },
+    {
+      "id": "biondi_2010_oil_microwave_degradation",
+      "source": "Biondi et al. (2010)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "key_values": {
+        "replicates": 3
+      },
+      "notes": "Microwave thermal-stress degradation rates of vegetable oils correlated with volatile hexanal accumulation and diene formation."
     }
   ]
 }

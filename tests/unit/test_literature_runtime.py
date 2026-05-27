@@ -379,6 +379,12 @@ def test_build_flavor_axis_summary_surfaces_all_family_lanes_and_adjustments():
         "researchgate_2023_pea_aeda",
         "zhang_1993_protein_deamidation_ammonia",
         "li_2010_phytate_chelation_kinetics",
+        "shirai_2015_bsa_dityrosine_diffusion_limited",
+        "zha_2020_ppi_glycation_aggregation",
+        "nguyen_2025_ppi_microencapsulated_oil_stabilization",
+        "pereira_2020_metal_pm_haber_weiss_chelation",
+        "kutzli_2020_pea_maltodextrin_electrospun_glycation",
+        "sun_2020_solid_matrix_cml_cel_accumulation",
     }
     assert summary["family_lane_summary"]["06"]["structural_gap_ids"] == [
         "ellman_opa_dsc_same_experiment"
@@ -682,7 +688,14 @@ def test_build_flavor_axis_summary_calibrates_family_08_guardrail_lane_with_safe
         "squeo_2023",
         "wang_2022_lab_hexanal_cleanup_anchor",
     ]
-    assert family_08["crosstalk_prior_ids"] == ["lincoln_2025_polyphenol_crosstalk_v1"]
+    assert set(family_08["crosstalk_prior_ids"]) == {
+        "lincoln_2025_polyphenol_crosstalk_v1",
+        "hidalgo_2007_decadienal_phenylalanine_styrene",
+        "zamora_2010_decadienal_asparagine_decarboxylation",
+        "ding_2020_schiff_base_amadori_emulsion_rates",
+        "richards_2009_hemoglobin_liposome_oxidation",
+        "smagghe_2006_leghemoglobin_oxygen_dissociation",
+    }
     assert family_08["safety_reference_ids"] == ["squeo_2023_pbpi_acrylamide"]
     assert family_08["acrylamide_reference_mean_ug_per_kg"] == pytest.approx(451.0)
     assert family_08["suppression_pressure_score"] > 0.3
@@ -1412,3 +1425,61 @@ def test_query_retention_reference_entries_returns_family_and_matrix_filtered_ro
         row["id"] == "xu_2023_spi_hexanal_temporal_profile" for row in soy_hexanal_rows
     )
     assert all(row["matrix_family"].startswith("soy") for row in soy_hexanal_rows)
+
+
+def test_query_new_ingested_campaigns_fgh_references_and_priors():
+    # Test benchmark intake entries query for family 15
+    f15_entries = query_benchmark_intake_entries(family="15")
+    f15_ids = {ref["id"] for ref in f15_entries}
+    assert "solis_calero_2015_pe_glyoxal" in f15_ids
+    assert "solis_calero_2013_pe_amadori" in f15_ids
+    assert "lertsiri_1998_pe_glycation" in f15_ids
+    assert "hidalgo_2005_pe_ribose_lysine" in f15_ids
+    assert "zamora_2020_pe_dihydropyridine" in f15_ids
+    assert "hidalgo_2006_pe_lysine_antioxidant" in f15_ids
+    assert "vilanova_2012_pe_schiff_base" in f15_ids
+    assert "biondi_2010_oil_microwave_degradation" in f15_ids
+
+    # Test benchmark intake entries query for family 16
+    f16_entries = query_benchmark_intake_entries(family="16")
+    f16_ids = {ref["id"] for ref in f16_entries}
+    assert "brands_2002_casein_sugar_melanoidin" in f16_ids
+    assert "gigl_2021_coffee_thiol_binding" in f16_ids
+    assert "suzuki_philp_1990_sulfur_melanoidin" in f16_ids
+    assert "mundt_wedzicha_2007_biscuit_browning" in f16_ids
+    assert "cao_2024_carp_myoglobin_mrp" in f16_ids
+    assert "hofmann_2001_melanoidin_thioether" in f16_ids
+    assert "martins_van_boekel_2005_ascorbic_amino_browning" in f16_ids
+
+    # Test benchmark intake entries query for family 14
+    f14_entries = query_benchmark_intake_entries(family="14")
+    f14_ids = {ref["id"] for ref in f14_entries}
+    assert "smuda_glomb_2013_aa_degradation_pathways" in f14_ids
+    assert "serpen_gokmen_2007_ascorbic_redox_kinetics" in f14_ids
+    assert "yang_2021_ascorbic_glycine_kinetics" in f14_ids
+    assert "yu_2018_ascorbic_basic_amino_browning" in f14_ids
+    assert "manso_2001_orange_juice_ascorbic_degradation" in f14_ids
+    assert "takase_2025_lemon_juice_ascorbic_dicarbonyl" in f14_ids
+    assert "hendrickx_1998_ascorbic_isobaric_degradation" in f14_ids
+    assert "jian_2012_ascorbic_ethanolic_degradation" in f14_ids
+
+    # Test family runtime priors for family 15 (e.g. phospholipid_amine_sink_priors)
+    f15_priors = query_family_runtime_priors(family="15")
+    f15_prior_ids = {p.get("id", p.get("reaction_key")) for p in f15_priors}
+    assert "solis_calero_2015_pe_glyoxal" in f15_prior_ids
+    assert "solis_calero_2013_pe_amadori" in f15_prior_ids
+    assert "lertsiri_1998_pe_glycation" in f15_prior_ids
+
+    # Test family runtime priors for family 16
+    f16_priors = query_family_runtime_priors(family="16")
+    f16_prior_ids = {p.get("id", p.get("reaction_key")) for p in f16_priors}
+    assert "brands_2002_casein_sugar_melanoidin" in f16_prior_ids
+    assert "gigl_2021_coffee_thiol_binding" in f16_prior_ids
+
+    # Test family runtime priors for family 14
+    f14_priors = query_family_runtime_priors(family="14")
+    f14_prior_ids = {p.get("id", p.get("reaction_key")) for p in f14_priors}
+    assert "serpen_gokmen_2007_ascorbic_redox_kinetics" in f14_prior_ids
+    assert "yang_2021_ascorbic_glycine_kinetics" in f14_prior_ids
+
+

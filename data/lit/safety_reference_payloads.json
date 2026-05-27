@@ -917,6 +917,106 @@
       "what_it_does_not_support": [
         "Low temperature processes."
       ]
+    },
+    {
+      "id": "urugo_2024_plant_milk_hca_quantification",
+      "kind": "industrial_endpoint_reference",
+      "report_visibility": "default",
+      "target_module": "safety",
+      "source_citation": "Urugo et al. (2024)",
+      "doi": "10.3390/foods14193295",
+      "validated_status": "reference_anchor",
+      "analyte": "HCAs",
+      "method": {
+        "instrument": "UHPLC-MS/MS",
+        "replicates": 3
+      },
+      "what_it_supports": [
+        "Quantitation and extraction profile of 10 HCA variants in soy and almond milk beverages."
+      ],
+      "what_it_does_not_support": [
+        "Dry extrusion HCA profiles."
+      ]
+    },
+    {
+      "id": "chen_2016_carbohydrate_meat_cml_cel_sterilization",
+      "kind": "industrial_endpoint_reference",
+      "report_visibility": "default",
+      "target_module": "safety",
+      "source_citation": "Chen et al. (2016)",
+      "doi": "10.1007/s10068-016-0185-5",
+      "validated_status": "reference_anchor",
+      "analyte": "CML",
+      "method": {
+        "instrument": "LC-MS",
+        "replicates": 3
+      },
+      "what_it_supports": [
+        "Zero-order CML and CEL formation rates during high-moisture sterilization accelerated 4x by glucose doping."
+      ],
+      "what_it_does_not_support": [
+        "Low-moisture starch-dominated systems."
+      ]
+    },
+    {
+      "id": "pruteanu_2023_glucose_phe_arrhenius_browning",
+      "kind": "industrial_endpoint_reference",
+      "report_visibility": "default",
+      "target_module": "safety",
+      "source_citation": "Pruteanu et al. (2023)",
+      "doi": "10.1016/j.lwt.2024.117316",
+      "validated_status": "reference_anchor",
+      "analyte": "browning_intermediates",
+      "method": {
+        "instrument": "HPLC",
+        "replicates": 3
+      },
+      "what_it_supports": [
+        "Apparent Arrhenius activation energy comparison for glucose/glycine (Ea = 109 kJ/mol) and glucose/phenylalanine (Ea = 145 kJ/mol)."
+      ],
+      "what_it_does_not_support": [
+        "Complex solid-state protein matrices with native starch."
+      ]
+    },
+    {
+      "id": "smuda_glomb_2013_aa_degradation_pathways",
+      "kind": "industrial_endpoint_reference",
+      "report_visibility": "default",
+      "target_module": "safety",
+      "source_citation": "Smuda & Glomb (2013)",
+      "doi": "10.1002/anie.201300399",
+      "validated_status": "reference_anchor",
+      "analyte": "browning_intermediates",
+      "method": {
+        "instrument": "LC-MS/MS",
+        "replicates": 3
+      },
+      "what_it_supports": [
+        "Degradation mass balance of vitamin C (75% accounted for) producing CML (carboxymethyl-lysine) via threose and xylosone intermediates."
+      ],
+      "what_it_does_not_support": [
+        "Non-enzymatic browning from stable aldohexose sugars."
+      ]
+    },
+    {
+      "id": "yu_2018_ascorbic_basic_amino_browning",
+      "kind": "industrial_endpoint_reference",
+      "report_visibility": "default",
+      "target_module": "safety",
+      "source_citation": "Yu et al. (2018)",
+      "doi": "10.1590/1678-457x.08717",
+      "validated_status": "reference_anchor",
+      "analyte": "browning_intermediates",
+      "method": {
+        "instrument": "HPLC",
+        "replicates": 3
+      },
+      "what_it_supports": [
+        "Zero-order macroscopic browning kinetics of AA with basic amino acids, with lysine producing the fastest rate despite a higher Ea of 54.94 kJ/mol."
+      ],
+      "what_it_does_not_support": [
+        "Non-basic aliphatic amino acid browning rates."
+      ]
     }
   ]
 }
