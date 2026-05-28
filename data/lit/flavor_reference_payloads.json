@@ -196,6 +196,80 @@
         "value": 0.05
       },
       "notes": "Compiled MFT table across meat systems and odor detection threshold (ODT) parameters."
+    },
+    {
+      "id": "wang_2023_mft_retention",
+      "compound": "2-methyl-3-furanthiol",
+      "source_citation": "Wang et al. (2023)",
+      "doi": "10.1021/acs.jafc.3c01845",
+      "matrix_context": "protein_binding_aqueous",
+      "analytical_method": "HS-SPME-GC-MS",
+      "units": "percent_bound",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "mft_protein_binding_retention",
+      "numeric_band_or_point": {
+        "type": "range",
+        "min": 15.0,
+        "max": 42.0,
+        "condition": "various protein matrices"
+      },
+      "notes": "MFT binding to various proteins: 15-42% retained; protein-type and concentration dependent."
+    },
+    {
+      "id": "fadel_2015_mft_retention",
+      "compound": "2-methyl-3-furanthiol",
+      "source_citation": "Fadel et al. (2015)",
+      "doi": "10.1016/j.foodchem.2015.06.109",
+      "matrix_context": "encapsulated_meat_flavour",
+      "analytical_method": "HS-SPME-GC-MS",
+      "units": "ug_per_g",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "mft_encapsulated_release",
+      "numeric_band_or_point": {
+        "type": "range",
+        "min": 0.5,
+        "max": 2.8,
+        "condition": "encapsulated meat-like flavour"
+      },
+      "notes": "MFT 0.5-2.8 ug/g in encapsulated meat-like flavour system."
+    },
+    {
+      "id": "mottram_2001_bmfd_retention",
+      "compound": "bis(2-methyl-3-furyl)disulfide",
+      "source_citation": "Mottram et al. (2001)",
+      "doi": "10.1016/S0963-9969(01)00120-4",
+      "matrix_context": "meat_model",
+      "analytical_method": "GC-MS",
+      "units": "ug_per_g",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "bmfd_irreversible_protein_binding",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 0.18,
+        "condition": "irreversibly bound fraction"
+      },
+      "notes": "BMFD irreversibly binds to protein; 0.18 ug/g residual after extensive washing."
+    },
+    {
+      "id": "siripitakpong_2026_fft_retention",
+      "compound": "2-furfurylthiol",
+      "source_citation": "Siripitakpong et al. (2026)",
+      "doi": "10.1016/j.foodchem.2026.143110",
+      "matrix_context": "deamidated_soy_protein",
+      "analytical_method": "HS-SPME-GC-MS",
+      "units": "percent_retained",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "fft_deamidation_retention",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 28.0,
+        "condition": "deamidated SPI"
+      },
+      "notes": "FFT 28% retained in deamidated SPI vs 38% in native; deamidation reduces binding."
     }
   ],
   "strecker_reference_anchors": [
@@ -348,6 +422,24 @@
           "origin": "leu_strecker_degradation"
         }
       }
+    },
+    {
+      "id": "mottram_wedzicha_1990_methional",
+      "compound": "methional",
+      "source_citation": "Mottram & Wedzicha (1990)",
+      "doi": "",
+      "matrix_context": "methionine_glucose_model",
+      "analytical_method": "GC-MS",
+      "units": "mol_pct",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "strecker_methional_yield",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 38.0,
+        "condition": "150°C Strecker yield from Met"
+      },
+      "notes": "Methional Strecker yield 38 mol% from methionine at 150°C."
     }
   ],
   "pyrazine_reference_anchors": [
@@ -1015,6 +1107,182 @@
         "value": 4096.0
       },
       "notes": "Pea protein AEDA (E,E)-2,4-heptadienal FD 4096."
+    },
+    {
+      "id": "mdpi_plants_2024_hemp_volatiles",
+      "compound": "(E)-2-octenal",
+      "source_citation": "MDPI Plants 14(2):274 (2024)",
+      "doi": "10.3390/plants13020274",
+      "matrix_context": "hemp_protein",
+      "analytical_method": "NADES vs alkaline extraction",
+      "units": "oav",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "offnote_dilution_validation",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 35.0
+      },
+      "notes": "Hemp protein isolate off-note OAV."
+    },
+    {
+      "id": "vtechworks_2022_fava_hydrolysis",
+      "compound": "2-pentylfuran",
+      "source_citation": "VTechWorks thesis",
+      "doi": "",
+      "matrix_context": "fava_bean",
+      "analytical_method": "HS-SPME-GC-MS",
+      "units": "fd_factor",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "offnote_dilution_validation",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 16384.0
+      },
+      "notes": "Fava bean hydrolysate 2-pentylfuran FD 16384 post-hydrolysis."
+    },
+    {
+      "id": "pmc11353891_lentil_deflavoring",
+      "compound": "hexanal",
+      "source_citation": "PMC11353891 (2024)",
+      "doi": "10.3390/foods13162590",
+      "matrix_context": "lentil_protein",
+      "analytical_method": "deflavoring_treatment",
+      "units": "oav",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "offnote_dilution_validation",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 1.0
+      },
+      "notes": "Lentil protein isolate residual hexanal OAV."
+    },
+    {
+      "id": "pmc11889959_spi_tvp_volatiles",
+      "compound": "2-pentylfuran",
+      "source_citation": "PMC11889959 (2025)",
+      "doi": "10.1016/j.foodchem.2025.142222",
+      "matrix_context": "soy_isolate",
+      "analytical_method": "HS-SPME-GC-MS",
+      "units": "presence_check",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "offnote_dilution_validation",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 1.0
+      },
+      "notes": "SPI TVP volatiles presence check."
+    },
+    {
+      "id": "liu_cadwallader_2023_pea_aeda",
+      "compound": "hexanal",
+      "source_citation": "Liu & Cadwallader (2023)",
+      "doi": "10.1016/j.foodchem.2023.136012",
+      "matrix_context": "pea_protein_isolate",
+      "analytical_method": "AEDA",
+      "units": "FD_factor",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "pea_off_note_aeda_ranking",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 512.0,
+        "condition": "hexanal FD factor in PPI"
+      },
+      "notes": "AEDA of PPI: hexanal FD=512, 1-octen-3-ol FD=256, nonanal FD=128."
+    },
+    {
+      "id": "researchgate_2023_pea_aeda",
+      "compound": "hexanal",
+      "source_citation": "ResearchGate (2023) pea AEDA",
+      "doi": "",
+      "matrix_context": "pea_protein_concentrate",
+      "analytical_method": "AEDA",
+      "units": "FD_factor",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "pea_off_note_aeda_ranking",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 256.0,
+        "condition": "hexanal FD factor in PPC"
+      },
+      "notes": "AEDA of PPC: hexanal FD=256 (lower than PPI), pentanal FD=128."
+    },
+    {
+      "id": "marquez_ruiz_2014_oleic_oav_anchor",
+      "compound": "nonanal",
+      "source_citation": "Marquez-Ruiz et al. (2014)",
+      "doi": "",
+      "matrix_context": "oleic_model",
+      "analytical_method": "GC-MS",
+      "units": "ppb",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "nonanal_oav_from_oleic_oxidation",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 1.0,
+        "condition": "nonanal ODT"
+      },
+      "notes": "Nonanal ODT 1.0 ppb from oleic acid oxidation; OAV 1-28."
+    },
+    {
+      "id": "messina_2022_pbma_oil_oav_anchor",
+      "compound": "hexanal",
+      "source_citation": "Messina et al. (2022)",
+      "doi": "",
+      "matrix_context": "pbma_oil_fraction",
+      "analytical_method": "GC-MS",
+      "units": "OAV",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "pbma_lipid_off_note_oav",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 18.0,
+        "condition": "hexanal OAV PBMA oil"
+      },
+      "notes": "PBMA oil: hexanal OAV=18, nonanal OAV=8."
+    },
+    {
+      "id": "yeo_shibamoto_1991_wof_hexanal",
+      "compound": "hexanal",
+      "source_citation": "Yeo & Shibamoto (1991)",
+      "doi": "",
+      "matrix_context": "wof_model",
+      "analytical_method": "GC-MS",
+      "units": "ppb",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "wof_hexanal_threshold",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 220.0,
+        "condition": "WOF hexanal ppb"
+      },
+      "notes": "Warmed-over flavour: hexanal 220 ppb benchmark."
+    },
+    {
+      "id": "rawel_2002_cga_cysteine_blocking",
+      "compound": "chlorogenic acid",
+      "source_citation": "Rawel et al. (2002)",
+      "doi": "",
+      "matrix_context": "protein_model",
+      "analytical_method": "fluorescence",
+      "units": "percent_blocked",
+      "benchmark_role": "reference_anchor",
+      "pipeline_role": "reference_only",
+      "target_direction": "cga_cys_blocking_off_note_suppression",
+      "numeric_band_or_point": {
+        "type": "point",
+        "value": 85.0,
+        "condition": "blocking efficiency oxidised CGA"
+      },
+      "notes": "Oxidised CGA blocks 85% reactive Cys; off-note suppression via polyphenol."
     }
   ]
 }

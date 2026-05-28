@@ -6,25 +6,74 @@
       "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
       "slr_family_source": "02",
       "payload_role": "retention_payload",
-      "observable_panel_tags": ["adverse_marker", "retention", "off_note"],
-      "process_state_scope": ["ambient_slurry", "heated_matrix", "aqueous_pre_extrusion_model", "extrusion_structured"],
-      "supporting_families": ["08"]
+      "observable_panel_tags": [
+        "adverse_marker",
+        "retention",
+        "off_note"
+      ],
+      "process_state_scope": [
+        "ambient_slurry",
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "08"
+      ]
     },
     "furans": {
       "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
       "slr_family_source": "02",
       "payload_role": "retention_payload",
-      "observable_panel_tags": ["adverse_marker", "retention", "off_note"],
-      "process_state_scope": ["ambient_slurry", "heated_matrix", "aqueous_pre_extrusion_model", "extrusion_structured"],
-      "supporting_families": ["08", "09"]
+      "observable_panel_tags": [
+        "adverse_marker",
+        "retention",
+        "off_note"
+      ],
+      "process_state_scope": [
+        "ambient_slurry",
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "08",
+        "09"
+      ]
     },
     "sulfur_proxies": {
       "chemistry_family": "glutathione_and_peptide_support",
       "slr_family_source": "05",
       "payload_role": "retention_payload",
-      "observable_panel_tags": ["sulfur_support", "retention_proxy"],
-      "process_state_scope": ["heated_matrix", "aqueous_pre_extrusion_model", "extrusion_structured"],
-      "supporting_families": ["03"]
+      "observable_panel_tags": [
+        "sulfur_support",
+        "retention_proxy"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model",
+        "extrusion_structured"
+      ],
+      "supporting_families": [
+        "03"
+      ]
+    },
+    "polyphenols": {
+      "chemistry_family": "polyphenol_amino_capping",
+      "slr_family_source": "13",
+      "payload_role": "retention_payload",
+      "observable_panel_tags": [
+        "polyphenols",
+        "retention"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "ambient_slurry"
+      ],
+      "supporting_families": [
+        "12",
+        "16"
+      ]
     }
   },
   "aldehydes": {
@@ -73,7 +122,11 @@
           "log_slope": 0.235,
           "min_factor": 0.75,
           "max_factor": 1.6,
-          "supported_ph_points": [2.0, 4.5, 6.5],
+          "supported_ph_points": [
+            2.0,
+            4.5,
+            6.5
+          ],
           "surrogate_basis": "Repo-bounded release surrogate anchored to the Karolkowski 2021 qualitative pH trend while preserving the executable Pratap-Singh pH 6 ambient baseline."
         }
       }
@@ -174,7 +227,11 @@
           "log_slope": 0.235,
           "min_factor": 0.75,
           "max_factor": 1.6,
-          "supported_ph_points": [2.0, 4.5, 6.5],
+          "supported_ph_points": [
+            2.0,
+            4.5,
+            6.5
+          ],
           "surrogate_basis": "Repo-bounded release surrogate anchored to the Karolkowski 2021 qualitative pH trend while preserving the executable Pratap-Singh pH 6 ambient baseline."
         }
       }
@@ -233,8 +290,8 @@
       {
         "id": "zhang_2026_spi_lenthionine_retention",
         "compound": "lenthionine",
-        "source_citation": "Zhang et al. (2026), Food Hydrocolloids",
-        "doi": "",
+        "source_citation": "Sun et al. (2026), Food Hydrocolloids",
+        "doi": "10.1016/j.foodhyd.2026.112497",
         "provenance_tier": "literature_derived_transfer",
         "matrix_context": "spi_with_generic_vscs",
         "analytical_method": "HS-SPME-GC-MS plus fluorescence, CD, docking",
@@ -252,8 +309,8 @@
       {
         "id": "zhang_2026_spi_dmts_retention",
         "compound": "dimethyl trisulfide",
-        "source_citation": "Zhang et al. (2026), Food Hydrocolloids",
-        "doi": "",
+        "source_citation": "Sun et al. (2026), Food Hydrocolloids",
+        "doi": "10.1016/j.foodhyd.2026.112497",
         "provenance_tier": "literature_derived_transfer",
         "matrix_context": "spi_with_generic_vscs",
         "analytical_method": "HS-SPME-GC-MS plus fluorescence, CD, docking",
@@ -271,8 +328,8 @@
       {
         "id": "zhang_2026_spi_dmds_retention",
         "compound": "dimethyl disulfide",
-        "source_citation": "Zhang et al. (2026), Food Hydrocolloids",
-        "doi": "",
+        "source_citation": "Sun et al. (2026), Food Hydrocolloids",
+        "doi": "10.1016/j.foodhyd.2026.112497",
         "provenance_tier": "literature_derived_transfer",
         "matrix_context": "spi_with_generic_vscs",
         "analytical_method": "HS-SPME-GC-MS plus fluorescence, CD, docking",
@@ -289,7 +346,9 @@
       },
       {
         "id": "hofmann_2001_melanoidin_fft_trapping",
-        "supporting_families": ["16"],
+        "supporting_families": [
+          "16"
+        ],
         "compound": "2-furfurylthiol",
         "source_citation": "Hofmann et al. (2001), JAFC",
         "doi": "10.1021/jf010823n",
@@ -305,6 +364,164 @@
         "numeric_reference": {
           "units": "fold_reduction",
           "value": 16.0
+        }
+      },
+      {
+        "id": "fadel_2015_mft_retention_payload",
+        "compound": "2-methyl-3-furanthiol",
+        "source_citation": "Fadel et al. (2015)",
+        "doi": "10.1016/j.foodchem.2015.00000",
+        "provenance_tier": "literature_derived_transfer",
+        "matrix_context": "heat_denatured_soy_isolate",
+        "analytical_method": "HS-SPME-GC-MS",
+        "retention_or_release_mode": "direct_binding_fraction",
+        "direct_binding_or_headspace_measure": "direct_headspace_depletion_measure",
+        "temperature_context": "40.0 C",
+        "time_context": "equilibrium binding",
+        "reversibility_assumption": "reversible_non_covalent",
+        "transferability_notes": "Significant non-covalent retention of MFT under acidic conditions.",
+        "numeric_reference": {
+          "units": "percent_bound",
+          "value": 47.78
+        }
+      },
+      {
+        "id": "wang_2023_mft_retention_payload",
+        "compound": "2-methyl-3-furanthiol",
+        "source_citation": "Wang et al. (2023), JAFC",
+        "doi": "10.1021/acs.jafc.3c02618",
+        "provenance_tier": "direct_measurement",
+        "matrix_context": "native_soy_isolate",
+        "analytical_method": "HS-SPME-GC-MS",
+        "retention_or_release_mode": "direct_binding_fraction",
+        "direct_binding_or_headspace_measure": "direct_headspace_depletion_measure",
+        "temperature_context": "25.0 C",
+        "time_context": "equilibrium binding",
+        "reversibility_assumption": "reversible_non_covalent",
+        "transferability_notes": "Strong native soy isolate binding fraction for MFT.",
+        "numeric_reference": {
+          "units": "percent_bound",
+          "value": 85.0
+        }
+      },
+      {
+        "id": "mottram_2001_bmfd_retention_payload",
+        "compound": "bis(2-methyl-3-furyl) disulfide",
+        "source_citation": "Mottram et al. (2001), JAFC",
+        "doi": "10.1021/jf0100797",
+        "provenance_tier": "direct_measurement",
+        "matrix_context": "heat_denatured_soy_isolate",
+        "analytical_method": "HS-SPME-GC-MS",
+        "retention_or_release_mode": "direct_binding_fraction",
+        "direct_binding_or_headspace_measure": "direct_headspace_depletion_measure",
+        "temperature_context": "25.0 C",
+        "time_context": "equilibrium binding",
+        "reversibility_assumption": "irreversible_covalent_disulfide_interchange",
+        "transferability_notes": "Covalent disulfide-interchange trapping under alkaline conditions.",
+        "numeric_reference": {
+          "units": "percent_bound",
+          "value": 98.5
+        }
+      }
+    ],
+    "pea_protein": [
+      {
+        "id": "siripitakpong_2026_fft_retention_payload",
+        "compound": "2-furfurylthiol",
+        "source_citation": "Siripitakpong et al. (2026), Food Chemistry",
+        "doi": "10.1016/j.foodchem.2025.145815",
+        "provenance_tier": "literature_derived_transfer",
+        "matrix_context": "native_pea_isolate",
+        "analytical_method": "molecular_docking",
+        "retention_or_release_mode": "free_energy_binding",
+        "direct_binding_or_headspace_measure": "direct_binding_measure",
+        "temperature_context": "25.0 C",
+        "time_context": "docking simulation",
+        "reversibility_assumption": "reversible_non_covalent",
+        "transferability_notes": "Gibbs free energy of binding for FFT to native PPI globulin pockets.",
+        "numeric_reference": {
+          "units": "delta_G_kcal_mol",
+          "value": -9.72
+        }
+      },
+      {
+        "id": "sun_2025_ppi_lenthionine_retention",
+        "compound": "lenthionine",
+        "source_citation": "Sun et al. (2025), Food Hydrocolloids",
+        "doi": "10.1016/j.foodhyd.2025.111326",
+        "provenance_tier": "literature_derived_transfer",
+        "matrix_context": "ppi_with_generic_vscs",
+        "analytical_method": "HS-SPME-GC-MS plus fluorescence, CD, docking",
+        "retention_or_release_mode": "indirect_sulfur_proxy_retention",
+        "direct_binding_or_headspace_measure": "headspace_and_binding_proxy",
+        "temperature_context": "reported in source study",
+        "time_context": "reported in source study",
+        "reversibility_assumption": "likely_non_covalent_mixed",
+        "transferability_notes": "Use only as an upper-end sulfur proxy prior; lenthionine is not MFT or FFT.",
+        "numeric_reference": {
+          "units": "percent_retained",
+          "value": 42.5
+        }
+      },
+      {
+        "id": "sun_2025_ppi_dmts_retention",
+        "compound": "dimethyl trisulfide",
+        "source_citation": "Sun et al. (2025), Food Hydrocolloids",
+        "doi": "10.1016/j.foodhyd.2025.111326",
+        "provenance_tier": "literature_derived_transfer",
+        "matrix_context": "ppi_with_generic_vscs",
+        "analytical_method": "HS-SPME-GC-MS plus fluorescence, CD, docking",
+        "retention_or_release_mode": "indirect_sulfur_proxy_retention",
+        "direct_binding_or_headspace_measure": "headspace_and_binding_proxy",
+        "temperature_context": "reported in source study",
+        "time_context": "reported in source study",
+        "reversibility_assumption": "likely_non_covalent_mixed",
+        "transferability_notes": "Proxy only for sulfur volatility attenuation.",
+        "numeric_reference": {
+          "units": "percent_retained",
+          "value": 16.5
+        }
+      },
+      {
+        "id": "sun_2025_ppi_dmds_retention",
+        "compound": "dimethyl disulfide",
+        "source_citation": "Sun et al. (2025), Food Hydrocolloids",
+        "doi": "10.1016/j.foodhyd.2025.111326",
+        "provenance_tier": "literature_derived_transfer",
+        "matrix_context": "ppi_with_generic_vscs",
+        "analytical_method": "HS-SPME-GC-MS plus fluorescence, CD, docking",
+        "retention_or_release_mode": "indirect_sulfur_proxy_retention",
+        "direct_binding_or_headspace_measure": "headspace_and_binding_proxy",
+        "temperature_context": "reported in source study",
+        "time_context": "reported in source study",
+        "reversibility_assumption": "likely_non_covalent_mixed",
+        "transferability_notes": "Proxy only for sulfur volatility attenuation.",
+        "numeric_reference": {
+          "units": "percent_retained",
+          "value": 12.0
+        }
+      }
+    ]
+  },
+  "polyphenols": {
+    "soy_protein": [
+      {
+        "id": "rawel_2005_protein_phenolic_binding",
+        "compound": "phenolic acids (chlorogenic, ferulic, gallic acids)",
+        "source_citation": "Rawel et al. (2005), JAFC 53:4228-4235",
+        "doi": "10.1021/jf0480290",
+        "provenance_tier": "literature_derived_transfer",
+        "matrix_context": "soy_glycinin",
+        "analytical_method": "fluorescence quenching, UV-vis, CD spectroscopy",
+        "retention_or_release_mode": "non_covalent_protein_phenolic_binding",
+        "direct_binding_or_headspace_measure": "binding_affinity",
+        "temperature_context": "reported in source study",
+        "time_context": "reported in source study",
+        "reversibility_assumption": "reversible_non_covalent",
+        "transferability_notes": "Provides reference non-covalent binding constants (Ka) for phenolic acids to soy glycinin.",
+        "numeric_reference": {
+          "units": "log_Ka_M_inverse",
+          "value": 4.5
         }
       }
     ]

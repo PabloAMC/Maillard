@@ -604,7 +604,7 @@
       "citation": "MDPI Plants 14(2):274 (2024)",
       "score": "7/8",
       "score_value": 7,
-      "status": "BACKLOG",
+      "status": "RUNTIME_BOUND",
       "occurrence_count": 1,
       "files": [
         "06_alternative_proteins.md"
@@ -620,8 +620,8 @@
           "raw_line": "12. `MDPI Plants 14(2):274 (2024)` — Hemp volatile profile; NADES vs. alkaline extraction; (E)-2-octenal OAV 35; β-caryophyllene identified. 7/8."
         }
       ],
-      "registry_id": null,
-      "runtime_artifact_count": 0
+      "registry_id": "mdpi_plants_2024_hemp_volatiles",
+      "runtime_artifact_count": 1
     },
     {
       "citation": "Mottram et al. (2022)",
@@ -811,7 +811,7 @@
       "citation": "PMC6104182 (2018)",
       "score": "7/8",
       "score_value": 7,
-      "status": "BACKLOG",
+      "status": "RUNTIME_BOUND",
       "occurrence_count": 1,
       "files": [
         "06_alternative_proteins.md"
@@ -827,8 +827,8 @@
           "raw_line": "8. `PMC6104182 (2018)` — A. oryzae soybean fermentation; Glu +2.49×, Gly +3.73×; Strecker aldehyde volatiles; IS. 7/8."
         }
       ],
-      "registry_id": null,
-      "runtime_artifact_count": 0
+      "registry_id": "pmc6104182_soybean_fermentation",
+      "runtime_artifact_count": 1
     },
     {
       "citation": "PubMed PMID:11893788 (Ref. 14)",
@@ -1294,7 +1294,7 @@
       "citation": "VTechWorks thesis",
       "score": "7/8",
       "score_value": 7,
-      "status": "BACKLOG",
+      "status": "RUNTIME_BOUND",
       "occurrence_count": 1,
       "files": [
         "06_alternative_proteins.md"
@@ -1310,14 +1310,14 @@
           "raw_line": "7. `VTechWorks thesis` — Fava bean hydrolysate; 2-pentylfuran FD 8192 native, 16384 post-hydrolysis; LOX warning quantified. 7/8."
         }
       ],
-      "registry_id": null,
-      "runtime_artifact_count": 0
+      "registry_id": "vtechworks_2022_fava_hydrolysis",
+      "runtime_artifact_count": 1
     },
     {
       "citation": "Wang et al. (2024)",
       "score": "7/8",
       "score_value": 7,
-      "status": "BACKLOG",
+      "status": "RUNTIME_BOUND",
       "occurrence_count": 2,
       "files": [
         "07_reducing_sugars.md"
@@ -1340,8 +1340,8 @@
           "raw_line": "11. `Wang et al. (2024)` — Taylor & Francis DOI:10.1080/10942912.2024.2355888 — GCPs + amino acids; 30.8% TFC increase; OAVs. 7/8."
         }
       ],
-      "registry_id": null,
-      "runtime_artifact_count": 0
+      "registry_id": "wang_2024_glucosamine_synergy",
+      "runtime_artifact_count": 1
     },
     {
       "citation": "Xu, H. et al. (2025)",
@@ -1439,7 +1439,7 @@
       "citation": "Blank & Mottram (Mercaptoketone labelling 2002)",
       "score": "6/8",
       "score_value": 6,
-      "status": "BACKLOG",
+      "status": "RUNTIME_BOUND",
       "occurrence_count": 1,
       "files": [
         "07_reducing_sugars.md"
@@ -1455,8 +1455,8 @@
           "raw_line": "17. `Blank & Mottram (Mercaptoketone labelling 2002)` — JAFC DOI:10.1021/jf035265m — [1-¹³C]ribose → 3-mercapto-2-pentanone (90% labelled); branching ratio quantification. 6/8."
         }
       ],
-      "registry_id": null,
-      "runtime_artifact_count": 0
+      "registry_id": "blank_mottram_2002_ribose_labeling",
+      "runtime_artifact_count": 1
     },
     {
       "citation": "Brash (1999)",
@@ -1485,7 +1485,7 @@
       "citation": "Buera et al. (1987)",
       "score": "6/8",
       "score_value": 6,
-      "status": "BACKLOG",
+      "status": "RUNTIME_BOUND",
       "occurrence_count": 2,
       "files": [
         "07_reducing_sugars.md",
@@ -1509,8 +1509,8 @@
           "raw_line": "5. `Buera et al. (1987)` — J Food Science — Ea for caramelisation: fructose/xylose 25–30 kcal/mol; glucose 33–36 kcal/mol; maltose/lactose 35–48 kcal/mol; triplicates. 6/8."
         }
       ],
-      "registry_id": null,
-      "runtime_artifact_count": 0
+      "registry_id": "buera_1987_maillard_caramelisation_ea",
+      "runtime_artifact_count": 1
     },
     {
       "citation": "Choi et al. (2024)",
@@ -1884,7 +1884,7 @@
       "citation": "PMC10056349 (2023)",
       "score": "6/8",
       "score_value": 6,
-      "status": "BACKLOG",
+      "status": "RUNTIME_BOUND",
       "occurrence_count": 1,
       "files": [
         "06_alternative_proteins.md"
@@ -1900,14 +1900,14 @@
           "raw_line": "9. `PMC10056349 (2023)` — Rubisco AA composition; Met 2.2%, Cys 1.9%, Gly 9.5%; Amadori product formation at 80°C; LC-MS. 6/8."
         }
       ],
-      "registry_id": null,
-      "runtime_artifact_count": 0
+      "registry_id": "pmc10056349_rubisco_amadori",
+      "runtime_artifact_count": 1
     },
     {
       "citation": "PMC11353891 (2024)",
       "score": "6/8",
       "score_value": 6,
-      "status": "BACKLOG",
+      "status": "RUNTIME_BOUND",
       "occurrence_count": 1,
       "files": [
         "06_alternative_proteins.md"
@@ -1923,14 +1923,14 @@
           "raw_line": "13. `PMC11353891 (2024)` — Lentil volatile profiles; de-flavoring strategy comparison; residual hexanal OAV post-treatment. 6/8."
         }
       ],
-      "registry_id": null,
-      "runtime_artifact_count": 0
+      "registry_id": "pmc11353891_lentil_deflavoring",
+      "runtime_artifact_count": 1
     },
     {
       "citation": "PMC11889959 (2025)",
       "score": "6/8",
       "score_value": 6,
-      "status": "BACKLOG",
+      "status": "RUNTIME_BOUND",
       "occurrence_count": 1,
       "files": [
         "06_alternative_proteins.md"
@@ -1946,14 +1946,14 @@
           "raw_line": "11. `PMC11889959 (2025)` — SPI TVP volatile profile; pyrazines quantified; 2-pentylfuran. 6/8."
         }
       ],
-      "registry_id": null,
-      "runtime_artifact_count": 0
+      "registry_id": "pmc11889959_spi_tvp_volatiles",
+      "runtime_artifact_count": 1
     },
     {
       "citation": "Poulsen et al. (2023)",
       "score": "6/8",
       "score_value": 6,
-      "status": "BACKLOG",
+      "status": "RUNTIME_BOUND",
       "occurrence_count": 1,
       "files": [
         "07_reducing_sugars.md"
@@ -1969,8 +1969,8 @@
           "raw_line": "12. `Poulsen et al. (2023)` — PMC10217484 — CML 16–48 mg/kg, CEL 25–86 mg/kg in PBMA; LC-MS/MS; AGE sink quantification. 6/8."
         }
       ],
-      "registry_id": null,
-      "runtime_artifact_count": 0
+      "registry_id": "poulsen_2023_pbma_cml_cel",
+      "runtime_artifact_count": 1
     },
     {
       "citation": "PubMed PMID:16248560 (Ref. 23)",

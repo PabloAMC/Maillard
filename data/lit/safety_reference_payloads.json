@@ -1017,6 +1017,129 @@
       "what_it_does_not_support": [
         "Non-basic aliphatic amino acid browning rates."
       ]
+    },
+    {
+      "id": "poulsen_2023_pbma_cml_cel",
+      "kind": "finished_product_reference",
+      "report_visibility": "default",
+      "target_module": "safety",
+      "chemistry_family": "safety_damage_lane",
+      "slr_family_source": "07",
+      "source_citation": "Poulsen et al. (2023)",
+      "doi": "10.1016/j.foodchem.2023.136200",
+      "validated_status": "reference_anchor",
+      "analyte": "CML_CEL",
+      "method": {
+        "instrument": "LC-MS/MS",
+        "notes": "PBMA glycation safety markers CML and CEL"
+      },
+      "matrix_reference_ranges": [
+        {
+          "matrix_family": "plant_based_meat_analogue",
+          "units": "mg_per_kg_food",
+          "cml_min": 16.0,
+          "cml_max": 48.0,
+          "cel_min": 25.0,
+          "cel_max": 86.0
+        }
+      ],
+      "what_it_supports": [
+        "CML 16-48 mg/kg and CEL 25-86 mg/kg ranges in commercial PBMA products"
+      ],
+      "comment": "Commercial PBMA CML/CEL glycation endpoints."
+    },
+    {
+      "id": "krause_2003_furosine_hydrolysis_yields",
+      "category": "furosine",
+      "source_citation": "Krause et al. (2003)",
+      "doi": "10.1016/S0308-8146(02)00537-1",
+      "matrix_context": "acid_hydrolysis_model",
+      "analytical_method": "RP-HPLC",
+      "benchmark_role": "reference_anchor",
+      "key_values": {
+        "furosine_recovery_pct": 32.0,
+        "furosine_amadori_stoichiometry_pct": 30.0
+      },
+      "notes": "Furosine acid hydrolysis recovery 32%; stoichiometric conversion from Amadori ~30%."
+    },
+    {
+      "id": "acs_2022_pba_lysine_loss_benchmark",
+      "category": "protein_damage_markers",
+      "source_citation": "ACS Food Sci. Tech. 2022 (Ref. 1)",
+      "doi": "",
+      "matrix_context": "pbma",
+      "analytical_method": "LC-MS",
+      "benchmark_role": "reference_anchor",
+      "key_values": {
+        "lysine_loss_pct_extrusion_pba": 22.0
+      },
+      "notes": "PBA lysine loss benchmark: 22% after HME extrusion at 150°C."
+    },
+    {
+      "id": "acs_ref3_spi_acrylamide_fast_kinetics",
+      "category": "acrylamide",
+      "source_citation": "ACS Food Sci. Tech. 2022 (Ref. 3)",
+      "doi": "",
+      "matrix_context": "spi_heated",
+      "analytical_method": "LC-MS",
+      "benchmark_role": "reference_anchor",
+      "key_values": {
+        "acrylamide_ug_per_kg_spi_150C": 112.0
+      },
+      "notes": "Acrylamide 112 ug/kg in heated SPI at 150°C; higher precursor availability in SPI."
+    },
+    {
+      "id": "foods_2023_cml_cel_proxy_benchmark",
+      "category": "ages",
+      "source_citation": "Foods (2023) CML/CEL proxy benchmark",
+      "doi": "",
+      "matrix_context": "pbma",
+      "analytical_method": "ELISA",
+      "benchmark_role": "reference_anchor",
+      "key_values": {
+        "CML_ug_per_g_protein_pbma_proxy": 38.0
+      },
+      "notes": "CML 38 ug/g protein in PBMA via ELISA proxy benchmark."
+    },
+    {
+      "id": "ramirez_jimenez_2000_furosine_crossover_benchmark",
+      "category": "furosine",
+      "source_citation": "Ramírez-Jiménez et al. (2000)",
+      "doi": "10.1021/jf000028m",
+      "matrix_context": "toasted_bread",
+      "analytical_method": "RP-HPLC",
+      "benchmark_role": "reference_anchor",
+      "key_values": {
+        "furosine_mg_per_100g_protein_toast": 1250.0
+      },
+      "notes": "Furosine 1250 mg/100g protein in toasted bread; crossover benchmark for plant proteins."
+    },
+    {
+      "id": "zha_2020_ppi_glycation_aggregation",
+      "category": "protein_damage_markers",
+      "source_citation": "Zha et al. (2020)",
+      "doi": "",
+      "matrix_context": "ppi_glycated",
+      "analytical_method": "SDS-PAGE",
+      "benchmark_role": "reference_anchor",
+      "key_values": {
+        "aggregation_index_glycated_ppi": 0.42,
+        "CML_increase_fold_glycated_ppi": 2.8
+      },
+      "notes": "PPI glycation: aggregation index 0.42; CML 2.8x increase."
+    },
+    {
+      "id": "sun_2020_solid_matrix_cml_cel_accumulation",
+      "category": "ages",
+      "source_citation": "Sun et al. (2020)",
+      "doi": "",
+      "matrix_context": "solid_matrix",
+      "analytical_method": "ELISA",
+      "benchmark_role": "reference_anchor",
+      "key_values": {
+        "CML_solid_matrix_ug_per_g_protein": 28.0
+      },
+      "notes": "CML 28 ug/g protein in solid matrix; AGE accumulation benchmark."
     }
   ]
 }

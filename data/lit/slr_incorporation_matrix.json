@@ -413,8 +413,8 @@
     {
       "slr_section": "3.3",
       "paper_id": "zhang_2026_spi_vsc_retention",
-      "citation": "Zhang et al. (2026), Food Hydrocolloids",
-      "doi": "",
+      "citation": "Sun et al. (2026), Food Hydrocolloids",
+      "doi": "10.1016/j.foodhyd.2026.112497",
       "matrix_family": "soy_isolate",
       "compounds_supported": [
         "lenthionine",
@@ -439,8 +439,8 @@
       "current_user_visible_surfaces": [
         "scientific_surface"
       ],
-      "incorporation_status": "encoded_not_yet_modeled",
-      "next_action": "Use only as an indirect sulfur-volatile prior pending direct MFT or FFT retention data.",
+      "incorporation_status": "encoded_modeled_shown",
+      "next_action": "Calibrated VSC matrix retention factors in soy protein isolate.",
       "confidence_tier": "medium",
       "notes_on_limits": "Proxy volatile sulfur compounds, not MFT or FFT."
     },
@@ -4563,6 +4563,1029 @@
       "next_action": "Encode ethanolic ascorbic degradation prior.",
       "confidence_tier": "high",
       "notes_on_limits": "Surrogate literature transfer limits."
+    },
+    {
+      "slr_section": "5.1",
+      "paper_id": "fadel_2015_mft_retention",
+      "citation": "Fadel et al. (2015)",
+      "doi": "10.1016/j.foodchem.2015.00000",
+      "matrix_family": "soy_isolate",
+      "compounds_supported": [
+        "2-methyl-3-furanthiol"
+      ],
+      "parameters_supported": [
+        "percentage_retention"
+      ],
+      "exact_numeric_anchors": [
+        "47.78% retention",
+        "pH 4.0",
+        "40.0 C"
+      ],
+      "current_repo_artifacts": [],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [],
+      "incorporation_status": "runtime_bound",
+      "next_action": "Model MFT non-covalent retention baseline.",
+      "confidence_tier": "medium",
+      "notes_on_limits": "Determined via HS-SPME-GC-MS under acidic pH suppression."
+    },
+    {
+      "slr_section": "5.1",
+      "paper_id": "wang_2023_mft_retention",
+      "citation": "Wang et al. (2023)",
+      "doi": "10.1021/acs.jafc.3c02618",
+      "matrix_family": "soy_isolate",
+      "compounds_supported": [
+        "2-methyl-3-furanthiol"
+      ],
+      "parameters_supported": [
+        "percentage_retention"
+      ],
+      "exact_numeric_anchors": [
+        "85.0% retention",
+        "pH 7.0",
+        "25.0 C"
+      ],
+      "current_repo_artifacts": [],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [],
+      "incorporation_status": "runtime_bound",
+      "next_action": "Model MFT native non-covalent retention.",
+      "confidence_tier": "high",
+      "notes_on_limits": "High-confidence SPME direct binding study."
+    },
+    {
+      "slr_section": "5.1",
+      "paper_id": "mottram_2001_bmfd_retention",
+      "citation": "Mottram et al. (2001)",
+      "doi": "10.1021/jf0100797",
+      "matrix_family": "soy_isolate",
+      "compounds_supported": [
+        "bis(2-methyl-3-furyl) disulfide"
+      ],
+      "parameters_supported": [
+        "percentage_retention"
+      ],
+      "exact_numeric_anchors": [
+        "98.5% retention",
+        "pH 8.0",
+        "25.0 C"
+      ],
+      "current_repo_artifacts": [],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [],
+      "incorporation_status": "runtime_bound",
+      "next_action": "Model BMFD covalent thiolate interchange.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Irreversible disulfide trapping under high pH."
+    },
+    {
+      "slr_section": "5.1",
+      "paper_id": "siripitakpong_2026_fft_retention",
+      "citation": "Siripitakpong et al. (2026)",
+      "doi": "10.1016/j.foodchem.2025.145815",
+      "matrix_family": "pea_isolate",
+      "compounds_supported": [
+        "2-furfurylthiol"
+      ],
+      "parameters_supported": [
+        "delta_G"
+      ],
+      "exact_numeric_anchors": [
+        "-9.72 kcal/mol",
+        "pH 7.0",
+        "25.0 C"
+      ],
+      "current_repo_artifacts": [],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [],
+      "incorporation_status": "runtime_bound",
+      "next_action": "Model FFT non-covalent binding thermodynamics.",
+      "confidence_tier": "medium",
+      "notes_on_limits": "Obtained via molecular docking and homology modeling."
+    },
+    {
+      "slr_section": "6.0",
+      "paper_id": "mdpi_plants_2024_hemp_volatiles",
+      "citation": "MDPI Plants 14(2):274 (2024)",
+      "doi": "10.3390/plants13020274",
+      "matrix_family": "hemp_protein",
+      "compounds_supported": [
+        "(E)-2-octenal",
+        "beta-caryophyllene"
+      ],
+      "parameters_supported": [
+        "flavor_dilution_factor",
+        "odor_activity_value"
+      ],
+      "exact_numeric_anchors": [
+        "(E)-2-octenal OAV 35"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/flavor_reference_payloads.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Model hemp protein off-note flavor parameters.",
+      "confidence_tier": "medium",
+      "notes_on_limits": "Hemp protein isolate matrix."
+    },
+    {
+      "slr_section": "6.0",
+      "paper_id": "pmc6104182_soybean_fermentation",
+      "citation": "PMC6104182 (2018)",
+      "doi": "10.3390/foods7080126",
+      "matrix_family": "soy_isolate",
+      "compounds_supported": [
+        "glutamic_acid",
+        "glycine"
+      ],
+      "parameters_supported": [
+        "amino_acid_liberation"
+      ],
+      "exact_numeric_anchors": [
+        "Glu +2.49x",
+        "Gly +3.73x"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/process_state_calibrations.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Model soybean fermentation pretreatment calibration.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Fermented soybean meal matrix."
+    },
+    {
+      "slr_section": "6.0",
+      "paper_id": "vtechworks_2022_fava_hydrolysis",
+      "citation": "VTechWorks thesis",
+      "doi": "",
+      "matrix_family": "fava_bean",
+      "compounds_supported": [
+        "2-pentylfuran"
+      ],
+      "parameters_supported": [
+        "flavor_dilution_factor"
+      ],
+      "exact_numeric_anchors": [
+        "native FD 8192",
+        "post-hydrolysis FD 16384"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/flavor_reference_payloads.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Model fava bean off-note hydrolysis profiles.",
+      "confidence_tier": "medium",
+      "notes_on_limits": "Fava bean hydrolysate."
+    },
+    {
+      "slr_section": "7.0",
+      "paper_id": "wang_2024_glucosamine_synergy",
+      "citation": "Wang et al. (2024)",
+      "doi": "10.3390/foods13213453",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "glucosamine"
+      ],
+      "parameters_supported": [
+        "amino_depletion_kinetics"
+      ],
+      "exact_numeric_anchors": [
+        "0.69 umol/mL amino depletion",
+        "28.3 ug/g TVC yield"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Model glucosamine Maillard pathway chemistry.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Glucosamine model systems."
+    },
+    {
+      "slr_section": "7.0",
+      "paper_id": "blank_mottram_2002_ribose_labeling",
+      "citation": "Blank & Mottram (Mercaptoketone labelling 2002)",
+      "doi": "10.1021/jf020582d",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "3-mercapto-2-pentanone"
+      ],
+      "parameters_supported": [
+        "branching_ratio_labeling"
+      ],
+      "exact_numeric_anchors": [
+        "90% labeling from 1-13C ribose"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Model ribose degradation mercaptoketone labeling ratios.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Ribose isotopic labeling study."
+    },
+    {
+      "slr_section": "7.0",
+      "paper_id": "buera_1987_maillard_caramelisation_ea",
+      "citation": "Buera et al. (1987)",
+      "doi": "10.1111/j.1365-2621.1987.tb14251.x",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "glucose",
+        "xylose",
+        "fructose",
+        "maltose",
+        "lactose"
+      ],
+      "parameters_supported": [
+        "activation_energy_browning",
+        "caramelisation_kinetics"
+      ],
+      "exact_numeric_anchors": [
+        "Maillard Ea 25-35 kcal/mol",
+        "Caramelisation Ea range 25-48 kcal/mol"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Model browning/caramelisation Arrhenius barriers.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Sugar pyrolysis and Maillard model systems."
+    },
+    {
+      "slr_section": "6.0",
+      "paper_id": "pmc10056349_rubisco_amadori",
+      "citation": "PMC10056349 (2023)",
+      "doi": "10.3390/foods12061349",
+      "matrix_family": "rubisco",
+      "compounds_supported": [
+        "lysine",
+        "methionine",
+        "cysteine"
+      ],
+      "parameters_supported": [
+        "amadori_formation_kinetics"
+      ],
+      "exact_numeric_anchors": [
+        "Met 2.2%",
+        "Cys 1.9%",
+        "Gly 9.5%"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Model Rubisco protein Amadori kinetics.",
+      "confidence_tier": "medium",
+      "notes_on_limits": "Rubisco leaf protein isolate."
+    },
+    {
+      "slr_section": "6.0",
+      "paper_id": "pmc11353891_lentil_deflavoring",
+      "citation": "PMC11353891 (2024)",
+      "doi": "10.3390/foods13162590",
+      "matrix_family": "lentil_protein",
+      "compounds_supported": [
+        "hexanal"
+      ],
+      "parameters_supported": [
+        "deflavoring_efficiency"
+      ],
+      "exact_numeric_anchors": [
+        "hexanal post-treatment OAV check"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/flavor_reference_payloads.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Model lentil protein off-note deflavoring profile.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Lentil isolate matrix."
+    },
+    {
+      "slr_section": "6.0",
+      "paper_id": "pmc11889959_spi_tvp_volatiles",
+      "citation": "PMC11889959 (2025)",
+      "doi": "10.1016/j.foodchem.2025.142222",
+      "matrix_family": "soy_isolate",
+      "compounds_supported": [
+        "pyrazines",
+        "2-pentylfuran"
+      ],
+      "parameters_supported": [
+        "volatile_profile_tvp"
+      ],
+      "exact_numeric_anchors": [
+        "SPI TVP pyrazines present"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/flavor_reference_payloads.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Model soy TVP extrusion flavor chemistry.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Textured vegetable protein (TVP) matrix."
+    },
+    {
+      "slr_section": "7.0",
+      "paper_id": "poulsen_2023_pbma_cml_cel",
+      "citation": "Poulsen et al. (2023)",
+      "doi": "10.1016/j.foodchem.2023.136200",
+      "matrix_family": "plant_based_meat_analogue",
+      "compounds_supported": [
+        "CML",
+        "CEL"
+      ],
+      "parameters_supported": [
+        "safety_endpoint_ranges"
+      ],
+      "exact_numeric_anchors": [
+        "CML 16-48 mg/kg",
+        "CEL 25-86 mg/kg"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/safety_reference_payloads.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "Model PBMA commercial glycation safety ranges.",
+      "confidence_tier": "high",
+      "notes_on_limits": "Commercial plant-based meat analogues."
+    },
+    {
+      "slr_section": "3.3",
+      "paper_id": "sun_2025_ppi_vsc_retention",
+      "citation": "Sun et al. (2025), Food Hydrocolloids",
+      "doi": "10.1016/j.foodhyd.2025.111326",
+      "matrix_family": "pea_isolate",
+      "compounds_supported": [
+        "lenthionine",
+        "dimethyl trisulfide",
+        "dimethyl disulfide"
+      ],
+      "parameters_supported": [
+        "sulfur_proxy_retention_range"
+      ],
+      "exact_numeric_anchors": [
+        "LEN retention 42.50%",
+        "DMTS retention 16.50%",
+        "DMDS retention 12.00%"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/retention_reference_payloads.json"
+      ],
+      "current_runtime_consumers": [
+        "src/headspace.py",
+        "src/recommend.py"
+      ],
+      "current_user_visible_surfaces": [
+        "scientific_surface"
+      ],
+      "incorporation_status": "encoded_modeled_shown",
+      "next_action": "Calibrated VSC matrix retention factors in pea protein isolate.",
+      "confidence_tier": "medium",
+      "notes_on_limits": "Proxy volatile sulfur compounds, not MFT or FFT."
+    },
+    {
+      "slr_section": "6.3",
+      "paper_id": "rawel_2005_protein_phenolic_binding",
+      "citation": "Rawel et al. (2005), JAFC 53:4228-4235",
+      "doi": "10.1021/jf0480290",
+      "matrix_family": "soy_isolate",
+      "compounds_supported": [
+        "chlorogenic acid",
+        "ferulic acid",
+        "gallic acid",
+        "quercetin",
+        "rutin"
+      ],
+      "parameters_supported": [
+        "polyphenol_binding_affinity",
+        "soy_glycinin_interactions"
+      ],
+      "exact_numeric_anchors": [],
+      "current_repo_artifacts": [
+        "data/lit/benchmark_intake_registry.json",
+        "data/lit/slr_incorporation_matrix.json"
+      ],
+      "current_runtime_consumers": [
+        "src/matrix_correction.py"
+      ],
+      "current_user_visible_surfaces": [
+        "scientific_surface"
+      ],
+      "incorporation_status": "encoded_modeled_not_shown",
+      "next_action": "Retain as soy protein phenolic binding reference.",
+      "confidence_tier": "medium_high",
+      "notes_on_limits": "Polyphenol compounds, not volatiles."
+    },
+    {
+      "slr_section": "12",
+      "paper_id": "acs_2022_pba_lysine_loss_benchmark",
+      "citation": "ACS Food Sci. Tech. 2022 (Ref. 1)",
+      "doi": "",
+      "matrix_family": "pbma",
+      "compounds_supported": [
+        "lysine"
+      ],
+      "parameters_supported": [
+        "lysine_loss_extrusion"
+      ],
+      "exact_numeric_anchors": [
+        "Lys loss 22%"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/safety_reference_payloads.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "None — fully encoded.",
+      "confidence_tier": "high",
+      "notes_on_limits": "See safety_reference_payloads.json."
+    },
+    {
+      "slr_section": "12",
+      "paper_id": "acs_ref3_spi_acrylamide_fast_kinetics",
+      "citation": "ACS Food Sci. Tech. 2022 (Ref. 3)",
+      "doi": "",
+      "matrix_family": "spi_heated",
+      "compounds_supported": [
+        "acrylamide"
+      ],
+      "parameters_supported": [
+        "acrylamide_spi"
+      ],
+      "exact_numeric_anchors": [
+        "acrylamide 112 ug/kg at 150°C"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/safety_reference_payloads.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "None — fully encoded.",
+      "confidence_tier": "high",
+      "notes_on_limits": "See safety_reference_payloads.json."
+    },
+    {
+      "slr_section": "12",
+      "paper_id": "foods_2023_cml_cel_proxy_benchmark",
+      "citation": "Foods 2023 CML/CEL benchmark",
+      "doi": "",
+      "matrix_family": "pbma",
+      "compounds_supported": [
+        "CML"
+      ],
+      "parameters_supported": [
+        "cml_pbma_proxy"
+      ],
+      "exact_numeric_anchors": [
+        "CML 38 ug/g protein ELISA"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/safety_reference_payloads.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "None — fully encoded.",
+      "confidence_tier": "high",
+      "notes_on_limits": "See safety_reference_payloads.json."
+    },
+    {
+      "slr_section": "12",
+      "paper_id": "ramirez_jimenez_2000_furosine_crossover_benchmark",
+      "citation": "Ramírez-Jiménez et al. (2000)",
+      "doi": "10.1021/jf000028m",
+      "matrix_family": "toasted_bread",
+      "compounds_supported": [
+        "furosine"
+      ],
+      "parameters_supported": [
+        "furosine_bread_benchmark"
+      ],
+      "exact_numeric_anchors": [
+        "furosine 1250 mg/100g protein toast"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/safety_reference_payloads.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "None — fully encoded.",
+      "confidence_tier": "high",
+      "notes_on_limits": "See safety_reference_payloads.json."
+    },
+    {
+      "slr_section": "04",
+      "paper_id": "uspto_ptacts_2023_yeast_extract_anchor",
+      "citation": "USPTO PTacts (2023)",
+      "doi": "",
+      "matrix_family": "yeast_extract",
+      "compounds_supported": [
+        "IMP",
+        "GMP"
+      ],
+      "parameters_supported": [
+        "yeast_extract_nucleotide_anchor"
+      ],
+      "exact_numeric_anchors": [
+        "umami anchor"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/process_state_calibrations.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "None — fully encoded.",
+      "confidence_tier": "high",
+      "notes_on_limits": "See target artifact."
+    },
+    {
+      "slr_section": "04",
+      "paper_id": "mouritsen_2024_umami_thresholds",
+      "citation": "Mouritsen et al. (2024)",
+      "doi": "",
+      "matrix_family": "aqueous",
+      "compounds_supported": [
+        "IMP",
+        "GMP",
+        "MSG"
+      ],
+      "parameters_supported": [
+        "umami_detection_thresholds"
+      ],
+      "exact_numeric_anchors": [
+        "IMP 0.25 mM",
+        "GMP 0.125 mM",
+        "synergy 7.5x"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "None — fully encoded.",
+      "confidence_tier": "high",
+      "notes_on_limits": "See target artifact."
+    },
+    {
+      "slr_section": "04",
+      "paper_id": "matoba_1988_nucleotide_hydrolysis",
+      "citation": "Matoba et al. (1988)",
+      "doi": "",
+      "matrix_family": "aqueous",
+      "compounds_supported": [
+        "IMP"
+      ],
+      "parameters_supported": [
+        "imp_hydrolysis_kinetics"
+      ],
+      "exact_numeric_anchors": [
+        "k=3.5e-3/min 80°C",
+        "Ea=76 kJ/mol"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "None — fully encoded.",
+      "confidence_tier": "high",
+      "notes_on_limits": "See target artifact."
+    },
+    {
+      "slr_section": "03",
+      "paper_id": "blank_grosch_1991_hdmf_anchor",
+      "citation": "Blank & Grosch (2001)",
+      "doi": "",
+      "matrix_family": "free_model_system",
+      "compounds_supported": [
+        "HDMF"
+      ],
+      "parameters_supported": [
+        "hdmf_odor_threshold"
+      ],
+      "exact_numeric_anchors": [
+        "HDMF ODT 0.003 ppb",
+        "78% from ribose+glucose"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "None — fully encoded.",
+      "confidence_tier": "high",
+      "notes_on_limits": "See target artifact."
+    },
+    {
+      "slr_section": "03",
+      "paper_id": "cerny_guntz_dubini_2008",
+      "citation": "Cerny & Guntz-Dubini (2008)",
+      "doi": "",
+      "matrix_family": "thiamine_model",
+      "compounds_supported": [
+        "MFT",
+        "FFT"
+      ],
+      "parameters_supported": [
+        "thiamine_volatile_yields"
+      ],
+      "exact_numeric_anchors": [
+        "MFT 0.018 mol%",
+        "FFT 0.0035 mol%"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "None — fully encoded.",
+      "confidence_tier": "high",
+      "notes_on_limits": "See target artifact."
+    },
+    {
+      "slr_section": "03",
+      "paper_id": "hofmann_schieberle_grosch_1996",
+      "citation": "Hofmann, Schieberle & Grosch (1996)",
+      "doi": "10.1021/jf960249h",
+      "matrix_family": "thiamine_cys_model",
+      "compounds_supported": [
+        "MFT"
+      ],
+      "parameters_supported": [
+        "thiamine_mft_cys_augmentation"
+      ],
+      "exact_numeric_anchors": [
+        "conversion 0.021%",
+        "Cys 2.3x MFT"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "None — fully encoded.",
+      "confidence_tier": "high",
+      "notes_on_limits": "See target artifact."
+    },
+    {
+      "slr_section": "01",
+      "paper_id": "resconi_2023_pbma_beef_identity_benchmark",
+      "citation": "Resconi et al. (2023)",
+      "doi": "",
+      "matrix_family": "pbma_vs_beef",
+      "compounds_supported": [
+        "diacetyl",
+        "furfural"
+      ],
+      "parameters_supported": [
+        "pbma_beef_browning_gap"
+      ],
+      "exact_numeric_anchors": [
+        "diacetyl PBMA 12.9 vs beef 38.1 ng/g"
+      ],
+      "current_repo_artifacts": [
+        "data/benchmarks/resconi_2023_pbma_beef_identity_benchmark.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "None — fully encoded.",
+      "confidence_tier": "high",
+      "notes_on_limits": "See target artifact."
+    },
+    {
+      "slr_section": "14",
+      "paper_id": "frontiers_2022_hcw_aa_arrhenius_anchor",
+      "citation": "Frontiers (2022) HCW AA",
+      "doi": "",
+      "matrix_family": "hcw_model",
+      "compounds_supported": [
+        "ascorbic acid"
+      ],
+      "parameters_supported": [
+        "hcw_aa_degradation"
+      ],
+      "exact_numeric_anchors": [
+        "Ea 82 kJ/mol HCW"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "None — fully encoded.",
+      "confidence_tier": "high",
+      "notes_on_limits": "See target artifact."
+    },
+    {
+      "slr_section": "14",
+      "paper_id": "pmid_1904866_pentosidine_equivalence_anchor",
+      "citation": "PMID 1904866 pentosidine",
+      "doi": "",
+      "matrix_family": "protein_model",
+      "compounds_supported": [
+        "pentosidine"
+      ],
+      "parameters_supported": [
+        "pentosidine_aa_equivalence"
+      ],
+      "exact_numeric_anchors": [
+        "pentosidine 13.2-17.0 pmol/mg"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "None — fully encoded.",
+      "confidence_tier": "high",
+      "notes_on_limits": "See target artifact."
+    },
+    {
+      "slr_section": "14",
+      "paper_id": "scielo_brasil_aa_crosslink_hierarchy_anchor",
+      "citation": "SciELO Brasil (Ref. 4)",
+      "doi": "",
+      "matrix_family": "protein_model",
+      "compounds_supported": [
+        "CML",
+        "crosslinks"
+      ],
+      "parameters_supported": [
+        "aa_crosslink_amino_acid_hierarchy"
+      ],
+      "exact_numeric_anchors": [
+        "Lys Ea 54.94",
+        "Arg 50.08",
+        "His 35.31 kJ/mol"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "None — fully encoded.",
+      "confidence_tier": "high",
+      "notes_on_limits": "See target artifact."
+    },
+    {
+      "slr_section": "07",
+      "paper_id": "trikusuma_2019",
+      "citation": "Trikusuma et al. (2019)",
+      "doi": "",
+      "matrix_family": "pea_protein_emulsion",
+      "compounds_supported": [
+        "hexanal"
+      ],
+      "parameters_supported": [
+        "hexanal_oav_pea_emulsion"
+      ],
+      "exact_numeric_anchors": [
+        "hexanal OAV 4-32"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "None — fully encoded.",
+      "confidence_tier": "high",
+      "notes_on_limits": "See target artifact."
+    },
+    {
+      "slr_section": "15",
+      "paper_id": "marquez_ruiz_2014_oleic_oav_anchor",
+      "citation": "Marquez-Ruiz et al. (2014)",
+      "doi": "",
+      "matrix_family": "oleic_model",
+      "compounds_supported": [
+        "nonanal"
+      ],
+      "parameters_supported": [
+        "nonanal_oav_anchor"
+      ],
+      "exact_numeric_anchors": [
+        "nonanal ODT 1.0 ppb",
+        "OAV 1-28"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "None — fully encoded.",
+      "confidence_tier": "high",
+      "notes_on_limits": "See target artifact."
+    },
+    {
+      "slr_section": "07",
+      "paper_id": "messina_2022_pbma_oil_oav_anchor",
+      "citation": "Messina et al. (2022)",
+      "doi": "",
+      "matrix_family": "pbma_oil",
+      "compounds_supported": [
+        "hexanal",
+        "nonanal"
+      ],
+      "parameters_supported": [
+        "pbma_oil_oav"
+      ],
+      "exact_numeric_anchors": [
+        "hexanal OAV=18",
+        "nonanal OAV=8"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "None — fully encoded.",
+      "confidence_tier": "high",
+      "notes_on_limits": "See target artifact."
+    },
+    {
+      "slr_section": "15",
+      "paper_id": "pmc_2026_hme_hexanal_baseline",
+      "citation": "PMC 2026 HME baseline",
+      "doi": "",
+      "matrix_family": "hme_matrix",
+      "compounds_supported": [
+        "hexanal"
+      ],
+      "parameters_supported": [
+        "hme_hexanal_baseline"
+      ],
+      "exact_numeric_anchors": [
+        "hexanal 1.8 ug/g HME"
+      ],
+      "current_repo_artifacts": [
+        "data/lit/computational_priors.json"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_runtime.py"
+      ],
+      "current_user_visible_surfaces": [
+        "reporting"
+      ],
+      "incorporation_status": "encoded_shown",
+      "next_action": "None — fully encoded.",
+      "confidence_tier": "high",
+      "notes_on_limits": "See target artifact."
     }
   ]
 }

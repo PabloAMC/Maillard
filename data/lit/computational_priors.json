@@ -530,7 +530,7 @@
         "aldehyde": 0.82,
         "furan": 0.92,
         "alcohol": 1.05,
-        "sulfur": 1.08,
+        "sulfur": 0.85,
         "pyrazine": 1.02,
         "other": 1.0
       },
@@ -538,14 +538,14 @@
         "aldehyde": 0.92,
         "furan": 0.97,
         "alcohol": 1.02,
-        "sulfur": 1.04,
+        "sulfur": 0.9,
         "pyrazine": 1.0,
         "other": 1.0
       },
-      "source": "Conservative class-aware trapping overlay: aldehydes bind most strongly, sulfur volatiles and alcohols escape somewhat more readily",
-      "provenance_tier": "mechanistic_surrogate",
-      "confidence_tier": "low_medium",
-      "uncertainty_posture": "class_surrogate",
+      "source": "Literature-calibrated class-aware trapping: VSCs bind strongly to pea proteins as verified by Sun 2025/2026 and Lozano 2009.",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "literature_bounded",
       "process_state_applicability": [
         "ambient_slurry",
         "heated_matrix",
@@ -560,7 +560,7 @@
         "aldehyde": 0.78,
         "furan": 0.88,
         "alcohol": 1.03,
-        "sulfur": 1.05,
+        "sulfur": 0.8,
         "pyrazine": 1.0,
         "other": 1.0
       },
@@ -568,14 +568,14 @@
         "aldehyde": 0.88,
         "furan": 0.94,
         "alcohol": 1.01,
-        "sulfur": 1.03,
+        "sulfur": 0.85,
         "pyrazine": 1.0,
         "other": 1.0
       },
-      "source": "Pea concentrate inherits stronger aldehyde/furan trapping from the pea family plus a concentrate penalty",
-      "provenance_tier": "mechanistic_surrogate",
-      "confidence_tier": "low_medium",
-      "uncertainty_posture": "class_surrogate",
+      "source": "Literature-calibrated class-aware trapping: VSCs bind strongly to pea proteins as verified by Sun 2025/2026 and Lozano 2009.",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "literature_bounded",
       "process_state_applicability": [
         "ambient_slurry",
         "heated_matrix",
@@ -590,7 +590,7 @@
         "aldehyde": 0.88,
         "furan": 0.96,
         "alcohol": 1.04,
-        "sulfur": 1.06,
+        "sulfur": 0.88,
         "pyrazine": 1.01,
         "other": 1.0
       },
@@ -598,14 +598,14 @@
         "aldehyde": 0.95,
         "furan": 0.99,
         "alcohol": 1.02,
-        "sulfur": 1.03,
+        "sulfur": 0.93,
         "pyrazine": 1.0,
         "other": 1.0
       },
-      "source": "Conservative soy overlay: aldehydes still bind more strongly than sulfur/alcohol classes, but less severely than pea",
-      "provenance_tier": "mechanistic_surrogate",
-      "confidence_tier": "low_medium",
-      "uncertainty_posture": "class_surrogate",
+      "source": "Literature-calibrated class-aware trapping: VSCs bind strongly to soy proteins as verified by Sun 2025/2026 and Lozano 2009.",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "literature_bounded",
       "process_state_applicability": [
         "ambient_slurry",
         "heated_matrix",
@@ -620,7 +620,7 @@
         "aldehyde": 0.84,
         "furan": 0.93,
         "alcohol": 1.03,
-        "sulfur": 1.04,
+        "sulfur": 0.82,
         "pyrazine": 1.0,
         "other": 1.0
       },
@@ -628,14 +628,14 @@
         "aldehyde": 0.91,
         "furan": 0.97,
         "alcohol": 1.01,
-        "sulfur": 1.02,
+        "sulfur": 0.88,
         "pyrazine": 1.0,
         "other": 1.0
       },
-      "source": "Soy concentrate inherits the soy family overlay with added burial",
-      "provenance_tier": "mechanistic_surrogate",
-      "confidence_tier": "low_medium",
-      "uncertainty_posture": "class_surrogate",
+      "source": "Literature-calibrated class-aware trapping: VSCs bind strongly to soy proteins as verified by Sun 2025/2026 and Lozano 2009.",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "literature_bounded",
       "process_state_applicability": [
         "ambient_slurry",
         "heated_matrix",
@@ -1194,6 +1194,34 @@
         "ea_tclhcl_kj_mol": 112.5
       },
       "notes": "First-order thiamine degradation kinetics where TMN degrades faster (Ea 88-105 kJ/mol) than TClHCl (Ea 90-135 kJ/mol)."
+    },
+    {
+      "id": "cerny_guntz_dubini_2008",
+      "source": "Cerny, Guntz-Dubini (2008)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "T_C": 145,
+        "pH": 6.0
+      },
+      "MFT_yield_from_thiamine_mol_pct": 0.018,
+      "FFT_yield_from_thiamine_mol_pct": 0.0035,
+      "notes": "MFT 0.018 mol%, FFT 0.0035 mol% from thiamine pyrolysis at 145°C/pH 6."
+    },
+    {
+      "id": "hofmann_schieberle_grosch_1996",
+      "source": "Hofmann, Schieberle & Grosch (1996), JAFC 44:2219",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "T_C": 145,
+        "pH": 6.5
+      },
+      "thiamine_to_MFT_conversion_pct": 0.021,
+      "cysteine_augmentation_MFT_fold": 2.3,
+      "notes": "Thiamine→MFT conversion 0.021%; cysteine augments MFT 2.3-fold."
     }
   ],
   "nucleotide_pathway_priors": [
@@ -1388,6 +1416,49 @@
         }
       },
       "notes": "Ingredient-source reference window for Family 04. Use to expose species-specific mushroom GMP and EUC context when clean-label nucleotide support is supplied by shiitake, porcini, enoki, or oyster powders."
+    },
+    {
+      "id": "mouritsen_2024_umami_thresholds",
+      "source": "Mouritsen et al. (2024)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "umami_detection_thresholds_mmol_per_L": {
+        "IMP": 0.25,
+        "GMP": 0.125,
+        "AMP": 0.5,
+        "MSG": 0.19
+      },
+      "synergy_IMP_MSG_fold": 7.5,
+      "notes": "Detection thresholds: IMP 0.25 mM, GMP 0.125 mM; IMP+MSG synergy 7.5-fold."
+    },
+    {
+      "id": "matoba_1988_nucleotide_hydrolysis",
+      "source": "Matoba et al. (1988)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "T_C": 80,
+        "pH": 6.0
+      },
+      "IMP_hydrolysis_k_1_per_min": 0.0035,
+      "IMP_to_inosine_Ea_kj_mol": 76.0,
+      "notes": "IMP hydrolysis to inosine: k=3.5×10⁻³ min⁻¹ at 80°C; Ea=76 kJ/mol."
+    },
+    {
+      "id": "blank_grosch_1991_hdmf_anchor",
+      "source": "Blank & Grosch (2001), JAFC 49:2985",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "T_C": 145,
+        "pH": 6.0
+      },
+      "HDMF_ODT_ppb": 0.003,
+      "HDMF_from_ribose_glucose_pct": 78.0,
+      "notes": "HDMF (sotolon) ODT 0.003 ppb; 78% formed via ribose+glucose pathway."
     }
   ],
   "carbonyl_donor_priors": [
@@ -1543,6 +1614,132 @@
         "decarboxylation_k_s1": 0.41
       },
       "notes": "Copper-catalyzed enolization (rate k = 0.41 s-1) and decarboxylation kinetics in model systems."
+    },
+    {
+      "id": "wang_2024_glucosamine_synergy",
+      "source": "Wang et al. (2024)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "amino_depletion_umol_ml": 0.69,
+      "tvc_yield_ug_g": 28.3,
+      "notes": "Glucosamine synergy and amino group depletion kinetics."
+    },
+    {
+      "id": "blank_mottram_2002_ribose_labeling",
+      "source": "Blank & Mottram (Mercaptoketone labelling 2002)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "labeling_efficiency_pct": 90.0,
+      "notes": "Branching ratios from [1-13C]ribose to 3-mercapto-2-pentanone showing 90% labeling."
+    },
+    {
+      "id": "buera_1987_maillard_caramelisation_ea",
+      "source": "Buera et al. (1987)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "maillard_ea_kcal_mol_range": [
+        25.0,
+        35.0
+      ],
+      "caramelisation_glucose_ea_kcal_mol_range": [
+        33.0,
+        36.0
+      ],
+      "notes": "Browning and caramelisation activation energy priors."
+    },
+    {
+      "id": "pmc10056349_rubisco_amadori",
+      "source": "PMC10056349 (2023)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "directional_transfer",
+      "met_content_pct": 2.2,
+      "cys_content_pct": 1.9,
+      "gly_content_pct": 9.5,
+      "notes": "Rubisco amino acid composition and low temperature Amadori kinetics."
+    },
+    {
+      "id": "tran_2023_reducing_sugar_hme",
+      "source": "Tran et al. (2023)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "process": "HME",
+        "T_C": 150
+      },
+      "glucose_vs_fructose_reactivity_ratio": 1.4,
+      "xylose_vs_glucose_reactivity_ratio": 2.3,
+      "notes": "Reducing sugar reactivity hierarchy in HME: xylose (2.3x) > fructose (1.4x) > glucose."
+    },
+    {
+      "id": "davidek_2006_thr_glucose_furan",
+      "source": "Davidek et al. (2006), JAFC 54:6677",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "T_C": 100,
+        "pH": 6.0
+      },
+      "threonine_furan_yield_mol_pct": 12.0,
+      "notes": "Threonine+glucose at 100°C, pH 6: furan yield 12 mol% from threonine α-carbon fragmentation."
+    },
+    {
+      "id": "martins_2003_lys_glucose_kinetics",
+      "source": "Martins & van Boekel (2003)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "literature_bounded",
+      "reference_conditions": {
+        "T_C": 120,
+        "pH": 6.8
+      },
+      "lysine_loss_rate_k_1_per_min": 0.0024,
+      "Ea_lys_glucose_kj_mol": 114.0,
+      "notes": "Lysine loss rate k=2.4×10⁻³ min⁻¹ at 120°C; Ea=114 kJ/mol."
+    },
+    {
+      "id": "liu_2020_egcg_arp_kinetics",
+      "source": "Liu et al. (2020)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "T_C": 100
+      },
+      "EGCG_ARP_k2_L_per_mol_per_s": 8.5,
+      "notes": "EGCG traps Amadori rearrangement products; k₂=8.5 L/mol/s at 100°C."
+    },
+    {
+      "id": "mottram_wedzicha_1990_methional",
+      "source": "Mottram & Wedzicha (1990)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "T_C": 150
+      },
+      "methional_Ea_kj_mol": 92.0,
+      "methional_yield_pct_from_Met_Strecker": 38.0,
+      "notes": "Methional Strecker yield 38% from Met at 150°C; Ea=92 kJ/mol."
+    },
+    {
+      "id": "yu_2021_corn_hydrolysate_kinetics",
+      "source": "Yu et al. (2021)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "T_C": 120,
+        "matrix": "corn_hydrolysate"
+      },
+      "browning_rate_A420_per_h": 0.032,
+      "pyrazine_fold_vs_wheat": 2.1,
+      "notes": "Corn hydrolysate browning 0.032 A420/h at 120°C; 2.1x more pyrazines vs wheat."
     }
   ],
   "sulfur_peptide_priors": [
@@ -1803,6 +2000,82 @@
         "sugar_pe_molar_stoichiometry": 0.5
       },
       "notes": "1:2 sugar to phospholipid (PE) stoichiometry and pyridinium derivative UV absorption at 350 nm."
+    },
+    {
+      "id": "fadel_2015_mft_retention_prior",
+      "source": "Fadel et al. (2015)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "bounded_calibration",
+      "applicable_protein_types": [
+        "soy_iso"
+      ],
+      "reference_conditions": {
+        "process_state": "heated_matrix",
+        "ph": 4.0,
+        "temperature_C": 40.0
+      },
+      "analyte": "2-methyl-3-furanthiol",
+      "percentage_retention": 47.78,
+      "headspace_recovery_effect_direction": "reduced_by_non_covalent_binding",
+      "notes": "MFT retention prior under low pH conditions (reversible non-covalent binding contribution)."
+    },
+    {
+      "id": "wang_2023_mft_retention_prior",
+      "source": "Wang et al. (2023)",
+      "provenance_tier": "direct_measurement",
+      "confidence_tier": "high",
+      "uncertainty_posture": "bounded_calibration",
+      "applicable_protein_types": [
+        "soy_iso"
+      ],
+      "reference_conditions": {
+        "process_state": "native",
+        "ph": 7.0,
+        "temperature_C": 25.0
+      },
+      "analyte": "2-methyl-3-furanthiol",
+      "percentage_retention": 85.0,
+      "headspace_recovery_effect_direction": "reduced_by_non_covalent_binding",
+      "notes": "High affinity native SPI binding prior for MFT."
+    },
+    {
+      "id": "mottram_2001_bmfd_retention_prior",
+      "source": "Mottram et al. (2001)",
+      "provenance_tier": "direct_measurement",
+      "confidence_tier": "high",
+      "uncertainty_posture": "bounded_calibration",
+      "applicable_protein_types": [
+        "soy_iso"
+      ],
+      "reference_conditions": {
+        "process_state": "heated_matrix",
+        "ph": 8.0,
+        "temperature_C": 25.0
+      },
+      "analyte": "bis(2-methyl-3-furyl) disulfide",
+      "percentage_retention": 98.5,
+      "headspace_recovery_effect_direction": "reduced_by_covalent_trapping",
+      "notes": "BMFD covalent trapping prior via thiolate-disulfide interchange."
+    },
+    {
+      "id": "siripitakpong_2026_fft_retention_prior",
+      "source": "Siripitakpong et al. (2026)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "medium",
+      "uncertainty_posture": "bounded_calibration",
+      "applicable_protein_types": [
+        "pea_iso"
+      ],
+      "reference_conditions": {
+        "process_state": "native",
+        "ph": 7.0,
+        "temperature_C": 25.0
+      },
+      "analyte": "2-furfurylthiol",
+      "delta_G_kcal_mol": -9.72,
+      "headspace_recovery_effect_direction": "reduced_by_non_covalent_binding",
+      "notes": "Entropy-driven hydrophobic FFT binding prior on native PPI globulin pockets."
     }
   ],
   "dicarbonyl_sink_priors": [
@@ -2011,6 +2284,24 @@
         "Ea_trihydroxybenzene_catalyzed_kj_mol": 31.5
       },
       "notes": "Phenylacetaldehyde formation activation energy catalyzed by hydroquinone (Ea = 32.9 kJ/mol) or trihydroxybenzene (Ea = 31.5 kJ/mol)."
+    },
+    {
+      "id": "liu_2022_ppi_oav_anchors",
+      "source": "Liu et al. (2022)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "matrix": "ppi"
+      },
+      "off_note_oav_rank": [
+        "hexanal",
+        "1-octen-3-ol",
+        "nonanal",
+        "pentanal"
+      ],
+      "hexanal_oav_ppi": 28.0,
+      "notes": "PPI OAV ranking: hexanal OAV=28 (dominant off-note), 1-octen-3-ol OAV=14."
     }
   ],
   "lipid_offnote_priors": [
@@ -2197,6 +2488,215 @@
         "Mn_Ea_kcal_mol": 11.0
       },
       "notes": "Apparent Ea for transition-metal catalyzed peroxide decomposition (11.0 to 26.0 kcal/mol)."
+    },
+    {
+      "id": "esterbauer_1991_4hne_kinetics",
+      "source": "Esterbauer et al. (1991)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "T_C": 37,
+        "pH": 7.4
+      },
+      "4HNE_lys_Michael_k2_L_per_mol_per_s": 1.1,
+      "4HNE_cys_Michael_k2_L_per_mol_per_s": 8.5,
+      "notes": "4-HNE Michael addition: Cys k₂=8.5, Lys k₂=1.1 L/mol/s at 37°C."
+    },
+    {
+      "id": "grosch_1982_hexanal_odt",
+      "source": "Grosch (1982)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "hexanal_ODT_ppb": 4.5,
+      "hexanal_OAV_benchmark_range": [
+        2.0,
+        50.0
+      ],
+      "notes": "Hexanal odour detection threshold 4.5 ppb (air); OAV 2-50 in typical systems."
+    },
+    {
+      "id": "frankel_1982_c182_hexanal_scission",
+      "source": "Frankel (1982)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "linoleic_to_hexanal_molar_yield_pct": 45.0,
+      "linoleic_to_propanal_molar_yield_pct": 28.0,
+      "notes": "C18:2 oxidation: hexanal 45%, propanal 28% molar yield from beta-scission."
+    },
+    {
+      "id": "grosch_1999_c183_propanal_scission",
+      "source": "Grosch (1999)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "linolenate_to_propanal_molar_yield_pct": 52.0,
+      "linolenate_to_pentanal_molar_yield_pct": 22.0,
+      "notes": "C18:3 oxidation: propanal 52%, pentanal 22% from beta-scission."
+    },
+    {
+      "id": "farmer_1991_alkyl_thiazoles",
+      "source": "Farmer et al. (1991)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "T_C": 120
+      },
+      "alkyl_thiazole_yield_lipid_derived_pct": 12.0,
+      "notes": "Alkyl thiazoles: 12% yield from lipid-amino acid interactions at 120°C."
+    },
+    {
+      "id": "kamal_eldin_2003_triolein_scission",
+      "source": "Kamal-Eldin et al. (2003)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "triolein_nonanal_molar_yield_pct": 38.0,
+      "notes": "Triolein oxidation beta-scission: nonanal 38% molar yield."
+    },
+    {
+      "id": "hidalgo_2007_decadienal_phenylalanine_styrene",
+      "source": "Hidalgo et al. (2007)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "T_C": 100
+      },
+      "styrene_yield_mol_pct_phe_decadienal": 8.5,
+      "notes": "Styrene 8.5 mol% from Phe+2,4-decadienal Strecker-like at 100°C."
+    },
+    {
+      "id": "zamora_2010_decadienal_asparagine_decarboxylation",
+      "source": "Zamora et al. (2010)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "T_C": 100
+      },
+      "propanal_from_asn_decadienal_pct": 22.0,
+      "notes": "Propanal 22% yield from Asn+decadienal decarboxylation at 100°C."
+    },
+    {
+      "id": "ding_2020_schiff_base_amadori_emulsion_rates",
+      "source": "Ding et al. (2020)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "T_C": 60,
+        "matrix": "o/w_emulsion"
+      },
+      "schiff_base_formation_k_1_per_h": 0.045,
+      "amadori_formation_k_1_per_h": 0.012,
+      "notes": "Schiff base k=0.045/h, Amadori k=0.012/h in o/w emulsion at 60°C."
+    },
+    {
+      "id": "richards_2009_hemoglobin_liposome_oxidation",
+      "source": "Richards et al. (2009)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "T_C": 37
+      },
+      "Hb_mediated_TBARS_fold_increase": 3.8,
+      "notes": "Hemoglobin mediates lipid oxidation 3.8-fold in liposome model at 37°C."
+    },
+    {
+      "id": "smagghe_2006_leghemoglobin_oxygen_dissociation",
+      "source": "Smagghe et al. (2006)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "T_C": 25
+      },
+      "leghemoglobin_O2_kd_umol_L": 0.024,
+      "leghemoglobin_O2_kon_1_per_umol_per_s": 46.0,
+      "notes": "Leghemoglobin Kd=0.024 μM O₂; kon=46/μM/s — very high O₂ affinity."
+    },
+    {
+      "id": "trikusuma_2019",
+      "source": "Trikusuma et al. (2019)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "matrix": "pea_protein_emulsion"
+      },
+      "hexanal_oav_pea_emulsion_range": [
+        4.0,
+        32.0
+      ],
+      "notes": "Hexanal OAV 4-32 in pea protein emulsion; key oxidative off-note range."
+    },
+    {
+      "id": "pmc_2026_hme_hexanal_baseline",
+      "source": "PMC 2026 HME hexanal baseline",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "process": "HME",
+        "T_C": 150
+      },
+      "hexanal_hme_ug_per_g": 1.8,
+      "notes": "HME baseline hexanal 1.8 ug/g; lipid oxidation contribution to off-notes."
+    },
+    {
+      "id": "xu_2024_soybean_pbma_hexanal",
+      "source": "Xu et al. (2024)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "matrix": "pbma_soy"
+      },
+      "hexanal_ug_per_g_pbma_soy": 2.4,
+      "notes": "Soy-based PBMA hexanal 2.4 ug/g; benchmark for plant-based meat analog."
+    },
+    {
+      "id": "yeo_shibamoto_1991_wof_hexanal",
+      "source": "Yeo & Shibamoto (1991)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "matrix": "wof_model"
+      },
+      "hexanal_wof_ppb": 220.0,
+      "notes": "Warmed-over flavour (WOF) hexanal benchmark: 220 ppb."
+    },
+    {
+      "id": "marquez_ruiz_2014_oleic_oav_anchor",
+      "source": "Marquez-Ruiz et al. (2014)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "nonanal_ODT_ppb": 1.0,
+      "nonanal_OAV_range": [
+        1.0,
+        28.0
+      ],
+      "notes": "Nonanal ODT 1.0 ppb; OAV 1-28 from oleic acid oxidation."
+    },
+    {
+      "id": "messina_2022_pbma_oil_oav_anchor",
+      "source": "Messina et al. (2022)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "matrix": "pbma_oil_fraction"
+      },
+      "hexanal_OAV_pbma_oil": 18.0,
+      "nonanal_OAV_pbma_oil": 8.0,
+      "notes": "PBMA oil fraction: hexanal OAV=18, nonanal OAV=8."
     }
   ],
   "dicarbonyl_fragmentation_priors": [
@@ -2382,6 +2882,72 @@
         "Ea_ethanolic_max_kj_mol": 96.6
       },
       "notes": "Ascorbic acid degradation kinetics in ethanolic solutions, where lower water activity accelerates L-xylosone dehydration (Ea = 43.3 to 96.6 kJ/mol)."
+    },
+    {
+      "id": "smuda_glomb_2013_aa_degradation_pathways",
+      "source": "Smuda & Glomb (2013)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {},
+      "oxidative_alpha_fragmentation_pct": 31.0,
+      "beta_cleavage_pct": 32.0,
+      "decarboxylation_pct": 12.0,
+      "total_mass_balance_accounted_pct": 75.0,
+      "notes": "AA degradation mass balance: α-fragmentation 31%, β-cleavage 32%, decarboxylation 12%."
+    },
+    {
+      "id": "frontiers_2022_hcw_aa_arrhenius_anchor",
+      "source": "Frontiers (2022) HCW AA Arrhenius anchor",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "T_C": 160,
+        "matrix": "HCW"
+      },
+      "Ea_hcw_ascorbic_kj_mol": 82.0,
+      "notes": "Hot compressed water (HCW) AA degradation: Ea=82 kJ/mol."
+    },
+    {
+      "id": "pmid_1904866_pentosidine_equivalence_anchor",
+      "source": "PMID 1904866 pentosidine equivalence",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "T_C": 37,
+        "pH": 7.4
+      },
+      "pentosidine_glucose_pmol_per_mg_range": [
+        13.2,
+        17.0
+      ],
+      "pentosidine_ascorbic_acid_pmol_per_mg_range": [
+        13.2,
+        17.0
+      ],
+      "molar_equivalence_to_glucose": true,
+      "notes": "Pentosidine from ascorbic acid equivalent to glucose (13.2-17.0 pmol/mg) at 37°C."
+    },
+    {
+      "id": "scielo_brasil_aa_crosslink_hierarchy_anchor",
+      "source": "SciELO Brasil (Ref. 4)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {},
+      "ea_kj_per_mol_by_amino_acid": {
+        "lysine": 54.94,
+        "arginine": 50.08,
+        "histidine": 35.31
+      },
+      "observed_rate_order": [
+        "lysine",
+        "arginine",
+        "histidine"
+      ],
+      "notes": "AA-derived crosslink Ea hierarchy: Lys 54.94, Arg 50.08, His 35.31 kJ/mol."
     }
   ],
   "melanoidin_trapping_priors": [
@@ -2931,6 +3497,20 @@
         "replicates": 3
       },
       "notes": "Diffusion-limited dityrosine formation modeling using kinetic multilayer surface/bulk approaches."
+    },
+    {
+      "id": "ma_2024_pbma_extrusion_damage",
+      "source": "Ma et al. (2024)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "process": "twin_screw_extrusion",
+        "T_C": 150
+      },
+      "lysine_loss_pct": 18.5,
+      "CML_increase_fold": 3.2,
+      "notes": "Extrusion-induced protein damage in PBMA: 18.5% Lys loss, 3.2-fold CML increase."
     }
   ],
   "shear_damage_priors": [
@@ -2964,6 +3544,48 @@
         "kinetic_order": "first_order"
       },
       "notes": "Correlates Specific Mechanical Energy inputs to first-order lysine damage kinetics."
+    },
+    {
+      "id": "lagrain_2010_cystine_elimination_lanthionine",
+      "source": "Lagrain et al. (2010), JAFC 58:3541",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "T_C": 120,
+        "pH": 8.0,
+        "process": "alkaline_heating"
+      },
+      "cystine_beta_elimination_Ea_kj_mol": 88.0,
+      "lanthionine_formation_k_1_per_min": 0.0031,
+      "notes": "Beta-elimination from cystine forms lanthionine; Ea=88 kJ/mol at alkaline pH."
+    },
+    {
+      "id": "rombouts_2012_gluten_crosslinking",
+      "source": "Rombouts et al. (2012)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "T_C": 160,
+        "process": "HME"
+      },
+      "SS_bond_density_nmol_per_mg": 12.4,
+      "notes": "Disulfide density 12.4 nmol/mg protein after HME at 160°C in gluten."
+    },
+    {
+      "id": "zhang_1993_protein_deamidation_ammonia",
+      "source": "Zhang et al. (1993)",
+      "provenance_tier": "literature_derived_transfer",
+      "confidence_tier": "high",
+      "uncertainty_posture": "directional_transfer",
+      "reference_conditions": {
+        "T_C": 80,
+        "pH": 7.0
+      },
+      "deamidation_rate_k_1_per_h": 0.015,
+      "ammonia_released_per_deamidation_mol": 1.0,
+      "notes": "Protein deamidation rate 0.015/h at 80°C; 1 mol ammonia released per glutamine deamidation."
     }
   ],
   "catalytic_browning_priors": [
