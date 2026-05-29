@@ -4,7 +4,7 @@
 
 _Monte Carlo propagation of barrier-family offset priors (additive Gaussian, kcal/mol) through the benchmark evaluator. CI = 90% (P5–P95)._
 
-**Headline trust metric**: measured value lies inside 90% CI for **39 / 48** matched compounds (**81.2%**).
+**Headline trust metric**: measured value lies inside 90% CI for **37 / 48** matched compounds (**77.1%**).
 
 Samples per benchmark: 200; seed 0; benchmarks evaluated: 16.
 
@@ -109,9 +109,9 @@ Samples per benchmark: 200; seed 0; benchmarks evaluated: 16.
 | Compound | Measured (ppb) | P5 | P50 | P95 | log₁₀ width | Inside 90% CI |
 | --- | --- | --- | --- | --- | --- | --- |
 | furfural | 0.0317 | 0.00123 | 0.0277 | 0.0353 | 1.46 | ✓ |
-| 2-furfurylthiol | 0.00502 | 0.000172 | 0.00443 | 0.00608 | 1.55 | ✓ |
-| 2-methyl-3-furanthiol | 0.00342 | 2.13e-06 | 0.0058 | 0.0378 | 4.25 | ✓ |
-| bis(2-methyl-3-furyl) disulfide | 0.000324 | 2.82e-08 | 7.91e-05 | 0.0114 | 5.61 | ✓ |
+| 2-furfurylthiol | 0.00502 | 0.000142 | 0.00366 | 0.00501 | 1.55 | ✗ |
+| 2-methyl-3-furanthiol | 0.00342 | 1.76e-06 | 0.00479 | 0.0312 | 4.25 | ✓ |
+| bis(2-methyl-3-furyl) disulfide | 0.000324 | 2.32e-08 | 6.53e-05 | 0.00944 | 5.61 | ✓ |
 | 2,5-dimethylpyrazine | 0.000234 | 7.15e-08 | 0.000114 | 0.0058 | 4.91 | ✓ |
 | Hexanal | 0.000196 | 0.000196 | 0.000196 | 0.000196 | 0.00 | ✓ |
 | Nonanal | 0.000102 | 0.000102 | 0.000102 | 0.000102 | 0.00 | ✓ |
@@ -124,11 +124,11 @@ Samples per benchmark: 200; seed 0; benchmarks evaluated: 16.
 | Compound | Measured (ppb) | P5 | P50 | P95 | log₁₀ width | Inside 90% CI |
 | --- | --- | --- | --- | --- | --- | --- |
 | 2,5-dimethylpyrazine | 0.00024 | 7.15e-08 | 0.000114 | 0.0058 | 4.91 | ✓ |
-| 2-furfurylthiol | 0.0051 | 0.000172 | 0.00443 | 0.00608 | 1.55 | ✓ |
-| 2-methyl-3-furanthiol | 0.0036 | 2.13e-06 | 0.0058 | 0.0378 | 4.25 | ✓ |
+| 2-furfurylthiol | 0.0051 | 0.000142 | 0.00366 | 0.00501 | 1.55 | ✗ |
+| 2-methyl-3-furanthiol | 0.0036 | 1.76e-06 | 0.00479 | 0.0312 | 4.25 | ✓ |
 | Hexanal | 0.00021 | 0.000196 | 0.000196 | 0.000196 | 0.00 | ✗ |
 | Nonanal | 0.0001 | 0.000102 | 0.000102 | 0.000102 | 0.00 | ✗ |
-| bis(2-methyl-3-furyl) disulfide | 0.00031 | 2.82e-08 | 7.91e-05 | 0.0114 | 5.61 | ✓ |
+| bis(2-methyl-3-furyl) disulfide | 0.00031 | 2.32e-08 | 6.53e-05 | 0.00944 | 5.61 | ✓ |
 
 ### `resconi_2023_pbma_beef_identity_benchmark`
 
@@ -147,9 +147,9 @@ Samples per benchmark: 200; seed 0; benchmarks evaluated: 16.
 | Compound | Measured (ppb) | P5 | P50 | P95 | log₁₀ width | Inside 90% CI |
 | --- | --- | --- | --- | --- | --- | --- |
 | furfural | 0.276 | 0.0108 | 0.242 | 0.308 | 1.46 | ✓ |
-| 2-furfurylthiol | 0.00707 | 0.000242 | 0.00624 | 0.00855 | 1.55 | ✓ |
-| 2-methyl-3-furanthiol | 0.00482 | 3e-06 | 0.00816 | 0.0532 | 4.25 | ✓ |
-| bis(2-methyl-3-furyl) disulfide | 0.000456 | 3.96e-08 | 0.000111 | 0.0161 | 5.61 | ✓ |
+| 2-furfurylthiol | 0.00707 | 0.00021 | 0.0054 | 0.00741 | 1.55 | ✓ |
+| 2-methyl-3-furanthiol | 0.00482 | 2.59e-06 | 0.00707 | 0.0461 | 4.25 | ✓ |
+| bis(2-methyl-3-furyl) disulfide | 0.000456 | 3.43e-08 | 9.64e-05 | 0.0139 | 5.61 | ✓ |
 | 2,5-dimethylpyrazine | 0.000332 | 1.02e-07 | 0.000163 | 0.00824 | 4.91 | ✓ |
 | Hexanal | 0.000203 | 0.000203 | 0.000203 | 0.000203 | 0.00 | ✓ |
 | Nonanal | 0.000105 | 0.000105 | 0.000105 | 0.000105 | 0.00 | ✓ |
@@ -162,11 +162,11 @@ Samples per benchmark: 200; seed 0; benchmarks evaluated: 16.
 | Compound | Measured (ppb) | P5 | P50 | P95 | log₁₀ width | Inside 90% CI |
 | --- | --- | --- | --- | --- | --- | --- |
 | 2,5-dimethylpyrazine | 0.000332 | 1.02e-07 | 0.000163 | 0.00824 | 4.91 | ✓ |
-| 2-furfurylthiol | 0.00707 | 0.000242 | 0.00624 | 0.00855 | 1.55 | ✓ |
-| 2-methyl-3-furanthiol | 0.00482 | 3e-06 | 0.00816 | 0.0532 | 4.25 | ✓ |
+| 2-furfurylthiol | 0.00707 | 0.00021 | 0.0054 | 0.00741 | 1.55 | ✓ |
+| 2-methyl-3-furanthiol | 0.00482 | 2.59e-06 | 0.00707 | 0.0461 | 4.25 | ✓ |
 | Hexanal | 0.000203 | 0.000203 | 0.000203 | 0.000203 | 0.00 | ✓ |
 | Nonanal | 0.000105 | 0.000105 | 0.000105 | 0.000105 | 0.00 | ✓ |
-| bis(2-methyl-3-furyl) disulfide | 0.000456 | 3.96e-08 | 0.000111 | 0.0161 | 5.61 | ✓ |
+| bis(2-methyl-3-furyl) disulfide | 0.000456 | 3.43e-08 | 9.64e-05 | 0.0139 | 5.61 | ✓ |
 
 ### `spi_hvp_xylose_120C_PMC9905368`
 

@@ -222,37 +222,37 @@
           "predicted_std": 0.01141998956906988
         },
         {
-          "ci_width_log10": 1.5475602603544911,
+          "ci_width_log10": 1.5475602603544913,
           "compound": "2-furfurylthiol",
-          "inside_ci": true,
+          "inside_ci": false,
           "measured_ppb": 0.005024215110674793,
-          "predicted_mean": 0.003787075621845046,
-          "predicted_p5": 0.00017218614843949,
-          "predicted_p50": 0.004432022039343457,
-          "predicted_p95": 0.006075170514014791,
-          "predicted_std": 0.001791143948620507
+          "predicted_mean": 0.0031261237444475615,
+          "predicted_p5": 0.00014213479234391862,
+          "predicted_p50": 0.0036585087588920048,
+          "predicted_p95": 0.005014881320531079,
+          "predicted_std": 0.0014785386368329656
         },
         {
           "ci_width_log10": 4.249693428650221,
           "compound": "2-methyl-3-furanthiol",
           "inside_ci": true,
           "measured_ppb": 0.003421173184298469,
-          "predicted_mean": 0.011244888408432024,
-          "predicted_p5": 2.1279425697092327e-06,
-          "predicted_p50": 0.005796742073672199,
-          "predicted_p95": 0.037814061954262713,
-          "predicted_std": 0.012739149184927804
+          "predicted_mean": 0.009282337129601907,
+          "predicted_p5": 1.7565563665052627e-06,
+          "predicted_p50": 0.004785046523078467,
+          "predicted_p95": 0.031214437933943275,
+          "predicted_std": 0.010515807110199837
         },
         {
           "ci_width_log10": 5.608574536546103,
           "compound": "bis(2-methyl-3-furyl) disulfide",
           "inside_ci": true,
           "measured_ppb": 0.0003237153767600219,
-          "predicted_mean": 0.002024736145463603,
-          "predicted_p5": 2.8157762753539e-08,
-          "predicted_p50": 7.905790219249467e-05,
-          "predicted_p95": 0.011433328506067514,
-          "predicted_std": 0.0038624041072058586
+          "predicted_mean": 0.0016713623842270309,
+          "predicted_p5": 2.3243436235232658e-08,
+          "predicted_p50": 6.526006077210646e-05,
+          "predicted_p95": 0.009437889096989694,
+          "predicted_std": 0.003188305277174647
         },
         {
           "ci_width_log10": 4.908720607468118,
@@ -308,26 +308,26 @@
           "predicted_std": 0.0020898321448645507
         },
         {
-          "ci_width_log10": 1.5475602603544911,
+          "ci_width_log10": 1.5475602603544913,
           "compound": "2-furfurylthiol",
-          "inside_ci": true,
+          "inside_ci": false,
           "measured_ppb": 0.0051,
-          "predicted_mean": 0.003787075621845046,
-          "predicted_p5": 0.00017218614843949,
-          "predicted_p50": 0.004432022039343457,
-          "predicted_p95": 0.006075170514014791,
-          "predicted_std": 0.001791143948620507
+          "predicted_mean": 0.0031261237444475615,
+          "predicted_p5": 0.00014213479234391862,
+          "predicted_p50": 0.0036585087588920048,
+          "predicted_p95": 0.005014881320531079,
+          "predicted_std": 0.0014785386368329656
         },
         {
           "ci_width_log10": 4.249693428650221,
           "compound": "2-methyl-3-furanthiol",
           "inside_ci": true,
           "measured_ppb": 0.0036,
-          "predicted_mean": 0.011244888408432024,
-          "predicted_p5": 2.1279425697092327e-06,
-          "predicted_p50": 0.005796742073672199,
-          "predicted_p95": 0.037814061954262713,
-          "predicted_std": 0.012739149184927804
+          "predicted_mean": 0.009282337129601907,
+          "predicted_p5": 1.7565563665052627e-06,
+          "predicted_p50": 0.004785046523078467,
+          "predicted_p95": 0.031214437933943275,
+          "predicted_std": 0.010515807110199837
         },
         {
           "ci_width_log10": 0.0,
@@ -356,11 +356,11 @@
           "compound": "bis(2-methyl-3-furyl) disulfide",
           "inside_ci": true,
           "measured_ppb": 0.00031,
-          "predicted_mean": 0.002024736145463603,
-          "predicted_p5": 2.8157762753539e-08,
-          "predicted_p50": 7.905790219249467e-05,
-          "predicted_p95": 0.011433328506067514,
-          "predicted_std": 0.0038624041072058586
+          "predicted_mean": 0.0016713623842270309,
+          "predicted_p5": 2.3243436235232658e-08,
+          "predicted_p50": 6.526006077210646e-05,
+          "predicted_p95": 0.009437889096989694,
+          "predicted_std": 0.003188305277174647
         }
       ],
       "coverage_rate": 1.0,
@@ -407,33 +407,33 @@
           "compound": "2-furfurylthiol",
           "inside_ci": true,
           "measured_ppb": 0.007072756598907859,
-          "predicted_mean": 0.005331193729754571,
-          "predicted_p5": 0.000242392232575481,
-          "predicted_p50": 0.006239106494200522,
-          "predicted_p95": 0.008552221868684595,
-          "predicted_std": 0.0025214535809351736
+          "predicted_mean": 0.00461696681859128,
+          "predicted_p5": 0.00020991863203905298,
+          "predicted_p50": 0.005403245337082751,
+          "predicted_p95": 0.00740646965661202,
+          "predicted_std": 0.0021836511873170646
         },
         {
           "ci_width_log10": 4.249693428650221,
           "compound": "2-methyl-3-furanthiol",
           "inside_ci": true,
           "measured_ppb": 0.004816100561427539,
-          "predicted_mean": 0.01582980763019882,
-          "predicted_p5": 2.9955763279384197e-06,
-          "predicted_p50": 0.008160268788377053,
-          "predicted_p95": 0.053232126874958076,
-          "predicted_std": 0.017933328784178686
+          "predicted_mean": 0.01370906785199037,
+          "predicted_p5": 2.5942550974012157e-06,
+          "predicted_p50": 0.007067027036824148,
+          "predicted_p95": 0.046100550068743605,
+          "predicted_std": 0.015530777559504032
         },
         {
           "ci_width_log10": 5.608574536546103,
           "compound": "bis(2-methyl-3-furyl) disulfide",
           "inside_ci": true,
           "measured_ppb": 0.00045570502391166165,
-          "predicted_mean": 0.0028502891732180634,
-          "predicted_p5": 3.9638629704058775e-08,
-          "predicted_p50": 0.0001112924679995796,
-          "predicted_p95": 0.016095081093753065,
-          "predicted_std": 0.00543723617224264
+          "predicted_mean": 0.002468432250490285,
+          "predicted_p5": 3.432819127480689e-08,
+          "predicted_p50": 9.638247228671729e-05,
+          "predicted_p95": 0.013938802286934475,
+          "predicted_std": 0.004708802618066593
         },
         {
           "ci_width_log10": 4.908720607468117,
@@ -493,22 +493,22 @@
           "compound": "2-furfurylthiol",
           "inside_ci": true,
           "measured_ppb": 0.007072756598907859,
-          "predicted_mean": 0.005331193729754571,
-          "predicted_p5": 0.000242392232575481,
-          "predicted_p50": 0.006239106494200522,
-          "predicted_p95": 0.008552221868684595,
-          "predicted_std": 0.0025214535809351736
+          "predicted_mean": 0.00461696681859128,
+          "predicted_p5": 0.00020991863203905298,
+          "predicted_p50": 0.005403245337082751,
+          "predicted_p95": 0.00740646965661202,
+          "predicted_std": 0.0021836511873170646
         },
         {
           "ci_width_log10": 4.249693428650221,
           "compound": "2-methyl-3-furanthiol",
           "inside_ci": true,
           "measured_ppb": 0.004816100561427539,
-          "predicted_mean": 0.01582980763019882,
-          "predicted_p5": 2.9955763279384197e-06,
-          "predicted_p50": 0.008160268788377053,
-          "predicted_p95": 0.053232126874958076,
-          "predicted_std": 0.017933328784178686
+          "predicted_mean": 0.01370906785199037,
+          "predicted_p5": 2.5942550974012157e-06,
+          "predicted_p50": 0.007067027036824148,
+          "predicted_p95": 0.046100550068743605,
+          "predicted_std": 0.015530777559504032
         },
         {
           "ci_width_log10": 0.0,
@@ -537,11 +537,11 @@
           "compound": "bis(2-methyl-3-furyl) disulfide",
           "inside_ci": true,
           "measured_ppb": 0.00045570502391166165,
-          "predicted_mean": 0.0028502891732180634,
-          "predicted_p5": 3.9638629704058775e-08,
-          "predicted_p50": 0.0001112924679995796,
-          "predicted_p95": 0.016095081093753065,
-          "predicted_std": 0.00543723617224264
+          "predicted_mean": 0.002468432250490285,
+          "predicted_p5": 3.432819127480689e-08,
+          "predicted_p50": 9.638247228671729e-05,
+          "predicted_p95": 0.013938802286934475,
+          "predicted_std": 0.004708802618066593
         }
       ],
       "coverage_rate": 1.0,
@@ -779,8 +779,8 @@
   ],
   "summary": {
     "benchmark_count": 16,
-    "ci_coverage_hits": 39,
-    "ci_coverage_rate": 0.8125,
+    "ci_coverage_hits": 37,
+    "ci_coverage_rate": 0.7708333333333334,
     "ci_level_pct": 90,
     "matched_compound_count": 48,
     "n_samples": 200,
