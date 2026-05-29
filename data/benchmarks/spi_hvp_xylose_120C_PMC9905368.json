@@ -1,13 +1,23 @@
 {
   "benchmark_id": "spi_hvp_xylose_120C_PMC9905368",
-  "source_doi": "PMC9905368",
+  "source_doi": "10.1007/s10068-022-01194-w",
   "protein_source": "soy_isolate",
   "precursors": {
-    "Soy protein isolate hydrolysate": {"concentration_mM": 50.0},
-    "L-Cysteine": {"concentration_mM": 3.0},
-    "L-Methionine": {"concentration_mM": 4.0},
-    "Glycine": {"concentration_mM": 8.0},
-    "D-Xylose": {"concentration_mM": 50.0}
+    "Soy protein isolate hydrolysate": {
+      "concentration_mM": 50.0
+    },
+    "L-Cysteine": {
+      "concentration_mM": 3.0
+    },
+    "L-Methionine": {
+      "concentration_mM": 4.0
+    },
+    "Glycine": {
+      "concentration_mM": 8.0
+    },
+    "D-Xylose": {
+      "concentration_mM": 50.0
+    }
   },
   "conditions": {
     "temp_C": 120,
@@ -28,8 +38,17 @@
     }
   },
   "measured_volatiles": {
-    "2-Furfurylthiol (FFT)": {"conc_ppb": 0.42, "uncertainty_pct": 12},
-    "2-Methyl-3-furanthiol (MFT)": {"conc_ppb": 0.18, "uncertainty_pct": 12},
-    "Methional": {"conc_ppb": 1.88, "uncertainty_pct": 10}
+    "2-Furfurylthiol (FFT)": {
+      "conc_ppb": 0.42,
+      "uncertainty_pct": 12
+    },
+    "2-Methyl-3-furanthiol (MFT)": {
+      "conc_ppb": 0.18,
+      "uncertainty_pct": 12
+    },
+    "Methional": {
+      "conc_ppb": 1.88,
+      "uncertainty_pct": 10
+    }
   }
 }

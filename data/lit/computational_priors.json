@@ -1197,7 +1197,7 @@
     },
     {
       "id": "cerny_guntz_dubini_2008",
-      "source": "Cerny, Guntz-Dubini (2008)",
+      "source": "Cerny & Guntz-Dubini (2008)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
       "uncertainty_posture": "directional_transfer",
@@ -1207,7 +1207,7 @@
       },
       "MFT_yield_from_thiamine_mol_pct": 0.018,
       "FFT_yield_from_thiamine_mol_pct": 0.0035,
-      "notes": "MFT 0.018 mol%, FFT 0.0035 mol% from thiamine pyrolysis at 145°C/pH 6."
+      "notes": "MFT 0.018 mol%, FFT 0.0035 mol% from thiamine pyrolysis at 145\u00b0C/pH 6."
     },
     {
       "id": "hofmann_schieberle_grosch_1996",
@@ -1221,7 +1221,7 @@
       },
       "thiamine_to_MFT_conversion_pct": 0.021,
       "cysteine_augmentation_MFT_fold": 2.3,
-      "notes": "Thiamine→MFT conversion 0.021%; cysteine augments MFT 2.3-fold."
+      "notes": "Thiamine\u2192MFT conversion 0.021%; cysteine augments MFT 2.3-fold."
     }
   ],
   "nucleotide_pathway_priors": [
@@ -1380,7 +1380,7 @@
     },
     {
       "id": "cui_2022_mushroom_gmp_euc_window_v1",
-      "source": "Cui et al. (2022), DOI:10.31665/JFB.2022.18309",
+      "source": "Cui et al. (2022), DOI:10.1016/j.lwt.2022.113651",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium_low",
       "uncertainty_posture": "bounded_contextual_transfer",
@@ -1444,7 +1444,7 @@
       },
       "IMP_hydrolysis_k_1_per_min": 0.0035,
       "IMP_to_inosine_Ea_kj_mol": 76.0,
-      "notes": "IMP hydrolysis to inosine: k=3.5×10⁻³ min⁻¹ at 80°C; Ea=76 kJ/mol."
+      "notes": "IMP hydrolysis to inosine: k=3.5\u00d710\u207b\u00b3 min\u207b\u00b9 at 80\u00b0C; Ea=76 kJ/mol."
     },
     {
       "id": "blank_grosch_1991_hdmf_anchor",
@@ -1576,7 +1576,7 @@
       "sucrose_caramelisation": {
         "hmf_mg_per_l_at_ph5_120c_60min": 48.0
       },
-      "notes": "Sucrose caramelisation kinetics showing k_obs and Ea versus pH and Temperature. Quantifies HMF 48 mg/L at pH 5.0, 120°C, 60 min."
+      "notes": "Sucrose caramelisation kinetics showing k_obs and Ea versus pH and Temperature. Quantifies HMF 48 mg/L at pH 5.0, 120\u00b0C, 60 min."
     },
     {
       "id": "huang_2024_dixyl_arp_degradation",
@@ -1617,7 +1617,7 @@
     },
     {
       "id": "wang_2024_glucosamine_synergy",
-      "source": "Wang et al. (2024)",
+      "source": "Wu et al. (2025)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
       "uncertainty_posture": "directional_transfer",
@@ -1686,7 +1686,7 @@
         "pH": 6.0
       },
       "threonine_furan_yield_mol_pct": 12.0,
-      "notes": "Threonine+glucose at 100°C, pH 6: furan yield 12 mol% from threonine α-carbon fragmentation."
+      "notes": "Threonine+glucose at 100\u00b0C, pH 6: furan yield 12 mol% from threonine \u03b1-carbon fragmentation."
     },
     {
       "id": "martins_2003_lys_glucose_kinetics",
@@ -1700,7 +1700,7 @@
       },
       "lysine_loss_rate_k_1_per_min": 0.0024,
       "Ea_lys_glucose_kj_mol": 114.0,
-      "notes": "Lysine loss rate k=2.4×10⁻³ min⁻¹ at 120°C; Ea=114 kJ/mol."
+      "notes": "Lysine loss rate k=2.4\u00d710\u207b\u00b3 min\u207b\u00b9 at 120\u00b0C; Ea=114 kJ/mol."
     },
     {
       "id": "liu_2020_egcg_arp_kinetics",
@@ -1712,7 +1712,7 @@
         "T_C": 100
       },
       "EGCG_ARP_k2_L_per_mol_per_s": 8.5,
-      "notes": "EGCG traps Amadori rearrangement products; k₂=8.5 L/mol/s at 100°C."
+      "notes": "EGCG traps Amadori rearrangement products; k\u2082=8.5 L/mol/s at 100\u00b0C."
     },
     {
       "id": "mottram_wedzicha_1990_methional",
@@ -1725,7 +1725,7 @@
       },
       "methional_Ea_kj_mol": 92.0,
       "methional_yield_pct_from_Met_Strecker": 38.0,
-      "notes": "Methional Strecker yield 38% from Met at 150°C; Ea=92 kJ/mol."
+      "notes": "Methional Strecker yield 38% from Met at 150\u00b0C; Ea=92 kJ/mol."
     },
     {
       "id": "yu_2021_corn_hydrolysate_kinetics",
@@ -1739,7 +1739,7 @@
       },
       "browning_rate_A420_per_h": 0.032,
       "pyrazine_fold_vs_wheat": 2.1,
-      "notes": "Corn hydrolysate browning 0.032 A420/h at 120°C; 2.1x more pyrazines vs wheat."
+      "notes": "Corn hydrolysate browning 0.032 A420/h at 120\u00b0C; 2.1x more pyrazines vs wheat."
     }
   ],
   "sulfur_peptide_priors": [
@@ -2215,7 +2215,7 @@
     },
     {
       "id": "comert_gokmen_2019_digestive_mgo_scavenging",
-      "source": "Cömert & Gökmen (2019)",
+      "source": "C\u00f6mert & G\u00f6kmen (2019)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
       "uncertainty_posture": "directional_transfer",
@@ -2239,7 +2239,7 @@
     },
     {
       "id": "comert_gokmen_2021_epicatechin_cysteine_mgo_synergy",
-      "source": "Cömert & Gökmen (2021)",
+      "source": "C\u00f6mert & G\u00f6kmen (2021)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
       "uncertainty_posture": "directional_transfer",
@@ -2501,7 +2501,7 @@
       },
       "4HNE_lys_Michael_k2_L_per_mol_per_s": 1.1,
       "4HNE_cys_Michael_k2_L_per_mol_per_s": 8.5,
-      "notes": "4-HNE Michael addition: Cys k₂=8.5, Lys k₂=1.1 L/mol/s at 37°C."
+      "notes": "4-HNE Michael addition: Cys k\u2082=8.5, Lys k\u2082=1.1 L/mol/s at 37\u00b0C."
     },
     {
       "id": "grosch_1982_hexanal_odt",
@@ -2546,7 +2546,7 @@
         "T_C": 120
       },
       "alkyl_thiazole_yield_lipid_derived_pct": 12.0,
-      "notes": "Alkyl thiazoles: 12% yield from lipid-amino acid interactions at 120°C."
+      "notes": "Alkyl thiazoles: 12% yield from lipid-amino acid interactions at 120\u00b0C."
     },
     {
       "id": "kamal_eldin_2003_triolein_scission",
@@ -2567,7 +2567,7 @@
         "T_C": 100
       },
       "styrene_yield_mol_pct_phe_decadienal": 8.5,
-      "notes": "Styrene 8.5 mol% from Phe+2,4-decadienal Strecker-like at 100°C."
+      "notes": "Styrene 8.5 mol% from Phe+2,4-decadienal Strecker-like at 100\u00b0C."
     },
     {
       "id": "zamora_2010_decadienal_asparagine_decarboxylation",
@@ -2579,7 +2579,7 @@
         "T_C": 100
       },
       "propanal_from_asn_decadienal_pct": 22.0,
-      "notes": "Propanal 22% yield from Asn+decadienal decarboxylation at 100°C."
+      "notes": "Propanal 22% yield from Asn+decadienal decarboxylation at 100\u00b0C."
     },
     {
       "id": "ding_2020_schiff_base_amadori_emulsion_rates",
@@ -2593,7 +2593,7 @@
       },
       "schiff_base_formation_k_1_per_h": 0.045,
       "amadori_formation_k_1_per_h": 0.012,
-      "notes": "Schiff base k=0.045/h, Amadori k=0.012/h in o/w emulsion at 60°C."
+      "notes": "Schiff base k=0.045/h, Amadori k=0.012/h in o/w emulsion at 60\u00b0C."
     },
     {
       "id": "richards_2009_hemoglobin_liposome_oxidation",
@@ -2605,7 +2605,7 @@
         "T_C": 37
       },
       "Hb_mediated_TBARS_fold_increase": 3.8,
-      "notes": "Hemoglobin mediates lipid oxidation 3.8-fold in liposome model at 37°C."
+      "notes": "Hemoglobin mediates lipid oxidation 3.8-fold in liposome model at 37\u00b0C."
     },
     {
       "id": "smagghe_2006_leghemoglobin_oxygen_dissociation",
@@ -2618,7 +2618,7 @@
       },
       "leghemoglobin_O2_kd_umol_L": 0.024,
       "leghemoglobin_O2_kon_1_per_umol_per_s": 46.0,
-      "notes": "Leghemoglobin Kd=0.024 μM O₂; kon=46/μM/s — very high O₂ affinity."
+      "notes": "Leghemoglobin Kd=0.024 \u03bcM O\u2082; kon=46/\u03bcM/s \u2014 very high O\u2082 affinity."
     },
     {
       "id": "trikusuma_2019",
@@ -2809,7 +2809,7 @@
     },
     {
       "id": "serpen_gokmen_2007_ascorbic_redox_kinetics",
-      "source": "Serpen & Gökmen (2007)",
+      "source": "Serpen & G\u00f6kmen (2007)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
       "uncertainty_posture": "directional_transfer",
@@ -2894,7 +2894,7 @@
       "beta_cleavage_pct": 32.0,
       "decarboxylation_pct": 12.0,
       "total_mass_balance_accounted_pct": 75.0,
-      "notes": "AA degradation mass balance: α-fragmentation 31%, β-cleavage 32%, decarboxylation 12%."
+      "notes": "AA degradation mass balance: \u03b1-fragmentation 31%, \u03b2-cleavage 32%, decarboxylation 12%."
     },
     {
       "id": "frontiers_2022_hcw_aa_arrhenius_anchor",
@@ -2928,7 +2928,7 @@
         17.0
       ],
       "molar_equivalence_to_glucose": true,
-      "notes": "Pentosidine from ascorbic acid equivalent to glucose (13.2-17.0 pmol/mg) at 37°C."
+      "notes": "Pentosidine from ascorbic acid equivalent to glucose (13.2-17.0 pmol/mg) at 37\u00b0C."
     },
     {
       "id": "scielo_brasil_aa_crosslink_hierarchy_anchor",
@@ -2970,7 +2970,7 @@
     },
     {
       "id": "jafc_2019_ref21_pea_gum_arabic_architecture_v1",
-      "source": "J. Agric. Food Chem. 2019 (Ref. 21), DOI:10.1021/acs.jafc.9b04099",
+      "source": "Zha et al. (2019)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium_low",
       "uncertainty_posture": "bounded_contextual_transfer",
@@ -2997,7 +2997,7 @@
     },
     {
       "id": "jafc_2022_melanoidin_thiol_binding",
-      "source": "J. Agric. Food Chem. 2022 (Ref. 41) + Ref. 38",
+      "source": "Gigl et al. (2021)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
       "uncertainty_posture": "directional_transfer",
@@ -3110,7 +3110,7 @@
         "barrier_kj_mol": null,
         "uncertainty_kj": null,
         "rate_uncertainty_factor": null,
-        "concentration_uncertainty": "×3-8 in ppb",
+        "concentration_uncertainty": "\u00d73-8 in ppb",
         "ranking_reliability": "no_anchor",
         "promotion_ceiling": "wet_lab_required",
         "honest_label": "Hexanal radical quench has no reliable kinetic anchor. Runtime falls back to literature_runtime barrier_kj_mol=31.72 default; treat any prediction qualitatively only.",
@@ -3120,7 +3120,7 @@
           "heated_matrix",
           "aqueous_pre_extrusion_model"
         ],
-        "promotion_note": "Removed xTB-derived 17.88 kcal/mol; escalated to wet-lab backlog per Vía C of tasks/todo.md (active plan 2026-04-22).",
+        "promotion_note": "Removed xTB-derived 17.88 kcal/mol; escalated to wet-lab backlog per V\u00eda C of tasks/todo.md (active plan 2026-04-22).",
         "last_refined_at": "2026-04-21",
         "refinability_status": "wet_lab_pending",
         "refinability_note": "Requires either: (a) hexanal H-abstraction Ea from radical-trapping literature ingestion, or (b) wet-lab measurement of hexanal suppression vs cysteine/sulfur partner concentration in oxidized-oil pre-cooking. See data/lit/deep_research_backlog.json for ResearchGate Ref 11 (lipid off-notes) ingestion."
@@ -3157,11 +3157,11 @@
         "barrier_kcal_mol": 7.58,
         "barrier_kj_mol": 31.7,
         "uncertainty_kj": 20.0,
-        "rate_uncertainty_factor": "×2-5 at 150°C",
-        "concentration_uncertainty": "×2-5 in ppb",
+        "rate_uncertainty_factor": "\u00d72-5 at 150\u00b0C",
+        "concentration_uncertainty": "\u00d72-5 in ppb",
         "ranking_reliability": "medium-high",
         "promotion_ceiling": "bounded_calibration",
-        "honest_label": "HCW Family 14 surrogate for an upstream ascorbic-acid dicarbonyl source, DFT validation pending, ±factor 2-5; bounded calibration",
+        "honest_label": "HCW Family 14 surrogate for an upstream ascorbic-acid dicarbonyl source, DFT validation pending, \u00b1factor 2-5; bounded calibration",
         "computational_method": "Family 14 HCW literature surrogate (bounded upstream dicarbonyl source)",
         "active_arrhenius_key": "aa_ring_open_dicarbonyl_hcw_family14_surrogate",
         "surrogate_kind": "ascorbic_upstream_dicarbonyl_source",
@@ -3202,11 +3202,11 @@
         "barrier_kcal_mol": 22.21,
         "barrier_kj_mol": 92.9,
         "uncertainty_kj": 20.9,
-        "rate_uncertainty_factor": "×2-5 at 150°C",
-        "concentration_uncertainty": "×2-5 in ppb",
+        "rate_uncertainty_factor": "\u00d72-5 at 150\u00b0C",
+        "concentration_uncertainty": "\u00d72-5 in ppb",
         "ranking_reliability": "medium-high",
         "promotion_ceiling": "bounded_calibration",
-        "honest_label": "SLR 15 literature Ea=92.9 kJ/mol, ±factor 2-5; bounded calibration",
+        "honest_label": "SLR 15 literature Ea=92.9 kJ/mol, \u00b1factor 2-5; bounded calibration",
         "computational_method": "Literature transfer (SLR 15, phospholipid-amine Maillard)",
         "active_arrhenius_key": "pe_schiff_base_lit_derived",
         "process_state_applicability": [
@@ -3224,11 +3224,11 @@
         "barrier_kcal_mol": 19.81,
         "barrier_kj_mol": 82.9,
         "uncertainty_kj": 20.9,
-        "rate_uncertainty_factor": "×2-5 at 150°C",
-        "concentration_uncertainty": "×2-5 in ppb",
+        "rate_uncertainty_factor": "\u00d72-5 at 150\u00b0C",
+        "concentration_uncertainty": "\u00d72-5 in ppb",
         "ranking_reliability": "medium-high",
         "promotion_ceiling": "bounded_calibration",
-        "honest_label": "SLR 15 literature Ea=82.9 kJ/mol, ±factor 2-5; bounded calibration",
+        "honest_label": "SLR 15 literature Ea=82.9 kJ/mol, \u00b1factor 2-5; bounded calibration",
         "computational_method": "Literature transfer (SLR 15, phospholipid-amine Maillard)",
         "active_arrhenius_key": "pe_amadori_lit_derived",
         "process_state_applicability": [
@@ -3246,11 +3246,11 @@
         "barrier_kcal_mol": 12.77,
         "barrier_kj_mol": 53.45,
         "uncertainty_kj": 4.02,
-        "rate_uncertainty_factor": "×2-4 at 150°C",
-        "concentration_uncertainty": "×2-4 in ppb-equivalent damage markers",
+        "rate_uncertainty_factor": "\u00d72-4 at 150\u00b0C",
+        "concentration_uncertainty": "\u00d72-4 in ppb-equivalent damage markers",
         "ranking_reliability": "medium-high",
         "promotion_ceiling": "bounded_calibration",
-        "honest_label": "ACS APTS Ref. 24 Ea=53.45 ± 4.02 kJ/mol for 3-DG to pyrraline; bounded calibration",
+        "honest_label": "ACS APTS Ref. 24 Ea=53.45 \u00b1 4.02 kJ/mol for 3-DG to pyrraline; bounded calibration",
         "computational_method": "Literature transfer (ACS APTS Ref. 24)",
         "active_arrhenius_key": "pyrraline_from_3dg_lit_derived",
         "process_state_applicability": [
@@ -3268,11 +3268,11 @@
         "barrier_kcal_mol": 19.53,
         "barrier_kj_mol": 81.7,
         "uncertainty_kj": 14.01,
-        "rate_uncertainty_factor": "×3-6 at 150°C",
-        "concentration_uncertainty": "×3-6 in ppb-equivalent damage markers",
+        "rate_uncertainty_factor": "\u00d73-6 at 150\u00b0C",
+        "concentration_uncertainty": "\u00d73-6 in ppb-equivalent damage markers",
         "ranking_reliability": "medium",
         "promotion_ceiling": "bounded_calibration",
-        "honest_label": "ACS APTS Ref. 24 Ea=81.70 ± 14.01 kJ/mol for 3-DG to furosine; bounded calibration",
+        "honest_label": "ACS APTS Ref. 24 Ea=81.70 \u00b1 14.01 kJ/mol for 3-DG to furosine; bounded calibration",
         "computational_method": "Literature transfer (ACS APTS Ref. 24)",
         "active_arrhenius_key": "furosine_from_3dg_lit_derived",
         "process_state_applicability": [
@@ -3289,11 +3289,11 @@
         "barrier_kcal_mol": 16.0,
         "barrier_kj_mol": 66.95,
         "uncertainty_kj": 42.0,
-        "rate_uncertainty_factor": "×5-15 at 150°C",
-        "concentration_uncertainty": "×5-15 in damage-marker equivalents",
+        "rate_uncertainty_factor": "\u00d75-15 at 150\u00b0C",
+        "concentration_uncertainty": "\u00d75-15 in damage-marker equivalents",
         "ranking_reliability": "medium-low",
         "promotion_ceiling": "ranking_only",
-        "honest_label": "DHA-plus-lysine family surrogate, assumes prior dehydroalanine formation, ±factor 5-15; ranking only",
+        "honest_label": "DHA-plus-lysine family surrogate, assumes prior dehydroalanine formation, \u00b1factor 5-15; ranking only",
         "computational_method": "DHA_Crosslinking family-rule surrogate (ArrheniusEP E0=16 kcal/mol)",
         "active_arrhenius_key": "lysinoalanine_crosslink_dha_family_surrogate",
         "surrogate_kind": "dha_michael_addition",
@@ -3571,7 +3571,7 @@
         "process": "HME"
       },
       "SS_bond_density_nmol_per_mg": 12.4,
-      "notes": "Disulfide density 12.4 nmol/mg protein after HME at 160°C in gluten."
+      "notes": "Disulfide density 12.4 nmol/mg protein after HME at 160\u00b0C in gluten."
     },
     {
       "id": "zhang_1993_protein_deamidation_ammonia",
@@ -3585,7 +3585,7 @@
       },
       "deamidation_rate_k_1_per_h": 0.015,
       "ammonia_released_per_deamidation_mol": 1.0,
-      "notes": "Protein deamidation rate 0.015/h at 80°C; 1 mol ammonia released per glutamine deamidation."
+      "notes": "Protein deamidation rate 0.015/h at 80\u00b0C; 1 mol ammonia released per glutamine deamidation."
     }
   ],
   "catalytic_browning_priors": [
@@ -3656,7 +3656,7 @@
     },
     {
       "id": "serpen_gokmen_2007_ascorbic_redox_kinetics",
-      "source": "Serpen & Gökmen (2007)",
+      "source": "Serpen & G\u00f6kmen (2007)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
       "uncertainty_posture": "directional_transfer",
@@ -3671,7 +3671,7 @@
   "phospholipid_amine_sink_priors": [
     {
       "id": "solis_calero_2015_pe_glyoxal",
-      "source": "Solís-Calero et al. (2015)",
+      "source": "Sol\u00eds-Calero et al. (2015)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
       "uncertainty_posture": "directional_transfer",
@@ -3685,7 +3685,7 @@
     },
     {
       "id": "solis_calero_2013_pe_amadori",
-      "source": "Solís-Calero et al. (2013)",
+      "source": "Sol\u00eds-Calero et al. (2013)",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
       "uncertainty_posture": "directional_transfer",

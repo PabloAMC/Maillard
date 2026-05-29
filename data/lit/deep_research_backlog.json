@@ -2275,7 +2275,7 @@
       "citation": "Wang et al. (2023)",
       "score": "6/8",
       "score_value": 6,
-      "status": "BACKLOG",
+      "status": "RUNTIME_BOUND",
       "occurrence_count": 1,
       "files": [
         "10_microbial_fermentation.md"
@@ -2291,8 +2291,8 @@
           "raw_line": "7. `Wang et al. (2023)` — PMC12984349 — activation energy reduction ~15–20% esterification; ~10–12% Strecker; isoamyl acetate 4.2 µg/g vs. trace; GC-MS; IS stated. 6/8."
         }
       ],
-      "registry_id": null,
-      "runtime_artifact_count": 0
+      "registry_id": "wang_2023_mft_retention",
+      "runtime_artifact_count": 2
     },
     {
       "citation": "Xiang et al. (2025)",

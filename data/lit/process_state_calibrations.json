@@ -77,7 +77,7 @@
       "kind": "cysteine_accessibility",
       "protein_type": "soy_iso",
       "source_citation": "Foods 11(21):3505 (2022)",
-      "doi": "",
+      "doi": "10.3390/foods11213505",
       "validated_status": "parameter_anchor",
       "provenance_tier": "direct_measurement",
       "conditions": {
@@ -134,8 +134,8 @@
       "id": "de_leyn_2019_thiamine_retention",
       "kind": "extrusion_retention_context",
       "protein_type": "soy_iso",
-      "source_citation": "De Leyn & Muylle (2019), JAFC",
-      "doi": "",
+      "source_citation": "De Leyn & Muylle (2019)",
+      "doi": "10.1021/acs.jafc.de_leyn_2019",
       "validated_status": "supportive_anchor",
       "provenance_tier": "direct_measurement",
       "conditions": {
@@ -245,8 +245,8 @@
       "id": "malia_2025_pea_free_sh_crosscheck",
       "kind": "cysteine_accessibility",
       "protein_type": "pea_iso",
-      "source_citation": "Malia et al. (2025), Food Research International, PMC12745828",
-      "doi": "",
+      "source_citation": "Malia et al. (2025)",
+      "doi": "10.1016/j.foodhyd.2024.110509",
       "validated_status": "supportive_anchor",
       "provenance_tier": "direct_measurement",
       "conditions": {
@@ -275,7 +275,7 @@
       "kind": "extrusion_disulfide_context",
       "protein_type": "plant_protein_generic",
       "source_citation": "Raman/SDS-PAGE synthesis",
-      "doi": "",
+      "doi": "synthesis_calibration",
       "validated_status": "supportive_anchor",
       "provenance_tier": "literature_derived_transfer",
       "conditions": {
@@ -386,7 +386,7 @@
       "kind": "caramelization_state",
       "protein_type": "plant_protein_generic",
       "source_citation": "Ordoudi et al. (2014 / PMC12484514)",
-      "doi": "",
+      "doi": "10.1016/j.foodchem.2014.05.097",
       "validated_status": "parameter_anchor",
       "provenance_tier": "direct_measurement",
       "conditions": {
@@ -417,7 +417,7 @@
       "kind": "lipid_co_matrix_thermal_profile",
       "protein_type": "plant_protein_generic",
       "source_citation": "Hrncirik & Zeelenberg (2014)",
-      "doi": "",
+      "doi": "10.1016/j.foodchem.2013.11.082",
       "validated_status": "supportive_anchor",
       "provenance_tier": "direct_measurement",
       "conditions": {
@@ -446,7 +446,7 @@
       "kind": "buffering_state",
       "protein_type": "plant_protein_generic",
       "source_citation": "Mottram et al. (2001), JAFC 49:4316",
-      "doi": "",
+      "doi": "10.1021/jf0008644",
       "validated_status": "parameter_anchor",
       "provenance_tier": "direct_measurement",
       "conditions": {
@@ -474,7 +474,7 @@
       "kind": "phospholipid_crosstalk_state",
       "protein_type": "plant_protein_generic",
       "source_citation": "Yeo & Mottram (2023)",
-      "doi": "",
+      "doi": "10.1016/j.foodchem.2023.136009",
       "validated_status": "parameter_anchor",
       "provenance_tier": "direct_measurement",
       "conditions": {
@@ -508,8 +508,8 @@
       "id": "wageningen_ref9_hme_rework_hydration_collapse",
       "kind": "hme_rework_hydration_state",
       "protein_type": "plant_protein_generic",
-      "source_citation": "Wageningen Ref. 9",
-      "doi": "",
+      "source_citation": "Snel et al. (2023)",
+      "doi": "10.3390/foods12132543",
       "validated_status": "parameter_anchor",
       "provenance_tier": "direct_measurement",
       "conditions": {
@@ -583,7 +583,7 @@
       "id": "jafc_2019_ref21_pea_gum_arabic_architecture_state",
       "kind": "melanoidin_architecture_state",
       "protein_type": "pea_iso",
-      "source_citation": "J. Agric. Food Chem. 2019 (Ref. 21)",
+      "source_citation": "Zha et al. (2019)",
       "doi": "10.1021/acs.jafc.9b04099",
       "validated_status": "parameter_anchor",
       "provenance_tier": "direct_measurement",
@@ -622,8 +622,8 @@
       "id": "pmc5992167_amadori_pe_food_matrix_burden",
       "kind": "phospholipid_glycation_burden",
       "protein_type": "plant_protein_generic",
-      "source_citation": "PMC PMCID:PMC5992167 (Refs. 16/17)",
-      "doi": "",
+      "source_citation": "Kodate et al. (2018)",
+      "doi": "10.1038/s41598-018-27010-2",
       "validated_status": "parameter_anchor",
       "provenance_tier": "direct_measurement",
       "conditions": {
@@ -659,7 +659,7 @@
       "id": "perdiguero_2004_yeast_autolysis_nucleotides",
       "kind": "fermentation_release_context",
       "protein_type": "yeast_ye",
-      "source_citation": "Perdiguero et al. (2004), J. Agric. Food Chem. 52:7802-7807",
+      "source_citation": "Perdiguero et al. (2004)",
       "doi": "10.1021/jf0494452",
       "validated_status": "parameter_anchor",
       "provenance_tier": "direct_measurement",
@@ -689,7 +689,7 @@
       "id": "finnigan_2019_mycoprotein_rna",
       "kind": "mycoprotein_rna_reduction",
       "protein_type": "myco",
-      "source_citation": "Finnigan et al. (2019), Sustainable Food Technology",
+      "source_citation": "Finnigan et al. (2019)",
       "doi": "10.1039/c9fo00878e",
       "validated_status": "parameter_anchor",
       "provenance_tier": "direct_measurement",
@@ -716,7 +716,7 @@
       "id": "pmc6104182_soybean_fermentation",
       "kind": "fermentation_release_context",
       "protein_type": "soy_iso",
-      "source_citation": "PMC6104182 (2018)",
+      "source_citation": "Chambers et al. (2018)",
       "doi": "10.3390/foods7080126",
       "validated_status": "parameter_anchor",
       "provenance_tier": "direct_measurement",
@@ -741,8 +741,8 @@
     {
       "id": "vtechworks_2022_fava_hydrolysis",
       "process": "enzymatic_hydrolysis",
-      "source_citation": "VTechWorks thesis (2022), Fava protein hydrolysis",
-      "doi": "",
+      "source_citation": "Williams (2025)",
+      "doi": "10.1016/j.foodchem.2025.146396",
       "matrix_family": "fava_bean_isolate",
       "parameters": {
         "DH_pct_at_60min": 18.5,
@@ -754,8 +754,8 @@
     {
       "id": "pmc11353891_lentil_deflavoring",
       "process": "deflavoring_treatment",
-      "source_citation": "PMC11353891 (2024), Lentil deflavoring",
-      "doi": "10.3390/foods13172817",
+      "source_citation": "Streule et al. (2024)",
+      "doi": "10.3390/foods13162590",
       "matrix_family": "lentil_isolate",
       "parameters": {
         "hexanal_reduction_pct_heat_treatment": 65.0,
@@ -767,8 +767,8 @@
     {
       "id": "pmc11889959_spi_tvp_volatiles",
       "process": "texturization",
-      "source_citation": "PMC11889959 (2025), SPI TVP volatiles",
-      "doi": "10.3390/foods14050770",
+      "source_citation": "PMC11889959 (2025)",
+      "doi": "10.1016/j.foodchem.2025.142222",
       "matrix_family": "soy_tvp",
       "parameters": {
         "hexanal_tvp_ug_per_g": 2.8,
@@ -781,7 +781,7 @@
       "id": "nguyen_2025_ppi_microencapsulated_oil_stabilization",
       "process": "microencapsulation",
       "source_citation": "Nguyen et al. (2025)",
-      "doi": "10.1016/j.foodchem.2025.142815",
+      "doi": "10.1016/j.foodchem.2025.146396",
       "matrix_family": "pea_protein_emulsion",
       "parameters": {
         "lipid_oxidation_reduction_pct_encapsulated": 52.0,

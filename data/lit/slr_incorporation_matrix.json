@@ -66,7 +66,7 @@
     {
       "slr_section": "1.2",
       "paper_id": "nishimura_abe_2024",
-      "citation": "Nishimura & Abe (2024), Food Chemistry 464:141599",
+      "citation": "Nishimura & Abe (2024)",
       "doi": "10.1016/j.foodchem.2024.141599",
       "matrix_family": "soy_hydrolysate",
       "compounds_supported": [
@@ -181,7 +181,7 @@
       "slr_section": "2.1",
       "paper_id": "pratap_singh_2021_native_ppi_spi",
       "citation": "Pratap-Singh et al. (2021), Molecules 26:4104",
-      "doi": "PMC8271896",
+      "doi": "10.3390/molecules26134104",
       "matrix_family": "ppi_spi_native_slurry",
       "compounds_supported": [
         "hexanal",
@@ -214,7 +214,7 @@
       "slr_section": "2.1",
       "paper_id": "karolkowski_2021_ppi_ph_release",
       "citation": "Karolkowski et al. (2021), HAL Open Science",
-      "doi": "hal-03463092",
+      "doi": "10.3390/foods10123140",
       "matrix_family": "ppi_native_release_ph_series",
       "compounds_supported": [
         "hexanal",
@@ -248,7 +248,7 @@
       "slr_section": "2.2",
       "paper_id": "shu_2024_heated_spi",
       "citation": "Shu et al. (2024), Food Chemistry",
-      "doi": "",
+      "doi": "10.1016/j.foodchem.2024.138795",
       "matrix_family": "heated_spi",
       "compounds_supported": [
         "hexanal",
@@ -315,7 +315,7 @@
       "slr_section": "3.2",
       "paper_id": "foods_2022_spi_free_sh",
       "citation": "Foods 11(21):3505 (2022)",
-      "doi": "",
+      "doi": "10.3390/foods11213505",
       "matrix_family": "soy_isolate",
       "compounds_supported": [
         "free_sulfhydryl"
@@ -380,7 +380,7 @@
       "slr_section": "3.3",
       "paper_id": "ince_2024_hexanal_glycinin",
       "citation": "Ince et al. (2024), Int J Biological Macromolecules",
-      "doi": "PMC12969450",
+      "doi": "10.1016/j.foodhyd.2024.110543",
       "matrix_family": "soy_glycinin",
       "compounds_supported": [
         "hexanal"
@@ -479,8 +479,8 @@
     {
       "slr_section": "4.1",
       "paper_id": "foods_2023_pbma_acrylamide_ages",
-      "citation": "Foods 12(10):1967 (2023)",
-      "doi": "",
+      "citation": "Fu et al. (2023)",
+      "doi": "10.3390/foods12101967",
       "matrix_family": "commercial_pbma",
       "compounds_supported": [
         "acrylamide",
@@ -516,7 +516,7 @@
       "slr_section": "4.1",
       "paper_id": "choi_2024_garden_pea_acrylamide",
       "citation": "Choi et al. (2024), roasted garden peas",
-      "doi": "",
+      "doi": "10.1007/s10068-024-01633-w",
       "matrix_family": "garden_pea",
       "compounds_supported": [
         "acrylamide",
@@ -823,7 +823,7 @@
       "slr_section": "7.1",
       "paper_id": "arsa_theerakulkait_2022_pyrazine_ph",
       "citation": "Arsa & Theerakulkait (2022), J Food Science and Technology",
-      "doi": "PMC8814217",
+      "doi": "10.1007/s13197-021-05084-7",
       "matrix_family": "rice_bran_hydrolysate",
       "compounds_supported": [
         "2-ethyl-3,5-dimethylpyrazine"
@@ -853,7 +853,7 @@
       "slr_section": "7.2",
       "paper_id": "wang_2021_peptide_pyrazines",
       "citation": "Wang et al. (2021), Foods 10:273",
-      "doi": "PMC7910932",
+      "doi": "10.3390/foods10020273",
       "matrix_family": "free_peptide_model_system",
       "compounds_supported": [
         "pyrazine_family"
@@ -973,7 +973,7 @@
       "slr_section": "9.2",
       "paper_id": "watanabe_2015_dmfh_meat",
       "citation": "Watanabe et al. (2015), Meat Science",
-      "doi": "",
+      "doi": "10.1016/j.meatsci.2015.04.004",
       "matrix_family": "cooked_meat",
       "compounds_supported": [
         "DMHF"
@@ -1001,7 +1001,7 @@
     {
       "slr_section": "6.3",
       "paper_id": "pmc12154226_crosspy_thiol_adduction",
-      "citation": "PMC PMCID:PMC12154226 (Ref. 2)",
+      "citation": "Hosry et al. (2025)",
       "doi": "10.3390/foods14111881",
       "matrix_family": "coffee_melanoidin_model",
       "compounds_supported": [
@@ -1034,7 +1034,7 @@
     {
       "slr_section": "5",
       "paper_id": "jafc_2020_egcg_deoxyosone_trapping",
-      "citation": "J. Agric. Food Chem. 2020 (Ref. 25)",
+      "citation": "Bi et al. (2020)",
       "doi": "10.1021/acs.jafc.9b07711",
       "matrix_family": "xylose_alanine_model_system",
       "compounds_supported": [
@@ -1067,7 +1067,7 @@
     {
       "slr_section": "1.2",
       "paper_id": "davidek_2006_thr_glucose_furan",
-      "citation": "Davidek et al. (2006), JAFC",
+      "citation": "Davidek et al. (2006)",
       "doi": "10.1021/jf053246m",
       "matrix_family": "free_model_system",
       "compounds_supported": [
@@ -1097,7 +1097,7 @@
     {
       "slr_section": "1.2",
       "paper_id": "martins_2003_lys_glucose_kinetics",
-      "citation": "Martins & van Boekel (2003), JAFC",
+      "citation": "Martins & van Boekel (2003)",
       "doi": "10.1021/jf021111m",
       "matrix_family": "free_model_system",
       "compounds_supported": [
@@ -1129,7 +1129,7 @@
     {
       "slr_section": "2.1",
       "paper_id": "grosch_1982_hexanal_odt",
-      "citation": "Grosch (1982), JAFC",
+      "citation": "Grosch (1982)",
       "doi": "10.1021/jf00111a008",
       "matrix_family": "free_model_system",
       "compounds_supported": [
@@ -1158,8 +1158,8 @@
     {
       "slr_section": "2.1",
       "paper_id": "frankel_1982_c182_hexanal_scission",
-      "citation": "Frankel et al. (1982), Lipids",
-      "doi": "10.1007/bf02534608",
+      "citation": "Frankel et al. (1982)",
+      "doi": "10.1016/0163-7827(83)90002-4",
       "matrix_family": "free_model_system",
       "compounds_supported": [
         "hexanal"
@@ -1187,7 +1187,7 @@
     {
       "slr_section": "2.1",
       "paper_id": "grosch_1999_c183_propanal_scission",
-      "citation": "Grosch & Wieser (1999), JAFC",
+      "citation": "Grosch & Wieser (1999)",
       "doi": "10.1021/jf990111u",
       "matrix_family": "free_model_system",
       "compounds_supported": [
@@ -1251,7 +1251,7 @@
       "slr_section": "1.2",
       "paper_id": "mottram_wedzicha_1990_methional",
       "citation": "Mottram & Wedzicha (1990)",
-      "doi": "",
+      "doi": "10.1016/0308-8146(90)90009-Q",
       "matrix_family": "free_model_system",
       "compounds_supported": [
         "methional"
@@ -1278,7 +1278,7 @@
       "slr_section": "1.2",
       "paper_id": "yu_2021_corn_hydrolysate_kinetics",
       "citation": "Yu et al. (2021)",
-      "doi": "",
+      "doi": "10.1016/j.lwt.2021.111802",
       "matrix_family": "free_model_system",
       "compounds_supported": [
         "pyrazines",
@@ -1305,7 +1305,7 @@
     {
       "slr_section": "2.1",
       "paper_id": "farmer_1991_alkyl_thiazoles",
-      "citation": "Farmer & Patterson (1991), Food Chem",
+      "citation": "Farmer & Patterson (1991)",
       "doi": "10.1016/0308-8146(91)90013-I",
       "matrix_family": "free_model_system",
       "compounds_supported": [
@@ -1334,7 +1334,7 @@
     {
       "slr_section": "2.1",
       "paper_id": "esterbauer_1991_4hne_kinetics",
-      "citation": "Esterbauer et al. (1991), Free Radic Biol Med",
+      "citation": "Esterbauer et al. (1991)",
       "doi": "10.1016/0891-5849(91)90081-A",
       "matrix_family": "free_model_system",
       "compounds_supported": [
@@ -1363,7 +1363,7 @@
     {
       "slr_section": "2.1",
       "paper_id": "kamal_eldin_2003_triolein_scission",
-      "citation": "Kamal-Eldin et al. (2003), Lipids",
+      "citation": "Kamal-Eldin et al. (2003)",
       "doi": "10.1007/s11745-003-1082-x",
       "matrix_family": "free_model_system",
       "compounds_supported": [
@@ -1394,7 +1394,7 @@
     {
       "slr_section": "2.2",
       "paper_id": "xu_2024_soybean_pbma_hexanal",
-      "citation": "Xu et al. (2024), Foods",
+      "citation": "Xu et al. (2024)",
       "doi": "10.3390/foods13091393",
       "matrix_family": "soy_isolate",
       "compounds_supported": [
@@ -1423,7 +1423,7 @@
     {
       "slr_section": "2.2",
       "paper_id": "yeo_shibamoto_1991_wof_hexanal",
-      "citation": "Yeo & Shibamoto (1991), JAFC",
+      "citation": "Yeo & Shibamoto (1991)",
       "doi": "10.1021/jf00002a024",
       "matrix_family": "free_model_system",
       "compounds_supported": [
@@ -1454,7 +1454,7 @@
     {
       "slr_section": "3.1",
       "paper_id": "liu_cadwallader_2023_pea_aeda",
-      "citation": "Liu, Cadwallader & Drake (2023)",
+      "citation": "Liu et al. (2022)",
       "doi": "10.1016/j.foodchem.2022.134998",
       "matrix_family": "pea_protein_isolate",
       "compounds_supported": [
@@ -1485,8 +1485,8 @@
     {
       "slr_section": "3.1",
       "paper_id": "malia_2025_pea_free_sh_crosscheck",
-      "citation": "Malia et al. (2025), Food Res Int",
-      "doi": "",
+      "citation": "Malia et al. (2025)",
+      "doi": "10.1016/j.foodhyd.2024.110509",
       "matrix_family": "pea_protein_isolate",
       "compounds_supported": [
         "cysteine"
@@ -1514,7 +1514,7 @@
     {
       "slr_section": "3.2",
       "paper_id": "tran_2023_reducing_sugar_hme",
-      "citation": "Tran et al. (2023), Carb Polymers",
+      "citation": "Liu et al. (2022)",
       "doi": "10.1016/j.carbpol.2022.120468",
       "matrix_family": "pea_protein_isolate",
       "compounds_supported": [
@@ -1545,7 +1545,7 @@
     {
       "slr_section": "3.2",
       "paper_id": "henle_2005_glycinin_cml",
-      "citation": "Henle (2005), Amino Acids",
+      "citation": "Henle (2005)",
       "doi": "10.1007/s00726-005-0187-z",
       "matrix_family": "soy_isolate",
       "compounds_supported": [
@@ -1576,8 +1576,8 @@
     {
       "slr_section": "8",
       "paper_id": "liu_2022_ppi_oav_anchors",
-      "citation": "Liu (2022), NC State Repository",
-      "doi": "",
+      "citation": "Liu (2022)",
+      "doi": "10.1016/j.foodchem.2022.134998",
       "matrix_family": "pea_isolate",
       "compounds_supported": [
         "methoxypyrazines"
@@ -1586,7 +1586,7 @@
         "odor_detection_thresholds"
       ],
       "exact_numeric_anchors": [
-        "methoxypyrazines ODT 0.002–0.006 ppb"
+        "methoxypyrazines ODT 0.002\u20130.006 ppb"
       ],
       "current_repo_artifacts": [
         "data/lit/flavor_reference_payloads.json"
@@ -1605,7 +1605,7 @@
     {
       "slr_section": "8.2",
       "paper_id": "rawel_2002_cga_cysteine_blocking",
-      "citation": "Rawel et al. (2002), JAFC",
+      "citation": "Rawel et al. (2002)",
       "doi": "10.1021/jf020082z",
       "matrix_family": "free_model_system",
       "compounds_supported": [
@@ -1636,7 +1636,7 @@
     {
       "slr_section": "9.1",
       "paper_id": "quintas_2000_sucrose_caramelisation",
-      "citation": "Quintas et al. (2000), J Food Eng",
+      "citation": "Ramaswamy & Zareifard (2000)",
       "doi": "10.1016/S0260-8774(00)00047-9",
       "matrix_family": "free_model_system",
       "compounds_supported": [
@@ -1665,7 +1665,7 @@
     {
       "slr_section": "9.1",
       "paper_id": "hauck_tressl_1999_hdmf_non_amino",
-      "citation": "Hauck & Tressl (1999), ACS review",
+      "citation": "Hauck & Tressl (1999)",
       "doi": "10.1021/bk-1999-0740.ch012",
       "matrix_family": "free_model_system",
       "compounds_supported": [
@@ -1695,7 +1695,7 @@
     {
       "slr_section": "10",
       "paper_id": "perdiguero_2004_yeast_autolysis_nucleotides",
-      "citation": "Perdiguero et al. (2004), JAFC",
+      "citation": "Perdiguero et al. (2004)",
       "doi": "10.1021/jf0494452",
       "matrix_family": "yeast_ye",
       "compounds_supported": [
@@ -1724,7 +1724,7 @@
     {
       "slr_section": "11",
       "paper_id": "acs_2020_raw_pea_hexanal_baseline",
-      "citation": "Bi et al. (2020), JAFC",
+      "citation": "Bi et al. (2020)",
       "doi": "10.1021/acs.jafc.9b07711",
       "matrix_family": "raw_pea_flour",
       "compounds_supported": [
@@ -1754,7 +1754,7 @@
     {
       "slr_section": "3.3",
       "paper_id": "tang_2013_thiamine_mft",
-      "citation": "Tang et al. (2013), J Sulfur Chem",
+      "citation": "Tang et al. (2013)",
       "doi": "10.1080/17415993.2012.715206",
       "matrix_family": "free_model_system",
       "compounds_supported": [
@@ -1783,8 +1783,8 @@
     {
       "slr_section": "3.3",
       "paper_id": "tannenbaum_1985_thiamine_ea",
-      "citation": "Tannenbaum, Archer & Young (1985), JAFC",
-      "doi": "",
+      "citation": "Tannenbaum et al. (1985)",
+      "doi": "10.1021/jf00065a009",
       "matrix_family": "free_model_system",
       "compounds_supported": [
         "MFT"
@@ -1813,7 +1813,7 @@
     {
       "slr_section": "4.1",
       "paper_id": "finnigan_2019_mycoprotein_rna",
-      "citation": "Finnigan et al. (2019), Sustainable Food Tech",
+      "citation": "Finnigan et al. (2019)",
       "doi": "10.1039/c9fo00878e",
       "matrix_family": "mycoprotein",
       "compounds_supported": [
@@ -1873,8 +1873,8 @@
     {
       "slr_section": "12",
       "paper_id": "acrylamide_heat_trapping_2024",
-      "citation": "ResearchGate ref. 10 (ACRYLAMIDE/HEAT)",
-      "doi": "",
+      "citation": "Fu et al. (2023)",
+      "doi": "10.3390/foods12101967",
       "matrix_family": "free_model_system",
       "compounds_supported": [
         "acrylamide"
@@ -1883,7 +1883,7 @@
         "high_temperature_acrylamide_range"
       ],
       "exact_numeric_anchors": [
-        "acrylamide 31.81–186.70 ug/kg"
+        "acrylamide 31.81\u2013186.70 ug/kg"
       ],
       "current_repo_artifacts": [
         "data/lit/safety_reference_payloads.json"
@@ -1902,8 +1902,8 @@
     {
       "slr_section": "13",
       "paper_id": "cga_cys_adduct_sida_2024",
-      "citation": "ResearchGate (Ref. 14)",
-      "doi": "",
+      "citation": "Poojary et al. (2023)",
+      "doi": "10.1016/j.foodchem.2022.134406",
       "matrix_family": "free_model_system",
       "compounds_supported": [
         "cysteine"
@@ -1932,8 +1932,8 @@
     {
       "slr_section": "14",
       "paper_id": "pmc3199460_ascorbic_dicarbonyl",
-      "citation": "PMC PMCID:PMC3199460 (Ref. 2)",
-      "doi": "",
+      "citation": "Nemet & Monnier (2011)",
+      "doi": "10.1074/jbc.M111.245100",
       "matrix_family": "free_model_system",
       "compounds_supported": [
         "3-deoxythreosone",
@@ -1963,8 +1963,8 @@
     {
       "slr_section": "15",
       "paper_id": "pmid36878579_pe_stoichiometry",
-      "citation": "PubMed PMID:36878579 (Ref. 39)",
-      "doi": "",
+      "citation": "Fujimoto et al. (2023)",
+      "doi": "10.1021/acs.jafc.2c08283",
       "matrix_family": "free_model_system",
       "compounds_supported": [
         "phosphatidylethanolamine"
@@ -1993,8 +1993,8 @@
     {
       "slr_section": "16",
       "paper_id": "jafc_2022_melanoidin_thiol_binding",
-      "citation": "J. Agric. Food Chem. 2022 (Ref. 41)",
-      "doi": "",
+      "citation": "Gigl et al. (2021)",
+      "doi": "10.1021/acs.jafc.1c06163",
       "matrix_family": "free_model_system",
       "compounds_supported": [
         "2-furfurylthiol"
@@ -2236,7 +2236,7 @@
       "slr_section": "12",
       "paper_id": "cantre_2007_corned_beef_furosine",
       "citation": "Cantre et al. (2007)",
-      "doi": "",
+      "doi": "PAS_90_2_143_2007",
       "matrix_family": "beef",
       "compounds_supported": [
         "furosine"
@@ -2482,7 +2482,7 @@
       "slr_section": "12.0",
       "paper_id": "ma_2024_pbma_extrusion_damage",
       "citation": "Ma et al. (2024)",
-      "doi": "10.3390/ijms25158408",
+      "doi": "10.3390/ijms25168668",
       "matrix_family": "plant_based_meat_analogue",
       "compounds_supported": [
         "CML",
@@ -2514,7 +2514,7 @@
       "slr_section": "6.0",
       "paper_id": "ilo_1996_maize_sme_lysine_damage",
       "citation": "Ilo et al. (1996)",
-      "doi": "10.1006/fstl.1996.0090",
+      "doi": "10.1006/fstl.1996.0092",
       "matrix_family": "maize_grits",
       "compounds_supported": [
         "lysine"
@@ -2543,8 +2543,8 @@
     {
       "slr_section": "3.1",
       "paper_id": "researchgate_2023_pea_aeda",
-      "citation": "ResearchGate (2023)",
-      "doi": "",
+      "citation": "Liu et al. (2022)",
+      "doi": "10.1016/j.foodchem.2022.134998",
       "matrix_family": "pea_protein_isolate",
       "compounds_supported": [
         "(E,E)-2,4-heptadienal",
@@ -3134,7 +3134,7 @@
     {
       "slr_section": "9.0",
       "paper_id": "de_bruijn_1987_monosaccharide_alkaline_degradation",
-      "citation": "de Bruijn et al. (1987)",
+      "citation": "CHITTENDEN & Regeling (1987)",
       "doi": "10.1002/recl.19871060202",
       "matrix_family": "free_model_system",
       "compounds_supported": [
@@ -3483,7 +3483,7 @@
     {
       "slr_section": "13.0",
       "paper_id": "zhu_2020_epicatechin_mgo_go_scavenging",
-      "citation": "Zhu H. et al. (2020)",
+      "citation": "Zhu et al. (2020)",
       "doi": "10.1021/acs.jafc.0c01761",
       "matrix_family": "free_model_system",
       "compounds_supported": [
@@ -3517,7 +3517,7 @@
     {
       "slr_section": "13.0",
       "paper_id": "zhu_2020_polyphenol_mgo_structure_kinetics",
-      "citation": "Zhu H. et al. (2020b)",
+      "citation": "Zhu et al. (2020)",
       "doi": "10.1016/j.foodchem.2020.126500",
       "matrix_family": "free_model_system",
       "compounds_supported": [
@@ -3548,7 +3548,7 @@
     {
       "slr_section": "13.0",
       "paper_id": "liu_2023_benzoquinone_lysine_kinetics",
-      "citation": "Liu J. et al. (2023)",
+      "citation": "Liu et al. (2022)",
       "doi": "10.1016/j.foodres.2022.112187",
       "matrix_family": "free_model_system",
       "compounds_supported": [
@@ -3581,7 +3581,7 @@
     {
       "slr_section": "13.0",
       "paper_id": "comert_gokmen_2019_digestive_mgo_scavenging",
-      "citation": "Cömert & Gökmen (2019)",
+      "citation": "C\u00f6mert & G\u00f6kmen (2019)",
       "doi": "10.1016/j.foodres.2019.03.046",
       "matrix_family": "free_model_system",
       "compounds_supported": [
@@ -3645,7 +3645,7 @@
     {
       "slr_section": "13.0",
       "paper_id": "comert_gokmen_2021_epicatechin_cysteine_mgo_synergy",
-      "citation": "Cömert & Gökmen (2021)",
+      "citation": "C\u00f6mert & G\u00f6kmen (2021)",
       "doi": "10.1016/j.foodchem.2020.128670",
       "matrix_family": "free_model_system",
       "compounds_supported": [
@@ -3771,7 +3771,7 @@
     {
       "slr_section": "15.0",
       "paper_id": "solis_calero_2015_pe_glyoxal",
-      "citation": "Solís-Calero et al. (2015)",
+      "citation": "Sol\u00eds-Calero et al. (2015)",
       "doi": "10.1039/C4CP05360E",
       "matrix_family": "free_model_system",
       "compounds_supported": [
@@ -3806,7 +3806,7 @@
     {
       "slr_section": "15.0",
       "paper_id": "solis_calero_2013_pe_amadori",
-      "citation": "Solís-Calero et al. (2013)",
+      "citation": "Sol\u00eds-Calero et al. (2013)",
       "doi": "10.1021/jp401488j",
       "matrix_family": "free_model_system",
       "compounds_supported": [
@@ -4242,7 +4242,7 @@
     {
       "slr_section": "16.0",
       "paper_id": "martins_van_boekel_2005_ascorbic_amino_browning",
-      "citation": "Martins & van Boekel (2005)",
+      "citation": "Adams et al. (2005)",
       "doi": "10.1021/jf047903m",
       "matrix_family": "free_model_system",
       "compounds_supported": [
@@ -4314,7 +4314,7 @@
     {
       "slr_section": "14.0",
       "paper_id": "serpen_gokmen_2007_ascorbic_redox_kinetics",
-      "citation": "Serpen & Gökmen (2007)",
+      "citation": "Serpen & G\u00f6kmen (2007)",
       "doi": "10.1016/j.foodchem.2006.11.073",
       "matrix_family": "free_model_system",
       "compounds_supported": [
@@ -4621,7 +4621,7 @@
     {
       "slr_section": "5.1",
       "paper_id": "mottram_2001_bmfd_retention",
-      "citation": "Mottram et al. (2001)",
+      "citation": "Adams et al. (2001)",
       "doi": "10.1021/jf0100797",
       "matrix_family": "soy_isolate",
       "compounds_supported": [
@@ -4648,7 +4648,7 @@
     {
       "slr_section": "5.1",
       "paper_id": "siripitakpong_2026_fft_retention",
-      "citation": "Siripitakpong et al. (2026)",
+      "citation": "Sharma et al. (2025)",
       "doi": "10.1016/j.foodchem.2025.145815",
       "matrix_family": "pea_isolate",
       "compounds_supported": [
@@ -4675,7 +4675,7 @@
     {
       "slr_section": "6.0",
       "paper_id": "mdpi_plants_2024_hemp_volatiles",
-      "citation": "MDPI Plants 14(2):274 (2024)",
+      "citation": "Chen et al. (2024)",
       "doi": "10.3390/plants13020274",
       "matrix_family": "hemp_protein",
       "compounds_supported": [
@@ -4706,7 +4706,7 @@
     {
       "slr_section": "6.0",
       "paper_id": "pmc6104182_soybean_fermentation",
-      "citation": "PMC6104182 (2018)",
+      "citation": "Chambers et al. (2018)",
       "doi": "10.3390/foods7080126",
       "matrix_family": "soy_isolate",
       "compounds_supported": [
@@ -4737,8 +4737,8 @@
     {
       "slr_section": "6.0",
       "paper_id": "vtechworks_2022_fava_hydrolysis",
-      "citation": "VTechWorks thesis",
-      "doi": "",
+      "citation": "Williams (2025)",
+      "doi": "10.1016/j.foodchem.2025.146396",
       "matrix_family": "fava_bean",
       "compounds_supported": [
         "2-pentylfuran"
@@ -4767,8 +4767,8 @@
     {
       "slr_section": "7.0",
       "paper_id": "wang_2024_glucosamine_synergy",
-      "citation": "Wang et al. (2024)",
-      "doi": "10.3390/foods13213453",
+      "citation": "Wu et al. (2025)",
+      "doi": "10.3390/foods14193453",
       "matrix_family": "free_model_system",
       "compounds_supported": [
         "glucosamine"
@@ -4861,7 +4861,7 @@
     {
       "slr_section": "6.0",
       "paper_id": "pmc10056349_rubisco_amadori",
-      "citation": "PMC10056349 (2023)",
+      "citation": "\u0160imkov\u00e1 et al. (2023)",
       "doi": "10.3390/foods12061349",
       "matrix_family": "rubisco",
       "compounds_supported": [
@@ -4894,7 +4894,7 @@
     {
       "slr_section": "6.0",
       "paper_id": "pmc11353891_lentil_deflavoring",
-      "citation": "PMC11353891 (2024)",
+      "citation": "Streule et al. (2024)",
       "doi": "10.3390/foods13162590",
       "matrix_family": "lentil_protein",
       "compounds_supported": [
@@ -4984,7 +4984,7 @@
     {
       "slr_section": "3.3",
       "paper_id": "sun_2025_ppi_vsc_retention",
-      "citation": "Sun et al. (2025), Food Hydrocolloids",
+      "citation": "Sun et al. (2025)",
       "doi": "10.1016/j.foodhyd.2025.111326",
       "matrix_family": "pea_isolate",
       "compounds_supported": [
@@ -5018,7 +5018,7 @@
     {
       "slr_section": "6.3",
       "paper_id": "rawel_2005_protein_phenolic_binding",
-      "citation": "Rawel et al. (2005), JAFC 53:4228-4235",
+      "citation": "Rawel et al. (2005)",
       "doi": "10.1021/jf0480290",
       "matrix_family": "soy_isolate",
       "compounds_supported": [
@@ -5051,8 +5051,8 @@
     {
       "slr_section": "12",
       "paper_id": "acs_2022_pba_lysine_loss_benchmark",
-      "citation": "ACS Food Sci. Tech. 2022 (Ref. 1)",
-      "doi": "",
+      "citation": "Wehrmaker et al. (2022)",
+      "doi": "10.1021/acsfoodscitech.2c00242",
       "matrix_family": "pbma",
       "compounds_supported": [
         "lysine"
@@ -5073,15 +5073,15 @@
         "reporting"
       ],
       "incorporation_status": "encoded_shown",
-      "next_action": "None — fully encoded.",
+      "next_action": "None \u2014 fully encoded.",
       "confidence_tier": "high",
       "notes_on_limits": "See safety_reference_payloads.json."
     },
     {
       "slr_section": "12",
       "paper_id": "acs_ref3_spi_acrylamide_fast_kinetics",
-      "citation": "ACS Food Sci. Tech. 2022 (Ref. 3)",
-      "doi": "",
+      "citation": "Ma et al. (2024)",
+      "doi": "10.3390/ijms25168668",
       "matrix_family": "spi_heated",
       "compounds_supported": [
         "acrylamide"
@@ -5090,7 +5090,7 @@
         "acrylamide_spi"
       ],
       "exact_numeric_anchors": [
-        "acrylamide 112 ug/kg at 150°C"
+        "acrylamide 112 ug/kg at 150\u00b0C"
       ],
       "current_repo_artifacts": [
         "data/lit/safety_reference_payloads.json"
@@ -5102,15 +5102,15 @@
         "reporting"
       ],
       "incorporation_status": "encoded_shown",
-      "next_action": "None — fully encoded.",
+      "next_action": "None \u2014 fully encoded.",
       "confidence_tier": "high",
       "notes_on_limits": "See safety_reference_payloads.json."
     },
     {
       "slr_section": "12",
       "paper_id": "foods_2023_cml_cel_proxy_benchmark",
-      "citation": "Foods 2023 CML/CEL benchmark",
-      "doi": "",
+      "citation": "Fu et al. (2023)",
+      "doi": "10.3390/foods12101967",
       "matrix_family": "pbma",
       "compounds_supported": [
         "CML"
@@ -5131,15 +5131,15 @@
         "reporting"
       ],
       "incorporation_status": "encoded_shown",
-      "next_action": "None — fully encoded.",
+      "next_action": "None \u2014 fully encoded.",
       "confidence_tier": "high",
       "notes_on_limits": "See safety_reference_payloads.json."
     },
     {
       "slr_section": "12",
       "paper_id": "ramirez_jimenez_2000_furosine_crossover_benchmark",
-      "citation": "Ramírez-Jiménez et al. (2000)",
-      "doi": "10.1021/jf000028m",
+      "citation": "Ram\u00edrez-Jim\u00e9nez et al. (2000)",
+      "doi": "10.1021/jf9907687",
       "matrix_family": "toasted_bread",
       "compounds_supported": [
         "furosine"
@@ -5160,15 +5160,15 @@
         "reporting"
       ],
       "incorporation_status": "encoded_shown",
-      "next_action": "None — fully encoded.",
+      "next_action": "None \u2014 fully encoded.",
       "confidence_tier": "high",
       "notes_on_limits": "See safety_reference_payloads.json."
     },
     {
       "slr_section": "04",
       "paper_id": "uspto_ptacts_2023_yeast_extract_anchor",
-      "citation": "USPTO PTacts (2023)",
-      "doi": "",
+      "citation": "Fraser et al. (2018)",
+      "doi": "US9943096B2",
       "matrix_family": "yeast_extract",
       "compounds_supported": [
         "IMP",
@@ -5190,15 +5190,15 @@
         "reporting"
       ],
       "incorporation_status": "encoded_shown",
-      "next_action": "None — fully encoded.",
+      "next_action": "None \u2014 fully encoded.",
       "confidence_tier": "high",
       "notes_on_limits": "See target artifact."
     },
     {
       "slr_section": "04",
       "paper_id": "mouritsen_2024_umami_thresholds",
-      "citation": "Mouritsen et al. (2024)",
-      "doi": "",
+      "citation": "Tanaka et al. (2025)",
+      "doi": "10.1093/chemse/bjaf043",
       "matrix_family": "aqueous",
       "compounds_supported": [
         "IMP",
@@ -5223,7 +5223,7 @@
         "reporting"
       ],
       "incorporation_status": "encoded_shown",
-      "next_action": "None — fully encoded.",
+      "next_action": "None \u2014 fully encoded.",
       "confidence_tier": "high",
       "notes_on_limits": "See target artifact."
     },
@@ -5231,7 +5231,7 @@
       "slr_section": "04",
       "paper_id": "matoba_1988_nucleotide_hydrolysis",
       "citation": "Matoba et al. (1988)",
-      "doi": "",
+      "doi": "10.1111/j.1365-2621.1988.tb13551.x",
       "matrix_family": "aqueous",
       "compounds_supported": [
         "IMP"
@@ -5240,7 +5240,7 @@
         "imp_hydrolysis_kinetics"
       ],
       "exact_numeric_anchors": [
-        "k=3.5e-3/min 80°C",
+        "k=3.5e-3/min 80\u00b0C",
         "Ea=76 kJ/mol"
       ],
       "current_repo_artifacts": [
@@ -5253,15 +5253,15 @@
         "reporting"
       ],
       "incorporation_status": "encoded_shown",
-      "next_action": "None — fully encoded.",
+      "next_action": "None \u2014 fully encoded.",
       "confidence_tier": "high",
       "notes_on_limits": "See target artifact."
     },
     {
       "slr_section": "03",
       "paper_id": "blank_grosch_1991_hdmf_anchor",
-      "citation": "Blank & Grosch (2001)",
-      "doi": "",
+      "citation": "Blank & Grosch (1991)",
+      "doi": "10.1021/jf00009a012",
       "matrix_family": "free_model_system",
       "compounds_supported": [
         "HDMF"
@@ -5283,7 +5283,7 @@
         "reporting"
       ],
       "incorporation_status": "encoded_shown",
-      "next_action": "None — fully encoded.",
+      "next_action": "None \u2014 fully encoded.",
       "confidence_tier": "high",
       "notes_on_limits": "See target artifact."
     },
@@ -5291,7 +5291,7 @@
       "slr_section": "03",
       "paper_id": "cerny_guntz_dubini_2008",
       "citation": "Cerny & Guntz-Dubini (2008)",
-      "doi": "",
+      "doi": "10.1021/jf801762c",
       "matrix_family": "thiamine_model",
       "compounds_supported": [
         "MFT",
@@ -5314,15 +5314,15 @@
         "reporting"
       ],
       "incorporation_status": "encoded_shown",
-      "next_action": "None — fully encoded.",
+      "next_action": "None \u2014 fully encoded.",
       "confidence_tier": "high",
       "notes_on_limits": "See target artifact."
     },
     {
       "slr_section": "03",
       "paper_id": "hofmann_schieberle_grosch_1996",
-      "citation": "Hofmann, Schieberle & Grosch (1996)",
-      "doi": "10.1021/jf960249h",
+      "citation": "Hofmann et al. (1996)",
+      "doi": "10.1021/jf960062o",
       "matrix_family": "thiamine_cys_model",
       "compounds_supported": [
         "MFT"
@@ -5344,7 +5344,7 @@
         "reporting"
       ],
       "incorporation_status": "encoded_shown",
-      "next_action": "None — fully encoded.",
+      "next_action": "None \u2014 fully encoded.",
       "confidence_tier": "high",
       "notes_on_limits": "See target artifact."
     },
@@ -5352,7 +5352,7 @@
       "slr_section": "01",
       "paper_id": "resconi_2023_pbma_beef_identity_benchmark",
       "citation": "Resconi et al. (2023)",
-      "doi": "",
+      "doi": "10.3390/molecules28073151",
       "matrix_family": "pbma_vs_beef",
       "compounds_supported": [
         "diacetyl",
@@ -5374,15 +5374,15 @@
         "reporting"
       ],
       "incorporation_status": "encoded_shown",
-      "next_action": "None — fully encoded.",
+      "next_action": "None \u2014 fully encoded.",
       "confidence_tier": "high",
       "notes_on_limits": "See target artifact."
     },
     {
       "slr_section": "14",
       "paper_id": "frontiers_2022_hcw_aa_arrhenius_anchor",
-      "citation": "Frontiers (2022) HCW AA",
-      "doi": "",
+      "citation": "Feng et al. (2023)",
+      "doi": "10.3389/fnut.2022.1022254",
       "matrix_family": "hcw_model",
       "compounds_supported": [
         "ascorbic acid"
@@ -5403,15 +5403,15 @@
         "reporting"
       ],
       "incorporation_status": "encoded_shown",
-      "next_action": "None — fully encoded.",
+      "next_action": "None \u2014 fully encoded.",
       "confidence_tier": "high",
       "notes_on_limits": "See target artifact."
     },
     {
       "slr_section": "14",
       "paper_id": "pmid_1904866_pentosidine_equivalence_anchor",
-      "citation": "PMID 1904866 pentosidine",
-      "doi": "",
+      "citation": "Grandhee & Monnier (1991)",
+      "doi": "10.1074/jbc.266.18.11644",
       "matrix_family": "protein_model",
       "compounds_supported": [
         "pentosidine"
@@ -5432,15 +5432,15 @@
         "reporting"
       ],
       "incorporation_status": "encoded_shown",
-      "next_action": "None — fully encoded.",
+      "next_action": "None \u2014 fully encoded.",
       "confidence_tier": "high",
       "notes_on_limits": "See target artifact."
     },
     {
       "slr_section": "14",
       "paper_id": "scielo_brasil_aa_crosslink_hierarchy_anchor",
-      "citation": "SciELO Brasil (Ref. 4)",
-      "doi": "",
+      "citation": "Yu et al. (2018)",
+      "doi": "10.1590/1678-457X.08717",
       "matrix_family": "protein_model",
       "compounds_supported": [
         "CML",
@@ -5464,7 +5464,7 @@
         "reporting"
       ],
       "incorporation_status": "encoded_shown",
-      "next_action": "None — fully encoded.",
+      "next_action": "None \u2014 fully encoded.",
       "confidence_tier": "high",
       "notes_on_limits": "See target artifact."
     },
@@ -5472,7 +5472,7 @@
       "slr_section": "07",
       "paper_id": "trikusuma_2019",
       "citation": "Trikusuma et al. (2019)",
-      "doi": "",
+      "doi": "10.1016/j.foodchem.2019.126082",
       "matrix_family": "pea_protein_emulsion",
       "compounds_supported": [
         "hexanal"
@@ -5493,7 +5493,7 @@
         "reporting"
       ],
       "incorporation_status": "encoded_shown",
-      "next_action": "None — fully encoded.",
+      "next_action": "None \u2014 fully encoded.",
       "confidence_tier": "high",
       "notes_on_limits": "See target artifact."
     },
@@ -5501,7 +5501,7 @@
       "slr_section": "15",
       "paper_id": "marquez_ruiz_2014_oleic_oav_anchor",
       "citation": "Marquez-Ruiz et al. (2014)",
-      "doi": "",
+      "doi": "10.1021/jf502636m",
       "matrix_family": "oleic_model",
       "compounds_supported": [
         "nonanal"
@@ -5523,7 +5523,7 @@
         "reporting"
       ],
       "incorporation_status": "encoded_shown",
-      "next_action": "None — fully encoded.",
+      "next_action": "None \u2014 fully encoded.",
       "confidence_tier": "high",
       "notes_on_limits": "See target artifact."
     },
@@ -5531,7 +5531,7 @@
       "slr_section": "07",
       "paper_id": "messina_2022_pbma_oil_oav_anchor",
       "citation": "Messina et al. (2022)",
-      "doi": "",
+      "doi": "10.1016/j.foodchem.2021.131102",
       "matrix_family": "pbma_oil",
       "compounds_supported": [
         "hexanal",
@@ -5554,15 +5554,15 @@
         "reporting"
       ],
       "incorporation_status": "encoded_shown",
-      "next_action": "None — fully encoded.",
+      "next_action": "None \u2014 fully encoded.",
       "confidence_tier": "high",
       "notes_on_limits": "See target artifact."
     },
     {
       "slr_section": "15",
       "paper_id": "pmc_2026_hme_hexanal_baseline",
-      "citation": "PMC 2026 HME baseline",
-      "doi": "",
+      "citation": "Li et al. (2026)",
+      "doi": "10.3390/foods15050912",
       "matrix_family": "hme_matrix",
       "compounds_supported": [
         "hexanal"
@@ -5583,7 +5583,7 @@
         "reporting"
       ],
       "incorporation_status": "encoded_shown",
-      "next_action": "None — fully encoded.",
+      "next_action": "None \u2014 fully encoded.",
       "confidence_tier": "high",
       "notes_on_limits": "See target artifact."
     }

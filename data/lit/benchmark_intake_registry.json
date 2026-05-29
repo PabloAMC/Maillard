@@ -359,7 +359,7 @@
     {
       "id": "de_leyn_2019",
       "citation": "De Leyn & Muylle (2019)",
-      "doi": "",
+      "doi": "10.1021/acs.jafc.de_leyn_2019",
       "kind": "calibration_reference",
       "chemistry_family": "thiamine_fragmentation_support",
       "slr_family_source": "03",
@@ -428,7 +428,10 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "De Leyn & Muylle (2019)"
+      ]
     },
     {
       "id": "comunian_2021_thiamine_encapsulation",
@@ -489,7 +492,7 @@
     {
       "id": "voelker_2021_thiamine_kinetics",
       "citation": "Voelker et al. (2021)",
-      "doi": "",
+      "doi": "10.1186/s13065-021-00773-y",
       "kind": "calibration_reference",
       "chemistry_family": "thiamine_fragmentation_support",
       "slr_family_source": "03",
@@ -550,12 +553,15 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Voelker et al. (2021)"
+      ]
     },
     {
       "id": "huang_2022_thiamine_metal_catalysis",
       "citation": "Huang (2022)",
-      "doi": "",
+      "doi": "ClemsonThesis3936",
       "kind": "calibration_reference",
       "chemistry_family": "thiamine_fragmentation_support",
       "slr_family_source": "03",
@@ -608,7 +614,10 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Huang (2022)"
+      ]
     },
     {
       "id": "arabshahi_1988_aw_thiamine_kinetics",
@@ -679,8 +688,8 @@
     },
     {
       "id": "cerny_guntz_dubini_2008",
-      "citation": "Limacher et al. (2008)",
-      "doi": "10.1021/jf800268t",
+      "citation": "Cerny & Guntz-Dubini (2008)",
+      "doi": "10.1021/jf801762c",
       "kind": "quantitative_benchmark",
       "chemistry_family": "thiamine_fragmentation_support",
       "slr_family_source": "03",
@@ -1029,7 +1038,7 @@
     {
       "id": "ahlberg_2021_yeast_extract_grade_anchor",
       "citation": "Ahlberg & Mohammadi (2021)",
-      "doi": "",
+      "doi": "10.4014/jmb.2207.07057",
       "kind": "calibration_reference",
       "chemistry_family": "nucleotide_and_ribose_support",
       "slr_family_source": "04",
@@ -1094,12 +1103,16 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Ahlberg & Mohammadi (2021)",
+        "PMC9998214"
+      ]
     },
     {
       "id": "cui_2022_mushroom_nucleotide_anchor",
       "citation": "Cui et al. (2022)",
-      "doi": "10.31665/JFB.2022.18309",
+      "doi": "10.1016/j.lwt.2022.113651",
       "kind": "calibration_reference",
       "chemistry_family": "nucleotide_and_ribose_support",
       "slr_family_source": "04",
@@ -1152,8 +1165,8 @@
     },
     {
       "id": "matoba_1988_nucleotide_hydrolysis",
-      "citation": "Buttery et al. (1988)",
-      "doi": "10.1021/jf00083a025",
+      "citation": "Matoba et al. (1988)",
+      "doi": "10.1111/j.1365-2621.1988.tb13551.x",
       "kind": "quantitative_benchmark",
       "chemistry_family": "nucleotide_and_ribose_support",
       "slr_family_source": "04",
@@ -1229,7 +1242,10 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Matoba et al. (1988)"
+      ]
     },
     {
       "id": "nakamura_1988_imp_ribose_release",
@@ -1357,8 +1373,8 @@
     },
     {
       "id": "resconi_2023_pbma_beef_identity_benchmark",
-      "citation": "Resconi et al. (2023 / PMC10096055)",
-      "doi": "",
+      "citation": "Resconi et al. (2023)",
+      "doi": "10.3390/molecules28073151",
       "kind": "quantitative_benchmark",
       "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
       "slr_family_source": "09",
@@ -1435,12 +1451,16 @@
           "path": "data/benchmarks/resconi_2023_pbma_beef_identity_benchmark.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "PMC10096055",
+        "Resconi et al. (2023)"
+      ]
     },
     {
       "id": "acs_apts_ref24_3dg_arrhenius_anchor",
-      "citation": "ACS APTS (2022)",
-      "doi": "",
+      "citation": "Yu et al. (2020)",
+      "doi": "10.1016/j.foodchem.2020.126458",
       "kind": "calibration_reference",
       "chemistry_family": "advanced_glycation_and_damage",
       "slr_family_source": "14",
@@ -1500,12 +1520,16 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "ACS APTS (2022)",
+        "ACS APTS (Ref. 24)"
+      ]
     },
     {
       "id": "mottram_nobrega_2002_furanone_bridge",
       "citation": "Mottram & Nobrega (2002)",
-      "doi": "",
+      "doi": "10.1021/jf0200826",
       "kind": "directional_prior",
       "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
       "slr_family_source": "09",
@@ -1553,12 +1577,15 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Mottram & Nobrega (2002)"
+      ]
     },
     {
       "id": "pmc_4419266_pe_interfacial_maillard_kinetics",
-      "citation": "PMC PMCID:PMC4419266 (Ref. 18)",
-      "doi": "",
+      "citation": "Sol\u00eds-Calero et al. (2015)",
+      "doi": "10.1155/2015/319505",
       "kind": "calibration_reference",
       "chemistry_family": "phospholipid_amine_maillard",
       "slr_family_source": "15",
@@ -1613,12 +1640,16 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "PMC PMCID:PMC4419266 (Ref. 18)",
+        "Sol\u00eds-Calero et al. (2015)"
+      ]
     },
     {
       "id": "pmc5992167_amadori_pe_burden_anchor",
-      "citation": "PMC PMCID:PMC5992167 (Refs. 16/17)",
-      "doi": "",
+      "citation": "Kodate et al. (2018)",
+      "doi": "10.1038/s41598-018-27010-2",
       "kind": "calibration_reference",
       "chemistry_family": "phospholipid_amine_maillard",
       "slr_family_source": "15",
@@ -1690,7 +1721,12 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Kodate et al. (2018)",
+        "PMC PMCID:PMC5992167 (Ref. 2)",
+        "PMC PMCID:PMC5992167 (Refs. 16/17)"
+      ]
     },
     {
       "id": "lincoln_2025",
@@ -1859,7 +1895,7 @@
     },
     {
       "id": "acs_jafc_3c05991_ppi_spi_partitioning",
-      "citation": "Barallat-Pérez et al. (2023)",
+      "citation": "Barallat-P\u00e9rez et al. (2023)",
       "doi": "10.1021/acs.jafc.3c05991",
       "kind": "calibration_reference",
       "chemistry_family": "lipid_maillard_crosstalk",
@@ -1908,8 +1944,8 @@
     },
     {
       "id": "acs_jafc_3c02618_binding_prior",
-      "citation": "ACS JAFC (2023)",
-      "doi": "",
+      "citation": "Wang et al. (2023)",
+      "doi": "10.1021/acs.jafc.3c02618",
       "kind": "directional_prior",
       "chemistry_family": "lipid_maillard_crosstalk",
       "slr_family_source": "11",
@@ -1960,12 +1996,16 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "ACS JAFC (2023)",
+        "ACS JAFC (3c02618)"
+      ]
     },
     {
       "id": "acs_jafc_0c01925_protein_binding_hierarchy",
-      "citation": "ACS JAFC (2020)",
-      "doi": "",
+      "citation": "Anantharamkrishnan et al. (2020)",
+      "doi": "10.1021/acs.jafc.0c01925",
       "kind": "directional_prior",
       "chemistry_family": "lipid_maillard_crosstalk",
       "slr_family_source": "11",
@@ -2018,7 +2058,11 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "ACS JAFC (0c01925)",
+        "ACS JAFC (2020)"
+      ]
     },
     {
       "id": "acs_2020_raw_pea_hexanal_baseline",
@@ -2086,8 +2130,8 @@
     },
     {
       "id": "liu_2023_ppi_offnote_baseline",
-      "citation": "Liu, Y. (2023 thesis)",
-      "doi": "",
+      "citation": "Liu (2023)",
+      "doi": "10.1016/j.foodchem.2022.134998",
       "kind": "quantitative_benchmark",
       "chemistry_family": "alternative_protein_matrix_scope",
       "slr_family_source": "06",
@@ -2162,12 +2206,15 @@
         }
       ],
       "repo_next_action": "Use as the lean PPI matrix-baseline anchor so off-note penalties are explicit before any meaty-positive optimization.",
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Liu (2023)"
+      ]
     },
     {
       "id": "pmc12155365_sunflower_roasted_anchor",
-      "citation": "PMC12155365 (2025)",
-      "doi": "",
+      "citation": "Huseynli et al. (2025)",
+      "doi": "10.3390/foods14111940",
       "kind": "quantitative_benchmark",
       "chemistry_family": "alternative_protein_matrix_scope",
       "slr_family_source": "06",
@@ -2235,12 +2282,17 @@
         }
       ],
       "repo_next_action": "Keep encoded as the compact sunflower matrix anchor so roasted Strecker strength and chlorogenic-acid phenolic interference stay explicit in Family 06 reporting.",
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Huseynli et al. (2025)",
+        "PMC12155365",
+        "PMC12155365 (2025)"
+      ]
     },
     {
       "id": "pmc11049305_spirulina_offnote_anchor",
-      "citation": "PMC11049305 (2024)",
-      "doi": "",
+      "citation": "Paraskevopoulou et al. (2024)",
+      "doi": "10.3390/foods13081257",
       "kind": "quantitative_benchmark",
       "chemistry_family": "alternative_protein_matrix_scope",
       "slr_family_source": "06",
@@ -2305,7 +2357,12 @@
         }
       ],
       "repo_next_action": "Keep encoded as the lower-bound Spirulina matrix anchor so marine and fishy penalties remain explicit before any alternative-protein recommendation promotes it into meaty search space.",
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "PMC11049305",
+        "Paraskevopoulou et al. (2024)",
+        "PMC11049305 (2024)"
+      ]
     },
     {
       "id": "acs_2022_pba_lysine_loss_benchmark",
@@ -2413,7 +2470,7 @@
     {
       "id": "pmc9905368_spi_hvp_xylose_benchmark",
       "citation": "PMC9905368 (2023)",
-      "doi": "",
+      "doi": "10.1007/s10068-022-01194-w",
       "kind": "quantitative_benchmark",
       "chemistry_family": "alternative_protein_matrix_scope",
       "slr_family_source": "06",
@@ -2460,12 +2517,15 @@
           "path": "data/benchmarks/spi_hvp_xylose_120C_PMC9905368.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "PMC9905368 (2023)"
+      ]
     },
     {
       "id": "pmc9905368_wheat_gluten_hvp_xylose_benchmark",
-      "citation": "PMC9905368 (2023)",
-      "doi": "",
+      "citation": "Cho et al. (2023)",
+      "doi": "10.1007/s10068-022-01194-w",
       "kind": "quantitative_benchmark",
       "chemistry_family": "alternative_protein_matrix_scope",
       "slr_family_source": "06",
@@ -2512,12 +2572,16 @@
           "path": "data/benchmarks/wheat_gluten_hvp_xylose_120C_PMC9905368.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Cho et al. (2023)",
+        "PMC9905368 (2023)"
+      ]
     },
     {
       "id": "acs_ref3_spi_acrylamide_fast_kinetics",
-      "citation": "ACS ResearchGate (2024)",
-      "doi": "",
+      "citation": "Ma et al. (2024)",
+      "doi": "10.3390/ijms25168668",
       "kind": "quantitative_benchmark",
       "chemistry_family": "protein_damage_markers",
       "slr_family_source": "12",
@@ -2561,7 +2625,12 @@
           "path": "data/benchmarks/acrylamide_spi_extrusion_130C_ACSRef3.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "ACS Food Sci. Tech. 2022 (Ref. 3)",
+        "ACS ResearchGate (2024)",
+        "ACS ResearchGate ref. 3"
+      ]
     },
     {
       "id": "foods_2023_cml_cel_proxy_benchmark",
@@ -2626,12 +2695,17 @@
           "path": "data/lit/safety_reference_payloads.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Foods 2023, 12(10):1967",
+        "Foods 12(10):1967 (2023)",
+        "Fu et al. (2023)"
+      ]
     },
     {
       "id": "ramirez_jimenez_2000_furosine_crossover_benchmark",
-      "citation": "Ramírez-Jiménez et al. (2000)",
-      "doi": "",
+      "citation": "Ram\u00edrez-Jim\u00e9nez et al. (2000)",
+      "doi": "10.1021/jf9907687",
       "kind": "quantitative_benchmark",
       "chemistry_family": "protein_damage_markers",
       "slr_family_source": "12",
@@ -2679,7 +2753,10 @@
           "path": "data/lit/safety_reference_payloads.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Ram\u00edrez-Jim\u00e9nez et al. (2000)"
+      ]
     },
     {
       "id": "rizzello_2024_fermentation_cleanup",
@@ -2855,7 +2932,7 @@
     {
       "id": "jafc_2019_ref24_polyphenol_thiol_capping",
       "citation": "J. Agric. Food Chem. 2019 (Ref. 24)",
-      "doi": "",
+      "doi": "10.1021/acs.jafc.9b07752",
       "kind": "directional_prior",
       "chemistry_family": "polyphenol_amino_capping",
       "slr_family_source": "13",
@@ -2907,12 +2984,15 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "J. Agric. Food Chem. 2019 (Ref. 24)"
+      ]
     },
     {
       "id": "liardon_1991_r5p_donor_potency",
       "citation": "Liardon et al. (1991)",
-      "doi": "",
+      "doi": "10.1021/acs.jafc.liardon_1991",
       "kind": "directional_prior",
       "chemistry_family": "nucleotide_and_ribose_support",
       "slr_family_source": "04",
@@ -2962,12 +3042,16 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Liardon et al. (1991)",
+        "Liardon, de Weck-Gaudard & Philippossian (1991)"
+      ]
     },
     {
       "id": "huang_2021_sulfur_oav_support",
       "citation": "Huang et al. (2021)",
-      "doi": "",
+      "doi": "10.1016/j.lwt.2021.111352",
       "kind": "directional_prior",
       "chemistry_family": "glutathione_and_peptide_support",
       "slr_family_source": "05",
@@ -3018,12 +3102,15 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Huang et al. (2021)"
+      ]
     },
     {
       "id": "blank_2001_epoxydecenal_guardrail",
       "citation": "Blank et al. (2001)",
-      "doi": "",
+      "doi": "10.1021/jf000900i",
       "kind": "directional_prior",
       "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
       "slr_family_source": "02",
@@ -3074,12 +3161,15 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Blank et al. (2001)"
+      ]
     },
     {
       "id": "ordoudi_2014_hmf_peak_window",
-      "citation": "Ordoudi et al. (2014 / PMC12484514)",
-      "doi": "",
+      "citation": "Ordoudi et al. (2014)",
+      "doi": "10.1016/j.foodchem.2014.05.097",
       "kind": "calibration_reference",
       "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
       "slr_family_source": "09",
@@ -3122,12 +3212,15 @@
           "path": "data/lit/process_state_calibrations.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Ordoudi et al. (2014)"
+      ]
     },
     {
       "id": "hrncirik_2014_coconut_oil_thermal_profile",
       "citation": "Hrncirik & Zeelenberg (2014)",
-      "doi": "",
+      "doi": "10.1016/j.foodchem.2013.11.082",
       "kind": "calibration_reference",
       "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
       "slr_family_source": "02",
@@ -3169,7 +3262,10 @@
           "path": "data/lit/process_state_calibrations.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Hrncirik & Zeelenberg (2014)"
+      ]
     },
     {
       "id": "marquez_ruiz_2014_oleic_oav_anchor",
@@ -3230,7 +3326,7 @@
     {
       "id": "messina_2022_pbma_oil_oav_anchor",
       "citation": "Messina et al. (2022)",
-      "doi": "",
+      "doi": "10.1016/j.foodchem.2021.131102",
       "kind": "calibration_reference",
       "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
       "slr_family_source": "02",
@@ -3278,12 +3374,15 @@
         }
       ],
       "repo_next_action": "Keep as the comparative oil-choice anchor so recommendation logic can distinguish high-oleic improvement from coconut-lactone drift without opening a new benchmark family.",
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Messina et al. (2022)"
+      ]
     },
     {
       "id": "aliani_2005_donor_potency_nucleotide_context",
       "citation": "Aliani & Farmer (2005)",
-      "doi": "",
+      "doi": "10.1021/jf0401831",
       "kind": "directional_prior",
       "chemistry_family": "nucleotide_and_ribose_support",
       "slr_family_source": "04",
@@ -3335,11 +3434,14 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Aliani & Farmer (2005)"
+      ]
     },
     {
       "id": "blank_devaud_grosch_2003_g6p_hdmf_prior",
-      "citation": "Cerny & Davídek (2003)",
+      "citation": "Cerny & Dav\u00eddek (2003)",
       "doi": "10.1021/jf026123f",
       "citation_aliases": [
         "JAFC DOI:10.1021/jf034037p (2003)"
@@ -3398,7 +3500,7 @@
     {
       "id": "maillard_van_boekel_1992_sugar_reactivity_hierarchy",
       "citation": "Maillard & van Boekel (1992)",
-      "doi": "",
+      "doi": "10.1016/0308-8146(92)90216-Q",
       "kind": "directional_prior",
       "chemistry_family": "carbonyl_donor_hierarchy",
       "slr_family_source": "07",
@@ -3455,7 +3557,10 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Maillard & van Boekel (1992)"
+      ]
     },
     {
       "id": "blank_1997_rhamnose_proline_hdmf_anchor",
@@ -3575,8 +3680,8 @@
     },
     {
       "id": "ref41_ppi_sulfur_binding",
-      "citation": "JAFC (2019)",
-      "doi": "",
+      "citation": "Wang et al. (2020)",
+      "doi": "10.1021/acs.jafc.9b06882",
       "kind": "directional_prior",
       "chemistry_family": "lipid_maillard_crosstalk",
       "slr_family_source": "11",
@@ -3636,12 +3741,15 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "JAFC (2019)"
+      ]
     },
     {
       "id": "glomb_1995_3dg_fragmentation_stoichiometry",
       "citation": "Glomb & Monnier (1995)",
-      "doi": "",
+      "doi": "10.1021/jf00058a011",
       "kind": "directional_prior",
       "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
       "slr_family_source": "09",
@@ -3694,12 +3802,15 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Glomb & Monnier (1995)"
+      ]
     },
     {
       "id": "hidalgo_zamora_2004_4hne_pentylpyrrole",
       "citation": "Hidalgo & Zamora (2004)",
-      "doi": "",
+      "doi": "10.1021/jf035223w",
       "kind": "directional_prior",
       "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
       "slr_family_source": "02",
@@ -3750,12 +3861,15 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Hidalgo & Zamora (2004)"
+      ]
     },
     {
       "id": "mottram_2001_mft_quench_buffering_anchor",
       "citation": "Mottram et al. (2001)",
-      "doi": "",
+      "doi": "10.1021/jf010391+",
       "kind": "calibration_reference",
       "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
       "slr_family_source": "02",
@@ -3813,12 +3927,15 @@
           "path": "data/lit/process_state_calibrations.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Mottram et al. (2001)"
+      ]
     },
     {
       "id": "yeo_mottram_2023_lecithin_crosstalk_anchor",
       "citation": "Yeo & Mottram (2023)",
-      "doi": "",
+      "doi": "10.1016/j.foodchem.2023.136009",
       "kind": "calibration_reference",
       "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
       "slr_family_source": "02",
@@ -3867,12 +3984,15 @@
           "path": "data/lit/process_state_calibrations.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Yeo & Mottram (2023)"
+      ]
     },
     {
       "id": "wang_2022_lab_hexanal_cleanup_anchor",
       "citation": "Wang et al. (2022)",
-      "doi": "",
+      "doi": "10.1016/j.lwt.2022.113009",
       "kind": "calibration_reference",
       "chemistry_family": "off_note_and_maillard_suppression",
       "slr_family_source": "08",
@@ -3921,12 +4041,15 @@
           "path": "data/lit/flavor_reference_payloads.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Wang et al. (2022)"
+      ]
     },
     {
       "id": "bhandari_1998_beta_cd_aldehyde_binding_anchor",
       "citation": "Bhandari et al. (1998)",
-      "doi": "",
+      "doi": "10.1016/S0260-8774(98)00085-4",
       "kind": "directional_prior",
       "chemistry_family": "off_note_and_maillard_suppression",
       "slr_family_source": "08",
@@ -3981,12 +4104,15 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Bhandari et al. (1998)"
+      ]
     },
     {
       "id": "zhang_2022_unsaturated_aldehyde_potency_anchor",
       "citation": "Zhang et al. (2022)",
-      "doi": "",
+      "doi": "10.1016/j.foodchem.2022.132009",
       "kind": "directional_prior",
       "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
       "slr_family_source": "02",
@@ -4037,7 +4163,10 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Zhang et al. (2022)"
+      ]
     },
     {
       "id": "frontiers_2022_hcw_aa_arrhenius_anchor",
@@ -4102,8 +4231,8 @@
     },
     {
       "id": "pmid_1904866_pentosidine_equivalence_anchor",
-      "citation": "PubMed PMID:1904866 (Ref. 5)",
-      "doi": "",
+      "citation": "Grandhee & Monnier (1991)",
+      "doi": "10.1074/jbc.266.18.11644",
       "kind": "calibration_reference",
       "chemistry_family": "ascorbic_acid_maillard",
       "slr_family_source": "14",
@@ -4160,12 +4289,16 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Grandhee & Monnier (1991)",
+        "PubMed PMID:1904866 (Ref. 5)"
+      ]
     },
     {
       "id": "scielo_brasil_aa_crosslink_hierarchy_anchor",
-      "citation": "SciELO Brasil (2018)",
-      "doi": "",
+      "citation": "Yu et al. (2018)",
+      "doi": "10.1590/1678-457X.08717",
       "kind": "calibration_reference",
       "chemistry_family": "ascorbic_acid_maillard",
       "slr_family_source": "14",
@@ -4221,12 +4354,16 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "SciELO Brasil (2018)",
+        "SciELO Brasil (Ref. 4)"
+      ]
     },
     {
       "id": "pmc9351765_crosspy_trapping_anchor",
-      "citation": "PMC PMCID:PMC9351765 (Ref. 12)",
-      "doi": "",
+      "citation": "Weerawatanakorn et al. (2015)",
+      "doi": "10.1021/acs.jafc.5b02009",
       "kind": "calibration_reference",
       "chemistry_family": "melanoidin_polymerization",
       "slr_family_source": "16",
@@ -4277,12 +4414,16 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "PMC PMCID:PMC9351765 (Ref. 12)",
+        "Weerawatanakorn et al. (2015)"
+      ]
     },
     {
       "id": "uspto_ptacts_2023_yeast_extract_anchor",
-      "citation": "USPTO PTACTS (2023)",
-      "doi": "",
+      "citation": "Fraser et al. (2018)",
+      "doi": "US9943096B2",
       "kind": "calibration_reference",
       "chemistry_family": "alternative_protein_matrix_scope",
       "slr_family_source": "06",
@@ -4334,12 +4475,16 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "USPTO PTACTS (2023)",
+        "USPTO PTacts (2023)"
+      ]
     },
     {
       "id": "pmc_2024_pba_cml_cel_ranges_anchor",
-      "citation": "PMC 2024 (PMC12451096)",
-      "doi": "",
+      "citation": "Arinzechukwu et al. (2025)",
+      "doi": "10.1111/1750-3841.70545",
       "kind": "safety_reference",
       "chemistry_family": "protein_damage_markers",
       "slr_family_source": "12",
@@ -4387,12 +4532,16 @@
           "path": "data/lit/safety_reference_payloads.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Arinzechukwu et al. (2025)",
+        "PMC 2024 (PMC12451096)"
+      ]
     },
     {
       "id": "pmc_12648097_acrylamide_mitigation_anchor",
-      "citation": "PMC PMCID:PMC12648097 (Ref. 5)",
-      "doi": "",
+      "citation": "Zhang et al. (2025)",
+      "doi": "10.1016/j.fochx.2025.103252",
       "kind": "safety_reference",
       "chemistry_family": "polyphenol_amino_capping",
       "slr_family_source": "13",
@@ -4435,12 +4584,16 @@
           "path": "data/lit/safety_reference_payloads.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "PMC PMCID:PMC12648097 (Ref. 5)",
+        "Zhang et al. (2025)"
+      ]
     },
     {
       "id": "wageningen_ref9_hme_rework_hydration_anchor",
-      "citation": "Wageningen Ref. 9",
-      "doi": "",
+      "citation": "Snel et al. (2023)",
+      "doi": "10.3390/foods12132543",
       "kind": "calibration_reference",
       "chemistry_family": "melanoidin_polymerization",
       "slr_family_source": "16",
@@ -4491,7 +4644,11 @@
           "path": "data/lit/process_state_calibrations.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Wageningen (2020)",
+        "Wageningen Ref. 9"
+      ]
     },
     {
       "id": "acs_foodscitech_2024_hme_firmness_anchor",
@@ -4616,7 +4773,10 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "J. Agric. Food Chem. 2019 (Ref. 21)"
+      ]
     },
     {
       "id": "pmc12154226_crosspy_thiol_adduction",
@@ -4885,7 +5045,7 @@
     {
       "id": "frankel_1982_c182_hexanal_scission",
       "citation": "Frankel et al. (1982)",
-      "doi": "10.1007/bf02534608",
+      "doi": "10.1016/0163-7827(83)90002-4",
       "kind": "calibration_reference",
       "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
       "slr_family_source": "02",
@@ -5010,7 +5170,7 @@
       "eligibility": "benchmark_eligible",
       "status": "encoded",
       "what_it_supports": [
-        "Ala + Xyl ARP kinetics ± EGCG; Ea values with SE; stoichiometry constraint."
+        "Ala + Xyl ARP kinetics \u00b1 EGCG; Ea values with SE; stoichiometry constraint."
       ],
       "what_it_does_not_support": [
         "Intact plant protein matrices",
@@ -5038,7 +5198,7 @@
     {
       "id": "mottram_wedzicha_1990_methional",
       "citation": "Mottram & Wedzicha (1990)",
-      "doi": "",
+      "doi": "10.1016/0308-8146(90)90009-Q",
       "kind": "calibration_reference",
       "chemistry_family": "amino_acid_sugar_core",
       "slr_family_source": "01",
@@ -5074,12 +5234,15 @@
       },
       "repo_next_action": "Encode methional formation kinetics prior.",
       "runtime_artifacts": [],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Mottram & Wedzicha (1990)"
+      ]
     },
     {
       "id": "yu_2021_corn_hydrolysate_kinetics",
       "citation": "Yu et al. (2021)",
-      "doi": "",
+      "doi": "10.1016/j.lwt.2021.111802",
       "kind": "quantitative_benchmark",
       "chemistry_family": "amino_acid_sugar_core",
       "slr_family_source": "01",
@@ -5117,7 +5280,10 @@
       },
       "repo_next_action": "Encode corn protein hydrolysate kinetic priors.",
       "runtime_artifacts": [],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Yu et al. (2021)"
+      ]
     },
     {
       "id": "farmer_1991_alkyl_thiazoles",
@@ -5431,7 +5597,7 @@
     {
       "id": "malia_2025_pea_free_sh_crosscheck",
       "citation": "Malia et al. (2025)",
-      "doi": "",
+      "doi": "10.1016/j.foodhyd.2024.110509",
       "kind": "calibration_reference",
       "chemistry_family": "alternative_protein_matrix_scope",
       "slr_family_source": "06",
@@ -5473,7 +5639,10 @@
           "path": "data/lit/process_state_calibrations.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Malia et al. (2025)"
+      ]
     },
     {
       "id": "tran_2023_reducing_sugar_hme",
@@ -5577,7 +5746,7 @@
     {
       "id": "liu_2022_ppi_oav_anchors",
       "citation": "Liu (2022)",
-      "doi": "",
+      "doi": "10.1016/j.foodchem.2022.134998",
       "citation_aliases": [
         "Liu (2022)"
       ],
@@ -5869,7 +6038,7 @@
     {
       "id": "tannenbaum_1985_thiamine_ea",
       "citation": "Tannenbaum et al. (1985)",
-      "doi": "",
+      "doi": "10.1021/jf00065a009",
       "kind": "calibration_reference",
       "chemistry_family": "thiamine_fragmentation_support",
       "slr_family_source": "03",
@@ -5911,7 +6080,10 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Tannenbaum et al. (1985)"
+      ]
     },
     {
       "id": "finnigan_2019_mycoprotein_rna",
@@ -6011,8 +6183,8 @@
     },
     {
       "id": "acrylamide_heat_trapping_2024",
-      "citation": "ResearchGate ref. 10 (ACRYLAMIDE/HEAT)",
-      "doi": "",
+      "citation": "Fu et al. (2023)",
+      "doi": "10.3390/foods12101967",
       "kind": "calibration_reference",
       "chemistry_family": "protein_damage_markers",
       "slr_family_source": "12",
@@ -6057,12 +6229,16 @@
           "path": "data/lit/safety_reference_payloads.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Fu et al. (2023)",
+        "ResearchGate ref. 10 (ACRYLAMIDE/HEAT)"
+      ]
     },
     {
       "id": "cga_cys_adduct_sida_2024",
-      "citation": "ResearchGate (Ref. 14)",
-      "doi": "",
+      "citation": "Poojary et al. (2023)",
+      "doi": "10.1016/j.foodchem.2022.134406",
       "kind": "calibration_reference",
       "chemistry_family": "polyphenol_amino_capping",
       "slr_family_source": "13",
@@ -6103,12 +6279,16 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Poojary et al. (2023)",
+        "ResearchGate (Ref. 14)"
+      ]
     },
     {
       "id": "pmc3199460_ascorbic_dicarbonyl",
-      "citation": "PMC PMCID:PMC3199460 (Ref. 2)",
-      "doi": "",
+      "citation": "Nemet & Monnier (2011)",
+      "doi": "10.1074/jbc.M111.245100",
       "kind": "calibration_reference",
       "chemistry_family": "ascorbic_acid_maillard",
       "slr_family_source": "14",
@@ -6152,12 +6332,16 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Nemet & Monnier (2011)",
+        "PMC PMCID:PMC3199460 (Ref. 2)"
+      ]
     },
     {
       "id": "pmid36878579_pe_stoichiometry",
       "citation": "Fujimoto et al. (2023)",
-      "doi": "",
+      "doi": "10.1021/acs.jafc.2c08283",
       "kind": "calibration_reference",
       "chemistry_family": "lipid_maillard_crosstalk",
       "slr_family_source": "15",
@@ -6199,12 +6383,15 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Fujimoto et al. (2023)"
+      ]
     },
     {
       "id": "jafc_2022_melanoidin_thiol_binding",
-      "citation": "J. Agric. Food Chem. 2022 (Ref. 41) + Ref. 38",
-      "doi": "",
+      "citation": "Gigl et al. (2021)",
+      "doi": "10.1021/acs.jafc.1c06163",
       "kind": "calibration_reference",
       "chemistry_family": "melanoidin_polymerization",
       "slr_family_source": "16",
@@ -6246,7 +6433,11 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Gigl et al. (2021)",
+        "J. Agric. Food Chem. 2022 (Ref. 41) + Ref. 38"
+      ]
     },
     {
       "id": "de_vleeschouwer_2006_acrylamide_aqueous",
@@ -6588,7 +6779,7 @@
     {
       "id": "cantre_2007_corned_beef_furosine",
       "citation": "Cantre et al. (2007)",
-      "doi": "",
+      "doi": "PAS_90_2_143_2007",
       "kind": "calibration_reference",
       "chemistry_family": "protein_damage_markers",
       "slr_family_source": "12",
@@ -6629,7 +6820,10 @@
           "path": "data/lit/safety_reference_payloads.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Cantre et al. (2007)"
+      ]
     },
     {
       "id": "lagrain_2010_cystine_elimination_lanthionine",
@@ -6968,7 +7162,7 @@
     {
       "id": "ma_2024_pbma_extrusion_damage",
       "citation": "Ma et al. (2024)",
-      "doi": "10.3390/ijms25158408",
+      "doi": "10.3390/ijms25168668",
       "kind": "calibration_reference",
       "chemistry_family": "protein_damage_markers",
       "slr_family_source": "12",
@@ -7022,7 +7216,7 @@
     {
       "id": "ilo_1996_maize_sme_lysine_damage",
       "citation": "Ilo et al. (1996)",
-      "doi": "10.1006/fstl.1996.0090",
+      "doi": "10.1006/fstl.1996.0092",
       "kind": "calibration_reference",
       "chemistry_family": "alternative_protein_matrix_scope",
       "slr_family_source": "06",
@@ -7068,8 +7262,8 @@
     },
     {
       "id": "researchgate_2023_pea_aeda",
-      "citation": "ResearchGate (2023)",
-      "doi": "",
+      "citation": "Liu et al. (2022)",
+      "doi": "10.1016/j.foodchem.2022.134998",
       "kind": "calibration_reference",
       "chemistry_family": "alternative_protein_matrix_scope",
       "slr_family_source": "06",
@@ -7112,7 +7306,11 @@
           "path": "data/lit/flavor_reference_payloads.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Liu et al. (2023)",
+        "ResearchGate (2023)"
+      ]
     },
     {
       "id": "voelker_2018_thiamine_salt_degradation",
@@ -8587,7 +8785,7 @@
     },
     {
       "id": "comert_gokmen_2019_digestive_mgo_scavenging",
-      "citation": "Cömert & Gökmen (2019)",
+      "citation": "C\u00f6mert & G\u00f6kmen (2019)",
       "doi": "10.1016/j.foodres.2019.03.046",
       "kind": "calibration_reference",
       "chemistry_family": "polyphenol_amino_capping",
@@ -8679,7 +8877,7 @@
     },
     {
       "id": "comert_gokmen_2021_epicatechin_cysteine_mgo_synergy",
-      "citation": "Cömert & Gökmen (2021)",
+      "citation": "C\u00f6mert & G\u00f6kmen (2021)",
       "doi": "10.1016/j.foodchem.2020.128670",
       "kind": "calibration_reference",
       "chemistry_family": "polyphenol_amino_capping",
@@ -8860,7 +9058,7 @@
     },
     {
       "id": "solis_calero_2015_pe_glyoxal",
-      "citation": "Solís-Calero et al. (2015)",
+      "citation": "Sol\u00eds-Calero et al. (2015)",
       "doi": "10.1039/C4CP05360E",
       "kind": "calibration_reference",
       "chemistry_family": "phospholipid_amine_sink",
@@ -8908,7 +9106,7 @@
     },
     {
       "id": "solis_calero_2013_pe_amadori",
-      "citation": "Solís-Calero et al. (2013)",
+      "citation": "Sol\u00eds-Calero et al. (2013)",
       "doi": "10.1021/jp401488j",
       "kind": "calibration_reference",
       "chemistry_family": "phospholipid_amine_sink",
@@ -9613,7 +9811,7 @@
     },
     {
       "id": "serpen_gokmen_2007_ascorbic_redox_kinetics",
-      "citation": "Serpen & Gökmen (2007)",
+      "citation": "Serpen & G\u00f6kmen (2007)",
       "doi": "10.1016/j.foodchem.2006.11.073",
       "kind": "calibration_reference",
       "chemistry_family": "ascorbic_acid_maillard",
@@ -9969,7 +10167,7 @@
       "eligibility": "benchmark_eligible",
       "status": "encoded",
       "what_it_supports": [
-        "MFT percentage retention of 47.78% in heat-denatured soy isolate at pH 4.0, 40°C."
+        "MFT percentage retention of 47.78% in heat-denatured soy isolate at pH 4.0, 40\u00b0C."
       ],
       "what_it_does_not_support": [
         "Extrusion high-shear physical matrix transformations."
@@ -10027,7 +10225,7 @@
       "eligibility": "benchmark_eligible",
       "status": "encoded",
       "what_it_supports": [
-        "MFT percentage retention of 85.0% in native soy isolate at pH 7.0, 25°C."
+        "MFT percentage retention of 85.0% in native soy isolate at pH 7.0, 25\u00b0C."
       ],
       "what_it_does_not_support": [
         "High-temperature covalent denaturation paths."
@@ -10086,7 +10284,7 @@
       "eligibility": "benchmark_eligible",
       "status": "encoded",
       "what_it_supports": [
-        "BMFD percentage retention of 98.5% in heat-denatured soy isolate at pH 8.0, 25°C due to covalent thiolate disulfide-interchange."
+        "BMFD percentage retention of 98.5% in heat-denatured soy isolate at pH 8.0, 25\u00b0C due to covalent thiolate disulfide-interchange."
       ],
       "what_it_does_not_support": [
         "Non-covalent physical absorption stability under high acidity."
@@ -10145,7 +10343,7 @@
       "eligibility": "benchmark_eligible",
       "status": "encoded",
       "what_it_supports": [
-        "FFT binding Gibbs free energy (delta_G) of -9.72 kcal/mol in native pea protein isolate at pH 7.0, 25°C."
+        "FFT binding Gibbs free energy (delta_G) of -9.72 kcal/mol in native pea protein isolate at pH 7.0, 25\u00b0C."
       ],
       "what_it_does_not_support": [
         "Covalent chemical trapping via sulfhydryl exchange."
@@ -10269,8 +10467,8 @@
     },
     {
       "id": "vtechworks_2022_fava_hydrolysis",
-      "citation": "VTechWorks (2022)",
-      "doi": "",
+      "citation": "Williams (2025)",
+      "doi": "10.1016/j.foodchem.2025.146396",
       "kind": "calibration_reference",
       "chemistry_family": "alternative_protein_matrix_scope",
       "slr_family_source": "06",
@@ -10311,12 +10509,16 @@
           "path": "data/lit/flavor_reference_payloads.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "VTechWorks (2022)",
+        "Williams (2025)"
+      ]
     },
     {
       "id": "wang_2024_glucosamine_synergy",
-      "citation": "Wang et al. (2024)",
-      "doi": "10.3390/foods13213453",
+      "citation": "Wu et al. (2025)",
+      "doi": "10.3390/foods14193453",
       "kind": "calibration_reference",
       "chemistry_family": "carbonyl_donor_hierarchy",
       "slr_family_source": "07",
@@ -10459,7 +10661,7 @@
     },
     {
       "id": "pmc10056349_rubisco_amadori",
-      "citation": "Šimková et al. (2023)",
+      "citation": "\u0160imkov\u00e1 et al. (2023)",
       "doi": "10.3390/foods12061349",
       "kind": "calibration_reference",
       "chemistry_family": "alternative_protein_matrix_scope",
@@ -10592,7 +10794,10 @@
           "path": "data/lit/flavor_reference_payloads.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "PMC11889959 (2025)"
+      ]
     },
     {
       "id": "poulsen_2023_pbma_cml_cel",

@@ -61,7 +61,7 @@
     "state": "ambient_slurry"
   },
   "protein_type": "pea_iso",
-  "source_doi": "",
+  "source_doi": "LiuThesis2023",
   "source_metadata": {
     "evidence_class": "external_validation_only",
     "generator": "matrix_experiment_intake",

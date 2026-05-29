@@ -1,11 +1,17 @@
 {
   "benchmark_id": "acrylamide_spi_extrusion_130C_ACSRef3",
   "benchmark_type": "safety",
-  "source_doi": "ACS ResearchGate ref. 3",
+  "source_doi": "10.3390/ijms25168668",
   "precursors": {
-    "Soy protein isolate": {"concentration_mM": 50.0},
-    "L-Asparagine": {"concentration_mM": 42.0},
-    "D-Glucose": {"concentration_mM": 42.0}
+    "Soy protein isolate": {
+      "concentration_mM": 50.0
+    },
+    "L-Asparagine": {
+      "concentration_mM": 42.0
+    },
+    "D-Glucose": {
+      "concentration_mM": 42.0
+    }
   },
   "conditions": {
     "temp_C": 130,
@@ -24,10 +30,13 @@
   "validation_contract": {
     "scale_thresholds": {
       "max_ratio": 1.5,
-      "mean_abs_log10_error": 0.20
+      "mean_abs_log10_error": 0.2
     }
   },
   "measured_volatiles": {
-    "acrylamide": {"conc_ppb": 62.62, "uncertainty_pct": 15}
+    "acrylamide": {
+      "conc_ppb": 62.62,
+      "uncertainty_pct": 15
+    }
   }
 }

@@ -1,11 +1,15 @@
 {
   "benchmark_id": "furosine_extrusion_crossover_140C_RamirezJimenez2000",
   "benchmark_type": "safety",
-  "source_doi": "Ramírez-Jiménez et al. (2000)",
+  "source_doi": "10.1021/jf9907687",
   "damage_protein_type": "pea_iso",
   "precursors": {
-    "L-Lysine": {"concentration_mM": 35.0},
-    "D-Glucose": {"concentration_mM": 35.0}
+    "L-Lysine": {
+      "concentration_mM": 35.0
+    },
+    "D-Glucose": {
+      "concentration_mM": 35.0
+    }
   },
   "conditions": {
     "temp_C": 140,
@@ -22,11 +26,14 @@
   "validation_contract": {
     "scale_thresholds": {
       "max_ratio": 2.0,
-      "mean_abs_log10_error": 0.30
+      "mean_abs_log10_error": 0.3
     }
   },
   "measured_volatiles": {
-    "furosine": {"conc_ppb": 87.0, "uncertainty_pct": 20}
+    "furosine": {
+      "conc_ppb": 87.0,
+      "uncertainty_pct": 20
+    }
   },
   "safety_context": {
     "protein_type": "pea_iso"
