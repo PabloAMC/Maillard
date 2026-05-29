@@ -19,7 +19,7 @@ def test_learning_loop_payload_links_ready_references_to_runtime_artifacts():
     assert payload["summary"]["ready_reference_count"] == len(rows)
     assert payload["summary"]["ready_reference_count"] >= 5
     assert payload["summary"]["queue_conflict_count"] == 0
-    assert rows["trikusuma_2019"]["triage_status"] == "ready_benchmark"
+    assert rows["trikusuma_2019"]["triage_status"] == "encoded"
     assert rows["trikusuma_2019"]["runtime_artifacts_present"] is True
     for entry_id in {
         "trikusuma_2019",

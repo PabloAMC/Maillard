@@ -29,9 +29,9 @@
 
 ### Lane S25-A: Phase 1 — Chunk 1 Ingestion: Core & Matrix Basics (27 items)
 - [x] A.1 Families `01` (Core - completed), `02` (Lipid Oxidation - completed), `06` (Alternative Proteins - completed), `07` (Reducing Sugars - completed).
-- [/ ] A.2 Extract, QC-validate, and encode Chunk 1 references into `benchmark_intake_registry.json` (17/27 references completed).
-- [/ ] A.3 Generate computational priors and payloads for Chunk 1 (17/27 references completed).
-- [/ ] A.4 Validate Chunk 1 via Docker tests and literature learning loop (Families 01, 02, 06, 07 validated).
+- [x] A.2 Extract, QC-validate, and encode Chunk 1 references into `benchmark_intake_registry.json` (27/27 references completed).
+- [x] A.3 Generate computational priors and payloads for Chunk 1 (27/27 references completed).
+- [x] A.4 Validate Chunk 1 via Docker tests and literature learning loop (Families 01, 02, 06, 07 validated).
 
 ### Lane S25-B: Phase 2 — Chunk 2 Ingestion: Flavor, Degradation & Fermentation (33 items)
 - [x] B.1 Families `08` (Off-notes), `09` (Carbohydrate degradation), `10` (Fermentation), `11` (Lipid-Maillard crosstalk).

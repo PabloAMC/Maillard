@@ -120,3 +120,218 @@ PATHWAY_METADATA = {
         "toxicity_flag": "Lysinoalanine (LAL)",
     },
 }
+
+
+def _wire_computational_priors():
+    import json
+    import math
+    from pathlib import Path
+
+    # 1. Load computational priors
+    root = Path(__file__).resolve().parents[1]
+    priors_path = root / "data" / "lit" / "computational_priors.json"
+    if not priors_path.exists():
+        return
+
+    try:
+        with open(priors_path, "r", encoding="utf-8") as f:
+            priors_data = json.load(f)
+    except Exception:
+        return
+
+    # Helper to calculate rate constant k at 150C (423.15 K) using Eyring equation
+    # k = (kB * T / h) * exp(-Delta G‡ / RT)
+    def calculate_k(barrier_kcal):
+        T = 423.15  # 150 C
+        kb = 1.380649e-23
+        h = 6.62607015e-34
+        R = 8.314462618
+        pre_exponential = (kb * T) / h
+        j_per_mol = barrier_kcal * 4184.0
+        exponent = -j_per_mol / (R * T)
+        return pre_exponential * math.exp(exponent)
+
+    # Extract prior kinetic values dynamically
+    pe_schiff_base_barrier = 22.21
+    pe_schiff_base_unc = 5.0
+    for e in priors_data.get("dft_kinetic_priors", {}).get("entries", []):
+        if e.get("reaction_key") == "pe_schiff_base":
+            if e.get("barrier_kcal_mol") is not None:
+                pe_schiff_base_barrier = float(e["barrier_kcal_mol"])
+            if e.get("uncertainty_kj") is not None:
+                pe_schiff_base_unc = float(e["uncertainty_kj"]) / 4.184
+
+    glucose_ea_kcal = 25.33
+    ribose_ea_kcal = 27.25
+    for e in priors_data.get("carbonyl_donor_priors", []):
+        if e.get("id") == "maillard_van_boekel_1992_sugar_reactivity_hierarchy_v1":
+            ea_by_sugar = e.get("ea_kj_per_mol_by_sugar", {})
+            if "glucose" in ea_by_sugar:
+                glucose_ea_kcal = float(ea_by_sugar["glucose"]) / 4.184
+            if "ribose" in ea_by_sugar:
+                ribose_ea_kcal = float(ea_by_sugar["ribose"]) / 4.184
+
+    pe_amadori_barrier = 19.81
+    pe_amadori_unc = 5.0
+    for e in priors_data.get("dft_kinetic_priors", {}).get("entries", []):
+        if e.get("reaction_key") == "pe_amadori":
+            if e.get("barrier_kcal_mol") is not None:
+                pe_amadori_barrier = float(e["barrier_kcal_mol"])
+            if e.get("uncertainty_kj") is not None:
+                pe_amadori_unc = float(e["uncertainty_kj"]) / 4.184
+
+    egcg_ea_kcal = 18.6
+    for e in priors_data.get("dicarbonyl_sink_priors", []):
+        if e.get("id") == "jafc_2020_egcg_deoxyosone_trapping_v1":
+            if e.get("baseline_arp_formation_ea_kj_per_mol") is not None:
+                egcg_ea_kcal = float(e["baseline_arp_formation_ea_kj_per_mol"]) / 4.184
+
+    huang_ea_kcal = 27.5
+    for e in priors_data.get("carbonyl_donor_priors", []):
+        if e.get("id") == "huang_2024_dixyl_arp_degradation":
+            if e.get("bifurcated_degradation_kinetics", {}).get("three_deoxyglucosone_mediated_furosine_ea_kj_mol") is not None:
+                huang_ea_kcal = float(e["bifurcated_degradation_kinetics"]["three_deoxyglucosone_mediated_furosine_ea_kj_mol"]) / 4.184
+
+    furosine_from_3dg_barrier = 19.53
+    furosine_from_3dg_unc = 3.35
+    for e in priors_data.get("dft_kinetic_priors", {}).get("entries", []):
+        if e.get("reaction_key") == "furosine_from_3dg":
+            if e.get("barrier_kcal_mol") is not None:
+                furosine_from_3dg_barrier = float(e["barrier_kcal_mol"])
+            if e.get("uncertainty_kj") is not None:
+                furosine_from_3dg_unc = float(e["uncertainty_kj"]) / 4.184
+
+    pyrraline_from_3dg_barrier = 12.77
+    pyrraline_from_3dg_unc = 0.96
+    for e in priors_data.get("dft_kinetic_priors", {}).get("entries", []):
+        if e.get("reaction_key") == "pyrraline_from_3dg":
+            if e.get("barrier_kcal_mol") is not None:
+                pyrraline_from_3dg_barrier = float(e["barrier_kcal_mol"])
+            if e.get("uncertainty_kj") is not None:
+                pyrraline_from_3dg_unc = float(e["uncertainty_kj"]) / 4.184
+
+    martins_furosine_ea = 28.5
+    martins_pyrraline_ea = 31.2
+    for e in priors_data.get("dft_kinetic_priors", {}).get("entries", []):
+        if e.get("id") == "martins_2003_lys_glucose_kinetics_v1":
+            params = e.get("kinetic_parameters", {})
+            if params.get("furosine_formation_ea_kcal_mol") is not None:
+                martins_furosine_ea = float(params["furosine_formation_ea_kcal_mol"])
+            if params.get("pyrraline_formation_ea_kcal_mol") is not None:
+                martins_pyrraline_ea = float(params["pyrraline_formation_ea_kcal_mol"])
+
+    frontiers_ea_kcal = 5.66
+    for e in priors_data.get("ascorbic_pathway_priors", []):
+        if e.get("id") == "frontiers_2022_hcw_aa_arrhenius_v1":
+            ea_by_ph = e.get("ea_kj_per_mol_by_ph", {})
+            if "5.0" in ea_by_ph and "7.0" in ea_by_ph:
+                frontiers_ea_kcal = (float(ea_by_ph["5.0"]) + float(ea_by_ph["7.0"])) / 2.0 / 4.184
+
+    aa_ring_open_barrier = 7.58
+    aa_ring_open_unc = 4.78
+    for e in priors_data.get("dft_kinetic_priors", {}).get("entries", []):
+        if e.get("reaction_key") == "aa_ring_open_dicarbonyl":
+            if e.get("barrier_kcal_mol") is not None:
+                aa_ring_open_barrier = float(e["barrier_kcal_mol"])
+            if e.get("uncertainty_kj") is not None:
+                aa_ring_open_unc = float(e["uncertainty_kj"]) / 4.184
+
+    lagrain_elim_ea_kcal = 21.08
+    lagrain_lanth_ea_kcal = 1.56
+    for e in priors_data.get("crosslink_kinetics_priors", []):
+        if e.get("id") == "lagrain_2010_cystine_elimination_lanthionine":
+            elim = e.get("elimination_kinetics", {})
+            if "ea_ph6_kj_mol" in elim:
+                lagrain_elim_ea_kcal = float(elim["ea_ph6_kj_mol"]) / 4.184
+            lanth = e.get("lanthionine_formation_kinetics", {})
+            if "ea_ph6_kj_mol" in lanth:
+                lagrain_lanth_ea_kcal = float(lanth["ea_ph6_kj_mol"]) / 4.184
+
+    quinone_cys_barrier = 6.93
+    quinone_cys_unc = 3.58
+    for e in priors_data.get("dft_kinetic_priors", {}).get("entries", []):
+        if e.get("reaction_key") == "quinone_cys_michael":
+            if e.get("barrier_kcal_mol") is not None:
+                quinone_cys_barrier = float(e["barrier_kcal_mol"])
+            if e.get("uncertainty_kj") is not None:
+                quinone_cys_unc = float(e["uncertainty_kj"]) / 4.184
+
+    lal_crosslink_barrier = 16.0
+    lal_crosslink_unc = 10.0
+    for e in priors_data.get("dft_kinetic_priors", {}).get("entries", []):
+        if e.get("reaction_key") == "lysinoalanine_crosslink":
+            if e.get("barrier_kcal_mol") is not None:
+                lal_crosslink_barrier = float(e["barrier_kcal_mol"])
+            if e.get("uncertainty_kj") is not None:
+                lal_crosslink_unc = float(e["uncertainty_kj"]) / 4.184
+
+    # Map reactions
+    for path_name, steps in PATHWAYS.items():
+        for step in steps:
+            fam = step.reaction_family
+            reactants = [r.label for r in step.reactants]
+            
+            barrier = None
+            uncertainty = 5.0
+            
+            if fam == "Schiff_Base_Formation":
+                if "D-glucose" in reactants:
+                    barrier = (pe_schiff_base_barrier * 2 + glucose_ea_kcal * 2) / 4.0
+                    uncertainty = (pe_schiff_base_unc * 2 + 3.0 * 2) / 4.0
+                elif "D-ribose" in reactants:
+                    barrier = (pe_schiff_base_barrier * 2 + ribose_ea_kcal * 2) / 4.0
+                    uncertainty = (pe_schiff_base_unc * 2 + 3.0 * 2) / 4.0
+                else:
+                    barrier = pe_schiff_base_barrier
+                    uncertainty = pe_schiff_base_unc
+            
+            elif fam == "Amadori_Rearrangement":
+                barrier = (pe_amadori_barrier * 2 + egcg_ea_kcal * 1 + huang_ea_kcal * 2) / 5.0
+                uncertainty = (pe_amadori_unc * 2 + 3.5 * 1 + 3.0 * 2) / 5.0
+                
+            elif fam == "Enolisation":
+                if "glucose-glycine-Amadori" in reactants:
+                    barrier = (furosine_from_3dg_barrier * 2 + martins_furosine_ea * 3) / 5.0
+                    uncertainty = (furosine_from_3dg_unc * 2 + 1.5 * 3) / 5.0
+                else:
+                    barrier = (pyrraline_from_3dg_barrier * 2 + martins_pyrraline_ea * 3) / 5.0
+                    uncertainty = (pyrraline_from_3dg_unc * 2 + 1.5 * 3) / 5.0
+                    
+            elif fam == "Sugar_Dehydration":
+                barrier = (frontiers_ea_kcal * 2 + aa_ring_open_barrier * 2) / 4.0
+                uncertainty = (3.0 * 2 + aa_ring_open_unc * 2) / 4.0
+                
+            elif fam == "Strecker_Degradation":
+                barrier = 22.67
+                uncertainty = 1.5
+                
+            elif fam == "Cysteine_Degradation":
+                barrier = lagrain_elim_ea_kcal
+                uncertainty = 1.5
+                
+            elif fam == "Thiol_Addition":
+                barrier = (quinone_cys_barrier * 2 + 18.0 * 3) / 5.0
+                uncertainty = (quinone_cys_unc * 2 + 1.5 * 3) / 5.0
+                
+            elif fam == "Lipid_Schiff_Base":
+                barrier = (pe_schiff_base_barrier * 2 + 23.66 * 3) / 5.0
+                uncertainty = (pe_schiff_base_unc * 2 + 1.5 * 3) / 5.0
+                
+            elif fam == "Beta_Elimination":
+                barrier = lagrain_elim_ea_kcal
+                uncertainty = 1.5
+                
+            elif fam == "DHA_Crosslinking":
+                barrier = (lal_crosslink_barrier * 2 + lagrain_lanth_ea_kcal * 3) / 5.0
+                uncertainty = (lal_crosslink_unc * 2 + 1.5 * 3) / 5.0
+
+            if barrier is not None:
+                step.barrier_kcal_mol = round(barrier, 3)
+                step.barrier_uncertainty_kcal = round(uncertainty, 3)
+                step.rate_constant_k = round(calculate_k(barrier), 7)
+                step.source_quality = "literature"
+
+
+# Run the wiring
+_wire_computational_priors()
+

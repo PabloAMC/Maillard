@@ -364,7 +364,7 @@ def build_example_extrusion_external_closure_workbook(root: Path = ROOT) -> Dict
         experiment["provenance"] = {
             "origin": "synthetic_diagnostic",
             "source_reference": f"synthetic_diagnostic_spi_extrusion_arm_{index + 1}",
-            "source_doi": "",
+            "source_doi": "synthetic_diagnostic",
             "measurement_date": "2026-04-08",
             "notes": "Diagnostic example generated from repo templates. Not real wet-lab data.",
         }

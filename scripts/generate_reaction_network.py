@@ -208,6 +208,7 @@ def main() -> int:
                             p,
                             family=family,
                             color=family_edge_colors.get(family, "#7f7f7f"),
+                            source_quality=step.source_quality,
                         )
 
     # 3. Define Positions (flow from left to right)
@@ -302,20 +303,24 @@ def main() -> int:
     for u, v, data in G.edges(data=True):
         fam = data["family"]
         color = data["color"]
+        quality = data.get("source_quality", "heuristic")
 
         # Map family to intensity attributes based on reaction barriers/rates
         if fam == "DHA_Crosslinking":
-            width, alpha, style = 4.0, 0.95, "solid"
+            width, alpha = 4.0, 0.95
         elif fam in {"Schiff_Base_Formation", "Lipid_Schiff_Base", "Thiol_Addition"}:
-            width, alpha, style = 2.8, 0.85, "solid"
+            width, alpha = 2.8, 0.85
         elif fam in {
             "Amadori_Rearrangement",
             "Strecker_Degradation",
             "Cysteine_Degradation",
         }:
-            width, alpha, style = 1.8, 0.70, "solid"
+            width, alpha = 1.8, 0.70
         else:  # Enolisation, Sugar_Dehydration, Beta_Elimination (high barriers, slow/rate-limiting)
-            width, alpha, style = 1.0, 0.45, "dashed"
+            width, alpha = 1.0, 0.45
+
+        # Style by confidence tier / source quality (Solid = Calibrated, Dashed = Heuristic)
+        style = "solid" if quality == "literature" else "dashed"
 
         nx.draw_networkx_edges(
             G,
@@ -357,21 +362,21 @@ def main() -> int:
                 [0],
                 color="0.4",
                 lw=4.0,
-                label="High Intensity (Fast Michael-type addition)",
+                label="High Intensity (Fast Michael addition)",
             ),
             plt.Line2D(
                 [0],
                 [0],
                 color="0.4",
                 lw=2.8,
-                label="Medium-High Intensity (Fast Schiff/thiol addition)",
+                label="Medium-High (Fast Schiff/thiol add)",
             ),
             plt.Line2D(
                 [0],
                 [0],
                 color="0.4",
                 lw=1.8,
-                label="Medium-Low Intensity (Moderate rearrangements/degradations)",
+                label="Medium-Low (Moderate rearrangements)",
             ),
             plt.Line2D(
                 [0],
@@ -379,7 +384,23 @@ def main() -> int:
                 color="0.4",
                 lw=1.0,
                 ls="--",
-                label="Low Intensity (Rate-limiting enolisation/dehydrations)",
+                label="Low Intensity (Rate-limiting steps)",
+            ),
+            plt.Line2D(
+                [0],
+                [0],
+                color="0.2",
+                lw=2.0,
+                ls="-",
+                label="Solid: Calibrated (Prior/Literature)",
+            ),
+            plt.Line2D(
+                [0],
+                [0],
+                color="0.2",
+                lw=2.0,
+                ls="--",
+                label="Dashed: Heuristic (Uncalibrated)",
             ),
         ]
     )

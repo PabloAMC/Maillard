@@ -13,6 +13,7 @@ Deletes old manually created files to avoid duplicates.
 import json
 import os
 import glob
+import re
 from datetime import datetime
 
 # Define paths
@@ -276,11 +277,17 @@ def main():
             for item in backlog_items:
                 if "01_amino_acid_sugar.md" in item.get("files", []):
                     score_val, assessments = score_backlog_item(item)
+                    backlog_doi = ""
+                    for desc in item.get("descriptions", []):
+                        m = re.search(r"DOI:\s*([^\s,;]+)", desc)
+                        if m:
+                            backlog_doi = m.group(1).rstrip(".")
+                            break
                     family_papers.append({
                         "source": "backlog",
                         "id": item.get("registry_id") or item.get("citation").lower().replace(" ", "_"),
                         "citation": item.get("citation"),
-                        "doi": "",
+                        "doi": backlog_doi,
                         "matrix_family": "Unknown (Backlog Candidate)",
                         "score": score_val,
                         "assessments": assessments,

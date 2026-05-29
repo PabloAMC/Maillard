@@ -573,6 +573,8 @@ def query_benchmark_intake_entries(
     rows: List[Dict[str, Any]] = []
     for entry in iter_benchmark_intake_entries(family=family):
         row = dict(entry)
+        if row.get("payload_role") == "retention_payload":
+            continue
         if entry_id is not None and str(row.get("id", "")).strip() != str(entry_id).strip():
             continue
         if primary_only:

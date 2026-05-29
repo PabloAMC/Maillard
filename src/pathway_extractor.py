@@ -55,6 +55,7 @@ class ElementaryStep:
     rate_constant_k: Optional[float] = None
     source_quality: str = "heuristic" # "literature", "estimated_tst", "heuristic"
     barrier_uncertainty_kcal: float = 5.0 # Default heuristic uncertainty
+    barrier_kcal_mol: Optional[float] = None
     
     def __str__(self) -> str:
         reacts = " + ".join([r.label for r in self.reactants])

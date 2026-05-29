@@ -68,6 +68,18 @@ class PathwayProfile:
 
 def evaluate_single_step(step: ElementaryStep) -> Tuple[float, float]:
     """Evaluates a single elementary step via xTB (used for parallel mapping)."""
+    if getattr(step, "barrier_kcal_mol", None) is not None:
+        delta_E = 0.0
+        try:
+            screener = XTBScreener()
+            # Fast thermodynamic calculation (only optimize separate species, no NEB)
+            reactants_total_E = sum(screener.optimize_species(r.smiles).energy_hartree for r in step.reactants)
+            products_total_E = sum(screener.optimize_species(p.smiles).energy_hartree for p in step.products)
+            delta_E = (products_total_E - reactants_total_E) * 627.509
+        except Exception:
+            delta_E = 0.0
+        return (delta_E, step.barrier_kcal_mol)
+
     screener = XTBScreener()
     try:
         return screener.compute_reaction_energy(step)

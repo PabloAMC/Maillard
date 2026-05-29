@@ -385,6 +385,12 @@ def test_build_flavor_axis_summary_surfaces_all_family_lanes_and_adjustments():
         "pereira_2020_metal_pm_haber_weiss_chelation",
         "kutzli_2020_pea_maltodextrin_electrospun_glycation",
         "sun_2020_solid_matrix_cml_cel_accumulation",
+        "mdpi_plants_2024_hemp_volatiles",
+        "pmc6104182_soybean_fermentation",
+        "vtechworks_2022_fava_hydrolysis",
+        "pmc10056349_rubisco_amadori",
+        "pmc11353891_lentil_deflavoring",
+        "pmc11889959_spi_tvp_volatiles",
     }
     assert summary["family_lane_summary"]["06"]["structural_gap_ids"] == [
         "ellman_opa_dsc_same_experiment"
@@ -1216,7 +1222,7 @@ def test_build_flavor_axis_summary_surfaces_family_04_benchmark_context_and_ribo
         "70C_12h"
     ] == pytest.approx(0.15)
     assert (
-        "Matoba, Terao & Fujimaki (1988), JAFC 36:1033"
+        "Matoba et al. (1988)"
         in family_04["benchmark_anchor_citations"]
     )
 
@@ -1331,7 +1337,7 @@ def test_build_flavor_axis_summary_surfaces_family_03_benchmark_context_and_extr
     family_03 = summary["family_lane_summary"]["03"]
     assert family_03["extrusion_reference_id"] == "de_leyn_2019_thiamine_retention"
     assert (
-        "Cerny & Guntz-Dubini (2008), JAFC 56:5138"
+        "Cerny & Guntz-Dubini (2008)"
         in family_03["benchmark_anchor_citations"]
     )
     assert family_03["extrusion_survival_factor"] == pytest.approx(0.04)
@@ -1481,5 +1487,25 @@ def test_query_new_ingested_campaigns_fgh_references_and_priors():
     f14_prior_ids = {p.get("id", p.get("reaction_key")) for p in f14_priors}
     assert "serpen_gokmen_2007_ascorbic_redox_kinetics" in f14_prior_ids
     assert "yang_2021_ascorbic_glycine_kinetics" in f14_prior_ids
+
+
+def test_query_newly_ingested_sulfur_binding_priors():
+    # 1. Test Sun 2026 and Sun 2025 in retention payloads
+    ret_entries = query_retention_reference_entries()
+    ret_ids = {ent["id"] for ent in ret_entries}
+    assert "zhang_2026_spi_lenthionine_retention" in ret_ids
+    assert "sun_2025_ppi_lenthionine_retention" in ret_ids
+    assert "sun_2025_ppi_dmts_retention" in ret_ids
+
+    # Check DOI and citation correction for Sun 2026 entry
+    sun_2026_ent = [e for e in ret_entries if e["id"] == "zhang_2026_spi_lenthionine_retention"][0]
+    assert sun_2026_ent["doi"] == "10.1016/j.foodhyd.2026.112497"
+    assert "Sun et al. (2026)" in sun_2026_ent["source_citation"]
+
+    # 2. Test Rawel 2005 in retention entries
+    rawel_entries = query_retention_reference_entries(entry_id="rawel_2005_protein_phenolic_binding")
+    assert rawel_entries
+    assert rawel_entries[0]["doi"] == "10.1021/jf0480290"
+
 
 

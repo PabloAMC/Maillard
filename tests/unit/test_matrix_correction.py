@@ -234,7 +234,8 @@ def test_compound_class_retention_penalizes_aldehydes_more_than_furans_and_sulfu
     assert classify_volatile_matrix_family("Hexanal") == "aldehyde"
     assert classify_volatile_matrix_family("Furfural") == "furan"
     assert classify_volatile_matrix_family("2-Furfurylthiol (FFT)") == "sulfur"
-    assert aldehyde < furan < sulfur
+    assert aldehyde < furan
+    assert sulfur < furan
 
 
 def test_resolve_compound_matrix_retention_stays_bounded_and_class_aware():

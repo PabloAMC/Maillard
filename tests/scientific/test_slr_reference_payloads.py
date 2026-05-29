@@ -107,7 +107,7 @@ def test_benchmark_intake_registry_encodes_trikusuma_and_lincoln_artifacts():
     by_id = {entry["id"]: entry for entry in payload["eligible_references"]}
 
     assert by_id["cerny_guntz_dubini_2008"]["runtime_artifacts"][0]["artifact_id"] == "thiamine_cys_xylose_145C_Cerny2008"
-    assert by_id["trikusuma_2019"]["status"] == "ready_for_intake_encoding"
+    assert by_id["trikusuma_2019"]["status"] == "encoded"
     assert by_id["trikusuma_2019"]["key_values"]["tracked_uht_markers_ug_per_l"]["hexanal"] == 782.0
     assert by_id["trikusuma_2019"]["runtime_artifacts"][0]["artifact_id"] == "pea_isolate_uht_140C_Trikusuma2019"
     for entry_id, artifact_id in {
