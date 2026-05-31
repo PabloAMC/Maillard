@@ -37,8 +37,8 @@ def main() -> int:
     G = nx.DiGraph()
 
     # We will exclude small co-products/byproducts like water, CO2, H2S, ammonia,
-    # hydrogen, and aminoacetone to keep the diagram clean and focused on organic backbones.
-    EXCLUDED_SPECIES = {"water", "CO2", "H2S", "ammonia", "hydrogen", "aminoacetone"}
+    # and hydrogen to keep the diagram clean and focused on organic backbones.
+    EXCLUDED_SPECIES = {"water", "CO2", "H2S", "ammonia", "hydrogen"}
 
     # Define color scheme (hex colors for premium aesthetics)
     # Precursors: Cool blue/green
@@ -174,6 +174,48 @@ def main() -> int:
             "size": 1800,
             "label": "Lysinoalanine\n(LAL / Damage)",
         },
+        "L-asparagine": {
+            "color": "#2ca02c",
+            "shape": "o",
+            "size": 1400,
+            "label": "L-Asparagine",
+        },
+        "glucose-asparagine-Schiff-base": {
+            "color": "#ff7f0e",
+            "shape": "s",
+            "size": 1600,
+            "label": "Glucose-Asn\nSchiff Base",
+        },
+        "acrylamide": {
+            "color": "#d62728",
+            "shape": "D",
+            "size": 1800,
+            "label": "Acrylamide\n(Safety Hazard)",
+        },
+        "2-methyl-3-furanthiol": {
+            "color": "#17becf",
+            "shape": "D",
+            "size": 1800,
+            "label": "2-Methyl-3-\nfuranthiol (MFT)",
+        },
+        "bis(2-methyl-3-furyl) disulfide": {
+            "color": "#17becf",
+            "shape": "D",
+            "size": 1800,
+            "label": "MFT Disulfide\n(Meaty Dimer)",
+        },
+        "2,5-dimethylpyrazine": {
+            "color": "#17becf",
+            "shape": "D",
+            "size": 1800,
+            "label": "2,5-Dimethyl-\npyrazine (Aroma)",
+        },
+        "aminoacetone": {
+            "color": "#ff7f0e",
+            "shape": "s",
+            "size": 1600,
+            "label": "Aminoacetone",
+        },
     }
 
     # 2. Add edges from pathways
@@ -221,6 +263,7 @@ def main() -> int:
         "L-leucine": (2.2, 0.9),
         "L-cysteine": (2.2, -0.6),
         "L-lysine": (2.2, -2.1),
+        "L-asparagine": (2.2, -3.2),
         # Column 2: Off-flavor / Lipid
         "hexanal": (1.0, -3.2),
         # Column 3: Early Intermediates / Schiff Bases
@@ -233,16 +276,22 @@ def main() -> int:
         "glucose-glycine-Amadori": (5.2, 3.5),
         "ribose-glycine-Amadori": (5.2, 2.0),
         "pyruvaldehyde": (5.2, 0.5),
+        "glucose-asparagine-Schiff-base": (5.2, -4.6),
         # Column 5: Deoxyosones
         "glucose-3-deoxyosone": (6.8, 3.5),
         "3-deoxyosone": (6.8, 2.0),
+        "aminoacetone": (6.8, -0.6),
         # Column 6: Endpoints / Aromas & Damage
         "HMF": (8.4, 3.5),
         "furfural": (8.4, 2.0),
         "3-methylbutanal": (8.4, 0.5),
         "lysinoalanine": (8.4, -1.4),
+        "2,5-dimethylpyrazine": (8.4, -0.6),
+        "acrylamide": (8.4, -4.6),
         # Column 7: Secondary Additions
         "2-furfurylthiol": (10.0, 0.8),
+        "2-methyl-3-furanthiol": (10.0, 2.0),
+        "bis(2-methyl-3-furyl) disulfide": (11.2, 2.0),
     }
 
     # Verify all nodes in G have styles and positions
@@ -259,8 +308,8 @@ def main() -> int:
     ax.spines["bottom"].set_visible(False)
     ax.set_xticks([])
     ax.set_yticks([])
-    ax.set_xlim(-0.2, 11.0)
-    ax.set_ylim(-4.6, 5.2)
+    ax.set_xlim(-0.2, 12.0)
+    ax.set_ylim(-5.2, 5.2)
 
     nodes_by_shape: dict[str, list[str]] = {}
     for node in G.nodes:
@@ -434,20 +483,23 @@ def main() -> int:
     # 6. Save Plot
     output_dir = ROOT / "results" / "validation"
     output_dir.mkdir(parents=True, exist_ok=True)
-    output_path = output_dir / "reaction_network.png"
+    output_path_png = output_dir / "reaction_network.png"
+    output_path_pdf = output_dir / "reaction_network.pdf"
 
     # Save the file with padding at the top for legends
-    plt.savefig(output_path, dpi=300, bbox_inches="tight")
+    fig.savefig(output_path_png, dpi=300, bbox_inches="tight")
+    fig.savefig(output_path_pdf, bbox_inches="tight")
     plt.close(fig)
     print(
-        f"Successfully generated and saved Maillard reaction network plot to {output_path}"
+        f"Successfully generated and saved Maillard reaction network plots to {output_path_png} and {output_path_pdf}"
     )
 
     # Copy to assets dir for docs
     docs_asset_dir = ROOT / "docs" / "assets"
     docs_asset_dir.mkdir(parents=True, exist_ok=True)
-    shutil.copyfile(output_path, docs_asset_dir / "reaction_network.png")
-    print(f"Copied reaction network plot to {docs_asset_dir / 'reaction_network.png'}")
+    shutil.copyfile(output_path_png, docs_asset_dir / "reaction_network.png")
+    shutil.copyfile(output_path_pdf, docs_asset_dir / "reaction_network.pdf")
+    print(f"Copied reaction network plots to {docs_asset_dir / 'reaction_network.png'} and {docs_asset_dir / 'reaction_network.pdf'}")
 
     return 0
 

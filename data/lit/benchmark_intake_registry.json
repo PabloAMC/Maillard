@@ -1584,7 +1584,7 @@
     },
     {
       "id": "pmc_4419266_pe_interfacial_maillard_kinetics",
-      "citation": "Sol\u00eds-Calero et al. (2015)",
+      "citation": "Solís-Calero et al. (2015)",
       "doi": "10.1155/2015/319505",
       "kind": "calibration_reference",
       "chemistry_family": "phospholipid_amine_maillard",
@@ -1643,7 +1643,7 @@
       "requires_primary_data": false,
       "citation_aliases": [
         "PMC PMCID:PMC4419266 (Ref. 18)",
-        "Sol\u00eds-Calero et al. (2015)"
+        "Solís-Calero et al. (2015)"
       ]
     },
     {
@@ -1895,7 +1895,7 @@
     },
     {
       "id": "acs_jafc_3c05991_ppi_spi_partitioning",
-      "citation": "Barallat-P\u00e9rez et al. (2023)",
+      "citation": "Barallat-Pérez et al. (2023)",
       "doi": "10.1021/acs.jafc.3c05991",
       "kind": "calibration_reference",
       "chemistry_family": "lipid_maillard_crosstalk",
@@ -2704,7 +2704,7 @@
     },
     {
       "id": "ramirez_jimenez_2000_furosine_crossover_benchmark",
-      "citation": "Ram\u00edrez-Jim\u00e9nez et al. (2000)",
+      "citation": "Ramírez-Jiménez et al. (2000)",
       "doi": "10.1021/jf9907687",
       "kind": "quantitative_benchmark",
       "chemistry_family": "protein_damage_markers",
@@ -2755,7 +2755,7 @@
       ],
       "requires_primary_data": false,
       "citation_aliases": [
-        "Ram\u00edrez-Jim\u00e9nez et al. (2000)"
+        "Ramírez-Jiménez et al. (2000)"
       ]
     },
     {
@@ -3324,62 +3324,6 @@
       "requires_primary_data": false
     },
     {
-      "id": "messina_2022_pbma_oil_oav_anchor",
-      "citation": "Messina et al. (2022)",
-      "doi": "10.1016/j.foodchem.2021.131102",
-      "kind": "calibration_reference",
-      "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
-      "slr_family_source": "02",
-      "payload_role": "benchmark_intake",
-      "observable_panel_tags": [
-        "off_note",
-        "oil_selection",
-        "delta_decalactone",
-        "oav_reference"
-      ],
-      "process_state_scope": [
-        "heated_matrix"
-      ],
-      "supporting_families": [
-        "11"
-      ],
-      "target_modules": [
-        "lipid_oxidation",
-        "recommend",
-        "reporting"
-      ],
-      "matrix_family": "cooked_pbma_oil_comparison",
-      "eligibility": "benchmark_eligible_parameter",
-      "status": "encoded",
-      "what_it_supports": [
-        "Comparative cooked-PBMA oil OAV panel for canola, high-oleic sunflower, coconut, and coconut:canola blend",
-        "A compact reference surface for oil-choice ranking that keeps both green-rancid and sweet-lactone failure modes visible"
-      ],
-      "what_it_does_not_support": [
-        "Executable benchmark closure for one final commercial burger formulation",
-        "A universal oil-ranking rule outside the reported SPI-based burger context"
-      ],
-      "key_values": {
-        "canola_hexanal_oav": 28.0,
-        "sunflower_high_oleic_nonanal_oav": 12.0,
-        "coconut_delta_decalactone_oav": 14.0,
-        "coconut_canola_3_1_hexanal_oav": 4.0,
-        "replicates": 6
-      },
-      "runtime_artifacts": [
-        {
-          "artifact_type": "flavor_reference_payload",
-          "artifact_id": "messina_2022_pbma_oil_oav_panel",
-          "path": "data/lit/flavor_reference_payloads.json"
-        }
-      ],
-      "repo_next_action": "Keep as the comparative oil-choice anchor so recommendation logic can distinguish high-oleic improvement from coconut-lactone drift without opening a new benchmark family.",
-      "requires_primary_data": false,
-      "citation_aliases": [
-        "Messina et al. (2022)"
-      ]
-    },
-    {
       "id": "aliani_2005_donor_potency_nucleotide_context",
       "citation": "Aliani & Farmer (2005)",
       "doi": "10.1021/jf0401831",
@@ -3441,7 +3385,7 @@
     },
     {
       "id": "blank_devaud_grosch_2003_g6p_hdmf_prior",
-      "citation": "Cerny & Dav\u00eddek (2003)",
+      "citation": "Cerny & Davídek (2003)",
       "doi": "10.1021/jf026123f",
       "citation_aliases": [
         "JAFC DOI:10.1021/jf034037p (2003)"
@@ -3496,71 +3440,6 @@
         }
       ],
       "requires_primary_data": false
-    },
-    {
-      "id": "maillard_van_boekel_1992_sugar_reactivity_hierarchy",
-      "citation": "Maillard & van Boekel (1992)",
-      "doi": "10.1016/0308-8146(92)90216-Q",
-      "kind": "directional_prior",
-      "chemistry_family": "carbonyl_donor_hierarchy",
-      "slr_family_source": "07",
-      "payload_role": "benchmark_intake",
-      "observable_panel_tags": [
-        "donor_hierarchy",
-        "arrhenius_anchor",
-        "carbonyl_donor"
-      ],
-      "process_state_scope": [
-        "heated_matrix",
-        "aqueous_pre_extrusion_model",
-        "extrusion_structured"
-      ],
-      "supporting_families": [
-        "03",
-        "04",
-        "09",
-        "10"
-      ],
-      "target_modules": [
-        "literature_runtime",
-        "precursor_resolver",
-        "recommend",
-        "reporting"
-      ],
-      "matrix_family": "aqueous_sugar_lysine_model_system",
-      "eligibility": "conditional",
-      "status": "ready_for_directional_prior_encoding",
-      "what_it_supports": [
-        "Quantitative sugar-reactivity hierarchy across ribose, pentoses, hexoses, and disaccharides",
-        "A temperature-aware donor-priority anchor so ribose and other pentoses are not treated as fixed scalar uplifts relative to glucose"
-      ],
-      "what_it_does_not_support": [
-        "Direct plant-matrix closure for PPI or SPI systems",
-        "A full downstream sulfur-yield benchmark without matching amino-acid and matrix context"
-      ],
-      "key_values": {
-        "ribose_vs_glucose_multiplier": 8.2,
-        "xylose_vs_glucose_multiplier": 5.9,
-        "fructose_vs_glucose_multiplier": 0.65,
-        "maltose_vs_glucose_multiplier": 0.1,
-        "glucose_ea_kj_per_mol": 106.0,
-        "ribose_ea_kj_per_mol": 114.0
-      },
-      "repo_next_action": "Keep as the quantitative donor-hierarchy prior so Family 07 can reason over pentose-versus-hexose reactivity with explicit k_obs and Ea support rather than only R5P-specific evidence.",
-      "runtime_artifacts": [
-        {
-          "artifact_type": "computational_prior",
-          "artifact_id": "maillard_van_boekel_1992_sugar_reactivity_hierarchy_v1",
-          "path": "data/lit/computational_priors.json",
-          "sections": [
-            "carbonyl_donor_priors"
-          ]
-        }
-      ],
-      "requires_primary_data": false,
-      "citation_aliases": [
-        "Maillard & van Boekel (1992)"
-      ]
     },
     {
       "id": "blank_1997_rhamnose_proline_hdmf_anchor",
@@ -5170,7 +5049,7 @@
       "eligibility": "benchmark_eligible",
       "status": "encoded",
       "what_it_supports": [
-        "Ala + Xyl ARP kinetics \u00b1 EGCG; Ea values with SE; stoichiometry constraint."
+        "Ala + Xyl ARP kinetics ± EGCG; Ea values with SE; stoichiometry constraint."
       ],
       "what_it_does_not_support": [
         "Intact plant protein matrices",
@@ -5194,50 +5073,6 @@
         }
       ],
       "requires_primary_data": false
-    },
-    {
-      "id": "mottram_wedzicha_1990_methional",
-      "citation": "Mottram & Wedzicha (1990)",
-      "doi": "10.1016/0308-8146(90)90009-Q",
-      "kind": "calibration_reference",
-      "chemistry_family": "amino_acid_sugar_core",
-      "slr_family_source": "01",
-      "payload_role": "benchmark_intake",
-      "observable_panel_tags": [
-        "methional",
-        "MGO",
-        "Strecker"
-      ],
-      "process_state_scope": [
-        "heated_matrix"
-      ],
-      "supporting_families": [
-        "07"
-      ],
-      "target_modules": [
-        "literature_runtime",
-        "precursor_resolver"
-      ],
-      "matrix_family": "free_model_system",
-      "eligibility": "benchmark_eligible",
-      "status": "encoded",
-      "encoding_status": "encoded_runtime_artifact",
-      "what_it_supports": [
-        "Methional yield from methionine + dicarbonyl MGO under model system conditions."
-      ],
-      "what_it_does_not_support": [
-        "Intact plant protein matrices",
-        "Extrusion high-temperature pathways"
-      ],
-      "key_values": {
-        "met_mgo_to_methional_conversion_pct": 12.0
-      },
-      "repo_next_action": "Encode methional formation kinetics prior.",
-      "runtime_artifacts": [],
-      "requires_primary_data": false,
-      "citation_aliases": [
-        "Mottram & Wedzicha (1990)"
-      ]
     },
     {
       "id": "yu_2021_corn_hydrolysate_kinetics",
@@ -8507,8 +8342,8 @@
       "requires_primary_data": false
     },
     {
-      "id": "urugo_2024_plant_milk_hca_quantification",
-      "citation": "Urugo et al. (2024)",
+      "id": "mandelli_2024_plant_milk_hca_quantification",
+      "citation": "Mandelli et al. (2025)",
       "doi": "10.3390/foods14193295",
       "kind": "calibration_reference",
       "chemistry_family": "protein_damage_markers",
@@ -8544,7 +8379,7 @@
       "runtime_artifacts": [
         {
           "artifact_type": "safety_reference_payload",
-          "artifact_id": "urugo_2024_plant_milk_hca_quantification",
+          "artifact_id": "mandelli_2024_plant_milk_hca_quantification",
           "path": "data/lit/safety_reference_payloads.json"
         }
       ],
@@ -8785,7 +8620,7 @@
     },
     {
       "id": "comert_gokmen_2019_digestive_mgo_scavenging",
-      "citation": "C\u00f6mert & G\u00f6kmen (2019)",
+      "citation": "Cömert & Gökmen (2019)",
       "doi": "10.1016/j.foodres.2019.03.046",
       "kind": "calibration_reference",
       "chemistry_family": "polyphenol_amino_capping",
@@ -8877,7 +8712,7 @@
     },
     {
       "id": "comert_gokmen_2021_epicatechin_cysteine_mgo_synergy",
-      "citation": "C\u00f6mert & G\u00f6kmen (2021)",
+      "citation": "Cömert & Gökmen (2021)",
       "doi": "10.1016/j.foodchem.2020.128670",
       "kind": "calibration_reference",
       "chemistry_family": "polyphenol_amino_capping",
@@ -9058,7 +8893,7 @@
     },
     {
       "id": "solis_calero_2015_pe_glyoxal",
-      "citation": "Sol\u00eds-Calero et al. (2015)",
+      "citation": "Solís-Calero et al. (2015)",
       "doi": "10.1039/C4CP05360E",
       "kind": "calibration_reference",
       "chemistry_family": "phospholipid_amine_sink",
@@ -9106,7 +8941,7 @@
     },
     {
       "id": "solis_calero_2013_pe_amadori",
-      "citation": "Sol\u00eds-Calero et al. (2013)",
+      "citation": "Solís-Calero et al. (2013)",
       "doi": "10.1021/jp401488j",
       "kind": "calibration_reference",
       "chemistry_family": "phospholipid_amine_sink",
@@ -9811,7 +9646,7 @@
     },
     {
       "id": "serpen_gokmen_2007_ascorbic_redox_kinetics",
-      "citation": "Serpen & G\u00f6kmen (2007)",
+      "citation": "Serpen & Gökmen (2007)",
       "doi": "10.1016/j.foodchem.2006.11.073",
       "kind": "calibration_reference",
       "chemistry_family": "ascorbic_acid_maillard",
@@ -10167,7 +10002,7 @@
       "eligibility": "benchmark_eligible",
       "status": "encoded",
       "what_it_supports": [
-        "MFT percentage retention of 47.78% in heat-denatured soy isolate at pH 4.0, 40\u00b0C."
+        "MFT percentage retention of 47.78% in heat-denatured soy isolate at pH 4.0, 40°C."
       ],
       "what_it_does_not_support": [
         "Extrusion high-shear physical matrix transformations."
@@ -10225,7 +10060,7 @@
       "eligibility": "benchmark_eligible",
       "status": "encoded",
       "what_it_supports": [
-        "MFT percentage retention of 85.0% in native soy isolate at pH 7.0, 25\u00b0C."
+        "MFT percentage retention of 85.0% in native soy isolate at pH 7.0, 25°C."
       ],
       "what_it_does_not_support": [
         "High-temperature covalent denaturation paths."
@@ -10284,7 +10119,7 @@
       "eligibility": "benchmark_eligible",
       "status": "encoded",
       "what_it_supports": [
-        "BMFD percentage retention of 98.5% in heat-denatured soy isolate at pH 8.0, 25\u00b0C due to covalent thiolate disulfide-interchange."
+        "BMFD percentage retention of 98.5% in heat-denatured soy isolate at pH 8.0, 25°C due to covalent thiolate disulfide-interchange."
       ],
       "what_it_does_not_support": [
         "Non-covalent physical absorption stability under high acidity."
@@ -10343,7 +10178,7 @@
       "eligibility": "benchmark_eligible",
       "status": "encoded",
       "what_it_supports": [
-        "FFT binding Gibbs free energy (delta_G) of -9.72 kcal/mol in native pea protein isolate at pH 7.0, 25\u00b0C."
+        "FFT binding Gibbs free energy (delta_G) of -9.72 kcal/mol in native pea protein isolate at pH 7.0, 25°C."
       ],
       "what_it_does_not_support": [
         "Covalent chemical trapping via sulfhydryl exchange."
@@ -10661,7 +10496,7 @@
     },
     {
       "id": "pmc10056349_rubisco_amadori",
-      "citation": "\u0160imkov\u00e1 et al. (2023)",
+      "citation": "Šimková et al. (2023)",
       "doi": "10.3390/foods12061349",
       "kind": "calibration_reference",
       "chemistry_family": "alternative_protein_matrix_scope",
@@ -11033,6 +10868,170 @@
         }
       ],
       "requires_primary_data": false
+    },
+    {
+      "id": "van_boekel_2001_maillard_kinetics_review",
+      "citation": "van Boekel (2001)",
+      "doi": "10.1002/1521-3803(20010601)45:3<150::AID-FOOD150>3.0.CO;2-9",
+      "kind": "directional_prior",
+      "chemistry_family": "carbonyl_donor_hierarchy",
+      "slr_family_source": "07",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "donor_hierarchy",
+        "carbonyl_donor",
+        "arrhenius_anchor"
+      ],
+      "process_state_scope": [
+        "heated_matrix",
+        "aqueous_pre_extrusion_model"
+      ],
+      "supporting_families": [
+        "10"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "kinetics",
+        "reporting"
+      ],
+      "matrix_family": "lysine_sugar_model_system",
+      "eligibility": "benchmark_eligible_parameter",
+      "status": "encoded",
+      "what_it_supports": [
+        "Quantitative k_obs and Ea for 9 sugars at pH 6, 50-70°C in lysine model system",
+        "Pentose >> hexose >> disaccharide reactivity hierarchy with temperature-dependence"
+      ],
+      "what_it_does_not_support": [
+        "Plant-matrix endpoint closure",
+        "A universal Maillard rate under extruder shear or low-moisture conditions"
+      ],
+      "key_values": {
+        "ribose_k_obs_at_60c_milli_per_hour": 98.4,
+        "glucose_k_obs_at_60c_milli_per_hour": 12.0,
+        "ribose_vs_glucose_relative_reactivity": 8.2,
+        "glucose_ea_kj_per_mol": 106.0,
+        "ribose_ea_kj_per_mol": 114.0,
+        "replicates": 3
+      },
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "van_boekel_2001_maillard_kinetics_review_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "carbonyl_donor_priors"
+          ]
+        }
+      ],
+      "repo_next_action": "Wired as the authoritative sugar-reactivity prior for Family 07. Activation energies (glucose 106 kJ/mol, ribose 114 kJ/mol) are now hardcoded in curated_pathways.py.",
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "van Boekel (2001)",
+        "Nahrung/Food 2001"
+      ]
+    },
+    {
+      "id": "martins_2001_maillard_kinetics_modelling",
+      "citation": "Martins, Jongen & van Boekel (2001)",
+      "doi": "10.1016/s0924-2244(01)00022-x",
+      "kind": "directional_prior",
+      "chemistry_family": "carbonyl_donor_hierarchy",
+      "slr_family_source": "07",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "donor_hierarchy",
+        "carbonyl_donor"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "10"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "reporting"
+      ],
+      "matrix_family": "lysine_sugar_model_system",
+      "eligibility": "conditional",
+      "status": "ready_for_directional_prior_encoding",
+      "what_it_supports": [
+        "Mechanistic kinetic modelling framework for the Maillard reaction hierarchy"
+      ],
+      "what_it_does_not_support": [
+        "Standalone plant-matrix benchmark closure"
+      ],
+      "key_values": {},
+      "runtime_artifacts": [
+        {
+          "artifact_type": "computational_prior",
+          "artifact_id": "martins_2001_maillard_kinetics_modelling_v1",
+          "path": "data/lit/computational_priors.json",
+          "sections": [
+            "carbonyl_donor_priors"
+          ]
+        }
+      ],
+      "repo_next_action": "Keep as co-reference to van_boekel_2001 for mechanistic context in Family 07.",
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Martins et al. (2001)",
+        "Trends Food Sci Technol 2001"
+      ]
+    },
+    {
+      "id": "mottram_1998_meat_flavour_review",
+      "citation": "Mottram (1998)",
+      "doi": "10.1016/s0308-8146(98)00076-4",
+      "kind": "calibration_reference",
+      "chemistry_family": "amino_acid_sugar_core",
+      "slr_family_source": "03",
+      "payload_role": "benchmark_intake",
+      "observable_panel_tags": [
+        "strecker_yield",
+        "methional",
+        "sulfur_positive"
+      ],
+      "process_state_scope": [
+        "heated_matrix"
+      ],
+      "supporting_families": [
+        "01",
+        "05"
+      ],
+      "target_modules": [
+        "literature_runtime",
+        "reporting"
+      ],
+      "matrix_family": "methionine_model_system",
+      "eligibility": "benchmark_eligible_parameter",
+      "status": "encoded",
+      "what_it_supports": [
+        "Methional Strecker yield anchor: ~38 mol% from methionine at ~150°C",
+        "General sulfur volatile formation narrative from amino acid Strecker pathways"
+      ],
+      "what_it_does_not_support": [
+        "Plant-matrix methional quantification",
+        "A universal Strecker yield under variable Aw or pH conditions"
+      ],
+      "key_values": {
+        "methional_strecker_yield_mol_pct": 38.0,
+        "temperature_c": 150.0,
+        "amino_acid": "methionine"
+      },
+      "runtime_artifacts": [
+        {
+          "artifact_type": "flavor_reference_payload",
+          "artifact_id": "mottram_1998_meat_flavour_strecker_v1",
+          "path": "data/lit/flavor_reference_payloads.json"
+        }
+      ],
+      "repo_next_action": "Replaces the ghost mottram_wedzicha_1990_methional entry. Use as the methional Strecker yield anchor for Family 03 sulfur reporting.",
+      "requires_primary_data": false,
+      "citation_aliases": [
+        "Mottram (1998)",
+        "Food Chemistry 62(4):415"
+      ]
     }
   ],
   "structural_gaps": [

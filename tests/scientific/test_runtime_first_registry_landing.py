@@ -42,7 +42,6 @@ def test_runtime_first_batch_is_landed_in_operational_registries():
     assert "ref41_ppi_sulfur_volatile_binding_v1" in family11_priors
 
     donor_priors = {row["id"] for row in query_family_prior_entries(chemistry_family="carbonyl_donor_hierarchy")}
-    assert "maillard_van_boekel_1992_sugar_reactivity_hierarchy_v1" in donor_priors
     assert "blank_1997_rhamnose_proline_hdmf_uplift_v1" in donor_priors
 
     support_priors = {row["id"] for row in query_family_prior_entries(supporting_family="08")}
@@ -119,10 +118,9 @@ def test_runtime_first_batch_is_landed_in_operational_registries():
         "Blank & Grosch (1991)",
         "Liu, Y. (2023 thesis)",
         "Marquez-Ruiz et al. (2014)",
-        "Messina et al. (2022)",
         "DOI ref. 41 in raw/11_maillard_lipid_crosstalk.md",
         "ACS JAFC 3c08432",
-        "Maillard & van Boekel (1992)",
+        "van Boekel (2001)",
         "Mottram et al. (2001)",
         "Wang et al. (2022)",
         "Yeo & Mottram (2023)",

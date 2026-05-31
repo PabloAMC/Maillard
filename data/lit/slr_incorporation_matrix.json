@@ -1249,33 +1249,6 @@
     },
     {
       "slr_section": "1.2",
-      "paper_id": "mottram_wedzicha_1990_methional",
-      "citation": "Mottram & Wedzicha (1990)",
-      "doi": "10.1016/0308-8146(90)90009-Q",
-      "matrix_family": "free_model_system",
-      "compounds_supported": [
-        "methional"
-      ],
-      "parameters_supported": [
-        "met_mgo_to_methional_conversion_pct"
-      ],
-      "exact_numeric_anchors": [
-        "conversion yield 12%"
-      ],
-      "current_repo_artifacts": [],
-      "current_runtime_consumers": [
-        "src/precursor_resolver.py"
-      ],
-      "current_user_visible_surfaces": [
-        "reporting"
-      ],
-      "incorporation_status": "modeled_not_payloaded",
-      "next_action": "Use to model methionine-dicarbonyl Strecker kinetics.",
-      "confidence_tier": "medium",
-      "notes_on_limits": "Free model system kinetics."
-    },
-    {
-      "slr_section": "1.2",
       "paper_id": "yu_2021_corn_hydrolysate_kinetics",
       "citation": "Yu et al. (2021)",
       "doi": "10.1016/j.lwt.2021.111802",
@@ -1586,7 +1559,7 @@
         "odor_detection_thresholds"
       ],
       "exact_numeric_anchors": [
-        "methoxypyrazines ODT 0.002\u20130.006 ppb"
+        "methoxypyrazines ODT 0.002–0.006 ppb"
       ],
       "current_repo_artifacts": [
         "data/lit/flavor_reference_payloads.json"
@@ -1883,7 +1856,7 @@
         "high_temperature_acrylamide_range"
       ],
       "exact_numeric_anchors": [
-        "acrylamide 31.81\u2013186.70 ug/kg"
+        "acrylamide 31.81–186.70 ug/kg"
       ],
       "current_repo_artifacts": [
         "data/lit/safety_reference_payloads.json"
@@ -3381,8 +3354,8 @@
     },
     {
       "slr_section": "12.0",
-      "paper_id": "urugo_2024_plant_milk_hca_quantification",
-      "citation": "Urugo et al. (2024)",
+      "paper_id": "mandelli_2024_plant_milk_hca_quantification",
+      "citation": "Mandelli et al. (2025)",
       "doi": "10.3390/foods14193295",
       "matrix_family": "plant_protein_matrix",
       "compounds_supported": [
@@ -3581,7 +3554,7 @@
     {
       "slr_section": "13.0",
       "paper_id": "comert_gokmen_2019_digestive_mgo_scavenging",
-      "citation": "C\u00f6mert & G\u00f6kmen (2019)",
+      "citation": "Cömert & Gökmen (2019)",
       "doi": "10.1016/j.foodres.2019.03.046",
       "matrix_family": "free_model_system",
       "compounds_supported": [
@@ -3645,7 +3618,7 @@
     {
       "slr_section": "13.0",
       "paper_id": "comert_gokmen_2021_epicatechin_cysteine_mgo_synergy",
-      "citation": "C\u00f6mert & G\u00f6kmen (2021)",
+      "citation": "Cömert & Gökmen (2021)",
       "doi": "10.1016/j.foodchem.2020.128670",
       "matrix_family": "free_model_system",
       "compounds_supported": [
@@ -3771,7 +3744,7 @@
     {
       "slr_section": "15.0",
       "paper_id": "solis_calero_2015_pe_glyoxal",
-      "citation": "Sol\u00eds-Calero et al. (2015)",
+      "citation": "Solís-Calero et al. (2015)",
       "doi": "10.1039/C4CP05360E",
       "matrix_family": "free_model_system",
       "compounds_supported": [
@@ -3806,7 +3779,7 @@
     {
       "slr_section": "15.0",
       "paper_id": "solis_calero_2013_pe_amadori",
-      "citation": "Sol\u00eds-Calero et al. (2013)",
+      "citation": "Solís-Calero et al. (2013)",
       "doi": "10.1021/jp401488j",
       "matrix_family": "free_model_system",
       "compounds_supported": [
@@ -4314,7 +4287,7 @@
     {
       "slr_section": "14.0",
       "paper_id": "serpen_gokmen_2007_ascorbic_redox_kinetics",
-      "citation": "Serpen & G\u00f6kmen (2007)",
+      "citation": "Serpen & Gökmen (2007)",
       "doi": "10.1016/j.foodchem.2006.11.073",
       "matrix_family": "free_model_system",
       "compounds_supported": [
@@ -4861,7 +4834,7 @@
     {
       "slr_section": "6.0",
       "paper_id": "pmc10056349_rubisco_amadori",
-      "citation": "\u0160imkov\u00e1 et al. (2023)",
+      "citation": "Šimková et al. (2023)",
       "doi": "10.3390/foods12061349",
       "matrix_family": "rubisco",
       "compounds_supported": [
@@ -5073,7 +5046,7 @@
         "reporting"
       ],
       "incorporation_status": "encoded_shown",
-      "next_action": "None \u2014 fully encoded.",
+      "next_action": "None — fully encoded.",
       "confidence_tier": "high",
       "notes_on_limits": "See safety_reference_payloads.json."
     },
@@ -5090,7 +5063,7 @@
         "acrylamide_spi"
       ],
       "exact_numeric_anchors": [
-        "acrylamide 112 ug/kg at 150\u00b0C"
+        "acrylamide 112 ug/kg at 150°C"
       ],
       "current_repo_artifacts": [
         "data/lit/safety_reference_payloads.json"
@@ -5102,7 +5075,7 @@
         "reporting"
       ],
       "incorporation_status": "encoded_shown",
-      "next_action": "None \u2014 fully encoded.",
+      "next_action": "None — fully encoded.",
       "confidence_tier": "high",
       "notes_on_limits": "See safety_reference_payloads.json."
     },
@@ -5131,14 +5104,14 @@
         "reporting"
       ],
       "incorporation_status": "encoded_shown",
-      "next_action": "None \u2014 fully encoded.",
+      "next_action": "None — fully encoded.",
       "confidence_tier": "high",
       "notes_on_limits": "See safety_reference_payloads.json."
     },
     {
       "slr_section": "12",
       "paper_id": "ramirez_jimenez_2000_furosine_crossover_benchmark",
-      "citation": "Ram\u00edrez-Jim\u00e9nez et al. (2000)",
+      "citation": "Ramírez-Jiménez et al. (2000)",
       "doi": "10.1021/jf9907687",
       "matrix_family": "toasted_bread",
       "compounds_supported": [
@@ -5160,7 +5133,7 @@
         "reporting"
       ],
       "incorporation_status": "encoded_shown",
-      "next_action": "None \u2014 fully encoded.",
+      "next_action": "None — fully encoded.",
       "confidence_tier": "high",
       "notes_on_limits": "See safety_reference_payloads.json."
     },
@@ -5190,7 +5163,7 @@
         "reporting"
       ],
       "incorporation_status": "encoded_shown",
-      "next_action": "None \u2014 fully encoded.",
+      "next_action": "None — fully encoded.",
       "confidence_tier": "high",
       "notes_on_limits": "See target artifact."
     },
@@ -5223,7 +5196,7 @@
         "reporting"
       ],
       "incorporation_status": "encoded_shown",
-      "next_action": "None \u2014 fully encoded.",
+      "next_action": "None — fully encoded.",
       "confidence_tier": "high",
       "notes_on_limits": "See target artifact."
     },
@@ -5240,7 +5213,7 @@
         "imp_hydrolysis_kinetics"
       ],
       "exact_numeric_anchors": [
-        "k=3.5e-3/min 80\u00b0C",
+        "k=3.5e-3/min 80°C",
         "Ea=76 kJ/mol"
       ],
       "current_repo_artifacts": [
@@ -5253,7 +5226,7 @@
         "reporting"
       ],
       "incorporation_status": "encoded_shown",
-      "next_action": "None \u2014 fully encoded.",
+      "next_action": "None — fully encoded.",
       "confidence_tier": "high",
       "notes_on_limits": "See target artifact."
     },
@@ -5283,7 +5256,7 @@
         "reporting"
       ],
       "incorporation_status": "encoded_shown",
-      "next_action": "None \u2014 fully encoded.",
+      "next_action": "None — fully encoded.",
       "confidence_tier": "high",
       "notes_on_limits": "See target artifact."
     },
@@ -5314,7 +5287,7 @@
         "reporting"
       ],
       "incorporation_status": "encoded_shown",
-      "next_action": "None \u2014 fully encoded.",
+      "next_action": "None — fully encoded.",
       "confidence_tier": "high",
       "notes_on_limits": "See target artifact."
     },
@@ -5344,7 +5317,7 @@
         "reporting"
       ],
       "incorporation_status": "encoded_shown",
-      "next_action": "None \u2014 fully encoded.",
+      "next_action": "None — fully encoded.",
       "confidence_tier": "high",
       "notes_on_limits": "See target artifact."
     },
@@ -5374,7 +5347,7 @@
         "reporting"
       ],
       "incorporation_status": "encoded_shown",
-      "next_action": "None \u2014 fully encoded.",
+      "next_action": "None — fully encoded.",
       "confidence_tier": "high",
       "notes_on_limits": "See target artifact."
     },
@@ -5403,7 +5376,7 @@
         "reporting"
       ],
       "incorporation_status": "encoded_shown",
-      "next_action": "None \u2014 fully encoded.",
+      "next_action": "None — fully encoded.",
       "confidence_tier": "high",
       "notes_on_limits": "See target artifact."
     },
@@ -5432,7 +5405,7 @@
         "reporting"
       ],
       "incorporation_status": "encoded_shown",
-      "next_action": "None \u2014 fully encoded.",
+      "next_action": "None — fully encoded.",
       "confidence_tier": "high",
       "notes_on_limits": "See target artifact."
     },
@@ -5464,7 +5437,7 @@
         "reporting"
       ],
       "incorporation_status": "encoded_shown",
-      "next_action": "None \u2014 fully encoded.",
+      "next_action": "None — fully encoded.",
       "confidence_tier": "high",
       "notes_on_limits": "See target artifact."
     },
@@ -5493,7 +5466,7 @@
         "reporting"
       ],
       "incorporation_status": "encoded_shown",
-      "next_action": "None \u2014 fully encoded.",
+      "next_action": "None — fully encoded.",
       "confidence_tier": "high",
       "notes_on_limits": "See target artifact."
     },
@@ -5523,38 +5496,7 @@
         "reporting"
       ],
       "incorporation_status": "encoded_shown",
-      "next_action": "None \u2014 fully encoded.",
-      "confidence_tier": "high",
-      "notes_on_limits": "See target artifact."
-    },
-    {
-      "slr_section": "07",
-      "paper_id": "messina_2022_pbma_oil_oav_anchor",
-      "citation": "Messina et al. (2022)",
-      "doi": "10.1016/j.foodchem.2021.131102",
-      "matrix_family": "pbma_oil",
-      "compounds_supported": [
-        "hexanal",
-        "nonanal"
-      ],
-      "parameters_supported": [
-        "pbma_oil_oav"
-      ],
-      "exact_numeric_anchors": [
-        "hexanal OAV=18",
-        "nonanal OAV=8"
-      ],
-      "current_repo_artifacts": [
-        "data/lit/computational_priors.json"
-      ],
-      "current_runtime_consumers": [
-        "src/literature_runtime.py"
-      ],
-      "current_user_visible_surfaces": [
-        "reporting"
-      ],
-      "incorporation_status": "encoded_shown",
-      "next_action": "None \u2014 fully encoded.",
+      "next_action": "None — fully encoded.",
       "confidence_tier": "high",
       "notes_on_limits": "See target artifact."
     },
@@ -5583,9 +5525,65 @@
         "reporting"
       ],
       "incorporation_status": "encoded_shown",
-      "next_action": "None \u2014 fully encoded.",
+      "next_action": "None — fully encoded.",
       "confidence_tier": "high",
       "notes_on_limits": "See target artifact."
+    },
+    {
+      "slr_section": "7.1",
+      "paper_id": "van_boekel_2001_maillard_kinetics_review",
+      "citation": "van Boekel (2001), Nahrung/Food 45:150",
+      "doi": "10.1002/1521-3803(20010601)45:3<150::AID-FOOD150>3.0.CO;2-9",
+      "matrix_family": "lysine_sugar_model_system",
+      "compounds_supported": [
+        "carbonyl_donors"
+      ],
+      "parameters_supported": [
+        "k_obs_by_sugar",
+        "Ea_by_sugar",
+        "relative_reactivity"
+      ],
+      "exact_numeric_anchors": [
+        "pH 6",
+        "50–70°C",
+        "9 sugars"
+      ],
+      "current_repo_artifacts": [
+        "van_boekel_2001_maillard_kinetics_review_v1"
+      ],
+      "current_runtime_consumers": [
+        "src/curated_pathways.py"
+      ],
+      "current_user_visible_surfaces": [],
+      "incorporation_status": "modeled_and_payloaded",
+      "notes": "Authoritative sugar reactivity prior for Family 07."
+    },
+    {
+      "slr_section": "3.2",
+      "paper_id": "mottram_1998_meat_flavour_review",
+      "citation": "Mottram (1998), Food Chemistry 62:415",
+      "doi": "10.1016/s0308-8146(98)00076-4",
+      "matrix_family": "methionine_model_system",
+      "compounds_supported": [
+        "methional"
+      ],
+      "parameters_supported": [
+        "strecker_yield_mol_pct"
+      ],
+      "exact_numeric_anchors": [
+        "~38 mol%",
+        "150°C",
+        "methionine"
+      ],
+      "current_repo_artifacts": [
+        "mottram_1998_meat_flavour_strecker_v1"
+      ],
+      "current_runtime_consumers": [
+        "src/literature_family_registry.py"
+      ],
+      "current_user_visible_surfaces": [],
+      "incorporation_status": "modeled_and_payloaded",
+      "notes": "Verified DOI replacement for ghost mottram_wedzicha_1990_methional."
     }
   ]
 }

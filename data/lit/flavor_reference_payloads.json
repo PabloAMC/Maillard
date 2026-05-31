@@ -424,22 +424,22 @@
       }
     },
     {
-      "id": "mottram_wedzicha_1990_methional",
+      "id": "mottram_1998_meat_flavour_strecker_v1",
       "compound": "methional",
-      "source_citation": "Mottram & Wedzicha (1990)",
-      "doi": "10.1016/0308-8146(90)90009-Q",
-      "matrix_context": "methionine_glucose_model",
-      "analytical_method": "GC-MS",
+      "source_citation": "Mottram (1998), Food Chemistry",
+      "doi": "10.1016/s0308-8146(98)00076-4",
+      "matrix_context": "methionine_model_system_review",
+      "analytical_method": "GC-MS, review of primary model system data",
       "units": "mol_pct",
       "benchmark_role": "reference_anchor",
       "pipeline_role": "reference_only",
-      "target_direction": "strecker_methional_yield",
+      "target_direction": "strecker_methional_yield_from_met",
       "numeric_band_or_point": {
         "type": "point",
         "value": 38.0,
-        "condition": "150°C Strecker yield from Met"
+        "condition": "~150°C Strecker yield from methionine"
       },
-      "notes": "Methional Strecker yield 38 mol% from methionine at 150°C."
+      "notes": "Mottram (1998) 'Flavour formation in meat and meat products: a review', Food Chemistry 62(4):415-424. Reports ~38 mol% methional Strecker yield from methionine in model systems. This replaces the ghost mottram_wedzicha_1990_methional entry with the correct verifiable DOI. DOI confirmed via Crossref."
     }
   ],
   "pyrazine_reference_anchors": [
@@ -978,51 +978,6 @@
       }
     },
     {
-      "id": "messina_2022_pbma_oil_oav_panel",
-      "compound": "oil_volatile_profile",
-      "source_citation": "Messina et al. (2022)",
-      "doi": "10.1016/j.foodchem.2021.131102",
-      "matrix_context": "spi_based_burger_oil_comparison_cooked_to_72c_internal",
-      "analytical_method": "HS-SPME-GC-MS with internal standard across cooked burger oil treatments",
-      "units": "oav",
-      "benchmark_role": "reference_anchor",
-      "pipeline_role": "optimization_constraint",
-      "target_direction": "prefer_high_oleic_or_balanced_blend_oils_over_canola_or_coconut_extremes_for_pbma_off_note_control",
-      "numeric_band_or_point": {
-        "type": "panel_values",
-        "values": {
-          "canola": {
-            "hexanal_oav_mean": 28.0,
-            "hexanal_oav_sd": 4.0,
-            "nonanal_oav_mean": 6.0,
-            "nonanal_oav_sd": 1.0,
-            "delta_decalactone_oav_max": 1.0
-          },
-          "sunflower_high_oleic": {
-            "hexanal_oav_mean": 9.0,
-            "hexanal_oav_sd": 2.0,
-            "nonanal_oav_mean": 12.0,
-            "nonanal_oav_sd": 2.0,
-            "delta_decalactone_oav_max": 1.0
-          },
-          "coconut": {
-            "hexanal_oav_max": 1.0,
-            "nonanal_oav_max": 1.0,
-            "delta_decalactone_oav_mean": 14.0,
-            "delta_decalactone_oav_sd": 3.0
-          },
-          "coconut_canola_3_1": {
-            "hexanal_oav_mean": 4.0,
-            "hexanal_oav_sd": 1.0,
-            "nonanal_oav_mean": 5.0,
-            "nonanal_oav_sd": 1.0,
-            "delta_decalactone_oav_mean": 4.0,
-            "delta_decalactone_oav_sd": 1.0
-          }
-        }
-      }
-    },
-    {
       "id": "grosch_1982_hexanal_odt_anchor",
       "compound": "hexanal",
       "source_citation": "Grosch (1982)",
@@ -1229,24 +1184,6 @@
         "condition": "nonanal ODT"
       },
       "notes": "Nonanal ODT 1.0 ppb from oleic acid oxidation; OAV 1-28."
-    },
-    {
-      "id": "messina_2022_pbma_oil_oav_anchor",
-      "compound": "hexanal",
-      "source_citation": "Messina et al. (2022)",
-      "doi": "10.1016/j.foodchem.2021.131102",
-      "matrix_context": "pbma_oil_fraction",
-      "analytical_method": "GC-MS",
-      "units": "OAV",
-      "benchmark_role": "reference_anchor",
-      "pipeline_role": "reference_only",
-      "target_direction": "pbma_lipid_off_note_oav",
-      "numeric_band_or_point": {
-        "type": "point",
-        "value": 18.0,
-        "condition": "hexanal OAV PBMA oil"
-      },
-      "notes": "PBMA oil: hexanal OAV=18, nonanal OAV=8."
     },
     {
       "id": "yeo_shibamoto_1991_wof_hexanal",

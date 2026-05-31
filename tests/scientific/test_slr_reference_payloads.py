@@ -130,10 +130,8 @@ def test_benchmark_intake_registry_encodes_trikusuma_and_lincoln_artifacts():
         "blank_grosch_1991_hdmf_anchor": "blank_grosch_1991_beef_hdmf_band",
         "liu_2023_ppi_offnote_baseline": "liu_2023_ppi_ibmp_band",
         "marquez_ruiz_2014_oleic_oav_anchor": "marquez_ruiz_2014_oleic_nonanal_oav_band",
-        "messina_2022_pbma_oil_oav_anchor": "messina_2022_pbma_oil_oav_panel",
         "ref41_ppi_sulfur_binding": "ref41_ppi_sulfur_volatile_binding_v1",
         "acs_jafc_3c08432_crosstalk_cleanup_link": "rizzello_2024_lactic_fermentation_cleanup",
-        "maillard_van_boekel_1992_sugar_reactivity_hierarchy": "maillard_van_boekel_1992_sugar_reactivity_hierarchy_v1",
         "blank_1997_rhamnose_proline_hdmf_anchor": "blank_1997_rhamnose_proline_hdmf_uplift_v1",
         "brands_2002_mgo_hdmf_anchor": "brands_2002_mgo_hdmf_c3_route_v1",
         "wang_2022_lab_hexanal_cleanup_anchor": "wang_2022_lab_hexanal_cleanup_oav_target",
@@ -199,7 +197,6 @@ def test_computational_priors_include_lincoln_crosstalk_prior():
     assert "catechin" in prior["polyphenol_examples"]
     assert {"voelker_2021_thiamine_arrhenius_v1", "arabshahi_1988_aw_dependent_thiamine_ea_v1", "huang_2022_thiamine_metal_catalysis_v1"}.issubset(thiamine_prior_ids)
     assert {"soladoye_2020_low_temp_euc_window_v1", "ahlberg_2021_yeast_extract_nucleotide_grade_window_v1", "cui_2022_mushroom_gmp_euc_window_v1"}.issubset(nucleotide_prior_ids)
-    assert "maillard_van_boekel_1992_sugar_reactivity_hierarchy_v1" in donor_prior_ids
     assert "blank_1997_rhamnose_proline_hdmf_uplift_v1" in donor_prior_ids
     assert any(entry["id"] == "brands_2002_mgo_hdmf_c3_route_v1" for entry in payload["furanone_priors"])
     assert {"mottram_2001_lipid_aldehyde_mft_quench_v1", "zhang_2022_unsaturated_aldehyde_offnote_potency_v1"}.issubset(lipid_offnote_prior_ids)
@@ -236,7 +233,6 @@ def test_flavor_reference_payloads_cover_sulfur_strecker_pyrazine_and_furanones(
     assert any(entry["id"] == "liu_2023_ppi_hexanal_band" for entry in payload["off_note_reference_anchors"])
     assert any(entry["id"] == "wang_2022_lab_hexanal_cleanup_oav_target" for entry in payload["off_note_reference_anchors"])
     assert any(entry["id"] == "marquez_ruiz_2014_oleic_nonanal_oav_band" for entry in payload["off_note_reference_anchors"])
-    assert any(entry["id"] == "messina_2022_pbma_oil_oav_panel" for entry in payload["off_note_reference_anchors"])
     assert any(entry["id"] == "pmc11049305_spirulina_beta_ionone_oav_floor" for entry in payload["off_note_reference_anchors"])
     assert any(entry["id"] == "pmc12155365_sunflower_2_methylbutanal_fd_point" for entry in payload["strecker_reference_anchors"])
     assert any(entry["id"] == "pmc12155365_sunflower_4_vinylguaiacol_fd_point" for entry in payload["off_note_reference_anchors"])

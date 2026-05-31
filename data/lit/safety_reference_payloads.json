@@ -919,11 +919,11 @@
       ]
     },
     {
-      "id": "urugo_2024_plant_milk_hca_quantification",
+      "id": "mandelli_2024_plant_milk_hca_quantification",
       "kind": "industrial_endpoint_reference",
       "report_visibility": "default",
       "target_module": "safety",
-      "source_citation": "Urugo et al. (2024)",
+      "source_citation": "Mandelli et al. (2025)",
       "doi": "10.3390/foods14193295",
       "validated_status": "reference_anchor",
       "analyte": "HCAs",

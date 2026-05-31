@@ -1,8 +1,8 @@
 {
   "summary": {
-    "total_occurrences": 179,
-    "unique_citations": 172,
-    "runtime_bound": 71,
+    "total_occurrences": 180,
+    "unique_citations": 173,
+    "runtime_bound": 72,
     "registry_only": 0,
     "backlog": 101,
     "min_score": 6
@@ -1812,29 +1812,6 @@
       "runtime_artifact_count": 1
     },
     {
-      "citation": "Mottram & Wedzicha (1990)",
-      "score": "6/8",
-      "score_value": 6,
-      "status": "RUNTIME_BOUND",
-      "occurrence_count": 1,
-      "files": [
-        "01_amino_acid_sugar.md"
-      ],
-      "descriptions": [
-        "Met + MGO → methional, absolute µmol yields, triplicates, FPD."
-      ],
-      "occurrences": [
-        {
-          "file": "01_amino_acid_sugar.md",
-          "line": 610,
-          "description": "Met + MGO → methional, absolute µmol yields, triplicates, FPD.",
-          "raw_line": "5. `Mottram & Wedzicha (1990)` — Met + MGO → methional, absolute µmol yields, triplicates, FPD. 6/8."
-        }
-      ],
-      "registry_id": "mottram_wedzicha_1990_methional",
-      "runtime_artifact_count": 0
-    },
-    {
       "citation": "Mottram (1998)",
       "score": "6/8",
       "score_value": 6,
@@ -3009,29 +2986,6 @@
       "runtime_artifact_count": 1
     },
     {
-      "citation": "Messina et al. (2022)",
-      "score": "8/8",
-      "score_value": 8,
-      "status": "RUNTIME_BOUND",
-      "occurrence_count": 1,
-      "files": [
-        "02_lipid_oxidation.md"
-      ],
-      "descriptions": [
-        "ResearchGate ref. — comparative OAV table for 4 oil types in cooked PBMA; n=6."
-      ],
-      "occurrences": [
-        {
-          "file": "02_lipid_oxidation.md",
-          "line": 590,
-          "description": "ResearchGate ref. — comparative OAV table for 4 oil types in cooked PBMA; n=6.",
-          "raw_line": "4. `Messina et al. (2022)` — ResearchGate ref. — comparative OAV table for 4 oil types in cooked PBMA; n=6. 8/8."
-        }
-      ],
-      "registry_id": "messina_2022_pbma_oil_oav_anchor",
-      "runtime_artifact_count": 1
-    },
-    {
       "citation": "Mottram & Nobrega (2002 / Chapter 9 review)",
       "score": "8/8",
       "score_value": 8,
@@ -3874,29 +3828,6 @@
       ],
       "registry_id": "de_leyn_2019",
       "runtime_artifact_count": 2
-    },
-    {
-      "citation": "Maillard & van Boekel (1992)",
-      "score": "7/8",
-      "score_value": 7,
-      "status": "RUNTIME_BOUND",
-      "occurrence_count": 1,
-      "files": [
-        "07_reducing_sugars.md"
-      ],
-      "descriptions": [
-        "Food Chemistry — full reactivity hierarchy with k_obs and Ea for 9 sugars; triplicates."
-      ],
-      "occurrences": [
-        {
-          "file": "07_reducing_sugars.md",
-          "line": 737,
-          "description": "Food Chemistry — full reactivity hierarchy with k_obs and Ea for 9 sugars; triplicates.",
-          "raw_line": "5. `Maillard & van Boekel (1992)` — Food Chemistry — full reactivity hierarchy with k_obs and Ea for 9 sugars; triplicates. 7/8."
-        }
-      ],
-      "registry_id": "maillard_van_boekel_1992_sugar_reactivity_hierarchy",
-      "runtime_artifact_count": 1
     },
     {
       "citation": "Matoba, Terao & Fujimaki (1988)",
@@ -5697,6 +5628,29 @@
         }
       ],
       "registry_id": "jian_2012_ascorbic_ethanolic_degradation",
+      "runtime_artifact_count": 1
+    },
+    {
+      "citation": "van Boekel (2001)",
+      "score": "8/8",
+      "score_value": 8,
+      "status": "RUNTIME_BOUND",
+      "occurrence_count": 1,
+      "files": [
+        "07_reducing_sugars.md"
+      ],
+      "descriptions": [
+        "Nahrung/Food — full kinetic review with k_obs and Ea for 9 sugars; Arrhenius fits; triplicates."
+      ],
+      "occurrences": [
+        {
+          "file": "07_reducing_sugars.md",
+          "line": 737,
+          "description": "Nahrung/Food — kinetic review, k_obs and Ea for 9 sugars.",
+          "raw_line": "van Boekel (2001) — Nahrung/Food — kinetic aspects of the Maillard reaction, critical review."
+        }
+      ],
+      "registry_id": "van_boekel_2001_maillard_kinetics_review",
       "runtime_artifact_count": 1
     }
   ]

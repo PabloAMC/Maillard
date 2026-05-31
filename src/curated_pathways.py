@@ -13,6 +13,13 @@ GLYCINE = _species("glycine", "NCC(=O)O")
 CYSTEINE = _species("L-cysteine", "NC(CS)C(=O)O")
 LEUCINE = _species("L-leucine", "CC(C)CC(N)C(=O)O")
 LYSINE = _species("L-lysine", "NCCCCC(N)C(=O)O")
+ASPARAGINE = _species("L-asparagine", "NC(=O)CC(N)C(=O)O")
+ACRYLAMIDE = _species("acrylamide", "C=CC(=O)N")
+MFT = _species("2-methyl-3-furanthiol", "Cc1c(S)cco1")
+MFT_DIMER = _species("bis(2-methyl-3-furyl) disulfide", "Cc1c(SSc2ccoc2C)cco1")
+DIMETHYLPYRAZINE_25 = _species("2,5-dimethylpyrazine", "Cc1cnc(C)cn1")
+GLUCOSE_ASN_SCHIFF = _species("glucose-asparagine-Schiff-base", "OCC(O)C(O)C(O)C(O)/C=N/C(CC(N)=O)C(=O)O")
+GLUCOSE_REMAINDER = _species("sugar-derived-amine-fragment", "NCC(O)C(O)C(O)C(O)C=O")
 WATER = _species("water", "O")
 CO2 = _species("CO2", "O=C=O")
 H2S = _species("H2S", "S")
@@ -57,11 +64,14 @@ PATHWAYS = {
     ],
     "B_Strecker_Leu": [
         _step([PYRUVALDEHYDE, LEUCINE], [METHYLBUTANAL_3, AMINOACETONE, CO2], "Strecker_Degradation"),
+        _step([AMINOACETONE, AMINOACETONE], [DIMETHYLPYRAZINE_25, WATER, WATER, HYDROGEN], "Strecker_Degradation"),
     ],
     "C_S_Maillard_FFT": [
         _step([CYSTEINE, WATER], [ACETALDEHYDE, H2S, NH3, CO2], "Cysteine_Degradation"),
         _step([RIBOSE], [FURFURAL, WATER, WATER, WATER], "Sugar_Dehydration"),
         _step([FURFURAL, H2S, HYDROGEN], [FFT, WATER], "Thiol_Addition"),
+        _step([DEOXYOSONE_3, H2S, HYDROGEN], [MFT, WATER, WATER, WATER], "Thiol_Addition"),
+        _step([MFT, MFT], [MFT_DIMER, HYDROGEN], "Thiol_Addition"),
     ],
     "D_Offflavour_Trapping_Gly": [
         _step([HEXANAL, GLYCINE], [HEXANAL_GLY_SCHIFF, WATER], "Lipid_Schiff_Base"),
@@ -72,6 +82,10 @@ PATHWAYS = {
     "E_DHA_Competition": [
         _step([CYSTEINE], [DHA, H2S], "Beta_Elimination"),
         _step([DHA, LYSINE], [LAL], "DHA_Crosslinking"),
+    ],
+    "F_Safety_Acrylamide": [
+        _step([GLUCOSE, ASPARAGINE], [GLUCOSE_ASN_SCHIFF, WATER], "Schiff_Base_Formation"),
+        _step([GLUCOSE_ASN_SCHIFF], [ACRYLAMIDE, CO2, GLUCOSE_REMAINDER], "Beta_Elimination"),
     ],
 }
 
@@ -119,6 +133,12 @@ PATHWAY_METADATA = {
         "consumes": ["L-cysteine", "L-lysine"],
         "toxicity_flag": "Lysinoalanine (LAL)",
     },
+    "F_Safety_Acrylamide": {
+        "target": ACRYLAMIDE,
+        "type": "competing",
+        "consumes": ["D-glucose", "L-asparagine"],
+        "toxicity_flag": "Acrylamide",
+    },
 }
 
 
@@ -161,15 +181,16 @@ def _wire_computational_priors():
             if e.get("uncertainty_kj") is not None:
                 pe_schiff_base_unc = float(e["uncertainty_kj"]) / 4.184
 
-    glucose_ea_kcal = 25.33
-    ribose_ea_kcal = 27.25
+    glucose_ea_kcal = 25.33  # 106 kJ/mol — van Boekel (2001) fallback
+    ribose_ea_kcal = 27.25   # 114 kJ/mol — van Boekel (2001) fallback
     for e in priors_data.get("carbonyl_donor_priors", []):
-        if e.get("id") == "maillard_van_boekel_1992_sugar_reactivity_hierarchy_v1":
+        if e.get("id") == "van_boekel_2001_maillard_kinetics_review_v1":
             ea_by_sugar = e.get("ea_kj_per_mol_by_sugar", {})
             if "glucose" in ea_by_sugar:
                 glucose_ea_kcal = float(ea_by_sugar["glucose"]) / 4.184
             if "ribose" in ea_by_sugar:
                 ribose_ea_kcal = float(ea_by_sugar["ribose"]) / 4.184
+            break
 
     pe_amadori_barrier = 19.81
     pe_amadori_unc = 5.0

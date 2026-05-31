@@ -46,7 +46,6 @@ def test_family_registry_returns_family_specific_prior_and_reference_entries():
     sulfur_refs = list(iter_flavor_reference_entries(family="03"))
     nucleotide_panel = list(iter_matrix_decision_panel_entries(family="04"))
 
-    assert any(row["id"] == "maillard_van_boekel_1992_sugar_reactivity_hierarchy_v1" for row in donor_priors)
     assert any(row["id"] == "blank_1997_rhamnose_proline_hdmf_uplift_v1" for row in donor_priors)
     assert any(row["id"] == "bhandari_1998_beta_cd_aldehyde_binding_v1" for row in guardrail_priors)
     assert any(row["id"] == "cerny_2007_thiamine_split_v1" for row in thiamine_priors)
