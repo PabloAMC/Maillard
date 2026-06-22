@@ -2,56 +2,65 @@
 
 > **Backup of the previous long-form roadmap**: [tasks/.todo.md.bak](.todo.md.bak). Closed sprints have full review blocks preserved there and in git history; this file is the live working surface only.
 
-## Priority order (set 2026-05-23 after literature-first realignment)
+## Priority order (set 2026-05-13 after the Tier A audit)
 
 > **Operating constraint (user, 2026-05-13):** *"Do not complicate the tool more than it can do really really well."* Every new lane below has a stop-the-line gate that prevents adding a feature that the kernel cannot back with calibrated evidence.
 
-1. **ACTIVE SPRINT: S25 — Phased & QC-Gated Literature Ingestion** — Systematically ingest the 99 backlog references from `deep_research_backlog.json` to ground our kinetics and matrices in empirical data. Ingested in 3 family-based chunks with strict QC validation steps to avoid poor quality data.
-2. **PARKED — Targeted Literature Search for Unresolved Gaps** — Cast a targeted net for missing matrix benchmarks (`ppi_meaty_positive_matrix_benchmark`, `spi_meaty_positive_matrix_benchmark`, and `meaty_off_flavour_safety_tradeoff_panel`) after Phase 1 backlog ingestion completes.
-3. **PARKED — Triangulated Barrier Strategy for Families 11–15** (gated by observables, parked pending literature ingestion).
-4. **PARKED — pyGSM integration & global barrier run** (gated by observables, parked).
-5. **PARKED — `pe_amadori` multi-step DFT closure** (parked, heavy compute).
-6. **MAINTENANCE BACKLOG** — `2026-04-17 DFT Ladder Bulletproofing` (3/4 items remaining) + `2026-04-13 Architecture Hardening`.
-7. **STRATEGIC BACKLOG** — `S14 monolith decomposition`, `S19 web interface`. Defer.
-8. **DONE / SUPERSEDED** — see [Recent closures](#recent-closures).
+1. **CLOSED (2026-06-22) — S27 Matrix lipid-oxidation recalibration (Workstream A) — landed as a refactor + a KEY NEGATIVE RESULT.** Goal was to close the matrix lipid-aldehyde over-prediction driving the external hold-out (0/8, median 36x). Root cause traced: hydroperoxide kinetics in `src/lipid_oxidation.py` are an unbounded Arrhenius × time model; the per-process_state matrix calibration registry pins in-panel to measured (in-panel reads 1.0x), but external-only hold-out hits unpinned process_states and the raw load leaks through (roasted-pea 160C 2748x, SPI/WG HME 24–748x).
+   - **Finding**: A1 saturation CANNOT fix the hold-out without regressing the headline. In-panel (progress ~0.06 @100C/45min) and hold-out (HME ~0.07) share the same kinetic regime; only roasted-160C is true extrapolation. A cap strong enough to bend the hold-out perturbs in-panel trace lipid points (Hexanal/Nonanal ~2e-4 ppb, near-zero-width MC CIs) → 37/48 dropped to 31/48 even at c=12. ⇒ the gap is a per-(matrix, process_state) **calibration** problem, not a kinetic-shape problem.
+   - **Shipped**: A1 saturation mechanism implemented but **DISABLED by default** (`max_conversion_fraction: null`) — default path is byte-identical to pre-S27, headline stays **37/48**, hold-out unchanged at 36.02x. A2 (externalize scale/Ea/branching/profiles to `data/lit/lipid_oxidation_calibration.json`, per-matrix `LipidProfile`, shared kinetics core) + A3 (shared core, per-stage branching retained) landed as a behavior-preserving refactor. Harnesses `scripts/diagnose_lipid_bias.py` + `scripts/calibrate_lipid_oxidation.py`; tests `tests/scientific/test_lipid_oxidation_saturation.py` (48 passing in the lipid/matrix/projection set). Gate honored: no invented numbers; 4 `external_validation/` bundles stayed frozen.
+   - **Next (Workstream B, NOT YET DONE)**: process-state-aware uncertainty — detect uncalibrated process_states and widen CI / lower trust there instead of emitting confident wrong point predictions; size matrix observable sigma from residuals; tier barrier sigma by provenance. This is the real lever for hold-out coverage. Plus curation (the original #4 lane) for high-T/extrusion anchors.
+2. **NO OTHER ACTIVE SPRINT** — last closures: `2026-05-13 CRO send-to-lab checklist + analytical_context` (unit suite 654/1) and `2026-05-13 DFT Ladder Bulletproofing` (unit suite 657/1).
+3. **DEFERRED (gate before doing) — S25 Tier A.3 — Formulation-tweak recommender.** Promising but risks overpromising: a one-shot grid sweep over `±cysteine`, `±ribose`, `±lipid`, `±pH`, `±temp` would feel like a recipe optimizer when the underlying kinetics are still calibrated against ≤48 benchmark targets. **Gate**: ship only after a scientist asks for it AND we can pin a reproducibility test that shows the top-3 tweaks come back with non-overlapping 90 % CIs on the meaty axis. Until then the existing `--report` already tells them which precursor is rate-limiting (`bottleneck_precursor`).
+4. **SUPERSEDED by S27 (2026-06-22) — S26 Tier A.1 — Lipid-oxidation external anchor.** Was PARKED as a curation-only task; the model-side recalibration is now in progress under S27 above. Curation gate still stands for any NEW hold-out anchor: do not invent numbers; the existing 4 `external_validation/` bundles remain the frozen test set.
+5. **PARKED — `pe_amadori` multi-step DFT closure**. Real chemistry win but heavy compute; pick up once a scientist actually asks for that barrier (or once `next-experiment` ranks it into the top-3).
+6. **MAINTENANCE BACKLOG** — `2026-04-17 DFT Ladder Bulletproofing` (3/4 items remaining) + `2026-04-13 Architecture Hardening`. Cheap, behavior-preserving; pick up between sprint lanes.
+7. **GATED — observable-first** — `2026-04-22 Triangulated Barrier Strategy` and `2026-04-19 pyGSM`. PAUSED until ≥1 wet-lab observable for Families 11–15 lands via `maillard ingest`. Note: the live top recommendation is still `cys_glucose_150C_Farmer1999 :: 2-methyl-3-furanthiol` (VoI 7.70).
+8. **STRATEGIC BACKLOG** — `S14 monolith decomposition`, `S19 web interface`. Defer.
+9. **DONE / SUPERSEDED** — see [Recent closures](#recent-closures).
 
 ---
 
-## Active Sprint — 2026-05-23 S25 — Phased & QC-Gated Literature Ingestion
+## Closed Sprint — 2026-05-13 S24 Tier A.2 — Sensory readout panel
 
-**Branch (proposed)**: `s25-literature-ingestion`. **TL;DR**: Ground the model in empirical data by ingesting the 99 backlog references from `deep_research_backlog.json` in three QC-gated chunks.
+**Branch (proposed)**: `s24-sensory-readout`. **TL;DR**: Translate the kernel's per-compound `predicted_p5/p50/p95` ppb into Odour Activity Values (OAV = predicted / odour_threshold) and roll them into three axes (`meaty`, `off_note`, `safety`) using the existing keyword vocabulary in [src/experiment_value.py](src/experiment_value.py). Add a `## 8. Sensory readout` block to `report.md` and per-formulation in `comparison.md`. Additive only: zero changes to the kinetic kernel, the recommender, or the projection layer.
 
-### QC Validation checklist per reference (The "Gate")
-1. **Extraction Validation**: Extract temperature, duration, pH, and matrix details. Confirm quantification method (GC-MS, SAFE, SIDA) and unit conversions (ppb/ppm). Verify physical constraints.
-2. **Registry Mapping**: Encode under [data/lit/benchmark_intake_registry.json](data/lit/benchmark_intake_registry.json). Ensure unique IDs and non-colliding matrix families.
-3. **Payload Generation**: Create/update corresponding computational priors or payloads under `data/lit/`.
-4. **Verification**: Run `pytest tests/unit -q` and `python -m src.literature_learning_loop` inside Docker. Ensure no calibration inflation.
+### Why this slice (and why nothing else from Tier A this sprint)
+A scientist looks at the report and sees `2-methyl-3-furanthiol predicted_p50 = 0.42 ppb` and has to mentally divide by the odour threshold to know whether it's perceptible. We already curate ODT for every relevant compound (`data/species/desirable_targets.yml`, `off_flavour_targets.yml`) and `load_compound_specs()` in [src/experiment_value.py](src/experiment_value.py) already exposes them. This is a 1-day translation layer with high scientist value and zero new science. A.3 (tweak recommender) and A.1 (lipid-oxidation anchor) were audited but are **explicitly out of scope** — see Priority order #2 and #3 above for the gates.
 
-### Lane S25-A: Phase 1 — Chunk 1 Ingestion: Core & Matrix Basics (27 items)
-- [x] A.1 Families `01` (Core - completed), `02` (Lipid Oxidation - completed), `06` (Alternative Proteins - completed), `07` (Reducing Sugars - completed).
-- [x] A.2 Extract, QC-validate, and encode Chunk 1 references into `benchmark_intake_registry.json` (27/27 references completed).
-- [x] A.3 Generate computational priors and payloads for Chunk 1 (27/27 references completed).
-- [x] A.4 Validate Chunk 1 via Docker tests and literature learning loop (Families 01, 02, 06, 07 validated).
+### Lane S24-A — `src/sensory_readout.py`
+- [x] A.1 `compute_oav(predicted_ppb, odour_threshold_ug_per_kg)` returns `None` when ODT is missing/non-positive/NaN; clamps negative predictions to 0.
+- [x] A.2 `roll_up_axes(rows)` keyed by `meaty | off_note | safety` using the same keyword classifiers as `_suggest_template`. Excludes compounds without ODT from `max_oav` / `above_threshold_count` but counts them in `compounds_without_odt`.
+- [x] A.3 `build_sensory_readout(result)` returns per-compound OAV (with p5 / p50 / p95) + axis roll-ups + a one-line headline.
 
-### Lane S25-B: Phase 2 — Chunk 2 Ingestion: Flavor, Degradation & Fermentation (33 items)
-- [x] B.1 Families `08` (Off-notes), `09` (Carbohydrate degradation), `10` (Fermentation), `11` (Lipid-Maillard crosstalk).
-- [x] B.2 Extract, QC-validate, and encode Chunk 2 references into `benchmark_intake_registry.json`.
-- [x] B.3 Generate computational priors and payloads for Chunk 2.
-- [x] B.4 Validate Chunk 2 via Docker tests and literature learning loop.
+### Lane S24-B — Report wiring
+- [x] B.1 `_render_sensory_readout_markdown(result, *, heading="## 8. Sensory readout")` in [src/reporting.py](src/reporting.py) emits an axis roll-up table and a per-compound OAV table sorted by descending OAV (compounds without ODT pushed to the bottom).
+- [x] B.2 Called from `generate_report` immediately after `_render_next_experiment_markdown`.
+- [x] B.3 Called inside the per-formulation loop in `generate_comparison_report` with `heading=f"### {res.name} — sensory readout"` so the heading hierarchy stays sane.
+- [x] B.4 Graceful degradation: empty `predicted_ppb` renders a one-line stub ("nothing to score"); a missing-ODT inventory note is emitted when at least one compound has no curated threshold.
 
-### Lane S25-C: Phase 3 — Chunk 3 Ingestion: Advanced Caps, Damage & Polymers (41 items)
-- [x] C.1 Families `03` (Thiamine), `04` (Nucleotides), `05` (Glutathione), `12` (Protein damage), `13` (Polyphenols), `14` (Ascorbic acid), `15` (Phospholipids), `16` (Melanoidins).
-- [x] C.2 Extract, QC-validate, and encode Chunk 3 references into `benchmark_intake_registry.json`.
-- [x] C.3 Generate computational priors and payloads for Chunk 3.
-- [x] C.4 Validate Chunk 3 via Docker tests and literature learning loop.
+### Lane S24-C — Tests
+- [x] C.1 New [tests/unit/test_sensory_readout.py](tests/unit/test_sensory_readout.py) covers `compute_oav` math + `None` paths, axis classifier (incl. safety > meaty > off-note precedence), axis roll-up with mixed ODT presence, `build_sensory_readout` against a fixture `FormulationResult` with curated specs (MFT/Hexanal/Acrylamide), and the empty-prediction path.
+- [x] C.2 [tests/unit/test_usability_reports.py](tests/unit/test_usability_reports.py) asserts `## 8. Sensory readout` appears after `## 7.` in `report.md` and that `comparison.md` carries a per-formulation `— sensory readout` heading.
+- [x] C.3 `pytest tests/unit -q` in Docker → **651 passed, 1 skipped, 2 warnings** in 285.89s (was 641/1, +10 new).
 
-### Lane S25-D: Phase 4 — Targeted Literature Search for Key Matrix Gaps
-- [x] D.1 Search literature databases (OpenAlex, Europe PMC, and web engines) for `ppi_meaty_positive_matrix_benchmark`, `spi_meaty_positive_matrix_benchmark`, and `meaty_off_flavour_safety_tradeoff_panel` (completed; confirmed no single literature package closes these combined matrix-aroma-safety contracts).
-- [x] D.2 QC-validate and ingest matching references (none found to ingest; confirmed as genuine structural literature gaps requiring wet-lab measurements).
+### Out of scope this sprint (held to)
+- A.3 (formulation-tweak recommender). A.1 (lipid-oxidation anchor curation).
+- New keywords / new axis classifiers (e.g. green, fatty, roasted). Punt to a real scientist request.
+- Per-axis weighting / sensory PCA. Same gate.
+- Any change to the kinetic kernel, projection layer, or VoI ranker.
 
-### Lane S25-E: Phase 5 — Re-evaluation & Roadmap Review
-- [x] E.1 Review updated `literature_learning_loop.md` and `family_deviation_audit.md` (completed; verified error tails are within expected tolerances, and literature ingestion backlog has been successfully processed).
-- [x] E.2 Decide next strategic steps (completed; determined that literature grounding is complete, and the next priority is transitioning to primary matrix and extrusion wet-lab data collection as outlined in `structural_unlock_triage.py`).
+### Review
+- **Shipped**: [src/sensory_readout.py](src/sensory_readout.py) (`compute_oav`, `classify_axis`, `roll_up_axes`, `build_sensory_readout`); `## 8. Sensory readout` in `generate_report` and a per-formulation block in `generate_comparison_report`; 10 new unit tests; full unit suite green at 651/1.
+- **Scientist value**: every report now states OAV with explicit p5/p95 bounds for every predicted compound that has a curated odour threshold, plus a three-line axis roll-up so a scientist sees "meaty above threshold; off-notes below threshold; safety clear" without doing arithmetic.
+- **Held the line**: Tier A.3 (tweak recommender) and A.1 (lipid-oxidation anchor) were not shipped despite being on the audit list — both have explicit gates in Priority order #2 and #3 of this file.
+- **Follow-up trigger**: open S25 (A.3) only when a scientist asks for it AND a reproducibility test for non-overlapping CIs across top-3 tweaks is in place. Open S26 (A.1) only when a real SIDA-grade lipid-oxidation paper is in hand.
+
+---
+
+## Closed Sprint — 2026-05-12 S22 Most-Valuable-Experiment surface
+
+> Closed; full review collapsed into the [Recent closures](#recent-closures) table. Long-form review is preserved in git history and `tasks/.todo.md.bak`.
 
 ---
 
@@ -61,19 +70,27 @@
 
 ---
 
-## Parked — 2026-04-22 Triangulated Barrier Strategy for Families 11–15
+## Active Plan — 2026-04-22 Triangulated Barrier Strategy for Families 11–15
 
-> **STATUS: PARKED pending literature ingestion.** Reactivation criterion: completion of Sprint 25 literature grounding and re-evaluation.
+> **STATUS: GATED — observable-first.** Reactivation criterion: ≥1 wet-lab observable for any of Families 11–15 lands via `maillard ingest`. Order then is **D → C(inventory only) → B → A**. Hard stop: if Vía B (React-OT) yields seeds for ≥2/4 eligible targets and the rest are classified by provenance, Vía A (OA-ReactDiff) is skipped.
 
 **Targets (7):** `hexanal_radical_quench`, `quinone_cys_michael`, `lysinoalanine_crosslink`, `aa_ring_open_dicarbonyl`, `pe_schiff_base`, `pe_amadori`, `asparagine_sugar_explicit_water_cluster`.
 **React-OT eligible (CHON):** `lysinoalanine_crosslink`, `aa_ring_open_dicarbonyl`, `pe_schiff_base`, `asparagine_sugar_explicit_water_cluster`.
 **Provenance matrix already published**: [results/validation/qm_barrier_provenance.md](results/validation/qm_barrier_provenance.md).
 
+### Lanes (collapsed; details in git history of this file)
+- **B (React-OT pilot)** — wrapper [scripts/recover_ts_react_ot_seed.py](scripts/recover_ts_react_ot_seed.py) is in repo; `models/external/react_ot/` has `provenance.json`. Pending: run on the 4 eligible targets when the gate opens.
+- **A (OA-ReactDiff fallback)** — only if B fails on ≥3/4 eligible targets. Not yet installed.
+- **C (wet-lab backlog)** — paralelo, no bloquea. Spec writing only; no experiments without trigger.
+- **D (governance)** — `qm_barrier_provenance.{md,json}` exists; `aa_ring_open_dicarbonyl.refinability_status="stack_limit_reached"` already committed.
+
 ---
 
-## Parked — 2026-04-19 pyGSM integration & global barrier run
+## Active Plan — 2026-04-19 pyGSM integration & global barrier run
 
-> **STATUS: PARKED pending literature ingestion.**
+> **STATUS: ⏸ PAUSED — gated by observables.** Same gate as above. The Sella + GFN2 + r2SCAN/def2-svp stack already failed twice on Family 14; without a benchmark observable a successful pyGSM run still moves nothing in `--report`. Do not start Phase 1.1 until the gate opens.
+
+7 targets, 4 phases (backend → 3-target validation → 7-target diagnosis → global run). Detail preserved in git history; reactivate only after the gate opens.
 
 ---
 
