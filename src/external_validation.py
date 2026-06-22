@@ -829,11 +829,17 @@ def build_external_validation_report(
     from src.uncertainty_propagation import default_priors, propagate_benchmarks
 
     holdout_files = [Path(item) for item in (benchmark_files or get_holdout_benchmark_files())]
+    # S27 Workstream B: the hold-out bundles are evidence_class=external_validation_only,
+    # i.e. UNCALIBRATED by construction — their matrix process-states are not pinned by
+    # the calibration registry. Use the wide structural-ignorance observable priors so
+    # the reported CIs reflect the model's genuine (large) uncertainty on these out-of-
+    # calibration predictions rather than the tight in-registry priors. The sigmas are a
+    # stated physical prior, not fitted to the measured hold-out values.
     envelope_payload = propagate_benchmarks(
         benchmark_files=holdout_files,
         n_samples=n_samples,
         seed=seed,
-        priors=default_priors(),
+        priors=default_priors(matrix_tier="uncalibrated"),
         target_tag=target_tag,
         execution_paths=("free_precursor", "matrix_precursor_augmented", "matrix_only"),
     )

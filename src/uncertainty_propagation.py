@@ -74,11 +74,30 @@ DEFAULT_OBSERVABLE_PRIORS: Dict[str, float] = {
     "matrix_retention": 0.20,
 }
 
-# Hard clamps on the sampled multipliers — guard against absurd MC tails.
+# S27 Workstream B — observable priors for UNCALIBRATED matrix process-states.
+# When a matrix prediction is NOT pinned by the per-(matrix, process_state)
+# calibration registry (e.g. roasting, HME extrusion, any novel formulation), the
+# headspace/retention translation is genuinely uncertain by ~1-2 orders of
+# magnitude: protein-volatile binding, denaturation, and volatile stripping under
+# severe processing all vary widely and are unmeasured for these conditions. These
+# sigmas are a STRUCTURAL IGNORANCE PRIOR stating that absence-of-calibration =>
+# large uncertainty. They are deliberately set from physical reasoning, NOT fitted
+# to the external hold-out values (the 4 hold-out bundles remain frozen); the
+# resulting coverage is reported as-is, not tuned to a target.
+DEFAULT_UNCALIBRATED_OBSERVABLE_PRIORS: Dict[str, float] = {
+    "matrix_headspace": 2.0,   # ln-sigma; 90% CI ~ +/- 1.43 dex (~27x)
+    "henry_kaw": 1.0,
+    "matrix_retention": 0.7,
+}
+
+# Hard clamps on the sampled multipliers — guard against absurd MC tails. The
+# upper bounds are wide enough that the calibrated priors (sigma 0.2-0.3) never
+# reach them in practice (so the in-panel run is unaffected), while the
+# uncalibrated tier above can still express its intended width.
 _OBSERVABLE_CLAMP: Dict[str, Tuple[float, float]] = {
-    "matrix_headspace": (0.1, 10.0),
-    "henry_kaw": (0.1, 10.0),
-    "matrix_retention": (0.05, 1.0),  # retention factor itself is bounded [0.01, 1]
+    "matrix_headspace": (0.01, 100.0),
+    "henry_kaw": (0.01, 100.0),
+    "matrix_retention": (0.01, 1.0),  # retention factor itself is bounded [0.01, 1]
 }
 
 
@@ -270,7 +289,11 @@ def _observable_multipliers(
         _matrix_module.resolve_compound_matrix_retention = original_retention  # type: ignore[assignment]
 
 
-def default_priors(*, include_observable: bool = True) -> List[ParameterPrior]:
+def default_priors(
+    *,
+    include_observable: bool = True,
+    matrix_tier: str = "calibrated",
+) -> List[ParameterPrior]:
     """Build the default prior set, overriding sigmas where qm_barrier_provenance
     has narrowed the bound for a specific anchor target.
 
@@ -280,6 +303,13 @@ def default_priors(*, include_observable: bool = True) -> List[ParameterPrior]:
     bounded-calibration tier. When ``include_observable`` is True we also
     add lognormal priors over the matrix-headspace, Henry, and matrix-
     retention multipliers (S20.4).
+
+    ``matrix_tier`` (S27 Workstream B) selects the observable-multiplier sigmas:
+    ``"calibrated"`` (default) uses the tight in-registry priors and is unchanged
+    from prior behaviour; ``"uncalibrated"`` uses the wide structural-ignorance
+    priors for matrix predictions that are not pinned by the calibration registry
+    (the external hold-out is uncalibrated by construction). Barrier priors are
+    identical in both tiers — only the matrix observables widen.
     """
 
     priors: Dict[str, ParameterPrior] = {
@@ -296,12 +326,20 @@ def default_priors(*, include_observable: bool = True) -> List[ParameterPrior]:
 
     result: List[ParameterPrior] = list(priors.values())
     if include_observable:
-        for key, sigma in DEFAULT_OBSERVABLE_PRIORS.items():
+        if matrix_tier == "uncalibrated":
+            observable_priors = DEFAULT_UNCALIBRATED_OBSERVABLE_PRIORS
+            source = "observable_uncalibrated_matrix"
+        elif matrix_tier == "calibrated":
+            observable_priors = DEFAULT_OBSERVABLE_PRIORS
+            source = "observable_multiplier_default"
+        else:
+            raise ValueError(f"Unknown matrix_tier: {matrix_tier!r} (expected 'calibrated' or 'uncalibrated')")
+        for key, sigma in observable_priors.items():
             result.append(
                 ParameterPrior(
                     key=key,
                     sigma_kcal=sigma,
-                    source="observable_multiplier_default",
+                    source=source,
                     kind="observable",
                 )
             )

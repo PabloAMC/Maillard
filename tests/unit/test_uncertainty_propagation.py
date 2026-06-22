@@ -138,3 +138,67 @@ def test_observable_multipliers_scale_headspace_factor():
     )
     assert scaled == pytest.approx(baseline * 2.0)
     assert restored == pytest.approx(baseline)
+
+
+# --- S27 Workstream B: process-state-aware (uncalibrated) matrix observable priors ---
+
+from src.uncertainty_propagation import (  # noqa: E402
+    DEFAULT_UNCALIBRATED_OBSERVABLE_PRIORS,
+    _OBSERVABLE_CLAMP,
+    sample_offset_vectors,
+)
+
+
+def _observables(priors):
+    return {p.key: p.sigma_kcal for p in priors if p.kind == "observable"}
+
+
+def test_calibrated_tier_is_unchanged_default():
+    # The default tier must keep the original tight observable sigmas so the
+    # in-panel prediction-uncertainty run is byte-identical.
+    obs = _observables(default_priors())
+    assert obs == dict(DEFAULT_OBSERVABLE_PRIORS)
+    assert _observables(default_priors(matrix_tier="calibrated")) == dict(DEFAULT_OBSERVABLE_PRIORS)
+
+
+def test_uncalibrated_tier_widens_only_observables():
+    cal = default_priors(matrix_tier="calibrated")
+    unc = default_priors(matrix_tier="uncalibrated")
+    # Observables widen...
+    assert _observables(unc) == dict(DEFAULT_UNCALIBRATED_OBSERVABLE_PRIORS)
+    for key in DEFAULT_OBSERVABLE_PRIORS:
+        assert _observables(unc)[key] > _observables(cal)[key]
+    # ...barriers are identical between tiers.
+    bar_cal = {p.key: p.sigma_kcal for p in cal if p.kind == "barrier"}
+    bar_unc = {p.key: p.sigma_kcal for p in unc if p.kind == "barrier"}
+    assert bar_cal == bar_unc
+
+
+def test_unknown_matrix_tier_raises():
+    with pytest.raises(ValueError):
+        default_priors(matrix_tier="bogus")
+
+
+def test_widened_clamp_is_inert_for_calibrated_sampling():
+    # The clamp upper/lower bounds were widened to let the uncalibrated tier
+    # express its width. This must NOT change calibrated sampling: at sigma 0.2-0.3
+    # no sample should reach even the OLD bounds (0.1, 10.0) / (0.05, 1.0), so the
+    # in-panel run is unaffected by the clamp change.
+    samples = sample_offset_vectors(default_priors(matrix_tier="calibrated"), n=2000, seed=0)
+    hs = [s["observable"]["matrix_headspace"] for s in samples]
+    kaw = [s["observable"]["henry_kaw"] for s in samples]
+    ret = [s["observable"]["matrix_retention"] for s in samples]
+    assert min(hs) > 0.1 and max(hs) < 10.0
+    assert min(kaw) > 0.1 and max(kaw) < 10.0
+    assert min(ret) > 0.05 and max(ret) <= 1.0
+
+
+def test_uncalibrated_sampling_actually_spans_wider_range():
+    samples = sample_offset_vectors(default_priors(matrix_tier="uncalibrated"), n=2000, seed=0)
+    hs = [s["observable"]["matrix_headspace"] for s in samples]
+    # With ln-sigma 2.0 and the widened clamp, the headspace multiplier must reach
+    # well beyond the old +/-10x band in at least one tail.
+    assert max(hs) > 15.0 or min(hs) < 0.05
+    # Retention stays physically bounded at <= 1.0.
+    ret = [s["observable"]["matrix_retention"] for s in samples]
+    assert max(ret) <= 1.0
