@@ -3,7 +3,7 @@
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
 [![Docker](https://img.shields.io/badge/docker-recommended-blue.svg)](https://www.docker.com/)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Calibration: 39/48 inside 90% CI](https://img.shields.io/badge/calibration-39%2F48%20inside%2090%25%20CI-brightgreen.svg)](results/validation/prediction_uncertainty.md)
+[![Calibration: 37/48 inside 90% CI](https://img.shields.io/badge/calibration-37%2F48%20inside%2090%25%20CI-brightgreen.svg)](results/validation/prediction_uncertainty.md)
 [![16 reaction families](https://img.shields.io/badge/chemistry-16%20reaction%20families-blueviolet.svg)](data/lit/family_ingestion_plan.json)
 
 **Maillard** is a computational screening framework that predicts which combinations of
@@ -89,7 +89,7 @@ and provenance metadata linking every number to its literature source.
 
 We publish four orthogonal evidence surfaces rather than a single accuracy number.
 
-### Headline: **39 out of 48** matched literature data points fall within the model's 90% confidence interval
+### Headline: **37 out of 48** matched literature data points fall within the model's 90% confidence interval
 
 <table>
 <tr>
@@ -102,14 +102,15 @@ We publish four orthogonal evidence surfaces rather than a single accuracy numbe
 | Surface                       | Question                                                                 | Status                                                       |
 | ----------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------ |
 | **Parity**              | On matched systems, how close is predicted ppb to measured?              | 16 benchmarks · 48 matched rows                             |
-| **External hold-out**   | On systems excluded from calibration, does the frozen model still cover? | 4 bundles ·**0/8 inside 90% CI** · median 36× error |
+| **External hold-out**   | On systems excluded from calibration, does the frozen model still cover? | 4 bundles ·**3/8 inside 90% CI** · median 34× error |
 | **Coverage**            | Which reaction families are wired and calibrated?                        | 16/16 wired · 7 with DFT anchors                            |
-| **Experiment priority** | Where would the next experiment improve confidence the most?             | 9/48 cells outside 90% CI — all queued                      |
+| **Experiment priority** | Where would the next experiment improve confidence the most?             | 11/48 cells outside 90% CI — all queued                     |
 
-> **On the external hold-out (0/8):** These 8 data points are intentionally excluded from
-> calibration. The large error (median 36×) quantifies how much structured plant-protein
-> trapping is *not yet* captured by free-precursor kinetics alone. The gap heatmap converts
-> each miss into a ranked, bookable wet-lab request.
+> **On the external hold-out (3/8):** These 8 data points are intentionally excluded from
+> calibration. With process-state-aware uncertainty, the model now honestly covers the
+> moderate misses (ambient pea/PPI, ≤~12×); the 5 still outside are extreme-processing cases
+> (HME extrusion, roasting) that remain genuine misses rather than being hidden behind an
+> over-wide CI. The gap heatmap converts each miss into a ranked, bookable wet-lab request.
 
 ### When to trust the predictions
 
