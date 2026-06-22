@@ -67,10 +67,14 @@ def _compute_meaty_quality_constraint(predicted_ppb: Dict[str, float]) -> Tuple[
     return ratio, penalty
 
 
-def build_formulation_uncertainty_envelopes(predicted_ppb: Dict[str, float]) -> Dict[str, Dict[str, object]]:
+def build_formulation_uncertainty_envelopes(
+    predicted_ppb: Dict[str, float],
+    *,
+    uncalibrated: bool = False,
+) -> Dict[str, Dict[str, object]]:
     from src.uncertainty_propagation import build_formulation_uncertainty_envelopes as _build_formulation_uncertainty_envelopes
 
-    return _build_formulation_uncertainty_envelopes(predicted_ppb)
+    return _build_formulation_uncertainty_envelopes(predicted_ppb, uncalibrated=uncalibrated)
 
 @dataclass
 class UncertaintyEnvelope:
@@ -622,6 +626,20 @@ class MaillardPipeline:
                 }
             )
 
+            # Compute confidence/scope once so the runtime uncertainty envelopes can
+            # honestly widen for out-of-calibration formulations (S27 followup #1).
+            confidence_metadata = _build_confidence_metadata(
+                extrusion_process=extrusion_process,
+                protein_type=protein_type,
+                process_state=process_state,
+                temperature_celsius=cond.effective_temperature_celsius,
+                time_minutes=form.get("time_minutes", 60.0),
+                pH=cond.pH,
+            )
+            formulation_uncalibrated = not bool(
+                confidence_metadata.get("scope_assessment", {}).get("in_scope", True)
+            )
+
             result = FormulationResult(
                 name=name,
                 target_score=t_score,
@@ -638,20 +656,15 @@ class MaillardPipeline:
                 predicted_proxy_ppb=rec_result.get("predicted_proxy_ppb", {}),
                 uncertainty_envelopes={
                     compound: UncertaintyEnvelope(**row)
-                    for compound, row in build_formulation_uncertainty_envelopes(conc_map).items()
+                    for compound, row in build_formulation_uncertainty_envelopes(
+                        conc_map, uncalibrated=formulation_uncalibrated
+                    ).items()
                 },
                 projection_metadata=rec_result.get("projection_metadata", {}),
                 avg_uncertainty=avg_unc,
                 effective_denaturation_state=denaturation_state,
                 matrix_explainability=matrix_explainability,
-                confidence_metadata=_build_confidence_metadata(
-                    extrusion_process=extrusion_process,
-                    protein_type=protein_type,
-                    process_state=process_state,
-                    temperature_celsius=cond.effective_temperature_celsius,
-                    time_minutes=form.get("time_minutes", 60.0),
-                    pH=cond.pH,
-                ),
+                confidence_metadata=confidence_metadata,
                 targets=rec_result.get("targets", []),
                 bottleneck_precursor=rec_result["metrics"].get("bottleneck", {}).get("precursor", "none"),
                 bottleneck_severity=rec_result["metrics"].get("bottleneck", {}).get("severity", 0.0),

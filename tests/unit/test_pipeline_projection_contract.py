@@ -37,7 +37,7 @@ def test_pipeline_preserves_proxy_and_projection_metadata(monkeypatch):
     )
     monkeypatch.setattr(
         "src.pipeline.build_formulation_uncertainty_envelopes",
-        lambda predicted_ppb: {
+        lambda predicted_ppb, **kwargs: {
             "furfural": {
                 "compound": "furfural",
                 "predicted_ppb": 48.0,

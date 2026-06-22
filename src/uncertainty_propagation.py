@@ -90,6 +90,15 @@ DEFAULT_UNCALIBRATED_OBSERVABLE_PRIORS: Dict[str, float] = {
     "matrix_retention": 0.7,
 }
 
+# Multiplicative 90% CI band implied by the dominant uncalibrated matrix sigma
+# above (matrix_headspace ln-sigma 2.0). Used by the RUNTIME report path to widen
+# a formulation's per-compound envelope when the formulation falls outside the
+# calibration scope, so a user's novel/out-of-registry run shows honestly wide CIs
+# instead of the tight in-panel band. ~[1/27, 27] around the point estimate.
+_UNCALIBRATED_HEADSPACE_SIGMA = DEFAULT_UNCALIBRATED_OBSERVABLE_PRIORS["matrix_headspace"]
+UNCALIBRATED_ENVELOPE_LOWER_RATIO = math.exp(-1.645 * _UNCALIBRATED_HEADSPACE_SIGMA)
+UNCALIBRATED_ENVELOPE_UPPER_RATIO = math.exp(1.645 * _UNCALIBRATED_HEADSPACE_SIGMA)
+
 # Hard clamps on the sampled multipliers — guard against absurd MC tails. The
 # upper bounds are wide enough that the calibrated priors (sigma 0.2-0.3) never
 # reach them in practice (so the in-panel run is unaffected), while the
@@ -188,6 +197,7 @@ def build_formulation_uncertainty_envelopes(
     predicted_ppb: Mapping[str, float],
     *,
     prediction_path: Path | str = PREDICTION_UNCERTAINTY_PATH,
+    uncalibrated: bool = False,
 ) -> Dict[str, Dict[str, Any]]:
     """Map cached benchmark envelopes onto current predicted compounds.
 
@@ -195,6 +205,14 @@ def build_formulation_uncertainty_envelopes(
     than rerunning Monte Carlo propagation. Each formulation compound receives a
     benchmark-derived interval only when that compound already appears in the
     uncertainty panel.
+
+    ``uncalibrated`` (S27 followup #1): when True, the formulation falls outside
+    the calibration scope (out-of-registry matrix/process_state), so the tight
+    in-panel band understates the true uncertainty. Each compound's envelope is
+    widened to at least the structural-ignorance band (~[1/27, 27]x), matching the
+    ``matrix_tier="uncalibrated"`` prior used for the external hold-out, and the
+    envelope_source is tagged accordingly. In-scope formulations (default) are
+    unchanged.
     """
 
     library = _load_prediction_interval_library(str(Path(prediction_path)))
@@ -214,6 +232,13 @@ def build_formulation_uncertainty_envelopes(
             continue
         lower_ratio = statistics.median(row["lower_ratio"] for row in matches)
         upper_ratio = statistics.median(row["upper_ratio"] for row in matches)
+        source = "prediction_uncertainty"
+        if uncalibrated:
+            # Out-of-calibration: never report a band tighter than the structural
+            # ignorance prior. Widen (never narrow) in both directions.
+            lower_ratio = min(lower_ratio, UNCALIBRATED_ENVELOPE_LOWER_RATIO)
+            upper_ratio = max(upper_ratio, UNCALIBRATED_ENVELOPE_UPPER_RATIO)
+            source = "prediction_uncertainty_uncalibrated"
         envelopes[str(compound)] = {
             "compound": str(compound),
             "predicted_ppb": predicted_value,
@@ -222,7 +247,7 @@ def build_formulation_uncertainty_envelopes(
             "predicted_p95": predicted_value * upper_ratio,
             "ci_level_pct": ci_level_pct,
             "support_count": len(matches),
-            "envelope_source": "prediction_uncertainty",
+            "envelope_source": source,
         }
     return envelopes
 
@@ -346,10 +371,35 @@ def default_priors(
     return result
 
 
+# Current-tier labels in qm_barrier_provenance.json that represent a genuine
+# measured/DFT anchor strong enough to NARROW a core family's MC sigma. The file's
+# other labels (literature_family_surrogate, literature_derived_transfer,
+# family_rule_surrogate, no_literature_anchor) are weaker than the flat default and
+# must NOT widen a well-anchored core family (see the design note below).
+_QM_ANCHORED_TIERS = frozenset(
+    {"bounded_calibration", "selective_dft_anchor", "dft_validated", "wet_lab_anchor"}
+)
+
+
 def _apply_qm_provenance_narrowing(priors: Dict[str, ParameterPrior]) -> None:
-    """Narrow (never widen) family sigmas using qm_barrier_provenance.json.
-    Mutates `priors` in place. Silently no-ops if the file is missing or
+    """Narrow (never widen) core-family sigmas using qm_barrier_provenance.json.
+    Mutates ``priors`` in place. Silently no-ops if the file is missing or
     malformed — the wider default sigma is the safe fallback.
+
+    Design note (S27 followup #2): this provenance file catalogues the EXPLORATORY
+    families (11-16: radical quench, quinone-Cys Michael, PE Schiff/Amadori,
+    lysinoalanine, ascorbic dicarbonyl), which are NOT in the MC's core-14
+    ``DEFAULT_FAMILY_PRIORS`` sampling set. Their tiers are surrogate / literature-
+    derived. We therefore (a) match the provenance ``active_arrhenius_key`` EXACTLY
+    against a core family key — never by substring — so an exploratory surrogate
+    barrier (e.g. ``quinone_cys_michael_thiol_addition_family``) can no longer
+    misattribute its uncertainty onto the well-anchored core ``thiol_addition`` used
+    in benchmarked Cys+ribose chemistry; and (b) only ever NARROW, and only when the
+    provenance ``current_tier`` is a genuine measured/DFT anchor. With the present
+    file this correctly no-ops (no core family carries an anchored tier), preserving
+    the in-panel headline; it activates automatically if a future entry anchors a
+    core family. The earlier code read a non-existent ``entries`` key (the schema
+    uses ``targets``) and was a silent no-op — this also fixes that latent bug.
     """
     if not QM_PROVENANCE_PATH.exists():
         return
@@ -357,30 +407,18 @@ def _apply_qm_provenance_narrowing(priors: Dict[str, ParameterPrior]) -> None:
         provenance = json.loads(QM_PROVENANCE_PATH.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError):
         return
-    family_to_key = {
-        "thiol_addition_family": "thiol_addition",
-        "amadori_rearrangement": "amadori_rearrangement",
-        "schiff_condensation": "schiff_condensation",
-        "strecker_degradation": "strecker_degradation",
-        "thiol_oxidation": "thiol_oxidation",
-        "aminoketone_condensation": "aminoketone_condensation",
-    }
-    entries = provenance.get("entries") if isinstance(provenance, Mapping) else None
-    if not isinstance(entries, list):
+    targets = provenance.get("targets") if isinstance(provenance, Mapping) else None
+    if not isinstance(targets, list):
         return
-    for entry in entries:
+    for entry in targets:
         if not isinstance(entry, Mapping):
             continue
-        family = str(entry.get("active_arrhenius_key", ""))
-        tier = str(entry.get("tier", ""))
-        target_key = None
-        for needle, key in family_to_key.items():
-            if needle in family:
-                target_key = key
-                break
-        if not target_key or target_key not in priors:
+        target_key = str(entry.get("active_arrhenius_key", ""))
+        tier = str(entry.get("current_tier", ""))
+        # Exact match only — no substring cross-mapping onto core families.
+        if target_key not in priors:
             continue
-        if tier == "bounded_calibration":
+        if tier in _QM_ANCHORED_TIERS:
             current = priors[target_key]
             if current.sigma_kcal > 1.0:
                 priors[target_key] = ParameterPrior(

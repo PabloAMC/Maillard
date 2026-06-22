@@ -202,3 +202,76 @@ def test_uncalibrated_sampling_actually_spans_wider_range():
     # Retention stays physically bounded at <= 1.0.
     ret = [s["observable"]["matrix_retention"] for s in samples]
     assert max(ret) <= 1.0
+
+
+# --- S27 followup #1: runtime process-state-aware envelope widening ---
+
+from src.uncertainty_propagation import (  # noqa: E402
+    PREDICTION_UNCERTAINTY_PATH,
+    UNCALIBRATED_ENVELOPE_LOWER_RATIO,
+    UNCALIBRATED_ENVELOPE_UPPER_RATIO,
+    _load_prediction_interval_library,
+    build_formulation_uncertainty_envelopes,
+)
+
+
+def _cached_library_keys(n=3):
+    lib = _load_prediction_interval_library(str(PREDICTION_UNCERTAINTY_PATH))
+    return list(lib.get("by_compound", {}).keys())[:n]
+
+
+def test_calibrated_runtime_envelope_unchanged_by_default():
+    keys = _cached_library_keys()
+    if not keys:
+        pytest.skip("no cached uncertainty library available")
+    predicted = {k: 100.0 for k in keys}
+    default = build_formulation_uncertainty_envelopes(predicted)
+    explicit = build_formulation_uncertainty_envelopes(predicted, uncalibrated=False)
+    assert default == explicit
+    for env in default.values():
+        assert env["envelope_source"] == "prediction_uncertainty"
+
+
+def test_uncalibrated_runtime_envelope_widens_to_structural_floor():
+    keys = _cached_library_keys()
+    if not keys:
+        pytest.skip("no cached uncertainty library available")
+    predicted = {k: 100.0 for k in keys}
+    cal = build_formulation_uncertainty_envelopes(predicted)
+    unc = build_formulation_uncertainty_envelopes(predicted, uncalibrated=True)
+    assert unc, "expected at least one cached-library compound to match"
+    for name, env in unc.items():
+        value = env["predicted_ppb"]
+        # The band is never tighter than the structural-ignorance floor...
+        assert env["predicted_p5"] <= value * UNCALIBRATED_ENVELOPE_LOWER_RATIO * (1 + 1e-9)
+        assert env["predicted_p95"] >= value * UNCALIBRATED_ENVELOPE_UPPER_RATIO * (1 - 1e-9)
+        assert env["envelope_source"] == "prediction_uncertainty_uncalibrated"
+        # ...and strictly no narrower than the calibrated band in both directions.
+        if name in cal:
+            assert env["predicted_p5"] <= cal[name]["predicted_p5"]
+            assert env["predicted_p95"] >= cal[name]["predicted_p95"]
+        # p50 (the point estimate) is unchanged.
+        assert env["predicted_p50"] == value
+
+
+# --- S27 followup #2: provenance-tiered barrier sigma (narrow-only, exact-match) ---
+
+def test_provenance_tiering_is_narrow_only_no_widening_on_current_file():
+    # The provenance file catalogues only exploratory families (not in the MC set)
+    # at surrogate tiers, so nothing should narrow AND nothing should widen: the
+    # core barrier sigmas must equal the flat defaults. This guards the in-panel
+    # headline against accidental barrier-sigma drift.
+    barrier = {p.key: p.sigma_kcal for p in default_priors() if p.kind == "barrier"}
+    assert barrier == dict(DEFAULT_FAMILY_PRIORS)
+
+
+def test_provenance_narrowing_never_widens_a_core_family():
+    from src.uncertainty_propagation import _apply_qm_provenance_narrowing
+
+    priors = {
+        key: ParameterPrior(key=key, sigma_kcal=sigma, source="x", kind="barrier")
+        for key, sigma in DEFAULT_FAMILY_PRIORS.items()
+    }
+    _apply_qm_provenance_narrowing(priors)
+    for key, sigma in DEFAULT_FAMILY_PRIORS.items():
+        assert priors[key].sigma_kcal <= sigma  # narrow-only invariant
