@@ -19,8 +19,8 @@ This artifact shows the full quantitative benchmark surface while still separati
 - Quantitative benchmarks outside 2x: 6
 - Worst quantitative benchmark ratio (all quantitative benchmarks): 1203.680x
 - Worst quantitative point (all quantitative benchmarks): Commercial PBMA, CML/CEL benchmark (Foods, 2023) / Nε-(Carboxymethyl)lysine (CML) (1203.680x; measured_volatiles)
-- Worst reference-only benchmark ratio: 3.195x
-- Worst reference-only point: Thiamine + cysteine + xylose, $145\,^{\circ}$C (Cerny, 2008) [reference anchor] / 2-Methyl-3-furanthiol (MFT) (3.195x; reference_volatiles)
+- Worst reference-only benchmark ratio: 2.787x
+- Worst reference-only point: Thiamine + cysteine + xylose, $145\,^{\circ}$C (Cerny, 2008) [reference anchor] / 2-Methyl-3-furanthiol (MFT) (2.787x; reference_volatiles)
 - Quantitative matched compounds plotted: 15
 - Authoritative free-precursor benchmarks: 7
 - Quantitative matrix-only benchmarks: 3

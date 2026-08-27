@@ -19,15 +19,15 @@ formulation:
       concentration_mM: 1.0
 measured_volatiles:
   2-furfurylthiol:
-    conc_ppb: 0.004948204584943074
+    conc_ppb: 0.007420533761409392
   2-methyl-3-furanthiol:
-    conc_ppb: 0.007685913242825444
+    conc_ppb: 0.010137777534225696
   bis(2-methyl-3-furyl) disulfide:
-    conc_ppb: 0.00260452372836774
+    conc_ppb: 0.002538687874706457
   2,5-dimethylpyrazine:
-    conc_ppb: 0.004778029445222977
+    conc_ppb: 0.004657252796533299
   Hexanal:
-    conc_ppb: 0.17199214636281665
+    conc_ppb: 0.7425330938848701
   Nonanal:
     conc_ppb: 0.03899145957513976
 provenance:

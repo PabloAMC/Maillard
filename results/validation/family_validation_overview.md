@@ -26,7 +26,7 @@ How to read the PNG:
 | 06 | Alternative protein matrix scope | matrix_scope_lane | True | 0 | 0 | 0 | - | - |
 | 07 | Reducing sugar and carbonyl donor hierarchy | immediate_expansion_lane | True | 0 | 0 | 0 | - | - |
 | 08 | Plant off-notes and Maillard suppression | guardrail_lane | True | 1 | 0 | 1 | 15.387 | 1.187 |
-| 09 | Carbohydrate pyrolysis and caramelization | failure_mode_lane | True | 5 | 0 | 3 | 1.000 | 0.223 |
+| 09 | Carbohydrate pyrolysis and caramelization | failure_mode_lane | True | 5 | 0 | 3 | 1.000 | 0.215 |
 | 10 | Microbial fermentation pretreatment | upstream_pretreatment_lane | True | 0 | 0 | 0 | - | - |
 | 11 | Maillard/Lipid Crosstalk | first_class_runtime_lane | True | 0 | 0 | 0 | - | - |
 | 12 | Protein Damage Markers | first_class_runtime_lane | True | 3 | 0 | 0 | - | - |

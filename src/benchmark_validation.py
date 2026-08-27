@@ -845,6 +845,11 @@ def _run_matrix_only_benchmark_prediction(bench: dict) -> dict:
         "predicted_proxy_ppb": predicted_proxy_ppb,
         "projection_metadata": projection_metadata,
         "debug_paths": {},
+        # 2026-08-27 (Wave S1): mirrors `predict_from_steps`'s per-channel flux breakdown so
+        # the two execution paths return the same key set. It is EMPTY here and always will
+        # be: the matrix-only lane never enumerates a reaction network, so it has no channels
+        # to break down -- which is also why neither Wave S1 fix reaches this path.
+        "debug_channel_flux": {},
         "species_names": {compound: compound for compound in predicted_ppb},
     }
 

@@ -59,22 +59,22 @@
   },
   "measured_volatiles": {
     "2,5-dimethylpyrazine": {
-      "conc_ppb": 0.00677334900122548
+      "conc_ppb": 0.006602135658538467
     },
     "2-furfurylthiol": {
-      "conc_ppb": 0.007291184991012699
+      "conc_ppb": 0.010934164798101938
     },
     "2-methyl-3-furanthiol": {
-      "conc_ppb": 0.011325201760823989
+      "conc_ppb": 0.014938026536876203
     },
     "Hexanal": {
-      "conc_ppb": 0.17826030458581718
+      "conc_ppb": 1.700615783970017
     },
     "Nonanal": {
-      "conc_ppb": 0.03985793645458732
+      "conc_ppb": 0.042515132218226476
     },
     "bis(2-methyl-3-furyl) disulfide": {
-      "conc_ppb": 0.0038377686271898093
+      "conc_ppb": 0.003740759423175426
     }
   },
   "metadata": {

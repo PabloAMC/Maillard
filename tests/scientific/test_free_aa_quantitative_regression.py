@@ -77,11 +77,13 @@ from src.benchmark_validation import evaluate_benchmark, evaluate_benchmark_payl
 # The direction also changed, which is why this table now carries one: MFT still
 # under-predicts, FFT now OVER-predicts slightly. The bands stay deliberately wide (they
 # are drift guards, not accuracy claims) and the benchmark's own contract still FAILS --
-# as of the 2026-08-27 Wave P refit, max_ratio 1.4110 against a 1.45 threshold (INSIDE)
-# and MALE 0.0935 against 0.09 (OUTSIDE), i.e. it now fails on one criterion instead of
-# two. (History: 2.2519 / 0.2192 after the Wave N route correction; 1.4533 / 0.1019 under
-# Wave I.) Nothing here turns a failing benchmark into a passing one, and the improvement
-# is FIT RECOVERY on a declared fit target -- see the per-compound note below.
+# as of the 2026-08-27 Wave S1 additive-propagator fix, max_ratio 1.4864 against a 1.45
+# threshold (OUTSIDE) and MALE 0.1267 against 0.09 (OUTSIDE), i.e. it is back to failing
+# on BOTH criteria. (History: 1.4110 / 0.0935 after the Wave P refit -- one criterion;
+# 2.2519 / 0.2192 after the Wave N route correction; 1.4533 / 0.1019 under Wave I.)
+# Nothing here turns a failing benchmark into a passing one, and where an earlier wave's
+# improvement was FIT RECOVERY on a declared fit target it is still labelled as such --
+# see the per-compound note below.
 BENCHMARK_EXPECTED_FOLD_ERRORS = {
     ROOT / "data" / "benchmarks" / "cys_ribose_140C_Hofmann1998.json": {
         # compound -> (low, pinned, high, direction). `ratio` is the symmetric fold
@@ -127,14 +129,31 @@ BENCHMARK_EXPECTED_FOLD_ERRORS = {
         # max_ratio 1.4110 is now INSIDE the 1.45 threshold, but MALE 0.0935 is outside
         # 0.09. The contract is UNTOUCHED and the benchmark still reports `scale-gap`.
         #
-        # 2026-08-27 (Wave P): measured 242.38 vs 342 ppb (was 151.87 under Wave N,
-        # 235.32 under Wave I).
-        "2-methyl-3-furanthiol": (1.15, 1.411, 1.75, "under"),
-        # 2026-08-27 (Wave P): measured 217.99 vs 200 ppb (was 243.72 under Wave N,
-        # 219.96 under Wave I). Still an OVER-prediction; the direction did not change.
-        # Band width held at the same RELATIVE span as the Wave N pin, so this is a
-        # re-centring, not a loosening.
-        "2-furfurylthiol": (1.00, 1.090, 1.43, "over"),
+        # RE-DERIVED 2026-08-27 (Wave S1 -- THE ADDITIVE FLUX PROPAGATOR). NO CONSTANT
+        # MOVED. `src/recommend.py::predict_from_steps` used to keep the lowest-span route
+        # per product and discard every parallel route's flux; it now SUMS kinetically
+        # distinct routes (deduplicated on the route's full step-set) before the fixed
+        # volatile budget is allocated. Both compounds here are reached by two enumerated
+        # routes, so BOTH rose:
+        #     MFT 242.38 -> 283.59 ppb vs 342   1.4110x under -> 1.2060x under  (better)
+        #     FFT 217.99 -> 297.28 ppb vs 200   1.0900x over  -> 1.4864x over   (WORSE)
+        # THE BENCHMARK GOT WORSE OVERALL AND IS PINNED WORSE: MALE 0.0935 -> 0.1267 dex
+        # and max_ratio 1.4110 -> 1.4864, so the untouched contract (1.45x / 0.09 dex) now
+        # fails on BOTH criteria again instead of one. Nothing was clawed back -- the two
+        # lanes share their upstream trunk, so any barrier that pushed FFT down would take
+        # MFT down with it, and re-fitting a barrier to absorb a propagator change is
+        # exactly the move this campaign exists to remove.
+        #
+        # 2026-08-27 (Wave S1): measured 283.59 vs 342 ppb (was 242.38 under Wave P,
+        # 151.87 under Wave N, 235.32 under Wave I). Upper bound carries the Wave P pin's
+        # RELATIVE span (x1.240); the lower bound is clipped at 1.00 because a symmetric
+        # fold error cannot go below it, which makes this side STRICTER, not looser.
+        "2-methyl-3-furanthiol": (1.00, 1.206, 1.50, "under"),
+        # 2026-08-27 (Wave S1): measured 297.28 vs 200 ppb (was 217.99 under Wave P,
+        # 243.72 under Wave N, 219.96 under Wave I). Still an OVER-prediction; the
+        # direction did not change. Upper bound carries the Wave P pin's relative span
+        # (x1.3119), so this is a re-centring, not a loosening.
+        "2-furfurylthiol": (1.00, 1.486, 1.95, "over"),
     },
 }
 

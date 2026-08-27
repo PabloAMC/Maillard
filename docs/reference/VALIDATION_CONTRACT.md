@@ -332,6 +332,18 @@ has never seen. Its rules, stated explicitly:
   interval before and after. This is the clearest illustration in the repository of why the
   per-point table has to be read alongside the headline. Both nonanal points remain
   over-predicted, and the model still treats oleate as being as oxidisable as linoleate.
+  **Wave S1 (2026-08-27) left all eight points BIT-IDENTICAL, and the reason is a finding in
+  its own right.** Two structural fixes landed in `src/recommend.py` -- the flux propagator
+  became additive over parallel channels, and the compound-specific matrix calibration
+  registry became reachable on the `matrix_precursor_augmented` lane -- and together they
+  moved 26 of the 42 scored in-panel rows. They moved ZERO of the eight hold-out points.
+  Every hold-out bundle executes the `matrix_only` path, which passes compound NAMES to the
+  registry (so the lookup repair never applied to it) and bypasses `predict_from_steps`
+  entirely (so the propagator change never applied to it). **The external hold-out therefore
+  exercises the lipid-oxidation and observability lane and says nothing whatsoever about the
+  Maillard network propagator.** Median 93.68x, coverage 3/8, `max_fold_error` 2474x and the
+  pre-widening 1/5 are all unchanged, and that invariance is evidence about the hold-out's
+  coverage rather than evidence about the model.
   **The 0/5 → 1/5 and the 32.79x → 15.31x are a REFERENCE correction, not a model change
   (Wave K/M, 2026-08-27).** Two of the four `li_2026_spi_wg_hme_control` points had been
   transcribed from adjacent table rows: 2-pentylfuran 221.5 was the paper's *Maltol* row

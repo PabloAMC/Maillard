@@ -3681,3 +3681,444 @@ two-precursor aqueous model at assumed pH/aw, with the loose mappings flagged pe
 **If this panel is re-run after a model change, report the strictly-independent number and
 the per-category breakdown TOGETHER.** A headline that rose while pH stayed at 2/7 would be
 hiding the finding.
+
+---
+
+## Wave S1 — the additive flux propagator + the unreachable matrix registry (2026-08-27)
+
+Owner-approved. TWO STRUCTURAL FIXES in `src/recommend.py`, then one regeneration and
+reconciliation. NO barrier, NO observability factor, NO projection constant was touched —
+nothing was tuned to compensate for either fix, and the places where the numbers got worse
+are reported as such. Fix 2 was landed and measured FIRST, then Fix 1, so the two effects
+are separately attributed below.
+
+### (a) THE ALGORITHM, BEFORE — stated so the change is reviewable
+
+`Recommender.predict_from_steps` runs a Bellman-Ford-style relaxation over the enumerated
+elementary steps. State per species: `tracking[canon] = (span, conc, depth, weight, unc)`.
+
+  1. SPAN is a cumulative SERIES RESISTANCE, not a max: for a step of barrier `b` fired from
+     reactants whose worst span is `s`, `exp(span/RT) = exp(s/RT) + exp(b/RT)` (log-sum-exp
+     for numerical safety). The single largest barrier on a route dominates it.
+  2. WEIGHT is the route's flux proxy:
+     `path_weight = min_r_conc * co_reactant_factor * exp(-path_span/RT)`, times
+     `_temporal_accessibility(tau*depth, t)` in FAST mode or an integrated Arrhenius
+     propensity under a ramp.
+  3. RELAXATION WAS WINNER-TAKES-ALL. `tracking[p]` was overwritten only `if path_span <
+     current_span` (or, on an exact tie, if `path_weight > current_weight`). So at the
+     fixpoint each product held the LOWEST-SPAN route and THAT ROUTE'S FLUX ALONE. Every
+     other route to that product was discarded entirely.
+  4. ALLOCATION (`_project_weighted_flux_to_ppb`, the Wave H budget machinery): the volatile
+     targets that accumulated (`depth > 0`, finite span, in `target_lookup`, budget-relevant)
+     get `activity = (weight/max_weight) * depth_activity * direct_sulfur_bonus`, then
+     `mol_fraction = activity / total_activity` and
+     `ppb = total_volatile_budget_molar * mol_fraction * MW * ppb_conversion_factor`. The
+     budget itself comes from `_estimate_projection_budget` (conversion extent x limiting
+     precursor x volatile yield fraction) and is INDEPENDENT of the propagator.
+
+  CONSEQUENCE, which is Wave P's finding: because step 3 discarded every non-fastest route,
+  step 4 saw one channel per product. Adding a second real route could not change a number
+  unless it was FASTER than the incumbent.
+
+### (a') THE ALGORITHM, AFTER
+
+  Steps 1, 2 and 4 are UNCHANGED. Step 3 is unchanged for span/conc/depth/`best_paths`, so
+  every span-driven behaviour downstream (span ranking, path traces, `depth_activity`) is
+  bit-identical. What is new is ONE additional sweep, after the fixpoint:
+
+      for step in steps:                       # from the CONVERGED tracking state
+          ev = _evaluate_step(step)            # same arithmetic, extracted verbatim
+          cid = _route_channel_id(ev.path)     # the route's FULL ORDERED STEP-SET
+          for p in ev.products:
+              channel_flux[p][cid] = max(channel_flux[p].get(cid, -inf), ev.path_weight)
+      summed_channel_flux[p] = sum(channel_flux[p].values())
+
+  and step 4 now reads `summed_channel_flux[p]` instead of `tracking[p][3]`. The sweep runs
+  ONCE after convergence rather than accumulating during relaxation, which is what makes it
+  impossible to add the same channel once per iteration. `_project_weighted_flux_to_ppb`
+  keeps a `channel_flux_totals=None` path that reproduces the old winner-takes-all behaviour
+  exactly; it is used by the mass-honesty test and by nothing that ships.
+  The per-product channel breakdown is exposed as `debug_channel_flux` in the returned
+  payload, so "the model has N routes to X" is now auditable against what was actually summed.
+
+  THE REFACTOR IS PROVABLY INERT. `_evaluate_step` was extracted VERBATIM from the loop body,
+  so the risk was a silent arithmetic change hiding inside a "pure" refactor. Measured, not
+  assumed: with the additive layer disabled (`channel_flux_totals=None`) the live panel
+  reproduces the pre-Wave-S1 predictions on 36 of 42 rows BIT-IDENTICALLY, and the 6 that
+  differ are EXACTLY Fix 2's six rows. Against the Fix-2-only measurement it is 42 of 42
+  identical. So every movement reported below is attributable to one of the two fixes and
+  none of it to the extraction.
+
+### (b) THE DEDUPE RULE — and the one the brief suggested, implemented, MEASURED and REJECTED
+
+  SHIPPED RULE: two routes are the same channel iff they are the same ordered step-set.
+  Within a channel the largest flux wins; across channels the fluxes SUM.
+
+  REJECTED RULE: "two routes sharing their RATE-LIMITING STEP are one channel, take the max."
+  It was implemented first, exactly as the brief specified, and then measured. TWO findings
+  killed it, and the brief's own instruction was to verify before expecting the sum:
+
+  1. THE RATE-LIMITING STEPS ARE NOT DISTINCT. Measured on cys_ribose_140C_Hofmann1998:
+     BOTH MFT routes have the same highest-barrier step, `Amadori_Rearrangement` at 29.06
+     kcal/mol. So does the FFT route. That step sits on the shared cysteine/ribose trunk that
+     essentially every route in the network passes through:
+         MFT winner path barriers  20.672 (Schiff) 29.060 (Amadori) 28.000 28.000 26.350
+         FFT winner path barriers  20.672 (Schiff) 29.060 (Amadori) 21.000 28.000 23.300 26.800
+     Under the rejected rule MFT keeps 242.38 ppb EXACTLY, FFT keeps 217.99, and the whole
+     live panel moves 3 rows of 42 (resconi furfural x0.99992, Bolton MFT x1.0210, Cerny2008
+     MFT x1.1464). That is winner-takes-all in all but name, and the [P] would not be closed.
+  2. AND IT IS WRONG, not merely inert. X --(slow, R_c)--> Y, then Y --(fast)--> P by two
+     branches and Y --(fast)--> Q by one. At steady state the trunk fixes the total flux and
+     the branches PARTITION it by conductance: P's share is
+     (1/R_1 + 1/R_2)/(1/R_1 + 1/R_2 + 1/R_3) = 2/3 for equal branches. This propagator's
+     per-route weight is `pool * exp(-span/RT)` with `exp(span/RT) = sum_i exp(b_i/RT)`, so a
+     dominant trunk collapses EVERY route's weight onto the same value ~ pool/exp(R_c/RT).
+     SUMMING P's two branches then reproduces the 2/3; taking the max returns 1/2. A shared
+     bottleneck is the reason the sum is correct, not a reason to suppress it — and the mass
+     the sum appears to create is not created, because step 4 normalises against a fixed
+     budget (verified in (d)).
+
+  LIMITATIONS OF THE SHIPPED RULE, stated honestly and carried as [P]:
+   * Every distinct producing step is treated as an independent branch. The model carries NO
+     POOL DEPLETION, so two branches drawing on the same scarce intermediate are summed as if
+     that intermediate were unlimited. Only the global budget cap stands between that and
+     minted mass, and it bounds the TOTAL, not the split.
+   * Because `best_paths` keeps one upstream route per reactant, a candidate's step-set is
+     determined by its terminal step, so in the current enumeration the rule reduces to "one
+     contribution per distinct producing step". A genuinely branched upstream is not enumerated.
+   * Additivity is applied where flux is CONSUMED (at the product, by the allocation layer)
+     and is NOT propagated. An intermediate with two routes still hands its own products a
+     single span, so parallelism does not compound along a chain.
+
+### (c) FIX 2 FIRST — the unreachable matrix registry (Wave O finding (f)), MEASURED ALONE
+
+  CAUSE, located: `_apply_output_projection` called
+  `describe_matrix_calibration(species.label or canon, ...)`. Species injected into
+  `corrected_initial` by the lipid-oxidation path are materialised as
+  `Species(species_name_lookup.get(canon, canon), canon)`, and when no enumerated step ever
+  names them the label falls back to the CANONICAL SMILES. `describe_matrix_calibration`
+  normalises "CCCCCC=O" to the literal string "ccccccc=o", matches no record and no class
+  anchor, returns `calibration_observable_factor=None`, and the caller's `or 1.0` applied a
+  factor of ONE, silently.
+
+  FIX: `_registry_compound_name(canon, label, target_lookup)` at the lookup boundary — keep
+  the species' own label when it IS a name, fall back to the compound-database name for that
+  canonical SMILES when the label is merely the SMILES again. `target_lookup` is keyed by
+  canonical SMILES and its `name` is the same spelling `MATRIX_BENCHMARK_BASE_MARKER_YIELDS`
+  uses on the `matrix_only` lane, so the two lanes now agree on the key. Applied to BOTH
+  branches of `_apply_output_projection`.
+
+  MEASURED ALONE, against the Wave R tree, before Fix 1 existed:
+    SCORED PANEL: 6 of 42 rows moved, all four internal snapshots, nothing else.
+      pea_isolate_..._Internal2026 / Hexanal   0.171992 -> 0.742533   x4.317250
+      pea_isolate_..._ProtocolPilot2026 / Hexanal      same          x4.317250
+      soy_isolate_..._Internal2026 / Hexanal   0.178260 -> 1.700616   x9.540070
+      soy_isolate_..._ProtocolPilot2026 / Hexanal      same          x9.540070
+      soy_isolate_..._Internal2026 / Nonanal   0.039858 -> 0.042515   x1.066667
+      soy_isolate_..._ProtocolPilot2026 / Nonanal      same          x1.066667
+      pea Nonanal did NOT move: its ambient factor is 1.0.
+      x4.317250 and x9.540070 are the Wave O refitted pea/soy ambient hexanal factors,
+      finally applying. x1.066667 = 0.160/0.150, the soy-vs-pea ambient release ratio.
+    EXTERNAL HOLD-OUT (n=200, seed 0): **ZERO of 8 points moved, artifact bit-identical.**
+    THE PROOF WAVE O ASKED FOR, now a test: perturbing the reached record by 4.32x moves the
+      soy Internal2026 Hexanal prediction by exactly 4.32x, and the factor is restored in the
+      same test. NOTE WHICH RECORD IS REACHED, and it is Wave O's second observation:
+      `determine_matrix_process_state(100 C, 45 min, aw 0.95)` returns `intermediate_matrix`,
+      whose fallback order is (`intermediate_matrix`, `ambient_slurry`), so the record reached
+      is the AMBIENT one — not the `heated_matrix` entry, and not the
+      `aqueous_pre_extrusion_model` the benchmark file declares. That process-state mismatch
+      is UNFIXED and remains open; this wave fixed the lookup, not the state.
+    BEFORE THE SNAPSHOT REFRESH the four snapshots FAILED (pea max_ratio 1.0 -> 4.317,
+      soy 1.0 -> 9.540, overall pass -> ranking-gap / scale-gap). They are model-generated
+      reproducibility baselines, so the Wave M sequence refreshes them first; after the
+      refresh the 4/4 internal-synthetic passes are restored. Recorded because the
+      intermediate state is what a reviewer would see if they ran the panel before the refresh.
+
+### (c') FIX 1 SECOND — the additive propagator, MEASURED ALONE on top of Fix 2
+
+    SCORED PANEL: 23 of 42 rows moved.
+      cys_ribose_140C_Hofmann1998 / 2-furfurylthiol        217.9999 -> 297.2755   x1.363650
+      cys_ribose_140C_Hofmann1998 / 2-methyl-3-furanthiol  242.3782 -> 283.5889   x1.170027
+      resconi_2023_pbma_beef_identity / furfural          3330.9660 -> 3148.6668  x0.945271
+      thiamine_cys_xylose_145C_Cerny2008 / MFT              0.772987 -> 0.886115  x1.146351
+      thiamine_cys_glucose_120C_Bolton1994 / MFT            0.017025 -> 0.017379  x1.020810
+      the 4 internal snapshots, per compound:
+          2-furfurylthiol                x1.499642
+          2-methyl-3-furanthiol          x1.319008
+          2,5-dimethylpyrazine           x0.974722
+          bis(2-methyl-3-furyl) disulfide x0.974722
+          furfural                       x0.974722
+          Hexanal / Nonanal              unchanged (injected, not network-propagated)
+      READ THE SIGNS TOGETHER: the sulfur channels RISE and the pyrazine/disulfide/furfural
+      rows fall by EXACTLY the same factor to pay for them. That is the fixed budget
+      redistributing, and it is the qualitative signature the mass-honesty check quantifies.
+    EXTERNAL HOLD-OUT: **ZERO of 8 points moved, artifact bit-identical.**
+    THE C2+C3 LANE NOW CONTRIBUTES. On Hofmann1998, with the lane monkey-patched off:
+      pentodiulose lane alone 217.25 ppb, both lanes 283.59 ppb, i.e. +30.5%. Wave P's
+      projected 242.38 + 71.02 = 313.39 was never obtainable: the lanes are not independent
+      (shared rate-limiting step) AND the budget is fixed, so the single-lane figures cannot
+      be added — the pentodiulose-alone figure itself falls 242.38 -> 217.25 once the
+      competing FFT channels also become additive.
+    CHANNEL CENSUS on Hofmann1998: 11 of 35 tracked species now carry >1 channel (was 8 under
+      the rejected rule). MFT 2 channels, sum/max = 1.4006; FFT 2 channels, 1.6324.
+
+### (d) MASS HONESTY — VERIFIED, NOT ASSERTED
+
+  Method: intercept `_project_weighted_flux_to_ppb` and run the SAME converged state twice,
+  once with `channel_flux_totals=None` (pre-Wave-S1 winner-takes-all) and once with the summed
+  channels, then convert both allocations back to molar and compare against
+  `projection_budget.total_volatile_budget_molar`.
+
+    | system                        | budget (molar) | allocated/budget OLD | NEW  | summed ppb   |
+    | ----------------------------- | -------------- | -------------------- | ---- | ------------ |
+    | cys_ribose_140C_Hofmann1998   | 1.0442e-05     | 1.000000000000       | 1.000000000000 | 1152.26 -> 1158.83 (x1.0057) |
+    | resconi_2023_pbma_beef        | 9.5114e-05     | 1.000000000000       | 1.000000000000 | 10848.47 -> 10849.06 (x1.00005) |
+    | soy_..._Internal2026          | 7.6665e-09     | 1.000000000000       | 1.000000000000 | 0.7517 -> 0.7548 (x1.0042) |
+
+  The molar total is the budget to 1 part in 10^12 before AND after. The summed PPB moves by
+  <=0.6% and only because ppb is molecular-weight-weighted and the allocation shifted between
+  species of different mass. Adding channels moves the SPLIT; it cannot mint mass.
+  Pinned in `tests/scientific/test_wave_s1_additive_flux_2026_08.py::
+  test_the_volatile_budget_still_caps_the_sum`.
+
+### (e) THE FULL OLD -> NEW HEADLINE TABLE (Wave R tree -> Wave S1 tree)
+
+  BENCHMARK PANEL (`benchmark_summary.json`), max_ratio / MALE:
+    cys_ribose_140C_Hofmann1998          1.4110 / 0.0935 -> **1.4864 / 0.1267**  (Fix 1) WORSE
+    resconi_2023_pbma_beef_identity      4.6573 / 0.6681 -> **4.4024 / 0.6437**  (Fix 1)
+    thiamine_cys_glucose_120C_Bolton1994 763.5881/2.8829 -> **748.0216 / 2.8739** (Fix 1)
+    thiamine_cys_xylose_145C_Cerny2008   3.1954 / 0.5045 -> **2.7874 / 0.4452**  (Fix 1)
+    every other row bit-identical (the four snapshots were refreshed and recover exactly).
+    THE HOFMANN CONTRACT (1.45x / 0.09 dex, UNTOUCHED) now fails on BOTH criteria where Wave
+    P had it failing on one. MFT improved 1.4110x under -> 1.2060x under; FFT degraded
+    1.0900x over -> 1.4864x over. Not clawed back: the lanes share their upstream trunk.
+    status_counts scale-gap 8 / pass-no-ranking 2 / pass 4  ALL UNCHANGED.
+    evidence-role split 6/4/4 UNCHANGED. predictive passes 0/6 UNCHANGED. fit-recovery 0/4
+    UNCHANGED. internal-synthetic 4/4 UNCHANGED. Aggregate strict 4/14 UNCHANGED, lenient
+    (presentation-layer, counts `pass-no-ranking`) 6/14 UNCHANGED. strict-ready 0/14 UNCHANGED.
+
+  EXTERNAL HOLD-OUT (`external_validation_report.json`, n=200 seed 0) — ALL EIGHT POINTS AND
+  EVERY SUMMARY FIELD **BIT-IDENTICAL**. The `cmp` over the artifact reports 0 leaf diffs.
+      | point                          | measured | p50      | fold      | moved? |
+      | bi_2020_raw_pea / hexanal      |   1260.0 |   1013.0 |    1.2437 | no |
+      | bi_2020_roasted_pea / hexanal  |    324.0 | 801700.4 | 2474.3839 | no |
+      | li_2026_hme / 1-hexanol        |    20.04 |  22394.3 | 1117.4799 | no |
+      | li_2026_hme / 2-pentylfuran    |   5625.8 |  11038.6 |    1.9621 | no |
+      | li_2026_hme / hexanal          |    605.6 |  56409.0 |   93.1471 | no |
+      | li_2026_hme / nonanal          |    72.66 |   8596.4 |  118.3093 | no |
+      | liu_2023_ppi / hexanal         |  11320.0 |   1013.0 |   11.1747 | no |
+      | liu_2023_ppi / nonanal         |   0.8018 |    75.55 |   94.2231 | no |
+    median |log10| **1.9717 dex UNCHANGED**; median fold **93.6837x UNCHANGED**;
+    ci_coverage 3/8 (0.375) UNCHANGED; pre-widening 3/8 UNCHANGED;
+    genuine_extrapolation 1/5 UNCHANGED; max_fold_error 2474.3839x UNCHANGED.
+    THE REASON IS STRUCTURAL AND IS ITSELF A FINDING: all four hold-out bundles execute the
+    `matrix_only` path. It passes compound NAMES to the registry (Fix 2 never applied) and it
+    bypasses `predict_from_steps` entirely (Fix 1 never applied). The external hold-out
+    exercises the lipid-oxidation and observability lane and says NOTHING about the Maillard
+    network propagator — an eight-point insensitivity no previous wave had measured.
+
+  MC PANEL (`prediction_uncertainty.json`, n=200 seed 0): every COUNT unchanged —
+    benchmark_count 11, matched rows 35, aggregate coverage 29/35 (82.9%),
+    honest_literature_coverage 1/3, not_evaluable 4, excluded_fitted_rows 2/2,
+    excluded_..._would_have_been_hits 2. Only interval widths moved:
+      external_literature median CI  0.8495 -> **0.9463** dex  (WIDER, coverage still 1/3)
+      fitted_row                     2.2767 -> **2.2083** dex
+      internal_synthetic             3.6929 -> **3.5612** dex
+    THE EXTERNAL WIDENING IS HONEST AND IS NOT AN IMPROVEMENT: a compound reached by several
+    routes now samples the barrier uncertainty of ALL of them, so the interval grew 1.25x and
+    bought no coverage with it.
+
+  VALIDATION OVERVIEW: benchmark_count 14, strict_ready 0, inside_1_5x 3, outside_1_5x 6,
+    worst_quantitative_ratio 1203.6799x (CML) — ALL UNCHANGED. Only
+    reference_worst_quantitative_ratio 3.1954 -> **2.7874** (Cerny 2008 MFT).
+    family_validation_overview: SLR-09 carbohydrate pyrolysis mean |log10| 0.223 -> **0.215**;
+    every other family row unchanged.
+
+  MATRIX SIGMA (`derive_matrix_sigma_from_residuals.py`): artifact **BIT-IDENTICAL**.
+    n=5, rms_ln_sigma 3.0166, bias_fold 3.3149, centered_sd 3.0951, 90% CI [2.0274, 6.3038],
+    shipped 2.86 INSIDE and NOT moved. Structural, per Wave O's own note: the uncalibrated
+    tier multiplies oxidation load by a base marker yield and reads NEITHER an observability
+    factor NOR the propagator. Neither fix can reach it, in either direction.
+
+  PROJECTION REFIT (`refit_projection_constants.py`, still NOT applied): fitted tau UNCHANGED
+    at 10000 min; objective at the fit 0.8817 -> **0.8824** dex, at the shipped tau 12589
+    0.8879 -> **0.8863** dex. The budget scale the fit wants is still 1.26x.
+
+  SNAPSHOTS: `refresh_internal_reproducibility_snapshots.py` GENERATOR_TAG v8 -> **v9** with a
+    new leading Wave S1 block that explicitly marks the Wave P "EXACTLY ZERO" paragraph and
+    the Wave O "THIS SNAPSHOT DID NOT MOVE AT ALL / registry UNREACHABLE" paragraph as
+    SUPERSEDED, rather than deleting them. NOTE: Wave P's ledger entry claims it bumped
+    "v8 -> v9", but the shipped tag in the four snapshot files was still v8 — Wave P edited
+    the NOTES text without the tag. The tag is now genuinely v9. [P] minor, recorded.
+
+  PENTOSE >> HEXOSE: 6.15x -> **7.78x** (ribose 686.83 -> 824.72, glucose 111.65 -> 105.95).
+    NOT IMPROVED SUGAR DISCRIMINATION, and the guard test says so in its own failure message.
+    Structural share re-measured in-process (thiol_addition_pentodiulose set equal to
+    thiol_addition_hexose): **3.1368x**, up from 2.3118x. History of the split: 1.13x of
+    3.39x (Wave N), 2.31x of 6.15x (Wave P), 3.14x of 7.78x now. The structural share HAS
+    grown, for a defensible reason — the propagator stopped discarding the pentose limb's
+    parallel routes — but ~2.5x of the claim is still the gap between a FITTED barrier and an
+    UNCONSTRAINED LEGACY FIT. Both halves are in the README and AUDIT.
+
+  MECHANISTIC-PRIORITY BENCHMARKS: 2 -> **0**, and this is a LOSS OF SIGNAL, not a win.
+    Fix 2 gives the internal snapshots' Hexanal/Nonanal rows a real compound-specific record,
+    so they stop reading `calibration_evidence_strength = "heuristic"` and
+    `_matrix_closure_action` stops routing them to `mechanistic_blocker`. What they read
+    instead is `process_state_mismatch` — the registry's honest label for a record reached
+    only through the `intermediate_matrix -> ambient_slurry` fallback — and the rule set has
+    NO BRANCH FOR THAT LABEL, so it is scored exactly like a genuine class-anchored transfer.
+    The governing decision did NOT change (`hold_observable_first`, 0 approved offline jobs,
+    same three blockers), so no compute was unlocked; what was lost is a warning. Pinned at 0
+    with the cause in three test files; the rule-set repair is [P] and was deliberately NOT
+    made in the same pass as the fix that exposed it.
+
+### (f) TESTS RE-PINNED (each with a dated causal comment; none relaxed)
+
+  Entry state after the two fixes + regeneration: 8 failures, all in tests/scientific.
+  tests/unit + tests/integration + tests/scripts were green throughout (1056 passed,
+  1 skipped, 0 failed, measured before any re-pin).
+
+  1. `test_wave_p_chemistry_2026_08.py::test_the_second_mft_channel_contributes_exactly_zero_
+     to_the_prediction` — WAVE P'S OWN FLAG, and its failure message said this failure would
+     be the notification. RENAMED to `..._now_contributes_after_the_wave_s1_propagator_fix`
+     and INVERTED: pentodiulose-alone 217.25, both lanes 283.59, ratio pinned at 1.3054x. The
+     docstring carries Wave P's original text verbatim plus why the 313.39 projection never
+     applied.
+  2. `test_wave_p_chemistry_2026_08.py::test_hofmann1998_after_the_refit` — MFT 242.38 ->
+     283.59, FFT 217.99 -> 297.28, with the full "half of this got worse" note and the
+     statement that no barrier was refitted.
+  3. `test_free_aa_quantitative_regression.py` — MFT band (1.15, 1.411, 1.75) ->
+     (1.00, 1.206, 1.50); FFT (1.00, 1.090, 1.43) -> (1.00, 1.486, 1.95). Upper bounds carry
+     the Wave P pins' RELATIVE spans (x1.240 and x1.3119); the MFT lower bound is CLIPPED at
+     1.00 because a symmetric fold error cannot go below it, which makes that side STRICTER,
+     not looser. The header block now records that the contract fails on BOTH criteria again.
+  4. `test_honest_headline_guards.py::test_honest_external_literature_coverage_is_1_of_3_...`
+     — median CI width 0.8495 -> 0.9463 dex, with the companion widths and an explicit note
+     that a widening which buys no coverage is not an improvement. All six COUNT assertions
+     in the same test are untouched and still pass, which is what identifies this as an
+     interval-width change.
+  5. `test_honest_headline_guards.py::test_pentose_hexose_mft_ordering_is_6_15x_...` —
+     RENAMED to `..._is_7_78x_not_the_retired_6_15x_3_39x_8_98x_or_15_8x`; ribose 686.8 ->
+     824.7, glucose 111.6 -> 106.0, ratio 6.15 -> 7.78, structural share 2.31 -> 3.14, and the
+     README/AUDIT doc-token assertion moved 6.15 -> 7.78 (both docs updated in the same edit).
+  6. `test_matrix_observable_closure_audit.py` — Hexanal closure_action `mechanistic_blocker`
+     -> `class_level_transfer_acceptable`; watchlist -> empty. TIGHTENED while re-pinning: it
+     now ALSO asserts `calibration_evidence_strength == "process_state_mismatch"` (so the
+     movement's actual cause is pinned, not just its effect) and pins the renderer's
+     "Mechanistic watchlist count: 0" line rather than the mere presence of a heading.
+  7. `test_offline_refinement_governance.py` — `mechanistic_priority_benchmark_count >= 1`
+     -> `== 0`. TIGHTENED: the assertion was a FLOOR, which could not have detected movement
+     in either direction; it is now two-sided, and the priority list is pinned empty with a
+     failure message naming the SMILES-vs-name regression as the thing to look for.
+  8. `test_refinement_governance.py` — same count 2 -> 0, same treatment. Both tests keep
+     their `governing_status == "hold_observable_first"` and
+     `approved_offline_job_count == 0` assertions untouched, which is the evidence that no
+     compute was unlocked by the change.
+  9. NEW `tests/scientific/test_wave_s1_additive_flux_2026_08.py` (9 tests) — two synthetic
+     independent routes to one product ADD exactly (and carry measurably different flux, so
+     max and sum cannot agree); a duplicated route contributes ONCE; channel identity is the
+     step-set and not the rate-limiting step; both Hofmann MFT routes are pinned as sharing
+     `Amadori_Rearrangement`; MASS HONESTY at a fixed budget; the Hofmann pair after the fix;
+     the Wave O 4.32x perturbation now moving the prediction; `_registry_compound_name`'s four
+     cases; and the exact set of rows Fix 2 moved.
+
+  NOT RE-PINNED, DELIBERATELY: `cys_ribose_140C_Hofmann1998`'s own contract (1.45x / 0.09 dex,
+  now failing on both criteria), the 3.0x pentose/hexose floor in
+  `test_pentose_hexose_sulfur_ordering.py`, the Pratap-Singh ratio tolerance, the Trikusuma
+  observability factors, `max_fold_error`, the pre-widening 1/5, the 0/6 predictive headline,
+  the 4/14 and 6/14 aggregates, strict-ready 0/14.
+
+### (g) DOC SYNC
+
+  README.md: the sulfur trust paragraph now reads 1.21x under on MFT AND names the 1.49x FFT
+    over-prediction as worse than before; pentose block 6.15x -> 7.78x with the structural
+    share 2.31x -> 3.14x and the honest "the structural share has grown but a third of the
+    claim is still a barrier gap"; the Wave P refit block's closing sentence now says its two
+    numbers have since moved and got worse; a NEW "Wave S1" block with the old->new table for
+    MFT/FFT/max_ratio/MALE, the rejected-dedupe finding, the correction of Wave P's 313.39
+    arithmetic, and the mass-honesty verification.
+  AUDIT.md: the "what survives is ordering" headline 6.15x -> 7.78x with the full split
+    history; 14 new rows in the "What Round 3 cost" table, every one labelled *(Wave S1)*,
+    including the three that got worse and the one that is a loss of signal; a NEW section
+    "Wave S1 — the additive flux propagator, and the registry nobody could reach" with the
+    per-fix attribution table, the rejected rule and its two-part refutation, the mass-honesty
+    numbers, and the hold-out insensitivity finding; and the Wave P "EXACTLY ZERO" paragraph
+    now carries a "-> CLOSED by Wave S1" marker instead of standing as current.
+  docs/reference/VALIDATION_CONTRACT.md §3E: a new dated paragraph recording that Wave S1
+    moved 26 of 42 in-panel rows and ZERO of the 8 hold-out points, with the structural reason
+    (`matrix_only` bypasses both fixes) and the conclusion that the hold-out's invariance is
+    evidence about the hold-out's coverage, not about the model.
+
+### (h) [P] CARRIED FORWARD
+
+  1. The shipped dedupe rule treats every distinct producing step as an independent branch,
+     and the model has NO POOL DEPLETION. Two branches drawing on the same scarce intermediate
+     are summed as if it were unlimited; only the global budget cap bounds the result, and it
+     bounds the total rather than the split.
+  2. Additivity is not PROPAGATED: an intermediate with two routes still hands its products a
+     single span, so parallelism does not compound along a chain. A full fix means carrying
+     summed flux through the relaxation, which is a larger rewrite.
+  3. `_matrix_closure_action` has no branch for `process_state_mismatch`, so a calibration
+     factor reached only through a process-state fallback now scores as an acceptable
+     class-level transfer. This is what silently emptied the mechanistic-refinement watchlist.
+  4. The runtime recomputes the internal snapshots' process_state as `intermediate_matrix`
+     from 100 C / 45 min / aw 0.95, not the `aqueous_pre_extrusion_model` those benchmark
+     files declare. Wave O flagged it; still open. It is why the AMBIENT record, not the
+     heated one, is the record Fix 2 made reachable.
+  5. The external hold-out cannot see the Maillard network at all — all four bundles are
+     `matrix_only`. Until a hold-out bundle exercises `predict_from_steps`, no external
+     evidence bears on the propagator, the barriers, or the network topology.
+  6. Wave P's ledger claims a snapshot NOTES bump to v9 that never reached GENERATOR_TAG
+     (the files shipped v8). Minor, and now corrected.
+  7. Everything Wave P carried forward that this wave did not touch: the `src/conditions.py`
+     family-name substring coupling; the C2+C3 lane's missing moisture dependence; the oleate
+     pool on the linoleate rate constant; 2-mercapto-3-pentanone's missing odour threshold;
+     the two disagreeing panel pass-counters (4/14 strict vs 6/14 presentation-layer); the
+     Trikusuma pre-Wave-P MALE inconsistency; the isotope dossier's Hearn & Smith
+     mis-attribution; the `[HH]` gate still on `_thiol_addition` (FFT); and the missing hexose
+     retro-aldol route to glycolaldehyde.
+
+### (i) GATES + SUITE
+
+  GATES, all three re-run on the final tree, after every code, artifact, test and doc edit:
+    citation_gate   PASS — 82 files, 964 DOI-bearing fields, 317 unique DOIs (was 81/951/316
+                    at Wave P; the +1/+13/+1 is Wave R's, not this wave's — Wave S1 introduced
+                    NO new citation). WAIVERS and TEXT_SURFACE_WAIVERS are both still the
+                    empty tuple.
+    holdout_guard   PASS — 3/3 invariants, re-run after the regeneration. Worth stating
+                    plainly given (e): the hold-out was not merely excluded from every fit,
+                    it was not even REACHABLE by either fix.
+    fit_target_gate PASS — both checks. The fit-target set is unchanged; this wave declared
+                    no new fit and moved no fitted constant.
+
+  FIRST FULL SUITE (`tests/unit tests/scientific tests/integration tests/scripts`, documented
+  conda path): **1274 passed, 1 skipped, 2 xfailed, 0 FAILED** in 877.27 s, exit code 0.
+  Arithmetic: 1274 + 1 + 2 = **1277** = Wave P's certified 1268 + the 9 new tests in
+  `tests/scientific/test_wave_s1_additive_flux_2026_08.py`. The 1 skip and both xfails are the
+  declared, strict-marked ones from Wave J2 (`xfail_strict = true`, so neither can silently
+  start passing).
+  THAT RUN IS SUPERSEDED AND HERE IS WHY, because the honest thing is to say it rather than
+  quote it: two edits landed while it was in flight — a one-key addition to the matrix-only
+  payload in `src/benchmark_validation.py` (`debug_channel_flux: {}`, so both execution paths
+  return the same key set) and the README/AUDIT prose sync. Python imports at collection, so
+  neither was in effect for that run. The CERTIFYING run below was executed on the final tree
+  with nothing further edited afterwards.
+
+  CERTIFYING FULL SUITE, on the final tree (29 modified tracked files + the one new test file),
+  after all three gates were re-run green on that same tree:
+  **1274 passed, 1 skipped, 2 xfailed, 0 FAILED** in 871.98 s, exit code 0, zero FAILED/ERROR
+  lines. It reproduces the first run's counts EXACTLY, which is the evidence that the two
+  in-flight edits were inert. NOT COMMITTED, NOT STASHED — handed to the orchestrator as
+  instructed.
+
+  INTERMEDIATE RUNS, kept because they isolate the blast radius:
+    - tests/unit + tests/integration + tests/scripts, after both fixes and the regeneration
+      but before any re-pin: **1056 passed, 1 skipped, 0 failed** (417.22 s). Every failure
+      this wave produced was in tests/scientific.
+    - tests/scientific at that same point: **8 failed, 210 passed, 2 xfailed** (468.96 s).
+      All 8 are the re-pins itemised in (f); none was a code defect.
+
+  ENVIRONMENT NOTE. Free RAM fell to ~93 MB during the long runs and pytest advanced a few
+  tests per minute through the tests/scientific governance region. Disk had 31 GiB free
+  throughout, so this is Wave P's memory-pressure condition and NOT its ENOSPC condition. It
+  slows the suite; it did not produce a single spurious failure in any run this wave.

@@ -134,9 +134,9 @@ synthetic comparators.
 
 | Population | Inside 90% CI | Not evaluable\* | Median CI width | Is it evidence? |
 | --- | ---: | ---: | ---: | --- |
-| **External literature** | **1/3** (33%) | 4 | 0.86 dex | **Yes — this is the only row that is** |
-| **Fitted rows** (constants back-solved from the benchmark) | 2/2 | 0 | 2.28 dex | No — algebraic recovery |
-| **Internal synthetic** (model vs its own frozen output) | 18/18 | 8 | 3.69 dex | No — reproducibility harness |
+| **External literature** | **1/3** (33%) | 4 | **0.95 dex** | **Yes — this is the only row that is** |
+| **Fitted rows** (constants back-solved from the benchmark) | 2/2 | 0 | 2.21 dex | No — algebraic recovery |
+| **Internal synthetic** (model vs its own frozen output) | 18/18 | 8 | 3.56 dex | No — reproducibility harness |
 
 \* Degenerate near-zero-width envelopes: the Monte Carlo perturbs nothing on their path, so
 pass/fail is meaningless and they are excluded from coverage.
@@ -209,7 +209,8 @@ spanning two or more orders of magnitude makes coverage cheap. This headline is 
 the usual worry: the intervals *grew* — and coverage still *fell*, most recently from 2/11 to
 1/3 when the fitted rows were pulled out of both sides. The point predictions moved further
 from the measurements than even those intervals allow, and the literature slice's own interval
-is the *narrowest* of the three (0.86 dex, a factor of ~7 end to end), so its 1/3 is the one
+is the *narrowest* of the three (**0.95 dex**, a factor of ~9 end to end — it widened from
+0.85 under the Wave S1 additive propagator and bought no coverage with the extra width), so its 1/3 is the one
 number here that is not cheap. The
 literature slice is now saying the model is wrong on the sulfur branch, and saying so loudly. The
 internal-synthetic rows (26 of the 35 matched rows in the Monte-Carlo panel) are
@@ -298,11 +299,36 @@ fitted against these two rows and not two. Three things keep this readable as wh
 >   conversion is wrong, the error is now *localised in one named constant* instead of spread
 >   through the route. That is the argument for doing the fit at all.
 >
-> The benchmark's own contract is untouched and still **fails** — max ratio 1.4110 is now
-> *inside* its 1.45 threshold, but MALE 0.0935 is outside 0.09, so it fails on one criterion
-> instead of two. Record:
+> The benchmark's own contract is untouched and still **fails** — max ratio 1.4110 was
+> *inside* its 1.45 threshold while MALE 0.0935 was outside 0.09, so at that point it failed
+> on one criterion instead of two. Record:
 > [sulfur_barrier_refit_pentodiulose.md](results/validation/sulfur_barrier_refit_pentodiulose.md),
 > which supersedes the stale `sulfur_barrier_refit_hofmann.md`.
+> **Those two numbers have since moved and got worse — see the Wave S1 block below.**
+
+**Wave S1 (2026-08-27): parallel reaction channels can finally add — and the flagship
+benchmark got worse.** Wave P discovered that `src/recommend.py` relaxed to the *lowest-span
+route per product* and kept only that route's flux, so adding a second literature-evidenced
+route to MFT contributed **exactly zero**. The propagator now sums kinetically distinct routes
+before the fixed volatile budget is allocated. Nothing was refitted to accompany it. What that
+cost, on the one verified sulfur benchmark:
+
+| Hofmann 1998 row | Wave P | Wave S1 | reading |
+| ---------------- | ------ | ------- | ------- |
+| MFT (vs 342 ppb) | 242.38 — 1.4110× under | **283.59 — 1.2060× under** | better |
+| FFT (vs 200 ppb) | 217.99 — 1.0900× over | **297.28 — 1.4864× over** | **worse** |
+| max ratio / MALE | 1.4110 / 0.0935 dex | **1.4864 / 0.1267 dex** | **worse — the untouched 1.45× / 0.09 dex contract now fails on *both* criteria again, not one** |
+
+Both compounds are reached by two enumerated routes, so both rose; FFT was already over. This
+was **not** clawed back: the two lanes share their upstream trunk, so a barrier that pushed FFT
+down would take MFT with it, and refitting a constant to absorb a propagator change is the
+exact move this campaign exists to remove. The fix also **corrects Wave P's own arithmetic**:
+Wave P projected MFT would reach 242.38 + 71.02 = 313.39 ppb "if the two channels are
+genuinely independent". They are not — both MFT routes share the trunk `Amadori_Rearrangement`
+as their rate-limiting step — and, more decisively, the volatile budget is fixed, so the
+single-lane figures were never addable. **Mass honesty was verified rather than argued:** at a
+fixed budget the allocated molar total equals `total_volatile_budget_molar` to 1 part in 10¹²
+both before and after, so adding channels moves the *split* and never the total.
 
 The one surviving literature constraint on the sulfur branch (Hofmann 1998, after three
 fabricated-source benchmarks were quarantined or deleted) was used to refit the branch —
@@ -488,23 +514,25 @@ We report the gap rather than absorbing it.
 
 **There is currently no "high" tier, and no benchmark in the panel is strict-ready
 (0/14).** Free-precursor sulfur chemistry used to sit here as the high-confidence lane; after
-the 2026-08-27 chemistry rebuild, the Wave N route correction and the Wave P refit the model
-under-predicts MFT by **1.41×** on its one verified
-sulfur benchmark and by 21–95× on the hydrolysate lanes, and the refit established that the
-residual is not removable by that barrier (its profile minimum sits at the floor of the
+the 2026-08-27 chemistry rebuild, the Wave N route correction, the Wave P refit and the Wave S1
+additive-propagator fix the model under-predicts MFT by **1.21×** on its one verified
+sulfur benchmark — while now **over**-predicting FFT on the same benchmark by **1.49×**, which
+is worse than before — and by 21–95× on the hydrolysate lanes, and the refit established that
+the residual is not removable by that barrier (its profile minimum sits at the floor of the
 defensible range). What survives is **ordering** — but read the size of it carefully, because
 the README previously quoted a number that no longer holds and attributed it to the wrong
-thing. Measured on the current tree (2026-08-27, after Wave P): the pentose ≫ hexose MFT
+thing. Measured on the current tree (2026-08-27, after Wave S1): the pentose ≫ hexose MFT
 constraint holds at
-**6.15×** (ribose 686.8 ppb vs glucose 111.6 ppb at matched conditions). It has now been
-published at 15.8×, then **8.98**×, then 3.39×, and now 6.15× — the falls were supports being
-removed, and **the rise is not a model improvement either**. Measured: zero the 3.30 kcal/mol
-gap between `thiol_addition_hexose` (29.65) and the refitted `thiol_addition_pentodiulose`
-(26.35) — i.e. make the two routes energetically identical — and the ratio collapses to
-**2.31×**. So the mechanism contributes ~2.3× and the remaining ~2.7× is carried by a barrier
-difference. Under Wave N that split was 1.13× structural out of 3.39×; **more of the ordering
-now rides on a fitted constant than before**, even though that constant is better provenanced
-than the estimate it replaced. Both halves of that sentence are true. The ordering agrees with
+**7.78×** (ribose 824.7 ppb vs glucose 106.0 ppb at matched conditions). It has now been
+published at 15.8×, then **8.98**×, then 3.39×, then 6.15×, and now 7.78× — the falls were
+supports being removed, and **the rises are not model improvements either**. Measured: zero the
+3.30 kcal/mol gap between `thiol_addition_hexose` (29.65) and the refitted
+`thiol_addition_pentodiulose` (26.35) — i.e. make the two routes energetically identical — and
+the ratio collapses to **3.14×**. So the mechanism contributes ~3.1× and the remaining ~2.5× is
+carried by a barrier difference. The split has been 1.13× of 3.39× (Wave N), 2.31× of 6.15×
+(Wave P) and 3.14× of 7.78× now: the structural share **has** grown, because the additive flux
+propagator stopped discarding the pentose limb's parallel routes, but **a third of the claim is
+still a gap between two barriers**, one of them an unconstrained legacy fit. The ordering agrees with
 Hofmann & Schieberle 1998; the *reason* the model reproduces it is weaker than the agreement
 looks. The wheat ≫ soy hydrolysate ranking claim is withdrawn entirely: both benchmarks that
 supported it were quarantined as fabricated.

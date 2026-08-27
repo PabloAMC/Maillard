@@ -335,16 +335,21 @@ def test_honest_external_literature_coverage_is_1_of_3_with_fitted_rows_excluded
         "Both fitted rows would have counted as literature hits under the old accounting. "
         "If this drops to 0, check that fitted rows are still being detected at all."
     )
-    # RE-PINNED 2026-08-27 (Wave P): 0.8558 -> 0.8495 dex. CAUSE: the six Wave P chemistry
-    # changes add species to the bounded volatile budget and moved the sulfur barrier, so
-    # every Monte-Carlo interval shifted slightly. The COUNTS did not move at all --
-    # hits 1/3, not_evaluable 4, excluded_fitted_rows 2, benchmark_count 11, matched rows
-    # 35 -- which is what identifies this as an interval-width change and not a coverage
-    # change. Companion widths: fitted_row 2.3205 -> 2.2767, internal_synthetic
-    # 3.7657 -> 3.6929.
-    assert coverage["median_ci_width_log10"] == pytest.approx(0.8495, abs=5e-4), (
+    # RE-PINNED 2026-08-27 (Wave S1): 0.8495 -> 0.9463 dex, i.e. the external-literature
+    # interval got 1.25x WIDER while its coverage stayed at 1/3. CAUSE: the flux propagator
+    # became additive over parallel channels, so a compound reached by several routes now
+    # samples the barrier uncertainty of ALL of them instead of only its fastest route --
+    # more routes, more spread. THIS IS A HONEST WIDENING AND IT IS NOT AN IMPROVEMENT:
+    # coverage did not rise with it, so the model is not paying for the extra width. The
+    # COUNTS again did not move -- hits 1/3, not_evaluable 4, excluded_fitted_rows 2,
+    # benchmark_count 11, matched rows 35 -- which is what identifies this as an
+    # interval-width change. Companion widths moved the OTHER way: fitted_row
+    # 2.2767 -> 2.2083, internal_synthetic 3.6929 -> 3.5612, because on those rows the
+    # extra channels concentrate the allocation rather than spreading it.
+    # (History: 0.8558 under Wave O, 0.8495 under Wave P.)
+    assert coverage["median_ci_width_log10"] == pytest.approx(0.9463, abs=5e-4), (
         f"Median CI width moved to {coverage['median_ci_width_log10']:.4f} dex from the "
-        f"published 0.856. A coverage rate that improves while this widens is the interval "
+        f"published 0.946. A coverage rate that improves while this widens is the interval "
         f"getting looser, not the model getting better."
     )
 
@@ -520,8 +525,8 @@ def test_holdout_scores_1_of_5_genuine_extrapolations_at_the_pre_widening_prior(
 # --------------------------------------------------------------------------------------
 
 
-def test_pentose_hexose_mft_ordering_is_6_15x_not_the_retired_3_39x_8_98x_or_15_8x():
-    """PENTOSE >> HEXOSE 6.15x (ribose 686.8 ppb vs glucose 111.6 ppb at matched conditions).
+def test_pentose_hexose_mft_ordering_is_7_78x_not_the_retired_6_15x_3_39x_8_98x_or_15_8x():
+    """PENTOSE >> HEXOSE 7.78x (ribose 824.7 ppb vs glucose 106.0 ppb at matched conditions).
 
     RE-PINNED 2026-08-27 (Wave N -- MFT ROUTE CORRECTION). Was 8.98x (ribose 981.3), and
     15.8x before that. CAUSE: the norfuraneol -> MFT step was retired on isotope evidence
@@ -566,38 +571,44 @@ def test_pentose_hexose_mft_ordering_is_6_15x_not_the_retired_3_39x_8_98x_or_15_
     glucose_ppb = _mft_predicted_ppb(hexose)
     ratio = ribose_ppb / glucose_ppb
 
-    # RE-PINNED 2026-08-27 (Wave P item 1). The ratio went UP, 3.39x -> 6.15x, and this
-    # test's own warning applies to the wave that wrote it: DO NOT REPORT THAT AS IMPROVED
-    # SUGAR DISCRIMINATION. Measured decomposition, in-process, by setting
-    # `thiol_addition_pentodiulose` equal to `thiol_addition_hexose` (29.65):
-    #     shipped (26.35 vs 29.65)   ribose 686.83 / glucose 111.65 = 6.1517x
-    #     equalised                  ribose 258.11 / glucose 111.65 = 2.3118x
-    # so 2.31x is structural and the remaining ~2.7x rides on a 3.30 kcal/mol gap between
-    # a FITTED barrier and an UNCONSTRAINED LEGACY FIT. Under Wave N the split was
-    # 1.13x structural out of 3.39x. In other words MORE of the ordering now rides on a
-    # fitted constant than before, even though that constant is better provenanced than
-    # the estimate it replaced. Both halves of that sentence are true and both belong in
-    # the report.
-    assert ribose_ppb == pytest.approx(686.8, rel=0.01), (
-        f"Ribose MFT moved to {ribose_ppb:.1f} ppb from the published 686.8 "
-        f"(370.3 after the Wave N route correction, 981.3 before it)"
+    # RE-PINNED 2026-08-27 (Wave S1 -- THE ADDITIVE FLUX PROPAGATOR). NO BARRIER MOVED.
+    # The ratio went UP again, 6.15x -> 7.78x, and this test's own warning applies with
+    # more force than ever: DO NOT REPORT THAT AS IMPROVED SUGAR DISCRIMINATION. The
+    # pentose limb is reached by more parallel routes than the hexose limb, and a
+    # propagator that sums parallel channels rewards exactly that. Re-measured
+    # decomposition, in-process, by setting `thiol_addition_pentodiulose` equal to
+    # `thiol_addition_hexose` (29.65):
+    #     shipped (26.35 vs 29.65)   ribose 824.72 / glucose 105.95 = 7.7838x
+    #     equalised                  ribose 332.35 / glucose 105.95 = 3.1368x
+    # so 3.14x is now STRUCTURAL and the remaining ~2.5x rides on the 3.30 kcal/mol gap
+    # between a FITTED barrier and an UNCONSTRAINED LEGACY FIT. History of the split:
+    # 1.13x of 3.39x under Wave N, 2.31x of 6.15x under Wave P, 3.14x of 7.78x now. The
+    # structural share HAS grown, and for a defensible reason -- richer topology now
+    # reaches the number instead of being discarded by the propagator -- but the gap
+    # between two barriers still carries a third of the claim, and the hexose limb still
+    # runs the demoted one-step lump.
+    assert ribose_ppb == pytest.approx(824.7, rel=0.01), (
+        f"Ribose MFT moved to {ribose_ppb:.1f} ppb from the published 824.7 "
+        f"(686.8 after the Wave P refit, 370.3 after the Wave N route correction, "
+        f"981.3 before it)"
     )
-    assert glucose_ppb == pytest.approx(111.6, rel=0.01), (
-        f"Glucose MFT moved to {glucose_ppb:.1f} ppb from the published 111.6 (109.3 "
-        f"before Wave P). The hexose limb still runs the demoted one-step lump; it moved "
-        f"only because the Wave P species additions dilute the shared volatile budget, so "
-        f"a LARGE move here has a different cause than a move in the ribose value."
+    assert glucose_ppb == pytest.approx(106.0, rel=0.01), (
+        f"Glucose MFT moved to {glucose_ppb:.1f} ppb from the published 106.0 (111.6 "
+        f"under Wave P, 109.3 before it). The hexose limb still runs the demoted one-step "
+        f"lump; it FELL under Wave S1 because the additive propagator gives the parallel "
+        f"sulfur channels a larger share of the same fixed volatile budget, so a LARGE "
+        f"move here has a different cause than a move in the ribose value."
     )
-    assert ratio == pytest.approx(6.15, rel=0.01), (
-        f"Pentose/hexose MFT ratio is {ratio:.2f}x, published as 6.15x. If it moved, do "
+    assert ratio == pytest.approx(7.78, rel=0.01), (
+        f"Pentose/hexose MFT ratio is {ratio:.2f}x, published as 7.78x. If it moved, do "
         f"not report it as changed sugar discrimination without first re-measuring the "
-        f"structural share -- only 2.31x of this ratio survives setting "
+        f"structural share -- only 3.14x of this ratio survives setting "
         f"`thiol_addition_pentodiulose` equal to `thiol_addition_hexose`; the rest is the "
         f"gap between a fitted barrier and an unconstrained legacy fit."
     )
 
     for doc, path in (("README.md", README), ("AUDIT.md", AUDIT)):
-        _assert_quoted(_doc_text(path), "6.15", doc, "the pentose/hexose ordering margin")
+        _assert_quoted(_doc_text(path), "7.78", doc, "the pentose/hexose ordering margin")
 
 
 # --------------------------------------------------------------------------------------

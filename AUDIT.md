@@ -87,27 +87,29 @@ These are worse than the numbers this repository advertised a week ago. They are
 | Surface | Value |
 | --- | --- |
 | Panel | **14 benchmarks** (2 more quarantined in Round 2); the MC uncertainty panel covers **11** of them, **35 matched rows** |
-| Literature rows inside 90% CI | **1/3 evaluable** (median CI width 0.86 dex), with fitted rows removed from numerator *and* denominator |
+| Literature rows inside 90% CI | **1/3 evaluable** (median CI width **0.95 dex** — it widened from 0.85 under Wave S1's additive propagator *without* buying any coverage), with fitted rows removed from numerator *and* denominator |
 | Fitted rows (constants back-solved from the benchmark) | 2/2 — **not evidence**; both would previously have been counted as literature hits |
 | Internal-synthetic rows (reproducibility only) | 18/18 — carries zero validation weight |
-| Benchmarks without blocking gaps | **0/6 predictive** (+ 1/4 fit-recovery, 4/4 synthetic; the 5/14 aggregate is all non-evidence). Fit-recovery fell 3/4 → 1/4 in Round 3 when the two Pratap-Singh benchmarks were corrected against the paper and stopped recovering. Wave O then refitted their constants onto the verified values and they recover again — at `pass-no-ranking`, which is not `pass`, so **none of these counts moved**. A refit changes the size of a recovery, never its evidential status. |
+| Benchmarks without blocking gaps | **0/6 predictive** (+ **0/4** fit-recovery, 4/4 synthetic; the **4/14** aggregate is all non-evidence — this row still read 1/4 and 5/14 after Wave P moved it, and was corrected in Wave S1). Fit-recovery fell 3/4 → 1/4 in Round 3 when the two Pratap-Singh benchmarks were corrected against the paper and stopped recovering. Wave O then refitted their constants onto the verified values and they recover again — at `pass-no-ranking`, which is not `pass`, so **none of these counts moved**. A refit changes the size of a recovery, never its evidential status. |
 | External hold-out | **1/5 genuine extrapolations** at the pre-widening prior — and 1/5 under the wider one too since Wave O; median fold error **93.68×**, worst **2474×**, coverage **3/8** at the shipped sigma. Only 4 of the 8 points are measurements at all. The median was 32.79× until Round 3 corrected two wrong table rows in the Li 2026 bundle (→ 15.31×, predictions unmoved), rose to 42.62× when Wave O refitted the ambient hexanal observability onto the paper's verified anchor, and rose again to 93.68× when Wave R found the Liu hold-out's two reference values matched nothing in their source and replaced them with the thesis's own Table 2.7. **Every rise came from correcting data toward the literature, and predictions moved in none of them**; see Round 3, Wave O and Wave R. |
 | Strict-ready benchmarks | **0/14** |
 | Reaction-chemistry lanes with generative templates | 5/16 (derived by enumeration, test-pinned) |
-| Test suite | **1265 passed, 1 skipped, 2 xfailed, 0 failed** (2026-08-27, after Wave P; 1242 after Round 3). The dvipng failure carried as "environmental" for the whole audit is **gone**: `--report` now degrades to mathtext instead of raising |
+| Test suite | **1274 passed, 1 skipped, 2 xfailed, 0 failed** (2026-08-27, after Wave S1; 1265 after Wave P, 1242 after Round 3). The dvipng failure carried as "environmental" for the whole audit is **gone**: `--report` now degrades to mathtext instead of raising |
 | Citation gate | **0 dead DOIs as of the 2026-08-26 and 2026-08-27 sweeps; 0 waivers.** The blocking gate is **structural and offline** — DOI grammar, confabulation signatures, status coherence, repair-record completeness. It cannot detect a live DOI that resolves to the wrong paper, which is exactly how the two PMC9905368 benchmarks survived every previous check. Liveness is a **scheduled weekly sample**, advisory, not part of the required set. |
 
 The coverage numbers *fell* during remediation — twice — and each fall is documented at
 the point it happened (see the README's calibration section and the ledger). That is the
 audit working as intended: each drop is the measured size of a fabricated support that was
 removed. What survives at quantitative fidelity is narrow; what survives robustly is
-**ordering** — pentose ≫ hexose sulfur chemistry (**6.15×** against a 3× floor; published as
+**ordering** — pentose ≫ hexose sulfur chemistry (**7.78×** against a 3× floor; published as
 15.8×, then corrected to **8.98**× on 2026-08-27, then to 3.39× the same day when the MFT
 route was corrected on isotope evidence, then to 6.15× when Wave P refitted the sulfur-addition
-barrier; and of that, only ~2.31× is structural — zeroing the 3.30 kcal/mol barrier gap between
-the hexose and pentose sulfur-addition steps collapses it, so ~2.7× is carried by a fitted
-barrier rather than by mechanism, and **more of the ordering rides on a fitted constant now
-than before**), matrix directionality — plus an experiment-prioritization machinery whose gap map is now honest.
+barrier, then to 7.78× when Wave S1 made the flux propagator additive; and of that, ~3.14× is
+structural — zeroing the 3.30 kcal/mol barrier gap between the hexose and pentose
+sulfur-addition steps collapses it, so ~2.5× is still carried by a fitted barrier rather than
+by mechanism. The structural share has grown (1.13× → 2.31× → 3.14×) because the propagator
+stopped discarding the pentose limb's parallel routes, but **a third of the claim is still a
+gap between two barriers**), matrix directionality — plus an experiment-prioritization machinery whose gap map is now honest.
 
 ## Round 2: the cold-start red team (2026-08-27)
 
@@ -388,6 +390,19 @@ one. Norfuraneol is kept as a genuine furanone product; it just no longer feeds 
 | *(Wave R)* Hold-out headline | median 42.62×, coverage 4/8 | **median 93.68×, coverage 3/8** | The Liu bundle's two reference values were replaced with the ones in its source; no prediction moved |
 | *(Wave P)* Matrix leave-lane-out ln-sigma | 3.25 on 5 residuals | **3.02** on 5, 90% CI [2.03, 6.30] | The Trikusuma nonanal residual fell 3238.93 → 1425.13 ppb |
 | *(Wave P)* Literature-row projection objective | 0.88 dex | **0.89 dex** at the shipped tau; the fit optimum moved 5011.87 → 10000 min (2.51× → **1.26×** away) | Chemistry additions + the sulfur refit |
+| *(Wave S1)* Hofmann MFT | 242.38 ppb — 1.4110× under | **283.59 ppb — 1.2060× under** | Additive flux propagator — no constant moved |
+| *(Wave S1)* Hofmann FFT | 217.99 ppb — 1.0900× over | **297.28 ppb — 1.4864× over** | Same; **worse**, and not clawed back |
+| *(Wave S1)* Hofmann contract | max ratio 1.4110 / MALE 0.0935 (fails on **one** criterion) | **1.4864 / 0.1267 dex** (fails on **both**) | Same — the untouched contract is 1.45× / 0.09 dex |
+| *(Wave S1)* Pentose ≫ hexose ordering | 6.15× (2.31× structural) | **7.78×** (**3.14×** structural) | The pentose limb has more parallel routes; the propagator stopped discarding them |
+| *(Wave S1)* Cerny 2008 MFT (reference-only) | 3.195× over | **2.787× over** | Additive flux propagator |
+| *(Wave S1)* Bolton 1994 MFT | 763.588× under | **748.022× under** | Same — a 2% move on a 750× miss changes nothing |
+| *(Wave S1)* Resconi furfural | 4.657× over | **4.402× over** | Same — furfural loses budget share to the sulfur channels |
+| *(Wave S1)* Internal snapshots, Hexanal | pea 0.1720 / soy 0.1783 ppb | **pea 0.7425 (×4.317) / soy 1.7006 (×9.540)** | The matrix calibration registry became reachable on the augmented lane; these are the Wave O refitted factors finally applying |
+| *(Wave S1)* Hold-out headline | median 93.68×, coverage 3/8, worst 2474× | **all eight points bit-identical** | Every hold-out bundle runs the `matrix_only` path, which neither fix touches |
+| *(Wave S1)* Matrix leave-lane-out ln-sigma | 3.02 on 5 residuals | **bit-identical** | The derivation reads neither the propagator nor the observability factors |
+| *(Wave S1)* MC external-literature CI width | 0.8495 dex | **0.9463 dex**, coverage still 1/3 | Additive channels sample more barriers, so intervals widened **without** buying coverage |
+| *(Wave S1)* Benchmarks without blocking gaps | 0/6 predictive, 0/4 fit-recovery, 4/4 synthetic (4/14) | **unchanged** | The four synthetic snapshots were refreshed, as they are after every intentional model change |
+| *(Wave S1)* Mechanistic-priority benchmarks | 2 | **0** | A side effect of the registry repair, and a **loss of signal**: `_matrix_closure_action` has no branch for `process_state_mismatch`, so a factor reached only through a state fallback now scores as an acceptable class-level transfer. Open item. |
 
 **The Hofmann row is the one to read twice.** The 1.45× was bought with
 `thiol_addition_norfuraneol` = 26.85 kcal/mol, a barrier fitted *through* the route the
@@ -534,6 +549,10 @@ route, and enriching the network cannot improve a number unless the new route is
 the old one. Reported, not fixed: making the propagator additive is a model-wide recalibration
 event and belongs to its own wave. Pinned in
 `tests/scientific/test_wave_p_chemistry_2026_08.py`.
+**→ CLOSED by Wave S1 (below). The propagator is now additive, MFT reads 283.59 ppb, and the
+313.39 ppb projected in the paragraph above was never obtainable — the two lanes share their
+rate-limiting step and the volatile budget is fixed. That paragraph is kept as the record of
+the finding; its arithmetic is superseded.**
 
 **And a naming hazard, found while placing the new families.** `src/conditions.py` selects the
 pH-ionisation and Labuza water-activity corrections by **substring match on the family name**.
@@ -600,6 +619,89 @@ And the caveat travels with the corrected values: Liu's standard curves were bui
 deionized water, not in the protein matrix**, so protein binding of the analyte is
 uncorrected and 0.188–3.42 µg/L is a *lower* bound on total nonanal. The over-prediction is,
 if anything, understated by this table.
+
+### Wave S1 — the additive flux propagator, and the registry nobody could reach (2026-08-27, owner-approved)
+
+Two **structural** fixes to `src/recommend.py`. No barrier, no observability factor, no
+projection constant was touched. Both were findings carried forward from earlier waves as
+`[P]`, both were reported-not-fixed at the time, and both are now closed.
+
+**Fix 1 — parallel channels can add.** Wave P's own headline finding: `predict_from_steps`
+relaxed to the *lowest-span route per product* and kept only that route's flux, so adding a
+real, literature-evidenced second route to the flagship compound contributed **exactly zero**
+(pentodiulose lane alone 242.38 ppb, C2+C3 lane alone 71.02 ppb, both together 242.38 ppb).
+Every compound-level claim in the repository rested on one route, and *"the model has N routes
+to X"* was not a statement about the prediction of X. Each product's flux proxy is now the
+**sum** over kinetically distinct routes, deduplicated on the route's full ordered step-set.
+
+> **The obvious guard was implemented, measured, and rejected — and that is the load-bearing
+> result.** The natural dedupe rule is *"two routes sharing a rate-limiting step are one
+> channel; take the max."* Measured: **both** MFT routes here have the same highest-barrier
+> step, the trunk `Amadori_Rearrangement` at 29.06 kcal/mol, which sits on the shared
+> cysteine/ribose stem that essentially every route in the network passes through. Under that
+> rule MFT keeps its old 242.38 ppb *exactly* and the whole live panel moves 3 rows by less
+> than 1.15× — winner-takes-all in all but name. It is also wrong on the physics: for a slow
+> trunk feeding two fast branches to P and one to Q, the trunk fixes the total flux and the
+> branches **partition** it by conductance, so P's share is 2/3, not 1/2. Because this
+> propagator's per-route weight is `pool · exp(−span/RT)` with
+> `exp(span/RT) = Σᵢ exp(barrierᵢ/RT)`, a dominant trunk collapses every route's weight onto
+> the same trunk value — and it is precisely **summing** them that reproduces the 2/3.
+
+This also **corrects Wave P's arithmetic**, which projected 242.38 + 71.02 = 313.39 ppb "if
+the two channels are genuinely independent". They are not independent, and the volatile budget
+is fixed, so the single-lane numbers were never addable. The shipped answer is 283.59 ppb.
+
+**Mass honesty, verified rather than asserted.** The allocation layer normalises activities to
+mole fractions of `total_volatile_budget_molar`. Measured on three systems (Hofmann, Resconi,
+the soy snapshot), running the same converged state through the additive proxy and through the
+retained winner-takes-all proxy: **allocated molar / budget = 1.000000000000 in every case,
+before and after.** The summed *ppb* moves by ≤0.6 %, and only because ppb is
+molecular-weight-weighted and the allocation shifted between species of different mass. Adding
+channels moves the split; it cannot mint mass.
+
+**Fix 2 — the matrix calibration registry was unreachable.** Wave O's finding (f): on the
+`matrix_precursor_augmented` lane, species injected from the lipid-oxidation path arrive
+labelled by *canonical SMILES* (`CCCCCC=O`), so the name-keyed
+`describe_matrix_calibration` matched nothing and the observability factor silently applied as
+**1.0**. Wave O proved it by changing the soy hexanal factor 4.32× and finding the snapshot
+bit-identical. The lookup now resolves a SMILES label to its compound-database name at the
+boundary, and the same perturbation moves the prediction by exactly 4.32× — pinned as a test.
+The internal snapshots can, for the first time, detect drift in
+`src/matrix_calibration_registry.py`.
+
+**What each fix moved, separately attributed.**
+
+| | Fix 2 alone (registry reachable) | Fix 1 alone (additive propagator) |
+| --- | --- | --- |
+| Scored panel rows moved | **6 of 42** — pea Hexanal ×4.3173, soy Hexanal ×9.5401, soy Nonanal ×1.0667, across the four internal snapshots | **23 of 42** — the sulfur channels rise, the pyrazine / disulfide / furfural rows fall by ×0.9747 to pay for them |
+| Hofmann MFT / FFT | unchanged | 242.38 → **283.59** / 217.99 → **297.28** |
+| External hold-out (8 points) | **bit-identical** | **bit-identical** |
+| Matrix ln-sigma | bit-identical | bit-identical |
+
+**Both fixes leave the external hold-out untouched, and the reason is worth stating.** All four
+hold-out bundles execute the `matrix_only` path: it passes compound *names* to the registry
+(so Fix 2 never applied to it) and it bypasses `predict_from_steps` entirely (so Fix 1 never
+applied to it). **The external hold-out therefore tests the lipid-oxidation and observability
+lane and says nothing whatsoever about the Maillard network propagator** — an eight-point
+insensitivity that no previous wave had measured.
+
+**What got worse, and stayed worse.** The flagship `cys_ribose_140C_Hofmann1998` contract now
+fails on *both* of its criteria (1.4864 / 0.1267 dex against 1.45× / 0.09 dex) where Wave P had
+it failing on one. FFT was already over-predicting and rose 1.36×. Nothing was refitted to
+recover it: the two lanes share their upstream trunk, so a barrier that pushed FFT down would
+take MFT with it. The Monte-Carlo external-literature interval **widened** 0.8495 → 0.9463 dex
+while its coverage stayed at 1/3 — extra width that bought nothing.
+
+**And one honest loss of signal.** Making the registry reachable removed the
+`mechanistic_blocker` flag from the internal snapshots' Hexanal and Nonanal rows, emptying the
+mechanistic-refinement watchlist (2 → 0 benchmarks). The rows now resolve a real record whose
+evidence strength is `process_state_mismatch` — the registry's honest label for a factor
+reached only through the `intermediate_matrix → ambient_slurry` fallback — but
+`_matrix_closure_action` has **no branch for that label**, so it is scored exactly like a
+genuine class-anchored transfer. The governing decision did not change (still
+`hold_observable_first`, still zero approved DFT jobs), so no compute was unlocked; what was
+lost is a warning. Pinned at 0 with the cause, and carried as an open item rather than repaired
+in the same pass as the fix that exposed it.
 
 ### What Round 3 means for the rest of the repository
 

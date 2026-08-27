@@ -160,9 +160,20 @@ def test_hofmann1998_after_the_refit():
     """
     evaluation = evaluate_benchmark(_HOFMANN)
     predicted = {c.compound: c.predicted_ppb for c in evaluation.comparisons}
-    assert predicted["2-methyl-3-furanthiol"] == pytest.approx(242.38, rel=1e-3)
-    assert predicted["2-furfurylthiol"] == pytest.approx(217.99, rel=1e-3)
-    # Still under / still over — the fit did not flip either direction.
+    # RE-PINNED 2026-08-27 (Wave S1). MFT 242.38 -> 283.59, FFT 217.99 -> 297.28.
+    # CAUSE: the flux propagator became ADDITIVE over parallel channels
+    # (`src/recommend.py::predict_from_steps`, `_route_channel_id`). BOTH compounds are
+    # reached by two enumerated routes here, so both rose. NOTHING WAS RE-FITTED to
+    # compensate: `thiol_addition_pentodiulose` is still the 26.35 this wave fitted, and
+    # the wave that changed the propagator deliberately did not touch a barrier.
+    # HALF OF THIS GOT WORSE and is pinned worse: MFT 1.4110x under -> 1.2060x under
+    # (better), FFT 1.0900x over -> 1.4864x over (WORSE), benchmark MALE 0.0935 -> 0.1267
+    # dex and max_ratio 1.4110 -> 1.4864, i.e. the contract now fails on BOTH of its
+    # criteria again rather than on one. The two lanes share their upstream trunk, so a
+    # barrier that pushed FFT down would push MFT down with it.
+    assert predicted["2-methyl-3-furanthiol"] == pytest.approx(283.59, rel=1e-3)
+    assert predicted["2-furfurylthiol"] == pytest.approx(297.28, rel=1e-3)
+    # Still under / still over — neither direction flipped.
     assert predicted["2-methyl-3-furanthiol"] < 342.0
     assert predicted["2-furfurylthiol"] > 200.0
 
@@ -199,25 +210,30 @@ def test_hexose_system_also_reaches_the_c2_c3_lane():
     assert "Mercaptoketone_Cyclodehydration" in families
 
 
-def test_the_second_mft_channel_contributes_exactly_zero_to_the_prediction():
-    """THE FINDING OF THIS WAVE, and it is about the propagator, not the chemistry.
+def test_the_second_mft_channel_now_contributes_after_the_wave_s1_propagator_fix():
+    """WAVE P'S FINDING, AND ITS RESOLUTION. Renamed and inverted 2026-08-27 (Wave S1).
 
-    `src/recommend.py` relaxes to the LOWEST-SPAN path per product; it does not sum
-    fluxes over parallel channels. Measured on cys_ribose_140C_Hofmann1998 at the
-    shipped constants, 2026-08-27:
+    WHAT WAVE P PINNED, verbatim from the version this replaces: the C2+C3 lane's
+    "MEASURED CONTRIBUTION TO THE SHIPPED PREDICTION: EXACTLY ZERO", because
+    `src/recommend.py` relaxed to the LOWEST-SPAN path per product and never summed
+    parallel channels. Its own failure message said this failure would be the
+    notification that the propagator had become additive. It has, and this is that
+    re-pin.
 
-        pentodiulose lane alone   242.38 ppb
-        C2+C3 lane alone           71.02 ppb
-        both lanes                242.38 ppb   <- the max, not the sum
+    MEASURED NOW, on cys_ribose_140C_Hofmann1998 at unchanged constants:
 
-    Had the two added, MFT would read 313.39 ppb, i.e. 1.09x under instead of 1.41x
-    under. So adding a real, literature-evidenced second channel to the flagship
-    compound moved the flagship number by exactly nothing. That is reported, not
-    fixed: changing the propagator to an additive one is a model-wide recalibration
-    event and belongs to its own wave.
+        pentodiulose lane alone (C2+C3 disabled)   217.25 ppb
+        both lanes                                 283.59 ppb
 
-    This test pins the ZERO. If someone makes the propagator additive, it fails, and
-    that failure is the notification.
+    NOTE WHAT THIS IS NOT. Wave P predicted 242.38 + 71.02 = 313.39 ppb "if the two MFT
+    channels are genuinely independent". Two things falsify that arithmetic and both are
+    measured, not argued. First, the two lanes DO share their rate-limiting step (the
+    trunk `Amadori_Rearrangement`), so the naive sum was never the right combination —
+    see tests/scientific/test_wave_s1_additive_flux_2026_08.py. Second, and more
+    importantly, the volatile budget is FIXED: adding a channel to MFT changes MFT's
+    SHARE of that budget, so the single-lane figures cannot simply be added, and the
+    pentodiulose-alone number itself falls (242.38 -> 217.25) once the competing FFT
+    channels also become additive. The 313.39 was never obtainable.
     """
     import src.smirks_engine as engine_module
 
@@ -234,12 +250,15 @@ def test_the_second_mft_channel_contributes_exactly_zero_to_the_prediction():
     finally:
         engine_module._c2_c3_mft_recombination = original
 
-    assert without["2-methyl-3-furanthiol"] == pytest.approx(
-        baseline["2-methyl-3-furanthiol"], rel=1e-12
-    ), (
-        "the C2+C3 lane now contributes to predicted MFT. If that is because the flux "
-        "propagator became additive, this is the expected failure — re-pin it and say "
-        "so in the ledger."
+    assert without["2-methyl-3-furanthiol"] == pytest.approx(217.25, rel=1e-3)
+    assert baseline["2-methyl-3-furanthiol"] == pytest.approx(283.59, rel=1e-3)
+    assert baseline["2-methyl-3-furanthiol"] > without["2-methyl-3-furanthiol"], (
+        "the C2+C3 lane must contribute to predicted MFT. If this fails the flux "
+        "propagator has gone back to winner-takes-all selection."
+    )
+    # And it is a real contribution, not rounding: +30.5% on the flagship number.
+    assert baseline["2-methyl-3-furanthiol"] / without["2-methyl-3-furanthiol"] == pytest.approx(
+        1.3054, rel=1e-3
     )
 
 
