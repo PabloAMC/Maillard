@@ -79,7 +79,7 @@ def _resolve_protocol_pilot_id(status_rows: Iterable[Mapping[str, Any]], protein
         dict(row)
         for row in status_rows
         if str(row.get("protein_type", "")) == protein_type
-        and str(row.get("source_origin", "")) == "internal_experiment"
+        and str(row.get("source_origin", "")) in {"synthetic_diagnostic", "internal_experiment"}
         and str(row.get("target_profile", "")) == "mixed"
     ]
     if not candidates:
@@ -177,7 +177,7 @@ def build_matrix_primary_benchmark_campaign(root: Path = ROOT) -> Dict[str, Any]
     promotion_payload = build_matrix_promotion_contract_artifact()
     status_rows = list(status_payload.get("benchmarks", []))
     assessment_rows = list(promotion_payload.get("benchmarks", []))
-    selected_target = dict(promotion_payload.get("selected_promotion_target", {}))
+    selected_target = dict(promotion_payload.get("selected_promotion_target") or {})
     selected_matrix = str(selected_target.get("protein_type", "pea_iso"))
     selected_internal_benchmark_id = _resolve_internal_benchmark_id(status_rows, selected_matrix)
 

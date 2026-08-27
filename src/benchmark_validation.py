@@ -6,7 +6,7 @@ import re
 from collections import defaultdict
 from difflib import SequenceMatcher
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional
+from typing import Any, Dict, Iterable, List, Mapping, Optional
 
 from src.conditions import ReactionConditions
 from src.barrier_constants import effective_barrier_from_rate_constant
@@ -699,21 +699,32 @@ def _run_benchmark_recommendation(
         from src.projection import DEFAULT_PROJECTION_STRATEGY
         for compound_name, yield_factor in MATRIX_BENCHMARK_BASE_MARKER_YIELDS.items():
             from rdkit import Chem
+            from rdkit.Chem import Descriptors
             smiles_map = {
                 "Hexanal": "CCCCCC=O",
                 "Nonanal": "CCCCCCCCC=O",
                 "1-Hexanol": "CCCCCCO",
-                "2-Pentylfuran": "CCCCC1=CC=CO1"
+                # Audit 2026-08-26: was CCCCC1=CC=CO1 (2-butylfuran, C8); the curated
+                # registry uses the correct C9 pentyl form, so canonical matching failed.
+                "2-Pentylfuran": "CCCCCC1=CC=CO1",
             }
             smi = smiles_map.get(compound_name)
             if smi:
                 mol = Chem.MolFromSmiles(smi)
-                mw = sum(atom.GetMass() for atom in mol.GetAtoms()) if mol else 100.0
+                # Full molecular weight (implicit H included) to mirror the reverse
+                # molar->ppb transform in recommend.py; the previous heavy-atom-only
+                # sum inflated the injected molarity by 11-16%.
+                mw = float(Descriptors.MolWt(mol)) if mol else 100.0
                 target_proxy_ppb = oxidation_load_ppb * float(yield_factor)
                 # target_proxy_ppb = molar_concentration * mw * ppb_conversion_factor
                 molar_conc = target_proxy_ppb / (mw * DEFAULT_PROJECTION_STRATEGY.ppb_conversion_factor)
+                # initial_concentrations is consumed downstream in mM (projection.py
+                # applies limiting_pool_to_molar_factor=1e-3); molar_conc above is in
+                # mol/L. The missing x1000 silently suppressed the whole volatile
+                # budget by 1000^(k/n) via the geometric-mean pool (audit 2026-08-26).
+                conc_mM = molar_conc * 1000.0
                 canon = canonicalize_smiles(smi, fallback_to_original=True, strip_salts=True)
-                initial_concentrations[canon] = initial_concentrations.get(canon, 0.0) + molar_conc
+                initial_concentrations[canon] = initial_concentrations.get(canon, 0.0) + conc_mM
 
     rec = Recommender()
     return rec.predict_from_steps(
@@ -1212,20 +1223,43 @@ def build_matrix_benchmark_deltas(
     return rows
 
 
+def matrix_source_anchor(bench: Mapping[str, Any]) -> str:
+    """Return the benchmark's citable external anchor, or "" if it has none.
+
+    2026-08-27 (audit remediation, DOI-less identifier retyping): four sources in
+    this repo are genuinely DOI-less (two theses, a US patent, a journal with no
+    DOI registration) and their identifiers used to be stored in fields named
+    ``doi`` / ``source_doi``, which is both dishonest and a citation-gate
+    violation. They now carry a typed ``identifier`` + ``identifier_scheme``
+    pair. A typed non-DOI identifier is exactly as much an external anchor as a
+    DOI, so every consumer that tested ``source_doi`` truthiness reads this
+    helper instead — otherwise retyping an identifier would silently *downgrade*
+    a real external source to "unspecified origin".
+    """
+    doi = str(bench.get("source_doi") or "").strip()
+    if doi:
+        return doi
+    identifier = str(bench.get("identifier") or "").strip()
+    if identifier:
+        return identifier
+    return ""
+
+
 def _matrix_source_origin(bench: dict) -> str:
     source_metadata = bench.get("source_metadata") or {}
     origin = str(source_metadata.get("origin", "")).strip()
     if origin:
         return origin
-    if bench.get("source_doi"):
+    if matrix_source_anchor(bench):
         return "external_literature"
     return "unspecified"
 
 
 def _matrix_source_reference(bench: dict) -> str:
     source_metadata = bench.get("source_metadata") or {}
-    if bench.get("source_doi"):
-        return str(bench["source_doi"])
+    anchor = matrix_source_anchor(bench)
+    if anchor:
+        return anchor
     generator = str(source_metadata.get("generator", "")).strip()
     origin = str(source_metadata.get("origin", "")).strip()
     if origin and generator:
@@ -1284,6 +1318,9 @@ def _increment_matrix_support_counts(counts: Dict[str, int], support_status: str
 
 
 def _matrix_external_data_status(bench: dict) -> str:
+    # This module is the single live implementation. A drifted duplicate family
+    # (benchmark_registry/evaluator/reporting/assertions/markdown) was confirmed
+    # dead code and deleted on 2026-08-27 — see tasks/audit_remediation.md.
     evidence_class = str(
         (bench.get("source_metadata") or {}).get(
             "evidence_class",
@@ -1295,8 +1332,18 @@ def _matrix_external_data_status(bench: dict) -> str:
 
     source_origin = _matrix_source_origin(bench)
     has_measured = bool(bench.get("measured_volatiles"))
-    if has_measured and (bench.get("source_doi") or source_origin.startswith("external")):
+    # 2026-08-27: reads the typed identifier as well as `source_doi` (see
+    # matrix_source_anchor) so a DOI-less external source is not downgraded.
+    if has_measured and (matrix_source_anchor(bench) or source_origin.startswith("external")):
         return "external_quantitative"
+    if has_measured and source_origin.strip().lower() == "synthetic_diagnostic":
+        # Audit 2026-08-26: payloads whose "measured" values are frozen model
+        # output (e.g. the ProtocolPilot intakes) must surface as synthetic,
+        # never as measured evidence of any grade.
+        return _CompatibilityStatus(
+            "synthetic_diagnostic_only",
+            aliases=("quantitative_unspecified_origin",),
+        )
     if has_measured and _is_internal_measured_matrix_source(source_origin):
         return _CompatibilityStatus(
             "internal_measured_quantitative",
@@ -1333,6 +1380,8 @@ def assess_matrix_benchmark_evidence(bench: dict | Path | str) -> MatrixBenchmar
         blocker = "benchmark only anchors adverse/off-flavour markers; no external meaty-positive targets are present"
     elif external_data_status == "external_validation_only":
         blocker = "external-validation hold-out only; explicitly excluded from calibration and promotion"
+    elif external_data_status == "synthetic_diagnostic_only":
+        blocker = "missing external quantitative matrix evidence for meaty-positive targets; current comparator is synthetic model output (diagnostic only)"
     elif external_data_status == "internal_measured_quantitative":
         blocker = "missing external quantitative matrix evidence for meaty-positive targets; current comparator is an internal measured experiment"
     elif external_data_status == "internal_reference_only":
@@ -1602,6 +1651,10 @@ def _matrix_compound_support_status(
         return "quantitative_closed"
     if signal_origin == "reference_volatiles":
         return "internal_reference_candidate"
+    if origin == "synthetic_diagnostic":
+        # Frozen model output carries reference-grade support at most, never
+        # measured-grade (audit 2026-08-26).
+        return "internal_reference_candidate"
     if evidence in {"internally_benchmarked", "conditional_calibration"} and _is_internal_measured_matrix_source(origin):
         return "internal_measured_candidate"
     if evidence in {"internally_benchmarked", "conditional_calibration"}:
@@ -1687,7 +1740,9 @@ def build_matrix_target_status_artifact(
         elif summary.ranking_contract_status != "pass":
             promotion_blocker = "ranking contract not yet passing"
         elif benchmark_counts["quantitative_closed"] < 2:
-            if evidence.external_data_status == "internal_measured_quantitative":
+            if evidence.external_data_status == "synthetic_diagnostic_only":
+                promotion_blocker = "insufficient externally measured target closure; current comparator is synthetic model output (diagnostic only)"
+            elif evidence.external_data_status == "internal_measured_quantitative":
                 promotion_blocker = "insufficient externally measured target closure; current comparator is internal measured only"
             elif evidence.external_data_status == "internal_reference_only":
                 promotion_blocker = "insufficient externally measured target closure; current comparator is internal reference-only"

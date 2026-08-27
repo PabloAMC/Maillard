@@ -1,12 +1,137 @@
 import optuna
 from pathlib import Path
-from typing import List, Optional
+from typing import Any, Dict, List, Mapping, Optional
 
 ROOT = Path(__file__).resolve().parents[1]
 
 from src.pipeline import MaillardPipeline  # noqa: E402
 from src.smirks_engine import ReactionConditions  # noqa: E402
 from src.pre_processor import PreProcessor  # noqa: E402
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Trial-parameter contract
+#
+# The Optuna search space is deliberately CLASS-based: one concentration knob
+# per amino-acid class, not one per precursor. That means `trial.params` keys
+# ("aa_conc_sulfur", "ph", …) are NOT precursor names, and feeding them to the
+# pipeline as `molar_ratios` is wrong twice over — the concentrations never
+# match a precursor label (so everything falls back to a flat 1.0) and "ph"
+# substring-matches "L-Phenylalanine", leaking the trial pH in as that amino
+# acid's concentration. The mapping below is the single source of truth used by
+# both `objective()` and `scripts/optimize_formulation.py`.
+# ─────────────────────────────────────────────────────────────────────────────
+
+#: Trial params that carry a precursor concentration, in millimolar (mM) — the
+#: unit `molar_ratios` values are consumed as downstream (see src/safety.py).
+CONCENTRATION_PARAM_KEYS = (
+    "sugar_conc",
+    "aa_conc_sulfur",
+    "aa_conc_branched",
+    "aa_conc_basic",
+    "aa_conc_other",
+)
+#: Trial params that are process conditions, not concentrations.
+CONDITION_PARAM_KEYS = ("ph", "temp", "aw", "time_minutes")
+#: Trial params whose value is a string; float() on these is what made the CLI
+#: crash unconditionally at the end of every optimization run.
+CATEGORICAL_PARAM_KEYS = ("intervention_agent", "pre_processing")
+#: Remaining numeric knobs that are neither concentrations nor conditions.
+AUXILIARY_PARAM_KEYS = ("intervention_dose",)
+
+_SULFUR_AMINO_ACIDS = ("cysteine", "methionine")
+_BRANCHED_AMINO_ACIDS = ("leucine", "isoleucine", "valine")
+_BASIC_AMINO_ACIDS = ("lysine", "arginine", "histidine")
+
+#: Fixed trace loading (mM) applied to every lipid off-flavour precursor.
+FIXED_LIPID_CONCENTRATION_MM = 0.1
+
+
+def amino_acid_concentration_param(name: str) -> str:
+    """Return the trial-parameter key that governs this amino acid's loading."""
+    lowered = str(name).strip().lower()
+    if lowered in _SULFUR_AMINO_ACIDS:
+        return "aa_conc_sulfur"
+    if lowered in _BRANCHED_AMINO_ACIDS:
+        return "aa_conc_branched"
+    if lowered in _BASIC_AMINO_ACIDS:
+        return "aa_conc_basic"
+    return "aa_conc_other"
+
+
+def build_molar_ratios(
+    params: Mapping[str, Any],
+    fixed_sugars: List[str],
+    fixed_amino_acids: List[str],
+    fixed_lipids: Optional[List[str]] = None,
+) -> Dict[str, float]:
+    """Map class-level trial concentrations onto real precursor names (mM)."""
+    molar_ratios: Dict[str, float] = {}
+    sugar_conc = float(params.get("sugar_conc", 1.0))
+    for sugar in fixed_sugars:
+        molar_ratios[sugar] = sugar_conc
+    for amino_acid in fixed_amino_acids:
+        key = amino_acid_concentration_param(amino_acid)
+        molar_ratios[amino_acid] = float(params.get(key, 1.0))
+    for lipid in (fixed_lipids or []):
+        molar_ratios[lipid] = FIXED_LIPID_CONCENTRATION_MM
+    return molar_ratios
+
+
+def interventions_from_params(params: Mapping[str, Any]) -> List[Dict[str, Any]]:
+    """Rebuild the intervention list a trial actually used."""
+    agent = params.get("intervention_agent", "none")
+    if not agent or str(agent) == "none":
+        return []
+    return [{"name": str(agent), "dose": float(params.get("intervention_dose", 0.0) or 0.0)}]
+
+
+def pre_processing_steps_from_params(params: Mapping[str, Any]) -> List[str]:
+    """Rebuild the pre-processing steps a trial actually used."""
+    choice = str(params.get("pre_processing", "none"))
+    if choice == "both":
+        return ["yeast_fermentation", "protease_hydrolysis"]
+    if choice in {"", "none"}:
+        return []
+    return [choice]
+
+
+def formulation_from_params(
+    params: Mapping[str, Any],
+    *,
+    name: str,
+    fixed_sugars: List[str],
+    fixed_amino_acids: List[str],
+    fixed_lipids: Optional[List[str]] = None,
+    protein_type: str = "free",
+    denaturation_state: Optional[float] = None,
+    pre_processor: Optional[PreProcessor] = None,
+) -> Dict[str, Any]:
+    """Rebuild the exact formulation dict a set of trial params describes.
+
+    Used by `objective()` to evaluate a trial and by the CLI to re-evaluate the
+    winning trial. Because both go through here, the "Optimized Parameter Set"
+    the CLI prints is the formulation that was actually scored.
+    """
+    fixed_lipids = fixed_lipids or []
+    molar_ratios = build_molar_ratios(params, fixed_sugars, fixed_amino_acids, fixed_lipids)
+    processor = pre_processor or PreProcessor()
+    molar_ratios = processor.apply(molar_ratios, pre_processing_steps_from_params(params))
+
+    return {
+        "name": name,
+        "sugars": list(fixed_sugars),
+        "amino_acids": list(fixed_amino_acids),
+        "lipids": list(fixed_lipids),
+        "molar_ratios": molar_ratios,
+        "ph": float(params.get("ph", 6.0)),
+        "temp": float(params.get("temp", 150.0)),
+        "aw": float(params.get("aw", 0.8)),
+        "time_minutes": float(params.get("time_minutes", 60.0)),
+        "interventions": interventions_from_params(params),
+        "protein_type": protein_type,
+        "denaturation_state": denaturation_state,
+    }
+
 
 class FormulationOptimizer:
     """
@@ -26,21 +151,23 @@ class FormulationOptimizer:
     def objective(self, trial: optuna.Trial, fixed_sugars: List[str], fixed_amino_acids: List[str], fixed_lipids: Optional[List[str]] = None) -> float:
         fixed_lipids = fixed_lipids or []
         
-        # 1. Sample continuous parameters
-        sugar_conc = trial.suggest_float("sugar_conc", 0.01, 1.0, log=True)
-        
+        # 1. Sample continuous parameters (concentrations are in mM).
+        # Values are read back off `trial.params` by `formulation_from_params`
+        # below, so the sampled space and the evaluated formulation cannot drift.
+        trial.suggest_float("sugar_conc", 0.01, 1.0, log=True)
+
         # Phase N: Sample independent concentrations based on amino acid class
-        aa_conc_sulfur = trial.suggest_float("aa_conc_sulfur", 0.01, 1.0, log=True)
-        aa_conc_branched = trial.suggest_float("aa_conc_branched", 0.01, 1.0, log=True)
-        aa_conc_basic = trial.suggest_float("aa_conc_basic", 0.01, 1.0, log=True)
-        aa_conc_other = trial.suggest_float("aa_conc_other", 0.01, 1.0, log=True)
+        trial.suggest_float("aa_conc_sulfur", 0.01, 1.0, log=True)
+        trial.suggest_float("aa_conc_branched", 0.01, 1.0, log=True)
+        trial.suggest_float("aa_conc_basic", 0.01, 1.0, log=True)
+        trial.suggest_float("aa_conc_other", 0.01, 1.0, log=True)
 
         ph = trial.suggest_float("ph", 3.0, 9.0)
         temp = trial.suggest_float("temp", 100.0, 200.0)
         aw = trial.suggest_float("aw", 0.3, 0.95)
-        # Time is logged for future kinetic-model expansion, currently not used in FAST bounds
-        time_mins = trial.suggest_float("time_minutes", 10.0, 120.0)
-        
+        trial.suggest_float("time_minutes", 10.0, 120.0)
+
+
         # Phase 20: Suggest interventions from library
         import yaml
         LIBRARY_PATH = ROOT / "data" / "interventions.yml"
@@ -52,64 +179,34 @@ class FormulationOptimizer:
             agents = ["none"]
             
         agent = trial.suggest_categorical("intervention_agent", agents)
-        agent_dose = trial.suggest_float("intervention_dose", 0.0, 1.0) if agent != "none" else 0.0
-        
-        interventions = [{"name": agent, "dose": agent_dose}] if agent != "none" else []
-        
+        if agent != "none":
+            trial.suggest_float("intervention_dose", 0.0, 1.0)
+
         # Phase 21: Pre-processing options (could also be part of the trial)
-        pre_processing = trial.suggest_categorical("pre_processing", ["none", "yeast_fermentation", "protease_hydrolysis", "both"])
-        pre_steps = []
-        if pre_processing == "both":
-            pre_steps = ["yeast_fermentation", "protease_hydrolysis"]
-        elif pre_processing != "none":
-            pre_steps = [pre_processing]
+        trial.suggest_categorical("pre_processing", ["none", "yeast_fermentation", "protease_hydrolysis", "both"])
 
         # 2. Setup the single evaluation condition
         cond = ReactionConditions(
-            pH=ph, 
-            temperature_celsius=temp, 
+            pH=ph,
+            temperature_celsius=temp,
             water_activity=aw,
             protein_type=self.protein_type
         )
-        
-        # 3. Create a custom grid override
-        molar_ratios = {}
-        for s in fixed_sugars:
-            molar_ratios[s] = sugar_conc
-            
-        for a in fixed_amino_acids:
-            name_lower = a.lower()
-            if name_lower in ["cysteine", "methionine"]:
-                molar_ratios[a] = aa_conc_sulfur
-            elif name_lower in ["leucine", "isoleucine", "valine"]:
-                molar_ratios[a] = aa_conc_branched
-            elif name_lower in ["lysine", "arginine", "histidine"]:
-                molar_ratios[a] = aa_conc_basic
-            else:
-                molar_ratios[a] = aa_conc_other
-                
-        for L in fixed_lipids:
-            molar_ratios[L] = 0.1 # Example fixed trace lipid
-            
-        # Phase 21: Apply Pre-Processing
-        processor = PreProcessor()
-        molar_ratios = processor.apply(molar_ratios, pre_steps)
 
-        formulation = {
-            "name": f"Trial_{trial.number}",
-            "sugars": fixed_sugars,
-            "amino_acids": fixed_amino_acids,
-            "lipids": fixed_lipids,
-            "molar_ratios": molar_ratios,
-            "ph": ph,
-            "temp": temp,
-            "aw": aw,
-            "time_minutes": time_mins,
-            "interventions": interventions,
-            "protein_type": self.protein_type,
-            "denaturation_state": self.denaturation_state
-        }
-        
+        # 3. Create a custom grid override.
+        # Built through the shared mapper so the CLI can rebuild this exact
+        # formulation from `trial.params` when it re-scores the winner.
+        formulation = formulation_from_params(
+            trial.params,
+            name=f"Trial_{trial.number}",
+            fixed_sugars=fixed_sugars,
+            fixed_amino_acids=fixed_amino_acids,
+            fixed_lipids=fixed_lipids,
+            protein_type=self.protein_type,
+            denaturation_state=self.denaturation_state,
+        )
+
+
         # 4. Evaluate using the robust pipeline without mutating global state (R.8 fix)
         designer = MaillardPipeline(self.target_tag, self.minimize_tag)
         res = designer.evaluate_single(formulation, cond)

@@ -26,6 +26,14 @@ logger = logging.getLogger(__name__)
 ROOT = Path(__file__).resolve().parents[1]
 CALIBRATION_HISTORY_DIR = ROOT / "data" / "calibration_history"
 
+# Measurements below ~0.1 ppb are at or under the quantitation limit of the GC-O
+# methods the intake payloads come from, so the measurement side of the log error is
+# floored there. Predictions are floored only to keep log10 defined (see the dated
+# note in `_compute_prediction_error`): flooring them at a physically meaningful
+# concentration flattens the objective and silently disables the calibration loop.
+MEASUREMENT_QUANTITATION_FLOOR_PPB = 0.1
+PREDICTION_LOG_GUARD_PPB = 1.0e-12
+
 
 def _monkey_patch_matrix_constants(
     protein_type: ProteinType,
@@ -152,8 +160,24 @@ def _compute_prediction_error(
                 
             # Log-scaled Mean Absolute Error (Log-MAE)
             # We use log10 to handle the huge dynamic range of ppb (from 0.1 to 10000)
-            log_meas = math.log10(max(meas_val, 0.1))
-            log_pred = math.log10(max(pred_val, 0.1))
+            #
+            # AUDIT 2026-08-27 (Wave H). The prediction side used to be clamped at the
+            # same 0.1 ppb floor as the measurement. That floor is right for a
+            # MEASUREMENT (0.1 ppb is around the quantitation limit of the GC-O methods
+            # these payloads come from) and wrong for a PREDICTION: it makes the
+            # objective exactly constant for every prediction below 0.1 ppb, so the
+            # L-BFGS-B gradient is identically zero and `calibrate_matrix_constants`
+            # reports "did not improve the MAE" and reverts — silently, for a reason that
+            # has nothing to do with the calibration. After the Wave G1 chemistry rebuild
+            # dropped sulfur yields 5-40x, that is the normal case, not an edge case:
+            # tests/integration/test_matrix_calibration_loop.py went red with a perfectly
+            # flat objective at MAE 3.5 = (|log10(0.1/500)| + |log10(0.1/200)|)/2, i.e. the
+            # value of the clamp itself rather than of any prediction.
+            # The prediction floor is now a pure log(0) guard placed far below any
+            # physically meaningful concentration, so under-prediction stays visible to
+            # the optimiser as a gradient instead of being flattened into a constant.
+            log_meas = math.log10(max(meas_val, MEASUREMENT_QUANTITATION_FLOOR_PPB))
+            log_pred = math.log10(max(pred_val, PREDICTION_LOG_GUARD_PPB))
             
             total_error += abs(log_pred - log_meas)
             count += 1

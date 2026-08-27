@@ -1,6 +1,7 @@
 import yaml
 import logging
 import math
+import re
 from pathlib import Path
 from typing import List, Dict, Tuple, Optional
 from dataclasses import dataclass, field
@@ -34,6 +35,30 @@ _FURFURAL_ALIASES = (
     "Furfural",
     "furfural",
 )
+
+
+_UNKNOWN_PRECURSOR_RE = re.compile(r"Unknown precursor '([^']*)'")
+
+
+def _extract_unresolved_names(message: str, requested: List[str]) -> List[str]:
+    """Pull the offending precursor name(s) out of a resolver error message.
+
+    ``precursor_resolver.resolve`` appends the full catalogue of available
+    names to its ValueError, which is useless in a report; we want the one
+    token the user actually got wrong.
+    """
+    found = _UNKNOWN_PRECURSOR_RE.findall(message or "")
+    if found:
+        return [str(name) for name in found]
+    # Fallback: report everything we were asked to resolve.
+    return [str(name) for name in requested]
+
+
+def _short_resolver_reason(message: str) -> str:
+    """Drop the giant ``Available: ...`` catalogue from a resolver error."""
+    text = str(message or "").strip()
+    head, sep, _tail = text.partition(". Available:")
+    return (head + ".") if sep else text
 
 
 def _max_predicted_signal(predicted_ppb: Dict[str, float], aliases: Tuple[str, ...]) -> float:
@@ -124,6 +149,10 @@ class FormulationResult:
     furanone_penalty: float = 0.0
     ranking_score: float = 0.0
     flavor_axis_summary: Dict[str, object] = field(default_factory=dict)
+    #: Formulations dropped from this evaluation batch because a precursor
+    #: could not be resolved. Populated on every result of the batch so the
+    #: omission is visible in reports instead of vanishing silently.
+    skipped_formulations: List[Dict[str, str]] = field(default_factory=list)
 
 
 def compute_ranking_score(
@@ -193,6 +222,9 @@ class MaillardPipeline:
         self.db = ResultsDB()
         self.sensory = SensoryPredictor()
         self.pre_processor = PreProcessor()
+        # Formulations dropped by the last evaluate_all() call because a
+        # precursor could not be resolved (see evaluate_all).
+        self.last_skipped_formulations: List[Dict[str, str]] = []
 
     def _load_grid(self) -> List[Dict]:
         if not GRID_FILE.exists():
@@ -201,6 +233,45 @@ class MaillardPipeline:
             data = yaml.safe_load(f)
             return data.get("formulations", [])
             
+    def grid_names(self) -> List[str]:
+        """Names of every formulation in the built-in grid, in file order."""
+        return [str(item.get("name", "")) for item in self.grid if item.get("name")]
+
+    def resolve_grid_formulation(self, name: str) -> Dict:
+        """Look up a grid formulation by name, tolerantly but never silently.
+
+        Exact match wins; then a case-insensitive exact match; then a unique
+        case-insensitive substring match (so ``"Cysteine Enrichment"`` finds
+        ``"Cysteine Enrichment (Basic)"``). Anything else raises with the full
+        list of valid names — the previous behaviour was a bare "not found",
+        which is what made the documented ``--names 'Baseline,...'`` quickstart
+        so hard to recover from.
+        """
+        requested = str(name).strip()
+        for item in self.grid:
+            if str(item.get("name", "")) == requested:
+                return item
+
+        lowered = requested.lower()
+        exact_ci = [item for item in self.grid if str(item.get("name", "")).lower() == lowered]
+        if len(exact_ci) == 1:
+            return exact_ci[0]
+
+        partial = [item for item in self.grid if lowered and lowered in str(item.get("name", "")).lower()]
+        if len(partial) == 1:
+            return partial[0]
+
+        available = ", ".join(f"'{n}'" for n in self.grid_names())
+        if len(partial) > 1:
+            ambiguous = ", ".join(f"'{item.get('name')}'" for item in partial)
+            raise ValueError(
+                f"Formulation '{name}' is ambiguous — it matches {ambiguous}. "
+                "Use the full name."
+            )
+        raise ValueError(
+            f"Formulation '{name}' not found in data/formulation_grid.yml. Available: {available}"
+        )
+
     def _load_tags(self) -> Dict[str, List[str]]:
         if not TAGS_FILE.exists():
             return {}
@@ -275,6 +346,13 @@ class MaillardPipeline:
             self.grid = [formulation]
             results = self.evaluate_all(global_conditions)
             if not results:
+                skipped = getattr(self, "last_skipped_formulations", []) or []
+                if skipped:
+                    detail = "; ".join(
+                        f"{row.get('name', 'unknown')}: {row.get('reason', 'unknown reason')}"
+                        for row in skipped
+                    )
+                    raise ValueError(f"Evaluation failed for formulation — {detail}")
                 raise ValueError("Evaluation failed for formulation")
             return results[0]
         finally:
@@ -286,6 +364,7 @@ class MaillardPipeline:
         Returns a ranked list of results.
         """
         results = []
+        skipped_formulations: List[Dict[str, str]] = []
         target_compounds = self.tags.get(self.target_tag, [])
         minimize_compounds = self.tags.get(self.minimize_tag, []) if self.minimize_tag else []
 
@@ -351,9 +430,26 @@ class MaillardPipeline:
             try:
                 precursors = resolve_many(all_names)
             except ValueError as e:
-                logging.getLogger(__name__).warning("Skipping '%s': %s", name, e)
+                # Do NOT swallow this. A single unrecognised precursor used to
+                # delete the whole formulation from the batch with only a log
+                # line, so an inverse-design screen could quietly rank 14 of 15
+                # grid entries and never say so.
+                skipped_formulations.append(
+                    {
+                        "name": str(name),
+                        "reason": _short_resolver_reason(str(e)),
+                        "unresolved_precursors": ", ".join(
+                            _extract_unresolved_names(str(e), all_names)
+                        ),
+                        "requested_precursors": ", ".join(str(n) for n in all_names),
+                    }
+                )
+                logging.getLogger(__name__).warning(
+                    "Skipping formulation '%s' — unresolved precursor(s): %s", name, e
+                )
                 continue
-                
+
+
             # Create a localized conditions object (e.g. to apply catalyst override if specified)
             effective_pH = family_upstream_contract.get("effective_pH", form.get("ph", global_conditions.pH))
             cond = ReactionConditions(
@@ -536,13 +632,19 @@ class MaillardPipeline:
                 "process_state": process_state,
             }
 
+            # `name_ratios` values are consumed as mM by the safety lane (see the
+            # `UNITS` contract in src/safety.py); grids that author them as
+            # unitless ratios are warned about by the literature runtime.
             safety_val, flagged = evaluate_formulation_safety(
-                name_ratios, 
-                cond.temperature_celsius, 
-                form.get("time_minutes", 60.0), 
+                name_ratios,
+                cond.temperature_celsius,
+                form.get("time_minutes", 60.0),
                 cond.pH,
                 modifiers=safety_modifiers
             )
+            # safety_val is now a genuine [0, 1] band-relative risk (2026-08-27),
+            # so this penalty is bounded by 2.0 instead of growing with the
+            # unbounded log-sum it replaced.
             s_penalty = safety_val * 2.0 # Weight for optimization
             
             trap_dict = rec_result["metrics"].get("trapping_efficiency", {})
@@ -682,7 +784,14 @@ class MaillardPipeline:
             )
             results.append(result)
 
-            
+        # Surface any formulation the resolver rejected: expose it on the
+        # pipeline (for callers that got an empty result list) and stamp it on
+        # every result of this batch (so reports can print it).
+        self.last_skipped_formulations = list(skipped_formulations)
+        if skipped_formulations:
+            for result in results:
+                result.skipped_formulations = list(skipped_formulations)
+
         # Rank by the full scientist-facing recommendation objective, then by lower off-flavour risk.
         risk_aversion = 1.0 # Default
         texture_aversion = 0.01 # 100 risk = 1.0 score penalty

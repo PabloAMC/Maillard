@@ -45,6 +45,16 @@ EXTERNAL_VALIDATION_PROTOCOL_DIR = ROOT / "data" / "protocols" / "external_valid
 EXTERNAL_VALIDATION_BENCHMARK_DIR = ROOT / "data" / "benchmarks" / "external_validation"
 EXTERNAL_VALIDATION_EVIDENCE_CLASS = "external_validation_only"
 
+# Read the live uncalibrated matrix sigma so the report's methodology disclosure
+# can never drift from the tier the envelopes are actually drawn with (it did:
+# the text asserted 2.0 for a day after the value was raised to 2.86).
+from src.uncertainty_propagation import (  # noqa: E402
+    DEFAULT_UNCALIBRATED_OBSERVABLE_PRIORS as _UNCALIBRATED_PRIORS,
+)
+
+_UNCALIBRATED_MATRIX_SIGMA = float(_UNCALIBRATED_PRIORS["matrix_headspace"])
+_UNCALIBRATED_MATRIX_FOLD = math.exp(1.645 * _UNCALIBRATED_MATRIX_SIGMA)
+
 # Compound aliases used to detect overlap between flavor-anchor compound names
 # and the calibration panel compound names. Keep this list short and only
 # add entries that have been manually verified.
@@ -972,6 +982,22 @@ def render_external_validation_markdown(payload: Mapping[str, Any]) -> str:
         f"**Median accuracy on hold-outs**: **{median_accuracy_str}** median fold error (median |log10 error| = **{median_abs_str}** dex).",
         "",
         f"Samples per hold-out bundle: {summary.get('n_samples', 0)}; seed {summary.get('seed', 0)}; bundles evaluated: {summary.get('holdout_benchmark_count', 0)}.",
+        "",
+        "> **Methodology disclosure (audit 2026-08-26, sigma refreshed 2026-08-27).**",
+        "> Hold-out envelopes are computed with the `uncalibrated` matrix prior tier",
+        f"> (matrix_headspace ln-sigma {_UNCALIBRATED_MATRIX_SIGMA:.2f}, ~±{_UNCALIBRATED_MATRIX_FOLD:.0f}x at 90% CI),",
+        "> which is substantially wider than the calibrated tier used",
+        "> for the in-panel headline — coverage here is therefore not comparable to the",
+        "> in-panel coverage number. Because that sigma was raised from 2.0 to",
+        f"> {_UNCALIBRATED_MATRIX_SIGMA:.2f} on 2026-08-26 (residual-derived, see",
+        "> `results/validation/matrix_sigma_residual_derivation.md`), any coverage gain",
+        "> against earlier runs of this report reflects a WIDER interval, not a more",
+        "> accurate prediction — read the median fold error, which is unaffected by the",
+        "> prior, alongside it. Additionally, bundles whose executable conditions",
+        "> are copied from an in-panel calibration benchmark re-score that anchor's",
+        "> prediction at its own conditions rather than testing extrapolation; only",
+        "> bundles at genuinely new process states (e.g. HME extrusion, roasting) test",
+        "> out-of-envelope transfer.",
         "",
         "## Hold-out bundles",
         "",

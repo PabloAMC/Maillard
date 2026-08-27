@@ -232,6 +232,17 @@ def calibrate_from_intake(
 ) -> Optional[Dict[str, Any]]:
     """Compatibility wrapper for calibrating matrix constants from a single intake payload."""
     payload = load_matrix_experiment_intake(payload_or_path) if isinstance(payload_or_path, (Path, str)) else dict(payload_or_path)
+    evidence_class = str(
+        payload.get(
+            "evidence_class",
+            (payload.get("provenance") or {}).get("evidence_class", ""),
+        )
+    ).strip()
+    if evidence_class == "external_validation_only":
+        raise ValueError(
+            "Refusing to calibrate from an external_validation_only payload: hold-out "
+            "evidence must never enter calibration (enforced guard, audit 2026-08-26)."
+        )
     provenance = dict(payload.get("provenance") or {})
     provenance.setdefault("origin", str(payload.get("source_kind", "internal_experiment") or "internal_experiment"))
     provenance.setdefault("source_reference", str(payload.get("experiment_id", "matrix_calibration_intake") or "matrix_calibration_intake"))

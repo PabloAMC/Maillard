@@ -352,8 +352,31 @@ _MELANOIDIN_TRAPPING_PROFILES = {
     _normalize_chemical_name("bis(2-methyl-3-furyl) disulfide"): {"slope": 0.55, "floor": 0.35},
 }
 
+# Fraction of the modelled volatile taken to survive to the headspace in a
+# hydrolysed-vegetable-protein matrix. These constrain the PRODUCT of the lane, not
+# any barrier: they were originally fit to the two xylose HVP benchmarks
+# (PMC9905368) with the barriers frozen, so a chemistry change underneath them is a
+# reason to RE-DERIVE them, never a reason to bend a barrier to compensate.
+#
+# RE-DERIVED 2026-08-27 (Wave H) against those same two literature benchmarks after
+# Wave G1's route change and Wave H's Hofmann-only barrier refit. Reproducible:
+# scripts/generators/rederive_hydrolysate_observability.py; record in
+# results/validation/hydrolysate_observability_rederivation.{json,md}.
+#   * Methional  0.0045 -> 0.05623.  Interior, identified: the unconstrained optimum
+#     is 0.0639 and 0.05623 is the conservative edge of the indifference band.
+#     Residuals go 16.2x / 12.4x under to 1.30x under / 1.01x.
+#   * 2-Furfurylthiol and 2-Methyl-3-furanthiol: NOT MOVED. Their unconstrained
+#     optima are 8.65 and 3.49 — 8.6x and 3.5x ABOVE the physical maximum of 1.0 for
+#     a surviving fraction. The model now UNDER-predicts these lanes (67x and 27x),
+#     and a factor that can only suppress cannot fix an under-prediction: the layer
+#     is saturated and the residual is somewhere else (see the allocation finding in
+#     results/validation/sulfur_barrier_refit_hofmann.md). The incumbents survive as
+#     unconstrained legacy estimates, NOT as fitted values.
+#   * bis(2-methyl-3-furyl) disulfide: NOT DERIVABLE. It has no row in any literature
+#     benchmark of this lane; its only comparators are the synthetic Internal2026 /
+#     ProtocolPilot2026 snapshots, which are forbidden as fit targets.
 _HYDROLYSATE_SULFUR_OBSERVABILITY_PROFILES = {
-    _normalize_chemical_name("Methional"): {"base_factor": 0.0045, "source_sensitive": False},
+    _normalize_chemical_name("Methional"): {"base_factor": 0.05623, "source_sensitive": False},
     _normalize_chemical_name("2-Furfurylthiol"): {"base_factor": 0.13, "source_sensitive": True},
     _normalize_chemical_name("2-Methyl-3-furanthiol"): {"base_factor": 0.13, "source_sensitive": True},
     _normalize_chemical_name("bis(2-methyl-3-furyl) disulfide"): {"base_factor": 0.18, "source_sensitive": True},
@@ -487,6 +510,8 @@ def _apply_output_projection(
             "projection_temperature_factor": float(projection_budget.temperature_factor),
             "projection_time_factor": float(projection_budget.time_factor),
             "projection_severity": float(projection_budget.severity),
+            "projection_kinetic_drive": float(projection_budget.kinetic_drive),
+            "projection_conversion_extent": float(projection_budget.conversion_extent),
             "volatile_yield_fraction": float(projection_budget.volatile_yield_fraction),
             "total_volatile_budget_molar": float(projection_budget.total_volatile_budget_molar),
         }
@@ -730,20 +755,25 @@ def _project_weighted_flux_to_ppb(
     if not candidate_entries:
         return {}
 
-    best_span = min(span for span, _depth, _weight, _path in candidate_entries.values())
     min_depth = min(depth for _span, depth, _weight, _path in candidate_entries.values())
-    span_window_kcal = max(0.35, 0.65 * 0.001987 * temperature_kelvin)
     max_weight = max(max(weight, 0.0) for _canon, (_span, _depth, weight, _path) in candidate_entries.items())
 
-    # At lower thermal severity, short terminal routes should retain a mild advantage over
-    # deeper ones when the final ppb budget is allocated across competing outputs.
+    # BOLTZMANN DE-DUPLICATION (2026-08-27).
+    # `weight` (tracking[canon][3]) is already a flux: reactant_flux_pool *
+    # co_reactant_factor * exp(-path_span / RT) * temporal_accessibility. The previous
+    # code ALSO multiplied in span_activity = exp(-(span - best_span) / (0.65 * RT))
+    # and then softened the flux with a ^0.65 exponent, so the net span discrimination
+    # was exp(-(1/0.65 + 0.65) * dspan / RT) = exp(-2.19 * dspan / RT) -- selectivity
+    # evaluated at an effective temperature of T/2.19 (~193 K at a 150 C bake), with no
+    # physical justification for either the second factor or the exponent.
+    # Selectivity is now applied exactly ONCE, at the physical temperature, by using the
+    # relative pathway flux directly. Everything else in the allocation (depth bias,
+    # direct-sulfur bonus) is an explicit non-Boltzmann heuristic keyed on severity.
     depth_bias_strength = max(0.0, 0.85 - severity) * 1.0
     activities = {}
     for canon, (span, depth, weight, best_path) in candidate_entries.items():
-        span_activity = math.exp(-(span - best_span) / span_window_kcal)
         if max_weight > 0.0:
-            relative_weight = max(weight, 0.0) / max_weight
-            flux_activity = max(relative_weight, 1.0e-6) ** 0.65
+            flux_activity = max(max(weight, 0.0) / max_weight, 1.0e-12)
         else:
             flux_activity = 1.0
         depth_activity = math.exp(-depth_bias_strength * max(depth - min_depth, 0))
@@ -751,9 +781,22 @@ def _project_weighted_flux_to_ppb(
         if best_path:
             terminal_family = str(best_path[-1].get("family", "")).lower().replace("-", "_").replace(" ", "_")
         direct_sulfur_bonus = 1.0
+        # AUDIT 2026-08-27 (Wave H): this equality test is now DEAD. Wave G1 renamed
+        # every terminal sulfur family — the routes that reach MFT today are
+        # `Thiol_Addition_Norfuraneol` (the real van den Ouweland route) and
+        # `Thiol_Addition_Legacy_Shortcut` (the demoted one-step lump), and neither
+        # is spelled "thiol_addition". So an unconstrained legacy heuristic silently
+        # switched itself off in the same commit that changed the chemistry. Measured
+        # size: at most 1.68x, and only 1.007x at the Hofmann1998 conditions where the
+        # sulfur residual is 5.6x, so it is NOT the cause of the sulfur collapse.
+        # Left dead ON PURPOSE rather than re-pointed: `direct_sulfur_bonus` is an
+        # unconstrained fit from the quarantined-target era and is the exact knob that
+        # would absorb the MFT residuals this panel exists to expose (see
+        # tasks/audit_remediation.md, "NOT refit, flagged for a dedicated workstream").
+        # Re-pointing it belongs to that workstream, with a refit, not to this one.
         if terminal_family == "thiol_addition":
             direct_sulfur_bonus += 0.8 * max(0.0, 0.85 - severity)
-        activities[canon] = span_activity * flux_activity * depth_activity * direct_sulfur_bonus
+        activities[canon] = flux_activity * depth_activity * direct_sulfur_bonus
 
     total_activity = sum(activities.values())
     if total_activity <= 0.0:
@@ -1352,6 +1395,8 @@ class Recommender:
                 "projection_temperature_factor": float(projection_budget.temperature_factor),
                 "projection_time_factor": float(projection_budget.time_factor),
                 "projection_severity": float(projection_budget.severity),
+                "projection_kinetic_drive": float(projection_budget.kinetic_drive),
+                "projection_conversion_extent": float(projection_budget.conversion_extent),
                 "water_activity": None if water_activity is None else float(water_activity),
                 "volatile_yield_fraction": float(projection_budget.volatile_yield_fraction),
                 "total_volatile_budget_molar": float(projection_budget.total_volatile_budget_molar),

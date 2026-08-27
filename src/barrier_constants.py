@@ -1,22 +1,62 @@
 """
 src/barrier_constants.py — Centralised FAST-mode heuristic barrier constants.
 
-These values are approximate activation energies (kcal/mol) for each
-Maillard reaction family, sourced from published DFT/experimental data
-and cross-checked against GFN2-xTB NEB estimates.
+These values are FITTED calibration constants (kcal/mol) for each Maillard
+reaction family: literature ranges were used as starting points, but many
+entries were subsequently adjusted so the FAST ranking reproduces the
+benchmark panel (several inline comments below are calibration rationales,
+e.g. "must stay competitive enough to recover the ... sulfur balance").
+Treat them as model parameters with literature-informed priors — NOT as
+independently anchored literature barriers.
 
 They are used by both `pipeline.py` and `run_pipeline.py` for the
 instant FAST-mode rankings.  Update this single file when new data
 is available — both call-sites import from here.
 
-Sources
--------
-* Yaylayan & Huyghues-Despointes 1994 (Schiff base condensation)
+Starting-point sources (see audit caveats)
+------------------------------------------
+* Yaylayan & Huyghues-Despointes 1994 — AUDIT 2026-08-26: that review covers
+  Amadori rearrangement products; cited here for Schiff ΔG‡, off-topic.
 * Martins & van Boekel 2003 (Amadori kinetics)
 * Hofmann & Schieberle 2000 (Strecker degradation)
-* Wedzicha 1984 (Cysteine thermolysis)
+* Wedzicha 1984 — AUDIT 2026-08-26: paper is a kinetic model of the
+  SULPHITE-inhibited Maillard reaction, not cysteine thermolysis.
 * Hodge 1953; Nursten 2005 (overall Maillard kinetics)
 * data/Gemini_Deep_Research/maillard_meat.md, data/Gemini_Deep_Research/maillard_plant_based.md (project literature reviews)
+
+AUDIT 2026-08-26 (forensics) — the sulfur-branch values (thiol_addition,
+thiol_addition_hexose, thiol_oxidation, aminoketone_condensation,
+strecker_degradation, thiohemiacetal_formation, thiol_dehydration) were all set
+in commit 2ea7d12 by a joint fit whose targets included the now-quarantined
+Mottram1994/Farmer1999 benchmarks. Post-quarantine, only thiol_addition retains
+a literature constraint (Hofmann1998, admissible window [28.10, 28.85] kcal/mol);
+it was RE-CENTRED to the Hofmann-only optimum 28.60 on 2026-08-26 (owner-approved).
+Treat the rest of the sulfur branch as free parameters pending re-anchoring — see
+tasks/audit_remediation.md.
+
+AUDIT 2026-08-27 (Wave H, sulfur refit) — Wave G1 replaced the fabricated one-step
+MFT shortcut with the accepted 1-deoxyosone → norfuraneol → MFT route, which moved
+the Hofmann constraint OFF `thiol_addition` (that key now labels only the demoted
+shortcut and the lumped `Thiol_Addition_H2` step) and ONTO
+`thiol_addition_norfuraneol`.  That constant was refit against Hofmann1998 alone
+(28.60 → 26.85; see its comment).  Measured at the same time, and recorded so the
+next person does not re-run the search: `thiohemiacetal_formation` has EXACTLY ZERO
+derivative on this benchmark over its whole defensible range; `thiol_dehydration` buys
+under 0.01 dex; and `furanone_cyclisation`, which only becomes identifiable once
+`thiol_addition_norfuraneol` drops below it, turns out to sit exactly at its own optimum
+(achievable gain 0.0000 dex). All three keep their incumbents.  The refit's own headline
+is that it does not work: no barrier value in any defensible range gets MFT closer
+than ~5.6x under, because the deficit is in the volatile-budget ALLOCATION (furfural,
+unmeasured in this benchmark, takes ~78% of a total budget that is itself the right
+order of magnitude), not in the barriers.  Full profile:
+results/validation/sulfur_barrier_refit_hofmann.md.
+
+AUDIT 2026-08-26 — cross-file inconsistency: data/lit/arrhenius_params.yml
+disagrees with this table on several families while both claim anchoring
+(mutarotation 22.6 vs 5.0 kcal/mol; thiol_addition 29 kJ/mol there vs
+28.85 kcal/mol here — same numerals, different units, suspected kJ/kcal
+transcription collision). Values left UNCHANGED pending human re-anchoring;
+see tasks/audit_remediation.md.
 """
 
 import json
@@ -49,9 +89,9 @@ FAST_BARRIERS: Dict[str, Tuple[float, str]] = {
     "thiol_addition_trimolecular": (24.0, "H2S-mediated sulfur trapping should remain accessible but no longer tie the upstream carbonyl bottleneck"),
     "thiohemiacetal_formation": (23.3, "Furfural-thiohemiacetal formation is favorable but not faster than the dominant carbonyl cascade"),
     "thiol_dehydration":    (26.8, "Thiohemiacetal dehydration remains feasible but should impose a real selectivity cost relative to direct furfural release"),
-    "thiol_addition":       (28.85,  "Pentose-derived MFT formation remains secondary to furfural release but must stay competitive enough to recover the Hofmann and Mottram sulfur balance"),
-    "thiol_addition_hexose": (29.65, "Hexose-derived MFT formation should remain weaker than the pentose branch while still yielding measurable Farmer-type sulfur output"),
-    "thiol_oxidation":      (29.02,  "Mottram-type furyl disulfide formation is secondary to MFT release but must stay accessible enough to preserve the calibrated disulfide branch"),
+    "thiol_addition":       (28.60,  "Re-centred 2026-08-26 to the Hofmann1998-only optimum after the Mottram/Farmer quarantine: the joint fit had pushed the value to 28.85, the boundary of Hofmann's admissible window [28.10, 28.85]; 28.60 minimises Hofmann MALE (0.082 -> 0.051)"),
+    "thiol_addition_hexose": (29.65, "UNCONSTRAINED LEGACY FIT (2026-08-26 forensics): tuned solely to the quarantined Farmer1999 benchmark; no surviving literature observable constrains it. Kept for behaviour continuity pending re-anchoring"),
+    "thiol_oxidation":      (29.02,  "UNCONSTRAINED LEGACY FIT (2026-08-26 forensics): tuned solely to the quarantined Mottram1994 disulfide row; surviving comparators are synthetic-only. Kept for behaviour continuity pending re-anchoring"),
 
     # ── Enolisation / dehydration ───────────────────────────────────
     "enolisation_intermediate": (21.0,  "Amadori/Heyns deoxyosone formation is the common gateway into furfural and sulfur branches; keep it competitive instead of falling back to the heuristic default barrier"),
@@ -60,8 +100,8 @@ FAST_BARRIERS: Dict[str, Tuple[float, str]] = {
     "dehydration":          (28.0,  "Coupled with enolisation; same approximate range"),
 
     # ── Strecker cascade ────────────────────────────────────────────
-    "strecker_degradation": (22.0,  "Calibrated to reduce pyrazine over-expression in acidic sulfur benchmark systems while staying in literature range"),
-    "aminoketone_condensation": (29.0,  "Pyrazine condensation should remain secondary to furfural in acidic sulfur systems while still producing measurable Farmer-type pyrazine output"),
+    "strecker_degradation": (22.0,  "UNCONSTRAINED LEGACY FIT (2026-08-26 forensics): calibrated against the quarantined Farmer1999 pyrazine row; no surviving observable constrains it. Kept pending re-anchoring"),
+    "aminoketone_condensation": (29.0,  "UNCONSTRAINED LEGACY FIT (2026-08-26 forensics): tuned solely to the quarantined Farmer1999 pyrazine target; no surviving observable constrains it. Kept pending re-anchoring"),
 
     # ── Retro-aldol ─────────────────────────────────────────────────
     "retro_aldol":          (32.0,  "Hodge 1953: C-C bond cleavage is high-barrier; softened from 35"),
@@ -83,7 +123,29 @@ FAST_BARRIERS: Dict[str, Tuple[float, str]] = {
     # ── Lipid Oxidation (Phase 19) ──────────────────────────────────
     "lipid_homolysis":      (42.0,  "O-O bond cleavage in hydroperoxides; high barrier"),
     "beta_scission":        (22.0,  "β-scission of alkoxy radicals; moderate barrier"),
-    "radical_crosstalk":    (15.0,  "Radical + H2S collisions; fast"),
+    "radical_crosstalk":    (15.0,  "Radical + H2S collisions; fast. NOTE 2026-08-27: the Radical_Crosstalk FAMILY was retired from the engine (it existed to consume fictitious elemental sulfur and quenched radicals by eating MFT). This key is retained because src/family_barrier_progress.py uses it as a family-coverage key"),
+
+    # ── ESTIMATED TIER (added 2026-08-27, Wave G1 fix 8) ─────────────
+    # Eight families were emitted by the engine but had NO entry here and no
+    # `_canonical_fast_family` route to one, so every one of them fell through
+    # to DEFAULT_BARRIER = 45.0 kcal/mol — a half-life of ~39,000 years at
+    # 150 C.  They were, in effect, silently switched off: the acrylamide and
+    # CML/CEL safety lanes, the furanone lane, the thiamine/GSH additive lane
+    # and the entire radical chain.  Giving them explicit values ACTIVATES
+    # those lanes; every value below is an ESTIMATE taken from the closest
+    # literature-anchored analogue already in this table, named in its comment,
+    # and NONE was chosen to reproduce any previous output.
+    "safety_risk_acrylamide": (30.83, "ESTIMATED. Direct transfer of the Knol et al. 2009 lumped Asn+sugar->acrylamide anchor Ea=129 kJ/mol (10.1016/j.foodchem.2009.11.049) already carried in DFT_ANCHOR_METADATA['asparagine_sugar_explicit_water_cluster']; that anchor describes exactly this step"),
+    "safety_risk_age":        (23.0,  "ESTIMATED. CML/CEL formation is a carbonyl-amine addition on the lysine epsilon-amine followed by rearrangement; taken as the Amadori analogue `amadori_rearrangement` (23.0, Martins 2003), the same 1,2-addition/proton-shift class"),
+    "furanone_formation":     (28.0,  "ESTIMATED. Furanone closure is a cyclisation/dehydration of a deoxyosone; taken as the `dehydration` / `2,3-enolisation` analogue (28.0, Nursten 2005)"),
+    "furanone_cyclisation":   (28.0,  "ESTIMATED. 1-deoxyosone -> norfuraneol/DMHF cyclodehydration; same analogue as `furanone_formation` (`dehydration`, 28.0). Deliberately NOT tuned to reproduce the output of the retired one-step MFT shortcut"),
+    "thiol_addition_norfuraneol": (26.85, "FITTED 2026-08-27 (Wave H) against cys_ribose_140C_Hofmann1998 ONLY, the sole surviving literature constraint on the sulfur branch. Norfuraneol + H2S -> MFT (van den Ouweland & Peer 1975, 10.1021/jf60200a038). Was 28.60, inherited from `thiol_addition` and from that key's PRE-G1 Hofmann window [28.10, 28.85] -- a window derived when MFT was made by the now-demoted one-step shortcut, so it did not survive the route change. Refit over the defensible range [23.30, 29.65] (the sulfur-addition class envelope already spanned by thiohemiacetal_formation and thiol_addition_hexose): profile min 0.6198 dex at the bottom, incumbent 0.6987 dex; 26.85 is the CONSERVATIVE EDGE of the 23.30-26.85 indifference band (within 0.01 dex of the optimum). The profile saturates inside the range -- no barrier value reproduces Hofmann's absolute yields, MFT stays 5.6x under. Reproducible: scripts/generators/refit_sulfur_barriers_hofmann.py; record in results/validation/sulfur_barrier_refit_hofmann.{json,md}"),
+    "additive_thermal_degradation": (25.0, "ESTIMATED. Thiamine/GSH thermal cleavage; taken as the existing `thiamine_degradation` / `additive_degradation` analogues (both 25.0)"),
+    "generalized_deamination": (21.0,  "ESTIMATED. Hydrolytic deamination of an alpha-aminoketone; taken as `enolisation_intermediate` (21.0), the directly analogous Amadori->deoxyosone + amine C-N cleavage"),
+    "radical_propagation_o2":  (5.0,   "ESTIMATED. R. + O2 is effectively barrierless and diffusion-controlled (<2 kcal/mol in the literature); assigned this table's near-barrierless tier value (`ring_opening`/`mutarotation`, 5.0) rather than 0 so it does not become a numerically dominant rate"),
+    "peroxy_h_abstraction":    (15.0,  "ESTIMATED. ROO. abstracting an allylic H is an H-atom transfer to a radical, the same class as `radical_crosstalk` (15.0, 'Radical + H2S collisions; fast'), which is the closest analogue in this table. Literature Ea for bis-allylic abstraction is lower (~6-8 kcal/mol); the conservative in-table analogue is used rather than an out-of-table number"),
+    "radical_termination":     (5.0,   "ESTIMATED. Russell-mechanism radical-radical termination is diffusion-controlled; assigned this table's near-barrierless tier (`ring_opening`, 5.0)"),
+    "furan_ring_aromatisation": (28.0, "ESTIMATED. Cyclodehydration + two-electron aromatisation closing a furan ring (thiamine -> 5-hydroxy-3-mercapto-2-pentanone -> MFT); taken as the `dehydration` analogue (28.0), the same cyclodehydration class as `furanone_cyclisation`"),
 }
 
 # Default barrier when no family pattern matches

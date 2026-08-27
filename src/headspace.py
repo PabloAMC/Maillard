@@ -21,12 +21,37 @@ from src.extrusion import compute_extrusion_headspace_adjustment
 from src.literature_runtime import get_retention_ph_release_profile
 from src.matrix_correction import ProteinType, resolve_compound_matrix_retention, resolve_matrix_correction
 
+# Upper bound of the van't Hoff extrapolation window for Kaw (audit 2026-08-26).
+#
+# `Kaw_25c` and `delta_H_sol_kj_mol` in data/lit/henry_constants.yml are fitted
+# near 298 K. A constant-enthalpy van't Hoff extrapolation is only defensible
+# while (a) the aqueous phase is still liquid water at ambient pressure and
+# (b) delta_H_sol is roughly temperature independent; both assumptions fail
+# above the normal boiling point of water. Extrapolating anyway produced the
+# audit's worked example: hexanal (Kaw_25c = 0.015, dH_sol = -40 kJ/mol) at
+# 453 K gives an extrapolation factor of ~249 and Kaw ~ 3.7, i.e. a
+# semi-volatile aldehyde predicted to sit almost entirely in the vapour phase,
+# which the underlying Henry fit cannot support.
+#
+# The reference temperature used in the exponent is therefore clamped to
+# [273.15, 373.15] K. Above 373.15 K (retort / extrusion regimes) Kaw is held
+# at its 100 C value, which is the last point the fit can defend; the residual
+# temperature dependence of those processes is carried by the empirical
+# process-state calibrations in src/matrix_calibration_registry.py instead.
+#
+# Note: no ceiling of Kaw <= 1 is imposed. Kaw > 1 is physical for sparingly
+# soluble gases (H2S reaches Kaw ~ 1.5 at 373 K), so a hard ceiling would be
+# wrong; the temperature clamp is the defensible bound.
+VANT_HOFF_MIN_TEMP_K = 273.15
+VANT_HOFF_MAX_TEMP_K = 373.15
+
+
 class HeadspaceModel:
     """
     Models the partitioning of volatiles between the food matrix and air.
     Accounts for temperature (Van't Hoff) and matrix suppression (lipids/proteins).
     """
-    
+
     def __init__(self, constants_path: str = "data/lit/henry_constants.yml"):
         self.constants_path = Path(constants_path)
         self.data = self._load_constants()
@@ -44,17 +69,26 @@ class HeadspaceModel:
         Calculates the dimensionless air-water partition coefficient at temp_k.
         Uses Van't Hoff / Clausius-Clapeyron extrapolation.
         Kaw(T) = Kaw(Tr) * exp(-dH/R * (1/T - 1/Tr))
+
+        The temperature entering the exponent is clamped to
+        [VANT_HOFF_MIN_TEMP_K, VANT_HOFF_MAX_TEMP_K]; see the module-level
+        comment on those constants for why (audit 2026-08-26).
         """
         entry = self.data.get(name)
         if not entry:
             return 0.01  # Default fallback volatility
-            
+
         kaw_298 = entry["Kaw_25c"]
         dh = entry["delta_H_sol_kj_mol"]
-        
+
+        # Clamp before extrapolating: outside the fitted window the constant
+        # dH_sol assumption breaks down and the exponential runs away
+        # (hexanal at 453 K -> Kaw 3.7, unphysical for a soluble aldehyde).
+        effective_temp_k = min(max(float(temp_k), VANT_HOFF_MIN_TEMP_K), VANT_HOFF_MAX_TEMP_K)
+
         # Extrapolate: Kaw(T) = Kaw(Tr) * exp(dH_sol/R * (1/temp_k - 1/Tr))
         # Since dH_sol is negative, Kaw increases as temp_k increases.
-        exponent = (dh / self.R) * (1.0 / temp_k - 1.0 / 298.15)
+        exponent = (dh / self.R) * (1.0 / effective_temp_k - 1.0 / 298.15)
         return kaw_298 * math.exp(exponent)
 
     def _extract_properties(self, smiles: str) -> Dict[str, float]:
@@ -103,6 +137,42 @@ class HeadspaceModel:
             return 45.0     # Carbonyl-amine covalent binding (Schiff)
         else:
             return 10.0
+
+    # Mirrors `_resolve_output_matrix_context` in src/recommend.py: a protein
+    # fraction at or above this value is the ReactionConditions "unspecified"
+    # sentinel (protein_fraction defaults to 1.0), not a measured composition.
+    UNSPECIFIED_PROTEIN_FRACTION_SENTINEL = 0.999
+
+    def _guard_matrix_fractions(self, fat_fraction: float, protein_fraction: float) -> tuple:
+        """
+        Neutralise the `protein_fraction = 1.0` sentinel (audit 2026-08-26).
+
+        `ReactionConditions.protein_fraction` defaults to 1.0, which in this
+        codebase means "unspecified" rather than a real volumetric fraction.
+        Feeding it into the sequestration denominator
+        `1 + Kfat*phi_fat + Kprot*phi_prot` suppresses headspace by up to ~46x
+        for a carbonyl (Kprot ~ 45), silently. `src/recommend.py` already guards
+        its own call sites; this guard makes `HeadspaceModel` safe for any new
+        caller. No production path currently reaches it: `recommend.py` zeroes
+        the fractions before calling, and `src/sensory.py` passes headspace=None.
+
+        A hydrated food matrix cannot physically be >= 99.9% protein by volume,
+        so clamping to 0.0 (rather than raising) keeps the model usable while
+        removing the landmine, and matches the existing "fall back, log, keep
+        going" style of this module.
+        """
+        fat = max(float(fat_fraction), 0.0)
+        protein = max(float(protein_fraction), 0.0)
+        if protein >= self.UNSPECIFIED_PROTEIN_FRACTION_SENTINEL:
+            logger.warning(
+                "predict_headspace received protein_fraction=%.3f; treating it as "
+                "'unspecified' (the ReactionConditions default sentinel) and using 0.0. "
+                "Pass a measured volumetric protein fraction, or protein_type=, "
+                "to model matrix retention.",
+                protein,
+            )
+            protein = 0.0
+        return fat, protein
 
     def _matrix_retention_fallback(
         self,
@@ -263,8 +333,14 @@ class HeadspaceModel:
 
         `pH` is optional and currently only applies an empirical plant-matrix
         release correction for acid-sensitive aldehydes/furans in pea/soy systems.
+
+        `protein_fraction` must be a real volumetric matrix fraction. Passing the
+        `ReactionConditions.protein_fraction` default of 1.0 straight through is
+        a sentinel meaning "unspecified", not a 100%-protein matrix, and is
+        neutralised here (see the guard below).
         """
         temp_k = temp_c + 273.15
+        fat_fraction, protein_fraction = self._guard_matrix_fractions(fat_fraction, protein_fraction)
         air_concs = {}
         base_matrix_retention = self._matrix_retention_fallback(
             protein_type,

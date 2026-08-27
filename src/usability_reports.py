@@ -482,8 +482,15 @@ def _build_aggregate_confidence_rows(
 def _fallback_sensitivity_summary(result: "FormulationResult") -> Dict[str, object]:
     precursor_attribution = getattr(result, "precursor_contributions", {}) or {}
     ranking_drivers = []
-    total = sum(float(value) for value in precursor_attribution.values())
-    for name, value in sorted(precursor_attribution.items(), key=lambda item: item[1], reverse=True)[:3]:
+    # Determinism: `precursor_contributions` is accumulated from a Python set in
+    # the recommender, so its key order varies with PYTHONHASHSEED. Summing the
+    # values in iteration order made the total differ by ~1 ULP between runs of
+    # identical science. Sum by sorted key, and break sort ties by name, so two
+    # in-process runs are bit-identical without pinning the hash seed.
+    total = sum(float(precursor_attribution[key]) for key in sorted(precursor_attribution))
+    for name, value in sorted(
+        precursor_attribution.items(), key=lambda item: (-float(item[1]), str(item[0]))
+    )[:3]:
         share = 100.0 * float(value) / total if total > 0 else 0.0
         ranking_drivers.append({
             "input": name,

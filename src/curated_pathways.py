@@ -1,6 +1,20 @@
 """Hand-curated Maillard reaction pathways used by the screening pipeline."""
 
+from src.barrier_constants import get_barrier
 from src.pathway_extractor import ElementaryStep, Species
+
+# Computational priors that are LOADED but deliberately NOT WIRED to any step,
+# with the reason. Recorded explicitly so a parked prior cannot be mistaken for
+# an oversight and quietly re-attached to the nearest-looking family.
+_PARKED_COMPUTATIONAL_PRIORS = {
+    "quinone_cys_michael": (
+        "SLR family 13 (cysteine thiol Michael addition to a polyphenol "
+        "quinone). Parked 2026-08-27: it was being averaged into the barrier "
+        "for furfural + H2S -> furfurylthiol, an unrelated reaction, where its "
+        "6.93 kcal/mol dominated the mean. No family-13 quinone/cysteine step "
+        "exists in the curated layer, so there is nothing to route it to."
+    ),
+}
 
 
 def _species(label: str, smiles: str) -> Species:
@@ -33,9 +47,15 @@ DHA = _species("dehydroalanine", "C=C(N)C(=O)O")
 LAL = _species("lysinoalanine", "NC(CCCCNCC(N)C(=O)O)C(=O)O")
 RIBOSE_GLY_SCHIFF = _species("ribose-glycine-Schiff-base", "OCC(O)C(O)C(O)/C=N/CC(=O)O")
 RIBOSE_GLY_AMADORI = _species("ribose-glycine-Amadori", "OCC(O)C(O)C(=O)CNCC(=O)O")
+RIBOSE_CYS_SCHIFF = _species("ribose-cysteine-Schiff-base", "OCC(O)C(O)C(O)/C=N/C(CS)C(=O)O")
+RIBOSE_CYS_AMADORI = _species("ribose-cysteine-Amadori", "OCC(O)C(O)C(=O)CNC(CS)C(=O)O")
 GLUCOSE_GLY_SCHIFF = _species("glucose-glycine-Schiff-base", "OCC(O)C(O)C(O)C(O)/C=N/CC(=O)O")
 GLUCOSE_GLY_AMADORI = _species("glucose-glycine-Amadori", "OCC(O)C(O)C(O)C(=O)CNCC(=O)O")
 DEOXYOSONE_3 = _species("3-deoxyosone", "O=CC(=O)CC(O)CO")
+# 1-deoxy-2,3-pentodiulose and norfuraneol: the accepted MFT precursors
+# (van den Ouweland & Peer 1975, DOI 10.1021/jf60200a038).
+DEOXYOSONE_1 = _species("pentose-1-deoxyosone", "CC(=O)C(=O)C(O)CO")
+NORFURANEOL = _species("norfuraneol", "CC1=C(O)C(=O)CO1")
 GLUCOSE_DEOXYOSONE_3 = _species("glucose-3-deoxyosone", "O=CC(=O)CC(O)C(O)CO")
 HMF = _species("HMF", "OCC1=CC=C(C=O)O1")
 HEXANAL = _species("hexanal", "CCCCCC=O")
@@ -49,29 +69,61 @@ def _step(reactants: list[Species], products: list[Species], reaction_family: st
     return ElementaryStep(reactants=reactants, products=products, reaction_family=reaction_family)
 
 
+# AUDIT 2026-08-27 (Wave G1 fix 9). Two things were repaired here.
+#
+# (a) FAMILY VOCABULARY. The curated layer used family strings the engine never
+#     emits ("Enolisation", "Sugar_Dehydration", and a pyrazine step mislabelled
+#     "Strecker_Degradation"). That split the two layers into separate
+#     vocabularies: `_wire_computational_priors` below keyed on the curated
+#     names, while the FAST barrier table keys on the engine names -- and
+#     "Sugar_Dehydration" in particular canonicalises to nothing, so it fell
+#     through to DEFAULT_BARRIER whenever the FAST path was used. Both layers
+#     now speak the engine's vocabulary.
+#
+# (b) PATHWAY C was not self-contained: it consumed DEOXYOSONE_3, which nothing
+#     in it produced, and reached furfural through a one-step ribose -> furfural
+#     lump. It now carries its own Schiff/Amadori/enolisation trunk (built on
+#     cysteine, so its declared `consumes` list is unchanged) and its MFT step
+#     follows the accepted norfuraneol route instead of the retired one-step
+#     3-deoxyosone + H2S shortcut.
+#
+# HYDROGEN in pathways B and C is a documented REDUCING-EQUIVALENT TOKEN, not a
+# pathway intermediate: the real donors/acceptors are the sugar-derived
+# reductones and dissolved O2, for which this model carries no species. Same
+# lumping convention as src/reaction_templates.py.
 PATHWAYS = {
     "A_Core_Maillard_Ribose_Gly": [
         _step([RIBOSE, GLYCINE], [RIBOSE_GLY_SCHIFF, WATER], "Schiff_Base_Formation"),
         _step([RIBOSE_GLY_SCHIFF], [RIBOSE_GLY_AMADORI], "Amadori_Rearrangement"),
-        _step([RIBOSE_GLY_AMADORI], [DEOXYOSONE_3, GLYCINE], "Enolisation"),
-        _step([DEOXYOSONE_3], [FURFURAL, WATER, WATER], "Sugar_Dehydration"),
+        _step([RIBOSE_GLY_AMADORI], [DEOXYOSONE_3, GLYCINE], "Enolisation_Intermediate"),
+        _step([DEOXYOSONE_3], [FURFURAL, WATER, WATER], "Enolisation_1_2"),
     ],
     "A_Core_Maillard_Glucose_Gly": [
         _step([GLUCOSE, GLYCINE], [GLUCOSE_GLY_SCHIFF, WATER], "Schiff_Base_Formation"),
         _step([GLUCOSE_GLY_SCHIFF], [GLUCOSE_GLY_AMADORI], "Amadori_Rearrangement"),
-        _step([GLUCOSE_GLY_AMADORI], [GLUCOSE_DEOXYOSONE_3, GLYCINE], "Enolisation"),
-        _step([GLUCOSE_DEOXYOSONE_3], [HMF, WATER, WATER], "Sugar_Dehydration"),
+        _step([GLUCOSE_GLY_AMADORI], [GLUCOSE_DEOXYOSONE_3, GLYCINE], "Enolisation_Intermediate"),
+        _step([GLUCOSE_DEOXYOSONE_3], [HMF, WATER, WATER], "Enolisation_1_2"),
     ],
     "B_Strecker_Leu": [
         _step([PYRUVALDEHYDE, LEUCINE], [METHYLBUTANAL_3, AMINOACETONE, CO2], "Strecker_Degradation"),
-        _step([AMINOACETONE, AMINOACETONE], [DIMETHYLPYRAZINE_25, WATER, WATER, HYDROGEN], "Strecker_Degradation"),
+        # This is the aminoketone self-condensation to the pyrazine, not a
+        # Strecker degradation; it was carrying the Strecker family (and hence
+        # the Strecker barrier) purely by mislabelling.
+        _step([AMINOACETONE, AMINOACETONE], [DIMETHYLPYRAZINE_25, WATER, WATER, HYDROGEN], "Aminoketone_Condensation"),
     ],
     "C_S_Maillard_FFT": [
         _step([CYSTEINE, WATER], [ACETALDEHYDE, H2S, NH3, CO2], "Cysteine_Degradation"),
-        _step([RIBOSE], [FURFURAL, WATER, WATER, WATER], "Sugar_Dehydration"),
+        _step([RIBOSE, CYSTEINE], [RIBOSE_CYS_SCHIFF, WATER], "Schiff_Base_Formation"),
+        _step([RIBOSE_CYS_SCHIFF], [RIBOSE_CYS_AMADORI], "Amadori_Rearrangement"),
+        # 1,2-enolisation limb -> 3-deoxyosone -> furfural -> FFT
+        _step([RIBOSE_CYS_AMADORI], [DEOXYOSONE_3, CYSTEINE], "Enolisation_Intermediate"),
+        _step([DEOXYOSONE_3], [FURFURAL, WATER, WATER], "Enolisation_1_2"),
         _step([FURFURAL, H2S, HYDROGEN], [FFT, WATER], "Thiol_Addition"),
-        _step([DEOXYOSONE_3, H2S, HYDROGEN], [MFT, WATER, WATER, WATER], "Thiol_Addition"),
-        _step([MFT, MFT], [MFT_DIMER, HYDROGEN], "Thiol_Addition"),
+        # 2,3-enolisation limb -> 1-deoxyosone -> norfuraneol -> MFT
+        _step([RIBOSE_CYS_AMADORI], [DEOXYOSONE_1, CYSTEINE], "Enolisation_2_3_Amadori"),
+        _step([DEOXYOSONE_1], [NORFURANEOL, WATER], "Furanone_Cyclisation"),
+        _step([NORFURANEOL, H2S, HYDROGEN], [MFT, WATER, WATER], "Thiol_Addition_Norfuraneol"),
+        _step([MFT, MFT], [MFT_DIMER, HYDROGEN], "Thiol_Oxidation"),
     ],
     "D_Offflavour_Trapping_Gly": [
         _step([HEXANAL, GLYCINE], [HEXANAL_GLY_SCHIFF, WATER], "Lipid_Schiff_Base"),
@@ -268,6 +320,9 @@ def _wire_computational_priors():
             if "ea_ph6_kj_mol" in lanth:
                 lagrain_lanth_ea_kcal = float(lanth["ea_ph6_kj_mol"]) / 4.184
 
+    # PARKED 2026-08-27 -- still read so the value stays visible in the load
+    # path and in any future re-routing, but deliberately not wired to a step.
+    # See `_PARKED_COMPUTATIONAL_PRIORS`.
     quinone_cys_barrier = 6.93
     quinone_cys_unc = 3.58
     for e in priors_data.get("dft_kinetic_priors", {}).get("entries", []):
@@ -310,30 +365,76 @@ def _wire_computational_priors():
                 barrier = (pe_amadori_barrier * 2 + egcg_ea_kcal * 1 + huang_ea_kcal * 2) / 5.0
                 uncertainty = (pe_amadori_unc * 2 + 3.5 * 1 + 3.0 * 2) / 5.0
                 
-            elif fam == "Enolisation":
+            elif fam == "Enolisation_Intermediate":
+                # 2026-08-27: key renamed from "Enolisation" (a family string the
+                # engine never emits) to the engine's own family name. Numbers
+                # unchanged.
                 if "glucose-glycine-Amadori" in reactants:
                     barrier = (furosine_from_3dg_barrier * 2 + martins_furosine_ea * 3) / 5.0
                     uncertainty = (furosine_from_3dg_unc * 2 + 1.5 * 3) / 5.0
                 else:
                     barrier = (pyrraline_from_3dg_barrier * 2 + martins_pyrraline_ea * 3) / 5.0
                     uncertainty = (pyrraline_from_3dg_unc * 2 + 1.5 * 3) / 5.0
-                    
-            elif fam == "Sugar_Dehydration":
+
+            elif fam == "Enolisation_1_2":
+                # 2026-08-27: key renamed from "Sugar_Dehydration". Numbers
+                # unchanged, but flagged: [P] CARRIED FORWARD -- both priors
+                # averaged here (`frontiers_2022_hcw_aa_arrhenius_v1` and
+                # `aa_ring_open_dicarbonyl`) are ASCORBIC ACID priors, and the
+                # ~6.6 kcal/mol they produce for deoxyosone -> furfural
+                # dehydration is far below the FAST table's literature-informed
+                # 28.0 for the same step. This is a provenance mismatch of the
+                # same kind as the quinone_cys_michael one fixed below; it was
+                # NOT in this wave's mandate and is left for an owner call
+                # rather than silently re-anchored.
                 barrier = (frontiers_ea_kcal * 2 + aa_ring_open_barrier * 2) / 4.0
                 uncertainty = (3.0 * 2 + aa_ring_open_unc * 2) / 4.0
-                
+
+            elif fam == "Enolisation_2_3_Amadori":
+                # New in the curated layer 2026-08-27 (the accepted MFT route).
+                # Inherits the enolisation family constant, as instructed.
+                barrier, uncertainty = get_barrier("Enolisation_2_3_Amadori")
+
+            elif fam == "Furanone_Cyclisation":
+                barrier, uncertainty = get_barrier("Furanone_Cyclisation")
+
             elif fam == "Strecker_Degradation":
                 barrier = 22.67
                 uncertainty = 1.5
-                
+
+            elif fam == "Aminoketone_Condensation":
+                # Previously mislabelled "Strecker_Degradation" and therefore
+                # silently given the Strecker barrier. Now takes the FAST
+                # table's `aminoketone_condensation` value (itself flagged there
+                # as an unconstrained legacy fit).
+                barrier, uncertainty = get_barrier("Aminoketone_Condensation")
+
             elif fam == "Cysteine_Degradation":
                 barrier = lagrain_elim_ea_kcal
                 uncertainty = 1.5
-                
+
             elif fam == "Thiol_Addition":
-                barrier = (quinone_cys_barrier * 2 + 18.0 * 3) / 5.0
-                uncertainty = (quinone_cys_unc * 2 + 1.5 * 3) / 5.0
-                
+                # 2026-08-27: the `quinone_cys_michael` DFT prior was PARKED
+                # here. It is an SLR family-13 observable -- Michael addition of
+                # a cysteine thiol to a POLYPHENOL QUINONE -- and was being
+                # averaged into the barrier for furfural + H2S, a completely
+                # different reaction; at 6.93 kcal/mol it dominated the average
+                # and pulled the step to 13.6 kcal/mol. There is no family-13
+                # quinone/cysteine step in the curated layer to route it to, so
+                # it is parked rather than re-pointed: see
+                # `_PARKED_COMPUTATIONAL_PRIORS` at the top of this module. The
+                # step now takes the
+                # FAST table's `thiol_addition` value, which is the only
+                # sulfur-branch constant with a surviving literature constraint
+                # (Hofmann 1998, 10.1021/jf9705983).
+                barrier, uncertainty = get_barrier("Thiol_Addition")
+
+            elif fam == "Thiol_Addition_Norfuraneol":
+                barrier, uncertainty = get_barrier("Thiol_Addition_Norfuraneol")
+
+            elif fam == "Thiol_Oxidation":
+                barrier, uncertainty = get_barrier("Thiol_Oxidation")
+
             elif fam == "Lipid_Schiff_Base":
                 barrier = (pe_schiff_base_barrier * 2 + 23.66 * 3) / 5.0
                 uncertainty = (pe_schiff_base_unc * 2 + 1.5 * 3) / 5.0

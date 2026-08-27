@@ -6,12 +6,20 @@ from src.input_normalization import normalize_aliases
 
 
 _FORMULATION_INPUT_ALIASES = {
-    "ph": ("PH",),
+    # "pH" is the natural spelling a scientist types; keep it first so the
+    # obvious key works without the caller having to know the internal casing.
+    "ph": ("pH", "PH"),
     "temperature": ("temp", "TEMP"),
     "water_activity": ("aw", "AW"),
     "protein_type": ("protein",),
     "matrix_type": ("matrix",),
 }
+
+# The keys `src.pipeline.MaillardPipeline.evaluate_all` actually reads off a
+# formulation mapping. `to_dict()` MUST emit these, otherwise a serialized
+# Formulation silently loses its process conditions when fed back to the
+# pipeline (it fell back to the global ReactionConditions instead).
+CANONICAL_PIPELINE_CONDITION_KEYS = ("ph", "temp", "aw", "time_minutes")
 
 @dataclass
 class Formulation:
@@ -44,10 +52,16 @@ class Formulation:
     def get(self, key: str, default: Any = None) -> Any:
         alias_map = {
             "temp": "temperature",
+            "TEMP": "temperature",
             "temperature": "temperature",
             "aw": "water_activity",
+            "AW": "water_activity",
             "water_activity": "water_activity",
             "ph": "ph",
+            "pH": "ph",
+            "PH": "ph",
+            "protein": "protein_type",
+            "matrix": "matrix_type",
         }
         return getattr(self, alias_map.get(key, key), default)
 
@@ -106,7 +120,16 @@ class Formulation:
         )
 
     def to_dict(self) -> Dict[str, Any]:
-        """Returns a dictionary representation for serialization."""
+        """Returns a dictionary representation for serialization.
+
+        Schema note (2026-08-27): this used to emit only ``temperature`` /
+        ``water_activity`` while the pipeline reads ``temp`` / ``aw``, so a
+        round-tripped formulation quietly lost its own temperature and water
+        activity and inherited the global ``ReactionConditions`` instead. The
+        canonical pipeline-read keys are now emitted alongside the dataclass
+        field names; ``from_dict`` accepts either spelling and prefers the
+        dataclass names, so the round trip is lossless in both directions.
+        """
         return {
             "name": self.name,
             "sugars": self.sugars,
@@ -116,6 +139,10 @@ class Formulation:
             "interventions": self.interventions,
             "molar_ratios": self.molar_ratios,
             "ph": self.ph,
+            # canonical pipeline-read keys
+            "temp": self.temperature,
+            "aw": self.water_activity,
+            # dataclass-native names (kept so from_dict round-trips exactly)
             "temperature": self.temperature,
             "water_activity": self.water_activity,
             "time_minutes": self.time_minutes,

@@ -36,6 +36,7 @@ from src.benchmark_validation import (
     get_benchmark_files,
     get_benchmark_metadata,
     load_benchmark,
+    matrix_source_anchor,
 )
 
 
@@ -84,17 +85,26 @@ DEFAULT_OBSERVABLE_PRIORS: Dict[str, float] = {
 # large uncertainty. They are deliberately set from physical reasoning, NOT fitted
 # to the external hold-out values (the 4 hold-out bundles remain frozen); the
 # resulting coverage is reported as-is, not tuned to a target.
+#
+# Residual-based sizing (audit follow-up 2026-08-26, the derivation tasks/todo.md
+# had promised): leave-lane-out transfer error over the in-panel matrix anchors
+# (hold-out untouched) gives RMS ln-sigma = 2.86, 90% chi-square interval
+# [1.98, 5.48] with n=6 — see scripts/generators/derive_matrix_sigma_from_residuals.py
+# and results/validation/matrix_sigma_residual_derivation.md. The original 2.0 sat
+# at the LOWER edge of that interval; on 2026-08-26 the owner approved raising the
+# value to the residual-derived point estimate 2.86, so the tier is now sized from
+# data rather than judgment.
 DEFAULT_UNCALIBRATED_OBSERVABLE_PRIORS: Dict[str, float] = {
-    "matrix_headspace": 2.0,   # ln-sigma; 90% CI ~ +/- 1.43 dex (~27x)
+    "matrix_headspace": 2.86,  # ln-sigma from leave-lane-out residuals; 90% CI ~ +/- 2.04 dex (~110x)
     "henry_kaw": 1.0,
     "matrix_retention": 0.7,
 }
 
 # Multiplicative 90% CI band implied by the dominant uncalibrated matrix sigma
-# above (matrix_headspace ln-sigma 2.0). Used by the RUNTIME report path to widen
+# above (auto-derived from the constant). Used by the RUNTIME report path to widen
 # a formulation's per-compound envelope when the formulation falls outside the
 # calibration scope, so a user's novel/out-of-registry run shows honestly wide CIs
-# instead of the tight in-panel band. ~[1/27, 27] around the point estimate.
+# instead of the tight in-panel band. At ln-sigma 2.86: ~[1/110, 110].
 _UNCALIBRATED_HEADSPACE_SIGMA = DEFAULT_UNCALIBRATED_OBSERVABLE_PRIORS["matrix_headspace"]
 UNCALIBRATED_ENVELOPE_LOWER_RATIO = math.exp(-1.645 * _UNCALIBRATED_HEADSPACE_SIGMA)
 UNCALIBRATED_ENVELOPE_UPPER_RATIO = math.exp(1.645 * _UNCALIBRATED_HEADSPACE_SIGMA)
@@ -459,6 +469,35 @@ def sample_offset_vectors(
     return samples
 
 
+# Envelopes narrower than this (in dex) are treated as degenerate: they either
+# trivially contain a value copied from the model or trivially miss everything.
+_MIN_EVALUABLE_CI_WIDTH_LOG10 = 0.01
+
+_SYNTHETIC_ORIGINS = {
+    "synthetic_diagnostic",
+    "internal_reproducibility_candidate",
+    "internal_experiment",
+}
+
+
+def _benchmark_signal_origin(bench_file: Path) -> str:
+    """Classify a benchmark's comparator signal as literature-measured or internal/synthetic."""
+    try:
+        bench = json.loads(Path(bench_file).read_text())
+    except (OSError, json.JSONDecodeError):
+        return "internal_synthetic"
+    origin = str((bench.get("source_metadata") or {}).get("origin", "")).strip().lower()
+    if origin in _SYNTHETIC_ORIGINS:
+        return "internal_synthetic"
+    # 2026-08-27: `matrix_source_anchor` also accepts the typed
+    # `identifier`/`identifier_scheme` pair that DOI-less sources (theses,
+    # patents, DOI-free journals) now carry, so retyping an identifier out of a
+    # `doi`-named field cannot reclassify a literature row as internal/synthetic.
+    if matrix_source_anchor(bench) or origin.startswith("external"):
+        return "external_literature"
+    return "internal_synthetic"
+
+
 def _percentile(sorted_values: Sequence[float], pct: float) -> float:
     if not sorted_values:
         return float("nan")
@@ -617,6 +656,43 @@ def propagate_benchmarks(
             )
         )
 
+    # Audit 2026-08-26 (4.2): the aggregate coverage number silently mixed
+    # literature-measured rows with internal synthetic comparators, and counted
+    # degenerate zero-width envelopes as ordinary pass/fail rows. Split them.
+    origin_by_benchmark: Dict[str, str] = {}
+    for env in benchmark_envelopes:
+        origin_by_benchmark[env.benchmark_id] = _benchmark_signal_origin(Path(env.bench_file))
+
+    split: Dict[str, Dict[str, Any]] = {
+        "external_literature": {"hits": 0, "total": 0, "not_evaluable": 0, "ci_widths_log10": []},
+        "internal_synthetic": {"hits": 0, "total": 0, "not_evaluable": 0, "ci_widths_log10": []},
+    }
+    for env in benchmark_envelopes:
+        bucket = split[origin_by_benchmark[env.benchmark_id]]
+        for c in env.compounds:
+            width = (
+                math.log10(c.predicted_p95 / c.predicted_p5)
+                if c.predicted_p5 > 0.0 and c.predicted_p95 > 0.0
+                else None
+            )
+            if width is None or width <= _MIN_EVALUABLE_CI_WIDTH_LOG10:
+                # A degenerate envelope cannot meaningfully contain (or miss) a
+                # measurement — report it, but keep it out of the coverage rate.
+                bucket["not_evaluable"] += 1
+                continue
+            bucket["total"] += 1
+            bucket["ci_widths_log10"].append(width)
+            if c.inside_ci:
+                bucket["hits"] += 1
+    for bucket in split.values():
+        widths = sorted(bucket.pop("ci_widths_log10"))
+        bucket["median_ci_width_log10"] = (
+            _percentile(widths, 50.0) if widths else None
+        )
+        bucket["ci_coverage_rate"] = (
+            bucket["hits"] / bucket["total"] if bucket["total"] else None
+        )
+
     payload: Dict[str, Any] = {
         "summary": {
             "n_samples": n_samples,
@@ -626,6 +702,7 @@ def propagate_benchmarks(
             "ci_coverage_hits": coverage_hits,
             "ci_coverage_rate": (coverage_hits / coverage_total) if coverage_total else None,
             "ci_level_pct": 90,
+            "signal_origin_split": split,
         },
         "priors": [
             {
@@ -640,6 +717,7 @@ def propagate_benchmarks(
             {
                 "benchmark_id": env.benchmark_id,
                 "bench_file": env.bench_file,
+                "signal_origin": origin_by_benchmark[env.benchmark_id],
                 "execution_path": env.execution_path,
                 "matched_compounds": env.matched_compounds,
                 "coverage_rate": env.coverage_rate,
@@ -668,6 +746,45 @@ def propagate_benchmarks(
     return payload
 
 
+def _render_signal_origin_split(split: Mapping[str, Any]) -> str:
+    """Render the honest coverage split (audit 2026-08-26).
+
+    The aggregate headline mixes literature-measured rows with internal
+    synthetic comparators (whose reference values are frozen model output) and
+    with degenerate zero-width envelopes. Only the literature slice is
+    validation evidence.
+    """
+    if not split:
+        return ""
+    lines = [
+        "> **Coverage split (read this, not the aggregate):** the aggregate above mixes",
+        "> literature-measured rows with internal synthetic comparators whose reference",
+        "> values are frozen model output; only the literature slice is validation",
+        "> evidence. Zero-width (degenerate) envelopes are excluded from coverage and",
+        "> counted as not-evaluable. Coverage is only interpretable next to its median",
+        "> CI width — a wide interval makes coverage cheap.",
+        ">",
+        "> | Signal origin | Inside 90% CI | Not evaluable | Median CI width (dex) |",
+        "> | --- | ---: | ---: | ---: |",
+    ]
+    labels = {
+        "external_literature": "External literature (validation evidence)",
+        "internal_synthetic": "Internal synthetic (reproducibility only)",
+    }
+    for key, label in labels.items():
+        bucket = split.get(key) or {}
+        hits = bucket.get("hits", 0)
+        total = bucket.get("total", 0)
+        rate = bucket.get("ci_coverage_rate")
+        rate_str = f" ({rate * 100:.0f}%)" if rate is not None else ""
+        width = bucket.get("median_ci_width_log10")
+        width_str = f"{width:.2f}" if width is not None else "n/a"
+        lines.append(
+            f"> | {label} | {hits}/{total}{rate_str} | {bucket.get('not_evaluable', 0)} | {width_str} |"
+        )
+    return "\n".join(lines)
+
+
 def render_markdown(payload: Mapping[str, Any]) -> str:
     summary = payload.get("summary", {})
     coverage_rate = summary.get("ci_coverage_rate")
@@ -680,6 +797,8 @@ def render_markdown(payload: Mapping[str, Any]) -> str:
         "_Monte Carlo propagation of barrier-family offset priors (additive Gaussian, kcal/mol) through the benchmark evaluator. CI = 90% (P5–P95)._",
         "",
         f"**Headline trust metric**: measured value lies inside 90% CI for **{summary.get('ci_coverage_hits', 0)} / {summary.get('matched_compound_count', 0)}** matched compounds (**{coverage_str}**).",
+        "",
+        _render_signal_origin_split(summary.get("signal_origin_split") or {}),
         "",
         f"Samples per benchmark: {summary.get('n_samples', 0)}; seed {summary.get('seed', 0)}; benchmarks evaluated: {summary.get('benchmark_count', 0)}.",
         "",

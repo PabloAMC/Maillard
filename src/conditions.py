@@ -6,6 +6,43 @@ import numpy as np
 from src.barrier_constants import arrhenius_rate_constant, get_donor_reactivity_multiplier
 from src.extrusion import build_extrusion_process_profile, normalize_moisture_regime
 
+
+# ── Amine-nucleophile matcher exemption (2026-08-27, Wave H) ──────────────────
+# `_ionization_correction` and `_water_activity_correction` classify a reaction
+# family by SUBSTRING.  Both were written for the amine-nucleophile steps of the
+# cascade — Schiff condensation, the Amadori/Heyns rearrangement, Strecker — where
+# the rate really does track the fraction of free (deprotonated) amine and where
+# Labuza's aw optimum was measured.
+#
+# Wave G1 introduced `Enolisation_2_3_Amadori`: the 2,3-enolisation /
+# beta-elimination that RELEASES the amino acid from the Amadori compound and
+# opens the accepted 1-deoxyosone -> norfuraneol -> MFT route (van den Ouweland &
+# Peer 1975).  It has no amine nucleophile — the amine is a leaving group — but
+# its NAME contains "amadori", so it silently collected both corrections.  At the
+# Hofmann1998 conditions (pH 5.0, aw 0.98) that is 1e-3 * 0.62 = 6.2e-4, i.e.
+# +6.06 kcal/mol of effective barrier, which pushed the real MFT route ~1600x
+# below the demoted one-step shortcut that Wave G1 had just replaced it with: the
+# flagship chemistry fix was inert, and the two knobs Wave H was asked to refit
+# (`thiol_addition_norfuraneol`, `furanone_cyclisation`) had exactly zero
+# derivative on every prediction.
+#
+# The exemption is deliberately narrow: it fires only on families that are
+# themselves enolisations / eliminations / deaminations, i.e. steps in which the
+# nitrogen leaves.  Of the ~35 families the engine emits, `Enolisation_2_3_Amadori`
+# is the only one that both matches an amine-nucleophile keyword and is such a
+# step, so this changes the classification of exactly one family.  Measured
+# prediction impact at the shipped barriers: none — the norfuraneol route becomes
+# the selected MFT path with the identical span and flux the shortcut had, so the
+# panel is byte-identical (verified 2026-08-27).  What it restores is
+# identifiability of the new route's barriers.
+_AMINE_LEAVING_GROUP_FAMILY_MARKERS = ("enolisation", "elimination", "deamination")
+
+
+def _releases_rather_than_attacks_with_the_amine(normalized_family: str) -> bool:
+    """True for families in which the amine is a leaving group, not a nucleophile."""
+    return any(marker in normalized_family for marker in _AMINE_LEAVING_GROUP_FAMILY_MARKERS)
+
+
 @dataclass
 class ReactionConditions:
     """
@@ -262,11 +299,13 @@ class ReactionConditions:
         Replaces arbitrary sigmoids.
         """
         fam = pathway_type.lower()
+        if _releases_rather_than_attacks_with_the_amine(fam):
+            return 1.0
         # Amine reactions require the deprotonated form (R-NH2)
         if any(x in fam for x in ("amadori", "strecker", "schiff")):
             pKa = 8.0  # Common alpha-amino pKa
             return 1.0 / (1.0 + 10**(pKa - self.pH))
-        
+
         # Pyrazines often peak at slightly alkaline pH
         elif "pyrazine" in fam:
             return 1.0 / (1.0 + 10**(6.5 - self.pH))
@@ -281,7 +320,10 @@ class ReactionConditions:
         """
         aw = self.water_activity
         fam = pathway_type.lower()
-        
+
+        if _releases_rather_than_attacks_with_the_amine(fam):
+            return 1.0
+
         if any(x in fam for x in ("amadori", "strecker", "pyrazine")):
             if aw < 0.2:
                 return 0.1

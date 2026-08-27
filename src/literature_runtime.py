@@ -2,8 +2,9 @@ from __future__ import annotations
 
 import json
 import math
+import warnings
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Mapping, Optional
+from typing import Any, Dict, Iterable, List, Mapping, Optional, Sequence
 
 from src.family_ingestion_plan import load_family_ingestion_plan
 from src.kokumi_scoring import build_kokumi_support_profile
@@ -18,7 +19,16 @@ from src.matrix_prior_registry import summarize_family_prior_bundle
 from src.matrix_targets import get_compound_panel_entry, iter_target_panel_entries
 from src.lipid_oxidation import summarize_lipid_runtime_split
 from src.projection_metadata import ProjectionMetadataMap
-from src.safety import get_safety_reference_payload, get_safety_reference_range, predict_acrylamide, predict_cel, predict_cml, predict_furosine
+from src.safety import (
+    MG_PER_KG_TO_PPB,
+    get_safety_reference_payload,
+    get_safety_reference_range,
+    mg_per_100g_protein_to_ppb,
+    predict_acrylamide,
+    predict_cel,
+    predict_cml,
+    predict_furosine,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -110,6 +120,111 @@ _PROTEIN_SOURCE_PROFILES = {
 def _normalize_name(name: str) -> str:
     normalized = str(name).lower().replace("_", " ").replace("-", " ")
     return " ".join(normalized.split())
+
+
+#: Tokens whose legitimate matches are morphological variants ("ferment" ->
+#: "fermentation"/"fermented", "culture" -> "cultured"). They match at a word
+#: START; every other token must match a whole word. Plain substring matching
+#: used to fire on "important"/"imported" for "imp" and on "asnase"
+#: (asparaginase) for "asn".
+_STEM_MATCH_TOKENS = {"ferment", "culture", "hydroly", "cultur"}
+
+
+def _token_matches(value: str, token: str) -> bool:
+    """Word-boundary token matching over an already-normalized name."""
+    target = str(token).strip().lower().replace("_", " ").replace("-", " ")
+    if not target:
+        return False
+    text = str(value).strip().lower()
+    if " " in target:
+        return target in text
+    words = text.split()
+    if target in _STEM_MATCH_TOKENS:
+        return any(word.startswith(target) for word in words)
+    return any(word == target or word == target + "s" for word in words)
+
+
+def _any_token_matches(value: str, tokens: Sequence[str]) -> bool:
+    return any(_token_matches(value, token) for token in tokens)
+
+
+#: CANONICAL UNIT for every `molar_ratios` / `effective_molar_ratios` mapping in
+#: the repo: millimolar (mM). `src.safety.predict_acrylamide` and the AGE
+#: predictors consume these values as mM, and three different authoring
+#: conventions were found in-repo (mM, mol/L, and unitless 1:1:1-style ratios),
+#: which move the predicted acrylamide by ~3300x. Payloads may declare their own
+#: unit with a `concentration_unit` entry; values are NEVER silently rescaled.
+MOLAR_RATIO_CANONICAL_UNIT = "mM"
+
+#: Reserved keys inside a molar_ratios mapping that carry metadata, not a
+#: concentration.
+MOLAR_RATIO_METADATA_KEYS = {"concentration_unit", "__concentration_unit__", "units", "unit"}
+
+#: Heuristic: if every declared concentration is <= this and no unit was
+#: declared, the mapping was almost certainly authored as unitless ratios.
+UNITLESS_RATIO_SUSPICION_MAX = 5.0
+
+
+def _extract_declared_concentration_unit(mapping: Optional[Mapping[str, Any]]) -> str:
+    for key, value in (mapping or {}).items():
+        if str(key).strip().lower() in MOLAR_RATIO_METADATA_KEYS and isinstance(value, str):
+            return str(value).strip()
+    return ""
+
+
+def _numeric_ratio_items(mapping: Optional[Mapping[str, Any]]) -> Dict[str, float]:
+    numeric: Dict[str, float] = {}
+    for key, value in (mapping or {}).items():
+        if str(key).strip().lower() in MOLAR_RATIO_METADATA_KEYS:
+            continue
+        try:
+            numeric[str(key)] = float(value)
+        except (TypeError, ValueError):
+            continue
+    return numeric
+
+
+def _assess_concentration_unit(
+    mapping: Optional[Mapping[str, Any]],
+    *,
+    context: str,
+) -> Dict[str, Any]:
+    """Resolve the declared unit of a molar_ratios mapping and warn on ambiguity.
+
+    Returns the declared unit (empty when none), the unit actually assumed, and
+    whether the values look like unitless ratios. Nothing is rescaled: the caller
+    keeps the numbers it was given, it just learns that they are suspect.
+    """
+    declared = _extract_declared_concentration_unit(mapping)
+    numeric = _numeric_ratio_items(mapping)
+    values = [value for value in numeric.values() if value > 0.0]
+    looks_unitless = bool(values) and not declared and max(values) <= UNITLESS_RATIO_SUSPICION_MAX
+    if looks_unitless:
+        # The message deliberately names only the KEYS, not the values, so the
+        # default warning filter collapses a whole optimizer sweep into one
+        # emission per distinct ingredient set instead of one per trial.
+        warnings.warn(
+            f"{context}: molar_ratios for {sorted(numeric)} carry NO declared "
+            f"concentration_unit and every value is <= {UNITLESS_RATIO_SUSPICION_MAX}; they are "
+            f"being consumed as {MOLAR_RATIO_CANONICAL_UNIT} (the canonical unit) but look like "
+            "unitless ratios. Acrylamide and AGE predictions scale with these values - declare "
+            "concentration_unit in the payload. Values are NOT rescaled.",
+            RuntimeWarning,
+            stacklevel=3,
+        )
+    if declared and declared.strip().lower() not in {"mm", "millimolar"}:
+        warnings.warn(
+            f"{context}: molar_ratios declare concentration_unit={declared!r}, but the safety "
+            f"lane consumes {MOLAR_RATIO_CANONICAL_UNIT}. Values are NOT rescaled; convert "
+            "upstream.",
+            RuntimeWarning,
+            stacklevel=3,
+        )
+    return {
+        "declared_concentration_unit": declared,
+        "assumed_concentration_unit": MOLAR_RATIO_CANONICAL_UNIT,
+        "looks_like_unitless_ratios": bool(looks_unitless),
+    }
 
 
 def _sigmoid(value: float, center: float, width: float) -> float:
@@ -1407,16 +1522,19 @@ def _sum_effective_molar_ratios(
     *,
     tokens: List[str],
 ) -> float:
+    """Sum the mM loading of every ingredient matching one of `tokens`.
+
+    Word-boundary matched since 2026-08-27: substring matching parsed "asnase"
+    (asparaginase, an acrylamide MITIGATION enzyme) as asparagine, i.e. as an
+    acrylamide precursor at the enzyme's own concentration.
+    Values are consumed as MOLAR_RATIO_CANONICAL_UNIT (mM).
+    """
     total = 0.0
     requested = [str(token).strip().lower() for token in tokens if str(token).strip()]
-    for raw_name, raw_value in effective_molar_ratios.items():
-        try:
-            value = float(raw_value)
-        except (TypeError, ValueError):
-            continue
+    for raw_name, raw_value in _numeric_ratio_items(effective_molar_ratios).items():
         normalized_name = _normalize_name(str(raw_name))
-        if any(token in normalized_name for token in requested):
-            total += value
+        if _any_token_matches(normalized_name, requested):
+            total += raw_value
     return float(total)
 
 
@@ -1431,14 +1549,21 @@ def _build_protein_damage_markers_lane(
     time_minutes: Optional[float],
     water_activity: Optional[float],
     effective_molar_ratios: Mapping[str, Any],
+    pH: Optional[float] = None,
+    concentration_unit: Optional[str] = None,
 ) -> Dict[str, Any]:
     temperature = float(temperature_celsius if temperature_celsius is not None else 25.0)
     duration = float(time_minutes if time_minutes is not None else 0.0)
     protein_label = str(protein_type or "free")
     process_label = str(process_state or "heated_matrix")
 
+    unit_assessment = _assess_concentration_unit(
+        dict(effective_molar_ratios or {}, **({"concentration_unit": concentration_unit} if concentration_unit else {})),
+        context="protein_damage_markers lane (family 12)",
+    )
+
     reducing_sugar_active = any(
-        any(token in sugar for token in ["ribose", "glucose", "fructose", "xylose", "maltose", "sugar"])
+        _any_token_matches(sugar, ["ribose", "glucose", "fructose", "xylose", "maltose", "sugar"])
         for sugar in normalized_sugars
     )
     polyphenol_factor = 0.20 if any("polyphenol" in value or "grape seed" in value or "catechin" in value for value in normalized_additives) else 0.0
@@ -1486,10 +1611,26 @@ def _build_protein_damage_markers_lane(
     furosine_benchmark = benchmark_by_id.get("ramirez_jimenez_2000_furosine_crossover_benchmark", {})
     acrylamide_benchmark = benchmark_by_id.get("acs_ref3_spi_acrylamide_fast_kinetics", {})
 
-    representative_cml = float((foods_benchmark.get("key_values", {}) or {}).get("representative_cml_mg_per_kg", 32.0) or 32.0)
-    representative_cel = float((foods_benchmark.get("key_values", {}) or {}).get("representative_cel_mg_per_kg", 55.0) or 55.0)
-    furosine_peak = float((furosine_benchmark.get("key_values", {}) or {}).get("peak_furosine_mg_per_100g_protein", 8.7) or 8.7)
-    acrylamide_anchor = float((acrylamide_benchmark.get("key_values", {}) or {}).get("acrylamide_end_ug_per_kg", 62.62) or 62.62)
+    # UNIT ALIGNMENT (2026-08-27). src.safety's predictors return ppb (ug/kg of
+    # food) - see the UNITS contract there. The intake-registry anchors are
+    # authored in mg/kg and mg per 100 g protein, and were previously divided
+    # into ppb predictions directly, which is a 1000x (CML/CEL) and 2000x
+    # (furosine) unit error. Every anchor is converted to ppb here, once.
+    # The furosine ratio in particular used to be min()-capped at 2.0 for every
+    # heated formulation; it is a real, varying quantity again.
+    representative_cml_ppb = MG_PER_KG_TO_PPB * float(
+        (foods_benchmark.get("key_values", {}) or {}).get("representative_cml_mg_per_kg", 32.0) or 32.0
+    )
+    representative_cel_ppb = MG_PER_KG_TO_PPB * float(
+        (foods_benchmark.get("key_values", {}) or {}).get("representative_cel_mg_per_kg", 55.0) or 55.0
+    )
+    furosine_peak_ppb = mg_per_100g_protein_to_ppb(
+        float((furosine_benchmark.get("key_values", {}) or {}).get("peak_furosine_mg_per_100g_protein", 8.7) or 8.7)
+    )
+    # ug/kg IS ppb - no conversion, stated so the asymmetry is not read as an oversight.
+    acrylamide_anchor_ppb = float(
+        (acrylamide_benchmark.get("key_values", {}) or {}).get("acrylamide_end_ug_per_kg", 62.62) or 62.62
+    )
     lysine_loss_anchor = float(
         (lysine_loss_benchmark.get("key_values", {}) or {}).get(
             "spi_lysine_loss_pct" if protein_label.startswith("soy") else "ppi_lysine_loss_pct",
@@ -1503,15 +1644,30 @@ def _build_protein_damage_markers_lane(
     residence_scale = max(0.40, min(1.35, 0.80 + 0.12 * math.log1p(max(duration, 0.0))))
     lysine_loss_pct = lysine_loss_anchor * max(0.15, thermal_damage_window) * residence_scale
 
+    # pH plumbing (2026-08-27): this used to read
+    # `pH=float(6.0 if process_state is None else 6.0)` - a tautology that pinned
+    # every runtime acrylamide prediction to pH 6.0 regardless of the
+    # formulation. The formulation pH is now used, falling back to 6.0 only when
+    # the caller genuinely has none.
+    acrylamide_pH = float(pH) if pH is not None else 6.0
     predicted_acrylamide_ppb = 0.0
+    acrylamide_assessment_status = "not_assessed"
+    acrylamide_not_assessed_reason = ""
+    if asparagine_mM <= 0.0:
+        acrylamide_not_assessed_reason = "no_asparagine_in_formulation"
+    elif reducing_sugar_mM <= 0.0:
+        acrylamide_not_assessed_reason = "no_reducing_sugar_in_formulation"
+    elif temperature < 105.0:
+        acrylamide_not_assessed_reason = "below_acrylamide_lane_temperature_floor_105C"
     if asparagine_mM > 0.0 and reducing_sugar_mM > 0.0 and temperature >= 105.0:
+        acrylamide_assessment_status = "assessed"
         predicted_acrylamide_ppb = float(
             predict_acrylamide(
                 asparagine_mM=asparagine_mM,
                 reducing_sugar_mM=reducing_sugar_mM,
                 temp_C=temperature,
                 time_min=max(duration, 1.0),
-                pH=float(6.0 if process_state is None else 6.0),
+                pH=acrylamide_pH,
                 water_activity=water_activity,
                 effective_temp_c=temperature if process_label in {"extrusion_structured", "hme", "lme"} else None,
             ).acrylamide_ppb
@@ -1557,10 +1713,10 @@ def _build_protein_damage_markers_lane(
             )
         )
 
-    acrylamide_ratio = predicted_acrylamide_ppb / max(acrylamide_anchor, 1.0e-6) if predicted_acrylamide_ppb > 0.0 else 0.0
-    cml_ratio = predicted_cml_proxy / max(representative_cml, 1.0e-6) if predicted_cml_proxy > 0.0 else 0.0
-    cel_ratio = predicted_cel_proxy / max(representative_cel, 1.0e-6) if predicted_cel_proxy > 0.0 else 0.0
-    furosine_ratio = predicted_furosine_proxy / max(furosine_peak, 1.0e-6) if predicted_furosine_proxy > 0.0 else 0.0
+    acrylamide_ratio = predicted_acrylamide_ppb / max(acrylamide_anchor_ppb, 1.0e-6) if predicted_acrylamide_ppb > 0.0 else 0.0
+    cml_ratio = predicted_cml_proxy / max(representative_cml_ppb, 1.0e-6) if predicted_cml_proxy > 0.0 else 0.0
+    cel_ratio = predicted_cel_proxy / max(representative_cel_ppb, 1.0e-6) if predicted_cel_proxy > 0.0 else 0.0
+    furosine_ratio = predicted_furosine_proxy / max(furosine_peak_ppb, 1.0e-6) if predicted_furosine_proxy > 0.0 else 0.0
     lysine_loss_ratio = lysine_loss_pct / max(lysine_loss_anchor, 1.0e-6) if lysine_loss_pct > 0.0 else 0.0
     damage_burden_score = min(
         1.6,
@@ -1610,9 +1766,25 @@ def _build_protein_damage_markers_lane(
             "asparagine_mM": float(asparagine_mM),
             "reactive_lysine_loss_pct": float(lysine_loss_pct),
             "predicted_acrylamide_ppb": float(predicted_acrylamide_ppb),
+            "acrylamide_assessment_status": acrylamide_assessment_status,
+            "acrylamide_not_assessed_reason": acrylamide_not_assessed_reason,
+            "acrylamide_pH_used": float(acrylamide_pH),
             "predicted_cml_proxy": float(predicted_cml_proxy),
             "predicted_cel_proxy": float(predicted_cel_proxy),
             "predicted_furosine_proxy": float(predicted_furosine_proxy),
+            # Units are declared, not implied: every predicted_* value above and
+            # every *_anchor below is ppb (ug/kg of food).
+            "damage_marker_units": "ppb (ug/kg food)",
+            "concentration_input_unit": MOLAR_RATIO_CANONICAL_UNIT,
+            "declared_concentration_unit": unit_assessment["declared_concentration_unit"],
+            "concentration_unit_warning": bool(unit_assessment["looks_like_unitless_ratios"]),
+            "acrylamide_anchor_ppb": float(acrylamide_anchor_ppb),
+            "cml_anchor_ppb": float(representative_cml_ppb),
+            "cel_anchor_ppb": float(representative_cel_ppb),
+            "furosine_anchor_ppb": float(furosine_peak_ppb),
+            "furosine_anchor_conversion": (
+                "8.7 mg/100 g protein x 20% protein x 10 -> 17.4 mg/kg x 1000 -> 17400 ppb"
+            ),
             "benchmark_anchor_ids": benchmark_anchor_ids,
             "benchmark_anchor_citations": benchmark_anchor_citations,
             "selected_benchmark_anchor_id": selected_benchmark_anchor_id,
@@ -2496,8 +2668,10 @@ def _build_nucleotide_calibration_context(
         entry_id="cui_2022_mushroom_gmp_euc_window_v1",
     )
     support_pool = normalized_sugars + normalized_additives + normalized_interventions
-    imp_active = any(any(token in value for token in ["imp", "inosinate"]) for value in support_pool)
-    gmp_active = any(any(token in value for token in ["gmp", "guanylate"]) for value in support_pool)
+    # Word-boundary matched (2026-08-27): "imp" as a substring fired on
+    # "important"/"imported"/"improver" in free-text cue lists.
+    imp_active = any(_any_token_matches(value, ["imp", "inosinate"]) for value in support_pool)
+    gmp_active = any(_any_token_matches(value, ["gmp", "guanylate"]) for value in support_pool)
     yeast_extract_active = any("yeast extract" in value for value in support_pool)
     mushroom_species = ""
     for candidate in ["shiitake", "porcini", "enoki", "oyster"]:
@@ -2648,8 +2822,8 @@ def _build_nucleotide_support_lane(
 ) -> Dict[str, Any]:
     support_pool = normalized_sugars + normalized_additives + normalized_interventions
     nucleotide_tokens = ["imp", "gmp", "inosinate", "guanylate", "yeast extract"]
-    nucleotide_active = any(any(token in value for token in nucleotide_tokens) for value in support_pool)
-    ribose_delivery_active = any(any(token in value for token in ["ribose", "ribose 5 phosphate", "ribose-5-phosphate", "r5p"]) for value in normalized_sugars + normalized_additives)
+    nucleotide_active = any(_any_token_matches(value, nucleotide_tokens) for value in support_pool)
+    ribose_delivery_active = any(_any_token_matches(value, ["ribose", "ribose 5 phosphate", "ribose-5-phosphate", "r5p"]) for value in normalized_sugars + normalized_additives)
     calibration = dict(nucleotide_calibration or {})
     active = bool(calibration.get("active", nucleotide_active or ribose_delivery_active))
     nucleotide_support_score = float(
@@ -2982,31 +3156,34 @@ def _build_fermentation_pretreatment_lane(
     thiamine_active: bool,
 ) -> Dict[str, Any]:
     pretreatment_pool = normalized_additives + normalized_amino + normalized_support_cues + normalized_interventions
+    # Word-boundary matched (2026-08-27). "ferment"/"culture" keep matching
+    # their morphological variants (fermentation, fermented, cultured) via the
+    # stem-token list; "miso"/"koji" no longer fire on longer words.
     fermentation_active = any(
-        any(token in value for token in ["ferment", "koji", "miso", "starter culture", "culture", "yeast extract"])
+        _any_token_matches(value, ["ferment", "koji", "miso", "starter culture", "culture", "yeast extract"])
         for value in pretreatment_pool
     )
     precursor_release_active = any(
-        any(token in value for token in ["hydrolysate", "hydroly", "protease", "peptide", "autolysate"])
+        _any_token_matches(value, ["hydrolysate", "hydroly", "protease", "peptide", "autolysate"])
         for value in pretreatment_pool
     )
     off_note_cleanup_active = any(
-        any(token in value for token in ["yeast fermentation", "yeast extract", "koji", "ferment"])
+        _any_token_matches(value, ["yeast fermentation", "yeast extract", "koji", "ferment"])
         for value in pretreatment_pool
     )
     nucleotide_support_active = any(
-        any(token in value for token in ["imp", "gmp", "inosinate", "guanylate", "yeast extract"])
+        _any_token_matches(value, ["imp", "gmp", "inosinate", "guanylate", "yeast extract"])
         for value in pretreatment_pool
     )
     benchmark_rows = query_benchmark_intake_entries(family="10")
     prior_rows = query_family_runtime_priors(family="10", process_state="heated_matrix")
     flavor_rows = query_flavor_reference_entries(family="10", payload_section="sulfur_reference_anchors")
     hydrolysate_cue_active = any(
-        any(token in value for token in ["hydrolysate", "protease", "peptide", "autolysate"])
+        _any_token_matches(value, ["hydrolysate", "protease", "peptide", "autolysate"])
         for value in pretreatment_pool
     )
     explicit_nucleotide_cue = any(
-        any(token in value for token in ["imp", "gmp", "inosinate", "guanylate"])
+        _any_token_matches(value, ["imp", "gmp", "inosinate", "guanylate"])
         for value in pretreatment_pool
     )
     pretreatment_pH_shift_active = bool((fermentation_active or off_note_cleanup_active) and pH is not None and float(pH) < 6.2)
@@ -3642,16 +3819,12 @@ def build_family_upstream_contract(
         "glucose": 0.92,
         "other_reducing_sugar": 0.88,
     }
-    base_molar_ratios = {
-        str(key): float(value)
-        for key, value in (molar_ratios or {}).items()
-        if value is not None
-    }
-    effective_molar_ratios = {
-        str(key): float(value)
-        for key, value in (molar_ratios or {}).items()
-        if value is not None
-    }
+    # `concentration_unit` passthrough (2026-08-27): payloads may declare the
+    # unit of their molar_ratios explicitly; metadata keys are separated from
+    # concentrations here so a declared unit cannot crash the float() coercion.
+    declared_concentration_unit = _extract_declared_concentration_unit(molar_ratios)
+    base_molar_ratios = _numeric_ratio_items(molar_ratios)
+    effective_molar_ratios = dict(base_molar_ratios)
     donor_pool_factors: Dict[str, float] = {}
     ratio_key_lookup = {_normalize_name(key): key for key in effective_molar_ratios}
     dominant_donor_class = str(donor_hierarchy_lane.get("dominant_donor_class", "none"))
@@ -3820,6 +3993,9 @@ def build_family_upstream_contract(
 
     return {
         "effective_molar_ratios": effective_molar_ratios,
+        # Declared unit of the mapping above; empty string means "undeclared, and
+        # therefore assumed to be MOLAR_RATIO_CANONICAL_UNIT (mM)".
+        "concentration_unit": declared_concentration_unit,
         "effective_pH": effective_pH,
         "pretreatment_active": bool(fermentation_pretreatment_lane.get("active", False)),
         "pretreatment_interventions": [
@@ -4053,7 +4229,7 @@ def build_flavor_axis_summary(
     nucleotide_priors = get_nucleotide_priors()
     nucleotide_calibration = dict(upstream_contract.get("nucleotide_calibration", {}))
     if (not nucleotide_calibration) and any(
-        any(token in value for token in ["imp", "gmp", "inosinate", "guanylate", "yeast extract", "ribose", "ribose 5 phosphate", "ribose-5-phosphate", "r5p"])
+        _any_token_matches(value, ["imp", "gmp", "inosinate", "guanylate", "yeast extract", "ribose", "ribose 5 phosphate", "ribose-5-phosphate", "r5p"])
         for value in normalized_sugars + normalized_additives + normalized_interventions
     ):
         nucleotide_calibration = _build_nucleotide_calibration_context(
@@ -4181,6 +4357,8 @@ def build_flavor_axis_summary(
         time_minutes=time_minutes,
         water_activity=water_activity,
         effective_molar_ratios=upstream_contract.get("effective_molar_ratios", {}) or {},
+        pH=pH,
+        concentration_unit=str(upstream_contract.get("concentration_unit", "") or "") or None,
     )
     polyphenol_capping_lane = dict(upstream_contract.get("family_lanes", {}).get("13", {})) or _build_polyphenol_amino_capping_lane(
         normalized_additives=normalized_additives,

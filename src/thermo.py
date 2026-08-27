@@ -72,20 +72,29 @@ class QuasiHarmonicCorrector:
         except OverflowError:
             return 0.0
 
-    def _rotor_entropy(self, freq_cm1: float, moment_of_inertia: float = 1.0e-44) -> float:
+    def _rotor_entropy(self, freq_cm1: float, b_av: float = 1.0e-44) -> float:
         """
-        Calculate free-rotor entropy for a single mode (J / mol K).
-        Standard approach assumes an average moment of inertia (Bav) for all low modes.
-        Grimme uses Bav = 1e-44 kg*m^2.
+        Calculate free-rotor entropy for a single mode (J / mol K), Grimme 2012.
+
+        The rotor's effective moment is mu = h / (8 pi^2 nu), reduced against the
+        averaged molecular moment B_av (1e-44 kg m^2) via mu' = mu*B_av/(mu+B_av).
+        B_av is only the damping ceiling for very low modes — it must NOT be used
+        as the moment itself. (Audit 2026-08-26: the previous implementation
+        ignored the frequency and plugged B_av straight in, giving a constant
+        ~46 J/mol/K that *raised* low-mode entropy above harmonic — the inverse
+        of the intended QRRHO capping. That inflated QM-refined barriers by
+        ~3.4 kcal/mol per damped low mode at 423 K.)
         """
-        # Bav = h / (8 * pi^2 * c * v_0)
-        # We simplify to the established damping function by Grimme
         if freq_cm1 <= 0.0:
             return 0.0
-            
-        # Free rotor approximation
-        sr = self.k_b * (0.5 + 0.5 * math.log( (8.0 * math.pi**3 * moment_of_inertia * self.k_b * self.temp_k) / (self.h**2) ))
-        
+
+        freq_hz = freq_cm1 * self.c
+        mu = self.h / (8.0 * math.pi**2 * freq_hz)
+        mu_reduced = (mu * b_av) / (mu + b_av)
+        sr = self.k_b * (0.5 + 0.5 * math.log(
+            (8.0 * math.pi**3 * mu_reduced * self.k_b * self.temp_k) / (self.h**2)
+        ))
+
         return sr * self.N_A
 
     def calculate_thermo(self, freqs_cm1: List[float], electronic_energy_h: float = 0.0) -> ThermoResult:

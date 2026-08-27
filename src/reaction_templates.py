@@ -4,11 +4,13 @@ from rdkit.Chem import AllChem
 from src.pathway_extractor import Species, ElementaryStep
 from src.conditions import ReactionConditions
 from src.smirks_engine import (
-    _is_ketose, _is_pentose, _is_hexose, _is_sugar, _is_asparagine, 
-    _is_lysine, _mol, _canonical, _is_valid, _GSH_CANONICAL, 
+    _is_ketose, _is_pentose, _is_hexose, _is_sugar, _is_asparagine,
+    _is_lysine, _mol, _canonical, _is_valid, _GSH_CANONICAL,
     _is_lipid_aldehyde, _is_lipid_hydroperoxide, _is_primary_amine,
     _has_cysteine_beta_carbon, _is_dicarbonyl, _mw, MAX_MW,
-    _THIAMINE_CANONICAL, _DMHF_CANONICAL, _HEMF_CANONICAL
+    _THIAMINE_CANONICAL, _DMHF_CANONICAL, _HEMF_CANONICAL,
+    _NORFURANEOL_CANONICAL, _MFT_CANONICAL, _FURYL_DISULFIDE_CANONICAL,
+    _DEOXYOSONE_1_PENTOSE, _DEOXYOSONE_1_HEXOSE,
 )
 
 # ──────────────────────────────────────────────────────────────────────────
@@ -217,6 +219,121 @@ def _enolisation_steps(
         reaction_family="Enolisation_2_3"
     ))
 
+    # ── 2,3-enolisation of the Amadori product -> 1-DEOXYOSONE ───────────
+    # AUDIT 2026-08-27 (Wave G1 fix 7).  This intermediate was entirely absent
+    # from the network, and with it the whole accepted route to the
+    # 3(2H)-furanones and hence to MFT:
+    #     Amadori --(2,3-enolisation)--> 1-deoxyosone
+    #             --(cyclisation/dehydration)--> norfuraneol (pentose)
+    #             --(+ H2S, reductone-mediated)--> 2-methyl-3-furanthiol
+    # van den Ouweland & Peer 1975, DOI 10.1021/jf60200a038; Hofmann &
+    # Schieberle.  Atom balance (ribose + glycine): C7H13NO6 -> C5H8O4 +
+    # C2H5NO2, exact, no water and no free hydrogen.
+    if _is_pentose(sugar):
+        deoxy_1 = Species(label="pentose-1-deoxyosone", smiles=_DEOXYOSONE_1_PENTOSE)
+    elif _is_hexose(sugar) or _is_ketose(sugar):
+        deoxy_1 = Species(label="hexose-1-deoxyosone", smiles=_DEOXYOSONE_1_HEXOSE)
+    else:
+        deoxy_1 = None
+
+    if deoxy_1 is not None:
+        steps.append(ElementaryStep(
+            reactants=[amadori],
+            products=[deoxy_1, amino_acid],
+            reaction_family="Enolisation_2_3_Amadori",
+        ))
+
+    return steps
+
+
+# Canonical forms of the 1-deoxyosones, used to keep the demoted 3-deoxyosone
+# shortcut from also firing on them.
+_DEOXYOSONE_1_CANONICALS = {
+    _canonical(_DEOXYOSONE_1_PENTOSE),
+    _canonical(_DEOXYOSONE_1_HEXOSE),
+}
+
+
+def _norfuraneol_mft_route(pool_species: List[Species]) -> List[ElementaryStep]:
+    """The accepted 1-deoxyosone -> furanone -> MFT route (Wave G1 fix 7).
+
+    Steps and their atom balances (all exact):
+
+      1. 1-deoxy-2,3-pentodiulose -> norfuraneol + H2O
+         C5H8O4 -> C5H6O3 + H2O.  Pure cyclodehydration: NO reduction is
+         needed, which is the structural reason a pentose reaches the
+         furanone/MFT branch so much more readily than a hexose.
+
+      2. 1-deoxy-2,3-hexodiulose + 2[H] -> furaneol (DMHF) + 2 H2O
+         C6H10O5 + H2 -> C6H8O3 + 2 H2O.  The hexose analogue needs an extra
+         reduction (which is why the classic DMHF precursor is the 6-deoxy
+         sugar rhamnose, not glucose).
+
+      3. norfuraneol + H2S + 2[H] -> 2-methyl-3-furanthiol + 2 H2O
+         C5H6O3 + H2S + H2 -> C5H6OS + 2 H2O.
+         van den Ouweland & Peer 1975, DOI 10.1021/jf60200a038.
+
+    LUMPING NOTE — the `2[H]` in steps 2 and 3 is written as molecular H2
+    because the model carries no explicit reductone couple.  In the real
+    system the hydrogen donors are the sugar-derived reductones/enaminols, not
+    free hydrogen gas.  H2 is therefore a *reducing-equivalent token* here, and
+    the steps are pool-gated on it so the lane cannot run without a reductant
+    having been generated somewhere in the network.
+    """
+    steps: List[ElementaryStep] = []
+    h2s = next((s for s in pool_species if s.smiles == "S"), None)
+    h2 = next((s for s in pool_species if s.smiles == "[HH]"), None)
+    water = Species("water", "O")
+
+    pentose_do1 = _canonical(_DEOXYOSONE_1_PENTOSE)
+    hexose_do1 = _canonical(_DEOXYOSONE_1_HEXOSE)
+
+    seen: Set[str] = set()
+    for s in pool_species:
+        can = _canonical(s.smiles)
+        if can in seen:
+            continue
+
+        if can == pentose_do1:
+            seen.add(can)
+            norfuraneol = Species(
+                label="norfuraneol", smiles=_NORFURANEOL_CANONICAL
+            )
+            steps.append(ElementaryStep(
+                reactants=[s],
+                products=[norfuraneol, water],
+                reaction_family="Furanone_Cyclisation",
+            ))
+        elif can == hexose_do1 and h2 is not None:
+            seen.add(can)
+            dmhf = Species(label="DMHF", smiles=_DMHF_CANONICAL)
+            steps.append(ElementaryStep(
+                reactants=[s, h2],
+                products=[dmhf, water, water],
+                reaction_family="Furanone_Cyclisation",
+            ))
+
+    if h2s is None or h2 is None:
+        return steps
+
+    # Norfuraneol may have arrived either from step 1 above (same call, so it is
+    # not yet in `pool_species`) or already be in the pool from a previous
+    # generation; cover both.
+    norfuraneol_can = _canonical(_NORFURANEOL_CANONICAL)
+    has_norfuraneol = any(
+        _canonical(s.smiles) == norfuraneol_can for s in pool_species
+    ) or any(
+        _canonical(p.smiles) == norfuraneol_can for st in steps for p in st.products
+    )
+    if has_norfuraneol:
+        norfuraneol = Species(label="norfuraneol", smiles=_NORFURANEOL_CANONICAL)
+        mft = Species(label="2-methyl-3-furanthiol", smiles=_MFT_CANONICAL)
+        steps.append(ElementaryStep(
+            reactants=[norfuraneol, h2s, h2],
+            products=[mft, water, water],
+            reaction_family="Thiol_Addition_Norfuraneol",
+        ))
+
     return steps
 
 
@@ -378,6 +495,18 @@ def _aminoketone_condensation(pool_species: List[Species]) -> List[ElementarySte
     """
     2x aminoacetone -> 2,5-dimethylpyrazine + 2H2O + H2
     (Aromatic pyrazines require oxidation/loss of 2H from the dihydro-intermediate).
+
+    RETAINED-H2 LUMPING NOTE (2026-08-27, Wave G1 fix 5).  The aromatisation of
+    the dihydropyrazine is a genuine two-electron OXIDATION; in food systems the
+    acceptor is dissolved O2 or a dicarbonyl/quinone.  The model carries no
+    explicit oxidant species, so those 2[H] are emitted as molecular H2 as a
+    documented reducing-equivalent token.  This is one of the four places where
+    free H2 survives on purpose (the others are `_furyl_disulfide_formation`,
+    `_sulfur_volatiles_pathway` and `_lipid_maillard_synergy`, all likewise
+    oxidative aromatisations/dimerisations).  What was removed in this wave is
+    the H2 that was NOT a lumped oxidant: the deamination step that manufactured
+    it out of water, and the thiazole condensation that emitted it purely to
+    patch a wrong carbon donor.
     """
     steps = []
     aks = [s for s in pool_species if "aminoacetone" in s.label.lower() or s.smiles == "CC(=O)CN"]
@@ -400,21 +529,44 @@ def _retro_aldol_fragmentation(pool_species: List[Species]) -> List[ElementarySt
     Sum: C6 H10 O5. Balanced! No water needed.
     Pentose Deoxyosone (C5 H8 O4) -> Pyruvaldehyde (C3 H4 O2) + Glycolaldehyde (C2 H4 O2)
     Sum: C5 H8 O4. Balanced.
+
+    AUDIT 2026-08-27 (Wave G1 fix 5): a second, equally standard retro-aldol
+    channel was added — cleavage on the other side of the enediol gives GLYOXAL
+    plus an alpha-hydroxy ketone, both classical Maillard fragmentation
+    products:
+
+        pentose deoxyosone  C5H8O4  -> C2H2O2 (glyoxal) + C3H6O2 (hydroxyacetone)
+        hexose  deoxyosone  C6H10O5 -> C2H2O2 (glyoxal) + C4H8O3 (3,4-dihydroxy-2-butanone)
+
+    Both balance exactly.  Without this channel glyoxal was never generated
+    anywhere in the network, which left BOTH the thiazole condensation (whose
+    correct C2 donor is glyoxal) and CML formation (lysine + glyoxal, the
+    `Safety_Risk_AGE` family) structurally unreachable.
     """
     steps = []
     for s in pool_species:
         lower = s.label.lower()
+        # The 1-deoxyosones are 2,3-diketones, not the 1,2-dicarbonyl the
+        # retro-aldol channels below assume; they are handled by
+        # `_norfuraneol_mft_route`.
+        if _canonical(s.smiles) in _DEOXYOSONE_1_CANONICALS:
+            continue
         if "deoxyosone" in lower:
+            glyoxal = Species(label="glyoxal", smiles="O=CC=O")
             # Hexose -> Pyruvaldehyde + Glyceraldehyde
             if "glucose" in lower or "fructose" in lower or _is_hexose(s):
                 p1 = Species(label="pyruvaldehyde", smiles="CC(=O)C=O")
                 p2 = Species(label="glyceraldehyde", smiles="O=CC(O)CO")
                 steps.append(ElementaryStep([s], [p1, p2], "Retro_Aldol_Fragmentation"))
+                p3 = Species(label="3,4-dihydroxy-2-butanone", smiles="CC(=O)C(O)CO")
+                steps.append(ElementaryStep([s], [glyoxal, p3], "Retro_Aldol_Fragmentation"))
             # Pentose -> Pyruvaldehyde + Glycolaldehyde
             elif "ribose" in lower or _is_pentose(s):
                 p1 = Species(label="pyruvaldehyde", smiles="CC(=O)C=O")
                 p2 = Species(label="glycolaldehyde", smiles="O=CCO")
                 steps.append(ElementaryStep([s], [p1, p2], "Retro_Aldol_Fragmentation"))
+                p3 = Species(label="hydroxyacetone", smiles="CC(=O)CO")
+                steps.append(ElementaryStep([s], [glyoxal, p3], "Retro_Aldol_Fragmentation"))
     return steps
 
 
@@ -451,7 +603,26 @@ def _cysteine_degradation(amino_acids: List[Species], conditions: ReactionCondit
 
 def _thiazole_condensation(pool_species: List[Species]) -> List[ElementaryStep]:
     """
-    Thiazole formation (Simplified balanced pathway).
+    2-Alkylthiazole formation from a Strecker aldehyde + an alpha-dicarbonyl.
+
+        R-CHO + OHC-CHO + NH3 + H2S  ->  2-R-thiazole + 3 H2O
+
+    AUDIT 2026-08-27 (Wave G1 fix 5): the C2 donor used to be GLYCOLALDEHYDE
+    (HOCH2-CHO), which forced a spurious free-H2 by-product to balance:
+
+        C2H4O + C2H4O2 + NH3 + H2S -> C4H5NS + 3 H2O + H2
+
+    Thiazole ring closure is a condensation of an alpha-dicarbonyl with a
+    thioamide-type nitrogen/sulfur pair, so the correct C2 donor is GLYOXAL.
+    With glyoxal the step balances exactly and the invented hydrogen is gone:
+
+        acetaldehyde     C2H4O  + C2H2O2 + NH3 + H2S -> C4H5NS  + 3 H2O
+        3-methylbutanal  C5H10O + C2H2O2 + NH3 + H2S -> C7H11NS + 3 H2O
+
+    Glyoxal itself is produced by the C2/C3 retro-aldol channel of the
+    deoxyosones (see `_retro_aldol_fragmentation`).
+
+    Historical derivation of the old (glycolaldehyde) stoichiometry:
     Pyruvaldehyde (C3 H4 O2) + NH3 (H3 N) + H2S (H2 S) -> Thiazole (C3 H3 N S) + 2 H2O (H4 O2) + H2 (H2).
     Sum Reactants: C3 H9 N O2 S. Sum Products: C3 H9 N O2 S. Perfectly balanced!
     Then we can decorate it via alkylation (for the 2-alkylthiazoles) or just use the Strecker aldehydes as the backbone 
@@ -478,11 +649,15 @@ def _thiazole_condensation(pool_species: List[Species]) -> List[ElementaryStep]:
     steps = []
     h2s = next((s for s in pool_species if s.smiles == "S"), None)
     nh3 = next((s for s in pool_species if s.smiles == "N"), None)
-    glycol = next((s for s in pool_species if "glycolaldehyde" in s.label.lower() or s.smiles == "O=CCO"), None)
-    
-    if not (h2s and nh3 and glycol):
+    glyoxal = next(
+        (s for s in pool_species
+         if "glyoxal" in s.label.lower() or _canonical(s.smiles) == _canonical("O=CC=O")),
+        None,
+    )
+
+    if not (h2s and nh3 and glyoxal):
         return steps
-        
+
     _thiazole_map = {
         "3-methylbutanal": ("2-isobutylthiazole", "CC(C)Cc1nccs1"),
         "2-methylbutanal": ("2-sec-butylthiazole", "CCC(C)c1nccs1"),
@@ -495,10 +670,9 @@ def _thiazole_condensation(pool_species: List[Species]) -> List[ElementaryStep]:
         if entry:
             tz = Species(label=entry[0], smiles=entry[1])
             water = Species("water", "O")
-            hydro = Species("H2", "[HH]")
             steps.append(ElementaryStep(
-                reactants=[sp, glycol, h2s, nh3], 
-                products=[tz, water, water, water, hydro], 
+                reactants=[sp, glyoxal, h2s, nh3],
+                products=[tz, water, water, water],
                 reaction_family="Lipid_Thiazole_Condensation"
             ))
     return steps
@@ -506,11 +680,18 @@ def _thiazole_condensation(pool_species: List[Species]) -> List[ElementaryStep]:
 
 def _thiol_addition(pool_species: List[Species]) -> List[ElementaryStep]:
     """
-    Furfural + H2S + [Reducer] -> Furfurylthiol (FFT) + ... 
+    Furfural + H2S + 2[H] -> 2-furfurylthiol (FFT) + H2O.
 
-    In vivo/food matrices, reduction is driven by the sugar pool (Reductones)
-    rather than H2 gas. We couple Furfural reduction with Sugar dehydration:
-    Furfural (C5H4O2) + H2S (H2S) + Ribose (C5H10O5) -> FFT (C5H6OS) + Deoxyosone (C5H8O4) + 2 H2O
+    Forming an aryl-methyl thiol from an aryl ALDEHYDE is a net reduction as
+    well as a substitution: C5H4O2 + H2S + H2 -> C5H6OS + H2O, exact.  In a real
+    food matrix the two hydrogens come from the sugar-derived reductones, not
+    from hydrogen gas; the model has no reductone couple, so H2 is used as the
+    documented reducing-equivalent token and both routes below are pool-gated
+    on it.
+
+    2026-08-27 (Wave G1): the docstring previously claimed a ribose-coupled
+    stoichiometry (`furfural + H2S + ribose -> FFT + deoxyosone + 2 H2O`) that
+    the code never implemented and that is itself short two hydrogens.
     """
     steps = []
     h2s = next((s for s in pool_species if s.smiles == "S"), None)
@@ -520,9 +701,10 @@ def _thiol_addition(pool_species: List[Species]) -> List[ElementaryStep]:
     # Priority 1: H2 Gas (Legacy/Specific path)
     h2 = next((s for s in pool_species if s.smiles == "[HH]"), None)
 
+    # label -> (thiol label, thiol SMILES, thiohemiacetal SMILES)
     _fft_map = {
-        "furfural":         ("2-furfurylthiol",       "SCc1ccco1"),
-        "5-methylfurfural": ("5-methylfurfurylthiol","SCc1ccc(C)o1"),
+        "furfural":         ("2-furfurylthiol",      "SCc1ccco1",    "OC(S)c1ccco1"),
+        "5-methylfurfural": ("5-methylfurfurylthiol", "SCc1ccc(C)o1", "OC(S)c1ccc(C)o1"),
     }
 
     water = Species("water", "O")
@@ -545,18 +727,29 @@ def _thiol_addition(pool_species: List[Species]) -> List[ElementaryStep]:
                     reaction_family="Thiol_Addition_H2"
                 ))
 
-        # Strategy B: H2S-mediated reduction (Two-Step Bimolecular)
-        # Step 1: Furfural + H2S -> Thiohemiacetal (C5H6O2S)
-        # Step 2: Thiohemiacetal + H2S -> FFT + S + H2O
-        if h2s:
-            intermed_smi = "OC(S)c1ccco1" # Thiohemiacetal
+        # Strategy B: two-step route through the thiohemiacetal.
+        # Step 1: Furfural + H2S -> Thiohemiacetal (C5H6O2S)          [exact]
+        # Step 2: Thiohemiacetal + 2[H] -> FFT + H2O                   [exact]
+        #
+        # AUDIT 2026-08-27 (Wave G1 fix 7): step 2 used to be written as
+        #   thiohemiacetal + H2S -> FFT + [S] + H2O
+        # which balances only by ejecting an atom of ELEMENTAL SULFUR that has
+        # no mechanistic counterpart — and that fictitious [S] was the sole
+        # reason the `Radical_Crosstalk` family existed (it mopped the [S] up
+        # by consuming MFT).  Converting an aryl thiohemiacetal to the thiol is
+        # a net REDUCTION, not a dehydration-plus-sulfur-loss, so the step now
+        # consumes reducing equivalents.  Same lumping convention as
+        # `_norfuraneol_mft_route`: H2 stands in for the sugar-derived
+        # reductones, and the step is pool-gated on it.
+        if h2:
             key = (sp.smiles, "bimolecular_coupled")
             if key not in seen:
                 seen.add(key)
-                intermed = Species(label=f"{sp.label}-thiohemiacetal", smiles=intermed_smi)
+                intermed = Species(
+                    label=f"{sp.label}-thiohemiacetal", smiles=entry[2]
+                )
                 fft = Species(label=entry[0], smiles=entry[1])
-                sulfur = Species(label="elemental-sulfur", smiles="[S]")
-                
+
                 # Step 1
                 steps.append(ElementaryStep(
                     reactants=[sp, h2s],
@@ -565,8 +758,8 @@ def _thiol_addition(pool_species: List[Species]) -> List[ElementaryStep]:
                 ))
                 # Step 2
                 steps.append(ElementaryStep(
-                    reactants=[intermed, h2s],
-                    products=[fft, sulfur, water],
+                    reactants=[intermed, h2],
+                    products=[fft, water],
                     reaction_family="Thiol_Dehydration"
                 ))
 
@@ -574,21 +767,46 @@ def _thiol_addition(pool_species: List[Species]) -> List[ElementaryStep]:
 
 
 def _mft_pathway(pool_species: List[Species]) -> List[ElementaryStep]:
-    """
-    Template for 2-methyl-3-furanthiol (MFT) formation (Critical Meat Aroma).
-    Path: 3-deoxyosone -> 1,4-dideoxyosone (1,4-DDO) -> MFT.
-    Balanced: 
-    C5H8O4 (deoxyosone) + H2S -> C5H6OS (MFT) + 2H2O.
+    """DEMOTED one-step 3-deoxyosone -> MFT shortcut (Wave G1 fix 7).
+
+    This is NOT a mechanism.  It is a single lumped step that was standing in
+    for the whole sulfur branch, and the 2026-08-27 chemistry review found it
+    to be the sole producer of the model's flagship compound.  The accepted
+    route (Amadori -> 2,3-enolisation -> 1-deoxyosone -> norfuraneol -> +H2S)
+    now lives in `_norfuraneol_mft_route` and carries the primary role; this
+    lump is retained only so that hexose systems, whose furanone branch needs
+    an extra reduction, retain SOME path to MFT and the network keeps its
+    historical reachability.
+
+    Two things changed here:
+
+    * the families were renamed to `Thiol_Addition_Legacy_Shortcut` /
+      `Thiol_Addition_Hexose_Legacy_Shortcut` so the lump is distinguishable in
+      every family breakdown.  Barrier lookup is unaffected: those names still
+      canonicalise to `thiol_addition` / `thiol_addition_hexose`.
+    * the fictitious ELEMENTAL SULFUR by-product was removed.  The old
+      stoichiometry consumed two H2S and ejected an atom of [S] to balance;
+      one H2S plus reducing equivalents balances exactly:
+
+          pentose  C5H8O4  + H2S + 2[H] -> C5H6OS + 3 H2O
+          hexose   C6H10O5 + H2S + 2[H] -> C5H6OS + CH2O + 3 H2O
+
+      The `2[H]` carries the same reductone lumping note as
+      `_norfuraneol_mft_route`.
     """
     steps = []
     h2s = next((s for s in pool_species if s.smiles == "S"), None)
-    if not h2s:
+    h2 = next((s for s in pool_species if s.smiles == "[HH]"), None)
+    if not h2s or not h2:
         return steps
-        
+
     water = Species("water", "O")
-    
+
     for s in pool_species:
         label_lower = s.label.lower()
+        # The 1-deoxyosones belong to the real route, not to this lump.
+        if _canonical(s.smiles) in _DEOXYOSONE_1_CANONICALS:
+            continue
         is_supported_deoxyosone = (
             "deoxyosone" in label_lower and (
                 _is_pentose(s)
@@ -602,24 +820,21 @@ def _mft_pathway(pool_species: List[Species]) -> List[ElementaryStep]:
             if "N" in s.smiles:
                 continue
 
-            # Net Dehydration/Thiolation to MFT
-            # Balanced: C5H8O4 + 2 H2S -> C5H6OS + 3 H2O + S
-            mft = Species(label="2-methyl-3-furanthiol", smiles="Cc1c(S)cco1")
-            sulfur = Species(label="elemental-sulfur", smiles="[S]")
-            if "glucose" in label_lower or "fructose" in label_lower:
+            mft = Species(label="2-methyl-3-furanthiol", smiles=_MFT_CANONICAL)
+            if "glucose" in label_lower or "fructose" in label_lower or _is_hexose(s):
                 formaldehyde = Species(label="formaldehyde", smiles="C=O")
                 steps.append(ElementaryStep(
-                    reactants=[s, h2s, h2s],
-                    products=[mft, formaldehyde, sulfur, water, water, water],
-                    reaction_family="Thiol_Addition_Hexose"
+                    reactants=[s, h2s, h2],
+                    products=[mft, formaldehyde, water, water, water],
+                    reaction_family="Thiol_Addition_Hexose_Legacy_Shortcut"
                 ))
             else:
                 steps.append(ElementaryStep(
-                    reactants=[s, h2s, h2s],
-                    products=[mft, sulfur, water, water, water],
-                    reaction_family="Thiol_Addition"
+                    reactants=[s, h2s, h2],
+                    products=[mft, water, water, water],
+                    reaction_family="Thiol_Addition_Legacy_Shortcut"
                 ))
-            
+
     return steps
 
 
@@ -627,13 +842,26 @@ def _furyl_disulfide_formation(pool_species: List[Species]) -> List[ElementarySt
     """
     Oxidative dimerisation of 2-methyl-3-furanthiol to the characteristic Mottram disulfide.
     Balanced: 2 C5H6OS -> C10H10O2S2 + H2.
+
+    LUMPING NOTE (2026-08-27): thiol -> disulfide is an OXIDATION and in the
+    real system the two hydrogens are taken by dissolved O2 or by a quinone /
+    dehydro-reductone acceptor.  The model carries no explicit oxidant, so the
+    2[H] are written as molecular H2.  This is a deliberate, documented
+    reducing-equivalent token, not a claim that H2 gas is evolved.
+
+    STRUCTURE FIX (Wave G1 fix 4): the product was
+    `Cc1cc(SSC2=C(C)OC=C2)co1` — a mixed 3-furyl/4-furyl regioisomer
+    (InChIKey JQDSBCSEZSRHAY) carrying the bis(2-methyl-3-furyl) disulfide
+    label.  The curated layer already had the correct molecule; the two layers
+    now agree on `Cc1c(SSc2ccoc2C)cco1` (OHDFENKFSKIFBJ).
     """
     steps = []
     hydro = Species("H2", "[HH]")
 
+    mft_can = _canonical(_MFT_CANONICAL)
     mft_species = [
         s for s in pool_species
-        if "2-methyl-3-furanthiol" in s.label.lower() or s.smiles == "Cc1c(S)cco1"
+        if "2-methyl-3-furanthiol" in s.label.lower() or _canonical(s.smiles) == mft_can
     ]
     seen = set()
     for mft in mft_species:
@@ -643,7 +871,7 @@ def _furyl_disulfide_formation(pool_species: List[Species]) -> List[ElementarySt
         seen.add(key)
         disulfide = Species(
             label="bis(2-methyl-3-furyl) disulfide",
-            smiles="Cc1cc(SSC2=C(C)OC=C2)co1",
+            smiles=_FURYL_DISULFIDE_CANONICAL,
         )
         steps.append(ElementaryStep(
             reactants=[mft, mft],
@@ -660,6 +888,10 @@ def _sulfur_volatiles_pathway(pool_species: List[Species]) -> List[ElementarySte
     Methional (CSCCC=O) -> Methanethiol (CS) + Acrolein (C=CC=O).
     2x Methanethiol (CS) -> DMDS (CSSC) + H2.
     DMDS + Methanethiol -> DMTS (CSSSC) + H2.
+
+    RETAINED-H2 LUMPING NOTE (2026-08-27): thiol -> di/tri-sulfide is an
+    oxidative coupling; the 2[H] are emitted as H2 as a documented
+    reducing-equivalent token because the model carries no explicit oxidant.
     """
     steps = []
     hydro = Species("H2", "[HH]")
@@ -699,79 +931,104 @@ def _sulfur_volatiles_pathway(pool_species: List[Species]) -> List[ElementarySte
 
 
 
+# A free alpha-amino acid: primary amine and carboxyl on the same carbon.
+_FREE_AMINO_ACID_SMARTS = Chem.MolFromSmarts("[NX3;H2;!$(N-C=O)][CX4][CX3](=[OX1])[OX2H1]")
+
+
 def _deamination_step(pool_species: List[Species]) -> List[ElementaryStep]:
     """
-    R.12: Generalized Hydrolytic deamination of ketosamines (Amadori) 
-    and alpha-aminoketones back to dicarbonyls (deoxyosones).
+    R.12: hydrolytic deamination of alpha-AMINOKETONES.
 
-    Mechanism:
-        R-C(=O)-CH2-NH-R' + H2O → R-C(=O)-CHO + NH2-R'
+        R-CO-CH2-NH2 + H2O  ->  R-CO-CH2-OH + NH3
+        (aminoacetone C3H7NO + H2O -> hydroxyacetone C3H6O2 + NH3)
+
+    AUDIT 2026-08-27 (Wave G1 fixes 5 and 6).  Three things were wrong:
+
+    1. STOICHIOMETRY.  The step was written as
+           R-CO-CH2-NH2 + H2O -> R-CO-CHO + NH3 + H2
+       i.e. an OXIDATION (alcohol level -> aldehyde level) dressed up as a
+       hydrolysis, balanced by inventing free hydrogen.  Worse, that H2 closed
+       a loop with the Strecker step that produced the aminoketone in the first
+       place: the network was manufacturing H2 out of water and feeding it to
+       furfurylthiol formation.  A hydrolytic deamination gives the
+       alpha-HYDROXY ketone, which balances exactly with no H2.
+
+    2. THE LABEL GUARD.  Any species whose LABEL contained an amino-acid name
+       was skipped.  Every real Amadori product is labelled
+       `<sugar>-<amino acid>-Amadori`, so the guard skipped exactly the class
+       the docstring claimed as its primary target.  The guard is now
+       structural (a free alpha-amino acid, matched on the molecule).
+
+    3. THE PRODUCT.  When forced through, the Amadori branch emitted the
+       1,2-dicarbonyl (a 2-osone) mislabelled `pentose-deoxyosone-R12`, and it
+       was unbalanced (an osone sits one oxidation state ABOVE the ketosamine,
+       so the step silently created an oxygen).  Sugar ketosamines are now
+       delegated to `_enolisation_steps`, which owns both the 1,2-enolisation
+       (-> 3-deoxyosone) and the 2,3-enolisation (-> 1-deoxyosone) channels
+       with exact balances.
+
+    Amide nitrogens (asparagine/glutamine side chains, peptide bonds) are
+    excluded from the pattern: they are not aminoketone nitrogens and hydrolyse
+    to a carboxylic acid, not to a ketol.
     """
     steps = []
     water = Species("water", "O")
-    
-    # SMIRKS for hydrolytic deamination:
-    # [C:1](=[O:2])[CH2:3]-[NX3:4] >> [C:1](=[O:2])[CH1:3]=[O] . [NX3:4]
-    # This takes the ketosamine and splits it into a dicarbonyl and an amine.
-    rxn = AllChem.ReactionFromSmarts("[CX3:1](=[O:2])-[CX4H2:3]-[NX3:4]>>[CX3:1](=[O:2])-[CX3H1:3]=O.[NX3:4]")
+
+    # Hydrolytic deamination: the C-N bond is replaced by C-OH and the nitrogen
+    # leaves as the free amine.  The recursive SMARTS excludes amide nitrogen.
+    rxn = AllChem.ReactionFromSmarts(
+        "[CX3:1](=[O:2])-[CX4H2:3]-[NX3;!$([NX3][CX3]=[OX1]):4]"
+        ">>[CX3:1](=[O:2])-[CX4H2:3]-[OX2H1].[NX3:4]"
+    )
+
+    _known_ketol_labels = {"CC(=O)CO": "hydroxyacetone"}
 
     for s in pool_species:
         # Filter out pyrazines or very large structures
         if "pyrazine" in s.label.lower() or _mw(s.smiles) > MAX_MW:
             continue
-            
-        # R.12: Skip free amino acids — they undergo Strecker/Maillard, not self-deamination
-        if any(aa in s.label.lower() for aa in [
-            "glycine", "alanine", "leucine", "isoleucine", "valine",
-            "phenylalanine", "methionine", "lysine", "cysteine",
-            "asparagine", "serine", "threonine", "arginine"
-        ]):
-            continue
-            
+
         mol = _mol(s.smiles)
         if mol is None:
+            continue
+
+        # Free amino acids undergo Strecker/Maillard, not self-deamination.
+        # Matched STRUCTURALLY so that Amadori/Heyns conjugates - whose labels
+        # embed an amino-acid name - are no longer swept up with them.
+        if _FREE_AMINO_ACID_SMARTS is not None and mol.HasSubstructMatch(_FREE_AMINO_ACID_SMARTS):
+            continue
+
+        # Sugar ketosamines belong to the enolisation channels; see (3) above.
+        if "Amadori" in s.label or "Heyns" in s.label:
             continue
 
         prods = rxn.RunReactants((mol,))
         if not prods:
             continue
-            
-        try:
-            # First product is the dicarbonyl (deoxyosone)
-            # Second product is the amine fragment
-            dicarb_smi = Chem.MolToSmiles(prods[0][0])
-            amine_smi = Chem.MolToSmiles(prods[0][1])
-            
-            # Labeling logic
-            dicarb_label = f"deaminated-{s.label}-dicarbonyl"
-            # If it's a pentose Amadori, call it deoxyosone
-            if "Amadori" in s.label or "Heyns" in s.label:
-                # Heuristic: if C5 -> pentose-deoxyosone, C6 -> hexose-deoxyosone
-                c_count = sum(1 for a in prods[0][0].GetAtoms() if a.GetAtomicNum() == 6)
-                if c_count == 5: dicarb_label = "pentose-deoxyosone-R12"
-                elif c_count == 6: dicarb_label = "hexose-deoxyosone-R12"
 
-            amine_sp = Species(label=f"liberated-amine-{s.label}", smiles=amine_smi)
-            dicarb_sp = Species(label=dicarb_label, smiles=dicarb_smi)
-            
-            # Stoichiometry logic:
-            # Amadori (ketosamine) -> Dicarb + Amine (Balanced)
-            # Aminoketone + H2O -> Dicarb + Amine + H2 (Balanced)
-            if "Amadori" in s.label or "Heyns" in s.label:
-                steps.append(ElementaryStep(
-                    reactants=[s],
-                    products=[dicarb_sp, amine_sp],
-                    reaction_family="Generalized_Deamination"
-                ))
-            else:
-                h2 = Species("H2", "[HH]")
-                steps.append(ElementaryStep(
-                    reactants=[s, water],
-                    products=[dicarb_sp, amine_sp, h2],
-                    reaction_family="Generalized_Deamination"
-                ))
+        try:
+            ketol_mol, amine_mol = prods[0][0], prods[0][1]
+            Chem.SanitizeMol(ketol_mol)
+            Chem.SanitizeMol(amine_mol)
+            ketol_smi = Chem.MolToSmiles(ketol_mol)
+            amine_smi = Chem.MolToSmiles(amine_mol)
         except Exception:
             continue
+
+        if not (_is_valid(ketol_smi) and _is_valid(amine_smi)):
+            continue
+
+        ketol_label = _known_ketol_labels.get(ketol_smi, f"deaminated-{s.label}-ketol")
+        amine_label = "ammonia" if amine_smi == "N" else f"liberated-amine-{s.label}"
+
+        steps.append(ElementaryStep(
+            reactants=[s, water],
+            products=[
+                Species(label=ketol_label, smiles=ketol_smi),
+                Species(label=amine_label, smiles=amine_smi),
+            ],
+            reaction_family="Generalized_Deamination"
+        ))
 
     return steps
 
@@ -779,6 +1036,10 @@ def _lipid_maillard_synergy(pool_species: List[Species]) -> List[ElementaryStep]
     """
     Lipid Aldehyde + alpha-aminoketone + H2S -> 2-Alkylthiazole + 2 H2O + H2.
     Lipid Aldehyde + 2x alpha-aminoketone -> Alkylpyrazine (Branching synergy).
+
+    RETAINED-H2 LUMPING NOTE (2026-08-27): as in `_aminoketone_condensation`,
+    the thiazole aromatisation is an oxidation and the 2[H] are emitted as H2
+    in the absence of an explicit oxidant species.
     """
     steps = []
     h2s = next((s for s in pool_species if s.smiles == "S"), None)
@@ -863,79 +1124,16 @@ def _lipid_hydroperoxide_scission(pool: List[Species]) -> List[ElementaryStep]:
     return steps
 
 
-def _radical_crosstalk_templates(pool: List[Species]) -> List[ElementaryStep]:
-    """
-    Templates for radical + sulfur collisions.
-    R. + H2S -> R-H + .SH
-    R. + .SH -> R-SH
-    """
-    steps = []
-    actual_radicals = []
-    for s in pool:
-        m = _mol(s.smiles)
-        if m and any(a.GetNumRadicalElectrons() > 0 for a in m.GetAtoms()):
-            actual_radicals.append(s)
-            
-    # H2S Crosstalk
-    h2s = next((s for s in pool if s.smiles == "S"), None)
-    if h2s:
-        for rad in actual_radicals:
-            # Rad + H2S -> RH + SH.
-            m_rad = _mol(rad.smiles)
-            if not m_rad: continue
-            rh_mol = Chem.RWMol(m_rad)
-            rad_indices = []
-            for atom in rh_mol.GetAtoms():
-                if atom.GetNumRadicalElectrons() > 0:
-                    rad_indices.append(atom.GetIdx())
-                    atom.SetNumRadicalElectrons(0)
-                    atom.SetNumExplicitHs(atom.GetTotalNumHs() + 1)
-            if not rad_indices: continue
-            try:
-                rh_mol.UpdatePropertyCache(strict=False)
-                Chem.SanitizeMol(rh_mol)
-                rh_smi = Chem.MolToSmiles(rh_mol)
-                sh_rad = Species(label="thiol-radical", smiles="[SH]")
-                steps.append(ElementaryStep(
-                    reactants=[rad, h2s],
-                    products=[Species(label=f"quenched-{rad.label}", smiles=rh_smi), sh_rad],
-                    reaction_family="Radical_Crosstalk"
-                ))
-            except Exception:
-                continue
-            
-    # Expanded Crosstalk: Rad + MFT -> RH + MFT-radical
-    mft_can = "Cc1occc1S" # Fixed canonical
-    mft_sp = next((s for s in pool if _canonical(s.smiles) == mft_can), None)
-    if mft_sp:
-        for rad in actual_radicals:
-             m_rad = _mol(rad.smiles)
-             if not m_rad: continue
-             rh_mol = Chem.RWMol(m_rad)
-             for atom in rh_mol.GetAtoms():
-                 if atom.GetNumRadicalElectrons() > 0:
-                     atom.SetNumRadicalElectrons(0)
-                     atom.SetNumExplicitHs(atom.GetTotalNumHs() + 1)
-             try:
-                 rh_mol.UpdatePropertyCache(strict=False)
-                 Chem.SanitizeMol(rh_mol)
-                 rh_smi = Chem.MolToSmiles(rh_mol)
-                 # MFT radical: S on the furan ring
-                 m_mft_rad = Chem.RWMol(_mol(mft_sp.smiles))
-                 for atom in m_mft_rad.GetAtoms():
-                     if atom.GetSymbol() == "S":
-                         atom.SetNumRadicalElectrons(1)
-                 mft_rad_smi = Chem.MolToSmiles(m_mft_rad)
-                 mft_rad = Species(label="MFT-radical", smiles=mft_rad_smi)
-                 steps.append(ElementaryStep(
-                     reactants=[rad, mft_sp],
-                     products=[Species(label=f"quenched-{rad.label}", smiles=rh_smi), mft_rad],
-                     reaction_family="Radical_Crosstalk"
-                 ))
-             except Exception:
-                 continue
-
-    return steps
+# `_radical_crosstalk_templates` (family `Radical_Crosstalk`) was RETIRED on
+# 2026-08-27 (Wave G1 fix 7).  It existed to mop up the fictitious elemental
+# sulfur `[S]` that `_thiol_addition` and `_mft_pathway` ejected to balance
+# themselves: `[S]` parses as an open-shell atom, so it was picked up as a
+# "radical" and quenched -- and its MFT branch quenched by CONSUMING the
+# model's flagship compound, turning 2-methyl-3-furanthiol into an
+# unaccounted-for MFT-thiyl radical.  Both [S] sources are gone (the thiol
+# steps are now reductions, not sulfur ejections), so the sink is gone with
+# them.  The `radical_crosstalk` FAST_BARRIERS entry is deliberately kept: it
+# is referenced by src/family_barrier_progress.py as a family-coverage key.
 
 
 def _sugar_ring_opening(pool_species: List[Species]) -> List[ElementaryStep]:
@@ -1040,25 +1238,87 @@ def _cml_cel_formation(lysine: Species, pool: List[Species]) -> List[ElementaryS
 
 def _thiamine_degradation(pool: List[Species], conditions: ReactionConditions) -> List[ElementaryStep]:
     """
-    Tier B Template: Thermal breakdown of Thiamine (Vitamin B1).
-    Literature shows this yields H2S, 2-methylthiophene, and thiazoles.
+    Tier B Template: thermal breakdown of Thiamine (Vitamin B1).
+
+    AUDIT 2026-08-27 (Wave G1 fix 8).  The single step this template used to
+    emit was
+
+        thiamine(+)  ->  H2S + 2-methylthiophene + 4,5-dihydro-2-methylthiazole
+
+    which is grossly unbalanced: C12H17N4OS(+) on the left against C9H15NS3 on
+    the right — three carbons, three nitrogens and an oxygen destroyed, and TWO
+    extra sulfur atoms created out of nothing (thiamine has exactly one S, so it
+    cannot yield both H2S and a thiophene in one step).
+
+    Replaced by the accepted, atom-balanced cascade (van der Linde et al. 1979;
+    Hofmann & Schieberle; Cerny 2008 on 5-hydroxy-3-mercapto-2-pentanone):
+
+      1. bridge hydrolysis
+         thiamine(+) + H2O -> 4-methyl-5-(2-hydroxyethyl)thiazole
+                            + protonated 4-amino-5-(hydroxymethyl)-2-methylpyrimidine
+         C12H17N4OS(+) + H2O -> C6H9NOS + C6H10N3O(+)
+      2. thiazolium ring opening
+         thiazole + 2 H2O -> 5-hydroxy-3-mercapto-2-pentanone + formamide
+         C6H9NOS + 2 H2O -> C5H10O2S + CH3NO
+      3a. cyclisation + aromatisation to the key thiamine aroma marker
+         5-hydroxy-3-mercapto-2-pentanone -> 2-methyl-3-furanthiol + H2O + 2[H]
+         C5H10O2S -> C5H6OS + H2O + H2
+         Closing the furan ring costs a water AND a two-electron oxidation, so
+         this step carries the same reducing-equivalent lumping note as the
+         other aromatisations; it is given its own family
+         (`Furan_Ring_Aromatisation`) so that lumping stays visible.
+      3b. competing H2S elimination
+         C5H10O2S -> H2S + C5H8O2 (5-hydroxy-3-penten-2-one)
+      4. thiophene closure (keeps the historical 2-methylthiophene product,
+         now with a real sulfur source)
+         C5H8O2 + H2S -> C5H6S + 2 H2O
+
+    Every step balances exactly, including charge on step 1.
     """
     if conditions.temperature_celsius < 100:
         return []
-        
+
     steps = []
+    water = Species("water", "O")
+    het = Species("4-methyl-5-(2-hydroxyethyl)thiazole", "Cc1ncsc1CCO")
+    hmp = Species("4-amino-5-hydroxymethyl-2-methylpyrimidinium", "Cc1nc(N)c(CO)c[nH+]1")
+    hmp_ketone = Species("5-hydroxy-3-mercapto-2-pentanone", "CC(=O)C(S)CCO")
+    formamide = Species("formamide", "NC=O")
+    mft = Species("2-methyl-3-furanthiol", _MFT_CANONICAL)
+    h2s = Species("Hydrogen_Sulfide", "S")
+    enone = Species("5-hydroxy-3-penten-2-one", "CC(=O)C=CCO")
+    methylthiophene = Species("2-methylthiophene", "Cc1cccs1")
+
     # Identify Thiamine in the pool by canonical SMILES
     for s in pool:
-        if _canonical(s.smiles) == _canonical(_THIAMINE_CANONICAL):
-            p1 = Species("Hydrogen_Sulfide", "S")
-            p2 = Species("2-methylthiophene", "Cc1cccs1")
-            p3 = Species("4,5-dihydro-2-methylthiazole", "CC1=NCCS1")
-            
-            steps.append(ElementaryStep(
-                reactants=[s],
-                products=[p1, p2, p3],
-                reaction_family="Additive_Thermal_Degradation"
-            ))
+        if _canonical(s.smiles) != _canonical(_THIAMINE_CANONICAL):
+            continue
+
+        steps.append(ElementaryStep(
+            reactants=[s, water],
+            products=[het, hmp],
+            reaction_family="Additive_Thermal_Degradation"
+        ))
+        steps.append(ElementaryStep(
+            reactants=[het, water, water],
+            products=[hmp_ketone, formamide],
+            reaction_family="Additive_Thermal_Degradation"
+        ))
+        steps.append(ElementaryStep(
+            reactants=[hmp_ketone],
+            products=[mft, water, Species("H2", "[HH]")],
+            reaction_family="Furan_Ring_Aromatisation"
+        ))
+        steps.append(ElementaryStep(
+            reactants=[hmp_ketone],
+            products=[h2s, enone],
+            reaction_family="Additive_Thermal_Degradation"
+        ))
+        steps.append(ElementaryStep(
+            reactants=[enone, h2s],
+            products=[methylthiophene, water, water],
+            reaction_family="Additive_Thermal_Degradation"
+        ))
     return steps
 
 
@@ -1067,8 +1327,19 @@ def _furanone_generation(pool: List[Species], conditions: ReactionConditions) ->
     Literature-grounded low-confidence template for positive furanones.
 
     Blank & Fay 1996 supports:
-    - pentose + alanine -> HEMF
-    - pentose + glycine or alanine -> DMHF/Furaneol
+    - pentose + alanine -> HEMF   (C5 + C3 - CO2 = C7, exact)
+    - pentose + glycine -> DMHF   (C5 + C2 - CO2 = C6, exact)
+
+    AUDIT 2026-08-27 (Wave G1 fix 4): a third step, `pentose + alanine -> DMHF`,
+    was deleted.  It was short one carbon (C5 + C3 - CO2 = C7 on the left, C6 on
+    the right), i.e. it destroyed a carbon atom every time it fired.  Both
+    surviving steps balance exactly, and in both of them the amino acid is a
+    genuine carbon donor, which is what makes the C count work.
+
+    The furanone a pentose gives WITHOUT an external carbon donor is
+    norfuraneol (4-hydroxy-5-methyl-3(2H)-furanone, C5H6O3), not DMHF; that
+    route is mechanistic rather than lumped and lives in
+    `_norfuraneol_mft_route` (1-deoxypentosulose -> norfuraneol + H2O).
     """
     if conditions.temperature_celsius < 90.0:
         return []
@@ -1096,16 +1367,6 @@ def _furanone_generation(pool: List[Species], conditions: ReactionConditions) ->
                     barrier_uncertainty_kcal=6.0,
                 )
             )
-            dmhf = Species(label="DMHF", smiles=_DMHF_CANONICAL)
-            steps.append(
-                ElementaryStep(
-                    reactants=[pentose, alanine],
-                    products=[dmhf, ammonia, co2, water, water],
-                    reaction_family="Furanone_Formation",
-                    source_quality="literature",
-                    barrier_uncertainty_kcal=6.0,
-                )
-            )
         for glycine in glycines:
             dmhf = Species(label="DMHF", smiles=_DMHF_CANONICAL)
             steps.append(
@@ -1124,18 +1385,25 @@ def _glutathione_cleavage(pool: List[Species], conditions: ReactionConditions) -
     """
     Tier B Template: Controlled cleavage of Glutathione (GSH).
     Literature shows it cleaves into glutamic acid and cysteinylglycine dipeptide.
+
+    AUDIT 2026-08-27 (Wave G1 fix 8): this is an amide HYDROLYSIS and the water
+    reactant was missing, so the step created H2O out of nothing:
+        GSH C10H17N3O6S -> C5H9NO4 + C5H10N2O3S  (products carry an extra H2O)
+    With water on the left it balances exactly:
+        C10H17N3O6S + H2O -> C5H9NO4 + C5H10N2O3S
     """
     if conditions.temperature_celsius < 100:
         return []
-        
+
     steps = []
+    water = Species("water", "O")
     for s in pool:
         if _canonical(s.smiles) == _canonical(_GSH_CANONICAL):
             p1 = Species("Glutamic_Acid", "N[C@@H](CCC(=O)O)C(=O)O")
             p2 = Species("Cysteinylglycine", "N[C@@H](CS)C(=O)NCC(=O)O")
-            
+
             steps.append(ElementaryStep(
-                reactants=[s],
+                reactants=[s, water],
                 products=[p1, p2],
                 reaction_family="Additive_Thermal_Degradation"
             ))

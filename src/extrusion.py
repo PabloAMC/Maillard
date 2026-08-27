@@ -89,6 +89,57 @@ _VOLATILE_CLASS_PARAMETERS = {
 }
 
 
+# ---------------------------------------------------------------------------
+# SME response calibration (recalibrated 2026-08-27, audit item 3.1)
+#
+# The previous forms saturated across the whole real twin-screw window: the
+# temperature offset hit its 40 C cap at 250 (LME) / 400 (HME) kJ/kg, the
+# headspace shear term hit min(1, SME/180) at 180 kJ/kg, the residence-time
+# factor hit its 0.85 floor at 460 kJ/kg and the RTD-spread sigmoid was
+# effectively 1.0 from 280 kJ/kg upwards.  Industrial twin-screw operation runs
+# at roughly 300-800 kJ/kg, so every SME quantity in this module was constant
+# over the entire window of interest.
+#
+# The temperature offset is now an explicit melt energy balance,
+#     dT = retained_fraction * SME / cp,
+# closed by a tanh soft ceiling so nothing is ever exactly saturated.
+#
+# Anchors and tiers:
+#  * cp of a protein melt: 3.1 kJ/(kg K) at HME moisture (~57 wt%, the Li et al.
+#    2026 control in data/lit/benchmark_intake_registry.json
+#    `pmc_2026_hme_hexanal_baseline`), 2.2 kJ/(kg K) at LME moisture
+#    (~25-30 wt%).  Water-weighted estimate from the moisture levels the repo
+#    carries; ESTIMATED TIER (no calorimetric anchor in the repo).
+#  * retained fraction: the share of mechanical dissipation that shows up as a
+#    melt-temperature rise rather than leaving through barrel cooling and
+#    evaporation.  Set so a 145-160 C barrel lands inside the 140-180 C
+#    extrusion window that `de_leyn_2019_thiamine_retention`
+#    (data/lit/process_state_calibrations.json) reports for structured soy, and
+#    so the drier LME regime heats more per unit SME, per the moisture-as-
+#    lubricant behaviour in `ilo_1996_maize_sme_lysine_damage`
+#    (Ilo & Berghofer 2003, data/lit/computational_priors.json).
+#    ESTIMATED TIER: directionally anchored, magnitude not fitted to data.
+#  * SME_WINDOW_REFERENCE_KJ_PER_KG = 300 and the 450 kJ/kg half-saturation
+#    constants below are placed at the low end and the middle of the real
+#    300-800 kJ/kg window so the responses discriminate inside it.
+#    ESTIMATED TIER; the only SME-resolved repo anchor
+#    (`raman_sds_extrusion_disulfide_severity`) is directional only
+#    ("exact_values_extracted": false).
+_SME_MELT_HEAT_CAPACITY_KJ_PER_KG_K = {"hme": 3.1, "lme": 2.2}
+_SME_MELT_RETAINED_FRACTION = {"hme": 0.10, "lme": 0.16}
+_SME_OFFSET_SOFT_CEILING_C = 120.0
+SME_WINDOW_REFERENCE_KJ_PER_KG = 300.0
+SME_WINDOW_UPPER_KJ_PER_KG = 800.0
+_SME_HALF_SATURATION_KJ_PER_KG = 450.0
+
+# Below this barrel temperature there is no thermal processing to speak of, so
+# the extrusion profile is reported as inactive and contributes no damage beyond
+# the ingredient baseline.  ESTIMATED TIER: furosine/LAL formation is negligible
+# below ~50 C on process time scales, and every extrusion anchor in the repo
+# sits at 140-180 C.
+AMBIENT_THERMAL_THRESHOLD_C = 50.0
+
+
 def _sigmoid(x: float, center: float, k: float) -> float:
     try:
         return 1.0 / (1.0 + math.exp(-k * (float(x) - float(center))))
@@ -100,12 +151,16 @@ def classify_volatile_compound(name: str) -> str:
     compound = str(name).strip().lower()
     if any(token in compound for token in ["thiol", "sulfide", "mercapt", "mft", "fft"]):
         return "sulfur"
-    if any(token in compound for token in ["anal", "enal"]):
+    # Furanic names first: furfural / 2-furaldehyde are furan-ring carbonyls and
+    # partition like the furan class, and neither spelling contains "furan".
+    if any(token in compound for token in ["furan", "furfur", "fural"]):
+        return "furan"
+    # "-aldehyde" spellings (benzaldehyde, phenylacetaldehyde, acetaldehyde)
+    # contain neither "anal" nor "enal" and used to fall through to "unknown".
+    if any(token in compound for token in ["anal", "enal", "aldehyde"]):
         return "aldehyde"
     if "pyrazine" in compound or "thiazole" in compound:
         return "pyrazine"
-    if "furan" in compound:
-        return "furan"
     if any(token in compound for token in ["hexanol", "octen-3-ol", " alcohol", "-ol"]):
         return "alcohol"
     return "unknown"
@@ -138,9 +193,19 @@ def estimate_mean_residence_time_seconds(
     base_seconds = 42.0 if regime == "hme" else 28.0
     rpm = None if screw_speed_rpm is None else max(50.0, float(screw_speed_rpm))
     feed = None if feed_rate_kg_per_h is None else max(0.5, float(feed_rate_kg_per_h))
+    # 280 rpm / 4.6 kg/h are the Li et al. (2026) HME control settings
+    # (`pmc_2026_hme_hexanal_baseline`), so both factors are 1.0 at the anchor.
     speed_factor = 1.0 if rpm is None else max(0.70, min(1.35, 280.0 / rpm))
     feed_factor = 1.0 if feed is None else max(0.75, min(1.35, 4.6 / feed))
-    sme_factor = max(0.85, min(1.10, 1.02 - 0.0005 * max(0.0, float(sme_kj_per_kg) - 120.0)))
+    # Power-law shortening with SME instead of the old linear ramp, which hit
+    # its 0.85 floor at 460 kJ/kg and was therefore flat over most of the real
+    # window.  Normalised to 1.0 at SME_WINDOW_REFERENCE_KJ_PER_KG; the 60 kJ/kg
+    # softening constant keeps it finite at SME -> 0.  ESTIMATED TIER.
+    sme = max(0.0, float(sme_kj_per_kg))
+    # Upper clamp 1.05 keeps the no-shear default close to the previous
+    # behaviour (42.0 -> 44.1 s at SME 0); the clamps are outside the real
+    # 300-800 window, where the factor runs 1.00 -> 0.83 unclamped.
+    sme_factor = max(0.60, min(1.05, ((SME_WINDOW_REFERENCE_KJ_PER_KG + 60.0) / (sme + 60.0)) ** 0.22))
     return max(12.0, min(90.0, base_seconds * speed_factor * feed_factor * sme_factor))
 
 
@@ -152,7 +217,11 @@ def estimate_relative_rtd_spread(
 ) -> float:
     regime = normalize_moisture_regime(moisture_regime)
     base_spread = 0.24 if regime == "hme" else 0.30
-    sme_broadening = (0.03 if regime == "hme" else 0.06) * _sigmoid(float(sme_kj_per_kg), 180.0, 0.03)
+    # Sigmoid re-centred on the middle of the real 300-800 kJ/kg window (was
+    # centred at 180 with k=0.03, i.e. >0.97 across the entire window).
+    sme_broadening = (0.03 if regime == "hme" else 0.06) * _sigmoid(
+        float(sme_kj_per_kg), _SME_HALF_SATURATION_KJ_PER_KG, 0.006
+    )
     rpm_compaction = 0.0
     if screw_speed_rpm is not None:
         rpm_compaction = 0.03 * _sigmoid(float(screw_speed_rpm), 260.0, 0.04)
@@ -165,7 +234,10 @@ def evaluate_extrusion_rtd_need(extrusion_process: Mapping[str, object]) -> Dict
     spread = float(extrusion_process.get("relative_rtd_spread", 0.0) or 0.0)
     mean_residence = float(extrusion_process.get("mean_residence_time_seconds", 0.0) or 0.0)
 
-    if regime == "lme" and (sme >= 180.0 or spread >= 0.33):
+    # Threshold moved from 180 to the low edge of the real twin-screw window
+    # (2026-08-27): 180 kJ/kg sat below every industrial LME setting, so the
+    # "simple RTD recommended" branch fired for essentially all LME runs.
+    if regime == "lme" and (sme >= SME_WINDOW_REFERENCE_KJ_PER_KG or spread >= 0.33):
         decision = "simple_rtd_recommended"
         reason = "Low-moisture or broad-distribution cases can distort time-at-temperature enough that the sequential-zone surrogate is no longer the best scientist-facing summary."
     else:
@@ -196,7 +268,11 @@ def compute_extrusion_headspace_adjustment(
         die_exit_temperature_celsius=extrusion_process.get("die_exit_temperature_celsius"),
     )
 
-    sme_term = max(0.0, min(1.0, sme / 180.0))
+    # Saturating (Michaelis-Menten style) shear-release term with a
+    # half-saturation constant in the middle of the real 300-800 kJ/kg window.
+    # The old min(1, SME/180) was pinned at 1.0 for every industrial setting.
+    # ESTIMATED TIER.
+    sme_term = max(0.0, sme) / (max(0.0, sme) + _SME_HALF_SATURATION_KJ_PER_KG)
     release_gain = float(params["shear_release_gain"]) * sme_term * (1.0 if regime == "hme" else 0.82)
     aggregation_penalty = float(params["aggregation_penalty"]) * _sigmoid(effective_temp, float(params["aggregation_center_c"]), 0.09)
     if regime == "lme":
@@ -205,12 +281,17 @@ def compute_extrusion_headspace_adjustment(
         aggregation_penalty *= 1.10
     shear_release_factor = max(0.75, min(1.45, 1.0 + release_gain - aggregation_penalty))
 
-    moisture_flash_factor = 0.80 + 0.45 * max(0.0, min(1.0, (water_activity - 0.45) / 0.35))
+    # Moisture modulation is now a bounded (0, 1] scaling of the class ceiling
+    # instead of a >1 multiplier clipped by min(): previously the product
+    # activation * moisture_factor exceeded 1 for any aw above ~0.60 once the
+    # die was hotter than ~140 C, so the min() pinned the fraction at the class
+    # maximum and water activity had no effect at all in exactly the regime
+    # where flash-off is strongest.  Range 0.55-1.00 over aw 0.30-0.85.
+    # ESTIMATED TIER (steam flash-off at the die is directional in the repo's
+    # HME anchors; no quantitative aw-resolved stripping dataset is carried).
+    moisture_flash_factor = 0.55 + 0.45 * max(0.0, min(1.0, (water_activity - 0.30) / 0.55))
     die_flash_activation = _sigmoid(die_temp, float(params["die_flash_center_c"]), 0.09)
-    die_stripping_fraction = min(
-        float(params["max_die_stripping_fraction"]),
-        float(params["max_die_stripping_fraction"]) * die_flash_activation * moisture_flash_factor,
-    )
+    die_stripping_fraction = float(params["max_die_stripping_fraction"]) * die_flash_activation * moisture_flash_factor
     combined_factor = max(0.30, min(1.35, shear_release_factor * (1.0 - die_stripping_fraction)))
 
     return {
@@ -252,13 +333,30 @@ def compute_sme_temperature_offset(
     moisture_regime: Optional[str] = None,
     water_activity: Optional[float] = None,
 ) -> float:
+    """Melt-temperature rise above the barrel setpoint caused by shear heating.
+
+    Recalibrated 2026-08-27 (audit item 3.1).  Melt energy balance
+    ``dT = retained_fraction * SME / cp`` with a tanh soft ceiling, replacing
+    ``min(40, max(5, slope * SME))`` which was saturated from 250 kJ/kg (LME) /
+    400 kJ/kg (HME) upwards — i.e. across nearly all of the real twin-screw
+    window — and jumped discontinuously to 5 C for any SME above zero.
+
+    Representative values (C): HME 300/500/800 kJ/kg -> 9.7 / 16.0 / 25.4;
+    LME 300/500/800 -> 21.5 / 35.1 / 54.0.  With a 140-160 C barrel this keeps
+    the effective temperature inside the 140-180 C structured-extrusion window
+    reported by `de_leyn_2019_thiamine_retention`.
+    """
     sme = max(0.0, float(sme_kj_per_kg))
     if sme <= 0.0:
         return 0.0
 
     regime = normalize_moisture_regime(moisture_regime, water_activity)
-    slope = 0.16 if regime == "lme" else 0.10
-    return min(40.0, max(5.0, sme * slope))
+    cp = _SME_MELT_HEAT_CAPACITY_KJ_PER_KG_K[regime]
+    retained = _SME_MELT_RETAINED_FRACTION[regime]
+    adiabatic_rise_c = retained * sme / cp
+    # Soft ceiling: strictly increasing everywhere, so the response never goes
+    # flat, while keeping physically absurd offsets bounded at extreme SME.
+    return _SME_OFFSET_SOFT_CEILING_C * math.tanh(adiabatic_rise_c / _SME_OFFSET_SOFT_CEILING_C)
 
 
 def pre_extrusion_damage_load(protein_type: str) -> Dict[str, float]:
@@ -280,17 +378,33 @@ def autoclave_damage_increment(
         return {"furosine_mg_per_kg": 0.0, "lal_mg_per_kg": 0.0}
 
     temp_c = float(temperature_celsius)
-    if temp_c < 121.0:
+
+    # Thermal activation ramp instead of the old `if temp_c < 121: return 0`
+    # cliff, which jumped from zero to the full time term at 121.00 C (a 25 min
+    # hold went 0 -> ~7 mg/kg furosine across 0.01 C).  Centred on the 121 C
+    # retort reference with a ~3 C width; the sigmoid is the smoothing device,
+    # the severity term below still carries the temperature dependence.
+    # ESTIMATED TIER: the width is a smoothing choice, not a fitted constant.
+    activation = _sigmoid(temp_c, 121.0, 1.2)
+    if activation < 1e-6:
         return {"furosine_mg_per_kg": 0.0, "lal_mg_per_kg": 0.0}
 
     regime = normalize_moisture_regime(moisture_regime, water_activity)
-    severity = max(0.0, temp_c - 121.0) / 5.0 + math.log1p(float(time_minutes) / 10.0)
+    severity = activation * (max(0.0, temp_c - 121.0) / 5.0 + math.log1p(float(time_minutes) / 10.0))
     moisture_factor = 1.15 if regime == "hme" else 0.90
     protein_factor = 1.10 if "iso" in str(protein_type).lower() else 1.0
 
     return {
         "furosine_mg_per_kg": 5.0 * severity * moisture_factor * protein_factor,
-        "lal_mg_per_kg": 9.0 * severity * protein_factor,
+        # Moisture factor now applied to LAL as well (2026-08-27): LAL forms by
+        # base-catalysed beta-elimination followed by Michael addition of lysine,
+        # a hydrolytic route that literature report 12
+        # (data/lit/extrusion_damage_reference_payloads.json, `extrusion_r12_lal`)
+        # associates with wet high-temperature extrusion, and
+        # `ilo_1996_maize_sme_lysine_damage` reports moisture modulating lysine
+        # damage.  Using the same factor as furosine is ESTIMATED TIER: the
+        # direction is anchored, the magnitude is not separately fitted.
+        "lal_mg_per_kg": 9.0 * severity * moisture_factor * protein_factor,
     }
 
 
@@ -316,6 +430,14 @@ def build_sequential_isothermal_zones(
 
     if zone_time_fractions:
         fractions = [max(0.0, float(value)) for value in zone_time_fractions]
+        # zip() below silently truncated to the shorter list, so a caller who
+        # supplied 5 barrel temperatures and 3 time fractions got a 3-zone
+        # profile with the last two zones dropped and no warning.
+        if len(fractions) != len(temperatures):
+            raise ValueError(
+                "zone_time_fractions and zone_temperatures must have the same length "
+                f"(got {len(fractions)} fractions for {len(temperatures)} zones)"
+            )
     else:
         if len(temperatures) == 2:
             fractions = [0.45, 0.55]
@@ -350,6 +472,7 @@ def build_extrusion_process_profile(
     sterilization_time_minutes: float = 0.0,
     zone_temperatures: Optional[Sequence[float]] = None,
     zone_time_fractions: Optional[Sequence[float]] = None,
+    process_time_minutes: Optional[float] = None,
 ) -> Dict[str, object]:
     regime = normalize_moisture_regime(moisture_regime, water_activity)
     offset_c = compute_sme_temperature_offset(
@@ -366,8 +489,35 @@ def build_extrusion_process_profile(
         moisture_regime=regime,
         water_activity=water_activity,
     )
+    # --- Thermal-exposure gate (2026-08-27, G2 finding) --------------------
+    # `active` used to be `... or regime in {"lme", "hme"}`, and the regime is
+    # ALWAYS one of those two, so the profile was unconditionally active: a
+    # 25 C / 0 min formulation still attached an extrusion process state and
+    # therefore still raised Furosine/LAL safety flags — from the ingredient
+    # baseline alone, attributed to a process that never ran.
+    # The gate is now real thermal exposure; with no thermal exposure the
+    # profile adds ZERO damage beyond the ingredient baseline, and the two
+    # contributions are reported separately either way.
+    sterilization_enabled = sterilization_temperature_celsius is not None and sterilization_time_minutes > 0.0
+    has_process_time = process_time_minutes is None or float(process_time_minutes) > 0.0
+    thermal_exposure_reasons: List[str] = []
+    if float(base_temperature_celsius) >= AMBIENT_THERMAL_THRESHOLD_C:
+        thermal_exposure_reasons.append("barrel_temperature_above_ambient_threshold")
+    if float(max(0.0, sme_kj_per_kg)) > 0.0:
+        thermal_exposure_reasons.append("mechanical_energy_input")
+    if sterilization_enabled:
+        thermal_exposure_reasons.append("sterilization_hold")
+    thermal_exposure = bool(thermal_exposure_reasons) and has_process_time
+    if not has_process_time:
+        thermal_exposure_reasons = []
+
+    process_damage_increment = (
+        dict(sterilization_increment)
+        if thermal_exposure
+        else {"furosine_mg_per_kg": 0.0, "lal_mg_per_kg": 0.0}
+    )
     total_damage_load = {
-        key: float(base_load.get(key, 0.0)) + float(sterilization_increment.get(key, 0.0))
+        key: float(base_load.get(key, 0.0)) + float(process_damage_increment.get(key, 0.0))
         for key in ("furosine_mg_per_kg", "lal_mg_per_kg")
     }
     zones = build_sequential_isothermal_zones(
@@ -394,7 +544,10 @@ def build_extrusion_process_profile(
     )
 
     profile = {
-        "active": offset_c > 0.0 or bool(sterilization_temperature_celsius) or regime in {"lme", "hme"},
+        "active": thermal_exposure,
+        "thermal_exposure": thermal_exposure,
+        "thermal_exposure_basis": thermal_exposure_reasons,
+        "ambient_thermal_threshold_celsius": AMBIENT_THERMAL_THRESHOLD_C,
         "model": "sequential_isothermal_zones",
         "moisture_regime": regime,
         "water_activity": float(water_activity),
@@ -413,6 +566,18 @@ def build_extrusion_process_profile(
             "temperature_celsius": None if sterilization_temperature_celsius is None else float(sterilization_temperature_celsius),
             "time_minutes": float(max(0.0, sterilization_time_minutes)),
             "damage_increment": sterilization_increment,
+        },
+        # Damage attribution is explicit: what the ingredient already carried
+        # before any processing, versus what this process state added.
+        "process_damage_increment": process_damage_increment,
+        "damage_load_attribution": {
+            "ingredient_baseline": dict(base_load),
+            "process_increment": dict(process_damage_increment),
+            "note": (
+                "total_damage_load = ingredient_baseline + process_increment. "
+                "With no thermal exposure the process increment is exactly zero, "
+                "so any non-zero total is ingredient provenance, not processing."
+            ),
         },
         "total_damage_load": total_damage_load,
         "zone_profile": zones,

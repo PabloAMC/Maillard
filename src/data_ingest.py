@@ -24,6 +24,10 @@ from src.uncertainty_propagation import propagate_benchmarks
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUTPUT_DIR = ROOT / "results" / "validation"
+#: Preview runs (no --confirm) must not write into the tracked validation
+#: directory. Before 2026-08-27 a plain preview dropped four files into
+#: results/validation/ uninvited, which looked like validated artifacts.
+DEFAULT_PREVIEW_OUTPUT_DIR = ROOT / "results" / "ingest_previews"
 
 
 @dataclass(frozen=True)
@@ -676,8 +680,25 @@ def _build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--sheet-name", help="Excel sheet name to ingest. Defaults to the first sheet.")
     parser.add_argument("--preview-samples", type=int, default=80)
     parser.add_argument("--preview-seed", type=int, default=0)
-    parser.add_argument("--output-dir", default=str(DEFAULT_OUTPUT_DIR))
-    parser.add_argument("--confirm", action="store_true", help="Write the canonical intake YAML in addition to preview artifacts.")
+    parser.add_argument(
+        "--output-dir",
+        default=None,
+        help=(
+            "Where to write the artifacts. Defaults to "
+            f"'{DEFAULT_PREVIEW_OUTPUT_DIR.relative_to(ROOT)}' in preview mode and "
+            f"'{DEFAULT_OUTPUT_DIR.relative_to(ROOT)}' with --confirm."
+        ),
+    )
+    parser.add_argument(
+        "--confirm",
+        action="store_true",
+        help=(
+            "Persist the canonical intake YAML (in addition to the preview and "
+            "support-delta artifacts) into the validation directory. This writes ONE "
+            "YAML file; it does not rebuild the benchmark panel or regenerate "
+            "validation artifacts — run the generators for that."
+        ),
+    )
     return parser
 
 
@@ -710,10 +731,15 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         preview_samples=args.preview_samples,
         preview_seed=args.preview_seed,
     )
+    if args.output_dir:
+        output_dir: Path | str = args.output_dir
+    else:
+        output_dir = DEFAULT_OUTPUT_DIR if args.confirm else DEFAULT_PREVIEW_OUTPUT_DIR
+
     artifacts = write_ingest_artifacts(
         payload,
         preview,
-        output_dir=args.output_dir,
+        output_dir=output_dir,
         persist_intake=bool(args.confirm),
     )
 
@@ -742,6 +768,14 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     print(f"Support delta Markdown: {artifacts.support_delta_md}")
     if artifacts.intake_yaml is not None:
         print(f"Canonical intake YAML: {artifacts.intake_yaml}")
+        print(
+            "Note: --confirm wrote that one YAML file. It did NOT rebuild the benchmark "
+            "panel or regenerate validation artifacts — run the generators in "
+            "scripts/generators/ (or ./scripts/docker_maillard.sh summary) for that."
+        )
     else:
-        print("Canonical intake YAML not written. Re-run with --confirm to persist it.")
+        print(
+            "Preview only. No canonical intake YAML was written and nothing under "
+            "results/validation/ was touched. Re-run with --confirm to persist the intake YAML."
+        )
     return 0

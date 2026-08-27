@@ -49,6 +49,8 @@ class ProjectionMetadataRow(TypedDict, total=False):
     projection_temperature_factor: float
     projection_time_factor: float
     projection_severity: float
+    projection_kinetic_drive: float
+    projection_conversion_extent: float
     volatile_yield_fraction: float
     total_volatile_budget_molar: float
     projection_strategy_name: str
@@ -56,7 +58,10 @@ class ProjectionMetadataRow(TypedDict, total=False):
     projection_ppb_basis: str
     projection_limiting_pool_to_molar_factor: float
     projection_baseline_volatile_yield_fraction: float
-    projection_severity_volatile_yield_slope: float
+    projection_conversion_ceiling_fraction: float
+    projection_apparent_activation_energy_kj_mol: float
+    projection_reference_temperature_kelvin: float
+    projection_reference_conversion_time_min: float
     projection_ppb_conversion_factor: float
     projection_strategy_notes: str
 

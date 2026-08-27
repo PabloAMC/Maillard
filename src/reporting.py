@@ -22,6 +22,7 @@ from functools import lru_cache
 from pathlib import Path
 from typing import List, Dict, Any, Optional, Iterable
 
+from src.input_normalization import resolve_condition_float, resolve_condition_value
 from src.pipeline import FormulationResult, UncertaintyEnvelope
 from src.literature_learning_loop import build_literature_learning_loop_payload
 from src.family_lane_sensitivity import build_family_lane_sensitivity_payload
@@ -39,6 +40,19 @@ from src.presentation import (
 )
 
 SCHEMA_VERSION = "2026-03-18"
+
+
+def _md_cell(value: Any) -> str:
+    """Render ``value`` safely inside a GitHub-flavoured Markdown table cell.
+
+    Several emitted labels are themselves pipe-joined (notably
+    ``observable_assumption_summary``, e.g.
+    ``"static_class_profile | class_level | standard_matrix_support"``), which
+    used to split an 8-column row into 10 fields and corrupt the table. Pipes
+    are escaped and newlines collapsed so one value stays one cell.
+    """
+    text = "" if value is None else str(value)
+    return text.replace("\\", "\\\\").replace("|", "\\|").replace("\n", " ").strip()
 
 
 def _get_uncertainty_envelope(result: FormulationResult, compound: str) -> Optional[UncertaintyEnvelope]:
@@ -996,8 +1010,10 @@ def _build_intervention_waterfall_summary(
     return {
         "baseline_name": baseline.name,
         "current_name": current.name,
-        "baseline_total_ppb": sum(float(value) for value in baseline_totals.values()),
-        "current_total_ppb": sum(float(value) for value in current_totals.values()),
+        # Sum by sorted key: float addition is not associative, so an
+        # order-dependent sum makes two identical runs differ by ~1 ULP.
+        "baseline_total_ppb": sum(float(baseline_totals[key]) for key in sorted(baseline_totals)),
+        "current_total_ppb": sum(float(current_totals[key]) for key in sorted(current_totals)),
         "steps": step_rows,
         "precursor_attribution": _build_precursor_intervention_summary(
             current,
@@ -1258,15 +1274,28 @@ def _render_glossary_markdown() -> str:
     return (
         "## 6. Glossary\n"
         "Plain-language meaning of the labels used above. The model is honest about *how* it knows what it claims; this section names that vocabulary.\n\n"
-        "**Scope banner.** A `⚠️ Out of calibration scope` banner at the top of the report means the matrix or process you asked about lies outside the convex hull of formulations the model has been calibrated against. The predictions are still emitted, but every compound's evidence tier is demoted one notch.\n\n"
-        "**Evidence tiers** (strongest to weakest):\n"
-        "- `bounded_calibration` — the prediction sits inside a benchmark we matched compound-for-compound; the residual is bounded by literature data on a directly comparable system.\n"
-        "- `transferred_literature` — the prediction is anchored by published kinetics or partition data from an adjacent system, transferred to your formulation under explicit assumptions.\n"
-        "- `surrogate_family` — no direct anchor; the prediction inherits a family-level prior (same reaction class, related precursor or matrix). Treat as directional, not quantitative.\n"
-        "- `surrogate_only` — the weakest tier. The prediction is a structural plausibility, not a measurement-backed estimate. Use for ranking, not for absolute concentration claims.\n"
-        "- `external_failing` — the compound is on the lipid-oxidation external hold-out where the frozen model is currently outside the 90 % CI (median > 1.0 dex error). Render in red; do not act on absolute ppb until a matrix-specific anchor lands.\n"
-        "- `xtb_derived` — barrier prior comes from a GFN2-xTB pathfinder that has not been promoted to a DFT anchor. Pathfinder, not authority.\n\n"
-        "**Confidence envelope.** `0.038 ppb [0.012-0.089, 90% CI]` means the p50 (median) Monte-Carlo prediction is `0.038 ppb`, with the central 90 % of samples between `0.012` and `0.089 ppb`. Wider envelopes signal weaker tiers.\n\n"
+        "**Three different tier vocabularies appear in this report. They are not interchangeable.** Each answers a different question:\n\n"
+        "**1. `tier` — how well benchmark-supported is *this run*?** Emitted on the run-level *Confidence & Support* block, on every *Compound Confidence* row, and on every *Aggregate Sensory Confidence* row. It is a band on a 0-100 confidence score, and it always travels with a `prediction_mode`:\n\n"
+        "| `tier` | score band | paired `prediction_mode` | what it licenses |\n"
+        "| :--- | :--- | :--- | :--- |\n"
+        "| `high` | >= 85 | `benchmark_supported_quantitative` | quantitative prioritisation before wet-lab confirmation |\n"
+        "| `medium` | 65-84 | `ranking_supported` | ranking and triage; verify absolute levels experimentally |\n"
+        "| `low` | 45-64 | `directional_only` | direction only; absolute ppb is provisional |\n"
+        "| `exploratory` | < 45 | `hypothesis_only` | hypothesis generation, not decision-grade |\n\n"
+        "**2. `calibration_evidence_strength` (shown as *Evidence* in the Calibration Summary) — what kind of anchor stands behind a compound's projection?** Strongest to weakest, and only these values are emitted at compound level:\n"
+        "- `literature_anchored` — a published measurement on a directly comparable system backs this compound's retention/partition treatment.\n"
+        "- `conditional_literature_anchored` — literature-anchored, but only under stated conditions (pH / process-state caveats attached).\n"
+        "- `class_anchored` — anchored at compound-class level (e.g. \"sulfur volatiles\"), not for this molecule specifically.\n"
+        "- `directional_transferred` — a prior transferred from an adjacent matrix or process state; direction is meaningful, magnitude is not.\n"
+        "- `process_state_mismatch` — an anchor exists, but for a different process state than the one you asked about; the nearest state was substituted.\n"
+        "- `heuristic` — no anchor at all; a built-in class default. Ranking use only.\n\n"
+        "  When the run is out of calibration scope every one of these is demoted one notch (see the scope banner below), and the pre-demotion value is preserved as `scope_demoted_from` in `report.json`.\n\n"
+        "**3. `confidence_tier` — how strong is the *literature prior* behind a chemistry lane?** This one comes from the curated literature registries (`data/lit/`), not from your run, and uses a five-point scale: `high`, `medium_high`, `medium`, `medium_low`, `low`. It grades the source, not the prediction: a `high` `confidence_tier` prior can still feed an `exploratory` `tier` prediction, because your formulation may sit far from where that prior was measured.\n\n"
+        "  *Name collision, stated plainly:* the campaign/comparison JSON also carries a key spelled `confidence_tier` that holds the run-level `tier` value (vocabulary 1), kept as a legacy alias. Prefer the `tier` key alongside it; only `confidence_tier` inside `data/lit/` payloads means vocabulary 3.\n\n"
+        "**Scope banner.** A `⚠️ Out of calibration scope` banner at the top of the report means the matrix or process you asked about lies outside the convex hull of formulations the model has been calibrated against. The predictions are still emitted, but every compound's evidence strength is demoted one notch.\n\n"
+        "**Reachability** (`reachability_status`). `chemically_reachable` — the compound is produced by an enumerated, barrier-scored pathway from your precursors. `conditionally_reachable` — reachable only under an assumption the run had to make. `merely_plausible` — no enumerated route; the number is a class-level projection.\n\n"
+        "**Observable assumption** (`observable_assumption_summary`). A pipe-joined triple: retention runtime mode, calibration fallback mode, support origin — e.g. `static_class_profile | class_level | standard_matrix_support` means the volatile's matrix retention came from a static class profile, its calibration fell back to class level, and no special matrix-support route was used.\n\n"
+        "**Confidence envelope.** `0.038 ppb [0.012-0.089, 90% CI]` means the p50 (median) Monte-Carlo prediction is `0.038 ppb`, with the central 90 % of samples between `0.012` and `0.089 ppb`. A compound printed without an interval had no envelope sampled. Wide envelopes make coverage cheap — read coverage and width together.\n\n"
         "**Intervention waterfall.** When two formulations are compared, the per-compound delta is decomposed into class-level (e.g. \"thiols\", \"aldehydes\") and per-precursor (e.g. \"cysteine\", \"glutathione\") contributions. Per-precursor attribution sums to the compound delta and is explicit about attribution mode.\n\n"
         "Full machine-readable trust artifacts: `results/validation/`. Per-compound 90 % envelope: `results/validation/prediction_uncertainty.md`. External hold-out: `results/validation/external_validation_report.md`.\n\n"
     )
@@ -1619,7 +1648,10 @@ def generate_report(
             "flavor_axis_summary": result.flavor_axis_summary,
             "predicted_ppb": {k: float(v) for k, v in result.predicted_ppb.items()},
             "detected_targets": result.detected_targets,
-            "detected_minimize": result.detected_minimize
+            "detected_minimize": result.detected_minimize,
+            "skipped_formulations": [
+                dict(row) for row in (getattr(result, "skipped_formulations", []) or [])
+            ],
         },
         "domain_warnings": [
             {"category": w.category, "level": w.level, "message": w.message}
@@ -1652,9 +1684,23 @@ def generate_report(
         f.write("| Parameter | Value |\n")
         f.write("| :--- | :--- |\n")
         for k, v in conditions_dict.items():
-            f.write(f"| {k} | {v} |\n")
+            f.write(f"| {_md_cell(k)} | {_md_cell(v)} |\n")
         f.write("\n")
-        
+
+        skipped_rows = list(getattr(result, "skipped_formulations", []) or [])
+        if skipped_rows:
+            f.write("> ⚠️ **Formulations dropped from this evaluation.** "
+                    "The following candidates were removed before scoring because at least one "
+                    "precursor could not be resolved. They are absent from every ranking below.\n>\n")
+            for row in skipped_rows:
+                f.write(
+                    f"> - **{_md_cell(row.get('name', 'unknown'))}** — "
+                    f"unresolved: `{_md_cell(row.get('unresolved_precursors', 'unknown'))}` "
+                    f"({_md_cell(row.get('reason', 'unknown reason'))})\n"
+                )
+            f.write("\n")
+
+
         f.write("## 2. Decision Summary\n")
         f.write("```text\n")
         with io.StringIO() as buf, redirect_stdout(buf):
@@ -1711,7 +1757,7 @@ def generate_report(
                 f.write("| :--- | :--- | :--- | :--- | :--- | ---: |\n")
                 for row in calibration_summary:
                     f.write(
-                        f"| {row.get('source', 'unknown')} | {row.get('support_origin', 'standard_matrix_support')} | {row.get('evidence_strength', 'unknown')} | {row.get('fallback_mode', 'unknown')} | {', '.join(str(item) for item in row.get('compounds', []))} | {float(row.get('observable_ppb_total', 0.0)):.2f} |\n"
+                        f"| {_md_cell(row.get('source', 'unknown'))} | {_md_cell(row.get('support_origin', 'standard_matrix_support'))} | {_md_cell(row.get('evidence_strength', 'unknown'))} | {_md_cell(row.get('fallback_mode', 'unknown'))} | {_md_cell(', '.join(str(item) for item in row.get('compounds', [])))} | {float(row.get('observable_ppb_total', 0.0)):.2f} |\n"
                     )
                 f.write("\n")
 
@@ -1758,8 +1804,16 @@ def generate_report(
                 f.write("| Compound | Predicted | Tier | Score | Mode | Reachability | Calibration Source | Observable Assumption |\n")
                 f.write("| :--- | :--- | :---: | ---: | :--- | :--- | :--- | :--- |\n")
                 for row in compound_rows:
+                    compound_name = str(row.get("compound", "unknown"))
                     f.write(
-                        f"| {row.get('compound', 'unknown')} | {_format_compound_prediction(result, str(row.get('compound', 'unknown')), float(row.get('observable_ppb', 0.0)))} | {row.get('tier', 'unknown')} | {float(row.get('score', 0.0)):.1f} | {row.get('prediction_mode', 'unknown')} | {row.get('reachability_status', 'merely_plausible')} | {row.get('calibration_source', 'unknown')} | {row.get('observable_assumption_summary', 'unknown')} |\n"
+                        f"| {_md_cell(compound_name)} "
+                        f"| {_md_cell(_format_compound_prediction(result, compound_name, float(row.get('observable_ppb', 0.0))))} "
+                        f"| {_md_cell(row.get('tier', 'unknown'))} "
+                        f"| {float(row.get('score', 0.0)):.1f} "
+                        f"| {_md_cell(row.get('prediction_mode', 'unknown'))} "
+                        f"| {_md_cell(row.get('reachability_status', 'merely_plausible'))} "
+                        f"| {_md_cell(row.get('calibration_source', 'unknown'))} "
+                        f"| {_md_cell(row.get('observable_assumption_summary', 'unknown'))} |\n"
                     )
                 f.write("\n")
 
@@ -1799,7 +1853,7 @@ def generate_report(
             f.write("| :--- | :--- | :--- | :---: | :---: | :---: | :---: | :--- | :--- |\n")
             for row in compound_evidence_ladder:
                 f.write(
-                    f"| {row.get('compound', 'unknown')} | {row.get('target_class', 'unknown')} | {row.get('evidence_state', 'still_missing')} | {'yes' if row.get('direct_anchor') else '-'} | {'yes' if row.get('transferred_prior') else '-'} | {'yes' if row.get('mechanistic_surrogate') else '-'} | {'yes' if row.get('computational_refinement') else '-'} | {row.get('support_origin', 'standard_matrix_support')} | {row.get('calibration_source', 'unknown')} |\n"
+                    f"| {_md_cell(row.get('compound', 'unknown'))} | {_md_cell(row.get('target_class', 'unknown'))} | {_md_cell(row.get('evidence_state', 'still_missing'))} | {'yes' if row.get('direct_anchor') else '-'} | {'yes' if row.get('transferred_prior') else '-'} | {'yes' if row.get('mechanistic_surrogate') else '-'} | {'yes' if row.get('computational_refinement') else '-'} | {_md_cell(row.get('support_origin', 'standard_matrix_support'))} | {_md_cell(row.get('calibration_source', 'unknown'))} |\n"
                 )
             f.write("\n")
 
@@ -1824,6 +1878,11 @@ def generate_report(
             extended_count = len(safety_reference_summary.get("extended_entries", []))
             if extended_count:
                 f.write(f"\n- Extended safety provenance entries available in JSON: {extended_count}\n")
+            # Evidence that could not be matched to this analyte is stated, not
+            # silently dropped (Wave G2, 2026-08-27).
+            exclusion_note = str(safety_reference_summary.get("exclusion_note", "") or "")
+            if exclusion_note:
+                f.write(f"\n- {exclusion_note}\n")
             f.write("\n")
 
         if flavor_reference_policy:
@@ -2028,6 +2087,12 @@ def generate_comparison_report(
                 "pyrazine_burden": float(res.pyrazine_burden),
                 "pyrazine_penalty": float(res.pyrazine_penalty),
                 "furanone_penalty": float(res.furanone_penalty),
+                # `tier` is the canonical name for the run-level confidence band
+                # (high/medium/low/exploratory). `confidence_tier` is kept as a
+                # legacy alias of the same value — note it collides with the
+                # literature-prior `confidence_tier` scale in data/lit/, which is
+                # a different five-point vocabulary. See report §6.
+                "tier": res.confidence_metadata.get("tier", "unknown"),
                 "confidence_tier": res.confidence_metadata.get("tier", "unknown"),
                 "confidence_score": float(res.confidence_metadata.get("score", 0.0)),
                 "benchmark_neighborhood": res.confidence_metadata.get("benchmark_neighborhood", "unknown"),
@@ -2220,6 +2285,54 @@ def generate_comparison_report(
     return output_dir
 
 
+def build_campaign_leaderboard(
+    results: Sequence[FormulationResult],
+    conditions_list: Sequence[Any],
+    shared_conditions: Optional[Mapping[str, Any]] = None,
+    effective_conditions: Optional[Mapping[str, Any]] = None,
+) -> List[Dict[str, Any]]:
+    """Build the campaign roll-up leaderboard, ranked by target score.
+
+    2026-08-27 (audit remediation A): the roll-up used to read
+    ``conditions.get("ph")`` / ``.get("temp")`` straight off the per-run
+    formulation dict and default to ``0.0``. Campaign formulations come from
+    ``data/formulation_grid.yml``, which carries no process conditions at all,
+    so EVERY leaderboard row printed pH 0.00 / Temp 0.0 (and Protein "free")
+    while the per-run reports showed the real values. Conditions are now
+    resolved through ``src.input_normalization.resolve_condition_value`` over
+    the same fallback chain ``src.pipeline.evaluate_all`` uses — per-formulation
+    override first, then the campaign's shared conditions, then the global
+    conditions the run actually used — so alternative key spellings
+    (``pH``/``temperature``) resolve too.
+    """
+    shared_conditions = shared_conditions or {}
+    leaderboard: List[Dict[str, Any]] = []
+    for result, conditions in zip(results, conditions_list):
+        condition_sources = (conditions, shared_conditions, effective_conditions)
+        leaderboard.append(
+            {
+                "name": result.name,
+                "protein_type": resolve_condition_value(
+                    "protein_type", condition_sources, default="free"
+                ),
+                # None (not 0.0) when a condition genuinely cannot be resolved:
+                # an unknown pH must read as unknown, not as pH 0.
+                "ph": resolve_condition_float("ph", condition_sources),
+                "temp": resolve_condition_float("temp", condition_sources),
+                "target_score": float(result.target_score),
+                "off_flavour_risk": float(result.off_flavour_risk),
+                "safety_score": float(result.safety_score),
+                # See the note in generate_comparison_report: `tier` is canonical,
+                # `confidence_tier` is a legacy alias of the same run-level value.
+                "tier": result.confidence_metadata.get("tier", "unknown"),
+                "confidence_tier": result.confidence_metadata.get("tier", "unknown"),
+                "prediction_mode": result.confidence_metadata.get("prediction_mode", "unknown"),
+            }
+        )
+    leaderboard.sort(key=lambda item: item["target_score"], reverse=True)
+    return leaderboard
+
+
 def generate_campaign_report(
     campaign_spec: Dict[str, Any],
     results: List[FormulationResult],
@@ -2227,7 +2340,15 @@ def generate_campaign_report(
     run_artifacts: List[Dict[str, Any]],
     warnings_list: Optional[List[List[DomainWarning]]] = None,
     output_dir: Optional[Path] = None,
+    effective_conditions: Optional[Mapping[str, Any]] = None,
 ) -> Path:
+    """Roll a set of per-formulation runs up into one campaign artifact.
+
+    `effective_conditions` is the resolved global condition set the pipeline
+    actually ran with (run_campaign passes its `ReactionConditions` values). It
+    is the last fallback for a condition a per-run formulation does not override,
+    ahead of nothing: the leaderboard must print what was simulated.
+    """
     campaign_metadata = campaign_spec.get("campaign", {})
     comparison_dir = generate_comparison_report(
         results=results,
@@ -2237,22 +2358,12 @@ def generate_campaign_report(
         campaign_metadata=campaign_metadata,
     )
 
-    leaderboard = []
-    for result, conditions in zip(results, conditions_list):
-        leaderboard.append(
-            {
-                "name": result.name,
-                "protein_type": conditions.get("protein_type", "free"),
-                "ph": float(conditions.get("ph", 0.0)),
-                "temp": float(conditions.get("temp", 0.0)),
-                "target_score": float(result.target_score),
-                "off_flavour_risk": float(result.off_flavour_risk),
-                "safety_score": float(result.safety_score),
-                "confidence_tier": result.confidence_metadata.get("tier", "unknown"),
-                "prediction_mode": result.confidence_metadata.get("prediction_mode", "unknown"),
-            }
-        )
-    leaderboard.sort(key=lambda item: item["target_score"], reverse=True)
+    leaderboard = build_campaign_leaderboard(
+        results=results,
+        conditions_list=conditions_list,
+        shared_conditions=campaign_spec.get("shared_conditions", {}) or {},
+        effective_conditions=effective_conditions,
+    )
 
     provenance = build_artifact_provenance(
         artifact_kind="campaign_screen",
@@ -2293,11 +2404,13 @@ def generate_campaign_report(
             handle.write(f"| {key} | {value} |\n")
         handle.write("\n")
         handle.write("## 2. Leaderboard\n")
-        handle.write("| Formulation | Protein | pH | Temp C | Target | Off-flavour | Safety | Confidence | Mode |\n")
+        handle.write("| Formulation | Protein | pH | Temp C | Target | Off-flavour | Safety | Tier | Mode |\n")
         handle.write("| :--- | :--- | ---: | ---: | ---: | ---: | ---: | :---: | :--- |\n")
         for row in leaderboard:
+            ph_cell = f"{row['ph']:.2f}" if row["ph"] is not None else "n/a"
+            temp_cell = f"{row['temp']:.1f}" if row["temp"] is not None else "n/a"
             handle.write(
-                f"| {row['name']} | {row['protein_type']} | {row['ph']:.2f} | {row['temp']:.1f} | {row['target_score']:.2f} | {row['off_flavour_risk']:.2f} | {row['safety_score']:.2f} | {row['confidence_tier']} | {row['prediction_mode']} |\n"
+                f"| {_md_cell(row['name'])} | {_md_cell(row['protein_type'])} | {ph_cell} | {temp_cell} | {row['target_score']:.2f} | {row['off_flavour_risk']:.2f} | {row['safety_score']:.2f} | {_md_cell(row['tier'])} | {_md_cell(row['prediction_mode'])} |\n"
             )
         handle.write("\n")
         handle.write("## 3. Generated Artifacts\n")
