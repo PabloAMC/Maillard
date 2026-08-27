@@ -37,16 +37,18 @@ def test_matrix_evidence_audit_distinguishes_external_off_flavour_from_internal_
     assert soy_meaty.external_data_status == "internal_reference_only"
     assert soy_meaty.promotable is False
 
+    # Audit 2026-08-26: the ProtocolPilot payloads are frozen model output, not
+    # internal experiments; they must surface as synthetic, never as measured.
     pea_protocol = by_id["pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026"]
-    assert pea_protocol.external_data_status == "internal_measured_quantitative"
+    assert pea_protocol.external_data_status == "synthetic_diagnostic_only"
     assert pea_protocol.target_profile == "mixed"
     assert pea_protocol.promotable is False
-    assert "internal measured experiment" in pea_protocol.promotion_blocker
+    assert "synthetic model output" in pea_protocol.promotion_blocker
 
     soy_protocol = by_id["soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026"]
-    assert soy_protocol.external_data_status == "internal_measured_quantitative"
+    assert soy_protocol.external_data_status == "synthetic_diagnostic_only"
     assert soy_protocol.promotable is False
 
     assert "Matrix Benchmark Evidence Audit Report" in markdown
     assert "internal_reference_only" in markdown
-    assert "internal_measured_quantitative" in markdown
+    assert "synthetic_diagnostic_only" in markdown

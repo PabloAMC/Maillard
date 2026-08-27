@@ -70,7 +70,7 @@ def test_strict_gate_eligibility_is_centralized_in_validation_contract():
 
     free_eval = BenchmarkEvaluation(
         benchmark_id="free_eval",
-        bench_file=ROOT / "data" / "benchmarks" / "cys_glucose_150C_Farmer1999.json",
+        bench_file=ROOT / "data" / "benchmarks" / "cys_ribose_140C_Hofmann1998.json",
         supported=True,
         reason=None,
         predicted_ppb={},
@@ -97,14 +97,26 @@ def test_strict_gate_eligibility_is_centralized_in_validation_contract():
 
 
 def test_benchmark_specific_scale_thresholds_override_global_defaults():
+    # Retargeted twice: originally cys_glucose_150C_Farmer1999, then Parker 2012 (both
+    # quarantined 2026-08-26 for unlocatable sources; Farmer since deleted). It now runs on
+    # cys_ribose_140C_Hofmann1998, the surviving verified free-precursor benchmark.
+    #
+    # This is a sharper exercise of the override than either predecessor. The global default
+    # for protein_type="free" is max_ratio 1.5 (BenchmarkThresholds.free_aa_ratio_threshold);
+    # this benchmark's file pins 1.45. The observed ratio below (1.48) sits BETWEEN the two,
+    # so it passes under the global default and fails only if the benchmark-specific value is
+    # actually being read -- the override is the whole difference between pass and fail.
+    #
+    # The mean |log10 ratio| is held out of the way on purpose: mean(log10(1.48), 0) = 0.085,
+    # under both the file's 0.09 and the global 0.10, so the failure below isolates the ratio.
     comparison_rows = [
-        CompoundComparison("cmp1", 100.0, 130.0, "cmp1", None, 1.0),
+        CompoundComparison("cmp1", 100.0, 148.0, "cmp1", None, 1.0),
         CompoundComparison("cmp2", 100.0, 100.0, "cmp2", None, 1.0),
     ]
 
     evaluation = BenchmarkEvaluation(
         benchmark_id="override_eval",
-        bench_file=ROOT / "data" / "benchmarks" / "cys_glucose_150C_Farmer1999.json",
+        bench_file=ROOT / "data" / "benchmarks" / "cys_ribose_140C_Hofmann1998.json",
         supported=True,
         reason=None,
         predicted_ppb={},
@@ -115,7 +127,11 @@ def test_benchmark_specific_scale_thresholds_override_global_defaults():
 
     summary = summarize_evaluation(evaluation, protein_type="free")
 
-    assert summary.max_ratio == 1.3
+    assert summary.max_ratio == 1.48
     assert summary.mean_abs_log10_error is not None
+    assert summary.mean_abs_log10_error < DEFAULT_VALIDATION_CONTRACT.thresholds.free_aa_mean_abs_log10_error_threshold
+    # Would pass under the global default...
+    assert summary.max_ratio < DEFAULT_VALIDATION_CONTRACT.thresholds.ratio_threshold_for("free")
+    # ...but the benchmark-specific 1.45 is tighter, and it is what gets enforced.
     assert summary.scale_status == "fail"
-    assert any("max ratio 1.300 > 1.25" in issue for issue in summary.blocking_issues)
+    assert any("max ratio 1.480 > 1.45" in issue for issue in summary.blocking_issues)

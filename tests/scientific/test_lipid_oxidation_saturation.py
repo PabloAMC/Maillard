@@ -50,9 +50,19 @@ def test_saturated_extent_handles_degenerate_inputs():
 def test_default_path_is_byte_identical_to_linear_model():
     # The cap ships DISABLED (max_conversion_fraction=null), so the production
     # hydroperoxide term must EXACTLY equal the pre-S27 linear computation, in the
-    # same multiplication order. This is the guard that keeps the in-panel headline
-    # at 37/48 (the trace lipid compounds have near-zero-width CIs and flip on any
-    # perturbation, including float reassociation).
+    # same multiplication order.
+    #
+    # DRIFT GUARD, not a coverage target. The trace lipid compounds carry near-zero-width
+    # CIs, so they flip inside/outside on any perturbation of this term -- including a
+    # bit-level float reassociation that changes no physics. This test exists to catch that
+    # silent drift, so that a change in the in-panel coverage number always corresponds to a
+    # real modelling change and never to an accidental refactor of the arithmetic here.
+    #
+    # It deliberately does NOT pin a coverage figure. The number moves for legitimate
+    # reasons (the panel shrank from 19 to 16 benchmarks on 2026-08-26 when three benchmarks
+    # with unlocatable sources were quarantined; in-panel coverage went 37/48 -> 35/41), and
+    # pinning it here would turn an observation into a target to be defended. Regenerate
+    # results/validation/prediction_uncertainty.md for the current value.
     from src.lipid_oxidation import _kinetics, _oxidation_rate_per_min
 
     assert _kinetics()["max_conversion_fraction"] is None, "cap must be disabled by default"

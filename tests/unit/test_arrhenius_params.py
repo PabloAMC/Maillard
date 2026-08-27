@@ -31,7 +31,8 @@ def test_get_arrhenius_params_valid():
     assert params is not None
     A, Ea_kcal, _, _ = params
     assert A == 1.5e11
-    assert abs(Ea_kcal - 13.62) < 0.1 # 57.0 kJ/mol / 4.184 = 13.62 kcal/mol
+    # Audit 2026-08-26: corrected to the thesis value (Table 5.2, Glu+Gly->DFG).
+    assert abs(Ea_kcal - 23.18) < 0.1 # 97.0 kJ/mol / 4.184 = 23.18 kcal/mol
     
     # Amadori
     params = get_arrhenius_params("amadori_rearrangement")

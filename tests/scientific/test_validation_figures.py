@@ -40,8 +40,32 @@ def test_validation_overview_payload_reports_current_tolerance_closure():
     assert payload["experimental_outside_1_5x_benchmark_count"] == sum(1 for ratio in experimental_ratios if ratio > 1.5)
     assert payload["experimental_outside_2x_benchmark_count"] == sum(1 for ratio in experimental_ratios if ratio > 2.0)
     assert payload["experimental_worst_quantitative_ratio"] == pytest.approx(max(experimental_ratios, default=0.0))
-    assert payload["worst_quantitative_point"]["benchmark_id"] == "thiamine_cys_xylose_145C_Cerny2008"
-    assert payload["worst_quantitative_point"]["reference_signal_origin"] == "reference_volatiles"
+    # UPDATED 2026-08-27 (cause: reporting-consistency fix, audit remediation Part 2a).
+    # `worst_quantitative_ratio` was always a max over ALL quantitative benchmarks, but
+    # `worst_quantitative_point` was selected only from the reference_volatiles subset.
+    # The two coincided by accident until the Bolton1994 benchmark entered the panel, at
+    # which point the artifact reported a worst ratio of 173x next to a worst point of
+    # 3.4x. This test pinned the buggy pairing (it asserted the point was Cerny, a
+    # reference_volatiles row, while the ratio above it came from the full population).
+    # The generator now draws both from the same population and exposes the reference-only
+    # view under explicitly named `reference_worst_quantitative_*` keys. The assertions
+    # below pin the CONSISTENCY property rather than a specific benchmark id, so the pair
+    # can never silently diverge again.
+    assert payload["worst_quantitative_population"] == "all_quantitative_benchmarks"
+    assert payload["worst_quantitative_point"]["max_ratio"] == pytest.approx(
+        payload["worst_quantitative_ratio"]
+    ), "worst_quantitative_point and worst_quantitative_ratio must describe the same population"
+
+    reference_ratios = [
+        float(row["max_ratio"] or 0.0)
+        for row in payload["quantitative_benchmarks"]
+        if row["reference_signal_origin"] != "measured_volatiles"
+    ]
+    assert payload["reference_worst_quantitative_ratio"] == pytest.approx(
+        max(reference_ratios, default=0.0)
+    )
+    assert payload["reference_worst_quantitative_point"]["benchmark_id"] == "thiamine_cys_xylose_145C_Cerny2008"
+    assert payload["reference_worst_quantitative_point"]["reference_signal_origin"] == "reference_volatiles"
     assert payload["experimental_worst_quantitative_point"]["benchmark_id"] != "thiamine_cys_xylose_145C_Cerny2008"
     assert payload["experimental_worst_quantitative_point"]["reference_signal_origin"] == "measured_volatiles"
 

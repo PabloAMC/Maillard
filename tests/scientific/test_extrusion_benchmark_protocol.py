@@ -29,7 +29,10 @@ def test_extrusion_benchmark_protocol_is_repo_backed_but_marks_missing_locked_sp
 
     assert payload["protocol_id"] == "spi_extrusion_mvp_benchmark_2026"
     assert payload["selected_protein_type"] == "soy_iso"
-    assert payload["design_targets"]["sme_levels_kj_per_kg"] == [120.0, 180.0]
+    # Updated 2026-08-27: the [120, 180] kJ/kg pair sat inside the SME response's
+    # old saturated region, so the model predicted both arms identically. The
+    # regenerated arms span the real 300-800 kJ/kg twin-screw window.
+    assert payload["design_targets"]["sme_levels_kj_per_kg"] == [300.0, 700.0]
     assert payload["repo_backed_lab_specs"]["headspace_method"]["fiber"] == "DVB/CAR/PDMS"
     assert payload["repo_backed_lab_specs"]["headspace_method"]["aldehyde_internal_standard_identity"] == "hexanal-d12"
     assert payload["repo_backed_lab_specs"]["safety_method"]["platform"] == "UHPLC Nexera plus TQMS8040"
@@ -83,7 +86,9 @@ def test_extrusion_external_closure_package_materializes_direct_damage_plus_trad
     markdown = render_extrusion_external_closure_package_markdown(payload)
     assert "Extrusion External Closure Package" in markdown
     assert "lysinoalanine" in markdown.lower()
-    assert "spi_hme_120_kj_per_kg" in markdown
+    # Arm id updated 2026-08-27 with the regenerated DoE levels (120/180 ->
+    # 300/700 kJ/kg); the arm ids are derived from the protocol's SME levels.
+    assert "spi_hme_300_kj_per_kg" in markdown
 
 
 def test_extrusion_external_closure_workbook_is_per_arm_and_placeholder_based():
@@ -131,3 +136,25 @@ def test_extrusion_5_8_follow_on_workbook_keeps_feed_reference_and_post_extrusio
     markdown = render_extrusion_disulfide_follow_on_workbook_markdown(payload)
     assert "Extrusion 5.8 Follow-On Workbook" in markdown
     assert "Feed reference assays" in markdown
+
+def test_extrusion_doe_arms_are_predicted_to_differ():
+    """Audit item 3.2: two arms the model scores identically buy no information."""
+    payload = build_extrusion_benchmark_protocol(ROOT)
+    discrimination = payload["arm_discrimination"]
+
+    assert discrimination["arms_predicted_distinct"] is True
+    for field in (
+        "effective_temperature_celsius",
+        "mean_residence_time_seconds",
+        "relative_rtd_spread",
+        "die_exit_temperature_celsius",
+    ):
+        assert field in discrimination["discriminating_fields"]
+
+    signatures = [arm["predicted_signature"] for arm in payload["process_arms"]]
+    assert len({tuple(sorted(sig.items())) for sig in signatures}) == len(signatures)
+
+    # And the fields the model genuinely cannot separate are named, not hidden.
+    assert "predicted_furosine_mg_per_kg" in discrimination["non_discriminating_fields"]
+    markdown = render_extrusion_benchmark_protocol_markdown(payload)
+    assert "Arm Discrimination Check" in markdown

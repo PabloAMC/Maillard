@@ -428,10 +428,26 @@ class TestPBMAAdditives:
         degrad_steps = [s for s in steps if s.reaction_family == "Additive_Thermal_Degradation"]
         assert len(degrad_steps) >= 1
         
+        # UPDATED 2026-08-27 (Wave G1 fix 8). The single step this used to assert
+        # was grossly unbalanced: thiamine (one sulfur) cannot yield BOTH H2S and
+        # a thiophene, and it destroyed 3 C, 3 N and an O per firing. It is now a
+        # balanced five-step cascade through the thiazole moiety and
+        # 5-hydroxy-3-mercapto-2-pentanone. H2S and 2-methylthiophene survive as
+        # products (with a real sulfur budget); 4,5-dihydro-2-methylthiazole was
+        # the fabricated second sulfur sink and is gone. MFT is now reachable
+        # directly from thiamine, which is the accepted route.
         products = [p.label for step in degrad_steps for p in step.products]
         assert "Hydrogen_Sulfide" in products
         assert "2-methylthiophene" in products
-        assert "4,5-dihydro-2-methylthiazole" in products
+        assert "4-methyl-5-(2-hydroxyethyl)thiazole" in products
+        assert "5-hydroxy-3-mercapto-2-pentanone" in products
+
+        # The furan ring closure that yields MFT is an oxidative cyclodehydration
+        # and carries its own family so that its 2[H] lumping stays visible.
+        aromatisation = [s for s in steps if s.reaction_family == "Furan_Ring_Aromatisation"]
+        assert "2-methyl-3-furanthiol" in [
+            p.label for step in aromatisation for p in step.products
+        ]
 
     def test_furanone_generation_from_pentose_and_alanine_or_glycine(self):
         engine = SmirksEngine(conditions=ReactionConditions(temperature_celsius=120))

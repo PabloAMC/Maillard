@@ -65,6 +65,10 @@ def test_meaty_quality_penalty_reduces_objective(monkeypatch):
 
         def __init__(self):
             self.user_attrs = {}
+            # Mirror optuna.Trial: sampled values are readable off `.params`,
+            # which is how the objective now rebuilds the formulation
+            # (src.bayesian_optimizer.formulation_from_params).
+            self.params = {}
 
         def suggest_float(self, name, low, high, log=False):
             values = {
@@ -79,6 +83,7 @@ def test_meaty_quality_penalty_reduces_objective(monkeypatch):
                 "time_minutes": 30.0,
                 "intervention_dose": 0.0,
             }
+            self.params[name] = values[name]
             return values[name]
 
         def suggest_categorical(self, name, options):
@@ -86,6 +91,7 @@ def test_meaty_quality_penalty_reduces_objective(monkeypatch):
                 "intervention_agent": "none",
                 "pre_processing": "none",
             }
+            self.params[name] = values[name]
             return values[name]
 
         def set_user_attr(self, key, value):
@@ -121,6 +127,10 @@ def test_furanone_penalty_reduces_objective(monkeypatch):
 
         def __init__(self):
             self.user_attrs = {}
+            # Mirror optuna.Trial: sampled values are readable off `.params`,
+            # which is how the objective now rebuilds the formulation
+            # (src.bayesian_optimizer.formulation_from_params).
+            self.params = {}
 
         def suggest_float(self, name, low, high, log=False):
             values = {
@@ -135,6 +145,7 @@ def test_furanone_penalty_reduces_objective(monkeypatch):
                 "time_minutes": 30.0,
                 "intervention_dose": 0.0,
             }
+            self.params[name] = values[name]
             return values[name]
 
         def suggest_categorical(self, name, options):
@@ -142,6 +153,7 @@ def test_furanone_penalty_reduces_objective(monkeypatch):
                 "intervention_agent": "none",
                 "pre_processing": "none",
             }
+            self.params[name] = values[name]
             return values[name]
 
         def set_user_attr(self, key, value):

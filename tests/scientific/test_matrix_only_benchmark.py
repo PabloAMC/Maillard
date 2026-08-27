@@ -77,11 +77,11 @@ def test_matrix_only_benchmark_is_deliberately_excluded_from_target_snapshots():
     rows = snapshot_all_benchmark_targets([
         bench_file,
         soy_bench_file,
-        ROOT / "data" / "benchmarks" / "cys_glucose_150C_Farmer1999.json",
+        ROOT / "data" / "benchmarks" / "cys_ribose_140C_Hofmann1998.json",
     ])
 
     assert rows
-    assert {row.benchmark_id for row in rows} == {"cys_glucose_150C_Farmer1999"}
+    assert {row.benchmark_id for row in rows} == {"cys_ribose_140C_Hofmann1998"}
 
 
 def test_matrix_only_benchmark_exposes_ranking_contract_and_calibration_metadata():

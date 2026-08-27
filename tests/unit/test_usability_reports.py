@@ -526,8 +526,15 @@ def test_generate_report_includes_confidence_metadata(tmp_path: Path, monkeypatc
     assert '"provenance"' in json_text
     assert "## 5. Provenance" in markdown_text
     assert "## 6. Glossary" in markdown_text
-    assert "bounded_calibration" in markdown_text
-    assert "external_failing" in markdown_text
+    # 2026-08-27 (Wave G3, tier-vocabulary unification): the report glossary used
+    # to define `bounded_calibration` / `external_failing`, a compound-level
+    # vocabulary that NO report column ever emitted. It now documents the three
+    # vocabularies that are actually emitted: `tier` (high/medium/low/exploratory),
+    # `calibration_evidence_strength`, and the literature-prior `confidence_tier`.
+    assert "`exploratory`" in markdown_text
+    assert "literature_anchored" in markdown_text
+    assert "directional_transferred" in markdown_text
+    assert "confidence_tier" in markdown_text
     assert "## 7. Recommended next experiment" in markdown_text
     assert "Extrusion Observable Panel" in markdown_text
     assert "Support Origin" in markdown_text
@@ -984,8 +991,15 @@ def test_generate_comparison_report_includes_provenance(tmp_path: Path, monkeypa
     assert "Trust Surface" in markdown_text
     assert "## 5. Provenance" in markdown_text
     assert "## 6. Glossary" in markdown_text
-    assert "bounded_calibration" in markdown_text
-    assert "external_failing" in markdown_text
+    # 2026-08-27 (Wave G3, tier-vocabulary unification): the report glossary used
+    # to define `bounded_calibration` / `external_failing`, a compound-level
+    # vocabulary that NO report column ever emitted. It now documents the three
+    # vocabularies that are actually emitted: `tier` (high/medium/low/exploratory),
+    # `calibration_evidence_strength`, and the literature-prior `confidence_tier`.
+    assert "`exploratory`" in markdown_text
+    assert "literature_anchored" in markdown_text
+    assert "directional_transferred" in markdown_text
+    assert "confidence_tier" in markdown_text
     assert "## 7. Recommended next experiment" in markdown_text
     assert "— sensory readout" in markdown_text
     assert (out_dir / "comparison_intervention_waterfall.png").exists()

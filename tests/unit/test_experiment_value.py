@@ -39,7 +39,8 @@ def test_load_compound_specs_aliases_resolve():
     assert long_form is not None
     assert short_form is long_form
     assert bare is long_form
-    assert long_form.odour_threshold_ug_per_kg == pytest.approx(0.0001)
+    # Audit 2026-08-26: corrected from 0.0001 to the commonly cited aqueous ODT.
+    assert long_form.odour_threshold_ug_per_kg == pytest.approx(0.007)
 
 
 def test_envelope_miss_inside_ci_is_zero():
@@ -153,7 +154,7 @@ def test_infer_matrix_family_id_prefix_for_unattributed_benchmark():
 
 
 def test_infer_matrix_family_free_precursor_and_unknown():
-    assert infer_matrix_family("cys_glucose_150C_Farmer1999", {}) == "free"
+    assert infer_matrix_family("cys_ribose_140C_Hofmann1998", {}) == "free"
     assert infer_matrix_family("thiamine_thermal_120C", {}) == "free"
     assert infer_matrix_family("completely_novel_id", {}) == "unknown"
 

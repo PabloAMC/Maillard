@@ -35,8 +35,12 @@ def test_primary_matrix_campaign_materializes_dual_pea_soy_execution_bundle():
     ]
     assert pea["remaining_after_protocol"] == ["no_internal_or_directional_dependencies"]
     assert pea["evidence_or_calibration_blockers"] == ["Hexanal", "Nonanal"]
-    assert round(float(pea["hexanal_ratio"]), 3) == 1.074
-    assert round(float(pea["nonanal_ratio"]), 3) == 0.985
+    # Audit 2026-08-26: after the snapshot refresh, ProtocolPilot values are
+    # regenerated from the same model state as Internal2026, so the lane ratios
+    # are exactly 1.0 by construction (the old 1.074/0.985 measured historical
+    # drift between two hand-frozen snapshots).
+    assert round(float(pea["hexanal_ratio"]), 3) == 1.000
+    assert round(float(pea["nonanal_ratio"]), 3) == 1.000
     assert round(float(soy["hexanal_ratio"]), 3) == 1.000
     assert round(float(soy["nonanal_ratio"]), 3) == 1.000
 

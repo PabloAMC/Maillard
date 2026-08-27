@@ -14,7 +14,7 @@ from src.family_validation_overview import (  # noqa: E402
 
 def test_family_validation_overview_tracks_quantitative_and_gap_families():
     payload = build_family_validation_overview_artifact([
-        ROOT / "data" / "benchmarks" / "cys_glucose_150C_Farmer1999.json",
+        ROOT / "data" / "benchmarks" / "cys_ribose_140C_Hofmann1998.json",
         ROOT / "data" / "benchmarks" / "pea_isolate_40C_PratapSingh2021.json",
         ROOT / "data" / "benchmarks" / "soy_isolate_40C_PratapSingh2021.json",
     ])

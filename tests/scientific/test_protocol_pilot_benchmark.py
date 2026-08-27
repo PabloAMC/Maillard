@@ -36,7 +36,10 @@ def test_protocol_pilot_benchmark_matches_materialized_intake_payload(pilot_inta
 
     assert actual == expected
     assert actual["benchmark_id"] == benchmark_id
-    assert actual["source_metadata"]["origin"] == "internal_experiment"
+    # Audit 2026-08-26: these volatile values are frozen model output, not lab
+    # measurements — the payload must say so and never claim experiment provenance.
+    assert actual["source_metadata"]["origin"] == "synthetic_diagnostic"
+    assert actual["evidence_class"] == "diagnostic_only"
     assert "measured_volatiles" in actual
 
 

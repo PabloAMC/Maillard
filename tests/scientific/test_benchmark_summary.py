@@ -19,18 +19,18 @@ from src.presentation import render_benchmark_summary_markdown
 
 def test_benchmark_summary_separates_supported_and_unsupported_cases():
     summaries = summarize_benchmarks([
-        ROOT / "data" / "benchmarks" / "cys_glucose_150C_Farmer1999.json",
+        ROOT / "data" / "benchmarks" / "cys_ribose_140C_Hofmann1998.json",
         ROOT / "data" / "benchmarks" / "pea_isolate_40C_PratapSingh2021.json",
         ROOT / "data" / "benchmarks" / "soy_isolate_40C_PratapSingh2021.json",
     ])
 
     by_id = {summary.benchmark_id: summary for summary in summaries}
 
-    assert by_id["cys_glucose_150C_Farmer1999"].supported is True
-    assert by_id["cys_glucose_150C_Farmer1999"].benchmark_engine == "fast_observable"
-    assert by_id["cys_glucose_150C_Farmer1999"].cantera_role == "diagnostic_reference_only"
-    assert by_id["cys_glucose_150C_Farmer1999"].thermodynamic_gating_policy == "diagnostic_only"
-    assert by_id["cys_glucose_150C_Farmer1999"].overall_status in {"pass", "scale-gap", "ranking-gap", "pass-no-ranking"}
+    assert by_id["cys_ribose_140C_Hofmann1998"].supported is True
+    assert by_id["cys_ribose_140C_Hofmann1998"].benchmark_engine == "fast_observable"
+    assert by_id["cys_ribose_140C_Hofmann1998"].cantera_role == "diagnostic_reference_only"
+    assert by_id["cys_ribose_140C_Hofmann1998"].thermodynamic_gating_policy == "diagnostic_only"
+    assert by_id["cys_ribose_140C_Hofmann1998"].overall_status in {"pass", "scale-gap", "ranking-gap", "pass-no-ranking"}
 
     assert by_id["pea_isolate_40C_PratapSingh2021"].supported is True
     assert by_id["pea_isolate_40C_PratapSingh2021"].benchmark_engine == "matrix_intake_headspace"
@@ -52,7 +52,7 @@ def test_benchmark_summary_separates_supported_and_unsupported_cases():
 
 def test_benchmark_summary_markdown_includes_gap_labels():
     summaries = summarize_benchmarks([
-        ROOT / "data" / "benchmarks" / "cys_glucose_150C_Farmer1999.json",
+        ROOT / "data" / "benchmarks" / "cys_ribose_140C_Hofmann1998.json",
         ROOT / "data" / "benchmarks" / "pea_isolate_40C_PratapSingh2021.json",
         ROOT / "data" / "benchmarks" / "soy_isolate_40C_PratapSingh2021.json",
     ])
@@ -60,7 +60,7 @@ def test_benchmark_summary_markdown_includes_gap_labels():
     markdown = render_benchmark_summary_markdown(summaries)
 
     assert "Benchmark Summary" in markdown
-    assert "cys_glucose_150C_Farmer1999" in markdown
+    assert "cys_ribose_140C_Hofmann1998" in markdown
     assert "pea_isolate_40C_PratapSingh2021" in markdown
     assert "soy_isolate_40C_PratapSingh2021" in markdown
     assert "matrix-only intake path is executable" in markdown
@@ -77,7 +77,7 @@ def test_benchmark_summary_markdown_includes_gap_labels():
 
 def test_family_lane_validation_artifact_groups_benchmarks_by_family_and_lane():
     payload = build_family_lane_validation_artifact([
-        ROOT / "data" / "benchmarks" / "cys_glucose_150C_Farmer1999.json",
+        ROOT / "data" / "benchmarks" / "cys_ribose_140C_Hofmann1998.json",
         ROOT / "data" / "benchmarks" / "pea_isolate_40C_PratapSingh2021.json",
         ROOT / "data" / "benchmarks" / "soy_isolate_40C_PratapSingh2021.json",
     ])
@@ -97,7 +97,7 @@ def test_family_lane_validation_artifact_groups_benchmarks_by_family_and_lane():
 def test_strict_gate_summary_reflects_threshold_failures():
     evaluation = BenchmarkEvaluation(
         benchmark_id="synthetic_benchmark",
-        bench_file=ROOT / "data" / "benchmarks" / "cys_glucose_150C_Farmer1999.json",
+        bench_file=ROOT / "data" / "benchmarks" / "cys_ribose_140C_Hofmann1998.json",
         supported=True,
         reason=None,
         predicted_ppb={},

@@ -18,7 +18,7 @@ from src.presentation import render_thermodynamic_gating_audit_markdown
 def _summary(*, status: str, mae: float, max_ratio: float) -> BenchmarkSummary:
     return BenchmarkSummary(
         benchmark_id="synthetic",
-        bench_file=ROOT / "data" / "benchmarks" / "cys_glucose_150C_Farmer1999.json",
+        bench_file=ROOT / "data" / "benchmarks" / "cys_ribose_140C_Hofmann1998.json",
         tier="PRIMARY",
         family="free_aa_sulfur",
         execution_path="free_precursor",
@@ -62,12 +62,12 @@ def test_thermodynamic_gating_materiality_rejects_worse_status():
 
 def test_thermodynamic_gating_audit_reports_policy_for_real_benchmarks():
     rows = audit_all_thermodynamic_gating([
-        ROOT / "data" / "benchmarks" / "cys_glucose_150C_Farmer1999.json",
+        ROOT / "data" / "benchmarks" / "cys_ribose_140C_Hofmann1998.json",
         ROOT / "data" / "benchmarks" / "pea_isolate_40C_PratapSingh2021.json",
     ])
 
     by_id = {row.benchmark_id: row for row in rows}
-    assert by_id["cys_glucose_150C_Farmer1999"].recommended_policy in {"diagnostic_only", "benchmark_facing_candidate"}
+    assert by_id["cys_ribose_140C_Hofmann1998"].recommended_policy in {"diagnostic_only", "benchmark_facing_candidate"}
     assert by_id["pea_isolate_40C_PratapSingh2021"].applicable is False
 
     markdown = render_thermodynamic_gating_audit_markdown(rows)
@@ -77,7 +77,7 @@ def test_thermodynamic_gating_audit_reports_policy_for_real_benchmarks():
 
 def test_auto_thermodynamic_gating_mode_resolves_to_contract_policy():
     free_bench = {
-        "benchmark_id": "cys_glucose_150C_Farmer1999",
+        "benchmark_id": "cys_ribose_140C_Hofmann1998",
         "protein_type": "free",
     }
     matrix_bench = {
@@ -91,7 +91,7 @@ def test_auto_thermodynamic_gating_mode_resolves_to_contract_policy():
 
 def test_auto_thermodynamic_gating_mode_honors_benchmark_facing_override():
     bench = {
-        "benchmark_id": "cys_glucose_150C_Farmer1999",
+        "benchmark_id": "cys_ribose_140C_Hofmann1998",
         "protein_type": "free",
         "metadata": {
             "thermodynamic_gating_policy": "benchmark_facing",

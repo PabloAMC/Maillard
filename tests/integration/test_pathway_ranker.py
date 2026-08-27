@@ -142,3 +142,99 @@ def test_ranker_sorting_criteria(monkeypatch):
     
     # A should be first because 25 < 30
     assert profiles[0].pathway_name == "A"
+
+
+# ---------------------------------------------------------------------------
+# Audit remediation 2026-08-27 (item 3.3: the ranking ignored scaled_rates)
+# ---------------------------------------------------------------------------
+
+def test_empty_pathway_ranks_last_with_no_steps_status(monkeypatch):
+    import src.pathway_ranker
+    monkeypatch.setattr(src.pathway_ranker, "evaluate_single_step", mock_evaluate_single_step)
+
+    pathways = {
+        "Pathway_Empty": [],
+        "Pathway_Slow": [ElementaryStep([], [], reaction_family="Slow_Step")],
+    }
+    ranked = PathwayRanker(n_cores=1).screen_pathways(pathways)
+
+    assert ranked[-1].pathway_name == "Pathway_Empty"
+    assert ranked[-1].status == "no_steps"
+    assert ranked[0].status == "ok"
+
+
+def test_ranking_is_rate_aware_when_conditions_are_supplied(monkeypatch):
+    """pH must be able to change the order of two pathways with equal spans."""
+    def mock_eval(step):
+        return (-10.0, 20.0)
+
+    import src.pathway_ranker
+    monkeypatch.setattr(src.pathway_ranker, "evaluate_single_step", mock_eval)
+
+    pathways = {
+        "Furan": [ElementaryStep([], [], reaction_family="1,2-enolisation")],
+        "Pyrazine": [ElementaryStep([], [], reaction_family="2,3-enolisation")],
+    }
+
+    alkaline = PathwayRanker(n_cores=1, conditions=ReactionConditions(pH=9.0)).screen_pathways(pathways)
+    acidic = PathwayRanker(n_cores=1, conditions=ReactionConditions(pH=4.0)).screen_pathways(pathways)
+
+    # Identical spans, so a span-only sort would return the same order twice.
+    assert alkaline[0].energetic_span == alkaline[1].energetic_span
+    assert alkaline[0].pathway_name == "Pyrazine"
+    assert acidic[0].pathway_name == "Furan"
+
+
+def test_rank_pathways_exposes_both_labelled_rankings(monkeypatch):
+    import src.pathway_ranker
+    monkeypatch.setattr(src.pathway_ranker, "evaluate_single_step", mock_evaluate_single_step)
+
+    pathways = {
+        "Pathway_Slow": [ElementaryStep([], [], reaction_family="Slow_Step")],
+        "Pathway_Fast": [ElementaryStep([], [], reaction_family="Fast_Step")],
+        "Pathway_Empty": [],
+    }
+    rankings = PathwayRanker(n_cores=1, conditions=ReactionConditions(pH=6.0)).rank_pathways(pathways)
+
+    assert set(rankings) == {"by_energetic_span", "by_conditioned_rate"}
+    assert rankings["by_energetic_span"][0].pathway_name == "Pathway_Fast"
+    assert rankings["by_conditioned_rate"][0].pathway_name == "Pathway_Fast"
+    for ranking in rankings.values():
+        assert ranking[-1].pathway_name == "Pathway_Empty"
+
+
+def test_bottleneck_scaled_rate_is_the_slowest_step():
+    profile = PathwayProfile("P", [], [0.0, 0.0], [10.0, 20.0], scaled_rates=[1e-3, 1e-8])
+    assert profile.bottleneck_scaled_rate == 1e-8
+    assert PathwayProfile("Q", [], [], [], scaled_rates=None).bottleneck_scaled_rate is None
+
+
+def test_failed_delta_e_uses_the_honest_sentinel(monkeypatch):
+    """A swallowed exception must not report a thermoneutral (0.0) step."""
+    import src.pathway_ranker as ranker_module
+
+    class _BoomScreener:
+        def optimize_species(self, smiles):
+            raise RuntimeError("embedding failure")
+
+    from src.pathway_extractor import Species
+
+    monkeypatch.setattr(ranker_module, "XTBScreener", _BoomScreener)
+    step = ElementaryStep(
+        [Species("A", "CCO")], [Species("B", "CC=O")],
+        reaction_family="Fast", barrier_kcal_mol=12.0,
+    )
+    delta_e, barrier = ranker_module.evaluate_single_step(step)
+
+    assert delta_e == ranker_module.FAILED_EVALUATION_SENTINEL_KCAL
+    assert barrier == 12.0
+
+
+def test_unresolved_species_steps_are_not_evaluated():
+    import src.pathway_ranker as ranker_module
+
+    step = ElementaryStep([], [], reaction_family="X", source_quality="unresolved_species")
+    assert ranker_module.evaluate_single_step(step) == (
+        ranker_module.FAILED_EVALUATION_SENTINEL_KCAL,
+        ranker_module.FAILED_EVALUATION_SENTINEL_KCAL,
+    )
