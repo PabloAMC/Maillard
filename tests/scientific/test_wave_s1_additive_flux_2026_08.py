@@ -137,7 +137,7 @@ def test_channel_identity_is_the_step_set_not_the_rate_limiting_step():
     assert a == "x->y|y->p"
 
 
-def test_both_hofmann_mft_routes_share_the_amadori_rate_limiting_step():
+def test_the_hofmann_lane_rate_limiting_steps_are_measured_not_assumed():
     """The measurement behind the rule choice, pinned so nobody re-derives the wrong expectation.
 
     Wave P predicted MFT would land at 242.38 + 71.02 = 313.39 ppb "if the two MFT channels
@@ -145,6 +145,14 @@ def test_both_hofmann_mft_routes_share_the_amadori_rate_limiting_step():
     Amadori rearrangement — so that arithmetic never applied. The shipped, budget-normalised
     answer is 283.59 ppb, below Wave P's estimate, because the second MFT channel competes
     for the same fixed volatile budget as the FFT channels that also grew.
+
+    RENAMED 2026-08-27 (Wave S2c) from `test_both_hofmann_mft_routes_share_the_amadori_
+    rate_limiting_step`, because after the `thiol_addition_pentodiulose` 26.35 -> 28.60 revert
+    THEY NO LONGER SHARE IT: the MFT lane now bottlenecks on `Thiol_Addition_Pentodiulose`
+    (effective 29.5354 kcal/mol at aw 0.98) while the FFT lane still bottlenecks on
+    `Amadori_Rearrangement` (29.0603). The old name asserted a conclusion; the new one names
+    what the test actually owns, which is that these steps are MEASURED off the shipped tree
+    rather than assumed. Full numbers and consequences in the comment at the assertions.
     """
     result = None
     original = Recommender.predict_from_steps
@@ -168,7 +176,27 @@ def test_both_hofmann_mft_routes_share_the_amadori_rate_limiting_step():
         path = result["debug_paths"][canon]
         return max(path, key=lambda t: float(t["barrier"]))["family"]
 
-    assert slowest_family("Cc1occc1S") == "Amadori_Rearrangement"
+    # RE-PINNED 2026-08-27 (Wave S2c -- THE BARRIER REVERT). THE MFT LANE NO LONGER SHARES
+    # ITS RATE-LIMITING STEP WITH THE FFT LANE, and that is a real structural movement, not a
+    # bookkeeping one. `thiol_addition_pentodiulose` went 26.35 -> 28.60 kcal/mol; at this
+    # benchmark's aw 0.98 the water-activity term adds ~0.935 kcal/mol to that step, so its
+    # EFFECTIVE barrier is 29.5354 -- above the shared Amadori trunk's 29.0603. Measured
+    # effective barriers on the shipped tree:
+    #     MFT: Schiff 21.6070 | Amadori 29.0603 | Enolisation_2_3_Amadori 28.0311 |
+    #          Deoxyosone_Reduction 28.9354 | Thiol_Addition_Pentodiulose 29.5354  <- slowest
+    #     FFT: Schiff 21.6070 | Amadori 29.0603  <- slowest | Enolisation_Intermediate 21.0000 |
+    #          Enolisation_1_2 27.6964 | Thiohemiacetal_Formation 23.3000 |
+    #          Thiol_Dehydration 27.7354
+    # WHAT THIS DOES AND DOES NOT CHANGE. It does NOT reopen the propagator rule: the shipped
+    # channel id is the route's FULL ordered step-set (see the test above), so two routes are
+    # distinct whether or not they share a rate-limiting step, and the additive sum is
+    # unaffected. It DOES retire this test's original argument -- "Wave P's 242.38 + 71.02
+    # arithmetic never applied because both lanes bottleneck on the same trunk". That
+    # argument is now only half true, and the surviving half is the decisive one: the
+    # volatile budget is FIXED, so single-lane figures were never addable regardless of where
+    # the bottleneck sits. The budget invariant is asserted independently in
+    # test_the_volatile_budget_still_caps_the_sum.
+    assert slowest_family("Cc1occc1S") == "Thiol_Addition_Pentodiulose"
     assert slowest_family("SCc1ccco1") == "Amadori_Rearrangement"
 
 
@@ -230,10 +258,40 @@ def test_hofmann_sulfur_pair_after_the_additive_propagator():
     benchmark's own contract (1.45x / 0.09 dex) is UNTOUCHED and now fails on max_ratio as
     well as on MALE. Nothing was tuned to claw this back — the two lanes share their
     upstream trunk, so any barrier that pushed FFT down would push MFT down with it.
+
+    RE-PINNED 2026-08-27 (Wave S1b -- THE pH ROUTING REPAIR, a DIFFERENT change):
+    MFT  283.59 -> 154.85 ppb vs 342   |  1.2060x under -> 2.2086x under   (WORSE)
+    FFT  297.28 -> 267.50 ppb vs 200   |  1.4864x over  -> 1.3375x over    (better)
+
+    That movement is NOT the propagator. `get_ph_multiplier` -- the enolisation
+    route-selection term, which had never been called on the prediction path -- now applies,
+    and at this benchmark's pH 5.0 it gives the 1,2-enolisation (FFT / furfural) arm a 4.5x
+    acid boost that the 2,3-enolisation (MFT) arm does not get. Against a fixed volatile
+    budget that moves share from MFT to FFT. NO BARRIER MOVED and nothing was refitted; the
+    untouched contract now fails both criteria by more (max_ratio 2.2086, MALE 0.2352 dex).
+    The ADDITIVE-PROPAGATOR property this test was written to own is unaffected and is
+    asserted separately: both compounds are still reached by two channels each.
+
+    RE-PINNED AGAIN 2026-08-27 (Wave S2c -- THE ANCHOR RETIREMENT, a THIRD kind of change):
+    MFT  154.85 ->  78.09 ppb vs 342   |  2.2086x under -> 4.3797x under   (WORSE)
+    FFT  267.50 -> 293.67 ppb vs 200   |  1.3375x over  -> 1.4684x over    (WORSE)
+
+    This one is not a propagator change and not a routing change -- it is a PROVENANCE
+    finding with a mechanical consequence. `thiol_addition_pentodiulose` is REVERTED
+    26.35 -> 28.60 (the un-fitted Wave N class value) and the Wave P fit record is RETRACTED,
+    because that refit's sole fit target was this benchmark and Wave S2b showed its
+    342 / 200 ppb are a REPO-INTERNAL DERIVATION: interior points of two invented, overlapping
+    mol % bands in data/benchmarks/maillard_validation_benchmarks.md section 1.3, committed in
+    the same commit as the benchmark JSON. The benchmark's 1.45x / 0.09 dex contract is
+    RETIRED (not widened) and its tier demoted PRIMARY -> REFERENCE; it now inherits the
+    global free-precursor default 1.5x / 0.10 dex and fails that by more (4.3797 / 0.4041 dex).
+    BOTH ROWS ARE WORSE AND BOTH ARE PINNED WORSE. Read them as errors against a yardstick
+    this repository invented, not as evidence about the chemistry.
+    THE SULFUR BRANCH NOW HAS ZERO ABSOLUTE LITERATURE ANCHORS.
     """
     predicted = _predicted(_HOFMANN)
-    assert predicted["2-methyl-3-furanthiol"] == pytest.approx(283.5889, rel=1e-4)
-    assert predicted["2-furfurylthiol"] == pytest.approx(297.2755, rel=1e-4)
+    assert predicted["2-methyl-3-furanthiol"] == pytest.approx(78.0867, rel=1e-4)
+    assert predicted["2-furfurylthiol"] == pytest.approx(293.6735, rel=1e-4)
 
 
 # ── FIX 2: the matrix calibration registry is reachable again ────────────────────────

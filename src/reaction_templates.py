@@ -1720,7 +1720,46 @@ def _lipid_hydroperoxide_scission(pool: List[Species]) -> List[ElementaryStep]:
 
 
 def _sugar_ring_opening(pool_species: List[Species]) -> List[ElementaryStep]:
-    """Hemiacetal cyclic sugar -> open-chain aldehyde. (Defensive rule via RWMol)"""
+    """Hemiacetal cyclic sugar -> open-chain aldehyde. (Defensive rule via RWMol)
+
+    ── WAVE T4 (2026-08-27): THIS RULE CANNOT FIRE TODAY. DOCUMENTED, NOT DELETED. ──
+
+    `SmirksEngine.enumerate` runs it as "Pre-Phase: Sugar Ring Opening"
+    (`src/smirks_engine.py:695`), i.e. it is presented as a live prerequisite of the
+    whole cascade. It is not one, for a reason that has nothing to do with this
+    function: it requires a CYCLIC HEMIACETAL (it locates a ring oxygen and calls
+    `RemoveBond(o_ring_idx, c_anomeric_idx)`), and EVERY sugar
+    `src/precursor_resolver.py` can produce is already OPEN-CHAIN:
+
+        glucose   O=CC(O)C(O)C(O)C(O)CO
+        ribose    O=CC(O)C(O)C(O)CO
+        xylose    O=CC(O)C(O)C(O)CO
+        fructose  OCC(O)C(O)C(O)C(=O)CO
+
+    and the resolver knows only those four (lactose / sucrose / maltose raise
+    `Unknown precursor`). Measured, not inferred: `Sugar_Ring_Opening` appears in
+    0 of 6 enumerated precursor pools at runtime.
+
+    Two pieces of config advertise the lane as live and are likewise unreached:
+    `FAST_BARRIERS["mutarotation"]` and `["ring_opening"]` (both 5.0, under a
+    section header reading "── Sugar prerequisite ──"), and the `mutarotation`
+    entry in `data/lit/arrhenius_params.yml`.
+
+    WHY THIS IS A COMMENT AND NOT A DELETION. The 42 lines below are correct
+    chemistry — mutarotation IS the real first step of the cascade in any aqueous
+    sugar system, and the ring/open-chain equilibrium is what makes the open-chain
+    carbonyl available at all. The model currently ASSUMES that equilibrium lies
+    fully open by shipping open-chain SMILES, which is a modelling shortcut, not a
+    chemical truth (at equilibrium D-glucose is ~99% cyclic). Deleting the rule
+    would remove the machinery and leave the shortcut undocumented.
+
+    OWNER DECISION, filed as [P] in `tasks/audit_remediation.md` under Wave T4:
+    either (i) add cyclic SMILES to the species/resolver layer, at which point this
+    rule and both barrier entries become live and the assumption becomes explicit
+    chemistry, or (ii) retire the lane and the two barrier keys together and state
+    the open-chain assumption in the resolver. Do NOT do (ii) piecemeal by deleting
+    this function: the barrier keys and the YAML entry would then dangle.
+    """
     steps = []
     # Match hemiacetal: O(ring) - C(ring)(OH)
     # The [O;X2;R] ensures it's a ring oxygen, [C;X4;R] is a ring carbon, [O;X2;H] is the hydroxyl.

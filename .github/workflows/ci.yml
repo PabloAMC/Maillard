@@ -42,11 +42,18 @@ name: CI
 # HuggingFace at runtime (network dependency) and running real semi-empirical
 # optimisations. Run them via the `qm` workflow_dispatch input when needed.
 
+# 2026-08-27 (owner request): test tiers run on PULL REQUESTS, not on every
+# branch push -- 8 pushes in one day each triggered a full ~30-min pipeline.
+# push triggers remain only for main (post-merge protection). Draft PRs run
+# only the cheap gates; mark the PR "Ready for review" (or use
+# workflow_dispatch) to run the full tiers. Note the previous pull_request
+# branch filter [main, audit-remediation] filtered on the BASE branch, so it
+# never matched PR #12 (base: s27-matrix-path-accuracy) at all -- the filter
+# is removed rather than extended.
 on:
   push:
-    branches: [main, audit-remediation]
+    branches: [main]
   pull_request:
-    branches: [main, audit-remediation]
   workflow_dispatch:
     inputs:
       qm:
@@ -127,6 +134,8 @@ jobs:
   # ---------------------------------------------------------------------------
   tests-unit:
     name: Unit tests
+    # Draft PRs skip the expensive tiers; gates still run.
+    if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
@@ -219,6 +228,8 @@ jobs:
   # ---------------------------------------------------------------------------
   tests-full:
     name: Scientific and integration tests
+    # Draft PRs skip the expensive tiers; gates still run.
+    if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     # 2026-08-27 (Wave J1). `needs: tests-unit` REMOVED. The stated rationale was
     # cost -- fail fast on the cheap tier, and let tests-unit warm the conda cache
@@ -300,6 +311,8 @@ jobs:
   # having never been asked. Do not quote the pytest pass count anywhere.
   strict-benchmarks:
     name: "Strict benchmark gate — RED: 0/14 strict-ready (9/9 PRIMARY fail, 5 SECONDARY unevaluated)"
+    # Draft PRs skip the expensive tiers; gates still run.
+    if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     timeout-minutes: 90
     # Advisory by construction. See the block above.

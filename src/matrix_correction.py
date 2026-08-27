@@ -20,6 +20,7 @@ Current legume-matrix anchoring inside the repo:
 
 import json
 import math
+import warnings
 from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path
@@ -47,6 +48,46 @@ def _load_json_payload(file_name: str) -> dict:
 
 PROCESS_STATE_CALIBRATION_PAYLOAD = _load_json_payload("process_state_calibrations.json")
 PROTEIN_SOURCE_REGISTRY_PAYLOAD = _load_json_payload("protein_source_registry.json")
+
+
+def _warn_if_registry_unsourced(payload: dict, consumer: str) -> bool:
+    """Surface an unanchored data file's own admission at LOAD time.
+
+    2026-08-27 (Wave T3, finding T1-01). ``data/lit/protein_source_registry.json``
+    has always described itself as *"Mocked values for 14 protein sources based on
+    Report 06 requirements"* -- and that sentence sat in a JSON field nothing read,
+    while the numbers underneath it drove ``matrix_uncertainty_factor`` and the
+    meaty-potential score at prediction time. Silence was reading as anchoring.
+
+    The precedent for the shape is the family-12 molar-ratio unit warning in
+    ``src.literature_runtime`` (``_resolve_concentration_unit``): state the defect,
+    name what depends on it, and change NOTHING about the values. No substitute
+    numbers are invented here; inventing them would be the same defect again.
+
+    Returns True when the payload admits it has no verifiable source, so callers can
+    propagate the fact into their own output payloads rather than only to stderr.
+    """
+    if str(payload.get("source_status", "")).strip() != "no_verifiable_source":
+        return False
+    warnings.warn(
+        f"{consumer}: data/lit/protein_source_registry.json declares "
+        "source_status='no_verifiable_source' -- every value in it is a MOCKED "
+        "placeholder whose only declared upstream is the LLM digest "
+        "data/Gemini_Deep_Research/06_alternative_proteins.md. It is nonetheless LIVE: "
+        "meaty_potential_multiplier, hydrolysate_observability_bias, off_note_penalty, "
+        "lox_activity_flag and methoxypyrazine_ceiling feed matrix_uncertainty_factor, "
+        "the meaty-potential score and the recommendation path. Any prediction that "
+        "differs between protein sources is unanchored on that axis. Values are NOT "
+        "substituted or rescaled.",
+        RuntimeWarning,
+        stacklevel=2,
+    )
+    return True
+
+
+PROTEIN_SOURCE_REGISTRY_UNSOURCED = _warn_if_registry_unsourced(
+    PROTEIN_SOURCE_REGISTRY_PAYLOAD, "src.matrix_correction"
+)
 
 @dataclass(frozen=True)
 class ProteinSourceProfile:

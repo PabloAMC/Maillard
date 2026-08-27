@@ -100,7 +100,11 @@ Amadori → (2,3-enolisation) → 1-deoxy-2,3-pentodiulose → (cyclodehydration
 **norfuraneol** → (+ H2S + 2[H]) → MFT, cited to van den Ouweland & Peer 1975. Wave H fitted
 `thiol_addition_norfuraneol` (28.60 → 26.85 kcal/mol) against `cys_ribose_140C_Hofmann1998`,
 which Wave I then recorded as *the only surviving literature anchor on the entire sulfur
-branch*.
+branch*. [SUPERSEDED 2026-08-27, Waves S2b/S2c: that benchmark's 342/200 ppb targets were
+later proven to be a repo-internal derivation from an abstract-reconstructed brief
+(`maillard_validation_benchmarks.md` §1.3), not literature values. The benchmark is retired
+to REFERENCE tier and the sulfur branch has ZERO absolute literature anchors. The isotope
+findings in this document are unaffected — they concern route topology, not yields.]
 
 **What the isotope evidence says.** Two independent results, from two laboratories, both
 say the norfuraneol → MFT step is not the in-situ route.

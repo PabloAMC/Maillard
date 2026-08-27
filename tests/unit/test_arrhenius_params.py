@@ -92,3 +92,74 @@ def test_arrhenius_round_trip_preserves_family_barrier():
     recovered = effective_barrier_from_rate_constant(rate_constant, temperature_kelvin, family=family)
 
     assert recovered == pytest.approx(barrier, rel=1e-9)
+
+
+# ── Wave T4 (2026-08-27) ──────────────────────────────────────────────────────
+
+
+def test_the_thiamine_arrhenius_anchor_is_reachable_from_the_emitted_family():
+    """T4.2. The literature A/Ea pair existed and NO emitted family could reach it.
+
+    `data/lit/arrhenius_params.yml` has carried a `thiamine_degradation` entry all
+    along, but the engine's thiamine steps emit `Additive_Thermal_Degradation`
+    (`src/reaction_templates.py:1943-1966`), which canonicalises to
+    `additive_thermal_degradation` -- a FAST_BARRIERS key in its own right since
+    Wave G1 fix 8. `_arrhenius_yaml_key` therefore returned None and
+    `src/cantera_export.py` silently fell back to the heuristic prefactor. Same
+    defect class as the eight DEFAULT_BARRIER fallthroughs, one lane over.
+    """
+    from src.barrier_constants import _arrhenius_yaml_key
+
+    assert _arrhenius_yaml_key("Additive_Thermal_Degradation") == "thiamine_degradation"
+
+    params = get_arrhenius_params("Additive_Thermal_Degradation")
+    assert params is not None, "the anchor is unreachable again"
+    a_value, ea_kcal, quality, _ = params
+    assert a_value == 1.0e9
+    assert ea_kcal == pytest.approx(100.8 / 4.184, abs=0.01)
+
+    # THE ANCHOR IS UNSOUND AND THE FIX DOES NOT LAUNDER IT. That YAML entry is a
+    # dead DOI with an unanchored Ea; wiring it makes the Cantera export REPORT
+    # "dead_doi" where it previously reported "heuristic" for a step whose
+    # literature entry existed the whole time. If this ever silently becomes
+    # "literature_estimated" without a re-anchoring wave, that is laundering.
+    assert quality == "dead_doi"
+
+
+def test_wiring_the_thiamine_anchor_left_the_screening_lane_untouched():
+    """SCOPE GUARD for T4.2: FAST_BARRIERS is authoritative for every prediction.
+
+    Per the authority statement in `src/barrier_constants.py`, FAST_BARRIERS drives
+    `evaluate_benchmark_payload` and the whole recommend lane, while the YAML drives
+    the Cantera export only. T4.2 touched the YAML key map and nothing else, so no
+    shipped number may move.
+    """
+    assert get_barrier("Additive_Thermal_Degradation")[0] == 25.0
+    assert get_barrier("thiamine_degradation")[0] == 25.0
+    assert get_barrier("additive_degradation")[0] == 25.0
+
+
+def test_the_mutarotation_anchor_is_still_unreachable_and_that_is_recorded():
+    """T4.3, pinned so the ledger item cannot be quietly lost.
+
+    The `Sugar_Ring_Opening` / mutarotation lane cannot fire: every sugar
+    `src/precursor_resolver.py` produces is already open-chain, so the cyclic
+    hemiacetal the rule matches never exists. This test does NOT assert the lane
+    should stay dead -- it asserts that the CURRENT state is the documented one, so
+    that implementing cyclic sugar forms (the owner option filed as [P] under Wave
+    T4) makes this test fail loudly and get updated, rather than passing unnoticed.
+    """
+    from src.barrier_constants import _arrhenius_yaml_key
+
+    assert _arrhenius_yaml_key("Sugar_Ring_Opening") == "mutarotation"
+
+    from src.precursor_resolver import resolve_many
+
+    for sugar in ("D-Glucose", "D-Ribose", "D-Xylose", "D-Fructose"):
+        (species,) = resolve_many([sugar])
+        assert "1" not in species.smiles, (
+            f"{sugar} now resolves to a RING form ({species.smiles}). The "
+            f"mutarotation lane may now be live -- re-read the Wave T4 note on "
+            f"`_sugar_ring_opening` in src/reaction_templates.py and update the "
+            f"[P] item in tasks/audit_remediation.md."
+        )

@@ -19,13 +19,13 @@ formulation:
       concentration_mM: 1.0
 measured_volatiles:
   2-furfurylthiol:
-    conc_ppb: 0.010934164798101938
+    conc_ppb: 0.005572340764894084
   2-methyl-3-furanthiol:
-    conc_ppb: 0.014938026536876203
+    conc_ppb: 0.002098340293790535
   bis(2-methyl-3-furyl) disulfide:
-    conc_ppb: 0.003740759423175426
+    conc_ppb: 0.0007797817940929268
   2,5-dimethylpyrazine:
-    conc_ppb: 0.006602135658538467
+    conc_ppb: 1.4819050084758518e-05
   Hexanal:
     conc_ppb: 1.700615783970017
   Nonanal:
@@ -50,19 +50,19 @@ comparison_contract:
     role: adverse_marker
     expected_rank: 2
     direction: lower
-  - name: 2-methyl-3-furanthiol
+  - name: 2-furfurylthiol
     role: desirable_marker
     expected_rank: 3
     direction: higher
-  - name: 2-furfurylthiol
+  - name: 2-methyl-3-furanthiol
     role: desirable_marker
     expected_rank: 4
     direction: higher
-  - name: 2,5-dimethylpyrazine
+  - name: bis(2-methyl-3-furyl) disulfide
     role: desirable_marker
     expected_rank: 5
     direction: higher
-  - name: bis(2-methyl-3-furyl) disulfide
+  - name: 2,5-dimethylpyrazine
     role: desirable_marker
     expected_rank: 6
     direction: higher

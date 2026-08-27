@@ -4,6 +4,17 @@ Wave H closed out the G-wave chemistry rebuild: it refit the sulfur branch again
 single surviving literature constraint, re-derived the hydrolysate observability factors,
 and fixed three defects found while doing so. Each of those defects is pinned here,
 because all three were the kind that hide rather than fail.
+
+CORRECTED 2026-08-27 (Wave S2c): "the single surviving literature constraint" was
+`cys_ribose_140C_Hofmann1998`, and it was NEVER a literature constraint. Wave S2b traced its
+MFT 342 / FFT 200 ppb to data/benchmarks/maillard_validation_benchmarks.md section 1.3, an
+abstract-reconstructed range table committed in the SAME commit as the benchmark JSON; both
+values are interior points of two invented, overlapping mol % bands. So BOTH of Wave H's
+calibration acts turned out to rest on non-evidence -- the hydrolysate observability
+re-derivation was retracted by Wave I when its two fit targets were shown to be fabricated,
+and the sulfur refit's live descendant (`thiol_addition_pentodiulose` = 26.35) was reverted to
+28.60 by Wave S2c. THE SULFUR BRANCH HAS ZERO ABSOLUTE LITERATURE ANCHORS. The defect pins
+below are unaffected; only the calibration claims are.
 """
 
 from __future__ import annotations
@@ -133,19 +144,56 @@ def test_corrected_mft_route_barriers_are_estimates_not_fits():
         are independent and their near-agreement is a coincidence of the shared
         upstream trunk, not evidence for the retired route;
       * `deoxyosone_reduction` was NOT fitted and is still ESTIMATED/UNCONSTRAINED.
+
+    RE-PINNED AGAIN 2026-08-27 (Wave S2c): 26.35 -> 28.60, i.e. BACK to the un-fitted
+    Wave N class value, and the test returns to its original meaning -- this constant is
+    an ESTIMATE, not a fit.
+    CAUSE, and it is not a chemistry finding: Wave S2b settled the provenance of the
+    refit's SOLE fit target and it is not a measurement. `cys_ribose_140C_Hofmann1998`'s
+    MFT 342 ppb / FFT 200 ppb were derived INSIDE THIS REPOSITORY from
+    data/benchmarks/maillard_validation_benchmarks.md section 1.3, an
+    abstract-reconstructed range table committed in c7efbbc -- the SAME commit that
+    created the benchmark JSON. Its row gives MFT `~0.02-0.05` mol % and FFT
+    `~0.01-0.03` mol %; on the file's declared (unattested) 10 mM basis with MW 114.17,
+    0.0300 mol % -> 342.5 -> 342 ppb and the band's geometric mean 0.017321 mol % ->
+    197.8 -> 200 ppb. Both shipped targets are interior points of two invented,
+    OVERLAPPING bands (~90% confidence, arithmetic exact). A barrier solved against the
+    repo's own guess is circular, so the constant is reverted and
+    results/validation/sulfur_barrier_refit_pentodiulose.{json,md} is RETRACTED -- the
+    same treatment Wave I gave hydrolysate_observability_rederivation and the Methional
+    base_factor when their only fit targets turned out to be fabricated.
+    THE COST IS REAL AND IS PINNED ELSEWHERE, NOT HIDDEN: on the retired benchmark the
+    revert moves MFT 154.85 -> 78.09 ppb and FFT 267.50 -> 293.67 ppb against the
+    fabricated 342 / 200, i.e. max_ratio 2.2086 -> 4.3797 and MALE 0.2352 -> 0.4041 dex.
+    THE SULFUR BRANCH NOW HAS ZERO ABSOLUTE LITERATURE ANCHORS.
     """
     value, note = barrier_constants.FAST_BARRIERS["thiol_addition_pentodiulose"]
-    assert value == pytest.approx(26.35)
-    assert value != pytest.approx(26.85), (
-        "the refit landed on the value Wave H fitted through the CONTRADICTED "
-        "norfuraneol route; that would need explaining, not asserting"
+    assert value == pytest.approx(28.60)
+    assert value != pytest.approx(26.35), (
+        "thiol_addition_pentodiulose is back at 26.35, the Wave P value fitted against "
+        "cys_ribose_140C_Hofmann1998 -- whose 342 / 200 ppb targets Wave S2b showed to be "
+        "a repo-internal derivation from an invented mol %% band, not a measurement. "
+        "Refitting against that benchmark is circular; it needs a real target first "
+        "(see tasks/audit_remediation.md '## Wave S2b' section (f), the ILL pack)."
     )
+    assert value != pytest.approx(26.85), (
+        "the Wave H value, fitted through the CONTRADICTED norfuraneol route AND against "
+        "the same non-measurement"
+    )
+    # The rationale must carry the WHOLE history -- estimate, fit, revert -- with the
+    # reason for the revert attached, so nobody re-runs the fit without reading it.
+    assert "REVERTED 2026-08-27 (Wave S2c)" in note
     assert "FITTED 2026-08-27 (Wave P item 1)" in note
+    assert "ESTIMATED" in note
     assert "cys_ribose_140C_Hofmann1998" in note
     assert "10.1021/jf035265m" in note
-    # The caveat that must never be separated from this number.
+    assert "ZERO ABSOLUTE LITERATURE ANCHORS" in note
+    # The caveat that must never be separated from this number. The Wave K wording is
+    # preserved (it is the historical record) and is explicitly marked superseded: the
+    # problem was never the undocumented mol%->ppb conversion, it was that there is no
+    # mol %% measurement on the far end of it.
     assert "mol%->ppb conversion" in note and "UNVERIFIED" in note
-    assert "sulfur_barrier_refit_pentodiulose" in note
+    assert "sulfur_barrier_refit_pentodiulose" in note and "RETRACTED" in note
 
     value, note = barrier_constants.FAST_BARRIERS["deoxyosone_reduction"]
     assert value == pytest.approx(28.0)

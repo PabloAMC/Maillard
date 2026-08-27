@@ -52,6 +52,31 @@ Checks (offline, all blocking)
    not quality -- and check 3 stops an entry from claiming the label and a DOI
    at once. Not waivable, because there is nothing to waive: adding the label is
    always possible and always free.
+6. **Digest-as-provenance** (added 2026-08-27, Wave T3) -- a record may not name a
+   machine-generated or abstract-reconstructed in-repo document
+   (``data/Gemini_Deep_Research/**``, ``docs/research/archives/``, ``raw/NN_*.md``,
+   "Literature Report N", ``maillard_validation_benchmarks.md``,
+   ``Maillard_meat.md`` / ``Maillard_Plant_based.md``, the Elicit dumps, the
+   nonexistent ``pathways.md``) as its ``citation``/``source``/``source_citation``
+   while claiming a ``provenance_tier`` that asserts a primary source was read
+   (``direct_measurement``, ``literature_derived_transfer``,
+   ``literature_bounded_provisional``). Tiers that already admit no paper stands
+   behind the number -- ``repo_literature_synthesis``, ``mechanistic_surrogate``,
+   ``direct_model_assumption``, ``unsourced_withdrawn`` -- are exempt by design;
+   naming the digest there is disclosure, not laundering. Marking the record
+   ``source_status: no_verifiable_source`` also satisfies the check, exactly as in
+   check 5. Separately, the strings ``digest_echo`` / ``llm_digest`` /
+   ``deep_research_says`` are refused outright as ``provenance_tier`` or
+   ``source_status`` values: a digest echo is a measurement of where a number was
+   found, never a tier of provenance. This check exists because
+   ``scripts/trace_key_values.py`` had been publishing exactly that confusion --
+   "Fully Verified: 153 (57.5%)" for entries whose numbers merely appeared near a
+   surname inside LLM-generated text (Wave T1 finding T1-00; the script is now
+   disarmed and its report retitled). Waivable in principle; **carrying no waivers.**
+   The single record it fired on when it was switched on (finding T1-08,
+   ``ref41_ppi_sulfur_volatile_binding_v1``) was fixed at source in the same wave --
+   tier demoted to ``direct_model_assumption``, ``source_status:
+   no_verifiable_source`` added, no value changed -- so the baseline stayed empty.
 
 Known-debt baseline
 -------------------
@@ -159,6 +184,49 @@ DOI_FIELDS = frozenset(
 REPAIR_FIELDS = frozenset({"doi_repair", "citation_repair"})
 REQUIRED_REPAIR_KEYS = ("old", "new", "date", "basis")
 
+# --- Check 6 scope: digest-as-provenance (2026-08-27, Wave T3) --------------
+# Wave T1 found that `scripts/trace_key_values.py` was publishing "Fully Verified:
+# 153 (57.5%)" for entries whose numbers merely appeared near a surname inside the
+# LLM-generated markdown under data/Gemini_Deep_Research/. That script has been
+# disarmed. This check stops the same confusion re-entering the DATA layer, where
+# it would be load-bearing: an entry may not name a machine-generated digest as its
+# source while simultaneously claiming a provenance tier that asserts somebody made
+# contact with a paper.
+#
+# Tiers that assert paper contact. `repo_literature_synthesis`,
+# `direct_model_assumption`, `mechanistic_surrogate` and `unsourced_withdrawn` are
+# deliberately NOT here: each already says on its face that no paper stands behind
+# the number, so citing a digest alongside one is honest rather than laundering.
+PAPER_CONTACT_TIERS = frozenset(
+    {
+        "direct_measurement",
+        "literature_derived_transfer",
+        "literature_bounded_provisional",
+    }
+)
+
+# Fields that, in this repo, carry a record's claimed upstream in prose.
+DIGEST_CITATION_FIELDS = ("citation", "source", "source_citation")
+
+# The machine-generated / abstract-reconstructed documents in this repository.
+# Naming one of these is naming an LLM digest, not a source.
+DIGEST_SOURCE_RE = re.compile(
+    r"(?i)("
+    r"Gemini_Deep_Research"
+    r"|docs/research/archives"
+    r"|(?:^|[\s/(\"'])raw/\d\d_[a-z0-9_]+\.md"
+    r"|\bLiterature Report \d+"
+    r"|maillard_validation_benchmarks\.md"
+    r"|Maillard_meat\.md|Maillard_Plant_based\.md"
+    r"|elicit_[a-z_]+\.md"
+    r"|(?:^|[\s/])pathways\.md"
+    r")"
+)
+
+# "digest echo" is a measurement, never a provenance tier or a source status. If it
+# ever appears as one, the laundering has been formalised into the schema.
+DIGEST_TIER_RE = re.compile(r"(?i)^(digest[_ -]?echo|deep[_ -]?research[_ -]?(?:says|report)|llm[_ -]?digest)")
+
 # https://www.crossref.org/blog/dois-and-matching-regular-expressions/ (permissive form)
 DOI_RE = re.compile(r"^10\.\d{4,9}/[-._;()/:A-Za-z0-9+<>\[\]]+$")
 
@@ -231,6 +299,17 @@ WAIVERS: tuple[tuple[str, str, str, str, str], ...] = (
     #    bundle's `external_validation_only` in particular — is unchanged
     #    (verified by a before/after classification diff over all 21 benchmark
     #    files; see tasks/audit_remediation.md).
+    #
+    #  - 2026-08-27 (Wave T3): check 6 (digest-as-provenance) was ADDED and the baseline
+    #    STAYED EMPTY. The one record it fired on -- `ref41_ppi_sulfur_volatile_binding_v1`
+    #    in data/lit/computational_priors.json, citing "DOI ref. 41 in
+    #    raw/11_maillard_lipid_crosstalk.md" while claiming
+    #    provenance_tier='literature_derived_transfer' -- was FIXED AT SOURCE rather than
+    #    waived: the tier is demoted to `direct_model_assumption` and the record now carries
+    #    source_status='no_verifiable_source'. No value changed. Evidence for the demotion
+    #    was already in the tree: the only DOI ever attached to that claim
+    #    (10.1021/acs.jafc.9b06882) is recorded in the 2026-08-26 ledger as TOPIC-MISMATCH,
+    #    resolving to a rodent reproductive-toxicology paper.
 )
 
 # --- Text-surface carry-over: NOT a baseline, an UNPAID DEFECT --------------
@@ -439,6 +518,51 @@ def _walk(node: Any, rel: str, pointer: str, out: list[Violation], dois: list[st
                     "or it does not (drop the DOI).",
                 )
             )
+
+        # --- Check 6: digest-as-provenance (2026-08-27, Wave T3) ------------
+        tier_raw = node.get("provenance_tier")
+        tier = tier_raw.strip() if isinstance(tier_raw, str) else ""
+        status_raw = node.get("source_status")
+        status_str = status_raw.strip() if isinstance(status_raw, str) else ""
+
+        for field_name, field_value in (
+            ("provenance_tier", tier),
+            ("source_status", status_str),
+        ):
+            if field_value and DIGEST_TIER_RE.match(field_value):
+                out.append(
+                    Violation(
+                        "digest-as-provenance",
+                        rel,
+                        f"{pointer}/{field_name}",
+                        field_value,
+                        "'digest echo' is a measurement of where a number was echoed, not a "
+                        "provenance tier. A value found inside data/Gemini_Deep_Research/ has "
+                        "no provenance; label it source_status='no_verifiable_source'.",
+                    )
+                )
+
+        if tier in PAPER_CONTACT_TIERS and status_str != "no_verifiable_source":
+            for field in DIGEST_CITATION_FIELDS:
+                value = node.get(field)
+                if not isinstance(value, str) or not value.strip():
+                    continue
+                if DIGEST_SOURCE_RE.search(value):
+                    out.append(
+                        Violation(
+                            "digest-as-provenance",
+                            rel,
+                            f"{pointer}/{field}",
+                            value.strip(),
+                            f"record claims provenance_tier='{tier}' -- which asserts that a "
+                            "primary source was read -- while naming a machine-generated or "
+                            "abstract-reconstructed in-repo document as its source. Per "
+                            "data/Gemini_Deep_Research/README.md, \"the deep-research report "
+                            "says so\" is not provenance. Either cite the primary source, or "
+                            "mark source_status='no_verifiable_source' and drop the tier.",
+                        )
+                    )
+                    break
 
     elif isinstance(node, list):
         for index, value in enumerate(node):

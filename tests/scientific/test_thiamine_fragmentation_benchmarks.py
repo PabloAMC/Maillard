@@ -59,11 +59,32 @@ def test_bolton_1994_thiamine_fragmentation_benchmark_is_executable_and_under_pr
         f"exposed the 13 ppb target (got {comparison.predicted_ppb:.4f} ppb), the Family 03 "
         "thiamine gap has closed and this test must be rewritten as a pass, not relaxed."
     )
-    assert 300.0 < comparison.ratio < 1500.0, (
-        f"Known Family 03 gap is {comparison.ratio:.1f}x; the pinned post-G1/Wave-H value is "
-        "744.9x. A move outside [300, 1500] means something other than the 2026-08-27 "
-        "approved chemistry changes has moved the thiamine lane -- investigate before "
-        "re-pinning, and if the gap has genuinely closed, rewrite this test as a pass."
+    # RE-PINNED 2026-08-27 (Wave S1b -- THE pH / WATER-ACTIVITY ROUTING REPAIR). NO
+    # CONSTANT MOVED. The gap moved 748.0x -> 6730.9x (predicted 0.01738 -> 0.001931 ppb
+    # against the same 13 ppb target). CAUSE, ATTRIBUTED BY MEASUREMENT rather than assumed:
+    # the three fixes were run one at a time (by emptying the other two family sets at
+    # runtime, no source edit) and this row is carried ALMOST ENTIRELY by the water-activity
+    # fix -- none 0.01738, route-pH-only 0.01659, pyrazine-only 0.01744, aw-only 0.002055,
+    # all three 0.001931 ppb. MECHANISM: `_water_activity_correction` used to reach 3 of the
+    # 29 emitted families and its dehydration branch keyed on the substring "furfural",
+    # which matches none of them, so it was dead. Membership is now decided by MEASURED net
+    # water stoichiometry, and at this benchmark's aw 0.98 every water-shedding step takes
+    # 1.3 - 0.98 = 0.32, i.e. +0.89 kcal/mol of effective barrier. The thiamine -> MFT lane's
+    # terminal `Furan_Ring_Aromatisation` (net +1 water) takes that penalty while the
+    # `Additive_Thermal_Degradation` steps above it do NOT -- that family is the only
+    # stoichiometrically non-uniform one (+2/0/-1/-2 across its steps) and is deliberately
+    # excluded, because one family-level factor cannot honestly represent it. MFT is a tiny
+    # share of a large fixed budget here, so its competitors absorb what it loses and the
+    # fold error amplifies. NOTHING WAS CLAWED BACK and no contract tolerance in
+    # data/benchmarks/thiamine_cys_glucose_120C_Bolton1994.json was touched, so this stays a
+    # loud failure in every regenerated artifact -- it is now the WORST quantitative point in
+    # the whole panel, having overtaken the CML row at 1203.7x.
+    assert 3000.0 < comparison.ratio < 14000.0, (
+        f"Known Family 03 gap is {comparison.ratio:.1f}x; the pinned post-Wave-S1b value is "
+        "6730.9x (744.9x post-G1/Wave-H, 748.0x post-Wave-S1). A move outside [3000, 14000] "
+        "means something other than the 2026-08-27 approved changes has moved the thiamine "
+        "lane -- investigate before re-pinning, and if the gap has genuinely closed, rewrite "
+        "this test as a pass."
     )
 
 
@@ -82,6 +103,16 @@ def test_cerny_2008_thiamine_fragmentation_benchmark_is_executable_and_under_pre
     #       cys_ribose_140C_Hofmann1998 ONLY (the sole surviving literature constraint on the
     #       sulfur branch). Cerny was NOT a fit target and must not become one -- see the
     #       standing caveat below. Final: predicted 0.7730 ppb vs 2.47 ppb = 3.195x UNDER.
+    #       CORRECTED 2026-08-27 (Wave S2c): the parenthesis above is FALSE and is kept
+    #       because it records what the repo believed. cys_ribose_140C_Hofmann1998 was never
+    #       a literature constraint -- Wave S2b traced its MFT 342 / FFT 200 ppb to
+    #       data/benchmarks/maillard_validation_benchmarks.md section 1.3, an
+    #       abstract-reconstructed table committed in the SAME commit as the benchmark JSON,
+    #       with both values interior points of two invented mol % bands. THE SULFUR BRANCH
+    #       HAS ZERO ABSOLUTE LITERATURE ANCHORS. Note the compounding: this benchmark's own
+    #       2.47 ppb reference is ALSO unverified (see the standing caveat below), so the
+    #       Family 03 lane is now measured against one unverified value using a barrier that
+    #       was fitted to a fabricated one and has since been reverted.
     # The assertion below is inverted to match the measured outcome and pinned to the
     # observed magnitude in both directions. Neither this benchmark's contract tolerance nor
     # any other was touched, so the failure remains visible in the regenerated artifacts.
@@ -121,9 +152,24 @@ def test_cerny_2008_thiamine_fragmentation_benchmark_is_executable_and_under_pre
         "Family 03 sulfur allocation has changed character again and this test must be "
         "re-derived, not relaxed."
     )
-    assert 2.2 < comparison.ratio < 4.6, (
-        f"Cerny 2008 MFT fold error is {comparison.ratio:.3f}x; the pinned post-G1/Wave-H "
-        "value is 3.195x (under). A move outside [2.2, 4.6] means something other than the "
-        "2026-08-26/27 approved changes has moved the sulfur branch -- investigate before "
-        "re-pinning."
+    # RE-PINNED 2026-08-27 (Wave S1b -- THE pH / WATER-ACTIVITY ROUTING REPAIR). NO
+    # CONSTANT MOVED. 2.787x -> 23.406x (predicted 0.7730 -> 0.1055 ppb vs 2.47 ppb). SAME
+    # CAUSE AND SAME LANE as the Bolton row above -- this is the second thiamine benchmark
+    # and it moves for the identical reason, which is itself the evidence that the movement
+    # is the aw routing repair and not something benchmark-specific. The direction did not
+    # change: still an UNDER-prediction, asserted separately above. Not clawed back.
+    # RE-RECORDED 2026-08-27 (Wave S2c -- THE HOFMANN ANCHOR RETIREMENT). 23.406x -> 25.741x
+    # (predicted 0.1055 -> 0.0959 ppb vs 2.47 ppb). CAUSE: `thiol_addition_pentodiulose`
+    # REVERTED 26.35 -> 28.60 because the Wave P refit that produced 26.35 was fitted against
+    # cys_ribose_140C_Hofmann1998 alone, whose values are not measurements. The xylose lane
+    # runs the same pentodiulose step as the ribose lane, which is why this row moves at all.
+    # WORSE, AND NOT CLAWED BACK. THE BAND IS DELIBERATELY NOT WIDENED: [12, 46] was set
+    # around 23.406x and 25.741x sits comfortably inside it, so the guard keeps exactly the
+    # sensitivity it had. Only the recorded value below is updated.
+    assert 12.0 < comparison.ratio < 46.0, (
+        f"Cerny 2008 MFT fold error is {comparison.ratio:.3f}x; the pinned post-Wave-S2c "
+        "value is 25.741x (under); it was 23.406x post-Wave-S1b, 3.195x post-G1/Wave-H and "
+        "2.787x post-Wave-S1. A "
+        "move outside [12, 46] means something other than the 2026-08-26/27 approved changes "
+        "has moved the sulfur branch -- investigate before re-pinning."
     )

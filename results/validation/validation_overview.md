@@ -9,25 +9,25 @@ This artifact shows the full quantitative benchmark surface while still separati
 - Quantitative benchmarks plotted: 9
 - Experimental quantitative benchmarks: 8
 - Reference-only quantitative anchors: 1
-- Experimental benchmarks inside 1.5x: 3
-- Experimental benchmarks outside 1.5x: 5
-- Experimental benchmarks outside 2x: 5
-- Worst experimental benchmark ratio: 1203.680x
-- Worst experimental point: Commercial PBMA, CML/CEL benchmark (Foods, 2023) / Nε-(Carboxymethyl)lysine (CML) (1203.680x)
-- Quantitative benchmarks inside 1.5x: 3
-- Quantitative benchmarks outside 1.5x: 6
-- Quantitative benchmarks outside 2x: 6
-- Worst quantitative benchmark ratio (all quantitative benchmarks): 1203.680x
-- Worst quantitative point (all quantitative benchmarks): Commercial PBMA, CML/CEL benchmark (Foods, 2023) / Nε-(Carboxymethyl)lysine (CML) (1203.680x; measured_volatiles)
-- Worst reference-only benchmark ratio: 2.787x
-- Worst reference-only point: Thiamine + cysteine + xylose, $145\,^{\circ}$C (Cerny, 2008) [reference anchor] / 2-Methyl-3-furanthiol (MFT) (2.787x; reference_volatiles)
+- Experimental benchmarks inside 1.5x: 2
+- Experimental benchmarks outside 1.5x: 6
+- Experimental benchmarks outside 2x: 6
+- Worst experimental benchmark ratio: 6730.854x
+- Worst experimental point: Thiamine + cysteine + glucose, $120\,^{\circ}$C (Bolton et al., 1994) / 2-Methyl-3-furanthiol (MFT) (6730.854x)
+- Quantitative benchmarks inside 1.5x: 2
+- Quantitative benchmarks outside 1.5x: 7
+- Quantitative benchmarks outside 2x: 7
+- Worst quantitative benchmark ratio (all quantitative benchmarks): 6730.854x
+- Worst quantitative point (all quantitative benchmarks): Thiamine + cysteine + glucose, $120\,^{\circ}$C (Bolton et al., 1994) / 2-Methyl-3-furanthiol (MFT) (6730.854x; measured_volatiles)
+- Worst reference-only benchmark ratio: 25.741x
+- Worst reference-only point: Thiamine + cysteine + xylose, $145\,^{\circ}$C (Cerny, 2008) [reference anchor] / 2-Methyl-3-furanthiol (MFT) (25.741x; reference_volatiles)
 - Quantitative matched compounds plotted: 15
 - Authoritative free-precursor benchmarks: 7
 - Quantitative matrix-only benchmarks: 3
 - Quantitative matrix-augmented benchmarks: 0
 - Integrated runtime families tracked in the overview artifact: 16
 - Authoritative matched compounds: 8
-- Median compound max-ratio in authoritative set: 108.218
+- Median compound max-ratio in authoritative set: 113.394
 - Coverage gaps still open: 7
 
 How to read the PNG:

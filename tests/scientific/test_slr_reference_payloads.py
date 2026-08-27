@@ -96,7 +96,23 @@ def test_slr_incorporation_matrix_covers_new_track1_sources():
     assert by_id["foods_2022_spi_free_sh"]["incorporation_status"] == "encoded_modeled_not_shown"
     assert by_id["karolkowski_2021_ppi_ph_release"]["incorporation_status"] == "encoded_modeled_shown"
     assert by_id["xu_2023_spi_temporal_release"]["incorporation_status"] == "encoded_modeled_shown"
-    assert by_id["jafc_3c05991_hexanal_binding"]["incorporation_status"] == "encoded_modeled_shown"
+    # RE-PINNED 2026-08-27 (Wave T3, finding T1-03). Was "encoded_modeled_shown".
+    # CAUSE, and it is a content finding, not a bookkeeping change: this entry's numeric
+    # anchor -- "PPI hexanal binding up to 52.76% +/- 4.65" -- was WITHDRAWN. Wave T3
+    # retrieved the full text of 10.1021/acs.jafc.3c05991 (open access, Europe PMC
+    # PMC10739987) and 52.76 +/- 4.65 %bound is OCTANAL, pooled over PPI/SPI/LPI, not
+    # hexanal and not PPI-specific. The paper reports NO numeric hexanal percent-bound
+    # anywhere; its only hexanal statements are qualitative, figure-only, and put PPI at the
+    # LOWEST binding affinity -- the opposite direction from how the anchor was used. The
+    # companion record in data/lit/retention_reference_payloads.json is demoted
+    # direct_measurement -> unsourced_withdrawn in the same wave. The status is still
+    # "encoded_modeled_shown*" because the entry is genuinely still wired into the runtime
+    # and still shown; the "_pending_reanchor" suffix records that what it is wired to is
+    # now a withdrawn number. Re-anchoring or retiring the lane is an owner decision [P].
+    assert (
+        by_id["jafc_3c05991_hexanal_binding"]["incorporation_status"]
+        == "encoded_modeled_shown_pending_reanchor"
+    )
     assert by_id["trikusuma_2019_pea_uht_aroma_panel"]["incorporation_status"] == "encoded_modeled_shown"
     assert by_id["lincoln_2025_polyphenol_crosstalk"]["incorporation_status"] == "encoded_modeled_shown"
     assert by_id["choi_2024_garden_pea_acrylamide"]["incorporation_status"] == "encoded_not_yet_shown"

@@ -101,30 +101,88 @@ def test_new_families_have_explicit_barrier_keys_and_do_not_fall_through(family)
     )
 
 
-def test_new_families_collect_no_accidental_ph_or_water_activity_correction():
-    """`src/conditions.py` classifies reactions for the pH/aw corrections by SUBSTRING.
+def test_new_families_collect_no_accidental_ph_correction_from_their_name():
+    """No Wave P family may pick up a pH correction it was not deliberately given.
 
-    A family name containing "strecker", "amadori", "schiff", "pyrazine" or "furfural"
-    silently picks up corrections that can be worth hundreds of x. The Wave P families
-    are named so that they receive the SAME treatment as the sibling steps they extend
-    or replace (`Furanone_Cyclisation`, `Furanone_Formation`), which receive none.
-    This test is the guard on that: it fails the day someone renames one of them into a
-    trigger word and changes a prediction by accident.
+    RE-PINNED AND NARROWED 2026-08-27 (Wave S1b -- THE pH / WATER-ACTIVITY ROUTING REPAIR).
+    NOT RELAXED: what changed is that the water-activity half of this guard was asserting
+    the ABSENCE of a correction that has since been deliberately, explicitly ADDED, so
+    keeping it would have been pinning a defect.
+
+    ORIGINAL TEXT, kept verbatim because its reasoning is still the reason this test exists:
+      "`src/conditions.py` classifies reactions for the pH/aw corrections by SUBSTRING. A
+      family name containing "strecker", "amadori", "schiff", "pyrazine" or "furfural"
+      silently picks up corrections that can be worth hundreds of x. The Wave P families are
+      named so that they receive the SAME treatment as the sibling steps they extend or
+      replace (`Furanone_Cyclisation`, `Furanone_Formation`), which receive none. This test
+      is the guard on that: it fails the day someone renames one of them into a trigger word
+      and changes a prediction by accident."
+
+    WHAT WAVE S1b CHANGED. `src/conditions.py` no longer classifies by substring at all --
+    both corrections now key on EXPLICIT FAMILY-NAME SETS, which removes the accident this
+    test was written to catch at its source. The pH half is therefore STRENGTHENED into a
+    real invariant (no Wave P family is in either amine set, so all of them must return
+    exactly 1.0, by construction rather than by luck of spelling).
+
+    The aw half is REPLACED by its correct successor below, because five of the six Wave P
+    families are net water-RELEASING and are now deliberately in
+    `_WATER_RELEASING_FAMILIES`: Mercaptoketone_Formation (+1), Mercaptoketone_Cyclodehydration
+    (+2), Furanone_Reductive_Opening (+1), Furanone_Amino_Acid_Reduction (+1),
+    Fructofuranosyl_Dehydration (+3). Only Mercaptoketone_Aldol_Addition is net-zero and
+    still uncorrected. Membership is decided by MEASURED stoichiometry, and that measurement
+    is what the successor test pins.
     """
     for family in _NEW_FAMILIES:
         fam = family.lower()
         assert _COND._ionization_correction(fam) == 1.0, (
-            f"{family} picked up an amine-ionisation correction from its NAME"
+            f"{family} picked up an amine-ionisation correction it was not given "
+            f"deliberately -- check `_ALPHA_AMINO_NUCLEOPHILE_FAMILIES` and "
+            f"`_AMINOKETONE_NUCLEOPHILE_FAMILIES` in src/conditions.py"
         )
-        assert _COND._water_activity_correction(fam) == 1.0, (
-            f"{family} picked up a Labuza water-activity correction from its NAME"
-        )
+
+
+def test_new_families_water_activity_membership_matches_their_measured_stoichiometry():
+    """The aw correction reaches exactly the Wave P families that shed water, and no others.
+
+    NEW 2026-08-27 (Wave S1b). This replaces the aw half of the guard above. Wave S2
+    measured `_water_activity_correction` reaching 3 of the 29 families this engine emits,
+    with its dehydration branch keyed on the substring "furfural" -- which matches NO emitted
+    family, so the branch was dead. Membership is now decided by net water produced per step,
+    counted directly off the enumerated steps.
+
+    The numbers in the mapping below are that measured count. If a Wave P family's
+    stoichiometry changes, this test fails and the family's membership must be re-derived --
+    it must NOT be edited to match.
+    """
+    net_water_per_step = {
+        "Mercaptoketone_Formation": +1,
+        "Mercaptoketone_Aldol_Addition": 0,
+        "Mercaptoketone_Cyclodehydration": +2,
+        "Furanone_Reductive_Opening": +1,
+        "Furanone_Amino_Acid_Reduction": +1,
+        "Fructofuranosyl_Dehydration": +3,
+    }
+    assert set(net_water_per_step) == set(_NEW_FAMILIES)
+    # aw 0.8 is the ReactionConditions default: the dehydration branch gives 1.3-0.8 = 0.5.
+    assert _COND.water_activity == pytest.approx(0.8)
+    for family, net_water in net_water_per_step.items():
+        got = _COND._water_activity_correction(family.lower())
+        if net_water > 0:
+            assert got == pytest.approx(0.5), (
+                f"{family} sheds {net_water} water per step, so it must carry the "
+                f"dehydration inhibition; got {got}"
+            )
+        else:
+            assert got == 1.0, (
+                f"{family} is net-zero in water, so it must carry NO mass-action term; "
+                f"got {got}"
+            )
 
 
 # ── item 1: the refit ──────────────────────────────────────────────────────────
 
 def test_pentodiulose_barrier_is_the_wave_p_fit_and_carries_the_conversion_caveat():
-    """26.35 kcal/mol, FITTED, against an anchor whose unit conversion is UNVERIFIED.
+    """28.60 kcal/mol, ESTIMATED again -- the Wave P fit is REVERTED and its record RETRACTED.
 
     Wave N shipped 28.60 (the un-fitted `thiol_addition` class value) and declined to
     refit, because refitting re-couples the only sulfur anchor to a fitted constant.
@@ -132,20 +190,50 @@ def test_pentodiulose_barrier_is_the_wave_p_fit_and_carries_the_conversion_cavea
     sees the network that ships. The load-bearing part is not the number: it is that
     the rationale must carry the fit target's own `content_verification_note` verbatim,
     so nobody can read 26.35 as a measured barrier.
+
+    RE-PINNED 2026-08-27 (Wave S2c). 26.35 -> 28.60. Wave N's stated worry -- that refitting
+    "re-couples the only sulfur anchor to a fitted constant" -- turned out to understate the
+    problem: there was no anchor. Wave S2b traced `cys_ribose_140C_Hofmann1998`'s MFT 342 /
+    FFT 200 ppb to data/benchmarks/maillard_validation_benchmarks.md section 1.3, an
+    abstract-reconstructed range table committed in c7efbbc, the SAME commit that created the
+    benchmark JSON; both values are interior points of two invented, OVERLAPPING mol % bands
+    (0.0300 mol % -> 342.5 -> 342 ppb; the FFT band's geometric mean 0.017321 mol % -> 197.8
+    -> 200 ppb, on the file's own unattested 10 mM / MW 114.17 basis). So the fit was against
+    the repo's own guess. The constant is reverted, results/validation/
+    sulfur_barrier_refit_pentodiulose.{json,md} is RETRACTED, and this test goes back to
+    asserting what it was written to assert: that this constant claims no provenance it does
+    not have. THE SULFUR BRANCH HAS ZERO ABSOLUTE LITERATURE ANCHORS.
+
+    WHAT THIS TEST NOW OWNS: the rationale must keep the WHOLE history -- estimate, fit,
+    revert -- because deleting the fit from the record would hide that it ever happened, and
+    the Wave K caveat text must survive verbatim while being marked superseded (the problem
+    was never the undocumented mol%->ppb conversion; it is that there is no measurement on the
+    far end of it).
     """
     value, rationale = FAST_BARRIERS["thiol_addition_pentodiulose"]
-    assert value == pytest.approx(26.35, abs=1e-9)
+    assert value == pytest.approx(28.60, abs=1e-9)
+    assert value != pytest.approx(26.35, abs=1e-9), (
+        "back at the Wave P fitted value. That fit's sole target was "
+        "cys_ribose_140C_Hofmann1998, whose values are a repo-internal derivation -- "
+        "refitting against it is circular. See tasks/audit_remediation.md '## Wave S2b'."
+    )
+    # The whole history, in order, still readable at the point of use.
+    assert "ESTIMATED" in rationale
     assert "FITTED 2026-08-27 (Wave P item 1)" in rationale
+    assert "REVERTED 2026-08-27 (Wave S2c)" in rationale
     assert "cys_ribose_140C_Hofmann1998" in rationale
-    # The verbatim caveat, and the sentence that says what it means for THIS constant.
+    assert "ZERO ABSOLUTE LITERATURE ANCHORS" in rationale
+    # The verbatim Wave K caveat, and the sentence that says what it means for THIS constant.
+    # Both are KEPT and both are marked superseded rather than deleted.
     assert "mol%->ppb conversion" in rationale
     assert "NOT documented anywhere in this repo" in rationale
     assert "UNVERIFIED" in rationale
     assert "LOCALISED HERE" in rationale
-    # The boundary honesty: the profile minimum is at the range floor, so the adopted
-    # value is the conservative edge and the residual is NOT removable by this barrier.
+    assert "SUPERSEDED" in rationale
+    # The boundary honesty from the retired fit: the profile minimum was at the range floor,
+    # so even the adopted value could not reach its (fabricated) target.
     assert "PROFILE MINIMUM SITS AT THE RANGE FLOOR" in rationale
-    assert "sulfur_barrier_refit_pentodiulose" in rationale
+    assert "sulfur_barrier_refit_pentodiulose" in rationale and "RETRACTED" in rationale
 
 
 def test_hofmann1998_after_the_refit():
@@ -171,8 +259,40 @@ def test_hofmann1998_after_the_refit():
     # dex and max_ratio 1.4110 -> 1.4864, i.e. the contract now fails on BOTH of its
     # criteria again rather than on one. The two lanes share their upstream trunk, so a
     # barrier that pushed FFT down would push MFT down with it.
-    assert predicted["2-methyl-3-furanthiol"] == pytest.approx(283.59, rel=1e-3)
-    assert predicted["2-furfurylthiol"] == pytest.approx(297.28, rel=1e-3)
+    # RE-PINNED 2026-08-27 (Wave S1b -- THE pH ROUTING REPAIR). MFT 283.59 -> 154.85,
+    # FFT 297.28 -> 267.50. NO BARRIER MOVED AND NOTHING WAS RE-FITTED.
+    # CAUSE: `get_ph_multiplier` -- the enolisation route-selection term -- had never been
+    # called on the prediction path and now is. At this benchmark's pH 5.0 it gives
+    # `Enolisation_1_2` (the 3-deoxyosone -> furfural/FFT arm) a 4.5x acid boost and
+    # `Enolisation_2_3_Amadori` (the 1-deoxyosone -> MFT arm) ~1.0, so the fixed volatile
+    # budget moves from the MFT arm to the FFT/furfural arm.
+    # BOTH HALVES ARE WORSE ON THE CONTRACT AND ARE PINNED WORSE: max_ratio 1.4864 ->
+    # 2.2086, MALE 0.1267 -> 0.2352 dex. MFT went 1.2060x under -> 2.2086x under (WORSE);
+    # FFT went 1.4864x over -> 1.3375x over (better). The untouched contract is
+    # 1.45x / 0.09 dex and it now fails both criteria by more.
+    # NOT A CONFLICT WITH A MEASUREMENT -- Wave S1b's first draft said it was, and Wave S2b
+    # (same day) showed otherwise. The 342 / 200 ppb targets were derived INSIDE THIS
+    # REPOSITORY from data/benchmarks/maillard_validation_benchmarks.md section 1.3, an
+    # abstract-reconstructed range table committed in the SAME commit as the benchmark file;
+    # both values are interior points of two INVENTED, OVERLAPPING bands (MFT 228-571 ppb,
+    # FFT 114-342 ppb). The MFT > FFT ordering is midpoint selection, not measurement, and
+    # the 1.45x / 0.09 dex contract is ~1.7x tighter than its own source band. The pH
+    # mechanism and this degradation are both real; the yardstick is not. See the file's
+    # `content_verification_note.wave_s2_followup` and '## Wave S2b' in
+    # tasks/audit_remediation.md.
+    # RE-PINNED 2026-08-27 (Wave S2c -- THE ANCHOR RETIREMENT). MFT 154.85 -> 78.09,
+    # FFT 267.50 -> 293.67. CAUSE: `thiol_addition_pentodiulose` REVERTED 26.35 -> 28.60,
+    # because the Wave P fit that produced 26.35 had exactly one target and that target is
+    # not a measurement (see the module note above and tasks/audit_remediation.md
+    # '## Wave S2b'). max_ratio 2.2086 -> 4.3797, MALE 0.2352 -> 0.4041 dex.
+    # BOTH ROWS ARE WORSE AND BOTH ARE PINNED WORSE. Nothing was clawed back, and the
+    # benchmark's 1.45x / 0.09 dex contract was RETIRED rather than widened -- it now
+    # inherits the global free-precursor default 1.5x / 0.10 dex and fails that by more.
+    # READ THE MISS FOR WHAT IT IS: an error against a yardstick this repository invented.
+    # It is NOT evidence about the chemistry, in either direction, and it must never be
+    # quoted as accuracy against literature.
+    assert predicted["2-methyl-3-furanthiol"] == pytest.approx(78.09, rel=1e-3)
+    assert predicted["2-furfurylthiol"] == pytest.approx(293.67, rel=1e-3)
     # Still under / still over — neither direction flipped.
     assert predicted["2-methyl-3-furanthiol"] < 342.0
     assert predicted["2-furfurylthiol"] > 200.0
@@ -250,15 +370,33 @@ def test_the_second_mft_channel_now_contributes_after_the_wave_s1_propagator_fix
     finally:
         engine_module._c2_c3_mft_recombination = original
 
-    assert without["2-methyl-3-furanthiol"] == pytest.approx(217.25, rel=1e-3)
-    assert baseline["2-methyl-3-furanthiol"] == pytest.approx(283.59, rel=1e-3)
+    # RE-PINNED 2026-08-27 (Wave S1b -- THE pH ROUTING REPAIR). 217.25 -> 128.40 and
+    # 283.59 -> 154.85. NOT a propagator change: both lanes fell by the same mechanism,
+    # the 4.5x acid boost that `Enolisation_1_2` now receives at this benchmark's pH 5.0,
+    # which moves budget share from the MFT arm to the FFT/furfural arm. THE QUANTITY THIS
+    # TEST EXISTS TO MEASURE IS UNCHANGED IN KIND: the C2+C3 lane still contributes, and
+    # the both-lanes/pentodiulose-alone ratio is 1.2060x (was 1.3054x under Wave S1).
+    # RE-PINNED 2026-08-27 (Wave S2c -- THE BARRIER REVERT). 128.40 -> 46.82 and
+    # 154.85 -> 78.09. `thiol_addition_pentodiulose` 26.35 -> 28.60; both lanes run through
+    # it, so both fell. THE PROPERTY THIS TEST OWNS IS UNCHANGED and in fact strengthened:
+    # the C2+C3 lane still contributes, and its share of MFT ROSE (ratio 1.2060 -> 1.6678)
+    # because raising the pentodiulose barrier makes the pentodiulose-only lane weaker
+    # relative to the C2+C3 lane, which does not run that step.
+    assert without["2-methyl-3-furanthiol"] == pytest.approx(46.82, rel=1e-3)
+    assert baseline["2-methyl-3-furanthiol"] == pytest.approx(78.09, rel=1e-3)
     assert baseline["2-methyl-3-furanthiol"] > without["2-methyl-3-furanthiol"], (
         "the C2+C3 lane must contribute to predicted MFT. If this fails the flux "
         "propagator has gone back to winner-takes-all selection."
     )
-    # And it is a real contribution, not rounding: +30.5% on the flagship number.
+    # And it is a real contribution, not rounding: +20.6% on the flagship number.
+    # RE-PINNED 2026-08-27 (Wave S1b): 1.3054 -> 1.2060. The C2+C3 lane's SHARE of MFT fell
+    # because the pH routing repair moved budget away from the MFT arm as a whole; the lane
+    # is still contributing, which is the property this test owns.
+    # RE-PINNED 2026-08-27 (Wave S2c): 1.2060 -> 1.6678, i.e. +66.8% on the flagship number
+    # rather than +20.6%. The lane got MORE important, not less, and for a mechanical reason:
+    # the reverted barrier sits on the pentodiulose lane only.
     assert baseline["2-methyl-3-furanthiol"] / without["2-methyl-3-furanthiol"] == pytest.approx(
-        1.3054, rel=1e-3
+        1.6678, rel=1e-3
     )
 
 

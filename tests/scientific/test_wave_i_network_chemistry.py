@@ -257,6 +257,17 @@ def test_hofmann1998_sulfur_predictions_are_recorded_not_tuned():
     """cys_ribose_140C_Hofmann1998 is the ONLY surviving literature constraint on
     the sulfur branch, so what Wave I did to it must be visible.
 
+    CORRECTED 2026-08-27 (Wave S2c). THE SENTENCE ABOVE IS FALSE and is kept verbatim
+    because it is what the repo believed for four months. This benchmark was never a
+    literature constraint: Wave S2b traced its MFT 342 ppb / FFT 200 ppb to
+    data/benchmarks/maillard_validation_benchmarks.md section 1.3, an abstract-reconstructed
+    range table committed in c7efbbc -- the SAME commit that created the benchmark JSON --
+    whose row gives MFT `~0.02-0.05` mol % and FFT `~0.01-0.03` mol %. On the file's declared
+    (unattested) 10 mM basis with MW 114.17: 0.0300 mol % -> 342.5 -> 342 ppb, and the FFT
+    band's geometric mean 0.017321 mol % -> 197.8 -> 200 ppb. Both are interior points of two
+    invented, OVERLAPPING bands. THE SULFUR BRANCH HAS ZERO ABSOLUTE LITERATURE ANCHORS, and
+    the "reference" numbers quoted below are this repository's own arithmetic.
+
     MEASURED (140 C / pH 5.0 / aw 0.98 / 30 min; reference MFT 342 ppb,
     FFT 200 ppb):
         pre-Wave-I        MFT  61.25 ppb (5.58x UNDER)   FFT  61.44 (3.26x UNDER)
@@ -271,6 +282,18 @@ def test_hofmann1998_sulfur_predictions_are_recorded_not_tuned():
     two independent choices -- see the Wave I note in src/barrier_constants.py.
     The bounds below are wide on purpose: they exist to catch a SILENT collapse
     or a silent blow-up, not to assert accuracy.
+
+    RE-PINNED 2026-08-27 (Wave S2c): the MFT floor 100.0 -> 40.0 ppb and the FFT ceiling
+    500.0 -> 600.0 ppb. CAUSE: `thiol_addition_pentodiulose` REVERTED 26.35 -> 28.60, the
+    un-fitted Wave N class value, because the Wave P refit that produced 26.35 had this
+    benchmark as its sole fit target. MFT 154.85 -> 78.09 ppb, FFT 267.50 -> 293.67 ppb.
+    THIS IS A DELIBERATE LOOSENING OF A DRIFT GUARD AND IT IS NOT A RELAXATION OF A CLAIM:
+    these bounds never asserted accuracy, the accuracy pin lives in
+    tests/scientific/test_free_aa_quantitative_regression.py (re-pinned WORSE in the same
+    wave, to 4.380x under / 1.468x over), and the benchmark's own contract was RETIRED rather
+    than widened. The new floor keeps its original character -- roughly half the current
+    value, so a genuine collapse still trips it -- rather than being set just under the
+    observed number.
     """
     payload = json.loads(
         (ROOT / "data/benchmarks/cys_ribose_140C_Hofmann1998.json").read_text(
@@ -284,8 +307,10 @@ def test_hofmann1998_sulfur_predictions_are_recorded_not_tuned():
     mft = predicted["2-methyl-3-furanthiol"]
     fft = predicted["2-furfurylthiol"]
 
-    assert 100.0 < mft < 700.0, f"Hofmann1998 MFT = {mft:.2f} ppb (reference 342)"
-    assert 80.0 < fft < 500.0, f"Hofmann1998 FFT = {fft:.2f} ppb (reference 200)"
+    # Bounds re-pinned 2026-08-27 (Wave S2c) -- see the docstring. The "reference" figures
+    # named in these messages are the repo-internal 342 / 200, NOT measurements.
+    assert 40.0 < mft < 700.0, f"Hofmann1998 MFT = {mft:.2f} ppb (repo-internal reference 342)"
+    assert 80.0 < fft < 600.0, f"Hofmann1998 FFT = {fft:.2f} ppb (repo-internal reference 200)"
 
 
 # ══ FIX 18 — acrylamide in a real enumeration ══════════════════════════════

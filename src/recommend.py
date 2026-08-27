@@ -754,13 +754,23 @@ def _is_ppb_output_species(
 
 
 def _select_accumulating_projection_species(
-    steps: List[Any],
     tracked_species: Dict[str, Tuple[float, float, int, float, float]],
     species_catalog: Dict[str, Species],
     target_lookup: Dict[str, Dict[str, Any]],
     exogenous_reactants: Set[str],
-    downstream_margin_kcal: float = 0.25,
 ) -> Set[str]:
+    """Which tracked species the budget projection lets accumulate.
+
+    2026-08-27 (Wave T4): two parameters REMOVED, AST-verified unused in the body
+    — `steps` and `downstream_margin_kcal: float = 0.25`. Both are leftovers of a
+    pre-Wave-S1 selection heuristic that compared each candidate against its
+    downstream competitors by a barrier margin; Wave S1's additive propagator
+    replaced that comparison entirely and the parameters were never unwired. The
+    magic default is the part worth removing: a reader tuning `0.25` would have
+    been tuning nothing, which is the same false-affordance class as the Wave I
+    false zeros. Behaviour is unchanged by construction — the body never read
+    either name.
+    """
     candidate_canons: Set[str] = set()
     for canon, (span, _conc, depth, _weight, _unc) in tracked_species.items():
         species = species_catalog.get(canon)
@@ -852,7 +862,6 @@ def _project_weighted_flux_to_ppb(
     total_volatile_budget_molar = projection_budget.total_volatile_budget_molar
 
     projected_species = _select_accumulating_projection_species(
-        steps,
         tracked_species,
         species_catalog,
         target_lookup,
@@ -907,10 +916,8 @@ def _project_weighted_flux_to_ppb(
             terminal_family = str(best_path[-1].get("family", "")).lower().replace("-", "_").replace(" ", "_")
         direct_sulfur_bonus = 1.0
         # AUDIT 2026-08-27 (Wave H): this equality test is now DEAD. Wave G1 renamed
-        # every terminal sulfur family — the routes that reach MFT today are
-        # `Thiol_Addition_Norfuraneol` (the real van den Ouweland route) and
-        # `Thiol_Addition_Legacy_Shortcut` (the demoted one-step lump), and neither
-        # is spelled "thiol_addition". So an unconstrained legacy heuristic silently
+        # every terminal sulfur family, and none of the survivors is spelled
+        # "thiol_addition". So an unconstrained legacy heuristic silently
         # switched itself off in the same commit that changed the chemistry. Measured
         # size: at most 1.68x, and only 1.007x at the Hofmann1998 conditions where the
         # sulfur residual is 5.6x, so it is NOT the cause of the sulfur collapse.
@@ -919,6 +926,19 @@ def _project_weighted_flux_to_ppb(
         # would absorb the MFT residuals this panel exists to expose (see
         # tasks/audit_remediation.md, "NOT refit, flagged for a dedicated workstream").
         # Re-pointing it belongs to that workstream, with a refit, not to this one.
+        #
+        # 2026-08-27 (Wave T4) — THE FAMILY NAMES ABOVE WERE UPDATED, THE KNOB WAS
+        # NOT TOUCHED. The Wave H text named `Thiol_Addition_Norfuraneol` and
+        # `Thiol_Addition_Legacy_Shortcut` as "the routes that reach MFT today".
+        # Neither is emitted any more: Wave N RETIRED the norfuraneol route on the
+        # Cerny & Davidek isotope evidence, and `Thiol_Addition_Legacy_Shortcut` has
+        # zero source literals and zero runtime emissions. The families that reach
+        # MFT now are `Thiol_Addition_Pentodiulose` (Wave N) and
+        # `Mercaptoketone_Cyclodehydration` (Wave P) — still neither spelled
+        # "thiol_addition", so the CONCLUSION is unchanged and in fact stronger: the
+        # branch is more thoroughly dead than when Wave H measured it. The knob stays
+        # dead deliberately, per the paragraph above; only the two stale names here
+        # were wrong.
         if terminal_family == "thiol_addition":
             direct_sulfur_bonus += 0.8 * max(0.0, 0.85 - severity)
         activities[canon] = flux_activity * depth_activity * direct_sulfur_bonus
@@ -1597,7 +1617,20 @@ class Recommender:
             "debug_paths": best_paths,
             # 2026-08-27 (Wave S1): per-product flux BROKEN OUT BY CHANNEL, so "the model has
             # N routes to X" is auditable against what the allocation layer actually summed.
-            # Keys are canonical SMILES; inner keys are rate-limiting `step_key`s.
+            # Keys are canonical SMILES. Inner keys are CHANNEL IDS: the full ordered
+            # step-set of the route, joined on "|" (`_route_channel_id`), which is the
+            # key the additive propagator deduplicates on.
+            #
+            # 2026-08-27 (Wave T4) CORRECTION. This line used to read "inner keys are
+            # rate-limiting `step_key`s". That is the description of the REJECTED rule
+            # — "routes sharing a rate-limiting step are one channel, take the max" —
+            # which `_route_channel_id`'s own docstring records as implemented,
+            # MEASURED and REJECTED (both MFT routes share the trunk Amadori step as
+            # their slowest, so it left the flagship number unmoved and under-counts
+            # the conductance partition a shared bottleneck actually produces). A
+            # reader auditing "the model has N routes to X" against this payload would
+            # have mis-read every key. No behaviour change; the payload was always the
+            # full step-set.
             "debug_channel_flux": channel_flux,
             "species_names": species_name_lookup,
         }

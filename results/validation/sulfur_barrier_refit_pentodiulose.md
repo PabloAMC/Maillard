@@ -1,3 +1,59 @@
+> # ⛔ RETRACTED — 2026-08-27 (Wave S2c)
+>
+> **This record is retracted. Do not use it as a warrant for any shipped constant.**
+>
+> Its only fit target was `cys_ribose_140C_Hofmann1998`, and that benchmark's two comparator
+> values are **not measurements**. Wave S2b established (~90% confidence, arithmetic exact) that
+> MFT **342 ppb** and FFT **200 ppb** were derived **inside this repository**, from
+> `data/benchmarks/maillard_validation_benchmarks.md` §1.3 — an abstract-reconstructed range
+> table committed in `c7efbbc`, the *same commit* that created the benchmark JSON. That table's
+> row reads `| Ribose + Cys, pH 5 aqueous | 140 | 30 min | ~0.02–0.05 | ~0.01–0.03 |` (MFT / FFT
+> mol %). On the benchmark's declared — and itself unattested — 10 mM basis with MW 114.17:
+> `0.0300 mol % × 0.010 M × 114.17 = 342.5 → 342 ppb`, and the **geometric mean** of the FFT
+> band, `0.017321 mol % → 197.8 → 200 ppb`. Both targets are interior points of two invented,
+> **overlapping** bands (MFT 228–571 ppb, FFT 114–342 ppb). Nothing in Hofmann & Schieberle 1998,
+> nothing in Mottram & Nobrega 2002, and nothing in any retrievable literature produces 342 or 200.
+>
+> **Action taken.** The single constant this record moved — `thiol_addition_pentodiulose`
+> 28.60 → 26.35 kcal/mol — is **reverted to 28.60** (the un-fitted `thiol_addition` class value
+> Wave N shipped) in `src/barrier_constants.py`. Every other knob this record profiled was
+> already reported "incumbent kept", so no other constant is affected. The benchmark's own
+> `validation_contract` (1.45× / 0.09 dex) is retired in the same wave, and its `metadata.tier`
+> is demoted `PRIMARY → REFERENCE`.
+>
+> **The cost, reported rather than buried.** On the retired benchmark itself the revert moves
+> MFT **154.85 → 78.09 ppb** and FFT **267.50 → 293.67 ppb** against the fabricated 342 / 200,
+> i.e. `max_ratio` **2.2086 → 4.3797** and MALE **0.2352 → 0.4041 dex**. The row got much worse.
+> It has to: 26.35 existed precisely to pull MFT toward 342, and 342 is not a measurement. A
+> model that looks worse against a number nobody measured has not got worse.
+>
+> **Same treatment as** `results/validation/hydrolysate_observability_rederivation.md`, retracted
+> by Wave I when its only two fit targets turned out to be fabricated and its one applied value
+> (the Methional `base_factor`) was reverted.
+>
+> **What this does *not* retract.** The fit-target accounting is unchanged.
+> `cys_ribose_140C_Hofmann1998` is still a declared fit target of two other **live** records —
+> `projection_constant_refit.json` and `sulfur_barrier_refit_hofmann.json` — so it stays flagged
+> `fitted_row: true` in `prediction_uncertainty.json` and stays **out** of the honest
+> literature-coverage numerator and denominator. That is the correct outcome: a value with no
+> verifiable source must not count as literature evidence in *either* direction.
+> `scripts/ci/fit_target_gate.py` skips retracted records, so the requirement on this benchmark
+> now flows from those two records rather than three; the flag it enforces is unchanged and the
+> gate is not weakened.
+>
+> **Do not re-run** `scripts/generators/refit_thiol_addition_pentodiulose_hofmann.py` against
+> this benchmark. It needs a real target first — see the ILL pack in
+> `tasks/audit_remediation.md` "## Wave S2b" §(f), then a rebuild in native **mol %**.
+>
+> **THE SULFUR BRANCH HAS ZERO ABSOLUTE LITERATURE ANCHORS.**
+>
+> The text below is preserved **verbatim as the forensic record of what was done**, not as a
+> current claim. In particular its first line, calling this benchmark "the ONLY surviving
+> literature constraint on the sulfur branch", is **false** — it was never a literature
+> constraint at all.
+
+---
+
 # `thiol_addition_pentodiulose` refit against Hofmann1998 (Wave P item 1)
 
 Fit target: `cys_ribose_140C_Hofmann1998.json` (DOI 10.1021/jf9705983) — the ONLY surviving literature constraint on the sulfur branch.

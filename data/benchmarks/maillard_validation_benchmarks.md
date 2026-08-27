@@ -1,5 +1,73 @@
 # Maillard Framework — Validation Benchmark Reference
 
+> # ⛔ FILE-LEVEL WARNING — READ BEFORE TAKING ANY NUMBER FROM THIS DOCUMENT
+>
+> **Added 2026-08-27 (Wave T3 of the audit remediation; Wave T1 recommendation §7).**
+>
+> ## 1. This is an abstract-reconstructed brief, not a transcription of papers.
+>
+> It was compiled by reading abstracts and search-engine snippets, and its numeric tables mix
+> values genuinely copied from an abstract with values that were **made up to fill the table
+> in**. Nothing in the document's own formatting told you which was which. The two are now
+> distinguishable, by a fingerprint that has been validated twice, independently:
+>
+> > **A BOLD or unhedged cell is transcribed from a real abstract.
+> > A `~`-hedged cell is INVENTED.**
+>
+> That rule was derived by Wave S2b on §1.3 and then confirmed, without being used, by Wave K
+> on §3.1: §3.1's only two bold cells (2-pentylfuran `638 ± 49`, `2492 ± 199`) are exactly the
+> two Wave K verified verbatim against the paper, and its `~`-hedged cells are exactly the ones
+> Wave K found wrong or sourceless. Apply the rule to every remaining table in this file. It is
+> a triage tool, not a licence: an unhedged cell still has to be checked against the paper.
+>
+> ## 2. Three sections are CONFIRMED sources of laundered values that reached shipped code.
+>
+> * **§1.3 (Hofmann & Schieberle yields) — FABRICATED.** Its `~0.02–0.05` and `~0.01–0.03`
+>   mol % bands produced the MFT **342 ppb** / FFT **200 ppb** benchmark targets (interior
+>   points of two invented, overlapping bands, on an unattested 10 mM basis). Those targets
+>   carried the panel's tightest contract and a barrier was refitted against them. Retired by
+>   Wave S2b/S2c. Its `Furfural + H2S ~0.5` cell is arithmetic on the abstract's "10 times
+>   higher efficiency"; its `Glucose + Cys` cell reads `~10× lower than ribose` — prose in a
+>   numeric column.
+> * **§3.1 (Pratap-Singh ppb) — tilde rows FABRICATED.** `~260`, `~380`, `~80`, `~120` ppb.
+>   The paper's real values are 1138.00 and 1621.71 ppb for hexanal and **n.d.** for hexanol in
+>   both matrices. All four numbers were back-solved into the live observability factors in
+>   `src/matrix_calibration_registry.py`. The hexanal pair was refitted (Wave O); **the
+>   1-hexanol pair `0.063` / `0.143` still ships**, solved from `~80` / `~120`, and carries the
+>   external hold-out's worst miss (1117×).
+> * **§3.2 ("Pouvreau" pH series) — FABRICATED, AND ITS CITED PAPER DOES NOT EXIST.** The
+>   citation is a self-declaring placeholder ("Approx. DOI: `10.1016 / j.foodchem.2021.xxx` —
+>   retrieve via Scopus"; spaced here so it is not re-asserted as an anchor). Its ppb pairs are
+>   internally inconsistent with its own Δ column in exactly the row carrying the one real
+>   number: 340/205 implies +65.9 %, not the +59 % it is labelled with. That +59 % was pasted in
+>   from a real paper — Fischer, Cachon & Cayot (2021), *Food Res. Int.* **150**:110760,
+>   DOI 10.1016/j.foodres.2021.110760 (CrossRef-verified 2026-08-27) — and two ppb values were
+>   invented around it. The invented "~55–65 %" band's midpoint, 1.60, is the exact origin of
+>   the shipped `log_slope = 0.235 = ln(1.60)/2` in `src/headspace.py`.
+>
+> ## 3. Several other citations here are placeholders, not references.
+>
+> §2.6, §3.2 and §4.4 all carry "retrieve via WoS/Scopus"-style approximate DOIs. A DOI in this
+> document is not evidence that the paper was located, let alone read.
+>
+> ## 4. Section 6 restates these numbers as MODULE CONTRACTS. It inherits every defect above.
+>
+> §6's module→benchmark map turns §1.3, §3.1, §3.2, §4.2 and §4.3 targets into things the code
+> is expected to reproduce. Several were fabricated. Do not read §6 as a specification.
+>
+> ## 5. THE RULE, which is the same rule that governs `data/Gemini_Deep_Research/`:
+>
+> > **No number, rate constant, activation energy, threshold, ratio or citation may enter the
+> > model from this file.** This document is not provenance. If the primary source cannot be
+> > obtained, the value does not ship; if it ships anyway it is marked
+> > `source_status: no_verifiable_source` with its citation field left empty.
+>
+> This file lives in `data/benchmarks/` — the directory a reviewer trusts most — which is why
+> this header is at the top rather than in a section note. It is retained rather than deleted
+> because it is the evidence trail for four separate audit findings. Sections carrying their
+> own warning boxes (§1.1, §1.3) have additional detail; the absence of a section-level box
+> means **nothing has been checked**, not that a section is clean.
+
 **Repository:** [github.com/PabloAMC/Maillard](https://github.com/PabloAMC/Maillard)  
 **Purpose:** Curated literature benchmarks for validating predictions from `recommend.py`, `headspace.py`, `sensory.py`, `safety.py`, and `matrix_correction.py`.  
 **Compiled:** 2026-03-13  
@@ -45,7 +113,22 @@ Each section maps to one validation gap identified in the SLR protocol. For each
 | 3-Mercapto-2-butanone | present | trace | — |
 | Bis(2-methyl-3-furyl) disulfide | present | — | — |
 
-**Note:** Concentrations are semi-quantitative (peak areas). Fully quantitative SIDA data for MFT/FFT from the same system available in Hofmann & Schieberle (1998) — see §1.4 below.
+**Note:** Concentrations are semi-quantitative (peak areas).
+
+> ⚠️ **CORRECTED 2026-08-27 (Wave S2c).** The sentence that used to close this Note read:
+> *"Fully quantitative SIDA data for MFT/FFT **from the same system** available in Hofmann &
+> Schieberle (1998) — see §1.4 below."* **It is deleted because it is a false premise, and it is
+> quoted here because of what it caused.** Two things are wrong with it. (1) "From the same
+> system" is unsupported: Hofmann & Schieberle 1998 is a *different* study with its own
+> conditions, and nothing establishes that it reused Mottram & Nobrega's 140 °C / 30 min /
+> equimolar protocol. That phrase is what licensed copying **this** section's conditions onto
+> **§1.3's** citation, and from there into
+> `data/benchmarks/cys_ribose_140C_Hofmann1998.json`, which to this day carries Mottram &
+> Nobrega's protocol under Hofmann & Schieberle's DOI. (2) The cross-reference itself is wrong —
+> §1.4 is Brands & van Boekel, not Hofmann & Schieberle; the intended target was §1.3. A
+> pointer that does not resolve to the paper it names is a generation artifact, and it is one of
+> the four tells that §1.3 was reconstructed rather than transcribed. See the warning header on
+> §1.3 and `tasks/audit_remediation.md` "## Wave S2b".
 
 **Key mechanistic finding:** Unbuffered ribose system is markedly less reactive for 2,3-enolization-route products. Confirms pH is a critical predictor variable for `conditions.py`.
 
@@ -73,7 +156,67 @@ Each section maps to one validation gap identified in the SLR protocol. For each
 
 ---
 
-### 1.3 Hofmann & Schieberle (1998) — PRIMARY / ANCHOR (quantitative SIDA)
+### 1.3 Hofmann & Schieberle (1998) — ⚠️ ABSTRACT-RECONSTRUCTED GUESSWORK — NOT A TRANSCRIPTION
+
+> **⛔ WARNING — 2026-08-27 (Wave S2c). DO NOT USE ANY NUMBER IN THIS SECTION.**
+>
+> **The yields table below was not transcribed from Hofmann & Schieberle 1998. It was
+> reconstructed from the paper's abstract, and the hedged cells were invented.** The full text of
+> `10.1021/jf9705983` is paywalled and was never obtained (ACS 403; Unpaywall `oa_locations: []`;
+> OpenAlex and Semantic Scholar both `closed`; five open-access citing papers pulled in full text
+> reproduce no yield). This section is **kept, not deleted** — it is the provenance record of a
+> fabrication that reached shipped code, and deleting it would destroy the evidence.
+>
+> **What it caused.** `data/benchmarks/cys_ribose_140C_Hofmann1998.json` was created in the *same
+> commit* as this document (`c7efbbc`, "Additional literature", 2026-04-08) and its two
+> "measured" values are interior points of the first row's two bands, on the JSON's declared —
+> and itself unattested — 10 mM basis with MW 114.17 (MFT and FFT are both C₅H₆OS):
+>
+> | | mol % chosen | arithmetic | shipped as | this row's band | band in ppb |
+> |---|---|---|---|---|---|
+> | MFT | 0.0300 | 3.0e-4 × 0.010 M × 114.17 = 3.4251e-4 g/L | **342 ppb** | `~0.02–0.05` | 228 – 571 |
+> | FFT | 0.017321 *(geometric mean)* | 1.7321e-4 × 0.010 M × 114.17 = 1.9776e-4 g/L | **200 ppb** | `~0.01–0.03` | 114 – 342 |
+>
+> That benchmark then carried the tightest validation contract in the whole panel (1.45× /
+> 0.09 dex — **~1.7× tighter than the 2.5× spread of the band it came from**), was scored as
+> literature in the accuracy headlines, and had a barrier constant fitted against it
+> (`thiol_addition_pentodiulose` 28.60 → 26.35). All of that is undone as of 2026-08-27: the
+> contract is retired, the tier is demoted `PRIMARY → REFERENCE`, both values are marked
+> `no_verifiable_source`, the constant is reverted to 28.60 and the fit record
+> `results/validation/sulfur_barrier_refit_pentodiulose.{json,md}` is retracted.
+> **THE SULFUR BRANCH HAS ZERO ABSOLUTE LITERATURE ANCHORS.**
+>
+> **The four tells that this table is reconstructed, each checkable without the paywalled body:**
+>
+> 1. **Only one row is bold and unhedged** — `1.4` / `0.05` — and that row is *verbatim from the
+>    abstract*: *"the highest yields for MFT (1.4 mol %) when hydroxyacetaldehyde and
+>    mercapto-2-propanone were reacted for 6 min at 180 degrees C in the absence of water. Both
+>    intermediates also generated significant amounts of FFT (0.05 mol %)."* Every other row is
+>    tilde-hedged, i.e. every other row is a guess.
+> 2. **The `Furfural + H₂S … ~0.5` cell is arithmetic on that same sentence**: the abstract says
+>    the furan-2-aldehyde/H₂S system "showed a 10 times higher efficiency in generating FFT", so
+>    10 × 0.05 = 0.5. But the table assigns it **140 °C / 30 min**, conditions the abstract
+>    nowhere supports — its intermediate systems are **180 °C / 6 min, anhydrous**.
+> 3. **The `Glucose + Cys` cell reads `~10× lower than ribose`** — a prose paraphrase of the
+>    abstract's "pentoses generated much higher amounts … than hexoses", typed into a numeric
+>    column. No paper prints that string in a yields table.
+> 4. **The 140 °C / 30 min conditions are transplanted from §1.1**, which is Mottram & Nobrega
+>    2002 — a *headspace peak-area* study, as §1.1's own Note says. The transplant was licensed by
+>    §1.1's now-deleted "from the same system" sentence (see the correction box there), and its
+>    cross-reference pointed at §1.4 (Brands & van Boekel), not at this section.
+>
+> **What Hofmann & Schieberle 1998 does establish**, from the abstract alone: SIDA quantitation
+> (absolute, gold standard), native unit **mol %**, and a design varying temperature, pH and water
+> content — so an aqueous pH series probably exists in the paper. That is the rebuild target. See
+> `tasks/audit_remediation.md` "## Wave S2b" §(f) for the ILL request pack, and note that Cerny
+> 2015's often-quoted "145 °C / 20 min at 1:3" sentence cites Hofmann & Schieberle **1995**
+> (`10.1021/jf00056a042`), not this paper.
+>
+> **Everything below this box is preserved verbatim as the forensic record.** Its "Benchmark use"
+> paragraph — *"Predicted MFT yield … must fall in the 0.02–0.05 mol% range"* — is **withdrawn**:
+> that range is this document's own invention, not a constraint from any paper. The
+> pentose ≫ hexose *ordering* is the one claim in this section the abstract genuinely supports,
+> and it is the only one the repo may keep using.
 
 **Citation:** Hofmann T, Schieberle P. *Quantitative Model Studies on the Effectiveness of Different Precursor Systems in the Formation of the Intense Food Odorants 2-Furfurylthiol and 2-Methyl-3-furanthiol.* J Agric Food Chem. 1998;46(1):235–241. DOI: [10.1021/jf9705983](https://doi.org/10.1021/jf9705983)
 

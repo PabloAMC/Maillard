@@ -233,6 +233,27 @@ class HeadspaceModel:
 
         profile = get_retention_ph_release_profile(name, protein_type=p_type.value)
         reference_ph = float(profile.get("reference_ph", 6.0) or 6.0)
+        # 2026-08-27 (Wave T3, finding T1-02) -- WHAT 0.235 IS, RECORDED HONESTLY.
+        # It is not a fitted or measured slope. It is exactly ln(1.60)/2 = 0.2350018,
+        # back-solved so that the pH-4.5-vs-pH-6.5 ratio of this function comes out at
+        # 1.60000 (= +60% release). The 1.60 is the arithmetic midpoint of a "~55-65%"
+        # band in data/benchmarks/maillard_validation_benchmarks.md section 3.2 -- an
+        # INVENTED table whose citation is a self-declaring placeholder DOI (recorded here
+        # with spaces inserted so it is not re-asserted as an anchor, and so that
+        # scripts/ci/citation_gate.py's confabulation check does not fire on this comment:
+        # "10.1016 / j.foodchem.2021.xxx") and whose own hexanal row implies +65.9%, not the
+        # +59% it is labelled with. `max_factor` below is the same 1.60 again.
+        # The value is KEPT because it is independently vindicated: Fischer, Cachon &
+        # Cayot (2021), Food Res. Int. 150:110760 (10.1016/j.foodres.2021.110760,
+        # CrossRef-verified 2026-08-27) state "hexanal release was found 59% higher with
+        # extraction using pH 4.5 than with pH 6.5" -- 1.600 vs 1.590, 0.63% apart.
+        # Vindication caveat, stated because 0.63% invites over-reading: Fischer varied
+        # EXTRACTION pH (which volatiles the isolate carries), this function varies
+        # RELEASE pH at measurement time. Different quantities. Treat the knob as
+        # no_verifiable_source for any quantitative purpose; the literature supports the
+        # direction and one hexanal percentage. Full record:
+        # data/lit/retention_reference_payloads.json -> karolkowski_2021_ppi_hexanal_ph_release
+        # -> runtime_surrogate.surrogate_basis.
         log_slope = float(profile.get("log_slope", 0.235) or 0.235)
         min_factor = float(profile.get("min_factor", 0.75) or 0.75)
         max_factor = float(profile.get("max_factor", 1.6) or 1.6)

@@ -27,27 +27,84 @@ ROOT = Path(__file__).resolve().parents[2]
 # ---------------------------------------------------------------------------
 
 
+def _string_constants_assigned_to(scope: ast.AST, variable: str) -> set[str]:
+    """Every string literal assigned to `variable` anywhere inside `scope`.
+
+    2026-08-27 (Wave T4). This is the half of the scan that was missing. See
+    `_engine_family_labels_in_sources` for why.
+    """
+    found: set[str] = set()
+
+    def _harvest(value: ast.AST) -> None:
+        if isinstance(value, ast.Constant) and isinstance(value.value, str):
+            found.add(value.value)
+        elif isinstance(value, ast.IfExp):  # `family = "A" if cond else "B"`
+            _harvest(value.body)
+            _harvest(value.orelse)
+
+    for node in ast.walk(scope):
+        if isinstance(node, ast.Assign):
+            targets, value = node.targets, node.value
+        elif isinstance(node, ast.AnnAssign) and node.value is not None:
+            targets, value = [node.target], node.value
+        else:
+            continue
+        if any(getattr(target, "id", None) == variable for target in targets):
+            _harvest(value)
+    return found
+
+
 def _engine_family_labels_in_sources() -> set[str]:
-    """AST-scan `src/` for the raw `reaction_family` strings the engine emits."""
+    """AST-scan `src/` for the raw `reaction_family` strings the engine emits.
+
+    2026-08-27 (Wave T4) -- THE BLIND SPOT THIS SCAN USED TO HAVE.
+
+    It read only string CONSTANTS handed directly to `ElementaryStep(...)` /
+    `_step(...)`. `src/reaction_templates.py:56-79` does not do that: it binds
+    the label to a local first (`family = "Heyns_Rearrangement"` for ketoses,
+    `family = "Amadori_Rearrangement"` for aldoses) and passes
+    `reaction_family=family`. `Heyns_Rearrangement` was therefore invisible here
+    and was absent from `ENGINE_FAMILY_LABELS` from Wave I until Wave T4 --
+    precisely the FIX 6 false-zero exposure this test exists to close, sitting
+    inside the test meant to close it.
+
+    The widening is DATAFLOW-SCOPED rather than blanket, deliberately. Scanning
+    every `family = "..."` in `src/` produces false positives -- e.g.
+    `src/matrix_experiment_intake.py:179` assigns `family = "matrix_headspace"`,
+    a benchmark-metadata tag that is not a reaction family at all. So: only when
+    a call site actually passes `reaction_family=<Name>` do we harvest the
+    strings assigned to that name, and only within the function that does it.
+    """
     labels: set[str] = set()
     for path in sorted((ROOT / "src").glob("*.py")):
         try:
             tree = ast.parse(path.read_text(encoding="utf-8"))
         except SyntaxError:  # pragma: no cover - defensive
             continue
-        for node in ast.walk(tree):
-            if not isinstance(node, ast.Call):
-                continue
-            name = getattr(node.func, "id", None) or getattr(node.func, "attr", None)
-            if name not in {"ElementaryStep", "_step"}:
-                continue
-            for keyword in node.keywords:
-                if keyword.arg == "reaction_family" and isinstance(keyword.value, ast.Constant):
-                    if isinstance(keyword.value.value, str):
-                        labels.add(keyword.value.value)
-            for arg in node.args:
-                if isinstance(arg, ast.Constant) and isinstance(arg.value, str):
-                    labels.add(arg.value)
+        scopes = [tree] + [
+            node
+            for node in ast.walk(tree)
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+        ]
+        for scope in scopes:
+            for node in ast.walk(scope):
+                if not isinstance(node, ast.Call):
+                    continue
+                name = getattr(node.func, "id", None) or getattr(node.func, "attr", None)
+                if name not in {"ElementaryStep", "_step"}:
+                    continue
+                for keyword in node.keywords:
+                    if keyword.arg != "reaction_family":
+                        continue
+                    if isinstance(keyword.value, ast.Constant):
+                        if isinstance(keyword.value.value, str):
+                            labels.add(keyword.value.value)
+                    elif isinstance(keyword.value, ast.Name):
+                        # Wave T4: the label is bound to a local. Resolve it.
+                        labels |= _string_constants_assigned_to(scope, keyword.value.id)
+                for arg in node.args:
+                    if isinstance(arg, ast.Constant) and isinstance(arg.value, str):
+                        labels.add(arg.value)
     return labels
 
 
@@ -56,6 +113,12 @@ def test_engine_family_labels_cover_sources():
 
     A family whose raw label is missing here would silently route to a no-op
     offset and be reported as a zero sensitivity -- exactly the FIX 6 failure.
+
+    2026-08-27 (Wave T4): this is the STATIC half. It missed
+    `Heyns_Rearrangement` for four waves because the scanner could not see a
+    label bound to a local variable; see `_engine_family_labels_in_sources`.
+    `test_engine_family_labels_cover_runtime_emission` below is the stronger
+    half and does not depend on the scanner being right.
     """
     from src.family_sensitivity import ENGINE_FAMILY_LABELS
 
@@ -63,6 +126,69 @@ def test_engine_family_labels_cover_sources():
     assert not missing, (
         "New reaction_family labels found in src/ that are not pinned in "
         f"ENGINE_FAMILY_LABELS: {sorted(missing)}"
+    )
+
+
+def test_the_static_scan_now_sees_labels_bound_to_a_local_variable():
+    """Tombstone for the Wave T4 blind spot. Pins the scanner, not the list.
+
+    `Heyns_Rearrangement` and `Amadori_Rearrangement` are the two labels in
+    `src/reaction_templates.py` that are assigned to a local before being passed
+    as `reaction_family=family`. If the scanner ever narrows back to literal
+    arguments only, the first of these disappears from its output and this test
+    -- not a silent zero sensitivity in a Monte-Carlo sweep -- is what fails.
+    """
+    scanned = _engine_family_labels_in_sources()
+    assert {"Heyns_Rearrangement", "Amadori_Rearrangement"} <= scanned
+
+    # And the widening stays dataflow-scoped: a variable also named `family`
+    # that never reaches an ElementaryStep must NOT be harvested.
+    assert "matrix_headspace" not in scanned
+    assert "matrix_precursor_augmented" not in scanned
+
+
+@pytest.mark.parametrize(
+    "pool",
+    [
+        pytest.param(["D-Glucose", "Glycine"], id="aldose"),
+        # THE POOL THAT WAS NEVER RUN. Wave S1b's family census and this
+        # module's static scan both effectively enumerated over
+        # `data/benchmarks/`, and NOT ONE SHIPPED BENCHMARK USES A KETOSE
+        # (`grep -io fructose` over the sugar lists returns 0). So the ketose
+        # branch of `_amadori_pathway` -- and with it `Heyns_Rearrangement` --
+        # was never enumerated by any guard, which is exactly how a family the
+        # engine has always emitted stayed missing from every list that claims
+        # to enumerate the families.
+        pytest.param(["D-Fructose", "Glycine"], id="ketose"),
+        pytest.param(["D-Ribose", "L-Cysteine"], id="pentose_sulfur"),
+    ],
+)
+def test_engine_family_labels_cover_runtime_emission(pool):
+    """RUNTIME enumeration: every family the engine actually emits must be pinned.
+
+    2026-08-27 (Wave T4). This is the strong form of
+    `test_engine_family_labels_cover_sources`, and it exists because the static
+    form has now failed once for four waves. It does not parse anything: it runs
+    the engine and reads `step.reaction_family` off the emitted steps, so no
+    scanner blind spot can hide a family from it. The only way a family escapes
+    is if no parametrised pool emits it -- which is why the ketose pool is here
+    and is commented above.
+    """
+    from src.conditions import ReactionConditions
+    from src.family_sensitivity import ENGINE_FAMILY_LABELS
+    from src.precursor_resolver import resolve_many
+    from src.smirks_engine import SmirksEngine
+
+    conditions = ReactionConditions(pH=6.0, temperature_celsius=150.0, water_activity=0.6)
+    steps = SmirksEngine(conditions).enumerate(resolve_many(pool), max_generations=4)
+    emitted = {step.reaction_family for step in steps if step.reaction_family}
+    assert emitted, f"the engine emitted no families at all for {pool}"
+
+    missing = emitted - set(ENGINE_FAMILY_LABELS)
+    assert not missing, (
+        f"families EMITTED AT RUNTIME from {pool} that are not pinned in "
+        f"ENGINE_FAMILY_LABELS: {sorted(missing)}. Each would route to a no-op "
+        f"offset and be reported as a zero sensitivity -- the FIX 6 failure."
     )
 
 

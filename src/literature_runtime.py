@@ -116,6 +116,49 @@ _PROTEIN_SOURCE_PROFILES = {
     if isinstance(entry, Mapping) and str(entry.get("source_id", "")).strip()
 }
 
+# 2026-08-27 (Wave T3, finding T1-01). protein_source_registry.json is a MOCK. Its
+# own description has always said so; nothing read that sentence, so the mock status
+# never reached either stderr or any output payload while the numbers underneath it
+# drove `matrix_uncertainty_factor` (see `_alternative_matrix_lane` below) and the
+# meaty-potential score. Warned at load, in the shape of the family-12 molar-ratio
+# unit warning in `_resolve_concentration_unit`: state the defect, name what depends
+# on it, rescale nothing, invent nothing.
+PROTEIN_SOURCE_REGISTRY_UNSOURCED = (
+    str(PROTEIN_SOURCE_REGISTRY_PAYLOAD.get("source_status", "")).strip()
+    == "no_verifiable_source"
+)
+if PROTEIN_SOURCE_REGISTRY_UNSOURCED:
+    warnings.warn(
+        "src.literature_runtime: data/lit/protein_source_registry.json declares "
+        "source_status='no_verifiable_source' -- every value in it is a MOCKED "
+        "placeholder whose only declared upstream is the LLM digest "
+        "data/Gemini_Deep_Research/06_alternative_proteins.md, which is not provenance. "
+        "It is nonetheless LIVE: hydrolysate_observability_bias, off_note_penalty and "
+        "lox_activity_flag enter matrix_uncertainty_factor directly, and "
+        "meaty_potential_multiplier drives the meaty-potential score. The plant-source "
+        "DIFFERENTIATION these values encode is not evidence. Values are NOT substituted.",
+        RuntimeWarning,
+        stacklevel=2,
+    )
+
+#: Surfaced verbatim on the family-06 lane payload so the mock status travels with the
+#: number it contaminates instead of living only in a warning nobody sees.
+PROTEIN_SOURCE_PROVENANCE = {
+    "registry": "data/lit/protein_source_registry.json",
+    "source_status": str(PROTEIN_SOURCE_REGISTRY_PAYLOAD.get("source_status", "") or "unstated"),
+    "value_basis": str(PROTEIN_SOURCE_REGISTRY_PAYLOAD.get("value_basis", "") or "unstated"),
+    "declared_upstream": "data/Gemini_Deep_Research/06_alternative_proteins.md (LLM digest)",
+    "affects": [
+        "matrix_uncertainty_factor",
+        "matrix_source_support_score",
+        "process_state_transfer_confidence",
+    ],
+    "warning": (
+        "MOCKED VALUES. Source-to-source differences in these outputs are not evidence; "
+        "they reproduce an ordering someone wrote down. Wave T3 (2026-08-27), finding T1-01."
+    ),
+}
+
 
 def _normalize_name(name: str) -> str:
     normalized = str(name).lower().replace("_", " ").replace("-", " ")
@@ -3142,6 +3185,12 @@ def _build_matrix_scope_lane(*, protein_label: str) -> Dict[str, Any]:
             "benchmark_transfer_mode": benchmark_transfer_mode,
             "process_state_anchor_ids": [str(row.get("id", "unknown")) for row in process_state_rows],
             "structural_gap_ids": [str(row.get("gap_id", "unknown")) for row in structural_gaps],
+            # 2026-08-27 (Wave T3, T1-01): the five source-profile numbers above are
+            # MOCKED. This block ships the registry's own admission alongside the
+            # numbers it contaminates, so a consumer of matrix_uncertainty_factor
+            # cannot read source differentiation as evidence.
+            "protein_source_provenance": dict(PROTEIN_SOURCE_PROVENANCE),
+            "protein_source_profile_unsourced": bool(PROTEIN_SOURCE_REGISTRY_UNSOURCED),
         },
     )
 

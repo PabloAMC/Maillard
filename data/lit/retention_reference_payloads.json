@@ -83,7 +83,8 @@
         "compound": "hexanal",
         "source_citation": "JAFC DOI:10.1021/acs.jafc.3c05991",
         "doi": "10.1021/acs.jafc.3c05991",
-        "provenance_tier": "direct_measurement",
+        "provenance_tier": "unsourced_withdrawn",
+        "provenance_tier_history": "direct_measurement until 2026-08-27; demoted by Wave T3, see content_correction_notes",
         "matrix_context": "pea_protein_isolate_vs_protein_free_control",
         "analytical_method": "static headspace GC-MS depletion versus protein-free control",
         "retention_or_release_mode": "direct_binding_fraction",
@@ -91,14 +92,20 @@
         "temperature_context": "not yet fully extracted from full text",
         "time_context": "not yet fully extracted from full text",
         "reversibility_assumption": "likely_non_covalent_reversible",
-        "transferability_notes": "High-value direct PPI anchor for hexanal retention, but still needs complete condition fields.",
+        "transferability_notes": "WITHDRAWN as a quantitative anchor 2026-08-27 (Wave T3). Previously read: 'High-value direct PPI anchor for hexanal retention, but still needs complete condition fields.' It is not an anchor for hexanal at all -- the paper reports no hexanal percentage, and its qualitative hexanal statement puts PPI at the LOW end, opposite to how this record was being used. Usable from this paper: the qualitative structure-binding ordering (carbonyl position, unsaturation, chain shape) and the octanal/2-octanone and heptanal/trans-2-heptenal endpoints, all pooled over PPI/SPI/LPI.",
         "numeric_reference": {
           "units": "percent_bound",
-          "value": 52.76,
-          "sd": 4.65
+          "value": null,
+          "value_status": "withdrawn_wrong_compound",
+          "withdrawn_value": 52.76,
+          "withdrawn_sd": 4.65,
+          "withdrawn_because": "belongs to OCTANAL, pooled over PPI/SPI/LPI -- not to hexanal, and not PPI-specific. See content_correction_notes.",
+          "paper_hexanal_content": "qualitative only: PPI and WPI show the LOWEST hexanal binding affinity, SPI the highest; differences often not statistically significant. Figure 4 only; no tabulated value."
         },
         "shared_anchor": true,
-        "shared_anchor_note": "One DOI serves 3 nominally distinct reference records in data/lit: acs_jafc_3c05991_ppi_spi_partitioning, jafc_3c05991_hexanal_binding, jafc_3c05991_ppi_hexanal_binding. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
+        "shared_anchor_note": "One DOI serves 3 nominally distinct reference records in data/lit: acs_jafc_3c05991_ppi_spi_partitioning, jafc_3c05991_hexanal_binding, jafc_3c05991_ppi_hexanal_binding. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources.",
+        "source_citation_full": "Barallat-Perez, C.; Janssen, H.-G.; Martins, S.; Fogliano, V.; Oliviero, T. (2023). Unraveling the Role of Flavor Structure and Physicochemical Properties in the Binding Phenomenon with Commercial Food Protein Isolates. J. Agric. Food Chem. 71(50), 20274-20284. DOI 10.1021/acs.jafc.3c05991, PMID 38059380, PMCID PMC10739987. Verified 2026-08-27 (Wave T3).",
+        "content_correction_notes": "COMPOUND MISATTRIBUTION, SETTLED AND CORRECTED 2026-08-27 (Wave T3, audit remediation; finding T1-03). This record shipped 52.76 +/- 4.65 %bound as a HEXANAL-in-PPI direct_measurement. Wave T1 flagged a conflict with an internal brief that assigned the same number to trans-2-heptenal. Wave T3 retrieved the full text (open access, CC-BY, via Europe PMC PMC10739987 fullTextXML) and BOTH were wrong. WHAT 52.76 +/- 4.65 ACTUALLY IS: octanal, pooled across three plant isolates. Verbatim, Results: 'the displacement of the carbonyl group from the inner part of the molecule toward the edge leads to a significant binding increase from 14.73 to 52.76% +/- 4.65 for the studies with plant protein isolates (PPI, SPI, and LPI)'. So 14.73% = 2-octanone and 52.76% = octanal, and it is a PANEL-WIDE range endpoint over PPI/SPI/LPI, not a PPI-specific value. The abstract repeats it in the same pooled form. WHAT trans-2-HEPTENAL ACTUALLY IS (i.e. the brief was also wrong): 54.60% (+/-3.95 and +/-2.98 in two comparisons), verbatim: 'The addition of double bonds to the flavor chain, from heptanal to trans-2-heptenal, resulted in a significant binding increase from 13.73 to 54.60% +/- 3.95 for PPI, SPI, and LPI'. The brief's companion claim that heptanal is ~30-35% is also contradicted: heptanal is 13.73%. WHAT THE PAPER SAYS ABOUT HEXANAL: no number, anywhere in the text. Hexanal appears only in Figure 4 (storage time x 5/70/90 C), values in the plot only, not in text or any table. Tables 1 and 2 are surface hydrophobicity and sulfhydryl content, not binding. The only hexanal statements are qualitative and point the OPPOSITE way from this record's use: 'SPI showed the highest binding capacity for hexanal followed by LPI ... In contrast, PPI and WPI showed the lowest binding affinity for hexanal. However, these differences were often not statistically significant.' ACTION TAKEN: the numeric anchor is WITHDRAWN, not replaced -- no substitute hexanal percentage exists to substitute, and inventing one would repeat the defect. provenance_tier demoted direct_measurement -> unsourced_withdrawn: the paper is real, open and correctly cited, but it contains no direct measurement of the quantity this record asserted. The DOI is KEPT (it is valid and the qualitative hexanal ordering above is genuinely from it), so source_status is deliberately NOT set to no_verifiable_source -- that would contradict the DOI and trip citation_gate check 3. CORRECT CITATION (CrossRef- and Europe PMC-verified 2026-08-27): Barallat-Perez, C.; Janssen, H.-G.; Martins, S.; Fogliano, V.; Oliviero, T. 'Unraveling the Role of Flavor Structure and Physicochemical Properties in the Binding Phenomenon with Commercial Food Protein Isolates.' J. Agric. Food Chem. 2023, 71(50), 20274-20284. PMID 38059380."
       },
       {
         "id": "karolkowski_2021_ppi_hexanal_ph_release",
@@ -115,8 +122,13 @@
         "reversibility_assumption": "likely_non_covalent_reversible",
         "transferability_notes": "Direct PPI pH-release anchor for native off-flavour release. The runtime still uses a bounded surrogate because the SLR summary does not yet encode full compound-wise ppm values.",
         "numeric_reference": {
-          "units": "qualitative_release_order",
-          "value": "acidic release exceeds near-neutral release across the reported pH 2.0, 4.5, and 6.5 extraction conditions"
+          "units": "percent_increase_in_hexanal_release_ph4.5_vs_ph6.5_extraction",
+          "value": 59.0,
+          "verbatim": "hexanal release was found 59% higher with extraction using pH 4.5 than with pH 6.5",
+          "quote_location": "abstract, closing sentence",
+          "quote_verified": "2026-08-27, Wave T3, via CrossRef (10.1016/j.foodres.2021.110760) and Europe PMC PMID 34865778",
+          "quantity_caveat": "This is an EXTRACTION-pH effect on which volatiles the isolate carries, NOT a release-pH effect at measurement time. src/headspace.py uses pH in the second sense. Do not treat 59% as a measurement of the runtime knob.",
+          "supersedes": "units 'qualitative_release_order', value 'acidic release exceeds near-neutral release across the reported pH 2.0, 4.5, and 6.5 extraction conditions' -- corrected 2026-08-27 (Wave T3): the record under-claimed, asserting no number had been taken from the paper while the runtime surrogate was numerically pinned to 1.60."
         },
         "runtime_surrogate": {
           "type": "ph_release_modifier",
@@ -129,7 +141,9 @@
             4.5,
             6.5
           ],
-          "surrogate_basis": "Repo-bounded release surrogate anchored to the Karolkowski 2021 qualitative pH trend while preserving the executable Pratap-Singh pH 6 ambient baseline."
+          "surrogate_basis": "DERIVATION CORRECTED 2026-08-27 (Wave T3, audit remediation; finding T1-02). The previous text -- 'Repo-bounded release surrogate anchored to the Karolkowski 2021 qualitative pH trend' -- was false in both directions: it named the wrong author (Karolkowski, already corrected to Fischer under citation_repair) and it claimed the surrogate took no number from anywhere, when in fact log_slope is an exact back-solve. WHAT log_slope=0.235 ACTUALLY IS: it is ln(1.60)/2 = 0.2350021, i.e. the value that makes exp(log_slope*(6.0-4.5)) / exp(log_slope*(6.0-6.5)) = 1.42266/0.88913 = 1.60000 exactly -- a +60% pH-4.5-vs-pH-6.5 release ratio. max_factor=1.6 is the same number again. WHERE 1.60 CAME FROM: it is the arithmetic midpoint of the '~55-65% higher' band in data/benchmarks/maillard_validation_benchmarks.md section 3.2, which is a FABRICATED table -- its citation is the self-declaring placeholder '(Approx. DOI: 10.1016/j.foodchem.2021.xxx -- retrieve via Scopus)', no such paper exists, and its own hexanal row (340/205 ppb) implies +65.9%, not the +59% it labels that row with. So the constant was back-solved from an invented band, not read off a paper. WHY THE VALUE IS KEPT ANYWAY: the one real fact inside section 3.2 -- the +59% -- was subsequently located in a real paper, Fischer, Cachon & Cayot (2021), Food Res. Int. 150:110760 (DOI 10.1016/j.foodres.2021.110760, CrossRef-verified 2026-08-27), whose abstract states verbatim: 'hexanal release was found 59% higher with extraction using pH 4.5 than with pH 6.5'. 1.600 vs 1.590 is a 0.63% discrepancy, so the shipped number is defensible and refitting it to ln(1.59)/2 = 0.23185 would move predictions by <1% while destroying the behavioural pin in tests/scientific/test_matrix_headspace_ph_validation.py. THE VALUE IS THEREFORE UNCHANGED; only this record of how it was obtained is. HOW STRONG THE VINDICATION IS -- HONESTLY: weaker than the 0.63% suggests. Fischer varied the pH at which the ISOLATE WAS EXTRACTED (a manufacturing variable determining which volatiles the powder carries); src/headspace.py applies this factor to pH as a RELEASE parameter at measurement time on a fixed composition. Those are different physical quantities, and the agreement is a coincidence of magnitude, not a measurement of this knob. Treat the knob as no_verifiable_source for any quantitative purpose: the literature supports the DIRECTION plus one hexanal percentage, nothing more.",
+          "log_slope_derivation": "ln(1.60)/2 = 0.2350021 (exact back-solve; see surrogate_basis)",
+          "source_status": "no_verifiable_source"
         },
         "doi_repair": {
           "old": "10.3390/foods10123140",
@@ -246,7 +260,8 @@
         "transferability_notes": "Native PPI pH-release context for 2-pentylfuran. Used for release-direction provenance and bounded headspace interpolation only.",
         "numeric_reference": {
           "units": "qualitative_release_order",
-          "value": "acidic release exceeds near-neutral release across the reported pH 2.0, 4.5, and 6.5 extraction conditions"
+          "value": "acidic release exceeds near-neutral release across the reported pH 2.0, 4.5, and 6.5 extraction conditions",
+          "compound_caveat": "2026-08-27 (Wave T3): qualitative is CORRECT here and must stay so. Fischer et al. (2021) report their 59% figure for HEXANAL only, explicitly as 'for example'. No 2-pentylfuran percentage exists in that paper. This record shares log_slope=0.235 with the hexanal record, but that constant was NOT derived from any 2-pentylfuran measurement -- see runtime_surrogate.surrogate_basis. For this compound the pH knob is direction-only."
         },
         "runtime_surrogate": {
           "type": "ph_release_modifier",
@@ -259,7 +274,9 @@
             4.5,
             6.5
           ],
-          "surrogate_basis": "Repo-bounded release surrogate anchored to the Karolkowski 2021 qualitative pH trend while preserving the executable Pratap-Singh pH 6 ambient baseline."
+          "surrogate_basis": "DERIVATION CORRECTED 2026-08-27 (Wave T3, audit remediation; finding T1-02). The previous text -- 'Repo-bounded release surrogate anchored to the Karolkowski 2021 qualitative pH trend' -- was false in both directions: it named the wrong author (Karolkowski, already corrected to Fischer under citation_repair) and it claimed the surrogate took no number from anywhere, when in fact log_slope is an exact back-solve. WHAT log_slope=0.235 ACTUALLY IS: it is ln(1.60)/2 = 0.2350021, i.e. the value that makes exp(log_slope*(6.0-4.5)) / exp(log_slope*(6.0-6.5)) = 1.42266/0.88913 = 1.60000 exactly -- a +60% pH-4.5-vs-pH-6.5 release ratio. max_factor=1.6 is the same number again. WHERE 1.60 CAME FROM: it is the arithmetic midpoint of the '~55-65% higher' band in data/benchmarks/maillard_validation_benchmarks.md section 3.2, which is a FABRICATED table -- its citation is the self-declaring placeholder '(Approx. DOI: 10.1016/j.foodchem.2021.xxx -- retrieve via Scopus)', no such paper exists, and its own hexanal row (340/205 ppb) implies +65.9%, not the +59% it labels that row with. So the constant was back-solved from an invented band, not read off a paper. WHY THE VALUE IS KEPT ANYWAY: the one real fact inside section 3.2 -- the +59% -- was subsequently located in a real paper, Fischer, Cachon & Cayot (2021), Food Res. Int. 150:110760 (DOI 10.1016/j.foodres.2021.110760, CrossRef-verified 2026-08-27), whose abstract states verbatim: 'hexanal release was found 59% higher with extraction using pH 4.5 than with pH 6.5'. 1.600 vs 1.590 is a 0.63% discrepancy, so the shipped number is defensible and refitting it to ln(1.59)/2 = 0.23185 would move predictions by <1% while destroying the behavioural pin in tests/scientific/test_matrix_headspace_ph_validation.py. THE VALUE IS THEREFORE UNCHANGED; only this record of how it was obtained is. HOW STRONG THE VINDICATION IS -- HONESTLY: weaker than the 0.63% suggests. Fischer varied the pH at which the ISOLATE WAS EXTRACTED (a manufacturing variable determining which volatiles the powder carries); src/headspace.py applies this factor to pH as a RELEASE parameter at measurement time on a fixed composition. Those are different physical quantities, and the agreement is a coincidence of magnitude, not a measurement of this knob. Treat the knob as no_verifiable_source for any quantitative purpose: the literature supports the DIRECTION plus one hexanal percentage, nothing more.",
+          "log_slope_derivation": "ln(1.60)/2 = 0.2350021 (exact back-solve; see surrogate_basis)",
+          "source_status": "no_verifiable_source"
         },
         "doi_repair": {
           "old": "10.3390/foods10123140",

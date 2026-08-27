@@ -57,8 +57,8 @@ _BENCHMARK_LABELS: dict[str, dict[str, str]] = {
         "latex": r"Pea isolate + ribose + cysteine, $100\,^{\circ}$C (Protocol Pilot, 2026)",
     },
     "pea_isolate_uht_140C_Trikusuma2019": {
-        "plain": "Pea isolate UHT, 140 C (Trikusuma, 2019)",
-        "latex": r"Pea isolate UHT, $140\,^{\circ}$C (Trikusuma, 2019)",
+        "plain": "Pea isolate UHT, 140 C (Trikusuma, 2020)",
+        "latex": r"Pea isolate UHT, $140\,^{\circ}$C (Trikusuma, 2020)",
     },
     "resconi_2023_pbma_beef_identity_benchmark": {
         "plain": "PBMA vs beef comparator, 150 C (Resconi et al., 2023)",

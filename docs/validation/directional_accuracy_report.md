@@ -558,3 +558,276 @@ Figs. 5.11–5.13 (lactose/maltose).
 | **2a Trikusuma 2020** | **CONFIRMED** — 782 / 163 / 24 ppb all match the 2018 OSU thesis Table 6 to rounding; citation year should be 2020, not 2019 |
 | **2b Hofmann & Schieberle 1998** | **STILL OPEN** — body closed everywhere; implied yields are MFT 0.0300 mol % / FFT 0.0175 mol % on the assumed 10 mM basis; conditions appear misattributed (they are Mottram & Nobrega 2002's protocol, not Hofmann's 145 °C / 20 min at 1:3) |
 | **2c Brands & van Boekel 2001** | **RECOVERED** — full trajectories for both systems plus the complete fitted kinetic model at 5 temperatures; the repo's "unreadable scan" note is false and should be retracted |
+
+---
+
+# ADDENDUM — Wave S1b, 2026-08-27: the routing repair, re-scored
+
+**Everything above this line is the Wave S2 measurement and is left standing verbatim. The
+pre-fix numbers are the evidence; deleting them would delete the delta.**
+
+Wave S2's three code findings were all confirmed by inspection and all fixed. No correction
+curve was reshaped, no constant refitted, no barrier touched, and the panel was **not**
+iterated against — the wiring was chosen from the chemistry, measured once, and reported
+whichever way it came out. Two claims flipped to agree; one flipped away; the benchmark
+panel got measurably **worse** on four rows and that is reported below rather than
+absorbed.
+
+## A1. A correction to the baseline this addendum is measured against
+
+The 18/29 in §2 was scored on `HEAD = c1a12d2`. Wave S1's additive-flux propagator landed
+after that, at `HEAD = 263bae8`. **Re-running the identical panel on 263bae8, before any
+Wave S1b edit, gives 19/29, not 18/29** — Wave S1 moved SUG-04 (MFT vs FFT in
+cysteine/ribose, a *fit-adjacent* row) from agree to `flat`, and moved one independent row
+into agreement. So the fit-adjacent bucket had already fallen from 9/9 to 8/9 before this
+wave began. **19/29 is the honest baseline for the delta below.** The pH and aw buckets were
+untouched by Wave S1 and stood at exactly the 2/7 and 0/3 §3 reports.
+
+## A2. The three defects, each confirmed before it was touched
+
+| # | Wave S2 finding | Confirmed how | Fix |
+|---|---|---|---|
+| 1 | `get_ph_multiplier` never called on the prediction path | `grep -rn` finds callers only in `kinetics.py`, `pathway_ranker.py`, `cantera_export.py`; none is reachable from `evaluate_benchmark_payload`, which enters `conditions.get_rate_constant()` at `benchmark_validation.py:662` | Called once, from `get_rate_constant`, through a gate (`_enolisation_route_ph_correction`) admitting only the enolisation branch point |
+| 2 | `_ionization_correction`'s pyrazine branch unreachable | Enumerated every family the engine emits over all of `data/benchmarks/`: **29 distinct families, not one containing "pyrazine"** | Explicit family set `{Aminoketone_Condensation}` — the family that actually makes 2,5-dimethylpyrazine — at the branch's own unchanged pKa 6.5 |
+| 3 | `_water_activity_correction` reaches almost nothing, misses the furan track | Reached 3 of the 29 (`Amadori_Rearrangement`, `Strecker_Degradation`, `Lipid_Strecker_Synergy`); its dehydration branch keyed on `"furfural"`, which matches **no** emitted family either | Membership by **measured net water stoichiometry**: water-releasing families get the (unchanged) `1.3 − aw` dehydration curve, water-consuming families get mass action in `aw`, net-zero families get nothing |
+
+### Which pH term applies where, and why both cannot apply to one family
+
+The two functions are different physics, which is why naive wiring would have double-counted:
+
+* `_ionization_correction` is **reagent availability** — the Henderson–Hasselbalch fraction of
+  the nucleophile present as free base. Monotone increasing in pH. Belongs to the families
+  where a nitrogen lone pair attacks.
+* `get_ph_multiplier` is **route selection** — which way the Amadori compound enolises.
+  1,2-enolisation is acid-catalysed and opens 3-deoxyosone → furfural/HMF; 2,3-enolisation is
+  base-catalysed and opens 1-deoxyosone → reductone → pyrazine/furanone. A branch-point
+  partition, not a reagent count.
+
+The two family sets are disjoint **by construction and by an import-time assertion**, so every
+family gets the pH physics exactly once.
+
+`get_ph_multiplier` is deliberately **not** wired to the families its own substrings would
+sweep up (`"thiol"`, `"thio"`, `"cysteine"`, `"furan"`, `"condensation"`). The furan track's
+acid preference is a property of the branch point; re-applying a 4.9x acid boost at every
+downstream thiol addition, cyclodehydration and oxidation would compound one physical effect
+five or six times along a single route. And `"condensation"` matches
+`Aminoketone_Condensation` — it would have handed the **pyrazine** step the acid-peaked
+Schiff Gaussian, i.e. defect 2 again in the opposite direction.
+
+## A3. All dead substring keys found, reported rather than silently deleted
+
+Measured against the 41 family names this engine can emit:
+
+| Key | In | Status |
+|---|---|---|
+| `"pyrazine"` | `_ionization_correction`, `_water_activity_correction`, `get_ph_multiplier` | **DEAD** — fixed in the first two; documented in the third |
+| `"furfural"` | `_water_activity_correction` | **DEAD** — this was the whole dehydration branch |
+| `"heyns"` | `get_ph_multiplier` | **DEAD** — no Heyns family is emitted |
+| `"nitrogen_heterocycle"` | `get_ph_multiplier` | **DEAD** — never used as a family name |
+| `"oxygen_heterocycle"` | `get_ph_multiplier` | **DEAD** — same |
+| `"1,2"` and `"2,3"` | `get_ph_multiplier` | **DEAD** — families spell these `1_2` / `2_3`; the underscore forms alongside them do the work, so the comma forms were always decorative |
+
+And one key that is live and was **dangerous**: `"condensation"` in `get_ph_multiplier`'s
+Schiff branch matches `Aminoketone_Condensation`. That is the reason the new call site is
+gated rather than open.
+
+### A bug this wave introduced and then found, stated because it changes how the numbers read
+
+The first wiring left the Wave H substring guard `_releases_rather_than_attacks_with_the_amine`
+in front of `_water_activity_correction`'s new sets. That guard matches `"enolisation"`, so it
+returned 1.0 for `Enolisation_1_2` — the 3-deoxyosone → furfural/HMF dehydration, **the furan
+track**, the single family finding 3 most needed to reach — before any set was consulted. It
+was caught by inspecting the factor table at the snapshot conditions, not by the score. The
+guard was removed from that function (the explicit sets subsume it strictly better:
+`Enolisation_2_3_Amadori` is net-zero in water, appears in no set, still returns 1.0, and
+`tests/unit/test_wave_h_2026_08.py` still pins it). **Every number below is post-fix.**
+
+A second, smaller one: `Furanone_Reductive_Opening` (net +1 water) was omitted from the
+water-releasing set by transcription, against the wave's own stated criterion. It was caught
+by a test written to re-derive set membership from the enumerated steps rather than trust the
+literal in the source, and that test now ships as
+`tests/scientific/test_wave_s1b_ph_aw_routing_2026_08.py::test_water_activity_membership_matches_measured_stoichiometry`,
+which checks **all 29 emitted families** and currently reports zero mismatches. Correcting the
+omission changed **no panel outcome and no benchmark row**; it changed DMHF's aw response
+(quoted post-fix below) and nothing else visible.
+
+## A4. THE PANEL, PRE → POST
+
+| Bucket | Wave S2 (`c1a12d2`) | Pre-fix baseline (`263bae8`) | **Post-fix** |
+|---|---|---|---|
+| **Strictly independent (headline)** | 18/29 (62%) | **19/29 (66%)** | **20/29 (69%)** |
+| + system-overlap | 6/6 | 6/6 | 6/6 |
+| Screening total | 24/35 | 25/35 | **26/35 (74%)** |
+| Fit-adjacent (excluded) | 9/9 | 8/9 | 8/9 |
+
+| Category | Pre-fix | Post-fix | |
+|---|---|---|---|
+| **ph** | **2/7** | **4/7** | **+2** |
+| **moisture_aw** | **0/3** | **0/3** | — |
+| **pH + aw combined** | **2/10 (20%)** | **4/10 (40%)** | **+2** |
+| sugar_identity | 8/8 | 7/8 | **−1** |
+| additive_cysteine | 4/4 | 4/4 | — |
+| temperature | 6/8 | 6/8 | — |
+| time | 2/2 | 2/2 | — |
+| lipid_lane | 2/2 | 2/2 | — |
+| matrix_identity | 1/1 | 1/1 | — |
+| **Excluding pH and aw** | **17/19 (89%)** | **16/19 (84%)** | **−1** |
+
+**Report these together, as Wave S2 instructed.** The headline rose by one row; the pH bucket
+rose by two and the non-pH bucket fell by one. **pH and aw are still worse than chance
+(4/10), and aw is still 0/3.** This repair moved the pH failure from *systematically inverted*
+to *coin-flip*; it did not make the model a pH advisor. **Wave S2's recommendation to guard
+pH and moisture recommendations at runtime stands unchanged.**
+
+### Per-claim flips, every row that moved
+
+| Claim | Observable | Expected | Pre-fix | Post-fix | |
+|---|---|---|---|---|---|
+| **PH-04** | 2,5-dimethylpyrazine, pH 4.5→5.6→6.5 | increasing | `decreasing` 64.5 / 38.8 / 24.4 | **`increasing`** 0.026 / 0.131 / 2.30 | **GAINED** |
+| **PH-06** | 2,5-dimethylpyrazine, pH 4→7→9 | increasing | `decreasing` 99.5 / 16.8 / 14.9 | **`increasing`** 1.80 / 7.95 / 20.7 | **GAINED** |
+| **SUG-12** | HMF, fructose vs glucose | A>B | `A>B` 2433 vs 1524 | `A<B` 897 vs 1617 | **LOST** |
+| PH-07 | furfural, pH 4→7→9 | flat | `increasing` 752 / 902 / 908 | `peak` 793 / 880 / 792 | still misses, closer |
+| AW-02 | acrylamide vs aw | peak | `trough` 8.04 / 3.90 / 4.36 | `decreasing` 3.37 / 0.69 / 0.54 | still misses |
+| AW-03 | HMF vs aw | peak | `flat` 570 / 598 / 594 | `increasing` 600 / 636 / 634 | still misses |
+| SUG-04 *(fit-adjacent)* | MFT vs FFT, cys/ribose | A>B | `flat` 284 vs 297 | `A<B` 155 vs 267 | already missing, now inverted |
+
+PH-01, PH-02, PH-03, PH-05, AW-01 did not change outcome.
+
+**The two gained rows are exactly the two claims defect 2 was diagnosed against** — the two
+independent direct measurements of dimethylpyrazine vs pH (Laemont & Barringer 2023 measure
+26.6 → 37.4 → 68.2 ppb over pH 4→7→9). The model now moves them the right way.
+
+### The one lost row, mechanism stated in full
+
+**SUG-12** is HMF from fructose vs glucose at pH 6.0. Glucose reaches HMF through
+`Enolisation_1_2`, which is now in the acid-favoured route set and picks up a **3.0x** boost at
+pH 6.0. Fructose reaches HMF through `Fructofuranosyl_Dehydration`, a direct ketose
+dehydration that bypasses the Amadori branch point entirely and is therefore **excluded** from
+that set — so it gets no boost, and glucose overtakes it.
+
+**This is an open owner decision, and the argument runs both ways [P].**
+*For inclusion:* fructofuranosyl dehydration to HMF is the textbook acid-catalysed hexose
+dehydration; two routes to the *same product* now receive opposite pH treatment, which is an
+internal inconsistency. *For exclusion (what shipped):* `get_ph_multiplier`'s branch is
+documented as the 1,2- vs 2,3-**enolisation** partition, and this family is not part of that
+partition. **The exclusion was written down before the panel was re-scored, and was
+deliberately not revisited afterwards** — re-wiring it now, having seen that it costs a row,
+would be exactly the optimisation-against-the-panel this document exists to prevent. The
+owner should decide it on the chemistry.
+
+### Why aw is still 0/3 — a structural finding, not a routing one
+
+AW-01 and AW-03 both score **HMF** in a glycine/glucose system. The correction now reaches
+that system's chemistry properly (5 of its 7 emitted families, up from 2), and it visibly
+moves compounds: DMHF falls **115.4 → 45.5 → 49.6 ppb** over aw 0.25 → 0.65 → 0.95 — a
+2.5x separation where there was none — and dimethylpyrazine falls 2.15 → 0.29 → 0.26. But
+**HMF cannot respond**, because HMF and
+furfural are both products of `Enolisation_1_2` — the *same* family — so they always carry the
+*same* aw and pH factor, and together they are **90–96%** of that system's volatile budget.
+Their shares are pinned against each other, and the projection budget itself is
+aw-independent.
+
+**No family-level correction can move HMF vs aw in a two-precursor system.** That is a
+statement about the allocation layer, not about the aw physics, and it is why AW-01/AW-03 were
+not going to be fixed by this wave regardless of how the families were assigned. Recorded as
+[P]: the budget has no moisture dependence.
+
+AW-02 (acrylamide vs aw) is a separate matter — it needs the acrylamide **destruction** term
+Wave S2 identified as the model's most consequential single miss, and this wave did not add one.
+
+## A5. THE COST — the benchmark panel got worse, on four rows
+
+Regenerated `benchmark_summary.json`. **`status_counts` are unchanged (scale-gap 8 /
+pass-no-ranking 2 / pass 4), strict-ready is unchanged at 0/14, and the four internal
+snapshots recover exactly after the documented refresh.** Four real rows moved, all four in
+the wrong direction:
+
+| Benchmark | max_ratio | MALE | |
+|---|---|---|---|
+| `cys_ribose_140C_Hofmann1998` | 1.4864 → **2.2086** | 0.1267 → **0.2352** | WORSE |
+| `thiamine_cys_glucose_120C_Bolton1994` | 748.02 → **6730.85** | 2.8739 → **3.8281** | MUCH WORSE |
+| `thiamine_cys_xylose_145C_Cerny2008` | 2.7874 → **23.4061** | 0.4452 → **1.3693** | MUCH WORSE |
+| `resconi_2023_pbma_beef_identity_benchmark` | 4.4024 → **5.4570** | 0.6437 → **0.7370** | WORSE |
+
+**Nothing was refitted to claw any of this back.** The Hofmann contract (1.45x / 0.09 dex) was
+already failing on both criteria after Wave S1 and fails by more now; it was not relaxed.
+
+> **Addendum, 2026-08-27 (Wave S2c) — the Hofmann row's yardstick was retired the same day.**
+> Wave S2b established that `cys_ribose_140C_Hofmann1998`'s MFT 342 / FFT 200 ppb are a
+> repo-internal derivation: interior points of two invented, overlapping mol % bands in
+> `data/benchmarks/maillard_validation_benchmarks.md` §1.3, an abstract-reconstructed table
+> committed in the same commit as the benchmark JSON. Wave S2c retired its 1.45x / 0.09 dex
+> contract (it was ~1.7x *tighter* than the 2.5x spread of the band its own target came from),
+> demoted its tier `PRIMARY → REFERENCE`, marked both values `no_verifiable_source`, and
+> reverted `thiol_addition_pentodiulose` 26.35 → 28.60 because that constant's sole fit target
+> was this benchmark. On the post-revert tree the Hofmann row reads **4.3797 / 0.4041 dex** and
+> the Cerny row **25.741 / 1.4114** — both worse again, both published. **Nothing in Wave S1b's
+> attribution changes:** the pH/aw routing repair really did move those rows for the reasons
+> given here. What changes is that the Hofmann row cannot be read as the model disagreeing with
+> a measurement, in this table or anywhere else. **The sulfur branch has zero absolute
+> literature anchors.**
+
+### Attribution, measured one fix at a time
+
+Each fix was measured alone by emptying the other two family sets at runtime (no source edit):
+
+| System / observable | none | fix 1 only | fix 2 only | fix 3 only | all three |
+|---|---|---|---|---|---|
+| Hofmann MFT (meas 342) | 283.6 | 219.7 | 296.5 | 286.2 | **154.8** |
+| Hofmann FFT (meas 200) | 297.3 | 317.6 | 310.9 | 245.2 | **267.5** |
+| Bolton MFT (meas 13.0) | 0.01738 | 0.01659 | 0.01744 | **0.002055** | **0.001931** |
+| Resconi furfural | 3149 | 3721 | 3265 | 2922 | **3903** |
+
+* **Bolton and Cerny are carried almost entirely by fix 3 (aw).** At aw 0.98 every
+  water-shedding step is multiplied by `1.3 − 0.98 = 0.32`, i.e. **+0.89 kcal/mol** of
+  effective barrier, and the thiamine → MFT lane's terminal `Furan_Ring_Aromatisation` takes
+  it while the `Additive_Thermal_Degradation` steps upstream of it do not (that family is
+  stoichiometrically non-uniform — +2/0/−1/−2 across its steps — so it is excluded, since one
+  family-level factor cannot honestly represent it). MFT is a small share of a large budget in
+  that system, so its competitors absorb what it loses and the ratio amplifies.
+* **Hofmann is carried by fix 1 (route pH), with interaction.** At pH 5.0 `Enolisation_1_2`
+  gets a **4.5x** acid boost and `Enolisation_2_3_Amadori` gets ≈1.0, so the FFT/furfural arm
+  gains on the MFT arm, against a benchmark whose targets are MFT 342 > FFT 200 at pH 5.0.
+
+  **CORRECTION, added after Wave S2b (2026-08-27, same day).** This bullet originally called
+  that "the textbook enolisation pH physics disagreeing with the Hofmann benchmark — one of
+  the two is wrong". That framed it as a conflict with a measurement, and **there is no
+  measurement on the other side.** Wave S2b traced 342 / 200 ppb to this repository's own
+  `data/benchmarks/maillard_validation_benchmarks.md` §1.3 — an abstract-reconstructed range
+  table (MFT `~0.02–0.05` mol %, FFT `~0.01–0.03` mol %) committed in the *same commit* that
+  created the benchmark file. Both shipped values are interior points of two **overlapping**
+  invented bands (MFT 228–571 ppb, FFT 114–342 ppb), so the MFT > FFT ordering is an artifact
+  of midpoint selection, and the benchmark's own 1.45× / 0.09 dex contract is ~1.7× tighter
+  than the band it came from. The mechanism above is real and the degradation is real and
+  reported; what is not available is a measurement saying the pH physics is wrong. Wave S2b
+  also corrects §2b of this report by one paper: Cerny 2015's "145 °C / 20 min at 1:3"
+  sentence cites Hofmann & Schieberle **1995** (`10.1021/jf00056a042`), not the 1998 paper, so
+  Cerny says nothing about this benchmark's conditions. See `## Wave S2b` in
+  `tasks/audit_remediation.md` and the `content_verification_note.wave_s2_followup` block in
+  the benchmark file, which carries both corrections.
+
+### The internal snapshots
+
+They are model-generated reproducibility baselines, refreshed per the Wave M sequence
+(`GENERATOR_TAG` v9 → **v10**). Movement, pea and soy identically:
+
+```
+2,5-dimethylpyrazine              x0.0022206     <- penalised twice: 89% protonated at pH 5.6 AND sheds 2 H2O
+2-methyl-3-furanthiol             x0.337600
+bis(2-methyl-3-furyl) disulfide   x0.496260
+2-furfurylthiol                   x0.504180
+furfural                          x1.074000      <- its 1,2-enolisation route gets the acid boost
+Hexanal, Nonanal                  x1 (unchanged) <- injected by the lipid lane, never propagated
+```
+
+**The ranking contract changed, and that is a real movement rather than a refresh artifact:**
+2-furfurylthiol now outranks 2-methyl-3-furanthiol, and the disulfide now outranks
+2,5-dimethylpyrazine.
+
+## A6. What this addendum does and does not change about §7's licence
+
+Unchanged: it licenses **screening** claims of the form "which arm gives more of X" with pH and
+moisture held fixed, and **nothing quantitative**. What changed is narrow and should be stated
+narrowly: **the pH direction for nitrogen heterocycles is no longer systematically inverted.**
+pH is 4/7, aw is 0/3, and 4/10 combined is still at or below chance. **The model still licenses
+no pH or moisture recommendation.** The runtime guard Wave S2 asked for is still the right call.

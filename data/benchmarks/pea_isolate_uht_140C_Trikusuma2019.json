@@ -20,7 +20,14 @@
   },
   "source_metadata": {
     "origin": "external_literature",
-    "generator": "Trikusuma 2019 DHS-GC-MS-MS quantitative table"
+    "generator": "Trikusuma 2020 DHS-GC-MS-MS quantitative table (values verified against the 2018 OSU thesis, Table 6 p.35, Processed column)"
+  },
+  "content_verification_note": {
+    "date": "2026-08-27",
+    "wave": "Wave S2 retrieval 2a, recorded by Wave S1b",
+    "status": "values_confirmed_citation_year_corrected",
+    "note": "VALUES CONFIRMED against the open-access precursor of the paywalled paper: Trikusuma, M., MS thesis, The Ohio State University 2018, OhioLINK ETD accession osu1531495328317918, Table 6 p.35 — hexanal 781.72 +/- 58.59, 2-pentylfuran 163.16 +/- 15.06, nonanal 23.98 +/- 0.80 ug/L. The uncertainty_pct 8/9/4 recorded here match the SD-derived RSDs 7.5/9.2/3.3%. Conditions match (140 C, 6 s hold, pH 7.16 processed). WHICH COLUMN THIS IS, and it is load-bearing: these are the PROCESSED column. Table 6 also carries a Control column (331 / 59 / 8) and an AGED column (683 / 197 / 22) that differ materially; the process_metadata.state 'heated_matrix' label is what selects Processed and must not be re-read as either of the others. CITATION YEAR: the canonical citation is 2020 (Trikusuma, Paravisini & Peterson, Food Chemistry 312:126082), not 2019. The benchmark_id string 'Trikusuma2019' is retained UNCHANGED as an identifier only — it is referenced by data/lit/benchmark_intake_registry.json, src/matrix_calibration_registry.py, six test modules and every generated artifact, and renaming it would be an identity change, not a citation fix. Read the id as an opaque key; the year in it is wrong.",
+    "source_url": "http://rave.ohiolink.edu/etdc/view?acc_num=osu1531495328317918"
   },
   "process_metadata": {
     "state": "heated_matrix",
@@ -55,7 +62,7 @@
       "nonanal"
     ],
     "citation_provenance": [
-      "Trikusuma 2019 UHT pea beverage DHS-GC-MS-MS quantitative table"
+      "Trikusuma 2020 UHT pea beverage DHS-GC-MS-MS quantitative table (2018 OSU thesis Table 6, Processed column)"
     ],
     "calibration_mode": "compound_specific_headspace",
     "notes": "Heated pea UHT beverage off-flavour ranking contract. Full table contains 21 compounds, but only the modeled lipid-marker subset is executable today."

@@ -34,38 +34,38 @@
       {
         "direction": "higher",
         "expected_rank": 3,
-        "name": "2-methyl-3-furanthiol",
-        "role": "desirable_marker"
-      },
-      {
-        "direction": "higher",
-        "expected_rank": 4,
         "name": "2-furfurylthiol",
         "role": "desirable_marker"
       },
       {
         "direction": "higher",
+        "expected_rank": 4,
+        "name": "2-methyl-3-furanthiol",
+        "role": "desirable_marker"
+      },
+      {
+        "direction": "higher",
         "expected_rank": 5,
-        "name": "2,5-dimethylpyrazine",
+        "name": "bis(2-methyl-3-furyl) disulfide",
         "role": "desirable_marker"
       },
       {
         "direction": "higher",
         "expected_rank": 6,
-        "name": "bis(2-methyl-3-furyl) disulfide",
+        "name": "2,5-dimethylpyrazine",
         "role": "desirable_marker"
       }
     ]
   },
   "measured_volatiles": {
     "2,5-dimethylpyrazine": {
-      "conc_ppb": 0.004657252796533299
+      "conc_ppb": 1.0453596535834718e-05
     },
     "2-furfurylthiol": {
-      "conc_ppb": 0.007420533761409392
+      "conc_ppb": 0.003781701075435802
     },
     "2-methyl-3-furanthiol": {
-      "conc_ppb": 0.010137777534225696
+      "conc_ppb": 0.0014240506961904675
     },
     "Hexanal": {
       "conc_ppb": 0.7425330938848701
@@ -74,7 +74,7 @@
       "conc_ppb": 0.03899145957513976
     },
     "bis(2-methyl-3-furyl) disulfide": {
-      "conc_ppb": 0.002538687874706457
+      "conc_ppb": 0.0005292033947214159
     }
   },
   "metadata": {

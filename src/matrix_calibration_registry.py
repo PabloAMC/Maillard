@@ -96,6 +96,29 @@ _RUNTIME_MULTIPLIER_ENV = "MAILLARD_MATRIX_CALIBRATION_MULTIPLIERS"
 #           paper reports n.d. in both matrices, so `0.143 / 0.063` is a ratio of two numbers
 #           that appear nowhere in it. Left untouched and flagged; retiring it is a separate
 #           science decision.
+#
+# 2026-08-27 (Wave T3) -- WHERE 260 / 380 / 80 / 120 ACTUALLY CAME FROM. Waves K, M and O all
+# recorded these as "origin unknown, no derivation found". They are not unknown. All four are
+# printed in `data/benchmarks/maillard_validation_benchmarks.md` section 3.1 as `~260 +/- 35`,
+# `~380 +/- 42`, `~80` and `~120` -- the repository's own abstract-reconstructed internal
+# brief, the same file and the same commit era as its section 1.3, which Wave S2b proved
+# fabricated (the MFT 342 / FFT 200 case). Section 3.1 carries the identical forensic
+# fingerprint, and it is now validated twice independently: BOLD or unhedged = transcribed
+# from a real abstract, `~`-hedged = invented. Section 3.1's only two bold cells are the
+# 2-pentylfuran `638 +/- 49` and `2492 +/- 199` that Wave K confirmed VERBATIM; its
+# tilde-hedged cells are exactly the four Wave K found wrong or unsourced. The fingerprint
+# predicts Wave K's result with no misses. So these constants were not mis-transcribed from a
+# paper -- they were back-solved from numbers this repository generated about itself.
+#
+# WHAT THAT CHANGES, AND WHAT IT DOES NOT. It changes nothing about the two hexanal factors:
+# Wave O already refitted them onto the verified 1138.00 / 1621.71 ppb, and that stands. It
+# changes the STATUS of the two 1-hexanol factors, which Wave O correctly declined to refit:
+# they are not merely "unanchored", they are solved from a fabricated pair, and they are LIVE
+# -- `0.143/0.063` ships, and the li_2026_hme 1-hexanol hold-out row misses by 1117x. Both
+# entries are now labelled `no_verifiable_source` in `source` and carry the full trail in
+# `notes`. WAVE T3 DID NOT REFIT OR RETIRE THEM. Refitting needs a measurement that does not
+# exist; retiring the lane changes predictions and the hold-out. Which of the two to do is an
+# OWNER DECISION, carried as [P] in tasks/audit_remediation.md.
 FITTED_TO_BENCHMARK = "fitted_to_benchmark"
 
 
@@ -186,8 +209,24 @@ _MATRIX_CALIBRATION_RECORDS = (
         compound="1-hexanol",
         observable_factor=1.0,
         evidence_strength=FITTED_TO_BENCHMARK,
-        source="Pratap-Singh 2021 pea isolate ambient slurry baseline",
+        source="no_verifiable_source (2026-08-27, Wave T3) -- back-solved from a fabricated value; was 'Pratap-Singh 2021 pea isolate ambient slurry baseline'",
         fallback_mode="compound_specific",
+        notes=(
+            "NO VERIFIABLE SOURCE (2026-08-27, Wave T3; findings T1-04/T1-05). This factor is "
+            "1.0 by construction because it DEFINES the pea reference lane: the module header's "
+            "arithmetic is 0.063 x 1269.8 = 80 ppb, and the soy 1-hexanol factor below is the "
+            "ratio 0.143/0.063 built on the same 80 / 120 ppb pair. Pratap-Singh et al. "
+            "(Molecules 2021, 26, 4104, Table 1) report n.d. for hexanol in BOTH matrices and "
+            "state pea proteins 'contained no alcohol compounds', so this lane was never "
+            "anchored to that paper. Wave T3 identified where 80 and 120 DID come from: "
+            "data/benchmarks/maillard_validation_benchmarks.md section 3.1, tilde-hedged rows "
+            "'~80' and '~120' -- the repository's own abstract-reconstructed brief, same table "
+            "and same fingerprint as the section 1.3 fabrication Wave S2b settled. These are "
+            "LIVE CONSTANTS and this lane carries the hold-out's worst miss (li_2026_hme "
+            "1-hexanol, 1117x). REFITTING OR RETIRING THE 1-HEXANOL LANE IS AN OWNER DECISION "
+            "[P]. Wave T3 deliberately did NOT refit: there is no measurement to fit to, and "
+            "inventing one would repeat the defect that produced 80 and 120 in the first place."
+        ),
         fitted_from_benchmark="pea_isolate_40C_PratapSingh2021",
     ),
     MatrixCalibrationRecord(
@@ -216,7 +255,7 @@ _MATRIX_CALIBRATION_RECORDS = (
         observable_factor=0.228776,
         previous_value=0.22877612093571738,
         evidence_strength=FITTED_TO_BENCHMARK,
-        source="Trikusuma 2019 UHT pea beverage heated headspace anchor",
+        source="Trikusuma 2020 UHT pea beverage heated headspace anchor",
         fallback_mode="compound_specific_process_state",
         notes="Heated pea UHT aldehyde anchor carried onto the matrix-only oxidation/headspace lane. BACK-SOLVED from this benchmark's own measured 782 ppb -- a process-state-specific observable correction, not a global oxidation law, and not independent evidence about this benchmark.",
         fitted_from_benchmark="pea_isolate_uht_140C_Trikusuma2019",
@@ -228,7 +267,7 @@ _MATRIX_CALIBRATION_RECORDS = (
         observable_factor=0.0194733,
         previous_value=0.019473307397293472,
         evidence_strength=FITTED_TO_BENCHMARK,
-        source="Trikusuma 2019 UHT pea beverage heated headspace anchor",
+        source="Trikusuma 2020 UHT pea beverage heated headspace anchor",
         fallback_mode="compound_specific_process_state",
         notes="Heated pea UHT furan anchor. BACK-SOLVED from this benchmark's own measured 163 ppb.",
         fitted_from_benchmark="pea_isolate_uht_140C_Trikusuma2019",
@@ -240,7 +279,7 @@ _MATRIX_CALIBRATION_RECORDS = (
         observable_factor=0.00959565,
         previous_value=0.009595650239086601,
         evidence_strength=FITTED_TO_BENCHMARK,
-        source="Trikusuma 2019 UHT pea beverage heated headspace anchor",
+        source="Trikusuma 2020 UHT pea beverage heated headspace anchor",
         fallback_mode="compound_specific_process_state",
         # 2026-08-27 (Wave P item 4) — THIS CONSTANT NO LONGER RECOVERS ITS OWN ANCHOR,
         # AND IT WAS NOT REFITTED. It was back-solved while nonanal was (wrongly) scaled
@@ -253,7 +292,7 @@ _MATRIX_CALIBRATION_RECORDS = (
         # arithmetic identity is the fingerprint: the factor was absorbing a
         # substrate-assignment error, nothing else. Refitting it here would re-absorb the
         # correction into the same constant and make the fix invisible, so it is left at
-        # its old value and the miss is reported. Trikusuma 2019 is also still the last
+        # its old value and the miss is reported. Trikusuma 2020 is also still the last
         # content-unverified pillar of the matrix lane (Wave O [P] item 5), so there is no
         # verified anchor to refit against even if refitting were wanted.
         notes="Heated pea UHT nonanal anchor. BACK-SOLVED from this benchmark's own measured 24 ppb, against the pre-Wave-P linoleate-pool nonanal. NOT refitted after the Wave P oleate substrate correction: the row now reads 2.2727x under, which is exactly the oleic/linoleic ratio.",
@@ -305,8 +344,22 @@ _MATRIX_CALIBRATION_RECORDS = (
         compound="1-hexanol",
         observable_factor=0.143 / 0.063,
         evidence_strength=FITTED_TO_BENCHMARK,
-        source="Pratap-Singh 2021 soy-vs-pea ambient slurry release ratio",
+        source="no_verifiable_source (2026-08-27, Wave T3) -- back-solved from a fabricated value; was 'Pratap-Singh 2021 soy-vs-pea ambient slurry release ratio'",
         fallback_mode="compound_specific",
+        notes=(
+            "NO VERIFIABLE SOURCE (2026-08-27, Wave T3; findings T1-04/T1-05). 0.143/0.063 is "
+            "the ratio of two numbers that appear NOWHERE in Pratap-Singh et al. (Molecules "
+            "2021, 26, 4104): its Table 1 reports n.d. for hexanol in both matrices, and the "
+            "paper's entire soy alcohol fraction is 40 +/- 9 ppb of 1-octen-3-ol -- one third "
+            "of the 120 ppb this numerator was solved from. The 0.143 x 838.8 = 120 and 0.063 x "
+            "1269.8 = 80 arithmetic is in the module header. Wave T3 traced 80 and 120 to "
+            "data/benchmarks/maillard_validation_benchmarks.md section 3.1, tilde-hedged rows "
+            "'~80' / '~120', in the repository's own abstract-reconstructed brief -- the same "
+            "table and the same bold-vs-tilde fingerprint as the section 1.3 fabrication. The "
+            "ratio is therefore a ratio of two INVENTED numbers, and it ships. REFIT OR RETIRE "
+            "IS AN OWNER DECISION [P]; Wave T3 did not refit, because there is nothing to fit "
+            "to and substituting a plausible number would be the original defect again."
+        ),
         fitted_from_benchmark="soy_isolate_40C_PratapSingh2021",
     ),
     MatrixCalibrationRecord(

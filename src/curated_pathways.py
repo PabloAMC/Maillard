@@ -1,4 +1,53 @@
-"""Hand-curated Maillard reaction pathways used by the screening pipeline."""
+"""Hand-curated Maillard reaction pathways used by the screening pipeline.
+
+═══════════════════════════════════════════════════════════════════════════════
+PARITY NOTE — 2026-08-27 (Wave T4).  THIS LAYER IS ONE WAVE BEHIND THE ENGINE.
+═══════════════════════════════════════════════════════════════════════════════
+
+`PATHWAYS` is a HAND-MAINTAINED MIRROR of the chemistry the SMIRKS engine
+enumerates (`src/reaction_templates.py` + `src/smirks_engine.py`).  Nothing keeps
+the two in step: no `src/` module imports this file, and no test compares the two
+family vocabularies.  Drift here is therefore silent, and it has happened.
+
+MEASURED STATUS (families emitted by `PATHWAYS`, counted 2026-08-27):
+
+  * WAVE N — MIRRORED.  The corrected MFT route is present
+    (`Deoxyosone_Reduction` + `Thiol_Addition_Pentodiulose`), the retired
+    `Thiol_Addition_Norfuraneol` step is gone, norfuraneol survives as a terminal
+    furanone product, and the block cites both Cerny & Davidek DOIs.
+
+  * WAVE P — NOT MIRRORED.  NONE of the six Wave P families appear here:
+        Mercaptoketone_Formation        Mercaptoketone_Aldol_Addition
+        Mercaptoketone_Cyclodehydration  (the C2+C3 recombination lane to MFT,
+                                          Hofmann & Schieberle 1998)
+        Fructofuranosyl_Dehydration      (fructose's own ring-retained HMF route)
+        Furanone_Reductive_Opening       Furanone_Amino_Acid_Reduction
+    The Wave P ledger section contains ZERO occurrences of the string "curated",
+    so this was not a decision to skip the mirror — it appears simply not to have
+    been considered.
+
+  * The ketose lane is likewise absent: the engine emits `Heyns_Rearrangement`
+    for fructose + an amino acid (Wave T4); this layer has only the aldose
+    `Amadori_Rearrangement`.
+
+CONSEQUENCE THE READER MUST KNOW ABOUT.  `scripts/generate_reaction_network.py`
+draws `docs/assets/reaction_network.pdf` FROM THIS FILE.  THE PUBLISHED
+ARCHITECTURE FIGURE THEREFORE DEPICTS PRE-WAVE-P CHEMISTRY: it shows neither the
+C2+C3 recombination lane to MFT nor fructose's independent HMF route.  It is a
+schematic of the core lanes, not a picture of the shipped network.  Read it that
+way until the figure is regenerated from a re-synced layer.
+
+THIS LAYER IS NOT DEAD — it is the input to that figure and to the chemistry
+invariants in `tests/unit/test_chemistry_soundness.py` and
+`tests/unit/test_data_integrity.py`.
+
+OWNER DECISION, filed as [P] in `tasks/audit_remediation.md` under Wave T4:
+either (i) mirror Wave P here and regenerate the figure, or (ii) declare this
+layer DELIBERATELY FROZEN at the Wave N topology and say so in the figure's own
+caption.  Wave T4 deliberately did NOT add the chemistry: hand-adding six
+families to a mirror nothing tests is how the drift got here, and the right fix
+is probably a parity TEST rather than another hand-sync.
+"""
 
 from src.barrier_constants import get_barrier
 from src.pathway_extractor import ElementaryStep, Species
@@ -455,6 +504,20 @@ def _wire_computational_priors():
                 # FAST table's `thiol_addition` value, which is the only
                 # sulfur-branch constant with a surviving literature constraint
                 # (Hofmann 1998, 10.1021/jf9705983).
+                # CORRECTED 2026-08-27 (Wave S2c): the two lines above are FALSE and are
+                # kept because they record what the repo believed when this routing was
+                # written. `thiol_addition` has NO literature constraint. Its "Hofmann
+                # window" [28.10, 28.85] was derived from cys_ribose_140C_Hofmann1998,
+                # whose MFT 342 / FFT 200 ppb Wave S2b traced to
+                # data/benchmarks/maillard_validation_benchmarks.md section 1.3 -- an
+                # abstract-reconstructed table committed in the same commit as the
+                # benchmark, with both values interior points of two invented mol % bands.
+                # THE SULFUR BRANCH HAS ZERO ABSOLUTE LITERATURE ANCHORS. The ROUTING
+                # DECISION here is unchanged and is still the right one: `thiol_addition`
+                # remains the closest sulfur-addition class analogue for this parked step,
+                # and parking it beats re-pointing it at a family that does not exist. What
+                # changes is only what may be claimed for the number it returns -- it is a
+                # class estimate, not a measured barrier. See src/barrier_constants.py.
                 barrier, uncertainty = get_barrier("Thiol_Addition")
 
             # Wave N 2026-08-27: the two families of the corrected MFT route

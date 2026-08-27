@@ -384,7 +384,8 @@
         "binding_mechanism_non_covalent"
       ],
       "exact_numeric_anchors": [
-        "PPI hexanal binding up to 52.76% +/- 4.65"
+        "WITHDRAWN 2026-08-27 (Wave T3): previously 'PPI hexanal binding up to 52.76% +/- 4.65'. Full text (Europe PMC PMC10739987) shows 52.76 +/- 4.65 %bound is OCTANAL, pooled over PPI/SPI/LPI. The paper reports NO numeric hexanal percent-bound anywhere.",
+        "Available instead (all pooled PPI/SPI/LPI, all from figures): 2-octanone 14.73 -> octanal 52.76 +/- 4.65; heptanal 13.73 -> trans-2-heptenal 54.60 +/- 3.95; cis-4-heptenal 18.19 -> trans-2-heptenal 54.60 +/- 2.98."
       ],
       "current_repo_artifacts": [
         "data/lit/retention_reference_payloads.json"
@@ -398,12 +399,14 @@
         "single_run_report_projection_table",
         "scientific_surface"
       ],
-      "incorporation_status": "encoded_modeled_shown",
-      "next_action": "Keep as the direct PPI hexanal retention anchor while preserving the remaining condition-completeness caveat.",
-      "confidence_tier": "medium_high",
-      "notes_on_limits": "Full-text fields for condition completeness remain pending.",
+      "incorporation_status": "encoded_modeled_shown_pending_reanchor",
+      "next_action": "RE-ANCHOR OR RETIRE [P, owner decision]. The direct PPI hexanal retention anchor does not exist in this paper. Either (a) source a real PPI hexanal percent-bound elsewhere, or (b) retire the quantitative claim and keep this paper as a qualitative structure-binding ordering only. Note its qualitative hexanal statement puts PPI at the LOWEST binding affinity, the opposite direction from the retired anchor's use.",
+      "confidence_tier": "low",
+      "notes_on_limits": "2026-08-27 (Wave T3): full text retrieved and read (open access CC-BY). Condition completeness is no longer the limiting issue -- compound attribution was. The paper's binding data live entirely in Figures 1-4; Tables 1-2 are surface hydrophobicity and sulfhydryl content. Its hexanal content is qualitative and figure-only.",
       "shared_anchor": true,
-      "shared_anchor_note": "One DOI serves 3 nominally distinct reference records in data/lit: acs_jafc_3c05991_ppi_spi_partitioning, jafc_3c05991_hexanal_binding, jafc_3c05991_ppi_hexanal_binding. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
+      "shared_anchor_note": "One DOI serves 3 nominally distinct reference records in data/lit: acs_jafc_3c05991_ppi_spi_partitioning, jafc_3c05991_hexanal_binding, jafc_3c05991_ppi_hexanal_binding. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources.",
+      "confidence_tier_history": "medium_high until 2026-08-27; demoted by Wave T3 after the numeric anchor was withdrawn as a wrong-compound attribution.",
+      "content_correction_notes": "2026-08-27 (Wave T3, finding T1-03). Verbatim from Results: 'the displacement of the carbonyl group from the inner part of the molecule toward the edge leads to a significant binding increase from 14.73 to 52.76% +/- 4.65 for the studies with plant protein isolates (PPI, SPI, and LPI)' -- i.e. 52.76 is OCTANAL, pooled. An internal brief (data/benchmarks/maillard_validation_benchmarks.md section 2.4) attributed ~52.8 +/- 4.6 to trans-2-heptenal; that is also wrong (trans-2-heptenal is 54.60), as is its 'heptanal ~30-35%' (heptanal is 13.73). Correct citation: Barallat-Perez et al. (2023), J. Agric. Food Chem. 71(50), 20274-20284."
     },
     {
       "slr_section": "3.3",
@@ -679,7 +682,7 @@
     {
       "slr_section": "5",
       "paper_id": "trikusuma_2019_pea_uht_aroma_panel",
-      "citation": "Trikusuma et al. (2019), Food Chemistry",
+      "citation": "Trikusuma et al. (2020), Food Chemistry",
       "doi": "10.1016/j.foodchem.2019.126082",
       "matrix_family": "pea_uht_beverage",
       "compounds_supported": [
@@ -6562,7 +6565,7 @@
     {
       "slr_section": "07",
       "paper_id": "trikusuma_2019",
-      "citation": "Trikusuma et al. (2019)",
+      "citation": "Trikusuma et al. (2020)",
       "doi": "10.1016/j.foodchem.2019.126082",
       "matrix_family": "pea_protein_emulsion",
       "compounds_supported": [

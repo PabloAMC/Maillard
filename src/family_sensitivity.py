@@ -61,6 +61,11 @@ ENGINE_FAMILY_LABELS: tuple[str, ...] = (
     "Furanone_Formation",
     "Furanone_Reductive_Opening",  # Wave P 2026-08-27: norfuraneol -> 2,3-pentanedione
     "Generalized_Deamination",
+    # Wave T4 2026-08-27: the ketose rearrangement. Emitted since before Wave I
+    # (`reaction_templates.py:60`) and missing here the whole time, because the
+    # guard test below AST-scans only string literals passed to
+    # `ElementaryStep(...)` and this one is bound to a local variable first.
+    "Heyns_Rearrangement",
     "Lipid_Homolysis",
     "Lipid_Schiff_Base",
     "Lipid_Strecker_Synergy",

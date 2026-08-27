@@ -67,6 +67,24 @@ comparison_contract:
   # of each other, so this ordering is NOT a robust claim and this fixture is not evidence of
   # one — it exists so that a model change shows up as a fixture edit with a reason attached,
   # rather than as a mysterious "ranking contract not yet passing" promotion blocker.
+  #
+  # RE-RANKED AGAIN 2026-08-27 (Wave S1b -- THE pH / WATER-ACTIVITY ROUTING REPAIR). FFT
+  # overtakes MFT (rank 3/4) and the disulfide overtakes 2,5-dimethylpyrazine (rank 5/6).
+  # NO CONSTANT MOVED. Cause: three routing defects in `src/conditions.py` were repaired --
+  # `get_ph_multiplier` had never been called on the prediction path; the pyrazine
+  # ionisation branch keyed on a substring matching none of the 29 emitted families; and the
+  # water-activity correction reached 3 of those 29 and missed the furan track. At this
+  # snapshot's pH 5.6 / aw 0.95 the effect on each row is:
+  #   2,5-dimethylpyrazine  x0.0022206  -- penalised TWICE: its amine is ~89% protonated at
+  #                                       pH 5.6 (pKa 6.5) AND the step sheds two waters
+  #   2-methyl-3-furanthiol x0.337603   -- its cyclodehydration sheds two waters
+  #   bis(2-methyl-3-furyl) disulfide x0.496265
+  #   2-furfurylthiol       x0.504176   -- one dehydration, so it falls least of the four
+  #   furfural              x1.074000   -- its 1,2-enolisation route gets the acid boost
+  #   Hexanal, Nonanal      x1          -- injected by the lipid lane, never propagated
+  # THE DMP MOVE IS THE ONE TO READ: it is 450x, so unlike the Wave P note above this
+  # reordering is NOT within-noise on that row. The MFT/FFT gap remains close (1.09x), so
+  # THAT half of the ordering is still not a robust claim.
   observable_targets:
   - name: Hexanal
     role: adverse_marker
@@ -76,19 +94,19 @@ comparison_contract:
     role: adverse_marker
     expected_rank: 2
     direction: lower
-  - name: 2-methyl-3-furanthiol
+  - name: 2-furfurylthiol
     role: desirable_marker
     expected_rank: 3
     direction: higher
-  - name: 2-furfurylthiol
+  - name: 2-methyl-3-furanthiol
     role: desirable_marker
     expected_rank: 4
     direction: higher
-  - name: 2,5-dimethylpyrazine
+  - name: bis(2-methyl-3-furyl) disulfide
     role: desirable_marker
     expected_rank: 5
     direction: higher
-  - name: bis(2-methyl-3-furyl) disulfide
+  - name: 2,5-dimethylpyrazine
     role: desirable_marker
     expected_rank: 6
     direction: higher
@@ -107,8 +125,10 @@ comparison_contract:
     the Wave H sulfur refit), which lifted 2,5-dimethylpyrazine above the thiols and
     swapped MFT ahead of FFT; then 2026-08-27 (Wave I), which put both thiols back above
     2,5-dimethylpyrazine; and again 2026-08-27 (Wave N MFT route correction), which dropped
-    MFT below both. Current model ordering is hexanal > nonanal > FFT >
-    2,5-dimethylpyrazine > MFT > bis(2-methyl-3-furyl) disulfide. This is a
+    MFT below both; then 2026-08-27 (Wave P) which put MFT back at rank 3; and again
+    2026-08-27 (Wave S1b pH/aw routing repair), which swapped FFT ahead of MFT and the
+    disulfide ahead of 2,5-dimethylpyrazine. Current model ordering is hexanal > nonanal >
+    FFT > MFT > bis(2-methyl-3-furyl) disulfide > 2,5-dimethylpyrazine. This is a
     documentation example whose ranks track the model, NOT measured truth -- the
     measured_volatiles above are illustrative and were never re-fitted to it.
 analytical_context:

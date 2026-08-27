@@ -136,9 +136,18 @@ def test_family_lane_validation_artifact_groups_benchmarks_by_family_and_lane():
 
 
 def test_strict_gate_summary_reflects_threshold_failures():
+    # RETARGETED 2026-08-27 (Wave S2c): the carrier file was
+    # cys_ribose_140C_Hofmann1998.json, used here only as a generic PRIMARY / free_precursor
+    # host for synthetic comparison rows. Its `metadata.tier` was demoted PRIMARY -> REFERENCE
+    # after Wave S2b showed its MFT 342 / FFT 200 ppb are a repo-internal derivation rather
+    # than a measurement, so it can no longer host a strict_ready=True assertion. Nothing
+    # about THIS test's subject changed -- it is about threshold arithmetic, not about that
+    # benchmark. acrylamide_spi_extrusion_130C_ACSRef3 is PRIMARY / free_precursor and carries
+    # its own 1.5 / 0.20 contract; the synthetic rows below sit far on the correct side of
+    # both criteria in both directions, so the retarget does not weaken the test.
     evaluation = BenchmarkEvaluation(
         benchmark_id="synthetic_benchmark",
-        bench_file=ROOT / "data" / "benchmarks" / "cys_ribose_140C_Hofmann1998.json",
+        bench_file=ROOT / "data" / "benchmarks" / "acrylamide_spi_extrusion_130C_ACSRef3.json",
         supported=True,
         reason=None,
         predicted_ppb={},
@@ -171,9 +180,14 @@ def test_strict_gate_summary_reflects_threshold_failures():
 
 
 def test_two_point_benchmark_surfaces_pass_without_ranking_when_scale_holds():
+    # RETARGETED 2026-08-27 (Wave S2c), same reason and same carrier as
+    # test_strict_gate_summary_reflects_threshold_failures above: the demoted
+    # cys_ribose_140C_Hofmann1998 (tier REFERENCE) cannot host a strict_ready=True assertion
+    # any more. The two synthetic rows below are 1.0526x each, well inside this file's
+    # 1.5 / 0.20 contract, so `pass-no-ranking` is reached for the same reason as before.
     evaluation = BenchmarkEvaluation(
         benchmark_id="two_point_benchmark",
-        bench_file=ROOT / "data" / "benchmarks" / "cys_ribose_140C_Hofmann1998.json",
+        bench_file=ROOT / "data" / "benchmarks" / "acrylamide_spi_extrusion_130C_ACSRef3.json",
         supported=True,
         reason=None,
         predicted_ppb={},

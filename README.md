@@ -3,7 +3,7 @@
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
 [![Docker](https://img.shields.io/badge/docker-recommended-blue.svg)](https://www.docker.com/)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Calibration: 1/3 evaluable literature rows inside 90% CI](https://img.shields.io/badge/calibration-1%2F3%20evaluable%20lit.%20rows%20in%2090%25%20CI-red.svg)](results/validation/prediction_uncertainty.md)
+[![Calibration: 0/3 evaluable literature rows inside 90% CI](https://img.shields.io/badge/calibration-0%2F3%20evaluable%20lit.%20rows%20in%2090%25%20CI-red.svg)](results/validation/prediction_uncertainty.md)
 [![Chemistry: 16 literature lanes, 5 with reaction templates](https://img.shields.io/badge/chemistry-16%20lanes%20%C2%B7%205%20with%20templates-blueviolet.svg)](results/validation/family_implementation_status.md)
 
 **Maillard** is a computational screening framework that predicts which combinations of
@@ -80,11 +80,11 @@ pH 5.5 / 105 °C / 45 min). Copy it from a run, never by hand:
 
 | Compound | Predicted | Tier | Score | Mode | Reachability | Calibration Source | Observable Assumption |
 | :--- | :--- | :---: | ---: | :--- | :--- | :--- | :--- |
-| furfural | 0.102 ppb [0.000922-11.3, 90% CI] | exploratory | 43.0 | hypothesis_only | chemically_reachable | Pratap-Singh 2021 pea isolate ambient slurry baseline (generic furan transfer) | static_class_profile \| class_level \| standard_matrix_support |
-| 2-furfurylthiol | 0.00305 ppb [2.76e-05-0.337, 90% CI] | exploratory | 33.0 | hypothesis_only | chemically_reachable | Interpolated base sulfur yield matching internal benchmark limits | sulfur_binding_prior \| class_level \| standard_matrix_support |
-| 2,5-dimethylpyrazine | 0.00234 ppb [2.71e-06-0.259, 90% CI] | exploratory | 43.0 | hypothesis_only | chemically_reachable | Interpolated base pyrazine yield matching internal benchmark limits | pyrazine_binding_prior \| class_level \| standard_matrix_support |
-| 2-methyl-3-furanthiol | 0.00163 ppb [6.91e-06-0.18, 90% CI] | exploratory | 33.0 | hypothesis_only | chemically_reachable | Interpolated base sulfur yield matching internal benchmark limits | sulfur_binding_prior \| class_level \| standard_matrix_support |
-| 3-methylbutanal | 0.00111 ppb | exploratory | 43.0 | hypothesis_only | chemically_reachable | Pratap-Singh 2021 pea isolate ambient slurry baseline (generic aldehyde transfer) | static_class_profile \| class_level \| standard_matrix_support |
+| furfural | 0.108 ppb [0.000975-11.9, 90% CI] | exploratory | 43.0 | hypothesis_only | chemically_reachable | Pratap-Singh 2021 pea isolate ambient slurry baseline (generic furan transfer) | static_class_profile \| class_level \| standard_matrix_support |
+| 2-furfurylthiol | 0.00211 ppb [9.14e-07-0.233, 90% CI] | exploratory | 33.0 | hypothesis_only | chemically_reachable | Interpolated base sulfur yield matching internal benchmark limits | sulfur_binding_prior \| class_level \| standard_matrix_support |
+| 3-methylbutanal | 0.000904 ppb | exploratory | 43.0 | hypothesis_only | chemically_reachable | Pratap-Singh 2021 pea isolate ambient slurry baseline (generic aldehyde transfer) | static_class_profile \| class_level \| standard_matrix_support |
+| 2-methyl-3-furanthiol | 9.5e-05 ppb [2.56e-07-0.0105, 90% CI] | exploratory | 33.0 | hypothesis_only | chemically_reachable | Interpolated base sulfur yield matching internal benchmark limits | sulfur_binding_prior \| class_level \| standard_matrix_support |
+| bis(2-methyl-3-furyl) disulfide | 2.94e-05 ppb [3e-08-0.00325, 90% CI] | exploratory | 33.0 | hypothesis_only | conditionally_reachable | Interpolated base sulfur yield matching internal benchmark limits | sulfur_binding_prior \| class_level \| standard_matrix_support |
 
 > **This table used to be fabricated, and the fix is worth reading.** Until 2026-08-27 the
 > generator behind these figures built its `FormulationResult` objects from hard-coded
@@ -130,13 +130,13 @@ after an adversarial provenance audit (2026-08-26), we report calibration **spli
 origin**, because an aggregate number quietly mixed literature-measured rows with internal
 synthetic comparators.
 
-### Headline: **1 of 3** evaluable literature rows falls within the model's 90% CI — and 3 populations that used to be pooled are now reported apart
+### Headline: **0 of 3** evaluable literature rows falls within the model's 90% CI — and 3 populations that used to be pooled are now reported apart
 
 | Population | Inside 90% CI | Not evaluable\* | Median CI width | Is it evidence? |
 | --- | ---: | ---: | ---: | --- |
-| **External literature** | **1/3** (33%) | 4 | **0.95 dex** | **Yes — this is the only row that is** |
-| **Fitted rows** (constants back-solved from the benchmark) | 2/2 | 0 | 2.21 dex | No — algebraic recovery |
-| **Internal synthetic** (model vs its own frozen output) | 18/18 | 8 | 3.56 dex | No — reproducibility harness |
+| **External literature** | **0/3** (0%) | 4 | **0.75 dex** | **Yes — this is the only row that is** |
+| **Fitted rows** (constants back-solved from the benchmark) | 2/2 | 0 | 2.96 dex | No — algebraic recovery |
+| **Internal synthetic** (model vs its own frozen output) | 18/18 | 8 | 4.18 dex | No — reproducibility harness |
 
 \* Degenerate near-zero-width envelopes: the Monte Carlo perturbs nothing on their path, so
 pass/fail is meaningless and they are excluded from coverage.
@@ -207,11 +207,13 @@ anything else.**
 **How to read this honestly:** coverage is only meaningful next to interval width — a 90% CI
 spanning two or more orders of magnitude makes coverage cheap. This headline is the reverse of
 the usual worry: the intervals *grew* — and coverage still *fell*, most recently from 2/11 to
-1/3 when the fitted rows were pulled out of both sides. The point predictions moved further
+1/3 when the fitted rows were pulled out of both sides, and then to 0/3 under Wave S1b. The point predictions moved further
 from the measurements than even those intervals allow, and the literature slice's own interval
-is the *narrowest* of the three (**0.95 dex**, a factor of ~9 end to end — it widened from
-0.85 under the Wave S1 additive propagator and bought no coverage with the extra width), so its 1/3 is the one
-number here that is not cheap. The
+is the *narrowest* of the three (**0.75 dex**, a factor of ~5.6 end to end — it widened from
+0.85 to 0.95 dex under the Wave S1 additive propagator and then *narrowed* to 0.75 dex under
+the Wave S1b routing repair, and **coverage fell from 1/3 to 0/3 as it narrowed**), so that
+0/3 is the one number here that is not cheap — a narrower interval that now misses every
+literature row is the worst of both. The
 literature slice is now saying the model is wrong on the sulfur branch, and saying so loudly. The
 internal-synthetic rows (26 of the 35 matched rows in the Monte-Carlo panel) are
 drift-detection harnesses, not
@@ -281,7 +283,12 @@ value 28.60, explicitly unconstrained. **A worse number obtained through a route
 literature supports is worth more than a better number obtained through one it refutes.**
 
 **That barrier has since been refitted, with owner approval (2026-08-27, Wave P), and both
-rows improved — which is fit recovery, not validation.** `thiol_addition_pentodiulose` went
+rows improved — which is fit recovery, not validation.** *(**REVERTED 2026-08-27 by Wave S2c**
+— the whole paragraph below is history. `thiol_addition_pentodiulose` is back at the un-fitted
+28.60 and the fit record is retracted, because Wave S2b showed the 342 / 200 ppb it was fitted
+against are this repository's own arithmetic on an invented mol % band, not a measurement. Read
+it as a record of what was done, not as a description of what ships.)*
+`thiol_addition_pentodiulose` went
 **28.60 → 26.35** kcal/mol against `cys_ribose_140C_Hofmann1998` and nothing else: one free
 parameter, range [23.30, 29.65] bounded by values already in the table, decision rules copied
 verbatim from the Wave H script, and run *last* in the wave so the fit sees the network that
@@ -319,6 +326,111 @@ cost, on the one verified sulfur benchmark:
 | FFT (vs 200 ppb) | 217.99 — 1.0900× over | **297.28 — 1.4864× over** | **worse** |
 | max ratio / MALE | 1.4110 / 0.0935 dex | **1.4864 / 0.1267 dex** | **worse — the untouched 1.45× / 0.09 dex contract now fails on *both* criteria again, not one** |
 
+**Wave S1b (2026-08-27): the pH and moisture physics was written, unit-tested, and never
+connected — and connecting it made this benchmark worse again.** The repo's first *ordinal*
+accuracy measurement (Wave S2's 52-claim directional panel) scored the model **16/19 on sugar
+identity, temperature, time and precursor loading, and 2/10 on pH and moisture** — worse than
+a coin, and systematically so. The cause was three routing defects, not three modelling
+errors: `get_ph_multiplier` was never called on the prediction path; the pyrazine branch of
+`_ionization_correction` keyed on a substring matching **none** of the 29 families this engine
+emits; and the water-activity correction reached 3 of those 29, missing the furan/HMF track
+entirely, with its dehydration branch keyed on the equally dead `"furfural"`. All three are
+now wired, with explicit family-name sets replacing every substring key. **No correction curve
+was reshaped, no constant refitted, and the panel was not iterated against.**
+
+| | pre-fix | post-fix | reading |
+| --- | --- | --- | --- |
+| Directional panel, **pH claims** | 2/7 | **4/7** | the two gained rows are exactly the two dimethylpyrazine-vs-pH measurements the diagnosis predicted |
+| Directional panel, **moisture claims** | 0/3 | **0/3** | see below — this one is structural, not routing |
+| Directional headline | 19/29 (66%) | **20/29 (69%)** | +2 pH, −1 sugar identity |
+| Hofmann MFT (vs 342 ppb) | 283.59 — 1.2060× under | **154.85 — 2.2086× under** | **worse** |
+| Hofmann FFT (vs 200 ppb) | 297.28 — 1.4864× over | **267.50 — 1.3375× over** | better |
+| Hofmann max ratio / MALE | 1.4864 / 0.1267 dex | **2.2086 / 0.2352 dex** | **worse on both** |
+| Bolton 1994 MFT | 748× under | **6731× under** | **much worse** — now the worst quantitative point in the whole panel |
+| Cerny 2008 MFT | 2.787× over | **23.406× over** | **much worse** |
+| MC panel, honest literature coverage | 1/3 | **0/3** | the Resconi furfural row left its own 90% CI |
+
+**The Hofmann row is not a conflict with a measurement, and saying so was wrong.** The
+mechanism is real — at pH 5.0 the textbook acid preference of 1,2-enolisation moves budget
+share from the MFT arm to the FFT/furfural arm — but the thing it moves *against* is not a
+measurement. **Wave S2b traced 342 / 200 ppb to this repository's own
+`data/benchmarks/maillard_validation_benchmarks.md` §1.3**, an abstract-reconstructed range
+table (`~0.02–0.05` and `~0.01–0.03` mol %) committed in the *same commit* that created the
+benchmark file; 342 and 200 are interior points of those two invented bands, and the bands
+**overlap** (MFT 228–571 ppb, FFT 114–342 ppb). So "MFT 342 > FFT 200 at pH 5" is an artifact
+of where the midpoints were picked, and the 1.45× / 0.09 dex contract is ~1.7× tighter than
+its own source band. The degradation above is still real and is still reported; what it is
+*not* is evidence that the pH physics is wrong. **Nothing was refitted to claw any of this
+back, and the contract was not relaxed either** — Wave S2b's recommendation to retire it and
+demote the benchmark is an owner decision, recorded in that file's
+`content_verification_note`. *(Executed the same day by Wave S2c — see immediately below.)*
+
+**Wave S2c (2026-08-27): the tightest contract in the panel was anchored to the repository's
+own guess, and it is retired. THE SULFUR BRANCH NOW HAS ZERO ABSOLUTE LITERATURE ANCHORS.**
+The owner approved Wave S2b's staged plan and it was executed. What that means, plainly: after
+three fabricated-source benchmarks were quarantined or deleted in Round 2, the repo said one
+literature anchor survived on the sulfur branch. It did not. `342` and `200` ppb were never
+measured by anybody — they are interior points of two invented mol % bands in this
+repository's own `data/benchmarks/maillard_validation_benchmarks.md` §1.3, and the arithmetic
+closes exactly on the benchmark's declared (also unattested) 10 mM basis:
+`0.0300 mol % × 0.010 M × 114.17 g/mol = 342.5 → 342 ppb`, and the geometric mean of the FFT
+band `0.017321 mol % → 197.8 → 200 ppb`.
+
+| What was undone | Before | After |
+| --- | --- | --- |
+| `cys_ribose_140C_Hofmann1998` values | shipped as literature measurements | both marked `value_status: no_verifiable_source`, values **unedited** (the shipped number is the evidence) |
+| Its validation contract | 1.45× / 0.09 dex — the tightest in the panel | **retired**; nothing looser invented; the global free-precursor default (1.5× / 0.10 dex) is inherited and is failed by more |
+| Its tier | `PRIMARY` | **`REFERENCE`** — no longer strict-gate eligible; kept in the tree as a mechanistic diagnostic |
+| `thiol_addition_pentodiulose` | 26.35 kcal/mol, *fitted* against that benchmark alone | **28.60 — reverted** to the un-fitted Wave N class value; the fit record is **retracted** |
+| §1.3 of the literature brief | presented as a transcribed yields table | dated **ABSTRACT-RECONSTRUCTED GUESSWORK** warning; kept, not deleted — it is the provenance record |
+
+**The cost is real and is published, not absorbed.** Removing a fit to a non-measurement makes
+the model look *worse* against that non-measurement, and it should:
+
+| Hofmann row | Wave S1b | **Wave S2c** | reading |
+| --- | --- | --- | --- |
+| MFT (vs the fabricated 342 ppb) | 154.85 — 2.2086× under | **78.09 — 4.3797× under** | **much worse** |
+| FFT (vs the fabricated 200 ppb) | 267.50 — 1.3375× over | **293.67 — 1.4684× over** | worse |
+| max ratio / MALE | 2.2086 / 0.2352 dex | **4.3797 / 0.4041 dex** | **worse on both** |
+| Cerny 2008 MFT (reference-only) | 23.406× over | **25.741× over** | worse — same barrier, xylose lane |
+
+Every other panel aggregate held: strict-ready **0/14** (this benchmark was *failing* its
+contract when it was retired, so retiring it removes a failure, not a pass), honest literature
+coverage **0/3**, MC coverage **28/35**, and **all eight external hold-out points bit-identical
+for a third consecutive wave**. The four internal reproducibility snapshots recover exactly
+after the documented refresh: MFT ×0.416079 and the MFT-derived disulfide ×0.420049, while
+every other propagated row rises by exactly ×1.010812 — one shared factor across three
+unrelated compounds, which is the signature of the fixed volatile budget re-normalising rather
+than of three coincidences.
+
+**What is *not* fixed by this.** The benchmark still declares `measured_volatiles`, so its rows
+are still enumerated and still scored — the fold errors above are errors against a fabricated
+yardstick and must never be quoted as accuracy against literature. Taking it out of the scored
+population entirely (via `reference_volatiles`, or quarantine) and rebuilding it from an
+interlibrary-loan copy of the paper in native **mol %** are the open owner items; the ILL
+request pack is in `tasks/audit_remediation.md` "## Wave S2b" §(f).
+
+**And moisture is still 0/3 for a reason worth knowing.** The correction now reaches the
+chemistry properly and visibly moves compounds (DMHF falls 115.4 → 45.5 → 49.6 ppb over
+aw 0.25 → 0.65 → 0.95, a 2.5× separation where there was none). But HMF — the observable in
+two of the three moisture rows — is produced by the
+*same* reaction family as furfural, so the two always carry the same aw factor, their shares
+are pinned against each other, and together they are 90–96% of that system's volatile budget.
+**No family-level correction can move HMF against aw in a two-precursor system**; the
+projection budget itself has no moisture dependence. That is a statement about the allocation
+layer, and it is an open item.
+
+**pH and moisture together are still 4/10 — at or below chance. The model still licenses no
+pH or moisture recommendation.** Full pre/post table and per-claim flips:
+[docs/validation/directional_accuracy_report.md](docs/validation/directional_accuracy_report.md)
+§A4.
+
+**One visible knock-on:** the forward-mode sample table above lost 2,5-dimethylpyrazine from
+its top five and gained bis(2-methyl-3-furyl) disulfide. At that example's pH 5.5 the pyrazine
+step is penalised twice over — its α-aminoketone amine is mostly protonated (pKa 6.5) *and* the
+condensation sheds two waters — so it falls by ~450×. The same swap appears in the internal
+reproducibility snapshots, where the ranking contract now reads FFT > MFT and disulfide > DMP.
+
 Both compounds are reached by two enumerated routes, so both rose; FFT was already over. This
 was **not** clawed back: the two lanes share their upstream trunk, so a barrier that pushed FFT
 down would take MFT with it, and refitting a constant to absorb a propagator change is the
@@ -330,7 +442,15 @@ single-lane figures were never addable. **Mass honesty was verified rather than 
 fixed budget the allocated molar total equals `total_volatile_budget_molar` to 1 part in 10¹²
 both before and after, so adding channels moves the *split* and never the total.
 
-The one surviving literature constraint on the sulfur branch (Hofmann 1998, after three
+**Corrected 2026-08-27 (Wave S2c): there is no surviving literature constraint on the sulfur
+branch.** The paragraph that follows is kept because it records what was done and what it
+found, but its premise is false — Hofmann 1998 was never a literature constraint here (see the
+Wave S2c block above), so the refits below were fitted against this repository's own guess.
+The finding they reported — *that no barrier value closes the gap* — survives as a statement
+about the model's allocation layer; the *anchor* does not.
+
+~~The one surviving literature constraint~~ The benchmark then believed to be the one surviving
+literature constraint on the sulfur branch (Hofmann 1998, after three
 fabricated-source benchmarks were quarantined or deleted) was used to refit the branch —
 and the refit's finding was that **it does not work**: no barrier value anywhere in its
 defensible range closed the gap, because the deficit is in how the volatile
@@ -343,7 +463,12 @@ A single global scale on the budget *would* close it — after the Wave P refit 
 0.0497 dex — at the price of pushing Resconi furfural from 4.7× to **5.9× over**. That constant
 was deliberately **not** moved
 ([results/validation/projection_constant_refit.md](results/validation/projection_constant_refit.md)).
-We report the gap rather than absorbing it.
+We report the gap rather than absorbing it. *(Those two fold numbers are as of Wave P and are
+now stale on both counts: the barrier they were measured against was reverted by Wave S2c, and
+the Hofmann residual they trade against is a residual to a non-measurement. The record was
+deliberately **not** re-run — re-running a refit generator to refresh a number nobody may act
+on would be a recalibration event dressed as bookkeeping. The decision it records, "do not move
+the global scale", is unchanged and is now better supported, not worse.)*
 
 <table>
 <tr>
@@ -480,21 +605,35 @@ We report the gap rather than absorbing it.
 > ingested with heavy LLM assistance and are **not yet fully human-verified**. An automated
 > audit (2026-08-26) found ~20% of registry DOIs unresolvable plus a class of live DOIs
 > pointing at the wrong paper; five benchmarks are now quarantined and every suspect anchor
-> carries an `audit_flag` in its registry entry. **102 records are marked
+> carries an `audit_flag` in its registry entry. **120 records are marked
 > `no_verifiable_source`** (measured 2026-08-27 across every tracked JSON and YAML file,
-> including nested records), of which **80 carry numeric payloads** and **62 of those are
+> including nested records), of which **98 carry numeric payloads** and **80 of those are
 > consumed at runtime**.
 >
-> That count was **84 / 62 earlier the same day, and it rose because the repository got more
-> honest, not because anything got worse.** `data/qm/` was excluded from every sweep this
-> repo has ever run — not by choice, but because `.gitignore` hid the directory from git
-> entirely. Tracking it (2026-08-27) exposed 18 barrier windows and claimed
-> quantum-chemistry values that carried **no citation, no run record and no provenance of
-> any kind**, and labelling them honestly is what moved 84 → 102. None of those 18 reach the
-> model: `data/qm/` is read only by a loader test and by the skip-heavy Phase 3 authority
-> lane, so the runtime figure stays at **62**. Treat kinetic parameters as provisional
-> pending manual source verification — the remediation ledger is
-> [tasks/audit_remediation.md](tasks/audit_remediation.md).
+> That count has now risen twice in one day, and **both rises are the repository getting more
+> honest, not worse.** Read it that way or the number is misleading in the wrong direction.
+>
+> * **84 → 102.** `data/qm/` was excluded from every sweep this repo has ever run — not by
+>   choice, but because `.gitignore` hid the directory from git entirely. Tracking it
+>   (2026-08-27) exposed 18 barrier windows and claimed quantum-chemistry values that carried
+>   **no citation, no run record and no provenance of any kind**, and labelling them honestly
+>   is what moved 84 → 102. None of those 18 reach the model: `data/qm/` is read only by a
+>   loader test and by the skip-heavy Phase 3 authority lane.
+> * **102 → 120** (Wave T3, 2026-08-27). Eighteen more records were labelled, and **all
+>   eighteen were already shipping — none is new, and no value was added, changed or
+>   invented.** Fifteen are `data/lit/protein_source_registry.json`, which has always
+>   described itself as *"Mocked values for 14 protein sources based on Report 06"* in a JSON
+>   field nothing read, while those mocked numbers drove `matrix_uncertainty_factor` and the
+>   meaty-potential score at prediction time; two are the pH-release surrogates in
+>   `retention_reference_payloads.json`, whose shipped `log_slope` turns out to be an exact
+>   back-solve from an invented band; one is `ref41_ppi_sulfur_volatile_binding_v1`, which
+>   cited a reference *number* inside an LLM research dump. Because all eighteen are in
+>   `data/lit/` and all carry numbers, the runtime figure rises with them, **62 → 80**. That
+>   is the honest count of unverifiable numbers the model consumes; it was 80 before this
+>   wave too, they were merely unlabelled.
+>
+> Treat kinetic parameters as provisional pending manual source verification — the
+> remediation ledger is [tasks/audit_remediation.md](tasks/audit_remediation.md).
 >
 > **What the citation gate can and cannot do.** `scripts/ci/citation_gate.py` is blocking and
 > reports **0 dead DOIs and 0 waivers** as of the 2026-08-26 and 2026-08-27 sweeps. But it is
@@ -521,20 +660,32 @@ is worse than before — and by 21–95× on the hydrolysate lanes, and the refi
 the residual is not removable by that barrier (its profile minimum sits at the floor of the
 defensible range). What survives is **ordering** — but read the size of it carefully, because
 the README previously quoted a number that no longer holds and attributed it to the wrong
-thing. Measured on the current tree (2026-08-27, after Wave S1): the pentose ≫ hexose MFT
+thing. Measured on the current tree (2026-08-27, after Wave S1b): the pentose ≫ hexose MFT
 constraint holds at
-**7.78×** (ribose 824.7 ppb vs glucose 106.0 ppb at matched conditions). It has now been
-published at 15.8×, then **8.98**×, then 3.39×, then 6.15×, and now 7.78× — the falls were
-supports being removed, and **the rises are not model improvements either**. Measured: zero the
-3.30 kcal/mol gap between `thiol_addition_hexose` (29.65) and the refitted
-`thiol_addition_pentodiulose` (26.35) — i.e. make the two routes energetically identical — and
-the ratio collapses to **3.14×**. So the mechanism contributes ~3.1× and the remaining ~2.5× is
+**8.26×** (ribose 169.1 ppb vs glucose 20.5 ppb at matched conditions). It has now been
+published at 15.8×, then **8.98**×, then 3.39×, then 6.15×, then 7.78×, then 18.27×, and now
+8.26× — the falls were supports being removed, and **the rises were not model improvements
+either**. Measured: zero the
+1.05 kcal/mol gap between `thiol_addition_hexose` (29.65) and
+`thiol_addition_pentodiulose` (28.60) — i.e. make the two routes energetically identical — and
+the ratio collapses to **4.27×**. So the mechanism contributes ~4.3× and the remaining ~1.9× is
 carried by a barrier difference. The split has been 1.13× of 3.39× (Wave N), 2.31× of 6.15×
-(Wave P) and 3.14× of 7.78× now: the structural share **has** grown, because the additive flux
-propagator stopped discarding the pentose limb's parallel routes, but **a third of the claim is
-still a gap between two barriers**, one of them an unconstrained legacy fit. The ordering agrees with
-Hofmann & Schieberle 1998; the *reason* the model reproduces it is weaker than the agreement
-looks. The wheat ≫ soy hydrolysate ranking claim is withdrawn entirely: both benchmarks that
+(Wave P), 3.14× of 7.78× (Wave S1), 4.27× of 18.27× (Wave S1b) and **4.27× of 8.26× now**.
+**The claim got smaller and its evidence got better, and both halves are the point.** Wave S2c
+reverted `thiol_addition_pentodiulose` 26.35 → 28.60 because the 26.35 was fitted against
+`cys_ribose_140C_Hofmann1998`, whose values are this repository's own arithmetic on an invented
+mol % band. Only the pentose limb runs that barrier, so ribose fell 374.0 → 169.1 while
+**glucose did not move at all** — which is what identifies the cause. The structural share is
+unchanged in absolute terms, so the fraction of the ordering carried by mechanism rather than
+by a barrier gap went from **23% to 52%**, and no part of the claim now traces to a number this
+repository invented. What is left riding on a barrier gap is 1.05 kcal/mol between an
+*estimated class value* and an unconstrained legacy fit — where it used to be 3.30 kcal/mol
+between a *fitted* barrier and that same legacy fit. The hexose limb still runs the demoted
+one-step lump. The ordering agrees with
+Hofmann & Schieberle 1998 — and this is the one Hofmann claim that survives Wave S2c, because
+pentose ≫ hexose is stated in that paper's **abstract**, which is retrievable, rather than in
+the reconstructed yields table that is not; the *reason* the model reproduces it is still
+weaker than the agreement looks. The wheat ≫ soy hydrolysate ranking claim is withdrawn entirely: both benchmarks that
 supported it were quarantined as fabricated.
 Use the model to rank; do not use it to predict a concentration.
 
@@ -821,8 +972,14 @@ reaction graph is not coherent, no later scoring is trustworthy.
 
 ### Kinetics
 
-Literature-calibrated Arrhenius parameters (Schiff base 15 kcal/mol → enolisation 28 kcal/mol;
-anchored to Hofmann, Martins, Nursten) drive laptop-speed FAST screening in < 1 second.
+Arrhenius parameters (Schiff base 15 kcal/mol → enolisation 28 kcal/mol) drive laptop-speed
+FAST screening in < 1 second. *Corrected 2026-08-27 (Wave S2c): this line used to read
+"Literature-calibrated … anchored to Hofmann, Martins, Nursten". The Martins and Nursten
+anchors stand; **the Hofmann anchor does not** — every constant that ever traced to
+`cys_ribose_140C_Hofmann1998` was traced to a repo-internal derivation, not to
+`10.1021/jf9705983`. The sulfur branch has zero absolute literature anchors; read
+`src/barrier_constants.py`'s per-key rationales for which values are measured, which are class
+analogues, and which are estimates.*
 A Cantera ODE solver is available for temporal profiles and mechanism debugging.
 
 ### Matrix physics

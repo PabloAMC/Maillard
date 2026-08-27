@@ -183,8 +183,10 @@ def test_projection_prefers_terminal_budget_relevant_endpoints():
         _canon(disulfide.smiles): {"name": "Bis(2-methyl-3-furyl) disulfide", "type": "desirable", "data": {}},
     }
 
+    # Wave T4 2026-08-27: `steps` and `downstream_margin_kcal` dropped from the
+    # signature — AST-verified unused in the body since Wave S1 replaced the
+    # selection heuristic that read them.
     selected = _select_accumulating_projection_species(
-        steps,
         tracked_species,
         species_catalog,
         target_lookup,

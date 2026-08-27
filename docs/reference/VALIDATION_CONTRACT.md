@@ -163,6 +163,23 @@ As of the current benchmark summary:
   (`results/validation/sulfur_barrier_refit_hofmann.md`) established that no barrier value in
   any defensible range recovers it either: the residual is a volatile-budget ALLOCATION
   deficit, not a barrier deficit.
+  **2026-08-27 (Wave S2c) — the 1.45x contract named above no longer exists, and the count is
+  still 0/14.** Wave S2b showed that `cys_ribose_140C_Hofmann1998`'s MFT 342 ppb and FFT
+  200 ppb are a repo-internal derivation, not a measurement from `10.1021/jf9705983`: both are
+  interior points of two invented, overlapping mol % bands in
+  `data/benchmarks/maillard_validation_benchmarks.md` §1.3, an abstract-reconstructed table
+  committed in the same commit as the benchmark JSON. The 1.45x / 0.09 dex contract was
+  **~1.7x tighter than the 2.5x spread of the band its own target was interpolated from**, so
+  it was **RETIRED** rather than widened; `metadata.tier` was demoted `PRIMARY → REFERENCE`,
+  which removes strict-gate eligibility via `strict_gate_tiers`; and the constant that refit
+  had produced (`thiol_addition_pentodiulose` 26.35) was reverted to the un-fitted class value
+  28.60, its record retracted. **Strict-ready is 0/14 before and after** — this benchmark was
+  *failing* its contract when it was retired (2.2086x / 0.2352 dex, and 4.3797x / 0.4041 dex
+  after the revert), so retiring it removes a failure, not a pass. Retiring the contract does
+  not leave the row untested: `_resolve_scale_thresholds` falls back to the global
+  free-precursor defaults (1.5x / 0.10 dex), which are marginally *looser* than what was
+  retired and which the row fails by more. That inheritance is stated here rather than left to
+  be discovered. **The sulfur branch now has zero absolute literature anchors.**
 - `pea_isolate_40C_PratapSingh2021` is executable through a dedicated `matrix_only` intake path, with full coverage, but it remains outside the strict release gate. Note: its marker yields are back-fitted to this same measurement, so this benchmark validates the intake plumbing, not predictive accuracy.
 - `soy_isolate_40C_PratapSingh2021` is executable through the same dedicated `matrix_only` intake path, with full coverage, with the same caveat.
 
@@ -344,6 +361,33 @@ has never seen. Its rules, stated explicitly:
   Maillard network propagator.** Median 93.68x, coverage 3/8, `max_fold_error` 2474x and the
   pre-widening 1/5 are all unchanged, and that invariance is evidence about the hold-out's
   coverage rather than evidence about the model.
+  **Wave S1b (2026-08-27) left them BIT-IDENTICAL AGAIN, for the same structural reason.**
+  Three pH / water-activity ROUTING defects were repaired in `src/conditions.py` -- the
+  enolisation route-selection term had never been called on the prediction path, the pyrazine
+  ionisation branch keyed on a substring matching none of the 29 emitted families, and the
+  water-activity correction reached 3 of those 29 and missed the furan track. Those changes
+  moved 4 of the 14 benchmark rows (all four in the wrong direction), moved the directional
+  panel's pH bucket from 2/7 to 4/7, and moved the MC panel's honest literature coverage from
+  1/3 to **0/3**. They moved ZERO of the eight hold-out points, because `get_rate_constant`
+  is only reached through `predict_from_steps`, which `matrix_only` bypasses. **Two
+  consecutive waves of prediction-path changes have now been invisible to the external
+  hold-out.** Until a hold-out bundle exercises the Maillard network, no external evidence
+  bears on the propagator, the barriers, the network topology, or the pH/aw physics.
+  **Wave S2c (2026-08-27) left them BIT-IDENTICAL A THIRD TIME, and this one is the sharpest
+  illustration of the gap.** Wave S2c reverted a shipped BARRIER —
+  `thiol_addition_pentodiulose` 26.35 → 28.60 kcal/mol — after Wave S2b established that the
+  benchmark it had been fitted against, `cys_ribose_140C_Hofmann1998`, carries values this
+  repository derived rather than measured (interior points of two invented mol % bands in
+  `data/benchmarks/maillard_validation_benchmarks.md` §1.3, committed in the same commit as
+  the benchmark JSON). That revert moved the flagship MFT row by ~2.0x, moved the
+  pentose ≫ hexose ordering headline from 18.27x to 8.26x, and re-scored two panel
+  benchmarks. It moved **zero** of the eight hold-out points, for the same structural reason:
+  `matrix_only` never reaches `predict_from_steps`, so no `FAST_BARRIERS` entry is on its
+  path. **Three consecutive waves — a propagator change, a routing repair, and a barrier
+  revert — have each been completely invisible to the external hold-out.** That matters more
+  after Wave S2c than before it: the hold-out cannot corroborate or refute a single
+  sulfur-branch constant, and the sulfur branch now has **zero absolute literature anchors**
+  in-panel either. There is currently no evidence of any kind bearing on those constants.
   **The 0/5 → 1/5 and the 32.79x → 15.31x are a REFERENCE correction, not a model change
   (Wave K/M, 2026-08-27).** Two of the four `li_2026_spi_wg_hme_control` points had been
   transcribed from adjacent table rows: 2-pentylfuran 221.5 was the paper's *Maltol* row

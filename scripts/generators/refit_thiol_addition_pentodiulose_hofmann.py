@@ -43,6 +43,26 @@ the benchmark file, verbatim:
     values could not be confirmed against the paper's tables. This is the panel's
     tightest contract (1.45x / 0.09 dex) resting on an unverified derivation."
 
+SUPERSEDED 2026-08-27 (Wave S2c). The Wave K caveat quoted above asks the wrong
+question. The problem was never that the mol%->ppb conversion was undocumented; it is
+that THERE IS NO MEASUREMENT ON THE FAR END OF IT. Wave S2b traced 342 and 200 ppb to
+data/benchmarks/maillard_validation_benchmarks.md section 1.3 -- an abstract-reconstructed
+range table committed in c7efbbc, the SAME commit that created the benchmark JSON --
+whose row gives MFT `~0.02-0.05` mol % and FFT `~0.01-0.03` mol %. On the benchmark's
+declared (unattested) 10 mM basis with MW 114.17: 0.0300 mol % -> 342.5 -> 342 ppb, and
+the FFT band's geometric mean 0.017321 mol % -> 197.8 -> 200 ppb. Both are interior
+points of two invented, overlapping bands (~90% confidence, arithmetic exact).
+CONSEQUENCE: this script's result is RETRACTED
+(results/validation/sulfur_barrier_refit_pentodiulose.{json,md}) and the constant it
+produced is REVERTED, 26.35 -> 28.60 kcal/mol, in src/barrier_constants.py.
+**DO NOT RE-RUN THIS SCRIPT AGAINST cys_ribose_140C_Hofmann1998.** Fitting a barrier to
+this repository's own arithmetic is circular whatever the objective says. A real target
+comes first: the ILL request pack in tasks/audit_remediation.md "## Wave S2b" section (f),
+then a rebuilt benchmark expressed in the paper's native mol % rather than in ppb (mol %
+is basis-free; the ppb target smuggles in the unattested 10 mM basis as a free
+multiplicative parameter underneath whatever contract sits on top of it).
+THE SULFUR BRANCH HAS ZERO ABSOLUTE LITERATURE ANCHORS.
+
 So this constant is fitted against an anchor whose UNIT CONVERSION IS UNVERIFIED.
 If that conversion is wrong, the error is localised HERE, in one barrier, rather
 than distributed. That sentence is reproduced verbatim in the constant's own

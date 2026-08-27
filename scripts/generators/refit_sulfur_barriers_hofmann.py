@@ -13,6 +13,22 @@ Wave G1 replaced the fabricated one-step MFT shortcut
 (van den Ouweland & Peer 1975, 10.1021/jf60199a045).  Absolute sulfur yields fell
 5-40x as a result — Hofmann1998 MFT went from ratio 1.02 to 7.83x UNDER.
 
+WITHDRAWN 2026-08-27 (Wave S2c) -- READ THIS BEFORE THE PARAGRAPH BELOW.
+`cys_ribose_140C_Hofmann1998` was NEVER a literature constraint. Wave S2b traced its
+MFT 342 / FFT 200 ppb to data/benchmarks/maillard_validation_benchmarks.md section 1.3,
+an abstract-reconstructed range table committed in c7efbbc -- the SAME commit that
+created the benchmark JSON -- whose row gives MFT `~0.02-0.05` mol % and FFT
+`~0.01-0.03` mol %. On the benchmark's declared (unattested) 10 mM basis with MW 114.17:
+0.0300 mol % -> 342.5 -> 342 ppb, and the FFT band's geometric mean 0.017321 mol % ->
+197.8 -> 200 ppb. Both are interior points of two invented, overlapping bands (~90%
+confidence, arithmetic exact). THE SULFUR BRANCH HAS ZERO ABSOLUTE LITERATURE ANCHORS.
+DO NOT RE-RUN THIS SCRIPT against that benchmark: it needs a real target first (the ILL
+pack in tasks/audit_remediation.md "## Wave S2b" section (f), then a rebuild in native
+mol %). This script's own output record, results/validation/sulfur_barrier_refit_hofmann.
+{json,md}, is annotated rather than retracted, because the constant it moved
+(`thiol_addition_norfuraneol`) sits on a family no step emits; its companion
+sulfur_barrier_refit_pentodiulose IS retracted and its constant reverted.
+
 The forensics record (tasks/audit_remediation.md, "Re-anchor the WHOLE sulfur
 branch") established that after the Mottram1994 / Farmer1999 quarantine,
 `cys_ribose_140C_Hofmann1998` is the ONLY surviving literature constraint on the
@@ -519,6 +535,14 @@ def main() -> int:
         f"Fit target: `{path.name}` (DOI 10.1021/jf9705983) — the ONLY surviving "
         "literature constraint on the sulfur branch after the Mottram1994 / Farmer1999 "
         "quarantine.",
+        "",
+        "> **CORRECTED 2026-08-27 (Wave S2c): the line above is false in the word "
+        "\"literature\".** Wave S2b traced this benchmark's MFT 342 / FFT 200 ppb to "
+        "`data/benchmarks/maillard_validation_benchmarks.md` §1.3, an abstract-reconstructed "
+        "range table committed in the same commit as the benchmark JSON; both values are "
+        "interior points of two invented, overlapping mol % bands. **The sulfur branch has "
+        "zero absolute literature anchors.** Do not re-run this script against this "
+        "benchmark.",
         "",
         f"Objective: `{record['objective']}`",
         "",

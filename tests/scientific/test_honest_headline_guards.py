@@ -295,8 +295,8 @@ def test_zero_of_six_predictive_benchmarks_are_free_of_blocking_gaps(panel):
 # --------------------------------------------------------------------------------------
 
 
-def test_honest_external_literature_coverage_is_1_of_3_with_fitted_rows_excluded():
-    """EXTERNAL LITERATURE 1/3 evaluable · 4 not evaluable · 2 fitted rows excluded BOTH sides.
+def test_honest_external_literature_coverage_is_0_of_3_with_fitted_rows_excluded():
+    """EXTERNAL LITERATURE 0/3 evaluable · 4 not evaluable · 2 fitted rows excluded BOTH sides.
 
     Source artifact: results/validation/prediction_uncertainty.json (TRACKED / force-added),
     key ``summary.honest_literature_coverage``. Read 2026-08-27.
@@ -322,9 +322,24 @@ def test_honest_external_literature_coverage_is_1_of_3_with_fitted_rows_excluded
         f"MC panel matched rows moved to {summary['matched_compound_count']}, published as 35"
     )
 
-    assert (coverage["hits"], coverage["total"]) == (1, 3), (
+    # RE-PINNED 2026-08-27 (Wave S1b -- THE pH / WATER-ACTIVITY ROUTING REPAIR).
+    # 1/3 -> 0/3. THIS IS A DEGRADATION AND IT IS NOT RELAXED HERE: the assertion is still
+    # two-sided and exact, so the number cannot drift back in either direction unnoticed.
+    # CAUSE, identified per row: the ONE literature hit was
+    # `resconi_2023_pbma_beef_identity_benchmark` / furfural, whose `inside_ci` flipped
+    # True -> False. Furfural is produced by `Enolisation_1_2`, which Wave S1b connected to
+    # the acid-favoured enolisation route-selection term for the first time; its p50 rose
+    # 2504.50 -> 3462.43 ppb while its 90% CI NARROWED (1.4048 -> 0.7460 dex), and the
+    # measured value fell outside the narrower interval. A narrower interval that now misses
+    # every literature row is the worst of both, and that is the honest reading.
+    # The COUNTS that did not move -- benchmark_count 11, matched rows 35,
+    # not_evaluable 4, excluded_fitted_rows 2 (both would-have-been hits) -- are what
+    # identify this as one row leaving its interval rather than an accounting change.
+    assert (coverage["hits"], coverage["total"]) == (0, 3), (
         f"Honest external-literature coverage moved to "
-        f"{coverage['hits']}/{coverage['total']}, published as 1/3."
+        f"{coverage['hits']}/{coverage['total']}, published as 0/3 (1/3 before Wave S1b). "
+        f"If this rises, verify it is the model getting closer and not the interval getting "
+        f"wider -- check `median_ci_width_log10` in the same breath."
     )
     assert coverage["not_evaluable"] == 4, (
         f"not_evaluable moved to {coverage['not_evaluable']}, published as 4. Rows that "
@@ -346,10 +361,16 @@ def test_honest_external_literature_coverage_is_1_of_3_with_fitted_rows_excluded
     # interval-width change. Companion widths moved the OTHER way: fitted_row
     # 2.2767 -> 2.2083, internal_synthetic 3.6929 -> 3.5612, because on those rows the
     # extra channels concentrate the allocation rather than spreading it.
-    # (History: 0.8558 under Wave O, 0.8495 under Wave P.)
-    assert coverage["median_ci_width_log10"] == pytest.approx(0.9463, abs=5e-4), (
+    # (History: 0.8558 under Wave O, 0.8495 under Wave P, 0.9463 under Wave S1.)
+    # RE-PINNED 2026-08-27 (Wave S1b): 0.9463 -> 0.7460 dex. The interval NARROWED by 1.27x
+    # and coverage fell 1/3 -> 0/3 at the same time. Read those two together: this is not
+    # the reassuring case (tighter intervals, same coverage) -- it is the interval tightening
+    # around a point prediction that moved further from the measurement. Companion widths
+    # moved the other way again: fitted_row 2.2083 -> 2.9573, internal_synthetic
+    # 3.5612 -> 4.1780.
+    assert coverage["median_ci_width_log10"] == pytest.approx(0.7460, abs=5e-4), (
         f"Median CI width moved to {coverage['median_ci_width_log10']:.4f} dex from the "
-        f"published 0.946. A coverage rate that improves while this widens is the interval "
+        f"published 0.746. A coverage rate that improves while this widens is the interval "
         f"getting looser, not the model getting better."
     )
 
@@ -525,8 +546,8 @@ def test_holdout_scores_1_of_5_genuine_extrapolations_at_the_pre_widening_prior(
 # --------------------------------------------------------------------------------------
 
 
-def test_pentose_hexose_mft_ordering_is_7_78x_not_the_retired_6_15x_3_39x_8_98x_or_15_8x():
-    """PENTOSE >> HEXOSE 7.78x (ribose 824.7 ppb vs glucose 106.0 ppb at matched conditions).
+def test_pentose_hexose_mft_ordering_is_8_26x_not_the_retired_18_27x_7_78x_6_15x_3_39x_8_98x_or_15_8x():
+    """PENTOSE >> HEXOSE 8.26x (ribose 169.1 ppb vs glucose 20.5 ppb at matched conditions).
 
     RE-PINNED 2026-08-27 (Wave N -- MFT ROUTE CORRECTION). Was 8.98x (ribose 981.3), and
     15.8x before that. CAUSE: the norfuraneol -> MFT step was retired on isotope evidence
@@ -587,28 +608,68 @@ def test_pentose_hexose_mft_ordering_is_7_78x_not_the_retired_6_15x_3_39x_8_98x_
     # reaches the number instead of being discarded by the propagator -- but the gap
     # between two barriers still carries a third of the claim, and the hexose limb still
     # runs the demoted one-step lump.
-    assert ribose_ppb == pytest.approx(824.7, rel=0.01), (
-        f"Ribose MFT moved to {ribose_ppb:.1f} ppb from the published 824.7 "
-        f"(686.8 after the Wave P refit, 370.3 after the Wave N route correction, "
+    # RE-PINNED 2026-08-27 (Wave S1b -- THE pH / WATER-ACTIVITY ROUTING REPAIR).
+    # NO BARRIER MOVED. 7.78x -> 18.27x, and THIS IS EMPHATICALLY NOT IMPROVED SUGAR
+    # DISCRIMINATION -- it is the denominator collapsing. BOTH absolute numbers FELL:
+    # ribose 824.7 -> 374.0 ppb, glucose 106.0 -> 20.5 ppb. CAUSE: at aw 0.98 the
+    # water-activity correction now reaches the sulfur families, and the hexose limb runs
+    # `Thiol_Addition_Hexose_Legacy_Shortcut`, a lumped step that sheds THREE waters, while
+    # the pentose limb runs `Deoxyosone_Reduction` + `Thiol_Addition_Pentodiulose`. The
+    # hexose route is penalised harder, so the ratio rose while the chemistry got no better.
+    # Re-measured decomposition, in-process, setting `thiol_addition_pentodiulose` equal to
+    # `thiol_addition_hexose` (29.65):
+    #     shipped (26.35 vs 29.65)   ribose 374.03 / glucose 20.47 = 18.2744x
+    #     equalised                  ribose  87.31 / glucose 20.47 =  4.2659x
+    # History of the structural split: 1.13x of 3.39x (Wave N), 2.31x of 6.15x (Wave P),
+    # 3.14x of 7.78x (Wave S1), 4.27x of 18.27x (Wave S1b).
+    # RE-PINNED 2026-08-27 (Wave S2c -- THE HOFMANN ANCHOR RETIREMENT). 18.27x -> 8.2607x,
+    # ribose 374.0 -> 169.1 ppb, GLUCOSE UNCHANGED at 20.5 ppb. THE RATIO FELL BY MORE THAN
+    # HALF AND IS PINNED LOWER; nothing was tuned to hold it up.
+    # CAUSE: `thiol_addition_pentodiulose` was REVERTED 26.35 -> 28.60 (the un-fitted Wave N
+    # class value) because the Wave P refit that produced 26.35 had exactly one fit target,
+    # `cys_ribose_140C_Hofmann1998`, and Wave S2b showed that benchmark's MFT 342 / FFT 200 ppb
+    # are a REPO-INTERNAL DERIVATION -- interior points of two invented mol % bands in
+    # data/benchmarks/maillard_validation_benchmarks.md section 1.3, committed in the SAME
+    # commit as the benchmark JSON. Only the PENTOSE limb runs that barrier, which is exactly
+    # what identifies the cause: glucose does not move at all.
+    # THE CLAIM IS SMALLER BUT ITS EVIDENCE IS BETTER, and both halves must be reported:
+    #     shipped (28.60 vs 29.65)   ribose 169.08 / glucose 20.47 =  8.2607x
+    #     equalised (both 29.65)     ribose  87.31 / glucose 20.47 =  4.2659x
+    # so the STRUCTURAL share is unchanged at 4.27x while the total fell, i.e. the fraction of
+    # the ordering carried by mechanism rather than by a barrier gap went from 23% (4.27 of
+    # 18.27) to 52% (4.27 of 8.26). The residual gap is now the 1.05 kcal/mol between an
+    # ESTIMATED class value and an unconstrained legacy fit, not the 3.30 kcal/mol between a
+    # FITTED barrier and an unconstrained legacy fit -- and no part of the claim now traces to
+    # a number this repository invented. The hexose limb still runs the demoted one-step lump.
+    # STILL BELOW THE 8.98x IT SAT AT AFTER WAVE N, and the 3.0x floor in
+    # test_pentose_hexose_sulfur_ordering.py is now 2.75x away rather than 6x away.
+    assert ribose_ppb == pytest.approx(169.1, rel=0.01), (
+        f"Ribose MFT moved to {ribose_ppb:.1f} ppb from the published 169.1 (374.0 under "
+        f"Wave S1b, 824.7 under Wave S1, "
+        f"686.8 after the Wave P refit, 370.3 after the Wave N route correction, "
         f"981.3 before it)"
     )
-    assert glucose_ppb == pytest.approx(106.0, rel=0.01), (
-        f"Glucose MFT moved to {glucose_ppb:.1f} ppb from the published 106.0 (111.6 "
+    assert glucose_ppb == pytest.approx(20.5, rel=0.01), (
+        f"Glucose MFT moved to {glucose_ppb:.1f} ppb from the published 20.5 (106.0 under "
+        f"Wave S1, 111.6 "
         f"under Wave P, 109.3 before it). The hexose limb still runs the demoted one-step "
         f"lump; it FELL under Wave S1 because the additive propagator gives the parallel "
         f"sulfur channels a larger share of the same fixed volatile budget, so a LARGE "
-        f"move here has a different cause than a move in the ribose value."
+        f"move here has a different cause than a move in the ribose value. Wave S2c's "
+        f"barrier revert left it untouched, which is what identified the cause."
     )
-    assert ratio == pytest.approx(7.78, rel=0.01), (
-        f"Pentose/hexose MFT ratio is {ratio:.2f}x, published as 7.78x. If it moved, do "
+    assert ratio == pytest.approx(8.26, rel=0.01), (
+        f"Pentose/hexose MFT ratio is {ratio:.2f}x, published as 8.26x. If it moved, do "
         f"not report it as changed sugar discrimination without first re-measuring the "
-        f"structural share -- only 3.14x of this ratio survives setting "
+        f"structural share -- only 4.27x of this ratio survives setting "
         f"`thiol_addition_pentodiulose` equal to `thiol_addition_hexose`; the rest is the "
-        f"gap between a fitted barrier and an unconstrained legacy fit."
+        f"gap between an estimated class value and an unconstrained legacy fit. And if it "
+        f"ROSE, check first whether a constant was refitted against "
+        f"cys_ribose_140C_Hofmann1998, whose values are not measurements."
     )
 
     for doc, path in (("README.md", README), ("AUDIT.md", AUDIT)):
-        _assert_quoted(_doc_text(path), "7.78", doc, "the pentose/hexose ordering margin")
+        _assert_quoted(_doc_text(path), "8.26", doc, "the pentose/hexose ordering margin")
 
 
 # --------------------------------------------------------------------------------------
@@ -675,8 +736,8 @@ def _no_verifiable_source_census():
     return census
 
 
-def test_no_verifiable_source_census_is_102_records_80_numeric_62_reaching_runtime():
-    """no_verifiable_source: 102 flagged · 80 carrying numbers · 62 of those reaching runtime.
+def test_no_verifiable_source_census_is_120_records_98_numeric_80_reaching_runtime():
+    """no_verifiable_source: 120 flagged · 98 carrying numbers · 80 of those reaching runtime.
 
     Pinned 2026-08-27 against README.md's "On literature provenance" note. The three
     numbers are pinned separately because they fail for different reasons and a maintainer
@@ -694,9 +755,30 @@ def test_no_verifiable_source_census_is_102_records_80_numeric_62_reaching_runti
     count that actually matters: an unverifiable citation attached to a number the runtime
     consumes is a fabricated parameter, not merely a bad footnote.
 
+    RE-PINNED 2026-08-27 (Wave T3): 102/80/62 -> 120/98/80. This is the SECOND rise in one
+    day and, like the first, it is a labelling change, not a data change. Eighteen records
+    that were already shipping unverifiable numbers were finally labelled:
+
+      * 15 in `data/lit/protein_source_registry.json` -- the file-level record plus all 14
+        protein-source profiles. That file has always described itself as "Mocked values for
+        14 protein sources based on Report 06 requirements", but the sentence sat in a JSON
+        field nothing read while the numbers underneath it drove `matrix_uncertainty_factor`
+        and the meaty-potential score at prediction time (Wave T1 finding T1-01).
+      * 2 in `data/lit/retention_reference_payloads.json` -- the two `runtime_surrogate`
+        blocks whose `log_slope = 0.235` is exactly ln(1.60)/2, back-solved from an invented
+        "~55-65%" band in an in-repo brief (T1-02).
+      * 1 in `data/lit/computational_priors.json` -- `ref41_ppi_sulfur_volatile_binding_v1`,
+        which cited reference *number* 41 inside an LLM research dump (T1-08).
+
+    NO VALUE WAS ADDED, CHANGED OR INVENTED IN THAT WAVE. All 18 are in data/lit and all
+    carry numbers, so the runtime figure moves with the total: 62 -> 80. The honest reading
+    is that 80 was always the true runtime figure and 62 was an undercount.
+
     All three counts are expected to FALL as anchors get verified. When they do, re-pin here
-    and in README.md in the same change. They must never rise silently -- a rise means new
-    unverifiable numbers entered the registries.
+    and in README.md in the same change. A rise is only acceptable when it is a LABELLING
+    correction of numbers that were already shipping, and the re-pin must say which records
+    moved and why -- a rise with no such account means new unverifiable numbers entered the
+    registries.
     """
     census = _no_verifiable_source_census()
 
@@ -708,27 +790,27 @@ def test_no_verifiable_source_census_is_102_records_80_numeric_62_reaching_runti
         if path.startswith("data/lit/")
     )
 
-    assert total == 102, (
-        f"Repo-wide no_verifiable_source count is {total}, published as 102. "
+    assert total == 120, (
+        f"Repo-wide no_verifiable_source count is {total}, published as 120. "
         f"Per file: { {k: v[0] for k, v in census.items()} }"
     )
-    assert numeric == 80, (
-        f"{numeric} flagged records carry numeric payloads, published as 80."
+    assert numeric == 98, (
+        f"{numeric} flagged records carry numeric payloads, published as 98."
     )
-    assert runtime == 62, (
+    assert runtime == 80, (
         f"{runtime} flagged records with numeric payloads sit in data/lit and therefore "
-        f"reach the runtime, published as 62. If a data/qm record becomes runtime-reachable "
+        f"reach the runtime, published as 80. If a data/qm record becomes runtime-reachable "
         f"this number must rise and the README's 'none of those 18 reach the model' claim "
         f"becomes false."
     )
 
     readme = _doc_text(README)
-    _assert_quoted(readme, "102 records", "README.md", "the no_verifiable_source census")
-    _assert_quoted(readme, "80 carry numeric payloads", "README.md", "the numeric subset")
-    _assert_quoted(readme, "62", "README.md", "the runtime-consumed subset")
+    _assert_quoted(readme, "120 records", "README.md", "the no_verifiable_source census")
+    _assert_quoted(readme, "98 carry numeric payloads", "README.md", "the numeric subset")
+    _assert_quoted(readme, "80 of those are", "README.md", "the runtime-consumed subset")
 
 
-def test_the_data_qm_records_that_moved_the_census_from_84_to_102_are_still_counted():
+def test_the_data_qm_records_that_moved_the_census_from_84_to_102_are_still_counted():  # noqa: N802
     """Pins the 84 (data/lit) + 18 (data/qm) = 102 split, not just the total.
 
     Separate from the census test above on purpose. A total of 102 can be preserved while
@@ -756,7 +838,13 @@ def test_the_data_qm_records_that_moved_the_census_from_84_to_102_are_still_coun
     in_lit = sum(
         flagged for path, (flagged, _) in census.items() if path.startswith("data/lit/")
     )
-    assert in_lit == 84, (
-        f"data/lit carries {in_lit} flagged records, measured as 84 on 2026-08-27 (the "
-        f"figure the README published before data/qm was brought into scope)."
+    # RE-PINNED 2026-08-27 (Wave T3): 84 -> 102. The data/qm side of the split is UNCHANGED
+    # at 18, which is what this test exists to protect. The data/lit side rose because Wave
+    # T3 labelled 18 already-shipping records (15 protein_source_registry, 2
+    # retention_reference_payloads runtime_surrogate blocks, 1 ref41) -- see the census test
+    # above for the full account. Total is now 102 + 18 = 120.
+    assert in_lit == 102, (
+        f"data/lit carries {in_lit} flagged records, measured as 102 on 2026-08-27 after "
+        f"Wave T3's labelling pass (it was 84 before that pass, and 84 is still the figure "
+        f"the README published before data/qm was brought into scope)."
     )

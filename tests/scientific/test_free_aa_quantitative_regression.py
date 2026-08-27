@@ -46,6 +46,13 @@ from src.benchmark_validation import evaluate_benchmark, evaluate_benchmark_payl
 # every regenerated artifact. Closing this gap means fixing the allocation layer, not
 # widening these numbers.
 #
+# CORRECTED 2026-08-27 (Wave S2c): the sentence above calling this benchmark "the only
+# surviving literature constraint on that branch" is FALSE and is kept because it records
+# what the repo believed. It was never a literature constraint -- see the Wave S2c block on
+# the MFT band below. The contract described as UNTOUCHED is now RETIRED (not widened), and
+# the tier is demoted PRIMARY -> REFERENCE.
+# THE SULFUR BRANCH HAS ZERO ABSOLUTE LITERATURE ANCHORS.
+#
 # RE-DERIVED AGAIN 2026-08-27 (Wave I fix 8 + fix 12). The Wave H numbers above are now
 # WRONG, and the reason matters more than the new numbers do, so it is recorded here
 # rather than folded away:
@@ -77,9 +84,10 @@ from src.benchmark_validation import evaluate_benchmark, evaluate_benchmark_payl
 # The direction also changed, which is why this table now carries one: MFT still
 # under-predicts, FFT now OVER-predicts slightly. The bands stay deliberately wide (they
 # are drift guards, not accuracy claims) and the benchmark's own contract still FAILS --
-# as of the 2026-08-27 Wave S1 additive-propagator fix, max_ratio 1.4864 against a 1.45
-# threshold (OUTSIDE) and MALE 0.1267 against 0.09 (OUTSIDE), i.e. it is back to failing
-# on BOTH criteria. (History: 1.4110 / 0.0935 after the Wave P refit -- one criterion;
+# as of the 2026-08-27 Wave S1b pH/aw routing repair, max_ratio 2.2086 against a 1.45
+# threshold (OUTSIDE) and MALE 0.2352 against 0.09 (OUTSIDE), i.e. it fails BOTH criteria
+# by more than before. (History: 1.4864 / 0.1267 after the Wave S1 additive propagator;
+# 1.4110 / 0.0935 after the Wave P refit -- one criterion;
 # 2.2519 / 0.2192 after the Wave N route correction; 1.4533 / 0.1019 under Wave I.)
 # Nothing here turns a failing benchmark into a passing one, and where an earlier wave's
 # improvement was FIT RECOVERY on a declared fit target it is still labelled as such --
@@ -144,16 +152,65 @@ BENCHMARK_EXPECTED_FOLD_ERRORS = {
         # MFT down with it, and re-fitting a barrier to absorb a propagator change is
         # exactly the move this campaign exists to remove.
         #
-        # 2026-08-27 (Wave S1): measured 283.59 vs 342 ppb (was 242.38 under Wave P,
-        # 151.87 under Wave N, 235.32 under Wave I). Upper bound carries the Wave P pin's
-        # RELATIVE span (x1.240); the lower bound is clipped at 1.00 because a symmetric
-        # fold error cannot go below it, which makes this side STRICTER, not looser.
-        "2-methyl-3-furanthiol": (1.00, 1.206, 1.50, "under"),
-        # 2026-08-27 (Wave S1): measured 297.28 vs 200 ppb (was 217.99 under Wave P,
-        # 243.72 under Wave N, 219.96 under Wave I). Still an OVER-prediction; the
-        # direction did not change. Upper bound carries the Wave P pin's relative span
-        # (x1.3119), so this is a re-centring, not a loosening.
-        "2-furfurylthiol": (1.00, 1.486, 1.95, "over"),
+        # RE-DERIVED 2026-08-27 (Wave S1b -- THE pH / WATER-ACTIVITY ROUTING REPAIR).
+        # NO CONSTANT MOVED. `get_ph_multiplier`, the enolisation route-selection term, had
+        # never been called on the prediction path; it now is. At this benchmark's pH 5.0
+        # it boosts `Enolisation_1_2` (the 3-deoxyosone -> furfural/FFT arm) 4.5x and leaves
+        # `Enolisation_2_3_Amadori` (the 1-deoxyosone -> MFT arm) at ~1.0, so the fixed
+        # volatile budget moves from MFT to FFT:
+        #     MFT 283.59 -> 154.85 ppb vs 342   1.2060x under -> 2.2086x under  (WORSE)
+        #     FFT 297.28 -> 267.50 ppb vs 200   1.4864x over  -> 1.3375x over   (better)
+        # DO NOT READ THE MFT ROW AS A CONFLICT WITH A MEASUREMENT. Wave S1b's first
+        # draft of this comment did, and Wave S2b (same day) showed that was wrong: the
+        # 342 / 200 ppb targets were derived INSIDE THIS REPOSITORY from
+        # data/benchmarks/maillard_validation_benchmarks.md section 1.3, an
+        # abstract-reconstructed range table (MFT ~0.02-0.05 mol %, FFT ~0.01-0.03 mol %)
+        # committed in the SAME commit as the benchmark file. 342 and 200 are interior
+        # points of two INVENTED and OVERLAPPING bands (MFT 228-571 ppb, FFT 114-342 ppb),
+        # so the MFT > FFT ordering is an artifact of midpoint selection, and the
+        # 1.45x / 0.09 dex contract is ~1.7x tighter than its own source band. The
+        # mechanism above is real and the degradation is real; what is NOT available is a
+        # measurement to say the model is wrong about it. See
+        # `content_verification_note.wave_s2_followup` in the benchmark file and the
+        # '## Wave S2b' section of tasks/audit_remediation.md.
+        #
+        # RE-DERIVED 2026-08-27 (Wave S2c -- THE ANCHOR RETIREMENT AND THE BARRIER REVERT).
+        # THIS IS NOT A CHEMISTRY CHANGE. Wave S2b settled where 342 / 200 came from and the
+        # answer is: from this repository. The two values are interior points of two invented,
+        # OVERLAPPING mol % bands in data/benchmarks/maillard_validation_benchmarks.md
+        # section 1.3, an abstract-reconstructed table committed in c7efbbc -- the SAME commit
+        # that created the benchmark JSON. On the file's declared (unattested) 10 mM basis with
+        # MW 114.17: 0.0300 mol % -> 342.5 -> 342 ppb, and the FFT band's geometric mean
+        # 0.017321 mol % -> 197.8 -> 200 ppb. ~90% confidence, arithmetic exact.
+        # CONSEQUENCE EXECUTED HERE: `thiol_addition_pentodiulose` REVERTED 26.35 -> 28.60 (the
+        # un-fitted Wave N class value) and results/validation/sulfur_barrier_refit_pentodiulose
+        # RETRACTED, because that refit's sole target was this benchmark. The benchmark's own
+        # 1.45x / 0.09 dex contract is RETIRED -- not widened -- and its tier demoted
+        # PRIMARY -> REFERENCE; it now inherits the global free-precursor default 1.5x / 0.10 dex
+        # and fails it by more: max_ratio 4.3797, MALE 0.4041 dex.
+        # WHAT THESE BANDS MEAN NOW, stated so nobody over-reads them: they are drift guards on
+        # the model's own output, measured against a number this repository invented. They can
+        # detect a silent change in the sulfur lane. They cannot say anything about accuracy,
+        # in either direction, and no wave may cite this benchmark's fold error as agreement or
+        # disagreement with literature. THE SULFUR BRANCH HAS ZERO ABSOLUTE LITERATURE ANCHORS.
+        # 2026-08-27 (Wave S2c): measured 78.09 vs 342 ppb (was 154.85 under Wave S1b, 283.59
+        # under Wave S1, 242.38 under Wave P, 151.87 under Wave N, 235.32 under Wave I). The
+        # band carries the SAME RELATIVE SPAN as the Wave S1b pin (x1.244 up, clipped at 1.00
+        # down), so it is a re-centring on a much WORSE number, not a loosening.
+        "2-methyl-3-furanthiol": (1.00, 4.380, 5.45, "under"),
+        # 2026-08-27 (Wave S1b): measured 267.50 vs 200 ppb (was 297.28 under Wave S1,
+        # 217.99 under Wave P, 243.72 under Wave N, 219.96 under Wave I). Still an
+        # OVER-prediction; the direction did not change, and this is the half of the pair
+        # that IMPROVED. The band is TIGHTENED to the Wave S1 pin's relative span applied
+        # to the smaller number (x1.312 -> upper 1.76), so improving here does not buy
+        # slack for the next wave.
+        # 2026-08-27 (Wave S2c): measured 293.67 vs 200 ppb (was 267.50 under Wave S1b, 297.28
+        # under Wave S1, 217.99 under Wave P, 243.72 under Wave N, 219.96 under Wave I). This
+        # half got WORSE again under the barrier revert -- the two lanes share their upstream
+        # trunk, so lifting the MFT-lane barrier hands budget share to the FFT lane. Same
+        # relative span as the Wave S1b pin (x1.3154 up), applied to the larger number: a
+        # re-centring on a worse value, not a loosening.
+        "2-furfurylthiol": (1.00, 1.468, 1.93, "over"),
     },
 }
 
