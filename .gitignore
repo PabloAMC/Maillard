@@ -39,6 +39,11 @@ data/*
 !data/benchmarks/
 !data/protocols/
 !data/protocols/**
+# Campaign specs referenced by docs/guides/QUICKSTART.md. `data/*` above hides
+# the directory outright, and git will not descend into an excluded directory,
+# so the later `!data/**/*.yml` rule cannot reach these files on its own.
+!data/campaigns/
+!data/campaigns/**
 
 # Ignore generated markdown pipeline outputs
 data/lit/deep_research_candidate_registry.json
@@ -68,6 +73,26 @@ results/*
 !results/validation/
 results/validation/*
 !results/validation/experiment_brief_cards.html
+# Audit 2026-08-26: the external hold-out evidence must be reviewable without a
+# Docker run — track it alongside the in-panel artifacts.
+!results/validation/external_validation_report.json
+!results/validation/external_validation_report.md
+# Audit evidence artifacts (2026-08-26): tracked so the derivations are reviewable.
+!results/validation/matrix_sigma_residual_derivation.json
+!results/validation/matrix_sigma_residual_derivation.md
+!results/validation/citation_verification_ledger.json
+!results/validation/citation_verification_ledger.md
+# Wave H evidence artifacts (2026-08-27): the two refits and the family-implementation
+# enumeration are cited from source comments and from the README, so they must be
+# reviewable without a run.
+!results/validation/sulfur_barrier_refit_hofmann.json
+!results/validation/sulfur_barrier_refit_hofmann.md
+!results/validation/hydrolysate_observability_rederivation.json
+!results/validation/hydrolysate_observability_rederivation.md
+!results/validation/family_implementation_status.json
+!results/validation/family_implementation_status.md
+!results/validation/projection_constant_refit.json
+!results/validation/projection_constant_refit.md
 
 # Generated xTB artifacts (ignore generated path-search outputs)
 # Keep data/geometries tracked but ignore generated xTB results under xtb_inputs
@@ -77,4 +102,5 @@ data/geometries/xtb_inputs/**/product*.xyz
 data/geometries/xtb_inputs/**/reactant*.xyz
 data/geometries/xtb_inputs/**/xtbrestart*
 data/geometries/xtb_inputs/**/.sccnotconverged
-data/geometries/
+data/geometries/scratch/
+.claude/

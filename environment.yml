@@ -9,7 +9,11 @@ dependencies:
   - setuptools
   - pytest
   - hypothesis
-  - numpy>=2.0
+  # Upper bound pinned 2026-08-26: NumPy >=2.4 breaks PySCF 2.11.0 (the einsum_path
+  # contraction tuples changed arity; pyscf/lib/numpy_helper.py unpacks 4 elements and
+  # raises), which takes down the whole QM/DFT-refinement lane in tests/qm. Lift once
+  # PySCF ships a NumPy 2.4-compatible release.
+  - numpy>=2.0,<2.4
   - scipy
   - pandas
   - jupyter
