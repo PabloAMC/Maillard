@@ -8,10 +8,37 @@ so that the reaction-network model can eventually be calibrated and tested again
 
 ## Read this first
 
-**Nothing in this directory is wired into the model, the calibration, the registry, the
-priors, or any test.** These are inert data files. Adding one changes no model output.
-Each file repeats this at the top. If that ever stops being true, this README must change
-with it.
+**This changed on 2026-08-27 (audit Wave S3). Two of these files are now a FIT CORPUS.**
+
+The previous version of this section said "nothing in this directory is wired into the
+model, the calibration, the registry, the priors, or any test", and required this README to
+change if that ever stopped being true. It has stopped being true, and here is the exact
+scope of it:
+
+| File | Status |
+|---|---|
+| `martins2005_glucose_glycine_80_100_120C_pH68.yml` | **IN THE FIT CORPUS** (glucose, DFG, 3-DG, 1-DG series) |
+| `martins2003_DFG_amadori_degradation.yml` | **IN THE FIT CORPUS**, pH 6.8 DFG series only; the pH 5.5 series is held out |
+| `martins2005_glucose_glycine_100C_pH68.yml` | not fitted — it is the same experiment as the 100 °C series of the file above, plotted in a second figure. Used only to measure the read-off reproducibility floor |
+| `brands_sugar_casein_120C_pH68.yml` | not fitted — endpoints, not trajectories |
+
+What consumes them: `scripts/generators/generate_trunk_rate_calibration.py`, which fits the
+eight-step trunk in `src/trunk_kinetics.py` and writes
+`results/validation/trunk_rate_calibration_refit.{json,md}`. The fit is machine-declared in
+that artifact's `fit_target_files` block and is read by `scripts/ci/fit_target_gate.py`
+(which was extended in the same wave to strip `.yml`/`.yaml`, not only `.json`, from a
+declared fit target — before that a YAML corpus declaration was accepted but inert).
+
+**What is still true, and matters more:** *no shipped prediction changed.* The fitted
+constants live in a dedicated calibration lane that no module under `src/` imports —
+`tests/scientific/test_wave_s3_trunk_kinetics.py` asserts exactly that, so the day someone
+wires it into a prediction path, a test fails and says so. The individual file headers still
+say "NOTHING IN THIS FILE IS WIRED INTO THE MODEL OR THE CALIBRATION"; for the two fitted
+files that sentence is now **superseded by this table**, and the fit is the reason.
+
+**This repository has been burned by invented literature values**, which is why the
+paragraph below still stands and why the fit was built to be auditable rather than
+convenient.
 
 **This repository has been burned by invented literature values.** See `AUDIT.md` at the
 repository root: a 2026-08 audit found roughly 30–45% citation contamination across the

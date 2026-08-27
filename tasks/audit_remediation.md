@@ -6048,3 +6048,403 @@ Targeted tests only, per the owner directive (**no full-suite run**):
 `tests/scientific/test_wave_u_maillard_path_holdout.py` **38 passed**. No existing test was
 re-pinned, because no shipped number moved: this wave added data, one generator, one gitignore
 negation and one guard check, and edited no module under `src/`.
+
+---
+
+## Wave S3 — the first RATE-LEVEL calibration of the sugar trunk (2026-08-27)
+
+Every barrier in this repository had, until this wave, been either an endpoint fit, a
+literature midpoint, or an estimate by analogy. Nothing had ever been fitted to a measured
+**trajectory**. Wave Q's 767 point-verified concentration-time values made that possible for
+the first time; this wave spends them.
+
+### (0) PRE-REGISTERED PREDICTION — written before the hold-out was re-scored
+
+The mission required predicting which of Wave U's three named structural errors a trunk rate
+calibration could move, *before* measuring. Recorded here first, at the point in the wave
+where the fit existed and the hold-out had not been re-run. Scored in section (e).
+
+The predictions follow from one mechanical fact established by reading the screening lane
+end to end (`src/barrier_constants.py:804` → `benchmark_validation.py:662-673` →
+`recommend.py:1179, 1211-1224, 910, 952` → `projection.py:170-223`):
+
+> **The FAST screening lane consumes barriers ONLY as branching ratios.** The predicted
+> total ppb is `total_volatile_budget_molar × mole_fraction × MW × 1e6`, and
+> `total_volatile_budget_molar` comes from `projection.py:170-223`, which never sees a
+> barrier — it is built from the limiting precursor molarity, the duration, and a *separate*
+> apparent Ea of 120 kJ/mol. The flux is additionally normalised twice
+> (`recommend.py:910` by `max_weight`, `:952` by `total_activity`). Measured: applying a
+> uniform +2 / +5 / +10 kcal/mol shift to every barrier changes the total predicted ppb by
+> under 0.4%, all of it molecular-weight re-weighting.
+
+| # | Wave U structural error | Prediction | Confidence |
+|---|---|---|---|
+| 1 | **Sulfur T-dependence backwards** (MFT measured ×0.249 across 100→130 °C, model ×4.55) | **Not fixed.** The temperature dependence of the magnitude is set by `projection.py`'s own 120 kJ/mol apparent Ea, which no trunk parameter touches. Trunk barriers can shift the sulfur branching ratio versus its competitors, and that ratio is T-dependent, so the number may *move* — but nothing in a sugar-trunk fit knows the sign of the sulfur error. | ~85% not fixed; direction of any movement not predicted |
+| 2 | **Acrylamide ~40× under-responsive in time** (×52.1 measured, ×1.24 predicted over 10→30 min) | **Cannot be fixed, structurally.** The budget is `1 − exp(−k_app·t)` with `k_app·t ≈ 3e-3 ≪ 1`, i.e. **linear in t**. The ceiling on the model's response to a 3× time change is therefore ×3, against a measured ×52. No barrier value anywhere can lift a linear response to a 52-fold one. | ~95% |
+| 3 | **Furfural and HMF share one pH term** (both move by exactly ×0.774) | **Unchanged.** The entire fit corpus sits at a single pH (6.8). No pH parameter is fitted, and the shared term lives in `_ionization_correction` / `_enolisation_route_ph_correction`, which this wave does not touch. | ~95% exactly unchanged |
+| — | **Median fold error (6.0388×)** | Moves little. Magnitudes are budget-driven and barrier-invariant to first order; only branching ratios can move, and only where a route crosses the `_temporal_accessibility` saturation threshold. | predicted \|Δ median\| < 20% |
+| — | **The structural zero** (glucose alone → 0.0 vs 17 400 ppb) | **Stays zero.** No amino acid means no condensation step, so the trunk never starts. A rate calibration cannot create a caramelization lane that does not exist. | ~99% |
+| — | **Directional panel** (21/29; pH 4/7, aw 0/3) | pH and aw rows exactly unchanged (no pH or aw parameter fitted). Headline moves by at most ±1. | ~90% |
+
+**The honest summary of that table: this wave was predicted, in advance, to be a calibration
+that the hold-out cannot see.** That prediction is itself the finding — it says the
+repository's absolute accuracy problem does not live in its barriers.
+
+### (a) LANE — the fit does not live in either shipped lane, and that was measured
+
+Three candidate lanes existed. Each was tested by running it, not by reading it.
+
+**The FAST screening lane cannot be fitted to a trajectory because it has no time axis.**
+Tracing `src/barrier_constants.py:804` → `benchmark_validation.py:662-673` →
+`recommend.py:1179, 1211-1224, 910, 952` → `projection.py:170-223`: there is no ODE solver
+anywhere in `src/` (`grep -rn "solve_ivp\|odeint\|scipy.integrate" src/` returns nothing).
+Two findings fell out of that trace and both matter later:
+
+* **The per-family prefactor cancels exactly.** `conditions.get_rate_constant` multiplies by
+  `A(family)`; `effective_barrier_from_rate_constant` on the next line divides by the same
+  `A(family)`. Measured: `bar_eff = Ea − RT·ln(multiplier)`, identically, for every family.
+  Every `A_value` in `data/lit/arrhenius_params.yml` is **dead in the screening lane**.
+* **The one surviving absolute rate is family-agnostic.** `recommend.py:1216` calls
+  `get_reference_pre_exponential()` with **no argument**, so every family gets the 1e11
+  default regardless of its YAML entry.
+
+**The Cantera export lane integrates ODEs but cannot represent the experiment.** Four
+blockers, all measured at HEAD b2a1b20 on glucose + glycine:
+
+1. **THE INITIAL MOLARITY IS DISCARDED.** `src/kinetics.py:373` does
+   `phase.X = initial_concentrations`; Cantera normalises `X` to sum to one, so only the
+   *ratio* survives and the absolute scale comes from Girolami molar-volume estimates.
+   **Measured: feeding 0.02 M, 0.2 M and 2.0 M gives bit-identical trajectories** (Amadori
+   at 9000 s = 1.93585 kmol/m³ in all three), against a t=0 glucose concentration of
+   2.546 mol/L that nobody asked for. A bimolecular constant cannot be fitted through that.
+2. **Four of the ten measured species do not exist in the network** — no fructose (no Lobry
+   de Bruyn isomerisation step at all), no formic acid, no acetic acid, no melanoidins.
+3. **The YAML lumps the enolisations.** `_arrhenius_yaml_key` maps `1,2-enolisation`,
+   `2,3-enolisation` and `enolisation_intermediate` onto one `enolisation` A/Ea pair — three
+   separately-measured steps forced to share one rate.
+4. **The YAML barrier is not even the operative number.** `cantera_export.py:161` does
+   `barrier_kcal = max(barrier_kcal, float(barrier_lit))` — a max against the FAST barrier,
+   not an assignment — after which every step is marked reversible with its equilibrium set
+   by Joback-estimated NASA polynomials.
+
+**So the fit lives in a third, dedicated lane: `src/trunk_kinetics.py`.** Explicit
+mass-action ODEs, `solve_ivp`, native units (mmol/L, minutes, kJ/mol), no thermo estimation,
+no gating. Eight steps, six species. Distorting a shipped lane to make it fittable would
+have been worse than the disease. **No module under `src/` imports it**, and
+`test_wave_s3_trunk_kinetics.py` asserts that by scanning the tree, so the day it becomes
+false a test says so.
+
+### (b) FITTED PARAMETERS — every one with its CI and its constraint status
+
+Corpus: `martins2005_glucose_glycine_80_100_120C_pH68.yml` (glucose, DFG, 3-DG, 1-DG at
+80/100/120 °C) plus the **pH 6.8 series of `martins2003_DFG_amadori_degradation.yml`** — an
+experiment on *isolated* DFG that separates the Amadori compound's decomposition from its own
+formation, which is what makes the branch split identifiable at all. **176 values, 16 free
+parameters.** Multi-response weighted least squares on `log(y + floor)`; floors from each
+file's own stated read-off uncertainty; **sigmas estimated from the replicate scatter in the
+data itself** (glucose 0.016, DFG 0.040, 3-DG 0.076, 1-DG 0.118 in log space), not assumed.
+Arrhenius carried as (k at 100 °C, Ea) — Martins' own reparameterisation, because over an
+80-120 °C window A and Ea are too correlated for a fitted A to mean anything.
+
+| step | repo family | k(100 °C) | 95% CI | Ea kJ/mol | 95% CI | status |
+|---|---|---:|---|---:|---|---|
+| `k_schiff` | `schiff_condensation` | 1.71e-05 L/(mmol·min) | 1.48e-05 – 1.97e-05 | 94.4 | 86 – 103 | **well constrained, both** |
+| `k_amadori` | `amadori_rearrangement` | 0.1536 /min | 0.104 – 0.226 | 34.7 | 13 – 57 | constrained |
+| `k_dfg_3dg` | `enolisation_intermediate` | 6.46e-03 /min | 3.96e-03 – 1.05e-02 | 144.8 | 116 – 174 | constrained |
+| `k_dfg_1dg` | `2,3-enolisation` | 3.05e-02 /min | 5.58e-03 – 0.167 | 73.0 | 15 – 131 | weak (30× band) |
+| `k_dfg_other` | *(none — structural gap)* | 4.31e-03 /min | 2.95e-08 – 630 | 89.5 | **−314 – 493** | **SLOPPY / Ea sign unconstrained** |
+| `k_3dg_out` | `1,2-enolisation` (lump) | 0.1047 /min | 0.0568 – 0.193 | 135.6 | 96 – 176 | constrained |
+| `k_1dg_out` | `furanone_amino_acid_reduction` (lump) | 3.031 /min | 0.534 – 17.2 | 40.1 | **−21 – 101** | weak / Ea sign unconstrained |
+| `k_glc_other` | *(none — structural gap)* | 2.71e-04 /min | 4.31e-05 – 1.70e-03 | 146.1 | 26 – 266 | weak |
+
+**Three honesty items about that table, none of them cosmetic.**
+
+1. **Reduced χ² = 14.69.** The sigmas are the data's own replicate scatter, so this says the
+   model's systematic error runs **3.8× the measurement noise**. Every CI above has been
+   widened by that factor; unscaled Gauss-Newton intervals would have been 3.8× too tight
+   and would have called five of these parameters "well constrained".
+2. **An Ea confidence interval that reaches below zero is not a wide interval, it is no
+   interval.** A negative Arrhenius Ea is unphysical, so `k_dfg_other` and `k_1dg_out` have
+   *no determined temperature dependence*, and the report says exactly that rather than
+   printing a tidy number. The three sloppiest Hessian eigendirections (eigenvalues 2.3e-05,
+   2.8e-04, 1.3e-03 against a condition number of 5.6e+08) are **all** Ea directions —
+   `Ea k_dfg_other`, `Ea k_glc_other`, and the `Ea k_1dg_out`/`Ea k_dfg_1dg` pair. The rates
+   are what this data constrains; several of the activation energies are not.
+3. **Only 1 of 60 random starts reached the optimum, and the first version of this fit
+   reported the wrong one.** The Schiff/Amadori profile re-optimises 15 of 16 parameters at
+   each of 20 fixed ratios, which sweeps the surface far more widely than the multi-start —
+   and it found a point **better than the reported optimum by Δcost 7.2**, i.e. the profile
+   would have been published with negative Δcost entries in it. Rather than tolerance it
+   away, the generator now adopts any such point, re-polishes all 16 parameters from it and
+   recomputes the profile, terminating only when a full profile finds nothing better
+   (`profile_informed_repolish_rounds: 1` in the artifact). This objective is rugged and the
+   record says so.
+
+**Fit quality, per response group:** median fold error 1.01–1.24× on all twelve
+glucose/glycine groups and 1.24–1.38× on the two isolated-DFG groups.
+
+**Two steps correspond to NO repository reaction family**, and are declared as gaps rather
+than folded into a neighbour. `k_glc_other` lumps the glucose→fructose isomerisation and the
+amine-independent fragmentation to organic acids — the repository's SMIRKS network emits
+**neither**, and at 100 °C they account for a large share of the measured glucose loss
+(glucose falls 70 mmol/L while glycine falls only 29). `k_dfg_other` is the DFG channel that
+does *not* regenerate glycine.
+
+### (c) CROSS-CHECK — one independent, one that only looks independent
+
+The distinction is load-bearing and is enforced in the artifact's own text.
+
+**Brands (2002), thesis Chapter 4 — GENUINELY INDEPENDENT.** Different amine (protein-bound
+lysine ε-amino, not free glycine), different sugar:amine ratio (10:1, not 1:1), different
+author, different data set, recovered by Wave S2. None of it entered the objective.
+
+| step | fitted @120 °C | Brands @120 °C | ratio | fitted Ea | Brands Ea |
+|---|---:|---:|---:|---:|---:|
+| condensation (sugar + amine → Amadori) | 8.04e-05 L/(mmol·min) | 2.4e-04 ± 2e-05 | **0.33×** | 94 | 114 ± 2 |
+| **TOTAL Amadori degradation** | 0.189 /min | 0.2805 | **0.67×** | — | 126 |
+
+**This is the wave's credibility test and it passes.** Two laboratories, two amines, two
+independent fits, agreeing to **1.5× on the Amadori degradation rate** and 3× on the
+condensation. The degradation row is the stronger of the two, because the fitted side is
+anchored by an isolated-DFG experiment Brands never ran.
+
+**Martins (2003) M4 — NOT INDEPENDENT, and labelled so everywhere it appears.** Martins
+fitted his constants to the very data fitted here; agreement is a *reproducibility* result —
+a different implementation, a different scheme and a different objective recovering the same
+rates — and is not evidence from a second experiment.
+
+| fitted step | Martins step(s) | fitted k(100 °C) | comparator | ratio |
+|---|---|---:|---:|---:|
+| `k_schiff` | 1 | 1.71e-05 | 1.61e-05 | **1.06×** |
+| `k_dfg_3dg` | 4 | 6.46e-03 | 1.11e-02 | 0.58× |
+| `k_dfg_1dg` | 7 | 3.05e-02 | 1.57e-02 | 1.94× |
+| `k_dfg_other` | 6 | 4.31e-03 | 7.08e-03 | 0.61× |
+| `k_3dg_out` | 5 + 9 | 0.1047 | 0.1969 | 0.53× |
+| `k_1dg_out` | 8 | 3.031 | 1.45 | 2.09× |
+| `k_glc_other` | 2 | 2.71e-04 | 1.64e-03 | 0.17× |
+
+**A units bug in this very table, caught and fixed, recorded because the repository has been
+burned by exactly this class of error.** Two of Martins' M4 steps are **bimolecular** — step
+1 (Glu + Gly → DFG) and step 9 (3-DG + Gly → melanoidins) — so their X values are in
+L/(mmol·min). The first draft compared step 9's 8.12e-4 directly against a first-order
+constant and reported a spurious **131× disagreement**; converting it to pseudo-first-order
+at the experiment's own 200 mmol/L glycine gives 0.53×. The generator now converts a
+bimolecular comparator **only** when the fitted step it faces is first-order, and records
+that it did.
+
+### (d) THE SCHIFF/AMADORI AUTHORITY INVERSION — RESOLVED. NEITHER FILE WAS RIGHT.
+
+Open as `[P]` since Wave I: `FAST_BARRIERS` says the Schiff condensation is ~2.0e4× faster
+than the Amadori rearrangement; `arrhenius_params.yml` says the Amadori rearrangement is
+~3.3e4× faster than the Schiff condensation — a disagreement of ~6.6e8 in the ratio about
+which of the first two steps of the entire cascade is rate-determining.
+
+**The Martins data measure the Amadori intermediate directly, and the isolated-DFG
+experiment measures its decomposition alone. The data decided.**
+
+The two steps can only be compared as pseudo-first-order rates, because the condensation is
+bimolecular and the rearrangement is not. At the experiment's own 200 mmol/L glycine, 100 °C:
+
+```
+    k_schiff × [Gly]  =  3.42e-03 /min      (condensation)
+    k_amadori         =  1.54e-01 /min      (rearrangement)
+    ratio             =  44.9               (Amadori faster)
+```
+
+A profile likelihood over that ratio — with `k_amadori` pinned and all 15 remaining
+parameters re-optimised at each point, from four starts each — gives a **95% interval of
+40–45**. Every decade from 0.1 to 1e6 outside it is rejected:
+
+| claim | ratio asserted | verdict | χ² statistic |
+|---|---:|---|---:|
+| `FAST_BARRIERS` (screening lane) | 5.0e-05 | **WRONG SIGN** | ~7.5e+04 |
+| `arrhenius_params.yml` (Cantera lane) | 3.3e+04 | right sign, **wrong by ~700×** | ~9.1e+02 |
+| **fitted** | **44.9** (40–45) | — | 0 |
+
+**So the reconciliation is not "pick a file".** The YAML has the ordering right and the
+magnitude wrong by about three orders of magnitude; the screening lane has the ordering
+backwards. **The condensation is rate-determining and the rearrangement is fast** — which is
+also why Martins was entitled to lump them into one step, and why the fitted `k_schiff`
+reproduces his lumped step 1 to 1.06×.
+
+Written into **both** files' headers, with the arithmetic. The YAML header additionally
+carries the repair constraint its `amadori` entry has been missing: any fixed A/Ea pair must
+satisfy `A·exp(−Ea/(R·373.15)) = 2.52e-03 1/s`, and with the entry's current Ea = 59.0 kJ/mol
+that implies **A = 4.6e5 1/s, not the 1.0e11 written there** — i.e. the *prefactor* is the
+broken half, by 5.3 orders of magnitude, exactly as that entry's own `audit_flag` suspected.
+Neither file's values were changed.
+
+### (e) SCORING THE PRE-REGISTRATION — the prediction in (0), now measured
+
+Scored against `results/validation/maillard_path_holdout_frozen_predictions.json` at commit
+`12f43dd`, **read, never regenerated**. New artifacts (append-only, the frozen file
+untouched): `results/validation/maillard_path_holdout_S3_prepost.{json,md}`.
+
+**AS SHIPPED: 0 of 22 targets moved. Every prediction is bit-identical to the
+pre-registration. The directional panel is byte-identical too (21/29; `diff` clean).**
+
+| # | prediction | outcome |
+|---|---|---|
+| 1 | sulfur T-dependence not fixed | **CORRECT** — MFT response ratio 4.551 unchanged (measured 0.2485) |
+| 2 | acrylamide time response cannot be fixed | **CORRECT** — 1.24 unchanged (measured 52.11) |
+| 3 | shared pH term exactly unchanged | **CORRECT** — furfural and HMF both 0.7743 |
+| — | median fold error moves <20% | **CORRECT** — 6.0388× → 6.0388×, exactly |
+| — | structural zero stays zero | **CORRECT** |
+| — | panel pH/aw unchanged | **CORRECT** — 4/7 and 0/3, identical |
+
+### (f) PROPAGATION — derived in full, deliberately NOT applied, and the counterfactual measured
+
+A principled mapping exists. The screening lane's own inverse is
+`Ea = −0.001987·T·ln(k/A)`, and `A` must be the family-agnostic **1e11**, because that is
+what `recommend.py:1216` uses for every family. At T = 373.15 K:
+
+| step | family | derived kcal/mol | shipped kcal/mol | Δ |
+|---|---|---:|---:|---:|
+| `k_schiff` | `schiff_condensation` | **excluded** | 15.00 | — |
+| `k_amadori` | `amadori_rearrangement` | **23.20** | **23.00** | **+0.20** |
+| `k_dfg_3dg` | `enolisation_intermediate` | 25.55 | 21.00 | +4.55 |
+| `k_dfg_1dg` | `2,3-enolisation` | 24.40 | 28.00 | −3.60 |
+| `k_3dg_out` | `1,2-enolisation` | 23.49 | 28.00 | −4.51 |
+| `k_1dg_out` | `furanone_amino_acid_reduction` | 20.99 | 28.00 | −7.01 |
+
+Worked example: `k_amadori` = 0.1536 /min = 2.560e-03 /s;
+`Ea = −0.001987 × 373.15 × ln(2.560e-03 / 1e11) = 23.20 kcal/mol`.
+
+**`schiff_condensation` is excluded outright**: it is bimolecular, in L/(mmol·min), and there
+is no dimensionally valid conversion to a first-order barrier without inventing a
+standard-state concentration. Inventing one is precisely the 342/200 basis failure Wave S2b
+exposed.
+
+**NOT APPLIED. `FAST_BARRIERS` is unchanged by this wave.** Two reasons, the second measured:
+
+1. **The dominant uncertainty is an assumed prefactor, not the fitted rate.** Setting
+   A = 1e11 s⁻¹ for every step folds the true prefactor, the activation entropy and general
+   acid/base catalysis by the phosphate buffer into Ea at **1.71 kcal/mol per decade** at
+   100 °C — wider than every confidence interval in section (b).
+2. **Applying it makes the model worse on both out-of-sample surfaces.** Measured, with the
+   derived barriers patched in memory and never written to `src/`:
+
+| surface | as shipped | counterfactual |
+|---|---|---|
+| hold-out median fold error | **6.0388×** | **7.6110×** (26% worse) |
+| hold-out targets moved | 0/22 | 21/22 — 11 better, **10 worse** |
+| hold-out series directions | 3/6 | 3/6 |
+| hold-out within-point orderings | **8/12** | **6/12** |
+| hold-out within 10x | 12/21 | 13/21 |
+| directional panel headline | **21/29** | **18/29** |
+| panel pH / sugar_identity | 4/7 · 8/8 | **2/7** · **7/8** |
+
+The counterfactual is not uniformly bad — `within_10x` rises 12 to 13 and the best single
+point improves from 1.52x to 1.12x — but the median, the within-point orderings and the
+directional panel all move the wrong way. **On the two surfaces that were designed to be
+out of sample, the verdict is consistent: do not apply.**
+
+**One correction to my own reasoning in (0), owned rather than buried.** I argued the
+magnitudes are "barrier-invariant to first order" and predicted a median move under 20%. That
+is true of the *total* predicted ppb — a uniform barrier shift moves it under 0.4% — but the
+per-compound ppb are branching ratios, and the derived set is not a uniform shift: it
+compresses the enolisation family from a 7 kcal/mol spread to 4.6. The counterfactual moved
+the median 26%. **The shipped prediction (0 movement) was right; the mechanism I gave for it
+was too strong.**
+
+**One unlooked-for confirmation of a Wave U hypothesis.** Wave U inferred, from furfural and
+HMF both moving by exactly ×0.774, that they "are being driven by one shared pH term, not by
+two independent ones". Under the counterfactual both move to **exactly 0.3008** — still
+identical to each other after a large and *differential* barrier change. That is direct
+positive evidence the shared term is a single multiplier, not a coincidence.
+
+### (g) OTHER HONEST RESIDUALS — measured, out of the objective, not fitted to
+
+* **Glycine yield.** The isolated-DFG experiment's Table 4.1.1 measures 83.4% / 78.1% of DFG
+  returning its glycine at 100 / 120 °C. The fit — which never saw this response — predicts
+  **89.5% / 90.1%**. The trunk over-attributes DFG decay to the two glycine-releasing
+  channels by 6-12 points, i.e. `k_dfg_other` is fitted too small. That parameter is also the
+  sloppiest in the fit, and these two facts are the same fact.
+* **The 1-DG branch flux is not credible against the acid data.** Cumulative
+  DFG → 1-DG flux over 150 min at 100 °C is **45.4 mmol/L** against a measured acetic acid of
+  **13.6 mmol/L** — 3.3× over budget. This is exactly why `k_dfg_1dg` carries a 30× CI: the
+  1-DG pool level constrains only the *ratio* `k_dfg_1dg / k_1dg_out`, and nothing in the fit
+  corpus pins the pair. **Fitting the acid responses would fix it, and the repository has no
+  formic or acetic acid species to fit them with.**
+* **Glucose loss over-predicted 15%** (80.3 vs ~70 mmol/L at 150 min, 100 °C).
+* **The missing pH physics, quantified.** The pH 5.5 series was held out of the objective
+  because the model has no pH term. Median fold error against it: **6.5× at 100 °C and 14.5×
+  at 120 °C.** That is the size of the gap Wave S2's 2/7 pH score was pointing at, now with a
+  number on it.
+* **The read-off floor, measured from the repository's own data.** The 100 °C experiment
+  appears in two figures of the same thesis, extracted independently. Their median
+  disagreement is 0.51 mmol/L for glucose and 0.145 for DFG — a floor no fit can beat.
+
+### (h) WHAT CHANGED, AND WHAT DID NOT
+
+**Changed:** `src/trunk_kinetics.py` (new, imported by nothing shipped);
+`scripts/generators/generate_trunk_rate_calibration.py` and
+`generate_trunk_calibration_holdout_prepost.py` (new);
+`results/validation/trunk_rate_calibration_refit.{json,md}` and
+`maillard_path_holdout_S3_prepost.{json,md}` (new);
+`tests/scientific/test_wave_s3_trunk_kinetics.py` (new, 29 assertions);
+headers of `src/barrier_constants.py` and `data/lit/arrhenius_params.yml` (the inversion
+resolution — comments only, **no value moved**); `data/lit/timeseries/README.md` (its
+"nothing here is wired into the calibration" claim is now false and says so);
+`scripts/ci/fit_target_gate.py` + `src/fit_target_index.py` (strip `.yml`/`.yaml` as well as
+`.json` from a declared fit target, kept in lockstep).
+
+**NOT changed:** any `FAST_BARRIERS` value, any `arrhenius_params.yml` value, any projection
+constant, observability factor, prior or benchmark. **No shipped number moved**, which the
+0/22 hold-out and byte-identical panel confirm independently of the claim.
+
+**The fit corpus is now machine-declared and machine-guarded.** The artifact carries
+`fit_target_files` and `fit_leverage` (16 parameters / 176 rows → `global_low_leverage`), and
+`fit_target_index.fit_target_map()` now resolves both YAML corpora to real ids. The `_refit`
+suffix in the filename is **load-bearing, not cosmetic**: `holdout_guard` check 4 scans
+`results/validation/*.json` filtered on the substring `refit`/`rederivation`, so the artifact
+named `trunk_rate_calibration.json` as originally specified would have been invisible to both
+gates. It now scans 34 fit records where Wave U scanned 33.
+
+### (i) [P] CARRIED FORWARD
+
+- [P] **Apply the derived barriers, or keep the two-lane split.** The full table is in (f).
+  The measured counterfactual says applying them costs 26% on the hold-out median and 3 rows
+  on the directional panel, so the recommendation is **do not apply** — but the derivation is
+  on the record and the decision is the owner's.
+- [P] **`arrhenius_params.yml`'s `amadori` prefactor is wrong by 5.3 orders of magnitude**,
+  and the fitted rate now says what a repair must reproduce (see (d)). Do not patch Ea alone.
+- [P] **The repository's network has no glucose→fructose isomerisation and no organic-acid
+  species.** Both are needed before the trunk's branch fluxes can be pinned (see (g)); the
+  1-DG channel is currently 3.3× over the acid budget and nothing in-corpus can catch it.
+- [P] **`amadori_rearrangement` = 23.0 kcal/mol is now independently corroborated** (derived
+  23.20 from a measured trajectory). This is the first FAST_BARRIERS value with trajectory
+  evidence behind it, and the only one.
+- [P] Wave U's `[P]` items are untouched by this wave: the ~480× acrylamide-lane
+  disagreement, the sulfur temperature sign, the shared pH term (now *confirmed* shared, see
+  (f)), the caramelization structural zero, and the closed Strecker branch.
+
+### (j) GATES
+
+| Gate | Result |
+|---|---|
+| `scripts/ci/holdout_guard.py` | **PASS** — 4/4; 16 bundles, 12 flagged, **34** fit records scanned (was 33) |
+| `scripts/ci/citation_gate.py` | **PASS** — 97 files, 1002 DOI-bearing fields, 323 unique DOIs, 0 waivers |
+| `scripts/ci/fit_target_gate.py` | **PASS** — 2/2, with the new YAML corpus declared and resolving |
+
+Targeted tests only, per the owner directive (**no full-suite run**).
+
+### (k) REGENERATION SCOPE — nothing downstream needed it, and that is checkable
+
+The mission asked which artifacts consume the changed parameters. **None, because no shipped
+parameter changed.** The only edits to `src/` are (i) a new module nothing imports and (ii)
+comment blocks in `src/barrier_constants.py` and a two-line suffix list in
+`src/fit_target_index.py`. That claim is not asserted, it is measured twice, independently:
+the hold-out is **0/22 moved, bit-identical**, and the directional panel is **byte-identical
+(`diff` clean)** against a run captured before any edit. Both would have caught a value that
+moved. So `benchmark_summary`, `prediction_uncertainty`, `external_validation_report`, the
+gap heatmap and the family figures were all left alone deliberately, and re-running them
+would have produced churn with no content.
+
+Four artifacts were **un-gitignored** (`.gitignore`, with the reason written in place).
+`trunk_rate_calibration_refit.{json,md}` has to be tracked for a reason beyond review: it is
+the machine-readable fit-corpus declaration that `fit_target_gate`, `fit_target_index` and
+`holdout_guard` check 4 all read. Untracked, CI would run with this wave's fit **undeclared
+and unguarded** — precisely the failure mode the fit-target gate exists to prevent. The
+pre/post artifact is tracked because a wave whose headline is "the hold-out did not move"
+owes the reader the file that shows it did not, target by target.

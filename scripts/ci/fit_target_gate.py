@@ -128,14 +128,30 @@ def _benchmark_id_from(token: str) -> str:
     Records name targets either as a benchmark id ("cys_ribose_140C_Hofmann1998") or as a
     file name ("cys_ribose_140C_Hofmann1998.json"), sometimes with a path or a trailing
     parenthetical comment. Take the stem of the first whitespace-delimited token.
+
+    WAVE S3 (2026-08-27): `.yml`/`.yaml` are stripped as well as `.json`. Until this
+    wave every fit in the repository was against a benchmark JSON, so stripping `.json`
+    alone was sufficient. The trunk rate calibration is fitted against the harvested
+    concentration-time series in `data/lit/timeseries/*.yml`, and a declaration of
+    `".../martins2005_glucose_glycine_80_100_120C_pH68.yml"` previously normalised to a
+    pseudo-id that still carried its suffix -- it could never collide with a scored
+    benchmark id, so the declaration passed the gate while buying no circularity
+    protection at all. Stripping the suffix makes a YAML corpus a first-class
+    declaration on the same footing as a JSON one. The principle the gate enforces is
+    unchanged: anything used in a fit must be machine-declared, and nothing declared may
+    appear in scored evidence.
+
+    `src/fit_target_index.py::benchmark_id_from_reference` re-implements this and MUST
+    be kept in lockstep.
     """
     text = str(token).strip()
     if not text:
         return ""
     head = text.split()[0].strip(",;")
     stem = Path(head).name
-    if stem.endswith(".json"):
-        stem = stem[: -len(".json")]
+    for suffix in (".json", ".yml", ".yaml"):
+        if stem.endswith(suffix):
+            return stem[: -len(suffix)]
     return stem
 
 

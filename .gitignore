@@ -206,3 +206,22 @@ scratch/
 !docs/assets/report_intervention_waterfall.png
 !docs/assets/report_comparison_intervention_waterfall.png
 !docs/assets/report_compound_confidence_overlay.png
+# Wave S3 evidence artifacts (2026-08-27): the first rate-level calibration of the sugar
+# trunk, and its score against the pre-registered hold-out.
+#
+# `trunk_rate_calibration_refit.{json,md}` MUST be tracked, and not only for review. It is
+# the machine-readable declaration of a FIT CORPUS: `scripts/ci/fit_target_gate.py` and
+# `src/fit_target_index.py` read its `fit_target_files` and `fit_leverage` blocks, and
+# `scripts/ci/holdout_guard.py` check 4 scans it (the `refit` in the filename is what puts
+# it in that scan). Untracked, CI would run with the fit undeclared and unguarded, which is
+# the exact failure mode the fit-target gate exists to prevent. It is also cited by name
+# from the headers of src/barrier_constants.py and data/lit/arrhenius_params.yml, where it
+# is the evidence for the Schiff/Amadori ordering resolution.
+!results/validation/trunk_rate_calibration_refit.json
+!results/validation/trunk_rate_calibration_refit.md
+# The pre/post score against the frozen pre-registration. Tracked because a wave that
+# reports "the hold-out did not move" has to leave behind the artifact that shows it did
+# not, target by target, rather than a sentence saying so. Append-only companion to
+# maillard_path_holdout_frozen_predictions.*, which it reads and never regenerates.
+!results/validation/maillard_path_holdout_S3_prepost.json
+!results/validation/maillard_path_holdout_S3_prepost.md

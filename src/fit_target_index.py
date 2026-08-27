@@ -87,14 +87,21 @@ def _iter_strings(node: Any) -> Iterator[str]:
 
 
 def benchmark_id_from_reference(token: str) -> str:
-    """Normalise a fit-target reference (id, filename, or path) to a benchmark id."""
+    """Normalise a fit-target reference (id, filename, or path) to a benchmark id.
+
+    WAVE S3 (2026-08-27): `.yml`/`.yaml` are stripped as well as `.json`, so that a fit
+    declared against the harvested time series in `data/lit/timeseries/*.yml` produces a
+    real id rather than one that still carries its suffix. Kept in lockstep with
+    `scripts/ci/fit_target_gate.py::_benchmark_id_from`, which carries the full rationale.
+    """
     text = str(token).strip()
     if not text:
         return ""
     head = text.split()[0].strip(",;")
     stem = Path(head).name
-    if stem.endswith(".json"):
-        stem = stem[: -len(".json")]
+    for suffix in (".json", ".yml", ".yaml"):
+        if stem.endswith(suffix):
+            return stem[: -len(suffix)]
     return stem
 
 

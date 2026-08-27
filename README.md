@@ -490,7 +490,7 @@ the global scale", is unchanged and is now better supported, not worse.)*
 | ----------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------ |
 | **Parity**              | On matched systems, how close is predicted ppb to measured?              | **14** benchmarks · MC panel covers **11** of them, **35 matched rows** · **0 strict-ready** · **0/6 predictive benchmarks without blocking gaps** |
 | **External hold-out**   | On systems excluded from calibration, does the frozen model still cover? | 4 bundles · **1/5 on genuine extrapolations** at the pre-widening prior (1/5 at the wider one too, since Wave O) · median **93.68×** error, worst **2474×** |
-| **Maillard-path hold-out** | On systems excluded from calibration, is the *reaction network* right? | **NEW (Wave U)** · 12 free-precursor literature points, predictions frozen before any calibration wave saw them · median **6.04×**, **12/21** within 10×, **1** structural zero · but the *shape* is wrong: sulfur temperature dependence runs backwards and acrylamide is ~40× under-responsive in time |
+| **Maillard-path hold-out** | On systems excluded from calibration, is the *reaction network* right? | **NEW (Wave U)** · 12 free-precursor literature points, predictions frozen before any calibration wave saw them · median **6.04×**, **12/21** within 10×, **1** structural zero · but the *shape* is wrong: sulfur temperature dependence runs backwards and acrylamide is ~40× under-responsive in time · **scored against Wave S3's rate calibration: 0/22 targets moved** |
 | **Coverage**            | Which chemistry lanes are wired, and how?                                | 16 lanes wired · **5 with generative reaction templates** · 7 with DFT anchors |
 | **Experiment priority** | Where would the next experiment improve confidence the most?             | 6/35 MC cells outside 90% CI — all queued                    |
 
@@ -515,6 +515,24 @@ the global scale", is unchanged and is now better supported, not worse.)*
 > temperature while the model has it rising 4.55×; measured acrylamide rises 52× from 10 to
 > 30 min while the model rises 1.24×; and two of three pH responses point the wrong way.
 > Full table and per-point provenance in `AUDIT.md` → "Wave U".
+>
+> **Scored, 2026-08-27 (Wave S3): the first rate-level calibration moved this hold-out by
+> exactly nothing — and that is the result.** The sugar trunk (Schiff condensation, Amadori
+> rearrangement, the enolisations, the deoxyosone sinks) was fitted for the first time to
+> *measured trajectories*: 176 concentration-time values from Martins' glucose/glycine
+> multiresponse experiments at 80/100/120 °C plus an experiment on isolated Amadori compound.
+> The fitted rates agree with **Brands (2002)** — an independent fitted model on a different
+> amine — to **1.5× on the Amadori degradation rate** and 3× on the condensation. Yet
+> **0 of 22 hold-out targets moved** and the directional panel is byte-identical, because the
+> screening lane consumes barriers **only as branching ratios**: the predicted magnitude comes
+> from a projection budget that never sees a barrier. Applying the derived barriers anyway was
+> measured as a counterfactual and makes things *worse* — hold-out median 6.04× → 7.61×, panel
+> 21/29 → 18/29 — so `FAST_BARRIERS` is unchanged. **The model's absolute-accuracy problem is
+> not in its barrier table.** The wave also settled a standing contradiction: the two barrier
+> tables disagreed by ~6.6e8 about which of the first two Maillard steps is rate-determining,
+> and the data say the Amadori rearrangement is 44.9× faster (95% interval 40–45) — the
+> screening lane had the sign backwards and the Cantera lane had the magnitude wrong by ~700×.
+> `results/validation/trunk_rate_calibration_refit.md` and `AUDIT.md` → "Wave S3".
 
 > **On the external hold-out — read this before the number above.** The 8 points are
 > genuinely excluded from calibration; the exclusion is code-enforced and survived an

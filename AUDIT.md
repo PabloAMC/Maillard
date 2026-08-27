@@ -966,6 +966,84 @@ acrylamide or HMF systems whose route carries a declared partial contamination �
 so in a `contamination_disclosure` block. And the median excludes the structural zero, which
 is a total miss with no finite fold error.
 
+## Wave S3 — the first rate-level calibration, and what it proved about the model (2026-08-27)
+
+Every barrier in this repository had, until this wave, been an endpoint fit, a literature
+midpoint, or an estimate by analogy. **Nothing had ever been fitted to a measured
+trajectory.** Wave S3 fitted the sugar trunk to 176 point-verified concentration-time values
+from Martins' glucose/glycine multiresponse experiments at 80/100/120 °C, plus a second
+experiment on *isolated* Amadori compound that separates its decomposition from its own
+formation. The fit corpus is `data/lit/timeseries/` and nothing else; it is machine-declared
+in `results/validation/trunk_rate_calibration_refit.json` and read by the fit-target gate.
+
+### The credibility test passes
+
+The fitted constants were checked against **Brands (2002)**, a genuinely independent fitted
+kinetic model — different amine (protein-bound lysine, not free glycine), different
+sugar:amine ratio, different author, different data — none of which entered the objective.
+
+| step | fitted @120 °C | Brands @120 °C | agreement |
+| --- | ---: | ---: | ---: |
+| condensation (sugar + amine → Amadori) | 8.04e-05 L/(mmol·min) | 2.4e-04 | **3.0×** |
+| total Amadori degradation | 0.189 /min | 0.2805 | **1.5×** |
+
+Two laboratories, two amines, two independent fits, agreeing to a factor of 1.5 on the rate
+the whole cascade is named for.
+
+### A standing contradiction, resolved — and neither file was right
+
+Since Wave I this repository has carried two barrier tables that disagreed by ~6.6e8 about
+which of the first two Maillard steps is rate-determining. The Martins data measure the
+Amadori intermediate directly, so the data could decide. On a pseudo-first-order basis at the
+experiment's own 200 mmol/L glycine and 100 °C, the fitted ratio is **44.9 (95% interval
+40–45), Amadori faster** — the condensation is rate-determining.
+
+- `src/barrier_constants.py` asserted the ratio was ~5e-05 (**wrong sign**).
+- `data/lit/arrhenius_params.yml` asserted ~3.3e+04 (right sign, **wrong by ~700×**).
+
+Both are now annotated with the resolution and the arithmetic. **Neither file's values were
+changed**, and the reason is the next section.
+
+### The finding that matters most: the model's accuracy problem is not in its barriers
+
+Tracing the screening lane end to end established that **it consumes barriers only as
+branching ratios**. The predicted magnitude is `budget × mole fraction × MW`, and the budget
+(`src/projection.py:170-223`) never sees a barrier — it is built from precursor molarity,
+duration and a separate apparent activation energy. A uniform shift of *every* barrier by
++2, +5 or +10 kcal/mol changes the total predicted ppb by under 0.4%. Two consequences fell
+out of the same trace: the per-family Arrhenius prefactors in `arrhenius_params.yml` **cancel
+exactly** and are dead in this lane, and the one place an absolute rate survives
+(`recommend.py:1216`) uses a family-agnostic default.
+
+**So this wave predicted, in writing and before scoring, that a rate calibration could not
+move the hold-out** — and then measured it. Scored against the pre-registered baseline frozen
+at commit `12f43dd`:
+
+| | as shipped | if the derived barriers were applied |
+| --- | --- | --- |
+| Hold-out targets moved | **0 / 22** | 21 / 22 (11 better, **10 worse**) |
+| Hold-out median fold error | **6.0388× — unchanged, exactly** | 7.6110× (26% worse) |
+| Directional panel | **21/29 — byte-identical** | 18/29 |
+
+All three of Wave U's named structural errors are unmoved, as predicted: the sulfur
+temperature dependence is still backwards, acrylamide is still ~40× under-responsive in time,
+and furfural and HMF still move by an identical pH factor. That last one gained *positive*
+evidence: under the counterfactual both shift to exactly 0.3008, still identical to each
+other after a large and differential barrier change — confirming Wave U's inference that they
+share a single pH multiplier.
+
+**The honest headline is therefore a negative result with a positive cause.** The trunk's
+rates are now measured, they agree with an independent laboratory to 1.5×, and applying them
+to the screening lane would make the model *worse*. The absolute-accuracy deficit lives in
+the projection budget and in missing chemistry — the network has no glucose→fructose
+isomerisation, no formic or acetic acid, no melanoidins, and no caramelization lane — not in
+the barrier table. `FAST_BARRIERS` is unchanged by this wave; the derived values are
+published with their arithmetic as an owner decision.
+
+One value did gain independent support: `amadori_rearrangement` = 23.0 kcal/mol derives to
+**23.20** from the fitted rate. It is the first and only constant in that table with evidence
+from a measured trajectory behind it.
+
 ## What this repository is now for
 
 A research prototype of the *architecture* alternative-protein flavor science needs —

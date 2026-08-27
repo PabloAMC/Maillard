@@ -54,12 +54,53 @@
 #         amadori               A=1.0e11, Ea=59.0 kJ/mol -> t1/2 = 1.33e-4 s
 #         => AMADORI IS ~3.3e4 x FASTER than Schiff.
 #   The rate-determining step of the cascade is therefore whichever file you
-#   happened to read. RECONCILING THEM IS AN OPEN OWNER ITEM. Wave I did NOT
-#   fix it: picking a winner means re-deriving the Martins condensation/
-#   rearrangement split (see the `schiff_condensation` audit_flag's open caveat
-#   about double-counting a lumped barrier) and then re-fitting the screening
-#   lane against the benchmark panel. Both are calibration work with owner
-#   sign-off, not an annotation pass.
+#   happened to read.
+#
+# ------------------------------------------------------------------------------
+# RESOLVED 2026-08-27 (Wave S3) — THIS FILE HAS THE ORDERING RIGHT AND THE
+# MAGNITUDE WRONG BY ~700x. VALUES UNCHANGED.
+# ------------------------------------------------------------------------------
+# Wave S3 fitted the sugar trunk to MEASURED concentration-time trajectories:
+# Martins' glucose/glycine multiresponse data at 80/100/120 C, which measure the
+# Amadori compound (DFG) directly, plus a second experiment on ISOLATED DFG that
+# separates the rearrangement from its own formation. Both live in
+# data/lit/timeseries/. Fit: scripts/generators/generate_trunk_rate_calibration.py
+# Result: results/validation/trunk_rate_calibration_refit.{json,md}
+#
+# The comparison can only be made on a PSEUDO-FIRST-ORDER basis, because the
+# condensation is bimolecular and the rearrangement is not. At the experiment's
+# own 200 mmol/L glycine loading and 100 C:
+#     k_schiff * [Gly] = 3.39e-3 1/min   (condensation)
+#     k_amadori        = 1.51e-1 1/min   (rearrangement)
+#     => AMADORI IS ~45x FASTER; the CONDENSATION is rate-determining.
+# A profile likelihood rejects every ratio from 0.1 to 1e6 outside a narrow band
+# around 45, at 95% confidence.
+#
+# SCORECARD, both files:
+#   * THIS FILE says ~3.3e4 (Amadori faster). RIGHT SIGN. Rejected on magnitude
+#     (chi-square statistic ~9.1e2): 59 kJ/mol paired with A = 1e11 1/s gives a
+#     sub-millisecond half-life, and the measurement gives minutes.
+#   * src/barrier_constants.py FAST_BARRIERS says ~1/2.0e4 (Schiff faster).
+#     WRONG SIGN, rejected far more strongly (~7.5e4).
+# The reconciliation is therefore NOT "pick a file". The ordering this file
+# asserts is correct and the screening lane's is inverted; the magnitude this
+# file asserts is wrong by roughly three orders of magnitude.
+#
+# WHAT WAS AND WAS NOT CHANGED. Nothing here moved. The `amadori` entry's A/Ea
+# pair remains internally broken for the reason its own audit_flag gives, and
+# the fitted rate now bounds what a repaired pair must reproduce:
+#     k_amadori(100 C) = 0.151 1/min = 2.52e-3 1/s  (95% CI 0.104-0.220 1/min)
+#     Ea = 42 kJ/mol (95% CI 20-64), CONSTRAINED but poorly, because a step this
+#     fast contributes little curvature to the observable over 80-120 C.
+# Any repair must satisfy A * exp(-Ea/(R*373.15)) = 2.52e-3 1/s. Written out
+# with the current Ea = 59.0 kJ/mol:
+#     59000 / (8.314 * 373.15) = 19.017;  exp(-19.017) = 5.50e-9
+#     A = 2.52e-3 / 5.50e-9   = 4.6e5 1/s
+# not the 1.0e11 written below — i.e. the PREFACTOR is the member of the pair
+# that is wrong, by 5.3 orders of magnitude, exactly as this entry's own
+# audit_flag suspected ("the A = 1e11 1/s is a generic unimolecular TST
+# prefactor that was never fitted jointly with this Ea").
+# DO NOT PATCH EITHER HALF ALONE. OPEN OWNER ITEM.
 # ==============================================================================
 
 arrhenius_data:

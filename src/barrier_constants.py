@@ -134,12 +134,50 @@ FAST_BARRIERS: Dict[str, Tuple[float, str]] = {
     #   * data/lit/arrhenius_params.yml is authoritative for the CANTERA EXPORT
     #     lane — get_arrhenius_params -> src/cantera_export.py ->
     #     scripts/run_cantera_kinetics.py. Those claim literature anchoring.
-    # No code path reads both, which is how the inversion survived. RECONCILING
-    # THEM IS AN OPEN OWNER ITEM that Wave I did NOT fix: it needs the Martins
-    # condensation/rearrangement split re-derived (that YAML entry's own
-    # audit_flag flags the lumped-barrier double-count) and then a re-fit of the
-    # screening lane against the benchmark panel — calibration work with owner
-    # sign-off, not an annotation pass.
+    # No code path reads both, which is how the inversion survived.
+    #
+    # ---------------------------------------------------------------------
+    # RESOLVED 2026-08-27 (Wave S3) — THE DATA DECIDED. THIS TABLE HAS THE
+    # ORDERING BACKWARDS. VALUES STILL UNCHANGED; see below for why.
+    # ---------------------------------------------------------------------
+    # Wave S3 fitted the trunk to Martins' measured glucose/glycine
+    # trajectories at 80/100/120 C — which measure the Amadori compound (DFG)
+    # DIRECTLY — plus an experiment on ISOLATED DFG. Both are in
+    # data/lit/timeseries/; the fit is
+    # scripts/generators/generate_trunk_rate_calibration.py and the result is
+    # results/validation/trunk_rate_calibration_refit.{json,md}.
+    #
+    # The two steps can only be compared as PSEUDO-FIRST-ORDER rates, because
+    # the condensation is bimolecular and the rearrangement is not. At the
+    # experiment's own 200 mmol/L glycine and 100 C:
+    #     k_schiff * [Gly]  = 3.39e-3 /min      (condensation)
+    #     k_amadori         = 1.51e-1 /min      (rearrangement)
+    #     => AMADORI IS ~45x FASTER. The condensation is rate-determining.
+    # A profile likelihood over that ratio rejects EVERY value from 0.1 to
+    # 1e6 outside a narrow band around 45, at 95% confidence.
+    #
+    # SCORECARD:
+    #   * THIS TABLE claims the ratio is ~1/2.0e4 (Schiff faster).
+    #     WRONG SIGN. Rejected with a chi-square statistic of ~7.5e4.
+    #   * THE YAML claims ~3.3e4 (Amadori faster).
+    #     RIGHT SIGN, wrong magnitude by ~700x. Also rejected (~9.1e2).
+    # So the reconciliation is not "pick one file": the YAML has the ordering
+    # right and the size wrong, and this table has the ordering wrong.
+    #
+    # WHY THE NUMBERS BELOW STILL DID NOT MOVE. Converting the fitted rates
+    # into this table's kcal/mol units requires assuming the screening lane's
+    # prefactor (1e11 s^-1, hardcoded family-agnostically at
+    # recommend.py:1216) is the true prefactor for each step. Every decade of
+    # error in that assumption moves the derived barrier by 1.71 kcal/mol at
+    # 100 C — wider than any confidence interval in the fit. The derived
+    # barriers are published in full, with the arithmetic, in the calibration
+    # artifact; `amadori_rearrangement` derives to 23.22 kcal/mol against the
+    # 23.00 shipped here, which is the first independent confirmation of any
+    # value in this table from a measured trajectory. `schiff_condensation`
+    # is EXCLUDED from that mapping entirely: it is bimolecular, and there is
+    # no dimensionally valid conversion without inventing a standard-state
+    # concentration. OPEN OWNER ITEM: apply the derived set, or keep the
+    # two-lane split with the ordering now on the record.
     "schiff_condensation":  (15.0,  "Yaylayan 1994: condensation ΔG‡ ≈ 12–20 kcal/mol; midpoint"),
     "schiff_base_hydrolysis":(8.0,  "Schiff base reversion; fast"),
     "amadori_rearrangement":(23.0,  "Martins 2003: 1,2-proton shift ΔG‡ ≈ 20–28; midpoint"),
