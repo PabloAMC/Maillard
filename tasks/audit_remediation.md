@@ -1032,3 +1032,13 @@ science judgment) · `[D]` deferred by design (documented decision, not forgotte
   `materialize_external_validation` typed-identifier drift flagged in the entry above; the
   Ohsu kokumi EC50s; the CML/CEL and furosine unit-collision gaps (1204x / 201x), which are
   real predictor gaps rather than reporting artifacts.
+- 2026-08-27 (CLOSE-OUT): Wave H landed (refit honest: barriers cannot fix the sulfur
+  deficit — allocation-layer residual documented, papering-over knob declined; final
+  numbers 2/11 lit rows in CI / 0/16 strict-ready / 5/16 generative lanes; suite 1178
+  passed / 1 dvipng; gates 0 waivers). AUDIT.md written (public narrative) + README
+  audit banner. Work committed as 7 thematic commits on audit-remediation, pushed,
+  PR #12 opened against s27 for self-review (scratch/ + .claude/ excluded and
+  gitignored). Cold-start red team launched against the committed tree: a zero-context
+  scientific due-diligence reviewer and a zero-context forensic code auditor — the
+  final verification that the remediation holds under the same class of scrutiny that
+  started it.
