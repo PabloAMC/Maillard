@@ -101,13 +101,28 @@ def test_acidic_ph_increases_plant_matrix_release_for_acid_sensitive_off_flavour
 
 
 def test_pratap_singh_headspace_calibration_carries_soy_release_gap_in_headspace_layer():
+    """The soy-vs-pea RELEASE GAP is what this test is about, and it did not move.
+
+    RE-PINNED 2026-08-27 (Wave O refit to content-corrected anchors, owner-approved).
+    The ambient hexanal factors were refitted against the verified Pratap-Singh values
+    (pea 1.0 -> 4.31725, soy 0.453/0.205 -> 9.54007) using ONE shared scale of 4.317249x --
+    see scripts/generators/refit_matrix_observability_pratap_singh.py and
+    results/validation/matrix_observability_refit_pratap_singh.{json,md}.
+
+    Because a SINGLE scale served both lanes, the soy/pea hexanal ratio this test exists to
+    guard is UNCHANGED at 0.453/0.205 = 2.2098 -- and that invariance is now asserted
+    directly at the end, which is a stronger statement of the test's own claim than the two
+    absolute pins were. The absolute pea value is re-pinned to the fitted constant; the
+    2-pentylfuran and 1-hexanol lanes were not refitted at all (verified verbatim, and
+    unanchored, respectively).
+    """
     model = HeadspaceModel()
 
     assert model.get_matrix_benchmark_headspace_factor(
         "Hexanal",
         protein_type="pea_iso",
         pH=6.0,
-    ) == pytest.approx(1.0)
+    ) == pytest.approx(4.31725)
     assert model.get_matrix_benchmark_headspace_factor(
         "2-Pentylfuran",
         protein_type="pea_iso",
@@ -123,7 +138,7 @@ def test_pratap_singh_headspace_calibration_carries_soy_release_gap_in_headspace
         "Hexanal",
         protein_type="soy_iso",
         pH=6.0,
-    ) == pytest.approx(0.453 / 0.205)
+    ) == pytest.approx(9.54007)
     assert model.get_matrix_benchmark_headspace_factor(
         "2-Pentylfuran",
         protein_type="soy_iso",
@@ -134,6 +149,17 @@ def test_pratap_singh_headspace_calibration_carries_soy_release_gap_in_headspace
         protein_type="soy_iso",
         pH=6.0,
     ) == pytest.approx(0.143 / 0.063)
+
+    # 2026-08-27 (Wave O): the property this test is named for, asserted as a property.
+    # One shared scale was applied to BOTH ambient hexanal factors, so the soy-vs-pea release
+    # gap is bit-for-bit what it was before the refit. If a future refit gives the two lanes
+    # independent freedom, this is the assertion that will say so.
+    pea = model.get_matrix_benchmark_headspace_factor("Hexanal", protein_type="pea_iso", pH=6.0)
+    soy = model.get_matrix_benchmark_headspace_factor("Hexanal", protein_type="soy_iso", pH=6.0)
+    assert soy / pea == pytest.approx(0.453 / 0.205, rel=1e-5), (
+        "the soy-vs-pea ambient hexanal release ratio moved away from the 2.2098 the "
+        "registry has always encoded; a per-lane refit would do exactly this."
+    )
 
 
 def test_shu_heated_soy_calibration_suppresses_2_pentylfuran_to_detection_floor_surrogate():

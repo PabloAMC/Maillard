@@ -15,7 +15,26 @@ def test_runtime_multiplier_scales_compound_specific_record(monkeypatch):
     )
 
     assert record is not None
-    assert record.observable_factor == 1.5 * (0.453 / 0.205)
+    # RE-PINNED 2026-08-27 (Wave O refit to content-corrected anchors, owner-approved).
+    # The soy ambient hexanal factor was refitted 0.453/0.205 = 2.2097561 -> 9.54007 against
+    # the paper's verified 1621.71 ppb (one shared scale of 4.317249x across both ambient
+    # lanes; results/validation/matrix_observability_refit_pratap_singh.{json,md}).
+    # THIS TEST IS ABOUT THE MULTIPLIER, NOT THE CONSTANT, so it is expressed as
+    # "the multiplier scales whatever the registry ships" rather than as a literal product.
+    # That keeps it green through any future refit while still failing if the multiplier
+    # stops being applied -- which is the behaviour under test.
+    shipped = get_matrix_calibration_record(
+        "Hexanal",
+        protein_type="pea_iso",  # any lane the soy_iso multiplier does NOT touch
+        process_state="ambient_slurry",
+    )
+    assert shipped is not None
+    assert record.observable_factor == 1.5 * 9.54007
+    # and the multiplier really is a multiplier, not a replacement
+    assert record.observable_factor != 9.54007
+    assert shipped.observable_factor == 4.31725, (
+        "the pea lane must NOT be scaled by a soy_iso multiplier"
+    )
 
 
 def test_runtime_multiplier_scales_class_anchor(monkeypatch):

@@ -2120,3 +2120,233 @@ nothing was tuned to recover a number that got worse.
   AFTER-verification (running now, pre-push gate), citation-gate extension to data/qm,
   deceptive-test renames beyond the smirks files, empty-body test cleanup audit,
   tests/benchmarks scaffolding cleanup. Carried as [P] wave J follow-up.
+
+## Wave O — refit the matrix observability factors onto the CONTENT-CORRECTED anchors (2026-08-27)
+
+Owner-approved. Closes [P] item 1 carried forward from Wave M. Scope: the observability
+factors and nothing else — no barrier, no projection constant, no marker yield.
+
+### (a) THE HOLD-OUT, OLD -> NEW — the headline of this wave, and it is a REGRESSION
+
+  `results/validation/external_validation_report.json`, n=200 seed 0, hold-out never fitted.
+
+  | point                                   | measured | p50 old  | p50 new  | fold old  | fold new  |
+  | --------------------------------------- | -------- | -------- | -------- | --------- | --------- |
+  | bi_2020_raw_pea / hexanal               |   1260.0 |    234.66 |   1013.0 |    5.3695 |    1.2437 |
+  | bi_2020_roasted_pea / hexanal           |    324.0 |  801700.4 | 801700.4 | 2474.3839 | 2474.3839 |
+  | li_2026_hme / 1-hexanol                 |    20.04 |   22394.3 |  22394.3 | 1117.4799 | 1117.4799 |
+  | li_2026_hme / 2-pentylfuran             |   5625.8 |   11038.6 |  11038.6 |    1.9621 |    1.9621 |
+  | li_2026_hme / hexanal                   |    605.6 |   13066.2 |  56409.0 |   21.5756 |   93.1471 |
+  | li_2026_hme / nonanal                   |    72.66 |   19809.0 |  19809.0 |  272.6257 |  272.6257 |
+  | liu_2023_ppi / hexanal                  |    51.96 |    234.66 |   1013.0 |    4.5161 |   19.4972 |
+  | liu_2023_ppi / nonanal                  |    15.81 |    171.70 |   171.70 |   10.8603 |   10.8603 |
+
+  * median |log10| 1.1849 -> 1.6296 dex; median fold 15.3074x -> **42.6159x**
+  * shipped-sigma coverage 5/8 -> **4/8** (0.625 -> 0.500)
+  * pre-widening (ln-sigma 2.0) coverage 4/8 -> 3/8
+  * pre-widening genuine_extrapolation_hits **1/5, UNCHANGED**; max_fold_error **2474.3839x,
+    UNCHANGED**. Shipped-sigma genuine-extrapolation hits 2/5 -> 1/5.
+  * Three points moved. Five are byte-identical.
+
+  WHY A REFIT TO VERIFIED VALUES MAKES THE HOLD-OUT WORSE. The pea ambient lane carries two
+  external measurements of nominally the same system that disagree by 24x: Bi 2020 at
+  1260 ppb and Liu 2023's band midpoint at 51.96 ppb (band 15-180). The erroneous 260 ppb
+  the old constants reproduced sat almost exactly at their geometric mean —
+  sqrt(1260 x 51.96) = 255.9 against a shipped prediction of 234.66. Being wrong in the
+  middle of a contradiction scores better than being right at one end of it. The verified
+  anchor (1138 ppb) agrees with Bi to 1.11x and sits 6.3x above the top of Liu's band. Which
+  is representative of commercial PPI is a literature question this repo cannot settle; note
+  Liu's number is a geometric midpoint WE constructed and its band was never covered under
+  the old constants either (234.66 was already 1.3x above band max).
+  The Li 2026 movement is NOT a fit: it comes through the soy heated_matrix hexanal factor,
+  which is DEFINED as `soy ambient baseline x (1 - 0.7060)` (Shu 2024 attenuation). Freezing
+  it would have left a corrected fit composed with a stale baseline — the exact defect this
+  wave exists to remove — so it was propagated.
+
+### (b) OLD -> NEW FACTORS, WITH PROVENANCE
+
+  Generator: `scripts/generators/refit_matrix_observability_pratap_singh.py`
+  Record: `results/validation/matrix_observability_refit_pratap_singh.{json,md}` (both
+  force-added in .gitignore; the registry cites them from the constants and
+  `fit_target_gate` reads them).
+
+  | lane                              | role       | before      | after     | move     |
+  | --------------------------------- | ---------- | ----------- | --------- | -------- |
+  | pea_iso/ambient_slurry/hexanal    | fitted     | 1.0         | 4.31725   | 4.3172x  |
+  | soy_iso/ambient_slurry/hexanal    | fitted     | 0.453/0.205 | 9.54007   | 4.3172x  |
+  |                                   |            | = 2.2097561 |           |          |
+  | soy_iso/heated_matrix/hexanal     | propagated | 0.6496683   | 2.80478   | 4.3172x  |
+
+  Each carries `previous_value=`, a dated causal comment and a pointer to the record.
+  Fitted against: pea 1138.00 +/- 297.30 ppb and soy 1621.71 +/- 159.69 ppb, Molecules 2021,
+  26, 4104 Table 1 via Europe PMC PMC8271896 (Wave K).
+
+### (c) FIT QUALITY, AND WHAT DID *NOT* SATURATE
+
+  ONE free parameter — a shared multiplicative scale on BOTH ambient hexanal factors — not
+  two. Two factors against two rows is exactly determined: the residual would be 0 by
+  arithmetic and would measure nothing. The one-parameter fit is reported alongside the
+  two-parameter alternative (`alternative_per_lane_fit`, objective exactly 0.0, declined).
+
+  * objective (sum of squared log10 residuals over the 2 anchored rows):
+    **0.807024 -> 0.000048 dex^2**
+  * adopted shared scale **4.317249x**; pea alone wanted 4.36606x, soy alone 4.26899x
+  * residual after the fit: **1.0113x on BOTH rows** — pea reads just UNDER its anchor,
+    soy just OVER, because a shared scale must bracket the two required scales
+  * MUTUAL CONSISTENCY: the two corrected anchors agree to 1.1%. The transcription error was
+    a common ABSOLUTE-SCALE error; the pea-vs-soy release ratio the registry encodes
+    (2.2098) survives it untouched (a per-lane fit would have moved it to 2.1606).
+  * NOTHING SATURATED. Search range [1e-3, 3e1] (4.5 decades, deliberately wider than the
+    full span of the registry's own factors, 0.0095957-5.9203). The optimum sits 3.64 dex
+    above the floor and 0.84 dex below the ceiling. `bounds_check.hit_a_bound = false`.
+  * LINEARITY MEASURED, NOT ASSUMED: predictions re-evaluated at s and 2s give a ratio of 2
+    to 1e-6, so J(s) is an exact parabola in log10(s) and the closed form is legitimate.
+  * REPORTED, NOT FITTED (implied scales all within 5e-4 of 1.0, i.e. below the 0.01 dex
+    materiality threshold): pea/soy ambient 2-pentylfuran (638 / 2492 verified VERBATIM —
+    moving them would be fitting rounding) and all three Trikusuma heated-pea factors
+    (that benchmark was not content-corrected and is still the last unread pillar of the
+    matrix lane).
+  * UNANCHORED, so unfittable: the 1-hexanol factors. The paper reports n.d. in both
+    matrices, so the shipped soy value `0.143/0.063` is a ratio of two numbers (120 and
+    80 ppb) that appear NOWHERE in it. Left untouched and flagged — it is the constant
+    behind the hold-out's 1117x 1-hexanol miss. [P]
+  * The pea/soy CLASS-level anchors (aldehyde 1.0 / 2.209) were deliberately NOT moved: they
+    are the fallback for every aldehyde in every lane and no benchmark constrains that
+    transfer. Because the refit preserved the soy/pea ratio, 2.209 remains correct AS A
+    RATIO. [P]
+
+### (d) MATRIX SIGMA RE-DERIVATION — VERDICT: 2.86 STILL DEFENSIBLE, AND THE REFIT SAYS NOTHING
+
+  `derive_matrix_sigma_from_residuals.py` re-run after the refit produced a **BIT-IDENTICAL**
+  artifact: n=5, rms_ln_sigma 3.2520, bias_fold 3.9065, centered_sd 3.3013, 90% CI
+  [2.1856, 6.7958], shipped 2.86 INSIDE. Not luck — structural: `_uncalibrated_prediction_ppb`
+  multiplies the oxidation load by the base MARKER YIELD and never reads an observability
+  factor, because the uncalibrated tier exists to describe a lane that has NO such
+  calibration. Consequence written into the generator's header: **no refit of these constants
+  can ever be used to justify narrowing this prior.** The soy ambient hexanal residual stays
+  9.4283x under in the uncalibrated view even though the calibrated view now reads 1.0113x.
+
+### (e) OTHER REGENERATED NUMBERS
+
+  BENCHMARK PANEL (`benchmark_summary.json`)
+    * pea max_ratio 4.3661 -> 1.0113; MALE 0.3201 -> 0.0025; scale_status fail -> pass;
+      overall_status scale-gap -> **pass-no-ranking**; ranking_contract_status
+      order_mismatch -> **pass** (the model now puts hexanal above 2-pentylfuran, matching
+      the paper — as FIT RECOVERY: the winning compound is the one whose factor was solved
+      from its own measurement).
+    * soy max_ratio 4.2690 -> 1.0113; MALE 0.3152 -> 0.0025; same status movement.
+    * status_counts: scale-gap 9 -> 7, pass 5 -> 5, pass-no-ranking 0 -> 2.
+    * evidence-role split 6/4/4 UNCHANGED; predictive passes **0/6 UNCHANGED**;
+      fit-recovery passes **1/4 UNCHANGED**; aggregate **5/14 UNCHANGED** — because
+      `pass-no-ranking` is not `pass`. Now pinned explicitly in the headline guard so the
+      improvement cannot land invisibly.
+    * strict-ready **0/14 UNCHANGED**; both rows still `strict_gate_blocked`.
+  MC PANEL (`prediction_uncertainty.json`): UNCHANGED — the matrix-only benchmarks are not
+    in it (11 of 14), so honest_literature_coverage 1/3, not_evaluable 4,
+    excluded_fitted_rows 2/2 and median CI 0.8558 dex all hold.
+  VALIDATION OVERVIEW: experimental benchmarks inside 1.5x **1 -> 3**, outside 1.5x 7 -> 5;
+    worst quantitative point unchanged (CML 1203.68x). family_validation_overview SLR-02
+    mean |log10| 0.085 -> 0.001.
+  PROJECTION REFIT (`refit_projection_constants.py`, still NOT applied): objective at the
+    shipped tau 0.9599 -> **0.8811 dex**, at the fit optimum 0.9408 -> **0.8620 dex**; fitted
+    tau UNCHANGED at 5011.87 min. THE 0.079 dex GAIN IS ENTIRELY THE TWO FIT-RECOVERY ROWS
+    (pea 0.6401 -> 0.0049 dex, soy 0.6303 -> 0.0049 dex) AND IS NOT EVIDENCE.
+  SNAPSHOTS: `refresh_internal_reproducibility_snapshots.py` NOTES v7 -> v8. The four
+    synthetic snapshots did NOT move at all — see the finding below.
+
+### (f) GENUINE FINDING FOUND WHILE HERE (reported, not fixed)
+
+  THE MATRIX OBSERVABILITY REGISTRY IS UNREACHABLE FROM THE RECOMMEND PATH. On the
+  `matrix_precursor_augmented` lane the network species arrive labelled by SMILES
+  (`CCCCCC=O`), not by name, so `describe_matrix_calibration` finds no record and returns
+  `calibration_observable_factor=None`, applying 1.0. Measured directly on
+  `soy_isolate_ribose_cysteine_100C_45min_Internal2026`: Hexanal metadata reads
+  `calibration_factor: 1.0, calibration_evidence_strength: heuristic,
+  calibration_fallback_mode: class_level`, and the snapshot is bit-identical after a 4.32x
+  change to the soy heated hexanal factor. Two consequences: (i) the internal snapshots are
+  insensitive to every constant in `src/matrix_calibration_registry.py`, so they cannot
+  detect drift in it; (ii) the process_state is recomputed there as `intermediate_matrix`
+  (100C/45min/aw0.95) rather than the file's declared `aqueous_pre_extrusion_model`. Recorded
+  in the snapshot generator's NOTES. [P]
+
+### (g) TESTS RE-PINNED (each with a dated causal comment)
+
+  1. `test_matrix_headspace_ph_validation.py` — `_PRATAP_SINGH_EXPECTED_RATIOS` hexanal
+     4.366/4.269 -> 1.0113/1.0113. The blanket "predicted < measured" direction assertion is
+     SPLIT per lane (pea under, soy over) because a shared scale must bracket the two
+     required scales — STRICTER than before, and it is the fingerprint that would break if
+     someone re-added per-lane freedom. 2-pentylfuran's <=1.01 branch untouched.
+  2. `test_matrix_only_benchmark.py` — same ratio re-pin; the ordering assertion rewritten
+     from a hard-coded "2-pentylfuran first" to "predicted ordering == measured ordering",
+     which now holds on BOTH lanes (fit recovery on the pea side); direction split per lane;
+     the `fitted_to_benchmark` label assertion left UNCHANGED with a note that its stability
+     across the refit is the point.
+  3. `test_matrix_assertions.py` — pea ranking_contract order_mismatch -> pass, max_ratio
+     4.366 -> 1.0113, ratio/adverse_order/overall fail -> pass. `strict_gate_blocked` stays
+     True and is annotated: a fit-recovery row cannot promote itself.
+  4. `test_benchmark_summary.py` — pea ranking_contract order_mismatch -> pass, plus NEW
+     explicit `evidence_role == "fit_recovery"` assertions on both rows so the restored pass
+     cannot be read as evidence. The markdown gap-label assertion moves off the
+     Pratap-Singh rows (their gaps closed) onto Hofmann1998, which still has a real one.
+  5. `test_honest_headline_guards.py` x2 — hold-out median 15.31 -> 42.62 with the full
+     3-point movement table and the geometric-mean explanation, plus new pins on
+     ci_coverage_hits 4 / rate 0.5; and the 0/6 guard gains a `pass-no-ranking` census
+     (0 -> 2, both named, both asserted to be `fit_recovery`) so "the guard did not move"
+     cannot hide a status improvement.
+  6. NEW `tests/scientific/test_matrix_observability_refit_wave_o.py` (3 tests) — shipped
+     constants vs the published refit to 5e-4 dex; the 1.0113x residual and the
+     one-parameter declaration; and the record's `per_row_recovery` fit-target declaration.
+
+  NOT RE-PINNED, DELIBERATELY: the Pratap-Singh ratio tolerance (2.0x), the strict-gate
+  exclusion, the 0/6 / 5/14 / 0/14 headlines, `max_fold_error`, and the pre-widening 1/5.
+
+### (h) DOC SYNC
+
+  README.md: fit-recovery block gains a Wave O paragraph (shared scale, 1.0113x residual,
+  status unchanged, ratio preserved); hold-out surface row 15.31x -> 42.62x and "2/5 via the
+  wider prior" -> 1/5 at both priors; a new block on the 24x Bi-vs-Liu contradiction and the
+  geometric-mean coincidence; the Wave M "matrix over-prediction re-derived" block updated
+  with the Wave O median and the reason the sigma derivation is invariant.
+  AUDIT.md: hold-out row; a new "Wave O — the refit, and the price it charged" section under
+  Round 3 with the 8-point table, the one-vs-two-parameter argument, the unanchored hexanol
+  finding and the sigma verdict; three new rows in the "What Round 3 cost" table.
+  docs/reference/VALIDATION_CONTRACT.md §3E: 15.31x -> 42.62x, 4/8-5/8 -> 3/8-4/8, and the
+  contradiction spelled out.
+
+### (i) GATES + SUITE
+
+  citation_gate PASS — 79 files, 904 DOI-bearing fields, 310 unique DOIs (unchanged; no new
+  citations were introduced).
+  holdout_guard PASS — 3/3 invariants, re-run after the refit and after regeneration.
+  fit_target_gate PASS — both checks. It now enumerates
+  `matrix_observability_refit_pratap_singh.json: leverage=per_row_recovery, 2 target(s)`,
+  and the per-row fit-target set is
+  `['cys_ribose_140C_Hofmann1998', 'pea_isolate_40C_PratapSingh2021', 'soy_isolate_40C_PratapSingh2021']`.
+
+  FINAL SUITE: see the line appended below.
+
+### [P] CARRIED FORWARD
+
+  1. The 1-hexanol observability factors are composed entirely of fabricated values
+     (`0.143 / 0.063` = 120 ppb / 80 ppb, neither in the paper) and have no anchor to refit
+     against. Retire, or find a real soy/pea 1-hexanol pair.
+  2. The compound-specific matrix calibration registry is unreachable on the
+     `matrix_precursor_augmented` path (SMILES-vs-name lookup). Either label the species or
+     canonicalise the lookup — until then the internal snapshots cannot detect drift in it.
+  3. The pea/soy CLASS-level aldehyde anchors were not moved with the refit. They remain
+     correct as a RATIO but their absolute scale is now inconsistent with the
+     compound-specific hexanal lane.
+  4. Bi 2020 (1260 ppb) vs Liu 2023 (15-180 ppb band) disagree by 24x on nominally the same
+     system and no observability factor satisfies both. Resolving which is representative of
+     commercial PPI is the single highest-value retrieval for this lane, ahead of Trikusuma.
+  5. Trikusuma 2020 remains the last content-unverified pillar of the matrix lane and the
+     only fit-recovery benchmark still scoring a full `pass`.
+
+### FINAL SUITE (Wave O)
+
+  **1245 passed, 1 skipped, 2 xfailed, 0 FAILED** in 833.90 s
+  (`tests/unit tests/scientific tests/integration tests/scripts`, documented conda path).
+  Entry state was 1242/0 (Wave M) + the 3 new tests in
+  `tests/scientific/test_matrix_observability_refit_wave_o.py` = 1245. The 1 skip and both
+  xfails are the declared, strict-marked ones from Wave J2. All three gates re-run green
+  after the suite. NOT COMMITTED, NOT STASHED — handed to the orchestrator as instructed.

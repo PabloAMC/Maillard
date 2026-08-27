@@ -62,187 +62,187 @@
   "stage1_coarse_tau_scan": [
     {
       "log10_tau_ref_min": 1.0,
-      "objective": 1.3580708303854323
+      "objective": 1.2792802430317618
     },
     {
       "log10_tau_ref_min": 2.0,
-      "objective": 1.2341824159778612
+      "objective": 1.1553918286241907
     },
     {
       "log10_tau_ref_min": 3.0,
-      "objective": 1.0578452568062884
+      "objective": 0.9790546694526179
     },
     {
       "log10_tau_ref_min": 4.0,
-      "objective": 0.9536808213810817
+      "objective": 0.8748902340274111
     },
     {
       "log10_tau_ref_min": 5.0,
-      "objective": 1.1468605741356357
+      "objective": 1.068069986781965
     },
     {
       "log10_tau_ref_min": 6.0,
-      "objective": 1.4487055597740284
+      "objective": 1.3699149724203576
     },
     {
       "log10_tau_ref_min": 7.0,
-      "objective": 1.690995533877724
+      "objective": 1.6122049465240536
     },
     {
       "log10_tau_ref_min": 8.0,
-      "objective": 1.7982726990350042
+      "objective": 1.7194821116813337
     },
     {
       "log10_tau_ref_min": 9.0,
-      "objective": 1.819532913520838
+      "objective": 1.7407423261671675
     },
     {
       "log10_tau_ref_min": 10.0,
-      "objective": 1.8220204451184039
+      "objective": 1.7432298577647332
     },
     {
       "log10_tau_ref_min": 11.0,
-      "objective": 1.8222740158494077
+      "objective": 1.743483428495737
     }
   ],
   "stage2_fine_tau_scan": [
     {
       "log10_tau_ref_min": 3.0,
-      "objective": 1.0578452568062884
+      "objective": 0.9790546694526179
     },
     {
       "log10_tau_ref_min": 3.1,
-      "objective": 1.0393592352072745
+      "objective": 0.960568647853604
     },
     {
       "log10_tau_ref_min": 3.2,
-      "objective": 1.0208192628683788
+      "objective": 0.942028675514708
     },
     {
       "log10_tau_ref_min": 3.3,
-      "objective": 1.0022363489547044
+      "objective": 0.9234457616010338
     },
     {
       "log10_tau_ref_min": 3.4,
-      "objective": 0.9836192806887252
+      "objective": 0.9048286933350546
     },
     {
       "log10_tau_ref_min": 3.5,
-      "objective": 0.9649750674096742
+      "objective": 0.8861844800560036
     },
     {
       "log10_tau_ref_min": 3.6,
-      "objective": 0.9469730670626898
+      "objective": 0.8681824797090192
     },
     {
       "log10_tau_ref_min": 3.7,
-      "objective": 0.9407673522772907
+      "objective": 0.8619767649236201
     },
     {
       "log10_tau_ref_min": 3.8,
-      "objective": 0.9411756916506243
+      "objective": 0.8623851042969537
     },
     {
       "log10_tau_ref_min": 3.9,
-      "objective": 0.9474317946323348
+      "objective": 0.8686412072786642
     },
     {
       "log10_tau_ref_min": 4.0,
-      "objective": 0.9536808213810817
+      "objective": 0.8748902340274111
     },
     {
       "log10_tau_ref_min": 4.1,
-      "objective": 0.9599227209437234
+      "objective": 0.8811321335900528
     },
     {
       "log10_tau_ref_min": 4.2,
-      "objective": 0.9679054025566063
+      "objective": 0.8891148152029357
     },
     {
       "log10_tau_ref_min": 4.3,
-      "objective": 0.9866098119299653
+      "objective": 0.9078192245762947
     },
     {
       "log10_tau_ref_min": 4.4,
-      "objective": 1.0053011564322916
+      "objective": 0.9265105690786211
     },
     {
       "log10_tau_ref_min": 4.5,
-      "objective": 1.0239763462488543
+      "objective": 0.9451857588951836
     },
     {
       "log10_tau_ref_min": 4.6,
-      "objective": 1.0426314513765502
+      "objective": 0.9638408640228797
     },
     {
       "log10_tau_ref_min": 4.7,
-      "objective": 1.0612615037548694
+      "objective": 0.9824709164011988
     },
     {
       "log10_tau_ref_min": 4.8,
-      "objective": 1.084833196493274
+      "objective": 1.0060426091396035
     },
     {
       "log10_tau_ref_min": 4.9,
-      "objective": 1.115872724108356
+      "objective": 1.0370821367546854
     },
     {
       "log10_tau_ref_min": 5.0,
-      "objective": 1.1468605741356357
+      "objective": 1.068069986781965
     }
   ],
   "stage3_baseline_scan": [
     {
       "log10_baseline": -9.0,
-      "objective": 0.9407851938507916
+      "objective": 0.861994606497121
     },
     {
       "log10_baseline": -8.0,
-      "objective": 0.9407850329811893
+      "objective": 0.8619944456275187
     },
     {
       "log10_baseline": -7.0,
-      "objective": 0.9407834244199726
+      "objective": 0.861992837066302
     },
     {
       "log10_baseline": -6.0,
-      "objective": 0.9407673522772907
+      "objective": 0.8619767649236201
     },
     {
       "log10_baseline": -5.0,
-      "objective": 0.9406079668387024
+      "objective": 0.8618173794850318
     },
     {
       "log10_baseline": -4.0,
-      "objective": 0.9391376236272246
+      "objective": 0.860347036273554
     }
   ],
   "stage4_ea_sensitivity_not_fitted": [
     {
       "apparent_activation_energy_kj_mol": 97.0,
-      "objective": 0.9337034412221035
+      "objective": 0.8549128538684329
     },
     {
       "apparent_activation_energy_kj_mol": 110.0,
-      "objective": 0.9376965132229464
+      "objective": 0.8589059258692758
     },
     {
       "apparent_activation_energy_kj_mol": 120.0,
-      "objective": 0.9407673522772907
+      "objective": 0.8619767649236201
     },
     {
       "apparent_activation_energy_kj_mol": 138.0,
-      "objective": 0.9471481660256026
+      "objective": 0.868357578671932
     },
     {
       "apparent_activation_energy_kj_mol": 160.0,
-      "objective": 0.9620952731365302
+      "objective": 0.8833046857828595
     }
   ],
   "shipped_constants": {
     "baseline_volatile_yield_fraction": 1e-06,
     "reference_conversion_time_min": 12589.0,
-    "objective": 0.9599221740724119,
+    "objective": 0.8811315867187413,
     "rows": [
       {
         "benchmark_id": "acrylamide_spi_extrusion_130C_ACSRef3",
@@ -296,9 +296,9 @@
         "benchmark_id": "pea_isolate_40C_PratapSingh2021",
         "compound": "hexanal",
         "measured_ppb": 1138.0,
-        "predicted_ppb": 260.6470182203558,
+        "predicted_ppb": 1125.278339411831,
         "scored": true,
-        "abs_log10_error": 0.6400895010594055
+        "abs_log10_error": 0.004882302883375105
       },
       {
         "benchmark_id": "pea_isolate_40C_PratapSingh2021",
@@ -344,9 +344,9 @@
         "benchmark_id": "soy_isolate_40C_PratapSingh2021",
         "compound": "hexanal",
         "measured_ppb": 1621.71,
-        "predicted_ppb": 379.8817979244892,
+        "predicted_ppb": 1640.0447759486174,
         "scored": true,
-        "abs_log10_error": 0.6303247099325839
+        "abs_log10_error": 0.004882510449884417
       },
       {
         "benchmark_id": "soy_isolate_40C_PratapSingh2021",
@@ -379,7 +379,7 @@
     "baseline_volatile_yield_fraction": 1e-06,
     "reference_conversion_time_min": 5011.872336272725
   },
-  "objective_at_fit": 0.9407673522772907,
+  "objective_at_fit": 0.8619767649236201,
   "objective_projection_sensitive_rows_only": 0.8367155233256158,
   "projection_sensitive_rows": 5,
   "scored_rows": 16,
@@ -443,9 +443,9 @@
       "benchmark_id": "pea_isolate_40C_PratapSingh2021",
       "compound": "hexanal",
       "measured_ppb": 1138.0,
-      "predicted_ppb": 260.6470182203558,
+      "predicted_ppb": 1125.278339411831,
       "scored": true,
-      "abs_log10_error": 0.6400895010594055,
+      "abs_log10_error": 0.004882302883375105,
       "projection_sensitive": false
     },
     {
@@ -497,9 +497,9 @@
       "benchmark_id": "soy_isolate_40C_PratapSingh2021",
       "compound": "hexanal",
       "measured_ppb": 1621.71,
-      "predicted_ppb": 379.8817979244892,
+      "predicted_ppb": 1640.0447759486174,
       "scored": true,
-      "abs_log10_error": 0.6303247099325839,
+      "abs_log10_error": 0.004882510449884417,
       "projection_sensitive": false
     },
     {
@@ -533,7 +533,7 @@
   "wave_h_decision": {
     "date": "2026-08-27",
     "decision": "FIT NOT APPLIED \u2014 incumbent reference_conversion_time_min retained",
-    "gap": "shipped tau_ref = 12589 min (objective 0.9599 dex); refit optimum = 5011.87 min (objective 0.9408 dex), i.e. the fit wants the global volatile budget scaled by 2.51x. The optimum has moved repeatedly as the chemistry and the reference data were corrected (Wave G1 chemistry rebuild, Wave I quarantines, Wave N MFT route correction, Wave K/M benchmark content corrections); it is a scale that absorbs whatever the rest of the model gets wrong, which is exactly why it is reported and not applied.",
+    "gap": "shipped tau_ref = 12589 min (objective 0.8811 dex); refit optimum = 5011.87 min (objective 0.8620 dex), i.e. the fit wants the global volatile budget scaled by 2.51x. The optimum has moved repeatedly as the chemistry and the reference data were corrected (Wave G1 chemistry rebuild, Wave I quarantines, Wave N MFT route correction, Wave K/M benchmark content corrections); it is a scale that absorbs whatever the rest of the model gets wrong, which is exactly why it is reported and not applied.",
     "why_not_applied": "tau_ref is a SINGLE GLOBAL SCALE on the volatile budget. Moving it does not improve any mechanism; it trades one lane against another, and this panel's mean-|log10| objective takes that trade happily. At the refit optimum the Hofmann1998 MFT residual collapses to 0.0468 dex (from 0.3526 dex shipped) while the Resconi 2023 furfural residual grows to 1.0574 dex (from 0.6590 dex shipped), i.e. from 4.6x to 11.4x OVER. The arithmetic is decisive: at the shipped value the total predicted pool over the five species this benchmark's system tracks is ~1126 ppb against a measured MFT+FFT of 542 ppb (measured 2026-08-27, Wave M: furfural 572.3, FFT 243.7, MFT 151.9, bis(2-methyl-3-furyl) disulfide 92.1, 2,5-dimethylpyrazine 66.4), so the budget is already the right order of magnitude and the sulfur deficit is an ALLOCATION deficit \u2014 furfural, unmeasured in that benchmark, takes ~51% of the pool. See results/validation/sulfur_barrier_refit_hofmann.md (NOTE: that record is itself STALE as of Wave N \u2014 it profiles `thiol_addition_norfuraneol`, a family the isotope evidence retired; re-running it is an open owner item). Raising the global budget 2.51x to close a 2.25x MFT gap means supplying ~2800 ppb of volatiles at these conditions to explain 542 ppb of measured product, sending the rest to species nobody measured, and pushing FFT from 1.22x over to ~3.1x over. That is not a calibration, it is a way of making the allocation finding invisible. The incumbent is therefore retained and the gap is reported.",
     "what_would_justify_applying_it": "A refit of the ALLOCATION (the depth-bias and direct-sulfur heuristics, both unconstrained legacy fits from the quarantined-target era), done first and with its own literature constraints, after which a global scale would be fitting a scale rather than absorbing a selectivity error."
   }

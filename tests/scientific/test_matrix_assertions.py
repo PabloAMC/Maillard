@@ -31,11 +31,26 @@ def test_matrix_benchmark_assertions_cover_external_and_internal_matrix_rows():
     # INVISIBLE while the reference agreed with the constant fitted to it. Nothing was
     # relaxed: the tolerance and the ranking contract are untouched, and the observability
     # factors were deliberately NOT refitted (owner decision -- see AUDIT.md Round 3).
-    assert pea_off.ranking_contract_status == "order_mismatch"
-    assert pea_off.max_ratio == pytest.approx(4.366, rel=1e-3)
-    assert pea_off.ratio_status == "fail"
-    assert pea_off.adverse_order_status == "fail"
-    assert pea_off.overall_status == "fail"
+    #
+    # RE-PINNED AGAIN 2026-08-27 (Wave O refit to content-corrected anchors, owner-approved).
+    # That owner decision has now been taken and recorded: the ambient hexanal observability
+    # factors were refitted against the VERIFIED 1138.00 / 1621.71 ppb with ONE shared scale
+    # of 4.317249x (scripts/generators/refit_matrix_observability_pratap_singh.py ->
+    # results/validation/matrix_observability_refit_pratap_singh.{json,md}). max_ratio
+    # 4.366 -> 1.0113, ranking contract order_mismatch -> pass, and every derived status with
+    # it. THE TOLERANCES ARE STILL UNTOUCHED -- what changed is the constant, not the bar.
+    #
+    # This row is now a FIT-RECOVERY pass and must be read as one: the model reproduces the
+    # measurement because a constant was solved from it. The 1.0113 is pinned rather than a
+    # "<= 1.05" band on purpose -- it is the residual a ONE-parameter fit leaves on TWO rows,
+    # and it would collapse to 1.0000 if anyone re-introduced per-lane freedom.
+    assert pea_off.ranking_contract_status == "pass"
+    assert pea_off.max_ratio == pytest.approx(1.0113, rel=1e-3)
+    assert pea_off.ratio_status == "pass"
+    assert pea_off.adverse_order_status == "pass"
+    assert pea_off.overall_status == "pass"
+    # Still blocked from the strict gate: a fit-recovery row cannot promote itself by
+    # agreeing with the number it was fitted to.
     assert pea_off.strict_gate_blocked is True
 
     pea_meaty = by_id["pea_isolate_ribose_cysteine_100C_45min_Internal2026"]

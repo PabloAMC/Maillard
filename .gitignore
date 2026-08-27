@@ -136,6 +136,13 @@ results/validation/*
 !results/validation/family_implementation_status.md
 !results/validation/projection_constant_refit.json
 !results/validation/projection_constant_refit.md
+# Wave O evidence artifact (2026-08-27): the matrix observability refit against the
+# content-corrected Pratap-Singh anchors. Tracked because src/matrix_calibration_registry.py
+# cites it from the constants themselves, because scripts/ci/fit_target_gate.py reads it to
+# know that pea/soy_isolate_40C_PratapSingh2021 are fit targets, and because the hold-out
+# regression it caused has to be reviewable without a run.
+!results/validation/matrix_observability_refit_pratap_singh.json
+!results/validation/matrix_observability_refit_pratap_singh.md
 
 # Generated xTB artifacts (ignore generated path-search outputs)
 # Keep data/geometries tracked but ignore generated xTB results under xtb_inputs

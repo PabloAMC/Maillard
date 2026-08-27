@@ -46,7 +46,19 @@ def test_benchmark_summary_separates_supported_and_unsupported_cases():
     # because the hexanal observability factor was back-solved from the erroneous 260.
     # This is a REAL, newly visible ranking failure, not a tolerance question: it was
     # invisible while the reference agreed with the constant fitted to it. NOT relaxed.
-    assert by_id["pea_isolate_40C_PratapSingh2021"].ranking_contract_status == "order_mismatch"
+    #
+    # RE-PINNED AGAIN 2026-08-27 (Wave O refit to content-corrected anchors, owner-approved),
+    # "order_mismatch" -> "pass". The observability factor was refitted against the VERIFIED
+    # 1138.00 ppb (shared scale 4.317249x; record:
+    # results/validation/matrix_observability_refit_pratap_singh.json), so the model now
+    # predicts hexanal 1125.3 > 2-pentylfuran 638.3 and the paper's ordering is reproduced.
+    # READ THIS AS FIT RECOVERY, NOT AS A PREDICTION: the ordering is now recovered because
+    # one of the two ranked compounds has a constant solved from its own measurement. The
+    # benchmark's evidence_role stays `fit_recovery` (asserted below) precisely so this
+    # restored "pass" cannot be counted as evidence.
+    assert by_id["pea_isolate_40C_PratapSingh2021"].ranking_contract_status == "pass"
+    assert by_id["pea_isolate_40C_PratapSingh2021"].evidence_role == "fit_recovery"
+    assert by_id["soy_isolate_40C_PratapSingh2021"].evidence_role == "fit_recovery"
     assert by_id["pea_isolate_40C_PratapSingh2021"].strict_ready is False
     assert by_id["pea_isolate_40C_PratapSingh2021"].overall_status in {"pass", "pass-no-ranking", "scale-gap", "ranking-gap"}
 
@@ -80,8 +92,19 @@ def test_benchmark_summary_markdown_includes_gap_labels():
     # correctly displaced by the quantitative ones. The test now asserts a gap label is
     # rendered at all -- which is what its name claims -- using the labels these rows
     # actually produce.
+    #
+    # RE-PINNED AGAIN 2026-08-27 (Wave O refit to content-corrected anchors, owner-approved).
+    # Both Pratap-Singh scale gaps closed (they are fit-recovery rows again, now recovering
+    # VERIFIED values instead of a transcription error) and the pea ranking contract passes,
+    # so neither "max ratio" nor "matrix ranking contract: order_mismatch" is emitted for
+    # them any more. The gap labels this fixture still produces come from Hofmann1998, which
+    # Wave N left at 2.25x under -- so the assertion moves there rather than being deleted.
+    # The three-benchmark fixture is deliberately kept: it now shows one row with a real
+    # quantitative gap next to two fit-recovery rows without one, which is the contrast the
+    # summary exists to make legible.
     assert "max ratio" in markdown
-    assert "matrix ranking contract: order_mismatch" in markdown
+    assert "cys_ribose_140C_Hofmann1998" in markdown
+    assert "matrix-only intake path is executable" in markdown
     assert "ambient_slurry" in markdown
     assert "Ranking Contract" in markdown
     assert "Strict Ready" in markdown

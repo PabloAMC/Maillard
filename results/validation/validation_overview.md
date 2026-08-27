@@ -9,14 +9,14 @@ This artifact shows the full quantitative benchmark surface while still separati
 - Quantitative benchmarks plotted: 9
 - Experimental quantitative benchmarks: 8
 - Reference-only quantitative anchors: 1
-- Experimental benchmarks inside 1.5x: 1
-- Experimental benchmarks outside 1.5x: 7
-- Experimental benchmarks outside 2x: 7
+- Experimental benchmarks inside 1.5x: 3
+- Experimental benchmarks outside 1.5x: 5
+- Experimental benchmarks outside 2x: 5
 - Worst experimental benchmark ratio: 1203.680x
 - Worst experimental point: Commercial PBMA, CML/CEL benchmark (Foods, 2023) / Nε-(Carboxymethyl)lysine (CML) (1203.680x)
-- Quantitative benchmarks inside 1.5x: 1
-- Quantitative benchmarks outside 1.5x: 8
-- Quantitative benchmarks outside 2x: 8
+- Quantitative benchmarks inside 1.5x: 3
+- Quantitative benchmarks outside 1.5x: 6
+- Quantitative benchmarks outside 2x: 6
 - Worst quantitative benchmark ratio (all quantitative benchmarks): 1203.680x
 - Worst quantitative point (all quantitative benchmarks): Commercial PBMA, CML/CEL benchmark (Foods, 2023) / Nε-(Carboxymethyl)lysine (CML) (1203.680x; measured_volatiles)
 - Worst reference-only benchmark ratio: 3.195x

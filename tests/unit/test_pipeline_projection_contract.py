@@ -103,7 +103,15 @@ def test_output_projection_applies_compound_specific_matrix_calibration():
 
     row = metadata[canon]
 
-    assert row["calibration_observable_factor"] == pytest.approx((0.453 / 0.205) * (1.0 - 0.7060))
+    # RE-PINNED 2026-08-27 (Wave O refit to content-corrected anchors, owner-approved).
+    # This lane's factor is DEFINED as the soy ambient hexanal baseline x the Shu 2024
+    # attenuation (1 - 0.7060). Wave O refitted that baseline against the verified 1621.71 ppb
+    # (0.453/0.205 = 2.2097561 -> 9.54007, a shared 4.317249x), and the composition was
+    # PROPAGATED rather than frozen -- freezing it would have left a corrected fit composed
+    # with a stale baseline. Record:
+    # results/validation/matrix_observability_refit_pratap_singh.{json,md}.
+    # Expressed as the composition rather than as a bare number so the structure stays visible.
+    assert row["calibration_observable_factor"] == pytest.approx(9.54007 * (1.0 - 0.7060))
     assert row["calibration_factor"] == pytest.approx(row["calibration_observable_factor"])
     assert row["accessibility_profile"] == "peptide_bound"
     assert row["accessibility_warning"] is True

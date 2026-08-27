@@ -265,14 +265,25 @@ has never seen. Its rules, stated explicitly:
   correct it**. Every row carries its `value_provenance` and the report renders the split.
   Until 2026-08-27 these were written at full float precision beside a fabricated
   `measurement_date` of "<publication year>-01-01", which is now `not_applicable`.
-- **Current numbers (2026-08-27 Wave M regeneration). The headline is 1/5.**
+- **Current numbers (2026-08-27 Wave O regeneration). The headline is 1/5.**
   Genuine-extrapolation coverage at the **pre-widening** prior (ln-sigma 2.0) is
-  **1 of 5**. The same predictions score **2/5** under the shipped ln-sigma 2.86 — that
-  difference is the width of the interval, not the accuracy of the model. Over all eight
-  rows: 4/8 at ln-sigma 2.0, 5/8 at 2.86, of which **3/3 are re-scoring bundles**
-  (`bi_2020_raw_pea`, `liu_2023_ppi_offnote_baseline`) that test nothing. Median fold error
-  **15.31x** (median |log10| 1.185 dex); worst miss **2474x** on roasted pea. **Read the fold
+  **1 of 5**, and since Wave O it is 1/5 under the shipped ln-sigma 2.86 as well (it was
+  2/5 between Wave M and Wave O; that difference was the width of the interval, not the
+  accuracy of the model). Over all eight rows: **3/8 at ln-sigma 2.0, 4/8 at 2.86**, of
+  which **3/3 are re-scoring bundles** (`bi_2020_raw_pea`,
+  `liu_2023_ppi_offnote_baseline`) that test nothing. Median fold error
+  **42.62x** (median |log10| 1.630 dex); worst miss **2474x** on roasted pea. **Read the fold
   error, not the coverage** — it is the only figure here no choice of prior can move.
+  **Wave O (2026-08-27) made this number WORSE by making a constant more correct.** The
+  ambient hexanal observability factors were refitted from the 260 / 380 ppb transcription
+  errors onto the paper's verified 1138.00 / 1621.71 ppb (one shared scale, 4.317249x;
+  record `results/validation/matrix_observability_refit_pratap_singh.json`). Median 15.31x
+  → 42.62x, coverage 5/8 → 4/8. Bi 2020 raw pea improved 5.37x → 1.24x; Liu 2023 went
+  4.52x → 19.50x and Li 2026 hexanal 21.58x → 93.15x. The reason is a contradiction inside
+  the hold-out itself: Bi reports 1260 ppb and Liu's band midpoint is 51.96 ppb for
+  nominally the same system, a 24x spread, and the erroneous 260 ppb sat almost exactly at
+  their geometric mean (255.9). No observability factor satisfies both. `max_fold_error`
+  and the pre-widening 1/5 did not move.
   **The 0/5 → 1/5 and the 32.79x → 15.31x are a REFERENCE correction, not a model change
   (Wave K/M, 2026-08-27).** Two of the four `li_2026_spi_wg_hme_control` points had been
   transcribed from adjacent table rows: 2-pentylfuran 221.5 was the paper's *Maltol* row

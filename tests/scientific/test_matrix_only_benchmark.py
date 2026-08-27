@@ -60,19 +60,38 @@ def test_matrix_only_benchmark_is_executable_with_full_coverage(bench_file):
 # NOTHING WAS RELAXED. The `hexanal` limits below were <=1.25 / <=1.10 pass-bands around an
 # algebraic recovery; they are now two-sided pins on an honest miss, which is a STRICTER
 # contract (drift in either direction fails). The 2-pentylfuran limits are untouched.
+#
+# RE-DERIVED AGAIN 2026-08-27 (Wave O refit to content-corrected anchors, owner-approved).
+# The owner decision item 2 above flags has been taken. The ambient hexanal observability
+# factors were refitted against the VERIFIED 1138.00 / 1621.71 ppb using ONE shared scale of
+# 4.317249x (scripts/generators/refit_matrix_observability_pratap_singh.py ->
+# results/validation/matrix_observability_refit_pratap_singh.{json,md}). Consequences pinned
+# below:
+#   * hexanal ratios 4.366x / 4.269x -> a COMMON 1.0113x. Not 1.0000x: one shared scale
+#     against two rows leaves a residual, and that residual is the only informative number
+#     in the fit -- it says the two corrected anchors agree to 1.1%, i.e. the transcription
+#     error was a common absolute-scale error and the pea-vs-soy release ratio survived it.
+#   * item 3's ordering inversion is RESOLVED for pea: the model now predicts hexanal
+#     (1125.3) above 2-pentylfuran (638.3), matching the paper. Read as fit recovery -- the
+#     winning compound is the one whose constant was solved from its own measurement.
+#   * item 2's "under-prediction" direction now SPLITS: pea under, soy over, because a single
+#     shared scale must bracket the two per-lane required scales (4.36606 and 4.26899). That
+#     bracketing is asserted below and is the fingerprint of a one-parameter fit.
+# Still nothing relaxed: same tolerances, same strict-gate exclusion, and both benchmarks
+# stay `fit_recovery` in the evidence-role split.
 @pytest.mark.parametrize(
     ("protein_type", "bench_file", "expected_limits", "expects_hexanal_first"),
     [
         (
             "pea_iso",
             MATRIX_ONLY_BENCHMARKS["pea_iso"],
-            {"hexanal": 4.366, "2-pentylfuran": 1.2},
+            {"hexanal": 1.0113, "2-pentylfuran": 1.2},
             True,
         ),
         (
             "soy_iso",
             MATRIX_ONLY_BENCHMARKS["soy_iso"],
-            {"hexanal": 4.269, "2-pentylfuran": 1.05},
+            {"hexanal": 1.0113, "2-pentylfuran": 1.05},
             False,
         ),
     ],
@@ -95,22 +114,35 @@ def test_matrix_only_benchmark_preserves_measured_ordering_without_entering_stri
     # The measured ordering the paper reports.
     assert (measured["hexanal"] > measured["2-pentylfuran"]) is expects_hexanal_first
 
-    # The ordering the model produces. For pea these now DISAGREE, and that disagreement is
-    # the point: it is reported, not tolerated away (the benchmark's ranking contract reads
-    # `order_mismatch` and the summary reads `scale-gap`).
-    assert predicted["2-pentylfuran"] > predicted["hexanal"]
+    # 2026-08-27 (Wave O): the ordering the model produces now AGREES with the paper on both
+    # lanes -- pea puts hexanal first, soy puts 2-pentylfuran first. Asserted as agreement
+    # with the measured ordering rather than as a fixed compound order, so the test states
+    # the property instead of a coincidence. It is fit recovery on the pea side: the compound
+    # that moved to the top is the one whose observability factor was solved from its own
+    # measured value.
+    assert (predicted["hexanal"] > predicted["2-pentylfuran"]) is expects_hexanal_first, (
+        "the predicted ordering no longer matches the measured ordering; before re-pinning, "
+        "check whether the Wave O refit was reverted."
+    )
 
     assert ratios["2-pentylfuran"] <= expected_limits["2-pentylfuran"]
     assert ratios["hexanal"] == pytest.approx(expected_limits["hexanal"], rel=0.01), (
-        f"{protein_type} hexanal ratio is {ratios['hexanal']:.3f}x, pinned at "
-        f"{expected_limits['hexanal']}x -- the exact size of the 2026-08-27 Wave K/M "
-        "reference correction. If it moved, check whether the observability factor was "
-        "refitted (owner decision) or the benchmark reverted."
+        f"{protein_type} hexanal ratio is {ratios['hexanal']:.4f}x, pinned at "
+        f"{expected_limits['hexanal']}x -- the residual left by the 2026-08-27 Wave O "
+        "one-parameter refit against the content-verified anchors. 1.0000 would mean someone "
+        "re-added per-lane freedom; 4.37x/4.27x would mean the refit was reverted."
     )
-    assert predicted["hexanal"] < measured["hexanal"], (
-        f"{protein_type} hexanal was pinned as an UNDER-prediction; re-derive with a dated "
-        "cause rather than relaxing."
-    )
+    # 2026-08-27 (Wave O): direction is now lane-specific and is the fingerprint of the
+    # one-parameter fit. The shared scale 4.317249x sits between the pea lane's required
+    # 4.36606x and the soy lane's 4.26899x, so it MUST under-shoot pea and over-shoot soy.
+    if protein_type == "pea_iso":
+        assert predicted["hexanal"] < measured["hexanal"], (
+            "pea hexanal must sit just UNDER its anchor under a shared-scale fit."
+        )
+    else:
+        assert predicted["hexanal"] > measured["hexanal"], (
+            "soy hexanal must sit just OVER its anchor under a shared-scale fit."
+        )
     assert summary.strict_ready is False
 
 
@@ -168,6 +200,13 @@ def test_matrix_only_benchmark_exposes_ranking_contract_and_calibration_metadata
     # is fitted to values with no source, and the max_ratio it now scores is 4.366x rather
     # than 1.002x. `fitted_to_benchmark` remains the correct label; the factors were NOT
     # refitted (owner decision -- AUDIT.md, Round 3).
+    #
+    # 2026-08-27 (Wave O refit to content-corrected anchors, owner-approved): the factors HAVE
+    # now been refitted, against the verified values this time, and the label is UNCHANGED --
+    # which is exactly the point. A constant solved from a benchmark is fit-recovery whether
+    # the value it was solved from was right or wrong; refitting improved the arithmetic and
+    # changed nothing about the evidence. The assertion below is therefore identical before
+    # and after the refit, and that stability is deliberate.
     assert hexanal_meta["calibration_evidence_strength"] == "fitted_to_benchmark"
     assert hexanal_meta["calibration_fallback_mode"] == "compound_specific"
     assert hexanal_meta["process_state"] == "ambient_slurry"

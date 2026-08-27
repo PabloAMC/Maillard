@@ -90,8 +90,8 @@ These are worse than the numbers this repository advertised a week ago. They are
 | Literature rows inside 90% CI | **1/3 evaluable** (median CI width 0.86 dex), with fitted rows removed from numerator *and* denominator |
 | Fitted rows (constants back-solved from the benchmark) | 2/2 — **not evidence**; both would previously have been counted as literature hits |
 | Internal-synthetic rows (reproducibility only) | 18/18 — carries zero validation weight |
-| Benchmarks without blocking gaps | **0/6 predictive** (+ 1/4 fit-recovery, 4/4 synthetic; the 5/14 aggregate is all non-evidence). Fit-recovery fell 3/4 → 1/4 in Round 3 when the two Pratap-Singh benchmarks were corrected against the paper and stopped recovering — see below. |
-| External hold-out | **1/5 genuine extrapolations** at the pre-widening prior — 2/5 only under the wider one, with the same predictions; median fold error **15.31×**, worst **2474×**. Only 4 of the 8 points are measurements at all. The median was 32.79× until Round 3 corrected two wrong table rows in the Li 2026 bundle; the predictions did not move. |
+| Benchmarks without blocking gaps | **0/6 predictive** (+ 1/4 fit-recovery, 4/4 synthetic; the 5/14 aggregate is all non-evidence). Fit-recovery fell 3/4 → 1/4 in Round 3 when the two Pratap-Singh benchmarks were corrected against the paper and stopped recovering. Wave O then refitted their constants onto the verified values and they recover again — at `pass-no-ranking`, which is not `pass`, so **none of these counts moved**. A refit changes the size of a recovery, never its evidential status. |
+| External hold-out | **1/5 genuine extrapolations** at the pre-widening prior — and 1/5 under the wider one too since Wave O; median fold error **42.62×**, worst **2474×**. Only 4 of the 8 points are measurements at all. The median was 32.79× until Round 3 corrected two wrong table rows in the Li 2026 bundle (→ 15.31×, predictions unmoved), then rose to 42.62× when Wave O refitted the ambient hexanal observability onto the paper's verified anchor. **A refit to verified values made the out-of-sample number worse**; see Round 3, Wave O. |
 | Strict-ready benchmarks | **0/14** |
 | Reaction-chemistry lanes with generative templates | 5/16 (derived by enumeration, test-pinned) |
 | Test suite | **1242 passed, 1 skipped, 2 xfailed, 0 failed** (2026-08-27, after Round 3). The dvipng failure carried as "environmental" for the whole audit is **gone**: `--report` now degrades to mathtext instead of raising |
@@ -365,12 +365,15 @@ one. Norfuraneol is kept as a genuine furanone product; it just no longer feeds 
 | Pentose ≫ hexose ordering | 8.98× (ribose 981.3) | **3.39×** (ribose 370.3), of which ~1.13× structural | Route correction |
 | Benchmarks without blocking gaps | 0/6 predictive, **3/4** fit-recovery, 4/4 synthetic (7/14) | 0/6 predictive, **1/4** fit-recovery, 4/4 synthetic (**5/14**) | Pratap-Singh content correction |
 | Pea / soy ambient slurry | max ratio 1.002× / 1.001× (`pass`) | **4.37× / 4.27× under** (`scale-gap`) | Pratap-Singh content correction |
+| Pea / soy ambient slurry, after the Wave O refit | 4.37× / 4.27× under (`scale-gap`) | **1.0113× on both** (`pass-no-ranking`, still `fit_recovery`) | Observability refit to the verified anchors |
 | Acrylamide extrusion | 6.42× under | **15.39× under** | Ma 2024 re-provenance (62.62 → 150 ppb) |
 | Resconi furfural | 3.14× over | **4.56× over** | Cherry-pick corrected (1040 → 715.22 ppb) |
-| Hold-out median fold error | 32.79× | **15.31×** | Li 2026 wrong-row correction |
-| Hold-out genuine extrapolations | 0/5 pre-widening | **1/5** pre-widening | Li 2026 wrong-row correction |
-| Literature-row projection objective | 0.74 dex | **0.96 dex** | Both corrections |
+| Hold-out median fold error | 32.79× | 15.31× → **42.62×** after Wave O | Li 2026 wrong-row correction, then the Wave O observability refit |
+| Hold-out genuine extrapolations | 0/5 pre-widening | **1/5** pre-widening (unmoved by Wave O) | Li 2026 wrong-row correction |
+| Hold-out coverage at the shipped sigma | 5/8 | **4/8** | Wave O observability refit |
+| Literature-row projection objective | 0.74 dex | 0.96 dex → **0.88 dex** after Wave O | Both corrections; then the Wave O refit (the 0.08 dex gain is entirely two fit-recovery rows and is **not** evidence) |
 | Matrix leave-lane-out ln-sigma | 2.86 RMS on 6 residuals | **3.25** on 5 | Pratap-Singh content correction |
+| Matrix leave-lane-out ln-sigma, after the Wave O refit | 3.25 on 5 | **3.25 on 5, bit-identical** | The derivation never reads the observability factors — by design |
 | Test suite | 1245 passed, 0 failed | **1242 passed, 1 skipped, 2 xfailed, 0 failed** | 18 stale pins re-derived, none relaxed |
 
 **The Hofmann row is the one to read twice.** The 1.45× was bought with
@@ -390,6 +393,73 @@ observability factors were deliberately *not* refitted — doing so in the same 
 chemistry change would make the resulting agreement unattributable — so
 `src/matrix_calibration_registry.py` now carries the arithmetic and the consequence at the
 constant.
+
+### Wave O — the refit, and the price it charged (2026-08-27, owner-approved)
+
+The deferred refit was then done, on its own, against the verified anchors.
+
+**What was fitted.** One parameter: a shared multiplicative scale of **4.317249×** on the
+ambient-slurry *hexanal* observability factors of both lanes (pea `1.0 → 4.31725`, soy
+`2.2097561 → 9.54007`; the soy heated-matrix factor is *defined* as the soy ambient baseline
+× the Shu 2024 attenuation, so it was propagated `0.649668 → 2.80478` rather than left
+composed with a stale baseline). Nothing else moved — no barrier, no projection constant, no
+marker yield, and not the 2-pentylfuran factors, whose anchors (638 / 2492 ppb) Wave K
+verified verbatim. Generator and record:
+`scripts/generators/refit_matrix_observability_pratap_singh.py` →
+`results/validation/matrix_observability_refit_pratap_singh.{json,md}`.
+
+**One parameter, not two, deliberately.** Two free factors against two rows is an exactly
+determined system: its zero residual is arithmetic and measures nothing. One shared scale
+leaves the data a degree of freedom to disagree with, and the residual it reports is
+informative: **1.0113× on both rows**. The pea lane wanted 4.36606× and the soy lane
+4.26899×, so the two corrected anchors are mutually consistent to 1.1%. The transcription
+error was a common *absolute-scale* error; the pea-vs-soy release ratio the registry encodes
+(2.2098) survived it untouched. Nothing saturated and no bound was hit — the optimum sits
+more than a decade inside the search range on both sides.
+
+**The status did not change, and that is the point.** Both benchmarks were already
+`fitted_to_benchmark`; they still are, still sit in the `fit_recovery` bucket, and are still
+excluded from the honest coverage numerator *and* denominator. Their `overall_status` moved
+`scale-gap` → `pass-no-ranking`, which is **not** counted as a pass: 0/6 predictive and
+5/14 aggregate are unchanged. A refit changes the size of a recovery, never its evidential
+status.
+
+**The price, which is the number that matters.** The external hold-out — the only lane a
+refit cannot flatter — got **worse**:
+
+| Hold-out point | Before | After |
+| --- | --- | --- |
+| Bi 2020 raw pea, hexanal | 5.37× | **1.24×** |
+| Liu 2023 PPI, hexanal | 4.52× | **19.50×** |
+| Li 2026 HME, hexanal | 21.58× | **93.15×** |
+| the other five points | unchanged | unchanged |
+| **median fold error** | 15.31× | **42.62×** |
+| coverage at the shipped sigma | 5/8 | **4/8** |
+| worst miss / pre-widening 1/5 | 2474× / 1 of 5 | unchanged |
+
+The cause is a contradiction inside the literature, not inside the fit. The pea ambient lane
+carries two external measurements of nominally the same system that disagree by **24×** —
+Bi 2020 at 1260 ppb and Liu 2023's band midpoint at 51.96 ppb — and the erroneous 260 ppb the
+old constants reproduced sat almost exactly at their geometric mean (√(1260 × 51.96) = 255.9).
+**Being wrong in the middle of a contradiction scores better than being right at one end of
+it.** The verified anchor (1138 ppb) agrees with Bi to 1.11× and sits 6.3× above the top of
+Liu's reported band; which is representative of commercial PPI is a question this repository
+cannot settle. What the refit bought is that the shipped constants are now anchored to
+numbers that exist in a paper.
+
+**What the refit could not touch.** The 1-hexanol factors. The paper reports n.d. in both
+matrices, so the shipped soy value `0.143 / 0.063` is a ratio of two numbers (120 and 80 ppb)
+that appear nowhere in it, and there is no anchor to refit it against. It is left in place,
+flagged in the registry and in the fit record, and it is the constant behind the hold-out's
+1117× 1-hexanol miss on Li 2026. Retiring it is a separate science decision.
+
+**And the sigma did not move at all.** Re-deriving the leave-lane-out matrix ln-sigma after
+the refit produced a **bit-identical** artifact (RMS 3.2520 on 5 residuals, 90% CI
+[2.186, 6.796], shipped 2.86 still inside). That is structural: the derivation multiplies the
+oxidation load by the base marker yield and never reads an observability factor, because the
+uncalibrated tier exists to describe a lane that has no such calibration. **No refit of these
+constants can ever be used to justify narrowing that prior** — now stated in the generator's
+own header.
 
 ### What Round 3 means for the rest of the repository
 

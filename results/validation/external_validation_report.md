@@ -8,24 +8,24 @@ _Monte Carlo envelope evaluation on isolated hold-out matrix bundles that are ex
 
 Everything else on this page is a weaker claim than that number, in two separate ways, and both were being read as if they were not:
 
-1. **Prior width.** At the currently shipped sigma (2.86, ~±110× at 90%) the *same predictions* score 2 / 5 on those same extrapolation rows, and 5 / 8 over all hold-out rows (vs 4 / 8 at ln-sigma 2.0). **Nothing about the model changed between those numbers — only the width of the interval drawn around it.**
+1. **Prior width.** At the currently shipped sigma (2.86, ~±110× at 90%) the *same predictions* score 1 / 5 on those same extrapolation rows, and 4 / 8 over all hold-out rows (vs 3 / 8 at ln-sigma 2.0). **Nothing about the model changed between those numbers — only the width of the interval drawn around it.**
 2. **Which rows test anything.** 3 of the 8 rows come from bundles whose executable conditions are *copied from an in-panel benchmark*: scoring them re-runs an existing anchor at its own conditions. They score 3 / 3, and that is a reproducibility comparison, not evidence of transfer.
 
 
-**Median accuracy on hold-outs**: **15.31x** median fold error (median |log10 error| = **1.185** dex). *This number is unaffected by the prior width and is the one to track across runs.*
+**Median accuracy on hold-outs**: **42.62x** median fold error (median |log10 error| = **1.630** dex). *This number is unaffected by the prior width and is the one to track across runs.*
 
 > **What is actually being scored here.** These are not eight external
 > measurements. The hold-out points divide as follows:
 >
 > | Provenance | Rows | Inside 90% CI | What a score against it means |
 > | --- | ---: | ---: | --- |
-> | `reported_point_value` | 4 | 2/4 (50%) | A concentration the source reports. A genuine external test. |
+> | `reported_point_value` | 4 | 1/4 (25%) | A concentration the source reports. A genuine external test. |
 > | `band_geometric_midpoint` | 2 | see combined row | The source reports a RANGE; the scored value is sqrt(min*max), a number we constructed. The honest uncertainty is the band (10-12x end to end), so landing inside it is weak evidence. |
 > | `derived_from_oav_and_repo_threshold` | 2 | see combined row | The source's odour-activity value multiplied by THIS REPO'S OWN hexanal odour threshold (4.5 ppb, compilation-level and never verified against a primary table). Partly encodes one of our own constants and moves if that constant is corrected. A consistency check, not an external measurement. |
 >
-> Combined: direct measurements **2/4 (50%)**, derived or constructed **3/4 (75%)**.
+> Combined: direct measurements **1/4 (25%)**, derived or constructed **3/4 (75%)**.
 
-_Secondary, prior-dependent figure: at the SHIPPED uncalibrated sigma the measured value lies inside the 90% CI for 5 / 8 matched hold-out compounds (62.5%)._
+_Secondary, prior-dependent figure: at the SHIPPED uncalibrated sigma the measured value lies inside the 90% CI for 4 / 8 matched hold-out compounds (50.0%)._
 
 Samples per hold-out bundle: 200; seed 0; bundles evaluated: 4.
 
@@ -49,10 +49,10 @@ Samples per hold-out bundle: 200; seed 0; bundles evaluated: 4.
 
 | Benchmark | Matched compounds | Inside 90% CI | Median accuracy |
 | --- | ---: | ---: | ---: |
-| external_validation_bi_2020_raw_pea_hexanal | 1 | 1/1 (100.0%) | 5.37x |
+| external_validation_bi_2020_raw_pea_hexanal | 1 | 1/1 (100.0%) | 1.24x |
 | external_validation_bi_2020_roasted_pea_hexanal | 1 | 0/1 (0.0%) | 2474.38x |
-| external_validation_li_2026_spi_wg_hme_control | 4 | 2/4 (50.0%) | 76.69x |
-| external_validation_liu_2023_ppi_offnote_baseline | 2 | 2/2 (100.0%) | 7.00x |
+| external_validation_li_2026_spi_wg_hme_control | 4 | 1/4 (25.0%) | 159.36x |
+| external_validation_liu_2023_ppi_offnote_baseline | 2 | 2/2 (100.0%) | 14.55x |
 
 ## Per-compound envelopes
 
@@ -63,7 +63,7 @@ Samples per hold-out bundle: 200; seed 0; bundles evaluated: 4.
 
 | Compound | Reference value (ppb) | Provenance | P5 | P50 | P95 | Fold error | Inside 90% CI |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| hexanal | 1.26e+03 | `derived_from_oav_and_repo_threshold` | 3.72 | 235 | 3.88e+04 | 5.37x | yes |
+| hexanal | 1.26e+03 | `derived_from_oav_and_repo_threshold` | 16.1 | 1.01e+03 | 1.67e+05 | 1.24x | yes |
 
 ### external_validation_bi_2020_roasted_pea_hexanal
 
@@ -83,7 +83,7 @@ Samples per hold-out bundle: 200; seed 0; bundles evaluated: 4.
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1-hexanol | 20 | `reported_point_value` | 355 | 2.24e+04 | 3.7e+06 | 1117.48x | no |
 | 2-pentylfuran | 5.63e+03 | `reported_point_value` | 175 | 1.1e+04 | 1.83e+06 | 1.96x | yes |
-| hexanal | 606 | `reported_point_value` | 207 | 1.31e+04 | 2.16e+06 | 21.58x | yes |
+| hexanal | 606 | `reported_point_value` | 895 | 5.64e+04 | 9.33e+06 | 93.15x | no |
 | nonanal | 72.7 | `reported_point_value` | 314 | 1.98e+04 | 3.28e+06 | 272.63x | no |
 
 ### external_validation_liu_2023_ppi_offnote_baseline
@@ -93,5 +93,5 @@ Samples per hold-out bundle: 200; seed 0; bundles evaluated: 4.
 
 | Compound | Reference value (ppb) | Provenance | P5 | P50 | P95 | Fold error | Inside 90% CI |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| hexanal | 52 | `band_geometric_midpoint` | 3.72 | 235 | 3.88e+04 | 4.52x | yes |
+| hexanal | 52 | `band_geometric_midpoint` | 16.1 | 1.01e+03 | 1.67e+05 | 19.50x | yes |
 | nonanal | 15.8 | `band_geometric_midpoint` | 2.73 | 172 | 2.84e+04 | 10.86x | yes |

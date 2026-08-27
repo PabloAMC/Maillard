@@ -19,7 +19,7 @@ How to read the PNG:
 | SLR | Family | Posture | Integrated | Benchmarks | Strict Ready | Quantitative Points | Median Ratio | Mean |log10 error| |
 | --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: |
 | 01 | Amino acid-sugar Maillard core | first_class_core | True | 7 | 0 | 20 | 1.000 | 0.192 |
-| 02 | Lipid oxidation and carbonylic crosstalk | immediate_expansion_lane | True | 7 | 0 | 15 | 1.000 | 0.085 |
+| 02 | Lipid oxidation and carbonylic crosstalk | immediate_expansion_lane | True | 7 | 0 | 15 | 1.000 | 0.001 |
 | 03 | Thiamine degradation and sulfur support | high_value_support_lane | True | 2 | 0 | 0 | - | - |
 | 04 | Nucleotide degradation and ribose support | high_value_support_lane | True | 0 | 0 | 0 | - | - |
 | 05 | Glutathione and peptide support | high_value_support_lane | True | 0 | 0 | 0 | - | - |

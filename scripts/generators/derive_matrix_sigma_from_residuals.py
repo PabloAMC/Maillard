@@ -27,6 +27,26 @@ Caveats printed into the artifact:
     reported alongside the point estimate.
   - RMS is taken around zero (bias included): the uncalibrated tier cannot assume a
     bias correction it does not have.
+
+2026-08-27 (Wave O) — WHY THE REFIT DID NOT MOVE THIS ARTIFACT, and why that is correct.
+  Wave O refitted the ambient-slurry hexanal observability factors against the
+  content-verified Pratap-Singh anchors (pea 1.0 -> 4.31725, soy 2.2097561 -> 9.54007;
+  results/validation/matrix_observability_refit_pratap_singh.json). Re-running this script
+  afterwards produced a BIT-IDENTICAL artifact. That is structural, not luck:
+  `_uncalibrated_prediction_ppb` below multiplies the oxidation load by the base MARKER
+  YIELD only — it never reads `observable_factor` at all, because the whole point of the
+  uncalibrated tier is to describe the error of a lane for which NO observability
+  calibration exists. So this derivation is invariant to every constant in
+  `src/matrix_calibration_registry.py` by construction, and no refit of those constants can
+  ever be used to justify a narrower prior here.
+  Two consequences worth stating out loud:
+    * The shipped 2.86 remains inside the 90% CI [2.186, 6.796] around rms_ln_sigma 3.2520,
+      exactly as it was after Wave M. Wave O supplies no new evidence about it either way.
+    * The header's phrase "the reference-lane calibration (the pea ambient marker yields,
+      headspace factor 1.0)" is now literally true only of the yields: the pea ambient lane
+      does carry a non-unit hexanal observability factor since Wave O. The emulation is
+      unchanged and still correct — "factor 1.0" here means "no lane-specific observability
+      correction is available", which is the condition the uncalibrated tier describes.
 """
 
 from __future__ import annotations

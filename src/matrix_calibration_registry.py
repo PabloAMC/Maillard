@@ -64,6 +64,38 @@ _RUNTIME_MULTIPLIER_ENV = "MAILLARD_MATRIX_CALIBRATION_MULTIPLIERS"
 # was solved from. The 2-pentylfuran factors are unaffected -- 638 and 2492 were verified
 # verbatim against the paper. The 1-hexanol entries now anchor to a compound the paper says
 # was not detected; they no longer have a target at all.
+#
+# 2026-08-27 (Wave O) -- THE REFIT, OWNER-APPROVED. The two ambient hexanal factors have now
+# been refitted against the VERIFIED values (1138.00 / 1621.71 ppb).
+#   Generator / record: scripts/generators/refit_matrix_observability_pratap_singh.py ->
+#                       results/validation/matrix_observability_refit_pratap_singh.{json,md}
+#   Fitted: ONE parameter, a common multiplicative scale s = 4.317249 on the ambient-slurry
+#           HEXANAL factors of BOTH lanes. Nothing else moved -- no barrier, no projection
+#           constant, no marker yield, and NOT the 2-pentylfuran factors (638 / 2492 were
+#           verified verbatim and are already recovered to 4e-4).
+#   Why one parameter and not two: two factors against two rows is exactly determined, so its
+#           zero residual is arithmetic and says nothing. One shared scale leaves the data a
+#           degree of freedom to disagree with, and it very nearly does not: the pea lane
+#           wants 4.36606x, the soy lane 4.26899x, and the shared 4.317249x satisfies both to
+#           1.0113x. The correction is an ABSOLUTE-SCALE error; the pea-vs-soy release ratio
+#           this registry encodes (2.2098) survives it (a per-lane fit would make it 2.1606).
+#   Status UNCHANGED: both benchmarks stay `fitted_to_benchmark`, stay out of the honest
+#           literature-coverage numerator and denominator, and are reported as fit-recovery.
+#           A refit changes the SIZE of a recovery (4.37x/4.27x under -> 1.0113x), never its
+#           evidential status.
+#   HONEST CONSEQUENCE, stated here because it is the number that matters: the EXTERNAL
+#           HOLD-OUT gets WORSE. The pea ambient lane carries two mutually contradictory
+#           external measurements (Bi 2020 1260 ppb vs Liu 2023 band midpoint 51.96 ppb, a
+#           24x spread at nominally identical conditions), and the erroneous 260 ppb constant
+#           sat almost exactly at their geometric mean (sqrt(1260 x 51.96) = 255.9). Moving to
+#           the verified anchor moves the lane onto the Bi side of that disagreement: Bi raw
+#           pea 5.37x -> 1.24x, but Liu 2023 4.52x -> 19.5x and Li 2026 hexanal 21.6x -> 93x.
+#           Hold-out median |log10| 1.1849 -> 1.6298 dex (15.31x -> 42.64x). See
+#           tasks/audit_remediation.md, Wave O.
+#   NOT REFITTED, because there is nothing left to fit them to: the 1-hexanol factors. The
+#           paper reports n.d. in both matrices, so `0.143 / 0.063` is a ratio of two numbers
+#           that appear nowhere in it. Left untouched and flagged; retiring it is a separate
+#           science decision.
 FITTED_TO_BENCHMARK = "fitted_to_benchmark"
 
 
@@ -109,22 +141,32 @@ class MatrixRuntimeCompositionRule:
 _MATRIX_CALIBRATION_RECORDS = (
     # --- Pea ambient reference lane -------------------------------------------------
     # 2026-08-27 (Wave I): relabelled literature_anchored -> fitted_to_benchmark.
-    # These factors are 1.0 BY CONSTRUCTION: this lane is the reference against which the
+    # These factors were 1.0 BY CONSTRUCTION: this lane is the reference against which the
     # others are expressed, and the yields it multiplies
     # (benchmark_validation.MATRIX_BENCHMARK_BASE_MARKER_YIELDS) are
     # pea_isolate_40C_PratapSingh2021's own measured ppb divided by one common scale of
     # 1268-1271. So `pea_isolate_40C_PratapSingh2021` scoring Pearson 1.000 / max_ratio 1.002
-    # is the lane reproducing the numbers it was built from, not a prediction. The factor is
-    # still 1.0 -- nothing changes at runtime -- but the label now says what it is.
+    # was the lane reproducing the numbers it was built from, not a prediction.
+    # 2026-08-27 (Wave O): the hexanal factor is no longer 1.0 -- the "1268-1271" scale was
+    # built from a hexanal value that is not in the paper, and the refit (see the module
+    # header) corrects the absolute scale by 4.317249x. The 2-pentylfuran / 1-hexanol /
+    # nonanal factors of this lane stay at 1.0, so the lane's INTERNAL reference role is
+    # preserved for every compound whose anchor was verified or absent.
     MatrixCalibrationRecord(
         protein_type="pea_iso",
         process_state="ambient_slurry",
         compound="hexanal",
-        observable_factor=1.0,
+        # Wave O refit, owner-approved: 1.0 -> 4.31725 (x4.317249, the shared ambient-hexanal
+        # observability scale fitted against the CONTENT-VERIFIED 1138.00 ppb of Molecules
+        # 2021, 26, 4104 Table 1 -- not the 260 ppb transcription error the old 1.0 recovered).
+        # Record: results/validation/matrix_observability_refit_pratap_singh.{json,md};
+        # generator: scripts/generators/refit_matrix_observability_pratap_singh.py (2026-08-27).
+        observable_factor=4.31725,
+        previous_value=1.0,
         evidence_strength=FITTED_TO_BENCHMARK,
-        source="Pratap-Singh 2021 pea isolate ambient slurry baseline",
+        source="Pratap-Singh 2021 pea isolate ambient slurry baseline (Wave O refit to the verified 1138.00 ppb)",
         fallback_mode="compound_specific",
-        notes="Reference compound for the pea matrix-only intake/headspace lane. Factor is 1.0 by construction; the underlying base marker yield is this benchmark's own measurement rescaled, so this lane is fit-recovery, not a prediction.",
+        notes="Reference compound for the pea matrix-only intake/headspace lane. FITTED: the factor is a shared ambient-hexanal observability scale solved so this benchmark's own verified measurement is reproduced, so this lane is fit-recovery, not a prediction. Refitting changed the size of the recovery (4.37x under -> 1.0113x), not its evidential status.",
         fitted_from_benchmark="pea_isolate_40C_PratapSingh2021",
     ),
     MatrixCalibrationRecord(
@@ -211,15 +253,26 @@ _MATRIX_CALIBRATION_RECORDS = (
     # common scale of 838.5-839.2. So both halves of the ratio are the two benchmarks these
     # lanes are then scored against, which is why soy scores max_ratio 1.001 / Pearson 1.000.
     # The expressions are LEFT AS EXPRESSIONS on purpose: they show the construction.
+    # 2026-08-27 (Wave O): the hexanal expression is GONE, because its numerator 0.453 was
+    # built from the 380 ppb transcription error. It is replaced by an explicit fitted
+    # constant; the other three keep their expressions, which are still exactly what they
+    # were.
     MatrixCalibrationRecord(
         protein_type="soy_iso",
         process_state="ambient_slurry",
         compound="hexanal",
-        observable_factor=0.453 / 0.205,
+        # Wave O refit, owner-approved: 0.453/0.205 = 2.2097561 -> 9.54007 (x4.317249, the
+        # SAME shared ambient-hexanal observability scale as the pea lane), fitted against the
+        # CONTENT-VERIFIED 1621.71 ppb of Molecules 2021, 26, 4104 Table 1. Because one scale
+        # serves both lanes, the soy-vs-pea release ratio is unchanged at 2.2097561 -- the
+        # correction was to the absolute scale, not to the relative structure.
+        # Record: results/validation/matrix_observability_refit_pratap_singh.{json,md}.
+        observable_factor=9.54007,
+        previous_value=2.209756097560976,
         evidence_strength=FITTED_TO_BENCHMARK,
-        source="Pratap-Singh 2021 soy-vs-pea ambient slurry release ratio",
+        source="Pratap-Singh 2021 soy ambient slurry hexanal (Wave O refit to the verified 1621.71 ppb)",
         fallback_mode="compound_specific",
-        notes="Soy release ratio carried relative to the pea reference intake lane. Both numerator and denominator are rescaled measurements from the two benchmarks this lane is scored against -- fit-recovery, not a prediction.",
+        notes="Soy ambient hexanal observability. FITTED to this benchmark's own verified measurement via a scale shared with the pea lane -- fit-recovery, not a prediction. Residual after the shared-scale fit is 1.0113x, and that residual exists only because the second degree of freedom was declined.",
         fitted_from_benchmark="soy_isolate_40C_PratapSingh2021",
     ),
     MatrixCalibrationRecord(
@@ -257,11 +310,19 @@ _MATRIX_CALIBRATION_RECORDS = (
         protein_type="soy_iso",
         process_state="heated_matrix",
         compound="hexanal",
-        observable_factor=(0.453 / 0.205) * (1.0 - 0.7060),
+        # 2026-08-27 (Wave O): PROPAGATED, not fitted. This constant is DEFINED as the soy
+        # ambient hexanal baseline times the Shu 2024 attenuation, so when the baseline was
+        # refitted the composition had to follow -- freezing it would leave a corrected fit
+        # composed with a stale baseline, which is the exact defect Wave O exists to remove.
+        # 0.649668 -> 2.80478 (the same x4.317249). No benchmark constrains this lane; the
+        # movement is a propagation of someone else's fit, and it is the mechanism by which
+        # the Li 2026 hold-out hexanal point degrades from 21.6x to 93x over.
+        observable_factor=9.54007 * (1.0 - 0.7060),
+        previous_value=0.6496682926829269,
         evidence_strength="conditional_literature_anchored",
         source="Shu 2024 heated soy off-flavour attenuation carried onto the Pratap-Singh soy ambient baseline",
         fallback_mode="compound_specific_process_state",
-        notes="High-severity soy treatment prior for heated matrix states. Useful for reliability and directional accuracy, but not a meaty benchmark anchor. 2026-08-27 (Wave I): kept as conditional_literature_anchored -- the ATTENUATION (1 - 0.7060) is a real Shu 2024 literature figure and no panel benchmark exists for heated soy, so this lane is not fit-recovery. But note its BASELINE factor (0.453/0.205) is fit-recovery (see the soy ambient block), so the anchoring is only as strong as one literature attenuation applied to a back-solved base.",
+        notes="High-severity soy treatment prior for heated matrix states. Useful for reliability and directional accuracy, but not a meaty benchmark anchor. 2026-08-27 (Wave I): kept as conditional_literature_anchored -- the ATTENUATION (1 - 0.7060) is a real Shu 2024 literature figure and no panel benchmark exists for heated soy, so this lane is not fit-recovery. But note its BASELINE factor is fit-recovery (see the soy ambient block), so the anchoring is only as strong as one literature attenuation applied to a back-solved base. 2026-08-27 (Wave O): baseline refitted 2.2097561 -> 9.54007, so this composed value moved with it.",
     ),
     MatrixCalibrationRecord(
         protein_type="soy_iso",

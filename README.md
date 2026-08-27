@@ -169,6 +169,19 @@ reports; **every one of those five sits in a non-evidence bucket.**
 > that the recovery was never evidence.** The observability factors were deliberately NOT
 > refitted here (see [AUDIT.md](AUDIT.md), Round 3): refitting them in the same pass as a
 > chemistry change would make the resulting agreement unattributable.
+>
+> **They have since been refitted, to the verified values, and the headline did not move
+> (2026-08-27, Wave O).** One shared scale of **4.317249×** was fitted across both ambient
+> hexanal lanes against 1138.00 / 1621.71 ppb — one free parameter, two rows, so the fit
+> keeps a measurable residual instead of an arithmetic zero. It lands at **1.0113× on both
+> rows**, which says the two corrected anchors agree to 1.1%: the transcription error was a
+> common *absolute-scale* error and the pea-vs-soy release ratio (2.2098) survived it
+> untouched. Both rows moved `scale-gap` → `pass-no-ranking`. **Neither counts as a pass and
+> neither is evidence** — they are still `fit_recovery`, still excluded from the coverage
+> numerator and denominator, so 0/6 predictive and 5/14 aggregate are unchanged. What the
+> refit bought is that the constants are now anchored to numbers that exist; what it cost is
+> in the hold-out row below. Record:
+> [matrix_observability_refit_pratap_singh.md](results/validation/matrix_observability_refit_pratap_singh.md).
 
 **How to read this honestly:** coverage is only meaningful next to interval width — a 90% CI
 spanning two or more orders of magnitude makes coverage cheap. This headline is the reverse of
@@ -278,7 +291,7 @@ We report the gap rather than absorbing it.
 | Surface                       | Question                                                                 | Status                                                       |
 | ----------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------ |
 | **Parity**              | On matched systems, how close is predicted ppb to measured?              | **14** benchmarks · MC panel covers **11** of them, **35 matched rows** · **0 strict-ready** · **0/6 predictive benchmarks without blocking gaps** |
-| **External hold-out**   | On systems excluded from calibration, does the frozen model still cover? | 4 bundles · **1/5 on genuine extrapolations** at the pre-widening prior (2/5 only via the wider one) · median **15.31×** error, worst **2474×** |
+| **External hold-out**   | On systems excluded from calibration, does the frozen model still cover? | 4 bundles · **1/5 on genuine extrapolations** at the pre-widening prior (1/5 at the wider one too, since Wave O) · median **42.62×** error, worst **2474×** |
 | **Coverage**            | Which chemistry lanes are wired, and how?                                | 16 lanes wired · **5 with generative reaction templates** · 7 with DFT anchors |
 | **Experiment priority** | Where would the next experiment improve confidence the most?             | 6/35 MC cells outside 90% CI — all queued                    |
 
@@ -287,11 +300,28 @@ We report the gap rather than absorbing it.
 > adversarial leak hunt. Everything else about them needs qualifying.
 >
 > **Genuine-extrapolation coverage is 1 of 5 at the prior this project shipped for most of
-> its life (ln-sigma 2.0).** The 2/5 quoted elsewhere is the *same predictions* re-scored
-> after the prior was widened to ln-sigma 2.86 on 2026-08-26. Nothing about the model
-> changed between those two numbers — only the width of the interval drawn around it. The
-> median hold-out fold error is 15.31×, which is why that is the figure to track.
-> The report now computes both and leads with the pre-widening one.
+> its life (ln-sigma 2.0).** A 2/5 was quoted here until 2026-08-27: that was the *same
+> predictions* re-scored after the prior was widened to ln-sigma 2.86 on 2026-08-26, and the
+> Wave O refit has since taken it back down to 1/5, so the two priors now agree. Nothing
+> about the model changed between those numbers — only the width of the interval drawn
+> around it. The median hold-out fold error is 42.62×, which is why that is the figure to
+> track. The report computes both and leads with the pre-widening one.
+>
+> **The refit to verified anchors made this WORSE, and that is the honest result
+> (2026-08-27, Wave O).** Correcting the ambient hexanal observability factors to the paper's
+> real values took the hold-out median from 15.31× to **42.62×** and shipped-sigma coverage
+> from 5/8 to **4/8**. Three of the eight points moved, in opposite directions: Bi 2020 raw
+> pea **5.37× → 1.24×** (the anchor and this hold-out point now agree), Liu 2023 **4.52× →
+> 19.50×**, Li 2026 hexanal **21.58× → 93.15×**. The cause is a disagreement in the
+> literature, not in the fit: the pea ambient lane carries two contradictory external
+> measurements — Bi at 1260 ppb and Liu's band midpoint at 51.96 ppb, a **24× spread at
+> nominally identical conditions** — and the erroneous 260 ppb the old constants reproduced
+> sat almost exactly at their geometric mean (√(1260 × 51.96) = 255.9). Being wrong in the
+> middle of a contradiction scores better than being right at one end of it. The verified
+> anchor (1138 ppb) agrees with Bi to 1.11× and sits 6.3× above the top of Liu's band; which
+> of the two is representative of commercial PPI is an open question this repository cannot
+> settle. `max_fold_error` (2474×) and the pre-widening 1/5 did **not** move — the refit
+> touched one lane, not the transfer behaviour.
 >
 > **That 0 of 5 became 1 of 5, and the median halved from 32.79×, because a reference was
 > corrected — not because the model improved (2026-08-27, Wave K/M).** Two of the four Li
@@ -410,16 +440,22 @@ Use the model to rank; do not use it to predict a concentration.
 > hold-out over-prediction*. That framing was built on top of two data errors, so here is
 > what the corrected anchors say:
 >
-> * The hold-out median is now **15.31×**, and one 49.8× miss is now 1.96×. That is entirely
->   the Li 2026 wrong-row correction, not a model change.
+> * The hold-out median was **15.31×** at that point, and one 49.8× miss became 1.96×. That
+>   was entirely the Li 2026 wrong-row correction, not a model change. **Wave O then took the
+>   median to 42.62×** by refitting the ambient lane onto the verified anchor — see the
+>   hold-out block above.
 > * **The over-prediction has not gone away.** The extreme process-state misses — roasted pea
 >   2474×, HME 1-hexanol 1117×, HME nonanal 273× — are untouched. All eight hold-out points
 >   are still over-predictions.
 > * **A new under-prediction appeared where there used to be perfect agreement.** With the
 >   real Pratap-Singh hexanal values (1138 / 1621.71 ppb) the ambient pea and soy slurry
->   lanes are **4.37× and 4.27× UNDER**, because their observability factors were solved from
+>   lanes were **4.37× and 4.27× UNDER**, because their observability factors were solved from
 >   260 / 380. In the uncalibrated residual derivation soy ambient hexanal moves from 2.21×
->   under to **9.43× under**.
+>   under to **9.43× under**. **Wave O closed the calibrated half of this** (one shared scale
+>   of 4.317249×, leaving a 1.0113× residual on both rows) but **not the uncalibrated half**:
+>   the residual derivation deliberately never reads the observability factors — the whole
+>   point of the uncalibrated tier is to describe a lane with no such calibration — so it is
+>   bit-identical after the refit and 9.43× still stands.
 > * So the diagnosis "unbounded lipid-oxidation kinetics over-predict at high process
 >   severity" survives, but the *baseline* it was measured against did not: the ambient lane
 >   is not a calibrated reference, it is a lane pinned to a mistranscribed number. The
@@ -427,6 +463,8 @@ Use the model to rank; do not use it to predict a concentration.
 >   the hexanol row is gone), bias fold 3.46 → **3.91**, 90% CI [1.98, 5.48] → **[2.19,
 >   6.80]**. The shipped 2.86 is still inside it and was **not** moved
 >   ([matrix_sigma_residual_derivation.md](results/validation/matrix_sigma_residual_derivation.md)).
+>   Re-derived again after the Wave O refit: **bit-identical**, for the structural reason
+>   given above. No refit of an observability constant can ever be used to narrow this prior.
 
 Full validation methodology: [VALIDATION_CONTRACT.md](docs/reference/VALIDATION_CONTRACT.md).
 Regenerate all evidence artifacts: `./scripts/docker_maillard.sh summary`.

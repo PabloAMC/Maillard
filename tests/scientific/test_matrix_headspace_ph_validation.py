@@ -122,9 +122,31 @@ def test_ph_release_surrogate_reproduces_its_own_log_slope_knob():
 # The test is therefore split per compound rather than relaxed. The <=1.01 pin survives where
 # it still means something (2-pentylfuran, still a genuine recovery), and hexanal is pinned
 # two-sided at its honest miss so a silent drift in either direction is caught.
+#
+# RE-PINNED AGAIN 2026-08-27 (Wave O refit to content-corrected anchors, owner-approved).
+# The refit the block above says is an owner decision has now been made and recorded:
+# scripts/generators/refit_matrix_observability_pratap_singh.py ->
+# results/validation/matrix_observability_refit_pratap_singh.{json,md}. ONE shared scale of
+# 4.317249x was fitted across BOTH ambient hexanal lanes, so the 4.366x / 4.269x misses
+# collapse to a COMMON 1.0113x residual -- and that residual is the point. Two free factors
+# would have given exactly 1.0000x on both rows and said nothing; one shared scale leaves the
+# data a degree of freedom, and the fact that it lands at 1.0113x on both is a measurement:
+# the two corrected anchors are mutually consistent to 1.1%, i.e. the transcription error was
+# a common ABSOLUTE-SCALE error and the pea-vs-soy release ratio (2.2098) survived it.
+#
+# WHAT THIS TEST NO LONGER SHOWS, stated so nobody reads the improvement as accuracy: hexanal
+# is now fit-recovery on both rows, exactly as 2-pentylfuran already was. Both benchmarks stay
+# `fitted_to_benchmark` in the registry and stay OUT of the honest literature-coverage count.
+# The number that DID move and is not excluded is the external hold-out, and it got WORSE
+# (median 15.31x -> 42.62x; see tests/scientific/test_honest_headline_guards.py).
+#
+# The hexanal pin is deliberately kept SEPARATE from the <=1.01 2-pentylfuran branch and
+# two-sided at 1.0113, NOT loosened to "<= 1.05": a shared-scale fit is allowed to leave a
+# residual, and pinning that residual's exact value is what would catch someone quietly adding
+# the second degree of freedom back (which would drive it to 1.0000).
 _PRATAP_SINGH_EXPECTED_RATIOS = {
-    "pea_isolate_40C_PratapSingh2021": {"hexanal": 4.366, "2-pentylfuran": 1.0},
-    "soy_isolate_40C_PratapSingh2021": {"hexanal": 4.269, "2-pentylfuran": 1.0},
+    "pea_isolate_40C_PratapSingh2021": {"hexanal": 1.0113, "2-pentylfuran": 1.0},
+    "soy_isolate_40C_PratapSingh2021": {"hexanal": 1.0113, "2-pentylfuran": 1.0},
 }
 
 
@@ -148,15 +170,33 @@ def test_matrix_only_pratap_singh_baselines_remain_stable_at_reference_ph():
                     f"({comparison.ratio:.4f}x); its factor is solved from a verified value."
                 )
             else:
-                assert comparison.predicted_ppb < comparison.measured_ppb
+                # 2026-08-27 (Wave O): the DIRECTION assertion is now the interesting one and
+                # it is asserted per lane rather than blanket-"under". One shared scale sits
+                # BETWEEN the two per-lane required scales (4.36606x for pea, 4.26899x for
+                # soy), so it necessarily under-shoots the lane that wanted more and
+                # over-shoots the lane that wanted less. Pea therefore reads slightly UNDER
+                # and soy slightly OVER, by the same 1.0113x. That bracketing is the
+                # fingerprint of a one-parameter fit; if both rows ever land on the same side
+                # of their measurement, someone has re-introduced per-lane freedom.
+                if evaluation.benchmark_id.startswith("pea_"):
+                    assert comparison.predicted_ppb < comparison.measured_ppb, (
+                        "pea hexanal should sit just UNDER its anchor: the shared scale is "
+                        "pulled down by the soy lane, which required less."
+                    )
+                else:
+                    assert comparison.predicted_ppb > comparison.measured_ppb, (
+                        "soy hexanal should sit just OVER its anchor: the shared scale is "
+                        "pulled up by the pea lane, which required more."
+                    )
                 assert comparison.ratio == pytest.approx(
                     expected[comparison.compound], rel=0.01
                 ), (
                     f"{evaluation.benchmark_id} {comparison.compound} ratio is "
-                    f"{comparison.ratio:.3f}x, pinned at "
-                    f"{expected[comparison.compound]}x -- the exact size of the 2026-08-27 "
-                    "Wave K/M reference correction. If this moved, check whether the "
-                    "observability factor was refitted (an owner decision that must be "
-                    "recorded in the registry and AUDIT.md) or whether the benchmark was "
-                    "reverted to its erroneous values."
+                    f"{comparison.ratio:.4f}x, pinned at "
+                    f"{expected[comparison.compound]}x -- the residual left by the 2026-08-27 "
+                    "Wave O one-parameter refit against the CONTENT-VERIFIED anchors. If this "
+                    "went to 1.0000, the second degree of freedom was added back and the "
+                    "mutual-consistency measurement was destroyed; if it went to 4.37x/4.27x, "
+                    "the refit was reverted; if it moved anywhere else, the benchmark values "
+                    "or the lipid-oxidation lane changed."
                 )

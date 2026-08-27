@@ -150,6 +150,26 @@ def test_zero_of_six_predictive_benchmarks_are_free_of_blocking_gaps(panel):
     deliberately NOT refitted (that is an owner decision, and refitting them in the same
     pass as the Wave N chemistry change would make the agreement unattributable).
 
+    2026-08-27 (Wave O refit to content-corrected anchors, owner-approved) -- THE NUMBERS
+    ABOVE ARE UNCHANGED, AND THAT NEEDED CHECKING RATHER THAN ASSUMING. The owner decision
+    was taken: the two ambient hexanal factors were refitted against the VERIFIED values
+    (one shared scale of 4.317249x; record
+    results/validation/matrix_observability_refit_pratap_singh.json), so both Pratap-Singh
+    rows stopped missing by 4.37x/4.27x and their ``overall_status`` moved
+    ``scale-gap`` -> ``pass-no-ranking``. They are NOT counted as passes here, because
+    ``overall_status == "pass"`` is the predicate this guard and the published headline
+    both use, and ``pass-no-ranking`` is a different (weaker) predicate. So fit-recovery
+    passes stay 1/4 and the aggregate stays 5/14.
+    That is a real and defensible outcome, but "the guard did not move" is exactly how a
+    laundering route hides, so the ``pass-no-ranking`` count is now pinned explicitly below
+    (0 -> 2) and the two rows are named. Nobody reading this file can now see 1/4 and be
+    unaware that two rows improved.
+    AND NOTE THE PRICE, which is not in this test: the same refit made the external hold-out
+    WORSE (median 15.31x -> 42.62x, coverage 5/8 -> 4/8). See
+    ``test_holdout_scores_1_of_5_genuine_extrapolations_at_the_pre_widening_prior``. The
+    in-panel rows that improved are fit-recovery; the out-of-sample rows that degraded are
+    the evidence.
+
     Pinned from a live panel evaluation; matches
     results/validation/benchmark_summary.json at the time of writing.
 
@@ -194,6 +214,28 @@ def test_zero_of_six_predictive_benchmarks_are_free_of_blocking_gaps(panel):
         f"internal-synthetic passes moved to {len(passing('internal_synthetic'))}/4 "
         f"(published 4/4)"
     )
+
+    # 2026-08-27 (Wave O): pinned so a fit-recovery improvement cannot land silently.
+    # `pass-no-ranking` means "coverage and scale both pass, but the benchmark declares no
+    # ranked target list to check", i.e. a weaker pass than `pass`. It went 0 -> 2 with the
+    # refit, and both rows are fit-recovery.
+    no_ranking = sorted(s.benchmark_id for s in panel if s.overall_status == "pass-no-ranking")
+    assert no_ranking == [
+        "pea_isolate_40C_PratapSingh2021",
+        "soy_isolate_40C_PratapSingh2021",
+    ], (
+        f"`pass-no-ranking` rows moved to {no_ranking} (published as the two Pratap-Singh "
+        f"fit-recovery rows since the 2026-08-27 Wave O refit). A row appearing here is a "
+        f"status improvement that the 0/6 and 5/14 headlines do NOT show; say so in "
+        f"README.md and AUDIT.md rather than only re-pinning."
+    )
+    for benchmark_id in no_ranking:
+        role = next(s.evidence_role for s in panel if s.benchmark_id == benchmark_id)
+        assert role == "fit_recovery", (
+            f"{benchmark_id} improved to pass-no-ranking while classified `{role}`. A "
+            f"PREDICTIVE benchmark reaching this status is a genuine result and must be "
+            f"promoted deliberately, not absorbed by this guard."
+        )
 
     total_passes = sum(1 for s in panel if s.overall_status == "pass")
     assert total_passes == 5, (
@@ -264,7 +306,7 @@ def test_honest_external_literature_coverage_is_1_of_3_with_fitted_rows_excluded
 
 
 def test_holdout_scores_1_of_5_genuine_extrapolations_at_the_pre_widening_prior():
-    """HOLD-OUT 1/5 genuine extrapolations pre-widening · median 15.31x · worst 2474x.
+    """HOLD-OUT 1/5 genuine extrapolations pre-widening · median 42.62x · worst 2474x.
 
     Source artifact: results/validation/external_validation_report.json (TRACKED /
     force-added). Read 2026-08-27.
@@ -279,6 +321,29 @@ def test_holdout_scores_1_of_5_genuine_extrapolations_at_the_pre_widening_prior(
     the new hit) and nonanal 673x -> 273x. The extreme process-state misses are untouched:
     roasted pea 2474x and HME 1-hexanol 1117x are unchanged, which is why `max_fold_error`
     below is unchanged. Read this as "one reference was wrong", not "the model improved".
+
+    RE-PINNED AGAIN 2026-08-27 (Wave O refit to content-corrected anchors, owner-approved),
+    median 15.31x -> 42.62x. THE HOLD-OUT GOT WORSE, and this is the wave's headline number.
+    The ambient hexanal observability factors were refitted against the CONTENT-VERIFIED
+    Pratap-Singh anchors (one shared scale, 4.317249x; record
+    results/validation/matrix_observability_refit_pratap_singh.json). Per point:
+        Bi 2020 raw pea hexanal   5.37x  ->   1.24x   (IMPROVED)
+        Liu 2023 hexanal          4.52x  ->  19.50x   (WORSE)
+        Li 2026 hexanal          21.58x  ->  93.15x   (WORSE, via the propagated soy
+                                                       heated-matrix baseline)
+        the other five points are byte-identical.
+    Why a refit to VERIFIED values makes the hold-out worse, stated so it is not read as a
+    bug: the pea ambient lane carries two mutually contradictory external measurements --
+    Bi 2020 at 1260 ppb and Liu 2023's band midpoint at 51.96 ppb, a 24x spread at nominally
+    identical conditions -- and the erroneous 260 ppb the old constants reproduced sat almost
+    exactly at their geometric mean (sqrt(1260 * 51.96) = 255.9). Moving onto the verified
+    anchor (1138 ppb, which agrees with Bi to 1.11x) necessarily moves off Liu. No single
+    observability factor can satisfy both; the disagreement is in the literature, not in the
+    fit. What the refit bought is that the constant is now anchored to a number that exists.
+
+    NOTE what did NOT move, because it is the discriminating evidence: the pre-widening
+    ``genuine_extrapolation_hits`` is still 1/5 and ``max_fold_error`` is still 2474.4. The
+    refit touched one lane, not the model's transfer behaviour.
 
     Three things are pinned and each blocks a different way of flattering this number:
 
@@ -323,10 +388,16 @@ def test_holdout_scores_1_of_5_genuine_extrapolations_at_the_pre_widening_prior(
         f"as 8 -- of which only 4 are measurements at all."
     )
 
-    assert summary["median_accuracy_fold"] == pytest.approx(15.31, abs=0.01), (
+    assert summary["median_accuracy_fold"] == pytest.approx(42.62, abs=0.01), (
         f"Median hold-out fold error is {summary['median_accuracy_fold']:.2f}x, published "
-        f"as 15.31x (32.79x before the 2026-08-27 Wave K/M Li 2026 reference correction)."
+        f"as 42.62x since the 2026-08-27 Wave O observability refit (15.31x before it, "
+        f"32.79x before the Wave K/M Li 2026 reference correction). If this IMPROVED, check "
+        f"that it was not bought by reverting the refit to the verified anchors."
     )
+    # The shipped-sigma coverage moved 5/8 -> 4/8 with the same refit and is pinned here so
+    # the headline cannot be quoted from a stale run.
+    assert summary["ci_coverage_hits"] == 4
+    assert summary["ci_coverage_rate"] == pytest.approx(0.5)
     assert summary["max_fold_error"] == pytest.approx(2474.4, abs=0.1), (
         f"Worst hold-out fold error is {summary['max_fold_error']:.1f}x, published as 2474x."
     )

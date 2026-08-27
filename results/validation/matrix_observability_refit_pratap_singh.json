@@ -1,0 +1,648 @@
+{
+  "generator": "scripts/generators/refit_matrix_observability_pratap_singh.py",
+  "date": "2026-08-27",
+  "wave": "Wave O",
+  "approval": "owner-approved refit against content-corrected anchors",
+  "objective": "sum over anchored rows of (log10(predicted_ppb / measured_ppb))^2, in dex^2; reported as its square root where a single-row dex figure is quoted",
+  "fit_target_ids": [
+    "pea_isolate_40C_PratapSingh2021",
+    "soy_isolate_40C_PratapSingh2021"
+  ],
+  "fit_target_files": [
+    "data/benchmarks/pea_isolate_40C_PratapSingh2021.json",
+    "data/benchmarks/soy_isolate_40C_PratapSingh2021.json"
+  ],
+  "anchor_provenance": "Molecules 2021, 26, 4104, Table 1 (Europe PMC PMC8271896), read in Wave K. pea hexanal 1138.00 +/- 297.30 ppb; soy hexanal 1621.71 +/- 159.69 ppb. The repo's previous 260 / 380 ppb are transcription errors and appear nowhere in the paper.",
+  "search_range": [
+    0.001,
+    30.0
+  ],
+  "search_range_basis": "wider than the full span of the registry's own shipped observability factors (0.0095957 to 5.9203, ~2.8 decades), so no optimum can be an artefact of a bound",
+  "grid_points": 601,
+  "calibration_eligible_benchmarks": [
+    "pea_isolate_40C_PratapSingh2021.json",
+    "pea_isolate_uht_140C_Trikusuma2019.json",
+    "soy_isolate_40C_PratapSingh2021.json"
+  ],
+  "exclusions": {
+    "external_validation_holdout": "structurally excluded: non-recursive glob over data/benchmarks/*.json, plus an explicit evidence_class / path assertion. Never read by this script.",
+    "internal_synthetic": "asserted out by filename marker (Internal2026 / ProtocolPilot2026).",
+    "quarantined": "outside the non-recursive glob (data/benchmarks/quarantined/)."
+  },
+  "linearity_check": {
+    "tolerance_relative": 1e-06,
+    "rows": [
+      {
+        "benchmark_id": "pea_isolate_40C_PratapSingh2021",
+        "compound": "hexanal",
+        "predicted_at_s1": 260.6470182203558,
+        "predicted_at_s2": 521.2940364407116,
+        "measured_ratio": 2.0,
+        "linear_within_tol": true
+      },
+      {
+        "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+        "compound": "hexanal",
+        "predicted_at_s1": 379.8817979244892,
+        "predicted_at_s2": 759.7635958489784,
+        "measured_ratio": 2.0,
+        "linear_within_tol": true
+      }
+    ],
+    "all_linear": true,
+    "reading": "the matrix-only prediction is exactly proportional to the observability factor, so J(s) is an exact parabola in log10(s) and the grid scan below is a confirmation of a closed form rather than a search over an unknown surface"
+  },
+  "per_lane_required_scales": {
+    "pea_iso/ambient_slurry/hexanal": 4.366058003540688,
+    "soy_iso/ambient_slurry/hexanal": 4.268985797319919
+  },
+  "shared_scale_optimum": 4.317249078683109,
+  "profile": [
+    {
+      "scale": 0.001,
+      "objective_dex2": 26.429509075270015
+    },
+    {
+      "scale": 0.0011874591753432751,
+      "objective_dex2": 25.355627439186996
+    },
+    {
+      "scale": 0.0014100592931069306,
+      "objective_dex2": 24.304017597247835
+    },
+    {
+      "scale": 0.0016743878453778773,
+      "objective_dex2": 23.274679549452514
+    },
+    {
+      "scale": 0.001988267210077217,
+      "objective_dex2": 22.26761329580104
+    },
+    {
+      "scale": 0.002360986141640367,
+      "objective_dex2": 21.282818836293416
+    },
+    {
+      "scale": 0.0028035746567491703,
+      "objective_dex2": 20.320296170929637
+    },
+    {
+      "scale": 0.003329130449916675,
+      "objective_dex2": 19.380045299709707
+    },
+    {
+      "scale": 0.003953206498668241,
+      "objective_dex2": 18.462066222633624
+    },
+    {
+      "scale": 0.004694271328870265,
+      "objective_dex2": 17.566358939701395
+    },
+    {
+      "scale": 0.005574255561017864,
+      "objective_dex2": 16.692923450913
+    },
+    {
+      "scale": 0.0066192009116389375,
+      "objective_dex2": 15.841759756268463
+    },
+    {
+      "scale": 0.007860030855966229,
+      "objective_dex2": 15.01286785576777
+    },
+    {
+      "scale": 0.009333465758398354,
+      "objective_dex2": 14.206247749410922
+    },
+    {
+      "scale": 0.011083109552562403,
+      "objective_dex2": 13.421899437197926
+    },
+    {
+      "scale": 0.013160740129524924,
+      "objective_dex2": 12.659822919128773
+    },
+    {
+      "scale": 0.015627841621112814,
+      "objective_dex2": 11.920018195203468
+    },
+    {
+      "scale": 0.01855742392380193,
+      "objective_dex2": 11.202485265422013
+    },
+    {
+      "scale": 0.022036183309053402,
+      "objective_dex2": 10.507224129784403
+    },
+    {
+      "scale": 0.026167068059881792,
+      "objective_dex2": 9.834234788290638
+    },
+    {
+      "scale": 0.031072325059538584,
+      "objective_dex2": 9.183517240940727
+    },
+    {
+      "scale": 0.03689711749119786,
+      "objective_dex2": 8.555071487734656
+    },
+    {
+      "scale": 0.043813820708641746,
+      "objective_dex2": 7.948897528672436
+    },
+    {
+      "scale": 0.05202712340732185,
+      "objective_dex2": 7.364995363754061
+    },
+    {
+      "scale": 0.06178008505674121,
+      "objective_dex2": 6.803364992979535
+    },
+    {
+      "scale": 0.0733613288541153,
+      "objective_dex2": 6.264006416348857
+    },
+    {
+      "scale": 0.08711358306319456,
+      "objective_dex2": 5.746919633862025
+    },
+    {
+      "scale": 0.10344382350541889,
+      "objective_dex2": 5.252104645519042
+    },
+    {
+      "scale": 0.1228353173541,
+      "objective_dex2": 4.779561451319905
+    },
+    {
+      "scale": 0.14586192464832906,
+      "objective_dex2": 4.329290051264616
+    },
+    {
+      "scale": 0.17320508075688773,
+      "objective_dex2": 3.9012904453531734
+    },
+    {
+      "scale": 0.20567396236083937,
+      "objective_dex2": 3.4955626335855774
+    },
+    {
+      "scale": 0.24422943373458594,
+      "objective_dex2": 3.1121066159618307
+    },
+    {
+      "scale": 0.2900124819770266,
+      "objective_dex2": 2.7509223924819297
+    },
+    {
+      "scale": 0.3443779826876962,
+      "objective_dex2": 2.412009963145878
+    },
+    {
+      "scale": 0.40893479532871263,
+      "objective_dex2": 2.0953693279536716
+    },
+    {
+      "scale": 0.48559337483020376,
+      "objective_dex2": 1.801000486905314
+    },
+    {
+      "scale": 0.5766223084280319,
+      "objective_dex2": 1.5289034400008021
+    },
+    {
+      "scale": 0.6847154508504858,
+      "objective_dex2": 1.279078187240139
+    },
+    {
+      "scale": 0.8130716446117172,
+      "objective_dex2": 1.0515247286233218
+    },
+    {
+      "scale": 0.9654893846056295,
+      "objective_dex2": 0.8462430641503531
+    },
+    {
+      "scale": 1.1464792284464875,
+      "objective_dex2": 0.6632331938212305
+    },
+    {
+      "scale": 1.3613972791592592,
+      "objective_dex2": 0.5024951176359567
+    },
+    {
+      "scale": 1.6166036904250332,
+      "objective_dex2": 0.3640288355945288
+    },
+    {
+      "scale": 1.919650885089004,
+      "objective_dex2": 0.247834347696949
+    },
+    {
+      "scale": 2.2795070569547775,
+      "objective_dex2": 0.153911653943216
+    },
+    {
+      "scale": 2.706821570040698,
+      "objective_dex2": 0.08226075433333024
+    },
+    {
+      "scale": 3.214240109361914,
+      "objective_dex2": 0.0328816488672923
+    },
+    {
+      "scale": 3.8167789096181783,
+      "objective_dex2": 0.005774337545101352
+    },
+    {
+      "scale": 4.532269136482803,
+      "objective_dex2": 0.0009388203667577886
+    },
+    {
+      "scale": 5.38188457124165,
+      "objective_dex2": 0.01837509733226156
+    },
+    {
+      "scale": 6.390768214759301,
+      "objective_dex2": 0.058083168441612404
+    },
+    {
+      "scale": 7.588776354108097,
+      "objective_dex2": 0.12006303369481089
+    },
+    {
+      "scale": 9.01136211131374,
+      "objective_dex2": 0.20431469309185618
+    },
+    {
+      "scale": 10.700624621420253,
+      "objective_dex2": 0.31083814663274933
+    },
+    {
+      "scale": 12.706554888609631,
+      "objective_dex2": 0.43963339431748905
+    },
+    {
+      "scale": 15.08851518948246,
+      "objective_dex2": 0.5907004361460768
+    },
+    {
+      "scale": 17.91699580405731,
+      "objective_dex2": 0.7640392721185112
+    },
+    {
+      "scale": 21.275701062114823,
+      "objective_dex2": 0.9596499022347937
+    },
+    {
+      "scale": 25.264026438068893,
+      "objective_dex2": 1.1775323264949225
+    },
+    {
+      "scale": 30.0,
+      "objective_dex2": 1.4176865448988996
+    }
+  ],
+  "profile_note": "downsampled to ~60 points for the artifact; the full grid is regenerated by re-running the script. J is a parabola in log10(s) with a single interior minimum.",
+  "grid_best": {
+    "scale": 4.304573077219782,
+    "objective_dex2": 5.093713515691332e-05
+  },
+  "bounds_check": {
+    "range_span_dex": 4.477121254719663,
+    "distance_to_lower_bound_dex": 3.6352071054959945,
+    "distance_to_upper_bound_dex": 0.8419141492236677,
+    "hit_a_bound": false,
+    "saturated": false,
+    "reading": "the optimum sits in the interior of the range by more than a decade on both sides; nothing saturated and no knob is pinned by a bound"
+  },
+  "objective_at_incumbent_dex2": 0.8070238093180748,
+  "objective_at_fit_dex2": 4.767557287522792e-05,
+  "objective_gain_dex2": 0.8069761337451996,
+  "rows_at_incumbent": [
+    {
+      "benchmark_id": "pea_isolate_40C_PratapSingh2021",
+      "lane": "pea_iso/ambient_slurry",
+      "compound": "hexanal",
+      "measured_ppb": 1138.0,
+      "predicted_ppb": 260.6470182203558,
+      "ratio": 0.22903955906885395,
+      "fold_error": 4.366058003540688,
+      "log10_residual_dex": -0.6400895010594055,
+      "in_objective": true
+    },
+    {
+      "benchmark_id": "pea_isolate_40C_PratapSingh2021",
+      "lane": "pea_iso/ambient_slurry",
+      "compound": "2-pentylfuran",
+      "measured_ppb": 638.0,
+      "predicted_ppb": 638.2673324225299,
+      "ratio": 1.0004190163362536,
+      "fold_error": 1.0004190163362536,
+      "log10_residual_dex": 0.00018193836774955344,
+      "in_objective": false
+    },
+    {
+      "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+      "lane": "pea_iso/heated_matrix",
+      "compound": "hexanal",
+      "measured_ppb": 782.0,
+      "predicted_ppb": 782.0056135695185,
+      "ratio": 1.0000071784776452,
+      "fold_error": 1.0000071784776452,
+      "log10_residual_dex": 3.117562040113911e-06,
+      "in_objective": false
+    },
+    {
+      "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+      "lane": "pea_iso/heated_matrix",
+      "compound": "2-pentylfuran",
+      "measured_ppb": 163.0,
+      "predicted_ppb": 163.00045581258945,
+      "ratio": 1.0000027963962543,
+      "fold_error": 1.0000027963962543,
+      "log10_residual_dex": 1.2144577644205087e-06,
+      "in_objective": false
+    },
+    {
+      "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+      "lane": "pea_iso/heated_matrix",
+      "compound": "nonanal",
+      "measured_ppb": 24.0,
+      "predicted_ppb": 23.999997971756642,
+      "ratio": 0.9999999154898601,
+      "fold_error": 1.000000084510147,
+      "log10_residual_dex": -3.6702288968256345e-08,
+      "in_objective": false
+    },
+    {
+      "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+      "lane": "soy_iso/ambient_slurry",
+      "compound": "hexanal",
+      "measured_ppb": 1621.71,
+      "predicted_ppb": 379.8817979244892,
+      "ratio": 0.23424767555511725,
+      "fold_error": 4.268985797319919,
+      "log10_residual_dex": -0.6303247099325839,
+      "in_objective": true
+    },
+    {
+      "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+      "lane": "soy_iso/ambient_slurry",
+      "compound": "2-pentylfuran",
+      "measured_ppb": 2492.0,
+      "predicted_ppb": 2492.2929435575757,
+      "ratio": 1.0001175535945328,
+      "fold_error": 1.0001175535945328,
+      "log10_residual_dex": 5.104987694400567e-05,
+      "in_objective": false
+    }
+  ],
+  "rows_at_fit": [
+    {
+      "benchmark_id": "pea_isolate_40C_PratapSingh2021",
+      "lane": "pea_iso/ambient_slurry",
+      "compound": "hexanal",
+      "measured_ppb": 1138.0,
+      "predicted_ppb": 1125.2780992733306,
+      "ratio": 0.9888208253719952,
+      "fold_error": 1.01130556147399,
+      "log10_residual_dex": -0.004882395563410864,
+      "in_objective": true
+    },
+    {
+      "benchmark_id": "pea_isolate_40C_PratapSingh2021",
+      "lane": "pea_iso/ambient_slurry",
+      "compound": "2-pentylfuran",
+      "measured_ppb": 638.0,
+      "predicted_ppb": 638.2673324225299,
+      "ratio": 1.0004190163362536,
+      "fold_error": 1.0004190163362536,
+      "log10_residual_dex": 0.00018193836774955344,
+      "in_objective": false
+    },
+    {
+      "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+      "lane": "pea_iso/heated_matrix",
+      "compound": "hexanal",
+      "measured_ppb": 782.0,
+      "predicted_ppb": 782.0056135695185,
+      "ratio": 1.0000071784776452,
+      "fold_error": 1.0000071784776452,
+      "log10_residual_dex": 3.117562040113911e-06,
+      "in_objective": false
+    },
+    {
+      "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+      "lane": "pea_iso/heated_matrix",
+      "compound": "2-pentylfuran",
+      "measured_ppb": 163.0,
+      "predicted_ppb": 163.00045581258945,
+      "ratio": 1.0000027963962543,
+      "fold_error": 1.0000027963962543,
+      "log10_residual_dex": 1.2144577644205087e-06,
+      "in_objective": false
+    },
+    {
+      "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+      "lane": "pea_iso/heated_matrix",
+      "compound": "nonanal",
+      "measured_ppb": 24.0,
+      "predicted_ppb": 23.999997971756642,
+      "ratio": 0.9999999154898601,
+      "fold_error": 1.000000084510147,
+      "log10_residual_dex": -3.6702288968256345e-08,
+      "in_objective": false
+    },
+    {
+      "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+      "lane": "soy_iso/ambient_slurry",
+      "compound": "hexanal",
+      "measured_ppb": 1621.71,
+      "predicted_ppb": 1640.0443420979843,
+      "ratio": 1.01130556147399,
+      "fold_error": 1.01130556147399,
+      "log10_residual_dex": 0.004882395563410837,
+      "in_objective": true
+    },
+    {
+      "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+      "lane": "soy_iso/ambient_slurry",
+      "compound": "2-pentylfuran",
+      "measured_ppb": 2492.0,
+      "predicted_ppb": 2492.2929435575757,
+      "ratio": 1.0001175535945328,
+      "fold_error": 1.0001175535945328,
+      "log10_residual_dex": 5.104987694400567e-05,
+      "in_objective": false
+    }
+  ],
+  "mutual_consistency": {
+    "definition": "residual left on each anchored row after ONE shared scale is fitted to BOTH. With two free factors this would be exactly zero and would say nothing.",
+    "residual_dex_per_row": [
+      -0.004882395563410864,
+      0.004882395563410837
+    ],
+    "worst_fold_error": 1.01130556147399,
+    "reading": "the two corrected anchors require scales of 4.36606x and 4.26899x; a single shared scale of 4.31725x satisfies both to within 1.0113x. The content correction is therefore very nearly a COMMON absolute-scale error on the ambient hexanal lane: the pea-vs-soy release RATIO the registry encodes (2.2098) survives the correction almost unchanged (it would become 2.1606 under a per-lane fit). What was wrong was the absolute scale, not the relative structure."
+  },
+  "alternative_per_lane_fit": {
+    "free_parameters": 2,
+    "fitted_rows": 2,
+    "objective_dex2": 0.0,
+    "rows": [
+      {
+        "benchmark_id": "pea_isolate_40C_PratapSingh2021",
+        "lane": "pea_iso/ambient_slurry",
+        "compound": "hexanal",
+        "measured_ppb": 1138.0,
+        "predicted_ppb": 1138.0,
+        "ratio": 1.0,
+        "fold_error": 1.0,
+        "log10_residual_dex": 0.0,
+        "in_objective": true
+      },
+      {
+        "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+        "lane": "soy_iso/ambient_slurry",
+        "compound": "hexanal",
+        "measured_ppb": 1621.71,
+        "predicted_ppb": 1621.71,
+        "ratio": 1.0,
+        "fold_error": 1.0,
+        "log10_residual_dex": 0.0,
+        "in_objective": true
+      }
+    ],
+    "why_declined": "exactly determined: two factors, two rows. Its zero residual is arithmetic and carries no information about the model or about whether the two corrected anchors agree. The one-parameter fit is adopted instead; the price is a 1.0113x residual on each row, which is the informative part."
+  },
+  "adopted": [
+    {
+      "protein_type": "pea_iso",
+      "process_state": "ambient_slurry",
+      "compound": "hexanal",
+      "role": "fitted",
+      "previous_value": 1.0,
+      "refit_value": 4.317249078683109,
+      "move_dex": 0.6352071054959947,
+      "material": true
+    },
+    {
+      "protein_type": "soy_iso",
+      "process_state": "ambient_slurry",
+      "compound": "hexanal",
+      "role": "fitted",
+      "previous_value": 2.209756097560976,
+      "refit_value": 9.540067476309506,
+      "move_dex": 0.6352071054959947,
+      "material": true
+    },
+    {
+      "protein_type": "soy_iso",
+      "process_state": "heated_matrix",
+      "compound": "hexanal",
+      "role": "propagated",
+      "previous_value": 0.6496682926829269,
+      "refit_value": 2.8047798380349946,
+      "move_dex": 0.6352071054959947,
+      "reason": "Defined as `soy ambient hexanal factor x (1 - 0.7060)`, the second term being the Shu 2024 heated-soy attenuation. Its BASELINE is the factor this script refits, so freezing it would leave a corrected fit composed with a stale baseline -- the exact defect this wave exists to remove. It moves by the same scale s. No panel benchmark constrains it; the movement is a propagation, not a fit."
+    }
+  ],
+  "materiality_threshold_dex": 0.01,
+  "reported_not_fitted": [
+    {
+      "lane": "pea_iso/ambient_slurry/2-pentylfuran",
+      "shipped_factor": 1.0,
+      "implied_scale_if_it_were_fitted": 0.9995811591648984,
+      "move_dex_if_it_were_fitted": -0.0001819383677496152,
+      "material": false,
+      "reason_not_fitted": "638 ppb verified VERBATIM against Molecules 26:4104 Table 1 (Wave K). The shipped factor already recovers it; moving it would be fitting rounding."
+    },
+    {
+      "lane": "soy_iso/ambient_slurry/2-pentylfuran",
+      "shipped_factor": 5.920318725099602,
+      "implied_scale_if_it_were_fitted": 0.9998824602226906,
+      "move_dex_if_it_were_fitted": -5.104987694398736e-05,
+      "material": false,
+      "reason_not_fitted": "2492 ppb verified VERBATIM against the same table. Same reading."
+    },
+    {
+      "lane": "pea_iso/heated_matrix/hexanal",
+      "shipped_factor": 0.228776,
+      "implied_scale_if_it_were_fitted": 0.9999928215738851,
+      "move_dex_if_it_were_fitted": -3.1175620400426167e-06,
+      "material": false,
+      "reason_not_fitted": "Trikusuma 2019 was NOT content-corrected \u2014 it is also the last unverified pillar of the matrix lane (Wave K: full text not retrieved). Refitting it here would move a constant against an anchor nobody has read."
+    },
+    {
+      "lane": "pea_iso/heated_matrix/2-pentylfuran",
+      "shipped_factor": 0.0194733,
+      "implied_scale_if_it_were_fitted": 0.9999972036115655,
+      "move_dex_if_it_were_fitted": -1.2144577644006486e-06,
+      "material": false,
+      "reason_not_fitted": "Same as the heated-pea hexanal entry."
+    },
+    {
+      "lane": "pea_iso/heated_matrix/nonanal",
+      "shipped_factor": 0.00959565,
+      "implied_scale_if_it_were_fitted": 1.000000084510147,
+      "move_dex_if_it_were_fitted": 3.6702289000604903e-08,
+      "material": false,
+      "reason_not_fitted": "Same as the heated-pea hexanal entry."
+    }
+  ],
+  "unanchored_after_content_correction": [
+    {
+      "lane": "pea_iso/ambient_slurry/1-hexanol",
+      "reason": "The paper reports n.d. for pea 1-hexanol and its text states pea proteins 'contained no alcohol compounds'. The 80 ppb this factor was built from is not a measurement. There is nothing to fit against; the factor is left at 1.0."
+    },
+    {
+      "lane": "soy_iso/ambient_slurry/1-hexanol",
+      "reason": "Soy 1-hexanol is n.d. as well (the paper's soy total alcohols are 40 +/- 9 ppb, 1-octen-3-ol only). The shipped factor 0.143/0.063 is a RATIO OF TWO FABRICATED NUMBERS (120 and 80 ppb), neither of which appears in the paper. It is left untouched because there is no anchor to fit it to -- but it is not a calibration, and it is the factor behind the hold-out's 1117x 1-hexanol miss on Li 2026. Retiring it is a science decision outside this refit's approved scope."
+    },
+    {
+      "lane": "pea_iso/ambient_slurry/nonanal",
+      "reason": "Nonanal is not reported for pea in this benchmark. Factor stays 1.0."
+    },
+    {
+      "lane": "soy_iso/ambient_slurry/nonanal",
+      "reason": "Nonanal is not reported for soy either; 0.160/0.150 is lane-internal. Untouched."
+    }
+  ],
+  "fit_leverage": {
+    "free_parameters": 1,
+    "fitted_rows": 2,
+    "parameters_per_row": 0.5,
+    "class": "per_row_recovery",
+    "interpretation": "ONE shared scale against two rows is 0.5 parameters per row, exactly at src.fit_target_index.FIT_LEVERAGE_THRESHOLD, so these rows are classified per_row_recovery and stay OUT of the honest literature-coverage numerator and denominator. That classification is unchanged by this refit: both benchmarks were already declared `fitted_to_benchmark` in the registry. What changes is the SIZE of the recovery (4.37x / 4.27x under -> ~1.01x), not its status.",
+    "why_this_exclusion_does_not_flatter_the_model": "Excluding a fitted row removes its hits as well as its misses. Before this refit these two rows were MISSES and were still excluded; after it they are near-exact and are still excluded. The number that moves as a result of this refit and is NOT excluded is the external hold-out, reported in results/validation/external_validation_report.json -- and it gets WORSE. See `holdout_note`."
+  },
+  "holdout_note": "This script never reads the hold-out. Scored AFTER the constants landed, by the normal generator, the hold-out median |log10| error moves from 1.1849 dex (15.31x) to a worse value, because the pea ambient lane contains two mutually contradictory external measurements (Bi 2020: 1260 ppb; Liu 2023 band midpoint: 51.96 ppb, a 24x spread at nominally the same conditions) and the erroneous 260 ppb constant happened to sit almost exactly at their geometric mean (sqrt(1260 x 51.96) = 255.9). Moving to the verified anchor moves the lane onto the Bi side of that disagreement. See tasks/audit_remediation.md, Wave O, for the 8-point table.",
+  "shipped_vs_refit": {
+    "tolerance_dex": 0.0005,
+    "rows": [
+      {
+        "lane": "pea_iso/ambient_slurry/hexanal",
+        "shipped": 4.31725,
+        "refit": 4.317249078683109,
+        "delta_dex": 9.268003569706555e-08,
+        "agrees": true
+      },
+      {
+        "lane": "soy_iso/ambient_slurry/hexanal",
+        "shipped": 9.54007,
+        "refit": 9.540067476309506,
+        "delta_dex": 1.1488647360773215e-07,
+        "agrees": true
+      },
+      {
+        "lane": "soy_iso/heated_matrix/hexanal",
+        "shipped": 2.8047805800000005,
+        "refit": 2.8047798380349946,
+        "delta_dex": 1.1488647370416486e-07,
+        "agrees": true
+      }
+    ],
+    "all_agree": true
+  }
+}
