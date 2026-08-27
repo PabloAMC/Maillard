@@ -39,7 +39,7 @@ if [[ -f "reactant.xyz" && -f "product.xyz" ]]; then
     xtb reactant.xyz --path product.xyz --gfn 2 --alpb water
 else
     echo "ERROR: reactant.xyz and/or product.xyz missing in $(pwd)"
-    echo "Did you run 'python scripts/generate_mapped_geometries.py'?"
+    echo "Did you run 'python scripts/generators/generate_mapped_geometries.py'?"
     exit 1
 fi
 """

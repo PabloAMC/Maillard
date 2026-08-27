@@ -23,10 +23,14 @@ history.
   and the `ingest_*.py` files use `.parents[1]` (they lived in `scripts/`). From
   `scripts/ingest/archive/` those resolve to the wrong directory. Any revival needs
   `.parents[3]` plus a review of the payloads.
-- **Most of these files are not tracked in git.** They were moved with a plain `mv`. Whether to
-  commit them is the repo owner's call; nothing here has been `git add`ed — *except*
-  `scratch_check_citations.py` and `scratch_resolve_citations.py`, which were already tracked in
-  the repo root and so were moved with `git mv` (2026-08-26) to keep their history.
+- **Everything in this directory IS tracked in git.** *(Corrected 2026-08-27, Wave R.)* This
+  paragraph used to read "Most of these files are not tracked in git … nothing here has been
+  `git add`ed — except `scratch_check_citations.py` and `scratch_resolve_citations.py`". That
+  was true on 2026-08-26, when the files had just been moved with a plain `mv`, and false by
+  the time the audit commits landed: `git ls-files scripts/ingest/archive` now returns all of
+  the scripts plus this README. The two `scratch_*.py` files named above are still the only
+  ones whose *history* followed them (they were moved with `git mv`); the rest entered git as
+  new files, so their pre-move history exists nowhere.
 
 ## Catalogue
 
@@ -74,6 +78,13 @@ needs.
 | `scratch_check_citations.py` | Read-only regex validator for the citation strings in `benchmark_intake_registry.json`. **Tracked in git** — moved here with `git mv` on 2026-08-26, so its history (and the local modifications it carried) followed it. |
 | `scratch_resolve_citations.py` | Resolves malformed citation strings in `benchmark_intake_registry.json` against Crossref over the network (`urllib` + rate-limit sleeps). **Tracked in git** — moved here with `git mv` on 2026-08-26. |
 
+### Deep-research detail extraction
+
+| File | Purpose |
+| --- | --- |
+| `get_details_fgh.py` | One-shot extractor for campaigns F/G/H: reads `data/Gemini_Deep_Research/raw/Gemini_deep_research_{F,G,H}.md` and writes `get_details_fgh_output.txt` beside itself. Archived here 2026-08-27 (Wave R) with `git mv`, so its history followed it. **Path caveat, worse than the `.parents[N]` problem above:** it resolves `ROOT = Path(".")`, i.e. relative to the *current working directory* rather than to its own location, so it only ever worked when invoked from the repo root and its archived location changes nothing about that. Its `OUTPUT_PATH` is also now stale: it still writes to `scripts/get_details_fgh_output.txt`, i.e. beside its OLD location, not beside the archived copy. Left as-is deliberately — this is a one-shot that must not be re-run. |
+| `get_details_fgh_output.txt` | The checked-in output of the script above. Kept as provenance for what campaigns F/G/H actually contained at extraction time. |
+
 ## Live tools left in place (NOT archived)
 
 These stay in `scripts/` because they are re-runnable diagnostics, not one-shot mutators. They
@@ -92,12 +103,14 @@ Also deliberately left in `scripts/`:
 - `scripts/ingest_results.py` — tracked; the live GC-MS ingestion entry point wired into
   `scripts/docker_maillard.sh ingest`.
 - `scripts/ingest_deep_research_markdown.py` — tracked; the live deep-research markdown reader.
-- `scripts/sync_backlog.py` — untracked, but re-runnable: reconciles
-  `deep_research_backlog.json` against `benchmark_intake_registry.json` rather than mutating
-  curated payloads.
-- `scripts/get_details_fgh.py` (+ `get_details_fgh_output.txt`) — untracked one-shot extraction
-  helper for campaigns F/G/H whose output is checked in beside it; left in place because it is
-  neither an `ingest_*` nor a `scratch_*` script. A candidate for this archive.
+- `scripts/sync_backlog.py` — **tracked** *(corrected 2026-08-27, Wave R: this line used to
+  say "untracked")*, and re-runnable: reconciles `deep_research_backlog.json` against
+  `benchmark_intake_registry.json` rather than mutating curated payloads.
+
+`scripts/get_details_fgh.py` (+ `get_details_fgh_output.txt`) used to be listed here as
+"untracked one-shot … a candidate for this archive". Both claims have been settled
+(2026-08-27, Wave R): both files were tracked, and the move this README predicted has now been
+made with `git mv`. They are catalogued above under *Deep-research detail extraction*.
 The two tracked `scratch_*.py` files that used to sit in the repo root
 (`scratch_check_citations.py`, `scratch_resolve_citations.py`) were moved into this archive
 with `git mv` on 2026-08-26, so their history followed them. They are catalogued above under

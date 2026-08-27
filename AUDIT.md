@@ -91,10 +91,10 @@ These are worse than the numbers this repository advertised a week ago. They are
 | Fitted rows (constants back-solved from the benchmark) | 2/2 — **not evidence**; both would previously have been counted as literature hits |
 | Internal-synthetic rows (reproducibility only) | 18/18 — carries zero validation weight |
 | Benchmarks without blocking gaps | **0/6 predictive** (+ 1/4 fit-recovery, 4/4 synthetic; the 5/14 aggregate is all non-evidence). Fit-recovery fell 3/4 → 1/4 in Round 3 when the two Pratap-Singh benchmarks were corrected against the paper and stopped recovering. Wave O then refitted their constants onto the verified values and they recover again — at `pass-no-ranking`, which is not `pass`, so **none of these counts moved**. A refit changes the size of a recovery, never its evidential status. |
-| External hold-out | **1/5 genuine extrapolations** at the pre-widening prior — and 1/5 under the wider one too since Wave O; median fold error **42.62×**, worst **2474×**. Only 4 of the 8 points are measurements at all. The median was 32.79× until Round 3 corrected two wrong table rows in the Li 2026 bundle (→ 15.31×, predictions unmoved), then rose to 42.62× when Wave O refitted the ambient hexanal observability onto the paper's verified anchor. **A refit to verified values made the out-of-sample number worse**; see Round 3, Wave O. |
+| External hold-out | **1/5 genuine extrapolations** at the pre-widening prior — and 1/5 under the wider one too since Wave O; median fold error **93.68×**, worst **2474×**, coverage **3/8** at the shipped sigma. Only 4 of the 8 points are measurements at all. The median was 32.79× until Round 3 corrected two wrong table rows in the Li 2026 bundle (→ 15.31×, predictions unmoved), rose to 42.62× when Wave O refitted the ambient hexanal observability onto the paper's verified anchor, and rose again to 93.68× when Wave R found the Liu hold-out's two reference values matched nothing in their source and replaced them with the thesis's own Table 2.7. **Every rise came from correcting data toward the literature, and predictions moved in none of them**; see Round 3, Wave O and Wave R. |
 | Strict-ready benchmarks | **0/14** |
 | Reaction-chemistry lanes with generative templates | 5/16 (derived by enumeration, test-pinned) |
-| Test suite | **1242 passed, 1 skipped, 2 xfailed, 0 failed** (2026-08-27, after Round 3). The dvipng failure carried as "environmental" for the whole audit is **gone**: `--report` now degrades to mathtext instead of raising |
+| Test suite | **1265 passed, 1 skipped, 2 xfailed, 0 failed** (2026-08-27, after Wave P; 1242 after Round 3). The dvipng failure carried as "environmental" for the whole audit is **gone**: `--report` now degrades to mathtext instead of raising |
 | Citation gate | **0 dead DOIs as of the 2026-08-26 and 2026-08-27 sweeps; 0 waivers.** The blocking gate is **structural and offline** — DOI grammar, confabulation signatures, status coherence, repair-record completeness. It cannot detect a live DOI that resolves to the wrong paper, which is exactly how the two PMC9905368 benchmarks survived every previous check. Liveness is a **scheduled weekly sample**, advisory, not part of the required set. |
 
 The coverage numbers *fell* during remediation — twice — and each fall is documented at
@@ -369,14 +369,14 @@ one. Norfuraneol is kept as a genuine furanone product; it just no longer feeds 
 | Pea / soy ambient slurry, after the Wave O refit | 4.37× / 4.27× under (`scale-gap`) | **1.0113× on both** (`pass-no-ranking`, still `fit_recovery`) | Observability refit to the verified anchors |
 | Acrylamide extrusion | 6.42× under | **15.39× under** | Ma 2024 re-provenance (62.62 → 150 ppb) |
 | Resconi furfural | 3.14× over | **4.56× over** | Cherry-pick corrected (1040 → 715.22 ppb) |
-| Hold-out median fold error | 32.79× | 15.31× → **42.62×** after Wave O | Li 2026 wrong-row correction, then the Wave O observability refit |
+| Hold-out median fold error | 32.79× | 15.31× → 42.62× after Wave O → **93.68×** after Wave R | Li 2026 wrong-row correction, then the Wave O observability refit, then the Wave R Liu reference correction |
 | Hold-out genuine extrapolations | 0/5 pre-widening | **1/5** pre-widening (unmoved by Wave O) | Li 2026 wrong-row correction |
-| Hold-out coverage at the shipped sigma | 5/8 | **4/8** | Wave O observability refit |
+| Hold-out coverage at the shipped sigma | 5/8 | 4/8 after Wave O → **3/8** after Wave R | Wave O observability refit, then the Wave R Liu reference correction |
 | Literature-row projection objective | 0.74 dex | 0.96 dex → **0.88 dex** after Wave O | Both corrections; then the Wave O refit (the 0.08 dex gain is entirely two fit-recovery rows and is **not** evidence) |
 | Matrix leave-lane-out ln-sigma | 2.86 RMS on 6 residuals | **3.25** on 5 | Pratap-Singh content correction |
 | Matrix leave-lane-out ln-sigma, after the Wave O refit | 3.25 on 5 | **3.25 on 5, bit-identical** | The derivation never reads the observability factors — by design |
 | Test suite | 1245 passed, 0 failed | **1242 passed, 1 skipped, 2 xfailed, 0 failed** | 18 stale pins re-derived, none relaxed |
-| *(Wave P)* Test suite | 1242 passed, 0 failed | **not fully re-run — see below** | The machine's data volume hit 100% and free RAM fell to ~60 MB mid-run; the certifying pass reached 82% of 1268 with ONE failure (a stale pin from the oleate correction, since re-pinned and passing) and all of `tests/unit` green. `tests/integration` and `tests/scripts` are NOT certified under the final tree. No number is published because none was measured. |
+| *(Wave P)* Test suite | 1242 passed, 0 failed | **1265 passed, 1 skipped, 2 xfailed, 0 failed** (873.99 s) | 1265+1+2 = 1268 collected = Wave O's 1248 + the 20 new Wave P tests. One real failure was produced and fixed en route: the Trikusuma nonanal recovery, a stale pin from the oleate substrate correction, re-pinned two-sided. Three earlier attempts were abandoned to a machine condition, not the tree — the data volume hit 100% (ENOSPC produced spurious ERRORs that do not reproduce) and free RAM fell to ~60 MB. |
 | *(Wave P)* Hofmann MFT | 151.87 ppb — 2.25× under | **242.38 ppb — 1.41× under** | `thiol_addition_pentodiulose` refit 28.60 → 26.35 (fit recovery, not evidence) |
 | *(Wave P)* Hofmann FFT | 243.72 ppb — 1.22× over | **217.99 ppb — 1.09× over** | Same refit; FFT was **not** fitted and co-moves through shared upstream flux |
 | *(Wave P)* Pentose ≫ hexose ordering | 3.39× (1.13× structural) | **6.15×** (2.31× structural) | The refitted barrier gap, not the mechanism |
@@ -385,6 +385,7 @@ one. Norfuraneol is kept as a genuine furanone product; it just no longer feeds 
 | *(Wave P)* Hold-out Li 2026 nonanal | 272.63× over | **118.31× over** | Oleate substrate correction — nothing fitted |
 | *(Wave P)* Hold-out Liu 2023 nonanal | 10.86× over | **4.78× over** | Same |
 | *(Wave P)* Hold-out headline | median 42.62×, coverage 4/8, worst 2474× | **all three unchanged** | The median sits between two points that did not move |
+| *(Wave R)* Hold-out headline | median 42.62×, coverage 4/8 | **median 93.68×, coverage 3/8** | The Liu bundle's two reference values were replaced with the ones in its source; no prediction moved |
 | *(Wave P)* Matrix leave-lane-out ln-sigma | 3.25 on 5 residuals | **3.02** on 5, 90% CI [2.03, 6.30] | The Trikusuma nonanal residual fell 3238.93 → 1425.13 ppb |
 | *(Wave P)* Literature-row projection objective | 0.88 dex | **0.89 dex** at the shipped tau; the fit optimum moved 5011.87 → 10000 min (2.51× → **1.26×** away) | Chemistry additions + the sulfur refit |
 
@@ -459,6 +460,15 @@ Liu's reported band; which is representative of commercial PPI is a question thi
 cannot settle. What the refit bought is that the shipped constants are now anchored to
 numbers that exist in a paper.
 
+> **Superseded 2026-08-27 (Wave R): the contradiction was not in the literature either.**
+> The "Liu 2023 band" in the paragraph above appears in no source. The thesis was retrieved
+> and read in full and its Table 2.7 reports hexanal at 2445–52454 µg/L, so the verified
+> 1138 ppb anchor sits *just under Liu's lowest lot* rather than 6.3× above her band, and Bi
+> and Liu do not disagree by 24× on any comparable basis. The Wave O refit's direction is
+> **vindicated by the corrected target**: the same Liu hexanal point reads 19.50× → **11.17×**
+> once scored against the real number. What still costs the headline is the *nonanal* row,
+> not a clash between two believable papers — see "Wave R" below.
+
 **What the refit could not touch.** The 1-hexanol factors. The paper reports n.d. in both
 matrices, so the shipped soy value `0.143 / 0.063` is a ratio of two numbers (120 and 80 ppb)
 that appear nowhere in it, and there is no anchor to refit it against. It is left in place,
@@ -531,6 +541,65 @@ A family called `Furanone_Strecker_Reduction` would have silently collected both
 suppression at pH 5.5 / a_w 0.95) purely because of how it was spelled. The Wave P families are
 named to receive the same treatment as the sibling steps they extend, and a test now pins that
 none of them picks up a correction. The underlying coupling is untouched and remains open.
+
+### Wave R — the hold-out was being graded against numbers from nowhere (2026-08-27, owner-adjudicated)
+
+Wave O closed with an open `[P]`: *"Bi 2020 (1260 ppb) vs Liu 2023 (15–180 ppb band) disagree
+by 24× on nominally the same system and no observability factor satisfies both."* That was
+treated for three waves as the sharpest unresolved conflict in the pea lane, quoted in this
+document, in the README and in the validation contract as evidence that the literature itself
+was inconsistent.
+
+**There was no conflict. One side of it was not in the literature.**
+
+The source was located and retrieved in full: Yaozheng Liu, *Flavor Chemistry of Pea Proteins*,
+MS thesis, North Carolina State University, **2021** — published as Liu, Cadwallader & Drake
+(2023), *Food Chemistry* 406:134998, `10.1016/j.foodchem.2022.134998` (CrossRef-verified). Its
+Table 2.7 quantifies nine commercial pea proteins, rehydrated to 10 % solids, by
+HS-SPME-GC-MS/MS against five-point external standard curves.
+
+| Compound | This repository carried | The thesis reports (Table 2.7) | Error |
+| --- | --- | --- | --- |
+| hexanal | band 15–180 ppb, mid 51.96 | **2445–52454 µg/L** (4318, 3360, 2445, 6052, 6383, 11203, 12181, 52454, 2533) | 50–300× **low** |
+| nonanal | band 5–50 ppb, mid 15.81 | **0.188–3.42 µg/L** | 6–266× **high** |
+| (E,E)-2,4-heptadienal | band 0.5–8 ppb, OAV 7–114 | **the compound does not appear in the thesis at all** | unsourceable |
+| 3-isobutyl-2-methoxypyrazine | max 0.08 ppb | **the compound does not appear in the thesis at all**; its methoxypyrazine is IPMP at 6.126–57.0 µg/L | wrong compound, and 713× low for the nearest real one |
+| hexanal OAV (`computational_priors`) | 28, with 1-octen-3-ol at 14 | **543–11656** (Table 2.8), 1-octen-3-ol **2–47** | 19–416× low |
+
+Not one of those numbers is a rounding, a unit slip or a transcription off an adjacent row —
+the failure mode Round 3 found in the Li 2026 and Pratap-Singh bundles. They correspond to
+nothing in the document they cite. The two compounds that are simply *absent* were **retired,
+not repaired**: `no_verifiable_source`, removed from any scored target, with the nearest real
+rows recorded in the correction note and explicitly *not* substituted.
+
+**The price, again on the only lane a correction cannot flatter.**
+
+| Hold-out point | Measured, before → after | Fold error, before → after |
+| --- | --- | --- |
+| Liu 2023 PPI, hexanal | 51.96 → **11320 ppb** | 19.50× → **11.17×** (better) |
+| Liu 2023 PPI, nonanal | 15.81 → **0.8018 ppb** | 4.78× → **94.22×** (worse) |
+| the other six points | unchanged | unchanged |
+| **median fold error** | | 42.62× → **93.68×** |
+| coverage at the shipped sigma | | 4/8 → **3/8** |
+| worst miss / pre-widening 1/5 | | 2474× / 1 of 5, unchanged |
+
+**No prediction moved.** Nothing was fitted, no constant was touched, and the hold-out stayed
+outside every fit — the three gates were re-run green afterwards. The headline got worse
+because the grading key was replaced with the real one.
+
+Two things worth stating plainly. First, the **Wave O refit is vindicated by the corrected
+target**: the Liu hexanal point improved from 19.50× to 11.17×, and the verified 1138 ppb
+Pratap-Singh anchor that drove the refit now sits *just under Liu's lowest lot* instead of
+6.3× above her band. The refit was right and was being graded by a broken key. Second, the
+**nonanal row is now the sharpest lipid-lane over-prediction the repository has against a
+directly-quantified reference**: 75.5 ppb predicted against a band whose top is 3.42 ppb.
+Wave P's oleate-substrate correction is the partial mitigation already landed — it took this
+same point from 214× to 94× — and it was not enough.
+
+And the caveat travels with the corrected values: Liu's standard curves were built **in
+deionized water, not in the protein matrix**, so protein binding of the analyte is
+uncorrected and 0.188–3.42 µg/L is a *lower* bound on total nonanal. The over-prediction is,
+if anything, understated by this table.
 
 ### What Round 3 means for the rest of the repository
 

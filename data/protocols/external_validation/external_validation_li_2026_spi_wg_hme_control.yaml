@@ -24,10 +24,11 @@ measured_volatiles:
     conc_ppb: 72.66
     value_provenance: reported_point_value
     value_provenance_note: A single concentration reported by the source. Scoring
-      this against a prediction is a genuine test. CONTENT-CORRECTED 2026-08-27
-      (Wave K/M) from 29.42, which was the paper's Decanal row (off-by-one
-      transcription); Nonanal HMPE-0 min reads 72.66 +/- 1.46 ug/kg. Verified
-      via Europe PMC fullTextXML (PMC12984281).
+      this against a prediction is a genuine test.
+    content_correction_note: '2026-08-27 (Wave K/M): was 29.42, which is the paper''s
+      DECANAL row (volatile table, HMPE-0 min control column); the Nonanal row reads
+      72.66 +/- 1.46 ug/kg. Off-by-one table-row transcription error, verified against
+      Europe PMC fullTextXML (PMC12984281). See results/validation/content_verification_wave_k.md.'
   1-hexanol:
     conc_ppb: 20.04
     value_provenance: reported_point_value
@@ -37,10 +38,12 @@ measured_volatiles:
     conc_ppb: 5625.8
     value_provenance: reported_point_value
     value_provenance_note: A single concentration reported by the source. Scoring
-      this against a prediction is a genuine test. CONTENT-CORRECTED 2026-08-27
-      (Wave K/M) from 221.5, which was the paper's Maltol row (off-by-one
-      transcription, 25x low); 2-Pentylfuran HMPE-0 min reads 5625.80 +/- 63.75
-      ug/kg. Verified via Europe PMC fullTextXML (PMC12984281).
+      this against a prediction is a genuine test.
+    content_correction_note: '2026-08-27 (Wave K/M): was 221.51, which is the paper''s
+      MALTOL row (volatile table, HMPE-0 min control column); the 2-Pentylfuran row
+      reads 5625.80 +/- 63.75 ug/kg -- the previous value was 25x low. Off-by-one
+      table-row transcription error, verified against Europe PMC fullTextXML (PMC12984281).
+      See results/validation/content_verification_wave_k.md.'
 provenance:
   origin: external_literature
   source_reference: Li et al. (2026), Foods 15(5):912

@@ -140,7 +140,7 @@ Observable-first governance: never promote a target without a justifying artifac
 
 ### Layer 6 — Selective QM (xTB → DFT)
 
-**Modules:** `src/mlp_barrier.py`, `src/dft_refiner.py`, `src/skala_refiner.py`
+**Modules:** `src/mlp_barrier.py`, `src/dft_refiner.py` *(2026-08-27, Wave R: `src/skala_refiner.py` was also listed here. That module does not exist and never appears anywhere in `git ls-files` — it was a planned refiner that was documented before it was written and then never written.)*
 
 Refines barrier quality for selected high-value steps. Not the main reason the tool is
 scientist-shareable today, but architecturally critical for the next tier of confidence.

@@ -2352,21 +2352,27 @@
     },
     {
       "id": "liu_2022_ppi_oav_anchors",
-      "source": "Liu et al. (2022)",
+      "source": "Liu, Y. (2021 thesis, NC State) / Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998",
       "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "high",
+      "confidence_tier": "medium",
       "uncertainty_posture": "directional_transfer",
       "reference_conditions": {
         "matrix": "ppi"
       },
       "off_note_oav_rank": [
         "hexanal",
+        "2-pentylfuran",
         "1-octen-3-ol",
         "nonanal",
         "pentanal"
       ],
-      "hexanal_oav_ppi": 28.0,
-      "notes": "PPI OAV ranking: hexanal OAV=28 (dominant off-note), 1-octen-3-ol OAV=14."
+      "hexanal_oav_ppi": 960.0,
+      "notes": "Pea-protein OAV ranking from Table 2.8 of the source. Hexanal OAV 543-11656 across the nine quantified samples (543 = sample 4, 11656 = sample 19); the scalar 960.0 is sample 1's value, retained only as the ranking-lane representative. 1-octen-3-ol OAV 2-47; 2-pentylfuran OAV 4-271; nonanal OAV <1-3; pentanal OAV <1 in all nine samples. Ranking is by OAV magnitude within this lipid-derived set.",
+      "hexanal_oav_ppi_range": [
+        543.0,
+        11656.0
+      ],
+      "content_correction_note": "CONTENT CORRECTION 2026-08-27 (Wave R). PREVIOUS VALUES: `hexanal_oav_ppi` 28.0 and the note 'PPI OAV ranking: hexanal OAV=28 (dominant off-note), 1-octen-3-ol OAV=14'. WHAT THEY MATCHED IN THE SOURCE: NOTHING. Table 2.8 'Odor-activity values (OAV) of positively identified aroma-active compounds of pea proteins' gives hexanal OAV = 960, 747, 543, 1345, 1418, 2490, 2707, 11656, 563 (samples 1, 2, 4, 12, 13, 14, 16, 19, 22) against the thesis's 4.5 ug/L water threshold -- 19x to 416x the retired 28.0 -- and 1-octen-3-ol OAV = 11, 7, 6, 4, 5, 3, 2, 4, 47 against a 1 ug/L threshold, i.e. never 14. The RANK ORDER was also wrong: 2-pentylfuran (OAV 4-271) outranks 1-octen-3-ol in 8 of 9 samples and was missing from the list entirely, while nonanal (OAV <1-3) and pentanal (OAV <1 everywhere) sit below both. Corrected from the same primary source read for the Liu hold-out correction; this record shares 10.1016/j.foodchem.2022.134998 with liu_2023_ppi_offnote_baseline (see its shared_anchor_note). NOT CONSUMED BY src/: the only other reference to `hexanal_oav_ppi` in the tree is the archived one-shot ingest script that wrote it, so this correction moves no prediction."
     }
   ],
   "lipid_offnote_priors": [

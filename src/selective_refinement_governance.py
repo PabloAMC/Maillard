@@ -211,13 +211,5 @@ def render_selective_refinement_governance_markdown(payload: Mapping[str, Any]) 
     return "\n".join(lines) + "\n"
 
 
-def build_refinement_governance_artifact(
-    benchmark_files: Optional[Iterable[Path | str]] = None,
-    *,
-    target_tag: str = DEFAULT_TARGET_TAG,
-) -> Dict[str, Any]:
-    return build_selective_refinement_governance_artifact(benchmark_files, target_tag=target_tag)
-
-
 def render_refinement_governance_markdown(payload: Mapping[str, Any]) -> str:
     return render_selective_refinement_governance_markdown(payload)

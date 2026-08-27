@@ -2258,7 +2258,7 @@
     },
     {
       "id": "liu_2023_ppi_offnote_baseline",
-      "citation": "Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998",
+      "citation": "Liu, Y. (2021), \"Flavor Chemistry of Pea Proteins\", MS thesis, North Carolina State University; published as Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998",
       "doi": "10.1016/j.foodchem.2022.134998",
       "kind": "quantitative_benchmark",
       "chemistry_family": "alternative_protein_matrix_scope",
@@ -2295,21 +2295,31 @@
       ],
       "key_values": {
         "hexanal_ppb_range": [
-          15.0,
-          180.0
+          2445.0,
+          52454.0
         ],
         "nonanal_ppb_range": [
-          5.0,
-          50.0
+          0.188,
+          3.42
         ],
-        "ee_2_4_heptadienal_ppb_range": [
-          0.5,
-          8.0
+        "ee_2_4_heptadienal_ppb_range": null,
+        "ipmp_ppb_range": [
+          6.126,
+          57.0
         ],
-        "methoxypyrazine_ppb_max": 0.08,
+        "methional_ppb_range": [
+          15.5,
+          182.0
+        ],
+        "2_pentylfuran_ppb_range": [
+          25.5,
+          1628.0
+        ],
+        "methoxypyrazine_ppb_max": 57.0,
         "mft_detected": false,
         "meaty_potential_multiplier": 0.12,
-        "replicate_lot_count": 6
+        "replicate_lot_count": 2,
+        "units_basis": "ug/L of the rehydrated 10%-solids (w/w) slurry, read as ppb"
       },
       "runtime_artifacts": [
         {
@@ -2345,7 +2355,8 @@
         "basis": "Relabelled to the CrossRef record for this DOI; see the shared_anchor note."
       },
       "shared_anchor": true,
-      "shared_anchor_note": "10.1016/j.foodchem.2022.134998 anchors four nominally distinct repo ids (liu_2023_ppi_offnote_baseline, liu_cadwallader_2023_pea_aeda, liu_2022_ppi_oav_anchors, researchgate_2023_pea_aeda). One paper, four ids; the 2022 year labels were also wrong (CrossRef: 2023)."
+      "shared_anchor_note": "10.1016/j.foodchem.2022.134998 anchors four nominally distinct repo ids (liu_2023_ppi_offnote_baseline, liu_cadwallader_2023_pea_aeda, liu_2022_ppi_oav_anchors, researchgate_2023_pea_aeda). One paper, four ids; the 2022 year labels were also wrong (CrossRef: 2023).",
+      "content_correction_note": "CONTENT CORRECTION 2026-08-27 (Wave R). This record's `key_values` were a verbatim copy of the four flavor_reference_payloads bands that Wave R found to match NOTHING in the source. PREVIOUS VALUES: hexanal_ppb_range [15.0, 180.0]; nonanal_ppb_range [5.0, 50.0]; ee_2_4_heptadienal_ppb_range [0.5, 8.0]; methoxypyrazine_ppb_max 0.08; replicate_lot_count 6. VERIFIED SOURCE: the full text of Yaozheng Liu, 'Flavor Chemistry of Pea Proteins', MS thesis, North Carolina State University, 2021 (published as Liu, Cadwallader & Drake 2023, Food Chemistry 406:134998), Table 2.7 'Concentrations of positively identified aroma-active compounds of pea proteins', across the nine quantified samples (1, 2, 4, 12, 13, 14, 16, 19, 22). NEW VALUES, all inter-lot min/max from that table: hexanal 2445-52454; nonanal 0.188-3.42; 2-pentylfuran 25.5-1628; methional 15.5-182; IPMP (2-isopropyl-3-methoxypyrazine) 6.126-57.0. ee_2_4_heptadienal_ppb_range is set to NULL: (E,E)-2,4-heptadienal is ABSENT from the source (grep for 'heptadien' over the full text returns zero hits), so there is no band to correct it to and inventing one is the defect being removed. `methoxypyrazine_ppb_max` 0.08 -> 57.0: the old value was attached to 3-isobutyl-2-methoxypyrazine (IBMP), which the source neither identifies nor quantifies; the source's methoxypyrazine is IPMP, and its maximum is 57.0 ug/L, i.e. 713x the retired ceiling. `replicate_lot_count` 6 -> 2: the Table 2.7 footnote reads 'Average concentration +/- standard deviation (n = 2)' (duplicate lots); the triplicate extractions are within-lot. UNITS BASIS: ug/L of the rehydrated 10%-solids (w/w) slurry, read as ppb (rho ~ 1 kg/L). DI-WATER CALIBRATION CAVEAT: quantification is by HS-SPME-GC-MS/MS EXTERNAL standard curves (R^2 > 0.95) built by spiking standards into DI WATER, not into the protein matrix, so protein binding is uncorrected and every value is a LOWER BOUND on total analyte. NOT CORRECTED, FLAGGED: `meaty_potential_multiplier` 0.12 and `mft_detected` false are repo constructions, not quantities the source reports; `mft_detected: false` is consistent with the source (no 2-methyl-3-furanthiol appears in any of its tables), but 0.12 remains unsourced. [P]"
     },
     {
       "id": "pmc12155365_sunflower_roasted_anchor",

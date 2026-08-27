@@ -3012,39 +3012,46 @@ is an open item: it means a family's name is a load-bearing calibration input. [
                    `sulfur_barrier_refit_pentodiulose.json: leverage=per_row_recovery,
                    1 target(s)` alongside the Wave H and Wave O records.
 
-  THE FULL SUITE DID NOT COMPLETE, AND THE REASON IS THE MACHINE, NOT THE TREE. Stated
-  plainly rather than papered over with a number nobody measured.
-    * The certifying run (`tests/unit tests/scientific tests/integration tests/scripts`,
-      1268 collected, documented conda path) reached **82 % with exactly ONE failure**:
+  FINAL SUITE: **1265 passed, 1 skipped, 2 xfailed, 0 FAILED** in 873.99 s
+  (`tests/unit tests/scientific tests/integration tests/scripts`, documented conda path,
+  exit code 0, zero FAILED/ERROR lines). Arithmetic check: 1265 + 1 + 2 = **1268**, which is
+  the `--collect-only` count, and 1268 = Wave O's certified 1248 + the 20 new tests in
+  `tests/scientific/test_wave_p_chemistry_2026_08.py`. The 1 skip and both xfails are the
+  declared, strict-marked ones from Wave J2 (`xfail_strict = true` is on, so neither xfail can
+  silently start passing).
+
+  HOW THAT NUMBER WAS OBTAINED, because the route to it matters for trusting it. Three earlier
+  attempts at this suite were abandoned, and the reason was the MACHINE, not the tree:
+    * Attempt 1 was contaminated. The machine's data volume reached **100 % capacity**
+      mid-run (133 MiB free at the worst point) and ENOSPC produced a cluster of spurious
+      ERRORs at 17 % in subprocess-backed unit tests. Those do NOT reproduce once space was
+      freed (clearing `__pycache__` and `.pytest_cache` recovered several GB), and the same
+      region ran clean in every later attempt. Anyone reading a failing log from this period
+      should check `df` before bisecting.
+    * Attempt 2 reached **82 % with exactly ONE failure**, located by index against a
+      `--collect-only` listing:
       `tests/scientific/test_matrix_only_benchmark.py::
        test_trikusuma_heated_pea_matrix_fit_is_recovered_to_within_1_05x`.
-      That failure was located by index against a `--collect-only` listing, diagnosed as a
-      STALE PIN from item 4 (the nonanal recovery this wave deliberately broke), re-pinned
-      two-sided with a dated causal comment, and the file now passes **7/7**.
-      **The whole of `tests/unit` — the first 72 % of that run, 931 tests — was green in it.**
-    * The run then stalled. During this wave the machine's data volume reached **100 % full**
-      (ENOSPC surfaced mid-run and produced a cluster of spurious ERRORs at 17 % that DO NOT
-      reproduce once space was freed) and free RAM fell to **~60 MB**, at which point pytest
-      held ~99 % CPU while advancing a few tests per ten minutes. Two further attempts
-      (`tests/scientific tests/integration tests/scripts`, and `tests/unit` alone) stalled the
-      same way. This is an environment condition and it is not caused by anything in Wave P.
-    * WHAT IS CERTIFIED GREEN UNDER THE FINAL TREE, run to completion:
-        - the 13-file Wave P blast radius (wave_p_chemistry, matrix_only_benchmark,
-          matrix_assertions, matrix_headspace_ph_validation, honest_headline_guards,
-          free_aa_quantitative_regression, pentose_hexose_sulfur_ordering, benchmark_summary,
-          matrix_experiment_intake, lipid_oxidation_saturation, lipid_oxidation_guard,
-          deep_research_benchmark_wiring, matrix_observability_refit_wave_o):
-          **64 passed**
-        - tests/unit/test_chemistry_soundness.py + tests/unit/test_wave_h_2026_08.py:
-          **42 passed**
-        - tests/unit/test_data_ingest.py + tests/scientific/test_matrix_experiment_intake.py:
-          **5 passed**
-        - tests/unit as a whole, earlier in the wave: 928 passed / 1 skipped / 2 failed, and
-          BOTH failures are the two re-pins above, since verified passing.
-    * NOT CERTIFIED under the final tree: `tests/integration` and `tests/scripts` (and the
-      tail of `tests/scientific` past index 1039). **[P] re-run the full suite on a machine
-      with headroom before this wave is committed.** No number is published for it here,
-      because none was measured.
+      That was a STALE PIN from item 4 — the nonanal recovery this wave deliberately breaks —
+      and it is the one real failure the wave produced. Re-pinned two-sided with a dated
+      causal comment; the file passes 7/7. All of `tests/unit` (the first 72 %) was green in
+      that attempt.
+    * Attempts 2 and 3 then stalled with free RAM at ~60 MB: pytest held ~99 % CPU while
+      advancing a few tests per ten minutes. This is an environment condition and is not
+      caused by anything in Wave P.
+  The certified run above is the one that completed after the Trikusuma re-pin landed, on the
+  final tree, with memory recovered. Its ZERO failures are what closes out the wave.
+
+  TARGETED RUNS MADE ALONG THE WAY, all green, kept because they isolate the blast radius:
+    - the 13-file Wave P blast radius (wave_p_chemistry, matrix_only_benchmark,
+      matrix_assertions, matrix_headspace_ph_validation, honest_headline_guards,
+      free_aa_quantitative_regression, pentose_hexose_sulfur_ordering, benchmark_summary,
+      matrix_experiment_intake, lipid_oxidation_saturation, lipid_oxidation_guard,
+      deep_research_benchmark_wiring, matrix_observability_refit_wave_o): **64 passed**
+    - tests/unit/test_chemistry_soundness.py + tests/unit/test_wave_h_2026_08.py: **42 passed**
+    - tests/unit/test_data_ingest.py + tests/scientific/test_matrix_experiment_intake.py:
+      **5 passed**
+    - tests/scientific/test_matrix_only_benchmark.py after the Trikusuma re-pin: **7 passed**
 
   NOT COMMITTED, NOT STASHED — handed to the orchestrator as instructed.
 
@@ -3064,3 +3071,430 @@ full 4-directory suite under the final Wave P tree: 1265 passed, 1 skipped, 2 xf
 condition that produced Wave P's spurious ERRORs and stalls). tests/integration and
 tests/scripts are hereby certified; the exit-144 kills during the stall window were
 Wave P's own process cleanup racing the orchestrator's runs, not test failures.
+
+---
+
+## Wave R — the Liu hold-out correction + the cleanup execution (2026-08-27)
+
+Two parts. Part A is a data-honesty correction to reference values (the hold-out stayed out
+of every fit; nothing was calibrated). Part B executes the Wave R0 cleanup inventory.
+
+### PART A — THE LIU HOLD-OUT WAS BEING GRADED AGAINST NUMBERS FROM NOWHERE
+
+Wave O's sharpest carried `[P]` — "Bi 2020 (1260 ppb) vs Liu 2023 (15-180 ppb band) disagree
+by 24x on nominally the same system and no observability factor satisfies both" — is closed,
+and the resolution is that ONE SIDE OF THE CONTRADICTION WAS NOT IN THE LITERATURE.
+
+Source located, retrieved and READ IN FULL: Yaozheng Liu, "Flavor Chemistry of Pea Proteins",
+MS thesis, North Carolina State University, **2021** (NC State Institutional Repository item
+db647868-5ffe-4621-9f11-bbc4db357406); published as Liu, Cadwallader & Drake (2023), Food
+Chemistry 406:134998, `10.1016/j.foodchem.2022.134998` (CrossRef-verified). Method: 24
+commercial pea proteins rehydrated to 10% solids (w/w) in DI water; nine of them quantified
+in Table 2.7 by HS-SPME-GC-MS/MS against five-point EXTERNAL standard curves with response
+factors (R^2 > 0.95). Table 2.3 identifies the nine: samples 4, 12, 13, 14, 16 (ISOLATES) and
+1, 2, 19, 22 (CONCENTRATES).
+
+#### (a) PER-COMPOUND CORRECTIONS, OLD -> NEW, WITH THE SOURCE ROWS QUOTED
+
+  **1. `liu_2023_ppi_hexanal_band` — hexanal. CORRECTED.**
+    OLD: band 15.0-180.0 ppb, geometric mid **51.96**, OAV 3-40. Matched NOTHING; no hexanal
+    number in the thesis is within two orders of magnitude of it.
+    THESIS Table 2.7, row `Hexanal 2` (column order 1, 2, 4, 12, 13, 14, 16, 19, 22):
+      `4318 +/- 481, 3360 +/- 274, 2445 +/- 212, 6052 +/- 776, 6383 +/- 409,
+       11203 +/- 2216, 12181 +/- 4237, 52454 +/- 34133, 2533 +/- 804` ug/L
+    NEW: band **2445-52454**, geometric mid **11320** (4 s.f.), span 21.45x, OAV 543-11656
+    (Table 2.8, against the thesis's own 4.5 ug/L water threshold — which equals this repo's
+    hexanal ODT, so the OAVs transfer without rescaling). The old band was 50-300x LOW.
+    RECORDED, NOT SCORED: the isolate-only subset (4, 12, 13, 14, 16) is 2445-12181, mid 5457.
+    The 52454 top of the scored band is sample 19, a CONCENTRATE and the lowest-protein
+    sample of the panel (52.8 wt% protein, Table 2.3).
+
+  **2. `liu_2023_ppi_nonanal_band` — nonanal. CORRECTED.**
+    OLD: band 5.0-50.0 ppb, geometric mid **15.81**, OAV 5-50. Matched NOTHING.
+    THESIS Table 2.7, row `Nonanal 2`:
+      `0.797 +/- 0.55, 0.469 +/- 0.30, 0.188 +/- 0.040, 0.301 +/- 0.075, 0.652 +/- 0.11,
+       0.861 +/- 0.11, 1.06 +/- 0.77, 1.15 +/- 0.66, 3.42 +/- 0.71` ug/L
+    NEW: band **0.188-3.42**, geometric mid **0.8018**, span 18.19x. The old band was 6-266x
+    HIGH. INDEPENDENT CORROBORATION IN THE SAME DOCUMENT: Table 2.8 reports nonanal OAV as
+    `<1 <1 <1 <1 <1 1 1 1 3` against a 1 ug/L threshold — only consistent with sub-ppb-to-3-ppb.
+
+  **3. `liu_2023_ppi_heptadienal_band` — (E,E)-2,4-heptadienal. RETIRED, NOT REPAIRED.**
+    OLD: band 0.5-8.0 ppb, mid 2.0, OAV 7-114.
+    THE COMPOUND IS ABSENT FROM THE SOURCE. Case-insensitive grep for `heptadien` over the
+    full thesis text returns **ZERO hits** — not in Table 2.7 (quantitation), 2.4 (SPME-GC-O),
+    2.5 (SAFE-GC-O) or 2.6 (AEDA/FD). The unsaturated aldehydes the thesis DOES quantify are
+    (E,E)-2,4-nonadienal (2.05-19.1), (E,E)-2,4-decadienal (0.436-8.29) and (E)-2-decenal
+    (3.65-143) ug/L. They are recorded in the correction note and DELIBERATELY NOT
+    substituted: different compounds, different thresholds, and swapping one in would repeat
+    the original error in a new form. Marked `value_status: no_verifiable_source`, removed
+    from any scored target. It was never in the scored bundle, so no benchmark number moves.
+
+  **4. `liu_2023_ppi_ibmp_band` — 3-isobutyl-2-methoxypyrazine. RETIRED, WRONG COMPOUND.**
+    OLD: band 0.0-0.08 ppb, ODT 0.002, OAV floor 1.0.
+    IBMP IS NOT IN THE SOURCE. The thesis states its pyrazine inventory explicitly: "The
+    pyrazines identified in this study included 2-ethyl-6-methyl-pyrazine, IPMP,
+    2-isoamyl-6-methylpyrazine, 2,5-dimethyl-3-(3-methylbutyl)-pyrazine,
+    2,3-diethyl-5-methyl pyrazine and 2-sec-butyl-3-methoxy pyrazine." IBMP appears only in
+    the literature review, quoting Murray et al. (1970/1976) on GREEN PEAS.
+    NEAREST REAL ROW, RECORDED BUT NOT SUBSTITUTED: Table 2.7 row
+    `2-Isopropyl-3-methoxypyrazine 2` = `57.0, 23.3, 18.2, 15.7, 21.9, 19.7, 29.0, 14.3,
+    6.126` ug/L, i.e. an IPMP band of **6.126-57.0** (mid 18.69), Table 2.8 OAV 3063-28500
+    against a 0.002 ug/L threshold. That is **76x-713x ABOVE the retired 0.08 ppb ceiling**:
+    the record was not merely mis-labelled, it was three orders of magnitude wrong even for
+    the compound it was nearest to. A properly-typed IPMP anchor is a separate owner decision.
+
+  **5. `liu_2022_ppi_oav_anchors` (`data/lit/computational_priors.json`). CORRECTED.**
+    Same underlying paper (the registry's own `shared_anchor_note` says so). OLD:
+    `hexanal_oav_ppi: 28.0`, note "hexanal OAV=28 (dominant off-note), 1-octen-3-ol OAV=14",
+    rank `[hexanal, 1-octen-3-ol, nonanal, pentanal]`. ALL WRONG. Table 2.8: hexanal OAV
+    `960, 747, 543, 1345, 1418, 2490, 2707, 11656, 563` (19x-416x the retired 28.0);
+    1-octen-3-ol `11, 7, 6, 4, 5, 3, 2, 4, 47` (never 14); 2-pentylfuran `89, 18, 13, 25, 40,
+    38, 60, 4, 271` — which outranks 1-octen-3-ol in 8 of 9 samples and was MISSING FROM THE
+    RANK LIST ENTIRELY. NEW rank `[hexanal, 2-pentylfuran, 1-octen-3-ol, nonanal, pentanal]`,
+    `hexanal_oav_ppi` 960.0 with `hexanal_oav_ppi_range [543, 11656]`. NOT CONSUMED BY `src/`
+    (only the archived one-shot ingest script that wrote it), so no prediction moves.
+
+  **6. `liu_2023_ppi_offnote_baseline.key_values` (`data/lit/benchmark_intake_registry.json`).**
+    A verbatim copy of the four defective bands. CORRECTED to the Table 2.7 ranges, plus
+    `2_pentylfuran_ppb_range [25.5, 1628.0]` and `methional_ppb_range [15.5, 182.0]` (both
+    verified from the same table), `ee_2_4_heptadienal_ppb_range -> null`,
+    `methoxypyrazine_ppb_max 0.08 -> 57.0` (IPMP), `replicate_lot_count 6 -> 2`.
+    FLAGGED NOT CORRECTED: `meaty_potential_multiplier: 0.12` is a repo construction the
+    source does not report. `mft_detected: false` is consistent with the source (no
+    2-methyl-3-furanthiol in any of its tables). **[P]**
+
+  EVERY corrected record carries a `content_correction_note` with: the previous value, the
+  statement that it matched nothing, the thesis table and row quoted verbatim, the UNITS
+  BASIS (ug/L of the rehydrated 10%-solids slurry, read as ppb at rho ~ 1 kg/L — NOT a
+  per-gram-of-powder or headspace basis), and the DI-WATER CALIBRATION CAVEAT (thesis 2.9:
+  "pea protein solutions were replaced with 5 mL DI water and were spiked with known
+  compounds at five different levels" — matrix binding is uncorrected, so **every value is a
+  LOWER BOUND on total analyte**). `src/external_validation.py` gained a 4-line pass-through
+  so `content_correction_note` travels from the payload anchor into the generated bundle;
+  without it a regeneration would present the corrected number as if it had always been right.
+
+#### (b) CITATION FIXED
+
+  `"Liu, Y. (2023 thesis)"` -> `Liu, Y. (2021), "Flavor Chemistry of Pea Proteins", MS thesis,
+  North Carolina State University; published as Liu, Cadwallader & Drake (2023), Food
+  Chemistry 406:134998`. The old string was doubly wrong: the thesis is **2021** (the 2023
+  belongs to the derived paper). `doi` added to all four payload anchors and `source_doi` to
+  the bundle: `10.1016/j.foodchem.2022.134998`. This REVERSES the Wave I note that said the
+  DOI was "deliberately NOT used here" — that reasoning confused CITING the paper with
+  PROMOTING the hold-out. Evidence class `external_validation_only` is unchanged and the
+  bundle remains outside every fit. The record ids keep their `liu_2023_` prefix, which is
+  correct for the published version and is referenced by four tests and two backlog files.
+
+  A STATUS-SEMANTICS DISTINCTION, made deliberately: the two retired anchors carry
+  `source_status: verified_primary_source_read` + `value_status: no_verifiable_source`, NOT
+  `source_status: no_verifiable_source`. The CITATION is verified — the source was identified,
+  retrieved and read, and its DOI is real. What has no verifiable source is the VALUE. Writing
+  `source_status: no_verifiable_source` beside a real DOI is internally incoherent and the
+  citation gate's status-coherence rule catches exactly that. The gate was NOT relaxed; the
+  data was made accurate. `value_provenance`, `pipeline_role` and `benchmark_role` all still
+  read `no_verifiable_source` / `retired_unverifiable`, so a grep still finds these records.
+
+#### (c) THE RANKING CONTRACT, RE-DERIVED
+
+  Auto-derived from the corrected panel (no explicit `comparison_contract` is supplied):
+  adverse markers `[hexanal, nonanal]`, hexanal expected_rank 1, nonanal 2, both direction
+  `lower`. UNCHANGED IN SHAPE, and now for a real reason: on the corrected panel hexanal
+  (11320) leads nonanal (0.8018) by 14000x, where the retired bands had it leading by only
+  3.3x. The contract's `citation_provenance` now carries the corrected citation.
+
+#### (d) THE HOLD-OUT, OLD -> NEW. IT GOT WORSE. NO PREDICTION MOVED.
+
+  `results/validation/external_validation_report.json`, n=200 seed 0, hold-out never fitted.
+
+  | point                         | meas old | meas new | p50      | fold old  | fold new  |
+  | ----------------------------- | -------- | -------- | -------- | --------- | --------- |
+  | bi_2020_raw_pea / hexanal     |   1260.0 |   1260.0 |   1013.1 |    1.2437 |    1.2437 |
+  | bi_2020_roasted_pea / hexanal |    324.0 |    324.0 | 801700.4 | 2474.3839 | 2474.3839 |
+  | li_2026_hme / 1-hexanol       |    20.04 |    20.04 |  22394.3 | 1117.4799 | 1117.4799 |
+  | li_2026_hme / 2-pentylfuran   |   5625.8 |   5625.8 |  11038.6 |    1.9621 |    1.9621 |
+  | li_2026_hme / hexanal         |    605.6 |    605.6 |  56409.9 |   93.1471 |   93.1471 |
+  | li_2026_hme / nonanal         |    72.66 |    72.66 |   8596.4 |  118.3093 |  118.3093 |
+  | **liu_2023_ppi / hexanal**    |    51.96 | **11320**|   1013.1 |   19.4972 | **11.1739** |
+  | **liu_2023_ppi / nonanal**    |    15.81 |**0.8018**|    75.55 |    4.7785 | **94.2234** |
+
+  * median |log10| 1.6296 -> **1.9717** dex; median fold 42.6159x -> **93.6837x**
+  * shipped-sigma coverage 4/8 -> **3/8** (0.500 -> 0.375). The hexanal point stays INSIDE
+    the interval; the nonanal point leaves it.
+  * pre-widening (ln-sigma 2.0) coverage **3/8 UNCHANGED** — the two priors now AGREE,
+    because the last point separating them left both intervals.
+  * `genuine_extrapolation` **1/5 UNCHANGED**; `max_fold_error` **2474.3839x UNCHANGED**;
+    `matched_compound_count` 8 UNCHANGED. `in_panel_rescoring` hits 3/3 -> 2/3.
+  * `external_failing_compounds`: nonanal mean |log10| 1.3762 -> **2.0236**; hexanal 1.6868
+    -> 1.6264 (IMPROVED); 1-hexanol 3.0482 unchanged.
+  * SIX POINTS ARE BYTE-IDENTICAL. Only the two Liu MEASURED values moved. **Nothing was
+    fitted, no constant was touched, no prior was changed.**
+
+  THE NONANAL ROW, REPORTED PLAINLY. The model predicts **75.55 ppb against a real inter-lot
+  band whose TOP is 3.42 ppb** — 94.22x over, and it is now the sharpest lipid-lane
+  over-prediction the repo has against a DIRECTLY-QUANTIFIED reference (the larger folds on
+  record — 2474x, 1117x, 118x — are all against reported point values in other lanes, and the
+  roasted-pea 2474x is an OAV-derived number). WAVE P'S OLEATE FIX IS THE PARTIAL MITIGATION
+  ALREADY LANDED: against the corrected reference the same fix reads **214.1x -> 94.22x**
+  (p50 171.70 -> 75.55), i.e. it removed more than half the error in log space and was still
+  not close. And the DI-water caveat runs the wrong way for us: Liu's 0.188-3.42 is a LOWER
+  bound on total nonanal, so the true over-prediction is if anything larger than 94x.
+
+  WAVE O IS VINDICATED BY THE CORRECTED TARGET. Wave O accepted a headline regression on the
+  grounds of a 24x literature contradiction. There was no contradiction: 51.96 was a midpoint
+  of a band that appears in no source. Against Table 2.7 the verified 1138 ppb Pratap-Singh
+  anchor sits just UNDER Liu's lowest lot (2445) rather than 6.3x above her band, Bi's 1260
+  and Liu's 2445-52454 are consistent for different matrices, and this same Liu hexanal point
+  IMPROVED 19.50x -> 11.17x once graded against the real number. The refit was right and was
+  being marked by a broken key.
+
+#### (e) A REPRODUCIBILITY DEFECT FOUND WHILE REGENERATING (fixed)
+
+  The committed `external_validation_li_2026_*.{yaml,json}` did not reproduce from their own
+  generator. Two causes, both fixed:
+  1. `_measurement_row`'s Wave I 4-significant-figure rounding was applied to EVERY number,
+     including `reported_point_value` rows. It was written to strip precision WE invented
+     (sqrt(15*180) = 51.96152422706632); applied to a measurement it strips precision the
+     SOURCE has. Li 2026 2-pentylfuran was being silently rewritten 5625.8 -> 5626.0 on every
+     regeneration, and Wave R's corrected Liu band max would have been written 52454 -> 52450.
+     Rounding now applies ONLY to constructed values (band midpoints, OAV-derived points);
+     never to reported values, and never to band endpoints, which are per-lot measurements
+     quoted from the source table. Dated causal comment in the docstring.
+  2. Wave K/M's Li 2026 correction notes lived inline in `value_provenance_note` in the
+     GENERATED files but as a structured `content_correction_note` in the payload, which the
+     generator dropped. The new pass-through surfaces them properly. No number changed.
+
+#### (f) TESTS RE-PINNED (each with a dated causal comment; none relaxed)
+
+  1. `tests/unit/test_audit_remediation_carried_2026_08.py::test_holdout_bundle_carries_typed_
+     identifier_and_keeps_its_evidence_class` — `assert "source_doi" not in bench` INVERTED to
+     `assert bench["source_doi"] == "10.1016/j.foodchem.2022.134998"`, i.e. STRICTER: the DOI
+     is now required to be that specific one, so the field cannot drift back to empty or to
+     another paper. Two new assertions require the identifier to name the thesis and the year
+     2021. The evidence-class invariant is untouched — that is the point of the test.
+  2. `tests/scientific/test_honest_headline_guards.py::test_holdout_scores_1_of_5_...` —
+     `median_accuracy_fold` 42.62 -> **93.68**, `ci_coverage_hits` 4 -> **3**,
+     `ci_coverage_rate` 0.5 -> **0.375**, each with the full two-point movement table and the
+     statement that no prediction moved. `max_fold_error` (2474.4), the pre-widening 1/5, the
+     5/3 kind split and `matched_compound_count` 8 are DELIBERATELY NOT re-pinned — they did
+     not move, and their stability across a reference correction is the guard's whole value.
+     The docstring gains a block recording that its own quoted "Liu 4.78x (IMPROVED)" was
+     computed against a fabricated reference.
+
+  NOT RE-PINNED, DELIBERATELY: `test_slr_reference_payloads.py:131` and
+  `test_literature_learning_loop.py:77` still map the backlog entry to
+  `liu_2023_ppi_ibmp_band`. The RECORD still exists (retired, not deleted), so the mapping is
+  still true; deleting the id would delete the retirement record. `deep_research_backlog.json`
+  keeps its raw `"Liu, Y. (2023 thesis)"` citation string with its existing repair record —
+  that is the historical raw text, and `test_runtime_first_registry_landing.py:119` reads it.
+
+#### (g) DOC SYNC (numbers match the regenerated artifacts exactly)
+
+  README.md: hold-out surface row 42.62x -> 93.68x; the "median hold-out fold error is 42.62x"
+  sentence -> 93.68x; a new leading Wave R block (old-vs-new bands, per-point folds, the
+  retired compounds, the DI-water caveat, the explicit "no prediction moved"); the Wave O
+  block's 24x-contradiction paragraph marked SUPERSEDED with the corrected reading; the Wave P
+  block's "all unchanged" annotated with what those numbers are now and with the 214x -> 94x
+  reading of the same fix. The two historical "15.31x -> 42.62x" statements are left as
+  history, because they are.
+  AUDIT.md: headline hold-out row; three rows in "What Round 3 cost"; a new "Wave R" section
+  under Round 3 with the five-row old-vs-new table, the price table, and the vindication note;
+  the Wave O 24x paragraph marked superseded in place.
+  docs/reference/VALIDATION_CONTRACT.md section 3E: "Current numbers" re-headed to the Wave R
+  regeneration, 42.62x -> 93.68x, 4/8 -> 3/8 (and the note that both priors now agree), a new
+  Wave R paragraph, and supersession notes on the Wave O and Wave P paragraphs.
+
+### PART B — CLEANUP EXECUTED (against `wave_r0_cleanup_inventory.md`)
+
+  **TIER 1 — DONE.**
+  * `src/Maillard.egg-info/` — 5 tracked files untracked and deleted (332 lines). Its
+    `top_level.txt` still advertised the five modules the audit deleted, i.e. the repo was
+    shipping a manifest asserting the dead-code island existed. `*.egg-info/` added to
+    `.gitignore` with a dated causal comment.
+  * `tasks/.todo.md.bak` — deleted (1162 lines). `*.bak` added to `.gitignore`.
+  * `src/validation/__init__.py` — deleted; the empty orphan package is gone. Every
+    `src.validation` hit in the tree is the MODULE `src/validation_contract.py`.
+  * **All 14 dead top-level functions deleted (~186 lines), after RE-VERIFYING all 14 —
+    including the two the inventory deferred because Wave P was editing those files.** Each
+    name returns exactly one hit (its own `def`) across `*.py/md/json/yaml/txt/cfg/toml`,
+    excluding `scratch/`, `.git/`, the ledger and AUDIT.md:
+    `load_report_result` (reporting), `build_multi_run_family_lane_sensitivity_payload`
+    (family_lane_sensitivity), `render_family_payload_coverage_markdown`
+    (literature_family_registry), `export_matrix_target_panel` (matrix_targets),
+    `_publication_year_proxy` (external_validation), `render_domain_warnings_markdown` +
+    `render_domain_warnings_cli` (presentation), `iter_family_prior_entries`
+    (matrix_prior_registry), `get_process_state_calibration_payload` (matrix_correction),
+    `build_refinement_governance_artifact` (selective_refinement_governance),
+    `_parse_xtb_energy` (xtb_path_quality), `load_optional_json_mapping` (artifact_io),
+    **`_predicted_order_lookup` (benchmark_validation)** and **`_species_from_pool`
+    (smirks_engine)** — the last two re-checked post-Wave-P and still zero-reference.
+    ONE import became orphaned and was removed: `Iterable` in `family_lane_sensitivity.py`
+    (verified against HEAD: it was used only by the deleted function). Every other unused
+    import in those 13 files pre-dates this wave and was left alone.
+    `_publication_year_proxy`'s docstring claimed it was "kept only so importers do not
+    break"; there were none. Its retirement rationale is preserved as a comment at the call
+    site that used to invoke it — a retired date-fabricator sitting in the module is a loaded
+    gun, and the comment is the part worth keeping.
+
+  **TIER 2 — DONE.** `scripts/get_details_fgh.py` + `get_details_fgh_output.txt` moved to
+  `scripts/ingest/archive/` with `git mv` (history follows). `scripts/ingest/archive/README.md`
+  gains a "Deep-research detail extraction" catalogue entry and its three false claims are
+  corrected in place, each marked with the date and the reason: (i) "Most of these files are
+  not tracked in git … nothing here has been `git add`ed" — false, `git ls-files` returns all
+  21 scripts plus the README; the corrected text keeps the true half (only the two
+  `scratch_*.py` files have their pre-move HISTORY); (ii) "`scripts/sync_backlog.py` —
+  untracked" — false, it is tracked; (iii) the `get_details_fgh` bullet's "untracked one-shot
+  … a candidate for this archive" — both halves settled. The catalogue entry also records a
+  path caveat the inventory missed and that is WORSE than the `.parents[N]` problem the README
+  already documents: this script resolves `ROOT = Path(".")`, i.e. relative to the CWD, not to
+  its own location, so it only ever worked from the repo root and archiving changes nothing.
+
+  **TIER 3.1 — SKIPPED, AND THE INVENTORY'S CASE FOR IT DOES NOT HOLD.** The instruction was
+  to consolidate only if the churn is genuinely zero. Call-site churn would indeed be zero
+  (private names retained, bodies delegate), but the recommendation is wrong on two counts
+  that only show up on reading the actual bodies:
+  1. **The shared helpers ALREADY EXIST and are simply unused.** `src/artifact_io.py` already
+     defines `repo_root()` (identical body) and `load_json_mapping()`. There is nothing to
+     add. Twelve modules ignore them.
+  2. **`_load_json` is not one helper, it is TWO with different failure semantics.** Three
+     modules (`chemistry_benchmark_validator`, `computational_gap_refinement`,
+     `literature_family_registry`) use a 3-line form with **no existence check** — a missing
+     file RAISES. Eight modules use a 4/5-line form that **returns `{}`** on a missing file.
+     Merging them would silently convert a raise into an empty dict in three modules. In this
+     repository an empty dict is a silent-degradation path, not an error path; that is a
+     behaviour change wearing a refactor's clothes, and it is precisely the class of defect
+     this audit exists to find. The `{}`-returning variant was ALREADY in `artifact_io` as
+     `load_optional_json_mapping` — dead, and deleted in TIER 1 of this same wave. The
+     shared-helper approach was already tried here and abandoned.
+  3. The claimed saving is also arithmetically wrong for `_repo_root`: the body is 2 lines and
+     a delegating body is 2 lines, so 12 delegations save **0 lines and add 12 imports** (net
+     +12). The inventory's "-24 lines" for `_repo_root` and "-45 lines" overall do not exist.
+  **[P] for the owner:** the real finding is that `artifact_io.repo_root` / `load_json_mapping`
+  have 12 and 11 uncoordinated shadows. Fixing that is a deliberate migration with a semantics
+  decision (which `_load_json` behaviour is correct where), not a mechanical dedup.
+
+  **TIER 4 — DONE (D1-D11).**
+  * D1 `.github/workflows/ci.yml` — the 5-line header describing `tests/benchmarks/` and
+    `_lane_policy.py` as live-but-unrun rewritten to say the lane was DELETED (Wave J2, one
+    day before the comment outlived it), what survives (the loader + its tracked `data/qm/`
+    fixtures), and that its only consumer is its own parse test.
+  * D2 `VALIDATION_CONTRACT.md` section 7 — the present-tense "`tests/benchmarks/` is
+    intentionally skip-heavy today" rewritten: the directory does not exist, nothing skips
+    there because nothing runs there.
+  * D3 same file — `scripts/generate_benchmark_summary.py` -> `scripts/generators/…`.
+  * D4 same file — the copy-pasteable `targets … cys_glucose_150C_Farmer1999.json competing`
+    line REMOVED, not repointed. The file was deleted as fabricated and there is no equivalent
+    competing-target benchmark; inventing one to keep an example alive is the failure mode the
+    document exists to prevent. The removal is annotated in place.
+  * D5 `docs/architecture.md` — `src/skala_refiner.py` removed from the module list; it does
+    not exist and never appears in `git ls-files` (documented before it was written, then
+    never written).
+  * D6 `docs/protocols/pea_matrix_meaty_benchmark.md` — the "as specified in
+    `docs/EXTERNAL_MATRIX_BENCHMARK_UNLOCK_REPORT.md`" pointer removed; that document is
+    absent from the repo and from git history.
+  * D7 `scripts/prepare_xtb_dirs.py` + `scripts/run_tier2_dft.py` — both user-facing "Did you
+    run …?" error strings repointed to `scripts/generators/generate_mapped_geometries.py`.
+    These are what a stuck user is told to run, which is why they matter more than a docstring.
+  * D8 `scripts/generators/ingest_dft_c4_c5_results.py` — "Run scripts/run_dft_c4_c5.py first"
+    replaced by a statement of the actual gap: no such runner exists in the working tree or
+    anywhere in git history, so the inputs must be produced by hand.
+  * D9 `generate_mace_training_data.py` + `generate_rmg_inputs.py` — self-referential
+    pre-move paths in their own docstrings corrected to `scripts/generators/…`.
+  * D10 `data/qm/phase33_barrier_benchmarks.json` — **APPENDED, NOT OVERWRITTEN**, as a new
+    `runtime_coupling_correction_2026_08_27` key beside the original. The original is an audit
+    record of what was true when it was checked. The correction makes the finding STRONGER:
+    with `_lane_policy.py` gone, NOTHING gates on this file's existence, so the eighteen
+    unverified numbers are fully inert.
+  * D11 `VALIDATION_CONTRACT.md` — the `thermodynamic_gating_audit.{md,json}` sentence
+    annotated: both artefacts are gitignored and absent; the command regenerates them.
+  * D12 (README `results/first_run/report.md`) — LEFT ALONE. It is a generated-output example
+    path, correct as an example, and the inventory graded it low severity.
+
+  **NOT TOUCHED, per the inventory's `keep` grades and the brief:** `direct_sulfur_bonus`
+  (3.3), `depth_bias_strength` (3.4), `scripts/calibrate_barriers.py`'s dangling-path tripwire
+  (3.5), `sulfur_barrier_refit_hofmann.{json,md}` (3.6), `src/authority_benchmark_data.py`
+  (3.7), the `_mft_pathway` hexose lump and the `Thiol_Addition_Norfuraneol` retirement
+  guards. `scratch/`, `.claude/`, `data/geometries/` and
+  `docs/validation/isotope_topology_evidence.md` untouched.
+
+### GATES
+
+  citation_gate **PASS** — 81 files, 959 DOI-bearing fields, 316 unique DOIs (was 79 / 904 /
+  310 at Wave O; the growth is Wave P's additions plus Wave R's four new `doi` fields on the
+  Liu anchors — the DOI itself was already in the repo, so unique DOIs moved with Wave P, not
+  with this wave). WAIVERS still empty.
+  holdout_guard **PASS** — 3/3 invariants, re-run after the correction and after regeneration.
+  fit_target_gate **PASS** — both checks.
+
+### ARTIFACTS REGENERATED
+
+  `generate_external_validation_payloads.py` (4 protocol YAMLs + 4 benchmark JSONs),
+  `generate_external_validation_report.py` (`external_validation_report.{json,md}` +
+  `external_failing_compounds.json`), `generate_external_validation_inventory.py`
+  (59 candidates / 8 executable / 50 narrative / 1 redundant, unchanged),
+  `generate_literature_backlog.py` and `generate_literature_learning_loop.py` (both read
+  `flavor_reference_payloads.json`; outputs gitignored, no tracked change). The calibration
+  panel, `benchmark_summary`, `prediction_uncertainty` and the matrix sigma derivation are
+  STRUCTURALLY unaffected: the hold-out is excluded from `get_benchmark_files()` and no
+  constant moved.
+
+### FINAL SUITE (Wave R)
+
+  **1265 passed, 1 skipped, 2 xfailed, 0 FAILED** in 1028.55 s
+  (`tests/unit tests/scientific tests/integration tests/scripts`, documented conda path,
+  `-p no:randomly`, exit code 0, zero FAILED/ERROR lines). 1265 + 1 + 2 = **1268**, the same
+  collected count Wave P certified — Wave R added no tests and removed none; it re-pinned two
+  existing assertions (one of them INVERTED to be stricter). The 1 skip and both xfails are
+  the declared, strict-marked ones from Wave J2.
+
+  HOW IT WAS OBTAINED, because one run was discarded. A first pass was started before Part B
+  was finished and was **killed by this wave at 62%** — deliberately, and only because it was
+  this wave's own process. Eleven `src/` files were rewritten under it mid-run (the
+  whitespace-minimisation pass described below), which makes any result from it meaningless:
+  it stalled at 62% precisely where the edits landed. It was killed, the tree was frozen, and
+  the suite above was run once, start to finish, against the final tree with nothing else
+  touching the repository. No pytest process this wave did not start was signalled.
+
+  A WHITESPACE NOTE on the dead-function deletions. The first deletion pass collapsed runs of
+  3-6 blank lines to 2 wherever it found them, which produced unrelated hunks in
+  `benchmark_validation.py` (18 whitespace lines), `smirks_engine.py` (7) and others, and
+  stripped a trailing-newline-less EOF in `family_lane_sensitivity.py`. That churn was
+  REVERTED and the deletions redone so each of the eleven pure-deletion files carries exactly
+  ONE hunk: the function and the blank lines that separated it from its neighbour, with the
+  original spacing preserved. A cleanup wave should not smuggle in a reformat.
+
+  NOT COMMITTED, NOT STASHED — handed to the orchestrator as instructed. 48 tracked paths
+  changed (+1139 / -2046 lines); the three untracked `data/geometries/` directories that were
+  present at entry are untouched, as are `scratch/`, `.claude/` and
+  `docs/validation/isotope_topology_evidence.md`.
+
+### [P] CARRIED FORWARD FROM WAVE R
+
+  1. **The nonanal lane is 94x over against a directly-quantified reference** (75.5 ppb vs a
+     0.188-3.42 band whose top is 3.42). Wave P's oleate-substrate fix removed more than half
+     the log error and stopped there. The remaining bias is the model treating oleate as
+     being as oxidisable as linoleate — see `src.lipid_oxidation.MARKER_HYDROPEROXIDE_POOL`.
+     This is now the highest-value lipid-lane target, ahead of the 1-hexanol factors.
+  2. **A properly-typed IPMP anchor.** The source quantifies 2-isopropyl-3-methoxypyrazine at
+     6.126-57.0 ug/L with OAV 3063-28500 — a real, verified, high-OAV pea off-note the repo
+     currently has NO anchor for, because the slot it would occupy was filled by a fabricated
+     IBMP band. Adding it is an owner decision (new record, not a repair).
+  3. **The Liu bundle's proxied pH 6.0 is not the source pH** (Table 2.3: 6.3-7.3, mean ~6.8
+     across the nine quantified slurries). Left unchanged because editing an executable
+     condition changes the prediction and Wave R corrected reference data only.
+  4. **`meaty_potential_multiplier: 0.12`** on `liu_2023_ppi_offnote_baseline` is a repo
+     construction the source does not report, and unlike the bands it IS consumed
+     (`src/matrix_correction.py` reads the field name from the source-profile registry).
+     Not corrected because there is nothing in the source to correct it to.
+  5. **`artifact_io.repo_root` / `load_json_mapping` have 12 and 11 uncoordinated shadows in
+     `src/`**, and the `_load_json` shadows split into two groups with DIFFERENT failure
+     semantics (raise vs return `{}`). Consolidation is a deliberate migration with a
+     semantics decision per call site, not the mechanical dedup the cleanup inventory
+     proposed. See TIER 3.1 above.
+  6. **The Phase 3 authority lane is now consumerless.** With `tests/benchmarks/_lane_policy.py`
+     deleted, `src/authority_benchmark_data.py`'s only importer is its own parse test, and its
+     eighteen unverified `data/qm/phase33_*` numbers are inert. Revive or retire — an owner
+     decision that Wave R only documented (D1, D2, D10).
+  7. **Wave I's 4-significant-figure rounding was silently altering measured values** on every
+     regeneration, and the committed `li_2026` artifacts had drifted away from their own
+     generator as a result. Fixed here for the hold-out generator. Whether the same
+     round-everything pattern exists in other generators was NOT audited. [P]

@@ -413,14 +413,6 @@ def _is_lipid_hydroperoxide(s: Species) -> bool:
     return c_count >= 8
 
 
-def _species_from_pool(pool: Set[str], label: str, smiles: str) -> Species:
-    """Create a Species, canonicalise its SMILES, and add to pool."""
-    can = _canonical(smiles)
-    if can:
-        pool.add(can)
-    return Species(label=label, smiles=smiles)
-
-
 
 from src.reaction_templates import (
     _amadori_cascade, _enolisation_steps, _strecker_step, _beta_elimination_steps,

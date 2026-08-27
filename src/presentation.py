@@ -240,29 +240,6 @@ def render_flavor_axis_markdown(
     return "\n".join(lines)
 
 
-def render_domain_warnings_markdown(warnings: List['DomainWarning']) -> str:
-    if not warnings:
-        return "> [!NOTE]\n> Run is within the validated scientific envelope.\n"
-        
-    lines = ["## Scientific Domain Warnings", ""]
-    for w in warnings:
-        icon = "⚠️" if w.level == "WARNING" else "🚨"
-        lines.append(f"- **{icon} {w.level} [{w.category}]**: {w.message}")
-    return "\n".join(lines) + "\n"
-
-
-def render_domain_warnings_cli(warnings: List['DomainWarning']):
-    if not warnings:
-        print("\n  ✅ Scientific Envelope: Trusted (matches PRIMARY benchmarks)")
-        return
-
-    print("\n  ⚠️  SCIENTIFIC DOMAIN WARNINGS:")
-    for w in warnings:
-        icon = "!" if w.level == "WARNING" else "!!"
-        print(f"    [{icon}] {w.category.ljust(15)}: {w.message}")
-    print("  " + "─" * 60)
-
-
 def render_decision_summary_cli(result: 'FormulationResult', warnings: List['DomainWarning']):
     """
     Renders a premium, consolidated scientist-facing summary of the simulation run.

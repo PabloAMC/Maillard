@@ -417,6 +417,27 @@ def test_holdout_scores_1_of_5_genuine_extrapolations_at_the_pre_widening_prior(
     oleate as being as oxidisable as linoleate, which biases them high by roughly another
     order of magnitude — see `src.lipid_oxidation.MARKER_HYDROPEROXIDE_POOL`.
 
+    2026-08-27 (Wave R) — THE LIU HOLD-OUT WAS SCORED AGAINST FABRICATED REFERENCE VALUES.
+    The paragraph above quotes "Liu 2023 PPI nonanal 10.86x -> 4.78x (IMPROVED)". Both of
+    those folds were computed against a number that does not exist in the cited source. The
+    primary document (Yaozheng Liu, "Flavor Chemistry of Pea Proteins", NC State MS thesis
+    2021; published as Liu, Cadwallader & Drake 2023, Food Chem. 406:134998) was retrieved
+    and read in full. Its Table 2.7 reports, across nine quantified commercial pea proteins,
+    hexanal 2445-52454 ug/L and nonanal 0.188-3.42 ug/L of the rehydrated 10%-solids slurry.
+    The repo carried hexanal 15-180 ppb (50-300x LOW) and nonanal 5-50 ppb (6-266x HIGH).
+    Neither band, and neither of the OAV pairs attached to them, matches any row of any table
+    in the thesis. Correcting them (no prediction moved):
+        Liu 2023 PPI hexanal   meas 51.96 -> 11320 ppb    fold 19.50x -> 11.17x  (IMPROVED)
+        Liu 2023 PPI nonanal   meas 15.81 -> 0.8018 ppb   fold  4.78x -> 94.22x  (WORSE)
+    and the headline moved 42.62x -> 93.68x with shipped-sigma coverage 4/8 -> 3/8. The
+    nonanal row is now the sharpest lipid-lane over-prediction the repo has against a
+    directly-quantified reference: 75.5 ppb predicted against a band whose TOP is 3.42 ppb.
+    Wave P's oleate-substrate fix is the partial mitigation already landed — it took this
+    same point from 214x to 94x — and it was not enough. NOTE the DI-water calibration
+    caveat travelling with the corrected values: Liu's curves were built in deionized water,
+    not in the protein matrix, so protein binding is uncorrected and 0.188-3.42 is a LOWER
+    bound. The gap is therefore, if anything, understated here.
+
     Three things are pinned and each blocks a different way of flattering this number:
 
     * ``pre_widening_coverage.genuine_extrapolation_hits == 0``. The uncalibrated matrix
@@ -460,16 +481,31 @@ def test_holdout_scores_1_of_5_genuine_extrapolations_at_the_pre_widening_prior(
         f"as 8 -- of which only 4 are measurements at all."
     )
 
-    assert summary["median_accuracy_fold"] == pytest.approx(42.62, abs=0.01), (
+    # RE-PINNED 2026-08-27 (Wave R): 42.62 -> 93.68. NOT a model change -- no constant, prior
+    # or factor moved. The Liu 2023 PPI hold-out's two reference values were found to match
+    # NOTHING in their cited source and were corrected against the primary document (Yaozheng
+    # Liu, "Flavor Chemistry of Pea Proteins", NC State MS thesis 2021, Table 2.7; published
+    # as Food Chem. 406:134998). MEASURED values moved, predictions did not:
+    #     hexanal  51.96 -> 11320 ppb (band 15-180 -> 2445-52454)   fold 19.50x -> 11.17x
+    #     nonanal  15.81 ->  0.8018 ppb (band 5-50 -> 0.188-3.42)   fold  4.78x -> 94.22x
+    # The nonanal point is the one that hurts, and it is reported plainly: the model predicts
+    # 75.5 ppb against a real inter-lot band whose TOP is 3.42 ppb. The other six points are
+    # byte-identical. Wave P's oleate-substrate correction already took this point from 214x
+    # to 94x before the reference was fixed, i.e. the mitigation landed first and was not
+    # enough. If this number IMPROVES, check it was not bought by reverting either the Wave O
+    # refit to the verified anchors or the Wave R reference correction.
+    assert summary["median_accuracy_fold"] == pytest.approx(93.68, abs=0.01), (
         f"Median hold-out fold error is {summary['median_accuracy_fold']:.2f}x, published "
-        f"as 42.62x since the 2026-08-27 Wave O observability refit (15.31x before it, "
-        f"32.79x before the Wave K/M Li 2026 reference correction). If this IMPROVED, check "
-        f"that it was not bought by reverting the refit to the verified anchors."
+        f"as 93.68x since the 2026-08-27 Wave R Liu reference correction (42.62x from the "
+        f"Wave O observability refit, 15.31x before it, 32.79x before the Wave K/M Li 2026 "
+        f"reference correction). If this IMPROVED, check that it was not bought by reverting "
+        f"the refit to the verified anchors or the Liu correction to the verified table."
     )
-    # The shipped-sigma coverage moved 5/8 -> 4/8 with the same refit and is pinned here so
-    # the headline cannot be quoted from a stale run.
-    assert summary["ci_coverage_hits"] == 4
-    assert summary["ci_coverage_rate"] == pytest.approx(0.5)
+    # Shipped-sigma coverage: 5/8 -> 4/8 at the Wave O refit, then 4/8 -> 3/8 at the Wave R
+    # Liu correction (the nonanal point left the interval; the hexanal point stayed inside
+    # it). Pinned here so the headline cannot be quoted from a stale run.
+    assert summary["ci_coverage_hits"] == 3
+    assert summary["ci_coverage_rate"] == pytest.approx(0.375)
     assert summary["max_fold_error"] == pytest.approx(2474.4, abs=0.1), (
         f"Worst hold-out fold error is {summary['max_fold_error']:.1f}x, published as 2474x."
     )

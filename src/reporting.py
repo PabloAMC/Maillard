@@ -1083,41 +1083,6 @@ def _write_intervention_waterfall(
     return output_path
 
 
-def load_report_result(report_json_path: Path | str) -> FormulationResult:
-    payload = json.loads(Path(report_json_path).read_text(encoding="utf-8"))
-    results = dict(payload.get("results", {}) or {})
-    uncertainty_envelopes = {
-        compound: UncertaintyEnvelope(**dict(row))
-        for compound, row in dict(results.get("uncertainty_envelopes", {}) or {}).items()
-    }
-    return FormulationResult(
-        name=str(results.get("name", Path(report_json_path).stem)),
-        target_score=float(results.get("target_score", 0.0) or 0.0),
-        off_flavour_risk=float(results.get("off_flavour_risk", 0.0) or 0.0),
-        safety_score=float(results.get("safety_score", 0.0) or 0.0),
-        lysine_budget=float(results.get("lysine_budget", 0.0) or 0.0),
-        trapping_efficiency=float(results.get("trapping_efficiency", 0.0) or 0.0),
-        mft_to_furfural_ratio=float(results.get("mft_to_furfural_ratio", 0.0) or 0.0),
-        meaty_quality_penalty=float(results.get("meaty_quality_penalty", 0.0) or 0.0),
-        strecker_balance_score=float(results.get("strecker_balance_score", 0.0) or 0.0),
-        strecker_gap_penalty=float(results.get("strecker_gap_penalty", 0.0) or 0.0),
-        pyrazine_propensity=float(results.get("pyrazine_propensity", 0.0) or 0.0),
-        pyrazine_burden=float(results.get("pyrazine_burden", 0.0) or 0.0),
-        pyrazine_penalty=float(results.get("pyrazine_penalty", 0.0) or 0.0),
-        furanone_penalty=float(results.get("furanone_penalty", 0.0) or 0.0),
-        flagged_toxics=list(results.get("flagged_toxics", []) or []),
-        radar=dict(results.get("radar", {}) or {}),
-        predicted_ppb={str(key): float(value) for key, value in dict(results.get("predicted_ppb", {}) or {}).items()},
-        uncertainty_envelopes=uncertainty_envelopes,
-        projection_metadata=dict(results.get("projection_metadata", {}) or {}),
-        matrix_explainability=dict(results.get("matrix_explainability", {}) or {}),
-        confidence_metadata=dict(results.get("confidence_metadata", {}) or {}),
-        flavor_axis_summary=dict(results.get("flavor_axis_summary", {}) or {}),
-        detected_targets=list(results.get("detected_targets", []) or []),
-        detected_minimize=list(results.get("detected_minimize", []) or []),
-    )
-
-
 def _safe_git_output(root: Path, args: List[str]) -> Optional[str]:
     try:
         completed = subprocess.run(

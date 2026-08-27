@@ -155,7 +155,15 @@ _HOLDOUT_BUNDLE_SPECS: Tuple[Dict[str, Any], ...] = (
         "matrix_context": "native_pea_protein_isolate_aqueous_slurry",
         "protein_type": "pea_iso",
         "process_state": "ambient_slurry",
-        "matrix_format": "native commercial pea protein isolate aqueous slurry external hold-out",
+        # 2026-08-27 (Wave R): was "native commercial pea protein ISOLATE aqueous slurry".
+        # The source's quantified panel is 5 isolates + 4 concentrates (Table 2.3), so
+        # calling it isolate-only overstated the match to the `pea_iso` lane.
+        "matrix_format": (
+            "commercial pea protein rehydrated to 10% solids (w/w) in deionized water; external "
+            "hold-out. The 9 quantified samples of Table 2.7 are 5 ISOLATES (4, 12, 13, 14, 16) "
+            "and 4 CONCENTRATES (1, 2, 19, 22). protein_type stays `pea_iso` because that is the "
+            "executable lane this bundle is proxied onto, not because the panel is isolate-only."
+        ),
         "conditions": {
             "temp_C": 40.0,
             "ph": 6.0,
@@ -167,29 +175,77 @@ _HOLDOUT_BUNDLE_SPECS: Tuple[Dict[str, Any], ...] = (
         },
         "benchmark_alignment": {
             "target_benchmark_id": "pea_isolate_40C_PratapSingh2021",
-            "notes": "Lot-to-lot PPI off-note baseline from Liu (2023). Conditions are proxied onto the existing ambient pea-isolate matrix-only lane so the bundle stays executable but external-only.",
+            "notes": (
+                "Lot-to-lot pea-protein off-note baseline from Liu (2021 thesis / 2023 paper). "
+                "Conditions are proxied onto the existing ambient pea-isolate matrix-only lane so "
+                "the bundle stays executable but external-only. 2026-08-27 (Wave R): the proxied "
+                "pH 6.0 is NOT the source pH -- Table 2.3 reports the rehydrated 10%-solids "
+                "slurries at pH 6.3-7.3 (mean ~6.8) across the nine quantified samples. The proxy "
+                "is left unchanged because editing an executable condition would change the "
+                "prediction, and Wave R corrects reference data only. [P] for a later wave."
+            ),
         },
         "analytical_context": {
-            "headspace_method": "HS-SPME-GC-MS plus GC-O",
-            "quantification_mode": "internal_standard_calibrated",
-            "replicates": 6,
-            "notes": "Band midpoints are used as hold-out reference values; uncertainty is derived from the reported band width. 2026-08-27 (Wave I): every measured row now carries value_provenance=band_geometric_midpoint plus band_min_ppb/band_max_ppb, because a geometric midpoint of a 10-12x band is a construction of ours, not a measurement.",
+            # 2026-08-27 (Wave R): retyped against the primary source, which was read in full.
+            "headspace_method": (
+                "HS-SPME-GC-MS/MS (triple quadrupole, MRM) for both scored rows; the same thesis "
+                "also ran DSE-SAFE-GC-MS, GC-O and AEDA, which are NOT the source of these numbers"
+            ),
+            # Was `internal_standard_calibrated`. There ARE internal standards
+            # (2-methyl-3-heptanone, 2-ethoxy-3-isopropyl pyrazine, heptanal-d14), but
+            # quantification is by a five-point EXTERNAL standard curve whose response factor was
+            # measured in DI WATER rather than in the protein matrix, so matrix binding is
+            # uncorrected and the reported concentrations are LOWER BOUNDS on total analyte.
+            "quantification_mode": "external_standard_curve_water_calibrated",
+            # Was 6. The Table 2.7 footnote reads "Average concentration +/- standard deviation
+            # (n = 2)" -- duplicate lots. The triplicate extractions are within-lot and do not
+            # make six independent observations.
+            "replicates": 2,
+            "panel_composition": (
+                "Table 2.7 quantifies 9 of the 24 commercial pea proteins: samples 4, 12, 13, 14, "
+                "16 (isolates) and 1, 2, 19, 22 (concentrates), per Table 2.3."
+            ),
+            "notes": (
+                "2026-08-27 (Wave R): BOTH scored rows were content-corrected against the primary "
+                "source after the previous values were found to match nothing in it. See the "
+                "per-row `content_correction_note`. Band midpoints are used as hold-out reference "
+                "values; the uncertainty column is derived from the band width, and a geometric "
+                "midpoint of an 18-21x band is a construction of ours, not a measurement."
+            ),
         },
         # 2026-08-27 (Wave I): typed identifier carried in the SPEC so a regeneration
-        # cannot drop it. This bundle's source is a thesis with no DOI or handle; before
-        # this, regenerating wrote `source_doi: ""` instead, which would have reclassified
-        # a real external hold-out as internal/synthetic.
+        # cannot drop it. 2026-08-27 (Wave R): the thesis still has no DOI, but the
+        # peer-reviewed version of the same dataset does, and it now flows into
+        # `source_doi` from the anchors' `doi` field.
         "provenance_overrides": {
-            "identifier": "Liu, Y. (2023), thesis, North Carolina State University Institutional Repository",
+            "identifier": (
+                "Liu, Y. (2021), \"Flavor Chemistry of Pea Proteins\", MS thesis, North Carolina "
+                "State University Institutional Repository (item "
+                "db647868-5ffe-4621-9f11-bbc4db357406)"
+            ),
             "identifier_scheme": "citation",
             "identifier_note": (
-                "2026-08-27: retyped from source_doi 'LiuThesis2023', which was never a DOI. "
-                "No DOI or handle is issued for this thesis record. The peer-reviewed version "
-                "of the same dataset is Liu, Cadwallader & Drake (2023), Food Chemistry "
-                "406:134998, doi 10.1016/j.foodchem.2022.134998 - anchored separately in "
-                "data/lit and deliberately NOT used here: this bundle stays "
-                "external_validation_only (hold-out), and its classification is unchanged by "
-                "the retyping."
+                "2026-08-27 (Wave I): retyped from source_doi 'LiuThesis2023', which was never a "
+                "DOI. 2026-08-27 (Wave R): the thesis carries no DOI, so the typed `identifier` "
+                "stays a citation -- and the YEAR is corrected from 2023 to 2021 (the 2023 date "
+                "belongs to the derived Food Chemistry paper, not the thesis). `source_doi` now "
+                "carries 10.1016/j.foodchem.2022.134998, the DOI of the PEER-REVIEWED VERSION OF "
+                "THE SAME DATASET (Liu, Cadwallader & Drake 2023, Food Chemistry 406:134998, "
+                "CrossRef-verified). This REVERSES the Wave I note that said the DOI was "
+                "'deliberately NOT used here': that reasoning confused CITING the paper with "
+                "PROMOTING the bundle. The bundle stays evidence_class external_validation_only, "
+                "stays out of every fit, and its classification is unchanged by carrying the "
+                "correct DOI."
+            ),
+            "content_correction_note": (
+                "2026-08-27 (Wave R): BOTH scored rows of this bundle were content-corrected. The "
+                "prior citation string 'Liu, Y. (2023 thesis)' was doubly wrong -- the thesis is "
+                "2021, and the numbers attached to it (hexanal 15-180 ppb, nonanal 5-50 ppb) "
+                "matched nothing in either the thesis or the paper. The full thesis text was read "
+                "for this wave; the corrected values come from Table 2.7. Two further anchors on "
+                "the same source, liu_2023_ppi_heptadienal_band and liu_2023_ppi_ibmp_band, were "
+                "marked no_verifiable_source because their compounds are ABSENT from the source; "
+                "neither was ever part of this scored bundle."
             ),
         },
         "denaturation_state": 0.0,
@@ -536,24 +592,6 @@ def _bundle_spec_for_anchor(anchor_id: str) -> Optional[Dict[str, Any]]:
     return None
 
 
-def _publication_year_proxy(citation: str) -> str:
-    """RETIRED 2026-08-27 (Wave I) — kept only so importers do not break.
-
-    This used to manufacture a `measurement_date` of "<publication year>-01-01" and write
-    it into the hold-out bundle's provenance. No such date was ever measured, reported or
-    known: it was the citation's year with a January 1st stapled to it, and it made a
-    synthesized bundle look like a dated laboratory record. Hold-out provenance now carries
-    `measurement_date: "not_applicable"` plus the real publication year in a field that
-    says it is a publication year.
-    """
-    digits = [part for part in str(citation).split() if part.strip("(),")[:4].isdigit()]
-    for part in digits:
-        cleaned = "".join(ch for ch in part if ch.isdigit())
-        if len(cleaned) >= 4:
-            return f"{cleaned[:4]}-01-01"
-    return "unspecified"
-
-
 def _publication_year(citation: str) -> str:
     """The source's publication year as a bare year string, or "unspecified"."""
     for part in str(citation).split():
@@ -578,11 +616,27 @@ def _measurement_row(candidate: ExternalCandidate) -> Dict[str, Any]:
         but is explicitly labelled: it is the UPWARD half-width of a geometric band, not a
         symmetric analytical uncertainty, and the band is asymmetric in linear space by
         construction.
+
+    2026-08-27 (Wave R). The Wave I 4-significant-figure rounding was applied to EVERY
+    number, including ones the source actually reports. That is the opposite of the honesty
+    it was written for: rounding sqrt(15 * 180) removes precision we invented, but rounding
+    a `reported_point_value` removes precision the SOURCE has. Two measured points were
+    being silently altered on every regeneration -- Li 2026 2-pentylfuran 5625.8 -> 5626.0
+    and (once Wave R corrected it) the Liu hexanal band max 52454 -> 52450 -- which is also
+    why the committed li_2026 artifacts had drifted away from their own generator. Rounding
+    is now applied ONLY to values this repo CONSTRUCTED (band midpoints and OAV-derived
+    points), never to reported values and never to the band endpoints, which are per-lot
+    measurements quoted verbatim from the source table.
     """
     if candidate.point_value is None:
         raise ValueError(f"Candidate {candidate.anchor_id} has no numeric point value")
 
-    row: Dict[str, Any] = {"conc_ppb": _round_sig(float(candidate.point_value), 4)}
+    is_reported = str(candidate.value_provenance) == "reported_point_value"
+    row: Dict[str, Any] = {
+        "conc_ppb": float(candidate.point_value)
+        if is_reported
+        else _round_sig(float(candidate.point_value), 4)
+    }
     row["value_provenance"] = candidate.value_provenance
     note = candidate.value_provenance_note or VALUE_PROVENANCE_NOTES.get(
         candidate.value_provenance, ""
@@ -595,8 +649,11 @@ def _measurement_row(candidate: ExternalCandidate) -> Dict[str, Any]:
         and candidate.band_high is not None
         and candidate.point_value > 0.0
     ):
-        row["band_min_ppb"] = _round_sig(float(candidate.band_low), 4)
-        row["band_max_ppb"] = _round_sig(float(candidate.band_high), 4)
+        # 2026-08-27 (Wave R): NOT rounded. These are per-lot values quoted from the source
+        # table (Liu 2021 Table 2.7 hexanal max is 52454, not 52450); only the midpoint
+        # between them is a construction of ours.
+        row["band_min_ppb"] = float(candidate.band_low)
+        row["band_max_ppb"] = float(candidate.band_high)
         row["band_span_fold"] = _round_sig(
             float(candidate.band_high) / float(candidate.band_low), 3
         ) if candidate.band_low > 0 else None
@@ -875,6 +932,13 @@ def build_holdout_bundles(
                 )
             anchor_row = anchor_lookup.get(anchor_id, {})
             measured_volatiles[candidate.compound] = _measurement_row(candidate)
+            # 2026-08-27 (Wave R). A row whose value was CORRECTED against the primary source
+            # must carry the correction with it into the generated bundle, or the only place
+            # the old-vs-new record survives is the ledger -- and a regeneration would then
+            # silently present the corrected number as if it had always been right.
+            correction_note = str(anchor_row.get("content_correction_note", "") or "").strip()
+            if correction_note:
+                measured_volatiles[candidate.compound]["content_correction_note"] = correction_note
             citations.append(str(anchor_row.get("source_citation", candidate.citation)))
             doi = str(anchor_row.get("doi", candidate.doi) or "")
             if doi:
@@ -901,6 +965,10 @@ def build_holdout_bundles(
                 # 2026-08-27 (Wave I): was `_publication_year_proxy(...)`, which wrote
                 # "<year>-01-01" -- an invented date that made a synthesized bundle read
                 # like a dated lab record. There is no measurement date for these bundles.
+                # 2026-08-27 (Wave R): that function is now DELETED, not just unused. Wave I
+                # left it in place "so importers do not break"; a repo-wide search found no
+                # importer, and a retired date-fabricator sitting in the module is a loaded
+                # gun. Its retirement rationale is preserved in this comment.
                 "measurement_date": "not_applicable",
                 "measurement_date_note": (
                     "This bundle is SYNTHESIZED from published anchors; no measurement date "
@@ -1322,9 +1390,15 @@ def _render_holdout_provenance_split(split: Mapping[str, Any]) -> str:
             "A concentration the source reports. A genuine external test."
         ),
         "band_geometric_midpoint": (
+            # 2026-08-27 (Wave R): the parenthetical read "(10-12x end to end)", which was
+            # the span of the two Liu bands BEFORE they were corrected against Table 2.7 of
+            # their own source. The real inter-lot spans are 21.45x (hexanal) and 18.19x
+            # (nonanal). Each row's own `band_span_fold` is authoritative; this prose no
+            # longer hard-codes a number it cannot keep in step with.
             "The source reports a RANGE; the scored value is sqrt(min*max), a number we "
-            "constructed. The honest uncertainty is the band (10-12x end to end), so "
-            "landing inside it is weak evidence."
+            "constructed. The honest uncertainty is the band itself -- read each row's "
+            "band_min_ppb/band_max_ppb and band_span_fold -- so landing inside it is weak "
+            "evidence."
         ),
         "derived_from_oav_and_repo_threshold": (
             "The source's odour-activity value multiplied by THIS REPO'S OWN hexanal "

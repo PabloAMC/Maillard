@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Dict, Iterable, List, Mapping
+from typing import Any, Dict, List, Mapping
 
 
 def _lane_toggle_magnitude(adjustment: Mapping[str, Any]) -> float:
@@ -37,39 +37,6 @@ def build_family_lane_sensitivity_payload(flavor_axis_summary: Mapping[str, Any]
             "sensitivity_policy": "family_lane_sensitivity_tracks_runtime_toggle_impact_not_barrier_offsets",
         },
         "family_lanes": rows,
-    }
-
-
-def build_multi_run_family_lane_sensitivity_payload(rows: Iterable[Mapping[str, Any]]) -> Dict[str, Any]:
-    payloads = [build_family_lane_sensitivity_payload(row) for row in rows]
-    aggregate: Dict[str, Dict[str, Any]] = {}
-    for payload in payloads:
-        for row in payload.get("family_lanes", []):
-            bucket = aggregate.setdefault(
-                str(row.get("slr_family", "99")),
-                {
-                    "slr_family": str(row.get("slr_family", "99")),
-                    "display_name": str(row.get("display_name", "unknown")),
-                    "run_count": 0,
-                    "active_run_count": 0,
-                    "mean_toggle_magnitude": 0.0,
-                },
-            )
-            bucket["run_count"] += 1
-            bucket["active_run_count"] += int(bool(row.get("active", False)))
-            bucket["mean_toggle_magnitude"] += float(row.get("toggle_magnitude", 0.0))
-    result_rows: List[Dict[str, Any]] = []
-    for row in aggregate.values():
-        row["mean_toggle_magnitude"] = float(row["mean_toggle_magnitude"]) / max(int(row["run_count"]), 1)
-        result_rows.append(row)
-    result_rows.sort(key=lambda row: (-float(row.get("mean_toggle_magnitude", 0.0)), row.get("slr_family", "99")))
-    return {
-        "summary": {
-            "run_count": len(payloads),
-            "family_lane_count": len(result_rows),
-            "sensitivity_policy": "family_lane_sensitivity_tracks_runtime_toggle_impact_not_barrier_offsets",
-        },
-        "family_lanes": result_rows,
     }
 
 

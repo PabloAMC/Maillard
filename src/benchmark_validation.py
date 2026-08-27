@@ -1539,18 +1539,6 @@ def _matrix_assertion_thresholds(
     }
 
 
-def _predicted_order_lookup(evaluation: BenchmarkEvaluation) -> List[str]:
-    normalized_rows = []
-    seen: set[str] = set()
-    for name, value in sorted(evaluation.predicted_ppb.items(), key=lambda item: item[1], reverse=True):
-        normalized = _normalize_name(name)
-        if normalized in seen:
-            continue
-        seen.add(normalized)
-        normalized_rows.append(name)
-    return normalized_rows
-
-
 def _matched_contract_prediction_rows(
     evaluation: BenchmarkEvaluation,
     contract_names: Iterable[str],

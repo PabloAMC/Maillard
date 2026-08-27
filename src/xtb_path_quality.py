@@ -48,14 +48,6 @@ def _parse_xtb_energy_from_content(xyz_content: str) -> float | None:
     except (ValueError, IndexError):
         return None
 
-
-def _parse_xtb_energy(xyz_path: Path) -> float | None:
-    """Extract xTB energy from a frame file's comment line (line 2)."""
-    try:
-        return _parse_xtb_energy_from_content(xyz_path.read_text(encoding="utf-8"))
-    except OSError:
-        return None
-
 def materialize_xtb_outputs(runner_dir: Path) -> List[Path]:
     frame_paths = sorted(
         [path for path in runner_dir.glob("xtbpath_*.xyz") if path_frame_index(path) >= 0],

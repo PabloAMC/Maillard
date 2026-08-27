@@ -867,130 +867,146 @@
     {
       "id": "liu_2023_ppi_hexanal_band",
       "compound": "hexanal",
-      "source_citation": "Liu, Y. (2023 thesis)",
-      "matrix_context": "native_pea_protein_isolate_aqueous_slurry",
-      "analytical_method": "HS-SPME-GC-MS with internal standard plus GC-O confirmation across commercial PPI lots",
+      "source_citation": "Liu, Y. (2021), \"Flavor Chemistry of Pea Proteins\", MS thesis, North Carolina State University; published as Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998",
+      "matrix_context": "commercial pea protein (5 isolates + 4 concentrates) rehydrated to 10% solids (w/w) in deionized water",
+      "analytical_method": "HS-SPME-GC-MS/MS (triple-quadrupole MRM) quantified against a five-point EXTERNAL standard curve built in DI water; internal standards 2-methyl-3-heptanone, 2-ethoxy-3-isopropyl pyrazine and heptanal-d14. Thesis Table 2.7, n = 2 duplicate lots per sample (extractions in triplicate within lot).",
       "units": "ppb",
       "benchmark_role": "reference_anchor",
       "pipeline_role": "reference_only",
       "target_direction": "retain_ppi_hexanal_baseline_as_structural_off_note_penalty",
       "numeric_band_or_point": {
         "type": "range",
-        "min": 15.0,
-        "max": 180.0,
+        "min": 2445.0,
+        "max": 52454.0,
         "values": {
-          "min_ppb": 15.0,
-          "max_ppb": 180.0,
-          "oav_min": 3.0,
-          "oav_max": 40.0
+          "min_ppb": 2445.0,
+          "max_ppb": 52454.0,
+          "oav_min": 543.0,
+          "oav_max": 11656.0,
+          "odor_threshold_ppb": 4.5,
+          "isolate_only_subset_min_ppb": 2445.0,
+          "isolate_only_subset_max_ppb": 12181.0
         }
       },
-      "source_status": "identifier_unavailable",
+      "source_status": "verified_primary_source_read",
       "source_status_repair": {
-        "old": "LiuThesis2023",
-        "new": null,
-        "date": "2026-08-26",
-        "basis": "'LiuThesis2023' is not a DOI. The work is Liu, Y. (2023), MS/PhD thesis, North Carolina State University (NC State Institutional Repository), which carries no DOI. The peer-reviewed version of the same dataset is Liu, Cadwallader & Drake (2023), 'Identification of predominant aroma components of dried pea protein concentrates and isolates', Food Chemistry 406:134998, 10.1016/j.foodchem.2022.134998 (CrossRef verified) - already anchored separately in this repo."
+        "old": "identifier_unavailable",
+        "new": "10.1016/j.foodchem.2022.134998",
+        "date": "2026-08-27",
+        "basis": "Wave R read the FULL thesis text. The thesis itself carries no DOI, but the peer-reviewed version of the SAME dataset does (10.1016/j.foodchem.2022.134998, CrossRef-verified), and it is now recorded in the `doi` field. The Wave I decision to leave the DOI off this record is reversed: it confused *citing* the source with *promoting* the hold-out. Every record below stays reference_only / external_validation_only."
       },
       "related_published_doi": "10.1016/j.foodchem.2022.134998",
       "value_provenance": "band_geometric_midpoint",
-      "value_provenance_note": "2026-08-27 (Wave I): the source reports a RANGE across commercial PPI lots, not a value. The scored hold-out number is the geometric midpoint sqrt(15.0 * 180.0) -- a construction of ours. The honest uncertainty is the band itself (a factor of 12.0 end to end), so a prediction landing inside it is weak evidence. Until 2026-08-27 the midpoint was written at full float precision (e.g. 51.96152422706632), advertising a precision that exists nowhere in the chain."
+      "value_provenance_note": "2026-08-27 (Wave R): the source reports one value per commercial lot, not a single number. The scored hold-out number is the geometric midpoint sqrt(2445.0 * 52454.0) = 11320 ppb (4 s.f.) of the inter-lot min/max -- a construction of ours. The honest uncertainty is the band itself (a factor of 21.45 end to end), so a prediction landing inside it is weak evidence. UNITS BASIS: ug/L OF THE REHYDRATED 10%-SOLIDS (w/w) SLURRY, read as ppb on the aqueous slurry (rho ~ 1 kg/L). It is NOT a per-gram-of-powder basis and NOT a headspace concentration. DI-WATER CALIBRATION CAVEAT: quantified by HS-SPME-GC-MS/MS external standard curves with response factors (R^2 > 0.95), and the curves were built by spiking the authentic standards into DI WATER, not into the protein matrix (thesis section 2.9: \"SPME extracts were prepared as described earlier ... except that pea protein solutions were replaced with 5 mL DI water and were spiked with known compounds at five different levels\"). Protein binding of the analyte is uncorrected, so every value here is a LOWER BOUND on total analyte in the slurry.",
+      "doi": "10.1016/j.foodchem.2022.134998",
+      "units_basis": "UNITS BASIS: ug/L OF THE REHYDRATED 10%-SOLIDS (w/w) SLURRY, read as ppb on the aqueous slurry (rho ~ 1 kg/L). It is NOT a per-gram-of-powder basis and NOT a headspace concentration.",
+      "calibration_caveat": "DI-WATER CALIBRATION CAVEAT: quantified by HS-SPME-GC-MS/MS external standard curves with response factors (R^2 > 0.95), and the curves were built by spiking the authentic standards into DI WATER, not into the protein matrix (thesis section 2.9: \"SPME extracts were prepared as described earlier ... except that pea protein solutions were replaced with 5 mL DI water and were spiked with known compounds at five different levels\"). Protein binding of the analyte is uncorrected, so every value here is a LOWER BOUND on total analyte in the slurry.",
+      "source_panel": "Table 2.7 quantifies 9 of the 24 commercial pea proteins: samples 4, 12, 13, 14, 16 (isolates) and 1, 2, 19, 22 (concentrates), per Table 2.3. Column order in the row quotations below is 1, 2, 4, 12, 13, 14, 16, 19, 22.",
+      "content_correction_note": "CONTENT CORRECTION 2026-08-27 (Wave R). PREVIOUS VALUE: band 15.0-180.0 ppb, geometric midpoint 51.96 ppb, with OAV 3-40. WHAT IT MATCHED IN THE SOURCE: NOTHING. No hexanal concentration and no hexanal OAV in the thesis is within two orders of magnitude of those numbers; the band is retired as unsourced. SOURCE: Yaozheng Liu, \"Flavor Chemistry of Pea Proteins\", MS thesis, North Carolina State University, 2021 (NC State Institutional Repository item db647868-5ffe-4621-9f11-bbc4db357406); published as Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998, doi 10.1016/j.foodchem.2022.134998. TABLE/ROW: Table 2.7 'Concentrations of positively identified aroma-active compounds of pea proteins', row `Hexanal 2` = 4318 +/- 481, 3360 +/- 274, 2445 +/- 212, 6052 +/- 776, 6383 +/- 409, 11203 +/- 2216, 12181 +/- 4237, 52454 +/- 34133, 2533 +/- 804 ug/L. NEW BAND = that inter-lot min/max (2445-52454). Table 2.7 quantifies 9 of the 24 commercial pea proteins: samples 4, 12, 13, 14, 16 (isolates) and 1, 2, 19, 22 (concentrates), per Table 2.3. Column order in the row quotations below is 1, 2, 4, 12, 13, 14, 16, 19, 22. OAV RANGE 543-11656 is Table 2.8, row `Hexanal`, against the thesis's own 4.5 ug/L water threshold -- which happens to equal this repo's hexanal ODT, so the OAVs transfer without rescaling. UNITS BASIS: ug/L OF THE REHYDRATED 10%-SOLIDS (w/w) SLURRY, read as ppb on the aqueous slurry (rho ~ 1 kg/L). It is NOT a per-gram-of-powder basis and NOT a headspace concentration. DI-WATER CALIBRATION CAVEAT: quantified by HS-SPME-GC-MS/MS external standard curves with response factors (R^2 > 0.95), and the curves were built by spiking the authentic standards into DI WATER, not into the protein matrix (thesis section 2.9: \"SPME extracts were prepared as described earlier ... except that pea protein solutions were replaced with 5 mL DI water and were spiked with known compounds at five different levels\"). Protein binding of the analyte is uncorrected, so every value here is a LOWER BOUND on total analyte in the slurry. NOT SCORED, recorded for honesty: the ISOLATE-ONLY subset (samples 4, 12, 13, 14, 16) is 2445-12181 ug/L, geometric mid 5457. The 52454 top of the scored band is sample 19, a CONCENTRATE and the lowest-protein sample of the panel (52.8 wt% protein, Table 2.3)."
     },
     {
       "id": "liu_2023_ppi_nonanal_band",
       "compound": "nonanal",
-      "source_citation": "Liu, Y. (2023 thesis)",
-      "matrix_context": "native_pea_protein_isolate_aqueous_slurry",
-      "analytical_method": "HS-SPME-GC-MS with internal standard plus GC-O confirmation across commercial PPI lots",
+      "source_citation": "Liu, Y. (2021), \"Flavor Chemistry of Pea Proteins\", MS thesis, North Carolina State University; published as Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998",
+      "matrix_context": "commercial pea protein (5 isolates + 4 concentrates) rehydrated to 10% solids (w/w) in deionized water",
+      "analytical_method": "HS-SPME-GC-MS/MS (triple-quadrupole MRM) quantified against a five-point EXTERNAL standard curve built in DI water; internal standards 2-methyl-3-heptanone, 2-ethoxy-3-isopropyl pyrazine and heptanal-d14. Thesis Table 2.7, n = 2 duplicate lots per sample (extractions in triplicate within lot).",
       "units": "ppb",
       "benchmark_role": "reference_anchor",
       "pipeline_role": "reference_only",
       "target_direction": "retain_ppi_nonanal_baseline_as_secondary_fatty_off_note_anchor",
       "numeric_band_or_point": {
         "type": "range",
-        "min": 5.0,
-        "max": 50.0,
+        "min": 0.188,
+        "max": 3.42,
         "values": {
-          "min_ppb": 5.0,
-          "max_ppb": 50.0,
-          "oav_min": 5.0,
-          "oav_max": 50.0
+          "min_ppb": 0.188,
+          "max_ppb": 3.42,
+          "oav_min": 0.188,
+          "oav_max": 3.42,
+          "odor_threshold_ppb": 1.0
         }
       },
-      "source_status": "identifier_unavailable",
+      "source_status": "verified_primary_source_read",
       "source_status_repair": {
-        "old": "LiuThesis2023",
-        "new": null,
-        "date": "2026-08-26",
-        "basis": "'LiuThesis2023' is not a DOI. The work is Liu, Y. (2023), MS/PhD thesis, North Carolina State University (NC State Institutional Repository), which carries no DOI. The peer-reviewed version of the same dataset is Liu, Cadwallader & Drake (2023), 'Identification of predominant aroma components of dried pea protein concentrates and isolates', Food Chemistry 406:134998, 10.1016/j.foodchem.2022.134998 (CrossRef verified) - already anchored separately in this repo."
+        "old": "identifier_unavailable",
+        "new": "10.1016/j.foodchem.2022.134998",
+        "date": "2026-08-27",
+        "basis": "Wave R read the FULL thesis text. The thesis itself carries no DOI, but the peer-reviewed version of the SAME dataset does (10.1016/j.foodchem.2022.134998, CrossRef-verified), and it is now recorded in the `doi` field. The Wave I decision to leave the DOI off this record is reversed: it confused *citing* the source with *promoting* the hold-out. Every record below stays reference_only / external_validation_only."
       },
       "related_published_doi": "10.1016/j.foodchem.2022.134998",
       "value_provenance": "band_geometric_midpoint",
-      "value_provenance_note": "2026-08-27 (Wave I): the source reports a RANGE across commercial PPI lots, not a value. The scored hold-out number is the geometric midpoint sqrt(5.0 * 50.0) -- a construction of ours. The honest uncertainty is the band itself (a factor of 10.0 end to end), so a prediction landing inside it is weak evidence. Until 2026-08-27 the midpoint was written at full float precision (e.g. 51.96152422706632), advertising a precision that exists nowhere in the chain."
+      "value_provenance_note": "2026-08-27 (Wave R): the source reports one value per commercial lot, not a single number. The scored hold-out number is the geometric midpoint sqrt(0.188 * 3.42) = 0.8018 ppb of the inter-lot min/max -- a construction of ours. The honest uncertainty is the band itself (a factor of 18.19 end to end), so a prediction landing inside it is weak evidence. UNITS BASIS: ug/L OF THE REHYDRATED 10%-SOLIDS (w/w) SLURRY, read as ppb on the aqueous slurry (rho ~ 1 kg/L). It is NOT a per-gram-of-powder basis and NOT a headspace concentration. DI-WATER CALIBRATION CAVEAT: quantified by HS-SPME-GC-MS/MS external standard curves with response factors (R^2 > 0.95), and the curves were built by spiking the authentic standards into DI WATER, not into the protein matrix (thesis section 2.9: \"SPME extracts were prepared as described earlier ... except that pea protein solutions were replaced with 5 mL DI water and were spiked with known compounds at five different levels\"). Protein binding of the analyte is uncorrected, so every value here is a LOWER BOUND on total analyte in the slurry.",
+      "doi": "10.1016/j.foodchem.2022.134998",
+      "units_basis": "UNITS BASIS: ug/L OF THE REHYDRATED 10%-SOLIDS (w/w) SLURRY, read as ppb on the aqueous slurry (rho ~ 1 kg/L). It is NOT a per-gram-of-powder basis and NOT a headspace concentration.",
+      "calibration_caveat": "DI-WATER CALIBRATION CAVEAT: quantified by HS-SPME-GC-MS/MS external standard curves with response factors (R^2 > 0.95), and the curves were built by spiking the authentic standards into DI WATER, not into the protein matrix (thesis section 2.9: \"SPME extracts were prepared as described earlier ... except that pea protein solutions were replaced with 5 mL DI water and were spiked with known compounds at five different levels\"). Protein binding of the analyte is uncorrected, so every value here is a LOWER BOUND on total analyte in the slurry.",
+      "source_panel": "Table 2.7 quantifies 9 of the 24 commercial pea proteins: samples 4, 12, 13, 14, 16 (isolates) and 1, 2, 19, 22 (concentrates), per Table 2.3. Column order in the row quotations below is 1, 2, 4, 12, 13, 14, 16, 19, 22.",
+      "content_correction_note": "CONTENT CORRECTION 2026-08-27 (Wave R). PREVIOUS VALUE: band 5.0-50.0 ppb, geometric midpoint 15.81 ppb, with OAV 5-50. WHAT IT MATCHED IN THE SOURCE: NOTHING. Every nonanal value in the thesis is sub-ppb to low-single-digit ppb; the old band was 6x-266x too HIGH and is retired as unsourced. SOURCE: Yaozheng Liu, \"Flavor Chemistry of Pea Proteins\", MS thesis, North Carolina State University, 2021 (NC State Institutional Repository item db647868-5ffe-4621-9f11-bbc4db357406); published as Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998, doi 10.1016/j.foodchem.2022.134998. TABLE/ROW: Table 2.7, row `Nonanal 2` = 0.797 +/- 0.55, 0.469 +/- 0.30, 0.188 +/- 0.040, 0.301 +/- 0.075, 0.652 +/- 0.11, 0.861 +/- 0.11, 1.06 +/- 0.77, 1.15 +/- 0.66, 3.42 +/- 0.71 ug/L. NEW BAND = that inter-lot min/max (0.188-3.42). Table 2.7 quantifies 9 of the 24 commercial pea proteins: samples 4, 12, 13, 14, 16 (isolates) and 1, 2, 19, 22 (concentrates), per Table 2.3. Column order in the row quotations below is 1, 2, 4, 12, 13, 14, 16, 19, 22. INDEPENDENT CORROBORATION IN THE SAME THESIS: Table 2.8 reports nonanal OAV as '<1 <1 <1 <1 <1 1 1 1 3' against a 1 ug/L water threshold, which is only consistent with sub-ppb-to-3-ppb concentrations. Because that threshold is 1.0, the OAV band and the concentration band coincide numerically. UNITS BASIS: ug/L OF THE REHYDRATED 10%-SOLIDS (w/w) SLURRY, read as ppb on the aqueous slurry (rho ~ 1 kg/L). It is NOT a per-gram-of-powder basis and NOT a headspace concentration. DI-WATER CALIBRATION CAVEAT: quantified by HS-SPME-GC-MS/MS external standard curves with response factors (R^2 > 0.95), and the curves were built by spiking the authentic standards into DI WATER, not into the protein matrix (thesis section 2.9: \"SPME extracts were prepared as described earlier ... except that pea protein solutions were replaced with 5 mL DI water and were spiked with known compounds at five different levels\"). Protein binding of the analyte is uncorrected, so every value here is a LOWER BOUND on total analyte in the slurry. CONSEQUENCE, REPORTED PLAINLY: this correction makes the hold-out WORSE, not better. See the Wave R hold-out table in tasks/audit_remediation.md."
     },
     {
       "id": "liu_2023_ppi_heptadienal_band",
       "compound": "(E,E)-2,4-heptadienal",
-      "source_citation": "Liu, Y. (2023 thesis)",
-      "matrix_context": "native_pea_protein_isolate_aqueous_slurry",
-      "analytical_method": "HS-SPME-GC-MS with internal standard plus GC-O confirmation across commercial PPI lots",
+      "source_citation": "Liu, Y. (2021), \"Flavor Chemistry of Pea Proteins\", MS thesis, North Carolina State University; published as Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998",
+      "matrix_context": "commercial pea protein (5 isolates + 4 concentrates) rehydrated to 10% solids (w/w) in deionized water",
+      "analytical_method": "HS-SPME-GC-MS/MS (triple-quadrupole MRM) quantified against a five-point EXTERNAL standard curve built in DI water; internal standards 2-methyl-3-heptanone, 2-ethoxy-3-isopropyl pyrazine and heptanal-d14. Thesis Table 2.7, n = 2 duplicate lots per sample (extractions in triplicate within lot).",
       "units": "ppb",
-      "benchmark_role": "reference_anchor",
-      "pipeline_role": "reference_only",
-      "target_direction": "retain_ppi_rancid_unsaturated_aldehyde_band_as_structural_off_note_anchor",
+      "benchmark_role": "retired_unverifiable",
+      "pipeline_role": "no_verifiable_source",
+      "target_direction": "none_retired_2026_08_27_compound_absent_from_source",
       "numeric_band_or_point": {
-        "type": "range",
-        "min": 0.5,
-        "max": 8.0,
-        "values": {
-          "min_ppb": 0.5,
-          "max_ppb": 8.0,
-          "oav_min": 7.0,
-          "oav_max": 114.0
-        }
+        "type": "no_verifiable_source",
+        "retired_min": 0.5,
+        "retired_max": 8.0
       },
-      "source_status": "identifier_unavailable",
+      "source_status": "verified_primary_source_read",
       "source_status_repair": {
-        "old": "LiuThesis2023",
-        "new": null,
-        "date": "2026-08-26",
-        "basis": "'LiuThesis2023' is not a DOI. The work is Liu, Y. (2023), MS/PhD thesis, North Carolina State University (NC State Institutional Repository), which carries no DOI. The peer-reviewed version of the same dataset is Liu, Cadwallader & Drake (2023), 'Identification of predominant aroma components of dried pea protein concentrates and isolates', Food Chemistry 406:134998, 10.1016/j.foodchem.2022.134998 (CrossRef verified) - already anchored separately in this repo."
+        "old": "identifier_unavailable",
+        "new": "10.1016/j.foodchem.2022.134998",
+        "date": "2026-08-27",
+        "basis": "Wave R read the FULL thesis text. The thesis itself carries no DOI, but the peer-reviewed version of the SAME dataset does (10.1016/j.foodchem.2022.134998, CrossRef-verified), and it is now recorded in the `doi` field. The Wave I decision to leave the DOI off this record is reversed: it confused *citing* the source with *promoting* the hold-out. Every record below stays reference_only / external_validation_only."
       },
       "related_published_doi": "10.1016/j.foodchem.2022.134998",
-      "value_provenance": "band_geometric_midpoint",
-      "value_provenance_note": "2026-08-27 (Wave I): the source reports a RANGE across commercial PPI lots, not a value. The scored hold-out number is the geometric midpoint sqrt(0.5 * 8.0) -- a construction of ours. The honest uncertainty is the band itself (a factor of 16.0 end to end), so a prediction landing inside it is weak evidence. Until 2026-08-27 the midpoint was written at full float precision (e.g. 51.96152422706632), advertising a precision that exists nowhere in the chain."
+      "value_provenance": "no_verifiable_source",
+      "value_provenance_note": "2026-08-27 (Wave R): RETIRED. (E,E)-2,4-heptadienal does not appear anywhere in the source. No band is substituted, because inventing one is the defect this wave exists to remove.",
+      "doi": "10.1016/j.foodchem.2022.134998",
+      "units_basis": "UNITS BASIS: ug/L OF THE REHYDRATED 10%-SOLIDS (w/w) SLURRY, read as ppb on the aqueous slurry (rho ~ 1 kg/L). It is NOT a per-gram-of-powder basis and NOT a headspace concentration.",
+      "calibration_caveat": "DI-WATER CALIBRATION CAVEAT: quantified by HS-SPME-GC-MS/MS external standard curves with response factors (R^2 > 0.95), and the curves were built by spiking the authentic standards into DI WATER, not into the protein matrix (thesis section 2.9: \"SPME extracts were prepared as described earlier ... except that pea protein solutions were replaced with 5 mL DI water and were spiked with known compounds at five different levels\"). Protein binding of the analyte is uncorrected, so every value here is a LOWER BOUND on total analyte in the slurry.",
+      "source_panel": "Table 2.7 quantifies 9 of the 24 commercial pea proteins: samples 4, 12, 13, 14, 16 (isolates) and 1, 2, 19, 22 (concentrates), per Table 2.3. Column order in the row quotations below is 1, 2, 4, 12, 13, 14, 16, 19, 22.",
+      "content_correction_note": "CONTENT CORRECTION 2026-08-27 (Wave R). PREVIOUS VALUE: band 0.5-8.0 ppb, geometric midpoint 2.0 ppb, with OAV 7-114. WHAT IT MATCHED IN THE SOURCE: NOTHING, AND THE COMPOUND IS NOT IN THE SOURCE AT ALL. SOURCE: Yaozheng Liu, \"Flavor Chemistry of Pea Proteins\", MS thesis, North Carolina State University, 2021 (NC State Institutional Repository item db647868-5ffe-4621-9f11-bbc4db357406); published as Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998, doi 10.1016/j.foodchem.2022.134998. SEARCH PERFORMED: case-insensitive grep for 'heptadien' over the full thesis text returns ZERO hits. The compound is absent from Table 2.7 (quantitation), Table 2.4 (HS-SPME-GC-O), Table 2.5 (SAFE-GC-O) and Table 2.6 (AEDA/FD factors). The nearest unsaturated aldehydes the thesis DOES quantify are (E,E)-2,4-nonadienal (2.05-19.1 ug/L), (E,E)-2,4-decadienal (0.436-8.29 ug/L) and (E)-2-decenal (3.65-143 ug/L) -- deliberately NOT substituted here, because they are different compounds with different odour thresholds and swapping them in would repeat the original error in a new form. DISPOSITION: marked no_verifiable_source and removed from any scored target. It was never in the scored hold-out bundle (the bundle carries hexanal and nonanal only), so no benchmark number changes. UNITS BASIS: ug/L OF THE REHYDRATED 10%-SOLIDS (w/w) SLURRY, read as ppb on the aqueous slurry (rho ~ 1 kg/L). It is NOT a per-gram-of-powder basis and NOT a headspace concentration. DI-WATER CALIBRATION CAVEAT: quantified by HS-SPME-GC-MS/MS external standard curves with response factors (R^2 > 0.95), and the curves were built by spiking the authentic standards into DI WATER, not into the protein matrix (thesis section 2.9: \"SPME extracts were prepared as described earlier ... except that pea protein solutions were replaced with 5 mL DI water and were spiked with known compounds at five different levels\"). Protein binding of the analyte is uncorrected, so every value here is a LOWER BOUND on total analyte in the slurry.",
+      "value_status": "no_verifiable_source",
+      "value_status_note": "2026-08-27 (Wave R): `source_status` reads verified_primary_source_read, NOT no_verifiable_source, and the distinction is deliberate. The CITATION is verified: the source was identified, retrieved and read in full, and its DOI is real. What has no verifiable source is the VALUE -- the compound this record names is absent from the source entirely. That is recorded in `value_status`, `value_provenance`, `pipeline_role` and `benchmark_role`, all of which say no_verifiable_source / retired. Writing source_status=no_verifiable_source while carrying a real DOI would be internally incoherent (the citation gate's status-coherence rule catches exactly that) and would also assert something false about the citation."
     },
     {
       "id": "liu_2023_ppi_ibmp_band",
       "compound": "3-isobutyl-2-methoxypyrazine",
-      "source_citation": "Liu, Y. (2023 thesis)",
-      "matrix_context": "native_pea_protein_isolate_aqueous_slurry",
-      "analytical_method": "HS-SPME-GC-MS with internal standard plus GC-O confirmation across commercial PPI lots",
+      "source_citation": "Liu, Y. (2021), \"Flavor Chemistry of Pea Proteins\", MS thesis, North Carolina State University; published as Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998",
+      "matrix_context": "commercial pea protein (5 isolates + 4 concentrates) rehydrated to 10% solids (w/w) in deionized water",
+      "analytical_method": "HS-SPME-GC-MS/MS (triple-quadrupole MRM) quantified against a five-point EXTERNAL standard curve built in DI water; internal standards 2-methyl-3-heptanone, 2-ethoxy-3-isopropyl pyrazine and heptanal-d14. Thesis Table 2.7, n = 2 duplicate lots per sample (extractions in triplicate within lot).",
       "units": "ppb",
-      "benchmark_role": "reference_anchor",
-      "pipeline_role": "reference_only",
-      "target_direction": "treat_methoxypyrazine_as_persistent_raw_pea_penalty_not_removed_by_maillard_support",
+      "benchmark_role": "retired_unverifiable",
+      "pipeline_role": "no_verifiable_source",
+      "target_direction": "none_retired_2026_08_27_compound_absent_from_source",
       "numeric_band_or_point": {
-        "type": "range",
-        "min": 0.0,
-        "max": 0.08,
-        "values": {
-          "min_ppb": 0.0,
-          "max_ppb": 0.08,
-          "odor_detection_threshold_ppb": 0.002,
-          "oav_floor": 1.0
-        }
+        "type": "no_verifiable_source",
+        "retired_min": 0.0,
+        "retired_max": 0.08
       },
-      "source_status": "identifier_unavailable",
+      "source_status": "verified_primary_source_read",
       "source_status_repair": {
-        "old": "LiuThesis2023",
-        "new": null,
-        "date": "2026-08-26",
-        "basis": "'LiuThesis2023' is not a DOI. The work is Liu, Y. (2023), MS/PhD thesis, North Carolina State University (NC State Institutional Repository), which carries no DOI. The peer-reviewed version of the same dataset is Liu, Cadwallader & Drake (2023), 'Identification of predominant aroma components of dried pea protein concentrates and isolates', Food Chemistry 406:134998, 10.1016/j.foodchem.2022.134998 (CrossRef verified) - already anchored separately in this repo."
+        "old": "identifier_unavailable",
+        "new": "10.1016/j.foodchem.2022.134998",
+        "date": "2026-08-27",
+        "basis": "Wave R read the FULL thesis text. The thesis itself carries no DOI, but the peer-reviewed version of the SAME dataset does (10.1016/j.foodchem.2022.134998, CrossRef-verified), and it is now recorded in the `doi` field. The Wave I decision to leave the DOI off this record is reversed: it confused *citing* the source with *promoting* the hold-out. Every record below stays reference_only / external_validation_only."
       },
       "related_published_doi": "10.1016/j.foodchem.2022.134998",
-      "value_provenance": "band_geometric_midpoint",
-      "value_provenance_note": "2026-08-27 (Wave I): scored value is a geometric band midpoint, not a measurement."
+      "value_provenance": "no_verifiable_source",
+      "value_provenance_note": "2026-08-27 (Wave R): RETIRED. 3-isobutyl-2-methoxypyrazine (IBMP) is not among the methoxypyrazines the source identifies or quantifies. The source's methoxypyrazine is 2-isopropyl-3-methoxypyrazine (IPMP), a different compound; its real band is recorded in this record's content_correction_note but is NOT substituted for the retired one.",
+      "doi": "10.1016/j.foodchem.2022.134998",
+      "units_basis": "UNITS BASIS: ug/L OF THE REHYDRATED 10%-SOLIDS (w/w) SLURRY, read as ppb on the aqueous slurry (rho ~ 1 kg/L). It is NOT a per-gram-of-powder basis and NOT a headspace concentration.",
+      "calibration_caveat": "DI-WATER CALIBRATION CAVEAT: quantified by HS-SPME-GC-MS/MS external standard curves with response factors (R^2 > 0.95), and the curves were built by spiking the authentic standards into DI WATER, not into the protein matrix (thesis section 2.9: \"SPME extracts were prepared as described earlier ... except that pea protein solutions were replaced with 5 mL DI water and were spiked with known compounds at five different levels\"). Protein binding of the analyte is uncorrected, so every value here is a LOWER BOUND on total analyte in the slurry.",
+      "source_panel": "Table 2.7 quantifies 9 of the 24 commercial pea proteins: samples 4, 12, 13, 14, 16 (isolates) and 1, 2, 19, 22 (concentrates), per Table 2.3. Column order in the row quotations below is 1, 2, 4, 12, 13, 14, 16, 19, 22.",
+      "content_correction_note": "CONTENT CORRECTION 2026-08-27 (Wave R). PREVIOUS VALUE: band 0.0-0.08 ppb (max 0.08), ODT 0.002 ppb, OAV floor 1.0, attached to the compound '3-isobutyl-2-methoxypyrazine'. WHAT IT MATCHED IN THE SOURCE: NOTHING, AND THE COMPOUND IS NOT IN THE SOURCE. SOURCE: Yaozheng Liu, \"Flavor Chemistry of Pea Proteins\", MS thesis, North Carolina State University, 2021 (NC State Institutional Repository item db647868-5ffe-4621-9f11-bbc4db357406); published as Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998, doi 10.1016/j.foodchem.2022.134998. The thesis states its pyrazine inventory explicitly: 'The pyrazines identified in this study included 2-ethyl-6-methyl-pyrazine, IPMP, 2-isoamyl-6-methylpyrazine, 2,5-dimethyl-3-(3-methylbutyl)-pyrazine, 2,3-diethyl-5-methyl pyrazine and 2-sec-butyl-3-methoxy pyrazine.' IBMP appears only in the literature review, quoting Murray et al. (1970/1976) on GREEN PEAS, never as a measurement on these proteins. NEAREST REAL ROW, RECORDED BUT NOT SUBSTITUTED: Table 2.7, row `2-Isopropyl-3-methoxypyrazine 2` = 57.0 +/- 6.3, 23.3 +/- 12, 18.2 +/- 1.7, 15.7 +/- 4.0, 21.9 +/- 3.7, 19.7 +/- 3.5, 29.0 +/- 3.4, 14.3 +/- 3.1, 6.126 +/- 1.1 ug/L, i.e. an IPMP band of 6.126-57.0 ug/L (geometric mid 18.69), Table 2.8 OAV 3063-28500 against a 0.002 ug/L threshold. That is 76x-713x ABOVE the retired 0.08 ppb ceiling, so the retired record was not merely mis-labelled, it was also wrong by three orders of magnitude for the compound it was nearest to. IPMP is NOT written into this record because IPMP != IBMP; a properly-typed IPMP anchor is a separate decision for the owner. DISPOSITION: marked no_verifiable_source and removed from any scored target. It was never in the scored hold-out bundle, so no benchmark number changes. UNITS BASIS: ug/L OF THE REHYDRATED 10%-SOLIDS (w/w) SLURRY, read as ppb on the aqueous slurry (rho ~ 1 kg/L). It is NOT a per-gram-of-powder basis and NOT a headspace concentration. DI-WATER CALIBRATION CAVEAT: quantified by HS-SPME-GC-MS/MS external standard curves with response factors (R^2 > 0.95), and the curves were built by spiking the authentic standards into DI WATER, not into the protein matrix (thesis section 2.9: \"SPME extracts were prepared as described earlier ... except that pea protein solutions were replaced with 5 mL DI water and were spiked with known compounds at five different levels\"). Protein binding of the analyte is uncorrected, so every value here is a LOWER BOUND on total analyte in the slurry.",
+      "value_status": "no_verifiable_source",
+      "value_status_note": "2026-08-27 (Wave R): `source_status` reads verified_primary_source_read, NOT no_verifiable_source, and the distinction is deliberate. The CITATION is verified: the source was identified, retrieved and read in full, and its DOI is real. What has no verifiable source is the VALUE -- the compound this record names is absent from the source entirely. That is recorded in `value_status`, `value_provenance`, `pipeline_role` and `benchmark_role`, all of which say no_verifiable_source / retired. Writing source_status=no_verifiable_source while carrying a real DOI would be internally incoherent (the citation gate's status-coherence rule catches exactly that) and would also assert something false about the citation."
     },
     {
       "id": "pmc11049305_spirulina_beta_ionone_oav_floor",

@@ -7,7 +7,7 @@ This creates the `input.py` configuration files for three critical test cases:
 2. D-Glucose + Glycine     (Target: Furfural, Amadori intermediates)
 3. Ribose + Cys + Leucine  (Target: FFT, MFT, 3-methylbutanal, pyrazines)
 
-Usage: python scripts/generate_rmg_inputs.py
+Usage: python scripts/generators/generate_rmg_inputs.py
 """
 
 from pathlib import Path

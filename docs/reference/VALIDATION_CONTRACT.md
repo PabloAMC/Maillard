@@ -61,7 +61,7 @@ For a reproducible thermodynamic-gating audit, use:
 ./scripts/docker_maillard.sh thermo-gating
 ```
 
-This writes `results/validation/thermodynamic_gating_audit.md` and `results/validation/thermodynamic_gating_audit.json` and reports whether the gated variant materially improves benchmark error. Until that audit says otherwise, thermodynamic gating remains diagnostic-only for benchmark pass/fail.
+This writes `results/validation/thermodynamic_gating_audit.md` and `results/validation/thermodynamic_gating_audit.json` and reports whether the gated variant materially improves benchmark error. *(2026-08-27, Wave R: both artefacts are gitignored and absent from the working tree — the command above regenerates them; this document describes what the command writes, not files you can expect to find.)* Until that audit says otherwise, thermodynamic gating remains diagnostic-only for benchmark pass/fail.
 The benchmark metadata and generated summary/index artefacts now also expose the current thermodynamic-gating policy so the `auto` benchmark path resolves through an explicit contract rather than an implicit default.
 
 For the current matrix-specific validation surfaces, use:
@@ -91,8 +91,14 @@ For reproducible target-level scientific inspection, use:
 
 ```bash
 ./scripts/docker_maillard.sh targets data/benchmarks/cys_ribose_140C_Hofmann1998.json
-./scripts/docker_maillard.sh targets data/benchmarks/cys_glucose_150C_Farmer1999.json competing
 ```
+
+*(2026-08-27, Wave R: a second copy-pasteable line here ran `targets` against
+`data/benchmarks/cys_glucose_150C_Farmer1999.json competing`. That file was DELETED as
+fabricated — see section 3's quarantine note below — so the command could not run. It is
+removed rather than repointed: there is no equivalent competing-target benchmark to
+substitute, and inventing one to keep an example alive is the failure mode this document
+exists to prevent.)*
 
 This exposes the current target snapshot (`ppb`, `span`, `depth`, weighted flux) without relying on brittle inline Python or shell quoting.
 
@@ -202,7 +208,7 @@ Benchmark execution is centralized in `src/benchmark_validation.py` and reused b
 - `tests/scientific/test_benchmarks.py`
 - `tests/scientific/test_free_aa_quantitative_regression.py`
 - `scripts/compare_sim_to_lit.py`
-- `scripts/generate_benchmark_summary.py`
+- `scripts/generators/generate_benchmark_summary.py` *(2026-08-27, Wave R: path corrected; the script moved into `scripts/generators/` and this line still pointed at `scripts/`)*
 
 ### B. Sensory Fidelity
 
@@ -265,15 +271,37 @@ has never seen. Its rules, stated explicitly:
   correct it**. Every row carries its `value_provenance` and the report renders the split.
   Until 2026-08-27 these were written at full float precision beside a fabricated
   `measurement_date` of "<publication year>-01-01", which is now `not_applicable`.
-- **Current numbers (2026-08-27 Wave P regeneration). The headline is 1/5.**
+- **Current numbers (2026-08-27 Wave R regeneration). The headline is 1/5.**
   Genuine-extrapolation coverage at the **pre-widening** prior (ln-sigma 2.0) is
   **1 of 5**, and since Wave O it is 1/5 under the shipped ln-sigma 2.86 as well (it was
   2/5 between Wave M and Wave O; that difference was the width of the interval, not the
-  accuracy of the model). Over all eight rows: **3/8 at ln-sigma 2.0, 4/8 at 2.86**, of
-  which **3/3 are re-scoring bundles** (`bi_2020_raw_pea`,
-  `liu_2023_ppi_offnote_baseline`) that test nothing. Median fold error
-  **42.62x** (median |log10| 1.630 dex); worst miss **2474x** on roasted pea. **Read the fold
+  accuracy of the model). Over all eight rows: **3/8 at ln-sigma 2.0 and 3/8 at 2.86** — the
+  two priors now agree, because Wave R's Liu correction pushed the last point that separated
+  them out of both intervals. Of the covered rows **2 of 3 are re-scoring bundles**
+  (`bi_2020_raw_pea`, `liu_2023_ppi_offnote_baseline`) that test nothing. Median fold error
+  **93.68x** (median |log10| 1.972 dex); worst miss **2474x** on roasted pea. **Read the fold
   error, not the coverage** — it is the only figure here no choice of prior can move.
+  **Wave R (2026-08-27) made this number WORSE by replacing two reference values that were in
+  no source.** The `liu_2023_ppi_offnote_baseline` bundle carried hexanal 15–180 ppb and
+  nonanal 5–50 ppb attributed to "Liu, Y. (2023 thesis)". The thesis (Yaozheng Liu, *Flavor
+  Chemistry of Pea Proteins*, NC State 2021; published as Liu, Cadwallader & Drake 2023,
+  Food Chem. 406:134998, `10.1016/j.foodchem.2022.134998`) was retrieved and read in full:
+  Table 2.7 reports hexanal **2445–52454 µg/L** and nonanal **0.188–3.42 µg/L** across nine
+  quantified commercial pea proteins, and no table in the document contains the repo's bands
+  or the OAV pairs attached to them. Correcting the measured values — **no prediction moved,
+  nothing fitted** — gives hexanal 19.50x → **11.17x** and nonanal 4.78x → **94.22x**; median
+  42.62x → 93.68x, coverage 4/8 → **3/8**, `max_fold_error` and the pre-widening 1/5
+  unchanged. The nonanal row is now the sharpest lipid-lane over-prediction the repository
+  has against a directly-quantified reference (75.5 ppb predicted, band top 3.42 ppb); Wave
+  P's oleate-substrate fix is the partial mitigation already landed and took the same point
+  from 214x to 94x. Liu's standard curves were built in **deionized water, not in the protein
+  matrix**, so protein binding is uncorrected and her values are lower bounds — the gap is if
+  anything understated. Two further anchors on the same source were **retired, not repaired**:
+  (E,E)-2,4-heptadienal is absent from the thesis entirely, and the methoxypyrazine anchor
+  named IBMP, which the thesis neither identifies nor quantifies (its methoxypyrazine is IPMP
+  at 6.126–57.0 µg/L, 713x the retired 0.08 ppb ceiling). Neither was ever in the scored
+  bundle. The hold-out stayed out of every fit: this was a reference correction, not a
+  calibration.
   **Wave O (2026-08-27) made this number WORSE by making a constant more correct.** The
   ambient hexanal observability factors were refitted from the 260 / 380 ppb transcription
   errors onto the paper's verified 1138.00 / 1621.71 ppb (one shared scale, 4.317249x;
@@ -284,14 +312,22 @@ has never seen. Its rules, stated explicitly:
   nominally the same system, a 24x spread, and the erroneous 260 ppb sat almost exactly at
   their geometric mean (255.9). No observability factor satisfies both. `max_fold_error`
   and the pre-widening 1/5 did not move.
+  *(Superseded 2026-08-27 by Wave R: the 24x spread was not a literature contradiction. The
+  51.96 ppb midpoint came from a band that appears in no source; Liu's real Table 2.7 range is
+  2445–52454 µg/L, which puts the verified 1138 ppb anchor just under her lowest lot. The Wave
+  O refit's direction is vindicated by the corrected target — this same point reads 11.17x
+  against the real number.)*
   **Wave P (2026-08-27) improved two of the eight points with nothing fitted, and moved the
   headline by nothing.** Nonanal is the C9 fragment of the OLEATE double bond, not a
   linoleate product (Miyazaki 2023, 10.1093/bbb/zbac189; Hung, Katrib & Martin 2005,
   10.1021/jp0500900), and `LipidProfile.oleic_acid_pct` had been dead code. Correcting the
   substrate moved `li_2026_spi_wg_hme_control` nonanal 272.63x → **118.31x** and
   `liu_2023_ppi_offnote_baseline` nonanal 10.86x → **4.78x**, each by exactly its matrix's
-  oleic/linoleic ratio; the other six points are byte-identical. Median fold error, coverage
-  hits (4/8), `max_fold_error` (2474x) and the pre-widening 1/5 are **all unchanged** — the
+  oleic/linoleic ratio; the other six points are byte-identical. (Both Liu folds here are
+  against the reference value Wave R later retired; against Table 2.7 the same fix reads
+  214x → 94.22x.) Median fold error, coverage
+  hits (4/8, now 3/8 after Wave R), `max_fold_error` (2474x) and the pre-widening 1/5 were
+  **all unchanged by this fix** — the
   median sits between two points that did not move, and the two that did were outside the
   interval before and after. This is the clearest illustration in the repository of why the
   per-point table has to be read alongside the headline. Both nonanal points remain
@@ -393,7 +429,7 @@ This is why a benchmark may be scientifically acceptable as `pass-no-ranking` wh
 
 ## 7. Expected Skips In The Docker Lane
 
-- `tests/benchmarks/` is intentionally skip-heavy today. Those tests are Phase 3 placeholders and HPC-oriented literature checks, not part of the current release gate.
+- `tests/benchmarks/` **no longer exists.** *(Corrected 2026-08-27, Wave R.)* This line used to describe it in the present tense as "intentionally skip-heavy today … Phase 3 placeholders and HPC-oriented literature checks". The directory and its `_lane_policy.py` gate were deleted on 2026-08-27 (Wave J2); nothing skips there because nothing runs there. The loader `src/authority_benchmark_data.py` and its tracked fixtures (`data/qm/phase33_barrier_benchmarks.json`, `data/qm/phase35_double_hybrid_benchmarks.json`) survive, but the loader's only remaining consumer is its own parse test, so no value from that lane reaches the model, a calibration or a headline. Reviving or retiring the Phase 3 authority lane is an open decision, not a skip.
 - Capability-gated QM tests should skip only when the backend is genuinely unavailable or unusable in the active Docker environment.
 - A path-based skip for a binary that is actually present in `PATH` is a test bug, not a valid environment gate.
 

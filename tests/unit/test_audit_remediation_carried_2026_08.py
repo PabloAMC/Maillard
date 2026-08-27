@@ -197,9 +197,23 @@ def test_doi_less_registry_sources_carry_a_typed_identifier_pair():
 
 def test_holdout_bundle_carries_typed_identifier_and_keeps_its_evidence_class():
     bench = json.loads(HOLDOUT_BUNDLE.read_text(encoding="utf-8"))
-    assert "source_doi" not in bench
+    # 2026-08-27 (Wave R): was `assert "source_doi" not in bench`. That pin encoded the
+    # Wave I decision to leave this bundle's DOI field empty on the grounds that citing the
+    # peer-reviewed version of the dataset would somehow promote a hold-out. It would not,
+    # and the empty field was hiding a real, checkable anchor. Wave R read the primary source
+    # (the 2021 NC State thesis, which itself has no DOI) and set `source_doi` to the DOI of
+    # the published version of the SAME dataset. The pin is INVERTED, not dropped: the DOI is
+    # now required, and required to be that specific one, so the field cannot drift back to
+    # empty or to some other paper. The typed `identifier` is still required alongside it,
+    # because the thesis remains the document the numbers were read from.
+    assert bench["source_doi"] == "10.1016/j.foodchem.2022.134998"
     assert bench["identifier_scheme"] == "citation"
     assert bench["identifier"]
+    # 2026-08-27 (Wave R): the identifier must name the THESIS and its real year (2021).
+    # Until Wave R it read "Liu, Y. (2023), thesis, ..." -- the 2023 belongs to the derived
+    # Food Chemistry paper, and the numbers attached to the record matched neither document.
+    assert "2021" in bench["identifier"]
+    assert "thesis" in bench["identifier"].lower()
     # The invariant that matters: retyping the identifier must not touch the
     # hold-out classification.
     assert bench["evidence_class"] == "external_validation_only"

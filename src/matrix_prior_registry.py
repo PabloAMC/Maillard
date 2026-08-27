@@ -107,17 +107,6 @@ def query_family_prior_entries(
     return rows
 
 
-def iter_family_prior_entries(
-    *,
-    chemistry_family: Optional[str] = None,
-    protein_type: Optional[str] = None,
-) -> List[Dict[str, Any]]:
-    return query_family_prior_entries(
-        chemistry_family=chemistry_family,
-        protein_type=protein_type,
-    )
-
-
 def summarize_family_prior_bundle(
     *,
     protein_type: Optional[str] = None,

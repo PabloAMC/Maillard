@@ -81,15 +81,6 @@ def get_protein_source_profile(source_id: Optional[str]) -> ProteinSourceProfile
 
 
 
-def get_process_state_calibration_payload(protein_type: ProteinType | str) -> list[dict]:
-    normalized = protein_type.value if isinstance(protein_type, ProteinType) else str(protein_type)
-    return [
-        entry
-        for entry in PROCESS_STATE_CALIBRATION_PAYLOAD.get("entries", [])
-        if str(entry.get("protein_type", "")) == normalized
-    ]
-
-
 class ProteinType(Enum):
     FREE_AMINO_ACID = "free"
     PEA_CONCENTRATE = "pea_conc"    # ~60% protein, fibrous matrix

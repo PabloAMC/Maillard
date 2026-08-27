@@ -134,13 +134,13 @@
       "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
       "compounds": [
         {
-          "abs_log10_error": 1.2899729792190637,
+          "abs_log10_error": 1.0482043052321985,
           "ci_width_log10": 4.0176770887691,
           "compound": "hexanal",
-          "fold_error": 19.49723288788163,
+          "fold_error": 11.173887775644184,
           "inside_ci": true,
           "is_direct_measurement": false,
-          "measured_ppb": 51.96,
+          "measured_ppb": 11320.0,
           "predicted_mean": 57784.03870232316,
           "predicted_p5": 16.081688326350452,
           "predicted_p50": 1013.0762208543294,
@@ -149,13 +149,13 @@
           "value_provenance": "band_geometric_midpoint"
         },
         {
-          "abs_log10_error": 0.6792931279979288,
+          "abs_log10_error": 1.974158946015635,
           "ci_width_log10": 4.0176770887691,
           "compound": "nonanal",
-          "fold_error": 4.7785169186782435,
-          "inside_ci": true,
+          "fold_error": 94.22343787017091,
+          "inside_ci": false,
           "is_direct_measurement": false,
-          "measured_ppb": 15.81,
+          "measured_ppb": 0.8018,
           "predicted_mean": 4309.141636123185,
           "predicted_p5": 1.1992632273978945,
           "predicted_p50": 75.54835248430304,
@@ -166,11 +166,11 @@
       ],
       "execution_path": "matrix_only",
       "holdout_kind": "in_panel_rescoring",
-      "inside_ci_count": 2,
-      "inside_ci_rate": 1.0,
+      "inside_ci_count": 1,
+      "inside_ci_rate": 0.5,
       "matched_compounds": 2,
-      "median_abs_log10_error": 0.9846330536084963,
-      "median_accuracy_fold": 9.652349829039157
+      "median_abs_log10_error": 1.5111816256239168,
+      "median_accuracy_fold": 32.44752872865161
     }
   ],
   "external_failing_compounds": [
@@ -181,12 +181,12 @@
     },
     {
       "compound": "hexanal",
-      "mean_abs_log10_error": 1.6868344570483176,
+      "mean_abs_log10_error": 1.6263922885516013,
       "n_holdout_observations": 4
     },
     {
       "compound": "nonanal",
-      "mean_abs_log10_error": 1.3761559369175278,
+      "mean_abs_log10_error": 2.0235888459263807,
       "n_holdout_observations": 2
     }
   ],
@@ -303,8 +303,8 @@
   "summary": {
     "benchmark_count": 4,
     "benchmark_dir": "/Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/external_validation",
-    "ci_coverage_hits": 4,
-    "ci_coverage_rate": 0.5,
+    "ci_coverage_hits": 3,
+    "ci_coverage_rate": 0.375,
     "ci_level_pct": 90,
     "evidence_class": "external_validation_only",
     "holdout_benchmark_count": 4,
@@ -320,9 +320,9 @@
         "total": 5
       },
       "in_panel_rescoring": {
-        "hits": 3,
+        "hits": 2,
         "meaning": "Bundles whose executable conditions are COPIED from an in-panel benchmark. Scoring them re-runs that anchor's prediction at that anchor's own conditions; it is a reproducibility comparison, not an extrapolation test.",
-        "rate": 1.0,
+        "rate": 0.6666666666666666,
         "total": 3
       }
     },
@@ -330,16 +330,16 @@
       "definition": "External-literature rows only, with fitted rows (constants back-solved from the benchmark) and internal synthetic reproducibility rows removed from BOTH numerator and denominator. Read it together with median_ci_width_log10: a wide interval covering a measurement is a weak claim.",
       "excluded_fitted_rows": 0,
       "excluded_fitted_rows_that_would_have_been_hits": 0,
-      "hits": 4,
+      "hits": 3,
       "median_ci_width_log10": 4.0176770887691,
       "not_evaluable": 0,
-      "rate": 0.5,
+      "rate": 0.375,
       "total": 8
     },
     "matched_compound_count": 8,
     "max_fold_error": 2474.3838828574594,
-    "median_abs_log10_error": 1.6295711632556027,
-    "median_accuracy_fold": 42.6158507961315,
+    "median_abs_log10_error": 1.9716641466538882,
+    "median_accuracy_fold": 93.68372415254433,
     "n_samples": 200,
     "pre_widening_coverage": {
       "ci_coverage_hits": 3,
@@ -353,8 +353,8 @@
     "seed": 0,
     "signal_origin_split": {
       "external_literature": {
-        "ci_coverage_rate": 0.5,
-        "hits": 4,
+        "ci_coverage_rate": 0.375,
+        "hits": 3,
         "median_ci_width_log10": 4.0176770887691,
         "not_evaluable": 0,
         "total": 8
@@ -381,8 +381,8 @@
         "reported_point_value": 4
       },
       "derived_or_constructed": {
-        "hits": 3,
-        "rate": 0.75,
+        "hits": 2,
+        "rate": 0.5,
         "total": 4
       },
       "direct_measurement": {

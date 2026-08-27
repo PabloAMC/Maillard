@@ -338,7 +338,7 @@ We report the gap rather than absorbing it.
 | Surface                       | Question                                                                 | Status                                                       |
 | ----------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------ |
 | **Parity**              | On matched systems, how close is predicted ppb to measured?              | **14** benchmarks · MC panel covers **11** of them, **35 matched rows** · **0 strict-ready** · **0/6 predictive benchmarks without blocking gaps** |
-| **External hold-out**   | On systems excluded from calibration, does the frozen model still cover? | 4 bundles · **1/5 on genuine extrapolations** at the pre-widening prior (1/5 at the wider one too, since Wave O) · median **42.62×** error, worst **2474×** |
+| **External hold-out**   | On systems excluded from calibration, does the frozen model still cover? | 4 bundles · **1/5 on genuine extrapolations** at the pre-widening prior (1/5 at the wider one too, since Wave O) · median **93.68×** error, worst **2474×** |
 | **Coverage**            | Which chemistry lanes are wired, and how?                                | 16 lanes wired · **5 with generative reaction templates** · 7 with DFT anchors |
 | **Experiment priority** | Where would the next experiment improve confidence the most?             | 6/35 MC cells outside 90% CI — all queued                    |
 
@@ -351,8 +351,34 @@ We report the gap rather than absorbing it.
 > predictions* re-scored after the prior was widened to ln-sigma 2.86 on 2026-08-26, and the
 > Wave O refit has since taken it back down to 1/5, so the two priors now agree. Nothing
 > about the model changed between those numbers — only the width of the interval drawn
-> around it. The median hold-out fold error is 42.62×, which is why that is the figure to
+> around it. The median hold-out fold error is 93.68×, which is why that is the figure to
 > track. The report computes both and leads with the pre-widening one.
+>
+> **The Liu hold-out was being scored against numbers that are in no source, and fixing
+> that made the headline worse again (2026-08-27, Wave R).** The block below quotes "Liu's
+> band midpoint at 51.96 ppb" as one side of a 24× literature contradiction. There was no
+> contradiction: the band was not in the literature. The primary document — Yaozheng Liu,
+> *Flavor Chemistry of Pea Proteins*, NC State MS thesis 2021, published as Liu, Cadwallader
+> & Drake (2023), *Food Chemistry* 406:134998, `10.1016/j.foodchem.2022.134998` — was
+> retrieved and read in full. Its Table 2.7 quantifies nine commercial pea proteins at
+> **hexanal 2445–52454 µg/L** and **nonanal 0.188–3.42 µg/L** of the rehydrated 10%-solids
+> slurry. This repository carried **hexanal 15–180 ppb** (50–300× low) and **nonanal 5–50
+> ppb** (6–266× high), plus OAV pairs and two further anchors that match no row of any table
+> in the thesis. Correcting the reference values — **no prediction moved, nothing was
+> fitted** — gives hexanal **19.50× → 11.17×** (better) and nonanal **4.78× → 94.22×**
+> (worse), taking the median from 42.62× to **93.68×** and shipped-sigma coverage from 4/8 to
+> **3/8**. The nonanal row is now the sharpest lipid-lane over-prediction on record against a
+> directly-quantified reference: **75.5 ppb predicted against a band whose top is 3.42 ppb**.
+> Wave P's oleate-substrate correction (below) is the partial mitigation already landed — it
+> took this same point from 214× to 94× — and it was not enough. Liu's curves were built in
+> **deionized water rather than in the protein matrix**, so protein binding is uncorrected
+> and 0.188–3.42 is a *lower* bound; the gap is if anything understated. Two further anchors
+> on the same source were retired rather than repaired: **(E,E)-2,4-heptadienal does not
+> appear anywhere in the thesis**, and the methoxypyrazine anchor named IBMP, a compound the
+> thesis neither identifies nor quantifies (its methoxypyrazine is IPMP, at 6.126–57.0 µg/L
+> — 713× the retired 0.08 ppb ceiling). Neither was ever in the scored bundle. The hold-out
+> stayed out of every fit throughout: this wave corrected reference data, it did not
+> calibrate.
 >
 > **The refit to verified anchors made this WORSE, and that is the honest result
 > (2026-08-27, Wave O).** Correcting the ambient hexanal observability factors to the paper's
@@ -364,10 +390,13 @@ We report the gap rather than absorbing it.
 > measurements — Bi at 1260 ppb and Liu's band midpoint at 51.96 ppb, a **24× spread at
 > nominally identical conditions** — and the erroneous 260 ppb the old constants reproduced
 > sat almost exactly at their geometric mean (√(1260 × 51.96) = 255.9). Being wrong in the
-> middle of a contradiction scores better than being right at one end of it. The verified
-> anchor (1138 ppb) agrees with Bi to 1.11× and sits 6.3× above the top of Liu's band; which
-> of the two is representative of commercial PPI is an open question this repository cannot
-> settle. `max_fold_error` (2474×) and the pre-widening 1/5 did **not** move — the refit
+> middle of a contradiction scores better than being right at one end of it. **Superseded
+> 2026-08-27 (Wave R): there was no contradiction.** The 51.96 ppb was a midpoint of a band
+> that appears in no source; Liu's real Table 2.7 range is 2445–52454 µg/L, so the verified
+> anchor (1138 ppb) sits *just under* Liu's lowest lot rather than 6.3× above her band. The
+> refit's DIRECTION is vindicated by the corrected target — this same Liu hexanal point
+> improved 19.50× → 11.17× when the reference was fixed — while the reason the median rose
+> is now the *nonanal* row, not a disagreement between two believable papers. `max_fold_error` (2474×) and the pre-widening 1/5 did **not** move — the refit
 > touched one lane, not the transfer behaviour.
 >
 > **Two points improved on 2026-08-27 (Wave P) with nothing fitted, and the headline did not
@@ -377,9 +406,13 @@ We report the gap rather than absorbing it.
 > model computed its entire hydroperoxide pool from `linoleic_acid_pct` and
 > `LipidProfile.oleic_acid_pct` was dead code. Correcting the substrate — no constant fitted,
 > no observability factor refitted — moved Li 2026 HME nonanal **272.63× → 118.31×** and Liu
-> 2023 nonanal **10.86× → 4.78×**, each by exactly the matrix's oleic/linoleic ratio. The
-> other six points are byte-identical. And `median_accuracy_fold` (42.62×), `ci_coverage_hits`
-> (4/8), `max_fold_error` (2474×) and the pre-widening 1/5 are **all unchanged**, because the
+> 2023 nonanal **10.86× → 4.78×**, each by exactly the matrix's oleic/linoleic ratio (both Liu
+> folds were computed against the fabricated reference Wave R later retired; against the real
+> Table 2.7 value the same fix reads **214× → 94.22×**). The
+> other six points are byte-identical. And `median_accuracy_fold` (42.62× at the time; 93.68×
+> since the Wave R reference correction), `ci_coverage_hits`
+> (4/8 at the time; 3/8 since Wave R), `max_fold_error` (2474×) and the pre-widening 1/5 were
+> **all unchanged by this fix**, because the
 > median sits between two points that did not move and the two that did were outside the
 > interval before and after. A real mechanistic correction improved a quarter of the hold-out
 > by 2.3× each and moved the published number by nothing. Both nonanal points are still
