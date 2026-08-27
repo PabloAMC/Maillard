@@ -7,7 +7,7 @@
     "water_activity": 0.95
   },
   "denaturation_state": 0.5,
-  "evidence_class": "calibration_candidate",
+  "evidence_class": "diagnostic_only",
   "matrix_ranking_contract": {
     "adverse_markers": [
       "furfural",
@@ -15,76 +15,70 @@
       "Nonanal"
     ],
     "citation_provenance": [
-      "Internal protocol-pilot intake aligned to the selected soy mixed-matrix lane."
+      "Synthetic protocol-pilot intake (model-derived values) aligned to the selected soy mixed-matrix lane."
     ],
-    "notes": "Single-point protocol pilot intake. Useful as a measured comparator and ingestion example, but not external benchmark promotion evidence.",
+    "notes": "Single-point synthetic protocol pilot intake (model-derived values). Useful as an ingestion example and reproducibility comparator only; not measured data and not external benchmark promotion evidence. Expected ranks track the current model snapshot (drift baseline), not measured truth.",
     "observable_targets": [
       {
-        "direction": "higher",
-        "expected_rank": 1,
-        "name": "2-furfurylthiol",
-        "role": "desirable_marker"
-      },
-      {
-        "direction": "higher",
-        "expected_rank": 2,
-        "name": "2-methyl-3-furanthiol",
-        "role": "desirable_marker"
-      },
-      {
-        "direction": "higher",
-        "expected_rank": 3,
-        "name": "bis(2-methyl-3-furyl) disulfide",
-        "role": "desirable_marker"
-      },
-      {
-        "direction": "higher",
-        "expected_rank": 4,
-        "name": "2,5-dimethylpyrazine",
-        "role": "desirable_marker"
-      },
-      {
         "direction": "lower",
-        "expected_rank": 5,
+        "expected_rank": 1,
         "name": "Hexanal",
         "role": "adverse_marker"
       },
       {
         "direction": "lower",
-        "expected_rank": 6,
+        "expected_rank": 2,
         "name": "Nonanal",
         "role": "adverse_marker"
+      },
+      {
+        "direction": "higher",
+        "expected_rank": 3,
+        "name": "2,5-dimethylpyrazine",
+        "role": "desirable_marker"
+      },
+      {
+        "direction": "higher",
+        "expected_rank": 4,
+        "name": "2-methyl-3-furanthiol",
+        "role": "desirable_marker"
+      },
+      {
+        "direction": "higher",
+        "expected_rank": 5,
+        "name": "2-furfurylthiol",
+        "role": "desirable_marker"
+      },
+      {
+        "direction": "higher",
+        "expected_rank": 6,
+        "name": "bis(2-methyl-3-furyl) disulfide",
+        "role": "desirable_marker"
       }
     ]
   },
   "measured_volatiles": {
     "2,5-dimethylpyrazine": {
-      "conc_ppb": 0.0003321444251217266,
-      "uncertainty_pct": 12.0
+      "conc_ppb": 0.008200531853620676
     },
     "2-furfurylthiol": {
-      "conc_ppb": 0.007072756598907859,
-      "uncertainty_pct": 10.0
+      "conc_ppb": 0.002397461032390729
     },
     "2-methyl-3-furanthiol": {
-      "conc_ppb": 0.004816100561427539,
-      "uncertainty_pct": 10.0
+      "conc_ppb": 0.002658536355696648
     },
     "Hexanal": {
-      "conc_ppb": 0.00020274490850644448,
-      "uncertainty_pct": 8.0
+      "conc_ppb": 0.17826030458581718
     },
     "Nonanal": {
-      "conc_ppb": 0.00010527516039223936,
-      "uncertainty_pct": 8.0
+      "conc_ppb": 0.09184654922144037
     },
     "bis(2-methyl-3-furyl) disulfide": {
-      "conc_ppb": 0.00045570502391166165,
-      "uncertainty_pct": 12.0
+      "conc_ppb": 0.0010355096917312129
     }
   },
   "metadata": {
-    "evidence_class": "calibration_candidate",
+    "evidence_class": "diagnostic_only",
     "execution_path": "matrix_precursor_augmented",
     "family": "matrix_precursor_augmented",
     "notes": "Generated from matrix experiment intake payload.",
@@ -110,10 +104,10 @@
   "protein_type": "soy_iso",
   "source_doi": null,
   "source_metadata": {
-    "evidence_class": "calibration_candidate",
+    "evidence_class": "diagnostic_only",
     "generator": "matrix_experiment_intake",
-    "measurement_date": "2026-03-25",
-    "notes": "Internal pilot measurement package derived through the matrix experiment intake contract. Not external literature and not the full time-series benchmark campaign.",
-    "origin": "internal_experiment"
+    "measurement_date": "not_applicable_synthetic",
+    "notes": "SYNTHETIC DIAGNOSTIC - volatile concentrations were frozen from the model's own Docker run path (audit 2026-08-26); no wet-lab measurement was performed. Retained solely as an intake-contract ingestion example and reproducibility comparator. Not external literature, not calibration evidence.",
+    "origin": "synthetic_diagnostic"
   }
 }

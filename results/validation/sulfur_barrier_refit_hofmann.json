@@ -1,0 +1,1883 @@
+{
+  "generated_by": "scripts/generators/refit_sulfur_barriers_hofmann.py",
+  "fit_target": "cys_ribose_140C_Hofmann1998.json",
+  "fit_target_doi": "10.1021/jf9705983",
+  "objective": "mean |log10(predicted_ppb / measured_ppb)| over the matched rows of cys_ribose_140C_Hofmann1998",
+  "unscored_row_penalty_dex": 3.0,
+  "forbidden_as_fit_targets": [
+    "data/benchmarks/external_validation/** (hold-out; excluded by assertion)",
+    "*Internal2026*  (synthetic reproducibility lane; excluded by assertion)",
+    "*ProtocolPilot2026*  (synthetic reproducibility lane; excluded by assertion)",
+    "spi_hvp_xylose_120C_PMC9905368 / wheat_gluten_hvp_xylose_120C_PMC9905368 (constrained by their own per-lane upstream_observability_factor, which is re-derived separately in scripts/generators/rederive_hydrolysate_observability.py)",
+    "thiamine_cys_xylose_145C_Cerny2008 (VALUES_NEED_RE_EXAMINATION)",
+    "thiamine_cys_glucose_120C_Bolton1994 (kept as an honest failure)"
+  ],
+  "decision_rules": {
+    "grid_step_kcal_per_mol": 0.05,
+    "flat_profile_dex": 1e-06,
+    "min_objective_gain_dex": 0.02,
+    "indifference_dex": 0.01,
+    "conservative_edge": "among values within indifference_dex of the profile minimum, adopt the LARGEST barrier (the least sulfur-favourable point the data cannot distinguish from the optimum)"
+  },
+  "incumbent_values": {
+    "thiol_addition_norfuraneol": 28.6,
+    "furanone_cyclisation": 28.0,
+    "thiohemiacetal_formation": 23.3,
+    "thiol_dehydration": 26.8
+  },
+  "incumbent_objective": 0.6987382473509562,
+  "incumbent_rows": [
+    {
+      "compound": "2-methyl-3-furanthiol",
+      "measured_ppb": 342.0,
+      "predicted_ppb": 43.69965890618023,
+      "ratio": 0.12777678042742757,
+      "scored": true,
+      "abs_log10_error": 0.8935480589196231
+    },
+    {
+      "compound": "2-furfurylthiol",
+      "measured_ppb": 200.0,
+      "predicted_ppb": 62.67604156283654,
+      "ratio": 0.3133802078141827,
+      "scored": true,
+      "abs_log10_error": 0.5039284357822893
+    }
+  ],
+  "reported_not_fitted": {
+    "thiol_addition": {
+      "reason_not_fitted": "After Wave G1 this key labels only `Thiol_Addition_Legacy_Shortcut` (the demoted fabricated one-step MFT route) and the lumped `Thiol_Addition_H2` step. Fitting it would tune the route this wave exists to retire; its derivative is reported instead.",
+      "incumbent": 28.6,
+      "probe": [
+        {
+          "value": 26.6,
+          "objective": 0.6250533733887789
+        },
+        {
+          "value": 27.6,
+          "objective": 0.6444262621883281
+        },
+        {
+          "value": 29.6,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 30.6,
+          "objective": 0.6987382473509562
+        }
+      ],
+      "objective_span_over_probe_dex": 0.07368487396217738,
+      "identifiable": true
+    }
+  },
+  "profiles": {
+    "thiol_addition_norfuraneol": {
+      "range_kcal_per_mol": [
+        23.3,
+        29.65
+      ],
+      "range_basis": "H2S/thiol addition to a carbonyl; low = thiohemiacetal_formation (23.30), high = thiol_addition_hexose (29.65), both already in FAST_BARRIERS",
+      "incumbent": 28.6,
+      "profile_min_objective": 0.6198472637527808,
+      "profile_max_objective": 0.6987382473509562,
+      "profile_span_dex": 0.07889098359817548,
+      "identifiable": true,
+      "achievable_gain_dex": 0.07889098359817548,
+      "profile": [
+        {
+          "value": 23.3,
+          "objective": 0.6198472637527808
+        },
+        {
+          "value": 23.35,
+          "objective": 0.6198557082516742
+        },
+        {
+          "value": 23.4,
+          "objective": 0.6198646829092926
+        },
+        {
+          "value": 23.45,
+          "objective": 0.6198742209996155
+        },
+        {
+          "value": 23.5,
+          "objective": 0.6198843578836633
+        },
+        {
+          "value": 23.55,
+          "objective": 0.6198951311402191
+        },
+        {
+          "value": 23.6,
+          "objective": 0.6199065807047297
+        },
+        {
+          "value": 23.65,
+          "objective": 0.6199187490168871
+        },
+        {
+          "value": 23.7,
+          "objective": 0.6199316811773883
+        },
+        {
+          "value": 23.75,
+          "objective": 0.6199454251145484
+        },
+        {
+          "value": 23.8,
+          "objective": 0.6199600317612397
+        },
+        {
+          "value": 23.85,
+          "objective": 0.6199755552428803
+        },
+        {
+          "value": 23.9,
+          "objective": 0.6199920530771654
+        },
+        {
+          "value": 23.95,
+          "objective": 0.6200095863862126
+        },
+        {
+          "value": 24.0,
+          "objective": 0.6200282201219218
+        },
+        {
+          "value": 24.05,
+          "objective": 0.6200480233053843
+        },
+        {
+          "value": 24.1,
+          "objective": 0.6200690692811329
+        },
+        {
+          "value": 24.15,
+          "objective": 0.6200914359872393
+        },
+        {
+          "value": 24.2,
+          "objective": 0.620115206242174
+        },
+        {
+          "value": 24.25,
+          "objective": 0.6201404680494649
+        },
+        {
+          "value": 24.3,
+          "objective": 0.6201673149212591
+        },
+        {
+          "value": 24.35,
+          "objective": 0.6201958462219451
+        },
+        {
+          "value": 24.4,
+          "objective": 0.6202261675330383
+        },
+        {
+          "value": 24.45,
+          "objective": 0.620258391040642
+        },
+        {
+          "value": 24.5,
+          "objective": 0.6202926359468959
+        },
+        {
+          "value": 24.55,
+          "objective": 0.6203290289067649
+        },
+        {
+          "value": 24.6,
+          "objective": 0.6203677044918325
+        },
+        {
+          "value": 24.65,
+          "objective": 0.6204088056826333
+        },
+        {
+          "value": 24.7,
+          "objective": 0.6204524843912771
+        },
+        {
+          "value": 24.75,
+          "objective": 0.6204989020162346
+        },
+        {
+          "value": 24.8,
+          "objective": 0.6205482300311034
+        },
+        {
+          "value": 24.85,
+          "objective": 0.6206006506095335
+        },
+        {
+          "value": 24.9,
+          "objective": 0.6206563572883042
+        },
+        {
+          "value": 24.95,
+          "objective": 0.6207155556709611
+        },
+        {
+          "value": 25.0,
+          "objective": 0.6207784641743359
+        },
+        {
+          "value": 25.05,
+          "objective": 0.6208453148204675
+        },
+        {
+          "value": 25.1,
+          "objective": 0.6209163540766969
+        },
+        {
+          "value": 25.15,
+          "objective": 0.6209918437465398
+        },
+        {
+          "value": 25.2,
+          "objective": 0.6210720619145529
+        },
+        {
+          "value": 25.25,
+          "objective": 0.6211573039480867
+        },
+        {
+          "value": 25.3,
+          "objective": 0.6212478835593364
+        },
+        {
+          "value": 25.35,
+          "objective": 0.6213441339310747
+        },
+        {
+          "value": 25.4,
+          "objective": 0.621446408909698
+        },
+        {
+          "value": 25.45,
+          "objective": 0.6215550842693719
+        },
+        {
+          "value": 25.5,
+          "objective": 0.621670559051283
+        },
+        {
+          "value": 25.55,
+          "objective": 0.6217932569821187
+        },
+        {
+          "value": 25.6,
+          "objective": 0.6219236279761762
+        },
+        {
+          "value": 25.65,
+          "objective": 0.6220621497255814
+        },
+        {
+          "value": 25.7,
+          "objective": 0.6222093293834638
+        },
+        {
+          "value": 25.75,
+          "objective": 0.6223657053449845
+        },
+        {
+          "value": 25.8,
+          "objective": 0.622531849131328
+        },
+        {
+          "value": 25.85,
+          "objective": 0.6227083673820717
+        },
+        {
+          "value": 25.9,
+          "objective": 0.6228959039614519
+        },
+        {
+          "value": 25.95,
+          "objective": 0.6230951421842046
+        },
+        {
+          "value": 26.0,
+          "objective": 0.6233068071669845
+        },
+        {
+          "value": 26.05,
+          "objective": 0.6235316683113543
+        },
+        {
+          "value": 26.1,
+          "objective": 0.6237705419246402
+        },
+        {
+          "value": 26.15,
+          "objective": 0.6240242939850197
+        },
+        {
+          "value": 26.2,
+          "objective": 0.6242938430573218
+        },
+        {
+          "value": 26.25,
+          "objective": 0.6245801633661625
+        },
+        {
+          "value": 26.3,
+          "objective": 0.624884288033067
+        },
+        {
+          "value": 26.35,
+          "objective": 0.6252073124842207
+        },
+        {
+          "value": 26.4,
+          "objective": 0.625550398035506
+        },
+        {
+          "value": 26.45,
+          "objective": 0.6259147756615038
+        },
+        {
+          "value": 26.5,
+          "objective": 0.6263017499546979
+        },
+        {
+          "value": 26.55,
+          "objective": 0.626712703281326
+        },
+        {
+          "value": 26.6,
+          "objective": 0.627149100139657
+        },
+        {
+          "value": 26.65,
+          "objective": 0.6276124917263339
+        },
+        {
+          "value": 26.7,
+          "objective": 0.6281045207157522
+        },
+        {
+          "value": 26.75,
+          "objective": 0.6286269262569859
+        },
+        {
+          "value": 26.8,
+          "objective": 0.6291815491917996
+        },
+        {
+          "value": 26.85,
+          "objective": 0.6297703374965649
+        },
+        {
+          "value": 26.9,
+          "objective": 0.6303953519496737
+        },
+        {
+          "value": 26.95,
+          "objective": 0.6310587720247022
+        },
+        {
+          "value": 27.0,
+          "objective": 0.6317629020081514
+        },
+        {
+          "value": 27.05,
+          "objective": 0.6325101773386876
+        },
+        {
+          "value": 27.1,
+          "objective": 0.6333031711627735
+        },
+        {
+          "value": 27.15,
+          "objective": 0.6341446010992876
+        },
+        {
+          "value": 27.2,
+          "objective": 0.6350373362027626
+        },
+        {
+          "value": 27.25,
+          "objective": 0.6359844041120924
+        },
+        {
+          "value": 27.3,
+          "objective": 0.636988998367839
+        },
+        {
+          "value": 27.35,
+          "objective": 0.6380544858773483
+        },
+        {
+          "value": 27.4,
+          "objective": 0.6391844145026504
+        },
+        {
+          "value": 27.45,
+          "objective": 0.6403825207409837
+        },
+        {
+          "value": 27.5,
+          "objective": 0.6416527374624985
+        },
+        {
+          "value": 27.55,
+          "objective": 0.6429992016636731
+        },
+        {
+          "value": 27.6,
+          "objective": 0.6444262621883281
+        },
+        {
+          "value": 27.65,
+          "objective": 0.6459384873611143
+        },
+        {
+          "value": 27.7,
+          "objective": 0.64754067247039
+        },
+        {
+          "value": 27.75,
+          "objective": 0.6492378470292046
+        },
+        {
+          "value": 27.8,
+          "objective": 0.6510352817341298
+        },
+        {
+          "value": 27.85,
+          "objective": 0.6529384950322275
+        },
+        {
+          "value": 27.9,
+          "objective": 0.6549532591964007
+        },
+        {
+          "value": 27.95,
+          "objective": 0.6570856057992589
+        },
+        {
+          "value": 28.0,
+          "objective": 0.6593418304648099
+        },
+        {
+          "value": 28.05,
+          "objective": 0.6617284967666104
+        },
+        {
+          "value": 28.1,
+          "objective": 0.6642524391303193
+        },
+        {
+          "value": 28.15,
+          "objective": 0.6669207645881166
+        },
+        {
+          "value": 28.2,
+          "objective": 0.6697408532225234
+        },
+        {
+          "value": 28.25,
+          "objective": 0.672720357128225
+        },
+        {
+          "value": 28.3,
+          "objective": 0.6758671977123591
+        },
+        {
+          "value": 28.35,
+          "objective": 0.6791895611479153
+        },
+        {
+          "value": 28.4,
+          "objective": 0.6826958917903911
+        },
+        {
+          "value": 28.45,
+          "objective": 0.6863948833666788
+        },
+        {
+          "value": 28.5,
+          "objective": 0.6902954677464035
+        },
+        {
+          "value": 28.55,
+          "objective": 0.6944068011117348
+        },
+        {
+          "value": 28.6,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 28.65,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 28.7,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 28.75,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 28.8,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 28.85,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 28.9,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 28.95,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 29.0,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 29.05,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 29.1,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 29.15,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 29.2,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 29.25,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 29.3,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 29.35,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 29.4,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 29.45,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 29.5,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 29.55,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 29.6,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 29.65,
+          "objective": 0.6987382473509562
+        }
+      ],
+      "indifference_band_kcal_per_mol": [
+        23.3,
+        26.85
+      ],
+      "adopted": 26.85,
+      "decision": "MOVED 28.60 -> 26.85 (conservative edge of the 23.30-26.85 indifference band; gain 0.0789 dex)"
+    },
+    "furanone_cyclisation": {
+      "range_kcal_per_mol": [
+        26.0,
+        30.0
+      ],
+      "range_basis": "cyclodehydration class; dehydration / 2,3-enolisation / furanone_formation are all 28.0 in FAST_BARRIERS, taken +/- 2 kcal/mol",
+      "incumbent": 28.0,
+      "profile_min_objective": 0.6987382473509562,
+      "profile_max_objective": 0.6987382473509562,
+      "profile_span_dex": 0.0,
+      "identifiable": false,
+      "achievable_gain_dex": 0.0,
+      "profile": [
+        {
+          "value": 26.0,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.05,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.1,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.15,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.2,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.25,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.3,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.35,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.4,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.45,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.5,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.55,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.6,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.65,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.7,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.75,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.8,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.85,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.9,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.95,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 27.0,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 27.05,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 27.1,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 27.15,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 27.2,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 27.25,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 27.3,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 27.35,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 27.4,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 27.45,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 27.5,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 27.55,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 27.6,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 27.65,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 27.7,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 27.75,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 27.8,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 27.85,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 27.9,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 27.95,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 28.0,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 28.05,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 28.1,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 28.15,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 28.2,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 28.25,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 28.3,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 28.35,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 28.4,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 28.45,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 28.5,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 28.55,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 28.6,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 28.65,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 28.7,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 28.75,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 28.8,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 28.85,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 28.9,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 28.95,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 29.0,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 29.05,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 29.1,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 29.15,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 29.2,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 29.25,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 29.3,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 29.35,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 29.4,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 29.45,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 29.5,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 29.55,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 29.6,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 29.65,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 29.7,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 29.75,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 29.8,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 29.85,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 29.9,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 29.95,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 30.0,
+          "objective": 0.6987382473509562
+        }
+      ],
+      "decision": "NOT IDENTIFIABLE \u2014 flat profile; incumbent kept"
+    },
+    "thiohemiacetal_formation": {
+      "range_kcal_per_mol": [
+        21.0,
+        26.8
+      ],
+      "range_basis": "thiohemiacetal formation must stay below its own dehydration step, thiol_dehydration (26.80)",
+      "incumbent": 23.3,
+      "profile_min_objective": 0.6987382473509562,
+      "profile_max_objective": 0.6987382473509562,
+      "profile_span_dex": 0.0,
+      "identifiable": false,
+      "achievable_gain_dex": 0.0,
+      "profile": [
+        {
+          "value": 21.0,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 21.05,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 21.1,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 21.15,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 21.2,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 21.25,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 21.3,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 21.35,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 21.4,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 21.45,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 21.5,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 21.55,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 21.6,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 21.65,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 21.7,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 21.75,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 21.8,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 21.85,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 21.9,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 21.95,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 22.0,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 22.05,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 22.1,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 22.15,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 22.2,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 22.25,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 22.3,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 22.35,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 22.4,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 22.45,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 22.5,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 22.55,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 22.6,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 22.65,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 22.7,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 22.75,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 22.8,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 22.85,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 22.9,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 22.95,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 23.0,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 23.05,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 23.1,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 23.15,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 23.2,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 23.25,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 23.3,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 23.35,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 23.4,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 23.45,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 23.5,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 23.55,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 23.6,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 23.65,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 23.7,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 23.75,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 23.8,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 23.85,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 23.9,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 23.95,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 24.0,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 24.05,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 24.1,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 24.15,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 24.2,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 24.25,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 24.3,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 24.35,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 24.4,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 24.45,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 24.5,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 24.55,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 24.6,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 24.65,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 24.7,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 24.75,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 24.8,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 24.85,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 24.9,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 24.95,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 25.0,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 25.05,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 25.1,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 25.15,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 25.2,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 25.25,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 25.3,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 25.35,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 25.4,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 25.45,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 25.5,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 25.55,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 25.6,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 25.65,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 25.7,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 25.75,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 25.8,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 25.85,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 25.9,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 25.95,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.0,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.05,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.1,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.15,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.2,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.25,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.3,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.35,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.4,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.45,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.5,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.55,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.6,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.65,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.7,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.75,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.8,
+          "objective": 0.6987382473509562
+        }
+      ],
+      "decision": "NOT IDENTIFIABLE \u2014 flat profile; incumbent kept"
+    },
+    "thiol_dehydration": {
+      "range_kcal_per_mol": [
+        23.3,
+        28.0
+      ],
+      "range_basis": "bounded below by thiohemiacetal_formation (23.30) and above by the generic dehydration barrier (28.00)",
+      "incumbent": 26.8,
+      "profile_min_objective": 0.6891338175508308,
+      "profile_max_objective": 0.7297208702982863,
+      "profile_span_dex": 0.04058705274745544,
+      "identifiable": true,
+      "achievable_gain_dex": 0.009604429800125436,
+      "profile": [
+        {
+          "value": 23.3,
+          "objective": 0.6891338175508308
+        },
+        {
+          "value": 23.35,
+          "objective": 0.6891425098701676
+        },
+        {
+          "value": 23.4,
+          "objective": 0.6891517478999377
+        },
+        {
+          "value": 23.45,
+          "objective": 0.6891615658892947
+        },
+        {
+          "value": 23.5,
+          "objective": 0.6891720002354842
+        },
+        {
+          "value": 23.55,
+          "objective": 0.6891830896183764
+        },
+        {
+          "value": 23.6,
+          "objective": 0.6891948751434084
+        },
+        {
+          "value": 23.65,
+          "objective": 0.6892074004934654
+        },
+        {
+          "value": 23.7,
+          "objective": 0.6892207120902002
+        },
+        {
+          "value": 23.75,
+          "objective": 0.6892348592654904
+        },
+        {
+          "value": 23.8,
+          "objective": 0.6892498944435203
+        },
+        {
+          "value": 23.85,
+          "objective": 0.6892658733342285
+        },
+        {
+          "value": 23.9,
+          "objective": 0.6892828551388359
+        },
+        {
+          "value": 23.95,
+          "objective": 0.6893009027681423
+        },
+        {
+          "value": 24.0,
+          "objective": 0.689320083074418
+        },
+        {
+          "value": 24.05,
+          "objective": 0.6893404670977441
+        },
+        {
+          "value": 24.1,
+          "objective": 0.6893621303276161
+        },
+        {
+          "value": 24.15,
+          "objective": 0.68938515298085
+        },
+        {
+          "value": 24.2,
+          "objective": 0.6894096202967215
+        },
+        {
+          "value": 24.25,
+          "objective": 0.6894356228504127
+        },
+        {
+          "value": 24.3,
+          "objective": 0.6894632568858953
+        },
+        {
+          "value": 24.35,
+          "objective": 0.6894926246694393
+        },
+        {
+          "value": 24.4,
+          "objective": 0.6895238348649829
+        },
+        {
+          "value": 24.45,
+          "objective": 0.6895570029327166
+        },
+        {
+          "value": 24.5,
+          "objective": 0.6895922515523161
+        },
+        {
+          "value": 24.55,
+          "objective": 0.6896297110722323
+        },
+        {
+          "value": 24.6,
+          "objective": 0.6896695199867305
+        },
+        {
+          "value": 24.65,
+          "objective": 0.6897118254422605
+        },
+        {
+          "value": 24.7,
+          "objective": 0.6897567837749561
+        },
+        {
+          "value": 24.75,
+          "objective": 0.689804561081176
+        },
+        {
+          "value": 24.8,
+          "objective": 0.6898553338229587
+        },
+        {
+          "value": 24.85,
+          "objective": 0.6899092894706171
+        },
+        {
+          "value": 24.9,
+          "objective": 0.6899666271845205
+        },
+        {
+          "value": 24.95,
+          "objective": 0.6900275585385328
+        },
+        {
+          "value": 25.0,
+          "objective": 0.6900923082874725
+        },
+        {
+          "value": 25.05,
+          "objective": 0.6901611151811928
+        },
+        {
+          "value": 25.1,
+          "objective": 0.6902342328281033
+        },
+        {
+          "value": 25.15,
+          "objective": 0.6903119306108031
+        },
+        {
+          "value": 25.2,
+          "objective": 0.6903944946571146
+        },
+        {
+          "value": 25.25,
+          "objective": 0.6904822288694742
+        },
+        {
+          "value": 25.3,
+          "objective": 0.690575456016162
+        },
+        {
+          "value": 25.35,
+          "objective": 0.690674518887829
+        },
+        {
+          "value": 25.4,
+          "objective": 0.6907797815230259
+        },
+        {
+          "value": 25.45,
+          "objective": 0.690891630506595
+        },
+        {
+          "value": 25.5,
+          "objective": 0.6910104763450069
+        },
+        {
+          "value": 25.55,
+          "objective": 0.6911367549228427
+        },
+        {
+          "value": 25.6,
+          "objective": 0.6912709290448922
+        },
+        {
+          "value": 25.65,
+          "objective": 0.6914134900684346
+        },
+        {
+          "value": 25.7,
+          "objective": 0.6915649596306128
+        },
+        {
+          "value": 25.75,
+          "objective": 0.691725891475876
+        },
+        {
+          "value": 25.8,
+          "objective": 0.6918968733886665
+        },
+        {
+          "value": 25.85,
+          "objective": 0.6920785292368316
+        },
+        {
+          "value": 25.9,
+          "objective": 0.6922715211313353
+        },
+        {
+          "value": 25.95,
+          "objective": 0.6924765517080068
+        },
+        {
+          "value": 26.0,
+          "objective": 0.6926943665373623
+        },
+        {
+          "value": 26.05,
+          "objective": 0.6929257566685347
+        },
+        {
+          "value": 26.1,
+          "objective": 0.6931715613136212
+        },
+        {
+          "value": 26.15,
+          "objective": 0.6934326706788232
+        },
+        {
+          "value": 26.2,
+          "objective": 0.693710028948842
+        },
+        {
+          "value": 26.25,
+          "objective": 0.6940046374311213
+        },
+        {
+          "value": 26.3,
+          "objective": 0.6943175578665289
+        },
+        {
+          "value": 26.35,
+          "objective": 0.694649915913032
+        },
+        {
+          "value": 26.4,
+          "objective": 0.6950029048089001
+        },
+        {
+          "value": 26.45,
+          "objective": 0.6953777892219584
+        },
+        {
+          "value": 26.5,
+          "objective": 0.6957759092909288
+        },
+        {
+          "value": 26.55,
+          "objective": 0.6961986848650434
+        },
+        {
+          "value": 26.6,
+          "objective": 0.6966476199474139
+        },
+        {
+          "value": 26.65,
+          "objective": 0.6971243073474125
+        },
+        {
+          "value": 26.7,
+          "objective": 0.6976304335466008
+        },
+        {
+          "value": 26.75,
+          "objective": 0.6981677837821895
+        },
+        {
+          "value": 26.8,
+          "objective": 0.6987382473509562
+        },
+        {
+          "value": 26.85,
+          "objective": 0.699343823135727
+        },
+        {
+          "value": 26.9,
+          "objective": 0.6999866253551895
+        },
+        {
+          "value": 26.95,
+          "objective": 0.7006688895363418
+        },
+        {
+          "value": 27.0,
+          "objective": 0.7013929787073232
+        },
+        {
+          "value": 27.05,
+          "objective": 0.7021613898063216
+        },
+        {
+          "value": 27.1,
+          "objective": 0.7029767603000512
+        },
+        {
+          "value": 27.15,
+          "objective": 0.7038418750028331
+        },
+        {
+          "value": 27.2,
+          "objective": 0.7047596730841568
+        },
+        {
+          "value": 27.25,
+          "objective": 0.7057332552496041
+        },
+        {
+          "value": 27.3,
+          "objective": 0.7067658910760994
+        },
+        {
+          "value": 27.35,
+          "objective": 0.7078610264782855
+        },
+        {
+          "value": 27.4,
+          "objective": 0.7090222912783545
+        },
+        {
+          "value": 27.45,
+          "objective": 0.7102535068462872
+        },
+        {
+          "value": 27.5,
+          "objective": 0.7115586937719007
+        },
+        {
+          "value": 27.55,
+          "objective": 0.7129420795238367
+        },
+        {
+          "value": 27.6,
+          "objective": 0.7144081060437104
+        },
+        {
+          "value": 27.65,
+          "objective": 0.7159614372164
+        },
+        {
+          "value": 27.7,
+          "objective": 0.7176069661492346
+        },
+        {
+          "value": 27.75,
+          "objective": 0.7193498221844694
+        },
+        {
+          "value": 27.8,
+          "objective": 0.7211953775602546
+        },
+        {
+          "value": 27.85,
+          "objective": 0.7231492536257509
+        },
+        {
+          "value": 27.9,
+          "objective": 0.7252173265059182
+        },
+        {
+          "value": 27.95,
+          "objective": 0.7274057321014094
+        },
+        {
+          "value": 28.0,
+          "objective": 0.7297208702982863
+        }
+      ],
+      "decision": "IMMATERIAL \u2014 best achievable gain 0.0096 dex < 0.02 dex; incumbent kept"
+    }
+  },
+  "adopted_values": {
+    "thiol_addition_norfuraneol": 26.85,
+    "furanone_cyclisation": 28.0,
+    "thiohemiacetal_formation": 23.3,
+    "thiol_dehydration": 26.8
+  },
+  "objective_at_adopted": 0.6297703374965649,
+  "rows_at_adopted": [
+    {
+      "compound": "2-methyl-3-furanthiol",
+      "measured_ppb": 342.0,
+      "predicted_ppb": 61.2464750206073,
+      "ratio": 0.1790832602941734,
+      "scored": true,
+      "abs_log10_error": 0.7469450076832764
+    },
+    {
+      "compound": "2-furfurylthiol",
+      "measured_ppb": 200.0,
+      "predicted_ppb": 61.43761220707336,
+      "ratio": 0.3071880610353668,
+      "scored": true,
+      "abs_log10_error": 0.5125956673098532
+    }
+  ],
+  "objective_gain_dex": 0.06896790985439138,
+  "irreducible_residual": {
+    "definition": "objective with EVERY fitted knob pinned at the bottom of its defensible range \u2014 the best the sulfur branch can do on this benchmark by barrier moves alone",
+    "values": {
+      "thiol_addition_norfuraneol": 23.3,
+      "furanone_cyclisation": 26.0,
+      "thiohemiacetal_formation": 21.0,
+      "thiol_dehydration": 23.3
+    },
+    "objective": 0.6102160148347286,
+    "rows": [
+      {
+        "compound": "2-methyl-3-furanthiol",
+        "measured_ppb": 342.0,
+        "predicted_ppb": 64.16704444780396,
+        "ratio": 0.18762293698188293,
+        "scored": true,
+        "abs_log10_error": 0.7267140700308055
+      },
+      {
+        "compound": "2-furfurylthiol",
+        "measured_ppb": 200.0,
+        "predicted_ppb": 64.16704444780395,
+        "ratio": 0.3208352222390197,
+        "scored": true,
+        "abs_log10_error": 0.4937179596386517
+      }
+    ],
+    "reading": "The profiles saturate well inside the defensible ranges: the MFT ceiling is set by the shared upstream span (Schiff/Amadori) and by the volatile-budget allocation, in which furfural \u2014 unmeasured in this benchmark \u2014 takes ~78% of a total budget that is itself the right order of magnitude (~1050 ppb against a measured MFT+FFT of 542 ppb). No barrier value in any defensible range reproduces the measured absolute sulfur yields; the remaining factor of ~5 on MFT and ~3 on FFT is an allocation deficit, not a barrier deficit. That is the finding this refit exists to produce, and it is reported rather than tuned away."
+  }
+}

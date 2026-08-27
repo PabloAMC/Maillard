@@ -1211,17 +1211,28 @@
     },
     {
       "id": "hofmann_schieberle_grosch_1996",
-      "source": "Hofmann, Schieberle & Grosch (1996), JAFC 44:2219",
-      "provenance_tier": "literature_derived_transfer",
-      "confidence_tier": "high",
-      "uncertainty_posture": "directional_transfer",
+      "source": "WITHDRAWN - no verifiable source (previously cited as 'Hofmann, Schieberle & Grosch (1996), JAFC 44:2219')",
+      "provenance_tier": "unsourced_withdrawn",
+      "confidence_tier": "low",
+      "source_status": "no_verifiable_source",
+      "uncertainty_posture": "withdrawn_do_not_use",
       "reference_conditions": {
         "T_C": 145,
         "pH": 6.5
       },
       "thiamine_to_MFT_conversion_pct": 0.021,
       "cysteine_augmentation_MFT_fold": 2.3,
-      "notes": "Thiamine→MFT conversion 0.021%; cysteine augments MFT 2.3-fold."
+      "withdrawn_values": [
+        "thiamine_to_MFT_conversion_pct",
+        "cysteine_augmentation_MFT_fold"
+      ],
+      "source_repair": {
+        "date": "2026-08-27",
+        "action": "confidence_tier high -> low; source_status no_verifiable_source",
+        "basis": "2026-08-26 citation sweep + source recovery: the cited JAFC 44:2219 (1996) thiamine/cysteine/ribose MFT paper does not exist. The benchmark built on this reference (thiamine_cys_ribose_100C_Hofmann1996) was DELETED and rebuilt from the verified Bolton & Reineccius 1994 chapter (10.1021/bk-1994-0543.ch022) as data/benchmarks/thiamine_cys_glucose_120C_Bolton1994.json, which the model fails honestly. The same repair was applied in data/lit/benchmark_intake_registry.json and data/lit/slr_incorporation_matrix.json, where these two anchors were withdrawn as unsourced.",
+        "id_retained_because": "the id is a stable join key referenced from data/lit/deep_research_backlog.json and tests/unit/test_literature_runtime.py; renaming it would silently break those joins."
+      },
+      "notes": "WITHDRAWN 2026-08-27. The two numbers below (thiamine->MFT conversion 0.021%; cysteine augments MFT 2.3-fold) came from a fabricated source and must not be used as anchors. They are retained in-file, not deleted, so the forensic record and the id join key survive; nothing in the live runtime reads either field (verified 2026-08-27: no consumer outside this file and an archived ingest script, and this entry is not the thiamine_fragmentation lane default - that is cerny_2007_thiamine_split_v1). Replacement lineage: Bolton & Reineccius 1994, 10.1021/bk-1994-0543.ch022 -> data/benchmarks/thiamine_cys_glucose_120C_Bolton1994.json."
     }
   ],
   "nucleotide_pathway_priors": [
@@ -1298,7 +1309,7 @@
     },
     {
       "id": "blank_devaud_grosch_2003_g6p_hdmf_uplift_v1",
-      "source": "Blank, Devaud & Grosch (2003), DOI:10.1021/jf026123f",
+      "source": "Yaylayan, Machiels & Istasse (2003), JAFC 51:3358, DOI:10.1021/jf034037p",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
       "uncertainty_posture": "bounded_calibration",
@@ -1306,11 +1317,19 @@
       "analytical_method": "SIDA with [2H3]-HDMF",
       "replicates": 3,
       "reference_system": "aqueous phosphorylated sugar model",
-      "notes": "Bounded phosphorylated-sugar prior for HDMF-rich routing. Use to keep G6P above glucose when furanone-support signals matter, without claiming endpoint closure in plant matrices."
+      "notes": "Bounded phosphorylated-sugar prior for HDMF-rich routing. Use to keep G6P above glucose when furanone-support signals matter, without claiming endpoint closure in plant matrices.",
+      "citation_repair": {
+        "old": "Blank, Devaud & Grosch (2003), DOI:10.1021/jf026123f",
+        "new": "Yaylayan, Machiels & Istasse (2003), JAFC 51:3358, DOI:10.1021/jf034037p",
+        "date": "2026-08-26",
+        "basis": "The cited DOI 10.1021/jf034037p was verified in CrossRef as Yaylayan, Machiels & Istasse (2003), 'Thermal Decomposition of Specifically Phosphorylated D-Glucoses and Their Role in the Control of the Maillard Reaction', JAFC 51(11):3358-3366 - the phosphorylated-sugar routing study this prior is about. The previously cited DOI (10.1021/jf026123f) resolves to Cerny & Davidek 2003 on ribose/cysteine aroma formation, which is neither a Blank/Devaud/Grosch paper nor a G6P study. No 'Blank, Devaud & Grosch (2003)' G6P/HDMF publication exists."
+      },
+      "citation_caveat": "Phenomenon anchor only. Yaylayan et al. 2003 is a pyrolysis-GC/MS study reporting relative pyrolysate profiles for 1- and 6-phosphorylated glucoses; it contains neither the 4.4x G6P-vs-glucose HDMF multiplier nor any [2H3]-HDMF stable-isotope dilution measurement. The stored multiplier and the 'SIDA with [2H3]-HDMF' method claim are unanchored.",
+      "value_anchor_status": "no_verifiable_source"
     },
     {
       "id": "soladoye_2020_low_temp_euc_window_v1",
-      "source": "Soladoye et al. (2020), DOI:10.3390/foods9030251",
+      "source": "Hwang, Ismail & Joo (2020), Foods 9:251, DOI:10.3390/foods9030251",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium_low",
       "uncertainty_posture": "bounded_contextual_transfer",
@@ -1343,7 +1362,13 @@
         "70C_12h": 15.0
       },
       "best_case_euc_fraction_of_raw": 0.83,
-      "notes": "Low-temperature EUC window anchor for Family 04. Use for scientist-facing mild-heating context and bounded PBMA transfer reasoning, not as a universal kinetic override for nucleotide hydrolysis."
+      "notes": "Low-temperature EUC window anchor for Family 04. Use for scientist-facing mild-heating context and bounded PBMA transfer reasoning, not as a universal kinetic override for nucleotide hydrolysis.",
+      "citation_repair": {
+        "old": "Soladoye et al. (2020), DOI:10.3390/foods9030251",
+        "new": "Hwang, Ismail & Joo (2020), Foods 9:251, DOI:10.3390/foods9030251",
+        "date": "2026-08-26",
+        "basis": "CrossRef record for this DOI (title, author list, print volume/issue) checked 2026-08-26: the paper is Hwang, Ismail & Joo (2020), 'Identification of Umami Taste in Sous-Vide Beef by Chemical Analyses, Equivalent Umami Concentration, and Electronic Tongue System' - the right study for this low-temperature EUC window, but not 'Soladoye et al. (2020)'."
+      }
     },
     {
       "id": "ahlberg_2021_yeast_extract_nucleotide_grade_window_v1",
@@ -1380,7 +1405,7 @@
     },
     {
       "id": "cui_2022_mushroom_gmp_euc_window_v1",
-      "source": "Cui et al. (2022), DOI:10.1016/j.lwt.2022.113651",
+      "source": "Liu, Bau, Jin et al. (2022), LWT 164:113651, DOI:10.1016/j.lwt.2022.113651",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium_low",
       "uncertainty_posture": "bounded_contextual_transfer",
@@ -1415,7 +1440,14 @@
           "total_euc_g_msg_per_100g": 0.8
         }
       },
-      "notes": "Ingredient-source reference window for Family 04. Use to expose species-specific mushroom GMP and EUC context when clean-label nucleotide support is supplied by shiitake, porcini, enoki, or oyster powders."
+      "notes": "Ingredient-source reference window for Family 04. Use to expose species-specific mushroom GMP and EUC context when clean-label nucleotide support is supplied by shiitake, porcini, enoki, or oyster powders.",
+      "citation_repair": {
+        "old": "Cui et al. (2022), DOI:10.1016/j.lwt.2022.113651",
+        "new": "Liu, Bau, Jin et al. (2022), LWT 164:113651, DOI:10.1016/j.lwt.2022.113651",
+        "date": "2026-08-26",
+        "basis": "CrossRef record for this DOI (title, author list, print volume/issue) checked 2026-08-26: the paper is Liu, Bau, Jin et al. (2022), 'Comparison of different drying techniques for shiitake mushroom (Lentinus edodes): Changes in volatile compounds, taste properties, and texture qualities' - a plausible source for the shiitake GMP/EUC window, but not 'Cui et al. (2022)'."
+      },
+      "citation_caveat": "Verified as the shiitake drying/taste study only. The porcini, enoki and oyster species profiles in this prior are NOT covered by it and remain unanchored."
     },
     {
       "id": "mouritsen_2024_umami_thresholds",
@@ -1464,7 +1496,7 @@
   "carbonyl_donor_priors": [
     {
       "id": "martins_2001_maillard_kinetics_modelling_v1",
-      "source": "Martins, Jongen & van Boekel (2001), DOI:10.1016/s0924-2244(01)00022-x",
+      "source": "Martins, Jongen & van Boekel (2000), Trends in Food Science & Technology 11:364, DOI:10.1016/s0924-2244(01)00022-x",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
       "uncertainty_posture": "bounded_calibration",
@@ -1476,7 +1508,13 @@
         "carbonyl_donor",
         "arrhenius_anchor"
       ],
-      "notes": "Trends Food Sci Technol review by the same Wageningen group. Consolidates kinetic rate constants and mechanistic context for the 9-sugar hierarchy. Use as co-reference to van_boekel_2001 — provides mechanistic interpretation rather than primary k_obs data."
+      "notes": "Trends Food Sci Technol review by the same Wageningen group. Consolidates kinetic rate constants and mechanistic context for the 9-sugar hierarchy. Use as co-reference to van_boekel_2001 — provides mechanistic interpretation rather than primary k_obs data.",
+      "citation_repair": {
+        "old": "Martins, Jongen & van Boekel (2001), DOI:10.1016/s0924-2244(01)00022-x",
+        "new": "Martins, Jongen & van Boekel (2000), Trends in Food Science & Technology 11:364, DOI:10.1016/s0924-2244(01)00022-x",
+        "date": "2026-08-26",
+        "basis": "CrossRef record for this DOI (title, author list, print volume/issue) checked 2026-08-26: the TiFS review 'A review of Maillard reaction in food and implications to kinetic modelling' is volume 11, issue 9-10, print year 2000 - the correct paper, cited with the wrong year."
+      }
     },
     {
       "id": "van_boekel_2001_maillard_kinetics_review_v1",
@@ -1563,7 +1601,8 @@
       "hdmf_odt_ug_per_l": 0.6,
       "hdmf_oav_lower_bound": 80.0,
       "replicates": 3,
-      "notes": "Bounded rhamnose-plus-proline HDMF prior for Family 07. Use to expose that rhamnose can drive unusually strong HDMF support when proline is present, without reclassifying rhamnose as a universal fast donor across plant matrices."
+      "notes": "Bounded rhamnose-plus-proline HDMF prior for Family 07. Use to expose that rhamnose can drive unusually strong HDMF support when proline is present, without reclassifying rhamnose as a universal fast donor across plant matrices.",
+      "audit_flag": "2026-08-26: DEAD DOI. 10.1021/jf960777q does not resolve (CrossRef 404) and no Blank et al. 1997 rhamnose-plus-proline HDMF source could be located by bibliographic search. Value UNCHANGED and currently unanchored."
     },
     {
       "id": "tran_2023_starch_liberation_v1",
@@ -1788,7 +1827,7 @@
     },
     {
       "id": "ohsu_2025_kokumi_casr_support_v1",
-      "source": "Ohsu et al. (2025), DOI:10.1021/acs.jafc.2c04919",
+      "source": "Ohsu et al. (2010), J. Biol. Chem. 285:1016, DOI:10.1074/jbc.M109.029165",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "medium",
       "uncertainty_posture": "bounded_calibration",
@@ -1820,7 +1859,15 @@
         0.3,
         1.5
       ],
-      "notes": "Bounded Family 05 kokumi prior for CaSR-active glutathione and gamma-glutamyl peptides. Use to expose mouthfulness support alongside sulfur-positive interpretation without claiming full sensory closure in plant matrices."
+      "notes": "Bounded Family 05 kokumi prior for CaSR-active glutathione and gamma-glutamyl peptides. Use to expose mouthfulness support alongside sulfur-positive interpretation without claiming full sensory closure in plant matrices.",
+      "citation_repair": {
+        "old": "Ohsu et al. (2025), DOI:10.1021/acs.jafc.2c04919",
+        "new": "Ohsu et al. (2010), J. Biol. Chem. 285:1016, DOI:10.1074/jbc.M109.029165",
+        "date": "2026-08-26",
+        "basis": "The intended anchor is the real Ohsu kokumi/CaSR paper: Ohsu, Amino, Nagasaki et al. (2010), 'Involvement of the Calcium-sensing Receptor in Human Taste Perception', J Biol Chem 285(2):1016-1022, 10.1074/jbc.M109.029165 (CrossRef verified). No 'Ohsu et al. (2025)' publication exists, and the DOI previously stored (10.1021/acs.jafc.2c04919) resolves to Yang, Liao, Dong et al. (2022) on kokumi gamma-glutamyl peptides - the right subject but the wrong authors."
+      },
+      "citation_caveat": "Subject anchor only. Ohsu et al. 2010 reports CaSR EC50 values of 1.34 uM (gamma-Glu-Val), 76.5 nM (glutathione) and 41.9 nM (gamma-Glu-Val-Gly) - three orders of magnitude away from the 0.32/0.45/0.68 mM stored here - and reports no CCK-secretion percentages and no 0-10 mouthfulness scale (its sensory scale runs -2..+2). The EC50, calcium-increase, CCK and mouthfulness constants in this prior are unanchored.",
+      "value_anchor_status": "no_verifiable_source"
     },
     {
       "id": "huang_2021_sulfur_oav_support_v1",
@@ -2176,7 +2223,7 @@
     },
     {
       "id": "shu_2019_cysteine_quinone_kinetics",
-      "source": "Shu et al. (2019)",
+      "source": "Shu, Lorentzen & Davies (2019), Free Radical Biology and Medicine 137:169, DOI:10.1016/j.freeradbiomed.2019.04.026",
       "provenance_tier": "literature_derived_transfer",
       "confidence_tier": "high",
       "uncertainty_posture": "directional_transfer",
@@ -2184,7 +2231,14 @@
         100000.0,
         1000000.0
       ],
-      "notes": "Second-order rate constants of 10^5 to 10^6 M-1 s-1 for quinone-thiol Michael additions."
+      "notes": "Second-order rate constants of 10^5 to 10^6 M-1 s-1 for quinone-thiol Michael additions.",
+      "citation_repair": {
+        "old": "Shu et al. (2019)",
+        "new": "Shu, Lorentzen & Davies (2019), Free Radical Biology and Medicine 137:169, DOI:10.1016/j.freeradbiomed.2019.04.026",
+        "date": "2026-08-26",
+        "basis": "The bare 'Shu et al. (2019)' string carried no identifier. The source deep-research document (data/Gemini_Deep_Research/slr_family_13_polyphenol_amino_capping.md) records DOI 10.1016/j.freeradbiomed.2019.04.026, verified in CrossRef as Shu, Lorentzen & Davies (2019), 'Reaction of quinones with proteins: Kinetics of adduct formation, effects on enzymatic activity and protein structure, and potential reversibility of modifications', Free Radic Biol Med 137:169-180 - a quinone/thiol adduct-formation kinetics study, matching the stored 10^5-10^6 M-1 s-1 second-order band."
+      },
+      "doi": "10.1016/j.freeradbiomed.2019.04.026"
     },
     {
       "id": "zhu_2020_epicatechin_mgo_go_scavenging",
@@ -3145,7 +3199,15 @@
         "promotion_note": "Replaces unreliable GFN2-xTB derived 17.84 kcal/mol (74.65 kJ/mol). xTB-derived value retired 2026-04-21 per scientific judgment.",
         "refinability_status": "literature_anchor_only",
         "refinability_note": "Direct ingestion of 13_polyphenol_amino_capping deep-research source (currently in deep_research_backlog) would close this gap with a primary measurement.",
-        "last_refined_at": "2026-04-21"
+        "last_refined_at": "2026-04-21",
+        "literature_anchor_doi": "10.1016/j.freeradbiomed.2019.04.026",
+        "literature_anchor_citation": "Shu, Lorentzen & Davies (2019), Free Radical Biology and Medicine 137:169",
+        "citation_repair": {
+          "old": "Shu et al. (2019) [no identifier]",
+          "new": "Shu, Lorentzen & Davies (2019), DOI:10.1016/j.freeradbiomed.2019.04.026",
+          "date": "2026-08-26",
+          "basis": "Same recovery as polyphenol_thiol_capping_priors/shu_2019_cysteine_quinone_kinetics; CrossRef-verified."
+        }
       },
       {
         "reaction_key": "aa_ring_open_dicarbonyl",

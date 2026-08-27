@@ -96,13 +96,15 @@
           "units": "percent_bound",
           "value": 52.76,
           "sd": 4.65
-        }
+        },
+        "shared_anchor": true,
+        "shared_anchor_note": "One DOI serves 3 nominally distinct reference records in data/lit: acs_jafc_3c05991_ppi_spi_partitioning, jafc_3c05991_hexanal_binding, jafc_3c05991_ppi_hexanal_binding. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
       },
       {
         "id": "karolkowski_2021_ppi_hexanal_ph_release",
         "compound": "hexanal",
-        "source_citation": "Karolkowski et al. (2021), HAL Open Science",
-        "doi": "10.3390/foods10123140",
+        "source_citation": "Fischer, Cachon & Cayot (2021), Food Res. Int. 150:110760",
+        "doi": "10.1016/j.foodres.2021.110760",
         "provenance_tier": "literature_derived_transfer",
         "matrix_context": "pea_protein_isolate_10_percent_wv_buffered_native_release",
         "analytical_method": "HS-SPME-GC-MS with external calibration across extraction pH conditions",
@@ -128,14 +130,27 @@
             6.5
           ],
           "surrogate_basis": "Repo-bounded release surrogate anchored to the Karolkowski 2021 qualitative pH trend while preserving the executable Pratap-Singh pH 6 ambient baseline."
-        }
+        },
+        "doi_repair": {
+          "old": "10.3390/foods10123140",
+          "new": "10.1016/j.foodres.2021.110760",
+          "date": "2026-08-26",
+          "basis": "Round-2 recovery high confidence: CrossRef search for pea-protein-isolate volatiles vs extraction pH surfaced this paper; the Semantic Scholar abstract lists the nine semi-quantified compounds and includes all three the repo names - hexanal, 2-pentylfuran and 2,5-dimethylpyrazine - and states 'hexanal release was found 59% higher with extraction using pH 4.5 than with pH 6.5', matching the repo's pH-series anchor. Same Dijon (AgroSup/INRAE) group as Karolkowski, HAL-deposited, which explains the mis-citation."
+        },
+        "citation_repair": {
+          "old": "Karolkowski et al. (2021), HAL Open Science",
+          "new": "Fischer, Cachon & Cayot (2021), Food Res. Int. 150:110760",
+          "date": "2026-08-26",
+          "basis": "Round-2 recovery high confidence: CrossRef search for pea-protein-isolate volatiles vs extraction pH surfaced this paper; the Semantic Scholar abstract lists the nine semi-quantified compounds and includes all three the repo names - hexanal, 2-pentylfuran and 2,5-dimethylpyrazine - and states 'hexanal release was found 59% higher with extraction using pH 4.5 than with pH 6.5', matching the repo's pH-series anchor. Same Dijon (AgroSup/INRAE) group as Karolkowski, HAL-deposited, which explains the mis-citation."
+        },
+        "citation_caveat": "The cited author is wrong: this is Fischer et al., not Karolkowski et al. Karolkowski et al. (2021) is 'Volatile Compounds in Pulses: A Review', Foods 10:3140 (10.3390/foods10123140) - a review with no pH-resolved dataset, i.e. the DOI currently in the repo. I confirmed pH 4.5 and 6.5 from the abstract; the third level (pH 2.0) and the explicit LOD/LOQ table are stated only as 'acidic pH' / 'external calibration' in the abstract and were not verified line-by-line."
       }
     ],
     "soy_protein": [
       {
         "id": "ince_2024_glycinin_hexanal_binding",
         "compound": "hexanal",
-        "source_citation": "Ince et al. (2024), Int J Biological Macromolecules",
+        "source_citation": "Ince et al. (2025), Food Hydrocolloids 158:110543",
         "doi": "10.1016/j.foodhyd.2024.110543",
         "provenance_tier": "direct_measurement",
         "matrix_context": "purified_soy_11S_glycinin",
@@ -151,12 +166,18 @@
           "min": 310.0,
           "max": 31000.0,
           "stoichiometry": "1:1"
+        },
+        "citation_repair": {
+          "old": "Ince et al. (2024), Int J Biological Macromolecules",
+          "new": "Ince et al. (2025), Food Hydrocolloids 158:110543",
+          "date": "2026-08-26",
+          "basis": "CrossRef record for this DOI (title, author list, print volume/issue) checked 2026-08-26: Ince, Condict, Stockmann et al., 'Molecular characterisation of interactions between 11S glycinin and hexanal - An off flavour compound' - the venue is Food Hydrocolloids 158 (2025), not Int J Biological Macromolecules (2024)."
         }
       },
       {
         "id": "shu_2024_heated_spi_hexanal_release",
         "compound": "hexanal",
-        "source_citation": "Shu et al. (2024), Food Chemistry",
+        "source_citation": "Kong et al. (2024), Food Chemistry 445:138795",
         "doi": "10.1016/j.foodchem.2024.138795",
         "provenance_tier": "direct_measurement",
         "matrix_context": "commercial_spi_after_ultrasonic_thermal_treatment",
@@ -170,6 +191,12 @@
         "numeric_reference": {
           "units": "fraction_change",
           "value": -0.706
+        },
+        "citation_repair": {
+          "old": "Shu et al. (2024), Food Chemistry",
+          "new": "Kong et al. (2024), Food Chemistry 445:138795",
+          "date": "2026-08-26",
+          "basis": "CrossRef record for this DOI (title, author list, print volume/issue) checked 2026-08-26: the paper is Kong, Wu, Li et al. (2024), 'Analyzing changes in volatile flavor compounds of soy protein isolate during ultrasonic-thermal synergistic treatment' - right subject (heated-SPI off-flavour attenuation), but not 'Shu et al. (2024)'."
         }
       },
       {
@@ -206,8 +233,8 @@
       {
         "id": "karolkowski_2021_ppi_2_pentylfuran_native_panel",
         "compound": "2-pentylfuran",
-        "source_citation": "Karolkowski et al. (2021), HAL Open Science",
-        "doi": "10.3390/foods10123140",
+        "source_citation": "Fischer, Cachon & Cayot (2021), Food Res. Int. 150:110760",
+        "doi": "10.1016/j.foodres.2021.110760",
         "provenance_tier": "literature_derived_transfer",
         "matrix_context": "pea_protein_isolate_10_percent_wv_buffered_native_release",
         "analytical_method": "HS-SPME-GC-MS with external calibration across extraction pH conditions",
@@ -233,7 +260,20 @@
             6.5
           ],
           "surrogate_basis": "Repo-bounded release surrogate anchored to the Karolkowski 2021 qualitative pH trend while preserving the executable Pratap-Singh pH 6 ambient baseline."
-        }
+        },
+        "doi_repair": {
+          "old": "10.3390/foods10123140",
+          "new": "10.1016/j.foodres.2021.110760",
+          "date": "2026-08-26",
+          "basis": "Round-2 recovery high confidence: CrossRef search for pea-protein-isolate volatiles vs extraction pH surfaced this paper; the Semantic Scholar abstract lists the nine semi-quantified compounds and includes all three the repo names - hexanal, 2-pentylfuran and 2,5-dimethylpyrazine - and states 'hexanal release was found 59% higher with extraction using pH 4.5 than with pH 6.5', matching the repo's pH-series anchor. Same Dijon (AgroSup/INRAE) group as Karolkowski, HAL-deposited, which explains the mis-citation."
+        },
+        "citation_repair": {
+          "old": "Karolkowski et al. (2021), HAL Open Science",
+          "new": "Fischer, Cachon & Cayot (2021), Food Res. Int. 150:110760",
+          "date": "2026-08-26",
+          "basis": "Round-2 recovery high confidence: CrossRef search for pea-protein-isolate volatiles vs extraction pH surfaced this paper; the Semantic Scholar abstract lists the nine semi-quantified compounds and includes all three the repo names - hexanal, 2-pentylfuran and 2,5-dimethylpyrazine - and states 'hexanal release was found 59% higher with extraction using pH 4.5 than with pH 6.5', matching the repo's pH-series anchor. Same Dijon (AgroSup/INRAE) group as Karolkowski, HAL-deposited, which explains the mis-citation."
+        },
+        "citation_caveat": "The cited author is wrong: this is Fischer et al., not Karolkowski et al. Karolkowski et al. (2021) is 'Volatile Compounds in Pulses: A Review', Foods 10:3140 (10.3390/foods10123140) - a review with no pH-resolved dataset, i.e. the DOI currently in the repo. I confirmed pH 4.5 and 6.5 from the abstract; the third level (pH 2.0) and the explicit LOD/LOQ table are stated only as 'acidic pH' / 'external calibration' in the abstract and were not verified line-by-line."
       }
     ],
     "soy_protein": [
@@ -267,7 +307,7 @@
       {
         "id": "shu_2024_heated_spi_2_pentylfuran_censored",
         "compound": "2-pentylfuran",
-        "source_citation": "Shu et al. (2024), Food Chemistry",
+        "source_citation": "Kong et al. (2024), Food Chemistry 445:138795",
         "doi": "10.1016/j.foodchem.2024.138795",
         "provenance_tier": "direct_measurement",
         "matrix_context": "commercial_spi_after_ultrasonic_thermal_treatment",
@@ -281,6 +321,12 @@
         "numeric_reference": {
           "units": "censored",
           "value": "not_detected"
+        },
+        "citation_repair": {
+          "old": "Shu et al. (2024), Food Chemistry",
+          "new": "Kong et al. (2024), Food Chemistry 445:138795",
+          "date": "2026-08-26",
+          "basis": "CrossRef record for this DOI (title, author list, print volume/issue) checked 2026-08-26: the paper is Kong, Wu, Li et al. (2024), 'Analyzing changes in volatile flavor compounds of soy protein isolate during ultrasonic-thermal synergistic treatment' - right subject (heated-SPI off-flavour attenuation), but not 'Shu et al. (2024)'."
         }
       }
     ]
@@ -364,13 +410,14 @@
         "numeric_reference": {
           "units": "fold_reduction",
           "value": 16.0
-        }
+        },
+        "shared_anchor": true,
+        "shared_anchor_note": "One DOI serves 3 nominally distinct reference records in data/lit: hofmann_2001_melanoidin_fft_trapping, hofmann_2001_melanoidin_thioether, pmc12154226_crosspy_thiol_adduction. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
       },
       {
         "id": "fadel_2015_mft_retention_payload",
         "compound": "2-methyl-3-furanthiol",
         "source_citation": "Fadel et al. (2015)",
-        "doi": "10.1016/j.foodchem.2015.00000",
         "provenance_tier": "literature_derived_transfer",
         "matrix_context": "heat_denatured_soy_isolate",
         "analytical_method": "HS-SPME-GC-MS",
@@ -383,6 +430,13 @@
         "numeric_reference": {
           "units": "percent_bound",
           "value": 47.78
+        },
+        "source_status": "no_verifiable_source",
+        "source_status_repair": {
+          "old": "10.1016/j.foodchem.2015.00000",
+          "new": null,
+          "date": "2026-08-26",
+          "basis": "The dead DOI 10.1016/j.foodchem.2015.00000 is a placeholder pattern (all-zero article number), i.e. never a real identifier. CrossRef searches for soy-protein-isolate binding/retention of 2-methyl-3-furanthiol with pH and HS-SPME, and an author sweep of Fadel in Food Chemistry 2013-2017, return nothing reporting a percentage retention of MFT by soy isolate at pH 4.0 / 40 C. I could find no publication containing the '47.78% retention' anchor. | Two real 2015 Fadel papers exist and are the plausible confabulation seeds, but neither supports the claim: Lotfy, Fadel, El-Ghorab & Shaheen (2015), Food Chem. 187:7-13, 10.1016/j.foodchem.2015.04.027 (encapsulated beef-like flavourings from mushroom-protein hydrolysate - wrong matrix); and Fadel et al. (2015), Int. J. Food Process. Technol. 2:17-25, 10.15379/2408-9826.2015.02.01.3 (encapsulated meat-like flavouring from acid-hydrolysed soybean protein, in which MFT is the major fresh-sample compound and declines over 6 months' storage - but it is a gum-arabic encapsulation storage study with no pH series, no 40 C isotherm and no 47.78% figure)."
         }
       },
       {
@@ -402,7 +456,9 @@
         "numeric_reference": {
           "units": "percent_bound",
           "value": 85.0
-        }
+        },
+        "shared_anchor": true,
+        "shared_anchor_note": "One DOI serves 2 nominally distinct reference records in data/lit: wang_2023_mft_retention, wang_2023_mft_retention_payload. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
       },
       {
         "id": "mottram_2001_bmfd_retention_payload",
@@ -421,15 +477,17 @@
         "numeric_reference": {
           "units": "percent_bound",
           "value": 98.5
-        }
+        },
+        "shared_anchor": true,
+        "shared_anchor_note": "One DOI serves 2 nominally distinct reference records in data/lit: mottram_2001_bmfd_retention, mottram_2001_bmfd_retention_payload. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
       }
     ],
     "pea_protein": [
       {
         "id": "siripitakpong_2026_fft_retention_payload",
         "compound": "2-furfurylthiol",
-        "source_citation": "Siripitakpong et al. (2026), Food Chemistry",
-        "doi": "10.1016/j.foodchem.2025.145815",
+        "source_citation": "Siripitakpong, Wongprasert, Rungrotmongkol & Suppavorasatit (2026), Food Chem. X 34:103712",
+        "doi": "10.1016/j.fochx.2026.103712",
         "provenance_tier": "literature_derived_transfer",
         "matrix_context": "native_pea_isolate",
         "analytical_method": "molecular_docking",
@@ -442,7 +500,20 @@
         "numeric_reference": {
           "units": "delta_G_kcal_mol",
           "value": -9.72
-        }
+        },
+        "doi_repair": {
+          "old": "10.1016/j.foodchem.2025.145815",
+          "new": "10.1016/j.fochx.2026.103712",
+          "date": "2026-08-26",
+          "basis": "Round-2 recovery high confidence: CrossRef author search 'Siripitakpong' returns exactly one 2026 paper, and its Europe PMC full text (PMC12966641) contains the repo's three anchors verbatim: 'The delta-G values observed for vanillin bound to PPI are -9.05, -9.06, and -9.72 kcal/mol at 5 C, 15 C, and 25 C' (so -9.72 kcal/mol at 25.0 C), with all binding experiments in 0.05 M phosphate buffer at pH 7.0, on pea protein isolate, supported by AutoDock Vina molecular docking. This is unambiguously the paper the entry was built from."
+        },
+        "citation_repair": {
+          "old": "Siripitakpong et al. (2026), Food Chemistry",
+          "new": "Siripitakpong, Wongprasert, Rungrotmongkol & Suppavorasatit (2026), Food Chem. X 34:103712",
+          "date": "2026-08-26",
+          "basis": "Round-2 recovery high confidence: CrossRef author search 'Siripitakpong' returns exactly one 2026 paper, and its Europe PMC full text (PMC12966641) contains the repo's three anchors verbatim: 'The delta-G values observed for vanillin bound to PPI are -9.05, -9.06, and -9.72 kcal/mol at 5 C, 15 C, and 25 C' (so -9.72 kcal/mol at 25.0 C), with all binding experiments in 0.05 M phosphate buffer at pH 7.0, on pea protein isolate, supported by AutoDock Vina molecular docking. This is unambiguously the paper the entry was built from."
+        },
+        "citation_caveat": "IMPORTANT: the ligand is VANILLIN, not 2-furfurylthiol - the word 'furfuryl' does not occur anywhere in the paper. The entry's compounds_supported ('2-furfurylthiol') is therefore wrong and the -9.72 kcal/mol value must not be used as an FFT binding energy. Also note -9.72 kcal/mol is the thermodynamic delta-G from binding isotherms, not the docking score (the docking affinities are -3.9689 kcal/mol for PPI and -3.7660 for deamidated PPI), so the entry's note 'obtained via molecular docking and homology modeling' is also inaccurate."
       },
       {
         "id": "sun_2025_ppi_lenthionine_retention",
@@ -461,7 +532,9 @@
         "numeric_reference": {
           "units": "percent_retained",
           "value": 42.5
-        }
+        },
+        "shared_anchor": true,
+        "shared_anchor_note": "One DOI serves 4 nominally distinct reference records in data/lit: sun_2025_ppi_dmds_retention, sun_2025_ppi_dmts_retention, sun_2025_ppi_lenthionine_retention, sun_2025_ppi_vsc_retention. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
       },
       {
         "id": "sun_2025_ppi_dmts_retention",
@@ -480,7 +553,9 @@
         "numeric_reference": {
           "units": "percent_retained",
           "value": 16.5
-        }
+        },
+        "shared_anchor": true,
+        "shared_anchor_note": "One DOI serves 4 nominally distinct reference records in data/lit: sun_2025_ppi_dmds_retention, sun_2025_ppi_dmts_retention, sun_2025_ppi_lenthionine_retention, sun_2025_ppi_vsc_retention. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
       },
       {
         "id": "sun_2025_ppi_dmds_retention",
@@ -499,7 +574,9 @@
         "numeric_reference": {
           "units": "percent_retained",
           "value": 12.0
-        }
+        },
+        "shared_anchor": true,
+        "shared_anchor_note": "One DOI serves 4 nominally distinct reference records in data/lit: sun_2025_ppi_dmds_retention, sun_2025_ppi_dmts_retention, sun_2025_ppi_lenthionine_retention, sun_2025_ppi_vsc_retention. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
       }
     ]
   },

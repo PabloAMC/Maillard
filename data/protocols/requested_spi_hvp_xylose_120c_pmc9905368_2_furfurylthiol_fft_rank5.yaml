@@ -1,0 +1,58 @@
+experiment_id: requested_spi_hvp_xylose_120c_pmc9905368_2_furfurylthiol_fft_rank5
+status: pending_lab
+source_kind: model_requested_experiment
+protein_type: free
+process_state: aqueous_pre_extrusion_model
+matrix_format: null
+conditions:
+  temp_C: 120
+  ph: 6.0
+  water_activity: 0.92
+  time_min: 30
+formulation:
+  precursors:
+    Soy protein isolate hydrolysate:
+      concentration_mM: 50.0
+    L-Cysteine:
+      concentration_mM: 3.0
+    L-Methionine:
+      concentration_mM: 4.0
+    Glycine:
+      concentration_mM: 8.0
+    D-Xylose:
+      concentration_mM: 50.0
+measured_volatiles:
+  2-Furfurylthiol (FFT):
+    conc_ppb: null
+    uncertainty_pct: null
+    _target_role: primary_request_target
+request_metadata:
+  originating_voi_rank: 5
+  voi_score: 5.04656723512394
+  voi_rationale: measured outside 90% CI by 1.14 dex; CI width 3.22 dex; ≈4e+01× ODT
+    (decision_relevance=1.62); critical meaty odorant — multi-factor SIDA closes precursor
+    × matrix gap
+  envelope_miss_log10: 1.141757108134641
+  ci_width_log10: 3.2239072138141047
+  decision_relevance: 1.6232492903979006
+  p5_predicted_ppb: 1.8096099205270017e-05
+  p50_predicted_ppb: 0.0019121437952445803
+  p95_predicted_ppb: 0.030303457480312174
+  previous_measured_ppb: 0.42
+  odour_threshold_ug_per_kg: 0.01
+  suggested_doe_template: blocking_benchmark_gap
+  goal: null
+  budget_label: null
+benchmark_alignment:
+  target_benchmark_id: spi_hvp_xylose_120C_PMC9905368
+  notes: Re-measure to constrain the model envelope at this benchmark.
+analytical_context:
+  headspace_method: HS-SPME-GC-MS
+  quantification_mode: internal_standard_calibrated
+  replicates: 3
+  non_detect_policy: report_lod_and_do_not_backfill
+  internal_standards:
+  - 13C-2-furfurylthiol
+  - hexanal-d12
+  notes: Defaults emitted by next-experiment; lab is expected to confirm or override
+    before returning the intake YAML.

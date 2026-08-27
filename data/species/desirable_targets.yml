@@ -25,7 +25,11 @@ compounds:
     precursor: "D-Ribose (retro-aldol → 1,4-dideoxyosone)"
     pathway: "C — S-Maillard"
     sensory_desc: "Intense meaty, boiled meat, broth-like"
-    odour_threshold_ug_per_kg: 0.0001   # extremely low threshold
+    # AUDIT 2026-08-26: previous value 0.0001 was 50-100x below the commonly cited
+    # aqueous ODT range of 0.005-0.01 ug/kg (Gasser & Grosch 1988 lineage), silently
+    # inflating every MFT odour-activity ratio. Set to 0.007 (the value the README
+    # example table already used); pending human verification against the primary source.
+    odour_threshold_ug_per_kg: 0.007
     priority: "critical"
     notes: "Single most important meaty odorant. Absent in plant matrices without ribose + cysteine."
 
@@ -141,7 +145,12 @@ compounds:
 
   - name: "Bis(2-methyl-3-furyl) disulfide"
     cas: "28588-75-2"
-    smiles: "Cc1cc(SSc2ccoc2C)co1"
+    # AUDIT 2026-08-27 (Wave G1 fix 4): was "Cc1cc(SSc2ccoc2C)co1", a mixed
+    # 3-furyl/4-furyl regioisomer (InChIKey JQDSBCSEZSRHAY) that CONTRADICTED
+    # this record's own inchi field below (OHDFENKFSKIFBJ, the correct
+    # bis(2-methyl-3-furyl) disulfide of CAS 28588-75-2). SMILES corrected to
+    # match the inchi; the reaction network emits the same molecule.
+    smiles: "Cc1c(SSc2ccoc2C)cco1"
     inchi: "InChI=1S/C10H10O2S2/c1-7-9(3-5-11-7)13-14-10-4-6-12-8(10)2/h3-6H,1-2H3"
     precursor: "MFT oxidation / radical recombination"
     pathway: "C — S-Maillard: MFT dimerisation"
@@ -217,7 +226,11 @@ compounds:
 
   - name: "HEMF"
     cas: null
-    smiles: "CCC1=C(O)OC(C)C1=O"
+    # AUDIT 2026-08-27 (Wave G1 fix 4): was "CCC1=C(O)OC(C)C1=O", which puts
+    # the enol OH on the ring-oxygen carbon - not a 3(2H)-furanone at all.
+    # HEMF is 2-ethyl-4-hydroxy-5-methyl-3(2H)-furanone, InChIKey
+    # GWCRPYGYVRXVLI.
+    smiles: "CCC1OC(C)=C(O)C1=O"
     inchi: null
     precursor: "Pentose + Alanine"
     pathway: "B — Furanone Formation"
@@ -228,7 +241,10 @@ compounds:
 
   - name: "DMHF"
     cas: null
-    smiles: "CC1=C(O)OC(C)C1=O"
+    # AUDIT 2026-08-27 (Wave G1 fix 4): was "CC1=C(O)OC(C)C1=O" (enol OH on
+    # the ring-oxygen carbon). DMHF/furaneol is 4-hydroxy-2,5-dimethyl-
+    # 3(2H)-furanone, InChIKey INAXVXBDKKUCGI.
+    smiles: "CC1OC(C)=C(O)C1=O"
     inchi: null
     precursor: "Pentose + Glycine or Alanine"
     pathway: "B — Furanone Formation"

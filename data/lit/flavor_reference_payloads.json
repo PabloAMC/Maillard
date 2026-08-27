@@ -114,7 +114,7 @@
     {
       "id": "hofmann_1997_beef_mft_band",
       "compound": "2-methyl-3-furanthiol",
-      "source_citation": "Hofmann & Schieberle (1997/1998), JAFC",
+      "source_citation": "Kerscher & Grosch (1998), Journal of Agricultural and Food Chemistry 46:1954",
       "doi": "10.1021/jf970892v",
       "matrix_context": "cooked_beef",
       "analytical_method": "SIDA with deuterated internal standards",
@@ -126,12 +126,18 @@
         "type": "band",
         "min": 7.0,
         "max": 28.0
+      },
+      "citation_repair": {
+        "old": "Hofmann & Schieberle (1997/1998), JAFC",
+        "new": "Kerscher & Grosch (1998), Journal of Agricultural and Food Chemistry 46:1954",
+        "date": "2026-08-26",
+        "basis": "CrossRef record for this DOI (title, author list, print volume/issue) checked 2026-08-26: the paper is Kerscher & Grosch (1998), 'Quantification of 2-Methyl-3-furanthiol, 2-Furfurylthiol, 3-Mercapto-2-pentanone, and 2-Mercapto-3-pentanone in Heated Meat' - an exact match to the MFT/FFT beef reference band this anchor supplies, but the authors are not Hofmann & Schieberle."
       }
     },
     {
       "id": "hofmann_1997_beef_fft_band",
       "compound": "2-furfurylthiol",
-      "source_citation": "Hofmann & Schieberle (1997/1998), JAFC",
+      "source_citation": "Kerscher & Grosch (1998), Journal of Agricultural and Food Chemistry 46:1954",
       "doi": "10.1021/jf970892v",
       "matrix_context": "cooked_beef",
       "analytical_method": "SIDA with deuterated internal standards",
@@ -143,6 +149,12 @@
         "type": "band",
         "min": 13.0,
         "max": 42.0
+      },
+      "citation_repair": {
+        "old": "Hofmann & Schieberle (1997/1998), JAFC",
+        "new": "Kerscher & Grosch (1998), Journal of Agricultural and Food Chemistry 46:1954",
+        "date": "2026-08-26",
+        "basis": "CrossRef record for this DOI (title, author list, print volume/issue) checked 2026-08-26: the paper is Kerscher & Grosch (1998), 'Quantification of 2-Methyl-3-furanthiol, 2-Furfurylthiol, 3-Mercapto-2-pentanone, and 2-Mercapto-3-pentanone in Heated Meat' - an exact match to the MFT/FFT beef reference band this anchor supplies, but the authors are not Hofmann & Schieberle."
       }
     },
     {
@@ -159,13 +171,14 @@
       "numeric_band_or_point": {
         "type": "point",
         "value": 41.09
-      }
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 13 nominally distinct reference records in data/lit: hernandez_2023_23_butanedione_direction, hernandez_2023_2_methylbutanal_panel, hernandez_2023_3_methylbutanal_panel, hernandez_2023_acetoin_direction, hernandez_2023_benzaldehyde_panel, hernandez_2023_furfural_ratio_anchor, hernandez_2023_gen_mft_point, hernandez_2023_methional_panel, hernandez_2023_methylpyrazine_pbma_vs_beef, hernandez_2023_pbma_meat_anchor, hernandez_2023_phenylacetaldehyde_panel, hernandez_2023_strecker_subanchors, resconi_2023_pbma_beef_identity_benchmark. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "uspto_ptacts_2023_yeast_extract_mft_oav_band",
       "compound": "2-methyl-3-furanthiol",
-      "source_citation": "USPTO PTACTS (2023 compiled)",
-      "doi": "US9943096B2",
+      "source_citation": "US 9,943,096 B2 (2018), Impossible Foods Inc.",
       "matrix_context": "thiamine_rich_yeast_extract_reaction_flavor",
       "analytical_method": "SIDA and precursor-composition panel",
       "units": "oav",
@@ -178,13 +191,29 @@
         "max": 8000.0
       },
       "thiamine_context": "high_internal_thiamine",
-      "notes": "Family 06 sulfur-positive reference anchor for yeast-extract systems. Use as a high-ceiling meaty target when a formulation includes yeast-extract-like precursor richness instead of forcing those systems onto soy or beef-only sulfur bands."
+      "notes": "Family 06 sulfur-positive reference anchor for yeast-extract systems. Use as a high-ceiling meaty target when a formulation includes yeast-extract-like precursor richness instead of forcing those systems onto soy or beef-only sulfur bands.",
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 2 nominally distinct reference records in data/lit: uspto_ptacts_2023_yeast_extract_anchor, uspto_ptacts_2023_yeast_extract_mft_oav_band. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources.",
+      "patent_number": "US9943096B2",
+      "source_status": "patent_not_peer_reviewed",
+      "source_status_repair": {
+        "old": "US9943096B2 (stored in the doi field)",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "'US9943096B2' is a granted US patent number, not a DOI. Verified 2026-08-26: US 9,943,096 B2, 'Methods and compositions for affecting the flavor and aroma profile of consumables', Impossible Foods Inc (Fraser, Brown, Karr, Holz-Schietinger, Cohn), granted 2018-04-17; it does discuss yeast extract as a precursor source and names 2-methyl-3-furanthiol. Moved out of the doi field so it is not mistaken for a journal citation."
+      },
+      "citation_repair": {
+        "old": "USPTO PTACTS (2023 compiled)",
+        "new": "US 9,943,096 B2 (2018), Impossible Foods Inc.",
+        "date": "2026-08-26",
+        "basis": "'US9943096B2' is a granted US patent number, not a DOI. Verified 2026-08-26: US 9,943,096 B2, 'Methods and compositions for affecting the flavor and aroma profile of consumables', Impossible Foods Inc (Fraser, Brown, Karr, Holz-Schietinger, Cohn), granted 2018-04-17; it does discuss yeast extract as a precursor source and names 2-methyl-3-furanthiol. Moved out of the doi field so it is not mistaken for a journal citation."
+      }
     },
     {
       "id": "tang_2013_thiamine_mft",
       "compound": "2-methyl-3-furanthiol",
-      "source_citation": "Tang et al. (2013)",
-      "doi": "10.1080/17415993.2012.715206",
+      "source_citation": "Tang, Jiang, Yuan & Ho (2013), J. Sulfur Chem. 34:38-47",
+      "doi": "10.1080/17415993.2012.708933",
       "matrix_context": "free_model_system",
       "analytical_method": "SIDA",
       "units": "ppb",
@@ -195,7 +224,20 @@
         "type": "point",
         "value": 0.05
       },
-      "notes": "Compiled MFT table across meat systems and odor detection threshold (ODT) parameters."
+      "notes": "Compiled MFT table across meat systems and odor detection threshold (ODT) parameters.",
+      "doi_repair": {
+        "old": "10.1080/17415993.2012.715206",
+        "new": "10.1080/17415993.2012.708933",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery high confidence: CrossRef author+topic search (Tang; thiamine, 2-methyl-3-furanthiol, model system) returned this record, and I re-fetched it by DOI to confirm: same Taylor & Francis journal and same DOI stem as the repo's dead identifier (10.1080/17415993.2012.708933 vs. the corrupted ...715206), volume 34 = the 2013 issue. It is the review of MFT flavour chemistry covering thiamine-degradation routes and MFT odour thresholds, exactly what the repo entry claims to draw on."
+      },
+      "citation_repair": {
+        "old": "Tang et al. (2013)",
+        "new": "Tang, Jiang, Yuan & Ho (2013), J. Sulfur Chem. 34:38-47",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery high confidence: CrossRef author+topic search (Tang; thiamine, 2-methyl-3-furanthiol, model system) returned this record, and I re-fetched it by DOI to confirm: same Taylor & Francis journal and same DOI stem as the repo's dead identifier (10.1080/17415993.2012.708933 vs. the corrupted ...715206), volume 34 = the 2013 issue. It is the review of MFT flavour chemistry covering thiamine-degradation routes and MFT odour thresholds, exactly what the repo entry claims to draw on."
+      },
+      "citation_caveat": "This is a review, so the 'MFT ODT 0.05 ppb' value it quotes is secondary; I could not open the full text to confirm 0.05 ppb specifically (commonly cited primary values for MFT in water are ~0.007-0.01 ppb, Buttery). Verify the threshold against a primary source before relying on it. Also note the print year is 2013 while CrossRef stamps the online date as 2012."
     },
     {
       "id": "wang_2023_mft_retention",
@@ -214,13 +256,14 @@
         "max": 42.0,
         "condition": "various protein matrices"
       },
-      "notes": "MFT binding to various proteins: 15-42% retained; protein-type and concentration dependent."
+      "notes": "MFT binding to various proteins: 15-42% retained; protein-type and concentration dependent.",
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 2 nominally distinct reference records in data/lit: wang_2023_mft_retention, wang_2023_mft_retention_payload. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "fadel_2015_mft_retention",
       "compound": "2-methyl-3-furanthiol",
       "source_citation": "Fadel et al. (2015)",
-      "doi": "10.1016/j.foodchem.2015.00000",
       "matrix_context": "encapsulated_meat_flavour",
       "analytical_method": "HS-SPME-GC-MS",
       "units": "ug_per_g",
@@ -233,7 +276,14 @@
         "max": 2.8,
         "condition": "encapsulated meat-like flavour"
       },
-      "notes": "MFT 0.5-2.8 ug/g in encapsulated meat-like flavour system."
+      "notes": "MFT 0.5-2.8 ug/g in encapsulated meat-like flavour system.",
+      "source_status": "no_verifiable_source",
+      "source_status_repair": {
+        "old": "10.1016/j.foodchem.2015.00000",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "The dead DOI 10.1016/j.foodchem.2015.00000 is a placeholder pattern (all-zero article number), i.e. never a real identifier. CrossRef searches for soy-protein-isolate binding/retention of 2-methyl-3-furanthiol with pH and HS-SPME, and an author sweep of Fadel in Food Chemistry 2013-2017, return nothing reporting a percentage retention of MFT by soy isolate at pH 4.0 / 40 C. I could find no publication containing the '47.78% retention' anchor. | Two real 2015 Fadel papers exist and are the plausible confabulation seeds, but neither supports the claim: Lotfy, Fadel, El-Ghorab & Shaheen (2015), Food Chem. 187:7-13, 10.1016/j.foodchem.2015.04.027 (encapsulated beef-like flavourings from mushroom-protein hydrolysate - wrong matrix); and Fadel et al. (2015), Int. J. Food Process. Technol. 2:17-25, 10.15379/2408-9826.2015.02.01.3 (encapsulated meat-like flavouring from acid-hydrolysed soybean protein, in which MFT is the major fresh-sample compound and declines over 6 months' storage - but it is a gum-arabic encapsulation storage study with no pH series, no 40 C isotherm and no 47.78% figure)."
+      }
     },
     {
       "id": "mottram_2001_bmfd_retention",
@@ -251,13 +301,15 @@
         "value": 0.18,
         "condition": "irreversibly bound fraction"
       },
-      "notes": "BMFD irreversibly binds to protein; 0.18 ug/g residual after extensive washing."
+      "notes": "BMFD irreversibly binds to protein; 0.18 ug/g residual after extensive washing.",
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 2 nominally distinct reference records in data/lit: mottram_2001_bmfd_retention, mottram_2001_bmfd_retention_payload. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "siripitakpong_2026_fft_retention",
       "compound": "2-furfurylthiol",
-      "source_citation": "Sharma et al. (2025)",
-      "doi": "10.1016/j.foodchem.2025.145815",
+      "source_citation": "Siripitakpong, Wongprasert, Rungrotmongkol & Suppavorasatit (2026), Food Chem. X 34:103712",
+      "doi": "10.1016/j.fochx.2026.103712",
       "matrix_context": "deamidated_soy_protein",
       "analytical_method": "HS-SPME-GC-MS",
       "units": "percent_retained",
@@ -269,7 +321,20 @@
         "value": 28.0,
         "condition": "deamidated SPI"
       },
-      "notes": "FFT 28% retained in deamidated SPI vs 38% in native; deamidation reduces binding."
+      "notes": "FFT 28% retained in deamidated SPI vs 38% in native; deamidation reduces binding.",
+      "doi_repair": {
+        "old": "10.1016/j.foodchem.2025.145815",
+        "new": "10.1016/j.fochx.2026.103712",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery high confidence: CrossRef author search 'Siripitakpong' returns exactly one 2026 paper, and its Europe PMC full text (PMC12966641) contains the repo's three anchors verbatim: 'The delta-G values observed for vanillin bound to PPI are -9.05, -9.06, and -9.72 kcal/mol at 5 C, 15 C, and 25 C' (so -9.72 kcal/mol at 25.0 C), with all binding experiments in 0.05 M phosphate buffer at pH 7.0, on pea protein isolate, supported by AutoDock Vina molecular docking. This is unambiguously the paper the entry was built from."
+      },
+      "citation_repair": {
+        "old": "Sharma et al. (2025)",
+        "new": "Siripitakpong, Wongprasert, Rungrotmongkol & Suppavorasatit (2026), Food Chem. X 34:103712",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery high confidence: CrossRef author search 'Siripitakpong' returns exactly one 2026 paper, and its Europe PMC full text (PMC12966641) contains the repo's three anchors verbatim: 'The delta-G values observed for vanillin bound to PPI are -9.05, -9.06, and -9.72 kcal/mol at 5 C, 15 C, and 25 C' (so -9.72 kcal/mol at 25.0 C), with all binding experiments in 0.05 M phosphate buffer at pH 7.0, on pea protein isolate, supported by AutoDock Vina molecular docking. This is unambiguously the paper the entry was built from."
+      },
+      "citation_caveat": "IMPORTANT: the ligand is VANILLIN, not 2-furfurylthiol - the word 'furfuryl' does not occur anywhere in the paper. The entry's compounds_supported ('2-furfurylthiol') is therefore wrong and the -9.72 kcal/mol value must not be used as an FFT binding energy. Also note -9.72 kcal/mol is the thermodynamic delta-G from binding isotherms, not the docking score (the docking affinities are -3.9689 kcal/mol for PPI and -3.7660 for deamidated PPI), so the entry's note 'obtained via molecular docking and homology modeling' is also inaccurate."
     }
   ],
   "strecker_reference_anchors": [
@@ -293,7 +358,9 @@
           "impossible": 20.74,
           "gen": 15.56
         }
-      }
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 13 nominally distinct reference records in data/lit: hernandez_2023_23_butanedione_direction, hernandez_2023_2_methylbutanal_panel, hernandez_2023_3_methylbutanal_panel, hernandez_2023_acetoin_direction, hernandez_2023_benzaldehyde_panel, hernandez_2023_furfural_ratio_anchor, hernandez_2023_gen_mft_point, hernandez_2023_methional_panel, hernandez_2023_methylpyrazine_pbma_vs_beef, hernandez_2023_pbma_meat_anchor, hernandez_2023_phenylacetaldehyde_panel, hernandez_2023_strecker_subanchors, resconi_2023_pbma_beef_identity_benchmark. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "hernandez_2023_methional_panel",
@@ -315,7 +382,9 @@
           "impossible": 4.89,
           "gen": 3.77
         }
-      }
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 13 nominally distinct reference records in data/lit: hernandez_2023_23_butanedione_direction, hernandez_2023_2_methylbutanal_panel, hernandez_2023_3_methylbutanal_panel, hernandez_2023_acetoin_direction, hernandez_2023_benzaldehyde_panel, hernandez_2023_furfural_ratio_anchor, hernandez_2023_gen_mft_point, hernandez_2023_methional_panel, hernandez_2023_methylpyrazine_pbma_vs_beef, hernandez_2023_pbma_meat_anchor, hernandez_2023_phenylacetaldehyde_panel, hernandez_2023_strecker_subanchors, resconi_2023_pbma_beef_identity_benchmark. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "hernandez_2023_3_methylbutanal_panel",
@@ -337,7 +406,9 @@
           "impossible": 16.22,
           "gen": 16.26
         }
-      }
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 13 nominally distinct reference records in data/lit: hernandez_2023_23_butanedione_direction, hernandez_2023_2_methylbutanal_panel, hernandez_2023_3_methylbutanal_panel, hernandez_2023_acetoin_direction, hernandez_2023_benzaldehyde_panel, hernandez_2023_furfural_ratio_anchor, hernandez_2023_gen_mft_point, hernandez_2023_methional_panel, hernandez_2023_methylpyrazine_pbma_vs_beef, hernandez_2023_pbma_meat_anchor, hernandez_2023_phenylacetaldehyde_panel, hernandez_2023_strecker_subanchors, resconi_2023_pbma_beef_identity_benchmark. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "hernandez_2023_phenylacetaldehyde_panel",
@@ -359,7 +430,9 @@
           "impossible": 18.21,
           "gen": 10.1
         }
-      }
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 13 nominally distinct reference records in data/lit: hernandez_2023_23_butanedione_direction, hernandez_2023_2_methylbutanal_panel, hernandez_2023_3_methylbutanal_panel, hernandez_2023_acetoin_direction, hernandez_2023_benzaldehyde_panel, hernandez_2023_furfural_ratio_anchor, hernandez_2023_gen_mft_point, hernandez_2023_methional_panel, hernandez_2023_methylpyrazine_pbma_vs_beef, hernandez_2023_pbma_meat_anchor, hernandez_2023_phenylacetaldehyde_panel, hernandez_2023_strecker_subanchors, resconi_2023_pbma_beef_identity_benchmark. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "hernandez_2023_benzaldehyde_panel",
@@ -381,7 +454,9 @@
           "impossible": 164.42,
           "gen": 89.35
         }
-      }
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 13 nominally distinct reference records in data/lit: hernandez_2023_23_butanedione_direction, hernandez_2023_2_methylbutanal_panel, hernandez_2023_3_methylbutanal_panel, hernandez_2023_acetoin_direction, hernandez_2023_benzaldehyde_panel, hernandez_2023_furfural_ratio_anchor, hernandez_2023_gen_mft_point, hernandez_2023_methional_panel, hernandez_2023_methylpyrazine_pbma_vs_beef, hernandez_2023_pbma_meat_anchor, hernandez_2023_phenylacetaldehyde_panel, hernandez_2023_strecker_subanchors, resconi_2023_pbma_beef_identity_benchmark. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "pmc12155365_sunflower_2_methylbutanal_fd_point",
@@ -437,9 +512,11 @@
       "numeric_band_or_point": {
         "type": "point",
         "value": 38.0,
-        "condition": "~150°C Strecker yield from methionine"
+        "condition": "~150\u00b0C Strecker yield from methionine"
       },
-      "notes": "Mottram (1998) 'Flavour formation in meat and meat products: a review', Food Chemistry 62(4):415-424. Reports ~38 mol% methional Strecker yield from methionine in model systems. This replaces the ghost mottram_wedzicha_1990_methional entry with the correct verifiable DOI. DOI confirmed via Crossref."
+      "notes": "Mottram (1998) 'Flavour formation in meat and meat products: a review', Food Chemistry 62(4):415-424. Reports ~38 mol% methional Strecker yield from methionine in model systems. This replaces the ghost mottram_wedzicha_1990_methional entry with the correct verifiable DOI. DOI confirmed via Crossref.",
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 2 nominally distinct reference records in data/lit: mottram_1998_meat_flavour_review, mottram_1998_meat_flavour_strecker_v1. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     }
   ],
   "pyrazine_reference_anchors": [
@@ -464,7 +541,9 @@
           24.0,
           39.0
         ]
-      }
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 13 nominally distinct reference records in data/lit: hernandez_2023_23_butanedione_direction, hernandez_2023_2_methylbutanal_panel, hernandez_2023_3_methylbutanal_panel, hernandez_2023_acetoin_direction, hernandez_2023_benzaldehyde_panel, hernandez_2023_furfural_ratio_anchor, hernandez_2023_gen_mft_point, hernandez_2023_methional_panel, hernandez_2023_methylpyrazine_pbma_vs_beef, hernandez_2023_pbma_meat_anchor, hernandez_2023_phenylacetaldehyde_panel, hernandez_2023_strecker_subanchors, resconi_2023_pbma_beef_identity_benchmark. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "laemont_2023_pyrazine_ph_direction",
@@ -485,7 +564,7 @@
     {
       "id": "arsa_2022_pyrazine_pH9_optimum",
       "compound": "2-ethyl-3,5-dimethylpyrazine",
-      "source_citation": "Arsa & Theerakulkait (2022), J Food Science and Technology",
+      "source_citation": "Arsa & Puechkamutr (2022), Journal of Food Science and Technology 59:890",
       "doi": "10.1007/s13197-021-05084-7",
       "matrix_context": "rice_bran_hydrolysate_plus_fructose",
       "analytical_method": "HS-SPME-GC-MS with odor activity value analysis",
@@ -496,6 +575,12 @@
       "numeric_band_or_point": {
         "type": "point",
         "value": 26.26
+      },
+      "citation_repair": {
+        "old": "Arsa & Theerakulkait (2022), J Food Science and Technology",
+        "new": "Arsa & Puechkamutr (2022), Journal of Food Science and Technology 59:890",
+        "date": "2026-08-26",
+        "basis": "CrossRef record for this DOI (title, author list, print volume/issue) checked 2026-08-26: the paper is Arsa & Puechkamutr, 'Pyrazine yield and functional properties of rice bran protein hydrolysate formed by the Maillard reaction at various pH' - right subject, but the second author is Puechkamutr, not Theerakulkait. Print issue is 59(3), 2022, so the cited year stands."
       }
     },
     {
@@ -535,7 +620,9 @@
           1093.0
         ],
         "preferred_ratio": 1.0
-      }
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 13 nominally distinct reference records in data/lit: hernandez_2023_23_butanedione_direction, hernandez_2023_2_methylbutanal_panel, hernandez_2023_3_methylbutanal_panel, hernandez_2023_acetoin_direction, hernandez_2023_benzaldehyde_panel, hernandez_2023_furfural_ratio_anchor, hernandez_2023_gen_mft_point, hernandez_2023_methional_panel, hernandez_2023_methylpyrazine_pbma_vs_beef, hernandez_2023_pbma_meat_anchor, hernandez_2023_phenylacetaldehyde_panel, hernandez_2023_strecker_subanchors, resconi_2023_pbma_beef_identity_benchmark. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "hernandez_2023_23_butanedione_direction",
@@ -551,7 +638,9 @@
       "numeric_band_or_point": {
         "type": "directional_only",
         "value": "higher in real meat than in PBMA"
-      }
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 13 nominally distinct reference records in data/lit: hernandez_2023_23_butanedione_direction, hernandez_2023_2_methylbutanal_panel, hernandez_2023_3_methylbutanal_panel, hernandez_2023_acetoin_direction, hernandez_2023_benzaldehyde_panel, hernandez_2023_furfural_ratio_anchor, hernandez_2023_gen_mft_point, hernandez_2023_methional_panel, hernandez_2023_methylpyrazine_pbma_vs_beef, hernandez_2023_pbma_meat_anchor, hernandez_2023_phenylacetaldehyde_panel, hernandez_2023_strecker_subanchors, resconi_2023_pbma_beef_identity_benchmark. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "hernandez_2023_acetoin_direction",
@@ -567,7 +656,9 @@
       "numeric_band_or_point": {
         "type": "directional_only",
         "value": "higher in real meat than in PBMA"
-      }
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 13 nominally distinct reference records in data/lit: hernandez_2023_23_butanedione_direction, hernandez_2023_2_methylbutanal_panel, hernandez_2023_3_methylbutanal_panel, hernandez_2023_acetoin_direction, hernandez_2023_benzaldehyde_panel, hernandez_2023_furfural_ratio_anchor, hernandez_2023_gen_mft_point, hernandez_2023_methional_panel, hernandez_2023_methylpyrazine_pbma_vs_beef, hernandez_2023_pbma_meat_anchor, hernandez_2023_phenylacetaldehyde_panel, hernandez_2023_strecker_subanchors, resconi_2023_pbma_beef_identity_benchmark. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     }
   ],
   "furanone_reference_anchors": [
@@ -607,7 +698,6 @@
       "id": "blank_grosch_1991_beef_hdmf_band",
       "compound": "HDMF",
       "source_citation": "Blank & Grosch (1991)",
-      "doi": "10.1021/jf00009a012",
       "matrix_context": "boiled_beef_100c_1h",
       "analytical_method": "SAFE, GC-MS/O, AEDA, and SIDA with [2H4]-HDMF internal standard",
       "units": "ug_per_kg",
@@ -626,13 +716,19 @@
           "oav_max": 11.2,
           "fd_factor": 256.0
         }
+      },
+      "source_status": "no_verifiable_source",
+      "source_status_repair": {
+        "old": "10.1021/jf00009a012",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "The backlog page reference 'JAFC 39:1207' is fabricated: I enumerated all CrossRef records for JAFC volume 39 pages 1195-1220 and p.1207 falls inside Mirvish et al., 'N-Nitrosoatrazine: synthesis, kinetics of formation...', JAFC 39:1205-1210 (10.1021/jf00007a002) - no HDMF paper occupies that page. CrossRef author search for Blank+Grosch 1990-1993 returns only 'Evaluation of Potent Odorants in Dill Seed and Dill Herb by Aroma Extract Dilution Analysis', J. Food Sci. 56:63-67 (10.1111/j.1365-2621.1991.tb07976.x) - not HDMF, not boiled beef. Neither the SLR anchors ('HDMF ODT 0.003 ppb', '78% from ribose+glucose') nor the backlog anchors ('HDMF in boiled beef 28-67 ug/kg, OAV 4.7-11.2') can be tied to any Blank & Grosch 1991 publication. | Nearest genuine Blank sources on HDMF, neither of which is 1991 nor supplies these numbers: Blank & Fay (1996), 'Formation of 4-Hydroxy-2,5-dimethyl-3(2H)-furanone and 4-Hydroxy-2(or 5)-ethyl-5(or 2)-methyl-3(2H)-furanone through Maillard Reaction Based on Pentose Sugars', JAFC 44:531-536, doi:10.1021/jf950439o; and Blank, Fay, Lakner & Schlosser (1997), JAFC 45:2642-2648, doi:10.1021/jf960997i (SIDA quantification of HDMF/HEMF in pentose Maillard model systems). Do not attach the 0.003 ppb threshold to either without reading them."
       }
     },
     {
       "id": "hauck_tressl_1999_hdmf_non_amino",
       "compound": "HDMF",
       "source_citation": "Hauck & Tressl (1999)",
-      "doi": "10.1021/bk-1999-0740.ch012",
       "matrix_context": "sugar_pyrolysis_without_amino_acids",
       "analytical_method": "SIDA",
       "units": "ug_per_g",
@@ -649,15 +745,22 @@
         "hdmf_from_mgo_self_condensation_ug_per_g": 2.9,
         "reaction_temp_C": 140.0
       },
-      "notes": "Quantifies HDMF from iso-oligosaccharides (3.8 ug/g) and maltose (1.4 ug/g) at 140 C without amino acids."
+      "notes": "Quantifies HDMF from iso-oligosaccharides (3.8 ug/g) and maltose (1.4 ug/g) at 140 C without amino acids.",
+      "source_status": "no_verifiable_source",
+      "source_status_repair": {
+        "old": "10.1021/bk-1999-0740.ch012",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "The DOI stem is impossible: ACS Symposium Series volume 740 is 'Surfactant-Based Separations' (CrossRef 10.1021/bk-2000-0740.ch001, Scamehorn & Harwell), not a flavour/HDMF volume, and no 10.1021/bk-1999-0740.* chapter exists. 'Hauck & Tressl' is a chimera of two unrelated groups: Tobias Hauck published on HDMF with Wilfried Schwab (e.g. Hauck, Landmann, Raab, Bruhlmann & Schwab (2002), Carbohydr. Res. 337:1185-1191, 10.1016/s0008-6215(02)00121-0), while Roland Tressl's 1999 output is 'Heat Generated Flavors and Precursors' with Rewicki (Flavor Chemistry, 10.1007/978-1-4615-4693-1_26). Neither reports HDMF yields of 3.8 / 1.4 / 2.9 ug/g from iso-oligosaccharides, maltose and methylglyoxal self-condensation at 140 C; repeated CrossRef searches on those terms find nothing. | If a non-amino-acid HDMF-formation anchor is needed, Hauck et al. (2002) Carbohydr. Res. 337:1185-1191 (10.1016/s0008-6215(02)00121-0) genuinely shows chemical HDMF formation from D-fructose-1,6-diphosphate without amino acids - but from a phosphorylated sugar, not from oligosaccharides/maltose, and without the repo's ug/g values."
+      }
     }
   ],
   "off_note_reference_anchors": [
     {
       "id": "bi_2020_raw_pea_hexanal_point",
       "compound": "hexanal",
-      "source_citation": "Bi et al. (2020), J. Agric. Food Chem. 68:2718-2727",
-      "doi": "10.1021/acs.jafc.9b07711",
+      "source_citation": "Yu et al. (2020), JAFC 68:1714-1724",
+      "doi": "10.1021/acs.jafc.0c00200",
       "matrix_context": "raw_pea_flour",
       "analytical_method": "HS-SPME-GC-SIM with 2,4,6-trimethylpyridine internal standard",
       "units": "ug_per_kg",
@@ -667,13 +770,28 @@
       "numeric_band_or_point": {
         "type": "point",
         "value": 1260.0
-      }
+      },
+      "doi_repair": {
+        "old": "10.1021/acs.jafc.9b07711",
+        "new": "10.1021/acs.jafc.0c00200",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery high confidence: CrossRef search for 'epigallocatechin gallate trapping deoxyosone xylose alanine Maillard' surfaced the SI record 10.1021/acs.jafc.0c00200.s001; the parent record and the PubMed abstract (PMID 31957424) confirm both of the repo's numeric anchors exactly: EGCG lowers the activation energy for xylose/alanine -> ARP conversion 'from 77.8 to 62.8 kJ/mol' (= 15.0 kJ/mol reduction) and improves the ARP (N-(1-deoxy-D-xylulos-1-yl)alanine) yield 'from 2 to 95%'. The matrix (xylose/alanine model system), the compound, and the EGCG-trapping-of-deoxyosones mechanism all match the SLR entry."
+      },
+      "citation_repair": {
+        "old": "Bi et al. (2020), J. Agric. Food Chem. 68:2718-2727",
+        "new": "Yu et al. (2020), JAFC 68:1714-1724",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery high confidence: CrossRef search for 'epigallocatechin gallate trapping deoxyosone xylose alanine Maillard' surfaced the SI record 10.1021/acs.jafc.0c00200.s001; the parent record and the PubMed abstract (PMID 31957424) confirm both of the repo's numeric anchors exactly: EGCG lowers the activation energy for xylose/alanine -> ARP conversion 'from 77.8 to 62.8 kJ/mol' (= 15.0 kJ/mol reduction) and improves the ARP (N-(1-deoxy-D-xylulos-1-yl)alanine) yield 'from 2 to 95%'. The matrix (xylose/alanine model system), the compound, and the EGCG-trapping-of-deoxyosones mechanism all match the SLR entry."
+      },
+      "citation_caveat": "The repo's citation string 'Bi et al. (2020)' is wrong - the true first author is Junhe Yu. 10.1021/acs.jafc.9b07711 (Bi et al., raw/roasted peas) should stay attached only to the pea hexanal baseline and external-validation entries.",
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 4 nominally distinct reference records in data/lit: bi_2020_raw_pea_hexanal_point, bi_2020_roasted_pea_hexanal_point, jafc_2020_egcg_deoxyosone_trapping, liu_2020_egcg_arp_kinetics. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "bi_2020_roasted_pea_hexanal_point",
       "compound": "hexanal",
-      "source_citation": "Bi et al. (2020), J. Agric. Food Chem. 68:2718-2727",
-      "doi": "10.1021/acs.jafc.9b07711",
+      "source_citation": "Yu et al. (2020), JAFC 68:1714-1724",
+      "doi": "10.1021/acs.jafc.0c00200",
       "matrix_context": "roasted_pea_flour_160c_30min",
       "analytical_method": "HS-SPME-GC-SIM with 2,4,6-trimethylpyridine internal standard",
       "units": "ug_per_kg",
@@ -683,13 +801,27 @@
       "numeric_band_or_point": {
         "type": "point",
         "value": 324.0
-      }
+      },
+      "doi_repair": {
+        "old": "10.1021/acs.jafc.9b07711",
+        "new": "10.1021/acs.jafc.0c00200",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery high confidence: CrossRef search for 'epigallocatechin gallate trapping deoxyosone xylose alanine Maillard' surfaced the SI record 10.1021/acs.jafc.0c00200.s001; the parent record and the PubMed abstract (PMID 31957424) confirm both of the repo's numeric anchors exactly: EGCG lowers the activation energy for xylose/alanine -> ARP conversion 'from 77.8 to 62.8 kJ/mol' (= 15.0 kJ/mol reduction) and improves the ARP (N-(1-deoxy-D-xylulos-1-yl)alanine) yield 'from 2 to 95%'. The matrix (xylose/alanine model system), the compound, and the EGCG-trapping-of-deoxyosones mechanism all match the SLR entry."
+      },
+      "citation_repair": {
+        "old": "Bi et al. (2020), J. Agric. Food Chem. 68:2718-2727",
+        "new": "Yu et al. (2020), JAFC 68:1714-1724",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery high confidence: CrossRef search for 'epigallocatechin gallate trapping deoxyosone xylose alanine Maillard' surfaced the SI record 10.1021/acs.jafc.0c00200.s001; the parent record and the PubMed abstract (PMID 31957424) confirm both of the repo's numeric anchors exactly: EGCG lowers the activation energy for xylose/alanine -> ARP conversion 'from 77.8 to 62.8 kJ/mol' (= 15.0 kJ/mol reduction) and improves the ARP (N-(1-deoxy-D-xylulos-1-yl)alanine) yield 'from 2 to 95%'. The matrix (xylose/alanine model system), the compound, and the EGCG-trapping-of-deoxyosones mechanism all match the SLR entry."
+      },
+      "citation_caveat": "The repo's citation string 'Bi et al. (2020)' is wrong - the true first author is Junhe Yu. 10.1021/acs.jafc.9b07711 (Bi et al., raw/roasted peas) should stay attached only to the pea hexanal baseline and external-validation entries.",
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 4 nominally distinct reference records in data/lit: bi_2020_raw_pea_hexanal_point, bi_2020_roasted_pea_hexanal_point, jafc_2020_egcg_deoxyosone_trapping, liu_2020_egcg_arp_kinetics. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "liu_2023_ppi_hexanal_band",
       "compound": "hexanal",
       "source_citation": "Liu, Y. (2023 thesis)",
-      "doi": "LiuThesis2023",
       "matrix_context": "native_pea_protein_isolate_aqueous_slurry",
       "analytical_method": "HS-SPME-GC-MS with internal standard plus GC-O confirmation across commercial PPI lots",
       "units": "ppb",
@@ -706,13 +838,20 @@
           "oav_min": 3.0,
           "oav_max": 40.0
         }
-      }
+      },
+      "source_status": "identifier_unavailable",
+      "source_status_repair": {
+        "old": "LiuThesis2023",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "'LiuThesis2023' is not a DOI. The work is Liu, Y. (2023), MS/PhD thesis, North Carolina State University (NC State Institutional Repository), which carries no DOI. The peer-reviewed version of the same dataset is Liu, Cadwallader & Drake (2023), 'Identification of predominant aroma components of dried pea protein concentrates and isolates', Food Chemistry 406:134998, 10.1016/j.foodchem.2022.134998 (CrossRef verified) - already anchored separately in this repo."
+      },
+      "related_published_doi": "10.1016/j.foodchem.2022.134998"
     },
     {
       "id": "liu_2023_ppi_nonanal_band",
       "compound": "nonanal",
       "source_citation": "Liu, Y. (2023 thesis)",
-      "doi": "LiuThesis2023",
       "matrix_context": "native_pea_protein_isolate_aqueous_slurry",
       "analytical_method": "HS-SPME-GC-MS with internal standard plus GC-O confirmation across commercial PPI lots",
       "units": "ppb",
@@ -729,13 +868,20 @@
           "oav_min": 5.0,
           "oav_max": 50.0
         }
-      }
+      },
+      "source_status": "identifier_unavailable",
+      "source_status_repair": {
+        "old": "LiuThesis2023",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "'LiuThesis2023' is not a DOI. The work is Liu, Y. (2023), MS/PhD thesis, North Carolina State University (NC State Institutional Repository), which carries no DOI. The peer-reviewed version of the same dataset is Liu, Cadwallader & Drake (2023), 'Identification of predominant aroma components of dried pea protein concentrates and isolates', Food Chemistry 406:134998, 10.1016/j.foodchem.2022.134998 (CrossRef verified) - already anchored separately in this repo."
+      },
+      "related_published_doi": "10.1016/j.foodchem.2022.134998"
     },
     {
       "id": "liu_2023_ppi_heptadienal_band",
       "compound": "(E,E)-2,4-heptadienal",
       "source_citation": "Liu, Y. (2023 thesis)",
-      "doi": "LiuThesis2023",
       "matrix_context": "native_pea_protein_isolate_aqueous_slurry",
       "analytical_method": "HS-SPME-GC-MS with internal standard plus GC-O confirmation across commercial PPI lots",
       "units": "ppb",
@@ -752,13 +898,20 @@
           "oav_min": 7.0,
           "oav_max": 114.0
         }
-      }
+      },
+      "source_status": "identifier_unavailable",
+      "source_status_repair": {
+        "old": "LiuThesis2023",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "'LiuThesis2023' is not a DOI. The work is Liu, Y. (2023), MS/PhD thesis, North Carolina State University (NC State Institutional Repository), which carries no DOI. The peer-reviewed version of the same dataset is Liu, Cadwallader & Drake (2023), 'Identification of predominant aroma components of dried pea protein concentrates and isolates', Food Chemistry 406:134998, 10.1016/j.foodchem.2022.134998 (CrossRef verified) - already anchored separately in this repo."
+      },
+      "related_published_doi": "10.1016/j.foodchem.2022.134998"
     },
     {
       "id": "liu_2023_ppi_ibmp_band",
       "compound": "3-isobutyl-2-methoxypyrazine",
       "source_citation": "Liu, Y. (2023 thesis)",
-      "doi": "LiuThesis2023",
       "matrix_context": "native_pea_protein_isolate_aqueous_slurry",
       "analytical_method": "HS-SPME-GC-MS with internal standard plus GC-O confirmation across commercial PPI lots",
       "units": "ppb",
@@ -775,7 +928,15 @@
           "odor_detection_threshold_ppb": 0.002,
           "oav_floor": 1.0
         }
-      }
+      },
+      "source_status": "identifier_unavailable",
+      "source_status_repair": {
+        "old": "LiuThesis2023",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "'LiuThesis2023' is not a DOI. The work is Liu, Y. (2023), MS/PhD thesis, North Carolina State University (NC State Institutional Repository), which carries no DOI. The peer-reviewed version of the same dataset is Liu, Cadwallader & Drake (2023), 'Identification of predominant aroma components of dried pea protein concentrates and isolates', Food Chemistry 406:134998, 10.1016/j.foodchem.2022.134998 (CrossRef verified) - already anchored separately in this repo."
+      },
+      "related_published_doi": "10.1016/j.foodchem.2022.134998"
     },
     {
       "id": "pmc11049305_spirulina_beta_ionone_oav_floor",
@@ -864,7 +1025,9 @@
       "numeric_band_or_point": {
         "type": "point",
         "value": 605.6
-      }
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 6 nominally distinct reference records in data/lit: li_2026_spi_wg_hme_1_hexanol_control_point, li_2026_spi_wg_hme_2_pentylfuran_control_point, li_2026_spi_wg_hme_heptanal_control_point, li_2026_spi_wg_hme_hexanal_control_point, li_2026_spi_wg_hme_nonanal_control_point, pmc_2026_hme_hexanal_baseline. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "li_2026_spi_wg_hme_heptanal_control_point",
@@ -880,7 +1043,9 @@
       "numeric_band_or_point": {
         "type": "point",
         "value": 89.8
-      }
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 6 nominally distinct reference records in data/lit: li_2026_spi_wg_hme_1_hexanol_control_point, li_2026_spi_wg_hme_2_pentylfuran_control_point, li_2026_spi_wg_hme_heptanal_control_point, li_2026_spi_wg_hme_hexanal_control_point, li_2026_spi_wg_hme_nonanal_control_point, pmc_2026_hme_hexanal_baseline. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "li_2026_spi_wg_hme_nonanal_control_point",
@@ -896,7 +1061,9 @@
       "numeric_band_or_point": {
         "type": "point",
         "value": 29.42
-      }
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 6 nominally distinct reference records in data/lit: li_2026_spi_wg_hme_1_hexanol_control_point, li_2026_spi_wg_hme_2_pentylfuran_control_point, li_2026_spi_wg_hme_heptanal_control_point, li_2026_spi_wg_hme_hexanal_control_point, li_2026_spi_wg_hme_nonanal_control_point, pmc_2026_hme_hexanal_baseline. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "li_2026_spi_wg_hme_1_hexanol_control_point",
@@ -912,7 +1079,9 @@
       "numeric_band_or_point": {
         "type": "point",
         "value": 20.04
-      }
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 6 nominally distinct reference records in data/lit: li_2026_spi_wg_hme_1_hexanol_control_point, li_2026_spi_wg_hme_2_pentylfuran_control_point, li_2026_spi_wg_hme_heptanal_control_point, li_2026_spi_wg_hme_hexanal_control_point, li_2026_spi_wg_hme_nonanal_control_point, pmc_2026_hme_hexanal_baseline. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "li_2026_spi_wg_hme_2_pentylfuran_control_point",
@@ -928,13 +1097,15 @@
       "numeric_band_or_point": {
         "type": "point",
         "value": 221.51
-      }
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 6 nominally distinct reference records in data/lit: li_2026_spi_wg_hme_1_hexanol_control_point, li_2026_spi_wg_hme_2_pentylfuran_control_point, li_2026_spi_wg_hme_heptanal_control_point, li_2026_spi_wg_hme_hexanal_control_point, li_2026_spi_wg_hme_nonanal_control_point, pmc_2026_hme_hexanal_baseline. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "wang_2022_lab_hexanal_cleanup_oav_target",
       "compound": "hexanal",
-      "source_citation": "Wang et al. (2022), PMC9751450",
-      "doi": "10.1016/j.lwt.2022.113009",
+      "source_citation": "Tao et al. (2022), Front. Microbiol. 13:1070773",
+      "doi": "10.3389/fmicb.2022.1070773",
       "matrix_context": "lab_fermented_plant_protein",
       "analytical_method": "SIDA-guided volatile profiling with ADH/ALDH mechanism confirmation and sensory panel",
       "units": "oav",
@@ -948,13 +1119,25 @@
           "residual_hexanal_oav": 0.47,
           "hexanal_depletion_fraction": 0.957
         }
-      }
+      },
+      "doi_repair": {
+        "old": "10.1016/j.lwt.2022.113009",
+        "new": "10.3389/fmicb.2022.1070773",
+        "date": "2026-08-26",
+        "basis": "The stored DOI 10.1016/j.lwt.2022.113009 does not resolve. The PMCID recorded in the citation string (PMC9751450) resolves via the NCBI ID converter to 10.3389/fmicb.2022.1070773 = Tao, Zhang, Duan, Xiao & Liu (2022), 'Mechanism and application of fermentation to remove beany flavor from plant-based meat analogs: A mini review', Front. Microbiol. 13:1070773 (CrossRef verified) - the LAB beany-flavour removal source this anchor is about, but not 'Wang et al. (2022)' and not LWT."
+      },
+      "citation_repair": {
+        "old": "Wang et al. (2022), PMC9751450",
+        "new": "Tao et al. (2022), Front. Microbiol. 13:1070773",
+        "date": "2026-08-26",
+        "basis": "The stored DOI 10.1016/j.lwt.2022.113009 does not resolve. The PMCID recorded in the citation string (PMC9751450) resolves via the NCBI ID converter to 10.3389/fmicb.2022.1070773 = Tao, Zhang, Duan, Xiao & Liu (2022), 'Mechanism and application of fermentation to remove beany flavor from plant-based meat analogs: A mini review', Front. Microbiol. 13:1070773 (CrossRef verified) - the LAB beany-flavour removal source this anchor is about, but not 'Wang et al. (2022)' and not LWT."
+      },
+      "citation_caveat": "Mini-review: any numeric hexanal-reduction band taken from it is second-hand rather than a primary measurement."
     },
     {
       "id": "marquez_ruiz_2014_oleic_nonanal_oav_band",
       "compound": "nonanal",
       "source_citation": "Marquez-Ruiz et al. (2014), JAFC 62:10295",
-      "doi": "10.1021/jf502636m",
       "matrix_context": "high_oleic_olive_oil_deep_frying_180c",
       "analytical_method": "HS-SPME-GC-MS with hexanal-d12 internal standard across frying-cycle samples",
       "units": "oav",
@@ -975,13 +1158,19 @@
             20
           ]
         }
+      },
+      "source_status": "no_verifiable_source",
+      "source_status_repair": {
+        "old": "10.1021/jf502636m",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "I enumerated every CrossRef record for JAFC (ISSN 0021-8561) published in 2014 (1561 items) and checked first pages: no article starts at p. 10295. Page 10295 falls inside Granato et al., JAFC 62:10283-10296 (10.1021/jf504480f, antioxidant extraction / response surface), and the next article begins at 10297 (Trujillo et al., nitrohydroxytyrosol). Separately, a CrossRef author sweep shows Gloria Marquez-Ruiz has no JAFC paper in 2014 at all (her 2014 output is in Eur. J. Lipid Sci. Technol. and Lipid Technol.), and no 'high-oleic olive oil frying volatiles with OAVs for 8 compounds' paper by her exists. | Both the venue coordinates and the author/year are fabricated, so the 'nonanal ODT 1.0 ppb / OAV 1-28' anchor has no source behind it. Note also that the SLR entry says matrix 'oleic_model' while the backlog says 'high-oleic olive oil frying' - internally inconsistent. If a real high-oleic frying-volatile anchor is wanted, Huang et al. (2024), Food Res. Int. 192:114749 (10.1016/j.foodres.2024.114749) covers volatile aldehyde distribution in high-oleic sunflower oil during frying, but it is a different paper and I did not verify the OAV numbers in it."
       }
     },
     {
       "id": "grosch_1982_hexanal_odt_anchor",
       "compound": "hexanal",
-      "source_citation": "Grosch (1982)",
-      "doi": "10.1021/jf00111a008",
+      "source_citation": "Grosch, W. (1982), in Food Flavours Part A (Morton & MacLeod, eds.), Elsevier, pp. 325-398",
       "matrix_context": "free_model_system",
       "analytical_method": "Aesthetic ODT evaluation",
       "units": "ppb",
@@ -992,13 +1181,27 @@
         "type": "point",
         "value": 4.5
       },
-      "notes": "Hexanal ODT of 4.5 ppb with water activity-dependent scission rate."
+      "notes": "Hexanal ODT of 4.5 ppb with water activity-dependent scission rate.",
+      "source_status": "compilation_anchored",
+      "source_status_repair": {
+        "old": "10.1021/jf00111a008",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "The current DOI is definitively wrong: 10.1021/jf00111a008 is Purcell & Walter (1982), 'Stability of amino acids during cooking and processing of sweet potatoes'. The work actually meant by 'Grosch (1982)' in the lipid-oxidation literature is the Elsevier book chapter above - it is a real, widely-cited chapter (CrossRef indexes only a 1982 Food Chemistry review OF the book, 10.1016/0308-8146(82)90085-1, not the chapter itself), and it carries no DOI. It is also not a JAFC paper as the repo backlog claims. | I could NOT confirm that the specific value hexanal ODT = 4.5 ppb appears in Grosch (1982). Published hexanal odour thresholds in water span 0.3-14 ug/L across studies, so 4.5 ppb is in range but unattributed. The nearest verifiable primary source for hexanal thresholds from Grosch's own group is Ullrich & Grosch (1987), 'Identification of the most intense volatile flavour compounds formed during autoxidation of linoleic acid', Z. Lebensm. Unters. Forsch. 184:277-282, DOI 10.1007/BF01027663 - but I could not read its threshold table (Springer paywall), so I do not assert it contains 4.5 ppb. Treat the hexanal ODT as unsourced until the value is read off a table."
+      },
+      "citation_repair": {
+        "old": "Grosch (1982)",
+        "new": "Grosch, W. (1982), in Food Flavours Part A (Morton & MacLeod, eds.), Elsevier, pp. 325-398",
+        "date": "2026-08-26",
+        "basis": "The current DOI is definitively wrong: 10.1021/jf00111a008 is Purcell & Walter (1982), 'Stability of amino acids during cooking and processing of sweet potatoes'. The work actually meant by 'Grosch (1982)' in the lipid-oxidation literature is the Elsevier book chapter above - it is a real, widely-cited chapter (CrossRef indexes only a 1982 Food Chemistry review OF the book, 10.1016/0308-8146(82)90085-1, not the chapter itself), and it carries no DOI. It is also not a JAFC paper as the repo backlog claims. | I could NOT confirm that the specific value hexanal ODT = 4.5 ppb appears in Grosch (1982). Published hexanal odour thresholds in water span 0.3-14 ug/L across studies, so 4.5 ppb is in range but unattributed. The nearest verifiable primary source for hexanal thresholds from Grosch's own group is Ullrich & Grosch (1987), 'Identification of the most intense volatile flavour compounds formed during autoxidation of linoleic acid', Z. Lebensm. Unters. Forsch. 184:277-282, DOI 10.1007/BF01027663 - but I could not read its threshold table (Springer paywall), so I do not assert it contains 4.5 ppb. Treat the hexanal ODT as unsourced until the value is read off a table."
+      },
+      "harmonized_citation": "Belitz, Grosch & Schieberle, Food Chemistry, 4th rev. ed., Springer 2009, doi 10.1007/978-3-540-69934-7 (standard aroma-threshold compilation; hexanal aqueous ODT quoted as ~5 ppb by the pea/soy OAV literature, e.g. PMC8271896; cross-check Czerny et al. 2008, 10.1007/s00217-008-0931-x, same low-single-digit ug/L band)",
+      "harmonization_note": "2026-08-27: the two reference-repair partitions diverged on this anchor (identifier_unavailable vs compilation-anchored); harmonized to the compilation anchor used in benchmark_intake_registry.json and data/species/off_flavour_targets.yml. Caveat retained: 4.5 ppb specifically has not been read off a primary table (published aqueous hexanal ODTs span 0.3-14 ug/L; 4.5 is in-range but the exact value is compilation-level, not primary-verified)."
     },
     {
       "id": "xu_2024_soybean_pbma_hexanal_anchor",
       "compound": "hexanal",
       "source_citation": "Xu et al. (2024)",
-      "doi": "10.3390/foods13091393",
       "matrix_context": "soy_isolate",
       "analytical_method": "GC-MS with internal standard",
       "units": "ppb",
@@ -1009,12 +1212,19 @@
         "type": "point",
         "value": 185.0
       },
-      "notes": "Soybean PBMA storage hexanal accumulation baseline of 185 ppb at 4 C after 14 days."
+      "notes": "Soybean PBMA storage hexanal accumulation baseline of 185 ppb at 4 C after 14 days.",
+      "source_status": "no_verifiable_source",
+      "source_status_repair": {
+        "old": "10.3390/foods13091393",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "Searched CrossRef (author 'Xu' + hexanal/soy meat analogue restricted to 2024; Foods 2024 + 'plant-based meat analogue hexanal storage volatile') and the web for a 2024 soy PBMA paper reporting the payload's claim ('185 ppb hexanal at 4 C after 14 days', from data/lit/flavor_reference_payloads.json). Nothing matches: no 2024 Xu-authored soy PBMA storage-hexanal paper appears anywhere, and the recorded DOI 10.3390/foods13091393 is the unrelated Spizzirri & Restuccia food-waste editorial. The nearest real papers are Sun et al. (2025), Food Chemistry: X, DOI 10.1016/j.fochx.2025.102795 (soybean meat analogue at 4 C vs -18 C - but no per-timepoint hexanal values in the main text, and hexanal decreases rather than accumulating) and Nagassa et al. (2025), Food Chemistry 481:144025, DOI 10.1016/j.foodchem.2025.144025 ('The development of volatile off-flavor compounds in soy protein isolates and plant meat during storage'). Neither is by Xu, neither is 2024, and I could not confirm 185 ppb in either. | Nagassa et al. 2025 (10.1016/j.foodchem.2025.144025) is the closest topical substitute if a soy-PBMA storage-hexanal anchor is needed, but its numbers were not verified and it cannot be the source of a '2024 Xu' 185 ppb figure. Recommend treating the 185 ppb payload as unsourced until a human re-anchors it."
+      }
     },
     {
       "id": "liu_cadwallader_2023_pea_aeda_anchor",
       "compound": "(E,E)-2,4-heptadienal",
-      "source_citation": "Liu, Cadwallader & Drake (2023)",
+      "source_citation": "Liu et al. (2023), Food Chemistry 406:134998",
       "doi": "10.1016/j.foodchem.2022.134998",
       "matrix_context": "pea_protein_isolate",
       "analytical_method": "AEDA and GC-O",
@@ -1026,12 +1236,20 @@
         "type": "point",
         "value": 4096.0
       },
-      "notes": "Pea protein AEDA (E,E)-2,4-heptadienal FD 4096."
+      "notes": "Pea protein AEDA (E,E)-2,4-heptadienal FD 4096.",
+      "citation_repair": {
+        "old": "Liu, Cadwallader & Drake (2023)",
+        "new": "Liu et al. (2023), Food Chemistry 406:134998",
+        "date": "2026-08-26",
+        "basis": "CrossRef record for this DOI (title, author list, print volume/issue) checked 2026-08-26: Liu, Cadwallader & Drake, 'Identification of predominant aroma components of dried pea protein concentrates and isolates' - Food Chemistry 406 (2023). The repo cited it as 'Liu (2022)' / 'Liu et al. (2022)' across three separate ids."
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 5 nominally distinct reference records in data/lit: liu_2022_ppi_oav_anchors, liu_cadwallader_2023_pea_aeda, liu_cadwallader_2023_pea_aeda_anchor, researchgate_2023_pea_aeda, researchgate_2023_pea_aeda_anchor. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "liu_2022_ppi_oav_anchors",
       "compound": "methoxypyrazines",
-      "source_citation": "Liu (2022)",
+      "source_citation": "Liu et al. (2023), Food Chemistry 406:134998",
       "doi": "10.1016/j.foodchem.2022.134998",
       "matrix_context": "pea_protein_isolate",
       "analytical_method": "AEDA/GC-MS/O",
@@ -1044,12 +1262,20 @@
         "lower_bound": 0.002,
         "upper_bound": 0.006
       },
-      "notes": "Baseline OAV table for 12 key pea protein isolate (PPI) volatiles and methoxypyrazines ODT (0.002-0.006 ppb)."
+      "notes": "Baseline OAV table for 12 key pea protein isolate (PPI) volatiles and methoxypyrazines ODT (0.002-0.006 ppb).",
+      "citation_repair": {
+        "old": "Liu (2022)",
+        "new": "Liu et al. (2023), Food Chemistry 406:134998",
+        "date": "2026-08-26",
+        "basis": "CrossRef record for this DOI (title, author list, print volume/issue) checked 2026-08-26: Liu, Cadwallader & Drake, 'Identification of predominant aroma components of dried pea protein concentrates and isolates' - Food Chemistry 406 (2023). The repo cited it as 'Liu (2022)' / 'Liu et al. (2022)' across three separate ids."
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 5 nominally distinct reference records in data/lit: liu_2022_ppi_oav_anchors, liu_cadwallader_2023_pea_aeda, liu_cadwallader_2023_pea_aeda_anchor, researchgate_2023_pea_aeda, researchgate_2023_pea_aeda_anchor. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "researchgate_2023_pea_aeda_anchor",
       "compound": "(E,E)-2,4-heptadienal",
-      "source_citation": "Liu et al. (2023)",
+      "source_citation": "Liu et al. (2023), Food Chemistry 406:134998",
       "doi": "10.1016/j.foodchem.2022.134998",
       "matrix_context": "pea_protein_isolate",
       "analytical_method": "AEDA and GC-O",
@@ -1061,13 +1287,21 @@
         "type": "point",
         "value": 4096.0
       },
-      "notes": "Pea protein AEDA (E,E)-2,4-heptadienal FD 4096."
+      "notes": "Pea protein AEDA (E,E)-2,4-heptadienal FD 4096.",
+      "citation_repair": {
+        "old": "Liu et al. (2023)",
+        "new": "Liu et al. (2023), Food Chemistry 406:134998",
+        "date": "2026-08-26",
+        "basis": "CrossRef record for this DOI (title, author list, print volume/issue) checked 2026-08-26: Liu, Cadwallader & Drake, 'Identification of predominant aroma components of dried pea protein concentrates and isolates' - Food Chemistry 406 (2023). The repo cited it as 'Liu (2022)' / 'Liu et al. (2022)' across three separate ids."
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 5 nominally distinct reference records in data/lit: liu_2022_ppi_oav_anchors, liu_cadwallader_2023_pea_aeda, liu_cadwallader_2023_pea_aeda_anchor, researchgate_2023_pea_aeda, researchgate_2023_pea_aeda_anchor. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "mdpi_plants_2024_hemp_volatiles",
       "compound": "(E)-2-octenal",
-      "source_citation": "Chen et al. (2024)",
-      "doi": "10.3390/plants13020274",
+      "source_citation": "Chen, Oliveira, Dias & Ismail (2025), Plants 14(2):274",
+      "doi": "10.3390/plants14020274",
       "matrix_context": "hemp_protein",
       "analytical_method": "NADES vs alkaline extraction",
       "units": "oav",
@@ -1078,13 +1312,25 @@
         "type": "point",
         "value": 35.0
       },
-      "notes": "Hemp protein isolate off-note OAV."
+      "notes": "Hemp protein isolate off-note OAV.",
+      "doi_repair": {
+        "old": "10.3390/plants13020274",
+        "new": "10.3390/plants14020274",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery medium confidence: The repo's DOI 10.3390/plants13020274 is a one-digit volume corruption (13 -> 14) of this record: same journal, same issue number and same article number 274, and the first author really is 'Chen', matching the repo's citation string. CrossRef record verified; PMC ID PMC11768760. Topic matches the repo exactly: hemp protein isolate, flavor/volatile properties. (The repo's current DOI resolves to Chen et al. 2024 on WGCNA of salt stress in wheat roots.)"
+      },
+      "citation_repair": {
+        "old": "Chen et al. (2024)",
+        "new": "Chen, Oliveira, Dias & Ismail (2025), Plants 14(2):274",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery medium confidence: The repo's DOI 10.3390/plants13020274 is a one-digit volume corruption (13 -> 14) of this record: same journal, same issue number and same article number 274, and the first author really is 'Chen', matching the repo's citation string. CrossRef record verified; PMC ID PMC11768760. Topic matches the repo exactly: hemp protein isolate, flavor/volatile properties. (The repo's current DOI resolves to Chen et al. 2024 on WGCNA of salt stress in wheat roots.)"
+      },
+      "citation_caveat": "The paper reports 49 VOCs (hexanal, nonanal, 1-hexanol, 1-octen-3-ol, 2-heptanone, beta-pinene, d-limonene, eucalyptol) but I could NOT find (E)-2-octenal, beta-caryophyllene, flavour-dilution factors, or any odour activity values in it. The repo's '(E)-2-octenal OAV 35' is therefore NOT supported by this source and should be dropped or re-sourced."
     },
     {
       "id": "vtechworks_2022_fava_hydrolysis",
       "compound": "2-pentylfuran",
-      "source_citation": "Williams (2025)",
-      "doi": "10.1016/j.foodchem.2025.146396",
+      "source_citation": "Williams, A. D. (2025), MS thesis, Virginia Tech (VTechWorks hdl:10919/137837)",
       "matrix_context": "fava_bean",
       "analytical_method": "HS-SPME-GC-MS",
       "units": "fd_factor",
@@ -1095,13 +1341,28 @@
         "type": "point",
         "value": 16384.0
       },
-      "notes": "Fava bean hydrolysate 2-pentylfuran FD 16384 post-hydrolysis."
+      "notes": "Fava bean hydrolysate 2-pentylfuran FD 16384 post-hydrolysis.",
+      "source_status": "identifier_unavailable",
+      "source_status_repair": {
+        "old": "10.1016/j.foodchem.2025.146396",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "The cited work is real: Williams, Anarra Denise (2025), 'Characterization of Fava Bean Hydrolysates for Future Use in Protein Enriched Beverages', MS thesis, Virginia Tech, persistent handle https://hdl.handle.net/10919/137837 (VTechWorks record checked 2026-08-26; SPME-GC-MS/GC-O of fava hydrolysates, 2-pentylfuran among the aroma-active compounds). VTechWorks issues no DOI for it. The DOI previously stored, 10.1016/j.foodchem.2025.146396, resolves to Nguyen, Boerkamp, Dubbelboer & van Duynhoven (2025), 'Mechanistic kinetic model to elucidate lipid oxidation mechanisms in spray-dried microencapsulated oils' - an unrelated paper that is legitimately anchored by nguyen_2025_ppi_microencapsulated_oil_stabilization."
+      },
+      "handle": "https://hdl.handle.net/10919/137837",
+      "citation_repair": {
+        "old": "Williams (2025)",
+        "new": "Williams, A. D. (2025), MS thesis, Virginia Tech (VTechWorks hdl:10919/137837)",
+        "date": "2026-08-26",
+        "basis": "The cited work is real: Williams, Anarra Denise (2025), 'Characterization of Fava Bean Hydrolysates for Future Use in Protein Enriched Beverages', MS thesis, Virginia Tech, persistent handle https://hdl.handle.net/10919/137837 (VTechWorks record checked 2026-08-26; SPME-GC-MS/GC-O of fava hydrolysates, 2-pentylfuran among the aroma-active compounds). VTechWorks issues no DOI for it. The DOI previously stored, 10.1016/j.foodchem.2025.146396, resolves to Nguyen, Boerkamp, Dubbelboer & van Duynhoven (2025), 'Mechanistic kinetic model to elucidate lipid oxidation mechanisms in spray-dried microencapsulated oils' - an unrelated paper that is legitimately anchored by nguyen_2025_ppi_microencapsulated_oil_stabilization."
+      },
+      "citation_caveat": "Thesis with no DOI; the FD 8192 / 16384 values were not re-checked against the thesis text."
     },
     {
       "id": "pmc11353891_lentil_deflavoring",
       "compound": "hexanal",
-      "source_citation": "Streule et al. (2024)",
-      "doi": "10.3390/foods13162590",
+      "source_citation": "Vurro, De Angelis, Squeo, Caponio, Summo & Pasqualone (2024), Foods 13:2608",
+      "doi": "10.3390/foods13162608",
       "matrix_context": "lentil_protein",
       "analytical_method": "deflavoring_treatment",
       "units": "oav",
@@ -1112,13 +1373,26 @@
         "type": "point",
         "value": 1.0
       },
-      "notes": "Lentil protein isolate residual hexanal OAV."
+      "notes": "Lentil protein isolate residual hexanal OAV.",
+      "doi_repair": {
+        "old": "10.3390/foods13162590",
+        "new": "10.3390/foods13162608",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery high confidence: The repo id encodes PMC11353891. NCBI esummary for PMC 11353891 returns exactly this article (PMID 39200535, DOI 10.3390/foods13162608), and the CrossRef record was checked independently. Topic matches the repo's 'lentil_protein / deflavoring_efficiency' claim precisely. The repo's stored DOI 10.3390/foods13162590 is a neighbouring Foods article (Streule et al., cocoa) - a transposition error."
+      },
+      "citation_repair": {
+        "old": "Streule et al. (2024)",
+        "new": "Vurro, De Angelis, Squeo, Caponio, Summo & Pasqualone (2024), Foods 13:2608",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery high confidence: The repo id encodes PMC11353891. NCBI esummary for PMC 11353891 returns exactly this article (PMID 39200535, DOI 10.3390/foods13162608), and the CrossRef record was checked independently. Topic matches the repo's 'lentil_protein / deflavoring_efficiency' claim precisely. The repo's stored DOI 10.3390/foods13162590 is a neighbouring Foods article (Streule et al., cocoa) - a transposition error."
+      },
+      "citation_caveat": "This is a REVIEW, not a primary measurement: it collates lentil volatile profiles and de-flavouring strategies. A 'hexanal post-treatment OAV' figure taken from it is second-hand and the underlying primary source should be cited for any numeric prior."
     },
     {
       "id": "pmc11889959_spi_tvp_volatiles",
       "compound": "2-pentylfuran",
-      "source_citation": "PMC11889959 (2025)",
-      "doi": "10.1016/j.foodchem.2025.142222",
+      "source_citation": "Park et al. (2025), Current Research in Food Science 10:100999",
+      "doi": "10.1016/j.crfs.2025.100999",
       "matrix_context": "soy_isolate",
       "analytical_method": "HS-SPME-GC-MS",
       "units": "presence_check",
@@ -1129,12 +1403,25 @@
         "type": "point",
         "value": 1.0
       },
-      "notes": "SPI TVP volatiles presence check."
+      "notes": "SPI TVP volatiles presence check.",
+      "doi_repair": {
+        "old": "10.1016/j.foodchem.2025.142222",
+        "new": "10.1016/j.crfs.2025.100999",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery high confidence: NCBI esummary for PMC11889959 returns PMID 40061876, DOI 10.1016/j.crfs.2025.100999, Curr Res Food Sci 10:100999, Park GW/Park KH/Kim SG/Lee SY, 2025 - a definitive PMCID-to-DOI resolution, so the repo's citation string 'PMC11889959 (2025)' is unambiguously this paper and the recorded DOI 10.1016/j.foodchem.2025.142222 was simply invented. The PMC full text confirms TVP volatile profiling by HS-SPME-GC-MS across soy, wheat, pea and rice TVP, including 2-pentylfuran (soybean TVP ~48.25 ug/L vs wheat 330.39 and pea 108.25)."
+      },
+      "citation_repair": {
+        "old": "PMC11889959 (2025)",
+        "new": "Park et al. (2025), Current Research in Food Science 10:100999",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery high confidence: NCBI esummary for PMC11889959 returns PMID 40061876, DOI 10.1016/j.crfs.2025.100999, Curr Res Food Sci 10:100999, Park GW/Park KH/Kim SG/Lee SY, 2025 - a definitive PMCID-to-DOI resolution, so the repo's citation string 'PMC11889959 (2025)' is unambiguously this paper and the recorded DOI 10.1016/j.foodchem.2025.142222 was simply invented. The PMC full text confirms TVP volatile profiling by HS-SPME-GC-MS across soy, wheat, pea and rice TVP, including 2-pentylfuran (soybean TVP ~48.25 ug/L vs wheat 330.39 and pea 108.25)."
+      },
+      "citation_caveat": "The repo's numeric anchor 'SPI TVP pyrazines present' is NOT supported: the paper reports no pyrazines in any TVP sample. Only the 2-pentylfuran half of the compounds_supported list is confirmed, and the matrix is extruded TVP rather than soy protein isolate proper."
     },
     {
       "id": "liu_cadwallader_2023_pea_aeda",
       "compound": "hexanal",
-      "source_citation": "Liu et al. (2022)",
+      "source_citation": "Liu et al. (2023), Food Chemistry 406:134998",
       "doi": "10.1016/j.foodchem.2022.134998",
       "matrix_context": "pea_protein_isolate",
       "analytical_method": "AEDA",
@@ -1147,12 +1434,20 @@
         "value": 512.0,
         "condition": "hexanal FD factor in PPI"
       },
-      "notes": "AEDA of PPI: hexanal FD=512, 1-octen-3-ol FD=256, nonanal FD=128."
+      "notes": "AEDA of PPI: hexanal FD=512, 1-octen-3-ol FD=256, nonanal FD=128.",
+      "citation_repair": {
+        "old": "Liu et al. (2022)",
+        "new": "Liu et al. (2023), Food Chemistry 406:134998",
+        "date": "2026-08-26",
+        "basis": "CrossRef record for this DOI (title, author list, print volume/issue) checked 2026-08-26: Liu, Cadwallader & Drake, 'Identification of predominant aroma components of dried pea protein concentrates and isolates' - Food Chemistry 406 (2023). The repo cited it as 'Liu (2022)' / 'Liu et al. (2022)' across three separate ids."
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 5 nominally distinct reference records in data/lit: liu_2022_ppi_oav_anchors, liu_cadwallader_2023_pea_aeda, liu_cadwallader_2023_pea_aeda_anchor, researchgate_2023_pea_aeda, researchgate_2023_pea_aeda_anchor. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "researchgate_2023_pea_aeda",
       "compound": "hexanal",
-      "source_citation": "Liu et al. (2022)",
+      "source_citation": "Liu et al. (2023), Food Chemistry 406:134998",
       "doi": "10.1016/j.foodchem.2022.134998",
       "matrix_context": "pea_protein_concentrate",
       "analytical_method": "AEDA",
@@ -1165,13 +1460,20 @@
         "value": 256.0,
         "condition": "hexanal FD factor in PPC"
       },
-      "notes": "AEDA of PPC: hexanal FD=256 (lower than PPI), pentanal FD=128."
+      "notes": "AEDA of PPC: hexanal FD=256 (lower than PPI), pentanal FD=128.",
+      "citation_repair": {
+        "old": "Liu et al. (2022)",
+        "new": "Liu et al. (2023), Food Chemistry 406:134998",
+        "date": "2026-08-26",
+        "basis": "CrossRef record for this DOI (title, author list, print volume/issue) checked 2026-08-26: Liu, Cadwallader & Drake, 'Identification of predominant aroma components of dried pea protein concentrates and isolates' - Food Chemistry 406 (2023). The repo cited it as 'Liu (2022)' / 'Liu et al. (2022)' across three separate ids."
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 5 nominally distinct reference records in data/lit: liu_2022_ppi_oav_anchors, liu_cadwallader_2023_pea_aeda, liu_cadwallader_2023_pea_aeda_anchor, researchgate_2023_pea_aeda, researchgate_2023_pea_aeda_anchor. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "marquez_ruiz_2014_oleic_oav_anchor",
       "compound": "nonanal",
       "source_citation": "Marquez-Ruiz et al. (2014)",
-      "doi": "10.1021/jf502636m",
       "matrix_context": "oleic_model",
       "analytical_method": "GC-MS",
       "units": "ppb",
@@ -1183,13 +1485,19 @@
         "value": 1.0,
         "condition": "nonanal ODT"
       },
-      "notes": "Nonanal ODT 1.0 ppb from oleic acid oxidation; OAV 1-28."
+      "notes": "Nonanal ODT 1.0 ppb from oleic acid oxidation; OAV 1-28.",
+      "source_status": "no_verifiable_source",
+      "source_status_repair": {
+        "old": "10.1021/jf502636m",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "I enumerated every CrossRef record for JAFC (ISSN 0021-8561) published in 2014 (1561 items) and checked first pages: no article starts at p. 10295. Page 10295 falls inside Granato et al., JAFC 62:10283-10296 (10.1021/jf504480f, antioxidant extraction / response surface), and the next article begins at 10297 (Trujillo et al., nitrohydroxytyrosol). Separately, a CrossRef author sweep shows Gloria Marquez-Ruiz has no JAFC paper in 2014 at all (her 2014 output is in Eur. J. Lipid Sci. Technol. and Lipid Technol.), and no 'high-oleic olive oil frying volatiles with OAVs for 8 compounds' paper by her exists. | Both the venue coordinates and the author/year are fabricated, so the 'nonanal ODT 1.0 ppb / OAV 1-28' anchor has no source behind it. Note also that the SLR entry says matrix 'oleic_model' while the backlog says 'high-oleic olive oil frying' - internally inconsistent. If a real high-oleic frying-volatile anchor is wanted, Huang et al. (2024), Food Res. Int. 192:114749 (10.1016/j.foodres.2024.114749) covers volatile aldehyde distribution in high-oleic sunflower oil during frying, but it is a different paper and I did not verify the OAV numbers in it."
+      }
     },
     {
       "id": "yeo_shibamoto_1991_wof_hexanal",
       "compound": "hexanal",
       "source_citation": "Yeo & Shibamoto (1991)",
-      "doi": "10.1021/jf00002a024",
       "matrix_context": "wof_model",
       "analytical_method": "GC-MS",
       "units": "ppb",
@@ -1201,13 +1509,20 @@
         "value": 220.0,
         "condition": "WOF hexanal ppb"
       },
-      "notes": "Warmed-over flavour: hexanal 220 ppb benchmark."
+      "notes": "Warmed-over flavour: hexanal 220 ppb benchmark.",
+      "source_status": "no_verifiable_source",
+      "source_status_repair": {
+        "old": "10.1021/jf00002a024",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "Enumerated Yeo & Shibamoto's 1991 output via CrossRef author search: all of it is microwave Maillard model-system work - 'Effects of moisture content on the Maillard browning model system upon microwave irradiation' (JAFC 39:1860, 10.1021/jf00010a035), 'Microwave-induced volatiles of the Maillard model system under different pH conditions' (JAFC 39:370, 10.1021/jf00002a029), 'Flavor and browning enhancement by electrolytes during microwave irradiation of the Maillard model system' (JAFC 39:948, 10.1021/jf00005a030). None concerns warmed-over flavour, phospholipid-derived hexanal, or lipoxygenase thermal inactivation. Targeted searches for the anchors (phospholipid fraction 82-88% of hexanal; LOX D-value 28 min) returned nothing. | The entry fuses two unrelated claims under a citation that supports neither. For the phospholipid-dominance phenomenon the canonical anchor is Igene & Pearson (1979), 'Role of Phospholipids and Triglycerides in Warmed-Over Flavor Development in Meat Model Systems', J. Food Sci. 44:1285-1290, doi 10.1111/j.1365-2621.1979.tb06420.x - but I did NOT confirm the 82-88% figure in it, and it says nothing about a 28 min LOX D-value, which needs a separate lipoxygenase thermal-inactivation source."
+      }
     },
     {
       "id": "rawel_2002_cga_cysteine_blocking",
       "compound": "chlorogenic acid",
-      "source_citation": "Rawel et al. (2002)",
-      "doi": "10.1021/jf020082z",
+      "source_citation": "Rawel, Czajka, Rohn & Kroll (2002), Int. J. Biol. Macromol. 30:137",
+      "doi": "10.1016/s0141-8130(02)00016-8",
       "matrix_context": "protein_model",
       "analytical_method": "fluorescence",
       "units": "percent_blocked",
@@ -1219,7 +1534,20 @@
         "value": 85.0,
         "condition": "blocking efficiency oxidised CGA"
       },
-      "notes": "Oxidised CGA blocks 85% reactive Cys; off-note suppression via polyphenol."
+      "notes": "Oxidised CGA blocks 85% reactive Cys; off-note suppression via polyphenol.",
+      "doi_repair": {
+        "old": "10.1021/jf020082z",
+        "new": "10.1016/s0141-8130(02)00016-8",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery medium confidence: The backlog pointer 'JAFC 50:5343' is false: a full page-scan of CrossRef's JAFC 2002 volume shows 50:5343-5348 is Ko, Weng & Chiou, 'Squalene Content and Antioxidant Activity of Terminalia catappa Leaves and Seeds' (10.1021/jf0203500). PubMed shows Rawel HM published only two 2002 papers; this one is the only one covering chlorogenic-acid derivatization and its effect on BOTH lysine and cysteine. Its abstract (read in full) states the derivatization by chlorogenic/caffeic/gallic acid 'caused a reduction of lysine, cysteine and tryptophan residues in the soy proteins' - the Cys/Lys blocking phenomenon the repo encodes."
+      },
+      "citation_repair": {
+        "old": "Rawel et al. (2002)",
+        "new": "Rawel, Czajka, Rohn & Kroll (2002), Int. J. Biol. Macromol. 30:137",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery medium confidence: The backlog pointer 'JAFC 50:5343' is false: a full page-scan of CrossRef's JAFC 2002 volume shows 50:5343-5348 is Ko, Weng & Chiou, 'Squalene Content and Antioxidant Activity of Terminalia catappa Leaves and Seeds' (10.1021/jf0203500). PubMed shows Rawel HM published only two 2002 papers; this one is the only one covering chlorogenic-acid derivatization and its effect on BOTH lysine and cysteine. Its abstract (read in full) states the derivatization by chlorogenic/caffeic/gallic acid 'caused a reduction of lysine, cysteine and tryptophan residues in the soy proteins' - the Cys/Lys blocking phenomenon the repo encodes."
+      },
+      "citation_caveat": "This is a protein (soy glycinin / trypsin inhibitor) system, not a free-amino-acid model system, and it reports percentage residue losses, NOT rate constants. The repo's 'Cys blocking rate 2.9x faster than Lys' and '43% Lys blocked at 10:1 ratio' are NOT in this paper and could not be traced to any publication - treat them as unsourced. An alternative same-year Rawel record is Rawel, Rohn, Kruse & Kroll (2002), Food Chem. 78:443-455, DOI 10.1016/s0308-8146(02)00155-3 (chlorogenic acid on BSA)."
     }
   ]
 }

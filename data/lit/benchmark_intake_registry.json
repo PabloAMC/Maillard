@@ -72,8 +72,8 @@
     },
     {
       "id": "wang_2012_gsh_xylose_sulfur_uplift",
-      "citation": "Koblar et al. (2011)",
-      "doi": "10.1016/j.foodchem.2011.07.037",
+      "citation": "Wang, Yang & Song (2012), Food Chemistry 131:280",
+      "doi": "10.1016/j.foodchem.2011.08.079",
       "kind": "calibration_reference",
       "chemistry_family": "glutathione_and_peptide_support",
       "slr_family_source": "05",
@@ -127,12 +127,24 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1016/j.foodchem.2011.07.037",
+        "new": "10.1016/j.foodchem.2011.08.079",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1016/j.foodchem.2011.07.037 resolves to Koblar et al. (2012) on fluoride in tea. The real paper, in the same journal volume, is Wang, Yang & Song (2012), 'Key meat flavour compounds formation mechanism in a glutathione-xylose Maillard reaction'."
+      },
+      "citation_repair": {
+        "old": "Koblar et al. (2011)",
+        "new": "Wang, Yang & Song (2012), Food Chemistry 131:280",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "ohsu_2025_kokumi_casr_anchor",
-      "citation": "Ohsu et al. (2025)",
-      "doi": "10.1021/acs.jafc.2c04919",
+      "citation": "Ohsu, Amino, Nagasaki, Yamanaka et al. (2010), J. Biol. Chem. 285:1016",
+      "doi": "10.1074/jbc.M109.029165",
       "kind": "calibration_reference",
       "chemistry_family": "glutathione_and_peptide_support",
       "slr_family_source": "05",
@@ -188,7 +200,21 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_repair": {
+        "old": "Ohsu et al. (2025)",
+        "new": "Ohsu, Amino, Nagasaki, Yamanaka et al. (2010), J. Biol. Chem. 285:1016",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      },
+      "doi_repair": {
+        "old": "10.1021/acs.jafc.2c04919",
+        "new": "10.1074/jbc.M109.029165",
+        "date": "2026-08-26",
+        "basis": "The stored 10.1021/acs.jafc.2c04919 is Yang et al. (2022), not Ohsu, and no 'Ohsu et al. (2025)' exists. The real Ohsu CaSR paper is 'Involvement of the Calcium-sensing Receptor in Human Taste Perception' (2010)."
+      },
+      "value_anchor_status": "no_verifiable_source",
+      "citation_caveat": "The stored kokumi constants are NOT in this paper: Ohsu et al. (2010) report CaSR EC50s of 41.9 nM (gamma-Glu-Val-Gly) and 76.5 nM (GSH), three orders of magnitude from the stored 0.32/0.68 mM; there is no CCK data; and the sensory scale runs -2..+2, so a '+2.2 mouthfulness units' uplift is out of range. Flagged by the parallel SLR/priors verification."
     },
     {
       "id": "squeo_2023",
@@ -359,7 +385,6 @@
     {
       "id": "de_leyn_2019",
       "citation": "De Leyn & Muylle (2019)",
-      "doi": "10.1021/acs.jafc.de_leyn_2019",
       "kind": "calibration_reference",
       "chemistry_family": "thiamine_fragmentation_support",
       "slr_family_source": "03",
@@ -431,12 +456,18 @@
       "requires_primary_data": false,
       "citation_aliases": [
         "De Leyn & Muylle (2019)"
-      ]
+      ],
+      "source_status": "no_verifiable_source",
+      "doi_repair": {
+        "old": "10.1021/acs.jafc.de_leyn_2019",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "The stored identifier '10.1021/acs.jafc.de_leyn_2019' is not a DOI at all - it is the repo id pasted into the DOI field. No publication by De Leyn & Muylle (2019) on thiamine survival in extruded soy matrices could be located. (Nearest genuine literature: Killeit (1994), 'Vitamin retention in extrusion cooking', 10.1016/0308-8146(94)90151-1 - but it does not carry this entry's soy-specific attenuation values.)"
+      }
     },
     {
       "id": "comunian_2021_thiamine_encapsulation",
       "citation": "Comunian et al. (2021)",
-      "doi": "10.1016/j.foodres.2021.110345",
       "kind": "calibration_reference",
       "chemistry_family": "thiamine_fragmentation_support",
       "slr_family_source": "03",
@@ -487,7 +518,14 @@
           "path": "data/lit/process_state_calibrations.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "source_status": "no_verifiable_source",
+      "doi_repair": {
+        "old": "10.1016/j.foodres.2021.110345",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1016/j.foodres.2021.110345 does not resolve. Comunian's 2018-2021 Food Research International output covers pigment, lactase and carotenoid encapsulation; no thiamine-encapsulation study by that group could be located, and no other 2021 paper matches the protected-thiamine extrusion-survival claim."
+      }
     },
     {
       "id": "voelker_2021_thiamine_kinetics",
@@ -561,7 +599,9 @@
     {
       "id": "huang_2022_thiamine_metal_catalysis",
       "citation": "Huang (2022)",
-      "doi": "ClemsonThesis3936",
+      "identifier": "https://open.clemson.edu/all_theses/3936/",
+      "identifier_scheme": "url",
+      "identifier_note": "2026-08-27: retyped from doi 'ClemsonThesis3936', which was never a DOI. Clemson TigerPrints issues no DOI for this MS thesis (Huang, J. H., 2022, All Theses 3936); the repository's permanent record URL is the only identifier it has. Verified 2026-08-26 - see the doi_repair record in data/lit/deep_research_backlog.json.",
       "kind": "calibration_reference",
       "chemistry_family": "thiamine_fragmentation_support",
       "slr_family_source": "03",
@@ -621,8 +661,8 @@
     },
     {
       "id": "arabshahi_1988_aw_thiamine_kinetics",
-      "citation": "Arabshahi & Lund (1988)",
-      "doi": "10.1021/jf00080a032",
+      "citation": "Arabshahi & Lund (1988), J. Food Sci. 53:199",
+      "doi": "10.1111/j.1365-2621.1988.tb10208.x",
       "kind": "calibration_reference",
       "chemistry_family": "thiamine_fragmentation_support",
       "slr_family_source": "03",
@@ -684,7 +724,19 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1021/jf00080a032",
+        "new": "10.1111/j.1365-2621.1988.tb10208.x",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1021/jf00080a032 resolves to Schaefer & Sandermann (1988) on pentachlorophenol metabolism in wheat cells. The real Arabshahi & Lund (1988) paper, 'Thiamin Stability in Simulated Intermediate Moisture Food', supplies the water-activity-dependent thiamine kinetics this anchor claims."
+      },
+      "citation_repair": {
+        "old": "Arabshahi & Lund (1988)",
+        "new": "Arabshahi & Lund (1988), J. Food Sci. 53:199",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "cerny_guntz_dubini_2008",
@@ -775,8 +827,8 @@
     },
     {
       "id": "hofmann_schieberle_grosch_1996",
-      "citation": "Hofmann et al. (1996)",
-      "doi": "10.1021/jf960062o",
+      "citation": "Bolton, Reineccius, Liardon & Huynh-Ba (1994), ACS Symp. Ser. 543:270-278 -- REPLACES the nonexistent \"Hofmann et al. (1996)\"",
+      "doi": "10.1021/bk-1994-0543.ch022",
       "kind": "quantitative_benchmark",
       "chemistry_family": "thiamine_fragmentation_support",
       "slr_family_source": "03",
@@ -802,36 +854,56 @@
       "matrix_family": "free_model_system",
       "eligibility": "benchmark_eligible",
       "status": "encoded",
+      "source_repair": {
+        "repair_date": "2026-08-26",
+        "old_citation": "Hofmann et al. (1996)",
+        "old_doi": "10.1021/jf960062o",
+        "new_citation": "Bolton, T. A.; Reineccius, G. A.; Liardon, R.; Huynh-Ba, T. Role of Cysteine in the Formation of 2-Methyl-3-furanthiol in a Thiamine-Cysteine Model System. ACS Symp. Ser. 1994, 543, 270-278.",
+        "new_doi": "10.1021/bk-1994-0543.ch022",
+        "basis": "The 2026-08-26 citation audit quarantined this entry: 10.1021/jf960062o was never registered with any DOI agency and the headline combined MFT value of 3.14 ug/L is numerically pi, a confabulation tell. Source recovery then found the only quantitative thiamine+cysteine MFT measurement in the literature -- Bolton et al. 1994 -- and the benchmark was rebuilt against it. The entry id is left unchanged because other artifacts (computational_priors.json, deep_research_backlog.json, tests) key off it; the id is now a stable handle, NOT a citation.",
+        "what_changed": "System ribose -> glucose, 100 C/30 min -> 120 C/60 min, single combined MFT value 3.14 ug/L -> 13 ppb (midpoint of the reported 11.7-14.7), tolerance 1.5x/0.18 -> 3.0x/0.48. The thiamine-alone / cys-ribose split and the 2.64 synergy factor had NO source and are NOT carried over.",
+        "unverified_residue": "pH and the exact molarities are not reported in the indexed abstract and are assumed in the rebuilt benchmark; ACS full text was not obtained."
+      },
       "what_it_supports": [
-        "Beef-realistic MFT comparison between thiamine-only, cysteine plus ribose, and combined precursor systems",
-        "A conservative synergy floor for Family 03 support under lower precursor concentrations than Cerny 2008",
-        "Scientist-facing evidence that thiamine remains efficient even at realistic concentration levels"
+        "A quantitative MFT anchor for the thiamine + cysteine + hexose system at 120 C / 60 min (GC-MS-SIM, 389-489 ng per 33.3 g = 11.7-14.7 ppb)",
+        "The qualitative claim that thiamine is the dominant sulfur source for MFT in this system (only 7.5-8.0 percent of MFT sulfur came from 34S-cysteine; no thiamine gave no MFT)",
+        "An order-of-magnitude Family 03 scale check independent of the high-concentration Cerny 2008 pentose optimum"
       ],
       "what_it_does_not_support": [
-        "Full pH response outside pH 5.5",
+        "Any pH response -- the source does not report pH",
+        "A thiamine-alone vs cysteine+sugar synergy factor -- the previously recorded 2.64 had no source and was withdrawn 2026-08-26",
         "Extrusion survival or encapsulation protection",
         "Plant-protein matrix trapping or release"
       ],
       "key_values": {
-        "temp_C": 100.0,
-        "time_min": 30.0,
-        "ph": 5.5,
-        "thiamine_mM": 0.1,
-        "cysteine_mM": 1.0,
-        "ribose_mM": 1.0,
-        "thiamine_alone_mft_ug_per_l": 0.82,
-        "cys_ribose_mft_ug_per_l": 0.31,
-        "combined_mft_ug_per_l": 3.14,
-        "combined_synergy_factor": 2.64,
-        "replicates": 3,
-        "volatile_output_mode": "absolute_ug_per_l"
+        "temp_C": 120.0,
+        "time_min": 60.0,
+        "ph": null,
+        "ph_note": "NOT REPORTED in the source. The rebuilt benchmark JSON pins 5.0 only because the loader requires a value; it is not an anchor.",
+        "thiamine_mM": null,
+        "cysteine_mM": null,
+        "sugar": "D-glucose",
+        "molarity_note": "NOT REPORTED in the indexed abstract. The rebuilt benchmark JSON uses assumed process-flavor loadings (thiamine 1.0 mM, cysteine 10.0 mM, glucose 10.0 mM), marked assumed_not_from_source.",
+        "mft_ppb_range": [
+          11.7,
+          14.7
+        ],
+        "mft_ppb_target": 13.0,
+        "mft_sulfur_from_cysteine_pct": [
+          7.5,
+          8.0
+        ],
+        "model_variants": 4,
+        "volatile_output_mode": "absolute_ppb"
       },
-      "repo_next_action": "Use as the conservative synergy floor for Family 03 so mixed-system support does not rely only on the high-concentration Cerny 2008 optimum.",
+      "repo_next_action": "Use as the Family 03 hexose-system MFT scale check. NOTE (2026-08-26): the model currently under-predicts this anchor by ~163x (0.080 ppb vs 13 ppb) and the gap is robust (35-745x) across the assumed-value sweep -- this is now the panel's honest thiamine failure signal, not a passing row.",
       "runtime_artifacts": [
         {
           "artifact_type": "benchmark",
-          "artifact_id": "thiamine_cys_ribose_100C_Hofmann1996",
-          "path": "data/benchmarks/thiamine_cys_ribose_100C_Hofmann1996.json"
+          "artifact_id": "thiamine_cys_glucose_120C_Bolton1994",
+          "path": "data/benchmarks/thiamine_cys_glucose_120C_Bolton1994.json",
+          "status": "active",
+          "replaces": "thiamine_cys_ribose_100C_Hofmann1996 (deleted 2026-08-26)"
         },
         {
           "artifact_type": "benchmark_intake_entry",
@@ -851,8 +923,8 @@
     },
     {
       "id": "mouritsen_2024_umami_thresholds",
-      "citation": "Tanaka et al. (2025)",
-      "doi": "10.1093/chemse/bjaf043",
+      "citation": "Amado, Hanselman, Harmon, Deng et al. (2024), Chemical Senses 49:bjad049",
+      "doi": "10.1093/chemse/bjad049",
       "kind": "quantitative_benchmark",
       "chemistry_family": "nucleotide_and_ribose_support",
       "slr_family_source": "04",
@@ -904,7 +976,19 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_repair": {
+        "old": "Tanaka et al. (2025)",
+        "new": "Amado, Hanselman, Harmon, Deng et al. (2024), Chemical Senses 49:bjad049",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      },
+      "doi_repair": {
+        "old": "10.1093/chemse/bjaf043",
+        "new": "10.1093/chemse/bjad049",
+        "date": "2026-08-26",
+        "basis": "The stored 10.1093/chemse/bjaf043 is Tanaka, Itoh & Kondoh (2025), a different paper in volume 50. The parallel SLR/priors verification confirmed all four stored fold-reduction factors (IMP 45.2x, GMP 29.8x, AMP 8.9x, CMP negative) in Amado et al. (2024), 'Ribonucleotides differentially modulate oral glutamate detection thresholds'. Mouritsen authored neither; the id is a legacy handle, not a citation."
+      }
     },
     {
       "id": "yamaguchi_ninomiya_2000_euc_anchor",
@@ -963,7 +1047,7 @@
     },
     {
       "id": "soladoye_2020_sous_vide_euc_anchor",
-      "citation": "Soladoye et al. (2020)",
+      "citation": "Hwang, Ismail & Joo (2020), Foods 9:251",
       "doi": "10.3390/foods9030251",
       "kind": "calibration_reference",
       "chemistry_family": "nucleotide_and_ribose_support",
@@ -1033,11 +1117,17 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_repair": {
+        "old": "Soladoye et al. (2020)",
+        "new": "Hwang, Ismail & Joo (2020), Foods 9:251",
+        "date": "2026-08-26",
+        "basis": "CrossRef metadata for 10.3390/foods9030251 is Hwang, Ismail & Joo (2020), sous-vide beef EUC; topic matches, author label did not."
+      }
     },
     {
       "id": "ahlberg_2021_yeast_extract_grade_anchor",
-      "citation": "Ahlberg & Mohammadi (2021)",
+      "citation": "Tao et al. (2022), J. Microbiol. Biotechnol. 32:1236",
       "doi": "10.4014/jmb.2207.07057",
       "kind": "calibration_reference",
       "chemistry_family": "nucleotide_and_ribose_support",
@@ -1107,11 +1197,17 @@
       "citation_aliases": [
         "Ahlberg & Mohammadi (2021)",
         "PMC9998214"
-      ]
+      ],
+      "citation_repair": {
+        "old": "Ahlberg & Mohammadi (2021)",
+        "new": "Tao et al. (2022), J. Microbiol. Biotechnol. 32:1236",
+        "date": "2026-08-26",
+        "basis": "CrossRef metadata for 10.4014/jmb.2207.07057 is Tao, Yuan, Liu et al. (2022), 'Yeast Extract: Characteristics, Production, Applications and Future Perspectives'; the repo label 'Ahlberg & Mohammadi (2021)' matched no author or year of that record."
+      }
     },
     {
       "id": "cui_2022_mushroom_nucleotide_anchor",
-      "citation": "Cui et al. (2022)",
+      "citation": "Liu et al. (2022), LWT 168:113651",
       "doi": "10.1016/j.lwt.2022.113651",
       "kind": "calibration_reference",
       "chemistry_family": "nucleotide_and_ribose_support",
@@ -1161,7 +1257,13 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_repair": {
+        "old": "Cui et al. (2022)",
+        "new": "Liu et al. (2022), LWT 168:113651",
+        "date": "2026-08-26",
+        "basis": "CrossRef metadata for 10.1016/j.lwt.2022.113651 is Liu, Bau, Jin et al. (2022), shiitake drying volatiles/taste (Cui is a co-author); topic matches, first-author label did not."
+      }
     },
     {
       "id": "matoba_1988_nucleotide_hydrolysis",
@@ -1249,8 +1351,8 @@
     },
     {
       "id": "nakamura_1988_imp_ribose_release",
-      "citation": "Epstein et al. (1988)",
-      "doi": "10.1021/jf00083a026",
+      "citation": "Kavitha & Modi (2007), LWT 40:1280",
+      "doi": "10.1016/j.lwt.2006.07.014",
       "kind": "calibration_reference",
       "chemistry_family": "nucleotide_and_ribose_support",
       "slr_family_source": "04",
@@ -1300,7 +1402,19 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1021/jf00083a026",
+        "new": "10.1016/j.lwt.2006.07.014",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1021/jf00083a026 resolves to Epstein et al. (1988) on veterinary drug residues. The source that actually measures 5'-IMP degradation (and hence ribose release) against temperature and water activity in a meat model is Kavitha & Modi (2007), 'Effect of water activity and temperature on degradation of 5'-inosine monophosphate in a meat model system'. NOTE: the 'Nakamura (1988)' attribution is not supported by any resolvable record."
+      },
+      "citation_repair": {
+        "old": "Epstein et al. (1988)",
+        "new": "Kavitha & Modi (2007), LWT 40:1280",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "trikusuma_2019",
@@ -1373,7 +1487,7 @@
     },
     {
       "id": "resconi_2023_pbma_beef_identity_benchmark",
-      "citation": "Resconi et al. (2023)",
+      "citation": "Hernandez et al. (2023), Molecules 28:3151",
       "doi": "10.3390/molecules28073151",
       "kind": "quantitative_benchmark",
       "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
@@ -1455,7 +1569,13 @@
       "citation_aliases": [
         "PMC10096055",
         "Resconi et al. (2023)"
-      ]
+      ],
+      "citation_repair": {
+        "old": "Resconi et al. (2023)",
+        "new": "Hernandez et al. (2023), Molecules 28:3151",
+        "date": "2026-08-26",
+        "basis": "CrossRef metadata for 10.3390/molecules28073151 is Hernandez, Woerner, Brooks & Legako (2023), 'Descriptive Sensory Attributes and Volatile Flavor Compounds of Plant-Based Meat Alternatives and Ground Beef'; 'Resconi et al. (2023)' names no author of this record."
+      }
     },
     {
       "id": "acs_apts_ref24_3dg_arrhenius_anchor",
@@ -2066,7 +2186,7 @@
     },
     {
       "id": "acs_2020_raw_pea_hexanal_baseline",
-      "citation": "Bi et al. (2020)",
+      "citation": "Bi et al. (2020), J. Agric. Food Chem. 68:2718",
       "doi": "10.1021/acs.jafc.9b07711",
       "citation_aliases": [
         "ACS JAFC 2020 (raw peas)"
@@ -2126,11 +2246,19 @@
           "path": "data/lit/flavor_reference_payloads.json"
         }
       ],
-      "repo_next_action": "Use as a raw-pea aroma baseline and conservative pea-family transfer anchor until isolate-matched PPI data is encoded."
+      "repo_next_action": "Use as a raw-pea aroma baseline and conservative pea-family transfer anchor until isolate-matched PPI data is encoded.",
+      "citation_repair": {
+        "old": "Bi et al. (2020)",
+        "new": "Bi et al. (2020), J. Agric. Food Chem. 68:2718",
+        "date": "2026-08-26",
+        "basis": "10.1021/acs.jafc.9b07711 (Bi et al. 2020, key aroma compounds in raw and roasted peas) is the correct anchor here and for both external_validation_bi_2020_* benchmarks; it was ALSO reused for the unrelated EGCG/deoxyosone claim, which has now been repointed."
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "10.1021/acs.jafc.9b07711 (Bi et al. 2020, key aroma compounds in raw and roasted peas) is the correct anchor here and for both external_validation_bi_2020_* benchmarks; it was ALSO reused for the unrelated EGCG/deoxyosone claim, which has now been repointed."
     },
     {
       "id": "liu_2023_ppi_offnote_baseline",
-      "citation": "Liu (2023)",
+      "citation": "Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998",
       "doi": "10.1016/j.foodchem.2022.134998",
       "kind": "quantitative_benchmark",
       "chemistry_family": "alternative_protein_matrix_scope",
@@ -2209,7 +2337,15 @@
       "requires_primary_data": false,
       "citation_aliases": [
         "Liu (2023)"
-      ]
+      ],
+      "citation_repair": {
+        "old": "Liu (2023)",
+        "new": "Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the CrossRef record for this DOI; see the shared_anchor note."
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "10.1016/j.foodchem.2022.134998 anchors four nominally distinct repo ids (liu_2023_ppi_offnote_baseline, liu_cadwallader_2023_pea_aeda, liu_2022_ppi_oav_anchors, researchgate_2023_pea_aeda). One paper, four ids; the 2022 year labels were also wrong (CrossRef: 2023)."
     },
     {
       "id": "pmc12155365_sunflower_roasted_anchor",
@@ -2410,8 +2546,7 @@
     },
     {
       "id": "blank_grosch_1991_hdmf_anchor",
-      "citation": "Blank & Grosch (1991)",
-      "doi": "10.1021/jf00009a012",
+      "citation": "Tonsbeek, Plancken & van de Weerdhof (1968), J. Agric. Food Chem. 16:1016",
       "kind": "quantitative_benchmark",
       "chemistry_family": "nucleotide_and_ribose_support",
       "slr_family_source": "04",
@@ -2465,7 +2600,14 @@
         }
       ],
       "repo_next_action": "Use as the compact Family 04 donor-routing and reporting anchor for HDMF without adding a large inline benchmark block.",
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1021/jf00009a012",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1021/jf00009a012 resolves to Mattheis et al. (1991) on apple volatiles, and no Blank & Grosch (1991) boiled-beef HDMF paper exists. Because this entry is kind=quantitative_benchmark, its beef HDMF band must not be transferred onto an adjacent paper. (Nearest genuine literature: Tonsbeek, Plancken & van de Weerdhof (1968), 10.1021/jf60160a008, 'Components contributing to beef flavor. Isolation of 4-hydroxy-5-methyl-3(2H)-furanone and its 2,5-dimethyl homolog from beef broth' - the primary beef-broth furanone isolation, but not a source for the stored concentration band.)"
+      },
+      "source_status": "no_verifiable_source"
     },
     {
       "id": "pmc9905368_spi_hvp_xylose_benchmark",
@@ -2756,11 +2898,16 @@
       "requires_primary_data": false,
       "citation_aliases": [
         "Ramírez-Jiménez et al. (2000)"
-      ]
+      ],
+      "citation_audit_note": {
+        "date": "2026-08-26",
+        "status": "left_in_place",
+        "basis": "DOI and citation are correct (Ramirez-Jimenez et al. 2000, 'Browning Indicators in Bread'). The mismatch is the entry's matrix_family='mild_legume_extrudate' label for a bread study; matrix_family is consumed by routing code, so it was annotated rather than rewritten."
+      }
     },
     {
       "id": "rizzello_2024_fermentation_cleanup",
-      "citation": "Rizzello et al. (2024)",
+      "citation": "Flores et al. (2024), J. Agric. Food Chem. 72:5334",
       "doi": "10.1021/acs.jafc.3c08432",
       "kind": "calibration_reference",
       "chemistry_family": "microbial_fermentation_modulation",
@@ -2806,11 +2953,17 @@
           "path": "data/lit/process_state_calibrations.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_repair": {
+        "old": "Rizzello et al. (2024)",
+        "new": "Flores et al. (2024), J. Agric. Food Chem. 72:5334",
+        "date": "2026-08-26",
+        "basis": "CrossRef metadata for 10.1021/acs.jafc.3c08432 is Flores, Comes, Gamero & Belloch (2024), fermented texturised pea protein aroma. The same DOI already anchors acs_jafc_3c08432_crosstalk_cleanup_link, so this is a duplicate anchor, not a second reference."
+      }
     },
     {
       "id": "acs_jafc_3c08432_crosstalk_cleanup_link",
-      "citation": "Flores et al. (2024)",
+      "citation": "Flores et al. (2024), J. Agric. Food Chem. 72:5334",
       "doi": "10.1021/acs.jafc.3c08432",
       "kind": "calibration_reference",
       "chemistry_family": "lipid_maillard_crosstalk",
@@ -2864,11 +3017,19 @@
           "path": "data/lit/process_state_calibrations.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_repair": {
+        "old": "Flores et al. (2024)",
+        "new": "Flores et al. (2024), J. Agric. Food Chem. 72:5334",
+        "date": "2026-08-26",
+        "basis": "10.1021/acs.jafc.3c08432 anchors both acs_jafc_3c08432_crosstalk_cleanup_link and rizzello_2024_fermentation_cleanup. One paper, two ids."
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "10.1021/acs.jafc.3c08432 anchors both acs_jafc_3c08432_crosstalk_cleanup_link and rizzello_2024_fermentation_cleanup. One paper, two ids."
     },
     {
       "id": "zhao_2022_moromi_precursor_release",
-      "citation": "Zhao et al. (2022)",
+      "citation": "Jo et al. (2022), Molecules 27:6182",
       "doi": "10.3390/molecules27196182",
       "kind": "calibration_reference",
       "chemistry_family": "microbial_fermentation_modulation",
@@ -2927,11 +3088,17 @@
           "path": "data/lit/process_state_calibrations.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_repair": {
+        "old": "Zhao et al. (2022)",
+        "new": "Jo et al. (2022), Molecules 27:6182",
+        "date": "2026-08-26",
+        "basis": "CrossRef metadata for 10.3390/molecules27196182 is Jo, An, Kim et al. (2022), comparative metabolomics of moromi; topic matches, author label did not."
+      }
     },
     {
       "id": "jafc_2019_ref24_polyphenol_thiol_capping",
-      "citation": "J. Agric. Food Chem. 2019 (Ref. 24)",
+      "citation": "Arsad et al. (2020), J. Agric. Food Chem. 68:8931",
       "doi": "10.1021/acs.jafc.9b07752",
       "kind": "directional_prior",
       "chemistry_family": "polyphenol_amino_capping",
@@ -2987,12 +3154,17 @@
       "requires_primary_data": false,
       "citation_aliases": [
         "J. Agric. Food Chem. 2019 (Ref. 24)"
-      ]
+      ],
+      "citation_repair": {
+        "old": "J. Agric. Food Chem. 2019 (Ref. 24)",
+        "new": "Arsad et al. (2020), J. Agric. Food Chem. 68:8931",
+        "date": "2026-08-26",
+        "basis": "CrossRef metadata for 10.1021/acs.jafc.9b07752 is Arsad, Zainudin, De Gobba et al. (2020), 'Quantitation of Protein Cysteine-Phenol Adducts in Minced Beef Containing 4-Methyl Catechol'; the repo label was a bare 'Ref. 24 (2019)' placeholder."
+      }
     },
     {
       "id": "liardon_1991_r5p_donor_potency",
       "citation": "Liardon et al. (1991)",
-      "doi": "10.1021/acs.jafc.liardon_1991",
       "kind": "directional_prior",
       "chemistry_family": "nucleotide_and_ribose_support",
       "slr_family_source": "04",
@@ -3046,12 +3218,18 @@
       "citation_aliases": [
         "Liardon et al. (1991)",
         "Liardon, de Weck-Gaudard & Philippossian (1991)"
-      ]
+      ],
+      "source_status": "no_verifiable_source",
+      "doi_repair": {
+        "old": "10.1021/acs.jafc.liardon_1991",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "The stored identifier '10.1021/acs.jafc.liardon_1991' is not a DOI - it is the repo id pasted into the DOI field. No Liardon (1991) study separating ribose-5-phosphate, ribose and glucose donor strength could be located; Liardon's traceable Maillard output is the 1987 JAFC CML identification paper. The R5P donor-strength multipliers are unsourced."
+      }
     },
     {
       "id": "huang_2021_sulfur_oav_support",
       "citation": "Huang et al. (2021)",
-      "doi": "10.1016/j.lwt.2021.111352",
       "kind": "directional_prior",
       "chemistry_family": "glutathione_and_peptide_support",
       "slr_family_source": "05",
@@ -3105,12 +3283,19 @@
       "requires_primary_data": false,
       "citation_aliases": [
         "Huang et al. (2021)"
-      ]
+      ],
+      "source_status": "no_verifiable_source",
+      "doi_repair": {
+        "old": "10.1016/j.lwt.2021.111352",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1016/j.lwt.2021.111352 resolves to Chraibi et al. (2021), an essential-oil antimicrobial mixture-design study. No Huang (2021) cysteine-xylose-glutamate sulfur-OAV study could be located by bibliographic search."
+      }
     },
     {
       "id": "blank_2001_epoxydecenal_guardrail",
-      "citation": "Blank et al. (2001)",
-      "doi": "10.1021/jf000900i",
+      "citation": "Lin, Fay, Welti & Blank (2001), Lipids 36:749",
+      "doi": "10.1007/s11745-001-0781-x",
       "kind": "directional_prior",
       "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
       "slr_family_source": "02",
@@ -3164,12 +3349,23 @@
       "requires_primary_data": false,
       "citation_aliases": [
         "Blank et al. (2001)"
-      ]
+      ],
+      "doi_repair": {
+        "old": "10.1007/s11745-001-0781-x",
+        "new": "10.1007/s11745-001-0781-x",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1021/jf000900i does not resolve. Lin, Fay, Welti & Blank (2001), 'Quantification of key odorants formed by autoxidation of arachidonic acid using isotope dilution assay', is the Blank-group 2001 arachidonic-acid/epoxydecenal quantification this guardrail cites."
+      },
+      "citation_repair": {
+        "old": "Blank et al. (2001)",
+        "new": "Lin, Fay, Welti & Blank (2001), Lipids 36:749",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "ordoudi_2014_hmf_peak_window",
       "citation": "Ordoudi et al. (2014)",
-      "doi": "10.1016/j.foodchem.2014.05.097",
       "kind": "calibration_reference",
       "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
       "slr_family_source": "09",
@@ -3215,12 +3411,19 @@
       "requires_primary_data": false,
       "citation_aliases": [
         "Ordoudi et al. (2014)"
-      ]
+      ],
+      "source_status": "no_verifiable_source",
+      "doi_repair": {
+        "old": "10.1016/j.foodchem.2014.05.097",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1016/j.foodchem.2014.05.097 resolves to Agcam et al. (2014) on PEF/heat inactivation of pectin methylesterase in orange juice. Ordoudi's traceable output is saffron/crocetin chemistry; no Ordoudi (2014) HMF peak-and-decline window at pH 5.0 / 125 C could be located."
+      }
     },
     {
       "id": "hrncirik_2014_coconut_oil_thermal_profile",
-      "citation": "Hrncirik & Zeelenberg (2014)",
-      "doi": "10.1016/j.foodchem.2013.11.082",
+      "citation": "Hrncirik & Zeelenberg (2013), J. Am. Oil Chem. Soc. 91:591",
+      "doi": "10.1007/s11746-013-2401-2",
       "kind": "calibration_reference",
       "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
       "slr_family_source": "02",
@@ -3265,12 +3468,23 @@
       "requires_primary_data": false,
       "citation_aliases": [
         "Hrncirik & Zeelenberg (2014)"
-      ]
+      ],
+      "doi_repair": {
+        "old": "10.1016/j.foodchem.2013.11.082",
+        "new": "10.1007/s11746-013-2401-2",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1016/j.foodchem.2013.11.082 resolves to Mashhadizadeh et al. (2014) on trace-metal SPE. The real Hrncirik & Zeelenberg paper is 'Stability of Essential Fatty Acids and Formation of Nutritionally Undesirable Compounds in Baking and Shallow Frying' (JAOCS, online 2013)."
+      },
+      "citation_repair": {
+        "old": "Hrncirik & Zeelenberg (2014)",
+        "new": "Hrncirik & Zeelenberg (2013), J. Am. Oil Chem. Soc. 91:591",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "marquez_ruiz_2014_oleic_oav_anchor",
       "citation": "Marquez-Ruiz et al. (2014)",
-      "doi": "10.1021/jf502636m",
       "kind": "calibration_reference",
       "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
       "slr_family_source": "02",
@@ -3321,12 +3535,19 @@
         }
       ],
       "repo_next_action": "Keep as the oleic-rich reference anchor so oil-selection logic does not treat nonanal-dominant systems as equivalent to hexanal-heavy linoleic oxidation.",
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "source_status": "no_verifiable_source",
+      "doi_repair": {
+        "old": "10.1021/jf502636m",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1021/jf502636m does not resolve. Marquez-Ruiz's traceable high-oleic-oil work (Grasas y Aceites 1996, JAOCS 2005/2010) concerns hydroperoxide and polar-compound quantitation, not volatile OAV tables; no 2014 high-oleic OAV anchor could be located."
+      }
     },
     {
       "id": "aliani_2005_donor_potency_nucleotide_context",
-      "citation": "Aliani & Farmer (2005)",
-      "doi": "10.1021/jf0401831",
+      "citation": "Aliani & Farmer (2005), J. Agric. Food Chem. 53:6067",
+      "doi": "10.1021/jf050085t",
       "kind": "directional_prior",
       "chemistry_family": "nucleotide_and_ribose_support",
       "slr_family_source": "04",
@@ -3381,12 +3602,24 @@
       "requires_primary_data": false,
       "citation_aliases": [
         "Aliani & Farmer (2005)"
-      ]
+      ],
+      "doi_repair": {
+        "old": "10.1021/jf050085t",
+        "new": "10.1021/jf050085t",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1021/jf0401831 does not resolve (CrossRef 404). CrossRef bibliographic search returns Aliani & Farmer (2005), 'Precursors of Chicken Flavor. I. Determination of Some Flavor Precursors in Chicken Muscle' - the ribose/nucleotide precursor determination the entry relies on."
+      },
+      "citation_repair": {
+        "old": "Aliani & Farmer (2005)",
+        "new": "Aliani & Farmer (2005), J. Agric. Food Chem. 53:6067",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "blank_devaud_grosch_2003_g6p_hdmf_prior",
-      "citation": "Cerny & Davídek (2003)",
-      "doi": "10.1021/jf026123f",
+      "citation": "Yaylayan, Machiels & Istasse (2003), J. Agric. Food Chem. 51:3358",
+      "doi": "10.1021/jf034037p",
       "citation_aliases": [
         "JAFC DOI:10.1021/jf034037p (2003)"
       ],
@@ -3439,12 +3672,26 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1021/jf026123f",
+        "new": "10.1021/jf034037p",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1021/jf026123f resolves to Cerny & Davidek (2003) on ribose/cysteine aroma - no G6P or HDMF multiplier. The phosphorylated-glucose Maillard control study is Yaylayan, Machiels & Istasse (2003), 'Thermal Decomposition of Specifically Phosphorylated D-Glucoses and Their Role in the Control of the Maillard Reaction', which the entry's own citation_aliases already name."
+      },
+      "citation_repair": {
+        "old": "Cerny & Davídek (2003)",
+        "new": "Yaylayan, Machiels & Istasse (2003), J. Agric. Food Chem. 51:3358",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "Shares 10.1021/jf034037p with the Yaylayan et al. (2003) entry already present in the registry."
     },
     {
       "id": "blank_1997_rhamnose_proline_hdmf_anchor",
-      "citation": "Blank et al. (1997)",
-      "doi": "10.1021/jf960777q",
+      "citation": "Blank & Fay (1996), J. Agric. Food Chem. 44:531",
+      "doi": "10.1021/jf950439o",
       "kind": "directional_prior",
       "chemistry_family": "carbonyl_donor_hierarchy",
       "slr_family_source": "07",
@@ -3496,12 +3743,24 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1021/jf960777q",
+        "new": "10.1021/jf950439o",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1021/jf960777q does not resolve. Blank & Fay (1996), 'Formation of 4-Hydroxy-2,5-dimethyl-3(2H)-furanone and 4-Hydroxy-2(or 5)-ethyl-5(or 2)-methyl-3(2H)-furanone through Maillard Reaction Based on Pentose Sugars' is the Blank furanone-yield study underlying this anchor. The rhamnose+proline specificity of the entry text is not fully carried by this source."
+      },
+      "citation_repair": {
+        "old": "Blank et al. (1997)",
+        "new": "Blank & Fay (1996), J. Agric. Food Chem. 44:531",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "brands_2002_mgo_hdmf_anchor",
-      "citation": "Brands & van Boekel (2002)",
-      "doi": "10.1021/jf015902m",
+      "citation": "Brands & van Boekel (2002), J. Agric. Food Chem. 50:6725",
+      "doi": "10.1021/jf011164h",
       "kind": "directional_prior",
       "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
       "slr_family_source": "09",
@@ -3555,12 +3814,23 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1021/jf011164h",
+        "new": "10.1021/jf011164h",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1021/jf015902m does not resolve. Brands & van Boekel (2002), 'Kinetic Modeling of Reactions in Heated Monosaccharide-Casein Systems', is the cited paper."
+      },
+      "citation_repair": {
+        "old": "Brands & van Boekel (2002)",
+        "new": "Brands & van Boekel (2002), J. Agric. Food Chem. 50:6725",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "ref41_ppi_sulfur_binding",
       "citation": "Wang et al. (2020)",
-      "doi": "10.1021/acs.jafc.9b06882",
       "kind": "directional_prior",
       "chemistry_family": "lipid_maillard_crosstalk",
       "slr_family_source": "11",
@@ -3623,12 +3893,19 @@
       "requires_primary_data": false,
       "citation_aliases": [
         "JAFC (2019)"
-      ]
+      ],
+      "source_status": "no_verifiable_source",
+      "doi_repair": {
+        "old": "10.1021/acs.jafc.9b06882",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1021/acs.jafc.9b06882 resolves to Zhao et al. (2019), a rodent reproductive-toxicology paper. The entry id is a bare cross-reference marker ('Ref. 41') with no author or year to search on, and no study reporting a DMTS > DMDS > DMS Stern-Volmer binding order for pea protein isolate could be located."
+      }
     },
     {
       "id": "glomb_1995_3dg_fragmentation_stoichiometry",
-      "citation": "Glomb & Monnier (1995)",
-      "doi": "10.1021/jf00058a011",
+      "citation": "Glomb & Monnier (1995), J. Biol. Chem. 270:10017",
+      "doi": "10.1074/jbc.270.17.10017",
       "kind": "directional_prior",
       "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
       "slr_family_source": "09",
@@ -3684,12 +3961,24 @@
       "requires_primary_data": false,
       "citation_aliases": [
         "Glomb & Monnier (1995)"
-      ]
+      ],
+      "doi_repair": {
+        "old": "10.1021/jf00058a011",
+        "new": "10.1074/jbc.270.17.10017",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1021/jf00058a011 resolves to Cabras et al. (1995) on insecticide residues in wine. The real Glomb & Monnier (1995) paper is 'Mechanism of Protein Modification by Glyoxal and Glycolaldehyde, Reactive Intermediates of the Maillard Reaction'. NOTE: it covers glyoxal/glycolaldehyde chemistry; the entry's explicit 3-deoxyglucosone fragmentation fractions are a modelling extrapolation, not a direct table in this source."
+      },
+      "citation_repair": {
+        "old": "Glomb & Monnier (1995)",
+        "new": "Glomb & Monnier (1995), J. Biol. Chem. 270:10017",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "hidalgo_zamora_2004_4hne_pentylpyrrole",
-      "citation": "Hidalgo & Zamora (2004)",
-      "doi": "10.1021/jf035223w",
+      "citation": "Globisch, Kaden & Henle (2015), J. Agric. Food Chem. 63:5273",
+      "doi": "10.1021/acs.jafc.5b01502",
       "kind": "directional_prior",
       "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
       "slr_family_source": "02",
@@ -3743,12 +4032,23 @@
       "requires_primary_data": false,
       "citation_aliases": [
         "Hidalgo & Zamora (2004)"
-      ]
+      ],
+      "doi_repair": {
+        "old": "10.1021/jf035223w",
+        "new": "10.1021/acs.jafc.5b01502",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1021/jf035223w does not resolve. The LOQ-backed absolute quantification of the 4-HNE-to-2-pentylpyrrole route in a food matrix is Globisch, Kaden & Henle (2015), '4-Hydroxy-2-nonenal (4-HNE) and Its Lipation Product 2-Pentylpyrrole Lysine (2-PPL) in Peanuts'; the Hidalgo & Zamora attribution is not supported by any resolvable record."
+      },
+      "citation_repair": {
+        "old": "Hidalgo & Zamora (2004)",
+        "new": "Globisch, Kaden & Henle (2015), J. Agric. Food Chem. 63:5273",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "mottram_2001_mft_quench_buffering_anchor",
-      "citation": "Mottram et al. (2001)",
-      "doi": "10.1021/jf010391+",
+      "citation": "Mottram & Elmore (2005), in The Maillard Reaction in Foods and Medicine, p.198",
       "kind": "calibration_reference",
       "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
       "slr_family_source": "02",
@@ -3809,12 +4109,18 @@
       "requires_primary_data": false,
       "citation_aliases": [
         "Mottram et al. (2001)"
-      ]
+      ],
+      "doi_repair": {
+        "old": "10.1021/jf010391+",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1021/jf010391+ does not resolve. No Mottram (2001) paper carrying a lipid-aldehyde MFT-quench coefficient plus a carnosine-buffered uplift could be located. The parallel SLR/priors verification additionally found that the real carnosine literature reports MFT DECREASING, i.e. the opposite sign to the stored +61% uplift, so the entry must not be re-anchored to an adjacent paper. (Nearest genuine literature for the quench half alone: Mottram & Elmore (2005), 10.1533/9781845698447.5.198, 'The Interaction of Lipid-Derived Aldehydes with the Maillard Reaction in Meat Systems'.)"
+      },
+      "source_status": "no_verifiable_source"
     },
     {
       "id": "yeo_mottram_2023_lecithin_crosstalk_anchor",
       "citation": "Yeo & Mottram (2023)",
-      "doi": "10.1016/j.foodchem.2023.136009",
       "kind": "calibration_reference",
       "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
       "slr_family_source": "02",
@@ -3866,12 +4172,18 @@
       "requires_primary_data": false,
       "citation_aliases": [
         "Yeo & Mottram (2023)"
-      ]
+      ],
+      "source_status": "no_verifiable_source",
+      "doi_repair": {
+        "old": "10.1016/j.foodchem.2023.136009",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1016/j.foodchem.2023.136009 resolves to Bae et al. (2023) on organosolv lignin antioxidants. No Yeo & Mottram (2023) soy-lecithin dose-window study for alkyl-thiophene uplift could be located; the author pairing itself does not appear in any indexed 2023 record."
+      }
     },
     {
       "id": "wang_2022_lab_hexanal_cleanup_anchor",
       "citation": "Wang et al. (2022)",
-      "doi": "10.1016/j.lwt.2022.113009",
       "kind": "calibration_reference",
       "chemistry_family": "off_note_and_maillard_suppression",
       "slr_family_source": "08",
@@ -3923,12 +4235,18 @@
       "requires_primary_data": false,
       "citation_aliases": [
         "Wang et al. (2022)"
-      ]
+      ],
+      "source_status": "no_verifiable_source",
+      "doi_repair": {
+        "old": "10.1016/j.lwt.2022.113009",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1016/j.lwt.2022.113009 does not resolve. No Wang (2022) LWT study reporting a residual-hexanal OAV target after lactic-acid-bacteria cleanup could be located. (Nearest genuine literature: Zipori et al. (2024), 10.3390/foods13040588, 'Rapid Acidification and Off-Flavor Reduction of Pea Protein by Fermentation with Lactic Acid Bacteria and Yeasts' - different authors, year and reported endpoints, so it was not substituted in.)"
+      }
     },
     {
       "id": "bhandari_1998_beta_cd_aldehyde_binding_anchor",
       "citation": "Bhandari et al. (1998)",
-      "doi": "10.1016/S0260-8774(98)00085-4",
       "kind": "directional_prior",
       "chemistry_family": "off_note_and_maillard_suppression",
       "slr_family_source": "08",
@@ -3986,12 +4304,18 @@
       "requires_primary_data": false,
       "citation_aliases": [
         "Bhandari et al. (1998)"
-      ]
+      ],
+      "doi_repair": {
+        "old": "10.1021/jf970605n",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1016/S0260-8774(98)00085-4 does not resolve (CrossRef 404). CrossRef bibliographic search over Bhandari's 1998-99 cyclodextrin output returns only lemon-oil/tea-tree-oil encapsulation papers; no Bhandari (1998) study of beta-cyclodextrin sequestration of hexanal, nonanal or (E)-2-nonenal could be located. The beta-CD sequestration figures in this entry are therefore unsourced."
+      },
+      "source_status": "no_verifiable_source"
     },
     {
       "id": "zhang_2022_unsaturated_aldehyde_potency_anchor",
       "citation": "Zhang et al. (2022)",
-      "doi": "10.1016/j.foodchem.2022.132009",
       "kind": "directional_prior",
       "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
       "slr_family_source": "02",
@@ -4045,7 +4369,14 @@
       "requires_primary_data": false,
       "citation_aliases": [
         "Zhang et al. (2022)"
-      ]
+      ],
+      "source_status": "no_verifiable_source",
+      "doi_repair": {
+        "old": "10.1016/j.foodchem.2022.132009",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1016/j.foodchem.2022.132009 does not resolve. No Zhang (2022) study establishing an LOD/LOQ-backed unsaturated-versus-saturated aldehyde potency hierarchy could be located."
+      }
     },
     {
       "id": "frontiers_2022_hcw_aa_arrhenius_anchor",
@@ -4110,8 +4441,8 @@
     },
     {
       "id": "pmid_1904866_pentosidine_equivalence_anchor",
-      "citation": "Grandhee & Monnier (1991)",
-      "doi": "10.1074/jbc.266.18.11644",
+      "citation": "Grandhee & Monnier (1991), J. Biol. Chem. 266:11649",
+      "doi": "10.1016/s0021-9258(18)99006-x",
       "kind": "calibration_reference",
       "chemistry_family": "ascorbic_acid_maillard",
       "slr_family_source": "14",
@@ -4172,12 +4503,24 @@
       "citation_aliases": [
         "Grandhee & Monnier (1991)",
         "PubMed PMID:1904866 (Ref. 5)"
-      ]
+      ],
+      "doi_repair": {
+        "old": "10.1016/s0021-9258(18)99006-x",
+        "new": "10.1016/s0021-9258(18)99006-x",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1074/jbc.266.18.11644 does not resolve (wrong page-based suffix). The registered DOI for Grandhee & Monnier (1991), 'Mechanism of formation of the Maillard protein cross-link pentosidine. Glucose, fructose, and ascorbate as pentosidine precursors' (the entry's own PMID 1904866), is 10.1016/S0021-9258(18)99006-X."
+      },
+      "citation_repair": {
+        "old": "Grandhee & Monnier (1991)",
+        "new": "Grandhee & Monnier (1991), J. Biol. Chem. 266:11649",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "scielo_brasil_aa_crosslink_hierarchy_anchor",
-      "citation": "Yu et al. (2018)",
-      "doi": "10.1590/1678-457X.08717",
+      "citation": "Yu et al. (2017), Food Sci. Technol. (Campinas) 38:537",
+      "doi": "10.1590/1678-457x.08717",
       "kind": "calibration_reference",
       "chemistry_family": "ascorbic_acid_maillard",
       "slr_family_source": "14",
@@ -4237,12 +4580,26 @@
       "citation_aliases": [
         "SciELO Brasil (2018)",
         "SciELO Brasil (Ref. 4)"
-      ]
+      ],
+      "citation_repair": {
+        "old": "Yu et al. (2018)",
+        "new": "Yu et al. (2017), Food Sci. Technol. (Campinas) 38:537",
+        "date": "2026-08-26",
+        "basis": "10.1590/1678-457x.08717 (Yu, Li, Yang & Yu 2017) is stored twice under two DOI case variants and two repo ids (scielo_brasil_aa_crosslink_hierarchy_anchor, yu_2018_ascorbic_basic_amino_browning). One paper, two ids; the year was also wrong (2017, not 2018)."
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "10.1590/1678-457x.08717 (Yu, Li, Yang & Yu 2017) is stored twice under two DOI case variants and two repo ids (scielo_brasil_aa_crosslink_hierarchy_anchor, yu_2018_ascorbic_basic_amino_browning). One paper, two ids; the year was also wrong (2017, not 2018).",
+      "doi_repair": {
+        "old": "10.1590/1678-457X.08717",
+        "new": "10.1590/1678-457x.08717",
+        "date": "2026-08-26",
+        "basis": "DOI case normalised so the two stored variants of Yu et al. (2017) collapse to one anchor."
+      }
     },
     {
       "id": "pmc9351765_crosspy_trapping_anchor",
-      "citation": "Weerawatanakorn et al. (2015)",
-      "doi": "10.1021/acs.jafc.5b02009",
+      "citation": "Weerawatanakorn, Wu, Pan & Ho (2015), J. Food Drug Anal. 23:176",
+      "doi": "10.1016/j.jfda.2015.02.001",
       "kind": "calibration_reference",
       "chemistry_family": "melanoidin_polymerization",
       "slr_family_source": "16",
@@ -4297,12 +4654,26 @@
       "citation_aliases": [
         "PMC PMCID:PMC9351765 (Ref. 12)",
         "Weerawatanakorn et al. (2015)"
-      ]
+      ],
+      "doi_repair": {
+        "old": "10.1021/acs.jafc.5b02009",
+        "new": "10.1016/j.jfda.2015.02.001",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1021/acs.jafc.5b02009 does not resolve. The NCBI ID converter maps the entry's own PMC9351765 to 10.1016/j.jfda.2015.02.001, Weerawatanakorn, Wu, Pan & Ho (2015), 'Reactivity and stability of selected flavor compounds' - which matches the entry's own 'Weerawatanakorn et al. (2015)' citation string."
+      },
+      "citation_repair": {
+        "old": "Weerawatanakorn et al. (2015)",
+        "new": "Weerawatanakorn, Wu, Pan & Ho (2015), J. Food Drug Anal. 23:176",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "uspto_ptacts_2023_yeast_extract_anchor",
       "citation": "Fraser et al. (2018)",
-      "doi": "US9943096B2",
+      "identifier": "US9943096B2",
+      "identifier_scheme": "patent",
+      "identifier_note": "2026-08-27: retyped from the doi field, where a granted US patent number was being stored. US 9,943,096 B2, 'Methods and compositions for affecting the flavor and aroma profile of consumables', Impossible Foods Inc, granted 2018-04-17 (verified 2026-08-26; patents carry no DOI). Matches the patent_number field already carried by the same source in data/lit/flavor_reference_payloads.json.",
       "kind": "calibration_reference",
       "chemistry_family": "alternative_protein_matrix_scope",
       "slr_family_source": "06",
@@ -4659,8 +5030,8 @@
     },
     {
       "id": "pmc12154226_crosspy_thiol_adduction",
-      "citation": "Hosry et al. (2025)",
-      "doi": "10.3390/foods14111881",
+      "citation": "Hofmann & Schieberle (2001), J. Agric. Food Chem. 50:319",
+      "doi": "10.1021/jf010823n",
       "kind": "calibration_reference",
       "chemistry_family": "polyphenol_amino_capping",
       "slr_family_source": "13",
@@ -4713,12 +5084,26 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.3390/foods14111881",
+        "new": "10.1021/jf010823n",
+        "date": "2026-08-26",
+        "basis": "The stored DOI 10.3390/foods14111881 does correspond to the entry's PMC12154226, but it is a broad Maillard review (El Hosry et al. 2025) with no CROSSPY adduction data. Re-anchored to Hofmann & Schieberle, 'Chemical Interactions between Odor-Active Thiols and Melanoidins Involved in the Aroma Staling of Coffee Beverages', where the parallel SLR/priors verification confirmed 'FFT decreased by a factor of 16' verbatim - the entry's own headline number. The CROSSPY radical itself is characterised in Hofmann, Bors & Stettmaier (2002), 10.1021/bk-2002-0807.ch004."
+      },
+      "citation_repair": {
+        "old": "Hosry et al. (2025)",
+        "new": "Hofmann & Schieberle (2001), J. Agric. Food Chem. 50:319",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "Shares 10.1021/jf010823n with hofmann_2001_melanoidin_thioether. One paper, two ids."
     },
     {
       "id": "jafc_2020_egcg_deoxyosone_trapping",
-      "citation": "Bi et al. (2020)",
-      "doi": "10.1021/acs.jafc.9b07711",
+      "citation": "Yu, Cui, Tang, Hayat et al. (2020), J. Agric. Food Chem. 68:1714",
+      "doi": "10.1021/acs.jafc.0c00200",
       "kind": "calibration_reference",
       "chemistry_family": "ascorbic_acid_maillard",
       "slr_family_source": "14",
@@ -4769,12 +5154,26 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1021/acs.jafc.9b07711",
+        "new": "10.1021/acs.jafc.0c00200",
+        "date": "2026-08-26",
+        "basis": "Re-anchored to Yu et al. (2020), 'Interaction of (-)-Epigallocatechin Gallate and Deoxyosones Blocking the Subsequent Maillard Reaction and Improving the Yield of N-(1-Deoxy-D-xylulos-1-yl)alanine'. The parallel SLR/priors verification confirmed both stored anchors to the decimal (Ea 77.8 -> 62.8 kJ/mol; ARP yield 2 -> 95%). This supersedes the interim 10.1021/acs.jafc.0c05098 (the same group's EGCG-ARP adduct paper, which does not carry those numbers)."
+      },
+      "citation_repair": {
+        "old": "Bi et al. (2020)",
+        "new": "Yu, Cui, Tang, Hayat et al. (2020), J. Agric. Food Chem. 68:1714",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "Shares 10.1021/acs.jafc.0c00200 with liu_2020_egcg_arp_kinetics: one Yu et al. (2020) paper, two ids."
     },
     {
       "id": "davidek_2006_thr_glucose_furan",
-      "citation": "Davidek et al. (2006)",
-      "doi": "10.1021/jf053246m",
+      "citation": "Limacher, Kerler, Davidek, Schmalzried & Blank (2008), J. Agric. Food Chem. 56:3639",
+      "doi": "10.1021/jf800268t",
       "kind": "safety_reference",
       "chemistry_family": "amino_acid_sugar_core",
       "slr_family_source": "01",
@@ -4819,12 +5218,24 @@
           "path": "data/lit/safety_reference_payloads.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1021/jf053246m",
+        "new": "10.1021/jf800268t",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1021/jf053246m does not resolve. The furan/methylfuran yield study from amino acid + sugar model systems with Davidek as co-author is Limacher et al. (2008), 'Formation of Furan and Methylfuran by Maillard-Type Reactions in Model Systems and Food'."
+      },
+      "citation_repair": {
+        "old": "Davidek et al. (2006)",
+        "new": "Limacher, Kerler, Davidek, Schmalzried & Blank (2008), J. Agric. Food Chem. 56:3639",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "martins_2003_lys_glucose_kinetics",
-      "citation": "Martins & van Boekel (2003)",
-      "doi": "10.1021/jf021111m",
+      "citation": "Yu, Zhong, Xie & Guo (2020), Food Chemistry 317:126458",
+      "doi": "10.1016/j.foodchem.2020.126458",
       "kind": "calibration_reference",
       "chemistry_family": "amino_acid_sugar_core",
       "slr_family_source": "01",
@@ -4870,12 +5281,24 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1021/jf021111m",
+        "new": "10.1016/j.foodchem.2020.126458",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1021/jf021111m does not resolve, and the Martins & van Boekel corpus is glucose/GLYCINE, not lysine. The study that reports furosine and pyrraline generation kinetics in a D-glucose / L-lysine model system is Yu, Zhong, Xie & Guo (2020)."
+      },
+      "citation_repair": {
+        "old": "Martins & van Boekel (2003)",
+        "new": "Yu, Zhong, Xie & Guo (2020), Food Chemistry 317:126458",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "grosch_1982_hexanal_odt",
-      "citation": "Grosch (1982)",
-      "doi": "10.1021/jf00111a008",
+      "citation": "Belitz, Grosch & Schieberle (2009), Food Chemistry, 4th rev. ed., Springer (aroma-threshold tables, Ch. 5)",
+      "doi": "10.1007/978-3-540-69934-7",
       "kind": "calibration_reference",
       "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
       "slr_family_source": "02",
@@ -4919,11 +5342,23 @@
           "path": "data/lit/flavor_reference_payloads.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1021/jf00111a008",
+        "new": "10.1007/978-3-540-69934-7",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1021/jf00111a008 resolves to Purcell & Walter (1982) on amino acid stability in sweet potatoes - nothing to do with odour thresholds, so the 4.5 ug/kg hexanal ODT was effectively unsourced. Belitz/Grosch/Schieberle 'Food Chemistry' is the standard compilation carrying the hexanal-in-water threshold of ~4.5 ug/kg and preserves the intended Grosch provenance. Cross-check: Czerny et al. (2008), Eur. Food Res. Technol. 228:265 (DOI 10.1007/s00217-008-0931-x) re-measured aqueous thresholds for key food odorants and places hexanal in the same low-single-digit ug/L band. The 4.5 ug/kg value itself was NOT changed."
+      },
+      "citation_repair": {
+        "old": "Grosch (1982)",
+        "new": "Belitz, Grosch & Schieberle (2009), Food Chemistry, 4th rev. ed., Springer (aroma-threshold tables, Ch. 5)",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "frankel_1982_c182_hexanal_scission",
-      "citation": "Frankel et al. (1982)",
+      "citation": "Frankel (1983), Prog. Lipid Res. 22:1",
       "doi": "10.1016/0163-7827(83)90002-4",
       "kind": "calibration_reference",
       "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
@@ -4969,12 +5404,18 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_repair": {
+        "old": "Frankel et al. (1982)",
+        "new": "Frankel (1983), Prog. Lipid Res. 22:1",
+        "date": "2026-08-26",
+        "basis": "CrossRef metadata for 10.1016/0163-7827(83)90002-4 is Frankel (1983), sole author, 'Volatile lipid oxidation products' - not a 1982 multi-author paper."
+      }
     },
     {
       "id": "grosch_1999_c183_propanal_scission",
-      "citation": "Grosch & Wieser (1999)",
-      "doi": "10.1021/jf990111u",
+      "citation": "Ullrich & Grosch (1988), J. Am. Oil Chem. Soc. 65:1313",
+      "doi": "10.1007/bf02542413",
       "kind": "calibration_reference",
       "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
       "slr_family_source": "02",
@@ -5019,12 +5460,24 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1021/jf990111u",
+        "new": "10.1007/bf02542413",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1021/jf990111u does not resolve. The Grosch-group study of C18:3 autoxidation odorants (propanal, 2,4-heptadienal) is Ullrich & Grosch (1988), 'Identification of the most intense odor compounds formed during autoxidation of methyl linolenate at room temperature'."
+      },
+      "citation_repair": {
+        "old": "Grosch & Wieser (1999)",
+        "new": "Ullrich & Grosch (1988), J. Am. Oil Chem. Soc. 65:1313",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "liu_2020_egcg_arp_kinetics",
-      "citation": "Liu et al. (2023/2024)",
-      "doi": "10.1021/acs.jafc.9b05898",
+      "citation": "Yu, Cui, Tang, Hayat et al. (2020), J. Agric. Food Chem. 68:1714",
+      "doi": "10.1021/acs.jafc.0c00200",
       "kind": "calibration_reference",
       "chemistry_family": "amino_acid_sugar_core",
       "slr_family_source": "01",
@@ -5072,12 +5525,25 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1021/acs.jafc.9b05898",
+        "new": "10.1021/acs.jafc.0c00200",
+        "date": "2026-08-26",
+        "basis": "Re-anchored to Yu et al. (2020), 'Interaction of (-)-Epigallocatechin Gallate and Deoxyosones Blocking the Subsequent Maillard Reaction and Improving the Yield of N-(1-Deoxy-D-xylulos-1-yl)alanine'. The parallel SLR/priors verification confirmed both stored anchors to the decimal (Ea 77.8 -> 62.8 kJ/mol; ARP yield 2 -> 95%). This supersedes the interim 10.1021/acs.jafc.0c05098 (the same group's EGCG-ARP adduct paper, which does not carry those numbers)."
+      },
+      "citation_repair": {
+        "old": "Liu et al. (2023/2024)",
+        "new": "Yu, Cui, Tang, Hayat et al. (2020), J. Agric. Food Chem. 68:1714",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "Shares 10.1021/acs.jafc.0c00200 with jafc_2020_egcg_deoxyosone_trapping: one Yu et al. (2020) paper, two ids."
     },
     {
       "id": "yu_2021_corn_hydrolysate_kinetics",
       "citation": "Yu et al. (2021)",
-      "doi": "10.1016/j.lwt.2021.111802",
       "kind": "quantitative_benchmark",
       "chemistry_family": "amino_acid_sugar_core",
       "slr_family_source": "01",
@@ -5118,12 +5584,19 @@
       "requires_primary_data": false,
       "citation_aliases": [
         "Yu et al. (2021)"
-      ]
+      ],
+      "source_status": "no_verifiable_source",
+      "doi_repair": {
+        "old": "10.1016/j.lwt.2021.111802",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1016/j.lwt.2021.111802 resolves to Patel, Andrade & Rousseau (2021) on W/O emulsion digestion. No Yu (2021) xylose + corn-protein-hydrolysate two-phase kinetics benchmark could be located, and this entry is flagged kind=quantitative_benchmark, so the absolute volatile values it carries are unsupported."
+      }
     },
     {
       "id": "farmer_1991_alkyl_thiazoles",
-      "citation": "Farmer & Patterson (1991)",
-      "doi": "10.1016/0308-8146(91)90013-I",
+      "citation": "Farmer & Patterson (1991), Food Chemistry 40:201",
+      "doi": "10.1016/0308-8146(91)90103-u",
       "kind": "calibration_reference",
       "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
       "slr_family_source": "02",
@@ -5171,12 +5644,24 @@
           "path": "data/lit/slr_incorporation_matrix.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1016/0308-8146(91)90103-u",
+        "new": "10.1016/0308-8146(91)90103-u",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1016/0308-8146(91)90013-I does not resolve; the correct suffix for Farmer & Patterson (1991), 'Compounds contributing to meat flavour', is 90103-u."
+      },
+      "citation_repair": {
+        "old": "Farmer & Patterson (1991)",
+        "new": "Farmer & Patterson (1991), Food Chemistry 40:201",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "esterbauer_1991_4hne_kinetics",
-      "citation": "Esterbauer et al. (1991)",
-      "doi": "10.1016/0891-5849(91)90081-A",
+      "citation": "Esterbauer, Schaur & Zollner (1991), Free Radic. Biol. Med. 11:81",
+      "doi": "10.1016/0891-5849(91)90192-6",
       "kind": "calibration_reference",
       "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
       "slr_family_source": "02",
@@ -5224,12 +5709,24 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1016/0891-5849(91)90192-6",
+        "new": "10.1016/0891-5849(91)90192-6",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1016/0891-5849(91)90081-A does not resolve; the correct suffix for Esterbauer, Schaur & Zollner (1991), 'Chemistry and biochemistry of 4-hydroxynonenal, malonaldehyde and related aldehydes' is 90192-6."
+      },
+      "citation_repair": {
+        "old": "Esterbauer et al. (1991)",
+        "new": "Esterbauer, Schaur & Zollner (1991), Free Radic. Biol. Med. 11:81",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "kamal_eldin_2003_triolein_scission",
-      "citation": "Kamal-Eldin et al. (2003)",
-      "doi": "10.1007/s11745-003-1082-x",
+      "citation": "Kamal-Eldin, Velasco & Dobarganes (2003), Eur. J. Lipid Sci. Technol. 105:329",
+      "doi": "10.1002/ejlt.200390032",
       "kind": "calibration_reference",
       "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
       "slr_family_source": "02",
@@ -5274,12 +5771,23 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1002/ejlt.200390032",
+        "new": "10.1002/ejlt.200390032",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1007/s11745-003-1082-x does not resolve. Kamal-Eldin, Velasco & Dobarganes (2003), 'Oxidation of mixtures of triolein and trilinolein at elevated temperatures', is the triolein oxidation study."
+      },
+      "citation_repair": {
+        "old": "Kamal-Eldin et al. (2003)",
+        "new": "Kamal-Eldin, Velasco & Dobarganes (2003), Eur. J. Lipid Sci. Technol. 105:329",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "xu_2024_soybean_pbma_hexanal",
       "citation": "Xu et al. (2024)",
-      "doi": "10.3390/foods13091393",
       "kind": "calibration_reference",
       "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
       "slr_family_source": "02",
@@ -5323,12 +5831,18 @@
           "path": "data/lit/flavor_reference_payloads.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "source_status": "no_verifiable_source",
+      "doi_repair": {
+        "old": "10.3390/foods13091393",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.3390/foods13091393 resolves to Spizzirri & Restuccia (2024), a food-waste-valorisation editorial. No Xu (2024) study of hexanal accumulation during storage of soy-based PBMAs could be located."
+      }
     },
     {
       "id": "yeo_shibamoto_1991_wof_hexanal",
       "citation": "Yeo & Shibamoto (1991)",
-      "doi": "10.1021/jf00002a024",
       "kind": "calibration_reference",
       "chemistry_family": "lipid_oxidation_and_carbonylic_crosstalk",
       "slr_family_source": "02",
@@ -5379,11 +5893,18 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "source_status": "no_verifiable_source",
+      "doi_repair": {
+        "old": "10.1021/jf00002a024",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1021/jf00002a024 resolves to Ramarathnam, Rubin & Diosady (1991), 'Studies on meat flavor. 1. ... uncured and cured pork', which contains neither the 82-88% phospholipid contribution to WOF hexanal nor a lipoxygenase D-value table. No Yeo & Shibamoto (1991) paper carrying those two results could be located."
+      }
     },
     {
       "id": "liu_cadwallader_2023_pea_aeda",
-      "citation": "Liu et al. (2022)",
+      "citation": "Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998",
       "doi": "10.1016/j.foodchem.2022.134998",
       "kind": "calibration_reference",
       "chemistry_family": "alternative_protein_matrix_scope",
@@ -5427,12 +5948,19 @@
           "path": "data/lit/flavor_reference_payloads.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_repair": {
+        "old": "Liu et al. (2022)",
+        "new": "Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the CrossRef record for this DOI; see the shared_anchor note."
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "10.1016/j.foodchem.2022.134998 anchors four nominally distinct repo ids (liu_2023_ppi_offnote_baseline, liu_cadwallader_2023_pea_aeda, liu_2022_ppi_oav_anchors, researchgate_2023_pea_aeda). One paper, four ids; the 2022 year labels were also wrong (CrossRef: 2023)."
     },
     {
       "id": "malia_2025_pea_free_sh_crosscheck",
       "citation": "Malia et al. (2025)",
-      "doi": "10.1016/j.foodhyd.2024.110509",
       "kind": "calibration_reference",
       "chemistry_family": "alternative_protein_matrix_scope",
       "slr_family_source": "06",
@@ -5477,12 +6005,18 @@
       "requires_primary_data": false,
       "citation_aliases": [
         "Malia et al. (2025)"
-      ]
+      ],
+      "source_status": "no_verifiable_source",
+      "doi_repair": {
+        "old": "10.1016/j.foodhyd.2024.110509",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1016/j.foodhyd.2024.110509 resolves to Gong et al. (2025) on esterified wheat starch. No Malia (2025) pea-protein free-sulfhydryl / DSC crosscheck could be located by bibliographic search."
+      }
     },
     {
       "id": "tran_2023_reducing_sugar_hme",
       "citation": "Liu et al. (2022)",
-      "doi": "10.1016/j.carbpol.2022.120468",
       "kind": "calibration_reference",
       "chemistry_family": "carbonyl_donor_hierarchy",
       "slr_family_source": "07",
@@ -5529,12 +6063,19 @@
           ]
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "source_status": "no_verifiable_source",
+      "doi_repair": {
+        "old": "10.1016/j.carbpol.2022.120468",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1016/j.carbpol.2022.120468 resolves to Liu et al. (2023) on conductive hydrogels for strain sensors - a different field. No Tran (2023) study of reducing-sugar liberation from pea versus waxy maize starch during HME could be located."
+      }
     },
     {
       "id": "henle_2005_glycinin_cml",
-      "citation": "Henle (2005)",
-      "doi": "10.1007/s00726-005-0187-z",
+      "citation": "Henle (2005), Amino Acids 29:313",
+      "doi": "10.1007/s00726-005-0200-2",
       "kind": "calibration_reference",
       "chemistry_family": "protein_damage_markers",
       "slr_family_source": "12",
@@ -5576,11 +6117,23 @@
           "path": "data/lit/safety_reference_payloads.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1007/s00726-005-0200-2",
+        "new": "10.1007/s00726-005-0200-2",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1007/s00726-005-0187-z does not resolve. Henle (2005), 'Protein-bound advanced glycation endproducts (AGEs) as bioactive amino acid derivatives in foods', is the Henle 2005 Amino Acids paper. NOTE: it is a review of food AGEs; the soy-glycinin-specific CML figure in this entry is not attributable to it."
+      },
+      "citation_repair": {
+        "old": "Henle (2005)",
+        "new": "Henle (2005), Amino Acids 29:313",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "liu_2022_ppi_oav_anchors",
-      "citation": "Liu (2022)",
+      "citation": "Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998",
       "doi": "10.1016/j.foodchem.2022.134998",
       "citation_aliases": [
         "Liu (2022)"
@@ -5630,12 +6183,20 @@
           "path": "data/lit/flavor_reference_payloads.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_repair": {
+        "old": "Liu (2022)",
+        "new": "Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998",
+        "date": "2026-08-26",
+        "basis": "10.1016/j.foodchem.2022.134998 anchors four nominally distinct repo ids (liu_2023_ppi_offnote_baseline, liu_cadwallader_2023_pea_aeda, liu_2022_ppi_oav_anchors, researchgate_2023_pea_aeda). One paper, four ids; the 2022 year labels were also wrong (CrossRef: 2023)."
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "10.1016/j.foodchem.2022.134998 anchors four nominally distinct repo ids (liu_2023_ppi_offnote_baseline, liu_cadwallader_2023_pea_aeda, liu_2022_ppi_oav_anchors, researchgate_2023_pea_aeda). One paper, four ids; the 2022 year labels were also wrong (CrossRef: 2023)."
     },
     {
       "id": "rawel_2002_cga_cysteine_blocking",
-      "citation": "Rawel et al. (2002)",
-      "doi": "10.1021/jf020082z",
+      "citation": "Rawel, Rohn, Kruse & Kroll (2002), Food Chemistry 78:443",
+      "doi": "10.1016/s0308-8146(02)00155-3",
       "kind": "calibration_reference",
       "chemistry_family": "off_note_and_maillard_suppression",
       "slr_family_source": "08",
@@ -5678,12 +6239,24 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1016/s0308-8146(02)00155-3",
+        "new": "10.1016/s0308-8146(02)00155-3",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1021/jf020082z does not resolve. Rawel, Rohn, Kruse & Kroll (2002), 'Structural changes induced in bovine serum albumin by covalent attachment of chlorogenic acid', is the Rawel 2002 CGA/protein derivatisation study reporting lysine and cysteine blocking. NOTE: the matrix is BSA, not a plant protein isolate."
+      },
+      "citation_repair": {
+        "old": "Rawel et al. (2002)",
+        "new": "Rawel, Rohn, Kruse & Kroll (2002), Food Chemistry 78:443",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "quintas_2000_sucrose_caramelisation",
-      "citation": "Ramaswamy & Zareifard (2000)",
-      "doi": "10.1016/S0260-8774(00)00047-9",
+      "citation": "Quintas, Guimaraes, Baylina, Brandao & Silva (2007), Innov. Food Sci. Emerg. Technol. 8:306",
+      "doi": "10.1016/j.ifset.2007.02.002",
       "kind": "calibration_reference",
       "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
       "slr_family_source": "09",
@@ -5724,12 +6297,23 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1016/S0260-8774(00)00047-9",
+        "new": "10.1016/j.ifset.2007.02.002",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1016/S0260-8774(00)00047-9 resolves to Ramaswamy & Zareifard (2000) on tube-flow heat transfer - no caramelisation content. The Quintas-group study that models sucrose caramelisation together with HMF formation is Quintas et al. (2007), 'Multiresponse modelling of the caramelisation reaction'."
+      },
+      "citation_repair": {
+        "old": "Ramaswamy & Zareifard (2000)",
+        "new": "Quintas, Guimaraes, Baylina, Brandao & Silva (2007), Innov. Food Sci. Emerg. Technol. 8:306",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "hauck_tressl_1999_hdmf_non_amino",
-      "citation": "Hauck & Tressl (1999)",
-      "doi": "10.1021/bk-1999-0740.ch012",
+      "citation": "Hauck, Landmann, Raab, Bruhlmann & Schwab (2002), Carbohydr. Res. 337:1185",
       "kind": "calibration_reference",
       "chemistry_family": "carbohydrate_pyrolysis_and_caramelization",
       "slr_family_source": "09",
@@ -5773,12 +6357,19 @@
           "path": "data/lit/flavor_reference_payloads.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1021/bk-1999-0740.ch012",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1021/bk-1999-0740.ch012 does not resolve and no Hauck & Tressl (1999) ACS Symposium Series chapter with these yields could be located. (Nearest genuine literature: Hauck, Landmann, Raab, Bruhlmann & Schwab (2002), 10.1016/s0008-6215(02)00121-0, 'Chemical formation of 4-hydroxy-2,5-dimethyl-3[2H]-furanone from d-fructose 1,6-diphosphate' - amino-acid-free HDMF formation, but from a phosphorylated hexose, not the maltose / iso-oligosaccharide / methylglyoxal routes and yields this entry quotes.)"
+      },
+      "source_status": "no_verifiable_source"
     },
     {
       "id": "perdiguero_2004_yeast_autolysis_nucleotides",
-      "citation": "Perdiguero et al. (2004)",
-      "doi": "10.1021/jf0494452",
+      "citation": "Charpentier, Aussenac, Charpentier & Prome (2005), J. Agric. Food Chem. 53:3000",
+      "doi": "10.1021/jf040334y",
       "kind": "calibration_reference",
       "chemistry_family": "fermentation_pretreatment",
       "slr_family_source": "10",
@@ -5821,12 +6412,24 @@
           "path": "data/lit/process_state_calibrations.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1021/jf040334y",
+        "new": "10.1021/jf040334y",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1021/jf0494452 does not resolve. Charpentier et al. (2005), 'Release of Nucleotides and Nucleosides during Yeast Autolysis: Kinetics and Potential Impact on Flavor', is the yeast-autolysis nucleotide-release kinetics study."
+      },
+      "citation_repair": {
+        "old": "Perdiguero et al. (2004)",
+        "new": "Charpentier, Aussenac, Charpentier & Prome (2005), J. Agric. Food Chem. 53:3000",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "tang_2013_thiamine_mft",
-      "citation": "Tang et al. (2013)",
-      "doi": "10.1080/17415993.2012.715206",
+      "citation": "Tang, Jiang, Yuan & Ho (2013), J. Sulfur Chem. 34:326 (CrossRef issue year 2012)",
+      "doi": "10.1080/17415993.2012.708933",
       "kind": "calibration_reference",
       "chemistry_family": "thiamine_fragmentation_support",
       "slr_family_source": "03",
@@ -5868,12 +6471,24 @@
           "path": "data/lit/flavor_reference_payloads.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1080/17415993.2012.708933",
+        "new": "10.1080/17415993.2012.708933",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1080/17415993.2012.715206 does not resolve; the correct DOI for Tang, Jiang, Yuan & Ho, 'Flavor chemistry of 2-methyl-3-furanthiol, an intense meaty aroma compound' (J. Sulfur Chem., issue-dated 2013) is 10.1080/17415993.2012.708933."
+      },
+      "citation_repair": {
+        "old": "Tang et al. (2013)",
+        "new": "Tang, Jiang, Yuan & Ho (2013), J. Sulfur Chem. 34:326 (CrossRef issue year 2012)",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "tannenbaum_1985_thiamine_ea",
-      "citation": "Tannenbaum et al. (1985)",
-      "doi": "10.1021/jf00065a009",
+      "citation": "Mauri, Alzamora, Chirife & Tomio (1989), Int. J. Food Sci. Technol. 24:1",
+      "doi": "10.1111/j.1365-2621.1989.tb00613.x",
       "kind": "calibration_reference",
       "chemistry_family": "thiamine_fragmentation_support",
       "slr_family_source": "03",
@@ -5918,12 +6533,24 @@
       "requires_primary_data": false,
       "citation_aliases": [
         "Tannenbaum et al. (1985)"
-      ]
+      ],
+      "doi_repair": {
+        "old": "10.1021/jf00065a009",
+        "new": "10.1111/j.1365-2621.1989.tb00613.x",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1021/jf00065a009 resolves to Al-Wandawi et al. (1985) on tomato processing wastes - an unrelated paper. The compilation of thiamine-degradation activation energies over a wide temperature/pH/water-activity range is Mauri, Alzamora, Chirife & Tomio (1989), 'Review: Kinetic parameters for thiamine degradation in foods and model solutions of high water activity'."
+      },
+      "citation_repair": {
+        "old": "Tannenbaum et al. (1985)",
+        "new": "Mauri, Alzamora, Chirife & Tomio (1989), Int. J. Food Sci. Technol. 24:1",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "finnigan_2019_mycoprotein_rna",
-      "citation": "Finnigan et al. (2019)",
-      "doi": "10.1039/c9fo00878e",
+      "citation": "Finnigan, Wall, Wilde, Stephens et al. (2019), Curr. Dev. Nutr. 3:nzz021",
+      "doi": "10.1093/cdn/nzz021",
       "kind": "calibration_reference",
       "chemistry_family": "nucleotide_and_ribose_support",
       "slr_family_source": "04",
@@ -5966,12 +6593,24 @@
           "path": "data/lit/process_state_calibrations.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1039/c9fo00878e",
+        "new": "10.1093/cdn/nzz021",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1039/c9fo00878e does not resolve. Finnigan et al. (2019), 'Mycoprotein: The Future of Nutritious Nonmeat Protein, a Symposium Review', is the cited source."
+      },
+      "citation_repair": {
+        "old": "Finnigan et al. (2019)",
+        "new": "Finnigan, Wall, Wilde, Stephens et al. (2019), Curr. Dev. Nutr. 3:nzz021",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "xu_2025_peptide_hierarchy",
-      "citation": "Xu, H. et al. (2025), PMC11743841",
-      "doi": "10.1186/s12934-025-02688-w",
+      "citation": "Lee, Lee & Jo (2025), Food Sci. Anim. Resour. 45:1",
+      "doi": "10.5851/kosfa.2024.e133",
       "kind": "calibration_reference",
       "chemistry_family": "glutathione_and_peptide_support",
       "slr_family_source": "05",
@@ -6014,7 +6653,19 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1186/s12934-025-02688-w",
+        "new": "10.5851/kosfa.2024.e133",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1186/s12934-025-02688-w does not resolve. The NCBI ID converter maps the entry's own PMC11743841 to 10.5851/kosfa.2024.e133, Lee, Lee & Jo (2025), 'Application of Animal Resources into the Maillard Reaction Model System to Improve Meat Flavor'. NOTE: the 'Xu, H. et al. (2025)' author label was wrong, and the peptide-hierarchy multipliers should be read against this review."
+      },
+      "citation_repair": {
+        "old": "Xu, H. et al. (2025), PMC11743841",
+        "new": "Lee, Lee & Jo (2025), Food Sci. Anim. Resour. 45:1",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "acrylamide_heat_trapping_2024",
@@ -6175,8 +6826,8 @@
     },
     {
       "id": "pmid36878579_pe_stoichiometry",
-      "citation": "Fujimoto et al. (2023)",
-      "doi": "10.1021/acs.jafc.2c08283",
+      "citation": "Fujimoto, Hayashi, Hamaguchi, Zhan et al. (2023), J. Oleo Sci. 72:311",
+      "doi": "10.5650/jos.ess22332",
       "kind": "calibration_reference",
       "chemistry_family": "lipid_maillard_crosstalk",
       "slr_family_source": "15",
@@ -6221,7 +6872,19 @@
       "requires_primary_data": false,
       "citation_aliases": [
         "Fujimoto et al. (2023)"
-      ]
+      ],
+      "doi_repair": {
+        "old": "10.1021/acs.jafc.2c08283",
+        "new": "10.5650/jos.ess22332",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1021/acs.jafc.2c08283 does not resolve. NCBI esummary maps the entry's own PMID 36878579 to 10.5650/jos.ess22332, Fujimoto et al. (2023), 'Clarification of the Mechanism of Inhibiting the Maillard Reaction between Phosphatidylethanolamine and Sugars by Adding Fatty Acid Calcium Salts' - matching both the author label and the calcium-stearate inhibition claim."
+      },
+      "citation_repair": {
+        "old": "Fujimoto et al. (2023)",
+        "new": "Fujimoto, Hayashi, Hamaguchi, Zhan et al. (2023), J. Oleo Sci. 72:311",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "jafc_2022_melanoidin_thiol_binding",
@@ -6276,8 +6939,8 @@
     },
     {
       "id": "de_vleeschouwer_2006_acrylamide_aqueous",
-      "citation": "De Vleeschouwer et al. (2006)",
-      "doi": "10.1021/jf051197n",
+      "citation": "De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx (2006), J. Agric. Food Chem. 54:7847",
+      "doi": "10.1021/jf0611264",
       "kind": "calibration_reference",
       "chemistry_family": "protein_damage_markers",
       "slr_family_source": "12",
@@ -6319,11 +6982,23 @@
           "path": "data/lit/safety_reference_payloads.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_repair": {
+        "old": "De Vleeschouwer et al. (2006)",
+        "new": "De Vleeschouwer, Van der Plancken, Van Loey & Hendrickx (2006), J. Agric. Food Chem. 54:7847",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      },
+      "doi_repair": {
+        "old": "10.1021/jf051197n",
+        "new": "10.1021/jf0611264",
+        "date": "2026-08-26",
+        "basis": "The stored 10.1021/jf051197n is Claeys, De Vleeschouwer & Hendrickx (2005), already anchored by sibling row claeys_2005_acrylamide_temperature_time - a silent duplicate. The real De Vleeschouwer et al. (2006) paper carrying the pH dependence this entry describes is 'Impact of pH on the Kinetics of Acrylamide Formation/Elimination Reactions in Model Systems'."
+      }
     },
     {
       "id": "zhu_2022_acrylamide_lipid_crosstalk",
-      "citation": "Zhu et al. (2022)",
+      "citation": "Ma et al. (2022), Front. Nutr. 9:940202",
       "doi": "10.3389/fnut.2022.940202",
       "kind": "calibration_reference",
       "chemistry_family": "protein_damage_markers",
@@ -6367,7 +7042,13 @@
           "path": "data/lit/safety_reference_payloads.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_repair": {
+        "old": "Zhu et al. (2022)",
+        "new": "Ma et al. (2022), Front. Nutr. 9:940202",
+        "date": "2026-08-26",
+        "basis": "CrossRef metadata for 10.3389/fnut.2022.940202 is Ma, Long, Li et al. (2022); topic (acrylamide/HMF in a glucose-asparagine-linoleic acid model) matches, author label did not."
+      }
     },
     {
       "id": "sun_2015_ground_beef_ages",
@@ -6419,7 +7100,7 @@
     },
     {
       "id": "zhu_2021_braised_chicken_ages",
-      "citation": "Zhu et al. (2021)",
+      "citation": "Zhu et al. (2020), J. Sci. Food Agric. 100:5064",
       "doi": "10.1002/jsfa.10528",
       "kind": "calibration_reference",
       "chemistry_family": "protein_damage_markers",
@@ -6465,7 +7146,13 @@
           "path": "data/lit/safety_reference_payloads.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_repair": {
+        "old": "Zhu et al. (2021)",
+        "new": "Zhu et al. (2020), J. Sci. Food Agric. 100:5064",
+        "date": "2026-08-26",
+        "basis": "CrossRef metadata for 10.1002/jsfa.10528 dates the article to 2020; repo claimed 2021."
+      }
     },
     {
       "id": "hamzalioglu_2026_milk_uht_ages",
@@ -6516,8 +7203,8 @@
     },
     {
       "id": "krause_2003_furosine_hydrolysis_yields",
-      "citation": "Krause et al. (2003)",
-      "doi": "10.1007/s00217-003-0685-6",
+      "citation": "Krause, Knoll & Henle (2003), Eur. Food Res. Technol. 216:277",
+      "doi": "10.1007/s00217-002-0649-0",
       "kind": "calibration_reference",
       "chemistry_family": "protein_damage_markers",
       "slr_family_source": "12",
@@ -6563,11 +7250,23 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1007/s00217-002-0649-0",
+        "new": "10.1007/s00217-002-0649-0",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1007/s00217-003-0685-6 does not resolve. Krause, Knoll & Henle (2003), 'Studies on the formation of furosine and pyridosine during acid hydrolysis of different Amadori products of lysine', is exactly the cited conversion-yield study."
+      },
+      "citation_repair": {
+        "old": "Krause et al. (2003)",
+        "new": "Krause, Knoll & Henle (2003), Eur. Food Res. Technol. 216:277",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "hidalgo_2000_tomato_furosine",
-      "citation": "Hidalgo & Pompei (2000)",
+      "citation": "Hidalgo & Pompei (1999), J. Agric. Food Chem. 48:78",
       "doi": "10.1021/jf990120u",
       "kind": "calibration_reference",
       "chemistry_family": "protein_damage_markers",
@@ -6609,12 +7308,20 @@
           "path": "data/lit/safety_reference_payloads.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_repair": {
+        "old": "Hidalgo & Pompei (2000)",
+        "new": "Hidalgo & Pompei (1999), J. Agric. Food Chem. 48:78",
+        "date": "2026-08-26",
+        "basis": "CrossRef metadata for 10.1021/jf990120u dates 'Hydroxymethylfurfural and Furosine Reaction Kinetics in Tomato Products' to 1999; repo claimed 2000."
+      }
     },
     {
       "id": "cantre_2007_corned_beef_furosine",
       "citation": "Cantre et al. (2007)",
-      "doi": "PAS_90_2_143_2007",
+      "identifier": "Philippine Agricultural Scientist 90(2):143-152 (2007)",
+      "identifier_scheme": "journal_locator",
+      "identifier_note": "2026-08-27: retyped from doi 'PAS_90_2_143_2007', which was an encoded journal locator, not a DOI. It decodes to Cantre, Garcia, Carpio & Madamba (2007), 'Reaction Kinetics of Furosine (epsilon-N-2-furoylmethyl-L-lysine) during Thermal Processing of Corned Beef', Philippine Agricultural Scientist 90(2):143-152 (verified 2026-08-26). The journal issues no DOI for this article, so the volume/issue/page locator is the identifier; no URL or ISSN is asserted here because none was verified.",
       "kind": "calibration_reference",
       "chemistry_family": "protein_damage_markers",
       "slr_family_source": "12",
@@ -6758,8 +7465,8 @@
     },
     {
       "id": "yu_2017_cml_cel_meat_review",
-      "citation": "Yu et al. (2017)",
-      "doi": "10.1016/j.tifs.2020.01.021",
+      "citation": "Sun, Tang, Wang, Rasco, Lai & Huang (2015), Food Chemistry 172:802",
+      "doi": "10.1016/j.foodchem.2014.09.129",
       "kind": "calibration_reference",
       "chemistry_family": "protein_damage_markers",
       "slr_family_source": "12",
@@ -6802,11 +7509,23 @@
           "path": "data/lit/safety_reference_payloads.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_repair": {
+        "old": "Yu et al. (2017)",
+        "new": "Sun, Tang, Wang, Rasco, Lai & Huang (2015), Food Chemistry 172:802",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      },
+      "doi_repair": {
+        "old": "10.1016/j.tifs.2020.01.021",
+        "new": "10.1016/j.foodchem.2014.09.129",
+        "date": "2026-08-26",
+        "basis": "Superseded on 2026-08-26 by the parallel SLR/priors verification: the stored Ea pair (CML 61.01, CEL 29.21 kJ/mol) appears verbatim in Sun et al. (2015), 'Formation of advanced glycation endproducts in ground beef under pasteurisation conditions'. The previously stored 10.1016/j.tifs.2020.01.021 is a 2020 TiFS review by Zhu et al. that reports, but does not measure, those values, and 'Yu et al. (2017)' names no author of either paper."
+      }
     },
     {
       "id": "huang_2024_dixyl_arp_degradation",
-      "citation": "Huang et al. (2024)",
+      "citation": "Zhang et al. (2024), J. Agric. Food Chem. 72:22461",
       "doi": "10.1021/acs.jafc.4c05736",
       "kind": "calibration_reference",
       "chemistry_family": "carbonyl_donor_hierarchy",
@@ -6849,7 +7568,13 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_repair": {
+        "old": "Huang et al. (2024)",
+        "new": "Zhang et al. (2024), J. Agric. Food Chem. 72:22461",
+        "date": "2026-08-26",
+        "basis": "CrossRef metadata for 10.1021/acs.jafc.4c05736 is Zhang, Cui, Xia et al. (2024); topic (DiXyl-ARP degradation with extra xylose) matches, author label did not."
+      }
     },
     {
       "id": "charissou_2007_cookie_cml_furosine",
@@ -6903,7 +7628,7 @@
     },
     {
       "id": "fratianni_2016_apricot_furosine",
-      "citation": "Fratianni et al. (2016)",
+      "citation": "Fratianni et al. (2017), Food Res. Int. 99:862",
       "doi": "10.1016/j.foodres.2016.12.009",
       "kind": "calibration_reference",
       "chemistry_family": "protein_damage_markers",
@@ -6945,7 +7670,13 @@
           "path": "data/lit/safety_reference_payloads.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_repair": {
+        "old": "Fratianni et al. (2016)",
+        "new": "Fratianni et al. (2017), Food Res. Int. 99:862",
+        "date": "2026-08-26",
+        "basis": "CrossRef metadata for 10.1016/j.foodres.2016.12.009 dates the article to 2017 (online-first in Dec 2016); repo claimed 2016."
+      }
     },
     {
       "id": "rombouts_2012_gluten_crosslinking",
@@ -7050,8 +7781,8 @@
     },
     {
       "id": "ilo_1996_maize_sme_lysine_damage",
-      "citation": "Ilo et al. (1996)",
-      "doi": "10.1006/fstl.1996.0092",
+      "citation": "Ilo & Berghofer (2003), J. Food Sci. 68:496",
+      "doi": "10.1111/j.1365-2621.2003.tb05701.x",
       "kind": "calibration_reference",
       "chemistry_family": "alternative_protein_matrix_scope",
       "slr_family_source": "06",
@@ -7093,11 +7824,23 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1006/fstl.1996.0092",
+        "new": "10.1111/j.1365-2621.2003.tb05701.x",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1006/fstl.1996.0092 is Ilo et al. (1996) on extrudate viscosity - correct authors, but it contains no lysine-damage measurement. The Ilo paper that actually reports first-order lysine-loss kinetics against extrusion severity is Ilo & Berghofer (2003), 'Kinetics of Lysine and Other Amino Acids Loss During Extrusion Cooking of Maize Grits'."
+      },
+      "citation_repair": {
+        "old": "Ilo et al. (1996)",
+        "new": "Ilo & Berghofer (2003), J. Food Sci. 68:496",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "researchgate_2023_pea_aeda",
-      "citation": "Liu et al. (2022)",
+      "citation": "Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998",
       "doi": "10.1016/j.foodchem.2022.134998",
       "kind": "calibration_reference",
       "chemistry_family": "alternative_protein_matrix_scope",
@@ -7145,7 +7888,15 @@
       "citation_aliases": [
         "Liu et al. (2023)",
         "ResearchGate (2023)"
-      ]
+      ],
+      "citation_repair": {
+        "old": "Liu et al. (2022)",
+        "new": "Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the CrossRef record for this DOI; see the shared_anchor note."
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "10.1016/j.foodchem.2022.134998 anchors four nominally distinct repo ids (liu_2023_ppi_offnote_baseline, liu_cadwallader_2023_pea_aeda, liu_2022_ppi_oav_anchors, researchgate_2023_pea_aeda). One paper, four ids; the 2022 year labels were also wrong (CrossRef: 2023)."
     },
     {
       "id": "voelker_2018_thiamine_salt_degradation",
@@ -7387,7 +8138,6 @@
     {
       "id": "zhang_1993_protein_deamidation_ammonia",
       "citation": "Zhang et al. (1993)",
-      "doi": "10.1111/j.1745-4530.1993.tb00179.x",
       "kind": "calibration_reference",
       "chemistry_family": "alternative_protein_matrix_scope",
       "slr_family_source": "06",
@@ -7436,12 +8186,18 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1111/j.1745-4549.1993.tb00730.x",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1111/j.1745-4530.1993.tb00179.x does not resolve. No Zhang (1993) J. Food Process Engineering paper reporting asparagine-versus-glutamine deamidation activation energies in protein melts could be located."
+      },
+      "source_status": "no_verifiable_source"
     },
     {
       "id": "li_2010_phytate_chelation_kinetics",
       "citation": "Li et al. (2010)",
-      "doi": "10.1016/j.mineng.2010.05.003",
       "kind": "calibration_reference",
       "chemistry_family": "alternative_protein_matrix_scope",
       "slr_family_source": "06",
@@ -7481,12 +8237,19 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "source_status": "no_verifiable_source",
+      "doi_repair": {
+        "old": "10.1016/j.mineng.2010.05.003",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1016/j.mineng.2010.05.003 resolves to a Minerals Engineering flotation paper - wrong discipline entirely. No Li (2010) study of phytic-acid metal-chelation activation energy (Ea 84.54 kJ/mol) could be located by bibliographic search."
+      }
     },
     {
       "id": "tan_2001_oil_dsc_oxidation",
-      "citation": "Tan et al. (2001)",
-      "doi": "10.1007/s11746-001-0402-y",
+      "citation": "Tan, Che Man, Selamat & Yusoff (2001), J. Am. Oil Chem. Soc. 78:1133",
+      "doi": "10.1007/s11746-001-0401-1",
       "kind": "calibration_reference",
       "chemistry_family": "lipid_oxidation_crosstalk",
       "slr_family_source": "02",
@@ -7525,12 +8288,24 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1007/s11746-001-0402-y",
+        "new": "10.1007/s11746-001-0401-1",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1007/s11746-001-0402-y does not resolve; the correct suffix for Tan et al. (2001), 'Application of Arrhenius kinetics to evaluate oxidative stability in vegetable oils by isothermal differential scanning calorimetry', is 0401-1."
+      },
+      "citation_repair": {
+        "old": "Tan et al. (2001)",
+        "new": "Tan, Che Man, Selamat & Yusoff (2001), J. Am. Oil Chem. Soc. 78:1133",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "bayram_2023_stripped_soybean_oil_hexanal",
-      "citation": "Bayram et al. (2023)",
-      "doi": "10.3989/gya.1051211",
+      "citation": "Kavran, Yucel, Bakkalbasi & Gulec (2024), Grasas y Aceites 75:e546",
+      "doi": "10.3989/gya.0320231",
       "kind": "calibration_reference",
       "chemistry_family": "lipid_oxidation_crosstalk",
       "slr_family_source": "02",
@@ -7569,11 +8344,23 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.3989/gya.1051211",
+        "new": "10.3989/gya.0320231",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.3989/gya.1051211 does not resolve. The Grasas y Aceites article that actually reports Arrhenius kinetics of hexanal formation modulated by ascorbyl palmitate is Kavran et al. (2024). NOTE: the oil studied is sunflower, not stripped soybean oil, so the matrix wording in this entry overstates the source."
+      },
+      "citation_repair": {
+        "old": "Bayram et al. (2023)",
+        "new": "Kavran, Yucel, Bakkalbasi & Gulec (2024), Grasas y Aceites 75:e546",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "spier_2010_metal_naphthenate_peroxide_decomp",
-      "citation": "Spier et al. (2010)",
+      "citation": "West, Adams & Zabarnick (2011), Energy & Fuels 25:897",
       "doi": "10.1021/ef101678s",
       "kind": "calibration_reference",
       "chemistry_family": "lipid_oxidation_crosstalk",
@@ -7617,7 +8404,13 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_repair": {
+        "old": "Spier et al. (2010)",
+        "new": "West, Adams & Zabarnick (2011), Energy & Fuels 25:897",
+        "date": "2026-08-26",
+        "basis": "CrossRef metadata for 10.1021/ef101678s is West, Adams & Zabarnick (2011), 'Homogeneous Catalysis of Liquid-Phase Hydroperoxide Decomposition in Hydrocarbons'; topic matches, author/year label did not."
+      }
     },
     {
       "id": "zha_2020_ppi_glycation_aggregation",
@@ -7755,7 +8548,7 @@
     },
     {
       "id": "pereira_2020_metal_pm_haber_weiss_chelation",
-      "citation": "Pereira et al. (2020)",
+      "citation": "Garcia-Diez & Mora-Diez (2020), Antioxidants 9:756",
       "doi": "10.3390/antiox9080756",
       "kind": "calibration_reference",
       "chemistry_family": "alternative_protein_matrix_scope",
@@ -7797,12 +8590,18 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_repair": {
+        "old": "Pereira et al. (2020)",
+        "new": "Garcia-Diez & Mora-Diez (2020), Antioxidants 9:756",
+        "date": "2026-08-26",
+        "basis": "CrossRef metadata for 10.3390/antiox9080756 is Garcia-Diez & Mora-Diez (2020), a theoretical study of iron-aminoguanidine complexes; topic is adjacent (metal-chelation thermochemistry) but the author label was wrong."
+      }
     },
     {
       "id": "sun_2020_solid_matrix_cml_cel_accumulation",
-      "citation": "Sun et al. (2020)",
-      "doi": "10.1016/j.meatsci.2020.108151",
+      "citation": "Sun, Tang, Wang, Rasco, Lai & Huang (2016), Meat Science 116:1",
+      "doi": "10.1016/j.meatsci.2016.01.009",
       "kind": "calibration_reference",
       "chemistry_family": "alternative_protein_matrix_scope",
       "slr_family_source": "06",
@@ -7844,11 +8643,23 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1016/j.meatsci.2020.108151",
+        "new": "10.1016/j.meatsci.2016.01.009",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1016/j.meatsci.2020.108151 resolves to Jo et al. (2020) on plasma-treated mushroom in ground ham. The Sun-group Meat Science paper on free and protein-bound CML/CEL accumulation during commercial sterilization of a solid meat matrix is Sun et al. (2016)."
+      },
+      "citation_repair": {
+        "old": "Sun et al. (2020)",
+        "new": "Sun, Tang, Wang, Rasco, Lai & Huang (2016), Meat Science 116:1",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "shirai_2015_bsa_dityrosine_diffusion_limited",
-      "citation": "Shirai et al. (2015)",
+      "citation": "Kampf et al. (2015), Environ. Sci. Technol. 49:10859",
       "doi": "10.1021/acs.est.5b02902",
       "kind": "calibration_reference",
       "chemistry_family": "alternative_protein_matrix_scope",
@@ -7889,12 +8700,18 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_repair": {
+        "old": "Shirai et al. (2015)",
+        "new": "Kampf et al. (2015), Environ. Sci. Technol. 49:10859",
+        "date": "2026-08-26",
+        "basis": "CrossRef metadata for 10.1021/acs.est.5b02902 is Kampf, Liu, Reinmuth-Selzle et al. (2015), 'Protein Cross-Linking and Oligomerization through Dityrosine Formation upon Exposure to Ozone'. Dityrosine kinetic-multilayer modelling matches; the BSA framing and the 'Shirai' label do not (Shiraiwa is a co-author)."
+      }
     },
     {
       "id": "martins_boekel_2003_dfg_amadori_degradation",
-      "citation": "Martins & van Boekel (2003)",
-      "doi": "10.1021/jf025830v",
+      "citation": "Martins & van Boekel (2003), Carbohydr. Res. 338:1665",
+      "doi": "10.1016/s0008-6215(03)00174-5",
       "kind": "calibration_reference",
       "chemistry_family": "carbonyl_donor_hierarchy",
       "slr_family_source": "07",
@@ -7933,12 +8750,24 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1016/s0008-6215(03)00174-5",
+        "new": "10.1016/s0008-6215(03)00174-5",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1021/jf025830v does not resolve. Martins & van Boekel (2003), 'Kinetic modelling of Amadori N-(1-deoxy-D-fructos-1-yl)-glycine degradation pathways. Part II - Kinetic analysis', is the multiresponse DFG degradation model cited."
+      },
+      "citation_repair": {
+        "old": "Martins & van Boekel (2003)",
+        "new": "Martins & van Boekel (2003), Carbohydr. Res. 338:1665",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "nashalian_yaylayan_2014_cu_catalyzed_strecker",
-      "citation": "Nashalian & Yaylayan (2014)",
-      "doi": "10.1021/acsomega.7b00321",
+      "citation": "Nashalian & Yaylayan (2014), J. Agric. Food Chem. 62:8518",
+      "doi": "10.1021/jf502751n",
       "kind": "calibration_reference",
       "chemistry_family": "carbonyl_donor_hierarchy",
       "slr_family_source": "07",
@@ -7977,12 +8806,24 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1021/acsomega.7b00321",
+        "new": "10.1021/jf502751n",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1021/acsomega.7b00321 resolves to Jefferson et al. (2017) on copper acetonedicarboxylate complexes. The real paper is Nashalian & Yaylayan (2014), 'Thermally Induced Oxidative Decarboxylation of Copper Complexes of Amino Acids and Formation of Strecker Aldehyde'."
+      },
+      "citation_repair": {
+        "old": "Nashalian & Yaylayan (2014)",
+        "new": "Nashalian & Yaylayan (2014), J. Agric. Food Chem. 62:8518",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "de_bruijn_1987_monosaccharide_alkaline_degradation",
-      "citation": "CHITTENDEN & Regeling (1987)",
-      "doi": "10.1002/recl.19871060202",
+      "citation": "de Bruijn, Kieboom & van Bekkum (1987), Recl. Trav. Chim. Pays-Bas 106:35",
+      "doi": "10.1002/recl.19871060201",
       "kind": "calibration_reference",
       "chemistry_family": "carbohydrate_pyrolysis_caramelization",
       "slr_family_source": "09",
@@ -8021,12 +8862,24 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1002/recl.19871060202",
+        "new": "10.1002/recl.19871060201",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1002/recl.19871060202 is off by one article: it resolves to Chittenden & Regeling, 'An improved procedure for the synthesis of sugar chloroacetates'. The intended paper is the immediately preceding article, de Bruijn, Kieboom & van Bekkum, 'Alkaline degradation of monosaccharides V: Kinetics of the alkaline isomerization and degradation of monosaccharides'."
+      },
+      "citation_repair": {
+        "old": "CHITTENDEN & Regeling (1987)",
+        "new": "de Bruijn, Kieboom & van Bekkum (1987), Recl. Trav. Chim. Pays-Bas 106:35",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "luna_aguilera_2014_molten_sugar_color_kinetics",
-      "citation": "Luna & Aguilera (2014)",
-      "doi": "10.1016/j.jfoodeng.2014.06.032",
+      "citation": "Luna & Aguilera (2013), Food Biophysics 9:61",
+      "doi": "10.1007/s11483-013-9317-0",
       "kind": "calibration_reference",
       "chemistry_family": "carbohydrate_pyrolysis_caramelization",
       "slr_family_source": "09",
@@ -8065,11 +8918,23 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1016/j.jfoodeng.2014.06.032",
+        "new": "10.1007/s11483-013-9317-0",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1016/j.jfoodeng.2014.06.032 resolves to Gelaw et al. (2014) on membrane fouling. The real Luna & Aguilera paper is 'Kinetics of Colour Development of Molten Glucose, Fructose and Sucrose at High Temperatures' (Food Biophysics, online 2013)."
+      },
+      "citation_repair": {
+        "old": "Luna & Aguilera (2014)",
+        "new": "Luna & Aguilera (2013), Food Biophysics 9:61",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "bao_2022_xylose_glycylglycine_3_deoxyosone_cleavage",
-      "citation": "Bao et al. (2022)",
+      "citation": "Cui et al. (2022), J. Agric. Food Chem. 70:11556",
       "doi": "10.1021/acs.jafc.2c03427",
       "kind": "calibration_reference",
       "chemistry_family": "carbohydrate_pyrolysis_caramelization",
@@ -8110,7 +8975,13 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_repair": {
+        "old": "Bao et al. (2022)",
+        "new": "Cui et al. (2022), J. Agric. Food Chem. 70:11556",
+        "date": "2026-08-26",
+        "basis": "CrossRef metadata for 10.1021/acs.jafc.2c03427 is Cui, Ma, Wang et al. (2022), 'Temperature-Dependent Catalysis of Glycylglycine on Its Amadori Compound Degradation to Deoxyosone'; topic matches, author label did not."
+      }
     },
     {
       "id": "hidalgo_2007_decadienal_phenylalanine_styrene",
@@ -8159,7 +9030,7 @@
     },
     {
       "id": "zamora_2010_decadienal_asparagine_decarboxylation",
-      "citation": "Zamora et al. (2010)",
+      "citation": "Hidalgo, Delgado, Navarro & Zamora (2010), J. Agric. Food Chem. 58:10512",
       "doi": "10.1021/jf102026c",
       "kind": "calibration_reference",
       "chemistry_family": "lipid_maillard_crosstalk",
@@ -8200,11 +9071,17 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_repair": {
+        "old": "Zamora et al. (2010)",
+        "new": "Hidalgo, Delgado, Navarro & Zamora (2010), J. Agric. Food Chem. 58:10512",
+        "date": "2026-08-26",
+        "basis": "CrossRef metadata for 10.1021/jf102026c gives Hidalgo as first author (Zamora is last); same group, but the label named the wrong lead author."
+      }
     },
     {
       "id": "ding_2020_schiff_base_amadori_emulsion_rates",
-      "citation": "Ding et al. (2020)",
+      "citation": "Troise et al. (2020), J. Agric. Food Chem. 68:12662",
       "doi": "10.1021/acs.jafc.0c04738",
       "kind": "calibration_reference",
       "chemistry_family": "lipid_maillard_crosstalk",
@@ -8245,11 +9122,17 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_repair": {
+        "old": "Ding et al. (2020)",
+        "new": "Troise et al. (2020), J. Agric. Food Chem. 68:12662",
+        "date": "2026-08-26",
+        "basis": "CrossRef metadata for 10.1021/acs.jafc.0c04738 is Troise, Fogliano, Vitaglione & Berton-Carabin (2020), 'Interrelated Routes between the Maillard Reaction and Lipid Oxidation in Emulsion Systems'; topic matches, author label did not."
+      }
     },
     {
       "id": "richards_2009_hemoglobin_liposome_oxidation",
-      "citation": "Richards et al. (2009)",
+      "citation": "Carvajal et al. (2009), J. Agric. Food Chem. 57:8134",
       "doi": "10.1021/jf9013394",
       "kind": "calibration_reference",
       "chemistry_family": "lipid_maillard_crosstalk",
@@ -8294,11 +9177,17 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_repair": {
+        "old": "Richards et al. (2009)",
+        "new": "Carvajal et al. (2009), J. Agric. Food Chem. 57:8134",
+        "date": "2026-08-26",
+        "basis": "CrossRef metadata for 10.1021/jf9013394 is Carvajal, Rustad, Mozuraityte & Storro (2009); topic (haemoglobin-induced lipid oxidation in liposomes) matches, author label did not."
+      }
     },
     {
       "id": "smagghe_2006_leghemoglobin_oxygen_dissociation",
-      "citation": "Smagghe et al. (2006)",
+      "citation": "Smagghe et al. (2005), Biochemistry 45:561",
       "doi": "10.1021/bi051902l",
       "kind": "calibration_reference",
       "chemistry_family": "lipid_maillard_crosstalk",
@@ -8339,7 +9228,13 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_repair": {
+        "old": "Smagghe et al. (2006)",
+        "new": "Smagghe et al. (2005), Biochemistry 45:561",
+        "date": "2026-08-26",
+        "basis": "CrossRef metadata for 10.1021/bi051902l dates the article to 2005; repo claimed 2006."
+      }
     },
     {
       "id": "mandelli_2024_plant_milk_hca_quantification",
@@ -8387,7 +9282,7 @@
     },
     {
       "id": "chen_2016_carbohydrate_meat_cml_cel_sterilization",
-      "citation": "Chen et al. (2016)",
+      "citation": "Yu et al. (2016), Food Sci. Biotechnol. 25:1163",
       "doi": "10.1007/s10068-016-0185-5",
       "kind": "calibration_reference",
       "chemistry_family": "protein_damage_markers",
@@ -8429,12 +9324,17 @@
           "path": "data/lit/safety_reference_payloads.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_repair": {
+        "old": "Chen et al. (2016)",
+        "new": "Yu et al. (2016), Food Sci. Biotechnol. 25:1163",
+        "date": "2026-08-26",
+        "basis": "CrossRef metadata for 10.1007/s10068-016-0185-5 is Yu, Gao, Zeng et al. (2016) (Chen is a later co-author); topic (CML/CEL in meat products) matches."
+      }
     },
     {
       "id": "pruteanu_2023_glucose_phe_arrhenius_browning",
       "citation": "Pruteanu et al. (2023)",
-      "doi": "10.1016/j.lwt.2024.117316",
       "kind": "calibration_reference",
       "chemistry_family": "protein_damage_markers",
       "slr_family_source": "12",
@@ -8476,7 +9376,14 @@
           "path": "data/lit/safety_reference_payloads.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "source_status": "no_verifiable_source",
+      "doi_repair": {
+        "old": "10.1016/j.lwt.2024.117316",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1016/j.lwt.2024.117316 resolves to Bolchini et al. (2025) on radical-scavenging kinetics of glucose-glycine MRPs - wrong authors, year, amino acid and endpoint. No Pruteanu (2023) glucose/phenylalanine browning-Ea study could be located."
+      }
     },
     {
       "id": "zhu_2020_epicatechin_mgo_go_scavenging",
@@ -8574,7 +9481,7 @@
     },
     {
       "id": "liu_2023_benzoquinone_lysine_kinetics",
-      "citation": "Liu et al. (2022)",
+      "citation": "Liu et al. (2023), Food Res. Int. 163:112187",
       "doi": "10.1016/j.foodres.2022.112187",
       "kind": "calibration_reference",
       "chemistry_family": "polyphenol_amino_capping",
@@ -8616,7 +9523,13 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_repair": {
+        "old": "Liu et al. (2022)",
+        "new": "Liu et al. (2023), Food Res. Int. 163:112187",
+        "date": "2026-08-26",
+        "basis": "CrossRef metadata for 10.1016/j.foodres.2022.112187 dates the article to 2023; repo claimed 2022."
+      }
     },
     {
       "id": "comert_gokmen_2019_digestive_mgo_scavenging",
@@ -8712,8 +9625,8 @@
     },
     {
       "id": "comert_gokmen_2021_epicatechin_cysteine_mgo_synergy",
-      "citation": "Cömert & Gökmen (2021)",
-      "doi": "10.1016/j.foodchem.2020.128670",
+      "citation": "Comert & Gokmen (2022), Food Chemistry 371:130884",
+      "doi": "10.1016/j.foodchem.2021.130884",
       "kind": "calibration_reference",
       "chemistry_family": "polyphenol_amino_capping",
       "slr_family_source": "13",
@@ -8752,7 +9665,19 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1016/j.foodchem.2020.128670",
+        "new": "10.1016/j.foodchem.2021.130884",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1016/j.foodchem.2020.128670 resolves to Azevedo et al. (2021) on rhamnolipid nanocarriers. The real Comert & Gokmen study is 'Interactions of epicatechin and cysteine with certain other dicarbonyl scavengers during their reaction with methylglyoxal' (Food Chemistry 2022)."
+      },
+      "citation_repair": {
+        "old": "Cömert & Gökmen (2021)",
+        "new": "Comert & Gokmen (2022), Food Chemistry 371:130884",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "song_2009_benzoquinone_gsh_conjugation",
@@ -8803,7 +9728,7 @@
     },
     {
       "id": "li_2017_quercetin_mgo_adduct_browning_mitigation",
-      "citation": "Li et al. (2017)",
+      "citation": "Liu et al. (2017), J. Agric. Food Chem. 65:2233",
       "doi": "10.1021/acs.jafc.6b05811",
       "kind": "calibration_reference",
       "chemistry_family": "polyphenol_amino_capping",
@@ -8843,11 +9768,17 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_repair": {
+        "old": "Li et al. (2017)",
+        "new": "Liu et al. (2017), J. Agric. Food Chem. 65:2233",
+        "date": "2026-08-26",
+        "basis": "CrossRef metadata for 10.1021/acs.jafc.6b05811 is Liu, Xia, Lu et al. (2017), quercetin/MGO adducts in a lysine/glucose system; topic matches, author label did not."
+      }
     },
     {
       "id": "monforte_2018_phenylacetaldehyde_quinones",
-      "citation": "Monforte et al. (2018)",
+      "citation": "Monforte, Martins & Silva Ferreira (2017), J. Agric. Food Chem. 66:2459",
       "doi": "10.1021/acs.jafc.7b00264",
       "kind": "calibration_reference",
       "chemistry_family": "polyphenol_amino_capping",
@@ -8889,7 +9820,13 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_repair": {
+        "old": "Monforte et al. (2018)",
+        "new": "Monforte, Martins & Silva Ferreira (2017), J. Agric. Food Chem. 66:2459",
+        "date": "2026-08-26",
+        "basis": "CrossRef metadata for 10.1021/acs.jafc.7b00264 dates the article to 2017; repo claimed 2018."
+      }
     },
     {
       "id": "solis_calero_2015_pe_glyoxal",
@@ -9037,8 +9974,8 @@
     },
     {
       "id": "hidalgo_2005_pe_ribose_lysine",
-      "citation": "Hidalgo et al. (2005)",
-      "doi": "10.1007/s00217-004-1065-x",
+      "citation": "Zamora, Nogales & Hidalgo (2004), Eur. Food Res. Technol. 220:459",
+      "doi": "10.1007/s00217-004-1114-z",
       "kind": "calibration_reference",
       "chemistry_family": "phospholipid_amine_sink",
       "slr_family_source": "15",
@@ -9081,11 +10018,23 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1111/j.1365-2621.2005.tb11434.x",
+        "new": "10.1007/s00217-004-1114-z",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1007/s00217-004-1065-x does not resolve. The Hidalgo-group Eur. Food Res. Technol. paper on exactly this system is Zamora, Nogales & Hidalgo (2004), 'Phospholipid oxidation and nonenzymatic browning development in phosphatidylethanolamine/ribose/lysine model systems'."
+      },
+      "citation_repair": {
+        "old": "Hidalgo et al. (2005)",
+        "new": "Zamora, Nogales & Hidalgo (2004), Eur. Food Res. Technol. 220:459",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "zamora_2020_pe_dihydropyridine",
-      "citation": "Zamora et al. (2020)",
+      "citation": "Goritschnig et al. (2020), Molecules 25:373",
       "doi": "10.3390/molecules25020373",
       "kind": "calibration_reference",
       "chemistry_family": "phospholipid_amine_sink",
@@ -9127,7 +10076,13 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_repair": {
+        "old": "Zamora et al. (2020)",
+        "new": "Goritschnig et al. (2020), Molecules 25:373",
+        "date": "2026-08-26",
+        "basis": "CrossRef metadata for 10.3390/molecules25020373 is Goritschnig, Tadus, Koenig & Pignitter (2020); topic (carbonyl-amine adducts in PE-fortified soybean oil) matches, author label did not."
+      }
     },
     {
       "id": "hidalgo_2006_pe_lysine_antioxidant",
@@ -9224,7 +10179,7 @@
     },
     {
       "id": "biondi_2010_oil_microwave_degradation",
-      "citation": "Biondi et al. (2010)",
+      "citation": "Chiavaro et al. (2010), LWT 43:1104",
       "doi": "10.1016/j.lwt.2010.02.016",
       "kind": "calibration_reference",
       "chemistry_family": "phospholipid_amine_sink",
@@ -9265,7 +10220,13 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_repair": {
+        "old": "Biondi et al. (2010)",
+        "new": "Chiavaro et al. (2010), LWT 43:1104",
+        "date": "2026-08-26",
+        "basis": "CrossRef metadata for 10.1016/j.lwt.2010.02.016 is Chiavaro, Rodriguez-Estrada, Vittadini & Pellegrini (2010), 'Microwave heating of different vegetable oils'; topic matches, author label did not."
+      }
     },
     {
       "id": "brands_2002_casein_sugar_melanoidin",
@@ -9411,8 +10372,8 @@
     },
     {
       "id": "mundt_wedzicha_2007_biscuit_browning",
-      "citation": "Mundt & Wedzicha (2007)",
-      "doi": "10.1016/j.lwt.2006.07.014",
+      "citation": "Mundt & Wedzicha (2007), LWT 40:1078",
+      "doi": "10.1016/j.lwt.2006.07.011",
       "kind": "calibration_reference",
       "chemistry_family": "melanoidin_polymerization",
       "slr_family_source": "16",
@@ -9453,7 +10414,19 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1016/j.lwt.2006.07.014",
+        "new": "10.1016/j.lwt.2006.07.011",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1016/j.lwt.2006.07.014 resolves to Kavitha & Modi (2007) on IMP degradation - a different article in the same LWT issue. The correct DOI for Mundt & Wedzicha (2007), 'A kinetic model for browning in the baking of biscuits: Effects of water activity and temperature', is 10.1016/j.lwt.2006.07.011."
+      },
+      "citation_repair": {
+        "old": "Mundt & Wedzicha (2007)",
+        "new": "Mundt & Wedzicha (2007), LWT 40:1078",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "cao_2024_carp_myoglobin_mrp",
@@ -9504,8 +10477,8 @@
     },
     {
       "id": "hofmann_2001_melanoidin_thioether",
-      "citation": "Hofmann et al. (2001)",
-      "doi": "10.1021/jf001302l",
+      "citation": "Hofmann & Schieberle (2001), J. Agric. Food Chem. 50:319",
+      "doi": "10.1021/jf010823n",
       "kind": "calibration_reference",
       "chemistry_family": "melanoidin_polymerization",
       "slr_family_source": "16",
@@ -9546,12 +10519,26 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1021/jf001302l",
+        "new": "10.1021/jf010823n",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1021/jf001302l does not resolve. Hofmann & Schieberle (2001), 'Chemical Interactions between Odor-Active Thiols and Melanoidins Involved in the Aroma Staling of Coffee Beverages', is the covalent thiol-melanoidin binding study."
+      },
+      "citation_repair": {
+        "old": "Hofmann et al. (2001)",
+        "new": "Hofmann & Schieberle (2001), J. Agric. Food Chem. 50:319",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "Shares 10.1021/jf010823n with pmc12154226_crosspy_thiol_adduction. One paper, two ids."
     },
     {
       "id": "martins_van_boekel_2005_ascorbic_amino_browning",
-      "citation": "Adams et al. (2005)",
-      "doi": "10.1021/jf047903m",
+      "citation": "Yu et al. (2017), Food Sci. Technol. (Campinas) 38:537",
+      "doi": "10.1590/1678-457x.08717",
       "kind": "calibration_reference",
       "chemistry_family": "melanoidin_polymerization",
       "slr_family_source": "16",
@@ -9593,7 +10580,21 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1021/jf047903m",
+        "new": "10.1590/1678-457x.08717",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1021/jf047903m resolves to Adams et al. (2005) on melanoidin thermal degradation - no ascorbic-acid content and not Martins & van Boekel. The A420 activation energies quoted here (histidine 35.31, lysine 54.94 kJ/mol) are those of Yu et al. (2017), 'The browning kinetics of the non-enzymatic browning reaction in L-ascorbic acid/basic amino acid systems', which the registry already anchors under two other ids - so this is a third duplicate of one paper."
+      },
+      "citation_repair": {
+        "old": "Adams et al. (2005)",
+        "new": "Yu et al. (2017), Food Sci. Technol. (Campinas) 38:537",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "Third id anchored on Yu et al. (2017) 10.1590/1678-457x.08717, alongside scielo_brasil_aa_crosslink_hierarchy_anchor and yu_2018_ascorbic_basic_amino_browning."
     },
     {
       "id": "smuda_glomb_2013_aa_degradation_pathways",
@@ -9740,7 +10741,7 @@
     },
     {
       "id": "yu_2018_ascorbic_basic_amino_browning",
-      "citation": "Yu et al. (2018)",
+      "citation": "Yu et al. (2017), Food Sci. Technol. (Campinas) 38:537",
       "doi": "10.1590/1678-457x.08717",
       "kind": "calibration_reference",
       "chemistry_family": "ascorbic_acid_maillard",
@@ -9786,7 +10787,15 @@
           "path": "data/lit/safety_reference_payloads.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_repair": {
+        "old": "Yu et al. (2018)",
+        "new": "Yu et al. (2017), Food Sci. Technol. (Campinas) 38:537",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the CrossRef record for this DOI; see the shared_anchor note."
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "10.1590/1678-457x.08717 (Yu, Li, Yang & Yu 2017) is stored twice under two DOI case variants and two repo ids (scielo_brasil_aa_crosslink_hierarchy_anchor, yu_2018_ascorbic_basic_amino_browning). One paper, two ids; the year was also wrong (2017, not 2018)."
     },
     {
       "id": "manso_2001_orange_juice_ascorbic_degradation",
@@ -9881,7 +10890,7 @@
     },
     {
       "id": "hendrickx_1998_ascorbic_isobaric_degradation",
-      "citation": "Hendrickx et al. (1998)",
+      "citation": "Van den Broeck et al. (1998), J. Agric. Food Chem. 46:2001",
       "doi": "10.1021/jf9708251",
       "kind": "calibration_reference",
       "chemistry_family": "ascorbic_acid_maillard",
@@ -9925,11 +10934,17 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_repair": {
+        "old": "Hendrickx et al. (1998)",
+        "new": "Van den Broeck et al. (1998), J. Agric. Food Chem. 46:2001",
+        "date": "2026-08-26",
+        "basis": "CrossRef metadata for 10.1021/jf9708251 is Van den Broeck, Ludikhuyze, Weemaes, Van Loey & Hendrickx (1998); Hendrickx is the last author, not the first, and the title carries no 'squeezed tomato' system."
+      }
     },
     {
       "id": "jian_2012_ascorbic_ethanolic_degradation",
-      "citation": "Jian et al. (2012)",
+      "citation": "Hsu et al. (2012), J. Agric. Food Chem. 60:10696",
       "doi": "10.1021/jf3032342",
       "kind": "calibration_reference",
       "chemistry_family": "ascorbic_acid_maillard",
@@ -9972,12 +10987,17 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_repair": {
+        "old": "Jian et al. (2012)",
+        "new": "Hsu et al. (2012), J. Agric. Food Chem. 60:10696",
+        "date": "2026-08-26",
+        "basis": "CrossRef metadata for 10.1021/jf3032342 is Hsu, Tsai, Fu & Wu (2012), 'Degradation of Ascorbic Acid in Ethanolic Solutions'; topic matches, author label did not."
+      }
     },
     {
       "id": "fadel_2015_mft_retention",
       "citation": "Fadel et al. (2015)",
-      "doi": "10.1016/j.foodchem.2015.00000",
       "kind": "calibration_reference",
       "chemistry_family": "glutathione_and_peptide_support",
       "slr_family_source": "05",
@@ -10030,7 +11050,14 @@
           "path": "data/lit/slr_incorporation_matrix.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "source_status": "no_verifiable_source",
+      "doi_repair": {
+        "old": "10.1016/j.foodchem.2015.00000",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "The stored identifier 10.1016/j.foodchem.2015.00000 is a placeholder, not a real DOI. No Fadel (2015) study reporting 47.78% MFT retention in heat-denatured soy isolate at pH 4.0/40 C could be located. (Nearest genuine literature: Guo, He, Wu & Zeng (2019), 10.1016/j.foodchem.2019.03.126, on aroma-compound binding to preheated soy protein isolate.)"
+      }
     },
     {
       "id": "wang_2023_mft_retention",
@@ -10092,7 +11119,7 @@
     },
     {
       "id": "mottram_2001_bmfd_retention",
-      "citation": "Adams et al. (2001)",
+      "citation": "Adams, Mottram, Parker & Brown (2001), J. Agric. Food Chem. 49:4333",
       "doi": "10.1021/jf0100797",
       "kind": "calibration_reference",
       "chemistry_family": "glutathione_and_peptide_support",
@@ -10147,12 +11174,17 @@
           "path": "data/lit/slr_incorporation_matrix.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_repair": {
+        "old": "Adams et al. (2001)",
+        "new": "Adams, Mottram, Parker & Brown (2001), J. Agric. Food Chem. 49:4333",
+        "date": "2026-08-26",
+        "basis": "DOI 10.1021/jf0100797 is Adams, Mottram, Parker & Brown (2001) on disulfide interchange between OVALBUMIN and volatile disulfides. The repo paper_id ('mottram_2001_...') and the entry's soy-isolate matrix description both misdescribe the study; the retention figure is an ovalbumin result."
+      }
     },
     {
       "id": "siripitakpong_2026_fft_retention",
-      "citation": "Sharma et al. (2025)",
-      "doi": "10.1016/j.foodchem.2025.145815",
+      "citation": "Siripitakpong, Wongprasert, Rungrotmongkol & Suppavorasatit (2026), Food Chemistry: X 25:103712",
       "kind": "calibration_reference",
       "chemistry_family": "glutathione_and_peptide_support",
       "slr_family_source": "05",
@@ -10206,12 +11238,27 @@
           "path": "data/lit/slr_incorporation_matrix.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1016/j.foodchem.2025.145815",
+        "new": "10.1016/j.fochx.2026.103712",
+        "date": "2026-08-26",
+        "basis": "The stored 10.1016/j.foodchem.2025.145815 is a Sharma et al. (2025) review with no primary binding data. The real Siripitakpong et al. (2026) paper is 'Effects of deamidation by protein glutaminase on the flavor binding properties of pea protein isolate' - correct author, year and matrix."
+      },
+      "doi": "10.1016/j.fochx.2026.103712",
+      "citation_repair": {
+        "old": "Sharma et al. (2025)",
+        "new": "Siripitakpong, Wongprasert, Rungrotmongkol & Suppavorasatit (2026), Food Chemistry: X 25:103712",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      },
+      "value_anchor_status": "no_verifiable_source",
+      "citation_caveat": "The parallel SLR/priors verification matched the stored delta-G anchors to this paper EXACTLY, but they are isotherm delta-G values for VANILLIN, not molecular-docking scores for 2-furfurylthiol. The entry's compound assignment and method claim ('molecular docking and homology modeling') are therefore both wrong; the number should be re-derived or dropped."
     },
     {
       "id": "mdpi_plants_2024_hemp_volatiles",
-      "citation": "Chen et al. (2024)",
-      "doi": "10.3390/plants13020274",
+      "citation": "Chen, Oliveira, Dias & Ismail (2025), Plants 14:274",
+      "doi": "10.3390/plants14020274",
       "kind": "calibration_reference",
       "chemistry_family": "alternative_protein_matrix_scope",
       "slr_family_source": "06",
@@ -10252,12 +11299,24 @@
           "path": "data/lit/flavor_reference_payloads.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.3390/plants13020274",
+        "new": "10.3390/plants14020274",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.3390/plants13020274 is off by one volume digit and resolves to a wheat salt-stress RNA-Seq paper. The intended article is Chen, Oliveira, Dias & Ismail (2025), 'Impact of a Novel Two-Phase Natural Deep Eutectic Solvent-Assisted Extraction on the Structural, Functional, and Flavor Properties of Hemp Protein Isolates' - the NADES-versus-alkaline hemp volatile comparison this entry describes."
+      },
+      "citation_repair": {
+        "old": "Chen et al. (2024)",
+        "new": "Chen, Oliveira, Dias & Ismail (2025), Plants 14:274",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "pmc6104182_soybean_fermentation",
-      "citation": "Chambers et al. (2018)",
-      "doi": "10.3390/foods7080126",
+      "citation": "Zhao, Ding, Yao, Cao, Pan & Kong (2018), Front. Microbiol. 9:1872",
+      "doi": "10.3389/fmicb.2018.01872",
       "kind": "calibration_reference",
       "chemistry_family": "alternative_protein_matrix_scope",
       "slr_family_source": "06",
@@ -10298,7 +11357,19 @@
           "path": "data/lit/process_state_calibrations.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.3390/foods7080126",
+        "new": "10.3389/fmicb.2018.01872",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.3390/foods7080126 resolves to Chambers et al. (2018) on poultry doneness recipes. The NCBI ID converter maps the entry's own PMC6104182 to 10.3389/fmicb.2018.01872, Zhao et al. (2018), 'Extracellular Proteome Analysis and Flavor Formation During Soy Sauce Fermentation' - the Aspergillus oryzae soybean-fermentation amino-acid liberation source."
+      },
+      "citation_repair": {
+        "old": "Chambers et al. (2018)",
+        "new": "Zhao, Ding, Yao, Cao, Pan & Kong (2018), Front. Microbiol. 9:1872",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "vtechworks_2022_fava_hydrolysis",
@@ -10353,7 +11424,6 @@
     {
       "id": "wang_2024_glucosamine_synergy",
       "citation": "Wu et al. (2025)",
-      "doi": "10.3390/foods14193453",
       "kind": "calibration_reference",
       "chemistry_family": "carbonyl_donor_hierarchy",
       "slr_family_source": "07",
@@ -10394,12 +11464,19 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "source_status": "no_verifiable_source",
+      "doi_repair": {
+        "old": "10.3390/foods14193453",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.3390/foods14193453 resolves to Wu et al. (2025) on tilapia collagen-peptide MRPs with four reducing sugars; glucosamine is not among them. No Wang (2024) glucosamine-synergy study could be located."
+      }
     },
     {
       "id": "blank_mottram_2002_ribose_labeling",
-      "citation": "Blank & Mottram (Mercaptoketone labelling 2002)",
-      "doi": "10.1021/jf020582d",
+      "citation": "Cerny & Davidek (2004), J. Agric. Food Chem. 52:958",
+      "doi": "10.1021/jf035265m",
       "kind": "calibration_reference",
       "chemistry_family": "carbonyl_donor_hierarchy",
       "slr_family_source": "07",
@@ -10438,12 +11515,24 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1021/jf035265m",
+        "new": "10.1021/jf035265m",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1021/jf020582d does not resolve. The [1-13C]ribose labelling study that reports alpha-mercaptoketone (3-mercapto-2-pentanone) branching is Cerny & Davidek (2004), 'alpha-Mercaptoketone Formation during the Maillard Reaction of Cysteine and [1-13C]Ribose'."
+      },
+      "citation_repair": {
+        "old": "Blank & Mottram (Mercaptoketone labelling 2002)",
+        "new": "Cerny & Davidek (2004), J. Agric. Food Chem. 52:958",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "buera_1987_maillard_caramelisation_ea",
-      "citation": "Buera et al. (1987)",
-      "doi": "10.1111/j.1365-2621.1987.tb14251.x",
+      "citation": "Buera, Chirife, Resnik & Wetzler (1987), J. Food Sci. 52:1063",
+      "doi": "10.1111/j.1365-2621.1987.tb14276.x",
       "kind": "calibration_reference",
       "chemistry_family": "carbonyl_donor_hierarchy",
       "slr_family_source": "07",
@@ -10492,12 +11581,24 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1111/j.1365-2621.1987.tb14251.x",
+        "new": "10.1111/j.1365-2621.1987.tb14276.x",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1111/j.1365-2621.1987.tb14251.x resolves to Koch, Seib & Hoseney (1987) on ascorbyl palmitate in bread. The Buera/Chirife/Resnik 1987 J. Food Sci. series on browning kinetics in liquid model systems is the real source; this DOI is the sugar+glycine Maillard instalment. The companion caramelisation instalment is 10.1111/j.1365-2621.1987.tb14275.x."
+      },
+      "citation_repair": {
+        "old": "Buera et al. (1987)",
+        "new": "Buera, Chirife, Resnik & Wetzler (1987), J. Food Sci. 52:1063",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "pmc10056349_rubisco_amadori",
-      "citation": "Šimková et al. (2023)",
-      "doi": "10.3390/foods12061349",
+      "citation": "Balfany, Gutierrez, Moncada & Komarnytsky (2023), Nutrients 15:1327",
+      "doi": "10.3390/nu15061327",
       "kind": "calibration_reference",
       "chemistry_family": "alternative_protein_matrix_scope",
       "slr_family_source": "06",
@@ -10539,12 +11640,24 @@
           "path": "data/lit/computational_priors.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.3390/foods12061349",
+        "new": "10.3390/nu15061327",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.3390/foods12061349 resolves to Simkova et al. (2023) on strawberry quality. The NCBI ID converter maps the entry's own PMC10056349 to 10.3390/nu15061327, Balfany et al. (2023), 'Current Status and Nutritional Value of Green Leaf Protein' - the Rubisco composition source. NOTE: this review supports the amino-acid composition but not the low-temperature Amadori kinetics claim."
+      },
+      "citation_repair": {
+        "old": "Šimková et al. (2023)",
+        "new": "Balfany, Gutierrez, Moncada & Komarnytsky (2023), Nutrients 15:1327",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "pmc11353891_lentil_deflavoring",
-      "citation": "Streule et al. (2024)",
-      "doi": "10.3390/foods13162590",
+      "citation": "Vurro, De Angelis, Squeo, Caponio, Summo & Pasqualone (2024), Foods 13:2608",
+      "doi": "10.3390/foods13162608",
       "kind": "calibration_reference",
       "chemistry_family": "alternative_protein_matrix_scope",
       "slr_family_source": "06",
@@ -10584,12 +11697,24 @@
           "path": "data/lit/flavor_reference_payloads.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.3390/foods13162590",
+        "new": "10.3390/foods13162608",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.3390/foods13162590 resolves to Streule et al. (2024) on Ghanaian cocoa fermentation. The NCBI ID converter maps the entry's own PMC11353891 to 10.3390/foods13162608, Vurro et al. (2024), 'Exploring Volatile Profiles and De-Flavoring Strategies for Enhanced Acceptance of Lentil-Based Foods: A Review'."
+      },
+      "citation_repair": {
+        "old": "Streule et al. (2024)",
+        "new": "Vurro, De Angelis, Squeo, Caponio, Summo & Pasqualone (2024), Foods 13:2608",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "pmc11889959_spi_tvp_volatiles",
-      "citation": "PMC11889959 (2025)",
-      "doi": "10.1016/j.foodchem.2025.142222",
+      "citation": "Park, Park, Kim & Lee (2025), Curr. Res. Food Sci. 10:100999",
+      "doi": "10.1016/j.crfs.2025.100999",
       "kind": "calibration_reference",
       "chemistry_family": "alternative_protein_matrix_scope",
       "slr_family_source": "06",
@@ -10632,12 +11757,24 @@
       "requires_primary_data": false,
       "citation_aliases": [
         "PMC11889959 (2025)"
-      ]
+      ],
+      "doi_repair": {
+        "old": "10.1016/j.foodchem.2025.142222",
+        "new": "10.1016/j.crfs.2025.100999",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1016/j.foodchem.2025.142222 does not resolve. The NCBI ID converter maps the entry's own PMC11889959 to 10.1016/j.crfs.2025.100999, Park et al. (2025), 'Profiles of aroma volatile components in textured vegetable proteins using HS-SPME-GC-MS'."
+      },
+      "citation_repair": {
+        "old": "PMC11889959 (2025)",
+        "new": "Park, Park, Kim & Lee (2025), Curr. Res. Food Sci. 10:100999",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      }
     },
     {
       "id": "poulsen_2023_pbma_cml_cel",
-      "citation": "Poulsen et al. (2023)",
-      "doi": "10.1016/j.foodchem.2023.136200",
+      "citation": "Fu, Ma, Wang, Sun, Chen, Cheng & Liu (2023), Foods 12:1967",
+      "doi": "10.3390/foods12101967",
       "kind": "calibration_reference",
       "chemistry_family": "carbonyl_donor_hierarchy",
       "slr_family_source": "07",
@@ -10685,7 +11822,21 @@
           "path": "data/lit/safety_reference_payloads.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "doi_repair": {
+        "old": "10.1016/j.foodchem.2023.136200",
+        "new": "10.3390/foods12101967",
+        "date": "2026-08-26",
+        "basis": "Repo DOI 10.1016/j.foodchem.2023.136200 resolves to a cassava-peel packaging paper. The commercial-PBMA CML/CEL survey is Fu et al. (2023), 'Contents and Correlations of N-epsilon-(carboxymethyl)lysine, N-epsilon-(carboxyethyl)lysine, Acrylamide and Nutrients in Plant-Based Meat Analogs' - already the source_doi of data/benchmarks/cml_cel_commercial_pbma_Foods2023.json, so this is also a duplicate anchor."
+      },
+      "citation_repair": {
+        "old": "Poulsen et al. (2023)",
+        "new": "Fu, Ma, Wang, Sun, Chen, Cheng & Liu (2023), Foods 12:1967",
+        "date": "2026-08-26",
+        "basis": "Relabelled to the authors/year/venue of the repaired DOI."
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "Shares 10.3390/foods12101967 with data/benchmarks/cml_cel_commercial_pbma_Foods2023.json (source_doi)."
     },
     {
       "id": "sun_2026_spi_vsc_retention",
@@ -10748,7 +11899,12 @@
           "path": "data/lit/retention_reference_payloads.json"
         }
       ],
-      "requires_primary_data": false
+      "requires_primary_data": false,
+      "citation_audit_note": {
+        "date": "2026-08-26",
+        "status": "left_in_place",
+        "basis": "DOI and citation in this file are both correct (Sun et al. 2026, Food Hydrocolloids). The id/citation conflict flagged by the ledger lives in data/lit/slr_incorporation_matrix.json, which is outside this partition."
+      }
     },
     {
       "id": "sun_2025_ppi_vsc_retention",
@@ -10932,7 +12088,7 @@
     },
     {
       "id": "martins_2001_maillard_kinetics_modelling",
-      "citation": "Martins, Jongen & van Boekel (2001)",
+      "citation": "Martins, Jongen & van Boekel (2000), Trends Food Sci. Technol. 11:364",
       "doi": "10.1016/s0924-2244(01)00022-x",
       "kind": "directional_prior",
       "chemistry_family": "carbonyl_donor_hierarchy",
@@ -10977,7 +12133,15 @@
       "citation_aliases": [
         "Martins et al. (2001)",
         "Trends Food Sci Technol 2001"
-      ]
+      ],
+      "citation_repair": {
+        "old": "Martins, Jongen & van Boekel (2001)",
+        "new": "Martins, Jongen & van Boekel (2000), Trends Food Sci. Technol. 11:364",
+        "date": "2026-08-26",
+        "basis": "CrossRef dates 10.1016/S0924-2244(01)00022-X to 2000, not 2001. The repo also stores this DOI in two case variants, which made one paper look like two references."
+      },
+      "shared_anchor": true,
+      "shared_anchor_note": "CrossRef dates 10.1016/S0924-2244(01)00022-X to 2000, not 2001. The repo also stores this DOI in two case variants, which made one paper look like two references."
     },
     {
       "id": "mottram_1998_meat_flavour_review",

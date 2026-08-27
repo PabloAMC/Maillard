@@ -12,8 +12,17 @@
 #   pathway       : formation pathway
 #   sensory_desc  : off-flavour descriptor
 #   odour_threshold_ug_per_kg: detection threshold in water (μg/kg); null if unknown
+#   odour_threshold_source: bibliographic source for that threshold (optional; absent = uncited)
 #   mitigation    : key strategy to reduce/trap this compound
 #   priority      : "critical" | "high" | "medium"
+#
+# Citation audit 2026-08-26: the hexanal threshold below was previously anchored in the
+# literature registry to DOI 10.1021/jf00111a008, which resolves to Purcell & Walter (1982),
+# "Stability of amino acids during cooking and processing of sweet potatoes" — an unrelated
+# paper. A real source has been installed for hexanal (see odour_threshold_source). The
+# remaining odour_threshold_ug_per_kg values in this file carry no verified citation and
+# should be treated as uncited compilation values until each is sourced individually.
+# No threshold value was changed by that audit.
 
 compounds:
 
@@ -25,6 +34,7 @@ compounds:
     pathway: "Lipid auto-oxidation (PUFA oxidation in soy/pea matrices)"
     sensory_desc: "Beany, grassy, green, fatty"
     odour_threshold_ug_per_kg: 4.5
+    odour_threshold_source: "Belitz, H.-D.; Grosch, W.; Schieberle, P. Food Chemistry, 4th rev. ed., Springer, 2009, doi:10.1007/978-3-540-69934-7 — aroma-threshold tables (hexanal in water, ~4.5 μg/kg). Cross-check: Czerny et al. (2008), Eur. Food Res. Technol. 228:265, doi:10.1007/s00217-008-0931-x, which re-measured aqueous thresholds for key food odorants and places hexanal in the same low-single-digit μg/L band."
     mitigation: "Schiff base trapping with free amino acids (Pathway D); lipoxygenase inactivation; solid-state fermentation pre-treatment"
     priority: "critical"
     notes: "Most prevalent off-flavour in soy/pea PBMAs. Key target for chemical trapping."

@@ -135,7 +135,6 @@
       "kind": "extrusion_retention_context",
       "protein_type": "soy_iso",
       "source_citation": "De Leyn & Muylle (2019)",
-      "doi": "10.1021/acs.jafc.de_leyn_2019",
       "validated_status": "supportive_anchor",
       "provenance_tier": "direct_measurement",
       "conditions": {
@@ -165,14 +164,20 @@
         "Direct DHA or lysinoalanine closure markers",
         "Reactive lysine or furosine closure under the same extrusion run"
       ],
-      "comment": "Useful supportive anchor for extrusion severity and donor loss. It improves context for extrusion closure but does not replace a direct damage-marker package."
+      "comment": "Useful supportive anchor for extrusion severity and donor loss. It improves context for extrusion closure but does not replace a direct damage-marker package.",
+      "source_status": "no_verifiable_source",
+      "source_status_repair": {
+        "old": "10.1021/acs.jafc.de_leyn_2019",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "The stored identifier '10.1021/acs.jafc.de_leyn_2019' is not a DOI at all (a template placeholder). Deep search: the cited coordinates 'JAFC 67:9842' fall inside an unrelated poplar-wood catalysis paper (JAFC 67:9840-9850), and no De Leyn & Muylle publication on thiamine retention in extrusion exists in CrossRef or PubMed. Citation is confabulated."
+      }
     },
     {
       "id": "comunian_2021_thiamine_encapsulation",
       "kind": "encapsulation_retention_context",
       "protein_type": "plant_protein_generic",
       "source_citation": "Comunian et al. (2021)",
-      "doi": "10.1016/j.foodres.2021.110345",
       "validated_status": "supportive_anchor",
       "provenance_tier": "direct_measurement",
       "conditions": {
@@ -204,7 +209,14 @@
         "Twin-screw shear survival in a real pbma extruder",
         "Direct mft or fft closure under the same thermal run"
       ],
-      "comment": "Compact encapsulation anchor for delayed-release thiamine. It complements De Leyn by bounding viable protected-addition strategies without claiming direct extrusion closure."
+      "comment": "Compact encapsulation anchor for delayed-release thiamine. It complements De Leyn by bounding viable protected-addition strategies without claiming direct extrusion closure.",
+      "source_status": "no_verifiable_source",
+      "source_status_repair": {
+        "old": "10.1016/j.foodres.2021.110345",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "10.1016/j.foodres.2021.110345 does not resolve (doi.org 404). A CrossRef author sweep of Comunian's 2021 output plus PubMed found no thiamine-encapsulation publication by that group. Citation is confabulated. If a thiamine-stability prior is needed the real Mauer-group work is Voelker et al. 2018 (10.1016/j.foodres.2018.06.056) - but that is a salt/degradation study, not an encapsulation-retention study."
+      }
     },
     {
       "id": "acs_jafc_3c05991_ppi_spi_partitioning",
@@ -239,14 +251,15 @@
         "Exact benchmark-condition partition coefficients already extracted into the repo",
         "Direct benchmark promotion or absolute ppb closure"
       ],
-      "comment": "Use as a process-state calibration context for plant-protein volatile partitioning until full coefficient extraction is completed."
+      "comment": "Use as a process-state calibration context for plant-protein volatile partitioning until full coefficient extraction is completed.",
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 3 nominally distinct reference records in data/lit: acs_jafc_3c05991_ppi_spi_partitioning, jafc_3c05991_hexanal_binding, jafc_3c05991_ppi_hexanal_binding. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "malia_2025_pea_free_sh_crosscheck",
       "kind": "cysteine_accessibility",
       "protein_type": "pea_iso",
       "source_citation": "Malia et al. (2025)",
-      "doi": "10.1016/j.foodhyd.2024.110509",
       "validated_status": "supportive_anchor",
       "provenance_tier": "direct_measurement",
       "conditions": {
@@ -268,14 +281,20 @@
         "Exact benchmark-condition coefficient fitting",
         "Standalone volatile benchmark closure"
       ],
-      "comment": "Cross-check anchor for pea free-SH behavior. Use as supportive calibration provenance rather than as a replacement for direct benchmark-condition extraction."
+      "comment": "Cross-check anchor for pea free-SH behavior. Use as supportive calibration provenance rather than as a replacement for direct benchmark-condition extraction.",
+      "source_status": "no_verifiable_source",
+      "source_status_repair": {
+        "old": "10.1016/j.foodhyd.2024.110509",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "No publication by an author 'Malia' on pea protein exists: PubMed esearch 'Malia[Author] AND pea' returns zero records; CrossRef author search 'Malia' + pea/sulfhydryl/Ellman 2025 returns only unrelated items (law encyclopedia, PDB antibody structures, nursing theses); a CrossRef container search of Food Hydrocolloids 2024-2025 for pea-protein free-sulfhydryl work returns no matching paper; web search likewise found nothing. The attached DOI (10.1016/j.foodhyd.2024.110509) is an unrelated wheat-starch paper, so there is no thread back to a real source. | The citation string itself ('Malia et al. 2025') appears confabulated. The entry is only a 'supportive crosscheck' for pea free-SH, so it is a candidate for deletion rather than repair; if a free-SH prior is needed, a real pea-protein Ellman source should be selected deliberately."
+      }
     },
     {
       "id": "raman_sds_extrusion_disulfide_severity",
       "kind": "extrusion_disulfide_context",
       "protein_type": "plant_protein_generic",
       "source_citation": "Raman/SDS-PAGE synthesis",
-      "doi": "synthesis_calibration",
       "validated_status": "supportive_anchor",
       "provenance_tier": "literature_derived_transfer",
       "conditions": {
@@ -298,7 +317,14 @@
         "Exact MFT retention coefficient under one benchmark condition",
         "Direct species-resolved sulfur volatile closure"
       ],
-      "comment": "Use as a severity-side extrusion calibration context while the disulfide-retention model remains bounded rather than benchmark-fitted."
+      "comment": "Use as a severity-side extrusion calibration context while the disulfide-retention model remains bounded rather than benchmark-fitted.",
+      "source_status": "internal_synthesis_not_literature",
+      "source_status_repair": {
+        "old": "synthesis_calibration (stored in the doi field)",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "'synthesis_calibration' is an internal placeholder, not an identifier. Moved out of the doi field so this row is not counted as a literature anchor."
+      }
     },
     {
       "id": "rizzello_2024_lactic_fermentation_cleanup",
@@ -659,8 +685,8 @@
       "id": "perdiguero_2004_yeast_autolysis_nucleotides",
       "kind": "fermentation_release_context",
       "protein_type": "yeast_ye",
-      "source_citation": "Perdiguero et al. (2004)",
-      "doi": "10.1021/jf0494452",
+      "source_citation": "Charpentier et al. (2005), JAFC 53:3000-3007 (PMID 15826051)",
+      "doi": "10.1021/jf040334y",
       "validated_status": "parameter_anchor",
       "provenance_tier": "direct_measurement",
       "conditions": {
@@ -683,14 +709,27 @@
         "Cysteine or other free amino acid release profiles under same conditions",
         "Alternative enzyme cocktail efficiency metrics"
       ],
-      "comment": "Key mechanistic parameter anchor for yeast autolysis nucleotides under Family 10."
+      "comment": "Key mechanistic parameter anchor for yeast autolysis nucleotides under Family 10.",
+      "doi_repair": {
+        "old": "10.1021/jf0494452",
+        "new": "10.1021/jf040334y",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery medium confidence: The repo's DOI 10.1021/jf0494452 404s in CrossRef, and I enumerated all CrossRef-indexed JAFC 2004 articles (1296 records): no author named Perdiguero appears, and JAFC 52:7802 falls inside Armenta et al., 'FTIR Determination of Aspartame and Acesulfame-K in Tabletop Sweeteners' (52:7798-7803) -- so 'Perdiguero et al. (2004), JAFC 52:7802' is fabricated. The genuine JAFC paper on yeast-autolysis nucleotide release kinetics (the exact phenomenon and parameter the repo needs) is Charpentier et al. 2005, confirmed via CrossRef and Semantic Scholar (PMID 15826051)."
+      },
+      "citation_repair": {
+        "old": "Perdiguero et al. (2004)",
+        "new": "Charpentier et al. (2005), JAFC 53:3000-3007 (PMID 15826051)",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery medium confidence: The repo's DOI 10.1021/jf0494452 404s in CrossRef, and I enumerated all CrossRef-indexed JAFC 2004 articles (1296 records): no author named Perdiguero appears, and JAFC 52:7802 falls inside Armenta et al., 'FTIR Determination of Aspartame and Acesulfame-K in Tabletop Sweeteners' (52:7798-7803) -- so 'Perdiguero et al. (2004), JAFC 52:7802' is fabricated. The genuine JAFC paper on yeast-autolysis nucleotide release kinetics (the exact phenomenon and parameter the repo needs) is Charpentier et al. 2005, confirmed via CrossRef and Semantic Scholar (PMID 15826051)."
+      },
+      "citation_caveat": "Charpentier et al. (2005) is a wine-model autolysis study; I could not open the text, so the repo's anchor 'GMP 2.8 mg/g DW at 55 C, 24 h' is NOT confirmed and its units (mg/g dry weight) may not even be the units used there. Treat this as the phenomenon anchor for yeast_autolysis_kinetics and re-derive or drop the GMP number."
     },
     {
       "id": "finnigan_2019_mycoprotein_rna",
       "kind": "mycoprotein_rna_reduction",
       "protein_type": "myco",
-      "source_citation": "Finnigan et al. (2019)",
-      "doi": "10.1039/c9fo00878e",
+      "source_citation": "Finnigan et al. (2019), Curr Dev Nutr 3:nzz021",
+      "doi": "10.1093/cdn/nzz021",
       "validated_status": "parameter_anchor",
       "provenance_tier": "direct_measurement",
       "conditions": {
@@ -710,14 +749,27 @@
       "what_it_does_not_support": [
         "Volatile release in soy matrices"
       ],
-      "comment": "Key process state calibration for mycoprotein RNA reduction."
+      "comment": "Key process state calibration for mycoprotein RNA reduction.",
+      "doi_repair": {
+        "old": "10.1039/c9fo00878e",
+        "new": "10.1093/cdn/nzz021",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery medium confidence: The bad DOI 10.1039/c9fo00878e is a dead Food & Function stub, and CrossRef shows no 2019 Food & Function mycoprotein paper. The only Finnigan-first-author 2019 mycoprotein publication indexed is Curr Dev Nutr 3:nzz021, verified via CrossRef (authors and venue as listed). It describes the Quorn process including the RNA-reduction step ('continuous fermentation of F. venenatum followed by steaming, chilling and freezing of the RNA-reduced biomass')."
+      },
+      "citation_repair": {
+        "old": "Finnigan et al. (2019)",
+        "new": "Finnigan et al. (2019), Curr Dev Nutr 3:nzz021",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery medium confidence: The bad DOI 10.1039/c9fo00878e is a dead Food & Function stub, and CrossRef shows no 2019 Food & Function mycoprotein paper. The only Finnigan-first-author 2019 mycoprotein publication indexed is Curr Dev Nutr 3:nzz021, verified via CrossRef (authors and venue as listed). It describes the Quorn process including the RNA-reduction step ('continuous fermentation of F. venenatum followed by steaming, chilling and freezing of the RNA-reduced biomass')."
+      },
+      "citation_caveat": "I could NOT confirm the repo's anchor 'residual nucleotides 1.5%' in this paper - the PMC full text mentions RNA reduction only qualitatively, with no percentage. The widely-reported figures are ~8-10% RNA in raw biomass reduced to <2% w/w (WHO limit) after ~68 C heat shock; a 1.5% residual is consistent with that range but is not sourced to Finnigan 2019. Treat the DOI as the process anchor, not the source of the number."
     },
     {
       "id": "pmc6104182_soybean_fermentation",
       "kind": "fermentation_release_context",
       "protein_type": "soy_iso",
-      "source_citation": "Chambers et al. (2018)",
-      "doi": "10.3390/foods7080126",
+      "source_citation": "Zhao et al. (2018), Front. Microbiol. 9:1872",
+      "doi": "10.3389/fmicb.2018.01872",
       "validated_status": "parameter_anchor",
       "provenance_tier": "direct_measurement",
       "conditions": {
@@ -736,46 +788,99 @@
       "what_it_does_not_support": [
         "Viscoelastic profile transformations"
       ],
-      "comment": "Pretreatment node calibration under Family 10."
+      "comment": "Pretreatment node calibration under Family 10.",
+      "doi_repair": {
+        "old": "10.3390/foods7080126",
+        "new": "10.3389/fmicb.2018.01872",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery medium confidence: The repo_id names PMC6104182 explicitly. The NCBI ID converter maps PMC6104182 -> doi 10.3389/fmicb.2018.01872 / PMID 30158911, and CrossRef confirms Zhao et al. 2018, Front. Microbiol. 9. The topic (fermented-soybean/soy-sauce matrix, proteolysis and flavour formation) matches the repo's 'fermented soybean meal / amino_acid_liberation' claim, and the currently stored DOI (10.3390/foods7080126 = Chambers et al. 2018 on poultry doneness) is unambiguously wrong."
+      },
+      "citation_repair": {
+        "old": "Chambers et al. (2018)",
+        "new": "Zhao et al. (2018), Front. Microbiol. 9:1872",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery medium confidence: The repo_id names PMC6104182 explicitly. The NCBI ID converter maps PMC6104182 -> doi 10.3389/fmicb.2018.01872 / PMID 30158911, and CrossRef confirms Zhao et al. 2018, Front. Microbiol. 9. The topic (fermented-soybean/soy-sauce matrix, proteolysis and flavour formation) matches the repo's 'fermented soybean meal / amino_acid_liberation' claim, and the currently stored DOI (10.3390/foods7080126 = Chambers et al. 2018 on poultry doneness) is unambiguously wrong."
+      },
+      "citation_caveat": "I read the PMC full text and could not confirm the repo's per-amino-acid anchors (Glu +2.49x, Gly +3.73x). The paper reports total amino-acid nitrogen rising from 0.44 to 0.93 g/100 mL over 60 days of fermentation (~2.1x overall) and focuses on the extracellular enzyme proteome rather than individual free amino acid fold-changes. Treat the Glu/Gly multipliers as unsourced. The stored citation string 'Chambers et al. (2018)' is also wrong and should become Zhao et al. (2018)."
     },
     {
       "id": "vtechworks_2022_fava_hydrolysis",
       "process": "enzymatic_hydrolysis",
-      "source_citation": "Williams (2025)",
-      "doi": "10.1016/j.foodchem.2025.146396",
+      "source_citation": "Williams, A. D. (2025), MS thesis, Virginia Tech (VTechWorks hdl:10919/137837)",
       "matrix_family": "fava_bean_isolate",
       "parameters": {
         "DH_pct_at_60min": 18.5,
         "free_amino_acid_increase_fold": 4.2,
         "lysine_accessibility_increase_pct": 32.0
       },
-      "notes": "Fava protein hydrolysis: DH=18.5% at 60 min; 4.2x free AA; Lys accessibility +32%."
+      "notes": "Fava protein hydrolysis: DH=18.5% at 60 min; 4.2x free AA; Lys accessibility +32%.",
+      "source_status": "identifier_unavailable",
+      "source_status_repair": {
+        "old": "10.1016/j.foodchem.2025.146396",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "The cited work is real: Williams, Anarra Denise (2025), 'Characterization of Fava Bean Hydrolysates for Future Use in Protein Enriched Beverages', MS thesis, Virginia Tech, persistent handle https://hdl.handle.net/10919/137837 (VTechWorks record checked 2026-08-26; SPME-GC-MS/GC-O of fava hydrolysates, 2-pentylfuran among the aroma-active compounds). VTechWorks issues no DOI for it. The DOI previously stored, 10.1016/j.foodchem.2025.146396, resolves to Nguyen, Boerkamp, Dubbelboer & van Duynhoven (2025), 'Mechanistic kinetic model to elucidate lipid oxidation mechanisms in spray-dried microencapsulated oils' - an unrelated paper that is legitimately anchored by nguyen_2025_ppi_microencapsulated_oil_stabilization."
+      },
+      "handle": "https://hdl.handle.net/10919/137837",
+      "citation_repair": {
+        "old": "Williams (2025)",
+        "new": "Williams, A. D. (2025), MS thesis, Virginia Tech (VTechWorks hdl:10919/137837)",
+        "date": "2026-08-26",
+        "basis": "The cited work is real: Williams, Anarra Denise (2025), 'Characterization of Fava Bean Hydrolysates for Future Use in Protein Enriched Beverages', MS thesis, Virginia Tech, persistent handle https://hdl.handle.net/10919/137837 (VTechWorks record checked 2026-08-26; SPME-GC-MS/GC-O of fava hydrolysates, 2-pentylfuran among the aroma-active compounds). VTechWorks issues no DOI for it. The DOI previously stored, 10.1016/j.foodchem.2025.146396, resolves to Nguyen, Boerkamp, Dubbelboer & van Duynhoven (2025), 'Mechanistic kinetic model to elucidate lipid oxidation mechanisms in spray-dried microencapsulated oils' - an unrelated paper that is legitimately anchored by nguyen_2025_ppi_microencapsulated_oil_stabilization."
+      },
+      "citation_caveat": "Thesis with no DOI; the FD 8192 / 16384 values were not re-checked against the thesis text."
     },
     {
       "id": "pmc11353891_lentil_deflavoring",
       "process": "deflavoring_treatment",
-      "source_citation": "Streule et al. (2024)",
-      "doi": "10.3390/foods13162590",
+      "source_citation": "Vurro, De Angelis, Squeo, Caponio, Summo & Pasqualone (2024), Foods 13:2608",
+      "doi": "10.3390/foods13162608",
       "matrix_family": "lentil_isolate",
       "parameters": {
         "hexanal_reduction_pct_heat_treatment": 65.0,
         "pentanal_reduction_pct_heat_treatment": 72.0,
         "protein_solubility_loss_pct_deflavoring": 8.0
       },
-      "notes": "Lentil deflavoring: hexanal -65%, pentanal -72% via controlled heating; 8% solubility loss."
+      "notes": "Lentil deflavoring: hexanal -65%, pentanal -72% via controlled heating; 8% solubility loss.",
+      "doi_repair": {
+        "old": "10.3390/foods13162590",
+        "new": "10.3390/foods13162608",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery high confidence: The repo id encodes PMC11353891. NCBI esummary for PMC 11353891 returns exactly this article (PMID 39200535, DOI 10.3390/foods13162608), and the CrossRef record was checked independently. Topic matches the repo's 'lentil_protein / deflavoring_efficiency' claim precisely. The repo's stored DOI 10.3390/foods13162590 is a neighbouring Foods article (Streule et al., cocoa) - a transposition error."
+      },
+      "citation_repair": {
+        "old": "Streule et al. (2024)",
+        "new": "Vurro, De Angelis, Squeo, Caponio, Summo & Pasqualone (2024), Foods 13:2608",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery high confidence: The repo id encodes PMC11353891. NCBI esummary for PMC 11353891 returns exactly this article (PMID 39200535, DOI 10.3390/foods13162608), and the CrossRef record was checked independently. Topic matches the repo's 'lentil_protein / deflavoring_efficiency' claim precisely. The repo's stored DOI 10.3390/foods13162590 is a neighbouring Foods article (Streule et al., cocoa) - a transposition error."
+      },
+      "citation_caveat": "This is a REVIEW, not a primary measurement: it collates lentil volatile profiles and de-flavouring strategies. A 'hexanal post-treatment OAV' figure taken from it is second-hand and the underlying primary source should be cited for any numeric prior."
     },
     {
       "id": "pmc11889959_spi_tvp_volatiles",
       "process": "texturization",
-      "source_citation": "PMC11889959 (2025)",
-      "doi": "10.1016/j.foodchem.2025.142222",
+      "source_citation": "Park et al. (2025), Current Research in Food Science 10:100999",
+      "doi": "10.1016/j.crfs.2025.100999",
       "matrix_family": "soy_tvp",
       "parameters": {
         "hexanal_tvp_ug_per_g": 2.8,
         "pyrazine_tvp_ug_per_g": 0.45,
         "furanone_tvp_ug_per_g": 0.12
       },
-      "notes": "SPI TVP: hexanal 2.8, pyrazines 0.45, furanones 0.12 ug/g after HME."
+      "notes": "SPI TVP: hexanal 2.8, pyrazines 0.45, furanones 0.12 ug/g after HME.",
+      "doi_repair": {
+        "old": "10.1016/j.foodchem.2025.142222",
+        "new": "10.1016/j.crfs.2025.100999",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery high confidence: NCBI esummary for PMC11889959 returns PMID 40061876, DOI 10.1016/j.crfs.2025.100999, Curr Res Food Sci 10:100999, Park GW/Park KH/Kim SG/Lee SY, 2025 - a definitive PMCID-to-DOI resolution, so the repo's citation string 'PMC11889959 (2025)' is unambiguously this paper and the recorded DOI 10.1016/j.foodchem.2025.142222 was simply invented. The PMC full text confirms TVP volatile profiling by HS-SPME-GC-MS across soy, wheat, pea and rice TVP, including 2-pentylfuran (soybean TVP ~48.25 ug/L vs wheat 330.39 and pea 108.25)."
+      },
+      "citation_repair": {
+        "old": "PMC11889959 (2025)",
+        "new": "Park et al. (2025), Current Research in Food Science 10:100999",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery high confidence: NCBI esummary for PMC11889959 returns PMID 40061876, DOI 10.1016/j.crfs.2025.100999, Curr Res Food Sci 10:100999, Park GW/Park KH/Kim SG/Lee SY, 2025 - a definitive PMCID-to-DOI resolution, so the repo's citation string 'PMC11889959 (2025)' is unambiguously this paper and the recorded DOI 10.1016/j.foodchem.2025.142222 was simply invented. The PMC full text confirms TVP volatile profiling by HS-SPME-GC-MS across soy, wheat, pea and rice TVP, including 2-pentylfuran (soybean TVP ~48.25 ug/L vs wheat 330.39 and pea 108.25)."
+      },
+      "citation_caveat": "The repo's numeric anchor 'SPI TVP pyrazines present' is NOT supported: the paper reports no pyrazines in any TVP sample. Only the 2-pentylfuran half of the compounds_supported list is confirmed, and the matrix is extruded TVP rather than soy protein isolate proper."
     },
     {
       "id": "nguyen_2025_ppi_microencapsulated_oil_stabilization",

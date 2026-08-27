@@ -1,0 +1,319 @@
+{
+  "benchmarks": [
+    {
+      "bench_file": "/Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/external_validation/external_validation_bi_2020_raw_pea_hexanal.json",
+      "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
+      "compounds": [
+        {
+          "abs_log10_error": 0.716219665888226,
+          "ci_width_log10": 2.809628486326507,
+          "compound": "hexanal",
+          "fold_error": 5.202590767236852,
+          "inside_ci": true,
+          "measured_ppb": 1260.0,
+          "predicted_mean": 1620.0089059708052,
+          "predicted_p5": 13.356122321623962,
+          "predicted_p50": 242.18702880395853,
+          "predicted_p95": 8616.063166043243,
+          "predicted_std": 3975.991324269278
+        }
+      ],
+      "execution_path": "matrix_only",
+      "inside_ci_count": 1,
+      "inside_ci_rate": 1.0,
+      "matched_compounds": 1,
+      "median_abs_log10_error": 0.716219665888226,
+      "median_accuracy_fold": 5.202590767236852
+    },
+    {
+      "bench_file": "/Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/external_validation/external_validation_bi_2020_roasted_pea_hexanal.json",
+      "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+      "compounds": [
+        {
+          "abs_log10_error": 3.4071832635468393,
+          "ci_width_log10": 2.809628486326507,
+          "compound": "hexanal",
+          "fold_error": 2553.7787186378205,
+          "inside_ci": false,
+          "measured_ppb": 324.0,
+          "predicted_mean": 5534709.061319523,
+          "predicted_p5": 45630.76842672386,
+          "predicted_p50": 827424.3048386538,
+          "predicted_p95": 29436506.615637273,
+          "predicted_std": 13583848.291854734
+        }
+      ],
+      "execution_path": "matrix_only",
+      "inside_ci_count": 0,
+      "inside_ci_rate": 0.0,
+      "matched_compounds": 1,
+      "median_abs_log10_error": 3.4071832635468393,
+      "median_accuracy_fold": 2553.7787186378205
+    },
+    {
+      "bench_file": "/Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/external_validation/external_validation_li_2026_spi_wg_hme_control.json",
+      "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+      "compounds": [
+        {
+          "abs_log10_error": 3.061955669593525,
+          "ci_width_log10": 2.809628486326507,
+          "compound": "1-hexanol",
+          "fold_error": 1153.3355256271607,
+          "inside_ci": false,
+          "measured_ppb": 20.04,
+          "predicted_mean": 154603.70937125076,
+          "predicted_p5": 1274.6263592309153,
+          "predicted_p50": 23112.8439335683,
+          "predicted_p95": 822264.1991273682,
+          "predicted_std": 379444.2147165699
+        },
+        {
+          "abs_log10_error": 1.7112348687937484,
+          "ci_width_log10": 2.809628486326507,
+          "compound": "2-pentylfuran",
+          "fold_error": 51.43217243412954,
+          "inside_ci": false,
+          "measured_ppb": 221.51,
+          "predicted_mean": 76206.97603126503,
+          "predicted_p5": 628.2864803293764,
+          "predicted_p50": 11392.740515884034,
+          "predicted_p95": 405308.95648690703,
+          "predicted_std": 187034.94433416837
+        },
+        {
+          "abs_log10_error": 1.3476780826949866,
+          "ci_width_log10": 2.8096284863265066,
+          "compound": "hexanal",
+          "fold_error": 22.267839516149152,
+          "inside_ci": false,
+          "measured_ppb": 605.6,
+          "predicted_mean": 90204.97116747838,
+          "predicted_p5": 743.6925960659601,
+          "predicted_p50": 13485.403610979927,
+          "predicted_p95": 479757.6893593383,
+          "predicted_std": 221390.25374859132
+        },
+        {
+          "abs_log10_error": 2.8419354603408205,
+          "ci_width_log10": 2.809628486326507,
+          "compound": "nonanal",
+          "fold_error": 694.9210390495008,
+          "inside_ci": false,
+          "measured_ppb": 29.42,
+          "predicted_mean": 136755.4527254644,
+          "predicted_p5": 1127.476860169361,
+          "predicted_p50": 20444.576968836314,
+          "predicted_p95": 727337.7415646604,
+          "predicted_std": 335639.2002407687
+        }
+      ],
+      "execution_path": "matrix_only",
+      "inside_ci_count": 0,
+      "inside_ci_rate": 0.0,
+      "matched_compounds": 4,
+      "median_abs_log10_error": 2.2765851645672845,
+      "median_accuracy_fold": 189.05369266030857
+    },
+    {
+      "bench_file": "/Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/external_validation/external_validation_liu_2023_ppi_offnote_baseline.json",
+      "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+      "compounds": [
+        {
+          "abs_log10_error": 0.6684689971498432,
+          "ci_width_log10": 2.809628486326507,
+          "compound": "hexanal",
+          "fold_error": 4.66089154247337,
+          "inside_ci": true,
+          "measured_ppb": 51.96152422706632,
+          "predicted_mean": 1620.0089059708052,
+          "predicted_p5": 13.356122321623962,
+          "predicted_p50": 242.18702880395853,
+          "predicted_p95": 8616.063166043243,
+          "predicted_std": 3975.991324269278
+        },
+        {
+          "abs_log10_error": 1.049518272893245,
+          "ci_width_log10": 2.8096284863265066,
+          "compound": "nonanal",
+          "fold_error": 11.2077458161363,
+          "inside_ci": true,
+          "measured_ppb": 15.811388300841896,
+          "predicted_mean": 1185.3723702225407,
+          "predicted_p5": 9.772772430456559,
+          "predicted_p50": 177.21002107606722,
+          "predicted_p95": 6304.436462958471,
+          "predicted_std": 2909.261944587277
+        }
+      ],
+      "execution_path": "matrix_only",
+      "inside_ci_count": 2,
+      "inside_ci_rate": 1.0,
+      "matched_compounds": 2,
+      "median_abs_log10_error": 0.8589936350215441,
+      "median_accuracy_fold": 7.227592108345696
+    }
+  ],
+  "external_failing_compounds": [
+    {
+      "compound": "1-hexanol",
+      "mean_abs_log10_error": 3.061955669593525,
+      "n_holdout_observations": 1
+    },
+    {
+      "compound": "2-pentylfuran",
+      "mean_abs_log10_error": 1.7112348687937484,
+      "n_holdout_observations": 1
+    },
+    {
+      "compound": "hexanal",
+      "mean_abs_log10_error": 1.5348875023199737,
+      "n_holdout_observations": 4
+    },
+    {
+      "compound": "nonanal",
+      "mean_abs_log10_error": 1.9457268666170329,
+      "n_holdout_observations": 2
+    }
+  ],
+  "external_failing_threshold_dex": 1.0,
+  "priors": [
+    {
+      "key": "schiff_condensation",
+      "kind": "barrier",
+      "sigma_kcal": 1.5,
+      "source": "barrier_constants_default"
+    },
+    {
+      "key": "amadori_rearrangement",
+      "kind": "barrier",
+      "sigma_kcal": 1.5,
+      "source": "barrier_constants_default"
+    },
+    {
+      "key": "1,2-enolisation",
+      "kind": "barrier",
+      "sigma_kcal": 1.5,
+      "source": "barrier_constants_default"
+    },
+    {
+      "key": "2,3-enolisation",
+      "kind": "barrier",
+      "sigma_kcal": 1.5,
+      "source": "barrier_constants_default"
+    },
+    {
+      "key": "strecker_degradation",
+      "kind": "barrier",
+      "sigma_kcal": 1.5,
+      "source": "barrier_constants_default"
+    },
+    {
+      "key": "cysteine_thermolysis",
+      "kind": "barrier",
+      "sigma_kcal": 1.5,
+      "source": "barrier_constants_default"
+    },
+    {
+      "key": "thiol_addition",
+      "kind": "barrier",
+      "sigma_kcal": 1.5,
+      "source": "barrier_constants_default"
+    },
+    {
+      "key": "thiol_addition_hexose",
+      "kind": "barrier",
+      "sigma_kcal": 1.5,
+      "source": "barrier_constants_default"
+    },
+    {
+      "key": "thiol_oxidation",
+      "kind": "barrier",
+      "sigma_kcal": 1.5,
+      "source": "barrier_constants_default"
+    },
+    {
+      "key": "aminoketone_condensation",
+      "kind": "barrier",
+      "sigma_kcal": 1.5,
+      "source": "barrier_constants_default"
+    },
+    {
+      "key": "retro_aldol",
+      "kind": "barrier",
+      "sigma_kcal": 1.5,
+      "source": "barrier_constants_default"
+    },
+    {
+      "key": "dehydration",
+      "kind": "barrier",
+      "sigma_kcal": 1.5,
+      "source": "barrier_constants_default"
+    },
+    {
+      "key": "beta_elimination",
+      "kind": "barrier",
+      "sigma_kcal": 1.5,
+      "source": "barrier_constants_default"
+    },
+    {
+      "key": "lipid_thiazole",
+      "kind": "barrier",
+      "sigma_kcal": 1.5,
+      "source": "barrier_constants_default"
+    },
+    {
+      "key": "matrix_headspace",
+      "kind": "observable",
+      "sigma_kcal": 2.0,
+      "source": "observable_uncalibrated_matrix"
+    },
+    {
+      "key": "henry_kaw",
+      "kind": "observable",
+      "sigma_kcal": 1.0,
+      "source": "observable_uncalibrated_matrix"
+    },
+    {
+      "key": "matrix_retention",
+      "kind": "observable",
+      "sigma_kcal": 0.7,
+      "source": "observable_uncalibrated_matrix"
+    }
+  ],
+  "source": {
+    "benchmark_dir": "/Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/external_validation",
+    "description": "Hold-out matrix benchmarks synthesized from flavor_reference_payloads.json and excluded from the default calibration panel.",
+    "evidence_class": "external_validation_only"
+  },
+  "summary": {
+    "benchmark_count": 4,
+    "benchmark_dir": "/Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/external_validation",
+    "ci_coverage_hits": 3,
+    "ci_coverage_rate": 0.375,
+    "ci_level_pct": 90,
+    "evidence_class": "external_validation_only",
+    "holdout_benchmark_count": 4,
+    "matched_compound_count": 8,
+    "max_fold_error": 2553.7787186378205,
+    "median_abs_log10_error": 1.5294564757443676,
+    "median_accuracy_fold": 33.84203542534207,
+    "n_samples": 200,
+    "seed": 0,
+    "signal_origin_split": {
+      "external_literature": {
+        "ci_coverage_rate": 0.375,
+        "hits": 3,
+        "median_ci_width_log10": 2.809628486326507,
+        "not_evaluable": 0,
+        "total": 8
+      },
+      "internal_synthetic": {
+        "ci_coverage_rate": null,
+        "hits": 0,
+        "median_ci_width_log10": null,
+        "not_evaluable": 0,
+        "total": 0
+      }
+    }
+  }
+}

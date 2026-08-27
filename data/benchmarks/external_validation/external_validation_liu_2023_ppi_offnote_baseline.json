@@ -8,6 +8,9 @@
   },
   "denaturation_state": 0.0,
   "evidence_class": "external_validation_only",
+  "identifier": "Liu, Y. (2023), thesis, North Carolina State University Institutional Repository",
+  "identifier_note": "2026-08-27: retyped from source_doi 'LiuThesis2023', which was never a DOI. No DOI or handle is issued for this thesis record. The peer-reviewed version of the same dataset is Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998, doi 10.1016/j.foodchem.2022.134998 - anchored separately in data/lit and deliberately NOT used here: this bundle stays external_validation_only (hold-out), and its classification is unchanged by the retyping.",
+  "identifier_scheme": "citation",
   "matrix_ranking_contract": {
     "adverse_markers": [
       "hexanal",
@@ -61,7 +64,6 @@
     "state": "ambient_slurry"
   },
   "protein_type": "pea_iso",
-  "source_doi": "LiuThesis2023",
   "source_metadata": {
     "evidence_class": "external_validation_only",
     "generator": "matrix_experiment_intake",

@@ -1,0 +1,51 @@
+{
+  "benchmark_id": "thiamine_cys_glucose_120C_Bolton1994",
+  "source_doi": "10.1021/bk-1994-0543.ch022",
+  "source_metadata": {
+    "citation": "Bolton, T. A.; Reineccius, G. A.; Liardon, R.; Huynh-Ba, T. Role of Cysteine in the Formation of 2-Methyl-3-furanthiol in a Thiamine-Cysteine Model System. ACS Symp. Ser. 1994, 543 (Thermally Generated Flavors), 270-278.",
+    "verified_date": "2026-08-26",
+    "verification_method": "CrossRef metadata (title, authors, volume, pages) plus the indexed abstract. ACS full text was NOT obtained.",
+    "replaces": "thiamine_cys_ribose_100C_Hofmann1996 (deleted 2026-08-26; its DOI 10.1021/jf960062o was never registered with any DOI agency and its reported MFT value 3.14 ppb is numerically pi)",
+    "measurement_basis": "MFT quantified by GC-MS-SIM against an internal standard: 389-489 ng per 33.3 g of model system across four variants = 11.7-14.7 ppb. Target below is the 13 ppb midpoint.",
+    "ph_note": "pH assumed from HCl salt forms; not reported in source; do not treat as anchored. The 5.0 value is required by the loader (ReactionConditions has no unpinned-pH mode) and is NOT a literature anchor. It is one of the reasons the tolerance is a factor of 3 rather than a factor of 2.",
+    "concentration_note": "assumed_not_from_source: the indexed abstract names the components (water, MSG, NaCl, IMP, D-glucose, thiamine-HCl, cysteine-HCl, +/- D-xylose) but gives no molarities. The concentrations below are plausible process-flavor model-system loadings chosen a priori, NOT values read from the chapter. Someone with ACS access must confirm them before they are treated as ground truth. MSG, NaCl and IMP are omitted because they are not reactive precursors on this path.",
+    "independent_corroboration": "11.7-14.7 ppb sits inside Kerscher & Grosch (10.1021/jf970892v) 5-28 ug/kg MFT for real boiled meat.",
+    "sulfur_origin_note": "Only 7.5-8.0 percent of MFT sulfur came from 34S-labelled cysteine, i.e. thiamine is the dominant sulfur source in this system; no thiamine gave no MFT."
+  },
+  "precursors": {
+    "Thiamine": {
+      "concentration_mM": 1.0
+    },
+    "L-Cysteine": {
+      "concentration_mM": 10.0
+    },
+    "D-Glucose": {
+      "concentration_mM": 10.0
+    }
+  },
+  "conditions": {
+    "temp_C": 120.0,
+    "ph": 5.0,
+    "water_activity": 0.98,
+    "time_min": 60.0
+  },
+  "metadata": {
+    "tier": "PRIMARY",
+    "family": "thiamine_fragmentation_support",
+    "execution_path": "free_precursor",
+    "notes": "Quantitative Family 03 thiamine-fragmentation anchor: thiamine-HCl + cysteine-HCl + D-glucose heated in sealed vials at 120 C for 60 min, MFT by GC-MS-SIM. Rebuilt 2026-08-26 from the verified Bolton et al. 1994 chapter after the fabricated thiamine_cys_ribose_100C_Hofmann1996 file was deleted. Composition, temperature, time and the 389-489 ng/33.3 g figure come from the INDEXED ABSTRACT, not from the chapter tables; pH and molarities are assumed (see source_metadata). Treat as an order-of-magnitude anchor."
+  },
+  "validation_contract": {
+    "scale_thresholds": {
+      "max_ratio": 3.0,
+      "mean_abs_log10_error": 0.48
+    },
+    "tolerance_rationale": "The published spread across the four model variants is only +/- 13 percent, but the unpinned pH, the assumed molarities and the abstract-only sourcing each move MFT by roughly 2-3x. A factor-of-3 band (about 4-40 ppb) is the tightest contract this source supports; a factor-of-2 band would over-claim."
+  },
+  "measured_volatiles": {
+    "2-Methyl-3-furanthiol (MFT)": {
+      "conc_ppb": 13.0,
+      "uncertainty_pct": 30
+    }
+  }
+}

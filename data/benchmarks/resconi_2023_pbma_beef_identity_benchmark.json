@@ -2,7 +2,7 @@
   "benchmark_id": "resconi_2023_pbma_beef_identity_benchmark",
   "source_metadata": {
     "origin": "external_literature",
-    "generator": "Resconi 2023 commercial PBMA survey",
+    "generator": "Hernandez et al. 2023 commercial PBMA versus ground beef survey",
     "notes": "Executable reference subset of the PBMA-versus-beef identity-gap panel. The current runtime surface closes only the furfural excess marker directly, using a glucose-plus-cysteine free-precursor surrogate that is already benchmarked by the engine; diacetyl, acetoin, and 2-acetylpyrrole remain attached in the intake metadata until broader mixed-matrix coverage is available."
   },
   "precursors": {
@@ -44,7 +44,7 @@
       "furfural"
     ],
     "citation_provenance": [
-      "Resconi et al. (2023 / PMC10096055) commercial PBMA versus beef survey",
+      "Hernandez, Woerner, Brooks & Legako (2023), Molecules 28:3151, doi:10.3390/molecules28073151 (PMC10096055) - commercial PBMA versus ground beef sensory/volatile survey",
       "Midpoint PBMA furfural value extracted from the absolute ng/g cooked-product table"
     ],
     "calibration_mode": "free_precursor_reference_anchor",
@@ -55,5 +55,19 @@
       "conc_ppb": 1040.0,
       "uncertainty_pct": 5
     }
-  }
+  },
+  "citation_repair": {
+    "old": {
+      "generator": "Resconi 2023 commercial PBMA survey",
+      "citation_provenance_0": "Resconi et al. (2023 / PMC10096055) commercial PBMA versus beef survey"
+    },
+    "new": {
+      "generator": "Hernandez et al. 2023 commercial PBMA versus ground beef survey",
+      "citation_provenance_0": "Hernandez, Woerner, Brooks & Legako (2023), Molecules 28:3151, doi:10.3390/molecules28073151 (PMC10096055) - commercial PBMA versus ground beef sensory/volatile survey"
+    },
+    "date": "2026-08-26",
+    "basis": "The file's own PMC10096055 resolves (NCBI ID converter) to 10.3390/molecules28073151, whose CrossRef record is Hernandez, Woerner, Brooks & Legako (2023), 'Descriptive Sensory Attributes and Volatile Flavor Compounds of Plant-Based Meat Alternatives and Ground Beef' (Molecules). 'Resconi' names no author of that record. The benchmark id and every numeric value are unchanged; only the bibliographic labels were corrected."
+  },
+  "shared_anchor": true,
+  "shared_anchor_note": "10.3390/molecules28073151 also anchors intake id resconi_2023_pbma_beef_identity_benchmark in data/lit/benchmark_intake_registry.json. One paper, one benchmark plus one intake row."
 }

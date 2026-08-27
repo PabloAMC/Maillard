@@ -91,14 +91,16 @@
         "Controlled wet-system kinetics",
         "Direct transfer of endpoint values to aqueous benchmark slurries"
       ],
-      "comment": "Use as a finished-product safety band distinct from ingredient endpoints."
+      "comment": "Use as a finished-product safety band distinct from ingredient endpoints.",
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 5 nominally distinct reference records in data/lit: acrylamide_heat_trapping_2024, foods_2023_cml_cel_proxy_benchmark, foods_2023_pba_cml_cel_benchmark, foods_2023_pbma_acrylamide_ages, poulsen_2023_pbma_cml_cel. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "choi_2024_pea_acrylamide_asparagine",
       "kind": "precursor_correlation_reference",
       "report_visibility": "default",
       "target_module": "safety",
-      "source_citation": "Choi et al. (2024), roasted garden peas",
+      "source_citation": "Jung et al. (2024), Food Science and Biotechnology 33:2333",
       "doi": "10.1007/s10068-024-01633-w",
       "validated_status": "reference_anchor",
       "analyte": "acrylamide",
@@ -123,14 +125,20 @@
         "Wet-system kinetic fitting",
         "Direct PPI slurry endpoint calibration"
       ],
-      "comment": "Use as mechanistically honest precursor-correlation provenance."
+      "comment": "Use as mechanistically honest precursor-correlation provenance.",
+      "citation_repair": {
+        "old": "Choi et al. (2024), roasted garden peas",
+        "new": "Jung et al. (2024), Food Science and Biotechnology 33:2333",
+        "date": "2026-08-26",
+        "basis": "CrossRef record for this DOI (title, author list, print volume/issue) checked 2026-08-26: the paper is Jung, Baek, Ma et al. (2024), acrylamide in air-fryer roasted legumes vs asparagine/free sugars - right subject, but not 'Choi et al. (2024)'."
+      }
     },
     {
       "id": "knol_2009_acrylamide_kinetics",
       "kind": "kinetic_model_reference",
       "report_visibility": "extended",
       "target_module": "safety",
-      "source_citation": "Knol et al. (2009), Food Chemistry 113:103",
+      "source_citation": "Knol et al. (2010), Food Chemistry 120:1047",
       "doi": "10.1016/j.foodchem.2009.11.049",
       "validated_status": "model_reference",
       "analyte": "acrylamide",
@@ -147,7 +155,13 @@
         "Industrial endpoint bands",
         "Aqueous SPI or PPI kinetic closure"
       ],
-      "comment": "Model provenance only; do not display as if it were an endpoint benchmark band."
+      "comment": "Model provenance only; do not display as if it were an endpoint benchmark band.",
+      "citation_repair": {
+        "old": "Knol et al. (2009), Food Chemistry 113:103",
+        "new": "Knol et al. (2010), Food Chemistry 120:1047",
+        "date": "2026-08-26",
+        "basis": "CrossRef record for this DOI (title, author list, print volume/issue) checked 2026-08-26: Knol, Linssen & van Boekel, 'Unravelling the kinetics of the formation of acrylamide in the Maillard reaction of fructose and asparagine by multiresponse modelling' - Food Chemistry 120(4):1047, 2010. The repo's 'Food Chemistry 113:103' volume/page was wrong as well as the year."
+      }
     },
     {
       "id": "claeys_2005_acrylamide_temperature_time",
@@ -260,7 +274,9 @@
         "Primary benchmark for reactive lysine loss in SPI vs PPI",
         "Calibration of lysine_accessibility_factor under severe shear+heat"
       ],
-      "comment": "PPI is significantly more resilient to lysine loss than SPI (15% vs 31%)."
+      "comment": "PPI is significantly more resilient to lysine loss than SPI (15% vs 31%).",
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 2 nominally distinct reference records in data/lit: acs_2022_pba_lysine_loss, acs_2022_pba_lysine_loss_benchmark. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "foods_2023_pba_cml_cel_benchmark",
@@ -301,7 +317,9 @@
         "Definitive AGE range in commercial plant-based meat analogs",
         "Proof that CEL > CML in high-temperature extrusion (MGO > GO)"
       ],
-      "comment": "CEL > CML reflects dominance of methylglyoxal pathway at extrusion temperatures."
+      "comment": "CEL > CML reflects dominance of methylglyoxal pathway at extrusion temperatures.",
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 5 nominally distinct reference records in data/lit: acrylamide_heat_trapping_2024, foods_2023_cml_cel_proxy_benchmark, foods_2023_pba_cml_cel_benchmark, foods_2023_pbma_acrylamide_ages, poulsen_2023_pbma_cml_cel. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "pmc_2024_pba_cml_cel_ranges",
@@ -448,15 +466,17 @@
         "Single-marker safety interpretation above 160 C",
         "Exact SPI/PPI process reconstruction without matrix-specific calibration"
       ],
-      "comment": "Use with CEL and CML context so severe-extrusion damage is not under-read when furosine declines."
+      "comment": "Use with CEL and CML context so severe-extrusion damage is not under-read when furosine declines.",
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 2 nominally distinct reference records in data/lit: ramirez_jimenez_2000_furosine_crossover, ramirez_jimenez_2000_furosine_crossover_benchmark. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "davidek_2006_thr_glucose_furan_safety",
       "kind": "safety_reference",
       "report_visibility": "default",
       "target_module": "safety",
-      "source_citation": "Davidek et al. (2006)",
-      "doi": "10.1021/jf053246m",
+      "source_citation": "Limacher, Kerler, Davidek, Schmalzried & Blank (2008), JAFC 56:3639",
+      "doi": "10.1021/jf800268t",
       "validated_status": "reference_anchor",
       "analyte": "furan",
       "method": {
@@ -481,7 +501,20 @@
         "SPI or PPI matrix encapsulation",
         "Extrusion shear effects"
       ],
-      "comment": "Use as safety ceiling for furan formation from threonine."
+      "comment": "Use as safety ceiling for furan formation from threonine.",
+      "doi_repair": {
+        "old": "10.1021/jf053246m",
+        "new": "10.1021/jf800268t",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery medium confidence: PubMed 'Davidek T[au] AND furan' returns only 8 records; the sole furan/methylfuran model-system paper is PMID 18439018. Its abstract (read in full) matches the repo's claim: furan and 2-methylfuran quantified in sugar/amino-acid model systems, threonine explicitly promoting furan formation via C2-fragment recombination and lactaldehyde (the Strecker aldehyde of threonine) being the key intermediate for 2-methylfuran - i.e. the Thr + glucose -> furan/methylfuran system the repo uses as a safety ceiling."
+      },
+      "citation_repair": {
+        "old": "Davidek et al. (2006)",
+        "new": "Limacher, Kerler, Davidek, Schmalzried & Blank (2008), JAFC 56:3639",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery medium confidence: PubMed 'Davidek T[au] AND furan' returns only 8 records; the sole furan/methylfuran model-system paper is PMID 18439018. Its abstract (read in full) matches the repo's claim: furan and 2-methylfuran quantified in sugar/amino-acid model systems, threonine explicitly promoting furan formation via C2-fragment recombination and lactaldehyde (the Strecker aldehyde of threonine) being the key intermediate for 2-methylfuran - i.e. the Thr + glucose -> furan/methylfuran system the repo uses as a safety ceiling."
+      },
+      "citation_caveat": "Citation string is wrong (2008 Limacher et al., Davidek is 3rd author, not 'Davidek et al. 2006'). Yields are reported as up to 330 umol furan / mol precursor under roasting (= 0.033 mol%) and <20 umol/mol under pressure cooking; the repo's '0.045 mol% at 120 C' is NOT confirmed by the abstract. If used as a safety ceiling, the correct order of magnitude is ~0.02-0.04 mol%."
     },
     {
       "id": "henle_2005_glycinin_cml",
@@ -490,8 +523,7 @@
       "target_module": "safety",
       "chemistry_family": "safety_damage_lane",
       "slr_family_source": "12",
-      "source_citation": "Henle (2005)",
-      "doi": "10.1007/s00726-005-0187-z",
+      "source_citation": "Henle (2005), Amino Acids 29:313-322 -- but see caveat",
       "validated_status": "reference_anchor",
       "analyte": "CML",
       "method": {
@@ -509,7 +541,20 @@
         "Upper-bound CML yield (2.3 umol/g protein) in heated soy glycinin matrices",
         "Dicarbonyl consumption estimation baseline for soy glycinin"
       ],
-      "comment": "Heated soy glycinin model system."
+      "comment": "Heated soy glycinin model system.",
+      "source_status": "no_verifiable_source",
+      "source_status_repair": {
+        "old": "10.1007/s00726-005-0187-z",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "CrossRef search of Amino Acids 2004-2006 for protein-bound CML/glycation returns exactly one Henle 2005 paper: doi 10.1007/s00726-005-0200-2, Amino Acids 29:313-322 (DOI verified live, sole author T. Henle). That is almost certainly what the dead DOI 10.1007/s00726-005-0187-z was meant to be. However it is a REVIEW of protein-bound AGEs in foods, not a heated soy-glycinin model-system study, so it cannot be the source of the repo's '2.3 umol CML/g protein' from soy glycinin or of a dicarbonyl-consumption estimate. | Reported as no_verifiable_source per the verification bar: the paper I can verify for 'Henle (2005)' provably cannot supply the repo's numeric anchors. Use 10.1007/s00726-005-0200-2 only as a general anchor for protein-bound CML in foods, NOT as the source of the soy-glycinin 2.3 umol CML/g figure. Multiple targeted searches for a Henle 2005 soy/glycinin CML model-system paper found nothing."
+      },
+      "citation_repair": {
+        "old": "Henle (2005)",
+        "new": "Henle (2005), Amino Acids 29:313-322 -- but see caveat",
+        "date": "2026-08-26",
+        "basis": "CrossRef search of Amino Acids 2004-2006 for protein-bound CML/glycation returns exactly one Henle 2005 paper: doi 10.1007/s00726-005-0200-2, Amino Acids 29:313-322 (DOI verified live, sole author T. Henle). That is almost certainly what the dead DOI 10.1007/s00726-005-0187-z was meant to be. However it is a REVIEW of protein-bound AGEs in foods, not a heated soy-glycinin model-system study, so it cannot be the source of the repo's '2.3 umol CML/g protein' from soy glycinin or of a dicarbonyl-consumption estimate. | Reported as no_verifiable_source per the verification bar: the paper I can verify for 'Henle (2005)' provably cannot supply the repo's numeric anchors. Use 10.1007/s00726-005-0200-2 only as a general anchor for protein-bound CML in foods, NOT as the source of the soy-glycinin 2.3 umol CML/g figure. Multiple targeted searches for a Henle 2005 soy/glycinin CML model-system paper found nothing."
+      }
     },
     {
       "id": "acrylamide_heat_trapping_2024",
@@ -540,15 +585,17 @@
       "what_it_does_not_support": [
         "Low temperature ambient slurry kinetics"
       ],
-      "comment": "Key safety reference for high-temperature acrylamide formation and trapping."
+      "comment": "Key safety reference for high-temperature acrylamide formation and trapping.",
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 5 nominally distinct reference records in data/lit: acrylamide_heat_trapping_2024, foods_2023_cml_cel_proxy_benchmark, foods_2023_pba_cml_cel_benchmark, foods_2023_pbma_acrylamide_ages, poulsen_2023_pbma_cml_cel. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "de_vleeschouwer_2006_acrylamide_aqueous",
       "kind": "kinetic_model_reference",
       "report_visibility": "default",
       "target_module": "safety",
-      "source_citation": "De Vleeschouwer et al. (2006)",
-      "doi": "10.1021/jf051197n",
+      "source_citation": "De Vleeschouwer, Van der Plancken & Van Loey (2006), JAFC 54:7847",
+      "doi": "10.1021/jf0611264",
       "validated_status": "reference_anchor",
       "analyte": "acrylamide",
       "method": {
@@ -569,14 +616,27 @@
       "what_it_does_not_support": [
         "Low temperature ambient slurry kinetics"
       ],
-      "comment": "Fundamental aqueous system kinetics study."
+      "comment": "Fundamental aqueous system kinetics study.",
+      "doi_repair": {
+        "old": "10.1021/jf051197n",
+        "new": "10.1021/jf0611264",
+        "date": "2026-08-26",
+        "basis": "CrossRef author+topic search: the aqueous acrylamide formation/elimination Ea ranges on this row (140.81-168.25 and 148.23-167.21 kJ/mol) are a pH-resolved BAND, which matches De Vleeschouwer, Van der Plancken & Van Loey (2006), 'Impact of pH on the Kinetics of Acrylamide Formation/Elimination Reactions in Model Systems', JAFC 54(21):7847-7855, 10.1021/jf0611264 (record verified). The row previously reused Claeys et al. 2005 (10.1021/jf051197n), which is a different paper already anchored by claeys_2005_acrylamide_temperature_time."
+      },
+      "citation_repair": {
+        "old": "De Vleeschouwer et al. (2006)",
+        "new": "De Vleeschouwer, Van der Plancken & Van Loey (2006), JAFC 54:7847",
+        "date": "2026-08-26",
+        "basis": "CrossRef author+topic search: the aqueous acrylamide formation/elimination Ea ranges on this row (140.81-168.25 and 148.23-167.21 kJ/mol) are a pH-resolved BAND, which matches De Vleeschouwer, Van der Plancken & Van Loey (2006), 'Impact of pH on the Kinetics of Acrylamide Formation/Elimination Reactions in Model Systems', JAFC 54(21):7847-7855, 10.1021/jf0611264 (record verified). The row previously reused Claeys et al. 2005 (10.1021/jf051197n), which is a different paper already anchored by claeys_2005_acrylamide_temperature_time."
+      },
+      "citation_caveat": "The stored Ea bands are the pH-series envelope reported by this paper; the individual bounds were not re-checked against its tables."
     },
     {
       "id": "zhu_2022_acrylamide_lipid_crosstalk",
       "kind": "kinetic_model_reference",
       "report_visibility": "default",
       "target_module": "safety",
-      "source_citation": "Zhu et al. (2022)",
+      "source_citation": "Ma et al. (2022), Frontiers in Nutrition 9:940202",
       "doi": "10.3389/fnut.2022.940202",
       "validated_status": "reference_anchor",
       "analyte": "acrylamide",
@@ -598,7 +658,13 @@
       "what_it_does_not_support": [
         "Aqueous systems without lipids"
       ],
-      "comment": "Key lipid-Maillard crosstalk safety reference."
+      "comment": "Key lipid-Maillard crosstalk safety reference.",
+      "citation_repair": {
+        "old": "Zhu et al. (2022)",
+        "new": "Ma et al. (2022), Frontiers in Nutrition 9:940202",
+        "date": "2026-08-26",
+        "basis": "CrossRef record for this DOI (title, author list, print volume/issue) checked 2026-08-26: the paper is Ma, Long, Li et al. (2022), 'Exploring Acrylamide and 5-Hydroxymethylfurfural Formation in Glucose-Asparagine-Linoleic Acid System With a Kinetic Model' - right subject, but not 'Zhu et al. (2022)'."
+      }
     },
     {
       "id": "sun_2015_ground_beef_ages",
@@ -627,7 +693,9 @@
       "what_it_does_not_support": [
         "High temperature dry extrusion kinetics"
       ],
-      "comment": "Ground beef pasteurization safety reference."
+      "comment": "Ground beef pasteurization safety reference.",
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 2 nominally distinct reference records in data/lit: sun_2015_ground_beef_ages, yu_2017_cml_cel_meat_review. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "zhu_2021_braised_chicken_ages",
@@ -655,7 +723,9 @@
       "what_it_does_not_support": [
         "Dairy model systems"
       ],
-      "comment": "Braised chicken matrix AGE kinetics reference."
+      "comment": "Braised chicken matrix AGE kinetics reference.",
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 2 nominally distinct reference records in data/lit: sun_2020_solid_matrix_cml_cel_accumulation, zhu_2021_braised_chicken_ages. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "hamzalioglu_2026_milk_uht_ages",
@@ -719,8 +789,7 @@
       "kind": "finished_product_reference",
       "report_visibility": "default",
       "target_module": "safety",
-      "source_citation": "Cantre et al. (2007)",
-      "doi": "PAS_90_2_143_2007",
+      "source_citation": "Cantre, Garcia, Carpio & Madamba (2007), Philippine Agric. Sci. 90(2):143-152",
       "validated_status": "reference_anchor",
       "analyte": "furosine",
       "method": {
@@ -740,14 +809,27 @@
       "what_it_does_not_support": [
         "Fluid milk model systems"
       ],
-      "comment": "Corned beef sterilization furosine reference."
+      "comment": "Corned beef sterilization furosine reference.",
+      "source_status": "identifier_unavailable",
+      "source_status_repair": {
+        "old": "PAS_90_2_143_2007",
+        "new": null,
+        "date": "2026-08-26",
+        "basis": "'PAS_90_2_143_2007' is not a DOI but an encoded journal locator, and it decodes correctly: Cantre, Garcia, Carpio & Madamba (2007), 'Reaction Kinetics of Furosine (epsilon-N-2-furoylmethyl-L-lysine) during Thermal Processing of Corned Beef', Philippine Agricultural Scientist 90(2):143-152 (verified 2026-08-26; furosine 289.23-701.53 mg/100 g protein, first-order over 100-125 C). The journal issues no DOI for this article."
+      },
+      "citation_repair": {
+        "old": "Cantre et al. (2007)",
+        "new": "Cantre, Garcia, Carpio & Madamba (2007), Philippine Agric. Sci. 90(2):143-152",
+        "date": "2026-08-26",
+        "basis": "'PAS_90_2_143_2007' is not a DOI but an encoded journal locator, and it decodes correctly: Cantre, Garcia, Carpio & Madamba (2007), 'Reaction Kinetics of Furosine (epsilon-N-2-furoylmethyl-L-lysine) during Thermal Processing of Corned Beef', Philippine Agricultural Scientist 90(2):143-152 (verified 2026-08-26; furosine 289.23-701.53 mg/100 g protein, first-order over 100-125 C). The journal issues no DOI for this article."
+      }
     },
     {
       "id": "yu_2017_cml_cel_meat_review",
       "kind": "industrial_endpoint_reference",
       "report_visibility": "default",
       "target_module": "safety",
-      "source_citation": "Yu et al. (2017)",
+      "source_citation": "Zhu et al. (2020), Trends in Food Science & Technology 98:30",
       "doi": "10.1016/j.tifs.2020.01.021",
       "validated_status": "reference_anchor",
       "analyte": "cml_cel",
@@ -769,7 +851,14 @@
       "what_it_does_not_support": [
         "Extrusion mechanical shear effects"
       ],
-      "comment": "Provides a reference for comparative CML vs CEL activation energy barriers."
+      "comment": "Provides a reference for comparative CML vs CEL activation energy barriers.",
+      "citation_repair": {
+        "old": "Yu et al. (2017)",
+        "new": "Zhu et al. (2020), Trends in Food Science & Technology 98:30",
+        "date": "2026-08-26",
+        "basis": "CrossRef record for this DOI (title, author list, print volume/issue) checked 2026-08-26: the paper is Zhu, Huang, Cheng et al. (2020), 'A comprehensive review of Nepsilon-carboxymethyllysine and Nepsilon-carboxyethyllysine in thermal processed meat products' - right subject, but not 'Yu et al. (2017)'."
+      },
+      "citation_caveat": "Review article: it compiles CML/CEL literature rather than reporting the CML 61.01 / CEL 29.21 kJ/mol activation energies as primary measurements."
     },
     {
       "id": "charissou_2007_cookie_cml_furosine",
@@ -798,14 +887,16 @@
       "what_it_does_not_support": [
         "High moisture extrusion mechanical effects"
       ],
-      "comment": "Cookie system showing CML/furosine crossover dynamics."
+      "comment": "Cookie system showing CML/furosine crossover dynamics.",
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 1 nominally distinct reference records in data/lit: charissou_2007_cookie_cml_furosine. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "fratianni_2016_apricot_furosine",
       "kind": "industrial_endpoint_reference",
       "report_visibility": "default",
       "target_module": "safety",
-      "source_citation": "Fratianni et al. (2016)",
+      "source_citation": "Fratianni et al. (2017), Food Research International 99:862",
       "doi": "10.1016/j.foodres.2016.12.009",
       "validated_status": "reference_anchor",
       "analyte": "furosine",
@@ -826,7 +917,13 @@
       "what_it_does_not_support": [
         "Dry extrusion kinetics"
       ],
-      "comment": "Apricot model system for furosine."
+      "comment": "Apricot model system for furosine.",
+      "citation_repair": {
+        "old": "Fratianni et al. (2016)",
+        "new": "Fratianni et al. (2017), Food Research International 99:862",
+        "date": "2026-08-26",
+        "basis": "CrossRef record for this DOI (title, author list, print volume/issue) checked 2026-08-26: Fratianni, Niro, Messia et al., 'Kinetics of carotenoids degradation and furosine formation in dried apricots' - print issue is 2017, not 2016."
+      }
     },
     {
       "id": "ma_2024_pbma_extrusion_damage",
@@ -856,7 +953,9 @@
       "what_it_does_not_support": [
         "Aqueous buffer without protein matrix"
       ],
-      "comment": "Important PBMA extrusion safety reference payload for CML, CEL and acrylamide."
+      "comment": "Important PBMA extrusion safety reference payload for CML, CEL and acrylamide.",
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 2 nominally distinct reference records in data/lit: acs_ref3_spi_acrylamide_fast_kinetics, ma_2024_pbma_extrusion_damage. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "knol_2005_acrylamide_kinetics",
@@ -876,7 +975,9 @@
       ],
       "what_it_does_not_support": [
         "Solid-state high-moisture extrusion without Aw corrections."
-      ]
+      ],
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 1 nominally distinct reference records in data/lit: knol_2005_acrylamide_kinetics. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "de_vleeschouwer_2008_acrylamide_aw",
@@ -896,7 +997,9 @@
       ],
       "what_it_does_not_support": [
         "Aqueous solution systems."
-      ]
+      ],
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 1 nominally distinct reference records in data/lit: de_vleeschouwer_2008_acrylamide_aw. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "ishak_2022_phip_hca_kinetics",
@@ -916,7 +1019,9 @@
       ],
       "what_it_does_not_support": [
         "Low temperature processes."
-      ]
+      ],
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 1 nominally distinct reference records in data/lit: ishak_2022_phip_hca_kinetics. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "mandelli_2024_plant_milk_hca_quantification",
@@ -943,7 +1048,7 @@
       "kind": "industrial_endpoint_reference",
       "report_visibility": "default",
       "target_module": "safety",
-      "source_citation": "Chen et al. (2016)",
+      "source_citation": "Yu et al. (2016), Food Science and Biotechnology 25:1163",
       "doi": "10.1007/s10068-016-0185-5",
       "validated_status": "reference_anchor",
       "analyte": "CML",
@@ -956,15 +1061,21 @@
       ],
       "what_it_does_not_support": [
         "Low-moisture starch-dominated systems."
-      ]
+      ],
+      "citation_repair": {
+        "old": "Chen et al. (2016)",
+        "new": "Yu et al. (2016), Food Science and Biotechnology 25:1163",
+        "date": "2026-08-26",
+        "basis": "CrossRef record for this DOI (title, author list, print volume/issue) checked 2026-08-26: the paper is Yu, Gao, Zeng et al. (2016), 'Effects of raw meat and process procedure on Nepsilon-carboxymethyllysine and Nepsilon-carboxyethyl-lysine formation in meat products' - right subject, but not 'Chen et al. (2016)'."
+      }
     },
     {
       "id": "pruteanu_2023_glucose_phe_arrhenius_browning",
       "kind": "industrial_endpoint_reference",
       "report_visibility": "default",
       "target_module": "safety",
-      "source_citation": "Pruteanu et al. (2023)",
-      "doi": "10.1016/j.lwt.2024.117316",
+      "source_citation": "van Boekel (2001), Nahrung/Food 45:150",
+      "doi": "10.1002/1521-3803(20010601)45:3<150::AID-FOOD150>3.0.CO;2-9",
       "validated_status": "reference_anchor",
       "analyte": "browning_intermediates",
       "method": {
@@ -976,7 +1087,22 @@
       ],
       "what_it_does_not_support": [
         "Complex solid-state protein matrices with native starch."
-      ]
+      ],
+      "doi_repair": {
+        "old": "10.1016/j.lwt.2024.117316",
+        "new": "10.1002/1521-3803(20010601)45:3<150::AID-FOOD150>3.0.CO;2-9",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery medium confidence: The repo's two anchors are a matched pair (Ea = 109 kJ/mol for glucose+glycine, Ea = 145 kJ/mol for glucose+phenylalanine). I traced them to the review El Hosry et al., 'Maillard Reaction: Mechanism, Influencing Parameters, ...', Foods 14(11):1881 (2025), Section 3.2, which states verbatim 'Ea = 109 kJ mol-1 for an aqueous solution of glucose and glycine (amino acid) at pH 5.5; Ea = 145 kJ mol-1 for an aqueous solution of glucose and phenylalanine' and cites it as reference [47]. I pulled the Foods reference list from CrossRef: ref_47 = van Boekel, 'Kinetic aspects of the Maillard reaction: a critical review', Nahrung 45:150, DOI as given (record verified in CrossRef, sole author M.A.J.S. van Boekel, PMID 11455780). No author named Pruteanu has any Maillard-related publication in CrossRef."
+      },
+      "citation_repair": {
+        "old": "Pruteanu et al. (2023)",
+        "new": "van Boekel (2001), Nahrung/Food 45:150",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery medium confidence: The repo's two anchors are a matched pair (Ea = 109 kJ/mol for glucose+glycine, Ea = 145 kJ/mol for glucose+phenylalanine). I traced them to the review El Hosry et al., 'Maillard Reaction: Mechanism, Influencing Parameters, ...', Foods 14(11):1881 (2025), Section 3.2, which states verbatim 'Ea = 109 kJ mol-1 for an aqueous solution of glucose and glycine (amino acid) at pH 5.5; Ea = 145 kJ mol-1 for an aqueous solution of glucose and phenylalanine' and cites it as reference [47]. I pulled the Foods reference list from CrossRef: ref_47 = van Boekel, 'Kinetic aspects of the Maillard reaction: a critical review', Nahrung 45:150, DOI as given (record verified in CrossRef, sole author M.A.J.S. van Boekel, PMID 11455780). No author named Pruteanu has any Maillard-related publication in CrossRef."
+      },
+      "citation_caveat": "Two caveats. (1) I verified the attribution of the 109/145 kJ/mol pair to van Boekel (2001) only via the Foods 2025 review's citation, not by reading van Boekel's own table (paywalled) - hence medium confidence. (2) van Boekel (2001) is a kinetics review; it does NOT cover HCAs, CML, CEL or acrylamide, so this DOI supports only the browning_activation_energy parameter of the repo entry. The other three compound classes on this SLR row need their own sources.",
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 2 nominally distinct reference records in data/lit: pruteanu_2023_glucose_phe_arrhenius_browning, van_boekel_2001_maillard_kinetics_review. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "smuda_glomb_2013_aa_degradation_pathways",
@@ -1016,7 +1142,9 @@
       ],
       "what_it_does_not_support": [
         "Non-basic aliphatic amino acid browning rates."
-      ]
+      ],
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 3 nominally distinct reference records in data/lit: martins_van_boekel_2005_ascorbic_amino_browning, scielo_brasil_aa_crosslink_hierarchy_anchor, yu_2018_ascorbic_basic_amino_browning. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "poulsen_2023_pbma_cml_cel",
@@ -1025,8 +1153,8 @@
       "target_module": "safety",
       "chemistry_family": "safety_damage_lane",
       "slr_family_source": "07",
-      "source_citation": "Poulsen et al. (2023)",
-      "doi": "10.1016/j.foodchem.2023.136200",
+      "source_citation": "Fu et al. (2023), Foods 12:1967",
+      "doi": "10.3390/foods12101967",
       "validated_status": "reference_anchor",
       "analyte": "CML_CEL",
       "method": {
@@ -1046,13 +1174,28 @@
       "what_it_supports": [
         "CML 16-48 mg/kg and CEL 25-86 mg/kg ranges in commercial PBMA products"
       ],
-      "comment": "Commercial PBMA CML/CEL glycation endpoints."
+      "comment": "Commercial PBMA CML/CEL glycation endpoints.",
+      "doi_repair": {
+        "old": "10.1016/j.foodchem.2023.136200",
+        "new": "10.3390/foods12101967",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery high confidence: Web search on the CML/CEL-in-PBMA phenomenon surfaced this paper; the PMC full text (PMC10217484) and CrossRef record confirm the metadata, and both numeric anchors match exactly: across 15 commercial plant-based meat analogs, CML 16.46-47.61 mg/kg (mean 32.64) and CEL 25.21-86.23 mg/kg - i.e. the repo's 'CML 16-48 mg/kg' and 'CEL 25-86 mg/kg' are rounded restatements of this dataset. Matrix family (commercial PBMA) and the safety-endpoint-range use both match."
+      },
+      "citation_repair": {
+        "old": "Poulsen et al. (2023)",
+        "new": "Fu et al. (2023), Foods 12:1967",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery high confidence: Web search on the CML/CEL-in-PBMA phenomenon surfaced this paper; the PMC full text (PMC10217484) and CrossRef record confirm the metadata, and both numeric anchors match exactly: across 15 commercial plant-based meat analogs, CML 16.46-47.61 mg/kg (mean 32.64) and CEL 25.21-86.23 mg/kg - i.e. the repo's 'CML 16-48 mg/kg' and 'CEL 25-86 mg/kg' are rounded restatements of this dataset. Matrix family (commercial PBMA) and the safety-endpoint-range use both match."
+      },
+      "citation_caveat": "The citation string in the repo is wrong: the authors are Fu, Ma, Wang, Sun, Chen, Cheng & Liu - there is no 'Poulsen' on this paper. Rename the entry (e.g. fu_2023_pbma_cml_cel) so the id does not carry a fabricated author.",
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 5 nominally distinct reference records in data/lit: acrylamide_heat_trapping_2024, foods_2023_cml_cel_proxy_benchmark, foods_2023_pba_cml_cel_benchmark, foods_2023_pbma_acrylamide_ages, poulsen_2023_pbma_cml_cel. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "krause_2003_furosine_hydrolysis_yields",
       "category": "furosine",
-      "source_citation": "Krause et al. (2003)",
-      "doi": "10.1007/s00217-003-0685-6",
+      "source_citation": "Krause, Knoll & Henle (2003), Eur. Food Res. Technol. 216:277-283",
+      "doi": "10.1007/s00217-002-0649-0",
       "matrix_context": "acid_hydrolysis_model",
       "analytical_method": "RP-HPLC",
       "benchmark_role": "reference_anchor",
@@ -1060,7 +1203,19 @@
         "furosine_recovery_pct": 32.0,
         "furosine_amadori_stoichiometry_pct": 30.0
       },
-      "notes": "Furosine acid hydrolysis recovery 32%; stoichiometric conversion from Amadori ~30%."
+      "notes": "Furosine acid hydrolysis recovery 32%; stoichiometric conversion from Amadori ~30%.",
+      "doi_repair": {
+        "old": "10.1007/s00217-003-0685-6",
+        "new": "10.1007/s00217-002-0649-0",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery high confidence: CrossRef bibliographic search on 'furosine pyridosine acid hydrolysis Amadori products lysine' returned this as the top exact hit; DOI verified live with matching authors, year, journal, volume and pages. The repo's dead DOI (10.1007/s00217-003-0685-6) is a corrupted variant of this Springer identifier. Both numeric anchors are confirmed from the paper's reported results: after hydrolysis with 6 M HCl the molar furosine yields were 32% for fructosyllysine and 34% for lactulosyl- (and maltulosyl-) lysine, with 42% for tagatosyllysine; the widely used fructoselysine transfer factor 3.1 is the reciprocal of the 32% yield."
+      },
+      "citation_repair": {
+        "old": "Krause et al. (2003)",
+        "new": "Krause, Knoll & Henle (2003), Eur. Food Res. Technol. 216:277-283",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery high confidence: CrossRef bibliographic search on 'furosine pyridosine acid hydrolysis Amadori products lysine' returned this as the top exact hit; DOI verified live with matching authors, year, journal, volume and pages. The repo's dead DOI (10.1007/s00217-003-0685-6) is a corrupted variant of this Springer identifier. Both numeric anchors are confirmed from the paper's reported results: after hydrolysis with 6 M HCl the molar furosine yields were 32% for fructosyllysine and 34% for lactulosyl- (and maltulosyl-) lysine, with 42% for tagatosyllysine; the widely used fructoselysine transfer factor 3.1 is the reciprocal of the 32% yield."
+      }
     },
     {
       "id": "acs_2022_pba_lysine_loss_benchmark",
@@ -1073,7 +1228,9 @@
       "key_values": {
         "lysine_loss_pct_extrusion_pba": 22.0
       },
-      "notes": "PBA lysine loss benchmark: 22% after HME extrusion at 150\u00b0C."
+      "notes": "PBA lysine loss benchmark: 22% after HME extrusion at 150\u00b0C.",
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 2 nominally distinct reference records in data/lit: acs_2022_pba_lysine_loss, acs_2022_pba_lysine_loss_benchmark. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "acs_ref3_spi_acrylamide_fast_kinetics",
@@ -1086,7 +1243,9 @@
       "key_values": {
         "acrylamide_ug_per_kg_spi_150C": 112.0
       },
-      "notes": "Acrylamide 112 ug/kg in heated SPI at 150\u00b0C; higher precursor availability in SPI."
+      "notes": "Acrylamide 112 ug/kg in heated SPI at 150\u00b0C; higher precursor availability in SPI.",
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 2 nominally distinct reference records in data/lit: acs_ref3_spi_acrylamide_fast_kinetics, ma_2024_pbma_extrusion_damage. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "foods_2023_cml_cel_proxy_benchmark",
@@ -1099,7 +1258,9 @@
       "key_values": {
         "CML_ug_per_g_protein_pbma_proxy": 38.0
       },
-      "notes": "CML 38 ug/g protein in PBMA via ELISA proxy benchmark."
+      "notes": "CML 38 ug/g protein in PBMA via ELISA proxy benchmark.",
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 5 nominally distinct reference records in data/lit: acrylamide_heat_trapping_2024, foods_2023_cml_cel_proxy_benchmark, foods_2023_pba_cml_cel_benchmark, foods_2023_pbma_acrylamide_ages, poulsen_2023_pbma_cml_cel. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "ramirez_jimenez_2000_furosine_crossover_benchmark",
@@ -1112,7 +1273,9 @@
       "key_values": {
         "furosine_mg_per_100g_protein_toast": 1250.0
       },
-      "notes": "Furosine 1250 mg/100g protein in toasted bread; crossover benchmark for plant proteins."
+      "notes": "Furosine 1250 mg/100g protein in toasted bread; crossover benchmark for plant proteins.",
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 2 nominally distinct reference records in data/lit: ramirez_jimenez_2000_furosine_crossover, ramirez_jimenez_2000_furosine_crossover_benchmark. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
     {
       "id": "zha_2020_ppi_glycation_aggregation",
@@ -1131,15 +1294,30 @@
     {
       "id": "sun_2020_solid_matrix_cml_cel_accumulation",
       "category": "ages",
-      "source_citation": "Sun et al. (2020)",
-      "doi": "10.1016/j.meatsci.2020.108151",
+      "source_citation": "Zhu et al. (2021), J. Sci. Food Agric. 101:388-397",
+      "doi": "10.1002/jsfa.10528",
       "matrix_context": "solid_matrix",
       "analytical_method": "ELISA",
       "benchmark_role": "reference_anchor",
       "key_values": {
         "CML_solid_matrix_ug_per_g_protein": 28.0
       },
-      "notes": "CML 28 ug/g protein in solid matrix; AGE accumulation benchmark."
+      "notes": "CML 28 ug/g protein in solid matrix; AGE accumulation benchmark.",
+      "doi_repair": {
+        "old": "10.1016/j.meatsci.2020.108151",
+        "new": "10.1002/jsfa.10528",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery high confidence: Searching the two numeric anchors verbatim ('44.16 kJ/mol free CML', '40.97 kJ/mol free CEL') found this paper, which reports Ea = 44.158 +/- 3.638 kJ/mol for free CML and 40.971 +/- 0.334 kJ/mol for free CEL -- both repo anchors to the rounding. CrossRef confirms the DOI, authors and JSFA 101:388-397. It is a zero-order kinetic study of free and protein-bound CML/CEL versus water loss in chicken braised at 60-100 C, matching the repo's 'protein_glycation_kinetics' and moisture-coupled framing."
+      },
+      "citation_repair": {
+        "old": "Sun et al. (2020)",
+        "new": "Zhu et al. (2021), J. Sci. Food Agric. 101:388-397",
+        "date": "2026-08-26",
+        "basis": "Round-2 recovery high confidence: Searching the two numeric anchors verbatim ('44.16 kJ/mol free CML', '40.97 kJ/mol free CEL') found this paper, which reports Ea = 44.158 +/- 3.638 kJ/mol for free CML and 40.971 +/- 0.334 kJ/mol for free CEL -- both repo anchors to the rounding. CrossRef confirms the DOI, authors and JSFA 101:388-397. It is a zero-order kinetic study of free and protein-bound CML/CEL versus water loss in chicken braised at 60-100 C, matching the repo's 'protein_glycation_kinetics' and moisture-coupled framing."
+      },
+      "citation_caveat": "The repo's citation string is wrong: authors are Zhu et al., not Sun et al., and the year is 2021 (online Oct 2020), not 2020. Note the matrix is braised CHICKEN, not a high-moisture plant-protein melt -- this is a surrogate transfer, which the repo's own 'notes_on_limits' already flags. The paper covers CML/CEL kinetics only; it does not supply dityrosine diffusion-limited kinetics or glyco-conjugate data, so those parameters need a separate source. The previously stored DOI (10.1016/j.meatsci.2020.108151 = Jo et al. on plasma-treated mushroom in ground ham) is unrelated.",
+      "shared_anchor": true,
+      "shared_anchor_note": "One DOI serves 2 nominally distinct reference records in data/lit: sun_2020_solid_matrix_cml_cel_accumulation, zhu_2021_braised_chicken_ages. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     }
   ]
 }

@@ -13,6 +13,16 @@
 #    experimental concentration data when used in ordinary differential equation (ODE) solvers.
 # 3. Midpoints: Where literature defines a range without specific matrix context, 
 #    the mathematical midpoint is utilized as the heuristic baseline.
+#
+# AUDIT 2026-08-26 (citation verification pass): several sources below did NOT
+# survive adversarial checking. Entries carry an `audit_flag` where the source is
+# dead, off-topic, or non-citable; values are UNCHANGED pending human re-anchoring
+# (see tasks/audit_remediation.md). Known cross-file inconsistency: this file and
+# src/barrier_constants.py FAST_BARRIERS disagree on several families while both
+# claiming literature anchoring — most severely thiol_addition (29 kJ/mol here vs
+# 28.85 kcal/mol = 120.7 kJ/mol in FAST_BARRIERS: same numerals, different units,
+# a suspected kJ/kcal transcription collision). FAST_BARRIERS values are fitted
+# calibration constants; do not treat the two files as interchangeable anchors.
 # ------------------------------------------------------------------------------
 
 arrhenius_data:
@@ -29,14 +39,28 @@ arrhenius_data:
     
   # 2. Schiff Base Formation
   schiff_condensation:
-    A_value: 1.5e11 # from Martins & van Boekel
+    A_value: 1.5e11 # NOT from the source (thesis reports a reparameterised X = k(T_av), not Arrhenius A); legacy value retained
     A_unit: "L/mol.s"
-    Ea_kj_mol: 57.0 
+    Ea_kj_mol: 97.0 # corrected 2026-08-26 from 57.0 (owner-approved): thesis Table 5.2, Glu+Gly -> DFG step, 97 +/- 3 kJ/mol
     temp_range_C: "80-120"
-    pH: 5.5
+    pH: 6.8 # the pH at which the 97 kJ/mol was fitted (was recorded as 5.5, unsupported)
     substrate: "Acyclic Carbonyl + Amine"
     source: "10.1016/j.foodchem.2004.04.006"
     source_quality: "literature"
+    audit_flag: >-
+      2026-08-26 (source recovery): the cited source is Martins & Van Boekel, Food Chemistry 90:257-269
+      (2005), = Chapter 5 of Martins' Wageningen PhD thesis 'Unravelling the Maillard reaction network by
+      multiresponse kinetic modelling' (2003, open access at https://edepot.wur.nl/121418). That chapter's
+      Table 5.2 is the only Ea table in the work; for the glucose + glycine condensation step (step 1,
+      Glu + Gly -> DFG, which lumps Schiff-base formation with the Amadori rearrangement) it reports
+      Ea = 97 +/- 3 kJ/mol, fitted multiresponse over 80-120 C at pH 6.8. The full set of fitted Ea values
+      is 97, 123, 93, 97, 30, 125, 107, 76, 95, 237 kJ/mol - 57 kJ/mol appears nowhere in the thesis, and
+      no Ea is reported at the pH 5.5 recorded in this entry. The A_value comment ("from Martins & van
+      Boekel") is also not literal: the thesis reports a reparameterised prefactor X = k(T_av) = 1.61e-5,
+      not an Arrhenius A. CORRECTED to 97 kJ/mol on 2026-08-26 (owner-approved). CAVEAT that remains
+      open: Martins' 97 kJ/mol is an apparent condensation+rearrangement composite, so this entry and
+      `amadori` (59 kJ/mol) now partially double-count the same lumped barrier - re-derive the split
+      when the Cantera lane is next recalibrated.
 
   # 3. Amadori/Heyns Rearrangement
   amadori:
@@ -48,6 +72,7 @@ arrhenius_data:
     substrate: "Aldosylamine"
     source: "10.1021/jf025561j"
     source_quality: "literature_estimated"
+    audit_flag: "2026-08-26: DOI resolves to Davidek/Clety/Aubin/Blank 2002, not Martins 2003 as the A_value comment claims; value unverified against either."
 
   # 3.5 Enolisation (1,2 and 2,3 pathways)
   enolisation:
@@ -69,7 +94,8 @@ arrhenius_data:
     pH: "Acidic/Neutral"
     substrate: "Fructose / 3-DG"
     source: "https://www.science.gov/topicpages/m/model+compounds+reaction.html"
-    source_quality: "literature"
+    source_quality: "non_citable_aggregator"
+    audit_flag: "2026-08-26: source is a topic-aggregator URL (currently unreachable), not a publication; Ea/A untraceable."
     
   # 5. Strecker Degradation
   strecker:
@@ -80,7 +106,8 @@ arrhenius_data:
     pH: "Neutral"
     substrate: "a-Dicarbonyl + Leucine"
     source: "T.P. Labuza 1998"
-    source_quality: "estimated_lit"
+    source_quality: "non_citable_author_year_only"
+    audit_flag: "2026-08-26: source is a bare author-year string with no DOI, title or venue, so it is not resolvable or verifiable; the A_value comment separately credits 'Hofmann 2000', a third uncited work. Ea=80.33 kJ/mol is unanchored."
 
   # 5.5 Retro-aldol Cleavage
   retro_aldol:
@@ -91,7 +118,8 @@ arrhenius_data:
     pH: "Alkaline favored"
     substrate: "Amadori Product / Intact Sugars"
     source: "10.1080/10408398.2017.1378865"
-    source_quality: "literature_estimated"
+    source_quality: "off_topic_source"
+    audit_flag: "2026-08-26: DOI is ALjahdali & Carbonero 2017, a nutrition/digestion review of MRP health effects; it contains no retro-aldol activation energies."
 
   # 6. Pyrazine Condensation 
   pyrazine_condensation:
@@ -106,13 +134,41 @@ arrhenius_data:
 
   # 7. Cysteine Thermolysis (H2S release)
   cysteine_thermolysis:
-    A_value: 3.16e7 # Midpoint 10^7.5 (10^5.5 - 10^10)
+    A_value: 1.0e14 # re-fitted 2026-08-26 together with Ea (old pair was internally broken: A=3.16e7 with Ea=206 gave k(100C)~5e-22/s, i.e. inert)
     A_unit: "1/s"
-    Ea_kj_mol: 206.0 # Midpoint of 162-250. Note: derived from geologic material pyrolysis (Wu et al., 2026), reflecting immense energy to break C-S/C-C bonds.
-    temp_range_C: "Pyrolysis / Aqueous"
-    pH: "Neutral/Alkaline"
+    Ea_kj_mol: 130.4 # corrected 2026-08-26 from 206.0 (owner-approved): Zheng & Ho 1994 aqueous H2S release, mean over pH 3-9
+    temp_range_C: "80-110 (aqueous)"
+    pH: "3-9 (weak dependence)"
     substrate: "Cysteine"
-    source: "10.5194/egusphere-2026-321"
+    source: "10.1021/bk-1994-0564.ch011"
+    source_quality: "literature"
+    audit_flag: >-
+      2026-08-26: non-peer-reviewed EGUsphere geoscience preprint on TGA/DSC of geologic materials
+      (Congo Basin sediments, Lake Cadagno); it contains no amino-acid kinetics at all, and the
+      "midpoint of 162-250" in the comment above could not be located in it. Transfer of Ea = 206 kJ/mol
+      to food-phase cysteine thermolysis is unsupported.
+      2026-08-26 (source recovery): the closest real measurement of this exact process is Zheng & Ho,
+      "Kinetics of the Release of Hydrogen Sulfide from Cysteine and Glutathione During Thermal
+      Treatment", ACS Symp. Ser. 564 (Sulfur Compounds in Foods), 138-146 (1994),
+      doi 10.1021/bk-1994-0564.ch011: 0.1 M aqueous L-cysteine, pH 3-9, 80-110 C, first-order H2S
+      release, Ea = 31.3 / 31.8 / 32.2 / 29.4 kcal/mol at pH 3 / 5 / 7 / 9 = 131.0 / 133.1 / 134.7 /
+      123.0 kJ/mol (mean 130.4). Supporting brackets: Yu & Tang, Czech J. Food Sci. 34:503-510 (2016),
+      doi 10.17221/86/2016-CJFS, 114.3 kJ/mol for browning-product formation in an
+      ascorbate/cysteine system at 125-155 C; and, for the dry/pyrolytic regime only, Yablokov et al.,
+      Russ. J. Gen. Chem. 79:1141-1145 (2009), doi 10.1134/S1070363209060188, 193 kJ/mol for neat solid
+      L-cysteine at 190-240 C (cystine 184, methionine 195). Recommended aqueous food-phase value:
+      Ea ~ 125 kJ/mol, range 115-140 - which is also what FAST_BARRIERS already uses (30 kcal/mol),
+      so Zheng & Ho is a better anchor for that number than the "Wedzicha 1984, upper range" comment
+      currently attached to it in src/barrier_constants.py.
+      CAUTION - do not change Ea alone: paired with the current A = 3.16e7 1/s, Ea = 206 gives
+      k(100 C) ~ 5e-22 1/s, i.e. cysteine is inert on any cooking timescale, so the A/Ea pair is
+      internally broken independently of the Ea error. A unimolecular prefactor consistent with
+      Ea ~ 130 kJ/mol and minutes-to-hours half-lives at 100 C is A ~ 1e14-1e15 1/s. Re-fit A and Ea
+      together, and if a dry/low-moisture channel is genuinely needed (extrusion, crust, >180 C),
+      add it as a SECOND step at ~190 kJ/mol rather than averaging the two regimes into one barrier -
+      averaging is how 206 arose in spirit, and it fits neither regime. APPLIED 2026-08-26
+      (owner-approved): Ea 130.4 kJ/mol + A 1e14 1/s per the Zheng & Ho anchor; a dry/pyrolytic
+      second channel (~190 kJ/mol) remains future work if extrusion/crust regimes need it.
 
   # 8. Thiol Addition
   thiol_addition:
@@ -123,6 +179,8 @@ arrhenius_data:
     pH: "Neutral"
     substrate: "H2S + Carbonyls"
     source: "https://www.researchgate.net...acrylamide_removal"
+    source_quality: "non_citable_truncated_url"
+    audit_flag: "2026-08-26: literally truncated ResearchGate URL, not a citation. Also the suspected kJ/kcal collision partner of FAST_BARRIERS thiol_addition (28.85 kcal/mol); establish intended units before any recalibration."
 
   # 9. DHA beta-elimination
   beta_elimination_dha:
@@ -133,6 +191,7 @@ arrhenius_data:
     pH: "Mildly alkaline"
     substrate: "Serine/Cysteine"
     source: "10.1021/bi00270a010 (Helmerhorst, E., & Stokes, G. B., 1983)"
+    audit_flag: "2026-08-26: DOI resolves correctly to Helmerhorst & Stokes 1983 Biochemistry, but that paper characterises an acid-stable persulfide-like residue in alkali/sulfhydryl-treated insulin — mechanistic evidence for beta-elimination of disulfides, not a kinetics study; the 19 kcal/mol (79.5 kJ/mol) midpoint cannot be traced to it."
 
   # 10. Thiamine Thermal Degradation
   thiamine_degradation:
@@ -143,3 +202,5 @@ arrhenius_data:
     pH: "Matrix dependent"
     substrate: "Vitamin B1"
     source: "10.1016/0022-1416(84)90226-9 (or similar lit)"
+    source_quality: "dead_doi"
+    audit_flag: "2026-08-26: DOI does not resolve (CrossRef 404), and the source string itself hedges with 'or similar lit'; no replacement located. Ea=100.8 kJ/mol is unanchored. Real thiamine kinetics anchors already exist in benchmark_intake_registry.json (Voelker 2018 10.1016/j.foodres.2018.06.056; Voelker 2021 10.1186/s13065-021-00773-y)."
