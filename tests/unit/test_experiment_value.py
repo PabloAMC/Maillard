@@ -88,9 +88,46 @@ def test_suggest_template_safety_marker():
     assert template == "missing_absolute_anchor"
 
 
-def test_suggest_template_meaty():
-    template, _ = _suggest_template("2-Methyl-3-furanthiol (MFT)", ci_width_log10=0.1, inside_ci=False)
+def test_suggest_template_meaty_in_a_protein_matrix():
+    """Matrix system -> the matrix-varying template. Unchanged behaviour.
+
+    2026-08-27 (Wave I): this test previously called `_suggest_template` with no system
+    at all and asserted `blocking_benchmark_gap`. That was the defect, not the contract:
+    template selection matched only the compound NAME, so a free-precursor aqueous
+    benchmark (thiamine + cysteine + glucose in buffer, no protein) was being handed a
+    protocol whose defining factor is "Matrix (SPI, PPI)". A CRO following that card would
+    have run the wrong experiment. The selector now takes the benchmark's system, so this
+    test states which system it is asserting about, and the free-precursor case below is
+    the regression the old test could not have caught.
+    """
+    template, _ = _suggest_template(
+        "2-Methyl-3-furanthiol (MFT)",
+        ci_width_log10=0.1,
+        inside_ci=False,
+        execution_path="matrix_only",
+        protein_type="pea_iso",
+    )
     assert template == "blocking_benchmark_gap"
+
+
+def test_suggest_template_meaty_in_a_free_precursor_system_does_not_prescribe_a_matrix():
+    """2026-08-27 (Wave I): the regression the rank-1 experiment card actually had."""
+    template, rationale = _suggest_template(
+        "2-Methyl-3-furanthiol (MFT)",
+        ci_width_log10=0.1,
+        inside_ci=False,
+        execution_path="free_precursor",
+        protein_type="free",
+    )
+    assert template == "free_precursor_sulfur_yield"
+    assert "FREE-PRECURSOR" in rationale
+
+    from src.doe_generator import DOE_TEMPLATES
+
+    factors = " ".join(DOE_TEMPLATES[template]["factors"]).lower()
+    assert "spi" not in factors and "ppi" not in factors, (
+        "a free-precursor protocol must not vary a protein matrix that is not in the system"
+    )
 
 
 def test_rank_experiments_sorted_descending_with_full_payload(tmp_path: Path):

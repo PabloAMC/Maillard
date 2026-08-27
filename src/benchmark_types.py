@@ -121,6 +121,20 @@ class BenchmarkSummary:
     slr_families: List[str] = field(default_factory=list)
     payload_roles: List[str] = field(default_factory=list)
     family_lane_names: List[str] = field(default_factory=list)
+    # 2026-08-27 (Wave I). What KIND of claim a row of this benchmark supports. The
+    # mechanical `overall_status` says whether the numbers agree; this says whether that
+    # agreement means anything.  One of:
+    #   "predictive"         — external literature measurement; the model was not fitted
+    #                          to it, so agreement is evidence.
+    #   "fit_recovery"       — the constants under test were BACK-SOLVED from this
+    #                          benchmark's own measured values (see
+    #                          matrix_calibration_registry.fitted_to_benchmark_lanes).
+    #                          Agreement here is algebraic recovery, NOT a prediction, and
+    #                          such rows are excluded from literature-coverage counts.
+    #   "internal_synthetic" — the comparator is model output frozen as a reproducibility
+    #                          snapshot, not a measurement. Agreement means the model
+    #                          reproduces itself.
+    evidence_role: str = "predictive"
 
 
 @dataclass(frozen=True)

@@ -44,6 +44,44 @@ data/*
 # so the later `!data/**/*.yml` rule cannot reach these files on its own.
 !data/campaigns/
 !data/campaigns/**
+# 2026-08-27 (Wave J1). THE ADVERTISED SUITE WAS NOT REPRODUCIBLE FROM A CLEAN
+# CHECKOUT. `data/*` above excluded three directories that tracked code and tests
+# import by absolute path, so the "1245 passed, 0 failed" figure was a property of
+# one working tree rather than of the repository.
+#
+# MEASURED, not estimated (an earlier draft of this comment asserted 13 failures;
+# that number was never measured and was wrong). Method: materialise the git INDEX
+# with `git checkout-index -a --prefix=<tmp>/` and run
+# `python -m pytest tests/unit tests/scientific tests/integration tests/scripts -q`
+# in it, so the result reflects what a `git clone` gets and not the working tree.
+#   BEFORE this un-ignore: 5 failed, 1238 passed, 4 skipped, 2 xfailed.
+# The same 5 are exactly what CI had been reporting all along (run 33037645105,
+# job "Unit tests"): 3 in test_authority_benchmark_data.py, 1 in test_data_ingest.py,
+# 1 in test_deep_research_tracker.py -- every one a FileNotFoundError or a missing
+# fixture, none of them a real defect in the code under test.
+#
+# Each of these needs the same two-line idiom as
+# data/campaigns/ (un-ignore the directory, then its contents) because git does
+# not descend into an excluded directory to evaluate a deeper negation.
+#   * data/qm/                 -> src/authority_benchmark_data.py,
+#                                 tests/benchmarks/_lane_policy.py (40K)
+#   * data/ingest_templates/   -> tests/unit/test_data_ingest.py, and the CSV
+#                                 templates for the QUICKSTART walkthrough (12K).
+#                                 Note these are .csv, which line 30 ignores
+#                                 globally; the negation below is what re-includes
+#                                 them, and it must therefore stay after it.
+#   * data/Gemini_Deep_Research/ -> cited as provenance by src/matrix_correction.py,
+#                                 src/barrier_constants.py and the data/lit
+#                                 registries (3.1M). Tracked so the citation
+#                                 contamination the audit found is REVIEWABLE at
+#                                 its source. Read data/Gemini_Deep_Research/README.md
+#                                 before trusting a single number in it.
+!data/qm/
+!data/qm/**
+!data/ingest_templates/
+!data/ingest_templates/**
+!data/Gemini_Deep_Research/
+!data/Gemini_Deep_Research/**
 
 # Ignore generated markdown pipeline outputs
 data/lit/deep_research_candidate_registry.json
@@ -56,6 +94,11 @@ xtbopt.log
 xtbrestart
 xtbtopo.mol
 .sccnotconverged
+# 2026-08-27 (Wave J1): three more unambiguous xTB scratch tokens that were
+# neither tracked nor ignored under data/geometries/.
+.xtboptok
+gfnff_topo
+*.xyz.bak
 wbo
 charges
 scr/
@@ -103,4 +146,37 @@ data/geometries/xtb_inputs/**/reactant*.xyz
 data/geometries/xtb_inputs/**/xtbrestart*
 data/geometries/xtb_inputs/**/.sccnotconverged
 data/geometries/scratch/
+# 2026-08-27 (Wave J1). `!data/geometries/` above re-includes EVERYTHING under it,
+# and these paths are pure generated output that was neither tracked nor ignored.
+# Counted 2026-08-27: 561 files under dft_checkpoints/ + dft_runs/ (5.7M) plus 13
+# more under the xtbpath_test scratch dir -- 574 files sitting one `git add -A`
+# away from the history. Written by scripts/run_computational_gap_dft.py (checkpoint_dir=...)
+# and by the xTB path search. Nothing reads them back; they are re-derivable by
+# re-running the job.
+data/geometries/dft_checkpoints/
+data/geometries/dft_runs/
+data/geometries/multistep/**/xtbpath_test/
 .claude/
+# 2026-08-27 (Wave J1). scratch/ is described as gitignored in the audit ledger
+# and in the working agreements, and it was NOT -- 87 untracked personal files
+# (ad-hoc DOI search scripts, API dumps; counted 2026-08-27) were one `git add -A`
+# from being published. Making the description true. Nothing in scratch/ is
+# touched by this change; only git's view of it.
+scratch/
+
+# 2026-08-27 (Wave J1). Figures referenced by README.md and docs/. `*.png` (line 25)
+# ignores them, so Wave I had to `git add -f` them. Naming them here removes the
+# need for `-f`: a regenerated figure can be staged the ordinary way, and anyone
+# who deletes and re-renders one does not have to know about the force flag.
+#
+# CORRECTION to what this comment said in an earlier draft: it claimed the `-f`
+# route "leaves a REGENERATED figure invisible to `git status`". That is FALSE and
+# was asserted without testing. .gitignore has no effect on files that are already
+# tracked, so a modified tracked PNG shows up either way. Verified 2026-08-27 by
+# removing these three lines and re-testing: the modified file still reported `AM`.
+# What the negation actually changes is only `git check-ignore --no-index`, i.e.
+# whether an UNTRACKED copy of the path can be added without `-f`. Keeping the
+# lines for that reason; deleting the false justification.
+!docs/assets/report_intervention_waterfall.png
+!docs/assets/report_comparison_intervention_waterfall.png
+!docs/assets/report_compound_confidence_overlay.png

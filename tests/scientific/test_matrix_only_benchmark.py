@@ -31,21 +31,49 @@ def test_matrix_only_benchmark_is_executable_with_full_coverage(bench_file):
 
     assert evaluation.supported is True
     assert evaluation.coverage == 1.0
-    assert len(evaluation.comparisons) == 3
+    # RE-PINNED 2026-08-27 (Wave M): 3 -> 2 comparisons. CAUSE: the Wave K/M content
+    # correction removed the hexanol row from both Pratap-Singh benchmarks. Molecules 2021,
+    # 26, 4104 Table 1 (Europe PMC, PMC8271896) reports hexanol as *n.d.* for pea and for
+    # soy, and the paper's text states pea proteins "contained no alcohol compounds"; soy's
+    # entire alcohol fraction is 40 +/- 9 ppb of 1-octen-3-ol. The 80 / 120 ppb rows this
+    # repo scored against had no source. See each file's `content_correction_note`.
+    assert len(evaluation.comparisons) == 2
 
 
+# RE-DERIVED 2026-08-27 (Wave M). CAUSE: the Wave K/M content correction of both
+# Pratap-Singh benchmarks against Molecules 2021, 26, 4104 Table 1 (Europe PMC, PMC8271896).
+# Three things changed and each is recorded here rather than folded away:
+#
+#   1. The hexanol row is GONE (paper: n.d. in both matrices), so the three-way ordering
+#      assertion has only two members left.
+#   2. The measured hexanal is 1138.00 ppb (pea) and 1621.71 ppb (soy), not 260 / 380. The
+#      observability factors were back-solved from 260 / 380 and are UNCHANGED (refitting
+#      them is an owner science decision -- AUDIT.md, Round 3), so the lane now misses by
+#      4.366x and 4.269x, i.e. exactly the size of the transcription error.
+#   3. The pea ORDERING claim inverted. With the paper's real values hexanal (1138) outranks
+#      2-pentylfuran (638), but the model still predicts 2-pentylfuran (638.3) above hexanal
+#      (260.6). That is a genuine, newly visible ranking failure -- previously masked because
+#      the reference agreed with the constant fitted to it -- and it is asserted here as a
+#      failure rather than removed. Soy's ordering (2-pentylfuran > hexanal) is unchanged and
+#      still correct.
+#
+# NOTHING WAS RELAXED. The `hexanal` limits below were <=1.25 / <=1.10 pass-bands around an
+# algebraic recovery; they are now two-sided pins on an honest miss, which is a STRICTER
+# contract (drift in either direction fails). The 2-pentylfuran limits are untouched.
 @pytest.mark.parametrize(
-    ("protein_type", "bench_file", "expected_limits"),
+    ("protein_type", "bench_file", "expected_limits", "expects_hexanal_first"),
     [
         (
             "pea_iso",
             MATRIX_ONLY_BENCHMARKS["pea_iso"],
-            {"hexanal": 1.25, "2-pentylfuran": 1.2, "hexanol": 1.35},
+            {"hexanal": 4.366, "2-pentylfuran": 1.2},
+            True,
         ),
         (
             "soy_iso",
             MATRIX_ONLY_BENCHMARKS["soy_iso"],
-            {"hexanal": 1.1, "2-pentylfuran": 1.05, "hexanol": 1.05},
+            {"hexanal": 4.269, "2-pentylfuran": 1.05},
+            False,
         ),
     ],
 )
@@ -53,17 +81,36 @@ def test_matrix_only_benchmark_preserves_measured_ordering_without_entering_stri
     protein_type,
     bench_file,
     expected_limits,
+    expects_hexanal_first,
 ):
 
     evaluation = evaluate_benchmark(bench_file)
     summary = summarize_evaluation(evaluation, protein_type=protein_type)
     ratios = {comparison.compound: comparison.ratio for comparison in evaluation.comparisons}
     predicted = {comparison.compound: comparison.predicted_ppb for comparison in evaluation.comparisons}
+    measured = {comparison.compound: comparison.measured_ppb for comparison in evaluation.comparisons}
 
-    assert predicted["2-pentylfuran"] > predicted["hexanal"] > predicted["hexanol"]
-    assert ratios["hexanal"] <= expected_limits["hexanal"]
+    assert set(predicted) == {"hexanal", "2-pentylfuran"}
+
+    # The measured ordering the paper reports.
+    assert (measured["hexanal"] > measured["2-pentylfuran"]) is expects_hexanal_first
+
+    # The ordering the model produces. For pea these now DISAGREE, and that disagreement is
+    # the point: it is reported, not tolerated away (the benchmark's ranking contract reads
+    # `order_mismatch` and the summary reads `scale-gap`).
+    assert predicted["2-pentylfuran"] > predicted["hexanal"]
+
     assert ratios["2-pentylfuran"] <= expected_limits["2-pentylfuran"]
-    assert ratios["hexanol"] <= expected_limits["hexanol"]
+    assert ratios["hexanal"] == pytest.approx(expected_limits["hexanal"], rel=0.01), (
+        f"{protein_type} hexanal ratio is {ratios['hexanal']:.3f}x, pinned at "
+        f"{expected_limits['hexanal']}x -- the exact size of the 2026-08-27 Wave K/M "
+        "reference correction. If it moved, check whether the observability factor was "
+        "refitted (owner decision) or the benchmark reverted."
+    )
+    assert predicted["hexanal"] < measured["hexanal"], (
+        f"{protein_type} hexanal was pinned as an UNDER-prediction; re-derive with a dated "
+        "cause rather than relaxing."
+    )
     assert summary.strict_ready is False
 
 
@@ -93,23 +140,66 @@ def test_matrix_only_benchmark_exposes_ranking_contract_and_calibration_metadata
 
     assert contract["process_state"] == "ambient_slurry"
     assert contract["calibration_mode"] == "compound_specific_headspace"
+    # RE-PINNED 2026-08-27 (Wave M): the "hexanol" target is gone. CAUSE: the Wave K/M
+    # content correction -- Molecules 2021, 26, 4104 Table 1 reports hexanol as n.d. for soy
+    # (and the paper's whole soy alcohol fraction is 40 +/- 9 ppb of 1-octen-3-ol, i.e. 3x
+    # LESS than the 120 ppb this file had attributed to a compound the paper says was not
+    # detected). The soy ORDER (2-pentylfuran > hexanal) is unchanged and still correct.
     assert [item["name"] for item in contract["observable_targets"]] == [
         "2-pentylfuran",
         "hexanal",
-        "hexanol",
     ]
 
     hexanal_meta = evaluation.projection_metadata["Hexanal"]
-    assert hexanal_meta["calibration_evidence_strength"] == "literature_anchored"
+    # RE-PINNED 2026-08-27 (Wave I): `literature_anchored` -> `fitted_to_benchmark`.
+    # This is a relabel, not a value change -- the factor is still 1.0. The pea ambient lane
+    # is the REFERENCE lane, and the base marker yields it multiplies
+    # (benchmark_validation.MATRIX_BENCHMARK_BASE_MARKER_YIELDS) are this very benchmark's
+    # own measured ppb divided by a single common scale: 0.205 x 1268.3 = 260 ppb,
+    # 0.502 x 1270.9 = 638, 0.063 x 1269.8 = 80. So the Pearson 1.000 / max_ratio 1.002 this
+    # benchmark scores is the lane reproducing the numbers it was built from. Calling that
+    # `literature_anchored` and then counting the agreement as validation is the circularity
+    # the cold-start red team found; `fitted_to_benchmark` says what it is.
+    # See src/matrix_calibration_registry.py (the arithmetic is written out there).
+    #
+    # 2026-08-27 (Wave M) -- and the label is now doing even more work than it was. Wave K
+    # read the paper: the 260 / 380 hexanal and the 80 / 120 hexanol those factors were
+    # solved from are NOT in it (true hexanal 1138.00 / 1621.71; hexanol n.d.). So this lane
+    # is fitted to values with no source, and the max_ratio it now scores is 4.366x rather
+    # than 1.002x. `fitted_to_benchmark` remains the correct label; the factors were NOT
+    # refitted (owner decision -- AUDIT.md, Round 3).
+    assert hexanal_meta["calibration_evidence_strength"] == "fitted_to_benchmark"
     assert hexanal_meta["calibration_fallback_mode"] == "compound_specific"
     assert hexanal_meta["process_state"] == "ambient_slurry"
     assert hexanal_meta["evidence_state"] == "externally_benchmarked"
     assert hexanal_meta["target_class"] == "adverse_lipid_markers"
     assert summary.ranking_contract_status == "pass"
-    assert summary.adverse_markers == ["2-pentylfuran", "hexanal", "hexanol"]
+    assert summary.adverse_markers == ["2-pentylfuran", "hexanal"]
 
 
-def test_trikusuma_heated_pea_matrix_benchmark_is_quantitatively_supported():
+def test_trikusuma_heated_pea_matrix_fit_is_recovered_to_within_1_05x():
+    """FIT RECOVERY, NOT PREDICTIVE ACCURACY. The <=1.05x below is expected BECAUSE fitted.
+
+    RENAMED 2026-08-27 (Wave J2, red-team finding: deceptive test names). The previous name
+    was ``test_trikusuma_heated_pea_matrix_benchmark_is_quantitatively_supported``, which
+    reads as "the model quantitatively predicts this literature benchmark". It does not. The
+    heated-matrix projection constants this test scores against were BACK-FITTED to this very
+    benchmark -- see ``results/validation/projection_constant_refit.json`` and the
+    ``fitted_to_benchmark`` calibration_evidence_strength asserted a few tests above, where
+    the arithmetic (measured ppb / a single common scale) is written out in full.
+
+    So a tight ratio here is arithmetic, not agreement: the lane is reproducing the numbers
+    it was solved from. Recovering a fit to within 5% is a REGRESSION CHECK on the fitting
+    machinery -- it catches an optimiser, registry or unit change that stops the constants
+    reproducing their own target -- and it is worth having for exactly that. It is NOT
+    evidence of predictive accuracy and must never be counted as a validation hit. The panel
+    accounting already excludes it on both sides of the ratio: this benchmark sits in the
+    ``fit_recovery`` evidence_role bucket, and the honest headline is 0/6 on the PREDICTIVE
+    bucket (see ``tests/scientific/test_honest_headline_guards.py``).
+
+    Note the last assertion, which is the honest half of this test and stays: even at 1.02x
+    recovery, ``strict_ready`` is False.
+    """
     evaluation = evaluate_benchmark(TRIKUSUMA_BENCHMARK)
     summary = summarize_evaluation(evaluation, protein_type="pea_iso")
     predicted = {comparison.compound: comparison.predicted_ppb for comparison in evaluation.comparisons}

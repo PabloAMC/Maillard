@@ -30,8 +30,12 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, Iterator, List, Mapping, Optional, Sequence, Tuple
 
 from src.benchmark_types import BenchmarkEvaluation
+from src.fit_target_index import fit_target_records_for
 from src.benchmark_validation import (
     DEFAULT_TARGET_TAG,
+    SYNTHETIC_BENCHMARK_ORIGINS,
+    benchmark_evidence_role,
+    benchmark_signal_origin,
     evaluate_benchmark,
     get_benchmark_files,
     get_benchmark_metadata,
@@ -109,15 +113,60 @@ _UNCALIBRATED_HEADSPACE_SIGMA = DEFAULT_UNCALIBRATED_OBSERVABLE_PRIORS["matrix_h
 UNCALIBRATED_ENVELOPE_LOWER_RATIO = math.exp(-1.645 * _UNCALIBRATED_HEADSPACE_SIGMA)
 UNCALIBRATED_ENVELOPE_UPPER_RATIO = math.exp(1.645 * _UNCALIBRATED_HEADSPACE_SIGMA)
 
-# Hard clamps on the sampled multipliers — guard against absurd MC tails. The
-# upper bounds are wide enough that the calibrated priors (sigma 0.2-0.3) never
-# reach them in practice (so the in-panel run is unaffected), while the
-# uncalibrated tier above can still express its intended width.
+# Hard clamps on the sampled multipliers — a guard against absurd MC tails.
+#
+# 2026-08-27 (Wave I) — THIS COMMENT USED TO BE FALSE, and the falsehood was load-bearing.
+# It claimed the bounds were "wide enough that ... the uncalibrated tier can still express
+# its intended width". At the sigma this tier shipped with since 2026-08-26 (2.86) that was
+# simply not true:
+#
+#     advertised 90% CI  = exp(+/- 1.645 * 2.86) = +/- 110.4x
+#     clamp              = +/- 100x
+#     P(|multiplier| clamped) = 2 * P(Z > ln(100)/2.86) = 2 * P(Z > 1.610) = 10.7%
+#
+# So roughly one draw in nine was pinned to the clamp, the realised band was +-100x, not
+# the +-110x quoted in the README and the reports, and the truncation fell hardest exactly
+# where the uncalibrated tier is meant to be honest about not knowing. A "tail guard" that
+# reshapes 10.7% of the distribution is not a guard; it is an undeclared prior.
+#
+# FIX: the clamp is now DERIVED FROM THE SIGMA rather than fixed, at
+# `_OBSERVABLE_CLAMP_SIGMA_MULTIPLE` sigmas, so it sits far out in the tail no matter how
+# the tier is sized and the sigma expresses fully. At 3.0 sigma it truncates
+# 2 * P(Z > 3) = 0.27% of draws — a genuine outlier guard. The legacy fixed bounds are kept
+# as a FLOOR so the calibrated tier's guard cannot become tighter than it was (its sigmas
+# are 0.2-0.3, so it never came near either bound and its results are unchanged).
+#
+# `matrix_retention` keeps its hard physical ceiling of 1.0: a retention FRACTION above
+# unity is not a wide tail, it is a different quantity.
 _OBSERVABLE_CLAMP: Dict[str, Tuple[float, float]] = {
     "matrix_headspace": (0.01, 100.0),
     "henry_kaw": (0.01, 100.0),
     "matrix_retention": (0.01, 1.0),  # retention factor itself is bounded [0.01, 1]
 }
+
+# How many sigmas out the tail guard sits. 3.0 -> 0.27% of draws truncated.
+_OBSERVABLE_CLAMP_SIGMA_MULTIPLE = 3.0
+
+# Keys whose clamp is a PHYSICAL bound, not a tail guard, and must not be widened.
+_PHYSICALLY_BOUNDED_OBSERVABLES = frozenset({"matrix_retention"})
+
+
+def _observable_clamp_for(key: str, sigma: float) -> Tuple[float, float]:
+    """The sampling clamp for one observable prior. 2026-08-27 (Wave I).
+
+    Returns the wider of (a) the legacy fixed bound and (b) a symmetric multiplicative
+    bound `_OBSERVABLE_CLAMP_SIGMA_MULTIPLE` sigmas out, so a wide tier expresses its
+    full width instead of being silently truncated at a constant. Physically bounded
+    keys are returned unchanged.
+    """
+    lo, hi = _OBSERVABLE_CLAMP.get(key, (0.01, 100.0))
+    if key in _PHYSICALLY_BOUNDED_OBSERVABLES:
+        return lo, hi
+    sigma = abs(float(sigma))
+    if sigma <= 0.0:
+        return lo, hi
+    span = math.exp(_OBSERVABLE_CLAMP_SIGMA_MULTIPLE * sigma)
+    return min(lo, 1.0 / span), max(hi, span)
 
 
 @dataclass(frozen=True)
@@ -262,11 +311,70 @@ def build_formulation_uncertainty_envelopes(
     return envelopes
 
 
+@lru_cache(maxsize=None)
+def _routed_offset_keys(prior_key: str) -> Tuple[str, ...]:
+    """Every BARRIER_OFFSETS key a prior named `prior_key` must set to actually bite.
+
+    2026-08-27 (Wave I) — MEASURED DEFECT, not a refactor.
+
+    `barrier_constants.get_barrier()` resolves BARRIER_OFFSETS against the NORMALISED RAW
+    family label and only canonicalises afterwards, so a prior keyed on a canonical family
+    name never matches the label the engine emits. Measured directly on this tree, **10 of
+    the 14 keys in `DEFAULT_FAMILY_PRIORS` moved no barrier at all**:
+
+        schiff_condensation, 1,2-enolisation, 2,3-enolisation, cysteine_thermolysis,
+        thiol_addition, thiol_addition_hexose, retro_aldol, dehydration,
+        beta_elimination, lipid_thiazole
+
+    (`1,2-enolisation` could never have matched anything: its target contains a `-` that
+    key normalisation has already replaced with `_`.) Only amadori_rearrangement,
+    strecker_degradation, thiol_oxidation and aminoketone_condensation were live.
+
+    So the Monte-Carlo barrier channel was ~70% inert and every published CI was narrower
+    than the priors it claimed to sample. **Note the direction: this made the intervals
+    too NARROW, so the coverage numbers this repo published were too LOW, not too high.**
+    Fixing it widens the intervals and therefore RAISES coverage — a change that flatters
+    the model, which is exactly why the before/after must be reported as an interval-width
+    change and never as an accuracy improvement. Nothing about any prediction changes; only
+    the width of the envelope drawn around it.
+
+    Same root cause as the `src/family_sensitivity.py` false zeros; this reuses that
+    module's resolver so the two cannot drift apart.
+    """
+    from src.family_sensitivity import resolve_offset_keys
+
+    # One prior key is not a family name at all and so canonicalises to itself, leaving it
+    # inert even after routing: `lipid_thiazole`. The engine emits
+    # `Lipid_Thiazole_Condensation`, which canonicalises to `lipid_condensation`. Aliased
+    # here rather than renamed, because the key is published in the artifact's `priors`
+    # list and renaming it would break comparison against older runs.
+    _PRIOR_KEY_ALIASES = {"lipid_thiazole": "lipid_condensation"}
+    resolved_family = _PRIOR_KEY_ALIASES.get(prior_key, prior_key)
+
+    # STILL INERT AFTER THE FIX, and deliberately so: `dehydration`. That canonical family
+    # exists in FAST_BARRIERS, but the engine emits `Sugar_Dehydration` and
+    # `Thiol_Dehydration`, which canonicalise to themselves — nothing canonicalises to
+    # `dehydration`. So this prior samples a family the network does not contain. It is NOT
+    # aliased here: which dehydration barrier the MC should perturb (one, the other, or
+    # both) is a science decision that changes every published interval, and it belongs to
+    # the owner with a stated reason, not to a lookup table in a routing helper. Pinned by
+    # tests/unit/test_uncertainty_propagation.py::
+    # test_every_default_family_prior_actually_moves_a_barrier, which names it explicitly
+    # so it cannot quietly stay broken or quietly become live.
+    return tuple(resolve_offset_keys(resolved_family, prior_key))
+
+
 @contextmanager
 def _barrier_offsets(offsets: Mapping[str, float]) -> Iterator[None]:
     previous = os.environ.get("BARRIER_OFFSETS")
+    # 2026-08-27 (Wave I): route each prior onto every engine label it names. See
+    # `_routed_offset_keys` -- 10 of 14 priors were previously exact no-ops.
+    routed: Dict[str, float] = {}
+    for key, value in dict(offsets).items():
+        for routed_key in _routed_offset_keys(str(key)):
+            routed[routed_key] = float(value)
     try:
-        os.environ["BARRIER_OFFSETS"] = json.dumps(dict(offsets))
+        os.environ["BARRIER_OFFSETS"] = json.dumps(routed)
         yield
     finally:
         if previous is None:
@@ -328,6 +436,7 @@ def default_priors(
     *,
     include_observable: bool = True,
     matrix_tier: str = "calibrated",
+    matrix_sigma_override: Optional[float] = None,
 ) -> List[ParameterPrior]:
     """Build the default prior set, overriding sigmas where qm_barrier_provenance
     has narrowed the bound for a specific anchor target.
@@ -370,6 +479,15 @@ def default_priors(
         else:
             raise ValueError(f"Unknown matrix_tier: {matrix_tier!r} (expected 'calibrated' or 'uncalibrated')")
         for key, sigma in observable_priors.items():
+            # 2026-08-27 (Wave I): `matrix_sigma_override` re-scores an identical run at a
+            # different matrix_headspace sigma. Used by the external-validation report to
+            # show coverage at the PRE-WIDENING sigma (2.0) beside the shipped one (2.86),
+            # so "the model got better" and "the interval got wider" stay distinguishable.
+            # It affects only the matrix_headspace observable and never the shipped
+            # defaults; nothing in the production path passes it.
+            if matrix_sigma_override is not None and key == "matrix_headspace":
+                sigma = float(matrix_sigma_override)
+                source = f"{source}_sigma_override_{sigma:g}"
             result.append(
                 ParameterPrior(
                     key=key,
@@ -461,7 +579,10 @@ def sample_offset_vectors(
         for prior in priors:
             if prior.kind == "observable":
                 multiplier = math.exp(rng.gauss(0.0, prior.sigma_kcal))
-                lo, hi = _OBSERVABLE_CLAMP.get(prior.key, (0.01, 100.0))
+                # 2026-08-27 (Wave I): sigma-derived tail guard. The previous fixed
+                # +/-100x clamp truncated 10.7% of draws at the uncalibrated tier's
+                # sigma 2.86, so the realised band was narrower than the advertised one.
+                lo, hi = _observable_clamp_for(prior.key, prior.sigma_kcal)
                 observables[prior.key] = max(lo, min(hi, multiplier))
             else:
                 barriers[prior.key] = rng.gauss(0.0, prior.sigma_kcal)
@@ -473,29 +594,28 @@ def sample_offset_vectors(
 # trivially contain a value copied from the model or trivially miss everything.
 _MIN_EVALUABLE_CI_WIDTH_LOG10 = 0.01
 
-_SYNTHETIC_ORIGINS = {
-    "synthetic_diagnostic",
-    "internal_reproducibility_candidate",
-    "internal_experiment",
-}
+# 2026-08-27 (Wave I): the implementation moved to `benchmark_validation` so the benchmark
+# summary layer can share it without a circular import (that module cannot import this one).
+# These names are kept as aliases because several scripts and tests import them by name.
+_SYNTHETIC_ORIGINS = SYNTHETIC_BENCHMARK_ORIGINS
 
 
 def _benchmark_signal_origin(bench_file: Path) -> str:
-    """Classify a benchmark's comparator signal as literature-measured or internal/synthetic."""
+    """Classify a benchmark's comparator signal as literature-measured or internal/synthetic.
+
+    Thin alias for `src.benchmark_validation.benchmark_signal_origin`, which is now the
+    single definition. Kept so existing importers keep working.
+    """
+    return benchmark_signal_origin(bench_file)
+
+
+def _benchmark_protein_type(bench_file: Path) -> str:
+    """The benchmark's declared protein system ("free", "pea_iso", ...). 2026-08-27."""
     try:
         bench = json.loads(Path(bench_file).read_text())
     except (OSError, json.JSONDecodeError):
-        return "internal_synthetic"
-    origin = str((bench.get("source_metadata") or {}).get("origin", "")).strip().lower()
-    if origin in _SYNTHETIC_ORIGINS:
-        return "internal_synthetic"
-    # 2026-08-27: `matrix_source_anchor` also accepts the typed
-    # `identifier`/`identifier_scheme` pair that DOI-less sources (theses,
-    # patents, DOI-free journals) now carry, so retyping an identifier out of a
-    # `doi`-named field cannot reclassify a literature row as internal/synthetic.
-    if matrix_source_anchor(bench) or origin.startswith("external"):
-        return "external_literature"
-    return "internal_synthetic"
+        return ""
+    return str(bench.get("protein_type", "") or "")
 
 
 def _percentile(sorted_values: Sequence[float], pct: float) -> float:
@@ -660,15 +780,33 @@ def propagate_benchmarks(
     # literature-measured rows with internal synthetic comparators, and counted
     # degenerate zero-width envelopes as ordinary pass/fail rows. Split them.
     origin_by_benchmark: Dict[str, str] = {}
+    role_by_benchmark: Dict[str, str] = {}
     for env in benchmark_envelopes:
         origin_by_benchmark[env.benchmark_id] = _benchmark_signal_origin(Path(env.bench_file))
+        role_by_benchmark[env.benchmark_id] = benchmark_evidence_role(
+            env.benchmark_id, Path(env.bench_file)
+        )
 
+    # 2026-08-27 (Wave I). THIRD bucket: `fitted_row`.
+    #
+    # The 2026-08-26 split separated literature-measured rows from internal synthetic
+    # comparators, which was the right first cut but left the worst case hiding inside the
+    # literature bucket: a row whose own constant was FITTED to it. Those rows are
+    # literature-sourced, so they landed in `external_literature` and were counted as
+    # evidence -- and because a fit reproduces its target, they were the rows most likely
+    # to be "inside the CI". In Wave H they were literally the only two hits in the
+    # headline. A fitted row must be reported, but it must never be in the numerator or
+    # the denominator of a coverage claim.
     split: Dict[str, Dict[str, Any]] = {
         "external_literature": {"hits": 0, "total": 0, "not_evaluable": 0, "ci_widths_log10": []},
         "internal_synthetic": {"hits": 0, "total": 0, "not_evaluable": 0, "ci_widths_log10": []},
+        "fitted_row": {"hits": 0, "total": 0, "not_evaluable": 0, "ci_widths_log10": []},
     }
     for env in benchmark_envelopes:
-        bucket = split[origin_by_benchmark[env.benchmark_id]]
+        if role_by_benchmark[env.benchmark_id] == "fit_recovery":
+            bucket = split["fitted_row"]
+        else:
+            bucket = split[origin_by_benchmark[env.benchmark_id]]
         for c in env.compounds:
             width = (
                 math.log10(c.predicted_p95 / c.predicted_p5)
@@ -693,6 +831,8 @@ def propagate_benchmarks(
             bucket["hits"] / bucket["total"] if bucket["total"] else None
         )
 
+    lit = split["external_literature"]
+    fitted = split["fitted_row"]
     payload: Dict[str, Any] = {
         "summary": {
             "n_samples": n_samples,
@@ -703,6 +843,26 @@ def propagate_benchmarks(
             "ci_coverage_rate": (coverage_hits / coverage_total) if coverage_total else None,
             "ci_level_pct": 90,
             "signal_origin_split": split,
+            # 2026-08-27 (Wave I). The one number to read. `ci_coverage_rate` above is the
+            # mixed-population aggregate, kept only for continuity with older artifacts:
+            # it pools genuine literature rows with the model reproducing its own frozen
+            # snapshots and with rows whose constants were fitted to them.
+            "honest_literature_coverage": {
+                "hits": lit["hits"],
+                "total": lit["total"],
+                "rate": lit["ci_coverage_rate"],
+                "not_evaluable": lit["not_evaluable"],
+                "median_ci_width_log10": lit["median_ci_width_log10"],
+                "excluded_fitted_rows": fitted["total"] + fitted["not_evaluable"],
+                "excluded_fitted_rows_that_would_have_been_hits": fitted["hits"],
+                "definition": (
+                    "External-literature rows only, with fitted rows (constants back-solved "
+                    "from the benchmark) and internal synthetic reproducibility rows removed "
+                    "from BOTH numerator and denominator. Read it together with "
+                    "median_ci_width_log10: a wide interval covering a measurement is a weak "
+                    "claim."
+                ),
+            },
         },
         "priors": [
             {
@@ -718,7 +878,22 @@ def propagate_benchmarks(
                 "benchmark_id": env.benchmark_id,
                 "bench_file": env.bench_file,
                 "signal_origin": origin_by_benchmark[env.benchmark_id],
+                # 2026-08-27 (Wave I): "predictive" | "fit_recovery" | "internal_synthetic".
+                "evidence_role": role_by_benchmark[env.benchmark_id],
+                # The disclosure flag the Wave I fit-target gate requires: True means the
+                # constants under test were derived from THIS benchmark with enough freedom
+                # to reproduce it row by row, so its rows are excluded from the
+                # literature-coverage numerator and denominator.
+                "fitted_row": role_by_benchmark[env.benchmark_id] == "fit_recovery",
+                # Every live fit record naming this benchmark, INCLUDING low-leverage
+                # global fits that do not trigger exclusion. A reader can then see that no
+                # literature row here is strictly out-of-sample even when it still counts.
+                "fit_target_of": list(fit_target_records_for(env.benchmark_id)),
                 "execution_path": env.execution_path,
+                # 2026-08-27 (Wave I): consumed by src.experiment_value._suggest_template,
+                # which was prescribing protein-matrix DoE protocols for free-precursor
+                # benchmarks because it could not see the system.
+                "protein_type": _benchmark_protein_type(Path(env.bench_file)),
                 "matched_compounds": env.matched_compounds,
                 "coverage_rate": env.coverage_rate,
                 "compounds": [
@@ -757,19 +932,31 @@ def _render_signal_origin_split(split: Mapping[str, Any]) -> str:
     if not split:
         return ""
     lines = [
-        "> **Coverage split (read this, not the aggregate):** the aggregate above mixes",
-        "> literature-measured rows with internal synthetic comparators whose reference",
-        "> values are frozen model output; only the literature slice is validation",
-        "> evidence. Zero-width (degenerate) envelopes are excluded from coverage and",
-        "> counted as not-evaluable. Coverage is only interpretable next to its median",
-        "> CI width — a wide interval makes coverage cheap.",
+        "> **Coverage split — this is the headline; the aggregate is not.** The aggregate",
+        "> pools three populations that support completely different claims:",
+        ">",
+        "> * **External literature** — a published measurement the model was not fitted to.",
+        ">   Only this row is validation evidence.",
+        "> * **Fitted rows** — the constants under test were back-solved from these",
+        ">   benchmarks with enough freedom to reproduce them row by row, so agreement here",
+        ">   is algebraic recovery. They are excluded from the literature numerator AND",
+        ">   denominator and reported separately. Read their outcomes: a row the model",
+        ">   still *fails* after being fitted to it is a strong negative result.",
+        "> * **Internal synthetic** — the comparator is the model's own frozen output.",
+        ">   Agreement means the model reproduces itself. Not evidence about chemistry.",
+        ">",
+        "> Zero-width (degenerate) envelopes are excluded from coverage and counted as",
+        "> not-evaluable — a predicted==measured synthetic hit trivially 'contains' its own",
+        "> value. Coverage is only interpretable next to its median CI width: a wide",
+        "> interval makes coverage cheap.",
         ">",
         "> | Signal origin | Inside 90% CI | Not evaluable | Median CI width (dex) |",
         "> | --- | ---: | ---: | ---: |",
     ]
     labels = {
-        "external_literature": "External literature (validation evidence)",
-        "internal_synthetic": "Internal synthetic (reproducibility only)",
+        "external_literature": "External literature (the only validation evidence)",
+        "fitted_row": "Fitted rows (fit recovery — NOT evidence)",
+        "internal_synthetic": "Internal synthetic (reproducibility only — NOT evidence)",
     }
     for key, label in labels.items():
         bucket = split.get(key) or {}
@@ -785,6 +972,42 @@ def _render_signal_origin_split(split: Mapping[str, Any]) -> str:
     return "\n".join(lines)
 
 
+def _render_honest_headline(summary: Mapping[str, Any]) -> str:
+    """The one number a reader should take away. 2026-08-27 (Wave I)."""
+    honest = summary.get("honest_literature_coverage") or {}
+    if not honest:
+        return (
+            "**Headline trust metric**: unavailable — this artifact predates the "
+            "Wave I coverage split. Regenerate it."
+        )
+    hits = honest.get("hits", 0)
+    total = honest.get("total", 0)
+    rate = honest.get("rate")
+    rate_str = f" (**{rate * 100:.1f}%**)" if rate is not None else ""
+    width = honest.get("median_ci_width_log10")
+    width_str = (
+        f" Median CI width **{width:.2f} dex** (~{10 ** width:.0f}× end to end) — read the "
+        "coverage with the width."
+        if width is not None
+        else ""
+    )
+    excluded = honest.get("excluded_fitted_rows", 0)
+    would_have_hit = honest.get("excluded_fitted_rows_that_would_have_been_hits", 0)
+    excluded_str = (
+        f" **{excluded}** fitted row(s) are excluded from both numerator and denominator "
+        f"({would_have_hit} of them would have counted as hits); see the split below."
+        if excluded
+        else ""
+    )
+    not_evaluable = honest.get("not_evaluable", 0)
+    ne_str = f" {not_evaluable} literature row(s) are not evaluable (degenerate envelope)." if not_evaluable else ""
+    return (
+        f"**Headline trust metric — external literature only**: the measured value lies "
+        f"inside the 90% CI for **{hits} / {total}** literature rows{rate_str}."
+        f"{excluded_str}{ne_str}{width_str}"
+    )
+
+
 def render_markdown(payload: Mapping[str, Any]) -> str:
     summary = payload.get("summary", {})
     coverage_rate = summary.get("ci_coverage_rate")
@@ -796,9 +1019,19 @@ def render_markdown(payload: Mapping[str, Any]) -> str:
         "",
         "_Monte Carlo propagation of barrier-family offset priors (additive Gaussian, kcal/mol) through the benchmark evaluator. CI = 90% (P5–P95)._",
         "",
-        f"**Headline trust metric**: measured value lies inside 90% CI for **{summary.get('ci_coverage_hits', 0)} / {summary.get('matched_compound_count', 0)}** matched compounds (**{coverage_str}**).",
+        # 2026-08-27 (Wave I): the aggregate used to be the headline. It pooled genuine
+        # literature rows with the model reproducing its own frozen snapshots and with
+        # rows whose constants had been fitted to them -- and in Wave H the only two
+        # "hits" in the literature slice were fitted rows. The honest number leads now;
+        # the aggregate is demoted to a labelled secondary line.
+        _render_honest_headline(summary),
         "",
         _render_signal_origin_split(summary.get("signal_origin_split") or {}),
+        "",
+        f"_Secondary, mixed-population figure, retained only for continuity with older "
+        f"reports — do not quote it: measured value lies inside 90% CI for "
+        f"{summary.get('ci_coverage_hits', 0)} / {summary.get('matched_compound_count', 0)} "
+        f"matched compounds ({coverage_str}), pooling literature, fitted and synthetic rows._",
         "",
         f"Samples per benchmark: {summary.get('n_samples', 0)}; seed {summary.get('seed', 0)}; benchmarks evaluated: {summary.get('benchmark_count', 0)}.",
         "",

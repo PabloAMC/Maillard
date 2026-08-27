@@ -10,7 +10,7 @@ Wave G1 replaced the fabricated one-step MFT shortcut
             --(cyclodehydration)--> norfuraneol
             --(+ H2S, reductone-mediated)--> 2-methyl-3-furanthiol
 
-(van den Ouweland & Peer 1975, 10.1021/jf60200a038).  Absolute sulfur yields fell
+(van den Ouweland & Peer 1975, 10.1021/jf60199a045).  Absolute sulfur yields fell
 5-40x as a result — Hofmann1998 MFT went from ratio 1.02 to 7.83x UNDER.
 
 The forensics record (tasks/audit_remediation.md, "Re-anchor the WHOLE sulfur
@@ -264,12 +264,60 @@ def main() -> int:
             "*Internal2026*  (synthetic reproducibility lane; excluded by assertion)",
             "*ProtocolPilot2026*  (synthetic reproducibility lane; excluded by assertion)",
             "spi_hvp_xylose_120C_PMC9905368 / wheat_gluten_hvp_xylose_120C_PMC9905368 "
-            "(constrained by their own per-lane upstream_observability_factor, which is "
-            "re-derived separately in "
-            "scripts/generators/rederive_hydrolysate_observability.py)",
+            "(QUARANTINED 2026-08-27 as fabricated; they were already excluded here before "
+            "that, because they are constrained by their own per-lane "
+            "upstream_observability_factor)",
             "thiamine_cys_xylose_145C_Cerny2008 (VALUES_NEED_RE_EXAMINATION)",
             "thiamine_cys_glucose_120C_Bolton1994 (kept as an honest failure)",
         ],
+        # 2026-08-27 (Wave I). Contamination review of this record, forced by the
+        # quarantine of the two PMC9905368 benchmarks as fabricated.
+        "contamination_review": {
+            "date": "2026-08-27",
+            "verdict": "THIS REFIT IS UNCONTAMINATED — its result STANDS.",
+            "basis": (
+                "The fit target is the single benchmark cys_ribose_140C_Hofmann1998 "
+                "(10.1021/jf9705983, Hofmann & Schieberle, JAFC 46:235-241), a real, verified "
+                "paper. The two quarantined PMC9905368 files were already on this script's "
+                "forbidden list before the quarantine and contributed exactly zero rows to the "
+                "objective, so the adopted value thiol_addition_norfuraneol 28.60 -> 26.85 and "
+                "every 'keep the incumbent' decision here are unaffected."
+            ),
+            "what_does_NOT_stand": (
+                "The separate hydrolysate-observability re-derivation "
+                "(scripts/generators/rederive_hydrolysate_observability.py) IS retracted: its "
+                "only targets were the two quarantined files. Its one applied value, the "
+                "Methional base_factor, is reverted 0.05623 -> 0.0045. That layer sits "
+                "DOWNSTREAM of these barriers and does not feed back into this objective."
+            ),
+            "SUPERSEDED_BY_A_LATER_WAVE_I_FIX": (
+                "READ THIS BEFORE CITING ANY CONCLUSION FROM AN EARLIER VERSION OF THIS "
+                "RECORD. Wave H's headline finding -- 'the profiles saturate; no barrier "
+                "value in any defensible range reproduces the measured absolute yields; "
+                "the residual is an ALLOCATION deficit, not a barrier deficit' -- was "
+                "measured against a network in which the MFT route was throttled by a "
+                "defect. The norfuraneol + H2S step consumed a pool reducing equivalent "
+                "whose only source in a ribose/cysteine system was pyrazine chemistry, so "
+                "MFT was structurally starved regardless of barrier value -- which is "
+                "exactly what a saturating profile looks like. Wave I sourced that "
+                "reductant from the thiol redox couple instead, and MFT went from 5.58x "
+                "under to 1.45x under on this very benchmark WITH NO BARRIER CHANGED. "
+                "The saturation was an artifact of the defect. `thiol_addition_norfuraneol` "
+                "still ships at Wave H's 26.85, which is now a value fitted against a "
+                "network that no longer exists. Re-running this refit is an OPEN OWNER "
+                "ITEM and was deliberately NOT done inside Wave I: a refit here would be "
+                "a recalibration event on top of a chemistry change, and the two must not "
+                "be entangled in one pass."
+            ),
+            "standing_caveat_unrelated_to_the_quarantine": (
+                "Hofmann1998's own validation contract (max_ratio 1.45 / mean_abs_log10_error "
+                "0.09) is the 3rd-tightest in the collection -- the same fitting-tell pattern "
+                "flagged for the quarantined files. The tolerance has NOT been widened, and "
+                "the panel currently fails it, so nothing is being hidden; but a single "
+                "benchmark with a suspiciously tight contract is a thin anchor for the whole "
+                "sulfur branch, and that remains an open owner item."
+            ),
+        },
         "decision_rules": {
             "grid_step_kcal_per_mol": GRID_STEP_KCAL,
             "flat_profile_dex": FLAT_PROFILE_DEX,
@@ -396,6 +444,36 @@ def main() -> int:
     record["rows_at_adopted"] = joint_rows
     record["objective_gain_dex"] = baseline_objective - joint_objective
 
+    # 2026-08-27 (Wave I). Fit leverage — see src/fit_target_index.py and
+    # scripts/ci/fit_target_gate.py. This one is the uncomfortable case and it is stated
+    # rather than smoothed: four free barriers against a two-row benchmark.
+    _fitted_rows = sum(1 for row in joint_rows if row.get("scored", True))
+    _free = len(KNOBS)
+    record["fit_leverage"] = {
+        "free_parameters": _free,
+        "fitted_rows": _fitted_rows,
+        "parameters_per_row": (_free / _fitted_rows) if _fitted_rows else None,
+        "class": "per_row_recovery",
+        "interpretation": (
+            f"{_free} free barriers against {_fitted_rows} rows. The fit has more freedom "
+            "than the data constrains, so cys_ribose_140C_Hofmann1998 cannot be scored as "
+            "out-of-sample evidence: its rows are excluded from the literature-coverage "
+            "numerator AND denominator and reported in the fitted-row bucket instead."
+        ),
+        "why_this_exclusion_does_not_flatter_the_model": (
+            "Excluding a fitted row removes its MISSES as well as its hits, and this row is "
+            "a miss: even with four free barriers the fit cannot reproduce the measurement "
+            "(MFT stays ~5.6x under, the profiles saturate inside their defensible ranges). "
+            "The fitted-row bucket therefore has to be read, not skipped -- 'the model "
+            "fails a benchmark it was fitted to' is a stronger negative result than any "
+            "coverage number. See `irreducible_residual` below."
+        ),
+        "what_would_fix_the_leverage": (
+            "A second independent literature benchmark of the sulfur branch. After the "
+            "Mottram1994 / Farmer1999 quarantine there is exactly one, and it is this one."
+        ),
+    }
+
     # ---- what the fit cannot fix -----------------------------------------
     floor_point = {key: KNOBS[key][0] for key in KNOBS}
     floor_objective, floor_rows = _evaluate_at(path, floor_point)
@@ -520,6 +598,53 @@ def main() -> int:
         f"objective is still **{floor_objective:.4f} dex**.",
         "",
     ]
+    # 2026-08-27 (Wave I): record whether the adopted point is actually SHIPPED. Without
+    # this the record reads as if `adopted_values` were live, which they are not when the
+    # script is run in report-only mode -- and the Wave I re-run WAS report-only, on
+    # purpose (see `applied_to_runtime` below).
+    shipped_now = {key: float(FAST_BARRIERS[key][0]) for key in KNOBS}
+    would_move = {
+        key: {"shipped": shipped_now[key], "adopted": adopted[key]}
+        for key in KNOBS
+        if abs(adopted[key] - shipped_now[key]) > 1e-9
+    }
+    record["applied_to_runtime"] = bool(args.apply and would_move)
+    record["shipped_constants"] = shipped_now
+    if would_move and not args.apply:
+        record["adopted_but_NOT_APPLIED"] = {
+            "constants": would_move,
+            "objective_shipped_dex": baseline_objective,
+            "objective_if_applied_dex": joint_objective,
+            "why_not_applied": (
+                "Wave I (2026-08-27) re-ran this record because the network changed "
+                "underneath it: decoupling the MFT step from the pyrazine-supplied hydrogen "
+                "pool took cys_ribose_140C_Hofmann1998 from 5.58x under to 1.45x under with "
+                "NO barrier changed. Applying a barrier refit on top of a chemistry change, "
+                "in the same pass, would entangle the two and make it impossible to say "
+                "afterwards which one produced the agreement. The record is written; the "
+                "constants are not moved. Applying it is an OPEN OWNER ITEM."
+            ),
+        }
+    json_path.write_text(json.dumps(record, indent=2) + "\n", encoding="utf-8")
+
+    if would_move and not args.apply:
+        lines.extend([
+            "",
+            "## NOT APPLIED",
+            "",
+            "**The adopted point above is NOT what ships.** This run was report-only. Shipped "
+            "vs adopted:",
+            "",
+            "| Constant | Shipped | Adopted here |",
+            "| --- | ---: | ---: |",
+        ])
+        for key, pair in sorted(would_move.items()):
+            lines.append(f"| `{key}` | {pair['shipped']:.2f} | {pair['adopted']:.2f} |")
+        lines.extend([
+            "",
+            record["adopted_but_NOT_APPLIED"]["why_not_applied"],
+        ])
+
     md_path = output_dir / "sulfur_barrier_refit_hofmann.md"
     md_path.write_text("\n".join(lines), encoding="utf-8")
     print(f"Wrote {json_path}")

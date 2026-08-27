@@ -24,19 +24,20 @@ measured_volatiles:
     _target_role: primary_request_target
 request_metadata:
   originating_voi_rank: 1
-  voi_score: 12.825190561139957
-  voi_rationale: measured outside 90% CI by 2.84 dex; CI width 0.29 dex; ≈2e+03× ODT
-    (decision_relevance=3.27); critical meaty odorant — multi-factor SIDA closes precursor
-    × matrix gap
-  envelope_miss_log10: 2.8357528731522392
-  ci_width_log10: 0.2923639544778422
+  voi_score: 13.359112644659554
+  voi_rationale: measured outside 90% CI by 2.83 dex; CI width 0.86 dex; ≈2e+03× ODT
+    (decision_relevance=3.27); critical meaty odorant in a FREE-PRECURSOR system —
+    the open question is absolute yield vs precursor dose and temperature, not matrix
+    transfer
+  envelope_miss_log10: 2.8300671072107892
+  ci_width_log10: 0.8557718453176407
   decision_relevance: 3.26884531229258
-  p5_predicted_ppb: 0.009678911629506107
-  p50_predicted_ppb: 0.0171587740541023
-  p95_predicted_ppb: 0.018975379883807344
+  p5_predicted_ppb: 0.0026798124458308806
+  p50_predicted_ppb: 0.01796760892773548
+  p95_predicted_ppb: 0.019225438100746978
   previous_measured_ppb: 13.0
   odour_threshold_ug_per_kg: 0.007
-  suggested_doe_template: blocking_benchmark_gap
+  suggested_doe_template: free_precursor_sulfur_yield
   goal: null
   budget_label: null
 benchmark_alignment:
@@ -49,6 +50,5 @@ analytical_context:
   non_detect_policy: report_lod_and_do_not_backfill
   internal_standards:
   - 13C-2-methyl-3-furanthiol
-  - hexanal-d12
   notes: Defaults emitted by next-experiment; lab is expected to confirm or override
     before returning the intake YAML.

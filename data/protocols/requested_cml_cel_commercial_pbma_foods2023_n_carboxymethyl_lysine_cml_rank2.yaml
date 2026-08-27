@@ -1,0 +1,50 @@
+experiment_id: requested_cml_cel_commercial_pbma_foods2023_n_carboxymethyl_lysine_cml_rank2
+status: pending_lab
+source_kind: model_requested_experiment
+protein_type: free
+process_state: aqueous_pre_extrusion_model
+matrix_format: null
+conditions:
+  temp_C: 150
+  ph: 6.1
+  water_activity: 0.45
+  time_min: 20
+formulation:
+  precursors:
+    L-Lysine:
+      concentration_mM: 45.0
+    D-Glucose:
+      concentration_mM: 45.0
+measured_volatiles:
+  Nε-(Carboxymethyl)lysine (CML):
+    conc_ppb: null
+    uncertainty_pct: null
+    _target_role: primary_request_target
+request_metadata:
+  originating_voi_rank: 2
+  voi_score: 4.080511009682455
+  voi_rationale: measured outside 90% CI by 3.08 dex; CI width 0.00 dex; safety marker
+    — needs SIDA-grade absolute anchor
+  envelope_miss_log10: 3.0805110096824553
+  ci_width_log10: 0.0
+  decision_relevance: 1.0
+  p5_predicted_ppb: 26.585141037167524
+  p50_predicted_ppb: 26.585141037167524
+  p95_predicted_ppb: 26.585141037167524
+  previous_measured_ppb: 32000.0
+  odour_threshold_ug_per_kg: null
+  suggested_doe_template: missing_absolute_anchor
+  goal: null
+  budget_label: null
+benchmark_alignment:
+  target_benchmark_id: cml_cel_commercial_pbma_Foods2023
+  notes: Re-measure to constrain the model envelope at this benchmark.
+analytical_context:
+  headspace_method: HS-SPME-GC-MS
+  quantification_mode: internal_standard_calibrated
+  replicates: 3
+  non_detect_policy: report_lod_and_do_not_backfill
+  internal_standards:
+  - compound_specific_internal_standard_for_n_carboxymethyl_lysine_cml
+  notes: Defaults emitted by next-experiment; lab is expected to confirm or override
+    before returning the intake YAML.

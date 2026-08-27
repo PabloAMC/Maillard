@@ -58,14 +58,15 @@ class TestResolveBasicMatching:
 
     def test_resolve_additives(self):
         """Should resolve known additives."""
+        # TIGHTENED 2026-08-27 (Wave J2). The body was wrapped in
+        # `try: ... except ValueError: pass  # Some additives might not be available`,
+        # which made the assertion optional: if the resolver stopped knowing thiamine, the
+        # test passed anyway. Measured 2026-08-27, both resolve, so nothing is lost by
+        # requiring it -- and losing either one now goes red.
         additives = ["thiamine", "glutathione"]
         for additive in additives:
-            try:
-                precursor = resolve(additive)
-                assert precursor is not None, f"Failed to resolve {additive}"
-            except ValueError:
-                # Some additives might not be available, that's ok
-                pass
+            precursor = resolve(additive)
+            assert precursor is not None, f"Failed to resolve {additive}"
 
     def test_resolve_returns_species_object(self):
         """Resolved precursor should be a Species-like object."""
@@ -93,20 +94,24 @@ class TestResolveFuzzyMatching:
         with pytest.raises(ValueError):
             resolve("glu")  # Too short/partial - should not match glucose
 
-    def test_resolve_common_misspellings(self):
-        """Should handle common misspellings."""
-        # Exact behavior depends on fuzzy matching implementation
-        # But it should attempt to resolve despite minor variations
-        try:
-            # These might fail or succeed depending on fuzzy threshold
-            precursor = resolve("glysine")  # misspelling of glycine
-            if precursor is not None:
-                assert "glycine" in precursor.label.lower() or \
-                       "gly" in precursor.label.lower(), \
-                       "Should match similar names"
-        except ValueError:
-            # Fuzzy matching might have a threshold that rejects very bad matches
-            pass
+    def test_misspelled_precursor_is_rejected_rather_than_fuzzy_matched(self):
+        """There is NO fuzzy matching: 'glysine' raises rather than resolving to glycine.
+
+        RENAMED AND TIGHTENED 2026-08-27 (Wave J2). The test was called
+        `test_resolve_common_misspellings` and its body was a try/except that accepted every
+        possible outcome: resolve-to-glycine passed, resolve-to-anything-else-returning-None
+        passed (the assertion sat behind `if precursor is not None`), and ValueError passed
+        via `except ValueError: pass`. No behaviour could fail it.
+
+        Measured 2026-08-27: `resolve("glysine")` raises
+        ``ValueError: Unknown precursor 'glysine'``. That is the real contract and it is
+        arguably the better one for this repo -- silently accepting a misspelling would map a
+        formulation onto a precursor the user did not ask for. It is now asserted, so adding
+        fuzzy matching becomes a deliberate, visible change rather than something a
+        permissive test would have waved through.
+        """
+        with pytest.raises(ValueError):
+            resolve("glysine")  # misspelling of glycine
 
     def test_resolve_whitespace_handling(self):
         """Should handle leading/trailing whitespace."""
@@ -165,14 +170,13 @@ class TestResolveMany:
         assert len(precursors) >= 2, "Should resolve mixed category inputs"
         assert all(hasattr(p, 'smiles') for p in precursors)
 
-    def test_resolve_many_empty_list(self):
-        """Empty list should return empty list or raise error."""
-        try:
-            precursors = resolve_many([])
-            assert isinstance(precursors, list)
-        except ValueError:
-            # Acceptable to raise error for empty input
-            pass
+    def test_resolve_many_empty_list_returns_empty_list(self):
+        """TIGHTENED 2026-08-27 (Wave J2): was "return empty list OR raise", so both passed.
+
+        Measured 2026-08-27: `resolve_many([])` returns `[]`. Pinning one of the two
+        outcomes means a change of contract is visible to callers instead of absorbed here.
+        """
+        assert resolve_many([]) == []
 
     def test_resolve_many_with_invalid_entry(self):
         """Should raise error if any entry is invalid."""

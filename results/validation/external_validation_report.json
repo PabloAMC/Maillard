@@ -6,19 +6,22 @@
       "compounds": [
         {
           "abs_log10_error": 0.7299356216735393,
-          "ci_width_log10": 3.8449283182254708,
+          "ci_width_log10": 4.0176770887691,
           "compound": "hexanal",
           "fold_error": 5.369521945162881,
           "inside_ci": true,
+          "is_direct_measurement": false,
           "measured_ppb": 1260.0,
-          "predicted_mean": 3360.709079533281,
+          "predicted_mean": 13384.455081897773,
           "predicted_p5": 3.7249842669177027,
           "predicted_p50": 234.6577615042746,
-          "predicted_p95": 26064.70182203558,
-          "predicted_std": 7276.783352380232
+          "predicted_p95": 38797.3025481534,
+          "predicted_std": 99862.2955797863,
+          "value_provenance": "derived_from_oav_and_repo_threshold"
         }
       ],
       "execution_path": "matrix_only",
+      "holdout_kind": "in_panel_rescoring",
       "inside_ci_count": 1,
       "inside_ci_rate": 1.0,
       "matched_compounds": 1,
@@ -30,25 +33,28 @@
       "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
       "compounds": [
         {
-          "abs_log10_error": 3.393467307761526,
-          "ci_width_log10": 3.8449283182254708,
+          "abs_log10_error": 3.393467078184556,
+          "ci_width_log10": 4.0176770887691,
           "compound": "hexanal",
-          "fold_error": 2474.385190867871,
+          "fold_error": 2474.3838828574594,
           "inside_ci": false,
+          "is_direct_measurement": false,
           "measured_ppb": 324.0,
-          "predicted_mean": 11481756.011585068,
-          "predicted_p5": 12726.290639141467,
-          "predicted_p50": 801700.8018411903,
-          "predicted_p95": 89049227.33653884,
-          "predicted_std": 24860899.59705674
+          "predicted_mean": 45727542.23132412,
+          "predicted_p5": 12726.283911765018,
+          "predicted_p50": 801700.3780458169,
+          "predicted_p95": 132549683.93383363,
+          "predicted_std": 341176186.1428112,
+          "value_provenance": "derived_from_oav_and_repo_threshold"
         }
       ],
       "execution_path": "matrix_only",
+      "holdout_kind": "genuine_extrapolation",
       "inside_ci_count": 0,
       "inside_ci_rate": 0.0,
       "matched_compounds": 1,
-      "median_abs_log10_error": 3.393467307761526,
-      "median_accuracy_fold": 2474.3851908678707
+      "median_abs_log10_error": 3.393467078184556,
+      "median_accuracy_fold": 2474.3838828574585
     },
     {
       "bench_file": "/Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/external_validation/external_validation_li_2026_spi_wg_hme_control.json",
@@ -56,101 +62,115 @@
       "compounds": [
         {
           "abs_log10_error": 3.0482397138082113,
-          "ci_width_log10": 3.8449283182254708,
+          "ci_width_log10": 4.0176770887691,
           "compound": "1-hexanol",
           "fold_error": 1117.4798833925074,
           "inside_ci": false,
+          "is_direct_measurement": true,
           "measured_ppb": 20.04,
-          "predicted_mean": 320725.45274195576,
+          "predicted_mean": 1277330.2640174343,
           "predicted_p5": 355.4896413794187,
           "predicted_p50": 22394.29686318585,
-          "predicted_p95": 2487455.2050239895,
-          "predicted_std": 694451.5517306813
+          "predicted_p95": 3702576.4892006647,
+          "predicted_std": 9530244.720297515,
+          "value_provenance": "reported_point_value"
         },
         {
-          "abs_log10_error": 1.6975189130084352,
-          "ci_width_log10": 3.8449283182254708,
+          "abs_log10_error": 0.29272796138143414,
+          "ci_width_log10": 4.0176770887691,
           "compound": "2-pentylfuran",
-          "fold_error": 49.833215727106804,
+          "fold_error": 1.9621308286308485,
           "inside_ci": true,
-          "measured_ppb": 221.51,
-          "predicted_mean": 158091.4001942301,
+          "is_direct_measurement": true,
+          "measured_ppb": 5625.8,
+          "predicted_mean": 629619.2841029409,
           "predicted_p5": 175.22730010902325,
           "predicted_p50": 11038.555615711428,
-          "predicted_p95": 1226111.844010894,
-          "predicted_std": 342307.78144224733
+          "predicted_p95": 1825067.1922035383,
+          "predicted_std": 4697630.69673706,
+          "value_provenance": "reported_point_value"
         },
         {
           "abs_log10_error": 1.333962126909673,
-          "ci_width_log10": 3.8449283182254708,
+          "ci_width_log10": 4.0176770887691,
           "compound": "hexanal",
           "fold_error": 21.57556249069678,
           "inside_ci": true,
+          "is_direct_measurement": true,
           "measured_ppb": 605.6,
-          "predicted_mean": 187130.24632411846,
+          "predicted_mean": 745270.2144445841,
           "predicted_p5": 207.41373529379683,
           "predicted_p50": 13066.16064436597,
-          "predicted_p95": 1451328.8585513565,
-          "predicted_std": 405184.21230535797
+          "predicted_p95": 2160302.665518298,
+          "predicted_std": 5560509.859107628,
+          "value_provenance": "reported_point_value"
         },
         {
-          "abs_log10_error": 2.828219504555507,
-          "ci_width_log10": 3.8449283182254708,
+          "abs_log10_error": 2.4355667794203226,
+          "ci_width_log10": 4.0176770887691,
           "compound": "nonanal",
-          "fold_error": 673.3168834470421,
+          "fold_error": 272.6256910406273,
           "inside_ci": false,
-          "measured_ppb": 29.42,
-          "predicted_mean": 283699.2376747064,
+          "is_direct_measurement": true,
+          "measured_ppb": 72.66,
+          "predicted_mean": 1129868.6121183329,
           "predicted_p5": 314.4500674903961,
           "predicted_p50": 19808.98271101198,
-          "predicted_p95": 2200290.433397746,
-          "predicted_std": 614280.4512198248
+          "predicted_p95": 3275131.793994685,
+          "predicted_std": 8430023.681896925,
+          "value_provenance": "reported_point_value"
         }
       ],
       "execution_path": "matrix_only",
+      "holdout_kind": "genuine_extrapolation",
       "inside_ci_count": 2,
       "inside_ci_rate": 0.5,
       "matched_compounds": 4,
-      "median_abs_log10_error": 2.262869208781971,
-      "median_accuracy_fold": 183.17626894748045
+      "median_abs_log10_error": 1.8847644531649979,
+      "median_accuracy_fold": 76.69454109398171
     },
     {
       "bench_file": "/Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/external_validation/external_validation_liu_2023_ppi_offnote_baseline.json",
       "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
       "compounds": [
         {
-          "abs_log10_error": 0.6547530413645298,
-          "ci_width_log10": 3.8449283182254708,
+          "abs_log10_error": 0.6547657810430333,
+          "ci_width_log10": 4.0176770887691,
           "compound": "hexanal",
-          "fold_error": 4.515990725730931,
+          "fold_error": 4.516123200621143,
           "inside_ci": true,
-          "measured_ppb": 51.96152422706632,
-          "predicted_mean": 3360.709079533281,
+          "is_direct_measurement": false,
+          "measured_ppb": 51.96,
+          "predicted_mean": 13384.455081897773,
           "predicted_p5": 3.7249842669177027,
           "predicted_p50": 234.6577615042746,
-          "predicted_p95": 26064.70182203558,
-          "predicted_std": 7276.783352380232
+          "predicted_p95": 38797.3025481534,
+          "predicted_std": 99862.2955797863,
+          "value_provenance": "band_geometric_midpoint"
         },
         {
-          "abs_log10_error": 1.0358023171079318,
-          "ci_width_log10": 3.8449283182254708,
+          "abs_log10_error": 1.0358404515117414,
+          "ci_width_log10": 4.0176770887691,
           "compound": "nonanal",
-          "fold_error": 10.859312151074446,
+          "fold_error": 10.860265724268737,
           "inside_ci": true,
-          "measured_ppb": 15.811388300841896,
-          "predicted_mean": 2459.055424048742,
+          "is_direct_measurement": false,
+          "measured_ppb": 15.81,
+          "predicted_mean": 9793.503718461785,
           "predicted_p5": 2.7255982440861244,
           "predicted_p50": 171.70080110068875,
-          "predicted_p95": 19071.73304051384,
-          "predicted_std": 5324.475623692852
+          "predicted_p95": 28388.270157185416,
+          "predicted_std": 73069.97237545339,
+          "value_provenance": "band_geometric_midpoint"
         }
       ],
       "execution_path": "matrix_only",
+      "holdout_kind": "in_panel_rescoring",
       "inside_ci_count": 2,
       "inside_ci_rate": 1.0,
       "matched_compounds": 2,
-      "median_abs_log10_error": 0.8452776792362309,
-      "median_accuracy_fold": 7.002896041072538
+      "median_abs_log10_error": 0.8453031162773874,
+      "median_accuracy_fold": 7.003306219371008
     }
   ],
   "external_failing_compounds": [
@@ -160,18 +180,13 @@
       "n_holdout_observations": 1
     },
     {
-      "compound": "2-pentylfuran",
-      "mean_abs_log10_error": 1.6975189130084352,
-      "n_holdout_observations": 1
-    },
-    {
       "compound": "hexanal",
-      "mean_abs_log10_error": 1.528029524427317,
+      "mean_abs_log10_error": 1.5280326519527003,
       "n_holdout_observations": 4
     },
     {
       "compound": "nonanal",
-      "mean_abs_log10_error": 1.9320109108317194,
+      "mean_abs_log10_error": 1.735703615466032,
       "n_holdout_observations": 2
     }
   ],
@@ -293,19 +308,63 @@
     "ci_level_pct": 90,
     "evidence_class": "external_validation_only",
     "holdout_benchmark_count": 4,
+    "holdout_kind_split": {
+      "genuine_extrapolation": {
+        "benchmarks": [
+          "external_validation_bi_2020_roasted_pea_hexanal",
+          "external_validation_li_2026_spi_wg_hme_control"
+        ],
+        "hits": 2,
+        "meaning": "Bundles at a process state the calibration panel does not contain (roasting, HME extrusion). These are the only rows that test transfer.",
+        "rate": 0.4,
+        "total": 5
+      },
+      "in_panel_rescoring": {
+        "hits": 3,
+        "meaning": "Bundles whose executable conditions are COPIED from an in-panel benchmark. Scoring them re-runs that anchor's prediction at that anchor's own conditions; it is a reproducibility comparison, not an extrapolation test.",
+        "rate": 1.0,
+        "total": 3
+      }
+    },
+    "honest_literature_coverage": {
+      "definition": "External-literature rows only, with fitted rows (constants back-solved from the benchmark) and internal synthetic reproducibility rows removed from BOTH numerator and denominator. Read it together with median_ci_width_log10: a wide interval covering a measurement is a weak claim.",
+      "excluded_fitted_rows": 0,
+      "excluded_fitted_rows_that_would_have_been_hits": 0,
+      "hits": 5,
+      "median_ci_width_log10": 4.0176770887691,
+      "not_evaluable": 0,
+      "rate": 0.625,
+      "total": 8
+    },
     "matched_compound_count": 8,
-    "max_fold_error": 2474.385190867871,
-    "median_abs_log10_error": 1.5157405199590541,
-    "median_accuracy_fold": 32.78993229685853,
+    "max_fold_error": 2474.3838828574594,
+    "median_abs_log10_error": 1.1849012892107074,
+    "median_accuracy_fold": 15.307395003707605,
     "n_samples": 200,
+    "pre_widening_coverage": {
+      "ci_coverage_hits": 4,
+      "ci_coverage_rate": 0.5,
+      "genuine_extrapolation_hits": 1,
+      "genuine_extrapolation_total": 5,
+      "matched_compound_count": 8,
+      "matrix_sigma": 2.0,
+      "why": "The uncalibrated matrix ln-sigma was raised 2.0 -> 2.86 on 2026-08-26. Coverage at the SHIPPED sigma is therefore not comparable with any earlier run of this report. This row re-scores the identical hold-out at the pre-widening sigma so the difference between 'the model got better' and 'the interval got wider' is visible rather than inferred. Read the median fold error, which no prior can change, alongside both."
+    },
     "seed": 0,
     "signal_origin_split": {
       "external_literature": {
         "ci_coverage_rate": 0.625,
         "hits": 5,
-        "median_ci_width_log10": 3.8449283182254708,
+        "median_ci_width_log10": 4.0176770887691,
         "not_evaluable": 0,
         "total": 8
+      },
+      "fitted_row": {
+        "ci_coverage_rate": null,
+        "hits": 0,
+        "median_ci_width_log10": null,
+        "not_evaluable": 0,
+        "total": 0
       },
       "internal_synthetic": {
         "ci_coverage_rate": null,
@@ -314,6 +373,24 @@
         "not_evaluable": 0,
         "total": 0
       }
+    },
+    "value_provenance_split": {
+      "counts": {
+        "band_geometric_midpoint": 2,
+        "derived_from_oav_and_repo_threshold": 2,
+        "reported_point_value": 4
+      },
+      "derived_or_constructed": {
+        "hits": 3,
+        "rate": 0.75,
+        "total": 4
+      },
+      "direct_measurement": {
+        "hits": 2,
+        "rate": 0.5,
+        "total": 4
+      },
+      "note": "`band_geometric_midpoint` rows score against a number WE constructed as sqrt(min*max) of a reported range; `derived_from_oav_and_repo_threshold` rows score against the source's OAV multiplied by this repo's own (compilation-level, primary-table-unverified) hexanal odour threshold of 4.5 ppb. Only `reported_point_value` rows are external measurements in the ordinary sense."
     }
   }
 }

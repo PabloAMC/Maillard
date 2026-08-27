@@ -1,4 +1,12 @@
 {
+  "RETRACTED": {
+    "status": "RETRACTED",
+    "retracted_on": "2026-08-27",
+    "retracted_by": "Wave I (cold-start red-team remediation)",
+    "reason": "This re-derivation's ONLY fit targets were spi_hvp_xylose_120C_PMC9905368 and wheat_gluten_hvp_xylose_120C_PMC9905368. Both are fabricated: the cited paper 10.1007/s10068-022-01194-w reacts protein hydrolysates with GLUCOSE and FRUCTOSE at pH 7.5 for 90 min and reports only RELATIVE GC-MS PEAK AREAS; it never mentions 2-furfurylthiol or 2-methyl-3-furanthiol, and contains no absolute concentration for any analyte. The absolute conc_ppb values these constants were fitted to therefore have no possible source. Both files are now quarantined.",
+    "consequence": "The one value this record moved -- Methional base_factor 0.0045 -> 0.05623 -- has been REVERTED in src/recommend.py::_HYDROLYSATE_SULFUR_OBSERVABILITY_PROFILES. The other three compounds were NOT moved by this record (saturated or non-derivable), so no other constant is affected. Additionally, the two Methional rows that this fit produced were subsequently SCORED as literature coverage -- a self-fit. Wave I adds scripts/ci/fit_target_gate.py to make that class of circularity a blocking CI failure.",
+    "do_not_use_as": "a warrant for any shipped constant"
+  },
   "generated_by": "scripts/generators/rederive_hydrolysate_observability.py",
   "fit_targets": [
     "spi_hvp_xylose_120C_PMC9905368.json",

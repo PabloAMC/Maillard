@@ -232,16 +232,45 @@ def _decision_relevance(
 
 
 def _suggest_template(
-    compound: str, ci_width_log10: Optional[float], inside_ci: bool
+    compound: str,
+    ci_width_log10: Optional[float],
+    inside_ci: bool,
+    *,
+    execution_path: str = "",
+    protein_type: str = "",
 ) -> Tuple[str, str]:
-    """Return (template_key, rationale_fragment)."""
+    """Return (template_key, rationale_fragment).
+
+    2026-08-27 (Wave I) — the template now depends on the BENCHMARK'S SYSTEM, not only on
+    a substring of the compound name.
+
+    The red team found the rank-1 experiment card prescribing a protein-matrix protocol
+    ("Matrix (SPI, PPI)", "Standard PBMA formulation baseline") for
+    `thiamine_cys_glucose_120C_Bolton1994` -- a FREE-PRECURSOR aqueous thiamine + cysteine
+    + glucose system with no protein in it at all. The cause: selection matched "furanthiol"
+    against `_MEATY_KEYWORDS` and returned `blocking_benchmark_gap` unconditionally, and
+    that template's whole point is to vary the protein matrix. A CRO following the card
+    would have run the wrong experiment.
+    """
     name = compound.lower()
+    free_precursor_system = (
+        str(protein_type).strip().lower() in {"free", "free_amino_acid", ""}
+        and str(execution_path).strip().lower() in {"free_precursor", ""}
+    ) or str(execution_path).strip().lower() == "free_precursor"
+
     if any(k in name for k in _SAFETY_KEYWORDS):
         return (
             "missing_absolute_anchor",
             "safety marker — needs SIDA-grade absolute anchor",
         )
     if any(k in name for k in _MEATY_KEYWORDS):
+        if free_precursor_system:
+            # Varying "Matrix (SPI, PPI)" is meaningless where there is no protein matrix.
+            return (
+                "free_precursor_sulfur_yield",
+                "critical meaty odorant in a FREE-PRECURSOR system — the open question is "
+                "absolute yield vs precursor dose and temperature, not matrix transfer",
+            )
         return (
             "blocking_benchmark_gap",
             "critical meaty odorant — multi-factor SIDA closes precursor × matrix gap",
@@ -340,7 +369,13 @@ def rank_experiments(
             envelope_miss = _envelope_miss_log10(measured, p5, p95)
             decision_relevance = _decision_relevance(measured, p50, odt)
             template_key, template_rationale = _suggest_template(
-                str(compound.get("compound", "")), ci_width_log10, inside_ci
+                str(compound.get("compound", "")),
+                ci_width_log10,
+                inside_ci,
+                # 2026-08-27 (Wave I): the benchmark's own system decides whether a
+                # matrix-varying protocol makes any sense. See _suggest_template.
+                execution_path=str(benchmark.get("execution_path", "") or ""),
+                protein_type=str(benchmark.get("protein_type", "") or ""),
             )
             score = _voi_score(
                 inside_ci=inside_ci,

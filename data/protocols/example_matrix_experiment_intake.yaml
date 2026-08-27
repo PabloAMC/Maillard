@@ -47,6 +47,16 @@ benchmark_alignment:
   target_benchmark_id: pea_isolate_ribose_cysteine_100C_45min_Internal2026
   notes: Compare against the closest aligned internal pea matrix harness.
 comparison_contract:
+  # RE-RANKED 2026-08-27 (Wave N). These ranks describe the ORDERING THE MODEL PRODUCES on
+  # the aligned internal pea snapshot; they are a drift-detection fixture, not a literature
+  # claim, and they must be refreshed whenever the snapshot is (see
+  # scripts/generators/refresh_internal_reproducibility_snapshots.py).
+  # Cause of this refresh: the MFT ROUTE CORRECTION. The norfuraneol + H2S -> MFT step was
+  # retired on isotope evidence (Cerny & Davidek 2003, 10.1021/jf026123f; 2004,
+  # 10.1021/jf035265m) and replaced by Deoxyosone_Reduction + Thiol_Addition_Pentodiulose at
+  # un-fitted ESTIMATED barriers (28.0 / 28.60) rather than the 26.85 Wave H had fitted
+  # through the contradicted route. MFT therefore falls BELOW both FFT and
+  # 2,5-dimethylpyrazine again. Previous order (Wave I): MFT 3, FFT 4, DMP 5.
   observable_targets:
   - name: Hexanal
     role: adverse_marker
@@ -56,15 +66,15 @@ comparison_contract:
     role: adverse_marker
     expected_rank: 2
     direction: lower
-  - name: 2,5-dimethylpyrazine
+  - name: 2-furfurylthiol
     role: desirable_marker
     expected_rank: 3
     direction: higher
-  - name: 2-methyl-3-furanthiol
+  - name: 2,5-dimethylpyrazine
     role: desirable_marker
     expected_rank: 4
     direction: higher
-  - name: 2-furfurylthiol
+  - name: 2-methyl-3-furanthiol
     role: desirable_marker
     expected_rank: 5
     direction: higher
@@ -85,8 +95,10 @@ comparison_contract:
     de-duplication), which reordered this lane from FFT > MFT > hexanal > nonanal to
     hexanal > nonanal > MFT > FFT; and again 2026-08-27 (Wave G1 chemistry rebuild plus
     the Wave H sulfur refit), which lifted 2,5-dimethylpyrazine above the thiols and
-    swapped MFT ahead of FFT. Current model ordering is hexanal > nonanal >
-    2,5-dimethylpyrazine > MFT > FFT > bis(2-methyl-3-furyl) disulfide. This is a
+    swapped MFT ahead of FFT; then 2026-08-27 (Wave I), which put both thiols back above
+    2,5-dimethylpyrazine; and again 2026-08-27 (Wave N MFT route correction), which dropped
+    MFT below both. Current model ordering is hexanal > nonanal > FFT >
+    2,5-dimethylpyrazine > MFT > bis(2-methyl-3-furyl) disulfide. This is a
     documentation example whose ranks track the model, NOT measured truth -- the
     measured_volatiles above are illustrative and were never re-fitted to it.
 analytical_context:

@@ -13,6 +13,60 @@ MATRIX_CALIBRATION_OFFSETS_PATH = ROOT / "data" / "lit" / "matrix_calibration_of
 _RUNTIME_MULTIPLIER_ENV = "MAILLARD_MATRIX_CALIBRATION_MULTIPLIERS"
 
 
+# 2026-08-27 (Wave I) — the `fitted_to_benchmark` evidence strength.
+#
+# The cold-start red team (forensic F3, scientific C3) found that several entries in this
+# registry were labelled `literature_anchored` / `conditional_literature_anchored` when they
+# were in fact BACK-SOLVED from the very benchmark they are then scored against. The tell was
+# an 8-to-17-significant-figure constant sitting next to a benchmark row reporting
+# Pearson R = 1.000 and max_ratio = 1.000.
+#
+# THE ARITHMETIC, so this is checkable rather than asserted:
+#
+#   Pea reference lane (`MATRIX_BENCHMARK_BASE_MARKER_YIELDS` in benchmark_validation.py)
+#     Hexanal        0.205 x 1268.3 = 260 ppb  <- pea_isolate_40C_PratapSingh2021 measured
+#     2-Pentylfuran  0.502 x 1270.9 = 638 ppb  <- same benchmark
+#     1-Hexanol      0.063 x 1269.8 =  80 ppb  <- same benchmark
+#   One common scale (1269 +/- 0.2%) recovers all three measured values exactly. Those
+#   "yields" ARE the benchmark's own measurements, rescaled by a single constant.
+#
+#   Soy ambient lane (the `0.453 / 0.205`-style expressions below)
+#     numerators 0.453 / 2.972 / 0.143 x 838.8 = 380 / 2492 / 120 ppb
+#                                                <- soy_isolate_40C_PratapSingh2021 measured
+#   Again one common scale (838.8 +/- 0.08%) across all three. Same construction.
+#
+#   Trikusuma pea-UHT heated lane: three 17-significant-figure constants whose benchmark row
+#   scores max_ratio 1.000 / MALE 0.000 on all three analytes. That is what an exact
+#   algebraic recovery looks like; no measurement is reported to 17 figures.
+#
+# None of this is wrong to DO -- a matrix observability factor has to be anchored to
+# something, and the anchor is a real measurement from a real paper. What was wrong was the
+# LABEL: calling it `literature_anchored` and then reporting the resulting agreement as
+# validation. A lane whose constant was solved from a benchmark cannot also be evidence about
+# that benchmark. Such lanes are now labelled `fitted_to_benchmark`, and the benchmark
+# reporting layer surfaces them as "fit-recovery (not predictive)" instead of "pass".
+#
+# 2026-08-27 (Wave M) -- AND THE ANCHOR ITSELF WAS WRONG. The arithmetic above is unchanged
+# and still describes exactly what these constants are, but the sentence "the anchor is a
+# real measurement from a real paper" no longer holds for the two hexanal rows and does not
+# hold at all for the 1-hexanol rows. Wave K read Molecules 2021, 26, 4104 Table 1 (Europe
+# PMC, PMC8271896): the paper's pea hexanal is 1138.00 ppb and its soy hexanal is 1621.71
+# ppb -- 4.38x and 4.27x above the 260 / 380 these factors were back-solved from -- and it
+# reports n.d. for hexanol in BOTH matrices, so the 80 / 120 ppb had no source at all.
+# The benchmark files are corrected (see their `content_correction_note`); THESE FACTORS ARE
+# NOT, and that is deliberate: refitting them is a science decision for an owner, not a
+# propagation step, and doing it in the same pass as a chemistry change would make the
+# agreement unattributable.
+#
+# CONSEQUENCE, so nobody reads the current numbers as agreement: the pea and soy ambient
+# hexanal lanes now UNDER-predict by exactly the correction factor (predicted 260.6 vs 1138
+# measured, 379.9 vs 1621.71), because the factor still reproduces the erroneous value it
+# was solved from. The 2-pentylfuran factors are unaffected -- 638 and 2492 were verified
+# verbatim against the paper. The 1-hexanol entries now anchor to a compound the paper says
+# was not detected; they no longer have a target at all.
+FITTED_TO_BENCHMARK = "fitted_to_benchmark"
+
+
 @dataclass(frozen=True)
 class MatrixCalibrationRecord:
     protein_type: str
@@ -23,6 +77,12 @@ class MatrixCalibrationRecord:
     source: str
     fallback_mode: str
     notes: str = ""
+    # Set when a shipped constant is re-expressed (e.g. rounded from fit residue to a
+    # defensible precision). Retains the exact prior value so the change is auditable.
+    previous_value: Optional[float] = None
+    # When evidence_strength == FITTED_TO_BENCHMARK, the benchmark id the factor was
+    # solved from. Consumed by the reporting layer to mark the row fit-recovery.
+    fitted_from_benchmark: Optional[str] = None
 
 @dataclass(frozen=True)
 class MatrixCalibrationAnchor:
@@ -33,6 +93,8 @@ class MatrixCalibrationAnchor:
     source: str
     fallback_mode: str
     notes: str = ""
+    previous_value: Optional[float] = None
+    fitted_from_benchmark: Optional[str] = None
 
 @dataclass(frozen=True)
 class MatrixRuntimeCompositionRule:
@@ -45,110 +107,151 @@ class MatrixRuntimeCompositionRule:
 
 
 _MATRIX_CALIBRATION_RECORDS = (
+    # --- Pea ambient reference lane -------------------------------------------------
+    # 2026-08-27 (Wave I): relabelled literature_anchored -> fitted_to_benchmark.
+    # These factors are 1.0 BY CONSTRUCTION: this lane is the reference against which the
+    # others are expressed, and the yields it multiplies
+    # (benchmark_validation.MATRIX_BENCHMARK_BASE_MARKER_YIELDS) are
+    # pea_isolate_40C_PratapSingh2021's own measured ppb divided by one common scale of
+    # 1268-1271. So `pea_isolate_40C_PratapSingh2021` scoring Pearson 1.000 / max_ratio 1.002
+    # is the lane reproducing the numbers it was built from, not a prediction. The factor is
+    # still 1.0 -- nothing changes at runtime -- but the label now says what it is.
     MatrixCalibrationRecord(
         protein_type="pea_iso",
         process_state="ambient_slurry",
         compound="hexanal",
         observable_factor=1.0,
-        evidence_strength="literature_anchored",
+        evidence_strength=FITTED_TO_BENCHMARK,
         source="Pratap-Singh 2021 pea isolate ambient slurry baseline",
         fallback_mode="compound_specific",
-        notes="Reference compound for the pea matrix-only intake/headspace lane.",
+        notes="Reference compound for the pea matrix-only intake/headspace lane. Factor is 1.0 by construction; the underlying base marker yield is this benchmark's own measurement rescaled, so this lane is fit-recovery, not a prediction.",
+        fitted_from_benchmark="pea_isolate_40C_PratapSingh2021",
     ),
     MatrixCalibrationRecord(
         protein_type="pea_iso",
         process_state="ambient_slurry",
         compound="2-pentylfuran",
         observable_factor=1.0,
-        evidence_strength="literature_anchored",
+        evidence_strength=FITTED_TO_BENCHMARK,
         source="Pratap-Singh 2021 pea isolate ambient slurry baseline",
         fallback_mode="compound_specific",
-        notes="Reference furan marker for the pea matrix-only intake/headspace lane.",
+        notes="Reference furan marker for the pea matrix-only intake/headspace lane. Factor is 1.0 by construction; see the hexanal entry.",
+        fitted_from_benchmark="pea_isolate_40C_PratapSingh2021",
     ),
     MatrixCalibrationRecord(
         protein_type="pea_iso",
         process_state="ambient_slurry",
         compound="1-hexanol",
         observable_factor=1.0,
-        evidence_strength="literature_anchored",
+        evidence_strength=FITTED_TO_BENCHMARK,
         source="Pratap-Singh 2021 pea isolate ambient slurry baseline",
         fallback_mode="compound_specific",
+        fitted_from_benchmark="pea_isolate_40C_PratapSingh2021",
     ),
     MatrixCalibrationRecord(
         protein_type="pea_iso",
         process_state="ambient_slurry",
         compound="nonanal",
         observable_factor=1.0,
-        evidence_strength="literature_anchored",
+        evidence_strength=FITTED_TO_BENCHMARK,
         source="Pratap-Singh 2021 pea isolate ambient slurry baseline",
         fallback_mode="compound_specific",
+        fitted_from_benchmark="pea_isolate_40C_PratapSingh2021",
     ),
+    # --- Trikusuma pea-UHT heated lane -----------------------------------------------
+    # 2026-08-27 (Wave I): relabelled conditional_literature_anchored ->
+    # fitted_to_benchmark, and the 17-significant-figure fit residue rounded to 6
+    # significant figures (previous_value retained). These three constants were BACK-SOLVED
+    # so that pea_isolate_uht_140C_Trikusuma2019 reproduces its own measured 782 / 163 / 24
+    # ppb; the benchmark row consequently reports Pearson 1.000, max_ratio 1.000,
+    # MALE 0.000. That is fit recovery, not agreement.
+    # Rounding changes each factor by < 1e-6 relative -- verified not to move any scored
+    # benchmark row.
     MatrixCalibrationRecord(
         protein_type="pea_iso",
         process_state="heated_matrix",
         compound="hexanal",
-        observable_factor=0.22877612093571738,
-        evidence_strength="conditional_literature_anchored",
+        observable_factor=0.228776,
+        previous_value=0.22877612093571738,
+        evidence_strength=FITTED_TO_BENCHMARK,
         source="Trikusuma 2019 UHT pea beverage heated headspace anchor",
         fallback_mode="compound_specific_process_state",
-        notes="Heated pea UHT aldehyde anchor carried onto the matrix-only oxidation/headspace lane. This is a process-state-specific observable correction, not a global oxidation law.",
+        notes="Heated pea UHT aldehyde anchor carried onto the matrix-only oxidation/headspace lane. BACK-SOLVED from this benchmark's own measured 782 ppb -- a process-state-specific observable correction, not a global oxidation law, and not independent evidence about this benchmark.",
+        fitted_from_benchmark="pea_isolate_uht_140C_Trikusuma2019",
     ),
     MatrixCalibrationRecord(
         protein_type="pea_iso",
         process_state="heated_matrix",
         compound="2-pentylfuran",
-        observable_factor=0.019473307397293472,
-        evidence_strength="conditional_literature_anchored",
+        observable_factor=0.0194733,
+        previous_value=0.019473307397293472,
+        evidence_strength=FITTED_TO_BENCHMARK,
         source="Trikusuma 2019 UHT pea beverage heated headspace anchor",
         fallback_mode="compound_specific_process_state",
-        notes="Heated pea UHT furan anchor carried onto the matrix-only oxidation/headspace lane.",
+        notes="Heated pea UHT furan anchor. BACK-SOLVED from this benchmark's own measured 163 ppb.",
+        fitted_from_benchmark="pea_isolate_uht_140C_Trikusuma2019",
     ),
     MatrixCalibrationRecord(
         protein_type="pea_iso",
         process_state="heated_matrix",
         compound="nonanal",
-        observable_factor=0.009595650239086601,
-        evidence_strength="conditional_literature_anchored",
+        observable_factor=0.00959565,
+        previous_value=0.009595650239086601,
+        evidence_strength=FITTED_TO_BENCHMARK,
         source="Trikusuma 2019 UHT pea beverage heated headspace anchor",
         fallback_mode="compound_specific_process_state",
-        notes="Heated pea UHT nonanal anchor carried onto the matrix-only oxidation/headspace lane.",
+        notes="Heated pea UHT nonanal anchor. BACK-SOLVED from this benchmark's own measured 24 ppb.",
+        fitted_from_benchmark="pea_isolate_uht_140C_Trikusuma2019",
     ),
+    # --- Soy ambient lane ------------------------------------------------------------
+    # 2026-08-27 (Wave I): relabelled literature_anchored -> fitted_to_benchmark.
+    # The expressions read like literature ratios, and the DENOMINATORS are the pea
+    # reference yields -- but the NUMERATORS (0.453 / 2.972 / 0.143 / 0.160) are
+    # soy_isolate_40C_PratapSingh2021's own measured ppb (380 / 2492 / 120) divided by one
+    # common scale of 838.5-839.2. So both halves of the ratio are the two benchmarks these
+    # lanes are then scored against, which is why soy scores max_ratio 1.001 / Pearson 1.000.
+    # The expressions are LEFT AS EXPRESSIONS on purpose: they show the construction.
     MatrixCalibrationRecord(
         protein_type="soy_iso",
         process_state="ambient_slurry",
         compound="hexanal",
         observable_factor=0.453 / 0.205,
-        evidence_strength="literature_anchored",
+        evidence_strength=FITTED_TO_BENCHMARK,
         source="Pratap-Singh 2021 soy-vs-pea ambient slurry release ratio",
         fallback_mode="compound_specific",
-        notes="Soy release ratio carried relative to the pea reference intake lane.",
+        notes="Soy release ratio carried relative to the pea reference intake lane. Both numerator and denominator are rescaled measurements from the two benchmarks this lane is scored against -- fit-recovery, not a prediction.",
+        fitted_from_benchmark="soy_isolate_40C_PratapSingh2021",
     ),
     MatrixCalibrationRecord(
         protein_type="soy_iso",
         process_state="ambient_slurry",
         compound="2-pentylfuran",
         observable_factor=2.972 / 0.502,
-        evidence_strength="literature_anchored",
+        evidence_strength=FITTED_TO_BENCHMARK,
         source="Pratap-Singh 2021 soy-vs-pea ambient slurry release ratio",
         fallback_mode="compound_specific",
+        fitted_from_benchmark="soy_isolate_40C_PratapSingh2021",
     ),
     MatrixCalibrationRecord(
         protein_type="soy_iso",
         process_state="ambient_slurry",
         compound="1-hexanol",
         observable_factor=0.143 / 0.063,
-        evidence_strength="literature_anchored",
+        evidence_strength=FITTED_TO_BENCHMARK,
         source="Pratap-Singh 2021 soy-vs-pea ambient slurry release ratio",
         fallback_mode="compound_specific",
+        fitted_from_benchmark="soy_isolate_40C_PratapSingh2021",
     ),
     MatrixCalibrationRecord(
         protein_type="soy_iso",
         process_state="ambient_slurry",
         compound="nonanal",
         observable_factor=0.160 / 0.150,
-        evidence_strength="literature_anchored",
+        evidence_strength=FITTED_TO_BENCHMARK,
         source="Pratap-Singh 2021 soy-vs-pea ambient slurry release ratio",
         fallback_mode="compound_specific",
+        notes="Nonanal is NOT reported for soy in the ambient benchmark; 0.160 is a lane-internal value carried on the same construction as the other three, so it is neither literature-anchored nor independently checkable.",
+        fitted_from_benchmark="soy_isolate_40C_PratapSingh2021",
     ),
     MatrixCalibrationRecord(
         protein_type="soy_iso",
@@ -158,7 +261,7 @@ _MATRIX_CALIBRATION_RECORDS = (
         evidence_strength="conditional_literature_anchored",
         source="Shu 2024 heated soy off-flavour attenuation carried onto the Pratap-Singh soy ambient baseline",
         fallback_mode="compound_specific_process_state",
-        notes="High-severity soy treatment prior for heated matrix states. Useful for reliability and directional accuracy, but not a meaty benchmark anchor.",
+        notes="High-severity soy treatment prior for heated matrix states. Useful for reliability and directional accuracy, but not a meaty benchmark anchor. 2026-08-27 (Wave I): kept as conditional_literature_anchored -- the ATTENUATION (1 - 0.7060) is a real Shu 2024 literature figure and no panel benchmark exists for heated soy, so this lane is not fit-recovery. But note its BASELINE factor (0.453/0.205) is fit-recovery (see the soy ambient block), so the anchoring is only as strong as one literature attenuation applied to a back-solved base.",
     ),
     MatrixCalibrationRecord(
         protein_type="soy_iso",
@@ -168,9 +271,46 @@ _MATRIX_CALIBRATION_RECORDS = (
         evidence_strength="conditional_literature_anchored",
         source="Shu 2024 heated soy 2-pentylfuran below-detection carryover onto the Pratap-Singh soy ambient baseline",
         fallback_mode="compound_specific_process_state",
-        notes="Below-detection is carried as a small non-zero censoring surrogate so heated soy ranking stays numerically stable while honoring the reported severe attenuation.",
+        notes="Below-detection is carried as a small non-zero censoring surrogate so heated soy ranking stays numerically stable while honoring the reported severe attenuation. 2026-08-27 (Wave I): same reading as the heated soy hexanal entry -- literature attenuation on a fit-recovery baseline.",
     ),
 )
+
+
+def fitted_to_benchmark_lanes() -> Dict[str, tuple[str, ...]]:
+    """Benchmark id -> the compounds whose observable factor was solved FROM it.
+
+    2026-08-27 (Wave I).  A benchmark listed here cannot be scored as evidence about the
+    model: the constants under test were derived from its own measured values, so any
+    agreement is algebraic recovery.  Consumers (`benchmark_validation`, the summary
+    generators, `scripts/ci/fit_target_gate.py`) use this to label such rows
+    ``fit_recovery`` instead of ``pass`` and to exclude them from literature-coverage
+    numerators and denominators.
+    """
+    lanes: Dict[str, list[str]] = {}
+    for record in _MATRIX_CALIBRATION_RECORDS:
+        if record.evidence_strength != FITTED_TO_BENCHMARK:
+            continue
+        if not record.fitted_from_benchmark:
+            continue
+        lanes.setdefault(record.fitted_from_benchmark, []).append(record.compound)
+    for anchor in _MATRIX_CLASS_ANCHORS:
+        if anchor.evidence_strength != FITTED_TO_BENCHMARK:
+            continue
+        if not anchor.fitted_from_benchmark:
+            continue
+        lanes.setdefault(anchor.fitted_from_benchmark, []).append(anchor.target_class)
+    return {key: tuple(sorted(set(value))) for key, value in sorted(lanes.items())}
+
+
+def is_fit_recovery_benchmark(benchmark_id: Optional[str]) -> bool:
+    """True when every scored row of this benchmark is algebraic recovery of a fit.
+
+    See `fitted_to_benchmark_lanes`.  Used to keep fit-recovery rows out of the honest
+    literature-coverage count rather than letting a Pearson of exactly 1.000 read as a pass.
+    """
+    if not benchmark_id:
+        return False
+    return str(benchmark_id) in fitted_to_benchmark_lanes()
 
 
 _MATRIX_CLASS_ANCHORS = (

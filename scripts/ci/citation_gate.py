@@ -16,10 +16,22 @@ It does *not* try to replace the human/CrossRef verification pass -- a DOI that
 resolves to the wrong paper is invisible to any structural check. Use ``--online``
 (non-blocking, see ``ci.yml``) for liveness sampling.
 
+Scan surfaces
+-------------
+* **Structured** (``SCAN_GLOBS``): fields NAMED for a DOI inside ``data/lit/*.json|yml``,
+  ``data/benchmarks/**/*.json`` and ``data/species/*.yml``. All four checks apply.
+* **Text** (``TEXT_SCAN_GLOBS``, added 2026-08-27, Wave I fix 4): every DOI-shaped
+  token anywhere in ``src/**/*.py``, ``docs/**/*.md``, ``README.md`` and ``AUDIT.md``.
+  Only checks 1 and 2 apply -- 3 and 4 are properties of a structured record.
+  This surface exists because the flagship mechanism anchor Wave I had to repair
+  (``10.1021/jf60200a038``, live but resolving to a gossypol/rat paper) was in
+  Python comments, a docstring and a free-text calibration rationale, and the
+  structured sweep could not see any of them.
+
 Checks (offline, all blocking)
 ------------------------------
-1. **DOI syntax** -- every DOI-bearing field across ``data/lit/*.json|yml``,
-   ``data/benchmarks/**/*.json`` and ``data/species/*.yml`` matches the DOI grammar.
+1. **DOI syntax** -- every DOI-bearing field, and every DOI-shaped token on the
+   text surface, matches the DOI grammar.
 2. **Confabulation signatures** -- author-name-shaped tails (``...de_leyn_2019``),
    all-zero article suffixes (``.00000``), and template placeholders
    (``XXXX``, ``TODO``, ``PLACEHOLDER``, ``10.xxxx/...``) are rejected outright,
@@ -30,6 +42,16 @@ Checks (offline, all blocking)
 4. **Repair-record completeness** -- every ``doi_repair`` / ``citation_repair``
    record must carry ``old``, ``new``, ``date`` and ``basis``. A repair without a
    basis is indistinguishable from a fresh confabulation.
+5. **Barrier-source disclosure** (``BARRIER_SOURCE_GLOBS``, added 2026-08-27,
+   Wave J1) -- every entry in the ``data/qm/`` barrier benchmark files must name
+   a source or carry ``source_status: no_verifiable_source``. This one checks for
+   an ABSENT citation rather than a bad one: all nine literature windows and all
+   eighteen claimed wB97M-V / revDSD / xTB values in those files shipped with no
+   citation, no run record and no ledger entry, and silence was reading as
+   provenance. The label satisfies the check by design -- it enforces disclosure,
+   not quality -- and check 3 stops an entry from claiming the label and a DOI
+   at once. Not waivable, because there is nothing to waive: adding the label is
+   always possible and always free.
 
 Known-debt baseline
 -------------------
@@ -65,7 +87,62 @@ SCAN_GLOBS = (
     "data/benchmarks/**/*.json",
     "data/species/*.yml",
     "data/species/*.yaml",
+    # 2026-08-27 (Wave J1). data/qm/ was outside every sweep this repo has ever
+    # run -- including the 2026-08-26 CrossRef ledger -- because `.gitignore`
+    # line 33 (`data/*`) hid the directory from git entirely, so it was neither
+    # reviewable nor scannable. Un-ignoring it (same commit) is what makes it
+    # reachable here. See BARRIER_SOURCE_GLOBS below for the check it feeds.
+    "data/qm/*.json",
 )
+
+# 2026-08-27 (Wave J1). Check 5's scope. These two files carry nine "literature"
+# barrier windows and eighteen columns of claimed quantum-chemistry results, and
+# between them they carried ZERO citations, run records or provenance of any kind.
+# The check below makes that state impossible to re-enter silently: an entry must
+# either name a source or admit that it has none.
+BARRIER_SOURCE_GLOBS = (
+    "data/qm/phase33_barrier_benchmarks.json",
+    "data/qm/phase35_double_hybrid_benchmarks.json",
+)
+
+# Fields that count as naming a source for check 5. A DOI is the strong form; the
+# typed identifier pair is the form used for genuinely DOI-less sources (theses,
+# patents, journals that register no DOI) -- see the WAIVERS history note.
+BARRIER_SOURCE_FIELDS = frozenset({"doi", "source_doi", "identifier", "citation"})
+
+# 2026-08-27 (Wave I fix 4). The structured sweep above only ever saw fields
+# NAMED for a DOI inside data files. The flagship mechanism anchor that Wave I
+# had to repair -- 10.1021/jf60200a038, live but resolving to a gossypol/rat
+# paper -- lived in none of them: it was sitting in Python comments, in a module
+# docstring and inside a free-text calibration rationale string, i.e. in exactly
+# the places a reader trusts most and the gate could not see. These globs close
+# that hole. They are scanned as TEXT: any DOI-shaped token anywhere in the file
+# is extracted and run through checks 1 and 2 (syntax, confabulation signature).
+# Checks 3 and 4 (status coherence, repair-record completeness) are properties of
+# a structured RECORD and do not apply to prose, so they are not run here.
+TEXT_SCAN_GLOBS = (
+    "src/**/*.py",
+    "docs/**/*.md",
+    "README.md",
+    "AUDIT.md",
+)
+
+# A DOI-shaped token embedded in free text. Deliberately greedy on the suffix and
+# then trimmed by `_trim_text_doi`, because prose ends DOIs with sentence
+# punctuation, wraps them in brackets/backticks/quotes, and puts them in
+# parentheses. Anything this misses is a false NEGATIVE (the gate stays silent),
+# never a false positive that blocks a build on punctuation.
+#
+# `\` and `#` terminate the token, and neither is a loss: a DOI suffix cannot
+# contain a backslash (in the archived research dumps under docs/research/ they
+# are MARKDOWN ESCAPES, e.g. `10.1016/0891-5849\`), and `#` starts a URL fragment
+# (`...1573830#:~:text=Generally%2C...`), which is part of the link, not the DOI.
+# Both were producing pure-punctuation `doi-syntax` failures on first run.
+TEXT_DOI_RE = re.compile(r"10\.\d{4,9}/[^\s\"'<>()\[\]{},;\\#]+")
+
+# Trailing characters that are prose, not part of the DOI. `.` is included
+# because a DOI never legitimately ends in a full stop, and sentences do.
+_TEXT_DOI_TRAILING = ".,;:`'\"*_-"
 
 # Field names that are asserted to hold a DOI.
 DOI_FIELDS = frozenset(
@@ -156,6 +233,46 @@ WAIVERS: tuple[tuple[str, str, str, str, str], ...] = (
     #    files; see tasks/audit_remediation.md).
 )
 
+# --- Text-surface carry-over: NOT a baseline, an UNPAID DEFECT --------------
+# (check_id, repo-relative path, exact value, what is actually wrong)
+#
+# 2026-08-27 (Wave I fix 4). Widening the scan to code and prose immediately
+# found a fabricated DOI in a document that predates the widening. This list is
+# deliberately NOT part of WAIVERS and is NOT a known-debt baseline: WAIVERS is
+# a ratchet for tolerated debt, whereas every entry here is a LIVE CONFABULATION
+# that a named owner has to delete. It exists for one reason only -- so that
+# turning the scan on does not red-line CI for work that is not the scan's fault
+# -- and it is printed under its own alarmed heading on every run so it cannot
+# become invisible.
+#
+# Rules for this list, which differ from WAIVERS on purpose:
+#   * It applies ONLY to files matched by TEXT_SCAN_GLOBS. The structured
+#     surface keeps its original rule that confabulation signatures are never
+#     waivable; nothing here weakens that.
+#   * Entries are keyed WITHOUT a pointer, because a line number in prose churns
+#     for reasons that have nothing to do with the citation.
+#   * Adding an entry requires naming the defect, not describing it as tolerable.
+#   * An entry that stops matching is reported as stale and must be deleted, so
+#     this list can only shrink.
+# EMPTY, and it should stay that way.
+#
+# Ratchet history:
+#   2026-08-27 (Wave I, opened): one entry — a confabulated Elsevier DOI in
+#     docs/slr_benchmark_evaluation.md §7.3, surfaced the moment the scan was widened to
+#     cover docs/**, README.md and AUDIT.md. It was carried for a matter of hours because
+#     docs/** sat outside the editing scope of the sub-task that widened the scan.
+#   2026-08-27 (Wave I, closed): FIXED AT SOURCE, not waived. The Hao et al. (2025)
+#     reference was WITHDRAWN in the document: its score is struck, its "directly
+#     calibrates the optimizer" claim is retracted (verified: no constant in the repo is
+#     fitted to it — the identifier appears nowhere else), and the bad identifier is
+#     retained in the withdrawal notice with spaces inserted so the record survives
+#     without re-asserting the anchor.
+#
+# The gate reports a waiver that no longer matches as STALE and fails the build, so this
+# list can only shrink. Adding to it requires a reason that would survive being read
+# aloud.
+TEXT_SURFACE_WAIVERS: tuple[tuple[str, str, str, str], ...] = ()
+
 
 class Violation:
     __slots__ = ("check", "path", "pointer", "value", "detail")
@@ -193,6 +310,79 @@ def _iter_files() -> Iterator[Path]:
                 yield path
 
 
+def _iter_text_files() -> Iterator[Path]:
+    seen: set[Path] = set()
+    for pattern in TEXT_SCAN_GLOBS:
+        for path in sorted(ROOT.glob(pattern)):
+            if not path.is_file() or path in seen:
+                continue
+            # Build artefacts and caches are not sources of citations.
+            parts = set(path.parts)
+            if "__pycache__" in parts or ".git" in parts or any(
+                part.endswith(".egg-info") for part in path.parts
+            ):
+                continue
+            seen.add(path)
+            yield path
+
+
+def _trim_text_doi(raw: str) -> str:
+    """Strip prose punctuation that the greedy text regex swallowed."""
+    token = raw.strip()
+    while token and token[-1] in _TEXT_DOI_TRAILING:
+        token = token[:-1]
+    return token
+
+
+def _check_doi_token(raw: str, rel: str, pointer: str, out: list[Violation]) -> None:
+    """Checks 1 and 2 on a single DOI string, from any source."""
+    for pattern, why in CONFABULATION_PATTERNS:
+        if pattern.search(raw):
+            out.append(Violation("confabulation-signature", rel, pointer, raw, why))
+            return
+    if not DOI_RE.match(raw):
+        out.append(
+            Violation(
+                "doi-syntax",
+                rel,
+                pointer,
+                raw,
+                "does not match the DOI grammar 10.<registrant>/<suffix>. "
+                "If this is a non-DOI identifier (thesis, patent, standard) "
+                "it does not belong in a field named for a DOI.",
+            )
+        )
+
+
+def _scan_text(path: Path, rel: str, out: list[Violation], dois: list[str]) -> int:
+    """Extract DOI-shaped tokens from a source/prose file and check them.
+
+    Returns the number of tokens found. The pointer is `#L<line>` so a failure
+    names the line, which is the only useful coordinate in an unstructured file.
+    """
+    found = 0
+    try:
+        text = path.read_text(encoding="utf-8")
+    except (OSError, UnicodeDecodeError) as exc:
+        out.append(
+            Violation("parse", rel, "", "", f"could not read: {type(exc).__name__}: {exc}")
+        )
+        return 0
+
+    if "10." not in text:  # cheap bail-out; most source files have no DOI at all
+        return 0
+
+    for line_number, line in enumerate(text.splitlines(), start=1):
+        for match in TEXT_DOI_RE.finditer(line):
+            token = _trim_text_doi(match.group(0))
+            if not token:
+                continue
+            found += 1
+            dois.append(token)
+            _check_doi_token(token, rel, f"#L{line_number}", out)
+    return found
+
+
 def _walk(node: Any, rel: str, pointer: str, out: list[Violation], dois: list[str]) -> None:
     if isinstance(node, dict):
         for key, value in node.items():
@@ -201,25 +391,7 @@ def _walk(node: Any, rel: str, pointer: str, out: list[Violation], dois: list[st
             if key in DOI_FIELDS and isinstance(value, str) and value.strip():
                 raw = value.strip()
                 dois.append(raw)
-                for pattern, why in CONFABULATION_PATTERNS:
-                    if pattern.search(raw):
-                        out.append(
-                            Violation("confabulation-signature", rel, child, raw, why)
-                        )
-                        break
-                else:
-                    if not DOI_RE.match(raw):
-                        out.append(
-                            Violation(
-                                "doi-syntax",
-                                rel,
-                                child,
-                                raw,
-                                "does not match the DOI grammar 10.<registrant>/<suffix>. "
-                                "If this is a non-DOI identifier (thesis, patent, standard) "
-                                "it does not belong in a field named for a DOI.",
-                            )
-                        )
+                _check_doi_token(raw, rel, child, out)
 
             if key in REPAIR_FIELDS and isinstance(value, dict):
                 # `new` may be explicitly null: that is the deliberate
@@ -274,7 +446,79 @@ def _walk(node: Any, rel: str, pointer: str, out: list[Violation], dois: list[st
 
 
 def run_offline() -> tuple[list[Violation], list[Violation], list[tuple[str, ...]], list[str], int]:
-    """Return (blocking, waived, stale_waivers, all_dois, files_scanned)."""
+    """Return (blocking, waived, stale_waivers, all_dois, files_scanned).
+
+    Kept at five elements deliberately: it is the published shape, used by
+    tests/unit/test_audit_remediation_carried_2026_08.py. The text-surface
+    carry-over added on 2026-08-27 is reported through `run_offline_detailed`.
+    """
+    blocking, waived, stale, _carried, _stale_carried, dois, files_scanned = (
+        run_offline_detailed()
+    )
+    return blocking, waived, stale, dois, files_scanned
+
+
+def _check_barrier_sources(path: Path, rel: str, out: list[Violation]) -> None:
+    """Check 5: every barrier benchmark entry names a source or admits it has none.
+
+    Added 2026-08-27 (Wave J1). The failure this prevents is not a bad citation but
+    the ABSENCE of one: nine literature windows and eighteen "computed" columns
+    shipped with no DOI, no author-year, no run record and no ledger entry, and
+    nothing in the repository could tell you that. Silence read as anchored.
+
+    A `no_verifiable_source` label satisfies this check. That is deliberate: the
+    check enforces DISCLOSURE, not quality. Check 3 (status coherence) still
+    forbids claiming the label and a DOI at once, so an entry cannot satisfy both
+    branches and pass as anchored.
+    """
+    try:
+        payload = _load(path)
+    except Exception:
+        return  # the parse violation is already recorded by the caller
+    if not isinstance(payload, dict):
+        return
+    benchmarks = payload.get("benchmarks")
+    if not isinstance(benchmarks, list):
+        return
+
+    for index, entry in enumerate(benchmarks):
+        if not isinstance(entry, dict):
+            continue
+        family = str(entry.get("family", f"index {index}"))
+        status = entry.get("source_status")
+        if isinstance(status, str) and status.strip() == "no_verifiable_source":
+            continue
+        if any(
+            isinstance(entry.get(field), str) and entry[field].strip()
+            for field in BARRIER_SOURCE_FIELDS
+        ):
+            continue
+        out.append(
+            Violation(
+                "barrier-source",
+                rel,
+                f"/benchmarks[{index}]",
+                family,
+                "barrier benchmark entry names no source. Every window and every "
+                "claimed computed value must carry one of "
+                f"{sorted(BARRIER_SOURCE_FIELDS)} or the explicit admission "
+                "source_status='no_verifiable_source'. An entry with neither is "
+                "indistinguishable from a number someone typed.",
+            )
+        )
+
+
+def run_offline_detailed() -> tuple[
+    list[Violation],
+    list[Violation],
+    list[tuple[str, ...]],
+    list[Violation],
+    list[tuple[str, ...]],
+    list[str],
+    int,
+]:
+    """Return (blocking, waived, stale_waivers, text_carried, stale_text_carried,
+    all_dois, files_scanned)."""
     violations: list[Violation] = []
     dois: list[str] = []
     files_scanned = 0
@@ -291,21 +535,48 @@ def run_offline() -> tuple[list[Violation], list[Violation], list[tuple[str, ...
         files_scanned += 1
         _walk(payload, rel, "", violations, dois)
 
+    # 2026-08-27 (Wave J1): check 5, barrier-source disclosure. Scoped to the two
+    # QM benchmark files rather than to all of SCAN_GLOBS, because "must name a
+    # source" is only well defined for a record that asserts a physical quantity.
+    for pattern in BARRIER_SOURCE_GLOBS:
+        for path in sorted(ROOT.glob(pattern)):
+            if path.is_file():
+                _check_barrier_sources(path, path.relative_to(ROOT).as_posix(), violations)
+
+    # 2026-08-27 (Wave I fix 4): unstructured pass over code and prose.
+    for path in _iter_text_files():
+        rel = path.relative_to(ROOT).as_posix()
+        if _scan_text(path, rel, violations, dois):
+            files_scanned += 1
+
     waiver_index = {(c, p, ptr, v): why for c, p, ptr, v, why in WAIVERS}
+    # Text-surface carry-over is keyed WITHOUT the pointer; see TEXT_SURFACE_WAIVERS.
+    text_index = {(c, p, v) for c, p, v, _why in TEXT_SURFACE_WAIVERS}
+    text_paths = {
+        path.relative_to(ROOT).as_posix() for path in _iter_text_files()
+    }
+
     blocking: list[Violation] = []
     waived: list[Violation] = []
+    carried: list[Violation] = []
     matched: set[tuple[str, str, str, str]] = set()
+    matched_text: set[tuple[str, str, str]] = set()
 
     for violation in violations:
-        # Confabulation signatures are never waivable.
-        if violation.check != "confabulation-signature" and violation.key in waiver_index:
+        text_key = (violation.check, violation.path, violation.value)
+        if violation.path in text_paths and text_key in text_index:
+            matched_text.add(text_key)
+            carried.append(violation)
+        # Confabulation signatures are never waivable on the structured surface.
+        elif violation.check != "confabulation-signature" and violation.key in waiver_index:
             matched.add(violation.key)
             waived.append(violation)
         else:
             blocking.append(violation)
 
     stale = [w for w in WAIVERS if (w[0], w[1], w[2], w[3]) not in matched]
-    return blocking, waived, stale, dois, files_scanned
+    stale_text = [w for w in TEXT_SURFACE_WAIVERS if (w[0], w[1], w[2]) not in matched_text]
+    return blocking, waived, stale, carried, stale_text, dois, files_scanned
 
 
 def run_online(dois: list[str], sample: int, seed: int, timeout: float) -> list[tuple[str, str]]:
@@ -354,7 +625,15 @@ def main(argv: list[str] | None = None) -> int:
     )
     args = parser.parse_args(argv)
 
-    blocking, waived, stale, dois, files_scanned = run_offline()
+    (
+        blocking,
+        waived,
+        stale,
+        carried,
+        stale_carried,
+        dois,
+        files_scanned,
+    ) = run_offline_detailed()
 
     print(f"citation_gate: scanned {files_scanned} files, {len(dois)} DOI-bearing fields, "
           f"{len(set(dois))} unique DOIs.")
@@ -364,6 +643,21 @@ def main(argv: list[str] | None = None) -> int:
         for violation in waived:
             print(f"  - [{violation.check}] {violation.path}{violation.pointer} -> {violation.value}")
 
+    if carried:
+        print(
+            f"\n!! {len(carried)} UNFIXED CITATION DEFECT(S) IN CODE/PROSE, carried by "
+            f"TEXT_SURFACE_WAIVERS so the widened scan does not red-line CI.\n"
+            f"!! These are NOT tolerated debt. Each one is a live defect awaiting an owner."
+        )
+        for violation in carried:
+            why = next(
+                (w[3] for w in TEXT_SURFACE_WAIVERS
+                 if (w[0], w[1], w[2]) == (violation.check, violation.path, violation.value)),
+                "",
+            )
+            print(f"  - [{violation.check}] {violation.path}{violation.pointer} -> {violation.value}")
+            print(f"      {why}")
+
     exit_code = 0
 
     if stale:
@@ -371,6 +665,13 @@ def main(argv: list[str] | None = None) -> int:
               f"so the waiver must be deleted from WAIVERS in this file:")
         for check, path, pointer, value, _why in stale:
             print(f"  - [{check}] {path}{pointer} -> {value}")
+        exit_code = 1
+
+    if stale_carried:
+        print(f"\nFAIL: {len(stale_carried)} stale text-surface carry-over(s) - the defect is "
+              f"fixed, so the entry must be deleted from TEXT_SURFACE_WAIVERS in this file:")
+        for check, path, value, _why in stale_carried:
+            print(f"  - [{check}] {path} -> {value}")
         exit_code = 1
 
     if blocking:

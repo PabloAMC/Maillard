@@ -388,9 +388,26 @@ def build_cheap_screening_artifact(
         offset_key = str(row.get("offset_key", ""))
         if not offset_key:
             continue
+        # 2026-08-27 (Wave I). Same routing defect as `src/family_sensitivity.py`, and it
+        # was silently disabling five of this loop's own screening families.
+        # `barrier_constants.get_barrier()` looks BARRIER_OFFSETS up against the normalised
+        # RAW family label and only canonicalises afterwards, so a short key like `schiff`
+        # / `enol` / `cys` / `retro_aldol` / `thiol_addition` never matches the label the
+        # engine actually emits (`Schiff_Base_Formation`, `Enolisation_1_2`,
+        # `Cysteine_Degradation`, `Retro_Aldol_Fragmentation`, `Thiol_Addition_H2`) --
+        # `enol` cannot match anything at all, because its target contains a `-` that
+        # normalisation has already replaced. The trials for those families were exact
+        # no-ops: the campaign was "screening" barriers it could not perturb and dutifully
+        # reporting zero improvement, which reads as evidence of insensitivity.
+        # `family_sensitivity` now publishes every key that can actually bite as
+        # `offset_keys`; use it, and fall back to the short key only for rows written
+        # before that field existed.
+        offset_keys = [str(key) for key in (row.get("offset_keys") or []) if str(key).strip()]
+        if not offset_keys:
+            offset_keys = [offset_key]
         for direction_label, sign in (("down", -1.0), ("up", 1.0)):
             for magnitude in CHEAP_SCREENING_MAGNITUDES:
-                recommended_offsets = {offset_key: sign * float(magnitude)}
+                recommended_offsets = {key: sign * float(magnitude) for key in offset_keys}
                 performance = _evaluate_offsets(contexts, recommended_offsets, target_tag=target_tag)
                 scenario_trials.append((f"{direction_label}_{magnitude:.1f}", recommended_offsets, performance))
         if not scenario_trials:

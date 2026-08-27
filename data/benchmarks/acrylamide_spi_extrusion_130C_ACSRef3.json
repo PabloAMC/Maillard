@@ -40,10 +40,22 @@
       "mean_abs_log10_error": 0.2
     }
   },
+  "content_correction_note": {
+    "date": "2026-08-27",
+    "wave": "Wave K/M content verification",
+    "verified_against": "Ma et al. 2024, Int J Mol Sci 25:8668 (PMC11354377), Figure 2D, read directly from the published figure image",
+    "corrections": [
+      "acrylamide 62.62 ppb -> 150 ppb (figure_readoff). The paper reports acrylamide ONLY in Figure 2 (no table); its text says the HIGHEST acrylamide content was at 130 C, and the Fig 2D bar for 130 C reads ~150 ug/kg on a 0-160 axis. The previous 62.62 ppb matches no bar in any panel and no derivable statistic (companion Fu 2023 mean/median/geometric-mean all ruled out); its origin is unknown. The benchmark_id's 'ACSRef3' suggests the value predates the current MDPI DOI and was never re-checked against it.",
+      "uncertainty_pct 15 -> 20: a bar-chart readoff cannot support a 15% claim; 20% covers the readoff resolution plus the printed SD whiskers.",
+      "NOTE: the model_change_note above still quotes the old 62.62 reference in its expected_miss line; with the corrected 150 ppb reference the expected miss WIDENS (predicted 9.75 ppb -> ~15.4x under). The benchmark remains expected_to_fail for the same desaturation reason."
+    ],
+    "value_provenance": "figure_readoff",
+    "report": "results/validation/content_verification_wave_k.md"
+  },
   "measured_volatiles": {
     "acrylamide": {
-      "conc_ppb": 62.62,
-      "uncertainty_pct": 15
+      "conc_ppb": 150,
+      "uncertainty_pct": 20
     }
   }
 }

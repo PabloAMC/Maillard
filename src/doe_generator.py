@@ -48,6 +48,31 @@ DOE_TEMPLATES = {
         "factors": ["Precursor Load (1x, 5x)", "Temperature (90C, 130C)", "Matrix (SPI, PPI)"],
         "instructions": "Standard PBMA formulation baseline. Use Safe+SPME extraction to capture both highly volatile (H2S) and semi-volatile (pyrazines) simultaneously with SIDA quantitation."
     },
+    # 2026-08-27 (Wave I). Added because the selector was handing `blocking_benchmark_gap`
+    # -- whose defining factor is "Matrix (SPI, PPI)" -- to free-precursor aqueous
+    # benchmarks that contain no protein matrix at all. A card is a set of instructions
+    # somebody may actually follow at a CRO; prescribing the wrong system is not a
+    # cosmetic defect. Factors here span the axes a free-precursor sulfur system actually
+    # has: precursor dose, temperature and pH.
+    "free_precursor_sulfur_yield": {
+        "method": "Quantitative Headspace SIDA, free-precursor aqueous model system",
+        "factors": [
+            "Precursor Load (1x, 5x of the benchmark's stated molarities)",
+            "Temperature (100C, 120C, 140C)",
+            "pH (4.5, 5.0, 6.0)",
+        ],
+        "instructions": (
+            "Aqueous buffered model system ONLY -- do NOT add a protein isolate; this "
+            "benchmark's system is free precursors in buffer and adding a matrix would "
+            "answer a different question. Reproduce the benchmark's stated precursor set "
+            "and molarities as the 1x arm, in sealed vials at the stated headspace ratio. "
+            "Add deuterated/13C internal standards before heating, not after. Report "
+            "absolute concentrations against the internal standards, plus LoD/LoQ. Where "
+            "the benchmark records a value as `assumed_not_from_source` (commonly pH and "
+            "the molarities), pin it explicitly in the returned YAML so the next "
+            "comparison is not against an assumption."
+        ),
+    },
     "missing_positive_flavor_anchor": {
         "method": "Targeted GC-MS (Furanone band)",
         "factors": ["Water Activity", "pH (5.5, 6.5)"],

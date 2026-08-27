@@ -1711,7 +1711,13 @@ def generate_report(
         f.write("## 3. Detailed Results\n")
         f.write(f"- **Target Score:** {result.target_score:.2f}\n")
         f.write(f"- **Off-Flavour Risk:** {result.off_flavour_risk:.2f}\n")
-        f.write(f"- **Safety Score:** {result.safety_score:.2f}\n\n")
+        # 2026-08-27 (Wave I): unlabelled, this reads like a grade and was being read as
+        # "higher is better". It is 2x the band-relative risk (src/pipeline.py s_penalty).
+        f.write(
+            f"- **Safety Score:** {result.safety_score:.2f} "
+            "*(2\u00d7 band-relative risk, range [0, 2]; **higher is worse**; "
+            ">1.0 = above the action band)*\n\n"
+        )
         f.write(f"- **MFT/Furfural Ratio:** {result.mft_to_furfural_ratio:.4f}\n")
         f.write(f"- **Meaty Quality Penalty:** {result.meaty_quality_penalty:.2f}\n\n")
         f.write(f"- **Strecker Balance Score:** {result.strecker_balance_score:.2f}\n")
@@ -2149,7 +2155,8 @@ def generate_comparison_report(
         
         f.write("| **Target Score** | " + " | ".join([f"{res.target_score:.2f}" for res in results]) + " |\n")
         f.write("| **Off-Flavour Risk** | " + " | ".join([f"{res.off_flavour_risk:.2f}" for res in results]) + " |\n")
-        f.write("| **Safety Score** | " + " | ".join([f"{res.safety_score:.2f}" for res in results]) + " |\n")
+        # 2026-08-27 (Wave I): see the single-run writer above -- higher is worse.
+        f.write("| **Safety Score** (2\u00d7 band risk, higher is worse) | " + " | ".join([f"{res.safety_score:.2f}" for res in results]) + " |\n")
         f.write("| **Lysine Budget** | " + " | ".join([f"{res.lysine_budget:.1f}%" for res in results]) + " |\n")
         f.write("| **Trapping Eff.** | " + " | ".join([f"{res.trapping_efficiency:.1f}%" for res in results]) + " |\n")
         f.write("| **MFT/Furfural Ratio** | " + " | ".join([f"{res.mft_to_furfural_ratio:.4f}" for res in results]) + " |\n")

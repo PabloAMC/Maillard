@@ -124,10 +124,27 @@ MAILLARD_STRICT_BENCHMARKS=1 ./scripts/docker_maillard.sh pytest tests/scientifi
 > The same audit found the panel headline mixed literature-measured rows with
 > internal synthetic comparators; coverage is now reported split by signal
 > origin (see §3E).
+>
+> **Second provenance finding (2026-08-27, cold-start red team).** Two further panel
+> benchmarks are quarantined: `spi_hvp_xylose_120C_PMC9905368` and
+> `wheat_gluten_hvp_xylose_120C_PMC9905368`. **Their DOI is live and its metadata
+> matches** — which is why the 225-anchor sweep passed them — but the cited paper
+> (`10.1007/s10068-022-01194-w`) uses glucose/fructose at pH 7.5 for 90 min and reports
+> only *relative peak areas*, and never mentions FFT or MFT. A relative-peak-area paper
+> cannot be the source of an absolute ppb value. **The panel is therefore 14, not 16.**
+> Read this together with §3F: the blocking citation gate checks DOI *identity* and cannot
+> check DOI *content*, so this class of defect is not machine-detectable here.
+>
+> **Third finding, and the one that most affects how to read §3F: circularity.** A
+> constant was re-derived against those two benchmarks and the same two rows were then
+> scored as evidence for it — they were the only two hits in the previous "2/11 literature
+> rows" headline, whose honest value was **0/11**. Coverage is now reported with fitted
+> rows removed from *both* numerator and denominator, and
+> `scripts/ci/fit_target_gate.py` makes undisclosed fit-then-score a build failure.
 
 As of the current benchmark summary:
 
-- **Strict-ready count is now 0/16 (2026-08-27).** The panel has no strict-ready benchmark
+- **Strict-ready count is now 0/14 (2026-08-27; the panel itself shrank 16 -> 14 when two more benchmarks were quarantined as fabricated).** The panel has no strict-ready benchmark
   at all. The sequence, all on this branch and all recorded in `tasks/audit_remediation.md`:
   6/16 → 4/16 when the projection retune cost `spi_hvp_xylose_120C_PMC9905368` and
   `wheat_gluten_hvp_xylose_120C_PMC9905368` their status, then 4/16 → 0/16 when the Wave G1
@@ -220,7 +237,10 @@ has never seen. Its rules, stated explicitly:
   class as a belt-and-braces guard. No hold-out value appears in any fitted
   parameter.
 - **Prior tier.** Hold-out envelopes use the `uncalibrated` matrix prior tier
-  (matrix_headspace ln-sigma 2.86, ~±110x at 90% CI) because their process states
+  (matrix_headspace ln-sigma 2.86, ~±110x at 90% CI — a figure that became true only on
+  2026-08-27, when the sampler's fixed ±100x clamp was replaced by a 3-sigma-derived one;
+  before that 10.7% of draws were pinned at the clamp and the realised band was ±100x)
+  because their process states
   have no calibrated registry entry. This is much wider than the in-panel tier,
   so **hold-out coverage and in-panel coverage are not comparable numbers**. The
   sigma is sized from data, not judgment (2026-08-26): leave-lane-out transfer
@@ -235,15 +255,32 @@ has never seen. Its rules, stated explicitly:
   extrapolation test. Only bundles at genuinely new process states (HME
   extrusion, roasting) test transfer, and the honest statement is that the model
   largely fails those.
-- **Current numbers (2026-08-27 regeneration).** Nominal coverage **5/8**
-  (62.5%): **3/3** on the re-scoring bundles (`bi_2020_raw_pea`,
-  `liu_2023_ppi_offnote_baseline`) and **2/5** on the genuine extrapolations
-  (`bi_2020_roasted_pea`, `li_2026_spi_wg_hme_control`). Median fold error
-  **32.79x** (median |log10| 1.516 dex); worst miss 2474x on roasted pea. Read
-  the fold error, not the coverage: the move from the previously reported 3/8 to
-  5/8 came entirely from raising the uncalibrated sigma 2.0 → 2.86, which widens
-  the interval without changing a single point prediction — the median fold
-  error was 33.84x before and is 32.79x now.
+- **What the eight points ARE (added 2026-08-27).** Only **4 of the 8** are reported
+  measurements. **2** are `band_geometric_midpoint` — the source reports a *range* across
+  commercial lots and the scored value is `sqrt(min*max)`, a number we constructed, whose
+  honest uncertainty is the 10–12x band itself. **2** are
+  `derived_from_oav_and_repo_threshold` — the source's odour-activity value multiplied by
+  *this repository's own* hexanal odour threshold (4.5 ppb, compilation-level, never verified
+  against a primary table), so they partly encode one of our constants and **move if we
+  correct it**. Every row carries its `value_provenance` and the report renders the split.
+  Until 2026-08-27 these were written at full float precision beside a fabricated
+  `measurement_date` of "<publication year>-01-01", which is now `not_applicable`.
+- **Current numbers (2026-08-27 Wave M regeneration). The headline is 1/5.**
+  Genuine-extrapolation coverage at the **pre-widening** prior (ln-sigma 2.0) is
+  **1 of 5**. The same predictions score **2/5** under the shipped ln-sigma 2.86 — that
+  difference is the width of the interval, not the accuracy of the model. Over all eight
+  rows: 4/8 at ln-sigma 2.0, 5/8 at 2.86, of which **3/3 are re-scoring bundles**
+  (`bi_2020_raw_pea`, `liu_2023_ppi_offnote_baseline`) that test nothing. Median fold error
+  **15.31x** (median |log10| 1.185 dex); worst miss **2474x** on roasted pea. **Read the fold
+  error, not the coverage** — it is the only figure here no choice of prior can move.
+  **The 0/5 → 1/5 and the 32.79x → 15.31x are a REFERENCE correction, not a model change
+  (Wave K/M, 2026-08-27).** Two of the four `li_2026_spi_wg_hme_control` points had been
+  transcribed from adjacent table rows: 2-pentylfuran 221.5 was the paper's *Maltol* row
+  (true 5625.80 ppb) and nonanal 29.42 was its *Decanal* row (true 72.66 ppb), verified
+  against Europe PMC `fullTextXML` (PMC12984281). The 2-pentylfuran point moves 49.8x over
+  → 1.96x over and nonanal 673x → 273x with byte-identical predictions. The extreme
+  process-state misses (roasted pea 2474x, HME 1-hexanol 1117x) are untouched. Historical:
+  33.84x before the sigma was raised, 32.79x after the Wave I regeneration.
 
 ### F. Reading The Coverage Split
 
@@ -251,6 +288,14 @@ has never seen. Its rules, stated explicitly:
 signal origin:
 
 - **External literature** rows are validation evidence.
+- **Fitted rows** (added 2026-08-27) are rows whose *own constants were solved from them*,
+  with enough freedom to reproduce them row by row. Agreement there is algebraic recovery,
+  not prediction, so they are removed from the literature numerator **and** denominator and
+  reported separately. **Read their outcomes rather than skipping them**: a row the model
+  still fails *after being fitted to it* is a stronger negative result than any coverage
+  number. `src/fit_target_index.py` classifies each fit record by leverage — a single global
+  constant fitted across two dozen rows does **not** trigger exclusion, because excluding
+  those rows would delete genuine failures instead of exposing them.
 - **Internal synthetic** rows compare the model against its own frozen output
   (drift detection); they carry zero validation weight and exist so refactors
   cannot silently change predictions.
@@ -260,20 +305,28 @@ signal origin:
   spanning several orders of magnitude makes coverage cheap. Report both,
   always.
 
-**Current in-panel numbers (2026-08-27 regeneration, n=200, seed 0).** 16 benchmarks,
-41 matched rows, 13 of them in the Monte Carlo panel; aggregate 90% CI coverage
-**28/41 (68.3%)**. Split:
+**Current in-panel numbers (2026-08-27 Wave I regeneration, n=200, seed 0).** **14**
+benchmarks (two quarantined as fabricated since the previous revision); 11 in the Monte
+Carlo panel, 35 matched rows; aggregate 90% CI coverage 29/35 (82.9%) — **do not quote that
+number**, it pools three populations that support different claims:
 
-| Signal origin | Inside 90% CI | Not evaluable | Median CI width |
-| --- | ---: | ---: | ---: |
-| External literature | **2/11 (18.2%)** | 4 | 3.00 dex |
-| Internal synthetic | 18/18 (100%) | 8 | 3.19 dex |
+| Population | Inside 90% CI | Not evaluable | Median CI width | Evidence? |
+| --- | ---: | ---: | ---: | --- |
+| External literature | **1/3 (33.3%)** | 4 | 0.86 dex | **yes — only this row** |
+| Fitted rows | 2/2 (100%) | 0 | 2.28 dex | no — algebraic recovery |
+| Internal synthetic | 18/18 (100%) | 8 | 3.65 dex | no — reproducibility harness |
 
-Read the first row with the third column: the intervals GREW (2.0 → 3.0 dex) and coverage
-still FELL (7/11 → 2/11). That is not a widening-of-error-bars story — the point predictions
-moved further from the measurements than even a ~1000x interval allows, because the
-2026-08-27 Wave G1 rebuild removed the fabricated chemistry the sulfur branch had been
-standing on. Out-of-CI cells: 13/41. Strict-ready: 0/16 (see §2).
+The literature denominator fell from 11 to 3 because the two rows that used to be its *only*
+hits were fitted rows, and two more benchmarks were quarantined. Benchmark-level: **0/6
+predictive** benchmarks are without blocking gaps (3/4 fit-recovery and 4/4 synthetic are —
+i.e. every "pass" in the panel sits in a non-evidence bucket). Strict-ready: **0/14** (see §2).
+
+Read every coverage figure with its width column. Note also that the Monte-Carlo intervals
+here are **wider than any previously published**, for a reason that is a defect and not an
+improvement: until 2026-08-27, 10 of the 14 barrier-family priors resolved to keys the engine
+never emits, so ~70% of the barrier channel was inert and every interval was narrower than the
+priors claimed. Coverage numbers from before that date were computed against intervals the
+model was not actually entitled to.
 
 ## 4. How To Read The Validation Figures
 

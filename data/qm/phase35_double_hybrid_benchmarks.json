@@ -1,0 +1,20 @@
+{
+  "provenance": {
+    "audit_note": "2026-08-27 (audit-remediation Wave J1). Both columns in every entry below are labelled `no_verifiable_source`. They are presented as computed quantum-chemistry results - wB97M-V and revDSD-PBEP86-D4 barrier heights - but the repository contains no input deck, no output log, no geometry, no basis-set or solvation specification, and no run date for any of them. A computed number with no reproducible run behind it is an assertion, not a calculation.",
+    "why_not_verified": "These cannot be anchored to a primary source even in principle: they are not literature values, they are claimed to be this project's own calculations. The only thing that could verify them is re-running them. Until someone does, `no_verifiable_source` is the honest label.",
+    "fabrication_indicators": "revDSD-PBEP86-D4 minus wB97M-V, over all nine families: +0.5, 0.0, +0.4, +0.5, +0.6, +0.4, +0.6, +0.3, +0.5 kcal/mol. Every difference is non-negative, every one is a clean multiple of 0.1, and all nine lie in a 0.6 kcal/mol band. Two genuinely independent functionals do not agree that tidily or that one-sidedly across nine different reaction classes; the spread of a real double-hybrid-vs-range-separated-hybrid comparison is both wider and signed in both directions. The `wb97mv_kcal_mol` column is byte-identical to the column of the same name in phase33_barrier_benchmarks.json, whose own defects are recorded there.",
+    "runtime_coupling": "NONE, verified 2026-08-27 - see the same field in phase33_barrier_benchmarks.json. Nothing in src/ consumes these values; the only importer is a loader test.",
+    "gate": "scripts/ci/citation_gate.py scans this directory (added Wave J1) and requires every benchmark entry to carry a verifiable DOI or this label. WAIVERS is empty and must stay empty."
+  },
+  "benchmarks": [
+    {"family": "amadori_rearrangement", "source_status": "no_verifiable_source", "wb97mv_kcal_mol": 20.1, "revdsd_pbep86_d4_kcal_mol": 20.6},
+    {"family": "strecker_decarboxylation", "source_status": "no_verifiable_source", "wb97mv_kcal_mol": 24.8, "revdsd_pbep86_d4_kcal_mol": 24.8},
+    {"family": "trapping_hexanal", "source_status": "no_verifiable_source", "wb97mv_kcal_mol": 18.3, "revdsd_pbep86_d4_kcal_mol": 18.7},
+    {"family": "mft_release", "source_status": "no_verifiable_source", "wb97mv_kcal_mol": 19.1, "revdsd_pbep86_d4_kcal_mol": 19.6},
+    {"family": "furosine_crossover", "source_status": "no_verifiable_source", "wb97mv_kcal_mol": 20.2, "revdsd_pbep86_d4_kcal_mol": 20.8},
+    {"family": "cml_cel_proxy", "source_status": "no_verifiable_source", "wb97mv_kcal_mol": 23.7, "revdsd_pbep86_d4_kcal_mol": 24.1},
+    {"family": "acrylamide_fast_kinetics", "source_status": "no_verifiable_source", "wb97mv_kcal_mol": 31.0, "revdsd_pbep86_d4_kcal_mol": 31.6},
+    {"family": "pyrazine_control", "source_status": "no_verifiable_source", "wb97mv_kcal_mol": 16.7, "revdsd_pbep86_d4_kcal_mol": 17.0},
+    {"family": "thiamine_fragmentation", "source_status": "no_verifiable_source", "wb97mv_kcal_mol": 22.0, "revdsd_pbep86_d4_kcal_mol": 22.5}
+  ]
+}

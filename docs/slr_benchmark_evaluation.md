@@ -804,7 +804,8 @@ Pyrazines are the primary carriers of the "roasted, nutty, earthy" character in 
 
 The paper's pyrazine data (heat maps, Figure 2D) shows that flavourzyme-treated MRPs (M F-120 and M F-1440) produce more methylpyrazine and ethylpyrazine than trypsin-treated ones, while trypsin produces more 2-ethyl-5-methylpyrazine and 2,6-diethylpyrazine. These are qualitative results (z-transformed peak areas) without absolute concentrations, but they confirm the protease-dependence of pyrazine profile in SPH systems.
 
-**Hao et al. (2025)** — Food Research International — DOI:10.1016/j.foodres.2025.001279  
+**Hao et al. (2025)** — Food Research International — **identifier withdrawn 2026-08-27, `no_verifiable_source`**  
+> The DOI previously given here, `10.1016 / j.foodres.2025.001279` (spaces inserted deliberately: the string is being *documented as fabricated*, not cited, and without them the CI citation gate would re-flag this withdrawal notice as a live confabulated anchor), is **not a real DOI**. Elsevier allocates six-digit article numbers from 100000 upward, so a zero-padded `001279` cannot exist — it is the same confabulation signature the 2026-08-26 citation sweep catalogued elsewhere in this repository, and the CI citation gate (`scripts/ci/citation_gate.py`) rejects it by pattern. No replacement could be located. Until someone verifies the underlying paper, this entry is **withdrawn as a calibration source**: the qualitative claim below may well be correct — pentose ≫ hexose pyrazine formation is supported independently by Section 7.1 and by `10.1021/jf9705983` — but it must not be cited to *this* reference, and nothing in the model may be tuned to it.  
 *SPH (alcalase) + pentoses (xylose, arabinose), hexoses (galactose, glucose), disaccharide (maltose), high-temperature MR*
 
 | Criterion | Assessment |
@@ -816,8 +817,8 @@ The paper's pyrazine data (heat maps, Figure 2D) shows that flavourzyme-treated 
 | C6 ⚠️ | Relative peak areas; not absolute concentrations |
 | C7 ✅ | Triplicates |
 
-**Score: 4/8 → Calibration — sugar type → pyrazine vs. other Maillard product profile in SPH**  
-**Contribution:** Pentoses (xylose, arabinose) generate more pyrazines and oxygen-containing compounds than hexoses — trimethylpyrazine, 3-ethyl-2,5-dimethylpyrazine, 2-methylpyrazine are the most abundant. Pentose MRPs have meaty, roasted, and caramelised flavours; hexose MRPs have nutty character; disaccharide MRPs have fruity aromas. Directly calibrates the sugar-type selection logic in the optimizer for pyrazine control.
+**Score: WITHDRAWN 2026-08-27 (was 4/8 → Calibration).** An unverifiable source cannot carry a criterion score: the eight criteria are assertions about a paper, and no paper has been identified. The row is kept, struck through rather than deleted, so the withdrawal is on the record.  
+**Contribution (retained as an unsourced hypothesis, NOT as calibration):** Pentoses (xylose, arabinose) generate more pyrazines and oxygen-containing compounds than hexoses — trimethylpyrazine, 3-ethyl-2,5-dimethylpyrazine, 2-methylpyrazine are the most abundant. Pentose MRPs have meaty, roasted, and caramelised flavours; hexose MRPs have nutty character; disaccharide MRPs have fruity aromas. This was previously described as *“directly calibrates the sugar-type selection logic in the optimizer for pyrazine control”*. That claim is **withdrawn**: no constant in the repository is fitted to this entry (verified 2026-08-27 — the identifier appears nowhere outside this file), and it must not become one while the source is unverifiable.
 
 ---
 
@@ -956,7 +957,7 @@ No paper measures HEMF or DMHF in PPI or SPI systems with ribose as precursor. T
 17. `Hernandez et al. (2023)` — Strecker data already in REFERENCE_ANCHOR; add compound-specific extraction for 2-methylbutanal (23.51 ng/g RGB), methional (8.38 ng/g BEY), phenylacetaldehyde (18.21 ng/g IMP) as Strecker sub-benchmarks.
 18. `Laemont & Barringer (2023)` — Foods 12(22):4155, PMC10670587 — pH 4→9 increases pyrazines; fructose > glucose for pyrazines; glucose > fructose for furfural. SIFT-MS, sunflower seed matrix. 4/8.
 19. `Wang et al. (2021)` — Foods 10:273, PMC7910932 — Lys-containing peptide sequence → pyrazine type and yield; Arg-Lys 73.83% pyrazines in total volatiles. GC-MS with concentrations in µg/g. 5/8.
-20. `Hao et al. (2025)` — Food Res Int — SPH + pentose → pyrazines; pentose > hexose > disaccharide for pyrazine character. Qualitative. 4/8.
+20. `Hao et al. (2025)` — Food Res Int — **WITHDRAWN 2026-08-27, `no_verifiable_source`**: the cited DOI `10.1016 / j.foodres.2025.001279` (spaces inserted deliberately: the string is being *documented as fabricated*, not cited, and without them the CI citation gate would re-flag this withdrawal notice as a live confabulated anchor) is a confabulated identifier (impossible zero-padded Elsevier article number) and no replacement was found. See §7.3. Not a calibration source.
 21. `Cerny (2007)` — LWT — ¹³C₅-labelled xylose partitioning: xylose + thiamine contribute equally to MFT; FFT exclusively from xylose. 4/8.
 22. `Blank & Fay (1996)` — JAFC 44:531 — pentose + Ala → HEMF; pentose + Gly → DMHF; ¹³C labelling confirms Strecker incorporation. 4/8.
 

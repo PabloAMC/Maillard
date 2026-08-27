@@ -75,6 +75,32 @@ against the grid. The CLI states which candidate the report describes; if a grid
 entry wins, the report is about *that* entry, and §1 of `report.md` lists the
 formulation that was actually evaluated (not your raw arguments).
 
+> ### ⚠️ `--minimize beany` does **not** predict beaniness from your ingredients
+>
+> Added 2026-08-27 after a cold-start review found this command reads as off-note
+> screening when it cannot do that. Be clear about what the flag does and does not do:
+>
+> - **`--minimize beany` only ranks off-note compounds that are already in the run.**
+>   It re-weights the objective; it does not generate lipid off-notes.
+> - **No fatty acid is registered as a precursor.** `Linoleic acid` is not a resolvable
+>   precursor name — the resolver rejects it. `--lipids` accepts *the aldehydes
+>   themselves* (`hexanal`, `nonanal`), so in forward mode you must supply the off-note
+>   you wanted predicted. Supplying nothing gives **Off-Flavour Risk 0.00**, which means
+>   "no off-note compound was in the system", not "this formulation is not beany".
+> - **The lipid radical chain cannot bridge the gap either.** It enumerates to *zero*
+>   steps from an unoxidised fatty acid plus O₂ (it needs a hydroperoxide seed), and the
+>   network's `MAX_MW = 300 Da` prune removes 13-HPODE (312 Da) and the peroxyl radical
+>   (311 Da), so even a seeded chain is cut before it can reach hexanal.
+> - **The matrix lane's hexanal is fit-recovery, not prediction.** The matrix-only
+>   hexanal number comes from observability factors that were back-solved from the very
+>   benchmarks they are scored against (see the `fit-recovery` rows in
+>   `results/validation/benchmark_summary.md`).
+>
+> Use the off-note lane to **rank formulations that already contain aldehydes**, never to
+> ask "will my ingredients go beany". Registering a fatty-acid precursor is an open owner
+> item; it would be dishonest to add one before the chain that consumes it works, because
+> a registered precursor that yields nothing looks like a confident zero.
+
 What you should look for:
 
 - `predicted_ppb`: observable concentration estimate

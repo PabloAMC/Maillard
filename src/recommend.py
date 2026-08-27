@@ -354,29 +354,32 @@ _MELANOIDIN_TRAPPING_PROFILES = {
 
 # Fraction of the modelled volatile taken to survive to the headspace in a
 # hydrolysed-vegetable-protein matrix. These constrain the PRODUCT of the lane, not
-# any barrier: they were originally fit to the two xylose HVP benchmarks
-# (PMC9905368) with the barriers frozen, so a chemistry change underneath them is a
-# reason to RE-DERIVE them, never a reason to bend a barrier to compensate.
+# any barrier.
 #
-# RE-DERIVED 2026-08-27 (Wave H) against those same two literature benchmarks after
-# Wave G1's route change and Wave H's Hofmann-only barrier refit. Reproducible:
-# scripts/generators/rederive_hydrolysate_observability.py; record in
-# results/validation/hydrolysate_observability_rederivation.{json,md}.
-#   * Methional  0.0045 -> 0.05623.  Interior, identified: the unconstrained optimum
-#     is 0.0639 and 0.05623 is the conservative edge of the indifference band.
-#     Residuals go 16.2x / 12.4x under to 1.30x under / 1.01x.
-#   * 2-Furfurylthiol and 2-Methyl-3-furanthiol: NOT MOVED. Their unconstrained
-#     optima are 8.65 and 3.49 — 8.6x and 3.5x ABOVE the physical maximum of 1.0 for
-#     a surviving fraction. The model now UNDER-predicts these lanes (67x and 27x),
-#     and a factor that can only suppress cannot fix an under-prediction: the layer
-#     is saturated and the residual is somewhere else (see the allocation finding in
-#     results/validation/sulfur_barrier_refit_hofmann.md). The incumbents survive as
-#     unconstrained legacy estimates, NOT as fitted values.
-#   * bis(2-methyl-3-furyl) disulfide: NOT DERIVABLE. It has no row in any literature
-#     benchmark of this lane; its only comparators are the synthetic Internal2026 /
-#     ProtocolPilot2026 snapshots, which are forbidden as fit targets.
+# WAVE I REVERT, 2026-08-27 — READ THIS BEFORE TOUCHING THESE NUMBERS.
+# Wave H (2026-08-27) re-derived the Methional factor 0.0045 -> 0.05623 against the two
+# xylose HVP benchmarks `spi_hvp_xylose_120C_PMC9905368` and
+# `wheat_gluten_hvp_xylose_120C_PMC9905368`. The cold-start red team then established
+# that BOTH of those benchmarks are fabricated: the cited paper
+# 10.1007/s10068-022-01194-w uses glucose/fructose at pH 7.5 for 90 min, reports only
+# RELATIVE PEAK AREAS, and never mentions FFT or MFT — so it cannot be the source of any
+# absolute ppb value in those files. The Wave H fit therefore had no measurement behind
+# it, and the two "methional rows inside the CI" it produced were a self-fit scored
+# against its own fit target. Both files are now quarantined
+# (data/benchmarks/quarantined/) and this constant is REVERTED to its pre-Wave-H value.
+# `results/validation/hydrolysate_observability_rederivation.{json,md}` is marked
+# RETRACTED and must not be cited as a warrant for any value here.
+#   * Methional  0.05623 -> 0.0045 (revert; the 0.05623 was fitted to fabricated data).
+#   * 2-Furfurylthiol / 2-Methyl-3-furanthiol / bis(2-methyl-3-furyl) disulfide: Wave H
+#     did NOT move these (their unconstrained optima were 8.65 and 3.49, above the
+#     physical maximum of 1.0 for a surviving fraction; the disulfide had no comparator
+#     at all), so there is nothing to revert. They remain UNCONSTRAINED LEGACY
+#     ESTIMATES, never fitted values.
+# NET STATUS after this revert: with the xylose HVP lanes quarantined, EVERY entry in
+# this table is an unconstrained legacy estimate. There is no surviving literature
+# constraint on any of them.
 _HYDROLYSATE_SULFUR_OBSERVABILITY_PROFILES = {
-    _normalize_chemical_name("Methional"): {"base_factor": 0.05623, "source_sensitive": False},
+    _normalize_chemical_name("Methional"): {"base_factor": 0.0045, "source_sensitive": False},
     _normalize_chemical_name("2-Furfurylthiol"): {"base_factor": 0.13, "source_sensitive": True},
     _normalize_chemical_name("2-Methyl-3-furanthiol"): {"base_factor": 0.13, "source_sensitive": True},
     _normalize_chemical_name("bis(2-methyl-3-furyl) disulfide"): {"base_factor": 0.18, "source_sensitive": True},

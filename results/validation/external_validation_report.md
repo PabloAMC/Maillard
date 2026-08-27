@@ -4,9 +4,28 @@
 
 _Monte Carlo envelope evaluation on isolated hold-out matrix bundles that are explicitly excluded from calibration via evidence_class = external_validation_only._
 
-**Headline external trust metric**: measured value lies inside 90% CI for **5 / 8** matched hold-out compounds (**62.5%**).
+**Headline external trust metric — GENUINE EXTRAPOLATIONS ONLY, at the PRE-WIDENING prior (matrix ln-sigma 2.0)**: **1 / 5**.
 
-**Median accuracy on hold-outs**: **32.79x** median fold error (median |log10 error| = **1.516** dex).
+Everything else on this page is a weaker claim than that number, in two separate ways, and both were being read as if they were not:
+
+1. **Prior width.** At the currently shipped sigma (2.86, ~±110× at 90%) the *same predictions* score 2 / 5 on those same extrapolation rows, and 5 / 8 over all hold-out rows (vs 4 / 8 at ln-sigma 2.0). **Nothing about the model changed between those numbers — only the width of the interval drawn around it.**
+2. **Which rows test anything.** 3 of the 8 rows come from bundles whose executable conditions are *copied from an in-panel benchmark*: scoring them re-runs an existing anchor at its own conditions. They score 3 / 3, and that is a reproducibility comparison, not evidence of transfer.
+
+
+**Median accuracy on hold-outs**: **15.31x** median fold error (median |log10 error| = **1.185** dex). *This number is unaffected by the prior width and is the one to track across runs.*
+
+> **What is actually being scored here.** These are not eight external
+> measurements. The hold-out points divide as follows:
+>
+> | Provenance | Rows | Inside 90% CI | What a score against it means |
+> | --- | ---: | ---: | --- |
+> | `reported_point_value` | 4 | 2/4 (50%) | A concentration the source reports. A genuine external test. |
+> | `band_geometric_midpoint` | 2 | see combined row | The source reports a RANGE; the scored value is sqrt(min*max), a number we constructed. The honest uncertainty is the band (10-12x end to end), so landing inside it is weak evidence. |
+> | `derived_from_oav_and_repo_threshold` | 2 | see combined row | The source's odour-activity value multiplied by THIS REPO'S OWN hexanal odour threshold (4.5 ppb, compilation-level and never verified against a primary table). Partly encodes one of our own constants and moves if that constant is corrected. A consistency check, not an external measurement. |
+>
+> Combined: direct measurements **2/4 (50%)**, derived or constructed **3/4 (75%)**.
+
+_Secondary, prior-dependent figure: at the SHIPPED uncalibrated sigma the measured value lies inside the 90% CI for 5 / 8 matched hold-out compounds (62.5%)._
 
 Samples per hold-out bundle: 200; seed 0; bundles evaluated: 4.
 
@@ -31,8 +50,8 @@ Samples per hold-out bundle: 200; seed 0; bundles evaluated: 4.
 | Benchmark | Matched compounds | Inside 90% CI | Median accuracy |
 | --- | ---: | ---: | ---: |
 | external_validation_bi_2020_raw_pea_hexanal | 1 | 1/1 (100.0%) | 5.37x |
-| external_validation_bi_2020_roasted_pea_hexanal | 1 | 0/1 (0.0%) | 2474.39x |
-| external_validation_li_2026_spi_wg_hme_control | 4 | 2/4 (50.0%) | 183.18x |
+| external_validation_bi_2020_roasted_pea_hexanal | 1 | 0/1 (0.0%) | 2474.38x |
+| external_validation_li_2026_spi_wg_hme_control | 4 | 2/4 (50.0%) | 76.69x |
 | external_validation_liu_2023_ppi_offnote_baseline | 2 | 2/2 (100.0%) | 7.00x |
 
 ## Per-compound envelopes
@@ -42,37 +61,37 @@ Samples per hold-out bundle: 200; seed 0; bundles evaluated: 4.
 - Execution path: matrix_only
 - Matched compounds: 1
 
-| Compound | Measured (ppb) | P5 | P50 | P95 | Fold error | Inside 90% CI |
-| --- | --- | --- | --- | --- | --- | --- |
-| hexanal | 1.26e+03 | 3.72 | 235 | 2.61e+04 | 5.37x | yes |
+| Compound | Reference value (ppb) | Provenance | P5 | P50 | P95 | Fold error | Inside 90% CI |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| hexanal | 1.26e+03 | `derived_from_oav_and_repo_threshold` | 3.72 | 235 | 3.88e+04 | 5.37x | yes |
 
 ### external_validation_bi_2020_roasted_pea_hexanal
 
 - Execution path: matrix_only
 - Matched compounds: 1
 
-| Compound | Measured (ppb) | P5 | P50 | P95 | Fold error | Inside 90% CI |
-| --- | --- | --- | --- | --- | --- | --- |
-| hexanal | 324 | 1.27e+04 | 8.02e+05 | 8.9e+07 | 2474.39x | no |
+| Compound | Reference value (ppb) | Provenance | P5 | P50 | P95 | Fold error | Inside 90% CI |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| hexanal | 324 | `derived_from_oav_and_repo_threshold` | 1.27e+04 | 8.02e+05 | 1.33e+08 | 2474.38x | no |
 
 ### external_validation_li_2026_spi_wg_hme_control
 
 - Execution path: matrix_only
 - Matched compounds: 4
 
-| Compound | Measured (ppb) | P5 | P50 | P95 | Fold error | Inside 90% CI |
-| --- | --- | --- | --- | --- | --- | --- |
-| 1-hexanol | 20 | 355 | 2.24e+04 | 2.49e+06 | 1117.48x | no |
-| 2-pentylfuran | 222 | 175 | 1.1e+04 | 1.23e+06 | 49.83x | yes |
-| hexanal | 606 | 207 | 1.31e+04 | 1.45e+06 | 21.58x | yes |
-| nonanal | 29.4 | 314 | 1.98e+04 | 2.2e+06 | 673.32x | no |
+| Compound | Reference value (ppb) | Provenance | P5 | P50 | P95 | Fold error | Inside 90% CI |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 1-hexanol | 20 | `reported_point_value` | 355 | 2.24e+04 | 3.7e+06 | 1117.48x | no |
+| 2-pentylfuran | 5.63e+03 | `reported_point_value` | 175 | 1.1e+04 | 1.83e+06 | 1.96x | yes |
+| hexanal | 606 | `reported_point_value` | 207 | 1.31e+04 | 2.16e+06 | 21.58x | yes |
+| nonanal | 72.7 | `reported_point_value` | 314 | 1.98e+04 | 3.28e+06 | 272.63x | no |
 
 ### external_validation_liu_2023_ppi_offnote_baseline
 
 - Execution path: matrix_only
 - Matched compounds: 2
 
-| Compound | Measured (ppb) | P5 | P50 | P95 | Fold error | Inside 90% CI |
-| --- | --- | --- | --- | --- | --- | --- |
-| hexanal | 52 | 3.72 | 235 | 2.61e+04 | 4.52x | yes |
-| nonanal | 15.8 | 2.73 | 172 | 1.91e+04 | 10.86x | yes |
+| Compound | Reference value (ppb) | Provenance | P5 | P50 | P95 | Fold error | Inside 90% CI |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| hexanal | 52 | `band_geometric_midpoint` | 3.72 | 235 | 3.88e+04 | 4.52x | yes |
+| nonanal | 15.8 | `band_geometric_midpoint` | 2.73 | 172 | 2.84e+04 | 10.86x | yes |

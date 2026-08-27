@@ -65,7 +65,13 @@ def _unblock_criteria(dependency_class: str, lane: str) -> str:
 
 def run_skip_scan(test_targets: Optional[Iterable[str]] = None) -> Dict[str, Any]:
     root = repo_root()
-    targets = list(test_targets or ["tests/benchmarks", "tests/qm"])
+    # 2026-08-27 (Wave J2): "tests/benchmarks" removed from the default lane list. That
+    # directory held only `_lane_policy.py`, a helper for a Phase 3 QM authority lane whose
+    # tests were deleted on 2026-04-21; nothing imported it and it collected zero tests, so
+    # every skip scan since then has been scanning an empty directory and reporting its
+    # zeros as though they were a clean lane. The directory is now gone. Minimal src change,
+    # made from tests/ because a test (tests/unit/test_skip_policy_registry.py) surfaced it.
+    targets = list(test_targets or ["tests/qm"])
     command = [sys.executable, "-m", "pytest", *targets, "-rs", "-q"]
     result = subprocess.run(
         command,

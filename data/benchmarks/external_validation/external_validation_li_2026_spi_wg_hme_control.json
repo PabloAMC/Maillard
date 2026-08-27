@@ -18,18 +18,18 @@
     "citation_provenance": [
       "Li et al. (2026), Foods 15(5):912"
     ],
-    "notes": "Auto-derived from the measured panel because no explicit comparison_contract was supplied.",
+    "notes": "Auto-derived from the measured panel because no explicit comparison_contract was supplied. Ranks re-derived 2026-08-27 (Wave K/M) after the nonanal and 2-pentylfuran content corrections: with the paper's values 2-pentylfuran (5625.8) outranks hexanal (605.6).",
     "observable_targets": [
       {
         "direction": "lower",
         "expected_rank": 1,
-        "name": "hexanal",
+        "name": "2-pentylfuran",
         "role": "adverse_marker"
       },
       {
         "direction": "lower",
         "expected_rank": 2,
-        "name": "2-pentylfuran",
+        "name": "hexanal",
         "role": "adverse_marker"
       },
       {
@@ -48,16 +48,24 @@
   },
   "measured_volatiles": {
     "1-hexanol": {
-      "conc_ppb": 20.04
+      "conc_ppb": 20.04,
+      "value_provenance": "reported_point_value",
+      "value_provenance_note": "A single concentration reported by the source. Scoring this against a prediction is a genuine test."
     },
     "2-pentylfuran": {
-      "conc_ppb": 221.51
+      "conc_ppb": 5625.8,
+      "value_provenance": "reported_point_value",
+      "value_provenance_note": "A single concentration reported by the source. Scoring this against a prediction is a genuine test. CONTENT-CORRECTED 2026-08-27 (Wave K/M) from 221.5, which was the paper's Maltol row (off-by-one transcription, 25x low); 2-Pentylfuran HMPE-0 min reads 5625.80 +/- 63.75 ug/kg, verified via Europe PMC fullTextXML (PMC12984281)."
     },
     "hexanal": {
-      "conc_ppb": 605.6
+      "conc_ppb": 605.6,
+      "value_provenance": "reported_point_value",
+      "value_provenance_note": "A single concentration reported by the source. Scoring this against a prediction is a genuine test."
     },
     "nonanal": {
-      "conc_ppb": 29.42
+      "conc_ppb": 72.66,
+      "value_provenance": "reported_point_value",
+      "value_provenance_note": "A single concentration reported by the source. Scoring this against a prediction is a genuine test. CONTENT-CORRECTED 2026-08-27 (Wave K/M) from 29.42, which was the paper's Decanal row (off-by-one transcription); Nonanal HMPE-0 min reads 72.66 +/- 1.46 ug/kg, verified via Europe PMC fullTextXML (PMC12984281)."
     }
   },
   "metadata": {
@@ -83,8 +91,11 @@
   "source_metadata": {
     "evidence_class": "external_validation_only",
     "generator": "matrix_experiment_intake",
-    "measurement_date": "2026-01-01",
+    "measurement_date": "not_applicable",
+    "measurement_date_note": "This bundle is SYNTHESIZED from published anchors; no measurement date exists. Until 2026-08-27 this field carried a fabricated '<publication year>-01-01'.",
     "notes": "External validation hold-out synthesized from flavor_reference_payloads.json; never use for calibration or promotion. li_2026_spi_wg_hme_hexanal_control_point: track_family_11_hme_hexanal_baseline_without_claiming_executable_benchmark_closure li_2026_spi_wg_hme_nonanal_control_point: retain_family_11_nonanal_baseline_as_supporting_off_note_panel_evidence li_2026_spi_wg_hme_1_hexanol_control_point: retain_family_11_1_hexanol_baseline_as_supporting_off_note_panel_evidence li_2026_spi_wg_hme_2_pentylfuran_control_point: retain_family_11_2_pentylfuran_baseline_as_supporting_off_note_panel_evidence",
-    "origin": "external_literature"
+    "origin": "external_literature",
+    "source_publication_year": "2026",
+    "source_reference": "Li et al. (2026), Foods 15(5):912"
   }
 }

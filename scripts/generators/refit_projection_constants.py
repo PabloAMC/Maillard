@@ -167,12 +167,51 @@ def main() -> int:
             "*Internal2026*  (synthetic reproducibility lane)",
             "*ProtocolPilot2026*  (synthetic reproducibility lane)",
         ],
+        # 2026-08-27 (Wave I). Disclosed contamination of THIS record's own history.
+        "contamination_note": {
+            "date": "2026-08-27",
+            "wave": "Wave I (cold-start red-team remediation)",
+            "removed_fit_targets": [
+                "spi_hvp_xylose_120C_PMC9905368.json",
+                "wheat_gluten_hvp_xylose_120C_PMC9905368.json",
+            ],
+            "why": (
+                "Both files were fabricated. The cited paper 10.1007/s10068-022-01194-w "
+                "reacts protein hydrolysates with GLUCOSE and FRUCTOSE at pH 7.5 for 90 min "
+                "and reports only RELATIVE GC-MS peak areas; it never mentions "
+                "2-furfurylthiol or 2-methyl-3-furanthiol and reports no absolute "
+                "concentration for any analyte. They are now quarantined and this glob no "
+                "longer sees them."
+            ),
+            "affected_prior_versions": (
+                "Every projection_constant_refit record written before 2026-08-27 included "
+                "6 rows from those two files (3 analytes each) in the fit objective, i.e. "
+                "6 of 15 literature rows. The fitted constant of record, "
+                "reference_conversion_time_min = 1.2589e4, was therefore fitted against a "
+                "population containing fabricated data."
+            ),
+            "what_survives": (
+                "The QUALITATIVE conclusions of the Wave H projection analysis survive and "
+                "are unaffected: (a) tau_ref is a single GLOBAL SCALE, so it cannot fix an "
+                "ALLOCATION deficit; (b) the deliberate decision NOT to apply the re-fitted "
+                "optimum stands, and stands for a reason (Hofmann MFT vs Resconi furfural "
+                "trade-off) that does not involve these files; (c) the Boltzmann "
+                "de-duplication finding is a structural result, not a fit. What does NOT "
+                "survive is the numeric value of the objective in earlier records and any "
+                "reading of the fitted tau_ref as literature-anchored across six of its rows. "
+                "The re-run that produced the current record excludes the quarantined files."
+            ),
+        },
         "fixed_constants": {
             "apparent_activation_energy_kj_mol": ea_kj,
             "reference_temperature_kelvin": DEFAULT_PROJECTION_STRATEGY.reference_temperature_kelvin,
             "conversion_ceiling_fraction": DEFAULT_PROJECTION_STRATEGY.conversion_ceiling_fraction,
         },
         "free_constants": ["baseline_volatile_yield_fraction", "reference_conversion_time_min"],
+        # 2026-08-27 (Wave I). Required by scripts/ci/fit_target_gate.py: a fit record must
+        # state how much freedom it had, so a reader can tell "one global scale across the
+        # whole panel" from "one knob per row". Filled in below once the row count is known.
+        "fit_leverage": None,
         "deliberately_not_refit": {
             "recommend.py depth_bias_strength (0.85 offset, 1.0 slope)": "unconstrained legacy fit",
             "recommend.py direct_sulfur_bonus (0.8 coefficient)": "unconstrained legacy fit",
@@ -322,32 +361,88 @@ def main() -> int:
     record["total_rows"] = len(final_rows)
     record["rows"] = final_rows
 
+    # 2026-08-27 (Wave I). Fit leverage — see src/fit_target_index.py.
+    _scored = record["scored_rows"]
+    _free = len(record["free_constants"])
+    record["fit_leverage"] = {
+        "free_parameters": _free,
+        "fitted_rows": _scored,
+        "parameters_per_row": (_free / _scored) if _scored else None,
+        "class": "global_low_leverage" if _scored and (_free / _scored) < 0.5 else "per_row_recovery",
+        "interpretation": (
+            f"{_free} GLOBAL constants fitted across {_scored} rows. Two constants cannot "
+            "make that many rows agree, so agreement on any individual row still carries "
+            "information and these rows STAY in the literature-coverage denominator. They "
+            "are annotated `fit_target_of` in prediction_uncertainty.json so a reader knows "
+            "they are not strictly out-of-sample. Contrast the matrix observability "
+            "factors, which are one free factor PER ROW and therefore reproduce their "
+            "targets exactly -- those are excluded from the count entirely."
+        ),
+        "honest_caveat": (
+            "This does mean there is NO literature benchmark in the panel that is fully "
+            "out-of-sample with respect to the projection scale. The only genuinely "
+            "out-of-sample evidence in the repo is the external_validation/ hold-out set."
+        ),
+    }
+
+    # 2026-08-27 (Wave M). The two residuals this decision turns on used to be
+    # HARD-CODED in the prose below, so the artifact kept quoting Wave H numbers
+    # after both the Wave N route correction and the Wave K/M content corrections
+    # had moved them. They are now read out of the rows this run just computed.
+    def _dex(rows: List[Dict[str, Any]], bench: str, compound_sub: str) -> float | None:
+        for row in rows:
+            if row["benchmark_id"] == bench and compound_sub.lower() in row["compound"].lower():
+                return float(row["abs_log10_error"])
+        return None
+
+    _mft_shipped = _dex(shipped_rows, "cys_ribose_140C_Hofmann1998", "2-methyl-3-furanthiol")
+    _mft_fitted = _dex(final_rows, "cys_ribose_140C_Hofmann1998", "2-methyl-3-furanthiol")
+    _furfural_shipped = _dex(shipped_rows, "resconi_2023_pbma_beef_identity_benchmark", "furfural")
+    _furfural_fitted = _dex(final_rows, "resconi_2023_pbma_beef_identity_benchmark", "furfural")
+    _budget_scale = shipped_tau / tau_star if tau_star else float("nan")
+
+    def _f(value: float | None, fmt: str) -> str:
+        return format(value, fmt) if value is not None else "n/a"
+
     record["wave_h_decision"] = {
         "date": "2026-08-27",
         "decision": "FIT NOT APPLIED — incumbent reference_conversion_time_min retained",
         "gap": (
             f"shipped tau_ref = {shipped_tau:.6g} min (objective {shipped_obj:.4f} dex); "
-            f"refit optimum = {tau_star:.6g} min (objective {final_obj:.4f} dex). The "
-            "optimum moved by a factor of ~5 after the Wave G1 chemistry rebuild dropped "
-            "sulfur yields 5-40x."
+            f"refit optimum = {tau_star:.6g} min (objective {final_obj:.4f} dex), i.e. the "
+            f"fit wants the global volatile budget scaled by {_budget_scale:.2f}x. The "
+            "optimum has moved repeatedly as the chemistry and the reference data were "
+            "corrected (Wave G1 chemistry rebuild, Wave I quarantines, Wave N MFT route "
+            "correction, Wave K/M benchmark content corrections); it is a scale that "
+            "absorbs whatever the rest of the model gets wrong, which is exactly why it "
+            "is reported and not applied."
         ),
         "why_not_applied": (
             "tau_ref is a SINGLE GLOBAL SCALE on the volatile budget. Moving it does not "
             "improve any mechanism; it trades one lane against another, and this panel's "
             "mean-|log10| objective takes that trade happily. At the refit optimum the "
-            "Hofmann1998 MFT residual collapses to 0.048 dex (from 0.75) while the "
-            "Resconi 2023 furfural residual grows to 1.281 dex, i.e. ~19x OVER. The "
-            "arithmetic is decisive: at the shipped value the total volatile budget at "
-            "the Hofmann conditions is ~1050 ppb against a measured MFT+FFT of 542 ppb, "
-            "so the budget is already the right order of magnitude and the sulfur "
-            "deficit is an ALLOCATION deficit (furfural, unmeasured in that benchmark, "
-            "takes ~78% of the pool) — see "
-            "results/validation/sulfur_barrier_refit_hofmann.md. Raising the global "
-            "budget 5x to close a 5.6x allocation gap means supplying ~5250 ppb of "
-            "volatiles to explain 542 ppb of measured product and sending the other "
-            "~4700 ppb to the species nobody measured in that experiment. That is not a "
-            "calibration, it is a way of making the Wave H finding invisible. The "
-            "incumbent is therefore retained and the gap is reported."
+            f"Hofmann1998 MFT residual collapses to {_f(_mft_fitted, '.4f')} dex (from "
+            f"{_f(_mft_shipped, '.4f')} dex shipped) while the Resconi 2023 furfural "
+            f"residual grows to {_f(_furfural_fitted, '.4f')} dex (from "
+            f"{_f(_furfural_shipped, '.4f')} dex shipped), i.e. from "
+            f"{_f(10.0 ** _furfural_shipped if _furfural_shipped is not None else None, '.1f')}x "
+            f"to {_f(10.0 ** _furfural_fitted if _furfural_fitted is not None else None, '.1f')}x "
+            "OVER. The arithmetic is decisive: at the shipped value the total predicted "
+            "pool over the five species this benchmark's system tracks is ~1126 ppb "
+            "against a measured MFT+FFT of 542 ppb (measured 2026-08-27, Wave M: furfural "
+            "572.3, FFT 243.7, MFT 151.9, bis(2-methyl-3-furyl) disulfide 92.1, "
+            "2,5-dimethylpyrazine 66.4), so the budget is already the right order of "
+            "magnitude and the sulfur deficit is an ALLOCATION deficit — furfural, "
+            "unmeasured in that benchmark, takes ~51% of the pool. See "
+            "results/validation/sulfur_barrier_refit_hofmann.md (NOTE: that record is "
+            "itself STALE as of Wave N — it profiles `thiol_addition_norfuraneol`, a "
+            "family the isotope evidence retired; re-running it is an open owner item). "
+            f"Raising the global budget {_budget_scale:.2f}x to close a 2.25x MFT gap "
+            "means supplying ~2800 ppb of volatiles at these conditions to explain 542 "
+            "ppb of measured product, sending the rest to species nobody measured, and "
+            "pushing FFT from 1.22x over to ~3.1x over. That is not a calibration, it is "
+            "a way of making the allocation finding invisible. The incumbent is therefore "
+            "retained and the gap is reported."
         ),
         "what_would_justify_applying_it": (
             "A refit of the ALLOCATION (the depth-bias and direct-sulfur heuristics, both "

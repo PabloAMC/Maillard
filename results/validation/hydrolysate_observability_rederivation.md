@@ -1,3 +1,30 @@
+> # ⛔ RETRACTED — 2026-08-27 (Wave I)
+>
+> **This record is retracted. Do not use it as a warrant for any shipped constant.**
+>
+> Its only fit targets were `spi_hvp_xylose_120C_PMC9905368` and
+> `wheat_gluten_hvp_xylose_120C_PMC9905368`. The cold-start red team established that both are
+> **fabricated**: the cited paper `10.1007/s10068-022-01194-w` reacts protein hydrolysates with
+> **glucose and fructose at pH 7.5 for 90 min** and reports only **relative GC-MS peak areas**.
+> It never mentions 2-furfurylthiol or 2-methyl-3-furanthiol and contains no absolute
+> concentration for any analyte, so the `conc_ppb` values fitted against here have **no possible
+> source**. Both files are now in `data/benchmarks/quarantined/`.
+>
+> **Action taken.** The single constant this record moved — Methional `base_factor`
+> 0.0045 → 0.05623 — is **reverted** in
+> `src/recommend.py::_HYDROLYSATE_SULFUR_OBSERVABILITY_PROFILES`. The other three compounds were
+> not moved here (saturated / not derivable), so no other constant is affected.
+>
+> **Why it matters beyond the constant.** The two Methional rows this fit produced were then
+> *scored* as literature coverage in the headline — a value fitted to a benchmark and then
+> reported as agreement with that same benchmark. `scripts/ci/fit_target_gate.py` (Wave I) now
+> makes that circularity a blocking CI failure.
+>
+> The text below is preserved **verbatim as the forensic record of what was done**, not as a
+> current claim.
+
+---
+
 # Hydrolysate sulfur observability factors — re-derivation (Wave H)
 
 `src/recommend.py::_HYDROLYSATE_SULFUR_OBSERVABILITY_PROFILES` holds one `base_factor` per compound: the fraction of the modelled volatile taken to survive to the headspace in an HVP matrix. These constrain the PRODUCT of the lane, not a barrier, so after Wave G1's chemistry change and Wave H's Hofmann-only barrier refit they are re-derived here — the same way they were originally derived, against the same two literature benchmarks — rather than being compensated for by bending a barrier.

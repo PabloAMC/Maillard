@@ -24,6 +24,17 @@
     "extrusion_history": "none",
     "matrix_format": "soy protein isolate slurry"
   },
+  "content_correction_note": {
+    "date": "2026-08-27",
+    "wave": "Wave K/M content verification",
+    "verified_against": "Molecules 2021, 26, 4104, Table 1, retrieved as JATS XML from Europe PMC (PMC8271896)",
+    "corrections": [
+      "hexanal 380 ppb -> 1621.71 ppb (paper: 1621.71 +/- 159.69; repo value was 4.27x low, origin unknown, no derivation found)",
+      "hexanol REMOVED: paper Table 1 reports n.d. for soy; the paper's text gives soy's entire alcohol fraction as 40 +/- 9 ppb of 1-octen-3-ol only, so the previous 120 ppb was 3x the paper's TOTAL alcohols and attributed to a compound the paper says was not detected",
+      "2-pentylfuran 2492 ppb CONFIRMED against the paper; ranking (2-pentylfuran > hexanal) unchanged"
+    ],
+    "report": "results/validation/content_verification_wave_k.md"
+  },
   "matrix_ranking_contract": {
     "observable_targets": [
       {
@@ -37,37 +48,26 @@
         "role": "adverse_marker",
         "expected_rank": 2,
         "direction": "higher"
-      },
-      {
-        "name": "hexanol",
-        "role": "adverse_marker",
-        "expected_rank": 3,
-        "direction": "higher"
       }
     ],
     "adverse_markers": [
       "2-pentylfuran",
-      "hexanal",
-      "hexanol"
+      "hexanal"
     ],
     "citation_provenance": [
-      "Pratap-Singh 2021 ambient slurry GC-MS profile for soy protein isolate"
+      "Pratap-Singh 2021 (Molecules 26:4104) Table 1, fully quantified ppb for soy protein isolate"
     ],
     "calibration_mode": "compound_specific_headspace",
     "notes": "Off-flavour ranking contract for the ambient soy-isolate matrix lane; still outside the strict gate."
   },
   "measured_volatiles": {
     "hexanal": {
-      "conc_ppb": 380,
-      "uncertainty_pct": 11
+      "conc_ppb": 1621.71,
+      "uncertainty_pct": 10
     },
     "2-pentylfuran": {
       "conc_ppb": 2492,
       "uncertainty_pct": 8
-    },
-    "hexanol": {
-      "conc_ppb": 120,
-      "uncertainty_pct": 15
     }
   },
   "protein_type": "soy_iso",

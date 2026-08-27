@@ -1,11 +1,13 @@
 import json
 import logging
 import math
+import os
 import subprocess
+import sys
 import time
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Sequence, Tuple
 
 import numpy as np
 from scipy.optimize import minimize
@@ -76,6 +78,63 @@ def _monkey_patch_matrix_constants(
             denatured_factors=denatured_factors,
             source=orig_prof.source
         )
+
+
+def _snapshot_matrix_constants(
+    protein_type: ProteinType,
+) -> Tuple[Optional[MatrixCorrection], Optional[VolatileClassRetentionProfile]]:
+    """Capture the live module-global matrix constants for one protein type."""
+    return (
+        MATRIX_CORRECTIONS.get(protein_type),
+        VOLATILE_CLASS_RETENTION_PROFILES.get(protein_type),
+    )
+
+
+def _restore_matrix_constants(
+    protein_type: ProteinType,
+    snapshot: Tuple[Optional[MatrixCorrection], Optional[VolatileClassRetentionProfile]],
+) -> None:
+    """Put back the constants captured by `_snapshot_matrix_constants`.
+
+    2026-08-27 (Wave I) -- FIX 17. `calibrate_matrix_constants` used to "revert"
+    by re-running the objective at x0, which is both expensive and only a revert
+    by side effect; and on the SUCCESS path it did not revert at all, leaving the
+    process globals at whatever parameter vector the optimiser happened to
+    evaluate last. Restoration is now explicit and happens in a `finally`.
+    """
+    corr, prof = snapshot
+    if corr is not None:
+        MATRIX_CORRECTIONS[protein_type] = corr
+    if prof is not None:
+        VOLATILE_CLASS_RETENTION_PROFILES[protein_type] = prof
+
+
+def candidate_constants_payload(protein_type: ProteinType, x: Sequence[float]) -> Dict[str, Any]:
+    """JSON-serialisable description of one candidate parameter vector."""
+    return {
+        "protein_type": ProteinType(protein_type).value,
+        "volatile_retention_denatured": float(x[0]),
+        "aldehyde_factor": float(x[1]),
+        "sulfur_factor": float(x[2]),
+        "pyrazine_factor": float(x[3]),
+    }
+
+
+def apply_matrix_constant_overrides(payload: Dict[str, Any]) -> None:
+    """Apply a `candidate_constants_payload` to this process's matrix globals.
+
+    Called both in-process and, crucially, inside the guardrail subprocess (see
+    `_GUARDRAIL_BOOTSTRAP`) BEFORE pytest imports any test module, so the
+    guardrail sees the candidate constants rather than the on-disk baseline.
+    """
+    protein_type = ProteinType(payload["protein_type"])
+    _monkey_patch_matrix_constants(
+        protein_type,
+        volatile_retention_denatured=float(payload["volatile_retention_denatured"]),
+        aldehyde_factor=float(payload["aldehyde_factor"]),
+        sulfur_factor=float(payload["sulfur_factor"]),
+        pyrazine_factor=float(payload["pyrazine_factor"]),
+    )
 
 
 def _compute_prediction_error(
@@ -188,17 +247,59 @@ def _compute_prediction_error(
     return total_error / count
 
 
-def _run_guardrail_tests() -> bool:
-    """Runs the scientific benchmarks to ensure we haven't broken free-precursor kinetics."""
-    logger.info("Running guardrail tests: pytest tests/scientific/test_benchmarks.py")
+GUARDRAIL_TEST_PATHS: Tuple[str, ...] = ("tests/scientific/test_benchmarks.py",)
+
+CANDIDATE_CONSTANTS_ENV_VAR = "MAILLARD_MATRIX_CANDIDATE_CONSTANTS"
+
+# 2026-08-27 (Wave I) -- FIX 17. The guardrail used to shell out to a bare
+# `pytest ...`. That subprocess re-imports `src.matrix_correction` from disk, so
+# the in-process globals mutated by `_monkey_patch_matrix_constants` were
+# invisible to it: the guardrail validated the BASELINE constants and then
+# reported "guardrails passed" for a CANDIDATE it had never executed. Every
+# candidate therefore passed the guardrail for the wrong reason.
+#
+# The subprocess is kept (it isolates a pytest run from the calibrating
+# process), but it is now bootstrapped through this shim, which applies the
+# candidate constants before pytest imports anything.
+_GUARDRAIL_BOOTSTRAP = """import json, os, sys
+
+sys.path.insert(0, os.environ["MAILLARD_GUARDRAIL_ROOT"])
+raw = os.environ.get("MAILLARD_MATRIX_CANDIDATE_CONSTANTS")
+if raw:
+    from src.matrix_calibration_optimizer import apply_matrix_constant_overrides
+
+    apply_matrix_constant_overrides(json.loads(raw))
+import pytest
+
+sys.exit(pytest.main(json.loads(os.environ["MAILLARD_GUARDRAIL_ARGS"])))
+"""
+
+
+def _run_guardrail_tests(
+    candidate: Optional[Dict[str, Any]] = None,
+    test_paths: Optional[Sequence[str]] = None,
+) -> bool:
+    """Run the scientific benchmarks against the CANDIDATE matrix constants.
+
+    `candidate` is a `candidate_constants_payload` dict. When it is None the
+    guardrail runs against the on-disk baseline (the pre-Wave-I behaviour), which
+    is only meaningful for a smoke check.
+    """
+    paths = list(test_paths) if test_paths is not None else list(GUARDRAIL_TEST_PATHS)
+    logger.info("Running guardrail tests: pytest %s", " ".join(paths))
     try:
-        env = {"MAILLARD_STRICT_BENCHMARKS": "1"}
-        import os
         full_env = os.environ.copy()
-        full_env.update(env)
-        
+        full_env["MAILLARD_STRICT_BENCHMARKS"] = "1"
+        full_env["MAILLARD_GUARDRAIL_ROOT"] = str(ROOT)
+        full_env["MAILLARD_GUARDRAIL_ARGS"] = json.dumps(paths + ["-q"])
+        if candidate is None:
+            full_env.pop(CANDIDATE_CONSTANTS_ENV_VAR, None)
+        else:
+            full_env[CANDIDATE_CONSTANTS_ENV_VAR] = json.dumps(candidate)
+
         result = subprocess.run(
-            ["pytest", "tests/scientific/test_benchmarks.py", "-q"],
+            [sys.executable, "-c", _GUARDRAIL_BOOTSTRAP],
+            cwd=str(ROOT),
             env=full_env,
             capture_output=True,
             text=True
@@ -247,37 +348,47 @@ def calibrate_matrix_constants(experiments: List[Dict[str, Any]], protein_type_s
         (0.01, 1.0)    # pyrazine_factor
     ]
 
-    # Calculate pre-calibration baseline error
-    baseline_mae = _compute_prediction_error(experiments, protein_type, x0)
-    logger.info(f"Baseline Log-MAE: {baseline_mae:.4f}")
+    # 2026-08-27 (Wave I) -- FIX 17: the objective mutates module globals, so the
+    # constants are snapshotted here and restored in the `finally` below on EVERY
+    # exit path (success, no-improvement, guardrail failure, exception). The old
+    # code reverted only on the two failure paths, and did so by re-running the
+    # objective at x0.
+    snapshot = _snapshot_matrix_constants(protein_type)
+    try:
+        # Calculate pre-calibration baseline error
+        baseline_mae = _compute_prediction_error(experiments, protein_type, x0)
+        logger.info(f"Baseline Log-MAE: {baseline_mae:.4f}")
 
-    logger.info("Starting L-BFGS-B optimization...")
-    start_time = time.time()
-    
-    res = minimize(
-        fun=lambda x: _compute_prediction_error(experiments, protein_type, x),
-        x0=x0,
-        bounds=bounds,
-        method="L-BFGS-B",
-        options={"ftol": 1e-4, "maxiter": 50}
-    )
+        logger.info("Starting L-BFGS-B optimization...")
+        start_time = time.time()
 
-    elapsed = time.time() - start_time
-    logger.info(f"Optimization finished in {elapsed:.1f}s. Success: {res.success}. Final Log-MAE: {res.fun:.4f}")
+        res = minimize(
+            fun=lambda x: _compute_prediction_error(experiments, protein_type, x),
+            x0=x0,
+            bounds=bounds,
+            method="L-BFGS-B",
+            options={"ftol": 1e-4, "maxiter": 50}
+        )
 
-    if res.fun >= baseline_mae:
-        logger.warning("Optimization did not improve the MAE. Reverting to baseline.")
-        # Revert
-        _compute_prediction_error(experiments, protein_type, x0)
-        return None
+        elapsed = time.time() - start_time
+        logger.info(f"Optimization finished in {elapsed:.1f}s. Success: {res.success}. Final Log-MAE: {res.fun:.4f}")
 
-    # Test guardrails with new parameters
-    guardrails_passed = _run_guardrail_tests()
-    if not guardrails_passed:
-        logger.warning("Guardrail tests failed with new parameters. Reverting to baseline.")
-        # Revert
-        _compute_prediction_error(experiments, protein_type, x0)
-        return None
+        if res.fun >= baseline_mae:
+            logger.warning("Optimization did not improve the MAE. Reverting to baseline.")
+            return None
+
+        # Test guardrails with the CANDIDATE parameters. `minimize` leaves the
+        # globals at whatever vector it evaluated last, which is not necessarily
+        # `res.x`, so the candidate is applied explicitly here and passed to the
+        # guardrail subprocess rather than being left to leak through globals.
+        candidate = candidate_constants_payload(protein_type, res.x)
+        apply_matrix_constant_overrides(candidate)
+        guardrails_passed = _run_guardrail_tests(candidate)
+        if not guardrails_passed:
+            logger.warning("Guardrail tests failed with new parameters. Reverting to baseline.")
+            return None
+    finally:
+        _restore_matrix_constants(protein_type, snapshot)
 
     # Success! Write diff to data/calibration_history
     mae_drop_pct = (baseline_mae - res.fun) / baseline_mae * 100

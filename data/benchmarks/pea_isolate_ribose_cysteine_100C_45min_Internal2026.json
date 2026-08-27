@@ -35,19 +35,19 @@
       {
         "direction": "higher",
         "expected_rank": 3,
-        "name": "2,5-dimethylpyrazine",
+        "name": "2-furfurylthiol",
         "role": "desirable_marker"
       },
       {
         "direction": "higher",
         "expected_rank": 4,
-        "name": "2-methyl-3-furanthiol",
+        "name": "2,5-dimethylpyrazine",
         "role": "desirable_marker"
       },
       {
         "direction": "higher",
         "expected_rank": 5,
-        "name": "2-furfurylthiol",
+        "name": "2-methyl-3-furanthiol",
         "role": "desirable_marker"
       },
       {
@@ -90,15 +90,15 @@
   "protein_type": "pea_iso",
   "reference_volatiles": {
     "2,5-dimethylpyrazine": {
-      "conc_ppb": 0.005771480994704506,
+      "conc_ppb": 0.005588024553036963,
       "uncertainty_pct": 0.0
     },
     "2-furfurylthiol": {
-      "conc_ppb": 0.0016233081488836016,
+      "conc_ppb": 0.005787048621426315,
       "uncertainty_pct": 0.0
     },
     "2-methyl-3-furanthiol": {
-      "conc_ppb": 0.0018000808655489076,
+      "conc_ppb": 0.004445171873666089,
       "uncertainty_pct": 0.0
     },
     "Hexanal": {
@@ -110,17 +110,17 @@
       "uncertainty_pct": 0.0
     },
     "bis(2-methyl-3-furyl) disulfide": {
-      "conc_ppb": 0.0007011381199213872,
+      "conc_ppb": 0.0019908645344058,
       "uncertainty_pct": 0.0
     },
     "furfural": {
-      "conc_ppb": 0.2985418718844224,
+      "conc_ppb": 0.28905220544439836,
       "uncertainty_pct": 0.0
     }
   },
   "source_metadata": {
-    "generator": "reproducibility_snapshot_refresh_v5",
-    "notes": "SYNTHETIC reproducibility snapshot: values are frozen output of the current model (refreshed via scripts/generators/refresh_internal_reproducibility_snapshots.py after the 2026-08-27 G-wave chemistry rebuild). Folded in, newest first: (G1) the fabricated lipid radical chain was deleted -- 93% of the emitted network, 5500 -> 369 steps -- and hexanal, norfuraneol, glyoxal, CML, DMHF and the correct disulfide regioisomer became reachable; the accepted 1-deoxyosone -> norfuraneol -> MFT route (van den Ouweland & Peer 1975) replaced the fabricated one-step shortcut, which is demoted but retained as a lump; eight families that had been silently switched off by the 45 kcal/mol DEFAULT_BARRIER fallthrough (acrylamide, CML/CEL, furanone, thiamine, GSH) were given explicit estimated barriers and are now live. (Wave H) `Enolisation_2_3_Amadori` stopped collecting the amine-nucleophile ionisation and Amadori water-activity corrections it was matching by name alone, which is what had left the new MFT route inert; `thiol_addition_norfuraneol` was refit 28.60 -> 26.85 against cys_ribose_140C_Hofmann1998 only; the Methional hydrolysate observability factor was re-derived 0.0045 -> 0.05623 against the two literature xylose HVP benchmarks. (2026-08-27 earlier) the projection retune: an apparent-Arrhenius conversion extent replaced the saturating severity sigmoid and the double-applied Boltzmann selectivity on path_span was de-duplicated. (2026-08-26) the audit bug fixes -- marker-injection mM basis, 2-pentylfuran SMILES, full MolWt. This is a drift-detection baseline, not a measurement, and carries zero calibration evidence.",
+    "generator": "reproducibility_snapshot_refresh_v7",
+    "notes": "SYNTHETIC reproducibility snapshot: values are frozen output of the current model (refreshed via scripts/generators/refresh_internal_reproducibility_snapshots.py after the 2026-08-27 Wave N route correction). Folded in, newest first: (Wave N) THE MFT ROUTE WAS CORRECTED ON ISOTOPE EVIDENCE. The norfuraneol + H2S -> MFT step (`Thiol_Addition_Norfuraneol`) was RETIRED: Cerny & Davidek 2003 (10.1021/jf026123f) spiked authentic norfuraneol into a [13C5]ribose/cysteine system and the MFT came out mainly 13C5-labelled, i.e. norfuraneol is 'unimportant as an intermediate'; Cerny & Davidek 2004 (10.1021/jf035265m) positionally confirmed 1,4-dideoxypento-2,3-diulose with [1-13C]ribose. Two families replace it: `Deoxyosone_Reduction` (1-deoxy-2,3-pentodiulose + 2[H] -> 1,4-dideoxypento-2,3-diulose + H2O, barrier 28.0 ESTIMATED) and `Thiol_Addition_Pentodiulose` (1,4-dideoxyosone + H2S -> MFT + 2 H2O, barrier 28.60 ESTIMATED and UNCONSTRAINED, deliberately NOT the 26.85 that Wave H fitted through the contradicted route, and NOT tuned). The H2S step no longer consumes a reducing-equivalent token; the reduction moved upstream. Norfuraneol is retained as a genuine furanone product, demoted out of the MFT lane. Honest effect on cys_ribose_140C_Hofmann1998: MFT 235.32 -> 151.87 ppb against 342 (1.45x under -> 2.25x under) and FFT 219.96 -> 243.72 against 200 (1.10x over -> 1.22x over). The numbers got WORSE and were NOT clawed back: the 1.45x had been bought with a barrier fitted through a route the isotope evidence contradicts. (Wave I) the norfuraneol + H2S -> MFT step no longer draws its 2[H] reducing equivalent from a pool whose only source was pyrazine chemistry -- the reductant is now sourced from the thiol redox couple (2 cysteine -> cystine + 2[H]), so MFT no longer goes to zero when aminoketone condensation is disabled. Measured effect on cys_ribose_140C_Hofmann1998: MFT 61.25 -> 235.32 ppb against a 342 ppb reference (5.58x under -> 1.45x under) and FFT 61.44 -> 219.96 against 200 (3.26x under -> 1.10x over), with NO barrier changed. The Lipid_Schiff_Base SMARTS finally implements the exclusions its comment claimed (no alpha-hydroxy carbonyls, C3+ only), taking the family from 75.2% of the core no-lipid network to 27.2%. The demoted one-step MFT shortcut no longer fires for pentoses. The Methional hydrolysate observability factor was REVERTED 0.05623 -> 0.0045: the two benchmarks it had been re-derived against are fabricated and are now quarantined. 10 of 14 Monte-Carlo barrier priors were exact no-ops and now route correctly, widening every confidence interval. (G1) the fabricated lipid radical chain was deleted -- 93% of the emitted network, 5500 -> 369 steps -- and hexanal, norfuraneol, glyoxal, CML, DMHF and the correct disulfide regioisomer became reachable; the accepted 1-deoxyosone -> norfuraneol -> MFT route (van den Ouweland & Peer 1975) replaced the fabricated one-step shortcut, which is demoted but retained as a lump; eight families that had been silently switched off by the 45 kcal/mol DEFAULT_BARRIER fallthrough (acrylamide, CML/CEL, furanone, thiamine, GSH) were given explicit estimated barriers and are now live. (Wave H) `Enolisation_2_3_Amadori` stopped collecting the amine-nucleophile ionisation and Amadori water-activity corrections it was matching by name alone, which is what had left the new MFT route inert; `thiol_addition_norfuraneol` was refit 28.60 -> 26.85 against cys_ribose_140C_Hofmann1998 only (that refit is now STALE -- it was performed against a network in which the MFT route was throttled by the H2 coupling Wave I removed, so its 'no barrier value can fix this' conclusion does not carry over and re-running it is an open owner item). (2026-08-27 earlier) the projection retune: an apparent-Arrhenius conversion extent replaced the saturating severity sigmoid and the double-applied Boltzmann selectivity on path_span was de-duplicated. (2026-08-26) the audit bug fixes -- marker-injection mM basis, 2-pentylfuran SMILES, full MolWt. This is a drift-detection baseline, not a measurement, and carries zero calibration evidence.",
     "origin": "internal_reproducibility_candidate"
   }
 }

@@ -42,12 +42,11 @@ To ensure both rapid development and scientific accuracy, the Maillard test suit
 - **Scope**: Geometry optimization, TS search stability, and explicit solvation cluster generation.
 - **Command**: `pytest tests/qm/`
 
-## 🔬 Research Benchmarks (`tests/benchmarks/`)
-
-- **Cost**: Very High (HPC-scale).
-- **Dependencies**: High-level DFT (PySCF).
-- **Scope**: Phase 3 literature validation and cross-functional benchmarking (e.g. wB97M-V vs. Double-Hybrids). Many tests here are forward-looking placeholders for experimental data.
-- **Command**: `pytest tests/benchmarks/`
+> **`tests/benchmarks/` was removed on 2026-08-27 (Wave J2).** Its Phase 3 QM authority-lane
+> tests were deleted on 2026-04-21; all that remained was an orphaned `_lane_policy.py`
+> helper that nothing imported. The directory collected zero tests, so the skip scan that
+> pointed at it had been reporting an empty lane's zeros as a clean lane ever since. If the
+> Phase 3 literature-validation lane is revived, it needs new tests, not that scaffolding.
 
 ---
 
@@ -55,9 +54,26 @@ To ensure both rapid development and scientific accuracy, the Maillard test suit
 
 - `@pytest.mark.slow`: Deselect with `pytest -m "not slow"` for fast local iteration.
 - `@pytest.mark.skipif(...)`: Automatically skips tests if an external backend is unavailable or unsupported in the active environment.
+- `xfail_strict = true` is set in `pytest.ini` (2026-08-27). An `xfail`-marked test that starts
+  passing is a **failure**, not a silent `xpass`: closing a known gap forces you back here to
+  promote the test into a real assertion.
 
-## Expected Skips In Docker
+## What counts as a legitimate skip
 
-- `tests/benchmarks/`: currently forward-looking Phase 3 placeholders and HPC-scale benchmark scaffolds. These skips are intentional and should not be treated as regressions until the underlying data or implementation exists.
-- Optional QM backend tests: skips are legitimate when they reflect a real capability probe, for example missing or unusable Sella/JAX, missing xTB, or unavailable CREST/QCG.
-- Environment-gated skips should probe the actual backend capability, not hard-code stale paths such as `conda_env/bin/...`.
+A skip is legitimate only when its condition names a **real external precondition** that the
+repository cannot satisfy for itself — a missing binary (xTB, CREST), an uninstalled optional
+backend (PySCF, Sella, MACE), a platform limitation, or a gitignored artifact that must be
+generated locally. The reason string must name that precondition specifically.
+
+A skip is **not** legitimate when:
+
+- its condition is "the behaviour under test is broken" — that is a self-excusing skip, and it
+  can never fail no matter how bad the code gets. Assert the current behaviour instead, or mark
+  the test `xfail(strict=True)` so it goes red when the gap closes;
+- its condition can never be true (for example, a file that is tracked in git). Assert the
+  precondition so its loss is visible;
+- it stands in for an unwritten assertion. Write the assertion or delete the test — a green
+  test that checks nothing launders confidence.
+
+Optional QM backend skips should probe the actual backend capability, not hard-code stale paths
+such as `conda_env/bin/...`.

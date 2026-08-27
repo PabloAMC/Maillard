@@ -21,6 +21,13 @@
     "execution_path": "free_precursor",
     "notes": "Quantitative free amino-acid sulfur benchmark used for strict-ready calibration."
   },
+  "content_verification_note": {
+    "date": "2026-08-27",
+    "wave": "Wave K content verification",
+    "status": "conversion_undocumented",
+    "note": "The paper's abstract reports MFT/FFT yields in mol % (e.g. MFT 1.4 mol % for its best precursor system), not ppb. The 342/200 ppb values here require a mol%->ppb conversion (system volume, precursor moles, molecular weights) that is NOT documented anywhere in this repo, and the full text is paywalled so the values could not be confirmed against the paper's tables. This is the panel's tightest contract (1.45x / 0.09 dex) resting on an unverified derivation. Needs: full-text access to 10.1021/jf9705983 and a written conversion, or replacement with the paper's native mol % as the target unit.",
+    "report": "results/validation/content_verification_wave_k.md"
+  },
   "validation_contract": {
     "scale_thresholds": {
       "max_ratio": 1.45,

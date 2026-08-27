@@ -93,11 +93,36 @@ def test_calibration_objective_keeps_a_gradient_below_the_measurement_floor():
 # 3. The Wave H fits: shipped values must match their recorded derivations
 # ---------------------------------------------------------------------------
 def test_sulfur_refit_shipped_value_matches_its_record():
-    """`thiol_addition_norfuraneol` is the value the Hofmann-only refit adopted."""
+    """`thiol_addition_norfuraneol` keeps the refit value, now marked RETIRED.
+
+    2026-08-27 (Wave N) — RE-PINNED. CAUSE: the norfuraneol -> MFT step was
+    removed from the network on isotope evidence (Cerny & Davidek 2003,
+    10.1021/jf026123f), so the constant is retired-with-provenance rather than
+    deleted: the value must still match the Wave H refit record it came from,
+    and the note must say both where it came from and that no step emits it.
+    """
     value, note = barrier_constants.FAST_BARRIERS["thiol_addition_norfuraneol"]
     assert value == pytest.approx(26.85)
     assert "Hofmann1998" in note
-    assert "refit_sulfur_barriers_hofmann.py" in note
+    assert "RETIRED" in note
+    assert "10.1021/jf026123f" in note
+    assert "sulfur_barrier_refit_hofmann" in note
+
+
+def test_corrected_mft_route_barriers_are_estimates_not_fits():
+    """2026-08-27 (Wave N): the corrected-route constants must stay untuned.
+
+    The route change (norfuraneol -> 1,4-dideoxyosone) must not silently
+    inherit the 26.85 that Wave H fitted THROUGH the contradicted route, and
+    neither new constant may claim a fit it does not have.
+    """
+    value, note = barrier_constants.FAST_BARRIERS["thiol_addition_pentodiulose"]
+    assert value == pytest.approx(28.60)
+    assert "ESTIMATED" in note and "UNCONSTRAINED" in note
+    assert "10.1021/jf035265m" in note
+    value, note = barrier_constants.FAST_BARRIERS["deoxyosone_reduction"]
+    assert value == pytest.approx(28.0)
+    assert "ESTIMATED" in note and "UNCONSTRAINED" in note
 
 
 def test_knobs_the_hofmann_refit_did_not_move_keep_their_estimates():
@@ -122,6 +147,12 @@ def test_hydrolysate_observability_factors_stay_physical_fractions():
     unconstrained optima are 3.5x and 8.6x above 1.0, i.e. the layer is saturated and
     cannot explain their residual. If a future pass ever writes a value above 1.0 here it
     has stopped being an observability factor and become a fudge factor.
+
+    2026-08-27 (Wave I): the (0, 1] property is unchanged and still asserted. The Methional
+    VALUE is not: the two benchmarks that re-derivation fitted against are fabricated (the
+    cited paper uses glucose/fructose at pH 7.5 and reports only relative peak areas, never
+    mentioning FFT or MFT), so they are quarantined, the record is RETRACTED and the
+    constant is reverted 0.05623 -> 0.0045.
     """
     for profile in _HYDROLYSATE_SULFUR_OBSERVABILITY_PROFILES.values():
         assert 0.0 < float(profile["base_factor"]) <= 1.0
@@ -129,7 +160,8 @@ def test_hydrolysate_observability_factors_stay_physical_fractions():
     from src.recommend import _normalize_chemical_name
 
     methional = _HYDROLYSATE_SULFUR_OBSERVABILITY_PROFILES[_normalize_chemical_name("Methional")]
-    assert methional["base_factor"] == pytest.approx(0.05623)
+    # RE-PINNED 2026-08-27 (Wave I): reverted, see the docstring above.
+    assert methional["base_factor"] == pytest.approx(0.0045)
 
 
 # ---------------------------------------------------------------------------
@@ -206,25 +238,41 @@ def test_readme_family_claim_matches_the_derived_artifact():
     assert template_lanes == {"01", "02", "03", "11", "12"}
 
 
-def test_observability_rederivation_target_selector_is_literature_only():
+def test_observability_rederivation_is_retracted_and_refuses_to_run():
+    """RE-AIMED 2026-08-27 (Wave I) — was `..._target_selector_is_literature_only`.
+
+    The old test asserted that this generator's fit targets were the two PMC9905368
+    xylose HVP benchmarks and that a synthetic target would be rejected. Both halves have
+    been overtaken: the two targets are FABRICATED (the cited paper 10.1007/s10068-022-
+    01194-w uses glucose/fructose at pH 7.5 for 90 min and reports only relative peak
+    areas, never mentioning FFT or MFT) and are now quarantined, so the generator has no
+    valid target at all and is retracted.
+
+    The test is NOT deleted and NOT relaxed. It now pins the stronger property: the
+    retraction is real and the script cannot be re-run against those files by accident.
+    The literature-only guard it used to exercise still exists and is still exercised, on
+    the two live fit generators, by the tests below.
+    """
     module = _load_generator(
         "_wave_h_observability", "scripts/generators/rederive_hydrolysate_observability.py"
     )
-    targets = module._guarded_targets()
-    assert {path.name for path in targets} == {
-        "spi_hvp_xylose_120C_PMC9905368.json",
-        "wheat_gluten_hvp_xylose_120C_PMC9905368.json",
-    }
+    assert module._RETRACTED is True
+    assert "RETRACTED" in module._RETRACTION_MESSAGE
+    assert "10.1007/s10068-022-01194-w" in module._RETRACTION_MESSAGE
 
-    original = module.TARGETS
+    # It must exit non-zero without writing anything, rather than raising an obscure
+    # missing-file assertion the next reader has to diagnose.
+    import sys as _sys
+
+    argv = _sys.argv
     try:
-        module.TARGETS = (
-            ROOT
-            / "data"
-            / "benchmarks"
-            / "soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026.json",
-        )
-        with pytest.raises(AssertionError):
-            module._guarded_targets()
+        _sys.argv = ["rederive_hydrolysate_observability.py"]
+        assert module.main() == 2
     finally:
-        module.TARGETS = original
+        _sys.argv = argv
+
+    # The targets it names must be the quarantined copies, not live panel files.
+    for path in module.TARGETS:
+        assert not path.exists(), f"a retracted fit target is back in the panel: {path}"
+        quarantined = path.parent / "quarantined" / path.name
+        assert quarantined.exists(), f"quarantined copy missing: {quarantined}"

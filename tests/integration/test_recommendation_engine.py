@@ -468,8 +468,15 @@ def test_matrix_benchmark_ranking_contract():
     ]
 
     for bench_file in benchmark_pairs:
-        if not bench_file.exists():
-            pytest.skip(f"Benchmark file not found: {bench_file}")
+        # TIGHTENED 2026-08-27 (Wave J2, red-team finding: dead/self-excusing skips). This
+        # was `pytest.skip(f"Benchmark file not found: {bench_file}")` INSIDE the loop, so a
+        # single missing benchmark abandoned the whole comparison -- including the pair that
+        # was present. Both files are tracked, so the branch was dead; as an assertion, a
+        # deleted or renamed benchmark now goes red instead of quietly shrinking coverage.
+        assert bench_file.exists(), (
+            f"tracked benchmark {bench_file.name} is missing; this test's pea/soy "
+            f"comparison cannot be made without it"
+        )
 
         evaluation = evaluate_benchmark(bench_file)
         summary = summarize_evaluation(evaluation, protein_type=evaluation.predicted_ppb and "pea_iso")

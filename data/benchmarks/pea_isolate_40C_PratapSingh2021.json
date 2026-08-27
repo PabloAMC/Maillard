@@ -24,50 +24,51 @@
     "extrusion_history": "none",
     "matrix_format": "pea protein isolate slurry"
   },
+  "content_correction_note": {
+    "date": "2026-08-27",
+    "wave": "Wave K/M content verification",
+    "verified_against": "Molecules 2021, 26, 4104, Table 1, retrieved as JATS XML from Europe PMC (PMC8271896)",
+    "corrections": [
+      "hexanal 260 ppb -> 1138.00 ppb (paper: 1138.00 +/- 297.30; repo value was 4.38x low, origin unknown, no derivation found)",
+      "hexanol REMOVED: paper Table 1 reports n.d. for pea, and its text states pea proteins 'contained no alcohol compounds'; the previous 80 ppb had no source",
+      "expected ranks corrected: with the paper's values hexanal (1138) outranks 2-pentylfuran (638); the previous ranking encoded the erroneous values",
+      "2-pentylfuran 638 ppb CONFIRMED verbatim against the paper"
+    ],
+    "report": "results/validation/content_verification_wave_k.md"
+  },
   "matrix_ranking_contract": {
     "observable_targets": [
       {
-        "name": "2-pentylfuran",
+        "name": "hexanal",
         "role": "adverse_marker",
         "expected_rank": 1,
         "direction": "higher"
       },
       {
-        "name": "hexanal",
+        "name": "2-pentylfuran",
         "role": "adverse_marker",
         "expected_rank": 2,
-        "direction": "higher"
-      },
-      {
-        "name": "hexanol",
-        "role": "adverse_marker",
-        "expected_rank": 3,
         "direction": "higher"
       }
     ],
     "adverse_markers": [
-      "2-pentylfuran",
       "hexanal",
-      "hexanol"
+      "2-pentylfuran"
     ],
     "citation_provenance": [
-      "Pratap-Singh 2021 ambient slurry GC-MS profile for pea protein isolate"
+      "Pratap-Singh 2021 (Molecules 26:4104) Table 1, fully quantified ppb for pea protein isolate"
     ],
     "calibration_mode": "compound_specific_headspace",
     "notes": "Off-flavour ranking contract for the ambient pea-isolate matrix lane; still outside the strict gate."
   },
   "measured_volatiles": {
     "hexanal": {
-      "conc_ppb": 260,
-      "uncertainty_pct": 14
+      "conc_ppb": 1138.0,
+      "uncertainty_pct": 26
     },
     "2-pentylfuran": {
       "conc_ppb": 638,
       "uncertainty_pct": 8
-    },
-    "hexanol": {
-      "conc_ppb": 80,
-      "uncertainty_pct": 19
     }
   },
   "protein_type": "pea_iso",

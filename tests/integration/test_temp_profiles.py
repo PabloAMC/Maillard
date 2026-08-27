@@ -59,24 +59,18 @@ def test_isothermal_vs_ramp(tmp_path):
     assert res_ramp["temperature"][0] == pytest.approx(298.15)
     assert res_ramp["temperature"][-1] == pytest.approx(423.15)
 
-def test_cli_ramp(tmp_path):
-    # Create dummy barriers JSON
-    barriers = {"amadori": 20.0}
-    barriers_path = tmp_path / "barriers.json"
-    with open(barriers_path, "w") as f:
-        json.dump(barriers, f)
-        
-    # Create ramp CSV
-    ramp_df = pd.DataFrame({
-        "time": [0, 5, 10],
-        "temp": [100, 150, 200]
-    })
-    ramp_path = tmp_path / "ramp.csv"
-    ramp_df.to_csv(ramp_path, index=False)
-    
-    # We can't easily run the CLI and check results without mocking or subprocesses
-    # But we already verified the core logic in the test above.
-    pass
+# DELETED 2026-08-27 (Wave J2, red-team finding: empty-body tests). `test_cli_ramp(tmp_path)`
+# wrote a barriers JSON and a ramp CSV into tmp_path, then ended on a bare `pass` under the
+# comment "We can't easily run the CLI and check results without mocking or subprocesses /
+# But we already verified the core logic in the test above." So it named the CLI in its title,
+# exercised no CLI, asserted nothing, and reported PASS -- a green tick for a test whose own
+# body admits it is not testing anything. The fixture setup it did perform was pure cost: both
+# files were written and then never read.
+#
+# The claim in that comment is true, which is why this is a deletion and not a rewrite: the
+# ramp logic IS covered, by test_temperature_ramp above (mole-fraction conservation plus the
+# 298.15 K -> 423.15 K endpoints). Nothing was lost. The CLI's own argument contract is
+# covered for real in tests/integration/test_cantera_sim.py.
 
 
 def test_fast_temporal_ramp_matches_cantera_directional_reference(tmp_path):

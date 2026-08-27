@@ -75,8 +75,16 @@ def test_validation_overview_uses_standardized_benchmark_labels():
     assert _bench_label("thiamine_cys_xylose_145C_Cerny2008") == r"Thiamine + cysteine + xylose, $145\,^{\circ}$C (Cerny, 2008) [reference anchor]"
     assert _bench_label("pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026") == r"Pea isolate + ribose + cysteine, $100\,^{\circ}$C (Protocol Pilot, 2026)"
     assert _bench_label("resconi_2023_pbma_beef_identity_benchmark") == r"PBMA vs beef comparator, $150\,^{\circ}$C (Resconi et al., 2023)"
-    assert _bench_label("spi_hvp_xylose_120C_PMC9905368") == r"SPI hydrolysate + xylose, $120\,^{\circ}$C (Cho et al., 2023)"
-    assert _bench_label("wheat_gluten_hvp_xylose_120C_PMC9905368") == r"Wheat gluten hydrolysate + xylose, $120\,^{\circ}$C (Cho et al., 2023)"
+    # RE-PINNED 2026-08-27 (Wave I): the label now carries a `[QUARANTINED]` suffix.
+    # `spi_hvp_xylose_120C_PMC9905368` and its wheat-gluten twin were quarantined as
+    # fabricated -- the cited paper reports relative peak areas for glucose/fructose at
+    # pH 7.5 and never mentions FFT or MFT. The label entries are KEPT so any surviving
+    # reference renders as a name rather than a raw slug, and the suffix is there so a
+    # figure or table that somehow still shows one of them cannot look like a live
+    # benchmark. See data/benchmarks/quarantined/README.md.
+    assert _bench_label("spi_hvp_xylose_120C_PMC9905368") == r"SPI hydrolysate + xylose, $120\,^{\circ}$C (Cho et al., 2023) [QUARANTINED]"
+    # RE-PINNED 2026-08-27 (Wave I): see the SPI entry above -- same quarantine.
+    assert _bench_label("wheat_gluten_hvp_xylose_120C_PMC9905368") == r"Wheat gluten hydrolysate + xylose, $120\,^{\circ}$C (Cho et al., 2023) [QUARANTINED]"
 
 
 def test_validation_overview_payload_surfaces_integrated_families_11_to_16():

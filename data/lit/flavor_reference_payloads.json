@@ -759,8 +759,8 @@
     {
       "id": "bi_2020_raw_pea_hexanal_point",
       "compound": "hexanal",
-      "source_citation": "Yu et al. (2020), JAFC 68:1714-1724",
-      "doi": "10.1021/acs.jafc.0c00200",
+      "source_citation": "Bi et al. (2020), J. Agric. Food Chem. 68:2718-2727",
+      "doi": "10.1021/acs.jafc.9b07711",
       "matrix_context": "raw_pea_flour",
       "analytical_method": "HS-SPME-GC-SIM with 2,4,6-trimethylpyridine internal standard",
       "units": "ug_per_kg",
@@ -785,13 +785,36 @@
       },
       "citation_caveat": "The repo's citation string 'Bi et al. (2020)' is wrong - the true first author is Junhe Yu. 10.1021/acs.jafc.9b07711 (Bi et al., raw/roasted peas) should stay attached only to the pea hexanal baseline and external-validation entries.",
       "shared_anchor": true,
-      "shared_anchor_note": "One DOI serves 4 nominally distinct reference records in data/lit: bi_2020_raw_pea_hexanal_point, bi_2020_roasted_pea_hexanal_point, jafc_2020_egcg_deoxyosone_trapping, liu_2020_egcg_arp_kinetics. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
+      "shared_anchor_note": "One DOI serves 4 nominally distinct reference records in data/lit: bi_2020_raw_pea_hexanal_point, bi_2020_roasted_pea_hexanal_point, jafc_2020_egcg_deoxyosone_trapping, liu_2020_egcg_arp_kinetics. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources.",
+      "value_provenance": "derived_from_oav_and_repo_threshold",
+      "value_provenance_note": "2026-08-27 (Wave I, cold-start red-team finding): this value is NOT an independently measured concentration in this repo's chain of custody. The arithmetic is exact: OAV 280 (the value the intake registry records for this anchor, 'Defined raw-pea hexanal baseline: 1260 ug/kg (OAV ~280)') x 4.5 ppb, where 4.5 ppb is THIS REPO'S OWN hexanal odour-detection threshold -- itself a compilation-level number that has never been read off a primary table (see the hexanal ODT anchor's harmonization_note in this file; published aqueous hexanal ODTs span 0.3-14 ug/L). 280 x 4.5 = 1260.0 to the digit. It is therefore possible that the source reports 1260 ug/kg directly and the OAV is the derived quantity -- but that has NOT been confirmed against the paper, and the exact divisibility by our own unsourced constant is precisely why the two readings cannot be told apart from inside the repo. Scored as a hold-out point it is a consistency check against our own threshold, not an external measurement, and it MOVES if that threshold is ever corrected.",
+      "value_provenance_arithmetic": {
+        "oav": 280.0,
+        "odour_detection_threshold_ppb": 4.5,
+        "odour_detection_threshold_source": "repo-internal compilation value (data/lit/flavor_reference_payloads.json hexanal ODT anchor); primary table never verified",
+        "product_ppb": 1260.0
+      },
+      "doi_repair_reversal": {
+        "date": "2026-08-27",
+        "wave": "Wave I",
+        "reverted_doi": "10.1021/acs.jafc.0c00200",
+        "restored_doi": "10.1021/acs.jafc.9b07711",
+        "reverted_citation": "Yu et al. (2020), JAFC 68:1714-1724",
+        "restored_citation": "Bi et al. (2020), J. Agric. Food Chem. 68:2718-2727",
+        "basis": "The 2026-08-26 doi_repair/citation_repair pair on this record was applied to the WRONG ANCHOR. Its stated basis is an EGCG / deoxyosone-trapping xylose-alanine paper -- 'EGCG lowers the activation energy for xylose/alanine -> ARP conversion from 77.8 to 62.8 kJ/mol'. That has nothing to do with a raw-pea hexanal baseline. The repair belonged on the registry entry jafc_2020_egcg_deoxyosone_trapping, not here. The contradiction is visible INSIDE the same record: its own citation_caveat says verbatim that '10.1021/acs.jafc.9b07711 (Bi et al., raw/roasted peas) should stay attached only to the pea hexanal baseline and external-validation entries' -- i.e. to this record -- while the doi_repair immediately above it moved this record off that DOI. The independently written citation_audit_note in data/benchmarks/external_validation/external_validation_bi_2020_raw_pea_hexanal.json reached the same conclusion on 2026-08-26 and marked 9b07711 'verified_correct_shared_anchor' for exactly these anchors.",
+        "how_it_surfaced": "Wave I regenerated the hold-out bundles (which had not been regenerated since the sweep). The regeneration rewrote the benchmark's source_doi from 9b07711 to 0c00200 and deleted the citation_audit_note that contradicted it. The stale artifact had been masking a live data defect.",
+        "superseded_records_retained": [
+          "doi_repair",
+          "citation_repair",
+          "citation_caveat"
+        ]
+      }
     },
     {
       "id": "bi_2020_roasted_pea_hexanal_point",
       "compound": "hexanal",
-      "source_citation": "Yu et al. (2020), JAFC 68:1714-1724",
-      "doi": "10.1021/acs.jafc.0c00200",
+      "source_citation": "Bi et al. (2020), J. Agric. Food Chem. 68:2718-2727",
+      "doi": "10.1021/acs.jafc.9b07711",
       "matrix_context": "roasted_pea_flour_160c_30min",
       "analytical_method": "HS-SPME-GC-SIM with 2,4,6-trimethylpyridine internal standard",
       "units": "ug_per_kg",
@@ -816,7 +839,30 @@
       },
       "citation_caveat": "The repo's citation string 'Bi et al. (2020)' is wrong - the true first author is Junhe Yu. 10.1021/acs.jafc.9b07711 (Bi et al., raw/roasted peas) should stay attached only to the pea hexanal baseline and external-validation entries.",
       "shared_anchor": true,
-      "shared_anchor_note": "One DOI serves 4 nominally distinct reference records in data/lit: bi_2020_raw_pea_hexanal_point, bi_2020_roasted_pea_hexanal_point, jafc_2020_egcg_deoxyosone_trapping, liu_2020_egcg_arp_kinetics. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
+      "shared_anchor_note": "One DOI serves 4 nominally distinct reference records in data/lit: bi_2020_raw_pea_hexanal_point, bi_2020_roasted_pea_hexanal_point, jafc_2020_egcg_deoxyosone_trapping, liu_2020_egcg_arp_kinetics. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources.",
+      "value_provenance": "derived_from_oav_and_repo_threshold",
+      "value_provenance_note": "2026-08-27 (Wave I, cold-start red-team finding): this value is NOT an independently measured concentration in this repo's chain of custody. The arithmetic is exact: OAV 72 (the value the intake registry records for this anchor, the roasted-pea carryover point, 324 ug/kg) x 4.5 ppb, where 4.5 ppb is THIS REPO'S OWN hexanal odour-detection threshold -- itself a compilation-level number that has never been read off a primary table (see the hexanal ODT anchor's harmonization_note in this file; published aqueous hexanal ODTs span 0.3-14 ug/L). 72 x 4.5 = 324.0 to the digit. It is therefore possible that the source reports 324 ug/kg directly and the OAV is the derived quantity -- but that has NOT been confirmed against the paper, and the exact divisibility by our own unsourced constant is precisely why the two readings cannot be told apart from inside the repo. Scored as a hold-out point it is a consistency check against our own threshold, not an external measurement, and it MOVES if that threshold is ever corrected.",
+      "value_provenance_arithmetic": {
+        "oav": 72.0,
+        "odour_detection_threshold_ppb": 4.5,
+        "odour_detection_threshold_source": "repo-internal compilation value; primary table never verified",
+        "product_ppb": 324.0
+      },
+      "doi_repair_reversal": {
+        "date": "2026-08-27",
+        "wave": "Wave I",
+        "reverted_doi": "10.1021/acs.jafc.0c00200",
+        "restored_doi": "10.1021/acs.jafc.9b07711",
+        "reverted_citation": "Yu et al. (2020), JAFC 68:1714-1724",
+        "restored_citation": "Bi et al. (2020), J. Agric. Food Chem. 68:2718-2727",
+        "basis": "The 2026-08-26 doi_repair/citation_repair pair on this record was applied to the WRONG ANCHOR. Its stated basis is an EGCG / deoxyosone-trapping xylose-alanine paper -- 'EGCG lowers the activation energy for xylose/alanine -> ARP conversion from 77.8 to 62.8 kJ/mol'. That has nothing to do with a raw-pea hexanal baseline. The repair belonged on the registry entry jafc_2020_egcg_deoxyosone_trapping, not here. The contradiction is visible INSIDE the same record: its own citation_caveat says verbatim that '10.1021/acs.jafc.9b07711 (Bi et al., raw/roasted peas) should stay attached only to the pea hexanal baseline and external-validation entries' -- i.e. to this record -- while the doi_repair immediately above it moved this record off that DOI. The independently written citation_audit_note in data/benchmarks/external_validation/external_validation_bi_2020_raw_pea_hexanal.json reached the same conclusion on 2026-08-26 and marked 9b07711 'verified_correct_shared_anchor' for exactly these anchors.",
+        "how_it_surfaced": "Wave I regenerated the hold-out bundles (which had not been regenerated since the sweep). The regeneration rewrote the benchmark's source_doi from 9b07711 to 0c00200 and deleted the citation_audit_note that contradicted it. The stale artifact had been masking a live data defect.",
+        "superseded_records_retained": [
+          "doi_repair",
+          "citation_repair",
+          "citation_caveat"
+        ]
+      }
     },
     {
       "id": "liu_2023_ppi_hexanal_band",
@@ -846,7 +892,9 @@
         "date": "2026-08-26",
         "basis": "'LiuThesis2023' is not a DOI. The work is Liu, Y. (2023), MS/PhD thesis, North Carolina State University (NC State Institutional Repository), which carries no DOI. The peer-reviewed version of the same dataset is Liu, Cadwallader & Drake (2023), 'Identification of predominant aroma components of dried pea protein concentrates and isolates', Food Chemistry 406:134998, 10.1016/j.foodchem.2022.134998 (CrossRef verified) - already anchored separately in this repo."
       },
-      "related_published_doi": "10.1016/j.foodchem.2022.134998"
+      "related_published_doi": "10.1016/j.foodchem.2022.134998",
+      "value_provenance": "band_geometric_midpoint",
+      "value_provenance_note": "2026-08-27 (Wave I): the source reports a RANGE across commercial PPI lots, not a value. The scored hold-out number is the geometric midpoint sqrt(15.0 * 180.0) -- a construction of ours. The honest uncertainty is the band itself (a factor of 12.0 end to end), so a prediction landing inside it is weak evidence. Until 2026-08-27 the midpoint was written at full float precision (e.g. 51.96152422706632), advertising a precision that exists nowhere in the chain."
     },
     {
       "id": "liu_2023_ppi_nonanal_band",
@@ -876,7 +924,9 @@
         "date": "2026-08-26",
         "basis": "'LiuThesis2023' is not a DOI. The work is Liu, Y. (2023), MS/PhD thesis, North Carolina State University (NC State Institutional Repository), which carries no DOI. The peer-reviewed version of the same dataset is Liu, Cadwallader & Drake (2023), 'Identification of predominant aroma components of dried pea protein concentrates and isolates', Food Chemistry 406:134998, 10.1016/j.foodchem.2022.134998 (CrossRef verified) - already anchored separately in this repo."
       },
-      "related_published_doi": "10.1016/j.foodchem.2022.134998"
+      "related_published_doi": "10.1016/j.foodchem.2022.134998",
+      "value_provenance": "band_geometric_midpoint",
+      "value_provenance_note": "2026-08-27 (Wave I): the source reports a RANGE across commercial PPI lots, not a value. The scored hold-out number is the geometric midpoint sqrt(5.0 * 50.0) -- a construction of ours. The honest uncertainty is the band itself (a factor of 10.0 end to end), so a prediction landing inside it is weak evidence. Until 2026-08-27 the midpoint was written at full float precision (e.g. 51.96152422706632), advertising a precision that exists nowhere in the chain."
     },
     {
       "id": "liu_2023_ppi_heptadienal_band",
@@ -906,7 +956,9 @@
         "date": "2026-08-26",
         "basis": "'LiuThesis2023' is not a DOI. The work is Liu, Y. (2023), MS/PhD thesis, North Carolina State University (NC State Institutional Repository), which carries no DOI. The peer-reviewed version of the same dataset is Liu, Cadwallader & Drake (2023), 'Identification of predominant aroma components of dried pea protein concentrates and isolates', Food Chemistry 406:134998, 10.1016/j.foodchem.2022.134998 (CrossRef verified) - already anchored separately in this repo."
       },
-      "related_published_doi": "10.1016/j.foodchem.2022.134998"
+      "related_published_doi": "10.1016/j.foodchem.2022.134998",
+      "value_provenance": "band_geometric_midpoint",
+      "value_provenance_note": "2026-08-27 (Wave I): the source reports a RANGE across commercial PPI lots, not a value. The scored hold-out number is the geometric midpoint sqrt(0.5 * 8.0) -- a construction of ours. The honest uncertainty is the band itself (a factor of 16.0 end to end), so a prediction landing inside it is weak evidence. Until 2026-08-27 the midpoint was written at full float precision (e.g. 51.96152422706632), advertising a precision that exists nowhere in the chain."
     },
     {
       "id": "liu_2023_ppi_ibmp_band",
@@ -936,7 +988,9 @@
         "date": "2026-08-26",
         "basis": "'LiuThesis2023' is not a DOI. The work is Liu, Y. (2023), MS/PhD thesis, North Carolina State University (NC State Institutional Repository), which carries no DOI. The peer-reviewed version of the same dataset is Liu, Cadwallader & Drake (2023), 'Identification of predominant aroma components of dried pea protein concentrates and isolates', Food Chemistry 406:134998, 10.1016/j.foodchem.2022.134998 (CrossRef verified) - already anchored separately in this repo."
       },
-      "related_published_doi": "10.1016/j.foodchem.2022.134998"
+      "related_published_doi": "10.1016/j.foodchem.2022.134998",
+      "value_provenance": "band_geometric_midpoint",
+      "value_provenance_note": "2026-08-27 (Wave I): scored value is a geometric band midpoint, not a measurement."
     },
     {
       "id": "pmc11049305_spirulina_beta_ionone_oav_floor",
@@ -1060,8 +1114,9 @@
       "target_direction": "retain_family_11_nonanal_baseline_as_supporting_off_note_panel_evidence",
       "numeric_band_or_point": {
         "type": "point",
-        "value": 29.42
+        "value": 72.66
       },
+      "content_correction_note": "2026-08-27 (Wave K/M): was 29.42, which is the paper's DECANAL row (volatile table, HMPE-0 min control column); the Nonanal row reads 72.66 +/- 1.46 ug/kg. Off-by-one table-row transcription error, verified against Europe PMC fullTextXML (PMC12984281). See results/validation/content_verification_wave_k.md.",
       "shared_anchor": true,
       "shared_anchor_note": "One DOI serves 6 nominally distinct reference records in data/lit: li_2026_spi_wg_hme_1_hexanol_control_point, li_2026_spi_wg_hme_2_pentylfuran_control_point, li_2026_spi_wg_hme_heptanal_control_point, li_2026_spi_wg_hme_hexanal_control_point, li_2026_spi_wg_hme_nonanal_control_point, pmc_2026_hme_hexanal_baseline. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },
@@ -1096,8 +1151,9 @@
       "target_direction": "retain_family_11_2_pentylfuran_baseline_as_supporting_off_note_panel_evidence",
       "numeric_band_or_point": {
         "type": "point",
-        "value": 221.51
+        "value": 5625.8
       },
+      "content_correction_note": "2026-08-27 (Wave K/M): was 221.51, which is the paper's MALTOL row (volatile table, HMPE-0 min control column); the 2-Pentylfuran row reads 5625.80 +/- 63.75 ug/kg -- the previous value was 25x low. Off-by-one table-row transcription error, verified against Europe PMC fullTextXML (PMC12984281). See results/validation/content_verification_wave_k.md.",
       "shared_anchor": true,
       "shared_anchor_note": "One DOI serves 6 nominally distinct reference records in data/lit: li_2026_spi_wg_hme_1_hexanol_control_point, li_2026_spi_wg_hme_2_pentylfuran_control_point, li_2026_spi_wg_hme_heptanal_control_point, li_2026_spi_wg_hme_hexanal_control_point, li_2026_spi_wg_hme_nonanal_control_point, pmc_2026_hme_hexanal_baseline. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
     },

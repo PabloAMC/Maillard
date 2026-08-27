@@ -181,17 +181,48 @@ def build_matrix_experiment_benchmark_payload(payload: Mapping[str, Any]) -> Dic
     provenance = normalized.get("provenance", {})
     evidence_class = str(normalized.get("evidence_class", "calibration_candidate"))
 
-    return {
+    # 2026-08-27 (Wave I). Provenance carry-through. Previously this materializer emitted a
+    # FIXED set of provenance keys, so every regeneration silently dropped:
+    #   * the typed `identifier` / `identifier_scheme` / `identifier_note` triple that
+    #     DOI-less sources carry (Wave G3) -- and, worse, wrote `source_doi: ""` in its
+    #     place, which downgrades the bundle's own signal-origin classification;
+    #   * hand-added audit annotations such as `citation_audit_note` / `shared_anchor`;
+    #   * any provenance field added after this function was written.
+    # This was recorded in the ledger as "FOUND, NOT FIXED" at the end of Wave G3. It is
+    # fixed here because Wave I regenerates these bundles.
+    source_doi = str(provenance.get("source_doi") or "").strip()
+    is_external = normalized.get("source_kind") == "external_literature"
+
+    source_metadata: Dict[str, Any] = {
+        "origin": provenance.get("origin", normalized.get("source_kind")),
+        "measurement_date": provenance.get("measurement_date"),
+        "generator": "matrix_experiment_intake",
+        "evidence_class": evidence_class,
+        "notes": provenance.get("notes") or normalized.get("analytical_context", {}).get("notes"),
+    }
+    # Everything else the payload declared about its own provenance survives verbatim.
+    _PROMOTED_TO_TOP_LEVEL = {
+        "identifier",
+        "identifier_scheme",
+        "identifier_note",
+        "shared_anchor",
+        "citation_audit_note",
+    }
+    for key, value in provenance.items():
+        if key in {"source_doi", "origin", "measurement_date", "notes"}:
+            continue
+        if key in _PROMOTED_TO_TOP_LEVEL:
+            continue
+        source_metadata.setdefault(key, value)
+
+    payload: Dict[str, Any] = {
         "benchmark_id": normalized.get("experiment_id"),
         "evidence_class": evidence_class,
-        "source_doi": provenance.get("source_doi") if normalized.get("source_kind") == "external_literature" else None,
-        "source_metadata": {
-            "origin": provenance.get("origin", normalized.get("source_kind")),
-            "measurement_date": provenance.get("measurement_date"),
-            "generator": "matrix_experiment_intake",
-            "evidence_class": evidence_class,
-            "notes": provenance.get("notes") or normalized.get("analytical_context", {}).get("notes"),
-        },
+        # An EMPTY source_doi is not the same as "no DOI": writing "" makes
+        # `matrix_source_anchor` report no external anchor and reclassifies a real
+        # literature hold-out as internal/synthetic. Emit the key only when there is one.
+        "source_doi": source_doi if (is_external and source_doi) else None,
+        "source_metadata": source_metadata,
         "precursors": precursors,
         "conditions": {
             "temp_C": normalized["conditions"]["temp_C"],
@@ -217,6 +248,18 @@ def build_matrix_experiment_benchmark_payload(payload: Mapping[str, Any]) -> Dic
         "protein_type": normalized.get("protein_type"),
         "denaturation_state": normalized.get("denaturation_state", 0.5),
     }
+
+    # The typed identifier pair and hand-added audit annotations live at the TOP level of a
+    # benchmark file (that is where `matrix_source_anchor` and the citation gate read them),
+    # so promote them out of provenance rather than burying them in source_metadata.
+    for key in _PROMOTED_TO_TOP_LEVEL:
+        if key in provenance and provenance[key] not in (None, ""):
+            payload[key] = provenance[key]
+
+    if payload.get("source_doi") is None:
+        payload.pop("source_doi")
+
+    return payload
 
 
 def materialize_matrix_experiment_benchmark(payload_or_path: Mapping[str, Any] | Path | str) -> Dict[str, Any]:

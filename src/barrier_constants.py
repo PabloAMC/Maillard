@@ -51,6 +51,27 @@ unmeasured in this benchmark, takes ~78% of a total budget that is itself the ri
 order of magnitude), not in the barriers.  Full profile:
 results/validation/sulfur_barrier_refit_hofmann.md.
 
+AUDIT 2026-08-27 (Wave I fix 8) — THE PARAGRAPH ABOVE IS NOW STALE, and is kept
+verbatim because it records what was true when the refit ran, not because it still
+describes the model.  Wave I fixed red-team finding H4: the `[HH]` reducing-equivalent
+token that gates `Thiol_Addition_Norfuraneol` had exactly one producer reachable from
+a cysteine/sugar system, the pyrazine aromatisation, so the whole sulfur branch was
+running behind a pyrazine bottleneck it has no business being behind.  Giving the token
+its own source (`2 cysteine -> cystine + 2[H]`, src/reaction_templates.py
+`_thiol_reductant_pool`) moved Hofmann1998 MFT from 61.25 ppb to 345.04 ppb against a
+342 ppb reference (5.58x UNDER -> 1.01x) and FFT from 61.44 to 187.49 ppb against 200.
+NO BARRIER WAS TOUCHED: `thiol_addition_norfuraneol` is still the 26.85 that Wave H
+fitted.  Consequences the next owner must not miss:
+  * the "5.6x under, deficit is in the allocation" diagnosis was an artefact of the
+    H4 coupling, so the Wave H profile in results/validation/sulfur_barrier_refit_hofmann.md
+    was computed on a network that no longer exists and must be RE-RUN before anyone
+    cites it again;
+  * 26.85 was selected as the conservative edge of an indifference band on a saturated
+    profile.  On the fixed network the profile is no longer saturated, so this value is
+    now an UNREFIT constant sitting near a benchmark it happens to reproduce.  That
+    agreement is a coincidence of two independent choices, NOT a calibration — do not
+    report it as one.  OPEN OWNER ITEM: re-run scripts/generators/refit_sulfur_barriers_hofmann.py.
+
 AUDIT 2026-08-26 — cross-file inconsistency: data/lit/arrhenius_params.yml
 disagrees with this table on several families while both claim anchoring
 (mutarotation 22.6 vs 5.0 kcal/mol; thiol_addition 29 kJ/mol there vs
@@ -79,6 +100,31 @@ FAST_BARRIERS: Dict[str, Tuple[float, str]] = {
     "ring_opening":         ( 5.0,  "Ring opening is near-barrierless (hemiacetal ⇌ open-chain)"),
 
     # ── Core Maillard cascade ───────────────────────────────────────
+    # AUDIT 2026-08-27 (Wave I fix 10, red-team H5) — SCHIFF/AMADORI ORDERING
+    # INVERSION between this table and data/lit/arrhenius_params.yml. BOTH
+    # VALUES UNCHANGED; this is an annotation, not a fix. At 150 C:
+    #     HERE (screening lane):  schiff 15.0 kcal -> t1/2 2.59e-4 s
+    #                             amadori 23.0 kcal -> t1/2 5.26 s
+    #                             => Schiff ~2.0e4 x FASTER
+    #     YAML (Cantera lane):    schiff A=1.5e11, 97.0 kJ -> t1/2 4.36 s
+    #                             amadori A=1.0e11, 59.0 kJ -> t1/2 1.33e-4 s
+    #                             => Amadori ~3.3e4 x FASTER
+    # The two tables disagree about which of the first two steps of the entire
+    # cascade is rate-determining, and disagree by ~6.6e8 in the ratio.
+    # AUTHORITY, stated plainly so nobody has to guess:
+    #   * THIS TABLE (FAST_BARRIERS) is authoritative for the SCREENING /
+    #     recommend lane — src/recommend.py, src/pipeline.py, and every
+    #     benchmark prediction through src/benchmark_validation.py. These are
+    #     FITTED calibration constants, as the module docstring says.
+    #   * data/lit/arrhenius_params.yml is authoritative for the CANTERA EXPORT
+    #     lane — get_arrhenius_params -> src/cantera_export.py ->
+    #     scripts/run_cantera_kinetics.py. Those claim literature anchoring.
+    # No code path reads both, which is how the inversion survived. RECONCILING
+    # THEM IS AN OPEN OWNER ITEM that Wave I did NOT fix: it needs the Martins
+    # condensation/rearrangement split re-derived (that YAML entry's own
+    # audit_flag flags the lumped-barrier double-count) and then a re-fit of the
+    # screening lane against the benchmark panel — calibration work with owner
+    # sign-off, not an annotation pass.
     "schiff_condensation":  (15.0,  "Yaylayan 1994: condensation ΔG‡ ≈ 12–20 kcal/mol; midpoint"),
     "schiff_base_hydrolysis":(8.0,  "Schiff base reversion; fast"),
     "amadori_rearrangement":(23.0,  "Martins 2003: 1,2-proton shift ΔG‡ ≈ 20–28; midpoint"),
@@ -121,6 +167,28 @@ FAST_BARRIERS: Dict[str, Tuple[float, str]] = {
     "glutathione_cleavage": (22.0,  "GSH peptide bond cleavage"),
 
     # ── Lipid Oxidation (Phase 19) ──────────────────────────────────
+    # AUDIT 2026-08-27 (Wave I fix 10, red-team H5) — KINETICALLY DEAD. VALUE
+    # UNCHANGED, arithmetic stated. 42.0 kcal/mol evaluated through this
+    # module's own `arrhenius_rate_constant` (which uses
+    # DEFAULT_REFERENCE_PREEXPONENTIAL = 1e11 for this family, since
+    # `lipid_homolysis` has no entry in data/lit/arrhenius_params.yml):
+    #     k(100 C) = 2.51e-14 1/s -> t1/2 = 8.8e5 years
+    #     k(140 C) = 6.04e-12 1/s -> t1/2 = 3.6e3 years
+    #     k(150 C) = 2.02e-11 1/s -> t1/2 = 1.09e3 years
+    # Cooking happens in minutes. This step therefore never fires, which means
+    # the entire radical chain it is supposed to initiate is switched off at the
+    # source — the same failure mode as the eight families that were falling
+    # through to DEFAULT_BARRIER = 45.0 before Wave G1 fix 8, except this one is
+    # explicit and so looked deliberate. Even with a physically proper O-O
+    # homolysis prefactor (1e15-1e16 1/s rather than 1e11) the half-life at
+    # 150 C is ~40 days, still dead. The real defect is that 42 kcal/mol is the
+    # GAS-PHASE unimolecular O-O bond dissociation enthalpy; in a food matrix
+    # hydroperoxide decomposition is METAL-CATALYSED (Fe(II)/Fe(III) redox
+    # cycling), with apparent barriers in the ~20-25 kcal/mol range — which is
+    # why src/lipid_oxidation.py has to model hexanal through a separate
+    # empirical Arrhenius path (Ea = 80 kJ/mol = 19.1 kcal/mol) instead of
+    # through this network family at all. Reconciling the two lipid lanes is an
+    # OPEN OWNER ITEM; Wave I changed no value.
     "lipid_homolysis":      (42.0,  "O-O bond cleavage in hydroperoxides; high barrier"),
     "beta_scission":        (22.0,  "β-scission of alkoxy radicals; moderate barrier"),
     "radical_crosstalk":    (15.0,  "Radical + H2S collisions; fast. NOTE 2026-08-27: the Radical_Crosstalk FAMILY was retired from the engine (it existed to consume fictitious elemental sulfur and quenched radicals by eating MFT). This key is retained because src/family_barrier_progress.py uses it as a family-coverage key"),
@@ -139,7 +207,9 @@ FAST_BARRIERS: Dict[str, Tuple[float, str]] = {
     "safety_risk_age":        (23.0,  "ESTIMATED. CML/CEL formation is a carbonyl-amine addition on the lysine epsilon-amine followed by rearrangement; taken as the Amadori analogue `amadori_rearrangement` (23.0, Martins 2003), the same 1,2-addition/proton-shift class"),
     "furanone_formation":     (28.0,  "ESTIMATED. Furanone closure is a cyclisation/dehydration of a deoxyosone; taken as the `dehydration` / `2,3-enolisation` analogue (28.0, Nursten 2005)"),
     "furanone_cyclisation":   (28.0,  "ESTIMATED. 1-deoxyosone -> norfuraneol/DMHF cyclodehydration; same analogue as `furanone_formation` (`dehydration`, 28.0). Deliberately NOT tuned to reproduce the output of the retired one-step MFT shortcut"),
-    "thiol_addition_norfuraneol": (26.85, "FITTED 2026-08-27 (Wave H) against cys_ribose_140C_Hofmann1998 ONLY, the sole surviving literature constraint on the sulfur branch. Norfuraneol + H2S -> MFT (van den Ouweland & Peer 1975, 10.1021/jf60200a038). Was 28.60, inherited from `thiol_addition` and from that key's PRE-G1 Hofmann window [28.10, 28.85] -- a window derived when MFT was made by the now-demoted one-step shortcut, so it did not survive the route change. Refit over the defensible range [23.30, 29.65] (the sulfur-addition class envelope already spanned by thiohemiacetal_formation and thiol_addition_hexose): profile min 0.6198 dex at the bottom, incumbent 0.6987 dex; 26.85 is the CONSERVATIVE EDGE of the 23.30-26.85 indifference band (within 0.01 dex of the optimum). The profile saturates inside the range -- no barrier value reproduces Hofmann's absolute yields, MFT stays 5.6x under. Reproducible: scripts/generators/refit_sulfur_barriers_hofmann.py; record in results/validation/sulfur_barrier_refit_hofmann.{json,md}"),
+    "thiol_addition_norfuraneol": (26.85, "RETIRED 2026-08-27 (Wave N): no step emits this family any more -- the norfuraneol + H2S -> MFT step was removed from `_furanone_and_mft_route` on isotope evidence (Cerny & Davidek 2003, 10.1021/jf026123f: norfuraneol spiked into a [13C5]ribose/cysteine system yields mainly 13C5-labelled MFT, so norfuraneol is 'unimportant as an intermediate'; Hofmann & Schieberle 1998, 10.1021/jf9705983, independently rank norfuraneol/cysteine as LESS effective MFT precursors). Entry kept for provenance only. Its history: FITTED 2026-08-27 (Wave H) against cys_ribose_140C_Hofmann1998 ONLY. Norfuraneol + H2S -> MFT (van den Ouweland & Peer 1975, 10.1021/jf60199a045 -- a genuine SYNTHESIS route, not the in-situ one). Was 28.60, inherited from `thiol_addition` and that key's PRE-G1 Hofmann window [28.10, 28.85]. Refit over [23.30, 29.65]: profile min 0.6198 dex, incumbent 0.6987 dex; 26.85 was the conservative edge of the indifference band. The 26.85 was therefore fitted THROUGH a contradicted route and does NOT transfer to `thiol_addition_pentodiulose`. Record: results/validation/sulfur_barrier_refit_hofmann.{json,md}"),
+    "thiol_addition_pentodiulose": (28.60, "ESTIMATED 2026-08-27 (Wave N). 1,4-dideoxypento-2,3-diulose + H2S -> MFT + 2 H2O, the isotope-evidenced in-situ MFT step (Cerny & Davidek 2003, 10.1021/jf026123f, proposed; Cerny & Davidek 2004, 10.1021/jf035265m, positionally confirmed with [1-13C]ribose). Initialised to the `thiol_addition` CLASS value 28.60, i.e. the pre-fit sulfur-addition analogue -- deliberately NOT the 26.85 that Wave H fitted through the retired norfuraneol route, and NOT tuned to reproduce any output. UNCONSTRAINED: no literature or QM constraint exists on this specific step yet; a refit against cys_ribose_140C_Hofmann1998 is possible but is an owner decision (the fit-target gate will then exclude that benchmark from scoring)"),
+    "deoxyosone_reduction": (28.0, "ESTIMATED 2026-08-27 (Wave N). 1-deoxy-2,3-pentodiulose + 2[H] -> 1,4-dideoxypento-2,3-diulose + H2O: formal C4 deoxygenation of the 1-deoxyosone via the sugar reductone pool, required by the Cerny & Davidek route (see `thiol_addition_pentodiulose`). No direct kinetic measurement exists; taken as the `dehydration`/`furanone_cyclisation` analogue (28.0, Nursten 2005) since the physical step is a dehydration-plus-reduction of the same substrate that `furanone_cyclisation` (28.0) cyclodehydrates -- setting the two equal deliberately expresses NO prior preference between the norfuraneol branch and the MFT branch at the 1-deoxyosone fork. UNCONSTRAINED; not tuned to reproduce any output"),
     "additive_thermal_degradation": (25.0, "ESTIMATED. Thiamine/GSH thermal cleavage; taken as the existing `thiamine_degradation` / `additive_degradation` analogues (both 25.0)"),
     "generalized_deamination": (21.0,  "ESTIMATED. Hydrolytic deamination of an alpha-aminoketone; taken as `enolisation_intermediate` (21.0), the directly analogous Amadori->deoxyosone + amine C-N cleavage"),
     "radical_propagation_o2":  (5.0,   "ESTIMATED. R. + O2 is effectively barrierless and diffusion-controlled (<2 kcal/mol in the literature); assigned this table's near-barrierless tier value (`ring_opening`/`mutarotation`, 5.0) rather than 0 so it does not become a numerically dominant rate"),

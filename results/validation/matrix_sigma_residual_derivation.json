@@ -38,10 +38,10 @@
       "benchmark_id": "soy_isolate_40C_PratapSingh2021",
       "lane": "soy_iso/ambient_slurry",
       "compound": "Hexanal",
-      "measured_ppb": 380.0,
+      "measured_ppb": 1621.71,
       "uncalibrated_predicted_ppb": 171.9111889062258,
-      "ln_residual": -0.7931932528266789,
-      "fold_error": 2.210443673955874
+      "ln_residual": -2.2442584271811894,
+      "fold_error": 9.433417396028894
     },
     {
       "benchmark_id": "soy_isolate_40C_PratapSingh2021",
@@ -51,26 +51,17 @@
       "uncalibrated_predicted_ppb": 420.9727650289041,
       "ln_residual": -1.7782727394602702,
       "fold_error": 5.919622852155053
-    },
-    {
-      "benchmark_id": "soy_isolate_40C_PratapSingh2021",
-      "lane": "soy_iso/ambient_slurry",
-      "compound": "1-Hexanol",
-      "measured_ppb": 120.0,
-      "uncalibrated_predicted_ppb": 52.83124341996207,
-      "ln_residual": -0.8203889956351689,
-      "fold_error": 2.271383223864432
     }
   ],
   "summary": {
-    "n_residuals": 6,
-    "mean_ln_residual": 1.2406372021884002,
-    "bias_fold": 3.4578160909092612,
-    "rms_ln_sigma": 2.861952369011696,
-    "centered_sd_ln": 2.8252272181269524,
+    "n_residuals": 5,
+    "mean_ln_residual": 1.362629406882212,
+    "bias_fold": 3.9064514598027946,
+    "rms_ln_sigma": 3.252049520608033,
+    "centered_sd_ln": 3.3013382104812377,
     "sigma_90pct_ci": {
-      "sigma_low_90": 1.975562024461906,
-      "sigma_high_90": 5.482506412180693
+      "sigma_low_90": 2.185588223519112,
+      "sigma_high_90": 6.795781533947968
     },
     "shipped_uncalibrated_sigma": 2.86,
     "shipped_within_ci": true

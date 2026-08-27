@@ -4,10 +4,42 @@ Models generation of key off-flavor aldehydes from polyunsaturated fatty acids.
 
 Kinetic constants (Arrhenius prefactor / activation energy / branching / per-matrix
 lipid profiles) live in ``data/lit/lipid_oxidation_calibration.json`` (S27 Workstream A,
-2026-06-22). The hydroperoxide extent is capped at physical 100% conversion via a
-first-order saturation so high temperature x time no longer extrapolates without bound;
-the saturating form is linear at low extent, so previously calibrated low-temperature
-anchors are preserved.
+2026-06-22).
+
+CONVERSION CAP: EXISTS, SHIPS DISABLED
+--------------------------------------
+2026-08-27 (Wave I fix 10, red-team H5). This docstring used to assert that "the
+hydroperoxide extent is capped at physical 100% conversion via a first-order
+saturation so high temperature x time no longer extrapolates without bound". That
+was FALSE as shipped, and had been since the mechanism landed. The mechanism
+(``_saturated_extent`` / ``_conversion_factor``) is real and unit-tested, but
+``kinetics.max_conversion_fraction`` is ``null`` in the tracked calibration JSON,
+which means ``_conversion_factor`` returns exactly 1.0 and BOTH public entry
+points (``predict_hexanal_generation``, ``predict_lop_generation``) run the
+unbounded pre-S27 linear model. High temperature x time DOES still extrapolate
+without bound in the shipped configuration.
+
+The JSON's own ``_provenance.saturation_rationale`` says why, and it is quoted
+verbatim here rather than paraphrased, INCLUDING the last clause, because the
+last clause is the part a paraphrase would lose:
+
+    "EMPIRICAL FINDING (2026-06-22): the validated benchmark envelope reaches
+    progress ~= 0.06 (100C/45min) and the external hold-out failures sit in the
+    SAME progress regime (HME ~0.07), so a cap aggressive enough to bend the
+    hold-out also perturbs in-panel trace points (Hexanal/Nonanal ~2e-4 ppb with
+    near-zero-width Monte-Carlo CIs) and regressed the headline 37/48 -> 31/48
+    even at c=12. The hold-out over-prediction is therefore a per-(matrix,
+    process_state) CALIBRATION gap (owned by Workstream B: process-state-aware
+    uncertainty + curation), NOT a kinetic-shape problem. The cap is therefore
+    SHIPPED DISABLED (null): predict_hexanal_generation/predict_lop_generation
+    are byte-identical to the pre-S27 linear model by default, so the headline
+    stays 37/48. The mechanism + _saturated_extent are retained, unit-tested,
+    and ready to be re-enabled alongside the Workstream-B CI re-sizing."
+
+Read that plainly: a physically-motivated cap was switched off in part because
+switching it on made the reported headline worse. That may well be the right
+call on the evidence, but it is a headline-preservation decision and it must be
+reported as one wherever the 37/48 headline is quoted.
 """
 
 import json
@@ -373,12 +405,21 @@ def predict_hexanal_generation(
     """
     Frankel 1998 radical chain model implementation.
 
-    The hydroperoxide extent is capped at physical 100% conversion (S27): the
-    matrix-benchmark path consumes ``total_hydroperoxide`` as its oxidation load,
-    so an unbounded Arrhenius x time term previously let out-of-calibration
-    process states (roasting, extrusion) extrapolate to absurd loads. The
-    saturating extent is linear in the calibrated low-temperature regime, so the
-    registry-pinned anchors are unchanged.
+    2026-08-27 (Wave I fix 10, red-team H5) — CORRECTED DOCSTRING. This used to
+    claim "the hydroperoxide extent is capped at physical 100% conversion (S27)".
+    It is not, as shipped. ``kinetics.max_conversion_fraction`` is ``null`` in
+    data/lit/lipid_oxidation_calibration.json, so ``_conversion_factor`` returns
+    exactly 1.0 and the line below is the unbounded pre-S27 linear term. The
+    out-of-calibration process states the old text said were now bounded
+    (roasting, extrusion) STILL extrapolate without bound.
+
+    The cap mechanism exists and is unit-tested; it ships DISABLED. The JSON's
+    ``_provenance.saturation_rationale`` records that enabling it "regressed the
+    headline 37/48 -> 31/48 even at c=12" and that it is "SHIPPED DISABLED
+    (null) ... so the headline stays 37/48". The full quotation, including that
+    headline-preservation clause, is in this module's docstring. Do not restate
+    the cap as active anywhere without first setting a non-null
+    ``max_conversion_fraction``.
     """
     kinetics = _kinetics()
     linoleic_fraction = lipid_profile.linoleic_acid_pct / 100.0

@@ -22,9 +22,18 @@ def test_fft_bottleneck_resolution():
         
         # We need the barrier DB
         db_path = "results/maillard_results.db"
-        if not os.path.exists(db_path):
-            pytest.skip("Barrier database not found. Skipping full simulation.")
-            
+        # TIGHTENED 2026-08-27 (Wave J2, red-team finding: dead/self-excusing skips). This
+        # was `pytest.skip("Barrier database not found. Skipping full simulation.")`.
+        # results/maillard_results.db is TRACKED, so the condition never fires -- and if it
+        # ever did, skipping is the wrong response: this test's entire subject is the
+        # simulation that the database drives, so a missing database means the test verified
+        # nothing while reporting a clean lane.
+        assert os.path.exists(db_path), (
+            f"barrier database {db_path} is missing; it is tracked in git and is the input "
+            f"this test exists to exercise"
+        )
+
+
         run_simulation(
             barriers_json=db_path,
             precursors=precursors,

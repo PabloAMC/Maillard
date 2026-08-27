@@ -4,17 +4,17 @@
   "enumeration_temperature_celsius": 150.0,
   "max_generations": 3,
   "battery_step_counts": {
-    "core_pentose_cysteine_lysine": 315,
-    "hexose_asparagine": 27,
-    "lipid_hydroperoxide_seed": 25,
+    "core_pentose_cysteine_lysine": 122,
+    "hexose_asparagine": 21,
+    "lipid_hydroperoxide_seed": 24,
     "unoxidised_lipid_plus_o2": 0,
-    "thiamine": 44,
-    "glutathione": 21,
+    "thiamine": 30,
+    "glutathione": 17,
     "ascorbate": 0,
     "polyphenol": 3,
     "phospholipid_headgroup": 0,
     "nucleotide": 3,
-    "serine_lysine_dha": 76
+    "serine_lysine_dha": 36
   },
   "emitted_reaction_families": {
     "Furanone_Formation": [
@@ -96,6 +96,13 @@
       "polyphenol",
       "thiamine"
     ],
+    "Thiol_Oxidation": [
+      "core_pentose_cysteine_lysine",
+      "lipid_hydroperoxide_seed",
+      "nucleotide",
+      "polyphenol",
+      "thiamine"
+    ],
     "Aminoketone_Condensation": [
       "core_pentose_cysteine_lysine",
       "glutathione",
@@ -133,15 +140,12 @@
       "serine_lysine_dha",
       "thiamine"
     ],
-    "Thiol_Addition_Norfuraneol": [
-      "core_pentose_cysteine_lysine"
-    ],
-    "Thiol_Addition_Legacy_Shortcut": [
-      "core_pentose_cysteine_lysine"
-    ],
-    "Thiol_Oxidation": [
+    "Deoxyosone_Reduction": [
       "core_pentose_cysteine_lysine",
-      "thiamine"
+      "glutathione"
+    ],
+    "Thiol_Addition_Pentodiulose": [
+      "core_pentose_cysteine_lysine"
     ],
     "Safety_Risk_AGE": [
       "core_pentose_cysteine_lysine",
@@ -152,13 +156,8 @@
     ],
     "Lipid_Schiff_Base": [
       "core_pentose_cysteine_lysine",
-      "glutathione",
-      "hexose_asparagine",
       "lipid_hydroperoxide_seed",
-      "nucleotide",
-      "polyphenol",
-      "serine_lysine_dha",
-      "thiamine"
+      "serine_lysine_dha"
     ],
     "Safety_Risk_Acrylamide": [
       "hexose_asparagine"
@@ -206,6 +205,7 @@
         "Amadori_Rearrangement",
         "Aminoketone_Condensation",
         "Cysteine_Degradation",
+        "Deoxyosone_Reduction",
         "Enolisation_1_2",
         "Enolisation_2_3",
         "Enolisation_2_3_Amadori",
@@ -219,13 +219,14 @@
         "Thiohemiacetal_Formation",
         "Thiol_Addition_H2",
         "Thiol_Addition_Hexose_Legacy_Shortcut",
-        "Thiol_Addition_Legacy_Shortcut",
-        "Thiol_Addition_Norfuraneol",
+        "Thiol_Addition_Pentodiulose",
         "Thiol_Dehydration",
         "Thiol_Oxidation"
       ],
       "mapped_but_not_emitted_by_this_battery": [
-        "Heyns_Rearrangement"
+        "Heyns_Rearrangement",
+        "Thiol_Addition_Legacy_Shortcut",
+        "Thiol_Addition_Norfuraneol"
       ],
       "implementation": "20 reaction template(s) emitted by src/reaction_templates.py / src/smirks_engine.py"
     },

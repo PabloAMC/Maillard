@@ -613,17 +613,21 @@ def test_hydrolysate_supported_sulfur_observability_uses_peptide_release_uplift_
 
     assert soy_fft == pytest.approx(0.13 * expected_hydrolysate_uplift * 1.25)
     assert wheat_fft == pytest.approx(soy_fft * (0.58 / 1.25))
-    # RE-PINNED 2026-08-27 (Wave H). The Methional `base_factor` was RE-DERIVED
-    # 0.0045 -> 0.05623 against the two literature xylose HVP benchmarks -- the same two
-    # it was originally fitted to, with the barriers frozen -- after the Wave G1 chemistry
-    # rebuild moved the chemistry underneath it. The optimum is interior and identified
-    # (unconstrained optimum 0.0639; 0.05623 is the conservative edge of the indifference
-    # band), and it takes the residuals from 16.2x/12.4x under to 1.30x under / 1.01x.
-    # Record: results/validation/hydrolysate_observability_rederivation.md; generator:
-    # scripts/generators/rederive_hydrolysate_observability.py.
+    # RE-PINNED 2026-08-27 (Wave I) — REVERTED to the pre-Wave-H value, 0.05623 -> 0.0045.
+    # Wave H had re-derived this factor 0.0045 -> 0.05623 against the two literature xylose
+    # HVP benchmarks. The cold-start red team then established that BOTH of those
+    # benchmarks are fabricated: the cited paper 10.1007/s10068-022-01194-w reacts protein
+    # hydrolysates with glucose/fructose at pH 7.5 for 90 min and reports only RELATIVE
+    # PEAK AREAS; it never mentions FFT or MFT and gives no absolute concentration for any
+    # analyte, so the conc_ppb values that fit was solved against have no possible source.
+    # Both files are now quarantined, the re-derivation record is RETRACTED, and the
+    # constant is back to its pre-Wave-H value.
+    # See: data/benchmarks/quarantined/README.md (Wave I section);
+    #      results/validation/hydrolysate_observability_rederivation.md (RETRACTED banner);
+    #      src/recommend.py::_HYDROLYSATE_SULFUR_OBSERVABILITY_PROFILES.
     # The property this test is named for -- that Methional is NOT source-sensitive while
-    # the thiols are -- is unchanged and is what the assertion below still checks.
-    assert soy_methional == pytest.approx(0.05623)
+    # the thiols are -- is unchanged, and is what the assertion below still checks.
+    assert soy_methional == pytest.approx(0.0045)
     assert wheat_fft < soy_fft
 
 

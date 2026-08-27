@@ -55,17 +55,87 @@ def test_sample_offset_vectors_reproducible_partitioned():
 
 
 def test_barrier_offsets_context_restores_environ():
+    """RE-PINNED 2026-08-27 (Wave I): the context manager now ROUTES each prior key.
+
+    This test used to assert that `_barrier_offsets({"schiff_condensation": 1.5})` wrote
+    exactly `{"schiff_condensation": 1.5}` into the environment. It did — and that was the
+    bug, not the contract. `barrier_constants.get_barrier()` resolves BARRIER_OFFSETS
+    against the normalised RAW family label before canonicalising, so the key
+    `schiff_condensation` never matched the label the engine emits
+    (`Schiff_Base_Formation`). Measured on this tree: **10 of the 14 keys in
+    DEFAULT_FAMILY_PRIORS moved no barrier at all**, so ~70% of the Monte-Carlo barrier
+    channel was inert and every published CI was narrower than the priors it claimed to
+    sample.
+
+    `_barrier_offsets` now expands each prior onto every engine label that canonicalises to
+    the same family. `lipid_schiff_base` appears alongside `schiff_base_formation` because
+    `get_barrier()` genuinely treats them as one canonical family; a prior on that family
+    legitimately moves both.
+
+    The property this test is named for -- that the environment is restored exactly, on
+    both the had-a-value and had-no-value paths -- is unchanged and still asserted.
+    """
     sentinel = "{\"original\": 1.0}"
     os.environ["BARRIER_OFFSETS"] = sentinel
     try:
         with _barrier_offsets({"schiff_condensation": 1.5}):
-            assert json.loads(os.environ["BARRIER_OFFSETS"]) == {"schiff_condensation": 1.5}
+            written = json.loads(os.environ["BARRIER_OFFSETS"])
+            # The prior key itself is still written (harmless), plus the labels that bite.
+            assert written["schiff_condensation"] == 1.5
+            assert written["schiff_base_formation"] == 1.5
+            assert set(written.values()) == {1.5}
         assert os.environ["BARRIER_OFFSETS"] == sentinel
     finally:
         os.environ.pop("BARRIER_OFFSETS", None)
     with _barrier_offsets({"amadori_rearrangement": -0.5}):
         assert "BARRIER_OFFSETS" in os.environ
     assert "BARRIER_OFFSETS" not in os.environ
+
+
+def test_every_default_family_prior_actually_moves_a_barrier():
+    """2026-08-27 (Wave I): the regression that would have caught the inert MC channel.
+
+    Before the routing fix, 10 of 14 priors were exact no-ops and nothing detected it: the
+    sampler ran, the artifact was written, and the intervals were simply too narrow. This
+    asserts the property directly -- perturb one prior, and at least one barrier the engine
+    can emit must move.
+    """
+    import src.barrier_constants as barrier_constants
+    from src.uncertainty_propagation import DEFAULT_FAMILY_PRIORS
+    from src.family_sensitivity import ENGINE_FAMILY_LABELS
+
+    def value(label: str) -> float:
+        raw = barrier_constants.get_barrier(label)
+        return float(raw[0]) if isinstance(raw, tuple) else float(raw)
+
+    os.environ.pop("BARRIER_OFFSETS", None)
+    baseline = {label: value(label) for label in ENGINE_FAMILY_LABELS}
+
+    inert = []
+    for key in DEFAULT_FAMILY_PRIORS:
+        with _barrier_offsets({key: -3.0}):
+            moved = [
+                label for label in ENGINE_FAMILY_LABELS
+                if abs(value(label) - baseline[label]) > 1e-9
+            ]
+        if not moved:
+            inert.append(key)
+
+    # One prior remains inert, and for a DIFFERENT reason than the routing defect: the
+    # canonical family `dehydration` exists in FAST_BARRIERS but the engine never emits a
+    # label that canonicalises to it. It emits `Sugar_Dehydration` and `Thiol_Dehydration`,
+    # which canonicalise to themselves. So this prior samples a family that is not in the
+    # network. That is a live finding, NOT something to paper over by re-pointing the prior
+    # here: which dehydration barrier the MC should perturb (one, the other, or both) is a
+    # science decision for the owner, and silently choosing one would change the published
+    # intervals without a stated reason. Named explicitly so it cannot be forgotten, and so
+    # that any NEW inert prior -- or this one becoming live -- fails the test.
+    KNOWN_INERT = {"dehydration"}
+    assert set(inert) == KNOWN_INERT, (
+        f"expected exactly {sorted(KNOWN_INERT)} to be inert, got {sorted(inert)}. "
+        "An inert prior silently narrows every published confidence interval; a newly "
+        "live one changes them. Either way, say so in the artifact before changing this."
+    )
 
 
 def test_percentile_basic():
@@ -222,8 +292,16 @@ def _cached_library_keys(n=3):
 
 def test_calibrated_runtime_envelope_unchanged_by_default():
     keys = _cached_library_keys()
-    if not keys:
-        pytest.skip("no cached uncertainty library available")
+    # TIGHTENED 2026-08-27 (Wave J2, red-team finding: dead/self-excusing skips). This was
+    # `if not keys: pytest.skip("no cached uncertainty library available")`. The library is
+    # results/validation/prediction_uncertainty.json, which is force-added and TRACKED, so
+    # the condition is never true and the skip was dead code -- but if the artifact were
+    # ever lost, the skip would have hidden that fact by turning both of these tests green.
+    # An absent uncertainty library is a failure, not a reason to stand down.
+    assert keys, (
+        "no cached uncertainty library available: "
+        "results/validation/prediction_uncertainty.json is tracked and must be present"
+    )
     predicted = {k: 100.0 for k in keys}
     default = build_formulation_uncertainty_envelopes(predicted)
     explicit = build_formulation_uncertainty_envelopes(predicted, uncalibrated=False)
@@ -234,8 +312,11 @@ def test_calibrated_runtime_envelope_unchanged_by_default():
 
 def test_uncalibrated_runtime_envelope_widens_to_structural_floor():
     keys = _cached_library_keys()
-    if not keys:
-        pytest.skip("no cached uncertainty library available")
+    # TIGHTENED 2026-08-27 (Wave J2) -- see the note on the test above.
+    assert keys, (
+        "no cached uncertainty library available: "
+        "results/validation/prediction_uncertainty.json is tracked and must be present"
+    )
     predicted = {k: 100.0 for k in keys}
     cal = build_formulation_uncertainty_envelopes(predicted)
     unc = build_formulation_uncertainty_envelopes(predicted, uncalibrated=True)

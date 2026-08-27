@@ -95,6 +95,27 @@ _HOLDOUT_BUNDLE_SPECS: Tuple[Dict[str, Any], ...] = (
             "replicates": 3,
             "notes": "Raw-pea flour baseline from Bi et al. (2020). Benchmark conditions are copied from the closest executable pea matrix-only lane because the literature point is a structural hold-out, not a closure benchmark.",
         },
+        "provenance_overrides": {
+            "shared_anchor": True,
+            "citation_audit_note": {
+                "date": "2026-08-26",
+                "status": "verified_correct_shared_anchor",
+                "basis": (
+                    "10.1021/acs.jafc.9b07711 (Bi et al. 2020, key aroma compounds in raw and "
+                    "roasted peas) is the correct anchor here and for "
+                    "external_validation_bi_2020_raw_pea_hexanal / "
+                    "external_validation_bi_2020_roasted_pea_hexanal / intake id "
+                    "acs_2020_raw_pea_hexanal_baseline. It was ALSO reused in "
+                    "data/lit/benchmark_intake_registry.json for the unrelated EGCG/deoxyosone "
+                    "claim (jafc_2020_egcg_deoxyosone_trapping); that anchor has been repointed "
+                    "to 10.1021/acs.jafc.0c05098, so this DOI is no longer double-counted across "
+                    "unrelated claims. 2026-08-27 (Wave I): this note used to live only in the "
+                    "generated benchmark file, where a regeneration deleted it -- it is now "
+                    "carried in the bundle spec so it survives. See doi_repair_reversal on the "
+                    "bi_2020 anchors in data/lit/flavor_reference_payloads.json."
+                ),
+            },
+        },
         "denaturation_state": 0.0,
     },
     {
@@ -152,7 +173,24 @@ _HOLDOUT_BUNDLE_SPECS: Tuple[Dict[str, Any], ...] = (
             "headspace_method": "HS-SPME-GC-MS plus GC-O",
             "quantification_mode": "internal_standard_calibrated",
             "replicates": 6,
-            "notes": "Band midpoints are used as hold-out reference values; uncertainty is derived from the reported band width.",
+            "notes": "Band midpoints are used as hold-out reference values; uncertainty is derived from the reported band width. 2026-08-27 (Wave I): every measured row now carries value_provenance=band_geometric_midpoint plus band_min_ppb/band_max_ppb, because a geometric midpoint of a 10-12x band is a construction of ours, not a measurement.",
+        },
+        # 2026-08-27 (Wave I): typed identifier carried in the SPEC so a regeneration
+        # cannot drop it. This bundle's source is a thesis with no DOI or handle; before
+        # this, regenerating wrote `source_doi: ""` instead, which would have reclassified
+        # a real external hold-out as internal/synthetic.
+        "provenance_overrides": {
+            "identifier": "Liu, Y. (2023), thesis, North Carolina State University Institutional Repository",
+            "identifier_scheme": "citation",
+            "identifier_note": (
+                "2026-08-27: retyped from source_doi 'LiuThesis2023', which was never a DOI. "
+                "No DOI or handle is issued for this thesis record. The peer-reviewed version "
+                "of the same dataset is Liu, Cadwallader & Drake (2023), Food Chemistry "
+                "406:134998, doi 10.1016/j.foodchem.2022.134998 - anchored separately in "
+                "data/lit and deliberately NOT used here: this bundle stays "
+                "external_validation_only (hold-out), and its classification is unchanged by "
+                "the retyping."
+            ),
         },
         "denaturation_state": 0.0,
     },
@@ -248,6 +286,9 @@ class ExternalCandidate:
     band_high: Optional[float]
     eligibility: str
     eligibility_reason: str
+    # 2026-08-27 (Wave I). What the scored number IS. See VALUE_PROVENANCE_NOTES.
+    value_provenance: str = "reported_point_value"
+    value_provenance_note: str = ""
 
     def to_jsonable(self) -> Dict[str, Any]:
         return {
@@ -264,7 +305,36 @@ class ExternalCandidate:
             "band_high": self.band_high,
             "eligibility": self.eligibility,
             "eligibility_reason": self.eligibility_reason,
+            "value_provenance": self.value_provenance,
+            "value_provenance_note": self.value_provenance_note,
         }
+
+
+# 2026-08-27 (Wave I) — hold-out value provenance.
+#
+# The cold-start red team found that hold-out "measurements" were being reported with an
+# air of measurement they had not earned: 17-significant-figure values next to an invented
+# `measurement_date`, and one value that the repo had computed from its own constants.
+# Nothing here is fabricated -- the underlying anchors are real -- but a scored hold-out
+# point must say which of these it is, because they support very different claims.
+VALUE_PROVENANCE_NOTES = {
+    "reported_point_value": (
+        "A single concentration reported by the source. Scoring this against a prediction "
+        "is a genuine test."
+    ),
+    "band_geometric_midpoint": (
+        "The source reports a RANGE, not a value. The scored number is the geometric "
+        "midpoint sqrt(min*max) of that range -- a construction of ours, not a measurement. "
+        "The honest uncertainty is the band itself, which is typically a factor of several; "
+        "a prediction landing inside such a band is weak evidence."
+    ),
+    "derived_from_oav_and_repo_threshold": (
+        "The scored number is NOT independently measured: it is an odour-activity value "
+        "from the source multiplied by an odour-detection threshold taken from THIS REPO. "
+        "It therefore partly encodes one of our own constants, and it moves if we change "
+        "that constant. Treat it as a consistency check, never as an external measurement."
+    ),
+}
 
 
 @dataclass(frozen=True)
@@ -467,6 +537,15 @@ def _bundle_spec_for_anchor(anchor_id: str) -> Optional[Dict[str, Any]]:
 
 
 def _publication_year_proxy(citation: str) -> str:
+    """RETIRED 2026-08-27 (Wave I) — kept only so importers do not break.
+
+    This used to manufacture a `measurement_date` of "<publication year>-01-01" and write
+    it into the hold-out bundle's provenance. No such date was ever measured, reported or
+    known: it was the citation's year with a January 1st stapled to it, and it made a
+    synthesized bundle look like a dated laboratory record. Hold-out provenance now carries
+    `measurement_date: "not_applicable"` plus the real publication year in a field that
+    says it is a publication year.
+    """
     digits = [part for part in str(citation).split() if part.strip("(),")[:4].isdigit()]
     for part in digits:
         cleaned = "".join(ch for ch in part if ch.isdigit())
@@ -475,21 +554,70 @@ def _publication_year_proxy(citation: str) -> str:
     return "unspecified"
 
 
+def _publication_year(citation: str) -> str:
+    """The source's publication year as a bare year string, or "unspecified"."""
+    for part in str(citation).split():
+        cleaned = "".join(ch for ch in part if ch.isdigit())
+        if len(cleaned) >= 4 and cleaned[:4].isdigit():
+            return cleaned[:4]
+    return "unspecified"
+
+
 def _measurement_row(candidate: ExternalCandidate) -> Dict[str, Any]:
+    """Build one `measured_volatiles` row, labelled with what the number actually is.
+
+    2026-08-27 (Wave I). Three changes, all forced by the cold-start red team:
+
+    1.  The value is rounded to 4 significant figures. It used to be written at full
+        float precision -- 51.96152422706632 for a number that is sqrt(15 * 180) -- which
+        advertised a measurement precision that does not exist anywhere in the chain.
+    2.  Every row carries `value_provenance` (and its note) so a reader cannot mistake a
+        band midpoint or a repo-derived number for a reported measurement.
+    3.  For band-derived rows the band itself is carried through as
+        `band_min_ppb`/`band_max_ppb`. `uncertainty_pct` is kept for schema compatibility
+        but is explicitly labelled: it is the UPWARD half-width of a geometric band, not a
+        symmetric analytical uncertainty, and the band is asymmetric in linear space by
+        construction.
+    """
     if candidate.point_value is None:
         raise ValueError(f"Candidate {candidate.anchor_id} has no numeric point value")
-    row: Dict[str, Any] = {"conc_ppb": float(candidate.point_value)}
+
+    row: Dict[str, Any] = {"conc_ppb": _round_sig(float(candidate.point_value), 4)}
+    row["value_provenance"] = candidate.value_provenance
+    note = candidate.value_provenance_note or VALUE_PROVENANCE_NOTES.get(
+        candidate.value_provenance, ""
+    )
+    if note:
+        row["value_provenance_note"] = note
+
     if (
         candidate.band_low is not None
         and candidate.band_high is not None
         and candidate.point_value > 0.0
     ):
+        row["band_min_ppb"] = _round_sig(float(candidate.band_low), 4)
+        row["band_max_ppb"] = _round_sig(float(candidate.band_high), 4)
+        row["band_span_fold"] = _round_sig(
+            float(candidate.band_high) / float(candidate.band_low), 3
+        ) if candidate.band_low > 0 else None
         half_span = max(
             abs(candidate.point_value - candidate.band_low),
             abs(candidate.band_high - candidate.point_value),
         )
         row["uncertainty_pct"] = round((half_span / candidate.point_value) * 100.0, 1)
+        row["uncertainty_pct_basis"] = (
+            "upward half-width of the reported band relative to its geometric midpoint; "
+            "NOT a symmetric analytical uncertainty. Read band_min_ppb/band_max_ppb instead."
+        )
     return row
+
+
+def _round_sig(value: float, digits: int) -> float:
+    """Round to `digits` significant figures. 2026-08-27 (Wave I)."""
+    if value == 0.0 or not math.isfinite(value):
+        return float(value)
+    exponent = math.floor(math.log10(abs(value)))
+    return float(round(value, -(exponent - digits + 1)))
 
 
 def _unit_is_ppb_equivalent(units: str) -> bool:
@@ -528,6 +656,19 @@ def build_inventory(
             numeric = anchor.get("numeric_band_or_point", {}) or {}
             point, lo, hi = _extract_numeric(numeric)
             canonical = _canonicalise_compound(compound)
+
+            # 2026-08-27 (Wave I). An anchor may DECLARE how its number was obtained
+            # (`value_provenance`); otherwise it is inferred from the numeric block shape.
+            # A band's scored value is a geometric midpoint we constructed, and saying so
+            # is the whole point.
+            declared_provenance = str(anchor.get("value_provenance", "") or "").strip()
+            if declared_provenance:
+                value_provenance = declared_provenance
+            elif lo is not None and hi is not None:
+                value_provenance = "band_geometric_midpoint"
+            else:
+                value_provenance = "reported_point_value"
+            value_provenance_note = str(anchor.get("value_provenance_note", "") or "").strip()
 
             in_panel = _compound_in_panel(canonical, panel)
             registry_row = registry_lookup.get(anchor_id, {})
@@ -587,6 +728,8 @@ def build_inventory(
                     band_high=hi,
                     eligibility=eligibility,
                     eligibility_reason=reason,
+                    value_provenance=value_provenance,
+                    value_provenance_note=value_provenance_note,
                 )
             )
 
@@ -755,12 +898,27 @@ def build_holdout_bundles(
                 "origin": "external_literature",
                 "source_reference": primary_citation,
                 "source_doi": dois[0] if dois else "",
-                "measurement_date": _publication_year_proxy(primary_citation),
+                # 2026-08-27 (Wave I): was `_publication_year_proxy(...)`, which wrote
+                # "<year>-01-01" -- an invented date that made a synthesized bundle read
+                # like a dated lab record. There is no measurement date for these bundles.
+                "measurement_date": "not_applicable",
+                "measurement_date_note": (
+                    "This bundle is SYNTHESIZED from published anchors; no measurement date "
+                    "exists. Until 2026-08-27 this field carried a fabricated "
+                    "'<publication year>-01-01'."
+                ),
+                "source_publication_year": _publication_year(primary_citation),
                 "notes": (
                     "External validation hold-out synthesized from flavor_reference_payloads.json; "
                     "never use for calibration or promotion. "
                     + " ".join(notes)
                 ).strip(),
+                # 2026-08-27 (Wave I). Typed identifiers and hand-written audit annotations
+                # live in the bundle SPEC, not only in the generated file, so a regeneration
+                # cannot silently delete them. This closes the "materialize_external_validation
+                # typed-identifier drift" item recorded as FOUND-NOT-FIXED at the end of
+                # Wave G3.
+                **dict(spec.get("provenance_overrides", {}) or {}),
             },
             "benchmark_alignment": dict(spec.get("benchmark_alignment", {})),
             "analytical_context": {
@@ -879,11 +1037,21 @@ def build_external_validation_report(
                 local_folds.append(fold_error)
             inside_ci = bool(compound.get("inside_ci", False))
             inside_ci_count += int(inside_ci)
+            # 2026-08-27 (Wave I). Carry the hold-out point's value provenance through to
+            # the report. Half of these eight "measurements" are not measurements: two are
+            # geometric midpoints of 10-12x bands, and two are the source's OAV multiplied
+            # by this repo's own hexanal odour threshold. A hold-out score means different
+            # things for each, and the report has to say which it is scoring.
+            provenance = _holdout_value_provenance(
+                Path(str(benchmark.get("bench_file", ""))), str(compound.get("compound", ""))
+            )
             compound_rows.append(
                 {
                     **dict(compound),
                     "abs_log10_error": abs_log10_error,
                     "fold_error": fold_error,
+                    "value_provenance": provenance,
+                    "is_direct_measurement": provenance == "reported_point_value",
                 }
             )
 
@@ -907,6 +1075,126 @@ def build_external_validation_report(
     summary = dict(envelope_payload.get("summary", {}))
     median_abs_log10_error = statistics.median(abs_log10_errors) if abs_log10_errors else None
     median_accuracy_fold = (10 ** median_abs_log10_error) if median_abs_log10_error is not None else None
+
+    # 2026-08-27 (Wave I). Two honesty blocks the red team asked for.
+    #
+    # (a2) GENUINE EXTRAPOLATION vs RE-SCORING. A bundle whose executable conditions are
+    #      COPIED from an in-panel benchmark is not testing extrapolation at all: it
+    #      re-scores that anchor's prediction at that anchor's own conditions. Only bundles
+    #      at a genuinely new process state (roasting, HME extrusion) test out-of-envelope
+    #      transfer. This was stated in prose before; it is computed here so the headline
+    #      cannot drift from it.
+    rescoring_rows: List[Dict[str, Any]] = []
+    extrapolation_rows: List[Dict[str, Any]] = []
+    extrapolation_ids: List[str] = []
+    for benchmark in benchmark_rows:
+        is_rescoring = _holdout_is_condition_copy(Path(str(benchmark.get("bench_file", ""))))
+        benchmark["holdout_kind"] = "in_panel_rescoring" if is_rescoring else "genuine_extrapolation"
+        if is_rescoring:
+            rescoring_rows.extend(benchmark.get("compounds", []) or [])
+        else:
+            extrapolation_rows.extend(benchmark.get("compounds", []) or [])
+            extrapolation_ids.append(str(benchmark.get("benchmark_id")))
+
+    # (a) MEASUREMENT vs DERIVED. Four of the eight hold-out points are not measurements:
+    #     two Liu bands whose scored value is a geometric midpoint we constructed, and two
+    #     Bi points computed as the source's OAV times this repo's own hexanal odour
+    #     threshold. The latter partly encode one of our own constants and MOVE if that
+    #     constant is corrected, so they can only ever be a consistency check.
+    provenance_counts: Dict[str, int] = {}
+    direct_rows: List[Dict[str, Any]] = []
+    derived_rows: List[Dict[str, Any]] = []
+    for benchmark in benchmark_rows:
+        for compound in benchmark.get("compounds", []) or []:
+            key = str(compound.get("value_provenance", "reported_point_value"))
+            provenance_counts[key] = provenance_counts.get(key, 0) + 1
+            (direct_rows if compound.get("is_direct_measurement") else derived_rows).append(compound)
+
+    def _coverage(rows: List[Dict[str, Any]]) -> Dict[str, Any]:
+        total = len(rows)
+        hits = sum(1 for row in rows if row.get("inside_ci"))
+        return {"hits": hits, "total": total, "rate": (hits / total) if total else None}
+
+    summary["holdout_kind_split"] = {
+        "genuine_extrapolation": {
+            **_coverage(extrapolation_rows),
+            "benchmarks": extrapolation_ids,
+            "meaning": (
+                "Bundles at a process state the calibration panel does not contain "
+                "(roasting, HME extrusion). These are the only rows that test transfer."
+            ),
+        },
+        "in_panel_rescoring": {
+            **_coverage(rescoring_rows),
+            "meaning": (
+                "Bundles whose executable conditions are COPIED from an in-panel benchmark. "
+                "Scoring them re-runs that anchor's prediction at that anchor's own "
+                "conditions; it is a reproducibility comparison, not an extrapolation test."
+            ),
+        },
+    }
+
+    summary["value_provenance_split"] = {
+        "counts": provenance_counts,
+        "direct_measurement": _coverage(direct_rows),
+        "derived_or_constructed": _coverage(derived_rows),
+        "note": (
+            "`band_geometric_midpoint` rows score against a number WE constructed as "
+            "sqrt(min*max) of a reported range; `derived_from_oav_and_repo_threshold` rows "
+            "score against the source's OAV multiplied by this repo's own (compilation-"
+            "level, primary-table-unverified) hexanal odour threshold of 4.5 ppb. Only "
+            "`reported_point_value` rows are external measurements in the ordinary sense."
+        ),
+    }
+
+    # (b) PRE-WIDENING COVERAGE. The uncalibrated matrix sigma was raised 2.0 -> 2.86 on
+    #     2026-08-26. Any coverage improvement since then is a WIDER INTERVAL, not a better
+    #     prediction. Re-run the same hold-out at the pre-widening sigma so the report can
+    #     lead with the number that is not an artifact of the prior. Same seed, same
+    #     samples, only the matrix prior differs.
+    narrow_summary: Dict[str, Any] = {}
+    try:
+        narrow_payload = propagate_benchmarks(
+            benchmark_files=holdout_files,
+            n_samples=n_samples,
+            seed=seed,
+            priors=default_priors(matrix_tier="uncalibrated", matrix_sigma_override=2.0),
+            target_tag=target_tag,
+            execution_paths=("free_precursor", "matrix_precursor_augmented", "matrix_only"),
+        )
+    except TypeError:
+        narrow_payload = None
+    if narrow_payload is not None:
+        narrow_hits = 0
+        narrow_total = 0
+        narrow_extrap_hits = 0
+        narrow_extrap_total = 0
+        for benchmark in narrow_payload.get("benchmarks", []):
+            is_extrapolation = str(benchmark.get("benchmark_id")) in set(extrapolation_ids)
+            for compound in benchmark.get("compounds", []):
+                narrow_total += 1
+                narrow_hits += int(bool(compound.get("inside_ci")))
+                if is_extrapolation:
+                    narrow_extrap_total += 1
+                    narrow_extrap_hits += int(bool(compound.get("inside_ci")))
+        narrow_summary = {
+            "matrix_sigma": 2.0,
+            "ci_coverage_hits": narrow_hits,
+            "matched_compound_count": narrow_total,
+            "ci_coverage_rate": (narrow_hits / narrow_total) if narrow_total else None,
+            "genuine_extrapolation_hits": narrow_extrap_hits,
+            "genuine_extrapolation_total": narrow_extrap_total,
+            "why": (
+                "The uncalibrated matrix ln-sigma was raised 2.0 -> "
+                f"{_UNCALIBRATED_MATRIX_SIGMA:.2f} on 2026-08-26. Coverage at the SHIPPED "
+                "sigma is therefore not comparable with any earlier run of this report. "
+                "This row re-scores the identical hold-out at the pre-widening sigma so "
+                "the difference between 'the model got better' and 'the interval got "
+                "wider' is visible rather than inferred. Read the median fold error, which "
+                "no prior can change, alongside both."
+            ),
+        }
+
     summary.update(
         {
             "holdout_benchmark_count": len(holdout_files),
@@ -915,6 +1203,7 @@ def build_external_validation_report(
             "max_fold_error": max(fold_errors) if fold_errors else None,
             "evidence_class": EXTERNAL_VALIDATION_EVIDENCE_CLASS,
             "benchmark_dir": str(EXTERNAL_VALIDATION_BENCHMARK_DIR),
+            "pre_widening_coverage": narrow_summary,
         }
     )
 
@@ -962,6 +1251,163 @@ def build_external_validation_report(
     }
 
 
+def _render_holdout_honest_lead(summary: Mapping[str, Any]) -> str:
+    """Lead the hold-out report with the pre-widening number. 2026-08-27 (Wave I)."""
+    narrow = summary.get("pre_widening_coverage") or {}
+    if not narrow:
+        return (
+            "**Headline external trust metric**: unavailable — this artifact predates the "
+            "Wave I pre-widening comparison. Regenerate it."
+        )
+    hits = narrow.get("ci_coverage_hits", 0)
+    total = narrow.get("matched_compound_count", 0)
+    shipped_hits = summary.get("ci_coverage_hits", 0)
+    shipped_total = summary.get("matched_compound_count", 0)
+
+    extrap_hits = narrow.get("genuine_extrapolation_hits")
+    extrap_total = narrow.get("genuine_extrapolation_total")
+    kinds = summary.get("holdout_kind_split", {}) or {}
+    shipped_extrap = kinds.get("genuine_extrapolation", {}) or {}
+    rescoring = kinds.get("in_panel_rescoring", {}) or {}
+
+    lead = (
+        "**Headline external trust metric — GENUINE EXTRAPOLATIONS ONLY, at the "
+        "PRE-WIDENING prior (matrix ln-sigma 2.0)**: "
+        f"**{extrap_hits} / {extrap_total}**.\n\n"
+        if extrap_total
+        else "**Headline external trust metric**: no genuine-extrapolation rows.\n\n"
+    )
+    return (
+        lead
+        + "Everything else on this page is a weaker claim than that number, in two separate "
+        "ways, and both were being read as if they were not:\n\n"
+        f"1. **Prior width.** At the currently shipped sigma "
+        f"({_UNCALIBRATED_MATRIX_SIGMA:.2f}, ~±{_UNCALIBRATED_MATRIX_FOLD:.0f}× at 90%) the "
+        f"*same predictions* score {shipped_extrap.get('hits', 0)} / "
+        f"{shipped_extrap.get('total', 0)} on those same extrapolation rows, and "
+        f"{shipped_hits} / {shipped_total} over all hold-out rows (vs {hits} / {total} at "
+        "ln-sigma 2.0). **Nothing about the model changed between those numbers — only the "
+        "width of the interval drawn around it.**\n"
+        f"2. **Which rows test anything.** {rescoring.get('total', 0)} of the "
+        f"{shipped_total} rows come from bundles whose executable conditions are *copied "
+        "from an in-panel benchmark*: scoring them re-runs an existing anchor at its own "
+        f"conditions. They score {rescoring.get('hits', 0)} / {rescoring.get('total', 0)}, "
+        "and that is a reproducibility comparison, not evidence of transfer.\n"
+    )
+
+
+def _render_holdout_provenance_split(split: Mapping[str, Any]) -> str:
+    """What the eight hold-out 'measurements' actually are. 2026-08-27 (Wave I)."""
+    if not split:
+        return ""
+    counts = split.get("counts", {}) or {}
+    direct = split.get("direct_measurement", {}) or {}
+    derived = split.get("derived_or_constructed", {}) or {}
+
+    def _cell(bucket: Mapping[str, Any]) -> str:
+        total = bucket.get("total", 0)
+        hits = bucket.get("hits", 0)
+        rate = bucket.get("rate")
+        return f"{hits}/{total}" + (f" ({rate * 100:.0f}%)" if rate is not None else "")
+
+    lines = [
+        "> **What is actually being scored here.** These are not eight external",
+        "> measurements. The hold-out points divide as follows:",
+        ">",
+        "> | Provenance | Rows | Inside 90% CI | What a score against it means |",
+        "> | --- | ---: | ---: | --- |",
+    ]
+    descriptions = {
+        "reported_point_value": (
+            "A concentration the source reports. A genuine external test."
+        ),
+        "band_geometric_midpoint": (
+            "The source reports a RANGE; the scored value is sqrt(min*max), a number we "
+            "constructed. The honest uncertainty is the band (10-12x end to end), so "
+            "landing inside it is weak evidence."
+        ),
+        "derived_from_oav_and_repo_threshold": (
+            "The source's odour-activity value multiplied by THIS REPO'S OWN hexanal "
+            "odour threshold (4.5 ppb, compilation-level and never verified against a "
+            "primary table). Partly encodes one of our own constants and moves if that "
+            "constant is corrected. A consistency check, not an external measurement."
+        ),
+    }
+    for key, description in descriptions.items():
+        n = counts.get(key, 0)
+        if not n:
+            continue
+        bucket = direct if key == "reported_point_value" else None
+        cell = _cell(bucket) if bucket is not None else "see combined row"
+        lines.append(f"> | `{key}` | {n} | {cell} | {description} |")
+    lines.extend(
+        [
+            ">",
+            f"> Combined: direct measurements **{_cell(direct)}**, "
+            f"derived or constructed **{_cell(derived)}**.",
+        ]
+    )
+    return "\n".join(lines)
+
+
+def _holdout_is_condition_copy(bench_file: Path) -> bool:
+    """True when this bundle's conditions are copied from its in-panel target benchmark.
+
+    2026-08-27 (Wave I). Such a bundle re-scores an existing anchor at that anchor's own
+    conditions -- a reproducibility comparison, not an extrapolation test. Computed by
+    comparing the four executable condition fields against the benchmark named in the
+    bundle spec's `benchmark_alignment.target_benchmark_id`.
+    """
+    try:
+        bench = json.loads(Path(bench_file).read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return False
+    bundle_id = str(bench.get("benchmark_id", ""))
+    spec = next(
+        (item for item in _HOLDOUT_BUNDLE_SPECS if item["bundle_id"] == bundle_id),
+        None,
+    )
+    if spec is None:
+        return False
+    target_id = str((spec.get("benchmark_alignment") or {}).get("target_benchmark_id", "")).strip()
+    if not target_id:
+        return False
+    target_path = BENCHMARK_DIR / f"{target_id}.json"
+    if not target_path.exists():
+        return False
+    try:
+        target = json.loads(target_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return False
+    fields = ("temp_C", "ph", "water_activity", "time_min")
+    here = bench.get("conditions", {}) or {}
+    there = target.get("conditions", {}) or {}
+    return all(
+        abs(float(here.get(field, float("nan"))) - float(there.get(field, float("inf")))) < 1e-9
+        for field in fields
+        if field in here and field in there
+    ) and all(field in here and field in there for field in fields)
+
+
+def _holdout_value_provenance(bench_file: Path, compound: str) -> str:
+    """`value_provenance` recorded on this hold-out row. 2026-08-27 (Wave I)."""
+    try:
+        bench = json.loads(Path(bench_file).read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return "unknown"
+    measured = bench.get("measured_volatiles", {}) or {}
+    row = measured.get(compound)
+    if row is None:
+        wanted = str(compound).strip().lower()
+        for key, value in measured.items():
+            if str(key).strip().lower() == wanted:
+                row = value
+                break
+    if not isinstance(row, Mapping):
+        return "unknown"
+    return str(row.get("value_provenance", "reported_point_value"))
+
+
 def render_external_validation_markdown(payload: Mapping[str, Any]) -> str:
     summary = payload.get("summary", {})
     coverage_rate = summary.get("ci_coverage_rate")
@@ -977,9 +1423,17 @@ def render_external_validation_markdown(payload: Mapping[str, Any]) -> str:
         "",
         "_Monte Carlo envelope evaluation on isolated hold-out matrix bundles that are explicitly excluded from calibration via evidence_class = external_validation_only._",
         "",
-        f"**Headline external trust metric**: measured value lies inside 90% CI for **{summary.get('ci_coverage_hits', 0)} / {summary.get('matched_compound_count', 0)}** matched hold-out compounds (**{coverage_str}**).",
+        # 2026-08-27 (Wave I): the honest lead. Two things were being read out of this
+        # report that it does not support: that eight external MEASUREMENTS were being
+        # scored (four are constructed or repo-derived), and that coverage had improved
+        # (the interval was widened 2.0 -> 2.86 on 2026-08-26). Both are stated first now.
+        _render_holdout_honest_lead(summary),
         "",
-        f"**Median accuracy on hold-outs**: **{median_accuracy_str}** median fold error (median |log10 error| = **{median_abs_str}** dex).",
+        f"**Median accuracy on hold-outs**: **{median_accuracy_str}** median fold error (median |log10 error| = **{median_abs_str}** dex). *This number is unaffected by the prior width and is the one to track across runs.*",
+        "",
+        _render_holdout_provenance_split(summary.get("value_provenance_split") or {}),
+        "",
+        f"_Secondary, prior-dependent figure: at the SHIPPED uncalibrated sigma the measured value lies inside the 90% CI for {summary.get('ci_coverage_hits', 0)} / {summary.get('matched_compound_count', 0)} matched hold-out compounds ({coverage_str})._",
         "",
         f"Samples per hold-out bundle: {summary.get('n_samples', 0)}; seed {summary.get('seed', 0)}; bundles evaluated: {summary.get('holdout_benchmark_count', 0)}.",
         "",
@@ -1027,14 +1481,20 @@ def render_external_validation_markdown(payload: Mapping[str, Any]) -> str:
         lines.append(f"- Execution path: {benchmark.get('execution_path')}")
         lines.append(f"- Matched compounds: {benchmark.get('matched_compounds', 0)}")
         lines.append("")
-        lines.append("| Compound | Measured (ppb) | P5 | P50 | P95 | Fold error | Inside 90% CI |")
-        lines.append("| --- | --- | --- | --- | --- | --- | --- |")
+        # 2026-08-27 (Wave I): `Reference value` replaces `Measured (ppb)` and carries a
+        # provenance column -- half of these are not measurements (see the split above).
+        lines.append(
+            "| Compound | Reference value (ppb) | Provenance | P5 | P50 | P95 | Fold error | Inside 90% CI |"
+        )
+        lines.append("| --- | --- | --- | --- | --- | --- | --- | --- |")
         for compound in benchmark.get("compounds", []):
             inside = "yes" if compound.get("inside_ci") else "no"
             fold_error = compound.get("fold_error")
             fold_error_str = f"{float(fold_error):.2f}x" if fold_error is not None else "n/a"
+            provenance = str(compound.get("value_provenance", "unknown"))
             lines.append(
                 f"| {compound.get('compound')} | {float(compound.get('measured_ppb', 0.0)):.3g} | "
+                f"`{provenance}` | "
                 f"{float(compound.get('predicted_p5', 0.0)):.3g} | {float(compound.get('predicted_p50', 0.0)):.3g} | "
                 f"{float(compound.get('predicted_p95', 0.0)):.3g} | {fold_error_str} | {inside} |"
             )

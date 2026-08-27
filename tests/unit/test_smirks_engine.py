@@ -6,6 +6,7 @@ sequences for the 4 canonical Maillard precursor systems, and that all
 outputs are structurally valid and pipeline-compatible.
 """
 
+import pytest  # noqa: E402
 from rdkit import Chem  # noqa: E402
 
 from src.smirks_engine import SmirksEngine  # noqa: E402
@@ -53,40 +54,67 @@ def _all_smiles_valid(steps):
 
 
 def assert_balanced(step: ElementaryStep):
-    """
-    Counts elements in reactants and products and asserts they are equal.
-    Also returns the difference dictionary for debugging.
+    """Assert that an ElementaryStep conserves every element, hydrogen included.
+
+    HARDENED 2026-08-27 (Wave J2, red-team finding S7). The previous implementation
+    silently `continue`d past any species RDKit could not parse, and silently kept a
+    hydrogen-suppressed molecule when `AddHs` raised. Both failure modes DROP atoms from
+    one side of the ledger, so a genuinely unbalanced reaction containing an unparseable
+    or un-hydrogenatable participant passed this assertion. Ten `test_mass_conservation`
+    tests were riding on that helper, which made them vacuous in exactly the situation
+    they exist to catch.
+
+    Every parse failure is now collected and raised as a test failure naming the species,
+    the side it sits on and the reaction family, BEFORE the element comparison runs. That
+    ordering matters: an unparseable species must never be reported as a balance diff,
+    because the two defects need different fixes.
+
+    Measured at the time of the fix: 329 steps over the 12 enumeration scenarios in this
+    file, ZERO unparseable species, ZERO AddHs failures, ZERO unbalanced steps. So the
+    hardening lands green -- it removes a latent laundering path rather than papering over
+    a live chemistry defect.
     """
     from collections import Counter
-    
-    def count_atoms(species_list):
+
+    parse_failures: list[str] = []
+
+    def count_atoms(species_list, side: str):
         counts = Counter()
         for sp in species_list:
             mol = Chem.MolFromSmiles(sp.smiles)
             if mol is None:
-                mol = Chem.MolFromSmarts(sp.smiles) # fallback just in case
+                mol = Chem.MolFromSmarts(sp.smiles)  # fallback just in case
             if mol is None:
+                parse_failures.append(
+                    f"{side} species {sp.label!r} has SMILES {sp.smiles!r} that RDKit cannot "
+                    f"parse as SMILES or SMARTS"
+                )
                 continue
-            
-            # Explicitly add Hs
+
+            # Explicit hydrogens are mandatory: an implicit-H molecule contributes no H to
+            # the ledger, which is the same silent atom-dropping this fix exists to remove.
             try:
                 mol = Chem.AddHs(mol)
-            except Exception:
-                # Fallback
-                # If AddHs fails, we can't count atoms reliably for this molecule.
-                # Returning None here would break the Counter logic.
-                # The original code passed, meaning it continued with the mol
-                # as it was before AddHs. Let's maintain that behavior for now
-                # to ensure syntactic correctness and functional consistency.
-                pass
-                
+            except Exception as exc:  # pragma: no cover - defensive; no known trigger
+                parse_failures.append(
+                    f"{side} species {sp.label!r} ({sp.smiles!r}) failed Chem.AddHs: {exc!r}; "
+                    f"its hydrogen count cannot be established"
+                )
+                continue
+
             for atom in mol.GetAtoms():
                 counts[atom.GetSymbol()] += 1
         return counts
 
-    r_counts = count_atoms(step.reactants)
-    p_counts = count_atoms(step.products)
-    
+    r_counts = count_atoms(step.reactants, "reactant")
+    p_counts = count_atoms(step.products, "product")
+
+    assert not parse_failures, (
+        f"Mass conservation for {step.reaction_family} is UNVERIFIABLE, not verified -- "
+        f"{len(parse_failures)} species could not be counted, so the atom ledger is "
+        f"incomplete on at least one side: " + "; ".join(parse_failures)
+    )
+
     diff = {}
     all_elements = set(r_counts.keys()).union(set(p_counts.keys()))
     for el in all_elements:
@@ -94,9 +122,53 @@ def assert_balanced(step: ElementaryStep):
         if d != 0:
             diff[el] = d
 
-    # For Phase 8.0 transition, we print the diff if unbalanced but assert
     assert not diff, f"Unbalanced reaction ({step.reaction_family}): Diff = {diff}. Reactants: {[r.smiles for r in step.reactants]} -> Products: {[p.smiles for p in step.products]}"
 
+
+def assert_all_balanced(steps):
+    """Balance every step AND require that there was something to balance.
+
+    ADDED 2026-08-27 (Wave J2). ``for step in self.steps: assert_balanced(step)`` is
+    vacuously true when the enumeration returns nothing, so a routing regression that
+    silenced a whole family would have turned ten mass-conservation tests green rather
+    than red. The emptiness check makes that failure mode loud.
+    """
+    assert steps, "no steps were enumerated, so mass conservation was never exercised"
+    for step in steps:
+        assert_balanced(step)
+
+
+class TestAssertBalancedHelperItself:
+    """Negative tests for the balance helper (Wave J2, 2026-08-27).
+
+    The helper is the single point of failure for ten mass-conservation tests. Before this
+    wave it silently dropped species it could not parse; these tests pin the hardened
+    behaviour so the laundering path cannot be reintroduced without going red.
+    """
+
+    def test_unparseable_species_fails_loudly_instead_of_being_dropped(self):
+        # Balanced except for the unparseable participant. Under the pre-fix helper the
+        # unparseable reactant was skipped and this step "passed" mass conservation.
+        step = ElementaryStep(
+            reactants=[to_species("water", "O"), to_species("nonsense", "not_a_smiles")],
+            products=[to_species("water", "O")],
+            reaction_family="Synthetic_Unparseable_Probe",
+        )
+        with pytest.raises(AssertionError, match="UNVERIFIABLE"):
+            assert_balanced(step)
+
+    def test_genuinely_unbalanced_step_is_still_reported_as_a_balance_diff(self):
+        step = ElementaryStep(
+            reactants=[to_species("water", "O")],
+            products=[to_species("water", "O"), to_species("water", "O")],
+            reaction_family="Synthetic_Unbalanced_Probe",
+        )
+        with pytest.raises(AssertionError, match="Unbalanced reaction"):
+            assert_balanced(step)
+
+    def test_empty_step_list_is_not_silently_a_pass(self):
+        with pytest.raises(AssertionError, match="no steps were enumerated"):
+            assert_all_balanced([])
 
 
 # ── Test 1: Ribose + Glycine @ pH 5 ────────────────────────────────────────
@@ -107,8 +179,7 @@ class TestRiboseGlycinePH5:
         self.steps = self.engine.enumerate([RIBOSE, GLYCINE])
 
     def test_mass_conservation(self):
-        for step in self.steps:
-            assert_balanced(step)
+        assert_all_balanced(self.steps)
 
     def test_produces_steps(self):
         assert len(self.steps) > 0, "Expected at least 1 step"
@@ -158,8 +229,7 @@ class TestGlucoseGlycinePH7:
         self.steps = self.engine.enumerate([GLUCOSE, GLYCINE])
 
     def test_mass_conservation(self):
-        for step in self.steps:
-            assert_balanced(step)
+        assert_all_balanced(self.steps)
 
     def test_produces_steps(self):
         assert len(self.steps) > 0
@@ -194,8 +264,7 @@ class TestRiboseCysteine:
         self.steps = self.engine.enumerate([RIBOSE, CYSTEINE, H2S, h2])
 
     def test_mass_conservation(self):
-        for step in self.steps:
-            assert_balanced(step)
+        assert_all_balanced(self.steps)
 
     def test_beta_elimination_fires(self):
         """Cysteine should undergo beta-elimination → DHA + H₂S."""
@@ -227,8 +296,7 @@ class TestDHACompetition:
         self.steps = self.engine.enumerate([RIBOSE, CYSTEINE, LYSINE, H2S])
 
     def test_mass_conservation(self):
-        for step in self.steps:
-            assert_balanced(step)
+        assert_all_balanced(self.steps)
 
     def test_lal_produced(self):
         """DHA + Lysine → Lysinoalanine (LAL)."""
@@ -251,8 +319,7 @@ class TestStrecker:
         self.steps = self.engine.enumerate([RIBOSE, GLYCINE, LEUCINE])
 
     def test_mass_conservation(self):
-        for step in self.steps:
-            assert_balanced(step)
+        assert_all_balanced(self.steps)
 
     def test_strecker_fires(self):
         families = _families(self.steps)
@@ -274,8 +341,7 @@ class TestAminoketoneCondensation:
         self.steps = self.engine.enumerate([RIBOSE, GLYCINE])
 
     def test_mass_conservation(self):
-        for step in self.steps:
-            assert_balanced(step)
+        assert_all_balanced(self.steps)
 
     def test_pyrazine_produced(self):
         labels = _labels(self.steps)
@@ -296,8 +362,7 @@ class TestRetroAldol:
         self.steps = self.engine.enumerate([GLUCOSE, GLYCINE, water, h2])
 
     def test_mass_conservation(self):
-        for step in self.steps:
-            assert_balanced(step)
+        assert_all_balanced(self.steps)
 
     def test_retro_aldol_fires(self):
         families = _families(self.steps)
@@ -318,8 +383,7 @@ class TestCysteineDegradation:
         self.steps = self.engine.enumerate([CYSTEINE])
 
     def test_mass_conservation(self):
-        for step in self.steps:
-            assert_balanced(step)
+        assert_all_balanced(self.steps)
         
     def test_degradation_fires(self):
         families = _families(self.steps)
@@ -340,8 +404,7 @@ class TestThiazoleCondensation:
         self.steps = self.engine.enumerate([RIBOSE, LEUCINE, CYSTEINE, H2S])
 
     def test_mass_conservation(self):
-        for step in self.steps:
-            assert_balanced(step)
+        assert_all_balanced(self.steps)
 
     def test_thiazole_condensation_fires(self):
         families = _families(self.steps)
@@ -361,8 +424,7 @@ class TestHeynsRearrangement:
         self.steps = self.engine.enumerate([FRUCTOSE, GLYCINE])
 
     def test_mass_conservation(self):
-        for step in self.steps:
-            assert_balanced(step)
+        assert_all_balanced(self.steps)
 
     def test_heyns_fires(self):
         families = _families(self.steps)
@@ -387,10 +449,7 @@ class TestOutputCompatibility:
 
     def test_mass_conservation(self):
         """Phase 8.0: Every generated step must strictly conserve atoms."""
-        all_steps = self.steps + self.steps_neutral
-        assert len(all_steps) > 0, "No steps generated to check balance"
-        for step in all_steps:
-            assert_balanced(step)
+        assert_all_balanced(self.steps + self.steps_neutral)
 
     def test_step_structure(self):
         for step in self.steps:

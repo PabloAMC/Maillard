@@ -13,9 +13,11 @@ from src.barrier_constants import effective_barrier_from_rate_constant
 from src.headspace import HeadspaceModel
 from src.kinetics import KineticsEngine
 from src.lipid_oxidation import PEA_LIPID_PROFILE, SOY_LIPID_PROFILE, predict_hexanal_generation
+from src.fit_target_index import fit_target_records_for, is_per_row_fit_target
 from src.matrix_calibration_registry import (
     describe_matrix_calibration,
     determine_matrix_process_state,
+    is_fit_recovery_benchmark,
 )
 from src.pipeline import MaillardPipeline
 from src.precursor_resolver import resolve_many
@@ -1140,6 +1142,10 @@ def summarize_evaluation_for_benchmark(
         calibration_mode=matrix_contract.get("calibration_mode"),
         reference_signal_origin=evaluation.reference_signal_origin,
         mean_abs_log10_error=mean_abs_log10_error,
+        # 2026-08-27 (Wave I): the honesty column. `overall_status` above is mechanical --
+        # it says whether predictions and measurements agree. This says whether that
+        # agreement is evidence about the model or a recovery of the model's own inputs.
+        evidence_role=benchmark_evidence_role(evaluation.benchmark_id, evaluation.bench_file),
     )
 
 
@@ -1243,6 +1249,67 @@ def matrix_source_anchor(bench: Mapping[str, Any]) -> str:
     if identifier:
         return identifier
     return ""
+
+
+# 2026-08-27 (Wave I). Canonical home of the signal-origin classifier. It used to live
+# only in `uncertainty_propagation._benchmark_signal_origin`, but the benchmark summary
+# layer needs it too and `uncertainty_propagation` imports THIS module, so keeping the
+# implementation there would have meant a cycle or a second, drifting copy.
+SYNTHETIC_BENCHMARK_ORIGINS = frozenset(
+    {
+        "synthetic_diagnostic",
+        "internal_reproducibility_candidate",
+        "internal_experiment",
+    }
+)
+
+
+def benchmark_signal_origin(bench_file: Path) -> str:
+    """Classify a benchmark's comparator signal as literature-measured or internal/synthetic.
+
+    Returns ``"external_literature"`` or ``"internal_synthetic"``.
+    """
+    try:
+        bench = json.loads(Path(bench_file).read_text())
+    except (OSError, json.JSONDecodeError):
+        return "internal_synthetic"
+    origin = str((bench.get("source_metadata") or {}).get("origin", "")).strip().lower()
+    if origin in SYNTHETIC_BENCHMARK_ORIGINS:
+        return "internal_synthetic"
+    # `matrix_source_anchor` also accepts the typed `identifier`/`identifier_scheme` pair
+    # that DOI-less sources (theses, patents, DOI-free journals) now carry, so retyping an
+    # identifier out of a `doi`-named field cannot reclassify a literature row as
+    # internal/synthetic.
+    if matrix_source_anchor(bench) or origin.startswith("external"):
+        return "external_literature"
+    return "internal_synthetic"
+
+
+def benchmark_evidence_role(benchmark_id: str, bench_file: Path) -> str:
+    """What KIND of claim this benchmark can support: see BenchmarkSummary.evidence_role.
+
+    2026-08-27 (Wave I). The mechanical status says whether predictions and measurements
+    agree; this says whether that agreement is evidence. Fit-recovery is checked FIRST and
+    beats signal origin: a lane whose observable factor was solved from a literature
+    benchmark is still literature-sourced, and is still not a prediction.
+
+    Two independent sources of fit-recovery are consulted:
+
+    * the calibration registry's own `fitted_to_benchmark` declarations (the matrix
+      observability factors, one free factor per compound per lane); and
+    * `src.fit_target_index`, which reads the fit records under `results/validation/` and
+      classifies each by LEVERAGE. Only high-leverage fits (enough free parameters to
+      reproduce their target row by row) make a benchmark fit-recovery. A low-leverage
+      global fit -- two constants across two dozen rows -- does NOT, because excluding
+      those rows would delete genuine failures from the count rather than expose them.
+    """
+    if is_fit_recovery_benchmark(benchmark_id):
+        return "fit_recovery"
+    if is_per_row_fit_target(benchmark_id):
+        return "fit_recovery"
+    if benchmark_signal_origin(Path(bench_file)) == "internal_synthetic":
+        return "internal_synthetic"
+    return "predictive"
 
 
 def _matrix_source_origin(bench: dict) -> str:
@@ -2227,6 +2294,10 @@ def summarize_benchmarks(
                 strict_ready=summary.strict_ready,
                 blocking_issues=summary.blocking_issues,
                 conditions=bench.get("conditions", {}),
+                # 2026-08-27 (Wave I): an unsupported benchmark still has an evidence role,
+                # and losing it here would make an unsupported fit-recovery row read as
+                # "predictive" in the summary.
+                evidence_role=benchmark_evidence_role(summary.benchmark_id, bench_path),
             )
         summaries.append(_enrich_benchmark_summary_family_metadata(summary, bench))
     return summaries
@@ -2329,6 +2400,10 @@ def _enrich_benchmark_summary_family_metadata(summary: BenchmarkSummary, bench: 
         slr_families=sorted(dict.fromkeys(slr_families)),
         payload_roles=sorted(dict.fromkeys(payload_roles)),
         family_lane_names=sorted(dict.fromkeys(family_lane_names)),
+        # 2026-08-27 (Wave I): this rebuild-with-families constructor is the one the
+        # summary generator actually returns, so the evidence role must be carried
+        # through here or every row silently reports "predictive".
+        evidence_role=summary.evidence_role,
     )
 
 

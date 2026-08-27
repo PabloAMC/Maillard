@@ -52,10 +52,14 @@ RIBOSE_CYS_AMADORI = _species("ribose-cysteine-Amadori", "OCC(O)C(O)C(=O)CNC(CS)
 GLUCOSE_GLY_SCHIFF = _species("glucose-glycine-Schiff-base", "OCC(O)C(O)C(O)C(O)/C=N/CC(=O)O")
 GLUCOSE_GLY_AMADORI = _species("glucose-glycine-Amadori", "OCC(O)C(O)C(O)C(=O)CNCC(=O)O")
 DEOXYOSONE_3 = _species("3-deoxyosone", "O=CC(=O)CC(O)CO")
-# 1-deoxy-2,3-pentodiulose and norfuraneol: the accepted MFT precursors
-# (van den Ouweland & Peer 1975, DOI 10.1021/jf60200a038).
+# 1-deoxy-2,3-pentodiulose and the 1,4-dideoxyosone: the isotope-evidenced MFT
+# precursors (Cerny & Davidek 2003, 10.1021/jf026123f; 2004, 10.1021/jf035265m).
+# Norfuraneol (van den Ouweland & Peer 1975, 10.1021/jf60199a045 — a synthesis
+# route, not the in-situ one) was retired from the MFT lane by Wave N 2026-08-27;
+# the species is kept as a genuine furanone product.
 DEOXYOSONE_1 = _species("pentose-1-deoxyosone", "CC(=O)C(=O)C(O)CO")
 NORFURANEOL = _species("norfuraneol", "CC1=C(O)C(=O)CO1")
+DIDEOXYOSONE_14 = _species("1,4-dideoxypentodiulose", "CC(=O)C(=O)CCO")
 GLUCOSE_DEOXYOSONE_3 = _species("glucose-3-deoxyosone", "O=CC(=O)CC(O)C(O)CO")
 HMF = _species("HMF", "OCC1=CC=C(C=O)O1")
 HEXANAL = _species("hexanal", "CCCCCC=O")
@@ -91,6 +95,21 @@ def _step(reactants: list[Species], products: list[Species], reaction_family: st
 # pathway intermediate: the real donors/acceptors are the sugar-derived
 # reductones and dissolved O2, for which this model carries no species. Same
 # lumping convention as src/reaction_templates.py.
+#
+# 2026-08-27 (Wave I fix 8, red-team H4) — PARITY NOTE, deliberately NOT acted on
+# here. The engine lane had a real bug from this token: in src/smirks_engine.py the
+# MFT step is POOL-GATED on `[HH]`, whose only producer reachable from a
+# ribose/cysteine system was the pyrazine aromatisation, so disabling the pyrazine
+# lane drove predicted MFT to exactly 0.0 ppb. That is fixed engine-side by
+# `src/reaction_templates._thiol_reductant_pool` (2 cysteine -> cystine + 2[H]).
+# THIS layer cannot have that failure mode -- a curated pathway is a fixed list of
+# steps, not a reachability search, so nothing here can be gated off -- but note
+# that pathway C's only HYDROGEN producer (`MFT + MFT -> dimer + H2`) sits
+# DOWNSTREAM of the MFT step that consumes it. That is a bookkeeping circularity,
+# harmless today, and it would become load-bearing the moment this layer is ever
+# fed through a flux propagator. Adding the cysteine -> cystine step here for
+# parity is an OPEN OWNER ITEM; it was left out of Wave I because it changes the
+# curated step inventory, which is pinned elsewhere.
 PATHWAYS = {
     "A_Core_Maillard_Ribose_Gly": [
         _step([RIBOSE, GLYCINE], [RIBOSE_GLY_SCHIFF, WATER], "Schiff_Base_Formation"),
@@ -119,10 +138,19 @@ PATHWAYS = {
         _step([RIBOSE_CYS_AMADORI], [DEOXYOSONE_3, CYSTEINE], "Enolisation_Intermediate"),
         _step([DEOXYOSONE_3], [FURFURAL, WATER, WATER], "Enolisation_1_2"),
         _step([FURFURAL, H2S, HYDROGEN], [FFT, WATER], "Thiol_Addition"),
-        # 2,3-enolisation limb -> 1-deoxyosone -> norfuraneol -> MFT
+        # 2,3-enolisation limb -> 1-deoxyosone -> 1,4-dideoxyosone -> MFT.
+        # ROUTE CORRECTION 2026-08-27 (Wave N): the norfuraneol -> MFT step was
+        # retired on isotope evidence (Cerny & Davidek 2003, 10.1021/jf026123f:
+        # spiked norfuraneol does NOT label the MFT; 2004, 10.1021/jf035265m:
+        # 1,4-dideoxypento-2,3-diulose positionally confirmed). Norfuraneol
+        # stays as a terminal furanone product of this pathway. Balances
+        # (RDKit-verified): C5H8O4 + H2 -> C5H8O3 + H2O; C5H8O3 + H2S ->
+        # C5H6OS + 2 H2O (no reducing token on the H2S step). Mirrors
+        # `_furanone_and_mft_route` in src/reaction_templates.py.
         _step([RIBOSE_CYS_AMADORI], [DEOXYOSONE_1, CYSTEINE], "Enolisation_2_3_Amadori"),
         _step([DEOXYOSONE_1], [NORFURANEOL, WATER], "Furanone_Cyclisation"),
-        _step([NORFURANEOL, H2S, HYDROGEN], [MFT, WATER, WATER], "Thiol_Addition_Norfuraneol"),
+        _step([DEOXYOSONE_1, HYDROGEN], [DIDEOXYOSONE_14, WATER], "Deoxyosone_Reduction"),
+        _step([DIDEOXYOSONE_14, H2S], [MFT, WATER, WATER], "Thiol_Addition_Pentodiulose"),
         _step([MFT, MFT], [MFT_DIMER, HYDROGEN], "Thiol_Oxidation"),
     ],
     "D_Offflavour_Trapping_Gly": [
@@ -429,8 +457,13 @@ def _wire_computational_priors():
                 # (Hofmann 1998, 10.1021/jf9705983).
                 barrier, uncertainty = get_barrier("Thiol_Addition")
 
-            elif fam == "Thiol_Addition_Norfuraneol":
-                barrier, uncertainty = get_barrier("Thiol_Addition_Norfuraneol")
+            # Wave N 2026-08-27: the two families of the corrected MFT route
+            # (Deoxyosone_Reduction, Thiol_Addition_Pentodiulose) both have
+            # explicit FAST_BARRIERS entries, so the plain get_barrier lookup
+            # below resolves them exactly. Thiol_Addition_Norfuraneol no longer
+            # appears in any pathway.
+            elif fam in ("Deoxyosone_Reduction", "Thiol_Addition_Pentodiulose"):
+                barrier, uncertainty = get_barrier(fam)
 
             elif fam == "Thiol_Oxidation":
                 barrier, uncertainty = get_barrier("Thiol_Oxidation")

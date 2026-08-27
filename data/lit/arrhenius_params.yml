@@ -23,7 +23,44 @@
 # 28.85 kcal/mol = 120.7 kJ/mol in FAST_BARRIERS: same numerals, different units,
 # a suspected kJ/kcal transcription collision). FAST_BARRIERS values are fitted
 # calibration constants; do not treat the two files as interchangeable anchors.
-# ------------------------------------------------------------------------------
+#
+# ==============================================================================
+# AUDIT 2026-08-27 (Wave I fix 10) — READ THIS BEFORE USING ANY A/Ea PAIR BELOW.
+# Red-team finding H5. NOTHING IN THIS FILE WAS RETUNED BY WAVE I. Every value
+# is byte-identical to what shipped before; what follows is arithmetic, not a
+# change. Several A/Ea pairs are physically broken, and the breakage is only
+# visible once you actually evaluate k(T) — which nobody had.
+#
+# WHICH TABLE IS AUTHORITATIVE FOR WHICH LANE (state this before comparing them):
+#   * src/barrier_constants.py FAST_BARRIERS (kcal/mol) is authoritative for the
+#     SCREENING / recommend lane: src/recommend.py, src/pipeline.py, the FAST
+#     rankings and every benchmark prediction that goes through
+#     src/benchmark_validation.py. Those are FITTED calibration constants.
+#   * THIS FILE (kJ/mol + A) is authoritative for the CANTERA EXPORT lane:
+#     src/barrier_constants.get_arrhenius_params -> src/cantera_export.py ->
+#     scripts/run_cantera_kinetics.py. Those claim to be literature values.
+#   The two lanes never read each other's numbers, which is why the
+#   disagreements below have survived: no single code path evaluates both.
+#
+# SCHIFF / AMADORI ORDERING INVERSION — the two tables disagree about which of
+# the first two steps of the entire Maillard cascade is faster, and they
+# disagree by nine orders of magnitude in the ratio. At 150 C:
+#     FAST_BARRIERS (screening lane, Eyring-form with its own A=1e11 reference):
+#         schiff_condensation   15.0 kcal/mol -> t1/2 = 2.59e-4 s
+#         amadori_rearrangement 23.0 kcal/mol -> t1/2 = 5.26 s
+#         => SCHIFF IS ~2.0e4 x FASTER than Amadori.
+#     THIS FILE (Cantera lane, with the A values as written):
+#         schiff_condensation   A=1.5e11, Ea=97.0 kJ/mol -> t1/2 = 4.36 s
+#         amadori               A=1.0e11, Ea=59.0 kJ/mol -> t1/2 = 1.33e-4 s
+#         => AMADORI IS ~3.3e4 x FASTER than Schiff.
+#   The rate-determining step of the cascade is therefore whichever file you
+#   happened to read. RECONCILING THEM IS AN OPEN OWNER ITEM. Wave I did NOT
+#   fix it: picking a winner means re-deriving the Martins condensation/
+#   rearrangement split (see the `schiff_condensation` audit_flag's open caveat
+#   about double-counting a lumped barrier) and then re-fitting the screening
+#   lane against the benchmark panel. Both are calibration work with owner
+#   sign-off, not an annotation pass.
+# ==============================================================================
 
 arrhenius_data:
   # 1. Mutarotation & Ring Opening
@@ -72,7 +109,26 @@ arrhenius_data:
     substrate: "Aldosylamine"
     source: "10.1021/jf025561j"
     source_quality: "literature_estimated"
-    audit_flag: "2026-08-26: DOI resolves to Davidek/Clety/Aubin/Blank 2002, not Martins 2003 as the A_value comment claims; value unverified against either."
+    audit_flag: >-
+      2026-08-26: DOI resolves to Davidek/Clety/Aubin/Blank 2002, not Martins 2003 as the A_value
+      comment claims; value unverified against either.
+      2026-08-27 (Wave I fix 10, red-team H5) — PHYSICALLY BROKEN A/Ea PAIR. VALUE UNCHANGED,
+      arithmetic stated so it stops being invisible. Ea = 59.0 kJ/mol is 14.10 kcal/mol. Paired
+      with the A = 1.0e11 1/s written above:
+          k(100 C) = 5.50e2 1/s   -> t1/2 = 1.26 ms
+          k(140 C) = 3.47e3 1/s   -> t1/2 = 0.20 ms
+          k(150 C) = 5.21e3 1/s   -> t1/2 = 0.13 ms
+      The Amadori rearrangement is the step the whole cascade is named for and it is measured in
+      MINUTES TO HOURS at these temperatures; a sub-millisecond half-life means this pair models it
+      as instantaneous, i.e. it cannot be rate-determining for anything and the Cantera lane's
+      Amadori pool is at steady state the moment the Schiff base appears. Two candidate causes,
+      neither resolved here: (a) 59 kJ/mol is roughly HALF the 97-125 kJ/mol band that Martins'
+      own multiresponse fit spans, so it may be a mis-transcribed member of that set; (b) the
+      A = 1e11 1/s is a generic unimolecular TST prefactor that was never fitted jointly with this
+      Ea — the same failure mode that was found and repaired in `cysteine_thermolysis` (see its
+      CAUTION note: do not change Ea alone). DO NOT patch Ea without re-fitting A.
+      See also the SCHIFF/AMADORI ORDERING INVERSION block in this file's header: this entry is the
+      faster half of an ordering that src/barrier_constants.py FAST_BARRIERS reverses.
 
   # 3.5 Enolisation (1,2 and 2,3 pathways)
   enolisation:
@@ -180,7 +236,29 @@ arrhenius_data:
     substrate: "H2S + Carbonyls"
     source: "https://www.researchgate.net...acrylamide_removal"
     source_quality: "non_citable_truncated_url"
-    audit_flag: "2026-08-26: literally truncated ResearchGate URL, not a citation. Also the suspected kJ/kcal collision partner of FAST_BARRIERS thiol_addition (28.85 kcal/mol); establish intended units before any recalibration."
+    audit_flag: >-
+      2026-08-26: literally truncated ResearchGate URL, not a citation. Also the suspected kJ/kcal
+      collision partner of FAST_BARRIERS thiol_addition (28.85 kcal/mol); establish intended units
+      before any recalibration.
+      2026-08-27 (Wave I fix 10, red-team H5) — BROKEN PAIR. VALUE UNCHANGED. Two separate defects:
+      (1) EFFECTIVELY BARRIERLESS. Ea = 29.0 kJ/mol is 6.93 kcal/mol. A_value is `.nan`, so
+      src/barrier_constants.get_arrhenius_params silently substitutes 6.25e12 ("TST @ 150C"),
+      giving
+          k(100 C) = 5.45e8   -> t1/2 = 1.27e-9 s
+          k(140 C) = 1.35e9   -> t1/2 = 5.15e-10 s
+          k(150 C) = 1.64e9   -> t1/2 = 4.22e-10 s
+      HONESTY NOTE ON THE RED-TEAM WORDING: the finding was filed as "implies a rate faster than
+      diffusion". Evaluated, that overstates it. Read as a bimolecular constant, 1.6e9 L/mol/s at
+      150 C sits roughly one to two orders of magnitude BELOW the aqueous diffusion ceiling
+      (~1e10 L/mol/s at 25 C, higher at 150 C). The defensible statement is weaker but still
+      damning: 6.93 kcal/mol makes H2S addition to a carbonyl essentially barrierless and therefore
+      never rate-limiting, in a model whose entire sulfur branch is supposed to be selectivity-
+      controlled at exactly this step. The 2026-08-26 kJ/kcal collision hypothesis is the likely
+      cause: FAST_BARRIERS uses 28.60 kcal/mol = 119.7 kJ/mol in the same slot, 4.1x this value.
+      (2) UNIT MISMATCH IN THE NaN SUBSTITUTION. A_unit here is "L/mol.s" (bimolecular), but the
+      substituted 6.25e12 is a UNIMOLECULAR TST prefactor in 1/s. The Cantera lane is therefore
+      handed a first-order prefactor for a second-order reaction whenever this entry is used.
+      Both are OPEN OWNER ITEMS; fixing either requires re-fitting A and Ea together.
 
   # 9. DHA beta-elimination
   beta_elimination_dha:
@@ -191,7 +269,27 @@ arrhenius_data:
     pH: "Mildly alkaline"
     substrate: "Serine/Cysteine"
     source: "10.1021/bi00270a010 (Helmerhorst, E., & Stokes, G. B., 1983)"
-    audit_flag: "2026-08-26: DOI resolves correctly to Helmerhorst & Stokes 1983 Biochemistry, but that paper characterises an acid-stable persulfide-like residue in alkali/sulfhydryl-treated insulin — mechanistic evidence for beta-elimination of disulfides, not a kinetics study; the 19 kcal/mol (79.5 kJ/mol) midpoint cannot be traced to it."
+    audit_flag: >-
+      2026-08-26: DOI resolves correctly to Helmerhorst & Stokes 1983 Biochemistry, but that paper
+      characterises an acid-stable persulfide-like residue in alkali/sulfhydryl-treated insulin —
+      mechanistic evidence for beta-elimination of disulfides, not a kinetics study; the
+      19 kcal/mol (79.5 kJ/mol) midpoint cannot be traced to it.
+      2026-08-27 (Wave I fix 10, red-team H5) — THE DEFECT HERE IS THE PREFACTOR, NOT THE BARRIER.
+      VALUE UNCHANGED. A_value is `.nan`, a bare placeholder, so this entry HAS NO PREFACTOR AT ALL:
+      the pair cannot produce a rate as written, and the Cantera export lane only gets a number
+      because src/barrier_constants.get_arrhenius_params silently substitutes 6.25e12 1/s
+      ("TST @ 150C") for any NaN. That substitution is undeclared at the point of use, so the
+      "literature-anchored" label this file claims is, for this entry, carrying a hard-coded
+      default. With the substituted prefactor and Ea = 79.496 kJ/mol (19.00 kcal/mol):
+          k(100 C) = 46.5 1/s   -> t1/2 = 14.9 ms
+          k(140 C) = 5.56e2 1/s -> t1/2 = 1.25 ms
+          k(150 C) = 9.60e2 1/s -> t1/2 = 0.72 ms
+      i.e. dehydroalanine formation is instantaneous on any cooking timescale, and the DHA /
+      lysinoalanine crosslinking lane downstream of it can never be limited by this step. Unlike
+      `amadori` and `thiol_addition` the BARRIER is at least in a plausible band and agrees with the
+      screening lane (FAST_BARRIERS `beta_elimination` = 18.0 kcal/mol, 1 kcal/mol lower), so the
+      repair needed is a real fitted A, not a new Ea. Compare `cysteine_thermolysis`, whose A was
+      re-fitted for exactly this reason on 2026-08-26. OPEN OWNER ITEM.
 
   # 10. Thiamine Thermal Degradation
   thiamine_degradation:

@@ -6,7 +6,7 @@ Derived by enumeration from the current engine, not asserted. Regenerate with `p
 
 | # | Family | Implementation | Reaction templates emitted |
 | -- | --- | --- | --- |
-| 01 | Amino acid-sugar Maillard core | generative reaction templates | `Amadori_Rearrangement`, `Aminoketone_Condensation`, `Cysteine_Degradation`, `Enolisation_1_2`, `Enolisation_2_3`, `Enolisation_2_3_Amadori`, `Enolisation_Intermediate`, `Furanone_Cyclisation`, `Furanone_Formation`, `Generalized_Deamination`, `Retro_Aldol_Fragmentation`, `Schiff_Base_Formation`, `Strecker_Degradation`, `Thiohemiacetal_Formation`, `Thiol_Addition_H2`, `Thiol_Addition_Hexose_Legacy_Shortcut`, `Thiol_Addition_Legacy_Shortcut`, `Thiol_Addition_Norfuraneol`, `Thiol_Dehydration`, `Thiol_Oxidation` |
+| 01 | Amino acid-sugar Maillard core | generative reaction templates | `Amadori_Rearrangement`, `Aminoketone_Condensation`, `Cysteine_Degradation`, `Deoxyosone_Reduction`, `Enolisation_1_2`, `Enolisation_2_3`, `Enolisation_2_3_Amadori`, `Enolisation_Intermediate`, `Furanone_Cyclisation`, `Furanone_Formation`, `Generalized_Deamination`, `Retro_Aldol_Fragmentation`, `Schiff_Base_Formation`, `Strecker_Degradation`, `Thiohemiacetal_Formation`, `Thiol_Addition_H2`, `Thiol_Addition_Hexose_Legacy_Shortcut`, `Thiol_Addition_Pentodiulose`, `Thiol_Dehydration`, `Thiol_Oxidation` |
 | 02 | Lipid oxidation and carbonylic crosstalk | generative reaction templates | `Beta_Scission`, `Lipid_Homolysis`, `Peroxy_H_Abstraction`, `Radical_Propagation_O2`, `Radical_Termination` |
 | 03 | Thiamine degradation and sulfur support | generative reaction templates | `Additive_Thermal_Degradation`, `Furan_Ring_Aromatisation` |
 | 04 | Nucleotide degradation and ribose support | literature priors only | — |

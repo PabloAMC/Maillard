@@ -22,6 +22,8 @@ A citation audit on **2026-08-26** could not locate a real literature source for
 | `cys_glucose_150C_Farmer1999.json` | `10.1016/S0308-8146(98)00174-8` | Dead DOI. No Farmer 1999 cysteine/glucose source reporting these volatiles could be located under any DOI. | **Deleted 2026-08-26** after source recovery confirmed no source exists (see §(b) below). Git history preserves the file. |
 | `thiamine_cys_ribose_100C_Hofmann1996.json` | `10.1021/jf960062o` | Dead DOI. The file reports **MFT = 3.14 ppb**, i.e. numerically pi — a confabulation tell rather than a measurement. | **Deleted 2026-08-26; replaced by `data/benchmarks/thiamine_cys_glucose_120C_Bolton1994.json`**, rebuilt from the verified Bolton et al. 1994 chapter per the recipe in §(c) below. |
 | `acrylamide_asparagine_glucose_Parker2012.json` | `10.1021/jf3032779` | Dead DOI, no identifiable source; the real Parker 2012 acrylamide paper is a different system. **Quarantined 2026-08-26** (second pass) — see the dedicated section below. | Quarantined; file retained. |
+| `spi_hvp_xylose_120C_PMC9905368.json` | `10.1007/s10068-022-01194-w` | **DOI is LIVE and correct — the paper is real, the content is not.** It uses glucose/fructose at pH 7.5 for 90 min and reports only *relative peak areas*; it never mentions FFT or MFT. The file's xylose/cysteine **absolute ppb** values have no possible source. **Quarantined 2026-08-27** (Wave I) — see the dedicated section below. | Quarantined; file retained. |
+| `wheat_gluten_hvp_xylose_120C_PMC9905368.json` | `10.1007/s10068-022-01194-w` | Same source, same finding as the row above. | Quarantined; file retained. |
 
 ## Treat the values *and the tolerances* as suspect
 
@@ -302,3 +304,95 @@ not unchanged: the swap removes one passing, strict-ready row (Parker's acrylami
 adjustment — other work in flight on this branch (the sulfur-barrier re-centring and the
 Sander 5.0.0 Kaw refresh) moves scored rows too. Recompute the headline from a fresh
 regeneration rather than predicting it.
+
+---
+
+## `spi_hvp_xylose_120C_PMC9905368` + `wheat_gluten_hvp_xylose_120C_PMC9905368` — quarantined 2026-08-27 (Wave I)
+
+Found by the **cold-start red team** (2026-08-27), independently by both reviewers (forensic
+finding F2, scientific finding C1). These two are a *different* failure mode from everything
+above, and the difference is the lesson: **their DOI is live, resolves correctly, and the
+metadata matches.** Every previous check — the full 225-DOI citation sweep included — passed
+them, because those checks verified that the citation *exists*, not that the paper *says what
+the file claims*.
+
+### The evidence
+
+The cited source is:
+
+> Food Science and Biotechnology, `10.1007/s10068-022-01194-w` (PMC9905368).
+
+| | What the paper actually did | What these files claim |
+|---|---|---|
+| Reducing sugar | **D-glucose and D-fructose** | **D-xylose**, 50 mM |
+| pH | **7.5** | **6.0** |
+| Time | **90 min** | **30 min** |
+| Reported quantity | **Relative GC-MS peak areas (%)** — no internal standard, no absolute quantitation | **Absolute `conc_ppb`**, each with a per-analyte `uncertainty_pct` |
+| 2-Furfurylthiol (FFT) | **not mentioned anywhere in the paper** | 0.42 / 0.61 ppb ± 12 % |
+| 2-Methyl-3-furanthiol (MFT) | **not mentioned anywhere in the paper** | 0.18 / 0.34 ppb ± 12 % |
+| Methional | present as a relative peak area | 1.88 / 3.44 ppb ± 10 % |
+
+The decisive point is not that the conditions differ — conditions can be mis-transcribed. It is
+that **a paper reporting only relative peak areas cannot be the source of an absolute ppb value
+by any route**: there is no unit conversion, no internal standard, and no calibration curve to
+convert from. For FFT and MFT there is not even a peak area, because the paper does not report
+those compounds at all. **These six numbers have no possible provenance.**
+
+### What they were doing in the repo
+
+Worse than passively sitting in the panel. They were:
+
+1. **Six of the ~15 scored literature rows** in the coverage headline — roughly 40 % of the
+   panel's external-literature evidence base.
+2. **The sole fit targets** of `scripts/generators/rederive_hydrolysate_observability.py`
+   (Wave H, 2026-08-27), which moved the Methional `base_factor` in
+   `src/recommend.py::_HYDROLYSATE_SULFUR_OBSERVABILITY_PROFILES` from 0.0045 to 0.05623 —
+   **and then the two Methional rows it had just been fitted to were scored as literature
+   coverage.** They were the *only two hits* in the Wave H headline of "2/11 literature rows
+   inside the CI". Fitted to a benchmark, then reported as agreement with that benchmark, on
+   data that never existed. The honest count for that headline is **0/11**.
+3. **Six of 15 rows** in the fit population of
+   `scripts/generators/refit_projection_constants.py`.
+
+### Actions taken (2026-08-27)
+
+| Action | Where |
+|---|---|
+| Files `git mv`'d here with `source_metadata.quarantined` + full evidence block | this directory |
+| Methional `base_factor` **reverted** 0.05623 → 0.0045 | `src/recommend.py` |
+| Re-derivation record marked **RETRACTED** (json + md), generator refuses to run | `results/validation/hydrolysate_observability_rederivation.*`, `scripts/generators/rederive_hydrolysate_observability.py` |
+| Contamination note added; the two files removed from the fit population by the quarantine itself | `scripts/generators/refit_projection_constants.py` |
+| Contamination review added, verdict **uncontaminated, result stands** | `scripts/generators/refit_sulfur_barriers_hofmann.py` |
+| New blocking CI gate against fit-then-score circularity | `scripts/ci/fit_target_gate.py` |
+
+### Does the sulfur barrier refit survive?
+
+**Yes — verified, not assumed.** `scripts/generators/refit_sulfur_barriers_hofmann.py` fits
+against exactly one benchmark, `cys_ribose_140C_Hofmann1998`
+(`10.1021/jf9705983` — Hofmann & Schieberle, JAFC **46**:235–241, a real and verified paper).
+The two quarantined files were on that script's *forbidden* list before the quarantine and
+contributed **zero rows** to its objective. So `thiol_addition_norfuraneol` 28.60 → 26.85 and
+every "keep the incumbent" decision in that record stand unchanged.
+
+One caveat that is **not** about the quarantine but should not be lost: Hofmann1998's own
+contract (`max_ratio` 1.45 / `mean_abs_log10_error` 0.09) is the third-tightest in the
+collection — the same tightness pattern flagged as a fitting tell above. The tolerance has not
+been widened and the panel currently *fails* it, so nothing is concealed; but a single
+benchmark with a suspiciously tight contract is a thin anchor for an entire branch of the
+chemistry, and that remains an open owner item.
+
+### What does NOT survive
+
+- The Methional `base_factor` of 0.05623, and the re-derivation record that produced it.
+- Any headline claiming those Methional rows as literature agreement.
+- With the xylose HVP lanes gone, **every** entry in
+  `_HYDROLYSATE_SULFUR_OBSERVABILITY_PROFILES` is now an unconstrained legacy estimate with no
+  literature constraint of any kind. That is stated at the constant.
+
+### The generalisable lesson
+
+The citation gate checks DOI *identity*. It cannot check DOI *content* — no offline gate can.
+Every anchor in this repo that has not been read against its source is exposed to exactly this
+failure mode, and the population of such anchors is large. Live-DOI-wrong-paper is not a rarer
+class than dead-DOI; the 2026-08-26 sweep measured it as **equally large** (47 metadata
+mismatches + 45 topic mismatches vs 45 dead).

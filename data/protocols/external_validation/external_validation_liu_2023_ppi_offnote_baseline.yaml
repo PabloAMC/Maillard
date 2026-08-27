@@ -15,19 +15,59 @@ formulation:
       concentration_mM: 1000.0
 measured_volatiles:
   hexanal:
-    conc_ppb: 51.96152422706632
+    conc_ppb: 51.96
+    value_provenance: band_geometric_midpoint
+    value_provenance_note: '2026-08-27 (Wave I): the source reports a RANGE across
+      commercial PPI lots, not a value. The scored hold-out number is the geometric
+      midpoint sqrt(15.0 * 180.0) -- a construction of ours. The honest uncertainty
+      is the band itself (a factor of 12.0 end to end), so a prediction landing inside
+      it is weak evidence. Until 2026-08-27 the midpoint was written at full float
+      precision (e.g. 51.96152422706632), advertising a precision that exists nowhere
+      in the chain.'
+    band_min_ppb: 15.0
+    band_max_ppb: 180.0
+    band_span_fold: 12.0
     uncertainty_pct: 246.4
+    uncertainty_pct_basis: upward half-width of the reported band relative to its
+      geometric midpoint; NOT a symmetric analytical uncertainty. Read band_min_ppb/band_max_ppb
+      instead.
   nonanal:
-    conc_ppb: 15.811388300841896
+    conc_ppb: 15.81
+    value_provenance: band_geometric_midpoint
+    value_provenance_note: '2026-08-27 (Wave I): the source reports a RANGE across
+      commercial PPI lots, not a value. The scored hold-out number is the geometric
+      midpoint sqrt(5.0 * 50.0) -- a construction of ours. The honest uncertainty
+      is the band itself (a factor of 10.0 end to end), so a prediction landing inside
+      it is weak evidence. Until 2026-08-27 the midpoint was written at full float
+      precision (e.g. 51.96152422706632), advertising a precision that exists nowhere
+      in the chain.'
+    band_min_ppb: 5.0
+    band_max_ppb: 50.0
+    band_span_fold: 10.0
     uncertainty_pct: 216.2
+    uncertainty_pct_basis: upward half-width of the reported band relative to its
+      geometric midpoint; NOT a symmetric analytical uncertainty. Read band_min_ppb/band_max_ppb
+      instead.
 provenance:
   origin: external_literature
   source_reference: Liu, Y. (2023 thesis)
   source_doi: ''
-  measurement_date: '2023-01-01'
+  measurement_date: not_applicable
+  measurement_date_note: This bundle is SYNTHESIZED from published anchors; no measurement
+    date exists. Until 2026-08-27 this field carried a fabricated '<publication year>-01-01'.
+  source_publication_year: '2023'
   notes: 'External validation hold-out synthesized from flavor_reference_payloads.json;
     never use for calibration or promotion. liu_2023_ppi_hexanal_band: retain_ppi_hexanal_baseline_as_structural_off_note_penalty
     liu_2023_ppi_nonanal_band: retain_ppi_nonanal_baseline_as_secondary_fatty_off_note_anchor'
+  identifier: Liu, Y. (2023), thesis, North Carolina State University Institutional
+    Repository
+  identifier_scheme: citation
+  identifier_note: '2026-08-27: retyped from source_doi ''LiuThesis2023'', which was
+    never a DOI. No DOI or handle is issued for this thesis record. The peer-reviewed
+    version of the same dataset is Liu, Cadwallader & Drake (2023), Food Chemistry
+    406:134998, doi 10.1016/j.foodchem.2022.134998 - anchored separately in data/lit
+    and deliberately NOT used here: this bundle stays external_validation_only (hold-out),
+    and its classification is unchanged by the retyping.'
 benchmark_alignment:
   target_benchmark_id: pea_isolate_40C_PratapSingh2021
   notes: Lot-to-lot PPI off-note baseline from Liu (2023). Conditions are proxied
@@ -37,8 +77,10 @@ analytical_context:
   headspace_method: HS-SPME-GC-MS plus GC-O
   quantification_mode: internal_standard_calibrated
   replicates: 6
-  notes: Band midpoints are used as hold-out reference values; uncertainty is derived
-    from the reported band width.
+  notes: 'Band midpoints are used as hold-out reference values; uncertainty is derived
+    from the reported band width. 2026-08-27 (Wave I): every measured row now carries
+    value_provenance=band_geometric_midpoint plus band_min_ppb/band_max_ppb, because
+    a geometric midpoint of a 10-12x band is a construction of ours, not a measurement.'
   citation_provenance:
   - Liu, Y. (2023 thesis)
   - Liu, Y. (2023 thesis)

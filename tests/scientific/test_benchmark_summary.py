@@ -37,7 +37,16 @@ def test_benchmark_summary_separates_supported_and_unsupported_cases():
     assert by_id["pea_isolate_40C_PratapSingh2021"].cantera_role == "not_authoritative"
     assert by_id["pea_isolate_40C_PratapSingh2021"].thermodynamic_gating_policy == "not_applicable"
     assert by_id["pea_isolate_40C_PratapSingh2021"].process_state == "ambient_slurry"
-    assert by_id["pea_isolate_40C_PratapSingh2021"].ranking_contract_status == "pass"
+    # RE-PINNED 2026-08-27 (Wave M) from "pass" to "order_mismatch". Cause: the Wave K/M
+    # content correction on this benchmark (see its `content_correction_note`). Molecules
+    # 2021, 26, 4104 Table 1 (PMC8271896) gives pea hexanal = 1138.00 ppb, not the 260 this
+    # file carried, and reports hexanol as n.d. rather than 80 ppb. With the paper's own
+    # values hexanal (1138) outranks 2-pentylfuran (638), so the corrected contract expects
+    # hexanal first -- and the model still predicts 2-pentylfuran first (638.3 vs 260.6),
+    # because the hexanal observability factor was back-solved from the erroneous 260.
+    # This is a REAL, newly visible ranking failure, not a tolerance question: it was
+    # invisible while the reference agreed with the constant fitted to it. NOT relaxed.
+    assert by_id["pea_isolate_40C_PratapSingh2021"].ranking_contract_status == "order_mismatch"
     assert by_id["pea_isolate_40C_PratapSingh2021"].strict_ready is False
     assert by_id["pea_isolate_40C_PratapSingh2021"].overall_status in {"pass", "pass-no-ranking", "scale-gap", "ranking-gap"}
 
@@ -63,7 +72,16 @@ def test_benchmark_summary_markdown_includes_gap_labels():
     assert "cys_ribose_140C_Hofmann1998" in markdown
     assert "pea_isolate_40C_PratapSingh2021" in markdown
     assert "soy_isolate_40C_PratapSingh2021" in markdown
-    assert "matrix-only intake path is executable" in markdown
+    # RE-PINNED 2026-08-27 (Wave M). The old assertion looked for the
+    # "matrix-only intake path is executable but not yet in the strict release gate"
+    # note, which the summary emits only when a benchmark has NO other blocking issue.
+    # After the Wave K/M content correction (hexanal 260 -> 1138 / 380 -> 1621.71, hexanol
+    # removed as n.d.) both Pratap-Singh rows carry real scale gaps, so that note is
+    # correctly displaced by the quantitative ones. The test now asserts a gap label is
+    # rendered at all -- which is what its name claims -- using the labels these rows
+    # actually produce.
+    assert "max ratio" in markdown
+    assert "matrix ranking contract: order_mismatch" in markdown
     assert "ambient_slurry" in markdown
     assert "Ranking Contract" in markdown
     assert "Strict Ready" in markdown

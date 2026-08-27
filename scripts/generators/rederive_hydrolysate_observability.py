@@ -1,8 +1,21 @@
 #!/usr/bin/env python3
 """Re-derive the per-lane hydrolysate sulfur `upstream_observability_factor`s.
 
-Context (2026-08-27, Wave H)
----------------------------
+RETRACTED 2026-08-27 (Wave I) — THIS SCRIPT REFUSES TO RUN
+----------------------------------------------------------
+Both of its fit targets are fabricated benchmarks and are now quarantined.  The cited
+paper `10.1007/s10068-022-01194-w` reacts protein hydrolysates with GLUCOSE and FRUCTOSE
+at pH 7.5 for 90 min and reports only RELATIVE GC-MS PEAK AREAS; it never mentions
+2-furfurylthiol or 2-methyl-3-furanthiol and reports no absolute concentration for any
+analyte.  The `conc_ppb` values this script fitted against therefore have no possible
+source.  The one constant it moved (Methional `base_factor` 0.0045 -> 0.05623) has been
+REVERTED in `src/recommend.py`, and the record it wrote
+(`results/validation/hydrolysate_observability_rederivation.{json,md}`) is marked
+RETRACTED.  The body below is preserved as the reproducible forensic record of what the
+Wave H fit did — not as a live procedure.
+
+Context (2026-08-27, Wave H) — historical
+------------------------------------------
 `src/recommend.py::_HYDROLYSATE_SULFUR_OBSERVABILITY_PROFILES` holds one
 `base_factor` per compound — the fraction of the modelled volatile that is taken to
 survive to the headspace in a hydrolysed-vegetable-protein (HVP) matrix.  The
@@ -197,11 +210,36 @@ def _rewrite_base_factor(text: str, compound: str, value: float) -> str:
     return text[: match.start()] + f"{match.group(1)}{value:.4g}" + text[match.end():]
 
 
+# RETRACTED 2026-08-27 (Wave I). Both fit targets are fabricated benchmarks and are now
+# quarantined: the cited paper 10.1007/s10068-022-01194-w uses glucose/fructose at pH 7.5
+# for 90 min and reports only RELATIVE PEAK AREAS, never mentions FFT or MFT, and cannot be
+# the source of any absolute ppb value in those files. This script therefore has no valid
+# target and refuses to run. It is kept (not deleted) as the reproducible record of what the
+# Wave H fit did, and so that the retraction is discoverable from the code as well as from
+# results/validation/hydrolysate_observability_rederivation.{json,md}.
+# To revive it, a REAL literature HVP benchmark must exist and be named here.
+_RETRACTED = True
+_RETRACTION_MESSAGE = (
+    "rederive_hydrolysate_observability.py is RETRACTED (2026-08-27, Wave I).\n"
+    "Its only fit targets -- spi_hvp_xylose_120C_PMC9905368 and "
+    "wheat_gluten_hvp_xylose_120C_PMC9905368 -- are fabricated and quarantined:\n"
+    "  the cited paper 10.1007/s10068-022-01194-w reacts hydrolysates with glucose/fructose\n"
+    "  at pH 7.5 for 90 min and reports only RELATIVE GC-MS peak areas. It never mentions\n"
+    "  2-furfurylthiol or 2-methyl-3-furanthiol and reports no absolute concentrations.\n"
+    "The Methional base_factor it fitted (0.0045 -> 0.05623) has been REVERTED in\n"
+    "src/recommend.py. Do not re-run this script against those files.\n"
+)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output-dir", default="results/validation")
     parser.add_argument("--apply", action="store_true")
     args = parser.parse_args()
+
+    if _RETRACTED:
+        sys.stderr.write(_RETRACTION_MESSAGE)
+        return 2
 
     paths = _guarded_targets()
     grid = _log_grid()

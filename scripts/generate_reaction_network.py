@@ -52,6 +52,18 @@ except Exception as e:
 #                           curated nor engine templates). Its colour is
 #                           repointed to `Furanone_Cyclisation`, the curated
 #                           cyclisation/dehydration lane that replaced it.
+#   * `Thiol_Addition_Norfuraneol`
+#                        -> RETIRED 2026-08-27 (Wave N) on isotope evidence
+#                           (Cerny & Davidek 2003, 10.1021/jf026123f; 2004,
+#                           10.1021/jf035265m): norfuraneol is not the in-situ
+#                           MFT intermediate. Its colour is inherited by
+#                           `Thiol_Addition_Pentodiulose`, the step that now
+#                           carries the H2S incorporation, so the MFT lane keeps
+#                           the same hue across the route change. The new
+#                           upstream `Deoxyosone_Reduction` gets an olive hue
+#                           adjacent to `Furanone_Cyclisation`, because the two
+#                           are the competing branches of the same 1-deoxyosone
+#                           fork.
 FAMILY_EDGE_COLORS: dict[str, str] = {
     "Schiff_Base_Formation": "#4682B4",
     "Amadori_Rearrangement": "#DAA520",
@@ -59,11 +71,12 @@ FAMILY_EDGE_COLORS: dict[str, str] = {
     "Enolisation_2_3_Amadori": "#E9967A",
     "Enolisation_Intermediate": "#B03060",
     "Furanone_Cyclisation": "#8FBC8F",
+    "Deoxyosone_Reduction": "#6B8E23",
     "Strecker_Degradation": "#BC8F8F",
     "Cysteine_Degradation": "#D2691E",
     "Aminoketone_Condensation": "#6A5ACD",
     "Thiol_Addition": "#48D1CC",
-    "Thiol_Addition_Norfuraneol": "#20B2AA",
+    "Thiol_Addition_Pentodiulose": "#20B2AA",
     "Thiol_Oxidation": "#008B8B",
     "Lipid_Schiff_Base": "#BA55D3",
     "Beta_Elimination": "#CD853F",
@@ -438,8 +451,9 @@ def main() -> int:
             # 2026-08-27: comment corrected to the post-Wave-G1 family names.
             # Everything else — the three Enolisation lanes, Beta_Elimination,
             # Furanone_Cyclisation, Aminoketone_Condensation, Thiol_Oxidation and
-            # Thiol_Addition_Norfuraneol — carries a high barrier and draws thin.
-            # Group membership is unchanged; only the names were stale.
+            # (2026-08-27, Wave N) Deoxyosone_Reduction + Thiol_Addition_Pentodiulose,
+            # which replaced Thiol_Addition_Norfuraneol — carries a high barrier and
+            # draws thin. Group membership is unchanged; only the names were stale.
             width, alpha = 1.0, 0.45
 
         # Style by confidence tier / source quality (Solid = Calibrated, Dashed = Heuristic)

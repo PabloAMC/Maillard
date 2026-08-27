@@ -37,12 +37,24 @@
   },
   "measured_volatiles": {
     "hexanal": {
-      "conc_ppb": 51.96152422706632,
-      "uncertainty_pct": 246.4
+      "band_max_ppb": 180.0,
+      "band_min_ppb": 15.0,
+      "band_span_fold": 12.0,
+      "conc_ppb": 51.96,
+      "uncertainty_pct": 246.4,
+      "uncertainty_pct_basis": "upward half-width of the reported band relative to its geometric midpoint; NOT a symmetric analytical uncertainty. Read band_min_ppb/band_max_ppb instead.",
+      "value_provenance": "band_geometric_midpoint",
+      "value_provenance_note": "2026-08-27 (Wave I): the source reports a RANGE across commercial PPI lots, not a value. The scored hold-out number is the geometric midpoint sqrt(15.0 * 180.0) -- a construction of ours. The honest uncertainty is the band itself (a factor of 12.0 end to end), so a prediction landing inside it is weak evidence. Until 2026-08-27 the midpoint was written at full float precision (e.g. 51.96152422706632), advertising a precision that exists nowhere in the chain."
     },
     "nonanal": {
-      "conc_ppb": 15.811388300841896,
-      "uncertainty_pct": 216.2
+      "band_max_ppb": 50.0,
+      "band_min_ppb": 5.0,
+      "band_span_fold": 10.0,
+      "conc_ppb": 15.81,
+      "uncertainty_pct": 216.2,
+      "uncertainty_pct_basis": "upward half-width of the reported band relative to its geometric midpoint; NOT a symmetric analytical uncertainty. Read band_min_ppb/band_max_ppb instead.",
+      "value_provenance": "band_geometric_midpoint",
+      "value_provenance_note": "2026-08-27 (Wave I): the source reports a RANGE across commercial PPI lots, not a value. The scored hold-out number is the geometric midpoint sqrt(5.0 * 50.0) -- a construction of ours. The honest uncertainty is the band itself (a factor of 10.0 end to end), so a prediction landing inside it is weak evidence. Until 2026-08-27 the midpoint was written at full float precision (e.g. 51.96152422706632), advertising a precision that exists nowhere in the chain."
     }
   },
   "metadata": {
@@ -67,8 +79,11 @@
   "source_metadata": {
     "evidence_class": "external_validation_only",
     "generator": "matrix_experiment_intake",
-    "measurement_date": "2023-01-01",
+    "measurement_date": "not_applicable",
+    "measurement_date_note": "This bundle is SYNTHESIZED from published anchors; no measurement date exists. Until 2026-08-27 this field carried a fabricated '<publication year>-01-01'.",
     "notes": "External validation hold-out synthesized from flavor_reference_payloads.json; never use for calibration or promotion. liu_2023_ppi_hexanal_band: retain_ppi_hexanal_baseline_as_structural_off_note_penalty liu_2023_ppi_nonanal_band: retain_ppi_nonanal_baseline_as_secondary_fatty_off_note_anchor",
-    "origin": "external_literature"
+    "origin": "external_literature",
+    "source_publication_year": "2023",
+    "source_reference": "Liu, Y. (2023 thesis)"
   }
 }

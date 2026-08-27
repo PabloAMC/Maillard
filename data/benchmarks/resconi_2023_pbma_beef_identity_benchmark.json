@@ -52,8 +52,9 @@
   },
   "measured_volatiles": {
     "furfural": {
-      "conc_ppb": 1040.0,
-      "uncertainty_pct": 5
+      "conc_ppb": 715.22,
+      "uncertainty_pct": 79,
+      "content_correction_note": "2026-08-27 (Wave K/M): was 1040.0 +/- 5%, which is exactly the mean of Beyond Meat (987.41) and Third Retail Brand (1093.54) with Impossible Burger (64.71) silently DROPPED -- an undeclared cherry-pick inside a 5% tolerance. The paper's PBMA furfural values (Molecules 28:3151, PMC10096055, volatile table) are 987.41 / 64.71 / 1093.54 ppb; the honest 3-product mean is 715.22 with SD 565.85 (79%). The 17x inter-product spread is real heterogeneity in commercial PBMAs and the widened uncertainty encodes it; a class-mean with a 5% tolerance was never a defensible contract. Verified against Europe PMC fullTextXML."
     }
   },
   "citation_repair": {

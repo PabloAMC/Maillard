@@ -136,7 +136,15 @@ _FAMILY_TO_SLR: Dict[str, str] = {
     # family 05 is GLUTATHIONE and peptide support, and none of these steps needs a
     # peptide. MFT/FFT are named as family 01 targets in the ingestion plan.
     "Cysteine_Degradation": "amino_acid_sugar_core",
+    # Wave N 2026-08-27: the MFT route was corrected on isotope evidence (Cerny &
+    # Davidek 2003, 10.1021/jf026123f; 2004, 10.1021/jf035265m). The two new
+    # families sit in the same core sugar/cysteine limb as the step they replace.
+    # `Thiol_Addition_Norfuraneol` is retired (no step emits it) but is kept in the
+    # map so an older tree, or a re-enabled route, still classifies rather than
+    # tripping the unmapped-family assertion.
     "Thiol_Addition_Norfuraneol": "amino_acid_sugar_core",
+    "Deoxyosone_Reduction": "amino_acid_sugar_core",
+    "Thiol_Addition_Pentodiulose": "amino_acid_sugar_core",
     "Thiol_Addition_H2": "amino_acid_sugar_core",
     "Thiohemiacetal_Formation": "amino_acid_sugar_core",
     "Thiol_Dehydration": "amino_acid_sugar_core",

@@ -11,6 +11,7 @@ from src.smirks_engine import (
     _THIAMINE_CANONICAL, _DMHF_CANONICAL, _HEMF_CANONICAL,
     _NORFURANEOL_CANONICAL, _MFT_CANONICAL, _FURYL_DISULFIDE_CANONICAL,
     _DEOXYOSONE_1_PENTOSE, _DEOXYOSONE_1_HEXOSE,
+    _PENTODIULOSE_14_DIDEOXY,
 )
 
 # ──────────────────────────────────────────────────────────────────────────
@@ -226,9 +227,27 @@ def _enolisation_steps(
     #     Amadori --(2,3-enolisation)--> 1-deoxyosone
     #             --(cyclisation/dehydration)--> norfuraneol (pentose)
     #             --(+ H2S, reductone-mediated)--> 2-methyl-3-furanthiol
-    # van den Ouweland & Peer 1975, DOI 10.1021/jf60200a038; Hofmann &
+    # van den Ouweland & Peer 1975, DOI 10.1021/jf60199a045; Hofmann &
     # Schieberle.  Atom balance (ribose + glycine): C7H13NO6 -> C5H8O4 +
     # C2H5NO2, exact, no water and no free hydrogen.
+    #
+    # doi_repair 2026-08-27 (Wave I fix 4) -- CANONICAL RECORD for this
+    # flagship anchor; the other four code sites carry only the corrected
+    # string and point here.
+    #   old:   10.1021/jf60200a038
+    #   new:   10.1021/jf60199a045
+    #   date:  2026-08-27
+    #   basis: the old DOI is registered but resolves to a gossypol/rat-feeding
+    #          paper in J. Agric. Food Chem., i.e. a live-but-wrong
+    #          (TOPIC-MISMATCH) anchor of exactly the class the 2026-08-26
+    #          citation sweep catalogued. 10.1021/jf60199a045 is the real
+    #          van den Ouweland & Peer 1975 JAFC paper -- the norfuraneol
+    #          (4-hydroxy-5-methyl-3(2H)-furanone) + H2S -> 2-methyl-3-furanthiol
+    #          study that this whole sulfur branch is built on. Repointed in
+    #          src/reaction_templates.py (x2), src/smirks_engine.py,
+    #          src/curated_pathways.py, src/barrier_constants.py and
+    #          scripts/generators/refit_sulfur_barriers_hofmann.py.
+    #          NO numeric value changed: this is a citation repair only.
     if _is_pentose(sugar):
         deoxy_1 = Species(label="pentose-1-deoxyosone", smiles=_DEOXYOSONE_1_PENTOSE)
     elif _is_hexose(sugar) or _is_ketose(sugar):
@@ -254,31 +273,66 @@ _DEOXYOSONE_1_CANONICALS = {
 }
 
 
-def _norfuraneol_mft_route(pool_species: List[Species]) -> List[ElementaryStep]:
-    """The accepted 1-deoxyosone -> furanone -> MFT route (Wave G1 fix 7).
+def _furanone_and_mft_route(pool_species: List[Species]) -> List[ElementaryStep]:
+    """Furanone formation and the isotope-evidenced 1,4-dideoxyosone MFT route.
 
-    Steps and their atom balances (all exact):
+    ROUTE CORRECTION 2026-08-27 (Wave N) — this function was
+    `_norfuraneol_mft_route` and its MFT step was norfuraneol + H2S + 2[H] ->
+    MFT (van den Ouweland & Peer 1975, 10.1021/jf60199a045).  That paper is a
+    genuine SYNTHESIS of MFT from norfuraneol, but the in-situ competition
+    experiment contradicts norfuraneol as the Maillard intermediate: Cerny &
+    Davidek 2003 (10.1021/jf026123f) spiked authentic (unlabelled) norfuraneol
+    into a [13C5]ribose/cysteine system and the resulting MFT was mainly
+    13C5-labelled — "4-hydroxy-5-methyl-3(2H)-furanone is unimportant as an
+    intermediate".  Cerny & Davidek 2004 (10.1021/jf035265m, [1-13C]ribose)
+    positionally confirmed the proposed intermediate: 1,4-dideoxypento-2,3-
+    diulose.  Hofmann & Schieberle 1998 (10.1021/jf9705983) independently rank
+    norfuraneol/cysteine among the LESS effective MFT precursors.  Evidence
+    dossier: docs/validation/isotope_topology_evidence.md §1-2.
+
+    Steps and their atom balances (all exact, RDKit-verified 2026-08-27):
 
       1. 1-deoxy-2,3-pentodiulose -> norfuraneol + H2O
-         C5H8O4 -> C5H6O3 + H2O.  Pure cyclodehydration: NO reduction is
-         needed, which is the structural reason a pentose reaches the
-         furanone/MFT branch so much more readily than a hexose.
+         C5H8O4 -> C5H6O3 + H2O.  Pure cyclodehydration.  KEPT: norfuraneol is
+         a real Maillard product (and per Cerny & Davidek 2003 the demonstrated
+         precursor of 2-mercapto-3-pentanone, a route not yet implemented) —
+         it just no longer feeds MFT.
 
       2. 1-deoxy-2,3-hexodiulose + 2[H] -> furaneol (DMHF) + 2 H2O
          C6H10O5 + H2 -> C6H8O3 + 2 H2O.  The hexose analogue needs an extra
          reduction (which is why the classic DMHF precursor is the 6-deoxy
          sugar rhamnose, not glucose).
 
-      3. norfuraneol + H2S + 2[H] -> 2-methyl-3-furanthiol + 2 H2O
-         C5H6O3 + H2S + H2 -> C5H6OS + 2 H2O.
-         van den Ouweland & Peer 1975, DOI 10.1021/jf60200a038.
+      3. 1-deoxy-2,3-pentodiulose + 2[H] -> 1,4-dideoxypento-2,3-diulose + H2O
+         C5H8O4 + H2 -> C5H8O3 + H2O.  Formal C4 deoxygenation of the
+         1-deoxyosone; in the real system the H-donors are sugar-derived
+         reductones/enaminols (see LUMPING NOTE).
+
+      4. 1,4-dideoxypento-2,3-diulose + H2S -> 2-methyl-3-furanthiol + 2 H2O
+         C5H8O3 + H2S -> C5H6OS + 2 H2O.  EXACT with no reducing-equivalent
+         token: under the literature topology the sulfur-incorporation step
+         needs no reduction at all — the `[HH]` bookkeeping moves upstream to
+         step 3, where a reductone donor is chemically ordinary.  The intact-C5
+         skeleton and the atom mapping (sugar C-1 -> diulose CH3 -> MFT
+         2-methyl) match the [1-13C] result.
 
     LUMPING NOTE — the `2[H]` in steps 2 and 3 is written as molecular H2
     because the model carries no explicit reductone couple.  In the real
     system the hydrogen donors are the sugar-derived reductones/enaminols, not
-    free hydrogen gas.  H2 is therefore a *reducing-equivalent token* here, and
-    the steps are pool-gated on it so the lane cannot run without a reductant
+    free hydrogen gas.  H2 is therefore a *reducing-equivalent token*, and the
+    steps are pool-gated on it so the lane cannot run without a reductant
     having been generated somewhere in the network.
+
+    AUDIT 2026-08-27 (Wave I fix 8) — red-team finding H4.  The pool gate above
+    was once physically wrong, not because gating on a reductant is wrong, but
+    because of WHERE the token came from: in a ribose/cysteine system the ONLY
+    producer of `[HH]` was `Aminoketone_Condensation`, silently coupling MFT to
+    pyrazine chemistry.  Wave I gave the token a source that exists in every
+    system that can make MFT at all (`_thiol_reductant_pool`: 2 cysteine ->
+    cystine + 2[H], `Thiol_Oxidation`).  The Wave N route keeps that donor and
+    REDUCES the token's role: MFT formation now consumes one `[HH]` (step 3)
+    instead of one per H2S addition (old step), and the H2S step itself is
+    token-free.
     """
     steps: List[ElementaryStep] = []
     h2s = next((s for s in pool_species if s.smiles == "S"), None)
@@ -304,6 +358,16 @@ def _norfuraneol_mft_route(pool_species: List[Species]) -> List[ElementaryStep]:
                 products=[norfuraneol, water],
                 reaction_family="Furanone_Cyclisation",
             ))
+            if h2 is not None:
+                dideoxy = Species(
+                    label="1,4-dideoxypentodiulose",
+                    smiles=_PENTODIULOSE_14_DIDEOXY,
+                )
+                steps.append(ElementaryStep(
+                    reactants=[s, h2],
+                    products=[dideoxy, water],
+                    reaction_family="Deoxyosone_Reduction",
+                ))
         elif can == hexose_do1 and h2 is not None:
             seen.add(can)
             dmhf = Species(label="DMHF", smiles=_DMHF_CANONICAL)
@@ -313,25 +377,27 @@ def _norfuraneol_mft_route(pool_species: List[Species]) -> List[ElementaryStep]:
                 reaction_family="Furanone_Cyclisation",
             ))
 
-    if h2s is None or h2 is None:
+    if h2s is None:
         return steps
 
-    # Norfuraneol may have arrived either from step 1 above (same call, so it is
-    # not yet in `pool_species`) or already be in the pool from a previous
-    # generation; cover both.
-    norfuraneol_can = _canonical(_NORFURANEOL_CANONICAL)
-    has_norfuraneol = any(
-        _canonical(s.smiles) == norfuraneol_can for s in pool_species
+    # The 1,4-dideoxyosone may have arrived either from step 3 above (same
+    # call, so it is not yet in `pool_species`) or already be in the pool from
+    # a previous generation; cover both.
+    dideoxy_can = _canonical(_PENTODIULOSE_14_DIDEOXY)
+    has_dideoxy = any(
+        _canonical(s.smiles) == dideoxy_can for s in pool_species
     ) or any(
-        _canonical(p.smiles) == norfuraneol_can for st in steps for p in st.products
+        _canonical(p.smiles) == dideoxy_can for st in steps for p in st.products
     )
-    if has_norfuraneol:
-        norfuraneol = Species(label="norfuraneol", smiles=_NORFURANEOL_CANONICAL)
+    if has_dideoxy:
+        dideoxy = Species(
+            label="1,4-dideoxypentodiulose", smiles=_PENTODIULOSE_14_DIDEOXY
+        )
         mft = Species(label="2-methyl-3-furanthiol", smiles=_MFT_CANONICAL)
         steps.append(ElementaryStep(
-            reactants=[norfuraneol, h2s, h2],
+            reactants=[dideoxy, h2s],
             products=[mft, water, water],
-            reaction_family="Thiol_Addition_Norfuraneol",
+            reaction_family="Thiol_Addition_Pentodiulose",
         ))
 
     return steps
@@ -548,7 +614,7 @@ def _retro_aldol_fragmentation(pool_species: List[Species]) -> List[ElementarySt
         lower = s.label.lower()
         # The 1-deoxyosones are 2,3-diketones, not the 1,2-dicarbonyl the
         # retro-aldol channels below assume; they are handled by
-        # `_norfuraneol_mft_route`.
+        # `_furanone_and_mft_route`.
         if _canonical(s.smiles) in _DEOXYOSONE_1_CANONICALS:
             continue
         if "deoxyosone" in lower:
@@ -597,7 +663,72 @@ def _cysteine_degradation(amino_acids: List[Species], conditions: ReactionCondit
                 products=[h2s, ammonia, acetaldehyde, co2],
                 reaction_family="Cysteine_Degradation"
             ))
-            
+
+    return steps
+
+
+# Canonical cysteine / cystine, used by `_thiol_reductant_pool`.
+_CYSTEINE_CANONICAL = "NC(CS)C(=O)O"                          # C3H7NO2S
+_CYSTINE_CANONICAL = "NC(CSSCC(N)C(=O)O)C(=O)O"               # C6H12N2O4S2
+
+
+def _thiol_reductant_pool(pool_species: List[Species]) -> List[ElementaryStep]:
+    """Redox source of the model's 2[H] reducing-equivalent token.
+
+        2 cysteine -> cystine + 2[H]
+        2 C3H7NO2S -> C6H12N2O4S2 + H2        (exact, no invented atoms)
+
+    AUDIT 2026-08-27 (Wave I fix 8) — red-team finding H4.  Several lumped
+    reduction steps (`_furanone_and_mft_route` steps 2 and 3, `_mft_pathway`,
+    `_thiol_addition`) are pool-gated on the `[HH]` reducing-equivalent token.
+    Before this wave the token had exactly one producer reachable from a
+    ribose/cysteine system: `Aminoketone_Condensation`, the dihydropyrazine ->
+    pyrazine aromatisation.  That made the flagship compound MFT a DOWNSTREAM
+    DEPENDENT OF PYRAZINE CHEMISTRY — disabling aminoketone condensation drove
+    predicted MFT to exactly 0.0 ppb (measured).  No literature supports that
+    coupling.
+
+    WHY CYSTEINE -> CYSTINE, and not the sugar-derived reductone.  The other
+    honest donor is the 2,3-enediol (reductone) tautomer of the 1-deoxyosone,
+    oxidised to its dehydro-reductone.  The model carries NO species for either
+    the enediol tautomer or the dehydro-reductone, so writing that couple would
+    have meant inventing two new structures purely to carry the bookkeeping —
+    precisely the class of move the Wave G1 chemistry review removed (the
+    fictitious elemental-sulfur balance token).  Thiol -> disulfide, by
+    contrast:
+      * is exactly balanced with species that already exist (cysteine is a
+        registry precursor; cystine is its textbook oxidation product);
+      * reuses the family `Thiol_Oxidation`, which is ALREADY on the documented
+        H2-emitting oxidation whitelist in tests/unit/test_chemistry_soundness.py
+        for exactly this 2 RSH -> RSSR bookkeeping;
+      * is present by construction in every system that can reach MFT at all,
+        since cysteine is also the H2S source.
+
+    RETAINED-H2 LUMPING NOTE: as with the other whitelisted oxidations, the
+    2[H] leave as molecular H2 because the model carries no explicit electron
+    acceptor.  H2 gas is a token, not a claim of hydrogen evolution.
+    """
+    steps: List[ElementaryStep] = []
+    cysteine = next(
+        (
+            s
+            for s in pool_species
+            if s.smiles == _CYSTEINE_CANONICAL
+            or _canonical(s.smiles) == _canonical(_CYSTEINE_CANONICAL)
+            or s.label.lower() in ("cysteine", "l-cysteine")
+        ),
+        None,
+    )
+    if cysteine is None:
+        return steps
+
+    cystine = Species(label="cystine", smiles=_CYSTINE_CANONICAL)
+    hydro = Species(label="H2", smiles="[HH]")
+    steps.append(ElementaryStep(
+        reactants=[cysteine, cysteine],
+        products=[cystine, hydro],
+        reaction_family="Thiol_Oxidation",
+    ))
     return steps
 
 
@@ -739,7 +870,7 @@ def _thiol_addition(pool_species: List[Species]) -> List[ElementaryStep]:
         # by consuming MFT).  Converting an aryl thiohemiacetal to the thiol is
         # a net REDUCTION, not a dehydration-plus-sulfur-loss, so the step now
         # consumes reducing equivalents.  Same lumping convention as
-        # `_norfuraneol_mft_route`: H2 stands in for the sugar-derived
+        # `_furanone_and_mft_route`: H2 stands in for the sugar-derived
         # reductones, and the step is pool-gated on it.
         if h2:
             key = (sp.smiles, "bimolecular_coupled")
@@ -772,8 +903,10 @@ def _mft_pathway(pool_species: List[Species]) -> List[ElementaryStep]:
     This is NOT a mechanism.  It is a single lumped step that was standing in
     for the whole sulfur branch, and the 2026-08-27 chemistry review found it
     to be the sole producer of the model's flagship compound.  The accepted
-    route (Amadori -> 2,3-enolisation -> 1-deoxyosone -> norfuraneol -> +H2S)
-    now lives in `_norfuraneol_mft_route` and carries the primary role; this
+    route (Amadori -> 2,3-enolisation -> 1-deoxyosone -> 1,4-dideoxypento-
+    2,3-diulose -> +H2S; Cerny & Davidek 2003/2004 — norfuraneol was retired
+    from the MFT lane by Wave N, 2026-08-27) now lives in
+    `_furanone_and_mft_route` and carries the primary role; this
     lump is retained only so that hexose systems, whose furanone branch needs
     an extra reduction, retain SOME path to MFT and the network keeps its
     historical reachability.
@@ -792,7 +925,38 @@ def _mft_pathway(pool_species: List[Species]) -> List[ElementaryStep]:
           hexose   C6H10O5 + H2S + 2[H] -> C5H6OS + CH2O + 3 H2O
 
       The `2[H]` carries the same reductone lumping note as
-      `_norfuraneol_mft_route`.
+      `_furanone_and_mft_route`.
+
+    AUDIT 2026-08-27 (Wave I fix 12) — HEXOSE-ONLY, as the paragraph above
+    already claimed.  Until this wave the substrate filter accepted
+    `_is_pentose(s)` and any label containing "ribose", so the demoted lump
+    ALSO fired on pentose 3-deoxyosones — in direct contradiction of its own
+    docstring, and for no reason: a pentose reaches MFT through the real
+    mechanistic pentose route (`_furanone_and_mft_route`), which is why the
+    lump was demoted in the first place.  The effect was that pentose MFT was
+    produced twice, once by the accepted mechanism and once by a lump that the
+    Wave G1 review had already called "NOT a mechanism", which flattered the
+    pentose >> hexose ordering with a fabricated contribution.
+
+    RESTRICTED rather than DELETED: the docstring's stated reason for keeping
+    the lump is hexose reachability, and that reason is still live.  The hexose
+    furanone branch needs an extra reduction to reach DMHF, so deleting the
+    lump outright would make MFT UNREACHABLE from glucose + cysteine and break
+    the reachability assertion in
+    tests/scientific/test_pentose_hexose_sulfur_ordering.py
+    (`test_hexose_cysteine_system_reaches_its_claimed_products`) — i.e. it
+    would trade a known-lumped path for no path at all.  The pentose emission
+    is gone; the family name `Thiol_Addition_Legacy_Shortcut` is retained in
+    src/barrier_constants.py and src/family_sensitivity.py because those are
+    family-coverage keys.
+
+    MEASURED (see tests/scientific/test_wave_i_network_chemistry.py):
+      * pentose >> hexose MFT ordering, matched 150 C / pH 5.5 / aw 0.95 /
+        60 min, ribose vs glucose:
+            before fix 12:  981.31 / 109.33 ppb = 8.98x
+            after  fix 12:  see the test; the pentose side loses the lump's
+                            contribution and the hexose side is untouched.
+      * cys_ribose_140C_Hofmann1998 MFT: reported in the same test.
     """
     steps = []
     h2s = next((s for s in pool_species if s.smiles == "S"), None)
@@ -807,13 +971,19 @@ def _mft_pathway(pool_species: List[Species]) -> List[ElementaryStep]:
         # The 1-deoxyosones belong to the real route, not to this lump.
         if _canonical(s.smiles) in _DEOXYOSONE_1_CANONICALS:
             continue
+        # 2026-08-27 (Wave I fix 12): HEXOSE ONLY. `_is_pentose(s)` and the
+        # "ribose" label test were removed; pentoses go through
+        # `_furanone_and_mft_route`.
         is_supported_deoxyosone = (
             "deoxyosone" in label_lower and (
-                _is_pentose(s)
-                or "ribose" in label_lower
+                _is_hexose(s)
                 or "glucose" in label_lower
                 or "fructose" in label_lower
             )
+            and not _is_pentose(s)
+            and "ribose" not in label_lower
+            and "xylose" not in label_lower
+            and "arabinose" not in label_lower
         )
         if is_supported_deoxyosone:
             # Filter out N-containing species; they require deamination first (R.12)
@@ -821,19 +991,12 @@ def _mft_pathway(pool_species: List[Species]) -> List[ElementaryStep]:
                 continue
 
             mft = Species(label="2-methyl-3-furanthiol", smiles=_MFT_CANONICAL)
-            if "glucose" in label_lower or "fructose" in label_lower or _is_hexose(s):
-                formaldehyde = Species(label="formaldehyde", smiles="C=O")
-                steps.append(ElementaryStep(
-                    reactants=[s, h2s, h2],
-                    products=[mft, formaldehyde, water, water, water],
-                    reaction_family="Thiol_Addition_Hexose_Legacy_Shortcut"
-                ))
-            else:
-                steps.append(ElementaryStep(
-                    reactants=[s, h2s, h2],
-                    products=[mft, water, water, water],
-                    reaction_family="Thiol_Addition_Legacy_Shortcut"
-                ))
+            formaldehyde = Species(label="formaldehyde", smiles="C=O")
+            steps.append(ElementaryStep(
+                reactants=[s, h2s, h2],
+                products=[mft, formaldehyde, water, water, water],
+                reaction_family="Thiol_Addition_Hexose_Legacy_Shortcut"
+            ))
 
     return steps
 
@@ -1184,21 +1347,84 @@ def _sugar_ring_opening(pool_species: List[Species]) -> List[ElementaryStep]:
 
 def _acrylamide_formation(sugar: Species, asparagine: Species) -> List[ElementaryStep]:
     """
-    Asparagine + Reducing Sugar -> Acrylamide + Fragments.
-    Acrylamide: C=CC(=O)N (C3H5NO)
+    Asparagine + Reducing Sugar -> Acrylamide + CO2 + NH3 + sugar 3-deoxyosone + H2O.
+
+    AUDIT 2026-08-27 (Wave I fix 18) — the reducing sugar used to be a
+    SPECTATOR.  The step was written
+
+        sugar + Asn -> acrylamide + SUGAR + CO2 + NH3
+
+    with the inline excuse "Sugar is conserved here for simplicity", which made
+    the sugar formally CATALYTIC: the whole asparagine budget could be converted
+    without consuming a single sugar molecule.  That is not the accepted
+    mechanism, and it contradicted `src/safety.py::predict_acrylamide`, the
+    other half of this lane, which is explicitly SECOND ORDER —
+    `dA/dt = kf*[Asn]*[Sugar] - ke*[A]` (Knol 2009 / Parker 2012) — i.e. it
+    treats the sugar as a consumed co-substrate.
+
+    The two layers now agree that the sugar is consumed.  The sugar leaves as
+    its 3-deoxyosone, which is where the accepted mechanism actually sends it
+    (Asn + carbonyl -> N-glycosyl-Asn -> decarboxylated Schiff base ->
+    acrylamide, with the sugar moiety hydrolysing off into the deoxyosone that
+    carries on down the Maillard cascade).  That species already exists in the
+    network: `_enolisation_steps` emits the identical SMILES.
+
+    Atom balance is now exact in both branches (it was exact before too, because
+    the spectator sugar cancelled on both sides):
+
+        hexose   C6H12O6 + C4H8N2O3 -> C3H5NO + CO2 + NH3 + C6H10O5 + H2O
+                 C10H20N2O9         -> C10H20N2O9
+        pentose  C5H10O5 + C4H8N2O3 -> C3H5NO + CO2 + NH3 + C5H8O4  + H2O
+                 C9H18N2O8          -> C9H18N2O8
+
+    MEASURED IMPACT, and an honest negative result.  Predicted acrylamide is
+    UNCHANGED to 12 significant figures by this fix (synthetic Asn 10 mM +
+    sugar at 1/10/100 mM, 160 C / 20 min / pH 6.0 / aw 0.6): the flux
+    propagation in src/recommend.py scores a step from its REACTANTS' spans and
+    concentrations, and the sugar was already a reactant, so moving it out of
+    the products changes the stoichiometry without moving the number.  Two
+    things follow, both stated rather than papered over:
+      * dose dependence was ALREADY present and is unchanged — acrylamide is
+        exactly linear in sugar mM (7.86 / 78.61 / 786.09 ppb at 1 / 10 /
+        100 mM);
+      * sugar-IDENTITY dependence is still absent, and is absent in BOTH
+        layers: glucose, ribose and fructose give bit-identical predictions,
+        and `predict_acrylamide` takes a single lumped `reducing_sugar_mM` with
+        no identity term at all.  Giving the template an identity term (e.g. a
+        `safety_risk_acrylamide` entry in
+        `barrier_constants.DONOR_REACTIVITY_MULTIPLIERS`) would be a NEW
+        CALIBRATION with no anchor behind it, and would put the template out of
+        step with safety.py — the opposite of the consistency this fix is for.
+        OPEN OWNER ITEM, not fixed here.
     """
     if not (_is_sugar(sugar) and _is_asparagine(asparagine)):
         return []
-    
-    # Net balanced reaction (simplified):
-    # Asparagine (C4H8N2O3) -> Acrylamide (C3H5NO) + CO2 (CO2) + NH3 (H3N)
+
+    # The sugar leaves as its 3-deoxyosone. Same SMILES/label convention as
+    # `_enolisation_steps`, so the two producers dedupe onto one pool species.
+    if _is_pentose(sugar):
+        deoxyosone_smiles = "O=CC(=O)CC(O)CO"          # C5H8O4
+    elif _is_hexose(sugar) or _is_ketose(sugar):
+        deoxyosone_smiles = "O=CC(=O)CC(O)C(O)CO"      # C6H10O5
+    else:
+        # No balanced sugar-derived product can be named for this substrate
+        # (e.g. a disaccharide). Emitting the old spectator form instead would
+        # reintroduce the catalytic-sugar bug, so the step is not emitted.
+        # Every sugar in data/species/precursors.yml is a pentose or a hexose,
+        # so this branch is currently unreachable from the registry.
+        return []
+
     acrylamide = Species(label="Acrylamide", smiles="C=CC(=O)N")
     co2 = Species(label="CO2", smiles="O=C=O")
     ammonia = Species(label="ammonia", smiles="N")
-    
+    water = Species(label="water", smiles="O")
+    deoxyosone = Species(
+        label=f"{sugar.label}-deoxyosone-3", smiles=deoxyosone_smiles
+    )
+
     return [ElementaryStep(
         reactants=[sugar, asparagine],
-        products=[acrylamide, sugar, co2, ammonia], # Sugar is conserved here for simplicity
+        products=[acrylamide, co2, ammonia, deoxyosone, water],
         reaction_family="Safety_Risk_Acrylamide"
     )]
 
@@ -1339,7 +1565,7 @@ def _furanone_generation(pool: List[Species], conditions: ReactionConditions) ->
     The furanone a pentose gives WITHOUT an external carbon donor is
     norfuraneol (4-hydroxy-5-methyl-3(2H)-furanone, C5H6O3), not DMHF; that
     route is mechanistic rather than lumped and lives in
-    `_norfuraneol_mft_route` (1-deoxypentosulose -> norfuraneol + H2O).
+    `_furanone_and_mft_route` (1-deoxypentosulose -> norfuraneol + H2O).
     """
     if conditions.temperature_celsius < 90.0:
         return []

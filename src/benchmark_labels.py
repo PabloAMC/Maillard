@@ -76,9 +76,14 @@ _BENCHMARK_LABELS: dict[str, dict[str, str]] = {
         "plain": "Soy isolate + ribose + cysteine, 100 C (Protocol Pilot, 2026)",
         "latex": r"Soy isolate + ribose + cysteine, $100\,^{\circ}$C (Protocol Pilot, 2026)",
     },
+    # QUARANTINED 2026-08-27 (Wave I) -- kept so any surviving reference to the id renders
+    # with a name instead of a raw slug, NOT because the benchmark is in the panel. Its
+    # values have no possible source: 10.1007/s10068-022-01194-w reports relative peak areas
+    # for glucose/fructose at pH 7.5 and never mentions FFT or MFT. See
+    # data/benchmarks/quarantined/README.md.
     "spi_hvp_xylose_120C_PMC9905368": {
-        "plain": "SPI hydrolysate + xylose, 120 C (Cho et al., 2023)",
-        "latex": r"SPI hydrolysate + xylose, $120\,^{\circ}$C (Cho et al., 2023)",
+        "plain": "SPI hydrolysate + xylose, 120 C (Cho et al., 2023) [QUARANTINED]",
+        "latex": r"SPI hydrolysate + xylose, $120\,^{\circ}$C (Cho et al., 2023) [QUARANTINED]",
     },
     "thiamine_cys_glucose_120C_Bolton1994": {
         "plain": "Thiamine + cysteine + glucose, 120 C (Bolton et al., 1994)",
@@ -92,9 +97,10 @@ _BENCHMARK_LABELS: dict[str, dict[str, str]] = {
         "plain": "Thiamine + cysteine + xylose, 145 C (Cerny, 2008) [reference anchor]",
         "latex": r"Thiamine + cysteine + xylose, $145\,^{\circ}$C (Cerny, 2008) [reference anchor]",
     },
+    # QUARANTINED 2026-08-27 (Wave I) -- see the spi_hvp_xylose entry above.
     "wheat_gluten_hvp_xylose_120C_PMC9905368": {
-        "plain": "Wheat gluten hydrolysate + xylose, 120 C (Cho et al., 2023)",
-        "latex": r"Wheat gluten hydrolysate + xylose, $120\,^{\circ}$C (Cho et al., 2023)",
+        "plain": "Wheat gluten hydrolysate + xylose, 120 C (Cho et al., 2023) [QUARANTINED]",
+        "latex": r"Wheat gluten hydrolysate + xylose, $120\,^{\circ}$C (Cho et al., 2023) [QUARANTINED]",
     },
 }
 

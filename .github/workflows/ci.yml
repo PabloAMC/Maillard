@@ -11,10 +11,25 @@ name: CI
 #                                      broken.
 #   tests-unit   (~10 min + env)     : tests/unit + tests/scripts. Fast tier.
 #   tests-full   (~25 min + env)     : tests/scientific + tests/integration.
-#                                      Gated behind tests-unit so a broken build
-#                                      does not burn a full runner hour, and so it
-#                                      restores the conda package cache that
-#                                      tests-unit just populated.
+#                                      Runs UNCONDITIONALLY as of 2026-08-27; see
+#                                      the comment on the job for why the previous
+#                                      `needs: tests-unit` had to go.
+#   strict-benchmarks (~25 min + env): MAILLARD_STRICT_BENCHMARKS=1. Advisory,
+#                                      continue-on-error, and RED ON PURPOSE. Its
+#                                      score (0/14 strict-ready) is in the job
+#                                      name and in the step summary.
+#
+# What is NOT covered, stated plainly so that a green CI page is not mistaken for
+# a validated model:
+#   * No job here asserts that predicted ppb agrees with measured ppb. The panel
+#     test is a coverage/executability check; the accuracy numbers are pinned in
+#     tests/scientific/test_honest_headline_guards.py and are bad on purpose.
+#   * strict-benchmarks cannot pass and is not required to. See its job block.
+#   * tests/benchmarks/ (the Phase 3 "authority lane") is run by NOTHING, here or
+#     anywhere. It is skip-heavy by construction -- tests/benchmarks/_lane_policy.py
+#     skips whenever the data/qm/ fixtures are missing, so before those fixtures
+#     were tracked (same commit as this change) an absent dataset produced skips,
+#     not failures. Recorded in docs/reference/VALIDATION_CONTRACT.md.
 #
 # Deliberately NOT in the required set: tests/qm. Those tests skip gracefully when
 # xtb / crest / sella / MACE are absent, but environment.yml *installs* all of
@@ -92,6 +107,15 @@ jobs:
 
       - name: Hold-out exclusion guard
         run: python scripts/ci/holdout_guard.py
+
+      # 2026-08-27 (Wave I). Blocking. Both failure modes this gate checks actually
+      # happened during the audit: a constant was re-derived against two benchmarks and
+      # those same two benchmarks were then scored as literature coverage (they were the
+      # only two hits in the headline), and a 17-significant-figure fit residue shipped as
+      # a "literature_anchored" calibration constant. Neither was visible to any existing
+      # check. Like the other gates in this tier it is stdlib-only and offline.
+      - name: Fit-target circularity + constant-precision gate
+        run: python scripts/ci/fit_target_gate.py
 
   # ---------------------------------------------------------------------------
   # Tier 1: fast test tier.
@@ -191,9 +215,23 @@ jobs:
   tests-full:
     name: Scientific and integration tests
     runs-on: ubuntu-latest
-    # Fail fast on the cheap tier, and let tests-unit populate the conda package
-    # cache that this job restores.
-    needs: tests-unit
+    # 2026-08-27 (Wave J1). `needs: tests-unit` REMOVED. The stated rationale was
+    # cost -- fail fast on the cheap tier, and let tests-unit warm the conda cache
+    # this job restores -- and it was reasonable in the abstract. What it produced
+    # in practice: tests-unit has never once been green on this branch, so this
+    # job resolved to `skipping` on every run it has ever had, and the scientific
+    # tier of a scientific repository has NEVER EXECUTED IN CI. Evidence: run
+    # 33037645105 (PR #12, 2026-08-27), where "Scientific and integration tests"
+    # reports `skipping / 0s` while "Unit tests" reports `fail / 14m`. A skipped
+    # required check renders as a neutral grey tick, not a red X, so the tier that
+    # actually validates the model was both never run and never visibly absent.
+    #
+    # The cost this reintroduces is real and bounded: on a cold cache both jobs
+    # now solve the environment concurrently instead of sharing one solve, which
+    # is roughly one extra runner-quarter-hour per cold run. That is the correct
+    # trade. A tier that never runs costs infinitely more than a tier that runs
+    # twice as expensively, and the failure mode it created -- silence reading as
+    # success -- is the exact defect this whole audit exists to remove.
     timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
@@ -230,6 +268,108 @@ jobs:
         with:
           name: pytest-full-log
           path: results/pytest_full.log
+          if-no-files-found: warn
+
+  # ---------------------------------------------------------------------------
+  # Tier 2b: the strict benchmark gate. EXPECTED RED. Never blocks.
+  # ---------------------------------------------------------------------------
+  #
+  # 2026-08-27 (Wave J1). MAILLARD_STRICT_BENCHMARKS=1 existed, was documented in
+  # docs/reference/VALIDATION_CONTRACT.md as "an honest go/no-go signal", and had
+  # never been run by any automation. Its result was therefore invisible unless a
+  # human chose to look, which is the same thing as not existing.
+  #
+  # It is `continue-on-error: true` because it is RED and is expected to stay red
+  # until the model actually gets better. That is a deliberate, and uncomfortable,
+  # choice: a check that cannot pass must not block a merge, but it also must not
+  # be deleted, and it must not be quiet. So the job name carries the score, the
+  # step summary carries the score, and neither can be read as a pass.
+  #
+  # Read the name literally. "0/14 strict-ready" is the whole result. The pytest
+  # line under it says `9 failed, 5 passed`, and the 5 passes are NOT five
+  # benchmarks meeting the strict criteria -- every one of the 14 has
+  # strict_ready=False in results/validation/benchmark_summary.json. The strict
+  # assertion in tests/scientific/test_benchmarks.py fires only when
+  # `summary.tier == "PRIMARY"`, and exactly 9 of the 14 are PRIMARY. The other 5
+  # are SECONDARY: they are not evaluated by the gate at all and report green for
+  # having never been asked. Do not quote the pytest pass count anywhere.
+  strict-benchmarks:
+    name: "Strict benchmark gate — RED: 0/14 strict-ready (9/9 PRIMARY fail, 5 SECONDARY unevaluated)"
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    # Advisory by construction. See the block above.
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache conda packages
+        uses: actions/cache@v4
+        env:
+          CACHE_EPOCH: 1
+        with:
+          path: ~/conda_pkgs_dir
+          key: conda-${{ runner.os }}-${{ env.CACHE_EPOCH }}-${{ hashFiles('environment.yml') }}
+
+      - name: Install conda (Miniforge)
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          # See the tests-unit job for why environment-file is not passed here.
+          miniforge-version: latest
+          activate-environment: maillard
+          python-version: "3.12"
+          auto-activate-base: false
+          pkgs-dirs: ~/conda_pkgs_dir
+
+      - name: Build the maillard environment
+        run: bash scripts/ci/setup_env.sh
+
+      - name: Strict free-AA benchmark gate (expected red)
+        id: strict
+        env:
+          MAILLARD_STRICT_BENCHMARKS: "1"
+        # `|| true` keeps the summary step below reachable with the real numbers.
+        # continue-on-error already prevents this job from failing the workflow;
+        # this prevents the *step* from short-circuiting the summary.
+        run: |
+          set -o pipefail
+          python -m pytest tests/scientific/test_benchmarks.py -q 2>&1 \
+            | tee strict_benchmarks.log || true
+
+      - name: Report the score, whatever it is
+        if: always()
+        run: |
+          # Recompute strict-readiness from the artifact rather than from the
+          # pytest tally, for the reason in the block above: the pytest tally
+          # over-counts passes by the number of SECONDARY benchmarks the gate
+          # never examines.
+          python - <<'PY' | tee -a "$GITHUB_STEP_SUMMARY"
+          import json, pathlib
+          p = pathlib.Path("results/validation/benchmark_summary.json")
+          if not p.exists():
+              print("## Strict benchmark gate\n\n`benchmark_summary.json` absent - score unknown.")
+              raise SystemExit(0)
+          rows = json.loads(p.read_text())
+          ready = [r for r in rows if r.get("strict_ready")]
+          primary = [r for r in rows if r.get("tier") == "PRIMARY"]
+          print("## Strict benchmark gate — ADVISORY, EXPECTED RED\n")
+          print(f"**{len(ready)}/{len(rows)} benchmarks are strict-ready.**\n")
+          print(f"- {len(primary)} are PRIMARY tier and ARE evaluated by the gate.")
+          print(f"- {len(rows) - len(primary)} are SECONDARY and are NOT evaluated by it. "
+                "They appear as pytest passes without having been checked; that is an "
+                "absence of evidence, not evidence of correctness.\n")
+          print("A green tick on this job means the job ran, not that the model passed.\n")
+          print("| benchmark | tier | strict_ready |")
+          print("|---|---|---|")
+          for r in sorted(rows, key=lambda r: r.get("benchmark_id", "")):
+              print(f"| `{r.get('benchmark_id')}` | {r.get('tier')} | {r.get('strict_ready')} |")
+          PY
+
+      - name: Upload strict-gate log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: strict-benchmarks-log
+          path: strict_benchmarks.log
           if-no-files-found: warn
 
   # ---------------------------------------------------------------------------

@@ -4,23 +4,21 @@
 
 _Per-benchmark contribution to the panel's 90% CI coverage rate._
 
-Panel coverage: **68.3%** (28 / 41).
-Panel mean |log₁₀(P50/measured)| = 0.63 dex.
+Panel coverage: **82.9%** (29 / 35).
+Panel mean |log₁₀(P50/measured)| = 0.51 dex.
 
 Sorted by descending leverage (positive ⇒ benchmark currently *carries* coverage; negative ⇒ benchmark *drags* it down and is the natural next experiment).
 
 | Benchmark | Matched | Inside CI | Self coverage | Coverage minus self | Leverage | Mean |Δlog₁₀| | Max |Δlog₁₀| |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| `pea_isolate_ribose_cysteine_100C_45min_Internal2026` | 7 | 7 | 100.0% | 61.8% | +0.065 | 0.08 | 0.32 |
-| `soy_isolate_ribose_cysteine_100C_45min_Internal2026` | 7 | 7 | 100.0% | 61.8% | +0.065 | 0.08 | 0.32 |
-| `pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026` | 6 | 6 | 100.0% | 62.9% | +0.054 | 0.09 | 0.32 |
-| `soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026` | 6 | 6 | 100.0% | 62.9% | +0.054 | 0.09 | 0.32 |
-| `acrylamide_spi_extrusion_130C_ACSRef3` | 1 | 0 | 0.0% | 70.0% | -0.017 | 0.81 | 0.81 |
-| `furosine_extrusion_crossover_140C_RamirezJimenez2000` | 1 | 0 | 0.0% | 70.0% | -0.017 | 2.30 | 2.30 |
-| `resconi_2023_pbma_beef_identity_benchmark` | 1 | 0 | 0.0% | 70.0% | -0.017 | 0.60 | 0.60 |
-| `thiamine_cys_glucose_120C_Bolton1994` | 1 | 0 | 0.0% | 70.0% | -0.017 | 2.88 | 2.88 |
-| `thiamine_cys_xylose_145C_Cerny2008` | 1 | 0 | 0.0% | 70.0% | -0.017 | 0.51 | 0.51 |
-| `spi_hvp_xylose_120C_PMC9905368` | 3 | 1 | 33.3% | 71.1% | -0.028 | 1.54 | 2.34 |
-| `wheat_gluten_hvp_xylose_120C_PMC9905368` | 3 | 1 | 33.3% | 71.1% | -0.028 | 1.35 | 2.07 |
-| `cml_cel_commercial_pbma_Foods2023` | 2 | 0 | 0.0% | 71.8% | -0.035 | 3.05 | 3.08 |
-| `cys_ribose_140C_Hofmann1998` | 2 | 0 | 0.0% | 71.8% | -0.035 | 0.81 | 0.92 |
+| `pea_isolate_ribose_cysteine_100C_45min_Internal2026` | 7 | 7 | 100.0% | 78.6% | +0.043 | 0.14 | 0.36 |
+| `soy_isolate_ribose_cysteine_100C_45min_Internal2026` | 7 | 7 | 100.0% | 78.6% | +0.043 | 0.14 | 0.36 |
+| `pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026` | 6 | 6 | 100.0% | 79.3% | +0.035 | 0.15 | 0.36 |
+| `soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026` | 6 | 6 | 100.0% | 79.3% | +0.035 | 0.15 | 0.36 |
+| `cys_ribose_140C_Hofmann1998` | 2 | 2 | 100.0% | 81.8% | +0.010 | 0.28 | 0.49 |
+| `resconi_2023_pbma_beef_identity_benchmark` | 1 | 1 | 100.0% | 82.4% | +0.005 | 0.57 | 0.57 |
+| `acrylamide_spi_extrusion_130C_ACSRef3` | 1 | 0 | 0.0% | 85.3% | -0.024 | 1.19 | 1.19 |
+| `furosine_extrusion_crossover_140C_RamirezJimenez2000` | 1 | 0 | 0.0% | 85.3% | -0.024 | 2.30 | 2.30 |
+| `thiamine_cys_glucose_120C_Bolton1994` | 1 | 0 | 0.0% | 85.3% | -0.024 | 2.86 | 2.86 |
+| `thiamine_cys_xylose_145C_Cerny2008` | 1 | 0 | 0.0% | 85.3% | -0.024 | 0.50 | 0.50 |
+| `cml_cel_commercial_pbma_Foods2023` | 2 | 0 | 0.0% | 87.9% | -0.050 | 3.05 | 3.08 |

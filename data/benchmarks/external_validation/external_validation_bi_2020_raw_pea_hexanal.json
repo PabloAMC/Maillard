@@ -1,5 +1,10 @@
 {
   "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
+  "citation_audit_note": {
+    "basis": "10.1021/acs.jafc.9b07711 (Bi et al. 2020, key aroma compounds in raw and roasted peas) is the correct anchor here and for external_validation_bi_2020_raw_pea_hexanal / external_validation_bi_2020_roasted_pea_hexanal / intake id acs_2020_raw_pea_hexanal_baseline. It was ALSO reused in data/lit/benchmark_intake_registry.json for the unrelated EGCG/deoxyosone claim (jafc_2020_egcg_deoxyosone_trapping); that anchor has been repointed to 10.1021/acs.jafc.0c05098, so this DOI is no longer double-counted across unrelated claims. 2026-08-27 (Wave I): this note used to live only in the generated benchmark file, where a regeneration deleted it -- it is now carried in the bundle spec so it survives. See doi_repair_reversal on the bi_2020 anchors in data/lit/flavor_reference_payloads.json.",
+    "date": "2026-08-26",
+    "status": "verified_correct_shared_anchor"
+  },
   "conditions": {
     "ph": 6.0,
     "temp_C": 40.0,
@@ -27,7 +32,9 @@
   },
   "measured_volatiles": {
     "hexanal": {
-      "conc_ppb": 1260.0
+      "conc_ppb": 1260.0,
+      "value_provenance": "derived_from_oav_and_repo_threshold",
+      "value_provenance_note": "2026-08-27 (Wave I, cold-start red-team finding): this value is NOT an independently measured concentration in this repo's chain of custody. The arithmetic is exact: OAV 280 (the value the intake registry records for this anchor, 'Defined raw-pea hexanal baseline: 1260 ug/kg (OAV ~280)') x 4.5 ppb, where 4.5 ppb is THIS REPO'S OWN hexanal odour-detection threshold -- itself a compilation-level number that has never been read off a primary table (see the hexanal ODT anchor's harmonization_note in this file; published aqueous hexanal ODTs span 0.3-14 ug/L). 280 x 4.5 = 1260.0 to the digit. It is therefore possible that the source reports 1260 ug/kg directly and the OAV is the derived quantity -- but that has NOT been confirmed against the paper, and the exact divisibility by our own unsourced constant is precisely why the two readings cannot be told apart from inside the repo. Scored as a hold-out point it is a consistency check against our own threshold, not an external measurement, and it MOVES if that threshold is ever corrected."
     }
   },
   "metadata": {
@@ -49,18 +56,16 @@
     "state": "ambient_slurry"
   },
   "protein_type": "pea_iso",
+  "shared_anchor": true,
   "source_doi": "10.1021/acs.jafc.9b07711",
   "source_metadata": {
     "evidence_class": "external_validation_only",
     "generator": "matrix_experiment_intake",
-    "measurement_date": "2020-01-01",
+    "measurement_date": "not_applicable",
+    "measurement_date_note": "This bundle is SYNTHESIZED from published anchors; no measurement date exists. Until 2026-08-27 this field carried a fabricated '<publication year>-01-01'.",
     "notes": "External validation hold-out synthesized from flavor_reference_payloads.json; never use for calibration or promotion. bi_2020_raw_pea_hexanal_point: track_raw_pea_off_note_burden_without_claiming_isolate_specificity",
-    "origin": "external_literature"
-  },
-  "shared_anchor": true,
-  "citation_audit_note": {
-    "date": "2026-08-26",
-    "status": "verified_correct_shared_anchor",
-    "basis": "10.1021/acs.jafc.9b07711 (Bi et al. 2020, key aroma compounds in raw and roasted peas) is the correct anchor here and for external_validation_bi_2020_raw_pea_hexanal / external_validation_bi_2020_roasted_pea_hexanal / intake id acs_2020_raw_pea_hexanal_baseline. It was ALSO reused in data/lit/benchmark_intake_registry.json for the unrelated EGCG/deoxyosone claim (jafc_2020_egcg_deoxyosone_trapping); that anchor has been repointed to 10.1021/acs.jafc.0c05098, so this DOI is no longer double-counted across unrelated claims."
+    "origin": "external_literature",
+    "source_publication_year": "2020",
+    "source_reference": "Bi et al. (2020), J. Agric. Food Chem. 68:2718-2727"
   }
 }

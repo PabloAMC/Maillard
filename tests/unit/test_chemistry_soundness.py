@@ -224,24 +224,40 @@ def test_radical_propagation_only_consumes_real_radicals():
 
 # ── The accepted MFT route ──────────────────────────────────────────────────
 
-def test_pentose_system_builds_mft_through_the_norfuraneol_route():
+# 2026-08-27 (Wave N) — RE-PINNED from the norfuraneol route to the
+# 1,4-dideoxyosone route. CAUSE: isotope evidence contradicts norfuraneol as
+# the in-situ MFT intermediate (Cerny & Davidek 2003, 10.1021/jf026123f:
+# norfuraneol spiked into a [13C5]ribose/cysteine system leaves MFT mainly
+# 13C5-labelled; Cerny & Davidek 2004, 10.1021/jf035265m: 1,4-dideoxypento-
+# 2,3-diulose positionally confirmed). Norfuraneol is still produced
+# (Furanone_Cyclisation) but no longer feeds MFT.
+def test_pentose_system_builds_mft_through_the_dideoxyosone_route():
     steps = _enumerate("ribose_cysteine")
     families = collections.Counter(s.reaction_family for s in steps)
 
     assert families["Enolisation_2_3_Amadori"] >= 1, "1-deoxyosone step missing"
     assert families["Furanone_Cyclisation"] >= 1, "norfuraneol step missing"
-    assert families["Thiol_Addition_Norfuraneol"] >= 1, "norfuraneol + H2S missing"
+    assert families["Deoxyosone_Reduction"] >= 1, "1,4-dideoxyosone step missing"
+    assert families["Thiol_Addition_Pentodiulose"] >= 1, "dideoxyosone + H2S missing"
+    assert families["Thiol_Addition_Norfuraneol"] == 0, (
+        "retired norfuraneol->MFT step re-appeared (contradicted by "
+        "Cerny & Davidek 2003)"
+    )
 
     labels = {p.label for s in steps for p in s.products}
     assert "norfuraneol" in labels
+    assert "1,4-dideoxypentodiulose" in labels
     assert "2-methyl-3-furanthiol" in labels
 
 
-def test_norfuraneol_route_steps_are_exactly_balanced():
+def test_dideoxyosone_route_steps_are_exactly_balanced():
+    # 2026-08-27 (Wave N): family set updated with the route correction; the
+    # balance requirement itself is unchanged.
     wanted = {
         "Enolisation_2_3_Amadori",
         "Furanone_Cyclisation",
-        "Thiol_Addition_Norfuraneol",
+        "Deoxyosone_Reduction",
+        "Thiol_Addition_Pentodiulose",
     }
     route = [s for s in _enumerate("ribose_cysteine") if s.reaction_family in wanted]
     assert len(route) == len(wanted)
@@ -257,19 +273,23 @@ def test_pentose_reaches_norfuraneol_without_a_reduction_hexose_does_not():
     furaneol, which is why the classic DMHF precursor is the 6-deoxy sugar
     rhamnose rather than glucose.
     """
-    from src.reaction_templates import _norfuraneol_mft_route
+    # 2026-08-27 (Wave N): function renamed `_norfuraneol_mft_route` ->
+    # `_furanone_and_mft_route` with the MFT route correction (Cerny & Davidek
+    # 2003/2004); the structural pentose-vs-hexose claim tested here is
+    # unchanged — the reduction-free path to norfuraneol is still pentose-only.
+    from src.reaction_templates import _furanone_and_mft_route
 
-    pentose_only = _norfuraneol_mft_route(
+    pentose_only = _furanone_and_mft_route(
         [Species("pentose-1-deoxyosone", _DEOXYOSONE_1_PENTOSE)]
     )
     assert [s.reaction_family for s in pentose_only] == ["Furanone_Cyclisation"]
 
-    hexose_no_reductant = _norfuraneol_mft_route(
+    hexose_no_reductant = _furanone_and_mft_route(
         [Species("hexose-1-deoxyosone", _DEOXYOSONE_1_HEXOSE)]
     )
     assert hexose_no_reductant == []
 
-    hexose_with_reductant = _norfuraneol_mft_route(
+    hexose_with_reductant = _furanone_and_mft_route(
         [
             Species("hexose-1-deoxyosone", _DEOXYOSONE_1_HEXOSE),
             Species("H2", "[HH]"),

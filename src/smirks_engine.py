@@ -81,6 +81,12 @@ _FURYL_DISULFIDE_CANONICAL = "Cc1c(SSc2ccoc2C)cco1"  # C10H10O2S2, OHDFENKFSKIFB
 # 1-deoxyosones (2,3-enolisation products) — the real MFT/furanone precursors.
 _DEOXYOSONE_1_PENTOSE = "CC(=O)C(=O)C(O)CO"      # 1-deoxy-2,3-pentodiulose, C5H8O4
 _DEOXYOSONE_1_HEXOSE = "CC(=O)C(=O)C(O)C(O)CO"   # 1-deoxy-2,3-hexodiulose,  C6H10O5
+# 1,4-dideoxypento-2,3-diulose (CH3-CO-CO-CH2-CH2OH, C5H8O3) — the isotope-
+# evidenced in-situ MFT precursor (Cerny & Davidek 2003, 10.1021/jf026123f;
+# positionally confirmed with [1-13C]ribose in Cerny & Davidek 2004,
+# 10.1021/jf035265m). Added 2026-08-27 (Wave N) when the norfuraneol->MFT step
+# was retired; see `_furanone_and_mft_route` in reaction_templates.py.
+_PENTODIULOSE_14_DIDEOXY = "CC(=O)C(=O)CCO"      # 1,4-dideoxypento-2,3-diulose, C5H8O3
 
 # Isotope tag used inside SMIRKS PRODUCT templates to mark the atom that must
 # survive sanitisation as an open-shell radical centre.  Without it RDKit's
@@ -105,7 +111,53 @@ _SMIRKS_RULES: List[Tuple[str, str, str, str]] = [
         # ran away into amino-aldehyde oligomers that are not volatiles.  This
         # became load-bearing once glyoxal entered the pool (its Strecker
         # partner is 2-aminoethanal).
-        "[CX4H2,CX4H3;!$(C[#7]):2][CH1:1]=[O:5].[NH2:3][CX4:4]>>[*:2][CH1:1]=[N:3][*:4].[O:5]",
+        #
+        # AUDIT 2026-08-27 (Wave I fix 9) — red-team finding H3.  The pattern
+        # was far broader than the comment two lines above it claimed, and had
+        # been for as long as the comment existed:
+        #   * "alpha-carbon has NO hydroxyl (excludes sugars)" was NOT
+        #     implemented.  `[CX4H2]` matches the alpha carbon of an
+        #     alpha-hydroxy aldehyde perfectly well — glycolaldehyde (OCC=O),
+        #     glyceraldehyde, and every sugar-derived alpha-hydroxy carbonyl in
+        #     the pool were legitimate substrates for a rule named
+        #     `Lipid_Schiff_Base`.
+        #   * "C3+" was NOT implemented either: `CX4H3` is a methyl, so
+        #     acetaldehyde (C2, a Strecker product, not a lipid aldehyde) matched.
+        # The two exclusions the comment already claimed are now actually in the
+        # SMARTS:
+        #   `!$(C[OX2])`      alpha-hydroxy/alkoxy carbonyls are out (no sugars);
+        #   `$(C([#6])[#6])`  the alpha carbon carries a second carbon besides
+        #                     the carbonyl, i.e. the aldehyde is C3 or longer;
+        #   `CX4H3` dropped   which is the C2 (acetaldehyde) case.
+        # MEASURED, core no-lipid network (D-Glucose + D-Ribose + Glycine +
+        # L-Cysteine + L-Lysine + L-Asparagine, 150 C / pH 5.5 / aw 0.95,
+        # max_generations=4; reproduced by
+        # tests/scientific/test_wave_i_network_chemistry.py):
+        #   before: 228 Lipid_Schiff_Base steps of 303 total = 75.2%
+        #   after:   28 Lipid_Schiff_Base steps of 103 total = 27.2%
+        # (Wave I fix 12 later removed one unrelated step from the same network,
+        # so the end-of-wave figure the regression test pins is 28 of 102 = 27.5%.
+        # The 303-step "before" is itself post-fix-8; the pre-Wave-I baseline was
+        # 224 of 298 = 75.2%, i.e. the same share.)
+        # Genuine lipid aldehydes are unaffected: hexanal (CCCCCC=O), nonanal
+        # and propanal still match; acetaldehyde (C2) and glycolaldehyde
+        # (alpha-hydroxy) no longer do.  The same test pins both directions.
+        #
+        # RESIDUAL DEFECT, NOT FIXED HERE (stated so it is not mistaken for a
+        # clean result).  All 28 surviving steps come from ONE substrate,
+        # 5-aminopentanal (NCCCCC=O), the Strecker aldehyde of lysine.  It is
+        # bifunctional in exactly the way the 2026-08-27 note above describes,
+        # but its amine sits on the OMEGA carbon, not the alpha carbon, so
+        # `!$(C[#7])` — which is a constraint on the alpha carbon only — does
+        # not see it.  Each condensation product still carries a free aldehyde
+        # and a free amine, so the rule oligomerises: 12 first-generation steps
+        # become 28 over four generations.  Killing that needs a whole-molecule
+        # "no primary amine anywhere on the aldehyde" condition, which is not
+        # expressible in this per-atom SMARTS and would need a rule gate; it is
+        # an OPEN OWNER ITEM, deliberately out of scope for Wave I fix 9, whose
+        # brief was to implement the two exclusions the comment already claimed.
+        "[CX4H2;!$(C[#7]);!$(C[OX2]);$(C([#6])[#6]):2][CH1:1]=[O:5].[NH2:3][CX4:4]"
+        ">>[*:2][CH1:1]=[N:3][*:4].[O:5]",
         "any",
     ),
     (
@@ -349,7 +401,7 @@ from src.reaction_templates import (
     _sulfur_volatiles_pathway, _deamination_step, _lipid_maillard_synergy,
     _lipid_hydroperoxide_scission, _sugar_ring_opening,
     _acrylamide_formation, _cml_cel_formation, _thiamine_degradation, _furanone_generation,
-    _glutathione_cleavage, _norfuraneol_mft_route
+    _glutathione_cleavage, _furanone_and_mft_route, _thiol_reductant_pool
 )
 # ──────────────────────────────────────────────────────────────────────────
 # Tier A: SMIRKS application
@@ -682,6 +734,14 @@ class SmirksEngine:
         cys_steps = _cysteine_degradation(pool_list(), self.conditions)
         _add_steps(cys_steps)
 
+        # 3b-1. Reducing-equivalent pool (Wave I fix 8, 2026-08-27; red-team H4).
+        # `2 cysteine -> cystine + 2[H]`. Must run BEFORE every lane that is
+        # pool-gated on the `[HH]` token (3e, 3e-1, 3e-2), otherwise the token's
+        # only producer reachable from a cysteine/sugar system is the pyrazine
+        # aromatisation at 3c and MFT becomes a downstream dependent of pyrazine
+        # chemistry. See `_thiol_reductant_pool`.
+        _add_steps(_thiol_reductant_pool(pool_list()))
+
         # 3c. Aminoketone Condensation (Pyrazines)
         ak_steps = _aminoketone_condensation(pool_list())
         _add_steps(ak_steps)
@@ -698,16 +758,21 @@ class SmirksEngine:
         ta_steps = _thiol_addition(pool_list())
         _add_steps(ta_steps)
 
-        # 3e-1. PRIMARY MFT route (Wave G1 fix 7, 2026-08-27):
+        # 3e-1. PRIMARY MFT route (Wave G1 fix 7; route corrected Wave N,
+        # 2026-08-27 on isotope evidence — Cerny & Davidek 2003
+        # 10.1021/jf026123f, 2004 10.1021/jf035265m):
         #   Amadori -(2,3-enolisation)-> 1-deoxyosone      [in _enolisation_steps]
-        #          -(cyclodehydration)-> norfuraneol
-        #          -(+ H2S, reductone-mediated)-> 2-methyl-3-furanthiol
-        # van den Ouweland & Peer 1975 (10.1021/jf60200a038); Hofmann & Schieberle.
-        norfuraneol_steps = _norfuraneol_mft_route(pool_list())
-        _add_steps(norfuraneol_steps)
-        # Second pass so the +H2S step can see a norfuraneol that only entered
-        # the pool on the first pass.
-        _add_steps(_norfuraneol_mft_route(pool_list()))
+        #          -(+2[H], C4 deoxygenation)-> 1,4-dideoxypento-2,3-diulose
+        #          -(+ H2S)-> 2-methyl-3-furanthiol
+        # Norfuraneol is still produced (cyclodehydration branch;
+        # van den Ouweland & Peer 1975, 10.1021/jf60199a045, is its genuine
+        # SYNTHESIS route to MFT) but no longer feeds MFT in situ; see
+        # `_furanone_and_mft_route`'s docstring.
+        furanone_steps = _furanone_and_mft_route(pool_list())
+        _add_steps(furanone_steps)
+        # Second pass so the +H2S step can see a 1,4-dideoxyosone that only
+        # entered the pool on the first pass.
+        _add_steps(_furanone_and_mft_route(pool_list()))
 
         # 3e-2. DEMOTED one-step 3-deoxyosone shortcut, kept only for hexose
         #       reachability; see `_mft_pathway`'s docstring.
