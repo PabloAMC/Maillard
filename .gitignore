@@ -162,6 +162,17 @@ results/validation/*
 # regression it caused has to be reviewable without a run.
 !results/validation/matrix_observability_refit_pratap_singh.json
 !results/validation/matrix_observability_refit_pratap_singh.md
+# Wave S4 evidence artifact (2026-08-27): the fitted-factors vs measured-binding-physics
+# mode comparison. Tracked because it is the ONLY place the mode-vs-mode result exists,
+# and a wave whose headline is "the fitted observability factors score worse out of sample
+# than no factor at all" owes the reader the file that shows it, row by row.
+# THE NAME IS LOAD-BEARING IN THE OPPOSITE DIRECTION TO WAVE S3's. `holdout_guard` check 4
+# scans results/validation/*refit*.json / *rederivation*.json as FIT RECORDS and fails if
+# one names a hold-out benchmark. This artifact names every hold-out benchmark and is NOT a
+# fit record -- nothing in Wave S4 was fitted -- so it must NEVER be renamed to contain
+# "refit" or "rederivation".
+!results/validation/matrix_binding_mode_comparison.json
+!results/validation/matrix_binding_mode_comparison.md
 
 # Generated xTB artifacts (ignore generated path-search outputs)
 # Keep data/geometries tracked but ignore generated xTB results under xtb_inputs

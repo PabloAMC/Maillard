@@ -1044,6 +1044,65 @@ One value did gain independent support: `amadori_rearrangement` = 23.0 kcal/mol 
 **23.20** from the fitted rate. It is the first and only constant in that table with evidence
 from a measured trajectory behind it.
 
+## Wave S4 — binding physics as an observability mode: measured constants, zero fitted parameters (2026-08-27)
+
+Wave S3 showed the absolute-accuracy deficit does not live in the barriers. This wave tested
+the next layer down the matrix lane: the **observability factors** that convert a predicted
+total into the number a paper reports. Every one of them was fitted — several back-solved
+from the benchmark they are then scored against, and the 1-hexanol pair (`0.143 / 0.063`)
+back-solved from two values Wave T3 proved appear in no publication.
+
+`src/protein_binding.py` computes the same factor from measured protein-binding data
+instead: `f_free = 1/(1 + a_p·Pow·c_p)`, a single-site Langmuir in the dilute-ligand limit,
+with `a_p` in litres per gram of protein. **Zero fitted parameters.** Every constant is
+transcribed with a verbatim quote into `data/lit/binding_constants.yml` from a full text that
+was retrieved and read. It ships as a *mode*, selectable per run; `fitted_factors` remains
+the default and no shipped number moved.
+
+**The model reproduces percent-bound measurements it was never built from.** `a_p` was fitted
+by one laboratory on 2-alkanones by APCI-MS; the check below is against other laboratories,
+other methods and other chemical classes, with nothing adjusted:
+
+| measurement | measured % bound | predicted from `a_p` | residual |
+| --- | ---: | ---: | ---: |
+| Wang 2015 thesis, pea isolate, 2-octanone, pH 7 | 31.90 | 32.64 | +0.74 pts |
+| Wang 2015 thesis, pea isolate, 2-heptanone | 13.90 | 16.49 | +2.59 pts |
+| Heng 2005 thesis, pea vicilin, 2-heptanone | 19.00 | 19.27 | +0.27 pts |
+| Heng 2005 thesis, pea vicilin, 2-octanone | 33.00 | 36.95 | +3.95 pts |
+| Barallat-Pérez 2023, plant isolates, octanal | 52.76 | 55.61 | +2.85 pts |
+| Wang 2015 thesis, pea isolate, octanal, pH 8 | 61.87 | 50.88 | −11.0 pts |
+
+**And then it does not rescue the matrix lane, for a reason worth stating.** Scored on the
+eight-point external hold-out — never fitted, by anyone — against the incumbent and against a
+*null model* that applies no observability factor at all:
+
+| mode | hold-out median fold | CI coverage | in-panel median fold |
+| --- | ---: | ---: | ---: |
+| `fitted_factors` (shipped) | 93.68× | 3/8 | **1.0004×** |
+| `unit_observability` (null) | **67.42×** | 4/8 | 5.92× |
+| `binding_physics` | 68.18× | **5/8** | 5.92× |
+
+Read the two comparisons separately, because they say different things. **The fitted factors
+beat everything in-panel and lose to doing nothing out of sample** — the textbook signature of
+constants fitted to the rows they are scored on. **The binding physics is a wash**: it moves
+the median by less than 1% against the null model, because on 12 of 16 hold-out rows there is
+no usable binding datum and the mode reduces to the null model exactly. On the two scored rows
+where it genuinely applies it is 1–1: Liu nonanal improves 94.2× → 1.85×, Liu hexanal degrades
+48.2× → 121×.
+
+**The sharpest single result is a unit argument, not a score.** An observability factor is a
+fraction of a total and cannot exceed 1. The shipped constants are **4.32 (pea) and 9.54
+(soy)**. Whatever those numbers are, they are not observability — they are absorbing an
+absolute-scale deficit that lives in the marker yields, which were themselves built from the
+retired 260 / 380 ppb values. No binding model can repair that from the observability side.
+
+The Liu-vs-Pratap-Singh question Wave R left open is now answered quantitatively and the
+answer is negative: binding predicts Liu's water-calibrated numbers under-read the true total
+by **2.51×**, which widens the Liu-vs-Pratap gap from 9.95× to **24.9×** instead of closing
+it. The two are a materials difference, not a method artefact.
+
+Full row-by-row result: [matrix_binding_mode_comparison.md](results/validation/matrix_binding_mode_comparison.md).
+
 ## What this repository is now for
 
 A research prototype of the *architecture* alternative-protein flavor science needs —

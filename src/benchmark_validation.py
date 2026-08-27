@@ -28,6 +28,12 @@ from src.matrix_calibration_registry import (
 )
 from src.pipeline import MaillardPipeline
 from src.precursor_resolver import resolve_many
+from src.protein_binding import (
+    binding_mode_active,
+    observability_factor as binding_observability_factor,
+    observability_mode,
+    resolve_binding_context,
+)
 from src.projection_metadata import make_projection_metadata_row
 from src.smirks_engine import SmirksEngine
 from src.validation_contract import BenchmarkThresholds, DEFAULT_VALIDATION_CONTRACT
@@ -788,9 +794,15 @@ def _run_matrix_only_benchmark_prediction(bench: dict) -> dict:
     headspace_model = HeadspaceModel()
     pH = conditions.get("ph")
 
+    # 2026-08-27 (Wave S4): the per-lane binding context, built from
+    # data/lit/binding_constants.yml -- i.e. from each lane's OWN source, never from a
+    # repository guess. It is inert unless the binding observability mode is selected.
+    binding_context = resolve_binding_context(bench)
+
     predicted_ppb: Dict[str, float] = {}
     predicted_proxy_ppb: Dict[str, float] = {}
     projection_metadata: Dict[str, Dict[str, Any]] = {}
+    binding_residual_ratios: Dict[str, float] = {}
     for compound, yield_factor in MATRIX_BENCHMARK_BASE_MARKER_YIELDS.items():
         headspace_factor = headspace_model.get_matrix_benchmark_headspace_factor(
             compound,
@@ -799,6 +811,7 @@ def _run_matrix_only_benchmark_prediction(bench: dict) -> dict:
             temperature_celsius=float(conditions["temp_C"]),
             time_minutes=float(conditions["time_min"]),
             water_activity=water_activity,
+            binding_context=binding_context,
         )
         calibration = describe_matrix_calibration(
             compound,
@@ -811,6 +824,42 @@ def _run_matrix_only_benchmark_prediction(bench: dict) -> dict:
         marker_load_ppb = oxidation_load_ppb_by_pool[hydroperoxide_pool_key_for_marker(compound)]
         proxy_ppb = marker_load_ppb * float(yield_factor) * release_factor
         observable_ppb = proxy_ppb * calibration_factor
+        binding_row: Dict[str, Any] = {}
+        if binding_mode_active():
+            # 2026-08-27 (Wave S4) -- THE NO-DOUBLE-COUNT CHECK (assembled here, asserted
+            # after the loop).
+            #
+            # `calibration_factor` (the FITTED / back-solved observability constant) is
+            # divided out of `release_factor` above and multiplied back in here, so it
+            # cancels exactly. In binding mode the surviving net observability must
+            # therefore be the BINDING factor times the pH release factor, with NO
+            # contribution from the fitted registry and none from the dynamic-retention
+            # composition -- the latter matters most, because
+            # `compose_dynamic_retention` routes through `resolve_compound_matrix_retention`
+            # whose `volatile_retention` is documented as "fraction escaping matrix (rest
+            # is bound)", i.e. it is itself an unanchored binding model.
+            #
+            # The test is the RATIO net / (f_free x pH), collected per compound. It cannot
+            # be asserted to equal 1.0 point-by-point because
+            # `src.uncertainty_propagation._observable_multipliers` legitimately wraps this
+            # method with a sampled scalar during Monte-Carlo propagation. But that scalar
+            # is GLOBAL to the sample, while every factor this check is guarding against
+            # (registry factor, dynamic retention) is PER COMPOUND. So the invariant that
+            # survives the sampler and still catches a leak is: the ratio must be the SAME
+            # for every compound on the lane.
+            binding = binding_observability_factor(compound, context=binding_context)
+            ph_factor = headspace_model.get_matrix_ph_release_factor(
+                compound, protein_type=protein_type, pH=pH
+            )
+            expected_net = float(binding.f_free) * float(ph_factor)
+            if expected_net <= 0.0:
+                raise AssertionError(
+                    f"binding observability for {compound!r} on {bench.get('benchmark_id')!r} "
+                    "is non-positive; f_free must be in (0, 1]."
+                )
+            binding_residual_ratios[compound] = float(headspace_factor) / expected_net
+            binding_row = binding.to_dict()
+            binding_row["binding_ph_release_factor"] = float(ph_factor)
         predicted_proxy_ppb[compound] = proxy_ppb
         predicted_ppb[compound] = observable_ppb
         projection_metadata[compound] = make_projection_metadata_row(
@@ -826,15 +875,36 @@ def _run_matrix_only_benchmark_prediction(bench: dict) -> dict:
                 "headspace_factor": release_factor,
                 "total_observable_factor": headspace_factor,
                 "process_state": process_state,
+                "observability_mode": observability_mode(),
                 **panel_entry,
                 **calibration,
+                **binding_row,
             },
         )
+
+    if binding_residual_ratios:
+        ratios = list(binding_residual_ratios.values())
+        reference = ratios[0]
+        for compound, ratio in binding_residual_ratios.items():
+            if not math.isclose(ratio, reference, rel_tol=1e-9, abs_tol=1e-12):
+                raise AssertionError(
+                    "binding-physics observability mode is active but the net matrix "
+                    f"observability on {bench.get('benchmark_id')!r} is not a single global "
+                    "multiple of (binding f_free x pH release factor): "
+                    f"{binding_residual_ratios!r}. A COMPOUND-SPECIFIC term other than the "
+                    "measured binding model is contributing -- most likely the fitted "
+                    "registry factor or the dynamic-retention composition. Double counting "
+                    "refused."
+                )
 
     return {
         "targets": [],
         "metrics": {
             "matrix_model": protein_type,
+            "observability_mode": observability_mode(),
+            "binding_no_double_count_ratio": (
+                sorted(binding_residual_ratios.values())[0] if binding_residual_ratios else None
+            ),
             # Wave P item 4: the LINOLEATE load keeps the historical key, so existing
             # readers keep the meaning they had; the oleate pool that now drives
             # nonanal is reported alongside it.

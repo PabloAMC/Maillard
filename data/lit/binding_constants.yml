@@ -1,0 +1,1252 @@
+# =====================================================================================
+# data/lit/binding_constants.yml
+#
+# MEASURED protein-flavour binding data for the matrix observability lane.
+# Created 2026-08-27, Wave S4 (tasks/audit_remediation.md).
+#
+# WHY THIS FILE EXISTS. Until this wave the matrix lane converted a predicted total
+# volatile concentration into a "headspace observable" number through the FITTED
+# observability factors in `src/matrix_calibration_registry.py`. Several of those were
+# back-solved from their own benchmark, and two (the 1-hexanol pair, 0.143 / 0.063) were
+# back-solved from values that appear in NO paper (Wave T3). This file holds the
+# alternative: binding numbers measured in real experiments, in their NATIVE units, each
+# with a verbatim quote from a retrieved full text.
+#
+# NOTHING IN THIS FILE IS FITTED. No value here was chosen, scaled or adjusted to make
+# any prediction match any benchmark. Every number is transcribed from a source that was
+# retrieved and read, and the quote that contains it is stored beside it.
+#
+# THE PHYSICS THIS FILE SERVES (see src/protein_binding.py for the implementation):
+#
+#     f_free = 1 / (1 + K_eff * c_p)
+#
+# a single-site Langmuir in the dilute-ligand limit, where `c_p` is the protein
+# concentration in the SAME mass units K_eff was measured in (g/L) and `f_free` is the
+# fraction of the total analyte that is free in the aqueous phase and therefore drives
+# the headspace. Two record types feed it:
+#
+#   (1) `hydrophobic_interaction_parameter_ap` -- the Harrison & Hills / Viry partition
+#       model as applied to plant proteins by Snel et al. 2023. There K_eff = a_p * Pow,
+#       with a_p in L per gram of protein and Pow the compound's octanol-water partition
+#       coefficient. This is the only record type in this file whose units already
+#       normalise by protein MASS, which is why it can be used without inventing a
+#       protein molar mass.
+#
+#   (2) `percent_bound_at_conditions` -- a percentage bound measured at ONE stated
+#       protein loading. It is stored AS THAT, with its conditions, and is inverted to
+#       K_eff = (p/(1-p)) / c_p_measured only at the point of use, which is exact
+#       arithmetic under the same single-site form. It is NOT extrapolated into an
+#       "affinity constant" it is not.
+#
+# WHAT IS DELIBERATELY *NOT* HERE.
+#   * No Klotz/Scatchard K in M^-1 has been converted to a per-gram basis. Those
+#     constants are defined per MOLE of protein, and none of the sources retrieved
+#     states the protein molar mass it used, so the conversion cannot be done without
+#     inventing one. The two such studies found are recorded under
+#     `not_usable_without_protein_molar_mass` with their numbers, so a later wave with
+#     that datum can promote them.
+#   * No denaturation / heat adjustment is applied anywhere. The one source that
+#     addresses it (Barallat-Perez 2023, Figure 4) reports the effect QUALITATIVELY
+#     ("increasing the temperature also led to a slight increase in the level of hexanal
+#     binding"); it prints no number for it. Recorded under
+#     `denaturation_effect_evidence` and NOT MODELLED. See src/protein_binding.py.
+#
+# UNITS DISCIPLINE. Every record carries `units` and, where a mass basis is involved,
+# `protein_basis` (`g_protein` vs `g_isolate_powder`). These are NOT interchangeable: a
+# commercial isolate is 77-93 wt% protein, so mixing them is a up-to-1.3x error in c_p.
+# Consumers must read `protein_basis` and say which basis they are working in.
+# =====================================================================================
+
+schema_version: 1
+created: "2026-08-27"
+wave: "S4"
+fitted_content: none
+fit_status: >-
+  No value in this file is fitted, tuned or back-solved. Every number is a literature
+  transcription with a verbatim quote. This file must never receive a value derived from
+  a repository prediction or from agreement with a repository benchmark.
+
+# -------------------------------------------------------------------------------------
+# SOURCES
+# -------------------------------------------------------------------------------------
+sources:
+  - source_id: snel_2023_heliyon
+    citation: >-
+      Snel, S.J.E.; Pascu, M.; Bodnar, I.; Avison, S.; van der Goot, A.J.; Beyrer, M.
+      (2023). "Flavor-protein interactions for four plant proteins with ketones and
+      esters." Heliyon 9(6): e16503.
+    doi: "10.1016/j.heliyon.2023.e16503"
+    crossref_verified: "2026-08-27"
+    crossref_returned_title: "Flavor-protein interactions for four plant proteins with ketones and esters"
+    access: open_access
+    retrieved_from: "Europe PMC PMC10245154 fullTextXML"
+    retrieved_on: "2026-08-27"
+    verification_status: content_verified_full_text
+    method_summary: >-
+      Equilibrium headspace (APCI-MS / GC) on flavoured protein dispersions of soy, yellow
+      pea, fava bean, chickpea and whey protein isolate at 5 protein-isolate levels
+      (5, 10, 20, 30, 50 g/kg dispersion), each with a C4/C6/C8/C10 ketone and ester
+      series; the Harrison & Hills flavour-partitioning model was fitted to the resulting
+      headspace suppression to obtain one hydrophobic interaction parameter a_p per
+      protein per chemical class.
+    model_quote: >-
+      "Eq (7) leads to:(8)Kwgeff=Kwgf1+Kpfcpe For ketones and esters, the flavor-protein
+      interaction is assumed to be dominated by hydrophobic interactions, the global
+      interaction constant could be approached with [23]:(9)Kpf=apPowf in which ap and
+      Powf are the unknown hydrophobic interaction parameter of the protein and the known
+      octanol-water partition coefficient of the flavor compound."
+    protein_basis_quote: >-
+      "This resulted in dispersions of 5, 10, 20, 30, and 50 gkg-1 for each protein
+      isolate. ... The exact amount of protein in each dispersion was then calculated
+      based on the protein content and dry matter content of the protein isolates."
+    pow_convention_quote: '"1Software EPIWEB v4.1, KOWWIN v1.68"'
+    pow_convention: KOWWIN_v1_68_estimate
+    protein_contents_quote: >-
+      "Protein content (g/100 g dw) 83.25 +/- 2.77a (Soy) 77.11 +/- 0.29b (Yellow pea)"
+
+  - source_id: barallat_perez_2023_jafc
+    citation: >-
+      Barallat-Perez, C.; Janssen, H.-G.; Martins, S.; Fogliano, V.; Oliviero, T. (2023).
+      "Unraveling the Role of Flavor Structure and Physicochemical Properties in the
+      Binding Phenomenon with Commercial Food Protein Isolates." J. Agric. Food Chem.
+      71(50): 20274-20284.
+    doi: "10.1021/acs.jafc.3c05991"
+    crossref_verified: "2026-08-27"
+    crossref_returned_title: "Unraveling the Role of Flavor Structure and Physicochemical Properties in the Binding Phenomenon with Commercial Food Protein Isolates"
+    access: open_access_cc_by
+    retrieved_from: "Europe PMC PMC10739987 fullTextXML"
+    retrieved_on: "2026-08-27"
+    verification_status: content_verified_full_text
+    repo_history_note: >-
+      This is the paper whose mis-attribution Wave T3 settled: the repository record
+      `jafc_3c05991_ppi_hexanal_binding` claimed 52.76 +/- 4.65 %bound for HEXANAL in PPI.
+      The paper reports that number for OCTANAL, pooled over PPI/SPI/LPI, and reports NO
+      hexanal percentage anywhere. The octanal record below is that value, correctly
+      attributed. The hexanal claim is recorded here as qualitative-only.
+    method_quote: >-
+      "From a 2 wv% protein solution, for each protein type, 1 mL was added into a 20 mL
+      GC-MS vial followed by the addition of 1 mL of flavor stock solution. Thus, a final
+      protein solution of 1 wv% and 5 mg/L flavor concentration was obtained."
+    binding_definition_quote: >-
+      "Flavor binding to proteins was calculated and expressed in %, in the absence and
+      presence of protein, as depicted in eq 1(15)1where HS1 (protein solution + flavor)
+      is the abundance in the headspace of the flavored-protein-based aqueous solution,
+      and HS2 and HS3 are the abundances in the headspace in the absence of flavor (HS2)
+      or protein (HS3)."
+    buffer_quote: >-
+      "(PPI, SPI, LPI, and WPI) at an initial concentration of 2 wv% in sodium phosphate
+      buffer (pH 7.0, 50 mM)."
+    incubation_quote: >-
+      "Samples were incubated and shaken for 14 min at 40 degC, following a modified
+      version of the Wang and Arntfield protocol."
+    protein_basis: g_isolate_powder
+    protein_basis_note: >-
+      "1 wv%" is 1 g of the commercial isolate powder per 100 mL, i.e. 10 g powder/L. The
+      paper states its isolates are ">83% protein (Table S2)", so the protein-basis
+      concentration is 8.3-9.5 g/L; the powder basis is used here and the difference is
+      carried as a stated <=1.2x uncertainty on c_p.
+
+  - source_id: harrison_hills_1997
+    citation: >-
+      Harrison, M.; Hills, B.P. (1997). "Mathematical Model of Flavor Release from Liquids
+      Containing Aroma-Binding Macromolecules." J. Agric. Food Chem. 45(5): 1883-1890.
+    doi: "10.1021/jf9607876"
+    crossref_verified: "2026-08-27"
+    crossref_returned_title: "Mathematical Model of Flavor Release from Liquids Containing Aroma-Binding Macromolecules"
+    access: closed
+    retrieved_from: null
+    verification_status: citation_verified_full_text_not_retrieved
+    role: >-
+      ORIGIN OF THE MODEL FORM ONLY. No number is taken from this paper. The equations
+      used here are quoted from Snel et al. 2023, which states them explicitly and cites
+      Harrison & Hills for them. Listed so the model's lineage is attributable.
+
+  - source_id: pratap_singh_2021_molecules
+    citation: >-
+      Singh, A.; Shi, Y.; Magreault, P.; Kitts, D.D.; Jarzebski, M.; Siejak, P. et al.
+      (2021). "A Rapid Gas-Chromatography/Mass-Spectrometry Technique for Determining
+      Odour Activity Values of Volatile Compounds in Plant Proteins: Soy, and
+      Allergen-Free Pea and Brown Rice Protein." Molecules 26(13): 4104.
+    doi: "10.3390/molecules26134104"
+    crossref_verified: "2026-08-27"
+    access: open_access
+    retrieved_from: "Europe PMC PMC8271896 fullTextXML"
+    retrieved_on: "2026-08-27"
+    verification_status: content_verified_full_text
+    role: matrix_protein_loading_and_quantification_basis
+
+  - source_id: liu_2021_ncsu_thesis
+    citation: >-
+      Liu, Y. (2021). "Flavor Chemistry of Pea Proteins", MS thesis, North Carolina State
+      University; published as Liu, Cadwallader & Drake (2023), Food Chemistry 406:134998.
+    doi: "10.1016/j.foodchem.2022.134998"
+    crossref_verified: "2026-08-27 (Wave R)"
+    access: open_repository
+    retrieved_from: "repository.lib.ncsu.edu (full thesis retrieved and read in Wave R)"
+    verification_status: content_verified_full_text_wave_r
+    role: matrix_protein_loading_and_quantification_basis
+
+  - source_id: pubchem_logp
+    citation: >-
+      PubChem Compound Summary, "LogP" section; experimental values sourced by PubChem
+      from Hansch, C.; Leo, A.; Hoekman, D. "Exploring QSAR - Hydrophobic, Electronic, and
+      Steric Constants." Washington, DC: American Chemical Society, 1995.
+    access: open_database
+    retrieved_from: "PubChem PUG-View / PUG-REST"
+    retrieved_on: "2026-08-27"
+    verification_status: content_verified_database_record
+    role: octanol_water_partition_coefficients
+
+  - source_id: wang_2015_umanitoba_thesis
+    citation: >-
+      Wang, K. (2015). "Evaluation of protein-flavour binding on flavour delivery and
+      protein thermal-gelation properties in regards to selected plant proteins", PhD
+      thesis, University of Manitoba (handle 1993/30986). Chapters 3-6 are the published
+      papers Wang & Arntfield, Food Chem. 157:364-372 (10.1016/j.foodchem.2014.02.042),
+      Food Hydrocoll. 43:410-417 (10.1016/j.foodhyd.2014.06.011), Food Res. Int. 77:1-9
+      (10.1016/j.foodres.2015.03.017) and Food Chem. 211:235-242
+      (10.1016/j.foodchem.2016.05.062).
+    doi: "10.1016/j.foodres.2015.03.017"
+    doi_note: >-
+      The thesis itself carries no DOI; the DOI above is the published version of the
+      chapter the Table 5.1 record below is transcribed from, CrossRef-verified.
+    crossref_verified: "2026-08-27"
+    crossref_returned_title: >-
+      "Effect of salts and pH on selected ketone flavours binding to salt-extracted pea
+      proteins: The role of non-covalent forces"
+    access: open_repository
+    retrieved_from: "mspace.lib.umanitoba.ca (full 277-page thesis retrieved)"
+    retrieved_on: "2026-08-27"
+    verification_status: content_verified_full_text
+    material: >-
+      Salt-extracted pea protein isolate (PPIs), lab-made, 82.68 wt% protein by Dumas
+      (N x 5.7).
+    method_summary: >-
+      1% (w/v) PPIs, flavours at 250 ppm, 0.01 M potassium phosphate (or 0.05 M NaCl for
+      the pH series), 30 C / 125 rpm / 3 h, ITEX dynamic-headspace GC/MS; binding % = 1 -
+      (peak area with protein / peak area without) x 100.
+    figure_only_warning: >-
+      The hexanal / heptanal / octanal x pea percent-bound values this campaign most wanted
+      are in Figure 3.1a of this thesis and are FIGURE-ONLY. They are not transcribed.
+
+  - source_id: heng_2005_wur_thesis
+    citation: >-
+      Heng, L. (2005). "Flavour aspects of pea and its protein preparations in relation to
+      novel protein foods", PhD thesis, Wageningen University.
+    doi: "10.18174/121674"
+    crossref_verified: "2026-08-27"
+    access: open_repository
+    retrieved_from: "edepot.wur.nl/121674"
+    retrieved_on: "2026-08-27"
+    verification_status: content_verified_full_text
+    material: "Purified pea vicilin and legumin (anion-exchange from de-hulled green pea flour)."
+    method_summary: >-
+      10 mM potassium phosphate, pH 7.6, I = 0.024 M; static headspace GC-FID, 37 C,
+      10 min, 500 rpm; heated fractions 90 C / 30 min.
+
+  - source_id: barallat_perez_2025_npjsf
+    citation: >-
+      Barallat-Perez, C.; Khazzam, E.; Janssen, H.-G.; Martins, S.; Fogliano, V.;
+      Oliviero, T. (2025). "An in vitro study exploring the role of mucin in the
+      protein-flavor binding mechanism." npj Science of Food 9: 174.
+    doi: "10.1038/s41538-025-00451-6"
+    crossref_verified: "2026-08-27"
+    crossref_returned_title: "An in vitro study exploring the role of mucin in the protein-flavor binding mechanism"
+    access: open_access
+    retrieved_from: "nature.com article PDF + the publisher's Table 1 HTML"
+    retrieved_on: "2026-08-27"
+    verification_status: content_verified_full_text
+    material: "Soy protein isolate SUPRO XT219D IP (Solae), native (no heat step); also WPI and LPI. NO PEA COLUMN."
+    method_summary: >-
+      "SPI, LPI, and WPI were individually utilized at an initial concentration of
+      2(w/v)% in sodium phosphate buffer (pH 7.0, 50 mM)"; five flavour levels 1, 2.5, 5,
+      10, 20 mg/L; 30 C / 125 rpm / 3 h; HS-GC-MS incubated 14 min at 40 C; binding
+      parameters from Klotz plots.
+
+  - source_id: liu_2026_ilc_spi
+    citation: >-
+      Liu, ...; Da Costa, ...; Chen, ...; Albada, B.; Janssen, H.-G. (2026). "Probing soy
+      protein-aldehyde binding by inverse liquid chromatography on protein-packed
+      columns." Food Chemistry 525: 150473.
+    doi: "10.1016/j.foodchem.2026.150473"
+    crossref_verified: "2026-08-27"
+    crossref_returned_title: "Probing soy protein-aldehyde binding by inverse liquid chromatography on protein-packed columns"
+    access: open_access_cc_by
+    retrieved_from: "edepot.wur.nl/721012 (CC-BY copy; ScienceDirect blocked)"
+    retrieved_on: "2026-08-27"
+    verification_status: content_verified_full_text
+    material: "Commercial SPI (Solae) physically mixed with diol-silica, 4.30 wt% protein in the packed bed."
+    method_summary: >-
+      Inverse liquid chromatography on a protein-packed column, phosphate-buffer mobile
+      phase, all measurements at 200 mg/L flavour; a parallel HS-GC-MS reference used 1%
+      (w/v) SPI with 100 mg/L aldehyde.
+
+  - source_id: okeefe_1988_isu_thesis
+    citation: >-
+      O'Keefe, S.F. (1988). "Binding of volatile flavor compounds to purified soy proteins
+      in an aqueous model system", PhD dissertation, Iowa State University. Published as
+      O'Keefe, Wilson, Resurreccion & Murphy (1991), J. Agric. Food Chem. 39:1022-1028
+      (10.1021/jf00006a003) and O'Keefe, Resurreccion, Wilson & Murphy (1991), J. Food
+      Sci. 56:802-806 (10.1111/j.1365-2621.1991.tb05386.x).
+    doi: "10.31274/rtd-180813-12611"
+    crossref_verified: "2026-08-27"
+    crossref_returned_title: "Binding of volatile flavor compounds to purified soy proteins in an aqueous model system"
+    access: open_repository
+    retrieved_from: "dr.lib.iastate.edu (full dissertation; both published papers are closed)"
+    retrieved_on: "2026-08-27"
+    verification_status: content_verified_full_text_ocr
+    ocr_warning: >-
+      The retrieved text is an OCR scan; spelling artefacts ("glyclnln", "Fentanal") are in
+      the scan, not in the transcription. Every number quoted below was grep-verified
+      against the OCR text.
+    material: "Purified soy glycinin (11S) and beta-conglycinin (7S), dialysed against 30 mM Tris-HCl pH 8.0."
+    method_summary: >-
+      "The protein solutions were diluted to lO.Omg/ml with standard Tris buffer" (10.0
+      g/L); ligand 1-1000 ppm; equilibrium headspace GC-FID in 5 mL septum vials at
+      278/293/303 K; K by the Wilkinson (1961) method.
+    units_caveat: >-
+      The OCR'd table headers print no units for K. M^-1 is established BY DERIVATION, not
+      by quote: the thesis's Table 8 gives dG = -3.26 kcal/mol for glycinin-hexanal at
+      293 K, and -RT ln(270) at 293 K = -3.26 kcal/mol, which closes only if K is in M^-1.
+
+# -------------------------------------------------------------------------------------
+# BINDING RECORDS
+# -------------------------------------------------------------------------------------
+records:
+
+  # --- Harrison & Hills hydrophobic interaction parameters (per gram of protein) -------
+  - record_id: snel2023_ap_yellow_pea_ketones
+    source_id: snel_2023_heliyon
+    quantity: hydrophobic_interaction_parameter_ap
+    value: 25.0e-5
+    uncertainty: 0.1e-5
+    units: L_per_g_protein
+    protein_basis: g_protein
+    protein_source: pea_iso
+    protein_material: "Pea protein isolate (PPI, Nutralys F85M, Roquette)"
+    compound_class: ketone
+    compound_class_measured_on: "2-butanone, 2-hexanone, 2-octanone, 2-decanone (C4-C10 2-alkanones)"
+    fit_quality_r2: 1.00
+    conditions:
+      temperature_celsius: 25.0
+      protein_range_g_isolate_per_kg: [5, 50]
+      flavor_range_mg_per_kg: [0.1, 10]
+      medium: "demineralised water dispersion"
+    location: "Table 3"
+    quote: >-
+      "Table 3 Fitting results of ketones and esters for soy, yellow pea, fava bean,
+      chickpea, and whey protein isolates, using the flavor partitioning model and Pow.
+      Model parameters are the hydrophobic interaction parameter ap +/- uncertainty of the
+      parameter (n=3) ... Protein source | Ketones ap (10-5 Lg-1) R2 | Esters ap (10-5
+      Lg-1) R2 ... Yellow pea 25 +/- 0.1 1.00 11 +/- 0.3 0.96"
+    verification_status: content_verified_full_text
+    usable_for_model: true
+
+  - record_id: snel2023_ap_soy_ketones
+    source_id: snel_2023_heliyon
+    quantity: hydrophobic_interaction_parameter_ap
+    value: 16.0e-5
+    uncertainty: 0.1e-5
+    units: L_per_g_protein
+    protein_basis: g_protein
+    protein_source: soy_iso
+    protein_material: "Soy protein isolate (SPI, Supro 500E A, Solae)"
+    compound_class: ketone
+    compound_class_measured_on: "2-butanone, 2-hexanone, 2-octanone, 2-decanone (C4-C10 2-alkanones)"
+    fit_quality_r2: 1.00
+    conditions:
+      temperature_celsius: 25.0
+      protein_range_g_isolate_per_kg: [5, 50]
+      flavor_range_mg_per_kg: [0.1, 10]
+      medium: "demineralised water dispersion"
+    location: "Table 3"
+    quote: >-
+      "Protein source | Ketones ap (10-5 Lg-1) R2 | Esters ap (10-5 Lg-1) R2 ... Soy 16
+      +/- 0.1 1.00 4.8 +/- 0.2 0.93"
+    verification_status: content_verified_full_text
+    usable_for_model: true
+
+  - record_id: snel2023_ap_yellow_pea_esters
+    source_id: snel_2023_heliyon
+    quantity: hydrophobic_interaction_parameter_ap
+    value: 11.0e-5
+    uncertainty: 0.3e-5
+    units: L_per_g_protein
+    protein_basis: g_protein
+    protein_source: pea_iso
+    compound_class: ester
+    fit_quality_r2: 0.96
+    location: "Table 3"
+    quote: >-
+      "Yellow pea 25 +/- 0.1 1.00 11 +/- 0.3 0.96"
+    verification_status: content_verified_full_text
+    usable_for_model: true
+    used_by_model: false
+    not_used_because: "No ester is on the matrix marker panel."
+
+  - record_id: snel2023_ap_soy_esters
+    source_id: snel_2023_heliyon
+    quantity: hydrophobic_interaction_parameter_ap
+    value: 4.8e-5
+    uncertainty: 0.2e-5
+    units: L_per_g_protein
+    protein_basis: g_protein
+    protein_source: soy_iso
+    compound_class: ester
+    fit_quality_r2: 0.93
+    location: "Table 3"
+    quote: >-
+      "Soy 16 +/- 0.1 1.00 4.8 +/- 0.2 0.93"
+    verification_status: content_verified_full_text
+    usable_for_model: true
+    used_by_model: false
+    not_used_because: "No ester is on the matrix marker panel."
+
+  - record_id: snel2023_ap_whey_ketones
+    source_id: snel_2023_heliyon
+    quantity: hydrophobic_interaction_parameter_ap
+    value: 22.0e-5
+    uncertainty: 0.1e-5
+    units: L_per_g_protein
+    protein_basis: g_protein
+    protein_source: whey_iso
+    compound_class: ketone
+    fit_quality_r2: 1.00
+    location: "Table 3"
+    quote: '"Whey 22 +/- 0.1 1.00 7.2 +/- 0.1 0.98"'
+    verification_status: content_verified_full_text
+    usable_for_model: true
+    used_by_model: false
+    not_used_because: "No whey lane exists in this repository; kept as an external scale check."
+
+  # --- Percent bound at one stated condition ------------------------------------------
+  - record_id: barallat2023_octanal_plant_isolates_pooled
+    source_id: barallat_perez_2023_jafc
+    quantity: percent_bound_at_conditions
+    value: 52.76
+    uncertainty: 4.65
+    units: percent_bound
+    protein_source: plant_isolates_pooled
+    protein_source_members: [pea_iso, soy_iso, lupin_iso]
+    compound: octanal
+    compound_class: aldehyde
+    conditions:
+      protein_concentration_g_per_L: 10.0
+      protein_basis: g_isolate_powder
+      flavor_concentration_mg_per_L: 5.0
+      pH: 7.0
+      buffer: "50 mM sodium phosphate"
+      headspace_incubation_celsius: 40.0
+      sample_hold_celsius: 30.0
+      method: "static headspace GC-MS, binding by headspace depletion vs a protein-free control"
+    location: "Results, 'Influence of Alkyl Chain Type and Location of the Carbonyl Group'; the per-protein values are in Figure 2"
+    quote: >-
+      "Generally, the displacement of the carbonyl group from the inner part of the
+      molecule toward the edge leads to a significant binding increase from 14.73 to
+      52.76% +/- 4.65 for the studies with plant protein isolates (PPI, SPI, and LPI)."
+    pooling_caveat: >-
+      POOLED, NOT PER-PROTEIN. 52.76% is the upper endpoint of a range quoted across PPI,
+      SPI and LPI together. The per-protein octanal values exist only in Figure 2 and are
+      NOT transcribed here (reading a bar chart is not a content-verified number).
+    verification_status: content_verified_full_text
+    usable_for_model: true
+    model_role: cross_check_only
+    model_role_note: >-
+      Used ONLY as an independent check on the a_p route (see
+      src/protein_binding.cross_check_octanal), never as a prediction constant: it is
+      pooled over three proteins, so it cannot resolve the pea-vs-soy lane split the
+      matrix registry needs.
+
+  - record_id: barallat2023_2octanone_plant_isolates_pooled
+    source_id: barallat_perez_2023_jafc
+    quantity: percent_bound_at_conditions
+    value: 14.73
+    uncertainty: null
+    units: percent_bound
+    protein_source: plant_isolates_pooled
+    compound: 2-octanone
+    compound_class: ketone
+    conditions:
+      protein_concentration_g_per_L: 10.0
+      protein_basis: g_isolate_powder
+      flavor_concentration_mg_per_L: 5.0
+      pH: 7.0
+      buffer: "50 mM sodium phosphate"
+    location: "Results; per-protein values in Figure 2"
+    quote: >-
+      "leads to a significant binding increase from 14.73 to 52.76% +/- 4.65 for the
+      studies with plant protein isolates (PPI, SPI, and LPI)."
+    verification_status: content_verified_full_text
+    usable_for_model: true
+    model_role: cross_check_only
+    range_endpoint_caveat: >-
+      THIS IS THE LOW ENDPOINT OF A POOLED RANGE, NOT A MEAN. The sentence quotes an
+      "increase from X to Y ... for PPI, SPI, and LPI", so X is the least-binding of the
+      three proteins and Y the most. Comparing a low endpoint against a single-protein
+      prediction over-states the residual, which is why the two records carrying this
+      caveat are the two largest residuals in the cross-check and are reported separately.
+
+  - record_id: barallat2023_heptanal_plant_isolates_pooled
+    source_id: barallat_perez_2023_jafc
+    quantity: percent_bound_at_conditions
+    value: 13.73
+    units: percent_bound
+    protein_source: plant_isolates_pooled
+    compound: heptanal
+    compound_class: aldehyde
+    conditions:
+      protein_concentration_g_per_L: 10.0
+      protein_basis: g_isolate_powder
+      flavor_concentration_mg_per_L: 5.0
+      pH: 7.0
+    quote: >-
+      "The addition of double bonds to the flavor chain, from heptanal to
+      trans-2-heptenal, resulted in a significant binding increase from 13.73 to 54.60%
+      +/- 3.95 for PPI, SPI, and LPI."
+    verification_status: content_verified_full_text
+    usable_for_model: true
+    model_role: cross_check_only
+    range_endpoint_caveat: >-
+      THIS IS THE LOW ENDPOINT OF A POOLED RANGE, NOT A MEAN. The sentence quotes an
+      "increase from X to Y ... for PPI, SPI, and LPI", so X is the least-binding of the
+      three proteins and Y the most. Comparing a low endpoint against a single-protein
+      prediction over-states the residual, which is why the two records carrying this
+      caveat are the two largest residuals in the cross-check and are reported separately.
+    anomaly_note: >-
+      HEPTANAL (13.73%) BINDS LESS THAN OCTANAL (52.76%) BY A FACTOR THIS MODEL CANNOT
+      REPRODUCE. One CH2 is ~0.5 log units of Pow, i.e. ~3x in K_eff, which would take
+      13.7% to ~33%, not 52.8%. Recorded, not smoothed: the aldehyde series in this paper
+      is steeper than any hydrophobicity-only model, which is the paper's own point
+      (covalent Schiff-base chemistry is available to aldehydes and is not in Pow).
+
+  - record_id: barallat2023_trans2heptenal_plant_isolates_pooled
+    source_id: barallat_perez_2023_jafc
+    quantity: percent_bound_at_conditions
+    value: 54.60
+    uncertainty: 3.95
+    units: percent_bound
+    protein_source: plant_isolates_pooled
+    compound: trans-2-heptenal
+    compound_class: alkenal
+    conditions:
+      protein_concentration_g_per_L: 10.0
+      protein_basis: g_isolate_powder
+      flavor_concentration_mg_per_L: 5.0
+      pH: 7.0
+    quote: >-
+      "resulted in a significant binding increase from 13.73 to 54.60% +/- 3.95 for PPI,
+      SPI, and LPI."
+    verification_status: content_verified_full_text
+    usable_for_model: true
+    model_role: cross_check_only
+
+  - record_id: barallat2023_cis4heptenal_plant_isolates_pooled
+    source_id: barallat_perez_2023_jafc
+    quantity: percent_bound_at_conditions
+    value: 18.19
+    units: percent_bound
+    protein_source: plant_isolates_pooled
+    compound: cis-4-heptenal
+    compound_class: alkenal
+    conditions:
+      protein_concentration_g_per_L: 10.0
+      protein_basis: g_isolate_powder
+      flavor_concentration_mg_per_L: 5.0
+      pH: 7.0
+    quote: >-
+      "The change of flavor's spatial configuration from spherical (cis-4-heptenal) to
+      linear-shaped (trans-2-heptenal) significantly increased the protein binding from
+      18.19 to 54.60% +/- 2.98."
+    verification_status: content_verified_full_text
+    usable_for_model: true
+    model_role: cross_check_only
+
+  # --- Wang 2015 thesis: pea protein isolate, percent bound, TABLE-printed -------------
+  - record_id: wang2015_ppi_2octanone_ph7
+    source_id: wang_2015_umanitoba_thesis
+    quantity: percent_bound_at_conditions
+    value: 31.9
+    uncertainty: 1.27
+    units: percent_bound
+    protein_source: pea_iso
+    compound: 2-octanone
+    compound_class: ketone
+    conditions:
+      protein_concentration_g_per_L: 10.0
+      protein_basis: g_isolate_powder
+      protein_purity_fraction: 0.8268
+      flavor_concentration_mg_per_L: 250.0
+      pH: 7.0
+      buffer: "0.05 M NaCl"
+      temperature_celsius: 30.0
+      method: "ITEX dynamic headspace GC/MS, depletion vs a protein-free control"
+    location: "Table 5.1, thesis p. 121"
+    quote: >-
+      "Table 5.1 Impact of pH on volatile headspace concentration and binding of selected
+      ketones with PPIs (1%, w/v, 0.05 M NaCl) for individual and overall flavour
+      retentions ... 7 | C6 5.41 +/- 0.26def 7.15 +/- 0.68f | C7 7.94 +/- 0.87cd 13.9
+      +/- 0.20e | C8 8.63 +/- 1.54bc 31.9 +/- 1.27b"
+    verification_status: content_verified_full_text
+    usable_for_model: true
+    model_role: cross_check_only
+
+  - record_id: wang2015_ppi_2heptanone_ph7
+    source_id: wang_2015_umanitoba_thesis
+    quantity: percent_bound_at_conditions
+    value: 13.9
+    uncertainty: 0.20
+    units: percent_bound
+    protein_source: pea_iso
+    compound: 2-heptanone
+    compound_class: ketone
+    conditions:
+      protein_concentration_g_per_L: 10.0
+      protein_basis: g_isolate_powder
+      protein_purity_fraction: 0.8268
+      flavor_concentration_mg_per_L: 250.0
+      pH: 7.0
+    location: "Table 5.1, thesis p. 121"
+    quote: '"7 | C7 7.94 +/- 0.87cd 13.9 +/- 0.20e"'
+    verification_status: content_verified_full_text
+    usable_for_model: true
+    model_role: cross_check_only
+
+  - record_id: wang2015_ppi_2hexanone_ph7
+    source_id: wang_2015_umanitoba_thesis
+    quantity: percent_bound_at_conditions
+    value: 7.15
+    uncertainty: 0.68
+    units: percent_bound
+    protein_source: pea_iso
+    compound: 2-hexanone
+    compound_class: ketone
+    conditions:
+      protein_concentration_g_per_L: 10.0
+      protein_basis: g_isolate_powder
+      protein_purity_fraction: 0.8268
+      flavor_concentration_mg_per_L: 250.0
+      pH: 7.0
+    location: "Table 5.1, thesis p. 121"
+    quote: '"7 | C6 5.41 +/- 0.26def 7.15 +/- 0.68f"'
+    verification_status: content_verified_full_text
+    usable_for_model: true
+    model_role: cross_check_only
+
+  - record_id: wang2015_ppi_octanal_native
+    source_id: wang_2015_umanitoba_thesis
+    quantity: percent_bound_at_conditions
+    value: 61.87
+    uncertainty: 0.46
+    units: percent_bound
+    protein_source: pea_iso
+    compound: octanal
+    compound_class: aldehyde
+    conditions:
+      protein_concentration_g_per_L: 10.0
+      protein_basis: g_isolate_powder
+      protein_purity_fraction: 0.8268
+      flavor_concentration_mg_per_L: 250.0
+      pH: 8.0
+      buffer: "0.01 M potassium phosphate"
+      temperature_celsius: 30.0
+      protein_state: "Control (native PPIs, held 50 C / 5 h without Alcalase)"
+    location: "Table 7.2, thesis p. 186 (unpublished chapter)"
+    quote: >-
+      "Table 7.2 Effect of enzymatic hydrolysis on pea protein binding to 2-octanone,
+      octanal, hexyl acetate and dibutyl disulfide flavours as a function of protein
+      hydrolysis time ... 2-octanone 23.76 +/- 1.06a ... Octanal 61.87 +/- 0.46c"
+    verification_status: content_verified_full_text
+    usable_for_model: true
+    model_role: cross_check_only
+
+  - record_id: wang2015_ppi_2octanone_ph8
+    source_id: wang_2015_umanitoba_thesis
+    quantity: percent_bound_at_conditions
+    value: 23.76
+    uncertainty: 1.06
+    units: percent_bound
+    protein_source: pea_iso
+    compound: 2-octanone
+    compound_class: ketone
+    conditions:
+      protein_concentration_g_per_L: 10.0
+      protein_basis: g_isolate_powder
+      protein_purity_fraction: 0.8268
+      flavor_concentration_mg_per_L: 250.0
+      pH: 8.0
+    location: "Table 7.2, thesis p. 186"
+    quote: '"2-octanone 23.76 +/- 1.06a"'
+    verification_status: content_verified_full_text
+    usable_for_model: true
+    model_role: cross_check_only
+    corroborating_text_quote: >-
+      "The binding of octanal by PPIs was about 3.5 times higher than the corresponding
+      ketone flavour (2-octanone)." (thesis p. 135)
+
+  # --- Heng 2005: purified pea vicilin --------------------------------------------------
+  - record_id: heng2005_vicilin_2octanone
+    source_id: heng_2005_wur_thesis
+    quantity: percent_bound_at_conditions
+    value: 33.0
+    units: percent_bound
+    protein_source: pea_vicilin
+    compound: 2-octanone
+    compound_class: ketone
+    conditions:
+      protein_concentration_g_per_L: 10.0
+      protein_basis: g_protein
+      protein_concentration_caveat: >-
+        Table 1 states no protein concentration. Figure 2 (ketones) states 1% w/v vicilin
+        and Figure 1 (aldehydes) states 0.1% w/v, so the ketone and aldehyde rows of the
+        same table are probably at DIFFERENT loadings. 1% w/v is used for the ketone rows
+        and the aldehyde rows are recorded but excluded from the cross-check.
+      ligand_concentration_mM: 0.025
+      pH: 7.6
+      temperature_celsius: 37.0
+    location: "Chapter 6, Table 1, p. 119"
+    quote: >-
+      "Table 1: The amount of aldehydes and ketones bound to vicilin at a concentration of
+      0.025 mM, heated and non-heated fractions, at pH 7.6. ... Vicilin non-heated |
+      Octanal ~23 96 | Pentanal ~15 52 | 2-Octanone <1.5 33 | 2-Heptanone <1 19 |
+      2-Hexanone <1 13 | 2-Pentanone <0.5 10 | Vicilin heated | Octanal ~9 32 |
+      2-Octanone <0.5 16"
+    verification_status: content_verified_full_text
+    usable_for_model: true
+    model_role: cross_check_only
+
+  - record_id: heng2005_vicilin_2heptanone
+    source_id: heng_2005_wur_thesis
+    quantity: percent_bound_at_conditions
+    value: 19.0
+    units: percent_bound
+    protein_source: pea_vicilin
+    compound: 2-heptanone
+    compound_class: ketone
+    conditions:
+      protein_concentration_g_per_L: 10.0
+      protein_basis: g_protein
+      pH: 7.6
+      temperature_celsius: 37.0
+    location: "Chapter 6, Table 1, p. 119"
+    quote: '"2-Heptanone <1 19"'
+    verification_status: content_verified_full_text
+    usable_for_model: true
+    model_role: cross_check_only
+
+  - record_id: heng2005_vicilin_2hexanone
+    source_id: heng_2005_wur_thesis
+    quantity: percent_bound_at_conditions
+    value: 13.0
+    units: percent_bound
+    protein_source: pea_vicilin
+    compound: 2-hexanone
+    compound_class: ketone
+    conditions:
+      protein_concentration_g_per_L: 10.0
+      protein_basis: g_protein
+      pH: 7.6
+      temperature_celsius: 37.0
+    location: "Chapter 6, Table 1, p. 119"
+    quote: '"2-Hexanone <1 13"'
+    verification_status: content_verified_full_text
+    usable_for_model: true
+    model_role: cross_check_only
+
+  - record_id: heng2005_vicilin_octanal_aldehyde_loading_ambiguous
+    source_id: heng_2005_wur_thesis
+    quantity: percent_bound_at_conditions
+    value: 96.0
+    units: percent_bound
+    protein_source: pea_vicilin
+    compound: octanal
+    compound_class: aldehyde
+    conditions:
+      protein_concentration_g_per_L: null
+      protein_concentration_caveat: >-
+        AMBIGUOUS AND THEREFORE EXCLUDED FROM THE CROSS-CHECK. Figure 1 (the aldehyde
+        figure) states 0.1% w/v vicilin, Figure 2 (ketones) states 1% w/v, and Table 1
+        states neither. At 1 g/L, 96% bound implies K_eff ~ 24 L/g -- 200x the a_p route.
+        At 10 g/L it implies 2.4 L/g. Neither can be checked without knowing which.
+      ligand_concentration_mM: 0.025
+      pH: 7.6
+    location: "Chapter 6, Table 1, p. 119"
+    quote: '"Vicilin non-heated | Octanal ~23 96"'
+    verification_status: content_verified_full_text
+    usable_for_model: false
+    not_usable_because: "protein concentration ambiguous in the source"
+
+  # --- Barallat-Perez 2025: SPI Klotz constants ----------------------------------------
+  - record_id: barallat2025_spi_klotz_series
+    source_id: barallat_perez_2025_npjsf
+    quantity: klotz_binding_constant_series
+    units: "K in M^-1 (per binding site); n dimensionless (sites per mole protein)"
+    protein_source: soy_iso
+    protein_state: native
+    location: "Table 1, Soy Protein Isolate columns (mucin-free)"
+    values:
+      2-heptanone: {n: 0.032, K: 1.2e4, r2: 0.96}
+      2-octanone: {n: 0.153, K: 9.2e3, r2: 0.99}
+      2-nonanone: {n: 0.331, K: 1.0e4, r2: 0.98}
+      2-decanone: {n: 0.915, K: 1.3e4, r2: 0.94}
+      hexanal: {n: 0.935, K: 3.5e3, r2: 0.99}
+      heptanal: {n: 0.432, K: 1.1e4, r2: 0.99}
+      octanal: {n: 0.349, K: 2.8e4, r2: 0.99}
+      nonanal: {n: 0.120, K: 1.0e5, r2: 0.97}
+      decanal: {n: 0.097, K: 3.4e5, r2: 0.91}
+    quote: >-
+      "Table 1 Linear equations and binding parameters (n = binding sites and K = binding
+      constant) obtained from Klotz plots for the binding of carbonyl compounds to
+      commercial food protein isolates (PIs) (whey, WPI, soy, SPI, and lupin, LPI) ...
+      Soy Protein Isolate ... Hexanal 0.935 3.5*10^3 y = 0.0003x-1.068 0.99 ... Nonanal
+      0.120 1*10^5 y = 0.00005x-8.304 0.97"
+    verification_status: content_verified_full_text
+    usable_for_model: false
+    not_usable_because: >-
+      K is per MOLE of protein and the paper states no protein molar mass, so neither K
+      nor nK converts to the L/g basis this model uses. Used ONLY as a compound-transfer
+      cross-check (relative K across the aldehyde series vs the Pow series).
+    authors_own_caveat_quote: >-
+      "Klotz plots assume that protein binding sites are uniform in number" -- and most SPI
+      n values are sub-stoichiometric (<1), so they are not "sites per mole" in a clean
+      sense. This is why the cross-check below uses K, not nK, and says so.
+    pea_absent_note: "THERE IS NO PEA COLUMN IN THIS TABLE (whey, soy and lupin only)."
+
+  # --- Liu 2026: SPI aldehyde series by inverse liquid chromatography -------------------
+  - record_id: liu2026_spi_ilc_kb_series
+    source_id: liu_2026_ilc_spi
+    quantity: binding_constant_series
+    units: "K_B in M^-1"
+    protein_source: soy_iso
+    protein_state: native
+    location: "Table 2"
+    values:
+      pentanal: {K_B: 1422, sd: 351}
+      hexanal: {K_B: 2623, sd: 150}
+      heptanal: {K_B: 10073, sd: 632}
+      octanal: {K_B: 21044, sd: 1707}
+      nonanal: {K_B: 68853, sd: 13565}
+      decanal: {K_B: 135090, sd: 14645}
+    quote: >-
+      "Pentanal 0.28 +/- 0.07 1422 +/- 351 ... Hexanal 0.52 +/- 0.03 2623 +/- 150 ...
+      Heptanal 1.98 +/- 0.12 10,073 +/- 632 ... Nonanal 13.56 +/- 2.65 68,853 +/- 13,565"
+      (Table 2, with the "literature value" column quoting Barallat-Perez et al. 2025 for
+      each row)
+    verification_status: content_verified_full_text
+    usable_for_model: false
+    not_usable_because: >-
+      M^-1 basis, and the protein is immobilised on silica at a 10,000:1 protein-to-flavour
+      ratio. Used only as an INDEPENDENT check on the shape of the aldehyde series.
+    method_caveat_quote: >-
+      "In the HS-GC-MS system, the protein-to-flavor ratio was approximately 100:1, whereas
+      the ILC employed a much higher protein-to-flavor ratio (~10,000:1)"
+
+  # --- O'Keefe 1988: purified soy fractions -------------------------------------------
+  - record_id: okeefe1988_glycinin_k_series
+    source_id: okeefe_1988_isu_thesis
+    quantity: binding_constant_series
+    units: "K in M^-1 (established by derivation from the thesis's own dG, not by a printed unit)"
+    protein_source: soy_glycinin_11S
+    location: "Table 5, p. 125"
+    conditions:
+      protein_concentration_g_per_L: 10.0
+      protein_basis: g_protein
+      buffer: "30 mM Tris-HCl pH 8.0"
+      method: "equilibrium headspace GC-FID; K by the Wilkinson (1961) method"
+    values_293K:
+      butanal: 39
+      pentanal: 87
+      hexanal: 270
+      octanal: 833
+      2-hexanone: 411
+      3-hexanone: 301
+      2-nonanone: 891
+      5-nonanone: 714
+      1-hexanol: 470
+    quote: >-
+      "Table 5. Equilibrium binding constants for glycinln ... Butanal 14 +/- 21.2 39 +
+      33.6 44 +/- 12.9 | Fentanal 40 +/- 20.9 87 +/- 22.9 119 +/- 37.2 | Hexanal 116 +/-
+      17.1 270 +/- 24.1 455 +/- 101.0 | Octanal 600 +/- 55.6 833 +/- 75.6 902 +/- 90.9 |
+      2-Hexanone 244 +/- 50.2 411 +/- 41.1 500 +/- 166.7 | ... 2-Nonanone 588 +/- 126.0
+      891 + 42.3 1000 +/- 111.1 ... hexanol 260 +/- 39.9 470 +/- 44.1 344 +/- 52.6"
+      (columns are 278 / 293 / 303 K; "Fentanal" and "glyclnln" are OCR artefacts)
+    verification_status: content_verified_full_text_ocr
+    usable_for_model: false
+    not_usable_because: >-
+      M^-1 per SITE; converting to L/g requires both n (Table 3) and the protein molar
+      mass. The thesis DOES state molar masses -- "The protein molarity was calculated
+      from the protein concentration by using molecular weights of 160 and 320 KDa,
+      respectively" -- but the sentence has no antecedent, so which mass belongs to which
+      protein cannot be resolved from the text, and the ambiguity is a factor of 2.
+    why_it_still_matters: >-
+      THIS IS THE ONLY RETRIEVED SOURCE ANYWHERE IN THIS CAMPAIGN THAT GIVES A 1-HEXANOL
+      BINDING CONSTANT ON A SOY PROTEIN. Its 1-hexanol/hexanal ratio at 293 K is
+      470/270 = 1.74, against a Pow ratio of 107.15/60.26 = 1.78 -- a 2% agreement with
+      the compound-transfer assumption this model makes, from a 1988 experiment that knew
+      nothing about it. The 1-hexanol lane is the one carrying the hold-out's 1117x miss.
+
+  - record_id: okeefe1988_bconglycinin_k_series
+    source_id: okeefe_1988_isu_thesis
+    quantity: binding_constant_series
+    units: "K in M^-1"
+    protein_source: soy_beta_conglycinin_7S
+    location: "Table 6, p. 125"
+    values_293K:
+      hexanal: 256
+      octanal: 200
+      2-hexanone: 385
+      2-nonanone: 254
+      1-hexanol: 181
+    quote: >-
+      "Table 6 ... Hexanal 171 + 24.7 256 + 160.3 303 + 30.2 ... hexanol 192 +/- 126.5
+      181 + 16.2 131 +/- 23.9"
+    verification_status: content_verified_full_text_ocr
+    usable_for_model: false
+    not_usable_because: "as for the glycinin series"
+    disagreement_note: >-
+      The 1-hexanol/hexanal ratio on 7S is 181/256 = 0.71, against 1.74 on 11S. The two
+      purified soy fractions disagree by 2.5x on the same ratio, which is the honest size
+      of the compound-transfer uncertainty for an alcohol.
+
+# -------------------------------------------------------------------------------------
+# OCTANOL-WATER PARTITION COEFFICIENTS (the Pow that multiplies a_p)
+# -------------------------------------------------------------------------------------
+octanol_water_partition:
+  basis_note: >-
+    a_p was fitted by Snel et al. against KOWWIN v1.68 estimates, so the Pow convention is
+    part of the constant. Where an EXPERIMENTAL Hansch value exists it is used and the
+    convention mismatch is quantified: on the one compound where both are available in
+    this table's sources (2-octanone) KOWWIN gives 2.22 and Hansch 2.37, a 0.15 dex /
+    1.41x difference in Pow, which propagates linearly into K_eff. That is the dominant
+    stated uncertainty of the a_p route for the aldehyde markers.
+  entries:
+    - compound: hexanal
+      log_p: 1.78
+      pow: 60.26
+      basis: experimental
+      source_id: pubchem_logp
+      pubchem_cid: 6184
+      quote: >-
+        'log kow = 1.78' -- PubChem LogP section, reference "Hansch, C., Leo, A., D.
+        Hoekman. Exploring QSAR - Hydrophobic, Electronic, and Steric Constants.
+        Washington, DC: American Chemical Society., 1995., p. 24"
+      verification_status: content_verified_database_record
+    - compound: 1-hexanol
+      log_p: 2.03
+      pow: 107.15
+      basis: experimental
+      source_id: pubchem_logp
+      pubchem_cid: 8103
+      quote: >-
+        'log Kow = 2.03' -- PubChem LogP section, reference "Hansch, C., Leo, A., D.
+        Hoekman. Exploring QSAR ... 1995., p. 25"
+      verification_status: content_verified_database_record
+    - compound: nonanal
+      log_p: 3.3
+      pow: 1995.26
+      basis: computed_xlogp3
+      source_id: pubchem_logp
+      pubchem_cid: 31289
+      quote: >-
+        PubChem PUG-REST property XLogP = 3.3 for CID 31289 (nonanal). PubChem returns
+        PUGVIEW.NotFound for the experimental LogP heading, i.e. no Hansch value is
+        indexed for this compound.
+      verification_status: content_verified_database_record
+      caveat: >-
+        COMPUTED, NOT MEASURED. This is the single largest lever on the nonanal lane's
+        binding correction; a 0.3 dex error in log P is a 2x error in K_eff.
+    - compound: 2-pentylfuran
+      log_p: 3.7
+      pow: 5011.87
+      basis: computed_xlogp3
+      source_id: pubchem_logp
+      pubchem_cid: 19602
+      quote: >-
+        PubChem PUG-REST property XLogP = 3.7 for CID 19602 (2-pentylfuran). No
+        experimental LogP heading is indexed.
+      verification_status: content_verified_database_record
+      caveat: "COMPUTED, NOT MEASURED."
+    - compound: octanal
+      log_p: 2.7
+      pow: 501.19
+      basis: computed_xlogp3
+      source_id: pubchem_logp
+      pubchem_cid: 454
+      quote: >-
+        PubChem PUG-REST property XLogP = 2.7 for CID 454 (octanal). PubChem's
+        experimental LogP heading gives 'log Kow = 3.5 at pH 6.9 (by HPLC)', an
+        HPLC-derived value 0.8 dex above the estimate; both are recorded and the
+        cross-check in src/protein_binding.py reports the result under BOTH.
+      verification_status: content_verified_database_record
+      experimental_alternative: 3.5
+      experimental_alternative_basis: "HPLC, PubChem LogP heading"
+    - compound: 2-octanone
+      log_p: 2.37
+      pow: 234.42
+      basis: experimental
+      source_id: pubchem_logp
+      pubchem_cid: 8093
+      quote: >-
+        'log Kow = 2.37' -- PubChem LogP section, reference "Hansch, C., Leo, A., D.
+        Hoekman. Exploring QSAR ... 1995., p. 49". KOWWIN gives 2.22 for the same compound
+        (Snel et al. 2023 Table 1), the 0.15 dex convention gap quoted above.
+      verification_status: content_verified_database_record
+    - compound: 2-heptanone
+      log_p: 1.98
+      pow: 95.50
+      basis: experimental
+      source_id: pubchem_logp
+      pubchem_cid: 8051
+      quote: >-
+        'log Kow = 1.98' -- PubChem LogP section, reference "Hansch, C., Leo, A., D.
+        Hoekman. Exploring QSAR ... 1995., p. 35"
+      verification_status: content_verified_database_record
+    - compound: 2-hexanone
+      log_p: 1.38
+      pow: 23.99
+      basis: experimental
+      source_id: pubchem_logp
+      pubchem_cid: 11583
+      quote: >-
+        'log Kow = 1.38' -- PubChem LogP section, reference "Hansch, C., Leo, A., D.
+        Hoekman. Exploring QSAR ... 1995., p. 24"
+      verification_status: content_verified_database_record
+    - compound: heptanal
+      log_p: 2.3
+      pow: 199.53
+      basis: computed_xlogp3
+      source_id: pubchem_logp
+      pubchem_cid: 8130
+      quote: >-
+        PubChem PUG-REST property XLogP = 2.3 for CID 8130 (heptanal); PUGVIEW returns
+        NotFound for the experimental LogP heading.
+      verification_status: content_verified_database_record
+      caveat: "COMPUTED, NOT MEASURED."
+    - compound: trans-2-heptenal
+      log_p: null
+      pow: null
+      basis: unavailable
+      note: >-
+        No experimental or XLogP3 value was retrieved, so the trans-2-heptenal and
+        cis-4-heptenal percent-bound records cannot be cross-checked against the a_p route.
+
+# -------------------------------------------------------------------------------------
+# MATRIX PROTEIN LOADINGS -- the c_p of each lane, from each lane's own source
+# -------------------------------------------------------------------------------------
+# `quantification_basis` is the OTHER half of the physics and is just as important as
+# c_p: it says WHICH concentration the source's reported number is.
+#   matrix_matched  -> standards were spiked INTO the matrix, so the reported number is
+#                      the TOTAL analyte and NO binding correction applies (f_free = 1).
+#   water_calibrated-> the calibration curve was built in water, so the reported number
+#                      is the FREE-equivalent concentration = total * f_free.
+#   unknown         -> not stated in what this repository has read. Treated as
+#                      matrix_matched (the conservative choice: it applies no correction).
+# -------------------------------------------------------------------------------------
+matrix_protein_loadings:
+  - lane_id: pea_isolate_40C_PratapSingh2021
+    protein_source: pea_iso
+    protein_concentration_g_per_L: 142.86
+    protein_basis: g_isolate_powder
+    aqueous: true
+    quote: >-
+      "To extract the volatiles, 1 g of plant protein powder was dissolved in 7 mL
+      distilled deionized water."
+    source_id: pratap_singh_2021_molecules
+    quantification_basis: matrix_matched
+    quantification_quote: >-
+      "The pea protein sample was spiked with 1, 2, 3, 4, 5 uL of stock standard and 5 uL
+      of internal standard hexanal-d12 was used to generate the standard curve for
+      quantification (Figure S2)."
+    verification_status: content_verified_full_text
+
+  - lane_id: soy_isolate_40C_PratapSingh2021
+    protein_source: soy_iso
+    protein_concentration_g_per_L: 142.86
+    protein_basis: g_isolate_powder
+    aqueous: true
+    quote: >-
+      "To extract the volatiles, 1 g of plant protein powder was dissolved in 7 mL
+      distilled deionized water."
+    source_id: pratap_singh_2021_molecules
+    quantification_basis: matrix_matched
+    quantification_quote: >-
+      "Figure S2: Calibration curves generated for hexanal, 1-hexanol and 2-nonanone in
+      pea and soy protein isolates (calibration curves in red are for pea, and that in
+      blue are for soy)"
+    verification_status: content_verified_full_text
+
+  - lane_id: external_validation_liu_2023_ppi_offnote_baseline
+    protein_source: pea_iso
+    protein_concentration_g_per_L: 100.0
+    protein_basis: g_isolate_powder
+    aqueous: true
+    quote: >-
+      "24 commercial pea proteins rehydrated to 10% solids (w/w) in DI water" (Wave R
+      record of the retrieved thesis; the thesis's own quantitation basis is ug/L of the
+      rehydrated 10%-solids slurry, Table 2.7).
+    source_id: liu_2021_ncsu_thesis
+    quantification_basis: water_calibrated
+    quantification_quote: >-
+      "pea protein solutions were replaced with 5 mL DI water and were spiked with known
+      compounds at five different levels" (thesis section 2.9) -- the five-point external
+      standard curves were therefore built in DI WATER, not in the protein matrix.
+    verification_status: content_verified_full_text_wave_r
+
+  - lane_id: external_validation_bi_2020_raw_pea_hexanal
+    protein_source: pea_iso
+    protein_concentration_g_per_L: null
+    aqueous: true
+    quantification_basis: unknown
+    note: >-
+      Bi et al. 2020 measured RAW PEA FLOUR, not a protein-isolate slurry, and the
+      repository's scored value is not a concentration the paper reports directly (it is
+      OAV 280 x this repository's own 4.5 ppb hexanal threshold; see the bundle's
+      value_provenance_note). No protein loading and no quantification basis can be
+      asserted for it from anything this repository has read, so the binding mode applies
+      NO correction here and says so.
+    verification_status: not_established
+
+  - lane_id: external_validation_bi_2020_roasted_pea_hexanal
+    protein_source: pea_iso
+    protein_concentration_g_per_L: null
+    aqueous: false
+    aqueous_note: "Bundle conditions declare water_activity 0.35 (roasted flour)."
+    quantification_basis: unknown
+    note: >-
+      Same as the raw-pea bundle, plus: at aw 0.35 there is no bulk aqueous phase for an
+      aqueous-partition Langmuir to describe. Out of the binding model's domain.
+    verification_status: not_established
+
+  - lane_id: external_validation_li_2026_spi_wg_hme_control
+    protein_source: soy_iso
+    protein_concentration_g_per_L: null
+    aqueous: false
+    aqueous_note: >-
+      Bundle conditions declare water_activity 0.35 and process state
+      extrusion_structured. A high-moisture extrudate analysed as a solid has no
+      slurry-phase protein concentration, and volatile retention in it is sorption in a
+      low-moisture solid, not aqueous-phase partitioning.
+    quantification_basis: unknown
+    note: >-
+      OUT OF DOMAIN, DELIBERATELY. Applying an aqueous-dispersion Langmuir here would be
+      the largest single change this wave could make to the hold-out and it would not be
+      physics. The out-of-domain variant is still computed and reported (see the
+      mode-comparison artifact) so the size of what is being declined is visible.
+    verification_status: not_established
+
+  - lane_id: pea_isolate_uht_140C_Trikusuma2019
+    protein_source: pea_iso
+    protein_concentration_g_per_L: null
+    aqueous: true
+    quantification_basis: unknown
+    note: >-
+      Trikusuma 2020 is the last content-unverified pillar of the matrix lane (Wave O [P]
+      item 5). Nothing about its sample preparation or calibration has been read, so no
+      loading and no basis are asserted.
+    verification_status: not_established
+
+# -------------------------------------------------------------------------------------
+# EVIDENCE THAT EXISTS BUT IS NOT USABLE AS A CONSTANT
+# -------------------------------------------------------------------------------------
+not_usable_without_protein_molar_mass:
+  - record_id: wongprasert2024_ppi_klotz
+    source_id: null
+    citation: >-
+      Wongprasert, T.; Mathatheeranan, P.; Siripitakpong, P.; Vilaivan, T.; Suriya, U.;
+      Rungrotmongkol, T. et al. (2024). "Effect of functional groups in strawberry
+      flavoring on pea protein-flavor interactions." Food Chemistry: X 23:101702.
+    doi: "10.1016/j.fochx.2024.101702"
+    crossref_verified: "2026-08-27"
+    retrieved_from: "Europe PMC PMC11342753 fullTextXML"
+    verification_status: content_verified_full_text
+    values_quoted:
+      note: "Klotz double-reciprocal analysis, PPI 3 g/100 mL, 0.05 M phosphate pH 7.0."
+      table_3_quote: >-
+        "K (x105) (M-1) 25 degC: vanillin 230.35 +/- 8.38; gamma-decalactone 210.17 +/-
+        14.10; furaneol 21.82 +/- 1.40; (Z)-3-hexen-1-ol 14.40 +/- 3.90 ... n 25 degC:
+        2.68 +/- 0.07; 3.23 +/- 0.14; 2.05 +/- 0.07; 13.70 +/- 3.55"
+    why_not_usable: >-
+      K is per MOLE of protein and the paper states no molar mass for its PPI, so nK
+      cannot be converted to the L/g basis this model works in. (Z)-3-hexen-1-ol is the
+      closest published analogue to 1-hexanol on pea protein found anywhere in this
+      campaign, which is exactly why the gap is recorded rather than filled by assuming a
+      globulin mass. [P]
+
+qualitative_only:
+  - record_id: barallat2023_hexanal_ordering
+    source_id: barallat_perez_2023_jafc
+    compound: hexanal
+    finding: "SPI > LPI > PPI ~ WPI in hexanal binding affinity; no number is printed."
+    quote: >-
+      "SPI exhibited a higher binding affinity for hexanal followed by LPI (Figure 4),
+      independently of the temperature applied (5, 70, and 90 degC). In contrast, PPI and
+      WPI showed the lowest binding affinity for hexanal. However, these differences were
+      often not statistically significant."
+    consequence: >-
+      DIRECTION CONFLICT WITH THE SHIPPED REGISTRY, RECORDED NOT RESOLVED. The matrix
+      registry encodes soy as releasing 2.2098x MORE hexanal than pea; this source says
+      soy BINDS hexanal more than pea, i.e. releases LESS. The a_p route agrees with
+      Barallat-Perez in neither direction (a_p pea 25e-5 > soy 16e-5 says pea binds more).
+      Two open-access sources disagree with each other on the sign of the pea-vs-soy
+      hexanal binding difference, and neither prints a hexanal number. This is the single
+      sharpest evidence gap in the matrix observability lane.
+    verification_status: content_verified_full_text
+
+denaturation_effect_evidence:
+  summary: >-
+    THREE RETRIEVED SOURCES ADDRESS HEAT AND THEY DO NOT AGREE. Two say heat REDUCES
+    binding (Liu 2026, quantified, small; Heng 2005, quantified, large) and one says it
+    RAISES it (Barallat-Perez 2023, qualitative). The one number measured on the material
+    class this repository's lanes actually are -- commercial SPI -- is Liu 2026's ~10%
+    decrease for hexanal, which changes f_free by under 1 percentage point at any lane
+    loading in this file. A term that is disputed in sign and, on the best-matched
+    source, smaller than every other uncertainty in the chain is not worth carrying.
+    DENATURATION IS NOT MODELLED. See src/protein_binding.describe_model().
+  entries:
+    - record_id: liu2026_denaturation_spi
+      source_id: liu_2026_ilc_spi
+      direction: heat_decreases_binding
+      quantified: true
+      value_hexanal_percent_change_in_K: -10.0
+      value_series_percent_change_in_K: [-6.0, -18.0]
+      treatment: "column heated to 85 C for 30 min, then cooled and stabilised at 25 C"
+      quote: >-
+        "Therefore, a decline in the binding constant of approximately 6-18% was observed,
+        with larger changes for more hydrophobic compounds, and the reduction in binding
+        following treatment at 85 C suggests that partial denaturation of soy protein
+        contributes to the loss of binding functionality." / "When comparing individual
+        aldehydes, the binding constant of pentanal remained nearly unchanged after heat
+        treatment, while hexanal and heptanal showed slight decreases of around 10%. In
+        contrast, octanal exhibited the most pronounced reduction, with a decrease of
+        nearly 18%."
+      authors_own_caveat: >-
+        The protein is silica-immobilised; the authors call the system "a controlled model
+        rather than a direct representation of protein behavior in real food matrices".
+      per_compound_values_are_figure_only: true
+      verification_status: content_verified_full_text
+
+    - record_id: heng2005_denaturation_vicilin
+      source_id: heng_2005_wur_thesis
+      direction: heat_decreases_binding
+      quantified: true
+      value: "octanal on vicilin: 96% bound non-heated -> 32% bound after 90 C / 30 min"
+      quote: '"Vicilin heated | Octanal ~9 32 | 2-Octanone <0.5 16"'
+      caveat: >-
+        Purified vicilin, not a commercial isolate, and the loading ambiguity that
+        disqualifies the aldehyde rows for the cross-check applies here too.
+      verification_status: content_verified_full_text
+
+    - record_id: barallat2023_temperature_effect
+      source_id: barallat_perez_2023_jafc
+      direction: heat_increases_binding
+      quantified: false
+      quote: >-
+        "Besides time, increasing the temperature also led to a slight increase in the
+        level of hexanal binding (Figure 4). ... Wang and Arntfield, showed hexanal binding
+        to canola proteins at 95 degC. Hexanal binding to canola proteins increased by ~32%
+        when applying heat."
+      caveat: >-
+        The only number in that passage (~32%) is second-hand and is for CANOLA protein;
+        the primary (Wang & Arntfield) was retrieved in this wave as the author's thesis
+        and its canola hexanal heat data is FIGURE-ONLY there too.
+      verification_status: content_verified_full_text
+  modelled: false

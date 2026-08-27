@@ -203,6 +203,26 @@ anything else.**
 > refit bought is that the constants are now anchored to numbers that exist; what it cost is
 > in the hold-out row below. Record:
 > [matrix_observability_refit_pratap_singh.md](results/validation/matrix_observability_refit_pratap_singh.md).
+>
+> **Binding physics mode: measured constants, zero fitted parameters (2026-08-27, Wave S4).**
+> There is now an alternative to those fitted factors and it can be selected per run.
+> `src/protein_binding.py` computes the observability factor as
+> `f_free = 1/(1 + a_p·Pow·c_p)` — a single-site Langmuir in the dilute-ligand limit with
+> `a_p` in litres per gram of protein — entirely from literature binding data transcribed
+> with verbatim quotes into [`data/lit/binding_constants.yml`](data/lit/binding_constants.yml).
+> **No parameter in it is fitted**, `fitted_factors` remains the default, and no shipped
+> number moved. The model reproduces percent-bound measurements from three other
+> laboratories to a median of ~3 percentage points with nothing adjusted. **Mode-vs-mode on
+> the never-fitted hold-out: `fitted_factors` 93.68× median / 3-8 covered, a *null model*
+> with no observability factor at all 67.42× / 4-8, `binding_physics` 68.18× / 5-8 — while
+> in-panel the fitted factors win 1.0004× to 5.92×.** That is the overfitting signature
+> exactly: the fitted constants beat everything where they were fitted and lose to doing
+> nothing where they were not. The binding physics itself is a wash — it has usable data on
+> only 4 of 16 hold-out rows and reduces to the null model on the rest. The unit argument is
+> sharper than the scores: an observability factor is a fraction of a total and cannot exceed
+> 1, and the shipped constants are **4.32 and 9.54**, so they are absorbing an absolute-scale
+> deficit that lives in the marker yields, not in observability. Record:
+> [matrix_binding_mode_comparison.md](results/validation/matrix_binding_mode_comparison.md).
 
 **How to read this honestly:** coverage is only meaningful next to interval width — a 90% CI
 spanning two or more orders of magnitude makes coverage cheap. This headline is the reverse of

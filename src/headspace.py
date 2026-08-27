@@ -19,6 +19,10 @@ from src.matrix_calibration_registry import (
 )
 from src.extrusion import compute_extrusion_headspace_adjustment
 from src.literature_runtime import get_retention_ph_release_profile
+from src.protein_binding import (
+    binding_mode_active,
+    observability_factor as protein_binding_observability_factor,
+)
 from src.matrix_correction import ProteinType, resolve_compound_matrix_retention, resolve_matrix_correction
 
 # Upper bound of the van't Hoff extrapolation window for Kaw (audit 2026-08-26).
@@ -271,6 +275,7 @@ class HeadspaceModel:
         temperature_celsius: float = 40.0,
         time_minutes: float = 10.0,
         water_activity: Optional[float] = None,
+        binding_context: Optional[Dict[str, object]] = None,
     ) -> float:
         """
         Empirical observable-release factor for the Pratap-Singh plant-matrix lane.
@@ -299,6 +304,36 @@ class HeadspaceModel:
             time_minutes=float(time_minutes),
             water_activity=water_activity,
         )
+
+        # 2026-08-27 (Wave S4) -- THE BINDING-PHYSICS OBSERVABILITY MODE.
+        #
+        # When the mode is `binding_physics`, the observability factor is computed from
+        # MEASURED protein-binding constants (data/lit/binding_constants.yml) instead of
+        # the fitted / back-solved constants in src/matrix_calibration_registry.py.
+        #
+        # NO DOUBLE COUNTING, and it is structural rather than a comment: this branch
+        # returns BEFORE `get_matrix_calibration_record` is ever consulted, and it does
+        # NOT apply `dynamic_release_factor` either. That second omission is the one that
+        # is easy to miss -- `compose_dynamic_retention` routes through
+        # `resolve_compound_matrix_retention`, whose `volatile_retention` is documented as
+        # "fraction escaping matrix (rest is bound)", i.e. it is ITSELF an (unanchored)
+        # binding model. Running both would count protein binding twice.
+        #
+        # The pH release factor IS still applied, in both modes, deliberately: it is a
+        # pH-dependent release term rather than a binding term, and keeping it identical
+        # on both sides is what makes the mode-vs-mode comparison a comparison of the
+        # observability constant alone.
+        if binding_mode_active():
+            binding = protein_binding_observability_factor(
+                name,
+                context=binding_context or {},
+            )
+            return float(binding.f_free) * self.get_matrix_ph_release_factor(
+                name,
+                protein_type=protein_type,
+                pH=pH,
+            )
+
         record = get_matrix_calibration_record(
             name,
             protein_type=p_type.value,

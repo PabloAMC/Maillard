@@ -6448,3 +6448,317 @@ the machine-readable fit-corpus declaration that `fit_target_gate`, `fit_target_
 and unguarded** — precisely the failure mode the fit-target gate exists to prevent. The
 pre/post artifact is tracked because a wave whose headline is "the hold-out did not move"
 owes the reader the file that shows it did not, target by target.
+
+---
+
+## Wave S4 — measurable binding physics against the fitted observability fudge (2026-08-27)
+
+Wave S3 proved the absolute-accuracy deficit does not live in the barriers. This wave went
+one layer down the matrix lane, to the OBSERVABILITY factors that convert a predicted total
+into the number a paper reports. Every one of them was fitted; two of them
+(`0.143 / 0.063`, the 1-hexanol pair) were back-solved from values Wave T3 proved appear in
+no publication. **Nothing in this wave is fitted. No shipped number moved. The hold-out
+entered nothing.**
+
+### (a) THE HEADLINE, STATED BEFORE THE PLEASANT PART
+
+**The fitted observability factors score WORSE on the never-fitted hold-out than applying no
+observability factor at all**, and they beat everything in-panel. That is the overfitting
+signature the mission predicted, measured:
+
+| mode | hold-out median fold | median \|log10\| | CI coverage | in-panel median fold |
+|---|---:|---:|---:|---:|
+| `fitted_factors` (SHIPPED, unchanged) | **93.684x** | 1.9717 | 3/8 | **1.0004x** |
+| `unit_observability` (null model, factor 1.0) | **67.419x** | 1.8288 | 4/8 | 5.9196x |
+| `binding_physics` (measured constants, 0 fitted) | 68.179x | 1.8337 | **5/8** | 5.9196x |
+
+Monte Carlo n=200 seed 0, the shipped scoring path. The `fitted_factors` row reproduces the
+shipped headline **exactly** (93.6837x, 3/8 in `external_validation_report.json`), which is
+the independent check that the mode machinery is inert by default.
+
+**AND THE BINDING PHYSICS IS A WASH.** The null model is why that can be said rather than
+guessed. Against `unit_observability` the binding mode moves the median by **1.1%** — because
+on **12 of 16** hold-out rows there is no usable binding datum and the mode reduces to the
+null model *exactly*. On the four rows where it genuinely applies (all Liu 2023, the only
+water-calibrated lane in the hold-out) the two scored ones split 1-1:
+
+* `liu_2023_ppi / nonanal` **94.22x -> 1.852x** — the repository's sharpest lipid-lane
+  over-prediction against a directly-quantified reference, very nearly fixed by a constant
+  measured in 2023 by someone else.
+* `liu_2023_ppi / hexanal` **48.24x -> 120.9x** (against the null; 11.17x under the fitted
+  mode) — worse, and for a reason that is the same reason the Pratap-vs-Liu test below fails.
+
+Without the null model, "binding_physics 68x beats fitted 94x" would have been reported as
+evidence for the binding physics. It is mostly evidence against the fitted factors.
+
+### (b) THE SHARPEST RESULT IS A UNIT ARGUMENT, NOT A SCORE
+
+An observability factor is the fraction of a total that the measurement sees. **It cannot
+exceed 1.** The shipped constants are **4.31725 (pea ambient hexanal)** and **9.54007 (soy
+ambient hexanal)**, with 5.92 on the soy furan class anchor.
+
+So whatever those numbers are, they are not observability. They are absorbing an
+absolute-scale deficit that lives UPSTREAM, in `MATRIX_BENCHMARK_BASE_MARKER_YIELDS` — and
+those yields are themselves `260 / 638 / 80 / 150` divided by a common scale, i.e. built from
+the very values Waves K/M/T3 retired. This is why the binding mode loses 4.3x on the
+in-panel hexanal rows the moment the fitted factor is removed: the budget under-predicts
+verified Pratap-Singh hexanal by exactly that factor, and the "observability factor" was the
+only thing hiding it. **No binding model can repair an absolute-scale error from the
+observability side.** Boundary, as the mission required: this wave did NOT touch the
+volatile-budget / allocation machinery (`src/projection.py`, the base marker yields,
+`src/lipid_oxidation.py`). That is the separate [P] workstream, and this result is a
+quantified argument for it.
+
+### (c) THE MODEL — one equation, zero fitted parameters
+
+`src/protein_binding.py` (new, 0 shipped-path effect by default):
+
+```
+    K_eff  = a_p * Pow                    [L per gram of protein]
+    f_free = 1 / (1 + K_eff * c_p)        [single-site Langmuir, dilute-ligand limit]
+```
+
+`a_p` is the Harrison & Hills / Viry hydrophobic interaction parameter as fitted to plant
+proteins by Snel et al. 2023, and it is the ONLY per-gram binding parameter this campaign
+found: every other retrieved constant is per MOLE of protein and none of those sources states
+the protein molar mass it used, so the conversion cannot be done without inventing one. Those
+are recorded under `not_usable_without_protein_molar_mass` rather than converted.
+
+**The second half of the physics is the quantification basis, and it matters as much as
+f_free.** `f_free` is only the right factor if the reference reports the FREE concentration:
+
+* **matrix-matched** (standards spiked into the slurry) measures the TOTAL -> factor **1.0**,
+  and `f_free` must NOT be applied. Pratap-Singh 2021 is this case, verbatim: *"The pea
+  protein sample was spiked with 1, 2, 3, 4, 5 uL of stock standard and 5 uL of internal
+  standard hexanal-d12 was used to generate the standard curve for quantification"*.
+* **water-calibrated** (external curve built in water) reads back the FREE concentration ->
+  factor `f_free`. Liu 2021 is this case, verbatim: *"pea protein solutions were replaced
+  with 5 mL DI water and were spiked with known compounds at five different levels"*.
+* **unknown** -> nothing is applied and the row says so. Six of the eight hold-out rows are
+  this, which is most of why the binding mode has so little to do.
+
+**NOT MODELLED, deliberately:** no denaturation term (see (f)), no covalent term, no
+low-water-activity lane (an aqueous-phase Langmuir does not describe a dry extrudate).
+
+### (d) THE ZERO-PARAMETER CROSS-CHECK — the model reproduces measurements it was not built from
+
+`a_p` was fitted by one laboratory on 2-alkanones in demineralised water by APCI-MS. These
+rows are other laboratories, other methods, and in two cases another chemical class. Nothing
+was adjusted:
+
+| record | compound | c_p g/L | measured % bound | predicted | residual (pts) |
+|---|---|---:|---:|---:|---:|
+| Heng 2005, pea vicilin | 2-heptanone | 10.0 | 19.00 | 19.27 | **+0.27** |
+| Wang 2015, pea isolate pH 7 | 2-octanone | 8.27 | 31.90 | 32.64 | **+0.74** |
+| Wang 2015, pea isolate pH 7 | 2-heptanone | 8.27 | 13.90 | 16.49 | +2.59 |
+| Wang 2015, pea isolate pH 7 | 2-hexanone | 8.27 | 7.15 | 4.72 | -2.43 |
+| Barallat-Perez 2023, plant isolates | octanal | 10.0 | 52.76 | 55.61 | +2.85 |
+| Heng 2005, pea vicilin | 2-octanone | 10.0 | 33.00 | 36.95 | +3.95 |
+| Heng 2005, pea vicilin | 2-hexanone | 10.0 | 13.00 | 5.66 | -7.34 |
+| Wang 2015, pea isolate pH 8 | 2-octanone | 8.27 | 23.76 | 32.64 | +8.88 |
+| Wang 2015, pea isolate pH 8 | octanal | 8.27 | 61.87 | 50.88 | **-10.99** |
+| *Barallat-Perez 2023 (range endpoint)* | 2-octanone | 10.0 | 14.73 | 36.95 | *+22.22* |
+| *Barallat-Perez 2023 (range endpoint)* | heptanal | 10.0 | 13.73 | 33.28 | *+19.55* |
+
+**Median \|residual\| 3.95 percentage points over all 11; 3.27 over the 8 that are not pooled
+range endpoints.** The two italicised rows are the LOW endpoints of "an increase from X to Y
+for PPI, SPI and LPI", i.e. the least-binding of three proteins, not a mean — they are the two
+largest residuals and they are reported separately rather than dropped.
+
+**Two things this cross-check earns that no score could.** First, `a_p` was fitted on ketones
+and both octanal rows land within 11 points, so the ketone->aldehyde class transfer is
+defensible (it is nonetheless declared an UPPER bound on `f_free`, because aldehydes also bind
+covalently). Second, the compound-transfer variable is validated independently: the aldehyde
+series `K(nonanal)/K(hexanal)` is **28.6x** (Barallat-Perez 2025 Klotz) and **26.2x** (Liu
+2026 inverse LC) against a Pow ratio of **33.1x**; and O'Keefe's 1988 glycinin
+`K(1-hexanol)/K(hexanal)` is **470/270 = 1.74** against a Pow ratio of **1.78** — a 2%
+agreement from a 1988 experiment that knew nothing about this model.
+
+### (e) THE PRATAP-vs-LIU TEST — a clean, falsifiable, NEGATIVE result
+
+Wave R's insight was that Liu's DI-water-calibrated values are lower bounds "by roughly the
+bound fraction". That is now a number, and it does not do what was hoped.
+
+```
+  f_free(hexanal, pea, c_p = 100 g/L)      = 0.3990
+  predicted water-calibrated under-read    = 2.5065x
+  Pratap-Singh (matrix-matched, total)     = 1138 ug/L
+  Liu Table 2.7 band                       = 2445 - 52454 ug/L, geometric mid 11 325
+  gap BEFORE the binding correction        = 9.95x
+  gap AFTER  the binding correction        = 24.94x
+```
+
+The direction is right — a water-calibrated measurement must read low — but the correction
+moves Liu's numbers UP, i.e. **it widens the disagreement it was supposed to explain, by
+2.5x.** The verdict is therefore that Pratap-Singh and Liu differ by MATERIAL AND LOT, not by
+method: Liu's own band spans 21.45x across nine commercial lots, which swamps a 2.5x method
+term. This also explains the one hold-out row where the binding physics makes things worse
+(`liu / hexanal`): the model already under-predicts there, and `f_free < 1` can only push it
+further under.
+
+### (f) DENATURATION — the sources disagree in sign, so there is no term
+
+The mission allowed an adjustment only if a source quantifies it. Three do or nearly do, and
+they do not agree:
+
+| source | material | direction | quantified? |
+|---|---|---|---|
+| Liu 2026 (inverse LC, 85 C / 30 min) | commercial SPI on silica | **decreases** | yes: hexanal **~-10%** in K, series -6 to -18% |
+| Heng 2005 | purified pea vicilin | **decreases** | yes: octanal 96% -> 32% bound |
+| Barallat-Perez 2023 | commercial isolates | **increases** | no, qualitative only |
+
+The best-matched source (commercial SPI) gives a ~10% change in K, which moves `f_free` by
+under one percentage point at every loading in the file — smaller than the Pow convention gap
+alone (see (g)). A term that is disputed in sign and, where measured on the right material,
+negligible, is not a term. All three are recorded in
+`data/lit/binding_constants.yml -> denaturation_effect_evidence` with `modelled: false`, and
+`src/protein_binding.describe_model()` reports `denaturation_modelled: false` with the reason.
+
+### (g) THE DATA FILE — `data/lit/binding_constants.yml`, 23 records / 11 sources
+
+Every record carries native units, the measurement conditions, a **verbatim quote**, the
+table/figure location, a `verification_status`, and (where a DOI exists) a CrossRef check.
+A test asserts all of that. Sources retrieved and read in full this wave:
+
+| source | what it gave | usable? |
+|---|---|---|
+| **Snel et al. 2023**, Heliyon 9:e16503 (PMC10245154) | `a_p` in **L per g protein**: yellow pea **25e-5**, soy **16e-5** (ketones, R2 = 1.00); esters 11e-5 / 4.8e-5 | **YES — the only per-gram parameter found anywhere** |
+| **Barallat-Perez et al. 2023**, JAFC 71:20274 (PMC10739987) | octanal **52.76 +/- 4.65** %bound and three more, at 1 wv% / pH 7 | yes, cross-check |
+| **Wang 2015**, U. Manitoba thesis (mspace) | Table 5.1 pea-isolate ketone %bound across pH 3-11; Table 7.2 octanal **61.87 +/- 0.46** | yes, cross-check |
+| **Heng 2005**, WUR thesis 10.18174/121674 | pea vicilin %bound, heated and non-heated | yes, cross-check |
+| **Barallat-Perez et al. 2025**, npj Sci Food 9:174 | SPI Klotz K and n for hexanal (3.5e3 M^-1), nonanal (1e5), the whole C6-C10 aldehyde and 2-alkanone series | **no** — M^-1, no protein molar mass stated |
+| **Liu et al. 2026**, Food Chem 525:150473 (edepot CC-BY) | SPI aldehyde K_B by inverse LC, hexanal 2623 M^-1; **the denaturation number** | **no** for K; yes for (f) |
+| **O'Keefe 1988**, Iowa State dissertation | purified glycinin / beta-conglycinin K for hexanal, octanal, **1-hexanol**, 2-nonanone at 3 temperatures | **no** — M^-1 and the molar-mass sentence is ambiguous |
+| PubChem / Hansch 1995 | experimental log P for hexanal (1.78), 1-hexanol (2.03), 2-octanone (2.37), 2-heptanone, 2-hexanone; XLogP3 for nonanal, 2-pentylfuran, octanal, heptanal | yes, with the estimated ones flagged |
+
+**The dominant stated uncertainty is the Pow convention, and it is quantified.** `a_p` was
+fitted against KOWWIN v1.68 estimates; the experimental Hansch values are used where they
+exist. On the one compound where both are available (2-octanone: KOWWIN 2.22, Hansch 2.37)
+they differ by **0.15 dex = 1.41x in Pow**, which propagates linearly into `K_eff`. For
+nonanal and 2-pentylfuran no experimental value is indexed at all and XLogP3 is used, flagged
+`computed_xlogp3` — a 0.3 dex error there is a 2x error in `K_eff`, and nonanal's f_free is
+0.0197, so that row is the most Pow-sensitive in the file.
+
+### (h) WIRING — a mode, not a replacement, with the no-double-count guard NEGATIVE-TESTED
+
+Four modes, resolved by an explicit context manager, then the
+`MAILLARD_MATRIX_OBSERVABILITY_MODE` environment variable, then the shipped default:
+`fitted_factors` (default, unchanged), `unit_observability` (null), `binding_physics`, and
+`binding_physics_out_of_domain`.
+
+**`binding_physics_out_of_domain` is currently a NO-OP and is not scored, and the reason is
+worth recording:** every non-aqueous lane in this repository (Bi roasted pea, Li 2026 HME)
+also has no declared protein loading and no established quantification basis, so the mode has
+nothing to compute with. **What blocks it is missing data, not the domain rule.**
+
+THE NO-DOUBLE-COUNT GUARD. In binding mode `src/headspace.py` returns BEFORE
+`get_matrix_calibration_record` is consulted, and it also drops `dynamic_release_factor` —
+the second omission is the one that is easy to miss, because `compose_dynamic_retention`
+routes through `resolve_compound_matrix_retention`, whose `volatile_retention` is documented
+as *"fraction escaping matrix (rest is bound)"*, i.e. it is ITSELF an unanchored binding
+model. Running both would count protein binding twice.
+
+`src/benchmark_validation.py` then asserts it. The first version of the assertion demanded
+`net == f_free x pH` point-by-point and **fired immediately** — correctly: the Monte-Carlo
+propagator legitimately wraps that method with a sampled multiplier. The shipped form uses
+the invariant that survives the sampler and still catches a leak: the sampler's multiplier is
+GLOBAL to a sample while every factor being guarded against is PER COMPOUND, so the ratio
+`net / (f_free x pH)` must be **identical across all four compounds on a lane**.
+Negative-tested both ways in `tests/scientific/test_wave_s4_protein_binding.py`: a global
+0.25x leak passes and is reported as `binding_no_double_count_ratio = 0.25`; a per-compound
+3x leak on hexanal alone raises `AssertionError: ... Double counting refused`.
+
+### (i) THE FABRICATED-FACTOR ROWS
+
+`0.143 / 0.063` is 120 ppb over 80 ppb, neither of which appears in Pratap-Singh et al.
+
+| benchmark | mode | observability factor | predicted ppb | measured | fold |
+|---|---|---:|---:|---:|---:|
+| `pea_isolate_40C_PratapSingh2021` / 1-Hexanol | fitted | 1.0 | 80.101 | *(retired — paper says n.d.)* | — |
+| `soy_isolate_40C_PratapSingh2021` / 1-Hexanol | fitted | **2.2698** | 119.92 | *(retired)* | — |
+| `soy_isolate_40C_PratapSingh2021` / 1-Hexanol | binding | 1.0 | 52.831 | *(retired)* | — |
+| `li_2026_hme` / 1-hexanol | fitted | **2.2698** | 22 390 | 20.04 | **1117x** |
+| `li_2026_hme` / 1-hexanol | binding | 1.0 | 9 866 | 20.04 | **492x** |
+
+Deleting the fabricated factor halves the log error on the only scored row it touches, and
+the two in-panel rows it also drives are unscorable because Wave K removed their target (the
+paper reports n.d.). **Neither this wave nor any before it has found a pea or soy 1-hexanol
+percent-bound or per-gram constant.** The nearest published numbers are O'Keefe's purified
+soy fractions (glycinin 470 M^-1, beta-conglycinin 181 M^-1 at 293 K) and Wongprasert 2024's
+(Z)-3-hexen-1-ol on PPI — neither convertible without a protein molar mass. **[P]**
+
+### (j) WHAT CHANGED
+
+**New:** `src/protein_binding.py`; `data/lit/binding_constants.yml`;
+`scripts/generators/generate_matrix_binding_mode_comparison.py`;
+`results/validation/matrix_binding_mode_comparison.{json,md}` (un-gitignored, with the reason
+in place — and the filename must NEVER contain `refit`/`rederivation`, because
+`holdout_guard` check 4 treats those as fit records and this file names every hold-out
+benchmark); `tests/scientific/test_wave_s4_protein_binding.py` (18 tests).
+
+**Edited:** `src/headspace.py` (one optional kwarg + the binding branch),
+`src/benchmark_validation.py` (context resolution, the guard, two metadata fields),
+`.gitignore`, `README.md`, `AUDIT.md`.
+
+**NOT changed:** any observability factor, any marker yield, any barrier, any projection
+constant, any benchmark, any hold-out bundle. `fitted_factors` is still the default and
+`test_shipped_pea_prediction_is_unchanged_by_this_wave` pins the shipped 1125.278 ppb.
+
+**Regeneration scope: none needed.** No shipped number moved, which is measured rather than
+asserted — the `fitted_factors` column of the mode comparison reproduces
+`external_validation_report.json`'s 93.6837x median and 3/8 coverage exactly, and 186 existing
+matrix / headspace / benchmark-summary / honest-headline tests pass unchanged.
+
+### (k) GATES + TESTS
+
+| Gate | Result |
+|---|---|
+| `scripts/ci/holdout_guard.py` | **PASS** — 4/4; 16 bundles, 12 flagged, 34 fit records scanned |
+| `scripts/ci/citation_gate.py` | **PASS** — **98** files (was 97), **1013** DOI-bearing fields (was 1002), **331** unique DOIs (was 323), 0 waivers. The 8 new DOIs are this wave's binding sources. |
+| `scripts/ci/fit_target_gate.py` | **PASS** — 2/2. `binding_constants.yml` declares no fit target because there is none. |
+
+Targeted tests only, per the owner directive (**no full-suite run**):
+`tests/scientific/test_wave_s4_protein_binding.py` **18 passed**; the regression subset
+`-k "matrix or headspace or honest_headline or benchmark_summary or observability or
+external_validation or uncertainty"` **186 passed, 1 xfailed, 0 failed**. No existing test
+was re-pinned, because no shipped number moved.
+
+The new tests deliberately do NOT pin the mode-vs-mode scores — pinning a number the wave
+just produced is the circularity Rounds 1-3 removed, and Wave U set that precedent. They pin
+the inertness of the default path, the arithmetic and unit handling of the model, the
+provenance discipline of the data file, and that the double-count guard fires.
+
+### (l) [P] CARRIED FORWARD
+
+- [P] **The absolute-scale deficit is in the marker yields, not in observability**, and now
+  there is a unit argument for it: an observability factor cannot exceed 1 and two shipped
+  ones are 4.32 and 9.54. `MATRIX_BENCHMARK_BASE_MARKER_YIELDS` (0.205 / 0.502 / 0.063 /
+  0.150) is `260 / 638 / 80 / 150` over a common scale, i.e. still built from the retired
+  values. This is the volatile-budget workstream's highest-value target.
+- [P] **Adopt, keep or retire the fitted observability factors.** The measured comparison is
+  on the record: they win in-panel by 5.9x in median fold (1.0004x vs 5.92x) and lose to *doing nothing*
+  out of sample. This wave does not make that call; it makes it decidable.
+- [P] **The 1-hexanol lane still has no anchor of any kind** (see (i)). Retiring it now has a
+  measured consequence (1117x -> 492x on the only scored row) rather than a guess.
+- [P] **Buy or ILL three papers.** `10.1016/j.foodchem.2022.133044` (Bi et al. 2022) is the
+  only identified primary source with a hexanal x pea-protein binding constant and is closed
+  on every open route tried (Unpaywall, OpenAlex, Semantic Scholar, Europe PMC, fatcat, IA
+  Scholar); it is quoted second-hand by Wongprasert 2024 as **K ~ 684.46 M^-1, n = 4.58 at
+  37 C**, with no conditions given. Also `10.1021/jf00006a003` (O'Keefe 1991 JAFC, to
+  disambiguate the 160/320 kDa sentence) and `10.1021/jf00108a037` (Damodaran & Kinsella
+  1981, quoted second-hand by two independent theses).
+- [P] **A protein molar mass would unlock four more datasets.** Barallat-Perez 2025, Liu 2026,
+  O'Keefe 1988 and Wongprasert 2024 all report K in M^-1. A REPORTED (not modelled)
+  consistency calculation: matching Snel's per-gram `a_p` for soy 2-octanone against
+  Barallat-Perez 2025's nK for the same compound implies an effective protein molar mass of
+  ~53 kDa, which is physically sensible for a soy subunit. That is a unit reconciliation
+  between two literature datasets, **not used anywhere in the model**, and it should not be
+  adopted without a source that states the mass.
+- [P] **No source anywhere gives 2-pentylfuran binding to any protein.** Both retrieval
+  sweeps returned zero. Its `f_free` in this model is the least supported (Pow is XLogP3 and
+  the class transfer is from ketones).
+- [P] **Barallat-Perez 2023 and the a_p route disagree on the SIGN of the pea-vs-soy hexanal
+  binding difference.** The paper says soy binds hexanal more than pea (qualitative, no
+  number); `a_p` says pea binds more (25e-5 vs 16e-5); and the shipped registry says soy
+  RELEASES 2.2098x more than pea. Two open-access sources contradict each other and neither
+  prints a hexanal number. This is the sharpest remaining evidence gap in the lane.
