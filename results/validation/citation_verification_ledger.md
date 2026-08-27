@@ -623,3 +623,382 @@ were added to entries that did not already carry one:
 | `10.3390/molecules26134104` | `MATCH` | benchmarks/pea_isolate_40C_PratapSingh2021.json, benchmarks/soy_isolate_40C_PratapSingh2021.json, lit/slr_incorporation_matrix.json | `pratap_singh_2021_native_ppi_spi`, `pea_isolate_40C_PratapSingh2021`, `soy_isolate_40C_PratapSingh2021` | Pratap-Singh et al. 2021 OAV determination in soy/pea/brown-rice proteins - as cited, and correct for both PratapSingh2021 benchmarks. |
 | `10.47836/ifrj.28.3.16` | `MATCH` | lit/benchmark_intake_registry.json, lit/slr_incorporation_matrix.json | `yang_2021_ascorbic_glycine_kinetics` | Yang et al. 2021 L-ascorbic acid/glycine browning kinetics - as cited. |
 
+
+---
+
+## Round-2 repairs (SLR/priors/backlog partition)
+
+Date: 2026-08-26. Scope (exclusive file partition): `data/lit/slr_incorporation_matrix.json`,
+`computational_priors.json`, `deep_research_backlog.json`, `flavor_reference_payloads.json`,
+`safety_reference_payloads.json`, `retention_reference_payloads.json`,
+`process_state_calibrations.json`. **Citation metadata only — zero stored numeric values were
+touched** (verified: numeric-leaf diff vs `HEAD` is 0 across all seven files).
+
+Method: for each defective anchor the intended source was inferred from the entry's id,
+description and `exact_numeric_anchors`, then recovered by CrossRef structured search
+(`query.bibliographic` / `query.container-title` / volume+page enumeration), NCBI ID conversion
+for PMIDs/PMCIDs, and targeted web/repository search for theses, ACS Symposium Series chapters
+and patents. A DOI was written only after its title, authors, year and venue were seen in a
+machine-readable record. Where a page-level coordinate was claimed (e.g. "JAFC 39:1207"), the
+volume was enumerated in CrossRef — a claimed page falling *inside* an unrelated article is a
+decisive falsification, and this test alone killed six citations.
+
+### Repair-record schema added by this round
+
+| Field | Meaning |
+|---|---|
+| `doi_repair` | `{old, new, date, basis}` — the identifier was replaced. |
+| `citation_repair` | `{old, new, date, basis}` — the author/year/venue string was corrected. |
+| `citation_caveat` | The recovered paper is the right source for the *phenomenon* but does not contain one or more of the entry's stored numbers. |
+| `value_anchor_status: "no_verifiable_source"` \| `"unverified"` | The reference is now correct, but the stored constant itself has no located source. |
+| `source_status: "no_verifiable_source"` | No publication supports the claim; the old identifier is preserved in `source_status_repair.old` and the `doi` field is removed. |
+| `source_status: "identifier_unavailable"` | The source is real and verified (thesis, book chapter, non-DOI journal) but issues no DOI. |
+| `source_status: "patent_not_peer_reviewed"` / `"internal_synthesis_not_literature"` | The `doi` field held a patent number / an internal placeholder; moved out so it is not counted as a literature anchor. |
+| `id_provenance_note` | The `paper_id` embeds a fabricated author name but is load-bearing for tests/registry joins, so it was kept and annotated rather than renamed. |
+| `shared_anchor` + `shared_anchor_note` | One DOI serving several nominally distinct references. |
+
+### Counts by class
+
+**Ledger-flagged defects in this partition (103 unique DOIs / 105 anchor sites):**
+
+| Class | DOIs | Disposition |
+|---|---:|---|
+| METADATA-MISMATCH | 42 | 29 citation strings corrected in place (48 sites); 5 papers **confirmed correct as cited** — the ledger flag was a CrossRef `issued`-vs-print-year artefact (Monforte 2018, Smagghe 2006, Hidalgo & Pompei 2000, Zhu 2021, Yu 2018); 4 where the citation string was already right and only the `paper_id` embedded a wrong author (Adams 2001, Sun 2026, Tanaka 2025, Ramírez-Jiménez 2000), annotated with `id_provenance_note` / `citation_caveat`; 5 escalated to a full DOI re-anchor. |
+| TOPIC-MISMATCH | 31 | 16 re-anchored to a verified paper; 13 `no_verifiable_source`; 2 `identifier_unavailable`. |
+| DEAD | 30 | 13 already repaired in round 1; 10 newly re-anchored; 6 `no_verifiable_source`; 1 `identifier_unavailable`. |
+
+**Deep-pass research targets (113 unique reference ids: 30 DEAD + 32 TOPIC-MISMATCH + 51
+backlog-only, resolved by ten parallel verification agents):**
+
+| Outcome | Count |
+|---|---:|
+| repaired (verified DOI written) | 67 (37 high confidence, 30 medium) |
+| `no_verifiable_source` | 43 |
+| `unresolvable` (real source, no stable identifier) | 3 |
+
+**Backlog deep pass (`deep_research_backlog.json`, 239 items):** the 69 items that had no DOI
+and insufficient bibliographic signal after the automated round are now fully dispositioned —
+**37 resolved** to a verified DOI with a `doi_resolution {basis, confidence, date}` record,
+**29 `no_verifiable_source`**, **3 `unresolvable_after_deep_search`**. File-wide state:
+127 resolved-with-basis, 41 DOI present from ingestion, 30 `self_referential_pointer`,
+38 `no_verifiable_source`, 3 `unresolvable_after_deep_search`, 0 undispositioned. Scraped
+`citation` strings are stable join keys for the runtime registry tests and were left unchanged;
+the corrected bibliographic string is written to `verified_citation` (68 items).
+
+**Annotations written across the partition:** 73 `doi_repair`, 210 `citation_repair`,
+91 `citation_caveat`, 83 `source_status`, 3 `value_anchor_status`, 5 `id_provenance_note`,
+94 `shared_anchor` nodes over 25 shared DOIs.
+
+**Duplicate-anchor collapse:** 25 DOIs each serve two or more nominally distinct reference
+records. Largest clusters: `10.1016/j.foodchem.2022.134998` (Liu, Cadwallader & Drake 2023) —
+7 records; `10.3390/molecules28073151` (Hernandez et al. 2023) — 6; `10.3390/foods12101967`
+(Fu et al. 2023) — 5; `10.1021/jf010823n` (Hofmann & Schieberle) — 3;
+`10.1021/acs.jafc.0c00200` (Yu et al. 2020) — 2. Every node in a cluster now carries
+`shared_anchor: true` and a note naming the sibling ids, so they are not read as corroborating
+evidence.
+
+### Ten most significant repairs
+
+1. **`yu_2017_cml_cel_meat_review`** → `10.1016/j.foodchem.2014.09.129` — Sun, Tang, Wang,
+   Rasco, Lai & Huang (2015), *Food Chem.* 172:802. The abstract states verbatim "activation
+   energy of 61.01 kJ/mol for CML and 29.21 kJ/mol for CEL", the exact pair the entry carries.
+   The previous DOI was a 2020 TiFS *review* by Zhu et al. and the citation string was a
+   non-existent "Yu et al. (2017)". Runtime-bound via `safety_reference_payloads.json`.
+2. **`liu_2020_egcg_arp_kinetics`** and **`jafc_2020_egcg_deoxyosone_trapping`** →
+   `10.1021/acs.jafc.0c00200` — Yu et al. (2020), *JAFC* 68:1714. Both anchors confirmed to the
+   decimal (Ea 77.8 → 62.8 kJ/mol = the stored 15.0 kJ/mol reduction; yield 2 → 95%). The two
+   ids are the same paper and are now flagged `shared_anchor`.
+3. **`hofmann_schieberle_1997_meat_anchor`** (the primary cooked-meat MFT/FFT reference band,
+   consumed by `src/reporting.py`) → the DOI is real but is **Kerscher & Grosch (1998)**,
+   *JAFC* 46:1954, "Quantification of 2-methyl-3-furanthiol, 2-furfurylthiol,
+   3-mercapto-2-pentanone and 2-mercapto-3-pentanone in heated meat" — an exact topical match,
+   but not Hofmann & Schieberle. Citation corrected at all three sites.
+4. **`hofmann_2001_melanoidin_thioether`** (dead DOI) and **`pmc12154226_crosspy_thiol_adduction`**
+   (a general Maillard review) → `10.1021/jf010823n` — Hofmann & Schieberle, "Chemical
+   Interactions between Odor-Active Thiols and Melanoidins Involved in the Aroma Staling of
+   Coffee Beverages", *JAFC* 50:319. "FFT decreased by a factor of 16" confirmed verbatim,
+   closing the Family-13 covalent thiol-depletion anchor.
+5. **`shu_2019_cysteine_quinone_kinetics`** (cited as bare "Shu et al. (2019)" with no
+   identifier; the *only* literature anchor behind the `quinone_cys_michael` barrier) →
+   `10.1016/j.freeradbiomed.2019.04.026` — Shu, Lorentzen & Davies (2019), *Free Radic. Biol.
+   Med.* 137:169. The DOI was recoverable from the repo's own deep-research source file. The
+   stored 10^5–10^6 M⁻¹s⁻¹ band matches; caveat recorded that the paper's quinone is
+   1,4-benzoquinone in buffer, so the transfer to food o-quinones is a surrogate step.
+6. **`ohsu_2025_kokumi_casr_support_v1`** — no "Ohsu et al. (2025)" exists and the stored DOI
+   resolved to Yang et al. (2022). Re-anchored to the real Ohsu paper,
+   `10.1074/jbc.M109.029165` (2010, *JBC* 285:1016), **and marked
+   `value_anchor_status: no_verifiable_source`**: the measured CaSR EC50s are 41.9 nM (γ-Glu-Val-Gly)
+   and 76.5 nM (GSH), three orders of magnitude from the stored 0.32/0.68 mM, there is no CCK
+   data, and the sensory scale runs −2..+2 so "+2.2 mouthfulness units" is out of range.
+7. **`blank_devaud_grosch_2003_g6p_hdmf_uplift_v1`** — the contradiction case (below).
+   Re-anchored to Yaylayan, Machiels & Istasse (2003), `10.1021/jf034037p`, as a
+   *phenomenon* anchor, with `value_anchor_status: no_verifiable_source` on the 4.4×
+   G6P-vs-glucose multiplier and the "[²H₃]-HDMF SIDA" method claim.
+8. **`mouritsen_2024_umami_thresholds`** (backlog) → `10.1093/chemse/bjad049` — Amado et al.
+   (2024), *Chem. Senses* 49:bjad049. All four fold-reduction factors (IMP 45.2×, GMP 29.8×,
+   AMP 8.9×, CMP negative) confirmed. The repo's "Chem Senses 49:bjaf043" was a chimera —
+   bjaf043 is a *different* 2025 paper in volume 50, which is what the SLR row anchors; the two
+   rows sharing this id now carry an `id_provenance_note` saying so. Mouritsen authored neither.
+9. **`pmid36878579_pe_stoichiometry`** (dead DOI) → `10.5650/jos.ess22332` — Fujimoto et al.
+   (2023), *J. Oleo Sci.* 72:257, recovered through the PMID embedded in the id. Both stored
+   anchors (1 mol sugar : 2 mol PE; UV 350 nm) appear verbatim in the abstract.
+10. **`de_bruijn_1987_monosaccharide_alkaline_degradation`** → `10.1002/recl.19871060201` —
+    de Bruijn, Kieboom & van Bekkum (1987), *Recl. Trav. Chim. Pays-Bas* 106:35, "Alkaline
+    degradation of monosaccharides V: kinetics…". The stored DOI was **off by one article in
+    the same issue** (a sugar-chloroacetate synthesis paper), which had also propagated a
+    fabricated "CHITTENDEN & Regeling (1987)" citation string into the SLR row.
+
+Runners-up worth naming: `martins_van_boekel_2005_ascorbic_amino_browning` →
+`10.1590/1678-457x.08717` (all three Ea values — Lys 54.94, Arg 50.08, His 35.31 kJ/mol —
+exact); `krause_2003_furosine_hydrolysis_yields` → `10.1007/s00217-002-0649-0` (both hydrolysis
+yields confirmed); `morel_2002_gluten_shear_aggregation` → `10.1021/bm015639p` (33.7 kJ/mol
+verbatim); `de_vleeschouwer_2006_acrylamide_aqueous` → `10.1021/jf0611264` (was silently reusing
+the Claeys 2005 DOI already anchored by a sibling row).
+
+### The two backlog contradictions
+
+1. **Genistein / AGE note carrying a mangrove-plant PMID.** The backlog row
+   "Nakagawa et al. (2004) — PubMed PMID:15165134 — Genistein IC₅₀ 48 µM; 82% AGE inhibition at
+   100 µM; daidzein 68%; SPI isoflavone correction factor −80% for dicarbonyl pool" cites a
+   PMID that resolves cleanly to an unrelated mangrove-plant natural-products paper. A full
+   PubMed sweep found **no** genistein/daidzein anti-glycation paper by any Nakagawa with those
+   IC₅₀/inhibition values. Resolution: `doi_resolution {status: "no_verifiable_source"}` plus
+   `source_status: "no_verifiable_source"`, with the nearest genuine anchor recorded in the
+   caveat — Lv, Shao, Chen & Ho (2011), "Genistein inhibits advanced glycation end product
+   formation by trapping methylglyoxal", *Chem. Res. Toxicol.* 24:579, `10.1021/tx100457h` —
+   which supports the phenomenon but **not** the stored numbers or the −80% correction factor.
+2. **"Blank, Devaud & Grosch (2003)" resolving to Cerny & Davidek.** The row claims
+   `DOI:10.1021/jf026123f — G6P → HDMF 4.4× vs. glucose; SIDA with [²H₃]-HDMF; triplicates`.
+   That DOI is live but is Cerny & Davidek (2003), "Formation of Aroma Compounds from Ribose and
+   Cysteine during the Maillard Reaction" — no G6P, no HDMF multiplier, no SIDA. No
+   Blank/Devaud/Grosch 2003 publication exists at all, and the method claim is independently
+   wrong: the Blank group's HDMF standard is [¹³C₂]-HDMF ([²H₃] labels EHMF). Resolution: the
+   backlog row and the `computational_priors` prior are both re-anchored to the real
+   phosphorylated-sugar study — Yaylayan, Machiels & Istasse (2003), "Thermal Decomposition of
+   Specifically Phosphorylated D-Glucoses and Their Role in the Control of the Maillard
+   Reaction", *JAFC* 51:3358, `10.1021/jf034037p` — which supports G6P-driven furanone routing
+   qualitatively (pyrolysis-GC/MS). The **4.4× multiplier itself is marked
+   `value_anchor_status: no_verifiable_source`**; the closest published near-match found
+   anywhere is a strawberry in-planta radiolabel ratio (≈4.2×), which is not a Maillard model.
+
+### Remaining gaps (owner decisions, values left untouched)
+
+- **43 references have no verifiable source.** The reference is now labelled honestly, but the
+  numbers they were carrying are unanchored and should be re-derived or dropped. The
+  highest-impact ones: `liardon_1991_r5p_donor_potency` (R5P >100× glucose — the ribose-phosphate
+  donor hierarchy), `blank_grosch_1991_hdmf_anchor` (boiled-beef HDMF 28–67 µg/kg, a
+  quantitative benchmark), `marquez_ruiz_2014_oleic_oav_anchor`, `bhandari_1998_beta_cd`
+  (the whole β-CD K_assoc table), `mottram_2001_mft_quench_buffering_anchor` (and the real
+  carnosine literature reports MFT *decreasing*, i.e. the opposite sign to the stored +61%),
+  `hauck_tressl_1999_hdmf_non_amino`, `de_leyn_2019_thiamine_retention`,
+  `comunian_2021_thiamine_encapsulation`, `wang_2023_mft_retention`, `fadel_2015_mft_retention`,
+  `xu_2025_peptide_hierarchy`, `malia_2025_pea_free_sh_crosscheck`, `hrncirik_2014_coconut_oil`.
+- **The hexanal ODT (4.5 ppb) is still unsourced.** `grosch_1982_hexanal_odt` is now
+  `identifier_unavailable`: the real "Grosch (1982)" is the Elsevier book chapter in *Food
+  Flavours Part A* (no DOI), and the 4.5 ppb value could not be confirmed in it. Published
+  hexanal thresholds in water span 0.3–14 µg/L, so the value is in range but unattributed.
+- **91 `citation_caveat` records mark entries where the DOI is now right but a stored number is
+  not in the paper.** Notably: the hemp "OAV 35", the threonine→furan 0.045 mol% ceiling, the
+  C18:3 8.2%/5.4% scission split, the CGA 2.9×/43% Cys-blocking pair, the DiXyl-ARP 115/85
+  kJ/mol Ea pair, the Ramírez-Jiménez "3–8% lysine blocked" claim, and the Cu–PM
+  −35.8 kcal/mol free energy (the verified paper computes *iron*–aminoguanidine complexes).
+- **Five `paper_id`s embed a fabricated author name** (`shirai_2015…`, `poulsen_2023…`,
+  `mottram_2001_bmfd_retention`, `mouritsen_2024…`, `zhang_2026_spi_vsc_retention`). They are
+  load-bearing for tests and sibling registries, so they were annotated with
+  `id_provenance_note` rather than renamed. Renaming is a separate mechanical change.
+- **`siripitakpong_2026_fft_retention`** was re-anchored to `10.1016/j.fochx.2026.103712`, whose
+  ΔG° values match the stored anchors *exactly* — but for **vanillin, not 2-furfurylthiol**, and
+  as an isotherm ΔG° rather than a docking score. This one needs a science call, not a citation
+  call.
+- Two of the ledger's earlier `[P]` items are now settled for this partition: the hexanal-ODT
+  anchor (above) and the `quinone_cys_michael` barrier's missing DOI (item 5).
+
+---
+
+## Round-2 repairs (intake registry + benchmarks partition)
+
+Date: 2026-08-26. Scope (exclusive file partition): `data/lit/benchmark_intake_registry.json`,
+`data/benchmarks/*.json` (including `external_validation/` and `quarantined/`), and
+`data/species/*.yml`. Excluded by agreement, because a concurrent agent owned them:
+`Parker2012`, `Cerny2008`, `Hofmann1996`/`Bolton1994`, `Mottram1994`, `Farmer1999`.
+**Citation metadata only — no `conc_ppb`, tolerance, `Ea`, threshold or any other
+model-consumed number was changed, and no artifact was regenerated.**
+
+Method: intent was inferred from each entry's `id`, `citation`, `what_it_supports` and
+`key_values`; the real publication was then recovered by CrossRef bibliographic search
+(`query.bibliographic` + `query.author`), by NCBI ID conversion where the repo id itself
+embedded a PMCID/PMID, and by targeted web search. **Every replacement DOI was fetched from
+CrossRef and its title, authors, year and venue read before it was written** (56 unique
+replacement DOIs, 56/56 resolved). Where the intended paper could not be found, the identifier
+was removed rather than left standing.
+
+### Counts by class
+
+Ledger-flagged anchors in this partition: **125 registry reference ids** (44 METADATA-MISMATCH,
+40 TOPIC-MISMATCH, 41 DEAD) plus 4 benchmark files.
+
+| Class | Repaired | `no_verifiable_source` | Left (with reason) |
+|---|---:|---:|---:|
+| METADATA-MISMATCH | 42 | 0 | 2 |
+| TOPIC-MISMATCH | 27 | 13 | 0 |
+| DEAD | 29 | 11 | 1 |
+| **Total** | **98** | **24** | **3** |
+
+The three left in place:
+
+- `sun_2026_spi_vsc_retention` — DOI and citation are both correct in this file; the id/citation
+  conflict the ledger flagged lives in `slr_incorporation_matrix.json`, outside this partition.
+- `ramirez_jimenez_2000_furosine_crossover_benchmark` — DOI and author/year are correct. The
+  defect is `matrix_family: "mild_legume_extrudate"` on a *toasted bread* study.
+  `matrix_family` is consumed by routing code, so it was annotated (`citation_audit_note` in the
+  benchmark file) rather than rewritten; the relabel is an owner call.
+- `hofmann_schieberle_grosch_1996` — shares `10.1021/jf960062o` with
+  `data/benchmarks/quarantined/thiamine_cys_ribose_100C_Hofmann1996.json`, owned by a concurrent
+  agent, which re-anchored it to Bolton et al. (1994) in the same pass.
+
+Annotations written: **84 `doi_repair`**, **98 `citation_repair`**, **24 `source_status:
+no_verifiable_source`**, **2 `value_anchor_status`/`citation_caveat`**, **16 `shared_anchor`**
+nodes, 4 `citation_audit_note` records in benchmark files.
+
+### Duplicate-anchor collapse
+
+Sixteen registry rows are now flagged `shared_anchor: true` with a `shared_anchor_note` naming
+their siblings, so coverage counts stop reading one paper as several independent sources:
+
+| DOI | Paper | Rows in this partition |
+|---|---|---:|
+| `10.1016/j.foodchem.2022.134998` | Liu, Cadwallader & Drake (2023) | 4 |
+| `10.1590/1678-457x.08717` | Yu et al. (2017) | 3 (incl. one DOI case-variant collapsed) |
+| `10.1021/acs.jafc.0c00200` | Yu et al. (2020) EGCG/deoxyosone | 2 |
+| `10.1021/jf010823n` | Hofmann & Schieberle (2001) | 2 |
+| `10.1021/acs.jafc.3c08432` | Flores et al. (2024) | 2 |
+| `10.1021/acs.jafc.9b07711` | Bi et al. (2020) | 1 registry + 2 external-validation benchmarks |
+| `10.3390/foods12101967` | Fu et al. (2023) | 1 registry + 1 benchmark |
+| `10.1021/jf034037p`, `10.1016/S0924-2244(01)00022-X` | Yaylayan (2003); Martins (2000) | 1 each, sibling outside partition |
+
+### Ten most significant repairs
+
+1. **`grosch_1982_hexanal_odt`** — the hexanal odour-detection threshold, which gates every
+   off-note OAV in the model. Was `10.1021/jf00111a008` = Purcell & Walter (1982),
+   *Stability of amino acids during cooking and processing of sweet potatoes*. Now
+   `10.1007/978-3-540-69934-7` — Belitz, Grosch & Schieberle, *Food Chemistry*, 4th rev. ed.,
+   Springer 2009, the standard aroma-threshold compilation carrying hexanal-in-water at
+   ~4.5 µg/kg (independently quoted as "about 5 ppb, [Belitz/Grosch/Schieberle]" by the pea/soy
+   OAV literature, e.g. PMC8271896). Cross-check recorded in the repair basis: Czerny et al.
+   (2008), `10.1007/s00217-008-0931-x`, which re-measured aqueous thresholds for key food
+   odorants and places hexanal in the same low-single-digit µg/L band. The 4.5 value itself was
+   not touched. The same source was installed as `odour_threshold_source` on the hexanal row of
+   `data/species/off_flavour_targets.yml`.
+2. **`ilo_1996_maize_sme_lysine_damage`** — was `10.1006/fstl.1996.0092`, an Ilo paper about
+   extrudate *viscosity* with no lysine measurement in it. Now
+   `10.1111/j.1365-2621.2003.tb05701.x` — Ilo & Berghofer (2003), *Kinetics of Lysine and Other
+   Amino Acids Loss During Extrusion Cooking of Maize Grits*: same first author, and the
+   first-order lysine-loss kinetics the entry actually claims.
+3. **`yu_2017_cml_cel_meat_review`** — was `10.1016/j.tifs.2020.01.021`, a Zhu et al. review,
+   under a non-existent "Yu et al. (2017)". Now `10.1016/j.foodchem.2014.09.129` — Sun et al.
+   (2015), whose abstract states the entry's stored pair verbatim (CML 61.01, CEL 29.21 kJ/mol).
+   Adopted from the parallel SLR/priors verification, which checked the numbers.
+4. **`de_bruijn_1987_monosaccharide_alkaline_degradation`** — was `10.1002/recl.19871060202`,
+   **off by one article in the same issue** (a sugar-chloroacetate synthesis paper, which had
+   also propagated a fabricated "CHITTENDEN & Regeling (1987)" citation string). Now
+   `10.1002/recl.19871060201` — de Bruijn, Kieboom & van Bekkum, *Alkaline degradation of
+   monosaccharides V: Kinetics of the alkaline isomerization and degradation of monosaccharides*.
+5. **`liu_2020_egcg_arp_kinetics` + `jafc_2020_egcg_deoxyosone_trapping`** — the second was
+   parasitising the Bi et al. pea-aroma DOI (`10.1021/acs.jafc.9b07711`), which contains no EGCG
+   chemistry and is the anchor for both `external_validation_bi_2020_*` hold-outs. Both now point
+   at `10.1021/acs.jafc.0c00200` — Yu et al. (2020) — with `shared_anchor` set. This un-collides
+   the external-validation anchor as a side effect.
+6. **`arabshahi_1988_aw_thiamine_kinetics`** — was `10.1021/jf00080a032` = Schaefer & Sandermann
+   (1988) on **pentachlorophenol metabolism in wheat cells**. Now
+   `10.1111/j.1365-2621.1988.tb10208.x` — Arabshahi & Lund (1988), *Thiamin Stability in
+   Simulated Intermediate Moisture Food*, exactly the water-activity-dependent thiamine kinetics
+   the entry claims.
+7. **`mundt_wedzicha_2007_biscuit_browning` ↔ `nakamura_1988_imp_ribose_release`** — a swapped
+   pair. The biscuit-browning entry held `10.1016/j.lwt.2006.07.014`, which is Kavitha & Modi
+   (2007) on **5′-IMP degradation**; and the IMP entry held a 1988 JAFC paper on veterinary drug
+   residues. Fixed to `10.1016/j.lwt.2006.07.011` (Mundt & Wedzicha, biscuit browning) and
+   `10.1016/j.lwt.2006.07.014` (Kavitha & Modi, IMP degradation) respectively.
+8. **`mdpi_plants_2024_hemp_volatiles`** — was `10.3390/plants13020274`, off by one volume digit,
+   resolving to a **wheat salt-stress RNA-Seq** paper. Now `10.3390/plants14020274` — Chen,
+   Oliveira, Dias & Ismail (2025), *Impact of a Novel Two-Phase Natural Deep Eutectic
+   Solvent-Assisted Extraction on the Structural, Functional, and Flavor Properties of Hemp
+   Protein Isolates* — the NADES-versus-alkaline hemp comparison the entry describes.
+9. **Four PMC/PMID-named entries recovered through their own ids.** `pmc11889959_spi_tvp_volatiles`
+   → `10.1016/j.crfs.2025.100999` (Park et al. 2025, TVP aroma volatiles);
+   `pmc11353891_lentil_deflavoring` → `10.3390/foods13162608` (Vurro et al. 2024, lentil
+   de-flavouring review); `pmc6104182_soybean_fermentation` → `10.3389/fmicb.2018.01872` (Zhao
+   et al. 2018, soy-sauce fermentation flavour); `pmid36878579_pe_stoichiometry` →
+   `10.5650/jos.ess22332` (Fujimoto et al. 2023, PE/sugar Maillard inhibition by fatty-acid
+   calcium salts — matching both the stored author label and the calcium-stearate claim). Each
+   previously carried a live DOI pointing at strawberry quality, cocoa fermentation, poultry
+   doneness recipes and a non-existent JAFC record respectively.
+10. **`tannenbaum_1985_thiamine_ea`** — was `10.1021/jf00065a009` = Al-Wandawi et al. (1985) on
+    *tomato processing wastes*. Now `10.1111/j.1365-2621.1989.tb00613.x` — Mauri, Alzamora,
+    Chirife & Tomio (1989), *Review: Kinetic parameters for thiamine degradation in foods and
+    model solutions of high water activity* — which is precisely the compiled-Ea source the entry
+    describes.
+
+Runners-up: `esterbauer_1991_4hne_kinetics` → `10.1016/0891-5849(91)90192-6` (correct suffix for
+the canonical 4-HNE review); `farmer_1991_alkyl_thiazoles` → `10.1016/0308-8146(91)90103-u`;
+`tan_2001_oil_dsc_oxidation` → `10.1007/s11746-001-0401-1`; `luna_aguilera_2014_molten_sugar_color_kinetics`
+→ `10.1007/s11483-013-9317-0` (real Luna & Aguilera, 2013 not 2014);
+`nashalian_yaylayan_2014_cu_catalyzed_strecker` → `10.1021/jf502751n`;
+`hidalgo_2005_pe_ribose_lysine` → `10.1007/s00217-004-1114-z` (right journal, wrong article).
+
+### Relabelled but not re-anchored (42 METADATA-MISMATCH)
+
+The DOI was right and the bibliographic claim was not. Every one now carries a `citation_repair`
+naming the CrossRef record. The worst offenders were *fabricated first authors*:
+`ohsu_2025_kokumi_casr_anchor` (no such author or year — the DOI was Yang et al. 2022, and the
+entry has since been re-anchored to the real Ohsu et al. 2010 CaSR paper),
+`jafc_2019_ref24_polyphenol_thiol_capping` (a bare "Ref. 24" placeholder → Arsad et al. 2020),
+`resconi_2023_pbma_beef_identity_benchmark` (→ Hernandez et al. 2023),
+`pereira_2020_metal_pm_haber_weiss_chelation` (→ García-Díez & Mora-Diez 2020),
+`shirai_2015_bsa_dityrosine_diffusion_limited` (→ Kampf et al. 2015 — and the study is ozone
+exposure, not BSA), `mottram_2001_bmfd_retention` (→ Adams et al. 2001 — and the matrix is
+ovalbumin, not soy isolate).
+
+### 24 entries now carry `source_status: "no_verifiable_source"`
+
+The identifier was removed and preserved inside `doi_repair.old`; where a topically adjacent but
+non-identical paper exists it is named in the basis as a *pointer*, deliberately **not**
+substituted in, because attaching the entry's stored numbers to a paper that does not contain
+them is the exact failure this pass exists to remove.
+
+Three of these were fabricated identifiers rather than dead DOIs — `de_leyn_2019`,
+`liardon_1991_r5p_donor_potency` (both had the repo id itself pasted into the `doi` field as
+`10.1021/acs.jafc.<id>`) and `fadel_2015_mft_retention` (`10.1016/j.foodchem.2015.00000`).
+
+The highest-impact unanchored numbers are: `liardon_1991_r5p_donor_potency` (the R5P-vs-ribose-
+vs-glucose donor hierarchy), `blank_grosch_1991_hdmf_anchor` (a `kind=quantitative_benchmark`
+beef HDMF band), `mottram_2001_mft_quench_buffering_anchor` (the lipid-aldehyde MFT quench *and*
+a carnosine uplift whose sign the real literature contradicts), `bhandari_1998_beta_cd_aldehyde_binding_anchor`
+(the whole β-cyclodextrin sequestration surface), `yu_2021_corn_hydrolysate_kinetics` (another
+`quantitative_benchmark`), `ref41_ppi_sulfur_binding`, `hauck_tressl_1999_hdmf_non_amino`,
+`wang_2022_lab_hexanal_cleanup_anchor` and `zhang_2022_unsaturated_aldehyde_potency_anchor`.
+
+### Benchmark files
+
+- `external_validation_bi_2020_raw_pea_hexanal.json`, `..._roasted_pea_hexanal.json` —
+  `source_doi` verified correct; annotated `shared_anchor: true` + `citation_audit_note`
+  recording that the DOI's misuse in the registry (the EGCG claim) has been repointed, so these
+  hold-outs are no longer entangled with an unrelated anchor.
+- `furosine_extrusion_crossover_140C_RamirezJimenez2000.json` — `source_doi` verified correct
+  against CrossRef; `citation_audit_note` records the toasted-bread-vs-legume-extrudate caveat.
+- `resconi_2023_pbma_beef_identity_benchmark.json` — the file's own PMC10096055 resolves to
+  `10.3390/molecules28073151` = **Hernandez, Woerner, Brooks & Legako (2023)**. "Resconi" names
+  no author of that record. `source_metadata.generator` and `citation_provenance[0]` corrected,
+  `citation_repair` + `shared_anchor` written. The benchmark id and every numeric value are
+  unchanged.
+
+### Divergence to reconcile with the SLR/priors partition
+
+That partition set `grosch_1982_hexanal_odt` to `source_status: "identifier_unavailable"` on the
+grounds that the real "Grosch (1982)" is a DOI-less Elsevier book chapter. This partition instead
+installed Belitz/Grosch/Schieberle (2009) as a *verifiable compilation* carrying the ~4.5 µg/kg
+figure, on the reasoning that a citable compilation the OAV literature itself quotes beats an
+unciteable one. The two files therefore describe the same anchor differently and should be
+harmonised by the owner; neither changed the 4.5 value.
+
+`data/lit/flavor_reference_payloads.json` also carries `10.1021/jf00111a008` for this anchor. It
+is outside this partition and was not touched.

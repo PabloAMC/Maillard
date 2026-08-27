@@ -8,7 +8,7 @@ This artifact answers the product question directly: which chemistry families al
 - Families with landed runtime integration: 16
 - Families with benchmark-linked experimental support: 7
 - Families with compound-level quantitative parity points: 4
-- Quantitative compound points plotted: 54
+- Quantitative compound points plotted: 47
 
 How to read the PNG:
 
@@ -18,18 +18,18 @@ How to read the PNG:
 
 | SLR | Family | Posture | Integrated | Benchmarks | Strict Ready | Quantitative Points | Median Ratio | Mean |log10 error| |
 | --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: |
-| 01 | Amino acid-sugar Maillard core | first_class_core | True | 11 | 7 | 30 | 1.025 | 0.026 |
-| 02 | Lipid oxidation and carbonylic crosstalk | immediate_expansion_lane | True | 7 | 0 | 17 | 1.000 | 0.002 |
-| 03 | Thiamine degradation and sulfur support | high_value_support_lane | True | 2 | 2 | 0 | - | - |
+| 01 | Amino acid-sugar Maillard core | first_class_core | True | 9 | 0 | 26 | 1.000 | 0.433 |
+| 02 | Lipid oxidation and carbonylic crosstalk | immediate_expansion_lane | True | 7 | 0 | 17 | 1.000 | 0.000 |
+| 03 | Thiamine degradation and sulfur support | high_value_support_lane | True | 2 | 0 | 0 | - | - |
 | 04 | Nucleotide degradation and ribose support | high_value_support_lane | True | 0 | 0 | 0 | - | - |
 | 05 | Glutathione and peptide support | high_value_support_lane | True | 0 | 0 | 0 | - | - |
-| 06 | Alternative protein matrix scope | matrix_scope_lane | True | 2 | 2 | 0 | - | - |
+| 06 | Alternative protein matrix scope | matrix_scope_lane | True | 2 | 0 | 0 | - | - |
 | 07 | Reducing sugar and carbonyl donor hierarchy | immediate_expansion_lane | True | 0 | 0 | 0 | - | - |
-| 08 | Plant off-notes and Maillard suppression | guardrail_lane | True | 2 | 2 | 2 | 1.027 | 0.011 |
-| 09 | Carbohydrate pyrolysis and caramelization | failure_mode_lane | True | 7 | 2 | 5 | 1.010 | 0.042 |
+| 08 | Plant off-notes and Maillard suppression | guardrail_lane | True | 1 | 0 | 1 | 6.424 | 0.808 |
+| 09 | Carbohydrate pyrolysis and caramelization | failure_mode_lane | True | 5 | 0 | 3 | 1.000 | 0.195 |
 | 10 | Microbial fermentation pretreatment | upstream_pretreatment_lane | True | 0 | 0 | 0 | - | - |
 | 11 | Maillard/Lipid Crosstalk | first_class_runtime_lane | True | 0 | 0 | 0 | - | - |
-| 12 | Protein Damage Markers | first_class_runtime_lane | True | 3 | 3 | 0 | - | - |
+| 12 | Protein Damage Markers | first_class_runtime_lane | True | 3 | 0 | 0 | - | - |
 | 13 | Polyphenol-Amino Capping | upstream_precursor_sink | True | 0 | 0 | 0 | - | - |
 | 14 | Ascorbic Acid Maillard | bounded_upstream_source | True | 0 | 0 | 0 | - | - |
 | 15 | PE Stealth Sugar Sink | upstream_precursor_sink | True | 0 | 0 | 0 | - | - |

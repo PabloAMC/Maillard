@@ -4,7 +4,7 @@
 
 _Leave-lane-out transfer error computed from in-panel matrix anchors only; the
 external hold-out is structurally excluded. This is the residual-based sizing
-promised in tasks/todo.md for the `uncalibrated` prior tier (shipped ln-sigma 2.0)._
+promised in tasks/todo.md for the `uncalibrated` prior tier (shipped ln-sigma 2.86)._
 
 | Lane | Compound | Measured ppb | Uncalibrated pred. ppb | ln residual | fold |
 | --- | --- | ---: | ---: | ---: | ---: |
@@ -17,7 +17,7 @@ promised in tasks/todo.md for the `uncalibrated` prior tier (shipped ln-sigma 2.
 
 **n = 6** residuals · mean ln residual +1.241 (bias 3.46x) · **RMS ln-sigma = 2.862** (centered SD 2.825)
 
-90% chi-square interval on sigma: [1.98, 5.48] — shipped value 2.0 is INSIDE this interval.
+90% chi-square interval on sigma: [1.98, 5.48] — shipped value 2.86 is INSIDE this interval.
 
 > **Caveats:** n is very small and the lanes are not independent draws (two share a
 > paper; one shares a matrix). RMS around zero includes systematic bias — the

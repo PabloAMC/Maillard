@@ -72,7 +72,7 @@
       "sigma_low_90": 1.975562024461906,
       "sigma_high_90": 5.482506412180693
     },
-    "shipped_uncalibrated_sigma": 2.0,
+    "shipped_uncalibrated_sigma": 2.86,
     "shipped_within_ci": true
   }
 }

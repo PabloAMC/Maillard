@@ -4,28 +4,30 @@
 
 This artifact shows the full quantitative benchmark surface while still separating strict-gate free-precursor trust from matrix-only and matrix-augmented evidence.
 
-- Benchmarks summarized: 19
-- Strict-ready benchmarks: 11
-- Quantitative benchmarks plotted: 14
-- Experimental quantitative benchmarks: 13
+- Benchmarks summarized: 16
+- Strict-ready benchmarks: 0
+- Quantitative benchmarks plotted: 11
+- Experimental quantitative benchmarks: 10
 - Reference-only quantitative anchors: 1
-- Experimental benchmarks inside 1.5x: 13
-- Experimental benchmarks outside 1.5x: 0
-- Experimental benchmarks outside 2x: 0
-- Worst experimental benchmark ratio: 1.442x
-- Worst experimental point: Cysteine + ribose, $140\,^{\circ}$C (Hofmann, 1998) / 2-methyl-3-furanthiol (1.442x)
-- Quantitative benchmarks inside 1.5x: 14
-- Quantitative benchmarks outside 1.5x: 0
-- Quantitative benchmarks outside 2x: 0
-- Worst quantitative benchmark ratio: 1.442x
-- Worst quantitative point: Thiamine + cysteine + xylose, $145\,^{\circ}$C (Cerny, 2008) [reference anchor] / 2-Methyl-3-furanthiol (MFT) (1.150x; reference_volatiles)
-- Quantitative matched compounds plotted: 30
-- Authoritative free-precursor benchmarks: 12
+- Experimental benchmarks inside 1.5x: 3
+- Experimental benchmarks outside 1.5x: 7
+- Experimental benchmarks outside 2x: 7
+- Worst experimental benchmark ratio: 1203.680x
+- Worst experimental point: Commercial PBMA, CML/CEL benchmark (Foods, 2023) / Nε-(Carboxymethyl)lysine (CML) (1203.680x)
+- Quantitative benchmarks inside 1.5x: 3
+- Quantitative benchmarks outside 1.5x: 8
+- Quantitative benchmarks outside 2x: 8
+- Worst quantitative benchmark ratio (all quantitative benchmarks): 1203.680x
+- Worst quantitative point (all quantitative benchmarks): Commercial PBMA, CML/CEL benchmark (Foods, 2023) / Nε-(Carboxymethyl)lysine (CML) (1203.680x; measured_volatiles)
+- Worst reference-only benchmark ratio: 3.195x
+- Worst reference-only point: Thiamine + cysteine + xylose, $145\,^{\circ}$C (Cerny, 2008) [reference anchor] / 2-Methyl-3-furanthiol (MFT) (3.195x; reference_volatiles)
+- Quantitative matched compounds plotted: 23
+- Authoritative free-precursor benchmarks: 9
 - Quantitative matrix-only benchmarks: 3
 - Quantitative matrix-augmented benchmarks: 0
 - Integrated runtime families tracked in the overview artifact: 16
-- Authoritative matched compounds: 21
-- Median compound max-ratio in authoritative set: 1.064
+- Authoritative matched compounds: 14
+- Median compound max-ratio in authoritative set: 27.527
 - Coverage gaps still open: 7
 
 How to read the PNG:

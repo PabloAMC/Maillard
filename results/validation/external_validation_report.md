@@ -4,30 +4,36 @@
 
 _Monte Carlo envelope evaluation on isolated hold-out matrix bundles that are explicitly excluded from calibration via evidence_class = external_validation_only._
 
-**Headline external trust metric**: measured value lies inside 90% CI for **3 / 8** matched hold-out compounds (**37.5%**).
+**Headline external trust metric**: measured value lies inside 90% CI for **5 / 8** matched hold-out compounds (**62.5%**).
 
-**Median accuracy on hold-outs**: **33.84x** median fold error (median |log10 error| = **1.529** dex).
+**Median accuracy on hold-outs**: **32.79x** median fold error (median |log10 error| = **1.516** dex).
 
 Samples per hold-out bundle: 200; seed 0; bundles evaluated: 4.
 
-> **Methodology disclosure (audit 2026-08-26).** Hold-out envelopes are computed
-> with the `uncalibrated` matrix prior tier (matrix_headspace ln-sigma 2.0,
-> ~±27x at 90% CI), which is substantially wider than the calibrated tier used
+> **Methodology disclosure (audit 2026-08-26, sigma refreshed 2026-08-27).**
+> Hold-out envelopes are computed with the `uncalibrated` matrix prior tier
+> (matrix_headspace ln-sigma 2.86, ~±110x at 90% CI),
+> which is substantially wider than the calibrated tier used
 > for the in-panel headline — coverage here is therefore not comparable to the
-> in-panel coverage number. Additionally, bundles whose executable conditions
-> are copied from an in-panel calibration benchmark (see each bundle's
-> `benchmark_alignment` note) re-score that anchor's prediction at its own
-> conditions rather than testing extrapolation; only bundles at genuinely new
-> process states (e.g. HME extrusion, roasting) test out-of-envelope transfer.
+> in-panel coverage number. Because that sigma was raised from 2.0 to
+> 2.86 on 2026-08-26 (residual-derived, see
+> `results/validation/matrix_sigma_residual_derivation.md`), any coverage gain
+> against earlier runs of this report reflects a WIDER interval, not a more
+> accurate prediction — read the median fold error, which is unaffected by the
+> prior, alongside it. Additionally, bundles whose executable conditions
+> are copied from an in-panel calibration benchmark re-score that anchor's
+> prediction at its own conditions rather than testing extrapolation; only
+> bundles at genuinely new process states (e.g. HME extrusion, roasting) test
+> out-of-envelope transfer.
 
 ## Hold-out bundles
 
 | Benchmark | Matched compounds | Inside 90% CI | Median accuracy |
 | --- | ---: | ---: | ---: |
-| external_validation_bi_2020_raw_pea_hexanal | 1 | 1/1 (100.0%) | 5.20x |
-| external_validation_bi_2020_roasted_pea_hexanal | 1 | 0/1 (0.0%) | 2553.78x |
-| external_validation_li_2026_spi_wg_hme_control | 4 | 0/4 (0.0%) | 189.05x |
-| external_validation_liu_2023_ppi_offnote_baseline | 2 | 2/2 (100.0%) | 7.23x |
+| external_validation_bi_2020_raw_pea_hexanal | 1 | 1/1 (100.0%) | 5.37x |
+| external_validation_bi_2020_roasted_pea_hexanal | 1 | 0/1 (0.0%) | 2474.39x |
+| external_validation_li_2026_spi_wg_hme_control | 4 | 2/4 (50.0%) | 183.18x |
+| external_validation_liu_2023_ppi_offnote_baseline | 2 | 2/2 (100.0%) | 7.00x |
 
 ## Per-compound envelopes
 
@@ -38,7 +44,7 @@ Samples per hold-out bundle: 200; seed 0; bundles evaluated: 4.
 
 | Compound | Measured (ppb) | P5 | P50 | P95 | Fold error | Inside 90% CI |
 | --- | --- | --- | --- | --- | --- | --- |
-| hexanal | 1.26e+03 | 13.4 | 242 | 8.62e+03 | 5.20x | yes |
+| hexanal | 1.26e+03 | 3.72 | 235 | 2.61e+04 | 5.37x | yes |
 
 ### external_validation_bi_2020_roasted_pea_hexanal
 
@@ -47,7 +53,7 @@ Samples per hold-out bundle: 200; seed 0; bundles evaluated: 4.
 
 | Compound | Measured (ppb) | P5 | P50 | P95 | Fold error | Inside 90% CI |
 | --- | --- | --- | --- | --- | --- | --- |
-| hexanal | 324 | 4.56e+04 | 8.27e+05 | 2.94e+07 | 2553.78x | no |
+| hexanal | 324 | 1.27e+04 | 8.02e+05 | 8.9e+07 | 2474.39x | no |
 
 ### external_validation_li_2026_spi_wg_hme_control
 
@@ -56,10 +62,10 @@ Samples per hold-out bundle: 200; seed 0; bundles evaluated: 4.
 
 | Compound | Measured (ppb) | P5 | P50 | P95 | Fold error | Inside 90% CI |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1-hexanol | 20 | 1.27e+03 | 2.31e+04 | 8.22e+05 | 1153.34x | no |
-| 2-pentylfuran | 222 | 628 | 1.14e+04 | 4.05e+05 | 51.43x | no |
-| hexanal | 606 | 744 | 1.35e+04 | 4.8e+05 | 22.27x | no |
-| nonanal | 29.4 | 1.13e+03 | 2.04e+04 | 7.27e+05 | 694.92x | no |
+| 1-hexanol | 20 | 355 | 2.24e+04 | 2.49e+06 | 1117.48x | no |
+| 2-pentylfuran | 222 | 175 | 1.1e+04 | 1.23e+06 | 49.83x | yes |
+| hexanal | 606 | 207 | 1.31e+04 | 1.45e+06 | 21.58x | yes |
+| nonanal | 29.4 | 314 | 1.98e+04 | 2.2e+06 | 673.32x | no |
 
 ### external_validation_liu_2023_ppi_offnote_baseline
 
@@ -68,5 +74,5 @@ Samples per hold-out bundle: 200; seed 0; bundles evaluated: 4.
 
 | Compound | Measured (ppb) | P5 | P50 | P95 | Fold error | Inside 90% CI |
 | --- | --- | --- | --- | --- | --- | --- |
-| hexanal | 52 | 13.4 | 242 | 8.62e+03 | 4.66x | yes |
-| nonanal | 15.8 | 9.77 | 177 | 6.3e+03 | 11.21x | yes |
+| hexanal | 52 | 3.72 | 235 | 2.61e+04 | 4.52x | yes |
+| nonanal | 15.8 | 2.73 | 172 | 1.91e+04 | 10.86x | yes |

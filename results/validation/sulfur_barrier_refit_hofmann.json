@@ -19,29 +19,44 @@
     "indifference_dex": 0.01,
     "conservative_edge": "among values within indifference_dex of the profile minimum, adopt the LARGEST barrier (the least sulfur-favourable point the data cannot distinguish from the optimum)"
   },
+  "applied_history": [
+    {
+      "date": "2026-08-27",
+      "knob": "thiol_addition_norfuraneol",
+      "from": 28.6,
+      "to": 26.85,
+      "objective_before": 0.6987,
+      "objective_after": 0.6298,
+      "hofmann_mft_fold_error_before": 7.83,
+      "hofmann_mft_fold_error_after": 5.58,
+      "hofmann_fft_fold_error_before": 3.19,
+      "hofmann_fft_fold_error_after": 3.26,
+      "basis": "conservative edge of the 23.30-26.85 indifference band over the defensible range [23.30, 29.65]; the 28.60 it replaced had been inherited from `thiol_addition` and from that key's PRE-Wave-G1 Hofmann window, which did not survive the MFT route change"
+    }
+  ],
   "incumbent_values": {
-    "thiol_addition_norfuraneol": 28.6,
+    "thiol_addition_norfuraneol": 26.85,
     "furanone_cyclisation": 28.0,
     "thiohemiacetal_formation": 23.3,
     "thiol_dehydration": 26.8
   },
-  "incumbent_objective": 0.6987382473509562,
+  "incumbent_objective": 0.6297703374965649,
   "incumbent_rows": [
     {
       "compound": "2-methyl-3-furanthiol",
       "measured_ppb": 342.0,
-      "predicted_ppb": 43.69965890618023,
-      "ratio": 0.12777678042742757,
+      "predicted_ppb": 61.2464750206073,
+      "ratio": 0.1790832602941734,
       "scored": true,
-      "abs_log10_error": 0.8935480589196231
+      "abs_log10_error": 0.7469450076832764
     },
     {
       "compound": "2-furfurylthiol",
       "measured_ppb": 200.0,
-      "predicted_ppb": 62.67604156283654,
-      "ratio": 0.3133802078141827,
+      "predicted_ppb": 61.43761220707336,
+      "ratio": 0.3071880610353668,
       "scored": true,
-      "abs_log10_error": 0.5039284357822893
+      "abs_log10_error": 0.5125956673098532
     }
   ],
   "reported_not_fitted": {
@@ -55,18 +70,18 @@
         },
         {
           "value": 27.6,
-          "objective": 0.6444262621883281
+          "objective": 0.6297703374965649
         },
         {
           "value": 29.6,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 30.6,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         }
       ],
-      "objective_span_over_probe_dex": 0.07368487396217738,
+      "objective_span_over_probe_dex": 0.0047169641077859925,
       "identifiable": true
     }
   },
@@ -77,12 +92,12 @@
         29.65
       ],
       "range_basis": "H2S/thiol addition to a carbonyl; low = thiohemiacetal_formation (23.30), high = thiol_addition_hexose (29.65), both already in FAST_BARRIERS",
-      "incumbent": 28.6,
+      "incumbent": 26.85,
       "profile_min_objective": 0.6198472637527808,
       "profile_max_objective": 0.6987382473509562,
       "profile_span_dex": 0.07889098359817548,
       "identifiable": true,
-      "achievable_gain_dex": 0.07889098359817548,
+      "achievable_gain_dex": 0.009923073743784094,
       "profile": [
         {
           "value": 23.3,
@@ -597,12 +612,7 @@
           "objective": 0.6987382473509562
         }
       ],
-      "indifference_band_kcal_per_mol": [
-        23.3,
-        26.85
-      ],
-      "adopted": 26.85,
-      "decision": "MOVED 28.60 -> 26.85 (conservative edge of the 23.30-26.85 indifference band; gain 0.0789 dex)"
+      "decision": "IMMATERIAL \u2014 best achievable gain 0.0099 dex < 0.02 dex; incumbent kept"
     },
     "furanone_cyclisation": {
       "range_kcal_per_mol": [
@@ -611,295 +621,295 @@
       ],
       "range_basis": "cyclodehydration class; dehydration / 2,3-enolisation / furanone_formation are all 28.0 in FAST_BARRIERS, taken +/- 2 kcal/mol",
       "incumbent": 28.0,
-      "profile_min_objective": 0.6987382473509562,
+      "profile_min_objective": 0.6297703374965649,
       "profile_max_objective": 0.6987382473509562,
-      "profile_span_dex": 0.0,
-      "identifiable": false,
+      "profile_span_dex": 0.06896790985439138,
+      "identifiable": true,
       "achievable_gain_dex": 0.0,
       "profile": [
         {
           "value": 26.0,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.05,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.1,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.15,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.2,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.25,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.3,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.35,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.4,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.45,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.5,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.55,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.6,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.65,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.7,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.75,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.8,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.85,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.9,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.95,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 27.0,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 27.05,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 27.1,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 27.15,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 27.2,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 27.25,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 27.3,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 27.35,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 27.4,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 27.45,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 27.5,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 27.55,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 27.6,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 27.65,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 27.7,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 27.75,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 27.8,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 27.85,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 27.9,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 27.95,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 28.0,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 28.05,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 28.1,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 28.15,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 28.2,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 28.25,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 28.3,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 28.35,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 28.4,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 28.45,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 28.5,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 28.55,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 28.6,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 28.65,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 28.7,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 28.75,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 28.8,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 28.85,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 28.9,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 28.95,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 29.0,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 29.05,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 29.1,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 29.15,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 29.2,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 29.25,
-          "objective": 0.6987382473509562
+          "objective": 0.634885668901928
         },
         {
           "value": 29.3,
-          "objective": 0.6987382473509562
+          "objective": 0.6462748871215864
         },
         {
           "value": 29.35,
-          "objective": 0.6987382473509562
+          "objective": 0.6581009371965933
         },
         {
           "value": 29.4,
-          "objective": 0.6987382473509562
+          "objective": 0.6703669661947018
         },
         {
           "value": 29.45,
-          "objective": 0.6987382473509562
+          "objective": 0.683075105345495
         },
         {
           "value": 29.5,
-          "objective": 0.6987382473509562
+          "objective": 0.6962264507491005
         },
         {
           "value": 29.55,
@@ -942,7 +952,7 @@
           "objective": 0.6987382473509562
         }
       ],
-      "decision": "NOT IDENTIFIABLE \u2014 flat profile; incumbent kept"
+      "decision": "IMMATERIAL \u2014 best achievable gain 0.0000 dex < 0.02 dex; incumbent kept"
     },
     "thiohemiacetal_formation": {
       "range_kcal_per_mol": [
@@ -951,479 +961,479 @@
       ],
       "range_basis": "thiohemiacetal formation must stay below its own dehydration step, thiol_dehydration (26.80)",
       "incumbent": 23.3,
-      "profile_min_objective": 0.6987382473509562,
-      "profile_max_objective": 0.6987382473509562,
+      "profile_min_objective": 0.6297703374965649,
+      "profile_max_objective": 0.6297703374965649,
       "profile_span_dex": 0.0,
       "identifiable": false,
       "achievable_gain_dex": 0.0,
       "profile": [
         {
           "value": 21.0,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 21.05,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 21.1,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 21.15,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 21.2,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 21.25,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 21.3,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 21.35,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 21.4,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 21.45,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 21.5,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 21.55,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 21.6,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 21.65,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 21.7,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 21.75,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 21.8,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 21.85,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 21.9,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 21.95,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 22.0,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 22.05,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 22.1,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 22.15,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 22.2,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 22.25,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 22.3,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 22.35,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 22.4,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 22.45,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 22.5,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 22.55,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 22.6,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 22.65,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 22.7,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 22.75,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 22.8,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 22.85,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 22.9,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 22.95,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 23.0,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 23.05,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 23.1,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 23.15,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 23.2,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 23.25,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 23.3,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 23.35,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 23.4,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 23.45,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 23.5,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 23.55,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 23.6,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 23.65,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 23.7,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 23.75,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 23.8,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 23.85,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 23.9,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 23.95,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 24.0,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 24.05,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 24.1,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 24.15,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 24.2,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 24.25,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 24.3,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 24.35,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 24.4,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 24.45,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 24.5,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 24.55,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 24.6,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 24.65,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 24.7,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 24.75,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 24.8,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 24.85,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 24.9,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 24.95,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 25.0,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 25.05,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 25.1,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 25.15,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 25.2,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 25.25,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 25.3,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 25.35,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 25.4,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 25.45,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 25.5,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 25.55,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 25.6,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 25.65,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 25.7,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 25.75,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 25.8,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 25.85,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 25.9,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 25.95,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.0,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.05,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.1,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.15,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.2,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.25,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.3,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.35,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.4,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.45,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.5,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.55,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.6,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.65,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.7,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.75,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.8,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         }
       ],
       "decision": "NOT IDENTIFIABLE \u2014 flat profile; incumbent kept"
@@ -1435,391 +1445,391 @@
       ],
       "range_basis": "bounded below by thiohemiacetal_formation (23.30) and above by the generic dehydration barrier (28.00)",
       "incumbent": 26.8,
-      "profile_min_objective": 0.6891338175508308,
-      "profile_max_objective": 0.7297208702982863,
-      "profile_span_dex": 0.04058705274745544,
+      "profile_min_objective": 0.6201430430157588,
+      "profile_max_objective": 0.6608194476040129,
+      "profile_span_dex": 0.040676404588254056,
       "identifiable": true,
-      "achievable_gain_dex": 0.009604429800125436,
+      "achievable_gain_dex": 0.009627294480806015,
       "profile": [
         {
           "value": 23.3,
-          "objective": 0.6891338175508308
+          "objective": 0.6201430430157588
         },
         {
           "value": 23.35,
-          "objective": 0.6891425098701676
+          "objective": 0.6201517565494672
         },
         {
           "value": 23.4,
-          "objective": 0.6891517478999377
+          "objective": 0.6201610171244085
         },
         {
           "value": 23.45,
-          "objective": 0.6891615658892947
+          "objective": 0.6201708590731224
         },
         {
           "value": 23.5,
-          "objective": 0.6891720002354842
+          "objective": 0.620181318881452
         },
         {
           "value": 23.55,
-          "objective": 0.6891830896183764
+          "objective": 0.6201924353234011
         },
         {
           "value": 23.6,
-          "objective": 0.6891948751434084
+          "objective": 0.6202042496044219
         },
         {
           "value": 23.65,
-          "objective": 0.6892074004934654
+          "objective": 0.6202168055136595
         },
         {
           "value": 23.7,
-          "objective": 0.6892207120902002
+          "objective": 0.6202301495856607
         },
         {
           "value": 23.75,
-          "objective": 0.6892348592654904
+          "objective": 0.6202443312722415
         },
         {
           "value": 23.8,
-          "objective": 0.6892498944435203
+          "objective": 0.6202594031250066
         },
         {
           "value": 23.85,
-          "objective": 0.6892658733342285
+          "objective": 0.6202754209892601
         },
         {
           "value": 23.9,
-          "objective": 0.6892828551388359
+          "objective": 0.620292444210024
         },
         {
           "value": 23.95,
-          "objective": 0.6893009027681423
+          "objective": 0.6203105358508577
         },
         {
           "value": 24.0,
-          "objective": 0.689320083074418
+          "objective": 0.6203297629263023
         },
         {
           "value": 24.05,
-          "objective": 0.6893404670977441
+          "objective": 0.620350196648807
         },
         {
           "value": 24.1,
-          "objective": 0.6893621303276161
+          "objective": 0.6203719126909558
         },
         {
           "value": 24.15,
-          "objective": 0.68938515298085
+          "objective": 0.6203949914640323
         },
         {
           "value": 24.2,
-          "objective": 0.6894096202967215
+          "objective": 0.6204195184138594
         },
         {
           "value": 24.25,
-          "objective": 0.6894356228504127
+          "objective": 0.6204455843349863
         },
         {
           "value": 24.3,
-          "objective": 0.6894632568858953
+          "objective": 0.6204732857043579
         },
         {
           "value": 24.35,
-          "objective": 0.6894926246694393
+          "objective": 0.6205027250356558
         },
         {
           "value": 24.4,
-          "objective": 0.6895238348649829
+          "objective": 0.6205340112555507
         },
         {
           "value": 24.45,
-          "objective": 0.6895570029327166
+          "objective": 0.6205672601032194
         },
         {
           "value": 24.5,
-          "objective": 0.6895922515523161
+          "objective": 0.620602594554569
         },
         {
           "value": 24.55,
-          "objective": 0.6896297110722323
+          "objective": 0.620640145272572
         },
         {
           "value": 24.6,
-          "objective": 0.6896695199867305
+          "objective": 0.6206800510854156
         },
         {
           "value": 24.65,
-          "objective": 0.6897118254422605
+          "objective": 0.6207224594940441
         },
         {
           "value": 24.7,
-          "objective": 0.6897567837749561
+          "objective": 0.6207675272108997
         },
         {
           "value": 24.75,
-          "objective": 0.689804561081176
+          "objective": 0.620815420731775
         },
         {
           "value": 24.8,
-          "objective": 0.6898553338229587
+          "objective": 0.6208663169426557
         },
         {
           "value": 24.85,
-          "objective": 0.6899092894706171
+          "objective": 0.6209204037637812
         },
         {
           "value": 24.9,
-          "objective": 0.6899666271845205
+          "objective": 0.6209778808329758
         },
         {
           "value": 24.95,
-          "objective": 0.6900275585385328
+          "objective": 0.6210389602307211
         },
         {
           "value": 25.0,
-          "objective": 0.6900923082874725
+          "objective": 0.6211038672493434
         },
         {
           "value": 25.05,
-          "objective": 0.6901611151811928
+          "objective": 0.6211728412089158
         },
         {
           "value": 25.1,
-          "objective": 0.6902342328281033
+          "objective": 0.6212461363226979
         },
         {
           "value": 25.15,
-          "objective": 0.6903119306108031
+          "objective": 0.621324022614796
         },
         {
           "value": 25.2,
-          "objective": 0.6903944946571146
+          "objective": 0.6214067868933276
         },
         {
           "value": 25.25,
-          "objective": 0.6904822288694742
+          "objective": 0.6214947337820572
         },
         {
           "value": 25.3,
-          "objective": 0.690575456016162
+          "objective": 0.6215881868139868
         },
         {
           "value": 25.35,
-          "objective": 0.690674518887829
+          "objective": 0.6216874895903659
         },
         {
           "value": 25.4,
-          "objective": 0.6907797815230259
+          "objective": 0.6217930070088287
         },
         {
           "value": 25.45,
-          "objective": 0.690891630506595
+          "objective": 0.6219051265645208
         },
         {
           "value": 25.5,
-          "objective": 0.6910104763450069
+          "objective": 0.6220242597283085
         },
         {
           "value": 25.55,
-          "objective": 0.6911367549228427
+          "objective": 0.6221508434062655
         },
         {
           "value": 25.6,
-          "objective": 0.6912709290448922
+          "objective": 0.6222853414849194
         },
         {
           "value": 25.65,
-          "objective": 0.6914134900684346
+          "objective": 0.6224282464668215
         },
         {
           "value": 25.7,
-          "objective": 0.6915649596306128
+          "objective": 0.6225800812013537
         },
         {
           "value": 25.75,
-          "objective": 0.691725891475876
+          "objective": 0.6227414007157546
         },
         {
           "value": 25.8,
-          "objective": 0.6918968733886665
+          "objective": 0.6229127941515322
         },
         {
           "value": 25.85,
-          "objective": 0.6920785292368316
+          "objective": 0.6230948868117521
         },
         {
           "value": 25.9,
-          "objective": 0.6922715211313353
+          "objective": 0.6232883423247698
         },
         {
           "value": 25.95,
-          "objective": 0.6924765517080068
+          "objective": 0.6234938649301441
         },
         {
           "value": 26.0,
-          "objective": 0.6926943665373623
+          "objective": 0.6237122018927614
         },
         {
           "value": 26.05,
-          "objective": 0.6929257566685347
+          "objective": 0.6239441460512051
         },
         {
           "value": 26.1,
-          "objective": 0.6931715613136212
+          "objective": 0.6241905385066633
         },
         {
           "value": 26.15,
-          "objective": 0.6934326706788232
+          "objective": 0.6244522714587508
         },
         {
           "value": 26.2,
-          "objective": 0.693710028948842
+          "objective": 0.6247302911946839
         },
         {
           "value": 26.25,
-          "objective": 0.6940046374311213
+          "objective": 0.6250256012383953
         },
         {
           "value": 26.3,
-          "objective": 0.6943175578665289
+          "objective": 0.6253392656661529
         },
         {
           "value": 26.35,
-          "objective": 0.694649915913032
+          "objective": 0.6256724125952203
         },
         {
           "value": 26.4,
-          "objective": 0.6950029048089001
+          "objective": 0.6260262378520631
         },
         {
           "value": 26.45,
-          "objective": 0.6953777892219584
+          "objective": 0.6264020088265952
         },
         {
           "value": 26.5,
-          "objective": 0.6957759092909288
+          "objective": 0.6268010685184622
         },
         {
           "value": 26.55,
-          "objective": 0.6961986848650434
+          "objective": 0.6272248397815052
         },
         {
           "value": 26.6,
-          "objective": 0.6966476199474139
+          "objective": 0.6276748297718424
         },
         {
           "value": 26.65,
-          "objective": 0.6971243073474125
+          "objective": 0.6281526346047633
         },
         {
           "value": 26.7,
-          "objective": 0.6976304335466008
+          "objective": 0.6286599442249119
         },
         {
           "value": 26.75,
-          "objective": 0.6981677837821895
+          "objective": 0.629198547493666
         },
         {
           "value": 26.8,
-          "objective": 0.6987382473509562
+          "objective": 0.6297703374965649
         },
         {
           "value": 26.85,
-          "objective": 0.699343823135727
+          "objective": 0.6303773170727895
         },
         {
           "value": 26.9,
-          "objective": 0.6999866253551895
+          "objective": 0.6310216045673731
         },
         {
           "value": 26.95,
-          "objective": 0.7006688895363418
+          "objective": 0.6317054398053219
         },
         {
           "value": 27.0,
-          "objective": 0.7013929787073232
+          "objective": 0.6324311902852764
         },
         {
           "value": 27.05,
-          "objective": 0.7021613898063216
+          "objective": 0.6332013575882636
         },
         {
           "value": 27.1,
-          "objective": 0.7029767603000512
+          "objective": 0.6340185839948846
         },
         {
           "value": 27.15,
-          "objective": 0.7038418750028331
+          "objective": 0.6348856593018115
         },
         {
           "value": 27.2,
-          "objective": 0.7047596730841568
+          "objective": 0.6358055278252812
         },
         {
           "value": 27.25,
-          "objective": 0.7057332552496041
+          "objective": 0.6367812955762909
         },
         {
           "value": 27.3,
-          "objective": 0.7067658910760994
+          "objective": 0.6378162375882429
         },
         {
           "value": 27.35,
-          "objective": 0.7078610264782855
+          "objective": 0.6389138053736256
         },
         {
           "value": 27.4,
-          "objective": 0.7090222912783545
+          "objective": 0.6400776344818297
         },
         {
           "value": 27.45,
-          "objective": 0.7102535068462872
+          "objective": 0.6413115521248133
         },
         {
           "value": 27.5,
-          "objective": 0.7115586937719007
+          "objective": 0.6426195848317675
         },
         {
           "value": 27.55,
-          "objective": 0.7129420795238367
+          "objective": 0.6440059660876618
         },
         {
           "value": 27.6,
-          "objective": 0.7144081060437104
+          "objective": 0.6454751439036372
         },
         {
           "value": 27.65,
-          "objective": 0.7159614372164
+          "objective": 0.6470317882599659
         },
         {
           "value": 27.7,
-          "objective": 0.7176069661492346
+          "objective": 0.6486807983541009
         },
         {
           "value": 27.75,
-          "objective": 0.7193498221844694
+          "objective": 0.6504273095779631
         },
         {
           "value": 27.8,
-          "objective": 0.7211953775602546
+          "objective": 0.6522767001394697
         },
         {
           "value": 27.85,
-          "objective": 0.7231492536257509
+          "objective": 0.6542345972337683
         },
         {
           "value": 27.9,
-          "objective": 0.7252173265059182
+          "objective": 0.6563068826595676
         },
         {
           "value": 27.95,
-          "objective": 0.7274057321014094
+          "objective": 0.6584996977659013
         },
         {
           "value": 28.0,
-          "objective": 0.7297208702982863
+          "objective": 0.6608194476040129
         }
       ],
       "decision": "IMMATERIAL \u2014 best achievable gain 0.0096 dex < 0.02 dex; incumbent kept"
@@ -1850,7 +1860,7 @@
       "abs_log10_error": 0.5125956673098532
     }
   ],
-  "objective_gain_dex": 0.06896790985439138,
+  "objective_gain_dex": 0.0,
   "irreducible_residual": {
     "definition": "objective with EVERY fitted knob pinned at the bottom of its defensible range \u2014 the best the sulfur branch can do on this benchmark by barrier moves alone",
     "values": {

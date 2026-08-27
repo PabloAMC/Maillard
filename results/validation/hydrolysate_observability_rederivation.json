@@ -17,34 +17,48 @@
     "conservative_edge": "among admissible values within indifference_dex of the profile minimum, adopt the SMALLEST factor",
     "admissibility": "an unconstrained optimum outside (0, 1] is reported SATURATED and the incumbent is kept \u2014 a boundary value is not a fit"
   },
+  "applied_history": [
+    {
+      "date": "2026-08-27",
+      "compound": "Methional",
+      "from": 0.0045,
+      "to": 0.05623,
+      "unconstrained_optimum": 0.06391,
+      "objective_before_dex": 1.156,
+      "objective_after_dex": 0.0619,
+      "residuals_before": "16.2x under (SPI) / 12.4x under (wheat gluten)",
+      "residuals_after": "1.30x under (SPI) / 1.01x (wheat gluten)",
+      "basis": "conservative edge of the 0.05623-0.07356 indifference band; interior and identified, unlike the two thiols whose optima sit above the physical maximum of 1.0"
+    }
+  ],
   "compounds": {
     "Methional": {
-      "incumbent_base_factor": 0.0045,
+      "incumbent_base_factor": 0.05623,
       "literature_rows": [
         {
           "benchmark_id": "spi_hvp_xylose_120C_PMC9905368",
           "compound": "Methional",
           "normalized": "methional",
           "measured_ppb": 1.88,
-          "predicted_ppb": 0.11575547451265807,
-          "ratio": 0.06157206091098834,
-          "abs_log10_error": 1.210616309665128
+          "predicted_ppb": 1.4464289626326141,
+          "ratio": 0.7693771077833054,
+          "abs_log10_error": 0.11386073993106871
         },
         {
           "benchmark_id": "wheat_gluten_hvp_xylose_120C_PMC9905368",
           "compound": "Methional",
           "normalized": "methional",
           "measured_ppb": 3.44,
-          "predicted_ppb": 0.2769630366405012,
-          "ratio": 0.08051251065130849,
-          "abs_log10_error": 1.0941366303815478
+          "predicted_ppb": 3.460807011176752,
+          "ratio": 1.0060485497606837,
+          "abs_log10_error": 0.0026189393525114218
         }
       ],
-      "incumbent_objective": 1.1523764700233379,
+      "incumbent_objective": 0.05823983964179007,
       "unconstrained_optimum": 0.06391296769823859,
       "unconstrained_optimum_admissible": true,
       "profile_min_objective": 0.058239839641790025,
-      "achievable_gain_dex": 1.0941366303815478,
+      "achievable_gain_dex": 4.163336342344337e-17,
       "profile": [
         {
           "base_factor": 0.0001,
@@ -1011,12 +1025,7 @@
           "objective": 1.1944110162013184
         }
       ],
-      "indifference_band": [
-        0.05623413251903491,
-        0.07356422544596414
-      ],
-      "adopted_base_factor": 0.05623413251903491,
-      "decision": "RE-DERIVED 0.0045 -> 0.05623 (unconstrained optimum 0.06391, admissible; conservative edge of the 0.05623-0.07356 indifference band; gain 1.0941 dex)"
+      "decision": "IMMATERIAL \u2014 best achievable gain 0.0000 dex < 0.02 dex; incumbent kept"
     },
     "2-Furfurylthiol": {
       "incumbent_base_factor": 0.13,
@@ -3015,7 +3024,5 @@
       "decision": "NOT DERIVABLE \u2014 this compound has no row in any LITERATURE benchmark of this lane; its only comparators are the synthetic Internal2026 / ProtocolPilot2026 snapshots, which are forbidden as fit targets. The incumbent is kept as an unconstrained legacy estimate."
     }
   },
-  "adopted": {
-    "Methional": 0.05623413251903491
-  }
+  "adopted": {}
 }
