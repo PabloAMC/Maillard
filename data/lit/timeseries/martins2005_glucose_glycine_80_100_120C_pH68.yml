@@ -1,0 +1,527 @@
+# Martins & van Boekel -- glucose/glycine multiresponse kinetics at 80, 100 and 120 C, pH 6.8
+# NOTHING IN THIS FILE IS WIRED INTO THE MODEL OR THE CALIBRATION. Data only.
+source:
+  citation: "Martins, S.I.F.S. & van Boekel, M.A.J.S. (2005) A kinetic model for the glucose/glycine Maillard reaction pathways. Food Chemistry 90(1-2):257-269."
+  doi: "10.1016/j.foodchem.2004.04.006"
+  doi_verified: "resolved via api.crossref.org 2026-08-27; title/journal/volume/pages/authors match"
+  primary_source_used: "Martins, S.I.F.S. (2003) Unravelling the Maillard reaction network by multiresponse kinetic modelling. PhD thesis, Wageningen University, 170 pp. ISBN 90-5808-823-5. Chapter 5, Figure 5.10 (thesis p. 121 = PDF page 131)."
+  primary_source_url: "https://edepot.wur.nl/121418"
+  access: figure_readoff
+  retrieved: 2026-08-27
+  page_mapping_verified: "PDF page 131 carries the printed page number 121 and Figure 5.10, exactly as claimed."
+system:
+  reactants: {glucose: 0.2 M, glycine: 0.2 M}
+  conditions:
+    T_C: [80, 100, 120]
+    T_note: "the thesis states five temperatures were run (80, 90, 100, 110, 120 C); Figure 5.10 plots only 80, 100 and 120 C. The 90 and 110 C series are NOT in this figure."
+    pH: 6.8
+    pH_note: "initial pH, uncontrolled during heating"
+    buffer: "phosphate, 0.1 mol/L"
+    matrix: aqueous
+    vessel: "screw-capped glass tubes (Schott 16 x 160 mm), 10 mL, oil bath"
+  replication: "at least duplicate (thesis Materials & Methods, Chapter 5); the marker census shows the actual replication was 3-fold"
+  conditions_verified: >-
+    VERIFIED 2026-08-27 verbatim against the thesis Materials and Methods (printed p. 33 =
+    PDF p. 42): "Equimolar solutions of glucose and glycine (0.2mol/L) were prepared in
+    phosphate buffer (10 mL, 0.1 mol/L, pH 6.8), filtered (0.2 um, Schleicher & Schuell) and
+    heated at 80, 90, 100, 110 and 120 C in an oil bath, in screw-capped glass tubes (Schott,
+    16 x 160 mm). ... Each reaction mixture was prepared, heated and analysed in at least
+    duplicate." This confirms the concentrations, buffer, pH, vessel, volume, heating method,
+    replication AND the five-temperature claim in T_note above.
+extraction:
+  method: vector_coordinate_extraction
+  method_note: >-
+    Same method as martins2005_glucose_glycine_100C_pH68.yml: the figure is vector art in
+    the thesis PDF and marker centres were taken from the content stream, calibrated on the
+    plot frame and confirmed against the axis tick coordinates. STILL A FIGURE READ-OFF.
+  temperature_attribution: >-
+    Figure 5.10 uses the SAME marker shape for all three temperatures and distinguishes them
+    only by line style, so each marker had to be assigned to a temperature. Two facts make
+    this tractable. (1) The sampling grids differ: 5, 10 and 20 min occur only at 120 C, and
+    150 and 180 min only at 80 C. (2) At the shared times the three series are separated by
+    a large gap in the response, and reaction extent is monotone in temperature. Markers at
+    each shared time were therefore split at the largest gaps and ordered by extent.
+  attribution_validation: >-
+    THE ASSIGNMENT IS INDEPENDENTLY VERIFIED, AND WAS RE-VERIFIED FROM SCRATCH ON 2026-08-27.
+    The 100 C run in this figure is the same experiment plotted in Figure 5.9, which was
+    extracted separately. For ALL TEN species the 100 C series recovered here agrees with
+    Figure 5.9 at EVERY shared time point (e.g. glucose 15 min: 183.3/190.1 here vs
+    183.3/190.0 from Fig 5.9; DFG 45 min: 10.57/10.84/11.39 vs 10.60/10.87/11.41).
+    MEASURED, not asserted: the largest disagreement over the whole figure is 1.3 mmol/L
+    (glucose, 45 min; 0.5% of that panel's 250 mmol/L scale), then 0.84 mmol/L (fructose,
+    30 min; 1.4% of the 60 mmol/L scale), then 0.54 mmol/L (DFG, 60-120 min; 2.2% of the
+    25 mmol/L scale). Methylglyoxal, formic and acetic acid and melanoidins all agree to
+    0.1-0.3 mmol/L. An earlier version of this note said disagreement was "under 1% of full
+    scale" and named methylglyoxal as the worst case; the true worst case in relative terms
+    is DFG at 60-120 min, at about 2% of full scale. Corrected 2026-08-27.
+    THE 100 C SERIES BELOW IS THEREFORE REDUNDANT with the other file and is retained only
+    as the audit trail for the 80 and 120 C series, which are the new information.
+  attribution_reverified_2026_08_27: >-
+    The temperature split was re-derived independently and agrees with what is recorded
+    below, series by series. Two structural facts make it decidable rather than guessed.
+    (1) The sampling grids differ: 5, 10 and 20 min are drawn only for 120 C and 150 and
+    180 min only for 80 C, so those points need no splitting at all. (2) At the shared times
+    every panel draws exactly 3 markers per temperature (66 markers per species = 22 time-
+    temperature cells x 3 replicates), and the three triples are separated by gaps far larger
+    than the within-triple spread -- for glucose at 15 min, for instance, the nine markers
+    fall at 148.4/148.4/150.0, 183.3/183.3/190.2 and 200.0/200.0/201.3. The middle triple
+    is confirmed as 100 C by Figure 5.9 independently. Where that separation fails the values
+    are parked under ambiguous_80_or_100 rather than assigned, and that parking was checked
+    to be correct: at melanoidins t=15 and formic acid t=30 the six non-120 C markers really
+    are indistinguishable.
+  marker_census: >-
+    Every species is drawn with exactly 66 markers, which equals 22 time-temperature cells
+    x 3 replicates and confirms that no marker was missed. 3-deoxyglucosone appears to carry
+    82 because the 80 C model-fit curve in panel C is drawn as a dotted line whose dots are
+    triangles; those 16 extra dots sit at x = 17.6, 22.0, 32.6, 47.5, 55.5, 56.8, 62.5, 71.8,
+    81.1, 92.5, 101.8, 111.0, 122.4, 141.9, 152.5 and 171.8 min, i.e. off the sampling grid,
+    and are correctly excluded from the 3-DG series below.
+  known_problems:
+    - "acetic acid at 15 min, formic acid at 30 min and melanoidins at 15 min were mis-split by the automatic rule (the 80 and 100 C values are both near zero there). These three points were re-assigned by hand against Figure 5.9, and where that still could not separate 80 from 100 C the values are parked under ambiguous_80_or_100 rather than being guessed."
+    - "FOUND AND FIXED 2026-08-27: the glycine 120 C series contained three values that do not exist in the figure -- [10, 196.1], [15, 179.5] and [20, 185.1]. Each was a duplicate of an adjacent time point, evidently inserted to make every time point show three replicates. They are removed; see the verification block on that series. This was the only such defect in the file: the other nine species were each re-enumerated marker by marker and matched exactly."
+    - "fructose at 120 C, 10 min carries a value of 5.96 mmol/L alongside 11.98 and 12.30. It is on the nominal time grid and is a real marker, but it does not follow the 120 C trend (4.3-5.3 at 5 min, 14.3-16.6 at 15 min). It is reported as extracted, not corrected."
+    - "at t = 0 all three temperature series are plotted on top of each other and cannot be separated. The distinct t=0 marker values are given per species under t0_markers and are NOT assigned to a temperature."
+  estimated_uncertainty: "+/- 0.3% of each panel full scale from calibration and marker centring, plus the authors' plotting rounding. The Figure 5.9 cross-check bounds the real error at about 2% of full scale (measured 2026-08-27; the previous '1%' understated it -- see attribution_validation for the per-species figures)."
+  replicate_note: "distinct marker positions only; coincident replicates collapse to one value, so counts are lower bounds. No averaging."
+  symbol_legend_source: "Figure 5.10 caption: A glucose (open diamond), fructose (filled triangle); B glycine (plus), DFG (open circle); C 1-DG (filled circle), 3-DG (open triangle); D formic acid (cross), acetic acid (filled diamond); E methylglyoxal (open square); F melanoidins (asterisk). Line styles: 80 C and 100 C dashed/dotted, 120 C solid."
+  axis_ranges_verified: >-
+    VERIFIED 2026-08-27 from the retrieved figure, including the DUAL AXES, which are the
+    main way this figure could be misread. Printed labels: panel A left "Glu mmol/L" 0-250
+    and right "Fru mmol/L" 0-60; panel B left "Gly mmol/L" 0-250 and right "DFG mmol/L" 0-25;
+    panel C "DG mmol/L" 0-1; panel D "Acids mmol/L" 0-21; panel E "MG mmol/L" 0-10; panel F
+    "Mel mmol/L" 0-10. All against Time 0-200 min. Both right-hand axes were confirmed to be
+    real drawn axes with their own tick marks spanning the same vertical extent as the left
+    axis. Every axis range asserted in the series below is correct, and fructose and DFG are
+    correctly read against the right-hand scale rather than the left.
+  temperature_count_verified: >-
+    The retrieved caption reads "model fit (lines) to experimental data (dots) of
+    glucose/glycine aqueous system heated at 80 C ( ), 100 C (- - -) and 120 C ( )", i.e.
+    three temperatures distinguished by line style only, confirming both the T_note above and
+    the reason temperature attribution had to be reconstructed. Thesis Materials and Methods
+    confirms five temperatures were run (80, 90, 100, 110, 120 C), so the 90 and 110 C series
+    are genuinely absent from this figure rather than overlooked.
+series:
+  - species: glucose
+    species_full: "glucose"
+    T_C: 80
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure_location: "panel A, open diamond, left axis 0-250 mmol/L"
+    n_points: 17
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27 from the raw PDF content stream of page 131, with marker geometry classified by path structure and the axis calibration (including the dual axes) re-derived from the drawn plot frames and tick marks. All 17 points reproduced, and the temperature attribution was re-derived independently and agrees. See extraction.attribution_reverified_2026_08_27."}
+    points: [[15, 199.9], [15, 201.3], [30, 195.7], [30, 198.4], [45, 195.7], [45, 197.0], [60, 194.4], [90, 191.5], [90, 192.8], [90, 195.7], [120, 188.8], [120, 190.1], [150, 181.7], [150, 185.9], [180, 179.0], [180, 180.4], [180, 183.3]]
+  - species: glucose
+    species_full: "glucose"
+    T_C: 100
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure_location: "panel A, open diamond, left axis 0-250 mmol/L"
+    n_points: 15
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27 from the raw PDF content stream of page 131, with marker geometry classified by path structure and the axis calibration (including the dual axes) re-derived from the drawn plot frames and tick marks. All 15 points reproduced, and the temperature attribution was re-derived independently and agrees. See extraction.attribution_reverified_2026_08_27."}
+    points: [[15, 183.3], [15, 190.1], [30, 169.3], [30, 172.1], [30, 179.0], [45, 167.9], [45, 169.3], [60, 153.9], [60, 156.8], [60, 158.1], [90, 141.5], [90, 145.7], [90, 147.0], [120, 134.6], [120, 137.3]]
+    note: "redundant with martins2005_glucose_glycine_100C_pH68.yml; kept as the attribution audit trail"
+  - species: glucose
+    species_full: "glucose"
+    T_C: 120
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure_location: "panel A, open diamond, left axis 0-250 mmol/L"
+    n_points: 12
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27 from the raw PDF content stream of page 131, with marker geometry classified by path structure and the axis calibration (including the dual axes) re-derived from the drawn plot frames and tick marks. All 12 points reproduced, and the temperature attribution was re-derived independently and agrees. See extraction.attribution_reverified_2026_08_27."}
+    points: [[5, 181.7], [5, 183.3], [5, 185.9], [10, 159.5], [10, 167.9], [15, 148.4], [15, 149.9], [20, 137.3], [20, 138.8], [20, 140.1], [30, 123.5], [30, 124.8]]
+  - species: glucose
+    T_C: null
+    kind: t0_markers
+    unit: mmol/L
+    note: "all three temperature series coincide at t=0 and cannot be separated"
+    values: [198.4, 199.9, 201.3, 202.6]
+  - species: glycine
+    species_full: "glycine"
+    T_C: 80
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure_location: "panel B, plus, left axis 0-250 mmol/L"
+    n_points: 19
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27 from the raw PDF content stream of page 131, with marker geometry classified by path structure and the axis calibration (including the dual axes) re-derived from the drawn plot frames and tick marks. All 19 points reproduced, and the temperature attribution was re-derived independently and agrees. See extraction.attribution_reverified_2026_08_27."}
+    points: [[15, 198.7], [15, 200.3], [30, 198.7], [30, 200.3], [45, 198.7], [45, 200.3], [45, 201.6], [60, 198.7], [60, 201.6], [60, 202.9], [90, 193.2], [90, 196.1], [90, 197.4], [120, 190.6], [120, 196.1], [150, 194.8], [150, 196.1], [180, 193.2], [180, 196.1]]
+  - species: glycine
+    species_full: "glycine"
+    T_C: 100
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure_location: "panel B, plus, left axis 0-250 mmol/L"
+    n_points: 13
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27 from the raw PDF content stream of page 131, with marker geometry classified by path structure and the axis calibration (including the dual axes) re-derived from the drawn plot frames and tick marks. All 13 points reproduced, and the temperature attribution was re-derived independently and agrees. See extraction.attribution_reverified_2026_08_27."}
+    points: [[15, 191.9], [15, 193.2], [30, 186.4], [30, 187.6], [45, 182.1], [45, 183.8], [60, 179.5], [60, 180.8], [60, 182.1], [90, 178.3], [90, 179.5], [120, 174.0], [120, 176.6]]
+    note: "redundant with martins2005_glucose_glycine_100C_pH68.yml; kept as the attribution audit trail"
+  - species: glycine
+    species_full: "glycine"
+    T_C: 120
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure_location: "panel B, plus, left axis 0-250 mmol/L"
+    n_points: 12
+    verification:
+      status: corrected
+      date: 2026-08-27
+      note: >-
+        THREE SPURIOUS POINTS REMOVED. An exhaustive re-enumeration of every plus marker in
+        panel B of Figure 5.10 (thesis p. 121 = PDF p. 131) found 66 markers at 48 distinct
+        positions, of which 11 further stroked crosses on the axes are tick marks and not
+        data. This series previously listed 15 values at 5 sampling times; only 12 exist.
+        The removed values, and why each is impossible: [10, 196.1] -- at t=10 the figure
+        draws exactly 3 markers, two coincident at 190.6 and one at 191.9, so there is no
+        third distinct position; 196.1 is the t=5 value. [15, 179.5] -- at t=15 the figure
+        draws 9 markers (3 temperatures x 3 replicates) at 6 distinct positions: 182.2,
+        185.1 (x2) at 120 C, 191.9 (x2), 193.2 at 100 C, 198.8, 200.3 (x2) at 80 C. There is
+        no marker at 179.5; 179.5 is the t=20 value. [20, 185.1] -- at t=20 only 120 C is
+        sampled and the figure draws exactly 3 markers, two coincident at 178.2 and one at
+        179.5; 185.1 is the t=15 value. All three removed values are duplicates of an
+        adjacent time point, i.e. they were padding to make each time show 3 replicates.
+        Every other series in this file was checked the same way and none had this defect.
+        Source of the correction: direct content-stream enumeration of Figure 5.10, panel B,
+        of the Martins (2003) thesis PDF (https://edepot.wur.nl/121418), PDF page 131.
+    points: [[5, 190.6], [5, 194.8], [5, 196.1], [10, 190.6], [10, 191.9], [15, 182.1], [15, 185.1], [20, 178.3], [20, 179.5], [30, 174.0], [30, 176.6], [30, 178.3]]
+  - species: glycine
+    T_C: null
+    kind: t0_markers
+    unit: mmol/L
+    note: "all three temperature series coincide at t=0 and cannot be separated"
+    values: [197.4, 198.7, 200.3, 201.6]
+  - species: fructose
+    species_full: "fructose"
+    T_C: 80
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure_location: "panel A, filled triangle, RIGHT axis 0-60 mmol/L"
+    n_points: 13
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27 from the raw PDF content stream of page 131, with marker geometry classified by path structure and the axis calibration (including the dual axes) re-derived from the drawn plot frames and tick marks. All 13 points reproduced, and the temperature attribution was re-derived independently and agrees. See extraction.attribution_reverified_2026_08_27."}
+    points: [[15, -0.02], [30, 0.30], [45, 0.62], [60, 0.94], [60, 1.32], [90, 1.32], [90, 1.64], [120, 1.32], [120, 1.96], [150, 1.96], [150, 2.28], [150, 2.97], [180, 2.65]]
+  - species: fructose
+    species_full: "fructose"
+    T_C: 100
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure_location: "panel A, filled triangle, RIGHT axis 0-60 mmol/L"
+    n_points: 16
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27 from the raw PDF content stream of page 131, with marker geometry classified by path structure and the axis calibration (including the dual axes) re-derived from the drawn plot frames and tick marks. All 16 points reproduced, and the temperature attribution was re-derived independently and agrees. See extraction.attribution_reverified_2026_08_27."}
+    points: [[15, 2.28], [15, 2.65], [15, 3.29], [30, 4.62], [30, 5.64], [45, 5.96], [45, 6.28], [45, 6.97], [60, 7.98], [60, 8.62], [60, 9.64], [90, 10.97], [90, 11.29], [120, 12.30], [120, 12.62], [120, 12.94]]
+    note: "redundant with martins2005_glucose_glycine_100C_pH68.yml; kept as the attribution audit trail"
+  - species: fructose
+    species_full: "fructose"
+    T_C: 120
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure_location: "panel A, filled triangle, RIGHT axis 0-60 mmol/L"
+    n_points: 13
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27 from the raw PDF content stream of page 131, with marker geometry classified by path structure and the axis calibration (including the dual axes) re-derived from the drawn plot frames and tick marks. All 13 points reproduced, and the temperature attribution was re-derived independently and agrees. See extraction.attribution_reverified_2026_08_27."}
+    points: [[5, 4.30], [5, 5.32], [10, 5.96], [10, 11.98], [10, 12.30], [15, 14.28], [15, 15.61], [15, 16.62], [20, 16.62], [20, 17.64], [20, 18.97], [30, 21.32], [30, 21.64]]
+  - species: fructose
+    T_C: null
+    kind: t0_markers
+    unit: mmol/L
+    note: "all three temperature series coincide at t=0 and cannot be separated"
+    values: [-0.02]
+  - species: DFG
+    species_full: "N-(1-deoxy-D-fructos-1-yl)-glycine (Amadori compound)"
+    T_C: 80
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure_location: "panel B, open circle, RIGHT axis 0-25 mmol/L"
+    n_points: 16
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27 from the raw PDF content stream of page 131, with marker geometry classified by path structure and the axis calibration (including the dual axes) re-derived from the drawn plot frames and tick marks. All 16 points reproduced, and the temperature attribution was re-derived independently and agrees. See extraction.attribution_reverified_2026_08_27."}
+    points: [[15, 0.91], [30, 1.59], [45, 2.98], [60, 3.67], [60, 4.22], [90, 6.01], [90, 6.15], [90, 6.56], [120, 7.26], [120, 7.53], [120, 7.66], [150, 8.91], [150, 9.19], [150, 9.46], [180, 10.42], [180, 10.71]]
+  - species: DFG
+    species_full: "N-(1-deoxy-D-fructos-1-yl)-glycine (Amadori compound)"
+    T_C: 100
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure_location: "panel B, open circle, RIGHT axis 0-25 mmol/L"
+    n_points: 15
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27 from the raw PDF content stream of page 131, with marker geometry classified by path structure and the axis calibration (including the dual axes) re-derived from the drawn plot frames and tick marks. All 15 points reproduced, and the temperature attribution was re-derived independently and agrees. See extraction.attribution_reverified_2026_08_27."}
+    points: [[15, 5.46], [15, 5.74], [30, 8.77], [30, 8.91], [45, 10.57], [45, 10.84], [45, 11.39], [60, 11.81], [60, 11.95], [60, 12.22], [90, 12.22], [90, 12.50], [90, 12.77], [120, 11.67], [120, 12.08]]
+    note: "redundant with martins2005_glucose_glycine_100C_pH68.yml; kept as the attribution audit trail"
+  - species: DFG
+    species_full: "N-(1-deoxy-D-fructos-1-yl)-glycine (Amadori compound)"
+    T_C: 120
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure_location: "panel B, open circle, RIGHT axis 0-25 mmol/L"
+    n_points: 13
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27 from the raw PDF content stream of page 131, with marker geometry classified by path structure and the axis calibration (including the dual axes) re-derived from the drawn plot frames and tick marks. All 13 points reproduced, and the temperature attribution was re-derived independently and agrees. See extraction.attribution_reverified_2026_08_27."}
+    points: [[5, 4.35], [5, 4.50], [5, 5.05], [10, 9.46], [10, 9.87], [15, 10.97], [15, 11.39], [15, 11.53], [20, 10.84], [20, 11.53], [30, 9.61], [30, 10.16], [30, 10.71]]
+  - species: DFG
+    T_C: null
+    kind: t0_markers
+    unit: mmol/L
+    note: "all three temperature series coincide at t=0 and cannot be separated"
+    values: [0.08, 0.36]
+  - species: 1-DG
+    species_full: "1-deoxyglucosone (1-deoxy-2,3-hexodiulose)"
+    T_C: 80
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure_location: "panel C, filled circle, axis 0-1 mmol/L"
+    n_points: 11
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27 from the raw PDF content stream of page 131, with marker geometry classified by path structure and the axis calibration (including the dual axes) re-derived from the drawn plot frames and tick marks. All 11 points reproduced, and the temperature attribution was re-derived independently and agrees. See extraction.attribution_reverified_2026_08_27."}
+    points: [[15, 0.003], [30, 0.003], [30, 0.014], [45, 0.014], [60, 0.014], [60, 0.025], [90, 0.036], [120, 0.041], [150, 0.052], [180, 0.052], [180, 0.063]]
+  - species: 1-DG
+    species_full: "1-deoxyglucosone (1-deoxy-2,3-hexodiulose)"
+    T_C: 100
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure_location: "panel C, filled circle, axis 0-1 mmol/L"
+    n_points: 14
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27 from the raw PDF content stream of page 131, with marker geometry classified by path structure and the axis calibration (including the dual axes) re-derived from the drawn plot frames and tick marks. All 14 points reproduced, and the temperature attribution was re-derived independently and agrees. See extraction.attribution_reverified_2026_08_27."}
+    points: [[15, 0.041], [15, 0.052], [15, 0.063], [30, 0.074], [30, 0.084], [45, 0.096], [60, 0.096], [60, 0.101], [90, 0.112], [90, 0.123], [90, 0.133], [120, 0.133], [120, 0.144], [120, 0.155]]
+    note: "redundant with martins2005_glucose_glycine_100C_pH68.yml; kept as the attribution audit trail"
+  - species: 1-DG
+    species_full: "1-deoxyglucosone (1-deoxy-2,3-hexodiulose)"
+    T_C: 120
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure_location: "panel C, filled circle, axis 0-1 mmol/L"
+    n_points: 9
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27 from the raw PDF content stream of page 131, with marker geometry classified by path structure and the axis calibration (including the dual axes) re-derived from the drawn plot frames and tick marks. All 9 points reproduced, and the temperature attribution was re-derived independently and agrees. See extraction.attribution_reverified_2026_08_27."}
+    points: [[5, 0.096], [5, 0.101], [10, 0.133], [10, 0.144], [10, 0.155], [15, 0.161], [20, 0.182], [30, 0.193], [30, 0.204]]
+  - species: 1-DG
+    T_C: null
+    kind: t0_markers
+    unit: mmol/L
+    note: "all three temperature series coincide at t=0 and cannot be separated"
+    values: [0.003, 0.025]
+  - species: 3-DG
+    species_full: "3-deoxyglucosone (3-deoxy-2-hexosulose)"
+    T_C: 80
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure_location: "panel C, open triangle, axis 0-1 mmol/L"
+    n_points: 16
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27 from the raw PDF content stream of page 131, with marker geometry classified by path structure and the axis calibration (including the dual axes) re-derived from the drawn plot frames and tick marks. All 16 points reproduced, and the temperature attribution was re-derived independently and agrees. See extraction.attribution_reverified_2026_08_27."}
+    points: [[15, 0.000], [30, 0.011], [45, 0.022], [60, 0.050], [60, 0.060], [60, 0.071], [90, 0.082], [90, 0.098], [120, 0.152], [120, 0.169], [150, 0.217], [150, 0.229], [150, 0.239], [180, 0.299], [180, 0.310], [180, 0.321]]
+  - species: 3-DG
+    species_full: "3-deoxyglucosone (3-deoxy-2-hexosulose)"
+    T_C: 100
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure_location: "panel C, open triangle, axis 0-1 mmol/L"
+    n_points: 12
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27 from the raw PDF content stream of page 131, with marker geometry classified by path structure and the axis calibration (including the dual axes) re-derived from the drawn plot frames and tick marks. All 12 points reproduced, and the temperature attribution was re-derived independently and agrees. See extraction.attribution_reverified_2026_08_27."}
+    points: [[15, 0.142], [15, 0.152], [15, 0.190], [30, 0.402], [30, 0.408], [45, 0.549], [60, 0.641], [90, 0.712], [90, 0.718], [120, 0.728], [120, 0.750], [120, 0.761]]
+    note: "redundant with martins2005_glucose_glycine_100C_pH68.yml; kept as the attribution audit trail"
+  - species: 3-DG
+    species_full: "3-deoxyglucosone (3-deoxy-2-hexosulose)"
+    T_C: 120
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure_location: "panel C, open triangle, axis 0-1 mmol/L"
+    n_points: 8
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27 from the raw PDF content stream of page 131, with marker geometry classified by path structure and the axis calibration (including the dual axes) re-derived from the drawn plot frames and tick marks. All 8 points reproduced, and the temperature attribution was re-derived independently and agrees. See extraction.attribution_reverified_2026_08_27."}
+    points: [[5, 0.261], [5, 0.283], [10, 0.593], [10, 0.609], [15, 0.712], [20, 0.750], [30, 0.772], [30, 0.799]]
+  - species: 3-DG
+    T_C: null
+    kind: t0_markers
+    unit: mmol/L
+    note: "all three temperature series coincide at t=0 and cannot be separated"
+    values: [0.000]
+  - species: methylglyoxal
+    species_full: "methylglyoxal"
+    T_C: 80
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure_location: "panel E, open square, axis 0-10 mmol/L"
+    n_points: 10
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27 from the raw PDF content stream of page 131, with marker geometry classified by path structure and the axis calibration (including the dual axes) re-derived from the drawn plot frames and tick marks. All 10 points reproduced, and the temperature attribution was re-derived independently and agrees. See extraction.attribution_reverified_2026_08_27."}
+    points: [[15, 0.03], [30, 0.03], [45, 0.03], [60, 0.03], [90, 0.03], [120, 0.03], [150, 0.03], [150, 0.13], [180, 0.13], [180, 0.44]]
+  - species: methylglyoxal
+    species_full: "methylglyoxal"
+    T_C: 100
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure_location: "panel E, open square, axis 0-10 mmol/L"
+    n_points: 17
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27 from the raw PDF content stream of page 131, with marker geometry classified by path structure and the axis calibration (including the dual axes) re-derived from the drawn plot frames and tick marks. All 17 points reproduced, and the temperature attribution was re-derived independently and agrees. See extraction.attribution_reverified_2026_08_27."}
+    points: [[15, 0.60], [15, 0.65], [30, 0.86], [30, 0.91], [30, 1.07], [45, 1.23], [45, 1.44], [45, 1.54], [60, 1.75], [60, 1.96], [60, 2.38], [90, 2.96], [90, 3.32], [90, 3.69], [120, 4.00], [120, 4.16], [120, 5.16]]
+    note: "redundant with martins2005_glucose_glycine_100C_pH68.yml; kept as the attribution audit trail"
+  - species: methylglyoxal
+    species_full: "methylglyoxal"
+    T_C: 120
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure_location: "panel E, open square, axis 0-10 mmol/L"
+    n_points: 10
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27 from the raw PDF content stream of page 131, with marker geometry classified by path structure and the axis calibration (including the dual axes) re-derived from the drawn plot frames and tick marks. All 10 points reproduced, and the temperature attribution was re-derived independently and agrees. See extraction.attribution_reverified_2026_08_27."}
+    points: [[5, 1.28], [10, 3.22], [10, 3.27], [15, 4.63], [15, 4.74], [20, 6.05], [20, 6.15], [20, 6.26], [30, 7.77], [30, 7.83]]
+  - species: methylglyoxal
+    T_C: null
+    kind: t0_markers
+    unit: mmol/L
+    note: "all three temperature series coincide at t=0 and cannot be separated"
+    values: [0.03]
+  - species: formic_acid
+    species_full: "formic acid"
+    T_C: 80
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure_location: "panel D, cross, axis 0-21 mmol/L"
+    n_points: 8
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27 from the raw PDF content stream of page 131, with marker geometry classified by path structure and the axis calibration (including the dual axes) re-derived from the drawn plot frames and tick marks. All 8 points reproduced, and the temperature attribution was re-derived independently and agrees. See extraction.attribution_reverified_2026_08_27."}
+    points: [[15, 0.00], [45, 0.00], [60, 0.00], [90, 0.00], [120, 0.24], [150, 0.45], [180, 0.69], [180, 0.79]]
+  - species: formic_acid
+    species_full: "formic acid"
+    T_C: 100
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure_location: "panel D, cross, axis 0-21 mmol/L"
+    n_points: 12
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27 from the raw PDF content stream of page 131, with marker geometry classified by path structure and the axis calibration (including the dual axes) re-derived from the drawn plot frames and tick marks. All 12 points reproduced, and the temperature attribution was re-derived independently and agrees. See extraction.attribution_reverified_2026_08_27."}
+    points: [[15, 0.24], [15, 0.34], [45, 0.57], [45, 0.69], [60, 1.02], [60, 1.14], [60, 1.24], [90, 1.79], [90, 1.91], [90, 2.03], [120, 2.24], [120, 2.48]]
+    note: "redundant with martins2005_glucose_glycine_100C_pH68.yml; kept as the attribution audit trail"
+  - species: formic_acid
+    species_full: "formic acid"
+    T_C: 120
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure_location: "panel D, cross, axis 0-21 mmol/L"
+    n_points: 11
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27 from the raw PDF content stream of page 131, with marker geometry classified by path structure and the axis calibration (including the dual axes) re-derived from the drawn plot frames and tick marks. All 11 points reproduced, and the temperature attribution was re-derived independently and agrees. See extraction.attribution_reverified_2026_08_27."}
+    points: [[5, 0.34], [5, 0.45], [10, 1.47], [15, 2.59], [15, 2.69], [20, 3.14], [20, 3.49], [20, 3.71], [30, 3.59], [30, 4.04], [30, 4.16]]
+  - species: formic_acid
+    T_C: null
+    kind: t0_markers
+    unit: mmol/L
+    note: "all three temperature series coincide at t=0 and cannot be separated"
+    values: [0.00]
+  - species: formic_acid
+    T_C: ambiguous_80_or_100
+    kind: unassigned
+    unit: mmol/L
+    note: "80 and 100 C are not separable at these times; left unassigned rather than guessed"
+    points: [[30, 0.00], [30, 0.34]]
+  - species: acetic_acid
+    species_full: "acetic acid"
+    T_C: 80
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure_location: "panel D, filled diamond, axis 0-21 mmol/L"
+    n_points: 12
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27 from the raw PDF content stream of page 131, with marker geometry classified by path structure and the axis calibration (including the dual axes) re-derived from the drawn plot frames and tick marks. All 12 points reproduced, and the temperature attribution was re-derived independently and agrees. See extraction.attribution_reverified_2026_08_27."}
+    points: [[15, 0.00], [30, 0.00], [45, 0.00], [60, 0.00], [90, 0.13], [90, 0.23], [120, 0.45], [120, 0.57], [150, 0.68], [150, 0.79], [150, 0.90], [180, 1.24]]
+  - species: acetic_acid
+    species_full: "acetic acid"
+    T_C: 100
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure_location: "panel D, filled diamond, axis 0-21 mmol/L"
+    n_points: 17
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27 from the raw PDF content stream of page 131, with marker geometry classified by path structure and the axis calibration (including the dual axes) re-derived from the drawn plot frames and tick marks. All 17 points reproduced, and the temperature attribution was re-derived independently and agrees. See extraction.attribution_reverified_2026_08_27."}
+    points: [[15, 0.45], [15, 0.57], [30, 1.79], [30, 1.92], [30, 2.03], [45, 3.93], [45, 4.16], [45, 4.49], [60, 5.28], [60, 5.51], [60, 6.17], [90, 9.44], [90, 9.55], [90, 9.66], [120, 11.00], [120, 11.79], [120, 12.01]]
+    note: "redundant with martins2005_glucose_glycine_100C_pH68.yml; kept as the attribution audit trail"
+  - species: acetic_acid
+    species_full: "acetic acid"
+    T_C: 120
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure_location: "panel D, filled diamond, axis 0-21 mmol/L"
+    n_points: 13
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27 from the raw PDF content stream of page 131, with marker geometry classified by path structure and the axis calibration (including the dual axes) re-derived from the drawn plot frames and tick marks. All 13 points reproduced, and the temperature attribution was re-derived independently and agrees. See extraction.attribution_reverified_2026_08_27."}
+    points: [[5, 1.24], [5, 1.35], [10, 5.96], [10, 6.29], [10, 6.52], [15, 9.44], [15, 11.24], [15, 11.45], [20, 12.46], [20, 14.25], [30, 17.28], [30, 17.52], [30, 18.18]]
+  - species: acetic_acid
+    T_C: null
+    kind: t0_markers
+    unit: mmol/L
+    note: "all three temperature series coincide at t=0 and cannot be separated"
+    values: [0.00, 0.13]
+  - species: melanoidins
+    species_full: "melanoidins"
+    T_C: 80
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure_location: "panel F, asterisk, axis 0-10 mmol/L"
+    n_points: 10
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27 from the raw PDF content stream of page 131, with marker geometry classified by path structure and the axis calibration (including the dual axes) re-derived from the drawn plot frames and tick marks. All 10 points reproduced, and the temperature attribution was re-derived independently and agrees. See extraction.attribution_reverified_2026_08_27."}
+    points: [[30, 0.00], [45, 0.00], [45, 0.05], [60, 0.00], [60, 0.05], [90, 0.05], [120, 0.10], [150, 0.21], [150, 0.26], [180, 0.31]]
+  - species: melanoidins
+    species_full: "melanoidins"
+    T_C: 100
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure_location: "panel F, asterisk, axis 0-10 mmol/L"
+    n_points: 14
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27 from the raw PDF content stream of page 131, with marker geometry classified by path structure and the axis calibration (including the dual axes) re-derived from the drawn plot frames and tick marks. All 14 points reproduced, and the temperature attribution was re-derived independently and agrees. See extraction.attribution_reverified_2026_08_27."}
+    points: [[30, 0.42], [30, 0.57], [30, 0.68], [45, 1.31], [45, 1.36], [60, 2.21], [60, 2.37], [60, 2.42], [90, 4.59], [90, 4.73], [90, 4.85], [120, 6.32], [120, 6.42], [120, 6.90]]
+    note: "redundant with martins2005_glucose_glycine_100C_pH68.yml; kept as the attribution audit trail"
+  - species: melanoidins
+    species_full: "melanoidins"
+    T_C: 120
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure_location: "panel F, asterisk, axis 0-10 mmol/L"
+    n_points: 14
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27 from the raw PDF content stream of page 131, with marker geometry classified by path structure and the axis calibration (including the dual axes) re-derived from the drawn plot frames and tick marks. All 14 points reproduced, and the temperature attribution was re-derived independently and agrees. See extraction.attribution_reverified_2026_08_27."}
+    points: [[5, 0.05], [5, 0.10], [10, 1.36], [10, 1.69], [10, 1.99], [15, 3.68], [15, 3.74], [15, 3.89], [20, 4.63], [20, 5.11], [20, 5.37], [30, 8.05], [30, 8.31], [30, 8.38]]
+  - species: melanoidins
+    T_C: null
+    kind: t0_markers
+    unit: mmol/L
+    note: "all three temperature series coincide at t=0 and cannot be separated"
+    values: [0.00, 0.05]
+  - species: melanoidins
+    T_C: ambiguous_80_or_100
+    kind: unassigned
+    unit: mmol/L
+    note: "80 and 100 C are not separable at these times; left unassigned rather than guessed"
+    points: [[15, 0.00], [15, 0.05], [15, 0.10], [15, 0.15]]
+file_verification:
+  status: corrected
+  date: 2026-08-27
+  wave: Q
+  summary: >-
+    RE-EXTRACTED INDEPENDENTLY AND CORRECTED. 415 of the 418 values now in this file were
+    reproduced exactly by an independent re-extraction. THREE VALUES WERE FOUND NOT TO EXIST
+    IN THE FIGURE AND HAVE BEEN REMOVED, all three from the glycine 120 C series. This is the
+    only file in this directory that required a data correction.
+  method_of_verification: >-
+    The thesis PDF was downloaded fresh and page 131 re-processed with a purpose-written
+    content-stream parser sharing no code or calibration with the original harvest. For each
+    of the ten species every marker was enumerated WITH ITS MULTIPLICITY (how many coincident
+    markers are drawn at that position), which is what made the three phantom glycine values
+    detectable: a position with zero markers cannot appear in the data. The complete set of
+    distinct marker positions per species was then diffed against this file.
+  per_species_result:
+    - "glucose: 48 distinct positions / 66 markers -- PERFECT MATCH with this file"
+    - "fructose: 43 / 66 -- PERFECT MATCH"
+    - "glycine: 48 / 66 -- file listed 51; 3 removed, see the glycine 120 C verification block"
+    - "DFG: 46 / 66 -- PERFECT MATCH"
+    - "1-DG: 36 / 66 -- PERFECT MATCH"
+    - "3-DG: 37 on-grid / 66 (plus 16 off-grid fit-curve dots correctly excluded) -- PERFECT MATCH"
+    - "methylglyoxal: 38 / 66 -- PERFECT MATCH"
+    - "formic acid: 34 / 66 -- PERFECT MATCH"
+    - "acetic acid: 44 / 66 -- PERFECT MATCH"
+    - "melanoidins: 44 / 66 -- PERFECT MATCH"
+  corrections_applied:
+    - "glycine T=120: removed [10, 196.1], [15, 179.5], [20, 185.1]; n_points 15 -> 12. Source of correction: content-stream enumeration of Figure 5.10 panel B, thesis PDF page 131."
+    - "ISBN added to primary_source_used (90-5808-823-5, from the thesis colophon)."
+    - "estimated_uncertainty and attribution_validation: the '1% of full scale' claim was replaced with the measured worst cases (up to 2.2% for DFG)."
+    - "provenance_note: the dotted model-fit curve whose dots a naive extractor reads as data is in PANEL C (the 80 C fit for 3-deoxyglucosone), not panel B as previously stated."
+  residual_uncertainty: >-
+    STILL A FIGURE READ-OFF, and additionally the temperature attribution at shared sampling
+    times is a RECONSTRUCTION, not something the figure labels. The reconstruction is
+    corroborated for 100 C by Figure 5.9 and is structurally forced elsewhere by the differing
+    sampling grids, but a reader who needs certainty on the 80 versus 120 C split at a
+    particular time should re-derive it. The genuinely ambiguous points are already parked
+    under ambiguous_80_or_100 and are not assigned.
+provenance_note: >-
+  Figure 5.10 of the Martins (2003) Wageningen thesis (= Fig. 6 of Martins & van Boekel
+  2005). Only the plotted measurement markers were extracted; the fitted M4 model curves
+  were identified and discarded, including a dotted fit curve in PANEL C (the 80 C fit for
+  3-deoxyglucosone) whose dots a naive extractor reads as a data series -- it is excluded
+  because its x-positions do not fall on the sampling grid. Corrected 2026-08-27: an earlier
+  version of this note placed that curve in panel B. No point is interpolated, smoothed,
+  averaged or synthesised.
+what_a_human_with_access_should_get_next: >-
+  The 90 C and 110 C series exist (the thesis Materials & Methods lists five temperatures
+  and the rate constants in Table 5.2 were fitted to all five) but are plotted nowhere in
+  the thesis. Recovering them needs the authors' raw data from Wageningen Food Quality and
+  Design. That would turn this into a five-temperature Arrhenius data set instead of three.
+

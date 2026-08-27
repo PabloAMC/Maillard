@@ -2350,3 +2350,123 @@ factors and nothing else — no barrier, no projection constant, no marker yield
   `tests/scientific/test_matrix_observability_refit_wave_o.py` = 1245. The 1 skip and both
   xfails are the declared, strict-marked ones from Wave J2. All three gates re-run green
   after the suite. NOT COMMITTED, NOT STASHED — handed to the orchestrator as instructed.
+
+---
+
+## Wave Q — verification of `data/lit/timeseries/` (2026-08-27)
+
+Scope: verify the four harvested kinetic time-series files against their source papers,
+point by point, so they can be committed and later used for calibration. They were produced
+by an agent killed before verifying anything; every number was treated as unverified.
+Files touched: `data/lit/timeseries/*` only. Nothing committed. Nothing wired into the model.
+
+### Verdict table
+
+| File | Series | Points | Status | Evidence |
+|---|---:|---:|---|---|
+| `brands_sugar_casein_120C_pH68.yml` | 20 | 60 | **verified_table** | Brands (2002) WUR thesis retrieved (edepot.wur.nl/199005). Tables 6.1 (PDF p.105), 6.2 (p.107), 3.1 (p.44) rendered at 4x and re-read as images — the OCR text layer of a bitonal scan is not trustworthy on its own. Every digit, every ±, every SEM matched. |
+| `martins2003_DFG_amadori_degradation.yml` | 8 + table | 106 | **verified_table + verified_figure_shape** | Martins (2003) WUR thesis retrieved (edepot.wur.nl/121418). Table 4.1.1: 32 values + 12 `n.a.` cells exact. Figs 4.1.1/4.1.2: all 76 markers re-extracted independently, reproduced to ≤0.01 mmol/L. |
+| `martins2005_glucose_glycine_100C_pH68.yml` | 10 | 183 | **verified_figure_shape** | Thesis Fig 5.9 (PDF p.126) re-extracted from the raw content stream. **All 183 points reproduced exactly**, to the last printed digit. Marker census 24/species = 8 times × 3 replicates. |
+| `martins2005_glucose_glycine_80_100_120C_pH68.yml` | 42 | 418 | **corrected** | Thesis Fig 5.10 (PDF p.131). 415/418 reproduced; **3 phantom points removed** (below). Nine of ten species matched perfectly. |
+
+All four sources were **actually retrieved**. The thesis route paid off: both Wageningen
+theses download openly and both are the primary form of the published chapters.
+
+### Citations
+
+All six DOIs resolve on CrossRef with exact title/journal/volume/page/author agreement:
+`10.1016/j.foodchem.2004.04.006`, `10.1016/s0008-6215(03)00173-3`,
+`10.1016/s0008-6215(03)00174-5`, `10.1021/jf9907586`, `10.1021/jf010789c`,
+`10.1021/jf001430b`. **Zero citation contamination in this directory** — a contrast with the
+30–45% rate the 2026-08 audit found elsewhere in the reference set.
+
+**The Brands file does not need a DOI found.** Its source is a PhD thesis, which has none;
+it is openly downloadable. The two chapters supplying every number are published articles
+whose DOIs were already present and now verified (JAFC 2000 mutagenicity → Tables 6.1/6.2;
+JAFC 2002 melanoidin quantification → Table 3.1). The task brief's guess that these data come
+from Brands & van Boekel 2001 JAFC `10.1021/jf001430b` is **wrong**: that is a different
+chapter of the same thesis and none of its data are in the file. It is the right *target*
+for the next retrieval, not the source of anything already here.
+
+### The one data defect found (in 767 values)
+
+`martins2005_glucose_glycine_80_100_120C_pH68.yml`, glycine 120 °C — three values that do
+not exist in the figure, now removed:
+
+- `[10, 196.1]` — at t=10 the figure draws exactly 3 markers: two coincident at 190.6, one
+  at 191.9. No third position. 196.1 is the t=5 value.
+- `[15, 179.5]` — at t=15 the figure draws 9 markers (3 T × 3 replicates) at 6 distinct
+  positions; none is at 179.5. 179.5 is the t=20 value.
+- `[20, 185.1]` — at t=20 only 120 °C is sampled; 3 markers, two at 178.2, one at 179.5.
+  185.1 is the t=15 value.
+
+Each removed value duplicates an adjacent time point — the series had been padded so every
+time point showed three replicates. Detectable only because the re-extraction recorded
+marker **multiplicity** per position: a position with zero drawn markers cannot be data.
+`n_points` 15 → 12. Source of correction: content-stream enumeration of Fig 5.10 panel B,
+thesis PDF p.131.
+
+### Other corrections
+
+Data added: 6 values (Brands Table 3.1 `a/b'` microanalysis column, previously skipped).
+
+Metadata: Brands ISBN `90-5808-579-4` → `90-5808-591-0`; unsupported "137 pp" removed
+(133-page scan ending at printed p.127, no page count stated anywhere); Brands Table 6.1
+p.101 → p.99 and Table 3.1 p.36 → p.37; scan "200 dpi" → measured ≈160 dpi 1-bit; Martins
+ISBN `90-5808-923-4` → `90-5808-823-5` (both files); DFG file's "filled-diamond series"
+exclusion note rewritten (no diamonds exist on that page — the fits are stroked polylines,
+the exclusion was right but its description was not); Fig 5.10 dotted fit curve relocated
+from panel B to panel C; Fig 5.10 read-off agreement restated from "under 1% of full scale"
+to the measured worst cases (2.2% for DFG at 60–120 min).
+
+### Verified and vindicated
+
+- The DFG file's flag that the thesis M&M is internally inconsistent (`0.237 g, 10 mmol`;
+  0.237 g of DFG = 1.0 mmol) is **confirmed verbatim**. The error is the thesis's, and it was
+  correctly flagged rather than silently fixed.
+- Every `system:` block (concentrations, buffer, pH, vessel, volume, filtration, replication)
+  confirmed verbatim against the retrieved Materials and Methods of both theses.
+- Fig 5.9's formic-vs-acetic assignment — which the caption cannot settle — confirmed from
+  the thesis body: *"acetic acid was always formed in higher concentrations than formic
+  acid"* (printed p.109) and *"the low amount of formic acid detected relatively to acetic
+  acid at pH 6.8"* (p.122).
+- Melanoidin ε = 0.64 ± 0.03 L·mmol⁻¹·cm⁻¹ at 470 nm confirmed (printed pp.37, 52).
+- The Fig 5.10 temperature attribution — the file's most reconstructed claim — holds. The
+  100 °C series agrees with the independent Fig 5.9 extraction at every shared time point for
+  all ten species; 5/10/20 min are 120 °C-only and 150/180 min are 80 °C-only, so those need
+  no splitting; the genuinely ambiguous points were already parked under
+  `ambiguous_80_or_100` and that parking is correct.
+- Marker census: exactly 66 markers per species in Fig 5.10 (= 22 time-temperature cells × 3
+  replicates) and 24 per species in Fig 5.9 (= 8 times × 3), so replication was 3-fold, not
+  merely the "at least duplicate" the M&M claims.
+
+### What remains unverifiable, and what a human should pull
+
+Nothing in these files is now unverifiable. What is **absent** and worth retrieving, in order:
+
+1. **Brands & van Boekel 2001 JAFC `10.1021/jf001430b`** — the glucose/fructose-casein
+   multiresponse trajectories. In the thesis they are figures in a 1-bit ≈160 dpi scan with
+   zero vector content, so they are genuinely unreadable there; reading points off them would
+   be eyeball estimation and was correctly not attempted. Someone with ACS access should
+   check whether the publisher PDF is vector. **This is the biggest gap** — the Brands file
+   currently holds endpoints (browning, Ames, C/N), not trajectories.
+2. **Martins thesis Figs 4.1.3–4.1.7** (PDF pp.78–82) and the Ch. 4.2 fit figures
+   (pp.93–105): deoxyosones, MGO, sugars, acids, melanoidins during DFG degradation at four
+   conditions. Vector, same PDF, same method. Skipped for time only.
+3. **90 °C and 110 °C glucose/glycine series** — run and fitted by the authors, plotted
+   nowhere. Needs raw data from Wageningen. Would give a five-point Arrhenius set.
+4. **Underlying tables for Figs 5.9/5.10** — never published in either the thesis or the
+   Food Chemistry paper.
+
+### Standing caveat
+
+Three of four files are **figure read-offs**. The re-extraction proves the numbers faithfully
+recover where the authors' plotting program placed each marker; it cannot prove those
+positions equal the authors' measurements. The ±0.3% of panel full scale is a **floor**, not
+a total. For Fig 5.10 there is a second layer: the temperature attribution is a
+reconstruction, corroborated but not labelled by the figure. Both caveats are recorded in
+each file's `residual_uncertainty` block and in `data/lit/timeseries/README.md`.
+
+`data/lit/timeseries/README.md` written: directory purpose, per-file status table, the
+fabrication warning pointing at `AUDIT.md`, the explicit statement that nothing here is wired
+into calibration, the verification method, and the retrieval backlog above.

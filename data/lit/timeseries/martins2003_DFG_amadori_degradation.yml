@@ -1,0 +1,239 @@
+# Martins et al. -- thermal degradation of the Amadori compound DFG (aqueous, 100/120 C, pH 5.5/6.8)
+# NOTHING IN THIS FILE IS WIRED INTO THE MODEL OR THE CALIBRATION. Data only.
+source:
+  citation: "Martins, S.I.F.S., Marcelis, A.T.M., van Boekel, M.A.J.S. (2003) Kinetic modelling of Amadori N-(1-deoxy-D-fructos-1-yl)-glycine degradation pathways. Part I - Reaction mechanism. Carbohydrate Research 338(16):1651-1663."
+  doi: "10.1016/s0008-6215(03)00173-3"
+  doi_verified: "resolved via api.crossref.org 2026-08-27; title/journal/volume/pages/authors match"
+  companion_paper:
+    citation: "Martins, S.I.F.S. & van Boekel, M.A.J.S. (2003) Kinetic modelling of Amadori N-(1-deoxy-D-fructos-1-yl)-glycine degradation pathways. Part II - Kinetic analysis. Carbohydrate Research 338(16):1665-1678."
+    doi: "10.1016/s0008-6215(03)00174-5"
+    doi_verified: "resolved via api.crossref.org 2026-08-27"
+  primary_source_used: "Martins, S.I.F.S. (2003) PhD thesis, Wageningen University -- Chapter 4, Table 4.1.1 (thesis p. 68) and Figures 4.1.1 / 4.1.2 (thesis p. 67 = PDF page 77)."
+  primary_source_url: "https://edepot.wur.nl/121418"
+  access: mixed
+  access_detail: "Table 4.1.1 = table transcription (exact). Figures 4.1.1 and 4.1.2 = vector coordinate extraction (figure_readoff)."
+  retrieved: 2026-08-27
+  verified_2026_08_27: >-
+    Thesis PDF downloaded fresh from https://edepot.wur.nl/121418 (1,633,582 bytes, 178 PDF
+    pages, PDF 1.4). Title page, promotoren and the colophon on PDF page 4 match the citation
+    ("Ph.D. Thesis, Wageningen University, The Netherlands. 170 pp."). Both Carbohydrate
+    Research DOIs and the thesis page mapping were re-checked; see file_verification below.
+  isbn: "90-5808-823-5 (printed on PDF page 4 of the thesis)"
+system:
+  reactants:
+    DFG: "10 mmol/L N-(1-deoxy-D-fructos-1-yl)-glycine, synthesised in-house (Kroh method)"
+  reactant_concentration_note: >-
+    The thesis Materials & Methods states "N-(1-deoxy-D-fructos-1-yl)-glycine (0.237 g,
+    10 mmol) was dissolved in phosphate buffer (100 mL)". 0.237 g of DFG (M = 237.2 g/mol)
+    is 1.0 mmol, not 10 mmol, so the printed millimole figure is internally inconsistent.
+    The initial concentration read off Figure 4.1.1 is 9.0-10.4 mmol/L, which matches
+    1 mmol in 100 mL = 10 mmol/L. 10 mmol/L is therefore taken as the initial
+    concentration and the "10 mmol" in the text is treated as a slip. FLAGGED, not silently
+    corrected.
+  conditions:
+    T_C: [100, 120]
+    pH: [5.5, 6.8]
+    pH_note: "initial pH, uncontrolled during heating"
+    buffer: "phosphate, 0.1 M K2HPO4 / KH2PO4"
+    matrix: aqueous
+    vessel: "screw-capped glass tubes (Schott 16 x 160 mm), oil bath"
+    duration: "up to 4 h at 100 C, up to 3 h at 120 C"
+  replication: "at least duplicate (thesis Materials & Methods, Chapter 4)"
+extraction:
+  method: "vector_coordinate_extraction for the two figures; table_transcription for Table 4.1.1"
+  symbol_legend_source: >-
+    Figure 4.1.1/4.1.2 captions read at 500 dpi: open triangle = 100 C pH 5.5;
+    filled triangle = 100 C pH 6.8; open circle = 120 C pH 5.5; filled circle = 120 C pH 6.8.
+  attribution_validation: >-
+    Two statements in the thesis body independently confirm the symbol-to-condition mapping.
+    (1) "After heating for 30 minutes at 120 C and pH 6.8, DFG was completely degraded" --
+    the filled-circle series reaches 0.03 mmol/L at 30 min. (2) "after 180 minutes at 100 C
+    and pH 5.5, only approximately 57% of the initial concentration had reacted" -- the
+    open-triangle series runs 10.08 -> 4.40 mmol/L over 180 min, i.e. 56% reacted. A third
+    statement, that 100 C/pH 6.8 and 120 C/pH 5.5 degrade at a similar rate, also holds for
+    the filled-triangle and open-circle series.
+  estimated_uncertainty: "+/- 0.3% of full scale (about 0.04 mmol/L on the DFG panel, 0.03 on the glycine panel), plus the authors' plotting rounding."
+  axis_calibration_verified: >-
+    VERIFIED 2026-08-27 by re-deriving the calibration from the drawn plot frames and axis
+    tick marks in the PDF content stream, independently of the earlier pass. Figure 4.1.1
+    frame: x 138.24-289.80 pt = 0-200 min, y 576.72-648.60 pt = 0-12 mmol/L (6 y-ticks at
+    0/2/4/6/8/10/12 and 5 x-ticks at 0/50/100/150/200, matching the printed labels). Figure
+    4.1.2 frame: x 347.29-523.81 pt = 0-200 min, y 512.87-647.88 pt = 0-10 mmol/L. The 0.3%
+    full-scale figure quoted above is therefore about 0.036 mmol/L on Figure 4.1.1 and
+    0.030 mmol/L on Figure 4.1.2, as stated.
+  replicate_note: "one marker per time point in these figures; distinct positions only, no averaging."
+  excluded: >-
+    CORRECTED 2026-08-27. The earlier note here claimed "a filled-diamond series at irregular
+    x-positions" had been identified as a dotted model-fit curve and discarded. That
+    description is wrong: re-parsing the content stream shows NO diamond markers anywhere on
+    this page. What is actually present, and correctly excluded, is four stroked polylines per
+    panel (line width 0.736 pt, one per experimental condition) which are the model fits, plus
+    PDF clipping paths (operator 'n'). The conclusion of the earlier note -- that non-data
+    geometry was excluded -- stands; only its description of that geometry was inaccurate.
+  independent_marker_census: >-
+    Figure 4.1.1 contains exactly 10 open triangles, 9 filled triangles, 9 open circles and
+    9 filled circles; Figure 4.1.2 contains exactly 10 open triangles, 9 filled triangles,
+    9 open circles and 9 filled circles. These counts equal the point counts of the eight
+    series below exactly, so no marker was dropped and none was invented.
+series:
+  - species: DFG
+    T_C: 100
+    pH: 5.5
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure: "Figure 4.1.1, open triangle"
+    n_points: 10
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED. The PDF content stream of page 77 was re-parsed from scratch and every marker centre recomputed against a calibration taken from the drawn plot frame and axis ticks. All 10 points reproduced to within 0.01 mmol/L of the values stored here (i.e. to the rounding printed below). Endpoints, curve shape and the position of the plateau all agree."}
+    points: [[0, 10.08], [5, 9.96], [15, 9.13], [30, 8.23], [45, 7.92], [60, 7.40], [75, 6.76], [90, 6.07], [120, 4.97], [180, 4.40]]
+  - species: DFG
+    T_C: 100
+    pH: 6.8
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure: "Figure 4.1.1, filled triangle"
+    n_points: 9
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED. The PDF content stream of page 77 was re-parsed from scratch and every marker centre recomputed against a calibration taken from the drawn plot frame and axis ticks. All 9 points reproduced to within 0.01 mmol/L of the values stored here (i.e. to the rounding printed below). Endpoints, curve shape and the position of the plateau all agree."}
+    points: [[0, 9.90], [15, 5.48], [30, 4.02], [45, 1.98], [60, 1.22], [90, 0.45], [120, 0.00], [150, 0.00], [180, 0.00]]
+  - species: DFG
+    T_C: 120
+    pH: 5.5
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure: "Figure 4.1.1, open circle"
+    n_points: 9
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED. The PDF content stream of page 77 was re-parsed from scratch and every marker centre recomputed against a calibration taken from the drawn plot frame and axis ticks. All 9 points reproduced to within 0.01 mmol/L of the values stored here (i.e. to the rounding printed below). Endpoints, curve shape and the position of the plateau all agree."}
+    points: [[0, 10.37], [5, 8.52], [10, 7.18], [15, 5.59], [30, 3.48], [45, 2.01], [60, 1.69], [90, 0.80], [120, 0.54]]
+  - species: DFG
+    T_C: 120
+    pH: 6.8
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure: "Figure 4.1.1, filled circle"
+    n_points: 9
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED. The PDF content stream of page 77 was re-parsed from scratch and every marker centre recomputed against a calibration taken from the drawn plot frame and axis ticks. All 9 points reproduced to within 0.01 mmol/L of the values stored here (i.e. to the rounding printed below). Endpoints, curve shape and the position of the plateau all agree."}
+    points: [[0, 9.03], [5, 4.82], [10, 1.62], [15, 0.67], [30, 0.03], [45, 0.03], [60, 0.03], [90, 0.03], [120, 0.03]]
+  - species: glycine
+    T_C: 100
+    pH: 5.5
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure: "Figure 4.1.2, open triangle"
+    n_points: 10
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED. The PDF content stream of page 77 was re-parsed from scratch and every marker centre recomputed against a calibration taken from the drawn plot frame and axis ticks. All 10 points reproduced to within 0.01 mmol/L of the values stored here (i.e. to the rounding printed below). Endpoints, curve shape and the position of the plateau all agree."}
+    points: [[0, 0.28], [5, 0.39], [15, 0.84], [30, 1.34], [45, 2.00], [60, 2.45], [75, 3.06], [90, 3.23], [120, 3.61], [180, 4.78]]
+  - species: glycine
+    T_C: 100
+    pH: 6.8
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure: "Figure 4.1.2, filled triangle"
+    n_points: 9
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED. The PDF content stream of page 77 was re-parsed from scratch and every marker centre recomputed against a calibration taken from the drawn plot frame and axis ticks. All 9 points reproduced to within 0.01 mmol/L of the values stored here (i.e. to the rounding printed below). Endpoints, curve shape and the position of the plateau all agree."}
+    points: [[0, 0.28], [15, 3.39], [30, 5.78], [45, 7.17], [60, 7.67], [90, 7.67], [120, 7.83], [150, 8.17], [180, 8.34]]
+  - species: glycine
+    T_C: 120
+    pH: 5.5
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure: "Figure 4.1.2, open circle"
+    n_points: 9
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED. The PDF content stream of page 77 was re-parsed from scratch and every marker centre recomputed against a calibration taken from the drawn plot frame and axis ticks. All 9 points reproduced to within 0.01 mmol/L of the values stored here (i.e. to the rounding printed below). Endpoints, curve shape and the position of the plateau all agree."}
+    points: [[0, 0.37], [5, 0.86], [10, 2.37], [15, 3.26], [30, 5.20], [45, 5.92], [60, 6.64], [90, 7.48], [120, 7.31]]
+  - species: glycine
+    T_C: 120
+    pH: 6.8
+    unit: mmol/L
+    data_quality: figure_readoff
+    figure: "Figure 4.1.2, filled circle"
+    n_points: 9
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED. The PDF content stream of page 77 was re-parsed from scratch and every marker centre recomputed against a calibration taken from the drawn plot frame and axis ticks. All 9 points reproduced to within 0.01 mmol/L of the values stored here (i.e. to the rounding printed below). Endpoints, curve shape and the position of the plateau all agree."}
+    points: [[0, 0.09], [5, 4.31], [10, 6.25], [15, 7.70], [30, 8.20], [45, 7.98], [60, 7.64], [90, 7.64], [120, 7.81]]
+
+glycine_yield_table:
+  description: >-
+    Table 4.1.1 of the thesis (p. 68), transcribed exactly. Yield of glycine expressed as a
+    percentage of the amount of DFG that had reacted -- NOT a concentration. n.a. = not
+    analysed; those time points are omitted rather than filled in.
+  unit: "% (mol glycine formed / mol DFG reacted)"
+  data_quality: table
+  verification:
+    status: verified_table
+    date: 2026-08-27
+    note: >-
+      VERIFIED EXACTLY. All 32 printed values and all 12 n.a. cells of Table 4.1.1 (thesis
+      p. 68 = PDF page 78) were re-read from the retrieved thesis and match this file digit
+      for digit, including which time points are n.a. in which column. The table header
+      confirms the four condition labels A-D used below (A: T100 C pH 5.5; B: T100 C pH 6.8;
+      C: T120 C pH 5.5; D: T120 C pH 6.8) and the footnote confirms the unit: "The yield of
+      glycine was calculated based on the amounts of DFG reacted." This table also
+      independently confirms the sampling grid used for the two figures:
+      5/10/15/30/45/60/75/90/120/150/180 min.
+  conditions:
+    A: {T_C: 100, pH: 5.5}
+    B: {T_C: 100, pH: 6.8}
+    C: {T_C: 120, pH: 5.5}
+    D: {T_C: 120, pH: 6.8}
+  series:
+    - condition: A
+      T_C: 100
+      pH: 5.5
+      points: [[5, 43.40], [15, 57.89], [30, 53.61], [45, 78.23], [60, 79.69], [75, 81.46], [90, 72.39], [120, 65.03], [180, 78.31]]
+      not_analysed_at: [10, 150]
+    - condition: B
+      T_C: 100
+      pH: 6.8
+      points: [[15, 71.02], [30, 93.85], [45, 87.44], [60, 84.91], [90, 78.42], [120, 76.59], [150, 80.14], [180, 81.45]]
+      not_analysed_at: [5, 10, 75]
+    - condition: C
+      T_C: 120
+      pH: 5.5
+      points: [[5, 25.87], [10, 62.05], [15, 59.56], [30, 69.79], [45, 66.20], [60, 71.95], [90, 74.20], [120, 70.18]]
+      not_analysed_at: [75, 150, 180]
+    - condition: D
+      T_C: 120
+      pH: 6.8
+      points: [[10, 83.92], [15, 94.72], [30, 95.82], [45, 92.36], [60, 84.41], [90, 84.05], [120, 86.39]]
+      not_analysed_at: [5, 75, 150, 180]
+
+file_verification:
+  status: verified_table_and_figure_shape
+  date: 2026-08-27
+  wave: Q
+  summary: >-
+    THIS FILE IS FULLY VERIFIED AND NEEDED NO DATA CORRECTIONS. 32 table values verified
+    exactly; 76 figure points independently re-extracted and reproduced to within 0.01 mmol/L.
+  what_was_checked:
+    - "DOI 10.1016/s0008-6215(03)00173-3 resolved via api.crossref.org: 'Kinetic modelling of Amadori N-(1-deoxy-d-fructos-1-yl)-glycine degradation pathways. Part I-Reaction mechanism', Carbohydrate Research 338(16):1651-1663, 2003, Martins / Marcelis / van Boekel. Exact match."
+    - "Companion DOI 10.1016/s0008-6215(03)00174-5 resolved: Part II - Kinetic analysis, Carbohydr Res 338(16):1665-1678, Martins & van Boekel. Exact match."
+    - "Thesis retrieved and the page mapping confirmed: PDF page 77 carries the printed page number 67 and both Figures 4.1.1 and 4.1.2; PDF page 78 carries printed page 68 and Table 4.1.1. Both mappings as claimed."
+    - "Table 4.1.1: all 32 values and all 12 n.a. cells verified digit for digit."
+    - "Figures 4.1.1 and 4.1.2: all 76 markers re-extracted from the raw PDF content stream with a calibration re-derived from the plot frames and axis ticks. Every one of the 76 points reproduced (max deviation 0.01 mmol/L). Marker counts per symbol match the series lengths exactly."
+    - "Symbol legend verified from the retrieved captions, which read: 'DFG thermal degradation at 100 C (open triangle, pH 5.5; filled triangle, pH 6.8) and at 120 C (open circle, pH 5.5; filled circle, pH 6.8)' and the same key for Figure 4.1.2. The symbol-to-condition mapping asserted in this file is correct."
+    - "attribution_validation quotes verified verbatim in the thesis body on printed page 67: 'After heating for 30 minutes at 120 C and pH 6.8, 1 was completely degraded whereas after 180 minutes at 100 C and pH 5.5, only approximately 57% of the initial concentration had reacted' and 'when comparing the system at 100 C and pH 6.8 with the system at 120 C and pH 5.5, a similar degradation rate was observed'."
+    - "reactant_concentration_note verified verbatim. Thesis Materials and Methods (printed p. 33 = PDF p. 42) reads: 'N-(1-deoxy-D-fructos-1-yl)-glycine (0.237 g, 10 mmol) was dissolved in phosphate buffer (100 mL, 0.1 M K2HPO4 / KH2PO4, pH 6.8 and pH 5.5) and heated at 100 C for a maximum of 4 hours and at 120 C for a maximum of 3 hours, in an oil bath, in screw-capped glass tubes (Schott, 16 x 160 mm). ... Each reaction mixture was prepared, heated and analysed in at least duplicate.' The 0.237 g / 10 mmol inconsistency this file flags is REAL and is in the thesis, not introduced here. Buffer, vessel, durations and replication are all confirmed."
+    - "'synthesised in-house (Kroh method)' confirmed: thesis printed p. 34 (PDF p. 43) reads 'Synthesis of N-(1-deoxy-D-fructos-1-yl)-glycine (DFG): Adapted from Kroh et al [1].'"
+  corrections_applied:
+    - "extraction.excluded rewrote: it described the discarded non-data geometry as 'a filled-diamond series', which does not exist on this page. The model fits are stroked polylines. The exclusion itself was correct."
+  residual_uncertainty: >-
+    These 76 points remain FIGURE READ-OFFS. The re-extraction proves the numbers faithfully
+    recover where the authors' plotting program placed each marker; it cannot prove those
+    marker positions equal the numbers in the authors' spreadsheet. Treat +/- 0.04 mmol/L
+    (Figure 4.1.1) and +/- 0.03 mmol/L (Figure 4.1.2) as a floor on the error, not a total.
+provenance_note: >-
+  Figures 4.1.1 and 4.1.2 and Table 4.1.1 of the Martins (2003) Wageningen thesis
+  (= Martins, Marcelis & van Boekel 2003, Carbohydr Res 338:1651-1663). Only plotted
+  measurement markers were extracted; fit curves were identified and discarded. Nothing is
+  interpolated, smoothed, averaged or synthesised.
+value_for_this_repo: >-
+  This is the cleanest available constraint on ONE step: the decomposition of the Amadori
+  compound, isolated from its own formation, at two temperatures and two pH values. It is
+  the natural target for the Amadori-degradation branch of the network, and the pH pair at
+  fixed T is the only clean pH lever in this whole directory.
+what_a_human_with_access_should_get_next: >-
+  Chapter 4 (thesis section 4.1) also plots 1-DG, 3-DG, methylglyoxal, glucose, mannose,
+  formic acid, acetic acid and melanoidins during DFG degradation (thesis Figures 4.1.3 to
+  4.1.7, PDF pages 78-82) and the Chapter 4.2 model-fit figures (PDF pages 93-105) replot
+  the same measurements at four conditions. Those are vector figures in the same PDF and
+  can be extracted with the identical method; they were not done in this pass for time
+  reasons, NOT because they are inaccessible.
+

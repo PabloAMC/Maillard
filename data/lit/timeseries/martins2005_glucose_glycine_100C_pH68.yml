@@ -1,0 +1,219 @@
+# Martins & van Boekel -- glucose/glycine multiresponse kinetics at 100 C, pH 6.8
+# NOTHING IN THIS FILE IS WIRED INTO THE MODEL OR THE CALIBRATION. Data only.
+source:
+  citation: "Martins, S.I.F.S. & van Boekel, M.A.J.S. (2005) A kinetic model for the glucose/glycine Maillard reaction pathways. Food Chemistry 90(1-2):257-269."
+  doi: "10.1016/j.foodchem.2004.04.006"
+  doi_verified: "resolved via api.crossref.org 2026-08-27: title/journal/volume/pages/authors all match"
+  primary_source_used: "Martins, S.I.F.S. (2003) Unravelling the Maillard reaction network by multiresponse kinetic modelling. PhD thesis, Wageningen University, 170 pp. ISBN 90-5808-823-5. Chapter 5, Figure 5.9 (thesis p. 116 = PDF page 126)."
+  primary_source_url: "https://edepot.wur.nl/121418"
+  access: figure_readoff
+  retrieved: 2026-08-27
+  isbn_correction: "the ISBN was recorded as 90-5808-923-4; the thesis colophon (PDF page 4) prints 90-5808-823-5. Corrected 2026-08-27. The '170 pp' in the citation is correct and is printed on the same page."
+  page_mapping_verified: "PDF page 126 carries the printed page number 116 and Figure 5.9, exactly as claimed."
+system:
+  reactants: {glucose: 0.2 M, glycine: 0.2 M}
+  conditions:
+    T_C: 100
+    pH: 6.8
+    pH_note: "initial pH; the paper reports that pH drops during heating (the effect of pH is concealed in the rate constants). pH was NOT controlled in this experiment."
+    buffer: "phosphate, 0.1 mol/L"
+    matrix: aqueous
+    vessel: "screw-capped glass tubes (Schott 16 x 160 mm), 10 mL, oil bath"
+    filtration: "solutions filtered 0.2 um before heating"
+  replication: "each reaction mixture prepared, heated and analysed in at least duplicate (thesis Materials & Methods, Chapter 5). Figure 5.9 shows up to 3 markers per time point."
+  conditions_verified: >-
+    VERIFIED 2026-08-27 verbatim against the thesis Materials and Methods (printed p. 33 =
+    PDF p. 42), "Preparation of reaction mixtures (Chapter 5)": "Equimolar solutions of
+    glucose and glycine (0.2mol/L) were prepared in phosphate buffer (10 mL, 0.1 mol/L,
+    pH 6.8), filtered (0.2 um, Schleicher & Schuell) and heated at 80, 90, 100, 110 and
+    120 C in an oil bath, in screw-capped glass tubes (Schott, 16 x 160 mm). ... Each
+    reaction mixture was prepared, heated and analysed in at least duplicate." Reactant
+    concentrations, buffer, pH, filtration, vessel, volume, heating method and replication
+    are all confirmed. The independent marker census below shows the replication was in fact
+    3-fold, not merely duplicate.
+extraction:
+  method: vector_coordinate_extraction
+  method_note: >-
+    The figures in the thesis PDF are VECTOR graphics, not raster images. Each plotted
+    marker is a distinct path in the PDF content stream. The marker centres were read
+    directly out of the content stream and mapped to data coordinates with a linear
+    calibration anchored on the plot-area frame, which was independently confirmed by the
+    axis tick-mark coordinates (agreement better than 0.15 pt on every axis). This is far
+    more precise than eyeball read-off but it is STILL A FIGURE READ-OFF, not a table:
+    it recovers where the authors' plotting program placed the marker, not the number in
+    the authors' spreadsheet.
+  x_axis_note: >-
+    Extracted marker x-coordinates cluster at 0.0, 15.0-15.5, 29.4-30.0, 44.8-45.4,
+    59.3-59.8, 89.2-90.5, 119.1-120.4 and 149.7-150.5 min. They are reported below on the
+    nominal grid 0/15/30/45/60/90/120/150 min. The thesis does not tabulate the sampling
+    times; the grid is inferred from the marker positions (spread <= 1.1 min).
+  estimated_uncertainty: "+/- 0.3% of each panel's full scale from calibration and marker centring, PLUS whatever rounding the authors' plotting program applied. Cross-checks below suggest the true error is under 1%."
+  cross_checks:
+    - "glucose and glycine at t=0 recover 198.3-199.9 and 199.8-201.8 mmol/L against a known charged concentration of 200 mmol/L (0.2 M) -- i.e. within 1%."
+    - "the same experiment is replotted in thesis Figure 5.10 (100 C series). Independently extracting that figure gives glucose 183.3/190.2 at 15 min (vs 183.3/190.0 here), 169.3/172.2/179.0 at 30 min (vs 170.0/173.2/179.9), 167.9/169.3 at 45 min (vs 166.6/168.4), 153.9/156.8/158.2 at 60 min (vs 153.2/156.7/158.3) -- agreement ~1 mmol/L on a 250 mmol/L scale."
+  replicate_note: >-
+    Every DISTINCT marker position is listed. Where two or three replicate markers were
+    drawn at exactly the same coordinates they cannot be separated and appear once, so the
+    number of values at a time point is a LOWER BOUND on the number of replicates. Values
+    within one time point are NOT averaged.
+  symbol_legend_source: "Figure 5.9 caption, read at 500 dpi: A glucose (open diamond), glycine (plus); B fructose (filled triangle), DFG (open circle), methylglyoxal (open square); C formic acid (cross), acetic acid (filled diamond); D 1-deoxyglucosone (filled circle), 3-deoxyglucosone (open triangle); E melanoidins (asterisk)."
+  melanoidin_basis: "melanoidins are reported by the authors in mmol/L via an extinction coefficient of 0.64 +/- 0.03 L.mmol-1.cm-1 at 470 nm (thesis section 3.3); they are an absorbance-derived quantity, not a directly measured molar concentration."
+  axis_ranges_verified: >-
+    VERIFIED 2026-08-27 against the retrieved figure. The printed axis labels of Figure 5.9
+    are A: 0-250 mmol/L, B: 0-20 mmol/L, C: 0-18 'Acids mmol/L', D: 0-0.8 'DG mmol/L',
+    E: 0-10 'Mel mmol/L', all against Time 0-200 min. Every panel range asserted in the
+    series below is correct. The plot frames and tick marks in the content stream confirm
+    the same ranges to better than 0.05 pt.
+  symbol_assignment_verified: >-
+    The Figure 5.9 caption in the retrieved PDF reads: "A: Glucose (diamond), Glycine (+);
+    B: Fructose (filled triangle), N-(1-deoxy-D-fructos-1-yl)-glycine (open circle),
+    methylglyoxal (square); C: Formic acid (.), Acetic acid (.); D: 1-deoxyglucosone (.),
+    3-deoxyglucosone (open triangle); E: Melanoidins (.)" -- several marker glyphs do not
+    survive text extraction. Independent path-geometry classification finds exactly the
+    shapes the caption implies: panel B holds triangles, circles and squares; panel C holds
+    crosses and diamonds; panel D holds circles and triangles; panel E holds only asterisks.
+    Panels B, D and E are therefore pinned by the caption alone. THE ONE ASSIGNMENT THE
+    CAPTION CANNOT SETTLE IS PANEL C, formic vs acetic acid. It is settled by the thesis
+    body, printed p. 109: "acetic acid was always formed in higher concentrations than
+    formic acid" and, of the glucose that degraded, the larger share "was acetic acid whereas
+    only 5% was formic acid"; thesis p. 122 repeats "the low amount of formic acid detected
+    relatively to acetic acid at pH 6.8". The larger series (reaching 13.57 mmol/L) is
+    therefore acetic acid and the smaller (reaching 2.77) is formic acid, as assigned here.
+  melanoidin_basis_verified: >-
+    Confirmed verbatim. The thesis states the melanoidin extinction coefficient for the
+    glucose/glycine system "was calculated to be 0.64 +/- 0.03" l.mmol-1.cm-1 at 470 nm
+    (printed p. 52), and Chapter 3 uses it to convert absorbance to mmol/L (printed p. 37:
+    "0.64 +/- 0.03 l.mmol-1.cm-1 at 470 nm. (See section 3.3) The concentration of melanoidins
+    is thus ..."). The caveat that melanoidins here are an absorbance-derived quantity stands.
+series:
+  - species: glucose
+    species_full: "glucose"
+    unit: mmol/L
+    data_quality: figure_readoff
+    panel: "A (open diamond, left axis 0-250 mmol/L)"
+    n_points: 21
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27. The raw PDF content stream of page 126 was re-parsed from scratch, markers classified by path geometry (diamond/triangle/circle/square as closed filled paths; plus/cross/asterisk as radiating stroked segments whose shared start point IS the data point), and the axis calibration re-derived from the drawn plot frame and tick marks. All 21 points reproduced exactly, to the last printed digit. The marker census for this panel also matches: 24 markers drawn = 8 time points x 3 replicates, collapsing to the 21 distinct positions listed."}
+    points: [[0, 198.3], [0, 199.9], [15, 183.3], [15, 190.0], [30, 170.0], [30, 173.2], [30, 179.9], [45, 166.6], [45, 168.4], [60, 153.2], [60, 156.7], [60, 158.3], [90, 141.8], [90, 145.0], [90, 146.6], [120, 135.1], [120, 136.7], [120, 138.3], [150, 128.5], [150, 130.1], [150, 135.1]]
+  - species: glycine
+    species_full: "glycine"
+    unit: mmol/L
+    data_quality: figure_readoff
+    panel: "A (plus, left axis 0-250 mmol/L)"
+    n_points: 16
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27. The raw PDF content stream of page 126 was re-parsed from scratch, markers classified by path geometry (diamond/triangle/circle/square as closed filled paths; plus/cross/asterisk as radiating stroked segments whose shared start point IS the data point), and the axis calibration re-derived from the drawn plot frame and tick marks. All 16 points reproduced exactly, to the last printed digit. The marker census for this panel also matches: 24 markers drawn = 8 time points x 3 replicates, collapsing to the 16 distinct positions listed."}
+    points: [[0, 199.8], [0, 201.8], [15, 191.6], [15, 193.2], [30, 186.5], [30, 188.5], [45, 181.8], [45, 183.4], [60, 179.8], [60, 181.8], [90, 178.3], [90, 179.8], [120, 175.2], [120, 176.7], [150, 170.1], [150, 171.6]]
+  - species: fructose
+    species_full: "fructose"
+    unit: mmol/L
+    data_quality: figure_readoff
+    panel: "B (filled triangle, axis 0-20 mmol/L)"
+    n_points: 22
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27. The raw PDF content stream of page 126 was re-parsed from scratch, markers classified by path geometry (diamond/triangle/circle/square as closed filled paths; plus/cross/asterisk as radiating stroked segments whose shared start point IS the data point), and the axis calibration re-derived from the drawn plot frame and tick marks. All 22 points reproduced exactly, to the last printed digit. The marker census for this panel also matches: 24 markers drawn = 8 time points x 3 replicates, collapsing to the 22 distinct positions listed."}
+    points: [[0, 0.00], [15, 2.41], [15, 2.82], [15, 3.35], [30, 4.54], [30, 4.80], [30, 5.61], [45, 6.01], [45, 6.55], [45, 7.08], [60, 8.00], [60, 8.81], [60, 9.60], [90, 10.94], [90, 11.19], [90, 11.47], [120, 12.41], [120, 12.66], [120, 13.20], [150, 13.60], [150, 14.67], [150, 14.80]]
+  - species: DFG
+    species_full: "N-(1-deoxy-D-fructos-1-yl)-glycine (Amadori compound)"
+    unit: mmol/L
+    data_quality: figure_readoff
+    panel: "B (open circle, axis 0-20 mmol/L)"
+    n_points: 19
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27. The raw PDF content stream of page 126 was re-parsed from scratch, markers classified by path geometry (diamond/triangle/circle/square as closed filled paths; plus/cross/asterisk as radiating stroked segments whose shared start point IS the data point), and the axis calibration re-derived from the drawn plot frame and tick marks. All 19 points reproduced exactly, to the last printed digit. The marker census for this panel also matches: 24 markers drawn = 8 time points x 3 replicates, collapsing to the 19 distinct positions listed."}
+    points: [[0, 0.08], [15, 5.55], [15, 5.67], [30, 8.74], [30, 8.87], [45, 10.60], [45, 10.87], [45, 11.41], [60, 11.27], [60, 11.80], [60, 11.94], [90, 11.80], [90, 12.20], [90, 12.47], [120, 11.13], [120, 11.66], [120, 12.07], [150, 10.60], [150, 10.87]]
+  - species: 1-DG
+    species_full: "1-deoxyglucosone (1-deoxy-2,3-hexodiulose)"
+    unit: mmol/L
+    data_quality: figure_readoff
+    panel: "D (filled circle, axis 0-0.8 mmol/L)"
+    n_points: 17
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27. The raw PDF content stream of page 126 was re-parsed from scratch, markers classified by path geometry (diamond/triangle/circle/square as closed filled paths; plus/cross/asterisk as radiating stroked segments whose shared start point IS the data point), and the axis calibration re-derived from the drawn plot frame and tick marks. All 17 points reproduced exactly, to the last printed digit. The marker census for this panel also matches: 24 markers drawn = 8 time points x 3 replicates, collapsing to the 17 distinct positions listed."}
+    points: [[0, 0.003], [15, 0.040], [15, 0.051], [15, 0.062], [30, 0.073], [30, 0.083], [45, 0.094], [60, 0.094], [60, 0.104], [90, 0.115], [90, 0.120], [90, 0.131], [120, 0.131], [120, 0.142], [120, 0.152], [150, 0.142], [150, 0.152]]
+  - species: 3-DG
+    species_full: "3-deoxyglucosone (3-deoxy-2-hexosulose)"
+    unit: mmol/L
+    data_quality: figure_readoff
+    panel: "D (open triangle, axis 0-0.8 mmol/L)"
+    n_points: 15
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27. The raw PDF content stream of page 126 was re-parsed from scratch, markers classified by path geometry (diamond/triangle/circle/square as closed filled paths; plus/cross/asterisk as radiating stroked segments whose shared start point IS the data point), and the axis calibration re-derived from the drawn plot frame and tick marks. All 15 points reproduced exactly, to the last printed digit. The marker census for this panel also matches: 24 markers drawn = 8 time points x 3 replicates, collapsing to the 15 distinct positions listed."}
+    points: [[0, 0.000], [15, 0.139], [15, 0.149], [15, 0.192], [30, 0.400], [30, 0.411], [45, 0.549], [60, 0.640], [90, 0.709], [90, 0.720], [120, 0.731], [120, 0.752], [120, 0.757], [150, 0.698], [150, 0.731]]
+  - species: methylglyoxal
+    species_full: "methylglyoxal"
+    unit: mmol/L
+    data_quality: figure_readoff
+    panel: "B (open square, axis 0-20 mmol/L)"
+    n_points: 20
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27. The raw PDF content stream of page 126 was re-parsed from scratch, markers classified by path geometry (diamond/triangle/circle/square as closed filled paths; plus/cross/asterisk as radiating stroked segments whose shared start point IS the data point), and the axis calibration re-derived from the drawn plot frame and tick marks. All 20 points reproduced exactly, to the last printed digit. The marker census for this panel also matches: 24 markers drawn = 8 time points x 3 replicates, collapsing to the 20 distinct positions listed."}
+    points: [[0, 0.08], [15, 0.61], [15, 0.75], [30, 0.88], [30, 1.01], [30, 1.14], [45, 1.28], [45, 1.54], [60, 1.82], [60, 1.94], [60, 2.48], [90, 3.01], [90, 3.41], [90, 3.81], [120, 4.07], [120, 4.20], [120, 5.14], [150, 5.94], [150, 6.08], [150, 6.74]]
+  - species: formic_acid
+    species_full: "formic acid"
+    unit: mmol/L
+    data_quality: figure_readoff
+    panel: "C (cross, axis 0-18 mmol/L)"
+    n_points: 15
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27. The raw PDF content stream of page 126 was re-parsed from scratch, markers classified by path geometry (diamond/triangle/circle/square as closed filled paths; plus/cross/asterisk as radiating stroked segments whose shared start point IS the data point), and the axis calibration re-derived from the drawn plot frame and tick marks. All 15 points reproduced exactly, to the last printed digit. The marker census for this panel also matches: 24 markers drawn = 8 time points x 3 replicates, collapsing to the 15 distinct positions listed."}
+    points: [[0, 0.00], [15, 0.26], [30, 0.48], [30, 0.74], [45, 0.85], [45, 0.96], [60, 0.96], [60, 1.10], [60, 1.33], [90, 1.81], [90, 1.92], [90, 2.06], [120, 2.29], [120, 2.40], [150, 2.77]]
+  - species: acetic_acid
+    species_full: "acetic acid"
+    unit: mmol/L
+    data_quality: figure_readoff
+    panel: "C (filled diamond, axis 0-18 mmol/L)"
+    n_points: 19
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27. The raw PDF content stream of page 126 was re-parsed from scratch, markers classified by path geometry (diamond/triangle/circle/square as closed filled paths; plus/cross/asterisk as radiating stroked segments whose shared start point IS the data point), and the axis calibration re-derived from the drawn plot frame and tick marks. All 19 points reproduced exactly, to the last printed digit. The marker census for this panel also matches: 24 markers drawn = 8 time points x 3 replicates, collapsing to the 19 distinct positions listed."}
+    points: [[0, 0.00], [15, 0.37], [15, 0.48], [30, 1.81], [30, 1.92], [45, 3.84], [45, 4.09], [45, 4.45], [60, 5.28], [60, 5.41], [60, 6.24], [90, 9.36], [90, 9.59], [120, 10.92], [120, 11.76], [120, 11.99], [150, 12.72], [150, 13.09], [150, 13.57]]
+  - species: melanoidins
+    species_full: "melanoidins"
+    unit: mmol/L
+    data_quality: figure_readoff
+    panel: "E (asterisk, axis 0-10 mmol/L)"
+    n_points: 19
+    verification: {status: verified_figure_shape, date: 2026-08-27, note: "INDEPENDENTLY RE-EXTRACTED 2026-08-27. The raw PDF content stream of page 126 was re-parsed from scratch, markers classified by path geometry (diamond/triangle/circle/square as closed filled paths; plus/cross/asterisk as radiating stroked segments whose shared start point IS the data point), and the axis calibration re-derived from the drawn plot frame and tick marks. All 19 points reproduced exactly, to the last printed digit. The marker census for this panel also matches: 24 markers drawn = 8 time points x 3 replicates, collapsing to the 19 distinct positions listed."}
+    points: [[0, 0.00], [15, 0.00], [15, 0.13], [15, 0.20], [30, 0.47], [30, 0.61], [30, 0.67], [45, 1.34], [60, 2.22], [60, 2.34], [60, 2.42], [90, 4.63], [90, 4.76], [90, 4.83], [120, 6.31], [120, 6.44], [120, 6.91], [150, 8.05], [150, 8.66]]
+file_verification:
+  status: verified_figure_shape
+  date: 2026-08-27
+  wave: Q
+  summary: >-
+    ALL 183 POINTS INDEPENDENTLY RE-EXTRACTED AND REPRODUCED EXACTLY. No data value in this
+    file required correction. One metadata error was found and fixed (the ISBN).
+  method_of_verification: >-
+    The thesis PDF was downloaded fresh and page 126 re-processed with a purpose-written
+    content-stream parser that does not share code or calibration with the original harvest.
+    Markers were classified by path geometry rather than by bounding-box heuristics: filled
+    closed paths give diamond / triangle / circle / square, and the +, x and asterisk markers
+    are drawn as 4 or 6 short segments radiating from a common start point, so that shared
+    start point IS the plotted datum and is recovered with zero centring error. Axis
+    calibration was re-derived from the drawn plot frames and their tick marks. PDF clipping
+    paths (operator 'n') and the stroked M3 model-fit polylines were identified and excluded.
+  per_panel_result:
+    - "panel A: 24 diamonds -> 21 distinct glucose positions, and 24 plus markers -> 16 distinct glycine positions. Both match this file exactly."
+    - "panel B: 22 fructose, 19 DFG, 20 methylglyoxal distinct positions. All match exactly."
+    - "panel C: 15 formic, 19 acetic distinct positions. All match exactly."
+    - "panel D: 17 1-DG, 15 3-DG distinct positions. All match exactly."
+    - "panel E: 19 melanoidin distinct positions. All match exactly."
+    - "Every panel draws 24 markers per species = 8 sampling times x 3 replicates. The 'up to 3 markers per time point' claim in system.replication is exact, and the replicate_note explanation of why some time points list fewer than 3 values is correct."
+  independent_cross_check: >-
+    The same experiment is replotted as Figure 5.10 on thesis p. 121. That figure was
+    extracted separately (see martins2005_glucose_glycine_80_100_120C_pH68.yml) and its
+    100 C series agrees with this file at EVERY shared time point for all ten species. The
+    largest disagreement found is 1.3 mmol/L for glucose at 45 min (0.5% of that panel's
+    250 mmol/L full scale) and 0.54 mmol/L for DFG at 60-120 min (2.2% of Figure 5.10's
+    25 mmol/L DFG scale). Typical disagreement is well under 1% of full scale. Two figures
+    drawn from one data set do not agree to better than the resolution at which each was
+    plotted, and this is that resolution.
+  residual_uncertainty: >-
+    STILL A FIGURE READ-OFF. The re-extraction shows the numbers faithfully recover the
+    marker positions the authors' plotting program produced; it cannot show those positions
+    equal the authors' underlying measurements. The +/- 0.3% of panel full scale quoted in
+    extraction.estimated_uncertainty is a floor.
+provenance_note: >-
+  Figure 5.9 of the Martins (2003) Wageningen thesis (= Fig. 5 of Martins & van Boekel 2005,
+  Food Chem 90:257-269), which plots the measured concentrations (dots) together with the
+  fitted M3 model (lines). ONLY THE DOTS were extracted; the fitted lines were identified
+  and discarded, as were PDF clipping paths (content-stream operator 'n') that a naive
+  extractor mistakes for markers. No point here is interpolated, smoothed, averaged or
+  otherwise synthesised.
+what_a_human_with_access_should_get_next: >-
+  The underlying concentration tables were never published: both the thesis and the Food
+  Chemistry paper present these data only as figures. The authors' raw data would have to
+  come from Wageningen (Food Quality and Design group) or from S.I.F.S. Martins directly.
+  Failing that, this vector extraction is the best available reconstruction and the
+  numbers above are what should be used.
+
