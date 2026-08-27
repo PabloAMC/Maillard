@@ -3498,3 +3498,186 @@ factors (R^2 > 0.95). Table 2.3 identifies the nine: samples 4, 12, 13, 14, 16 (
      regeneration, and the committed `li_2026` artifacts had drifted away from their own
      generator as a result. Fixed here for the hold-out generator. Whether the same
      round-everything pattern exists in other generators was NOT audited. [P]
+
+---
+
+## Wave S2 — directional (ordinal) accuracy panel + three hard retrievals (2026-08-27)
+
+Read-only on `src/` and `data/`. New files: `docs/validation/directional_claims_panel.yml`
+(52 claims, 14 sources) and `docs/validation/directional_accuracy_report.md`. The scoring
+runner was deliberately left in the session scratchpad, NOT committed — an in-repo
+directional scorer becomes an optimisation target the moment it enters CI, and this panel's
+value is that the model has never seen it. Nothing was tuned.
+
+### Why: the repo has never measured the thing it is actually used for
+
+Every validation artifact here measures ABSOLUTE accuracy, and reports it honestly as bad.
+But the model's real use is ORDINAL — which sugar, which isolate, which way to move a knob.
+Nobody had scored that. This wave built the evidence base and ran it.
+
+### Headline: 18/29 (62%) on strictly independent claims
+
+| Bucket | Agree / evaluable | Unevaluable |
+|---|---|---|
+| **Strictly independent (headline)** | **18 / 29 (62%)** | 8 |
+| + system-overlap (ratios the fit cancels out of) | 6 / 6 (100%) | 0 |
+| Screening total | 24 / 35 (69%) | 8 |
+| Fit-adjacent (per-row fit targets, **excluded**) | 9 / 9 (100%) | 0 |
+
+That gradient — 100% on fitted rows, 100% on system-overlap, 62% out of sample — is the
+finding. Most rows are binary, so chance is ~50%: the directional edge is real but modest.
+
+### The failures are NOT spread evenly. Two knobs carry almost all of them.
+
+| Category | Score | | Category | Score |
+|---|---|---|---|---|
+| sugar_identity | **8/8** | | **ph** | **2/7** |
+| temperature | **6/8** | | **moisture_aw** | **0/3** |
+| additive_cysteine | 3/4 | | time | 2/2 |
+| lipid_lane | 2/2 | | matrix_identity | 1/1 |
+
+**Excluding pH and aw the headline is 16/19 (84%). Restricted to pH and aw it is 2/10 (20%)
+— worse than a coin.** The model is a usable screening tool over sugar identity, precursor
+loading, temperature and time, and an actively misleading one over pH and moisture.
+
+### THREE CODE FINDINGS, verifiable by inspection (not fixed — `src/` not owned this wave)
+
+1. **`ReactionConditions.get_ph_multiplier` is dead on the prediction path.** It encodes the
+   documented physics (pyrazines alkaline-favoured, 0.2→8.2 sigmoid; furans/thiols
+   acid-favoured, 4.9x boost) and is unit-tested for the correct signs in
+   `tests/unit/test_conditions.py`. `grep -rn get_ph_multiplier src/` finds it ONLY in
+   `kinetics.py`, `pathway_ranker.py`, `cantera_export.py`.
+   `benchmark_validation._run_benchmark_recommendation` calls `conditions.get_rate_constant()`,
+   which applies `_ionization_correction` + `_water_activity_correction` and **not**
+   `get_ph_multiplier`. Written, tested, and never executed where it matters. **[P]**
+2. **The pyrazine branch of `_ionization_correction` (`conditions.py:310`) is unreachable.**
+   It keys on the substring `"pyrazine"` in the reaction-family name. The families the
+   SMIRKS engine actually emits are `Aminoketone_Condensation`, `Enolisation_2_3`,
+   `Enolisation_2_3_Amadori`, `Retro_Aldol_Fragmentation`, … — none contains "pyrazine", so
+   the branch returns 1.0 at every pH. Net effect: the model moves 2,5-dimethylpyrazine the
+   WRONG WAY with pH in every system tested, against two independent direct measurements
+   (Laemont & Barringer 2023 measure 26.6 → 37.4 → 68.2 ppb over pH 4→7→9; model gives
+   99.5 → 16.8 → 14.9). **[P]**
+3. **`_water_activity_correction` is correctly shaped and effectively inert.** It implements
+   Labuza with a real peak at aw 0.65 and a 5x range — but is applied to only 2 of the 7
+   emitted families (`Amadori_Rearrangement`, `Strecker_Degradation`), neither on the
+   furfural/HMF track. At the observable the residual is a 4.9% wiggle (HMF 570 → 598 → 594
+   over aw 0.25 → 0.65 → 0.95), below any decision-relevant threshold. This is a ROUTING
+   fix, not a modelling one. **[P]**
+
+Also: **the model can only make acrylamide go up with temperature** (TEMP-01, ACR-02). Ma
+2024 measures 130 > 150 > 170 °C; a review places the acrylamide maximum at 160–180 °C. The
+model has no acrylamide destruction term. For a tool whose pitch includes process-safety
+screening, this is the most consequential single miss in the panel.
+
+### Eight measured scope limits (each probed against the running model, not assumed)
+
+* **Ribose and xylose are indistinguishable** — identical predictions to 4+ s.f. on every
+  observable. Ni 2021 measures xylose giving 2.3x the FFT of ribose while ribose gives 1.8x
+  the MFT of xylose. Any pentose recommendation is a coin flip on this axis.
+* **No α-dicarbonyls, no CML, no CEL** anywhere in the output — despite
+  `cml_cel_commercial_pbma_Foods2023.json` existing as a benchmark.
+* **No methionine Strecker branch** — methionine + glucose at 140 °C returns ZERO named
+  volatiles. No methional, though it is one of the largest responses in Trikusuma's table.
+* **`MATRIX_BENCHMARK_PROFILES` has two entries.** Brown rice, which carries 14–20x the
+  hexanal of either legume isolate in Pratap-Singh Table 1, cannot be ranked at all.
+* **The matrix lane and free lane share no observable** — a protein isolate emits only the
+  four lipid markers, so "what happens to pyrazines in a pea beverage" is unanswerable.
+* **No off-note can go DOWN with heat.** Trikusuma measures beany 3.3 → 1.5 while
+  oxidized/painty rises 1.0 → 2.7 under the same UHT step; all four matrix markers rise
+  monotonically with thermal load.
+* **2-Pentylfuran has no Maillard route**, only a lipid one, so the measured hexose > pentose
+  ordering for it cannot be represented.
+
+### MISSION 2 — three hard retrievals
+
+**2a. Trikusuma — CONFIRMED.** `pea_isolate_uht_140C_Trikusuma2019.json`'s 782 / 163 / 24 ppb
+are real. Source: **Trikusuma, M., MS thesis, Ohio State University 2018**, OhioLINK ETD
+accession `osu1531495328317918`, open access — the direct precursor of the paywalled paper.
+Table 6, p.35: hexanal 781.72 ± 58.59, 2-pentylfuran 163.16 ± 15.06, nonanal 23.98 ± 0.80
+µg/L, "Processed" column. The ±8/9/4% in the benchmark match the SD-derived RSDs (7.5/9.2/3.3%).
+Conditions match (140 °C, 6 s hold, pH 7.16 processed). **Two curation notes:** the canonical
+citation year is **2020** (Food Chem 312:126082), not 2019; and the values are the Processed
+column, not Control (331/59/8) or Aged (683/197/22) — the `heated_matrix` state label is
+load-bearing and deserves an explicit note in the file. [O]
+
+**2b. Hofmann & Schieberle 1998 — STILL OPEN.** Every route exhausted; body closed
+everywhere (ACS 403, Unpaywall `oa_locations: []`, OpenAlex/S2 CLOSED, 5 OA citing papers
+pulled in full text — none reproduces the yields, Google Books zero volumes, Cerny 2015
+cites it 5x and quotes no number). Only quantitative text obtainable is the abstract, whose
+mol % figures (1.4 / 0.05) belong to a DRY 180 °C intermediate system, not the benchmark's.
+**Arithmetic, written out:** MFT/FFT MW 114.17; on the assumed 10 mM basis the repo's ppb
+imply **MFT 0.0300 mol %** and **FFT 0.0175 mol %** (342e-6/114.17/0.010×100). Forward, the
+abstract's 1.4 mol % would give 15 984 ppb (46.7x) and 0.05 mol % would give 571 ppb (2.85x).
+Not confirmed, not refuted. **Three things for the owner:**
+  1. The implied yields are chemically plausible but trace to nothing.
+  2. **The conditions appear misattributed.** Cerny 2015 verbatim: Hofmann & Schieberle's
+     aqueous ribose/cysteine model was **145 °C / 20 min at 1:3 cysteine:ribose**; the
+     benchmark's **140 °C / 30 min / equimolar** is the **Mottram & Nobrega 2002**
+     (`10.1021/jf0200826`) protocol — and they reported headspace GC-MS, not solution ppb,
+     so they are not the source of 342/200 either.
+  3. **The 10 mM basis is itself unverified**, so the conversion carries a free multiplicative
+     parameter — sitting underneath the panel's TIGHTEST contract (1.45x / 0.09 dex).
+  Two clean resolutions only: ILL/institutional access to the body, or re-express the target
+  in the paper's native mol % and drop the ppb. `data/` not edited (concurrent agent owns it). [O]
+
+**2c. Brands & van Boekel 2001 — RECOVERED. The "unreadable scan" finding was WRONG.**
+`data/lit/timeseries/brands_sugar_casein_120C_pH68.yml` asserts the multiresponse data
+"exist ONLY as figures in a 1-bit 200 dpi scan… reading points off those figures would be
+eyeball estimation and was NOT attempted." The scan IS bitonal CCITT at 200 dpi, but
+rendered at 400 dpi the markers are 20–25 px across and unambiguous — verified directly by
+rendering the page and inspecting the annotated overlay. **Also: DOI `10.1021/jf001430b` is
+"Reactions of Monosaccharides during Heating of Sugar−Casein Systems", and thesis Chapter 2
+(PDF pp. 16–33) IS that paper verbatim** — the 2001 data were inside a PDF already in the
+scratchpad the whole time.
+  Recovered (all 120 °C, 150 mM sugar, 3% Na-caseinate, 0.1 M phosphate, pH₀ 6.8): full
+  glucose–casein and fructose–casein trajectories for glucose, fructose, formic acid, acetic
+  acid, lysine residues and Amadori compound at 0/2/5/10/15/20/30/40 min; pH and total acid
+  by titration AND by HPLC; A420 split total/protein/sugar plus protein-bound melanoidins;
+  the isolated-Amadori control (Fig 2.7). **Plus the complete fitted kinetic model:** Scheme
+  4.1's 9 ODEs, Table 4.1's 11 rate constants ± 95% CI at 120 °C, **Table 4.2's Arrhenius set
+  at 90/100/110/120/130 °C with Ea per step**, and Schemes 4.3/4.4 with the pH correction and
+  arginine. Tables 4.1/4.5 and all Scheme-4.4 ODEs verified digit-for-digit against 400-dpi
+  renders.
+  **Four independent validations** (none fitted): t=0 glucose reads 150.0 vs a 150 mM nominal
+  charge; Fig 2.3's HPLC acids (different figure, different axis) match Fig 2.1/2.2's
+  formic+acetic to within 0.12 mmol/L at all ten points; the thesis's own stated pH drops
+  (0.3 and 0.4 units) match the digitized 6.73→6.45 and 6.71→6.30; mass balance closes at
+  95% (101% including unidentified acids).
+  **Source defects flagged as-is:** Table 4.3 (pH 5.9) is cited on thesis p.55 but is not
+  printed anywhere; `d[M]/dt` uses `k14` where the system uses `k15` (thesis typo).
+  Data in `<scratchpad>/brands_out_tables.md` (362 lines) with overlay PNGs. **[O]**
+
+### Owner decisions this wave surfaces
+
+1. **Retract the false "not extractable" note** in `brands_sugar_casein_120C_pH68.yml` and
+   promote the trajectories as `data_quality: digitized_figure`. It is the reason a rich,
+   already-downloaded dataset sat unused. The Chapter 4 rate constants are arguably the
+   bigger prize: a published, fully-specified competing kinetic model at five temperatures
+   for exactly this chemistry — a far stronger comparator than any single benchmark row. [O]
+2. **Route `get_ph_multiplier` into the prediction path, or delete it.** Right now the repo
+   has tested pH physics that no prediction ever sees, which is worse than having none —
+   a reader inspecting `conditions.py` will conclude the model handles pH correctly. [O]
+3. **Guard pH and aw recommendations at runtime.** 2/10 is worse than chance and the failure
+   is systematic, not noisy. A user who moves pH on this model's advice is more likely to be
+   misled than helped. [O]
+4. **Trikusuma citation year → 2020**, and note the Processed-column provenance. [O]
+5. **Hofmann: either get the body, or move the benchmark to mol %.** [O]
+
+### What this score does and does not license (full text in the report)
+
+It licenses **screening** claims of a narrow shape — "which arm gives more of X" with pH and
+moisture held fixed — at roughly 84% on those axes. It licenses **nothing quantitative**: the
+panel never scores a magnitude, and where magnitudes are visible they are often poor even
+when the sign is right (SUG-13 gets glucose > fructose for furfural by 4.9x where the
+measurement is 1.2x). It licenses **no pH or moisture recommendation at all**.
+**62% is not a quality certificate** — chance is ~50%.
+
+Two caveats on the panel itself: it is **scoped to the model's own footprint** (chemistry the
+model cannot emit is recorded as unevaluable, not as failure, so this is not coverage of
+Maillard chemistry); and several literature systems are food matrices mapped onto a
+two-precursor aqueous model at assumed pH/aw, with the loose mappings flagged per claim.
+
+**If this panel is re-run after a model change, report the strictly-independent number and
+the per-category breakdown TOGETHER.** A headline that rose while pH stayed at 2/7 would be
+hiding the finding.
