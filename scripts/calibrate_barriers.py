@@ -2,10 +2,40 @@
 """
 scripts/calibrate_barriers.py
 
-Automates the fitting of "Barrier Offsets" per reaction family to minimize the error 
+Automates the fitting of "Barrier Offsets" per reaction family to minimize the error
 between framework simulations and experimental literature benchmarks (Mottram, Farmer).
 
 Uses Optuna for hyperparameter optimization of activation energies.
+
+!! THIS SCRIPT NO LONGER RUNS - ITS FIT TARGETS WERE DELETED - DO NOT RE-ANCHOR !!
+
+    Both benchmarks this script fits against were QUARANTINED on 2026-08-26 because a
+    citation audit could not locate a real literature source for either of them, and
+    then DELETED on the same date once source recovery confirmed that no such source
+    exists and that the values were invented:
+
+      * cys_ribose_150C_Mottram1994 - DOI resolves to an unrelated beef-bone protein
+        paper with no volatile data; no such Mottram 1994 paper is locatable. The
+        quantitative cysteine/sugar literature of that era reports FD factors or mol %
+        yields, never the absolute ppb triple this file claimed.
+      * cys_glucose_150C_Farmer1999 - dead DOI; Farmer never published a cysteine +
+        glucose model system, and four independent chemistry tells mark the numbers as
+        invented.
+
+    See data/benchmarks/quarantined/README.md ("Source recovery findings" and "Verdicts
+    executed") for the full evidence. Git history preserves both files.
+
+    The paths in BENCHMARKS below therefore no longer exist, so this script will fail
+    fast on any run. That is deliberate: a silent retarget onto surviving benchmarks
+    would quietly re-create the original problem (barriers fitted to whatever the panel
+    happens to contain). Retarget it consciously or delete it.
+
+    Its output, data/lit/calibration_offsets.json, is deliberately UNWIRED from the
+    runtime, and it MUST STAY UNWIRED. Fitting activation energies to unverifiable
+    numbers bakes a confabulation into every downstream prediction. Note that the sulfur
+    branch of src/barrier_constants.py was in fact once fitted against these two
+    benchmarks (commit 2ea7d12) - re-anchoring that branch is tracked as an open item in
+    tasks/audit_remediation.md.
 """
 
 import os
@@ -30,10 +60,15 @@ logger = get_logger(__name__)
 
 from src.barrier_constants import FAST_BARRIERS
 
-# Benchmarks to fit against
+# Benchmarks to fit against.
+# DELETED (2026-08-26): both sources were found fabricated by the citation audit and the
+# subsequent source recovery, and the files were removed from the repository (history
+# preserves them). These paths are intentionally left dangling so the script fails fast
+# instead of being silently retargeted. See the module docstring and
+# data/benchmarks/quarantined/README.md. Output remains unwired.
 BENCHMARKS = [
-    "data/benchmarks/cys_ribose_150C_Mottram1994.json",
-    "data/benchmarks/cys_glucose_150C_Farmer1999.json"
+    "data/benchmarks/quarantined/cys_ribose_150C_Mottram1994.json",
+    "data/benchmarks/quarantined/cys_glucose_150C_Farmer1999.json"
 ]
 
 NAME_TO_SMILES = {

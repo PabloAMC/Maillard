@@ -160,8 +160,27 @@ def _build_payload() -> dict[str, object]:
         benchmark_points = points_by_benchmark.get(str(summary_row.benchmark_id), [])
         return max(benchmark_points, key=lambda row: float(row["max_ratio"]), default=None)
 
-    worst_quantitative_benchmark = max(reference_quantitative_benchmarks, key=lambda row: float(row.max_ratio or 0.0), default=None)
+    # CONSISTENCY FIX (2026-08-27, audit remediation Part 2a): `worst_quantitative_ratio`
+    # is a max over ALL quantitative benchmarks, but `worst_quantitative_point` used to be
+    # selected from `reference_quantitative_benchmarks` (the reference_volatiles subset)
+    # only. The two happened to coincide until the Bolton1994 benchmark entered the panel,
+    # at which point the artifact would report a "worst quantitative benchmark ratio" of
+    # ~163x next to a "worst quantitative point" of Cerny at ~1.6x. The pair is now drawn
+    # from the same population (all quantitative benchmarks); the reference-only view it
+    # used to provide is preserved below under an explicitly-named key.
+    worst_quantitative_benchmark = max(quantitative_benchmarks, key=lambda row: float(row.max_ratio or 0.0), default=None)
     worst_quantitative_point = _select_representative_point(worst_quantitative_benchmark, quantitative_points)
+    reference_quantitative_points = [
+        row for row in quantitative_points if row["reference_signal_origin"] != "measured_volatiles"
+    ]
+    reference_worst_benchmark = max(
+        reference_quantitative_benchmarks,
+        key=lambda row: float(row.max_ratio or 0.0),
+        default=None,
+    )
+    reference_worst_quantitative_point = _select_representative_point(
+        reference_worst_benchmark, reference_quantitative_points
+    )
     experimental_quantitative_points = [
         row for row in quantitative_points if row["reference_signal_origin"] == "measured_volatiles"
     ]
@@ -189,6 +208,9 @@ def _build_payload() -> dict[str, object]:
         "experimental_outside_2x_benchmark_count": max(0, len(experimental_quantitative_benchmarks) - experimental_inside_2x_benchmark_count),
         "experimental_worst_quantitative_ratio": max((float(row.max_ratio or 0.0) for row in experimental_quantitative_benchmarks), default=0.0),
         "worst_quantitative_point": _compact_point_summary(worst_quantitative_point),
+        "worst_quantitative_population": "all_quantitative_benchmarks",
+        "reference_worst_quantitative_ratio": max((float(row.max_ratio or 0.0) for row in reference_quantitative_benchmarks), default=0.0),
+        "reference_worst_quantitative_point": _compact_point_summary(reference_worst_quantitative_point),
         "experimental_worst_quantitative_point": _compact_point_summary(experimental_worst_quantitative_point),
         "quantitative_benchmarks": [
             {
@@ -247,6 +269,7 @@ def _render_markdown(payload: dict[str, object]) -> str:
     matrix_quantitative = [row for row in quantitative_benchmarks if row["execution_path"] == "matrix_only"]
     augmented_quantitative = [row for row in quantitative_benchmarks if row["execution_path"] == "matrix_precursor_augmented"]
     worst_point = payload.get("worst_quantitative_point")
+    reference_worst_point = payload.get("reference_worst_quantitative_point")
     experimental_worst_point = payload.get("experimental_worst_quantitative_point")
 
     lines = [
@@ -269,8 +292,10 @@ def _render_markdown(payload: dict[str, object]) -> str:
         f"- Quantitative benchmarks inside 1.5x: {payload['inside_1_5x_benchmark_count']}",
         f"- Quantitative benchmarks outside 1.5x: {payload['outside_1_5x_benchmark_count']}",
         f"- Quantitative benchmarks outside 2x: {payload['outside_2x_benchmark_count']}",
-        f"- Worst quantitative benchmark ratio: {float(payload['worst_quantitative_ratio']):.3f}x",
-        f"- Worst quantitative point: {worst_point['benchmark_label']} / {worst_point['compound']} ({float(worst_point['max_ratio']):.3f}x; {worst_point['reference_signal_origin']})" if worst_point else "- Worst quantitative point: n/a",
+        f"- Worst quantitative benchmark ratio (all quantitative benchmarks): {float(payload['worst_quantitative_ratio']):.3f}x",
+        f"- Worst quantitative point (all quantitative benchmarks): {worst_point['benchmark_label']} / {worst_point['compound']} ({float(worst_point['max_ratio']):.3f}x; {worst_point['reference_signal_origin']})" if worst_point else "- Worst quantitative point (all quantitative benchmarks): n/a",
+        f"- Worst reference-only benchmark ratio: {float(payload['reference_worst_quantitative_ratio']):.3f}x",
+        f"- Worst reference-only point: {reference_worst_point['benchmark_label']} / {reference_worst_point['compound']} ({float(reference_worst_point['max_ratio']):.3f}x; {reference_worst_point['reference_signal_origin']})" if reference_worst_point else "- Worst reference-only point: n/a",
         f"- Quantitative matched compounds plotted: {len(quantitative_points)}",
         f"- Authoritative free-precursor benchmarks: {len(authoritative_benchmarks)}",
         f"- Quantitative matrix-only benchmarks: {len(matrix_quantitative)}",
@@ -406,6 +431,15 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output-dir", default="results/validation")
     parser.add_argument("--docs-asset-dir", default="docs/assets")
+    parser.add_argument(
+        "--skip-figures",
+        action="store_true",
+        help=(
+            "write validation_overview.md/.json only. Added 2026-08-27 (Wave H) so the "
+            "artifact can be regenerated on a machine without dvipng; the PNG stays stale "
+            "and the staleness is stated rather than hidden."
+        ),
+    )
     args = parser.parse_args()
 
     output_dir = Path(args.output_dir)
@@ -420,9 +454,17 @@ def main() -> int:
     md_path = output_dir / "validation_overview.md"
     json_path = output_dir / "validation_overview.json"
 
-    _render_figure(payload, png_path)
     md_path.write_text(markdown, encoding="utf-8")
     json_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+
+    if args.skip_figures:
+        print(markdown)
+        print(f"Wrote {md_path}")
+        print(f"Wrote {json_path}")
+        print("Figure skipped (--skip-figures).")
+        return 0
+
+    _render_figure(payload, png_path)
     shutil.copyfile(png_path, docs_asset_dir / "validation_overview.png")
 
     print(markdown)

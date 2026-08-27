@@ -1,0 +1,296 @@
+name: CI
+
+# Enforced checks for the Maillard repo.
+#
+# Tiering rationale
+# -----------------
+#   gates        (~1 min, pip-only)  : data-integrity gates. No conda, no science
+#                                      deps, cannot flake on a solver. This is the
+#                                      signal an external inspector should look at
+#                                      first, and it is always green or genuinely
+#                                      broken.
+#   tests-unit   (~10 min + env)     : tests/unit + tests/scripts. Fast tier.
+#   tests-full   (~25 min + env)     : tests/scientific + tests/integration.
+#                                      Gated behind tests-unit so a broken build
+#                                      does not burn a full runner hour, and so it
+#                                      restores the conda package cache that
+#                                      tests-unit just populated.
+#
+# Deliberately NOT in the required set: tests/qm. Those tests skip gracefully when
+# xtb / crest / sella / MACE are absent, but environment.yml *installs* all of
+# them, so on CI they would actually execute -- pulling MACE model weights from
+# HuggingFace at runtime (network dependency) and running real semi-empirical
+# optimisations. Run them via the `qm` workflow_dispatch input when needed.
+
+on:
+  push:
+    branches: [main, audit-remediation]
+  pull_request:
+    branches: [main, audit-remediation]
+  workflow_dispatch:
+    inputs:
+      qm:
+        description: "Also run the tests/qm tier (slow; needs xtb/crest/MACE)"
+        type: boolean
+        default: false
+  schedule:
+    # Weekly DOI liveness sample. Advisory only -- see the citation-liveness job.
+    - cron: "17 6 * * 1"
+
+permissions:
+  contents: read
+
+env:
+  # environment.yml lists `defaults` (Anaconda's own channel) explicitly, and
+  # conda >=25.3 refuses to use it non-interactively until its Terms of Service
+  # are accepted -- surfacing as CondaToSNonInteractiveError during env creation.
+  # The conda-anaconda-tos plugin already auto-accepts when CI=true (which Actions
+  # sets), so this is belt-and-braces; it is set explicitly so the behaviour does
+  # not depend on that detection heuristic.
+  #
+  # The cleaner fix is a one-line edit to environment.yml removing `defaults`:
+  # every dependency here resolves from conda-forge + pytorch, so `defaults`
+  # earns nothing. That file is outside this change's scope. If env creation
+  # still fails on ToS, either drop `defaults` from environment.yml or add a
+  # `conda tos accept --override-channels --channel defaults` step after conda is
+  # installed but before the environment is created.
+  CONDA_PLUGINS_AUTO_ACCEPT_TOS: "yes"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    # -e: fail on error. -l: login shell, required for `conda activate` to work
+    # in steps that setup-miniconda has prepared.
+    shell: bash -el {0}
+
+jobs:
+  # ---------------------------------------------------------------------------
+  # Tier 0: data-integrity gates. Offline, deterministic, ~1 minute.
+  # ---------------------------------------------------------------------------
+  gates:
+    name: Data integrity gates
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # These gates read JSON/YAML and parse Python with ast. PyYAML is the only
+      # dependency; deliberately no conda and no science stack, so this check
+      # cannot be taken down by a dependency-solve failure.
+      - name: Install gate dependencies
+        run: python -m pip install --disable-pip-version-check "pyyaml>=6.0"
+
+      - name: Citation contamination gate (offline)
+        run: python scripts/ci/citation_gate.py
+
+      - name: Hold-out exclusion guard
+        run: python scripts/ci/holdout_guard.py
+
+  # ---------------------------------------------------------------------------
+  # Tier 1: fast test tier.
+  # ---------------------------------------------------------------------------
+  tests-unit:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      # tests/unit/test_cli_scripts.py::test_run_campaign_named_comparison_mode
+      # shells out to scripts/run_campaign.py, which renders figures through
+      # src/plot_style.configure_science_plot_style(). That function's
+      # _assert_latex_contract() hard-fails unless ALL of the following exist:
+      #   * a `latex` binary                -> texlive-latex-base
+      #   * `dvipng`                        -> dvipng
+      #   * type1cm.sty                     -> texlive-latex-extra
+      #   * type1ec.sty                     -> cm-super
+      # (it compiles a probe document using type1cm + type1ec, so a partial TeX
+      # install fails just as loudly as no TeX at all).
+      #
+      # We install rather than deselect: the test is a genuine regression guard
+      # on figure generation, and this is the standard matplotlib CI package set.
+      # Cost is ~2-3 min of apt time. If texlive ever becomes the bottleneck, the
+      # documented fallback is to drop these packages and add:
+      #     --deselect tests/unit/test_cli_scripts.py::test_run_campaign_named_comparison_mode
+      # to the pytest invocation below -- but note that silently disables the only
+      # end-to-end check that campaign figures still render.
+      - name: Install LaTeX toolchain for figure-rendering tests
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends \
+            texlive-latex-base \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
+            cm-super \
+            dvipng
+          # Fail early and loudly here rather than inside a pytest subprocess,
+          # where the failure surfaces as an opaque non-zero CLI exit code.
+          kpsewhich type1cm.sty
+          kpsewhich type1ec.sty
+          dvipng --version | head -1
+
+      - name: Cache conda packages
+        uses: actions/cache@v4
+        env:
+          # Bump CACHE_EPOCH to force a cold rebuild without touching environment.yml.
+          CACHE_EPOCH: 1
+        with:
+          path: ~/conda_pkgs_dir
+          key: conda-${{ runner.os }}-${{ env.CACHE_EPOCH }}-${{ hashFiles('environment.yml') }}
+
+      - name: Install conda (Miniforge)
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          # Miniforge defaults to conda-forge + the libmamba solver, which is what
+          # actually resolves this environment: rdkit, cantera, pyscf, xtb, crest,
+          # ase and geometric are all conda-forge packages, with no pip equivalent
+          # that would work here. A pip-only install is not a viable alternative.
+          #
+          # environment-file is deliberately NOT passed here. The env is built by
+          # scripts/ci/setup_env.sh in the next step, which reproduces the
+          # Dockerfile's Linux-proven ordering: strip the `pytorch::pytorch=*=*cpu*`
+          # build-string pin, install CPU torch from PyTorch's wheel index first
+          # (so mace-torch's pip resolution does not drag in multi-GB CUDA torch),
+          # then apply the env file. The Dockerfile is the only environment build
+          # in this repo known to work on Linux, so CI follows it rather than
+          # inventing a second recipe.
+          miniforge-version: latest
+          activate-environment: maillard
+          python-version: "3.12"
+          auto-activate-base: false
+          pkgs-dirs: ~/conda_pkgs_dir
+
+      - name: Build the maillard environment
+        run: bash scripts/ci/setup_env.sh
+
+      # setup_env.sh already asserts the numpy>=2.0,<2.4 pin held. This step exists
+      # so a failing run has the full resolved environment in its log.
+      - name: Environment report
+        if: always()
+        run: |
+          conda info
+          conda list
+
+      - name: Unit tests
+        # pytest.ini sets pythonpath=., so no editable install is needed.
+        # NOTE: neither pytest-timeout nor pytest-xdist is in environment.yml, so
+        # do not add --timeout or -n here; the job-level timeout-minutes is the
+        # runaway guard.
+        run: python -m pytest tests/unit tests/scripts -q
+
+  # ---------------------------------------------------------------------------
+  # Tier 2: scientific + integration.
+  # ---------------------------------------------------------------------------
+  tests-full:
+    name: Scientific and integration tests
+    runs-on: ubuntu-latest
+    # Fail fast on the cheap tier, and let tests-unit populate the conda package
+    # cache that this job restores.
+    needs: tests-unit
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache conda packages
+        uses: actions/cache@v4
+        env:
+          CACHE_EPOCH: 1
+        with:
+          path: ~/conda_pkgs_dir
+          key: conda-${{ runner.os }}-${{ env.CACHE_EPOCH }}-${{ hashFiles('environment.yml') }}
+
+      - name: Install conda (Miniforge)
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          # See the tests-unit job for why environment-file is not passed here.
+          miniforge-version: latest
+          activate-environment: maillard
+          python-version: "3.12"
+          auto-activate-base: false
+          pkgs-dirs: ~/conda_pkgs_dir
+
+      - name: Build the maillard environment
+        run: bash scripts/ci/setup_env.sh
+
+      - name: Scientific and integration tests
+        run: |
+          mkdir -p results
+          python -m pytest tests/scientific tests/integration -q 2>&1 | tee results/pytest_full.log
+
+      - name: Upload test log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pytest-full-log
+          path: results/pytest_full.log
+          if-no-files-found: warn
+
+  # ---------------------------------------------------------------------------
+  # Optional: QM tier. Manual only -- see the header note.
+  # ---------------------------------------------------------------------------
+  tests-qm:
+    name: QM tests (manual)
+    if: github.event_name == 'workflow_dispatch' && inputs.qm
+    runs-on: ubuntu-latest
+    needs: tests-unit
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache conda packages
+        uses: actions/cache@v4
+        env:
+          CACHE_EPOCH: 1
+        with:
+          path: ~/conda_pkgs_dir
+          key: conda-${{ runner.os }}-${{ env.CACHE_EPOCH }}-${{ hashFiles('environment.yml') }}
+
+      - name: Install conda (Miniforge)
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          # See the tests-unit job for why environment-file is not passed here.
+          miniforge-version: latest
+          activate-environment: maillard
+          python-version: "3.12"
+          auto-activate-base: false
+          pkgs-dirs: ~/conda_pkgs_dir
+
+      - name: Build the maillard environment
+        run: bash scripts/ci/setup_env.sh
+
+      - name: QM tests
+        run: python -m pytest tests/qm -q
+
+  # ---------------------------------------------------------------------------
+  # Advisory: DOI liveness. Never blocks a PR.
+  # ---------------------------------------------------------------------------
+  citation-liveness:
+    name: DOI liveness sample (advisory)
+    # Scheduled and manual only. Network-dependent by construction, so it must
+    # never gate a merge -- doi.org being slow is not a reason to block work.
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install gate dependencies
+        run: python -m pip install --disable-pip-version-check "pyyaml>=6.0"
+
+      - name: Resolve a random DOI sample against doi.org
+        # --fail-on-online is intentionally omitted: dead DOIs are reported in the
+        # log for triage, but a transient doi.org outage must not create a red X
+        # that people learn to ignore.
+        run: python scripts/ci/citation_gate.py --online --sample 40

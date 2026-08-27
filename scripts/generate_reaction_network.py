@@ -32,6 +32,64 @@ except Exception as e:
     plt.style.use("default")
 
 
+# Edge colour per curated reaction family.
+#
+# 2026-08-27 (audit remediation B): Wave G1 renamed the reaction-family
+# vocabulary (src/reaction_templates.py, mirrored by src/curated_pathways.py) and
+# this map still carried the pre-G1 keys, so most curated steps fell through to
+# the grey `#7f7f7f` default and the legend advertised families the engine never
+# emits. The keys below are exactly the families `src.curated_pathways.PATHWAYS`
+# emits today (see `curated_reaction_families()` and the coverage check in
+# `main()`), so the map cannot silently drift again.
+#
+# Retired keys and what happened to them:
+#   * `Enolisation`      -> split by G1 into `Enolisation_1_2`,
+#                           `Enolisation_2_3_Amadori` and `Enolisation_Intermediate`.
+#                           The original colour stays with `Enolisation_1_2`; the
+#                           other two get neighbouring hues so the lane still
+#                           reads as one family group.
+#   * `Sugar_Dehydration` -> no longer emitted anywhere in the repo (neither
+#                           curated nor engine templates). Its colour is
+#                           repointed to `Furanone_Cyclisation`, the curated
+#                           cyclisation/dehydration lane that replaced it.
+FAMILY_EDGE_COLORS: dict[str, str] = {
+    "Schiff_Base_Formation": "#4682B4",
+    "Amadori_Rearrangement": "#DAA520",
+    "Enolisation_1_2": "#CD5C5C",
+    "Enolisation_2_3_Amadori": "#E9967A",
+    "Enolisation_Intermediate": "#B03060",
+    "Furanone_Cyclisation": "#8FBC8F",
+    "Strecker_Degradation": "#BC8F8F",
+    "Cysteine_Degradation": "#D2691E",
+    "Aminoketone_Condensation": "#6A5ACD",
+    "Thiol_Addition": "#48D1CC",
+    "Thiol_Addition_Norfuraneol": "#20B2AA",
+    "Thiol_Oxidation": "#008B8B",
+    "Lipid_Schiff_Base": "#BA55D3",
+    "Beta_Elimination": "#CD853F",
+    "DHA_Crosslinking": "#B22222",
+}
+
+# Colour used when a family has no entry above. Reaching it means the map has
+# drifted from the family vocabulary again.
+DEFAULT_EDGE_COLOR = "#7f7f7f"
+
+
+def curated_reaction_families() -> set[str]:
+    """Every reaction family `src.curated_pathways.PATHWAYS` actually emits."""
+    return {step.reaction_family for steps in PATHWAYS.values() for step in steps}
+
+
+def uncoloured_reaction_families() -> set[str]:
+    """Curated families that would fall through to `DEFAULT_EDGE_COLOR`."""
+    return curated_reaction_families() - set(FAMILY_EDGE_COLORS)
+
+
+def stale_colour_map_keys() -> set[str]:
+    """Colour-map keys no curated pathway emits any more."""
+    return set(FAMILY_EDGE_COLORS) - curated_reaction_families()
+
+
 def main() -> int:
     # 1. Create a Directed Graph
     G = nx.DiGraph()
@@ -219,18 +277,29 @@ def main() -> int:
     }
 
     # 2. Add edges from pathways
-    family_edge_colors = {
-        "Schiff_Base_Formation": "#4682B4",
-        "Amadori_Rearrangement": "#DAA520",
-        "Enolisation": "#CD5C5C",
-        "Sugar_Dehydration": "#8FBC8F",
-        "Strecker_Degradation": "#BC8F8F",
-        "Cysteine_Degradation": "#D2691E",
-        "Thiol_Addition": "#48D1CC",
-        "Lipid_Schiff_Base": "#BA55D3",
-        "Beta_Elimination": "#CD853F",
-        "DHA_Crosslinking": "#B22222",
-    }
+    family_edge_colors = FAMILY_EDGE_COLORS
+
+    # Coverage check: every family the curated pathways emit must have a colour,
+    # otherwise the diagram silently paints real chemistry in the grey default.
+    missing = sorted(uncoloured_reaction_families())
+    if missing:
+        raise RuntimeError(
+            "reaction-family colour map is out of date — no colour for: "
+            + ", ".join(missing)
+            + ". Add them to FAMILY_EDGE_COLORS (do not let them fall through to "
+            f"{DEFAULT_EDGE_COLOR})."
+        )
+    stale = sorted(stale_colour_map_keys())
+    if stale:
+        print(
+            "Warning: FAMILY_EDGE_COLORS carries key(s) no curated pathway emits: "
+            + ", ".join(stale)
+        )
+    print(
+        f"Family colour coverage: {len(curated_reaction_families())}/"
+        f"{len(curated_reaction_families())} curated families coloured, 0 falling "
+        "through to the default."
+    )
 
     for path_name, steps in PATHWAYS.items():
         for step in steps:
@@ -249,7 +318,7 @@ def main() -> int:
                             r,
                             p,
                             family=family,
-                            color=family_edge_colors.get(family, "#7f7f7f"),
+                            color=family_edge_colors.get(family, DEFAULT_EDGE_COLOR),
                             source_quality=step.source_quality,
                         )
 
@@ -365,7 +434,12 @@ def main() -> int:
             "Cysteine_Degradation",
         }:
             width, alpha = 1.8, 0.70
-        else:  # Enolisation, Sugar_Dehydration, Beta_Elimination (high barriers, slow/rate-limiting)
+        else:
+            # 2026-08-27: comment corrected to the post-Wave-G1 family names.
+            # Everything else — the three Enolisation lanes, Beta_Elimination,
+            # Furanone_Cyclisation, Aminoketone_Condensation, Thiol_Oxidation and
+            # Thiol_Addition_Norfuraneol — carries a high barrier and draws thin.
+            # Group membership is unchanged; only the names were stale.
             width, alpha = 1.0, 0.45
 
         # Style by confidence tier / source quality (Solid = Calibrated, Dashed = Heuristic)
@@ -398,9 +472,14 @@ def main() -> int:
         ),
     ]
 
+    # 2026-08-27: legend lists only the families that actually have an edge in
+    # this figure, instead of every key in the colour map — the old legend
+    # advertised lanes the drawing does not contain.
+    drawn_families = {str(data["family"]) for _, _, data in G.edges(data=True)}
     edge_legend_handles = [
         plt.Line2D([0], [0], color=color, lw=2, label=fam.replace("_", " "))
         for fam, color in family_edge_colors.items()
+        if fam in drawn_families
     ]
 
     # Add a legend entry to define transition intensity

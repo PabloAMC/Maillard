@@ -103,10 +103,29 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--sterilization-time-minutes", type=float, default=0.0, help="Optional post-extrusion sterilization time in minutes")
     parser.add_argument("--barrel-zones", type=str, default="", help="Comma-separated sequential barrel zone temperatures in Celsius")
     parser.add_argument("--barrel-zone-time-fractions", type=str, default="", help="Comma-separated residence-time fractions aligned with --barrel-zones")
-    parser.add_argument("--target", type=str, default=None, help="Inverse design target sensory tag (e.g. meaty, roasted)")
+    parser.add_argument(
+        "--target",
+        type=str,
+        default=None,
+        help=(
+            "Switch to INVERSE DESIGN mode: screen the built-in formulation grid "
+            "(data/formulation_grid.yml) for this sensory tag. Any formulation you "
+            "also pass (--sugars/--amino-acids/--additives/--lipids) is evaluated as "
+            "one extra candidate alongside the grid. Omit --target to run FORWARD mode, "
+            "which scores your formulation and nothing else."
+        ),
+    )
     parser.add_argument("--minimize", type=str, default=DEFAULTS.default_minimize_tag, help="Inverse design off-flavour tag to minimize (default: beany)")
     parser.add_argument("--xtb", action="store_true", help="Run full GFN2-xTB structural optimizations (SLOW!). Defaults to fast Hammond estimating.")
-    parser.add_argument("--protein-type", choices=["free", "pea_conc", "pea_iso", "soy_conc", "soy_iso", "wheat_gluten", "myco"], default=DEFAULTS.default_protein_type, help="Protein matrix type for accessibility corrections.")
+    # NOTE (2026-08-27): `wheat_gluten` was advertised here but is NOT a member of
+    # src.matrix_correction.ProteinType, so every run using it died with
+    # "'wheat_gluten' is not a valid ProteinType" the moment the matrix layer
+    # resolved a denaturation state. The matrix-correction layer has no wheat
+    # gluten accessibility/retention profile (matrix_calibration_registry carries
+    # only "Placeholder: no wheat_gluten matrix calibration data yet"), so the
+    # option is withdrawn rather than silently aliased to soy. Wheat gluten is
+    # still reachable as a registry-backed --protein-source for MEATY multipliers.
+    parser.add_argument("--protein-type", choices=["free", "pea_conc", "pea_iso", "soy_conc", "soy_iso", "myco"], default=DEFAULTS.default_protein_type, help="Protein matrix type for accessibility corrections. (wheat_gluten has no calibrated matrix profile; use --protein-source wheat_gluten instead.)")
     parser.add_argument("--protein-source", type=str, default=None, help="Explicit registry-backed protein source for MEATY multipliers (e.g. pea_isolate, wheat_gluten).")
     parser.add_argument("--denaturation-state", type=float, default=DEFAULTS.default_denaturation_state, help="Protein denaturation level (0.0 to 1.0). Default 0.5.")
     parser.add_argument("--list-precursors", action="store_true", help="List available precursors and exit")
@@ -152,6 +171,157 @@ def _render_result_bundle(
     return generate_report(res, warnings, conditions_dict, output_dir=output_dir)
 
 
+CUSTOM_CANDIDATE_NAME = "Your formulation (custom)"
+
+#: CLI arguments that describe a *formulation* rather than the global process
+#: conditions. Inverse design used to read none of them.
+FORMULATION_ARG_KEYS = ("sugars", "amino_acids", "additives", "lipids")
+#: Formulation-shaping arguments that only mean something once precursors exist.
+FORMULATION_MODIFIER_ARG_KEYS = ("ratios",)
+
+
+def _parse_ratio_dict(raw: str) -> Dict[str, float]:
+    ratio_dict: Dict[str, float] = {}
+    if not raw:
+        return ratio_dict
+    for pair in raw.split(","):
+        if ":" not in pair:
+            continue
+        k, v = pair.split(":", 1)
+        try:
+            ratio_dict[k.strip().lower()] = float(v.strip())
+        except ValueError:
+            logger.error(f"Invalid ratio value '{v}' for '{k}'. Must be a float.")
+            sys.exit(1)
+    return ratio_dict
+
+
+def _split_names(raw: str) -> List[str]:
+    return [token.strip() for token in (raw or "").split(",") if token.strip()]
+
+
+def build_formulation_from_args(args: argparse.Namespace, name: str) -> Dict[str, Any]:
+    """Assemble the formulation dict the pipeline consumes from CLI arguments.
+
+    Shared by forward mode and by the custom candidate that inverse design now
+    screens alongside the grid, so the two modes cannot drift apart.
+    """
+    return {
+        "name": name,
+        "sugars": _split_names(args.sugars),
+        "amino_acids": _split_names(args.amino_acids),
+        "lipids": _split_names(args.lipids),
+        "additives": _split_names(args.additives),
+        "molar_ratios": _parse_ratio_dict(args.ratios),
+        "ph": args.ph,
+        "temp": args.temp,
+        "aw": args.aw,
+        "time_minutes": args.time_minutes,
+        "sme_kj_per_kg": args.sme_kj_per_kg,
+        "moisture_regime": args.moisture_regime,
+        "sterilization_temperature_celsius": args.sterilization_temp,
+        "sterilization_time_minutes": args.sterilization_time_minutes,
+        "barrel_zone_temperatures": _parse_float_list(args.barrel_zones) if args.barrel_zones else None,
+        "barrel_zone_time_fractions": _parse_float_list(args.barrel_zone_time_fractions) if args.barrel_zone_time_fractions else None,
+        "protein_type": args.protein_type,
+        "protein_source": args.protein_source,
+        "denaturation_state": args.denaturation_state,
+        "catalyst": args.catalyst,
+    }
+
+
+def _user_supplied_precursors(args: argparse.Namespace) -> bool:
+    return any(_split_names(getattr(args, key, "") or "") for key in FORMULATION_ARG_KEYS)
+
+
+def _report_inputs_for_inverse_design(
+    args: argparse.Namespace,
+    *,
+    winning_formulation: Dict[str, Any],
+    candidate_count: int,
+    custom_candidate_included: bool,
+    ignored_arguments: List[str],
+) -> Dict[str, Any]:
+    """The inputs block §1 of the report should echo.
+
+    Historically this was ``vars(args)``, which printed the user's
+    ``--sugars``/``--ratios``/``--time-minutes`` at the top of a report whose
+    science came from a grid entry that never saw them. We echo what was
+    actually evaluated instead, and name what was ignored.
+    """
+    payload: Dict[str, Any] = {
+        "mode": "inverse_design",
+        "target_tag": args.target,
+        "minimize_tag": args.minimize,
+        "candidates_screened": candidate_count,
+        "custom_candidate_included": custom_candidate_included,
+        "selected_formulation": winning_formulation.get("name", "unknown"),
+        "selected_sugars": ", ".join(str(x) for x in winning_formulation.get("sugars", [])) or "-",
+        "selected_amino_acids": ", ".join(str(x) for x in winning_formulation.get("amino_acids", [])) or "-",
+        "selected_additives": ", ".join(str(x) for x in winning_formulation.get("additives", [])) or "-",
+        "selected_lipids": ", ".join(str(x) for x in winning_formulation.get("lipids", [])) or "-",
+        "selected_molar_ratios": winning_formulation.get("molar_ratios", {}) or "1.0 for every precursor (grid default)",
+        "ph": winning_formulation.get("ph", args.ph),
+        "temp": winning_formulation.get("temp", args.temp),
+        "aw": winning_formulation.get("aw", args.aw),
+        "time_minutes": winning_formulation.get("time_minutes", args.time_minutes),
+        "protein_type": winning_formulation.get("protein_type", args.protein_type),
+        "catalyst": winning_formulation.get("catalyst", args.catalyst),
+        "xtb": bool(args.xtb),
+    }
+    if ignored_arguments:
+        payload["ignored_cli_arguments"] = ", ".join(sorted(ignored_arguments))
+        payload["ignored_cli_arguments_note"] = (
+            "These arguments do not reach the selected grid formulation. "
+            "Use forward mode (drop --target) to score exactly the formulation you typed."
+        )
+    return payload
+
+
+def _report_inputs_for_forward_mode(
+    args: argparse.Namespace, formulation: Dict[str, Any]
+) -> Dict[str, Any]:
+    """Inputs block for forward mode — every value here really was evaluated."""
+    payload: Dict[str, Any] = {
+        "mode": "forward_single_formulation",
+        "sugars": ", ".join(str(x) for x in formulation.get("sugars", [])) or "-",
+        "amino_acids": ", ".join(str(x) for x in formulation.get("amino_acids", [])) or "-",
+        "additives": ", ".join(str(x) for x in formulation.get("additives", [])) or "-",
+        "lipids": ", ".join(str(x) for x in formulation.get("lipids", [])) or "-",
+        "molar_ratios": formulation.get("molar_ratios", {}) or "1.0 for every precursor (default)",
+        "ph": formulation.get("ph"),
+        "temp": formulation.get("temp"),
+        "aw": formulation.get("aw"),
+        "time_minutes": formulation.get("time_minutes"),
+        "protein_type": formulation.get("protein_type"),
+        "protein_source": formulation.get("protein_source"),
+        "denaturation_state": formulation.get("denaturation_state"),
+        "catalyst": formulation.get("catalyst"),
+        "sme_kj_per_kg": formulation.get("sme_kj_per_kg"),
+        "moisture_regime": formulation.get("moisture_regime"),
+        "sterilization_temperature_celsius": formulation.get("sterilization_temperature_celsius"),
+        "sterilization_time_minutes": formulation.get("sterilization_time_minutes"),
+        "barrel_zone_temperatures": formulation.get("barrel_zone_temperatures"),
+        "barrel_zone_time_fractions": formulation.get("barrel_zone_time_fractions"),
+        "xtb": bool(args.xtb),
+    }
+    return {key: value for key, value in payload.items() if value is not None}
+
+
+def report_skipped_formulations(designer: MaillardPipeline) -> None:
+    """Print any formulation the resolver dropped, instead of losing it silently."""
+    skipped = list(getattr(designer, "last_skipped_formulations", []) or [])
+    if not skipped:
+        return
+    print("\n  ⚠️  SKIPPED FORMULATIONS (not scored, not ranked):")
+    for row in skipped:
+        print(
+            f"    - {row.get('name', 'unknown')}: unresolved precursor(s) "
+            f"{row.get('unresolved_precursors', 'unknown')} — {row.get('reason', 'unknown reason')}"
+        )
+    print("    Run `--list-precursors` to see the recognised names.\n")
+
+
 def run_inverse_design(args: argparse.Namespace, conditions: ReactionConditions) -> None:
     print("======================================================")
     print("      Maillard Inverse Design Mode (Phase 7.5)")
@@ -160,19 +330,53 @@ def run_inverse_design(args: argparse.Namespace, conditions: ReactionConditions)
     logger.info(f"Minimizing Risk Profile:   '{args.minimize}'")
     logger.info(f"Conditions: pH {conditions.pH}, {conditions.temperature_celsius}°C, aᵥ {conditions.water_activity}")
     print("-" * 60)
-    
+
     try:
         designer = MaillardPipeline(args.target, args.minimize)
-        logger.info(f"Evaluating {len(designer.grid)} industrial formulations against tags...")
-        
+
+        # --- Honest handling of formulation arguments in inverse-design mode ---
+        # Inverse design screens the fixed grid. Before 2026-08-27 it read none of
+        # --sugars/--amino-acids/--additives/--lipids/--ratios and reported them
+        # anyway. Now a user-supplied formulation is screened as one more
+        # candidate, and anything still unused is named out loud.
+        candidate_grid = list(designer.grid)
+        custom_candidate_included = _user_supplied_precursors(args)
+        ignored_arguments: List[str] = []
+
+        if custom_candidate_included:
+            custom_formulation = build_formulation_from_args(args, CUSTOM_CANDIDATE_NAME)
+            candidate_grid.append(custom_formulation)
+            print(
+                f"  ℹ️  Your formulation is entered as candidate '{CUSTOM_CANDIDATE_NAME}' "
+                f"alongside the {len(designer.grid)} built-in grid entries."
+            )
+            print(
+                "     Grid entries carry their own precursors, ratios and (sometimes) pH/temp; "
+                "your --ratios/--time-minutes apply only to your own candidate."
+            )
+        else:
+            for key in FORMULATION_ARG_KEYS + FORMULATION_MODIFIER_ARG_KEYS:
+                if str(getattr(args, key, "") or "").strip():
+                    ignored_arguments.append(f"--{key.replace('_', '-')}")
+            if ignored_arguments:
+                logger.warning(
+                    "Inverse design (--target) screens the built-in grid; %s cannot be applied "
+                    "without at least one precursor argument. Drop --target to score your own "
+                    "formulation in forward mode.",
+                    ", ".join(sorted(ignored_arguments)),
+                )
+
+        logger.info(f"Evaluating {len(candidate_grid)} formulations against tags...")
+
         if args.dry_run:
             logger.info("\n[DRY RUN] Bypassing expensive grid evaluation.")
             logger.info("Validation: Grid dimensions bounded correctly.")
             logger.info("\nDry-run complete. Exiting.")
             sys.exit(0)
-            
-        results = designer.evaluate_all(conditions)
-        
+
+        results = designer.evaluate_all(conditions, grid_override=candidate_grid)
+        report_skipped_formulations(designer)
+
         print("\n  Top Recommended Formulations:")
         print("    ┌──────────────────────────────┬──────────────┬──────────────┬─────────────┬─────────────┐")
         print("    │ FORMULATION                  │ TARGET SCORE │ RISK PENALTY │ LYS BUDGET  │ TRAP EFF    │")
@@ -184,16 +388,41 @@ def run_inverse_design(args: argparse.Namespace, conditions: ReactionConditions)
             lys = f"{res.lysine_budget:.1f}%"
             trap = f"{res.trapping_efficiency:.1f}%"
             print(f"    │ {res.name[:28]:<28} │ {t_score:>12} │ {r_score:>12} │ {lys:>11} │ {trap:>11} │")
-        
+
         print("    └──────────────────────────────┴──────────────┴──────────────┴─────────────┴─────────────┘")
-        
+
         if results:
             best = results[0]
-            best_formulation = next((item for item in designer.grid if item.get("name") == best.name), {})
+            best_formulation = next(
+                (item for item in candidate_grid if item.get("name") == best.name), {}
+            )
             best_precursors = []
             for key in ("sugars", "amino_acids", "additives", "lipids"):
                 best_precursors.extend(best_formulation.get(key, []))
-            
+
+            if custom_candidate_included:
+                if best.name == CUSTOM_CANDIDATE_NAME:
+                    print("\n  ✅ Your formulation won the screen. The report below is your formulation.")
+                else:
+                    custom_rank = next(
+                        (idx + 1 for idx, res in enumerate(results) if res.name == CUSTOM_CANDIDATE_NAME),
+                        None,
+                    )
+                    rank_text = f"ranked #{custom_rank} of {len(results)}" if custom_rank else "was not scored"
+                    print(
+                        f"\n  ℹ️  The report below describes the winning GRID formulation "
+                        f"'{best.name}', not the formulation you typed (yours {rank_text})."
+                    )
+                    print(
+                        "     To get a report for exactly your formulation, drop --target "
+                        "(forward mode)."
+                    )
+            else:
+                print(
+                    f"\n  ℹ️  The report below describes the winning grid formulation '{best.name}'. "
+                    "Inverse design does not evaluate a formulation of your own unless you pass one."
+                )
+
             report_dir = _render_result_bundle(
                 best,
                 target_tag=args.target or DEFAULTS.default_target_tag,
@@ -205,13 +434,19 @@ def run_inverse_design(args: argparse.Namespace, conditions: ReactionConditions)
                 formulation=best_formulation,
                 baseline_conditions=conditions,
                 designer=designer,
-                conditions_dict=vars(args),
+                conditions_dict=_report_inputs_for_inverse_design(
+                    args,
+                    winning_formulation=best_formulation,
+                    candidate_count=len(candidate_grid),
+                    custom_candidate_included=custom_candidate_included,
+                    ignored_arguments=ignored_arguments,
+                ),
                 report_enabled=bool(args.report),
                 output_dir=Path(args.output_dir) if args.output_dir else None,
             )
             if report_dir is not None:
                 logger.info(f"📄 Report generated in: {report_dir}")
-        
+
         sys.exit(0)
         
     except ValueError as e:
@@ -221,33 +456,18 @@ def run_inverse_design(args: argparse.Namespace, conditions: ReactionConditions)
 
 def run_forward_pipeline(args: argparse.Namespace, conditions: ReactionConditions) -> None:
     # Parse ratios
-    ratio_dict = {}
-    if args.ratios:
-        for pair in args.ratios.split(","):
-            if ":" in pair:
-                k, v = pair.split(":")
-                try:
-                    ratio_dict[k.strip().lower()] = float(v.strip())
-                except ValueError:
-                    logger.error(f"Invalid ratio value '{v}' for '{k}'. Must be a float.")
-                    sys.exit(1)
+    ratio_dict = _parse_ratio_dict(args.ratios)
 
     # Print Forward Pipeline Header
     print("======================================================")
-    print("      Maillard Generative Pipeline (Phase 7)")
+    print("      Maillard Generative Pipeline (Phase 7) — forward mode")
     print("======================================================\n")
-    
+    print("  Scoring exactly the formulation you supplied (no grid screening).\n")
+
     # 1. Resolve Precursors (for display and DoV check)
-    names = []
-    if args.sugars:
-        names += args.sugars.split(",")
-    if args.amino_acids:
-        names += args.amino_acids.split(",")
-    if args.additives:
-        names += args.additives.split(",")
-    if args.lipids:
-        names += args.lipids.split(",")
-    names = [n.strip() for n in names if n.strip()]
+    names: List[str] = []
+    for key in FORMULATION_ARG_KEYS:
+        names += _split_names(getattr(args, key, "") or "")
 
     if not names:
         logger.error("No precursors specified. Use --sugars, --amino-acids, --additives, --lipids OR --target.")
@@ -280,34 +500,20 @@ def run_forward_pipeline(args: argparse.Namespace, conditions: ReactionCondition
         sys.exit(0)
 
     designer = MaillardPipeline(target_tag=DEFAULTS.default_target_tag, minimize_tag=DEFAULTS.default_minimize_tag)
-    
-    formulation = {
-        "name": "Single_Run",
-        "sugars": args.sugars.split(",") if args.sugars else [],
-        "amino_acids": args.amino_acids.split(",") if args.amino_acids else [],
-        "lipids": args.lipids.split(",") if args.lipids else [],
-        "additives": args.additives.split(",") if args.additives else [],
-        "molar_ratios": ratio_dict,
-        "ph": args.ph,
-        "temp": args.temp,
-        "aw": args.aw,
-        "time_minutes": args.time_minutes,
-        "sme_kj_per_kg": args.sme_kj_per_kg,
-        "moisture_regime": args.moisture_regime,
-        "sterilization_temperature_celsius": args.sterilization_temp,
-        "sterilization_time_minutes": args.sterilization_time_minutes,
-        "barrel_zone_temperatures": _parse_float_list(args.barrel_zones) if args.barrel_zones else None,
-        "barrel_zone_time_fractions": _parse_float_list(args.barrel_zone_time_fractions) if args.barrel_zone_time_fractions else None,
-        "protein_type": args.protein_type,
-        "protein_source": args.protein_source,
-        "denaturation_state": args.denaturation_state,
-        "catalyst": args.catalyst
-    }
-    
+
+    formulation = build_formulation_from_args(args, "Single_Run")
+
     logger.info("\nRunning generative pipeline and scoring sensory impact...")
-    res = designer.evaluate_single(formulation, conditions)
+    try:
+        res = designer.evaluate_single(formulation, conditions)
+    except ValueError as exc:
+        report_skipped_formulations(designer)
+        logger.error(f"Formulation error: {exc}")
+        sys.exit(1)
+    report_skipped_formulations(designer)
     logger.info(f"Generated {len(res.targets)} actionable pathways.")
-    
+
+
     if res.targets:
         print("\n  Top Predicted Targets (by likelihood/bottleneck):")
         print_table(res.targets)
@@ -337,7 +543,7 @@ def run_forward_pipeline(args: argparse.Namespace, conditions: ReactionCondition
         formulation=formulation,
         baseline_conditions=conditions,
         designer=designer,
-        conditions_dict=vars(args),
+        conditions_dict=_report_inputs_for_forward_mode(args, formulation),
         report_enabled=bool(args.report),
         output_dir=Path(args.output_dir) if args.output_dir else None,
     )
