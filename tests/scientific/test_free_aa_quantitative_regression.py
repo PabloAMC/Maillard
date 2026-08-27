@@ -77,9 +77,11 @@ from src.benchmark_validation import evaluate_benchmark, evaluate_benchmark_payl
 # The direction also changed, which is why this table now carries one: MFT still
 # under-predicts, FFT now OVER-predicts slightly. The bands stay deliberately wide (they
 # are drift guards, not accuracy claims) and the benchmark's own contract still FAILS --
-# max_ratio 2.2519 against a 1.45 threshold, MALE 0.2192 against 0.09 (1.4533 / 0.1019
-# before the 2026-08-27 Wave N route correction) -- so nothing here
-# turns a failing benchmark into a passing one.
+# as of the 2026-08-27 Wave P refit, max_ratio 1.4110 against a 1.45 threshold (INSIDE)
+# and MALE 0.0935 against 0.09 (OUTSIDE), i.e. it now fails on one criterion instead of
+# two. (History: 2.2519 / 0.2192 after the Wave N route correction; 1.4533 / 0.1019 under
+# Wave I.) Nothing here turns a failing benchmark into a passing one, and the improvement
+# is FIT RECOVERY on a declared fit target -- see the per-compound note below.
 BENCHMARK_EXPECTED_FOLD_ERRORS = {
     ROOT / "data" / "benchmarks" / "cys_ribose_140C_Hofmann1998.json": {
         # compound -> (low, pinned, high, direction). `ratio` is the symmetric fold
@@ -101,11 +103,38 @@ BENCHMARK_EXPECTED_FOLD_ERRORS = {
         # so it fails visibly in every regenerated artifact -- now at max_ratio 2.2519 and
         # MALE 0.2192 rather than 1.4533 / 0.1019.
         #
-        # 2026-08-27 (Wave N): measured 151.87 vs 342 ppb (was 235.32 under Wave I).
-        "2-methyl-3-furanthiol": (1.85, 2.252, 2.80, "under"),
-        # 2026-08-27 (Wave N): measured 243.72 vs 200 ppb (was 219.96 under Wave I).
-        # Still an OVER-prediction; the direction did not change, only the size.
-        "2-furfurylthiol": (1.00, 1.219, 1.60, "over"),
+        # RE-DERIVED 2026-08-27 (Wave P item 1 -- THE OWNER-APPROVED REFIT OF THE
+        # CORRECTED ROUTE). Wave N deliberately shipped `thiol_addition_pentodiulose` at
+        # the un-fitted class value 28.60 and left the refit as an owner decision; Wave P
+        # took it, and ran it LAST in the wave so the fit sees the network that ships.
+        # ONE free parameter over [23.30, 29.65], decision rules identical to Wave H's
+        # script. Record: results/validation/sulfur_barrier_refit_pentodiulose.{json,md};
+        # generator: scripts/generators/refit_thiol_addition_pentodiulose_hofmann.py.
+        #
+        # BOTH ROWS IMPROVED, AND THAT IS NOT A VALIDATION RESULT. This benchmark is a
+        # declared FIT TARGET at `per_row_recovery` leverage; a fitted row getting closer
+        # to its own target is arithmetic, not evidence. Two things make the improvement
+        # readable anyway, and both are pinned here:
+        #   * the profile MINIMUM sits at the range FLOOR (argmin 23.30, hit_a_bound =
+        #     true), so 26.35 is the conservative edge of the indifference band and the
+        #     residual is NOT removable by this barrier -- with the knob pinned at the
+        #     floor the objective is still 0.0836 dex;
+        #   * FFT was NOT fitted and moved anyway, in the OPPOSITE direction, because the
+        #     two lanes draw on the same upstream sugar flux. That coupling is exactly why
+        #     ONE knob was fitted against these two rows rather than two.
+        #
+        # AND THE CONTRACT STILL FAILS, by a hair and on the second criterion only:
+        # max_ratio 1.4110 is now INSIDE the 1.45 threshold, but MALE 0.0935 is outside
+        # 0.09. The contract is UNTOUCHED and the benchmark still reports `scale-gap`.
+        #
+        # 2026-08-27 (Wave P): measured 242.38 vs 342 ppb (was 151.87 under Wave N,
+        # 235.32 under Wave I).
+        "2-methyl-3-furanthiol": (1.15, 1.411, 1.75, "under"),
+        # 2026-08-27 (Wave P): measured 217.99 vs 200 ppb (was 243.72 under Wave N,
+        # 219.96 under Wave I). Still an OVER-prediction; the direction did not change.
+        # Band width held at the same RELATIVE span as the Wave N pin, so this is a
+        # re-centring, not a loosening.
+        "2-furfurylthiol": (1.00, 1.090, 1.43, "over"),
     },
 }
 

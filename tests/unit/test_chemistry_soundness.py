@@ -272,11 +272,24 @@ def test_pentose_reaches_norfuraneol_without_a_reduction_hexose_does_not():
     cyclodehydration. The hexose analogue needs an extra reduction to reach
     furaneol, which is why the classic DMHF precursor is the 6-deoxy sugar
     rhamnose rather than glucose.
+
+    2026-08-27 (Wave N): function renamed `_norfuraneol_mft_route` ->
+    `_furanone_and_mft_route` with the MFT route correction (Cerny & Davidek
+    2003/2004); the structural pentose-vs-hexose claim tested here is
+    unchanged — the reduction-free path to norfuraneol is still pentose-only.
+
+    RE-PINNED 2026-08-27 (Wave P item 6). CAUSE: the hexose branch no longer takes its
+    reducing equivalent from the `[HH]` POOL TOKEN, so "hexose with no `[HH]` in the
+    pool emits nothing" stopped being the right probe — it was testing the gate, not
+    the chemistry, and the gate was the defect (red-team H4, second half: in a
+    cysteine-free system the token's only producer was the pyrazine aromatisation).
+    The reductant is now the AMINO ACID, which the accepted mechanism names
+    (Blank & Fay 1996, 10.1021/jf950439o: "reduction of the resulting
+    acetylformoin-type intermediates"; Kerler et al. 2010, 10.1002/9781444317770.ch3,
+    on the Strecker-active amino acid). The claim under test is unchanged and is now
+    probed with the reductant the chemistry actually uses: a pentose needs NO reductant
+    of any kind, a hexose needs one.
     """
-    # 2026-08-27 (Wave N): function renamed `_norfuraneol_mft_route` ->
-    # `_furanone_and_mft_route` with the MFT route correction (Cerny & Davidek
-    # 2003/2004); the structural pentose-vs-hexose claim tested here is
-    # unchanged — the reduction-free path to norfuraneol is still pentose-only.
     from src.reaction_templates import _furanone_and_mft_route
 
     pentose_only = _furanone_and_mft_route(
@@ -284,18 +297,33 @@ def test_pentose_reaches_norfuraneol_without_a_reduction_hexose_does_not():
     )
     assert [s.reaction_family for s in pentose_only] == ["Furanone_Cyclisation"]
 
-    hexose_no_reductant = _furanone_and_mft_route(
+    # A hexose 1-deoxyosone on its own is still a dead end: it cannot cyclodehydrate
+    # to furaneol without a reductant, and an `[HH]` token is no longer one.
+    hexose_alone = _furanone_and_mft_route(
         [Species("hexose-1-deoxyosone", _DEOXYOSONE_1_HEXOSE)]
     )
-    assert hexose_no_reductant == []
+    assert hexose_alone == []
 
-    hexose_with_reductant = _furanone_and_mft_route(
+    hexose_with_h2_token_only = _furanone_and_mft_route(
         [
             Species("hexose-1-deoxyosone", _DEOXYOSONE_1_HEXOSE),
             Species("H2", "[HH]"),
         ]
     )
-    assert [s.reaction_family for s in hexose_with_reductant] == ["Furanone_Cyclisation"]
+    assert hexose_with_h2_token_only == [], (
+        "the hexose furanone step is pool-gated on the `[HH]` token again — that gate "
+        "is the red-team H4 defect Wave P removed"
+    )
+
+    hexose_with_amino_acid = _furanone_and_mft_route(
+        [
+            Species("hexose-1-deoxyosone", _DEOXYOSONE_1_HEXOSE),
+            Species("glycine", "NCC(=O)O"),
+        ]
+    )
+    assert [s.reaction_family for s in hexose_with_amino_acid] == [
+        "Furanone_Amino_Acid_Reduction"
+    ]
 
 
 def test_legacy_mft_shortcut_is_labelled_as_such():

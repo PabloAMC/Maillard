@@ -51,12 +51,22 @@ comparison_contract:
   # the aligned internal pea snapshot; they are a drift-detection fixture, not a literature
   # claim, and they must be refreshed whenever the snapshot is (see
   # scripts/generators/refresh_internal_reproducibility_snapshots.py).
-  # Cause of this refresh: the MFT ROUTE CORRECTION. The norfuraneol + H2S -> MFT step was
-  # retired on isotope evidence (Cerny & Davidek 2003, 10.1021/jf026123f; 2004,
+  # Cause of the Wave N refresh: the MFT ROUTE CORRECTION. The norfuraneol + H2S -> MFT step
+  # was retired on isotope evidence (Cerny & Davidek 2003, 10.1021/jf026123f; 2004,
   # 10.1021/jf035265m) and replaced by Deoxyosone_Reduction + Thiol_Addition_Pentodiulose at
   # un-fitted ESTIMATED barriers (28.0 / 28.60) rather than the 26.85 Wave H had fitted
-  # through the contradicted route. MFT therefore falls BELOW both FFT and
-  # 2,5-dimethylpyrazine again. Previous order (Wave I): MFT 3, FFT 4, DMP 5.
+  # through the contradicted route. MFT therefore fell BELOW both FFT and
+  # 2,5-dimethylpyrazine. Order under Wave I: MFT 3, FFT 4, DMP 5. Under Wave N: FFT 3,
+  # DMP 4, MFT 5.
+  #
+  # RE-RANKED AGAIN 2026-08-27 (Wave P item 1). MFT returns to rank 3 and DMP falls to 5.
+  # Cause: `thiol_addition_pentodiulose` was refitted against cys_ribose_140C_Hofmann1998,
+  # 28.60 -> 26.35 kcal/mol (record results/validation/sulfur_barrier_refit_pentodiulose.md),
+  # so the MFT lane speeds up relative to the rest of the volatile budget. On the aligned pea
+  # snapshot: MFT 0.0076859, FFT 0.0049482, DMP 0.0047780. Note MFT and DMP are within 1.6x
+  # of each other, so this ordering is NOT a robust claim and this fixture is not evidence of
+  # one — it exists so that a model change shows up as a fixture edit with a reason attached,
+  # rather than as a mysterious "ranking contract not yet passing" promotion blocker.
   observable_targets:
   - name: Hexanal
     role: adverse_marker
@@ -66,15 +76,15 @@ comparison_contract:
     role: adverse_marker
     expected_rank: 2
     direction: lower
-  - name: 2-furfurylthiol
+  - name: 2-methyl-3-furanthiol
     role: desirable_marker
     expected_rank: 3
     direction: higher
-  - name: 2,5-dimethylpyrazine
+  - name: 2-furfurylthiol
     role: desirable_marker
     expected_rank: 4
     direction: higher
-  - name: 2-methyl-3-furanthiol
+  - name: 2,5-dimethylpyrazine
     role: desirable_marker
     expected_rank: 5
     direction: higher

@@ -62,187 +62,187 @@
   "stage1_coarse_tau_scan": [
     {
       "log10_tau_ref_min": 1.0,
-      "objective": 1.2792802430317618
+      "objective": 1.3121204540913405
     },
     {
       "log10_tau_ref_min": 2.0,
-      "objective": 1.1553918286241907
+      "objective": 1.1875802538269835
     },
     {
       "log10_tau_ref_min": 3.0,
-      "objective": 0.9790546694526179
+      "objective": 1.0112430946554107
     },
     {
       "log10_tau_ref_min": 4.0,
-      "objective": 0.8748902340274111
+      "objective": 0.8817005963660266
     },
     {
       "log10_tau_ref_min": 5.0,
-      "objective": 1.068069986781965
+      "objective": 1.0797981911616128
     },
     {
       "log10_tau_ref_min": 6.0,
-      "objective": 1.3699149724203576
+      "objective": 1.3816431768000055
     },
     {
       "log10_tau_ref_min": 7.0,
-      "objective": 1.6122049465240536
+      "objective": 1.6239331509037014
     },
     {
       "log10_tau_ref_min": 8.0,
-      "objective": 1.7194821116813337
+      "objective": 1.7312103160609815
     },
     {
       "log10_tau_ref_min": 9.0,
-      "objective": 1.7407423261671675
+      "objective": 1.7524705305468153
     },
     {
       "log10_tau_ref_min": 10.0,
-      "objective": 1.7432298577647332
+      "objective": 1.754958062144381
     },
     {
       "log10_tau_ref_min": 11.0,
-      "objective": 1.743483428495737
+      "objective": 1.7552116328753848
     }
   ],
   "stage2_fine_tau_scan": [
     {
       "log10_tau_ref_min": 3.0,
-      "objective": 0.9790546694526179
+      "objective": 1.0112430946554107
     },
     {
       "log10_tau_ref_min": 3.1,
-      "objective": 0.960568647853604
+      "objective": 0.9927570730563968
     },
     {
       "log10_tau_ref_min": 3.2,
-      "objective": 0.942028675514708
+      "objective": 0.974217100717501
     },
     {
       "log10_tau_ref_min": 3.3,
-      "objective": 0.9234457616010338
+      "objective": 0.9556341868038267
     },
     {
       "log10_tau_ref_min": 3.4,
-      "objective": 0.9048286933350546
+      "objective": 0.9370171185378474
     },
     {
       "log10_tau_ref_min": 3.5,
-      "objective": 0.8861844800560036
+      "objective": 0.9183729052587964
     },
     {
       "log10_tau_ref_min": 3.6,
-      "objective": 0.8681824797090192
+      "objective": 0.900370904911812
     },
     {
       "log10_tau_ref_min": 3.7,
-      "objective": 0.8619767649236201
+      "objective": 0.8941651901264129
     },
     {
       "log10_tau_ref_min": 3.8,
-      "objective": 0.8623851042969537
+      "objective": 0.8879486809574959
     },
     {
       "log10_tau_ref_min": 3.9,
-      "objective": 0.8686412072786642
+      "objective": 0.8817231522206507
     },
     {
       "log10_tau_ref_min": 4.0,
-      "objective": 0.8748902340274111
+      "objective": 0.8817005963660266
     },
     {
       "log10_tau_ref_min": 4.1,
-      "objective": 0.8811321335900528
+      "objective": 0.8879424959286684
     },
     {
       "log10_tau_ref_min": 4.2,
-      "objective": 0.8891148152029357
+      "objective": 0.901980363373517
     },
     {
       "log10_tau_ref_min": 4.3,
-      "objective": 0.9078192245762947
+      "objective": 0.920684772746876
     },
     {
       "log10_tau_ref_min": 4.4,
-      "objective": 0.9265105690786211
+      "objective": 0.9393761172492023
     },
     {
       "log10_tau_ref_min": 4.5,
-      "objective": 0.9451857588951836
+      "objective": 0.9580513070657649
     },
     {
       "log10_tau_ref_min": 4.6,
-      "objective": 0.9638408640228797
+      "objective": 0.976706412193461
     },
     {
       "log10_tau_ref_min": 4.7,
-      "objective": 0.9824709164011988
+      "objective": 0.99533646457178
     },
     {
       "log10_tau_ref_min": 4.8,
-      "objective": 1.0060426091396035
+      "objective": 1.0177708135192514
     },
     {
       "log10_tau_ref_min": 4.9,
-      "objective": 1.0370821367546854
+      "objective": 1.0488103411343332
     },
     {
       "log10_tau_ref_min": 5.0,
-      "objective": 1.068069986781965
+      "objective": 1.0797981911616128
     }
   ],
   "stage3_baseline_scan": [
     {
       "log10_baseline": -9.0,
-      "objective": 0.861994606497121
+      "objective": 0.88177738227851
     },
     {
       "log10_baseline": -8.0,
-      "objective": 0.8619944456275187
+      "objective": 0.8817766898377231
     },
     {
       "log10_baseline": -7.0,
-      "objective": 0.861992837066302
+      "objective": 0.8817697661065186
     },
     {
       "log10_baseline": -6.0,
-      "objective": 0.8619767649236201
+      "objective": 0.8817005963660266
     },
     {
       "log10_baseline": -5.0,
-      "objective": 0.8618173794850318
+      "objective": 0.8810155627843753
     },
     {
       "log10_baseline": -4.0,
-      "objective": 0.860347036273554
+      "objective": 0.8747513188413878
     }
   ],
   "stage4_ea_sensitivity_not_fitted": [
     {
       "apparent_activation_energy_kj_mol": 97.0,
-      "objective": 0.8549128538684329
+      "objective": 0.8684364152370055
     },
     {
       "apparent_activation_energy_kj_mol": 110.0,
-      "objective": 0.8589059258692758
+      "objective": 0.8749056661114943
     },
     {
       "apparent_activation_energy_kj_mol": 120.0,
-      "objective": 0.8619767649236201
+      "objective": 0.8817005963660266
     },
     {
       "apparent_activation_energy_kj_mol": 138.0,
-      "objective": 0.868357578671932
+      "objective": 0.8939244489154338
     },
     {
       "apparent_activation_energy_kj_mol": 160.0,
-      "objective": 0.8833046857828595
+      "objective": 0.9088461308140849
     }
   ],
   "shipped_constants": {
     "baseline_volatile_yield_fraction": 1e-06,
     "reference_conversion_time_min": 12589.0,
-    "objective": 0.8811315867187413,
+    "objective": 0.8879419490573568,
     "rows": [
       {
         "benchmark_id": "acrylamide_spi_extrusion_130C_ACSRef3",
@@ -272,17 +272,17 @@
         "benchmark_id": "cys_ribose_140C_Hofmann1998",
         "compound": "2-methyl-3-furanthiol",
         "measured_ppb": 342.0,
-        "predicted_ppb": 151.8689491666311,
+        "predicted_ppb": 242.37816368847723,
         "scored": true,
-        "abs_log10_error": 0.35255711813196794
+        "abs_log10_error": 0.14953261521854883
       },
       {
         "benchmark_id": "cys_ribose_140C_Hofmann1998",
         "compound": "2-furfurylthiol",
         "measured_ppb": 200.0,
-        "predicted_ppb": 243.72374026781145,
+        "predicted_ppb": 217.99992675087188,
         "scored": true,
-        "abs_log10_error": 0.085867838671132
+        "abs_log10_error": 0.03742635201540578
       },
       {
         "benchmark_id": "furosine_extrusion_crossover_140C_RamirezJimenez2000",
@@ -328,17 +328,17 @@
         "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
         "compound": "nonanal",
         "measured_ppb": 24.0,
-        "predicted_ppb": 23.999997971756642,
+        "predicted_ppb": 10.559999107572926,
         "scored": true,
-        "abs_log10_error": 3.6702288968256345e-08
+        "abs_log10_error": 0.3565473602161014
       },
       {
         "benchmark_id": "resconi_2023_pbma_beef_identity_benchmark",
         "compound": "furfural",
         "measured_ppb": 715.22,
-        "predicted_ppb": 3261.9060683989755,
+        "predicted_ppb": 3330.966009760407,
         "scored": true,
-        "abs_log10_error": 0.6590318003885733
+        "abs_log10_error": 0.668130550716041
       },
       {
         "benchmark_id": "soy_isolate_40C_PratapSingh2021",
@@ -360,9 +360,9 @@
         "benchmark_id": "thiamine_cys_glucose_120C_Bolton1994",
         "compound": "2-Methyl-3-furanthiol (MFT)",
         "measured_ppb": 13.0,
-        "predicted_ppb": 0.016821702037885893,
+        "predicted_ppb": 0.017024886407605383,
         "scored": true,
-        "abs_log10_error": 2.8880734162394277
+        "abs_log10_error": 2.8828591293851416
       },
       {
         "benchmark_id": "thiamine_cys_xylose_145C_Cerny2008",
@@ -377,10 +377,10 @@
   "applied_to_runtime": false,
   "fitted_constants": {
     "baseline_volatile_yield_fraction": 1e-06,
-    "reference_conversion_time_min": 5011.872336272725
+    "reference_conversion_time_min": 10000.0
   },
-  "objective_at_fit": 0.8619767649236201,
-  "objective_projection_sensitive_rows_only": 0.8367155233256158,
+  "objective_at_fit": 0.8817005963660266,
+  "objective_projection_sensitive_rows_only": 0.8285223192385545,
   "projection_sensitive_rows": 5,
   "scored_rows": 16,
   "total_rows": 16,
@@ -416,18 +416,18 @@
       "benchmark_id": "cys_ribose_140C_Hofmann1998",
       "compound": "2-methyl-3-furanthiol",
       "measured_ppb": 342.0,
-      "predicted_ppb": 380.94949425707523,
+      "predicted_ppb": 305.0285982650012,
       "scored": true,
-      "abs_log10_error": 0.04684129529033489,
+      "abs_log10_error": 0.0496855470816909,
       "projection_sensitive": true
     },
     {
       "benchmark_id": "cys_ribose_140C_Hofmann1998",
       "compound": "2-furfurylthiol",
       "measured_ppb": 200.0,
-      "predicted_ppb": 611.3589124238565,
+      "predicted_ppb": 274.3490216559168,
       "scored": true,
-      "abs_log10_error": 0.48526625209343494,
+      "abs_log10_error": 0.1372734201522637,
       "projection_sensitive": true
     },
     {
@@ -479,18 +479,18 @@
       "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
       "compound": "nonanal",
       "measured_ppb": 24.0,
-      "predicted_ppb": 23.999997971756642,
+      "predicted_ppb": 10.559999107572926,
       "scored": true,
-      "abs_log10_error": 3.6702288968256345e-08,
+      "abs_log10_error": 0.3565473602161014,
       "projection_sensitive": false
     },
     {
       "benchmark_id": "resconi_2023_pbma_beef_identity_benchmark",
       "compound": "furfural",
       "measured_ppb": 715.22,
-      "predicted_ppb": 8162.916867442629,
+      "predicted_ppb": 4190.588272606087,
       "scored": true,
-      "abs_log10_error": 1.0574057232734826,
+      "abs_log10_error": 0.7678353429614506,
       "projection_sensitive": true
     },
     {
@@ -515,26 +515,26 @@
       "benchmark_id": "thiamine_cys_glucose_120C_Bolton1994",
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "measured_ppb": 13.0,
-      "predicted_ppb": 0.042170267915451656,
+      "predicted_ppb": 0.021419201331403747,
       "scored": true,
-      "abs_log10_error": 2.4889369921306583,
+      "abs_log10_error": 2.783140079267156,
       "projection_sensitive": true
     },
     {
       "benchmark_id": "thiamine_cys_xylose_145C_Cerny2008",
       "compound": "2-Methyl-3-furanthiol (MFT)",
       "measured_ppb": 2.47,
-      "predicted_ppb": 1.9389633465783904,
+      "predicted_ppb": 0.9727914537158602,
       "scored": true,
-      "abs_log10_error": 0.10512735384016844,
+      "abs_log10_error": 0.4046772067302109,
       "projection_sensitive": true
     }
   ],
   "wave_h_decision": {
     "date": "2026-08-27",
     "decision": "FIT NOT APPLIED \u2014 incumbent reference_conversion_time_min retained",
-    "gap": "shipped tau_ref = 12589 min (objective 0.8811 dex); refit optimum = 5011.87 min (objective 0.8620 dex), i.e. the fit wants the global volatile budget scaled by 2.51x. The optimum has moved repeatedly as the chemistry and the reference data were corrected (Wave G1 chemistry rebuild, Wave I quarantines, Wave N MFT route correction, Wave K/M benchmark content corrections); it is a scale that absorbs whatever the rest of the model gets wrong, which is exactly why it is reported and not applied.",
-    "why_not_applied": "tau_ref is a SINGLE GLOBAL SCALE on the volatile budget. Moving it does not improve any mechanism; it trades one lane against another, and this panel's mean-|log10| objective takes that trade happily. At the refit optimum the Hofmann1998 MFT residual collapses to 0.0468 dex (from 0.3526 dex shipped) while the Resconi 2023 furfural residual grows to 1.0574 dex (from 0.6590 dex shipped), i.e. from 4.6x to 11.4x OVER. The arithmetic is decisive: at the shipped value the total predicted pool over the five species this benchmark's system tracks is ~1126 ppb against a measured MFT+FFT of 542 ppb (measured 2026-08-27, Wave M: furfural 572.3, FFT 243.7, MFT 151.9, bis(2-methyl-3-furyl) disulfide 92.1, 2,5-dimethylpyrazine 66.4), so the budget is already the right order of magnitude and the sulfur deficit is an ALLOCATION deficit \u2014 furfural, unmeasured in that benchmark, takes ~51% of the pool. See results/validation/sulfur_barrier_refit_hofmann.md (NOTE: that record is itself STALE as of Wave N \u2014 it profiles `thiol_addition_norfuraneol`, a family the isotope evidence retired; re-running it is an open owner item). Raising the global budget 2.51x to close a 2.25x MFT gap means supplying ~2800 ppb of volatiles at these conditions to explain 542 ppb of measured product, sending the rest to species nobody measured, and pushing FFT from 1.22x over to ~3.1x over. That is not a calibration, it is a way of making the allocation finding invisible. The incumbent is therefore retained and the gap is reported.",
+    "gap": "shipped tau_ref = 12589 min (objective 0.8879 dex); refit optimum = 10000 min (objective 0.8817 dex), i.e. the fit wants the global volatile budget scaled by 1.26x. The optimum has moved repeatedly as the chemistry and the reference data were corrected (Wave G1 chemistry rebuild, Wave I quarantines, Wave N MFT route correction, Wave K/M benchmark content corrections); it is a scale that absorbs whatever the rest of the model gets wrong, which is exactly why it is reported and not applied.",
+    "why_not_applied": "tau_ref is a SINGLE GLOBAL SCALE on the volatile budget. Moving it does not improve any mechanism; it trades one lane against another, and this panel's mean-|log10| objective takes that trade happily. At the refit optimum the Hofmann1998 MFT residual collapses to 0.0497 dex (from 0.1495 dex shipped) while the Resconi 2023 furfural residual grows to 0.7678 dex (from 0.6681 dex shipped), i.e. from 4.7x to 5.9x OVER. The arithmetic is decisive: at the shipped value the total predicted pool over the five species this benchmark's system tracks is 1152.3 ppb against a measured MFT+FFT of 542 ppb (derived live, furfural 511.9, 2-methyl-3-furanthiol 242.4, 2-furfurylthiol 218.0, bis(2-methyl-3-furyl) disulfide 120.6, 2,5-dimethylpyrazine 59.4), so the budget is already the right order of magnitude and the sulfur deficit is an ALLOCATION deficit \u2014 furfural, unmeasured in that benchmark, takes 44% of the pool. See results/validation/sulfur_barrier_refit_pentodiulose.md (the Wave P refit of `thiol_addition_pentodiulose` against this same benchmark; it SUPERSEDES sulfur_barrier_refit_hofmann.md, which is stale because it profiles `thiol_addition_norfuraneol`, a family the isotope evidence retired). Raising the global budget 1.26x to close the current MFT gap (1.41x under) means supplying ~1451 ppb of volatiles at these conditions to explain 542 ppb of measured product, sending the rest to species nobody measured, and pushing FFT from 1.09x over further over. That is not a calibration, it is a way of making the allocation finding invisible. The incumbent is therefore retained and the gap is reported.",
     "what_would_justify_applying_it": "A refit of the ALLOCATION (the depth-bias and direct-sulfur heuristics, both unconstrained legacy fits from the quarantined-target era), done first and with its own literature constraints, after which a global scale would be fitting a scale rather than absorbing a selectivity error."
   }
 }

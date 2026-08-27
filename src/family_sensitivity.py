@@ -54,14 +54,21 @@ ENGINE_FAMILY_LABELS: tuple[str, ...] = (
     "Enolisation_2_3",
     "Enolisation_2_3_Amadori",
     "Enolisation_Intermediate",
+    "Fructofuranosyl_Dehydration",  # Wave P 2026-08-27: fructose HMF route correction
     "Furan_Ring_Aromatisation",
+    "Furanone_Amino_Acid_Reduction",  # Wave P 2026-08-27: DMHF [HH] gate removed
     "Furanone_Cyclisation",
     "Furanone_Formation",
+    "Furanone_Reductive_Opening",  # Wave P 2026-08-27: norfuraneol -> 2,3-pentanedione
     "Generalized_Deamination",
     "Lipid_Homolysis",
     "Lipid_Schiff_Base",
     "Lipid_Strecker_Synergy",
     "Lipid_Thiazole_Condensation",
+    # Wave P 2026-08-27: the C2+C3 recombination lane (Hofmann & Schieberle 1998).
+    "Mercaptoketone_Aldol_Addition",
+    "Mercaptoketone_Cyclodehydration",
+    "Mercaptoketone_Formation",
     "Retro_Aldol_Fragmentation",
     "Safety_Risk_AGE",
     "Safety_Risk_Acrylamide",

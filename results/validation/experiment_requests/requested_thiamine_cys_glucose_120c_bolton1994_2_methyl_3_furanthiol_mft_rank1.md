@@ -7,9 +7,9 @@ Generated from the current Monte-Carlo benchmark envelope.
 
 - Compound: **2-Methyl-3-furanthiol (MFT)**
 - Envelope miss: 2.83 dex
-- 90% CI width: 0.86 dex
+- 90% CI width: 0.85 dex
 - ODT: 0.007 µg/kg; decision relevance 3.27
-- Rationale: measured outside 90% CI by 2.83 dex; CI width 0.86 dex; ≈2e+03× ODT (decision_relevance=3.27); critical meaty odorant in a FREE-PRECURSOR system — the open question is absolute yield vs precursor dose and temperature, not matrix transfer
+- Rationale: measured outside 90% CI by 2.83 dex; CI width 0.85 dex; ≈2e+03× ODT (decision_relevance=3.27); critical meaty odorant in a FREE-PRECURSOR system — the open question is absolute yield vs precursor dose and temperature, not matrix transfer
 
 
 
@@ -42,7 +42,7 @@ Aqueous buffered model system ONLY -- do NOT add a protein isolate; this benchma
 
 ## CRO send-to-lab checklist
 
-- [ ] Confirm target compound identity and calibrate over a range spanning BOTH the published value (≈ 13 ppb) and the model's 90% CI midpoint (≈ 0.0179676 ppb). They differ by 724× — that disagreement is *why* this experiment is ranked, so a calibration range covering only one of them cannot resolve it.
+- [ ] Confirm target compound identity and calibrate over a range spanning BOTH the published value (≈ 13 ppb) and the model's 90% CI midpoint (≈ 0.0178032 ppb). They differ by 730× — that disagreement is *why* this experiment is ranked, so a calibration range covering only one of them cannot resolve it.
 - [ ] Procure or confirm availability of the suggested isotopically-labeled internal standards above; substitute and **note the swap** in `analytical_context.notes`.
 - [ ] Run ≥ 3 biological replicates plus a process blank and a matrix blank.
 - [ ] Measure and report LoD and LoQ; do **not** backfill non-detects (`non_detect_policy: report_lod_and_do_not_backfill`).

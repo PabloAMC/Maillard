@@ -18,15 +18,15 @@ How to read the PNG:
 
 | SLR | Family | Posture | Integrated | Benchmarks | Strict Ready | Quantitative Points | Median Ratio | Mean |log10 error| |
 | --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: |
-| 01 | Amino acid-sugar Maillard core | first_class_core | True | 7 | 0 | 20 | 1.000 | 0.192 |
-| 02 | Lipid oxidation and carbonylic crosstalk | immediate_expansion_lane | True | 7 | 0 | 15 | 1.000 | 0.001 |
+| 01 | Amino acid-sugar Maillard core | first_class_core | True | 7 | 0 | 20 | 1.000 | 0.179 |
+| 02 | Lipid oxidation and carbonylic crosstalk | immediate_expansion_lane | True | 7 | 0 | 15 | 1.000 | 0.024 |
 | 03 | Thiamine degradation and sulfur support | high_value_support_lane | True | 2 | 0 | 0 | - | - |
 | 04 | Nucleotide degradation and ribose support | high_value_support_lane | True | 0 | 0 | 0 | - | - |
 | 05 | Glutathione and peptide support | high_value_support_lane | True | 0 | 0 | 0 | - | - |
 | 06 | Alternative protein matrix scope | matrix_scope_lane | True | 0 | 0 | 0 | - | - |
 | 07 | Reducing sugar and carbonyl donor hierarchy | immediate_expansion_lane | True | 0 | 0 | 0 | - | - |
 | 08 | Plant off-notes and Maillard suppression | guardrail_lane | True | 1 | 0 | 1 | 15.387 | 1.187 |
-| 09 | Carbohydrate pyrolysis and caramelization | failure_mode_lane | True | 5 | 0 | 3 | 1.000 | 0.220 |
+| 09 | Carbohydrate pyrolysis and caramelization | failure_mode_lane | True | 5 | 0 | 3 | 1.000 | 0.223 |
 | 10 | Microbial fermentation pretreatment | upstream_pretreatment_lane | True | 0 | 0 | 0 | - | - |
 | 11 | Maillard/Lipid Crosstalk | first_class_runtime_lane | True | 0 | 0 | 0 | - | - |
 | 12 | Protein Damage Markers | first_class_runtime_lane | True | 3 | 0 | 0 | - | - |

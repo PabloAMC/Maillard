@@ -15,6 +15,7 @@ from src.benchmark_validation import (
     snapshot_benchmark_targets,
     summarize_evaluation,
 )
+from src.lipid_oxidation import PEA_LIPID_PROFILE
 
 
 MATRIX_ONLY_BENCHMARKS = {
@@ -238,6 +239,36 @@ def test_trikusuma_heated_pea_matrix_fit_is_recovered_to_within_1_05x():
 
     Note the last assertion, which is the honest half of this test and stays: even at 1.02x
     recovery, ``strict_ready`` is False.
+
+    RE-PINNED 2026-08-27 (Wave P item 4) -- AND THE RECOVERY BROKE, WHICH IS THE RESULT.
+    The nonanal row no longer recovers, and the reason is the cleanest illustration this
+    campaign has produced of what a back-solved constant actually measures. Nonanal is the C9
+    fragment of the OLEATE double bond and appears in NEITHER linoleate hydroperoxide isomer's
+    product list (Miyazaki et al. 2023, 10.1093/bbb/zbac189, read in full text; Hung, Katrib &
+    Martin 2005, 10.1021/jp0500900, quantify "1-nonanal (30 +/- 3% carbon yield)" from oleate
+    cleavage). The model scaled it off ``linoleic_acid_pct`` and
+    ``LipidProfile.oleic_acid_pct`` was read by no code path at all. Wave P corrected the
+    SUBSTRATE -- no constant fitted, no observability factor refitted -- and the nonanal row
+    fell from 24.00 ppb (exact recovery) to 10.56 ppb, i.e. 2.2727x under, which is EXACTLY
+    1 / (22.0 / 50.0), the pea oleic/linoleic ratio.
+
+    A constant that tracks a substrate error to five significant figures was never measuring
+    the model. It was deliberately NOT refitted: refitting would re-absorb the correction into
+    the same constant and make the fix invisible, and Trikusuma 2019 is in any case still the
+    last content-unverified pillar of the matrix lane, so there is no verified anchor to refit
+    against (see the dated note on the record in ``src/matrix_calibration_registry.py``).
+
+    Consequences pinned below, all of them worse than before and none of them clawed back:
+      * ``ratios["nonanal"]`` is pinned TWO-SIDED at the exact ratio rather than loosened to a
+        one-sided bound, so drift in either direction fails;
+      * ``overall_status`` moves ``pass`` -> ``scale-gap``, which takes fit-recovery passes
+        across the whole panel from 1/4 to 0/4 (see
+        ``tests/scientific/test_honest_headline_guards.py``) and leaves every remaining panel
+        pass in the internal-synthetic bucket;
+      * the hexanal and 2-pentylfuran rows, whose factors were NOT substrate-affected, still
+        recover exactly -- which is what identifies the cause as the substrate and nothing
+        else.
+    The ordering assertion is kept and still holds.
     """
     evaluation = evaluate_benchmark(TRIKUSUMA_BENCHMARK)
     summary = summarize_evaluation(evaluation, protein_type="pea_iso")
@@ -247,8 +278,24 @@ def test_trikusuma_heated_pea_matrix_fit_is_recovered_to_within_1_05x():
     assert predicted["hexanal"] > predicted["2-pentylfuran"] > predicted["nonanal"]
     assert ratios["hexanal"] <= 1.05
     assert ratios["2-pentylfuran"] <= 1.05
-    assert ratios["nonanal"] <= 1.05
+
+    # The two rows whose factors were solved against the correct substrate still recover.
+    assert predicted["hexanal"] == pytest.approx(782.0, rel=1e-4)
+    assert predicted["2-pentylfuran"] == pytest.approx(163.0, rel=1e-4)
+
+    # The nonanal row does not, and by exactly the oleic/linoleic ratio.
+    oleic_over_linoleic = (
+        PEA_LIPID_PROFILE.oleic_acid_pct / PEA_LIPID_PROFILE.linoleic_acid_pct
+    )
+    assert predicted["nonanal"] == pytest.approx(24.0 * oleic_over_linoleic, rel=1e-4)
+    assert ratios["nonanal"] == pytest.approx(1.0 / oleic_over_linoleic, rel=1e-4)
+    assert predicted["nonanal"] < 24.0, "nonanal must under-predict its own former anchor"
+
     assert summary.process_state == "heated_matrix"
     assert summary.ranking_contract_status == "pass"
-    assert summary.overall_status == "pass"
+    assert summary.overall_status == "scale-gap", (
+        "the Trikusuma row is expected to FAIL on scale since the Wave P oleate substrate "
+        "correction; a return to `pass` means either a genuine improvement or the nonanal "
+        "observability factor being refitted to its own benchmark -- check which"
+    )
     assert summary.strict_ready is False

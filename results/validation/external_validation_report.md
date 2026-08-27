@@ -51,8 +51,8 @@ Samples per hold-out bundle: 200; seed 0; bundles evaluated: 4.
 | --- | ---: | ---: | ---: |
 | external_validation_bi_2020_raw_pea_hexanal | 1 | 1/1 (100.0%) | 1.24x |
 | external_validation_bi_2020_roasted_pea_hexanal | 1 | 0/1 (0.0%) | 2474.38x |
-| external_validation_li_2026_spi_wg_hme_control | 4 | 1/4 (25.0%) | 159.36x |
-| external_validation_liu_2023_ppi_offnote_baseline | 2 | 2/2 (100.0%) | 14.55x |
+| external_validation_li_2026_spi_wg_hme_control | 4 | 1/4 (25.0%) | 104.98x |
+| external_validation_liu_2023_ppi_offnote_baseline | 2 | 2/2 (100.0%) | 9.65x |
 
 ## Per-compound envelopes
 
@@ -84,7 +84,7 @@ Samples per hold-out bundle: 200; seed 0; bundles evaluated: 4.
 | 1-hexanol | 20 | `reported_point_value` | 355 | 2.24e+04 | 3.7e+06 | 1117.48x | no |
 | 2-pentylfuran | 5.63e+03 | `reported_point_value` | 175 | 1.1e+04 | 1.83e+06 | 1.96x | yes |
 | hexanal | 606 | `reported_point_value` | 895 | 5.64e+04 | 9.33e+06 | 93.15x | no |
-| nonanal | 72.7 | `reported_point_value` | 314 | 1.98e+04 | 3.28e+06 | 272.63x | no |
+| nonanal | 72.7 | `reported_point_value` | 136 | 8.6e+03 | 1.42e+06 | 118.31x | no |
 
 ### external_validation_liu_2023_ppi_offnote_baseline
 
@@ -94,4 +94,4 @@ Samples per hold-out bundle: 200; seed 0; bundles evaluated: 4.
 | Compound | Reference value (ppb) | Provenance | P5 | P50 | P95 | Fold error | Inside 90% CI |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | hexanal | 52 | `band_geometric_midpoint` | 16.1 | 1.01e+03 | 1.67e+05 | 19.50x | yes |
-| nonanal | 15.8 | `band_geometric_midpoint` | 2.73 | 172 | 2.84e+04 | 10.86x | yes |
+| nonanal | 15.8 | `band_geometric_midpoint` | 1.2 | 75.5 | 1.25e+04 | 4.78x | yes |

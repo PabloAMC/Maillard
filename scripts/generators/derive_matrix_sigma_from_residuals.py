@@ -64,7 +64,10 @@ from src.benchmark_validation import (
     MATRIX_BENCHMARK_BASE_MARKER_YIELDS,
     MATRIX_BENCHMARK_PROFILES,
 )
-from src.lipid_oxidation import predict_hexanal_generation
+from src.lipid_oxidation import (
+    hydroperoxide_pool_key_for_marker,
+    predict_hexanal_generation,
+)
 from src.uncertainty_propagation import DEFAULT_UNCALIBRATED_OBSERVABLE_PRIORS
 
 REFERENCE_LANE = ("pea_iso", "ambient_slurry")
@@ -86,7 +89,16 @@ def _uncalibrated_prediction_ppb(protein_type: str, temp_c: float, time_min: flo
     oxidation = predict_hexanal_generation(
         profile, temp_C=float(temp_c), time_min=float(time_min), oxygen_availability=1.0
     )
-    load_ppb = float(oxidation["total_hydroperoxide"]) * 1000.0
+    # Wave P item 4 (2026-08-27): the uncalibrated load is PER MARKER now, because
+    # nonanal is cleaved from the OLEATE pool and the rest from the LINOLEATE pool.
+    # This is NOT a no-op: one of the five scored residuals is the Trikusuma heated-pea
+    # Nonanal row, whose uncalibrated prediction falls 3238.93 -> 1425.13 ppb (exactly
+    # the pea oleic/linoleic ratio, 0.4400x). Measured effect on the derived prior:
+    # rms_ln_sigma 3.2520 -> 3.0166, bias_fold 3.9065 -> 3.3149, 90% CI
+    # [2.1856, 6.7958] -> [2.0274, 6.3038]. The SHIPPED 2.86 was NOT moved and is
+    # still inside the CI -- it moved closer to the derivation, which is a consequence
+    # of a substrate correction and not a reason to narrow the prior.
+    load_ppb = float(oxidation[hydroperoxide_pool_key_for_marker(yield_key)]) * 1000.0
     return load_ppb * float(MATRIX_BENCHMARK_BASE_MARKER_YIELDS[yield_key])
 
 

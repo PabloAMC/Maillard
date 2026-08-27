@@ -130,6 +130,8 @@ results/validation/*
 # reviewable without a run.
 !results/validation/sulfur_barrier_refit_hofmann.json
 !results/validation/sulfur_barrier_refit_hofmann.md
+!results/validation/sulfur_barrier_refit_pentodiulose.json
+!results/validation/sulfur_barrier_refit_pentodiulose.md
 !results/validation/hydrolysate_observability_rederivation.json
 !results/validation/hydrolysate_observability_rederivation.md
 !results/validation/family_implementation_status.json

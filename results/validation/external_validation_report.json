@@ -106,18 +106,18 @@
           "value_provenance": "reported_point_value"
         },
         {
-          "abs_log10_error": 2.4355667794203226,
+          "abs_log10_error": 2.0730187458371265,
           "ci_width_log10": 4.0176770887691,
           "compound": "nonanal",
-          "fold_error": 272.6256910406273,
+          "fold_error": 118.30926214970623,
           "inside_ci": false,
           "is_direct_measurement": true,
           "measured_ppb": 72.66,
-          "predicted_mean": 1129868.6121183329,
-          "predicted_p5": 314.4500674903961,
-          "predicted_p50": 19808.98271101198,
-          "predicted_p95": 3275131.793994685,
-          "predicted_std": 8430023.681896925,
+          "predicted_mean": 490320.3411079559,
+          "predicted_p5": 136.45946325054928,
+          "predicted_p50": 8596.350987797654,
+          "predicted_p95": 1421283.608714675,
+          "predicted_std": 3658312.1638420625,
           "value_provenance": "reported_point_value"
         }
       ],
@@ -126,8 +126,8 @@
       "inside_ci_count": 1,
       "inside_ci_rate": 0.25,
       "matched_compounds": 4,
-      "median_abs_log10_error": 2.202368063356232,
-      "median_accuracy_fold": 159.35586914496432
+      "median_abs_log10_error": 2.021094046564634,
+      "median_accuracy_fold": 104.97697319042058
     },
     {
       "bench_file": "/Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/external_validation/external_validation_liu_2023_ppi_offnote_baseline.json",
@@ -149,18 +149,18 @@
           "value_provenance": "band_geometric_midpoint"
         },
         {
-          "abs_log10_error": 1.0358404515117414,
+          "abs_log10_error": 0.6792931279979288,
           "ci_width_log10": 4.0176770887691,
           "compound": "nonanal",
-          "fold_error": 10.860265724268737,
+          "fold_error": 4.7785169186782435,
           "inside_ci": true,
           "is_direct_measurement": false,
           "measured_ppb": 15.81,
-          "predicted_mean": 9793.503718461785,
-          "predicted_p5": 2.7255982440861244,
-          "predicted_p50": 171.70080110068875,
-          "predicted_p95": 28388.270157185416,
-          "predicted_std": 73069.97237545339,
+          "predicted_mean": 4309.141636123185,
+          "predicted_p5": 1.1992632273978945,
+          "predicted_p50": 75.54835248430304,
+          "predicted_p95": 12490.83886916158,
+          "predicted_std": 32150.787845199487,
           "value_provenance": "band_geometric_midpoint"
         }
       ],
@@ -169,8 +169,8 @@
       "inside_ci_count": 2,
       "inside_ci_rate": 1.0,
       "matched_compounds": 2,
-      "median_abs_log10_error": 1.1629067153654025,
-      "median_accuracy_fold": 14.551464876442711
+      "median_abs_log10_error": 0.9846330536084963,
+      "median_accuracy_fold": 9.652349829039157
     }
   ],
   "external_failing_compounds": [
@@ -186,7 +186,7 @@
     },
     {
       "compound": "nonanal",
-      "mean_abs_log10_error": 1.735703615466032,
+      "mean_abs_log10_error": 1.3761559369175278,
       "n_holdout_observations": 2
     }
   ],

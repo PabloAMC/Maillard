@@ -22,16 +22,16 @@ measured_volatiles:
     _target_role: primary_request_target
 request_metadata:
   originating_voi_rank: 5
-  voi_score: 3.8743136591192067
-  voi_rationale: CI width 2.75 dex; ≈5e+04× ODT (decision_relevance=4.69); critical
+  voi_score: 3.773298531742101
+  voi_rationale: CI width 2.68 dex; ≈5e+04× ODT (decision_relevance=4.69); critical
     meaty odorant in a FREE-PRECURSOR system — the open question is absolute yield
     vs precursor dose and temperature, not matrix transfer
   envelope_miss_log10: 0.0
-  ci_width_log10: 2.7542284039840816
+  ci_width_log10: 2.6824173020617494
   decision_relevance: 4.688928066041878
-  p5_predicted_ppb: 0.8478670659779846
-  p50_predicted_ppb: 110.29049018922193
-  p95_predicted_ppb: 481.45551972646246
+  p5_predicted_ppb: 1.218729727770969
+  p50_predicted_ppb: 166.62253229366866
+  p95_predicted_ppb: 586.5765634172453
   previous_measured_ppb: 342.0
   odour_threshold_ug_per_kg: 0.007
   suggested_doe_template: free_precursor_sulfur_yield

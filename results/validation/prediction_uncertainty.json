@@ -70,26 +70,26 @@
       "benchmark_id": "cys_ribose_140C_Hofmann1998",
       "compounds": [
         {
-          "ci_width_log10": 2.7542284039840816,
+          "ci_width_log10": 2.6824173020617494,
           "compound": "2-methyl-3-furanthiol",
           "inside_ci": true,
           "measured_ppb": 342.0,
-          "predicted_mean": 158.3649817989725,
-          "predicted_p5": 0.8478670659779846,
-          "predicted_p50": 110.29049018922193,
-          "predicted_p95": 481.45551972646246,
-          "predicted_std": 161.4047986085206
+          "predicted_mean": 201.47596300995426,
+          "predicted_p5": 1.218729727770969,
+          "predicted_p50": 166.62253229366866,
+          "predicted_p95": 586.5765634172453,
+          "predicted_std": 191.30796756803218
         },
         {
-          "ci_width_log10": 1.8868413168339226,
+          "ci_width_log10": 1.8709942873028533,
           "compound": "2-furfurylthiol",
           "inside_ci": true,
           "measured_ppb": 200.0,
-          "predicted_mean": 144.7661192400621,
-          "predicted_p5": 3.5772460177801517,
-          "predicted_p50": 166.93580561362126,
-          "predicted_p95": 275.67039321685047,
-          "predicted_std": 89.12690869720817
+          "predicted_mean": 133.34152159326817,
+          "predicted_p5": 3.575492827778769,
+          "predicted_p50": 148.807513919474,
+          "predicted_p95": 265.66246530577683,
+          "predicted_std": 84.48675246458498
         }
       ],
       "coverage_rate": 1.0,
@@ -97,7 +97,8 @@
       "execution_path": "free_precursor",
       "fit_target_of": [
         "projection_constant_refit.json",
-        "sulfur_barrier_refit_hofmann.json"
+        "sulfur_barrier_refit_hofmann.json",
+        "sulfur_barrier_refit_pentodiulose.json"
       ],
       "fitted_row": true,
       "matched_compounds": 2,
@@ -136,37 +137,37 @@
       "benchmark_id": "pea_isolate_ribose_cysteine_100C_45min_Internal2026",
       "compounds": [
         {
-          "ci_width_log10": 4.748681838422457,
+          "ci_width_log10": 4.729723568176302,
           "compound": "2,5-dimethylpyrazine",
           "inside_ci": true,
-          "measured_ppb": 0.005588024553036963,
-          "predicted_mean": 0.037047876834761524,
-          "predicted_p5": 5.2415663461894885e-06,
-          "predicted_p50": 0.006812232419070536,
-          "predicted_p95": 0.2938616587816903,
-          "predicted_std": 0.07950875952812071
+          "measured_ppb": 0.004778029445222977,
+          "predicted_mean": 0.029504156918904255,
+          "predicted_p5": 4.502890430435642e-06,
+          "predicted_p50": 0.0041393717117333955,
+          "predicted_p95": 0.24166566262825984,
+          "predicted_std": 0.06572008495551447
         },
         {
-          "ci_width_log10": 2.625128736163186,
+          "ci_width_log10": 2.6114206335965684,
           "compound": "2-furfurylthiol",
           "inside_ci": true,
-          "measured_ppb": 0.005787048621426315,
-          "predicted_mean": 0.013586429894893184,
-          "predicted_p5": 7.989558389889235e-05,
-          "predicted_p50": 0.008730047624541082,
-          "predicted_p95": 0.033701676941326114,
-          "predicted_std": 0.013327335562961319
+          "measured_ppb": 0.004948204584943074,
+          "predicted_mean": 0.01043417567361888,
+          "predicted_p5": 6.967634235080243e-05,
+          "predicted_p50": 0.0060103602711290265,
+          "predicted_p95": 0.028477769989443003,
+          "predicted_std": 0.01058260995213896
         },
         {
-          "ci_width_log10": 3.765665487290244,
+          "ci_width_log10": 3.6929213861348926,
           "compound": "2-methyl-3-furanthiol",
           "inside_ci": true,
-          "measured_ppb": 0.004445171873666089,
-          "predicted_mean": 0.022821568741471798,
-          "predicted_p5": 2.031636796453559e-05,
-          "predicted_p50": 0.0023854730234539397,
-          "predicted_p95": 0.11844358865044571,
-          "predicted_std": 0.03971333789915918
+          "measured_ppb": 0.007685913242825444,
+          "predicted_mean": 0.029087282310343347,
+          "predicted_p5": 2.7731705339478728e-05,
+          "predicted_p50": 0.004442613154100263,
+          "predicted_p95": 0.1367407517411391,
+          "predicted_std": 0.04409557154402639
         },
         {
           "ci_width_log10": 0.0,
@@ -183,34 +184,34 @@
           "ci_width_log10": 0.0,
           "compound": "Nonanal",
           "inside_ci": true,
-          "measured_ppb": 0.08861695357986309,
-          "predicted_mean": 0.08861695357986309,
-          "predicted_p5": 0.08861695357986309,
-          "predicted_p50": 0.08861695357986309,
-          "predicted_p95": 0.08861695357986309,
+          "measured_ppb": 0.03899145957513976,
+          "predicted_mean": 0.03899145957513976,
+          "predicted_p5": 0.03899145957513976,
+          "predicted_p50": 0.03899145957513976,
+          "predicted_p95": 0.03899145957513976,
           "predicted_std": 0.0
         },
         {
-          "ci_width_log10": 5.0338140622113166,
+          "ci_width_log10": 5.064166033428662,
           "compound": "bis(2-methyl-3-furyl) disulfide",
           "inside_ci": true,
-          "measured_ppb": 0.0019908645344058,
-          "predicted_mean": 0.016775616316980227,
-          "predicted_p5": 7.557546675793727e-07,
-          "predicted_p50": 0.0008691340119892949,
-          "predicted_p95": 0.08169489149556376,
-          "predicted_std": 0.030485031903642466
+          "measured_ppb": 0.00260452372836774,
+          "predicted_mean": 0.018556118186639773,
+          "predicted_p5": 7.007619040084765e-07,
+          "predicted_p50": 0.0012940896947723547,
+          "predicted_p95": 0.08123375286546002,
+          "predicted_std": 0.03047325308447537
         },
         {
-          "ci_width_log10": 1.1460433205597582,
+          "ci_width_log10": 1.463224948594835,
           "compound": "furfural",
           "inside_ci": true,
-          "measured_ppb": 0.28905220544439836,
-          "predicted_mean": 0.22157053923515604,
-          "predicted_p5": 0.02199180944284013,
-          "predicted_p50": 0.25348813289629746,
-          "predicted_p95": 0.3078252807835728,
-          "predicted_std": 0.09123798752156315
+          "measured_ppb": 0.24715352191310258,
+          "predicted_mean": 0.1840790574047967,
+          "predicted_p5": 0.009239119427235659,
+          "predicted_p50": 0.21730478635438286,
+          "predicted_p95": 0.2684451299564593,
+          "predicted_std": 0.08633445904266612
         }
       ],
       "coverage_rate": 1.0,
@@ -227,37 +228,37 @@
       "benchmark_id": "pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026",
       "compounds": [
         {
-          "ci_width_log10": 4.748681838422457,
+          "ci_width_log10": 4.729723568176302,
           "compound": "2,5-dimethylpyrazine",
           "inside_ci": true,
-          "measured_ppb": 0.005588024553036963,
-          "predicted_mean": 0.037047876834761524,
-          "predicted_p5": 5.2415663461894885e-06,
-          "predicted_p50": 0.006812232419070536,
-          "predicted_p95": 0.2938616587816903,
-          "predicted_std": 0.07950875952812071
+          "measured_ppb": 0.004778029445222977,
+          "predicted_mean": 0.029504156918904255,
+          "predicted_p5": 4.502890430435642e-06,
+          "predicted_p50": 0.0041393717117333955,
+          "predicted_p95": 0.24166566262825984,
+          "predicted_std": 0.06572008495551447
         },
         {
-          "ci_width_log10": 2.625128736163186,
+          "ci_width_log10": 2.6114206335965684,
           "compound": "2-furfurylthiol",
           "inside_ci": true,
-          "measured_ppb": 0.005787048621426315,
-          "predicted_mean": 0.013586429894893184,
-          "predicted_p5": 7.989558389889235e-05,
-          "predicted_p50": 0.008730047624541082,
-          "predicted_p95": 0.033701676941326114,
-          "predicted_std": 0.013327335562961319
+          "measured_ppb": 0.004948204584943074,
+          "predicted_mean": 0.01043417567361888,
+          "predicted_p5": 6.967634235080243e-05,
+          "predicted_p50": 0.0060103602711290265,
+          "predicted_p95": 0.028477769989443003,
+          "predicted_std": 0.01058260995213896
         },
         {
-          "ci_width_log10": 3.765665487290244,
+          "ci_width_log10": 3.6929213861348926,
           "compound": "2-methyl-3-furanthiol",
           "inside_ci": true,
-          "measured_ppb": 0.004445171873666089,
-          "predicted_mean": 0.022821568741471798,
-          "predicted_p5": 2.031636796453559e-05,
-          "predicted_p50": 0.0023854730234539397,
-          "predicted_p95": 0.11844358865044571,
-          "predicted_std": 0.03971333789915918
+          "measured_ppb": 0.007685913242825444,
+          "predicted_mean": 0.029087282310343347,
+          "predicted_p5": 2.7731705339478728e-05,
+          "predicted_p50": 0.004442613154100263,
+          "predicted_p95": 0.1367407517411391,
+          "predicted_std": 0.04409557154402639
         },
         {
           "ci_width_log10": 0.0,
@@ -274,23 +275,23 @@
           "ci_width_log10": 0.0,
           "compound": "Nonanal",
           "inside_ci": true,
-          "measured_ppb": 0.08861695357986309,
-          "predicted_mean": 0.08861695357986309,
-          "predicted_p5": 0.08861695357986309,
-          "predicted_p50": 0.08861695357986309,
-          "predicted_p95": 0.08861695357986309,
+          "measured_ppb": 0.03899145957513976,
+          "predicted_mean": 0.03899145957513976,
+          "predicted_p5": 0.03899145957513976,
+          "predicted_p50": 0.03899145957513976,
+          "predicted_p95": 0.03899145957513976,
           "predicted_std": 0.0
         },
         {
-          "ci_width_log10": 5.0338140622113166,
+          "ci_width_log10": 5.064166033428662,
           "compound": "bis(2-methyl-3-furyl) disulfide",
           "inside_ci": true,
-          "measured_ppb": 0.0019908645344058,
-          "predicted_mean": 0.016775616316980227,
-          "predicted_p5": 7.557546675793727e-07,
-          "predicted_p50": 0.0008691340119892949,
-          "predicted_p95": 0.08169489149556376,
-          "predicted_std": 0.030485031903642466
+          "measured_ppb": 0.00260452372836774,
+          "predicted_mean": 0.018556118186639773,
+          "predicted_p5": 7.007619040084765e-07,
+          "predicted_p50": 0.0012940896947723547,
+          "predicted_p95": 0.08123375286546002,
+          "predicted_std": 0.03047325308447537
         }
       ],
       "coverage_rate": 1.0,
@@ -307,15 +308,15 @@
       "benchmark_id": "resconi_2023_pbma_beef_identity_benchmark",
       "compounds": [
         {
-          "ci_width_log10": 1.3983397599366791,
+          "ci_width_log10": 1.4024604953021835,
           "compound": "furfural",
           "inside_ci": true,
           "measured_ppb": 715.22,
-          "predicted_mean": 2704.802750845571,
-          "predicted_p5": 180.98878826334766,
-          "predicted_p50": 2670.6590094516396,
-          "predicted_p95": 4528.886453350319,
-          "predicted_std": 1367.7730512271485
+          "predicted_mean": 2671.0443851505693,
+          "predicted_p5": 177.65941789611023,
+          "predicted_p50": 2727.2888517968418,
+          "predicted_p95": 4487.957443300275,
+          "predicted_std": 1304.6379484285653
         }
       ],
       "coverage_rate": 1.0,
@@ -334,37 +335,37 @@
       "benchmark_id": "soy_isolate_ribose_cysteine_100C_45min_Internal2026",
       "compounds": [
         {
-          "ci_width_log10": 4.748681838422457,
+          "ci_width_log10": 4.729723568176302,
           "compound": "2,5-dimethylpyrazine",
           "inside_ci": true,
-          "measured_ppb": 0.00793986385609509,
-          "predicted_mean": 0.05264026588170933,
-          "predicted_p5": 7.447591324346681e-06,
-          "predicted_p50": 0.009679305709940321,
-          "predicted_p95": 0.41753960475797114,
-          "predicted_std": 0.11297171657508036
+          "measured_ppb": 0.00677334900122548,
+          "predicted_mean": 0.04182518213621724,
+          "predicted_p5": 6.383311101213966e-06,
+          "predicted_p50": 0.005867985865470524,
+          "predicted_p95": 0.3425859746909176,
+          "predicted_std": 0.09316499132062467
         },
         {
-          "ci_width_log10": 2.625128736163186,
+          "ci_width_log10": 2.6114206335965684,
           "compound": "2-furfurylthiol",
           "inside_ci": true,
-          "measured_ppb": 0.008546882224401947,
-          "predicted_mean": 0.02006577510543287,
-          "predicted_p5": 0.00011799765139442628,
-          "predicted_p50": 0.012893392425305485,
-          "predicted_p95": 0.049773949110412656,
-          "predicted_std": 0.019683119129149405
+          "measured_ppb": 0.007291184991012699,
+          "predicted_mean": 0.01537476952682526,
+          "predicted_p5": 0.000102668168394391,
+          "predicted_p50": 0.008856272582743085,
+          "predicted_p95": 0.0419620259348932,
+          "predicted_std": 0.015593487602264304
         },
         {
-          "ci_width_log10": 3.765665487290244,
+          "ci_width_log10": 3.6929213861348926,
           "compound": "2-methyl-3-furanthiol",
           "inside_ci": true,
-          "measured_ppb": 0.006565066747630735,
-          "predicted_mean": 0.03370513589384328,
-          "predicted_p5": 3.0005209145400537e-05,
-          "predicted_p50": 0.00352310103382608,
-          "predicted_p95": 0.17492913376998148,
-          "predicted_std": 0.058652560910804084
+          "measured_ppb": 0.011325201760823989,
+          "predicted_mean": 0.04286014302154495,
+          "predicted_p5": 4.0862698838617274e-05,
+          "predicted_p50": 0.006546195452107418,
+          "predicted_p95": 0.20148765064980775,
+          "predicted_std": 0.06497487399576278
         },
         {
           "ci_width_log10": 0.0,
@@ -381,34 +382,34 @@
           "ci_width_log10": 0.0,
           "compound": "Nonanal",
           "inside_ci": true,
-          "measured_ppb": 0.09184654922144037,
-          "predicted_mean": 0.09184654922144037,
-          "predicted_p5": 0.09184654922144037,
-          "predicted_p50": 0.09184654922144037,
-          "predicted_p95": 0.09184654922144037,
+          "measured_ppb": 0.03985793645458732,
+          "predicted_mean": 0.03985793645458732,
+          "predicted_p5": 0.03985793645458732,
+          "predicted_p50": 0.03985793645458732,
+          "predicted_p95": 0.03985793645458732,
           "predicted_std": 0.0
         },
         {
-          "ci_width_log10": 5.0338140622113166,
+          "ci_width_log10": 5.064166033428662,
           "compound": "bis(2-methyl-3-furyl) disulfide",
           "inside_ci": true,
-          "measured_ppb": 0.0029403044303628802,
-          "predicted_mean": 0.02477587908491554,
-          "predicted_p5": 1.1161727776793634e-06,
-          "predicted_p50": 0.001283622537780511,
-          "predicted_p95": 0.1206550457106385,
-          "predicted_std": 0.045023291548456114
+          "measured_ppb": 0.0038377686271898093,
+          "predicted_mean": 0.027342460905027878,
+          "predicted_p5": 1.032573449434057e-06,
+          "predicted_p50": 0.001906842612825586,
+          "predicted_p95": 0.11969802571594577,
+          "predicted_std": 0.04490237250758588
         },
         {
-          "ci_width_log10": 1.1460433205597582,
+          "ci_width_log10": 1.463224948594835,
           "compound": "furfural",
           "inside_ci": true,
-          "measured_ppb": 2.521046541321871,
-          "predicted_mean": 1.9324870423971274,
-          "predicted_p5": 0.19180748006417342,
-          "predicted_p50": 2.2108649187500395,
-          "predicted_p95": 2.684780966323187,
-          "predicted_std": 0.7957566437688026
+          "measured_ppb": 2.1506575405064403,
+          "predicted_mean": 1.6018020289273336,
+          "predicted_p5": 0.08039611052279534,
+          "predicted_p50": 1.8909225882911382,
+          "predicted_p95": 2.3359308760167163,
+          "predicted_std": 0.7512571696669433
         }
       ],
       "coverage_rate": 1.0,
@@ -425,37 +426,37 @@
       "benchmark_id": "soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026",
       "compounds": [
         {
-          "ci_width_log10": 4.748681838422457,
+          "ci_width_log10": 4.729723568176302,
           "compound": "2,5-dimethylpyrazine",
           "inside_ci": true,
-          "measured_ppb": 0.00793986385609509,
-          "predicted_mean": 0.05264026588170933,
-          "predicted_p5": 7.447591324346681e-06,
-          "predicted_p50": 0.009679305709940321,
-          "predicted_p95": 0.41753960475797114,
-          "predicted_std": 0.11297171657508036
+          "measured_ppb": 0.00677334900122548,
+          "predicted_mean": 0.04182518213621724,
+          "predicted_p5": 6.383311101213966e-06,
+          "predicted_p50": 0.005867985865470524,
+          "predicted_p95": 0.3425859746909176,
+          "predicted_std": 0.09316499132062467
         },
         {
-          "ci_width_log10": 2.625128736163186,
+          "ci_width_log10": 2.6114206335965684,
           "compound": "2-furfurylthiol",
           "inside_ci": true,
-          "measured_ppb": 0.008546882224401947,
-          "predicted_mean": 0.02006577510543287,
-          "predicted_p5": 0.00011799765139442628,
-          "predicted_p50": 0.012893392425305485,
-          "predicted_p95": 0.049773949110412656,
-          "predicted_std": 0.019683119129149405
+          "measured_ppb": 0.007291184991012699,
+          "predicted_mean": 0.01537476952682526,
+          "predicted_p5": 0.000102668168394391,
+          "predicted_p50": 0.008856272582743085,
+          "predicted_p95": 0.0419620259348932,
+          "predicted_std": 0.015593487602264304
         },
         {
-          "ci_width_log10": 3.765665487290244,
+          "ci_width_log10": 3.6929213861348926,
           "compound": "2-methyl-3-furanthiol",
           "inside_ci": true,
-          "measured_ppb": 0.006565066747630735,
-          "predicted_mean": 0.03370513589384328,
-          "predicted_p5": 3.0005209145400537e-05,
-          "predicted_p50": 0.00352310103382608,
-          "predicted_p95": 0.17492913376998148,
-          "predicted_std": 0.058652560910804084
+          "measured_ppb": 0.011325201760823989,
+          "predicted_mean": 0.04286014302154495,
+          "predicted_p5": 4.0862698838617274e-05,
+          "predicted_p50": 0.006546195452107418,
+          "predicted_p95": 0.20148765064980775,
+          "predicted_std": 0.06497487399576278
         },
         {
           "ci_width_log10": 0.0,
@@ -472,23 +473,23 @@
           "ci_width_log10": 0.0,
           "compound": "Nonanal",
           "inside_ci": true,
-          "measured_ppb": 0.09184654922144037,
-          "predicted_mean": 0.09184654922144037,
-          "predicted_p5": 0.09184654922144037,
-          "predicted_p50": 0.09184654922144037,
-          "predicted_p95": 0.09184654922144037,
+          "measured_ppb": 0.03985793645458732,
+          "predicted_mean": 0.03985793645458732,
+          "predicted_p5": 0.03985793645458732,
+          "predicted_p50": 0.03985793645458732,
+          "predicted_p95": 0.03985793645458732,
           "predicted_std": 0.0
         },
         {
-          "ci_width_log10": 5.0338140622113166,
+          "ci_width_log10": 5.064166033428662,
           "compound": "bis(2-methyl-3-furyl) disulfide",
           "inside_ci": true,
-          "measured_ppb": 0.0029403044303628802,
-          "predicted_mean": 0.02477587908491554,
-          "predicted_p5": 1.1161727776793634e-06,
-          "predicted_p50": 0.001283622537780511,
-          "predicted_p95": 0.1206550457106385,
-          "predicted_std": 0.045023291548456114
+          "measured_ppb": 0.0038377686271898093,
+          "predicted_mean": 0.027342460905027878,
+          "predicted_p5": 1.032573449434057e-06,
+          "predicted_p50": 0.001906842612825586,
+          "predicted_p95": 0.11969802571594577,
+          "predicted_std": 0.04490237250758588
         }
       ],
       "coverage_rate": 1.0,
@@ -505,15 +506,15 @@
       "benchmark_id": "thiamine_cys_glucose_120C_Bolton1994",
       "compounds": [
         {
-          "ci_width_log10": 0.8557718453176407,
+          "ci_width_log10": 0.8495325628804017,
           "compound": "2-Methyl-3-furanthiol (MFT)",
           "inside_ci": false,
           "measured_ppb": 13.0,
-          "predicted_mean": 0.019818847965607844,
-          "predicted_p5": 0.0026798124458308806,
-          "predicted_p50": 0.01796760892773548,
-          "predicted_p95": 0.019225438100746978,
-          "predicted_std": 0.04274061466643283
+          "predicted_mean": 0.019759117554019098,
+          "predicted_p5": 0.0027057436733029894,
+          "predicted_p50": 0.017803186847516493,
+          "predicted_p95": 0.01913459235943245,
+          "predicted_std": 0.04321995348640121
         }
       ],
       "coverage_rate": 1.0,
@@ -669,7 +670,7 @@
       "excluded_fitted_rows": 2,
       "excluded_fitted_rows_that_would_have_been_hits": 2,
       "hits": 1,
-      "median_ci_width_log10": 0.8557718453176407,
+      "median_ci_width_log10": 0.8495325628804017,
       "not_evaluable": 4,
       "rate": 0.3333333333333333,
       "total": 3
@@ -681,21 +682,21 @@
       "external_literature": {
         "ci_coverage_rate": 0.3333333333333333,
         "hits": 1,
-        "median_ci_width_log10": 0.8557718453176407,
+        "median_ci_width_log10": 0.8495325628804017,
         "not_evaluable": 4,
         "total": 3
       },
       "fitted_row": {
         "ci_coverage_rate": 1.0,
         "hits": 2,
-        "median_ci_width_log10": 2.320534860409002,
+        "median_ci_width_log10": 2.2767057946823015,
         "not_evaluable": 0,
         "total": 2
       },
       "internal_synthetic": {
         "ci_coverage_rate": 1.0,
         "hits": 18,
-        "median_ci_width_log10": 3.765665487290244,
+        "median_ci_width_log10": 3.6929213861348926,
         "not_evaluable": 8,
         "total": 18
       }

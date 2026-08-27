@@ -88,6 +88,34 @@ _DEOXYOSONE_1_HEXOSE = "CC(=O)C(=O)C(O)C(O)CO"   # 1-deoxy-2,3-hexodiulose,  C6H
 # was retired; see `_furanone_and_mft_route` in reaction_templates.py.
 _PENTODIULOSE_14_DIDEOXY = "CC(=O)C(=O)CCO"      # 1,4-dideoxypento-2,3-diulose, C5H8O3
 
+# ── Wave P (2026-08-27): the C2 + C3 recombination lane to MFT ────────────
+# Hofmann & Schieberle 1998 (10.1021/jf9705983) got their HIGHEST MFT yield of
+# all — 1.4 mol %, 6 min, 180 C, in the absence of water — from hydroxyacetaldehyde
+# (= glycolaldehyde, already a species) plus MERCAPTO-2-PROPANONE, a topology the
+# network could not express because the C3 partner did not exist.  Cerny 2015
+# (10.1016/b978-1-78242-103-0.00009-6, full text) renders Hofmann & Schieberle's
+# own scheme: "The formation of 2-methyl-3-furanthiol (16) starts with aldol
+# reaction of hydroxyacetaldehyde (18) and mercaptopropanone (19) to give
+# 4,5-dihydroxy-3-mercapto-2-pentanone (20). The intermediate 20 cyclises and
+# dehydrates to yield 2-methyl-3-furanthiol (16)."  Both intermediates below are
+# NAMED in that scheme; neither is invented here.
+_MERCAPTO_2_PROPANONE = "CC(=O)CS"               # 1-mercapto-2-propanone, C3H6OS
+_DIHYDROXY_MERCAPTO_PENTANONE = "CC(=O)C(S)C(O)CO"
+#                                                # 4,5-dihydroxy-3-mercapto-2-pentanone,
+#                                                # C5H10O3S — Cerny 2015 intermediate 20
+
+# ── Wave P (2026-08-27): the norfuraneol -> 2-mercapto-3-pentanone lane ───
+# Cerny & Davidek 2003 (10.1021/jf026123f) showed norfuraneol is NOT the MFT
+# intermediate but IS the demonstrated precursor of 2-mercapto-3-pentanone:
+# "Whereas 2-mercapto-3-pentanone was found unlabeled and hence originated from
+# 4-hydroxy-5-methyl-3(2H)-furanone, its isomer 3-mercapto-2-pentanone was formed
+# from both 4-hydroxy-5-methyl-3(2H)-furanone and ribose."  That paper proposes no
+# mechanism; Whitfield & Mottram 1999 (10.1021/jf980980v) supply it, reporting
+# 2,3-PENTANEDIONE as one of the "main non-sulfur compounds" of exactly this
+# system (norfuraneol + cysteine or H2S, pH 4.5, 140 C, 60 min).
+_PENTANE_2_3_DIONE = "CCC(=O)C(C)=O"             # 2,3-pentanedione, C5H8O2
+_MERCAPTO_3_PENTANONE_2 = "CCC(=O)C(C)S"         # 2-mercapto-3-pentanone, C5H10OS
+
 # Isotope tag used inside SMIRKS PRODUCT templates to mark the atom that must
 # survive sanitisation as an open-shell radical centre.  Without it RDKit's
 # sanitiser fills the unsatisfied valence with an INVENTED implicit hydrogen
@@ -401,7 +429,8 @@ from src.reaction_templates import (
     _sulfur_volatiles_pathway, _deamination_step, _lipid_maillard_synergy,
     _lipid_hydroperoxide_scission, _sugar_ring_opening,
     _acrylamide_formation, _cml_cel_formation, _thiamine_degradation, _furanone_generation,
-    _glutathione_cleavage, _furanone_and_mft_route, _thiol_reductant_pool
+    _glutathione_cleavage, _furanone_and_mft_route, _thiol_reductant_pool,
+    _c2_c3_mft_recombination, _norfuraneol_mercaptopentanone_route,
 )
 # ──────────────────────────────────────────────────────────────────────────
 # Tier A: SMIRKS application
@@ -773,6 +802,35 @@ class SmirksEngine:
         # Second pass so the +H2S step can see a 1,4-dideoxyosone that only
         # entered the pool on the first pass.
         _add_steps(_furanone_and_mft_route(pool_list()))
+
+        # 3e-1b. SECOND MFT channel (Wave P item 2, 2026-08-27): the C2 + C3
+        # recombination that Hofmann & Schieberle 1998 (10.1021/jf9705983) measured
+        # as their HIGHEST-yielding MFT system (1.4 mol %, 6 min, 180 C, dry) and
+        # that the network could not express at all until this wave, because
+        # mercapto-2-propanone was not a species:
+        #   pyruvaldehyde + H2S + 2[H] -> 1-mercapto-2-propanone + H2O
+        #   glycolaldehyde + 1-mercapto-2-propanone
+        #                            -> 4,5-dihydroxy-3-mercapto-2-pentanone
+        #                            -> MFT + 2 H2O
+        # Runs AFTER 3e-1 so that MFT from both channels lands in one pool species,
+        # and after 3e-0/Phase 2 so the C2/C3 fragments exist. Deliberately NOT
+        # moisture-gated; see the function docstring for why, and for the measured
+        # reachability limit (glycolaldehyde is emitted only by the pentose
+        # retro-aldol channel).
+        _add_steps(_c2_c3_mft_recombination(pool_list()))
+        # Second pass so the aldol step can see a mercaptopropanone that only
+        # entered the pool on the first pass.
+        _add_steps(_c2_c3_mft_recombination(pool_list()))
+
+        # 3e-1c. NORFURANEOL's real sulfur fate (Wave P item 3, 2026-08-27). Wave N
+        # retired norfuraneol from the MFT lane and left it with ZERO consumers;
+        # Cerny & Davidek 2003 (10.1021/jf026123f) demonstrated what it does
+        # instead, and Whitfield & Mottram 1999 (10.1021/jf980980v) supply the
+        # 2,3-pentanedione intermediate:
+        #   norfuraneol + 2 x 2[H] -> 2,3-pentanedione + H2O
+        #   2,3-pentanedione + H2S + 2[H] -> 2-mercapto-3-pentanone + H2O
+        _add_steps(_norfuraneol_mercaptopentanone_route(pool_list()))
+        _add_steps(_norfuraneol_mercaptopentanone_route(pool_list()))
 
         # 3e-2. DEMOTED one-step 3-deoxyosone shortcut, kept only for hexose
         #       reachability; see `_mft_pathway`'s docstring.

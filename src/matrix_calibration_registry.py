@@ -242,7 +242,21 @@ _MATRIX_CALIBRATION_RECORDS = (
         evidence_strength=FITTED_TO_BENCHMARK,
         source="Trikusuma 2019 UHT pea beverage heated headspace anchor",
         fallback_mode="compound_specific_process_state",
-        notes="Heated pea UHT nonanal anchor. BACK-SOLVED from this benchmark's own measured 24 ppb.",
+        # 2026-08-27 (Wave P item 4) — THIS CONSTANT NO LONGER RECOVERS ITS OWN ANCHOR,
+        # AND IT WAS NOT REFITTED. It was back-solved while nonanal was (wrongly) scaled
+        # off the LINOLEATE hydroperoxide pool. Nonanal is the C9 fragment of the OLEATE
+        # double bond and is now scaled off `oleic_acid_pct` (see
+        # src/lipid_oxidation.MARKER_HYDROPEROXIDE_POOL; Miyazaki 2023 10.1093/bbb/zbac189
+        # finds nonanal in NEITHER linoleate hydroperoxide isomer's product list). The
+        # prediction consequently fell from 24.00 ppb to 10.56 ppb, i.e. 2.2727x under —
+        # which is EXACTLY 1 / (oleic 22.0 / linoleic 50.0) = 1/0.44. That exact
+        # arithmetic identity is the fingerprint: the factor was absorbing a
+        # substrate-assignment error, nothing else. Refitting it here would re-absorb the
+        # correction into the same constant and make the fix invisible, so it is left at
+        # its old value and the miss is reported. Trikusuma 2019 is also still the last
+        # content-unverified pillar of the matrix lane (Wave O [P] item 5), so there is no
+        # verified anchor to refit against even if refitting were wanted.
+        notes="Heated pea UHT nonanal anchor. BACK-SOLVED from this benchmark's own measured 24 ppb, against the pre-Wave-P linoleate-pool nonanal. NOT refitted after the Wave P oleate substrate correction: the row now reads 2.2727x under, which is exactly the oleic/linoleic ratio.",
         fitted_from_benchmark="pea_isolate_uht_140C_Trikusuma2019",
     ),
     # --- Soy ambient lane ------------------------------------------------------------

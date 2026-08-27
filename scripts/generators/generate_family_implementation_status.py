@@ -151,6 +151,18 @@ _FAMILY_TO_SLR: Dict[str, str] = {
     "Thiol_Oxidation": "amino_acid_sugar_core",
     "Thiol_Addition_Legacy_Shortcut": "amino_acid_sugar_core",
     "Thiol_Addition_Hexose_Legacy_Shortcut": "amino_acid_sugar_core",
+    # Wave P 2026-08-27: three evidence-grounded chemistry additions, all in the same
+    # core sugar/amino-acid limb as the steps they extend or replace.
+    #   item 2 -- Hofmann & Schieberle 1998 C2+C3 recombination to MFT
+    #   item 3 -- norfuraneol -> 2,3-pentanedione -> 2-mercapto-3-pentanone
+    #   item 5 -- fructose reaches HMF by its own ring-retained dehydration
+    #   item 6 -- hexose DMHF is reduced by the amino acid, not by an [HH] token
+    "Mercaptoketone_Formation": "amino_acid_sugar_core",
+    "Mercaptoketone_Aldol_Addition": "amino_acid_sugar_core",
+    "Mercaptoketone_Cyclodehydration": "amino_acid_sugar_core",
+    "Furanone_Reductive_Opening": "amino_acid_sugar_core",
+    "Furanone_Amino_Acid_Reduction": "amino_acid_sugar_core",
+    "Fructofuranosyl_Dehydration": "amino_acid_sugar_core",
     # --- 02 lipid oxidation ---------------------------------------------------
     "Lipid_Homolysis": "lipid_oxidation_and_carbonylic_crosstalk",
     "Beta_Scission": "lipid_oxidation_and_carbonylic_crosstalk",

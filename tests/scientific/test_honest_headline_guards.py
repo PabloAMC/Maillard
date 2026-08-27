@@ -129,7 +129,7 @@ def test_calibration_panel_is_14_benchmarks_and_none_is_strict_ready(panel):
 
 
 def test_zero_of_six_predictive_benchmarks_are_free_of_blocking_gaps(panel):
-    """PREDICTIVE 0/6 · fit-recovery 1/4 · internal-synthetic 4/4.
+    """PREDICTIVE 0/6 · fit-recovery 0/4 · internal-synthetic 4/4.
 
     This is the number the whole audit turns on. The panel scores 5/14 "pass" overall, and
     a 7/16 version of that number was once published as evidence of accuracy. Split by what
@@ -203,12 +203,27 @@ def test_zero_of_six_predictive_benchmarks_are_free_of_blocking_gaps(panel):
         f"correct README.md and AUDIT.md together."
     )
 
-    assert len(passing("fit_recovery")) == 1, (
-        f"fit-recovery passes moved to {len(passing('fit_recovery'))}/4 (published 1/4 "
-        f"since the 2026-08-27 Wave K/M Pratap-Singh content correction). The single "
-        f"survivor is pea_isolate_uht_140C_Trikusuma2019, whose source has NOT yet been "
-        f"content-verified -- if it rises again, check whether a corrected benchmark was "
-        f"reverted rather than a model improved."
+    # RE-PINNED 2026-08-27 (Wave P item 4): 1 -> 0. THE LAST FIT-RECOVERY PASS IS GONE.
+    # CAUSE, and it is the cleanest demonstration this campaign has produced of why fit
+    # recovery is not evidence: `pea_isolate_uht_140C_Trikusuma2019` was the single
+    # survivor, and it passed because THREE observability factors had been back-solved so
+    # it reproduced its own measured 782 / 163 / 24 ppb. Wave P corrected the SUBSTRATE
+    # nonanal is cleaved from -- oleate, not linoleate (Miyazaki 2023,
+    # 10.1093/bbb/zbac189: nonanal appears in neither linoleate hydroperoxide isomer's
+    # product list; `LipidProfile.oleic_acid_pct` had been dead code) -- and the nonanal
+    # row immediately fell to 2.2727x under, which is EXACTLY 1 / (22.0 / 50.0), the pea
+    # oleic/linoleic ratio. A constant that tracks a substrate error to five significant
+    # figures was never measuring the model.
+    # The factor was deliberately NOT refitted: doing so would re-absorb the correction
+    # into the same constant and make the fix invisible, and Trikusuma 2019 is in any case
+    # still the last content-unverified pillar of the matrix lane (Wave O [P] item 5), so
+    # there is no verified anchor to refit against. See the dated note on the record in
+    # src/matrix_calibration_registry.py.
+    assert len(passing("fit_recovery")) == 0, (
+        f"fit-recovery passes moved to {len(passing('fit_recovery'))}/4 (published 0/4 "
+        f"since the 2026-08-27 Wave P oleate substrate correction). A row returning here "
+        f"means either a genuine improvement or a back-solved constant being refitted to "
+        f"its own benchmark -- check which before re-pinning."
     )
     assert len(passing("internal_synthetic")) == 4, (
         f"internal-synthetic passes moved to {len(passing('internal_synthetic'))}/4 "
@@ -238,10 +253,37 @@ def test_zero_of_six_predictive_benchmarks_are_free_of_blocking_gaps(panel):
         )
 
     total_passes = sum(1 for s in panel if s.overall_status == "pass")
-    assert total_passes == 5, (
-        f"Aggregate panel passes moved to {total_passes}/14 (published 5/14 since the "
-        f"2026-08-27 Wave K/M content correction; 7/14 before it, explicitly "
-        f"labelled do-not-quote because every pass is in a non-evidence bucket)."
+    # RE-PINNED 2026-08-27 (Wave P): 5 -> 4, same cause as the fit-recovery line above.
+    # EVERY remaining pass is now an internal synthetic reproducibility row, i.e. the model
+    # agreeing with its own frozen output. There is no longer a single benchmark in the
+    # panel that passes on anything but its own snapshot.
+    assert total_passes == 4, (
+        f"Aggregate panel passes moved to {total_passes}/14 (published 4/14 since the "
+        f"2026-08-27 Wave P oleate substrate correction; 5/14 after Wave K/M, 7/14 before "
+        f"that -- explicitly labelled do-not-quote because every pass is in a non-evidence "
+        f"bucket)."
+    )
+    assert passing("internal_synthetic") == sorted(
+        s.benchmark_id for s in panel if s.overall_status == "pass"
+    ), (
+        "a pass appeared outside the internal-synthetic bucket; that is a real result and "
+        "must be promoted deliberately, in README.md and AUDIT.md, not absorbed here."
+    )
+
+    # 2026-08-27 (Wave P): the PUBLISHED MARKDOWN USES A DIFFERENT PREDICATE, and the two
+    # have quietly disagreed since Wave O. `src/presentation.py::_is_pass` counts
+    # `pass-no-ranking` and `partial-pass` as passes, so benchmark_summary.md prints
+    # "0/6 + 2/4 + 4/4 = 6/14" while this guard, on `overall_status == "pass"`, sees
+    # 0/6 + 0/4 + 4/4 = 4/14. Both are defensible; publishing them without saying which is
+    # which is not. Pinned here so the divergence cannot widen unnoticed. [P] reconcile.
+    lenient_passes = sum(
+        1 for s in panel
+        if s.overall_status in {"pass", "pass-no-ranking", "partial-pass"}
+    )
+    assert lenient_passes == 6, (
+        f"the lenient (presentation-layer) pass count moved to {lenient_passes}/14, "
+        f"published 6/14. It is the number benchmark_summary.md prints; the strict count "
+        f"asserted above is the number this guard and the README headline use."
     )
 
     for doc, path in (("README.md", README), ("AUDIT.md", AUDIT)):
@@ -293,7 +335,14 @@ def test_honest_external_literature_coverage_is_1_of_3_with_fitted_rows_excluded
         "Both fitted rows would have counted as literature hits under the old accounting. "
         "If this drops to 0, check that fitted rows are still being detected at all."
     )
-    assert coverage["median_ci_width_log10"] == pytest.approx(0.8558, abs=5e-4), (
+    # RE-PINNED 2026-08-27 (Wave P): 0.8558 -> 0.8495 dex. CAUSE: the six Wave P chemistry
+    # changes add species to the bounded volatile budget and moved the sulfur barrier, so
+    # every Monte-Carlo interval shifted slightly. The COUNTS did not move at all --
+    # hits 1/3, not_evaluable 4, excluded_fitted_rows 2, benchmark_count 11, matched rows
+    # 35 -- which is what identifies this as an interval-width change and not a coverage
+    # change. Companion widths: fitted_row 2.3205 -> 2.2767, internal_synthetic
+    # 3.7657 -> 3.6929.
+    assert coverage["median_ci_width_log10"] == pytest.approx(0.8495, abs=5e-4), (
         f"Median CI width moved to {coverage['median_ci_width_log10']:.4f} dex from the "
         f"published 0.856. A coverage rate that improves while this widens is the interval "
         f"getting looser, not the model getting better."
@@ -344,6 +393,29 @@ def test_holdout_scores_1_of_5_genuine_extrapolations_at_the_pre_widening_prior(
     NOTE what did NOT move, because it is the discriminating evidence: the pre-widening
     ``genuine_extrapolation_hits`` is still 1/5 and ``max_fold_error`` is still 2474.4. The
     refit touched one lane, not the model's transfer behaviour.
+
+    2026-08-27 (Wave P item 4) — TWO POINTS IMPROVED AND EVERY PINNED NUMBER BELOW HELD.
+    This is the only untuned hold-out movement the campaign has produced, so it is worth
+    stating exactly what it was and what it was not. Nonanal is the C9 fragment of the
+    OLEATE double bond, not a linoleate product (Miyazaki 2023, 10.1093/bbb/zbac189, read
+    in full text: nonanal is in neither linoleate hydroperoxide isomer's product list;
+    Hung, Katrib & Martin 2005, 10.1021/jp0500900, "1-nonanal (30 +/- 3% carbon yield)"
+    from oleate cleavage). The model computed the whole pool from `linoleic_acid_pct` and
+    `LipidProfile.oleic_acid_pct` was dead code. Correcting the SUBSTRATE, with no constant
+    fitted and no factor refitted:
+        Li 2026 HME nonanal      272.63x -> 118.31x   (IMPROVED, x0.434 = soy oleic/linoleic)
+        Liu 2023 PPI nonanal      10.86x ->   4.78x   (IMPROVED, x0.440 = pea oleic/linoleic)
+        the other six points are byte-identical.
+    And yet: ``median_accuracy_fold`` is UNCHANGED at 42.6159x, ``ci_coverage_hits`` is
+    UNCHANGED at 4/8, ``max_fold_error`` is UNCHANGED at 2474.4, and the pre-widening
+    genuine-extrapolation count is UNCHANGED at 1/5 — because the median sits between two
+    points that did not move and the two that did were already outside the interval and
+    remain so. A real, mechanistically-motivated correction improved two of eight points by
+    2.3x each and moved the headline by exactly nothing. That is what an honest hold-out
+    looks like, and it is the reason the headline is quoted rather than the per-point table.
+    Both nonanal points are STILL over-predicted (118x and 4.8x), and the model still treats
+    oleate as being as oxidisable as linoleate, which biases them high by roughly another
+    order of magnitude — see `src.lipid_oxidation.MARKER_HYDROPEROXIDE_POOL`.
 
     Three things are pinned and each blocks a different way of flattering this number:
 
@@ -412,8 +484,8 @@ def test_holdout_scores_1_of_5_genuine_extrapolations_at_the_pre_widening_prior(
 # --------------------------------------------------------------------------------------
 
 
-def test_pentose_hexose_mft_ordering_is_3_39x_not_the_retired_8_98x_or_15_8x():
-    """PENTOSE >> HEXOSE 3.39x (ribose 370.3 ppb vs glucose 109.3 ppb at matched conditions).
+def test_pentose_hexose_mft_ordering_is_6_15x_not_the_retired_3_39x_8_98x_or_15_8x():
+    """PENTOSE >> HEXOSE 6.15x (ribose 686.8 ppb vs glucose 111.6 ppb at matched conditions).
 
     RE-PINNED 2026-08-27 (Wave N -- MFT ROUTE CORRECTION). Was 8.98x (ribose 981.3), and
     15.8x before that. CAUSE: the norfuraneol -> MFT step was retired on isotope evidence
@@ -458,24 +530,38 @@ def test_pentose_hexose_mft_ordering_is_3_39x_not_the_retired_8_98x_or_15_8x():
     glucose_ppb = _mft_predicted_ppb(hexose)
     ratio = ribose_ppb / glucose_ppb
 
-    assert ribose_ppb == pytest.approx(370.3, rel=0.01), (
-        f"Ribose MFT moved to {ribose_ppb:.1f} ppb from the published 370.3 "
-        f"(981.3 before the 2026-08-27 Wave N route correction)"
+    # RE-PINNED 2026-08-27 (Wave P item 1). The ratio went UP, 3.39x -> 6.15x, and this
+    # test's own warning applies to the wave that wrote it: DO NOT REPORT THAT AS IMPROVED
+    # SUGAR DISCRIMINATION. Measured decomposition, in-process, by setting
+    # `thiol_addition_pentodiulose` equal to `thiol_addition_hexose` (29.65):
+    #     shipped (26.35 vs 29.65)   ribose 686.83 / glucose 111.65 = 6.1517x
+    #     equalised                  ribose 258.11 / glucose 111.65 = 2.3118x
+    # so 2.31x is structural and the remaining ~2.7x rides on a 3.30 kcal/mol gap between
+    # a FITTED barrier and an UNCONSTRAINED LEGACY FIT. Under Wave N the split was
+    # 1.13x structural out of 3.39x. In other words MORE of the ordering now rides on a
+    # fitted constant than before, even though that constant is better provenanced than
+    # the estimate it replaced. Both halves of that sentence are true and both belong in
+    # the report.
+    assert ribose_ppb == pytest.approx(686.8, rel=0.01), (
+        f"Ribose MFT moved to {ribose_ppb:.1f} ppb from the published 686.8 "
+        f"(370.3 after the Wave N route correction, 981.3 before it)"
     )
-    assert glucose_ppb == pytest.approx(109.3, rel=0.01), (
-        f"Glucose MFT moved to {glucose_ppb:.1f} ppb from the published 109.3. This side "
-        f"was NOT touched by Wave N -- the hexose limb still runs the demoted one-step lump "
-        f"-- so a move here has a different cause than a move in the ribose value."
+    assert glucose_ppb == pytest.approx(111.6, rel=0.01), (
+        f"Glucose MFT moved to {glucose_ppb:.1f} ppb from the published 111.6 (109.3 "
+        f"before Wave P). The hexose limb still runs the demoted one-step lump; it moved "
+        f"only because the Wave P species additions dilute the shared volatile budget, so "
+        f"a LARGE move here has a different cause than a move in the ribose value."
     )
-    assert ratio == pytest.approx(3.39, rel=0.01), (
-        f"Pentose/hexose MFT ratio is {ratio:.2f}x, published as 3.39x. If it went UP, do "
-        f"not report it as improved sugar discrimination without first checking how much of "
-        f"the change is structural -- ~3x of this ratio rides on `thiol_addition_pentodiulose` "
-        f"= 28.60, an ESTIMATED and explicitly UNCONSTRAINED barrier, not on the mechanism."
+    assert ratio == pytest.approx(6.15, rel=0.01), (
+        f"Pentose/hexose MFT ratio is {ratio:.2f}x, published as 6.15x. If it moved, do "
+        f"not report it as changed sugar discrimination without first re-measuring the "
+        f"structural share -- only 2.31x of this ratio survives setting "
+        f"`thiol_addition_pentodiulose` equal to `thiol_addition_hexose`; the rest is the "
+        f"gap between a fitted barrier and an unconstrained legacy fit."
     )
 
     for doc, path in (("README.md", README), ("AUDIT.md", AUDIT)):
-        _assert_quoted(_doc_text(path), "3.39", doc, "the pentose/hexose ordering margin")
+        _assert_quoted(_doc_text(path), "6.15", doc, "the pentose/hexose ordering margin")
 
 
 # --------------------------------------------------------------------------------------

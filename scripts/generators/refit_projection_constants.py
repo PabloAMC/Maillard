@@ -401,6 +401,59 @@ def main() -> int:
     _furfural_fitted = _dex(final_rows, "resconi_2023_pbma_beef_identity_benchmark", "furfural")
     _budget_scale = shipped_tau / tau_star if tau_star else float("nan")
 
+    # 2026-08-27 (Wave P) — SECOND PASS OF THE WAVE M FIX. Wave M derived the two
+    # RESIDUALS this prose quotes but left the ALLOCATION arithmetic (~1126 ppb,
+    # 542 ppb, ~51 %, ~2800 ppb) and the MFT/FFT fold errors hard-coded, so they went
+    # stale again as soon as the Wave P chemistry and the barrier refit moved them.
+    # They are now computed from the live prediction, every time. This is the pattern
+    # flagged as [P] in Wave M: a generator that writes narrative next to numbers must
+    # derive ALL of them or it publishes fiction with a timestamp on it.
+    def _hofmann_allocation() -> Dict[str, Any]:
+        from src.benchmark_validation import evaluate_benchmark as _eval
+
+        bench = ROOT / "data" / "benchmarks" / "cys_ribose_140C_Hofmann1998.json"
+        evaluation = _eval(bench)
+        # `predicted_ppb` carries each species under several aliases (SMILES, lower-case
+        # label, display label); select one canonical key per species so the sum is not
+        # multiplied by the alias count.
+        canonical = [
+            "furfural",
+            "2-methyl-3-furanthiol",
+            "2-furfurylthiol",
+            "bis(2-methyl-3-furyl) disulfide",
+            "2,5-dimethylpyrazine",
+        ]
+        per_species = {
+            name: float(evaluation.predicted_ppb.get(name, 0.0)) for name in canonical
+        }
+        total = sum(per_species.values())
+        measured = {
+            c.compound: float(c.measured_ppb) for c in evaluation.comparisons
+        }
+        measured_total = sum(measured.values())
+        ratios = {
+            c.compound: (float(c.predicted_ppb) / float(c.measured_ppb))
+            for c in evaluation.comparisons
+            if c.measured_ppb
+        }
+        return {
+            "per_species_ppb": per_species,
+            "tracked_total_ppb": total,
+            "measured_total_ppb": measured_total,
+            "furfural_share": (per_species["furfural"] / total) if total else float("nan"),
+            "ratios": ratios,
+        }
+
+    _alloc = _hofmann_allocation()
+
+    def _fold(name: str) -> str:
+        ratio = _alloc["ratios"].get(name)
+        if ratio is None or ratio <= 0.0:
+            return "n/a"
+        return (
+            f"{ratio:.2f}x over" if ratio >= 1.0 else f"{1.0 / ratio:.2f}x under"
+        )
+
     def _f(value: float | None, fmt: str) -> str:
         return format(value, fmt) if value is not None else "n/a"
 
@@ -428,19 +481,26 @@ def main() -> int:
             f"{_f(10.0 ** _furfural_shipped if _furfural_shipped is not None else None, '.1f')}x "
             f"to {_f(10.0 ** _furfural_fitted if _furfural_fitted is not None else None, '.1f')}x "
             "OVER. The arithmetic is decisive: at the shipped value the total predicted "
-            "pool over the five species this benchmark's system tracks is ~1126 ppb "
-            "against a measured MFT+FFT of 542 ppb (measured 2026-08-27, Wave M: furfural "
-            "572.3, FFT 243.7, MFT 151.9, bis(2-methyl-3-furyl) disulfide 92.1, "
-            "2,5-dimethylpyrazine 66.4), so the budget is already the right order of "
-            "magnitude and the sulfur deficit is an ALLOCATION deficit — furfural, "
-            "unmeasured in that benchmark, takes ~51% of the pool. See "
-            "results/validation/sulfur_barrier_refit_hofmann.md (NOTE: that record is "
-            "itself STALE as of Wave N — it profiles `thiol_addition_norfuraneol`, a "
-            "family the isotope evidence retired; re-running it is an open owner item). "
-            f"Raising the global budget {_budget_scale:.2f}x to close a 2.25x MFT gap "
-            "means supplying ~2800 ppb of volatiles at these conditions to explain 542 "
-            "ppb of measured product, sending the rest to species nobody measured, and "
-            "pushing FFT from 1.22x over to ~3.1x over. That is not a calibration, it is "
+            f"pool over the five species this benchmark's system tracks is "
+            f"{_alloc['tracked_total_ppb']:.1f} ppb against a measured MFT+FFT of "
+            f"{_alloc['measured_total_ppb']:.0f} ppb (derived live, "
+            + ", ".join(
+                f"{name} {value:.1f}"
+                for name, value in _alloc["per_species_ppb"].items()
+            )
+            + "), so the budget is already the right order of magnitude and the sulfur "
+            "deficit is an ALLOCATION deficit — furfural, unmeasured in that benchmark, "
+            f"takes {_alloc['furfural_share'] * 100.0:.0f}% of the pool. See "
+            "results/validation/sulfur_barrier_refit_pentodiulose.md (the Wave P refit of "
+            "`thiol_addition_pentodiulose` against this same benchmark; it SUPERSEDES "
+            "sulfur_barrier_refit_hofmann.md, which is stale because it profiles "
+            "`thiol_addition_norfuraneol`, a family the isotope evidence retired). "
+            f"Raising the global budget {_budget_scale:.2f}x to close the current MFT gap "
+            f"({_fold('2-methyl-3-furanthiol')}) means supplying "
+            f"~{_alloc['tracked_total_ppb'] * _budget_scale:.0f} ppb of volatiles at these "
+            f"conditions to explain {_alloc['measured_total_ppb']:.0f} ppb of measured "
+            "product, sending the rest to species nobody measured, and pushing FFT from "
+            f"{_fold('2-furfurylthiol')} further over. That is not a calibration, it is "
             "a way of making the allocation finding invisible. The incumbent is therefore "
             "retained and the gap is reported."
         ),

@@ -265,7 +265,7 @@ has never seen. Its rules, stated explicitly:
   correct it**. Every row carries its `value_provenance` and the report renders the split.
   Until 2026-08-27 these were written at full float precision beside a fabricated
   `measurement_date` of "<publication year>-01-01", which is now `not_applicable`.
-- **Current numbers (2026-08-27 Wave O regeneration). The headline is 1/5.**
+- **Current numbers (2026-08-27 Wave P regeneration). The headline is 1/5.**
   Genuine-extrapolation coverage at the **pre-widening** prior (ln-sigma 2.0) is
   **1 of 5**, and since Wave O it is 1/5 under the shipped ln-sigma 2.86 as well (it was
   2/5 between Wave M and Wave O; that difference was the width of the interval, not the
@@ -284,6 +284,18 @@ has never seen. Its rules, stated explicitly:
   nominally the same system, a 24x spread, and the erroneous 260 ppb sat almost exactly at
   their geometric mean (255.9). No observability factor satisfies both. `max_fold_error`
   and the pre-widening 1/5 did not move.
+  **Wave P (2026-08-27) improved two of the eight points with nothing fitted, and moved the
+  headline by nothing.** Nonanal is the C9 fragment of the OLEATE double bond, not a
+  linoleate product (Miyazaki 2023, 10.1093/bbb/zbac189; Hung, Katrib & Martin 2005,
+  10.1021/jp0500900), and `LipidProfile.oleic_acid_pct` had been dead code. Correcting the
+  substrate moved `li_2026_spi_wg_hme_control` nonanal 272.63x → **118.31x** and
+  `liu_2023_ppi_offnote_baseline` nonanal 10.86x → **4.78x**, each by exactly its matrix's
+  oleic/linoleic ratio; the other six points are byte-identical. Median fold error, coverage
+  hits (4/8), `max_fold_error` (2474x) and the pre-widening 1/5 are **all unchanged** — the
+  median sits between two points that did not move, and the two that did were outside the
+  interval before and after. This is the clearest illustration in the repository of why the
+  per-point table has to be read alongside the headline. Both nonanal points remain
+  over-predicted, and the model still treats oleate as being as oxidisable as linoleate.
   **The 0/5 → 1/5 and the 32.79x → 15.31x are a REFERENCE correction, not a model change
   (Wave K/M, 2026-08-27).** Two of the four `li_2026_spi_wg_hme_control` points had been
   transcribed from adjacent table rows: 2-pentylfuran 221.5 was the paper's *Maltol* row

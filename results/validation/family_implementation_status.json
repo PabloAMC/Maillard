@@ -4,11 +4,11 @@
   "enumeration_temperature_celsius": 150.0,
   "max_generations": 3,
   "battery_step_counts": {
-    "core_pentose_cysteine_lysine": 122,
+    "core_pentose_cysteine_lysine": 127,
     "hexose_asparagine": 21,
     "lipid_hydroperoxide_seed": 24,
     "unoxidised_lipid_plus_o2": 0,
-    "thiamine": 30,
+    "thiamine": 33,
     "glutathione": 17,
     "ascorbate": 0,
     "polyphenol": 3,
@@ -135,16 +135,28 @@
     ],
     "Furanone_Cyclisation": [
       "core_pentose_cysteine_lysine",
-      "glutathione",
-      "hexose_asparagine",
-      "serine_lysine_dha",
-      "thiamine"
+      "glutathione"
     ],
     "Deoxyosone_Reduction": [
       "core_pentose_cysteine_lysine",
       "glutathione"
     ],
     "Thiol_Addition_Pentodiulose": [
+      "core_pentose_cysteine_lysine"
+    ],
+    "Mercaptoketone_Formation": [
+      "core_pentose_cysteine_lysine",
+      "thiamine"
+    ],
+    "Mercaptoketone_Aldol_Addition": [
+      "core_pentose_cysteine_lysine",
+      "thiamine"
+    ],
+    "Mercaptoketone_Cyclodehydration": [
+      "core_pentose_cysteine_lysine",
+      "thiamine"
+    ],
+    "Furanone_Reductive_Opening": [
       "core_pentose_cysteine_lysine"
     ],
     "Safety_Risk_AGE": [
@@ -158,6 +170,11 @@
       "core_pentose_cysteine_lysine",
       "lipid_hydroperoxide_seed",
       "serine_lysine_dha"
+    ],
+    "Furanone_Amino_Acid_Reduction": [
+      "hexose_asparagine",
+      "serine_lysine_dha",
+      "thiamine"
     ],
     "Safety_Risk_Acrylamide": [
       "hexose_asparagine"
@@ -210,9 +227,14 @@
         "Enolisation_2_3",
         "Enolisation_2_3_Amadori",
         "Enolisation_Intermediate",
+        "Furanone_Amino_Acid_Reduction",
         "Furanone_Cyclisation",
         "Furanone_Formation",
+        "Furanone_Reductive_Opening",
         "Generalized_Deamination",
+        "Mercaptoketone_Aldol_Addition",
+        "Mercaptoketone_Cyclodehydration",
+        "Mercaptoketone_Formation",
         "Retro_Aldol_Fragmentation",
         "Schiff_Base_Formation",
         "Strecker_Degradation",
@@ -224,11 +246,12 @@
         "Thiol_Oxidation"
       ],
       "mapped_but_not_emitted_by_this_battery": [
+        "Fructofuranosyl_Dehydration",
         "Heyns_Rearrangement",
         "Thiol_Addition_Legacy_Shortcut",
         "Thiol_Addition_Norfuraneol"
       ],
-      "implementation": "20 reaction template(s) emitted by src/reaction_templates.py / src/smirks_engine.py"
+      "implementation": "25 reaction template(s) emitted by src/reaction_templates.py / src/smirks_engine.py"
     },
     {
       "slr_family": "02",

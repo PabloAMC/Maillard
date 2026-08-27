@@ -135,8 +135,8 @@ synthetic comparators.
 | Population | Inside 90% CI | Not evaluable\* | Median CI width | Is it evidence? |
 | --- | ---: | ---: | ---: | --- |
 | **External literature** | **1/3** (33%) | 4 | 0.86 dex | **Yes — this is the only row that is** |
-| **Fitted rows** (constants back-solved from the benchmark) | 2/2 | 0 | 2.32 dex | No — algebraic recovery |
-| **Internal synthetic** (model vs its own frozen output) | 18/18 | 8 | 3.77 dex | No — reproducibility harness |
+| **Fitted rows** (constants back-solved from the benchmark) | 2/2 | 0 | 2.28 dex | No — algebraic recovery |
+| **Internal synthetic** (model vs its own frozen output) | 18/18 | 8 | 3.69 dex | No — reproducibility harness |
 
 \* Degenerate near-zero-width envelopes: the Monte Carlo perturbs nothing on their path, so
 pass/fail is meaningless and they are excluded from coverage.
@@ -151,10 +151,31 @@ fit-then-score a build failure. The panel itself also shrank from 16 benchmarks 
 more were quarantined as fabricated (see [AUDIT.md](AUDIT.md), Round 2).
 
 **And the benchmark-level count, split the same way:** of 14 benchmarks, the ones without
-blocking coverage or ranking gaps are **0 of 6 predictive**, 1 of 4 fit-recovery, and 4 of 4
-internal-synthetic. The 5/14 aggregate is retained in
+blocking coverage or ranking gaps are **0 of 6 predictive**, **0 of 4 fit-recovery**, and 4 of 4
+internal-synthetic. The 4/14 aggregate is retained in
 [benchmark_summary.md](results/validation/benchmark_summary.md) only for continuity with older
-reports; **every one of those five sits in a non-evidence bucket.**
+reports; **every one of those four is now an internal synthetic row — the model agreeing with
+its own frozen output. There is no longer a single benchmark in the panel that passes on
+anything else.**
+
+> **Two counters, and they disagree.** `benchmark_summary.md` prints **6/14**, because
+> `src/presentation.py::_is_pass` also counts the weaker `pass-no-ranking` status (the two
+> Pratap-Singh fit-recovery rows). The headline above and
+> `tests/scientific/test_honest_headline_guards.py` use the strict `overall_status == "pass"`
+> and see **4/14**. Both are defensible; publishing them without saying which is which is not.
+> The divergence predates this wave (7/14 vs 5/14 after Wave O) and is now pinned in the guard.
+
+> **Fit-recovery fell 1/4 → 0/4 on 2026-08-27 (Wave P), and the mechanism is worth reading.**
+> The last survivor was `pea_isolate_uht_140C_Trikusuma2019`, which passed because three
+> observability factors had been back-solved so it reproduced its own measured 782 / 163 / 24
+> ppb. Wave P corrected the *substrate* nonanal is cleaved from — oleate, not linoleate
+> (Miyazaki 2023, [10.1093/bbb/zbac189](https://doi.org/10.1093/bbb/zbac189): nonanal appears
+> in neither linoleate hydroperoxide isomer's product list; `LipidProfile.oleic_acid_pct` had
+> been declared, populated for pea and soy, and read by **no code path in the repository**).
+> The nonanal row immediately fell to **2.2727× under**, which is *exactly*
+> 1 / (22.0 / 50.0), the pea oleic/linoleic ratio. A constant that tracks a substrate error to
+> five significant figures was never measuring the model. It was deliberately **not**
+> refitted.
 
 > **Fit-recovery fell 3/4 → 1/4 on 2026-08-27 (Wave K/M), and it is the most instructive
 > number on this page.** The two Pratap-Singh ambient-slurry benchmarks used to score max
@@ -218,12 +239,13 @@ unphysical term.
 > at the flattering number. 0.26 dex was measured *before* the chemistry rebuild described
 > next; it was never the shipped state. At the shipped constants,
 > [results/validation/projection_constant_refit.md](results/validation/projection_constant_refit.md)
-> records a literature-row objective of **0.96 dex** (0.74 dex before the 2026-08-27 Wave N
-> route correction and the Wave K/M benchmark content corrections; the objective is worse
-> because the *references* got more accurate, not because the model changed) — nearly four
+> records a literature-row objective of **0.89 dex** (0.96 dex before the Wave O and Wave P
+> regenerations, 0.74 dex before the 2026-08-27 Wave N route correction and the Wave K/M
+> benchmark content corrections; the objective got worse because the *references* got more
+> accurate, not because the model changed) — nearly four
 > times the figure this README was quoting, and six times the 0.15 it started from. The
 > degradation was **larger** than stated. (The fit optimum the repository declines to apply
-> sits at 0.94 dex, i.e. the refit buys almost nothing: tau_ref is a single global scale and
+> sits at 0.88 dex, i.e. the refit buys almost nothing: tau_ref is a single global scale and
 > cannot fix an allocation problem.) The regenerated coverage numbers are in the section above.
 
 *Then* a mechanism-level review of every reaction template found that the flagship compound,
@@ -257,6 +279,31 @@ been bought with `thiol_addition_norfuraneol` = 26.85 kcal/mol, a barrier Wave H
 value 28.60, explicitly unconstrained. **A worse number obtained through a route the isotope
 literature supports is worth more than a better number obtained through one it refutes.**
 
+**That barrier has since been refitted, with owner approval (2026-08-27, Wave P), and both
+rows improved — which is fit recovery, not validation.** `thiol_addition_pentodiulose` went
+**28.60 → 26.35** kcal/mol against `cys_ribose_140C_Hofmann1998` and nothing else: one free
+parameter, range [23.30, 29.65] bounded by values already in the table, decision rules copied
+verbatim from the Wave H script, and run *last* in the wave so the fit sees the network that
+ships. MFT 151.87 → **242.38 ppb** (2.25× under → **1.41× under**); FFT, which was **not**
+fitted, moved 243.72 → **217.99** (1.22× over → **1.09× over**) in the opposite direction,
+because the two lanes draw on the same upstream sugar flux — which is exactly why one knob was
+fitted against these two rows and not two. Three things keep this readable as what it is:
+> * the benchmark is a **declared fit target** at `per_row_recovery` leverage, so it stays out
+>   of the honest literature-coverage numerator *and* denominator, exactly as before;
+> * **the profile minimum sits at the range floor** (argmin 23.30, `hit_a_bound = true`), so
+>   26.35 is the conservative edge of the indifference band and the residual is *not* removable
+>   by this barrier — pinned at the floor the objective is still 0.0836 dex;
+> * the anchor's own **mol%→ppb conversion is unverified** (Wave K), and that sentence now
+>   travels verbatim inside the constant's rationale in `src/barrier_constants.py`. If the
+>   conversion is wrong, the error is now *localised in one named constant* instead of spread
+>   through the route. That is the argument for doing the fit at all.
+>
+> The benchmark's own contract is untouched and still **fails** — max ratio 1.4110 is now
+> *inside* its 1.45 threshold, but MALE 0.0935 is outside 0.09, so it fails on one criterion
+> instead of two. Record:
+> [sulfur_barrier_refit_pentodiulose.md](results/validation/sulfur_barrier_refit_pentodiulose.md),
+> which supersedes the stale `sulfur_barrier_refit_hofmann.md`.
+
 The one surviving literature constraint on the sulfur branch (Hofmann 1998, after three
 fabricated-source benchmarks were quarantined or deleted) was used to refit the branch —
 and the refit's finding was that **it does not work**: no barrier value anywhere in its
@@ -265,9 +312,9 @@ budget is *allocated*, not in the barriers
 ([results/validation/sulfur_barrier_refit_hofmann.md](results/validation/sulfur_barrier_refit_hofmann.md)
 — **that record is now stale**: it profiles `thiol_addition_norfuraneol`, the family Wave N
 retired, and re-running it is an open owner item).
-A single global scale on the budget *would* close it — the refit optimum sits **2.51×** away
-and would drop the Hofmann MFT residual from 0.35 dex to 0.05 dex — at the price of pushing
-Resconi furfural from 4.6× to **11.4× over** and FFT from 1.22× to ~3.1× over. That constant
+A single global scale on the budget *would* close it — after the Wave P refit the optimum sits
+**1.26×** away (it was 2.51× before) and would drop the Hofmann MFT residual from 0.1495 dex to
+0.0497 dex — at the price of pushing Resconi furfural from 4.7× to **5.9× over**. That constant
 was deliberately **not** moved
 ([results/validation/projection_constant_refit.md](results/validation/projection_constant_refit.md)).
 We report the gap rather than absorbing it.
@@ -322,6 +369,22 @@ We report the gap rather than absorbing it.
 > of the two is representative of commercial PPI is an open question this repository cannot
 > settle. `max_fold_error` (2474×) and the pre-widening 1/5 did **not** move — the refit
 > touched one lane, not the transfer behaviour.
+>
+> **Two points improved on 2026-08-27 (Wave P) with nothing fitted, and the headline did not
+> move at all.** Nonanal is the C9 fragment of the **oleate** double bond, not a linoleate
+> product (Miyazaki 2023, `10.1093/bbb/zbac189`, read in full text; Hung, Katrib & Martin 2005,
+> `10.1021/jp0500900`, measure "1-nonanal (30 ± 3% carbon yield)" from oleate cleavage). The
+> model computed its entire hydroperoxide pool from `linoleic_acid_pct` and
+> `LipidProfile.oleic_acid_pct` was dead code. Correcting the substrate — no constant fitted,
+> no observability factor refitted — moved Li 2026 HME nonanal **272.63× → 118.31×** and Liu
+> 2023 nonanal **10.86× → 4.78×**, each by exactly the matrix's oleic/linoleic ratio. The
+> other six points are byte-identical. And `median_accuracy_fold` (42.62×), `ci_coverage_hits`
+> (4/8), `max_fold_error` (2474×) and the pre-widening 1/5 are **all unchanged**, because the
+> median sits between two points that did not move and the two that did were outside the
+> interval before and after. A real mechanistic correction improved a quarter of the hold-out
+> by 2.3× each and moved the published number by nothing. Both nonanal points are still
+> over-predicted, and the model still treats oleate as being as oxidisable as linoleate —
+> which biases them high by roughly another order of magnitude and is *not* fixed.
 >
 > **That 0 of 5 became 1 of 5, and the median halved from 32.79×, because a reference was
 > corrected — not because the model improved (2026-08-27, Wave K/M).** Two of the four Li
@@ -392,23 +455,23 @@ We report the gap rather than absorbing it.
 
 **There is currently no "high" tier, and no benchmark in the panel is strict-ready
 (0/14).** Free-precursor sulfur chemistry used to sit here as the high-confidence lane; after
-the 2026-08-27 chemistry rebuild and the Wave N route correction the model under-predicts MFT
-by **2.25×** on its one verified
-sulfur benchmark and by 21–95× on the hydrolysate lanes, and the refit established that no
-barrier value fixes it. What survives is **ordering** — but read the size of it carefully, because the README
-previously quoted a number that no longer holds and attributed it to the wrong thing. Measured
-on the current tree (2026-08-27, after Wave N): the pentose ≫ hexose MFT constraint holds at
-**3.39×** (ribose 370.3 ppb vs glucose 109.3 ppb at matched conditions). It has now been
-published at 15.8×, then **8.98**×, and now 3.39× — each fall a support being removed, none of
-them a model change. More importantly, **almost none of that separation is structural.** Zero
-the 1.05 kcal/mol gap between `thiol_addition_hexose` (29.65) and
-`thiol_addition_pentodiulose` (28.60)
-— i.e. make the two routes energetically identical — and the ratio collapses to **1.13×**. So
-the mechanism contributes ~1.1× and the remaining ~3× is carried by a barrier difference that
-is **ESTIMATED and unconstrained** — no literature or QM measurement bears on that specific
-step. What did improve is the *kind* of unconstrained: the pentose barrier used to be 26.85,
-a value fitted through a route the isotope evidence contradicts; it is now the un-fitted
-sulfur-addition class value. The ordering agrees with
+the 2026-08-27 chemistry rebuild, the Wave N route correction and the Wave P refit the model
+under-predicts MFT by **1.41×** on its one verified
+sulfur benchmark and by 21–95× on the hydrolysate lanes, and the refit established that the
+residual is not removable by that barrier (its profile minimum sits at the floor of the
+defensible range). What survives is **ordering** — but read the size of it carefully, because
+the README previously quoted a number that no longer holds and attributed it to the wrong
+thing. Measured on the current tree (2026-08-27, after Wave P): the pentose ≫ hexose MFT
+constraint holds at
+**6.15×** (ribose 686.8 ppb vs glucose 111.6 ppb at matched conditions). It has now been
+published at 15.8×, then **8.98**×, then 3.39×, and now 6.15× — the falls were supports being
+removed, and **the rise is not a model improvement either**. Measured: zero the 3.30 kcal/mol
+gap between `thiol_addition_hexose` (29.65) and the refitted `thiol_addition_pentodiulose`
+(26.35) — i.e. make the two routes energetically identical — and the ratio collapses to
+**2.31×**. So the mechanism contributes ~2.3× and the remaining ~2.7× is carried by a barrier
+difference. Under Wave N that split was 1.13× structural out of 3.39×; **more of the ordering
+now rides on a fitted constant than before**, even though that constant is better provenanced
+than the estimate it replaced. Both halves of that sentence are true. The ordering agrees with
 Hofmann & Schieberle 1998; the *reason* the model reproduces it is weaker than the agreement
 looks. The wheat ≫ soy hydrolysate ranking claim is withdrawn entirely: both benchmarks that
 supported it were quarantined as fabricated.
@@ -465,6 +528,13 @@ Use the model to rank; do not use it to predict a concentration.
 >   ([matrix_sigma_residual_derivation.md](results/validation/matrix_sigma_residual_derivation.md)).
 >   Re-derived again after the Wave O refit: **bit-identical**, for the structural reason
 >   given above. No refit of an observability constant can ever be used to narrow this prior.
+> * **Wave P moved it, and a chemistry correction is the only thing that can (2026-08-27).**
+>   One of the five residuals is the Trikusuma heated-pea *nonanal* row, whose uncalibrated
+>   prediction fell 3238.93 → 1425.13 ppb when nonanal was moved onto the oleate pool — the
+>   exact 0.4400× oleic/linoleic ratio. RMS **3.25 → 3.02**, bias fold 3.91 → **3.31**, 90% CI
+>   [2.19, 6.80] → **[2.03, 6.30]**. The shipped 2.86 was **not** moved and is still inside.
+>   The derivation moved *toward* the shipped value; that is a consequence of correcting a
+>   substrate, and it is not a reason to narrow the prior.
 
 Full validation methodology: [VALIDATION_CONTRACT.md](docs/reference/VALIDATION_CONTRACT.md).
 Regenerate all evidence artifacts: `./scripts/docker_maillard.sh summary`.

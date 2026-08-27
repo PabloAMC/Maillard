@@ -30,9 +30,9 @@
       "lane": "pea_iso/heated_matrix",
       "compound": "Nonanal",
       "measured_ppb": 24.0,
-      "uncalibrated_predicted_ppb": 3238.9327424324397,
-      "ln_residual": 4.904945323690359,
-      "fold_error": 134.95553093468502
+      "uncalibrated_predicted_ppb": 1425.130406670274,
+      "ln_residual": 4.083964771620528,
+      "fold_error": 59.3804336112614
     },
     {
       "benchmark_id": "soy_isolate_40C_PratapSingh2021",
@@ -55,13 +55,13 @@
   ],
   "summary": {
     "n_residuals": 5,
-    "mean_ln_residual": 1.362629406882212,
-    "bias_fold": 3.9064514598027946,
-    "rms_ln_sigma": 3.252049520608033,
-    "centered_sd_ln": 3.3013382104812377,
+    "mean_ln_residual": 1.1984332964682458,
+    "bias_fold": 3.3149193564137613,
+    "rms_ln_sigma": 3.016601069080242,
+    "centered_sd_ln": 3.0950847411444795,
     "sigma_90pct_ci": {
-      "sigma_low_90": 2.185588223519112,
-      "sigma_high_90": 6.795781533947968
+      "sigma_low_90": 2.0273515916215947,
+      "sigma_high_90": 6.303766812477785
     },
     "shipped_uncalibrated_sigma": 2.86,
     "shipped_within_ci": true

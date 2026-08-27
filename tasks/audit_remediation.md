@@ -2470,3 +2470,597 @@ each file's `residual_uncertainty` block and in `data/lit/timeseries/README.md`.
 `data/lit/timeseries/README.md` written: directory purpose, per-file status table, the
 fabrication warning pointing at `AUDIT.md`, the explicit statement that nothing here is wired
 into calibration, the verification method, and the retrieval backlog above.
+
+## Bi-vs-Liu adjudication (2026-08-27, orchestrator, owner-requested)
+
+Wave O's sharpest [P] — "Bi 2020 and Liu 2023 disagree by 24x on the pea hexanal lane
+and no constant can satisfy both" — is RESOLVED, and the resolution is that the repo's
+Liu numbers are untraceable to their source. Primary evidence retrieved:
+
+1. The "Liu, Y. (2023 thesis)" anchor is Yaozheng Liu, "Flavor Chemistry of Pea
+   Proteins", NC State MS thesis (2021; the derived paper is Liu, Cadwallader & Drake,
+   Food Chemistry 406:134998, 2023, DOI verified). FULL THESIS RETRIEVED (216 pp, via
+   repository.lib.ncsu.edu). Method: 24 commercial pea proteins (9 concentrates, 15
+   isolates), rehydrated to 10% solids; quantification by HS-SPME-GC-MS/MS external
+   standard curves with response factors (R^2>0.95), units ug/L of the 10% slurry
+   (Table 2.7). CAVEAT: curves built in DI WATER, not protein matrix, so protein
+   binding is uncorrected -> values are, if anything, LOWER bounds on total hexanal.
+2. Table 2.7 hexanal across the 9 quantified samples: 2445 to 52454 ug/L (typical
+   2400-12000). Nonanal: 0.188 to 3.42 ug/L. 2-pentylfuran: 25.5 to 1628 ug/L.
+3. THE REPO'S LIU BAND (hexanal 15-180 ppb; nonanal band mid 15.81) MATCHES NOTHING
+   in the thesis: hexanal is ~50-300x HIGHER than our band; nonanal ~5-80x LOWER.
+   The 15-180 band appears confabulated or transcribed from an unidentified source.
+4. Pratap-Singh 2021 (verified earlier): standards spiked INTO the 1:7 w/v protein
+   slurry (matrix-matched, hexanal-d12 IS) -> per-slurry basis, 1138/1622 ug/L.
+   COMPARABLE BASIS to Liu (10% vs 12.5% solids).
+
+VERDICT: on comparable slurry bases the two believable measurements AGREE within
+~2-5x at the low end of Liu's inter-lot range: Pratap-Singh pea PPI 1138 ug/L; Liu
+commercial pea proteins 2445-52454 ug/L. Commercial pea-protein slurries carry
+hexanal in the THOUSANDS of ug/L. Bi 2020 (raw/roasted PEA FLOUR, not isolate;
+1260 = OAV 280 x our own 4.5 ppb ODT, i.e. derived not measured) is consistent at
+the low end for a different matrix. The "24x literature conflict" was a conflict
+between a real measurement and a phantom band. TRUST ORDER for the pea lane:
+Pratap-Singh (matrix-matched SIDA-style) >= Liu thesis Table 2.7 (water-calibrated,
+lower bound, huge real inter-lot spread) >> Bi (derived, wrong matrix) >>> the
+retired 15-180 band (no identifiable source).
+
+QUEUED (after Wave P lands - its regeneration reads these files): correct
+external_validation_liu_2023_ppi_offnote_baseline.{json,yaml} + payload anchors to
+Table 2.7 bands (hexanal band 2445-52454, geometric mid ~11330; nonanal band
+0.188-3.42, geometric mid ~0.80; provenance thesis_table, water-calibration caveat),
+re-derive ranks, re-score hold-out, sync docs/tests. Note Wave O's post-refit
+prediction 1013 ug/L for liu-hexanal lands 1.2x UNDER Liu's lowest lot vs 11x under
+the geometric mid - the refit direction is VINDICATED by the corrected target.
+[P] the nonanal correction will worsen that point (model 171.7 vs ~0.80 mid) -
+consistent with the oleate-nonanal topology fix Wave P is landing (nonanal should
+mostly vanish when routed off linoleate).
+
+## Wave P — evidence-grounded chemistry additions (2026-08-27, owner-approved)
+
+Six owner-approved items. Every step atom-balanced and RDKit-verified, every constant either
+literature-anchored or labelled ESTIMATED/UNCONSTRAINED, every DOI CrossRef-verified BEFORE it
+was written anywhere. Nothing was tuned to reproduce a prior output, and the two places where
+the numbers got worse are reported as such.
+
+ORDER OF EXECUTION, and it matters. The items were EXECUTED 4, 6, 2, 3, 5, then 1 — not in the
+order they were listed. Item 1 is a refit, and Wave L1's own finding about Wave H was that
+fitting a barrier before a route change fits the wrong route more precisely. The same logic
+applies inside a wave: items 2 and 6 both move the ribose/cysteine system, so the refit was run
+LAST, against the network that actually ships. Item 7 needed no code change (see below).
+
+### (a) THE FINDING OF THIS WAVE — parallel channels cannot add
+
+Item 2 added the MFT channel Hofmann & Schieberle 1998 measured as their HIGHEST-yielding
+system. Measured contribution to the shipped prediction: **EXACTLY ZERO**.
+
+  On cys_ribose_140C_Hofmann1998, at the shipped constants, 2026-08-27:
+      pentodiulose lane alone   242.38 ppb
+      C2+C3 lane alone           71.02 ppb
+      BOTH lanes                242.38 ppb      <- the max, not the sum
+
+`src/recommend.py::predict_from_steps` relaxes to the LOWEST-SPAN path per product (see the
+`if path_span < current_span` branch); it does not sum flux over parallel channels. Had the two
+added, MFT would read 313.39 ppb = 1.09x under instead of 1.41x under. Consequences, stated
+plainly:
+  * every compound-level claim in this repository rests on ONE route, whichever is fastest;
+  * enriching the network CANNOT improve a number unless the new route is faster than the old;
+  * "the model has N routes to X" is not a statement about the prediction of X.
+REPORTED, NOT FIXED. Making the propagator additive is a model-wide recalibration event with
+its own regeneration and belongs to its own wave. Pinned in
+`tests/scientific/test_wave_p_chemistry_2026_08.py::test_the_second_mft_channel_contributes_exactly_zero_to_the_prediction`,
+which fails the day someone changes it — and that failure is the notification.
+
+### (b) A NAMING HAZARD, found while placing the new families
+
+`src/conditions.py` selects the pH-ionisation and Labuza water-activity corrections by
+SUBSTRING MATCH on the family name ("strecker", "amadori", "schiff", "pyrazine", "furfural").
+The natural name for item 6's new family was `Furanone_Strecker_Reduction` — which would have
+silently collected BOTH corrections and suppressed DMHF by ~480x at pH 5.5 / aw 0.95, as a side
+effect of a spelling. Its sibling `Furanone_Formation`, the same chemistry, receives neither.
+The family is therefore called `Furanone_Amino_Acid_Reduction`, and a test now pins that none
+of the six Wave P families picks up either correction. THE UNDERLYING COUPLING IS UNTOUCHED and
+is an open item: it means a family's name is a load-bearing calibration input. [P]
+
+### (c) ITEM 1 — refit `thiol_addition_pentodiulose` against Hofmann1998
+
+  Generator: `scripts/generators/refit_thiol_addition_pentodiulose_hofmann.py` (mirrors
+  `refit_sulfur_barriers_hofmann.py`'s honest-profile style: same objective, same
+  identifiability / materiality / conservative-edge rules, same grid step, plus an explicit
+  BOUNDARY-HONESTY check the older script lacked).
+  Record: `results/validation/sulfur_barrier_refit_pentodiulose.{json,md}` (un-ignored in
+  .gitignore). It SUPERSEDES `sulfur_barrier_refit_hofmann.{json,md}`, which profiles a family
+  no step emits; the old record is left in place for provenance and still declares the same fit
+  target, so the fit-target accounting is unchanged by the new file's arrival.
+
+  ADOPTED: 28.60 -> **26.35** kcal/mol.
+  * range [23.30, 29.65] = thiohemiacetal_formation .. thiol_addition_hexose, both already in
+    FAST_BARRIERS. Same range the retired knob used, deliberately, so the two fits compare.
+  * ONE free parameter. The Wave H script fitted FOUR barriers against these two rows (2.0
+    parameters/row); this is 0.5, exactly at FIT_LEVERAGE_THRESHOLD, so the benchmark stays
+    `per_row_recovery` and out of the honest coverage numerator AND denominator either way.
+    What changed is how much freedom the fit had, not the benchmark's status.
+  * objective (mean |log10| over the 2 rows) **0.2192 -> 0.0935 dex**; profile span 0.3224 dex.
+  * **THE PROFILE MINIMUM IS AT THE RANGE FLOOR** (argmin 23.30, `hit_a_bound = true`). The
+    data want a value the table's own sulfur-addition class envelope does not contain: the
+    profile SATURATES, and with the knob pinned at the floor the objective is still 0.0836 dex.
+    26.35 is the conservative edge of the indifference band, NOT the optimum. The residual is
+    not removable by this barrier.
+  * MFT 151.87 -> **242.38** ppb vs 342: 2.2519x under -> **1.4110x under**.
+  * FFT 243.72 -> **217.99** ppb vs 200: 1.2186x over -> **1.0900x over**. **FFT CO-MOVES, AND
+    IT WAS NOT FITTED.** Over the search range MFT spans 3.53x and FFT spans 1.25x, in
+    OPPOSITE directions: lowering the MFT barrier diverts shared upstream sugar flux into the
+    MFT lane and FFT falls. The two rows are therefore not independent evidence — which is
+    precisely why ONE knob was fitted against them and not two.
+  * REPORTED, NOT FITTED (objective span over +/-2 kcal, at the adopted point):
+        furanone_cyclisation      0.0000 dex  (exactly zero derivative here)
+        deoxyosone_reduction      0.3850 dex  (in SERIES with the fitted step; fitting both
+                                               would split one measurable quantity in two)
+        thiohemiacetal_formation  0.0033 dex  (FFT-side)
+        thiol_dehydration         0.0285 dex  (FFT-side)
+        thiol_addition            0.1011 dex  (labels only the demoted lumps)
+  * THE CAVEAT, CARRIED VERBATIM. The fit target's own `content_verification_note` (Wave K)
+    says the 342/200 ppb require a mol%->ppb conversion that is "NOT documented anywhere in
+    this repo" and could not be confirmed against the paper. That sentence is now quoted
+    VERBATIM inside the constant's FAST_BARRIERS rationale, inside the JSON record, and in the
+    generator, with the consequence spelled out: the constant is fitted against an anchor whose
+    unit conversion is UNVERIFIED, and if the conversion is wrong THE ERROR IS LOCALISED IN THIS
+    ONE BARRIER rather than distributed across the route. The generator ASSERTS the note is
+    still present and unchanged before it runs, so the caveat cannot go stale silently.
+  * The benchmark's own contract is UNTOUCHED and still FAILS — max_ratio 1.4110 is now INSIDE
+    its 1.45 threshold but MALE 0.0935 is outside 0.09, i.e. it fails on one criterion instead
+    of two.
+  * Note 26.35 vs the retired 26.85 that Wave H fitted THROUGH the contradicted route. The two
+    fits are independent (different route, same benchmark, same rules) and the near-agreement is
+    a coincidence of the shared upstream trunk, NOT evidence for the retired route. A test
+    asserts the adopted value is not 26.85.
+
+### (d) ITEM 2 — the C2 + C3 recombination lane to MFT
+
+  Hofmann & Schieberle 1998 (10.1021/jf9705983, abstract retrieved VERBATIM via Europe PMC,
+  PMID 10554225 — CrossRef-verified): "the highest yields for MFT (1.4 mol %) when
+  hydroxyacetaldehyde and mercapto-2-propanone were reacted for 6 min at 180 degrees C in the
+  absence of water". The network could not express this at all: mercapto-2-propanone was not a
+  species. Wave L1 listed it as one of the top three completeness gaps.
+
+  THREE STEPS, all exact and RDKit-verified:
+      pyruvaldehyde + H2S + 2[H] -> 1-mercapto-2-propanone + H2O
+          C3H4O2 + H2S + H2 -> C3H6OS + H2O          both sides C3H8O2S
+          family `Mercaptoketone_Formation`
+      glycolaldehyde + 1-mercapto-2-propanone -> 4,5-dihydroxy-3-mercapto-2-pentanone
+          C2H4O2 + C3H6OS -> C5H10O3S                both sides C5H10O3S
+          family `Mercaptoketone_Aldol_Addition`  (ADDITION, not condensation — the named
+          literature intermediate retains both oxygens)
+      4,5-dihydroxy-3-mercapto-2-pentanone -> MFT + 2 H2O
+          C5H10O3S -> C5H6OS + 2 H2O                 both sides C5H10O3S
+          family `Mercaptoketone_Cyclodehydration`
+  Overall C2H4O2 + C3H6OS -> C5H6OS + 2 H2O, exact, with NO reducing token on the
+  recombination itself; the token is consumed once, upstream, in step 1.
+
+  MECHANISM CITATION. The 1998 abstract states no mechanism (it is a yield paper; the body is
+  paywalled and was NOT retrieved). Cerny 2015, "The role of sulfur chemistry in thermal
+  generation of aroma", 10.1016/b978-1-78242-103-0.00009-6 (CrossRef-verified; FULL TEXT
+  retrieved) renders their Figure 9.6 verbatim: "The formation of 2-methyl-3-furanthiol (16)
+  starts with aldol reaction of hydroxyacetaldehyde (18) and mercaptopropanone (19) to give
+  4,5-dihydroxy-3-mercapto-2-pentanone (20). The intermediate 20 cyclises and dehydrates to
+  yield 2-methyl-3-furanthiol (16)." Both intermediates are NAMED there; neither is invented.
+
+  WHERE THE C3 PARTNER COMES FROM — AND THE ROUTE THAT WAS REJECTED. Two candidates were
+  balanced and researched:
+      (a) hydroxyacetone + H2S -> 1-mercapto-2-propanone + H2O   [EXACT, no token]
+      (b) pyruvaldehyde + H2S + 2[H] -> 1-mercapto-2-propanone + H2O
+  (a) is the CHEAPER step and needs no reducing equivalent. It was REJECTED: a literature search
+  found NO support for direct thiol-for-hydroxyl exchange on a simple alpha-hydroxyketone under
+  Maillard conditions. (b) is what the literature states, three separate times in Cerny 2015:
+  "An alternative formation pathway to alpha-mercaptoketones passes through dicarbonyl
+  compounds ... These can add hydrogen sulfide ... and then undergo reduction. Actually,
+  3-mercapto-2-butanone was found in the model reaction of hydrogen sulfide with
+  2,3-butanedione, and 3-mercapto-2-pentanone and 2-mercapto-3-pentanone in the reaction with
+  2,3-pentanedione (Mottram et al., 1995)". Primary model-system evidence: Mottram, Madruga &
+  Whitfield 1995, 10.1021/jf00049a035 (CrossRef-verified, JAFC 43:189-193).
+  HONEST LIMIT: the demonstrated cases are the C4 and C5 dicarbonyls. The C3 member is the
+  analogous instance of a mechanism stated GENERALLY for "dicarbonyl compounds" and demonstrated
+  for its two nearest homologues. That is written into the docstring and the barrier rationale.
+  1-mercapto-2-propanone is itself reported as a cysteine/ribose and cysteine/glucose Maillard
+  product in Cerny 2015's own product lists (attributed there to Hofmann & Schieberle 1995) —
+  but NOT in the 1995 abstract, which was retrieved and does not name it. Flagged.
+
+  NOT MOISTURE-GATED, and why. The 1.4 mol % was measured "in the absence of water" and
+  `ReactionConditions` does carry `water_activity`, so a gate is mechanically possible. It was
+  declined: a single dry-condition yield does not establish the channel is ABSENT in water, and
+  Cerny 2015 says both intermediates "are known to occur in heated L-cysteine/glucose systems",
+  which are aqueous. Worse, the existing aw machinery is only reachable through the family-name
+  substring matcher, i.e. by choosing a name containing "furfural" — a naming trick, not a
+  model. The channel competes on barriers alone and THE MODEL DOES NOT EXPRESS THE MOISTURE
+  DEPENDENCE THE MEASUREMENT WAS MADE UNDER. Stated as a limitation. [P]
+
+  REACHABILITY, MEASURED — AND THE MEASUREMENT CORRECTED A GUESS I HAD ALREADY WRITTEN DOWN.
+  The lane needs glycolaldehyde, which `_retro_aldol_fragmentation` emits only from the PENTOSE
+  deoxyosone, so the docstring first claimed the lane was pentose-only. Enumeration says
+  otherwise: in glucose+cysteine the identical species arrives via glyoxal -> Strecker ->
+  2-aminoethanal -> hydrolytic deamination, because pool identity is by canonical SMILES and not
+  by label. The docstring was corrected to the measurement. While there,
+  `_deamination_step._known_ketol_labels` gained `"O=CCO": "glycolaldehyde"` so the molecule
+  stops appearing as `deaminated-2-aminoethanal-ketol` — a READABILITY fix with zero numeric
+  effect (verified: the panel is byte-identical across it).
+
+### (e) ITEM 3 — norfuraneol -> 2,3-pentanedione -> 2-mercapto-3-pentanone
+
+  Wave N retired norfuraneol from the MFT lane and left it with ZERO consumers. Cerny & Davidek
+  2003 (10.1021/jf026123f, abstract VERBATIM, PMID 12696962) name what it actually does:
+  "Whereas 2-mercapto-3-pentanone was found unlabeled and hence originated from
+  4-hydroxy-5-methyl-3(2H)-furanone, its isomer 3-mercapto-2-pentanone was formed from both
+  4-hydroxy-5-methyl-3(2H)-furanone and ribose."
+
+  THE ISOMER MATTERS AND THE LANE EMITS ONLY ONE. 2-mercapto-3-pentanone is assigned
+  exclusively to norfuraneol; 3-mercapto-2-pentanone has a second, ribose-derived origin (the
+  1,4-dideoxyosone route already in the network), so emitting it here would double-count that
+  flux. A test asserts it is NOT emitted.
+
+  THE MECHANISM IS NOT IN THAT PAPER — it proposes a pathway only for MFT and
+  3-mercapto-2-pentanone. Whitfield & Mottram 1999 (10.1021/jf980980v, CrossRef-verified, JAFC
+  47:1626-1634, abstract VERBATIM, PMID 10564029) reacted norfuraneol with cysteine or H2S at
+  pH 4.5 / 140 C / 60 min: "The main non-sulfur compounds were 2,3-pentanedione,
+  2,4-pentanedione, and 3,4-hexanedione." So the ring opens to the C5 alpha-dicarbonyl FIRST and
+  sulfur enters afterwards, by the same alpha-mercaptoketone mechanism as item 2.
+
+  TWO STEPS, exact and RDKit-verified:
+      norfuraneol + 2 x 2[H] -> 2,3-pentanedione + H2O
+          C5H6O3 + 2 H2 -> C5H8O2 + H2O              both sides C5H10O3
+          family `Furanone_Reductive_Opening`
+      2,3-pentanedione + H2S + 2[H] -> 2-mercapto-3-pentanone + H2O
+          C5H8O2 + H2S + H2 -> C5H10OS + H2O         both sides C5H12O2S
+          family `Mercaptoketone_Formation`  (SAME family as item 2 — same mechanism, and
+          Mottram 1995 demonstrated it on this exact substrate)
+
+  THE ONE-STEP LUMP WAS WRITTEN OUT AND REJECTED. `norfuraneol + H2S -> 2-mercapto-3-pentanone
+  + 2 H2O` needs SIX hydrogens (C5H8O3S vs C5H14O3S), i.e. THREE reducing-equivalent tokens on
+  a single step. NOTE: the brief for this wave stated the requirement as +4H / two tokens; the
+  arithmetic is +6H / three, verified independently twice. Three tokens on one step is not an
+  elementary step by any reading; the two-step literature route accounts for the same three
+  across two steps with a MEASURED intermediate in between.
+
+  SENSORY LAYER: 2-mercapto-3-pentanone is quantified in heated meat by Kerscher & Grosch 1998
+  (10.1021/jf970892v, CrossRef-verified: beef 20-44 ug/kg, pork 11-14, lamb 10, chicken 13) but
+  NO PEER-REVIEWED ODOUR THRESHOLD FOR IT COULD BE RETRIEVED — it is absent from Cerny 2015's
+  threshold tables and from Blank's sulfur-odorant table, both of which carry the ISOMER
+  (3-mercapto-2-pentanone, "sulfury, catty", 0.7 ug/kg in water). It is therefore NOT registered
+  as a scored sensory target: adding a target with a fabricated threshold is the exact failure
+  mode this campaign exists to remove. It ships as a network species and a sulfur sink only. [P]
+
+### (f) ITEM 4 — nonanal comes off the OLEATE pool
+
+  `LipidProfile.oleic_acid_pct` was declared, populated for pea and soy, carried through the
+  calibration registry, and READ BY NO CODE PATH IN THE REPO. Nonanal is in NEITHER linoleate
+  hydroperoxide isomer's product list (Miyazaki 2023, 10.1093/bbb/zbac189, read in FULL TEXT):
+  13-HpODE -> hexanal, vinyl hexanoate, 2-pentylfuran, 4,5-epoxy-2-decenal; 9-HpODE ->
+  2,4-decadienal, octanoic acid, 2-octenal, hexanal. Nonanal is the C9 fragment of the OLEATE
+  double bond.
+
+  CITATION CORRECTION MADE WHILE HERE. `docs/validation/isotope_topology_evidence.md` attributes
+  10.1021/jp0500900 to "Hearn & Smith (2007)". CrossRef resolves that DOI to **Hung, Katrib &
+  Martin (2005)**, J. Phys. Chem. A — the dossier has the TITLE right and the authors/year
+  wrong. The abstract (Europe PMC, PMID 16833788) does carry the quoted figure verbatim:
+  "1-nonanal (30 +/- 3% carbon yield)". The correct attribution is used in the code; the dossier
+  is a Wave L1 deliverable and was NOT edited (it is on this wave's do-not-touch list). The
+  companion Reynolds citation is 2006, not 2007 (the dossier says both in different places). [P]
+
+  IMPLEMENTED: `predict_hexanal_generation` now returns `total_hydroperoxide_oleate` alongside
+  `total_hydroperoxide`, computed with the SAME kinetics from `oleic_acid_pct`; nonanal is
+  scaled off it. `MARKER_HYDROPEROXIDE_POOL` / `hydroperoxide_pool_key_for_marker` are the
+  single source of truth and are consumed by both matrix paths in `benchmark_validation.py` and
+  by `derive_matrix_sigma_from_residuals.py`. The BRANCHING RATIO (0.15) was NOT touched — only
+  the pool it multiplies.
+
+  KNOWN, DELIBERATELY UNIMPLEMENTED: the oleate pool uses the same rate constant as the
+  linoleate pool, which is generous to nonanal (monoenoic C18:1 oxidises ~an order of magnitude
+  slower than dienoic C18:2). Applying that ratio would push predicted nonanal down another
+  ~10x, i.e. FURTHER TOWARDS the hold-out — which is exactly why it was not done in the same
+  pass. Predicted nonanal is expected to remain biased HIGH. [P]
+
+  OLD -> NEW, EVERY ROW THAT MOVED:
+    EXTERNAL HOLD-OUT (n=200, seed 0; hold-out never fitted, holdout_guard re-run PASS)
+      | point                          | measured | p50 old  | p50 new | fold old  | fold new |
+      | li_2026_hme / nonanal          |    72.66 | 19809.0  |  8596.4 | 272.6257x | 118.3093x|
+      | liu_2023_ppi / nonanal         |    15.81 |   171.70 |   75.55 |  10.8603x |   4.7785x|
+      the other SIX points are byte-identical.
+      Each moved by exactly its matrix's oleic/linoleic ratio (soy 0.4340, pea 0.4400).
+      AND THE HEADLINE DID NOT MOVE AT ALL: median |log10| 1.6296 dex / median fold 42.6159x
+      UNCHANGED, ci_coverage_hits 4/8 UNCHANGED, max_fold_error 2474.3839x UNCHANGED,
+      pre-widening genuine_extrapolation_hits 1/5 UNCHANGED. The median sits between two points
+      that did not move, and the two that did were outside the interval before and after.
+      A real mechanistic correction improved a quarter of the hold-out by 2.3x each and moved
+      the published number by nothing. That is the clearest argument in the repo for reading the
+      per-point table alongside the headline.
+    IN-PANEL
+      pea_isolate_uht_140C_Trikusuma2019 nonanal 24.00 -> 10.56 ppb = 2.2727x under, which is
+      EXACTLY 1/(22.0/50.0). Benchmark `pass` -> `scale-gap`. THE OBSERVABILITY FACTOR WAS NOT
+      REFITTED: doing so would re-absorb the correction into the same constant and make the fix
+      invisible, and Trikusuma 2019 is still the last content-unverified pillar of the matrix
+      lane, so there is no verified anchor to refit against. Dated note added to
+      `src/matrix_calibration_registry.py`.
+      -> THIS BREAKS THE LAST FIT-RECOVERY PASS IN THE PANEL: fit-recovery passes 1/4 -> 0/4,
+      aggregate (strict `pass`) 5/14 -> 4/14. Every remaining pass is an internal synthetic row.
+      The four Internal2026/ProtocolPilot2026 snapshots' Nonanal rows moved by the same ratio.
+    MATRIX SIGMA (`derive_matrix_sigma_from_residuals.py`, leave-lane-out)
+      One of the five scored residuals is the Trikusuma nonanal row: uncalibrated prediction
+      3238.93 -> 1425.13 ppb. rms_ln_sigma 3.2520 -> **3.0166**; bias_fold 3.9065 -> 3.3149;
+      centered_sd 3.3013 -> 3.0951; 90% CI [2.1856, 6.7958] -> **[2.0274, 6.3038]**.
+      The shipped 2.86 was NOT moved and is still inside. It moved TOWARDS the shipped value;
+      that is a consequence of correcting a substrate, not a reason to narrow the prior.
+
+### (g) ITEM 5 — fructose reaches HMF by its own route
+
+  The model sent fructose Heyns -> hexose 3-deoxyosone -> HMF, i.e. through the precursor an
+  isotope study excludes for exactly this sugar. Perez Locas & Yaylayan 2008 (10.1021/jf8010245,
+  CrossRef-verified, abstract VERBATIM, PMID 18611024): "both fructose and sucrose showed much
+  higher conversion rates than 3-deoxyglucosone thus precluding it as a major precursor of HMF
+  in fructose and sucrose solutions ... sucrose degrades into glucose and a very reactive
+  fructofuranosyl cation."
+  CAREFUL WITH THAT CITATION, and the care is recorded in the code: its title and design are
+  about SUCROSE and the cation it proposes arises from GLYCOSIDIC CLEAVAGE. It is cited for
+  exactly two things — the 3-DG exclusion for fructose, and the cation's identity. The
+  ring-retained route from FREE fructose is Antal, Mok & Richards 1990
+  (10.1016/0008-6215(90)84096-d, CrossRef-verified, Carbohydr. Res. 199:91-109, abstract
+  VERBATIM), which reviews both hypotheses and finds for the ring-retained one.
+
+  IMPLEMENTED, minimally: for a KETOSE the 1,2-enolisation HMF step is replaced by
+      D-fructose C6H12O6 -> HMF C6H6O3 + 3 H2O      [EXACT, family `Fructofuranosyl_Dehydration`]
+  The Heyns product and the 3-deoxyosone are still formed (they feed the retro-aldol and
+  Strecker lanes); only the claim that fructose's HMF comes through them is removed. In a system
+  with both sugars the glucose limb still emits deoxyosone -> HMF and pool de-duplication means
+  it appears once. NO INTERMEDIATE WAS INVENTED: Amarasekara 2008 (10.1016/j.carres.2008.09.008)
+  names a structurally defined one, but in DMSO with the solvent as catalyst, so it is recorded
+  and not used. NO RATE ADVANTAGE ENCODED: the barrier is set EQUAL to the `dehydration` class
+  value the replaced step carried (28.0), even though the paper measured fructose converting
+  FASTER. Conservative direction, deliberately not tuned.
+
+  MEASURED IMPACT ON SCORED ROWS: **ZERO**. The only benchmarks containing fructose are the two
+  QUARANTINED PMC9905368 files. This is a topology repair with no scoreboard consequence, and it
+  is reported as one rather than left unmentioned because it moved nothing.
+
+### (h) ITEM 6 — the furaneol `[HH]` pool gate is gone
+
+  Red-team H4's second half, and Wave L1's topology risk 3. The hexose 1-deoxyosone -> DMHF step
+  was pool-gated on the `[HH]` token whose only producer in a cysteine-free system is the
+  pyrazine aromatisation, so predicted furaneol from glucose was a downstream dependent of
+  pyrazine chemistry — while Wang & Ho 2008 (10.1021/jf8012025) CONFIRM the route with CAMOLA.
+
+  A `_sugar_reductant_pool` WAS INVESTIGATED AND DECLINED. Research verdict, and it is the
+  honest answer to the question the brief asked: the literature establishes that Maillard
+  reductones ACT as reducing agents — including the 1-deoxyosone itself, measured (Kanzler,
+  Haase & Kroh 2014, 10.1021/jf404322r; Kanzler et al. 2016, 10.1021/acs.jafc.6b03398) — but it
+  does NOT pin a specific balanced couple with both the reductone and its dehydroreductone named
+  and structurally defined: Kanzler 2016 finds the oxidised partner is a TRANSIENT TRICARBONYL
+  that fragments to lactic/glycolic/glyceric acid, so what was characterised is the fragments,
+  not the couple. Writing that couple would have meant inventing a species purely to carry
+  bookkeeping — the exact move Wave I declined for the same reason. A search for a
+  "reductone disproportionation" claim returned zero primary retrievals and it is NOT asserted.
+
+  WHAT WAS DONE INSTEAD IS BETTER: the token was not re-sourced, it was REMOVED, because the
+  accepted mechanism NAMES the reductant and it is the amino acid. Blank & Fay 1996
+  (10.1021/jf950439o, CrossRef-verified, abstract VERBATIM): the mechanism is "based on
+  decomposition of the Amadori compound via 2,3-enolization, chain elongation by the Strecker
+  aldehydes, and REDUCTION of the resulting acetylformoin-type intermediates to the target
+  molecules". Kerler, Winkel, Davidek & Blank 2010 (10.1002/9781444317770.ch3, CrossRef-verified,
+  FULL TEXT) name the donors: "acetylformoin ... is an effective precursor for
+  4-hydroxy-2,5-dimethyl-3(2H)-furanone (Furaneol). The amounts of Furaneol obtained from
+  acetylformoin were significantly enhanced in the presence of reductones such as ascorbic acid
+  or methylene reductinic acid as well as the STRECKER-ACTIVE AMINO ACID proline."
+
+  NEW STEP, family `Furanone_Amino_Acid_Reduction`, EXACT with NO token:
+      hexose 1-deoxyosone + amino acid -> DMHF + Strecker aldehyde + CO2 + NH3 + H2O
+      glycine:  C6H10O5 + C2H5NO2 -> C6H8O3 + CH2O  + CO2 + NH3 + H2O   C8H15NO7 both sides
+      alanine:  C6H10O5 + C3H7NO2 -> C6H8O3 + C2H4O + CO2 + NH3 + H2O   C9H17NO7 both sides
+  All six DMHF carbons still come from the hexose (the amino acid's carbon leaves as its own
+  aldehyde and as CO2), so Wang & Ho's intact-C6 CAMOLA constraint is preserved — pinned in a
+  test. The Strecker-aldehyde table was lifted to module level so this step and `_strecker_step`
+  share one source of truth. The BARRIER IS UNCHANGED at 28.0, deliberately: it is the same
+  value the step carried through `furanone_cyclisation`, so any movement in furaneol is
+  attributable to the stoichiometry and not to a barrier change.
+
+  THE MEASUREMENT THE BRIEF ASKED FOR (glucose + glycine, pH 5.5 / 150 C, max_generations=3,
+  `_aminoketone_condensation` monkey-patched to return [], in-process, no repo file touched):
+      Wave L1:  [baseline] 16 steps | DMHF steps 1 | H2 producers ['Aminoketone_Condensation']
+                [pyrazine OFF] 14 steps | DMHF steps 0 | H2 producers []
+      Wave P:   [baseline] 16 steps | DMHF steps 1 | H2 producers ['Aminoketone_Condensation']
+                [pyrazine OFF] 15 steps | DMHF steps **1** | H2 producers []
+  DMHF now SURVIVES. The `[HH]` token still exists and still has exactly one producer in an
+  amine-only system; what changed is that furaneol no longer needs it. `_thiol_addition` (FFT)
+  is still token-gated and is OUT OF SCOPE here. [P]
+
+### (i) ITEM 7 — the verified Henry's-law constants
+
+  NO CHANGE WAS NEEDED: the values are ALREADY ACTIVE and have been since 2026-08-26 (round 3,
+  owner-approved; see the ledger entry of that date). `data/lit/henry_constants.yml` ships
+  acrylamide `Kaw_25c: 6.0e-8` (`previous_value: 1.0e-9`) and HMF `5.0e-8`
+  (`previous_value: 1.0e-10`), both above the `_NON_OBSERVABLE_KAW_THRESHOLD = 1.0e-8` gate in
+  `src/recommend.py`, and both classify `observable`. No `literature_value_pending_threshold_
+  decision` key survives anywhere.
+
+  RE-MEASURED EMPIRICALLY TODAY, because "verified inert earlier" is a claim with a date on it.
+  A throwaway harness (scratchpad, no repo file touched) scored the ENTIRE live benchmark panel
+  twice in one process — once as shipped, once with both `Kaw_25c` values patched back to their
+  `previous_value` placeholders in `recommend._HENRY_LOOKUP`:
+      rows whose prediction differs: **NONE — 0 of 42 scored rows**
+  So the activation remains numerically inert on the panel, and the earlier measurement holds.
+  The reason is structural and worth writing down: acrylamide is produced by `src/safety.py`,
+  which is not on the Henry-gated loop at all, and HMF's only appearances are in benchmarks
+  where it is not a scored analyte. The partition layer as a whole is still inert (the `[D]`
+  Henry workstream), so what these two values buy today is correctness of record, not
+  correctness of prediction. Recorded so the next reader does not re-open it.
+
+### (j) EVERY OTHER PANEL NUMBER THAT MOVED, old -> new
+
+  BENCHMARK PANEL (`benchmark_summary.json`), max_ratio / MALE:
+    cys_ribose_140C_Hofmann1998            2.2519 / 0.2192 -> **1.4110 / 0.0935**  (item 1)
+    pea_isolate_uht_140C_Trikusuma2019     1.0000 / -      -> **2.2727 / 0.1189**  (item 4)
+    resconi_2023_pbma_beef_identity        4.5607 / 0.6590 -> **4.6573 / 0.6681**  (species added
+                                                                 to the shared volatile budget)
+    thiamine_cys_glucose_120C_Bolton1994 772.8112 / 2.8881 -> **763.5881 / 2.8829**  (same cause)
+    every other row bit-identical.
+    NOTE ON THE TRIKUSUMA "BEFORE" MALE: the pre-Wave-P artifact carried 1.4562 dex next to
+    max_ratio 1.0000, which is internally inconsistent (three rows all recovering exactly should
+    give ~0). It is reported as read rather than reconstructed; the post-Wave-P 0.1189 is
+    log10(2.2727)/3 and is self-consistent. Worth a look. [P]
+    status_counts: scale-gap 7 -> **8**, pass 5 -> **4**, pass-no-ranking 2 UNCHANGED.
+    evidence-role split 6/4/4 UNCHANGED. predictive passes **0/6 UNCHANGED**.
+    fit-recovery passes 1/4 -> **0/4**. strict-ready **0/14 UNCHANGED**.
+    TWO COUNTERS, AND THEY DISAGREE — found while re-pinning. `benchmark_summary.md` prints
+    "0/6 + 2/4 + 4/4 = 6/14" because `src/presentation.py::_is_pass` also counts
+    `pass-no-ranking`; the guard test and the README headline use strict `overall_status ==
+    "pass"` and see 0/6 + 0/4 + 4/4 = 4/14. The divergence PREDATES this wave (7/14 vs 5/14
+    after Wave O, where the ledger quoted only the strict number). Both are now pinned and the
+    README says which is which. [P] reconcile the predicates.
+  MC PANEL (`prediction_uncertainty.json`, n=200 seed 0): every COUNT unchanged — benchmark_count
+    11, matched rows 35, coverage 29/35, honest_literature_coverage 1/3, not_evaluable 4,
+    excluded_fitted_rows 2/2. Only interval widths moved: external_literature median CI
+    0.8558 -> **0.8495** dex, fitted_row 2.3205 -> **2.2767**, internal_synthetic
+    3.7657 -> **3.6929**.
+  VALIDATION OVERVIEW: status_counts as above; inside_1_5x 3 UNCHANGED, outside_1_5x 6, worst
+    quantitative point unchanged (CML 1203.68x).
+  SNAPSHOTS: NOTES bumped v8 -> v9 with all six items and the honest movement. The four
+    synthetic snapshots MOVED this time (unlike Wave O): the sulfur / pyrazine / furfural rows
+    fall together by ~0.87x because the added species dilute the bounded volatile budget, and
+    Nonanal falls by the oleate ratio. In the pea snapshot MFT rises to rank 1.
+  PENTOSE >> HEXOSE: 3.39x -> **6.15x** (ribose 370.3 -> 686.83, glucose 109.3 -> 111.65).
+    THIS IS NOT IMPROVED SUGAR DISCRIMINATION, and the test that pinned it said so in advance.
+    Structural share re-measured in-process (thiol_addition_pentodiulose set equal to
+    thiol_addition_hexose): **2.3118x**, up from 1.13x under Wave N. So 2.31x is mechanism and
+    ~2.7x is the 3.30 kcal/mol gap between a FITTED barrier and an UNCONSTRAINED LEGACY FIT.
+    More of the ordering rides on a fitted constant than before, even though that constant is
+    better provenanced than the estimate it replaced. Both halves are in the README.
+  PROJECTION REFIT (still NOT applied): fitted tau 5011.87 -> **10000** min, i.e. the budget
+    scale the fit wants fell 2.51x -> **1.26x**; objective at fit 0.8620 -> 0.8817, at the
+    shipped tau 0.8811 -> 0.8879.
+    GENERATOR BUG FIXED WHILE HERE — the SECOND pass of the Wave M fix. Wave M derived the two
+    residuals the decision prose quotes but left the ALLOCATION arithmetic hard-coded
+    ("~1126 ppb", "542 ppb", "~51%", "~2800 ppb", "1.22x over", "~3.1x over", "2.25x MFT gap"),
+    and every one had gone stale again. They are now computed from the live prediction on every
+    run: tracked pool 1152.3 ppb over five species, furfural share 44%, MFT gap 1.41x under,
+    FFT 1.09x over. The record's pointer to the stale `sulfur_barrier_refit_hofmann.md` was
+    repointed at the Wave P record. This is Wave M's [P] item 3, closed one generator at a time.
+
+### (k) TESTS RE-PINNED (each with a dated causal comment; none relaxed)
+
+  1. `tests/unit/test_chemistry_soundness.py::test_pentose_reaches_norfuraneol_without_a_
+     reduction_hexose_does_not` — the hexose probe was testing the `[HH]` GATE, not the
+     chemistry, and the gate was the defect. Rewritten to probe the reductant the chemistry
+     actually uses: pentose needs none, hexose+`[HH]`-token STILL emits nothing (asserted, so
+     the gate cannot come back), hexose+amino-acid emits `Furanone_Amino_Acid_Reduction`.
+     STRICTER than before: it now pins the absence of the gate as well as the presence of the
+     route.
+  2. `tests/unit/test_wave_h_2026_08.py::test_corrected_mft_route_barriers_are_estimates_not_
+     fits` — `thiol_addition_pentodiulose` is no longer ESTIMATED/UNCONSTRAINED, so the old
+     assertions would have been asserting a lie. Re-pinned to 26.35 with FITTED provenance, the
+     verbatim conversion caveat, an explicit `!= 26.85`, and `deoxyosone_reduction` still
+     ESTIMATED/UNCONSTRAINED.
+  3. `tests/scientific/test_free_aa_quantitative_regression.py` — MFT band (1.85, 2.252, 2.80)
+     -> (1.15, 1.411, 1.75); FFT (1.00, 1.219, 1.60) -> (1.00, 1.090, 1.43). Band widths held at
+     the same RELATIVE span, so this is a re-centring and not a loosening. The header records
+     that the contract now fails on ONE criterion (MALE 0.0935 > 0.09) rather than two, and that
+     the improvement is FIT RECOVERY on a declared fit target.
+  4. `tests/scientific/test_honest_headline_guards.py` x4 — fit-recovery passes 1 -> 0 with the
+     full oleate/linoleate explanation; aggregate 5 -> 4 plus a NEW assertion that every
+     remaining pass is internal-synthetic; a NEW pin on the lenient presentation-layer count
+     (6/14) so the two predicates cannot drift apart unnoticed; MC median CI 0.8558 -> 0.8495
+     with the companion widths; pentose ordering 3.39 -> 6.15 with the structural decomposition
+     measured rather than asserted; and the hold-out guard gains a dated paragraph on the two
+     nonanal points WITHOUT changing a single pinned number, because none of them moved.
+  5. NEW `tests/scientific/test_wave_p_chemistry_2026_08.py` (20 tests) — every new family has
+     an explicit barrier key and canonicalises to ITSELF (the fallthrough guard); none picks up
+     a pH/aw correction from its name; the refit value and its caveat; the Hofmann rows; the
+     C2+C3 lane's existence, its hexose reachability, and its ZERO contribution; norfuraneol's
+     consumers and the isomer it must not emit; the oleate pool; the Trikusuma 2.2727x = 1/0.44
+     identity; the fructose route; the pyrazine-independence measurement; the token-free DMHF
+     step; and the intact-C6 CAMOLA constraint.
+
+  NOT RE-PINNED, DELIBERATELY: `cys_ribose_140C_Hofmann1998`'s own contract (1.45x / 0.09 dex),
+  the Pratap-Singh ratio tolerance, the Trikusuma observability factors, the 3.0x pentose/hexose
+  floor, `max_fold_error`, the pre-widening 1/5, the 0/6 predictive headline, strict-ready 0/14.
+
+### (l) [P] CARRIED FORWARD
+
+  1. `src/recommend.py` selects the lowest-span path per product and does not sum parallel
+     channels. Every compound claim rests on one route. Fixing it is a model-wide recalibration.
+  2. `src/conditions.py` selects pH/aw corrections by SUBSTRING on the family name, so a
+     family's NAME is a load-bearing calibration input. Wave P worked around it and pinned the
+     workaround; it did not fix it.
+  3. The C2+C3 lane does not express the low-moisture dependence Hofmann measured it under. Any
+     gate would need an invented threshold or a naming trick.
+  4. The oleate pool uses the linoleate rate constant; predicted nonanal stays biased HIGH by
+     roughly an order of magnitude. Needs its own anchor.
+  5. 2-mercapto-3-pentanone has no retrievable peer-reviewed odour threshold and is therefore
+     not a scored sensory target.
+  6. The two panel pass-counters (strict vs presentation-layer) disagree, 4/14 vs 6/14.
+  7. The Trikusuma pre-Wave-P MALE (1.4562 next to max_ratio 1.0000) is internally inconsistent.
+  8. `docs/validation/isotope_topology_evidence.md` mis-attributes 10.1021/jp0500900 to
+     "Hearn & Smith (2007)"; CrossRef says Hung, Katrib & Martin (2005). Dossier not edited
+     (do-not-touch list); the code uses the correct attribution.
+  9. `_thiol_addition` (FFT) is still `[HH]`-pool-gated. Out of scope for item 6.
+ 10. The hexose retro-aldol channel that Yaylayan & Keyhani show gives glycolaldehyde directly
+     from glucose is still absent; the C2+C3 lane reaches hexose systems by a longer route.
+
+### (m) GATES + SUITE — and an honest note about the suite
+
+  GATES, all three re-run LAST, after every code, artifact, test and doc edit:
+    citation_gate  PASS — 81 files, 951 DOI-bearing fields, 316 unique DOIs (was 79/904/310
+                   at Wave O). The six new DOIs passed with no formatting change; WAIVERS and
+                   TEXT_SURFACE_WAIVERS are both still the empty tuple.
+    holdout_guard  PASS — 3/3 invariants, re-run after the regeneration.
+    fit_target_gate PASS — both checks. It now enumerates the new record
+                   `sulfur_barrier_refit_pentodiulose.json: leverage=per_row_recovery,
+                   1 target(s)` alongside the Wave H and Wave O records.
+
+  THE FULL SUITE DID NOT COMPLETE, AND THE REASON IS THE MACHINE, NOT THE TREE. Stated
+  plainly rather than papered over with a number nobody measured.
+    * The certifying run (`tests/unit tests/scientific tests/integration tests/scripts`,
+      1268 collected, documented conda path) reached **82 % with exactly ONE failure**:
+      `tests/scientific/test_matrix_only_benchmark.py::
+       test_trikusuma_heated_pea_matrix_fit_is_recovered_to_within_1_05x`.
+      That failure was located by index against a `--collect-only` listing, diagnosed as a
+      STALE PIN from item 4 (the nonanal recovery this wave deliberately broke), re-pinned
+      two-sided with a dated causal comment, and the file now passes **7/7**.
+      **The whole of `tests/unit` — the first 72 % of that run, 931 tests — was green in it.**
+    * The run then stalled. During this wave the machine's data volume reached **100 % full**
+      (ENOSPC surfaced mid-run and produced a cluster of spurious ERRORs at 17 % that DO NOT
+      reproduce once space was freed) and free RAM fell to **~60 MB**, at which point pytest
+      held ~99 % CPU while advancing a few tests per ten minutes. Two further attempts
+      (`tests/scientific tests/integration tests/scripts`, and `tests/unit` alone) stalled the
+      same way. This is an environment condition and it is not caused by anything in Wave P.
+    * WHAT IS CERTIFIED GREEN UNDER THE FINAL TREE, run to completion:
+        - the 13-file Wave P blast radius (wave_p_chemistry, matrix_only_benchmark,
+          matrix_assertions, matrix_headspace_ph_validation, honest_headline_guards,
+          free_aa_quantitative_regression, pentose_hexose_sulfur_ordering, benchmark_summary,
+          matrix_experiment_intake, lipid_oxidation_saturation, lipid_oxidation_guard,
+          deep_research_benchmark_wiring, matrix_observability_refit_wave_o):
+          **64 passed**
+        - tests/unit/test_chemistry_soundness.py + tests/unit/test_wave_h_2026_08.py:
+          **42 passed**
+        - tests/unit/test_data_ingest.py + tests/scientific/test_matrix_experiment_intake.py:
+          **5 passed**
+        - tests/unit as a whole, earlier in the wave: 928 passed / 1 skipped / 2 failed, and
+          BOTH failures are the two re-pins above, since verified passing.
+    * NOT CERTIFIED under the final tree: `tests/integration` and `tests/scripts` (and the
+      tail of `tests/scientific` past index 1039). **[P] re-run the full suite on a machine
+      with headroom before this wave is committed.** No number is published for it here,
+      because none was measured.
+
+  NOT COMMITTED, NOT STASHED — handed to the orchestrator as instructed.
+
+### (n) ENVIRONMENT FINDING (not a repo defect, but it invalidated a test run)
+
+  `/System/Volumes/Data` hit **100 % capacity** during this wave (133 MiB free at the worst
+  point). The observable symptom inside pytest was a cluster of ERRORs in subprocess-backed
+  unit tests, which looks exactly like a code regression and is not one. Clearing
+  `__pycache__` and `.pytest_cache` from the repo recovered several GB on its own. Anyone
+  reading a failing CI log from this period should check `df` before bisecting.
+
+## Wave P certification (2026-08-27, orchestrator)
+
+The [P] "re-run the full suite on a machine with headroom before committing" is CLOSED:
+full 4-directory suite under the final Wave P tree: 1265 passed, 1 skipped, 2 xfailed,
+0 failed (873.99 s), run after freeing 6 GB of stale Docker images (the disk-full
+condition that produced Wave P's spurious ERRORs and stalls). tests/integration and
+tests/scripts are hereby certified; the exit-144 kills during the stall window were
+Wave P's own process cleanup racing the orchestrator's runs, not test failures.

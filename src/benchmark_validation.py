@@ -12,7 +12,14 @@ from src.conditions import ReactionConditions
 from src.barrier_constants import effective_barrier_from_rate_constant
 from src.headspace import HeadspaceModel
 from src.kinetics import KineticsEngine
-from src.lipid_oxidation import PEA_LIPID_PROFILE, SOY_LIPID_PROFILE, predict_hexanal_generation
+from src.lipid_oxidation import (
+    HYDROPEROXIDE_POOL_KEYS,
+    MARKER_HYDROPEROXIDE_POOL,
+    PEA_LIPID_PROFILE,
+    SOY_LIPID_PROFILE,
+    hydroperoxide_pool_key_for_marker,
+    predict_hexanal_generation,
+)
 from src.fit_target_index import fit_target_records_for, is_per_row_fit_target
 from src.matrix_calibration_registry import (
     describe_matrix_calibration,
@@ -687,7 +694,13 @@ def _run_benchmark_recommendation(
             time_min=float(formulation.get("time_minutes", 60.0)),
             oxygen_availability=1.0,
         )
-        oxidation_load_ppb = float(oxidation["total_hydroperoxide"]) * 1000.0
+        # SUBSTRATE CORRECTION 2026-08-27 (Wave P item 4): the load is now
+        # PER MARKER, because nonanal comes off the oleate pool and the other
+        # three come off the linoleate pool. See
+        # `src.lipid_oxidation.MARKER_HYDROPEROXIDE_POOL` for the evidence.
+        def _oxidation_load_ppb_for(compound_name: str) -> float:
+            return float(oxidation[hydroperoxide_pool_key_for_marker(compound_name)]) * 1000.0
+
         # Convert ppb to a proxy molar concentration. The framework's recommend engine converts molar -> ppb using ppb_conversion_factor later.
         # But wait, predict_hexanal_generation gives total_hydroperoxide load which drives hexanal and nonanal.
         # Since the matrix_only path uses MATRIX_BENCHMARK_BASE_MARKER_YIELDS, and recommend.py applies its own logic,
@@ -717,7 +730,7 @@ def _run_benchmark_recommendation(
                 # molar->ppb transform in recommend.py; the previous heavy-atom-only
                 # sum inflated the injected molarity by 11-16%.
                 mw = float(Descriptors.MolWt(mol)) if mol else 100.0
-                target_proxy_ppb = oxidation_load_ppb * float(yield_factor)
+                target_proxy_ppb = _oxidation_load_ppb_for(compound_name) * float(yield_factor)
                 # target_proxy_ppb = molar_concentration * mw * ppb_conversion_factor
                 molar_conc = target_proxy_ppb / (mw * DEFAULT_PROJECTION_STRATEGY.ppb_conversion_factor)
                 # initial_concentrations is consumed downstream in mM (projection.py
@@ -764,7 +777,14 @@ def _run_matrix_only_benchmark_prediction(bench: dict) -> dict:
         time_min=float(conditions["time_min"]),
         oxygen_availability=1.0,
     )
-    oxidation_load_ppb = float(oxidation["total_hydroperoxide"]) * 1000.0
+    # SUBSTRATE CORRECTION 2026-08-27 (Wave P item 4): per-marker oxidation load.
+    # Nonanal is the C9 fragment of the OLEATE double bond and is now scaled off
+    # `oleic_acid_pct`; hexanal / 2-pentylfuran / 1-hexanol stay on the linoleate
+    # pool, which is what Miyazaki 2023's isomer-resolved product lists support.
+    # See `src.lipid_oxidation.MARKER_HYDROPEROXIDE_POOL`.
+    oxidation_load_ppb_by_pool = {
+        key: float(oxidation[key]) * 1000.0 for key in HYDROPEROXIDE_POOL_KEYS.values()
+    }
     headspace_model = HeadspaceModel()
     pH = conditions.get("ph")
 
@@ -788,7 +808,8 @@ def _run_matrix_only_benchmark_prediction(bench: dict) -> dict:
         panel_entry = get_compound_panel_entry(compound) or {}
         calibration_factor = float(calibration.get("calibration_observable_factor") or 1.0)
         release_factor = headspace_factor / calibration_factor if calibration_factor > 0.0 else headspace_factor
-        proxy_ppb = oxidation_load_ppb * float(yield_factor) * release_factor
+        marker_load_ppb = oxidation_load_ppb_by_pool[hydroperoxide_pool_key_for_marker(compound)]
+        proxy_ppb = marker_load_ppb * float(yield_factor) * release_factor
         observable_ppb = proxy_ppb * calibration_factor
         predicted_proxy_ppb[compound] = proxy_ppb
         predicted_ppb[compound] = observable_ppb
@@ -798,6 +819,10 @@ def _run_matrix_only_benchmark_prediction(bench: dict) -> dict:
             observable_ppb=observable_ppb,
             extras={
                 "matrix_factor": 1.0,
+                # Wave P item 4: which fatty-acid pool this marker was cleaved
+                # from. Nonanal = oleate, everything else = linoleate.
+                "hydroperoxide_pool": MARKER_HYDROPEROXIDE_POOL.get(compound, "linoleate"),
+                "oxidation_load_ppb": marker_load_ppb,
                 "headspace_factor": release_factor,
                 "total_observable_factor": headspace_factor,
                 "process_state": process_state,
@@ -810,7 +835,11 @@ def _run_matrix_only_benchmark_prediction(bench: dict) -> dict:
         "targets": [],
         "metrics": {
             "matrix_model": protein_type,
-            "oxidation_load_ppb": oxidation_load_ppb,
+            # Wave P item 4: the LINOLEATE load keeps the historical key, so existing
+            # readers keep the meaning they had; the oleate pool that now drives
+            # nonanal is reported alongside it.
+            "oxidation_load_ppb": oxidation_load_ppb_by_pool["total_hydroperoxide"],
+            "oxidation_load_ppb_oleate": oxidation_load_ppb_by_pool["total_hydroperoxide_oleate"],
         },
         "predicted_ppb": predicted_ppb,
         "predicted_proxy_ppb": predicted_proxy_ppb,

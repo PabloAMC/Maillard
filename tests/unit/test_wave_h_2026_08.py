@@ -110,16 +110,43 @@ def test_sulfur_refit_shipped_value_matches_its_record():
 
 
 def test_corrected_mft_route_barriers_are_estimates_not_fits():
-    """2026-08-27 (Wave N): the corrected-route constants must stay untuned.
+    """The corrected-route constants must never claim more provenance than they have.
 
-    The route change (norfuraneol -> 1,4-dideoxyosone) must not silently
-    inherit the 26.85 that Wave H fitted THROUGH the contradicted route, and
-    neither new constant may claim a fit it does not have.
+    2026-08-27 (Wave N), original intent: the route change (norfuraneol ->
+    1,4-dideoxyosone) must not silently inherit the 26.85 that Wave H fitted THROUGH
+    the contradicted route, and neither new constant may claim a fit it does not have.
+
+    RE-PINNED 2026-08-27 (Wave P item 1). CAUSE: `thiol_addition_pentodiulose` was
+    REFITTED, with owner approval, against cys_ribose_140C_Hofmann1998 alone:
+    28.60 -> 26.35 kcal/mol (generator
+    scripts/generators/refit_thiol_addition_pentodiulose_hofmann.py, record
+    results/validation/sulfur_barrier_refit_pentodiulose.{json,md}). So the constant is
+    no longer ESTIMATED/UNCONSTRAINED and this test would be asserting a lie if left as
+    written. What it asserts instead is the thing that actually protects the reader:
+
+      * the value is the one the published record adopted, to the digit;
+      * the rationale says FITTED, names its single target, and does NOT claim to be
+        a measurement;
+      * the fit target's own unverified mol%->ppb conversion travels with it verbatim,
+        so the risk is visible at the point of use;
+      * 26.35 is NOT the 26.85 Wave H fitted through the retired route -- the two fits
+        are independent and their near-agreement is a coincidence of the shared
+        upstream trunk, not evidence for the retired route;
+      * `deoxyosone_reduction` was NOT fitted and is still ESTIMATED/UNCONSTRAINED.
     """
     value, note = barrier_constants.FAST_BARRIERS["thiol_addition_pentodiulose"]
-    assert value == pytest.approx(28.60)
-    assert "ESTIMATED" in note and "UNCONSTRAINED" in note
+    assert value == pytest.approx(26.35)
+    assert value != pytest.approx(26.85), (
+        "the refit landed on the value Wave H fitted through the CONTRADICTED "
+        "norfuraneol route; that would need explaining, not asserting"
+    )
+    assert "FITTED 2026-08-27 (Wave P item 1)" in note
+    assert "cys_ribose_140C_Hofmann1998" in note
     assert "10.1021/jf035265m" in note
+    # The caveat that must never be separated from this number.
+    assert "mol%->ppb conversion" in note and "UNVERIFIED" in note
+    assert "sulfur_barrier_refit_pentodiulose" in note
+
     value, note = barrier_constants.FAST_BARRIERS["deoxyosone_reduction"]
     assert value == pytest.approx(28.0)
     assert "ESTIMATED" in note and "UNCONSTRAINED" in note

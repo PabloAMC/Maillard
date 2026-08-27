@@ -12,6 +12,9 @@ from src.smirks_engine import (
     _NORFURANEOL_CANONICAL, _MFT_CANONICAL, _FURYL_DISULFIDE_CANONICAL,
     _DEOXYOSONE_1_PENTOSE, _DEOXYOSONE_1_HEXOSE,
     _PENTODIULOSE_14_DIDEOXY,
+    # Wave P 2026-08-27: the C2+C3 MFT lane and the norfuraneol sulfur sink.
+    _MERCAPTO_2_PROPANONE, _DIHYDROXY_MERCAPTO_PENTANONE,
+    _PENTANE_2_3_DIONE, _MERCAPTO_3_PENTANONE_2,
 )
 
 # ──────────────────────────────────────────────────────────────────────────
@@ -192,12 +195,70 @@ def _enolisation_steps(
         water_count = 2
         furfural = Species(label="furfural", smiles="O=Cc1ccco1")
         formaldehyde = Species(label="formaldehyde", smiles="C=O")
-    
-    steps.append(ElementaryStep(
-        reactants=[deoxy],
-        products=[product_12] + [water] * water_count,
-        reaction_family="Enolisation_1_2"
-    ))
+
+    # ROUTE CORRECTION 2026-08-27 (Wave P item 5) — KETOSES DO NOT REACH HMF
+    # THROUGH THE 3-DEOXYOSONE.  The model sent fructose through
+    # Heyns -> hexose 3-deoxyosone -> HMF, i.e. through the precursor an isotope
+    # study excludes for exactly this sugar.  Perez Locas & Yaylayan 2008
+    # (10.1021/jf8010245, JAFC 56:6717-6723; abstract retrieved verbatim,
+    # PMID 18611024):
+    #
+    #   "Glucose exhibited a much lower conversion rate than 3-deoxyglucosone,
+    #   however, both fructose and sucrose showed much higher conversion rates
+    #   than 3-deoxyglucosone THUS PRECLUDING IT AS A MAJOR PRECURSOR OF HMF IN
+    #   FRUCTOSE and sucrose solutions. ... sucrose degrades into glucose and a
+    #   very reactive FRUCTOFURANOSYL CATION. In dry systems this cation can be
+    #   effectively converted directly into HMF."
+    #
+    # CAREFUL WITH THAT CITATION: its title and design are about SUCROSE, and the
+    # cation it proposes arises from glycosidic cleavage.  It is cited here for
+    # exactly two things — the exclusion of 3-deoxyglucosone for fructose, and the
+    # fructofuranosyl-cation identity — and for nothing else.  The ring-retained
+    # route from FREE fructose is Antal, Mok & Richards 1990 (10.1016/0008-6215(90)
+    # 84096-d, Carbohydr. Res. 199:91-109; abstract retrieved verbatim), which is
+    # where that cation comes from:
+    #
+    #   "The literature contains two alternative hypotheses for the mechanism of
+    #   dehydration of fructose to 5-(hydroxymethyl)-2-furaldehyde (HMF), namely
+    #   (1) a sequence of reactions commencing with and retaining the FRUCTOFURANOSE
+    #   RING INTACT, and (2) a succession of reactions proceeding mainly via
+    #   open-chain intermediates. The existing evidence for hypotheses (1) and (2)
+    #   is reviewed and found to favor (1). ... analysis of the results was found to
+    #   confirm the first hypothesis."
+    #
+    # The distinction is TOPOLOGICAL, not kinetic: fructose keeps its own ring and
+    # never passes through the open-chain 3-deoxyosone.  Implemented minimally as
+    # one direct dehydration, which balances exactly:
+    #
+    #   D-fructose C6H12O6 -> HMF C6H6O3 + 3 H2O          [EXACT, RDKit-verified]
+    #
+    # WHAT IS DELIBERATELY NOT DONE: no intermediate is invented.  Amarasekara,
+    # Williams & Ebede 2008 (10.1016/j.carres.2008.09.008) do name a structurally
+    # defined ring-retained intermediate, (4R,5R)-4-hydroxy-5-hydroxymethyl-4,5-
+    # dihydrofuran-2-carbaldehyde — but in DMSO at 150 C with the solvent as
+    # catalyst, not in an aqueous or food matrix, so it is recorded and not used.
+    # No rate advantage is encoded either: the barrier is set to the same
+    # `dehydration` class value as the route it replaces, so the model expresses NO
+    # preference even though the paper measured fructose converting FASTER.  That is
+    # the conservative direction and it is not tuned.
+    #
+    # The Heyns product and the 3-deoxyosone are still formed from a ketose (they
+    # feed the retro-aldol and Strecker lanes); what is removed is only the claim
+    # that fructose's HMF comes through them.  In a system containing BOTH glucose
+    # and fructose the glucose limb still emits the deoxyosone -> HMF step, and pool
+    # de-duplication means it appears exactly once.
+    if _is_ketose(sugar):
+        steps.append(ElementaryStep(
+            reactants=[sugar],
+            products=[product_12, water, water, water],
+            reaction_family="Fructofuranosyl_Dehydration",
+        ))
+    else:
+        steps.append(ElementaryStep(
+            reactants=[deoxy],
+            products=[product_12] + [water] * water_count,
+            reaction_family="Enolisation_1_2"
+        ))
 
     if not _is_pentose(sugar):
         # Secondary hexose branch: deoxyosone -> furfural + formaldehyde + 2 H2O.
@@ -368,14 +429,76 @@ def _furanone_and_mft_route(pool_species: List[Species]) -> List[ElementaryStep]
                     products=[dideoxy, water],
                     reaction_family="Deoxyosone_Reduction",
                 ))
-        elif can == hexose_do1 and h2 is not None:
+        elif can == hexose_do1:
             seen.add(can)
-            dmhf = Species(label="DMHF", smiles=_DMHF_CANONICAL)
-            steps.append(ElementaryStep(
-                reactants=[s, h2],
-                products=[dmhf, water, water],
-                reaction_family="Furanone_Cyclisation",
-            ))
+            # GATE REMOVED 2026-08-27 (Wave P item 6) — red-team H4, second half.
+            # This step used to be `hexose 1-deoxyosone + 2[H] -> DMHF + 2 H2O`,
+            # POOL-GATED on the `[HH]` token.  In a cysteine-free system (glucose +
+            # glycine) the only `[HH]` producer that runs before it is the pyrazine
+            # aromatisation, so predicted furaneol was a downstream dependent of
+            # pyrazine chemistry — measured by Wave L1: disabling
+            # `_aminoketone_condensation` took DMHF steps from 1 to 0.  Wang & Ho
+            # 2008 (10.1021/jf8012025) make that worse rather than better: their
+            # CAMOLA experiment (1:1 [13C6]/[12C6]glucose -> 1:1 [13C6]/[12C6]DMHF)
+            # establishes the intact-C6 route as REAL, so the model was gating a
+            # confirmed route behind an unphysical dependency.
+            #
+            # The token is not re-sourced here; it is REMOVED, because the accepted
+            # mechanism names the reductant and it is the amino acid.  Blank & Fay
+            # 1996 (10.1021/jf950439o) state the mechanism is "based on decomposition
+            # of the Amadori compound via 2,3-enolization, chain elongation by the
+            # Strecker aldehydes, and REDUCTION of the resulting acetylformoin-type
+            # intermediates to the target molecules".  Kerler, Winkel, Davidek &
+            # Blank 2010 (10.1002/9781444317770.ch3, full text) name the donors:
+            # "acetylformoin, which is formed from 1-deoxyhexosone, is an effective
+            # precursor for 4-hydroxy-2,5-dimethyl-3(2H)-furanone (Furaneol). The
+            # amounts of Furaneol obtained from acetylformoin were significantly
+            # enhanced in the presence of reductones such as ascorbic acid or
+            # methylene reductinic acid as well as the STRECKER-ACTIVE AMINO ACID
+            # proline."
+            #
+            # Writing that coupling explicitly balances EXACTLY with no token at all:
+            #
+            #   1-deoxy-2,3-hexodiulose + amino acid
+            #        -> DMHF + Strecker aldehyde + CO2 + NH3 + H2O
+            #   glycine: C6H10O5 + C2H5NO2 -> C6H8O3 + CH2O + CO2 + NH3 + H2O
+            #            C8H15NO7          -> C8H15NO7                    [EXACT]
+            #   alanine: C6H10O5 + C3H7NO2 -> C6H8O3 + C2H4O + CO2 + NH3 + H2O
+            #            C9H17NO7          -> C9H17NO7                    [EXACT]
+            #
+            # All six DMHF carbons still come from the hexose — the amino acid's
+            # carbon leaves as its own aldehyde and as CO2 — so the intact-C6 CAMOLA
+            # result is preserved, which is the constraint that matters.
+            #
+            # ON THE FAMILY NAME, stated because it is load-bearing.  This family is
+            # deliberately NOT called `Furanone_Strecker_Reduction`.  `src/conditions.py`
+            # classifies reactions for the pH-ionisation and Labuza water-activity
+            # corrections by SUBSTRING on the family name, and "strecker" is one of the
+            # trigger words; a family so named would silently pick up both corrections
+            # (~480x suppression at pH 5.5 / aw 0.95) as a side effect of a NAME.  The
+            # sibling amino-acid-coupled furanone step, `Furanone_Formation` in
+            # `_furanone_generation`, receives neither correction, so this one must not
+            # either — otherwise two steps of the same chemistry would be treated
+            # differently because of how they were spelled.  That substring coupling is
+            # a known repo defect (see the header of src/conditions.py); this wave
+            # neither exploits nor fixes it, and it is carried as an open item.
+            for amino_acid in pool_species:
+                entry = STRECKER_ALDEHYDES.get(amino_acid.label.lower())
+                if entry is None:
+                    continue
+                ald_label, ald_smiles = entry
+                dmhf = Species(label="DMHF", smiles=_DMHF_CANONICAL)
+                steps.append(ElementaryStep(
+                    reactants=[s, amino_acid],
+                    products=[
+                        dmhf,
+                        Species(label=ald_label, smiles=ald_smiles),
+                        Species(label="CO2", smiles="O=C=O"),
+                        Species(label="ammonia", smiles="N"),
+                        water,
+                    ],
+                    reaction_family="Furanone_Amino_Acid_Reduction",
+                ))
 
     if h2s is None:
         return steps
@@ -401,6 +524,315 @@ def _furanone_and_mft_route(pool_species: List[Species]) -> List[ElementaryStep]
         ))
 
     return steps
+
+
+def _c2_c3_mft_recombination(pool_species: List[Species]) -> List[ElementaryStep]:
+    """Hofmann & Schieberle's highest-yielding MFT route: C2 + C3 recombination.
+
+    ADDED 2026-08-27 (Wave P item 2).  Wave L1 listed this as one of the top three
+    COMPLETENESS GAPS in the network, and it is the one that touches the flagship
+    compound.  Hofmann & Schieberle 1998 (10.1021/jf9705983, abstract retrieved
+    verbatim via Europe PMC, PMID 10554225) — the repo's only surviving sulfur
+    anchor — says:
+
+        "Studies on several intermediates indicated the highest yields for MFT
+        (1.4 mol %) when hydroxyacetaldehyde and mercapto-2-propanone were reacted
+        for 6 min at 180 degrees C in the absence of water. Both intermediates also
+        generated significant amounts of FFT (0.05 mol %). However, the system
+        furan-2-aldehyde/H(2)S showed a 10 times higher efficiency in generating
+        FFT. Thiamin and norfuraneol/cysteine were less effective precursors of MFT."
+
+    So the paper this repo FITS ITS SULFUR BRANCH AGAINST names a channel the
+    network could not express at all, because the C3 partner was not a species.
+
+    THE MECHANISM.  The 1998 abstract is a yield paper and states no mechanism; the
+    scheme is in the paper's body (paywalled, NOT retrieved).  Cerny 2015
+    (10.1016/b978-1-78242-103-0.00009-6, "The role of sulfur chemistry in thermal
+    generation of aroma", Flavour Development, Analysis and Perception in Food and
+    Beverages, pp. 187-210; full text retrieved) renders it, p. 194:
+
+        "The authors propose formation pathways (Figure 9.6) for both
+        2-methyl-3-furanthiol (16) and 2-furanmethanethiol (22) via
+        hydroxyacetaldehyde (18) and mercaptopropanone (19), two intermediates that
+        are known to occur in heated L-cysteine/glucose systems. The formation of
+        2-methyl-3-furanthiol (16) starts with aldol reaction of hydroxyacetaldehyde
+        (18) and mercaptopropanone (19) to give 4,5-dihydroxy-3-mercapto-2-pentanone
+        (20). The intermediate 20 cyclises and dehydrates to yield
+        2-methyl-3-furanthiol (16)."
+
+    WHERE THE C3 PARTNER COMES FROM.  Neither paper says how mercapto-2-propanone
+    itself forms in situ, so the route below is an ANALOGY and is labelled as one.
+    Cerny 2015 states the general mechanism three separate times, e.g. p. 192-193:
+
+        "An alternative formation pathway to alpha-mercaptoketones passes through
+        dicarbonyl compounds, which are known intermediates in the Maillard
+        reaction. These can add hydrogen sulfide (originating from L-cysteine
+        decomposition) and then undergo reduction. Actually, 3-mercapto-2-butanone
+        was found in the model reaction of hydrogen sulfide with 2,3-butanedione,
+        and 3-mercapto-2-pentanone and 2-mercapto-3-pentanone in the reaction with
+        2,3-pentanedione (Mottram et al., 1995)."
+
+    and p. 197: "The reaction of hydrogen sulfide with a dicarbonyl (27) and
+    reduction produces alpha-mercaptoketone 28."  The primary model-system evidence
+    is Mottram, Madruga & Whitfield 1995 (10.1021/jf00049a035, JAFC 43:189-193),
+    whose abstract reports H2S + 2,3-butanedione and H2S + 2,3-pentanedione giving
+    "mercaptoketones ... which readily oxidized to the corresponding disulfides".
+
+    HONEST LIMIT OF THAT ANALOGY: the demonstrated cases are the C4 and C5
+    alpha-dicarbonyls.  The C3 member (pyruvaldehyde/methylglyoxal -> 1-mercapto-2-
+    propanone) is NOT itself demonstrated in any source retrieved.  The route below
+    is the C3 instance of a mechanism stated generally for "dicarbonyl compounds"
+    and demonstrated for its two nearest homologues.  The competing candidate — a
+    direct thiol-for-hydroxyl exchange on hydroxyacetone, which balances exactly and
+    needs NO reducing equivalent — was searched for and found to have NO literature
+    support at all, and was therefore NOT implemented even though it is the cheaper
+    step.  That is the whole decision, recorded so it can be argued with.
+
+    STEPS AND BALANCES (all exact, RDKit-verified 2026-08-27):
+
+      1. pyruvaldehyde + H2S + 2[H] -> 1-mercapto-2-propanone + H2O
+         C3H4O2 + H2S + H2 -> C3H6OS + H2O.   Both sides C3H8O2S.
+         `Mercaptoketone_Formation`.  The 2[H] is the established reducing-equivalent
+         token (see `_thiol_reductant_pool`); Cerny's "and then undergo reduction" is
+         the clause it stands for, so the step is pool-gated on it exactly like the
+         other lumped reductions in this module.
+
+      2. glycolaldehyde + 1-mercapto-2-propanone -> 4,5-dihydroxy-3-mercapto-2-pentanone
+         C2H4O2 + C3H6OS -> C5H10O3S.   Both sides C5H10O3S.
+         `Mercaptoketone_Aldol_Addition`.  Note ADDITION, not condensation: Cerny's
+         named intermediate 20 has retained both oxygens, so no water leaves here.
+
+      3. 4,5-dihydroxy-3-mercapto-2-pentanone -> MFT + 2 H2O
+         C5H10O3S -> C5H6OS + 2 H2O.   Both sides C5H10O3S.
+         `Mercaptoketone_Cyclodehydration`.
+
+    Overall C2H4O2 + C3H6OS -> C5H6OS + 2 H2O, exact, with NO reducing equivalent on
+    the recombination itself — the token is consumed once, upstream, in step 1.
+
+    NOT GATED TO LOW MOISTURE, AND WHY.  Hofmann & Schieberle's 1.4 mol % was
+    measured "in the absence of water", and Wave L1 suggested the channel is likely
+    dominant under roasting/extrusion.  `ReactionConditions` does carry
+    `water_activity`, so a gate is mechanically possible — but a single dry-condition
+    yield does not establish that the channel is ABSENT in water, and Cerny 2015
+    states both intermediates "are known to occur in heated L-cysteine/glucose
+    systems", which are aqueous.  Any threshold would therefore be invented.  The
+    existing aw machinery would also have to be reached through the family-name
+    substring matcher in src/conditions.py, i.e. by choosing a family name that
+    happens to contain "furfural" — a naming trick, not a model.  The channel is
+    therefore left to compete on barriers alone, and this paragraph is the
+    limitation: the model does NOT currently express the moisture dependence the
+    measurement was made under.
+
+    REACHABILITY, MEASURED NOT ASSUMED (and the measurement corrected a guess I had
+    written here first).  Step 2 needs glycolaldehyde.  It was expected to be
+    pentose-only, because `_retro_aldol_fragmentation` emits glycolaldehyde from the
+    PENTOSE 3-deoxyosone and not from the hexose one.  Enumerating both systems at
+    pH 5.5 / 150 C shows the lane fires in BOTH:
+
+      ribose + cysteine   glycolaldehyde direct from the pentose retro-aldol
+      glucose + cysteine  glycolaldehyde via glyoxal -> Strecker -> 2-aminoethanal
+                          -> hydrolytic deamination (`_deamination_step`), which
+                          lands the identical canonical species in the pool
+
+    so `Mercaptoketone_Cyclodehydration` is a second MFT producer in the hexose
+    system too, alongside the demoted `Thiol_Addition_Hexose_Legacy_Shortcut`.
+    Matching is by canonical SMILES, not by label, which is why the longer hexose
+    route connects at all.  Yaylayan & Keyhani 2000/2001 (10.1021/jf000004n,
+    10.1021/jf000986w) independently show labelled GLUCOSE giving glycolaldehyde
+    (intact C1-C2 and C5-C6, 70/30 split) by direct fragmentation, which the model
+    still does NOT emit — that third hexose retro-aldol channel remains a
+    completeness gap, it is just no longer the thing that gates this lane.
+    """
+    steps: List[ElementaryStep] = []
+    h2s = next((s for s in pool_species if s.smiles == "S"), None)
+    if h2s is None:
+        return steps
+    h2 = next((s for s in pool_species if s.smiles == "[HH]"), None)
+    water = Species("water", "O")
+
+    pyruvaldehyde_can = _canonical("CC(=O)C=O")
+    glycolaldehyde_can = _canonical("O=CCO")
+    mercaptopropanone_can = _canonical(_MERCAPTO_2_PROPANONE)
+
+    pyruvaldehyde = next(
+        (s for s in pool_species if _canonical(s.smiles) == pyruvaldehyde_can), None
+    )
+    glycolaldehyde = next(
+        (s for s in pool_species if _canonical(s.smiles) == glycolaldehyde_can), None
+    )
+
+    mercaptopropanone = Species(
+        label="1-mercapto-2-propanone", smiles=_MERCAPTO_2_PROPANONE
+    )
+
+    # Step 1 — H2S addition to the C3 alpha-dicarbonyl, with reduction.
+    if pyruvaldehyde is not None and h2 is not None:
+        steps.append(ElementaryStep(
+            reactants=[pyruvaldehyde, h2s, h2],
+            products=[mercaptopropanone, water],
+            reaction_family="Mercaptoketone_Formation",
+        ))
+
+    have_mercaptopropanone = any(
+        _canonical(s.smiles) == mercaptopropanone_can for s in pool_species
+    ) or bool(steps)
+    if glycolaldehyde is None or not have_mercaptopropanone:
+        return steps
+
+    # Steps 2 and 3 — aldol addition, then cyclisation + dehydration.
+    aldol = Species(
+        label="4,5-dihydroxy-3-mercapto-2-pentanone",
+        smiles=_DIHYDROXY_MERCAPTO_PENTANONE,
+    )
+    steps.append(ElementaryStep(
+        reactants=[glycolaldehyde, mercaptopropanone],
+        products=[aldol],
+        reaction_family="Mercaptoketone_Aldol_Addition",
+    ))
+    steps.append(ElementaryStep(
+        reactants=[aldol],
+        products=[
+            Species(label="2-methyl-3-furanthiol", smiles=_MFT_CANONICAL),
+            water,
+            water,
+        ],
+        reaction_family="Mercaptoketone_Cyclodehydration",
+    ))
+    return steps
+
+
+def _norfuraneol_mercaptopentanone_route(
+    pool_species: List[Species],
+) -> List[ElementaryStep]:
+    """The route norfuraneol actually has: -> 2,3-pentanedione -> 2-mercapto-3-pentanone.
+
+    ADDED 2026-08-27 (Wave P item 3).  Wave N retired norfuraneol from the MFT lane
+    on isotope evidence and left it with ZERO consumers.  The same experiment that
+    retired it named what it does instead.  Cerny & Davidek 2003 (10.1021/jf026123f,
+    abstract retrieved verbatim, PMID 12696962), spiking authentic norfuraneol into a
+    [13C5]ribose/cysteine system:
+
+        "Whereas 2-mercapto-3-pentanone was found unlabeled and hence originated from
+        4-hydroxy-5-methyl-3(2H)-furanone, its isomer 3-mercapto-2-pentanone was
+        formed from both 4-hydroxy-5-methyl-3(2H)-furanone and ribose."
+
+    Unlabelled product from an unlabelled spike in a labelled-sugar system is a
+    direct precursor assignment, and it is the ONLY one of the two isomers the paper
+    assigns exclusively to norfuraneol.  This lane therefore emits 2-mercapto-3-
+    pentanone and NOT its isomer: 3-mercapto-2-pentanone has a second, ribose-derived
+    origin (the 1,4-dideoxyosone route, already in `_furanone_and_mft_route`'s lane)
+    and emitting it here would double-count that flux.
+
+    THE MECHANISM IS NOT IN THAT PAPER.  Cerny & Davidek 2003 propose a pathway only
+    for MFT and 3-mercapto-2-pentanone; for the 2-mercapto isomer they give none.
+    Whitfield & Mottram 1999 (10.1021/jf980980v, JAFC 47:1626-1634, abstract
+    retrieved verbatim, PMID 10564029) reacted norfuraneol with cysteine or H2S at
+    pH 4.5 / 140 C / 60 min and report:
+
+        "The main non-sulfur compounds were 2,3-pentanedione, 2,4-pentanedione, and
+        3,4-hexanedione."
+
+    i.e. the ring opens to the C5 alpha-DICARBONYL first, and sulfur enters
+    afterwards by the ordinary alpha-mercaptoketone mechanism (see
+    `_c2_c3_mft_recombination` for that mechanism's own citations).  Cerny 2015
+    (10.1016/b978-1-78242-103-0.00009-6, p. 195) states the same reading of that
+    work: "demonstrating 4-hydroxy-5-methyl-3(2H)-furanone as a suitable precursor
+    for both isomers. The authors propose a formation pathway involving
+    2,3-pentanedione."
+
+    STEPS AND BALANCES (exact, RDKit-verified 2026-08-27):
+
+      1. norfuraneol + 2 x 2[H] -> 2,3-pentanedione + H2O
+         C5H6O3 + 2 H2 -> C5H8O2 + H2O.   Both sides C5H10O3.
+         `Furanone_Reductive_Opening`.
+
+      2. 2,3-pentanedione + H2S + 2[H] -> 2-mercapto-3-pentanone + H2O
+         C5H8O2 + H2S + H2 -> C5H10OS + H2O.   Both sides C5H12O2S.
+         `Mercaptoketone_Formation` — the SAME family as the C3 step, because it is
+         the same mechanism on a different dicarbonyl, and Mottram 1995 demonstrated
+         it on this exact substrate.
+
+    WHY NOT ONE STEP.  The one-step lump
+    `norfuraneol + H2S -> 2-mercapto-3-pentanone + 2 H2O` needs SIX hydrogens
+    (C5H6O3 + H2S = C5H8O3S against C5H10OS + 2 H2O = C5H14O3S), i.e. THREE
+    reducing-equivalent tokens on a single step.  That is not an elementary step by
+    any reading, and the literature route above accounts for the same three tokens
+    across two steps with a measured intermediate in between.  The three-token lump
+    was written out, checked, and rejected on that basis.
+
+    SENSORY LAYER: 2-mercapto-3-pentanone is quantified in heated meat by Kerscher &
+    Grosch 1998 (10.1021/jf970892v: beef 20-44 ug/kg, pork 11-14, lamb 10, chicken
+    13) but NO peer-reviewed odour threshold for it could be retrieved (it is absent
+    from Cerny 2015's threshold tables and from Blank's sulfur-odorant table, which
+    carry the ISOMER, 3-mercapto-2-pentanone, at "sulfury, catty", 0.7 ug/kg in
+    water).  It is therefore NOT registered as a scored sensory target here: adding a
+    target with a fabricated threshold is exactly the failure mode this campaign
+    exists to remove.  It ships as a network species and a sulfur sink only.
+    """
+    steps: List[ElementaryStep] = []
+    h2s = next((s for s in pool_species if s.smiles == "S"), None)
+    h2 = next((s for s in pool_species if s.smiles == "[HH]"), None)
+    if h2s is None or h2 is None:
+        return steps
+
+    water = Species("water", "O")
+    norfuraneol_can = _canonical(_NORFURANEOL_CANONICAL)
+    pentanedione_can = _canonical(_PENTANE_2_3_DIONE)
+
+    norfuraneol = next(
+        (s for s in pool_species if _canonical(s.smiles) == norfuraneol_can), None
+    )
+    pentanedione = Species(label="2,3-pentanedione", smiles=_PENTANE_2_3_DIONE)
+
+    if norfuraneol is not None:
+        steps.append(ElementaryStep(
+            reactants=[norfuraneol, h2, h2],
+            products=[pentanedione, water],
+            reaction_family="Furanone_Reductive_Opening",
+        ))
+
+    have_pentanedione = any(
+        _canonical(s.smiles) == pentanedione_can for s in pool_species
+    ) or bool(steps)
+    if not have_pentanedione:
+        return steps
+
+    steps.append(ElementaryStep(
+        reactants=[pentanedione, h2s, h2],
+        products=[
+            Species(label="2-mercapto-3-pentanone", smiles=_MERCAPTO_3_PENTANONE_2),
+            water,
+        ],
+        reaction_family="Mercaptoketone_Formation",
+    ))
+    return steps
+
+
+# amino-acid label (lower case) -> (Strecker aldehyde label, SMILES).
+#
+# Lifted to module level 2026-08-27 (Wave P item 6) so that the amino-acid-coupled
+# reduction of the hexose 1-deoxyosone to DMHF can use exactly the same table as
+# `_strecker_step`. Both steps oxidise the amino acid to its Strecker aldehyde and
+# release CO2 + NH3; sharing one table is what keeps the two balanced consistently.
+STRECKER_ALDEHYDES = {
+    "l-leucine":      ("3-methylbutanal", "CC(C)CC=O"),
+    "leucine":        ("3-methylbutanal", "CC(C)CC=O"),
+    "l-isoleucine":   ("2-methylbutanal", "CCC(C)C=O"),
+    "isoleucine":     ("2-methylbutanal", "CCC(C)C=O"),
+    "l-valine":       ("2-methylpropanal", "CC(C)C=O"),
+    "valine":         ("2-methylpropanal", "CC(C)C=O"),
+    "glycine":        ("formaldehyde",    "C=O"),
+    "l-alanine":      ("acetaldehyde",    "CC=O"),
+    "alanine":        ("acetaldehyde",    "CC=O"),
+    "l-phenylalanine": ("phenylacetaldehyde", "O=CCc1ccccc1"),
+    "phenylalanine":  ("phenylacetaldehyde", "O=CCc1ccccc1"),
+    "l-methionine":   ("methional",       "CSCCC=O"),
+    "methionine":     ("methional",       "CSCCC=O"),
+    "l-lysine":       ("5-aminopentanal", "NCCCCC=O"),
+    "lysine":         ("5-aminopentanal", "NCCCCC=O"),
+    "l-cysteine":     ("mercaptoacetaldehyde", "SCC=O"),
+    "cysteine":       ("mercaptoacetaldehyde", "SCC=O"),
+}
 
 
 def _strecker_step(
@@ -431,27 +863,9 @@ def _strecker_step(
     we'll use a mapping for both the amino acid AND the dicarbonyl.
     """
     
-    # 1. Map Amino Acid to its Strecker Aldehyde
-    _aa_to_aldehyde = {
-        # name -> (aldehyde_label, aldehyde_smiles)
-        "l-leucine":      ("3-methylbutanal", "CC(C)CC=O"),
-        "leucine":        ("3-methylbutanal", "CC(C)CC=O"),
-        "l-isoleucine":   ("2-methylbutanal", "CCC(C)C=O"),
-        "isoleucine":     ("2-methylbutanal", "CCC(C)C=O"),
-        "l-valine":       ("2-methylpropanal","CC(C)C=O"),
-        "valine":         ("2-methylpropanal","CC(C)C=O"),
-        "glycine":        ("formaldehyde",    "C=O"), 
-        "l-alanine":      ("acetaldehyde",    "CC=O"),
-        "alanine":        ("acetaldehyde",    "CC=O"),
-        "l-phenylalanine":("phenylacetaldehyde","O=CCc1ccccc1"),
-        "phenylalanine":  ("phenylacetaldehyde","O=CCc1ccccc1"),
-        "l-methionine":   ("methional",       "CSCCC=O"),
-        "methionine":     ("methional",       "CSCCC=O"),
-        "l-lysine":       ("5-aminopentanal", "NCCCCC=O"),
-        "lysine":         ("5-aminopentanal", "NCCCCC=O"),
-        "l-cysteine":     ("mercaptoacetaldehyde", "SCC=O"),
-        "cysteine":       ("mercaptoacetaldehyde", "SCC=O"),
-    }
+    # 1. Map Amino Acid to its Strecker Aldehyde (module-level table; see
+    #    STRECKER_ALDEHYDES).
+    _aa_to_aldehyde = STRECKER_ALDEHYDES
 
     # 2. Map Dicarbonyl to its Aminoketone
     # R1-C(=O)-C(=O)-R2 -> R1-C(=O)-CH(NH2)-R2
@@ -1144,7 +1558,13 @@ def _deamination_step(pool_species: List[Species]) -> List[ElementaryStep]:
         ">>[CX3:1](=[O:2])-[CX4H2:3]-[OX2H1].[NX3:4]"
     )
 
-    _known_ketol_labels = {"CC(=O)CO": "hydroxyacetone"}
+    # 2026-08-27 (Wave P): "O=CCO" added. Deaminating 2-aminoethanal gives
+    # GLYCOLALDEHYDE, a species the network already knows by that name from the
+    # pentose retro-aldol channel; without the entry the identical molecule was
+    # labelled `deaminated-2-aminoethanal-ketol`. Pool identity is by canonical
+    # SMILES, so this is a READABILITY fix with no numeric effect -- verified by
+    # re-running the panel.
+    _known_ketol_labels = {"CC(=O)CO": "hydroxyacetone", "O=CCO": "glycolaldehyde"}
 
     for s in pool_species:
         # Filter out pyrazines or very large structures

@@ -10,13 +10,13 @@ promised in tasks/todo.md for the `uncalibrated` prior tier (shipped ln-sigma 2.
 | --- | --- | ---: | ---: | ---: | ---: |
 | pea_iso/heated_matrix | Hexanal | 782 | 4426.54 | +1.734 | 5.66x |
 | pea_iso/heated_matrix | 2-Pentylfuran | 163 | 10839.6 | +4.197 | 66.50x |
-| pea_iso/heated_matrix | Nonanal | 24 | 3238.93 | +4.905 | 134.96x |
+| pea_iso/heated_matrix | Nonanal | 24 | 1425.13 | +4.084 | 59.38x |
 | soy_iso/ambient_slurry | Hexanal | 1621.71 | 171.911 | -2.244 | 9.43x |
 | soy_iso/ambient_slurry | 2-Pentylfuran | 2492 | 420.973 | -1.778 | 5.92x |
 
-**n = 5** residuals · mean ln residual +1.363 (bias 3.91x) · **RMS ln-sigma = 3.252** (centered SD 3.301)
+**n = 5** residuals · mean ln residual +1.198 (bias 3.31x) · **RMS ln-sigma = 3.017** (centered SD 3.095)
 
-90% chi-square interval on sigma: [2.19, 6.80] — shipped value 2.86 is INSIDE this interval.
+90% chi-square interval on sigma: [2.03, 6.30] — shipped value 2.86 is INSIDE this interval.
 
 > **Caveats:** n is very small and the lanes are not independent draws (two share a
 > paper; one shares a matrix). RMS around zero includes systematic bias — the
