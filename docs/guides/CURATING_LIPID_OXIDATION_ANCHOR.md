@@ -12,9 +12,24 @@ S27 established that the matrix lipid-aldehyde over-prediction on the external h
 (see [src/lipid_oxidation.py](../../src/lipid_oxidation.py) and
 [data/lit/lipid_oxidation_calibration.json](../../data/lit/lipid_oxidation_calibration.json)).
 Workstream B made the model *honestly uncertain* on uncalibrated process-states (external
-hold-out 0/8 → 3/8 inside 90% CI), but the extreme-processing cases (HME extrusion, roasting)
-remain genuine misses. **Closing them requires real measured anchors at those process-states**,
+hold-out 0/8 → 3/8 inside 90% CI; 5/8 as of 2026-08-27, after the uncalibrated matrix
+ln-sigma was raised 2.0 → 2.86 on residual evidence — a wider interval, not a better
+prediction: median hold-out fold error is ~33× either way). The extreme-processing cases
+(HME extrusion, roasting) remain genuine misses. **Closing them requires real measured anchors at those process-states**,
 not a wider prior or a tuned cap. That is the curation task below.
+
+> **Update 2026-08-27 (Wave G1/H chemistry rebuild).** The network's lipid radical chain was
+> rebuilt: `radical_propagation_o2` had been matching *any* sp² carbon, so 61 of 103
+> peroxidation steps were fabricated, radical flags were being lost in the SMIRKS ordering,
+> and the β-scission pattern required an sp³ β-carbon — which made **hexanal structurally
+> unreachable in the network**, masked in production only by the fixed branching ratio. All
+> of that is fixed and hexanal is now reachable. Two things follow for this checklist.
+> (1) The chain initiates only from a **hydroperoxide**: an unoxidised fatty acid plus O₂
+> enumerates to zero steps, so the anchor still seeds the lane and the calibration registry
+> is still where the quantitative content lives. (2) The hold-out numbers above are
+> unchanged by the rebuild (median fold error 32.79×, worst 2474× on roasted pea), because
+> the hold-out lanes run through the lipid-oxidation anchor rather than the network. The
+> curation task is unchanged.
 
 ## What qualifies as an anchor (intake criteria)
 

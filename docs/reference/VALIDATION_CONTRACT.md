@@ -114,13 +114,34 @@ MAILLARD_STRICT_BENCHMARKS=1 ./scripts/docker_maillard.sh pytest tests/scientifi
 
 ## 2. Current Validated Envelope
 
-As of the current Docker-validated benchmark summary:
+> **Provenance audit (2026-08-26).** An adversarial citation audit found that the
+> sources behind three panel benchmarks are dead or resolve to unrelated papers:
+> `cys_ribose_150C_Mottram1994`, `cys_glucose_150C_Farmer1999`, and
+> `thiamine_cys_ribose_100C_Hofmann1996`. They are quarantined under
+> `data/benchmarks/quarantined/` (excluded from the panel) pending human source
+> verification — see the README there and `tasks/audit_remediation.md`. Two of
+> them were previously listed below as strict-ready; that status is withdrawn.
+> The same audit found the panel headline mixed literature-measured rows with
+> internal synthetic comparators; coverage is now reported split by signal
+> origin (see §3E).
 
-- `cys_glucose_150C_Farmer1999` is `pass` and `strict-ready`.
-- `cys_ribose_140C_Hofmann1998` is `partial-pass` and `strict-ready`.
-- `cys_ribose_150C_Mottram1994` is `pass` and `strict-ready`.
-- `pea_isolate_40C_PratapSingh2021` is now executable through a dedicated `matrix_only` intake path, with full coverage, but it remains outside the strict release gate.
-- `soy_isolate_40C_PratapSingh2021` is now executable through the same dedicated `matrix_only` intake path, with full coverage, but it also remains outside the strict release gate.
+As of the current benchmark summary:
+
+- **Strict-ready count is now 0/16 (2026-08-27).** The panel has no strict-ready benchmark
+  at all. The sequence, all on this branch and all recorded in `tasks/audit_remediation.md`:
+  6/16 → 4/16 when the projection retune cost `spi_hvp_xylose_120C_PMC9905368` and
+  `wheat_gluten_hvp_xylose_120C_PMC9905368` their status, then 4/16 → 0/16 when the Wave G1
+  chemistry rebuild removed the fabricated MFT shortcut and the fabricated lipid radical
+  chain. `cys_ribose_140C_Hofmann1998`, the last strict-ready free-amino-acid benchmark, now
+  under-predicts MFT by 5.58x and FFT by 3.26x against a 1.45x contract; the safety-marker
+  benchmarks fail on the separately documented unit collisions and the SME desaturation.
+  Every one of these tolerances is UNCHANGED — nothing was widened to recover the count.
+  The Hofmann-only refit that followed
+  (`results/validation/sulfur_barrier_refit_hofmann.md`) established that no barrier value in
+  any defensible range recovers it either: the residual is a volatile-budget ALLOCATION
+  deficit, not a barrier deficit.
+- `pea_isolate_40C_PratapSingh2021` is executable through a dedicated `matrix_only` intake path, with full coverage, but it remains outside the strict release gate. Note: its marker yields are back-fitted to this same measurement, so this benchmark validates the intake plumbing, not predictive accuracy.
+- `soy_isolate_40C_PratapSingh2021` is executable through the same dedicated `matrix_only` intake path, with full coverage, with the same caveat.
 
 The headspace module now also carries a conservative matrix fallback for `pea_iso` and `soy_iso` when no explicit fat/protein fractions are supplied. That fallback is intentionally tied to the same retention estimates already used in `src/matrix_correction.py`, and those retention estimates now relax with `denaturation_state` in the same way across matrix correction, output projection, and sensory scoring.
 
@@ -153,7 +174,7 @@ For `matrix_only` today, the contract is narrow and explicit:
 - The unit layer now freezes the same relative hierarchy in `tests/unit/test_matrix_correction.py`, including the stricter expectation that soy and pea concentrates stay more buried than their corresponding isolates across native, midpoint, and denatured states.
 - pH-dependent plant-matrix headspace validation is now covered as a relative trend check against the Pouvreau pea-isolate family; it is intentionally narrower than the absolute Pratap-Singh intake benchmarks.
 
-This means the framework now has three strict-ready free-amino-acid benchmarks and two executable matrix-headspace intake benchmarks (`pea isolate` and `soy isolate`). The absolute concentration projection is materially better calibrated for the current free-precursor envelope, but the matrix headspace lane should still be treated as an executable intake model rather than a broadly calibrated release gate.
+This means the framework currently has NO strict-ready benchmark (2026-08-27; see §2) and two executable matrix-headspace intake benchmarks (`pea isolate` and `soy isolate`). The matrix headspace lane should be treated as an executable intake model rather than a broadly calibrated release gate.
 
 ## 3. How We Validate
 
@@ -187,6 +208,73 @@ The validated execution contract now uses named Docker lanes instead of ad hoc c
 - `./scripts/docker_maillard.sh validated-envelope`: reproducible validated-envelope / domain-of-applicability artifact.
 - `./scripts/docker_maillard.sh explain-formulation <name>`: reproducible formulation explainability artifact for a formulation in `data/formulation_grid.yml`.
 
+### E. External Hold-out Methodology (added 2026-08-26)
+
+The external hold-out is the only surface that tests the frozen model on data it
+has never seen. Its rules, stated explicitly:
+
+- **Exclusion.** Hold-out bundles live in `data/benchmarks/external_validation/`
+  and carry `evidence_class = external_validation_only`. The benchmark loader's
+  non-recursive glob makes the directory structurally invisible to every fitting
+  and panel-evaluation path, and `calibrate_from_intake` raises on the evidence
+  class as a belt-and-braces guard. No hold-out value appears in any fitted
+  parameter.
+- **Prior tier.** Hold-out envelopes use the `uncalibrated` matrix prior tier
+  (matrix_headspace ln-sigma 2.86, ~±110x at 90% CI) because their process states
+  have no calibrated registry entry. This is much wider than the in-panel tier,
+  so **hold-out coverage and in-panel coverage are not comparable numbers**. The
+  sigma is sized from data, not judgment (2026-08-26): leave-lane-out transfer
+  error over the in-panel matrix anchors — hold-out untouched — gives RMS
+  ln-sigma 2.86 with a 90% interval of [1.98, 5.48] (n=6, see
+  `results/validation/matrix_sigma_residual_derivation.md`). The originally
+  shipped 2.0 sat at the lower edge of that interval; the tier now uses the
+  residual-derived point estimate.
+- **Extrapolation vs re-scoring.** Bundles whose executable conditions are
+  copied from an in-panel benchmark re-score that anchor's prediction against a
+  different paper's measurement — a reproducibility comparison, not an
+  extrapolation test. Only bundles at genuinely new process states (HME
+  extrusion, roasting) test transfer, and the honest statement is that the model
+  largely fails those.
+- **Current numbers (2026-08-27 regeneration).** Nominal coverage **5/8**
+  (62.5%): **3/3** on the re-scoring bundles (`bi_2020_raw_pea`,
+  `liu_2023_ppi_offnote_baseline`) and **2/5** on the genuine extrapolations
+  (`bi_2020_roasted_pea`, `li_2026_spi_wg_hme_control`). Median fold error
+  **32.79x** (median |log10| 1.516 dex); worst miss 2474x on roasted pea. Read
+  the fold error, not the coverage: the move from the previously reported 3/8 to
+  5/8 came entirely from raising the uncalibrated sigma 2.0 → 2.86, which widens
+  the interval without changing a single point prediction — the median fold
+  error was 33.84x before and is 32.79x now.
+
+### F. Reading The Coverage Split
+
+`results/validation/prediction_uncertainty.md` now reports coverage split by
+signal origin:
+
+- **External literature** rows are validation evidence.
+- **Internal synthetic** rows compare the model against its own frozen output
+  (drift detection); they carry zero validation weight and exist so refactors
+  cannot silently change predictions.
+- **Not evaluable** rows have degenerate (near-zero-width) envelopes: the Monte
+  Carlo perturbs nothing on their path, so pass/fail is meaningless for them.
+- Coverage is only interpretable next to median CI width: a 90% interval
+  spanning several orders of magnitude makes coverage cheap. Report both,
+  always.
+
+**Current in-panel numbers (2026-08-27 regeneration, n=200, seed 0).** 16 benchmarks,
+41 matched rows, 13 of them in the Monte Carlo panel; aggregate 90% CI coverage
+**28/41 (68.3%)**. Split:
+
+| Signal origin | Inside 90% CI | Not evaluable | Median CI width |
+| --- | ---: | ---: | ---: |
+| External literature | **2/11 (18.2%)** | 4 | 3.00 dex |
+| Internal synthetic | 18/18 (100%) | 8 | 3.19 dex |
+
+Read the first row with the third column: the intervals GREW (2.0 → 3.0 dex) and coverage
+still FELL (7/11 → 2/11). That is not a widening-of-error-bars story — the point predictions
+moved further from the measurements than even a ~1000x interval allows, because the
+2026-08-27 Wave G1 rebuild removed the fabricated chemistry the sulfur branch had been
+standing on. Out-of-CI cells: 13/41. Strict-ready: 0/16 (see §2).
+
 ## 4. How To Read The Validation Figures
 
 The repository now relies on a small set of figures that each have a distinct purpose.
@@ -208,6 +296,7 @@ This is why a benchmark may be scientifically acceptable as `pass-no-ranking` wh
 
 ## 5. Blind Spots That Still Matter
 
+- **Citation provenance**: literature anchors were ingested by LLM-assisted deep-research campaigns and are not yet human-verified. An automated sweep (2026-08-26) found ~20% of registry DOIs unresolvable, plus a harder-to-detect class of live DOIs pointing at the wrong paper. Kinetic parameters and benchmark values should be treated as provisional pending manual source verification; `data/lit/computational_priors.json` (`dft_kinetic_priors`) is the provenance template the rest of the registries should be held to.
 - **Matrix-only systems**: the first plant-isolate benchmark path is now executable and the default matrix-state handling is less manual, but broader matrix calibration beyond the current pea/soy intake family is still missing.
 - **Headspace translation**: the remaining free-amino-acid scale gaps are now dominated by how FAST activity is translated into observed concentration/headspace, not by a single missing sulfur barrier.
 - **Peptide accessibility**: intact protein systems are still outside the validated free-precursor envelope.
