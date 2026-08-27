@@ -897,6 +897,75 @@ both change panel membership. The ILL request pack is in `tasks/audit_remediatio
 "## Wave S2b" §(f). If the paper turns out to have no aqueous ribose/cysteine row, the honest
 outcome is to retire the absolute sulfur anchor entirely and say so.
 
+## Wave U — the network's first out-of-sample test (2026-08-27)
+
+Every accuracy claim in the sections above is about the *matrix* lane or about systems the
+model was calibrated on. Wave S1 found the structural reason: **all four bundles in the
+external hold-out run the `matrix_only` execution path.** They read a lipid-oxidation load
+off a matrix profile and return before `Recommender.predict_from_steps` is ever called.
+That is why three consecutive waves of reaction-network work — an additive flux propagator,
+a pH/water-activity rewiring, and a shipped barrier revert — moved dozens of in-panel rows
+and left **all eight hold-out points bit-identical**. The invariance was evidence about the
+hold-out's coverage, not about the model. **The chemistry this repository is actually about
+had never been scored on a system it had not already seen.**
+
+Wave U built the missing thing: twelve content-verified free-precursor literature points,
+frozen under `data/benchmarks/external_validation/maillard_path/`, every one of them
+executing the reaction network. **Every value was read out of the actual paper or thesis and
+is quoted verbatim in its bundle**, with the access route and retrieval date; nine candidate
+sources were declined and the reason recorded for each (the full table is in
+`tasks/audit_remediation.md` "## Wave U"). No conversion uses an assumed molar basis — the
+one source reporting a basis-free ratio keeps it as the native unit, which is the direct
+lesson of the retired 342/200 anchor.
+
+**The predictions were frozen BEFORE any calibration wave saw these points.**
+`results/validation/maillard_path_holdout_frozen_predictions.{json,md}` records the git HEAD
+it was generated from, and it is un-gitignored specifically so that a later wave cannot
+regenerate it after calibrating and compare it with itself. That file, not a re-run, is what
+the pending rate-calibration work must be scored against.
+
+### The baseline, stated plainly
+
+| Measure | Result |
+| --- | --- |
+| Points / scored targets | 12 bundles · 22 targets · 21 quantitatively scored |
+| **Median fold error** | **6.04×** |
+| Worst / best | 52.59× (FFT at 130 °C) / 1.52× (MFT at 100 °C) |
+| Within 10× | **12 / 21** |
+| Within-point orderings | **8 / 12** pairs |
+| Cross-bundle response directions | **3 / 6** |
+| Structural zeroes | **1** — the model returns *nothing* for glucose with no amino-acid partner |
+
+**6.04× is better than this repository's own in-panel numbers would have predicted, and the
+encouraging part is real: the sulfur branch, which Wave S2c established has ZERO absolute
+literature anchors, predicts MFT at 100 °C to 1.52×.** That is an uncalibrated branch
+landing inside a factor of two on an isotope-dilution measurement it had never seen.
+
+**And the median is the least interesting number here, because the shape is wrong in three
+specific, nameable ways that a fold-error median cannot show:**
+
+1. **The sulfur branch has the temperature dependence backwards.** Measured MFT *falls*
+   4.0× from 100 °C/4 h to 130 °C/0.5 h; the model has it *rising* 4.55×. Response ratio
+   18.3, direction wrong. The good 1.52× at 100 °C and the 12.1× miss at 130 °C are the same
+   error seen from two ends.
+2. **Acrylamide barely responds to time.** Measured 28 → 1459 ppb over 10 → 30 min at
+   180 °C, a 52× rise; the model moves 61 → 76 ppb, a 1.24× rise. Response ratio **0.024** —
+   the model is roughly forty times under-responsive in time on this route.
+3. **Two of three pH responses point the wrong way.** From pH 5 to pH 8 the source measures
+   furfural ×1.47 and HMF ×1.76; the model gives ×0.774 for both. Only furaneol (×5.11
+   measured, ×2.48 predicted) moves correctly.
+
+Also frozen: the two acrylamide lanes in this repository **disagree with each other by
+roughly 480×** on the same 0.2 M glucose/asparagine system (network 1143 ppb, lumped
+`predict_acrylamide` 544 870 ppb). Nothing in the panel had ever put them side by side.
+
+**What this does not license.** Twelve points is not a validation. Five of the twelve are
+acrylamide or HMF systems whose route carries a declared partial contamination — the
+`safety_risk_acrylamide` barrier is a transfer of the Knol group's lumped Ea — so their
+*temperature* dependence is not out of sample even though their yields are; each bundle says
+so in a `contamination_disclosure` block. And the median excludes the structural zero, which
+is a total miss with no finite fold error.
+
 ## What this repository is now for
 
 A research prototype of the *architecture* alternative-protein flavor science needs —

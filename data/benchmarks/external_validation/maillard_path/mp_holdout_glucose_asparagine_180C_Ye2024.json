@@ -1,0 +1,80 @@
+{
+  "benchmark_id": "mp_holdout_glucose_asparagine_180C_Ye2024",
+  "evidence_class": "external_validation_only",
+  "maillard_path_holdout": true,
+  "source_doi": "10.3390/foods13172836",
+  "source_metadata": {
+    "citation": "Ye, Z.; Xu, H.; Xie, Y.; Peng, Z.; Li, H.; Hou, R.; Cai, H.; Song, W. Tea's Characteristic Components Eliminate Acrylamide in the Maillard Model System. Foods 2024, 13 (17), 2836.",
+    "crossref_verified": "2026-08-27. CrossRef returns title 'Tea's Characteristic Components Eliminate Acrylamide in the Maillard Model System', Foods 13(17):2836, issued 2024-09-06, first author Ye Zhihao. Matches the record above exactly.",
+    "origin": "external_literature",
+    "evidence_class": "external_validation_only",
+    "notes": "MAILLARD-PATH HOLD-OUT (Wave U, 2026-08-27). Never use for calibration, refitting, or any promotion decision. This bundle exists to test Recommender.predict_from_steps out of sample."
+  },
+  "content_verification": {
+    "access_level": "full_text",
+    "access_route": "Europe PMC fullTextXML, https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11395303/fullTextXML",
+    "pmcid": "PMC11395303",
+    "retrieval_date": "2026-08-27",
+    "quoted_method": "2.2. Glc-Asn Thermal Model Reaction. The Maillard model reaction was conducted using a previously described method with some minor modifications [22]. In brief, an equimolar solution of glucose and asparagine was accurately prepared in phosphate buffer (0.1 M, pH 6.86), and 4 mL of the solution was transferred to a 25 mL thick-walled pressurized glass tube in an oil bath (DF-1015, Shanghai Lichen Instrument Technology, Shanghai, China) at 180 degC and kept for 30 min. The sample was then allowed to cool to room temperature, and 0.1 mL of 13C3-acrylamide standard solution (10 mg/L) was added.",
+    "quoted_quantification": "2.4. LC-Triple Quadrupole (QQQ) MS/MS Analysis of Acrylamide in the Maillard Model System. An LC-QQQ-MS/MS device equipped with an electrospray ionization source (AB SCIEX, Boston, MA, USA) coupled with a SCIEX high-performance liquid spectrometer system was used to determine the levels of acrylamide that formed in the Maillard model system [23].",
+    "quantification_class": "isotope_dilution_lcmsms",
+    "quantification_verdict": "ADMISSIBLE. 13C3-acrylamide is added to the cooled reaction mixture as an isotopically labelled internal standard before LC-QQQ-MS/MS. This is stable-isotope dilution, not a relative peak area and not an OAV back-calculation."
+  },
+  "precursor_concentration_provenance": {
+    "status": "NOT_STATED_IN_SOURCE__EXECUTION_ASSUMPTION",
+    "what_the_paper_says": "'an equimolar solution of glucose and asparagine' - the paper gives the buffer (0.1 M phosphate, pH 6.86) and the volume (4 mL) but never states the molarity of the reactants.",
+    "assumption_and_its_basis": "0.2 M each, taken from the method the paper cites as its origin: Knol, J.J.; van Loon, W.A.M.; Linssen, J.P.H.; Ruck, A.L.; van Boekel, M.A.J.S.; Voragen, A.G.J. Toward a Kinetic Model for Acrylamide Formation in a Glucose-Asparagine Reaction System. J. Agric. Food Chem. 2005, 53, 6133-6139 (10.1021/jf050504m) - the paper's reference [22]. Knol's abstract, retrieved 2026-08-27 from the Wageningen research portal (https://research.wur.nl/en/publications/toward-a-kinetic-model-for-acrylamide-formation-in-a-glucose-aspa, the Unpaywall OA location for that DOI), reads verbatim: 'Equimolar solutions (0.2 M) of glucose and asparagine were heated at different temperatures (120-200 C) at pH 6.8.'",
+    "honesty_note": "This is an INFERENCE, not a transcription. The Foods 2024 paper says 'with some minor modifications' and does not say the molarity was one of the things left unmodified. The target below is a RATIO (umol acrylamide per mol asparagine), which is basis-free and therefore does not itself depend on this assumption; only the model's INPUT does. The sensitivity of the prediction to this assumption is recorded in `execution_assumption_sensitivity` and must be read alongside the score.",
+    "dedupe_note": "10.1021/jf050504m already appears in this repository (data/lit/benchmark_intake_registry.json, data/lit/slr_incorporation_matrix.json, data/lit/deep_research_backlog.json, data/benchmarks/maillard_validation_benchmarks.md) as a backlog citation whose own record states 'The backlog gives no numeric anchors, so the rate constants/activation energies the repo may have taken from it were not individually verified.' NO VALUE from Knol 2005 enters this bundle. It is used here only to source the reactant molarity for the model's input."
+  },
+  "contamination_disclosure": {
+    "status": "PARTIAL - READ BEFORE SCORING",
+    "what_is_contaminated": "src/barrier_constants.FAST_BARRIERS['safety_risk_acrylamide'] = 30.83 kcal/mol is documented in the repo as a 'Direct transfer of the Knol et al. 2009 lumped Asn+sugar->acrylamide anchor Ea=129 kJ/mol (10.1016/j.foodchem.2009.11.049)'. That barrier IS on the network route that produces the prediction scored here, so the TEMPERATURE DEPENDENCE of this prediction is anchored to the Knol group's kinetics.",
+    "what_is_not_contaminated": "The absolute YIELD. No acrylamide yield from any source has ever been fitted in this repository, and neither the 140.58 umol/mol Asn value nor anything else from Ye et al. 2024 appears anywhere in the tree (checked 2026-08-27: zero grep hits for 10.3390/foods13172836 across data/, docs/, src/, results/). The magnitude is a genuine out-of-sample prediction; the Arrhenius slope is not.",
+    "consequence": "Score this point as a test of the model's absolute yield at one temperature, NOT as a test of its temperature dependence."
+  },
+  "protein_type": "free",
+  "denaturation_state": 0.0,
+  "precursors": {
+    "D-Glucose": { "concentration_mM": 200.0 },
+    "L-Asparagine": { "concentration_mM": 200.0 }
+  },
+  "conditions": {
+    "temp_C": 180.0,
+    "ph": 6.86,
+    "water_activity": 0.99,
+    "time_min": 30.0
+  },
+  "metadata": {
+    "tier": "REFERENCE",
+    "family": "acrylamide_free_precursor_network",
+    "execution_path": "free_precursor",
+    "notes": "family is deliberately NOT 'safety'. src/benchmark_validation._evaluate_loaded_benchmark dispatches family=='safety' to the lumped predict_acrylamide solver, which never touches the reaction network. The whole point of this bundle is that Recommender.predict_from_steps produces the number, so the family string is chosen to route around that dispatch. The lumped safety solver's answer for the same system is recorded in `cross_path_reference` for contrast and is NOT the pre-registered prediction."
+  },
+  "cross_path_reference": {
+    "note": "Recorded 2026-08-27 at git HEAD 12f43dd by evaluating the identical precursor/condition payload with metadata.family='safety', which routes to src.safety.predict_acrylamide instead of the network. This is context, not a score - and it is a striking contrast: on the same system the lumped safety solver returns roughly 480x the network's answer, which says the two acrylamide lanes in this repository disagree by more than two orders of magnitude at 0.2 M and nobody had noticed.",
+    "predict_acrylamide_ppb": 544870.2805,
+    "network_predict_from_steps_ppb": 1142.6354
+  },
+  "reference_volatiles": {
+    "Acrylamide": {
+      "conc_ppb_deliberately_absent": "The source reports a RATIO (umol acrylamide / mol asparagine), not a concentration. Converting it to ppb requires the reactant molarity the paper never states, i.e. exactly the free multiplicative parameter Wave S2b found hiding under the 342/200 anchor. The native-unit target lives in `holdout_targets` and is scored there.",
+      "uncertainty_pct": 9.9
+    }
+  },
+  "holdout_targets": {
+    "Acrylamide": {
+      "target_unit": "umol_per_mol_limiting_precursor",
+      "target_value": 140.58,
+      "target_uncertainty": 13.92,
+      "target_quote": "3.1. The Effects of Instant Green Tea on Acrylamide Levels in the Glc-Asn Model System ... The level of acrylamide under the control condition (i.e., 0 g/mol Asn) was 140.58 +/- 13.92 umol/mol Asn.",
+      "molar_basis": "mol of asparagine charged to the reaction. The paper expresses every dose in this study as 'g/mol Asn' and every acrylamide level as 'umol/mol Asn', so asparagine is unambiguously the denominator. Asparagine is also the joint-lowest declared precursor molarity in this bundle (equimolar with glucose), so it is what src/projection._estimate_projection_budget treats as limiting - the paper's denominator and the model's denominator coincide, which is why this pair is unit-commensurable.",
+      "unit_commensurable": true,
+      "smiles": "C=CC(N)=O"
+    }
+  },
+  "execution_assumption_sensitivity": {
+    "why": "The reactant molarity is an assumption (see precursor_concentration_provenance). A score that moves a lot with it is a score about the assumption.",
+    "measured_2026_08_27_at_HEAD_12f43dd": "See results/validation/maillard_path_holdout_frozen_predictions.json -> sensitivity block. Recorded so a later wave cannot re-pick the molarity."
+  }
+}

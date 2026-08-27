@@ -490,8 +490,31 @@ the global scale", is unchanged and is now better supported, not worse.)*
 | ----------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------ |
 | **Parity**              | On matched systems, how close is predicted ppb to measured?              | **14** benchmarks · MC panel covers **11** of them, **35 matched rows** · **0 strict-ready** · **0/6 predictive benchmarks without blocking gaps** |
 | **External hold-out**   | On systems excluded from calibration, does the frozen model still cover? | 4 bundles · **1/5 on genuine extrapolations** at the pre-widening prior (1/5 at the wider one too, since Wave O) · median **93.68×** error, worst **2474×** |
+| **Maillard-path hold-out** | On systems excluded from calibration, is the *reaction network* right? | **NEW (Wave U)** · 12 free-precursor literature points, predictions frozen before any calibration wave saw them · median **6.04×**, **12/21** within 10×, **1** structural zero · but the *shape* is wrong: sulfur temperature dependence runs backwards and acrylamide is ~40× under-responsive in time |
 | **Coverage**            | Which chemistry lanes are wired, and how?                                | 16 lanes wired · **5 with generative reaction templates** · 7 with DFT anchors |
 | **Experiment priority** | Where would the next experiment improve confidence the most?             | 6/35 MC cells outside 90% CI — all queued                    |
+
+> **On the Maillard-path hold-out (Wave U, 2026-08-27) — the reaction network's first
+> out-of-sample test.** The row above it is a *matrix* number: all four legacy hold-out
+> bundles run the `matrix_only` path and never call `predict_from_steps`, which is why three
+> consecutive waves of chemistry work moved zero hold-out points. Twelve content-verified
+> free-precursor literature points now live in
+> `data/benchmarks/external_validation/maillard_path/` and every one of them executes the
+> network. Every value is quoted verbatim from the retrieved paper in its own bundle; no
+> conversion assumes a molar basis.
+>
+> **The predictions were frozen before any calibration wave saw these points**, in
+> `results/validation/maillard_path_holdout_frozen_predictions.{json,md}`, which names the
+> git HEAD it came from. That file is a pre-registration and the pending rate-calibration
+> work must be scored against *it*, not against a fresh run.
+>
+> Median 6.04× is better than the in-panel numbers would suggest, and the best single point
+> is genuinely encouraging: **MFT at 100 °C to 1.52×, on a sulfur branch that Wave S2c
+> established has zero absolute literature anchors.** But the median hides the finding. The
+> model gets the *shape* wrong in three nameable ways — measured MFT falls 4.0× with rising
+> temperature while the model has it rising 4.55×; measured acrylamide rises 52× from 10 to
+> 30 min while the model rises 1.24×; and two of three pH responses point the wrong way.
+> Full table and per-point provenance in `AUDIT.md` → "Wave U".
 
 > **On the external hold-out — read this before the number above.** The 8 points are
 > genuinely excluded from calibration; the exclusion is code-enforced and survived an

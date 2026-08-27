@@ -5811,3 +5811,240 @@ across `test_wave_i_tooling`, `test_wave_s1b_ph_aw_routing_2026_08`, `test_arrhe
 `test_pentose_hexose_sulfur_ordering`, `test_pipeline`. **11 tests added this wave.**
 The uncommitted work of Waves S1b, S2c and T3 was preserved throughout; nothing was committed
 or stashed. Orchestrator certifies the batch.
+
+## Wave U — the reaction network's FIRST out-of-sample test (2026-08-27)
+
+Wave S1's structural finding is the reason this wave exists: **all four bundles in the
+external hold-out run the `matrix_only` execution path.** They read a lipid-oxidation load off
+a matrix profile and return before `Recommender.predict_from_steps` is ever called. That is
+why Waves S1, S1b and S2c each moved dozens of in-panel rows and left **all eight hold-out
+points bit-identical** — three consecutive waves, one of them a shipped *barrier* revert. The
+invariance was evidence about the hold-out's coverage, not about the model. **The chemistry
+this repository is about had never been scored on a system it had not already seen.**
+
+This wave harvested twelve content-verified free-precursor literature points that DO exercise
+the network, froze them under the hold-out guard, and recorded the CURRENT model's predictions
+so the pending rate-calibration wave can be scored against predictions committed **before it
+ran**. The ordering is the deliverable.
+
+**Nothing was tuned to these points, by this wave or anyone.** No barrier, projection
+constant, observability factor or prior was touched. `src/` was not edited at all except
+`scripts/ci/holdout_guard.py`, which was *strengthened*.
+
+### (a) THE POINTS — 12 bundles, 22 targets, every value quoted from a retrieved source
+
+All live in `data/benchmarks/external_validation/maillard_path/`, all
+`evidence_class: external_validation_only`, all `maillard_path_holdout: true`, all
+`execution_path: free_precursor`, all `protein_type: free`.
+
+| # | System | Source (access) | Target(s), native unit | Dedupe |
+|---|---|---|---|---|
+| 1-4 | **ribose 25 mM + cysteine 25 mM**, 0.5 M K-phosphate pH 5.5, sealed 20 mL Duran, 3 mL; 100 °C/4 h, 110 °C/2 h, 120 °C/1 h, 130 °C/0.5 h | Yiltirak, Balagiannis, Koek, Koch & Elmore 2026, *Food Res. Int.* 231:118600, `10.1016/j.foodres.2026.118600` — **full text + publisher supplementary** (CentAUR PDF via `--resolve` to 46.22.140.67; Table S3 unzipped out of Elsevier `mmc1.docx`) | MFT 6.88 / 3.29 / 2.4 / 1.71 µg/L; FFT 1.28 / 1.46 / 1.68 / 1.62 µg/L — **SIDA** (MFT-d3, FFT-d2, matrix-matched curve) | **0 hits** for the DOI or either lead author across `data/ docs/ src/ results/` |
+| 5-6 | **glucose 0.25 M + L-alanine 0.25 M**, unbuffered, sealed ampoule, 130 ± 1 °C, 2 h, at **pH 5** and **pH 8** | Schibilsky 2019, TU Berlin dissertation (DepositOnce bitstream `969d7075-…`) — **full text PDF**, Tabelle 10 + Tabelle 17 read directly | furfural 17/25 µM; furaneol 9/46 µM; HMF 454/798 µM — internal standard with **measured** response factors (Tabelle 10) | **0 hits**; no DOI exists, typed `identifier`/`identifier_scheme` pair used (same convention as the Liu 2021 NC State thesis) |
+| 7 | **glucose 0.2 M + asparagine 0.2 M**, 0.1 M phosphate pH 6.86, 4 mL sealed tube, 180 °C, 30 min | Ye et al. 2024, *Foods* 13(17):2836, `10.3390/foods13172836` — **full text** (Europe PMC `PMC11395303` fullTextXML) | acrylamide **140.58 ± 13.92 µmol/mol Asn** — 13C3-acrylamide **isotope dilution** LC-QQQ-MS/MS. Kept in the paper's own basis-free ratio unit; **no ppb conversion** | **0 hits** |
+| 8-10 | **glucose 27.75 mM + asparagine 33.3 mM**, pH 6.0, 100 mL, 180 °C; 10 min and 30 min in 1% acetic acid, plus 30 min in deionised water | Chang / Sung et al. 2021, *Polymers* 13(12):1901, `10.3390/polym13121901` — **full text** (`PMC8229482`) | acrylamide 28 / 1459 / 832 ppb; HMF 7 ppm — authentic-standard calibration curves | **0 hits** |
+| 11 | **fructose 27.75 mM + asparagine 33.3 mM**, pH 6.0, 100 mL, 180 °C, 30 min | Lin, Ting, Ndraha, Hsiao & Sung 2022, *Polymers* 14(8):1565, `10.3390/polym14081565` — **full text** (`PMC9031937`) | acrylamide 1859 ppb; HMF 12.28 ppm | **0 hits** |
+| 12 | **glucose 555 mM alone** (10% w/v), no amino acid, pH 4.36 measured, 121 °C, 18 min autoclave | Steinhagen et al. 2021, *Pharmaceuticals* 14(11):1121, `10.3390/ph14111121` — **full text** (`PMC8625795`), Table 4 read directly | 5-HMF 17.4 ± 3.9 µg/mL — LC-MS/MS, calibration 0.5-100 µg/mL, R² ≥ 0.993 | **0 hits** |
+
+**Diversity, since it was the stated criterion:** sulfur thiols (8 targets), furanone +
+oxygen-heterocycle (6), acrylamide (5), HMF (4); temperatures 100-180 °C; times 10 min - 4 h;
+pH 4.36 - 8.0; three different sugars and four different amino acids; one **temperature/time
+series**, one **fixed-temperature time course**, one **pH pair**, one **sugar-identity pair**
+across bundles 10/11, and one **sugar-only** system with no amino acid at all.
+
+**One methodological note, recorded because it is a choice.** Bundles 7-11 set
+`metadata.family` to something other than `"safety"`. `_evaluate_loaded_benchmark` dispatches
+`family == "safety"` to the lumped `predict_acrylamide` solver, which never touches the
+network. Routing around that dispatch is the entire point of the bundle, and each says so in
+its `metadata.notes`; the safety solver's answer for the same system is recorded alongside as
+`cross_path_reference` and is explicitly not the scored number.
+
+### (b) DECLINED CANDIDATES — every one, with the reason
+
+Nine sources were retrieved far enough to judge and then refused. Two of the refusals are the
+most useful output of this wave.
+
+| Candidate | Retrieved to | Reason declined |
+|---|---|---|
+| **Martins 2003**, WUR thesis, glucose/glycine 0.2 M pH 6.8, **HMF max 20 µmol/L at 120 °C** | full text (`edepot.wur.nl/121418`) | **CONTAMINATED — this is a calibration source.** `data/lit/arrhenius_params.yml` takes Ea = 97 kJ/mol from that chapter's Table 5.2, and `data/lit/timeseries/martins2005_glucose_glycine_80_100_120C_pH68.yml` holds **ten species curves digitised off its figures**. 10 grep hits. Scoring the same chapter's HMF as a "hold-out" would have been laundering. This is why the independent Schibilsky thesis was used for the furanone lane instead. |
+| **Knol 2005 / Knol 2008 thesis**, `10.1021/jf050504m`, acrylamide 1.5 mol% (glucose) and 3 mol% (fructose) | full text (`edepot.wur.nl/122035`) | Three reasons, any one sufficient: the yields are stated in concluding prose with **no temperature or time attached** (they are maxima over a 120-200 °C × 0-45 min series); the per-timepoint concentrations exist **only as figures**; and Table 7.2's `a` column is a **fitted logistic asymptote**, not a measurement. Also partially contaminated — `FAST_BARRIERS["safety_risk_acrylamide"] = 30.83` is a declared transfer of the Knol group's Ea. Used in this wave **only** to source bundle 7's reactant molarity, which is recorded as an inference. |
+| **Blank, Fay, Lakner & Schlosser 1997**, `10.1021/jf960997i`, HDMF 2.6-5.1 µg / EHMF 6.8-10 µg per mmol pentose | abstract only (ACS 403; EPFL Infoscience 429 on every attempt) | The yields are a **RANGE across unspecified conditions**, and the precursor concentrations are not in the abstract. Taking an interior point of a published band is precisely the 342/200 failure mode Wave S2b exposed. 3 existing grep hits for the DOI. |
+| **Hofmann & Schieberle 1998**, `10.1021/jf9705983`, MFT 1.4 mol% | abstract only (closed on Unpaywall, OpenAlex, S2, Europe PMC, IA Scholar) | **The mol% denominator is defined nowhere in the abstract**, and neither are the precursor concentrations or the reaction volume. This is the paper Waves S2b/S2c retired; re-ingesting its abstract number would have re-created the retired anchor under a new name. |
+| **Grosch, Zeiler-Hilgart, Cerny & Guth 1993**, MFT 0.2 µg/L (cys+ribose) vs 300 µg/L (cys+thiamine) | second-hand, quoted verbatim in Cerny 2015 (chapter retrieved in full) | Second-hand, and the conditions are the single word **"boiling"** — no temperature, time, pH, buffer or vessel. Usable as a ~1500× ordinal claim about the thiamine route, not as an executable point. **Worth an ILL: it is the only absolute thiamine-route number found anywhere.** |
+| **Cerny & Briffod 2007**, `10.1021/jf062874w` | abstract only | Closed everywhere. **Correction to this wave's own brief:** the assumption that it "reports quantified µg amounts of MFT/FFT as a function of pH" **could not be confirmed** — the published abstract contains only 13C-label distributions and relative statements, and no absolute unit. `data/lit/slr_incorporation_matrix.json` already carries a `citation_caveat` saying the repo's numbers do not come from it; that caveat stands and is now independently corroborated. |
+| **Ping et al. 2021**, `10.3390/antiox10070993`, acrylamide **2250 ± 82 µg/kg**, true 13C3 SIDA | full text (`PMC8300766`) | **The most painful decline.** Genuine isotope dilution, clean control, verified table. But the system is 10 µmol each of asparagine and glucose **homogenised into 1 g of silica gel**: the paper states neither a water activity nor a reaction volume, so executing it requires inventing **two** free parameters, and its µg/kg basis refers to a solid support rather than the aqueous medium the projection layer assumes. Measured at HEAD 12f43dd, the prediction swings **47× across a plausible aw range** (70.1 ppb at aw 0.2 → 1.5 ppb at aw 0.9). Declined rather than scored with two invented parameters. *The one robust statement it does support, recorded here and not in a bundle: the model is at least **32× low** on this system at every aw tested.* |
+| **Chen et al. 2026**, `10.1016/j.crfs.2026.101433`, five pyrazines in µg/L with per-compound calibration curves (R² > 0.995) | full text (`PMC13186052`) | Not a free-precursor system: the precursor is a **purified Thr-Amadori compound**, and the engine has no ARP entry point. Substituting threonine + xylose would be modelling a different experiment. |
+| **Ratsch et al. 2025**, `10.3390/molecules30030535`, SIDA-quantified furfural / 2-methylpyrazine with deuterated standards, fructose 0.02 M + one amino acid 0.01 M | full text (`PMC11821130`) | The vehicle is **Chardonnay base wine** — an undefined precursor background plus ethanol. Closest thing in open access to an absolute furanone-family model system, and still not one. |
+
+Rejected outright on quantification method, each verified by reading the paper's own sentence:
+**Wang et al. 2021** `10.3390/foods10020273` (peak-area normalisation, RF assumed 1, and *"m
+represents the sample mass (g)"* never defined — a ~50× basis ambiguity; 5 existing grep hits);
+**Zhang et al. 2022** `10.1016/j.ultsonch.2022.105913` (the running text calls the same numbers
+both "peak area" and "concentration", and 2,3-DMP ≫ 2,5-DMP by ~1000× is chemically
+implausible); **Cha et al. 2019** `10.1038/s41598-019-41824-8` (α-dicarbonyls *are* absolute
+but none is in `data/species/`; the volatiles are *"peak area ratio (PAR)"*); **Song et al.
+2019** `10.3390/polym11030521` (*"assuming that the relative response factor was 1 and the
+recovery ratio was 100%"*); **Ma et al. 2022** `10.3389/fnut.2022.940202` (SIDA method, but
+**no absolute concentration anywhere in text or tables** — figures only; DOI already in repo);
+**Scalone 2016** Ghent thesis (*"GC-MS peak Area × 10⁶"* for every model system; its only
+SIDA-grade assay is on cookies and bread); **Zheng 2023** `PMC9868338` and **Foods 2023**
+`PMC9818664` and **Okumura 1990** (single IS with RF = 1, or "semiquantified ... NIST library",
+or "Area %").
+
+**ILL asks this wave generated** (all CrossRef-verified, all closed on every open route
+exercised — Europe PMC, Unpaywall, OpenAlex, Semantic Scholar, IA Scholar, CentAUR,
+DepositOnce, mediaTUM, biblio.ugent.be, J-Stage, EPFL Infoscience):
+`10.1021/jf9705983` **Tables 1-6** (the mol% precursor matrix — would settle the retired
+anchor); `10.1021/jf0200826` Mottram & Nobrega; `10.1021/jf980980v` + Whitfield & Mottram 2001
+(the H₂S + norfuraneol branch); `10.1021/jf062874w` Cerny & Briffod (to settle whether it holds
+absolute numbers at all); `10.1021/jf990954c` Hofmann, Münch & Schieberle 2000 (**the** Strecker
+paper — nothing open substitutes for it); Grosch et al. 1993 in *Progress in Flavor Precursor
+Studies*. A separate finding worth carrying: across ~15 Europe PMC open-access query
+formulations, **no open-access paper reports absolutely-quantified Strecker aldehydes from a
+free-precursor sugar + amino-acid model system.** The Strecker branch cannot be held out from
+open sources.
+
+### (c) THE FROZEN ARTIFACT — `results/validation/maillard_path_holdout_frozen_predictions.{json,md}`
+
+Generated by `scripts/generators/generate_maillard_path_holdout_frozen_predictions.py` at
+**git HEAD 12f43dd** (branch `audit-remediation`), before any rate-calibration wave saw these
+points. The file records that commit in its own header and states that S3 must be scored
+against **it**, not against a fresh run. **It was un-gitignored in the same change**
+(`.gitignore`, with the reason written in place): an untracked pre-registration is not a
+pre-registration, because nothing would stop a later wave regenerating it after calibrating
+and comparing it with itself.
+
+| Measure | Result |
+| --- | --- |
+| Bundles / targets | 12 / 22 |
+| Quantitatively scored | 21 |
+| **Median fold error** | **6.0388×** |
+| Median abs log10 error | 0.7809 dex |
+| Worst / best | **52.586×** (FFT, 130 °C) / **1.5168×** (MFT, 100 °C) |
+| Within 10× | **12 / 21** (57.1%) |
+| Within-point orderings | **8 / 12** pairs |
+| Cross-bundle response directions | **3 / 6** |
+| Structural zeroes | **1** |
+
+**Unit handling.** Only two non-ppb target units are scored quantitatively, and both are
+basis-free ratios: `mol_percent` and `umol_per_mol_limiting_precursor`. The predicted value is
+derived from the model's OWN declared identity and nothing else —
+`ppb = molar × MW × ppb_conversion_factor (=1e6)` from `src/projection.py` — divided by the
+lowest declared precursor molarity, which is the same limiting-precursor rule
+`_estimate_projection_budget` uses. Bundle 7 additionally states that the paper's denominator
+(mol of asparagine charged) and the model's denominator coincide, which is what makes the pair
+commensurable at all. The µM → ppb conversions in bundles 5-6 use only a molecular weight and
+the thesis's own volumetric basis, and the exact arithmetic is written into each target's
+`native_unit_and_conversion` field. **No conversion in this wave introduces a molar basis.**
+
+**`structural_zero` is counted separately and deliberately.** Bundle 12 (glucose alone) gets a
+prediction of exactly 0.0 against a measured 17 400 ppb. It has no finite fold error, so it
+cannot enter the median — which is precisely why it is named and counted rather than dropped
+as "not evaluable". A median that silently omits total misses reports a better model than
+exists.
+
+### (d) WHAT THE BASELINE ACTUALLY SAYS — the median is the least interesting number
+
+**The encouraging part is real and should be said first.** Wave S2c ended with *the sulfur
+branch now has zero absolute literature anchors*. This wave gave that branch its first real
+absolute measurement, as a hold-out, and it predicts **MFT at 100 °C to 1.5168×**. An
+uncalibrated branch landing inside a factor of two on an isotope-dilution number it had never
+seen is not nothing.
+
+**Then the shape, which is wrong in three specific ways a fold-error median cannot show:**
+
+| Series | Axis | Compound | Measured | Predicted | Response ratio | Direction |
+|---|---|---|---|---|---|---|
+| Yiltirak 2026 | 100 °C/4 h → 130 °C/0.5 h | MFT | ×0.249 | ×4.55 | **18.3** | **WRONG WAY** |
+| Yiltirak 2026 | same | FFT | ×1.27 | ×5.48 | 4.33 | OK |
+| Chang 2021 | 10 min → 30 min at 180 °C | acrylamide | ×52.1 | ×1.24 | **0.0238** | OK |
+| Schibilsky 2019 | pH 5 → pH 8 at 130 °C | furfural | ×1.47 | ×0.774 | 0.527 | **WRONG WAY** |
+| Schibilsky 2019 | same | furaneol (DMHF) | ×5.11 | ×2.48 | 0.485 | OK |
+| Schibilsky 2019 | same | HMF | ×1.76 | ×0.774 | 0.441 | **WRONG WAY** |
+
+1. **The sulfur branch has the temperature dependence backwards.** Measured MFT *falls* 4.0×
+   across the series; the model has it *rising* 4.55×. The excellent 1.52× at 100 °C and the
+   12.1× miss at 130 °C are the same error seen from opposite ends — which means a
+   calibration that only shifts the sulfur barriers up or down will improve one and worsen the
+   other. **This is the sharpest single instruction this wave has for S3.**
+2. **Acrylamide barely responds to time.** ×52.1 measured against ×1.24 predicted, a response
+   ratio of 0.024. And note *what this is not contaminated by*: the Knol Ea transfer sets the
+   temperature dependence, and this series holds temperature fixed.
+3. **Two of three pH responses point the wrong way**, and both wrong ones (furfural, HMF) move
+   by exactly the same factor ×0.774 — i.e. they are being driven by one shared pH term, not
+   by two independent ones. Furaneol, which moves correctly, is the exception.
+4. **The MFT > FFT ordering fails at all four sulfur points (0/4).** All eight of the wave's
+   within-point ordering hits come from the acrylamide/HMF and oxygen-heterocycle bundles,
+   which score 8/8.
+
+**A fifth finding, found while here and not looked for.** The two acrylamide lanes in this
+repository disagree by **~480×** on the same 0.2 M glucose/asparagine system: the network
+returns 1142.6 ppb and the lumped `predict_acrylamide` returns 544 870.3 ppb. Both are shipped.
+Nothing in the panel had ever evaluated them side by side, because every acrylamide benchmark
+in `data/benchmarks/` carries `family: "safety"` and therefore only ever exercises one of them.
+Recorded in bundle 7's `cross_path_reference`. **[P] for the owner — not fixed here.**
+
+### (e) GUARD COVERAGE — extended, and negative-tested
+
+The bundles live in a **subdirectory**, `external_validation/maillard_path/`, and the reason is
+scientific rather than cosmetic: `get_holdout_benchmark_files()` globs `*.json`
+**non-recursively**, so these points do not enter `external_validation_report`'s median. That
+median is a matrix-only lipid-oxidation number, and averaging two different execution paths
+into one figure is the kind of thing this campaign exists to stop. It also means no
+`test_honest_headline_guards` pin had to move.
+
+That placement would have left them **entirely unguarded**, so `scripts/ci/holdout_guard.py`
+was extended — strengthened only, nothing relaxed:
+
+* **Check 1 now uses `rglob`, not `glob`.** It reports 16 bundles (4 legacy + 12 new); before
+  the change it would have seen 4 and said PASS.
+* **New check 4, `check_maillard_path_bundles`.** Every file flagged `maillard_path_holdout:
+  true` must (a) live under the hold-out directory, (b) carry
+  `evidence_class: external_validation_only`, (c) declare
+  `metadata.execution_path: free_precursor` — a bundle that silently drifted to `matrix_only`
+  would keep scoring and stop testing anything — and (d) have its `benchmark_id` absent from
+  the whole fit/calibration corpus (`data/lit/**/*.json` plus every
+  `results/validation/*refit*.json` / `*rederivation*.json`).
+
+**Negative-tested, three ways, each confirmed to exit 1 with the check-4 line suppressed:**
+planting `{"fit_target": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026"}` in
+`results/validation/`; flipping one bundle's `execution_path` to `matrix_only`; and copying a
+flagged bundle up into `data/benchmarks/`. All three were reverted; the clean tree exits 0.
+
+`tests/scientific/test_wave_u_maillard_path_holdout.py` adds **38 assertions** covering the
+same invariants from the test side, plus one that every target carries a `target_quote`, a
+`target_value` and a stated basis, and one that the frozen artifact still names its git
+commit. **The tests deliberately do NOT pin the scores** — pinning the number you just
+produced is the circularity Rounds 1-3 removed. The one pinned number is the bundle count, so
+that dropping an inconvenient point breaks the build.
+
+### (f) [P] CARRIED FORWARD
+
+- [P] **Score S3 against `maillard_path_holdout_frozen_predictions.json` at HEAD 12f43dd.**
+  Not against a regenerated copy. The file says so itself.
+- [P] **The two acrylamide lanes disagree by ~480×** (see (d)). Owner decision: reconcile them,
+  or state in the README which one is authoritative for which regime.
+- [P] **The sulfur branch's temperature dependence has the wrong sign.** A uniform barrier
+  shift cannot fix it (see (d)(1)). Whatever S3 does here, the 100 °C and 130 °C points must
+  be reported together.
+- [P] **Two pH responses move by the identical factor ×0.774**, suggesting furfural and HMF
+  share a single pH term where the measurement says they should not. Worth a look at
+  `_enolisation_route_ph_correction` before calibrating anything.
+- [P] **The free-precursor network returns exactly zero for a sugar with no amino-acid
+  partner.** Either wire a caramelization lane or state the scope limit on the surfaces that
+  advertise a `carbohydrate_pyrolysis_and_caramelization` family.
+- [P] **The Strecker branch cannot be held out from open sources** (see (b)). It needs
+  `10.1021/jf990954c` through an institutional route or it stays untested.
+
+### (g) GATES
+
+| Gate | Result |
+|---|---|
+| `scripts/ci/holdout_guard.py` | **PASS** — **4/4** (was 3/3), 16 bundles checked, 12 flagged, 33 fit records scanned |
+| `scripts/ci/citation_gate.py` | **PASS** — 96 files (was 84), 1001 DOI-bearing fields, 323 unique DOIs, 0 waivers |
+| `scripts/ci/fit_target_gate.py` | **PASS** — 2/2 |
+
+Targeted tests only, per the owner directive (**no full-suite run**):
+`tests/scientific/test_wave_u_maillard_path_holdout.py` **38 passed**. No existing test was
+re-pinned, because no shipped number moved: this wave added data, one generator, one gitignore
+negation and one guard check, and edited no module under `src/`.

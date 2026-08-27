@@ -1,0 +1,92 @@
+{
+  "benchmark_id": "mp_holdout_fructose_asparagine_180C_Lin2022",
+  "evidence_class": "external_validation_only",
+  "maillard_path_holdout": true,
+  "source_doi": "10.3390/polym14081565",
+  "source_metadata": {
+    "citation": "Lin, H.-T.V.; Ting, Y.-S.; Ndraha, N.; Hsiao, H.-I.; Sung, W.-C. Effect of Chitosan Incorporation on the Development of Acrylamide during Maillard Reaction in Fructose-Asparagine Model Solution and the Functional Characteristics of the Resultants. Polymers 2022, 14 (8), 1565.",
+    "crossref_verified": "2026-08-27. CrossRef returns that exact title, Polymers 14(8):1565, issued 2022-04-12, first author Lin Hong-Ting Victor.",
+    "origin": "external_literature",
+    "evidence_class": "external_validation_only",
+    "notes": "MAILLARD-PATH HOLD-OUT (Wave U, 2026-08-27). Never use for calibration, refitting, or any promotion decision."
+  },
+  "content_verification": {
+    "access_level": "full_text",
+    "access_route": "Europe PMC fullTextXML, https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9031937/fullTextXML",
+    "pmcid": "PMC9031937",
+    "retrieval_date": "2026-08-27",
+    "quoted_method": "2.2. Preparation of Maillard Reaction Model System. ... Briefly, solutions containing (1) 0.5 g asparagine, (2) 0.5 g fructose, and (3) a combination of 0.5 g asparagine and 0.5 g fructose were dissolved in water. ... We adjusted the pH of each solution to 5.8 by adding 1 N sodium hydroxide (NaOH) and then to 6.0 by adding 0.001 N NaOH. Each solution was topped up with distilled water to 100 mL. Thereafter, each solution was placed in a dry-bath incubator (DB200-2, Yisheng Technology Idea Strategy Co. Ltd., New Taipei, Taiwan) maintained at 180 degC for 10, 20, and 30 min and then immediately cooled in tap water prior to analysis. Each sample was prepared in triplicate.",
+    "quoted_quantification_acrylamide": "Acrylamide quantification was determined from a calibration curve that was built in the range of 0-3125 ppb, using a UV detector at 210 nm.",
+    "quoted_quantification_hmf": "HMF was detected and quantified from the calibration curve built with HMF standard solutions in the range of 0.48-750 ppm, using a UV detector at 284 nm.",
+    "quantification_class": "external_standard_curve_hplc_uv",
+    "quantification_verdict": "ADMISSIBLE WITH A STATED CAVEAT. Both analytes are quantified against an authentic-standard calibration curve after SPE clean-up (Oasis HLB/MCX for acrylamide), so these are absolute concentrations with a defined basis (ppb and ppm of the reaction solution), not relative peak areas and not OAV back-calculations. The caveat is the DETECTOR: HPLC-UV at 210 nm for acrylamide is markedly less selective than the LC-MS/MS or SIDA methods this campaign prefers, so co-eluting UV-absorbing Maillard products could bias the acrylamide value high. It cannot bias it by the factors this hold-out is measuring."
+  },
+  "precursor_concentration_provenance": {
+    "status": "STATED_IN_SOURCE__ONE_RESIDUAL_AMBIGUITY",
+    "derivation": "0.5 g asparagine and 0.5 g fructose, each made up to 100 mL. Fructose MW 180.16 -> 0.5/180.16/0.1 L = 27.75 mM. Asparagine: the Chemicals section says 'L-asparagine monohydrate ... obtained from Sigma-Aldrich', so 0.5 g of the monohydrate (MW 150.13) = 33.30 mM. If the authors instead meant 0.5 g of anhydrous asparagine (MW 132.12) it would be 37.85 mM.",
+    "ambiguity_effect": "13.6% on the asparagine molarity. The monohydrate reading is used because it is the salt the paper says it bought. This is far below the fold errors this hold-out measures and it does not change which precursor is limiting (fructose, at 27.75 mM, is limiting either way).",
+    "unstated_conditions": "The paper does not state the aliquot volume actually heated in the dry-bath incubator (a 100 mL aqueous solution held at 180 degC is above the normal boiling point, so the vessel must be sealed or the aliquot small; neither is described). Water activity is therefore not measurable from the paper and is entered as 0.99 for a dilute aqueous solution. Recorded rather than hidden."
+  },
+  "contamination_disclosure": {
+    "status": "PARTIAL - READ BEFORE SCORING",
+    "what_is_contaminated": "As for the Ye 2024 bundle: src/barrier_constants.FAST_BARRIERS['safety_risk_acrylamide'] = 30.83 kcal/mol is a declared transfer of the Knol et al. 2009/2010 lumped Ea = 129 kJ/mol (10.1016/j.foodchem.2009.11.049), and that barrier sits on the network route producing the acrylamide prediction. The temperature dependence is Knol-anchored; the yield is not.",
+    "hmf_is_clean": "The HMF route (enolisation -> 3-deoxyosone -> cyclodehydration) carries no anchor from this paper or any acrylamide paper.",
+    "dedupe": "10.3390/polym14081565 returns ZERO grep hits across data/, docs/, src/ and results/ (checked 2026-08-27). Neither value below appears anywhere in the tree."
+  },
+  "protein_type": "free",
+  "denaturation_state": 0.0,
+  "precursors": {
+    "D-Fructose": { "concentration_mM": 27.75 },
+    "L-Asparagine": { "concentration_mM": 33.3 }
+  },
+  "conditions": {
+    "temp_C": 180.0,
+    "ph": 6.0,
+    "water_activity": 0.99,
+    "time_min": 30.0
+  },
+  "metadata": {
+    "tier": "REFERENCE",
+    "family": "acrylamide_free_precursor_network",
+    "execution_path": "free_precursor",
+    "notes": "family is deliberately NOT 'safety' so the prediction comes from Recommender.predict_from_steps rather than the lumped predict_acrylamide solver. See cross_path_reference."
+  },
+  "cross_path_reference": {
+    "note": "Recorded 2026-08-27 at git HEAD 12f43dd by evaluating the identical payload with metadata.family='safety'. Context, not a score.",
+    "predict_acrylamide_ppb": 2023.2186
+  },
+  "reference_volatiles": {
+    "Acrylamide": {
+      "conc_ppb": 1859.0,
+      "uncertainty_pct": null
+    },
+    "5-Hydroxymethylfurfural (HMF)": {
+      "conc_ppb": 12280.0,
+      "uncertainty_pct": null
+    }
+  },
+  "holdout_targets": {
+    "Acrylamide": {
+      "target_unit": "ppb",
+      "target_value": 1859.0,
+      "target_quote": "The heating of asparagine-fructose solution for 30 min generated 1859 and 9401 ppb in water and acetic acid, respectively.",
+      "molar_basis": "ppb of the reaction solution (ug/L), read off the acrylamide calibration curve built over 0-3125 ppb. The aqueous ('in water') figure is the one used; the 9401 ppb figure is the 1% acetic acid system, which is a different formulation and is NOT scored here.",
+      "unit_commensurable": true,
+      "smiles": "C=CC(N)=O"
+    },
+    "5-Hydroxymethylfurfural (HMF)": {
+      "target_unit": "ppb",
+      "target_value": 12280.0,
+      "target_quote": "As HMF can react with asparagine to form MRPs and acrylamide, the production of HMF is probably generated via the caramelization of fructose/glucose (91.56 ppm (Figure 4A) and 34.51 ppm [18]) after heating for 30 min, as compared to HMF generated by the formation of a dicarbonyl intermediate and 3-deoxyglucosone from the Maillard reaction (12.28 ppm (Figure 4A) and 5.13 ppm [18]).",
+      "molar_basis": "ppm of the reaction solution, read off an HMF calibration curve built over 0.48-750 ppm; 12.28 ppm = 12280 ppb.",
+      "value_provenance": "TEXT-QUOTED, FIGURE-SOURCED. The number is printed in the Results prose with an explicit pointer to Figure 4A; the paper publishes no HMF table. It is the asparagine-fructose (Maillard) arm, contrasted in the same sentence against the fructose-only (caramelization) arm at 91.56 ppm. Weaker than a table row and labelled as such - but it is a printed number in the paper, not a reconstruction.",
+      "unit_commensurable": true,
+      "smiles": "O=Cc1ccc(CO)o1"
+    }
+  },
+  "ordinal_claim": {
+    "claim": "HMF >> acrylamide in the aqueous fructose-asparagine system at 180 degC / 30 min.",
+    "source_sentence": "It should be noted that the content of acrylamide was measured at the ppb level, whereas HMF was at the ppm level.",
+    "why_it_matters": "This ordering is robust to every calibration caveat above (it spans three orders of magnitude), so it is scoreable even where the absolute values are not."
+  }
+}

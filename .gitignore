@@ -133,6 +133,15 @@ results/validation/*
 !results/validation/matrix_sigma_residual_derivation.md
 !results/validation/citation_verification_ledger.json
 !results/validation/citation_verification_ledger.md
+# Wave U (2026-08-27): the Maillard-path hold-out's FROZEN predictions. This one is
+# not merely "reviewable without a run" — it is a PRE-REGISTRATION. Its entire
+# function is that it records what the model predicted on twelve unseen literature
+# systems at a NAMED git commit, before any rate-calibration wave saw them. An
+# untracked pre-registration is not a pre-registration: there would be nothing
+# stopping a later wave from regenerating it after calibrating and comparing it to
+# itself. It must be in git history.
+!results/validation/maillard_path_holdout_frozen_predictions.json
+!results/validation/maillard_path_holdout_frozen_predictions.md
 # Wave H evidence artifacts (2026-08-27): the two refits and the family-implementation
 # enumeration are cited from source comments and from the README, so they must be
 # reviewable without a run.

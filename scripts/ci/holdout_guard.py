@@ -10,7 +10,8 @@ Three independent mechanisms keep them out. This guard asserts all three
 *statically*, so a refactor cannot quietly remove one:
 
 1. **Data-side label.** Every JSON under ``data/benchmarks/external_validation/``
-   declares ``evidence_class: external_validation_only`` at top level.
+   -- *including its subdirectories* -- declares
+   ``evidence_class: external_validation_only`` at top level.
 2. **Code-side refusal.** ``src/matrix_experiment_intake.calibrate_from_intake``
    raises on an ``external_validation_only`` payload rather than calibrating it.
 3. **Discovery-side isolation.** ``src.benchmark_validation.get_benchmark_files``
@@ -19,6 +20,24 @@ Three independent mechanisms keep them out. This guard asserts all three
    ``rglob`` or ``**/*.json`` would silently pull the hold-out set into the
    calibration corpus; that is the single highest-consequence one-character
    regression in this repo.
+
+A fourth check was added on 2026-08-27 (Wave U), when the hold-out gained its
+first bundles that actually execute the reaction network:
+
+4. **Maillard-path bundles stay out of the fit corpus.** Wave S1 established that
+   all four legacy hold-out bundles run ``matrix_only`` and never reach
+   ``Recommender.predict_from_steps``; three consecutive waves of network changes
+   moved zero hold-out points for that reason. The ``maillard_path/`` bundles are
+   the repo's first out-of-sample test of the network itself, and they are the
+   pre-registration target of the pending rate-calibration wave -- which makes
+   them the single most attractive thing in the tree to quietly fit to. So every
+   bundle flagged ``maillard_path_holdout: true`` must (a) live under the hold-out
+   directory, (b) carry the evidence_class label, (c) declare
+   ``metadata.execution_path: free_precursor`` -- a bundle that silently drifts to
+   ``matrix_only`` stops testing the network and the panel would not notice -- and
+   (d) have its ``benchmark_id`` absent from the fit/calibration corpus
+   (``data/lit/`` registries and any ``results/validation/*refit*`` /
+   ``*rederivation*`` record).
 
 The guard is deliberately static (AST + file reads, no imports of heavy deps), so
 it runs in about a second and cannot be defeated by import-time monkeypatching.
@@ -36,11 +55,14 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 
-HOLDOUT_DIR = ROOT / "data" / "benchmarks" / "external_validation"
+BENCHMARK_ROOT = ROOT / "data" / "benchmarks"
+HOLDOUT_DIR = BENCHMARK_ROOT / "external_validation"
 INTAKE_MODULE = ROOT / "src" / "matrix_experiment_intake.py"
 VALIDATION_MODULE = ROOT / "src" / "benchmark_validation.py"
 
 EVIDENCE_CLASS = "external_validation_only"
+MAILLARD_PATH_FLAG = "maillard_path_holdout"
+REQUIRED_EXECUTION_PATH = "free_precursor"
 GUARDED_FUNCTION = "calibrate_from_intake"
 DISCOVERY_FUNCTION = "get_benchmark_files"
 
@@ -61,7 +83,12 @@ def check_evidence_class(failures: list[str]) -> None:
         failures.append(f"hold-out directory is missing: {HOLDOUT_DIR.relative_to(ROOT)}")
         return
 
-    files = sorted(HOLDOUT_DIR.glob("*.json"))
+    # 2026-08-27 (Wave U): rglob, not glob. The Maillard-path bundles live in the
+    # maillard_path/ SUBDIRECTORY (so that they stay out of the matrix-only
+    # external_validation_report median, which would otherwise average two
+    # different execution paths into one meaningless figure). A non-recursive
+    # glob here would have left them entirely unguarded.
+    files = sorted(HOLDOUT_DIR.rglob("*.json"))
     if not files:
         failures.append(
             f"no hold-out bundles found in {HOLDOUT_DIR.relative_to(ROOT)} - "
@@ -84,7 +111,7 @@ def check_evidence_class(failures: list[str]) -> None:
                 "Without this label the bundle is eligible for calibration."
             )
 
-    print(f"  [1/3] evidence_class: {len(files)} hold-out bundle(s) checked.")
+    print(f"  [1/4] evidence_class: {len(files)} hold-out bundle(s) checked.")
 
 
 def _find_function(tree: ast.Module, name: str) -> ast.FunctionDef | ast.AsyncFunctionDef | None:
@@ -135,7 +162,7 @@ def check_calibration_guard(failures: list[str]) -> None:
         )
 
     if not failures:
-        print(f"  [2/3] calibration guard: {GUARDED_FUNCTION}() raises on {EVIDENCE_CLASS}.")
+        print(f"  [2/4] calibration guard: {GUARDED_FUNCTION}() raises on {EVIDENCE_CLASS}.")
 
 
 def check_non_recursive_discovery(failures: list[str]) -> None:
@@ -192,7 +219,95 @@ def check_non_recursive_discovery(failures: list[str]) -> None:
 
     if not any(f.startswith(f"{rel}:{func.lineno} {DISCOVERY_FUNCTION}") for f in failures):
         patterns = ", ".join(f"{m}({p!r})" for m, p in glob_calls)
-        print(f"  [3/3] discovery isolation: {DISCOVERY_FUNCTION}() uses {patterns} (non-recursive).")
+        print(f"  [3/4] discovery isolation: {DISCOVERY_FUNCTION}() uses {patterns} (non-recursive).")
+
+
+def check_maillard_path_bundles(failures: list[str]) -> None:
+    """Check 4 (2026-08-27, Wave U): the network hold-out must stay a hold-out.
+
+    See the module docstring for why these bundles are the highest-value fit
+    target in the repository and therefore need their own invariant.
+    """
+    flagged: list[tuple[Path, dict]] = []
+
+    # (a) Nothing outside the hold-out directory may claim the flag.
+    for path in sorted(BENCHMARK_ROOT.rglob("*.json")):
+        try:
+            payload = json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        if not isinstance(payload, dict) or payload.get(MAILLARD_PATH_FLAG) is not True:
+            continue
+        rel = path.relative_to(ROOT).as_posix()
+        if HOLDOUT_DIR not in path.parents:
+            failures.append(
+                f"{rel}: carries {MAILLARD_PATH_FLAG}=true but does not live under "
+                f"{HOLDOUT_DIR.relative_to(ROOT).as_posix()}/. A Maillard-path hold-out "
+                "point outside the hold-out directory is discoverable by default "
+                "benchmark discovery and is no longer out of sample."
+            )
+            continue
+        flagged.append((path, payload))
+
+    if not flagged:
+        print(f"  [4/4] maillard-path bundles: none flagged {MAILLARD_PATH_FLAG}=true.")
+        return
+
+    # (b)/(c) Label and execution path.
+    for path, payload in flagged:
+        rel = path.relative_to(ROOT).as_posix()
+        if payload.get("evidence_class") != EVIDENCE_CLASS:
+            failures.append(
+                f"{rel}: {MAILLARD_PATH_FLAG}=true but evidence_class is "
+                f"{payload.get('evidence_class')!r}, must be {EVIDENCE_CLASS!r}."
+            )
+        execution_path = (payload.get("metadata") or {}).get("execution_path")
+        if execution_path != REQUIRED_EXECUTION_PATH:
+            failures.append(
+                f"{rel}: metadata.execution_path is {execution_path!r}, must be "
+                f"{REQUIRED_EXECUTION_PATH!r}. The whole point of these bundles is that "
+                "they run Recommender.predict_from_steps; on any other path they stop "
+                "testing the reaction network and the panel cannot tell."
+            )
+
+    # (d) No fit/calibration record may name them.
+    ids = {
+        str(payload.get("benchmark_id"))
+        for _, payload in flagged
+        if payload.get("benchmark_id")
+    }
+    fit_corpus: list[Path] = []
+    lit_dir = ROOT / "data" / "lit"
+    if lit_dir.is_dir():
+        fit_corpus.extend(sorted(lit_dir.rglob("*.json")))
+    results_dir = ROOT / "results" / "validation"
+    if results_dir.is_dir():
+        fit_corpus.extend(
+            path
+            for path in sorted(results_dir.glob("*.json"))
+            if "refit" in path.name or "rederivation" in path.name
+        )
+    for path in fit_corpus:
+        try:
+            text = path.read_text(encoding="utf-8")
+        except Exception:
+            continue
+        for benchmark_id in sorted(ids):
+            if benchmark_id in text:
+                failures.append(
+                    f"{path.relative_to(ROOT).as_posix()}: names the Maillard-path hold-out "
+                    f"benchmark {benchmark_id!r}. These points are the pre-registration "
+                    "target of the pending rate-calibration wave; a calibration record that "
+                    "names one has destroyed the only out-of-sample evidence the reaction "
+                    "network has."
+                )
+
+    if not any("maillard" in f.lower() or any(i in f for i in ids) for f in failures):
+        print(
+            f"  [4/4] maillard-path bundles: {len(flagged)} flagged, all "
+            f"{REQUIRED_EXECUTION_PATH}, none named by any fit record "
+            f"({len(fit_corpus)} records scanned)."
+        )
 
 
 def main() -> int:
@@ -202,6 +317,7 @@ def main() -> int:
     check_evidence_class(failures)
     check_calibration_guard(failures)
     check_non_recursive_discovery(failures)
+    check_maillard_path_bundles(failures)
 
     if failures:
         print(f"\nFAIL: {len(failures)} hold-out invariant violation(s):\n", file=sys.stderr)

@@ -1,0 +1,91 @@
+{
+  "benchmark_id": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
+  "evidence_class": "external_validation_only",
+  "maillard_path_holdout": true,
+  "source_doi": "10.1016/j.foodres.2026.118600",
+  "source_metadata": {
+    "citation": "Yiltirak, S.; Balagiannis, D. P.; Koek, J.; Koch, J.; Elmore, J. S. Formation of aroma-potent thiols in heat-stable vegetable oil-in-water emulsion models containing ribose and cysteine. Food Research International 2026, 231, 118600.",
+    "crossref_verified": "2026-08-27. CrossRef returns that exact title, Food Research International vol 231, article 118600, issued 2026-05, authors Yiltirak Suleyman / Balagiannis Dimitris P. / Koek Jan / Koch Jens / Elmore J. Stephen.",
+    "origin": "external_literature",
+    "evidence_class": "external_validation_only",
+    "notes": "MAILLARD-PATH HOLD-OUT (Wave U, 2026-08-27). Never use for calibration, refitting, or any promotion decision."
+  },
+  "content_verification": {
+    "access_level": "full_text_plus_publisher_supplementary",
+    "access_route": "Article PDF (CC-BY) from the University of Reading repository, https://centaur.reading.ac.uk/129248/1/1-s2.0-S0963996926002759-main.pdf, fetched with a --resolve override to 46.22.140.67 because centaur.reading.ac.uk does not resolve from this host (the CNAME target reading.eprints-hosting.org was obtained from Google public DNS-over-HTTPS). Supplementary Table S3 from the publisher's own file, https://ars.els-cdn.com/content/image/1-s2.0-S0963996926002759-mmc1.docx, unzipped and read out of word/document.xml.",
+    "retrieval_date": "2026-08-27",
+    "quoted_method": "2.3 (model preparation): 'The models were: i) emulsion system (87% buffer, 3% sucrose ester, 10% canola oil), ii) buffer/oil system (90% buffer, 10% canola oil), iii) buffer/emulsifier (97% buffer, 3% sucrose ester), iv) buffer system (100% buffer). All buffer phases were prepared by dissolving ribose (25 mM) and cysteine (25 mM) in potassium phosphate buffer (0.5 M, pH 5.5).' 2.4 (heating): 'After emulsification, model systems (3 mL) ... were transferred to 20-mL Duran tubes with screw-caps lined with PTFE gaskets (Duran Wheaton Kimble, Werthein, Germany) and they were heated at 100 degC/4 h, 110 degC/2 h, 120 degC/1 h and 130 degC/0.5 h in a heating block equipped with a magnetic stirrer (RS900 reaction station; Electrochemical, Cambridge, UK). ... After heating, the tubes were cooled immediately to room temperature in an ice bath to stop the thermal reaction. ... All systems without precursors were prepared and heated under the same conditions and used as blanks for aroma analysis.' THIS BUNDLE SCORES MODEL (iv), 'Buffer' - the oil-free, emulsifier-free, 100% aqueous arm. The other three arms are NOT ingested: they add canola oil and/or a sucrose ester, which the free-precursor engine cannot represent.",
+    "quoted_quantification": "2.5/2.6: 'An aliquot of sample (30 uL) was mixed and vortexed with 10 uL of 20 ug/L MFT-d3 and FFT-d2, and extracted with 6 mL ice-cold NaOH (1 M) ... derivatization was performed by adding 50 uL of pentafluorobenzyl bromide (PFBBr) solution'. 'selected ion monitoring (SIM) was used for quantification. The ions recorded were m/z 113, 181, 296 for MFT, m/z 116, 181, 297 for MFT-d3, m/z 81, 181, 294 for FFT, m/z 83, 181, 296 for FFT-d2 and m/z 72, 241, 181, 284 for 3M2B. ... Concentrations were determined by using a matrix-matched calibration curve prepared from an unheated emulsion containing equal amounts of internal standards as the samples, where the concentration of the spiked MFT and FFT ranged from 0.2 ug/L to 10 ug/L.'",
+    "quoted_table": "Table S3 (supplementary, Elsevier mmc1.docx). 'Table S3. The concentrations of MFT, FFT and 3M2B in model systems after heating for 4 h, 2 h, 1 h and 0.5 h at 100 degC, 110 degC, 120degC and 130 degC, respectively.' Column headers as printed: MFT (ug/L) | FFT (ug/L) | 3M2B (ug/L). The four BUFFER rows, verbatim: 'Buffer 100 C  6.88+/-0.98aA  1.28+/-0.08cB  1.54+/-0.03aA' ; 'Buffer 110 C  3.29+/-0.06bB  1.46+/-0.19abB  1.16+/-0.08bA' ; 'Buffer 120 C  2.4+/-0.16bcB  1.68+/-0.21aA  1.21+/-0.21bA' ; 'Buffer 130 C  1.71+/-0.12cB  1.62+/-0.11abB  0.69+/-0.06cA'.",
+    "main_text_corroboration": "The main text independently reproduces two of these figures, which is why they are treated as table-grade rather than supplementary-only: 'The formation of MFT was highest during heating at 100 degC for 4 h, reaching 6.88 +/- 0.98 ug/L and 7.57 +/- 0.75 ug/L in buffer and buffer/emulsifier system, respectively, and decreased by 75% and 63% after heating at 130 degC for 0.5 h (p < 0.05).' (6.88 x 0.25 = 1.72, matching the table's 1.71.) And: 'FFT formation tended to increase in buffer and buffer/emulsion systems up to 1.68 +/- 0.21 ug/L and 1.87 +/- 0.06 ug/L with increasing heating temperature and decreasing time.'",
+    "quantification_class": "stable_isotope_dilution_gcms",
+    "quantification_verdict": "ADMISSIBLE, AND THE BEST IN THIS HOLD-OUT. Deuterated analogues of BOTH scored analytes (MFT-d3, FFT-d2) are spiked into the sample before derivatization and extraction, and concentrations come off a matrix-matched calibration curve. This is stable-isotope dilution. It is exactly the class of measurement Wave S2c found the repository did NOT have for the sulfur branch.",
+    "what_is_deliberately_not_ingested": "(a) The three lipid/emulsifier arms - the engine has no sucrose-ester or canola-oil representation. (b) 3-mercapto-2-butanone (3M2B), even though the table quantifies it: no deuterated analogue was spiked for it (only MFT-d3 and FFT-d2 were), AND it is not in data/species/desirable_targets.yml, so the model emits nothing to compare it against. (c) Hexanal from the same paper, which the authors state is semi-quantitative ('assuming that both compounds have similar response factors')."
+  },
+  "significance": {
+    "why_this_is_the_headline_of_the_wave": "Wave S2c (2026-08-27) ended with THE SULFUR BRANCH HAS ZERO ABSOLUTE LITERATURE ANCHORS: cys_ribose_140C_Hofmann1998's MFT 342 ppb / FFT 200 ppb were shown to be interior points of two invented mol% bands in the repo's own abstract-reconstructed markdown. These four rows are the first absolute, isotope-dilution, free-precursor cysteine+ribose MFT and FFT measurements this repository has ever held - and they arrive as a HOLD-OUT, not as an anchor. They must not be fitted.",
+    "no_contamination": "10.1016/j.foodres.2026.118600 returns ZERO grep hits across data/, docs/, src/ and results/ (checked 2026-08-27), as do the author surnames Yiltirak and Balagiannis. No barrier, projection constant or observability factor in this repository has ever seen a number from this paper. Unlike the acrylamide bundles, there is not even a partial Ea transfer: the sulfur branch is uncalibrated, which is the whole point."
+  },
+  "precursor_concentration_provenance": {
+    "status": "FULLY_STATED_IN_SOURCE",
+    "derivation": "'ribose (25 mM) and cysteine (25 mM) in potassium phosphate buffer (0.5 M, pH 5.5)' - quoted verbatim above. Nothing is inferred.",
+    "vessel_and_headspace": "3 mL of sample in a sealed 20-mL Duran tube, i.e. a headspace/liquid ratio of about 5.7 with PTFE-lined screw caps, stirred. The engine has no headspace partition term for a closed vessel, so any volatile lost to that headspace is a systematic bias the model cannot see. Recorded, not corrected.",
+    "residual_caveats": "(a) The buffer was made in tap water, not deionised water (the paper says so), so trace-metal catalysis is uncontrolled. (b) pH was measured only before heating; at 0.5 M phosphate the drift over 4 h at 100 degC should be small but is not reported."
+  },
+  "protein_type": "free",
+  "denaturation_state": 0.0,
+  "precursors": {
+    "D-Ribose": {
+      "concentration_mM": 25.0
+    },
+    "L-Cysteine": {
+      "concentration_mM": 25.0
+    }
+  },
+  "conditions": {
+    "temp_C": 120.0,
+    "ph": 5.5,
+    "water_activity": 0.98,
+    "time_min": 60.0
+  },
+  "metadata": {
+    "tier": "REFERENCE",
+    "family": "free_aa_sulfur",
+    "execution_path": "free_precursor",
+    "notes": "One of a FOUR-POINT temperature/time series from the same buffer model (100 degC/4 h, 110 degC/2 h, 120 degC/1 h, 130 degC/0.5 h). The series is the point: the paper measures MFT FALLING 4.0x across it while FFT RISES 1.27x, a crossover the repository's uncalibrated sulfur branch has never been asked to reproduce."
+  },
+  "reference_volatiles": {
+    "2-Methyl-3-furanthiol (MFT)": {
+      "conc_ppb": 2.4,
+      "uncertainty_pct": 6.67
+    },
+    "2-Furfurylthiol (FFT)": {
+      "conc_ppb": 1.68,
+      "uncertainty_pct": 12.5
+    }
+  },
+  "holdout_targets": {
+    "2-Methyl-3-furanthiol (MFT)": {
+      "target_unit": "ppb",
+      "target_value": 2.4,
+      "target_uncertainty": 0.16,
+      "target_quote": "Table S3 (supplementary, Elsevier mmc1.docx). 'Table S3. The concentrations of MFT, FFT and 3M2B in model systems after heating for 4 h, 2 h, 1 h and 0.5 h at 100 degC, 110 degC, 120degC and 130 degC, respectively.' Column headers as printed: MFT (ug/L) | FFT (ug/L) | 3M2B (ug/L). The four BUFFER rows, verbatim: 'Buffer 100 C  6.88+/-0.98aA  1.28+/-0.08cB  1.54+/-0.03aA' ; 'Buffer 110 C  3.29+/-0.06bB  1.46+/-0.19abB  1.16+/-0.08bA' ; 'Buffer 120 C  2.4+/-0.16bcB  1.68+/-0.21aA  1.21+/-0.21bA' ; 'Buffer 130 C  1.71+/-0.12cB  1.62+/-0.11abB  0.69+/-0.06cA'.",
+      "molar_basis": "ug/L of the whole model system. For the Buffer arm the model system is 100% aqueous buffer, so ug/L is unambiguous and is numerically identical to the model's own ppb basis (ug/L read as ug/kg at 1 kg/L). NO CONVERSION IS APPLIED. For the emulsion arms the same unit would be ambiguous, which is a second reason only the Buffer arm is ingested.",
+      "unit_commensurable": true,
+      "smiles": "Cc1occc1S"
+    },
+    "2-Furfurylthiol (FFT)": {
+      "target_unit": "ppb",
+      "target_value": 1.68,
+      "target_uncertainty": 0.21,
+      "target_quote": "Table S3 (supplementary, Elsevier mmc1.docx). 'Table S3. The concentrations of MFT, FFT and 3M2B in model systems after heating for 4 h, 2 h, 1 h and 0.5 h at 100 degC, 110 degC, 120degC and 130 degC, respectively.' Column headers as printed: MFT (ug/L) | FFT (ug/L) | 3M2B (ug/L). The four BUFFER rows, verbatim: 'Buffer 100 C  6.88+/-0.98aA  1.28+/-0.08cB  1.54+/-0.03aA' ; 'Buffer 110 C  3.29+/-0.06bB  1.46+/-0.19abB  1.16+/-0.08bA' ; 'Buffer 120 C  2.4+/-0.16bcB  1.68+/-0.21aA  1.21+/-0.21bA' ; 'Buffer 130 C  1.71+/-0.12cB  1.62+/-0.11abB  0.69+/-0.06cA'.",
+      "molar_basis": "As for MFT: ug/L of the 100% aqueous Buffer model system, numerically identical to the model's ppb basis. NO CONVERSION IS APPLIED.",
+      "unit_commensurable": true,
+      "smiles": "SCc1ccco1"
+    }
+  },
+  "ordinal_claims": {
+    "within_point": "MFT > FFT at 100 degC/4 h and 110 degC/2 h; FFT > MFT at 120 degC/1 h is FALSE (2.4 vs 1.68) but the gap narrows monotonically; at 130 degC/0.5 h MFT 1.71 vs FFT 1.62 are within one combined SD.",
+    "across_the_series": "MFT falls monotonically 6.88 -> 3.29 -> 2.4 -> 1.71 ug/L as temperature rises and time shortens; FFT rises 1.28 -> 1.46 -> 1.68 then falls slightly to 1.62. Scored across bundles in results/validation/maillard_path_holdout_frozen_predictions.md."
+  }
+}
