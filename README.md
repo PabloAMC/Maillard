@@ -832,6 +832,73 @@ directional report and is trying not to repeat.
 | **Moderate** — verify before deciding | Directional prioritisation and *relative* ranking  | Cys + ribose vs Cys + glucose; pea vs soy matrix comparisons; choosing what to test next |
 | **Low** — exploratory only            | Hypothesis generation                              | Any absolute ppb figure; new protein sources without nearby benchmarks; extrusion claims |
 
+### The kinetic core is the prediction path (2026-08-29, Wave B5 — the propagator cutover)
+
+`maillard compare` and `maillard predict` now route through **`src/kinetic_core/engine.py`**, the
+mass-action reaction network built over Waves B1–B4. The old FAST screening lane is **demoted, not
+deleted**: it is still reachable behind `--lane fast`, it is labelled `ORDINAL SCREENING`
+everywhere it surfaces, and **its absolute ppb no longer reach any user-facing surface** — the
+CLI strips them from both the table and the JSON, and `--absolute` on that lane is refused.
+
+**What the core is.** Three networks that do *not* compose, each with its own integrator:
+
+| lane | steps | adds | pH | measured skill |
+| --- | ---: | --- | --- | --- |
+| trunk | 15 | glucose/fructose/glycine → melanoidins | none | **browning median 1.45x — PASS**, the core's one clean hold-out win |
+| sulfur | 79 | pentoses, cysteine, thiamine, MFT/FFT/furfural | pH trajectory | **15/27** pre-registered hold-out rows |
+| acrylamide | 31 | asparagine, the acrylamide block | none | **0/4** gating rows, 3 of them pre-registered failures with the mechanism named |
+
+The sulfur *steps* are deliberately absent from the acrylamide lane — composing them would spend
+the same cysteine twice — so a request spanning both is declared **unanswerable** rather than
+silently routed. B4 adds the output layer: ratios lead, OAV carries intervals, and every matrix
+shift is reported as a **residual decomposition** ("measured 132x, the named terms explain 2.6x,
+the rest is unexplained residual").
+
+**The core refuses what it cannot name.** It has no lipid-oxidation path, no HMF, no DMHF, and no
+alanine in the sulfur lane. Those are not hard cases; they are compounds and systems the model
+cannot represent, and the engine emits an `EnvelopeDeclaration` with a named reason and **no
+number** rather than a plausible-looking float.
+
+**The final exam, pre-registered and run once** ([`cutover_prereg.md`](results/validation/cutover_prereg.md)
+→ [`cutover_final_exam.md`](results/validation/cutover_final_exam.md)). The first time any build
+wave opened the 21 frozen external-validation bundles:
+
+| | core | old lane |
+| --- | --- | --- |
+| points answered | **23 of 40** (17 declared out of envelope) | 31 of 40 |
+| within 3x | **5 / 23** | 5 / 31 |
+| **paired median fold error** (the 23 points both answer) | **24.93x** | **12.65x** |
+| worst | 515x | 506x |
+
+**Read the paired row: on the points both lanes answer, the core is about 2x WORSE on median
+accuracy than the lane it replaces.** The pre-registration said this outcome was expected and
+allowed for it in advance, but it is a negative result and it is the first thing to know. What the
+cutover buys is the 17 refusals and the localisation of the failures — and one genuine win:
+
+- **Sulfur at 145 °C is the core's best result anywhere: 4/10 within 3x** (xylose FFT 1.14x, xylose
+  MFT 1.17x) where the old lane scores **0/10** and misses by up to 506x.
+- **Sulfur on the low-temperature ladder is 0/8, median 290x.** The temperature axis itself is
+  sound; the failure is on the *time* axis, and the localised cause is B2.1's declared policy that
+  sulfur consumption channels carry **no activation energy**, so a 4 h hold at 100 °C accumulates
+  thiol the sinks never remove. This is the first out-of-sample evidence pricing that policy.
+- **The acrylamide lane has the time shape inverted** — Chang measures acrylamide rising 28 → 1459
+  ppb between 10 and 30 min; the core predicts it falling 6766 → 4041. Its single in-band
+  acrylamide "pass" is a falling curve crossing a rising measurement and **should not be counted as
+  evidence**.
+- **The core returns one number for two arms the source distinguishes** (Chang's acetic-acid and
+  water arms, 1459 vs 832 ppb measured, 4041 predicted for both) because the acrylamide lane has no
+  pH or solvent term. The declaration says so on every such row. It is the cleanest illustration in
+  the repository of what "no pH term" costs.
+
+Four **wiring** bugs were found and fixed during the cutover, none a parameter change. Three were
+found before the exam ran and share one signature — a compound that *has* a measured threshold
+being reported as having none: the B4 OAV table is keyed by species key rather than display name,
+`oav_table` returns its entries under `per_species`, and `protein_type: free` had to be resolved to
+the `water` threshold matrix. The fourth was found after the exam, on the CLI compare path only
+(which the exam does not use, so no exam number is affected): `compare_formulations` returns its
+ratio under `ratio_a_over_b`, and the renderer was looking for `ratio` — so the core lane's
+*primary* output, per-compound ratios, rendered as a dash for every compound.
+
 <!-- BEGIN GENERATED: model-card -->
 
 ### Model card — the validity domain, generated from the artifacts
@@ -1256,11 +1323,21 @@ the output; `SMIRKS_SYSTEM.md` described two templates as "Validated vs. benchma
 when **0 of 14** benchmarks are strict-ready. The structural content below is what survived
 that filter.*
 
-### The two lanes — the single most load-bearing fact about this codebase
+### The lanes — the single most load-bearing fact about this codebase
 
-Every benchmark, and every prediction, runs down **one of two execution paths**, and they
-share almost nothing. Confusing them has produced more wrong conclusions in this repository's
-history than any chemistry error:
+**Updated 2026-08-29 (Wave B5).** There are now **three** things that can produce a number, and
+the shipped default changed. `maillard compare` / `maillard predict` route through the
+**kinetic core** (`src/kinetic_core/engine.py`); the two paths described below are the
+**FAST screening lane**, which still runs behind `--lane fast` with its absolutes withheld, and
+the **matrix lane**, whose absolute path no longer feeds any user-facing output. The measured
+comparison between core and old lane is in the model-card section above — and it is not a
+flattering one for the core on median accuracy (24.93x vs 12.65x on the 23 points both answer).
+What follows describes the two OLD paths, which remain in the tree and still back the benchmark
+artifacts.
+
+Every *benchmark* still runs down **one of two execution paths**, and they share almost nothing.
+Confusing them has produced more wrong conclusions in this repository's history than any
+chemistry error:
 
 | | `free_precursor` | `matrix_only` / `matrix_precursor_augmented` |
 | --- | --- | --- |

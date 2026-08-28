@@ -8702,3 +8702,121 @@ BASELINE but did not improve the already-thrice-offset state. The diagnostic is 
 informative in this form — it is a per-family sensitivity readout rather than a path-dependent
 greedy trace — but it is a different quantity, and the wave that changed it says so.
 
+
+---
+
+## Wave B5 — THE PROPAGATOR CUTOVER (2026-08-29)
+
+The final structural wave. The kinetic core (`src/kinetic_core/`, Waves B1–B4) becomes the
+shipped prediction path; the FAST screening lane is demoted to the ordinal-only front end its
+measured skill supports. **Wiring and scoring only — no parameter, bound, prior or
+initialisation changed in this wave.**
+
+### What shipped
+
+- [x] **B5.1 New engine route.** `src/kinetic_core/engine.py`: one entry module mapping a
+      formulation + process spec (precursors in mM, a piecewise-constant `ThermalProgram`,
+      time, pH, matrix descriptor) onto one of the core's three networks, integrating it, and
+      emitting the B4 output layer (absolutes with reliability bands, OAV tables with
+      intervals, per-compound ratios, rankings, residual decomposition). Parameters are READ
+      from the frozen B1/B2.1/B3 fit reports; the module fits nothing.
+- [x] **B5.2 Explicit envelope.** `EnvelopeDeclaration` with three states
+      (`in_envelope` / `in_envelope_extrapolated` / `out_of_envelope`). A refused request
+      carries NO number and `CorePrediction.require()` raises `OutOfEnvelope`. The lanes do not
+      compose — a request spanning sulfur and acrylamide is declared unanswerable rather than
+      silently routed, because the acrylamide network deliberately omits every sulfur step.
+- [x] **B5.3 CLI cutover.** `compare` / `predict` default to `--lane core`. The FAST lane
+      survives at `--lane fast`, labelled `ORDINAL SCREENING` everywhere, with every absolute
+      ppb stripped from the table AND the JSON by `comparative_cli.screening_payload`;
+      `--absolute` on that lane exits 2. Nothing was deleted. The old `matrix_correction`
+      absolute path no longer feeds a user-facing absolute.
+- [x] **B5.4 The final exam.** Pre-registered in `results/validation/cutover_prereg.md`
+      (written before the scorer existed and before any measured value was read), scored once
+      by `scripts/generators/generate_cutover_final_exam.py`, reported in
+      `results/validation/cutover_final_exam.{md,json}`. First time a build wave opened
+      `data/benchmarks/external_validation/`; opened for scoring only.
+- [x] **B5.5 Docs.** README model-card section (core-first, with the honest numbers) and its
+      lanes section; `VALIDATION_CONTRACT.md` §3G; this entry.
+- [x] **B5.6 Tests.** `tests/unit/test_kinetic_core_b5_cutover.py`, 31 tests. Ran
+      `tests/unit/test_kinetic_core_b*.py` (250 passed) plus
+      `tests/unit/test_comparative_cli_2026_08.py`, which this wave modified.
+
+### The result, stated the unflattering way first
+
+| | core | old lane |
+|---|---|---|
+| points answered (of 40) | **23** (17 declared out of envelope) | 31 |
+| within the 3.0x band | 5/23 | 5/31 |
+| **paired median fold error** (n=23, the only apples-to-apples number) | **24.93x** | **12.65x** |
+| worst | 515x | 506x |
+
+**On the 23 points both lanes answer, the core is ~2x WORSE on median accuracy than the lane
+it replaces.** The pre-registration allowed for this and said so in advance; it is still a
+negative result and the README, the contract and this ledger all lead with it. The unpaired
+medians (core 24.93x over 23 answers, old 10.86x over its own 31) are NOT comparable and are
+never quoted as a comparison.
+
+What the cutover buys:
+
+- **Sulfur at 145 °C: 4/10 within 3x** (xylose FFT 1.14x, xylose MFT 1.17x) where the old lane
+  scores **0/10** and misses by up to 506x. The rebuilt sulfur network's best out-of-sample
+  result.
+- **17 refusals instead of 17 guesses**, each with a named structural reason: no lipid-oxidation
+  path (8 matrix points), no HMF (5), no DMHF (2), no alanine in the sulfur lane (2).
+- **Two failures localised to named policies.** The 0/8 on the Yiltirak 100–130 °C ladder
+  (median 290x) prices B2.1's "consumption channels carry no activation energy" — the
+  temperature axis is sound at fixed hold time, the failure is on the time axis. The acrylamide
+  time-shape inversion (measured 28 → 1459 ppb over 10 → 30 min; core 6766 → 4041) prices B3's
+  saturated `Ea_int1_mel` bound extrapolated 20 °C above its fit point.
+
+### Pre-registration scorecard — three claims held, three did not
+
+| claim | outcome |
+|---|---|
+| 23 in envelope, 17 declared out | **HELD** (exactly) |
+| 2–7 of 23 inside band, most likely 4 | **HELD** (5/23) |
+| median 10x–100x and not better than the old lane | **HELD** (24.93x, worse) |
+| Yiltirak: under-prediction worsening as T falls | **HALF-FALSIFIED** — gradient right (worst rung is 100 °C, 515x), direction wrong (over-predicts at 4/4 rungs) |
+| Lin 2022 fructose is the worst acrylamide point | **FALSIFIED** — it is the best (8.1x vs 242x worst) |
+| acrylamide under-predicts, per Knol 2010 | **FALSIFIED** — every answered acrylamide point over-predicts |
+
+### Contradictions and qualifications, reported not improvised
+
+1. **The "first time any build wave opens these bundles" framing needs one asterisk.** The
+   FILES were never opened before this wave, but **4 of the 34 maillard-path points were
+   already scored in B2.1** under different row names (`hofmann_ribose_pH3/pH7_MFT/FFT`), from
+   the declaration's own row inventory. Both sides were hold-out throughout, so nothing was
+   fitted — but those four are a RE-SCORE, not a first exposure, and they are labelled
+   `*(re-score)*` in the exam table. Recorded in the pre-registration before the exam ran.
+2. **The furfural declension was reached by a different route than pre-registered, and
+   agrees.** The prereg declared Schibilsky's furfural out on the AMINE axis (no alanine in the
+   sulfur lane); the engine reports a LANE CONFLICT (alanine is acrylamide-lane, furfural is
+   sulfur-lane). Same fact, two directions, identical verdict. The machine-derived reason is
+   the more precise one and is what ships.
+3. **One in-band acrylamide "pass" is not evidence.** Chang 30 min at 2.77x is a falling
+   predicted curve crossing a rising measurement — the same model scores 242x on the 10 min
+   point of the same experiment. Flagged in the exam report rather than left in the tally.
+4. **Four wiring bugs found and fixed** (none a parameter change). Three were found BEFORE the
+   exam ran and share one signature — a compound with a measured threshold reported as having
+   none: the B4 OAV table is keyed by species key not display name; `oav_table` returns entries
+   under `per_species`; `protein_type: free` needed resolving to the `water` threshold matrix.
+   The fourth was found AFTER the exam, on the CLI compare path only, which the exam does not
+   exercise — so no exam number is affected: `compare_formulations` returns its ratio under
+   `ratio_a_over_b` and the renderer looked for `ratio`, so the core lane's PRIMARY output
+   (per-compound ratios) rendered as a dash for every compound. Caught only because the cutover
+   was exercised end-to-end by hand; no test would have caught a renderer printing dashes.
+5. **Two S5 CLI tests were updated, not deleted.** `test_{compare,predict}_verb_runs_end_to_end`
+   pinned the FAST artifact names as the DEFAULT; the default changed, so they now assert the
+   core artifacts, and a new `test_fast_lane_still_runs_but_emits_no_absolutes` pins the demoted
+   lane's behaviour.
+
+### Open after B5
+
+- [ ] The core's absolute accuracy is worse than the lane it replaced. The exam localises two
+      causes (no-Ea consumption channels; the saturated acrylamide melanoidin barrier). Neither
+      can be addressed without new fitting, which is out of scope for a cutover wave.
+- [ ] The benchmark artifacts (`summary`, `index`, `external_validation_report`) still run the
+      OLD lanes. Routing them through the core is a separate wave and would change every
+      published panel number.
+- [ ] `rank-experiments` still reads the cached Monte-Carlo panel, which is an old-lane
+      artifact. Unchanged by this wave.

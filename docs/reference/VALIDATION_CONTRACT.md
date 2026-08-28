@@ -551,6 +551,84 @@ is in `results/validation/holdout_prepost_barrier_offset_retirement.md`: the hon
 (10.05× → 10.86×), and the eight-point matrix hold-out cannot see the difference at all
 because it never reaches the reaction network.
 
+### G. The Propagator Cutover (added 2026-08-29, Wave B5)
+
+The shipped prediction path changed. This section states the new contract and the evidence
+behind it.
+
+**What routes where.** `maillard compare` and `maillard predict` default to `--lane core`, the
+mass-action kinetic core at `src/kinetic_core/engine.py`. The FAST lane is reachable at
+`--lane fast` and is **demoted to ordinal screening**: its outputs are labelled
+`ORDINAL SCREENING`, its absolute ppb are stripped from both the rendered table and the JSON
+payload by `comparative_cli.screening_payload`, and `--absolute` on that lane exits 2 with a
+message. `src/matrix_correction.py`'s absolute path no longer feeds a user-facing absolute.
+None of the old code was deleted; the benchmark artifacts (`summary`, `index`,
+`external_validation_report`) still run the old lanes and are unchanged by this wave.
+
+**The envelope is now an explicit output.** The core is three networks that do not compose
+(trunk 15 steps, sulfur 79, acrylamide 31; the sulfur *steps* are deliberately absent from the
+acrylamide lane). Any request whose precursors or targets fall outside a single lane produces an
+`EnvelopeDeclaration` with `state = out_of_envelope`, a named reason, and **no number**;
+`CorePrediction.require()` raises `OutOfEnvelope` rather than returning a value. Conditions
+outside the parameters' measured range produce `in_envelope_extrapolated` — a number *plus* the
+warning, carried together. The core cannot name hexanal, nonanal, 1-hexanol, 2-pentylfuran, HMF
+or DMHF, and has no alanine in the sulfur lane; those are refusals, not failures.
+
+**The final exam.** Pre-registered in `results/validation/cutover_prereg.md` (written before the
+scorer existed and before any measured value was read), scored once by
+`scripts/generators/generate_cutover_final_exam.py`, reported in
+`results/validation/cutover_final_exam.md`. It is the first time a build wave opened
+`data/benchmarks/external_validation/`, and it was opened for **scoring only** — no parameter
+changed in Wave B5.
+
+| | core | old lane |
+|---|---|---|
+| points answered (of 40) | **23** (17 declared out) | 31 |
+| within the 3.0x band | 5/23 | 5/31 |
+| **paired median fold error** (n=23) | **24.93x** | **12.65x** |
+
+**Read the paired row and nothing else for the headline comparison.** The old lane emits a number
+for every point including the ones the core declines; a median over 40 guesses and a median over
+23 answers are different quantities, and the unpaired medians (core 24.93x, old 10.86x over its
+own 31 points) are not comparable. Reporting only those would let the core look good by refusing
+its hardest points — the error this document has already recorded twice. **On the honest
+comparison the core is ~2x WORSE than the lane it replaces**, which the pre-registration allowed
+for in advance and which must be stated before any of the wins.
+
+What the cutover buys, per the exam:
+
+- **Sulfur at 145 °C: 4/10 within 3x** against the old lane's **0/10** on the same points — the
+  strongest out-of-sample result the sulfur network has.
+- **Sulfur on the 100–130 °C ladder: 0/8, median 290x**, and the cause is localised. The
+  temperature axis is sound at fixed hold time; the failure is on the *time* axis, and it prices
+  B2.1's declared policy that sulfur consumption channels carry **no activation energy**.
+- **Acrylamide: the time shape is inverted** (measured 28 → 1459 ppb over 10 → 30 min; core
+  6766 → 4041). Its one in-band acrylamide row is a falling curve crossing a rising measurement
+  and is explicitly **not counted as evidence** in the exam report.
+- **The pH-free lanes return one number for two arms a source distinguishes** (Chang's
+  acetic-acid vs water arms), declared on every affected row.
+
+**Wiring fixes logged (no parameter moved).** Four. Three were found before the exam ran and share
+one signature — a compound with a measured threshold reported as having none: the B4 OAV table is
+keyed by species key not display name; `oav_table` returns entries under `per_species`; and
+`protein_type: free` needed resolving to the `water` threshold matrix (`engine.resolve_matrix`,
+which deliberately leaves a real protein isolate alone so it still returns its honest
+`NoMeasuredThreshold`). The fourth was found after the exam, on the CLI compare path only, which
+the exam does not exercise — so no exam number is affected: `compare_formulations` returns its
+ratio under `ratio_a_over_b` and the renderer looked for `ratio`, so the core lane's primary
+output rendered as a dash for every compound.
+
+**Regenerate with:**
+
+```bash
+./scripts/docker_maillard.sh run "python scripts/generators/generate_cutover_final_exam.py"
+```
+
+**Guarded by** `tests/unit/test_kinetic_core_b5_cutover.py`: envelope enforcement (a refused
+prediction raises rather than returning a number), CLI routing, the absence of any FAST absolute
+in user output, label presence, and the exam-report schema — including the invariant that a
+declined row carries `core_predicted = None` and a non-empty reason.
+
 ## 4. How To Read The Validation Figures
 
 The repository now relies on a small set of figures that each have a distinct purpose.

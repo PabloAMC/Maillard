@@ -549,10 +549,14 @@ def _wrap(text: str, width: int = 92, indent: str = "  ") -> str:
 def render_compare_text(payload: Mapping[str, Any], *, show_absolute: bool = False) -> str:
     out: List[str] = []
     a_name, b_name = payload["a"]["name"], payload["b"]["name"]
+    banner = f" [{SCREENING_LABEL}]" if payload.get("absolutes_withheld") else ""
     out.append("=" * 96)
-    out.append(f"  COMPARE   A = {a_name}   vs   B = {b_name}")
+    out.append(f"  COMPARE{banner}   A = {a_name}   vs   B = {b_name}")
     out.append("=" * 96)
     out.append("")
+    if payload.get("absolutes_withheld"):
+        out.append(_wrap(payload["caveats"]["screening"], indent="  !! "))
+        out.append("")
     axes = payload["axes_exercised"]
     out.append(
         f"  Axes this comparison moves: {', '.join(axes) if axes else '(none -- the two arms are identical)'}"
@@ -612,12 +616,17 @@ def render_compare_text(payload: Mapping[str, Any], *, show_absolute: bool = Fal
 
 def render_predict_text(payload: Mapping[str, Any]) -> str:
     out: List[str] = []
+    banner = f" [{SCREENING_LABEL}]" if payload.get("absolutes_withheld") else ""
     out.append("=" * 96)
-    out.append(f"  PREDICT   {payload['system']['name']}")
+    out.append(f"  PREDICT{banner}   {payload['system']['name']}")
     out.append("=" * 96)
     out.append("")
     out.append("  !! " + "-" * 88)
-    out.append(_wrap(payload["caveats"]["absolute"], indent="  !! "))
+    if payload.get("absolutes_withheld"):
+        out.append(f"  !! {SCREENING_LABEL}")
+        out.append(_wrap(payload["caveats"]["screening"], indent="  !! "))
+    else:
+        out.append(_wrap(payload["caveats"]["absolute"], indent="  !! "))
     out.append("  !! " + "-" * 88)
     out.append("")
     out.append(
@@ -635,21 +644,25 @@ def render_predict_text(payload: Mapping[str, Any]) -> str:
         )
     )
     out.append("")
-    out.append(
-        f"  {'compound':<34} {'range (90% CI), ppb':>28}  {'lane':<18} pathway"
-    )
+    withheld = bool(payload.get("absolutes_withheld"))
+    column = "rank" if withheld else "range (90% CI), ppb"
+    out.append(f"  {'compound':<34} {column:>28}  {'lane':<18} pathway")
     out.append("  " + "-" * 94)
-    for row in payload["rows"]:
-        if row["range_available"]:
+    for index, row in enumerate(payload["rows"], start=1):
+        if withheld:
+            # ORDINAL SCREENING: the ordering survives, the magnitudes do not.
+            band = f"#{index} (ppb withheld)"
+        elif row.get("range_available"):
             band = f"{_fmt(row['range_p5'])} .. {_fmt(row['range_p95'])}"
         else:
-            band = f"{_fmt(row['predicted_ppb'])} (point, no interval)"
+            band = f"{_fmt(row.get('predicted_ppb'))} (point, no interval)"
         out.append(
             f"  {row['compound'][:33]:<34} {band:>28}  "
             f"{(row['lane_reliability'] or '-'):<18} {row['dominant_pathway'] or '-'}"
         )
     out.append("")
-    out.append(_wrap(payload["caveats"]["no_range"]))
+    if not withheld:
+        out.append(_wrap(payload["caveats"]["no_range"]))
     if payload["caveats"].get("sulfur"):
         out.append("")
         out.append(_wrap(payload["caveats"]["sulfur"]))
@@ -702,3 +715,331 @@ def render_rank_text(payload: Mapping[str, Any]) -> str:
 
 def to_json(payload: Mapping[str, Any]) -> str:
     return json.dumps(payload, indent=2, sort_keys=True, default=str)
+
+
+# ---------------------------------------------------------------------------------------
+# Build Wave B5 -- THE PROPAGATOR CUTOVER
+# ---------------------------------------------------------------------------------------
+#
+# From B5, ``compare`` and ``predict`` route through the KINETIC CORE
+# (src/kinetic_core/engine.py). The FAST lane above is NOT deleted -- it is
+# demoted to the ordinal-only front end its measured skill supports, and every
+# surface it reaches is labelled and stripped of absolutes.
+#
+# The two rules this section enforces, mechanically rather than by convention:
+#   1. NO ABSOLUTE ppb FROM THE FAST LANE REACHES A USER-FACING SURFACE.
+#      ``screening_payload`` removes the fields; the CLI applies it to every
+#      FAST payload before rendering or serialising, so there is no path from a
+#      FAST ppb to a terminal.
+#   2. Every FAST surface carries the ORDINAL SCREENING label.
+
+SCREENING_LABEL = "ORDINAL SCREENING"
+
+SCREENING_CAVEAT = (
+    "ORDINAL SCREENING LANE. These are RANKINGS, not concentrations. The FAST lane's "
+    "absolute ppb are withheld from every user-facing surface as of Wave B5, because its "
+    "measured absolute skill does not support them (median 6.0x on the free-precursor "
+    "hold-out, 67-94x on the matrix lane, 1 of 5 genuine extrapolation rows inside the 90% "
+    "CI). What the FAST lane is measured to do is ORDER things: the directional panel scores "
+    "24/35 on strictly independent claims. Use it to sort candidates; use `--lane core` for "
+    "any quantity."
+)
+
+CORE_CAVEAT = (
+    "KINETIC CORE. Absolute concentrations come from the mass-action network (frozen "
+    "B1/B2.1/B3 parameters), and they are reported WITH their envelope declaration. The core "
+    "refuses what it cannot name: it has no lipid-oxidation path, no HMF and no DMHF, and its "
+    "three lanes do not compose. A refusal is an output, not a failure. Read the cutover final "
+    "exam (results/validation/cutover_final_exam.md) for its measured out-of-sample accuracy "
+    "before trusting any number here."
+)
+
+#: Fields removed from every FAST payload before it reaches a user.
+_FAST_ABSOLUTE_FIELDS = ("a_ppb", "b_ppb", "predicted_ppb", "range_p5", "range_p95")
+
+
+def screening_payload(payload: Mapping[str, Any]) -> Dict[str, Any]:
+    """
+    Strip FAST-lane absolutes and stamp the ORDINAL SCREENING label.
+
+    Applied at the CLI boundary to every FAST payload. The ratio, the ordering
+    and the reliability columns survive untouched -- those are the lane's
+    measured product. The ppb columns do not.
+    """
+    out = dict(payload)
+    out["lane"] = "fast"
+    out["lane_label"] = SCREENING_LABEL
+    rows = []
+    for row in out.get("rows", []):
+        clean = {k: v for k, v in dict(row).items() if k not in _FAST_ABSOLUTE_FIELDS}
+        clean["absolute_ppb_withheld"] = True
+        clean["lane_label"] = SCREENING_LABEL
+        rows.append(clean)
+    out["rows"] = rows
+    caveats = dict(out.get("caveats") or {})
+    caveats["screening"] = SCREENING_CAVEAT
+    # The old absolute caveat described numbers this lane no longer emits.
+    caveats["absolute"] = (
+        "NOT APPLICABLE on the screening lane: absolute ppb are withheld here. "
+        "Use `--lane core`."
+    )
+    out["caveats"] = caveats
+    out["absolutes_withheld"] = True
+    return out
+
+
+def _core_process(spec: Mapping[str, Any]):
+    from src.kinetic_core.engine import ProcessSpec, ThermalProgram
+
+    return ProcessSpec(
+        thermal=ThermalProgram.isothermal(
+            float(spec["temp_C"]), float(spec["time_min"])
+        ),
+        ph=float(spec["ph"]),
+        water_activity=float(spec["aw"]) if spec.get("aw") is not None else None,
+        matrix=str(spec.get("matrix") or spec.get("protein_type") or "water"),
+    )
+
+
+def spec_to_core(spec: Mapping[str, Any]):
+    """Turn a validated CLI spec into the engine's FormulationSpec."""
+    from src.kinetic_core.engine import FormulationSpec
+
+    return FormulationSpec(
+        name=str(spec.get("name") or "system"),
+        precursors={str(k): float(v) for k, v in dict(spec["precursors"]).items()},
+        process=_core_process(spec),
+    )
+
+
+def _core_targets(spec: Mapping[str, Any], targets: Optional[Sequence[str]]):
+    from src.kinetic_core.engine import default_targets_for
+
+    if targets:
+        return list(targets)
+    return list(default_targets_for(dict(spec["precursors"])))
+
+
+def predict_core(
+    spec: Mapping[str, Any], *, targets: Optional[Sequence[str]] = None
+) -> Dict[str, Any]:
+    """Single-formulation prediction through the kinetic core."""
+    from src.kinetic_core.engine import engine_metadata, predict
+
+    core_spec = spec_to_core(spec)
+    requested = _core_targets(spec, targets)
+    if not requested:
+        return {
+            "artifact": "maillard_predict_core",
+            "lane": "core",
+            "lane_label": "KINETIC CORE",
+            "system": {"name": core_spec.name, "spec": dict(spec)},
+            "answered": False,
+            "declaration": {
+                "state": "out_of_envelope",
+                "lane": None,
+                "reasons": [
+                    "No precursor in this spec maps to a core species, so no lane "
+                    "can be resolved and no target can be named. The core is a "
+                    "named small-molecule network."
+                ],
+                "warnings": [],
+                "unmapped_precursors": sorted(str(k) for k in spec["precursors"]),
+                "unrepresented_targets": [],
+                "mapped_precursors": {},
+                "mapped_targets": {},
+            },
+            "rows": [],
+            "caveats": {"core": CORE_CAVEAT},
+            "engine": engine_metadata(),
+        }
+
+    run = predict(core_spec, requested)
+    rows: List[Dict[str, Any]] = []
+    oav_payload: Dict[str, Any] = {}
+    if run.answered:
+        oav_payload = dict(run.oav())
+        per_species = oav_payload.get("per_species") or {}
+        for compound, value in run.ranking():
+            # The B4 OAV table is keyed by SPECIES KEY, not display name, and
+            # its entries live under 'per_species'.
+            species_key = run.declaration.mapped_targets.get(compound, compound)
+            rows.append(
+                {
+                    "compound": compound,
+                    "species_key": species_key,
+                    "predicted_ug_per_l": value,
+                    "oav": _oav_summary(per_species.get(species_key)),
+                    "lane": run.declaration.lane,
+                }
+            )
+    return {
+        "artifact": "maillard_predict_core",
+        "lane": "core",
+        "lane_label": "KINETIC CORE",
+        "system": {"name": core_spec.name, "spec": dict(spec)},
+        "answered": run.answered,
+        "declaration": run.declaration.as_dict(),
+        "rows": rows,
+        "oav_table": oav_payload,
+        "run_metadata": dict(run.run_metadata),
+        "caveats": {"core": CORE_CAVEAT},
+        "engine": engine_metadata(),
+    }
+
+
+def _oav_summary(entry: Any) -> Optional[Dict[str, Any]]:
+    """
+    Flatten one entry of the B4 ``oav_table``'s ``per_species`` block.
+
+    A missing threshold is reported as ``available: False`` WITH its reason,
+    never as an OAV of zero -- the B4 layer's whole design point is that the
+    absence of a measured threshold is a state, not a value.
+    """
+    if not isinstance(entry, Mapping):
+        return None
+    interval = entry.get("OAV_interval") or [None, None]
+    if entry.get("OAV_point") is None:
+        return {
+            "available": False,
+            "threshold_state": entry.get("threshold_state"),
+            "reason": (entry.get("diagnostics") or {}).get(
+                "reason", "no measured threshold for this compound in this matrix"
+            ),
+        }
+    return {
+        "available": True,
+        "oav": entry.get("OAV_point"),
+        "low": interval[0],
+        "high": interval[1],
+        "threshold_ug_per_l": entry.get("threshold_ug_per_L"),
+        "threshold_source": entry.get("threshold_source"),
+        "threshold_state": entry.get("threshold_state"),
+    }
+
+
+def compare_core(
+    spec_a: Mapping[str, Any],
+    spec_b: Mapping[str, Any],
+    *,
+    targets: Optional[Sequence[str]] = None,
+) -> Dict[str, Any]:
+    """Two-arm comparison through the kinetic core. Ratios lead, as in B4."""
+    from src.kinetic_core.engine import compare as core_compare
+    from src.kinetic_core.engine import engine_metadata
+
+    core_a, core_b = spec_to_core(spec_a), spec_to_core(spec_b)
+    requested = _core_targets(spec_a, targets) or _core_targets(spec_b, targets)
+    payload = core_compare(core_a, core_b, requested) if requested else {
+        "comparable": False,
+        "reason": "no precursor in either arm maps to a core species",
+        "declaration_a": {},
+        "declaration_b": {},
+    }
+    return {
+        "artifact": "maillard_compare_core",
+        "lane": "core",
+        "lane_label": "KINETIC CORE",
+        "a": {"name": core_a.name, "spec": dict(spec_a)},
+        "b": {"name": core_b.name, "spec": dict(spec_b)},
+        "comparison": payload,
+        "caveats": {"core": CORE_CAVEAT, "ratio": RATIO_CAVEAT},
+        "engine": engine_metadata(),
+    }
+
+
+def _render_declaration(declaration: Mapping[str, Any], out: List[str]) -> None:
+    state = declaration.get("state", "unknown")
+    out.append(f"  ENVELOPE: {state.upper()}   lane: {declaration.get('lane') or '-'}")
+    for reason in declaration.get("reasons") or []:
+        out.append(_wrap(f"REFUSED -- {reason}", indent="    ! "))
+    for warning in declaration.get("warnings") or []:
+        out.append(_wrap(f"declared extrapolation -- {warning}", indent="    ~ "))
+
+
+def render_predict_core_text(payload: Mapping[str, Any]) -> str:
+    out: List[str] = []
+    out.append("=" * 96)
+    out.append(f"  PREDICT [KINETIC CORE]   {payload['system']['name']}")
+    out.append("=" * 96)
+    out.append("")
+    _render_declaration(payload.get("declaration") or {}, out)
+    out.append("")
+    if not payload.get("answered"):
+        out.append("  NO NUMBER IS EMITTED. The core declined this request above.")
+        out.append("")
+        out.append(_wrap(payload["caveats"]["core"]))
+        out.append("")
+        return "\n".join(out)
+
+    out.append(f"  {'compound':<38} {'ug/L (= ppb in water)':>24}  {'OAV':>14}")
+    out.append("  " + "-" * 82)
+    for row in payload["rows"]:
+        oav = row.get("oav") or {}
+        oav_text = (
+            f"{oav['oav']:.3g}" if oav.get("available") and oav.get("oav") is not None
+            else "no threshold"
+        )
+        out.append(
+            f"  {row['compound'][:37]:<38} {_fmt(row['predicted_ug_per_l']):>24}  {oav_text:>14}"
+        )
+    out.append("")
+    out.append(_wrap(payload["caveats"]["core"]))
+    out.append("")
+    return "\n".join(out)
+
+
+def render_compare_core_text(payload: Mapping[str, Any]) -> str:
+    out: List[str] = []
+    a_name, b_name = payload["a"]["name"], payload["b"]["name"]
+    out.append("=" * 96)
+    out.append(f"  COMPARE [KINETIC CORE]   A = {a_name}   vs   B = {b_name}")
+    out.append("=" * 96)
+    out.append("")
+    comparison = payload.get("comparison") or {}
+    if not comparison.get("comparable"):
+        out.append("  NOT COMPARABLE.")
+        out.append(_wrap(str(comparison.get("reason", "")), indent="    ! "))
+        for label, key in (("A", "declaration_a"), ("B", "declaration_b")):
+            declaration = comparison.get(key) or {}
+            if declaration:
+                out.append(f"  arm {label}:")
+                _render_declaration(declaration, out)
+        out.append("")
+        out.append(_wrap(payload["caveats"]["core"]))
+        out.append("")
+        return "\n".join(out)
+
+    ratios = comparison.get("ratios") or {}
+    rows = list(ratios.get("rows") or [])
+    band = ratios.get("reliability_band_x")
+    out.append(
+        f"  {ratios.get('n_resolved', 0)} of {ratios.get('n_compared', 0)} ratios resolve "
+        f"above the same-sample dispersion band"
+        + (f" ({band:.3g}x)" if isinstance(band, (int, float)) else "")
+    )
+    out.append("")
+    out.append(f"  {'compound':<38} {'A/B':>12} {'direction':<14} resolved")
+    out.append("  " + "-" * 88)
+    for row in rows:
+        ratio = row.get("ratio_a_over_b")
+        if not isinstance(ratio, (int, float)):
+            ratio_text = "-"
+        elif ratio != ratio or ratio in (float("inf"), float("-inf")) or ratio == 0.0:
+            # One arm is at zero: a ratio is undefined, not enormous.
+            ratio_text = "A only" if ratio else "B only"
+        else:
+            ratio_text = f"{ratio:.3g}x"
+        # 'within the band' means NOT resolved -- a ratio inside the dispersion
+        # band is reported as unresolved rather than as a small effect.
+        resolved = "no -- inside band" if row.get("within_reliability_band") else "yes"
+        out.append(
+            f"  {str(row.get('compound', '?'))[:37]:<38} {ratio_text:>12} "
+            f"{str(row.get('direction', '-')):<14} {resolved}"
+        )
+    out.append("")
+    out.append(_wrap(payload["caveats"]["ratio"]))
+    out.append("")
+    out.append(_wrap(payload["caveats"]["core"]))
+    out.append("")
+    return "\n".join(out)

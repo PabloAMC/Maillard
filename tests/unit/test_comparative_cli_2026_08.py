@@ -438,19 +438,45 @@ def _run_cli(*args, expect_ok=True):
 
 @pytest.mark.slow
 def test_compare_verb_runs_end_to_end_and_emits_json():
+    """
+    2026-08-29 (Wave B5, the propagator cutover): the DEFAULT lane is now the
+    kinetic core, so the default artifact is `maillard_compare_core`. The FAST
+    lane's payload is still reachable behind `--lane fast` and is asserted in
+    the companion test below.
+    """
     proc = _run_cli("compare", str(EXAMPLE_SPEC), "--json")
     payload = json.loads(proc.stdout)
-    assert payload["artifact"] == "maillard_compare"
-    assert payload["axes_exercised"] == ["sugar_identity"]
-    assert payload["rows"]
+    assert payload["artifact"] == "maillard_compare_core"
+    assert payload["lane"] == "core"
+    assert payload["comparison"]["comparable"] is True
 
 
 @pytest.mark.slow
 def test_predict_verb_runs_end_to_end_and_emits_json():
+    """2026-08-29 (Wave B5): default lane is the kinetic core -- see above."""
     proc = _run_cli("predict", str(EXAMPLE_SPEC), "--system", "a", "--json")
     payload = json.loads(proc.stdout)
-    assert payload["artifact"] == "maillard_predict"
+    assert payload["artifact"] == "maillard_predict_core"
+    assert payload["lane"] == "core"
+    assert payload["answered"] is True
     assert payload["rows"]
+
+
+@pytest.mark.slow
+def test_fast_lane_still_runs_but_emits_no_absolutes():
+    """
+    Wave B5: the FAST lane is DEMOTED, not deleted. It must still run, must be
+    labelled ORDINAL SCREENING, and must not carry a single absolute ppb.
+    """
+    proc = _run_cli("predict", str(EXAMPLE_SPEC), "--system", "a", "--lane", "fast", "--json")
+    payload = json.loads(proc.stdout)
+    assert payload["artifact"] == "maillard_predict"
+    assert payload["lane_label"] == "ORDINAL SCREENING"
+    assert payload["absolutes_withheld"] is True
+    assert payload["rows"], "the screening lane must still rank compounds"
+    text = json.dumps(payload)
+    for field in ("predicted_ppb", "range_p5", "range_p95", "a_ppb", "b_ppb"):
+        assert f'"{field}"' not in text, f"{field} leaked from the screening lane"
 
 
 @pytest.mark.slow

@@ -31,13 +31,18 @@ if str(ROOT) not in sys.path:
 from src.comparative_cli import (  # noqa: E402
     SPEC_TEMPLATE,
     SpecError,
+    compare_core,
     compare_systems,
     evaluate_system,
     load_spec_document,
+    predict_core,
     predict_system,
+    render_compare_core_text,
     render_compare_text,
+    render_predict_core_text,
     render_predict_text,
     render_rank_text,
+    screening_payload,
     select_system,
     split_comparison_document,
     to_json,
@@ -50,6 +55,17 @@ def _add_common(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--top", type=int, default=None, help="show only the N largest rows")
     parser.add_argument("--target-tag", default=DEFAULTS.default_target_tag)
     parser.add_argument("--minimize-tag", default=DEFAULTS.default_minimize_tag)
+    parser.add_argument(
+        "--lane",
+        choices=("core", "fast"),
+        default="core",
+        help=(
+            "core (default): the mass-action kinetic core -- absolute concentrations with "
+            "an explicit envelope declaration, and a refusal where it cannot predict. "
+            "fast: the ORDINAL SCREENING lane -- rankings only; its absolute ppb are "
+            "withheld from every user-facing surface (Wave B5)."
+        ),
+    )
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -132,18 +148,44 @@ def run_compare(args: argparse.Namespace) -> int:
     if not args.spec:
         raise SpecError("compare needs a spec. Try `maillard compare --template`.")
     spec_a, spec_b = _load_two_arms(args.spec)
+
+    if args.lane == "core":
+        if args.absolute:
+            print(
+                "note: --absolute is redundant on the core lane; the kinetic core reports "
+                "absolute concentrations by default, with their envelope declaration.",
+                file=sys.stderr,
+            )
+        payload = compare_core(spec_a, spec_b)
+        print(to_json(payload) if args.json else render_compare_core_text(payload))
+        return 0
+
+    if args.absolute:
+        print(
+            "error: --absolute is not available on the screening lane. The FAST lane's\n"
+            "  absolute ppb are withheld from every user-facing surface (Wave B5): its\n"
+            "  measured skill is ordinal, not quantitative. Re-run with --lane core.",
+            file=sys.stderr,
+        )
+        return 2
     run_a = evaluate_system(spec_a, target_tag=args.target_tag, minimize_tag=args.minimize_tag)
     run_b = evaluate_system(spec_b, target_tag=args.target_tag, minimize_tag=args.minimize_tag)
-    payload = compare_systems(run_a, run_b, top_n=args.top)
-    print(to_json(payload) if args.json else render_compare_text(payload, show_absolute=args.absolute))
+    payload = screening_payload(compare_systems(run_a, run_b, top_n=args.top))
+    print(to_json(payload) if args.json else render_compare_text(payload, show_absolute=False))
     return 0
 
 
 def run_predict(args: argparse.Namespace) -> int:
     document = load_spec_document(args.spec)
     spec = select_system(document, source=str(args.spec), arm=args.system)
+
+    if args.lane == "core":
+        payload = predict_core(spec)
+        print(to_json(payload) if args.json else render_predict_core_text(payload))
+        return 0
+
     run = evaluate_system(spec, target_tag=args.target_tag, minimize_tag=args.minimize_tag)
-    payload = predict_system(run, top_n=args.top)
+    payload = screening_payload(predict_system(run, top_n=args.top))
     print(to_json(payload) if args.json else render_predict_text(payload))
     return 0
 
