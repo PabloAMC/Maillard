@@ -353,3 +353,33 @@ the sulfur branch: FFT is consumed by protein disulfides (1:1 and 2:1 adducts)
 — a protein-matrix thiol sink the model does not yet have. The derived
 ambient-rate bound (t1/2 37-760 days at 3 wt%) says the covalent channel
 CANNOT explain ambient losses and bites only at process temperature.
+
+## Amendment 6 — 2026-08-29 (Meynier 2004, wave K4e — the covalent-sink verdict)
+
+meynier2004 (Int. Dairy J. 14:681, figure-only paper, Fig. 6 digitised at
++/-0.1 mol%): NO FIT ROWS — third consecutive covalent-adduct paper to yield
+none. Ten hold-out gates and twelve do-not-use entries adopted as proposed in
+the dossier §13. Binding rulings:
+1. The covalent aldehyde-protein channel is now BRACKETED two-sided: K4d's
+   lower bound and this paper's upper bound overlap at t1/2 ~ 37-74 days
+   ambient (two labs, two decades, two protein families, two techniques).
+   Carry k2(hexanal-Lys) <= 2.5e-5 M^-1 s^-1 at 20 C as a ceiling with the
+   t-2-hexenal pair (5.3-7.9e-5 Lys / 1.5-2.4e-4 His) as measured analogues.
+2. VERDICT, computed not asserted: covalent + reversible binding does NOT
+   close the hexanal matrix gap — covalent supplies ~0.06% of the 1304x
+   log-shift on a threshold-panel timescale; reversible ~25%. The matrix
+   module's ratio-reporting design stands. The one surviving corner: covalent
+   extent is uncapped (Lys in vast excess), so it becomes relevant at process
+   temperature ONLY if Ea >~ 70 kJ/mol — and that Ea is UNMEASURED in every
+   corpus source. NEW NAMED WET-LAB GAP: Ea of aldehyde-lysine adduct
+   formation on food proteins.
+3. K4d's binary gate G-2 is REPLACED by the ordinal form (hexanal DOES
+   cross-link at high dose; enals do so at >=4x lower dose).
+4. Derived covalent/reversible split adopted as a constraint: hexanal binding
+   >=98% reversible on headspace timescales, ~2/3 reversible for t-2-hexenal;
+   ~22-33% of Meynier2002's "partition coefficient" is irreversible chemistry
+   (sizes that dossier's M-4 flag).
+5. Do-not-use: the paper's abstract partition claim (imported from Meynier
+   2003 — double-count hazard); its Fig. 2 Trp-fluorescence dataset (authors'
+   own disclaimer); fluorescence as a covalent-extent proxy anywhere
+   (measured 7x anti-correlated in one experiment here).
