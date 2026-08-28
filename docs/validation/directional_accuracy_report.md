@@ -30,6 +30,13 @@ document is the first measurement of whether the model gets **directions** right
 
 ## 2. Headline
 
+> **This is the Wave S2 measurement, not the current one.** Two later waves moved rows. The
+> shipped tree scores **21/29**, not the 18/29 below. Jump to
+> [CURRENT STANDING](#current-standing--the-panel-as-it-scores-on-the-shipped-tree) at the end
+> of this file for the numbers that are live, and read this section as the baseline the delta
+> is measured from. The pre-fix numbers are kept verbatim because deleting them would delete
+> the delta.
+
 | Bucket | Agree | Evaluable | Rate | Unevaluable |
 |---|---|---|---|---|
 | **Strictly independent (headline)** | **18** | **29** | **62%** | 8 |
@@ -831,3 +838,161 @@ moisture held fixed, and **nothing quantitative**. What changed is narrow and sh
 narrowly: **the pH direction for nitrogen heterocycles is no longer systematically inverted.**
 pH is 4/7, aw is 0/3, and 4/10 combined is still at or below chance. **The model still licenses
 no pH or moisture recommendation.** The runtime guard Wave S2 asked for is still the right call.
+
+---
+
+# CURRENT STANDING — the panel as it scores on the shipped tree
+
+**Added 2026-08-28 (Wave S5).** Everything above this line is left verbatim: §2 is the Wave S2
+measurement, the addendum is the Wave S1b re-score. Neither was ever updated for the wave that
+landed after them, so a reader who stopped at the addendum carried away **20/29** when the
+shipped tree scores **21/29**. This section is the single place that states the *current* number,
+and it is the section machine-read by `src/directional_reliability.py`, which is what the
+`maillard` CLI prints as its per-axis reliability tags. **Nothing here is a new measurement.**
+The one row that moved is the Wave T4 Heyns-consistency fix, recorded with its mechanism in
+`tasks/audit_remediation.md` (Wave T4): `SUG-12` (HMF, fructose vs glucose) flipped MISS → OK,
+carrying `sugar_identity` 7/8 → 8/8 and the headline 20/29 → 21/29. Waves S3 and S4 both
+re-scored the panel and both found it **byte-identical** at 21/29.
+
+**Updated 2026-08-28 (Wave W).** Eleven claims were added to the panel from five
+interlibrary-loan papers whose full text this repository had never held (`HOF-01`…`HOF-04`
+from Hofmann & Schieberle 1998, `MOT-01`…`MOT-06` from Mottram & Nobrega 2002 — see §W below
+for what each one is and why four of them are unevaluable). Six are evaluable and all six are
+strictly independent. **They scored 3/6, which is worse than the panel average and pulls the
+headline down from 21/29 (72%) to 24/35 (69%).** The movement is not evenly spread and the
+direction is the interesting part: the two new pH rows both AGREE, taking `ph` from 4/7 to
+6/9, while `sugar_identity` — the category this report called *Trustworthy* at 8/8 — takes its
+first two misses and drops to 9/11. **The category the panel was most confident about is the
+one the new evidence damaged, and the category it called broken is the one that improved.**
+
+| bucket | agree | evaluable |
+|---|---:|---:|
+| strictly independent (headline) | 24 | 35 |
+| system-overlap | 6 | 6 |
+| fit-adjacent (excluded from the headline) | 8 | 9 |
+| independent, excluding ph and moisture_aw | 18 | 23 |
+| independent, ph and moisture_aw only | 6 | 12 |
+
+**Read the last two rows, and the category table below, with their denominators in mind — they
+are different denominators and conflating them inflates the score.** The
+category table sums to **30/41**, which is the *screening* bucket: the 35 independent claims
+plus the 6 system-overlap ones. Excluding pH and water activity it sums to 24/29 (83%). But
+all six overlap rows sit outside pH and aw, so the strictly-independent version of that same
+statement is **18/23 (78%)**, which is the number to quote alongside the 24/35 headline. All
+twelve pH and aw rows are independent, which is why 23 + 12 = 35 exactly.
+
+| category | agree | evaluable |
+|---|---:|---:|
+| sugar_identity | 9 | 11 |
+| additive_cysteine | 4 | 4 |
+| temperature | 6 | 8 |
+| time | 2 | 2 |
+| lipid_lane | 2 | 2 |
+| matrix_identity | 1 | 1 |
+| ranking | 0 | 1 |
+| ph | 6 | 9 |
+| moisture_aw | 0 | 3 |
+
+Stated in one line, on the independent bucket throughout: **24/35 overall; 18/23 (78%)
+excluding pH and water activity; 6/12 (50%) on pH and water activity, which is at chance;
+0/3 on water activity alone.** Twelve further claims are unevaluable and are counted in
+neither column (§7, §W).
+
+**What moved, and it is not flattering.** Before Wave W this section read *21/29 overall;
+17/19 (89%) excluding pH and water activity*. The 89% was the number this report leaned on
+hardest — it is the basis of the §8 licence to use the model for screening with pH and
+moisture held fixed. Six genuinely out-of-sample rows took it to 78%. The `sugar_identity`
+category, previously **8/8 and labelled *Trustworthy* without qualification**, is now 9/11:
+the model separates glucose from fructose by 52× (MFT) and 154× (FFT) where Hofmann &
+Schieberle measure them within 1.3× of each other, in the same table, the same run and the
+same lab. That is not a near miss on an ordering; it is two orders of magnitude of spurious
+structure between two hexoses. The `ranking` category appears for the first time with a
+single independent row and it is a miss (`MOT-03`). Against that, `ph` improved from 4/7 to
+6/9 on two rows that AGREE — the first pH rows this panel has ever scored from a source with
+a stated buffer system, and they agree with the Hofmann pH hold-out's direction as well.
+
+**The licence in §8 and §A6 is unchanged by this section.** The model licenses screening claims
+of the form "which arm gives more of X" with pH and moisture held fixed, and nothing
+quantitative. It licenses no pH recommendation and no moisture recommendation.
+
+### How to update this table
+
+Re-score the panel with the scratchpad runner described in §9, then edit the two tables above
+and say in one line which rows moved and why. The verdict thresholds the CLI applies to these
+counts (`trust` / `caution` / `do-not-use`) live in `src/directional_reliability.py` and are
+stated in the README model card; they are deliberately *not* stored here, so that this file
+stays a record of measurement and nothing else.
+
+---
+
+## §W. The Wave W rows (2026-08-28)
+
+Eleven claims added from five papers the repository obtained by interlibrary loan on
+2026-08-28 and read in full for the first time. **Nothing in the model was tuned to build
+these rows, and Wave W fitted no constant to anything.** All eleven are `fit_status:
+independent`.
+
+| Claim | Category | Observable | Literature | Model | Outcome | Predicted values (ppb) |
+|---|---|---|---|---|---|---|
+| HOF-01 | sugar_identity | MFT | `A>B` | `A<B` | **MISS** | cysteine + D-fructose = 1.729; cysteine + D-glucose = 90.23 |
+| HOF-02 | sugar_identity | FFT | `A>B` | `A<B` | **MISS** | cysteine + D-fructose = 5.388; cysteine + D-glucose = 828.3 |
+| HOF-03 | sugar_identity | FFT | `A>B` | `A>B` | agree | ribose dry 180 °C = 5545; glucose dry 180 °C = 2897 |
+| HOF-04 | moisture_aw | MFT, FFT | `A>B` | `-` | n/a | — (triply confounded in the source; see below) |
+| MOT-01 | ph | MFT | `A>B` | `A>B` | agree | pH 4.2 = 1258; pH 5.6 = 103.2 |
+| MOT-02 | ph | FFT | `A>B` | `A>B` | agree | pH 4.2 = 1720; pH 5.6 = 454.8 |
+| MOT-03 | ranking | MFT | `A>B` | `A<B` | **MISS** | MFT = 103.2; FFT = 454.8 |
+| MOT-04 | sugar_identity | MFT | `A>B` | `-` | n/a | — (ribose-5-phosphate not in the resolver) |
+| MOT-05 | sugar_identity | MFT | `A>B` | `-` | n/a | — (IMP not in the resolver) |
+| MOT-06 | ph | MFT | `A<B` | `-` | n/a | — (no buffer term; no pH trajectory) |
+
+**3 agree / 6 evaluable. Four unevaluable, and each one names what would make it evaluable.**
+
+### The two misses that matter most
+
+**HOF-01 / HOF-02 — the hexose pair.** Hofmann & Schieberle's Table 1 measures fructose and
+glucose with cysteine under identical conditions: FFT 3.2 vs 2.8 µg, MFT 2.5 vs 1.9 µg. Both
+pairs are within 1.32×, which is at the edge of the paper's own ±10% replicate spread — the
+honest reading of the source is *these two hexoses are the same to well within a factor of
+two*, with fructose marginally ahead. The model puts glucose ahead of fructose by **52× on
+MFT and 154× on FFT**. The sign is wrong and the magnitude is wrong by two orders. This is
+the first evidence the panel has ever held on hexose-vs-hexose discrimination, and the model
+fails it badly. It also demotes the previous `sugar_identity` 8/8: every one of those eight
+rows was pentose-vs-hexose or thiol-vs-thiol, i.e. comparisons across a large real gap. The
+model is good at large gaps and inventing large gaps where none exist is the same defect
+seen from the other side.
+
+**MOT-03 — the MFT/FFT branch ratio.** Both Hofmann (SIDA, absolute) and Mottram (Tenax,
+relative) put MFT above FFT in buffered cysteine/ribose near pH 5; the model puts FFT above
+MFT by 4.4×. Note the caveat carried on the claim itself: Mottram's response factor of 1
+makes his cross-compound comparison weak evidence. Hofmann's SIDA numbers are the authority
+here (19.8 vs 12.1 µg at pH 5.0), and they agree with Mottram's sign, so the model is
+contradicted by both. The corresponding absolute rows are scored in
+`data/benchmarks/hofmann1998_ribose_cysteine_145C_20min_pH5.json`, where the model
+over-predicts FFT by 12.3× and MFT by 2.4× — the same defect measured on the absolute scale.
+
+### The unevaluable four are the finding, not a gap in the work
+
+- **HOF-04** (dry vs aqueous within one sugar) changes temperature, time *and* water content
+  at once, and the source assigns no water activity to the dry arm. A hit would be luck and
+  a miss uninterpretable. *Would become evaluable with:* a dry-heat source that reports an
+  a<sub>w</sub>, or an aqueous arm at matched 180 °C / 6 min.
+- **MOT-04 / MOT-05** need ribose-5-phosphate and inosine-5′-monophosphate, neither of which
+  is among the 19 species `src/precursor_resolver.py` resolves. MOT-05 is the sharper one:
+  IMP is the dominant ribose reservoir in post-mortem muscle, so the model cannot reason
+  about the actual precursor pool of cooked meat. *Would become evaluable with:* the species
+  **and** a dephosphorylation step — the species alone would produce a confidently wrong
+  answer, since the paper's own mechanism is dephosphorylation.
+- **MOT-06** (buffer catalysis) needs both a buffer term the model does not have and a pH
+  *trajectory* it cannot represent: the unbuffered arm drifts from pH 5.6 to 3.9 during the
+  run and the model integrates at one fixed pH. No pH was assigned to it, deliberately —
+  picking 5.6 or 3.9 would have been this repository inventing the number it then scored
+  itself against.
+
+### Why Mottram & Nobrega is ordinal-only, permanently
+
+Wave S2b predicted at ~85% confidence that this paper's values were Tenax-relative. The paper
+settles it in its own words: *"This allowed comparison of the relative contributions the
+volatiles made to the headspaces of the different systems but did not provide absolute
+concentrations in the aqueous solutions."* It can never become an absolute benchmark here, at
+any future date — the quantity it reports is not the quantity the model predicts. See
+`sources.mottram2002.ordinal_only_reason` in the panel YAML for the full quote.

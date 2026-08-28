@@ -6762,3 +6762,658 @@ provenance discipline of the data file, and that the double-count guard fires.
   number); `a_p` says pea binds more (25e-5 vs 16e-5); and the shipped registry says soy
   RELEASES 2.2098x more than pea. Two open-access sources contradict each other and neither
   prints a hexanal number. This is the sharpest remaining evidence gap in the lane.
+
+---
+
+## Wave S5 — the comparative front door, a generated model card, and nine fewer documents (2026-08-28)
+
+**Mandate:** build one user-facing entry point around the product thesis the owner approved —
+*comparisons cancel systematic error; the model's measured skill is ordinal* — generate the
+validity domain instead of writing it, and finish with **fewer** documents than we started.
+No new science, no re-tuning. All three constraints held; the file count is **−13**.
+
+### (a) THE PREMISE, RESTATED FROM THE EVIDENCE RATHER THAN ASSERTED
+
+| lane | out-of-sample absolute accuracy | ordinal accuracy |
+|---|---|---|
+| free precursor | median **6.04×**, worst 52.6×, 12/21 within 10× | 8/12 within-point orderings, **3/6** series directions |
+| protein matrix | median **67.4–93.7×** across all three observability modes | — |
+| genuine extrapolation | **1/5** inside the 90% CI | — |
+| directional panel | — | **21/29** independent, **17/19** excluding pH/aw |
+
+Nothing above is new. The wave's contribution is that a user now meets those numbers at the
+point of use rather than in a README they may not read.
+
+### (b) THE STALE-ARTIFACT FINDING — the reason the card is generated, not written
+
+`docs/validation/directional_accuracy_report.md` was still publishing **20/29** as its
+post-fix headline. The shipped tree scores **21/29**: Wave T4's Heyns-consistency fix flipped
+SUG-12 (HMF, fructose vs glucose) MISS → OK, carrying `sugar_identity` 7/8 → 8/8, and Waves S3
+and S4 both re-scored the panel byte-identically at 21/29. The ledger recorded it; the
+artifact did not. **Three waves published a number one point below the truth, in the file
+whose entire purpose is to state that number.**
+
+A second, sharper version of the same defect was found while wiring the tags: the report's
+**category table and its bucket table have different denominators.** The categories sum to
+27/35 — the *screening* bucket (29 independent + 6 overlap) — so deriving "excluding pH and
+aw" by summing categories yields 23/25 (92%), where the headline-comparable figure is
+**17/19 (89%)**. Both are true; mixing them inflates the score by three points, and the first
+draft of the model card did exactly that. Fixed by adding two explicitly-labelled bucket rows
+to the report and having the generator **read** them rather than derive them, with the
+arithmetic written out in place. All ten pH/aw rows are independent, which is why 19 + 10 = 29
+exactly and why the six overlap rows all sit outside pH and aw.
+
+`docs/validation/directional_accuracy_report.md` gains a `## CURRENT STANDING` section — the
+one place stating the live counts, machine-read by the CLI and the card — plus a pointer at
+§2 so no reader stops at the Wave S2 numbers. **Everything above that section is left
+verbatim; the pre-fix numbers are the evidence for the delta.**
+
+### (c) THE COMPARATIVE INTERFACE — `python scripts/maillard.py`
+
+Three verbs, thin orchestration over existing machinery:
+
+| verb | leads with | reliability |
+|---|---|---|
+| `compare` | per-compound **A/B ratios**, dominant (rate-limiting) pathway per side | per-axis tag from the panel, weakest axis governs |
+| `predict` | a **range**, not a point; model-card caveats inline | lane tag per compound |
+| `rank-experiments` | the VoI queue, promoted to a first-class verb | — |
+
+Absolute ppb appear only behind `--absolute`, and the caveat ships **in the same block** as
+the numbers, never as a footnote. `--json` emits the payload; `--top N` trims.
+
+**The reliability tags are read from the artifact at runtime, not compiled in.** Re-score the
+panel, edit the CURRENT STANDING table, and the tool's advice moves — there is no second copy
+of the numbers. A missing or unparseable report **raises**; it does not fall back to a baked-in
+default, because a silent default is precisely how a number outlives its evidence.
+
+Thresholds, stated in the card and applied without judgement: `trust` ≥ 80% on ≥ 3 claims,
+`caution` ≥ 60% or too few claims, `do-not-use` < 60% **or unmeasured**. Under those, a sugar
+swap reports `trust (8/8)`, a pH sweep `do-not-use (4/7)` and a moisture change
+`do-not-use (0/3)` — the conclusion §A6 reaches in prose, now enforced at the point of use.
+Bundling a pH change with a sugar change does **not** launder the pH miss: the weakest axis
+governs, and that is a test.
+
+**What the ratio interval is, and is not.** `A_p5/B_p95 .. A_p95/B_p5` — the ordinary
+independent-error combination of two existing envelopes, labelled in output as the
+conservative bound it is. The comparative thesis says the two arms' errors are strongly
+correlated and the true interval is far tighter. **Nobody has measured that correlation, so
+this wave models none.** Stating the bound and naming it as too wide is the honest position;
+inventing a correlation coefficient to tighten it would have been new science.
+
+**One plumbing change to `src/`, no science:** `MaillardPipeline.last_route_traces`, a
+side-channel exactly like the existing `last_skipped_formulations`, exposing the
+`debug_paths` / `debug_channel_flux` payload `predict_from_steps` already returned and
+`evaluate_all` already discarded. Not a `FormulationResult` field, so no debug payload enters
+any serialized report. Measured inert: the 281-test regression subset is green and the
+determinism test still passes.
+
+**A presentation defect found and fixed:** `predicted_ppb` carries **three** aliases per
+compound (canonical SMILES, species name, display label) for downstream benchmark matching.
+Read naively, the table printed every compound three times. Rows are now built from
+`result.targets`, which is already one per compound. The same aliasing is why the sulfur and
+lipid caveats match on substrings — a caveat that fires on only one spelling is a caveat that
+silently does not fire.
+
+**Also surfaced rather than smoothed over:** `predict` prints the run-level tier, which for a
+cys/ribose system reads `high`. That is the *scope* vocabulary, not a validation claim, and
+the README says there is no high trust tier. The renderer now says so on the line below,
+naming 0/14 strict-ready — one honest sentence beats renaming a field the rest of the
+codebase uses.
+
+### (d) THE MODEL CARD — `scripts/generators/generate_model_card.py` → README.md
+
+Reads the directional report, both hold-out artifacts, the mode comparison, the benchmark
+panel (**recomputed live**, because `benchmark_summary.json` is gitignored and a card that
+read it would print "artifact absent" on every fresh clone — the self-excusing-skip pattern
+Wave J2 removed), the `no_verifiable_source` census (recounted), the sulfur benchmark's anchor
+status (**checked, not asserted**) and the three gates (**actually run**). Emits a claim-type ×
+system-class table with trust/caution/do-not-use verdicts, spliced between
+`<!-- BEGIN GENERATED: model-card -->` markers. **No new standalone document**; the
+machine-readable twin lands in gitignored `results/validation/model_card.json`.
+
+The repo had **no** marker precedent — `README.md` contained zero HTML comments and no
+generator has ever written it (`generate_report_visual_examples.py` only *prints a reminder*
+to copy by hand). This wave establishes the convention. `--check` makes drift a failing
+command; a test asserts the committed card equals what the artifacts currently say.
+
+**The three honest headline sentences are computed, and one of them is verified rather than
+recited:** the sulfur claim only renders if `cys_ribose_140C_Hofmann1998.json` actually shows
+every `measured_volatiles` entry carrying `value_status: no_verifiable_source`. If a real
+anchor ever lands, the card stops making the claim by itself.
+
+**A census contradiction was caught before it shipped.** The recount finds **166** records
+carrying `no_verifiable_source` in a status field; README's test-pinned figure is **120**.
+Both are right under different definitions — 120 is the `source_status` key specifically, which
+the recount reproduces **exactly**. The card now leads with 120, states the 46-record
+remainder and its keys, and points the 98-numeric / 80-runtime split at the guard test that
+owns it. Publishing 166 beside a pinned 120 would have read as drift in a document whose
+purpose is to prevent drift.
+
+**A negative result worth recording:** no artifact state can make the card say `trust` about an
+absolute concentration. That is a test, not a convention.
+
+### (e) CONSOLIDATION — 30 → 17 documents, 9157 → 7387 lines
+
+| document | disposition | lines |
+|---|---|---:|
+| `docs/research/archives/` ×5 digests | **DELETED** — md5-identical to `data/Gemini_Deep_Research/` | −1529 |
+| `docs/research/archives/README.md` | folded into `data/Gemini_Deep_Research/README.md`, **DELETED** | −66 |
+| `docs/Plant Protein Thermal Processing Research.md` | **DELETED** — a *sixth* md5-identical duplicate, zero references, and the only one with **no warning header at all** | −173 |
+| `docs/architecture.md` | folded into README (corrected), **DELETED** | −195 |
+| `docs/reference/SMIRKS_SYSTEM.md` | folded into README (corrected), **DELETED** | −37 |
+| `docs/reference/COMMAND_REFERENCE.md` | folded into QUICKSTART appendix, **DELETED** | −85 |
+| `docs/guides/CURATING_LIPID_OXIDATION_ANCHOR.md` | folded into VALIDATION_CONTRACT §3E-bis, **DELETED** | −79 |
+| `docs/notebooks/2_Food_Scientist_Walkthrough.md` | **DELETED** — a changelog for a notebook nothing references | −87 |
+| `Max_ref.azure.txt` | **DELETED** — a tracked 0-byte file at the repo root | −0 |
+| README.md | +ARCHITECTURE, +model card, +CLI Step 0 | +204 |
+| QUICKSTART.md | +command reference, +CLI section | +125 |
+| VALIDATION_CONTRACT.md | +anchor-curation methodology | +76 |
+| directional_accuracy_report.md | +CURRENT STANDING | +66 |
+| **NET** | **−13 documents** | **−1770** |
+
+**KEPT, deliberately, against the count.** `docs/guides/GLOSSARY.md` (71 lines) was a
+fold candidate and is not folded. It is the corrected post-audit version, it is the only place
+the three colliding tier vocabularies are disentangled at length, and pouring 71 dense lines
+into a 1300-line README makes the README worse. *The directive is fewer documents, not fewer
+good documents;* there were enough genuine husks to make the number without deleting a live
+one. Recorded here so the decision is visible rather than silently taken.
+
+**The duplicate deletion is a provenance question, and it was treated as one.** The archive
+README argued the five copies were "the evidence trail" for findings that trace a shipped
+constant to a digest and nothing else. That argument protects the **content**, and the content
+is untouched: every file was byte-identical (`cmp`-verified, not assumed) to a copy under
+`data/Gemini_Deep_Research/`, which carries the stronger warning README. Deleting a second copy
+destroys no evidence; keeping an unwarned copy under an authoritative-looking `docs/` path was
+itself the defect Wave T3 opened, and that file's own "Preferred long-term disposition" section
+prescribed this consolidation. Its unique finding — the dangling `pathways.md` — was folded
+into the surviving README **before** the delete.
+
+**Eight citation strings repaired, two of which were already broken** before this wave:
+`data/lit/computational_priors.json` cited `docs/Maillard_Plant_based.md` and
+`data/lit/matrix_family_coverage_registry.json` cited `docs/Elicit - … Report.md`; **neither
+path has ever existed** (both files lived under `docs/research/archives/`). Repointing them is a
+fix, not a move. **`pathways.md` was NOT repointed** — it exists nowhere, and the three headers
+naming it supply the odour thresholds that are the denominator of every OAV in
+`src/sensory.py`. Its name is kept and flagged in place in all three files. Substituting a
+plausible source for an absent one is the defect this remediation exists to remove. Carried
+`[P]`, unchanged.
+
+`citation_gate.DIGEST_SOURCE_RE` keeps its `docs/research/archives` alternative even though the
+directory is gone, with the reason written in place: a stale citation string still naming that
+path must keep tripping the detector rather than reading as clean.
+
+**Pre-audit claims corrected in the folds, not carried across.** `docs/architecture.md` opened
+its trust surface with "**High trust — use freely**" and advertised the retired
+`bounded_calibration` / `transferred_literature` / `surrogate_family` vocabulary;
+`SMIRKS_SYSTEM.md` called two templates "Validated vs. benchmarks" at 0/14 strict-ready. Both
+claims were dropped, not relocated. What survived: the **two-lane design** (`free_precursor` vs
+`matrix_only`, and why three network waves left all eight matrix hold-out points bit-identical),
+`trunk_kinetics` and why it deliberately ships unwired, the benchmarks→gates→artifacts→README
+data flow, and the SMIRKS Tier A/B provenance with the MW-300 Da cap stated as the **scientific
+limitation** it is (it is why 13-HPODE at 312 Da is pruned and the lipid chain cannot reach
+hexanal).
+
+**Two stale links fixed in passing**, both pre-existing: `SCIENTIFIC_REFERENCE.md` pointed four
+links at `docs/use_cases/`, a directory that has never existed (the files are in
+`docs/protocols/`), and `data/lit/README.md` carried an absolute
+`file:///Users/pabloantoniomorenocasares/...` URI. `CONTRIBUTING.md`'s `docs/` map omitted four
+real subtrees and named three files that no longer exist; it also asserted "No Python execution
+code" under `data/` while `data/reactions/curated_pathways.py` sits there. Corrected in place.
+
+### (f) GATES + TESTS
+
+| Gate | Result |
+|---|---|
+| `scripts/ci/holdout_guard.py` | **PASS** — 4/4; 16 bundles, 12 flagged, 34 fit records scanned |
+| `scripts/ci/citation_gate.py` | **PASS** — **92** files (was 98), **909** DOI-bearing fields (was 1013), **287** unique DOIs (was 331), 0 waivers. The drop is entirely the six deleted duplicate digests; no DOI was removed from any *data* file, and the surviving copies carry the same DOIs under `data/Gemini_Deep_Research/`. |
+| `scripts/ci/fit_target_gate.py` | **PASS** — 2/2 |
+
+Targeted only, per the owner directive (**no full-suite run**):
+
+* `tests/unit/test_comparative_cli_2026_08.py` — **39 passed** (new: CLI shape per verb,
+  rendering honesty, reliability wiring, model-card generation and staleness)
+* affected docs/front-door tests — `test_honest_headline_guards.py`,
+  `test_front_door_ux_2026_08.py`, `test_wave_i_chemistry.py`: **121 passed**
+* regression subset `-k "matrix or headspace or benchmark or observability or
+  external_validation or uncertainty or honest_headline"`: **281 passed, 1 xfailed, 0 failed**
+
+The new tests deliberately pin **no predicted ppb, ratio or fold error** — pinning a number
+this wave produced is the circularity Rounds 1–3 removed. They pin behaviour: that the tags
+follow the artifact (verified by pointing the loader at a synthetic report and watching the
+verdicts invert), that a missing report raises rather than defaults, that absolutes never reach
+a user without their caveat, that unmeasured reads as `do-not-use`, and that no artifact state
+can produce a `trust` verdict on an absolute concentration.
+
+**One packaging defect caught at the end.** `data/cli_examples/compare_ribose_vs_glucose.yml`
+— the worked example the CLI smoke test runs against — was caught by `.gitignore:33`'s
+blanket `data/*`. Untracked, its test would have passed locally and failed on a fresh clone:
+the self-excusing-skip pattern Wave J2 removed. Un-ignored with the reason written in place.
+
+### (g) [P] CARRIED FORWARD
+
+- [P] **`pathways.md` still does not exist** and is still cited by three runtime-critical data
+  files. Unchanged by this wave by design; re-sourcing per-compound odour thresholds is a
+  retrieval job, not a documentation one.
+- [P] **`docs/notebooks/results/maillard_results.db`** is a generated SQLite artifact tracked
+  inside `docs/`, contrary to CONTRIBUTING's own "`results/` is gitignored" rule. Left in place:
+  a notebook may read it, and deleting tracked binary data on a documentation pass is the wrong
+  wave for that call.
+- [P] **Neither `docs/notebooks/*.ipynb` is referenced by anything**, and their committed
+  outputs may embed pre-audit numbers. No gate scans notebook outputs.
+- [P] **The ratio-interval correlation is unmeasured.** The comparative thesis is that errors
+  cancel between arms; the CLI can only publish the bound that assumes they do not. A
+  measurement of that correlation — e.g. paired hold-out arms scored as ratios — would be the
+  single highest-value addition to the interface, and would convert a caveat into a number.
+- [P] **`docs/reference/SCIENTIFIC_REFERENCE.md` is date-stale** ("as of 2026-03-18"): its
+  "well supported" and numeric-anchor tables predate the entire citation audit and have never
+  been reconciled against it. It is referenced by path from `src/reporting.py:1102`, so it
+  cannot simply be deleted; it needs a content pass.
+- [P] **`docs/slr_benchmark_evaluation.md` carries a dead branch reference** (`real_tests`) and
+  a March date header, while two `data/lit/` registries name it as their `source_document`.
+
+---
+
+## Wave W — the ILL payoff: the sulfur branch gets real anchors, and fails them
+
+**2026-08-28.** Five previously-paywalled papers were delivered by the owner into
+`data/articles/` (gitignored; **no PDF is committed**). This wave read all five in full and
+turned them into data. It fitted **nothing** — no barrier, no observability factor, no
+threshold, no prior was touched anywhere in the tree.
+
+### The headline, stated the unflattering way round
+
+**"THE SULFUR BRANCH HAS ZERO ABSOLUTE LITERATURE ANCHORS" IS NO LONGER TRUE. It now has
+three, and the model fails all three.** That sentence had been the audit's signature finding
+since Wave S2c; it is corrected in README.md, AUDIT.md, VALIDATION_CONTRACT.md,
+`src/barrier_constants.py`, `src/comparative_cli.py`, `src/model_card.py`,
+`src/curated_pathways.py`, `data/benchmarks/maillard_validation_benchmarks.md` and the two
+tests that pinned it. The three anchors are the pH-5.0 aqueous rows of Hofmann & Schieberle
+1998 Table 1, and the model misses them by **12.27×, 29.58× and 14.46×** (six comparisons,
+mean 0.92 dex). *The branch went from unanchored to anchored-and-measurably-wrong, which is
+the direction of travel this audit wanted.*
+
+### (a) The anchor, and what the primary source settled
+
+`hofmann1998_ribose_cysteine_145C_20min_pH5` — **FFT 121 ppb, MFT 198 ppb**, from cysteine
+3.3 mmol + ribose 10.0 mmol in **100 mL** of 0.5 mol/L phosphate at pH 5.0, **145 °C / 20 min**
+in a laboratory autoclave, quantified by SIDA against [²H₂]-FFT and [²H₃]-MFT. Native ppb is
+legitimate here and this is the whole difference from the retired file: **the volume is
+printed in the table footnote**, so µg-per-100-mL × 10 = µg/L is a single stated
+multiplication with no assumed concentration. The retired benchmark's ppb needed a
+mol%→ppb conversion resting on an unattested 10 mM basis — a free multiplicative parameter.
+
+**Every table was independently re-read from the PDF by this wave, not taken on trust from
+the orchestrator's transcription.** All ten matched.
+
+Three things the primary source settled that no amount of secondary retrieval could:
+
+1. **342 and 200 ppb appear nowhere in the paper.** Wave S2b's forensic conclusion — that
+   they were a repo-internal derivation from `maillard_validation_benchmarks.md` §1.3 — is
+   **confirmed from the source**. The two files are cross-linked in both directions;
+   `cys_ribose_140C_Hofmann1998.json` is kept, unedited, as the provenance record, and its
+   numbers are not resurrected, copied or reconciled.
+2. **§1.3's invented band was not merely unsourced, it was wrong by an order of magnitude,
+   in the optimistic direction.** Its `~0.02–0.05 mol %` MFT for ribose+cysteine, checked
+   against the real Table 1 (19.8 µg from 10.0 mmol): **0.00173 mol %**, about **12× below
+   the bottom of the band.** Recorded in `maillard_validation_benchmarks.md` itself.
+3. **The conditions block was not even a faithful copy of the protocol it was borrowed
+   from.** Mottram & Nobrega's real system is 140 °C / 30 min at **50 mM** each; the retired
+   file declared 10 mM. Wave S2b could not check that; now it is checked, and it is wrong too.
+
+**The contract, derived from the measurement and from nothing else.** Table 1 footnote b:
+*"Data are mean values of triplicates and differed by not more than 10%."* Every other table
+in the paper references it. 10% ⇒ `max_ratio` **1.10**, `mean_abs_log10_error` **0.0414**
+(= log₁₀ 1.10). It is set **at** the measurement's precision, not above it: the failure mode
+being cleaned up is the opposite one — the retired 1.45× / 0.09 dex was ~1.7× *tighter* than
+its own invented source's spread. Note the shipped contract is **stricter** than the global
+free-precursor default (1.5 / 0.10), which was available and would have been looser. Nothing
+was widened so a row would pass. The model fails both.
+
+### (b) The fit/hold-out split — decided and written into the files BEFORE ingestion
+
+**The split is on an axis, not on convenience: the scored panel is the pH-5.0 slice; the
+hold-out is everything off pH 5.0, plus one sugar held back.**
+
+| | rows | why |
+|---|---|---|
+| **PANEL** `data/benchmarks/` | ribose, glucose, fructose @ pH 5.0 | the classic condition, and the one the rest of the panel already sits at |
+| **HOLD-OUT** `external_validation/maillard_path/` | xylose @ pH 5.0; ribose & glucose @ pH 3.0 and pH 7.0 | xylose is the one executable sugar the panel never sees; the pH axis is the pre-registration target of the pending pH/aw work |
+
+The load-bearing half is the pH series. Table 2 contains a **sign-crossing** claim — from
+ribose both odorants rise monotonically as pH falls 7→5→3, while from glucose and rhamnose
+both go through a **maximum at pH 5.0** — and that is precisely the acid test of any future
+pH term. Putting it in the panel would make it fittable; putting it in the hold-out
+pre-registers it. **No row is on both sides. Nothing was fitted to anything.**
+`holdout_guard` passes (21 bundles, 17 maillard-path).
+
+**The dry-heat rows are deliberately NOT ingested as absolute rows anywhere.** The paper
+states no water activity and no system mass for the silica-gel system, so both the engine's
+`water_activity` input and the µg→ppb denominator would have to be **invented** — the same
+class of move that produced 342/200. They are ingested as *ordinal* claims instead, which
+need no such number.
+
+### (c) Model vs measurement — every new row, scored once and frozen
+
+| | benchmark | analyte | measured | predicted | fold | \|dex\| |
+|---|---|---|---:|---:|---:|---:|
+| PANEL | ribose pH 5.0 | FFT | 121 | 1485.08 | **12.27×** | 1.089 |
+| PANEL | ribose pH 5.0 | MFT | 198 | 468.58 | 2.37× | 0.374 |
+| PANEL | glucose pH 5.0 | FFT | 28 | 828.35 | **29.58×** | 1.471 |
+| PANEL | glucose pH 5.0 | MFT | 19 | 90.23 | 4.75× | 0.677 |
+| PANEL | fructose pH 5.0 | FFT | 32 | 5.39 | 0.17× | 0.774 |
+| PANEL | fructose pH 5.0 | MFT | 25 | 1.73 | **0.07×** | 1.160 |
+| HOLD-OUT | xylose pH 5.0 | FFT | 96 | 1485.08 | 15.47× | 1.189 |
+| HOLD-OUT | xylose pH 5.0 | MFT | 143 | 468.58 | 3.28× | 0.515 |
+| HOLD-OUT | ribose pH 3.0 | FFT | 229 | 1662.91 | 7.26× | 0.861 |
+| HOLD-OUT | ribose pH 3.0 | MFT | 553 | 2145.61 | 3.88× | 0.589 |
+| HOLD-OUT | ribose pH 7.0 | FFT | 12 | 641.02 | 53.42× | 1.728 |
+| HOLD-OUT | ribose pH 7.0 | MFT | 25 | 161.32 | 6.45× | 0.810 |
+| HOLD-OUT | glucose pH 3.0 | FFT | 7 | 951.23 | 135.89× | 2.133 |
+| HOLD-OUT | glucose pH 3.0 | MFT | 3 | 1519.27 | **506.42×** | 2.705 |
+| HOLD-OUT | glucose pH 7.0 | FFT | 6 | 343.39 | 57.23× | 1.758 |
+| HOLD-OUT | glucose pH 7.0 | MFT | 4 | 22.85 | 5.71× | 0.757 |
+
+**Mean |log₁₀| — panel 0.924 dex (6 rows), hold-out 1.304 dex (10 rows).** The hold-out is
+0.38 dex worse than the panel on rows from the *same paper, same table, same lab, same day*.
+That gap is not out-of-distribution generalisation failure; it is the model degrading as it
+moves off pH 5.0.
+
+#### The pentose ≫ hexose test — the first same-conditions measurement this claim has ever been scored against
+
+| ratio | measured (Table 1) | model | verdict |
+|---|---:|---:|---|
+| **MFT ribose/glucose** | **10.42×** | **5.19×** | model has **half** the real pentose advantage |
+| **FFT ribose/glucose** | **4.32×** | **1.79×** | model has **41%** of it |
+| MFT ribose/fructose | 7.92× | **270.99×** | 34× too large |
+| FFT ribose/fructose | 3.78× | **275.64×** | 73× too large |
+| MFT ribose/xylose | 1.38× | **1.0000×** | model cannot distinguish two pentoses at all |
+| FFT ribose/xylose | 1.26× | **1.0000×** | ditto |
+
+The repo's own pentose≫hexose figure has ranged **3.4×–18.3×** across waves; the measurement
+is **10.42×** (MFT) and the shipped model says **5.19×**. So the claim is real, the model has
+the sign right, and it **under-states the effect by about 2×**. That is the most useful thing
+in this wave: a number that was previously only bounded by which wave you asked.
+
+**And two failures that were invisible before:**
+
+- **The model invents a 154× gap between two hexoses that measure within 1.3× of each other.**
+  Fructose vs glucose: measured FFT 3.2 vs 2.8 µg, MFT 2.5 vs 1.9 µg. Model: glucose ahead by
+  52× (MFT) and 154× (FFT), with the **sign wrong** as well. Being good at large real gaps and
+  inventing large fake ones is the same defect seen from two sides.
+- **Ribose and xylose are byte-identical to six significant figures** — the network reaches
+  both through one pentose lane. The hold-out row is structurally guaranteed to fail on the
+  ordinal axis, and that is the finding, not a defect in the row.
+
+#### The sign-crossing pH claim (hold-out): the model gets the pentose right and the hexose wrong
+
+| | measured pH 3 / 5 / 7 | shape | model | shape | |
+|---|---|---|---|---|---|
+| ribose FFT | 229 / 121 / 12 | monotonic ↓pH ⇒ ↑ | 1663 / 1485 / 641 | monotonic | ✅ |
+| ribose MFT | 553 / 198 / 25 | monotonic | 2146 / 469 / 161 | monotonic | ✅ |
+| glucose FFT | 7 / **28** / 6 | **max at pH 5** | 951 / 828 / 343 | monotonic | ❌ |
+| glucose MFT | 3 / **19** / 4 | **max at pH 5** | 1519 / 90 / 23 | monotonic | ❌ |
+
+The model applies one pH shape to both sugars, which is exactly what a family-level pH term
+must do — and exactly what the measurement forbids. **This is now pre-registered, out of
+sample, and cannot be fitted to.**
+
+### (d) The step-level gap list — what the engine cannot execute, and what it would need
+
+Tables 3, 4, 6, 7, 8 and 10 are the repo's **first constraints on individual steps rather
+than end-to-end lumps**, and they are the reason this paper was worth the ILL. **None of them
+is executable today.** `src/precursor_resolver.py` resolves **19** species
+(`data/species/precursors.yml`); every step-level precursor in the paper is missing:
+
+| precursor | Hofmann tables | status | what the row would constrain |
+|---|---|---|---|
+| hydroxyacetaldehyde (glycolaldehyde) | 6, 8, 10 | **MISSING** | the C2 half of Wave P's C2+C3 lane |
+| 2-oxopropanal (methylglyoxal/pyruvaldehyde) | 6, 7 | **MISSING** | the C3 half |
+| mercapto-2-propanone | 7, 8, 9, 10 | **MISSING** | Wave P's lane, measured end to end |
+| norfuraneol (NF) | 4, 5, 10 | **MISSING** | the route Wave N retired — Table 5 is the evidence |
+| 3-deoxyribosulose | 3 | **MISSING** | the deoxyosone branch point |
+| furan-2-aldehyde (furfural) as a *precursor* | 3 | **MISSING** | FFT's dominant route (60× ribose) |
+| hydrogen sulfide (H₂S) | 3, 4, 7 | **MISSING** | the sulfur donor in every step-level row |
+| rhamnose, glucose-6-phosphate, maltose | 1, 2, 5 | **MISSING** | 3 more Table 1 rows |
+| ribose-5-phosphate, IMP | *(Mottram)* | **MISSING** | the meat-relevant precursor pool |
+| thiamine | 10 | present | but Table 10's row is single-precursor |
+
+**What would be needed, precisely:** adding a species to `precursors.yml` is *not* sufficient
+and would be actively harmful — the resolver would then return a confidently wrong answer for
+a precursor the reaction network has no route from. Each row needs the species **and** the
+step: e.g. ribose-5-phosphate needs a dephosphorylation step (the paper's own mechanism), and
+furan-2-aldehyde-as-precursor needs the H₂S addition step that Table 3 measures.
+
+**Two things the paper hands us for free, recorded now so a later wave does not have to
+re-derive them:**
+
+- **The mol% basis is documented.** mol% = mol product / mol limiting precursor × 100,
+  verified against Table 4 (ribose 15.1 µg MFT / 114.17 g·mol⁻¹ = 1.323e-7 mol; per 1 mmol =
+  0.0132% ≈ the printed 0.01%). Any future mol% target now converts honestly.
+- **Table 5 is independent support for Wave N's route correction, from the very paper whose
+  misattributed values funded the norfuraneol barrier fit.** Ribose makes **54 530 µg NF** and
+  only **19.8 µg MFT** — a factor of ~2750 — while glucose's ratio is ~7. The authors' own
+  conclusion: *"MFT formation might not run exclusively via NF as the key intermediate."*
+- Table 10 ranks the routes: hydroxyacetaldehyde/mercapto-2-propanone **268.1 µg (0.24 mol%)**
+  > NF/H₂S 211.2 > NF/cysteine 50.8 > **thiamin 8.2**. **Wave P was right to add the C2+C3
+  lane** — it is the single most effective measured MFT route, and thiamin is 33× weaker.
+
+### (e) What the other four papers unlocked — every old → new
+
+#### Bi et al. 2020 (`10.1021/acs.jafc.9b07711`) — the two-branch question, answered
+
+Wave I flagged that the hold-out hexanal value 1260 ppb was **exactly** OAV 280 × the repo's
+own unsourced 4.5 ppb threshold, and could not tell from inside the repo whether the paper
+reported the concentration or the OAV. **The paper answers it: the concentration is the
+measured quantity and the OAV is derived from it.** Table 4's footnote h defines OAV as the
+*"ratio of concentration to odor threshold"*; the concentration column carries a standard
+deviation and the OAV column does not. The repo was running the paper's own arithmetic
+backwards and landing on the right number by construction.
+
+| | old | new | fold change |
+|---|---|---|---|
+| raw pea hexanal | 1260.0 ppb, `derived_from_oav_and_repo_threshold` | **1260.0 ppb**, `primary_source_table_value_verified`, ±114 (9.05%) | **1.000×** |
+| roasted pea hexanal | 324.0 ppb, same | **324.0 ppb**, same, ±34.3 (10.59%) | **1.000×** |
+
+**The number does not move. This is a provenance correction and an uncertainty addition, and
+it is reported as that rather than dressed up as a fix.** What changes is what the value is
+entitled to be called: it was "a consistency check against our own threshold"; it is now an
+external measurement with a stated replicate spread. **The coincidence is explained**: Bi et
+al.'s own threshold column prints **4.5 µg/kg** for hexanal, attributed to van Gemert — the
+same compilation the repo uses, which is why the division came out exact. That corroborates
+the repo's 4.5 ppb ODT's provenance; it is **not** an independent measurement of it.
+
+Quantification class recorded honestly: external calibration curve against
+2,4,6-trimethylpyridine, R² 0.997, triplicate — **not** isotope dilution, so weaker than the
+Hofmann and Yiltirak sulfur anchors, and labelled as such rather than levelled up.
+
+#### Mottram & Nobrega 2002 (`10.1021/jf0200826`) — ORDINAL, permanently
+
+**Wave S2b predicted "Tenax-relative at ~85% confidence". CONFIRMED, and the paper says it
+itself:** *"This allowed comparison of the relative contributions the volatiles made to the
+headspaces of the different systems **but did not provide absolute concentrations in the
+aqueous solutions**."* Table 1's footnote: *"Approximate quantities in headspace (ng/mmol of
+sugar)"*. **It can never become an absolute benchmark here, at any future date** — the
+quantity it reports is not the quantity the model predicts. Six ordinal claims added to
+`docs/validation/directional_claims_panel.yml`, where the panel is weakest.
+
+#### Brands & van Boekel 2001 (`10.1021/jf001430b`) — 39 trajectory series
+
+`data/lit/timeseries/brands_sugar_casein_120C_pH68.yml` held **endpoints only** and said so:
+*"Reading points off those figures would be eyeball estimation at low resolution and was NOT
+attempted. Those numbers are NOT in this repository."* They are now — **not** from the thesis
+scan, but from the journal paper's own figures. **The paper contains ZERO tables**, so
+`data_quality: table` is unachievable from this source by anyone, ever; every series is
+labelled `figure_readoff` under a new `source_2001` block kept separate from the thesis data.
+
+**Four independent verification checks, all passed and all recorded:** (1) the digitized
+"acids by HPLC" series from Fig. 3 equals formic + acetic digitized separately from Figs. 1/2
+to within 2% at every point; (2) the digitized pH endpoints reproduce the paper's prose pH
+drops (0.3 and 0.4 units) to 0.03; (3) Fig. 4's two y-axes stand in exactly the 1:2 ratio the
+paper's own ε = 500 implies; (4) **this wave re-read Figure 7 and Figure 1's left panel by
+eye from upsampled renders, without reference to the digitizer** — Fig. 7 agreed on all 18
+values to one least-significant digit, Fig. 1's glucose series on all 8 to ~1 mmol/L.
+
+Four superimposed points are carried `ambiguous: true` rather than resolved; one point (Fig. 6
+fructose formic acid at t=15) is **absent from the paper** and is omitted, not interpolated.
+Stated plainly: the ±1% digitization error **is not the experiment's error bar** — the paper
+reports no error bars at all.
+
+Three things the file now holds that it did not: the **Amadori intermediate maximum**
+(rises to ~1.1 mmol/L at t=10–15, then falls — a direct observation of an intermediate being
+consumed, which no endpoint can show); the **aldose/ketose contrast** (Amadori flat at zero
+for the whole fructose run against a peak for glucose); and the **no-protein caramelisation
+control** (browning is ~6× protein-dependent for glucose but only ~2× for fructose).
+`reports_no_kinetic_parameters` is recorded loudly: the paper fits **no** rate constants and
+says so four times — if any constant here is ever attributed to this DOI, it is misattributed.
+
+#### Bi et al. 2022 (`10.1016/j.foodchem.2022.133044`) — identity verified, and the answer is "no"
+
+Identity confirmed from the PDF: *"Non-covalent interactions of selected flavors with pea
+protein"*, Food Chemistry **389** (2022) 133044. **The hexanal × pea protein constant this
+campaign most wanted is `K = 684.46 ± 109.43 M⁻¹`** (Table 1, 37 °C, pH 7.6) — **and it is
+NOT usable**, for exactly the reason `binding_constants.yml` already documented for
+`wongprasert2024_ppi_klotz`: K is defined per **mole** of protein and **the paper never states
+a protein molar mass**. Promoting it would put a free multiplicative parameter under the most
+load-bearing constant in the matrix lane. Recorded in
+`not_usable_without_protein_molar_mass`, with the numbers, so a later wave can promote it.
+
+What **is** usable is the PRV retention percentage, measured at a stated g/L loading and
+needing no molar mass: **hexanal 71.72% bound at 10 g/L pea protein**, pH 7.6, 37 °C
+(`bi2022_hexanal_pea_protein_prv`), plus (Z)-2-penten-1-ol 29.29% and (E)-2-octenal 79.31%.
+It sits at the real in-pea concentration (~12.6 µM), far inside the dilute-ligand limit the
+Langmuir form requires.
+
+**Did the binding mode's hold-out score improve? NO — and it could not have.**
+
+| mode | median fold error | before Wave W |
+|---|---:|---:|
+| fitted_factors | 93.68× | 93.68× |
+| unit_observability | 67.42× | 67.42× |
+| binding_physics | 68.18× | 68.18× |
+
+**Unchanged to every digit.** Two reasons, both structural: the new record enters the
+cross-check, not the prediction path (the shipped mode predicts from `a_p × Pow` alone, and
+patching in a per-compound measured constant for hexanal *only* would make the mode a hybrid
+of measured physics and per-compound patching — the exact pattern this audit removes); and
+the Bi 2020 hold-out lanes are **raw pea flour**, for which no protein loading can be
+asserted, so the binding mode applies no correction there at all.
+
+**What the real constant did instead is falsify the binding model on the compound that
+matters most.** The zero-parameter cross-check gained **its first hexanal row**:
+
+> `bi2022_hexanal_pea_protein_prv` | hexanal | 10.00 g/L | measured **71.72%** | predicted
+> **13.09%** | residual **−58.63 points**
+
+That is **by far the largest residual in the table** (previous worst: +22.22). And the paper
+explains it: *"hydrogen bonding was dominant in the non-covalent interactions between hexanal
+and pea protein"*, in explicit contrast to the two other compounds it studied. **The shipped
+binding physics is a purely hydrophobic partition model driven by Pow — so the one compound
+the matrix lane leans on hardest is the one its functional form is least entitled to
+describe.** Recorded as a mechanism-level caveat in `qualitative_only`; nothing was changed
+for it, because no better form is specified well enough to implement. Two further caveats
+recorded: the paper's own Ksv (14.205 L/mol) and Klotz K (684.46 M⁻¹) disagree **~48×** at the
+same temperature in the same buffer and the authors never mention it; and binding percentage
+**collapses** above 0.25 mM (a rise-then-fall a single-site Langmuir cannot produce at all).
+
+### (f) Panel and directional aggregates — what moved, and which direction
+
+| aggregate | before | after | why |
+|---|---|---|---|
+| Panel size | 14 | **17** | 3 Hofmann anchors |
+| Strict-ready | 0/14 | **0/17** | all three new anchors FAIL |
+| Predictive benchmarks w/o blocking gaps | 0/6 | **0/9** | denominator +50%, numerator still zero |
+| MC panel | 11 benchmarks, 35 rows | **14, 41** | |
+| Honest external-literature CI coverage | 0/3 @ **0.75 dex** | **4/9 @ 2.63 dex** | **see below — this is not an improvement** |
+| Directional, strictly independent | 21/29 (72%) | **24/35 (69%)** | new rows scored 3/6 |
+| …excluding pH and aw | 17/19 (89%) | **18/23 (78%)** | |
+| `sugar_identity` | **8/8 "Trustworthy"** | **9/11** | first two misses ever |
+| `ph` | 4/7 `do-not-use` | **6/9 `caution`** | both new pH rows AGREE |
+| `ranking` | — | **0/1** | new category, one row, a miss |
+
+**The CI-coverage move must not be quoted alone.** The old guard's message said: *"If this
+rises, verify it is the model getting closer and not the interval getting wider — check
+`median_ci_width_log10` in the same breath."* **It is the interval getting wider**: 0.746 →
+2.627 dex, i.e. from a factor of 5.6 end-to-end to a factor of **~424**. Four of the six new
+rows "cover" their measurement with intervals **2.90, 2.95, 3.04 and 3.74 dex** wide — an
+interval spanning three orders of magnitude contains almost anything, so those hits are close
+to vacuous. **No prior, threshold or interval was widened; the population changed, not the
+model.** The two rows that *miss* (fructose FFT and MFT) are the informative half. The guard
+now carries a two-sided width assertion so the vacuity cannot be quietly quoted away.
+
+**The `ph` promotion is real but small, and came from evidence, not from a threshold.**
+`CAUTION_MIN_RATE` is still 0.60 and `TRUST_MIN_RATE` still 0.80 — the test asserts both.
+6/9 = 0.667 clears the floor by two rows, both from one source. `caution` here means "no
+longer demonstrably worse than a coin", **not** "trustworthy"; the §8/§A6 licence still says
+the model licenses no pH recommendation, and the re-pinned guard now asserts the invariant
+that actually matters — **pH and water activity are never `trust`** — rather than one
+particular tag.
+
+**The `sugar_identity` demotion is the one to read.** It was 8/8 and labelled *Trustworthy*
+without qualification. Every one of those eight rows was pentose-vs-hexose or thiol-vs-thiol
+— comparisons across a large real gap. Given a hexose-vs-hexose comparison for the first
+time, the model fails it by two orders of magnitude with the sign wrong.
+
+### (g) Files
+
+**New (8):** `data/benchmarks/hofmann1998_{ribose,glucose,fructose}_cysteine_145C_20min_pH5.json`;
+`data/benchmarks/external_validation/maillard_path/mp_holdout_hofmann1998_{xylose_…_pH5,ribose_…_pH3,ribose_…_pH7,glucose_…_pH3,glucose_…_pH7}.json`.
+
+**Corrected:** the two `external_validation_bi_2020_*_hexanal.json` bundles (provenance +
+uncertainty, values unchanged, prior notes retained verbatim); `binding_constants.yml`
+(+1 source, +3 percent-bound records, +1 not-usable Klotz record, +3 qualitative mechanism
+records, Bi-2020 lane note corrected); `brands_sugar_casein_120C_pH68.yml` (+39 figure-readoff
+series, header and `what_was_deliberately_NOT_extracted` amended in place);
+`directional_claims_panel.yml` (+1 source, +11 claims, `hofmann1998` promoted
+`access: abstract` → `full_text`); `directional_accuracy_report.md` (CURRENT STANDING
+re-scored + new §W); `maillard_validation_benchmarks.md`; README, AUDIT,
+VALIDATION_CONTRACT; `src/{barrier_constants,comparative_cli,curated_pathways,
+directional_reliability,model_card}.py`.
+
+**`src/model_card.collect_sulfur_anchor_status` was widened.** It inspected **one retired
+file**, so what it actually measured was "the retired file still has no verified value" —
+permanently true and not the question anyone is asking. It now scans the panel
+(non-recursively, so the hold-out stays out) and `zero_absolute_anchors` is derived from that
+scan. The guard was re-pinned to assert the **mechanism** (the flag agrees with the scan)
+rather than the **answer**, which is what let it go stale in the flattering direction.
+
+**Regenerated:** `prediction_uncertainty.{json,md}`, `matrix_binding_mode_comparison.{json,md}`,
+`model_card.json` + the README card.
+
+### (h) Gates and tests
+
+```
+holdout_guard   PASS   21 bundles · 17 maillard-path · all free_precursor · none named by any fit record
+citation_gate   PASS   102 files · 925 DOI fields · 288 unique DOIs
+fit_target_gate PASS   circularity + coverage accounting + constant precision
+```
+
+Targeted subsets only, per the owner's testing directive — no full-suite run.
+**210 passed, 0 failed** across `test_honest_headline_guards`, `test_comparative_cli_2026_08`,
+`test_wave_h_2026_08`, `test_wave_p_chemistry_2026_08`, `test_benchmarks`,
+`test_free_aa_quantitative_regression`, `test_wave_s1b_ph_aw_routing_2026_08`,
+`test_wave_s3_trunk_kinetics`, `test_wave_i_chemistry`, `test_wave_i_network_chemistry`,
+`test_thiamine_fragmentation_benchmarks`, `test_wave_s1_additive_flux_2026_08`,
+`test_wave_s4_protein_binding`.
+
+**No PDF was committed.** Wave S5's uncommitted work was preserved (verified with
+`git status` before and after; every S5 change is still staged and untouched).
+
+### (i) [P] CARRIED FORWARD from this wave
+
+- [P] **The step-level tables are the highest-value unexecuted evidence in the tree.** Six
+  Hofmann tables constrain individual steps and none can run. Closing even one — the
+  hydroxyacetaldehyde/mercapto-2-propanone → MFT row, 268.1 µg at 0.24 mol% — would give the
+  repo its first single-step target. Needs species **plus** steps, not species alone.
+- [P] **The binding physics is the wrong functional form for hexanal**, on the paper's own
+  evidence, and hexanal is the matrix lane's most load-bearing compound. A −58.6-point
+  cross-check residual is not a calibration problem.
+- [P] **`K = 684.46 M⁻¹` is stranded on a missing protein molar mass**, for the second source
+  running. One number — the MW the Klotz analysis assumed — would unlock both this and
+  `wongprasert2024_ppi_klotz`.
+- [P] **The pH sign-crossing claim is now pre-registered and unfitted.** Any future pH or
+  a<sub>w</sub> term must reproduce a pentose that is monotonic and a hexose that peaks at
+  pH 5, and no single family-level pH shape can do both.
+- [P] **Ribose and xylose are indistinguishable to the network.** Six significant figures
+  identical. The measurement separates them by 1.26–1.38×.
+- [P] **The dry-heat rows need an a<sub>w</sub> basis** before they can ever be absolute rows.
+  Recorded as ordinal only; do not invent one.

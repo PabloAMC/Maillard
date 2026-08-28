@@ -95,8 +95,8 @@ def _assert_quoted(text: str, token: str, where: str, what: str) -> None:
 # --------------------------------------------------------------------------------------
 
 
-def test_calibration_panel_is_14_benchmarks_and_none_is_strict_ready(panel):
-    """PANEL 14 · STRICT-READY 0/14.
+def test_calibration_panel_is_17_benchmarks_and_none_is_strict_ready(panel):
+    """PANEL 17 · STRICT-READY 0/17.
 
     Pinned 2026-08-27 from a live evaluation of the tracked benchmark files, cross-checked
     against results/validation/validation_overview.json (benchmark_count 14,
@@ -104,23 +104,37 @@ def test_calibration_panel_is_14_benchmarks_and_none_is_strict_ready(panel):
     two fabricated benchmarks (spi_hvp_xylose_120C_PMC9905368,
     wheat_gluten_hvp_xylose_120C_PMC9905368) -- if this count returns to 16, check that the
     quarantine has not been reverted before re-pinning.
+
+    RE-PINNED 2026-08-28 (Wave W): 14 -> 17, strict-ready 0/14 -> 0/17. CAUSE: three
+    absolute, isotope-dilution literature anchors were added from the full text of Hofmann &
+    Schieberle 1998 (10.1021/jf9705983), obtained by interlibrary loan --
+    ``hofmann1998_{ribose,glucose,fructose}_cysteine_145C_20min_pH5``, the pH-5.0 aqueous
+    rows of its Table 1. THIS IS THE WAVE THAT ENDED "THE SULFUR BRANCH HAS ZERO ABSOLUTE
+    LITERATURE ANCHORS": the branch now has three, from the very paper whose misattributed
+    values Wave S2b traced to a repo-internal derivation and Wave S2c retired.
+    STRICT-READY DID NOT MOVE, and that is the point worth reading twice. All three new rows
+    FAIL, and badly: ribose 12.27x on FFT, glucose 29.58x, fructose 14.46x, with a panel-side
+    mean |log10| of 0.92 dex across the six new comparisons. Gaining a real anchor made the
+    panel look worse, not better, because the previous anchor was a number the repository had
+    written for itself. A panel that gets worse when it is given real data is a panel that was
+    not previously being tested.
     """
-    assert len(panel) == 14, (
-        f"Calibration panel is {len(panel)} benchmarks, not the published 14. "
+    assert len(panel) == 17, (
+        f"Calibration panel is {len(panel)} benchmarks, not the published 17. "
         f"Adding or removing a benchmark changes every downstream headline; re-pin this "
         f"guard and the README/AUDIT tables in the same change."
     )
 
     strict_ready = [s.benchmark_id for s in panel if s.strict_ready]
     assert strict_ready == [], (
-        f"The published claim is 0/14 strict-ready. These are now strict-ready: "
+        f"The published claim is 0/17 strict-ready. These are now strict-ready: "
         f"{strict_ready}. If that is real, say so in README.md -- the 'no high tier' "
         f"statement in 'When to trust the predictions' depends on this being zero."
     )
 
     readme = _doc_text(README)
-    _assert_quoted(readme, "**14**", "README.md", "the panel size")
-    _assert_quoted(readme, "0/14", "README.md", "the strict-ready count")
+    _assert_quoted(readme, "**17**", "README.md", "the panel size")
+    _assert_quoted(readme, "0/17", "README.md", "the strict-ready count")
 
 
 # --------------------------------------------------------------------------------------
@@ -128,8 +142,8 @@ def test_calibration_panel_is_14_benchmarks_and_none_is_strict_ready(panel):
 # --------------------------------------------------------------------------------------
 
 
-def test_zero_of_six_predictive_benchmarks_are_free_of_blocking_gaps(panel):
-    """PREDICTIVE 0/6 · fit-recovery 0/4 · internal-synthetic 4/4.
+def test_zero_of_nine_predictive_benchmarks_are_free_of_blocking_gaps(panel):
+    """PREDICTIVE 0/9 · fit-recovery 0/4 · internal-synthetic 4/4.
 
     This is the number the whole audit turns on. The panel scores 5/14 "pass" overall, and
     a 7/16 version of that number was once published as evidence of accuracy. Split by what
@@ -187,8 +201,8 @@ def test_zero_of_six_predictive_benchmarks_are_free_of_blocking_gaps(panel):
     )
 
     totals = {role: len(rows) for role, rows in by_role.items()}
-    assert totals == {"predictive": 6, "fit_recovery": 4, "internal_synthetic": 4}, (
-        f"Evidence-role split moved to {totals}, published as 6/4/4. Reclassifying a "
+    assert totals == {"predictive": 9, "fit_recovery": 4, "internal_synthetic": 4}, (
+        f"Evidence-role split moved to {totals}, published as 9/4/4. Reclassifying a "
         f"benchmark changes the denominator of the headline claim -- justify it in AUDIT.md."
     )
 
@@ -197,7 +211,7 @@ def test_zero_of_six_predictive_benchmarks_are_free_of_blocking_gaps(panel):
 
     predictive_passes = passing("predictive")
     assert predictive_passes == [], (
-        f"The published headline is 0/6 PREDICTIVE benchmarks without blocking gaps. These "
+        f"The published headline is 0/9 PREDICTIVE benchmarks without blocking gaps. These "
         f"now pass: {predictive_passes}. Before celebrating, confirm the benchmark is still "
         f"genuinely predictive (its constants were not fitted to it) -- then re-pin here and "
         f"correct README.md and AUDIT.md together."
@@ -295,8 +309,9 @@ def test_zero_of_six_predictive_benchmarks_are_free_of_blocking_gaps(panel):
 # --------------------------------------------------------------------------------------
 
 
-def test_honest_external_literature_coverage_is_0_of_3_with_fitted_rows_excluded():
-    """EXTERNAL LITERATURE 0/3 evaluable · 4 not evaluable · 2 fitted rows excluded BOTH sides.
+def test_honest_external_literature_coverage_is_4_of_9_on_intervals_too_wide_to_mean_much():
+    """EXTERNAL LITERATURE 4/9 evaluable · 4 not evaluable · 2 fitted rows excluded BOTH sides.
+    MEDIAN 90% CI WIDTH 2.627 dex -- A FACTOR OF ~424 FROM END TO END. READ THE TWO TOGETHER.
 
     Source artifact: results/validation/prediction_uncertainty.json (TRACKED / force-added),
     key ``summary.honest_literature_coverage``. Read 2026-08-27.
@@ -315,11 +330,11 @@ def test_honest_external_literature_coverage_is_0_of_3_with_fitted_rows_excluded
     summary = payload["summary"]
     coverage = summary["honest_literature_coverage"]
 
-    assert summary["benchmark_count"] == 11, (
-        f"MC panel is {summary['benchmark_count']} benchmarks, published as 11"
+    assert summary["benchmark_count"] == 14, (
+        f"MC panel is {summary['benchmark_count']} benchmarks, published as 14"
     )
-    assert summary["matched_compound_count"] == 35, (
-        f"MC panel matched rows moved to {summary['matched_compound_count']}, published as 35"
+    assert summary["matched_compound_count"] == 41, (
+        f"MC panel matched rows moved to {summary['matched_compound_count']}, published as 41"
     )
 
     # RE-PINNED 2026-08-27 (Wave S1b -- THE pH / WATER-ACTIVITY ROUTING REPAIR).
@@ -335,9 +350,24 @@ def test_honest_external_literature_coverage_is_0_of_3_with_fitted_rows_excluded
     # The COUNTS that did not move -- benchmark_count 11, matched rows 35,
     # not_evaluable 4, excluded_fitted_rows 2 (both would-have-been hits) -- are what
     # identify this as one row leaving its interval rather than an accounting change.
-    assert (coverage["hits"], coverage["total"]) == (0, 3), (
+    # RE-PINNED 2026-08-28 (Wave W): 0/3 -> 4/9, and THE INSTRUCTION IN THE OLD MESSAGE WAS
+    # FOLLOWED BEFORE RE-PINNING. It said: "If this rises, verify it is the model getting
+    # closer and not the interval getting wider -- check median_ci_width_log10 in the same
+    # breath." IT IS THE INTERVAL GETTING WIDER. The median 90% CI went 0.746 -> 2.627 dex,
+    # i.e. 3.5x wider, from a factor of 5.6 end-to-end to a factor of ~424.
+    # CAUSE: six new external-literature rows arrived -- the three Hofmann & Schieberle 1998
+    # panel anchors, two compounds each -- and the sulfur branch's barrier priors are so
+    # loose that four of the six "cover" their measurement with intervals 2.90, 2.95, 3.04
+    # and 3.74 dex wide. An interval spanning three orders of magnitude will contain almost
+    # any measurement; those four hits are close to vacuous and are NOT evidence the model
+    # improved. The two rows that MISS (fructose FFT and MFT) miss despite intervals 1.44 and
+    # 2.63 dex wide, which is the more informative half of the result.
+    # NOTHING WAS WIDENED TO ACHIEVE THIS. No prior, threshold or interval was touched in
+    # Wave W; the population changed, not the model. The headline is re-pinned with the width
+    # assertion below deliberately kept two-sided so the vacuity stays visible.
+    assert (coverage["hits"], coverage["total"]) == (4, 9), (
         f"Honest external-literature coverage moved to "
-        f"{coverage['hits']}/{coverage['total']}, published as 0/3 (1/3 before Wave S1b). "
+        f"{coverage['hits']}/{coverage['total']}, published as 4/9 (0/3 before Wave W). "
         f"If this rises, verify it is the model getting closer and not the interval getting "
         f"wider -- check `median_ci_width_log10` in the same breath."
     )
@@ -368,10 +398,20 @@ def test_honest_external_literature_coverage_is_0_of_3_with_fitted_rows_excluded
     # around a point prediction that moved further from the measurement. Companion widths
     # moved the other way again: fitted_row 2.2083 -> 2.9573, internal_synthetic
     # 3.5612 -> 4.1780.
-    assert coverage["median_ci_width_log10"] == pytest.approx(0.7460, abs=5e-4), (
+    # RE-PINNED 2026-08-28 (Wave W): 0.7460 -> 2.6269 dex. See the block above the hits
+    # assertion. This is the case the old comment warned about in as many words -- coverage
+    # improving while the interval widens -- and it is being reported as that, not as a win.
+    assert coverage["median_ci_width_log10"] == pytest.approx(2.6269, abs=5e-4), (
         f"Median CI width moved to {coverage['median_ci_width_log10']:.4f} dex from the "
-        f"published 0.746. A coverage rate that improves while this widens is the interval "
+        f"published 2.627. A coverage rate that improves while this widens is the interval "
         f"getting looser, not the model getting better."
+    )
+    # The vacuity is asserted, not just described: 4/9 on a ~424x interval must never be
+    # quoted as though it were 4/9 on a tight one.
+    assert coverage["median_ci_width_log10"] > 2.0, (
+        "The median external-literature interval has narrowed below 2 dex. If coverage is "
+        "still 4/9 or better at that width, that IS a real improvement -- re-pin this guard "
+        "and say so loudly in README.md, because the current prose says the opposite."
     )
 
 

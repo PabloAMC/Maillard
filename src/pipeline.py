@@ -3,7 +3,7 @@ import logging
 import math
 import re
 from pathlib import Path
-from typing import List, Dict, Tuple, Optional
+from typing import Any, List, Dict, Tuple, Optional
 from dataclasses import dataclass, field
 
 from src.smirks_engine import SmirksEngine, ReactionConditions, Species  # noqa: E402
@@ -225,6 +225,18 @@ class MaillardPipeline:
         # Formulations dropped by the last evaluate_all() call because a
         # precursor could not be resolved (see evaluate_all).
         self.last_skipped_formulations: List[Dict[str, str]] = []
+        # 2026-08-28 (Wave S5). Route traces from the last evaluate_all() call, keyed by
+        # formulation name: {name: {"debug_paths": ..., "debug_channel_flux": ...,
+        # "species_names": ...}} exactly as `Recommender.predict_from_steps` returns them.
+        #
+        # WHY A SIDE-CHANNEL AND NOT A FormulationResult FIELD. The comparative CLI reports a
+        # dominant pathway per compound, which needs the route trace. Putting it on
+        # FormulationResult would push a large debug payload into every serialized report,
+        # so it is exposed the same way `last_skipped_formulations` already is: on the
+        # pipeline, overwritten per call, read by whoever wants it. NOTHING in the science
+        # path reads this; it is a read-only view of a payload `predict_from_steps` was
+        # already returning and `evaluate_all` was already discarding.
+        self.last_route_traces: Dict[str, Dict[str, Any]] = {}
 
     def _load_grid(self) -> List[Dict]:
         if not GRID_FILE.exists():
@@ -365,6 +377,7 @@ class MaillardPipeline:
         """
         results = []
         skipped_formulations: List[Dict[str, str]] = []
+        route_traces: Dict[str, Dict[str, Any]] = {}
         target_compounds = self.tags.get(self.target_tag, [])
         minimize_compounds = self.tags.get(self.minimize_tag, []) if self.minimize_tag else []
 
@@ -783,11 +796,17 @@ class MaillardPipeline:
                 flavor_axis_summary=flavor_axis_summary,
             )
             results.append(result)
+            route_traces[name] = {
+                "debug_paths": rec_result.get("debug_paths", {}),
+                "debug_channel_flux": rec_result.get("debug_channel_flux", {}),
+                "species_names": rec_result.get("species_names", {}),
+            }
 
         # Surface any formulation the resolver rejected: expose it on the
         # pipeline (for callers that got an empty result list) and stamp it on
         # every result of this batch (so reports can print it).
         self.last_skipped_formulations = list(skipped_formulations)
+        self.last_route_traces = route_traces
         if skipped_formulations:
             for result in results:
                 result.skipped_formulations = list(skipped_formulations)

@@ -49,6 +49,21 @@ band, 0.017321 mol % → 197.7 → 200 ppb.  Confidence ~90%.
 thiol_addition included — is an estimate or a fit to a repo-internal number.  The
 [28.10, 28.85] "Hofmann window" is a window around the repo's own guess.
 
+UPDATED 2026-08-28 (Wave W) — READ BOTH HALVES, THEY SAY DIFFERENT THINGS NOW.
+The BENCHMARK half of that paragraph is superseded: the sulfur branch has three absolute,
+stable-isotope-dilution literature anchors, `hofmann1998_{ribose,glucose,fructose}_cysteine
+_145C_20min_pH5`, taken from Table 1 of the real 10.1021/jf9705983 after the full text was
+obtained.  The paper also confirms from the primary source that 342 and 200 ppb appear
+nowhere in it, so everything above about the provenance of the retired values stands.
+The CONSTANTS half is UNCHANGED and is the part that matters here: **no barrier in this
+file is anchored to a literature measurement, and Wave W fitted nothing.**  The new anchors
+were deliberately not used to refit anything — the model misses them by 12.27x, 29.58x and
+14.46x, and closing that by solving four free barriers against six rows would recreate
+exactly the circularity Wave H produced and Wave S2c had to retract.  What changed is that
+these estimates can now be SCORED against real measurements instead of being unfalsifiable.
+They score badly.  The [28.10, 28.85] "Hofmann window" is still a window around the repo's
+own guess and is still not a literature window.
+
 AUDIT 2026-08-27 (Wave H, sulfur refit) — Wave G1 replaced the fabricated one-step
 MFT shortcut with the accepted 1-deoxyosone → norfuraneol → MFT route, which moved
 the Hofmann constraint OFF `thiol_addition` (that key now labels only the demoted

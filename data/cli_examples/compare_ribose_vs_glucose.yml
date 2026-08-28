@@ -1,0 +1,23 @@
+# Maillard comparative-interface spec. Two arms, 'a' and 'b'.
+# Precursor values are MILLIMOLAR (mM) -- the unit the projection budget consumes.
+a:
+  name: cysteine_ribose
+  precursors:
+    L-Cysteine: 10.0
+    D-Ribose: 10.0
+  temp_C: 140.0
+  time_min: 30.0
+  ph: 5.0
+  aw: 0.98
+  protein_type: free
+b:
+  name: cysteine_glucose
+  precursors:
+    L-Cysteine: 10.0
+    D-Glucose: 10.0
+  temp_C: 140.0
+  time_min: 30.0
+  ph: 5.0
+  aw: 0.98
+  protein_type: free
+

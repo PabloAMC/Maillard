@@ -1,0 +1,77 @@
+{
+  "benchmark_id": "hofmann1998_glucose_cysteine_145C_20min_pH5",
+  "source_doi": "10.1021/jf9705983",
+  "source_metadata": {
+    "citation": "Hofmann, T.; Schieberle, P. Quantitative Model Studies on the Effectiveness of Different Precursor Systems in the Formation of the Intense Food Odorants 2-Furfurylthiol and 2-Methyl-3-furanthiol. J. Agric. Food Chem. 1998, 46 (1), 235-241. DOI 10.1021/jf9705983.",
+    "citation_note": "Title, authors, affiliation and pagination transcribed VERBATIM from the first page of data/articles/hofmann1998.pdf: 'J. Agric. Food Chem. 1998, 46, 235-241' / 'Quantitative Model Studies on the Effectiveness of Different Precursor Systems in the Formation of the Intense Food Odorants 2-Furfurylthiol and 2-Methyl-3-furanthiol' / 'T. Hofmann and P. Schieberle*' / 'Deutsche Forschungsanstalt fuer Lebensmittelchemie, Lichtenbergstrasse 4, D-85748 Garching, Germany'. The DOI 10.1021/jf9705983 was already CrossRef-verified in this repository; the printed volume/pages/author line matches it. IDENTITY CONFIRMED FROM THE PDF, not assumed from the filename.",
+    "origin": "external_literature",
+    "access": "Full text obtained by the repository owner via interlibrary loan, 2026-08-28, and read directly from data/articles/hofmann1998.pdf (the PDF is gitignored and is NOT committed; only extracted data enters the repo). Every number in this file was re-read from the PDF by Wave W, table by table, and not taken on trust from any secondary source or digest."
+  },
+  "content_verification": {
+    "access_level": "full_text",
+    "retrieval_date": "2026-08-28",
+    "quantification_class": "stable_isotope_dilution_gcms",
+    "quoted_method": "EXPERIMENTAL PROCEDURES, Model Experiments, verbatim: 'In a first series of experiments, the reactants (cf. amounts detailed in the tables) were dissolved in phosphate buffer (0.5 mol/L) at pH 3.0, 5.0, or 7.0 and thermally treated for 20 min at 145 degC in a laboratory autoclave (200 mL; Type II; Roth, Germany). In a second series of experiments, the reactants were intimately mixed with silica gel (3.0 g containing 300 uL of the respective phosphate buffer; 2 mol/L) and reacted for 6 min at 180 degC.'",
+    "quoted_quantification": "EXPERIMENTAL PROCEDURES, Quantitation of FFT and MFT by SIDA, verbatim: 'After cooling of the reaction mixtures to 20 degC, the internal standards [2H2]-2-furfurylthiol and [2H3]-2-methyl-3-furanthiol (10 ug each dissolved in 0.5 mL of pentane) were added to the aqueous reaction mixtures and, after equilibration for 10 min, the analyte and the labeled standard were isolated by extraction with diethyl ether (three times, total volume = 60 mL). After drying over Na2SO4, quantitation of FFT and MFT was performed by mass chromatography using the fragment ions and response factors as described recently (Guth et al., 1995).'",
+    "quoted_table_footnotes": "Table 1 footnote a, verbatim: 'A solution (100 mL) of cysteine (3.3 mmol) and the corresponding carbohydrate (10.0 mmol) was reacted at pH 5.0 in a laboratory autoclave.' Table 1 footnote b, verbatim: 'Data are mean values of triplicates and differed by not more than 10%.' (Footnote b is referenced by every other table in the paper -- Tables 2 through 10 each read 'See footnote b in Table 1' -- so the +/-10% replicate spread applies to every number this wave ingests from this paper.)",
+    "quoted_table": "Table 1, 'Amounts of FFT and MFT Generated from Cysteine and Various Carbohydrates', column header 'amountb (ug)', sub-columns FFT | MFT. Rows verbatim: 'ribose 12.1 19.8' ; 'xylose 9.6 14.3' ; 'fructose 3.2 2.5' ; 'glucose 2.8 1.9' ; 'glucose-6-phosphate 0.9 0.6' ; 'rhamnose 0.8 0.8' ; 'maltose 0.6 0.3'.",
+    "quoted_row": "Table 1, row verbatim: 'glucose 2.8 1.9' (FFT 2.8 ug, MFT 1.9 ug per 100 mL). Reprinted consistently in Table 2's pH 5.0 columns ('glucose 0.7 2.8 0.6 1.4 0.3 1.9 0.4 4.2') and in Table 5 ('glucose 6.9 2.8 13.5 1.9').",
+    "quantification_verdict": "ADMISSIBLE AND ABSOLUTE. Deuterated analogues of BOTH scored analytes ([2H2]-FFT and [2H3]-MFT) are spiked into the reaction mixture before extraction, and quantitation is by mass chromatography against them. This is stable-isotope dilution analysis -- the class of measurement Wave S2c found the sulfur branch did not have a single example of on the panel side."
+  },
+  "unit_basis": "STATED BASIS, NO FREE PARAMETER. The paper prints micrograms of odorant, and the table footnote states the system volume: 'A solution (100 mL)'. ug per 100 mL x 10 = ug/L. The medium is 0.5 mol/L aqueous phosphate buffer, density ~1 kg/L, so ug/L is numerically ug/kg = ppb on the model's own basis. The conversion is therefore a single stated multiplication by 10 with no assumed concentration and no assumed density beyond that of dilute aqueous buffer. THIS IS THE DIFFERENCE FROM THE RETIRED FILE data/benchmarks/cys_ribose_140C_Hofmann1998.json: that file's ppb required a mol%->ppb conversion resting on an UNATTESTED 10 mM concentration basis, i.e. a free multiplicative parameter. Here the volume is printed in the source, so native ppb is legitimate.",
+  "precursor_concentration_provenance": {
+    "status": "FULLY_STATED_IN_SOURCE",
+    "derivation": "STATED BASIS. cysteine 3.3 mmol / 0.100 L = 33.0 mM; carbohydrate 10.0 mmol / 0.100 L = 100.0 mM. Both the moles and the volume are printed in the table footnote quoted above; nothing is inferred. The cysteine:sugar ratio is 1:3.03, i.e. the 1:3 stoichiometry the repository had previously inferred second-hand and recorded at ~85% confidence -- now confirmed from the primary source.",
+    "residual_caveats": "(a) The autoclave is a closed 200 mL vessel holding 100 mL of solution, so there is a ~100 mL headspace; the engine has no closed-vessel headspace partition term, and any FFT/MFT lost to that headspace is a systematic bias the model cannot see. Recorded, not corrected. (b) pH is set by 0.5 mol/L phosphate but is reported only as the buffer's nominal pH, not measured after heating. (c) The paper reports no blank/control subtraction for these tables."
+  },
+  "protein_type": "free",
+  "denaturation_state": 0.0,
+  "precursors": {
+    "L-Cysteine": {
+      "concentration_mM": 33.0
+    },
+    "D-Glucose": {
+      "concentration_mM": 100.0
+    }
+  },
+  "conditions": {
+    "temp_C": 145.0,
+    "ph": 5.0,
+    "water_activity": 0.98,
+    "time_min": 20.0
+  },
+  "wave_w_split_reasoning": "FIT/HOLD-OUT SPLIT, DECIDED AND WRITTEN DOWN BEFORE INGESTION (Wave W, 2026-08-28). The split is on an AXIS, not on convenience: THE SCORED PANEL IS THE pH 5.0 SLICE; THE HOLD-OUT IS EVERYTHING OFF pH 5.0, PLUS ONE SUGAR HELD BACK. Panel: the three pH-5.0 aqueous Table 1 rows the precursor resolver can execute (ribose, glucose, fructose) -- pH 5.0 is the classic ribose/cysteine meat-model condition and the condition the rest of the panel already sits at, so these are the rows that belong in the calibration corpus. Hold-out, under data/benchmarks/external_validation/maillard_path/ with the Wave U flags: (i) the xylose pH-5.0 row, a carbohydrate the panel never sees; and (ii) the whole pH 3.0 / pH 7.0 series for ribose and glucose. Reason for (ii), which is the load-bearing one: Table 2 contains a SIGN-CROSSING pH claim -- from ribose both odorants rise monotonically as pH falls 7 -> 5 -> 3, while from glucose and rhamnose both go through a MAXIMUM at pH 5.0 -- and that claim is precisely the acid test of any future pH or water-activity term. Putting it in the panel would make it fittable; putting it in the hold-out pre-registers it. NO ROW IS IN BOTH FILES SETS, no constant was fitted in this wave to anything, and the hold-out rows were scored once, after ingestion, and frozen.",
+  "wave_w_dry_heat_exclusion": "THE DRY-HEAT COLUMNS OF TABLE 2 ARE DELIBERATELY NOT INGESTED AS ABSOLUTE ROWS, in either the panel or the hold-out. The system is 'a mixture of cysteine (3.3 mmol) and the corresponding carbohydrate (10.0 mmol) ... dry-heated for 6 min at 180 degC' on silica gel carrying 300 uL of 2 mol/L buffer per 3.0 g. The paper states no water activity and no system mass, so both the engine's `water_activity` input and the ug -> ppb denominator would have to be INVENTED. Inventing a water activity to make a row executable is the same class of move as inventing a concentration basis, which is what produced the retired 342/200. The dry-heat data are instead ingested as ORDINAL claims, which need no such number: see docs/validation/directional_claims_panel.yml.",
+  "metadata": {
+    "tier": "PRIMARY",
+    "family": "free_aa_sulfur",
+    "execution_path": "free_precursor",
+    "notes": "WAVE W (2026-08-28). Absolute, isotope-dilution literature anchor for the free-precursor sulfur branch: glucose + cysteine, 0.5 mol/L phosphate pH 5.0, 145 degC, 20 min. Read from the primary source, not from a digest. PANEL MEMBER (pH-5.0 slice) -- see wave_w_split_reasoning. SUPERSEDES-IN-EVIDENCE, DOES NOT DELETE: data/benchmarks/cys_ribose_140C_Hofmann1998.json. That file cites this same DOI and shipped MFT 342 ppb / FFT 200 ppb for four months as a literature measurement. Wave S2b traced those two numbers to a repo-internal derivation and Wave S2c retired them, leaving the sulfur branch with zero absolute literature anchors. Wave W read the paper itself and CONFIRMS the forensic conclusion from the primary source: 342 and 200 appear NOWHERE in 10.1021/jf9705983. The paper's actual value for the closest system -- the one this file carries -- is MFT 198 ppb / FFT 121 ppb at 145 degC / 20 min / pH 5.0 / cysteine 33 mM + ribose 100 mM. The old file is deliberately kept in the tree as the provenance record of the fabrication and its numbers are NOT resurrected, NOT copied, and NOT reconciled: 342/198 = 1.73x high and 200/121 = 1.65x high, and the conditions differed on all four of temperature, time, stoichiometry and concentration. Read the two files together; the old one is the evidence, this one is the measurement.",
+    "supersedes_in_evidence": "cys_ribose_140C_Hofmann1998"
+  },
+  "validation_contract": {
+    "scale_thresholds": {
+      "max_ratio": 1.1,
+      "mean_abs_log10_error": 0.0414
+    },
+    "derivation": "DERIVED FROM THE MEASUREMENT'S OWN STATED PRECISION AND FROM NOTHING ELSE. Table 1 footnote b, quoted in full in content_verification.quoted_table_footnotes, reads 'Data are mean values of triplicates and differed by not more than 10%.' That is the only precision statement the paper makes, and every table in the paper references it. A replicate spread of 10% is a multiplicative tolerance of 1.10x; log10(1.10) = 0.041393, rounded here to 0.0414. So: max_ratio 1.10, mean_abs_log10_error 0.0414.",
+    "what_this_contract_is_and_is_not": "It is the tolerance THE DATA SUPPORTS -- the smallest difference the measurement can resolve. It is NOT a claim that the model meets it, and on the day it was written the model does not come close (see results/validation/hofmann1998_wave_w_scores.md). The contract is set at the measurement's precision on purpose, because that is the only number in evidence. The failure mode this repository is cleaning up is the OPPOSITE one: data/benchmarks/cys_ribose_140C_Hofmann1998.json carried a 1.45x / 0.09 dex contract that was ~1.7x TIGHTER than the 2.5x spread of the invented band its target was drawn from. Here the contract EQUALS its source's spread exactly. Nothing was widened so that a row would pass, and nothing was narrowed to make a pass look impressive.",
+    "why_not_the_global_default": "The repository's global free-precursor default is max_ratio 1.5 / mean_abs_log10_error 0.10 (src/validation_contract.py::BenchmarkThresholds). Inheriting it here would have been defensible and would have been LOOSER. It was not taken, because 1.5 is a repo-wide convention with no basis in this measurement, and this is the first sulfur benchmark in the tree whose source states its own precision. Recorded so that the choice is visible: the contract shipped here is STRICTER than the default, and the model fails both."
+  },
+  "measured_volatiles": {
+    "2-Furfurylthiol (FFT)": {
+      "conc_ppb": 28.0,
+      "uncertainty_pct": 10,
+      "value_status": "primary_source_verified",
+      "smiles": "SCc1ccco1",
+      "provenance": "Table 1, glucose row, FFT column: 2.8 ug per 100 mL -> 28 ug/L = 28 ppb. STATED BASIS, NO FREE PARAMETER. The paper prints micrograms of odorant, and the table footnote states the system volume: 'A solution (100 mL)'. ug per 100 mL x 10 = ug/L. The medium is 0.5 mol/L aqueous phosphate buffer, density ~1 kg/L, so ug/L is numerically ug/kg = ppb on the model's own basis. The conversion is therefore a single stated multiplication by 10 with no assumed concentration and no assumed density beyond that of dilute aqueous buffer. THIS IS THE DIFFERENCE FROM THE RETIRED FILE data/benchmarks/cys_ribose_140C_Hofmann1998.json: that file's ppb required a mol%->ppb conversion resting on an UNATTESTED 10 mM concentration basis, i.e. a free multiplicative parameter. Here the volume is printed in the source, so native ppb is legitimate."
+    },
+    "2-Methyl-3-furanthiol (MFT)": {
+      "conc_ppb": 19.0,
+      "uncertainty_pct": 10,
+      "value_status": "primary_source_verified",
+      "smiles": "Cc1occc1S",
+      "provenance": "Table 1, glucose row, MFT column: 1.9 ug per 100 mL -> 19 ug/L = 19 ppb. STATED BASIS, NO FREE PARAMETER. The paper prints micrograms of odorant, and the table footnote states the system volume: 'A solution (100 mL)'. ug per 100 mL x 10 = ug/L. The medium is 0.5 mol/L aqueous phosphate buffer, density ~1 kg/L, so ug/L is numerically ug/kg = ppb on the model's own basis. The conversion is therefore a single stated multiplication by 10 with no assumed concentration and no assumed density beyond that of dilute aqueous buffer. THIS IS THE DIFFERENCE FROM THE RETIRED FILE data/benchmarks/cys_ribose_140C_Hofmann1998.json: that file's ppb required a mol%->ppb conversion resting on an UNATTESTED 10 mM concentration basis, i.e. a free multiplicative parameter. Here the volume is printed in the source, so native ppb is legitimate."
+    }
+  }
+}

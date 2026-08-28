@@ -4,7 +4,7 @@
 
 _Monte Carlo propagation of barrier-family offset priors (additive Gaussian, kcal/mol) through the benchmark evaluator. CI = 90% (P5–P95)._
 
-**Headline trust metric — external literature only**: the measured value lies inside the 90% CI for **0 / 3** literature rows (**0.0%**). **2** fitted row(s) are excluded from both numerator and denominator (2 of them would have counted as hits); see the split below. 4 literature row(s) are not evaluable (degenerate envelope). Median CI width **0.75 dex** (~6× end to end) — read the coverage with the width.
+**Headline trust metric — external literature only**: the measured value lies inside the 90% CI for **4 / 9** literature rows (**44.4%**). **2** fitted row(s) are excluded from both numerator and denominator (2 of them would have counted as hits); see the split below. 4 literature row(s) are not evaluable (degenerate envelope). Median CI width **2.63 dex** (~424× end to end) — read the coverage with the width.
 
 > **Coverage split — this is the headline; the aggregate is not.** The aggregate
 > pools three populations that support completely different claims:
@@ -26,13 +26,13 @@ _Monte Carlo propagation of barrier-family offset priors (additive Gaussian, kca
 >
 > | Signal origin | Inside 90% CI | Not evaluable | Median CI width (dex) |
 > | --- | ---: | ---: | ---: |
-> | External literature (the only validation evidence) | 0/3 (0%) | 4 | 0.75 |
+> | External literature (the only validation evidence) | 4/9 (44%) | 4 | 2.63 |
 > | Fitted rows (fit recovery — NOT evidence) | 2/2 (100%) | 0 | 2.95 |
 > | Internal synthetic (reproducibility only — NOT evidence) | 18/18 (100%) | 8 | 4.11 |
 
-_Secondary, mixed-population figure, retained only for continuity with older reports — do not quote it: measured value lies inside 90% CI for 28 / 35 matched compounds (80.0%), pooling literature, fitted and synthetic rows._
+_Secondary, mixed-population figure, retained only for continuity with older reports — do not quote it: measured value lies inside 90% CI for 32 / 41 matched compounds (78.0%), pooling literature, fitted and synthetic rows._
 
-Samples per benchmark: 200; seed 0; benchmarks evaluated: 11.
+Samples per benchmark: 200; seed 0; benchmarks evaluated: 14.
 
 ## Priors
 
@@ -95,6 +95,36 @@ Samples per benchmark: 200; seed 0; benchmarks evaluated: 11.
 | Compound | Measured (ppb) | P5 | P50 | P95 | log₁₀ width | Inside 90% CI |
 | --- | --- | --- | --- | --- | --- | --- |
 | furosine | 1.74e+04 | 86.5 | 86.5 | 86.5 | 0.00 | ✗ |
+
+### `hofmann1998_fructose_cysteine_145C_20min_pH5`
+
+- Execution path: `free_precursor`
+- Matched compounds with envelope: 2
+
+| Compound | Measured (ppb) | P5 | P50 | P95 | log₁₀ width | Inside 90% CI |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2-Furfurylthiol (FFT) | 32 | 0.267 | 4.13 | 7.36 | 1.44 | ✗ |
+| 2-Methyl-3-furanthiol (MFT) | 25 | 0.0239 | 1.19 | 10.1 | 2.63 | ✗ |
+
+### `hofmann1998_glucose_cysteine_145C_20min_pH5`
+
+- Execution path: `free_precursor`
+- Matched compounds with envelope: 2
+
+| Compound | Measured (ppb) | P5 | P50 | P95 | log₁₀ width | Inside 90% CI |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2-Furfurylthiol (FFT) | 28 | 1.21 | 555 | 1.32e+03 | 3.04 | ✓ |
+| 2-Methyl-3-furanthiol (MFT) | 19 | 0.271 | 78.9 | 1.47e+03 | 3.73 | ✓ |
+
+### `hofmann1998_ribose_cysteine_145C_20min_pH5`
+
+- Execution path: `free_precursor`
+- Matched compounds with envelope: 2
+
+| Compound | Measured (ppb) | P5 | P50 | P95 | log₁₀ width | Inside 90% CI |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2-Furfurylthiol (FFT) | 121 | 2.42 | 1.17e+03 | 2.17e+03 | 2.95 | ✓ |
+| 2-Methyl-3-furanthiol (MFT) | 198 | 2.67 | 388 | 2.14e+03 | 2.90 | ✓ |
 
 ### `pea_isolate_ribose_cysteine_100C_45min_Internal2026`
 

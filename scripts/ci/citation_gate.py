@@ -54,7 +54,8 @@ Checks (offline, all blocking)
    always possible and always free.
 6. **Digest-as-provenance** (added 2026-08-27, Wave T3) -- a record may not name a
    machine-generated or abstract-reconstructed in-repo document
-   (``data/Gemini_Deep_Research/**``, ``docs/research/archives/``, ``raw/NN_*.md``,
+   (``data/Gemini_Deep_Research/**``, ``docs/research/archives/`` [deleted 2026-08-28,
+   pattern retained], ``raw/NN_*.md``,
    "Literature Report N", ``maillard_validation_benchmarks.md``,
    ``Maillard_meat.md`` / ``Maillard_Plant_based.md``, the Elicit dumps, the
    nonexistent ``pathways.md``) as its ``citation``/``source``/``source_citation``
@@ -159,7 +160,7 @@ TEXT_SCAN_GLOBS = (
 # never a false positive that blocks a build on punctuation.
 #
 # `\` and `#` terminate the token, and neither is a loss: a DOI suffix cannot
-# contain a backslash (in the archived research dumps under docs/research/ they
+# contain a backslash (in the research dumps under data/Gemini_Deep_Research/ they
 # are MARKDOWN ESCAPES, e.g. `10.1016/0891-5849\`), and `#` starts a URL fragment
 # (`...1573830#:~:text=Generally%2C...`), which is part of the link, not the DOI.
 # Both were producing pure-punctuation `doi-syntax` failures on first run.
@@ -213,6 +214,10 @@ DIGEST_CITATION_FIELDS = ("citation", "source", "source_citation")
 DIGEST_SOURCE_RE = re.compile(
     r"(?i)("
     r"Gemini_Deep_Research"
+    # 2026-08-28 (Wave S5): docs/research/archives/ was DELETED -- its five files were
+    # byte-identical duplicates of data/Gemini_Deep_Research/. This alternative is kept
+    # deliberately rather than pruned as dead: a stale citation string still naming that
+    # path, anywhere, must keep tripping the digest detector rather than reading as clean.
     r"|docs/research/archives"
     r"|(?:^|[\s/(\"'])raw/\d\d_[a-z0-9_]+\.md"
     r"|\bLiterature Report \d+"

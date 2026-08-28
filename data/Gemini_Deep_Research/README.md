@@ -87,6 +87,38 @@ not exist** (`01_amino_acid_sugar.md`, `11_maillard_lipid_crosstalk.md`, …). F
 names from before the `slr_family_NN_<family_id>.md` rename and resolve by hand; one,
 `00_framework_scaffold.md`, has no counterpart in the tree at all. Also logged as `[P]`.
 
+## Live dangling reference — `pathways.md` does not exist
+
+*Folded here 2026-08-28 (Wave S5) from `docs/research/archives/README.md`, which was deleted
+along with the five byte-identical duplicates it warned about. This finding existed nowhere
+else in this form, so it is carried here rather than lost with its file.*
+
+`data/species/desirable_targets.yml` and `data/species/off_flavour_targets.yml` both declare
+their `Source:` as, among these filenames, **`pathways.md`** — a file that exists nowhere in
+this repository. Those two YAML files supply the odour thresholds that are the denominator of
+every odour-activity value computed in `src/sensory.py`, so the header of a runtime-critical
+data file names an LLM digest and a nonexistent document as its authority.
+
+Wave T3 did **not** edit those two YAML headers, and Wave S5 did not either: re-sourcing
+per-compound odour thresholds is a retrieval job with a real risk of substituting plausible
+numbers for absent ones, which is the defect this whole remediation exists to remove. Wave S5
+repointed the *resolvable* names at their surviving copies here and left `pathways.md` named
+and flagged in place. Carried as **[P], owner decision** — see `tasks/audit_remediation.md`
+§ Wave T3 and Wave T1 finding T1-10. Until then, treat every `odour_threshold_ug_per_kg` in
+those files as uncited unless it carries its own inline `AUDIT`/source comment (hexanal and
+MFT do; most do not).
+
+### Why the `docs/` duplicates were deleted rather than kept as an evidence trail
+
+`docs/research/archives/README.md` argued the five copies were "the evidence trail" for audit
+findings that trace a shipped constant to a digest and to nothing else. That argument holds
+for the *content*, and the content is untouched: all five were **byte-identical** (md5-checked)
+to files in this directory, as was `docs/Plant Protein Thermal Processing Research.md`, which
+sat under `docs/` with no warning header at all. Deleting a second copy destroys no evidence;
+keeping an unwarned copy under an authoritative-looking `docs/` path was itself the defect
+Wave T3 opened. That file's own "Preferred long-term disposition" section prescribed this
+consolidation.
+
 ## Inventory
 
 | Path | What it is |

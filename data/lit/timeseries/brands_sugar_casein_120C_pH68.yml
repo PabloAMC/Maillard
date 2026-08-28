@@ -1,5 +1,16 @@
-# Brands & van Boekel -- sugar/casein systems at 120 C, pH 6.8: transcribed TABLES only
+# Brands & van Boekel -- sugar/casein systems at 120 C, pH 6.8.
 # NOTHING IN THIS FILE IS WIRED INTO THE MODEL OR THE CALIBRATION. Data only.
+#
+# TWO SOURCES, TWO DATA QUALITIES, KEPT SEPARATE ON PURPOSE.
+#   `source`      -- the 2002 PhD thesis. Everything under it is data_quality: table,
+#                    transcribed and image-verified (Wave 2026-08-27).
+#   `source_2001` -- ADDED 2026-08-28 (Wave W). Brands & van Boekel (2001) JAFC 49:4667-4675,
+#                    DOI 10.1021/jf001430b, full text obtained by interlibrary loan. This is
+#                    the journal paper the 2026-08-27 pass explicitly said it did NOT hold and
+#                    could not read (see what_was_deliberately_NOT_extracted, now amended).
+#                    Everything under it is data_quality: figure_readoff -- THE PAPER CONTAINS
+#                    NO TABLES AT ALL, so these numbers cannot be transcribed by anyone, ever.
+#                    Do not mix the two qualities in any downstream average without saying so.
 source:
   citation: "Brands, C.M.J. (2002) Kinetic modelling of the Maillard reaction between proteins and sugars. PhD thesis, Wageningen University. ISBN 90-5808-591-0."
   primary_source_url: "https://edepot.wur.nl/199005"
@@ -67,11 +78,19 @@ extraction:
     image. Because the text layer is OCR of a bitonal scan it cannot be trusted on its own;
     the image re-reading is what verifies these digits.
   what_was_deliberately_NOT_extracted: >-
-    The concentration-time multiresponse data that make this thesis valuable -- glucose,
-    fructose, formic acid, acetic acid, lysine loss and melanoidins vs time in glucose-casein
-    and fructose-casein systems (thesis Figures 2.1, 2.2, 2.7, 4.x) -- exist ONLY as figures
-    in a 1-bit 200 dpi scan. Reading points off those figures would be eyeball estimation at
-    low resolution and was NOT attempted. Those numbers are NOT in this repository.
+    SUPERSEDED IN PART, 2026-08-28 (Wave W) -- read this whole key, the original text is kept
+    because it is the record of what was and was not attempted. ORIGINAL TEXT: "The
+    concentration-time multiresponse data that make this thesis valuable -- glucose, fructose,
+    formic acid, acetic acid, lysine loss and melanoidins vs time in glucose-casein and
+    fructose-casein systems (thesis Figures 2.1, 2.2, 2.7, 4.x) -- exist ONLY as figures in a
+    1-bit 200 dpi scan. Reading points off those figures would be eyeball estimation at low
+    resolution and was NOT attempted. Those numbers are NOT in this repository."
+    WHAT CHANGED: those trajectories ARE now in this repository, but they are NOT read off the
+    thesis scan. They are read off the corresponding figures of the JOURNAL PAPER, Brands &
+    van Boekel (2001) JAFC 49:4667-4675, whose full text arrived on 2026-08-28 -- a cleaner
+    source than the thesis scan. See `source_2001` and every series carrying
+    data_quality: figure_readoff. WHAT DID NOT CHANGE: no thesis figure was digitized, and the
+    judgement above about the thesis scan stands unaltered.
 
 series:
   # ---- Table 6.2: browning (thesis p. 101; = Table 2 of Brands et al. 2000 JAFC) ----
@@ -267,3 +286,441 @@ what_a_human_with_access_should_get_next: >-
   ACS access should check whether its figures are vector in the publisher PDF, in which
   case the same coordinate-extraction used on the Martins figures would recover the
   glucose/fructose/formic-acid/acetic-acid/lysine/melanoidin time series at 120 C.
+
+# =========================================================================================
+# WAVE W (2026-08-28) -- the concentration-time trajectories, from the JOURNAL PAPER.
+# =========================================================================================
+source_2001:
+  citation: "Brands, C.M.J.; van Boekel, M.A.J.S. Reactions of Monosaccharides during Heating of Sugar-Casein Systems: Building of a Reaction Network Model. J. Agric. Food Chem. 2001, 49 (10), 4667-4675."
+  doi: "10.1021/jf001430b"
+  access: full_text
+  retrieved: 2026-08-28
+  retrieved_from: >-
+    data/articles/brands2001.pdf, obtained by the repository owner via interlibrary loan. The
+    PDF is gitignored and is NOT committed; only extracted data enters the repo.
+  identity_verified: >-
+    Confirmed from the PDF itself, not from the filename. Running head: "J. Agric. Food Chem.
+    2001, 49, 4667-4675". Title as printed: "Reactions of Monosaccharides during Heating of
+    Sugar-Casein Systems: Building of a Reaction Network Model". Authors as printed: "Carline
+    M. J. Brands and Martinus A. J. S. van Boekel*", "Department of Agrotechnology and Food
+    Sciences, Product Design and Quality Management Group, Wageningen University". The DOI is
+    not printed on a labelled line; the copyright line reads "10.1021/jf001430b CCC: $20.00
+    (C) 2001 American Chemical Society" and the article ID at the end is "JF001430B".
+  quoted_method: >-
+    "Preparation of Reaction Model Systems. Sodium caseinate (3% w/w) and sugar (150 mM
+    monosaccharide) were dissolved in a phosphate buffer (0.1 M; pH 6.8) to give a molar ratio
+    of sugar to lysine residues of 10:1. The samples were heated for various times (0-40 min)
+    at 120 degC in an oil bath in screw-capped glass tubes (Schott, 16 x 160 mm). The chosen
+    heating temperature corresponds to sterilization temperatures usually used in the food
+    industry. The reported heating times include the heating-up period of ~2-3 min. After a
+    given heating time, samples were cooled in ice water, prior to analysis. The reaction
+    mixtures were heat-treated and analyzed in at least duplicate."
+  quoted_quantification: >-
+    Sugars and acids: "The last 6 mL, containing the sugars and organic acids, was analyzed by
+    HPLC using an ion-exchange column (ION-300 ...). The eluent consisted of 0.0025 M sulfuric
+    acid in water, the flow rate was 0.4 mL/min, and the column was kept at 85 degC. Sugars
+    were detected by monitoring the refractive index and organic acids by their UV absorbance
+    at 210 nm." Total acids: "Samples of 15 mL of reaction mixture were titrated with 0.1 N
+    NaOH to pH 8.3." Amadori: "The Amadori compound was determined by means of furosine, using
+    HPLC. ... Furosine concentration was recalculated to that of the Amadori compound using a
+    conversion factor of 3.1 (11)." Lysine: "Available lysine residues were determined after
+    derivatization with o-phthaldialdehyde (9)." Melanoidins: "The extinction coefficient of
+    protein-bound melanoidins formed in glucose-casein and fructose-casein systems was measured
+    to be 500 mol-1 L cm-1 (unpublished results). The concentration of melanoidins is thus
+    expressed as sugar units incorporated in the brown products."
+  the_paper_contains_no_tables: >-
+    STATED PLAINLY BECAUSE IT GOVERNS EVERY SERIES BELOW. Brands & van Boekel 2001 has ZERO
+    tables -- a search of the full text layer returns no table caption and no tabulated data.
+    Every quantity it reports as a function of time exists ONLY inside bitmap figures (1-bit
+    CCITT stencils with no vector text). There is therefore NO transcription path for these
+    numbers for anybody, and `data_quality: table` is not achievable from this source at any
+    future date. What is achievable is a careful digitization, labelled as one, which is what
+    the series below are.
+  reports_no_kinetic_parameters: >-
+    The paper fits NO rate constants and NO activation energies, and says so four times, e.g.
+    "The reaction pathways found were put together into a model, which will be evaluated by
+    kinetic modeling in a subsequent paper." The only two numeric constants it states are the
+    furosine-to-Amadori conversion factor 3.1 and the melanoidin extinction coefficient 500
+    mol-1 L cm-1. IF ANY RATE CONSTANT IN THIS REPOSITORY IS EVER ATTRIBUTED TO THIS DOI, IT IS
+    MISATTRIBUTED -- the kinetics are in the companion paper (Brands & van Boekel 2002, JAFC
+    50:6725), which this repository does not hold.
+  ph_is_stated_three_different_ways_in_one_paper: >-
+    Recorded rather than silently resolved. Methods say the buffer is "pH 6.8"; the abstract
+    says the systems "were heated at 120 degC and pH 6.7"; the measured t=0 pH in Figure 3 is
+    6.72 (glucose) and 6.70 (fructose). This file keeps its top-level `system.conditions.pH:
+    6.8` because that is the Methods value and is what the thesis chapters also state, and it
+    carries the measured pH as its own series so a reader can see all three.
+  ph_drop_quoted: >-
+    "The formation of organic acids caused pH decreases of 0.3 pH unit in a glucose-casein
+    system and 0.4 pH unit in a fructose-casein system after heating for 40 min at 120 degC
+    (Figure 3)." The digitized pH series below give 6.72 -> 6.45 (0.27) and 6.70 -> 6.33
+    (0.37), consistent with the quoted 0.3 and 0.4 -- one of the cross-checks listed under
+    figure_readoff_method.
+  mass_balance_quoted: >-
+    "The results of the mass balance calculations (Figure 5) showed an almost negligible amount
+    of missing compounds after 40 min of heating at 120 degC when all reaction products
+    including brown compounds and unidentified acids were calculated. ... Between 10 and 30 min
+    more compounds were missing." And, importantly for anyone tempted to close a budget with
+    these numbers: "The titration experiment showed that acid formation was higher than the
+    total amount of acetic and formic acid. Hence, other organic acids were formed but were not
+    identified."
+
+figure_readoff_method:
+  what_was_done: >-
+    Figure bitmaps extracted from the PDF with pdfimages; each panel calibrated against its own
+    detected axis line and printed tick positions; marker centres located by a 21x21 ink-density
+    peak detector, with series identity checked by marker-shape (corner-ink) tests and by visual
+    zoom. Symbol key from the captions, which the text extraction mangles through ligature loss:
+    4 = open triangle, 0 = open square, b = filled circle, 9 = filled square, O = open circle,
+    ] = open diamond, / = asterisk.
+  stated_accuracy: >-
+    About +/-0.5-1% of each panel's full scale: +/-1 mmol/L on a 0-160 axis, +/-0.05 mmol/L on
+    a 0-8 axis, +/-0.1 mmol/L on a 0-16 axis, +/-0.03 on an A420 axis. THIS IS A DIGITIZATION
+    UNCERTAINTY AND IT IS NOT THE EXPERIMENT'S UNCERTAINTY. The paper reports no error bars and
+    states only that "The reaction mixtures were heat-treated and analyzed in at least
+    duplicate", so the true measurement uncertainty on every point below is UNKNOWN and is
+    larger than the digitization error. Do not quote the +/-1% as if it were an experimental
+    error bar.
+  independent_verification: >-
+    Four checks, all passed, all recorded because a digitization nobody checked is a guess.
+    (1) INTERNAL: the "acids by HPLC" series digitized from Figure 3 equals formic + acetic
+    digitized independently from Figures 1 and 2, to within 2% at every time point (glucose
+    t=40: 3.29 + 5.24 = 8.53 vs 8.37 read from Fig 3; fructose t=40: 4.96 + 5.85 = 10.81 vs
+    10.63). Two figures, two separate digitizations, one arithmetic identity.
+    (2) TEXTUAL: the digitized pH endpoints reproduce the pH drops the paper states in prose
+    (0.3 and 0.4 units) to 0.03 units.
+    (3) AXIS IDENTITY: Figure 4's two y-axes stand in exactly the 1:2 ratio the paper's own
+    extinction coefficient implies (c[mmol/L] = 2 x A420 at eps = 500 mol-1 L cm-1), which is
+    an independent check that the axis calibration is right.
+    (4) HUMAN RE-READ: Wave W re-read Figure 7 and Figure 1's left panel directly from
+    upsampled renders, point by point, without reference to the digitizer output. Figure 7
+    agreed on all 18 values to within one least-significant digit (e.g. Amadori 0.43 / 0.40 /
+    0.165 / 0.03 / 0 / 0 vs digitized 0.431 / 0.401 / 0.168 / 0.031 / 0 / 0). Figure 1's
+    glucose series agreed on all 8 values to within ~1 mmol/L.
+  points_that_are_ambiguous_and_are_flagged_not_resolved: >-
+    Four points where two markers physically superimpose because the curves cross there, so the
+    two series cannot be separated: Fig 1 t=10 formic/acetic (both ~0.7); Fig 2 t=30
+    formic/acetic (both ~4.1); Fig 6 fructose-only t=40 formic/acetic (both ~6.58); Fig 4A t=10
+    total/protein browning. Each is carried below with `ambiguous: true` on the point rather
+    than resolved to a number. Separately, the t=0 and t=2 markers overlap in every 0-160
+    mmol/L panel (2 min is about one marker width at that scale), so those two columns are
+    marked lower confidence. And one point is simply ABSENT from the paper: the formic-acid
+    series in Figure 6's fructose panel has no t=15 marker (7 circles against 8 squares,
+    verified at 4x zoom). It is omitted, not interpolated.
+
+series_2001:
+  # ---- Figure 1: glucose-casein, 120 C ----
+  - species: glucose
+    system: glucose_casein
+    unit: mmol/L
+    data_quality: figure_readoff
+    provenance: "Figure 1, left panel, open triangles. Caption: 'Glucose-casein solutions heated at 120 degC: glucose (open triangle); fructose (open square); formic acid (filled circle); acetic acid (filled square); lysine residues (open circle); Amadori compound (open diamond).'"
+    verification: {status: verified_figure_readoff, date: 2026-08-28, note: "human re-read of an upsampled render agreed on all 8 values to within ~1 mmol/L (check 4)"}
+    low_confidence_points: [0, 2]
+    points: [[0, 150], [2, 150], [5, 139.3], [10, 129.3], [15, 122.2], [20, 110.2], [30, 102.0], [40, 93.1]]
+  - species: fructose
+    system: glucose_casein
+    unit: mmol/L
+    data_quality: figure_readoff
+    provenance: "Figure 1, left panel, open squares (isomerisation product)"
+    verification: {status: verified_figure_readoff, date: 2026-08-28, note: "human re-read agreed on all values to within ~1 mmol/L"}
+    low_confidence_points: [0, 2]
+    points: [[0, 0.9], [2, 0.5], [5, 6.9], [10, 14.7], [15, 20.4], [20, 24.3], [30, 30.3], [40, 34.6]]
+  - species: formic_acid
+    system: glucose_casein
+    unit: mmol/L
+    data_quality: figure_readoff
+    provenance: "Figure 1, middle panel, filled circles"
+    ambiguous_points: [10]
+    ambiguous_note: "at t=10 the formic and acetic markers superimpose (the curves cross); both read ~0.7 and they are NOT separable. The value is carried as the shared reading, flagged, not resolved."
+    points: [[0, 0.0], [2, 0.0], [5, 0.44], [10, 0.7], [15, 0.96], [20, 1.15], [30, 2.79], [40, 3.29]]
+  - species: acetic_acid
+    system: glucose_casein
+    unit: mmol/L
+    data_quality: figure_readoff
+    provenance: "Figure 1, middle panel, filled squares"
+    ambiguous_points: [10]
+    ambiguous_note: "see formic_acid/glucose_casein: same superimposed pair at t=10, both ~0.7."
+    points: [[0, 0.0], [2, 0.0], [5, 0.16], [10, 0.75], [15, 1.54], [20, 2.08], [30, 3.53], [40, 5.24]]
+  - species: available_lysine_residues
+    system: glucose_casein
+    unit: mmol/L
+    data_quality: figure_readoff
+    provenance: "Figure 1, right panel, open circles"
+    points: [[0, 15.0], [2, 15.0], [5, 13.8], [10, 12.6], [15, 11.0], [20, 10.5], [30, 8.7], [40, 8.6]]
+  - species: amadori_compound
+    system: glucose_casein
+    unit: mmol/L
+    data_quality: figure_readoff
+    provenance: "Figure 1, right panel, open diamonds; measured as furosine and recalculated with the paper's stated factor 3.1"
+    shape_note: "RISES TO A MAXIMUM AT t=10-15 AND THEN FALLS. That intermediate maximum is the single most useful shape in this file: it is a direct observation of an intermediate being consumed, which no endpoint value can show."
+    points: [[0, 0.11], [2, 0.18], [5, 0.71], [10, 1.10], [15, 1.10], [20, 0.99], [30, 0.78], [40, 0.67]]
+
+  # ---- Figure 2: fructose-casein, 120 C ----
+  - species: fructose
+    system: fructose_casein
+    unit: mmol/L
+    data_quality: figure_readoff
+    provenance: "Figure 2, left panel, open squares. Caption: 'Fructose-casein solutions heated at 120 degC: fructose (open square); glucose (open triangle); formic acid (filled circle); acetic acid (filled square); lysine residues (open circle); Amadori compound (open diamond).'"
+    low_confidence_points: [0, 2]
+    points: [[0, 146.5], [2, 141], [5, 140.7], [10, 133.1], [15, 121.2], [20, 108.2], [30, 101.7], [40, 97.8]]
+  - species: glucose
+    system: fructose_casein
+    unit: mmol/L
+    data_quality: figure_readoff
+    provenance: "Figure 2, left panel, open triangles (isomerisation product)"
+    points: [[0, 0.0], [2, 0.0], [5, 1.1], [10, 3.3], [15, 9.4], [20, 10.5], [30, 14.4], [40, 16.2]]
+  - species: formic_acid
+    system: fructose_casein
+    unit: mmol/L
+    data_quality: figure_readoff
+    provenance: "Figure 2, middle panel, filled circles"
+    ambiguous_points: [30]
+    ambiguous_note: "at t=30 the formic and acetic markers superimpose; both read ~4.1 and are not separable."
+    points: [[0, 0.0], [2, 0.44], [5, 1.14], [10, 1.96], [15, 2.49], [20, 2.92], [30, 4.09], [40, 4.96]]
+  - species: acetic_acid
+    system: fructose_casein
+    unit: mmol/L
+    data_quality: figure_readoff
+    provenance: "Figure 2, middle panel, filled squares"
+    ambiguous_points: [30]
+    ambiguous_note: "see formic_acid/fructose_casein: same superimposed pair at t=30, both ~4.1."
+    points: [[0, 0.0], [2, 0.0], [5, 0.07], [10, 0.50], [15, 1.35], [20, 2.13], [30, 4.05], [40, 5.85]]
+  - species: available_lysine_residues
+    system: fructose_casein
+    unit: mmol/L
+    data_quality: figure_readoff
+    provenance: "Figure 2, right panel, open circles"
+    points: [[0, 14.6], [2, 14.5], [5, 13.7], [10, 12.3], [15, 11.1], [20, 9.7], [30, 8.7], [40, 7.2]]
+  - species: amadori_compound
+    system: fructose_casein
+    unit: mmol/L
+    data_quality: figure_readoff
+    provenance: "Figure 2, right panel, open diamonds"
+    shape_note: "FLAT AT ZERO for every time point, which is the paper's own finding and is why it is recorded rather than dropped: 'The Heyns compound glucosyllysine was not detected in the heated fructose-casein system, and only a very small amount of Amadori compound was found.' Contrast the glucose-casein series above, which peaks at ~1.1 mmol/L. This pair is a direct aldose/ketose discrimination test."
+    points: [[0, 0.0], [2, 0.0], [5, 0.0], [10, 0.0], [15, 0.0], [20, 0.0], [30, 0.0], [40, 0.0]]
+
+  # ---- Figure 3: pH and total acids ----
+  - species: pH_measured
+    system: glucose_casein
+    unit: pH
+    data_quality: figure_readoff
+    provenance: "Figure 3A, open circles, left axis. Caption: 'pH (open circle) and total amount of acids as found by titration (open triangle) and HPLC (open square) in heated glucose-casein (A) and fructose-casein (B) systems.'"
+    verification: {status: verified_figure_readoff, date: 2026-08-28, note: "endpoint drop 6.72 -> 6.45 = 0.27, against the paper's prose statement of '0.3 pH unit' (check 2)"}
+    points: [[0, 6.72], [2, 6.72], [5, 6.70], [10, 6.67], [15, 6.61], [20, 6.58], [30, 6.53], [40, 6.45]]
+  - species: pH_measured
+    system: fructose_casein
+    unit: pH
+    data_quality: figure_readoff
+    provenance: "Figure 3B, open circles, left axis"
+    verification: {status: verified_figure_readoff, date: 2026-08-28, note: "endpoint drop 6.70 -> 6.33 = 0.37, against the paper's prose statement of '0.4 pH unit' (check 2)"}
+    points: [[0, 6.70], [2, 6.66], [5, 6.65], [10, 6.62], [15, 6.55], [20, 6.50], [30, 6.39], [40, 6.33]]
+  - species: total_acids_by_titration
+    system: glucose_casein
+    unit: mmol/L
+    data_quality: figure_readoff
+    provenance: "Figure 3A, open triangles, right axis"
+    note: "EXCEEDS formic + acetic at every time. The paper: 'other organic acids were formed but were not identified. Possible acids are lactic acid, ..., glycolic acid, ..., and the already mentioned saccharinic acids'. The gap is the unidentified-acid pool and must not be closed by assuming it is formic + acetic."
+    points: [[0, 0.0], [2, 0.0], [5, 1.0], [10, 2.6], [15, 7.2], [20, 9.1], [30, 14.1], [40, 17.3]]
+  - species: total_acids_by_hplc
+    system: glucose_casein
+    unit: mmol/L
+    data_quality: figure_readoff
+    provenance: "Figure 3A, open squares, right axis"
+    verification: {status: verified_figure_readoff, date: 2026-08-28, note: "equals formic + acetic from Figure 1 to within 2% at every point -- the cross-figure identity of check 1"}
+    points: [[0, 0.0], [2, 0.0], [5, 0.11], [10, 1.39], [15, 2.38], [20, 3.10], [30, 6.21], [40, 8.37]]
+  - species: total_acids_by_titration
+    system: fructose_casein
+    unit: mmol/L
+    data_quality: figure_readoff
+    provenance: "Figure 3B, open triangles, right axis"
+    points: [[0, 0.0], [2, 1.25], [5, 2.83], [10, 5.34], [15, 9.70], [20, 13.19], [30, 21.09], [40, 25.12]]
+  - species: total_acids_by_hplc
+    system: fructose_casein
+    unit: mmol/L
+    data_quality: figure_readoff
+    provenance: "Figure 3B, open squares, right axis"
+    verification: {status: verified_figure_readoff, date: 2026-08-28, note: "equals formic + acetic from Figure 2 to within 2% at every point (check 1)"}
+    points: [[0, 0.0], [2, 0.38], [5, 1.31], [10, 2.29], [15, 3.98], [20, 5.12], [30, 8.01], [40, 10.63]]
+
+  # ---- Figure 4: browning ----
+  # NOTE the unit difference from Table 6.2 above: Table 6.2 is the THESIS at 20/40/60 min,
+  # this is the PAPER at 0-40 min. They are different runs and must not be concatenated.
+  - species: absorbance_420nm_total
+    system: glucose_casein
+    unit: A420 (4x diluted in 16% SDS)
+    data_quality: figure_readoff
+    provenance: "Figure 4A, open diamonds. Caption: 'Browning of total system (open diamond), protein fraction (filled circle), and sugar fraction (open triangle) expressed in absorbance units measured at 420 nm and concentration of protein-bound melanoidins (filled circle) in heated glucose-casein (A) and fructose-casein (B) systems.'"
+    ambiguous_points: [10]
+    ambiguous_note: "at t=10 the total and protein-fraction markers superimpose; ~0.22, not separable."
+    points: [[0, 0.0], [2, 0.0], [5, 0.0], [10, 0.22], [15, 0.78], [20, 1.24], [30, 2.30], [40, 3.32]]
+  - species: absorbance_420nm_protein_fraction
+    system: glucose_casein
+    unit: A420 (4x diluted in 16% SDS)
+    data_quality: figure_readoff
+    provenance: "Figure 4A, filled circles, left axis"
+    points: [[0, 0.0], [2, 0.0], [5, 0.0], [10, 0.215], [15, 0.64], [20, 1.10], [30, 1.94], [40, 2.66]]
+  - species: absorbance_420nm_sugar_fraction
+    system: glucose_casein
+    unit: A420 (4x diluted in 16% SDS)
+    data_quality: figure_readoff
+    provenance: "Figure 4A, open triangles, left axis"
+    points: [[0, 0.0], [2, 0.0], [5, 0.0], [10, 0.07], [15, 0.08], [20, 0.23], [30, 0.35], [40, 0.70]]
+  - species: protein_bound_melanoidins
+    system: glucose_casein
+    unit: mmol/L (sugar units incorporated; = 2 x A420 at eps 500 mol-1 L cm-1)
+    data_quality: figure_readoff
+    derivation_note: "NOT AN INDEPENDENT SERIES. It is the protein-fraction A420 read on Figure 4's second y-axis, which the paper places in an exact 1:2 ratio to the first via its own stated extinction coefficient. Recorded separately because the paper reports it as a concentration, but it carries no information the A420 series does not."
+    points: [[0, 0.0], [2, 0.0], [5, 0.0], [10, 0.43], [15, 1.27], [20, 2.20], [30, 3.89], [40, 5.32]]
+  - species: absorbance_420nm_total
+    system: fructose_casein
+    unit: A420 (4x diluted in 16% SDS)
+    data_quality: figure_readoff
+    provenance: "Figure 4B, open diamonds"
+    points: [[0, 0.0], [2, 0.0], [5, 0.0], [10, 0.45], [15, 1.17], [20, 1.77], [30, 3.52], [40, 4.74]]
+  - species: absorbance_420nm_protein_fraction
+    system: fructose_casein
+    unit: A420 (4x diluted in 16% SDS)
+    data_quality: figure_readoff
+    provenance: "Figure 4B, filled circles"
+    points: [[0, 0.0], [2, 0.0], [5, 0.0], [10, 0.31], [15, 0.90], [20, 1.15], [30, 2.81], [40, 3.66]]
+  - species: absorbance_420nm_sugar_fraction
+    system: fructose_casein
+    unit: A420 (4x diluted in 16% SDS)
+    data_quality: figure_readoff
+    provenance: "Figure 4B, open triangles"
+    points: [[0, 0.0], [2, 0.0], [5, 0.0], [10, 0.07], [15, 0.08], [20, 0.61], [30, 0.68], [40, 1.06]]
+  - species: protein_bound_melanoidins
+    system: fructose_casein
+    unit: mmol/L (sugar units incorporated; = 2 x A420 at eps 500 mol-1 L cm-1)
+    data_quality: figure_readoff
+    derivation_note: "as for glucose_casein: the second axis of the protein-fraction series, not an independent measurement."
+    points: [[0, 0.0], [2, 0.0], [5, 0.0], [10, 0.61], [15, 1.80], [20, 2.30], [30, 5.62], [40, 7.31]]
+
+  # ---- Figure 6: sugars heated WITHOUT casein (the caramelisation control) ----
+  # THE MOST VALUABLE PAIR IN THIS FILE for anyone separating Maillard from caramelisation:
+  # same sugar, same T, same t, protein present vs absent.
+  - species: glucose
+    system: glucose_only_no_protein
+    unit: mmol/L
+    data_quality: figure_readoff
+    provenance: "Figure 6, top-left panel, open triangles. Caption: 'Glucose solutions (top) and fructose solutions (bottom) heated without casein at 120 degC: glucose (open triangle); fructose (open square); formic acid (filled circle); acetic acid (filled square); absorbance at 420 nm (asterisk).'"
+    low_confidence_points: [0, 2]
+    points: [[0, 154], [2, 154], [5, 144.0], [10, 136.2], [15, 129.8], [20, 112.1], [30, 105.0], [40, 92.9]]
+  - species: fructose
+    system: glucose_only_no_protein
+    unit: mmol/L
+    data_quality: figure_readoff
+    provenance: "Figure 6, top-left panel, open squares"
+    note: "ISOMERISATION IS FASTER WITHOUT PROTEIN: 44.7 mmol/L at 40 min here vs 34.6 with casein. The sugar is not being consumed by the Amadori route."
+    low_confidence_points: [0, 2]
+    points: [[0, 0.7], [2, 0.4], [5, 7.5], [10, 16.7], [15, 22.7], [20, 30.5], [30, 38.3], [40, 44.7]]
+  - species: formic_acid
+    system: glucose_only_no_protein
+    unit: mmol/L
+    data_quality: figure_readoff
+    provenance: "Figure 6, top-middle panel, filled circles"
+    points: [[0, 0.0], [2, 0.0], [5, 0.39], [10, 0.46], [15, 0.66], [20, 1.06], [30, 1.72], [40, 2.34]]
+  - species: acetic_acid
+    system: glucose_only_no_protein
+    unit: mmol/L
+    data_quality: figure_readoff
+    provenance: "Figure 6, top-middle panel, filled squares"
+    points: [[0, 0.0], [2, 0.0], [5, 0.11], [10, 0.02], [15, 0.05], [20, 0.25], [30, 1.13], [40, 2.05]]
+  - species: absorbance_420nm_total
+    system: glucose_only_no_protein
+    unit: A420
+    data_quality: figure_readoff
+    provenance: "Figure 6, top-right panel, asterisks"
+    note: "0.52 at 40 min WITHOUT protein against 3.32 WITH protein (Figure 4A). Browning is ~6x protein-dependent in this system; caramelisation alone accounts for well under a fifth of it."
+    points: [[0, 0.0], [2, 0.0], [5, 0.0], [10, 0.0], [15, 0.02], [20, 0.09], [30, 0.21], [40, 0.52]]
+  - species: fructose
+    system: fructose_only_no_protein
+    unit: mmol/L
+    data_quality: figure_readoff
+    provenance: "Figure 6, bottom-left panel, open squares"
+    low_confidence_points: [0, 2]
+    points: [[0, 148], [2, 148], [5, 141.9], [10, 136.2], [15, 126.7], [20, 115.7], [30, 112.8], [40, 99.7]]
+  - species: glucose
+    system: fructose_only_no_protein
+    unit: mmol/L
+    data_quality: figure_readoff
+    provenance: "Figure 6, bottom-left panel, open triangles"
+    shape_note: "NON-MONOTONIC: peaks at t=30 (20.2) and FALLS at t=40 (17.0). Recorded as read; the paper offers no comment on it."
+    points: [[0, 0.0], [2, 0.0], [5, 1.1], [10, 3.2], [15, 11.4], [20, 12.1], [30, 20.2], [40, 17.0]]
+  - species: formic_acid
+    system: fructose_only_no_protein
+    unit: mmol/L
+    data_quality: figure_readoff
+    provenance: "Figure 6, bottom-middle panel, filled circles"
+    missing_points: [15]
+    missing_note: "THE PAPER HAS NO t=15 MARKER FOR THIS SERIES -- seven circles against eight squares, verified at 4x zoom. The point is omitted, NOT interpolated."
+    ambiguous_points: [40]
+    ambiguous_note: "at t=40 the formic and acetic markers superimpose; both ~6.58, not separable."
+    points: [[0, 0.0], [2, 0.0], [5, 0.89], [10, 3.16], [20, 5.45], [30, 6.33], [40, 6.58]]
+  - species: acetic_acid
+    system: fructose_only_no_protein
+    unit: mmol/L
+    data_quality: figure_readoff
+    provenance: "Figure 6, bottom-middle panel, filled squares"
+    ambiguous_points: [40]
+    ambiguous_note: "see formic_acid/fructose_only_no_protein: same superimposed pair at t=40, both ~6.58."
+    points: [[0, 0.0], [2, 0.0], [5, 0.02], [10, 0.66], [15, 1.70], [20, 2.98], [30, 5.25], [40, 6.58]]
+  - species: absorbance_420nm_total
+    system: fructose_only_no_protein
+    unit: A420
+    data_quality: figure_readoff
+    provenance: "Figure 6, bottom-right panel, asterisks"
+    note: "2.46 at 40 min without protein against 4.74 with casein (Figure 4B) -- browning is only ~2x protein-dependent for the ketose, against ~6x for the aldose. That aldose/ketose contrast in the CARAMELISATION share is a discriminating fact this repository had no data for."
+    points: [[0, 0.01], [2, 0.0], [5, 0.09], [10, 0.21], [15, 0.59], [20, 0.88], [30, 1.69], [40, 2.46]]
+
+  # ---- Figure 7: ISOLATED Amadori compound heated alone ----
+  # Times here are 0, 2, 5, 10, 20, 40 -- there is NO t=15 and NO t=30 in this figure.
+  - species: amadori_compound
+    system: isolated_amadori_compound
+    unit: mmol/L
+    data_quality: figure_readoff
+    provenance: "Figure 7, open diamonds. Caption: 'Isolated Amadori compound heated at 120 degC: Amadori compound (open diamond); formic acid (filled circle); acetic acid (filled square).' Preparation, verbatim: 'Formation of protein-bound Amadori product was induced by incubating 150 mM glucose with 3% casein at 65 degC for 15 h.'"
+    verification: {status: verified_figure_readoff, date: 2026-08-28, note: "human re-read of an upsampled render agreed on all six values to within one least-significant digit (check 4)"}
+    why_this_series_matters: "THE ONLY SINGLE-STEP CONSTRAINT IN THIS FILE. Every other series is an end-to-end lump over a whole network; this one starts from an isolated intermediate and watches it decay into two named products, with no sugar and no competing route. It is the closest thing this repository has to an elementary-step measurement outside the Hofmann step-level tables."
+    points: [[0, 0.431], [2, 0.401], [5, 0.168], [10, 0.031], [20, 0.0], [40, 0.0]]
+  - species: formic_acid
+    system: isolated_amadori_compound
+    unit: mmol/L
+    data_quality: figure_readoff
+    provenance: "Figure 7, filled circles"
+    points: [[0, 0.0], [2, 0.001], [5, 0.049], [10, 0.109], [20, 0.141], [40, 0.167]]
+  - species: acetic_acid
+    system: isolated_amadori_compound
+    unit: mmol/L
+    data_quality: figure_readoff
+    provenance: "Figure 7, filled squares"
+    yield_note: "0.431 mmol/L of Amadori compound decays to 0.167 formic + 0.220 acetic = 0.387 mmol/L of the two named acids, i.e. ~90% of the starting material accounted for by two products. That closure is the paper's evidence that Amadori breakdown is a major acid source."
+    points: [[0, 0.0], [2, 0.001], [5, 0.083], [10, 0.158], [20, 0.209], [40, 0.220]]
+
+not_quantified_in_the_source:
+  hmf_and_furfuryl_alcohol: >-
+    "However, HMF and furfuryl alcohol were formed in very low amounts (0-40 uM)." A RANGE, not
+    a series -- no time course is printed, so none is recorded here. Note the magnitude: 0-40
+    uM against 150 mM starting sugar is at most 0.027% conversion, which is a useful bound on
+    how much of this system's carbon can be flowing through the HMF route.
+  hhmf_and_ddmp: >-
+    "HHMF and DDMP could not be quantified because no reference material was available."
+  methylglyoxal: >-
+    Detected but not quantified: "Experiments in which we trapped reactive alpha-dicarbonyl
+    compounds with o-phenylenediamine showed that methylglyoxal was indeed formed." No
+    concentration is given anywhere in the paper.
+  galactose_and_tagatose: >-
+    NO DATA AT ALL, despite both appearing in the Methods: "The reaction products that were
+    detected in the heated galactose- and tagatose-casein systems were comparable with those in
+    the glucose- and fructose-casein systems (results not shown)." The thesis Table 6.2 above
+    does carry galactose and tagatose browning endpoints; those are a different run and are
+    NOT interchangeable with these trajectories.
+  figure_5_mass_balance: >-
+    Figure 5 is a STACKED AREA CHART of the quantities already listed above, re-expressed as a
+    percentage of initial sugar. Its band boundaries were deliberately not digitized -- they
+    carry no information the component series do not, and digitizing stacked boundaries
+    compounds the error of every band beneath. Only the top of the stack (total recovery) was
+    read, approximately: glucose-casein ~99-100% at 0-5 min, dipping to ~97% around 15-20 min,
+    back to ~99-100% by 30-40 min; fructose-casein ~100% to 10 min, dipping to ~92% at 20 min,
+    ~99% at 30 and ~96-98% at 40. Consistent with the paper's prose.

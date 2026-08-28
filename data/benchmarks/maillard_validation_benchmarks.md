@@ -186,6 +186,15 @@ Each section maps to one validation gap identified in the SLR protocol. For each
 > `results/validation/sulfur_barrier_refit_pentodiulose.{json,md}` is retracted.
 > **THE SULFUR BRANCH HAS ZERO ABSOLUTE LITERATURE ANCHORS.**
 >
+> **CORRECTED 2026-08-28 (Wave W): THIS IS NO LONGER TRUE.** The full text of Hofmann & Schieberle 1998 (`10.1021/jf9705983`) arrived by interlibrary loan and the sulfur branch now has **three** absolute, stable-isotope-dilution literature anchors — `hofmann1998_{ribose,glucose,fructose}_cysteine_145C_20min_pH5`, the pH-5.0 aqueous rows of the paper's own Table 1 (ribose FFT 121 / MFT 198 ppb; glucose 28 / 19; fructose 32 / 25, all µg per 100 mL × 10 with the volume printed in the table footnote). The paper also confirms Wave S2b's forensic finding from the primary source: 342 and 200 ppb appear nowhere in it. **The model fails all three anchors** — 12.27×, 29.58× and 14.46× worst-ratio, mean 0.92 dex — so the branch went from *unanchored* to *anchored and measurably wrong*, which is the direction of travel this audit wanted.
+>
+> Note what that does to *this document*: section 1.3's abstract-reconstructed band
+> `~0.02-0.05` mol % MFT for ribose+cysteine can now be checked against the paper it was
+> guessing at. The real Table 1 value is 19.8 µg MFT per 100 mL from 10.0 mmol ribose,
+> i.e. 19.8e-6/114.17/0.010 x 100 = **0.00173 mol %** — about **12x below the bottom of
+> the invented band**. The guesswork was not merely unsourced; it was wrong by an order
+> of magnitude, and in the optimistic direction.
+>
 > **The four tells that this table is reconstructed, each checkable without the paywalled body:**
 >
 > 1. **Only one row is bold and unhedged** — `1.4` / `0.05` — and that row is *verbatim from the

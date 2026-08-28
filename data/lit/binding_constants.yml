@@ -312,6 +312,50 @@ sources:
 # -------------------------------------------------------------------------------------
 # BINDING RECORDS
 # -------------------------------------------------------------------------------------
+
+  - source_id: bi_2022_foodchem
+    citation: >-
+      Bi, S.; Pan, X.; Zhang, W.; Ma, Z.; Lao, F.; Shen, Q.; Wu, J. (2022). "Non-covalent
+      interactions of selected flavors with pea protein: Role of molecular structure of
+      flavor compounds." Food Chemistry 389: 133044.
+    doi: "10.1016/j.foodchem.2022.133044"
+    crossref_verified: "2026-08-28"
+    access: full_text
+    retrieved_from: >-
+      data/articles/1-s2.0-S0308814622010068-main.pdf, obtained by the repository owner via
+      interlibrary loan. The PDF is gitignored and NOT committed. Identity confirmed from the
+      PDF itself (title, author list, "Food Chemistry 389 (2022) 133044", and the printed
+      "https://doi.org/10.1016/j.foodchem.2022.133044"), not assumed from the filename.
+    retrieved_on: "2026-08-28"
+    verification_status: content_verified_full_text
+    material: >-
+      LAB-EXTRACTED, NOT A COMMERCIAL ISOLATE. "the defatted pea flour was dispersed in DI
+      water (1:10, w/v) with the pH adjusted to 9.0 using 2.0 M NaOH ... the pH of the
+      supernatant was adjusted to 4.5 using 2 M HCl ... the pH of the pea protein suspension
+      was adjusted to 7.0, and then the protein was collected and kept at -80 degC for 24 h.
+      The frozen pea protein solution was placed into a vacuum freeze-dryer ... at -40 degC
+      for 48 h." Alkaline-extracted / isoelectric-precipitated whole pea protein. NO PROTEIN
+      PURITY IS REPORTED, no 7S/11S fractionation, and the native/denatured state is never
+      stated (they report 17.9% alpha-helix by CD without flavours, and dock against the 11S
+      crystal structure PDB 3KSC). Transferability to a commercial PPI is unverified.
+    method_summary: >-
+      "2.3. Investigation of binding of flavor compounds to pea protein using static headspace
+      gas chromatography/mass spectrometry"; 1% (w/v) final pea protein in 0.01 M potassium
+      phosphate buffer pH 7.6; "The vial was kept at 37 degC for 2 h"; binding % from headspace
+      depletion against a protein-free control. Partition coefficients by the phase ratio
+      variation (PRV) method under "the same conditions as those described in Section 2.3.1".
+    cosolvent_caveat: >-
+      A METHANOL CO-SOLVENT IS PRESENT AND THE AUTHORS DO NOT DISCUSS IT. "Stock solutions of
+      the flavor compounds were prepared by dissolving each compound in the potassium phosphate
+      buffer solution to a concentration of 10 mM. An appropriate amount of absolute methanol
+      was needed for easy dissolution. The ratio of methanol to potassium phosphate buffer was
+      1:19." That is ~5% methanol in the stock and ~1.25% v/v in the assay after dilution.
+      Methanol perturbs hydrophobic binding; the effect is unquantified and uncorrected here.
+    ionic_strength_caveat: "Never stated beyond '0.01 M potassium phosphate buffer (pH 7.6)'; no added NaCl."
+    supplementary_not_held: >-
+      The PDF is the main article only. Tables S1-S4 and Figs S1-S2 are cited but absent, so
+      only the supplementary values RESTATED IN THE BODY TEXT are recorded here.
+
 records:
 
   # --- Harrison & Hills hydrophobic interaction parameters (per gram of protein) -------
@@ -420,6 +464,122 @@ records:
     not_used_because: "No whey lane exists in this repository; kept as an external scale check."
 
   # --- Percent bound at one stated condition ------------------------------------------
+
+  # --- Wave W (2026-08-28): the hexanal x pea gap, from Bi et al. 2022 -----------------
+  # THIS IS THE ROW THE CAMPAIGN ASKED FOR. sources.liu_2021_ncsu_thesis carried the note
+  # "The hexanal / heptanal / octanal x pea percent-bound values this campaign most wanted
+  # are in Figure 3.1a of this thesis and are FIGURE-ONLY. They are not transcribed."
+  # Bi et al. 2022 supply a hexanal x pea number that is NOT figure-only: it is stated in
+  # the body text, with both underlying partition coefficients printed alongside it.
+  - record_id: bi2022_hexanal_pea_protein_prv
+    source_id: bi_2022_foodchem
+    quantity: percent_bound_at_conditions
+    value: 71.72
+    uncertainty: null
+    uncertainty_note: >-
+      NO UNCERTAINTY IS PRINTED for the retention percentages or for the partition
+      coefficients they come from. "All the experiments were conducted in triplicate" is the
+      only replication statement, with no spread given. Recorded as null rather than assigned
+      a plausible-looking number.
+    units: percent_bound
+    protein_source: pea_iso
+    compound: hexanal
+    compound_class: aldehyde
+    conditions:
+      protein_concentration_g_per_L: 10.0
+      protein_basis: g_isolate_powder
+      protein_basis_note: >-
+        "A 2% (w/v) pea protein solution was prepared in 0.01 M potassium phosphate buffer
+        (pH 7.6)" and "After mixing, the final concentration of protein was 1%", i.e. 10 g/L
+        of the freeze-dried lab-extracted powder. THE PAPER REPORTS NO PROTEIN PURITY, so
+        this is a POWDER basis, not a protein basis, and it cannot be converted to one. If
+        the powder is (say) 85 wt% protein like a typical commercial isolate, the true
+        g_protein loading is 8.5 g/L and the inferred K_eff is ~18% larger. That uncertainty
+        is real and is not resolvable from this source.
+      flavor_concentration: "1260 +/- 114 ug/kg, i.e. the real in-pea hexanal level from Bi et al. 2020, ~12.6 uM"
+      pH: 7.6
+      buffer: "0.01 M potassium phosphate"
+      temperature_celsius: 37.0
+      method: "phase ratio variation (PRV), static headspace GC/MS; R(%) = (1 - K1/K2) x 100 where K1 is the buffer/gas and K2 the pea-protein-matrix/gas partition coefficient"
+    location: "Results section 3.8 (body text); the underlying Table S3 is in the Supplementary, which this PDF does not contain"
+    quote: >-
+      "The partition coefficients of hexanal between the pea protein matrix and the headspace
+      and between the potassium phosphate buffer and the headspace were 116.37 and 32.90,
+      respectively." ... "The percentage retention of (Z)-2-penten-1-ol, hexanal, and
+      (E)-2-octenal by pea protein was 29.29%, 71.72%, and 79.31%, respectively."
+    arithmetic_check: >-
+      1 - 32.90/116.37 = 71.73%, against the printed 71.72%. The two printed partition
+      coefficients and the printed retention are mutually consistent to the last digit, which
+      is why this record is admissible even though Table S3 itself is not held.
+    dilute_ligand_note: >-
+      UNUSUALLY WELL SUITED to the single-site Langmuir this repository uses, and worth
+      stating because most percent-bound records in this file are not. The PRV experiment was
+      run at the REAL in-pea flavour concentration (~12.6 uM hexanal), not at the 0.05-2.5 mM
+      levels used for the Klotz analysis, so it sits far inside the dilute-ligand limit where
+      f_free = 1/(1 + K_eff c_p) is the correct form. The same paper shows that at 0.5-2.5 mM
+      the binding percentage COLLAPSES (see mechanism_caveats below), i.e. the high-
+      concentration branch is NOT in the dilute limit at all.
+    verification_status: content_verified_full_text
+    usable_for_model: true
+    model_role: cross_check_only
+    model_role_note: >-
+      Enters `src/protein_binding.cross_check_percent_bound` as the FIRST HEXANAL ROW that
+      cross-check has ever had, on the compound that carries the most weight anywhere in the
+      matrix lane. It is NOT promoted to a prediction constant: the shipped binding mode
+      predicts from `a_p * Pow` alone, and swapping in a per-compound measured constant for
+      hexanal and nothing else would make the mode a hybrid of measured physics and
+      per-compound patching -- which is the pattern this whole audit exists to remove. If a
+      future wave wants a per-compound route it must do it for every compound or not at all.
+
+  - record_id: bi2022_z2penten1ol_pea_protein_prv
+    source_id: bi_2022_foodchem
+    quantity: percent_bound_at_conditions
+    value: 29.29
+    uncertainty: null
+    units: percent_bound
+    protein_source: pea_iso
+    compound: (Z)-2-penten-1-ol
+    compound_class: alcohol
+    conditions:
+      protein_concentration_g_per_L: 10.0
+      protein_basis: g_isolate_powder
+      flavor_concentration: "901 +/- 119 ug/kg (real in-pea level)"
+      pH: 7.6
+      buffer: "0.01 M potassium phosphate"
+      temperature_celsius: 37.0
+      method: "phase ratio variation (PRV), static headspace GC/MS"
+    quote: >-
+      "The percentage retention of (Z)-2-penten-1-ol, hexanal, and (E)-2-octenal by pea
+      protein was 29.29%, 71.72%, and 79.31%, respectively."
+    partition_coefficients_quoted: "2065.44 (pea protein matrix) and 1460.49 (buffer)"
+    verification_status: content_verified_full_text
+    usable_for_model: true
+    model_role: cross_check_only
+
+  - record_id: bi2022_e2octenal_pea_protein_prv
+    source_id: bi_2022_foodchem
+    quantity: percent_bound_at_conditions
+    value: 79.31
+    uncertainty: null
+    units: percent_bound
+    protein_source: pea_iso
+    compound: (E)-2-octenal
+    compound_class: aldehyde
+    conditions:
+      protein_concentration_g_per_L: 10.0
+      protein_basis: g_isolate_powder
+      flavor_concentration: "22.9 +/- 3.54 ug/kg (real in-pea level)"
+      pH: 7.6
+      buffer: "0.01 M potassium phosphate"
+      temperature_celsius: 37.0
+      method: "phase ratio variation (PRV), static headspace GC/MS"
+    quote: >-
+      "The percentage retention of (Z)-2-penten-1-ol, hexanal, and (E)-2-octenal by pea
+      protein was 29.29%, 71.72%, and 79.31%, respectively."
+    partition_coefficients_quoted: "2203.85 (pea protein matrix) and 455.93 (buffer)"
+    verification_status: content_verified_full_text
+    usable_for_model: true
+    model_role: cross_check_only
   - record_id: barallat2023_octanal_plant_isolates_pooled
     source_id: barallat_perez_2023_jafc
     quantity: percent_bound_at_conditions
@@ -1097,12 +1257,19 @@ matrix_protein_loadings:
     aqueous: true
     quantification_basis: unknown
     note: >-
-      Bi et al. 2020 measured RAW PEA FLOUR, not a protein-isolate slurry, and the
-      repository's scored value is not a concentration the paper reports directly (it is
-      OAV 280 x this repository's own 4.5 ppb hexanal threshold; see the bundle's
-      value_provenance_note). No protein loading and no quantification basis can be
-      asserted for it from anything this repository has read, so the binding mode applies
-      NO correction here and says so.
+      Bi et al. 2020 measured RAW PEA FLOUR, not a protein-isolate slurry. CORRECTED
+      2026-08-28 (Wave W): the second half of this note used to read "the repository's
+      scored value is not a concentration the paper reports directly (it is OAV 280 x this
+      repository's own 4.5 ppb hexanal threshold)". THAT IS NOW KNOWN TO BE WRONG. The full
+      text arrived by interlibrary loan and its Table 4 prints "1260 +/- 114" ug/kg directly,
+      with the OAV derived FROM it by footnote h ("ratio of concentration to odor threshold").
+      The repository was running the paper's own calculation backwards; the exact divisibility
+      by 4.5 is explained by Bi et al. using the SAME van Gemert threshold, 4.5 ug/kg, that
+      this repository uses. See the bundle's wave_w_primary_source_correction.
+      WHAT DID NOT CHANGE, AND IT IS THE PART THAT GOVERNS THIS LANE: no protein loading and
+      no quantification basis can be asserted for raw pea flour from anything this repository
+      has read, so the binding mode still applies NO correction here and still says so. The
+      value being real does not make the matrix describable.
     verification_status: not_established
 
   - lane_id: external_validation_bi_2020_roasted_pea_hexanal
@@ -1148,6 +1315,55 @@ matrix_protein_loadings:
 # EVIDENCE THAT EXISTS BUT IS NOT USABLE AS A CONSTANT
 # -------------------------------------------------------------------------------------
 not_usable_without_protein_molar_mass:
+
+  - record_id: bi2022_pea_klotz
+    source_id: bi_2022_foodchem
+    citation: >-
+      Bi, S.; Pan, X.; Zhang, W.; Ma, Z.; Lao, F.; Shen, Q.; Wu, J. (2022). "Non-covalent
+      interactions of selected flavors with pea protein: Role of molecular structure of
+      flavor compounds." Food Chemistry 389: 133044.
+    doi: "10.1016/j.foodchem.2022.133044"
+    crossref_verified: "2026-08-28"
+    retrieved_from: "data/articles/1-s2.0-S0308814622010068-main.pdf (interlibrary loan, not committed)"
+    verification_status: content_verified_full_text
+    values_quoted:
+      note: >-
+        Table 1, "Binding parameters characterizing binding pea proteins to different selected
+        flavors at 37 degC", columns as printed: Flavor compounds | n | K (M-1) | nK (M-1).
+        Lab-extracted pea protein 1% w/v, 0.01 M potassium phosphate pH 7.6, 37 degC.
+      table_1_quote: >-
+        "(Z)-2-penten-1-ol 2.55 +/- 1.34 | 438.68 +/- 259.27 | 1119.90 +/- 273.72 ;
+        hexanal 4.84 +/- 0.36 | 684.46 +/- 109.43 | 3313.23 +/- 308.45 ;
+        (E)-2-octenal 26.95 +/- 2.92 | 8207.72 +/- 2223.82 | 221238.94 +/- 39964.95"
+      body_text_corroboration: >-
+        "were 438.68 +/- 259.27, 684.46 +/- 109.43, and 8207.72 +/- 2223.82 M-1, respectively"
+        (for K), and "1119.90 +/- 273.72, 3313.23 +/- 308.45, and 221,238.94 +/- 39,964.95"
+        (for nK, units omitted in the text; the table header carries them).
+      scope_restriction_quoted_by_the_authors: >-
+        "The values for n for the binding of pea protein with (Z)-2-penten-1-ol, hexanal, and
+        (E)-2-octenal AT HIGH FLAVOR COMPOUND CONCENTRATIONS were 2.55 +/- 1.34, 4.84 +/-
+        0.36, and 26.95 +/- 2.92, respectively." High = 0.5-2.5 mM. NO CONSTANTS ARE REPORTED
+        FOR THE 0.05-0.25 mM BRANCH, which is the branch the in-food concentrations sit in.
+    why_not_usable: >-
+      THE SAME REASON AS wongprasert2024_ppi_klotz, and it is worth restating because this is
+      the single most-wanted constant in the campaign and it still cannot be used. K is defined
+      per MOLE of protein through v = ([L]t - [L])/Cp, and the paper NEVER STATES the protein
+      molar mass it used -- it gives pea protein only in % w/v and mg/mL. So 684.46 M-1 cannot
+      be converted to the L/g basis this model works in without inventing a globulin mass, and
+      inventing one would put a free multiplicative parameter under the most load-bearing
+      constant in the matrix lane. What CAN be salvaged from this paper is the PRV retention
+      percentage, which is measured at a stated g/L loading and needs no molar mass; that is
+      record `bi2022_hexanal_pea_protein_prv` above. Note also that K = a/b (intercept over
+      slope) is itself independent of the assumed Cp, so K is robust while n = 4.84 is not
+      interpretable at all without the molar mass -- another reason not to build on n.
+    do_not_confuse_with_the_stern_volmer_constants: >-
+      The same paper prints Stern-Volmer quenching constants in Fig. 2 in L/mol -- the SAME
+      units as K -- and for hexanal at 37 degC Ksv = 14.205 L/mol against Klotz K = 684.46
+      M-1. That is a ~48x disagreement at the same temperature, in the same buffer, in the
+      same paper, and the authors never reconcile or even mention it. Anyone promoting a
+      constant out of this paper must say which of the two they mean. (The Ksv values are
+      figure-legend text, not table values, and F0/F only reaches ~1.06 at 2.5 mM, so the
+      fluorescence route is measuring something much weaker than the headspace route.)
   - record_id: wongprasert2024_ppi_klotz
     source_id: null
     citation: >-
@@ -1189,6 +1405,84 @@ qualitative_only:
       Two open-access sources disagree with each other on the sign of the pea-vs-soy
       hexanal binding difference, and neither prints a hexanal number. This is the single
       sharpest evidence gap in the matrix observability lane.
+    verification_status: content_verified_full_text
+
+  - record_id: bi2022_hexanal_binds_by_hydrogen_bonding_not_hydrophobically
+    source_id: bi_2022_foodchem
+    direction: mechanism_challenge_to_the_shipped_binding_physics
+    quantified: false
+    quote: >-
+      Abstract: "Hydrophobic interactions were dominant in the non-covalent interactions
+      between (E)-2-octenal/(Z)-2-penten-1-ol and pea protein, whereas HYDROGEN BONDING WAS
+      DOMINANT IN THE NON-COVALENT INTERACTIONS BETWEEN HEXANAL AND PEA PROTEIN." And:
+      "The values of dH and dS for the binding reaction between hexanal and pea protein were
+      -150.916 kJ/mol and -0.446 kJ/(mol K), respectively, at 37 degC, which implies that van
+      der Waals interactions or hydrogen bonds played a major role in the interaction." And,
+      from the docking: "a hydrogen bond was formed between the Gln40 residue and the oxygen
+      atom in hexanal with a length of 2.89 A."
+    why_this_matters_here: >-
+      READ THIS BEFORE TRUSTING THE BINDING MODE ON HEXANAL. The shipped binding physics is
+      K_eff = a_p * Pow -- a purely HYDROPHOBIC partition model, in which a compound's
+      affinity is set by its octanol-water partition coefficient and nothing else. Bi et al.
+      conclude that for hexanal specifically, and in contrast to the two other compounds they
+      studied, the dominant interaction is NOT hydrophobic. If that is right, then the one
+      compound the matrix lane leans on hardest is the one the model's functional form is
+      least entitled to describe, and any agreement on hexanal is partly luck. This is a
+      MECHANISM-LEVEL caveat, not a numerical correction: nothing in the model was changed
+      for it, because the alternative form is not specified anywhere well enough to implement.
+      The authors do concede a secondary hydrophobic component -- "It is worth noting that
+      hexanal also decreased the surface hydrophobicity of pea protein. This may have been
+      due to the fact that important secondary hydrophobic interactions occurred between the
+      protein and the flavor compound in addition to hydrogen bonding or van der Waals
+      forces" -- so this is a claim about which term dominates, not that Pow is irrelevant.
+    verification_status: content_verified_full_text
+
+  - record_id: bi2022_binding_is_reversible_and_non_covalent
+    source_id: bi_2022_foodchem
+    direction: supports_the_reversible_partition_assumption
+    quantified: false
+    quote: >-
+      Conclusions: "By the combination of calculations of thermodynamic parameters, protein
+      surface hydrophobicity measurements, and the use of bond-disrupting agents, it was
+      confirmed that the interactions of pea protein with the three flavor compounds were
+      REVERSIBLE and involved hydrophobic interactions, as well as hydrogen bonds."
+    why_this_matters_here: >-
+      The repository's binding model assumes a reversible equilibrium partition, and
+      `describe_model()` reports `covalent_binding_modelled: False`. This is the first
+      retrieved source that tests reversibility on pea protein directly and finds it. NOTE
+      THE LIMIT OF WHAT IT SHOWS: the paper makes NO measurement of covalent adduct formation
+      at all -- no adduct MS search, no borohydride reduction, no bound-residue analysis --
+      so it establishes that the interaction it measured is reversible, not that no covalent
+      route exists. Aldehyde-lysine Schiff-base chemistry is exactly what this paper did not
+      look for, and at 37 degC / 2 h it would not have had much chance to.
+    verification_status: content_verified_full_text
+
+  - record_id: bi2022_binding_percentage_collapses_above_0_25_mM
+    source_id: bi_2022_foodchem
+    direction: langmuir_form_fails_at_high_ligand
+    quantified: true
+    value: "hexanal binding rises with concentration to ~86% at 0.25 mM, then COLLAPSES to ~16% at 0.5 mM and ~6% at 2.5 mM"
+    quote: >-
+      "The retention by pea protein of the flavor compounds increased with the flavor
+      compound concentration in the range from 0.05 to 0.25 mM. However, this trend was
+      reversed in the concentration range of 0.5-2.5 mM, and the percentage retention was
+      lower than that at low concentrations (0.05-0.25 mM)." And: "When the concentration of
+      the flavor compounds reached a certain value (2.5 mM) that exceeded the binding
+      capacity of pea protein, the binding percentages decreased."
+    caveat: >-
+      THE PER-CONCENTRATION NUMBERS ARE FIGURE-ONLY (Fig. 1A) and are NOT transcribed as
+      data. The value field above is a qualitative summary of a read-off, and is stored here
+      in the qualitative section for exactly that reason. What is quotable is the direction
+      and the authors' own explanation.
+    why_this_matters_here: >-
+      A single-site Langmuir predicts binding percentage INDEPENDENT of ligand concentration
+      in the dilute limit and monotonically decreasing above it -- it cannot produce a rise
+      then a collapse. So the model's functional form is wrong somewhere in this range. The
+      practical consequence is a bound on where the model may be used: the PRV record
+      `bi2022_hexanal_pea_protein_prv` was measured at ~12.6 uM, twenty times below the
+      turning point, so it is in the regime the model can describe. The Klotz constants were
+      fitted ABOVE it, in the regime the model cannot -- a second, independent reason not to
+      promote them.
     verification_status: content_verified_full_text
 
 denaturation_effect_evidence:

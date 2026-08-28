@@ -1,7 +1,13 @@
 # Off-Flavour Target Compounds — Plant-Based Meat Alternatives
 #
 # These compounds must be MINIMISED or TRAPPED in the final product.
-# Sources: Maillard_Plant_based.md, pathways.md, Elicit reports.
+# Sources: data/Gemini_Deep_Research/maillard_plant_based.md,
+#          data/Gemini_Deep_Research/elicit_plant_based_cooking.md.
+#          (2026-08-28, Wave S5: repointed from bare filenames; the docs/research/archives/
+#          copies were byte-identical duplicates and were deleted. No value was changed.)
+# ALSO CITED: `pathways.md` -- A FILE THAT EXISTS NOWHERE IN THIS REPOSITORY. Kept on the
+#          record rather than dropped: the odour thresholds below feed every odour-activity
+#          value in src/sensory.py. Carried as [P], owner decision (Wave T3, T1-10).
 # SMILES validated against PubChem.
 #
 # Fields:

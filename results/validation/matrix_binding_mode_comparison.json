@@ -1,7 +1,7 @@
 {
   "generated_by": "scripts/generators/generate_matrix_binding_mode_comparison.py",
   "wave": "S4",
-  "git_head": "2c3488e",
+  "git_head": "c6b6be3",
   "fitted_parameters_in_this_wave": 0,
   "model": {
     "module": "src/protein_binding.py",
@@ -12,8 +12,8 @@
     "denaturation_modelled": false,
     "denaturation_not_modelled_because": "the two retrieved sources disagree in sign (Barallat-Perez 2023: heat raises hexanal binding, qualitative; Heng 2005: heat lowers octanal binding to purified vicilin, 96% -> 32%)",
     "covalent_binding_modelled": false,
-    "record_count": 23,
-    "source_count": 11,
+    "record_count": 26,
+    "source_count": 12,
     "modes": [
       "fitted_factors",
       "binding_physics",
@@ -34,7 +34,8 @@
     "heng_2005_wur_thesis",
     "barallat_perez_2025_npjsf",
     "liu_2026_ilc_spi",
-    "okeefe_1988_isu_thesis"
+    "okeefe_1988_isu_thesis",
+    "bi_2022_foodchem"
   ],
   "modes": [
     "fitted_factors",
@@ -1340,7 +1341,7 @@
           "fold_error": 1.2437366252042112,
           "abs_log10_error": 0.09472842349750889,
           "inside_ci": true,
-          "value_provenance": "derived_from_oav_and_repo_threshold"
+          "value_provenance": "primary_source_table_value_verified"
         },
         {
           "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
@@ -1350,7 +1351,7 @@
           "fold_error": 2474.3838828574594,
           "abs_log10_error": 3.393467078184556,
           "inside_ci": false,
-          "value_provenance": "derived_from_oav_and_repo_threshold"
+          "value_provenance": "primary_source_table_value_verified"
         },
         {
           "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
@@ -1428,7 +1429,7 @@
           "fold_error": 5.369521945162881,
           "abs_log10_error": 0.7299356216735393,
           "inside_ci": true,
-          "value_provenance": "derived_from_oav_and_repo_threshold"
+          "value_provenance": "primary_source_table_value_verified"
         },
         {
           "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
@@ -1438,7 +1439,7 @@
           "fold_error": 10815.749391795729,
           "abs_log10_error": 4.034056615818239,
           "inside_ci": false,
-          "value_provenance": "derived_from_oav_and_repo_threshold"
+          "value_provenance": "primary_source_table_value_verified"
         },
         {
           "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
@@ -1516,7 +1517,7 @@
           "fold_error": 5.369521945162881,
           "abs_log10_error": 0.7299356216735393,
           "inside_ci": true,
-          "value_provenance": "derived_from_oav_and_repo_threshold"
+          "value_provenance": "primary_source_table_value_verified"
         },
         {
           "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
@@ -1526,7 +1527,7 @@
           "fold_error": 10815.749391795729,
           "abs_log10_error": 4.034056615818239,
           "inside_ci": false,
-          "value_provenance": "derived_from_oav_and_repo_threshold"
+          "value_provenance": "primary_source_table_value_verified"
         },
         {
           "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
@@ -1703,6 +1704,45 @@
     ]
   },
   "cross_check_percent_bound": [
+    {
+      "record_id": "bi2022_hexanal_pea_protein_prv",
+      "compound": "hexanal",
+      "compound_class": "aldehyde",
+      "protein_source_declared": "pea_iso",
+      "measured_percent_bound": 71.72,
+      "protein_concentration_g_per_l_used": 10.0,
+      "protein_basis": "g_isolate_powder",
+      "predicted_percent_bound_pea_iso": 13.09259983487594,
+      "residual_points_pea_iso": -58.62740016512406,
+      "predicted_percent_bound_soy_iso": 8.79374252108689,
+      "residual_points_soy_iso": -62.92625747891311
+    },
+    {
+      "record_id": "bi2022_z2penten1ol_pea_protein_prv",
+      "compound": "(Z)-2-penten-1-ol",
+      "compound_class": "alcohol",
+      "protein_source_declared": "pea_iso",
+      "measured_percent_bound": 29.29,
+      "protein_concentration_g_per_l_used": 10.0,
+      "protein_basis": "g_isolate_powder",
+      "predicted_percent_bound_pea_iso": null,
+      "unavailable_because_pea_iso": "no content-verified octanol-water partition coefficient for '(Z)-2-penten-1-ol'",
+      "predicted_percent_bound_soy_iso": null,
+      "unavailable_because_soy_iso": "no content-verified octanol-water partition coefficient for '(Z)-2-penten-1-ol'"
+    },
+    {
+      "record_id": "bi2022_e2octenal_pea_protein_prv",
+      "compound": "(E)-2-octenal",
+      "compound_class": "aldehyde",
+      "protein_source_declared": "pea_iso",
+      "measured_percent_bound": 79.31,
+      "protein_concentration_g_per_l_used": 10.0,
+      "protein_basis": "g_isolate_powder",
+      "predicted_percent_bound_pea_iso": null,
+      "unavailable_because_pea_iso": "no content-verified octanol-water partition coefficient for '(E)-2-octenal'",
+      "predicted_percent_bound_soy_iso": null,
+      "unavailable_because_soy_iso": "no content-verified octanol-water partition coefficient for '(E)-2-octenal'"
+    },
     {
       "record_id": "barallat2023_octanal_plant_isolates_pooled",
       "compound": "octanal",

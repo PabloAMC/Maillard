@@ -779,7 +779,7 @@
       "volatile_retention_mid": 0.45,
       "volatile_retention_native": 0.37,
       "volatile_retention_denatured": 0.53,
-      "source": "Soy concentrate envelope derived from soy-isolate globulin burial (glycinin/beta-conglycinin) with added fiber/concentrate penalty; repo anchors: Kutzli 2020 / Naik 2021 synthesis plus soy-polysaccharide conjugation trapping notes in docs/Maillard_Plant_based.md",
+      "source": "Soy concentrate envelope derived from soy-isolate globulin burial (glycinin/beta-conglycinin) with added fiber/concentrate penalty; repo anchors: Kutzli 2020 / Naik 2021 synthesis plus soy-polysaccharide conjugation trapping notes in data/Gemini_Deep_Research/maillard_plant_based.md",
       "provenance_tier": "repo_literature_synthesis",
       "confidence_tier": "low_medium",
       "uncertainty_posture": "directional_transfer",

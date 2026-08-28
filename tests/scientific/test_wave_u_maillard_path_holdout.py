@@ -41,7 +41,12 @@ ROOT = Path(__file__).resolve().parents[2]
 HOLDOUT_DIR = ROOT / "data" / "benchmarks" / "external_validation" / "maillard_path"
 FROZEN_JSON = ROOT / "results" / "validation" / "maillard_path_holdout_frozen_predictions.json"
 
-EXPECTED_BUNDLE_COUNT = 12
+# 2026-08-28 (Wave W, re-pinned by the orchestrator): 12 -> 17. Wave W ADDED five
+# Hofmann & Schieberle 1998 bundles (the pH-3/pH-7 series for ribose and glucose,
+# plus xylose pH 5) from the owner-retrieved PDF — growth, not shrinkage; the
+# original 12 are untouched. The five carry the same provenance contract
+# (access_route: owner-provided PDF, dual-read verification).
+EXPECTED_BUNDLE_COUNT = 17
 
 
 def _bundles() -> list[tuple[Path, dict]]:
@@ -133,7 +138,16 @@ def test_the_frozen_artifact_names_the_commit_it_was_generated_from():
     git = payload.get("git") or {}
     assert git.get("commit") and git["commit"] != "unknown", "frozen artifact has no git commit"
     assert payload.get("pre_registration"), "frozen artifact lost its pre-registration statement"
-    assert payload["summary"]["bundle_count"] == EXPECTED_BUNDLE_COUNT
+    # 2026-08-28 (orchestrator, closing Wave W): the FROZEN artifact pins the 12
+    # bundles that existed at its generation commit (12f43dd) and must NEVER track
+    # the live directory — it is the pre-registration. Wave W later ADDED five
+    # bundles to the directory (EXPECTED_BUNDLE_COUNT is now 17); those carry
+    # their own Wave W baseline scores and are not part of this freeze. Comparing
+    # the frozen count against the live count conflated the two.
+    assert payload["summary"]["bundle_count"] == 12, (
+        "the frozen pre-registration artifact was regenerated or edited - it must "
+        "keep the 12 bundles frozen at 12f43dd"
+    )
     # Structural zeroes must stay visible. They have no finite fold error, so a
     # median that silently drops them reports a better model than exists.
     assert "structural_zero_count" in payload["summary"], (

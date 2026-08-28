@@ -132,6 +132,114 @@
       "signal_origin": "external_literature"
     },
     {
+      "bench_file": "/Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/hofmann1998_fructose_cysteine_145C_20min_pH5.json",
+      "benchmark_id": "hofmann1998_fructose_cysteine_145C_20min_pH5",
+      "compounds": [
+        {
+          "ci_width_log10": 1.4400039693088553,
+          "compound": "2-Furfurylthiol (FFT)",
+          "inside_ci": false,
+          "measured_ppb": 32.0,
+          "predicted_mean": 4.03688175367667,
+          "predicted_p5": 0.2672494320314514,
+          "predicted_p50": 4.133278318536105,
+          "predicted_p95": 7.360727840844754,
+          "predicted_std": 2.2795704605433786
+        },
+        {
+          "ci_width_log10": 2.6269336365835407,
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "inside_ci": false,
+          "measured_ppb": 25.0,
+          "predicted_mean": 2.6874754290455973,
+          "predicted_p5": 0.02392507469088343,
+          "predicted_p50": 1.1890999869334733,
+          "predicted_p95": 10.134140914819186,
+          "predicted_std": 3.177182782706084
+        }
+      ],
+      "coverage_rate": 1.0,
+      "evidence_role": "predictive",
+      "execution_path": "free_precursor",
+      "fit_target_of": [],
+      "fitted_row": false,
+      "matched_compounds": 2,
+      "protein_type": "free",
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "/Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/hofmann1998_glucose_cysteine_145C_20min_pH5.json",
+      "benchmark_id": "hofmann1998_glucose_cysteine_145C_20min_pH5",
+      "compounds": [
+        {
+          "ci_width_log10": 3.036933186263617,
+          "compound": "2-Furfurylthiol (FFT)",
+          "inside_ci": true,
+          "measured_ppb": 28.0,
+          "predicted_mean": 574.8160031156054,
+          "predicted_p5": 1.2084759077790905,
+          "predicted_p50": 554.9193443459444,
+          "predicted_p95": 1315.743347845773,
+          "predicted_std": 430.9594850001932
+        },
+        {
+          "ci_width_log10": 3.734817404305067,
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "inside_ci": true,
+          "measured_ppb": 19.0,
+          "predicted_mean": 406.9370472553086,
+          "predicted_p5": 0.27086808633699283,
+          "predicted_p50": 78.89682141427652,
+          "predicted_p95": 1470.8732298437574,
+          "predicted_std": 621.2099313903897
+        }
+      ],
+      "coverage_rate": 1.0,
+      "evidence_role": "predictive",
+      "execution_path": "free_precursor",
+      "fit_target_of": [],
+      "fitted_row": false,
+      "matched_compounds": 2,
+      "protein_type": "free",
+      "signal_origin": "external_literature"
+    },
+    {
+      "bench_file": "/Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/hofmann1998_ribose_cysteine_145C_20min_pH5.json",
+      "benchmark_id": "hofmann1998_ribose_cysteine_145C_20min_pH5",
+      "compounds": [
+        {
+          "ci_width_log10": 2.9532513529414453,
+          "compound": "2-Furfurylthiol (FFT)",
+          "inside_ci": true,
+          "measured_ppb": 121.0,
+          "predicted_mean": 1059.308147371049,
+          "predicted_p5": 2.417955729568493,
+          "predicted_p50": 1174.2504688372628,
+          "predicted_p95": 2171.1993386394784,
+          "predicted_std": 730.6664335960421
+        },
+        {
+          "ci_width_log10": 2.9038496113519514,
+          "compound": "2-Methyl-3-furanthiol (MFT)",
+          "inside_ci": true,
+          "measured_ppb": 198.0,
+          "predicted_mean": 803.1344617174276,
+          "predicted_p5": 2.671437316147499,
+          "predicted_p50": 388.02492986304264,
+          "predicted_p95": 2140.891212195042,
+          "predicted_std": 872.8067762681268
+        }
+      ],
+      "coverage_rate": 1.0,
+      "evidence_role": "predictive",
+      "execution_path": "free_precursor",
+      "fit_target_of": [],
+      "fitted_row": false,
+      "matched_compounds": 2,
+      "protein_type": "free",
+      "signal_origin": "external_literature"
+    },
+    {
       "bench_file": "/Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/pea_isolate_ribose_cysteine_100C_45min_Internal2026.json",
       "benchmark_id": "pea_isolate_ribose_cysteine_100C_45min_Internal2026",
       "compounds": [
@@ -660,30 +768,30 @@
     }
   ],
   "summary": {
-    "benchmark_count": 11,
-    "ci_coverage_hits": 28,
-    "ci_coverage_rate": 0.8,
+    "benchmark_count": 14,
+    "ci_coverage_hits": 32,
+    "ci_coverage_rate": 0.7804878048780488,
     "ci_level_pct": 90,
     "honest_literature_coverage": {
       "definition": "External-literature rows only, with fitted rows (constants back-solved from the benchmark) and internal synthetic reproducibility rows removed from BOTH numerator and denominator. Read it together with median_ci_width_log10: a wide interval covering a measurement is a weak claim.",
       "excluded_fitted_rows": 2,
       "excluded_fitted_rows_that_would_have_been_hits": 2,
-      "hits": 0,
-      "median_ci_width_log10": 0.7460031301321478,
+      "hits": 4,
+      "median_ci_width_log10": 2.6269336365835407,
       "not_evaluable": 4,
-      "rate": 0.0,
-      "total": 3
+      "rate": 0.4444444444444444,
+      "total": 9
     },
-    "matched_compound_count": 35,
+    "matched_compound_count": 41,
     "n_samples": 200,
     "seed": 0,
     "signal_origin_split": {
       "external_literature": {
-        "ci_coverage_rate": 0.0,
-        "hits": 0,
-        "median_ci_width_log10": 0.7460031301321478,
+        "ci_coverage_rate": 0.4444444444444444,
+        "hits": 4,
+        "median_ci_width_log10": 2.6269336365835407,
         "not_evaluable": 4,
-        "total": 3
+        "total": 9
       },
       "fitted_row": {
         "ci_coverage_rate": 1.0,

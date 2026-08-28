@@ -66,7 +66,7 @@ graph TD
 
 ### Steps for Registering New Papers
 
-1.  **Quality Assessment**: Assess the paper against the 8 quality criteria (found in [docs/protocols/BENCHMARK_INTAKE_CHECKLIST.md](file:///Users/pabloantoniomorenocasares/Developer/Maillard/docs/protocols/BENCHMARK_INTAKE_CHECKLIST.md)):
+1.  **Quality Assessment**: Assess the paper against the 8 quality criteria (found in [docs/protocols/BENCHMARK_INTAKE_CHECKLIST.md](../../docs/protocols/BENCHMARK_INTAKE_CHECKLIST.md)):
     *   **C1**: Exact reactant identities specified.
     *   **C2**: Precursor concentrations/ratios specified.
     *   **C3**: Reaction conditions ($pH, T, t, a_w$) reported.

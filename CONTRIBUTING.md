@@ -17,21 +17,27 @@ scripts/        CLI entrypoints and one-shot research scripts.
                 Scientist-facing CLIs route through src/usability_reports.py.
 
 data/           Curated inputs only (priors, geometries, lit, protocols).
-                No generated artifacts. No Python execution code.
-                Curated pathways live in src/curated_pathways.py, not data/.
+                No generated artifacts. One exception, stated because this line used to
+                deny it: data/reactions/curated_pathways.py IS Python under data/, alongside
+                src/curated_pathways.py (corrected 2026-08-28, Wave S5).
                 For the literature database and ingestion, see [data/lit/README.md](data/lit/README.md).
 
 results/        Generated artifacts. .gitignore'd. Do not hand-edit.
 
 tests/          unit/ (fast), scientific/ (regression), scripts/ (integration).
 
-docs/           Human-facing documentation.
-  architecture.md          Design principles, trust tiers, layer descriptions.
-  guides/                  Onboarding: QUICKSTART, COMPUTATIONAL_GAP_RUNBOOK, GLOSSARY.
-  reference/               Deep technical: COMMAND_REFERENCE, SMIRKS_SYSTEM,
-                           SCIENTIFIC_REFERENCE, VALIDATION_CONTRACT.
+docs/           Human-facing documentation. (Wave S5, 2026-08-28: this map used to omit
+                four real subtrees and name three files that no longer exist. Nine documents
+                were folded into their nearest living home and deleted; see AUDIT.md.)
+  guides/                  Onboarding: QUICKSTART (incl. the command reference),
+                           COMPUTATIONAL_GAP_RUNBOOK, GLOSSARY.
+  reference/               Deep technical: SCIENTIFIC_REFERENCE, VALIDATION_CONTRACT.
   protocols/               Benchmark intake specs and the PPI/SPI primary protocol.
+  validation/              Frozen evidence: the directional-accuracy panel and report,
+                           the isotope-topology dossier. Read-only records of measurement.
+  notebooks/               Executable walkthroughs.
   assets/                  Images and diagrams.
+  slr_benchmark_evaluation.md  The systematic literature review two data registries cite.
 
 data/Gemini_Deep_Research/  All literature synthesis reports (Elicit, SLR, kinetics).
 

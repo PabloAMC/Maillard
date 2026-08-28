@@ -82,6 +82,13 @@ data/*
 !data/ingest_templates/**
 !data/Gemini_Deep_Research/
 !data/Gemini_Deep_Research/**
+# 2026-08-28 (Wave S5). The worked example specs for `python scripts/maillard.py`. These MUST
+# be tracked: `tests/unit/test_comparative_cli_2026_08.py` runs the CLI against
+# compare_ribose_vs_glucose.yml and asserts it still matches `maillard compare --template`,
+# so untracked they would make that test pass locally and fail (or silently skip) on a fresh
+# clone -- the self-excusing-skip pattern Wave J2 removed. Line 33's `data/*` catches them.
+!data/cli_examples/
+!data/cli_examples/**
 
 # Ignore generated markdown pipeline outputs
 data/lit/deep_research_candidate_registry.json

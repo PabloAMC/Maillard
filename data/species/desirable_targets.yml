@@ -1,6 +1,17 @@
 # Desirable Target Volatiles for Plant-Based Meat Flavour Replication
 #
-# Source: pathways.md, Maillard_meat.md, Maillard_Plant_based.md and literature.
+# Source: data/Gemini_Deep_Research/maillard_meat.md,
+#         data/Gemini_Deep_Research/maillard_plant_based.md, and literature.
+#         (2026-08-28, Wave S5: repointed from bare filenames whose only copies under
+#         docs/research/archives/ were byte-identical duplicates and were deleted. The
+#         surviving files carry the corpus warning README. No value was changed.)
+# ALSO CITED: `pathways.md` -- A FILE THAT EXISTS NOWHERE IN THIS REPOSITORY. Its name is
+#         kept rather than quietly dropped because the odour thresholds below are the
+#         denominator of every odour-activity value in src/sensory.py, and pretending they
+#         have a source would be worse than recording that one of their declared sources
+#         cannot be produced. Carried as [P], owner decision; see tasks/audit_remediation.md
+#         (Wave T3, finding T1-10). Treat every odour_threshold_ug_per_kg here as uncited
+#         unless it carries its own inline AUDIT/source comment.
 # All SMILES validated against PubChem.
 # Odour thresholds in μg/kg (water), where available.
 #

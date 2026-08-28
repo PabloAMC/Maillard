@@ -70,8 +70,54 @@ sources:
   hofmann1998:
     citation: "Hofmann, T. & Schieberle, P. (1998). Quantitative Model Studies on the Effectiveness of Different Precursor Systems in the Formation of the Intense Food Odorants 2-Furfurylthiol and 2-Methyl-3-furanthiol. J. Agric. Food Chem. 46(1), 235-241."
     doi: "10.1021/jf9705983"
-    access: abstract
-    retrieved_from: "OpenAlex abstract_inverted_index (reconstructed); body PAYWALLED and never retrieved - see directional_accuracy_report.md Mission 2b"
+    access: full_text
+    retrieved_from: >-
+      data/articles/hofmann1998.pdf (full text, obtained by the owner via interlibrary loan
+      2026-08-28 and read directly; the PDF is gitignored and not committed). UPDATED IN WAVE W.
+      This entry previously read `access: abstract` / "OpenAlex abstract_inverted_index
+      (reconstructed); body PAYWALLED and never retrieved - see directional_accuracy_report.md
+      Mission 2b". The body is now retrieved, all ten tables are transcribed, and every claim
+      citing this source below is quoted from the article text rather than from the abstract.
+      Claims SUG-01 and SUG-02 still quote the ABSTRACT sentence, which is verbatim and
+      correct; the new HOF-* claims quote the tables the abstract was summarising.
+  mottram2002:
+    citation: "Mottram, D. S. & Nobrega, I. C. C. (2002). Formation of Sulfur Aroma Compounds in Reaction Mixtures Containing Cysteine and Three Different Forms of Ribose. J. Agric. Food Chem. 50(14), 4080-4086."
+    doi: "10.1021/jf0200826"
+    access: full_text
+    retrieved_from: >-
+      data/articles/mottram2002.pdf (full text, obtained by the owner via interlibrary loan
+      2026-08-28 and read directly; the PDF is gitignored and not committed).
+    ordinal_only: true
+    ordinal_only_reason: >-
+      SETTLED FROM THE METHODS, 2026-08-28 (Wave W). Wave S2b predicted at ~85% confidence
+      that this paper's values were Tenax-relative rather than absolute. CONFIRMED, and the
+      paper says so itself in one sentence, quoted verbatim: "Approximate quantities of the
+      volatiles in the concentrated headspace from each sample were estimated by comparison
+      of their peak areas, in the total ion current chromatogram, with that of the
+      1,2-dichlorobenzene internal standard using a response factor of 1. This allowed
+      comparison of the relative contributions the volatiles made to the headspaces of the
+      different systems BUT DID NOT PROVIDE ABSOLUTE CONCENTRATIONS IN THE AQUEOUS SOLUTIONS."
+      (Emphasis added; the words are the authors'.) Table 1's own footnote a reads
+      "Approximate quantities in headspace (ng/mmol of sugar)". So this source can NEVER
+      become an absolute benchmark in this repository, at any future date, on any amount of
+      further work - the quantity it reports is not the quantity the model predicts. It is
+      admissible here and only here. Reported precision, for the record: "The mean coefficient
+      of variance (CV) for quantities of individual components was 22% and, with the exception
+      of some compounds that were present in relatively small amounts, no compound showed a
+      CV >40%."
+    protocol_note: >-
+      Conditions, verbatim: "Separate solutions of cysteine (0.1 M) and the ribose-containing
+      compound (0.1 M) were prepared using water or the appropriate buffer. ... Equal
+      quantities of the solutions were mixed, and 6.0 mL of the mixture (i.e., 0.3 mmol of
+      each reactant) was transferred to the reaction ampules. The ampules were flame-sealed
+      and then heated in a CERTOclav autoclave (Kelomat, Traun, Austria) for 30 min at 140
+      degC under a pressure of 0.28 MPa (2.8 bar)." So 50 mM cysteine + 50 mM sugar, 140 degC,
+      30 min. THIS CONFIRMS WAVE S2b's SECOND FINDING: the retired benchmark
+      data/benchmarks/cys_ribose_140C_Hofmann1998.json's conditions block (140 degC / 30 min /
+      equimolar) is Mottram & Nobrega's protocol attached to Hofmann & Schieberle's citation.
+      One detail Wave S2b could not check is now checkable and is ALSO wrong: the retired file
+      declares 10 mM, while Mottram & Nobrega's system is 50 mM. The conditions block was not
+      even a faithful copy of the protocol it was borrowed from.
   ma2024:
     citation: "Ma, Y., Fu, S., Cheng, K.-W., Liu, B., et al. (2024). Impact of Extrusion Parameters on the Formation of CML, CEL and Acrylamide in Plant-Based Meat Analogues. Int. J. Mol. Sci. 25(16), 8668."
     doi: "10.3390/ijms25168668"
@@ -1253,3 +1299,303 @@ panel:
       The free-precursor lane never emits it for any sugar/amino-acid combination probed
       here. So the model structurally cannot represent a SUGAR effect on 2-pentylfuran -
       in its world 2-pentylfuran has no Maillard route at all, only a lipid route.
+
+  # =====================================================================
+  # WAVE W (2026-08-28) - claims added from five interlibrary-loan papers.
+  #
+  # Two of these papers were previously ABSTRACT-ONLY in this file
+  # (hofmann1998) or absent entirely (mottram2002). Nothing in the model was
+  # tuned to build these rows, and no constant was fitted in Wave W at all.
+  #
+  # WHY THE MOTTRAM ROWS ARE HERE AND NOT IN data/benchmarks/: the paper's own
+  # methods sentence says its numbers "did not provide absolute concentrations
+  # in the aqueous solutions". Ordinal is the only honest home for them. See
+  # sources.mottram2002.ordinal_only_reason.
+  # =====================================================================
+
+  - claim_id: HOF-01
+    statement: "With cysteine at 145 C / 20 min / pH 5.0, FRUCTOSE is at least as effective as GLUCOSE for both thiols - the two hexoses measure within 1.3x of each other, with fructose slightly ahead on both."
+    claim_type: ordering
+    category: sugar_identity
+    observables: ["MFT"]
+    conditions:
+      A:
+        label: "cysteine + D-fructose, 145 C 20 min pH 5.0"
+        system: {precursors: {L-Cysteine: 33.0, D-Fructose: 100.0}, temp_C: 145, ph: 5.0, water_activity: 0.98, time_min: 20}
+      B:
+        label: "cysteine + D-glucose, 145 C 20 min pH 5.0"
+        system: {precursors: {L-Cysteine: 33.0, D-Glucose: 100.0}, temp_C: 145, ph: 5.0, water_activity: 0.98, time_min: 20}
+    expected_relation: "A>B"
+    source:
+      ref: hofmann1998
+      quote: "ribose 12.1 19.8 | xylose 9.6 14.3 | fructose 3.2 2.5 | glucose 2.8 1.9 | glucose-6-phosphate 0.9 0.6 | rhamnose 0.8 0.8 | maltose 0.6 0.3"
+      quote_form: table_row_reformatted
+      quote_form_note: >-
+        Table 1, "Amounts of FFT and MFT Generated from Cysteine and Various Carbohydrates",
+        columns "amountb (ug)" = FFT | MFT. Rows are verbatim; the column separator was
+        rewritten as "|" and the seven rows joined onto one line. Footnote a: "A solution
+        (100 mL) of cysteine (3.3 mmol) and the corresponding carbohydrate (10.0 mmol) was
+        reacted at pH 5.0 in a laboratory autoclave." Footnote b: "Data are mean values of
+        triplicates and differed by not more than 10%." MFT: fructose 2.5 vs glucose 1.9 =
+        1.32x, which is outside the +/-10% replicate spread.
+    fit_status: independent
+    fit_note: >-
+      Both sides are now PANEL benchmarks (hofmann1998_fructose_cysteine_145C_20min_pH5 and
+      hofmann1998_glucose_cysteine_145C_20min_pH5, ingested in the same wave). That does NOT
+      make this row fit-adjacent: Wave W fitted nothing, to these rows or to anything else,
+      and src/fit_target_index.py names neither benchmark. If a future wave ever fits a
+      constant against either one, this row must be reclassified to fit_adjacent in the
+      same change.
+    model_scope_note: "Expressible: both sugars resolve and MFT is a model observable."
+
+  - claim_id: HOF-02
+    statement: "Same claim as HOF-01 for FFT: fructose is at least as effective as glucose (3.2 vs 2.8 ug)."
+    claim_type: ordering
+    category: sugar_identity
+    observables: ["FFT"]
+    conditions:
+      A:
+        label: "cysteine + D-fructose, 145 C 20 min pH 5.0"
+        system: {precursors: {L-Cysteine: 33.0, D-Fructose: 100.0}, temp_C: 145, ph: 5.0, water_activity: 0.98, time_min: 20}
+      B:
+        label: "cysteine + D-glucose, 145 C 20 min pH 5.0"
+        system: {precursors: {L-Cysteine: 33.0, D-Glucose: 100.0}, temp_C: 145, ph: 5.0, water_activity: 0.98, time_min: 20}
+    expected_relation: "A>B"
+    source:
+      ref: hofmann1998
+      quote: "ribose 12.1 19.8 | xylose 9.6 14.3 | fructose 3.2 2.5 | glucose 2.8 1.9 | glucose-6-phosphate 0.9 0.6 | rhamnose 0.8 0.8 | maltose 0.6 0.3"
+      quote_form: table_row_reformatted
+      quote_form_note: >-
+        As HOF-01. FFT: fructose 3.2 vs glucose 2.8 = 1.14x. THIS IS INSIDE THE +/-10%
+        REPLICATE SPREAD ON EACH SIDE, so the source does not resolve the ordering with
+        confidence; what it DOES resolve is that the two hexoses are the same to well within
+        a factor of 2. A model separating them by orders of magnitude is wrong regardless of
+        which way the sign falls, and that is what this row is really testing. Read the
+        predicted values, not just the outcome.
+    fit_status: independent
+    fit_note: "As HOF-01."
+    model_scope_note: "Expressible."
+
+  - claim_id: HOF-03
+    statement: "Under DRY-heating (6 min / 180 C on buffered silica gel), the pentose still beats the hexose for FFT, and by a wider margin than in water: ribose 97.2 ug vs glucose 1.4 ug."
+    claim_type: ordering
+    category: sugar_identity
+    observables: ["FFT"]
+    conditions:
+      A:
+        label: "cysteine + D-ribose, dry-heated 180 C 6 min"
+        system: {precursors: {L-Cysteine: 33.0, D-Ribose: 100.0}, temp_C: 180, ph: 5.0, water_activity: 0.3, time_min: 6}
+      B:
+        label: "cysteine + D-glucose, dry-heated 180 C 6 min"
+        system: {precursors: {L-Cysteine: 33.0, D-Glucose: 100.0}, temp_C: 180, ph: 5.0, water_activity: 0.3, time_min: 6}
+    expected_relation: "A>B"
+    source:
+      ref: hofmann1998
+      quote: "ribose 22.9 12.1 1.2 97.2 55.3 19.8 2.5 25.1 | glucose 0.7 2.8 0.6 1.4 0.3 1.9 0.4 4.2 | rhamnose 0.2 0.8 0.1 0.4 0.1 0.8 0.1 3.1"
+      quote_form: table_row_reformatted
+      quote_form_note: >-
+        Table 2, "Influence of pH on the Amounts of FFT and MFT Generated from Cysteine and
+        Carbohydrates". Printed column order: FFT at pH 3.0 / 5.0 / 7.0 / dry-5.0c, then MFT
+        at pH 3.0 / 5.0 / 7.0 / dry-5.0c. The dry columns are the 4th and 8th. Footnote c:
+        "A mixture of cysteine (3.3 mmol) and the corresponding carbohydrate (10.0 mmol) was
+        dry-heated for 6 min at 180 degC."
+    water_activity_caveat: >-
+      THE SOURCE STATES NO WATER ACTIVITY. The system is a silica gel (3.0 g) carrying 300 uL
+      of 2 mol/L phosphate buffer; neither an aw nor a system mass is printed, which is
+      exactly why the dry-heat rows are NOT ingested as absolute benchmarks anywhere in this
+      repository (see wave_w_dry_heat_exclusion in the Wave W benchmark files). The aw 0.3
+      written above is a STAND-IN, not a measurement. It is admissible HERE and only here
+      because this claim is a SAME-aw comparison: the identical stand-in appears on both
+      sides and cancels out of the ordering. Wave W verified that the model's outcome for
+      this row is unchanged at aw 0.2, 0.3 and 0.5. If a future edit ever makes the two sides
+      differ in aw, this row stops being interpretable and must be marked evaluable: false.
+    fit_status: independent
+    model_scope_note: "Expressible, with the stand-in aw documented above."
+
+  - claim_id: HOF-04
+    statement: "The dry/aqueous comparison within one carbohydrate SPLITS BY SIGN between the two odorants for glucose: dry-heating RAISES MFT (1.9 -> 4.2 ug) but LOWERS FFT (2.8 -> 1.4 ug)."
+    claim_type: ordering
+    category: moisture_aw
+    observables: ["MFT", "FFT"]
+    evaluable: false
+    expected_relation: "A>B"
+    conditions: {}
+    source:
+      ref: hofmann1998
+      quote: "Under these conditions, ribose generated much higher concentrations of FFT than under aqueous conditions, whereas MFT was only slightly increased. In contrast, FFT especially was lower when hexoses were reacted under dry-heating conditions."
+    fit_status: independent
+    model_scope_note: >-
+      UNEVALUABLE - THE COMPARISON IS TRIPLY CONFOUNDED IN THE SOURCE AND CANNOT BE
+      DECONFOUNDED. The aqueous arm is 145 degC for 20 min in bulk buffer; the dry arm is 180
+      degC for 6 min on buffered silica gel. Temperature, time AND water content all change
+      at once, and the source assigns no water activity to the dry arm. A model "miss" here
+      would be uninterpretable - it could be the aw term, the Arrhenius term, or the time
+      integration - and a model "hit" would be luck. WHAT WOULD MAKE IT EVALUABLE: a source
+      reporting a dry-heat aw explicitly, or an aqueous arm at matched 180 degC / 6 min.
+      Recorded rather than dropped, because the sign SPLIT (MFT up, FFT down, same system,
+      same change) is a genuinely discriminating fact about the branch point that no wave has
+      yet been able to test.
+
+  - claim_id: MOT-01
+    statement: "In phosphate-buffered cysteine/ribose at 140 C, MFT rises as the buffered pH falls from 5.6 to 4.2 (2230 -> 8250 ng/mmol sugar)."
+    claim_type: ordering
+    category: ph
+    observables: ["MFT"]
+    conditions:
+      A:
+        label: "cysteine + ribose, phosphate buffer pH 4.2, 140 C 30 min"
+        system: {precursors: {L-Cysteine: 50.0, D-Ribose: 50.0}, temp_C: 140, ph: 4.2, water_activity: 0.98, time_min: 30}
+      B:
+        label: "cysteine + ribose, phosphate buffer pH 5.6, 140 C 30 min"
+        system: {precursors: {L-Cysteine: 50.0, D-Ribose: 50.0}, temp_C: 140, ph: 5.6, water_activity: 0.98, time_min: 30}
+    expected_relation: "A>B"
+    source:
+      ref: mottram2002
+      quote: "2-methyl-3-furanthiol 2940 1010 97 2050 2230 67 2960 2620 143 10230 8250 1867"
+      quote_form: table_row_reformatted
+      quote_form_note: >-
+        Table 1, the 2-methyl-3-furanthiol row, transcribed across all twelve printed data
+        columns in order: unbuffered (Rib-PO4, ribose, IMP), phosphate pH 5.6 (Rib-PO4,
+        ribose, IMP), phthalate pH 5.6 (Rib-PO4, ribose, IMP), phosphate pH 4.2 (Rib-PO4,
+        ribose, IMP). THE TWO CELLS THIS CLAIM USES are the ribose columns of the phosphate
+        blocks: pH 5.6 = 2230, pH 4.2 = 8250. Units per footnote a: "Approximate quantities
+        in headspace (ng/mmol of sugar)". The buffer holds: the paper reports final pH 5.5
+        and 3.9 respectively, i.e. within 0.3 unit as stated for the buffered systems.
+    fit_status: independent
+    fit_note: >-
+      No side of this comparison is a fit target. This is a pH claim from a lab, a method and
+      a decade different from every other pH row in this panel, which matters because the ph
+      category is the panel's worst (see report section 3.1).
+    corroboration_note: >-
+      INDEPENDENT AGREEMENT WITH THE HOFMANN pH HOLD-OUT. Hofmann & Schieberle 1998 (SIDA,
+      absolute, 145 C, 0.5 M phosphate) find ribose MFT rising 2.5 -> 19.8 -> 55.3 ug as pH
+      falls 7.0 -> 5.0 -> 3.0. Mottram & Nobrega 2002 (Tenax headspace, relative, 140 C, 0.2 M
+      pyrophosphate) find the same direction over 5.6 -> 4.2. Two labs, two methods, two
+      quantification classes, same sign. The direction of the pentose pH effect is now the
+      best-corroborated directional fact in the sulfur branch.
+    model_scope_note: "Expressible."
+
+  - claim_id: MOT-02
+    statement: "Same as MOT-01 for FFT: in phosphate-buffered cysteine/ribose, FFT rises as pH falls from 5.6 to 4.2 (1750 -> 3160 ng/mmol sugar)."
+    claim_type: ordering
+    category: ph
+    observables: ["FFT"]
+    conditions:
+      A:
+        label: "cysteine + ribose, phosphate buffer pH 4.2, 140 C 30 min"
+        system: {precursors: {L-Cysteine: 50.0, D-Ribose: 50.0}, temp_C: 140, ph: 4.2, water_activity: 0.98, time_min: 30}
+      B:
+        label: "cysteine + ribose, phosphate buffer pH 5.6, 140 C 30 min"
+        system: {precursors: {L-Cysteine: 50.0, D-Ribose: 50.0}, temp_C: 140, ph: 5.6, water_activity: 0.98, time_min: 30}
+    expected_relation: "A>B"
+    source:
+      ref: mottram2002
+      quote: "2-furanmethanethiol 3310 2610 13 496 1750 23 840 3540 47 2360 3160 5000"
+      quote_form: table_row_reformatted
+      quote_form_note: >-
+        Table 1, the 2-furanmethanethiol (= 2-furfurylthiol, FFT) row, same twelve-column
+        order as MOT-01. The cells used are the ribose columns of the phosphate blocks:
+        pH 5.6 = 1750, pH 4.2 = 3160.
+    fit_status: independent
+    model_scope_note: "Expressible."
+
+  - claim_id: MOT-03
+    statement: "In phosphate-buffered cysteine/ribose at pH 5.6 / 140 C, MFT exceeds FFT in the headspace (2230 vs 1750 ng/mmol sugar)."
+    claim_type: ordering
+    category: ranking
+    observables: ["MFT"]
+    conditions:
+      A:
+        label: "MFT, cysteine + ribose, phosphate pH 5.6"
+        observable: "MFT"
+        system: {precursors: {L-Cysteine: 50.0, D-Ribose: 50.0}, temp_C: 140, ph: 5.6, water_activity: 0.98, time_min: 30}
+      B:
+        label: "FFT, cysteine + ribose, phosphate pH 5.6"
+        observable: "FFT"
+        system: {precursors: {L-Cysteine: 50.0, D-Ribose: 50.0}, temp_C: 140, ph: 5.6, water_activity: 0.98, time_min: 30}
+    expected_relation: "A>B"
+    source:
+      ref: mottram2002
+      quote: "2-methyl-3-furanthiol 2940 1010 97 2050 2230 67 2960 2620 143 10230 8250 1867 | 2-furanmethanethiol 3310 2610 13 496 1750 23 840 3540 47 2360 3160 5000"
+      quote_form: table_row_reformatted
+      quote_form_note: "Table 1, both thiol rows, twelve-column order as MOT-01; the cells used are the phosphate pH 5.6 ribose column of each: MFT 2230, FFT 1750."
+    cross_method_caveat: >-
+      THIS ROW COMPARES TWO DIFFERENT COMPOUNDS MEASURED WITH A RESPONSE FACTOR OF 1. The
+      methods say quantities were estimated "with that of the 1,2-dichlorobenzene internal
+      standard using a response factor of 1" - i.e. no compound-specific response factor was
+      applied. Comparing MFT to FFT therefore carries an unquantified relative-response bias
+      that comparing MFT to MFT across systems (MOT-01/02) does not. The claim is kept
+      because the model's own MFT/FFT branch ratio is a live open question, but the ratio is
+      1.27x and the stated CV is 22%, so this row is WEAK EVIDENCE and must not be quoted as
+      settling the branch point. Hofmann's SIDA numbers, which DO carry compound-specific
+      response factors, are the authority: MFT 19.8 vs FFT 12.1 ug at pH 5.0, same sign.
+    fit_status: independent
+    model_scope_note: "Expressible, with the response-factor caveat above."
+
+  - claim_id: MOT-04
+    statement: "Ribose 5-phosphate and free ribose give similar sulfur-volatile yields WHEN BUFFERED, but ribose 5-phosphate greatly outperforms free ribose when unbuffered (unbuffered MFT 2940 vs 1010; total mercaptoketones 13760 vs 919 ng/mmol sugar)."
+    claim_type: ordering
+    category: sugar_identity
+    observables: ["MFT"]
+    evaluable: false
+    expected_relation: "A>B"
+    conditions: {}
+    source:
+      ref: mottram2002
+      quote: "In the systems buffered with phosphate or phthalate buffers, both ribose and ribose phosphate systems gave similar quantities of sulfur volatiles. However, in the absence of buffer, the ribose system was relatively unreactive, especially for volatiles formed via the"
+      quote_form: verbatim
+      quote_form_note: "Abstract; the sentence is truncated at the page-column break in the extracted text and is quoted only as far as it is contiguous."
+    fit_status: independent
+    model_scope_note: >-
+      UNEVALUABLE - PRECURSOR NOT IN THE RESOLVER. src/precursor_resolver.py resolves 19
+      species (data/species/precursors.yml); ribose 5-phosphate is not one of them, and
+      neither is inosine 5'-monophosphate (see MOT-05). The model cannot represent a
+      phosphorylated sugar at all, so it cannot express any claim about phosphate-ester
+      precursors. WHAT WOULD MAKE IT EVALUABLE: a ribose-5-phosphate entry in precursors.yml
+      WITH a dephosphorylation step in the network - adding the species alone would produce a
+      confidently wrong answer rather than an honest one, because the paper's own mechanism
+      is that "the greater reactivity of ribose 5-phosphate in the unbuffered system is
+      believed to result from the ready dephosphorylation of this sugar".
+
+  - claim_id: MOT-05
+    statement: "Inosine 5'-monophosphate is a much poorer sulfur-volatile precursor than either ribose or ribose 5-phosphate (MFT 97 vs 1010 vs 2940 ng/mmol sugar, unbuffered)."
+    claim_type: ordering
+    category: sugar_identity
+    observables: ["MFT"]
+    evaluable: false
+    expected_relation: "A>B"
+    conditions: {}
+    source:
+      ref: mottram2002
+      quote: "The inosine monophosphate systems produced much lower quantities of volatiles than ribose phosphate or ribose systems."
+    fit_status: independent
+    model_scope_note: >-
+      UNEVALUABLE - PRECURSOR NOT IN THE RESOLVER, as MOT-04. This is the meat-relevant one:
+      IMP is the dominant ribose reservoir in post-mortem muscle, so a model that cannot
+      represent it cannot reason about the actual precursor pool of cooked meat. Recorded as
+      a scope limitation rather than dropped.
+
+  - claim_id: MOT-06
+    statement: "Unbuffered cysteine/ribose is far less reactive than buffered, for MFT (1010 vs 2230 ng/mmol sugar) - buffer catalysis, not just pH."
+    claim_type: ordering
+    category: ph
+    observables: ["MFT"]
+    evaluable: false
+    expected_relation: "A<B"
+    conditions: {}
+    source:
+      ref: mottram2002
+      quote: "On heating, the pH values of the unbuffered reaction mixtures containing cysteine and ribose 5-phosphate or free ribose dropped from the initial pH of 5.6 to pH 4.2 and 3.9, respectively."
+    fit_status: independent
+    model_scope_note: >-
+      UNEVALUABLE - TWO SEPARATE MODEL LIMITATIONS, and both are worth stating. (1) NO BUFFER
+      TERM: the model takes a pH, not a buffer identity or molarity, so it cannot express
+      "phosphate catalyses the 2,3-enolisation step" at all - and that is the paper's own
+      explanation of the effect ("the role of phosphate and phthalate buffers in catalyzing
+      the Maillard reaction is associated only with the 2,3-enolization step in the breakdown
+      of the Amadori intermediate"). (2) NO pH TRAJECTORY: the unbuffered system's pH DRIFTS
+      from 5.6 to 3.9 during the run, and the model integrates at a single fixed pH, so there
+      is no single pH value that honestly represents the unbuffered arm. Assigning it 5.6
+      (initial) or 3.9 (final) would each be a choice this repository would then be scoring
+      itself against. NOT MADE. WHAT WOULD MAKE IT EVALUABLE: a time-varying pH input, plus a
+      buffer-catalysis term keyed to the enolisation branch.

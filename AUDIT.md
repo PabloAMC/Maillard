@@ -86,13 +86,13 @@ These are worse than the numbers this repository advertised a week ago. They are
 
 | Surface | Value |
 | --- | --- |
-| Panel | **14 benchmarks** (2 more quarantined in Round 2); the MC uncertainty panel covers **11** of them, **35 matched rows** |
-| Literature rows inside 90% CI | **1/3 evaluable** (median CI width **0.95 dex** — it widened from 0.85 under Wave S1's additive propagator *without* buying any coverage), with fitted rows removed from numerator *and* denominator |
+| Panel | **17 benchmarks** *(2026-08-28, Wave W: 14 -> 17; three absolute isotope-dilution sulfur anchors added from the full text of Hofmann & Schieberle 1998, and 2 more remain quarantined from Round 2)*; the MC uncertainty panel covers **14** of them, **41 matched rows** |
+| Literature rows inside 90% CI | **4/9 evaluable** on a median CI width of **2.63 dex** — a factor of ~424 end to end, so read the two numbers together and do not quote the 44% alone. *(2026-08-28, Wave W: 0/3 at 0.75 dex -> 4/9 at 2.63 dex. The rate rose because six new external-literature rows arrived, four of which sit inside intervals 2.9-3.7 dex wide; an interval spanning three orders of magnitude covers almost anything. NO prior, threshold or interval was widened in Wave W — the population changed, not the model. The two rows that MISS, fructose FFT and MFT, are the informative half.)* Fitted rows are removed from numerator and denominator alike |
 | Fitted rows (constants back-solved from the benchmark) | 2/2 — **not evidence**; both would previously have been counted as literature hits |
 | Internal-synthetic rows (reproducibility only) | 18/18 — carries zero validation weight |
-| Benchmarks without blocking gaps | **0/6 predictive** (+ **0/4** fit-recovery, 4/4 synthetic; the **4/14** aggregate is all non-evidence — this row still read 1/4 and 5/14 after Wave P moved it, and was corrected in Wave S1). Fit-recovery fell 3/4 → 1/4 in Round 3 when the two Pratap-Singh benchmarks were corrected against the paper and stopped recovering. Wave O then refitted their constants onto the verified values and they recover again — at `pass-no-ranking`, which is not `pass`, so **none of these counts moved**. A refit changes the size of a recovery, never its evidential status. |
+| Benchmarks without blocking gaps | **0/9 predictive** (+ **0/4** fit-recovery, 4/4 synthetic; the **4/17** aggregate is all non-evidence). *(2026-08-28, Wave W: predictive 0/6 -> 0/9. All three new Hofmann anchors are predictive and all three FAIL — 12.27x, 29.58x, 14.46x worst-ratio. The headline denominator grew by 50% and the numerator stayed at zero.)* Fit-recovery fell 3/4 -> 1/4 in Round 3 when the two Pratap-Singh benchmarks were corrected against the paper and stopped recovering. Wave O then refitted their constants onto the verified values and they recover again — at `pass-no-ranking`, which is not `pass`, so none of those counts moved. A refit changes the size of a recovery, never its evidential status. |
 | External hold-out | **1/5 genuine extrapolations** at the pre-widening prior — and 1/5 under the wider one too since Wave O; median fold error **93.68×**, worst **2474×**, coverage **3/8** at the shipped sigma. Only 4 of the 8 points are measurements at all. The median was 32.79× until Round 3 corrected two wrong table rows in the Li 2026 bundle (→ 15.31×, predictions unmoved), rose to 42.62× when Wave O refitted the ambient hexanal observability onto the paper's verified anchor, and rose again to 93.68× when Wave R found the Liu hold-out's two reference values matched nothing in their source and replaced them with the thesis's own Table 2.7. **Every rise came from correcting data toward the literature, and predictions moved in none of them**; see Round 3, Wave O and Wave R. |
-| Strict-ready benchmarks | **0/14** |
+| Strict-ready benchmarks | **0/17** *(0/14 before Wave W; the three new literature anchors are not strict-ready either — they fail their contracts by 12-30x)* |
 | Reaction-chemistry lanes with generative templates | 5/16 (derived by enumeration, test-pinned) |
 | Test suite | **1274 passed, 1 skipped, 2 xfailed, 0 failed** (2026-08-27, after Wave S1; 1265 after Wave P, 1242 after Round 3). The dvipng failure carried as "environmental" for the whole audit is **gone**: `--report` now degrades to mathtext instead of raising |
 | Citation gate | **0 dead DOIs as of the 2026-08-26 and 2026-08-27 sweeps; 0 waivers.** The blocking gate is **structural and offline** — DOI grammar, confabulation signatures, status coherence, repair-record completeness. It cannot detect a live DOI that resolves to the wrong paper, which is exactly how the two PMC9905368 benchmarks survived every previous check. Liveness is a **scheduled weekly sample**, advisory, not part of the required set. |
@@ -1103,6 +1103,52 @@ it. The two are a materials difference, not a method artefact.
 
 Full row-by-row result: [matrix_binding_mode_comparison.md](results/validation/matrix_binding_mode_comparison.md).
 
+## Wave S5 — the front door made to match the evidence, and nine documents fewer (2026-08-28)
+
+Every wave before this one improved what the repository *knows*. This one changed what it
+*says first*, because the two had drifted: the tools led with absolute ppb numbers, and every
+out-of-sample measurement here says those are wrong by 6x to 94x, while the ordinal claims are
+right 21 times in 29.
+
+**One entry point, ratios first.** `python scripts/maillard.py` has three verbs — `compare`
+(per-compound A/B ratios, dominant pathway, per-axis reliability), `predict` (a range, not a
+point, with the caveats inline) and `rank-experiments` (the value-of-information queue). It is
+orchestration over existing machinery; no science changed to build it. Absolute numbers appear
+only behind `--absolute`, and their caveat prints in the same block. The per-axis reliability
+tags are read from `docs/validation/directional_accuracy_report.md` **at runtime**, so a
+sugar swap reports `trust (8/8)` and a pH sweep reports `do-not-use (4/7)` — and re-scoring the
+panel changes what the tool tells a user with no code change.
+
+**The model card is generated, not written.** `scripts/generators/generate_model_card.py` reads
+the directional panel, both hold-out artifacts, the mode comparison, a live re-run of the
+benchmark panel, a recount of the `no_verifiable_source` census, the sulfur benchmark's anchor
+status and the three CI gates, and writes a claim-type x system-class validity domain into
+README.md between markers. `--check` turns drift into a failing command.
+
+**The reason it is generated is a defect this wave found.** The directional report was still
+publishing **20/29** as its headline; the tree has scored **21/29** since Wave T4 moved SUG-12.
+Three waves published a number one point below the truth in the file whose whole purpose is to
+state that number. A second, subtler version was caught while wiring the tags: the report's
+category table and its bucket table have different denominators, so summing categories to get
+"excluding pH and water activity" gives 23/25 where the headline-comparable figure is
+**17/19**. Both tables are now labelled and the arithmetic is written out in place.
+
+**Nine documents were folded into their nearest living home and deleted: 30 -> 17 documents,
+9157 -> 7387 lines.** Six were byte-identical duplicates of files under
+`data/Gemini_Deep_Research/` (`cmp`-verified), one of them sitting under `docs/` with no warning
+header at all. `docs/architecture.md` and `docs/reference/SMIRKS_SYSTEM.md` were folded into
+README **with their pre-audit trust claims removed rather than relocated** — the first opened
+with "High trust — use freely", the second called two templates "Validated vs. benchmarks" at
+0/14 strict-ready. Eight citation strings were repointed at the surviving copies, two of which
+had been dangling before this wave. `pathways.md`, which exists nowhere and is cited by three
+runtime-critical data files, was **not** repointed: it is named and flagged in place, because
+substituting a plausible source for an absent one is the defect this remediation exists to
+remove.
+
+All three gates pass. The citation gate's file count falls 98 -> 92 and its DOI count 1013 ->
+909, entirely from the deleted duplicates; the same DOIs remain under
+`data/Gemini_Deep_Research/`.
+
 ## What this repository is now for
 
 A research prototype of the *architecture* alternative-protein flavor science needs —
@@ -1151,6 +1197,8 @@ thiol redox couple instead (2 cysteine → cystine + 2[H], exactly atom-balanced
 > annotated rather than reverted only because no step emits its family. Its live sibling
 > `thiol_addition_pentodiulose` **was** reverted, 26.35 → 28.60. See "Wave S2c" above.
 > **The sulfur branch has zero absolute literature anchors.**
+>
+> **CORRECTED 2026-08-28 (Wave W): THIS IS NO LONGER TRUE.** The full text of Hofmann & Schieberle 1998 (`10.1021/jf9705983`) arrived by interlibrary loan and the sulfur branch now has **three** absolute, stable-isotope-dilution literature anchors — `hofmann1998_{ribose,glucose,fructose}_cysteine_145C_20min_pH5`, the pH-5.0 aqueous rows of the paper's own Table 1 (ribose FFT 121 / MFT 198 ppb; glucose 28 / 19; fructose 32 / 25, all µg per 100 mL × 10 with the volume printed in the table footnote). The paper also confirms Wave S2b's forensic finding from the primary source: 342 and 200 ppb appear nowhere in it. **The model fails all three anchors** — 12.27×, 29.58× and 14.46× worst-ratio, mean 0.92 dex — so the branch went from *unanchored* to *anchored and measurably wrong*, which is the direction of travel this audit wanted.
 
 That this came from a structural correction and not from a fit is the entire point: it is the
 only movement in this audit that is not a knob turning.

@@ -25,6 +25,32 @@ Then open:
 - [../../results/validation/benchmark_summary.md](../../results/validation/benchmark_summary.md)
 - [../../results/validation/validation_overview.md](../../results/validation/validation_overview.md)
 
+## Start here — `maillard compare`, not a single prediction
+
+*Added 2026-08-28 (Wave S5).* Every out-of-sample measurement in this repository says the
+absolute ppb numbers are wrong by 6x to 94x, and that the **ordinal** claims are right 21
+times in 29. So the shortest useful first command is a comparison, not a prediction:
+
+```bash
+python scripts/maillard.py compare --template > my_comparison.yml   # edit the two arms
+python scripts/maillard.py compare my_comparison.yml
+```
+
+It prints per-compound **A/B ratios**, the dominant (rate-limiting) pathway on each side, and
+a reliability tag per comparison axis read live from the directional-accuracy panel — so a
+pH sweep is labelled `do-not-use (4/7)` and a sugar swap `trust (8/8)`, on the page, at the
+moment you ask. Three verbs:
+
+| Verb | Question it answers |
+| --- | --- |
+| `compare` | "Which of these two formulations gives more X?" — ratios, CIs, per-axis reliability |
+| `predict` | "What comes out of this one formulation?" — ranges not points, caveats inline |
+| `rank-experiments` | "What should I measure next?" — the value-of-information queue |
+
+`--absolute` adds the raw ppb columns to `compare`, with the caveat printed alongside them;
+`--json` emits the machine-readable payload. The full designer below is unchanged and still
+the right tool when you want a complete report or a grid screen.
+
 ## Two modes — pick the one that answers your question
 
 `scripts/run_pipeline.py` has two distinct modes, and the difference matters:
@@ -204,6 +230,105 @@ the timestamp fields and compare the rest — they should match byte for byte.
 
 ## Before You Trust A Result
 
-Read [architecture.md](../architecture.md).
+Read the **model card** in [README.md](../../README.md#model-card--the-validity-domain-generated-from-the-artifacts).
+It is generated from the live validation artifacts and states, per claim type and system
+class, whether the answer you are about to quote is `trust`, `caution` or `do-not-use` —
+with the measurement behind each verdict. The one-line version: compare, do not quote
+absolutes, and treat any pH or moisture direction as unsupported.
 
-That document explains the trust tiers: what the tool can support today, what remains directional only, and where wet-lab confirmation is still mandatory.
+*(2026-08-28, Wave S5: this section used to point at `docs/architecture.md`, which described
+a pre-audit trust surface — it opened with "High trust — use freely" at a time when 0 of 14
+benchmarks are strict-ready. That file was folded into README's architecture section and
+deleted rather than left to contradict the evidence.)*
+
+---
+
+## Appendix — Command reference
+
+*Folded in 2026-08-28 (Wave S5) from `docs/reference/COMMAND_REFERENCE.md`, which was deleted.
+It was accurate — all 32 subcommands verified against `scripts/docker_maillard.sh` — but it was
+a third surface answering "how do I run this", alongside this file and README's Getting
+Started. One fewer document, same content.*
+
+## Environment Lifecycle
+
+| Command | Purpose |
+| --- | --- |
+| `./scripts/docker_maillard.sh up` | Start or create the validated Docker container |
+| `./scripts/docker_maillard.sh bootstrap` | Create the conda environment and apply required patches |
+| `./scripts/docker_maillard.sh shell` | Open an interactive shell inside the validated environment |
+| `./scripts/docker_maillard.sh status` | Check container and environment status |
+
+## Core Validation Commands
+
+| Command | Purpose |
+| --- | --- |
+| `./scripts/docker_maillard.sh summary` | Generate the benchmark summary artifact |
+| `./scripts/docker_maillard.sh index` | Generate the benchmark index artifact |
+| `./scripts/docker_maillard.sh validated-envelope` | Generate the plain-language domain-of-validity artifact |
+| `./scripts/docker_maillard.sh validation-figures` | Generate graphical reliability and limitation figures |
+| `./scripts/docker_maillard.sh thermo-gating` | Audit whether thermodynamic gating materially helps |
+
+## Test Lanes
+
+| Command | Purpose |
+| --- | --- |
+| `./scripts/docker_maillard.sh core` | Unit and integration correctness |
+| `./scripts/docker_maillard.sh scientific-fast` | Fast scientific regression lane |
+| `./scripts/docker_maillard.sh kinetics-validation` | Slower kinetics reference lane |
+| `./scripts/docker_maillard.sh scientific` | Full scientific artifact generation plus regression lane |
+| `./scripts/docker_maillard.sh qm-heavy` | QM and external-backend validation |
+
+## Benchmark Inspection
+
+| Command | Purpose |
+| --- | --- |
+| `./scripts/docker_maillard.sh targets data/benchmarks/<benchmark>.json` | Inspect target-level predictions for one benchmark |
+| `./scripts/docker_maillard.sh targets-report` | Aggregate target-level report across supported benchmarks |
+| `./scripts/docker_maillard.sh hofmann` | Diagnostic trace for the Hofmann sulfur benchmark |
+
+## Matrix-Specific Commands
+
+| Command | Purpose |
+| --- | --- |
+| `./scripts/docker_maillard.sh matrix-deltas` | Per-compound matrix benchmark deltas |
+| `./scripts/docker_maillard.sh matrix-evidence` | External versus internal matrix evidence audit |
+| `./scripts/docker_maillard.sh matrix-assertions` | Ranking assertions for current matrix benchmarks |
+| `./scripts/docker_maillard.sh matrix-readiness` | Family-level readiness for matrix promotion |
+| `./scripts/docker_maillard.sh matrix-branch-deltas main` | Compare current branch matrix outputs against main |
+| `./scripts/docker_maillard.sh coverage-gaps` | Coverage-gap report for selective mechanistic expansion work |
+| `./scripts/docker_maillard.sh literature-learning-loop` | Publish literature gaps, ready references, and recommended experiment requests in `results/validation/literature_learning_loop.{md,json}` plus `active_learning_requests.json` |
+| `./scripts/docker_maillard.sh computational-gap-refinement-plan` | Generate the descriptive computational-gap refinement plan and manifests |
+| `./scripts/docker_maillard.sh computational-gap-xtb` | Run xTB seed generation for the named computational-gap targets |
+| `./scripts/docker_maillard.sh computational-gap-dft-preflight aa_ring_open_dicarbonyl` | Run the geometry-control preflight and write the target-specific DFT execution JSON without starting heavy QM |
+| `./scripts/docker_maillard.sh computational-gap-dft aa_ring_open_dicarbonyl` | Run DFT refinement for one computational-gap target with preflight, phase tracking, and a target-specific execution JSON |
+| `./scripts/docker_maillard.sh computational-gap-dft-ingest` | Build the DFT ingestion report for computational-gap refinement |
+| `./scripts/docker_maillard.sh computational-gap-dft-promote` | Promote completed computational-gap DFT results into priors |
+| `./scripts/docker_maillard.sh refinement-governance` | Generate the selective mechanistic refinement governance artifact |
+| `./scripts/docker_maillard.sh campaign data/campaigns/shareable_meaty_screen.yml` | Generate a review-ready campaign package with run-level and campaign-level artifacts |
+
+## CLI Workflows Outside Docker
+
+| Command | Purpose |
+| --- | --- |
+| `python scripts/run_pipeline.py --list-precursors` | List available precursors |
+| `python scripts/run_pipeline.py --list-tags` | List sensory/optimization tags |
+| `python scripts/run_pipeline.py ...` | Run one forward prediction |
+| `python scripts/optimize_formulation.py ...` | Search a formulation space |
+| `python scripts/run_campaign.py --names "A,B" --ph 5.5 --temp 105` | Generate a side-by-side comparison package via the campaign pipeline |
+| `python scripts/run_campaign.py --spec data/campaigns/shareable_meaty_screen.yml` | Generate a shareable multi-run campaign package |
+| `python scripts/compare_sim_to_lit.py` | Compare the framework against literature benchmarks |
+
+## Recommended Review Sequence
+
+If you are reviewing the state of the repository rather than developing it, the shortest useful sequence is:
+
+```bash
+./scripts/docker_maillard.sh summary
+./scripts/docker_maillard.sh validated-envelope
+./scripts/docker_maillard.sh validation-figures
+./scripts/docker_maillard.sh literature-learning-loop
+./scripts/docker_maillard.sh matrix-readiness
+./scripts/docker_maillard.sh coverage-gaps
+```
+

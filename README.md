@@ -3,7 +3,7 @@
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
 [![Docker](https://img.shields.io/badge/docker-recommended-blue.svg)](https://www.docker.com/)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Calibration: 0/3 evaluable literature rows inside 90% CI](https://img.shields.io/badge/calibration-0%2F3%20evaluable%20lit.%20rows%20in%2090%25%20CI-red.svg)](results/validation/prediction_uncertainty.md)
+[![Calibration: 4/9 evaluable literature rows inside a 2.6-dex 90% CI](https://img.shields.io/badge/calibration-4%2F9%20lit.%20rows%20in%20a%202.6--dex%2090%25%20CI-red.svg)](results/validation/prediction_uncertainty.md)
 [![Chemistry: 16 literature lanes, 5 with reaction templates](https://img.shields.io/badge/chemistry-16%20lanes%20%C2%B7%205%20with%20templates-blueviolet.svg)](results/validation/family_implementation_status.md)
 
 **Maillard** is a computational screening framework that predicts which combinations of
@@ -134,9 +134,9 @@ synthetic comparators.
 
 | Population | Inside 90% CI | Not evaluable\* | Median CI width | Is it evidence? |
 | --- | ---: | ---: | ---: | --- |
-| **External literature** | **0/3** (0%) | 4 | **0.75 dex** | **Yes — this is the only row that is** |
-| **Fitted rows** (constants back-solved from the benchmark) | 2/2 | 0 | 2.96 dex | No — algebraic recovery |
-| **Internal synthetic** (model vs its own frozen output) | 18/18 | 8 | 4.18 dex | No — reproducibility harness |
+| **External literature** | **4/9** (44%) | 4 | **2.63 dex** (~424× end to end) | **Yes — this is the only row that is, and the width is why 44% is not good news** |
+| **Fitted rows** (constants back-solved from the benchmark) | 2/2 | 0 | 2.95 dex | No — algebraic recovery |
+| **Internal synthetic** (model vs its own frozen output) | 18/18 | 8 | 4.11 dex | No — reproducibility harness |
 
 \* Degenerate near-zero-width envelopes: the Monte Carlo perturbs nothing on their path, so
 pass/fail is meaningless and they are excluded from coverage.
@@ -150,8 +150,8 @@ denominator fell from 11 to 3, and `scripts/ci/fit_target_gate.py` makes undiscl
 fit-then-score a build failure. The panel itself also shrank from 16 benchmarks to **14**: two
 more were quarantined as fabricated (see [AUDIT.md](AUDIT.md), Round 2).
 
-**And the benchmark-level count, split the same way:** of 14 benchmarks, the ones without
-blocking coverage or ranking gaps are **0 of 6 predictive**, **0 of 4 fit-recovery**, and 4 of 4
+**And the benchmark-level count, split the same way:** of 17 benchmarks, the ones without
+blocking coverage or ranking gaps are **0 of 9 predictive**, **0 of 4 fit-recovery**, and 4 of 4
 internal-synthetic. The 4/14 aggregate is retained in
 [benchmark_summary.md](results/validation/benchmark_summary.md) only for continuity with older
 reports; **every one of those four is now an internal synthetic row — the model agreeing with
@@ -387,6 +387,7 @@ demote the benchmark is an owner decision, recorded in that file's
 
 **Wave S2c (2026-08-27): the tightest contract in the panel was anchored to the repository's
 own guess, and it is retired. THE SULFUR BRANCH NOW HAS ZERO ABSOLUTE LITERATURE ANCHORS.**
+*(**CORRECTED 2026-08-28 (Wave W): THIS IS NO LONGER TRUE.** The full text of Hofmann & Schieberle 1998 (`10.1021/jf9705983`) arrived by interlibrary loan and the sulfur branch now has **three** absolute, stable-isotope-dilution literature anchors — `hofmann1998_{ribose,glucose,fructose}_cysteine_145C_20min_pH5`, the pH-5.0 aqueous rows of the paper's own Table 1 (ribose FFT 121 / MFT 198 ppb; glucose 28 / 19; fructose 32 / 25, all µg per 100 mL × 10 with the volume printed in the table footnote). The paper also confirms Wave S2b's forensic finding from the primary source: 342 and 200 ppb appear nowhere in it. **The model fails all three anchors** — 12.27×, 29.58× and 14.46× worst-ratio, mean 0.92 dex — so the branch went from *unanchored* to *anchored and measurably wrong*, which is the direction of travel this audit wanted. The Wave S2c sentence is kept verbatim because it was true when written, and because the period during which 342/200 shipped as literature is what this section exists to record.)*
 The owner approved Wave S2b's staged plan and it was executed. What that means, plainly: after
 three fabricated-source benchmarks were quarantined or deleted in Round 2, the repo said one
 literature anchor survived on the sulfur branch. It did not. `342` and `200` ppb were never
@@ -508,7 +509,7 @@ the global scale", is unchanged and is now better supported, not worse.)*
 
 | Surface                       | Question                                                                 | Status                                                       |
 | ----------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------ |
-| **Parity**              | On matched systems, how close is predicted ppb to measured?              | **14** benchmarks · MC panel covers **11** of them, **35 matched rows** · **0 strict-ready** · **0/6 predictive benchmarks without blocking gaps** |
+| **Parity**              | On matched systems, how close is predicted ppb to measured?              | **17** benchmarks · MC panel covers **14** of them, **41 matched rows** · **0 strict-ready** · **0/9 predictive benchmarks without blocking gaps** |
 | **External hold-out**   | On systems excluded from calibration, does the frozen model still cover? | 4 bundles · **1/5 on genuine extrapolations** at the pre-widening prior (1/5 at the wider one too, since Wave O) · median **93.68×** error, worst **2474×** |
 | **Maillard-path hold-out** | On systems excluded from calibration, is the *reaction network* right? | **NEW (Wave U)** · 12 free-precursor literature points, predictions frozen before any calibration wave saw them · median **6.04×**, **12/21** within 10×, **1** structural zero · but the *shape* is wrong: sulfur temperature dependence runs backwards and acrylamide is ~40× under-responsive in time · **scored against Wave S3's rate calibration: 0/22 targets moved** |
 | **Coverage**            | Which chemistry lanes are wired, and how?                                | 16 lanes wired · **5 with generative reaction templates** · 7 with DFT anchors |
@@ -530,7 +531,9 @@ the global scale", is unchanged and is now better supported, not worse.)*
 >
 > Median 6.04× is better than the in-panel numbers would suggest, and the best single point
 > is genuinely encouraging: **MFT at 100 °C to 1.52×, on a sulfur branch that Wave S2c
-> established has zero absolute literature anchors.** But the median hides the finding. The
+> established has zero absolute literature anchors** *(true when written; Wave W gave that
+> branch three real Hofmann anchors on 2026-08-28 and the model fails all three by
+> 12-30× — see the calibration section)*.** But the median hides the finding. The
 > model gets the *shape* wrong in three nameable ways — measured MFT falls 4.0× with rising
 > temperature while the model has it rising 4.55×; measured acrylamide rises 52× from 10 to
 > 30 min while the model rises 1.24×; and two of three pH responses point the wrong way.
@@ -707,13 +710,60 @@ the global scale", is unchanged and is now better supported, not worse.)*
 
 ### When to trust the predictions
 
+The table below is the hand-written summary; the **generated model card** immediately after it
+is the authoritative version, recomputed from the artifacts every time
+`scripts/generators/generate_model_card.py` runs. If the two ever disagree, the generated one
+is right and this one has drifted — which is precisely the failure this wave found in the
+directional report and is trying not to repeat.
+
 | Trust level                                  | Use for                                            | Example                                                         |
 | -------------------------------------------- | -------------------------------------------------- | --------------------------------------------------------------- |
 | **Moderate** — verify before deciding | Directional prioritisation and *relative* ranking  | Cys + ribose vs Cys + glucose; pea vs soy matrix comparisons; choosing what to test next |
 | **Low** — exploratory only            | Hypothesis generation                              | Any absolute ppb figure; new protein sources without nearby benchmarks; extrusion claims |
 
+<!-- BEGIN GENERATED: model-card -->
+
+### Model card — the validity domain, generated from the artifacts
+
+*Generated by `scripts/generators/generate_model_card.py`. Do not hand-edit between the markers; regenerate. Every number below is read from a tracked artifact or recomputed live, and the row says which.*
+
+- **Absolute concentrations are unreliable.** Out of sample the free-precursor lane lands at a 6.04x median fold error (worst 52.6x) and the matrix lane at 67.4x-93.7x across all three observability modes. Nothing in this repository licenses a ppb number as a specification.
+- **Directional and ranking claims are the measured product**, at 24/35 on strictly independent claims -- 18/23 (78%) once pH and water activity are set aside, and 6/12 on pH and water activity themselves, which is at or below chance.
+- **The sulfur branch has 3 absolute literature anchors, and the model fails every one of them.** They are the primary-source-verified stable-isotope-dilution rows in hofmann1998_fructose_cysteine_145C_20min_pH5, hofmann1998_glucose_cysteine_145C_20min_pH5, hofmann1998_ribose_cysteine_145C_20min_pH5. The previously shipped claim of ZERO anchors was corrected on 2026-08-28 (Wave W) when the full text behind them was obtained; the retired benchmark (cys_ribose_140C_Hofmann1998) is kept in the tree as the provenance record of the values that were not measurements. Absolute agreement is poor and the DIRECTION is a separate question.
+
+| Claim type | System class | Measured | Verdict |
+|---|---|---|---|
+| Absolute concentration (ppb) | free precursor (sugar + amino acid, aqueous) | median 6.04x, 12/21 within 10x<br/><sub>12-point pre-registered hold-out, frozen before any calibration wave saw it</sub> | **do-not-use** |
+| Absolute concentration (ppb) | protein matrix (pea / soy isolate) | median 93.7x, CI coverage 3/8<br/><sub>8-point external hold-out; the shipped fitted factors LOSE to applying no observability factor at all</sub> | **do-not-use** |
+| Absolute concentration (ppb) | genuine extrapolation (roasting, HME extrusion) | 1/5 inside the 90% CI<br/><sub>the only rows that test transfer; the interval that does cover is ~4 decades wide</sub> | **do-not-use** |
+| Direction / ranking on `sugar_identity` | any (sugar swap, conditions held) | 9/11 on the directional panel | **trust** |
+| Direction / ranking on `additive_cysteine` | free precursor (cysteine present vs absent) | 4/4 on the directional panel | **trust** |
+| Direction / ranking on `temperature` | any (temperature moved, everything else held) | 6/8 on the directional panel | caution |
+| Direction / ranking on `time` | any (time moved, everything else held) | 2/2 on the directional panel | caution |
+| Direction / ranking on `lipid_lane` | protein matrix (lipid-derived aldehydes) | 2/2 on the directional panel | caution |
+| Direction / ranking on `matrix_identity` | protein matrix (pea vs soy) | 1/1 on the directional panel | caution |
+| Direction / ranking on `ph` | any (pH moved) | 6/9 on the directional panel | caution |
+| Direction / ranking on `moisture_aw` | any (water activity moved) | 0/3 on the directional panel | **do-not-use** |
+| Ordering of two compounds in one system | free precursor | 8/12 pairs correct<br/><sub>measured on the hold-out, independently of the panel</sub> | caution |
+| Response direction across a condition series | free precursor | 3/6 correct<br/><sub>the sulfur temperature dependence is inverted and acrylamide is ~40x under-responsive in time</sub> | **do-not-use** |
+| Any claim of benchmark-grade agreement | the in-panel benchmarks themselves | 0/17 strict-ready<br/><sub>recomputed live; strict-ready is the repository's own passing bar</sub> | **do-not-use** |
+| Which experiment to run next (value of information) | any system the uncertainty panel covers | every ranked row is a measured model failure<br/><sub>this claim type does not depend on the model being right -- it depends on the model being wrong in a located, quantified way, which it demonstrably is</sub> | **trust** |
+
+**Verdict thresholds** (applied, not judged): trust = >= 80% agreement on >= 3 claims; caution = >= 60% agreement, or too few claims to establish; do-not-use = < 60% agreement, or unmeasured. An unmeasured axis is reported do-not-use on purpose — absence of evidence is not evidence.
+
+**Provenance census (recounted at generation time, not copied).** **120 records** carry `source_status: no_verifiable_source` across 12 tracked data files — the figure the provenance note above quotes, reproduced here by recount. A further 46 carry the same marker under a different status key (`status`, `value_status`, `value_anchor_status`), for 166 in total. The numeric-payload and runtime-consumed subsets (98 and 80) use a narrower definition than this recount and are pinned separately by `tests/scientific/test_honest_headline_guards.py`.
+
+**Blocking gates at generation time:** `holdout_guard.py` PASS · `citation_gate.py` PASS · `fit_target_gate.py` PASS.
+
+**Provenance of the hold-out numbers.** `results/validation/maillard_path_holdout_frozen_predictions.json`, 12 bundles / 21 scored targets, frozen 2026-08-27 at `12f43dd` — before any calibration wave saw those points, and un-gitignored specifically so a later wave cannot regenerate it and compare it with itself.
+
+**How to use this model in one line:** compare two formulations and read the ratio (`python scripts/maillard.py compare`), never quote the absolute number, and treat any pH or moisture direction as unsupported.
+
+<!-- END GENERATED: model-card -->
+
+
 **There is currently no "high" tier, and no benchmark in the panel is strict-ready
-(0/14).** Free-precursor sulfur chemistry used to sit here as the high-confidence lane; after
+(0/17).** Free-precursor sulfur chemistry used to sit here as the high-confidence lane; after
 the 2026-08-27 chemistry rebuild, the Wave N route correction, the Wave P refit and the Wave S1
 additive-propagator fix the model under-predicts MFT by **1.21×** on its one verified
 sulfur benchmark — while now **over**-predicting FFT on the same benchmark by **1.49×**, which
@@ -852,7 +902,7 @@ the engine ever emits a reaction family the table does not classify.
 📖 = curated layer only &emsp; 📚 = literature priors only
 
 ⚠️ = has quantitative benchmark rows, and currently MISSES them by the stated factor
-(0/14 benchmarks are strict-ready — see the calibration section above) &emsp;
+(0/17 benchmarks are strict-ready — see the calibration section above) &emsp;
 📐 = literature-calibrated priors, no dedicated benchmark &emsp;
 🧮 = computational closure in progress (xTB → DFT queue)
 
@@ -913,6 +963,67 @@ git clone https://github.com/PabloAMC/Maillard.git
 cd Maillard
 ./scripts/docker_maillard.sh up && ./scripts/docker_maillard.sh bootstrap
 ```
+
+### Step 0 — The comparative front door (`python -m` style entry point)
+
+*Added 2026-08-28 (Wave S5).* Steps 1–4 below are the full designer and are unchanged. This
+step exists because they lead with the part of the model that was **measured to be wrong**: an
+absolute ppb number, out of sample, is off by 6×–94×. What was measured to work is the
+ordinal reading — 21/29 on strictly independent directional claims. So the front door leads
+with **ratios**:
+
+```bash
+python scripts/maillard.py compare --template > my_comparison.yml
+python scripts/maillard.py compare my_comparison.yml
+```
+
+```
+  COMPARE   A = cysteine_ribose   vs   B = cysteine_glucose
+
+  Axes this comparison moves: sugar_identity
+  Governing reliability:      trust (8/8)
+
+    - sugar_identity     trust        panel 8/8
+
+  compound                                  A/B          bound(lo..hi)  reliability        pathway A
+  ----------------------------------------------------------------------------------------------
+  Furfural                                1.74x   0.000142 .. 2.12e+04  trust (8/8)        Amadori_Rearrangement
+  2-Furfurylthiol (FFT)                   1.69x   6.62e-06 .. 4.29e+05  trust (8/8)        Amadori_Rearrangement
+  2-Methyl-3-furanthiol (MFT)             5.71x   0.000139 .. 2.34e+05  trust (8/8)        Thiol_Addition_Pentodiulose
+  2,5-Dimethylpyrazine                    1.53x   4.56e-07 .. 5.12e+06  trust (8/8)        Aminoketone_Condensation
+```
+
+Move the pH instead of the sugar, and the same tool says so:
+
+```
+  Axes this comparison moves: ph, moisture_aw
+  Governing reliability:      do-not-use (0/3)
+
+    - ph                 do-not-use   panel 4/7
+        pH is 4/7 on the panel and 4/10 combined with water activity -- at or below chance.
+        The model licenses no pH recommendation.
+    - moisture_aw        do-not-use   panel 0/3
+        Water activity is 0/3 and the miss is STRUCTURAL, not a wiring bug: HMF and furfural
+        share one reaction family, so they always carry the same aw factor, and the
+        projection budget has no moisture dependence at all.
+```
+
+Those reliability tags are **read at runtime** from
+[`docs/validation/directional_accuracy_report.md`](docs/validation/directional_accuracy_report.md);
+re-score the panel and edit that file, and the tool's advice moves with it. There is no second
+copy of the numbers.
+
+| Verb | What it answers | Notes |
+| --- | --- | --- |
+| `compare A.yml B.yml` (or one two-arm file) | "Which formulation gives more X?" | Ratios, the conservative independent-error bound, dominant pathway, per-axis reliability |
+| `predict spec.yml` | "What comes out of this one?" | Ranges not points; model-card caveats printed inline |
+| `rank-experiments` | "What should I measure next?" | Surfaces the value-of-information loop |
+
+Flags: `--absolute` adds the raw ppb columns to `compare` **with the caveat printed in the
+same block**, `--json` emits the machine-readable payload, `--top N` trims the table.
+Input specs are small YAML/JSON — precursors in **mM**, plus `temp_C`, `time_min`, `ph`, `aw`,
+and an optional `protein_type`. None of the process conditions is defaulted: a defaulted
+temperature is a silent chemistry claim, so a spec missing one is refused by name.
 
 ### Step 1 — Predict your formulation (forward mode)
 
@@ -1023,7 +1134,102 @@ Full quickstart guide: [QUICKSTART.md](docs/guides/QUICKSTART.md). Glossary for 
 ---
 
 <details>
-<summary><b>Computational methods under the hood</b></summary>
+<summary><b>Architecture and computational methods under the hood</b></summary>
+
+*This section absorbed `docs/architecture.md` and `docs/reference/SMIRKS_SYSTEM.md` on
+2026-08-28 (Wave S5); both files were deleted. They were not merged wholesale — each led with
+a pre-audit trust claim that the evidence has since withdrawn. `architecture.md` opened its
+trust surface with "**High trust — use freely**" and advertised a `bounded_calibration` /
+`transferred_literature` / `surrogate_family` confidence vocabulary that no longer exists in
+the output; `SMIRKS_SYSTEM.md` described two templates as "Validated vs. benchmarks" at a time
+when **0 of 14** benchmarks are strict-ready. The structural content below is what survived
+that filter.*
+
+### The two lanes — the single most load-bearing fact about this codebase
+
+Every benchmark, and every prediction, runs down **one of two execution paths**, and they
+share almost nothing. Confusing them has produced more wrong conclusions in this repository's
+history than any chemistry error:
+
+| | `free_precursor` | `matrix_only` / `matrix_precursor_augmented` |
+| --- | --- | --- |
+| What runs | The enumerated reaction network: SMIRKS → barriers → flux propagation → projection | A lipid-oxidation load read off a **matrix profile**, multiplied by marker yields and observability factors |
+| Reaches `Recommender.predict_from_steps` | Yes | **No** — `matrix_only` returns before the network is ever called |
+| Where its numbers come from | Chemistry | Calibration constants, several of them back-solved from the benchmarks they are then scored against |
+| Measured out-of-sample | 6.04x median fold error (12-point hold-out) | 67x–94x median (8-point hold-out), and the shipped fitted factors **lose to applying no factor at all** |
+
+This is not an abstraction: it is why three consecutive waves of reaction-network work — an
+additive flux propagator, a pH/water-activity rewiring, a barrier revert — moved dozens of
+in-panel rows and left all eight matrix hold-out points **bit-identical**. The invariance was
+evidence about the hold-out's coverage, not about the model.
+
+### `src/trunk_kinetics.py` — why there is a third, deliberately non-shipping integrator
+
+Neither lane above can be honestly fitted to concentration-vs-time data. The FAST screening
+lane has no time axis and no absolute rate constant — it propagates *relative* fluxes, so a
+uniform shift of every barrier by +10 kcal/mol changes the predicted ppb by under 0.4%. The
+Cantera export lane does integrate ODEs but discards the initial molarity (Cantera normalises
+mole fractions), so three feeds two orders of magnitude apart give bit-identical trajectories.
+
+`trunk_kinetics.py` is a minimal dedicated integrator for the sugar-trunk subsystem, built so
+that the first rate-level calibration in this repository's history could happen at all. It was
+fitted to 176 point-verified concentration-time values and **agrees with an independent
+laboratory's fitted model to 1.5x** on total Amadori degradation. It is also **not wired into
+either shipped lane**, and that was the finding: applying its derived barriers would make the
+hold-out 26% *worse*, because the absolute-accuracy deficit lives in the projection budget and
+in missing chemistry, not in the barrier table.
+
+### Data flow — benchmarks → gates → artifacts → this README
+
+```
+data/benchmarks/**            data/lit/**              docs/validation/directional_*
+        |                          |                              |
+        v                          v                              v
+ src/benchmark_validation   src/*.py (science)          src/directional_reliability
+        |                          |                              |
+        +----------> scripts/generators/generate_*.py <-----------+
+                               |
+                               v
+                    results/validation/*.{json,md}     <-- the evidence, mostly gitignored;
+                               |                           the load-bearing ones force-added
+        +----------------------+----------------------+
+        |                      |                      |
+        v                      v                      v
+  scripts/ci/*.py       scripts/maillard.py    generate_model_card.py
+  (3 blocking gates)    (the user-facing CLI)  (rewrites README's model card in place)
+```
+
+Three properties of that diagram are deliberate. **The gates are blocking and offline** —
+`citation_gate` (DOI grammar, confabulation signatures, digest-as-provenance),
+`fit_target_gate` (fit-then-score circularity), `holdout_guard` (that no hold-out bundle is
+named by any fit record). **The CLI reads the directional artifact at runtime**, so a
+re-scored panel changes what the tool tells a user without a code change. And **the README's
+model card is generated, not written**, because prose does not update itself: this wave found
+the directional report still publishing 20/29 four commits after the tree started scoring
+21/29.
+
+### Reaction template provenance — Tier A and Tier B
+
+`src/smirks_engine.py` is a hybrid generator. **Tier A** rules are generic SMIRKS functional-group
+transforms (`schiff_base_lipid` ← Martins 2001; `beta_scission_alkoxy` and
+`radical_propagation_o2` ← Frankel 1985). **Tier B** are curated Python templates for
+rearrangements whose atom mapping is non-trivial — `_amadori_cascade` (glycation, via the
+N-substituted-1-amino-1-deoxy-2-ketose), `_strecker_step` (oxidative decarboxylation →
+Strecker aldehyde + CO₂), `_beta_elimination_steps` (the DHA pathway), `_thiazole_condensation`
+(heuristic, Yaylayan 1990).
+
+Three physical constraints keep the enumeration from exploding, and **one of them is a known
+scientific limitation, not just a performance guard**:
+
+1. **MW cap at 300 Da** on volatile products. This is why the lipid radical chain cannot reach
+   hexanal from a fatty acid: 13-HPODE (312 Da) and the peroxyl radical (311 Da) are both
+   pruned out of the network.
+2. **Canonical deduplication** — every intermediate is RDKit-canonicalised before recruitment.
+3. **Strict atom balance**, including H₂O and CO₂ co-products.
+
+Known template gaps: nitrate/nitrite interventions are not modelled, and the iron-coordination
+SMIRKS rules are placeholders. Missing chemistry the network has no route to at all:
+glucose→fructose isomerisation, formic and acetic acid, melanoidins, and a caramelisation lane.
 
 ### Reaction enumeration
 
@@ -1038,7 +1244,10 @@ FAST screening in < 1 second. *Corrected 2026-08-27 (Wave S2c): this line used t
 "Literature-calibrated … anchored to Hofmann, Martins, Nursten". The Martins and Nursten
 anchors stand; **the Hofmann anchor does not** — every constant that ever traced to
 `cys_ribose_140C_Hofmann1998` was traced to a repo-internal derivation, not to
-`10.1021/jf9705983`. The sulfur branch has zero absolute literature anchors; read
+`10.1021/jf9705983`. *(Updated 2026-08-28, Wave W: the paper's real Table 1 values are now
+ingested as three panel anchors, which the model fails by 12-30x. What remains true is the
+sentence's actual point — no sulfur barrier constant has ever been fitted to a verified
+literature value, and none was fitted in Wave W either.)* Read
 `src/barrier_constants.py`'s per-key rationales for which values are measured, which are class
 analogues, and which are estimates.*
 A Cantera ODE solver is available for temporal profiles and mechanism debugging.
@@ -1087,11 +1296,12 @@ Pea and soy have the strongest literature backing; others are directional.
 
 | If you are a…                                          | Start with                                                                                                                                 |
 | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Anyone, first command**                        | `python scripts/maillard.py compare --template` → the [model card](#when-to-trust-the-predictions)                                             |
 | **Food scientist** — first run                   | [QUICKSTART.md](docs/guides/QUICKSTART.md)                                                                                                    |
 | **Scientist** — understanding the output         | [GLOSSARY.md](docs/guides/GLOSSARY.md)                                                                                                        |
 | **Reviewer** — auditing what is verified         | [VALIDATION_CONTRACT.md](docs/reference/VALIDATION_CONTRACT.md) → [results/validation/](results/validation/)                                    |
 | **Experimentalist** — closing the gaps           | [PPI_SPI protocol](docs/protocols/PPI_SPI_PRIMARY_BENCHMARK_PROTOCOL.md) → [experiment ranking](results/validation/experiment_value_ranking.md) |
-| **Maintainer** — extending the chemistry         | [architecture.md](docs/architecture.md) → [SMIRKS_SYSTEM.md](docs/reference/SMIRKS_SYSTEM.md)                                                   |
+| **Maintainer** — extending the chemistry         | [Architecture (above)](#architecture-and-computational-methods-under-the-hood) → [CONTRIBUTING.md](CONTRIBUTING.md)                             |
 | **QM operator** — running the DFT queue          | [COMPUTATIONAL_GAP_RUNBOOK.md](docs/guides/COMPUTATIONAL_GAP_RUNBOOK.md)                                                                      |
 | **Literature curator** — ingestion & calibration | [data/lit/README.md](data/lit/README.md)                                                                                                      |
 | **New contributor**                               | [CONTRIBUTING.md](CONTRIBUTING.md)                                                                                                            |

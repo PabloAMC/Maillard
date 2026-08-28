@@ -512,7 +512,13 @@ def _wire_computational_priors():
                 # data/benchmarks/maillard_validation_benchmarks.md section 1.3 -- an
                 # abstract-reconstructed table committed in the same commit as the
                 # benchmark, with both values interior points of two invented mol % bands.
-                # THE SULFUR BRANCH HAS ZERO ABSOLUTE LITERATURE ANCHORS. The ROUTING
+                # THE SULFUR BRANCH HAS ZERO ABSOLUTE LITERATURE ANCHORS.
+                # (Superseded 2026-08-28, Wave W: it now has three, from the real
+                # Table 1 of 10.1021/jf9705983 -- and the model fails all three by
+                # 12-30x. Nothing here was refitted to them. The sentence is kept
+                # because the provenance point it was making is unchanged: the
+                # constant this comment guards has never been anchored to any
+                # literature value, before or after Wave W.) The ROUTING
                 # DECISION here is unchanged and is still the right one: `thiol_addition`
                 # remains the closest sulfur-addition class analogue for this parked step,
                 # and parking it beats re-pointing it at a family that does not exist. What
