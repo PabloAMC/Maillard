@@ -156,16 +156,50 @@ SULFUR_SPECIES: Tuple[Species, ...] = (
             "diagnostic that no lumped 'mercaptopentanone' node can express.",
             sulfur=1),
     Species("ACTZ", "2-acetylthiazole", 5, 1, "product", True, sulfur=1),
+    # ---- B2.1: the Kang 2026 fed intermediate ------------------------------
+    Species("TTCA", "2-(tetrahydroxybutyl)thiazolidine-4-carboxylic acid "
+                    "(the cysteine + xylose condensate Kang 2026 charges)",
+            8, 1, "reactant", True,
+            "B2.1, NEW. Kang 2026's whole temperature ladder is run on PURIFIED "
+            "TTCA at 10 mmol/L, not on a sugar + amino acid mixture, so the "
+            "system cannot be represented by any pot the module already had. "
+            "Two measured facts fix its topology and both are FIT rows: free "
+            "cysteine is a TRANSIENT INTERMEDIATE of its degradation (Fig. S3 "
+            "rises then falls at all three temperatures), and the free-cysteine "
+            "yield is CAPPED AT 16.3 mol% of the cysteine moiety charged, so "
+            ">=84% of the sulfur leaves without ever passing through free "
+            "cysteine. Those two facts are why TTCA has exactly two fates here "
+            "(r_ttca_cys and r_ttca_deg) rather than one.", sulfur=1),
     # ---- terminal pools ---------------------------------------------------
-    Species("BND", "matrix-bound C5-thiol conjugate (REVERSIBLE reservoir)",
+    Species("BND", "matrix-bound MFT conjugate (REVERSIBLE reservoir)",
             5, 0, "pool", False,
-            "The product of covalent addition to a matrix electrophile. MFT and "
-            "FFT are both C5H6OS, so one adduct species serves both. "
+            "The product of covalent addition of MFT to a matrix electrophile. "
+            "B2.1 SPLIT THIS SPECIES IN TWO. B2 carried one lumped C5 adduct for "
+            "both thiols -- MFT and FFT are both C5H6OS, so the atom balance "
+            "permitted it -- and the consequence, which B2 itself recorded as a "
+            "limitation, is that a pot containing both thiols slowly converted "
+            "FFT into MFT through the shared reservoir. BND (MFT) and BND_F "
+            "(FFT) are now separate, the release step returns the thiol that was "
+            "bound, and that limitation is retired. "
             "NOT TERMINAL: Stack 2018 measures the thiol-quinone conjugation as "
-            "an EQUILIBRIUM (K ~ 1e2-1e3 M^-1), which is why added cysteine "
-            "RELEASES bound FFT (Sun 2019). It is a SEQUESTRATION RESERVOIR, "
-            "and treating it as a sink would over-predict permanent aroma loss "
-            "on long timescales.", sulfur=1),
+            "an EQUILIBRIUM, which is why added cysteine RELEASES bound FFT "
+            "(Sun 2019). It is a SEQUESTRATION RESERVOIR, and treating it as a "
+            "sink would over-predict permanent aroma loss on long timescales.",
+            sulfur=1),
+    Species("BND_F", "matrix-bound FFT conjugate (REVERSIBLE reservoir)",
+            5, 0, "pool", False,
+            "B2.1, NEW -- the FFT half of the split described on BND.", sulfur=1),
+    Species("PRB", "thiol bound to a protein disulfide (1:1 / 2:1 exchange adduct)",
+            5, 0, "pool", False,
+            "B2.1, NEW. anantharamkrishnan2020b Fig. 7c: 2-furfurylthiol reacts "
+            "with beta-lactoglobulin's disulfide linkages to give BOTH 1:1 "
+            "(+114 Da) and 2:1 (+228 Da) adducts within 24 h at ambient "
+            "temperature, 'in close analogy to the reactions with n-PrSH'. The "
+            "sulfur branch had no protein sink at all. The channel is "
+            "STOICHIOMETRIC in protein disulfides, not catalytic -- its capacity "
+            "is the protein's disulfide inventory (2 per BLG = 1.09 mmol/L in "
+            "that paper's 10% solution) -- which is why the partner is a titrated "
+            "SITE POOL and not a catalyst.", sulfur=1),
     Species("OLG", "C-5 thiol oligomer", 5, 0, "pool", False,
             "van Seeventer 2001's acid-catalysed electrophilic oligomerisation "
             "at C-5 (85% H-D exchange at C-5 against 10% at C-4; air ~ argon). "
@@ -197,6 +231,18 @@ SULFUR_SPECIES: Tuple[Species, ...] = (
             "of the MFT pool to the dimer and the REDUCED one (cysteine) only "
             "8.6%. The branch responds to REDOX STATE, not to concentration, "
             "so the oxidant is a state variable."),
+    Species("PROT_SS", "protein disulfide sites (matrix input, titrated)", 0, 0,
+            "site", False,
+            "B2.1, NEW. ZERO atoms: a disulfide-linkage equivalent, in the units "
+            "its only measurement uses -- anantharamkrishnan2020b counts 2 "
+            "disulfides per beta-lactoglobulin, i.e. 1.09 mmol/L of sites in "
+            "that paper's 10% (w/v) BLG solution. IT IS A MATRIX INPUT AND IT IS "
+            "ZERO IN EVERY MODEL SYSTEM IN THE FIT AND HOLD-OUT PANELS, which is "
+            "the whole point: the channel is STRUCTURALLY PRESENT and carries "
+            "EXACTLY ZERO RATE in a protein-free pot, by mass action rather than "
+            "by a flag. Kang's TTCA ladder, Hofmann's buffers, Zhou's water and "
+            "Cerny's model solutions all contain no protein, so nothing in "
+            "either panel is changed by this channel's existence."),
     Species("FRAG_N", "unassigned fragment nitrogen", 0, 1, "pool", False),
     Species("FRAG_S", "unassigned fragment sulfur", 0, 0, "pool", False, sulfur=1),
 )
@@ -222,7 +268,18 @@ SITE_POOLS: Tuple[str, ...] = tuple(s.key for s in SULFUR_SPECIES if s.role == "
 #: which is why added cysteine RELEASES bound thiol (Sun 2019). Treating the
 #: bound adduct as terminal would over-predict permanent aroma loss on long
 #: timescales, so the release step exists and BND is a reversible reservoir.
-TERMINAL_POOLS: Tuple[str, ...] = ("OLG", "FRAG_N", "FRAG_S")
+#:
+#: PRB IS TERMINAL, and that is a decision the source forces rather than a
+#: convenience. anantharamkrishnan2020b sec. 5d: no reversibility experiment is
+#: reported for ANY adduct in that paper -- no dilution, no pH change, no
+#: heating, no time series -- and the authors' own claim of irreversibility is
+#: an assumption. The dossier's instruction is that an irreversible hexanal
+#: sink is NOT supported; for the thiol-disulfide exchange it says the reverse
+#: ('reversible in principle in the presence of other thiols') is equally
+#: untested. With no measurement in either direction the conservative encoding
+#: is the one that cannot invent a release rate, so PRB is terminal and the
+#: absence of a release step is recorded here as a KNOWN GAP.
+TERMINAL_POOLS: Tuple[str, ...] = ("OLG", "PRB", "FRAG_N", "FRAG_S")
 
 
 # ---------------------------------------------------------------------------
@@ -254,6 +311,8 @@ MOLECULAR_WEIGHT_G_PER_MOL: Mapping[str, float] = {
     "MP3P": 118.20,   # C5H10OS
     "MP2P": 118.20,
     "ACTZ": 127.16,   # C5H5NOS
+    # B2.1
+    "TTCA": 253.27,   # C8H15NO6S, L-cysteine + D-xylose - H2O
 }
 
 

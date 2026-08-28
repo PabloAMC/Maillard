@@ -25,22 +25,64 @@ THE FOUR ARCHITECTURAL COMMITMENTS, each a measured finding
    moves the split as a matter of arithmetic. A model with fixed fractions
    fails that hold-out by construction, which is the point of holding it out.
 
-2. **THIOL CONSUMPTION IS FOUR NAMED CHANNELS, NOT ONE ARRHENIUS.** Inventory
+2. **THIOL CONSUMPTION IS NAMED CHANNELS, NOT ONE ARRHENIUS.** Inventory
    sec. B.7: four papers, four temperatures, four dominant sinks, each
    excluding the others'. The channels are declared in
    ``parameters_sulfur.THIOL_CHANNELS`` with their own temperature windows and
    ``ea_kj_mol = None``. Deriving an Ea by pairing the 30 C and 115 C rates is
    a PROHIBITED DERIVATION (sec. C.1) and no code path reaches it.
+   *B2.1 narrows this to the NAMED channels it was always about.* The residual
+   ``*_decay`` lumps have never been measured at any temperature, so there is
+   no cross-lab pairing to prohibit -- and holding them fixed at 145 C is the
+   strong claim, not the weak one. See ``NAMED_CHANNEL_KEYS`` versus
+   ``UNASSIGNED_SINK_KEYS``.
 
 3. **DIMERISATION IS NOT AROMA LOSS.** The MFT dimer is 15.6x more potent than
    its own monomer, so the ~7-10% of MFT-equivalents that sit in it carry an
    OAV that matches the monomer's. It is a tracked SPECIES with its own
    threshold (``species_sulfur.odour_activity_values``), never a loss term.
 
-4. **pH IS STRUCTURAL, NOT FITTED.** Acid-catalysed 1,2-enolisation, base-
-   catalysed 2,3-enolisation, the measured neutral-H2S speciation and Zheng &
-   Ho's measured four-pH cysteine thermolysis set. Zero fitted pH parameters.
-   See ``parameters_sulfur.PH_TERM_PROVENANCE``.
+4. **pH IS STRUCTURAL, NOT FITTED.** Acid- and base-catalysed enolisation, the
+   measured sulfide and amine speciation, and Zheng & Ho's measured four-pH
+   cysteine thermolysis set. Zero fitted pH parameters -- still zero after
+   B2.1. See ``parameters_sulfur.PH_TERM_PROVENANCE``.
+
+WHAT BUILD WAVE B2.1 CHANGED, AND WHY
+-------------------------------------
+B2's pre-registered scorecard was 7/27 gating with a NAMED dominant defect: its
+structural pH slope was about one decade per pH unit, which gave the right
+SHAPES and far too much SLOPE, so every level three pH units from the fitted pH
+collapsed or exploded. Five changes, each traceable to a source:
+
+* **pH, part 1 -- speciation at reaction temperature.** Every pKa is now
+  evaluated by van 't Hoff at the temperature the reaction runs at. B2 used
+  25 C values at 115-145 C and called it a declared approximation; the cysteine
+  alpha-ammonium moves 10.28 -> 8.09 and the sulfide 7.05 -> 5.94, i.e. from
+  outside the operating window to inside it.
+* **pH, part 2 -- no lane is 100% catalysed.** Each pH-sensitive step now runs
+  in parallel with an uncatalysed or oppositely-charged twin
+  (``r_arp_tdp_thermal``, ``r_arp_dpo_thermal``, ``r_ddp_mft_hs``,
+  ``r_fur_fft_hs``, and ``r_pent_caramel`` with its acid tag removed). The
+  observable slope is now a ratio of two ordinary rate constants fitted on FIT
+  rows -- not a pH exponent.
+* **pH, part 3 -- consumption carries pH too.** Kumazawa 2003's seven-point
+  121 C grid (declared FIT) measures 2-furfurylthiol survival collapsing from
+  99.5% to under 0.5% between pH 3 and 7 with no formation involved at all.
+  B2 had to attribute all of that to formation. ``ch_thiolate_loss_*`` and the
+  thiolate tag on the dimerisation channels carry it where it belongs.
+* **Temperature.** Kang 2026 SI Table S4's 100 and 120 C rungs are FIT, giving
+  the module its first in-system temperature axis (B2's single lumped Ea landed
+  on its bound and was reported as a failure to determine). Kang's measured
+  Ea(free-cysteine depletion) = 55.1 kJ/mol is a FIXED barrier on the new
+  ``r_cys_thermal``. No new global sulfur Ea was added.
+* **Stack 2018, corrected.** Both the forward and the reverse constant are
+  measured, so K = 5.64 M^-1 at 19.4 C and dH = -28.5 kJ/mol. B2 used 316 M^-1
+  with no temperature dependence, on this paper's stated authority; the paper
+  does not support it. And BND is split into BND and BND_F, which retires B2's
+  own recorded limitation that the shared reservoir converted FFT into MFT.
+* **A new channel.** ``ch_protein_ss_*``: FFT is consumed by protein
+  disulfides (Amendment 5). Rate-bounded rather than fitted, and identically
+  zero in every scored row because no system in either panel contains protein.
 
 WHERE THE TRUNK FEEDS THIS MODULE, AND WHERE IT DOES NOT
 --------------------------------------------------------
@@ -63,13 +105,13 @@ from .network import BALANCED_ELEMENTS, REACTIONS as TRUNK_REACTIONS, Reaction
 from .parameters import KineticParameter
 from .parameters_sulfur import (
     MEASURED_SULFUR,
-    THIOL_QUINONE_EQUILIBRIUM_USED_L_PER_MMOL,
     SulfurParameter,
     T_REF_S_K,
     cysteine_thermolysis_k,
     oligomerisation_rate,
     ph_factor,
     sulfur_registry_metadata,
+    thiol_adduct_equilibrium_l_per_mmol,
 )
 from .species_sulfur import (
     N_SULFUR_STATE,
@@ -168,6 +210,29 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
         "sulfide are unmeasured and are routed to FRAG_C / FRAG_N.",
     ),
     Reaction(
+        "r_cys_thermal", {"Cys": 1}, {"FRAG_C": 3, "FRAG_N": 1, "FRAG_S": 1},
+        "k_cys_thermal",
+        "B2.1, NEW, AND IT CARRIES A MEASURED ACTIVATION ENERGY. Kang 2026 SI "
+        "Fig. S4 tracks FREE cysteine, 10 mmol/L, pH 7, sealed, and measures "
+        "16.2% and 38.7% conversion by 120 min at 100 and 120 C -- the "
+        "corpus's first activation energy for cysteine CONSUMPTION under "
+        "Maillard conditions, Ea = 55.1 kJ/mol, R^2 0.994. "
+        "IT IS NOT THE SAME REACTION AS r_cys_h2s AND MUST NOT BE CONFUSED "
+        "WITH IT. Zheng & Ho measure H2S RELEASE (Ea 133 kJ/mol) and Zheng's "
+        "own constants account for only ~2.7% conversion at 100 C against "
+        "Kang's 16.2%, so most of what consumes cysteine in a sealed aqueous "
+        "system releases no sulfide at all. This step is that remainder: "
+        "cystine formation, non-sulfide degradation and self-condensation, "
+        "lumped. Its RATE is fitted; its BARRIER is Kang's measurement, so the "
+        "temperature dependence of the cysteine pool is not a free shape. "
+        "THE MEASUREMENT'S OWN QUALIFICATIONS TRAVEL WITH IT: the curves are "
+        "not cleanly first order (120 and 140 C decelerate, 100 C mildly "
+        "accelerates), the figure is DIGITISED rather than printed, n is not "
+        "stated, and the identification of the system as free cysteine rather "
+        "than the TTCA-bound moiety is 85% confident on the dossier's own "
+        "reading.",
+    ),
+    Reaction(
         "r_h2s_loss", {"H2S": 1}, {"FRAG_S": 1}, "k_h2s_loss",
         "FITTED consumption of the sulfide pool -- volatilisation and every "
         "non-thiol sink. Without it H2S accumulates forever, which is the "
@@ -212,6 +277,27 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
     ),
     Reaction("r_arp_tdp", {"ARP": 1}, {"TDP": 1, "FRAG_C": 3, "FRAG_N": 1},
              "k_arp_tdp", "The fed Amadori's 1,2-enolisation. Acid-catalysed."),
+    Reaction(
+        "r_arp_tdp_thermal", {"ARP": 1}, {"TDP": 1, "FRAG_C": 3, "FRAG_N": 1},
+        "k_arp_tdp_th",
+        "B2.1: THE UNCATALYSED 1,2-ENOLISATION OF THE FED AMADORI, and it is "
+        "the fix for B2's dominant defect rather than a new chemical claim. If "
+        "a product has exactly one route and that route is fully rate-limited "
+        "by [H+], then the product is one decade per pH unit BY CONSTRUCTION, "
+        "with no chemistry left over -- which is precisely what B2's hold-out "
+        "report diagnosed. The uncatalysed route is the same reaction without "
+        "the proton, it is what keeps caramelisation running in neutral and "
+        "alkaline solution, and its free-sugar analogue (r_pent_caramel) was "
+        "already in the network and already forced there by Hofmann's "
+        "amine-free fed rows. With both present the OBSERVABLE pH slope is "
+        "sub-decade and its crossover is a ratio of two ordinary rate "
+        "constants fitted on FIT rows -- not a pH parameter.",
+    ),
+    Reaction(
+        "r_arp_dpo_thermal", {"ARP": 1}, {"DPO": 1, "FRAG_C": 3, "FRAG_N": 1},
+        "k_arp_dpo_th",
+        "The base-lane partner of r_arp_tdp_thermal, for the same reason.",
+    ),
     Reaction("r_dpo_nf", {"DPO": 1}, {"NF": 1}, "k_dpo_nf", ""),
     Reaction(
         "r_dpo_ptr", {"DPO": 1}, {"PTR": 1}, "k_dpo_ptr",
@@ -268,6 +354,16 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
         "with no fragment pattern, 'pathways via ribose fragmentation were not "
         "relevant' => ~93% of MFT carries the intact pentose skeleton at 95 C.",
     ),
+    Reaction(
+        "r_ddp_mft_hs", {"DDP": 1, "H2S": 1}, {"MFT": 1}, "k_ddp_mft_hs",
+        "B2.1: THE SAME ADDITION THROUGH THE HYDROSULFIDE ANION. A nucleophile "
+        "with two protonation states adds through both; B2 carried only the "
+        "neutral molecule, which is a mechanism claim that runs against the "
+        "elementary chemistry (HS- is by far the better nucleophile and H2S "
+        "dominates only by abundance below the pKa) and which is half of why "
+        "B2's thiols collapsed at high pH. Two branches, two constants, both "
+        "fitted on FIT rows: the crossover is a rate ratio, not a pH parameter.",
+    ),
     Reaction("r_nf_mft", {"NF": 1, "H2S": 1}, {"MFT": 1}, "k_nf_mft", ""),
     Reaction(
         "r_nf_mp3p", {"NF": 1, "H2S": 1}, {"MP3P": 1}, "k_nf_mp3p",
@@ -292,6 +388,10 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
         "r_fur_fft", {"FUR": 1, "H2S": 1}, {"FFT": 1}, "k_fur_fft",
         "Furfural is 60x ribose and 7x the 3-deoxyosone as an FFT source "
         "(Hofmann 1998 T3).",
+    ),
+    Reaction(
+        "r_fur_fft_hs", {"FUR": 1, "H2S": 1}, {"FFT": 1}, "k_fur_fft_hs",
+        "The FFT partner of r_ddp_mft_hs.",
     ),
     Reaction(
         "r_fur_decay", {"FUR": 1}, {"FRAG_C": 5}, "k_fur_decay",
@@ -334,6 +434,25 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
         "two-system constraint on the ARP -> MGO flux with no free downstream "
         "parameter, and it is a declared HOLD-OUT.",
     ),
+    # ================= B2.1: THE FED TTCA INTERMEDIATE =====================
+    Reaction(
+        "r_ttca_cys", {"TTCA": 1}, {"Cys": 1, "PENT": 1}, "k_ttca_cys",
+        "B2.1: TTCA's ring-opening back to free cysteine and the pentose. Kang "
+        "2026 charges purified TTCA at 10 mmol/L and measures free cysteine "
+        "RISING THEN FALLING at all three temperatures, with the maximum moving "
+        "earlier as T rises -- consecutive A -> B -> C kinetics. This is the "
+        "release half; the module's existing cysteine sinks are the consumption "
+        "half, so the transient emerges rather than being imposed.",
+    ),
+    Reaction(
+        "r_ttca_deg", {"TTCA": 1},
+        {"DPO": 1, "FRAG_C": 3, "FRAG_N": 1, "FRAG_S": 1}, "k_ttca_deg",
+        "B2.1: TTCA's OTHER fate, and it is what the 16.3 mol% ceiling is made "
+        "of. Peak free cysteine is 1.63 mmol/L against 10 mmol/L TTCA charged, "
+        "so >=84% of the cysteine moiety leaves by a route that never passes "
+        "through free cysteine. A network with only the release route would "
+        "have to violate that bound; this step is how it can satisfy it.",
+    ),
     # ================= THIOL CONSUMPTION: FOUR NAMED CHANNELS =============
     # Channel 1 -- covalent addition to matrix electrophiles. 25-30 C. MEASURED.
     Reaction(
@@ -344,24 +463,57 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
         "flux at 30 C, which fixes the stoichiometry as 1:1 and the order as "
         "first in thiol.",
     ),
-    Reaction("ch_thioether_fft", {"FFT": 1, "MELE": 1}, {"BND": 1}, "k_thioether", ""),
+    Reaction("ch_thioether_fft", {"FFT": 1, "MELE": 1}, {"BND_F": 1},
+             "k_thioether",
+             "B2.1: FFT now has its OWN adduct reservoir -- see "
+             "ch_thioether_release_fft."),
     Reaction(
         "ch_thioether_release", {"BND": 1}, {"MFT": 1, "MELE": 1}, None,
-        "THE CONJUGATION IS REVERSIBLE, and leaving it out would have been a "
-        "real error. Stack 2018 measures thiol-quinone conjugation as an "
-        "EQUILIBRIUM (K ~ 1e2-1e3 M^-1) -- a SEQUESTRATION equilibrium, not an "
-        "irreversible sink -- which is the mechanism behind Sun 2019's finding "
-        "that ADDING cysteine RELEASES bound FFT. An irreversible-only sink "
-        "over-predicts permanent aroma loss on long timescales. "
-        "ITS RATE IS DERIVED, NOT FITTED: k_reverse = k_thioether / K, so the "
-        "step adds no free parameter and cannot be tuned. "
-        "TWO LIMITATIONS, STATED: the release is written to MFT because the "
-        "bound adduct is a single lumped C5 species that serves both thiols, so "
-        "a pot containing both would slowly convert FFT into MFT through it; "
-        "the module is therefore only valid for release where one thiol "
-        "dominates, and BND is reported alongside so the size of that pool is "
-        "visible. And the equilibrium constant is measured on quinone "
-        "conjugates, i.e. on one of the two channels MELE lumps.",
+        "THE CONJUGATION IS REVERSIBLE, and B2 was right to say so and wrong "
+        "about the number. Stack 2018 measures BOTH the forward and the reverse "
+        "constant at four temperatures, so K = k1/k-1 is MEASURED, not a range: "
+        "5.64 M^-1 at 19.4 C rising to 10.57 M^-1 at 4.6 C. B2 used 316 M^-1 on "
+        "this paper's authority; the paper does not support it, and the "
+        "correction is 56x. "
+        "AND K FALLS WITH TEMPERATURE -- the addition is exothermic, dH = -28.5 "
+        "kJ/mol, confirmed to the last digit by two independent Arrhenius "
+        "refits -- so HEATING RELEASES BOUND THIOL. That is the measured "
+        "mechanism behind Hofmann's 80 C brew being slower than his own 30 C "
+        "models, and B2 could not express it because its K had no temperature "
+        "dependence at all. "
+        "ITS RATE IS STILL DERIVED, NOT FITTED: k_reverse = k_thioether(T) / "
+        "K(T). "
+        "B2.1 ALSO RETIRES B2's STATED LIMITATION that the shared adduct "
+        "silently converted FFT into MFT: BND and BND_F are separate species "
+        "and each releases the thiol that was bound.",
+    ),
+    Reaction(
+        "ch_thioether_release_fft", {"BND_F": 1}, {"FFT": 1, "MELE": 1}, None,
+        "The FFT half of the split. Same derived rate, same measured K(T).",
+    ),
+    # Channel 1b -- B2.1: thiol-disulfide exchange with matrix PROTEIN.
+    Reaction(
+        "ch_protein_ss_fft", {"FFT": 1, "PROT_SS": 1}, {"PRB": 1},
+        "k_protein_ss",
+        "B2.1, NEW CHANNEL, required by FIT_HOLDOUT_DECLARATION.md Amendment 5. "
+        "anantharamkrishnan2020b Fig. 7c: 2-furfurylthiol cleaves "
+        "beta-lactoglobulin's disulfide linkages to give BOTH 1:1 (+114 Da) and "
+        "2:1 (+228 Da) adducts within 24 h at ambient temperature. The sulfur "
+        "branch had no protein sink at all. "
+        "IT IS STOICHIOMETRIC, NOT CATALYTIC -- capacity is the protein's own "
+        "disulfide inventory -- which is why the partner is a titrated SITE "
+        "POOL. PROT_SS IS ZERO IN EVERY SYSTEM IN BOTH SCORED PANELS, so this "
+        "channel carries EXACTLY ZERO FLUX in every fit and hold-out row, by "
+        "mass action and not by a flag. Its rate is BOUNDED from the paper's "
+        "single timescale bracket, never fitted: no FIT row contains protein.",
+    ),
+    Reaction(
+        "ch_protein_ss_mft", {"MFT": 1, "PROT_SS": 1}, {"PRB": 1},
+        "k_protein_ss",
+        "The MFT arm, and it is an INFERENCE rather than a measurement: "
+        "anantharamkrishnan measures FFT and n-propanethiol, and the dossier "
+        "flags the extension to the furan-3-thiol class as its own inference. "
+        "Carried at the same bounded rate with that flag attached.",
     ),
     # Channel 2 -- acid-catalysed C-5 oligomerisation. 50 C. NO MEASURED RATE.
     Reaction(
@@ -395,6 +547,26 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
         "partner, which the 30 C and 50 C systems do not have -- which is why "
         "it is a separate channel and not a term in a lumped sink.",
     ),
+    # Channel 5 -- B2.1: the pH-dependent, thiolate-mediated oxidative sink.
+    Reaction(
+        "ch_thiolate_loss_fft", {"FFT": 1}, {"FRAG_C": 5, "FRAG_S": 1},
+        "k_thiolate_loss",
+        "B2.1, NEW, AND IT IS WHERE THE FFT-VERSUS-pH SLOPE ACTUALLY LIVES. "
+        "Kumazawa 2003 heats 1 ppm 2-furfurylthiol at 121 C / 10 min across "
+        "seven pH levels and measures survival falling 99.5 -> 96.2 -> 89.1 -> "
+        "79.5 -> 45.1 -> 11 -> <0.5 % from pH 3.0 to 7.0, with the difurfuryl "
+        "disulfide growing monotonically over the same grid AND a mass-balance "
+        "shortfall the authors attribute to a Fenton-type route. B2 had NO pH "
+        "dependence on any consumption channel, so it was forced to load the "
+        "whole observed pH response of FFT onto FORMATION at a decade per pH "
+        "unit. A measurable part of that response is CONSUMPTION. "
+        "Thiol oxidation proceeds through the thiolate, so the factor is the "
+        "thiolate fraction at reaction temperature: a mechanism claim with no "
+        "fitted pH number. This step is the NON-disulfide half (the shortfall); "
+        "the disulfide half is ch_dimer_*, which now carries the same factor.",
+    ),
+    Reaction("ch_thiolate_loss_mft", {"MFT": 1}, {"FRAG_C": 5, "FRAG_S": 1},
+             "k_thiolate_loss", ""),
     # Terminal decay of the aroma species, bounded to allow ~zero.
     Reaction("ch_mft_decay", {"MFT": 1}, {"FRAG_C": 5, "FRAG_S": 1}, "k_mft_decay", ""),
     Reaction("ch_fft_decay", {"FFT": 1}, {"FRAG_C": 5, "FRAG_S": 1}, "k_fft_decay", ""),
@@ -419,13 +591,33 @@ REACTION_PH_FACTOR: Mapping[str, str] = {
     "r_pent_dpo": "base",
     "r_dpo_ddp": "base",
     "r_pent_tdp": "acid",
-    "r_pent_caramel": "acid",
+    # B2.1: r_pent_caramel LOSES its acid factor. It is the module's declared
+    # AMINE-INDEPENDENT thermal enolisation -- the step Hofmann's amine-free fed
+    # rows forced into existence -- and caramelisation is not specific-acid
+    # catalysed: it runs at neutral and alkaline pH, faster if anything.
+    # Labelling it "acid" made BOTH routes to the 3-deoxyosone proportional to
+    # [H+], which left the free-sugar lane with no uncatalysed route at all and
+    # is a second instance of the defect B2's report named once.
+    "r_pent_caramel": "",
+    "r_pent_thermal_dpo": "",
+    "r_arp_tdp_thermal": "",
+    "r_arp_dpo_thermal": "",
     "r_glc_fur": "acid",
     "r_ddp_mft": "neutral_h2s",
+    "r_ddp_mft_hs": "hs_anion",
     "r_nf_mft": "neutral_h2s",
     "r_nf_mp3p": "neutral_h2s",
     "r_mgo_mp": "neutral_h2s",
     "r_fur_fft": "neutral_h2s",
+    "r_fur_fft_hs": "hs_anion",
+    # B2.1: thiol oxidation to the disulfide proceeds through the THIOLATE.
+    # This is a mechanism claim and it costs no parameter. Kumazawa's grid
+    # measures the disulfide growing monotonically with pH while the thiol
+    # collapses, in the same tubes, which is exactly the signature.
+    "ch_dimer_mft": "thiolate",
+    "ch_dimer_fft": "thiolate",
+    "ch_thiolate_loss_mft": "thiolate",
+    "ch_thiolate_loss_fft": "thiolate",
 }
 
 
@@ -534,17 +726,27 @@ def sulfur_rate_constants_at(
         if isinstance(parameter, KineticParameter) and parameter.ea_kj_mol is None:
             raise ValueError(f"{reaction.key}: trunk parameter {key!r} has no Ea")
         value = parameter.k_at(float(temperature_k))
-        value *= ph_factor(REACTION_PH_FACTOR.get(reaction.key, ""), ph)
+        value *= ph_factor(
+            REACTION_PH_FACTOR.get(reaction.key, ""), ph, float(temperature_k)
+        )
         out[reaction.key] = value
 
     # DERIVED RATE 1: the reverse of the thioether conjugation. Stack 2018
-    # measures the equilibrium, not the reverse rate, so the reverse constant is
-    # k_forward / K and is not a free parameter. Units check: k_thioether is
-    # L/(mmol*min) and K is L/mmol, so the quotient is 1/min, which is the
-    # first-order unit the release step needs.
-    out["ch_thioether_release"] = (
-        out["ch_thioether_mft"] / THIOL_QUINONE_EQUILIBRIUM_USED_L_PER_MMOL
-    )
+    # measures BOTH constants, so K = k1/k-1 is measured and so is its
+    # temperature dependence (dH = -28.5 kJ/mol, exothermic). The reverse
+    # constant is k_forward(T) / K(T) and is not a free parameter. Units check:
+    # k_thioether is L/(mmol*min) and K is L/mmol, so the quotient is 1/min,
+    # which is the first-order unit the release step needs.
+    #
+    # B2.1 CHANGED TWO THINGS HERE. B2 divided by a fixed 0.3162 L/mmol taken
+    # from a "K ~ 1e2-1e3 M^-1" range that Stack does not print; the measured
+    # value is 5.64e-3 L/mmol at 19.4 C, 56x smaller. And B2's K was
+    # temperature-independent, so it could not express the one food-relevant
+    # thing Stack measures: heating pushes the equilibrium back toward FREE
+    # thiol.
+    _k_adduct = thiol_adduct_equilibrium_l_per_mmol(float(temperature_k))
+    out["ch_thioether_release"] = out["ch_thioether_mft"] / _k_adduct
+    out["ch_thioether_release_fft"] = out["ch_thioether_fft"] / _k_adduct
 
     # DERIVED RATE 2: B1's Amadori rearrangement, pinned to the condensation.
     # Reproduced here so the trunk behaves identically inside the extended
@@ -836,12 +1038,19 @@ def branch_shares(flux: Mapping[str, float]) -> Dict[str, float]:
         return float(numerator) / float(denominator) if denominator > 0 else float("nan")
 
     mft_from_thiamine = flux.get("r_hmp_mft", 0.0)
-    mft_from_intact = flux.get("r_ddp_mft", 0.0)
+    # B2.1: THE INTACT-SKELETON ROUTE IS NOW TWO PARALLEL STEPS, one through
+    # neutral H2S and one through HS-. They are the same ROUTE -- same carbon
+    # skeleton, same precursor, same product -- differing only in which
+    # protonation state of the sulfide does the attack, so a route share that
+    # counted one and not the other would be wrong twice over: it would
+    # under-report the intact-skeleton share, and it would make that share move
+    # with pH for a reason that has nothing to do with the route mix.
+    mft_from_intact = flux.get("r_ddp_mft", 0.0) + flux.get("r_ddp_mft_hs", 0.0)
     mft_from_nf = flux.get("r_nf_mft", 0.0)
     mft_from_c2c3 = flux.get("r_ha_mp_mft", 0.0)
     mft_total = mft_from_thiamine + mft_from_intact + mft_from_nf + mft_from_c2c3
 
-    fur_to_fft = flux.get("r_fur_fft", 0.0)
+    fur_to_fft = flux.get("r_fur_fft", 0.0) + flux.get("r_fur_fft_hs", 0.0)
     fur_total = fur_to_fft + flux.get("r_fur_decay", 0.0)
 
     mft_made = mft_total
@@ -850,6 +1059,8 @@ def branch_shares(flux: Mapping[str, float]) -> Dict[str, float]:
     mft_to_thioether = flux.get("ch_thioether_mft", 0.0)
     mft_to_oligomer = flux.get("ch_oligomer_mft", 0.0)
     mft_to_decay = flux.get("ch_mft_decay", 0.0)
+    mft_to_thiolate = flux.get("ch_thiolate_loss_mft", 0.0)
+    mft_to_protein = flux.get("ch_protein_ss_mft", 0.0)
 
     return {
         "MFT_share_thiamine_route": share(mft_from_thiamine, mft_total),
@@ -865,6 +1076,11 @@ def branch_shares(flux: Mapping[str, float]) -> Dict[str, float]:
         "MFT_consumed_share_thioether": share(mft_to_thioether, mft_made),
         "MFT_consumed_share_oligomerisation": share(mft_to_oligomer, mft_made),
         "MFT_consumed_share_unassigned_decay": share(mft_to_decay, mft_made),
+        "MFT_consumed_share_thiolate_oxidation": share(mft_to_thiolate, mft_made),
+        "MFT_consumed_share_protein_disulfide": share(mft_to_protein, mft_made),
+        "MFT_share_intact_skeleton_via_neutral_H2S": share(
+            flux.get("r_ddp_mft", 0.0), mft_from_intact
+        ),
         "note": (
             "Every value above is a ratio of time-integrated mass-action fluxes "
             "computed for THIS run. None is stored anywhere. Perturb a "

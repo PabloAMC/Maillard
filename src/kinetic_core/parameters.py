@@ -66,6 +66,13 @@ EVIDENCE_CLASSES = (
     "measured_activation_energy",  # an Ea printed in a paper
     "derived_from_fit_data",  # estimated here by least squares on FIT rows
     "structural_constant",    # a stoichiometry or atom count, not a rate
+    # Added by Build Wave B2.1. A constant that is NOT measured and NOT fitted:
+    # it is bounded, from a qualitative timescale bracket in a source that
+    # reports no rate at all ("nearly none at 6 h, clearly seen at 24 h"). Such
+    # a constant may be carried so that a mechanistically required channel is
+    # structurally present, but it must never be quoted as a measurement, and
+    # nothing in a fit objective may be allowed to move it.
+    "bounded_from_a_timescale_bracket",
 )
 
 

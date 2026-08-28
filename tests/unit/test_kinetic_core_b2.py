@@ -147,8 +147,14 @@ def test_every_sulfur_species_has_formation_and_consumption():
     for reaction in FULL_REACTIONS:
         produced.update(reaction.products)
         consumed.update(reaction.reactants)
+    # B2.1 adds BND_F (the FFT half of the split adduct reservoir, which IS
+    # consumed by its own release step but is listed here for symmetry with
+    # BND) and PRB, the protein-disulfide adduct, which is TERMINAL because
+    # anantharamkrishnan2020b sec. 5d reports no reversibility experiment in
+    # either direction -- carrying a release rate would be inventing one.
     terminal_by_design = {
-        "FRAG_C", "FRAG_N", "FRAG_S", "MEL_C", "MEL_N", "BND", "OLG",
+        "FRAG_C", "FRAG_N", "FRAG_S", "MEL_C", "MEL_N", "BND", "BND_F",
+        "OLG", "PRB",
     }
     for species in SULFUR_STATE:
         if species.role in ("reactant", "site") or species.key in terminal_by_design:
@@ -275,14 +281,18 @@ def test_single_route_controls_are_structural(parameters):
 
 def test_four_named_channels_with_four_windows():
     names = {c["channel"] for c in THIOL_CHANNELS}
-    assert names == {
+    # B2's four, which must all still be there and separately named
+    assert {
         "covalent_addition_to_matrix_electrophiles",
         "acid_catalysed_C5_oligomerisation",
         "oxidative_dimerisation",
         "radical_coupling_to_methanethiol",
-    }
+    } <= names
+    # B2.1 adds two more, each with its own source and its own exclusion
+    assert "thiolate_mediated_oxidative_loss" in names
+    assert "thiol_disulfide_exchange_with_matrix_protein" in names
     windows = {c["dominant_at_c"] for c in THIOL_CHANNELS}
-    assert len(windows) == 4, "each channel must declare its own T window"
+    assert len(windows) >= 4, "each channel must declare its own T window"
     for channel in THIOL_CHANNELS:
         assert channel["what_excludes_the_neighbour"], channel["channel"]
 
@@ -292,24 +302,46 @@ def test_no_consumption_channel_has_an_activation_energy(parameters):
     Inventory sec. C.1 / B.7: pairing two channels' rates to get an Ea is a
     PROHIBITED DERIVATION. Enforced by there being no Ea to pair.
     """
-    assert MEASURED_SULFUR["k_thioether"].ea_kj_mol is None
-    for key in CONSUMPTION_KEYS:
+    # B2.1 NARROWS THIS, AND THE NARROWING IS THE POINT OF THE REVISION.
+    # Sec. B.7's finding is about FOUR NAMED CHANNELS that four papers measure
+    # at four temperatures; pairing two of THOSE is what is prohibited, and it
+    # still is. The residual `*_decay` lumps are not those channels -- nobody
+    # has measured them at any temperature, so there is no pairing to prohibit,
+    # and asserting they are temperature-INDEPENDENT is a strong claim with no
+    # evidence and a known direction of error. See
+    # parameters_sulfur.NAMED_CHANNEL_KEYS / UNASSIGNED_SINK_KEYS.
+    from src.kinetic_core.parameters_sulfur import NO_EA_KEYS
+
+    for key in NO_EA_KEYS:
         assert parameters[key].ea_kj_mol is None, key
         assert "no_Ea_available" in parameters[key].flags
+    assert MEASURED_SULFUR["k_protein_ss"].ea_kj_mol is None
+    assert MEASURED_SULFUR["k_oligomer" if False else "k_protein_ss"].k_ref is not None
 
 
 def test_a_no_Ea_parameter_is_held_fixed_not_extrapolated():
-    thioether = MEASURED_SULFUR["k_thioether"]
-    assert thioether.k_at(303.15) == thioether.k_at(388.15) == thioether.k_ref
+    """
+    B2.1: k_thioether now carries Stack 2018's MEASURED forward barrier, so the
+    channel that stands for "no Ea exists" is the protein-disulfide exchange,
+    for which no source reports a temperature dependence of any kind.
+    """
+    protein = MEASURED_SULFUR["k_protein_ss"]
+    assert protein.k_at(303.15) == protein.k_at(388.15) == protein.k_ref
 
 
 def test_the_thioether_channel_emits_an_extrapolation_warning_off_its_window(parameters):
     run = integrate_sulfur(
-        parameters, 115.0 + CELSIUS, {"MFT": 1.0, "MELE": 10.0}, np.array([0.0, 60.0]),
+        parameters, 115.0 + CELSIUS,
+        {"MFT": 1.0, "MELE": 10.0, "PROT_SS": 1.0}, np.array([0.0, 60.0]),
         ph=5.0,
     )
     warnings = run.metadata["extrapolation_warnings"]
-    assert any("k_thioether" in w and "NO ACTIVATION ENERGY" in w for w in warnings)
+    # k_thioether is measured over 25-30 C and is being evaluated at 115 C
+    assert any("k_thioether" in w for w in warnings)
+    # and the channel that genuinely has no barrier says so in those words
+    assert any(
+        "k_protein_ss" in w and "NO ACTIVATION ENERGY" in w for w in warnings
+    )
 
 
 def test_the_oligomerisation_channel_is_declared_and_zero(parameters):
@@ -388,15 +420,24 @@ def test_there_are_no_fitted_ph_parameters():
 
 
 def test_ph_factors_are_normalised_at_pH5():
-    for kind in ("acid", "base", "neutral_h2s"):
+    for kind in ("acid", "base", "neutral_h2s", "hs_anion", "thiolate"):
         assert ph_factor(kind, 5.0) == pytest.approx(1.0, rel=1e-9)
 
 
 def test_h2s_speciation_falls_and_amine_rises_through_the_measured_pKas():
+    """
+    B2.1: the SHAPES are unchanged and still measured; what changed is that the
+    pKa are now evaluated at reaction temperature, so the half-way point of the
+    sulfide curve is 7.05 only at 25 C.
+    """
+    from src.kinetic_core.parameters_sulfur import pka_at
+
     assert neutral_h2s_fraction(5.0) > neutral_h2s_fraction(7.0) > neutral_h2s_fraction(9.0)
     assert free_amine_fraction(5.0) < free_amine_fraction(7.0) < free_amine_fraction(9.0)
-    # the sulfide pKa is 7.05, so the neutral fraction crosses one half there
-    assert neutral_h2s_fraction(7.05) == pytest.approx(0.5, abs=1e-6)
+    assert neutral_h2s_fraction(7.05, 298.15) == pytest.approx(0.5, abs=1e-6)
+    assert neutral_h2s_fraction(pka_at("h2s_1", 418.15), 418.15) == pytest.approx(
+        0.5, abs=1e-6
+    )
 
 
 def test_the_two_factor_product_law_and_exactly_where_its_maximum_is():
@@ -433,27 +474,41 @@ def test_the_two_factor_product_law_and_exactly_where_its_maximum_is():
     That is a dynamic property of the ODE, not of these algebraic factors.
     Whether it actually produces the maximum is scored out-of-sample by
     `zhou_MFT_shape_pH8_over_pH7` in the hold-out report, and nowhere else.
-    """
-    grid = np.linspace(3.0, 12.0, 901)
 
-    def argmax_ph(base_power, sulfide_power):
+    B2.1 ADDENDUM. The pKa are now evaluated at REACTION temperature, so every
+    maximum listed above MOVES DOWN with it -- and that is the point, because
+    the whole family shifts toward the pH window the experiments actually
+    occupy instead of sitting two to three units above it. The invariant the
+    test now pins is the STRUCTURE, which is temperature-independent: the
+    maximum of base^a x sulfide^b always lands between the two pKa AT THE
+    EVALUATION TEMPERATURE, and it lands ON one of them at the two limiting
+    exponent combinations.
+    """
+    from src.kinetic_core.parameters_sulfur import pka_at
+
+    grid = np.linspace(2.0, 12.0, 1001)
+
+    def argmax_ph(base_power, sulfide_power, t_k):
         v = np.array([
-            ph_factor("base", p) ** base_power
-            * ph_factor("neutral_h2s", p) ** sulfide_power
+            ph_factor("base", p, t_k) ** base_power
+            * ph_factor("neutral_h2s", p, t_k) ** sulfide_power
             for p in grid
         ])
         assert np.isfinite(v).all()
         return float(grid[int(np.argmax(v))])
 
-    from src.kinetic_core.parameters_sulfur import PKA_CYSTEINE_AMINE, PKA_H2S_1
-
-    assert argmax_ph(1, 2) == pytest.approx(PKA_H2S_1, abs=0.02)
-    assert argmax_ph(2, 1) == pytest.approx(PKA_CYSTEINE_AMINE, abs=0.02)
-    assert argmax_ph(1, 1) == pytest.approx(8.66, abs=0.05)
-    assert argmax_ph(2, 2) == pytest.approx(8.67, abs=0.05)
+    for t_k in (298.15, 393.15, 418.15):
+        pka_s = pka_at("h2s_1", t_k)
+        pka_n = pka_at("cysteine_amine", t_k)
+        assert argmax_ph(1, 2, t_k) == pytest.approx(pka_s, abs=0.03)
+        assert argmax_ph(2, 1, t_k) == pytest.approx(pka_n, abs=0.03)
+        for powers in ((1, 1), (2, 2)):
+            assert pka_s - 0.03 <= argmax_ph(*powers, t_k) <= pka_n + 0.03
+    # and the whole family moves DOWN as the pKa do
+    assert argmax_ph(1, 1, 418.15) < argmax_ph(1, 1, 298.15) - 1.0
     # every one is INTERIOR -- the product law is peaked, not monotone
     for powers in ((1, 1), (1, 2), (2, 1), (2, 2)):
-        assert grid[0] < argmax_ph(*powers) < grid[-1]
+        assert grid[0] < argmax_ph(*powers, 418.15) < grid[-1]
 
 
 def test_cysteine_thermolysis_uses_the_source_consistent_matched_pairs():
@@ -595,10 +650,9 @@ def test_every_parameter_carries_its_provenance():
             assert parameter.dossier_anchor, key
             assert parameter.conditions, key
             assert parameter.rate_transfer, key
-            assert parameter.evidence_class in (
-                "measured_rate", "measured_activation_energy",
-                "derived_from_fit_data", "structural_constant",
-            )
+            from src.kinetic_core.parameters import EVIDENCE_CLASSES
+
+            assert parameter.evidence_class in EVIDENCE_CLASSES
             metadata = parameter.as_metadata()
             assert metadata["dft_derived"] is False
             assert "ph_of_measurement" in metadata
@@ -762,7 +816,7 @@ def test_pinned_hofmann_ph5_regression(parameters):
 
 def test_network_shape_is_pinned():
     described = describe_sulfur()
-    assert described["n_species"] == 42
+    assert described["n_species"] == 46  # B2.1 adds TTCA, BND_F, PRB, PROT_SS
     assert described["trunk_reactions"] == 15
     assert len(SULFUR_REACTIONS) == described["sulfur_reactions"]
     ph_tagged = {k for k, v in REACTION_PH_FACTOR.items() if v}

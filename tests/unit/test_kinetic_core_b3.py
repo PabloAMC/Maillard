@@ -716,7 +716,9 @@ def test_the_flux_budget_accounts_for_every_reaction(parameters):
 
 def test_network_shape_is_pinned():
     described = describe_acrylamide()
-    assert described["n_species"] == 51
+    # B2.1 added four species to the sulfur block (TTCA, BND_F, PRB,
+    # PROT_SS), which the acrylamide state vector inherits unchanged.
+    assert described["n_species"] == 55
     assert described["trunk_reactions"] == 15
     assert described["acrylamide_reactions"] == 16
     assert described["n_reactions"] == 31
