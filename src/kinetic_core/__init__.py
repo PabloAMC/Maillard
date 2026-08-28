@@ -147,6 +147,58 @@ from .acrylamide import (  # noqa: F401,E402
 )
 
 
+# --- Build Wave B4: the matrix / OAV output layer -------------------------
+# Additive in exactly the way B2 and B3 were. This layer consumes the network's
+# concentrations; nothing in B1-B3 imports it, and it imports neither
+# src/matrix_correction.py nor src/headspace.py (the OLD lane).
+from .parameters_matrix import (  # noqa: F401,E402
+    ADDUCT_POSITIVE_CLASSES,
+    ALPHA_BETA_UNSATURATION_OBSERVATIONS,
+    CHAIN_LENGTH_SLOPE_PER_CH2,
+    COMPOUND_STRUCTURE,
+    COVALENT_CEILING,
+    HOLDOUT_SEALED_BINDING,
+    MATRIX_LOADING,
+    NO_ADDUCT_GATE_CLASSES,
+    NO_ADDUCT_GATE_COMPOUNDS,
+    PH_ADDUCT_GATE_BELOW,
+    REVERSIBLE_BINDING,
+    REVERSIBLE_LOG_SHIFT_CEILING,
+    SOURCE_CONTRADICTIONS,
+    CompoundStructure,
+    MatrixLoading,
+    MatrixParameter,
+    assert_no_dft_matrix,
+    assert_no_mocked_protein_source,
+    binding_constant_for,
+    matrix_registry_metadata,
+)
+from .matrix_oav import (  # noqa: F401,E402
+    MATRIX_THRESHOLDS,
+    SEALED_OR_REFUSED_MATRICES,
+    UNIMPLEMENTED_CANDIDATE_TERMS,
+    WATER_THRESHOLDS,
+    AbsoluteConcentration,
+    NoMeasuredThreshold,
+    OAVResult,
+    ResidualDecomposition,
+    ShiftPrediction,
+    ThresholdRecord,
+    absolute_concentration,
+    compare_formulations,
+    covalent_channel_state,
+    decompose_residual,
+    fit_class_binding_constants,
+    fit_unsaturation_penalty,
+    layer_metadata,
+    oav_table,
+    odour_activity,
+    predict_matrix_shift,
+    select_threshold,
+    select_threshold_verbose,
+)
+
+
 def operative_parameters(fitted):
     """
     Assemble the full operative parameter set: measured backbone + fitted steps.
@@ -204,8 +256,18 @@ __all__ = [
     "ACRYLAMIDE_REACTIONS",
     "ACRYLAMIDE_STATE",
     "MEASURED_ACRYLAMIDE",
+    "MATRIX_THRESHOLDS",
+    "WATER_THRESHOLDS",
+    "AbsoluteConcentration",
     "apparent_lumped_constants",
     "branch_shares",
+    "compare_formulations",
+    "decompose_residual",
+    "matrix_registry_metadata",
+    "oav_table",
+    "odour_activity",
+    "predict_matrix_shift",
+    "select_threshold",
     "integrate",
     "integrate_acrylamide",
     "integrate_sulfur",

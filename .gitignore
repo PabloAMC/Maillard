@@ -338,3 +338,23 @@ scratch/
 !results/validation/kinetic_core_b2_fit_report.md
 !results/validation/kinetic_core_b2_holdout_report.json
 !results/validation/kinetic_core_b2_holdout_report.md
+# Build Wave B4 (2026-08-28): the matrix / OAV output layer's fit and hold-out
+# reports, tracked on the same reasoning as B1-B3.
+!results/validation/kinetic_core_b4_fit_report.json
+!results/validation/kinetic_core_b4_fit_report.md
+!results/validation/kinetic_core_b4_holdout_report.json
+!results/validation/kinetic_core_b4_holdout_report.md
+# B4's FROZEN PREDICTIONS, tracked for exactly the reason Wave U's are: an
+# untracked pre-registration is not a pre-registration. This file records what
+# the three-term matrix model predicted for Hong 2020's ten paired soy/water
+# ratios BEFORE the hold-out values were read, together with the failures the
+# wave expected. Nothing would stop a later wave from regenerating it after
+# seeing the answers unless it is in git history.
+!results/validation/kinetic_core_b4_frozen_predictions.json
+# The custodial copy of the Hong 2020 GATING HOLD-OUT values, extracted under a
+# no-outcome reporting rule by an agent firewalled from the build. Tracked so
+# that the values the scorer used are auditable and cannot be edited silently;
+# it is a HOLD-OUT record, and no fitting or model-development wave may open it.
+!results/validation/holdout_frozen/
+!results/validation/holdout_frozen/hong2020_paired_thresholds.json
+!results/validation/holdout_frozen/hong2020_public_manifest.json
