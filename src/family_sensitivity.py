@@ -60,6 +60,10 @@ ENGINE_FAMILY_LABELS: tuple[str, ...] = (
     "Furanone_Cyclisation",
     "Furanone_Formation",
     "Furanone_Reductive_Opening",  # Wave P 2026-08-27: norfuraneol -> 2,3-pentanedione
+    # Wave X 2026-08-28: norfuraneol + H2S + 2[H] -> MFT, re-added as a SLOW
+    # PARALLEL channel constrained by Hofmann & Schieberle 1998 Table 4. NOT the
+    # retired `Thiol_Addition_Norfuraneol`; new name, new barrier key.
+    "Furanone_Reductive_Sulfhydrylation",
     "Generalized_Deamination",
     # Wave T4 2026-08-27: the ketose rearrangement. Emitted since before Wave I
     # (`reaction_templates.py:60`) and missing here the whole time, because the

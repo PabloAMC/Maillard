@@ -21,7 +21,6 @@ Everything else on this page is a weaker claim than that number, in two separate
 > | --- | ---: | ---: | --- |
 > | `reported_point_value` | 4 | 1/4 (25%) | A concentration the source reports. A genuine external test. |
 > | `band_geometric_midpoint` | 2 | see combined row | The source reports a RANGE; the scored value is sqrt(min*max), a number we constructed. The honest uncertainty is the band itself -- read each row's band_min_ppb/band_max_ppb and band_span_fold -- so landing inside it is weak evidence. |
-> | `derived_from_oav_and_repo_threshold` | 2 | see combined row | The source's odour-activity value multiplied by THIS REPO'S OWN hexanal odour threshold (4.5 ppb, compilation-level and never verified against a primary table). Partly encodes one of our own constants and moves if that constant is corrected. A consistency check, not an external measurement. |
 >
 > Combined: direct measurements **1/4 (25%)**, derived or constructed **2/4 (50%)**.
 
@@ -63,7 +62,7 @@ Samples per hold-out bundle: 200; seed 0; bundles evaluated: 4.
 
 | Compound | Reference value (ppb) | Provenance | P5 | P50 | P95 | Fold error | Inside 90% CI |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| hexanal | 1.26e+03 | `derived_from_oav_and_repo_threshold` | 16.1 | 1.01e+03 | 1.67e+05 | 1.24x | yes |
+| hexanal | 1.26e+03 | `primary_source_table_value_verified` | 16.1 | 1.01e+03 | 1.67e+05 | 1.24x | yes |
 
 ### external_validation_bi_2020_roasted_pea_hexanal
 
@@ -72,7 +71,7 @@ Samples per hold-out bundle: 200; seed 0; bundles evaluated: 4.
 
 | Compound | Reference value (ppb) | Provenance | P5 | P50 | P95 | Fold error | Inside 90% CI |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| hexanal | 324 | `derived_from_oav_and_repo_threshold` | 1.27e+04 | 8.02e+05 | 1.33e+08 | 2474.38x | no |
+| hexanal | 324 | `primary_source_table_value_verified` | 1.27e+04 | 8.02e+05 | 1.33e+08 | 2474.38x | no |
 
 ### external_validation_li_2026_spi_wg_hme_control
 

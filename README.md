@@ -388,6 +388,24 @@ demote the benchmark is an owner decision, recorded in that file's
 **Wave S2c (2026-08-27): the tightest contract in the panel was anchored to the repository's
 own guess, and it is retired. THE SULFUR BRANCH NOW HAS ZERO ABSOLUTE LITERATURE ANCHORS.**
 *(**CORRECTED 2026-08-28 (Wave W): THIS IS NO LONGER TRUE.** The full text of Hofmann & Schieberle 1998 (`10.1021/jf9705983`) arrived by interlibrary loan and the sulfur branch now has **three** absolute, stable-isotope-dilution literature anchors — `hofmann1998_{ribose,glucose,fructose}_cysteine_145C_20min_pH5`, the pH-5.0 aqueous rows of the paper's own Table 1 (ribose FFT 121 / MFT 198 ppb; glucose 28 / 19; fructose 32 / 25, all µg per 100 mL × 10 with the volume printed in the table footnote). The paper also confirms Wave S2b's forensic finding from the primary source: 342 and 200 ppb appear nowhere in it. **The model fails all three anchors** — 12.27×, 29.58× and 14.46× worst-ratio, mean 0.92 dex — so the branch went from *unanchored* to *anchored and measurably wrong*, which is the direction of travel this audit wanted. The Wave S2c sentence is kept verbatim because it was true when written, and because the period during which 342/200 shipped as literature is what this section exists to record.)*
+
+**Wave X (2026-08-28): the repository's first STEP-LEVEL constraints.** Wave W found six
+further tables in the same paper that measure *individual reaction steps* rather than
+end-to-end lumps — `precursor (1 mmol) + H₂S (1 mmol) in 50 mL, pH 5.0, 145 °C / 20 min` —
+and found that **not one of them could be executed**, because `src/precursor_resolver.py`
+resolved none of their precursors. Wave X added the seven missing species,
+repaired three structural blockers, and ingested the tables. **Six step-level rows are now on
+the panel and five are scored** (the sixth is a fit target). They are predicted at a mean
+**0.518 dex**, about *half* the end-to-end panel's 0.95 dex — the first direct evidence that
+the model's error is accumulated through the cascade rather than made in any one step. Nine
+further rows are verified but **not executable**, each with the missing step named, in
+[`data/benchmarks/step_level_unreachable/`](data/benchmarks/step_level_unreachable/). And the
+wave's own headline is a rejection: the norfuraneol → MFT step that Wave N retired on isotope
+evidence was **re-added as a slow parallel channel** and then its barrier fit was **rejected by
+its own pre-registered isotope gate** — Hofmann's Table 4 wants a barrier ≤ 23.30 kcal/mol and
+Cerny & Davidek's labelling experiment admits nothing below 27.80, so **the model cannot
+reproduce both experiments at once**, and that incompatibility is the measurement.
+
 The owner approved Wave S2b's staged plan and it was executed. What that means, plainly: after
 three fabricated-source benchmarks were quarantined or deleted in Round 2, the repo said one
 literature anchor survived on the sulfur branch. It did not. `342` and `200` ppb were never
@@ -509,7 +527,7 @@ the global scale", is unchanged and is now better supported, not worse.)*
 
 | Surface                       | Question                                                                 | Status                                                       |
 | ----------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------ |
-| **Parity**              | On matched systems, how close is predicted ppb to measured?              | **17** benchmarks · MC panel covers **14** of them, **41 matched rows** · **0 strict-ready** · **0/9 predictive benchmarks without blocking gaps** |
+| **Parity**              | On matched systems, how close is predicted ppb to measured?              | **23** benchmarks · MC panel covers **20** of them, **47 matched rows** · **0 strict-ready** · **0/14 predictive benchmarks without blocking gaps** *(2026-08-28, Wave X: six step-level rows added; nine further verified rows are deliberately OFF the panel in `data/benchmarks/step_level_unreachable/` because the network cannot execute them)* |
 | **External hold-out**   | On systems excluded from calibration, does the frozen model still cover? | 4 bundles · **1/5 on genuine extrapolations** at the pre-widening prior (1/5 at the wider one too, since Wave O) · median **93.68×** error, worst **2474×** |
 | **Maillard-path hold-out** | On systems excluded from calibration, is the *reaction network* right? | **NEW (Wave U)** · 12 free-precursor literature points, predictions frozen before any calibration wave saw them · median **6.04×**, **12/21** within 10×, **1** structural zero · but the *shape* is wrong: sulfur temperature dependence runs backwards and acrylamide is ~40× under-responsive in time · **scored against Wave S3's rate calibration: 0/22 targets moved** |
 | **Coverage**            | Which chemistry lanes are wired, and how?                                | 16 lanes wired · **5 with generative reaction templates** · 7 with DFT anchors |
@@ -728,8 +746,8 @@ directional report and is trying not to repeat.
 *Generated by `scripts/generators/generate_model_card.py`. Do not hand-edit between the markers; regenerate. Every number below is read from a tracked artifact or recomputed live, and the row says which.*
 
 - **Absolute concentrations are unreliable.** Out of sample the free-precursor lane lands at a 6.04x median fold error (worst 52.6x) and the matrix lane at 67.4x-93.7x across all three observability modes. Nothing in this repository licenses a ppb number as a specification.
-- **Directional and ranking claims are the measured product**, at 24/35 on strictly independent claims -- 18/23 (78%) once pH and water activity are set aside, and 6/12 on pH and water activity themselves, which is at or below chance.
-- **The sulfur branch has 3 absolute literature anchors, and the model fails every one of them.** They are the primary-source-verified stable-isotope-dilution rows in hofmann1998_fructose_cysteine_145C_20min_pH5, hofmann1998_glucose_cysteine_145C_20min_pH5, hofmann1998_ribose_cysteine_145C_20min_pH5. The previously shipped claim of ZERO anchors was corrected on 2026-08-28 (Wave W) when the full text behind them was obtained; the retired benchmark (cys_ribose_140C_Hofmann1998) is kept in the tree as the provenance record of the values that were not measurements. Absolute agreement is poor and the DIRECTION is a separate question.
+- **Directional and ranking claims are the measured product**, at 24/36 on strictly independent claims -- 18/23 (78%) once pH and water activity are set aside, and 6/13 on pH and water activity themselves, which is at or below chance.
+- **The sulfur branch has 8 absolute literature anchors, and the model fails every one of them.** They are the primary-source-verified stable-isotope-dilution rows in hofmann1998_c2c3_recombination_145C_20min_pH3, hofmann1998_c2c3_recombination_145C_20min_pH5, hofmann1998_c2c3_recombination_145C_20min_pH7, hofmann1998_fructose_cysteine_145C_20min_pH5, hofmann1998_furan2aldehyde_h2s_145C_20min_pH5, hofmann1998_glucose_cysteine_145C_20min_pH5, hofmann1998_norfuraneol_cysteine_145C_20min_pH5, hofmann1998_ribose_cysteine_145C_20min_pH5. A further 1 primary-source-verified sulfur row(s) are on the panel and are NOT counted here, because a constant was selected by looking at them (hofmann1998_norfuraneol_h2s_145C_20min_pH5): agreement on a fitted row is not evidence about the model. The previously shipped claim of ZERO anchors was corrected on 2026-08-28 (Wave W) when the full text behind them was obtained; the retired benchmark (cys_ribose_140C_Hofmann1998) is kept in the tree as the provenance record of the values that were not measurements. Absolute agreement is poor and the DIRECTION is a separate question.
 
 | Claim type | System class | Measured | Verdict |
 |---|---|---|---|
@@ -742,11 +760,11 @@ directional report and is trying not to repeat.
 | Direction / ranking on `time` | any (time moved, everything else held) | 2/2 on the directional panel | caution |
 | Direction / ranking on `lipid_lane` | protein matrix (lipid-derived aldehydes) | 2/2 on the directional panel | caution |
 | Direction / ranking on `matrix_identity` | protein matrix (pea vs soy) | 1/1 on the directional panel | caution |
-| Direction / ranking on `ph` | any (pH moved) | 6/9 on the directional panel | caution |
+| Direction / ranking on `ph` | any (pH moved) | 6/10 on the directional panel | caution |
 | Direction / ranking on `moisture_aw` | any (water activity moved) | 0/3 on the directional panel | **do-not-use** |
 | Ordering of two compounds in one system | free precursor | 8/12 pairs correct<br/><sub>measured on the hold-out, independently of the panel</sub> | caution |
 | Response direction across a condition series | free precursor | 3/6 correct<br/><sub>the sulfur temperature dependence is inverted and acrylamide is ~40x under-responsive in time</sub> | **do-not-use** |
-| Any claim of benchmark-grade agreement | the in-panel benchmarks themselves | 0/17 strict-ready<br/><sub>recomputed live; strict-ready is the repository's own passing bar</sub> | **do-not-use** |
+| Any claim of benchmark-grade agreement | the in-panel benchmarks themselves | 0/23 strict-ready<br/><sub>recomputed live; strict-ready is the repository's own passing bar</sub> | **do-not-use** |
 | Which experiment to run next (value of information) | any system the uncertainty panel covers | every ranked row is a measured model failure<br/><sub>this claim type does not depend on the model being right -- it depends on the model being wrong in a located, quantified way, which it demonstrably is</sub> | **trust** |
 
 **Verdict thresholds** (applied, not judged): trust = >= 80% agreement on >= 3 claims; caution = >= 60% agreement, or too few claims to establish; do-not-use = < 60% agreement, or unmeasured. An unmeasured axis is reported do-not-use on purpose — absence of evidence is not evidence.
@@ -763,7 +781,7 @@ directional report and is trying not to repeat.
 
 
 **There is currently no "high" tier, and no benchmark in the panel is strict-ready
-(0/17).** Free-precursor sulfur chemistry used to sit here as the high-confidence lane; after
+(0/23).** Free-precursor sulfur chemistry used to sit here as the high-confidence lane; after
 the 2026-08-27 chemistry rebuild, the Wave N route correction, the Wave P refit and the Wave S1
 additive-propagator fix the model under-predicts MFT by **1.21×** on its one verified
 sulfur benchmark — while now **over**-predicting FFT on the same benchmark by **1.49×**, which
@@ -902,7 +920,7 @@ the engine ever emits a reaction family the table does not classify.
 📖 = curated layer only &emsp; 📚 = literature priors only
 
 ⚠️ = has quantitative benchmark rows, and currently MISSES them by the stated factor
-(0/17 benchmarks are strict-ready — see the calibration section above) &emsp;
+(0/23 benchmarks are strict-ready — see the calibration section above) &emsp;
 📐 = literature-calibrated priors, no dedicated benchmark &emsp;
 🧮 = computational closure in progress (xTB → DFT queue)
 

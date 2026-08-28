@@ -161,6 +161,11 @@ _FAMILY_TO_SLR: Dict[str, str] = {
     "Mercaptoketone_Aldol_Addition": "amino_acid_sugar_core",
     "Mercaptoketone_Cyclodehydration": "amino_acid_sugar_core",
     "Furanone_Reductive_Opening": "amino_acid_sugar_core",
+    # Wave X 2026-08-28: norfuraneol + H2S + 2[H] -> MFT, re-added as a SLOW PARALLEL
+    # channel constrained by Hofmann & Schieberle 1998 Table 4 and held to a minority
+    # in-situ share by the isotope regression test. Same SLR family as its siblings on the
+    # furanone lane; NOT the retired `Thiol_Addition_Norfuraneol`.
+    "Furanone_Reductive_Sulfhydrylation": "amino_acid_sugar_core",
     "Furanone_Amino_Acid_Reduction": "amino_acid_sugar_core",
     "Fructofuranosyl_Dehydration": "amino_acid_sugar_core",
     # --- 02 lipid oxidation ---------------------------------------------------

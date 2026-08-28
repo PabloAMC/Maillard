@@ -95,8 +95,8 @@ def _assert_quoted(text: str, token: str, where: str, what: str) -> None:
 # --------------------------------------------------------------------------------------
 
 
-def test_calibration_panel_is_17_benchmarks_and_none_is_strict_ready(panel):
-    """PANEL 17 · STRICT-READY 0/17.
+def test_calibration_panel_is_23_benchmarks_and_none_is_strict_ready(panel):
+    """PANEL 23 · STRICT-READY 0/23.
 
     Pinned 2026-08-27 from a live evaluation of the tracked benchmark files, cross-checked
     against results/validation/validation_overview.json (benchmark_count 14,
@@ -118,23 +118,38 @@ def test_calibration_panel_is_17_benchmarks_and_none_is_strict_ready(panel):
     panel look worse, not better, because the previous anchor was a number the repository had
     written for itself. A panel that gets worse when it is given real data is a panel that was
     not previously being tested.
+
+    RE-PINNED 2026-08-28 (Wave X): 17 -> 23, strict-ready 0/17 -> 0/23. CAUSE: six
+    STEP-LEVEL rows from the same paper's Tables 3, 4, 8 and 10 -- the tables that constrain
+    INDIVIDUAL REACTION STEPS rather than end-to-end lumps, and which no earlier wave could
+    execute because the precursor resolver knew none of their precursors. Five are scored;
+    the sixth (``hofmann1998_norfuraneol_h2s_145C_20min_pH5``) is a declared fit target.
+    STRICT-READY DID NOT MOVE, AGAIN. The five scored rows average 0.518 dex -- about HALF
+    the end-to-end panel's 0.952 dex, which is the first evidence this repository has that
+    its error accumulates through the cascade rather than being made in one step -- and not
+    one of them comes within the +/-10% replicate contract the source's own footnote sets.
+    NINE FURTHER VERIFIED ROWS ARE DELIBERATELY NOT ON THIS PANEL. They live in
+    data/benchmarks/step_level_unreachable/, because the network cannot execute them and
+    `_mean_abs_log10_error` SKIPS non-positive predictions -- scoring a structural zero would
+    cost nothing and the total miss would be invisible. If this count jumps by nine, check
+    that someone has not promoted them without implementing the steps they name.
     """
-    assert len(panel) == 17, (
-        f"Calibration panel is {len(panel)} benchmarks, not the published 17. "
+    assert len(panel) == 23, (
+        f"Calibration panel is {len(panel)} benchmarks, not the published 23. "
         f"Adding or removing a benchmark changes every downstream headline; re-pin this "
         f"guard and the README/AUDIT tables in the same change."
     )
 
     strict_ready = [s.benchmark_id for s in panel if s.strict_ready]
     assert strict_ready == [], (
-        f"The published claim is 0/17 strict-ready. These are now strict-ready: "
+        f"The published claim is 0/23 strict-ready. These are now strict-ready: "
         f"{strict_ready}. If that is real, say so in README.md -- the 'no high tier' "
         f"statement in 'When to trust the predictions' depends on this being zero."
     )
 
     readme = _doc_text(README)
-    _assert_quoted(readme, "**17**", "README.md", "the panel size")
-    _assert_quoted(readme, "0/17", "README.md", "the strict-ready count")
+    _assert_quoted(readme, "**23**", "README.md", "the panel size")
+    _assert_quoted(readme, "0/23", "README.md", "the strict-ready count")
 
 
 # --------------------------------------------------------------------------------------
@@ -142,7 +157,7 @@ def test_calibration_panel_is_17_benchmarks_and_none_is_strict_ready(panel):
 # --------------------------------------------------------------------------------------
 
 
-def test_zero_of_nine_predictive_benchmarks_are_free_of_blocking_gaps(panel):
+def test_zero_of_fourteen_predictive_benchmarks_are_free_of_blocking_gaps(panel):
     """PREDICTIVE 0/9 · fit-recovery 0/4 · internal-synthetic 4/4.
 
     This is the number the whole audit turns on. The panel scores 5/14 "pass" overall, and
@@ -200,9 +215,20 @@ def test_zero_of_nine_predictive_benchmarks_are_free_of_blocking_gaps(panel):
         f"Unexpected evidence_role buckets: {sorted(by_role)}"
     )
 
+    # RE-PINNED 2026-08-28 (Wave X): 9/4/4 -> 14/5/4. CAUSE: six step-level rows from
+    # Hofmann & Schieberle 1998 Tables 3, 4, 8 and 10. FIVE are PREDICTIVE (9 -> 14); the
+    # sixth, `hofmann1998_norfuraneol_h2s_145C_20min_pH5`, is a declared FIT TARGET and lands
+    # in `fit_recovery` (4 -> 5) automatically, via its `fit_target_declaration` block and
+    # results/validation/furanone_reductive_sulfhydrylation_refit_hofmann.json -- it was not
+    # hand-classified here. NOTE WHICH WAY THAT CUTS: moving a row into `fit_recovery`
+    # normally FLATTERS the headline by shrinking the predictive denominator, which is the
+    # laundering route this guard exists to block. It does not flatter anything here: the
+    # predictive denominator grew by five and the numerator stayed at zero, and the fitted
+    # row is a MISS (2.3x under) that the exclusion removes from the count. The failure is
+    # reported in tasks/audit_remediation.md '## Wave X' (b) instead.
     totals = {role: len(rows) for role, rows in by_role.items()}
-    assert totals == {"predictive": 9, "fit_recovery": 4, "internal_synthetic": 4}, (
-        f"Evidence-role split moved to {totals}, published as 9/4/4. Reclassifying a "
+    assert totals == {"predictive": 14, "fit_recovery": 5, "internal_synthetic": 4}, (
+        f"Evidence-role split moved to {totals}, published as 14/5/4. Reclassifying a "
         f"benchmark changes the denominator of the headline claim -- justify it in AUDIT.md."
     )
 
@@ -211,7 +237,7 @@ def test_zero_of_nine_predictive_benchmarks_are_free_of_blocking_gaps(panel):
 
     predictive_passes = passing("predictive")
     assert predictive_passes == [], (
-        f"The published headline is 0/9 PREDICTIVE benchmarks without blocking gaps. These "
+        f"The published headline is 0/14 PREDICTIVE benchmarks without blocking gaps. These "
         f"now pass: {predictive_passes}. Before celebrating, confirm the benchmark is still "
         f"genuinely predictive (its constants were not fitted to it) -- then re-pin here and "
         f"correct README.md and AUDIT.md together."
@@ -234,7 +260,7 @@ def test_zero_of_nine_predictive_benchmarks_are_free_of_blocking_gaps(panel):
     # there is no verified anchor to refit against. See the dated note on the record in
     # src/matrix_calibration_registry.py.
     assert len(passing("fit_recovery")) == 0, (
-        f"fit-recovery passes moved to {len(passing('fit_recovery'))}/4 (published 0/4 "
+        f"fit-recovery passes moved to {len(passing('fit_recovery'))}/5 (published 0/5 "
         f"since the 2026-08-27 Wave P oleate substrate correction). A row returning here "
         f"means either a genuine improvement or a back-solved constant being refitted to "
         f"its own benchmark -- check which before re-pinning."
@@ -309,9 +335,9 @@ def test_zero_of_nine_predictive_benchmarks_are_free_of_blocking_gaps(panel):
 # --------------------------------------------------------------------------------------
 
 
-def test_honest_external_literature_coverage_is_4_of_9_on_intervals_too_wide_to_mean_much():
-    """EXTERNAL LITERATURE 4/9 evaluable · 4 not evaluable · 2 fitted rows excluded BOTH sides.
-    MEDIAN 90% CI WIDTH 2.627 dex -- A FACTOR OF ~424 FROM END TO END. READ THE TWO TOGETHER.
+def test_honest_external_literature_coverage_is_4_of_13_and_the_intervals_narrowed():
+    """EXTERNAL LITERATURE 4/13 evaluable · 5 not evaluable · 3 fitted rows excluded BOTH sides.
+    MEDIAN 90% CI WIDTH 1.440 dex -- A FACTOR OF ~28 FROM END TO END. READ THE TWO TOGETHER.
 
     Source artifact: results/validation/prediction_uncertainty.json (TRACKED / force-added),
     key ``summary.honest_literature_coverage``. Read 2026-08-27.
@@ -330,11 +356,13 @@ def test_honest_external_literature_coverage_is_4_of_9_on_intervals_too_wide_to_
     summary = payload["summary"]
     coverage = summary["honest_literature_coverage"]
 
-    assert summary["benchmark_count"] == 14, (
-        f"MC panel is {summary['benchmark_count']} benchmarks, published as 14"
+    # RE-PINNED 2026-08-28 (Wave X): 14 -> 20 benchmarks, 41 -> 47 matched rows, from the six
+    # step-level Hofmann rows.
+    assert summary["benchmark_count"] == 20, (
+        f"MC panel is {summary['benchmark_count']} benchmarks, published as 20"
     )
-    assert summary["matched_compound_count"] == 41, (
-        f"MC panel matched rows moved to {summary['matched_compound_count']}, published as 41"
+    assert summary["matched_compound_count"] == 47, (
+        f"MC panel matched rows moved to {summary['matched_compound_count']}, published as 47"
     )
 
     # RE-PINNED 2026-08-27 (Wave S1b -- THE pH / WATER-ACTIVITY ROUTING REPAIR).
@@ -365,17 +393,34 @@ def test_honest_external_literature_coverage_is_4_of_9_on_intervals_too_wide_to_
     # NOTHING WAS WIDENED TO ACHIEVE THIS. No prior, threshold or interval was touched in
     # Wave W; the population changed, not the model. The headline is re-pinned with the width
     # assertion below deliberately kept two-sided so the vacuity stays visible.
-    assert (coverage["hits"], coverage["total"]) == (4, 9), (
+    # RE-PINNED 2026-08-28 (Wave X): 4/9 -> 4/13, i.e. 44% -> 31%, AND THE INTERVAL
+    # NARROWED AT THE SAME TIME: median 2.6269 -> 1.4400 dex, from a factor of ~424 end to
+    # end to a factor of ~28. THIS IS THE EXACT OPPOSITE OF THE WAVE W MOVE and it must be
+    # read that way. Wave W's coverage rose because the intervals got vacuously wide; here
+    # they got 15x tighter END TO END and the rate FELL, because the four new
+    # external-literature step-level rows carry envelopes of 0.15-0.4 dex and every one of
+    # them MISSES. A model that is wrong with a narrow interval is CONFIDENTLY wrong, which
+    # is worse than being wrong with a wide one, and the numbers now say so in both columns.
+    # NOTHING WAS NARROWED: no prior, threshold or interval was touched in Wave X. The
+    # population changed -- the step-level rows have short paths, so fewer barrier priors
+    # compound along them.
+    assert (coverage["hits"], coverage["total"]) == (4, 13), (
         f"Honest external-literature coverage moved to "
-        f"{coverage['hits']}/{coverage['total']}, published as 4/9 (0/3 before Wave W). "
+        f"{coverage['hits']}/{coverage['total']}, published as 4/13 (4/9 before Wave X). "
         f"If this rises, verify it is the model getting closer and not the interval getting "
         f"wider -- check `median_ci_width_log10` in the same breath."
     )
-    assert coverage["not_evaluable"] == 4, (
-        f"not_evaluable moved to {coverage['not_evaluable']}, published as 4. Rows that "
+    assert coverage["not_evaluable"] == 5, (
+        f"not_evaluable moved to {coverage['not_evaluable']}, published as 5. Rows that "
         f"cannot be evaluated must stay visible; silently dropping them inflates the rate."
     )
-    assert coverage["excluded_fitted_rows"] == 2
+    # RE-PINNED 2026-08-28 (Wave X): 2 -> 3. The third is the Wave X fit target,
+    # `hofmann1998_norfuraneol_h2s_145C_20min_pH5`, detected through its
+    # `fit_target_declaration` and the tracked fit record. It is NOT one of the two rows that
+    # would have been hits -- it is a MISS that the exclusion removes from the count, which
+    # is the direction of exclusion nobody benefits from and the reason the second assertion
+    # is pinned separately.
+    assert coverage["excluded_fitted_rows"] == 3
     assert coverage["excluded_fitted_rows_that_would_have_been_hits"] == 2, (
         "Both fitted rows would have counted as literature hits under the old accounting. "
         "If this drops to 0, check that fitted rows are still being detected at all."
@@ -401,17 +446,29 @@ def test_honest_external_literature_coverage_is_4_of_9_on_intervals_too_wide_to_
     # RE-PINNED 2026-08-28 (Wave W): 0.7460 -> 2.6269 dex. See the block above the hits
     # assertion. This is the case the old comment warned about in as many words -- coverage
     # improving while the interval widens -- and it is being reported as that, not as a win.
-    assert coverage["median_ci_width_log10"] == pytest.approx(2.6269, abs=5e-4), (
+    # RE-PINNED 2026-08-28 (Wave X): 2.6269 -> 1.4400 dex. See the block above the hits
+    # assertion: the interval narrowed and the coverage rate fell together.
+    assert coverage["median_ci_width_log10"] == pytest.approx(1.4400, abs=5e-4), (
         f"Median CI width moved to {coverage['median_ci_width_log10']:.4f} dex from the "
-        f"published 2.627. A coverage rate that improves while this widens is the interval "
+        f"published 1.440. A coverage rate that improves while this widens is the interval "
         f"getting looser, not the model getting better."
     )
-    # The vacuity is asserted, not just described: 4/9 on a ~424x interval must never be
-    # quoted as though it were 4/9 on a tight one.
-    assert coverage["median_ci_width_log10"] > 2.0, (
-        "The median external-literature interval has narrowed below 2 dex. If coverage is "
-        "still 4/9 or better at that width, that IS a real improvement -- re-pin this guard "
-        "and say so loudly in README.md, because the current prose says the opposite."
+    # RE-DIRECTED 2026-08-28 (Wave X). The old assertion was `> 2.0`, guarding against the
+    # Wave W vacuity ("4/9 on a ~424x interval must never be quoted as though it were 4/9 on
+    # a tight one"). That guard has been SATISFIED rather than removed -- the interval did
+    # narrow below 2 dex -- and its own failure message named the condition under which the
+    # narrowing would be good news: "if coverage is still 4/9 OR BETTER at that width". It is
+    # not; coverage FELL to 4/13. So the assertion is inverted to guard the situation that is
+    # now live: a tight interval that misses. If coverage climbs back above 50% at a width
+    # under 2 dex, that IS a real improvement and this guard must be re-pinned and the
+    # README prose rewritten, because the prose currently says the model is confidently wrong.
+    assert coverage["median_ci_width_log10"] < 2.0
+    assert coverage["rate"] < 0.5, (
+        f"External-literature CI coverage rose to {coverage['rate']:.1%} at a median interval "
+        f"width of {coverage['median_ci_width_log10']:.2f} dex. Coverage above half on a "
+        f"NARROW interval would be the first real uncertainty-calibration result this "
+        f"repository has -- verify it is not an accounting change, then re-pin here and "
+        f"rewrite the 'confidently wrong' prose in README.md and AUDIT.md."
     )
 
 
@@ -586,7 +643,7 @@ def test_holdout_scores_1_of_5_genuine_extrapolations_at_the_pre_widening_prior(
 # --------------------------------------------------------------------------------------
 
 
-def test_pentose_hexose_mft_ordering_is_8_26x_not_the_retired_18_27x_7_78x_6_15x_3_39x_8_98x_or_15_8x():
+def test_pentose_hexose_mft_ordering_is_14_17x_not_the_retired_8_26x_18_27x_7_78x_6_15x_3_39x_8_98x_or_15_8x():
     """PENTOSE >> HEXOSE 8.26x (ribose 169.1 ppb vs glucose 20.5 ppb at matched conditions).
 
     RE-PINNED 2026-08-27 (Wave N -- MFT ROUTE CORRECTION). Was 8.98x (ribose 981.3), and
@@ -683,8 +740,33 @@ def test_pentose_hexose_mft_ordering_is_8_26x_not_the_retired_18_27x_7_78x_6_15x
     # a number this repository invented. The hexose limb still runs the demoted one-step lump.
     # STILL BELOW THE 8.98x IT SAT AT AFTER WAVE N, and the 3.0x floor in
     # test_pentose_hexose_sulfur_ordering.py is now 2.75x away rather than 6x away.
-    assert ribose_ppb == pytest.approx(169.1, rel=0.01), (
-        f"Ribose MFT moved to {ribose_ppb:.1f} ppb from the published 169.1 (374.0 under "
+    # RE-PINNED 2026-08-28 (Wave X -- THE NORFURANEOL CHANNEL RETURNS). 8.2607x -> 14.1655x,
+    # ribose 169.08 -> 289.94 ppb, GLUCOSE AGAIN UNCHANGED at 20.47 ppb. NO BARRIER MOVED:
+    # the Wave X fit against Hofmann Table 4 was REJECTED by its isotope gate.
+    # DO NOT REPORT THIS AS IMPROVED SUGAR DISCRIMINATION. It is the numerator gaining a
+    # channel the denominator cannot have: norfuraneol is a PENTOSE 1-deoxyosone product, so
+    # the new `Furanone_Reductive_Sulfhydrylation` step fires on the ribose limb only, and
+    # glucose does not move at all -- which is exactly what identifies the cause, the same
+    # signature Wave S2c's barrier revert had.
+    # Re-measured decomposition, in-process, on the shipped tree:
+    #     shipped                              ribose 289.94 / glucose 20.47 = 14.1655x
+    #     `thiol_addition_pentodiulose` = 29.65 ribose 216.83 / glucose 20.47 = 10.5938x
+    #     norfuraneol channel disabled          ribose 169.08 / glucose 20.47 =  8.2607x
+    # So the ordering now rests on THREE things and only the third is mechanism: a
+    # 1.05 kcal/mol barrier gap (3.57x of it), a channel the hexose limb structurally cannot
+    # run (5.90x of it), and ~8.26x that survives both. History of the structural share:
+    # 1.13x of 3.39x (Wave N), 2.31x of 6.15x (Wave P), 3.14x of 7.78x (Wave S1), 4.27x of
+    # 18.27x (Wave S1b), 4.27x of 8.26x (Wave S2c).
+    # AND THE MEASUREMENT SAYS 10.42x. Hofmann & Schieberle 1998 Table 1 gives ribose/glucose
+    # MFT = 19.8/1.9 under identical conditions (Wave W). The model was 5.19x against that on
+    # the panel row before this wave and is closer now -- BY ADDING A ROUTE THAT MAKES THE
+    # ABSOLUTE ribose ROW WORSE (2.37x over -> 3.61x over against the measured 198 ppb).
+    # Getting a ratio right by inflating its numerator is not the same as getting the
+    # chemistry right, and this comment exists so that nobody quotes the first without the
+    # second.
+    assert ribose_ppb == pytest.approx(289.9, rel=0.01), (
+        f"Ribose MFT moved to {ribose_ppb:.1f} ppb from the published 289.9 (169.1 under "
+        f"Wave S2c, 374.0 under "
         f"Wave S1b, 824.7 under Wave S1, "
         f"686.8 after the Wave P refit, 370.3 after the Wave N route correction, "
         f"981.3 before it)"
@@ -698,8 +780,8 @@ def test_pentose_hexose_mft_ordering_is_8_26x_not_the_retired_18_27x_7_78x_6_15x
         f"move here has a different cause than a move in the ribose value. Wave S2c's "
         f"barrier revert left it untouched, which is what identified the cause."
     )
-    assert ratio == pytest.approx(8.26, rel=0.01), (
-        f"Pentose/hexose MFT ratio is {ratio:.2f}x, published as 8.26x. If it moved, do "
+    assert ratio == pytest.approx(14.17, rel=0.01), (
+        f"Pentose/hexose MFT ratio is {ratio:.2f}x, published as 14.17x. If it moved, do "
         f"not report it as changed sugar discrimination without first re-measuring the "
         f"structural share -- only 4.27x of this ratio survives setting "
         f"`thiol_addition_pentodiulose` equal to `thiol_addition_hexose`; the rest is the "

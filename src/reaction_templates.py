@@ -644,9 +644,20 @@ def _c2_c3_mft_recombination(pool_species: List[Species]) -> List[ElementaryStep
     completeness gap, it is just no longer the thing that gates this lane.
     """
     steps: List[ElementaryStep] = []
+    # AUDIT 2026-08-28 (Wave X) -- THE H2S GUARD WAS TOO HIGH IN THE FUNCTION.
+    # It used to read `if h2s is None: return steps`, aborting the WHOLE lane. Only
+    # step 1 (pyruvaldehyde + H2S + 2[H] -> mercaptopropanone) needs H2S; steps 2 and
+    # 3 are an aldol addition and a cyclodehydration between two carbon species and
+    # contain no sulfur reagent at all -- the sulfur is already in the
+    # mercaptopropanone. So a pool that HAS mercaptopropanone but no free H2S could
+    # not reach MFT, which is not a chemical statement about anything.
+    #
+    # That pool is not hypothetical: it is Hofmann & Schieberle 1998's Table 8 and the
+    # top row of their Table 10 -- hydroxyacetaldehyde (1 mmol) + mercapto-2-propanone
+    # (1 mmol) in 50 mL, no H2S, no cysteine -- which is the single most effective MFT
+    # system in the paper (268.1 ug, 0.24 mol %) and the system Wave P added this lane
+    # FOR. The lane was built from that measurement and then could not execute it.
     h2s = next((s for s in pool_species if s.smiles == "S"), None)
-    if h2s is None:
-        return steps
     h2 = next((s for s in pool_species if s.smiles == "[HH]"), None)
     water = Species("water", "O")
 
@@ -666,7 +677,8 @@ def _c2_c3_mft_recombination(pool_species: List[Species]) -> List[ElementaryStep
     )
 
     # Step 1 — H2S addition to the C3 alpha-dicarbonyl, with reduction.
-    if pyruvaldehyde is not None and h2 is not None:
+    # This is the only step in the lane that needs free H2S (Wave X, see above).
+    if pyruvaldehyde is not None and h2s is not None and h2 is not None:
         steps.append(ElementaryStep(
             reactants=[pyruvaldehyde, h2s, h2],
             products=[mercaptopropanone, water],
@@ -697,6 +709,97 @@ def _c2_c3_mft_recombination(pool_species: List[Species]) -> List[ElementaryStep
             water,
         ],
         reaction_family="Mercaptoketone_Cyclodehydration",
+    ))
+    return steps
+
+
+def _norfuraneol_mft_parallel_route(pool_species: List[Species]) -> List[ElementaryStep]:
+    """The norfuraneol -> MFT route, re-added as a SLOW PARALLEL channel.
+
+    ADDED 2026-08-28 (Wave X).  READ THIS BEFORE CONCLUDING THAT IT UNDOES WAVE N.
+    It does not.  Wave N and this wave describe two different experiments, and the
+    additive flux propagator (Wave S1) can hold both.
+
+    THE STEP, and its balance (RDKit-verified exact, 2026-08-28):
+
+        norfuraneol + H2S + 2[H] -> 2-methyl-3-furanthiol + 2 H2O
+        C5H6O3 + H2S + H2 -> C5H6OS + 2 H2O          both sides C5H10O3S
+
+    THE MECHANISM IS THE PAPER'S OWN.  Hofmann & Schieberle 1998
+    (10.1021/jf9705983), Figure 1 and the text on p. 238, read verbatim from
+    data/articles/hofmann1998.pdf:
+
+        "Incorporation of a thiol group at carbon 3 yields 4-mercapto-5-methyl-
+        3(2H)-furanone in a first reaction step, which in turn might be reduced by
+        a reductone or by a further molecule of hydrogen sulfide.  Elimination of
+        water from the intermediate 3-hydroxy-4-mercapto-5-methyl-1,2-dihydrofuran
+        would give rise to MFT."
+
+    That is substitution -> reduction -> dehydration.  It is lumped into ONE step
+    here for the same reason the rest of this module lumps: the two named
+    intermediates (4-mercapto-5-methyl-3(2H)-furanone, C5H6O2S; and the
+    1,2-dihydrofuran, C5H8O2S) are carried by NO barrier, no benchmark and no
+    measurement in this repository, so emitting them would add two unconstrained
+    constants to buy nothing.  The lumped step's stoichiometry is the sum of the
+    three and is exact.  Van den Ouweland & Peer 1975 (10.1021/jf60199a045) and
+    Whitfield et al. 1993 report the same synthesis independently.
+
+    WHY THIS IS NOT A REVERSAL OF WAVE N.  Wave N removed this step on Cerny &
+    Davidek 2003 (10.1021/jf026123f): authentic UNLABELLED norfuraneol spiked into a
+    [13C5]ribose/cysteine system left the MFT mainly 13C5-labelled, so norfuraneol is
+    "unimportant as an intermediate".  A spike experiment measures a route's SHARE OF
+    FLUX IN COMPETITION.  Hofmann Table 4 measures something else: norfuraneol FED as
+    the precursor, 1 mmol with 1 mmol H2S in 50 mL at pH 5.0, giving MFT 211.2 ug =
+    0.19 mol %, fourteen times the yield from ribose under identical conditions.  A
+    route can be real and still carry little flux when its substrate is made in trace
+    amounts upstream -- and that is precisely what Hofmann's own Table 5 shows from
+    the other side: ribose makes 54 530 ug NF and 19.8 ug MFT, a factor ~2750, and
+    the authors write "the MFT formation might not run exclusively via NF as the key
+    intermediate."  Under the ADDITIVE propagator (Wave S1) a slow parallel channel
+    adds a small term; it does not overwrite the dominant one.  Under a
+    multiplicative or max-channel propagator this re-addition WOULD have re-created
+    the defect Wave N removed, and would have been the wrong call.
+
+    THE ISOTOPE RESULT IS NOW A TEST, NOT A CASUALTY.
+    tests/scientific/test_wave_x_step_level_2026_08.py::
+    test_norfuraneol_route_stays_a_minor_share_of_ribose_mft_flux asserts that in the
+    ribose/cysteine system this channel stays a MINOR share of MFT flux.  If a future
+    barrier change lets it take the lane back, that test fails.
+
+    THE BARRIER IS NEW AND IS NOT THE RETIRED 26.85.  The family is
+    `Furanone_Reductive_Sulfhydrylation`, deliberately NOT the retired
+    `Thiol_Addition_Norfuraneol`, so the barrier key is new too and the retired
+    constant is not reused by accident.  26.85 was fitted THROUGH a route the
+    literature contradicts AND against 342/200 ppb, which Wave S2b proved to be this
+    repository's own arithmetic rather than a measurement -- it carries no
+    information and transferring it would launder that history into a new step.  The
+    new constant is fitted against Hofmann Table 4 by
+    scripts/generators/fit_furanone_reductive_sulfhydrylation_hofmann.py, and that
+    row is declared a FIT TARGET so `fit_target_gate` removes it from scored
+    evidence.
+    """
+    steps: List[ElementaryStep] = []
+    h2s = next((s for s in pool_species if s.smiles == "S"), None)
+    h2 = next((s for s in pool_species if s.smiles == "[HH]"), None)
+    if h2s is None or h2 is None:
+        return steps
+
+    norfuraneol_can = _canonical(_NORFURANEOL_CANONICAL)
+    norfuraneol = next(
+        (s for s in pool_species if _canonical(s.smiles) == norfuraneol_can), None
+    )
+    if norfuraneol is None:
+        return steps
+
+    water = Species("water", "O")
+    steps.append(ElementaryStep(
+        reactants=[norfuraneol, h2s, h2],
+        products=[
+            Species(label="2-methyl-3-furanthiol", smiles=_MFT_CANONICAL),
+            water,
+            water,
+        ],
+        reaction_family="Furanone_Reductive_Sulfhydrylation",
     ))
     return steps
 
@@ -1092,6 +1195,14 @@ def _thiol_reductant_pool(pool_species: List[Species]) -> List[ElementaryStep]:
         2 cysteine -> cystine + 2[H]
         2 C3H7NO2S -> C6H12N2O4S2 + H2        (exact, no invented atoms)
 
+        2 H2S     -> hydrogen disulfide + 2[H]      [WAVE X, 2026-08-28]
+        2 H2S     -> H2S2 + H2                (exact, no invented atoms)
+
+    Both are the same couple -- thiol oxidised to disulfide -- with a different
+    thiol, which is why they share the family name `Thiol_Oxidation`. The H2S
+    branch is sourced to Hofmann & Schieberle 1998's own text; see the long note
+    at its emission site below.
+
     AUDIT 2026-08-27 (Wave I fix 8) — red-team finding H4.  Several lumped
     reduction steps (`_furanone_and_mft_route` steps 2 and 3, `_mft_pathway`,
     `_thiol_addition`) are pool-gated on the `[HH]` reducing-equivalent token.
@@ -1123,6 +1234,8 @@ def _thiol_reductant_pool(pool_species: List[Species]) -> List[ElementaryStep]:
     acceptor.  H2 gas is a token, not a claim of hydrogen evolution.
     """
     steps: List[ElementaryStep] = []
+    hydro = Species(label="H2", smiles="[HH]")
+
     cysteine = next(
         (
             s
@@ -1133,16 +1246,86 @@ def _thiol_reductant_pool(pool_species: List[Species]) -> List[ElementaryStep]:
         ),
         None,
     )
-    if cysteine is None:
-        return steps
+    if cysteine is not None:
+        cystine = Species(label="cystine", smiles=_CYSTINE_CANONICAL)
+        steps.append(ElementaryStep(
+            reactants=[cysteine, cysteine],
+            products=[cystine, hydro],
+            reaction_family="Thiol_Oxidation",
+        ))
 
-    cystine = Species(label="cystine", smiles=_CYSTINE_CANONICAL)
-    hydro = Species(label="H2", smiles="[HH]")
-    steps.append(ElementaryStep(
-        reactants=[cysteine, cysteine],
-        products=[cystine, hydro],
-        reaction_family="Thiol_Oxidation",
-    ))
+    # ── WAVE X (2026-08-28): the SECOND donor of the same couple, H2S itself ──
+    #
+    #     2 H2S -> HSSH + 2[H]
+    #     2 H2S -> H2S2 + H2        (both sides H4S2, RDKit-verified exact)
+    #
+    # WHY THIS EXISTS, AND WHY IT IS NOT AN INVENTION OF CONVENIENCE. Until this
+    # wave the ONLY donor of the `[HH]` reducing-equivalent token reachable from a
+    # sulfur system was `2 cysteine -> cystine + 2[H]` above (Wave I fix 8). That
+    # made every reductive sulfur step -- `Thiol_Addition_H2`, `Thiol_Dehydration`,
+    # `Mercaptoketone_Formation`, and the Wave X norfuraneol step -- a DOWNSTREAM
+    # DEPENDENT OF CYSTEINE BEING PRESENT. Wave I removed exactly this defect once
+    # already, when the token's only donor was the pyrazine aromatisation; the
+    # cysteine donor it installed instead is fine for cysteine systems and is still
+    # a hidden precondition everywhere else.
+    #
+    # It became visible, and falsifiable, the moment the repository tried to execute
+    # Hofmann & Schieberle 1998's step-level model systems (10.1021/jf9705983,
+    # Tables 3, 4 and 7). Those systems contain NO cysteine and NO amino acid at
+    # all -- they are `precursor (1 mmol) + hydrogen sulfide (1 mmol) in 50 mL` --
+    # and they produce FFT at 0.48 mol %, MFT at 0.19 mol % and mercapto-2-propanone
+    # at 1.8 mol %. A model in which those yields are structurally zero is not
+    # expressing a chemical claim, it is expressing a bookkeeping accident.
+    #
+    # THE SOURCE IS THE PAPER BEING INGESTED, and it is explicit. Hofmann &
+    # Schieberle 1998, p. 238, describing Figure 1 (the NF + H2S -> MFT sequence),
+    # verbatim from data/articles/hofmann1998.pdf:
+    #
+    #     "Incorporation of a thiol group at carbon 3 yields 4-mercapto-5-methyl-
+    #      3(2H)-furanone in a first reaction step, WHICH IN TURN MIGHT BE REDUCED
+    #      BY A REDUCTONE OR BY A FURTHER MOLECULE OF HYDROGEN SULFIDE."
+    #
+    # "or by a further molecule of hydrogen sulfide" is precisely the couple written
+    # above: H2S is the reductant and is itself oxidised. The paper's own Table 7
+    # measures the consequence -- doubling H2S from 1 to 2 mmol raises the
+    # mercaptoketone yield 1.8 -> 4.0 mol %, and the authors conclude "it might be
+    # assumed that H2S is the limiting factor in this reaction" -- i.e. H2S is
+    # consumed in MORE THAN ONE role, which is what a reagent that is both the
+    # sulfur donor and the reductant looks like from the outside.
+    #
+    # THE PRODUCT IS A REAL MOLECULE, NOT A BALANCE TOKEN. HSSH is hydrogen
+    # disulfide (disulfane, H2S2), the exact sulfur analogue of the cystine the
+    # cysteine couple makes, and the ordinary two-electron oxidation product of
+    # H2S. This is deliberately NOT the retired `[S]` elemental-sulfur move
+    # (Wave G1 fix 7): nothing is ejected to make the arithmetic work, the couple
+    # is thiol -> disulfide on both sides of the analogy, and
+    # tests/unit/test_chemistry_soundness.py::test_no_elemental_sulfur_balance_token
+    # still holds.
+    #
+    # FAMILY NAME: `Thiol_Oxidation`, the same family as the cysteine couple, on
+    # purpose. It is the same mechanistic couple with a different thiol, it is
+    # already on the documented H2-emitting oxidation whitelist in
+    # tests/unit/test_chemistry_soundness.py, and giving it its own name would
+    # have created a family with no barrier entry -- the 45 kcal/mol fallthrough
+    # bug class this repository has been cleaning up.
+    #
+    # LUMPING NOTE, unchanged from the cysteine couple: the 2[H] leave as molecular
+    # H2 because the model carries no explicit electron acceptor. H2 is a token, not
+    # a claim of hydrogen evolution.
+    #
+    # WHAT THIS CHANGES IN SYSTEMS THAT ALREADY HAD CYSTEINE: it adds a second
+    # producer of an existing token, so the token's pool grows and every lane gated
+    # on it can run faster. That is a real behaviour change on the shipped panel and
+    # it is MEASURED and reported in tasks/audit_remediation.md "## Wave X", not
+    # waved through.
+    h2s = next((s for s in pool_species if s.smiles == "S"), None)
+    if h2s is not None:
+        steps.append(ElementaryStep(
+            reactants=[h2s, h2s],
+            products=[Species(label="hydrogen disulfide", smiles="SS"), hydro],
+            reaction_family="Thiol_Oxidation",
+        ))
+
     return steps
 
 
@@ -1246,17 +1429,42 @@ def _thiol_addition(pool_species: List[Species]) -> List[ElementaryStep]:
     # Priority 1: H2 Gas (Legacy/Specific path)
     h2 = next((s for s in pool_species if s.smiles == "[HH]"), None)
 
-    # label -> (thiol label, thiol SMILES, thiohemiacetal SMILES)
+    # canonical SMILES -> (thiol label, thiol SMILES, thiohemiacetal SMILES)
+    #
+    # AUDIT 2026-08-28 (Wave X) -- SUBSTRATE MATCHING MOVED FROM LABEL TO CANONICAL
+    # SMILES. This dict used to be keyed on `sp.label` and selected with
+    # `_fft_map.get(sp.label)`, i.e. the model's only route to its flagship FFT
+    # depended on a molecule being SPELLED "furfural". Every other sulfur template in
+    # this module (`_furanone_and_mft_route`, `_c2_c3_mft_recombination`,
+    # `_norfuraneol_mercaptopentanone_route`) already matches on canonical SMILES, and
+    # Wave P's own docstring states the reason: "Matching is by canonical SMILES, not
+    # by label, which is why the longer hexose route connects at all."
+    #
+    # MEASURED, not inferred. Hofmann & Schieberle 1998 Table 3 feeds furan-2-aldehyde
+    # directly and measures FFT at 0.48 mol %, 60x the yield from ribose. Resolving
+    # that precursor (Wave X, data/species/precursors.yml) gives it the registry name
+    # "Furan-2-aldehyde", which is what the paper calls it -- and under the old label
+    # match the fed molecule was INERT: the pool held furan-2-aldehyde, the template
+    # looked for the string "furfural", and the network's best-measured FFT route
+    # produced nothing. The identical molecule made INTERNALLY by `_enolisation_steps`
+    # (which labels it "furfural") did react. Two copies of one molecule with
+    # different reactivity is not chemistry, it is a name lookup.
     _fft_map = {
-        "furfural":         ("2-furfurylthiol",      "SCc1ccco1",    "OC(S)c1ccco1"),
-        "5-methylfurfural": ("5-methylfurfurylthiol", "SCc1ccc(C)o1", "OC(S)c1ccc(C)o1"),
+        _canonical("O=Cc1ccco1"):     ("2-furfurylthiol",      "SCc1ccco1",    "OC(S)c1ccco1"),
+        # 5-methylfurfural. Recorded as measured: NOTHING in this repository emits
+        # this molecule or resolves it as a precursor (grep for "5-methylfurfural"
+        # over src/ returns only this line), so the entry is unreachable today under
+        # the old label key and under the new SMILES key alike. It is kept, not
+        # deleted, because the hexose branch that would produce it is a known
+        # completeness gap rather than a decision to exclude it.
+        _canonical("Cc1ccc(C=O)o1"):  ("5-methylfurfurylthiol", "SCc1ccc(C)o1", "OC(S)c1ccc(C)o1"),
     }
 
     water = Species("water", "O")
     seen = set()
-    
+
     for sp in pool_species:
-        entry = _fft_map.get(sp.label)
+        entry = _fft_map.get(_canonical(sp.smiles))
         if not entry:
             continue
 

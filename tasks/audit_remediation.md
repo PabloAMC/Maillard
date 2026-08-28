@@ -7417,3 +7417,469 @@ Targeted subsets only, per the owner's testing directive — no full-suite run.
   identical. The measurement separates them by 1.26–1.38×.
 - [P] **The dry-heat rows need an a<sub>w</sub> basis** before they can ever be absolute rows.
   Recorded as ordinal only; do not invent one.
+
+## Wave X — the step-level tables, made executable (2026-08-28)
+
+**2026-08-28.** Wave W read Hofmann & Schieberle 1998 (10.1021/jf9705983) in full and
+found six tables that constrain **individual steps** rather than end-to-end lumps — and
+found that **not one of them could run**. This wave makes them run, ingests them, and
+scores the model on them. Every number below was re-read from `data/articles/hofmann1998.pdf`
+by this wave (pages 237–240 rendered and read directly, not taken from Wave W's transcription
+or from the orchestrator's extraction); all ten tables matched both.
+
+### (a) THE NORFURANEOL DECISION — reasoning recorded BEFORE the code was written
+
+This is the wave's science decision and it looks, at first glance, like a reversal of
+Wave N. It is not. The two findings are about **different experiments** and they are
+compatible under the Wave S1 additive propagator.
+
+**What Wave N established (and this wave does not touch).** Cerny & Davidek 2003
+(10.1021/jf026123f) spiked authentic unlabelled norfuraneol into a [¹³C₅]ribose/cysteine
+system; the MFT came out mainly ¹³C₅-labelled, i.e. **from the ribose skeleton, not from
+the spike**. Norfuraneol is therefore *unimportant as an in-situ intermediate*. Wave N
+removed `norfuraneol + H2S + 2[H] -> MFT` and installed the isotope-evidenced
+1,4-dideoxyosone route in its place. Hofmann's own Table 5 independently supports this from
+the other direction: ribose makes **54 530 µg NF** and only **19.8 µg MFT** (a factor
+~2750) while glucose's ratio is ~7, and the authors themselves write *"the MFT formation
+might not run exclusively via NF as the key intermediate."*
+
+**What Hofmann Table 4 measures.** Norfuraneol **fed as a precursor**, 1 mmol with 1 mmol
+H₂S in 50 mL at pH 5.0, 145 °C/20 min: **MFT 211.2 µg, 0.19 mol %** — 14× the yield from
+ribose under identical conditions. Table 10 ranks it second of four MFT systems. The paper
+prints the mechanism in **Figure 1** and describes it in words on p. 238: *"Incorporation of
+a thiol group at carbon 3 yields 4-mercapto-5-methyl-3(2H)-furanone in a first reaction
+step, which in turn might be reduced by a reductone or by a further molecule of hydrogen
+sulfide. Elimination of water from the intermediate 3-hydroxy-4-mercapto-5-methyl-1,2-
+dihydrofuran would give rise to MFT."* Van den Ouweland & Peer 1975 (10.1021/jf60199a045)
+and Whitfield et al. 1993 report the same synthesis.
+
+**Why both are true at once.** A spike experiment measures a route's *share of flux in
+competition*; a synthesis experiment measures whether the route *exists*. Cerny's result
+says the NF route contributes **little** in situ from ribose — not that it contributes
+**nothing**, and not that it fails when NF is handed to the system directly at 20 mM. Under
+the Wave S1 **additive** flux propagator the model can hold both statements simultaneously:
+a parallel channel with a high barrier carries a small share when its substrate is made in
+trace amounts by a slow upstream step, and carries the system when its substrate is the
+feed. A model that cannot express "slow but real" cannot express either experiment.
+
+**THE RESOLUTION AS DECIDED (and then implemented).**
+
+1. **Re-add the step**, as the paper's own mechanism, in one lumped elementary step with the
+   original stoichiometry: `norfuraneol + H2S + 2[H] -> MFT + 2 H2O`
+   (C₅H₆O₃ + H₂S + H₂ → C₅H₆OS + 2 H₂O; both sides C₅H₁₀O₃S — RDKit-verified exact).
+   The family is **`Furanone_Reductive_Sulfhydrylation`**, a NEW name, deliberately not the
+   retired `Thiol_Addition_Norfuraneol`.
+2. **The barrier is NEW and is fitted to Table 4, not inherited.** `26.85` — the retired
+   `thiol_addition_norfuraneol` — is **not reused**, silently or otherwise. It was fitted
+   through a route the literature contradicts *and* against a value Wave S2b proved was the
+   repository's own arithmetic; it carries no information. The new key
+   `furanone_reductive_sulfhydrylation` gets its value from
+   `scripts/generators/fit_furanone_reductive_sulfhydrylation_hofmann.py`, one knob against
+   the Table 4 NF row, with the retired constant's full history cross-referenced from the
+   new entry so the two can never be confused. *(Outcome, written after the run: the fit was
+   **rejected by its own pre-registered isotope gate** and the constant kept its unfitted
+   `thiol_addition` class seed, 28.60. That rejection is the wave's main scientific result —
+   see (b).)*
+3. **Table 4's NF row and the Table 10 NF/H₂S row are the SAME measurement** (211.2 µg) and
+   are declared **FIT TARGETS** in the fit record, so `fit_target_gate` removes them from
+   scored evidence automatically. They are ingested once, not twice.
+4. **The Cerny constraint becomes a TESTED PROPERTY, not a casualty.** A regression test
+   (`tests/scientific/test_wave_x_step_level_2026_08.py::
+   test_norfuraneol_route_stays_a_minor_share_of_ribose_mft_flux`) asserts that in the
+   **ribose/cysteine** system the NF channel's share of predicted MFT stays a **minority**,
+   and the same rule runs inside the fit script as decision rule 5, so a fitted value that
+   violates it is rejected before it can ship.
+
+   > **CORRECTION, MADE BEFORE THE FIT WAS RUN AND DISCLOSED BECAUSE IT IS PERMISSIVE.**
+   > This paragraph's first draft pre-registered the ceiling at **20 %**. That number was a
+   > guess. The source states no percentage: Cerny & Davidek 2003 say only that the MFT
+   > *"was mainly ¹³C₅-labeled"*, and "mainly" supports exactly one quantitative reading —
+   > the non-norfuraneol fraction is the **majority**, so the NF share is below **50 %**.
+   > A tighter ceiling would be invented precision, which is the failure mode this audit
+   > exists to remove, so the ceiling shipped is **0.50**. It changes no decision in this
+   > wave — see (b): the rejected candidate fails both 0.20 and 0.50 — but the shipped
+   > incumbent sits at 34 %, which passes 0.50 and would have failed 0.20, so the
+   > correction is recorded rather than quietly absorbed. The ceiling is conservative in
+   > the right direction for a second reason the source supplies: Cerny **added** authentic
+   > norfuraneol on top of what the system makes, so the unspiked in-situ share is strictly
+   > lower than whatever it was in that experiment.
+
+**What would have made this the WRONG call, stated so it can be argued with.** If the model
+had a *multiplicative* or *max-channel* propagator, adding a fast parallel route would
+overwrite rather than add, and re-adding NF would have re-created exactly the defect Wave N
+removed. It does not (Wave S1). And if the fitted barrier came out *low* — i.e. if Table 4
+demanded a fast step — the isotope share test would fail and the resolution would be
+falsified rather than shipped. That is the point of running the test after the fit rather
+than before.
+
+### (b) THE RESULT: the fit was REJECTED, and the two experiments are incompatible
+
+The barrier fit ran (`scripts/generators/fit_furanone_reductive_sulfhydrylation_hofmann.py`;
+record `results/validation/furanone_reductive_sulfhydrylation_refit_hofmann.{json,md}`, both
+tracked). Decision rules 1–4 are copied unchanged from
+`refit_thiol_addition_pentodiulose_hofmann.py` so the runs are comparable. **Rule 5 is new
+and is the point of the wave**: the value selected by rules 1–4 must still leave the
+norfuraneol channel a MINORITY of predicted MFT in the ribose/cysteine system.
+
+| | value | Table 4 objective | NF share of ribose MFT |
+|---|---:|---:|---:|
+| incumbent (unfitted `thiol_addition` class seed) | **28.60** | 0.4402 dex (2.76× under) | **34.3 %** |
+| rules 1–4 selection (conservative edge of the indifference band) | 26.30 | 0.3545 dex (2.26× under) | **58.1 %** |
+| profile argmin | 23.30 — **AT THE RANGE FLOOR** | — | — |
+| lowest barrier the isotope ceiling admits | **27.80** | — | 50 % |
+
+**The admissible sets are disjoint.** Hofmann Table 4 wants ≤ 23.30 kcal/mol; the isotope
+constraint admits nothing below 27.80. **No value of this constant reproduces both
+experiments.** The fit is therefore rejected by rule 5, the constant keeps its unfitted class
+seed 28.60, and the fit target is still 2.3× under-predicted at the value that ships. That is
+the wave's main scientific result, and it is a *negative* one: **the model cannot simultaneously
+account for a fed-norfuraneol yield and a labelling experiment on the same chemistry.**
+
+Two things follow that are worth stating rather than leaving implicit.
+
+- **`28.60` must not be read as calibrated.** It is the value that was already there when the
+  fit declined to move it. Its `FAST_BARRIERS` rationale says so in those words.
+- **At 28.60 the isotope constraint is satisfied but not comfortably** — 34.3 % against a
+  50 % ceiling. It would have *failed* the 20 % ceiling the ledger's first draft wrote down.
+  Since the rejected candidate fails both ceilings, the gate's verdict is the same either way
+  and no decision in this wave turns on the correction; but "passes, at 34 %" is the honest
+  description, not "passes".
+
+**Co-movement, measured and not hidden.** This channel competes for upstream flux, so it moves
+rows it was not fitted to. Adding the step at the shipped 28.60 (ablation: the template
+function replaced with a no-op, not the barrier raised):
+
+| row | analyte | measured | before the NF channel | after | |
+|---|---|---:|---:|---:|---|
+| ribose/cysteine pH 5.0 (Wave W panel) | MFT | 198 | 468.58 (2.37×) | **713.74 (3.61×)** | worse |
+| ribose/cysteine pH 5.0 | FFT | 121 | 1485.08 (12.27×) | 1428.76 (11.81×) | slightly better |
+| glucose, fructose (both analytes) | — | — | unchanged to every digit | unchanged | norfuraneol is a PENTOSE product |
+
+Panel mean |log₁₀| moves **0.9241 → 0.9518 dex**. **The wave made the shipped panel slightly
+worse, and the worsening is concentrated in the one row the new step touches.** Reported here
+rather than netted off against the new rows.
+
+### (c) SPECIES — seven added, three declined
+
+`src/precursor_resolver.py` read four YAML categories; a fifth, `maillard_intermediates`, was
+added, along with support for explicit `aliases` (the prefix/parenthesis heuristics reach
+"D-Ribose" → "ribose" but cannot reach *furan-2-aldehyde* → *furfural*, which are different
+words). A key-collision check now raises rather than letting YAML order decide.
+
+**Every added species is RDKit-verified for formula AND is byte-identical, after
+canonicalisation, to the copy the engine already carried.** That second check is the
+load-bearing one: every template matches on canonical SMILES, so a precursor that canonicalises
+differently would be a **silent duplicate** — the fed molecule inert, the internally-made one
+reactive, two copies of one molecule with different chemistry. Pinned in
+`tests/scientific/test_wave_x_step_level_2026_08.py`.
+
+| species | SMILES | formula | InChIKey | the engine copy it must equal |
+|---|---|---|---|---|
+| Hydroxyacetaldehyde | `OCC=O` | C₂H₄O₂ | WGCNASOHLSPBMP | `_enolisation_steps` `p2` |
+| 2-Oxopropanal | `CC(=O)C=O` | C₃H₄O₂ | AIJULSRZWUXGPQ | `curated_pathways.PYRUVALDEHYDE` |
+| Mercapto-2-propanone | `CC(=O)CS` | C₃H₆OS | USVCRBGYQRVTNK | `_MERCAPTO_2_PROPANONE` (Wave P) |
+| Norfuraneol | `CC1=C(O)C(=O)CO1` | C₅H₆O₃ | DLVYTANECMRFGX | `_NORFURANEOL_CANONICAL` |
+| Furan-2-aldehyde | `O=Cc1ccco1` | C₅H₄O₂ | HYBBIBNJHNGZAN | `curated_pathways.FURFURAL` |
+| 3-Deoxyribosulose | `O=CC(=O)CC(O)CO` | C₅H₈O₄ | QFNWRVAZZYFNCF | `curated_pathways.DEOXYOSONE_3` |
+| Hydrogen sulfide | `S` | H₂S | RWSOTUBLDIXVET | matched as `s.smiles == "S"` throughout |
+
+No CAS is asserted for 3-deoxyribosulose: the repository has no verified registry number for
+the open-chain 3-deoxy-pentos-2-ulose, and a `null` is honest where a guess would not be.
+
+**DECLINED, with the measured reason — rhamnose, glucose-6-phosphate, maltose.** All three are
+Table 1/2/5 rows and all three would have been one line of YAML. Adding them would have made
+the resolver return a confidently wrong answer:
+
+- **Rhamnose (6-deoxyhexose).** `_is_hexose` *does* accept it — six carbons, an aldehyde, four
+  hydroxyls — and that is exactly the problem. `_amadori_cascade` and `_enolisation_steps` then
+  hard-code the **aldohexose** skeleton: the Amadori product is built by string template as
+  `OCC(O)C(O)C(O)C(=O)C(N…)` and the deoxyosone is emitted as the fixed
+  `O=CC(=O)CC(O)C(O)CO` (C₆H₁₀O₅). From rhamnose (C₆H₁₂O₅) that step is **atom-unbalanced by
+  one oxygen** — the network would silently invent an oxygen and then run a glucose cascade
+  under a rhamnose label. Rhamnose's real 1-deoxyosone is C₆H₁₀O₄ and is the classic DMHF
+  precursor; representing it honestly needs a 6-deoxyhexose branch with its own intermediates,
+  which is a chemistry wave, not a species line.
+- **Glucose-6-phosphate.** `_is_hexose` accepts it too (six carbons, aldehyde, hydroxyls), and
+  the same hard-coded template would emit a **phosphate-free** Amadori product: the phosphate
+  group simply vanishes. `grep -n "phosph" src/reaction_templates.py src/smirks_engine.py`
+  returns nothing — **there is no phosphate-ester hydrolysis step anywhere in the network**,
+  which is also why Wave W's `MOT-04`/`MOT-05` (ribose-5-phosphate, IMP) are unevaluable.
+- **Maltose.** Twelve carbons, so `_is_hexose` and `_is_pentose` both reject it and
+  `_amadori_cascade` returns `[]` — no steps at all. There is no glycosidic-cleavage step
+  (`grep -n "glycosid\|disaccharide"` finds only comments, one of which already records that
+  "lactose / sucrose / maltose raise `Unknown precursor`").
+
+The rule applied in all three cases is Wave W's own: *adding a species to `precursors.yml` is
+not sufficient and would be actively harmful — the resolver would then return a confidently
+wrong answer for a precursor the reaction network has no route from.*
+
+### (d) THREE STRUCTURAL REPAIRS, and what each one unlocked
+
+None of these is a barrier change; all three are cases where correct chemistry was already in
+the tree and could not fire.
+
+1. **`_thiol_addition` selected its substrate by the literal LABEL `"furfural"`.** Every other
+   sulfur template matches on canonical SMILES — Wave P's own docstring says so — but the
+   model's route to its flagship FFT depended on a molecule being *spelled* a particular way.
+   Feeding the paper's own name, *furan-2-aldehyde*, gave an inert pool species while the
+   identical molecule made internally reacted. Now keyed on canonical SMILES. **Unlocks
+   Hofmann Table 3's furan-2-aldehyde row, the paper's dominant FFT route (60× ribose).**
+   Recorded while there: the map's second entry, 5-methylfurfural, is emitted by nothing in the
+   repository and was unreachable under both the old key and the new one.
+2. **`_c2_c3_mft_recombination` aborted the whole lane when there was no free H₂S.** Only step 1
+   (pyruvaldehyde + H₂S + 2[H] → mercaptopropanone) needs H₂S; steps 2 and 3 are an aldol
+   addition and a cyclodehydration between two carbon species, with the sulfur already in the
+   mercaptoketone. The guard has moved to step 1. **Unlocks Hofmann Table 8 and the top row of
+   Table 10 — hydroxyacetaldehyde + mercapto-2-propanone, the single most effective MFT system
+   in the paper, and the measurement Wave P built this lane FROM.**
+3. **The `[HH]` reducing-equivalent token had no producer in a cysteine-free system.** Its only
+   donor was `2 cysteine → cystine + 2[H]` (Wave I fix 8), so every reductive sulfur step was a
+   hidden downstream dependent of cysteine being present — the same defect class Wave I removed
+   once already, when the token's only donor was the pyrazine aromatisation. Hofmann's Tables 3,
+   4 and 7 contain no amino acid at all and yield 0.48, 0.19 and 1.8 mol %; in the model they
+   were structurally zero. Added, sourced to the paper being ingested:
+
+       2 H2S -> hydrogen disulfide + 2[H]      2 H2S -> H2S2 + H2   (both sides H4S2, exact)
+
+   > "Incorporation of a thiol group at carbon 3 yields 4-mercapto-5-methyl-3(2H)-furanone in a
+   > first reaction step, **which in turn might be reduced by a reductone or by a further
+   > molecule of hydrogen sulfide**." — Hofmann & Schieberle 1998, p. 238
+
+   Family `Thiol_Oxidation`, the same couple with a different thiol, so it inherits the existing
+   barrier and the documented H₂-emitting oxidation whitelist rather than creating a family with
+   no barrier entry (the 45 kcal/mol fallthrough bug class). HSSH is a real molecule, the exact
+   sulfur analogue of cystine — **this is not the retired `[S]` elemental-sulfur token, and
+   `test_no_elemental_sulfur_balance_token` still holds.**
+   **MEASURED EFFECT ON THE EXISTING PANEL: NONE.** Ablated against the three Wave W rows, the
+   H₂S couple leaves every prediction **byte-identical** — where a donor already exists it adds
+   nothing, and it creates reachability only where there was none. The entire panel movement in
+   this wave comes from the norfuraneol step, not from this.
+
+### (e) MODEL VS MEASUREMENT — every executable step-level row
+
+All values ppb, µg per 50 mL × 20, with the volume printed in each table's own footnote.
+
+| row | table | analyte | measured | predicted | fold | \|dex\| |
+|---|---|---|---:|---:|---:|---:|
+| furan-2-aldehyde + H₂S | 3 | FFT | 11016 | 2413.66 | **0.219×** | 0.659 |
+| norfuraneol + H₂S ***(FIT TARGET — excluded)*** | 4 / 10 | MFT | 4224 | 1533.06 | 0.363× | 0.440 |
+| norfuraneol + cysteine | 10 | MFT | 1016 | 1745.31 | 1.718× | 0.235 |
+| hydroxyacetaldehyde + mercapto-2-propanone, pH 3.0 | 8 | MFT | 310 | 2180.34 | **7.033×** | 0.847 |
+| …pH 5.0 | 8 / 10 | MFT | 5362 | 2180.34 | 0.407× | 0.391 |
+| …pH 7.0 | 8 | MFT | 6230 | 2180.34 | 0.350× | 0.456 |
+
+**Mean |log₁₀| over the five SCORED rows = 0.518 dex.** The end-to-end panel from the same
+paper is **0.952 dex**. *The model is about twice as accurate on a single step as it is on a
+whole cascade* — which is what you would expect if the error is accumulated rather than made in
+one place, and it is the first evidence the repository has ever had on that question. It is
+also the first time this branch has been scored on anything but a lump.
+
+**Three specific findings visible only at step level:**
+
+- **The C2+C3 lane has NO pH dependence AT ALL.** 2180.34 ppb at pH 3, 5 and 7, identical to six
+  significant figures, against a measured **20× rise**. Its three families appear in none of the
+  pH sets in `src/conditions.py`. Wave P chose that knowingly and wrote down why — reaching the
+  existing machinery would have required a family name containing the substring `"furfural"`,
+  *"a naming trick, not a model"*. The caveat was right; this is the measurement that prices it.
+  Scored as directional claim `HOX-03`, a **miss**, taking `ph` to **6/10 — exactly on the
+  `caution` floor, one miss from `do-not-use`.**
+- **The model does not distinguish a sulfur DONOR.** Norfuraneol + H₂S measures **4.16×** more
+  MFT than norfuraneol + cysteine; the model puts them the other way round. It has no yield term
+  on sulfur liberation — `Cysteine_Degradation` and `Beta_Elimination` each emit one H₂S per
+  cysteine — so a mole of cysteine *is* a mole of H₂S in its bookkeeping. Claim `HOX-02`, miss.
+- **FFT from furan-2-aldehyde is 4.6× UNDER-predicted**, while every end-to-end FFT row in the
+  Wave W panel is 12–30× **OVER**-predicted. The single step is not the source of the
+  over-prediction; something upstream is.
+
+### (f) THE MISSING-STEP LIST — the wave's chemistry specification
+
+Nine verified rows are in `data/benchmarks/step_level_unreachable/` (a subdirectory, therefore
+invisible to `get_benchmark_files`'s non-recursive glob), each carrying a `not_executable` block
+with `blocker_class`, `what_is_missing` (with the function that stops it) and `step_needed`
+(with the exact balanced stoichiometry). **They are NOT quarantined** — quarantine is for values
+with no source; these are true and the *model* is what is missing.
+
+**Why they are not simply scored and allowed to fail: they would not fail.**
+`_mean_abs_log10_error` skips comparisons whose prediction is non-positive, so a row the model
+cannot produce scores as *no error at all*. Two of them are worse — the mercapto-2-propanone
+rows produce no entry in `predicted_ppb`, so `_best_prediction_match` returns no match. Scoring
+them would make the panel look better for being less capable.
+
+| # | blocker | rows | what it needs |
+|---|---|---|---|
+| 1 | **A fed 3-deoxyosone has no consumer.** `Enolisation_1_2` is emitted only from inside `_enolisation_steps`, which requires an Amadori product. | Table 3 3-deoxyribosulose | A refactor, no new chemistry and no new barrier: move the 1,2-enolisation dehydration into a pool-scanning template keyed on the deoxyosone's canonical SMILES. **Cheapest item on this list.** |
+| 2 | **1-mercapto-2-propanone is not a projected observable.** The step runs and the compound enters the pool; `predict_from_steps` reports only compounds in the desirable/off-flavour/toxic registries. | Table 7 ×2 | **One SOURCED odour threshold.** Deliberately not invented — adding a compound with a made-up ODT to make a row scorable is the move this audit exists to remove. |
+| 3 | **No C2 + C3 aldol.** The network fragments sugars and never condenses fragments back; fed hydroxyacetaldehyde + 2-oxopropanal enumerates **zero** steps. | Table 6 ×3 | The two branches Hofmann & Schieberle **draw and name** in their own Figure 2, both exactly balanced with species the engine already has (C₂H₄O₂ + C₃H₄O₂ → C₅H₈O₄, to the 3-deoxy- or the 1-deoxy-pentosone). Half-blocked by #1. |
+| 4 | **No amine-free sugar degradation lane.** The whole sugar trunk is entered through `_amadori_cascade`; sugar + H₂S has no amine, so the sugar is untouched and one step enumerates. | Table 3 ribose, Table 4 ribose | A caramelisation entry step. Not attempted: it sits upstream of **every** sugar row on the panel and nothing here separates the catalysed from the uncatalysed rate. |
+| 5 | **Water is not a tracked species**, so a HYDROLYTIC step cannot be the FIRST step of a system. | Table 10 thiamin | A seed, not a step — and not a local one: `_evaluate_step` scales flux by a `co_reactant_factor` built from reactant concentrations, so seeding water moves every water-consuming step on the panel. Needs its own wave and its own before/after table. |
+
+**Blocker 5 is the most general finding in the wave and the only one that is not about sulfur
+chemistry.** Thiamine alone emits **seven** steps and does reach MFT
+(`Additive_Thermal_Degradation` ×2 → 5-hydroxy-3-mercapto-2-pentanone →
+`Furan_Ring_Aromatisation` → MFT); `predict_from_steps` then returns an **empty dict**, because
+its first step is `Thiamine + water → thiazole + pyrimidinium` and water is in neither the
+initial pool nor any earlier product. Every other benchmark hides this: a sugar + amino acid
+system makes water in its own first step (`Schiff_Base_Formation`). Both existing thiamine
+benchmarks contain a sugar and an amino acid, which is why three waves of thiamine work never
+exposed it. **Any system whose first step is hydrolytic predicts nothing at all — not a low
+number, nothing.**
+
+Also unlisted above because it is a Wave-P-scope item rather than a Wave X blocker: **the FFT
+branch of the C2+C3 lane does not exist.** Hofmann's Figure 3 draws two regiochemical outcomes
+of one aldol; the network implements only the MFT one. The three Table 8 FFT measurements
+(522 / 810 / 1164 ppb) are carried in the panel files under `unreachable_analytes` with the
+missing stoichiometry written out, rather than scored as structural zeros.
+### (g) DIRECTIONAL PANEL — three evaluable rows, one hit, and the pH axis on its floor
+
+Seven claims added (`HOX-01`…`HOX-07`, `docs/validation/directional_claims_panel.yml`; panel
+62 → 69). Three evaluable, four unevaluable with the blocker named.
+
+| claim | category | literature | model | outcome |
+|---|---|---|---|---|
+| HOX-01 HA/mercaptopropanone > NF/H₂S | ranking | `A>B` | `A>B` | agree *(fit-adjacent)* |
+| HOX-02 NF/H₂S > NF/cysteine | ranking | `A>B` | `A<B` | **MISS** *(fit-adjacent)* |
+| HOX-03 C2+C3 MFT rises pH 3 → 7 | ph | `A>B` | `A=B` | **MISS** |
+| HOX-04 thiamin is the weakest | ranking | — | — | unevaluable (water not tracked) |
+| HOX-05 Table 6 FA/NF rise with pH | ph | — | — | unevaluable (no C2+C3 aldol) |
+| HOX-06 doubling H₂S raises the mercaptoketone | additive_cysteine | — | — | unevaluable (observable missing) |
+| HOX-07 furan-2-aldehyde ≫ ribose as FFT source | ranking | — | — | unevaluable (both comparators) |
+
+`HOX-01` and `HOX-02` are classified **`fit_adjacent`** and excluded from the headline. Not
+because a constant was fitted to them — the fit was rejected and moved nothing — but because a
+value was *selected by looking at* the row they use as a comparator, and the conservative
+classification needs no argument while the permissive one would.
+
+**Aggregates.** Headline 24/35 → **24/36**. `ph` 6/9 → **6/10 = 0.600, EXACTLY ON the
+`caution` floor** (`CAUTION_MIN_RATE` is 0.60 and was not touched — the guard asserts it). One
+more pH miss returns the axis to `do-not-use`. Pooled pH + a_w 6/12 → **6/13 (46 %), now BELOW
+chance.** `ranking` stays 0/1 because both new ranking rows are fit-adjacent.
+
+### (h) WHAT THE NUMBERS DID, INCLUDING THE ONES THAT GOT WORSE
+
+| aggregate | before | after | reading |
+|---|---|---|---|
+| Panel size | 17 | **23** | +6 step-level rows |
+| Strict-ready | 0/17 | **0/23** | none of the new rows meets its ±10 % contract either |
+| Predictive benchmarks w/o blocking gaps | 0/9 | **0/14** | denominator +56 %, numerator still zero |
+| Fit-recovery benchmarks | 4 | **5** | the declared fit target, classified automatically |
+| MC panel | 14 bm / 41 rows | **20 / 47** | |
+| Honest external-literature CI coverage | 4/9 (44 %) @ **2.63 dex** | **4/13 (31 %) @ 1.44 dex** | **see below** |
+| Directional, strictly independent | 24/35 | **24/36** | new row is a miss |
+| `ph` | 6/9 `caution` | **6/10 `caution`, on the floor** | |
+| Wave W panel mean \|log₁₀\| | 0.9241 | **0.9518** | **the wave made it worse** |
+| Pentose/hexose MFT ratio (model) | 8.26× | **14.17×** | measured 10.42× — *see below* |
+
+**The CI-coverage move is the mirror image of Wave W's and must be read that way.** Wave W's
+coverage rose *because the intervals became vacuously wide* (0.75 → 2.63 dex). Here the median
+external-literature interval **narrowed by a factor of ~15 end to end** (2.63 → 1.44 dex) and
+the rate **fell** (44 % → 31 %), because the four new external-literature step-level rows carry
+envelopes of 0.15–0.4 dex and **every one of them misses**. Short paths compound fewer barrier
+priors, so the model is *tighter and still wrong*: **confidently wrong**, which is worse than
+wrong with a wide interval. No prior, threshold or interval was touched; the population changed.
+The old guard's `> 2.0 dex` vacuity assertion has been **satisfied rather than deleted**, and
+inverted to guard the situation that is now live (`< 2.0 dex` and `rate < 0.5`), with the
+re-pin condition its own failure message had already specified.
+
+**The pentose/hexose ratio moved TOWARDS the measurement for the wrong reason.** Measured
+(Table 1, same conditions) 10.42×; model 8.26× → 14.17×. Glucose did not move at all —
+norfuraneol is a pentose product, so the new channel fires on one limb only. Decomposed on the
+shipped tree: 8.26× survives disabling the new channel, 10.59× survives equalising
+`thiol_addition_pentodiulose` with `thiol_addition_hexose`, 14.17× shipped. **A ratio brought
+closer by inflating its numerator, on a row whose absolute value got worse, is not improved
+sugar discrimination**, and the guard now says so in as many words.
+
+### (i) FILES
+
+**New (18).** Panel: `data/benchmarks/hofmann1998_{furan2aldehyde_h2s,norfuraneol_h2s,
+norfuraneol_cysteine}_145C_20min_pH5.json`, `hofmann1998_c2c3_recombination_145C_20min_pH{3,5,7}.json`.
+Off-panel: `data/benchmarks/step_level_unreachable/` — nine `*_UNREACHABLE_*.json` plus a
+`README.md` that lists the blockers cheapest-first. Code:
+`scripts/generators/fit_furanone_reductive_sulfhydrylation_hofmann.py`,
+`tests/scientific/test_wave_x_step_level_2026_08.py`. Records (tracked, with the reason in
+`.gitignore`): `results/validation/furanone_reductive_sulfhydrylation_refit_hofmann.{json,md}`.
+
+**Changed.** `data/species/precursors.yml` (+1 category, +7 species);
+`src/precursor_resolver.py` (new category, `aliases`, collision check);
+`src/reaction_templates.py` (the H₂S reducing couple, the SMILES substrate match, the C2+C3
+guard, `_norfuraneol_mft_parallel_route`); `src/smirks_engine.py` (wiring);
+`src/barrier_constants.py` (+1 key); `src/conditions.py` (+1 water-releasing family);
+`src/family_sensitivity.py` (+1 label); `src/model_card.py` (fit-target split in the anchor
+scan); `src/directional_reliability.py` (`ph` axis note);
+`scripts/generators/generate_family_implementation_status.py` (+1 SLR mapping — added because
+that script's own guard REFUSED to publish a family table containing an unclassified family,
+which is the guard working);
+`docs/validation/directional_claims_panel.yml` (+7 claims), `directional_accuracy_report.md`
+(CURRENT STANDING re-scored + §X); README, AUDIT; `.gitignore`.
+
+**Regenerated:** `prediction_uncertainty.{json,md}`, `model_card.json` + the README card,
+`validation_overview.{md,png}`, `family_validation_overview.md`, `family_implementation_status.{json,md}`,
+`loo_leverage.{json,md}`, `experiment_value_ranking.{json,md}`, `external_validation_report.{json,md}`,
+`docs/assets/family_*.png`.
+
+**One regeneration produced a finding rather than a number.** `external_validation_report`
+came back with its scores **byte-identical** (3/8 coverage, 93.68× median — the matrix hold-out
+is untouched by sulfur chemistry, as expected) but with two provenance labels corrected:
+Bi 2020's hexanal rows moved `derived_from_oav_and_repo_threshold` →
+`primary_source_table_value_verified`. **That was Wave W's correction and Wave W did not
+regenerate this artifact**, so the report had been publishing the superseded label for a day.
+Recorded rather than quietly absorbed.
+
+### (j) TESTING
+
+Targeted subsets only, per the owner's directive — no full-suite run; the orchestrator
+certifies at commit.
+
+```
+holdout_guard   PASS   21 bundles · 17 maillard-path · all free_precursor · none named by any fit record
+citation_gate   PASS   117 files · 949 DOI fields · 288 unique DOIs
+fit_target_gate PASS   circularity + coverage accounting + constant precision
+```
+
+**444 passed, 2 xfailed, 0 failed** across `test_chemistry_soundness`, `test_smirks_balance`,
+`test_smirks_engine`, `test_wave_h_2026_08`, `test_data_integrity`, `test_wave_i_chemistry`,
+`test_wave_i_tooling`, `test_wave_i_network_chemistry`, `test_wave_p_chemistry_2026_08`,
+`test_pentose_hexose_sulfur_ordering`, `test_wave_s1_additive_flux_2026_08`,
+`test_wave_s1b_ph_aw_routing_2026_08`, `test_wave_x_step_level_2026_08`,
+`test_family_sensitivity`, `test_honest_headline_guards`, `test_benchmarks`,
+`test_free_aa_quantitative_regression`, `test_thiamine_fragmentation_benchmarks`,
+`test_wave_u_maillard_path_holdout`, `test_wave_s3_trunk_kinetics`, `test_wave_s4_protein_binding`,
+`test_comparative_cli_2026_08`, `test_benchmark_{index,summary,targets}`, `test_blind_spots`,
+`test_validation_contract`.
+
+**Eleven guards fired and every one was re-pinned with a dated causal comment**, never
+loosened: the two Wave P norfuraneol tests, the Wave S1 channel-count and Hofmann-pair pins,
+the panel-size / evidence-role / CI-coverage / pentose-ordering headline guards, and the two
+comparative-CLI guards (`ph` counts, sulfur-anchor list). The `fit_target_gate` also failed
+once, correctly, because the first draft of the fit record omitted its `fit_leverage` block —
+the gate refusing to accept a fit record that does not state its own leverage is the gate
+working, and the block was added rather than the check bypassed.
+
+**No PDF was committed.** `data/articles/` remains gitignored.
+
+### (k) [P] CARRIED FORWARD
+
+- [P] **THE HEADLINE FINDING: Hofmann Table 4 and Cerny & Davidek's labelling experiment are
+  INCOMPATIBLE in this model.** No value of `furanone_reductive_sulfhydrylation` satisfies both
+  (≤ 23.30 vs ≥ 27.80 kcal/mol). Either the fed-norfuraneol system runs a route the in-situ
+  system does not, or something upstream mis-allocates the in-situ norfuraneol pool. **This is
+  the most specific open scientific question the sulfur branch has**, and it is now expressed as
+  two numbers rather than as an argument.
+- [P] **Five named missing steps, cheapest first** (§f). Closing #1 — moving the 1,2-enolisation
+  dehydration out of `_enolisation_steps` into a pool-scanning template — is a refactor with **no
+  new chemistry and no new barrier** and unlocks a row plus part of Table 6.
+- [P] **Water is not a tracked species.** Any system whose first step is hydrolytic predicts
+  *nothing*. Not local: seeding water moves every water-consuming step on the panel.
+- [P] **The C2+C3 lane has no pH term at all** and the measurement says 20× across four pH
+  units. Fixing it must not be done by naming a family so that a substring matcher catches it —
+  that is the trick `src/conditions.py`'s header already warns about.
+- [P] **The model does not distinguish a sulfur DONOR.** One H₂S per cysteine, no yield term;
+  the measurement prices the difference at 4.16×.
+- [P] **The wave made the shipped panel slightly worse** (0.9241 → 0.9518 dex), concentrated in
+  the ribose row the new channel touches. If the norfuraneol channel is ever removed again, that
+  0.028 dex comes back — and so does the inability to express Table 4.
+- [P] **1-mercapto-2-propanone needs ONE sourced odour threshold** to make two of the paper's
+  largest measured yields (1.8 and 4.0 mol %) scorable. Not invented here.
+- [P] **Rhamnose, G6P and maltose stay declined** until the network has, respectively, a
+  6-deoxyhexose branch, a phosphate-ester hydrolysis step, and a glycosidic cleavage step.
+  The same missing phosphate step blocks Wave W's `MOT-04` / `MOT-05` (ribose-5-phosphate, IMP),
+  which is the meat-relevant precursor pool.

@@ -1,0 +1,72 @@
+{
+  "benchmark_id": "hofmann1998_UNREACHABLE_ribose_h2s_145C_20min_pH5_MFT",
+  "source_doi": "10.1021/jf9705983",
+  "source_metadata": {
+    "citation": "Hofmann, T.; Schieberle, P. Quantitative Model Studies on the Effectiveness of Different Precursor Systems in the Formation of the Intense Food Odorants 2-Furfurylthiol and 2-Methyl-3-furanthiol. J. Agric. Food Chem. 1998, 46 (1), 235-241. DOI 10.1021/jf9705983.",
+    "origin": "external_literature",
+    "access": "Full text obtained by the repository owner via interlibrary loan and read from data/articles/hofmann1998.pdf (gitignored; the PDF is NOT committed - only extracted data enters the repo). Wave X (2026-08-28) re-read pages 237-240 of the PDF directly, as rendered page images, and re-checked every value in this file against the printed table. It did NOT take them from Wave W's transcription or from any digest."
+  },
+  "content_verification": {
+    "access_level": "full_text",
+    "retrieval_date": "2026-08-28",
+    "quantification_class": "stable_isotope_dilution_gcms",
+    "quoted_method": "EXPERIMENTAL PROCEDURES, Model Experiments, verbatim: 'In a first series of experiments, the reactants (cf. amounts detailed in the tables) were dissolved in phosphate buffer (0.5 mol/L) at pH 3.0, 5.0, or 7.0 and thermally treated for 20 min at 145 degC in a laboratory autoclave (200 mL; Type II; Roth, Germany).'",
+    "quoted_quantification": "EXPERIMENTAL PROCEDURES, Quantitation of FFT and MFT by SIDA, verbatim: 'After cooling of the reaction mixtures to 20 degC, the internal standards [2H2]-2-furfurylthiol and [2H3]-2-methyl-3-furanthiol (10 ug each dissolved in 0.5 mL of pentane) were added to the aqueous reaction mixtures and, after equilibration for 10 min, the analyte and the labeled standard were isolated by extraction with diethyl ether (three times, total volume = 60 mL). After drying over Na2SO4, quantitation of FFT and MFT was performed by mass chromatography using the fragment ions and response factors as described recently (Guth et al., 1995).'",
+    "quoted_table_footnotes": "Table 4 footnote a, verbatim: 'An aqueous solution (50 mL) of hydrogen sulfide (1 mmol) and the precursor was heated at pH 5.0 in a laboratory autoclave.' Footnote b: 'See footnote b in Table 1.'",
+    "quoted_row": "Table 4, row verbatim: 'ribose 15.1 0.01'.",
+    "quantification_verdict": "ADMISSIBLE AND ABSOLUTE for FFT and MFT: deuterated analogues of both ([2H2]-FFT, [2H3]-MFT) are spiked into the reaction mixture before extraction and quantitation is by mass chromatography against them. This is stable-isotope dilution analysis."
+  },
+  "unit_basis": "STATED BASIS, NO FREE PARAMETER. The paper prints micrograms of product and the table footnote states the system volume: 'An aqueous solution (50 mL)'. ug per 50 mL x 20 = ug/L; the medium is dilute aqueous buffer, density ~1 kg/L, so ug/L is numerically ug/kg = ppb on the model's own basis. One stated multiplication, no assumed concentration. The mol% column is reproduced alongside and is INDEPENDENTLY VERIFIED here: mol% = mol product / mol limiting precursor (1 mmol) x 100. This is the same discipline that distinguishes these rows from the retired data/benchmarks/cys_ribose_140C_Hofmann1998.json, whose ppb rested on an unattested 10 mM basis.",
+  "protein_type": "free",
+  "denaturation_state": 0.0,
+  "precursors": {
+    "D-Ribose": {
+      "concentration_mM": 20.0
+    },
+    "Hydrogen sulfide": {
+      "concentration_mM": 20.0
+    }
+  },
+  "conditions": {
+    "temp_C": 145.0,
+    "ph": 5.0,
+    "water_activity": 0.98,
+    "time_min": 20.0
+  },
+  "condition_provenance": {
+    "status": "FULLY_STATED_IN_SOURCE for T, t, pH, volume and moles.",
+    "derivation": "Temperature and time from the Methods block quoted above (20 min at 145 degC in a laboratory autoclave); pH, volume and precursor moles from the table's own footnote, quoted above. 1 mmol in 50 mL = 20.0 mM; 2 mmol in 50 mL = 40.0 mM. Nothing is inferred.",
+    "water_activity_note": "water_activity 0.98 is ASSERTED, not measured: the paper states no water activity for any experiment. 0.98 is the value the repository uses for dilute aqueous buffer and is the same value Wave W used for the Table 1/Table 2 aqueous rows, so these rows sit on the same assumption as the rows they are compared against. It is an assumption; it is not evidence. The DRY-HEAT rows of this paper (Table 2 column 5.0c and Table 8 experiment 4) are NOT ingested as absolute rows anywhere, because for them the assumption would have to be invented from nothing - see Wave W.",
+    "headspace_caveat": "The autoclave is a closed 200 mL vessel holding 50 mL of solution, so there is a ~150 mL headspace. The engine has no closed-vessel gas-liquid partition term. For the rows charged with HYDROGEN SULFIDE this cuts both ways and is stated loudly: a large share of the 1 or 2 mmol of H2S is in the gas phase at 145 degC, so the aqueous H2S the model reacts with at a nominal 20 or 40 mM is an UPPER BOUND on the real one, and any product lost to that headspace is a systematic bias the model cannot see. Recorded, not corrected."
+  },
+  "metadata": {
+    "tier": "PRIMARY",
+    "family": "free_aa_sulfur",
+    "execution_path": "free_precursor",
+    "notes": "WAVE X (2026-08-28). Hofmann Table 4, ribose row: 1 mmol ribose + 1 mmol H2S in 50 mL, pH 5.0, 145 degC / 20 min -> MFT 15.1 ug = 0.01 mol%. The baseline against which the paper reports NF as a 14x better MFT precursor. Same blocker as the Table 3 ribose row."
+  },
+  "validation_contract": {
+    "scale_thresholds": {
+      "max_ratio": 1.1,
+      "mean_abs_log10_error": 0.0414
+    },
+    "derivation": "DERIVED FROM THE MEASUREMENT'S OWN STATED PRECISION AND FROM NOTHING ELSE. Table 1 footnote b, verbatim: 'Data are mean values of triplicates and differed by not more than 10%.' Every step-level table in this paper carries 'See footnote b in Table 1', so that +/-10% replicate spread is the stated precision of every value in this file. A 10% replicate spread is a multiplicative tolerance of 1.10x; log10(1.10) = 0.041393, rounded to 0.0414. Identical to the contract Wave W derived for the Table 1 rows, from the same footnote, so the step-level rows and the end-to-end rows are held to the same standard.",
+    "what_this_contract_is_and_is_not": "It is the tolerance THE DATA SUPPORTS, not a claim that the model meets it. On the day it was written the model does not come close on any row in this wave; see the Wave X table in tasks/audit_remediation.md. The contract is set AT the measurement's precision, which is stricter than the repository's global free-precursor default (1.5 / 0.10). Nothing was widened so a row would pass."
+  },
+  "measured_volatiles": {
+    "2-Methyl-3-furanthiol (MFT)": {
+      "conc_ppb": 302.0,
+      "uncertainty_pct": 10,
+      "value_status": "primary_source_verified",
+      "smiles": "Cc1occc1S",
+      "provenance": "Table 4, ribose row: 15.1 ug per 50 mL -> 302 ug/L = 302 ppb; printed mol% 0.01. VERIFIED: 15.1e-6 / 114.17 = 1.3226e-7 mol; per 1 mmol = 0.0132 mol%, printed to one significant figure as 0.01. THIS IS THE ROW THE MOL% BASIS WAS ORIGINALLY CONFIRMED ON."
+    }
+  },
+  "not_executable": {
+    "blocker_class": "MISSING_STEP",
+    "what_is_missing": "AN AMINE-FREE SUGAR DEGRADATION LANE. The network's entire sugar trunk is entered through `_amadori_cascade` (sugar + PRIMARY AMINE -> Schiff base -> Amadori/Heyns), and every downstream intermediate - the 1- and 3-deoxyosones, furan-2-aldehyde, norfuraneol, the retro-aldol C2/C3 fragments - is emitted by `_enolisation_steps`, which takes an Amadori product as its argument. A system of sugar + H2S contains no primary amine, so SmirksEngine.enumerate returns ONE step (the Wave X `2 H2S -> HSSH + 2[H]` couple) and the sugar is untouched. Measured, not inferred: see the Wave X ledger entry.",
+    "step_needed": "Acid/thermal dehydration of a free sugar to its deoxyosones WITHOUT an amine catalyst - i.e. caramelisation. Hofmann & Schieberle state the chemistry in this paper's own text (p.237): 'Dehydration of pentoses may result in the formation of either the 1- or the 3-deoxypentosone. Their subsequent cyclization and elimination of water lead to the formation of either NF or furan-2-aldehyde as the major products.' Both product species already exist in the engine, so the gap is the ENTRY step, not the downstream lane. DELIBERATELY NOT IMPLEMENTED IN WAVE X: the amine-catalysed and uncatalysed routes have different rates and this repository has no measurement that separates them, so a barrier would have to be invented, and it would sit upstream of every sugar row on the panel.",
+    "consequence_if_ignored": "Predicted FFT/MFT for these rows is exactly 0.0 ppb by construction. The mean-absolute-log10 aggregate SKIPS non-positive predictions, so scoring them would cost nothing and the total miss would be invisible. That is why they are here and not on the panel."
+  },
+  "wave_x_placement": "THIS FILE IS NOT ON THE VALIDATION PANEL AND IS NOT SCORED. It lives in a SUBDIRECTORY of data/benchmarks/, and `get_benchmark_files` in src/benchmark_validation.py uses a non-recursive glob('*.json'), so nothing panel-wide sees it - the same mechanism that keeps data/benchmarks/external_validation/ and data/benchmarks/quarantined/ out. IT IS NOT QUARANTINE. Quarantine is for values with no real source; every value here is verified against the primary source page image and is TRUE. What is missing is a REACTION STEP in src/, named in `not_executable.step_needed`. The day that step is implemented the file moves up one directory and becomes a scored row, with no edit to its numbers."
+}

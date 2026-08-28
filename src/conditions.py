@@ -230,6 +230,14 @@ _WATER_RELEASING_FAMILIES = frozenset({
     "furanone_cyclisation",                  # +1  1-deoxyosone -> norfuraneol + H2O
     "furanone_formation",                    # +1  (sibling of the above)
     "furanone_reductive_opening",            # +1
+    # WAVE X (2026-08-28): norfuraneol + H2S + 2[H] -> MFT + 2 H2O.  Counted off the
+    # emitted step, not assumed, on the same MEASURED criterion this block's header
+    # states.  It belongs to the redox-lumped subset named in the LIMITATION note
+    # above, for the same reason `mercaptoketone_formation` does: part of the water
+    # released is a redox byproduct, so the Le Chatelier argument is weaker here than
+    # for a pure condensation.  Included anyway, and flagged, rather than excluded by
+    # judgement.
+    "furanone_reductive_sulfhydrylation",    # +2
     "lipid_thiazole_condensation",           # +3
     "mercaptoketone_cyclodehydration",       # +2  aldol -> MFT + 2 H2O
     "mercaptoketone_formation",              # +1

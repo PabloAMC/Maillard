@@ -6,7 +6,7 @@ Derived by enumeration from the current engine, not asserted. Regenerate with `p
 
 | # | Family | Implementation | Reaction templates emitted |
 | -- | --- | --- | --- |
-| 01 | Amino acid-sugar Maillard core | generative reaction templates | `Amadori_Rearrangement`, `Aminoketone_Condensation`, `Cysteine_Degradation`, `Deoxyosone_Reduction`, `Enolisation_1_2`, `Enolisation_2_3`, `Enolisation_2_3_Amadori`, `Enolisation_Intermediate`, `Furanone_Amino_Acid_Reduction`, `Furanone_Cyclisation`, `Furanone_Formation`, `Furanone_Reductive_Opening`, `Generalized_Deamination`, `Mercaptoketone_Aldol_Addition`, `Mercaptoketone_Cyclodehydration`, `Mercaptoketone_Formation`, `Retro_Aldol_Fragmentation`, `Schiff_Base_Formation`, `Strecker_Degradation`, `Thiohemiacetal_Formation`, `Thiol_Addition_H2`, `Thiol_Addition_Hexose_Legacy_Shortcut`, `Thiol_Addition_Pentodiulose`, `Thiol_Dehydration`, `Thiol_Oxidation` |
+| 01 | Amino acid-sugar Maillard core | generative reaction templates | `Amadori_Rearrangement`, `Aminoketone_Condensation`, `Cysteine_Degradation`, `Deoxyosone_Reduction`, `Enolisation_1_2`, `Enolisation_2_3`, `Enolisation_2_3_Amadori`, `Enolisation_Intermediate`, `Furanone_Amino_Acid_Reduction`, `Furanone_Cyclisation`, `Furanone_Formation`, `Furanone_Reductive_Opening`, `Furanone_Reductive_Sulfhydrylation`, `Generalized_Deamination`, `Mercaptoketone_Aldol_Addition`, `Mercaptoketone_Cyclodehydration`, `Mercaptoketone_Formation`, `Retro_Aldol_Fragmentation`, `Schiff_Base_Formation`, `Strecker_Degradation`, `Thiohemiacetal_Formation`, `Thiol_Addition_H2`, `Thiol_Addition_Hexose_Legacy_Shortcut`, `Thiol_Addition_Pentodiulose`, `Thiol_Dehydration`, `Thiol_Oxidation` |
 | 02 | Lipid oxidation and carbonylic crosstalk | generative reaction templates | `Beta_Scission`, `Lipid_Homolysis`, `Peroxy_H_Abstraction`, `Radical_Propagation_O2`, `Radical_Termination` |
 | 03 | Thiamine degradation and sulfur support | generative reaction templates | `Additive_Thermal_Degradation`, `Furan_Ring_Aromatisation` |
 | 04 | Nucleotide degradation and ribose support | literature priors only | — |
@@ -25,7 +25,7 @@ Derived by enumeration from the current engine, not asserted. Regenerate with `p
 
 ## Implementation detail
 
-* **01 Amino acid-sugar Maillard core** — 25 reaction template(s) emitted by src/reaction_templates.py / src/smirks_engine.py
+* **01 Amino acid-sugar Maillard core** — 26 reaction template(s) emitted by src/reaction_templates.py / src/smirks_engine.py
 * **02 Lipid oxidation and carbonylic crosstalk** — 5 reaction template(s) emitted by src/reaction_templates.py / src/smirks_engine.py
 * **03 Thiamine degradation and sulfur support** — 2 reaction template(s) emitted by src/reaction_templates.py / src/smirks_engine.py
 * **04 Nucleotide degradation and ribose support** — Ribose itself is a first-class sugar donor of families 01/07, but there is no nucleotide template: IMP/GMP enumerate to nothing. The lane exists as literature priors and coverage bookkeeping only (src/family_barrier_progress.py, src/dft_coverage_map.py).

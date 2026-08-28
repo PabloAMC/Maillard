@@ -243,3 +243,18 @@ scratch/
 # maillard_path_holdout_frozen_predictions.*, which it reads and never regenerates.
 !results/validation/maillard_path_holdout_S3_prepost.json
 !results/validation/maillard_path_holdout_S3_prepost.md
+
+# Wave X evidence artifact (2026-08-28): the norfuraneol barrier fit against Hofmann &
+# Schieberle 1998 Table 4. Tracked for three reasons, each sufficient on its own.
+# (1) `scripts/ci/fit_target_gate.py` and `src/fit_target_index.py` scan
+#     results/validation/*refit*.json as FIT RECORDS; this is the file that declares
+#     `hofmann1998_norfuraneol_h2s_145C_20min_pH5` a fit target, and an untracked
+#     declaration would let a scored panel row quietly double as a fit target on any
+#     machine that had not run the generator.
+# (2) The fit was REJECTED by its own pre-registered isotope gate, so the record is the
+#     only place the REASON the shipped barrier is still its unfitted class seed exists.
+#     A rejected fit that leaves no artifact is indistinguishable from a fit never run.
+# (3) tests/scientific/test_wave_x_step_level_2026_08.py reads it and asserts that the
+#     shipped constant, the gate's verdict and the test's own ceiling all agree.
+!results/validation/furanone_reductive_sulfhydrylation_refit_hofmann.json
+!results/validation/furanone_reductive_sulfhydrylation_refit_hofmann.md

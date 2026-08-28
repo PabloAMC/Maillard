@@ -915,6 +915,56 @@ a stated buffer system, and they agree with the Hofmann pH hold-out's direction 
 of the form "which arm gives more of X" with pH and moisture held fixed, and nothing
 quantitative. It licenses no pH recommendation and no moisture recommendation.
 
+**Updated 2026-08-28 (Wave X).** Seven more claims were added, all from the *step-level*
+tables of the same Hofmann & Schieberle paper (`HOX-01`…`HOX-07`; see §X). **Three are
+evaluable and the headline moves 24/35 → 24/36**, because the one strictly-independent row
+among them is a **miss**. The other two evaluable rows are classified `fit_adjacent`, not
+because a constant was fitted to them — Wave X's only fit was **rejected by its own isotope
+gate** and moved nothing — but because a value was *selected by looking at* the row they use
+as a comparator, and the conservative classification needs no argument.
+
+The tables below are the Wave X numbers. **The one row that moved the headline is `HOX-03`,
+and it is worth reading on its own:** from hydroxyacetaldehyde + mercapto-2-propanone the
+paper measures MFT rising **20×** from pH 3 to pH 7, and the model predicts **the identical
+value at pH 3, 5 and 7 — 2180.34 ppb, to six significant figures**. That lane's three
+families appear in none of the pH sets in `src/conditions.py`, so it carries **no pH term at
+all**. Wave P chose that deliberately and wrote down why (reaching the existing machinery
+would have needed a family name containing the substring `"furfural"` — *"a naming trick, not
+a model"*). This row converts that recorded caveat into a scored miss, which is what a
+directional panel is for. `ph` goes 6/9 → 6/10.
+
+| bucket | agree | evaluable |
+|---|---:|---:|
+| strictly independent (headline) | 24 | 36 |
+| system-overlap | 6 | 6 |
+| fit-adjacent (excluded from the headline) | 9 | 11 |
+| independent, excluding ph and moisture_aw | 18 | 23 |
+| independent, ph and moisture_aw only | 6 | 13 |
+
+| category | agree | evaluable |
+|---|---:|---:|
+| sugar_identity | 9 | 11 |
+| additive_cysteine | 4 | 4 |
+| temperature | 6 | 8 |
+| time | 2 | 2 |
+| lipid_lane | 2 | 2 |
+| matrix_identity | 1 | 1 |
+| ranking | 0 | 1 |
+| ph | 6 | 10 |
+| moisture_aw | 0 | 3 |
+
+Stated in one line, on the independent bucket throughout: **24/36 (67%) overall; 18/23 (78%)
+excluding pH and water activity; 6/13 (46%) on pH and water activity, which is now *below*
+chance; 0/3 on water activity alone.** Sixteen further claims are unevaluable and are counted
+in neither column (§7, §W, §X). The category table sums to the *screening* bucket (36
+independent + 6 overlap = 42) at **30/42**; `ranking` stays 0/1 because both new ranking rows
+are fit-adjacent.
+
+**The `ph` axis has now been measured on a system with no amino acid and no sugar in it, and
+that is the point.** Every previous pH row was confounded by the amine chemistry; `HOX-03` is
+two small carbonyls in buffer, and the model has nothing to say about it. The §8 / §A6 licence
+is unchanged and is if anything better supported: the model licenses **no** pH recommendation.
+
 ### How to update this table
 
 Re-score the panel with the scratchpad runner described in §9, then edit the two tables above
@@ -996,3 +1046,73 @@ volatiles made to the headspaces of the different systems but did not provide ab
 concentrations in the aqueous solutions."* It can never become an absolute benchmark here, at
 any future date — the quantity it reports is not the quantity the model predicts. See
 `sources.mottram2002.ordinal_only_reason` in the panel YAML for the full quote.
+
+---
+
+## §X. The Wave X rows (2026-08-28)
+
+Seven claims from the **step-level** tables of Hofmann & Schieberle 1998 — Tables 3, 6, 7, 8
+and 10, the ones that constrain individual reaction steps rather than end-to-end lumps. They
+were unreachable before this wave because `src/precursor_resolver.py` could not resolve a
+single one of their precursors.
+
+| Claim | Category | Observable | Literature | Model | Outcome | Predicted values (ppb) |
+|---|---|---|---|---|---|---|
+| HOX-01 | ranking | MFT | `A>B` | `A>B` | agree *(fit-adjacent)* | HA/mercaptopropanone = 2180.34; NF/H₂S = 1533.06 |
+| HOX-02 | ranking | MFT | `A>B` | `A<B` | **MISS** *(fit-adjacent)* | NF/H₂S = 1533.06; NF/cysteine = 1745.31 |
+| HOX-03 | ph | MFT | `A>B` | `A=B` | **MISS** | pH 7.0 = 2180.34; pH 3.0 = 2180.34 |
+| HOX-04 | ranking | MFT | `A<B` | `-` | n/a | — (thiamin alone predicts nothing; water is not a tracked species) |
+| HOX-05 | ph | FFT | `A>B` | `-` | n/a | — (no C2 + C3 aldol step; zero steps enumerate) |
+| HOX-06 | additive_cysteine | MFT | `A>B` | `-` | n/a | — (1-mercapto-2-propanone is not a projected observable) |
+| HOX-07 | ranking | FFT | `A>B` | `-` | n/a | — (both comparators unreachable; see below) |
+
+**1 agree / 3 evaluable, of which only HOX-03 is strictly independent — and it is a miss.
+Four unevaluable, and each names exactly what would make it evaluable.**
+
+### HOX-03 — the cleanest pH experiment in the paper, and the model has no pH term for it
+
+Two small carbonyls in buffer: hydroxyacetaldehyde + mercapto-2-propanone, 1 mmol each in
+50 mL, 145 °C / 20 min. MFT measured at **15.5 / 268.1 / 311.5 µg** at pH 3 / 5 / 7 — a **20×
+rise**. The model predicts **2180.34 ppb at all three pH values, identical to six significant
+figures.**
+
+This is not a calibration failure; it is a structural absence. The lane's families
+(`Mercaptoketone_Formation`, `Mercaptoketone_Aldol_Addition`,
+`Mercaptoketone_Cyclodehydration`) appear in **none** of the pH sets in `src/conditions.py`,
+so no pH factor of any kind is applied to it. Wave P made that choice knowingly and recorded
+it: the existing water-activity/pH machinery is reached through a family-name substring
+matcher, and reaching it would have required naming the family so that it contained the
+substring `"furfural"` — *"a naming trick, not a model"*. The caveat was right and the choice
+was right; this row is the measurement that turns it from a caveat into a scored miss, which
+is the whole purpose of a directional panel.
+
+### HOX-02 — the sulfur donor the model does not distinguish
+
+Norfuraneol + H₂S gives **211.2 µg** MFT; norfuraneol + cysteine gives **50.8 µg**. Same
+carbon precursor, same charge, same volume, same pH, same thermal treatment — only the sulfur
+source differs, and it costs a factor of **4.2**. The model puts them the other way round
+(1533 vs 1745). It has no yield term on sulfur liberation: `Cysteine_Degradation` and
+`Beta_Elimination` each emit one H₂S per cysteine, so in the model's bookkeeping a mole of
+cysteine *is* a mole of H₂S. This row is the first measurement that prices that
+simplification.
+
+### The four unevaluable rows are the wave's chemistry specification
+
+Each names a distinct blocker, and they are cheapest-first in
+[`data/benchmarks/step_level_unreachable/README.md`](../../data/benchmarks/step_level_unreachable/README.md):
+a fed 3-deoxyosone has no consumer (a refactor, no new chemistry); 1-mercapto-2-propanone is
+not a projected observable (one sourced odour threshold); there is no C2 + C3 aldol (two steps
+Hofmann & Schieberle draw and name in their own Figure 2); there is no amine-free sugar
+degradation lane; and **water is not a tracked species, so a hydrolytic step cannot be the
+first step of a system**. That last one is the most general finding in the wave and the only
+one that is not about sulfur chemistry — thiamine alone emits seven steps and reaches MFT, and
+the flux propagator returns an empty dict.
+
+### Why two of the three evaluable rows are fit-adjacent
+
+`HOX-01` and `HOX-02` use the norfuraneol/H₂S system as one side of their comparison, and that
+system is the sole fit target of
+`results/validation/furanone_reductive_sulfhydrylation_refit_hofmann.json`. **The fit was
+rejected by its own isotope gate and moved no constant**, so nothing in the shipped tree was
+actually chosen by looking at that row — but a rejected fit is still a look, and classifying
+them as fit-adjacent needs no argument while classifying them as independent would.

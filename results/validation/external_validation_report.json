@@ -17,7 +17,7 @@
           "predicted_p50": 1013.0762208543294,
           "predicted_p95": 167497.65442601521,
           "predicted_std": 431130.4955918323,
-          "value_provenance": "derived_from_oav_and_repo_threshold"
+          "value_provenance": "primary_source_table_value_verified"
         }
       ],
       "execution_path": "matrix_only",
@@ -45,7 +45,7 @@
           "predicted_p50": 801700.3780458169,
           "predicted_p95": 132549683.93383363,
           "predicted_std": 341176186.1428112,
-          "value_provenance": "derived_from_oav_and_repo_threshold"
+          "value_provenance": "primary_source_table_value_verified"
         }
       ],
       "execution_path": "matrix_only",
@@ -377,7 +377,7 @@
     "value_provenance_split": {
       "counts": {
         "band_geometric_midpoint": 2,
-        "derived_from_oav_and_repo_threshold": 2,
+        "primary_source_table_value_verified": 2,
         "reported_point_value": 4
       },
       "derived_or_constructed": {

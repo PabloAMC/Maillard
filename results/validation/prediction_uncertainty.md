@@ -4,7 +4,7 @@
 
 _Monte Carlo propagation of barrier-family offset priors (additive Gaussian, kcal/mol) through the benchmark evaluator. CI = 90% (P5–P95)._
 
-**Headline trust metric — external literature only**: the measured value lies inside the 90% CI for **4 / 9** literature rows (**44.4%**). **2** fitted row(s) are excluded from both numerator and denominator (2 of them would have counted as hits); see the split below. 4 literature row(s) are not evaluable (degenerate envelope). Median CI width **2.63 dex** (~424× end to end) — read the coverage with the width.
+**Headline trust metric — external literature only**: the measured value lies inside the 90% CI for **4 / 13** literature rows (**30.8%**). **3** fitted row(s) are excluded from both numerator and denominator (2 of them would have counted as hits); see the split below. 5 literature row(s) are not evaluable (degenerate envelope). Median CI width **1.44 dex** (~28× end to end) — read the coverage with the width.
 
 > **Coverage split — this is the headline; the aggregate is not.** The aggregate
 > pools three populations that support completely different claims:
@@ -26,13 +26,13 @@ _Monte Carlo propagation of barrier-family offset priors (additive Gaussian, kca
 >
 > | Signal origin | Inside 90% CI | Not evaluable | Median CI width (dex) |
 > | --- | ---: | ---: | ---: |
-> | External literature (the only validation evidence) | 4/9 (44%) | 4 | 2.63 |
-> | Fitted rows (fit recovery — NOT evidence) | 2/2 (100%) | 0 | 2.95 |
-> | Internal synthetic (reproducibility only — NOT evidence) | 18/18 (100%) | 8 | 4.11 |
+> | External literature (the only validation evidence) | 4/13 (31%) | 5 | 1.44 |
+> | Fitted rows (fit recovery — NOT evidence) | 2/3 (67%) | 0 | 2.87 |
+> | Internal synthetic (reproducibility only — NOT evidence) | 18/18 (100%) | 8 | 4.03 |
 
-_Secondary, mixed-population figure, retained only for continuity with older reports — do not quote it: measured value lies inside 90% CI for 32 / 41 matched compounds (78.0%), pooling literature, fitted and synthetic rows._
+_Secondary, mixed-population figure, retained only for continuity with older reports — do not quote it: measured value lies inside 90% CI for 32 / 47 matched compounds (68.1%), pooling literature, fitted and synthetic rows._
 
-Samples per benchmark: 200; seed 0; benchmarks evaluated: 14.
+Samples per benchmark: 200; seed 0; benchmarks evaluated: 20.
 
 ## Priors
 
@@ -84,8 +84,8 @@ Samples per benchmark: 200; seed 0; benchmarks evaluated: 14.
 
 | Compound | Measured (ppb) | P5 | P50 | P95 | log₁₀ width | Inside 90% CI |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2-methyl-3-furanthiol | 342 | 0.42 | 67.2 | 368 | 2.94 | ✓ |
-| 2-furfurylthiol | 200 | 0.455 | 225 | 419 | 2.96 | ✓ |
+| 2-methyl-3-furanthiol | 342 | 0.673 | 108 | 494 | 2.87 | ✓ |
+| 2-furfurylthiol | 200 | 0.455 | 208 | 388 | 2.93 | ✓ |
 
 ### `furosine_extrusion_crossover_140C_RamirezJimenez2000`
 
@@ -95,6 +95,33 @@ Samples per benchmark: 200; seed 0; benchmarks evaluated: 14.
 | Compound | Measured (ppb) | P5 | P50 | P95 | log₁₀ width | Inside 90% CI |
 | --- | --- | --- | --- | --- | --- | --- |
 | furosine | 1.74e+04 | 86.5 | 86.5 | 86.5 | 0.00 | ✗ |
+
+### `hofmann1998_c2c3_recombination_145C_20min_pH3`
+
+- Execution path: `free_precursor`
+- Matched compounds with envelope: 1
+
+| Compound | Measured (ppb) | P5 | P50 | P95 | log₁₀ width | Inside 90% CI |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2-Methyl-3-furanthiol (MFT) | 310 | 1.71e+03 | 2.18e+03 | 2.41e+03 | 0.15 | ✗ |
+
+### `hofmann1998_c2c3_recombination_145C_20min_pH5`
+
+- Execution path: `free_precursor`
+- Matched compounds with envelope: 1
+
+| Compound | Measured (ppb) | P5 | P50 | P95 | log₁₀ width | Inside 90% CI |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2-Methyl-3-furanthiol (MFT) | 5.36e+03 | 1.71e+03 | 2.18e+03 | 2.41e+03 | 0.15 | ✗ |
+
+### `hofmann1998_c2c3_recombination_145C_20min_pH7`
+
+- Execution path: `free_precursor`
+- Matched compounds with envelope: 1
+
+| Compound | Measured (ppb) | P5 | P50 | P95 | log₁₀ width | Inside 90% CI |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2-Methyl-3-furanthiol (MFT) | 6.23e+03 | 1.71e+03 | 2.18e+03 | 2.41e+03 | 0.15 | ✗ |
 
 ### `hofmann1998_fructose_cysteine_145C_20min_pH5`
 
@@ -106,6 +133,15 @@ Samples per benchmark: 200; seed 0; benchmarks evaluated: 14.
 | 2-Furfurylthiol (FFT) | 32 | 0.267 | 4.13 | 7.36 | 1.44 | ✗ |
 | 2-Methyl-3-furanthiol (MFT) | 25 | 0.0239 | 1.19 | 10.1 | 2.63 | ✗ |
 
+### `hofmann1998_furan2aldehyde_h2s_145C_20min_pH5`
+
+- Execution path: `free_precursor`
+- Matched compounds with envelope: 1
+
+| Compound | Measured (ppb) | P5 | P50 | P95 | log₁₀ width | Inside 90% CI |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2-Furfurylthiol (FFT) | 1.1e+04 | 2.41e+03 | 2.41e+03 | 2.41e+03 | 0.00 | ✗ |
+
 ### `hofmann1998_glucose_cysteine_145C_20min_pH5`
 
 - Execution path: `free_precursor`
@@ -116,6 +152,24 @@ Samples per benchmark: 200; seed 0; benchmarks evaluated: 14.
 | 2-Furfurylthiol (FFT) | 28 | 1.21 | 555 | 1.32e+03 | 3.04 | ✓ |
 | 2-Methyl-3-furanthiol (MFT) | 19 | 0.271 | 78.9 | 1.47e+03 | 3.73 | ✓ |
 
+### `hofmann1998_norfuraneol_cysteine_145C_20min_pH5`
+
+- Execution path: `free_precursor`
+- Matched compounds with envelope: 1
+
+| Compound | Measured (ppb) | P5 | P50 | P95 | log₁₀ width | Inside 90% CI |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2-Methyl-3-furanthiol (MFT) | 1.02e+03 | 1.46e+03 | 1.74e+03 | 2.03e+03 | 0.14 | ✗ |
+
+### `hofmann1998_norfuraneol_h2s_145C_20min_pH5`
+
+- Execution path: `free_precursor`
+- Matched compounds with envelope: 1
+
+| Compound | Measured (ppb) | P5 | P50 | P95 | log₁₀ width | Inside 90% CI |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2-Methyl-3-furanthiol (MFT) | 4.22e+03 | 1.22e+03 | 1.53e+03 | 1.88e+03 | 0.19 | ✗ |
+
 ### `hofmann1998_ribose_cysteine_145C_20min_pH5`
 
 - Execution path: `free_precursor`
@@ -123,8 +177,8 @@ Samples per benchmark: 200; seed 0; benchmarks evaluated: 14.
 
 | Compound | Measured (ppb) | P5 | P50 | P95 | log₁₀ width | Inside 90% CI |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2-Furfurylthiol (FFT) | 121 | 2.42 | 1.17e+03 | 2.17e+03 | 2.95 | ✓ |
-| 2-Methyl-3-furanthiol (MFT) | 198 | 2.67 | 388 | 2.14e+03 | 2.90 | ✓ |
+| 2-Furfurylthiol (FFT) | 121 | 2.42 | 1.07e+03 | 2.05e+03 | 2.93 | ✓ |
+| 2-Methyl-3-furanthiol (MFT) | 198 | 4.23 | 615 | 2.87e+03 | 2.83 | ✓ |
 
 ### `pea_isolate_ribose_cysteine_100C_45min_Internal2026`
 
@@ -133,13 +187,13 @@ Samples per benchmark: 200; seed 0; benchmarks evaluated: 14.
 
 | Compound | Measured (ppb) | P5 | P50 | P95 | log₁₀ width | Inside 90% CI |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2,5-dimethylpyrazine | 1.05e-05 | 8.61e-09 | 3.24e-05 | 0.0289 | 6.53 | ✓ |
-| 2-furfurylthiol | 0.00378 | 4.52e-06 | 0.0104 | 0.0475 | 4.02 | ✓ |
-| 2-methyl-3-furanthiol | 0.00142 | 5.86e-06 | 0.00217 | 0.0752 | 4.11 | ✓ |
+| 2,5-dimethylpyrazine | 1.05e-05 | 8.6e-09 | 3.11e-05 | 0.0251 | 6.47 | ✓ |
+| 2-furfurylthiol | 0.00378 | 4.52e-06 | 0.00934 | 0.0454 | 4.00 | ✓ |
+| 2-methyl-3-furanthiol | 0.00142 | 9.31e-06 | 0.00403 | 0.0993 | 4.03 | ✓ |
 | Hexanal | 0.743 | 0.743 | 0.743 | 0.743 | 0.00 | ✓ |
 | Nonanal | 0.039 | 0.039 | 0.039 | 0.039 | 0.00 | ✓ |
-| bis(2-methyl-3-furyl) disulfide | 0.000529 | 8.39e-07 | 0.000821 | 0.0395 | 4.67 | ✓ |
-| furfural | 0.262 | 0.0855 | 0.244 | 0.269 | 0.50 | ✓ |
+| bis(2-methyl-3-furyl) disulfide | 0.000529 | 9.56e-07 | 0.001 | 0.0348 | 4.56 | ✓ |
+| furfural | 0.262 | 0.0742 | 0.24 | 0.269 | 0.56 | ✓ |
 
 ### `pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026`
 
@@ -148,12 +202,12 @@ Samples per benchmark: 200; seed 0; benchmarks evaluated: 14.
 
 | Compound | Measured (ppb) | P5 | P50 | P95 | log₁₀ width | Inside 90% CI |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2,5-dimethylpyrazine | 1.05e-05 | 8.61e-09 | 3.24e-05 | 0.0289 | 6.53 | ✓ |
-| 2-furfurylthiol | 0.00378 | 4.52e-06 | 0.0104 | 0.0475 | 4.02 | ✓ |
-| 2-methyl-3-furanthiol | 0.00142 | 5.86e-06 | 0.00217 | 0.0752 | 4.11 | ✓ |
+| 2,5-dimethylpyrazine | 1.05e-05 | 8.6e-09 | 3.11e-05 | 0.0251 | 6.47 | ✓ |
+| 2-furfurylthiol | 0.00378 | 4.52e-06 | 0.00934 | 0.0454 | 4.00 | ✓ |
+| 2-methyl-3-furanthiol | 0.00142 | 9.31e-06 | 0.00403 | 0.0993 | 4.03 | ✓ |
 | Hexanal | 0.743 | 0.743 | 0.743 | 0.743 | 0.00 | ✓ |
 | Nonanal | 0.039 | 0.039 | 0.039 | 0.039 | 0.00 | ✓ |
-| bis(2-methyl-3-furyl) disulfide | 0.000529 | 8.39e-07 | 0.000821 | 0.0395 | 4.67 | ✓ |
+| bis(2-methyl-3-furyl) disulfide | 0.000529 | 9.56e-07 | 0.001 | 0.0348 | 4.56 | ✓ |
 
 ### `resconi_2023_pbma_beef_identity_benchmark`
 
@@ -171,13 +225,13 @@ Samples per benchmark: 200; seed 0; benchmarks evaluated: 14.
 
 | Compound | Measured (ppb) | P5 | P50 | P95 | log₁₀ width | Inside 90% CI |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2,5-dimethylpyrazine | 1.48e-05 | 1.22e-08 | 4.6e-05 | 0.0409 | 6.53 | ✓ |
-| 2-furfurylthiol | 0.00557 | 6.65e-06 | 0.0153 | 0.07 | 4.02 | ✓ |
-| 2-methyl-3-furanthiol | 0.0021 | 8.64e-06 | 0.0032 | 0.111 | 4.11 | ✓ |
+| 2,5-dimethylpyrazine | 1.48e-05 | 1.22e-08 | 4.4e-05 | 0.0356 | 6.47 | ✓ |
+| 2-furfurylthiol | 0.00557 | 6.65e-06 | 0.0138 | 0.0669 | 4.00 | ✓ |
+| 2-methyl-3-furanthiol | 0.0021 | 1.37e-05 | 0.00594 | 0.146 | 4.03 | ✓ |
 | Hexanal | 1.7 | 1.7 | 1.7 | 1.7 | 0.00 | ✓ |
 | Nonanal | 0.0425 | 0.0425 | 0.0425 | 0.0425 | 0.00 | ✓ |
-| bis(2-methyl-3-furyl) disulfide | 0.00078 | 1.24e-06 | 0.00121 | 0.0582 | 4.67 | ✓ |
-| furfural | 2.28 | 0.744 | 2.12 | 2.34 | 0.50 | ✓ |
+| bis(2-methyl-3-furyl) disulfide | 0.00078 | 1.41e-06 | 0.00147 | 0.0513 | 4.56 | ✓ |
+| furfural | 2.28 | 0.646 | 2.09 | 2.34 | 0.56 | ✓ |
 
 ### `soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026`
 
@@ -186,12 +240,12 @@ Samples per benchmark: 200; seed 0; benchmarks evaluated: 14.
 
 | Compound | Measured (ppb) | P5 | P50 | P95 | log₁₀ width | Inside 90% CI |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2,5-dimethylpyrazine | 1.48e-05 | 1.22e-08 | 4.6e-05 | 0.0409 | 6.53 | ✓ |
-| 2-furfurylthiol | 0.00557 | 6.65e-06 | 0.0153 | 0.07 | 4.02 | ✓ |
-| 2-methyl-3-furanthiol | 0.0021 | 8.64e-06 | 0.0032 | 0.111 | 4.11 | ✓ |
+| 2,5-dimethylpyrazine | 1.48e-05 | 1.22e-08 | 4.4e-05 | 0.0356 | 6.47 | ✓ |
+| 2-furfurylthiol | 0.00557 | 6.65e-06 | 0.0138 | 0.0669 | 4.00 | ✓ |
+| 2-methyl-3-furanthiol | 0.0021 | 1.37e-05 | 0.00594 | 0.146 | 4.03 | ✓ |
 | Hexanal | 1.7 | 1.7 | 1.7 | 1.7 | 0.00 | ✓ |
 | Nonanal | 0.0425 | 0.0425 | 0.0425 | 0.0425 | 0.00 | ✓ |
-| bis(2-methyl-3-furyl) disulfide | 0.00078 | 1.24e-06 | 0.00121 | 0.0582 | 4.67 | ✓ |
+| bis(2-methyl-3-furyl) disulfide | 0.00078 | 1.41e-06 | 0.00147 | 0.0513 | 4.56 | ✓ |
 
 ### `thiamine_cys_glucose_120C_Bolton1994`
 
@@ -209,4 +263,4 @@ Samples per benchmark: 200; seed 0; benchmarks evaluated: 14.
 
 | Compound | Measured (ppb) | P5 | P50 | P95 | log₁₀ width | Inside 90% CI |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2-Methyl-3-furanthiol (MFT) | 2.47 | 0.068 | 0.0966 | 0.104 | 0.19 | ✗ |
+| 2-Methyl-3-furanthiol (MFT) | 2.47 | 0.072 | 0.102 | 0.112 | 0.19 | ✗ |

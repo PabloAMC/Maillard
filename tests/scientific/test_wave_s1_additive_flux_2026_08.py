@@ -170,7 +170,15 @@ def test_the_hofmann_lane_rate_limiting_steps_are_measured_not_assumed():
 
     assert result is not None
     channels = result["debug_channel_flux"]["Cc1occc1S"]
-    assert len(channels) == 2, "MFT is reached by exactly two enumerated routes here"
+    # RE-PINNED 2026-08-28 (Wave X): 2 -> 3. The norfuraneol -> MFT step returned as a THIRD
+    # parallel channel (`Furanone_Reductive_Sulfhydrylation`), constrained by Hofmann &
+    # Schieberle 1998 Table 4 and gated by the isotope share test in
+    # tests/scientific/test_wave_x_step_level_2026_08.py. This is precisely the situation
+    # this test exists to police -- more parallel routes to one product - and the additive
+    # rule is unchanged: the channel id is still the route's FULL ordered step-set, so the
+    # third route is distinct and its flux is SUMMED, not selected. The budget invariant in
+    # test_the_volatile_budget_still_caps_the_sum is what stops that sum minting mass.
+    assert len(channels) == 3, "MFT is reached by exactly three enumerated routes here"
 
     def slowest_family(canon: str) -> str:
         path = result["debug_paths"][canon]
@@ -290,8 +298,22 @@ def test_hofmann_sulfur_pair_after_the_additive_propagator():
     THE SULFUR BRANCH NOW HAS ZERO ABSOLUTE LITERATURE ANCHORS.
     """
     predicted = _predicted(_HOFMANN)
-    assert predicted["2-methyl-3-furanthiol"] == pytest.approx(78.0867, rel=1e-4)
-    assert predicted["2-furfurylthiol"] == pytest.approx(293.6735, rel=1e-4)
+    # RE-PINNED 2026-08-28 (Wave X -- A THIRD MFT CHANNEL, NO BARRIER MOVED).
+    # MFT 78.0867 -> 119.0800, FFT 293.6735 -> 282.8675. CAUSE: the norfuraneol -> MFT step
+    # returned as a parallel channel (`Furanone_Reductive_Sulfhydrylation`), constrained by
+    # Hofmann & Schieberle 1998 Table 4 and held to a minority in-situ share by
+    # tests/scientific/test_wave_x_step_level_2026_08.py. The Wave X barrier fit was REJECTED
+    # by that gate, so `furanone_reductive_sulfhydrylation` ships at the un-fitted
+    # `thiol_addition` class value 28.60 and no constant in the tree moved.
+    # BOTH DIRECTIONS ARE PINNED HONESTLY: MFT rose because a channel was ADDED and the
+    # propagator sums channels; FFT fell because the volatile budget is FIXED and MFT's
+    # share of it grew. THE YARDSTICK IS STILL NOT A MEASUREMENT: 342 / 200 ppb are this
+    # repository's own arithmetic (Wave S2b, confirmed from the primary source by Wave W).
+    # For the movement against a REAL measurement, see
+    # hofmann1998_ribose_cysteine_145C_20min_pH5: MFT 468.58 -> 713.74 ppb against 198,
+    # i.e. 2.37x over -> 3.61x over. This wave made that row WORSE and reports it as such.
+    assert predicted["2-methyl-3-furanthiol"] == pytest.approx(119.0800, rel=1e-4)
+    assert predicted["2-furfurylthiol"] == pytest.approx(282.8675, rel=1e-4)
 
 
 # ── FIX 2: the matrix calibration registry is reachable again ────────────────────────

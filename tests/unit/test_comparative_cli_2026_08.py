@@ -127,10 +127,18 @@ def test_ph_and_water_activity_are_never_trusted_on_the_shipped_panel():
     # src/directional_reliability._AXIS_NOTES).
     assert dr.reliability_for_axis("moisture_aw", counts).verdict == dr.VERDICT_DO_NOT_USE
 
-    # pH, as of Wave W, clears the caution floor by two rows and no more. Pinned so that a
+    # pH, as of Wave W, cleared the caution floor by two rows and no more. Pinned so that a
     # drop back below 0.60 is visible as a change rather than absorbed silently.
+    # RE-PINNED 2026-08-28 (Wave X): 6/9 -> 6/10, and the axis is now EXACTLY ON the floor
+    # (0.600 against CAUTION_MIN_RATE 0.60). NO THRESHOLD MOVED -- both are asserted above.
+    # The new row is `HOX-03`: Hofmann & Schieberle 1998 Table 8 measures MFT rising 20x from
+    # pH 3 to pH 7 in a system containing no amino acid and no sugar (hydroxyacetaldehyde +
+    # mercapto-2-propanone), and the model predicts the IDENTICAL value at pH 3, 5 and 7,
+    # because that lane's three families appear in none of the pH sets in src/conditions.py.
+    # ONE MORE pH MISS TAKES THIS AXIS BACK TO do-not-use. That is not a reason to avoid
+    # adding pH rows; it is the reason to add them.
     assert dr.reliability_for_axis("ph", counts).verdict == dr.VERDICT_CAUTION
-    assert counts["ph"] == (6, 9)
+    assert counts["ph"] == (6, 10)
 
 
 def test_an_unmeasured_axis_is_reported_as_do_not_use_not_as_silence():
@@ -545,13 +553,38 @@ def test_the_sulfur_anchor_claim_is_checked_not_asserted():
         f"flag={status['zero_absolute_anchors']}, verified anchors={verified}."
     )
 
-    # As of Wave W there are three, from Hofmann & Schieberle 1998. Pinned so that losing
-    # them is a failure rather than a silent return to the old sentence.
+    # RE-PINNED 2026-08-28 (Wave X): three -> eight, all still from Hofmann & Schieberle
+    # 1998. The five new ones are the STEP-LEVEL rows -- Tables 3, 8 and 10 -- which
+    # constrain individual reaction steps rather than end-to-end lumps. Pinned so that
+    # losing any of them is a failure rather than a silent return to the old sentence.
     assert verified == [
+        "hofmann1998_c2c3_recombination_145C_20min_pH3",
+        "hofmann1998_c2c3_recombination_145C_20min_pH5",
+        "hofmann1998_c2c3_recombination_145C_20min_pH7",
         "hofmann1998_fructose_cysteine_145C_20min_pH5",
+        "hofmann1998_furan2aldehyde_h2s_145C_20min_pH5",
         "hofmann1998_glucose_cysteine_145C_20min_pH5",
+        "hofmann1998_norfuraneol_cysteine_145C_20min_pH5",
         "hofmann1998_ribose_cysteine_145C_20min_pH5",
     ], f"panel-verified sulfur anchors moved to {verified}"
+
+    # ADDED 2026-08-28 (Wave X). A NINTH primary-source-verified sulfur row is on the panel
+    # and is deliberately NOT in the list above: `hofmann1998_norfuraneol_h2s_145C_20min_pH5`
+    # is the fit target of results/validation/
+    # furanone_reductive_sulfhydrylation_refit_hofmann.json, so a constant was selected by
+    # looking at it and its agreement is not evidence about the model. It is SEPARATED, not
+    # dropped -- excluding a fitted row removes its misses as well as its hits, and this one
+    # is currently a miss (2.3x under). The guard pins that the split exists and that the two
+    # lists are disjoint, so a future wave cannot quietly promote a fitted row into the
+    # anchor count.
+    fitted = status["panel_verified_sulfur_values_that_are_fit_targets"]
+    assert fitted, "the Wave X fit target must still be recognised as one"
+    fitted_benchmarks = {row.split("/", 1)[0] for row in fitted}
+    assert fitted_benchmarks == {"hofmann1998_norfuraneol_h2s_145C_20min_pH5"}
+    assert not fitted_benchmarks.intersection(verified), (
+        "a fit target is being counted as an absolute literature anchor; agreement on a "
+        "row a constant was selected against carries no information about the model"
+    )
 
 
 def test_the_provenance_census_reproduces_the_readme_pinned_source_status_count():

@@ -291,8 +291,29 @@ def test_hofmann1998_after_the_refit():
     # READ THE MISS FOR WHAT IT IS: an error against a yardstick this repository invented.
     # It is NOT evidence about the chemistry, in either direction, and it must never be
     # quoted as accuracy against literature.
-    assert predicted["2-methyl-3-furanthiol"] == pytest.approx(78.09, rel=1e-3)
-    assert predicted["2-furfurylthiol"] == pytest.approx(293.67, rel=1e-3)
+    # RE-PINNED 2026-08-28 (Wave X -- THE NORFURANEOL ROUTE RETURNS AS A PARALLEL CHANNEL).
+    # MFT 78.09 -> 119.08, FFT 293.67 -> 282.87. NO BARRIER MOVED: the Wave X fit against
+    # Hofmann Table 4 was REJECTED by its own isotope gate and
+    # `furanone_reductive_sulfhydrylation` ships at the un-fitted `thiol_addition` class
+    # value 28.60 (results/validation/furanone_reductive_sulfhydrylation_refit_hofmann.json).
+    # CAUSE: `norfuraneol + H2S + 2[H] -> MFT + 2 H2O` was re-added as a THIRD MFT channel
+    # (src/reaction_templates.py::_norfuraneol_mft_parallel_route). Wave N had removed it on
+    # Cerny & Davidek's spiking result; Hofmann & Schieberle 1998 Table 4 MEASURES it when
+    # norfuraneol is FED (211.2 ug, 0.19 mol %, 14x the yield from ribose), and under the
+    # Wave S1 additive propagator "real but minor in situ" is expressible. The isotope
+    # constraint is now a REGRESSION TEST rather than the step's absence:
+    # tests/scientific/test_wave_x_step_level_2026_08.py::
+    # test_norfuraneol_route_stays_a_minor_share_of_ribose_mft_flux.
+    # MFT is WORSE against this file's number and is pinned worse (4.38x under -> 2.87x
+    # under is *closer* to 342, but 342 IS NOT A MEASUREMENT -- see the paragraph above --
+    # so "closer" here means nothing about the chemistry); FFT co-moves DOWN because the two
+    # lanes share upstream flux and MFT's share of a fixed budget grew.
+    # THE NUMBER THAT MATTERS IS ON THE REAL ANCHOR, NOT HERE: on
+    # hofmann1998_ribose_cysteine_145C_20min_pH5, whose 198 ppb IS a primary-source
+    # measurement, MFT went 468.58 -> 713.74, i.e. 2.37x over -> 3.61x OVER. The wave made
+    # the real panel row worse and says so in tasks/audit_remediation.md '## Wave X' (b).
+    assert predicted["2-methyl-3-furanthiol"] == pytest.approx(119.08, rel=1e-3)
+    assert predicted["2-furfurylthiol"] == pytest.approx(282.87, rel=1e-3)
     # Still under / still over — neither direction flipped.
     assert predicted["2-methyl-3-furanthiol"] < 342.0
     assert predicted["2-furfurylthiol"] > 200.0
@@ -382,8 +403,14 @@ def test_the_second_mft_channel_now_contributes_after_the_wave_s1_propagator_fix
     # the C2+C3 lane still contributes, and its share of MFT ROSE (ratio 1.2060 -> 1.6678)
     # because raising the pentodiulose barrier makes the pentodiulose-only lane weaker
     # relative to the C2+C3 lane, which does not run that step.
-    assert without["2-methyl-3-furanthiol"] == pytest.approx(46.82, rel=1e-3)
-    assert baseline["2-methyl-3-furanthiol"] == pytest.approx(78.09, rel=1e-3)
+    # RE-PINNED 2026-08-28 (Wave X -- A THIRD MFT CHANNEL). 46.82 -> 90.10 and 78.09 ->
+    # 119.08. NO BARRIER MOVED (the Wave X fit was rejected by its isotope gate). CAUSE: the
+    # norfuraneol -> MFT step returned as a parallel channel, so the "C2+C3 disabled" arm now
+    # carries TWO lanes (pentodiulose + norfuraneol) rather than one, which is why the
+    # without-figure nearly doubled. THE PROPERTY THIS TEST OWNS IS UNCHANGED: the C2+C3 lane
+    # still contributes, and it must, or the propagator has gone back to winner-takes-all.
+    assert without["2-methyl-3-furanthiol"] == pytest.approx(90.10, rel=1e-3)
+    assert baseline["2-methyl-3-furanthiol"] == pytest.approx(119.08, rel=1e-3)
     assert baseline["2-methyl-3-furanthiol"] > without["2-methyl-3-furanthiol"], (
         "the C2+C3 lane must contribute to predicted MFT. If this fails the flux "
         "propagator has gone back to winner-takes-all selection."
@@ -395,8 +422,12 @@ def test_the_second_mft_channel_now_contributes_after_the_wave_s1_propagator_fix
     # RE-PINNED 2026-08-27 (Wave S2c): 1.2060 -> 1.6678, i.e. +66.8% on the flagship number
     # rather than +20.6%. The lane got MORE important, not less, and for a mechanical reason:
     # the reverted barrier sits on the pentodiulose lane only.
+    # RE-PINNED 2026-08-28 (Wave X): 1.6678 -> 1.3216, i.e. +32.2% on the flagship number
+    # rather than +66.8%. The C2+C3 lane's SHARE fell, and it fell for an arithmetic reason
+    # with no bearing on the lane itself: the denominator gained a whole extra channel (the
+    # returned norfuraneol route). The lane's own contribution did not shrink.
     assert baseline["2-methyl-3-furanthiol"] / without["2-methyl-3-furanthiol"] == pytest.approx(
-        1.6678, rel=1e-3
+        1.3216, rel=1e-3
     )
 
 
@@ -416,7 +447,21 @@ def test_norfuraneol_has_consumers_again_and_they_are_the_evidenced_ones():
         for s in steps
         if any(r.label == "norfuraneol" for r in s.reactants)
     }
-    assert consumers == {"Furanone_Reductive_Opening"}
+    # RE-PINNED 2026-08-28 (Wave X). Norfuraneol has a SECOND consumer again:
+    # `Furanone_Reductive_Sulfhydrylation`, the Hofmann Figure 1 route to MFT, re-added as a
+    # SLOW PARALLEL channel constrained by that paper's Table 4 (211.2 ug MFT from FED
+    # norfuraneol, 14x the yield from ribose). This does NOT reinstate the claim Wave N
+    # retired. Cerny & Davidek 2003's spiking experiment says the route is unimportant IN
+    # SITU, not that it does not exist, and the in-situ share is now asserted to stay a
+    # MINORITY in tests/scientific/test_wave_x_step_level_2026_08.py::
+    # test_norfuraneol_route_stays_a_minor_share_of_ribose_mft_flux (measured 34.3%, ceiling
+    # 0.50 from the source's word "mainly"). The barrier for the new step is NOT the retired
+    # `thiol_addition_norfuraneol` 26.85; the fit that would have moved it was rejected by
+    # that same gate. Full argument: tasks/audit_remediation.md '## Wave X' (a) and (b).
+    # The assertion below still owns the property this test was written for -- that the
+    # EVIDENCED norfuraneol fate is present -- and now also pins the exact size of the set,
+    # so a third consumer cannot appear silently.
+    assert consumers == {"Furanone_Reductive_Opening", "Furanone_Reductive_Sulfhydrylation"}
 
     products = {p.label for s in steps for p in s.products}
     assert "2,3-pentanedione" in products

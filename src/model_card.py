@@ -333,13 +333,23 @@ def collect_sulfur_anchor_status() -> Dict[str, Any]:
     # measured against, and hiding that it fails it). So the panel is scanned too, and
     # `zero_absolute_anchors` is now false iff a PANEL benchmark carries a
     # primary-source-verified sulfur value.
+    # 2026-08-28 (Wave X). A SECOND scan was added alongside the first, and the reason is
+    # the audit's own rule rather than tidiness: a benchmark that a constant was FITTED
+    # against is not evidence about the model, so listing it among the anchors the model
+    # "fails" would be circular in the flattering direction the moment it stopped failing.
+    # Wave X ingested the first step-level sulfur rows and declared one of them
+    # (hofmann1998_norfuraneol_h2s_145C_20min_pH5, Hofmann Table 4) a fit target. It is
+    # separated out here rather than dropped, because dropping it would hide a row that IS
+    # currently a miss -- exclusion has to be symmetric about which direction it flatters.
     verified: List[str] = []
+    fitted: List[str] = []
     benchmark_dir = ROOT / "data" / "benchmarks"
     if benchmark_dir.is_dir():
         for path in sorted(benchmark_dir.glob("*.json")):  # non-recursive: hold-out stays out
             other = _read_json(path)
             if not isinstance(other, Mapping):
                 continue
+            is_fit_target = "fit_target_declaration" in other
             for name, record in (other.get("measured_volatiles") or {}).items():
                 if not isinstance(record, Mapping):
                     continue
@@ -347,7 +357,7 @@ def collect_sulfur_anchor_status() -> Dict[str, Any]:
                     continue
                 if not _is_sulfur_analyte(str(name)):
                     continue
-                verified.append(f"{path.stem}/{name}")
+                (fitted if is_fit_target else verified).append(f"{path.stem}/{name}")
     return {
         "available": True,
         "path": _relative(SULFUR_BENCHMARK_PATH),
@@ -357,6 +367,15 @@ def collect_sulfur_anchor_status() -> Dict[str, Any]:
         "panel_verified_sulfur_values": sorted(verified),
         "panel_verified_sulfur_benchmarks": sorted(
             {row.split("/", 1)[0] for row in verified}
+        ),
+        "panel_verified_sulfur_values_that_are_fit_targets": sorted(fitted),
+        "fit_target_note": (
+            "Rows listed under `..._that_are_fit_targets` carry a `fit_target_declaration` "
+            "block, i.e. a constant was selected by looking at them. They are primary-source "
+            "verified and they are NOT counted as anchors: agreement on a fitted row carries "
+            "no information about the model. They are listed rather than deleted because "
+            "excluding a fitted row removes its MISSES as well as its hits, and at the time "
+            "of writing the one row here is a miss."
         ),
         "zero_absolute_anchors": not anchored and not verified,
     }
@@ -471,7 +490,30 @@ def _headline_sentences(card: Mapping[str, Any]) -> List[str]:
                 + " absolute literature anchors, and the model fails every one of them.** "
                 "They are the primary-source-verified stable-isotope-dilution rows in "
                 + ", ".join(sulfur.get("panel_verified_sulfur_benchmarks") or [])
-                + ". The previously shipped claim of ZERO anchors was corrected on 2026-08-28 "
+                + ". "
+                + (
+                    (
+                        "A further "
+                        + str(len({
+                            row.split("/", 1)[0]
+                            for row in (sulfur.get(
+                                "panel_verified_sulfur_values_that_are_fit_targets"
+                            ) or [])
+                        }))
+                        + " primary-source-verified sulfur row(s) are on the panel and are NOT "
+                        "counted here, because a constant was selected by looking at them ("
+                        + ", ".join(sorted({
+                            row.split("/", 1)[0]
+                            for row in (sulfur.get(
+                                "panel_verified_sulfur_values_that_are_fit_targets"
+                            ) or [])
+                        }))
+                        + "): agreement on a fitted row is not evidence about the model. "
+                    )
+                    if sulfur.get("panel_verified_sulfur_values_that_are_fit_targets")
+                    else ""
+                )
+                + "The previously shipped claim of ZERO anchors was corrected on 2026-08-28 "
                 "(Wave W) when the full text behind them was obtained; the retired benchmark ("
                 + Path(sulfur.get("path", "")).stem
                 + ") is kept in the tree as the provenance record of the values that were not "

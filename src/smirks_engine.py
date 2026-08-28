@@ -423,6 +423,7 @@ from src.reaction_templates import (
     _acrylamide_formation, _cml_cel_formation, _thiamine_degradation, _furanone_generation,
     _glutathione_cleavage, _furanone_and_mft_route, _thiol_reductant_pool,
     _c2_c3_mft_recombination, _norfuraneol_mercaptopentanone_route,
+    _norfuraneol_mft_parallel_route,
 )
 # ──────────────────────────────────────────────────────────────────────────
 # Tier A: SMIRKS application
@@ -823,6 +824,19 @@ class SmirksEngine:
         #   2,3-pentanedione + H2S + 2[H] -> 2-mercapto-3-pentanone + H2O
         _add_steps(_norfuraneol_mercaptopentanone_route(pool_list()))
         _add_steps(_norfuraneol_mercaptopentanone_route(pool_list()))
+
+        # 3e-1d. NORFURANEOL -> MFT, re-added as a SLOW PARALLEL channel (Wave X,
+        # 2026-08-28). Wave N removed this step on Cerny & Davidek's spike result;
+        # Hofmann & Schieberle 1998 Table 4 MEASURES it directly when norfuraneol is
+        # FED (211.2 ug MFT, 0.19 mol %, 14x the yield from ribose). Those two facts
+        # are compatible under the Wave S1 ADDITIVE propagator -- a slow parallel
+        # route carries little flux in situ and carries the system when its substrate
+        # is the feed -- and the isotope constraint is now enforced as a REGRESSION
+        # TEST on the ribose system rather than by the step's absence. The full
+        # argument is in `_norfuraneol_mft_parallel_route`'s docstring and in
+        # tasks/audit_remediation.md "## Wave X" (a). Runs AFTER 3e-1/3e-1b so that
+        # MFT from all three channels lands in one pool species.
+        _add_steps(_norfuraneol_mft_parallel_route(pool_list()))
 
         # 3e-2. DEMOTED one-step 3-deoxyosone shortcut, kept only for hexose
         #       reachability; see `_mft_pathway`'s docstring.

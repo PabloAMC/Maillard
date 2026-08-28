@@ -28,7 +28,13 @@ def _load_precursors() -> Dict[str, dict]:
         data = yaml.safe_load(f)
 
     _LOOKUP = {}
-    for category in ("amino_acids", "sugars", "exogenous_precursors", "lipids"):
+    # 2026-08-28 (Wave X): `maillard_intermediates` added.  The tuple below is the
+    # ONLY place the resolver learns which YAML blocks are precursor blocks, so a
+    # category added to the file but not here is silently invisible -- that is how
+    # `lipids` behaved before it was added, and it is why the list is spelled out
+    # rather than derived from `data.keys()`: an accidental top-level key in the
+    # YAML must not become a resolvable precursor.
+    for category in ("amino_acids", "sugars", "exogenous_precursors", "lipids", "maillard_intermediates"):
         for entry in data.get(category, []):
             name = entry["name"]
             # Index by multiple keys for fuzzy matching:
@@ -49,7 +55,27 @@ def _load_precursors() -> Dict[str, dict]:
                     if base.lower().startswith(prefix):
                         keys.append(base.lower()[len(prefix):])
 
+            # 2026-08-28 (Wave X): explicit `aliases`.  The prefix/parenthesis
+            # heuristics above cover "D-Ribose" -> "ribose" but cannot cover the
+            # synonym pairs the sulfur literature actually uses -- furan-2-aldehyde /
+            # furfural, 2-oxopropanal / methylglyoxal / pyruvaldehyde, norfuraneol /
+            # NF, hydrogen sulfide / H2S.  Those are DIFFERENT WORDS, not decorations
+            # on the same word, so no amount of string surgery reaches them and the
+            # synonym has to be declared in the data file next to the SMILES it means.
+            for alias in entry.get("aliases", []) or []:
+                alias_key = str(alias).strip().lower()
+                if alias_key:
+                    keys.append(alias_key)
+
             for key in keys:
+                # An alias must never silently steal a name another entry already
+                # owns; that would make resolution depend on YAML ordering.
+                if key in _LOOKUP and _LOOKUP[key]["name"] != name:
+                    raise ValueError(
+                        f"precursor key collision: {key!r} is claimed by both "
+                        f"{_LOOKUP[key]['name']!r} and {name!r} in "
+                        f"{_PRECURSORS_PATH.name}"
+                    )
                 _LOOKUP[key] = entry
 
     return _LOOKUP

@@ -1,0 +1,77 @@
+{
+  "benchmark_id": "hofmann1998_c2c3_recombination_145C_20min_pH3",
+  "source_doi": "10.1021/jf9705983",
+  "source_metadata": {
+    "citation": "Hofmann, T.; Schieberle, P. Quantitative Model Studies on the Effectiveness of Different Precursor Systems in the Formation of the Intense Food Odorants 2-Furfurylthiol and 2-Methyl-3-furanthiol. J. Agric. Food Chem. 1998, 46 (1), 235-241. DOI 10.1021/jf9705983.",
+    "origin": "external_literature",
+    "access": "Full text obtained by the repository owner via interlibrary loan and read from data/articles/hofmann1998.pdf (gitignored; the PDF is NOT committed - only extracted data enters the repo). Wave X (2026-08-28) re-read pages 237-240 of the PDF directly, as rendered page images, and re-checked every value in this file against the printed table. It did NOT take them from Wave W's transcription or from any digest."
+  },
+  "content_verification": {
+    "access_level": "full_text",
+    "retrieval_date": "2026-08-28",
+    "quantification_class": "stable_isotope_dilution_gcms",
+    "quoted_method": "EXPERIMENTAL PROCEDURES, Model Experiments, verbatim: 'In a first series of experiments, the reactants (cf. amounts detailed in the tables) were dissolved in phosphate buffer (0.5 mol/L) at pH 3.0, 5.0, or 7.0 and thermally treated for 20 min at 145 degC in a laboratory autoclave (200 mL; Type II; Roth, Germany).'",
+    "quoted_quantification": "EXPERIMENTAL PROCEDURES, Quantitation of FFT and MFT by SIDA, verbatim: 'After cooling of the reaction mixtures to 20 degC, the internal standards [2H2]-2-furfurylthiol and [2H3]-2-methyl-3-furanthiol (10 ug each dissolved in 0.5 mL of pentane) were added to the aqueous reaction mixtures and, after equilibration for 10 min, the analyte and the labeled standard were isolated by extraction with diethyl ether (three times, total volume = 60 mL). After drying over Na2SO4, quantitation of FFT and MFT was performed by mass chromatography using the fragment ions and response factors as described recently (Guth et al., 1995).'",
+    "quoted_table_footnotes": "Table 8 footnote a, verbatim: 'An aqueous solution (50 mL) of hydroxyacetaldehyde (1 mmol) and mercapto-2-propanone (1 mmol) was reacted in a laboratory autoclave.' Footnote b: 'See footnote b in Table 1.' Footnote c (experiment 4, NOT ingested here): 'A mixture of hydroxyacetaldehyde (1 mmol) and mercapto-2-propanone (1 mmol) was intimately mixed with silica gel (3.0 g containing 300 uL of phosphate buffer, pH 5.0) and was dry-heated for 6 min at 180 degC.' Table 1 footnote b, verbatim: 'Data are mean values of triplicates and differed by not more than 10%.' Every step-level table in this paper carries 'See footnote b in Table 1', so that +/-10% replicate spread is the stated precision of every value in this file.",
+    "quoted_row": "Table 8, row verbatim: '1 3.0 26.1 0.02 15.5 0.01'.",
+    "quantification_verdict": "ADMISSIBLE AND ABSOLUTE for FFT and MFT: deuterated analogues of both ([2H2]-FFT, [2H3]-MFT) are spiked into the reaction mixture before extraction and quantitation is by mass chromatography against them. This is stable-isotope dilution analysis."
+  },
+  "unit_basis": "STATED BASIS, NO FREE PARAMETER. The paper prints micrograms of product and the table footnote states the system volume: 'An aqueous solution (50 mL)'. ug per 50 mL x 20 = ug/L; the medium is dilute aqueous buffer, density ~1 kg/L, so ug/L is numerically ug/kg = ppb on the model's own basis. One stated multiplication, no assumed concentration. The mol% column is reproduced alongside and is INDEPENDENTLY VERIFIED here: mol% = mol product / mol limiting precursor (1 mmol) x 100. This is the same discipline that distinguishes these rows from the retired data/benchmarks/cys_ribose_140C_Hofmann1998.json, whose ppb rested on an unattested 10 mM basis.",
+  "protein_type": "free",
+  "denaturation_state": 0.0,
+  "precursors": {
+    "Hydroxyacetaldehyde": {
+      "concentration_mM": 20.0
+    },
+    "Mercapto-2-propanone": {
+      "concentration_mM": 20.0
+    }
+  },
+  "conditions": {
+    "temp_C": 145.0,
+    "ph": 3.0,
+    "water_activity": 0.98,
+    "time_min": 20.0
+  },
+  "condition_provenance": {
+    "status": "FULLY_STATED_IN_SOURCE for T, t, pH, volume and moles.",
+    "derivation": "Temperature and time from the Methods block quoted above (20 min at 145 degC in a laboratory autoclave); pH, volume and precursor moles from the table's own footnote, quoted above. 1 mmol in 50 mL = 20.0 mM; 2 mmol in 50 mL = 40.0 mM. Nothing is inferred.",
+    "water_activity_note": "water_activity 0.98 is ASSERTED, not measured: the paper states no water activity for any experiment. 0.98 is the value the repository uses for dilute aqueous buffer and is the same value Wave W used for the Table 1/Table 2 aqueous rows, so these rows sit on the same assumption as the rows they are compared against. It is an assumption; it is not evidence. The DRY-HEAT rows of this paper (Table 2 column 5.0c and Table 8 experiment 4) are NOT ingested as absolute rows anywhere, because for them the assumption would have to be invented from nothing - see Wave W.",
+    "headspace_caveat": "The autoclave is a closed 200 mL vessel holding 50 mL of solution, so there is a ~150 mL headspace. The engine has no closed-vessel gas-liquid partition term. For the rows charged with HYDROGEN SULFIDE this cuts both ways and is stated loudly: a large share of the 1 or 2 mmol of H2S is in the gas phase at 145 degC, so the aqueous H2S the model reacts with at a nominal 20 or 40 mM is an UPPER BOUND on the real one, and any product lost to that headspace is a systematic bias the model cannot see. Recorded, not corrected."
+  },
+  "wave_x_split_reasoning": "FIT / SCORED SPLIT, DECIDED AND WRITTEN DOWN BEFORE THE FIT WAS RUN (Wave X, 2026-08-28). Exactly ONE measurement in this ingestion is a FIT TARGET: the norfuraneol + H2S -> MFT row (Table 4 NF row, 211.2 ug = 4224 ppb, reprinted identically as the NF/H2S row of Table 10). It constrains the ONE new barrier this wave adds, `furanone_reductive_sulfhydrylation`, and is declared as `fit_target` in results/validation/furanone_reductive_sulfhydrylation_refit_hofmann.json so `scripts/ci/fit_target_gate.py` removes it from scored evidence automatically rather than by anyone remembering to. EVERY OTHER ROW IN THIS WAVE IS SCORED. In particular the NF/cysteine row of Table 10 is SCORED, deliberately: it runs through the same new barrier but supplies its H2S from cysteine instead of as a charge, so it tests whether the fitted constant TRANSFERS to a system it was not fitted on. NOTHING from this wave enters the frozen data/benchmarks/external_validation/maillard_path/ hold-out, which is untouched.",
+  "metadata": {
+    "tier": "PRIMARY",
+    "family": "free_aa_sulfur",
+    "execution_path": "free_precursor",
+    "notes": "WAVE X (2026-08-28). Hofmann & Schieberle 1998 Table 8, experiment 1: 1 mmol hydroxyacetaldehyde + 1 mmol mercapto-2-propanone in 50 mL at pH 3.0, 145 degC / 20 min. This is the C2 + C3 recombination lane Wave P added to the network ON THE STRENGTH OF THIS VERY PAPER, from its abstract, without being able to execute the measurement; Wave X can. The paper's own conclusion is that 'mercapto-2-propanone and hydroxyacetaldehyde are important intermediates involved in MFT generation during food processing'.  THE FFT HALF OF THIS TABLE IS NOT SCORED AND THE REASON IS STRUCTURAL, NOT EVIDENTIAL: Hofmann's Figure 3 shows TWO regiochemical outcomes of the same aldol - attack by the METHYLENE group of mercapto-2-propanone gives 4,5-dihydroxy-3-mercapto-2-pentanone and hence MFT, while attack by the METHYL group gives 4,5-dihydroxy-1-mercapto-2-pentanone and hence FFT. The network implements only the MFT branch (Wave P), so its predicted FFT here is structurally zero. Recording that as a scored miss would let a MISSING STEP masquerade as a numerical error, and recording it as a pass would be worse; the measurement is therefore carried in `unreachable_analytes` with the missing step named. Experiment 4 (dry, silica gel, 180 degC / 6 min - the paper's headline 1.39 mol% MFT) is NOT ingested as an absolute row: the paper states no water activity and no system mass for it, so both the engine's `water_activity` input and the ug->ppb denominator would have to be invented."
+  },
+  "validation_contract": {
+    "scale_thresholds": {
+      "max_ratio": 1.1,
+      "mean_abs_log10_error": 0.0414
+    },
+    "derivation": "DERIVED FROM THE MEASUREMENT'S OWN STATED PRECISION AND FROM NOTHING ELSE. Table 1 footnote b, verbatim: 'Data are mean values of triplicates and differed by not more than 10%.' Every step-level table in this paper carries 'See footnote b in Table 1', so that +/-10% replicate spread is the stated precision of every value in this file. A 10% replicate spread is a multiplicative tolerance of 1.10x; log10(1.10) = 0.041393, rounded to 0.0414. Identical to the contract Wave W derived for the Table 1 rows, from the same footnote, so the step-level rows and the end-to-end rows are held to the same standard.",
+    "what_this_contract_is_and_is_not": "It is the tolerance THE DATA SUPPORTS, not a claim that the model meets it. On the day it was written the model does not come close on any row in this wave; see the Wave X table in tasks/audit_remediation.md. The contract is set AT the measurement's precision, which is stricter than the repository's global free-precursor default (1.5 / 0.10). Nothing was widened so a row would pass."
+  },
+  "measured_volatiles": {
+    "2-Methyl-3-furanthiol (MFT)": {
+      "conc_ppb": 310.0,
+      "uncertainty_pct": 10,
+      "value_status": "primary_source_verified",
+      "smiles": "Cc1occc1S",
+      "provenance": "Table 8, experiment 1 (pH 3.0), MFT columns: 15.5 ug per 50 mL -> 310.0 ug/L = 310.0 ppb; printed mol% 0.01. INDEPENDENTLY VERIFIED: 15.5e-6 g / 114.17 g/mol = 1.3576e-07 mol; per 1 mmol charged = 0.014 mol%."
+    }
+  },
+  "unreachable_analytes": {
+    "2-Furfurylthiol (FFT)": {
+      "conc_ppb": 522.0,
+      "uncertainty_pct": 10,
+      "value_status": "primary_source_verified",
+      "smiles": "SCc1ccco1",
+      "provenance": "Table 8, experiment 1 (pH 3.0), FFT columns: 26.1 ug per 50 mL -> 522.0 ug/L = 522.0 ppb; printed mol% 0.02.",
+      "why_not_scored": "MISSING STEP, not missing accuracy. The FFT branch of Hofmann's Figure 3 - nucleophilic attack by the METHYL group of mercapto-2-propanone on hydroxyacetaldehyde, giving 4,5-dihydroxy-1-mercapto-2-pentanone (IIa) which cyclises and dehydrates to 2-furfurylthiol (IIb) - is NOT implemented in src/reaction_templates.py::_c2_c3_mft_recombination, which implements only the methylene/MFT branch. Predicted FFT is therefore exactly 0.0 ppb by construction. Scoring a structural zero against a real measurement would report a missing step as a calibration error and would be silently dropped from the mean-absolute-log10 aggregate (which skips non-positive predictions), i.e. a total miss would cost nothing. The value is kept here, verified, so the step can be specified and the row promoted the day it is implemented.",
+      "step_needed": "glycolaldehyde + 1-mercapto-2-propanone -> 4,5-dihydroxy-1-mercapto-2-pentanone (C2H4O2 + C3H6OS -> C5H10O3S, exact), then -> 2-furfurylthiol + 2 H2O (C5H10O3S -> C5H6OS + 2 H2O, exact). Both structures are NAMED and DRAWN in Hofmann & Schieberle 1998 Figure 3 (intermediates IIa and IIb); neither would be invented."
+    }
+  }
+}

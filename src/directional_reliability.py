@@ -177,9 +177,14 @@ def verdict_for(agree: int, evaluable: int) -> str:
 
 _AXIS_NOTES = {
     "ph": (
-        "pH is 6/9 on the panel and 6/12 combined with water activity -- at chance when the two "
-        "axes are pooled, and only two rows above the floor on its own (Wave W, 2026-08-28; "
-        "was 4/7 and 4/10). The model licenses no pH recommendation."
+        "pH is 6/10 on the panel and 6/13 combined with water activity -- BELOW chance when the "
+        "two axes are pooled, and EXACTLY ON the caution floor on its own: one more miss makes it "
+        "do-not-use (Wave X, 2026-08-28; was 6/9 and 6/12 at Wave W, and 4/7 and 4/10 before "
+        "that). The Wave X row is the sharpest of them: Hofmann's hydroxyacetaldehyde + "
+        "mercapto-2-propanone system, which has no amino acid and no sugar to confound it, "
+        "measures MFT rising 20x from pH 3 to pH 7 and the model predicts the IDENTICAL value at "
+        "pH 3, 5 and 7, because that lane carries no pH term at all. The model licenses no pH "
+        "recommendation."
     ),
     "moisture_aw": (
         "Water activity is 0/3 and the miss is STRUCTURAL, not a wiring bug: HMF and furfural "

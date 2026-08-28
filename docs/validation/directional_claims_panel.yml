@@ -1599,3 +1599,226 @@ panel:
       (initial) or 3.9 (final) would each be a choice this repository would then be scoring
       itself against. NOT MADE. WHAT WOULD MAKE IT EVALUABLE: a time-varying pH input, plus a
       buffer-catalysis term keyed to the enolisation branch.
+
+  # ── WAVE X (2026-08-28): the step-level tables ────────────────────────────
+  # Seven claims from Hofmann & Schieberle 1998 Tables 3, 6, 7, 8 and 10 — the tables
+  # that constrain INDIVIDUAL STEPS. Three are evaluable. Every value below was read
+  # from the rendered page images of data/articles/hofmann1998.pdf by Wave X and
+  # cross-checked against the paper's own mol% column by an independent arithmetic
+  # route; the conversions are recorded in the benchmark files under
+  # data/benchmarks/hofmann1998_* and data/benchmarks/step_level_unreachable/.
+  #
+  # ONE OF THESE ROWS TOUCHES A FIT TARGET AND IS LABELLED FOR IT. The NF/H2S system
+  # (Table 4 = Table 10 row 2) is the sole fit target of
+  # results/validation/furanone_reductive_sulfhydrylation_refit_hofmann.json, so
+  # HOX-01 and HOX-02, which use it as one side of a comparison, are `fit_adjacent`
+  # and are EXCLUDED FROM THE HEADLINE — even though the fit was REJECTED by its own
+  # isotope gate and moved no constant. A rejected fit still means a value was
+  # selected by looking at that row, and the conservative classification is the one
+  # that does not have to be argued for.
+
+  - claim_id: HOX-01
+    statement: "Of the four MFT precursor systems in Table 10, the hydroxyacetaldehyde/mercapto-2-propanone pair is the most effective - ahead of norfuraneol/H2S (268.1 vs 211.2 ug)."
+    claim_type: ordering
+    category: ranking
+    observables: ["MFT"]
+    conditions:
+      A:
+        label: "hydroxyacetaldehyde + mercapto-2-propanone, 1 mmol each in 50 mL, 145 C 20 min pH 5.0"
+        system: {precursors: {Hydroxyacetaldehyde: 20.0, Mercapto-2-propanone: 20.0}, temp_C: 145, ph: 5.0, water_activity: 0.98, time_min: 20}
+      B:
+        label: "norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0"
+        system: {precursors: {Norfuraneol: 20.0, Hydrogen sulfide: 20.0}, temp_C: 145, ph: 5.0, water_activity: 0.98, time_min: 20}
+    expected_relation: "A>B"
+    source:
+      ref: hofmann1998
+      quote: "hydroxyacetaldehyde/mercapto-2-propanone 268.1 0.24 | NF/H2S 211.2 0.19 | NF/cysteine 50.8 0.05 | thiamin 8.2 0.01"
+      quote_form: table_row_reformatted
+      quote_form_note: >-
+        Table 10, "Amounts of MFT Liberated from Various Precursors or Precursor Systems",
+        columns "MFT" = ugb | %. The four rows are verbatim; the column separator was
+        rewritten as "|" and the rows joined onto one line. Footnote a: "An aqueous solution
+        (50 mL) of the precursors was reacted at pH 5.0 in a laboratory autoclave." Footnote
+        b: "See footnote b in Table 1." The stub column head states the charge: "precursor
+        (1.0 mmol) each". 268.1/211.2 = 1.27x, outside the +/-10% replicate spread.
+    fit_status: fit_adjacent
+    fit_note: >-
+      The B side is `hofmann1998_norfuraneol_h2s_145C_20min_pH5`, the sole fit target of
+      results/validation/furanone_reductive_sulfhydrylation_refit_hofmann.json. The fit was
+      REJECTED by its isotope gate and moved no constant, so no value in the tree was
+      actually chosen by looking at this row - but a rejected fit is still a look, and the
+      conservative classification needs no argument. Excluded from the headline.
+    model_scope_note: "Expressible: all four precursors resolve (Wave X) and MFT is a model observable."
+
+  - claim_id: HOX-02
+    statement: "Norfuraneol with H2S is a far better MFT precursor than norfuraneol with cysteine (211.2 vs 50.8 ug) - an equimolar cysteine charge delivers much less effective sulfur than free H2S."
+    claim_type: ordering
+    category: ranking
+    observables: ["MFT"]
+    conditions:
+      A:
+        label: "norfuraneol + H2S, 1 mmol each in 50 mL, 145 C 20 min pH 5.0"
+        system: {precursors: {Norfuraneol: 20.0, Hydrogen sulfide: 20.0}, temp_C: 145, ph: 5.0, water_activity: 0.98, time_min: 20}
+      B:
+        label: "norfuraneol + cysteine, 1 mmol each in 50 mL, 145 C 20 min pH 5.0"
+        system: {precursors: {Norfuraneol: 20.0, L-Cysteine: 20.0}, temp_C: 145, ph: 5.0, water_activity: 0.98, time_min: 20}
+    expected_relation: "A>B"
+    source:
+      ref: hofmann1998
+      quote: "hydroxyacetaldehyde/mercapto-2-propanone 268.1 0.24 | NF/H2S 211.2 0.19 | NF/cysteine 50.8 0.05 | thiamin 8.2 0.01"
+      quote_form: table_row_reformatted
+      quote_form_note: >-
+        As HOX-01. 211.2/50.8 = 4.16x, far outside the replicate spread. This is the
+        cleanest sulfur-donor comparison in the paper: the carbon precursor, the charge, the
+        volume, the pH and the thermal treatment are all identical and only the sulfur
+        source differs.
+    fit_status: fit_adjacent
+    fit_note: "As HOX-01: the A side is the fit target. Excluded from the headline."
+    model_scope_note: >-
+      Expressible, and worth watching: the model has no explicit account of how much H2S a
+      mole of cysteine delivers - `Cysteine_Degradation` and `Beta_Elimination` each emit one
+      H2S per cysteine with no yield term - so a system given cysteine has, in the model's
+      bookkeeping, roughly the sulfur a system given H2S has. This row is where that
+      simplification becomes measurable.
+
+  - claim_id: HOX-03
+    statement: "From hydroxyacetaldehyde + mercapto-2-propanone, MFT formation RISES strongly with pH: 15.5 ug at pH 3.0, 268.1 at pH 5.0, 311.5 at pH 7.0 - a 20x rise from pH 3 to pH 7."
+    claim_type: ordering
+    category: ph
+    observables: ["MFT"]
+    conditions:
+      A:
+        label: "hydroxyacetaldehyde + mercapto-2-propanone at pH 7.0"
+        system: {precursors: {Hydroxyacetaldehyde: 20.0, Mercapto-2-propanone: 20.0}, temp_C: 145, ph: 7.0, water_activity: 0.98, time_min: 20}
+      B:
+        label: "hydroxyacetaldehyde + mercapto-2-propanone at pH 3.0"
+        system: {precursors: {Hydroxyacetaldehyde: 20.0, Mercapto-2-propanone: 20.0}, temp_C: 145, ph: 3.0, water_activity: 0.98, time_min: 20}
+    expected_relation: "A>B"
+    source:
+      ref: hofmann1998
+      quote: "1 3.0 26.1 0.02 15.5 0.01 | 2 5.0 40.5 0.04 268.1 0.23 | 3 7.0 58.2 0.05 311.5 0.27"
+      quote_form: table_row_reformatted
+      quote_form_note: >-
+        Table 8, "Amounts of FFT and MFT Generated from Hydroxyacetaldehyde and
+        Mercapto-2-propanone", columns expt | pH | FFT ugb | % | MFT ugb | %. Experiments
+        1-3 (the aqueous ones) are verbatim; the column separator was rewritten as "|" and
+        the rows joined onto one line. Experiment 4 is the DRY system and is deliberately
+        not quoted here. Footnote a: "An aqueous solution (50 mL) of hydroxyacetaldehyde
+        (1 mmol) and mercapto-2-propanone (1 mmol) was reacted in a laboratory autoclave."
+        The paper's own prose: "At pH 3.0, low concentrations of both odorants were formed.
+        Increasing the pH to 5.0 significantly favored the formation of the MFT."
+    fit_status: independent
+    fit_note: >-
+      Both sides are PANEL benchmarks (hofmann1998_c2c3_recombination_145C_20min_pH7 and
+      _pH3, ingested in this wave) and NEITHER is a fit target. The only fit run in Wave X
+      was against the norfuraneol/H2S row and it was rejected.
+    model_scope_note: >-
+      Expressible in principle and, as it turns out, NOT expressible in practice - which is
+      the finding. This lane's three families (`Mercaptoketone_Formation`,
+      `Mercaptoketone_Aldol_Addition`, `Mercaptoketone_Cyclodehydration`) appear in none of
+      the pH sets in src/conditions.py, so the lane carries NO pH term at all and predicts
+      the identical value at pH 3, 5 and 7. Wave P chose that deliberately, and said so:
+      reaching the existing machinery would have required a family name containing the
+      substring "furfural", "a naming trick, not a model". This row is the measurement that
+      turns that recorded caveat into a scored miss.
+
+  - claim_id: HOX-04
+    statement: "Thiamin is by far the weakest of the four MFT precursor systems - 8.2 ug against 268.1 for the C2+C3 pair, a factor of 33."
+    claim_type: ordering
+    category: ranking
+    observables: ["MFT"]
+    evaluable: false
+    expected_relation: "A<B"
+    conditions: {}
+    source:
+      ref: hofmann1998
+      quote: "Thiamin was less efficient, because by factors of 30 or 25 less MFT was generated compared to the two binary precursor mixtures."
+    fit_status: independent
+    model_scope_note: >-
+      UNEVALUABLE - THE THIAMIN-ONLY SYSTEM PREDICTS NOTHING AT ALL, and the reason is not
+      about thiamine chemistry. `SmirksEngine.enumerate` on thiamine alone emits SEVEN steps
+      and does reach MFT; the FLUX PROPAGATOR then returns an empty dict, because
+      `Recommender.predict_from_steps` seeds its tracking dict from the initial
+      concentrations only and `_evaluate_step` refuses any step whose reactant is untracked.
+      Thiamine's first step is a HYDROLYSIS - "Thiamine + water -> thiazole + pyrimidinium" -
+      water is not in the initial pool, and nothing has yet produced any. WATER IS NOT A
+      TRACKED SPECIES, so a hydrolytic step cannot be the FIRST step of a system. Every other
+      benchmark hides this: a sugar + amino acid system makes water in its own first step.
+      Recorded in full in data/benchmarks/step_level_unreachable/
+      hofmann1998_UNREACHABLE_thiamin_145C_20min_pH5.json. WHAT WOULD MAKE IT EVALUABLE: a
+      seeded water pool - which is not a local change, because it moves every
+      water-consuming step on the panel.
+
+  - claim_id: HOX-05
+    statement: "From hydroxyacetaldehyde + 2-oxopropanal, BOTH furan-2-aldehyde and norfuraneol rise strongly and monotonically with pH (FA 101.2 -> 364.5 -> 1443.1 ug; NF 153.1 -> 885.1 -> 3610.5 ug at pH 3 / 5 / 7), and NF exceeds FA at every pH."
+    claim_type: ordering
+    category: ph
+    observables: ["FFT"]
+    evaluable: false
+    expected_relation: "A>B"
+    conditions: {}
+    source:
+      ref: hofmann1998
+      quote: "3.0 101.2 0.11 153.1 0.13 | 5.0 364.5 0.40 885.1 0.78 | 7.0 1443.1 1.60 3610.5 3.18"
+      quote_form: table_row_reformatted
+      quote_form_note: >-
+        Table 6, "Amounts of Furan-2-aldehyde (FA) and NF Generated from Hydroxyacetaldehyde
+        and 2-Oxopropanal", columns pH | FA ugb | % | NF ugb | %. Rows verbatim, separator
+        rewritten as "|". Footnote a: "An aqueous solution (50 mL) of hydroxyacetaldehyde
+        (1 mmol) and 2-oxopropanal (1 mmol) was reacted in a laboratory autoclave."
+    fit_status: independent
+    model_scope_note: >-
+      UNEVALUABLE - MISSING STEP. Fed hydroxyacetaldehyde + 2-oxopropanal enumerate ZERO
+      steps: the network fragments sugars (`Retro_Aldol_Fragmentation`, `Enolisation_2_3`)
+      and has no step running the other way. This is the cleanest pH experiment in the paper
+      - no amino acid, no sugar, two C2/C3 fragments and a 14x (FA) / 24x (NF) rise across
+      four pH units - and the model cannot attempt it. WHAT WOULD MAKE IT EVALUABLE: the two
+      aldol branches Hofmann & Schieberle DRAW AND NAME in their Figure 2, both exactly
+      balanced with species the engine already has; see data/benchmarks/
+      step_level_unreachable/hofmann1998_UNREACHABLE_c2c3_aldol_145C_20min_pH5.json.
+
+  - claim_id: HOX-06
+    statement: "Doubling the H2S charge more than doubles mercapto-2-propanone formation from 2-oxopropanal (1650 -> 3600 ug); H2S is the limiting reagent."
+    claim_type: ordering
+    category: additive_cysteine
+    observables: ["MFT"]
+    evaluable: false
+    expected_relation: "A>B"
+    conditions: {}
+    source:
+      ref: hofmann1998
+      quote: "Because higher H2S concentrations increased the formation of the mercaptoketone (Table 7), it might be assumed that H2S is the limiting factor in this reaction."
+    fit_status: independent
+    model_scope_note: >-
+      UNEVALUABLE - MISSING OBSERVABLE, not a missing step. The reaction runs:
+      `Mercaptoketone_Formation` fires on 2-oxopropanal + H2S and 1-mercapto-2-propanone
+      enters the pool. It is discarded at the projection layer, which reports only compounds
+      present in the desirable / off-flavour / toxic registries, and 1-mercapto-2-propanone
+      is in none of them. WHAT WOULD MAKE IT EVALUABLE: one SOURCED odour threshold for
+      1-mercapto-2-propanone. Wave X refused to invent one - adding a compound with a made-up
+      threshold in order to make a row scorable is the exact move this audit exists to
+      remove.
+
+  - claim_id: HOX-07
+    statement: "With H2S, furan-2-aldehyde is a far better FFT precursor than ribose (550.8 vs 9.2 ug, a factor of 60) and than the 3-deoxypentosone (78.6 ug, a factor of 7)."
+    claim_type: ordering
+    category: ranking
+    observables: ["FFT"]
+    evaluable: false
+    expected_relation: "A>B"
+    conditions: {}
+    source:
+      ref: hofmann1998
+      quote: "More FFT was liberated from the furan-2-aldehyde, compared to ribose and the 3-deoxyribosulose, by factors of 60 or 7, respectively (Table 3)."
+    fit_status: independent
+    model_scope_note: >-
+      UNEVALUABLE - BOTH COMPARATORS ARE UNREACHABLE, for two different reasons, and the A
+      side is the only one of the three the model can run. Ribose + H2S contains no primary
+      amine, and the network's entire sugar trunk is entered through `_amadori_cascade`, so
+      the sugar is untouched: NO AMINE-FREE SUGAR DEGRADATION LANE EXISTS. The fed
+      3-deoxypentosone canonicalises to the engine's own intermediate but has no CONSUMER,
+      because the `Enolisation_1_2` dehydration that turns it into furan-2-aldehyde is
+      emitted only from inside `_enolisation_steps`, which requires an Amadori product. Both
+      are recorded with their exact stoichiometry in data/benchmarks/
+      step_level_unreachable/. The second is the cheapest unblock on the Wave X list: no new
+      chemistry, no new barrier, only a trigger moved.
