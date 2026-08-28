@@ -268,3 +268,54 @@ Corrections, effective immediately and BEFORE any wave uses the affected rows:
 5. **Recorded hazard:** Martins 2003 a/b/c letter suffixes are permuted
    differently between the authors' own reference lists — resolve Martins 2003
    citations only by journal + volume + page, never by letter.
+
+## Amendment 4 — 2026-08-28 (roles for the research-round-2 corpus, waves K4a/K4b/K4c)
+
+Roles assigned BEFORE any wave parameterizes these sources; per-dataset detail
+lives in each dossier's final section (data/lit/extraction_dossiers/), adopted
+as proposed except where amended below. Flagship assignments, binding:
+
+FIT (priority order): Pereyra Gonzales milk-powder k set (15 rate constants,
+real food, twice-verified); Meynier partition RATIOS + 17/20 enthalpies (never
+its absolute K_aw — static-headspace absolute-scale suspect, spread 9.5x);
+Miao's 4 Ea; Leksrisompong K ratios; Lievonen pH-drift values; Stack 2018
+NAC arm forward+reverse constants (CORRECTED set — the paper's printed
+activation parameters carry a spurious ln(10); dossier's refit is canonical);
+li2016 k2 ladder; Cai 2024 100 C course + Ea pair; kumazawa pH grid at 121 C;
+Bell 1996 17 k with the 2.4x deconfounded Tg effect (not the paper's "7-fold");
+weykamp Schiff set as prior (pH never stated — flag carried); Kang 2026 Table 1
+Tier A columns ONLY (mu-g/L basis per the 900-dpi verification, NOT mg/L)
+— Tier B semi-quant is never scorable as levels.
+
+HOLD-OUT (gating unless noted): Hong 2020's 10 paired soy/water threshold
+ratios — pass criterion: >=7/10 within 5x AND correct sign on all 10 including
+the ethyl-4-methylpentanoate inversion; Cai 2024's 120/140 C 2-AP courses (the
+model must predict the sign reversal); Stack's GSH arm (nucleophile-identity
+transfer); sun2019 pH-9 column (temperature-ordering inversion); Zhou 2025
+50 C row (interpolation test; its printed FFT Arrhenius is REFUTED — fit to
+methanethiol data — the dossier refit Ea 7.92 kJ/mol is the reference and
+means ambient fade is transport-limited).
+
+NEITHER: anantharamkrishnan2020 (mechanism_reference: no rates, saturating
+dose; its pH-3 adduct gate is a structural constraint only); bagiyan2004
+(initial rates the authors disclaim as qualitative); Zhou 2025 OAV table
+(irreconcilable with its own concentrations); Pereyra Gonzales Ea=498 kJ/mol
+(viscosity transition, must never enter an Ea prior); Kang Fig 1a sulfur bars
+at 120/140 C (corrupted — near-identical to the pH series).
+
+RULING — figure-digitised data: may hold GATING hold-out status only when the
+digitisation is cross-validated against text-quoted values from the same paper
+(Nakamura qualifies: 14/14 reproduced); otherwise DIAGNOSTIC only.
+
+DEFERRED: Kang 2026 per-compound temperature ladder (Tables S4/S5 are SI-only,
+not yet retrieved) — the sulfur T-ladder gap stays OPEN until the SI arrives.
+REOPENED: the Hofmann 1998 temperature/water-content series does NOT exist
+(two fully-confounded process conditions only) — Amendment 1's hope withdrawn.
+
+PROCESS HAZARD (binding on all future ingestion): pdftotext renders mu as "m"
+in RSC/Arbortext PDFs — a silent 1000x unit corruption. Any value from such a
+PDF must be verified against a raster before ingestion.
+
+NEW PROVENANCE FIELDS required on matrix records: cross_study_cross_method,
+dispersion_scale, absolute_scale_suspect, pH on aldehyde-binding records,
+response_variable, dose_saturating.
