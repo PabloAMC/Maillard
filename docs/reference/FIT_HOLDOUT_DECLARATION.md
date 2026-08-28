@@ -383,3 +383,15 @@ the dossier §13. Binding rulings:
    2003 — double-count hazard); its Fig. 2 Trp-fluorescence dataset (authors'
    own disclaimer); fluorescence as a covalent-extent proxy anywhere
    (measured 7x anti-correlated in one experiment here).
+
+## Amendment 7 — 2026-08-29 (pH-trajectory state, pre-registered before Wave B2.2)
+
+For the pH-trajectory state (owner-approved option (a)): Zhou 2023's three
+measured final-pH endpoints (initial 6/7/8 -> final 3.22/3.42/5.07, unbuffered,
+120 C/2 h) are declared FIT as calibration anchors for the drift model (acid
+production from the tracked FA/AA pools + textbook buffer capacity). They are
+process-state observables, not volatile levels — no volatile hold-out is
+affected. The Chang water-vs-buffer arm pair REMAINS HOLD-OUT (it is the
+drift model's exam). Kang decay-barrier identification uses ONLY the declared
+Kang 100/120 C FIT rungs; the 140 C column and the Yiltirak/van Seeventer/
+Zhang/Zhou-dimer rows remain untouchable hold-outs.
