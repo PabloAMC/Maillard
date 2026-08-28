@@ -216,3 +216,19 @@ moves columns.
 | Cai 2024 (10.1016/j.foodres.2024.114591) 2-AP multiresponse 100/120/140 C | **role deferred until retrieved** | abstract-verified only; structural facts usable now: glyoxal rate-determining, non-monotone optimum ~100 C |
 | Weykamp & Penders 1982 Schiff k-1 = 0.435 /h at 37 C (biomedical) | **FIT (as a prior, rate_transfer: not_licensed to food T without the Ea)** | only measured Schiff reverse rate in any literature; internal k1/k-1/K consistency verified to 4 digits |
 | Ge & Lee 1997 reverse-rate Ea | **quarantined until tables retrieved** | method disputed in print by van Boekel; abstract has a unit defect (kcal/J confusion) |
+
+## Amendment 2 — 2026-08-28 (orchestrator ruling on a discovered disjointness violation)
+
+Wave B2 found that Cerny 2007 Table 4's MFT column (declared FIT) and Table 5's
+1x arm (declared HOLD-OUT) are the SAME measurement (85:15) published twice —
+violating rule 1. RULING: the FIT column shrinks. Cerny 2007 Table 4's MFT
+column is excluded from fitting; topology identification is carried by Cerny
+2007b's ternary split and Table 4's non-MFT columns. Table 5's concentration
+pair keeps its full hold-out role. This is the conservative direction (nothing
+held out was ever fit).
+
+Disclosure, for the record: the K3 inventory document itself prints the Zhou
+pH-6/pH-8 columns and Zhang Fig. 2d/e values, so Wave B2's builder saw those
+hold-out values during directed reads. They entered no parameter, bound, or
+initialisation (enforced by a literal-grep firewall test), but "seen" is
+recorded honestly here. The frozen mp_holdout_* bundles were never opened.
