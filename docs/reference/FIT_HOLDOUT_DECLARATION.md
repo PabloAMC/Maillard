@@ -232,3 +232,39 @@ pH-6/pH-8 columns and Zhang Fig. 2d/e values, so Wave B2's builder saw those
 hold-out values during directed reads. They entered no parameter, bound, or
 initialisation (enforced by a literal-grep firewall test), but "seen" is
 recorded honestly here. The frozen mp_holdout_* bundles were never opened.
+
+## Amendment 3 — 2026-08-28 (correction to Amendment 1, from the Martins-cluster extraction)
+
+Direct extraction of the four Martins papers found Amendment 1 partly unsupported.
+Corrections, effective immediately and BEFORE any wave uses the affected rows:
+
+1. **FROZEN: the "Martins thesis Table 4.2.3 reverse rates (Amadori -> parent
+   sugar), FIT" row.** No numeric reverse rate constant exists in Part I, Part II,
+   the epsilon paper, the pH-ladder paper, or Food Chem. 90. The authors DELETED
+   DFG -> parent sugars as quantitatively unimportant; parent-sugar re-formation is
+   modelled as FORWARD steps out of the Schiff intermediate (Part II Table 3
+   k10/k11/k16). The row stays frozen until the thesis PDF is read directly.
+2. **Corrected attribution of the model discrimination:** the reversibility result
+   is Food Chem. 90 (martins2005.pdf) Table 1, not "thesis Table 5.1": winning
+   hypothesis A (Glu+Gly -> E1 <-> DFG) beats hypothesis B by dAICc 276 and the
+   FULLY IRREVERSIBLE variant by 287.46. The structural claim (Schiff <-> Amadori
+   reversible) STANDS; the citation and the "Amadori -> parent sugar" framing were
+   wrong.
+3. **Same-experiment de-duplication (binding):** thesis chapters and the four
+   journal papers are the SAME experiments published twice. The journal-paper
+   versions are canonical; thesis-based rows in Amendment 1 that duplicate them
+   (epsilon Table 3.3.1; pH ladder Ch. 6; glycine yields Table 4.1.1) are hereby
+   MERGED into the paper rows, declared once. Also binding: Martins Part I and
+   Part II are one experiment (fit either the time courses or the derived rate
+   constants, never both); martins2005b Tables 1/2/4(1:1) print one experiment
+   three times — it counts once.
+4. **Roles adopted for the four papers as proposed by the extraction dossiers**
+   (Part II Table 3: pH 6.8 columns FIT / pH 5.5 columns HOLD-OUT, quarantining
+   k5, k8, k12, k13, k14, k15; Part I: pH 6.8 FIT / pH 5.5 HOLD-OUT, Fig. 5
+   diagnostic_only; epsilon: measured input + induction times as HOLD-OUT;
+   pH ladder: Table 2 pH 5.5+6.8 FIT once, pH 4.8/6.0/7.5 HOLD-OUT, Table 4
+   ratio arms HOLD-OUT as a ratio-invariance test, Table 1 pH-stat-vs-drifting
+   as a methodological HOLD-OUT).
+5. **Recorded hazard:** Martins 2003 a/b/c letter suffixes are permuted
+   differently between the authors' own reference lists — resolve Martins 2003
+   citations only by journal + volume + page, never by letter.
