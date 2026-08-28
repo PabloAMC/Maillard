@@ -319,3 +319,37 @@ PDF must be verified against a raster before ingestion.
 NEW PROVENANCE FIELDS required on matrix records: cross_study_cross_method,
 dispersion_scale, absolute_scale_suspect, pH on aldehyde-binding records,
 response_variable, dose_saturating.
+
+## Amendment 5 — 2026-08-28 (Kang 2026 SI + adduct survey, wave K4d)
+
+**The sulfur temperature ladder EXISTS.** Kang 2026 Table S4 gives Tier-A
+absolute MFT and FFT at 100/120/140 C (pH 7, 120 min, calibration R^2 > 0.998,
+subtotals closing to +/-0.003). Roles, binding:
+- FIT: MFT/FFT/furfural at 100 and 120 C; Ea(free-cysteine depletion) = 55.1
+  kJ/mol from digitised Fig S4 (R^2 0.994); TTCA->Cys yield ceiling 16.3 mol%
+  as a one-sided bound.
+- ★ HOLD-OUT (gating): MFT and FFT at 140 C — a true extrapolation test where
+  a single-Ea model fitted on 100/120 under-predicts 3.8x/2.5x. The measured
+  behaviour is NON-ARRHENIUS (apparent Ea rises 7->98 kJ/mol across the legs
+  while the sulfur class as a whole decelerates): free-thiol formation switches
+  on between 120 and 140 C. A single-Ea sulfur branch is expected to fail this
+  hold-out; passing requires the switch-on to emerge structurally.
+- QUARANTINED: Table S5's pH-7 column (duplicates S4's 100 C column with
+  different SDs — one of the two is mis-pasted); all Kang SDs (use means with
+  the dossier's replacement uncertainty); Tier-B polysulfide rows as levels;
+  the main paper's Fig 1a sulfur bars at 120/140 C (confirmed corrupted, true
+  values recovered in the dossier); the main paper's H2S claim (nothing in the
+  SI measures H2S).
+- Unit authority: the SI (true-mu Aspose typesetting, raster-verified) outranks
+  the mu->m-corrupted main PDF.
+
+**anantharamkrishnan2020b (the parent adduct survey):** hexanal DOES form
+covalent lysine adducts on beta-lactoglobulin — the mechanism behind the
+matrix hexanal over-prediction is demonstrated but not sizable here
+(saturating dose, no rates, no y-axes). NO FIT ROWS. Seven ordinal/binary
+gates adopted as proposed, including the 32-of-47 no-adduct negative gate
+(falsifies any generic protein-binding loss term). New required channel for
+the sulfur branch: FFT is consumed by protein disulfides (1:1 and 2:1 adducts)
+— a protein-matrix thiol sink the model does not yet have. The derived
+ambient-rate bound (t1/2 37-760 days at 3 wt%) says the covalent channel
+CANNOT explain ambient losses and bites only at process temperature.
