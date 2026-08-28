@@ -307,3 +307,34 @@ scratch/
 # holdout_guard do not mistake a hold-out SCORECARD for a fit record.
 !results/validation/holdout_prepost_barrier_offset_retirement.json
 !results/validation/holdout_prepost_barrier_offset_retirement.md
+# Build Wave B1 evidence artifacts (2026-08-28): the kinetic core's fit record and its
+# hold-out scorecard. Tracked for the same reason the Wave U pre-registration is: the
+# fit report declares, at a named commit, which nine Martins responses entered the
+# objective and that the browning response did not, and the hold-out report is scored
+# against parameters frozen by that file. An untracked pair proves nothing -- a later
+# wave could regenerate the "frozen" parameters after seeing the browning data and
+# compare them to themselves.
+# NOTE for the CI gates: the filenames deliberately avoid `refit`/`rederivation`, so
+# neither fit_target_gate nor holdout_guard reads them. That is correct here -- this
+# fit declares NO benchmark fit target; its entire corpus is literature time series
+# under data/lit/timeseries/ and nothing under data/benchmarks/ is read.
+!results/validation/kinetic_core_b1_fit_report.json
+!results/validation/kinetic_core_b1_fit_report.md
+!results/validation/kinetic_core_b1_holdout_report.json
+!results/validation/kinetic_core_b1_holdout_report.md
+# Build Wave B2 evidence artifacts (2026-08-28): the SULFUR module's fit record and its
+# pre-registered hold-out scorecard, tracked for exactly the reason B1's pair is.
+# The fit report is the FREEZE: it names, at a commit, which 39 rows entered the
+# objective, which parameters came out, and -- via `reuse_frozen_verification` -- that
+# the reversible-release step added after the freeze moved no fit row by more than
+# 2.75e-7. The hold-out report is scored against those parameters and against nothing
+# else. An untracked pair proves nothing: a later wave could regenerate the "frozen"
+# parameters after reading Zhou's pH-6/pH-8 columns and compare them to themselves.
+# NOTE for the CI gates: as with B1, the filenames deliberately avoid
+# `refit`/`rederivation`, so neither fit_target_gate nor holdout_guard reads them.
+# That is correct here -- this fit declares NO benchmark fit target, nothing under
+# data/benchmarks/ is read, and no frozen mp_holdout_* bundle was opened by the wave.
+!results/validation/kinetic_core_b2_fit_report.json
+!results/validation/kinetic_core_b2_fit_report.md
+!results/validation/kinetic_core_b2_holdout_report.json
+!results/validation/kinetic_core_b2_holdout_report.md

@@ -246,11 +246,21 @@ def test_no_shipped_module_imports_the_calibration_lane():
     starts importing it, the wave's central claim -- that no shipped number
     moved -- stops being true, and this test is where that must be noticed.
     """
+    # 2026-08-28 (Wave B1/B2 batch): tightened from a substring grep to actual
+    # import detection. src/kinetic_core/ mentions trunk_kinetics in docstrings
+    # (it documents superseding the seed) without importing it; provenance
+    # narration must not trip the guard whose intent is import isolation.
+    import re
+
+    import_pattern = re.compile(
+        r"^\s*(?:import\s+(?:src\.)?trunk_kinetics|from\s+(?:src\.)?trunk_kinetics\s+import|from\s+\.\.?\s*trunk_kinetics\s+import|from\s+src\s+import\s+.*\btrunk_kinetics\b)",
+        re.MULTILINE,
+    )
     offenders = []
     for path in (ROOT / "src").rglob("*.py"):
         if path.name == "trunk_kinetics.py":
             continue
-        if "trunk_kinetics" in path.read_text(encoding="utf-8"):
+        if import_pattern.search(path.read_text(encoding="utf-8")):
             offenders.append(path.relative_to(ROOT).as_posix())
     assert offenders == [], f"trunk_kinetics is imported by shipped code: {offenders}"
 
