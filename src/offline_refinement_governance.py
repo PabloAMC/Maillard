@@ -97,17 +97,23 @@ def build_offline_refinement_governance_artifact(
     )
     advance_count = int(cheap_payload.get("summary", {}).get("advance", 0))
     run_now_count = int(dft_payload.get("summary", {}).get("run_now", 0))
+    # 2026-08-28 OWNER POLICY (Pablo): the DFT lane is CLOSED — "do not run DFT
+    # jobs, they are not helpful here". Rationale on record: at Maillard
+    # temperatures RT ~ 0.84 kcal/mol, so state-of-the-art DFT's 1-3 kcal/mol
+    # barrier errors are 3-30x rate errors, worse for the DELTA-DELTA-Ea that
+    # selectivity depends on, and the condensed-phase pH/aw/protein effects are
+    # unmodeled. Measured kinetics outrank computed barriers ALWAYS. The gate is
+    # therefore PINNED to hold: run_now candidates may still be COUNTED (the
+    # diagnostics that produce them remain informative as attention pointers)
+    # but can never flip the governing status, and no job is ever approved.
     governing_status = "hold_observable_first"
-    if run_now_count > 0:
-        governing_status = "selective_refinement_allowed"
 
     blockers = [
         "observable closure still names the benchmark-visible compounds that must move before mechanistic escalation",
         "cheap-first screening produced no benchmark-visible improvement for the active mechanistic-priority families",
         "no selective DFT jobs are approved until a cheap-first perturbation improves benchmark-visible diagnostics",
+        "OWNER POLICY 2026-08-28: the DFT lane is closed permanently — computed barriers are not trusted at Maillard-relevant accuracy; measured kinetics only",
     ]
-    if run_now_count > 0:
-        blockers[-1] = "approved selective DFT jobs remain sparse and benchmark-scoped"
 
     return {
         "summary": {
@@ -115,13 +121,16 @@ def build_offline_refinement_governance_artifact(
             "mechanistic_priority_benchmark_count": len(benchmark_rows),
             "benchmarks_with_named_targets": sum(1 for row in benchmark_rows if row["target_compounds"]),
             "cheap_first_advance_count": advance_count,
-            "approved_offline_job_count": run_now_count,
-            "approved_offline_job_families": approved_job_families,
+            "approved_offline_job_count": 0,  # PINNED: DFT lane closed by owner policy 2026-08-28
+            "candidate_offline_job_count": run_now_count,  # attention pointers only, never approved
+            "approved_offline_job_families": [],  # PINNED empty: no job is ever approved
+            "candidate_offline_job_families": approved_job_families,
             "policy": "continue_only_when_observable_closure_names_the_targets_and_cheap_first_screening_improves_benchmark_visible_diagnostics",
         },
         "blockers": blockers,
         "mechanistic_priority_benchmarks": benchmark_rows,
-        "approved_offline_jobs": approved_jobs,
+        "approved_offline_jobs": [],  # PINNED empty: DFT lane closed by owner policy 2026-08-28
+        "candidate_offline_jobs": approved_jobs,  # kept as diagnostics, not approvals
     }
 
 

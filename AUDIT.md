@@ -1149,6 +1149,267 @@ All three gates pass. The citation gate's file count falls 98 -> 92 and its DOI 
 909, entirely from the deleted duplicates; the same DOIs remain under
 `data/Gemini_Deep_Research/`.
 
+## Wave Y — the budget workstream: three findings, one fix, and two falsified predictions (2026-08-28)
+
+Three earlier waves triangulated the same address for the model's absolute-accuracy deficit.
+Wave S3 measured that the screening lane consumes barriers only as branching ratios. Wave S4
+made a unit argument: an observability factor is a fraction of a total and cannot exceed 1, and
+the shipped ambient hexanal factors were 4.32 and 9.54. Wave X measured 0.518 dex on a single
+step against 0.952 dex end to end. This wave maps the layer all three point at, moves the one
+constant the argument licenses, and reports what the move did not fix.
+
+### The layer, measured
+
+    observable_ppb = L(pool, lane, T, t) x Y(compound) x release(compound, lane) x cal(compound, lane, state)
+
+`Y` and `cal` are **perfectly degenerate on any single lane** — only their product is
+identified — so which one carries a scale is a *convention*, and the convention the registry
+declares is that the pea ambient slurry is the reference lane whose factors are 1.0. Wave O
+wrote its shared scale into `cal`, which broke that convention and produced a fraction-observed
+of 4.32. There is a second degeneracy that decides the direction of the fix: `Y` also multiplies
+`hydroperoxide_scale = 1.0e6`, an arbitrary constant, so **a yield above 1 is not a unit
+violation and a fraction-observed above 1 is.**
+
+### Old → new, with provenance
+
+| constant | before | after | kind |
+|---|---:|---:|---|
+| `MATRIX_BENCHMARK_BASE_MARKER_YIELDS['Hexanal']` | 0.205 | **0.885036** | Wave O's shared scale, relocated. One parameter, two verified anchors, the same 1.0113× residual. |
+| `pea_iso / ambient_slurry / hexanal` | 4.31725 | **1.0** | reference lane restored; independently the value Wave S4 (c) evidenced from Pratap-Singh's matrix-matched methods |
+| `pea_iso / heated_matrix / hexanal` | 0.228776 | **0.0529912** | propagation of the Trikusuma back-solve |
+| `soy_iso / ambient_slurry / hexanal` | 9.54007 | **0.453 / 0.205** | the soy-vs-pea ratio, restored as a self-documenting expression |
+| `soy_iso / heated_matrix / hexanal` | 2.80478 | **(0.453/0.205)·(1−0.7060)** | composition rule, unchanged, following its baseline |
+| `2-Pentylfuran` yield 0.502 | — | **not moved** | re-derives to 0.5017897, 0.000182 dex away — below the 0.01 dex materiality floor |
+| `1-Hexanol` / `Nonanal` yields | — | **not moved** | no anchor of any kind; not fitted |
+| `reference_conversion_time_min` | 12589 | **not moved** | see below |
+
+**Nothing predicted moved on the calibrated tier.** The eight hold-out points are unchanged to
+six significant figures (four hexanal rows drift 3e-7 to 8e-7 from rounding, four non-hexanal
+rows are bit-identical), and the pea lane still reads 1125.278 ppb.
+
+### What DID move, and it is the point
+
+`_uncalibrated_prediction_ppb` reads the yield and never reads an observability factor. Wave O
+recorded that no refit of *those* constants could ever move the matrix sigma derivation; a
+**yield** refit is the case that sentence does not cover, and this is the first one. Soy ambient
+hexanal goes from **9.4334× under to 2.1851× under** in that tier, and the scatter narrows
+(centred sd 3.0951 → 2.8452 in ln space) — but the **bias grows** (3.31× → 5.95× over) because
+the same relocation makes the heated lanes over-predict by 4.32× in a tier that has no
+observability to correct them with. Net RMS ln-sigma 3.0166 → 3.1075; shipped 2.86 still inside
+the re-derived 90% interval [2.088, 6.494]. **The prior was not re-fitted** — doing so in the
+wave that moved the residuals would make the two unattributable.
+
+### The Wave S4 claim: PARTIALLY CONFIRMED
+
+Two factors came back under 1 (pea ambient → 1.0, soy heated → 0.6497). **Six did not, and
+every one of them is a soy factor.** The reason is structural: a marker yield is shared across
+matrices, so it can absorb a *global* scale error and never a *lane* one. Pinning observability
+to the 1.0 that Wave S4's own evidence requires and fitting two yields against four verified
+rows leaves an RMS residual of **0.3103 dex**, entirely soy-vs-pea — required-yield ratio
+**2.1606× on hexanal, 5.9221× on 2-pentylfuran**. Those two differ from each other, so the
+deficit is *compound*-specific as well as *lane*-specific and **cannot be repaired by the soy
+lipid profile either** (that would move both linoleate markers by one factor). Wave S4's
+diagnosis was correct about the global scale and incomplete about the rest.
+
+### The projection budget: a hard new constraint, and a decision not to apply it
+
+Wave X's single-step systems print molar yields on the fed precursor, which is exactly what the
+budget's `conversion_extent` predicts — with no allocation term in between. That gives the
+repository its first constraint on the budget from *below*:
+
+> `hofmann1998_furan2aldehyde_h2s` measures **11016 ppb** of FFT. The model's entire volatile
+> budget at those conditions, expressed in that analyte's own molar mass, is **2413.65 ppb**,
+> and the allocation already gives that analyte **100 %** of it. The row is unreachable at any
+> allocation, any barrier and any observability factor. Required budget scale **4.564×**.
+
+Three rows are unreachable in this sense, all of them Wave X step-level rows. And yet the same
+table demands the opposite elsewhere: required scale spans **0.0022× to 4.564×, a factor of
+2075**. Grouped by how many steps the route actually took, short paths (≤2 steps, 5 rows) want
+the budget **1.07×** and long ones (≥4 steps, 11 rows) want it **0.0185×** — a **57.9×** split.
+Applying the binding constraint costs the panel (mean |log10| 0.9283 → 1.0119 dex, 8 rows
+better and 8 worse), so `tau_ref` is **not** moved. **The deficit is not a scale. It is that the
+budget is allocated from the limiting precursor with no regard for how many steps separate that
+precursor from the product** — which is Wave X's step-vs-cascade result with a mechanism under
+it. Record:
+[projection_budget_step_yield_constraint.md](results/validation/projection_budget_step_yield_constraint.md).
+
+### Two pre-registered predictions were falsified, and both falsifications are findings
+
+Predictions were written to
+[wave_y_prereg_predictions.json](results/validation/wave_y_prereg_predictions.json) before any
+constant was edited.
+
+* **Y-P1 — "0 of 22 maillard_path hold-out targets move" — FALSIFIED: 8 moved.** Not by this
+  wave. Ablation: with Wave Y's five constants reverted in memory, the same 8 still differ;
+  with Wave X's norfuraneol channel replaced by a no-op, **all 22 are bit-identical to the
+  pre-registration**. Wave X priced that channel against the Wave W panel (0.9241 → 0.9518 dex)
+  and never re-scored the frozen hold-out; the unmeasured price is **8/22 targets and a median
+  fold error of 6.0388× → 10.8638×** on the repository's only free-precursor out-of-sample
+  surface. Wave Y's own contribution is **0 targets**.
+* **Y-P8 — "the four synthetic snapshots are bit-identical" — FALSIFIED: every network-derived
+  volatile on them moved by exactly ×1.27604.** The mechanism is a genuine cross-layer leak: on
+  the `matrix_precursor_augmented` lane the marker yields set the *injected* marker molarity,
+  which enters `_relative_precursor_load_factor` — a geometric mean over all positive initial
+  concentrations — and therefore the volatile budget. 4.317249^(1/6) = 1.27612 with six
+  positive species. **A lipid-oxidation observability constant is setting part of the Maillard
+  volatile budget.** Carried as an open item; it is a structural change, not a constant.
+
+Everything else scored as predicted: the Wave X step-level rows are unchanged at 0.5177 dex, the
+hold-out is unchanged, the honest external-literature coverage is unchanged at 4 hits, and the
+matrix sigma moved exactly as predicted in mechanism (both uncalibrated hexanal predictions
+×4.317249) though not in aggregate direction.
+
+### What Wave Y cost
+
+| aggregate | before | after | reading |
+|---|---|---|---|
+| Panel passes, strict | 4/14 | **0/14** | the last four were synthetic snapshots; ×1.936 inherited from Waves W/X, ×1.276 from this wave, against a ×2.00 threshold |
+| Panel passes, lenient (`benchmark_summary.md`) | 6/14 | **2/14** | the two Pratap-Singh `pass-no-ranking` fit-recovery rows survive |
+| MC panel 90 % CI coverage | 32/47 | **28/47** | all four lost hits are synthetic rows |
+| Honest external-literature coverage | 4 hits | **4 hits** | unchanged — the headline that carries evidence did not move |
+| Matrix hold-out median fold | 93.68× | **93.68×** | unchanged |
+| Wave X step-level mean \|log10\| | 0.518 | **0.5177** | unchanged |
+
+The snapshots were **not** regenerated. Refreshing them would restore 0/14 → 4/14 and in the
+same motion absorb the Waves W/X drift that nobody has reported.
+
+### The barrier sensitivity deficit, decomposed (on a Wave Z1 lead)
+
+Wave Z1 measured a ~13× shortfall between the Arrhenius expectation of a 2.30 kcal/mol barrier
+move (15.9×) and its effect on the Hofmann Table 4 objective (1.22×). Reproduced here to
+1.2179×, and split into **two** stages rather than one:
+
+| probe | analyte share of budget | Arrhenius | flux ratio | ppb ratio | stage 1 (span) | stage 2 (allocation) |
+|---|---:|---:|---:|---:|---:|---:|
+| `furan2aldehyde_h2s` / FFT | 0.992 | 15.93× | 1.4121× | **1.0000×** | 11.28× | 1.41× |
+| `norfuraneol_h2s` / MFT | 0.465 | 15.93× | 6.5817× | **1.2179×** | 2.42× | 5.40× |
+| `cys_ribose_140C` / MFT | 0.109 | 16.47× | 1.7502× | **1.5982×** | 9.41× | 1.10× |
+
+Stage 1 is the log-sum-exp **series span**: the largest barrier on a route dominates it, so
+moving a smaller one barely moves the flux. Stage 2 is the **allocation normalisation**: a
+channel that already holds most of a fixed budget cannot grow. On the first probe a 15.9× rate
+change produces *exactly zero* change in predicted ppb, and the sum of predicted ppb is
+invariant to six figures. **Barriers set the split; the budget sets the scale.** And the budget
+work cannot fix it — under the counterfactual `tau_ref` every ratio in that table is identical
+to 3e-16, because a common factor cancels out of a ratio. Said plainly: *the normalisation is
+deeper than the budget constants.* Record:
+[barrier_sensitivity_deficit.md](results/validation/barrier_sensitivity_deficit.md).
+
+### One decision deliberately NOT taken
+
+The Trikusuma heated-pea nonanal factor is stale by exactly `linoleic/oleic = 50/22 = 2.2727`,
+because Wave P moved nonanal to the oleate pool without propagating the constant. Wave Y
+re-derived that identity independently from the layer map and then found Wave P's own comment
+block recording the same diagnosis and an explicit refusal to refit — on the grounds that
+re-solving it would re-absorb the correction that exposed it, and that Trikusuma is still
+content-unverified. Both grounds hold. **The refusal stands; Wave Y contributes only the
+independent confirmation.**
+
+## Wave R1 — the barrier table the model was not using (2026-08-28)
+
+**The finding, in one sentence: the repository contained an automatic search that tuned
+reaction barriers to improve the benchmark panel the model is then scored against, wrote
+the result into a tracked data file that `get_barrier()` applies to every prediction, and
+was invoked from the middle of the repository's own documented regeneration command.**
+
+This is the same defect class as every other finding in this document — fit, then score,
+without declaring the fit — but it is the first one found *in the code that produces the
+barriers themselves*, and the first one whose arming mechanism was a `make`-style command
+the project tells people to run.
+
+### The mechanism
+
+`src/barrier_constants.get_barrier()` reads `accepted_offsets` from
+`data/lit/refinement_surrogate_patches.json` and **adds** the matching entry to the audited
+`FAST_BARRIERS` value. `src/refinement_campaign.build_refinement_impact_artifact()` filled
+that map by trying candidate offsets, keeping any that lowered the panel's total score, and
+returning them as `patch`. `scripts/generators/generate_refinement_governance.py` ends with
+`patch_path.write_text(json.dumps(impact_payload["patch"]))` — a wholesale overwrite of the
+tracked file — and that generator is line 181 of `scripts/docker_maillard.sh`, inside
+`scientific_lane()`, **ahead of** the figure generators, the validated-envelope report and
+`scientific_fast_lane()`, which is the scientific-regression pytest run.
+
+Three properties make it worse than a stale constant:
+
+1. **It is circular.** The acceptance criterion is the score on the evaluation panel. The
+   panel is then published as evidence. Nothing declared this to
+   `scripts/ci/fit_target_gate.py`, so both gates passed throughout.
+2. **It is saturated.** All nine accepted offsets were exactly ±3.0 kcal/mol — the search
+   bound. A fit pinned to its bounds reports the bound, not an optimum. The true optimum,
+   if one exists, is outside the search space and was never looked for.
+3. **It is large.** At 150 °C, 3.0 kcal/mol is a ~35× rate factor.
+
+| family | armed | audited table | error |
+| --- | ---: | ---: | ---: |
+| `Schiff_Base_Formation` | 18.0 | **15.0** | +3.0 |
+| `Retro_Aldol_Fragmentation` | 29.0 | **32.0** | −3.0 |
+| `Thiol_Addition` | 31.6 | **28.6** | +3.0 |
+
+`thiol_addition_pentodiulose` — the constant Waves N/P/S2c argued over at length — was
+**not** reached by any offset and shipped at 28.60 throughout. The `thiol_addition` *class*
+value is the one that was silently 31.6.
+
+### What was contaminated, and what was not — measured, not assumed
+
+The tracked patch file at git `HEAD` carried an **empty** map. So a clean checkout shipped
+the audited table, and every artifact in this tree was produced in that state. Re-running
+the full generator sequence after the retirement reproduces `benchmark_summary`,
+`external_validation_report`, `prediction_uncertainty`, `matrix_sigma_residual_derivation`,
+`experiment_value_ranking`, `loo_leverage`, the family overviews and the figures
+**byte-identically**; the free-precursor hold-out re-run reproduces Wave Y's shipped
+numbers to the last digit. **The published accuracy numbers were not inflated.**
+
+What was live is the *arming*: anyone who ran `scientific_lane()` — the repository's own
+instruction — silently replaced three barriers and then ran the scientific regression suite
+against the replaced model, with no message and no artifact recording it. Whether a given
+local tree was honest depended on whether someone had checked the file out since. Running
+the pre-retirement code today re-accepts the same nine offsets, so this was a live trap,
+not a historical one.
+
+### The price, on the pre-registration
+
+The `maillard_path` hold-out (frozen at `12f43dd`, never available to any fit) scored under
+both states — `results/validation/holdout_prepost_barrier_offset_retirement.md`:
+
+| metric (32 targets) | fit armed | fit retired (ships) | direction |
+| --- | ---: | ---: | --- |
+| median fold error | 10.05× | **10.86×** | worse |
+| median \|log₁₀\| | 1.0020 dex | **1.0360 dex** | worse |
+| worst fold error | 565.2× | **506.4×** | better |
+| within 10× | 15/31 | 15/31 | unchanged |
+| targets differing from the 12f43dd pre-registration | **21 of 22** | **8 of 22** | the result |
+
+**The honest model is ~8 % worse on the median of a hold-out the fit never saw.** That is
+the expected sign: a panel fit that generalises slightly is still a panel fit. The last row
+is what settles it — armed, the model contradicted its own pre-registration on 21 of 22
+targets; retired, on 8, and those 8 are Wave X's norfuraneol channel, already attributed.
+
+The eight-point **matrix** hold-out moved **0 of 8 points**, because it runs `matrix_only`
+and never reaches the reaction network. A hold-out that cannot detect a 35× rate error in
+three barriers is not evidence about barriers.
+
+### What was done
+
+* `accepted_offsets` permanently empty, with a retirement note recording all nine retired
+  values. The note is emitted from `src.refinement_campaign.RETIREMENT_NOTE` rather than
+  hand-written into the JSON, because the generator overwrites that file wholesale and a
+  hand-written explanation would survive exactly until the next regeneration.
+* The auto-acceptance path records candidates as `candidate_offsets_not_applied`
+  diagnostics — the search is still a useful attention pointer — and applies nothing.
+* `tests/unit/test_wave_r1_barrier_offset_retirement.py`: 57 test cases, including
+  `get_barrier(family) == FAST_BARRIERS[family]` for **every one of the 51 families**,
+  because the retired offsets reached families by three different routes (exact key,
+  normalised alias, and the `schiff`/`amadori`/`enol`/`strecker`/`cys` substring map inside
+  `get_barrier`) and a sampled guard would have to guess the next route.
+
+### What this generalises to
+
+Every previous round of this audit looked for fits in *data*. This one was in a
+*generator*, and the generator was in the *build*. The lesson for the remaining `[P]` list
+is that "does any script write into a tracked file that a runtime path reads?" is a
+question worth asking of every generator in `scripts/generators/`, not only of the ones
+with `refit` in the name.
+
 ## What this repository is now for
 
 A research prototype of the *architecture* alternative-protein flavor science needs —

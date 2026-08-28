@@ -111,7 +111,18 @@ def test_output_projection_applies_compound_specific_matrix_calibration():
     # with a stale baseline. Record:
     # results/validation/matrix_observability_refit_pratap_singh.{json,md}.
     # Expressed as the composition rather than as a bare number so the structure stays visible.
-    assert row["calibration_observable_factor"] == pytest.approx(9.54007 * (1.0 - 0.7060))
+    #
+    # RE-PINNED 2026-08-28 (Wave Y): the BASELINE moved sides, so the composition follows it
+    # again. Wave O's shared ambient-hexanal scale now lives in
+    # MATRIX_BENCHMARK_BASE_MARKER_YIELDS['Hexanal'] (0.205 -> 0.885036) and every hexanal
+    # observability constant was divided by it, so the soy ambient baseline reads
+    # 0.453/0.205 and this composed value reads 0.6496683 -- exactly its pre-Wave-O number.
+    # The composition rule (baseline x the Shu 2024 attenuation) is untouched, and the
+    # PREDICTED ppb on this lane is unchanged, which is the invariant the relocation
+    # preserves. Note this factor was above 1 before and is not now: the Wave S4 unit
+    # objection is answered on this lane by arithmetic that moved no prediction.
+    # Record: results/validation/matrix_marker_yield_rederivation.{json,md}.
+    assert row["calibration_observable_factor"] == pytest.approx((0.453 / 0.205) * (1.0 - 0.7060))
     assert row["calibration_factor"] == pytest.approx(row["calibration_observable_factor"])
     assert row["accessibility_profile"] == "peptide_bound"
     assert row["accessibility_warning"] is True

@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import json
 
+import pytest
+
 from src.matrix_calibration_registry import describe_matrix_calibration, get_matrix_calibration_record
 
 
@@ -29,10 +31,18 @@ def test_runtime_multiplier_scales_compound_specific_record(monkeypatch):
         process_state="ambient_slurry",
     )
     assert shipped is not None
-    assert record.observable_factor == 1.5 * 9.54007
+    # RE-PINNED 2026-08-28 (Wave Y): the constants moved sides. Wave O's shared ambient
+    # hexanal scale now lives in MATRIX_BENCHMARK_BASE_MARKER_YIELDS['Hexanal'] and every
+    # hexanal observability constant was divided by it, so soy ambient reads 0.453/0.205 and
+    # pea ambient reads 1.0. Record: results/validation/matrix_marker_yield_rederivation.md.
+    #
+    # The comment above already says this test is about the MULTIPLIER rather than the
+    # constant, so the assertions are now written that way instead of being re-pinned to new
+    # literals -- which makes them survive the next relocation as well as this one.
+    assert record.observable_factor == pytest.approx(1.5 * (0.453 / 0.205))
     # and the multiplier really is a multiplier, not a replacement
-    assert record.observable_factor != 9.54007
-    assert shipped.observable_factor == 4.31725, (
+    assert record.observable_factor != pytest.approx(0.453 / 0.205)
+    assert shipped.observable_factor == pytest.approx(1.0), (
         "the pea lane must NOT be scaled by a soy_iso multiplier"
     )
 

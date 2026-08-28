@@ -258,3 +258,52 @@ scratch/
 #     shipped constant, the gate's verdict and the test's own ceiling all agree.
 !results/validation/furanone_reductive_sulfhydrylation_refit_hofmann.json
 !results/validation/furanone_reductive_sulfhydrylation_refit_hofmann.md
+
+# Wave Y evidence artifacts (2026-08-28): the volatile-budget / marker-yield workstream.
+# Five files, tracked for five distinct reasons; none is a convenience copy.
+#
+# (1) The marker-yield re-derivation is a FIT RECORD. `scripts/ci/fit_target_gate.py`,
+#     `src/fit_target_index.py` and `holdout_guard` check 4 all scan
+#     results/validation/*rederivation*.json, and this is the file that declares the two
+#     Pratap-Singh benchmarks and Trikusuma as targets of the relocated shared scale.
+#     Untracked, CI would run with the relocation undeclared and unguarded.
+!results/validation/matrix_marker_yield_rederivation.json
+!results/validation/matrix_marker_yield_rederivation.md
+# (2) The projection-budget constraint record. Its filename must NEVER contain `refit` or
+#     `rederivation`: nothing was fitted from it, no constant moved, and the two gates would
+#     otherwise treat the step-level rows it scores as fit targets and strip them from
+#     scored evidence -- which would delete the very rows that constrain the budget. It is
+#     tracked because the DECISION not to apply the constraint is only defensible with the
+#     measured counterfactual beside it.
+!results/validation/projection_budget_step_yield_constraint.json
+!results/validation/projection_budget_step_yield_constraint.md
+# (3) The pre-registration. Written before any constant was edited and before anything was
+#     re-scored, including the one amendment (change 2 withdrawn) and its reason. A wave
+#     that scores itself against predictions it wrote afterwards has proved nothing; this
+#     file is what makes the scoring in the ledger checkable.
+!results/validation/wave_y_prereg_predictions.json
+# (4) The pre/post against the frozen maillard_path hold-out. Same rule as the Wave S3
+#     companion, plus one this wave added: it carries the ABLATION that attributes the 8
+#     drifted targets to Wave X's norfuraneol channel rather than to this wave, and an
+#     attribution claim with no artifact behind it is an assertion.
+!results/validation/maillard_path_holdout_wave_y_prepost.json
+!results/validation/maillard_path_holdout_wave_y_prepost.md
+# (5) The barrier-sensitivity decomposition (on a Wave Z1 lead). It reproduces Wave Z1's
+#     1.22x, splits the ~13x deficit into span saturation and allocation normalisation, and
+#     measures that the budget constants CANNOT restore sensitivity. Nothing is fitted; the
+#     filename deliberately avoids `refit`/`rederivation` for the same reason as (2).
+!results/validation/barrier_sensitivity_deficit.json
+!results/validation/barrier_sensitivity_deficit.md
+
+# Wave R1 evidence artifact (2026-08-28): both frozen hold-outs scored BEFORE and AFTER the
+# retirement of the auto-accepted barrier offsets. Tracked because it is the only place the
+# price of honesty is written down: the retired model is ~8% WORSE on the median fold error
+# of the maillard_path pre-registration (10.05x -> 10.86x), and the eight-point matrix
+# hold-out cannot see the change at all. A README that claims "the honest numbers are worse"
+# owes the reader the file that measures it. Nothing here is fitted and no hold-out was
+# regenerated or re-frozen -- the frozen pre-registration is READ; the "before" arm is
+# reconstructed through the BARRIER_OFFSETS environment variable in a subprocess. The
+# filename deliberately avoids `refit`/`rederivation` so that fit_target_gate and
+# holdout_guard do not mistake a hold-out SCORECARD for a fit record.
+!results/validation/holdout_prepost_barrier_offset_retirement.json
+!results/validation/holdout_prepost_barrier_offset_retirement.md

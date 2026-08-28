@@ -7883,3 +7883,822 @@ working, and the block was added rather than the check bypassed.
   6-deoxyhexose branch, a phosphate-ester hydrolysis step, and a glycosidic cleavage step.
   The same missing phosphate step blocks Wave W's `MOT-04` / `MOT-05` (ribose-5-phosphate, IMP),
   which is the meat-relevant precursor pool.
+
+---
+
+## Wave Y — the budget workstream: three findings, one fix, two falsified predictions (2026-08-28)
+
+Three waves triangulated one address. **Wave S3** measured that the FAST screening lane
+consumes barriers only as branching ratios ("the deficit is in the projection budget and
+missing chemistry, not the barrier table"). **Wave S4** made a unit argument: an
+observability factor is the fraction of a total a measurement sees, so it *cannot exceed 1*,
+and the shipped ambient hexanal factors were 4.32 and 9.54. **Wave X** measured 0.518 dex on
+a single step against 0.952 dex end to end. This wave maps the layer all three point at,
+moves the one constant the argument licenses, measures the budget against Wave X's new
+step-level yields, and reports at length what none of that fixed.
+
+### (a) THE LAYER MAP — deliverable (a), measured rather than read
+
+`_run_matrix_only_benchmark_prediction` (`src/benchmark_validation.py:764`):
+
+```
+observable_ppb = L(pool, lane, T, t) * Y(compound) * release(compound, lane) * cal(compound, lane, state)
+```
+
+| symbol | where it lives | provenance status |
+|---|---|---|
+| `L` | `src.lipid_oxidation.predict_hexanal_generation` -> `total_hydroperoxide` (linoleate) or `total_hydroperoxide_oleate`, x1000 | **UNANCHORED.** `hydroperoxide_scale = 1.0e6` and the Arrhenius pair (1e8 /min, 80 kJ/mol) are "order-of-magnitude literature values" by the JSON's own `_provenance`; the lipid profiles are "literature-typical values already present in the codebase". |
+| `Y` | `MATRIX_BENCHMARK_BASE_MARKER_YIELDS` | Hexanal / 2-PF / 1-hexanol were `260 / 638 / 80` over one common scale of 1269 (the registry header's own arithmetic). 638 verified verbatim; 260 corrected to 1138 by Wave K; 80 shown fabricated by Wave T3. Nonanal 0.150 has no anchor on either ambient lane. |
+| `release` | `HeadspaceModel.get_matrix_benchmark_headspace_factor`, net of `cal` | Measured **1.000000 on both ambient lanes** and 0.772209 on the Trikusuma heated lane. |
+| `cal` | `matrix_calibration_registry.describe_matrix_calibration` | Every entry `fitted_to_benchmark` or `conditional_literature_anchored`; the 1-hexanol pair is `no_verifiable_source`. |
+
+The measured decomposition, per lane and per compound, is in
+`results/validation/matrix_marker_yield_rederivation.{json,md}`.
+
+**TWO DEGENERACIES, AND THEY DECIDE THE WHOLE WAVE.**
+
+1. **`Y` and `cal` are perfectly degenerate on any single lane** — only their product is
+   identified. Which one carries a scale is a *convention*, and the convention the registry
+   declares in its own header is that the pea ambient slurry is the reference lane whose
+   factors are 1.0 by construction. Wave O wrote its shared scale into `cal`, breaking that
+   convention and producing a "fraction observed" of 4.32.
+2. **`Y` is also degenerate with `hydroperoxide_scale = 1.0e6`**, an arbitrary round number.
+   So **a yield above 1 is not a unit violation and a fraction-observed above 1 is.** That
+   asymmetry is the entire licence for the fix, and it is the honest counterpart of Wave S4's
+   argument rather than a weakening of it: it says where the scale may go, not that it does
+   not exist.
+
+Two further facts, both measured while mapping and both load-bearing later:
+
+* **Every hexanal lane in the repository resolves to a `compound_specific` record.** No lane
+  reaches the class-level aldehyde anchor for hexanal, so relocating the four compound-specific
+  hexanal constants is *complete* — nothing is left behind on a fallback path.
+* **The free-precursor lane's budget is a different machine entirely.**
+  `_estimate_projection_budget` (`src/projection.py:170`) never sees a marker yield, and the
+  matrix_only lane never calls it. The two targets in this wave's brief are in different lanes,
+  and `projection_constant_refit.json` conflates them — see (f).
+
+### (b) FIT CORPUS — declared before fitting, and asserted in code
+
+**For the marker yields** (`scripts/generators/rederive_matrix_marker_yields.py`), the
+content-verified panel anchors and nothing else:
+
+| benchmark | compound | measured ppb | ± % | required Y at cal = 1 |
+|---|---|---:|---:|---:|
+| `pea_isolate_40C_PratapSingh2021` | Hexanal | 1138.00 | 26 | 0.895042 |
+| `pea_isolate_40C_PratapSingh2021` | 2-Pentylfuran | 638 | 8 | 0.501790 |
+| `soy_isolate_40C_PratapSingh2021` | Hexanal | 1621.71 | 10 | 1.933851 |
+| `soy_isolate_40C_PratapSingh2021` | 2-Pentylfuran | 2492 | 8 | 2.971651 |
+
+`pea_isolate_uht_140C_Trikusuma2019` is carried for **propagation only** and contributes no
+residual to any objective — it is still the last content-unverified pillar of the matrix lane.
+
+**Never in any fit, and asserted rather than intended:** `data/benchmarks/external_validation/**`
+(both hold-outs), `*Internal2026*` / `*ProtocolPilot2026*` (synthetic model output), Wave X's
+declared fit target `hofmann1998_norfuraneol_h2s_145C_20min_pH5`, and
+`data/benchmarks/quarantined/**`. The generator raises on any path containing
+`external_validation` or `quarantined`.
+
+The record declares `fit_leverage.class = per_row_recovery` with **1 free parameter over 2
+rows** and names all three benchmarks, so `fit_target_gate` and `holdout_guard` see the
+relocation. The two Pratap-Singh rows were already excluded from the honest-literature
+numerator *and* denominator as fit recovery and stay excluded — the panel-count consequence is
+accepted, not argued around.
+
+### (c) OLD -> NEW, EVERY CONSTANT, WITH PROVENANCE — deliverable (c)
+
+| constant | before | after | kind |
+|---|---:|---:|---|
+| `MATRIX_BENCHMARK_BASE_MARKER_YIELDS['Hexanal']` | 0.205 | **0.885036** | Wave O's shared scale relocated. ONE parameter, the same two verified anchors, the same 1.0113x residual. Per-lane required yields 0.895042 (pea) / 0.875142 (soy); the shared value brackets them. |
+| `pea_iso / ambient_slurry / hexanal` | 4.31725 | **1.0** | reference lane restored — and independently the value Wave S4 (c) evidenced from Pratap-Singh's verbatim matrix-matched methods |
+| `pea_iso / heated_matrix / hexanal` | 0.228776 | **0.0529912** | propagation of the Trikusuma back-solve; recovery preserved (782.0056 ppb before and after) |
+| `soy_iso / ambient_slurry / hexanal` | 9.54007 | **`0.453 / 0.205`** | the soy-vs-pea ratio, restored as an expression because that is what makes it checkable |
+| `soy_iso / heated_matrix / hexanal` | 2.80478 | **`(0.453/0.205)*(1-0.7060)`** | composition rule untouched, following its baseline |
+| `2-Pentylfuran` yield | 0.502 | **not moved** | re-derives to 0.5017897 — **0.000182 dex** away, below the 0.01 dex materiality floor Wave O used. Moving it would be fitting rounding. |
+| `1-Hexanol` yield | 0.063 | **not moved** | **UNANCHORED.** The paper says n.d. in both matrices; Wave T3 traced the 80 ppb to the repository's own brief. Nothing to fit. The lane is now unanchored end to end — yield AND factor. **[P]** |
+| `Nonanal` yield | 0.150 | **not moved** | **UNANCHORED.** No ambient anchor exists; the only nonanal target is Trikusuma, whose factor is back-solved from it. |
+| `reference_conversion_time_min` | 12589 | **not moved** | see (f) |
+
+**Identifiability and CI.** The one free parameter is the shared scale; its two per-lane
+requirements differ by 1.0228x (= 1.0113²), i.e. the two content-verified anchors are mutually
+consistent to 1.1% after the fit — a real residual, not an arithmetic zero, because the second
+degree of freedom was declined. Propagating the anchors' own stated uncertainties (±26% pea,
+±9.85% soy) gives a weighted 95% band on `Y(Hexanal)` of roughly 0.79–0.99; the pea anchor's 26%
+dominates it. **The absolute scale of `Y` is not identifiable at all** without pinning
+`hydroperoxide_scale`, and the record says so rather than quoting a physical yield.
+
+### (d) PREDICT-THEN-SCORE — deliverable (d)
+
+Ten predictions were written to `results/validation/wave_y_prereg_predictions.json` **before any
+constant was edited and before anything was re-scored**, with one amendment (below) also made
+before scoring. Eight scored correct, two were falsified, and both falsifications are findings.
+
+| # | surface | predicted | measured | verdict |
+|---|---|---|---|---|
+| Y-P1 | maillard_path hold-out (frozen 12f43dd, 22 targets) | 0 of 22 move | **8 of 22 differ from the freeze; Wave Y's own contribution is 0** | **FALSIFIED as worded, mechanism CORRECT** |
+| Y-P2 | Wave X step-level rows (5 scored, 0.518 dex) | bit-identical | **0.5177 dex** | CORRECT |
+| Y-P3 | matrix hold-out, 4 hexanal points | unchanged to 6 s.f. | max relative drift **8.5e-7** | CORRECT |
+| Y-P4 | matrix hold-out, 4 non-hexanal points | cannot move | **bit-identical, 0.00e+00** | CORRECT |
+| Y-P5 | matrix sigma derivation | must move; both hexanal predictions x4.317249; rms and bias FALL | predictions **x4.317249 exactly**; scatter fell 3.0951 -> 2.8452; **rms ROSE 3.0166 -> 3.1075 and bias ROSE 3.31x -> 5.95x** | **MECHANISM CORRECT, DIRECTION WRONG** |
+| Y-P5b | shipped sigma 2.86 inside the re-derived 90% CI | yes (0.7) | **inside [2.088, 6.494]** | CORRECT |
+| Y-P6 | directional panel (69 claims) | unchanged | no claim moves — checked claim by claim, see below | CORRECT |
+| Y-P7 | `benchmark_summary` rows | no row moves | Pratap-Singh/Trikusuma drift 2.4e-5 to 4.9e-5 (rounding); **the four synthetic snapshots moved x1.276** | PARTLY FALSIFIED (see Y-P8) |
+| Y-P8 | four internal synthetic snapshots | bit-identical | **every network-derived volatile x1.27604** | **FALSIFIED** |
+| Y-P9 | `projection_constant_refit` argmin | cannot move | 5 of its 16 rows are projection-INSENSITIVE by construction; only the objective's value can move | CORRECT (see (f)) |
+| Y-P10 | the Wave S4 claim | partially confirmed; every survivor a soy factor | exactly that | CORRECT |
+
+**AMENDMENT, made before scoring and recorded rather than absorbed.** The pre-registration
+listed a second change — propagating the stale Trikusuma nonanal factor. Wave Y's layer map had
+re-derived that staleness independently, from the arithmetic (the row is under by exactly
+`linoleic/oleic = 50/22 = 2.272727`; confirmed by re-multiplying against the linoleate pool:
+21592.8849 x 0.15 x 0.772209 x 0.00959565 = 24.0000 ppb). Reading the constant's own comment
+block afterwards showed **Wave P had already found the same identity and explicitly refused to
+refit**, on two grounds that still hold: re-solving it would re-absorb the correction into the
+constant that was hiding it, and Trikusuma is content-unverified. The change was **withdrawn**.
+Overturning a prior wave's reasoned refusal to turn a 0.44x row into a 1.00x row — on a
+benchmark whose own constant is back-solved from it — improves a number and degrades the record.
+
+#### Y-P1, attributed: the frozen hold-out has been stale since Wave X and nobody scored it
+
+Two ablations, both in `results/validation/maillard_path_holdout_wave_y_prepost.{json,md}`:
+
+| ablation | frozen targets still differing |
+|---|---:|
+| none (as shipped) | **8** |
+| Wave X's norfuraneol channel replaced with a no-op | **0** |
+| Wave Y's five constants reverted in memory | **0 vs. the shipped run** |
+
+All eight are **pentose** (ribose/cysteine, Yiltirak) rows: MFT rises 1.78–1.89x on all four
+bundles and FFT falls 0.992x — the exact fingerprint of a norfuraneol channel, which is a
+pentose product. **Wave X priced that channel against the Wave W panel (0.9241 -> 0.9518 dex)
+and did not re-score the frozen hold-out. The unmeasured price is 8 of 22 targets and a median
+fold error of 6.0388x -> 10.8638x** on the repository's only free-precursor out-of-sample
+surface. Wave Y did not cause it, does not fix it, and is the wave that measured it — because
+its own prediction of "no movement" failed loudly enough to force the check.
+
+The comparison is over the **frozen file's own 22 targets**. Ten targets were added after the
+freeze (Waves W/X mp_holdout bundles); they are listed by name in the artifact and are NOT
+counted as movement, because they have no frozen counterpart to move from.
+
+#### Y-P6, checked rather than assumed — including the one claim that could have flipped
+
+Nine of the 69 panel claims carry `Hexanal` as an observable. Eight are single-observable
+A-vs-B or monotonic-direction claims, and **every hexanal observability constant moved by
+exactly the same 4.317249x**, so every A/B hexanal ratio is preserved identically and no
+ordinal outcome can change. Measured, not argued: on the formulation lane the relocation is a
+pure OUTPUT multiplier — a four-formulation before/after diff moved `CCCCCC=O` / `Hexanal`
+and left **every other compound bit-identical**, because `predict_lop_generation` injects LOPs
+before the observability factor is applied and the budget never sees it.
+
+**The ninth is the one worth naming. `PROC-05` is a CROSS-COMPOUND ranking** — "hexanal (782)
+> 2-pentylfuran (163) > nonanal (24)" — and a cross-compound hexanal claim is exactly what a
+hexanal-only rescale can flip. It is safe because it lives on the Trikusuma **matrix_only**
+lane, where the relocation is product-preserving (782.006 / 163.000 / 10.560 before and
+after). **On the formulation lane the same claim would have moved by 4.317x**, and that is the
+concrete face of the shared-factor defect in (h): the two lanes are one edit away from
+disagreeing about a published ranking. **[P]**
+
+#### Y-P8, mechanism: a lipid-oxidation constant is setting part of the Maillard budget
+
+On the `matrix_precursor_augmented` lane the marker yields do not merely scale a prediction.
+`_run_benchmark_recommendation` injects each marker's molarity as `L x Y / (MW x 1e6) x 1000`,
+and that molarity then enters `_relative_precursor_load_factor` — **a geometric mean over all
+positive initial concentrations** — which multiplies the volatile budget. Measured on the pea
+snapshot:
+
+```
+  load_factor  3.892805 -> 4.967416          x1.27604
+  4.317249^(1/6) = 1.27612                   (six positive species)
+  Hexanal 0.742533 -> 0.742533               injected marker: unchanged
+  furfural 0.259806 -> 0.331525              x1.27604   network species
+  MFT, FFT, 2,5-dimethylpyrazine             x1.27604   network species
+```
+
+**A lipid-oxidation observability constant is setting part of the MAILLARD volatile budget, via
+a geometric mean that treats an injected oxidation product as if it were a Maillard precursor.**
+Not fixed here — it is a structural change, not a constant, and fixing it in the same wave
+would make the relocation unattributable. **[P]**
+
+#### Y-P5, owned: the direction claim was wrong and the reason is instructive
+
+The prediction said "every hexanal residual shrinks by exactly 4.317249x". The *predictions* did
+move by exactly 4.317249x, on both rows, as predicted. But a residual only shrinks if the row was
+UNDER-predicted. Soy ambient hexanal was 9.4334x under and became 2.1851x under (better); the
+Trikusuma heated row was 5.66x over and became 24.44x over (worse). I reasoned only about the row
+Wave S4 named and forgot the other one. Net: scatter narrows (centred sd 3.0951 -> 2.8452 in ln
+space), **bias grows** (3.31x -> 5.95x over), rms rises slightly. The reading is that the
+uncalibrated tier — a "no observability at all" model — cannot express a scale that is genuinely
+lane-dependent, and the relocation makes that more visible rather than less. **The sigma prior was
+NOT re-fitted**; adopting a narrower one in the wave that moved the residuals would make the two
+unattributable. **[P]**
+
+### (e) THE S4 FALSIFIABLE CLAIM — deliverable (e): PARTIALLY CONFIRMED
+
+The full before/after census of every observability constant in the registry is in the record.
+Summary: **8 constants were above 1 before; 6 are above 1 after, and every survivor is a SOY
+constant.**
+
+| lane | before | after | > 1 after |
+|---|---:|---:|:--:|
+| pea_iso / ambient_slurry / hexanal | 4.31725 | 1.0 | no |
+| soy_iso / heated_matrix / hexanal | 2.80478 | 0.649668 | no |
+| soy_iso / ambient_slurry / hexanal | 9.54007 | 2.209756 | **YES** |
+| soy_iso / ambient_slurry / 2-pentylfuran | 5.920319 | unchanged | **YES** |
+| soy_iso / ambient_slurry / 1-hexanol | 2.269841 | unchanged | **YES** |
+| soy_iso / ambient_slurry / nonanal | 1.066667 | unchanged | **YES** |
+| soy_iso class anchor / aldehyde | 2.209 | unchanged | **YES** |
+| soy_iso class anchor / furan | 5.92 | unchanged | **YES** |
+
+**Why the yields cannot reach them, measured.** A marker yield is shared across matrices, so it
+absorbs a GLOBAL scale error and never a LANE one. Model M2 in the record pins observability to
+the 1.0 that Wave S4 (c)'s own matrix-matched evidence requires on both ambient lanes and fits
+two yields against the four verified rows — two degrees of freedom for the data to disagree
+with, and it does:
+
+| compound | fitted Y | pea required | soy required | soy/pea | residual |
+|---|---:|---:|---:|---:|---|
+| Hexanal | 1.751084 | 0.895042 | 1.933851 | **2.1606x** | −0.2915 / +0.0431 dex |
+| 2-Pentylfuran | 1.221124 | 0.501790 | 2.971651 | **5.9221x** | −0.3862 / +0.3862 dex |
+
+RMS **0.3103 dex**, entirely soy-vs-pea. **And the two soy/pea ratios differ from each other**,
+so the residual is COMPOUND-specific as well as LANE-specific — which rules out the obvious
+next suspect: a soy lipid-profile change moves both linoleate markers by one common factor and
+therefore cannot produce 2.16x and 5.92x simultaneously. The soy lane needs soy's marker
+*ratio* to differ from pea's (measured 2-PF/hexanal: pea 0.561, soy 1.537, a 2.74x difference),
+which is chemistry the model does not have.
+
+**Verdict: Wave S4's diagnosis was right about the global scale and incomplete about the rest.**
+The unit argument identified a real misplacement and this wave acted on it; the residual it was
+supposed to explain is a different quantity, living one layer further up in the lipid-oxidation
+intake and its matrix dependence. **[P]**
+
+### (f) THE PROJECTION BUDGET — a hard new constraint, measured, and deliberately not applied
+
+Wave X's single-step systems print the **molar yield of the product on the fed precursor**, which
+is exactly what `conversion_extent * load_factor` predicts, with no allocation term between them.
+And because `_project_weighted_flux_to_ppb` normalises `mol_fraction = activity / total_activity`
+against a budget no barrier can touch, the largest ppb the model can ever give one analyte is
+`budget_molar * MW * 1e6`. That gives the repository its first constraint on the budget **from
+below**:
+
+> `hofmann1998_furan2aldehyde_h2s` measures **11016 ppb** of FFT (0.48 mol %, Table 3). The
+> model's entire volatile budget at those conditions, in that analyte's own molar mass, is
+> **2413.65 ppb** (0.1057 mol %), and the allocation already gives that analyte **100.0 %** of
+> it. **The row is unreachable at any allocation, any barrier and any observability factor.**
+> Required budget scale **4.5640x**; implied `tau_ref` = 2758.3 min.
+
+Three rows are unreachable in this sense, all Wave X step-level rows (the two other C2+C3 pH
+rows at 2.22x and 2.58x). Wave H retained `tau_ref = 12589` on the argument that the budget was
+"already the right order of magnitude"; every row it had was an end-to-end cascade where the
+allocation spreads the budget over unmeasured species. This is the class of row Wave H did not
+have.
+
+**AND YET NO GLOBAL SCALE WORKS.** Required budget scale across the 16 scored rows spans
+**0.0022x to 4.5640x — a factor of 2075**. Grouped by the number of steps the winning route
+actually took (read from `debug_paths`):
+
+| winning-route steps | rows | geometric-mean required scale | min | max |
+|---:|---:|---:|---:|---:|
+| 2 | 5 | **1.0719x** | 0.1284x | 4.5640x |
+| 4 | 5 | **0.0114x** | 0.0022x | 0.1171x |
+| 5 | 2 | **0.0905x** | 0.0286x | 0.2869x |
+| 6 | 4 | **0.0153x** | 0.0040x | 0.1678x |
+
+**Short paths (<= 2 steps) want the budget 1.07x; long paths (>= 4 steps) want it 0.0185x — a
+57.9x split.** Applying the binding constraint costs the panel (mean |log10| 0.9283 -> 1.0119
+dex; 8 rows better, 8 worse; within-10x 11/16 -> 9/16), so **`tau_ref` is NOT moved**.
+
+**The finding is the split, not the scale.** The budget is allocated from the limiting precursor
+with no regard for how many steps separate that precursor from the product, and the allocation
+then spends all of it — so a one-step system is starved (allocation 90–100 %, budget 4.6x too
+small) and a six-step cascade is flooded (allocation 0–20 %, budget 10–500x too large). That is
+Wave X's "0.518 dex on a step vs 0.952 dex end to end" with a mechanism under it, and it says the
+repair is structural: a per-step attrition term, or an allocation that is not a partition of a
+fixed budget. **[P]** Record:
+`results/validation/projection_budget_step_yield_constraint.{json,md}`.
+
+**A defect in the existing projection refit, found while measuring.**
+`results/validation/projection_constant_refit.json` names `pea_isolate_40C_PratapSingh2021`,
+`soy_isolate_40C_PratapSingh2021` and `pea_isolate_uht_140C_Trikusuma2019` among its
+`fit_target_files`. Those run the matrix_only lane, which **never calls
+`_estimate_projection_budget`** — measured: they produce no projection metadata at all. Their
+residuals are therefore CONSTANTS in that objective, diluting the mean over **5 of 16 rows**
+with no information about `tau_ref`. This is why Y-P9 holds: a marker-yield change moves that
+objective's VALUE and can never move its ARGMIN. **[P]** — the objective should be restricted to
+projection-sensitive rows before it is quoted again.
+
+### (g) THE BARRIER SENSITIVITY DEFICIT — on a Wave Z1 lead, decomposed
+
+Wave Z1 measured a ~13x shortfall between the Arrhenius expectation of a −2.30 kcal/mol move
+(15.9x at 418 K) and its effect on the Hofmann Table 4 objective (1.22x), and proposed the
+allocation normalisation as the cause. Reproduced here to **1.2179x** and split into **two**
+stages, not one (`results/validation/barrier_sensitivity_deficit.{json,md}`):
+
+| probe | analyte share | Arrhenius | flux ratio | ppb ratio | sum ppb ratio | stage 1 (span) | stage 2 (allocation) |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| `furan2aldehyde_h2s` / FFT | 0.992 | 15.93x | 1.4121x | **1.0000x** | 1.000000x | 11.28x | 1.41x |
+| `norfuraneol_h2s` / MFT | 0.465 | 15.93x | 6.5817x | **1.2179x** | 0.900509x | 2.42x | 5.40x |
+| `cys_ribose_140C` / MFT | 0.109 | 16.47x | 1.7502x | **1.5982x** | 1.028137x | 9.41x | 1.10x |
+
+* **Stage 1, span saturation.** `exp(span/RT) = sum_i exp(b_i/RT)` is a series resistance, so the
+  largest barrier on a route dominates it. Moving a smaller one barely moves the flux. This
+  dominates on long cascades (9.41x on the six-step probe).
+* **Stage 2, allocation normalisation.** `mol_fraction = activity / total_activity` against a
+  fixed budget, so a channel already holding fraction `f` grows only by
+  `r*f/(r*f+1-f)/f`. This dominates where the analyte already owns the budget — on the first
+  probe **a 15.9x rate change produces exactly zero change in predicted ppb.** The closed form
+  matches two of three probes to ~1.2 % and over-predicts the third by 1.5x, because the shipped
+  allocation also carries a `depth_activity` bias and a `max_weight` normalisation; that
+  discrepancy is reported rather than tuned.
+* **The sum of predicted ppb is invariant to six figures.** Barriers set the SPLIT; the budget
+  sets the SCALE.
+
+**And Wave Y's budget work cannot restore sensitivity.** Under the counterfactual `tau_ref`
+every ratio in that table is identical to **3e-16**, because `tau_ref` is a pure multiplicative
+scale and both stages are ratios, from which a common factor cancels. Said plainly, as asked:
+**the normalisation is deeper than the budget constants.** Restoring barrier sensitivity to
+absolute ppb requires the allocation to stop being a partition of a fixed budget. **[P]**
+
+This joins Wave S3 and Wave S4 into one statement: **barriers cannot set the scale, so any
+absolute-scale error is forced into whichever downstream multiplier is free — which was the
+observability factors.** Wave Y moved that scale to where the units permit it. It did not, and
+could not, restore sensitivity.
+
+### (h) A SIDE-EFFECT OF WAVE O, UNDONE
+
+The relocation is product-preserving on the matrix_only lane but NOT on the general
+**formulation** lane (`src/pipeline.py`), and that turned out to be a correction rather than a
+regression. The formulation lane injects LOPs via `predict_lop_generation`, which uses the
+*separate* `branching_ratios.formulation_path` set (hexanal 0.37) on a historically different
+proxy scale — and then applies the SAME registry observability factor. So Wave O's 4.317249x,
+fitted on the matrix benchmark lane, silently multiplied every formulation-path hexanal by
+4.317249x with no anchor for it; Wave O's ledger does not mention the formulation path.
+Measured before and after on four grid formulations: hexanal **130.68 -> 30.27 ppb**, exactly
+÷4.317249, **every other compound bit-identical**. The pre-Wave-O value is restored.
+
+**The underlying defect survives and is bigger than either wave:** one observability factor is
+shared between two lanes whose upstream yields are on independently-set scales. A fit on either
+lane silently rescales the other. **[P]**
+
+### (i) WHAT CHANGED
+
+**New (tracked, with the reason written into `.gitignore`):**
+`scripts/generators/rederive_matrix_marker_yields.py`,
+`derive_projection_budget_from_step_yields.py`, `generate_wave_y_holdout_prepost.py`,
+`measure_barrier_sensitivity_deficit.py`;
+`results/validation/matrix_marker_yield_rederivation.{json,md}`,
+`projection_budget_step_yield_constraint.{json,md}`, `wave_y_prereg_predictions.json`,
+`maillard_path_holdout_wave_y_prepost.{json,md}`, `barrier_sensitivity_deficit.{json,md}`.
+
+**Edited:** `src/benchmark_validation.py` (one yield + the dimensional header),
+`src/matrix_calibration_registry.py` (four hexanal constants + a module-header block),
+`.gitignore`, `README.md`, `AUDIT.md`.
+
+**Regenerated, and MOVED:** `external_validation_report.{json,md}` (8 points, max relative
+drift 8.5e-7), `matrix_sigma_residual_derivation.{json,md}` (the intended move),
+`prediction_uncertainty.{json,md}` (32/47 -> 28/47, all four lost hits synthetic),
+`loo_leverage.{json,md}`, `experiment_value_ranking.{json,md}`, `family_validation_overview.md`
+(SLR-01 median ratio 1.936 -> 2.470, SLR-09 1.007 -> 1.268; **SLR-02, the lipid-oxidation lane,
+is unchanged at 1.000 / 0.024** -- which is the matrix_only lane's invariance, measured from a
+third direction), `docs/assets/family_{benchmark_accuracy,parity}.png`.
+
+**Regenerated and BYTE-IDENTICAL** (run so the claim is measured rather than assumed):
+`validation_overview.{md,json,png}`, `model_card.json` and the README model card.
+`benchmark_summary.{json,md}` is untracked by design and was regenerated locally; the panel it
+prints is the same one the honest-headline guard recomputes live, so the guard is the binding
+check and it is re-pinned in (j).
+
+**NOT changed:** any barrier, any projection constant, any prior, any benchmark file, any
+hold-out bundle, the 2-pentylfuran / 1-hexanol / nonanal yields, the class-level anchors, and
+the four synthetic snapshots (see below).
+
+**The synthetic snapshots were deliberately NOT regenerated.** Refreshing them would restore
+0/14 -> 4/14 on the panel and in the same motion absorb the unreported Waves W/X drift. The
+rows stay failing and the decomposition (x1.936 inherited, x1.276 from this wave, against a
+x2.00 threshold) is pinned in the guard's own comment. **[P]** — an owner decision.
+
+### (j) TESTS RECONCILED — six guards fired, every one re-pinned with a dated causal comment
+
+Targeted subsets only, per the owner directive; **no full-suite run**.
+
+1. `test_headspace.py::test_pratap_singh_headspace_calibration_carries_soy_release_gap_in_headspace_layer`
+   — pea 4.31725 -> 1.0, soy 9.54007 -> `0.453/0.205`. The soy/pea RATIO assertion, which is what
+   the test is named for, is **unchanged for the second wave running**.
+2. `test_matrix_calibration_registry.py::test_runtime_multiplier_scales_compound_specific_record`
+   — rewritten to assert the multiplier against whatever the registry ships, which is what its own
+   comment already said it was for; it will now survive the next relocation too.
+3. `test_pipeline_projection_contract.py::test_output_projection_applies_compound_specific_matrix_calibration`
+   — expressed as the composition `(0.453/0.205)*(1-0.7060)` so the structure stays visible.
+4. `test_matrix_observability_refit_wave_o.py::test_shipped_constants_match_the_published_refit`
+   — **made STRICTER, not looser.** It now checks the PRODUCT `yield x factor` against the
+   published refit at each era's own yield. That is what Wave O actually solved for, it fails on
+   any uncompensated edit to EITHER half (which the old form could not see), and it is invariant
+   to a future relocation that preserves predictions.
+5. `test_honest_headline_guards.py` x3 — internal-synthetic passes 4 -> 0, aggregate 4/14 -> 0/14,
+   lenient 6/14 -> 2/14, each with the two-step decomposition and an explicit warning that a pass
+   RETURNING is most likely a snapshot regeneration.
+6. `test_wave_s4_protein_binding.py` x2 — the ppb assertions (1125.278 / 638.267) are **untouched
+   and still pass**, which is the result; only the factor assertion moved. The no-double-count
+   guard was **moved to the SOY lane** so it keeps its discriminating power: on the pea lane
+   "reported 1.0, net 1.0" would assert nothing.
+
+Subsets run: `-k "matrix or headspace or observability or benchmark_summary or honest_headline or
+uncertainty or external_validation"` over `tests/unit tests/scientific tests/integration`
+(**186 passed, 1 xfailed, 0 failed**), plus `test_benchmarks`,
+`test_benchmark_{summary,index,targets}`, `test_blind_spots`, `test_wave_x_step_level_2026_08`,
+`test_wave_u_maillard_path_holdout`, `test_wave_s4_protein_binding`,
+`test_wave_s3_trunk_kinetics`, `test_wave_s1_additive_flux_2026_08`,
+`test_wave_p_chemistry_2026_08`, `test_comparative_cli_2026_08`,
+`test_pipeline_projection_contract` and `tests/integration/test_pipeline`
+(**242 passed, 2 xfailed, 0 failed**). Both xfails are the declared strict-marked ones from
+Wave J2. The generator self-check also runs clean: `rederive_matrix_marker_yields.py` in its
+default (checking) mode re-derives the relocation from the anchors and exits 0 against the
+shipped constants, so the derivation and what ships cannot drift apart silently.
+
+### (k) GATES — deliverable (f)
+
+| Gate | Result |
+|---|---|
+| `scripts/ci/holdout_guard.py` | **PASS** — 4/4; 21 bundles, 17 maillard-path, all `free_precursor`, none named by any fit record, **36** fit records scanned (was 34 at Wave S3) |
+| `scripts/ci/citation_gate.py` | **PASS** — 117 files, 949 DOI-bearing fields, 288 unique DOIs, 0 waivers (unchanged; no citation was added) |
+| `scripts/ci/fit_target_gate.py` | **PASS** — 2/2. The relocation is declared; every new constant is <= 6 significant figures. |
+
+### (l) [P] CARRIED FORWARD
+
+- [P] **THE SOY-VS-PEA MARKER-RATIO DEFICIT is the successor to the S4 item.** Every
+  observability constant still above 1 is a soy constant, and the residual is both LANE- and
+  COMPOUND-specific (2.1606x hexanal, 5.9221x 2-pentylfuran), so neither a shared yield nor the
+  soy lipid profile can reach it. Measured 2-PF/hexanal ratio: pea 0.561, soy 1.537.
+- [P] **THE BUDGET IS PATH-LENGTH-BLIND, and that is the absolute-accuracy deficit.** Short
+  paths want 1.07x, long paths 0.0185x — a 57.9x split — and three step-level rows are
+  *unreachable at any allocation*. The repair is structural, not a constant.
+- [P] **BARRIER SENSITIVITY IS SATURATED IN TWO PLACES** (span log-sum-exp, allocation
+  normalisation) and no budget constant can restore it. On a dominant channel a 15.9x rate
+  change moves the prediction by 1.0000x.
+- [P] **THE MARKER YIELDS LEAK INTO THE MAILLARD BUDGET** through
+  `_relative_precursor_load_factor` on the `matrix_precursor_augmented` lane (x1.27604 measured
+  = 4.317249^(1/6)).
+- [P] **ONE OBSERVABILITY FACTOR SERVES TWO DIFFERENTLY-SCALED LANES.** A fit on the matrix
+  benchmark lane silently rescales the formulation lane; Wave O did exactly that and Wave Y
+  undid it (formulation hexanal 130.68 -> 30.27 ppb).
+- [P] **THE FROZEN maillard_path HOLD-OUT IS STALE SINCE WAVE X** — 8/22 targets, median
+  6.0388x -> 10.8638x, entirely the norfuraneol channel. Either re-freeze deliberately (naming
+  the commit and the reason) or carry the drift explicitly; it must not sit unscored again.
+- [P] **THE FOUR SYNTHETIC SNAPSHOTS ARE 2.47x OFF THEIR PINS** and the panel now reads 0/14.
+  Regenerating restores 4/14 and absorbs Waves W/X's drift. Owner decision.
+- [P] **`projection_constant_refit`'s OBJECTIVE IS DILUTED BY 5 INERT ROWS** — three matrix_only
+  benchmarks that never call the budget. Restrict it to projection-sensitive rows before quoting
+  it again.
+- [P] **THE MATRIX SIGMA CAN NOW BE RE-DERIVED FOR REAL** — a yield refit moves that tier where
+  an observability refit structurally cannot. This wave measured the move (rms 3.0166 -> 3.1075,
+  scatter down, bias up) and deliberately did NOT re-fit the prior.
+- [P] **THE 1-HEXANOL LANE IS UNANCHORED END TO END** — yield 0.063 AND factor `0.143/0.063`,
+  both traced by Wave T3 to the repository's own brief. Unchanged from Wave S4's item, now with
+  the yield half named too.
+- [P] **`hydroperoxide_scale = 1.0e6` IS UNANCHORED**, so no marker yield in this repository can
+  be quoted as a physical yield. Pinning it would make all four interpretable at once.
+
+## Wave R1 — the barrier table the model was not using, and the regeneration command that armed it (2026-08-28)
+
+Entry state: the orchestrator had measured shipped barriers of `Schiff_Base_Formation` 18.0
+(table 15.0), `Retro_Aldol_Fragmentation` 29.0 (32.0) and `Thiol_Addition` 31.6 (28.6),
+traced them to AUTO-ACCEPTED offsets in `data/lit/refinement_surrogate_patches.json`, and
+retired the acceptance path. This wave reconciles the repository to the un-offset model,
+scores both frozen hold-outs under both states, and — the load-bearing part — establishes
+**which artifacts were actually contaminated**, because that turned out not to be what the
+brief assumed.
+
+### (a) THE CORRECTION TO THE BRIEF, MEASURED FIRST BECAUSE EVERYTHING ELSE DEPENDS ON IT
+
+**The published numbers were NOT inflated. The mechanism that would have inflated them was
+live, and the repo's own documented regeneration command is what armed it.**
+
+Four independent measurements, in the order they were taken:
+
+1. `git show HEAD:data/lit/refinement_surrogate_patches.json` — `accepted_offsets` is `{}`,
+   and has been since 12f43dd. A clean checkout ships the audited table.
+2. Regenerating `benchmark_summary` produced a **byte-identical** file. Every one of the
+   orchestrator's sixteen cross-check panel numbers reproduces exactly (11.808/0.815,
+   2.872/0.304, 29.584, 14.458, 4.564, 2.755, 1.718, 7.033/2.459/2.857, 15.387, 6730.854,
+   24.037, 2.273, 5.457, 1.011 pass-no-ranking, snapshots 2.470).
+3. The un-offset arm of the hold-out re-run reproduces **Wave Y's shipped median fold error
+   of 10.8638x and its 8-of-22 drift from the pre-registration, to the last digit**. Wave Y
+   therefore ran un-armed.
+4. Loading `HEAD`'s `src/refinement_campaign.py` as a module and calling
+   `build_refinement_impact_artifact()` **today** re-accepts all nine offsets, unchanged, at
+   the bound. The defect was live, not historical. (Probe run in scratch; nothing written.)
+
+**So where did 18.0 / 29.0 / 31.6 come from?** From
+`scripts/generators/generate_refinement_governance.py`, whose last statement is
+`patch_path.write_text(json.dumps(impact_payload["patch"], indent=2))` — a wholesale
+overwrite of the TRACKED file. That generator is line 181 of `scripts/docker_maillard.sh`,
+inside `scientific_lane()`, **ahead of** the figure generators, the validated-envelope
+report and `scientific_fast_lane()` (the scientific-regression pytest run). File mtimes
+confirm the sequence: the governance artifacts were written at 14:19 today, the retirement
+note at 14:24. Running the repository's own documented regeneration command armed a
++/-3.0 kcal/mol override of the barrier table and then scored everything after it, including
+the test suite, against the armed model — with nothing on screen to say so, and no artifact
+recording which state a given number came from.
+
+**That is a worse defect than the one in the brief, not a lesser one.** An inflated number
+is visible once you re-derive it. A build step that silently changes the physics halfway
+through, and reverts on the next `git checkout`, makes every local measurement
+unattributable.
+
+The contrast that prices it, both halves from the same armed run:
+
+| surface | armed | honest | |
+|---|---:|---:|---|
+| the campaign's OWN objective (the panel it was fitted on) | 3045.48 | 5970.89 | **1.96x better, fitted** |
+| median fold error, frozen `maillard_path` hold-out (never fitted) | 10.05x | 10.86x | **1.08x worse, honest** |
+
+### (b) BOTH FROZEN HOLD-OUTS, BEFORE AND AFTER — deliverable (c)
+
+New artifact `results/validation/holdout_prepost_barrier_offset_retirement.{json,md}`,
+generator `scripts/generators/generate_wave_r1_holdout_prepost.py`. The "before" arm is
+reconstructed by passing the nine retired offsets through the `BARRIER_OFFSETS` environment
+variable **in a subprocess** — no file restored, no hold-out regenerated, no re-freeze. The
+generator reads the retired values out of the patch file's own provenance block, so it
+cannot drift from what was retired, and it **refuses to run** if `accepted_offsets` is ever
+non-empty.
+
+**Hold-out 1 — `maillard_path` (free precursor, frozen at 12f43dd, 32 targets today):**
+
+| metric | armed | honest (ships) | direction |
+|---|---:|---:|---|
+| median fold error | 10.0462x | **10.8638x** | worse |
+| median \|log10\| | 1.0020 dex | **1.0360 dex** | worse |
+| worst fold error | 565.2249x | **506.4244x** | better |
+| best fold error | 1.2516x | 1.2435x | ~flat |
+| within 10x | 15/31 | 15/31 | unchanged |
+| ordinal pairs correct | 10 | 10 | unchanged |
+| **targets differing from the 12f43dd pre-registration** | **21 of 22** | **8 of 22** | **the result** |
+
+31 of 32 targets moved. The pentose sulfur rows carry it: FFT rises 1.19-1.42x on every
+Hofmann and Yiltirak bundle (`thiol_addition` 31.6 -> 28.6 is a rate INCREASE), MFT falls
+0.89-0.99x, and the acrylamide/HMF/furfural rows move by <0.6 %. The last row is the one that
+settles the argument: armed, the model contradicted its own pre-registration on 21 of 22
+targets; honest, on 8 — and those 8 are Wave X's norfuraneol channel, already attributed by
+Wave Y. **The armed model had silently invalidated the pre-registration wholesale, and the
+only reason nobody noticed is that the arming is invisible.**
+
+**Hold-out 2 — the eight-point matrix hold-out: 0 of 8 points moved, to machine precision.**
+Coverage 3/8, median accuracy 93.68x, max fold error 2474.386x, all identical to 16 figures.
+That is a NEGATIVE result about the hold-out: it runs `matrix_only`, which never reaches the
+reaction network (Wave S1), so it is structurally incapable of detecting a 35x rate error in
+three barriers. It should never again be cited as evidence about barrier quality.
+
+### (c) ARTIFACTS REGENERATED — deliverable (a)
+
+Run on the documented conda path (`/opt/homebrew/Caskroom/miniforge/base/envs/maillard/bin/python`),
+figures ON, nothing with `--skip-figures`.
+
+**BYTE-IDENTICAL after regeneration** (run so the claim is measured, not assumed):
+`benchmark_summary.{json,md}`, `prediction_uncertainty.{json,md}` (n=200, seed 0; 28/47),
+`external_validation_report.{json,md}` (3/8, median 93.68x), `validation_overview.{md,json,png}`,
+`family_validation_overview.md`, `family_implementation_status.{json,md}`,
+`matrix_sigma_residual_derivation.{json,md}` (n=5, rms 3.108, bias 5.95x, shipped 2.86 still
+inside the CI and NOT moved), `experiment_value_ranking.{json,md}`, `loo_leverage.{json,md}`,
+`docs/assets/family_{benchmark_accuracy,parity}.png`. **Not one number in the tree moved.**
+
+**MOVED — and every one is Wave W/X staleness this wave caught, NOT a barrier effect:**
+* `benchmark_index.{json,md}` — **the nine `hofmann1998_*` step-level benchmarks from Waves
+  W/X were missing entirely** (16 rows -> 25). `cys_ribose_140C_Hofmann1998` tier
+  PRIMARY -> REFERENCE (the Wave S2c demotion had never propagated here). The four synthetic
+  snapshots flip `pass` -> `scale-gap`, which is the Wave Y 2.470x drift being reported
+  honestly rather than absorbed.
+* `gap_heatmap.png` — 16x12 -> **25x13**, max VoI 13.36 -> 14.19, outside-CI cells 6 -> 19.
+* `experiment_brief_cards.html` — benchmark count 16 -> 23, rank-2 card changes benchmark.
+
+**DELIBERATELY NOT REGENERATED, each with its reason:**
+* **Every `refit_*` / `projection_constant_refit` / `matrix_observability_refit_*` generator.**
+  Per the brief: re-running a fit after a barrier change is recalibration, not regeneration.
+  Stated plainly because it is the whole point of this wave — a wave that retires an
+  undeclared fit and then re-runs the declared ones has laundered the change through them.
+* **The four internal reproducibility snapshots.** Wave Y left them 2.470x off their pins as
+  an explicit owner decision ([P], because refreshing them absorbs the unreported Waves W/X
+  drift). The orchestrator's own post-retirement panel measures 2.470, i.e. the decision
+  still stands and the retirement does not disturb it. Refreshing them here would restore
+  0/14 -> 4/14 for no reason at all, since no prediction moved.
+* **`results/validation/experiment_requests/` and `data/protocols/requested_*.yaml`.** Stale
+  by the same Wave W/X gap (index VoI 13.36 vs the current 14.19, and the top-5 membership
+  has changed). Regenerating SPAWNS five new tracked protocol files and orphans five old
+  ones, which is a file-churn decision with an owner call inside it (what to delete). Left as
+  a **[P]** with the measurement, rather than done quietly. Noted for consistency: this wave
+  DID refresh `gap_heatmap` and `experiment_brief_cards`, which have the same staleness but
+  are single-file overwrites with no orphans.
+* **`docs/slr_benchmark_evaluation.md`** — no generator, consumes none of the changed
+  payloads (unchanged rationale from Wave M).
+
+### (d) THE ONE SOURCE CHANGE THIS WAVE MADE, AND WHY IT IS NOT A TEST FIX
+
+`src/refinement_campaign.py`: the retirement note is now emitted from a module constant
+`RETIREMENT_NOTE` and included in the patch payload, instead of living only as hand-written
+JSON.
+
+**Why this was necessary rather than tidy.** The generator overwrites the patch file
+wholesale. A hand-written explanation of why the mechanism was retired would therefore
+survive exactly until the next `scientific_lane()` run — i.e. the note explaining the defect
+would be erased by the very command that used to arm it. It is also the note that
+`generate_wave_r1_holdout_prepost.py` reads to reconstruct the "before" arm and that the new
+guard test checks. Emitting it from code makes the file reproducible from source and makes
+erasure a test failure. Nothing numeric changed.
+
+`src/barrier_constants.py`: **comment only, no constant touched.** The FAST_BARRIERS
+"AUTHORITY, stated plainly so nobody has to guess" block asserted that this table is
+authoritative for the screening lane. `get_barrier()`, 650 lines below, returns
+`FAST_BARRIERS[fm][0] + active_offset`. The block now says so, records the three measured
+armed values, and states the rule that survives: the offset ARITHMETIC stays (a declared fit
+record, or `BARRIER_OFFSETS` for a sensitivity probe, may still use it) but it may never
+again be written by a search that optimises the evaluation panel.
+
+### (e) THE SMILES-PARSE VERDICT — deliverable (g)
+
+**Benign by design; cosmetic log noise; NOT fixed, recorded as [P].** Traced by wrapping
+`Chem.MolFromSmiles` and running a benchmark evaluation. Every failing string comes from ONE
+call site:
+
+```
+src/recommend.py:507   _registry_compound_name:  label_is_smiles = _canon(label) == canon
+  -> src/recommend.py:112  _canon -> canonicalize_smiles(smi, fallback_to_original=True, ...)
+  -> src/chem_utils.py:21  Chem.MolFromSmiles(smi)
+```
+
+The line is a deliberate probe: *"is this species label actually a SMILES, or a human name?"*
+For `Furan-2-aldehyde`, `Hydrogen sulfide`, `2-methylthiophene`, `bis(2-methyl-3-furyl)` etc.
+RDKit fails to parse, `fallback_to_original=True` returns the string unchanged, the equality
+is False, and the label is correctly used as the compound name. **That is the intended
+branch, taken correctly.** The only defect is that RDKit's C++ logger writes
+`SMILES Parse Error` to stderr, so every generator log is full of alarming lines for entirely
+expected reasons — which already cost this campaign one false-positive defect report.
+
+Checked and cleared: the second name-or-SMILES site,
+`scripts/generators/derive_projection_budget_from_step_yields.py:138`, is only ever reached
+with `fallback_to_original=False`, so a name returns `None` before `_mw` is called. No
+functional path is affected anywhere.
+
+**Not fixed here on purpose.** The fix is ~8 lines (a `quiet=True` parameter on
+`canonicalize_smiles` wrapping the call in `RDLogger.DisableLog`/`EnableLog` under
+try/finally, passed only at the probe site), but it touches a per-species hot path in the
+shipped prediction lane, for a purely cosmetic gain, in the one wave whose entire deliverable
+is the removal of a silent source-side behaviour change. **[P]** with the call site above.
+
+
+### (f) TESTS RECONCILED — deliverable (b): **NOT ONE TEST NEEDED RE-PINNING, AND THAT IS THE EVIDENCE**
+
+The brief expected many failures — fold-band pins, honest-headline guards, snapshot pins,
+matrix rows, the Wave X/Y pins. **There were none.** Targeted subsets only, per the owner
+directive; no full-suite run.
+
+| subset | result |
+|---|---|
+| `tests/unit/test_wave_r1_barrier_offset_retirement.py` (NEW, this wave) | **57 passed** |
+| `test_honest_headline_guards` + `test_free_aa_quantitative_regression` + `test_wave_h_2026_08` + `test_wave_p_chemistry_2026_08` | **40 passed** |
+| `tests/unit tests/scientific tests/integration -k "matrix or headspace or benchmark_summary or benchmark_index or honest_headline or uncertainty or external_validation or validation_contract or wave_x or wave_u or wave_s1 or wave_s3 or wave_s4 or barrier or arrhenius or projection"` | **502 passed, 1 xfailed** (1003 deselected), 312.65 s |
+| `test_offline_refinement_governance` + `test_refinement_campaign` + `test_refinement_governance` + `test_wave_i_tooling` + `test_uncertainty_propagation` | **48 passed**, 872.99 s |
+| **total** | **647 passed, 1 xfailed, 0 failed** |
+
+The xfail is one of the declared strict-marked ones from Wave J2 (`xfail_strict = true`, so
+it cannot silently start passing).
+
+**Zero failures is the RESULT, not a shortcut.** It is the fourth independent confirmation
+of (a): if the shipped tree had been running on offset barriers, the fold-band pins on
+`cys_ribose_140C_Hofmann1998`, the pentose ordering floor and the honest-headline guards
+would all have moved by factors of order 1.2-1.5x. They did not move at all. A wave that had
+"re-pinned" them would have been re-pinning them to numbers that never changed.
+
+**Two test files were ANNOTATED (comments only, no assertion changed, no re-run needed):**
+1. `tests/scientific/test_refinement_campaign.py::test_refinement_campaign_discriminates_...`
+   — its `accepted_candidate_count == 0` and `patched == baseline` assertions were an
+   ACCIDENT of the three-benchmark subset (whose candidates never advance) and are now a
+   structural guarantee. The comment says so, records the nine offsets the same code accepted
+   on the full panel, and names the guard that can see what a three-benchmark test cannot.
+   **This is the test that should have caught the defect and structurally could not.**
+2. `..._campaign.py::test_get_barrier_consumes_refinement_surrogate_patch` — a docstring
+   stating that this test proves the offset ARITHMETIC works (deliberately kept, for a future
+   DECLARED barrier fit) on a `tmp_path` file, and that the tracked file's emptiness is the
+   other test's job. Deleting either one re-opens the hole.
+
+**The new guard test, `tests/unit/test_wave_r1_barrier_offset_retirement.py` — deliverable (e):**
+* `accepted_offsets == {}` and `accepted_candidates == []` in the tracked patch file, with a
+  failure message that tells the reader what to do instead of re-arming it.
+* `get_barrier(f)[0] == FAST_BARRIERS[f][0]` **parametrised over all 51 families**, not a
+  sample — because the retired offsets reached families by THREE different routes (exact key
+  `thiol_addition`; normalised alias `retro_aldol_fragmentation`; and the
+  `schiff`/`amadori`/`enol`/`strecker`/`cys` SUBSTRING map inside `get_barrier`, where one
+  line reaches every family whose normalised name contains the full key). A hand-picked
+  sample would have to guess which route the next one takes.
+* The three measured overrides pinned in BOTH directions — equal to the table, and NOT equal
+  to 18.0 / 29.0 / 31.6.
+* The substring map asserted inert while the file is empty.
+* The retirement note asserted to match `src.refinement_campaign.RETIREMENT_NOTE`, so a
+  regeneration that drops the note fails instead of silently erasing the explanation.
+* An autouse fixture deletes `BARRIER_OFFSETS` from the environment and clears the mtime-keyed
+  patch cache, so neither a stray shell variable nor another test's `tmp_path` fixture can
+  make these assertions vacuous.
+
+### (g) THE BARRIER-VALUE PROSE SWEEP — no numeric correction was warranted, and the reason matters
+
+Grepped `README.md`, `AUDIT.md`, `docs/`, `src/`, `tests/` and the ledger for `28.60` /
+`28.6 kcal` and the surrounding barrier claims. **Nothing needed a numeric edit**, for two
+distinct reasons that must not be conflated:
+
+* **`thiol_addition_pentodiulose` was never reached by any offset.** It shipped at 28.60
+  before and after — measured, both arms. The offset key `thiol_addition` matches only by
+  EXACT normalised key and is not in the substring map, so the constant that Waves N / P /
+  S2c argued over at length is untouched. Every statement about it is true.
+* **The `thiol_addition` CLASS statements were true of `HEAD` and false only of an armed
+  tree.** Per (a), the tracked file was empty at `HEAD`, so a clean checkout matched the
+  prose. Rewriting those sentences to say they were wrong would have been a fabrication in
+  the opposite direction.
+
+The qualification was therefore made **once, at the authoritative place**: the
+`AUTHORITY, stated plainly so nobody has to guess` block at the head of `FAST_BARRIERS` in
+`src/barrier_constants.py` now records that `get_barrier()` returns
+`FAST_BARRIERS[fm][0] + active_offset`, gives the three measured armed values, and states the
+surviving rule. Scattering the same caveat across thirty prose sites would have made it
+easier to miss, not harder.
+
+### (h) GATES — deliverable (f)
+
+| Gate | Result |
+|---|---|
+| `scripts/ci/holdout_guard.py` | **PASS** — 4/4 invariants; 21 hold-out bundles, 17 maillard-path, all `free_precursor`, none named by any fit record, **36** fit records scanned (unchanged from Wave Y: the new artifact is a SCORECARD, and its filename deliberately avoids `refit`/`rederivation` so the gate does not mistake it for a fit record) |
+| `scripts/ci/fit_target_gate.py` | **PASS** — 2/2. Nothing was fitted this wave; one undeclared fit was REMOVED |
+| `scripts/ci/citation_gate.py` | **PASS** — 117 files, 949 DOI-bearing fields, 288 unique DOIs, 0 waivers. Re-run AFTER every doc edit; unchanged, because no citation was added |
+
+### (i) WHAT CHANGED
+
+**New (tracked, with the reason written into `.gitignore`):**
+`scripts/generators/generate_wave_r1_holdout_prepost.py`,
+`results/validation/holdout_prepost_barrier_offset_retirement.{json,md}`,
+`tests/unit/test_wave_r1_barrier_offset_retirement.py`.
+
+**Edited:** `src/refinement_campaign.py` (the `RETIREMENT_NOTE` constant + its emission —
+see (d)), `src/barrier_constants.py` (comment only), `tests/scientific/test_refinement_campaign.py`
+(comments only), `README.md`, `AUDIT.md`, `docs/reference/VALIDATION_CONTRACT.md`, `.gitignore`,
+this ledger.
+
+**Regenerated and BYTE-IDENTICAL:** see (c). **Regenerated and MOVED:** `benchmark_index`,
+`gap_heatmap.png`, `experiment_brief_cards.html` — all three Wave W/X staleness, none a
+barrier effect.
+
+**NOT changed:** any barrier, any projection constant, any marker yield, any observability
+factor, any prior, any benchmark file, any hold-out bundle, the four synthetic snapshots.
+
+### (j) [P] CARRIED FORWARD
+
+- [P] **THE ARMING PATTERN IS A CLASS, NOT AN INCIDENT.** `generate_refinement_governance.py`
+  writes into `data/lit/`, which a runtime path reads. Every generator in
+  `scripts/generators/` should be audited for the same shape — *does this script write into a
+  tracked file that `src/` reads at prediction time?* — because "fit records live in
+  `results/validation/*refit*.json`" is the assumption both gates are built on, and this one
+  was not there.
+- [P] **THE EIGHT-POINT MATRIX HOLD-OUT IS BLIND TO THE REACTION NETWORK.** 0 of 8 points
+  moved under a 35x rate change in three barriers. It is a lipid-oxidation/observability
+  hold-out and must stop being cited as evidence about barriers or chemistry.
+- [P] **`results/validation/experiment_requests/` AND `data/protocols/requested_*.yaml` ARE
+  STALE** by the Wave W/X gap (index VoI 13.36 vs 14.19; top-5 membership changed).
+  Regenerating spawns five new tracked protocol files and orphans five old ones — an owner
+  call on what to delete. Measured here, deliberately not done.
+- [P] **THE SMILES-PARSE NOISE** at `src/recommend.py:507` — benign by design, cosmetic, ~8
+  lines to silence, on a per-species hot path. See (e) for the full verdict and the fix.
+- [P] **THE SEARCH IS STILL WORTH READING, JUST NOT APPLYING.** `candidate_offsets_not_applied`
+  now records what the campaign WOULD have chosen — four candidates, every recommended offset
+  at the ±3.0 bound, individual improvements 2599.78 / 708.02 / 6.12 / 0.32 against a baseline
+  objective of 5970.89. Armed, the first three compounded to 3045.48, i.e. **the panel's own
+  objective was halved by moving three barriers to a search bound**. That is a statement about
+  the panel's identifiability, and someone should ask what it means before the next barrier is
+  quoted as measured. Note also the spread: `retro_aldol` alone is 44 % of the baseline
+  objective and `strecker_degradation` is 0.005 % — the "fit" was one barrier plus noise.
+- [P] Wave Y's entire `[P]` list is unaffected by this wave and still stands.
+
+
+### (k) THE ARMING MECHANISM, RE-RUN AND DISARMED — end-to-end proof
+
+`generate_refinement_governance.py` was re-run to completion on the retired code (35 min
+wall, CPU-bound). This is the step that used to arm the offsets, so running it is the only
+way to show the disarm actually holds rather than asserting it.
+
+| | armed run (14:19, orchestrator) | disarmed run (15:37, this wave) |
+|---|---:|---:|
+| `accepted_offsets` written to the tracked file | **9 offsets** | **`{}`** |
+| `accepted_candidate_count` | 3 | **0** |
+| `candidate_not_applied_count` | (field did not exist) | **4** |
+| `baseline_total_score` | 5970.888890575251 | 5970.888890575251 |
+| `patched_total_score` | **3045.478740855963** | **5970.888890575251** |
+
+The tracked patch file now carries the retirement note **emitted from code**, with the
+`why` block at five entries including the arming-mechanism paragraph, `accepted_offsets` `{}`,
+and the four diagnostics. `test_wave_r1_barrier_offset_retirement.py` re-run against the
+regenerated file: **57 passed**.
+
+**One honest nuance in the diagnostic, recorded rather than glossed.** The retired loop was
+GREEDY-SEQUENTIAL — it advanced `current` after each acceptance, so later candidates were
+scored against the accumulated offsets. With acceptance removed, `current` never advances, so
+each candidate is now scored **independently against the baseline**. That is why four
+candidates surface where three were accepted: `strecker_degradation` (+0.32) improves the
+BASELINE but did not improve the already-thrice-offset state. The diagnostic is arguably more
+informative in this form — it is a per-family sensitivity readout rather than a path-dependent
+greedy trace — but it is a different quantity, and the wave that changed it says so.
+

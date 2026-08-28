@@ -144,9 +144,59 @@ MATRIX_BENCHMARK_BASE_MARKER_YIELDS = {
     # Pea-referenced observable yields from the Pratap-Singh 2021 ambient-slurry
     # family. Soy-vs-pea release differences now live explicitly in HeadspaceModel
     # so the matrix-only path separates oxidation intake from headspace observability.
-    "Hexanal": 0.205,
+    #
+    # WHAT THESE ARE, DIMENSIONALLY (2026-08-28, Wave Y). The matrix_only lane computes
+    #
+    #     observable_ppb = L(pool, lane, T, t) * Y(compound) * release * cal
+    #
+    # so `Y` converts a pseudo-hydroperoxide load into marker ppb. `Y` is DEGENERATE with
+    # `kinetics.hydroperoxide_scale` (1.0e6, a round unanchored number in
+    # data/lit/lipid_oxidation_calibration.json): only the product is identified. So a
+    # `Y` above 1 is NOT a unit violation -- which is exactly the asymmetry that makes the
+    # relocation below correct. An OBSERVABILITY factor is a fraction of a total and
+    # cannot exceed 1 (Wave S4 (b)); a marker yield against an arbitrary scale can.
+    #
+    # 2026-08-28 (Wave Y) -- Hexanal 0.205 -> 0.885036. THE SCALE MOVED SIDES; NO NEW
+    # PARAMETER WAS INTRODUCED. Wave O fitted ONE shared scale s = 4.317249 against the
+    # two CONTENT-VERIFIED Pratap-Singh anchors (pea 1138.00, soy 1621.71 ppb, Molecules
+    # 2021, 26, 4104 Table 1 via PMC8271896) and wrote it into the ambient-slurry HEXANAL
+    # observability factors, which took the pea reference lane's factor from its
+    # by-construction 1.0 to 4.31725 -- "a fraction of the total that the measurement
+    # sees", equal to 4.32. Wave S4 (b) named that as the tell that the deficit lived
+    # here instead. This wave moves the same single constant to this side of the product:
+    #
+    #     0.205 * 4.317249 = 0.885036       and every hexanal `cal` is divided by 4.317249
+    #     (src/matrix_calibration_registry.py: 4.31725 -> 1.0, 0.228776 -> 0.0529912,
+    #      9.54007 -> 0.453/0.205, 2.80478 -> (0.453/0.205)*(1-0.7060))
+    #
+    # The CALIBRATED tier is preserved to 6 significant figures on every lane (measured;
+    # every hexanal lane in the repository resolves to a compound_specific record, so
+    # none reaches the class-level aldehyde anchor, which is deliberately not moved). The
+    # UNCALIBRATED tier -- `_uncalibrated_prediction_ppb`, which reads this dict and never
+    # reads an observability factor -- moves by the full 4.317249x, and that movement is
+    # the point: it is the first time the matrix sigma derivation has been able to see
+    # the correction at all.
+    #
+    # Derivation, corpus and identifiability:
+    #   scripts/generators/rederive_matrix_marker_yields.py
+    #   results/validation/matrix_marker_yield_rederivation.{json,md}
+    #
+    # previous_value: 0.205 (Wave O era and earlier; itself 260/1268.3, i.e. back-solved
+    # from a hexanal figure Wave K proved is not in the paper).
+    "Hexanal": 0.885036,
+    # CONFIRMED, NOT MOVED (Wave Y). 638 ppb was verified VERBATIM against the paper, and
+    # the pea-reference requirement re-derives to 0.5017897 -- 0.000182 dex from the
+    # shipped value, below the 0.01 dex materiality floor Wave O used. Moving it would be
+    # fitting rounding.
     "2-Pentylfuran": 0.502,
+    # UNANCHORED (Wave Y, restating Wave T3). Pratap-Singh report n.d. for hexanol in BOTH
+    # matrices; 0.063 is 80/1269.8 and Wave T3 traced the 80 to the repository's own
+    # abstract-reconstructed brief. There is nothing to fit against, so it was NOT fitted.
+    # The 1-hexanol lane is unanchored end to end -- yield AND factor. [P]
     "1-Hexanol": 0.063,
+    # UNANCHORED (Wave Y). Pratap-Singh report no nonanal on either ambient lane, so the
+    # only nonanal target in the repository is Trikusuma 2019 (content-unverified) and its
+    # observability factor is back-solved from that very row. Nothing here is fitted.
     "Nonanal": 0.150,
 }
 

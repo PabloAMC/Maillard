@@ -28,6 +28,10 @@ from src.benchmark_validation import _run_matrix_only_benchmark_prediction
 
 ROOT = Path(__file__).resolve().parents[2]
 PEA_BENCH = ROOT / "data" / "benchmarks" / "pea_isolate_40C_PratapSingh2021.json"
+# Added 2026-08-28 (Wave Y): the soy lane is the one whose fitted observability factor
+# still differs from 1.0 after the marker-yield relocation, so it is where the
+# "reported but not applied" guard below keeps its discriminating power.
+SOY_BENCH = ROOT / "data" / "benchmarks" / "soy_isolate_40C_PratapSingh2021.json"
 LIU_BENCH = (
     ROOT
     / "data"
@@ -55,12 +59,22 @@ def test_shipped_pea_prediction_is_unchanged_by_this_wave():
 
     1125.278 ppb hexanal is `oxidation load x base marker yield x 4.31725`, the Wave O
     refit constant. If this moves, Wave S4 has leaked into the default path.
+
+    2026-08-28 (Wave Y): THE PPB ASSERTIONS ARE UNTOUCHED AND STILL PASS, which is the
+    result -- Wave Y relocated the ambient hexanal scale from the observability factor into
+    `MATRIX_BENCHMARK_BASE_MARKER_YIELDS['Hexanal']` (0.205 -> 0.885036), and the product
+    that reaches this prediction is preserved to 6 significant figures. Only the FACTOR
+    assertion below is re-pinned, 4.31725 -> 1.0, because that is the half of the product
+    that moved. The pea ambient lane is the reference lane, so 1.0 is what its own
+    definition requires and what Wave S4 (c)'s own matrix-matched-quantification evidence
+    says it should have been. Record:
+    results/validation/matrix_marker_yield_rederivation.{json,md}.
     """
     result = _run_matrix_only_benchmark_prediction(_bench(PEA_BENCH))
     assert result["predicted_ppb"]["Hexanal"] == pytest.approx(1125.278, rel=1e-4)
     assert result["predicted_ppb"]["2-Pentylfuran"] == pytest.approx(638.267, rel=1e-4)
     assert result["projection_metadata"]["Hexanal"]["total_observable_factor"] == pytest.approx(
-        4.31725, rel=1e-6
+        1.0, rel=1e-6
     )
     assert result["projection_metadata"]["Hexanal"]["observability_mode"] == pb.MODE_FITTED
 
@@ -171,12 +185,20 @@ def test_unknown_basis_applies_nothing_and_says_so():
 # --------------------------------------------------------------------------------------
 
 def test_binding_mode_bypasses_the_fitted_registry_entirely():
+    # MOVED TO THE SOY LANE 2026-08-28 (Wave Y), TO KEEP THE TEST DISCRIMINATING.
+    # This test's whole point is that the fitted registry constant is REPORTED but is NOT
+    # in the product. On the pea lane that distinction has just collapsed: Wave Y relocated
+    # the shared ambient hexanal scale into the marker yield, so the pea fitted factor is
+    # now 1.0 and "reported 1.0, net 1.0" would assert nothing. The soy ambient lane still
+    # ships 0.453/0.205 = 2.2098, so the two numbers still differ there and the test still
+    # fails if the registry factor leaks into the product. Record:
+    # results/validation/matrix_marker_yield_rederivation.{json,md}.
     with pb.use_observability_mode(pb.MODE_BINDING):
-        result = _run_matrix_only_benchmark_prediction(_bench(PEA_BENCH))
+        result = _run_matrix_only_benchmark_prediction(_bench(SOY_BENCH))
     meta = result["projection_metadata"]["Hexanal"]
     # The fitted constant is still REPORTED (it is what the other mode would have used)
-    # but it must not be in the product: the net observability is 1.0, not 4.31725.
-    assert meta["calibration_observable_factor"] == pytest.approx(4.31725, rel=1e-6)
+    # but it must not be in the product: the net observability is 1.0, not 2.2098.
+    assert meta["calibration_observable_factor"] == pytest.approx(0.453 / 0.205, rel=1e-6)
     assert meta["total_observable_factor"] == pytest.approx(1.0, rel=1e-9)
     assert result["metrics"]["binding_no_double_count_ratio"] == pytest.approx(1.0, rel=1e-9)
 

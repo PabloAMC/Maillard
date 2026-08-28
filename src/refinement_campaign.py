@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import copy
 import json
 import os
 import tempfile
@@ -576,6 +577,38 @@ def _has_severe_regression(baseline_rows: List[Dict[str, Any]], scenario_rows: L
     return False
 
 
+# 2026-08-28 (Wave R1) — THE RETIREMENT NOTE LIVES IN CODE, NOT ONLY IN THE DATA FILE.
+# `scripts/generators/generate_refinement_governance.py` ends with
+# `patch_path.write_text(json.dumps(impact_payload["patch"], indent=2))`, i.e. it
+# OVERWRITES `data/lit/refinement_surrogate_patches.json` wholesale — and that generator
+# sits in the middle of `scientific_lane()` in `scripts/docker_maillard.sh`, the repo's own
+# documented regeneration sequence. So a hand-written note in the JSON survives exactly
+# until the next regeneration pass. The note that explains why this mechanism was retired
+# is precisely the thing that must not be silently erasable, so it is emitted from here and
+# reproduced byte-for-byte on every run.
+RETIREMENT_NOTE: Dict[str, Any] = {
+    "date": "2026-08-28",
+    "why": [
+        "CIRCULARITY: the offsets were accepted BECAUSE they improved scores on the benchmark panel that the same benchmarks are then scored against. That is fitting to the evaluation set - the defect class this entire audit campaign existed to remove - and it was never declared to scripts/ci/fit_target_gate.py.",
+        "SATURATION: every accepted offset sat at exactly +/-3.0, the search bound, not at an interior optimum. A fit pinned to its bounds is a bound report, not a calibration.",
+        "SILENT OVERRIDE: every barrier statement in the repo - including the Hofmann-anchored thiol_addition 28.60, the Wave N/P/S2c route work, and every audit note quoting a FAST_BARRIERS value - described a number the model was NOT using. Measured shipped values with the offsets armed: Schiff_Base_Formation 18.0 (table 15.0), Retro_Aldol_Fragmentation 29.0 (table 32.0), Thiol_Addition 31.6 (table 28.6).",
+        "OWNER POLICY 2026-08-28: measured kinetics outrank fitted barriers always; automatic barrier fitting is exactly the mechanism being retired in favour of a measured mass-action kinetic core.",
+        "ARMING MECHANISM, measured 2026-08-28 (Wave R1): the tracked patch file at git HEAD carried an EMPTY accepted_offsets, so a clean checkout shipped the audited table. The offsets were written into that tracked file by scripts/generators/generate_refinement_governance.py, which runs mid-sequence in scientific_lane() in scripts/docker_maillard.sh - ahead of the figure generators, the envelope report AND the scientific-regression pytest lane. Running the repo's own documented regeneration sequence therefore ARMED a +/-3.0 kcal/mol override of the barrier table and scored everything after it against the armed model. Re-running the pre-retirement code today re-accepts the same nine offsets, so the defect was live, not historical.",
+    ],
+    "retired_offsets_kept_for_provenance": {
+        "retro_aldol": -3.0,
+        "retro_aldol_fragmentation": -3.0,
+        "lipid_schiff_base": 3.0,
+        "schiff": 3.0,
+        "schiff_base_formation": 3.0,
+        "schiff_condensation": 3.0,
+        "thiol_addition": 3.0,
+        "thiol_addition_h2": 3.0,
+        "thiol_addition_legacy_shortcut": 3.0,
+    },
+}
+
+
 def build_refinement_impact_artifact(
     benchmark_files: Optional[Iterable[Path | str]] = None,
     *,
@@ -586,6 +619,7 @@ def build_refinement_impact_artifact(
     baseline = _evaluate_offsets(contexts, {}, target_tag=target_tag)
     accepted_offsets: Dict[str, float] = {}
     accepted_candidates: List[Dict[str, Any]] = []
+    candidate_diagnostics: List[Dict[str, Any]] = []
     current = baseline
 
     for candidate in cheap_payload.get("candidates", []):
@@ -598,22 +632,43 @@ def build_refinement_impact_artifact(
             continue
         if _has_severe_regression(current["benchmarks"], trial["benchmarks"]):
             continue
-        accepted_offsets = trial_offsets
-        accepted_candidates.append(
+        # 2026-08-28 — AUTO-ACCEPTANCE RETIRED. Accepting an offset because it
+        # improves the benchmark panel, and then scoring the model on that same
+        # panel, is fitting to the evaluation set: the exact circularity this
+        # campaign removed everywhere else, and it was never declared to
+        # scripts/ci/fit_target_gate.py. It was also LIVE — the accepted offsets
+        # were written to data/lit/refinement_surrogate_patches.json, which
+        # barrier_constants.get_barrier() applies to every shipped prediction,
+        # silently overriding the audited table by +/-3.0 kcal/mol (~35x in rate
+        # at 150 C). Candidates are still SURFACED below as diagnostics — the
+        # search is informative as an attention pointer — but nothing is ever
+        # accepted, and `accepted_offsets` stays empty so the shipped barrier
+        # always equals the documented FAST_BARRIERS value. Re-enabling this
+        # requires declaring the panel as a fit target and removing those rows
+        # from scored evidence. See the retirement note in the patch file.
+        candidate_diagnostics.append(
             {
                 "reaction_family": str(candidate.get("reaction_family", "unknown")),
                 "recommended_offsets": dict(candidate.get("recommended_offsets", {})),
                 "screen_decision": str(candidate.get("screen_decision", "unknown")),
                 "total_improvement": float(candidate.get("total_improvement", 0.0)),
+                "status": "diagnostic_only_never_applied",
             }
         )
-        current = trial
+        # `current` is deliberately NOT advanced: no offset is applied, so the
+        # patched score must stay equal to the baseline score.
 
     patch_payload = {
-        "schema_version": "1.0",
-        "description": "Accepted surrogate barrier offsets selected only when they improve benchmark-visible diagnostics without severe regressions.",
+        "schema_version": "1.1",
+        "description": (
+            "RETIRED 2026-08-28: automatic barrier-offset acceptance is disabled. "
+            "accepted_offsets is permanently empty so the shipped barrier equals the "
+            "documented FAST_BARRIERS value; candidates below are diagnostics only."
+        ),
+        "retirement_note": copy.deepcopy(RETIREMENT_NOTE),
         "accepted_offsets": accepted_offsets,
         "accepted_candidates": accepted_candidates,
+        "candidate_offsets_not_applied": candidate_diagnostics,
         "baseline_total_score": float(baseline["total_score"]),
         "patched_total_score": float(current["total_score"]),
     }
@@ -623,6 +678,7 @@ def build_refinement_impact_artifact(
         "patched": current,
         "summary": {
             "accepted_candidate_count": len(accepted_candidates),
+            "candidate_not_applied_count": len(candidate_diagnostics),
             "baseline_total_score": float(baseline["total_score"]),
             "patched_total_score": float(current["total_score"]),
             "total_improvement": float(baseline["total_score"] - current["total_score"]),

@@ -8,15 +8,15 @@ promised in tasks/todo.md for the `uncalibrated` prior tier (shipped ln-sigma 2.
 
 | Lane | Compound | Measured ppb | Uncalibrated pred. ppb | ln residual | fold |
 | --- | --- | ---: | ---: | ---: | ---: |
-| pea_iso/heated_matrix | Hexanal | 782 | 4426.54 | +1.734 | 5.66x |
+| pea_iso/heated_matrix | Hexanal | 782 | 19110.5 | +3.196 | 24.44x |
 | pea_iso/heated_matrix | 2-Pentylfuran | 163 | 10839.6 | +4.197 | 66.50x |
 | pea_iso/heated_matrix | Nonanal | 24 | 1425.13 | +4.084 | 59.38x |
-| soy_iso/ambient_slurry | Hexanal | 1621.71 | 171.911 | -2.244 | 9.43x |
+| soy_iso/ambient_slurry | Hexanal | 1621.71 | 742.183 | -0.782 | 2.19x |
 | soy_iso/ambient_slurry | 2-Pentylfuran | 2492 | 420.973 | -1.778 | 5.92x |
 
-**n = 5** residuals · mean ln residual +1.198 (bias 3.31x) · **RMS ln-sigma = 3.017** (centered SD 3.095)
+**n = 5** residuals · mean ln residual +1.783 (bias 5.95x) · **RMS ln-sigma = 3.108** (centered SD 2.845)
 
-90% chi-square interval on sigma: [2.03, 6.30] — shipped value 2.86 is INSIDE this interval.
+90% chi-square interval on sigma: [2.09, 6.49] — shipped value 2.86 is INSIDE this interval.
 
 > **Caveats:** n is very small and the lanes are not independent draws (two share a
 > paper; one shares a matrix). RMS around zero includes systematic bias — the

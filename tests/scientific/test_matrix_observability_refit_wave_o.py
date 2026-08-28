@@ -63,14 +63,35 @@ def _record() -> dict:
 
 
 def test_shipped_constants_match_the_published_refit():
-    """The registry's constants ARE the ones the published record derives.
+    """Wave O's fit is still shipped -- as a PRODUCT, which is what it always was.
 
     The record stores, per lane, the pre-Wave-O ``previous_value`` and the ``refit_value``
-    it solved for. This walks the live registry and checks each shipped constant against
-    the refit value it claims to be, to 5e-4 dex (~0.12%) -- loose enough to absorb the
-    6-significant-figure rounding the fit_target_gate requires, tight enough that any real
-    edit fails.
+    it solved for. This originally walked the live registry and compared each shipped
+    constant against its ``refit_value`` directly.
+
+    RE-PINNED 2026-08-28 (Wave Y), AND MADE STRICTER RATHER THAN LOOSER. Wave Y relocated
+    the shared ambient-hexanal scale out of ``observable_factor`` and into
+    ``MATRIX_BENCHMARK_BASE_MARKER_YIELDS['Hexanal']`` (0.205 -> 0.885036), on the unit
+    argument that an observability factor cannot exceed 1 while a marker yield multiplying
+    an arbitrary ``hydroperoxide_scale`` can. Wave O's fit was NOT withdrawn and no
+    parameter was added: the same single constant, the same two verified anchors, the same
+    1.0113x residual.
+
+    What Wave O actually solved for was never the factor on its own -- it was the PRODUCT
+    ``marker_yield x observable_factor``, because that product is what reaches a prediction
+    and the split between its two halves is a convention. So this test now checks the
+    product, at the yield of the era each side belongs to. That is strictly stronger than
+    the old form: it fails on any edit to EITHER constant that is not compensated in the
+    other, which the old form could not see, and it is invariant to a future relocation
+    that preserves predictions. Record:
+    results/validation/matrix_marker_yield_rederivation.{json,md}.
     """
+    from src.benchmark_validation import MATRIX_BENCHMARK_BASE_MARKER_YIELDS
+
+    # The marker yield Wave O's refit_value was expressed against, before Wave Y moved the
+    # scale onto it. Hard-coded because it is history, not a live constant.
+    PRE_WAVE_Y_HEXANAL_YIELD = 0.205
+
     live = {
         (r.protein_type, r.process_state, r.compound): float(r.observable_factor)
         for r in _MATRIX_CALIBRATION_RECORDS
@@ -81,13 +102,19 @@ def test_shipped_constants_match_the_published_refit():
     for entry in adopted:
         lane = (entry["protein_type"], entry["process_state"], entry["compound"])
         assert lane in live, f"{lane} vanished from the calibration registry"
-        delta_dex = abs(math.log10(live[lane] / float(entry["refit_value"])))
+        assert lane[2] == "hexanal", (
+            f"{lane} is not a hexanal lane; the product form below assumes the hexanal yield"
+        )
+        shipped_product = live[lane] * float(MATRIX_BENCHMARK_BASE_MARKER_YIELDS["Hexanal"])
+        published_product = float(entry["refit_value"]) * PRE_WAVE_Y_HEXANAL_YIELD
+        delta_dex = abs(math.log10(shipped_product / published_product))
         assert delta_dex <= 5.0e-4, (
-            f"{lane} ships {live[lane]:.6g} but the published refit says "
-            f"{float(entry['refit_value']):.6g} ({delta_dex:.2e} dex apart). The constant "
-            f"and its derivation have diverged: either re-run "
+            f"{lane} ships yield x factor = {shipped_product:.6g} but the published refit "
+            f"says {published_product:.6g} ({delta_dex:.2e} dex apart). The fit and what "
+            f"ships have diverged: either re-run "
             f"scripts/generators/refit_matrix_observability_pratap_singh.py and land the "
-            f"new record, or restore the constant."
+            f"new record, or restore the constants. NOTE the product, not the factor: "
+            f"Wave Y moved the scale between the two halves without changing their product."
         )
         # The record must also still remember where it came from, or the move is
         # unauditable a year from now.

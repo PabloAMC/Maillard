@@ -265,9 +265,39 @@ def test_zero_of_fourteen_predictive_benchmarks_are_free_of_blocking_gaps(panel)
         f"means either a genuine improvement or a back-solved constant being refitted to "
         f"its own benchmark -- check which before re-pinning."
     )
-    assert len(passing("internal_synthetic")) == 4, (
+    # RE-PINNED 2026-08-28 (Wave Y): 4/4 -> 0/4, AND THE MOVEMENT IS TWO-THIRDS INHERITED.
+    # These four rows are the synthetic reproducibility snapshots -- MODEL OUTPUT pinned at
+    # an earlier commit, not measurements -- so "failing" them means the model has drifted
+    # away from its own recorded self, which is exactly what they exist to detect. Measured
+    # decomposition of `max_ratio` on all four, by reverting Wave Y's five constants in
+    # memory and re-running:
+    #
+    #     1.000  (as pinned)  ->  1.936  Waves W/X chemistry, NEVER REGENERATED OR REPORTED
+    #                          ->  2.470  x1.27604 from Wave Y
+    #
+    # and the pass threshold is max_ratio <= 2.00, so the snapshots were already sitting at
+    # 97 % of it before this wave and Wave Y tipped them over.
+    #
+    # WAVE Y'S 1.27604x IS A REAL FINDING, NOT ROUNDING. On the matrix_precursor_augmented
+    # lane the marker yields do not merely scale a prediction: they set the injected marker
+    # molarity, which enters `_relative_precursor_load_factor` -- a GEOMETRIC MEAN over all
+    # positive initial concentrations -- and therefore the volatile budget. Raising the
+    # hexanal yield by 4.317249x raises that geometric mean by 4.317249^(1/6) = 1.27612 with
+    # six positive species, which is the 1.27604 measured. Every NETWORK-derived volatile on
+    # those snapshots (furfural, MFT, FFT, dimethylpyrazine) rises by exactly that factor
+    # while the four injected markers are unchanged. A lipid-oxidation observability constant
+    # is thus setting part of the MAILLARD volatile budget. That leak is carried as [P]; it
+    # is a structural change, not a constant, and fixing it belongs to its own wave.
+    #
+    # NOT REGENERATED, DELIBERATELY. Refreshing the snapshots would restore 4/4 and would in
+    # the same motion absorb the unreported Waves W/X drift, which is laundering. The rows
+    # stay failing and the decomposition is on the record.
+    assert len(passing("internal_synthetic")) == 0, (
         f"internal-synthetic passes moved to {len(passing('internal_synthetic'))}/4 "
-        f"(published 4/4)"
+        f"(published 0/4 since the 2026-08-28 Wave Y marker-yield relocation; 4/4 before "
+        f"Waves W/X). These are reproducibility pins, not evidence: a row RETURNING here "
+        f"means someone regenerated the snapshots, which absorbs every unreported drift "
+        f"since they were last written. Check what was absorbed before re-pinning."
     )
 
     # 2026-08-27 (Wave O): pinned so a fit-recovery improvement cannot land silently.
@@ -297,11 +327,23 @@ def test_zero_of_fourteen_predictive_benchmarks_are_free_of_blocking_gaps(panel)
     # EVERY remaining pass is now an internal synthetic reproducibility row, i.e. the model
     # agreeing with its own frozen output. There is no longer a single benchmark in the
     # panel that passes on anything but its own snapshot.
-    assert total_passes == 4, (
-        f"Aggregate panel passes moved to {total_passes}/14 (published 4/14 since the "
-        f"2026-08-27 Wave P oleate substrate correction; 5/14 after Wave K/M, 7/14 before "
-        f"that -- explicitly labelled do-not-quote because every pass is in a non-evidence "
-        f"bucket)."
+    # RE-PINNED 2026-08-28 (Wave Y): 4 -> 0. The four remaining passes WERE the four
+    # synthetic reproducibility snapshots, and they have now drifted off their own pins --
+    # 1.936x from the unreported Waves W/X chemistry and a further 1.27604x from Wave Y's
+    # marker-yield relocation leaking into `_relative_precursor_load_factor`, against a
+    # 2.00x pass threshold. The full decomposition is on the internal_synthetic assertion
+    # above and in tasks/audit_remediation.md, Wave Y.
+    #
+    # SO THE HEADLINE IS NOW LITERALLY ZERO: not one benchmark in this panel passes, on any
+    # kind of evidence, including its own frozen output. That is the most honest the number
+    # has ever been, and it should be quoted as such rather than repaired by regenerating
+    # the snapshots.
+    assert total_passes == 0, (
+        f"Aggregate panel passes moved to {total_passes}/14 (published 0/14 since the "
+        f"2026-08-28 Wave Y relocation; 4/14 after Wave P, 5/14 after Wave K/M, 7/14 before "
+        f"that -- and every one of those historical passes was in a non-evidence bucket). A "
+        f"pass RETURNING here is most likely a snapshot regeneration; check what drift it "
+        f"absorbed before re-pinning."
     )
     assert passing("internal_synthetic") == sorted(
         s.benchmark_id for s in panel if s.overall_status == "pass"
@@ -320,9 +362,14 @@ def test_zero_of_fourteen_predictive_benchmarks_are_free_of_blocking_gaps(panel)
         1 for s in panel
         if s.overall_status in {"pass", "pass-no-ranking", "partial-pass"}
     )
-    assert lenient_passes == 6, (
+    # RE-PINNED 2026-08-28 (Wave Y): 6 -> 2, the same four snapshot rows leaving by the same
+    # cause. What survives is exactly the two Pratap-Singh `pass-no-ranking` fit-recovery
+    # rows, so the two predicates now differ by 2 (2 lenient vs 0 strict) where they used to
+    # differ by 2 (6 vs 4): the divergence did not widen, the population under it shrank.
+    assert lenient_passes == 2, (
         f"the lenient (presentation-layer) pass count moved to {lenient_passes}/14, "
-        f"published 6/14. It is the number benchmark_summary.md prints; the strict count "
+        f"published 2/14 since Wave Y (6/14 before it). It is the number "
+        f"benchmark_summary.md prints; the strict count "
         f"asserted above is the number this guard and the README headline use."
     )
 

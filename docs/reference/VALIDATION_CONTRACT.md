@@ -527,6 +527,30 @@ never emits, so ~70% of the barrier channel was inert and every interval was nar
 priors claimed. Coverage numbers from before that date were computed against intervals the
 model was not actually entitled to.
 
+**A fit target that this section could not see, until 2026-08-28 (Wave R1).** Everything
+above assumes that a fit is something recorded in a fit record under
+`results/validation/*refit*.json`, where `src/fit_target_index.py` and
+`scripts/ci/fit_target_gate.py` can classify it. One was not.
+`data/lit/refinement_surrogate_patches.json` carried barrier offsets that
+`src/barrier_constants.get_barrier()` **adds to the audited `FAST_BARRIERS` value**, and
+`src/refinement_campaign.py` filled that map automatically by keeping any offset that
+lowered the total score on the benchmark panel — the panel this section then reports
+coverage over. It was undeclared, so no gate saw it; it was saturated at the ±3.0 kcal/mol
+search bound; and at 150 °C 3.0 kcal/mol is a ~35× rate factor. It was armed by
+`scripts/generators/generate_refinement_governance.py`, which the repository's own
+`scientific_lane()` runs *before* its scientific-regression pytest lane, so a local tree
+could be scoring itself against tuned barriers with nothing on screen to say so.
+
+The auto-acceptance is retired, `accepted_offsets` is permanently empty, and
+`tests/unit/test_wave_r1_barrier_offset_retirement.py` asserts that `get_barrier()` returns
+the table value for every family. The tracked file at `HEAD` was empty, so none of the
+numbers in this document were produced under the armed state — verified by regenerating
+them all and getting byte-identical output. The price on the one surface that can price it
+is in `results/validation/holdout_prepost_barrier_offset_retirement.md`: the honest model is
+**~8 % worse** on the median fold error of the frozen `maillard_path` pre-registration
+(10.05× → 10.86×), and the eight-point matrix hold-out cannot see the difference at all
+because it never reaches the reaction network.
+
 ## 4. How To Read The Validation Figures
 
 The repository now relies on a small set of figures that each have a distinct purpose.

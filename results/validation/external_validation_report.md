@@ -49,7 +49,7 @@ Samples per hold-out bundle: 200; seed 0; bundles evaluated: 4.
 | Benchmark | Matched compounds | Inside 90% CI | Median accuracy |
 | --- | ---: | ---: | ---: |
 | external_validation_bi_2020_raw_pea_hexanal | 1 | 1/1 (100.0%) | 1.24x |
-| external_validation_bi_2020_roasted_pea_hexanal | 1 | 0/1 (0.0%) | 2474.38x |
+| external_validation_bi_2020_roasted_pea_hexanal | 1 | 0/1 (0.0%) | 2474.39x |
 | external_validation_li_2026_spi_wg_hme_control | 4 | 1/4 (25.0%) | 104.98x |
 | external_validation_liu_2023_ppi_offnote_baseline | 2 | 1/2 (50.0%) | 32.45x |
 
@@ -71,7 +71,7 @@ Samples per hold-out bundle: 200; seed 0; bundles evaluated: 4.
 
 | Compound | Reference value (ppb) | Provenance | P5 | P50 | P95 | Fold error | Inside 90% CI |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| hexanal | 324 | `primary_source_table_value_verified` | 1.27e+04 | 8.02e+05 | 1.33e+08 | 2474.38x | no |
+| hexanal | 324 | `primary_source_table_value_verified` | 1.27e+04 | 8.02e+05 | 1.33e+08 | 2474.39x | no |
 
 ### external_validation_li_2026_spi_wg_hme_control
 

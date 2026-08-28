@@ -1,0 +1,694 @@
+{
+  "generated_by": "scripts/generators/rederive_matrix_marker_yields.py",
+  "wave": "Wave Y (2026-08-28)",
+  "objective": "Relocate the matrix lane's absolute observable scale from the observability factor (where an operator > 1 is a unit violation) to the base marker yield (where it is not), and measure what survives.",
+  "layer_map": {
+    "equation": "observable_ppb = L(pool, lane, T, t) * Y(compound) * release(compound, lane) * cal(compound, lane, state)",
+    "L": "src.lipid_oxidation.predict_hexanal_generation -> total_hydroperoxide / total_hydroperoxide_oleate, x1000",
+    "Y": "src.benchmark_validation.MATRIX_BENCHMARK_BASE_MARKER_YIELDS",
+    "release": "src.headspace.HeadspaceModel.get_matrix_benchmark_headspace_factor, net of cal",
+    "cal": "src.matrix_calibration_registry.describe_matrix_calibration",
+    "degeneracy": "Y and cal are perfectly degenerate on a single lane; only their product is identified.",
+    "second_degeneracy": "Y is degenerate with kinetics.hydroperoxide_scale = 1.0e6 in data/lit/lipid_oxidation_calibration.json, so Y carries no unit bound and 'Y > 1' is not a violation."
+  },
+  "fit_target_files": [
+    "pea_isolate_40C_PratapSingh2021.json",
+    "soy_isolate_40C_PratapSingh2021.json",
+    "pea_isolate_uht_140C_Trikusuma2019.json"
+  ],
+  "fit_target_ids": [
+    "pea_isolate_40C_PratapSingh2021",
+    "soy_isolate_40C_PratapSingh2021",
+    "pea_isolate_uht_140C_Trikusuma2019"
+  ],
+  "forbidden_as_fit_targets": [
+    "data/benchmarks/external_validation/** (matrix hold-out AND maillard_path hold-out)",
+    "*Internal2026* / *ProtocolPilot2026* (synthetic reproducibility lane)",
+    "hofmann1998_norfuraneol_h2s_145C_20min_pH5 (Wave X's declared fit target, different lane)",
+    "data/benchmarks/quarantined/**"
+  ],
+  "fit_leverage": {
+    "free_parameters": 1,
+    "fitted_rows": 2,
+    "parameters_per_row": 0.5,
+    "class": "per_row_recovery",
+    "interpretation": "M1 relocates ONE parameter -- Wave O's shared ambient-hexanal scale, fitted against two verified anchors -- from cal into Y. It introduces no new freedom: the same single constant, the same two rows, the same 1.0113x residual. Those rows were already excluded from the honest-literature numerator and denominator as fit recovery and stay excluded. Trikusuma is carried for PROPAGATION only and contributes no residual."
+  },
+  "lanes": {
+    "pea_isolate_40C_PratapSingh2021": {
+      "benchmark_id": "pea_isolate_40C_PratapSingh2021",
+      "protein_type": "pea_iso",
+      "process_state": "ambient_slurry",
+      "conditions": {
+        "temp_C": 40,
+        "ph": 6.0,
+        "water_activity": 0.95,
+        "time_min": 10
+      },
+      "oxidation_load_ppb_by_pool": {
+        "total_hydroperoxide": 1271.4488693675894,
+        "total_hydroperoxide_oleate": 559.4375025217392
+      },
+      "compounds": {
+        "Hexanal": {
+          "pool_key": "total_hydroperoxide",
+          "oxidation_load_ppb": 1271.4488693675894,
+          "shipped_yield": 0.885036,
+          "release_factor": 1.0,
+          "calibration_factor": 1.0,
+          "calibration_fallback_mode": "compound_specific",
+          "calibration_source": null,
+          "predicted_ppb": 1125.2780215496139,
+          "measured_ppb": 1138.0,
+          "measured_uncertainty_pct": 26.0
+        },
+        "2-Pentylfuran": {
+          "pool_key": "total_hydroperoxide",
+          "oxidation_load_ppb": 1271.4488693675894,
+          "shipped_yield": 0.502,
+          "release_factor": 1.0,
+          "calibration_factor": 1.0,
+          "calibration_fallback_mode": "compound_specific",
+          "calibration_source": null,
+          "predicted_ppb": 638.2673324225299,
+          "measured_ppb": 638.0,
+          "measured_uncertainty_pct": 8.0
+        },
+        "1-Hexanol": {
+          "pool_key": "total_hydroperoxide",
+          "oxidation_load_ppb": 1271.4488693675894,
+          "shipped_yield": 0.063,
+          "release_factor": 1.0,
+          "calibration_factor": 1.0,
+          "calibration_fallback_mode": "compound_specific",
+          "calibration_source": null,
+          "predicted_ppb": 80.10127877015813,
+          "measured_ppb": null,
+          "measured_uncertainty_pct": null
+        },
+        "Nonanal": {
+          "pool_key": "total_hydroperoxide_oleate",
+          "oxidation_load_ppb": 559.4375025217392,
+          "shipped_yield": 0.15,
+          "release_factor": 1.0,
+          "calibration_factor": 1.0,
+          "calibration_fallback_mode": "compound_specific",
+          "calibration_source": null,
+          "predicted_ppb": 83.91562537826088,
+          "measured_ppb": null,
+          "measured_uncertainty_pct": null
+        }
+      }
+    },
+    "soy_isolate_40C_PratapSingh2021": {
+      "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+      "protein_type": "soy_iso",
+      "process_state": "ambient_slurry",
+      "conditions": {
+        "temp_C": 40,
+        "ph": 6.0,
+        "water_activity": 0.95,
+        "time_min": 10
+      },
+      "oxidation_load_ppb_by_pool": {
+        "total_hydroperoxide": 838.5911653962233,
+        "total_hydroperoxide_oleate": 363.9169208323233
+      },
+      "compounds": {
+        "Hexanal": {
+          "pool_key": "total_hydroperoxide",
+          "oxidation_load_ppb": 838.5911653962233,
+          "shipped_yield": 0.885036,
+          "release_factor": 1.0,
+          "calibration_factor": 2.209756097560976,
+          "calibration_fallback_mode": "compound_specific",
+          "calibration_source": null,
+          "predicted_ppb": 1640.0442288190159,
+          "measured_ppb": 1621.71,
+          "measured_uncertainty_pct": 10.0
+        },
+        "2-Pentylfuran": {
+          "pool_key": "total_hydroperoxide",
+          "oxidation_load_ppb": 838.5911653962233,
+          "shipped_yield": 0.502,
+          "release_factor": 1.0,
+          "calibration_factor": 5.920318725099602,
+          "calibration_fallback_mode": "compound_specific",
+          "calibration_source": null,
+          "predicted_ppb": 2492.2929435575757,
+          "measured_ppb": 2492.0,
+          "measured_uncertainty_pct": 8.0
+        },
+        "1-Hexanol": {
+          "pool_key": "total_hydroperoxide",
+          "oxidation_load_ppb": 838.5911653962233,
+          "shipped_yield": 0.063,
+          "release_factor": 1.0,
+          "calibration_factor": 2.2698412698412698,
+          "calibration_fallback_mode": "compound_specific",
+          "calibration_source": null,
+          "predicted_ppb": 119.91853665165993,
+          "measured_ppb": null,
+          "measured_uncertainty_pct": null
+        },
+        "Nonanal": {
+          "pool_key": "total_hydroperoxide_oleate",
+          "oxidation_load_ppb": 363.9169208323233,
+          "shipped_yield": 0.15,
+          "release_factor": 1.0,
+          "calibration_factor": 1.0666666666666667,
+          "calibration_fallback_mode": "compound_specific",
+          "calibration_source": null,
+          "predicted_ppb": 58.226707333171724,
+          "measured_ppb": null,
+          "measured_uncertainty_pct": null
+        }
+      }
+    },
+    "pea_isolate_uht_140C_Trikusuma2019": {
+      "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+      "protein_type": "pea_iso",
+      "process_state": "heated_matrix",
+      "conditions": {
+        "temp_C": 140,
+        "ph": 7.1,
+        "water_activity": 0.98,
+        "time_min": 0.1
+      },
+      "oxidation_load_ppb_by_pool": {
+        "total_hydroperoxide": 21592.8849495496,
+        "total_hydroperoxide_oleate": 9500.869377801826
+      },
+      "compounds": {
+        "Hexanal": {
+          "pool_key": "total_hydroperoxide",
+          "oxidation_load_ppb": 21592.8849495496,
+          "shipped_yield": 0.885036,
+          "release_factor": 0.7722090310491849,
+          "calibration_factor": 0.0529912,
+          "calibration_fallback_mode": "compound_specific_process_state",
+          "calibration_source": null,
+          "predicted_ppb": 782.0062752559559,
+          "measured_ppb": 782.0,
+          "measured_uncertainty_pct": 8.0
+        },
+        "2-Pentylfuran": {
+          "pool_key": "total_hydroperoxide",
+          "oxidation_load_ppb": 21592.8849495496,
+          "shipped_yield": 0.502,
+          "release_factor": 0.7722090310491849,
+          "calibration_factor": 0.0194733,
+          "calibration_fallback_mode": "compound_specific_process_state",
+          "calibration_source": null,
+          "predicted_ppb": 163.00045581258945,
+          "measured_ppb": 163.0,
+          "measured_uncertainty_pct": 9.0
+        },
+        "1-Hexanol": {
+          "pool_key": "total_hydroperoxide",
+          "oxidation_load_ppb": 21592.8849495496,
+          "shipped_yield": 0.063,
+          "release_factor": 1.0,
+          "calibration_factor": 1.0,
+          "calibration_fallback_mode": "nearest_process_state",
+          "calibration_source": null,
+          "predicted_ppb": 1360.3517518216247,
+          "measured_ppb": null,
+          "measured_uncertainty_pct": null
+        },
+        "Nonanal": {
+          "pool_key": "total_hydroperoxide_oleate",
+          "oxidation_load_ppb": 9500.869377801826,
+          "shipped_yield": 0.15,
+          "release_factor": 0.7722090310491849,
+          "calibration_factor": 0.00959565,
+          "calibration_fallback_mode": "compound_specific_process_state",
+          "calibration_source": null,
+          "predicted_ppb": 10.559999107572926,
+          "measured_ppb": 24.0,
+          "measured_uncertainty_pct": 4.0
+        }
+      }
+    }
+  },
+  "M0_shipped": {
+    "hexanal_yield": 0.885036,
+    "pea_ambient_hexanal_cal": 1.0,
+    "soy_ambient_hexanal_cal": 2.209756097560976
+  },
+  "M1_reparameterisation_ADOPTED": {
+    "wave_o_shared_scale_for_reference": 4.31725,
+    "effective_scale_after_rounding": 4.317248780487805,
+    "hexanal_yield_old": 0.205,
+    "hexanal_yield_new": 0.885036,
+    "hexanal_yield_currently_shipped": 0.885036,
+    "adopted_ambient_hexanal_cal": {
+      "pea_isolate_40C_PratapSingh2021": 1.0,
+      "soy_isolate_40C_PratapSingh2021": 2.209756097560976
+    },
+    "per_lane_required_hexanal_yield": {
+      "pea_isolate_40C_PratapSingh2021": 0.895041890725841,
+      "soy_isolate_40C_PratapSingh2021": 0.8751420884505834
+    },
+    "one_parameter_residual_fold": {
+      "pea_isolate_40C_PratapSingh2021": 1.0113056313255515,
+      "soy_isolate_40C_PratapSingh2021": 0.9888208936705212
+    },
+    "hexanal_observability_factor_moves": [
+      {
+        "protein_type": "pea_iso",
+        "process_state": "ambient_slurry",
+        "old_factor": 4.31725,
+        "new_factor": 1.0,
+        "shipped_factor": 1.0,
+        "exceeds_one_before": true,
+        "exceeds_one_after": false,
+        "product_preserved_fold": 0.9999997175256948
+      },
+      {
+        "protein_type": "pea_iso",
+        "process_state": "heated_matrix",
+        "old_factor": 0.228776,
+        "new_factor": 0.0529912,
+        "shipped_factor": 0.0529912,
+        "exceeds_one_before": false,
+        "exceeds_one_after": false,
+        "product_preserved_fold": 1.0000008461402656
+      },
+      {
+        "protein_type": "soy_iso",
+        "process_state": "ambient_slurry",
+        "old_factor": 9.54007,
+        "new_factor": 2.209756097560976,
+        "shipped_factor": 2.209756097560976,
+        "exceeds_one_before": true,
+        "exceeds_one_after": true,
+        "product_preserved_fold": 0.9999996663934977
+      },
+      {
+        "protein_type": "soy_iso",
+        "process_state": "heated_matrix",
+        "old_factor": 2.8047805800000005,
+        "new_factor": 0.6496682926829269,
+        "shipped_factor": 0.6496682926829269,
+        "exceeds_one_before": true,
+        "exceeds_one_after": false,
+        "product_preserved_fold": 0.9999996663934975
+      }
+    ],
+    "calibrated_tier_effect": "None at reporting precision: the product Y*cal is preserved to 6 significant figures on every lane, and every hexanal lane in the repository resolves to a compound-specific record (measured -- no lane reaches the class-level aldehyde anchor for hexanal), so the relocation is complete.",
+    "uncalibrated_tier_effect": "REAL AND INTENDED. `_uncalibrated_prediction_ppb` (the tier scripts/generators/derive_matrix_sigma_from_residuals.py scores) multiplies the oxidation load by Y and NEVER reads cal. Its hexanal residuals therefore move by the full 4.317249x. Wave O recorded that no OBSERVABILITY refit could ever move that derivation; a YIELD refit can, and this is the first one."
+  },
+  "M2_observability_pinned_to_evidence_REPORTED_NOT_ADOPTED": {
+    "premise": "Wave S4 (c) established from Pratap-Singh 2021's own verbatim methods that the anchors are MATRIX-MATCHED (standards spiked into the slurry), i.e. they measure the TOTAL, i.e. the observability factor on both ambient lanes is 1.0 on evidence rather than by fit.",
+    "free_parameters": 2,
+    "rows": 4,
+    "yields": {
+      "2-Pentylfuran": {
+        "fitted_yield": 1.2211240000969126,
+        "per_lane_required_yield": {
+          "pea_isolate_40C_PratapSingh2021": 0.5017897419007791,
+          "soy_isolate_40C_PratapSingh2021": 2.9716506717818363
+        },
+        "residual_dex": {
+          "pea_isolate_40C_PratapSingh2021": -0.386237988217162,
+          "soy_isolate_40C_PratapSingh2021": 0.38623798821716193
+        },
+        "lane_spread_fold": 5.922103270834565
+      },
+      "Hexanal": {
+        "fitted_yield": 1.751084043392414,
+        "per_lane_required_yield": {
+          "pea_isolate_40C_PratapSingh2021": 0.895041890725841,
+          "soy_isolate_40C_PratapSingh2021": 1.9338505661859235
+        },
+        "residual_dex": {
+          "pea_isolate_40C_PratapSingh2021": -0.29146362846037766,
+          "soy_isolate_40C_PratapSingh2021": 0.043115921369878435
+        },
+        "lane_spread_fold": 2.160625760898915
+      }
+    },
+    "rms_residual_dex": 0.3103101659932138,
+    "verdict": "REJECTED AS A SHIPPED MODEL, AND THE REASON IS THE FINDING. With observability pinned to its evidenced value, ONE shared yield vector cannot fit both matrices: the soy-vs-pea required-yield ratio is 2-Pentylfuran 5.9221x, Hexanal 2.1606x. Those two numbers differ from each other, so the disagreement is COMPOUND-SPECIFIC and cannot be repaired by any change to the soy lipid profile (which moves both markers on the linoleate pool by the same factor). It is also LANE-SPECIFIC, so it cannot be repaired by any change to Y. The residual is structurally outside both of this wave's targets."
+  },
+  "observability_census": [
+    {
+      "kind": "compound_specific",
+      "protein_type": "pea_iso",
+      "process_state": "ambient_slurry",
+      "compound": "hexanal",
+      "factor_before": 4.31725,
+      "factor_after": 1.0,
+      "above_one_before": true,
+      "above_one_after": false
+    },
+    {
+      "kind": "compound_specific",
+      "protein_type": "pea_iso",
+      "process_state": "ambient_slurry",
+      "compound": "2-pentylfuran",
+      "factor_before": 1.0,
+      "factor_after": 1.0,
+      "above_one_before": false,
+      "above_one_after": false
+    },
+    {
+      "kind": "compound_specific",
+      "protein_type": "pea_iso",
+      "process_state": "ambient_slurry",
+      "compound": "1-hexanol",
+      "factor_before": 1.0,
+      "factor_after": 1.0,
+      "above_one_before": false,
+      "above_one_after": false
+    },
+    {
+      "kind": "compound_specific",
+      "protein_type": "pea_iso",
+      "process_state": "ambient_slurry",
+      "compound": "nonanal",
+      "factor_before": 1.0,
+      "factor_after": 1.0,
+      "above_one_before": false,
+      "above_one_after": false
+    },
+    {
+      "kind": "compound_specific",
+      "protein_type": "pea_iso",
+      "process_state": "heated_matrix",
+      "compound": "hexanal",
+      "factor_before": 0.228776,
+      "factor_after": 0.0529912,
+      "above_one_before": false,
+      "above_one_after": false
+    },
+    {
+      "kind": "compound_specific",
+      "protein_type": "pea_iso",
+      "process_state": "heated_matrix",
+      "compound": "2-pentylfuran",
+      "factor_before": 0.0194733,
+      "factor_after": 0.0194733,
+      "above_one_before": false,
+      "above_one_after": false
+    },
+    {
+      "kind": "compound_specific",
+      "protein_type": "pea_iso",
+      "process_state": "heated_matrix",
+      "compound": "nonanal",
+      "factor_before": 0.00959565,
+      "factor_after": 0.00959565,
+      "above_one_before": false,
+      "above_one_after": false
+    },
+    {
+      "kind": "compound_specific",
+      "protein_type": "soy_iso",
+      "process_state": "ambient_slurry",
+      "compound": "hexanal",
+      "factor_before": 9.54007,
+      "factor_after": 2.209756097560976,
+      "above_one_before": true,
+      "above_one_after": true
+    },
+    {
+      "kind": "compound_specific",
+      "protein_type": "soy_iso",
+      "process_state": "ambient_slurry",
+      "compound": "2-pentylfuran",
+      "factor_before": 5.920318725099602,
+      "factor_after": 5.920318725099602,
+      "above_one_before": true,
+      "above_one_after": true
+    },
+    {
+      "kind": "compound_specific",
+      "protein_type": "soy_iso",
+      "process_state": "ambient_slurry",
+      "compound": "1-hexanol",
+      "factor_before": 2.2698412698412698,
+      "factor_after": 2.2698412698412698,
+      "above_one_before": true,
+      "above_one_after": true
+    },
+    {
+      "kind": "compound_specific",
+      "protein_type": "soy_iso",
+      "process_state": "ambient_slurry",
+      "compound": "nonanal",
+      "factor_before": 1.0666666666666667,
+      "factor_after": 1.0666666666666667,
+      "above_one_before": true,
+      "above_one_after": true
+    },
+    {
+      "kind": "compound_specific",
+      "protein_type": "soy_iso",
+      "process_state": "heated_matrix",
+      "compound": "hexanal",
+      "factor_before": 2.8047805800000005,
+      "factor_after": 0.6496682926829269,
+      "above_one_before": true,
+      "above_one_after": false
+    },
+    {
+      "kind": "compound_specific",
+      "protein_type": "soy_iso",
+      "process_state": "heated_matrix",
+      "compound": "2-pentylfuran",
+      "factor_before": 0.17760956175298803,
+      "factor_after": 0.17760956175298803,
+      "above_one_before": false,
+      "above_one_after": false
+    },
+    {
+      "kind": "class_anchor",
+      "protein_type": "pea_iso",
+      "process_state": "(class)",
+      "compound": "aldehyde",
+      "factor_before": 1.0,
+      "factor_after": 1.0,
+      "above_one_before": false,
+      "above_one_after": false
+    },
+    {
+      "kind": "class_anchor",
+      "protein_type": "pea_iso",
+      "process_state": "(class)",
+      "compound": "furan",
+      "factor_before": 1.0,
+      "factor_after": 1.0,
+      "above_one_before": false,
+      "above_one_after": false
+    },
+    {
+      "kind": "class_anchor",
+      "protein_type": "pea_iso",
+      "process_state": "(class)",
+      "compound": "sulfur",
+      "factor_before": 1.0,
+      "factor_after": 1.0,
+      "above_one_before": false,
+      "above_one_after": false
+    },
+    {
+      "kind": "class_anchor",
+      "protein_type": "pea_iso",
+      "process_state": "(class)",
+      "compound": "pyrazine",
+      "factor_before": 1.0,
+      "factor_after": 1.0,
+      "above_one_before": false,
+      "above_one_after": false
+    },
+    {
+      "kind": "class_anchor",
+      "protein_type": "soy_iso",
+      "process_state": "(class)",
+      "compound": "aldehyde",
+      "factor_before": 2.209,
+      "factor_after": 2.209,
+      "above_one_before": true,
+      "above_one_after": true
+    },
+    {
+      "kind": "class_anchor",
+      "protein_type": "soy_iso",
+      "process_state": "(class)",
+      "compound": "furan",
+      "factor_before": 5.92,
+      "factor_after": 5.92,
+      "above_one_before": true,
+      "above_one_after": true
+    },
+    {
+      "kind": "class_anchor",
+      "protein_type": "soy_iso",
+      "process_state": "(class)",
+      "compound": "sulfur",
+      "factor_before": 1.0,
+      "factor_after": 1.0,
+      "above_one_before": false,
+      "above_one_after": false
+    },
+    {
+      "kind": "class_anchor",
+      "protein_type": "soy_iso",
+      "process_state": "(class)",
+      "compound": "pyrazine",
+      "factor_before": 1.0,
+      "factor_after": 1.0,
+      "above_one_before": false,
+      "above_one_after": false
+    },
+    {
+      "kind": "class_anchor",
+      "protein_type": "wheat_gluten",
+      "process_state": "(class)",
+      "compound": "aldehyde",
+      "factor_before": 1.0,
+      "factor_after": 1.0,
+      "above_one_before": false,
+      "above_one_after": false
+    },
+    {
+      "kind": "class_anchor",
+      "protein_type": "wheat_gluten",
+      "process_state": "(class)",
+      "compound": "furan",
+      "factor_before": 1.0,
+      "factor_after": 1.0,
+      "above_one_before": false,
+      "above_one_after": false
+    },
+    {
+      "kind": "class_anchor",
+      "protein_type": "wheat_gluten",
+      "process_state": "(class)",
+      "compound": "sulfur",
+      "factor_before": 1.0,
+      "factor_after": 1.0,
+      "above_one_before": false,
+      "above_one_after": false
+    },
+    {
+      "kind": "class_anchor",
+      "protein_type": "wheat_gluten",
+      "process_state": "(class)",
+      "compound": "pyrazine",
+      "factor_before": 1.0,
+      "factor_after": 1.0,
+      "above_one_before": false,
+      "above_one_after": false
+    },
+    {
+      "kind": "class_anchor",
+      "protein_type": "myco",
+      "process_state": "(class)",
+      "compound": "aldehyde",
+      "factor_before": 1.0,
+      "factor_after": 1.0,
+      "above_one_before": false,
+      "above_one_after": false
+    },
+    {
+      "kind": "class_anchor",
+      "protein_type": "myco",
+      "process_state": "(class)",
+      "compound": "furan",
+      "factor_before": 1.0,
+      "factor_after": 1.0,
+      "above_one_before": false,
+      "above_one_after": false
+    },
+    {
+      "kind": "class_anchor",
+      "protein_type": "myco",
+      "process_state": "(class)",
+      "compound": "sulfur",
+      "factor_before": 1.0,
+      "factor_after": 1.0,
+      "above_one_before": false,
+      "above_one_after": false
+    },
+    {
+      "kind": "class_anchor",
+      "protein_type": "myco",
+      "process_state": "(class)",
+      "compound": "pyrazine",
+      "factor_before": 1.0,
+      "factor_after": 1.0,
+      "above_one_before": false,
+      "above_one_after": false
+    }
+  ],
+  "S4_claim_verdict": {
+    "claim": "Wave S4 (b): the shipped observability factors 4.32 / 9.54 are absorbing an absolute-scale deficit that lives upstream in MATRIX_BENCHMARK_BASE_MARKER_YIELDS; fixing the yields should bring the factors back under 1.",
+    "factors_above_one_before": [
+      "pea_iso/ambient_slurry/hexanal",
+      "soy_iso/(class)/aldehyde",
+      "soy_iso/(class)/furan",
+      "soy_iso/ambient_slurry/1-hexanol",
+      "soy_iso/ambient_slurry/2-pentylfuran",
+      "soy_iso/ambient_slurry/hexanal",
+      "soy_iso/ambient_slurry/nonanal",
+      "soy_iso/heated_matrix/hexanal"
+    ],
+    "factors_above_one_after": [
+      "soy_iso/(class)/aldehyde",
+      "soy_iso/(class)/furan",
+      "soy_iso/ambient_slurry/1-hexanol",
+      "soy_iso/ambient_slurry/2-pentylfuran",
+      "soy_iso/ambient_slurry/hexanal",
+      "soy_iso/ambient_slurry/nonanal"
+    ],
+    "verdict": "PARTIALLY CONFIRMED \u2014 see the record's own summary; the surviving population is entirely soy."
+  },
+  "wave_p_pool_staleness": {
+    "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+    "compound": "Nonanal",
+    "measured_ppb": 24.0,
+    "predicted_ppb": 10.559999107572926,
+    "fold": 0.4399999628155386,
+    "linoleate_pool_ppb": 21592.8849495496,
+    "oleate_pool_ppb": 9500.869377801826,
+    "pool_ratio_linoleate_over_oleate": 2.272727272727272,
+    "shipped_factor": 0.00959565,
+    "pool_corrected_factor": 0.0218083,
+    "diagnosis": "The Trikusuma heated-pea nonanal observability factor was back-solved (pre-Wave-P) so that LINOLEATE_pool * Y * release * cal == 24 ppb. Wave P item 4 then moved nonanal onto the OLEATE pool without propagating the constant. The row is now under by EXACTLY the pool ratio, which is exactly linoleic_acid_pct / oleic_acid_pct = 50/22 = 2.272727 for the pea profile -- an arithmetic staleness, not a model error. Confirmed by re-multiplying: 21592.8849 * 0.15 * 0.772209 * 0.00959565 = 24.0000 ppb."
+  },
+  "derived_yields": {
+    "Hexanal": {
+      "shipped": 0.885036,
+      "derived": 0.885036,
+      "moved": false,
+      "status": "MOVED \u2014 the Wave O shared scale relocated from the observability factor",
+      "anchored_in_corpus": true
+    },
+    "2-Pentylfuran": {
+      "shipped": 0.502,
+      "derived": 0.502,
+      "moved": false,
+      "status": "CONFIRMED, not moved \u2014 the pea-reference requirement is 0.5017897, 0.000182 dex from shipped, below the 0.01 dex materiality floor",
+      "anchored_in_corpus": true
+    },
+    "1-Hexanol": {
+      "shipped": 0.063,
+      "derived": 0.063,
+      "moved": false,
+      "status": "UNANCHORED \u2014 no verified measurement exists for this compound on either ambient lane; NOT fitted",
+      "anchored_in_corpus": false
+    },
+    "Nonanal": {
+      "shipped": 0.15,
+      "derived": 0.15,
+      "moved": false,
+      "status": "UNANCHORED \u2014 no verified measurement exists for this compound on either ambient lane; NOT fitted",
+      "anchored_in_corpus": false
+    }
+  },
+  "applied_to_runtime": true,
+  "drift": []
+}

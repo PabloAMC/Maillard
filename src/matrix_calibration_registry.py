@@ -119,6 +119,48 @@ _RUNTIME_MULTIPLIER_ENV = "MAILLARD_MATRIX_CALIBRATION_MULTIPLIERS"
 # `notes`. WAVE T3 DID NOT REFIT OR RETIRE THEM. Refitting needs a measurement that does not
 # exist; retiring the lane changes predictions and the hold-out. Which of the two to do is an
 # OWNER DECISION, carried as [P] in tasks/audit_remediation.md.
+#
+# 2026-08-28 (Wave Y) -- THE AMBIENT HEXANAL SCALE HAS MOVED OUT OF THIS FILE. Wave O's
+# shared scale 4.317249 is not withdrawn and no parameter was added or removed; it now lives
+# in `MATRIX_BENCHMARK_BASE_MARKER_YIELDS['Hexanal']` (0.205 -> 0.885036) and every hexanal
+# `observable_factor` here has been divided by it:
+#
+#     pea_iso / ambient_slurry   4.31725    ->  1.0                        (reference lane)
+#     pea_iso / heated_matrix    0.228776   ->  0.0529912                  (propagation)
+#     soy_iso / ambient_slurry   9.54007    ->  0.453 / 0.205              (the soy/pea ratio)
+#     soy_iso / heated_matrix    2.80478    ->  (0.453/0.205)*(1-0.7060)   (composition rule)
+#
+# THE ARGUMENT IS A UNIT ARGUMENT (Wave S4 (b)). An `observable_factor` is the fraction of a
+# total that a measurement sees, so it cannot exceed 1 -- and after Wave O this file shipped
+# 4.32 and 9.54. A marker YIELD has no such bound: it multiplies `hydroperoxide_scale`
+# (1.0e6, an arbitrary constant in data/lit/lipid_oxidation_calibration.json), so only the
+# product is identified and a yield above 1 says nothing. The scale therefore belongs on the
+# yield side, and Wave S4 (c) independently evidences the value this lane returns to:
+# Pratap-Singh spike their standards INTO the slurry, i.e. matrix-matched quantification,
+# i.e. the measurement reads the TOTAL and the observable fraction is 1.0.
+#
+# NOTHING PREDICTED MOVED. The product `Y * cal` is preserved on every lane to 6 significant
+# figures, verified by re-running the decomposition before and after; the hold-out's eight
+# points and the four synthetic snapshots are unchanged. What DOES move is the UNCALIBRATED
+# tier (`_uncalibrated_prediction_ppb`), which reads the yield and never reads this file --
+# see results/validation/matrix_sigma_residual_derivation.{json,md}. Wave O wrote that no
+# refit of THESE constants could ever move that derivation; that remains true, and a yield
+# refit is the case it does not cover.
+#
+# AND HALF OF WAVE S4's PREDICTION IS FALSIFIED, which is recorded here rather than in a
+# report nobody opens. S4 expected the factors to come back under 1 once the yields were
+# fixed. Two do. SIX DO NOT, and every one of them is a SOY factor: ambient hexanal 2.2098,
+# ambient 2-pentylfuran 5.9203, ambient 1-hexanol 2.2698, ambient nonanal 1.0667, and the
+# soy class anchors 2.209 (aldehyde) / 5.92 (furan). A marker yield is shared across
+# matrices, so it can absorb a GLOBAL scale error and can never absorb a LANE one. Measured
+# with observability pinned to its evidenced 1.0 on both ambient lanes, the soy-vs-pea
+# required-yield ratio is 2.1606x on hexanal and 5.9221x on 2-pentylfuran -- and those two
+# differ, so the deficit is COMPOUND-specific too and cannot be repaired by the soy lipid
+# profile either. That is the next workstream. [P]
+#
+# Derivation, corpus, identifiability and the full before/after census:
+#   scripts/generators/rederive_matrix_marker_yields.py
+#   results/validation/matrix_marker_yield_rederivation.{json,md}
 FITTED_TO_BENCHMARK = "fitted_to_benchmark"
 
 
@@ -184,8 +226,24 @@ _MATRIX_CALIBRATION_RECORDS = (
         # 2021, 26, 4104 Table 1 -- not the 260 ppb transcription error the old 1.0 recovered).
         # Record: results/validation/matrix_observability_refit_pratap_singh.{json,md};
         # generator: scripts/generators/refit_matrix_observability_pratap_singh.py (2026-08-27).
-        observable_factor=4.31725,
-        previous_value=1.0,
+        #
+        # 2026-08-28 (Wave Y) -- THE SCALE MOVED SIDES. 4.31725 -> 1.0, and the SAME constant
+        # now lives in MATRIX_BENCHMARK_BASE_MARKER_YIELDS['Hexanal'] (0.205 -> 0.885036).
+        # Wave O's fit is not withdrawn and no parameter was added: one shared scale, the
+        # same two verified anchors, the same 1.0113x residual. What changed is which side of
+        # the product carries it, and the argument is a UNIT argument (Wave S4 (b)): an
+        # observability factor is the fraction of a total that a measurement sees and cannot
+        # exceed 1, so "4.32" was not an observability at all. A marker yield can exceed 1
+        # because it multiplies an arbitrary `hydroperoxide_scale`. This lane's factor is
+        # therefore back at the 1.0 that its OWN definition requires -- it is the reference
+        # lane -- and, independently, at the value Wave S4 (c) evidenced from the paper's
+        # verbatim methods: Pratap-Singh spike their standards into the slurry, i.e. the
+        # measurement is MATRIX-MATCHED and reads the TOTAL, i.e. the observable fraction
+        # is 1.0. The two arguments agree, which is why this is the value that ships.
+        # Derivation: scripts/generators/rederive_matrix_marker_yields.py ->
+        # results/validation/matrix_marker_yield_rederivation.{json,md}.
+        observable_factor=1.0,
+        previous_value=4.31725,
         evidence_strength=FITTED_TO_BENCHMARK,
         source="Pratap-Singh 2021 pea isolate ambient slurry baseline (Wave O refit to the verified 1138.00 ppb)",
         fallback_mode="compound_specific",
@@ -252,8 +310,15 @@ _MATRIX_CALIBRATION_RECORDS = (
         protein_type="pea_iso",
         process_state="heated_matrix",
         compound="hexanal",
-        observable_factor=0.228776,
-        previous_value=0.22877612093571738,
+        # 2026-08-28 (Wave Y): 0.228776 -> 0.0529912. PROPAGATION, NOT A NEW FIT. The
+        # back-solve that produced 0.228776 is unchanged in every respect except which side
+        # of `Y * cal` carries the ambient hexanal scale; dividing by the same 4.317249 that
+        # went into MATRIX_BENCHMARK_BASE_MARKER_YIELDS['Hexanal'] preserves this lane's
+        # recovery of its own 782 ppb exactly (measured: 782.0056 ppb before and after).
+        # Trikusuma 2020 is still the last content-unverified pillar of the matrix lane and
+        # this row is still fit recovery, not evidence -- neither of those changes here.
+        observable_factor=0.0529912,
+        previous_value=0.228776,
         evidence_strength=FITTED_TO_BENCHMARK,
         source="Trikusuma 2020 UHT pea beverage heated headspace anchor",
         fallback_mode="compound_specific_process_state",
@@ -320,8 +385,27 @@ _MATRIX_CALIBRATION_RECORDS = (
         # serves both lanes, the soy-vs-pea release ratio is unchanged at 2.2097561 -- the
         # correction was to the absolute scale, not to the relative structure.
         # Record: results/validation/matrix_observability_refit_pratap_singh.{json,md}.
-        observable_factor=9.54007,
-        previous_value=2.209756097560976,
+        #
+        # 2026-08-28 (Wave Y) -- 9.54007 -> 0.453/0.205, the shared scale relocated into
+        # MATRIX_BENCHMARK_BASE_MARKER_YIELDS['Hexanal'] (see the pea ambient entry above and
+        # results/validation/matrix_marker_yield_rederivation.md). The expression is restored
+        # verbatim BECAUSE IT IS SELF-DOCUMENTING: this constant is the soy-vs-pea ratio and
+        # nothing else, and writing it as a ratio is what makes that checkable.
+        #
+        # AND IT IS STILL ABOVE 1, WHICH FALSIFIES HALF OF WAVE S4's DIAGNOSIS. S4 predicted
+        # the factors would come back under 1 once the yields were fixed. The pea lane does
+        # (4.31725 -> 1.0) and the soy heated lane does (2.80478 -> 0.6497); this one does
+        # not, and neither do the four other soy factors, which the relocation never touched.
+        # The reason is structural and is measured in the Wave Y record: a marker yield is
+        # shared across matrices, so it can absorb a GLOBAL scale error and can never absorb
+        # a LANE one. With observability pinned to its evidenced 1.0 on both ambient lanes,
+        # the soy/pea required-yield ratio is 2.1606x on hexanal and 5.9221x on
+        # 2-pentylfuran -- and because those two differ from each other, the residual is
+        # COMPOUND-specific as well, so it cannot be repaired by the soy lipid profile
+        # either (that would move both linoleate markers by one factor). The soy-vs-pea
+        # marker-ratio deficit is the next workstream, and it is not in this one. [P]
+        observable_factor=0.453 / 0.205,
+        previous_value=9.54007,
         evidence_strength=FITTED_TO_BENCHMARK,
         source="Pratap-Singh 2021 soy ambient slurry hexanal (Wave O refit to the verified 1621.71 ppb)",
         fallback_mode="compound_specific",
@@ -384,8 +468,16 @@ _MATRIX_CALIBRATION_RECORDS = (
         # 0.649668 -> 2.80478 (the same x4.317249). No benchmark constrains this lane; the
         # movement is a propagation of someone else's fit, and it is the mechanism by which
         # the Li 2026 hold-out hexanal point degrades from 21.6x to 93x over.
-        observable_factor=9.54007 * (1.0 - 0.7060),
-        previous_value=0.6496682926829269,
+        #
+        # 2026-08-28 (Wave Y): 2.80478 -> 0.6496683, following its baseline back down as the
+        # shared scale relocated into the marker yield. The composition rule is unchanged --
+        # this constant is still DEFINED as (soy ambient baseline) x (1 - 0.7060) -- so the
+        # product that reaches a prediction is preserved and the Li 2026 hold-out hexanal
+        # point does not move. Note what that means: this factor was above 1 and now is not,
+        # so the Wave S4 unit objection is answered on THIS lane by arithmetic that changed
+        # no prediction at all. See results/validation/matrix_marker_yield_rederivation.md.
+        observable_factor=(0.453 / 0.205) * (1.0 - 0.7060),
+        previous_value=2.8047805800000005,
         evidence_strength="conditional_literature_anchored",
         source="Shu 2024 heated soy off-flavour attenuation carried onto the Pratap-Singh soy ambient baseline",
         fallback_mode="compound_specific_process_state",

@@ -12,9 +12,9 @@
       "lane": "pea_iso/heated_matrix",
       "compound": "Hexanal",
       "measured_ppb": 782.0,
-      "uncalibrated_predicted_ppb": 4426.541414657668,
-      "ln_residual": 1.7335190985351454,
-      "fold_error": 5.660538893424127
+      "uncalibrated_predicted_ppb": 19110.48052420958,
+      "ln_residual": 3.1961374415434425,
+      "fold_error": 24.437954634539103
     },
     {
       "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
@@ -39,9 +39,9 @@
       "lane": "soy_iso/ambient_slurry",
       "compound": "Hexanal",
       "measured_ppb": 1621.71,
-      "uncalibrated_predicted_ppb": 171.9111889062258,
-      "ln_residual": -2.2442584271811894,
-      "fold_error": 9.433417396028894
+      "uncalibrated_predicted_ppb": 742.1833706576119,
+      "ln_residual": -0.7816400841728927,
+      "fold_error": 2.1850529991841277
     },
     {
       "benchmark_id": "soy_isolate_40C_PratapSingh2021",
@@ -55,13 +55,13 @@
   ],
   "summary": {
     "n_residuals": 5,
-    "mean_ln_residual": 1.1984332964682458,
-    "bias_fold": 3.3149193564137613,
-    "rms_ln_sigma": 3.016601069080242,
-    "centered_sd_ln": 3.0950847411444795,
+    "mean_ln_residual": 1.7834806336715645,
+    "bias_fold": 5.950532037763944,
+    "rms_ln_sigma": 3.1075354048937904,
+    "centered_sd_ln": 2.8451654437806617,
     "sigma_90pct_ci": {
-      "sigma_low_90": 2.0273515916215947,
-      "sigma_high_90": 6.303766812477785
+      "sigma_low_90": 2.08846536378533,
+      "sigma_high_90": 6.493791557244892
     },
     "shipped_uncalibrated_sigma": 2.86,
     "shipped_within_ci": true

@@ -115,6 +115,21 @@ def test_pratap_singh_headspace_calibration_carries_soy_release_gap_in_headspace
     absolute pins were. The absolute pea value is re-pinned to the fitted constant; the
     2-pentylfuran and 1-hexanol lanes were not refitted at all (verified verbatim, and
     unanchored, respectively).
+
+    RE-PINNED AGAIN 2026-08-28 (Wave Y): 4.31725 -> 1.0. Wave O's shared scale is NOT
+    withdrawn -- it moved to the other side of the product, into
+    `MATRIX_BENCHMARK_BASE_MARKER_YIELDS['Hexanal']` (0.205 -> 0.885036), on the unit
+    argument that an observability factor is a fraction of a total and cannot exceed 1
+    (Wave S4 (b)) while a marker yield multiplying an arbitrary `hydroperoxide_scale` can.
+    The pea ambient lane is the REFERENCE lane, so 1.0 is what its own definition requires,
+    and it is independently what Wave S4 (c) evidenced from Pratap-Singh's verbatim methods
+    (matrix-matched quantification reads the TOTAL). The predicted ppb on this lane is
+    unchanged to 6 significant figures. Record:
+    results/validation/matrix_marker_yield_rederivation.{json,md}.
+
+    The soy/pea RATIO -- the thing this test is named after -- is unchanged for the second
+    time in two waves, which is the point: it survived the Wave O refit AND the Wave Y
+    relocation, because neither touched relative structure.
     """
     model = HeadspaceModel()
 
@@ -122,7 +137,7 @@ def test_pratap_singh_headspace_calibration_carries_soy_release_gap_in_headspace
         "Hexanal",
         protein_type="pea_iso",
         pH=6.0,
-    ) == pytest.approx(4.31725)
+    ) == pytest.approx(1.0)
     assert model.get_matrix_benchmark_headspace_factor(
         "2-Pentylfuran",
         protein_type="pea_iso",
@@ -134,11 +149,17 @@ def test_pratap_singh_headspace_calibration_carries_soy_release_gap_in_headspace
         pH=6.0,
     ) == pytest.approx(1.0)
 
+    # RE-PINNED 2026-08-28 (Wave Y): 9.54007 -> 0.453/0.205, the same relocation as the pea
+    # lane above. AND NOTE WHAT DID NOT HAPPEN: this factor is still ABOVE 1, so the Wave S4
+    # prediction that fixing the yields would bring every factor under 1 is only half right.
+    # Every factor that remains above 1 after the relocation is a SOY factor, because a
+    # marker yield is shared across matrices and can absorb a global scale error but never a
+    # lane one. See results/validation/matrix_marker_yield_rederivation.md.
     assert model.get_matrix_benchmark_headspace_factor(
         "Hexanal",
         protein_type="soy_iso",
         pH=6.0,
-    ) == pytest.approx(9.54007)
+    ) == pytest.approx(0.453 / 0.205)
     assert model.get_matrix_benchmark_headspace_factor(
         "2-Pentylfuran",
         protein_type="soy_iso",

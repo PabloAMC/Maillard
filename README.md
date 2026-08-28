@@ -130,6 +130,71 @@ after an adversarial provenance audit (2026-08-26), we report calibration **spli
 origin**, because an aggregate number quietly mixed literature-measured rows with internal
 synthetic comparators.
 
+### Read this first (2026-08-28): the model was fitting its own evaluation panel, and the repo's own regeneration command is what armed it
+
+`data/lit/refinement_surrogate_patches.json` holds a map of barrier offsets that
+`src/barrier_constants.get_barrier()` **adds to the audited `FAST_BARRIERS` value** before
+returning it. Until 2026-08-28 that map was filled *automatically*, by a search in
+`src/refinement_campaign.py` that accepted an offset **because it improved the benchmark
+panel the model is then scored against**. That is a fit to the evaluation set — the defect
+class this whole audit existed to remove — and it was never declared to
+`scripts/ci/fit_target_gate.py`. Every accepted offset also sat at exactly ±3.0 kcal/mol,
+the search bound: a bound report, not an optimum. **At 150 °C, 3.0 kcal/mol is a ~35×
+factor in rate.**
+
+| family | barrier with the fit armed | audited table value | error |
+| --- | ---: | ---: | ---: |
+| `Schiff_Base_Formation` | 18.0 | **15.0** | +3.0 kcal/mol |
+| `Retro_Aldol_Fragmentation` | 29.0 | **32.0** | −3.0 kcal/mol |
+| `Thiol_Addition` | 31.6 | **28.6** | +3.0 kcal/mol |
+
+**The mechanism is retired.** `accepted_offsets` is permanently empty, the auto-acceptance
+path now records its candidates as `candidate_offsets_not_applied` diagnostics and never
+applies them, and `tests/unit/test_wave_r1_barrier_offset_retirement.py` fails if either
+the file grows an entry or `get_barrier()` stops returning the table value for *any* of the
+51 families.
+
+**What was actually contaminated, measured rather than assumed — and this is the part worth
+reading.** At git `HEAD` the tracked patch file carried an **empty** map, so a clean
+checkout shipped the audited table, and every artifact and hold-out number published in
+this README was produced in that state: re-running the whole generator sequence after the
+retirement reproduces `benchmark_summary`, `external_validation_report`,
+`prediction_uncertainty` and the eight-point matrix hold-out **byte-identically**. The
+offsets were written into the tracked file by
+`scripts/generators/generate_refinement_governance.py` — which runs in the *middle* of
+`scientific_lane()` in `scripts/docker_maillard.sh`, ahead of the figure generators, the
+envelope report **and the scientific-regression pytest lane**. So running the repository's
+own documented regeneration command armed a ±3.0 kcal/mol override of the barrier table and
+then scored everything after it against the armed model, until someone happened to
+`git checkout` the file. Re-running the pre-retirement code today re-accepts the same nine
+offsets, so this was live, not historical.
+
+**The price, on the only surface that can price it.** The free-precursor `maillard_path`
+hold-out is a pre-registration frozen at git `12f43dd` and was never available to any fit.
+Scored under both states
+(`results/validation/holdout_prepost_barrier_offset_retirement.md`):
+
+| `maillard_path` hold-out (32 targets) | fit armed | fit retired (**what ships**) |
+| --- | ---: | ---: |
+| median fold error | 10.05× | **10.86×** |
+| median \|log₁₀\| error | 1.0020 dex | **1.0360 dex** |
+| within 10× | 15/31 | 15/31 |
+| worst fold error | 565.2× | **506.4×** |
+| frozen targets differing from the 12f43dd pre-registration | 21 of 22 | **8 of 22** |
+
+**The honest model is the worse model on the median, and that is the expected direction.**
+The armed model bought ~8 % on the median fold error of a hold-out it had never seen, by
+tuning three barriers against a *different* set of benchmarks — which is exactly what an
+undeclared panel fit looks like when it happens to generalise a little. The last row is the
+one that settles the argument: with the fit armed, the model disagreed with its own
+pre-registration on 21 of 22 targets; retired, it disagrees on 8 — and those 8 are Wave X's
+norfuraneol channel, already attributed and on the record.
+
+**The eight-point matrix hold-out did not move at all** — 0 of 8 points, to machine
+precision. That is not a clean bill of health: it runs the `matrix_only` execution path,
+which never reaches the reaction network, so it is structurally incapable of detecting a
+barrier error of any size.
+
 ### Headline: **0 of 3** evaluable literature rows falls within the model's 90% CI — and 3 populations that used to be pooled are now reported apart
 
 | Population | Inside 90% CI | Not evaluable\* | Median CI width | Is it evidence? |
@@ -151,19 +216,26 @@ fit-then-score a build failure. The panel itself also shrank from 16 benchmarks 
 more were quarantined as fabricated (see [AUDIT.md](AUDIT.md), Round 2).
 
 **And the benchmark-level count, split the same way:** of 17 benchmarks, the ones without
-blocking coverage or ranking gaps are **0 of 9 predictive**, **0 of 4 fit-recovery**, and 4 of 4
-internal-synthetic. The 4/14 aggregate is retained in
-[benchmark_summary.md](results/validation/benchmark_summary.md) only for continuity with older
-reports; **every one of those four is now an internal synthetic row — the model agreeing with
-its own frozen output. There is no longer a single benchmark in the panel that passes on
-anything else.**
+blocking coverage or ranking gaps are **0 of 9 predictive**, **0 of 4 fit-recovery**, and — as
+of 2026-08-28 — **0 of 4 internal-synthetic**. The aggregate is **0/14**.
 
-> **Two counters, and they disagree.** `benchmark_summary.md` prints **6/14**, because
+> **Not one benchmark in this panel passes, on any kind of evidence, including its own frozen
+> output.** That is the most honest this number has ever been, and it got there without a
+> single measurement being re-read. The last four passes were the synthetic reproducibility
+> snapshots — the model agreeing with a copy of itself — and they drifted off their own pins in
+> two steps: **×1.936** from the Waves W/X sulfur chemistry, then a further **×1.276** from
+> Wave Y's marker-yield relocation, against a ×2.00 pass threshold. The snapshots were
+> deliberately **not** regenerated: refreshing them would restore 0/14 → 4/14 and in the same
+> motion absorb the Waves W/X drift, which is laundering. Full decomposition:
+> [tasks/audit_remediation.md](tasks/audit_remediation.md), Wave Y.
+
+> **Two counters, and they disagree.** `benchmark_summary.md` prints **2/14**, because
 > `src/presentation.py::_is_pass` also counts the weaker `pass-no-ranking` status (the two
 > Pratap-Singh fit-recovery rows). The headline above and
 > `tests/scientific/test_honest_headline_guards.py` use the strict `overall_status == "pass"`
-> and see **4/14**. Both are defensible; publishing them without saying which is which is not.
-> The divergence predates this wave (7/14 vs 5/14 after Wave O) and is now pinned in the guard.
+> and see **0/14**. Both are defensible; publishing them without saying which is which is not.
+> The divergence predates this wave (7/14 vs 5/14 after Wave O, 6/14 vs 4/14 after Wave P) and
+> is pinned in the guard. The gap has not widened; the population under it shrank.
 
 > **Fit-recovery fell 1/4 → 0/4 on 2026-08-27 (Wave P), and the mechanism is worth reading.**
 > The last survivor was `pea_isolate_uht_140C_Trikusuma2019`, which passed because three
@@ -223,6 +295,27 @@ anything else.**
 > 1, and the shipped constants are **4.32 and 9.54**, so they are absorbing an absolute-scale
 > deficit that lives in the marker yields, not in observability. Record:
 > [matrix_binding_mode_comparison.md](results/validation/matrix_binding_mode_comparison.md).
+>
+> **The unit argument, acted on and then HALF FALSIFIED (2026-08-28, Wave Y).** Wave O's
+> shared ambient-hexanal scale has been moved to the side of the product the unit argument
+> requires: `MATRIX_BENCHMARK_BASE_MARKER_YIELDS['Hexanal']` **0.205 → 0.885036**, and every
+> hexanal observability constant divided by the same 4.317249 (**pea ambient 4.31725 → 1.0**,
+> soy heated 2.80478 → 0.6497, pea heated 0.228776 → 0.0529912, soy ambient 9.54007 →
+> 0.453/0.205). Wave O's fit is not withdrawn — same single constant, same two verified
+> anchors, same 1.0113× residual — and **no prediction moved**: the eight hold-out points are
+> unchanged to six significant figures and the pea lane still reads 1125.278 ppb. A yield can
+> exceed 1 because it multiplies an arbitrary `hydroperoxide_scale`; a fraction-observed
+> cannot.
+>
+> **But Wave S4 predicted the factors would all come back under 1, and six of them did not.**
+> Every survivor is a **soy** factor (ambient hexanal 2.2098, 2-pentylfuran 5.9203, 1-hexanol
+> 2.2698, nonanal 1.0667, and the soy class anchors 2.209 / 5.92). A marker yield is shared
+> across matrices, so it can absorb a *global* scale error and never a *lane* one. With
+> observability pinned to the 1.0 that Wave S4's own matrix-matched-quantification evidence
+> requires, the soy-vs-pea required-yield ratio is **2.1606× on hexanal and 5.9221× on
+> 2-pentylfuran** — and because those two differ, the residual is *compound*-specific too, so
+> it cannot be repaired by the soy lipid profile either. Record:
+> [matrix_marker_yield_rederivation.md](results/validation/matrix_marker_yield_rederivation.md).
 
 **How to read this honestly:** coverage is only meaningful next to interval width — a 90% CI
 spanning two or more orders of magnitude makes coverage cheap. This headline is the reverse of

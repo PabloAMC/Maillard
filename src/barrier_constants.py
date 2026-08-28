@@ -152,6 +152,34 @@ FAST_BARRIERS: Dict[str, Tuple[float, str]] = {
     # No code path reads both, which is how the inversion survived.
     #
     # ---------------------------------------------------------------------
+    # QUALIFICATION 2026-08-28 (Wave R1) — "AUTHORITATIVE" WAS NOT LITERALLY
+    # TRUE, AND NOW IT IS. Read `get_barrier()` at the bottom of this module:
+    # it returns `FAST_BARRIERS[fm][0] + active_offset`, where `active_offset`
+    # comes from `accepted_offsets` in data/lit/refinement_surrogate_patches.json
+    # (and, secondarily, from a BARRIER_OFFSETS environment variable). Until
+    # 2026-08-28 that JSON map was filled AUTOMATICALLY by
+    # src/refinement_campaign.build_refinement_impact_artifact(), which accepted
+    # an offset because it lowered the score on the benchmark panel the model is
+    # then evaluated against — an undeclared fit to the evaluation set — and
+    # wrote it into the TRACKED file from inside `scientific_lane()` in
+    # scripts/docker_maillard.sh. With that armed, the shipped values were
+    # schiff_condensation 18.0 (this table: 15.0), retro_aldol 29.0 (32.0) and
+    # thiol_addition 31.6 (28.6): a ~35x rate factor each at 150 C. So every
+    # sentence in this repository that quoted a FAST_BARRIERS number as "what
+    # the model uses" was true of a clean checkout and false of any tree in
+    # which the documented regeneration command had been run.
+    # The auto-acceptance is RETIRED; `accepted_offsets` is permanently empty;
+    # tests/unit/test_wave_r1_barrier_offset_retirement.py asserts
+    # get_barrier(f) == FAST_BARRIERS[f][0] for every family in this table, so
+    # the authority statement above is now enforced rather than asserted.
+    # The offset ARITHMETIC is deliberately left in place: an offset may still
+    # be applied, but only through an explicitly declared fit record that
+    # scripts/ci/fit_target_gate.py can see, or through BARRIER_OFFSETS for a
+    # sensitivity probe. It may never again be written by a search that
+    # optimises the evaluation panel.
+    # ---------------------------------------------------------------------
+    #
+    # ---------------------------------------------------------------------
     # RESOLVED 2026-08-27 (Wave S3) — THE DATA DECIDED. THIS TABLE HAS THE
     # ORDERING BACKWARDS. VALUES STILL UNCHANGED; see below for why.
     # ---------------------------------------------------------------------
