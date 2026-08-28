@@ -200,3 +200,19 @@ Source of record for the underlying extraction evidence:
 `data/lit/extraction_dossiers/k3_final_parameter_inventory.md`, whose §A–§C carry
 per-row units, conditions, anchors and provenance verdicts, with the K1/K2 and
 per-paper dossiers alongside it in the same directory.
+
+## Amendment 1 — 2026-08-28 (research round 2, before any use)
+
+New sources discovered after the original declaration; roles assigned BEFORE any
+wave parameterizes them. Direction of change is additive only — no existing row
+moves columns.
+
+| dataset | role | reasoning |
+|---|---|---|
+| Martins 2003 Wageningen thesis (edepot.wur.nl/121418), Table 4.2.3 reverse rates (Amadori -> parent sugar, 100/120 C x pH 5.5/6.8) + Table 5.1 model discrimination (SB <-> DFG reversible, dAICc 276 over irreversible) | **FIT** | parent document of the already-FIT Martins 2005 dataset; same system, same lab; closes the declared reverse-rate structural gap with measured values |
+| Martins 2003 thesis Table 4.1.1 glycine-release yields (65-95%) | **FIT** | model-free reactant-side constraint, same system |
+| Martins 2003 thesis Table 3.3.1 melanoidin epsilon (1.00 +/- 0.03 at 420 nm, 0.65 +/- 0.02 at 470 nm; T- and DP-invariant) | **FIT (measured input, not a scored target)** | epsilon is an observable-model constant; the Martins step-9 browning HOLD-OUT is unaffected and stays held out |
+| Martins 2003 thesis Ch. 6 pH ladder (k at pH 4.8/5.5/6.0/6.8/7.5 + fitted pH exponents) | **HOLD-OUT except pH 5.5/6.8 columns (which are the already-FIT conditions)** | the model is pH-fixed at 6.8; the off-pH columns are exactly the extrapolation test the trunk lacks. Cut axis: pH, mirroring the Hofmann convention |
+| Cai 2024 (10.1016/j.foodres.2024.114591) 2-AP multiresponse 100/120/140 C | **role deferred until retrieved** | abstract-verified only; structural facts usable now: glyoxal rate-determining, non-monotone optimum ~100 C |
+| Weykamp & Penders 1982 Schiff k-1 = 0.435 /h at 37 C (biomedical) | **FIT (as a prior, rate_transfer: not_licensed to food T without the Ea)** | only measured Schiff reverse rate in any literature; internal k1/k-1/K consistency verified to 4 digits |
+| Ge & Lee 1997 reverse-rate Ea | **quarantined until tables retrieved** | method disputed in print by van Boekel; abstract has a unit defect (kcal/J confusion) |
