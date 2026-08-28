@@ -395,3 +395,22 @@ affected. The Chang water-vs-buffer arm pair REMAINS HOLD-OUT (it is the
 drift model's exam). Kang decay-barrier identification uses ONLY the declared
 Kang 100/120 C FIT rungs; the 140 C column and the Yiltirak/van Seeventer/
 Zhang/Zhou-dimer rows remain untouchable hold-outs.
+
+## Amendment 8 — 2026-08-29 (Blank & Fay 1996, DMHF route)
+
+blank1996 (JAFC 44:531, one condition, no yield tables): route-topology source
+only. Roles as the dossier proposes: isotopomer branch fractions (4/12/84 Gly;
+15/47/38 Ala; ~70/30 Strecker-vs-fragment) = PRIOR on the C1-donor split;
+alanine/glycine HEMF truth table + norfuraneol >> DMHF ordering = structural
+HOLD-OUTS; the "low mg/kg" prose estimate = DO-NOT-INGEST (no method/basis —
+the cys_ribose_140C failure class); NO barrier may ever be fit to this paper
+(prohibited derivation). The DMHF channel remains topologically enabled but
+uncalibrated until the quantitative companion (Blank, Fay, Lakner & Schlosser
+1997, JAFC 45:2642, isotope dilution assays) is retrieved.
+
+Recorded defects for the code-quality pass: the repo's "the amino acid is the
+reductant (Blank & Fay 1996)" claim (barrier_constants.py:325 and 4 other
+sites) misquotes the paper (it names dismutation OR enoloxo compounds); the
+ledger's "stoichiometry the model uses" claim is false (the model lacks the
+step); the repo's Strecker-aldehyde-leaves co-product contradicts the paper's
+consumed-into-ring route.
