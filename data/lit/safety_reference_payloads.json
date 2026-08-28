@@ -971,13 +971,22 @@
         "replicates": 3
       },
       "what_it_supports": [
-        "Bifurcated acrylamide formation (Ea 52.1 kJ/mol) and degradation (Ea 72.9 kJ/mol) kinetic parameters."
+        "Bifurcated acrylamide formation (Ea 94.4 +/- 11 kJ/mol) and degradation (Ea 85.1 +/- 14 kJ/mol) kinetic parameters."
       ],
       "what_it_does_not_support": [
         "Solid-state high-moisture extrusion without Aw corrections."
       ],
       "shared_anchor": true,
-      "shared_anchor_note": "One DOI serves 1 nominally distinct reference records in data/lit: knol_2005_acrylamide_kinetics. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources."
+      "shared_anchor_note": "One DOI serves 1 nominally distinct reference records in data/lit: knol_2005_acrylamide_kinetics. Verified against CrossRef 2026-08-26: these are facets of a single publication, not independent evidence - do not treat them as corroborating sources.",
+      "correction_note": {
+        "date": "2026-08-28",
+        "wave": "Build Wave B3 (kinetic core, Module 3: acrylamide / safety)",
+        "what_was_wrong": "what_it_supports stated the Knol 2005 acrylamide barriers as Ea 52.1 kJ/mol (formation) and Ea 72.9 kJ/mol (degradation). Neither number appears in the source.",
+        "what_it_now_says": "the pair the source actually prints: Ea(k4, formation) = 94.4 +/- 11 and Ea(k6, acrylamide -> product X) = 85.1 +/- 14 kJ/mol.",
+        "verified_against": "data/lit/extraction_dossiers/k3_final_parameter_inventory.md sec. A.2 lines 202-203 and its errata table row 3, which record the mis-statement in this file explicitly",
+        "carry_this_caveat": "the degradation barrier comes with the author's own qualification: 'the model was NOT restrained by experimental data for the products formed in the degradation reaction'. The rate constant it belongs to (k6) is nonetheless corroborated to 1.26x at 160 C by two other labs (Claeys 2005, De Vleeschouwer 2009 I).",
+        "unrelated_defect_not_fixed_here": "the shipped Ea = 129 kJ/mol acrylamide barrier in src/barrier_constants.py and src/safety.py is attributed to Knol and appears in NONE of the three Knol papers. It is out of this file's scope and is recorded in src/kinetic_core/parameters_acrylamide.REFUSED_PARAMETERS."
+      }
     },
     {
       "id": "de_vleeschouwer_2008_acrylamide_aw",
