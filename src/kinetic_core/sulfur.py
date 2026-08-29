@@ -2,8 +2,25 @@
 src/kinetic_core/sulfur.py
 
 THE SULFUR REACTION NETWORK: FORMATION *AND* CONSUMPTION OF THE THIOL AROMA
-COMPOUNDS, AS A MASS-ACTION EXTENSION OF BUILD WAVE B1's CORE.
+COMPOUNDS, AS A MASS-ACTION EXTENSION OF BUILD WAVE B1's CORE
+(Build Wave B2, 2026-08-28; refitted through B2.1-B2.4).
 ==========================================================================
+
+WAVE: B2 built this lane; B2.1-B2.4 refitted it (B2.2 made pH a computed state
+rather than a prescribed one, B2.3 fixed charge conservation, B2.4 declared the
+objective weighting and shipped the 18-member ensemble). B7 did NOT touch it and
+its residuals moved anyway, because four of B7's furanic steps drain trunk
+species this lane reads -- disclosed at
+tests/unit/test_kinetic_core_b2_4.py rather than absorbed by a refit.
+EXAM: results/validation/kinetic_core_b2_4_{fit,holdout}_report.md is the
+current record; the cutover final exam scores it out of sample.
+DECLARED GAPS: the lane has ZERO ABSOLUTE LITERATURE ANCHORS -- Wave S2c
+retracted the last one when its MFT 342 / FFT 200 ppb targets were traced to a
+repo-internal reconstruction rather than to the paper. Its RATIOS are therefore
+first-class and its ABSOLUTES are not. See ``parameters_sulfur``'s own
+``PROHIBITED_DERIVATIONS`` for the named fits that must never be attempted, and
+the ``furanone_reductive_sulfhydrylation`` entry in ``src/barrier_constants.py``
+for a fit that was RUN and REJECTED by its own pre-registered isotope gate.
 
 Modules 1 and 2 of ``docs/reference/FIT_HOLDOUT_DECLARATION.md``. The network
 is B1's fifteen trunk steps PLUS the thirty-four steps below, over B1's

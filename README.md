@@ -3,7 +3,7 @@
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
 [![Docker](https://img.shields.io/badge/docker-recommended-blue.svg)](https://www.docker.com/)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Calibration: 4/9 evaluable literature rows inside a 2.6-dex 90% CI](https://img.shields.io/badge/calibration-4%2F9%20lit.%20rows%20in%20a%202.6--dex%2090%25%20CI-red.svg)](results/validation/prediction_uncertainty.md)
+[![Calibration: 4/13 evaluable literature rows inside a 1.4-dex 90% CI](https://img.shields.io/badge/calibration-4%2F13%20lit.%20rows%20in%20a%201.4--dex%2090%25%20CI-red.svg)](results/validation/prediction_uncertainty.md)
 [![Chemistry: 16 literature lanes, 5 with reaction templates](https://img.shields.io/badge/chemistry-16%20lanes%20%C2%B7%205%20with%20templates-blueviolet.svg)](results/validation/family_implementation_status.md)
 
 **Maillard** is a computational screening framework that predicts which combinations of
@@ -195,13 +195,15 @@ precision. That is not a clean bill of health: it runs the `matrix_only` executi
 which never reaches the reaction network, so it is structurally incapable of detecting a
 barrier error of any size.
 
-### Headline: **0 of 3** evaluable literature rows falls within the model's 90% CI — and 3 populations that used to be pooled are now reported apart
+### Headline: **4 of 13** evaluable literature rows fall within the model's 90% CI — and 3 populations that used to be pooled are now reported apart
+
+*(current as of `results/validation/prediction_uncertainty.md`; the panel has grown since the 4/9 and 0/3 figures earlier revisions of this section quoted, and the intervals have narrowed by more than a decade.)*
 
 | Population | Inside 90% CI | Not evaluable\* | Median CI width | Is it evidence? |
 | --- | ---: | ---: | ---: | --- |
-| **External literature** | **4/9** (44%) | 4 | **2.63 dex** (~424× end to end) | **Yes — this is the only row that is, and the width is why 44% is not good news** |
-| **Fitted rows** (constants back-solved from the benchmark) | 2/2 | 0 | 2.95 dex | No — algebraic recovery |
-| **Internal synthetic** (model vs its own frozen output) | 18/18 | 8 | 4.11 dex | No — reproducibility harness |
+| **External literature** | **4/13** (31%) | 5 | **1.44 dex** (~28× end to end) | **Yes — this is the only row that is, and 31% inside a 28×-wide interval is a bad number, not a mixed one** |
+| **Fitted rows** (constants back-solved from the benchmark) | 2/3 | 0 | 2.87 dex | No — algebraic recovery |
+| **Internal synthetic** (model vs its own frozen output) | 18/18 | 8 | 4.03 dex | No — reproducibility harness |
 
 \* Degenerate near-zero-width envelopes: the Monte Carlo perturbs nothing on their path, so
 pass/fail is meaningless and they are excluded from coverage.
@@ -213,11 +215,16 @@ read "2 of 11 literature rows". A constant solved from a benchmark reproduces th
 Those rows are now removed from the literature numerator **and** denominator, which is why the
 denominator fell from 11 to 3, and `scripts/ci/fit_target_gate.py` makes undisclosed
 fit-then-score a build failure. The panel itself also shrank from 16 benchmarks to **14**: two
-more were quarantined as fabricated (see [AUDIT.md](AUDIT.md), Round 2).
+more were quarantined as fabricated (see [AUDIT.md](AUDIT.md), Round 2). *(That 3 is the
+2026-08-27 figure. The literature denominator has since grown to **13** as Waves W and X put
+real Hofmann rows on the panel — the split survived the growth, the coverage did not.)*
 
-**And the benchmark-level count, split the same way:** of 17 benchmarks, the ones without
-blocking coverage or ranking gaps are **0 of 9 predictive**, **0 of 4 fit-recovery**, and — as
-of 2026-08-28 — **0 of 4 internal-synthetic**. The aggregate is **0/14**.
+**And the benchmark-level count, split the same way** (read off
+`results/validation/benchmark_summary.md`, which now prints the split itself)**:** of **23**
+benchmarks, the ones without blocking coverage or ranking gaps are **0 of 14 predictive**,
+**2 of 5 fit-recovery**, and **0 of 4 internal-synthetic** — a mixed-population aggregate of
+**2/23**. On the strict bar the repository actually gates on, **strict-ready is 0/23**: not one
+benchmark passes, of any evidence class.
 
 > **Not one benchmark in this panel passes, on any kind of evidence, including its own frozen
 > output.** That is the most honest this number has ever been, and it got there without a
@@ -229,13 +236,14 @@ of 2026-08-28 — **0 of 4 internal-synthetic**. The aggregate is **0/14**.
 > motion absorb the Waves W/X drift, which is laundering. Full decomposition:
 > [tasks/audit_remediation.md](tasks/audit_remediation.md), Wave Y.
 
-> **Two counters, and they disagree.** `benchmark_summary.md` prints **2/14**, because
-> `src/presentation.py::_is_pass` also counts the weaker `pass-no-ranking` status (the two
-> Pratap-Singh fit-recovery rows). The headline above and
+> **Two counters, and they disagree.** `benchmark_summary.md` prints **2/23** on its mixed
+> all-rows line, because `src/presentation.py::_is_pass` also counts the weaker
+> `pass-no-ranking` status (the two Pratap-Singh fit-recovery rows). The headline above and
 > `tests/scientific/test_honest_headline_guards.py` use the strict `overall_status == "pass"`
-> and see **0/14**. Both are defensible; publishing them without saying which is which is not.
-> The divergence predates this wave (7/14 vs 5/14 after Wave O, 6/14 vs 4/14 after Wave P) and
-> is pinned in the guard. The gap has not widened; the population under it shrank.
+> and see **0/23**. Both are defensible; publishing them without saying which is which is not.
+> The divergence predates this wave (7/14 vs 5/14 after Wave O, 6/14 vs 4/14 after Wave P, then
+> 2/14 vs 0/14) and is pinned in the guard. The gap has not widened; the denominator grew from
+> 14 to 23 as Waves W/X/B7 added rows, and every added row failed.
 
 > **Fit-recovery fell 1/4 → 0/4 on 2026-08-27 (Wave P), and the mechanism is worth reading.**
 > The last survivor was `pea_isolate_uht_140C_Trikusuma2019`, which passed because three
@@ -318,17 +326,17 @@ of 2026-08-28 — **0 of 4 internal-synthetic**. The aggregate is **0/14**.
 > [matrix_marker_yield_rederivation.md](results/validation/matrix_marker_yield_rederivation.md).
 
 **How to read this honestly:** coverage is only meaningful next to interval width — a 90% CI
-spanning two or more orders of magnitude makes coverage cheap. This headline is the reverse of
-the usual worry: the intervals *grew* — and coverage still *fell*, most recently from 2/11 to
-1/3 when the fitted rows were pulled out of both sides, and then to 0/3 under Wave S1b. The point predictions moved further
-from the measurements than even those intervals allow, and the literature slice's own interval
-is the *narrowest* of the three (**0.75 dex**, a factor of ~5.6 end to end — it widened from
-0.85 to 0.95 dex under the Wave S1 additive propagator and then *narrowed* to 0.75 dex under
-the Wave S1b routing repair, and **coverage fell from 1/3 to 0/3 as it narrowed**), so that
-0/3 is the one number here that is not cheap — a narrower interval that now misses every
-literature row is the worst of both. The
-literature slice is now saying the model is wrong on the sulfur branch, and saying so loudly. The
-internal-synthetic rows (26 of the 35 matched rows in the Monte-Carlo panel) are
+spanning two or more orders of magnitude makes coverage cheap. The *rate* has fallen through
+every revision of this section — **2/11 → 1/3** when the fitted rows were pulled out of both
+sides, **1/3 → 0/3** under Wave S1b, and **0/3 → 4/13 (31%)** once Waves W and X put ten more
+real literature rows on the panel. Read the last of those as a bigger denominator, not as a
+recovery: nine of the ten rows added were missed. And the literature slice's interval is still
+the *narrowest* of the three (**1.44 dex**, a factor of ~28 end to end, against 2.87 for the
+fitted rows and 4.03 for the synthetic ones), so 31% is the one coverage number on this page
+that is not cheap — the tightest intervals in the panel and the model still outside them 9 times
+in 13. The
+literature slice is saying the model is wrong on the sulfur branch, and saying so loudly. The
+internal-synthetic rows (26 of the 47 matched rows in the Monte-Carlo panel) are
 drift-detection harnesses, not
 evidence, and are labeled as such throughout the pipeline. Four former panel benchmarks lost
 their place in the audit because their cited sources are dead or resolve to unrelated papers:
@@ -832,63 +840,131 @@ directional report and is trying not to repeat.
 | **Moderate** — verify before deciding | Directional prioritisation and *relative* ranking  | Cys + ribose vs Cys + glucose; pea vs soy matrix comparisons; choosing what to test next |
 | **Low** — exploratory only            | Hypothesis generation                              | Any absolute ppb figure; new protein sources without nearby benchmarks; extrusion claims |
 
-### The kinetic core is the prediction path (2026-08-29, Wave B5 — the propagator cutover)
+### The kinetic core is the prediction path (Wave B5 — the propagator cutover; numbers re-scored through B7, 2026-08-29)
 
 `maillard compare` and `maillard predict` now route through **`src/kinetic_core/engine.py`**, the
-mass-action reaction network built over Waves B1–B4. The old FAST screening lane is **demoted, not
+mass-action reaction network built over Waves B1–B4 and extended by B6 (the lipid lane) and B7
+(the furanic channel). The old FAST screening lane is **demoted, not
 deleted**: it is still reachable behind `--lane fast`, it is labelled `ORDINAL SCREENING`
 everywhere it surfaces, and **its absolute ppb no longer reach any user-facing surface** — the
 CLI strips them from both the table and the JSON, and `--absolute` on that lane is refused.
 
-**What the core is.** Three networks that do *not* compose, each with its own integrator:
+**What the core is.** Four networks that do *not* compose, each with its own integrator. Waves B6
+and B7 added the fourth lane and the furanic channel, so the step counts below are larger than
+the ones this section carried at the B5 cutover (counted from `src/kinetic_core`: trunk
+`network.REACTIONS`, sulfur `sulfur.FULL_REACTIONS`, acrylamide
+`acrylamide.FULL_ACRYLAMIDE_REACTIONS`):
 
 | lane | steps | adds | pH | measured skill |
 | --- | ---: | --- | --- | --- |
-| trunk | 15 | glucose/fructose/glycine → melanoidins | none | **browning median 1.45x — PASS**, the core's one clean hold-out win |
-| sulfur | 79 | pentoses, cysteine, thiamine, MFT/FFT/furfural | pH trajectory | **15/27** pre-registered hold-out rows |
-| acrylamide | 31 | asparagine, the acrylamide block | none | **0/4** gating rows, 3 of them pre-registered failures with the mechanism named |
+| trunk | 26 | glucose/fructose/glycine → melanoidins; **B7 adds HMF, DMHF, 3,4-dideoxyglucosone, acetylformoin** | none | **browning median 1.45x — PASS**, the core's one clean hold-out win; the B7 furanic hold-out answers **7 of 7** exam rows at **1 in band** and **misses its pre-registered HMF direction** |
+| sulfur | 93 | pentoses, cysteine, thiamine, MFT/FFT/furfural | pH trajectory | **11/32** pre-registered hold-out rows (B2.3/B2.4 scorecard, shipped weighting). The trajectory is downward and is published as such: **B2.1 15/33 → B2.2 12/33 → B2.3 12/33**, then 11/32 after Amendment 9 permanently demoted one row |
+| acrylamide | 42 | asparagine, the acrylamide block | none | **0/4** gating rows, 3 of them pre-registered failures with the mechanism named |
+| lipid (B6) | — | linoleate hydroperoxide pool → Frankel 1989's six measured products | none | branch **distribution** fitted and frozen, **rate is a declared assumption**; **0 in band** on the exam's 8-point matrix-lipid family (4 answered, 4 still refused), answered median **1863x** |
 
 The sulfur *steps* are deliberately absent from the acrylamide lane — composing them would spend
 the same cysteine twice — so a request spanning both is declared **unanswerable** rather than
-silently routed. B4 adds the output layer: ratios lead, OAV carries intervals, and every matrix
-shift is reported as a **residual decomposition** ("measured 132x, the named terms explain 2.6x,
-the rest is unexplained residual").
+silently routed. The lipid lane co-integrates with any *one* Maillard lane (disjoint species
+sets), checked at every call rather than assumed. B4 adds the output layer: ratios lead, OAV
+carries intervals, and every matrix shift is reported as a **residual decomposition** ("measured
+132x, the named terms explain 2.6x, the rest is unexplained residual").
 
-**The core refuses what it cannot name.** It has no lipid-oxidation path, no HMF, no DMHF, and no
-alanine in the sulfur lane. Those are not hard cases; they are compounds and systems the model
-cannot represent, and the engine emits an `EnvelopeDeclaration` with a named reason and **no
-number** rather than a plausible-looking float.
+**The core still refuses what it cannot name — but the list is much shorter than it was, and
+what is left on it is a sharper kind of refusal.** The B5 text here said the core had "no
+lipid-oxidation path, no HMF, no DMHF"; **all three of those are now false** — B6 built the lipid
+lane and B7 made HMF and DMHF trunk targets. What `engine.UNREPRESENTED_COMPOUNDS` actually
+refuses today is:
 
-**The final exam, pre-registered and run once** ([`cutover_prereg.md`](results/validation/cutover_prereg.md)
-→ [`cutover_final_exam.md`](results/validation/cutover_final_exam.md)). The first time any build
-wave opened the 21 frozen external-validation bundles:
+- **1-hexanol** and **2-pentylfuran** — the lipid lane exists, but neither is in Frankel 1989's
+  six-product slate and no branch fraction for either route is measured anywhere in the fit
+  corpus. The FAST lane emits a number for both; this lane will not invent one.
+- **propanal** (an α-linolenate scission product; Frankel fed linoleate only) and **2-nonenal**
+  (named in Frankel's introduction, quantified in none of his tables).
+- **HEMF / homofuraneol** — the compound is real and the route is understood; the *lane algebra*
+  refuses, because it needs alanine and a pentose in the same lane and those live on the
+  acrylamide and sulfur lanes respectively.
+- **2,5-dimethyl-4-hydroxy-3(2H)-thiophenone** — the species and its edge are in the network and
+  balanced, but its rate is exactly zero, because the only fed-precursor experiment in the corpus
+  reports a GC area percent with no internal standard.
+
+Read the change of shape, not just the change of length: the pre-B6 refusals were "no route
+exists"; every surviving one is "the route exists and the *number* is not measured". In each case
+the engine emits an `EnvelopeDeclaration` with a named reason and **no number** rather than a
+plausible-looking float.
+
+**The final exam, pre-registered and run once, and re-scored at every wave since**
+([`cutover_prereg.md`](results/validation/cutover_prereg.md) →
+[`cutover_final_exam.md`](results/validation/cutover_final_exam.md)). The 21 frozen
+external-validation bundles, 40 points. **The numbers below are the current, post-B7 scoring**;
+the B5 figures this section used to carry are kept in the trajectory row underneath, because the
+direction of travel is the finding:
 
 | | core | old lane |
 | --- | --- | --- |
-| points answered | **23 of 40** (17 declared out of envelope) | 31 of 40 |
-| within 3x | **5 / 23** | 5 / 31 |
-| **paired median fold error** (the 23 points both answer) | **24.93x** | **12.65x** |
-| worst | 515x | 506x |
+| points answered | **34 of 40** (6 declared out of envelope) | 39 of 40 |
+| within 3x | **4 / 34** | 7 / 39 |
+| **paired median fold error** (the 33 points both answer) | **42.23x** | **10.86x** |
+| geometric-mean fold, same 33 points | **45.02x** | **13.14x** |
+| worst | **33 392x** | 2 748x |
 
-**Read the paired row: on the points both lanes answer, the core is about 2x WORSE on median
-accuracy than the lane it replaces.** The pre-registration said this outcome was expected and
-allowed for it in advance, but it is a negative result and it is the first thing to know. What the
-cutover buys is the 17 refusals and the localisation of the failures — and one genuine win:
+**Read the paired row: on the 33 points both lanes answer, the core is 3.9x WORSE on median
+accuracy than the lane it replaces** (42.23x vs 10.86x — the exam's own wording is "about 3.887x
+worse"). At the B5 cutover that gap was 2x, on 23 paired points. **It has roughly doubled, and it
+doubled because the core stopped refusing.** The pre-registration allowed for the core losing this
+comparison, so the sign is not a surprise; the size is worse than it was, and that is the first
+thing to know.
 
-- **Sulfur at 145 °C is the core's best result anywhere: 4/10 within 3x** (xylose FFT 1.14x, xylose
-  MFT 1.17x) where the old lane scores **0/10** and misses by up to 506x.
-- **Sulfur on the low-temperature ladder is 0/8, median 290x.** The temperature axis itself is
-  sound; the failure is on the *time* axis, and the localised cause is B2.1's declared policy that
-  sulfur consumption channels carry **no activation energy**, so a 4 h hold at 100 °C accumulates
-  thiol the sinks never remove. This is the first out-of-sample evidence pricing that policy.
+**The refusal count fell 17 → 13 → 6, and the cost of each step is measurable** (B6 baseline,
+B7 baseline and the current exam are all tracked artifacts):
+
+| | refusals | core answers | in band | core median | worst |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| pre-B6 | 17 | 23 | 3 | 50.13x | 648x |
+| pre-B7 (B6's lipid lane wired) | 13 | 27 | 3 | 50.13x | **33 392x** |
+| current (B7's furanic channel wired) | **6** | **34** | **4** | **40.23x** | 33 392x |
+
+**B6 and B7 pull in opposite directions and the honest reading is that only one of them paid.**
+B6's four new lipid answers are the whole of the 648x → 33 392x jump in the worst point: two of
+them are 40 °C / 10 min rows scored against an isolate's *accumulated storage* oxidation, which
+the lane's own declared no-formation-during-heating gap says it cannot make. B7's seven new
+furanic answers went the other way — median 50.13x → 40.23x, geometric mean 60.96x → 43.29x, and
+the in-band count up for the first time since the cutover (3 → 4). A refusal converted into a bad number costs the
+paired median; a refusal converted into a defensible number buys it back.
+
+**So: does "what the cutover buys is the refusals" still hold at 6?** Much more weakly, and the
+sentence should not be read the way it was written. At 17 refusals out of 40 the core was
+declining 42% of the exam and the trade was real. At 6 it declines 15%, while being 3.9x worse
+than the lane it replaced on everything it does answer. What survives of the argument is not the
+*count* but the *kind*: every remaining refusal names a specific unmeasured quantity (see the list
+above), and the failures that remain are localised to named lanes and named constants rather than
+smeared across one screening heuristic. That is still worth something. It is not worth as much as
+17 refusals were, and quoting the B5 sentence unchanged would overstate it.
+
+The specifics (all from `results/validation/cutover_final_exam.md`):
+
+- **Sulfur at 145 °C is still the core's best family: 2/10 within 3x**, median 11.48x, where the
+  old lane scores **0/10** on the same points and misses by up to 506x. This is down from the
+  4/10 this section reported at B5 — the two flagship rows moved the wrong way, xylose FFT from
+  1.14x to **3.076x (now a FAIL)** and xylose MFT from 1.17x to **2.376x (still a pass, but only
+  just)**. The family beats the old lane on median and loses to its own previous self.
+- **Sulfur on the low-temperature ladder is 0/8, median 193.5x.** The temperature axis itself is
+  sound — at a fixed hold, product rises with temperature as it should. The failure is on the
+  *time* axis: Yiltirak's protocol compensates lower temperature with longer holds, and over a 4 h
+  hold at 100 °C the core accumulates thiol its sinks never remove. **The mechanism first blamed
+  for this — B2.1's no-activation-energy consumption policy — has since been fixed** (B2.2 gave
+  the decay lumps their own barrier families, B2.3 refit them), so the residual 193.5x is no
+  longer attributable to it and is currently unexplained.
 - **The acrylamide lane has the time shape inverted** — Chang measures acrylamide rising 28 → 1459
-  ppb between 10 and 30 min; the core predicts it falling 6766 → 4041. Its single in-band
+  ppb between 10 and 30 min; the core predicts it falling **6750 → 4031**. Its single in-band
   acrylamide "pass" is a falling curve crossing a rising measurement and **should not be counted as
-  evidence**.
+  evidence**: the same model scores 241x on the 10 min point of the same experiment.
 - **The core returns one number for two arms the source distinguishes** (Chang's acetic-acid and
-  water arms, 1459 vs 832 ppb measured, 4041 predicted for both) because the acrylamide lane has no
-  pH or solvent term. The declaration says so on every such row. It is the cleanest illustration in
-  the repository of what "no pH term" costs.
+  water arms, 1459 vs 832 ppb measured, **4031 predicted for both**) because the acrylamide lane
+  has no pH or solvent term. The declaration says so on every such row. It is the cleanest
+  illustration in the repository of what "no pH term" costs.
+- **Four of the 40 points are the same measurements as four rows of the kinetic-core hold-out
+  panel**, not analogues of them. The exam and the panel are therefore not independent evidence on
+  that axis, and both artifacts declare it from Wave B2.4 onward.
 
 Four **wiring** bugs were found and fixed during the cutover, none a parameter change. Three were
 found before the exam ran and share one signature — a compound that *has* a measured threshold
@@ -1320,7 +1396,7 @@ a pre-audit trust claim that the evidence has since withdrawn. `architecture.md`
 trust surface with "**High trust — use freely**" and advertised a `bounded_calibration` /
 `transferred_literature` / `surrogate_family` confidence vocabulary that no longer exists in
 the output; `SMIRKS_SYSTEM.md` described two templates as "Validated vs. benchmarks" at a time
-when **0 of 14** benchmarks are strict-ready. The structural content below is what survived
+when **0 of 23** benchmarks are strict-ready. The structural content below is what survived
 that filter.*
 
 ### The lanes — the single most load-bearing fact about this codebase
@@ -1331,7 +1407,9 @@ the shipped default changed. `maillard compare` / `maillard predict` route throu
 **FAST screening lane**, which still runs behind `--lane fast` with its absolutes withheld, and
 the **matrix lane**, whose absolute path no longer feeds any user-facing output. The measured
 comparison between core and old lane is in the model-card section above — and it is not a
-flattering one for the core on median accuracy (24.93x vs 12.65x on the 23 points both answer).
+flattering one for the core on median accuracy (**42.23x vs 10.86x on the 33 points both
+answer**, B7 exam, `results/validation/cutover_final_exam.md`; it was 24.93x vs 12.65x on 23
+paired points when this line was first written at B5, so the gap has roughly doubled).
 What follows describes the two OLD paths, which remain in the tree and still back the benchmark
 artifacts.
 

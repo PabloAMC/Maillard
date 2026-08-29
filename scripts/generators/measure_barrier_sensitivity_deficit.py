@@ -54,6 +54,7 @@ Usage
 
 from __future__ import annotations
 
+import argparse
 import json
 import math
 import sys
@@ -219,7 +220,16 @@ def probe(spec: Dict[str, Any], temperature_kelvin: float, tau_ref: Optional[flo
     }
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Measure and decompose the model's barrier-sensitivity deficit into "
+            "span saturation and allocation normalisation; writes "
+            "results/validation/barrier_sensitivity_deficit.{json,md}."
+        )
+    )
+    parser.parse_args(argv)
+
     shipped_tau = float(DEFAULT_PROJECTION_STRATEGY.reference_conversion_time_min)
     constraint = json.loads(
         (ROOT / "results" / "validation" / "projection_budget_step_yield_constraint.json").read_text()

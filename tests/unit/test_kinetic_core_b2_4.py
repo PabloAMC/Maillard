@@ -163,8 +163,33 @@ def test_the_control_reproduces_b2_3s_cost_and_only_the_ph_rows_move():
     # single exam row it moves is 1.26x (see the B7 hold-out report, H7).
     # An orchestrator ruling on whether to re-run B2.3/B2.4 against the B7
     # trunk is requested; nothing here presumes one.
+    # ==== WAVE Q1: THE TOLERANCE, NOT THE VALUE, WAS THE DEFECT ====
+    # B7 re-pinned this literal and kept the pre-B7 `rel=1e-9`. That tolerance
+    # was correct when the assertion was `cost == published` -- both sides were
+    # then the SAME float, read from the same artifact, so bit-identity was the
+    # property under test and 1e-9 asserted it. After B7 the two sides are no
+    # longer the same float: the left is a ~50-term least-squares cost RECOMPUTED
+    # here, and 1e-9 silently became a demand for bit-reproducible floating-point
+    # summation across BLAS/libm builds. That is not a property this repository
+    # has ever claimed, and it does not hold: on macOS/arm64 outside the
+    # validated container the cost is 8.386176922760855, which differs from the
+    # pinned literal by 1.5e-5 absolute / 1.8e-6 relative -- ~1800x the declared
+    # tolerance, and RED on a clean tree at 92b746d.
+    #
+    # The literal is NOT changed: it is the container's value and re-pinning it
+    # to this host's would move a scientific number and hide the portability
+    # fact. The tolerance is widened to 1e-5, which is ~5x the observed
+    # cross-platform spread and still ~2600x tighter than the +2.6 % trunk
+    # perturbation this assertion exists to detect. The precedent is B1's own B7
+    # re-pins (tests/unit/test_kinetic_core_b1.py), which use rel=2e-3 for the
+    # same class of quantity in the same wave.
+    #
+    # WHAT IS STILL BEING ASSERTED: that B2.3's objective at its own vector sits
+    # where B7's trunk perturbation put it, and has not moved again. What is no
+    # longer being asserted -- because it was never true -- is that a float sum
+    # is bit-identical across platforms.
     B7_TRUNK_SHIFTED_COST = 8.386192115776923
-    assert cost == pytest.approx(B7_TRUNK_SHIFTED_COST, rel=1e-9), (
+    assert cost == pytest.approx(B7_TRUNK_SHIFTED_COST, rel=1e-5), (
         f"B2.3's objective at its own vector has moved again: {cost}. It is "
         f"expected to differ from the published {published} by exactly the B7 "
         f"trunk perturbation and by nothing else.")

@@ -29,14 +29,23 @@ refusal. In particular:
   * every declared assumption the run actually used is listed in the footer
     with its band, because the bands are the product.
 
-THE ONE PIECE OF ARITHMETIC THIS MODULE DOES ITSELF
----------------------------------------------------
-``compare_core`` does not carry an OAV table (``engine.compare`` returns run
-DICTS, and ``CorePrediction.oav()`` lives on the object). Rather than change the
-engine, the OAV for a compare arm is rebuilt here from the run dict by the same
-three steps ``CorePrediction.oav()`` uses -- wrap in the B4 band, drop the
-NO_B4_RECORD species, re-key to the B4 compound key -- and the duplication is
-flagged in ``_oav_for_run``'s docstring as API feedback rather than hidden.
+THIS MODULE DOES NO ARITHMETIC OF ITS OWN (Q1)
+----------------------------------------------
+It used to do one piece. ``engine.compare`` returned its arms flattened through
+``CorePrediction.as_dict()``, which drops the object and therefore drops
+``.oav()``, so a compare carried no OAV table -- and this module rebuilt one by
+hand from the run dict. The V1 wave recorded that as API feedback and predicted
+it would drift. It had: the copy was written in B6 and never learned about B7's
+furanone declared-assumption band, so a compare drew NARROWER intervals than a
+predict of the identical arm.
+
+Q1 fixed the API instead of the copy. ``engine.compare`` emits ``oav_table_a``
+/ ``oav_table_b`` and ``rows_a``/``rows_b`` from the live objects, and this
+module reads them. Likewise the three key-spaces a compound wears (display
+name, species key, B4 key) are converted ONLY through
+``kinetic_core.keyspaces``, never by an inline ``.get`` here -- getting that
+hop wrong does not raise, it silently reports "no measured threshold" for a
+compound that has one.
 """
 
 from __future__ import annotations
@@ -409,63 +418,26 @@ def svg_stacked_decades(
 # ---------------------------------------------------------------------------
 
 
-def _oav_for_run(run: Mapping[str, Any], declaration: Mapping[str, Any]) -> Dict[str, Any]:
-    """
-    Rebuild the B4 OAV table for one arm of a COMPARE, from its run dict.
-
-    API FEEDBACK, recorded here rather than worked around silently:
-    ``engine.compare`` returns ``run_a``/``run_b`` as ``CorePrediction.as_dict()``
-    payloads, which drop the object and therefore drop ``.oav()`` and
-    ``.absolutes()``. A compare consequently carries NO OAV table and NO
-    concentration intervals, while a predict carries both. The three steps below
-    are a verbatim re-implementation of ``CorePrediction.oav()`` and will drift
-    from it the day that method changes. The right fix is for ``engine.compare``
-    to emit the OAV table per arm.
-    """
-    from src.kinetic_core.matrix_oav import absolute_concentration, oav_table
-    from src.kinetic_core.engine import resolve_matrix
-    from src.kinetic_core.species_lipid import B4_COMPOUND_KEY, NO_B4_RECORD
-
-    metadata = dict(run.get("run_metadata") or {})
-    widths = dict(metadata.get("lipid_extra_decades") or {})
-    mapped = dict(declaration.get("mapped_targets") or {})
-    by_key: Dict[str, Any] = {}
-    for compound, value in (run.get("concentrations_ug_per_l") or {}).items():
-        key = mapped.get(compound, compound)
-        if key in NO_B4_RECORD:
-            continue
-        by_key[B4_COMPOUND_KEY.get(key, key)] = absolute_concentration(
-            float(value),
-            via_partition=True,
-            extra_decades=float(widths.get(compound, 0.0)),
-            provenance=f"kinetic core {declaration.get('lane')} lane",
-        )
-    segments = metadata.get("segments") or []
-    peak = max(
-        (float(s.get("temperature_C", 0.0)) for s in segments), default=None
-    )
-    return oav_table(
-        by_key,
-        matrix=resolve_matrix(str(metadata.get("matrix") or "water")),
-        temperature_c=peak,
-    )
-
-
 def _species_key_for(compound: str, declaration: Mapping[str, Any]) -> str:
-    return dict(declaration.get("mapped_targets") or {}).get(compound, compound)
+    """DISPLAY NAME -> SPECIES KEY. See ``kinetic_core.keyspaces``."""
+    from src.kinetic_core.keyspaces import species_key_for
 
-
-def _b4_key_for(species_key: str) -> Optional[str]:
-    from src.kinetic_core.species_lipid import B4_COMPOUND_KEY, NO_B4_RECORD
-
-    if species_key in NO_B4_RECORD:
-        return None
-    return B4_COMPOUND_KEY.get(species_key, species_key)
+    return species_key_for(compound, declaration.get("mapped_targets") or {})
 
 
 def _oav_entry(oav_table_payload: Mapping[str, Any], species_key: str) -> Dict[str, Any]:
+    """
+    One arm's OAV entry for a species, looked up in the B4 KEY-SPACE.
+
+    Q1: the species -> B4 hop used to be written out here as a third private
+    copy. It lives in ``kinetic_core.keyspaces.b4_key`` now, because getting it
+    wrong does not raise -- it returns "no measured threshold" for a compound
+    that has one.
+    """
+    from src.kinetic_core.keyspaces import b4_key
+
     per_species = dict(oav_table_payload.get("per_species") or {})
-    b4 = _b4_key_for(species_key)
+    b4 = b4_key(species_key)
     entry = per_species.get(b4) if b4 else None
     return dict(entry) if isinstance(entry, Mapping) else {}
 
@@ -1172,7 +1144,18 @@ def render_predict_report(payload: Mapping[str, Any]) -> str:
         species_key = str(row.get("species_key") or _species_key_for(compound, declaration))
         entry = _oav_entry(oav_payload, species_key)
         concentration = dict(entry.get("concentration") or {})
-        interval = concentration.get("interval_ug_per_L") or [None, None]
+        # Q1: the row carries its own interval now. The fallback to the OAV
+        # table is kept for payloads written before that, but it is a FALLBACK:
+        # the table has no entry at all for a NO_B4_RECORD species, so reading
+        # the interval out of it printed a bare point for four of the lipid
+        # lane's seven products -- against this module's own rule that an
+        # absolute is never drawn without its interval.
+        interval = (
+            row.get("interval_ug_per_l")
+            or concentration.get("interval_ug_per_L")
+            or [None, None]
+        )
+        band_x = row.get("band_x", concentration.get("band_x"))
         oav_summary = dict(row.get("oav") or {})
         oav_interval = entry.get("OAV_interval") or [None, None]
         is_dimer = species_key == dimer_key
@@ -1216,7 +1199,7 @@ def render_predict_report(payload: Mapping[str, Any]) -> str:
                 lo=sig(interval[0]),
                 hi=sig(interval[1]),
                 band=(
-                    sig(concentration.get("band_x")) + "&times;"
+                    sig(band_x) + "&times;"
                     if float(row.get("predicted_ug_per_l") or 0.0) > 0.0
                     else "n/a"
                 ),
@@ -1412,6 +1395,9 @@ def render_compare_report(payload: Mapping[str, Any]) -> str:
     band = ratios.get("reliability_band_x")
     n_resolved = int(ratios.get("n_resolved", 0))
     n_compared = int(ratios.get("n_compared", 0))
+    # Q1: published by the science layer, which now excludes an undefined ratio
+    # from n_resolved rather than counting it. Read, never re-derived.
+    n_undefined = int(ratios.get("n_undefined", 0))
 
     body.append("<h2>Per-compound ratios (A / B)</h2>")
     body.append(
@@ -1420,7 +1406,13 @@ def render_compare_report(payload: Mapping[str, Any]) -> str:
         + (f" ({sig(band)}&times;)" if isinstance(band, (int, float)) else "")
         + ". A ratio INSIDE that band is reported <strong>NOT RESOLVED</strong> &mdash; "
         "not as a small effect. The two are different claims and are styled "
-        "differently below.</p>"
+        "differently below."
+        + (
+            f" {n_undefined} of the {n_compared} is not a ratio at all "
+            "(one arm at exactly zero) and resolves nothing."
+            if n_undefined else ""
+        )
+        + "</p>"
     )
 
     table_rows: List[str] = []
@@ -1498,16 +1490,23 @@ def render_compare_report(payload: Mapping[str, Any]) -> str:
                 "the bar looks like.</p>"
             )
 
-    # ---- per-arm OAV, rebuilt from the run dicts ---------------------------
+    # ---- per-arm OAV, AS THE ENGINE EMITTED IT ----------------------------
+    # Q1: this block used to rebuild each arm's OAV table here, by hand, from
+    # the run dict -- ``engine.compare`` returned the arms flattened through
+    # ``as_dict()``, which drops the object and with it ``.oav()``. The copy had
+    # already drifted (it never learned B7's furanone band, so a compare drew
+    # narrower intervals than a predict of the same arm), which is exactly the
+    # failure its own docstring predicted. ``engine.compare`` now emits
+    # ``oav_table_a``/``oav_table_b`` from the live objects and this module
+    # reads them.
     run_a = dict(comparison.get("run_a") or {})
     run_b = dict(comparison.get("run_b") or {})
-    for label, run, declaration in (
-        (name_a, run_a, declaration_a),
-        (name_b, run_b, declaration_b),
+    for label, run, declaration, oav_payload in (
+        (name_a, run_a, declaration_a, dict(comparison.get("oav_table_a") or {})),
+        (name_b, run_b, declaration_b, dict(comparison.get("oav_table_b") or {})),
     ):
         if not run.get("concentrations_ug_per_l"):
             continue
-        oav_payload = _oav_for_run(run, declaration)
         chart_rows = []
         for species_key in oav_payload.get("ranking_by_OAV") or []:
             entry = dict((oav_payload.get("per_species") or {}).get(species_key) or {})
@@ -1560,11 +1559,23 @@ def render_compare_report(payload: Mapping[str, Any]) -> str:
 
 
 def write_report(payload: Mapping[str, Any], path: Path | str) -> Path:
-    """Render the right report for this payload and write it."""
+    """
+    Render the right report for this payload and write it.
+
+    Q1 FIXED THE ROUTING PREDICATE. This dispatched on
+    ``artifact.startswith("maillard_compare")``, and the FAST lane's artifact is
+    named ``"maillard_compare"`` -- a prefix of the core's
+    ``"maillard_compare_core"``. So the guard below could never fire for the
+    payload it was written to catch: a FAST payload matched the prefix, was
+    routed into the CORE renderer, and died on a missing key, while the
+    friendly error explaining that ``--report`` is core-only sat unreachable.
+    The dispatch is now on the exact core artifact names, so a FAST payload gets
+    the error the author intended. No core payload changes route.
+    """
     artifact = str(payload.get("artifact") or "")
-    if artifact.startswith("maillard_compare"):
+    if artifact == "maillard_compare_core":
         text = render_compare_report(payload)
-    elif artifact.startswith("maillard_predict"):
+    elif artifact == "maillard_predict_core":
         text = render_predict_report(payload)
     else:
         raise ValueError(

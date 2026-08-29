@@ -70,7 +70,7 @@ but see topology risk 3 for what it is gated on.
 | 8 | **Furfural** from hexose (secondary branch) | hexose 3-deoxyosone → furfural + **formaldehyde** + 2 H2O (`reaction_templates.py:201-207`) | Labelled glucose/alanine: glucose "can lose the C-6 atom to produce a pentose moiety responsible for the formation of furfural" — one terminal carbon is lost, as the model encodes; the specific 3-deoxyosone precursor and the formaldehyde identity of the lost C1 are not established | **PARTIALLY SUPPORTED** | Yaylayan & Keyhani 2000 `[ABS]` |
 | 9 | **HMF** from hexose | hexose 3-deoxyosone → HMF + 2 H2O (`reaction_templates.py:190`), reached by **both** glucose (Amadori) and fructose (Heyns) | 3-Deoxyglucosone converts to HMF far faster than glucose does (supports the glucose route), **but** "both fructose and sucrose showed much higher conversion rates than 3-deoxyglucosone thus **precluding it as a major precursor of HMF in fructose** and sucrose solutions" | **PARTIALLY SUPPORTED** (glucose) / **CONTRADICTED** (fructose) | Perez Locas & Yaylayan 2008 `[ABS]` |
 | 10 | **Furaneol / HDMF (DMHF)** from hexose | hexose 1-deoxyosone + 2[H] → DMHF + 2 H2O (`reaction_templates.py:343-350`) | CAMOLA-style 1:1 [13C6]/[12C6]glucose gave a 1:1 mixture of [13C6]- and [12C6]-DMHF ⇒ **intact C6 skeleton**, no C3+C3 recombination; acetylformoin (the cyclised 1-deoxyosone) detected as the DMHF precursor in glucose/amino-acid systems | **CONFIRMED** | Wang & Ho 2008 `[ABS]`; corroborated Spreng et al. 2021 `[ABS]`, Schieberle 2005 `[ABS]` |
-| 11 | **DMHF / HEMF** from pentose + amino acid | pentose + glycine → DMHF; pentose + alanine → HEMF (`reaction_templates.py:1519-1575`) | 13C-labelled glycine and alanine: "incorporation of the Strecker degradation products **formaldehyde and acetaldehyde** into the pentose moiety, forming the furanones HDMF and HEMF"; mechanism = Amadori → 2,3-enolisation → chain elongation by the Strecker aldehyde → **reduction** of acetylformoin-type intermediates | **CONFIRMED** (C5+C1 / C5+C2 stoichiometry exactly as modelled) | Blank & Fay 1996 `[ABS]` |
+| 11 | **DMHF / HEMF** from pentose + amino acid | pentose + glycine → DMHF; pentose + alanine → HEMF (`reaction_templates.py:2218-2274` — pointer corrected 2026-08-29, Wave Q1; the old range is now `_mft_pathway`'s docstring) | 13C-labelled glycine and alanine: "incorporation of the Strecker degradation products **formaldehyde and acetaldehyde** into the pentose moiety, forming the furanones HDMF and HEMF"; mechanism = Amadori → 2,3-enolisation → chain elongation by the Strecker aldehyde → **reduction** of acetylformoin-type intermediates | **CONFIRMED** (C5+C1 / C5+C2 stoichiometry exactly as modelled) | Blank & Fay 1996 `[ABS]` |
 | 12 | **Norfuraneol** (as a species / cyclisation step) | pentose 1-deoxyosone → norfuraneol + H2O (`reaction_templates.py:333-342`) | Norfuraneol is a genuine Maillard product and reacts with H2S (van den Ouweland & Peer's original synthesis); in situ it is the demonstrated precursor of **2-mercapto-3-pentanone**, not of MFT | **PARTIALLY SUPPORTED** (keep the species and the step; retire its MFT role) | Van den Ouweland & Peer 1975 `[META]`; Cerny & Davidek 2003 `[ABS]` |
 | 13 | **Retro-aldol fragmentation** of the deoxyosones | 3-deoxyosone → pyruvaldehyde + glyceraldehyde / glycolaldehyde; second channel → glyoxal + ketol (`reaction_templates.py:561-606`) | Labelled glucose: pyruvaldehyde and acetol "incorporated intact C1-C2-C3 and C4-C5-C6 carbon chains"; glycolaldehyde "incorporated intact C5-C6 and C1-C2 chains" (70/30 split) — i.e. both C3+C3 and C2+C4 cleavages are real | **CONFIRMED** | Yaylayan & Keyhani 2000 `[ABS]`; Yaylayan & Keyhani 2001 `[ABS]` |
 | 14 | **Strecker aldehydes** (methional, 3-methylbutanal, phenylacetaldehyde) | α-dicarbonyl + amino acid → aldehyde + aminoketone + CO2 (`reaction_templates.py:376-485`) | [15N]- and [methyl-13C]methionine confirm the amino-acid origin of the Strecker aldehyde. **But** the α-dicarbonyl is not the only initiator: lipid-derived 4-oxo-2-alkenals, 2,4-alkadienals and 4,5-epoxy-2-alkenals raise phenylacetaldehyde yields by 300-900 % and have measured Ea 28-67 kJ/mol | **PARTIALLY SUPPORTED** (route real, initiator set incomplete) | Yaylayan & Keyhani 2001 `[ABS]`; Zamora et al. 2013 `[ABS]`; Zamora et al. 2015 `[ABS]` |
@@ -288,10 +288,19 @@ The pentose route is equally well evidenced. Blank & Fay 1996 (JAFC 44:531-536):
 > **reduction** of the resulting acetylformoin-type intermediates." `[ABS]`
 
 The model's `_furanone_generation` stoichiometry (pentose + glycine − CO2 → C6 DMHF; pentose +
-alanine − CO2 → C7 HEMF) matches the C5+C1 / C5+C2 accounting. Two caveats worth recording:
+alanine − CO2 → C7 HEMF) matches the C5+C1 / C5+C2 accounting. Caveats worth recording:
 the ~30 % sugar-fragmentation channel is not modelled, and Blank & Fay report HDMF from
 pentose/**alanine** as well as pentose/glycine, whereas the model's alanine branch emits only
 HEMF.
+
+**Qualified 2026-08-29 (Wave Q1).** What is confirmed is the **carbon accounting**, not the
+**mechanism**, and the row above should be read that way. Blank & Fay's route is a multi-step
+chain elongation through a *released* Strecker aldehyde and an **acetylformoin** intermediate.
+`_furanone_generation` is a **single lumped bimolecular step with no acetylformoin node**, and it
+is **first order in amino acid by construction** — against Blank 1997 Table 5, which measures that
+order at **n = 0.35–0.71** (`data/lit/extraction_dossiers/k5b_dmhf_synthesis.md` row R2). That is a
+known shape mis-specification, testable today, and it is not what a "CONFIRMED" verdict on carbon
+accounting says anything about.
 
 ### 14. Strecker aldehydes: right route, incomplete initiator set
 

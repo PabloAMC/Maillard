@@ -27,6 +27,7 @@ Usage:
 
 from __future__ import annotations
 
+import argparse
 import json
 import math
 import statistics
@@ -358,7 +359,16 @@ def render(payload: Dict[str, Any]) -> str:
     return "\n".join(out)
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Score Wave Y against both frozen out-of-sample surfaces and "
+            "against its own pre-registration; writes "
+            "results/validation/maillard_path_holdout_wave_y_prepost.{json,md}."
+        )
+    )
+    parser.parse_args(argv)
+
     payload = build()
     OUT_JSON.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
     OUT_MD.write_text(render(payload), encoding="utf-8")

@@ -664,6 +664,7 @@ def _findings(rows: List[Dict[str, Any]], *, paired=(), old_paired=None,
         (core_paired_median / old_paired_median
          if core_paired_median and old_paired_median else None))
 
+    _n_declined = sum(1 for r in rows if not r.get("answered"))
     findings.append({
         "title": (
             "The core is BETTER than the old lane on the paired subset"
@@ -687,23 +688,54 @@ def _findings(rows: List[Dict[str, Any]], *, paired=(), old_paired=None,
                "is not expected to beat the old lane on median accuracy in this exam'), so this "
                "is a confirmed expectation rather than a surprise — but it is a negative result "
                "and it is the first thing a reader should be told.\n\n")
-            + "What the core buys instead is the 17 declensions and the localisation of the "
-            "failures. The old lane emitted a number for all 8 matrix-path lipid points and all "
-            "7 HMF/DMHF/furfural points; every one of those numbers came from a route the "
-            "kinetic core does not have, and 5 of the old lane's 5 in-band hits sit in exactly "
-            "those families. Whether that trade is worth making is a judgement, and the numbers "
-            "for making it are both in the family table above."
+            + f"What the core buys instead is the {_n_declined} declensions and the "
+            "localisation of the failures: where it cannot name a route it says so instead of "
+            "emitting a number from one it does not have. Whether that trade is worth making is "
+            "a judgement, and the numbers for making it are in the family table above.\n\n"
+            + (
+                "NOTE ON THE SIZE OF THAT TRADE, because it has moved a long way and the "
+                f"argument is weaker than it was: the core declined 17 of {len(rows)} at B5, "
+                f"and declines {_n_declined} now. B6 gave it the lipid lane and B7 the furanic "
+                "channels, so most of what it used to refuse it now answers — and answering is "
+                "how it acquired its worst points. A refusal count is only an argument while "
+                "the refusals are the ones worth making; read the family table for which "
+                "families the remaining declensions are in."
+            )
         ),
     })
 
+    _hof = by_family.get("sulfur_hofmann1998_145C", {}) if by_family else {}
+    _hof_best = sorted(
+        (r for r in rows
+         if r.get("family") == "sulfur_hofmann1998_145C"
+         and r.get("core_fold_error") is not None),
+        key=lambda r: r["core_fold_error"],
+    )[:2]
+    _hof_examples = ", ".join(
+        f"{r.get('benchmark_id', '?')} {r.get('compound', '?')} at "
+        f"{_fmt(r['core_fold_error'])}x"
+        for r in _hof_best
+    ) or "no scored row"
+    _hof_old_worst = max(
+        (r["old_fold_error"] for r in rows
+         if r.get("family") == "sulfur_hofmann1998_145C"
+         and r.get("old_fold_error") is not None),
+        default=None,
+    )
     findings.append({
-        "title": "The sulfur lane is excellent at 145 C and catastrophic on the low-temperature ladder",
+        "title": "The sulfur lane is strongest at 145 C and catastrophic on the low-temperature ladder",
         "body": (
-            "The Hofmann family (145 C, 20 min) is the core's best result anywhere: **4/10 "
-            "within 3x**, including xylose FFT at 1.14x and xylose MFT at 1.17x, against an old "
-            "lane that scores **0/10** on the same points and misses by up to 506x. That is a "
-            "genuine out-of-sample win for the rebuilt sulfur network on the conditions closest "
-            "to its fit point.\n\n"
+            # Q1: these were typed literals ("4/10", "1.14x", "1.17x", "506x")
+            # from the B5 run and were stale by two waves -- the same defect
+            # B2.3's docstring above says it fixed, left in place three
+            # paragraphs later. They are read off this run's rows now.
+            f"The Hofmann family (145 C, 20 min) is the core's best result anywhere: "
+            f"**{_hof.get('core_within_band', 0)}/{_hof.get('points', 0)} within 3x**, its two "
+            f"closest rows being {_hof_examples}, against an old lane that scores "
+            f"**{_hof.get('old_within_band', 0)}/{_hof.get('points', 0)}** on the same points"
+            + (f" and misses by up to {_fmt(_hof_old_worst)}x" if _hof_old_worst else "")
+            + ". That is a genuine out-of-sample result for the rebuilt sulfur network on the "
+            "conditions closest to its fit point.\n\n"
             f"The Yiltirak family (100-130 C, 30 min - 4 h) is "
             f"**{by_family.get('sulfur_yiltirak2026_T_ladder', {}).get('core_within_band', 0)}/"
             f"{by_family.get('sulfur_yiltirak2026_T_ladder', {}).get('points', 8)}**, median "
@@ -727,17 +759,34 @@ def _findings(rows: List[Dict[str, Any]], *, paired=(), old_paired=None,
         ),
     })
 
+    # Q1: the four ppb figures and the two fold errors below were typed from
+    # the B5 run. They are read off this run's own rows now, keyed on the two
+    # Chang time points, so the paragraph cannot describe a trajectory the table
+    # above does not show.
+    def _chang(minutes: float) -> Dict[str, Any]:
+        for r in rows:
+            if (r.get("family") == "acrylamide_180C"
+                    and r.get("time_min") == minutes
+                    and "Chang2021" in str(r.get("benchmark_id", ""))
+                    and r.get("core_predicted") is not None):
+                return r
+        return {}
+
+    _c10, _c30 = _chang(10.0), _chang(30.0)
     findings.append({
         "title": "The acrylamide lane has the TIME SHAPE inverted",
         "body": (
-            "Chang 2021 measures acrylamide RISING from 28 ppb at 10 min to 1459 ppb at 30 min. "
-            "The core predicts it FALLING, from 6766 ppb at 10 min to 4041 ppb at 30 min — its "
-            "trajectory peaks at about 5 min and decays thereafter. The single in-band "
-            "acrylamide pass (Chang 30 min, 2.77x) is therefore a crossing of a falling curve "
-            "with a rising measurement, not a correct prediction: the same model scores 242x on "
-            "the 10 min point of the same experiment. **A pass on one point of a two-point time "
-            "series whose direction is wrong should not be counted as evidence**, and it is "
-            "flagged here rather than left in the tally to be misread.\n\n"
+            f"Chang 2021 measures acrylamide RISING from {_fmt(_c10.get('measured'))} ppb at "
+            f"10 min to {_fmt(_c30.get('measured'))} ppb at 30 min. The core predicts it "
+            f"FALLING, from {_fmt(_c10.get('core_predicted'))} ppb at 10 min to "
+            f"{_fmt(_c30.get('core_predicted'))} ppb at 30 min — its trajectory peaks at about "
+            f"5 min and decays thereafter. The single in-band acrylamide pass (Chang 30 min, "
+            f"{_fmt(_c30.get('core_fold_error'))}x) is therefore a crossing of a falling curve "
+            "with a rising measurement, not a correct prediction: the same model scores "
+            f"{_fmt(_c10.get('core_fold_error'))}x on the 10 min point of the same experiment. "
+            "**A pass on one point of a two-point time series whose direction is wrong should "
+            "not be counted as evidence**, and it is flagged here rather than left in the tally "
+            "to be misread.\n\n"
             "The mechanism is B3's declared underfit: `Ea_int1_mel` sits at the TOP of its "
             "search bound (260.0 kJ/mol, saturated), and these bundles are at 180 C against a "
             "160 C fit point, so the melanoidin sink that sets the acrylamide partition is being "
@@ -751,7 +800,8 @@ def _findings(rows: List[Dict[str, Any]], *, paired=(), old_paired=None,
             "`mp_holdout_glucose_asparagine_180C_30min_Chang2021` (1% acetic acid) and "
             "`..._30min_water_Chang2021` (deionized water) measure 1459 and 832 ppb "
             "respectively — the same chemistry in two solvents, deliberately kept in separate "
-            "bundles by the curation campaign. The core returns **4041 ppb for both**, because "
+            "bundles by the curation campaign. The core returns "
+            f"**{_fmt(_c30.get('core_predicted'))} ppb for both**, because "
             "the acrylamide lane has no pH term and no solvent term; the declaration says so on "
             "every one of these rows. The core cannot see a 1.75x effect the experiment was "
             "designed to isolate. That is a coverage gap in the model, correctly declared, and "

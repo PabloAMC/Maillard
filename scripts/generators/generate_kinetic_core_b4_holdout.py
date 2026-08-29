@@ -47,6 +47,7 @@ Run with: ./scripts/docker_maillard.sh run \
 
 from __future__ import annotations
 
+import argparse
 import json
 import math
 import sys
@@ -511,7 +512,16 @@ def to_markdown(report: dict) -> str:
     return "\n".join(lines) + "\n"
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Score Build Wave B4's frozen blind predictions against the Hong "
+            "2020 paired thresholds hold-out, fitting nothing; writes "
+            "results/validation/kinetic_core_b4_holdout_report.{json,md}."
+        )
+    )
+    parser.parse_args(argv)
+
     if not FROZEN.exists():
         print(f"missing {FROZEN}; run generate_kinetic_core_b4_fit.py first")
         return 1

@@ -98,17 +98,17 @@ Expected output (abridged):
   mapped precursors: Cys=10 mM, Glc=10 mM
     ~ declared extrapolation -- ...
 
-  6 of 6 ratios resolve above the same-sample dispersion band (4.8x)
+  4 of 6 ratios resolve above the same-sample dispersion band (4.8x)
   ...of which 2 are UNDEFINED (one arm at exactly zero) and resolve nothing:
   see the 'resolved' column, not this count.
 
   compound                                        A/B direction      resolved
   ------------------------------------------------------------------------------
-  2-acetylthiazole                          2.01e-05x higher_in_cysteine_glucose yes
-  2-furfurylthiol (FFT)                         15.1x higher_in_cysteine_ribose  yes
-  2-methyl-3-furanthiol (MFT)                    234x higher_in_cysteine_ribose  yes
+  2-acetylthiazole                          2.04e-05x higher_in_cysteine_glucose yes
+  2-furfurylthiol (FFT)                         17.2x higher_in_cysteine_ribose  yes
+  2-methyl-3-furanthiol (MFT)                    244x higher_in_cysteine_ribose  yes
   bis(2-methyl-3-furyl) disulfide              A only undefined       n/a -- undefined
-  furfural                                      40.6x higher_in_cysteine_ribose  yes
+  furfural                                      53.2x higher_in_cysteine_ribose  yes
   methanethiol                                 A only undefined       n/a -- undefined
 ```
 
@@ -138,10 +138,10 @@ python scripts/maillard.py predict data/cli_examples/compare_ribose_vs_glucose.y
 ```text
   compound                                  ug/L (= ppb in water)             OAV
   ----------------------------------------------------------------------------
-  furfural                                                 195           0.065
-  2-furfurylthiol (FFT)                                    119        1.99e+04
-  2-methyl-3-furanthiol (MFT)                             62.4        1.25e+04
-  2-acetylthiazole                                         2.1            0.21
+  furfural                                              194.90           0.065
+  2-furfurylthiol (FFT)                                 119.40        1.99e+04
+  2-methyl-3-furanthiol (MFT)                            62.44        1.25e+04
+  2-acetylthiazole                                        2.10            0.21
   bis(2-methyl-3-furyl) disulfide                            0               0
   methanethiol                                               0    no threshold
 ```
@@ -161,7 +161,7 @@ having none rather than being given a borrowed one.
 ### Example 3 — the refusal, which is also an answer
 
 ```yaml
-# ask_for_hmf.yml
+# refusal_demo.yml
 name: cys_ribose_asking_for_hmf
 precursors: {L-Cysteine: 10.0, D-Ribose: 10.0}
 targets: ["2-methyl-3-furanthiol (MFT)", "HMF", "2-pentylfuran"]
@@ -172,19 +172,27 @@ aw: 0.98
 ```
 
 ```bash
-python scripts/maillard.py predict ask_for_hmf.yml --report /tmp/refused.html
+python scripts/maillard.py predict refusal_demo.yml --report /tmp/refused.html
 ```
 
 ```text
   ENVELOPE: OUT_OF_ENVELOPE   lane: sulfur
   mapped precursors: Cys=10 mM, PENT=10 mM
-    ! REFUSED -- UNREPRESENTED TARGETS: HMF -- 5-HMF is not a species in any core
-    ! lane. The hexose-dehydration route that forms it was never parameterised: no
-    ! dataset in the fit corpus measures it.; 2-pentylfuran -- The B6 lipid lane
-    ! exists, but 2-pentylfuran is NOT in Frankel 1989's six-product slate and no
-    ! branch fraction for the linoleate -> alkylfuran route is measured anywhere in
-    ! the fit corpus. The FAST lane's shipped 0.08 has no source. Refused rather
-    ! than invented.
+    ! REFUSED -- UNREPRESENTED TARGETS: 2-pentylfuran -- The B6 lipid lane exists, but
+    ! 2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the
+    ! linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's
+    ! shipped 0.08 has no source. Refused rather than invented.
+    ~ declared extrapolation -- no buffer was declared for this system, so the pH TRAJECTORY is
+    ~ EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. ...
+    ~ declared extrapolation -- 5-HMF: the two formation limbs are ingested WHOLE from Kocadagli &
+    ~ Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 140 C in
+    ~ an aqueous or matrix system, so both the temperature and the physical state are
+    ~ extrapolations. ...
+    ~ declared extrapolation -- 5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. ...
+    ~ gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED.
+    ~ declared extrapolation -- 5-HMF + cysteine: the sink constant is HELD at its 50 C value for
+    ~ this whole program. Holding it UNDER-states the sink; extrapolating it is a named prohibited
+    ~ derivation (K5a sec. 7.3), and the direction is stated rather than chosen for convenience.
 
   NO NUMBER IS EMITTED. The core declined this request above.
 ```
@@ -193,13 +201,27 @@ on stderr:
 
 ```text
 OUT OF ENVELOPE -- no number is emitted. Lane resolved: sulfur.
-  missing species (targets the core cannot name): HMF, 2-pentylfuran
+  missing species (targets the core cannot name): 2-pentylfuran
+  declared reason -- UNREPRESENTED TARGETS: 2-pentylfuran -- The B6 lipid lane exists, but
+  2-pentylfuran is NOT in Frankel 1989's six-product slate and no branch fraction for the
+  linoleate -> alkylfuran route is measured anywhere in the fit corpus. The FAST lane's
+  shipped 0.08 has no source. Refused rather than invented.
+  A refusal is an output, not a failure. Run `python scripts/maillard.py explain <compound>` ...
 ```
 
 **This is the feature, not the failure.** The alternative is a plausible-looking float with
 nothing behind it, and every documented accuracy defect in this repository began as a number
 that should not have existed. The refusal tells you precisely what would have to be measured
 for the answer to exist — which is a research plan, not an error message.
+
+**Watch what happened to HMF here, because it is the other half of the lesson.** Until Wave B7
+this same spec refused *two* targets, and the HMF refusal read "5-HMF is not a species in any core
+lane. The hexose-dehydration route that forms it was never parameterised." B7 parameterised it, so
+HMF is now an answerable trunk species and only 2-pentylfuran refuses. **The refusal did not become
+a silent pass — it became four declared extrapolations**, one of which states the expected
+direction of the error out loud ("EXPECT HMF TO BE OVER-PREDICTED"). A refusal is what the model
+says when it has no route; a declared extrapolation is what it says when it has a route it does not
+trust at your conditions. Neither is a number you should ship.
 
 The HTML report renders each refusal as its own card, alongside the full list of what the
 model *can* be asked and every compound it deliberately refuses with the reason.
@@ -237,7 +259,7 @@ Four kinds, all of which emit no number:
 | refusal | what it means |
 | --- | --- |
 | **unmapped precursor** | you named something the core cannot charge — an intact protein, a flour, an isolate used as a precursor |
-| **unrepresented target** | you asked for a compound with no species in any lane (HMF, DMHF, furaneol, 1-hexanol, 2-pentylfuran, propanal, 2-nonenal) |
+| **unrepresented target** | you asked for a compound the core cannot name. The current list is **1-hexanol, 2-pentylfuran, propanal, 2-nonenal, HEMF / homofuraneol** and **2,5-dimethyl-4-hydroxy-3(2H)-thiophenone** — read them off `engine.UNREPRESENTED_COMPOUNDS`, which carries each one's reason. *HMF, DMHF and furaneol left this list in Wave B7 and now answer.* |
 | **lane conflict** | your request needs two Maillard lanes at once; they do not compose, because that would spend the same cysteine twice |
 | **missing sulfur source / asparagine** | the lane was selected but the charge cannot supply the atom the product is made of |
 
@@ -258,8 +280,15 @@ wide.
 ```bash
 python scripts/maillard.py explain MFT
 python scripts/maillard.py explain hexanal
-python scripts/maillard.py explain HMF      # a refusal, with its declared reason
+python scripts/maillard.py explain HMF             # answers since B7 -- 2 routes, 1 of them `pinned`
+python scripts/maillard.py explain 2-pentylfuran   # a refusal, with its declared reason
 ```
+
+`explain HMF` is worth running for the contrast: it resolves to `lane: trunk`, two formation
+routes, **measured 1 / pinned 1** — and the pinned one carries the authors' own `Ea = 0`, quoted
+verbatim from their footnote, because no defensible activation energy for that edge exists in any
+paper of the cluster. `explain 2-pentylfuran` prints no routes at all, the reason it is refused,
+and the full list of compounds the model *can* explain.
 
 Prints every route the model has to that compound, the **evidence class** of each step, and
 the literature anchors those steps rest on:

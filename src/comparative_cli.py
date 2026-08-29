@@ -17,7 +17,13 @@ arms run through the same projection budget, the same marker yields and the same
 observability factors cancels the systematic scale error those constants carry, and what
 survives is the thing that was measured to work.
 
-Absolutes are still available behind ``--absolute``, and they print their own caveat.
+CORRECTED 2026-08-29 (Wave Q1). This line used to read "Absolutes are still available behind
+``--absolute``, and they print their own caveat." That has not been true since the B5 cutover.
+On the FAST lane ``--absolute`` now EXITS 2, and ``screening_payload`` strips every ppb field
+from the payload before it can reach a renderer, unconditionally -- so no FAST absolute reaches
+a user by any route. On the CORE lane absolutes ARE emitted, always with their envelope
+declaration and always inside a reliability interval, and ``--absolute`` is a no-op note there
+because the flag has nothing left to unlock.
 
 WHAT THIS MODULE MAY AND MAY NOT DO
 -----------------------------------
@@ -57,7 +63,15 @@ from src.usability_reports import prepare_cli_confidence
 
 ROOT = Path(__file__).resolve().parents[1]
 
-#: Printed above every absolute number this interface emits, without exception.
+#: The FAST lane's absolute caveat. CORRECTED 2026-08-29 (Wave Q1): this said
+#: "Printed above every absolute number this interface emits, without
+#: exception", which stopped being true at the B5 cutover. It is now printed
+#: NOWHERE on the FAST lane -- ``screening_payload`` overwrites the caveat block
+#: with the screening label and strips the ppb fields -- and it is not used on
+#: the core lane at all, which has its own ``CORE_CAVEAT``. It is reachable only
+#: from the library-level renderers, which the unit tests call directly on raw
+#: payloads to pin that IF an absolute is ever printed it arrives with this text
+#: in the same block. Keep it for that; do not read it as shipped behaviour.
 ABSOLUTE_CAVEAT = (
     "ABSOLUTE ppb ARE NOT RELIABLE. Measured out-of-sample: median 6.0x fold error on the "
     "free-precursor hold-out (worst 52.6x), 67-94x on the matrix lane, and 1 of 5 genuine "
@@ -547,6 +561,27 @@ def _wrap(text: str, width: int = 92, indent: str = "  ") -> str:
 
 
 def render_compare_text(payload: Mapping[str, Any], *, show_absolute: bool = False) -> str:
+    """
+    Render a FAST-lane compare payload as text.
+
+    REACHABILITY, stated because it is not obvious and Q1 had to work it out.
+    ``show_absolute`` CANNOT BE TRUE FROM THE CLI. Three gates stack: the only
+    production caller (``scripts/maillard.py``) passes ``show_absolute=False``
+    literally; ``--absolute`` exits 2 on this lane before reaching here; and the
+    core lane renders through ``render_compare_core_text`` instead. So the
+    absolute block below is dead from the front door.
+
+    It is NOT dead from the library, and that is why it is kept rather than
+    deleted: ``tests/unit/test_comparative_cli_2026_08.py`` calls it directly on
+    a RAW payload to pin a policy that should outlive the current gating -- if
+    absolutes are ever printed, the caveat ships in the SAME block as the
+    numbers, not somewhere else on the page.
+
+    THE CONSTRAINT THAT COMES WITH THAT: the absolute block reads ``a_ppb`` and
+    ``b_ppb``, which ``screening_payload`` STRIPS. Passing a screened payload
+    with ``show_absolute=True`` would raise ``KeyError``. Callers must pass the
+    raw payload from ``compare_systems``, as the tests do.
+    """
     out: List[str] = []
     a_name, b_name = payload["a"]["name"], payload["b"]["name"]
     banner = f" [{SCREENING_LABEL}]" if payload.get("absolutes_withheld") else ""
@@ -615,6 +650,23 @@ def render_compare_text(payload: Mapping[str, Any], *, show_absolute: bool = Fal
 
 
 def render_predict_text(payload: Mapping[str, Any]) -> str:
+    """
+    Render a FAST-lane predict payload as text.
+
+    REACHABILITY (Q1, same analysis as ``render_compare_text``): every payload
+    that reaches this function FROM THE CLI has been through
+    ``screening_payload``, which sets ``absolutes_withheld=True`` unconditionally
+    and strips ``predicted_ppb`` / ``range_p5`` / ``range_p95``. So from the
+    front door ``withheld`` is ALWAYS true, and the three ``else`` arms below --
+    the "range (90% CI), ppb" column heading, the range and point-value bands,
+    and the ``no_range`` caveat -- are unreachable, as is ``caveats["absolute"]``.
+
+    They are kept because the library-level tests exercise this renderer on RAW
+    payloads, and because those arms are the only thing that would render a FAST
+    absolute correctly if the screening policy is ever revisited. Do not read
+    them as live behaviour, and do not pass a screened payload to them: the
+    fields they read have been deleted by then.
+    """
     out: List[str] = []
     banner = f" [{SCREENING_LABEL}]" if payload.get("absolutes_withheld") else ""
     out.append("=" * 96)
@@ -745,17 +797,37 @@ SCREENING_CAVEAT = (
     "any quantity."
 )
 
+# CORRECTED 2026-08-29 (Wave Q1). This caveat is printed to EVERY core-lane
+# user, and three of its factual claims had been falsified by the waves that
+# followed it: B6 added the lipid lane (so "no lipid-oxidation path" was wrong),
+# B7 added HMF and DMHF as trunk targets (so "no HMF and no DMHF" was wrong),
+# and B6's direct-sum co-integration means the lipid lane DOES compose with any
+# one Maillard lane (so "its three lanes do not compose" was wrong, and there
+# are four lanes). A caveat that overstates the model's limits is not the safe
+# direction to be wrong in: it teaches users to distrust answers the model can
+# actually support, and it goes stale invisibly because nothing tests prose.
 CORE_CAVEAT = (
     "KINETIC CORE. Absolute concentrations come from the mass-action network (frozen "
-    "B1/B2.1/B3 parameters), and they are reported WITH their envelope declaration. The core "
-    "refuses what it cannot name: it has no lipid-oxidation path, no HMF and no DMHF, and its "
-    "three lanes do not compose. A refusal is an output, not a failure. Read the cutover final "
-    "exam (results/validation/cutover_final_exam.md) for its measured out-of-sample accuracy "
-    "before trusting any number here."
+    "B1/B2.x/B3/B6/B7 parameters), and they are reported WITH their envelope declaration. The "
+    "core refuses what it cannot name -- ask it for 1-hexanol, 2-pentylfuran or propanal and it "
+    "will tell you why it will not answer, rather than answering. Its four lanes (trunk, sulfur, "
+    "acrylamide, lipid) do not compose freely: the lipid lane co-integrates with ONE Maillard "
+    "lane as a direct sum, and the Maillard lanes do not compose with each other. A refusal is "
+    "an output, not a failure. Read the cutover final exam "
+    "(results/validation/cutover_final_exam.md) for its measured out-of-sample accuracy before "
+    "trusting any number here."
 )
 
 #: Fields removed from every FAST payload before it reaches a user.
-_FAST_ABSOLUTE_FIELDS = ("a_ppb", "b_ppb", "predicted_ppb", "range_p5", "range_p95")
+#: Q1 added ``ci_level_pct`` and ``range_available``. Both are properties of an
+#: absolute interval that is itself being withheld, so leaving them in described
+#: a quantity the payload no longer carried -- ``range_available: true`` next to
+#: no range. Nothing rendered them, so this strips two fields that were dead
+#: weight rather than changing any output.
+_FAST_ABSOLUTE_FIELDS = (
+    "a_ppb", "b_ppb", "predicted_ppb", "range_p5", "range_p95",
+    "ci_level_pct", "range_available",
+)
 
 
 def screening_payload(payload: Mapping[str, Any]) -> Dict[str, Any]:
@@ -875,18 +947,31 @@ def predict_core(
     oav_payload: Dict[str, Any] = {}
     if run.answered:
         oav_payload = dict(run.oav())
-        per_species = oav_payload.get("per_species") or {}
-        for compound, value in run.ranking():
-            # The B4 OAV table is keyed by SPECIES KEY, not display name, and
-            # its entries live under 'per_species'.
-            species_key = run.declaration.mapped_targets.get(compound, compound)
+        # Q1: the rows come from the ENGINE, already carrying their interval and
+        # their OAV entry, instead of being assembled here against a table keyed
+        # in a different key-space. The hand-rolled version did
+        # ``per_species[species_key]``, but ``per_species`` is keyed by B4 KEY --
+        # identical for the trunk and sulfur lanes, DIFFERENT for the lipid one
+        # ("HEXANAL" vs "hexanal", "DECADIENAL" vs "tt_2_4_decadienal"). So
+        # every lipid compound's lookup missed and every report said "no
+        # threshold" for two compounds that have a measured one. See
+        # ``kinetic_core.keyspaces`` for why that failure is always silent.
+        for row in run.interval_rows():
             rows.append(
                 {
-                    "compound": compound,
-                    "species_key": species_key,
-                    "predicted_ug_per_l": value,
-                    "oav": _oav_summary(per_species.get(species_key)),
-                    "lane": run.declaration.lane,
+                    "compound": row["compound"],
+                    "species_key": row["species_key"],
+                    "predicted_ug_per_l": row["predicted_ug_per_l"],
+                    # Q1: the interval travels WITH the point it belongs to. It
+                    # used to be reachable only by joining the row back onto
+                    # oav_table["per_species"][b4_key]["concentration"], which
+                    # dropped it entirely for the four NO_B4_RECORD species --
+                    # compounds with no odour threshold still have a perfectly
+                    # well-defined concentration interval.
+                    "interval_ug_per_l": row["interval_ug_per_l"],
+                    "band_x": row["band_x"],
+                    "oav": _oav_summary(row["oav"], no_b4_reason=row["no_b4_reason"]),
+                    "lane": row["lane"],
                 }
             )
     return {
@@ -904,15 +989,30 @@ def predict_core(
     }
 
 
-def _oav_summary(entry: Any) -> Optional[Dict[str, Any]]:
+def _oav_summary(
+    entry: Any, *, no_b4_reason: Optional[str] = None
+) -> Optional[Dict[str, Any]]:
     """
     Flatten one entry of the B4 ``oav_table``'s ``per_species`` block.
 
     A missing threshold is reported as ``available: False`` WITH its reason,
     never as an OAV of zero -- the B4 layer's whole design point is that the
     absence of a measured threshold is a state, not a value.
+
+    Q1: ``no_b4_reason`` carries that same design point one step further out.
+    A compound with NO B4 structural record has no entry in the table at all,
+    and used to arrive here as a bare ``None`` -- so the report printed an
+    empty reason, which reads as an unexplained blank rather than as the
+    recorded, specific statement ``NO_B4_RECORD`` holds for each of them
+    ("an alkane; the B4 registry has no hydrocarbon class at all").
     """
     if not isinstance(entry, Mapping):
+        if no_b4_reason:
+            return {
+                "available": False,
+                "threshold_state": "no_b4_structural_record",
+                "reason": no_b4_reason,
+            }
         return None
     interval = entry.get("OAV_interval") or [None, None]
     if entry.get("OAV_point") is None:
@@ -1107,13 +1207,17 @@ def render_compare_core_text(payload: Mapping[str, Any]) -> str:
         f"above the same-sample dispersion band"
         + (f" ({band:.3g}x)" if isinstance(band, (int, float)) else "")
     )
-    # API FEEDBACK (V1): matrix_oav.compare_formulations sets
-    # within_reliability_band=False for an UNDEFINED ratio (one arm at exactly
-    # zero), so those rows are counted in n_resolved. The payload is left alone
-    # -- it is the science layer's own number -- but the count is qualified
-    # here, because "6 of 6 resolve" reads as six claims when two of them are
-    # not ratios at all.
-    undefined = sum(1 for row in rows if str(row.get("direction")) == "undefined")
+    # Q1: fixed at the source. ``compare_formulations`` no longer counts an
+    # UNDEFINED ratio (one arm at exactly zero) as resolved, and publishes
+    # ``n_undefined`` so this line does not have to re-derive the predicate --
+    # the V1 workaround that lived here did, and it disagreed with the wider
+    # predicate the per-row column below uses.
+    undefined = int(
+        ratios.get(
+            "n_undefined",
+            sum(1 for row in rows if str(row.get("direction")) == "undefined"),
+        )
+    )
     if undefined:
         out.append(
             f"  ...of which {undefined} are UNDEFINED (one arm at exactly zero) and "

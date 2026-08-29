@@ -30,6 +30,7 @@ Run with: ./scripts/docker_maillard.sh run \
 
 from __future__ import annotations
 
+import argparse
 import json
 import subprocess
 import sys
@@ -87,7 +88,16 @@ def _git_head() -> Dict[str, str]:
             "branch": _run("rev-parse", "--abbrev-ref", "HEAD")}
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Fit Build Wave B6's four lipid-oxidation branch simplexes and "
+            "hydroperoxide composition to Frankel 1989's zero-additive columns; "
+            "writes results/validation/kinetic_core_b6_fit_report.{json,md}."
+        )
+    )
+    parser.parse_args(argv)
+
     if not PREREG.exists():
         raise SystemExit(
             f"{PREREG} is missing. The pre-registration is written BEFORE the "

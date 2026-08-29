@@ -443,19 +443,49 @@ def _furanone_and_mft_route(pool_species: List[Species]) -> List[ElementaryStep]
             # establishes the intact-C6 route as REAL, so the model was gating a
             # confirmed route behind an unphysical dependency.
             #
-            # The token is not re-sourced here; it is REMOVED, because the accepted
-            # mechanism names the reductant and it is the amino acid.  Blank & Fay
-            # 1996 (10.1021/jf950439o) state the mechanism is "based on decomposition
-            # of the Amadori compound via 2,3-enolization, chain elongation by the
-            # Strecker aldehydes, and REDUCTION of the resulting acetylformoin-type
-            # intermediates to the target molecules".  Kerler, Winkel, Davidek &
-            # Blank 2010 (10.1002/9781444317770.ch3, full text) name the donors:
+            # The token is not re-sourced here; it is REMOVED, and the amino acid
+            # is written into the step as the reducing partner.
+            #
+            # CITATION CORRECTED 2026-08-29 (Wave Q1).  This comment used to say
+            # "the accepted mechanism names the reductant and it is the amino
+            # acid.  Blank & Fay 1996 ...".  THE PAPER DOES NOT NAME IT.  Blank &
+            # Fay 1996 (10.1021/jf950439o) describe the route as "based on
+            # decomposition of the Amadori compound via 2,3-enolization, chain
+            # elongation by the Strecker aldehydes, and REDUCTION of the resulting
+            # acetylformoin-type intermediates to the target molecules" — a phrase
+            # that names NO reductant at all — and where they do address the
+            # reduction (p. 534) they leave it explicitly open: "The reduction may
+            # occur either by a dismutation or by a reaction with further enoloxo
+            # compounds", after Schieberle 1992.  Their own figure legend calls the
+            # mechanism "Hypothetical".  In Blank & Fay the amino acid's
+            # demonstrated role is CARBON donor (the Strecker aldehyde), not
+            # hydride donor.
+            #
+            # What actually supports the coupling written below is Kerler, Winkel,
+            # Davidek & Blank 2010 (10.1002/9781444317770.ch3, full text) ALONE,
+            # and it supports a weaker claim than "names the reductant":
             # "acetylformoin, which is formed from 1-deoxyhexosone, is an effective
             # precursor for 4-hydroxy-2,5-dimethyl-3(2H)-furanone (Furaneol). The
             # amounts of Furaneol obtained from acetylformoin were significantly
             # enhanced in the presence of reductones such as ascorbic acid or
             # methylene reductinic acid as well as the STRECKER-ACTIVE AMINO ACID
-            # proline."
+            # proline."  That is an ENHANCEMENT observation listing proline
+            # alongside genuine reductones.  So: the step below is a DECLARED
+            # MODELLING CHOICE consistent with Kerler, not a mechanism any cited
+            # paper asserts, and Blank & Fay 1996 is cited here only for the route
+            # TOPOLOGY and for the amino acid as carbon donor.
+            #
+            # NOTE ON THE ALDEHYDE'S FATE, since it is the opposite of the paper's.
+            # Below, the Strecker aldehyde LEAVES as a co-product.  In Blank &
+            # Fay's own scheme it is CONSUMED INTO THE RING by aldol condensation
+            # (their step g follows their step f).  That difference is deliberate
+            # and is right for the HEXOSE case: Wang & Ho 2008's CAMOLA result
+            # requires all six DMHF carbons to come from one intact glucose, which
+            # forbids incorporating the amino acid's carbon into the ring.  Blank &
+            # Fay's incorporating route is the PENTOSE case, and that is handled
+            # separately in `_furanone_generation`.  The balancing below is
+            # therefore a device for the intact-C6 route, and Blank & Fay 1996 must
+            # not be read as its source.
             #
             # Writing that coupling explicitly balances EXACTLY with no token at all:
             #

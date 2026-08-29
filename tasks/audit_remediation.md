@@ -1709,8 +1709,23 @@ CH2SH carbon exactly as the model routes it) and "furan-2-aldehyde/H2S showed a 
 higher efficiency". Acrylamide's Asn route is CONFIRMED by Zyzak et al. 2003
 (10.1021/jf034180i) — and the two literature branches (loss of NH3 / loss of a substituted
 imine) turn out to be split one each across the template layer and the curated layer.
-DMHF/HEMF from pentose + amino acid is CONFIRMED with the exact C5+C1 / C5+C2 stoichiometry
-the model uses (Blank & Fay 1996, 10.1021/jf950439o, with 13C-glycine and 13C-alanine). The
+DMHF/HEMF from pentose + amino acid is CONFIRMED with the C5+C1 / C5+C2 CARBON ACCOUNTING the
+model uses (Blank & Fay 1996, 10.1021/jf950439o, with 13C-glycine and 13C-alanine).
+[QUALIFIED 2026-08-29, Wave Q1. This sentence said "the exact ... stoichiometry the model uses",
+and it was over-claimed in two directions at once. FIRST, a correction of the correction: the
+declaration's own recorded defect says "the model lacks the step", and THAT IS NO LONGER TRUE --
+`src/reaction_templates.py::_furanone_generation` (lines 2218-2274, live via
+`src/smirks_engine.py:423`) emits both `pentose + glycine -> DMHF + NH3 + CO2 + 2 H2O` and
+`pentose + alanine -> HEMF + NH3 + CO2 + 2 H2O`, both balancing exactly, gated at T >= 90 C.
+The 1996 dossier's D2 inspected `_furanone_and_mft_route` only; see k5b_dmhf_synthesis.md row R1.
+SECOND, what remains over-claimed: the net CARBON ACCOUNTING matches (glycine C2 - CO2 = C1;
+alanine C3 - CO2 = C2), but the MECHANISM does not. Blank & Fay's route is a multi-step chain
+elongation through a released Strecker aldehyde and an acetylformoin intermediate; the model's
+step is a SINGLE LUMPED BIMOLECULAR reaction, FIRST ORDER IN AMINO ACID by construction, with no
+acetylformoin node -- and Blank 1997 Table 5 measures that order at n = 0.35-0.71, so the shape
+is a known mis-specification (k5b row R2). The paper's ~30 % sugar-fragmentation channel is also
+not modelled. Read this row as "the carbon accounting is confirmed", not "the mechanism is".]
+The
 thiamine MFT cascade is CONFIRMED (Cerny & Briffod 2007, 10.1021/jf062874w), and its key
 intermediate 5-hydroxy-3-mercapto-2-pentanone is a compound identified in exactly that system.
 DMS's absence is a CORRECT omission (its precursor is S-methylmethionine, not methionine).
@@ -2837,16 +2852,36 @@ is an open item: it means a family's name is a load-bearing calibration input. [
   bookkeeping — the exact move Wave I declined for the same reason. A search for a
   "reductone disproportionation" claim returned zero primary retrievals and it is NOT asserted.
 
-  WHAT WAS DONE INSTEAD IS BETTER: the token was not re-sourced, it was REMOVED, because the
-  accepted mechanism NAMES the reductant and it is the amino acid. Blank & Fay 1996
-  (10.1021/jf950439o, CrossRef-verified, abstract VERBATIM): the mechanism is "based on
-  decomposition of the Amadori compound via 2,3-enolization, chain elongation by the Strecker
-  aldehydes, and REDUCTION of the resulting acetylformoin-type intermediates to the target
-  molecules". Kerler, Winkel, Davidek & Blank 2010 (10.1002/9781444317770.ch3, CrossRef-verified,
-  FULL TEXT) name the donors: "acetylformoin ... is an effective precursor for
-  4-hydroxy-2,5-dimethyl-3(2H)-furanone (Furaneol). The amounts of Furaneol obtained from
-  acetylformoin were significantly enhanced in the presence of reductones such as ascorbic acid
-  or methylene reductinic acid as well as the STRECKER-ACTIVE AMINO ACID proline."
+  WHAT WAS DONE INSTEAD: the token was not re-sourced, it was REMOVED, and the amino acid was
+  written into the step as the reducing partner.
+
+  CITATION CORRECTED 2026-08-29 (Wave Q1). This block used to read "the accepted mechanism
+  NAMES the reductant and it is the amino acid. Blank & Fay 1996 ...". THAT MISREADS THE PAPER,
+  and the misreading was propagated to eight other sites. What each source actually supports:
+
+    - Blank & Fay 1996 (10.1021/jf950439o), abstract VERBATIM: the mechanism is "based on
+      decomposition of the Amadori compound via 2,3-enolization, chain elongation by the Strecker
+      aldehydes, and REDUCTION of the resulting acetylformoin-type intermediates to the target
+      molecules". That phrase names NO REDUCTANT AT ALL. Where the paper does address the
+      reduction, at p. 534, it leaves it explicitly open: "The reduction may occur either by a
+      DISMUTATION or by a reaction with further ENOLOXO COMPOUNDS", citing Schieberle 1992 (ACS
+      Symp. Ser. 490, 164-175); and the mechanism figure's own legend says "Hypothetical". In
+      Blank & Fay the amino acid's demonstrated role is CARBON donor (it supplies the Strecker
+      aldehyde), not hydride donor. So this paper supports the route TOPOLOGY and the carbon
+      accounting, and NOT the reductant claim.
+    - Kerler, Winkel, Davidek & Blank 2010 (10.1002/9781444317770.ch3, CrossRef-verified, FULL
+      TEXT) is the only source that puts an amino acid anywhere near the reducing role, and it
+      does so as an ENHANCEMENT observation, not a mechanism: "acetylformoin ... is an effective
+      precursor for 4-hydroxy-2,5-dimethyl-3(2H)-furanone (Furaneol). The amounts of Furaneol
+      obtained from acetylformoin were significantly enhanced in the presence of reductones such
+      as ascorbic acid or methylene reductinic acid as well as the STRECKER-ACTIVE AMINO ACID
+      proline." Proline is listed ALONGSIDE genuine reductones.
+
+  NET: the amino-acid coupling is a DECLARED MODELLING CHOICE consistent with Kerler 2010, not a
+  mechanism any cited paper asserts, and it must not be described as one. The primary source that
+  would settle it is Hofmann & Schieberle 2001, "Acetylformoin -- an important progenitor",
+  Flavour 2000 Proc. pp. 311-322, cited for exactly this by both Wang & Ho 2008 and Poisson 2019;
+  the repo does not hold it (data/lit/extraction_dossiers/k5b_dmhf_synthesis.md row R6).
 
   NEW STEP, family `Furanone_Amino_Acid_Reduction`, EXACT with NO token:
       hexose 1-deoxyosone + amino acid -> DMHF + Strecker aldehyde + CO2 + NH3 + H2O

@@ -23,6 +23,7 @@ Writes results/validation/kinetic_core_b6_holdout_report.{json,md}.
 
 from __future__ import annotations
 
+import argparse
 import json
 import subprocess
 import sys
@@ -421,7 +422,16 @@ def score_exam(after: Dict[str, Any], before: Dict[str, Any]) -> Dict[str, Any]:
     }
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Score the frozen B6 lipid-oxidation fit against its three declared "
+            "Module 5 hold-outs (re-running the cutover final exam); writes "
+            "results/validation/kinetic_core_b6_holdout_report.{json,md}."
+        )
+    )
+    parser.parse_args(argv)
+
     if not FIT_REPORT.exists():
         raise SystemExit(f"{FIT_REPORT} missing -- run the B6 fit generator first.")
     if not EXAM_BASELINE.exists():

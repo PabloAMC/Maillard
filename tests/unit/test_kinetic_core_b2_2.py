@@ -211,13 +211,36 @@ def test_a_dynamic_run_conserves_charge_at_every_point():
     # relative interpolation error is a larger absolute number. Pinning the
     # absolute value would have made the test tighten itself every time the
     # model became more complete, which is the wrong direction.
+    #
+    # ==== WAVE Q1 RE-EXAMINATION, because this was flagged worth distrusting ====
+    # It was flagged for a good reason and the reason is now recorded rather than
+    # left as suspicion. B2.3 re-expressed this bound in the SAME commit that
+    # changed the charge physics, and the framing above ("as the comment always
+    # stated it") understates what happened: the old absolute bound would FAIL
+    # today. Measured on this tree, worst = 0.012756 mmol/L, so `worst < 1e-2`
+    # is violated by 28 %. So B2.3 did not merely restate the threshold, it
+    # loosened one that had gone red, in the commit that made it red.
+    #
+    # The RELATIVE FORM survives that scrutiny: the titratable inventory
+    # legitimately grows as the model is completed, and a fixed absolute bound
+    # would ratchet against completeness. The COEFFICIENT does not survive it --
+    # 1e-3 was a round number, not a measured one. Against the measured
+    # scale = 44.145 mmol/L the actual relative residual is 2.89e-4, so 1e-3 was
+    # spending 3.5x of headroom nobody had accounted for.
+    #
+    # Tightened to 5e-4, which keeps 1.7x headroom over the measured value --
+    # enough for the interpolation error to breathe as the node spacing changes,
+    # not enough to absorb a real charge-closure regression unnoticed. If a
+    # future wave needs this loosened again, the number to beat is 2.89e-4 and
+    # the loosening should be disclosed as one.
     scale = abs(float(sid)) + sum(
         c for _g, c in PH.titratable_inventory(
             {k: float(run.concentrations[-1, SULFUR_INDEX[k]])
              for k in SULFUR_STATE_KEYS}, _DRIFT, _BUFFER_NONE))
-    assert worst < 1e-3 * scale, (
+    assert worst < 5e-4 * scale, (
         f"charge balance drifts by {worst:.3g} mmol/L against a charge scale "
-        f"of {scale:.3g} mmol/L")
+        f"of {scale:.3g} mmol/L (Q1 measured 2.89e-4 relative; the bound is "
+        f"5e-4)")
 
 
 def test_a_dynamic_run_conserves_carbon_nitrogen_and_sulfur():

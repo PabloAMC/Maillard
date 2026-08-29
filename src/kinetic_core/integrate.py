@@ -1,8 +1,21 @@
 """
 src/kinetic_core/integrate.py
 
-STIFF-SAFE INTEGRATION OF THE KINETIC CORE.
-===========================================
+STIFF-SAFE INTEGRATION OF THE KINETIC CORE (Build Wave B1, 2026-08-28).
+=======================================================================
+
+WAVE: B1, and unchanged by every wave since -- B2.x, B3, B6 and B7 all added
+species and edges, and none of them needed to touch the propagator. That is the
+module's success condition, so it is stated rather than left to be inferred.
+EXAM: none of its own. It has no parameters and makes no prediction; it is
+exercised indirectly by every wave's fit and hold-out, and directly by the
+non-negativity and mass-conservation assertions in the b1/b2 unit tests.
+DECLARED GAPS: fixed-step output only at the caller's requested grid (a stiff
+transient between two output points is integrated but never reported); no event
+detection, so a thermal program's segment boundaries must be passed as separate
+integrations rather than found; and no sensitivity propagation -- every
+uncertainty band in this repository is produced by RE-INTEGRATION at declared
+corners, never by differentiating this solver.
 
 The network is stiff by construction: at 100 C the fastest constant
 (1-deoxyglucosone consumption, 1.45 /min) is ~10^5 times the slowest

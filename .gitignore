@@ -400,3 +400,82 @@ scratch/
 !results/validation/kinetic_core_b7_holdout_report.md
 !results/validation/kinetic_core_b7_exam_baseline.json
 !results/validation/kinetic_core_b7_exam_baseline.md
+
+# ===========================================================================
+# WAVE Q1 (2026-08-29) -- CONSOLIDATION OF THE results/validation ALLOW-LIST
+# ===========================================================================
+# THE INVARIANT THIS LIST EXISTS TO ENFORCE, stated once instead of being
+# re-explained per wave above: `results/validation/*` is ignored because it is
+# mostly regenerable output, and each artifact that is EVIDENCE -- something a
+# reviewer must be able to read without a Docker run, or something a later wave
+# compares against -- is re-included by name. The per-wave comments above give
+# the reason for each; they are kept as written.
+#
+# WHAT WAS WRONG, and it is the failure mode the ignore rule was supposed to
+# prevent in the first place: 38 artifacts were TRACKED but had NO negation
+# rule. They are in git only because someone ran `git add -f` once. For those
+# files `git status` stays silent when a regenerated copy differs or goes
+# missing, `git check-ignore` reports them ignored, and the next person to
+# delete-and-regenerate one has to know to force-add it again -- exactly the
+# trap the Wave J1 comment at the top of this section describes. The list below
+# closes that gap. It was derived mechanically (every path in
+# `git ls-files results/validation/` that `git check-ignore --no-index` still
+# matched), not by hand, so it is complete as of this commit.
+#
+# IF YOU ADD A TRACKED ARTIFACT UNDER results/validation/, ADD ITS NEGATION HERE.
+# The check is one line:
+#   git ls-files results/validation/ | while read f; do \
+#       git check-ignore -q --no-index "$f" && echo "UNNEGATED: $f"; done
+# It must print nothing.
+
+# -- the cutover exam: the authoritative out-of-sample accuracy artifact, and
+#    the one the README, the model card and three test files all read.
+!results/validation/cutover_final_exam.json
+!results/validation/cutover_final_exam.md
+!results/validation/cutover_prereg.md
+!results/validation/d1_exam_panel_reconciliation.json
+!results/validation/d1_exam_panel_reconciliation.md
+
+# -- kinetic-core waves whose fit/hold-out/prereg records were force-added
+#    rather than allow-listed (B2.1, B2.2, B2.4, B3).
+!results/validation/kinetic_core_b2_1_diagnosis.md
+!results/validation/kinetic_core_b2_1_fit_report.json
+!results/validation/kinetic_core_b2_1_fit_report.md
+!results/validation/kinetic_core_b2_1_holdout_report.json
+!results/validation/kinetic_core_b2_1_holdout_report.md
+!results/validation/kinetic_core_b2_2_diagnosis.md
+!results/validation/kinetic_core_b2_2_prereg.md
+!results/validation/kinetic_core_b2_2_fit_report.json
+!results/validation/kinetic_core_b2_2_fit_report.md
+!results/validation/kinetic_core_b2_2_holdout_report.json
+!results/validation/kinetic_core_b2_2_holdout_report.md
+!results/validation/kinetic_core_b2_4_prereg.md
+!results/validation/kinetic_core_b2_4_fit_report.json
+!results/validation/kinetic_core_b2_4_fit_report.md
+!results/validation/kinetic_core_b2_4_holdout_report.json
+!results/validation/kinetic_core_b2_4_holdout_report.md
+!results/validation/kinetic_core_b2_4_amine_fate_probe.json
+!results/validation/kinetic_core_b3_fit_report.json
+!results/validation/kinetic_core_b3_fit_report.md
+!results/validation/kinetic_core_b3_holdout_report.json
+!results/validation/kinetic_core_b3_holdout_report.md
+
+# -- calibration-coverage and leverage evidence the README badges quote.
+!results/validation/prediction_uncertainty.json
+!results/validation/prediction_uncertainty.md
+!results/validation/loo_leverage.json
+!results/validation/loo_leverage.md
+!results/validation/experiment_value_ranking.json
+!results/validation/experiment_value_ranking.md
+!results/validation/experiment_requests/
+!results/validation/family_validation_overview.md
+!results/validation/validation_overview.md
+!results/validation/validation_overview.png
+!results/validation/gap_heatmap.png
+
+# -- Wave Q1's own artifact: the corpus-wide Arrhenius prefactor audit. Tracked
+#    for the same reason the refit records above are: it FLAGS shipped constants
+#    that do not reproduce their source k(T) tables, and a flag nobody can read
+#    without re-running the generator is not a flag.
+!results/validation/prefactor_audit.json
+!results/validation/prefactor_audit.md

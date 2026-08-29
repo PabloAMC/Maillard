@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import argparse
 import sys
 from pathlib import Path
 
@@ -28,8 +29,22 @@ from src.extrusion_benchmark_landing import (  # noqa: E402
 )
 
 
-def main() -> int:
-    output_dir = ROOT / "results" / "validation"
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Export the extrusion benchmark protocol, its SOP lock register, "
+            "the external-closure package and workbook and the disulfide "
+            "follow-on package and workbook into results/validation/."
+        )
+    )
+    parser.add_argument(
+        "--output-dir",
+        default=str(ROOT / "results" / "validation"),
+        help="directory the artifacts are written to",
+    )
+    args = parser.parse_args(argv)
+
+    output_dir = Path(args.output_dir)
     payload = export_extrusion_benchmark_protocol(str(output_dir), root=ROOT)
     lock_payload = export_extrusion_sop_lock_register(str(output_dir), root=ROOT)
     closure_payload = export_extrusion_external_closure_package(str(output_dir), root=ROOT)

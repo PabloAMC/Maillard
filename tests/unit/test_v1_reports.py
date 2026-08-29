@@ -266,7 +266,18 @@ def _compare_payload_with(rows):
                 "formulation_a": "A",
                 "formulation_b": "B",
                 "n_compared": len(rows),
-                "n_resolved": sum(1 for r in rows if not r["within_reliability_band"]),
+                # Q1: this fixture used to compute n_resolved as
+                # ``not within_reliability_band``, which is the arithmetic the
+                # science layer USED to do -- so it silently kept testing the
+                # bug after the layer was fixed. It now mirrors
+                # ``matrix_oav.compare_formulations``: an UNDEFINED ratio
+                # resolves nothing and is counted separately.
+                "n_resolved": sum(
+                    1 for r in rows
+                    if r["direction"] != "undefined"
+                    and not r["within_reliability_band"]
+                ),
+                "n_undefined": sum(1 for r in rows if r["direction"] == "undefined"),
                 "reliability_band_x": 4.79583152331272,
                 "rows": rows,
             },

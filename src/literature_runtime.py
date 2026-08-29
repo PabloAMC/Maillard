@@ -3383,7 +3383,29 @@ def _build_caramelization_lane(
         if prior_rows or carbonyl_anchor_rows or furanone_anchor_rows:
             summary = "Carbohydrate pyrolysis or caramelization markers are active, and the lane now carries explicit furanone and carbonyl anchors so browning support is separated from benchmark-visible over-furan drift."
         if mgo_hdmf_reference_active:
-            summary = "Carbohydrate pyrolysis or caramelization markers are active, and the lane now carries an explicit methylglyoxal-to-HDMF C3 anchor so fragmentation-heavy browning is not treated as amino-acid-dependent only."
+            # CLAIM CORRECTED 2026-08-29 (Wave Q1). This string used to say the
+            # lane "carries an explicit methylglyoxal-to-HDMF C3 anchor". Two
+            # things were wrong with that. (1) ANCHOR overstates what this lane
+            # holds: the only thing behind this branch is the computational prior
+            # `brands_2002_mgo_hdmf_c3_route_v1`, which the repo itself flags
+            # `source_anchor_status: unanchored_no_doi_field` -- no record in any
+            # data/lit/*.json resolves it to a paper. (2) THE LANE does not carry
+            # a reaction edge at all; this module is the family-lane NARRATIVE
+            # layer and is not wired to the kinetic core. A real MGO -> DMHF edge
+            # DOES now exist, but it lives in the core (`r_mgo_dmhf`, 2 MGO ->
+            # DMHF, rate key `k_mgo_dmhf`, added by B7 from Wang & Ho 2008 JAFC
+            # 56:7405-7409 Fig. 1), and its own level is flagged
+            # `digitised_from_a_bar_chart` / `single_temperature_no_ea_licensed`.
+            # The sentence now says which of the two the reader is looking at.
+            summary = (
+                "Carbohydrate pyrolysis or caramelization markers are active, and "
+                "an unanchored methylglyoxal-to-HDMF C3 prior is in scope, so "
+                "fragmentation-heavy browning is not treated as amino-acid-dependent "
+                "only. This lane carries the PRIOR, not a rate: the prior resolves to "
+                "no DOI, and the model's actual C3+C3 edge is the kinetic core's "
+                "`r_mgo_dmhf` (Wang & Ho 2008), whose level is a digitised bar-chart "
+                "value at a single temperature."
+            )
     return _build_family_lane_payload(
         "09",
         active=active,

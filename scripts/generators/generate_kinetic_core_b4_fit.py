@@ -42,6 +42,7 @@ Run with: ./scripts/docker_maillard.sh run \
 
 from __future__ import annotations
 
+import argparse
 import json
 import math
 import sys
@@ -529,7 +530,17 @@ def to_markdown(report: dict) -> str:
     return "\n".join(lines) + "\n"
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Fit Build Wave B4's matrix / OAV output layer on fit rows only and "
+            "freeze the blind Hong 2020 predictions; writes "
+            "results/validation/kinetic_core_b4_fit_report.{json,md} and "
+            "kinetic_core_b4_frozen_predictions.json."
+        )
+    )
+    parser.parse_args(argv)
+
     report = build()
     OUT_JSON.parent.mkdir(parents=True, exist_ok=True)
     OUT_JSON.write_text(json.dumps(report, indent=2, default=str))

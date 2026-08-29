@@ -22,15 +22,26 @@ request produces an explicit ``EnvelopeDeclaration`` with a named reason, and
 NO NUMBER. Asking a declared-out prediction for an absolute raises
 ``OutOfEnvelope`` rather than returning a plausible-looking float.
 
-THE THREE LANES, AND WHY THEY DO NOT COMPOSE
---------------------------------------------
-  * ``TRUNK``      -- ``REACTIONS`` (15 steps). Glc/Fru/Gly -> melanoidins.
+THE FOUR LANES, AND HOW THEY COMPOSE
+------------------------------------
+Step counts below are as of B7 (2026-08-29). They are stated for orientation
+only -- ``engine_metadata()`` COUNTS them at call time rather than quoting
+these, because the literals that used to live there went stale across B6 and B7
+and shipped wrong counts into every artifact for two waves (Q1).
+
+  * ``TRUNK``      -- ``REACTIONS`` (26 steps). Glc/Fru/Gly -> melanoidins,
+                      plus B7's furanic channel (HMF, DMHF).
                       No pH term, no a_w term.
-  * ``SULFUR``     -- ``FULL_REACTIONS`` (79 steps) = trunk + sulfur. Adds the
+  * ``SULFUR``     -- ``FULL_REACTIONS`` (93 steps) = trunk + sulfur. Adds the
                       pentoses, cysteine, thiamine, MFT/FFT/furfural. Carries a
                       pH trajectory.
-  * ``ACRYLAMIDE`` -- ``FULL_ACRYLAMIDE_REACTIONS`` (31 steps) = trunk +
+  * ``ACRYLAMIDE`` -- ``FULL_ACRYLAMIDE_REACTIONS`` (42 steps) = trunk +
                       acrylamide. Adds asparagine and the acrylamide block.
+  * ``LIPID``      -- B6's hydroperoxide pool and Frankel 1989's six-product
+                      slate. This is the one lane that DOES compose: it
+                      co-integrates with any ONE Maillard lane as a direct sum,
+                      on the asserted-disjoint-species condition ``predict()``
+                      checks at runtime.
 
 The sulfur STEPS are deliberately absent from the acrylamide lane
 (``acrylamide.OUT_OF_SCOPE``): composing them would spend the same cysteine
@@ -573,9 +584,44 @@ class EnvelopeDeclaration:
     def is_answerable(self) -> bool:
         return self.state in ("in_envelope", "in_envelope_extrapolated")
 
+    @property
+    def summary(self) -> str:
+        """
+        The verdict in ONE LINE, for a header, a log line or a card title. Q1.
+
+        Every consumer of this object was writing its own version of this
+        sentence, and they had drifted: the CLI said "REFUSED", the HTML report
+        said "out of envelope", and the explain subcommand said neither. The
+        wording is fixed here so that a refusal reads the same wherever it is
+        printed, and so that an EXTRAPOLATED answer never renders as a plain
+        answer just because a caller forgot to check ``warnings``.
+
+        It is DERIVED, never stored: there is no state in which the summary and
+        the fields it summarises can disagree.
+        """
+        lanes = ", ".join(self.lanes or ((self.lane,) if self.lane else ())) or "no lane"
+        if self.state == "out_of_envelope":
+            reason = self.reasons[0] if self.reasons else "no reason recorded"
+            more = (
+                f" (+{len(self.reasons) - 1} more)" if len(self.reasons) > 1 else ""
+            )
+            return f"REFUSED, no number emitted -- {reason}{more}"
+        n_targets = len(self.mapped_targets)
+        if self.state == "in_envelope_extrapolated":
+            first = self.warnings[0] if self.warnings else "conditions outside the fit range"
+            more = (
+                f" (+{len(self.warnings) - 1} more)" if len(self.warnings) > 1 else ""
+            )
+            return (
+                f"ANSWERED but EXTRAPOLATED on the {lanes} lane, {n_targets} "
+                f"target(s) -- {first}{more}"
+            )
+        return f"answered in envelope on the {lanes} lane, {n_targets} target(s)"
+
     def as_dict(self) -> Dict[str, Any]:
         return {
             "state": self.state,
+            "summary": self.summary,
             "lane": self.lane,
             "lanes": list(self.lanes or ((self.lane,) if self.lane else ())),
             "reasons": list(self.reasons),
@@ -1178,7 +1224,7 @@ class CorePrediction:
         display name silently returns ``NoMeasuredThreshold`` for a compound
         that has one -- a wiring bug found and fixed during the B5 cutover.
         """
-        from .species_lipid import B4_COMPOUND_KEY, NO_B4_RECORD
+        from .keyspaces import keys_for
 
         # B6: feed the ALREADY-WIDENED AbsoluteConcentration, not the bare
         # float. odour_activity auto-wraps a float in B4's measured band alone,
@@ -1187,18 +1233,69 @@ class CorePrediction:
         wrapped = self.absolutes()
         by_key: Dict[str, Any] = {}
         for compound, value in wrapped.items():
-            key = self.declaration.mapped_targets.get(compound, compound)
-            if key in NO_B4_RECORD:
+            keys = keys_for(compound, self.declaration.mapped_targets)
+            if keys.b4 is None:
                 # B6: no structural record, so no threshold, no binding class
                 # and no unsaturation gate. Dropped from the OAV table rather
-                # than defaulted -- ``NO_B4_RECORD`` says why for each.
+                # than defaulted -- ``NO_B4_RECORD`` says why for each, and
+                # ``interval_rows()`` still carries the compound's interval.
                 continue
-            by_key[B4_COMPOUND_KEY.get(key, key)] = value
+            by_key[keys.b4] = value
         return oav_table(
             by_key,
             matrix=matrix or resolve_matrix(self.spec.process.matrix),
             temperature_c=self.spec.process.thermal.peak_temperature_c,
         )
+
+    def interval_rows(self, matrix: Optional[str] = None) -> Tuple[Dict[str, Any], ...]:
+        """
+        One row per answered compound, CARRYING ITS OWN INTERVAL. Q1.
+
+        The report layer used to reconstruct a row's interval by looking the
+        compound up in the OAV table. That silently loses the interval of every
+        compound the OAV table drops -- which is the whole ``NO_B4_RECORD`` set,
+        i.e. four of the lipid lane's seven products. A compound with no
+        measured odour threshold still has a perfectly well-defined
+        concentration interval, and refusing to print it was an accident of
+        where the number was stored, not a statement about the evidence.
+
+        So the interval is attached HERE, next to the point it belongs to, and
+        the OAV table is consulted only for the OAV. ``oav`` is ``None`` only
+        when the compound is not in the table; ``no_b4_reason`` then says why,
+        in the words ``NO_B4_RECORD`` records.
+
+        Ordered by descending concentration, like :meth:`ranking`.
+        """
+        from .keyspaces import keys_for
+
+        table = self.oav(matrix) if self.answered else {}
+        per_species = dict(table.get("per_species") or {})
+        wrapped = self.absolutes()
+        rows: list = []
+        for compound, value in self.ranking():
+            keys = keys_for(compound, self.declaration.mapped_targets)
+            absolute = wrapped.get(compound)
+            entry = per_species.get(keys.b4) if keys.b4 else None
+            rows.append(
+                {
+                    "compound": compound,
+                    "species_key": keys.species,
+                    "b4_key": keys.b4,
+                    "lane": _TARGET_LANE.get(keys.species) or self.declaration.lane,
+                    "predicted_ug_per_l": float(value),
+                    "interval_ug_per_l": (
+                        [absolute.lo_ug_per_l, absolute.hi_ug_per_l]
+                        if absolute is not None else [None, None]
+                    ),
+                    "band_x": absolute.band_x if absolute is not None else None,
+                    "interval_provenance": (
+                        absolute.provenance if absolute is not None else None
+                    ),
+                    "oav": dict(entry) if isinstance(entry, Mapping) else None,
+                    "no_b4_reason": keys.no_b4_reason,
+                }
+            )
+        return tuple(rows)
 
     def ranking(self) -> Tuple[Tuple[str, float], ...]:
         """Compounds ordered by descending concentration."""
@@ -1561,6 +1658,16 @@ def compare(
     are shared between the arms and cancel exactly in a within-run ratio. If
     EITHER arm is out of envelope, no ratio is emitted for the affected
     compounds; a ratio against a refusal is not a ratio.
+
+    Q1: each arm now also carries its OWN OAV table and its own interval rows
+    (``oav_table_a``/``oav_table_b``, ``rows_a``/``rows_b``). Before this, a
+    compare returned the arms as plain ``as_dict()`` payloads, which drop the
+    object and therefore drop ``.oav()`` and ``.absolutes()`` -- so the report
+    layer rebuilt the OAV table by hand from the run dict. That copy had
+    ALREADY drifted: it was written in B6 and never taught about B7's furanone
+    declared-assumption band, so a compare drew narrower intervals than a
+    predict of the identical arm. The tables are emitted here, from the live
+    objects, so there is exactly one implementation to keep correct.
     """
     run_a = predict(spec_a, targets)
     run_b = predict(spec_b, targets)
@@ -1592,6 +1699,11 @@ def compare(
         "declaration_b": run_b.declaration.as_dict(),
         "run_a": run_a.as_dict(),
         "run_b": run_b.as_dict(),
+        # Q1: the arms' OWN B4 output, from the live objects. See the docstring.
+        "oav_table_a": dict(run_a.oav()),
+        "oav_table_b": dict(run_b.oav()),
+        "rows_a": [dict(r) for r in run_a.interval_rows()],
+        "rows_b": [dict(r) for r in run_b.interval_rows()],
     }
 
 
@@ -1618,17 +1730,35 @@ def residual_report(
 
 
 def engine_metadata() -> Dict[str, Any]:
-    """What this engine is, for embedding in every artifact it produces."""
+    """
+    What this engine is, for embedding in every artifact it produces.
+
+    Q1: THE STEP COUNTS ARE NOW COUNTED, NOT TRANSCRIBED. They were written out
+    as literals at B5 -- "15 steps", "79 steps", "31 steps" -- and B6 and B7
+    then added edges without updating them, so every artifact this engine has
+    produced since carried step counts that were wrong by 11, 14 and 11
+    respectively, and a ``"wave": "B5"`` stamp two waves out of date. A
+    provenance field that silently describes an older model than the one that
+    produced the number is worse than no field, because it is quoted in
+    good faith. Counting them at call time makes the class of error impossible.
+    """
+    from .acrylamide import FULL_ACRYLAMIDE_REACTIONS
+    from .network import REACTIONS
+    from .sulfur import FULL_REACTIONS
+
     return {
         "module": "src/kinetic_core/engine.py",
-        "wave": "B5 -- the propagator cutover",
+        "wave": "B7 -- furanic channels (HMF, DMHF); propagator cutover at B5",
         "lanes": list(LANES),
         "lane_networks": {
-            TRUNK: "REACTIONS (15 steps), no pH term, no a_w term",
-            SULFUR: "FULL_REACTIONS (79 steps) = trunk + sulfur, pH trajectory",
+            TRUNK: f"REACTIONS ({len(REACTIONS)} steps), no pH term, no a_w term",
+            SULFUR: (
+                f"FULL_REACTIONS ({len(FULL_REACTIONS)} steps) = trunk + sulfur, "
+                "pH trajectory"
+            ),
             ACRYLAMIDE: (
-                "FULL_ACRYLAMIDE_REACTIONS (31 steps) = trunk + acrylamide; "
-                "sulfur STEPS deliberately absent"
+                f"FULL_ACRYLAMIDE_REACTIONS ({len(FULL_ACRYLAMIDE_REACTIONS)} "
+                "steps) = trunk + acrylamide; sulfur STEPS deliberately absent"
             ),
             LIPID: (
                 "B6: a hydroperoxide pool resolved by position (9-/13-) and "

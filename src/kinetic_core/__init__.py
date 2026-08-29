@@ -22,12 +22,28 @@ integrated with a stiff-capable solver, with:
 
 WHAT THIS PACKAGE IS NOT
 ------------------------
-Nothing in the shipped prediction path imports it. It does not modify the FAST
-screening lane, ``benchmark_validation``, any governance module, or anything
-under ``data/benchmarks/``. Like ``src/trunk_kinetics``, which it supersedes
-for calibration purposes, it is a calibration and prediction lane and only
-that. ``src/trunk_kinetics`` is left in place, untouched, because the audit
-artefacts of wave S3 refer to it.
+CORRECTED 2026-08-29 (Wave Q1). This section used to open "Nothing in the
+shipped prediction path imports it." That was true when B1 wrote it and became
+false at the B5 CUTOVER, after which this package IS the shipped prediction
+path: ``scripts/maillard.py`` -> ``src/comparative_cli.py`` -> ``.engine``, on
+the default ``--lane core``. The claim then sat here for three waves saying the
+opposite of the architecture, which is the most expensive kind of stale comment
+-- a reader checking whether it is safe to change something here would have been
+told, wrongly, that nothing depends on it.
+
+What remains TRUE and is the point of the section: this package does not modify
+the FAST screening lane, ``benchmark_validation``, any governance module, or
+anything under ``data/benchmarks/``. Those are separate lanes and the core does
+not reach into them. ``src/trunk_kinetics``, which this package supersedes for
+calibration purposes, is left in place and untouched because the audit artefacts
+of wave S3 refer to it.
+
+WAVE INDEX (which module arrived when, for reading the docstrings below)
+-----------------------------------------------------------------------
+B1 trunk network + integrator; B2/B2.1-B2.4 sulfur lane and its pH state;
+B3 acrylamide lane; B4 the matrix/OAV output layer; B5 the cutover -- ``engine``
+became the front door; B6 the lipid lane, co-integrated as a direct sum;
+B7 the furanic channels (HMF, DMHF); Q1 the quality pass (``keyspaces``).
 """
 
 from .integrate import CoreRun, flux_budget, integrate  # noqa: F401

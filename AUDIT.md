@@ -567,10 +567,22 @@ Wave P.
    repair, and it is reported as one.
 6. **The furaneol `[HH]` pool gate is gone.** Red-team finding H4's second half: predicted
    furaneol from glucose was contingent on pyrazine chemistry. The token was not re-sourced,
-   it was removed — the accepted mechanism names the reductant and it is the amino acid
-   (Blank & Fay 1996, `10.1021/jf950439o`; Kerler et al. 2010, `10.1002/9781444317770.ch3`).
+   it was removed, and the amino acid was written into the step as the reducing partner.
    Measured: disabling aminoketone condensation now leaves the DMHF step standing (it used to
    take it to zero).
+   **Citation corrected 2026-08-29 (Wave Q1).** This item used to read "the accepted mechanism
+   names the reductant and it is the amino acid (Blank & Fay 1996 …)". Blank & Fay 1996 do **not**
+   name it: they leave it open — *"The reduction may occur either by a dismutation or by a
+   reaction with further enoloxo compounds"* (`10.1021/jf950439o` p. 534, after Schieberle 1992),
+   under a figure legend their own paper calls *"Hypothetical"*. In that paper the amino acid is
+   the **carbon** donor (the Strecker aldehyde), not a hydride donor. The coupling the model
+   ships rests on **Kerler et al. 2010** (`10.1002/9781444317770.ch3`) alone, and on a weaker
+   statement than "names the reductant" — Furaneol from acetylformoin *"was significantly
+   enhanced in the presence of reductones such as ascorbic acid or methylene reductinic acid as
+   well as the Strecker-active amino acid proline"*. It is therefore a **declared modelling
+   choice**, not a mechanism a cited paper asserts. Resolving it properly needs Hofmann &
+   Schieberle 2001, *"Acetylformoin — an important progenitor"*, Flavour 2000 Proc. 311–322,
+   which this repo does not hold.
 
 **The finding this wave produced, and it is about the engine rather than the chemistry.**
 Adding a second, literature-evidenced channel to the flagship compound changed its prediction

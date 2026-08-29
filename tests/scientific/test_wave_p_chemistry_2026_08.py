@@ -563,9 +563,16 @@ def test_furaneol_from_glucose_glycine_survives_disabling_the_pyrazine_lane():
     i.e. predicted furaneol from glucose was a downstream dependent of pyrazine
     chemistry, while Wang & Ho 2008's CAMOLA experiment establishes the route as real.
 
-    After Wave P the token is not re-sourced, it is GONE: the amino acid is the
-    reductant (Blank & Fay 1996; Kerler et al. 2010), the step balances exactly with
-    no `[HH]`, and DMHF survives.
+    After Wave P the token is not re-sourced, it is GONE: the amino acid is written
+    into the step as the reducing partner, the step balances exactly with no `[HH]`,
+    and DMHF survives.
+
+    CITATION CORRECTED 2026-08-29 (Wave Q1): this used to cite "(Blank & Fay 1996;
+    Kerler et al. 2010)" for "the amino acid is the reductant". Blank & Fay 1996 do
+    not say it -- they leave the reductant open ("either by a dismutation or by a
+    reaction with further enoloxo compounds", p. 534). The coupling rests on Kerler
+    et al. 2010 alone and is a declared modelling choice. What this test asserts --
+    that DMHF survives with no `[HH]` token and the step balances -- is unaffected.
     """
     import src.smirks_engine as engine_module
 
@@ -604,7 +611,10 @@ def test_the_dmhf_step_consumes_no_reducing_equivalent_token():
             "the DMHF step is pool-gated on the reducing-equivalent token again"
         )
         assert _atoms(step.reactants) == _atoms(step.products)
-        # The amino acid is the reductant: it leaves as its Strecker aldehyde + CO2 + NH3.
+        # The amino acid is the model's reducing partner and it LEAVES as its
+        # Strecker aldehyde + CO2 + NH3 -- deliberately the opposite of Blank &
+        # Fay's pentose route, where the aldehyde is consumed into the ring. The
+        # intact-C6 CAMOLA constraint (Wang & Ho 2008) requires it to leave here.
         labels = {p.label for p in step.products}
         assert {"DMHF", "formaldehyde", "CO2", "ammonia", "water"} <= labels
 

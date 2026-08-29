@@ -2,8 +2,23 @@
 src/kinetic_core/species.py
 
 THE STATE VECTOR OF THE MASS-ACTION KINETIC CORE, WITH ITS CARBON AND NITROGEN
-BOOKKEEPING.
+BOOKKEEPING (Build Wave B1, 2026-08-28; trunk block extended by B7).
 =============================================================================
+
+WAVE: B1 for the thirteen trunk state variables; B7 added the furanic block
+(HMF, DMHF and their partners). The sulfur, acrylamide and lipid lanes keep
+their own state in ``species_sulfur``, ``species_acrylamide`` and
+``species_lipid`` -- one file per lane, so a lane's atom counts and its
+molecular weights cannot drift apart.
+EXAM: none of its own. Nothing here is fitted and nothing here is a rate, so
+there is nothing to score; what this file is checked against is the CONSERVATION
+INVARIANT, enforced at import by ``network.validate_balance()``.
+DECLARED GAPS: two of the thirteen trunk variables are not molecular
+concentrations (see the melanoidin note below), so they have no molecular weight
+and cannot be converted to ug/L -- the engine reports them in their own unit
+rather than inventing one. A species with no entry in
+``MOLECULAR_WEIGHT_G_PER_MOL`` is in that category by construction, not by
+omission.
 
 Every entry below carries the atom counts that make the conservation invariant
 computable. Nothing in this file is fitted, and nothing in it is a rate.

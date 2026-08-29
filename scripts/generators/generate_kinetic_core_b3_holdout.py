@@ -90,6 +90,7 @@ were NOT opened by this wave at any point.
 
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from dataclasses import replace
@@ -232,7 +233,22 @@ def interval(function, parameters, n_draws=N_DRAWS, seed=MC_SEED):
     }
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Score Build Wave B3's (acrylamide / safety) pre-registered "
+            "hold-out rows against the frozen B3 parameters, fitting nothing; "
+            "writes "
+            "results/validation/kinetic_core_b3_holdout_report.{json,md}."
+        )
+    )
+    parser.add_argument(
+        "--output-dir",
+        default=str(ROOT / "results" / "validation"),
+        help="directory the artifacts are written to",
+    )
+    args = parser.parse_args(argv)
+
     frozen = load_frozen()
     p = frozen["parameters"]
     rows: List[Dict[str, Any]] = []
@@ -521,7 +537,7 @@ def main() -> int:
         "rows": rows,
     }
 
-    out_json = ROOT / "results/validation/kinetic_core_b3_holdout_report.json"
+    out_json = Path(args.output_dir) / "kinetic_core_b3_holdout_report.json"
     out_json.parent.mkdir(parents=True, exist_ok=True)
     out_json.write_text(json.dumps(payload, indent=2, default=str))
 
@@ -626,7 +642,7 @@ def main() -> int:
         a(r["comment"])
         a("")
 
-    out_md = ROOT / "results/validation/kinetic_core_b3_holdout_report.md"
+    out_md = Path(args.output_dir) / "kinetic_core_b3_holdout_report.md"
     out_md.write_text("\n".join(lines))
     print(f"wrote {out_json}")
     print(f"wrote {out_md}")

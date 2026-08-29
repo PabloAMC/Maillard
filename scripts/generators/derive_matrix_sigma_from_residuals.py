@@ -51,6 +51,7 @@ Caveats printed into the artifact:
 
 from __future__ import annotations
 
+import argparse
 import json
 import math
 import sys
@@ -226,9 +227,23 @@ def render_markdown(payload: dict) -> str:
     return "\n".join(lines) + "\n"
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Derive the uncalibrated-tier matrix_headspace ln-sigma from "
+            "in-panel leave-lane-out residuals; writes "
+            "results/validation/matrix_sigma_residual_derivation.{json,md}."
+        )
+    )
+    parser.add_argument(
+        "--output-dir",
+        default=str(ROOT / "results" / "validation"),
+        help="directory the artifacts are written to",
+    )
+    args = parser.parse_args(argv)
+
     payload = build_payload()
-    out_dir = ROOT / "results" / "validation"
+    out_dir = Path(args.output_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / "matrix_sigma_residual_derivation.json").write_text(
         json.dumps(payload, indent=2) + "\n"

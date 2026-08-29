@@ -415,6 +415,40 @@ ledger's "stoichiometry the model uses" claim is false (the model lacks the
 step); the repo's Strecker-aldehyde-leaves co-product contradicts the paper's
 consumed-into-ring route.
 
+DISCHARGED 2026-08-29 (Wave Q1), with two corrections to this paragraph itself.
+
+1. The reductant misquote was real and was WIDER than "4 other sites": nine
+   sites carried it, including `refresh_internal_reproducibility_snapshots.py`,
+   which re-emits it into two frozen benchmark JSONs on every run — so fixing
+   only the five would have silently reintroduced it. All nine are corrected.
+   The honest statement now shipped everywhere: Blank & Fay 1996 leave the
+   reductant OPEN ("either by a dismutation or by a reaction with further
+   enoloxo compounds", p. 534, after Schieberle 1992, under a legend their own
+   paper calls "Hypothetical"), and in that paper the amino acid is the CARBON
+   donor. The model's amino-acid coupling rests on Kerler et al. 2010 alone, as
+   an ENHANCEMENT observation listing proline alongside genuine reductones, and
+   is therefore a declared modelling choice rather than a mechanism any cited
+   paper asserts. Hofmann & Schieberle 2001 (Flavour 2000 Proc. 311-322) is the
+   primary source that would settle it; the repo does not hold it.
+2. **This paragraph's own "(the model lacks the step)" is wrong**, and was
+   already superseded by k5b_dmhf_synthesis.md row R1 before Q1 ran.
+   `reaction_templates.py::_furanone_generation` (2218-2274, live via
+   smirks_engine) does ship `pentose + glycine -> DMHF` and
+   `pentose + alanine -> HEMF`, both balancing exactly. The 1996 dossier's
+   defect D2 had inspected `_furanone_and_mft_route` only. What is genuinely
+   over-claimed is narrower and is now recorded at the site: the C5+C1 / C5+C2
+   CARBON ACCOUNTING matches, the MECHANISM does not — the model's step is a
+   single lumped bimolecular reaction, first order in amino acid, against Blank
+   1997 Table 5's measured n = 0.35-0.71, with no acetylformoin node and no
+   sugar-fragmentation channel.
+3. The Strecker-aldehyde-leaves stoichiometry is KEPT and re-framed rather than
+   changed. It is right for the HEXOSE route — Wang & Ho 2008's CAMOLA result
+   requires all six DMHF carbons to come from one intact glucose, which forbids
+   incorporating the amino acid's carbon into the ring — and it is deliberately
+   opposite to Blank & Fay's PENTOSE mechanism, which is handled separately in
+   `_furanone_generation`. The defect was the citation, not the chemistry, and
+   Blank & Fay 1996 is no longer cited as the source of the co-product fate.
+
 ## Amendment 9 — 2026-08-29 (pre-declaration of Wave B2.3, before it runs)
 
 1. CHARGE-CONSERVATION FIX (invariant, not a parameter): B2.2 found that
@@ -757,3 +791,21 @@ fitted constant is moved.** Pre-registered in
    cutover_final_exam.md; ratified with the structural mitigation noted
    (zero fitted parameters in the HMF node; the one fitted DMHF constant is
    identified on a pentose system appearing in no exam bundle).
+
+## Amendment 16 — 2026-08-30 (orchestrator rulings on the Q1 quality pass)
+
+1. PREFACTOR FLAGS: no shipped value moves in Q1 (correct). The genuine
+   defects — cysteine_thermolysis A=1e14 (51.8x vs Zheng's own table, the
+   third-time-lucky item) and any other flag traceable to a transcribed
+   source table rather than a global-fit identifiability diagnostic — are
+   PRE-DECLARED for the next parameter wave (with the incoming Scholar-round
+   ladder data), fixed with blind re-sits. Kocadagli-lane flags remain
+   diagnostics-only per the artifact's own caveat.
+2. safety.py's 4 uncited (Ea, A) pairs: to be LABELLED unsourced per the
+   Wave T3 convention in the next wave; conduct disclosed here.
+3. Internal2026/ProtocolPilot snapshots stay UNREFRESHED (standing owner
+   decision from Wave Y); the drift (up to 2.5x if regenerated) is recorded.
+4. The b2_4 ensemble/exam/panel artifacts are force-added so their 10
+   assertions enforce on CI.
+5. cutover_final_exam's 5e-8 non-bit-reproducibility: accepted (zero verdict
+   changes); narrative corrected to match its own table.

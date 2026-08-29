@@ -83,6 +83,7 @@ were NOT opened by this wave at any point.
 
 from __future__ import annotations
 
+import argparse
 import json
 import math
 import sys
@@ -275,7 +276,26 @@ def score(observed: float, predicted: float, band: float) -> Dict[str, Any]:
     }
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Score Build Wave B2.3's pre-registered hold-out rows against the "
+            "frozen B2.3 parameters, fitting nothing; writes "
+            "results/validation/kinetic_core_b2_3_holdout_report.{json,md}."
+        )
+    )
+    parser.add_argument(
+        "--output-dir",
+        default=str(ROOT / "results" / "validation"),
+        help="directory the artifacts are written to",
+    )
+    parser.add_argument(
+        "--basename",
+        default=OUT_BASENAME,
+        help="stem of the two report files",
+    )
+    args = parser.parse_args(argv)
+
     global _DRIFT
     frozen = load_frozen()
     p = frozen["parameters"]
@@ -1187,7 +1207,7 @@ def main() -> int:
         ),
     }
 
-    out_json = ROOT / f"results/validation/{OUT_BASENAME}.json"
+    out_json = Path(args.output_dir) / f"{args.basename}.json"
     out_json.parent.mkdir(parents=True, exist_ok=True)
     out_json.write_text(json.dumps(payload, indent=2, default=str))
 
@@ -1323,7 +1343,7 @@ def main() -> int:
     a(payload["firewall_disclosure"])
     a("")
 
-    out_md = ROOT / f"results/validation/{OUT_BASENAME}.md"
+    out_md = Path(args.output_dir) / f"{args.basename}.md"
     out_md.write_text("\n".join(lines))
     print(f"GATING {n_gating_pass}/{len(gating)}  diagnostic {n_diag_pass}/"
           f"{len(diagnostic)}  unscored {len(unscored)}")

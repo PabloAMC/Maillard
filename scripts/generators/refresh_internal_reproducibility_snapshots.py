@@ -14,6 +14,7 @@ path, then commit the diff so the drift baseline is explicit in review:
 
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from pathlib import Path
@@ -148,12 +149,20 @@ NOTES = (
     "contains fructose, so this moves zero scored rows. "
     "(6) THE DMHF [HH] POOL GATE IS GONE. The hexose 1-deoxyosone -> furaneol step was "
     "gated on a reducing-equivalent token whose only producer in a cysteine-free system "
-    "was pyrazine aromatisation -- the second half of red-team H4. The accepted "
-    "mechanism names the reductant and it is the amino acid (Blank & Fay 1996, "
-    "10.1021/jf950439o; Kerler et al. 2010, 10.1002/9781444317770.ch3), so the step is "
+    "was pyrazine aromatisation -- the second half of red-team H4. The token was "
+    "removed and the amino acid written in as the reducing partner, so the step is "
     "now `1-deoxyosone + amino acid -> DMHF + Strecker aldehyde + CO2 + NH3 + H2O`, "
     "exact with NO token. Measured on glucose+glycine: disabling aminoketone "
-    "condensation now leaves DMHF steps at 1 (was 0). "
+    "condensation now leaves DMHF steps at 1 (was 0). CITATION CORRECTED 2026-08-29 "
+    "(Wave Q1): this sentence used to read 'the accepted mechanism names the reductant "
+    "and it is the amino acid (Blank & Fay 1996, 10.1021/jf950439o; Kerler et al. 2010, "
+    "10.1002/9781444317770.ch3)'. Blank & Fay 1996 name NO reductant -- they leave it "
+    "open, 'either by a dismutation or by a reaction with further enoloxo compounds' "
+    "(p. 534) -- and in that paper the amino acid is the CARBON donor. The coupling "
+    "rests on Kerler et al. 2010 alone, as an enhancement observation listing the "
+    "Strecker-active amino acid proline alongside genuine reductones, and is therefore "
+    "a DECLARED MODELLING CHOICE rather than a mechanism a cited paper asserts. No "
+    "value in this snapshot changes; only the attribution does. "
     "NET EFFECT ON THIS SNAPSHOT: the added species dilute the bounded volatile budget, "
     "so the sulfur/pyrazine/furfural rows move together by ~0.87x, and Nonanal moves by "
     "the oleate ratio. Both are re-pinned here. "
@@ -286,8 +295,27 @@ def refresh_protocol_pilot(protein: str, predicted: dict) -> None:
     out.write_text(json.dumps(bench, indent=2, sort_keys=True) + "\n")
 
 
-def main() -> int:
-    for protein in ("pea", "soy"):
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Refresh the SYNTHETIC Internal2026 and ProtocolPilot2026 snapshots "
+            "for pea and soy from the CURRENT model, rewriting "
+            "data/benchmarks/{pea,soy}_isolate_ribose_cysteine_100C_45min_"
+            "{Internal2026,ProtocolPilot2026}.json and the two "
+            "data/protocols/*_intake.yaml. These are drift baselines, not "
+            "measurements. RUNNING THIS MOVES SHIPPED NUMBERS: run it only for "
+            "an intentional model change, then commit the diff so the drift is "
+            "explicit in review."
+        )
+    )
+    parser.add_argument(
+        "--protein",
+        choices=("pea", "soy"),
+        action="append",
+        help="refresh only this protein (repeatable; default: both)",
+    )
+    args = parser.parse_args(argv)
+    for protein in tuple(args.protein or ("pea", "soy")):
         predicted = refresh_internal(protein)
         refresh_protocol_pilot(protein, predicted)
         print(f"{protein}: refreshed Internal2026 + ProtocolPilot2026 snapshots")

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from pathlib import Path
@@ -19,12 +20,26 @@ from src.chemistry_family_scope import (  # noqa: E402
 OUTPUT_DIR = ROOT / "results" / "validation"
 
 
-def main() -> int:
-    payload = build_chemistry_family_scope_artifact()
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Build the chemistry-family scope artifact; writes "
+            "results/validation/chemistry_family_scope.{json,md}."
+        )
+    )
+    parser.add_argument(
+        "--output-dir",
+        default=str(OUTPUT_DIR),
+        help="directory the artifacts are written to",
+    )
+    args = parser.parse_args(argv)
 
-    json_path = OUTPUT_DIR / "chemistry_family_scope.json"
-    markdown_path = OUTPUT_DIR / "chemistry_family_scope.md"
+    payload = build_chemistry_family_scope_artifact()
+    output_dir = Path(args.output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    json_path = output_dir / "chemistry_family_scope.json"
+    markdown_path = output_dir / "chemistry_family_scope.md"
 
     with open(json_path, "w", encoding="utf-8") as handle:
         json.dump(payload, handle, indent=2)

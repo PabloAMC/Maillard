@@ -612,10 +612,24 @@ def compare_formulations(
             not resolved, band_x,
             "NOT RESOLVED: inside the measured same-sample dispersion band"
             if not resolved else "resolved above the same-sample dispersion band"))
-    resolved_rows = [r for r in rows if not r.within_reliability_band]
+    # Q1: an UNDEFINED ratio resolves nothing and must not be counted as
+    # resolved. It was, because the undefined row is constructed with
+    # ``within_reliability_band=False`` -- true in the literal sense (an
+    # undefined ratio is not inside the dispersion band) but read by every
+    # consumer as "this row resolved". "6 of 6 ratios resolve" then reads as six
+    # claims when two of them are not ratios at all. Both the CLI and the HTML
+    # report had grown their own compensating text; the count is fixed here
+    # instead, in the layer that owns it, and ``n_undefined`` is published so a
+    # renderer never has to re-derive the predicate.
+    undefined_rows = [r for r in rows if r.direction == "undefined"]
+    resolved_rows = [
+        r for r in rows
+        if r.direction != "undefined" and not r.within_reliability_band
+    ]
     return {
         "formulation_a": label_a, "formulation_b": label_b,
         "n_compared": len(rows), "n_resolved": len(resolved_rows),
+        "n_undefined": len(undefined_rows),
         "reliability_band_x": band_x,
         "rows": [r.as_dict() for r in rows],
         "ranking_by_ratio": [r.compound for r in sorted(

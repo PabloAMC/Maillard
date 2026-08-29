@@ -1,8 +1,25 @@
 """
 src/kinetic_core/parameters.py
 
-THE SINGLE PARAMETER REGISTRY OF THE MASS-ACTION KINETIC CORE.
+THE SINGLE PARAMETER REGISTRY OF THE MASS-ACTION KINETIC CORE
+(Build Wave B1, 2026-08-28).
 ==============================================================
+
+WAVE: B1. The later lanes did NOT extend this file -- each keeps its own
+registry (``parameters_sulfur``, ``parameters_acrylamide``, ``parameters_matrix``,
+``parameters_lipid``, ``parameters_furanic``) so that a lane's constants and its
+declared gaps stay in one place. This file is the TRUNK's registry.
+EXAM: results/validation/kinetic_core_b1_fit_report.md for what was fitted here
+and to what; results/validation/kinetic_core_b1_holdout_report.md for the
+pre-registered hold-out; the cutover final exam for out-of-sample accuracy.
+DECLARED GAPS: see ``PROHIBITED_DERIVATIONS`` and the per-entry
+``evidence_class`` / ``rate_transfer`` flags, which are the machine-readable
+form of this section -- a constant whose ``evidence_class`` is not a
+measurement says so at runtime, in the metadata of every prediction that used
+it. Wave Q1's corpus-wide prefactor audit
+(results/validation/prefactor_audit.md) additionally flags which shipped
+(Ea, A) pairs do NOT reproduce their source k(T) table; read it before trusting
+a prefactor here.
 
 Every rate constant the network can use is declared here, once, with:
 

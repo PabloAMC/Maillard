@@ -8,7 +8,6 @@ science theme if available. Saves the output to results/validation/reaction_netw
 
 from __future__ import annotations
 
-import shutil
 import sys
 from pathlib import Path
 
@@ -587,12 +586,29 @@ def main() -> int:
         f"Successfully generated and saved Maillard reaction network plots to {output_path_png} and {output_path_pdf}"
     )
 
-    # Copy to assets dir for docs
-    docs_asset_dir = ROOT / "docs" / "assets"
-    docs_asset_dir.mkdir(parents=True, exist_ok=True)
-    shutil.copyfile(output_path_png, docs_asset_dir / "reaction_network.png")
-    shutil.copyfile(output_path_pdf, docs_asset_dir / "reaction_network.pdf")
-    print(f"Copied reaction network plots to {docs_asset_dir / 'reaction_network.png'} and {docs_asset_dir / 'reaction_network.pdf'}")
+    # RETIRED AS A PUBLISHED ASSET 2026-08-29 (Wave Q1). This used to copy both
+    # plots into docs/assets/ and docs/assets/reaction_network.pdf was tracked.
+    # It has been DELETED, for provenance reasons rather than aesthetic ones: the
+    # tracked PDF was three months older than every other asset in that
+    # directory, nothing in README.md or docs/ ever linked to it, and its
+    # ledger entry (tasks/audit_remediation.md) had an open "needs regenerating
+    # for the new family colours" item that was never done -- so the published
+    # artefact did not depict the shipped network and no reader could tell.
+    #
+    # Its replacement is scripts/generators/generate_network_map.py, which
+    # renders all four lanes FROM THE LIVE CODE in src/kinetic_core/ to
+    # docs/assets/network_map.html, deterministically, with evidence-class edges
+    # and provenance tooltips. A hand-laid-out drawing cannot make that
+    # guarantee, which is the whole reason it went stale.
+    #
+    # This script is KEPT: it still writes results/validation/, and
+    # tests/unit/test_audit_remediation_carried_2026_08.py imports it for its
+    # family colour map. Only the docs/assets/ publication step is gone.
+    print(
+        "Not publishing to docs/assets/: the reaction-network drawing was "
+        "retired in favour of the generated docs/assets/network_map.html "
+        "(scripts/generators/generate_network_map.py)."
+    )
 
     return 0
 

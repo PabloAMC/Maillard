@@ -53,6 +53,7 @@ so the comparison is of ENCODINGS at fixed chemistry, not of fits.
 
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from pathlib import Path
@@ -264,9 +265,23 @@ def run_probe() -> Dict[str, Any]:
     }
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Re-run the B2.4 amine-fate probe over its three encodings on "
+            "B2.2's frozen parameters; writes "
+            "results/validation/kinetic_core_b2_4_amine_fate_probe.json."
+        )
+    )
+    parser.add_argument(
+        "--output-dir",
+        default=str(ROOT / "results" / "validation"),
+        help="directory the artifacts are written to",
+    )
+    args = parser.parse_args(argv)
+
     payload = run_probe()
-    dest = ROOT / "results/validation/kinetic_core_b2_4_amine_fate_probe.json"
+    dest = Path(args.output_dir) / "kinetic_core_b2_4_amine_fate_probe.json"
     dest.write_text(json.dumps(payload, indent=2, default=str))
     print(f"wrote {dest}")
     print(json.dumps(payload["verdict"], indent=2))

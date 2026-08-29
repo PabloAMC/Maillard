@@ -33,6 +33,7 @@ Usage:
 
 from __future__ import annotations
 
+import argparse
 import json
 import math
 import statistics
@@ -293,7 +294,17 @@ def render(payload: Dict[str, Any]) -> str:
     return "\n".join(lines) + "\n"
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Score Wave S3's trunk rate calibration against the frozen hold-out "
+            "baseline in three columns (frozen / as shipped / counterfactual); "
+            "writes "
+            "results/validation/maillard_path_holdout_S3_prepost.{json,md}."
+        )
+    )
+    parser.parse_args(argv)
+
     payload = build()
     (VALIDATION / "maillard_path_holdout_S3_prepost.json").write_text(
         json.dumps(payload, indent=2) + "\n", encoding="utf-8")

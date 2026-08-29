@@ -18,6 +18,7 @@ scorer. It opens no bundle and no benchmark.
 
 from __future__ import annotations
 
+import argparse
 import json
 import math
 import statistics
@@ -846,14 +847,30 @@ def render_holdout_report(p: Dict[str, Any]) -> str:
     return "\n".join(a)
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Assemble the Build Wave B2.4 fit and hold-out reports from "
+            "artifacts already on disk and score the pre-registration claim by "
+            "claim; writes "
+            "results/validation/kinetic_core_b2_4_{fit,holdout}_report.{json,md}."
+        )
+    )
+    parser.add_argument(
+        "--output-dir",
+        default=str(V),
+        help="directory the artifacts are written to",
+    )
+    args = parser.parse_args(argv)
+
     payload = build()
-    (V / "kinetic_core_b2_4_fit_report.json").write_text(
+    out = Path(args.output_dir)
+    (out / "kinetic_core_b2_4_fit_report.json").write_text(
         json.dumps(payload, indent=2, default=str))
-    (V / "kinetic_core_b2_4_fit_report.md").write_text(render_fit_report(payload))
-    (V / "kinetic_core_b2_4_holdout_report.json").write_text(
+    (out / "kinetic_core_b2_4_fit_report.md").write_text(render_fit_report(payload))
+    (out / "kinetic_core_b2_4_holdout_report.json").write_text(
         json.dumps(payload, indent=2, default=str))
-    (V / "kinetic_core_b2_4_holdout_report.md").write_text(
+    (out / "kinetic_core_b2_4_holdout_report.md").write_text(
         render_holdout_report(payload))
     print("wrote kinetic_core_b2_4_{fit,holdout}_report.{md,json}")
     for c in payload["prereg_checks"]:

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import argparse
 import sys
 from pathlib import Path
 
@@ -20,8 +21,21 @@ from src.primary_benchmark_campaign import (  # noqa: E402
 )
 
 
-def main() -> int:
-    output_dir = ROOT / "results" / "validation"
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Export the primary matrix benchmark campaign, its external package "
+            "and the package intake template into results/validation/."
+        )
+    )
+    parser.add_argument(
+        "--output-dir",
+        default=str(ROOT / "results" / "validation"),
+        help="directory the artifacts are written to",
+    )
+    args = parser.parse_args(argv)
+
+    output_dir = Path(args.output_dir)
     campaign = export_matrix_primary_benchmark_campaign(str(output_dir), root=ROOT)
     package = export_primary_matrix_external_package(str(output_dir), root=ROOT)
     intake_template = export_primary_matrix_external_package_intake_template(str(output_dir), root=ROOT)

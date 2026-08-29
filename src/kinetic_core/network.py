@@ -1,8 +1,25 @@
 """
 src/kinetic_core/network.py
 
-THE MASS-ACTION REACTION NETWORK OF THE TRUNK, WITH THE MELANOIDIN MASS SINK.
+THE MASS-ACTION REACTION NETWORK OF THE TRUNK, WITH THE MELANOIDIN MASS SINK
+(Build Wave B1, 2026-08-28; extended by B7).
 =============================================================================
+
+WAVE: B1 for the fifteen trunk steps; B7 hung the FURANIC CHANNEL here (the HMF
+node and DMHF Edges A and B, including ``r_mgo_dmhf``), which is why the sulfur
+lane's residuals moved in B7 without any sulfur constant being touched -- the
+sulfur lane runs this trunk.
+EXAM: the cutover final exam (results/validation/cutover_final_exam.md) scores
+this network's predictions; B1's own fit and hold-out records are
+results/validation/kinetic_core_b1_{fit,holdout}_report.md.
+DECLARED GAPS: the melanoidin sink is an ELEMENTAL pool, not a molecule, so it
+has no molecular weight and is reported in its own unit; the furanic edges
+carry NO activation energy from any source (all five papers of the cluster are
+single-temperature), so their partition barrier is a declared assumption priced
+by re-integration rather than a measurement; and ``k_mgo_dmhf``'s level is a
+digitised bar-chart value at one temperature. The balance invariant, by
+contrast, is not a gap: this module REFUSES TO IMPORT if any step fails to
+balance carbon or nitrogen.
 
 FIFTEEN steps over the thirteen state variables of ``species.py``. Every step
 is written as an explicit reactant->product stoichiometry and the module

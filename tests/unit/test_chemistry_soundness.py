@@ -283,12 +283,21 @@ def test_pentose_reaches_norfuraneol_without_a_reduction_hexose_does_not():
     pool emits nothing" stopped being the right probe — it was testing the gate, not
     the chemistry, and the gate was the defect (red-team H4, second half: in a
     cysteine-free system the token's only producer was the pyrazine aromatisation).
-    The reductant is now the AMINO ACID, which the accepted mechanism names
-    (Blank & Fay 1996, 10.1021/jf950439o: "reduction of the resulting
-    acetylformoin-type intermediates"; Kerler et al. 2010, 10.1002/9781444317770.ch3,
-    on the Strecker-active amino acid). The claim under test is unchanged and is now
-    probed with the reductant the chemistry actually uses: a pentose needs NO reductant
-    of any kind, a hexose needs one.
+    The reducing partner is now the AMINO ACID. The claim under test is unchanged
+    and is now probed with the reductant the model actually uses: a pentose needs
+    NO reductant of any kind, a hexose needs one.
+
+    CITATION CORRECTED 2026-08-29 (Wave Q1). This docstring used to say the amino
+    acid is "the reductant, which the accepted mechanism names (Blank & Fay 1996
+    ...)". Blank & Fay 1996 name no reductant: the abstract phrase quoted here,
+    "reduction of the resulting acetylformoin-type intermediates", names none, and
+    at p. 534 the paper leaves it open -- "either by a dismutation or by a reaction
+    with further enoloxo compounds". The coupling is supported by Kerler et al.
+    2010 (10.1002/9781444317770.ch3) alone, as an ENHANCEMENT observation putting
+    the Strecker-active amino acid proline alongside genuine reductones. It is a
+    declared modelling choice, not a mechanism a cited paper asserts. Nothing about
+    the assertions below changes: they test the pentose/hexose ASYMMETRY, which is
+    structural and independent of who supplies the hydride.
     """
     from src.reaction_templates import _furanone_and_mft_route
 
