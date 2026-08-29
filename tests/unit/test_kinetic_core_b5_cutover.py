@@ -69,12 +69,49 @@ def _acrylamide_spec():
 
 
 def test_sulfur_request_is_in_envelope_and_routes_to_the_sulfur_lane():
+    """
+    B2.2 CHANGES THE EXPECTED STATE HERE, DELIBERATELY.
+
+    The sulfur lane now carries a pH-TRAJECTORY state, and a pH trajectory
+    needs a buffer. A request that does not declare one is answered -- but it
+    is answered by EXTRAPOLATING the trajectory from water autoprotolysis and
+    the charged solutes alone, which for a real buffered experiment
+    over-predicts the drift. That is an extrapolation and the engine now says
+    so, which is why the state is `in_envelope_extrapolated` rather than
+    `in_envelope`. The diagnostic below is what B2.2's buffer probe measured:
+    the same pot answered unbuffered and answered at Hofmann's declared 0.5 M
+    phosphate differs by up to ~15x in predicted thiol.
+    """
     run = predict(_sulfur_spec(), [MFT, FFT])
     assert run.answered
     assert run.declaration.lane == SULFUR
-    assert run.declaration.state == "in_envelope"
+    assert run.declaration.state == "in_envelope_extrapolated"
+    assert any("no buffer was declared" in w for w in run.declaration.warnings)
     assert set(run.concentrations_ug_per_l) == {MFT, FFT}
     assert all(v >= 0.0 for v in run.concentrations_ug_per_l.values())
+
+
+def test_declaring_the_buffer_removes_the_extrapolation_flag():
+    """
+    The other half: the flag is not decoration. Supply the buffer the source
+    actually states and the request is back inside the envelope.
+    """
+    from src.kinetic_core.engine import ProcessSpec, ThermalProgram
+    from src.kinetic_core.ph_state import BufferSpec
+
+    spec = FormulationSpec(
+        "sulfur",
+        {"D-Ribose": 100.0, "L-Cysteine": 33.0},
+        ProcessSpec(
+            ThermalProgram.isothermal(145.0, 20.0), ph=5.0,
+            buffer=BufferSpec(kind="phosphate", phosphate_mol_l=0.5,
+                              declared=True, source="Hofmann 1998 Methods"),
+        ),
+    )
+    run = predict(spec, [MFT, FFT])
+    assert run.answered
+    assert not any("no buffer was declared" in w for w in run.declaration.warnings)
+    assert run.declaration.state == "in_envelope"
 
 
 def test_acrylamide_request_routes_to_the_acrylamide_lane():

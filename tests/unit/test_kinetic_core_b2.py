@@ -152,9 +152,15 @@ def test_every_sulfur_species_has_formation_and_consumption():
     # BND) and PRB, the protein-disulfide adduct, which is TERMINAL because
     # anantharamkrishnan2020b sec. 5d reports no reversibility experiment in
     # either direction -- carrying a release rate would be inventing one.
+    # B2.2 adds ACID, the titratable organic-acid pool. It is TERMINAL BY
+    # CONSTRUCTION and that is the whole point of it: nothing in the sulfur
+    # network consumes it, so it cannot change a volatile prediction except
+    # through the charge balance that sets the pH. tests/unit/
+    # test_kinetic_core_b2_2.py asserts separately that it never appears as a
+    # reactant anywhere.
     terminal_by_design = {
         "FRAG_C", "FRAG_N", "FRAG_S", "MEL_C", "MEL_N", "BND", "BND_F",
-        "OLG", "PRB",
+        "OLG", "PRB", "ACID",
     }
     for species in SULFUR_STATE:
         if species.role in ("reactant", "site") or species.key in terminal_by_design:
@@ -816,7 +822,8 @@ def test_pinned_hofmann_ph5_regression(parameters):
 
 def test_network_shape_is_pinned():
     described = describe_sulfur()
-    assert described["n_species"] == 46  # B2.1 adds TTCA, BND_F, PRB, PROT_SS
+    # B2.1 added TTCA, BND_F, PRB, PROT_SS; B2.2 adds ACID.
+    assert described["n_species"] == 47
     assert described["trunk_reactions"] == 15
     assert len(SULFUR_REACTIONS) == described["sulfur_reactions"]
     ph_tagged = {k for k, v in REACTION_PH_FACTOR.items() if v}

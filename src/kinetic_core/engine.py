@@ -72,13 +72,14 @@ from .species_sulfur import (
     SULFUR_INDEX,
     mmol_per_litre_to_ug_per_litre,
 )
+from .ph_state import BUFFER_ABSENT_WARNING, DEFAULT_BUFFER, BufferSpec, PhDrift
 from .sulfur import integrate_sulfur
 
 CELSIUS = 273.15
 
 _ROOT = Path(__file__).resolve().parents[2]
 _B1_FIT_REPORT = _ROOT / "results/validation/kinetic_core_b1_fit_report.json"
-_B2_FIT_REPORT = _ROOT / "results/validation/kinetic_core_b2_1_fit_report.json"
+_B2_FIT_REPORT = _ROOT / "results/validation/kinetic_core_b2_2_fit_report.json"
 _B3_FIT_REPORT = _ROOT / "results/validation/kinetic_core_b3_fit_report.json"
 
 
@@ -365,6 +366,16 @@ class ProcessSpec:
     #: it. Only the sulfur lane can use it; declared as ignored elsewhere.
     ph_final: Optional[float] = None
     water_activity: Optional[float] = None
+    #: B2.2: THE BUFFER IS NOW AN INPUT. ``None`` means "no buffer was
+    #: declared", which resolves to ``ph_state.DEFAULT_BUFFER`` (unbuffered)
+    #: and raises an extrapolation warning -- a pot whose buffer nobody
+    #: recorded is a pot whose pH trajectory is being extrapolated. Supply
+    #: ``BufferSpec(kind="clamped")`` to get B2's fixed-pH behaviour back
+    #: explicitly rather than by accident.
+    buffer: Optional[BufferSpec] = None
+    #: The two calibrated pH-drift constants. ``None`` disables the dynamic pH
+    #: state entirely, which is what keeps every B2/B2.1 artefact reproducible.
+    ph_drift: Optional[PhDrift] = None
     #: Free-text matrix descriptor, matched against the B4 threshold matrices.
     matrix: str = "water"
 
@@ -577,6 +588,19 @@ def declare_envelope(
             f"a final pH was supplied but the {lane} lane has no pH trajectory; "
             f"it is ignored."
         )
+    # B2.2: the buffer is an input with a declared default, and its ABSENCE is
+    # an extrapolation rather than a silent assumption.
+    if lane == SULFUR:
+        if spec.process.buffer is None:
+            warnings.append(BUFFER_ABSENT_WARNING)
+        elif spec.process.buffer.is_clamped:
+            warnings.append(
+                "the buffer spec CLAMPS the pH. The dynamic pH state is "
+                "switched off for this run and the declared pH is held for the "
+                "whole hold, which is an assumption about the experiment, not "
+                "a prediction about it."
+            )
+
 
     if reasons:
         return EnvelopeDeclaration(
@@ -627,6 +651,21 @@ def b1_fitted(variant: str = "variant_A_measured_sink") -> Dict[str, Tuple[float
     }
 
 
+def core_ph_drift() -> PhDrift:
+    """
+    B2.2's two FROZEN pH-drift constants, read from the fit report.
+
+    THE ENGINE NEVER CONSTRUCTS ITS OWN. A caller may override the drift on a
+    ProcessSpec (for a sensitivity study), but the shipped default is the
+    frozen calibration and nothing else.
+    """
+    frozen = _read(_B2_FIT_REPORT)["frozen_parameters"]["ph_drift"]
+    return PhDrift(
+        acid_yield=float(frozen["acid_yield_per_sink_event"]),
+        arp_amine_pka=float(frozen["arp_secondary_ammonium_pKa"]),
+    )
+
+
 def core_parameters(lane: str) -> Dict[str, Any]:
     """The full operative parameter set for one lane, from the frozen reports."""
     if lane == TRUNK:
@@ -637,7 +676,9 @@ def core_parameters(lane: str) -> Dict[str, Any]:
         parameters.update(MEASURED_SULFUR)
         parameters.update(
             with_fitted_sulfur(
-                frozen["log10_k_ref_at_145C"], frozen["lumped_formation_Ea_kJ_mol"]
+                frozen["log10_k_ref_at_145C"],
+                frozen["lumped_formation_Ea_kJ_mol"],
+                frozen["decay_Ea_kJ_mol"],
             )
         )
         return parameters
@@ -772,6 +813,18 @@ def _integrate_program(
                     if process.ph_final is not None
                     else None
                 ),
+                # B2.2: the sulfur lane runs the DYNAMIC pH state by default,
+                # on the FROZEN calibration. A caller gets the old clamped
+                # behaviour only by asking for it explicitly with
+                # BufferSpec(kind="clamped") -- never by omission.
+                buffer_spec=(
+                    process.buffer if process.buffer is not None
+                    else DEFAULT_BUFFER
+                ),
+                ph_drift=(
+                    process.ph_drift if process.ph_drift is not None
+                    else core_ph_drift()
+                ),
                 rtol=1e-8,
                 atol=1e-14,
             )
@@ -807,6 +860,13 @@ def _integrate_program(
                 "extrapolation_warnings": list(
                     run.metadata.get("extrapolation_warnings", [])
                 ),
+                # B2.2: the pH is now an OUTPUT of the sulfur lane, not only an
+                # input, so it travels with the segment that produced it.
+                "ph_mode": run.metadata.get("ph_mode"),
+                "ph_in_situ_start": run.metadata.get("ph_initial_in_situ"),
+                "ph_in_situ_end": run.metadata.get("ph_final_in_situ"),
+                "ph_cooled_end": run.metadata.get("ph_final_cooled"),
+                "ph_notes": list(run.metadata.get("ph_notes", [])),
             }
         )
     return state, metadata
@@ -850,6 +910,14 @@ def predict(
 
     metadata["ph"] = float(spec.process.ph)
     metadata["ph_final"] = spec.process.ph_final
+    metadata["buffer"] = (
+        spec.process.buffer.as_dict() if spec.process.buffer is not None
+        else DEFAULT_BUFFER.as_dict()
+    )
+    metadata["ph_drift_constants"] = (
+        spec.process.ph_drift.as_dict() if spec.process.ph_drift is not None
+        else (core_ph_drift().as_dict() if lane == SULFUR else None)
+    )
     metadata["matrix"] = spec.process.matrix
     metadata["thermal_program"] = spec.process.thermal.describe()
 

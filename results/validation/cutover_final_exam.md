@@ -1,15 +1,15 @@
 # Cutover final exam — the kinetic core vs the old lane on the 21 frozen bundles
 
-Generated 2026-08-28 on `audit-remediation` @ `5a9135d` (dirty).
+Generated 2026-08-29 on `audit-remediation` @ `675b909` (dirty).
 
 Pre-registered in [`results/validation/cutover_prereg.md`](cutover_prereg.md), written BEFORE this scorer existed and before any measured value was read. **No parameter changed in this wave.** Pass band: **3.0x** on every level row, taken unchanged from the B2.1 and B3 scorecards.
 
 ## Headline
 
 - **21 bundles, 40 points.** The core ANSWERS **23** and **DECLINES 17**, each declension with a named structural reason.
-- **Core: 5/23 within 3.0x**, median fold error **24.93x**, worst 515.1x.
+- **Core: 5/23 within 3.0x**, median fold error **10.65x**, worst 1475x.
 - **Old lane, all 31 points it scores: 5 within 3.0x**, median **10.86x**, worst 506.4x.
-- **PAIRED SUBSET (n=23), the only apples-to-apples number:** core median **24.93x** vs old median **12.65x**.
+- **PAIRED SUBSET (n=23), the only apples-to-apples number:** core median **10.65x** vs old median **12.65x**.
 
 > Read the paired row, not the two unpaired medians. The old lane emits a number for every point including the ones the core declines; a median over guesses and a median over answers are different quantities. Reporting only the unpaired pair would let the core look good by refusing its hardest points.
 
@@ -20,8 +20,8 @@ Pre-registered in [`results/validation/cutover_prereg.md`](cutover_prereg.md), w
 | `acrylamide_180C` | 7 | 5 | 2 | 1 | 2 | 8.145x | 6.161x |
 | `furan_browning_glc_alanine` | 7 | 0 | 7 | 0 | 2 | --x | 5.658x |
 | `matrix_path_lipid` | 8 | 0 | 8 | 0 | 0 | --x | --x |
-| `sulfur_hofmann1998_145C` | 10 | 10 | 0 | 4 | 0 | 7.091x | 13.77x |
-| `sulfur_yiltirak2026_T_ladder` | 8 | 8 | 0 | 0 | 1 | 290.5x | 16.77x |
+| `sulfur_hofmann1998_145C` | 10 | 10 | 0 | 4 | 0 | 4.163x | 13.77x |
+| `sulfur_yiltirak2026_T_ladder` | 8 | 8 | 0 | 0 | 1 | 262.3x | 16.77x |
 
 ## Every point, old lane vs core
 
@@ -49,24 +49,24 @@ Pre-registered in [`results/validation/cutover_prereg.md`](cutover_prereg.md), w
 | `mp_holdout_glucose_asparagine_180C_30min_water` | 5-Hydroxymethylfurfural (HMF) | ppb | 7000 | 4.313e+04 | 6.161x | **DECLINED** | -- | --x | -- |
 | `mp_holdout_glucose_asparagine_180C_Ye2024` | Acrylamide | umol_per_mol_limiting_precursor | 140.6 | 80.38 | 1.749x | ANSWERED | 7048 | 50.13x | **FAIL** |
 | `mp_holdout_glucose_only_autoclave_121C_Steinha` | 5-Hydroxymethylfurfural (HMF) | ppb | 1.74e+04 | 0 | --x | **DECLINED** | -- | --x | -- |
-| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Furfurylthiol (FFT) | ppb | 7 | 951.2 | 135.9x | ANSWERED | 987.6 | 141.1x | **FAIL** |
-| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Methyl-3-furanthiol (MFT) | ppb | 3 | 1519 | 506.4x | ANSWERED | 28.8 | 9.599x | **FAIL** |
-| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Furfurylthiol (FFT) | ppb | 6 | 343.4 | 57.23x | ANSWERED | 5.976 | 1.004x | PASS |
-| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Methyl-3-furanthiol (MFT) | ppb | 4 | 22.85 | 5.713x | ANSWERED | 64.78 | 16.2x | **FAIL** |
-| `mp_holdout_hofmann1998_ribose_cysteine_145C_20` | 2-Furfurylthiol (FFT) *(re-score)* | ppb | 229 | 1409 | 6.151x | ANSWERED | 5710 | 24.93x | **FAIL** |
-| `mp_holdout_hofmann1998_ribose_cysteine_145C_20` | 2-Methyl-3-furanthiol (MFT) *(re-score)* | ppb | 553 | 2878 | 5.204x | ANSWERED | 32.6 | 16.96x | **FAIL** |
-| `mp_holdout_hofmann1998_ribose_cysteine_145C_20` | 2-Furfurylthiol (FFT) *(re-score)* | ppb | 12 | 624.7 | 52.06x | ANSWERED | 55 | 4.583x | **FAIL** |
-| `mp_holdout_hofmann1998_ribose_cysteine_145C_20` | 2-Methyl-3-furanthiol (MFT) *(re-score)* | ppb | 25 | 316.2 | 12.65x | ANSWERED | 34.68 | 1.387x | PASS |
-| `mp_holdout_hofmann1998_xylose_cysteine_145C_20` | 2-Furfurylthiol (FFT) | ppb | 96 | 1429 | 14.88x | ANSWERED | 109.1 | 1.137x | PASS |
-| `mp_holdout_hofmann1998_xylose_cysteine_145C_20` | 2-Methyl-3-furanthiol (MFT) | ppb | 143 | 713.7 | 4.991x | ANSWERED | 166.8 | 1.167x | PASS |
-| `mp_holdout_ribose_cysteine_buffer_100C_4h_Yilt` | 2-Methyl-3-furanthiol (MFT) | ppb | 6.88 | 8.556 | 1.244x | ANSWERED | 224 | 32.56x | **FAIL** |
-| `mp_holdout_ribose_cysteine_buffer_100C_4h_Yilt` | 2-Furfurylthiol (FFT) | ppb | 1.28 | 15.44 | 12.06x | ANSWERED | 659.3 | 515.1x | **FAIL** |
-| `mp_holdout_ribose_cysteine_buffer_110C_2h_Yilt` | 2-Methyl-3-furanthiol (MFT) | ppb | 3.29 | 15.71 | 4.775x | ANSWERED | 308 | 93.63x | **FAIL** |
-| `mp_holdout_ribose_cysteine_buffer_110C_2h_Yilt` | 2-Furfurylthiol (FFT) | ppb | 1.46 | 33.17 | 22.72x | ANSWERED | 684 | 468.5x | **FAIL** |
-| `mp_holdout_ribose_cysteine_buffer_120C_1h_Yilt` | 2-Methyl-3-furanthiol (MFT) | ppb | 2.4 | 26.07 | 10.86x | ANSWERED | 362 | 150.8x | **FAIL** |
-| `mp_holdout_ribose_cysteine_buffer_120C_1h_Yilt` | 2-Furfurylthiol (FFT) | ppb | 1.68 | 61.28 | 36.48x | ANSWERED | 627.3 | 373.4x | **FAIL** |
-| `mp_holdout_ribose_cysteine_buffer_130C_30min_Y` | 2-Methyl-3-furanthiol (MFT) | ppb | 1.71 | 36.73 | 21.48x | ANSWERED | 404.4 | 236.5x | **FAIL** |
-| `mp_holdout_ribose_cysteine_buffer_130C_30min_Y` | 2-Furfurylthiol (FFT) | ppb | 1.62 | 83.99 | 51.85x | ANSWERED | 558.1 | 344.5x | **FAIL** |
+| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Furfurylthiol (FFT) | ppb | 7 | 951.2 | 135.9x | ANSWERED | 25.57 | 3.652x | **FAIL** |
+| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Methyl-3-furanthiol (MFT) | ppb | 3 | 1519 | 506.4x | ANSWERED | 31.94 | 10.65x | **FAIL** |
+| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Furfurylthiol (FFT) | ppb | 6 | 343.4 | 57.23x | ANSWERED | 28.04 | 4.673x | **FAIL** |
+| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Methyl-3-furanthiol (MFT) | ppb | 4 | 22.85 | 5.713x | ANSWERED | 35.88 | 8.971x | **FAIL** |
+| `mp_holdout_hofmann1998_ribose_cysteine_145C_20` | 2-Furfurylthiol (FFT) *(re-score)* | ppb | 229 | 1409 | 6.151x | ANSWERED | 77.45 | 2.957x | PASS |
+| `mp_holdout_hofmann1998_ribose_cysteine_145C_20` | 2-Methyl-3-furanthiol (MFT) *(re-score)* | ppb | 553 | 2878 | 5.204x | ANSWERED | 5.99 | 92.31x | **FAIL** |
+| `mp_holdout_hofmann1998_ribose_cysteine_145C_20` | 2-Furfurylthiol (FFT) *(re-score)* | ppb | 12 | 624.7 | 52.06x | ANSWERED | 1.589 | 7.552x | **FAIL** |
+| `mp_holdout_hofmann1998_ribose_cysteine_145C_20` | 2-Methyl-3-furanthiol (MFT) *(re-score)* | ppb | 25 | 316.2 | 12.65x | ANSWERED | 22.4 | 1.116x | PASS |
+| `mp_holdout_hofmann1998_xylose_cysteine_145C_20` | 2-Furfurylthiol (FFT) | ppb | 96 | 1429 | 14.88x | ANSWERED | 91.19 | 1.053x | PASS |
+| `mp_holdout_hofmann1998_xylose_cysteine_145C_20` | 2-Methyl-3-furanthiol (MFT) | ppb | 143 | 713.7 | 4.991x | ANSWERED | 361.5 | 2.528x | PASS |
+| `mp_holdout_ribose_cysteine_buffer_100C_4h_Yilt` | 2-Methyl-3-furanthiol (MFT) | ppb | 6.88 | 8.556 | 1.244x | ANSWERED | 262.2 | 38.1x | **FAIL** |
+| `mp_holdout_ribose_cysteine_buffer_100C_4h_Yilt` | 2-Furfurylthiol (FFT) | ppb | 1.28 | 15.44 | 12.06x | ANSWERED | 1888 | 1475x | **FAIL** |
+| `mp_holdout_ribose_cysteine_buffer_110C_2h_Yilt` | 2-Methyl-3-furanthiol (MFT) | ppb | 3.29 | 15.71 | 4.775x | ANSWERED | 382.5 | 116.2x | **FAIL** |
+| `mp_holdout_ribose_cysteine_buffer_110C_2h_Yilt` | 2-Furfurylthiol (FFT) | ppb | 1.46 | 33.17 | 22.72x | ANSWERED | 1632 | 1118x | **FAIL** |
+| `mp_holdout_ribose_cysteine_buffer_120C_1h_Yilt` | 2-Methyl-3-furanthiol (MFT) | ppb | 2.4 | 26.07 | 10.86x | ANSWERED | 428.2 | 178.4x | **FAIL** |
+| `mp_holdout_ribose_cysteine_buffer_120C_1h_Yilt` | 2-Furfurylthiol (FFT) | ppb | 1.68 | 61.28 | 36.48x | ANSWERED | 1083 | 644.5x | **FAIL** |
+| `mp_holdout_ribose_cysteine_buffer_130C_30min_Y` | 2-Methyl-3-furanthiol (MFT) | ppb | 1.71 | 36.73 | 21.48x | ANSWERED | 322.9 | 188.8x | **FAIL** |
+| `mp_holdout_ribose_cysteine_buffer_130C_30min_Y` | 2-Furfurylthiol (FFT) | ppb | 1.62 | 83.99 | 51.85x | ANSWERED | 543.9 | 335.7x | **FAIL** |
 
 ## The declensions, with their reasons
 
@@ -85,8 +85,8 @@ Every claim in `cutover_prereg.md` that this exam can settle, checked against th
 |---|---|---|
 | 23 of the 40 points are in envelope; 17 are declared out | **HELD** | core answered 23, declined 17 |
 | 2 to 7 of the 23 in-envelope points inside band, most likely 4 | **HELD** | 5/23 inside the 3.0x band |
-| core median fold error 10x-100x, and NOT better than the old lane | **HELD** | core median 24.93x vs old paired 12.65x -- the core is WORSE on the paired subset |
-| Yiltirak: UNDER-prediction, worsening as temperature falls | **HALF-FALSIFIED** | DIRECTION WRONG -- the core OVER-predicts at 4/4 rungs, not under. GRADIENT RIGHT -- the worst rung is the 100 C one (515.1x). |
+| core median fold error 10x-100x, and NOT better than the old lane | **HELD** | core median 10.65x vs old paired 12.65x -- the core is BETTER on the paired subset |
+| Yiltirak: UNDER-prediction, worsening as temperature falls | **HALF-FALSIFIED** | DIRECTION WRONG -- the core OVER-predicts at 4/4 rungs, not under. GRADIENT RIGHT -- the worst rung is the 100 C one (1475x). |
 | Lin 2022 (fructose-fed) is the WORST acrylamide point | **FALSIFIED** | Lin fold 8.145x; worst Chang/Ye glucose fold 241.7x. The fructose point is the BEST acrylamide point, not the worst. |
 | acrylamide direction: UNDER-prediction, consistent with Knol 2010 | **FALSIFIED** | every answered acrylamide point OVER-predicts; the module under-predicted its own B3 gating row and over-predicts here by 2.8x-242x |
 
@@ -134,3 +134,4 @@ These points ARE answered, but at conditions the parameters do not license. The 
 - pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.
 - water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis.
 - pH 6.86 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.
+- no buffer was declared for this system, so the pH TRAJECTORY is EXTRAPOLATED: it is computed from water autoprotolysis and the charged solutes alone. If the experiment was in fact buffered, every pH-dependent rate in this run is wrong in the direction of too much drift.

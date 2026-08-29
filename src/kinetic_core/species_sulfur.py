@@ -245,6 +245,25 @@ SULFUR_SPECIES: Tuple[Species, ...] = (
             "either panel is changed by this channel's existence."),
     Species("FRAG_N", "unassigned fragment nitrogen", 0, 1, "pool", False),
     Species("FRAG_S", "unassigned fragment sulfur", 0, 0, "pool", False, sulfur=1),
+    Species("ACID", "titratable organic-acid equivalents from the osone sink",
+            1, 0, "pool", False,
+            "B2.2, NEW, AND IT EXISTS ONLY TO CARRY CHARGE. The deoxyosone "
+            "sink is a LUMP over everything the corpus never identified. "
+            "Martins 2005 measures that PART of the hexose deoxyosone flux "
+            "terminates as formic acid (step 5) and acetic acid (step 8) while "
+            "another part terminates as browning polymer (step 9), so the "
+            "pentose analogue's acid yield is a FRACTION -- and that fraction "
+            "is the single calibrated constant of the pH-trajectory model "
+            "(ph_state.PhDrift.acid_yield), fitted on Amendment 7's three Zhou "
+            "endpoints and on nothing else. "
+            "CARBON CONVENTION, stated because it is a convention: the pool is "
+            "counted in ACID EQUIVALENTS on a FORMIC basis, so it carries ONE "
+            "carbon and the extra carbon of any acetic share stays in FRAG_C. "
+            "Carbon still balances exactly, step by step; what the pool is FOR "
+            "is the charge balance, not the carbon budget. "
+            "It is TERMINAL: nothing in the sulfur network consumes it, so its "
+            "existence cannot change any volatile prediction except through "
+            "the pH.", ),
 )
 
 #: The concatenated table. B1's entries first, in B1's order, so trunk indices
@@ -279,7 +298,7 @@ SITE_POOLS: Tuple[str, ...] = tuple(s.key for s in SULFUR_SPECIES if s.role == "
 #: untested. With no measurement in either direction the conservative encoding
 #: is the one that cannot invent a release rate, so PRB is terminal and the
 #: absence of a release step is recorded here as a KNOWN GAP.
-TERMINAL_POOLS: Tuple[str, ...] = ("OLG", "PRB", "FRAG_N", "FRAG_S")
+TERMINAL_POOLS: Tuple[str, ...] = ("OLG", "PRB", "FRAG_N", "FRAG_S", "ACID")
 
 
 # ---------------------------------------------------------------------------

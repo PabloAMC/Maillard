@@ -1736,6 +1736,88 @@ UNASSIGNED_SINK_KEYS: Tuple[str, ...] = (
     "k_h2s_loss", "k_osone_decay", "k_thiol_decay", "k_thiolate_loss",
 )
 
+#: ===================================================================
+#: B2.2 -- THE DECAY LUMPS GET THEIR OWN BARRIERS, IN TWO NAMED FAMILIES
+#: ===================================================================
+#: B2.1's own diagnosis (results/validation/kinetic_core_b2_1_diagnosis.md sec.
+#: 2a) localised its 140 C failure precisely: giving the `*_decay` lumps the
+#: LUMPED FORMATION Ea fixed eleven low-temperature rows and broke the top of
+#: the ladder, because a sink that accelerates exactly as fast as its source
+#: keeps running at full speed once the pot is precursor-exhausted. Its own
+#: closing sentence names the fix -- "the `*_decay` lumps should not share the
+#: FORMATION barrier. They need their own".
+#:
+#: THE CONSTRAINT ON DOING IT: a barrier can only be given to a family the
+#: DECLARED FIT ROWS can identify, and identification needs the same sink
+#: measured at two temperatures. Exactly two families qualify, and the third
+#: group is deliberately left alone.
+#:
+#:   FAMILY A -- FREE-THIOL SINKS. `k_fft_decay`, `k_mft_decay`,
+#:   `k_thiol_decay` (the shared minor-thiol lump) and `k_thiolate_loss`. ONE
+#:   barrier, shared, because the chemistry is shared: every one of them is the
+#:   loss of a free -SH group, and the corpus resolves them at no temperature
+#:   separately. WHAT IDENTIFIES IT: Kumazawa 2003's pH grid measures
+#:   2-furfurylthiol SURVIVAL at 121 C WITH NO FORMATION PRESENT -- a direct
+#:   read of the sink -- while Hofmann 1998's pH-5 SIDA anchors pin the same
+#:   thiols' NET level at 145 C and Kang's declared 100/120 C rungs pin them in
+#:   a third pot. Three temperatures, one of them formation-free.
+#:
+#:   FAMILY B -- CARBONYL-POOL SINKS. `k_fur_decay`, `k_osone_decay` and
+#:   `k_nf_decay`. ONE barrier, shared, because all three are the thermal
+#:   degradation of a reactive carbonyl in the same pot and no fit row resolves
+#:   them apart. WHAT IDENTIFIES IT: Kang's FURFURAL ladder -- the dossier's
+#:   own "best-behaved Arrhenius series in the table" -- at the declared 100
+#:   and 120 C rungs, against Hofmann 1998 Table 5's in-situ furfural and
+#:   norfuraneol levels at 145 C.
+#:
+#:   NOT GIVEN A BARRIER: `k_dimer_decay` and `k_h2s_loss`. They keep the
+#:   lumped formation Ea, i.e. B2.1's setting, UNCHANGED. Nothing in the fit
+#:   panel measures a disulfide's or a sulfide's decay at two temperatures --
+#:   the dimer rows are single-temperature RATIOS and no H2S is measured
+#:   anywhere in this corpus (kang2026_SI_extraction.md sec. 6a) -- so a free
+#:   barrier for either would be a parameter identified by nothing. Leaving
+#:   them where they are is the conservative direction and it costs no claim.
+#:
+#: NET COST: TWO new fitted numbers. Not nine, and not one per lump.
+DECAY_FAMILY_THIOL_SINK: Tuple[str, ...] = (
+    "k_mft_decay", "k_fft_decay", "k_thiol_decay", "k_thiolate_loss",
+)
+DECAY_FAMILY_CARBONYL_SINK: Tuple[str, ...] = (
+    "k_fur_decay", "k_osone_decay", "k_nf_decay",
+)
+#: The lumps that keep the lumped FORMATION Ea, exactly as in B2.1.
+DECAY_KEYS_ON_FORMATION_EA: Tuple[str, ...] = ("k_dimer_decay", "k_h2s_loss")
+
+DECAY_FAMILIES: Mapping[str, Tuple[str, ...]] = {
+    "thiol_sink": DECAY_FAMILY_THIOL_SINK,
+    "carbonyl_sink": DECAY_FAMILY_CARBONYL_SINK,
+}
+
+DECAY_FAMILY_IDENTIFYING_ROWS: Mapping[str, str] = {
+    "thiol_sink": (
+        "Kumazawa 2003 Fig. 3 (2-furfurylthiol survival at 121 C, formation "
+        "absent, six declared-FIT pH levels) + Hofmann 1998 T1/T2 pH-5 SIDA "
+        "anchors at 145 C + Kang 2026 SI T-S4 MFT/FFT at the declared 100 and "
+        "120 C rungs."
+    ),
+    "carbonyl_sink": (
+        "Kang 2026 SI T-S4 furfural at the declared 100 and 120 C rungs (the "
+        "dossier's own best-behaved Arrhenius series) + Hofmann 1998 T5 "
+        "in-situ furfural and norfuraneol at 145 C + Hofmann 1998 T3/T4 fed "
+        "furfural and fed norfuraneol."
+    ),
+}
+
+#: Search bounds on the two decay barriers. Deliberately as wide as the
+#: formation barrier's, and STARTED FROM RANDOM POINTS INSIDE THEM, so that
+#: landing above or below the formation Ea is a RESULT. The direction matters:
+#: a decay barrier BELOW the formation barrier makes the sinks relatively
+#: slower as temperature rises, which is what B2.1's diagnosis says the 140 C
+#: rung needs; a decay barrier ABOVE it makes them relatively faster, which is
+#: what a flat 100->120 C yield ladder could instead demand. The fit is not
+#: told which, and neither bound is tightened toward either answer.
+DECAY_EA_BOUNDS: Tuple[float, float] = (20.0, 250.0)
+
 #: Kept for the B2 API: every fitted step that consumes rather than forms.
 CONSUMPTION_KEYS: Tuple[str, ...] = NAMED_CHANNEL_KEYS + UNASSIGNED_SINK_KEYS
 
@@ -1807,30 +1889,50 @@ def sulfur_placeholders() -> Dict[str, SulfurParameter]:
                 ("fitted_here", "no_literature_value")
                 + (("no_Ea_available", "temperature_held_fixed")
                    if consumption else ("shares_lumped_formation_Ea",))
+                + ((f"b2_2_decay_family:{decay_family_of(key)}",)
+                   if decay_family_of(key) else ())
             ),
             note=why,
         )
     return out
 
 
+def decay_family_of(key: str) -> Optional[str]:
+    """Which B2.2 decay family a fitted key belongs to, or None."""
+    for family, keys in DECAY_FAMILIES.items():
+        if key in keys:
+            return family
+    return None
+
+
 def with_fitted_sulfur(
-    fitted_log10k: Mapping[str, float], lumped_formation_ea: float
+    fitted_log10k: Mapping[str, float],
+    lumped_formation_ea: float,
+    decay_ea: Optional[Mapping[str, float]] = None,
 ) -> Dict[str, SulfurParameter]:
     """
     Populate the fitted steps from ``{key: log10 k_ref at 145 C}``.
 
-    Formation steps receive ``lumped_formation_ea``; consumption steps receive
-    None, and are therefore held at 145 C with an extrapolation warning
-    wherever they are evaluated. That asymmetry is policy 2, in code.
+    Formation steps receive ``lumped_formation_ea``. A step with a MEASURED
+    barrier receives the measurement and the fit cannot move it. A step in one
+    of the two B2.2 decay families receives that family's own fitted barrier;
+    if ``decay_ea`` is not supplied the families fall back to
+    ``lumped_formation_ea``, which is exactly B2.1's behaviour, so every B2.1
+    artefact stays reproducible. The three NAMED CHANNELS still receive None
+    and are held at 145 C -- that asymmetry is policy 2, unchanged.
     """
     out = sulfur_placeholders()
+    families = dict(decay_ea or {})
     for key, log10k in fitted_log10k.items():
         if key not in out:
             raise KeyError(f"{key!r} is not a fitted sulfur step")
+        family = decay_family_of(key)
         if key in NO_EA_KEYS:
             ea = None
         elif key in MEASURED_EA_OVERRIDES:
             ea = float(MEASURED_EA_OVERRIDES[key])
+        elif family is not None and family in families:
+            ea = float(families[family])
         else:
             ea = float(lumped_formation_ea)
         out[key] = replace(out[key], k_ref=10.0 ** float(log10k), ea_kj_mol=ea)

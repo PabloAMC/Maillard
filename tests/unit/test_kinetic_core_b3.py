@@ -717,8 +717,11 @@ def test_the_flux_budget_accounts_for_every_reaction(parameters):
 def test_network_shape_is_pinned():
     described = describe_acrylamide()
     # B2.1 added four species to the sulfur block (TTCA, BND_F, PRB,
-    # PROT_SS), which the acrylamide state vector inherits unchanged.
-    assert described["n_species"] == 55
+    # PROT_SS) and B2.2 added a fifth (ACID, the titratable organic-acid pool),
+    # all of which the acrylamide state vector inherits unchanged. The
+    # acrylamide lane composes ZERO sulfur reactions, asserted two lines below,
+    # so a wider state vector changes no acrylamide prediction.
+    assert described["n_species"] == 56
     assert described["trunk_reactions"] == 15
     assert described["acrylamide_reactions"] == 16
     assert described["n_reactions"] == 31
