@@ -1,0 +1,18 @@
+{
+  "name": "pea-isolate extrusion, three zones (60 -> 120 -> 150 C), sulfur + lipid co-integrated",
+  "_why": "An extrusion-like program written as the multi-zone process it physically is, rather than collapsed to one isothermal hold. The pea protein isolate is a LIPID CARRIER, not a precursor: its declared charge is ignored (mM of an isolate has no molar basis) and the hydroperoxide pool comes from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. This is the only example that co-integrates two lanes, and the flux map is the clearest way to see how little of the total step flux the sulfur chemistry carries next to lipid scission at these residence times.",
+  "_note_on_the_charge": "The free cysteine and glucose are the added reaction-flavour precursors, not the isolate's own bound amino acids; the core cannot charge a network with an intact protein and says so.",
+  "precursors": {
+    "Pea protein isolate": 1.0,
+    "L-Cysteine": 5.0,
+    "D-Glucose": 20.0
+  },
+  "thermal_segments": [
+    [4.0, 60.0],
+    [1.5, 120.0],
+    [0.5, 150.0]
+  ],
+  "ph": 6.5,
+  "aw": 0.75,
+  "matrix": "pea_protein_isolate"
+}

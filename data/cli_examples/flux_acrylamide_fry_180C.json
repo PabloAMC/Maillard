@@ -1,0 +1,12 @@
+{
+  "name": "asparagine + glucose, 180 C / 4 min (the acrylamide lane)",
+  "_why": "The third lane, and a deliberately uncomfortable example: the acrylamide lane's measured skill on its gating rows is 0/4, and the cutover exam found its TIME SHAPE inverted (a source measures acrylamide rising 28 -> 1459 ppb between 10 and 30 min; the core predicts it falling). The flux map is where you can see why -- look at how much material the elimination channels carry relative to formation. A picture of a model failing in a located way is more useful than no picture.",
+  "precursors": {
+    "L-Asparagine": 10.0,
+    "D-Glucose": 10.0
+  },
+  "thermal_segments": [[4.0, 180.0]],
+  "ph": 6.8,
+  "aw": 0.35,
+  "matrix": "water"
+}

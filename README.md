@@ -1485,6 +1485,7 @@ Pea and soy have the strongest literature backing; others are directional.
 | If you are a…                                          | Start with                                                                                                                                 |
 | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Anyone, first command**                        | `python scripts/maillard.py compare --template` → the [model card](#when-to-trust-the-predictions)                                             |
+| **Flavour scientist** — using the tool           | [USING_THE_TOOL.md](docs/USING_THE_TOOL.md) — three worked examples, how to read intervals / NOT-RESOLVED / refusals, and what the model is explicitly *not* for |
 | **Food scientist** — first run                   | [QUICKSTART.md](docs/guides/QUICKSTART.md)                                                                                                    |
 | **Scientist** — understanding the output         | [GLOSSARY.md](docs/guides/GLOSSARY.md)                                                                                                        |
 | **Reviewer** — auditing what is verified         | [VALIDATION_CONTRACT.md](docs/reference/VALIDATION_CONTRACT.md) → [results/validation/](results/validation/)                                    |

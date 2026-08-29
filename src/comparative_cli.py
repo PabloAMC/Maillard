@@ -813,10 +813,26 @@ def spec_to_core(spec: Mapping[str, Any]):
 
 
 def _core_targets(spec: Mapping[str, Any], targets: Optional[Sequence[str]]):
+    """
+    Which compounds to ask the core for.
+
+    Build Wave V1 adds the middle branch: a spec may name ``targets:``
+    explicitly. That is a usability fix with a governance benefit -- before it,
+    a user could not ask "what does this model say about HMF here?", so the
+    engine's most informative output (a NAMED REFUSAL with the reason) was
+    unreachable from the front door. An explicitly named target that the core
+    cannot represent now produces that refusal, which is the point of having
+    written the refusals.
+    """
     from src.kinetic_core.engine import default_targets_for
 
     if targets:
         return list(targets)
+    declared = spec.get("targets")
+    if declared:
+        if isinstance(declared, str):
+            return [declared]
+        return [str(t) for t in declared]
     return list(default_targets_for(dict(spec["precursors"])))
 
 
@@ -950,11 +966,72 @@ def compare_core(
 
 def _render_declaration(declaration: Mapping[str, Any], out: List[str]) -> None:
     state = declaration.get("state", "unknown")
-    out.append(f"  ENVELOPE: {state.upper()}   lane: {declaration.get('lane') or '-'}")
+    lanes = declaration.get("lanes") or (
+        [declaration["lane"]] if declaration.get("lane") else []
+    )
+    out.append(
+        f"  ENVELOPE: {state.upper()}   lane: "
+        + (" + ".join(str(lane) for lane in lanes) if lanes else "NONE RESOLVED")
+    )
+    mapped = dict(declaration.get("mapped_precursors") or {})
+    if mapped:
+        out.append(
+            "  mapped precursors: "
+            + ", ".join(f"{key}={value:g} mM" for key, value in sorted(mapped.items()))
+        )
     for reason in declaration.get("reasons") or []:
         out.append(_wrap(f"REFUSED -- {reason}", indent="    ! "))
     for warning in declaration.get("warnings") or []:
         out.append(_wrap(f"declared extrapolation -- {warning}", indent="    ~ "))
+
+
+def envelope_error_text(declaration: Mapping[str, Any]) -> str:
+    """
+    The out-of-envelope message, naming the missing lane and the missing species.
+
+    Build Wave V1. The engine already writes an excellent reason for every
+    refusal; what it does not do is put the two questions a bench scientist
+    actually asks -- "which lane could not be resolved?" and "which of MY inputs
+    was the problem?" -- at the top. This composes both from the
+    ``EnvelopeDeclaration`` itself, reusing its text verbatim and inventing
+    nothing.
+    """
+    lines: List[str] = []
+    lanes = declaration.get("lanes") or (
+        [declaration["lane"]] if declaration.get("lane") else []
+    )
+    lines.append(
+        "OUT OF ENVELOPE -- no number is emitted. "
+        + (
+            f"Lane resolved: {' + '.join(str(lane) for lane in lanes)}."
+            if lanes
+            else "NO LANE could be resolved for this request."
+        )
+    )
+    unmapped = list(declaration.get("unmapped_precursors") or [])
+    if unmapped:
+        lines.append(
+            "  missing species (precursors the core cannot name): "
+            + ", ".join(str(u) for u in unmapped)
+        )
+    unrepresented = declaration.get("unrepresented_targets") or []
+    if unrepresented:
+        names = [
+            (entry.get("compound") if isinstance(entry, Mapping) else entry[0])
+            for entry in unrepresented
+        ]
+        lines.append(
+            "  missing species (targets the core cannot name): "
+            + ", ".join(str(n) for n in names)
+        )
+    for reason in declaration.get("reasons") or []:
+        lines.append(_wrap(f"declared reason -- {reason}", indent="  "))
+    lines.append(
+        "  A refusal is an output, not a failure. Run "
+        "`python scripts/maillard.py explain <compound>` to see what the core "
+        "does carry for a compound, and why."
+    )
+    return "\n".join(lines)
 
 
 def render_predict_core_text(payload: Mapping[str, Any]) -> str:
@@ -1010,6 +1087,18 @@ def render_compare_core_text(payload: Mapping[str, Any]) -> str:
         out.append("")
         return "\n".join(out)
 
+    # Build Wave V1. The declarations used to be printed ONLY when the two arms
+    # could not be compared, so a successful comparison silently dropped every
+    # declared extrapolation the engine had attached to it -- the buffer that
+    # was never declared, the lipid rate anchored 12 decades away. A warning
+    # that appears only on failure is a warning nobody reads.
+    for label, key in (("A", "declaration_a"), ("B", "declaration_b")):
+        declaration = comparison.get(key) or {}
+        if declaration:
+            out.append(f"  arm {label}:")
+            _render_declaration(declaration, out)
+            out.append("")
+
     ratios = comparison.get("ratios") or {}
     rows = list(ratios.get("rows") or [])
     band = ratios.get("reliability_band_x")
@@ -1018,6 +1107,18 @@ def render_compare_core_text(payload: Mapping[str, Any]) -> str:
         f"above the same-sample dispersion band"
         + (f" ({band:.3g}x)" if isinstance(band, (int, float)) else "")
     )
+    # API FEEDBACK (V1): matrix_oav.compare_formulations sets
+    # within_reliability_band=False for an UNDEFINED ratio (one arm at exactly
+    # zero), so those rows are counted in n_resolved. The payload is left alone
+    # -- it is the science layer's own number -- but the count is qualified
+    # here, because "6 of 6 resolve" reads as six claims when two of them are
+    # not ratios at all.
+    undefined = sum(1 for row in rows if str(row.get("direction")) == "undefined")
+    if undefined:
+        out.append(
+            f"  ...of which {undefined} are UNDEFINED (one arm at exactly zero) and "
+            f"resolve nothing: see the 'resolved' column, not this count."
+        )
     out.append("")
     out.append(f"  {'compound':<38} {'A/B':>12} {'direction':<14} resolved")
     out.append("  " + "-" * 88)
@@ -1031,8 +1132,17 @@ def render_compare_core_text(payload: Mapping[str, Any]) -> str:
         else:
             ratio_text = f"{ratio:.3g}x"
         # 'within the band' means NOT resolved -- a ratio inside the dispersion
-        # band is reported as unresolved rather than as a small effect.
-        resolved = "no -- inside band" if row.get("within_reliability_band") else "yes"
+        # band is reported as unresolved rather than as a small effect. An
+        # UNDEFINED ratio (one arm at zero) is neither: V1 stops labelling it
+        # 'yes', which read as a resolved claim about a quantity that does not
+        # exist.
+        if str(row.get("direction")) == "undefined" or not isinstance(ratio, (int, float)) \
+                or ratio != ratio or ratio in (float("inf"), float("-inf")) or ratio == 0.0:
+            resolved = "n/a -- undefined"
+        elif row.get("within_reliability_band"):
+            resolved = "no -- inside band"
+        else:
+            resolved = "yes"
         out.append(
             f"  {str(row.get('compound', '?'))[:37]:<38} {ratio_text:>12} "
             f"{str(row.get('direction', '-')):<14} {resolved}"

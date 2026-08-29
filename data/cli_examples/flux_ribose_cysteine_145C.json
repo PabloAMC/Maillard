@@ -1,0 +1,12 @@
+{
+  "name": "cysteine + ribose, 145 C / 20 min, pH 5.0 (the sulfur lane's best-measured point)",
+  "_why": "145 C for 20 min at pH 5.0 in water is the condition of the Hofmann & Schieberle 1998 stable-isotope-dilution rows, which are the sulfur branch's only primary-source-verified absolute anchors. It is also where the kinetic core scores its best out-of-sample result anywhere (4/10 within 3x). Reading the flux map here shows which of the six MFT/FFT formation channels the model actually leans on at a reaction-flavour cook temperature.",
+  "precursors": {
+    "L-Cysteine": 10.0,
+    "D-Ribose": 10.0
+  },
+  "thermal_segments": [[20.0, 145.0]],
+  "ph": 5.0,
+  "aw": 0.98,
+  "matrix": "water"
+}
