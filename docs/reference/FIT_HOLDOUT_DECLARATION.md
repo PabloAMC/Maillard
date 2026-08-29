@@ -433,3 +433,130 @@ consumed-into-ring route.
    bundle's SOURCE PAPER with per-field provenance notes — measured values,
    compound lists, and roles remain byte-identical. The exam is then reported
    BOTH WAYS (buffer-completed and as-was) in the same artifact, permanently.
+
+## Amendment 10 — 2026-08-29 (Wave B6, the lipid-oxidation module: disclosure + two findings)
+
+Written by the build wave itself, additive only. **No dataset changes columns.**
+
+1. **EXPOSURE DISCLOSURE — the α-tocopherol arms are now `seen_diagnostic`,
+   permanently.** Frankel 1989 prints the zero-additive column (FIT) and the
+   α-tocopherol / 1,4-cyclohexadiene columns (HOLD-OUT) **in the same table
+   rows** of Tables 1 and 2, and states the hold-out result in prose in its
+   ABSTRACT. Extracting the FIT column from `data/articles/frankel1989.pdf`
+   without seeing the hold-out column is not possible. B6's builder saw them.
+   Under the Amendment 9 clause 1 precedent (the Kang 140 °C row) the arms are
+   demoted to **seen-diagnostic and may never gate**. The mitigation adopted is
+   STRUCTURAL rather than procedural: B6's hydrogen-donor term has **no fitted
+   parameter and no stored value**, so its two-sided prediction is a
+   monotonicity theorem over the whole donor range and there was nothing to tune
+   toward the seen numbers even in principle. A literal-grep firewall test
+   (`tests/unit/test_kinetic_core_b6.py`) asserts that no hold-out-only literal
+   appears in the lipid package or in the frozen fit report.
+   **Unaffected and still GATING:** the Frankel **nonanal absence** — a
+   structural zero fixed by molecular topology, not by any number in the paper.
+   **Never opened:** the two frozen Bi 2020 bundles, reached only through
+   `scripts/generators/generate_cutover_final_exam.py`.
+   The 1,4-cyclohexadiene arms, unassigned in D.6, are hereby recorded as
+   **HOLD-OUT (seen_diagnostic)** — the conservative direction; nothing held out
+   was ever fit.
+
+2. **DEFECT FIXED: the cutover exam never scored the four matrix_path bundles.**
+   `generate_cutover_final_exam.py` read a measured value from
+   `holdout_targets[c].target_value` and then from
+   `reference_volatiles[c].conc_ppb`. The four matrix_path bundles carry neither:
+   their value is in `measured_volatiles[c].conc_ppb`. Every matrix_path point
+   therefore returned `measured = None` and was reported **with no fold error in
+   BOTH lanes** — the two scorers shared the bug. It went unnoticed because the
+   core REFUSED all four bundles before B6, so a missing referee cost nothing
+   visible. This is a schema-reading fix with the same standing as Amendment 9
+   clause 2's buffer-field completion: defensible with no reference to any
+   hold-out value. **Consequence: the OLD lane's reported numbers move too**, and
+   its matrix-path performance is out of sample for the first time.
+
+3. **REPORTED FOR ORCHESTRATOR RULING — two benchmark-record problems B6 found
+   and did NOT act on unilaterally:**
+   * `bi_2020_raw_pea_hexanal` and `liu_2023_ppi_offnote_baseline` record
+     **40 °C for 10 min**. That is an ambient headspace measurement of an
+     as-received isolate, so the measured hexanal is the isolate's **accumulated
+     storage oxidation**, not a process output. Scoring a formation model
+     against an inventory measurement is a category error of the same class as
+     Brewer 1995's `dose_added_pre_cook` reclassification (D.6 Module 7).
+     Candidate remedy: reclassify both as `inventory_not_process` and score them
+     only against a model that carries an ambient-storage formation term.
+   * Those two bundles declare **identical** conditions (40 °C, 10 min, pH 6.0,
+     a_w 0.95) and **identical** precursors (`Pea Protein Isolate`), yet their
+     measured hexanal differs **9.0×**. Whatever separates the two samples is not
+     written down, so no model reading only the recorded fields can distinguish
+     them. This is a record defect, not a model defect.
+
+4. **New declared gap, named:** *the rate of lipid-hydroperoxide decomposition at
+   cooking temperature.* B6 carries it as a bounded, labelled INPUT (Schroën
+   2022's 25 °C, hand-fitted, no-SD, lumped `k4`, with the authors' own Q10 =
+   2–3 as an explicit assumption with a band). No Q10 number is baked into any
+   stated constant, and every lipid prediction returns
+   `in_envelope_extrapolated`. Re-affirms `k3` §C.9 and research-round-3 §F.3.
+
+## Amendment 11 — 2026-08-29 (orchestrator rulings on Wave B6's flags)
+
+1. The two 40 C / 10 min matrix-path bundles (bi_2020_raw_pea,
+   liu_2023_ppi_offnote) measure the AMBIENT HEADSPACE INVENTORY of an
+   as-received isolate, not the output of a thermal process — scoring a
+   formation model against them is the Brewer-1995 category error class.
+   RULING: they stay in the exam table (frozen, untouched) but carry
+   category_mismatch: inventory_measurement and are excluded from gating
+   aggregates, reported separately. The two 160 C process points (3.7x, 8.7x,
+   both inside interval) are the lane's real exam and gate normally.
+2. RECORD DEFECT, no edit: bi_2020_raw_pea and liu_2023_ppi_offnote declare
+   identical conditions and precursors yet differ 9.0x in measured hexanal —
+   consistent with the corpus's same-sample 10-23x dispersion finding; the
+   pair is itself evidence for interval-only absolute reporting.
+3. Ratified: Wave B6's self-recorded Amendment 10 (Frankel tocopherol arms
+   demoted to seen_diagnostic — the paper prints FIT and hold-out columns in
+   the same rows); the two-sided signature HOLDING for every donor split in
+   (0,1) is recorded as structural corroboration, not a scored pass.
+4. Adopted finding: the historic 36x/1304x hexanal OVER-prediction was a
+   FAST-lane artifact (unbounded extrapolation from the invented 0.37 share),
+   not lipid chemistry — the measured-slate lane UNDER-predicts. The matrix
+   gap's sign was the old lane's, not the food's.
+
+## Amendment 12 — 2026-08-29 (K5a/K5b roles: HMF + DMHF clusters; corrections to Amendment 8)
+
+Per-dataset detail in k5a_hmf_synthesis.md / k5b_dmhf_synthesis.md, adopted as
+proposed except as amended. Binding highlights:
+
+DMHF (K5b): blank1997's 39 SIDA cells = FIT (pentose formation edge — the
+channel's calibration). CORRECTIONS to Amendment 8's blank1996 roles (a GC-O
+dash is a non-detection, not a zero): the HEMF alanine switch is demoted to a
+~10-25x preference test; "DMHF from pentose alone" is SIGN-REVERSED into a
+ceiling (<0.01 ug/mmol). Corroborated: 70/30 Strecker split (73/27 by the
+non-isotopic null control). Wang & Ho: MGO edge structurally separated
+(no shared intermediate with the intact-skeleton edge; resolves Poisson's
+open b-vs-c); its level is digitised — prior only. NAMED HOLD-OUTS:
+apriyantono1993 held-vs-drifting pH pair scored as ONE paired log-ratio test
+(the corpus's only pH-trajectory pair — overturns round-3's "ratio-only"
+verdict: Table 1 is absolute nmol/mol xylose, and it CLOSES the declared
+no-pentose-furfural-yields gap, 274x pH effect); shu1988-vs-wang2008 paired
+sink/net pH test. PROHIBITED: any thiol_addition_dmhf fit to Shu's 6.0% GC
+area. Edge C (cysteine sink) has no magnitude — carried structural.
+
+HMF (K5a): Kocadagli glucose system (Kocada2016.pdf = jafc.6b01862 — NOTE THE
+FILE SWAP) = primary FIT; its NaCl arm + Gursul's 27 C zero-accumulation row =
+sharpest hold-outs. Hamzalioglu 2018 (DOI 10.1016/j.foodchem.2017.07.131) =
+the HMF SINK: first second-order HMF+Cys constants (3.95/5.15/23.3 M^-1 day^-1
+at 5/25/50 C, pH 3.5) + HMF self-degradation + a SAME-METHOD matrix-vs-water
+rate-ratio pair (Cys selectivity 11.4x water -> 1.2x coffee) — the class
+previously declared nonexistent. Use the dossier's REFIT prefactors, not the
+published ones (2/6 reproduce; third confirmed real-Ea-bad-prefactor case).
+REFUSED ENTIRELY: Gursul Aktag Table 2 Ea (0/43 reproduce; six mathematically
+underivable). Agcam 2022 = only internally reproducible Ea table (9/9) but
+uniresponse synthetic juice — priors with scope flags. The fructose-limb vs
+3-DG question is RESOLVED AS TWO QUANTITIES: fructose wins on flux (model
+discrimination, unmeasured intermediate), 3-DG wins on published constants
+(measured species) — the node design carries both parallel sources + one
+sink, branch fraction matrix-dependent, never hard-coded.
+
+PROCESS: Kocadagli2016.pdf (wheat flour) has a cipher-garbled text layer —
+greps CANNOT see its content (round-3's negative sweep was blind to it); the
+dossier publishes the solved glyph map. QUEUED for the quality pass: audit
+every A_value in the corpus against refits from source k-tables (three
+confirmed cases of correct Ea bolted to defective prefactors).
