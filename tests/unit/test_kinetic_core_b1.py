@@ -10,6 +10,7 @@ guarantees, the hold-out firewall, and one pinned Martins-condition regression.
 from __future__ import annotations
 
 import math
+import re
 from pathlib import Path
 
 import numpy as np
@@ -296,11 +297,45 @@ def test_fitted_steps_are_labelled_as_fitted():
 def test_extrapolation_beyond_the_measured_window_is_flagged(parameters):
     run = integrate(parameters, 473.15, INITIAL, [0.0, 1.0])
     warnings = run.metadata["extrapolation_warnings"]
-    assert warnings, "200 C is outside every parameter's 80-120 C window"
-    assert all("measured over 80-120 C" in line for line in warnings)
+    assert warnings, "200 C is outside every parameter's measured window"
+    # B7 CHANGE, and it is the warning getting MORE honest rather than less.
+    # Through B6 every operative trunk constant came from Martins' 80-120 C
+    # study, so every warning line read "measured over 80-120 C". The furanic
+    # channel adds constants measured over 160-200 C (Kocadagli's melt),
+    # 5-50 C (Hamzalioglu's sink) and at a SINGLE temperature (Blank 90 C,
+    # Wang & Ho 120 C, Shu & Ho 160 C), so each line must now name ITS OWN
+    # parameter's window. Asserting a single shared window would have hidden
+    # exactly the fact that the trunk is no longer parameterised over one
+    # temperature range.
+    assert all(
+        re.search(r"measured over -?[\d.]+--?[\d.]+ C", line)
+        or re.search(r"measured over [\d.]+-[\d.]+ C", line)
+        for line in warnings
+    ), warnings
+    assert any("measured over 80-120 C" in line for line in warnings)
+    # ... and at least one line names a DIFFERENT window from Martins', which
+    # is the fact the old single-window assertion would now hide. (Kocadagli's
+    # 160-200 C constants raise no warning at 200 C precisely because 200 C is
+    # INSIDE their window -- which is itself the point.)
+    assert any("measured over 80-120 C" not in line for line in warnings)
 
+    # B7 CHANGE, and it is the honest direction. Through B6 a run at 100 C
+    # raised NO warning, because every operative constant came from Martins'
+    # 80-120 C study and 100 C sits in the middle of it. The furanic channel's
+    # eleven constants come from an amine-free melt at 160-200 C, from a
+    # 5-50 C storage study and from four SINGLE-TEMPERATURE experiments, so a
+    # 100 C run is now an extrapolation FOR THEM and says so. Every warning
+    # must be a furanic one; Martins' own constants must still be silent.
     inside = integrate(parameters, 373.15, INITIAL, [0.0, 1.0])
-    assert inside.metadata["extrapolation_warnings"] == []
+    inside_warnings = inside.metadata["extrapolation_warnings"]
+    assert inside_warnings, "the furanic constants are out of window at 100 C"
+    furanic_keys = {
+        "k_glc_tdg", "k_tdg_ddg", "k_ddg_hmf", "k_fru_int", "k_int_hmf",
+        "k_fru_odg", "k_tdg_mgo", "k_hmf_self", "k_odg_af", "k_af_dmhf",
+        "k_mgo_dmhf", "k_dpo_af", "k_hmf_cys", "k_dmhf_h2s",
+    }
+    for line in inside_warnings:
+        assert line.split(":", 1)[0] in furanic_keys, line
 
 
 # ---------------------------------------------------------------------------
@@ -377,15 +412,36 @@ def test_martins_condition_regression(parameters):
     run = integrate(parameters, 373.15, INITIAL, [0.0, 120.0])
     end = {key: float(run.series(key)[-1])
            for key in ("Glc", "Fru", "Gly", "AMA", "TDG", "ODG", "MGO", "FA", "AA")}
+    # B7 RE-PINNED, and the change is explained rather than absorbed. The
+    # furanic channel hangs on the TRUNK and four of its eleven steps put a new
+    # drain on a B1-fitted species: Fru -> Int, 3-DG -> 3,4-DG, 3-DG -> MGO and
+    # Glc -> 3-DG. B1 is NOT refit -- this wave has no licence to move its four
+    # constants -- so the trunk's trajectory moves a little and the pins move
+    # with it. Every movement is under 6 %:
+    #
+    #   Glc 126.32 -> 125.757 (-0.45 %)   Fru 18.04  -> 16.992  (-5.8 %)
+    #   Gly 175.38 -> 175.603 (+0.13 %)   AMA 11.74  -> 11.7245 (-0.13 %)
+    #   TDG 0.747  -> 0.72663 (-2.7 %)    ODG 0.1274 -> 0.12694 (-0.36 %)
+    #   MGO 3.416  -> 3.4832  (+2.0 %)    FA  2.504  -> 2.4548  (-2.0 %)
+    #   AA  11.25  -> 11.2109 (-0.35 %)
+    #
+    # FRUCTOSE MOVES MOST, which is the signature this change should have:
+    # k_fru_int is the largest of the four new drains and fructose is its
+    # parent. results/validation/kinetic_core_b7_prereg.md sec. 1.3 sized the
+    # fructose drain at ~12 % of its flux at 100 C before this was measured.
     expected = {
-        "Glc": 126.32, "Fru": 18.04, "Gly": 175.38, "AMA": 11.74,
-        "TDG": 0.747, "ODG": 0.1274, "MGO": 3.416, "FA": 2.504, "AA": 11.25,
+        "Glc": 125.757, "Fru": 16.992, "Gly": 175.603, "AMA": 11.7245,
+        "TDG": 0.72663, "ODG": 0.12694, "MGO": 3.4832, "FA": 2.4548,
+        "AA": 11.2109,
     }
     for key, value in expected.items():
         assert end[key] == pytest.approx(value, rel=2e-3), f"{key}: {end[key]}"
 
-    assert float(run.melanoidin_mmol_L()[-1]) == pytest.approx(10.34, rel=2e-3)
-    assert float(run.melanoidin_c_over_n()[-1]) == pytest.approx(9.51, rel=2e-3)
+    # B7: 10.34 -> 10.1493 (-1.8 %) and C/N 9.51 -> 9.5698 (+0.6 %). The pool
+    # gains carbon relative to nitrogen because r_tdg_mgo adds a second,
+    # amine-free methylglyoxal source and r_mgo_mel is the carbon-only channel.
+    assert float(run.melanoidin_mmol_L()[-1]) == pytest.approx(10.1493, rel=2e-3)
+    assert float(run.melanoidin_c_over_n()[-1]) == pytest.approx(9.5698, rel=2e-3)
 
 
 def test_melanoidin_c_over_n_starts_at_the_step_9_stoichiometry(parameters):

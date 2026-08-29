@@ -3,57 +3,57 @@
   "both_ways": {
     "as_was": {
       "all_points": {
-        "best_fold_error": 2.0477407945913852,
-        "geometric_mean_fold": 47.383384831748664,
-        "median_abs_log10_error": 1.4910717713989556,
-        "median_fold_error": 31.218924601260703,
-        "n": 34,
+        "best_fold_error": 2.7697767906379314,
+        "geometric_mean_fold": 69.1914865662501,
+        "median_abs_log10_error": 1.6732277155858921,
+        "median_fold_error": 47.122434081770095,
+        "n": 27,
         "worst_fold_error": 33391.73597895205
       },
       "paired": {
-        "best_fold_error": 2.0477407945913852,
-        "geometric_mean_fold": 49.40571333997651,
-        "median_abs_log10_error": 1.5450524746976524,
-        "median_fold_error": 35.079425696985076,
-        "n": 33,
+        "best_fold_error": 2.7697767906379314,
+        "geometric_mean_fold": 69.1914865662501,
+        "median_abs_log10_error": 1.6732277155858921,
+        "median_fold_error": 47.122434081770095,
+        "n": 27,
         "worst_fold_error": 33391.73597895205
       },
-      "scored": 34,
-      "within_band": 3
+      "scored": 27,
+      "within_band": 2
     },
     "buffer_completed": {
       "all_points": {
-        "best_fold_error": 2.0477407945913852,
-        "geometric_mean_fold": 43.2944893201303,
-        "median_abs_log10_error": 1.6040173270044316,
-        "median_fold_error": 40.230541614006285,
-        "n": 34,
+        "best_fold_error": 2.3763832670033147,
+        "geometric_mean_fold": 60.95867746621138,
+        "median_abs_log10_error": 1.7001402830195138,
+        "median_fold_error": 50.1349150063831,
+        "n": 27,
         "worst_fold_error": 33391.73597895205
       },
       "paired": {
-        "best_fold_error": 2.0477407945913852,
-        "geometric_mean_fold": 45.01901966521474,
-        "median_abs_log10_error": 1.625650035306526,
-        "median_fold_error": 42.23281551627133,
-        "n": 33,
+        "best_fold_error": 2.3763832670033147,
+        "geometric_mean_fold": 60.95867746621138,
+        "median_abs_log10_error": 1.7001402830195138,
+        "median_fold_error": 50.1349150063831,
+        "n": 27,
         "worst_fold_error": 33391.73597895205
       },
-      "scored": 34,
-      "within_band": 4
+      "scored": 27,
+      "within_band": 3
     },
     "by_family": {
       "acrylamide_180C": {
         "as_was_in_band": 1,
-        "as_was_median_fold": 6.323051267256421,
+        "as_was_median_fold": 8.14453657237207,
         "completed_in_band": 1,
-        "completed_median_fold": 6.323051267256421,
+        "completed_median_fold": 8.14453657237207,
         "points": 7
       },
       "furan_browning_glc_alanine": {
-        "as_was_in_band": 1,
-        "as_was_median_fold": 11.929988259674973,
-        "completed_in_band": 1,
-        "completed_median_fold": 11.929988259674973,
+        "as_was_in_band": 0,
+        "as_was_median_fold": null,
+        "completed_in_band": 0,
+        "completed_median_fold": null,
         "points": 7
       },
       "matrix_path_lipid": {
@@ -65,16 +65,16 @@
       },
       "sulfur_hofmann1998_145C": {
         "as_was_in_band": 1,
-        "as_was_median_fold": 17.150380331865065,
+        "as_was_median_fold": 17.150380324297938,
         "completed_in_band": 2,
-        "completed_median_fold": 11.47732133297033,
+        "completed_median_fold": 12.214748158194354,
         "points": 10
       },
       "sulfur_yiltirak2026_T_ladder": {
         "as_was_in_band": 0,
-        "as_was_median_fold": 444.5092123505325,
+        "as_was_median_fold": 444.5091964417646,
         "completed_in_band": 0,
-        "completed_median_fold": 193.46967915486215,
+        "completed_median_fold": 193.4696788276824,
         "points": 8
       }
     },
@@ -82,10 +82,10 @@
     "old_lane_is_identical_in_both_columns": "THE OLD LANE HAS NO pH STATE AND NO BUFFER INPUT AT ALL, so its numbers are BY CONSTRUCTION the same in both columns. That is why the old-lane comparison is reported against BOTH core columns rather than recomputed: the comparison changes because the CORE moves, never because the old lane does.",
     "old_lane_paired": {
       "best_fold_error": 1.1197232824869903,
-      "geometric_mean_fold": 13.144648543947154,
-      "median_abs_log10_error": 1.0359824965004563,
-      "median_fold_error": 10.86381837964712,
-      "n": 33,
+      "geometric_mean_fold": 16.79657576562487,
+      "median_abs_log10_error": 1.1020422421902207,
+      "median_fold_error": 12.648593695999491,
+      "n": 27,
       "worst_fold_error": 2748.4338151666816
     },
     "rows_improved_by_the_buffer": 13,
@@ -97,19 +97,19 @@
   "bundle_count": 21,
   "by_family": {
     "acrylamide_180C": {
-      "answered": 7,
-      "core_median_fold": 6.323051267256421,
+      "answered": 5,
+      "core_median_fold": 8.14453657237207,
       "core_within_band": 1,
-      "declined": 0,
+      "declined": 2,
       "old_median_fold": 6.161180779498496,
       "old_within_band": 2,
       "points": 7
     },
     "furan_browning_glc_alanine": {
-      "answered": 5,
-      "core_median_fold": 11.929988259674973,
-      "core_within_band": 1,
-      "declined": 2,
+      "answered": 0,
+      "core_median_fold": null,
+      "core_within_band": 0,
+      "declined": 7,
       "old_median_fold": 5.657559362149902,
       "old_within_band": 2,
       "points": 7
@@ -125,7 +125,7 @@
     },
     "sulfur_hofmann1998_145C": {
       "answered": 10,
-      "core_median_fold": 11.47732133297033,
+      "core_median_fold": 12.214748158194354,
       "core_within_band": 2,
       "declined": 0,
       "old_median_fold": 13.765760288060605,
@@ -134,7 +134,7 @@
     },
     "sulfur_yiltirak2026_T_ladder": {
       "answered": 8,
-      "core_median_fold": 193.46967915486215,
+      "core_median_fold": 193.4696788276824,
       "core_within_band": 0,
       "declined": 0,
       "old_median_fold": 16.772164231776266,
@@ -144,7 +144,7 @@
   },
   "findings": [
     {
-      "body": "On the 33 points both lanes answer, the core's median fold error is **42.23x** against the old lane's **10.86x**, i.e. about **3.887x worse on median accuracy**. The pre-registration allowed for this outcome and said it in advance ('the core is not expected to beat the old lane on median accuracy in this exam'), so this is a confirmed expectation rather than a surprise \u2014 but it is a negative result and it is the first thing a reader should be told.\n\nWhat the core buys instead is the 17 declensions and the localisation of the failures. The old lane emitted a number for all 8 matrix-path lipid points and all 7 HMF/DMHF/furfural points; every one of those numbers came from a route the kinetic core does not have, and 5 of the old lane's 5 in-band hits sit in exactly those families. Whether that trade is worth making is a judgement, and the numbers for making it are both in the family table above.",
+      "body": "On the 27 points both lanes answer, the core's median fold error is **50.13x** against the old lane's **12.65x**, i.e. about **3.964x worse on median accuracy**. The pre-registration allowed for this outcome and said it in advance ('the core is not expected to beat the old lane on median accuracy in this exam'), so this is a confirmed expectation rather than a surprise \u2014 but it is a negative result and it is the first thing a reader should be told.\n\nWhat the core buys instead is the 17 declensions and the localisation of the failures. The old lane emitted a number for all 8 matrix-path lipid points and all 7 HMF/DMHF/furfural points; every one of those numbers came from a route the kinetic core does not have, and 5 of the old lane's 5 in-band hits sit in exactly those families. Whether that trade is worth making is a judgement, and the numbers for making it are both in the family table above.",
       "title": "The core is WORSE than the old lane on the paired subset, and that is the headline"
     },
     {
@@ -177,17 +177,17 @@
   "prereg_checks": [
     {
       "claim": "23 of the 40 points are in envelope; 17 are declared out",
-      "detail": "core answered 34, declined 6",
+      "detail": "core answered 27, declined 13",
       "outcome": "MISSED"
     },
     {
       "claim": "2 to 7 of the 23 in-envelope points inside band, most likely 4",
-      "detail": "4/34 inside the 3.0x band",
+      "detail": "3/27 inside the 3.0x band",
       "outcome": "HELD"
     },
     {
       "claim": "core median fold error 10x-100x, and NOT better than the old lane",
-      "detail": "BAND HALF: core median over all scored points 40.23x, inside the 10x-100x band. NOT-BETTER HALF: on the paired subset the core is 42.23x against the old lane's 10.86x, i.e. the core is WORSE or equal, as claimed. (B2.3 scores both halves; through B2.2 this check tested only the band and printed HELD while its own detail said the opposite -- reported in kinetic_core_b2_2_diagnosis.md sec. 2.)",
+      "detail": "BAND HALF: core median over all scored points 50.13x, inside the 10x-100x band. NOT-BETTER HALF: on the paired subset the core is 50.13x against the old lane's 12.65x, i.e. the core is WORSE or equal, as claimed. (B2.3 scores both halves; through B2.2 this check tested only the band and printed HELD while its own detail said the opposite -- reported in kinetic_core_b2_2_diagnosis.md sec. 2.)",
       "outcome": "HELD"
     },
     {
@@ -197,7 +197,7 @@
     },
     {
       "claim": "Lin 2022 (fructose-fed) is the WORST acrylamide point",
-      "detail": "Lin fold 8.246x; worst Chang/Ye glucose fold 241.1x. The fructose point is the BEST acrylamide point, not the worst.",
+      "detail": "Lin fold 8.145x; worst Chang/Ye glucose fold 241.7x. The fructose point is the BEST acrylamide point, not the worst.",
       "outcome": "FALSIFIED"
     },
     {
@@ -528,8 +528,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 8.24609953268217,
-      "as_was_predicted": 225.43991770074254,
+      "as_was_fold_error": 8.14453657237207,
+      "as_was_predicted": 228.2511697849215,
       "as_was_within_band": false,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_fructose_asparagine_180C_Lin2022",
@@ -539,13 +539,13 @@
       "buffer_provenance_class": "repo_verbatim_methods_quote",
       "buffer_species": "none",
       "compound": "Acrylamide",
-      "core_fold_error": 8.24609953268217,
+      "core_fold_error": 8.14453657237207,
       "core_interval_ug_per_L": [
-        32.23270340255045,
-        1576.7574893794397
+        32.634647545998135,
+        1596.419769349515
       ],
       "core_measured_within_interval": false,
-      "core_predicted": 225.43991770074254,
+      "core_predicted": 228.2511697849215,
       "core_within_band": false,
       "declaration_reasons": [],
       "declaration_warnings": [
@@ -565,34 +565,31 @@
       "time_min": 30.0
     },
     {
-      "answered": true,
-      "as_was_fold_error": 6.323051267256421,
-      "as_was_predicted": 1942.1003374733518,
-      "as_was_within_band": false,
+      "answered": false,
+      "as_was_fold_error": null,
+      "as_was_predicted": null,
+      "as_was_within_band": null,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_fructose_asparagine_180C_Lin2022",
       "buffer_applied": true,
       "buffer_concentration_M": null,
-      "buffer_moved_the_row": false,
+      "buffer_moved_the_row": null,
       "buffer_provenance_class": "repo_verbatim_methods_quote",
       "buffer_species": "none",
       "compound": "5-Hydroxymethylfurfural (HMF)",
-      "core_fold_error": 6.323051267256421,
-      "core_interval_ug_per_L": [
-        277.6755101501951,
-        13583.314274902961
+      "core_fold_error": null,
+      "core_interval_ug_per_L": null,
+      "core_measured_within_interval": null,
+      "core_predicted": null,
+      "core_within_band": null,
+      "declaration_reasons": [
+        "UNREPRESENTED TARGETS: 5-Hydroxymethylfurfural (HMF) -- 5-HMF is not a species in any core lane. The hexose-dehydration route that forms it was never parameterised: no dataset in the fit corpus measures it."
       ],
-      "core_measured_within_interval": true,
-      "core_predicted": 1942.1003374733518,
-      "core_within_band": false,
-      "declaration_reasons": [],
       "declaration_warnings": [
         "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-        "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis.",
-        "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 180 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
-        "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
+        "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
       ],
-      "envelope_state": "in_envelope_extrapolated",
+      "envelope_state": "out_of_envelope",
       "family": "acrylamide_180C",
       "lane": "acrylamide",
       "measured": 12280.0,
@@ -639,36 +636,31 @@
       "time_min": 120.0
     },
     {
-      "answered": true,
-      "as_was_fold_error": 52.799274192115384,
-      "as_was_predicted": 21.840641138438322,
-      "as_was_within_band": false,
+      "answered": false,
+      "as_was_fold_error": null,
+      "as_was_predicted": null,
+      "as_was_within_band": null,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019",
       "buffer_applied": true,
       "buffer_concentration_M": null,
-      "buffer_moved_the_row": false,
+      "buffer_moved_the_row": null,
       "buffer_provenance_class": "repo_verbatim_methods_quote",
       "buffer_species": "none",
       "compound": "DMHF",
-      "core_fold_error": 52.799274192115384,
-      "core_interval_ug_per_L": [
-        2.223471485003496,
-        214.53551734543353
+      "core_fold_error": null,
+      "core_interval_ug_per_L": null,
+      "core_measured_within_interval": null,
+      "core_predicted": null,
+      "core_within_band": null,
+      "declaration_reasons": [
+        "UNREPRESENTED TARGETS: DMHF -- 2,5-dimethyl-4-hydroxy-3(2H)-furanone is not a core species. The core carries NORFURANEOL (4-hydroxy-5-methyl-3(2H)-furanone, key NF), which is a different compound on a different (pentose) route. Reporting NF as DMHF would be a species substitution the corpus does not license."
       ],
-      "core_measured_within_interval": false,
-      "core_predicted": 21.840641138438322,
-      "core_within_band": false,
-      "declaration_reasons": [],
       "declaration_warnings": [
         "pH 5 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-        "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis.",
-        "DMHF/furanone: the formation edge carries NO activation energy of its own -- none exists in the literature, on any edge, from any of the five papers in the cluster, all of which are single-temperature. Its temperature dependence is INHERITED from the measured 1-deoxyosone step. The reported interval spans a +/-50 kJ/mol partition barrier and is priced by re-integration, not nominated.",
-        "DMHF: the LEVEL of the hexose route is a DECLARED TRANSFER from the pentose calibration. There is no absolute hexose DMHF yield in any of the five papers of the cluster -- the intact-C6 structure is settled twice over by CAMOLA and the magnitude is measured nowhere. Blank 1997's 39 cells are all pentose; Wang & Ho's nine are all per mole of methylglyoxal.",
-        "DMHF: the Edge B (methylglyoxal, C3+C3) level is DIGITISED FROM A BAR CHART with no text layer, by external-standard HPLC with no recovery correction and an unstated pH hold -- three transmission defects deep, carried as a PRIOR ONLY. Its bracket (below detection in situ; 8-13 % in a real bean; 20 % at a 1.4 M methylglyoxal spike) is a hold-out, not a fit.",
-        "DMHF: the CYSTEINE SINK (Edge C) is present, balanced, and runs at EXACTLY ZERO. No measurement of DMHF consumption exists anywhere; fitting one to Shu & Ho's 6.0 % GC area is a named prohibited derivation. Any DMHF number here is a FORMATION number with no sink."
+        "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
       ],
-      "envelope_state": "in_envelope_extrapolated",
+      "envelope_state": "out_of_envelope",
       "family": "furan_browning_glc_alanine",
       "lane": "acrylamide",
       "measured": 1153.17,
@@ -681,34 +673,31 @@
       "time_min": 120.0
     },
     {
-      "answered": true,
-      "as_was_fold_error": 2.0477407945913852,
-      "as_was_predicted": 27959.56409679512,
-      "as_was_within_band": true,
+      "answered": false,
+      "as_was_fold_error": null,
+      "as_was_predicted": null,
+      "as_was_within_band": null,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019",
       "buffer_applied": true,
       "buffer_concentration_M": null,
-      "buffer_moved_the_row": false,
+      "buffer_moved_the_row": null,
       "buffer_provenance_class": "repo_verbatim_methods_quote",
       "buffer_species": "none",
       "compound": "5-Hydroxymethylfurfural (HMF)",
-      "core_fold_error": 2.0477407945913852,
-      "core_interval_ug_per_L": [
-        3997.572151321039,
-        195552.99939350976
+      "core_fold_error": null,
+      "core_interval_ug_per_L": null,
+      "core_measured_within_interval": null,
+      "core_predicted": null,
+      "core_within_band": null,
+      "declaration_reasons": [
+        "UNREPRESENTED TARGETS: 5-Hydroxymethylfurfural (HMF) -- 5-HMF is not a species in any core lane. The hexose-dehydration route that forms it was never parameterised: no dataset in the fit corpus measures it."
       ],
-      "core_measured_within_interval": true,
-      "core_predicted": 27959.56409679512,
-      "core_within_band": true,
-      "declaration_reasons": [],
       "declaration_warnings": [
         "pH 5 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-        "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis.",
-        "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 130 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
-        "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
+        "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
       ],
-      "envelope_state": "in_envelope_extrapolated",
+      "envelope_state": "out_of_envelope",
       "family": "furan_browning_glc_alanine",
       "lane": "acrylamide",
       "measured": 57253.94,
@@ -755,36 +744,31 @@
       "time_min": 120.0
     },
     {
-      "answered": true,
-      "as_was_fold_error": 269.86295698192305,
-      "as_was_predicted": 21.840641138438322,
-      "as_was_within_band": false,
+      "answered": false,
+      "as_was_fold_error": null,
+      "as_was_predicted": null,
+      "as_was_within_band": null,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019",
       "buffer_applied": true,
       "buffer_concentration_M": null,
-      "buffer_moved_the_row": false,
+      "buffer_moved_the_row": null,
       "buffer_provenance_class": "repo_verbatim_methods_quote",
       "buffer_species": "none",
       "compound": "DMHF",
-      "core_fold_error": 269.86295698192305,
-      "core_interval_ug_per_L": [
-        2.223471485003496,
-        214.53551734543353
+      "core_fold_error": null,
+      "core_interval_ug_per_L": null,
+      "core_measured_within_interval": null,
+      "core_predicted": null,
+      "core_within_band": null,
+      "declaration_reasons": [
+        "UNREPRESENTED TARGETS: DMHF -- 2,5-dimethyl-4-hydroxy-3(2H)-furanone is not a core species. The core carries NORFURANEOL (4-hydroxy-5-methyl-3(2H)-furanone, key NF), which is a different compound on a different (pentose) route. Reporting NF as DMHF would be a species substitution the corpus does not license."
       ],
-      "core_measured_within_interval": false,
-      "core_predicted": 21.840641138438322,
-      "core_within_band": false,
-      "declaration_reasons": [],
       "declaration_warnings": [
         "pH 8 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-        "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis.",
-        "DMHF/furanone: the formation edge carries NO activation energy of its own -- none exists in the literature, on any edge, from any of the five papers in the cluster, all of which are single-temperature. Its temperature dependence is INHERITED from the measured 1-deoxyosone step. The reported interval spans a +/-50 kJ/mol partition barrier and is priced by re-integration, not nominated.",
-        "DMHF: the LEVEL of the hexose route is a DECLARED TRANSFER from the pentose calibration. There is no absolute hexose DMHF yield in any of the five papers of the cluster -- the intact-C6 structure is settled twice over by CAMOLA and the magnitude is measured nowhere. Blank 1997's 39 cells are all pentose; Wang & Ho's nine are all per mole of methylglyoxal.",
-        "DMHF: the Edge B (methylglyoxal, C3+C3) level is DIGITISED FROM A BAR CHART with no text layer, by external-standard HPLC with no recovery correction and an unstated pH hold -- three transmission defects deep, carried as a PRIOR ONLY. Its bracket (below detection in situ; 8-13 % in a real bean; 20 % at a 1.4 M methylglyoxal spike) is a hold-out, not a fit.",
-        "DMHF: the CYSTEINE SINK (Edge C) is present, balanced, and runs at EXACTLY ZERO. No measurement of DMHF consumption exists anywhere; fitting one to Shu & Ho's 6.0 % GC area is a named prohibited derivation. Any DMHF number here is a FORMATION number with no sink."
+        "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
       ],
-      "envelope_state": "in_envelope_extrapolated",
+      "envelope_state": "out_of_envelope",
       "family": "furan_browning_glc_alanine",
       "lane": "acrylamide",
       "measured": 5893.98,
@@ -797,34 +781,31 @@
       "time_min": 120.0
     },
     {
-      "answered": true,
-      "as_was_fold_error": 3.5993329385108486,
-      "as_was_predicted": 27959.56409679512,
-      "as_was_within_band": false,
+      "answered": false,
+      "as_was_fold_error": null,
+      "as_was_predicted": null,
+      "as_was_within_band": null,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019",
       "buffer_applied": true,
       "buffer_concentration_M": null,
-      "buffer_moved_the_row": false,
+      "buffer_moved_the_row": null,
       "buffer_provenance_class": "repo_verbatim_methods_quote",
       "buffer_species": "none",
       "compound": "5-Hydroxymethylfurfural (HMF)",
-      "core_fold_error": 3.5993329385108486,
-      "core_interval_ug_per_L": [
-        3997.572151321039,
-        195552.99939350976
+      "core_fold_error": null,
+      "core_interval_ug_per_L": null,
+      "core_measured_within_interval": null,
+      "core_predicted": null,
+      "core_within_band": null,
+      "declaration_reasons": [
+        "UNREPRESENTED TARGETS: 5-Hydroxymethylfurfural (HMF) -- 5-HMF is not a species in any core lane. The hexose-dehydration route that forms it was never parameterised: no dataset in the fit corpus measures it."
       ],
-      "core_measured_within_interval": true,
-      "core_predicted": 27959.56409679512,
-      "core_within_band": false,
-      "declaration_reasons": [],
       "declaration_warnings": [
         "pH 8 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-        "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis.",
-        "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 130 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
-        "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
+        "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
       ],
-      "envelope_state": "in_envelope_extrapolated",
+      "envelope_state": "out_of_envelope",
       "family": "furan_browning_glc_alanine",
       "lane": "acrylamide",
       "measured": 100635.78,
@@ -838,8 +819,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 241.05587871893061,
-      "as_was_predicted": 6749.564604130057,
+      "as_was_fold_error": 241.65340003731782,
+      "as_was_predicted": 6766.295201044899,
       "as_was_within_band": false,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_glucose_asparagine_180C_10min_Chang2021",
@@ -849,13 +830,13 @@
       "buffer_provenance_class": "repo_verbatim_methods_quote",
       "buffer_species": "acetate",
       "compound": "Acrylamide",
-      "core_fold_error": 241.05587871893061,
+      "core_fold_error": 241.65340003731782,
       "core_interval_ug_per_L": [
-        965.0319082801918,
-        47207.37413389052
+        967.4239973725041,
+        47324.39020742495
       ],
       "core_measured_within_interval": false,
-      "core_predicted": 6749.564604130057,
+      "core_predicted": 6766.295201044899,
       "core_within_band": false,
       "declaration_reasons": [],
       "declaration_warnings": [
@@ -876,8 +857,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 2.762919807196095,
-      "as_was_predicted": 4031.0999986991023,
+      "as_was_fold_error": 2.7697767906379314,
+      "as_was_predicted": 4041.1043375407417,
       "as_was_within_band": true,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_glucose_asparagine_180C_30min_Chang2021",
@@ -887,13 +868,13 @@
       "buffer_provenance_class": "repo_verbatim_methods_quote",
       "buffer_species": "acetate",
       "compound": "Acrylamide",
-      "core_fold_error": 2.762919807196095,
+      "core_fold_error": 2.7697767906379314,
       "core_interval_ug_per_L": [
-        576.3542320689097,
-        28194.06242785957
+        577.7846215487765,
+        28264.034136311773
       ],
       "core_measured_within_interval": true,
-      "core_predicted": 4031.0999986991023,
+      "core_predicted": 4041.1043375407417,
       "core_within_band": true,
       "declaration_reasons": [],
       "declaration_warnings": [
@@ -914,8 +895,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 4.845072113821036,
-      "as_was_predicted": 4031.0999986991023,
+      "as_was_fold_error": 4.857096559544161,
+      "as_was_predicted": 4041.1043375407417,
       "as_was_within_band": false,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021",
@@ -925,13 +906,13 @@
       "buffer_provenance_class": "repo_verbatim_methods_quote",
       "buffer_species": "none",
       "compound": "Acrylamide",
-      "core_fold_error": 4.845072113821036,
+      "core_fold_error": 4.857096559544161,
       "core_interval_ug_per_L": [
-        576.3542320689097,
-        28194.06242785957
+        577.7846215487765,
+        28264.034136311773
       ],
       "core_measured_within_interval": true,
-      "core_predicted": 4031.0999986991023,
+      "core_predicted": 4041.1043375407417,
       "core_within_band": false,
       "declaration_reasons": [],
       "declaration_warnings": [
@@ -951,34 +932,31 @@
       "time_min": 30.0
     },
     {
-      "answered": true,
-      "as_was_fold_error": 3.3201171189798275,
-      "as_was_predicted": 2108.359358765901,
-      "as_was_within_band": false,
+      "answered": false,
+      "as_was_fold_error": null,
+      "as_was_predicted": null,
+      "as_was_within_band": null,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021",
       "buffer_applied": true,
       "buffer_concentration_M": null,
-      "buffer_moved_the_row": false,
+      "buffer_moved_the_row": null,
       "buffer_provenance_class": "repo_verbatim_methods_quote",
       "buffer_species": "none",
       "compound": "5-Hydroxymethylfurfural (HMF)",
-      "core_fold_error": 3.3201171189798275,
-      "core_interval_ug_per_L": [
-        301.44671170126543,
-        14746.152514348696
+      "core_fold_error": null,
+      "core_interval_ug_per_L": null,
+      "core_measured_within_interval": null,
+      "core_predicted": null,
+      "core_within_band": null,
+      "declaration_reasons": [
+        "UNREPRESENTED TARGETS: 5-Hydroxymethylfurfural (HMF) -- 5-HMF is not a species in any core lane. The hexose-dehydration route that forms it was never parameterised: no dataset in the fit corpus measures it."
       ],
-      "core_measured_within_interval": true,
-      "core_predicted": 2108.359358765901,
-      "core_within_band": false,
-      "declaration_reasons": [],
       "declaration_warnings": [
         "pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-        "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis.",
-        "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 180 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
-        "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
+        "water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis."
       ],
-      "envelope_state": "in_envelope_extrapolated",
+      "envelope_state": "out_of_envelope",
       "family": "acrylamide_180C",
       "lane": "acrylamide",
       "measured": 7000.0,
@@ -992,8 +970,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 50.05840788509599,
-      "as_was_predicted": 7037.210980486795,
+      "as_was_fold_error": 50.1349150063831,
+      "as_was_predicted": 7047.966351597337,
       "as_was_within_band": false,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_glucose_asparagine_180C_Ye2024",
@@ -1003,10 +981,10 @@
       "buffer_provenance_class": "repo_verbatim_methods_quote",
       "buffer_species": "phosphate",
       "compound": "Acrylamide",
-      "core_fold_error": 50.05840788509599,
+      "core_fold_error": 50.1349150063831,
       "core_interval_ug_per_L": null,
       "core_measured_within_interval": null,
-      "core_predicted": 7037.210980486795,
+      "core_predicted": 7047.966351597337,
       "core_within_band": false,
       "declaration_reasons": [],
       "declaration_warnings": [
@@ -1026,33 +1004,30 @@
       "time_min": 30.0
     },
     {
-      "answered": true,
-      "as_was_fold_error": 11.929988259674973,
-      "as_was_predicted": 1458.5093984387588,
-      "as_was_within_band": false,
+      "answered": false,
+      "as_was_fold_error": null,
+      "as_was_predicted": null,
+      "as_was_within_band": null,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021",
       "buffer_applied": true,
       "buffer_concentration_M": null,
-      "buffer_moved_the_row": false,
+      "buffer_moved_the_row": null,
       "buffer_provenance_class": "unknown",
       "buffer_species": "buffer_unknown",
       "compound": "5-Hydroxymethylfurfural (HMF)",
-      "core_fold_error": 11.929988259674973,
-      "core_interval_ug_per_L": [
-        208.53317074092396,
-        10201.013382072573
+      "core_fold_error": null,
+      "core_interval_ug_per_L": null,
+      "core_measured_within_interval": null,
+      "core_predicted": null,
+      "core_within_band": null,
+      "declaration_reasons": [
+        "UNREPRESENTED TARGETS: 5-Hydroxymethylfurfural (HMF) -- 5-HMF is not a species in any core lane. The hexose-dehydration route that forms it was never parameterised: no dataset in the fit corpus measures it."
       ],
-      "core_measured_within_interval": false,
-      "core_predicted": 1458.5093984387588,
-      "core_within_band": false,
-      "declaration_reasons": [],
       "declaration_warnings": [
-        "pH 4.36 was supplied, but the trunk lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.",
-        "5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 121 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.",
-        "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED."
+        "pH 4.36 was supplied, but the trunk lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled."
       ],
-      "envelope_state": "in_envelope_extrapolated",
+      "envelope_state": "out_of_envelope",
       "family": "furan_browning_glc_alanine",
       "lane": "trunk",
       "measured": 17400.0,
@@ -1066,8 +1041,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 54.01978663987577,
-      "as_was_predicted": 378.1385064791304,
+      "as_was_fold_error": 60.044596615318035,
+      "as_was_predicted": 420.31217630722625,
       "as_was_within_band": false,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3",
@@ -1077,13 +1052,13 @@
       "buffer_provenance_class": "primary_source_pdf",
       "buffer_species": "phosphate",
       "compound": "2-Furfurylthiol (FFT)",
-      "core_fold_error": 12.347984244348256,
+      "core_fold_error": 13.462085648024473,
       "core_interval_ug_per_L": [
-        12.358336645910367,
-        604.5443852273867
+        13.473372098811424,
+        659.0896239350473
       ],
       "core_measured_within_interval": false,
-      "core_predicted": 86.43588971043779,
+      "core_predicted": 94.23459953617132,
       "core_within_band": false,
       "declaration_reasons": [],
       "declaration_warnings": [],
@@ -1101,8 +1076,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 10.41474209400001,
-      "as_was_predicted": 31.24422628200003,
+      "as_was_fold_error": 10.759873006690517,
+      "as_was_predicted": 32.27961902007155,
       "as_was_within_band": false,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3",
@@ -1112,13 +1087,13 @@
       "buffer_provenance_class": "primary_source_pdf",
       "buffer_species": "phosphate",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "core_fold_error": 10.606658421592407,
+      "core_fold_error": 10.967410668364236,
       "core_interval_ug_per_L": [
-        4.549521821364103,
-        222.55324089146768
+        4.704259548700868,
+        230.1226919369078
       ],
       "core_measured_within_interval": false,
-      "core_predicted": 31.81997526477722,
+      "core_predicted": 32.902232005092706,
       "core_within_band": false,
       "declaration_reasons": [],
       "declaration_warnings": [],
@@ -1136,8 +1111,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 27.358423505536333,
-      "as_was_predicted": 164.150541033218,
+      "as_was_fold_error": 31.217349145512685,
+      "as_was_predicted": 187.3040948730761,
       "as_was_within_band": false,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7",
@@ -1147,13 +1122,13 @@
       "buffer_provenance_class": "primary_source_pdf",
       "buffer_species": "phosphate",
       "compound": "2-Furfurylthiol (FFT)",
-      "core_fold_error": 401.4228863820416,
+      "core_fold_error": 318.0609690747347,
       "core_interval_ug_per_L": [
-        0.0021370517340025263,
-        0.10454017103986311
+        0.002697160478088934,
+        0.13193953764202265
       ],
       "core_measured_within_interval": false,
-      "core_predicted": 0.014946830894663261,
+      "core_predicted": 0.018864307737772694,
       "core_within_band": false,
       "declaration_reasons": [],
       "declaration_warnings": [],
@@ -1171,8 +1146,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 8.53912214419291,
-      "as_was_predicted": 34.15648857677164,
+      "as_was_fold_error": 8.823539219782253,
+      "as_was_predicted": 35.29415687912901,
       "as_was_within_band": false,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7",
@@ -1182,13 +1157,13 @@
       "buffer_provenance_class": "primary_source_pdf",
       "buffer_species": "phosphate",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "core_fold_error": 2.4796066495142877,
+      "core_fold_error": 2.643396021959634,
       "core_interval_ug_per_L": [
-        1.4181060125275702,
-        69.37082651931495
+        1.511778407662646,
+        73.95308723548106
       ],
       "core_measured_within_interval": true,
-      "core_predicted": 9.91842659805715,
+      "core_predicted": 10.573584087838537,
       "core_within_band": true,
       "declaration_reasons": [],
       "declaration_warnings": [],
@@ -1276,8 +1251,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 35.079425696985076,
-      "as_was_predicted": 0.34208085684342737,
+      "as_was_fold_error": 35.07942569698522,
+      "as_was_predicted": 0.342080856843426,
       "as_was_within_band": false,
       "b2_1_rescored": true,
       "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
@@ -1287,13 +1262,13 @@
       "buffer_provenance_class": "primary_source_pdf",
       "buffer_species": "phosphate",
       "compound": "2-Furfurylthiol (FFT)",
-      "core_fold_error": 498.9922393004056,
+      "core_fold_error": 498.99223930040256,
       "core_interval_ug_per_L": [
-        0.0034383760220951555,
-        0.1681982760314247
+        0.003438376022095176,
+        0.1681982760314257
       ],
       "core_measured_within_interval": false,
-      "core_predicted": 0.024048470206318593,
+      "core_predicted": 0.024048470206318735,
       "core_within_band": false,
       "declaration_reasons": [],
       "declaration_warnings": [],
@@ -1311,8 +1286,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 21.13071564080081,
-      "as_was_predicted": 1.1831118465163613,
+      "as_was_fold_error": 21.130715640800737,
+      "as_was_predicted": 1.1831118465163653,
       "as_was_within_band": false,
       "b2_1_rescored": true,
       "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
@@ -1322,13 +1297,13 @@
       "buffer_provenance_class": "primary_source_pdf",
       "buffer_species": "phosphate",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "core_fold_error": 517.2738559036196,
+      "core_fold_error": 517.2738559036153,
       "core_interval_ug_per_L": [
-        0.006910116901169409,
-        0.33802869217430226
+        0.006910116901169467,
+        0.33802869217430515
       ],
       "core_measured_within_interval": false,
-      "core_predicted": 0.04833029876665194,
+      "core_predicted": 0.048330298766652346,
       "core_within_band": false,
       "declaration_reasons": [],
       "declaration_warnings": [],
@@ -1346,8 +1321,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 13.170045022929324,
-      "as_was_predicted": 1264.3243222012152,
+      "as_was_fold_error": 13.17004500779514,
+      "as_was_predicted": 1264.3243207483335,
       "as_was_within_band": false,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
@@ -1357,13 +1332,13 @@
       "buffer_provenance_class": "primary_source_pdf",
       "buffer_species": "phosphate",
       "compound": "2-Furfurylthiol (FFT)",
-      "core_fold_error": 3.0762601029964944,
+      "core_fold_error": 3.076260094361736,
       "core_interval_ug_per_L": [
-        42.22408049127511,
-        2065.515086193804
+        42.22408037275628,
+        2065.5150803961074
       ],
       "core_measured_within_interval": true,
-      "core_predicted": 295.32096988766347,
+      "core_predicted": 295.3209690587267,
       "core_within_band": false,
       "declaration_reasons": [],
       "declaration_warnings": [],
@@ -1381,8 +1356,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 2.9303286428120554,
-      "as_was_predicted": 419.03699592212394,
+      "as_was_fold_error": 2.9303286402135287,
+      "as_was_predicted": 419.0369955505346,
       "as_was_within_band": true,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5",
@@ -1392,13 +1367,13 @@
       "buffer_provenance_class": "primary_source_pdf",
       "buffer_species": "phosphate",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "core_fold_error": 2.376383282573259,
+      "core_fold_error": 2.3763832670033147,
       "core_interval_ug_per_L": [
-        48.58681610950857,
-        2376.767012961979
+        48.586815791170174,
+        2376.76699738952
       ],
       "core_measured_within_interval": true,
-      "core_predicted": 339.8228094079761,
+      "core_predicted": 339.822807181474,
       "core_within_band": true,
       "declaration_reasons": [],
       "declaration_warnings": [],
@@ -1416,8 +1391,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 47.122434059972235,
-      "as_was_predicted": 324.20234633260895,
+      "as_was_fold_error": 47.122434081770095,
+      "as_was_predicted": 324.20234648257826,
       "as_was_within_band": false,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
@@ -1427,13 +1402,13 @@
       "buffer_provenance_class": "repo_verbatim_methods_quote",
       "buffer_species": "potassium_phosphate",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "core_fold_error": 38.228267711741246,
+      "core_fold_error": 38.22826803190985,
       "core_interval_ug_per_L": [
-        37.604426669037665,
-        1839.5311322082107
+        37.60442698398148,
+        1839.531147614614
       ],
       "core_measured_within_interval": false,
-      "core_predicted": 263.0104818567798,
+      "core_predicted": 263.01048405953975,
       "core_within_band": false,
       "declaration_reasons": [],
       "declaration_warnings": [],
@@ -1451,8 +1426,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 2336.6956042949737,
-      "as_was_predicted": 2990.9703734975665,
+      "as_was_fold_error": 2336.695599563938,
+      "as_was_predicted": 2990.97036744184,
       "as_was_within_band": false,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026",
@@ -1462,13 +1437,13 @@
       "buffer_provenance_class": "repo_verbatim_methods_quote",
       "buffer_species": "potassium_phosphate",
       "compound": "2-Furfurylthiol (FFT)",
-      "core_fold_error": 598.6078481913958,
+      "core_fold_error": 598.6078153493535,
       "core_interval_ug_per_L": [
-        109.55149052631452,
-        5359.033370634969
+        109.55148451587766,
+        5359.033076616772
       ],
       "core_measured_within_interval": false,
-      "core_predicted": 766.2180456849866,
+      "core_predicted": 766.2180036471725,
       "core_within_band": false,
       "declaration_reasons": [],
       "declaration_warnings": [],
@@ -1486,8 +1461,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 128.28166333835097,
-      "as_was_predicted": 422.04667238317467,
+      "as_was_fold_error": 128.28166352546847,
+      "as_was_predicted": 422.0466729987913,
       "as_was_within_band": false,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
@@ -1497,13 +1472,13 @@
       "buffer_provenance_class": "repo_verbatim_methods_quote",
       "buffer_species": "potassium_phosphate",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "core_fold_error": 107.4567839404132,
+      "core_fold_error": 107.45678374290718,
       "core_interval_ug_per_L": [
-        50.54703097570318,
-        2472.656688502527
+        50.547030882797515,
+        2472.656683957773
       ],
       "core_measured_within_interval": false,
-      "core_predicted": 353.53281916395946,
+      "core_predicted": 353.5328185141646,
       "core_within_band": false,
       "declaration_reasons": [],
       "declaration_warnings": [],
@@ -1521,8 +1496,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 2379.508039417114,
-      "as_was_predicted": 3474.0817375489864,
+      "as_was_fold_error": 2379.5080097799196,
+      "as_was_predicted": 3474.081694278683,
       "as_was_within_band": false,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026",
@@ -1532,13 +1507,13 @@
       "buffer_provenance_class": "repo_verbatim_methods_quote",
       "buffer_species": "potassium_phosphate",
       "compound": "2-Furfurylthiol (FFT)",
-      "core_fold_error": 647.8495575762685,
+      "core_fold_error": 647.8495723854304,
       "core_interval_ug_per_L": [
-        135.23619314464685,
-        6615.476142752393
+        135.2361962360045,
+        6615.4762939752445
       ],
       "core_measured_within_interval": false,
-      "core_predicted": 945.8603540613519,
+      "core_predicted": 945.8603756827283,
       "core_within_band": false,
       "declaration_reasons": [],
       "declaration_warnings": [],
@@ -1556,8 +1531,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 179.26502762358732,
-      "as_was_predicted": 430.2360662966095,
+      "as_was_fold_error": 179.26502723763974,
+      "as_was_predicted": 430.2360653703354,
       "as_was_within_band": false,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
@@ -1567,13 +1542,13 @@
       "buffer_provenance_class": "repo_verbatim_methods_quote",
       "buffer_species": "potassium_phosphate",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "core_fold_error": 153.76671194772658,
+      "core_fold_error": 153.7667119000099,
       "core_interval_ug_per_L": [
-        52.76421535223252,
-        2581.1167834367634
+        52.7642153358588,
+        2581.116782635795
       ],
       "core_measured_within_interval": false,
-      "core_predicted": 369.0401086745438,
+      "core_predicted": 369.0401085600238,
       "core_within_band": false,
       "declaration_reasons": [],
       "declaration_warnings": [],
@@ -1591,8 +1566,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 1596.3809620364043,
-      "as_was_predicted": 2681.920016221159,
+      "as_was_fold_error": 1596.380988949315,
+      "as_was_predicted": 2681.9200614348492,
       "as_was_within_band": false,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026",
@@ -1602,13 +1577,13 @@
       "buffer_provenance_class": "repo_verbatim_methods_quote",
       "buffer_species": "potassium_phosphate",
       "compound": "2-Furfurylthiol (FFT)",
-      "core_fold_error": 469.4137510793868,
+      "core_fold_error": 469.4137565521138,
       "core_interval_ug_per_L": [
-        112.75375246217432,
-        5515.68143168225
+        112.75375377672998,
+        5515.6814959876065
       ],
       "core_measured_within_interval": false,
-      "core_predicted": 788.6151018133698,
+      "core_predicted": 788.6151110075511,
       "core_within_band": false,
       "declaration_reasons": [],
       "declaration_warnings": [],
@@ -1626,8 +1601,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 183.89051344246946,
-      "as_was_predicted": 314.4527779866228,
+      "as_was_fold_error": 183.8905157257482,
+      "as_was_predicted": 314.4527818910294,
       "as_was_within_band": false,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
@@ -1637,13 +1612,13 @@
       "buffer_provenance_class": "repo_verbatim_methods_quote",
       "buffer_species": "potassium_phosphate",
       "compound": "2-Methyl-3-furanthiol (MFT)",
-      "core_fold_error": 161.0787409430878,
+      "core_fold_error": 161.07874338583568,
       "core_interval_ug_per_L": [
-        39.3822252133952,
-        1926.497376845383
+        39.3822258106239,
+        1926.4974060605814
       ],
       "core_measured_within_interval": false,
-      "core_predicted": 275.44464701268015,
+      "core_predicted": 275.444651189779,
       "core_within_band": false,
       "declaration_reasons": [],
       "declaration_warnings": [],
@@ -1661,8 +1636,8 @@
     },
     {
       "answered": true,
-      "as_was_fold_error": 705.1279112585955,
-      "as_was_predicted": 1142.3072162389249,
+      "as_was_fold_error": 705.127877157781,
+      "as_was_predicted": 1142.3071609956053,
       "as_was_within_band": false,
       "b2_1_rescored": false,
       "benchmark_id": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026",
@@ -1672,13 +1647,13 @@
       "buffer_provenance_class": "repo_verbatim_methods_quote",
       "buffer_species": "potassium_phosphate",
       "compound": "2-Furfurylthiol (FFT)",
-      "core_fold_error": 225.86061736663652,
+      "core_fold_error": 225.86061426952912,
       "core_interval_ug_per_L": [
-        52.314423061875694,
-        2559.113870630227
+        52.31442234451563,
+        2559.11383553845
       ],
       "core_measured_within_interval": false,
-      "core_predicted": 365.8942001339512,
+      "core_predicted": 365.8941951166372,
       "core_within_band": false,
       "declaration_reasons": [],
       "declaration_warnings": [],
@@ -1716,14 +1691,14 @@
       {
         "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
         "compound": "2-Furfurylthiol (FFT)",
-        "exam_fold_error": 498.9922393004056,
+        "exam_fold_error": 498.99223930040256,
         "exam_in_band": false,
         "holdout_panel_row": "hofmann_ribose_pH7_FFT"
       },
       {
         "benchmark_id": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
         "compound": "2-Methyl-3-furanthiol (MFT)",
-        "exam_fold_error": 517.2738559036196,
+        "exam_fold_error": 517.2738559036153,
         "exam_in_band": false,
         "holdout_panel_row": "hofmann_ribose_pH7_MFT"
       }
@@ -1731,17 +1706,17 @@
   },
   "summary": {
     "core": {
-      "best_fold_error": 2.0477407945913852,
-      "geometric_mean_fold": 43.2944893201303,
-      "median_abs_log10_error": 1.6040173270044316,
-      "median_fold_error": 40.230541614006285,
-      "n": 34,
+      "best_fold_error": 2.3763832670033147,
+      "geometric_mean_fold": 60.95867746621138,
+      "median_abs_log10_error": 1.7001402830195138,
+      "median_fold_error": 50.1349150063831,
+      "n": 27,
       "worst_fold_error": 33391.73597895205
     },
-    "core_answered": 34,
-    "core_declined": 6,
-    "core_scored": 34,
-    "core_within_band": 4,
+    "core_answered": 27,
+    "core_declined": 13,
+    "core_scored": 27,
+    "core_within_band": 3,
     "old_lane_all_points": {
       "best_fold_error": 1.1197232824869903,
       "geometric_mean_fold": 15.403546120717891,
@@ -1753,21 +1728,21 @@
     "old_within_band": 7,
     "paired_subset": {
       "core": {
-        "best_fold_error": 2.0477407945913852,
-        "geometric_mean_fold": 45.01901966521474,
-        "median_abs_log10_error": 1.625650035306526,
-        "median_fold_error": 42.23281551627133,
-        "n": 33,
+        "best_fold_error": 2.3763832670033147,
+        "geometric_mean_fold": 60.95867746621138,
+        "median_abs_log10_error": 1.7001402830195138,
+        "median_fold_error": 50.1349150063831,
+        "n": 27,
         "worst_fold_error": 33391.73597895205
       },
-      "n": 33,
+      "n": 27,
       "note": "The ONLY apples-to-apples comparison: the old lane restricted to exactly the points the core answers.",
       "old": {
         "best_fold_error": 1.1197232824869903,
-        "geometric_mean_fold": 13.144648543947154,
-        "median_abs_log10_error": 1.0359824965004563,
-        "median_fold_error": 10.86381837964712,
-        "n": 33,
+        "geometric_mean_fold": 16.79657576562487,
+        "median_abs_log10_error": 1.1020422421902207,
+        "median_fold_error": 12.648593695999491,
+        "n": 27,
         "worst_fold_error": 2748.4338151666816
       }
     }

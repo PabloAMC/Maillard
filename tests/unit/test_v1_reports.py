@@ -64,7 +64,14 @@ TRUNK_SPEC = {
 REFUSED_SPEC = {
     "name": "refused_targets",
     "precursors": {"L-Cysteine": 10.0, "D-Ribose": 10.0},
-    "targets": ["2-methyl-3-furanthiol (MFT)", "HMF", "2-pentylfuran"],
+    # WAVE B7 SWAPPED THE REFUSED EXAMPLE. This spec's job is to be
+    # OUT OF ENVELOPE, and "HMF" stopped being a refusal when B7 gave 5-HMF a
+    # route (two parallel sources ingested whole from Kocadagli & Gokmen 2016's
+    # amine-free glucose system, plus Hamzalioglu's measured sink). "HEMF" --
+    # homofuraneol -- replaces it and is refused for a SHARPER reason: the
+    # compound is real and its route is understood, but it needs a C2 Strecker
+    # donor and the core cannot put alanine and a pentose in the same lane.
+    "targets": ["2-methyl-3-furanthiol (MFT)", "HEMF", "2-pentylfuran"],
     "temp_C": 140.0,
     "time_min": 30.0,
     "ph": 5.0,
@@ -178,7 +185,7 @@ def test_an_out_of_envelope_request_renders_refusal_cards_with_named_reasons(
     assert 'class="card refusal"' in text, "refusals must be first-class cards"
     assert "No number is emitted" in text
     # The engine's own named reasons, verbatim -- not a generic apology.
-    assert "5-HMF is not a species in any core lane" in text
+    assert "Strecker donor" in text and "do not compose" in text
     assert "not in Frankel 1989" in text or "six-product slate" in text
     # And the page must say what CAN be asked instead.
     assert "Targets each lane can report" in text
@@ -201,7 +208,7 @@ def test_the_cli_names_the_lane_and_the_missing_species_on_stderr(refused_payloa
     assert "OUT OF ENVELOPE" in message
     assert "Lane resolved: sulfur" in message
     assert "missing species" in message
-    assert "HMF" in message and "2-pentylfuran" in message
+    assert "HEMF" in message and "2-pentylfuran" in message
     # It reuses the EnvelopeDeclaration's own text rather than paraphrasing it.
     for reason in refused_payload["declaration"]["reasons"]:
         assert reason.split(":")[0] in message
@@ -451,10 +458,11 @@ def test_explain_marks_the_lipid_rate_as_an_assumption_and_the_branches_as_fitte
 
 
 def test_explain_answers_a_refused_compound_with_the_declared_reason():
-    payload = explain_compound.explain("HMF")
+    # B7: "HMF" is answered now; "HEMF" is the sharper refusal that replaces it.
+    payload = explain_compound.explain("HEMF")
     assert payload["answered"] is False
     assert payload["state"] == "refused"
-    assert "not a species in any core lane" in payload["reason"]
+    assert "Strecker donor" in payload["reason"]
     text = explain_compound.render_explain_text(payload)
     assert "REFUSED" in text
     assert "A refusal is an answer" in text

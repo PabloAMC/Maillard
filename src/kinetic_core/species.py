@@ -84,6 +84,57 @@ SPECIES: Tuple[Species, ...] = (
     Species("FRAG_C", "unassigned fragment carbon", 1, 0, "pool", False,
             "carbon leaving a measured step in an unmeasured co-product. An "
             "accounting pool, not a species; nothing consumes it"),
+    # -----------------------------------------------------------------------
+    # BUILD WAVE B7 -- THE FURANIC CHANNEL. Appended, never interleaved, so
+    # that every B1/B2/B3 index above is unchanged and a pre-B7 state vector is
+    # still a prefix of this one.
+    #
+    # These five live on the TRUNK rather than in a lane of their own because
+    # their parents already do: HMF's two sources are fructose and
+    # 3-deoxyglucosone, and DMHF's are 1-deoxyglucosone and methylglyoxal.
+    # All four parents are B1 trunk species, so the furanic block is reachable
+    # from the trunk, the sulfur and the acrylamide lanes without any lane
+    # composing with any other. See ``furanic.py`` for the topology and
+    # ``parameters_furanic.py`` for every constant and its source.
+    # -----------------------------------------------------------------------
+    Species("INT", "undetermined cyclic intermediate of fructose dehydration",
+            6, 0, "intermediate", False,
+            "Kocadagli & Gokmen 2016 (JAFC 10.1021/acs.jafc.6b01862) call this "
+            "'Int' and say in as many words that it is UNDETERMINED and "
+            "UNMEASURED. Its concentration scale is therefore NOT identified: "
+            "only the product k7*[Int] is constrained by their data, so "
+            "k_fru_int and k_int_hmf are carried as a PAIR and neither is "
+            "transferable on its own. This is K5a constraint C2 and it is why "
+            "no rate constant on this limb may ever be compared in magnitude "
+            "with one on the measured 3-DG limb (K5a MUST-NOT #3)."),
+    Species("DDG", "3,4-dideoxyglucosone (3,4-DG)", 6, 0, "intermediate", True,
+            "SEMI-QUANTITATED against the 3-DG response factor in both "
+            "Kocadagli papers (author-declared, K5a C22), so its absolute "
+            "scale carries an unknown multiplicative error and both edges that "
+            "touch it inherit it. Carried as a state variable rather than "
+            "lumped away because 3-DG -> 3,4-DG is the RATE-DETERMINING STEP "
+            "of the 3-DG limb in two independent matrices (K5a C3)."),
+    Species("HMF", "5-hydroxymethylfurfural (5-HMF)", 6, 0, "product", True,
+            "THE compound of the K5a cluster. NOT norfuraneol: two papers the "
+            "repo already holds (whitfield1999, whitfield2001) and two in the "
+            "K5b cluster (blank1996 'HMF (3)', apriyantono1993 'HMFone') use "
+            "an HMF-shaped token to mean 4-hydroxy-5-methyl-3(2H)-furanone, "
+            "which is species ``NF`` on the sulfur lane and a different "
+            "molecule. See ``furanic.NAMING_TRAPS``."),
+    Species("AF", "acetylformoin (4,5-dihydroxy-2,6-heptanedione, cyclised)",
+            6, 0, "intermediate", False,
+            "The DMHF progenitor on the INTACT-SKELETON edge, and the species "
+            "that STRUCTURALLY SEPARATES the two DMHF routes: Wang & Ho 2008 "
+            "fed [13C6]glucose + [12C3]methylglyoxal and observed NO "
+            "[12C6]acetylformoin, so the methylglyoxal route does not pass "
+            "through it (K5b B7). Unmeasured in magnitude anywhere."),
+    Species("DMHF", "2,5-dimethyl-4-hydroxy-3(2H)-furanone (furaneol, HDMF)",
+            6, 0, "product", True,
+            "Written HDMF by Blank 1996/1997 and Poisson 2019 and DMHF by "
+            "Wang & Ho 2008 and Shu & Ho 1988; the repo uses DMHF. A DIFFERENT "
+            "COMPOUND from norfuraneol (``NF``, C5): the pre-B7 engine refused "
+            "every DMHF request on exactly that ground and the refusal was "
+            "correct."),
 )
 
 SPECIES_KEYS: Tuple[str, ...] = tuple(s.key for s in SPECIES)

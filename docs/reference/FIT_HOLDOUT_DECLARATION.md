@@ -653,3 +653,107 @@ before any fit ran; mandated by `d1_exam_panel_reconciliation.md` §8 items 1–
      the guard no reach, because a measured value is never immediately preceded
      by a letter. An explicit, reason-carrying `FIREWALL-OK` marker is the only
      other escape and a test asserts every such marker states its reason.
+
+## Amendment 14 — 2026-08-29 (Wave B7, the furanic channel: two disclosures, two findings, one request for a ruling)
+
+Written by the build wave itself, additive only. **No dataset changes columns,
+no hold-out role changes, no benchmark record is edited, and no B1/B2/B3/B6
+fitted constant is moved.** Pre-registered in
+`results/validation/kinetic_core_b7_prereg.md` before any fit ran.
+
+1. **EXPOSURE DISCLOSURE — the seven exam rows are `seen_diagnostic`,
+   permanently.** `results/validation/cutover_final_exam.md` prints the MEASURED
+   value of all 40 exam points in its per-point table, and B7's builder opened
+   it while locating the five HMF and two DMHF bundles the wave was asked to
+   convert. No file under `data/benchmarks/external_validation/` was opened.
+   Under the Amendment 9 clause 1 / Amendment 10 clause 1 precedent the seven
+   rows are demoted to **seen-diagnostic and may never gate**. The mitigation
+   adopted is STRUCTURAL, as B6's was: **the HMF node has no fitted parameter at
+   all** — its seven formation/sink constants are ingested whole from Kocadagli
+   & Gokmen 2016's glucose Table 2 and Hamzalioglu & Gokmen 2018's Table 1 refit
+   — and **the DMHF node has exactly one**, `k_dpo_af`, calibrated on three
+   pentose cells of Blank 1997 at 90 °C, a system with no glucose, no alanine
+   and no relation to any exam bundle. A literal-grep firewall
+   (`tests/unit/test_kinetic_core_b7.py`) asserts that no hold-out-only literal
+   appears in the furanic package or in the frozen fit report.
+   **Also seen, and disclosed for the same reason:** every B7 hold-out value is
+   printed in K5a §9.1 / K5b §8.3, which this wave was instructed to read. Each
+   hold-out therefore carries a written, quantitative prediction made before its
+   scorer existed.
+
+2. **THE FURANIC CHANNEL HANGS ON THE TRUNK, AND THE TRUNK MOVED.** All four of
+   its parents — fructose, 3-deoxyglucosone, 1-deoxyglucosone, methylglyoxal —
+   are B1 trunk species, so the eleven new steps run inside the trunk, sulfur
+   AND acrylamide lanes and there is no new lane conflict. The cost is that four
+   of them put a new drain on a B1-fitted species. **B1 is NOT refit.** Measured
+   consequences, all reported rather than absorbed: Martins' 100 °C regression
+   moves ≤ 5.8 % on any species (fructose most, which is the right signature);
+   18 previously-answered exam rows move, the largest by **1.26×**, inside the
+   pre-registered 1.5× ceiling.
+
+3. **★ REPORTED FOR ORCHESTRATOR RULING — B2.3's objective at its own frozen
+   vector has moved 2.6 % (8.1754 → 8.3862) without one of its 48 constants
+   being touched.** The sulfur network runs the trunk, so a trunk change moves
+   B2.3's residuals. **This wave did NOT refit anything to absorb it**: refitting
+   the sulfur lane to swallow a trunk change is precisely the undeclared
+   exchange-rate move that `d1_exam_panel_reconciliation.md` found accounted for
+   96 % of the B2.2→B2.3 exam regression. The B2.4 vector is therefore now
+   fitted against a slightly different trunk from the one that ships. The
+   discrepancy is pinned, with its size and its reason, in
+   `tests/unit/test_kinetic_core_b2_4.py`. **A ruling on whether to re-run
+   B2.3/B2.4 against the B7 trunk is requested; nothing presumes one.**
+
+4. **TWO PRE-REGISTERED PREDICTIONS WERE WRONG, AND BOTH ARE DISCLOSED IN THE
+   ARTEFACTS RATHER THAN QUIETLY RESTATED:**
+   * **HMF direction.** The pre-registration argued that a node with no
+     validated sink at cooking temperature (K5a G2: the 50–150 °C window is
+     empty) must OVER-predict. **All five exam rows UNDER-predict**, by
+     2.0–11.9×. The missing sink is therefore not the binding constraint — the
+     SOURCE terms are, and the melt→matrix transfer loses more flux than the
+     absent sink adds back. A directional result about a transfer nobody had
+     tested.
+   * **Gursul Aktag's 27 °C row.** Pre-registered PASS on the declared 100 µg/L
+     floor; **it FAILS at 1 171 µg/L.** The cause is diagnosed and is not a
+     defect in the ingested activation energies: at 27 °C the model's HMF is
+     99.9 % 3-DG-limb, and that limb's terminal step carries **Ea = 0 by
+     Kocadagli's own choice** (footnote: "does not follow Arrhenius equation").
+     A zero-barrier terminal step cannot switch off as temperature falls.
+     Amendment 12 called this row "the cheapest and most informative single test
+     in the module"; it earned the description. **G1 measured for the first
+     time.**
+
+5. **A CONTRADICTION FOUND WHILE DOING THE ABOVE, REPORTED NOT IMPROVISED.**
+   Amendment 12 records the HEMF alanine preference as "~10-25x". Computed from
+   Blank 1997 Table 1 itself, the three sugars give **5.2× (arabinose), 25×
+   (xylose) and 14.3× (ribose)**. The 10–25× band is the xylose/ribose pair;
+   **arabinose sits at half its lower edge.** The correction Amendment 12 makes
+   to Amendment 8 stands entirely — it is a preference and not a switch — but
+   the range should read **≈5–25×**. Nothing was changed on this account.
+
+6. **DECLARED, AND CARRIED ON EVERY ANSWER:** the module has NO pH term on any
+   furanic edge (K5a G8 — six pH values across seven papers and no single paper
+   varies pH, which `k3` §B.2 already forbids fitting across); NO activation
+   energy on any furanone edge (all five K5b papers are single-temperature —
+   the partition barrier is a declared assumption banded at ±50 kJ/mol and
+   priced by re-integration); NO magnitude on the DMHF cysteine sink (Edge C
+   ships at exactly zero, and fitting Shu & Ho's 6.0 % GC area is a named
+   prohibited derivation); and Hamzalioglu's sink constant is **CLAMPED at
+   50 °C**, never extrapolated. The two Schibilsky bundles differ only in pH and
+   the model returns identical HMF and DMHF for both — a pre-registered
+   structural miss whose size (1.76× on HMF, 5.1× on DMHF) is now the measured
+   size of G8.
+
+## Amendment 15 — 2026-08-30 (orchestrator rulings on Wave B7's flags)
+
+1. The 2.6% movement of B2.3's frozen objective at its own frozen vector
+   (the furanic channel adds trunk consumption edges; the sulfur lane runs
+   the trunk) is ACCEPTED as physics propagation — no refit occurs in
+   response (the D1 sigma-exchange failure class); the drift is pinned with
+   its reason and will be absorbed by the next pre-registered sulfur wave.
+2. Amendment 12's HEMF alanine-preference range is corrected to ~5-25x
+   (computed per-sugar from Blank 1997 Table 1); the Amendment 8 correction
+   stands.
+3. B7's seven exam rows are seen_diagnostic per its disclosed exposure of
+   cutover_final_exam.md; ratified with the structural mitigation noted
+   (zero fitted parameters in the HMF node; the one fitted DMHF constant is
+   identified on a pentose system appearing in no exam bundle).

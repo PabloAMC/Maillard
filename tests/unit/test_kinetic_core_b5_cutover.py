@@ -124,8 +124,21 @@ def test_acrylamide_request_routes_to_the_acrylamide_lane():
 @pytest.mark.parametrize(
     "compound, token",
     [
-        ("5-Hydroxymethylfurfural (HMF)", "not a species"),
-        ("DMHF", "NORFURANEOL"),
+        # WAVE B7 REMOVED THESE TWO. 5-HMF and DMHF are now SPECIES with
+        # routes -- see tests/unit/test_kinetic_core_b7.py -- and the compounds
+        # that replace them here are the neighbours whose refusals B7 made
+        # SHARPER rather than dropping. That is the same discipline B6 applied
+        # to 1-hexanol and 2-pentylfuran two lines below, and the two B5
+        # reasons that are retired are quoted verbatim in the B7 report so the
+        # change of verdict is legible:
+        #   "the hexose-dehydration route that forms it was never
+        #    parameterised" -- NOW FALSE (Kocadagli's amine-free glucose
+        #    system is ingested whole);
+        #   "reporting NF as DMHF would be a species substitution the corpus
+        #    does not license" -- STILL TRUE, and honoured by DMHF being its
+        #    OWN species with its own route rather than an alias of NF.
+        ("HEMF", "alanine"),
+        ("2,5-dimethyl-4-hydroxy-3(2H)-thiophenone", "Haleva-Toledo"),
         # WAVE B6 updated these four rows. The lipid lane now EXISTS, so
         # "no lipid-oxidation path" is no longer true of any of them. What is
         # asserted instead is that each is still refused for a reason that is
@@ -502,13 +515,23 @@ def test_exam_declines_every_lipid_and_hmf_point():
       * nonanal      -- the oleate -> nonanal branch fraction is unmeasured;
       * 1-hexanol    -- no aldehyde-reduction step exists in the corpus;
       * 2-pentylfuran -- not in Frankel's six-product slate;
-      * HMF / DMHF   -- unchanged from B5.
+      * HMF / DMHF   -- NO LONGER ON THIS LIST. Wave B7 gives both a route,
+                        and it is NOT a branch fraction: the HMF node's source
+                        topology is adopted from four independent published
+                        networks that all write it the same way, its seven
+                        constants are INGESTED from one declared-FIT system
+                        with nothing fitted, and the DMHF node has exactly ONE
+                        fitted number, calibrated on a pentose system that
+                        appears in no exam bundle. The limb SHARE is computed
+                        from the pools and moves from 2 % to 96 % across
+                        conditions, which is what makes it not a fraction.
+                        tests/unit/test_kinetic_core_b7.py pins all of that.
 
     A future wave that quietly starts answering any of those has invented a
     branch fraction, and this test is where that shows up.
     """
     payload = json.loads(EXAM_JSON.read_text())
-    still_declined = ("nonanal", "hexanol", "pentylfuran", "hmf", "dmhf")
+    still_declined = ("nonanal", "hexanol", "pentylfuran")
     for row in payload["rows"]:
         compound = row["compound"].lower()
         if compound == "hexanal":

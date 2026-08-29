@@ -56,6 +56,7 @@ from .parameters import (
     SCHIFF_AMADORI_SPLIT,
     KineticParameter,
 )
+from .parameters_furanic import FURANIC_PARAMETERS
 from .species import (
     BY_KEY,
     INDEX,
@@ -168,9 +169,138 @@ REACTIONS: Tuple[Reaction, ...] = (
     ),
     Reaction("r_fa_frag", {"FA": 1}, {"FRAG_C": 1}, "k_fa_frag", "FITTED."),
     Reaction("r_aa_frag", {"AA": 1}, {"FRAG_C": 2}, "k_aa_frag", "FITTED."),
+    # =======================================================================
+    # BUILD WAVE B7 -- THE FURANIC CHANNEL, eleven steps.
+    # =======================================================================
+    # It hangs HERE, on the trunk, rather than in a lane of its own, because
+    # all four of its parents are trunk species: fructose and 3-deoxyglucosone
+    # for HMF, 1-deoxyglucosone and methylglyoxal for DMHF. Living on the trunk
+    # means the sulfur and acrylamide lanes inherit it without any lane
+    # composing with any other -- there is no new lane conflict to resolve.
+    #
+    # THE HMF NODE'S ARCHITECTURE IS NOT THIS MODULE'S INVENTION. Four
+    # independent groups fitted four multiresponse networks in four matrices
+    # (Kocadagli x2, Goncuoglu Tas, Gursul Aktag, Sen, Han) and ALL FOUR write
+    # the same source topology: EXACTLY TWO PARALLEL FIRST-ORDER INPUTS, one
+    # from the 3-DG/3,4-DG chain and one from the fructose/cation chain. K5a
+    # sec. 8.1 calls that the strongest architectural agreement in the cluster
+    # and says it should be adopted without modification. It is.
+    #
+    # THERE IS NO BRANCH FRACTION HERE AND THERE CANNOT BE ONE. The share each
+    # limb takes is whatever the dynamic Fru and TDG pools make it, which is
+    # what every paper that explains its own verdict actually appeals to:
+    # pool size (Gursul Aktag's fructose-rich juices), a starved 3-DG source
+    # (Kocadagli's k3, the smallest constant in his table), or a drained
+    # cation pool (Sen's k3/k20 at 10-300x the dehydration step). K5a sec. 3.1
+    # Rule 1, and MUST-NOT #1.
+    Reaction(
+        "r_glc_tdg", {"Glc": 1}, {"TDG": 1}, "k_glc_tdg",
+        "B7. Kocadagli JAFC step 3, the AMINE-FREE entry to the 3-DG limb. "
+        "B1's trunk reaches 3-deoxyglucosone only through the Amadori "
+        "compound, so before B7 a sugar-only pot had no 3-DG limb at all and "
+        "a glucose/alanine pot had no deoxyosone of any kind -- the trunk's "
+        "only amine is glycine.",
+    ),
+    Reaction(
+        "r_tdg_ddg", {"TDG": 1}, {"DDG": 1}, "k_tdg_ddg",
+        "B7. Kocadagli JAFC step 4. THE RATE-DETERMINING STEP OF THE 3-DG "
+        "LIMB (K5a C3), corroborated in two independent matrices. Its product "
+        "is semi-quantitated against the 3-DG response factor, so both edges "
+        "that touch DDG inherit an unknown multiplicative scale (C22).",
+    ),
+    Reaction(
+        "r_ddg_hmf", {"DDG": 1}, {"HMF": 1}, "k_ddg_hmf",
+        "B7. Kocadagli JAFC step 5. FAST relative to its parent (2-5x, two "
+        "matrices) and carrying the authors' OWN Ea = 0: their k runs "
+        "160 -> 110 -> 137 across 160 -> 180 -> 200 C and they fixed the "
+        "barrier to zero with the footnote 'does not follow Arrhenius "
+        "equation'. No usable Ea exists for this edge in any paper of the "
+        "cluster.",
+    ),
+    Reaction(
+        "r_fru_int", {"Fru": 1}, {"INT": 1}, "k_fru_int",
+        "B7. Kocadagli JAFC step 6. The fructose limb's FAST entry step -- the "
+        "mirror image of the 3-DG limb, whose fast step is the second one "
+        "(K5a C3/C4). Deleting this edge is what THREE independent model-"
+        "discrimination tests in THREE matrices reject: 'did not fit ... by no "
+        "means', 'remarkably underestimated', 'far below the experimental "
+        "values'. A 3-DG-only HMF node is falsified three times over (C1).",
+    ),
+    Reaction(
+        "r_int_hmf", {"INT": 1}, {"HMF": 1}, "k_int_hmf",
+        "B7. Kocadagli JAFC step 7. The fructose limb's RATE-DETERMINING step. "
+        "[Int] is UNMEASURED, so this constant and k_fru_int are identified "
+        "only up to a common pool scale and neither may be compared in "
+        "magnitude with a constant on the measured 3-DG limb (C2).",
+    ),
+    Reaction(
+        "r_fru_odg", {"Fru": 1}, {"ODG": 1}, "k_fru_odg",
+        "B7. Kocadagli JAFC step 8, the AMINE-FREE entry to the furanone limb "
+        "(2,3-enolisation). K5a sec. 5 row 4: the parent of 1-DG has four "
+        "different answers in four matrices from one lab. B1 carries the "
+        "Amadori parent; this adds the melt's, so the split between them is "
+        "set by the pools rather than by a constant.",
+    ),
+    Reaction(
+        "r_tdg_mgo", {"TDG": 1}, {"MGO": 1, "FRAG_C": 3}, "k_tdg_mgo",
+        "B7. Kocadagli JAFC step 11, the AMINE-FREE methylglyoxal source and "
+        "therefore DMHF Edge B's feed in a sugar-only pot. The C3 residue is "
+        "unmeasured and goes to FRAG_C, B1's discipline unchanged. The parent "
+        "of MGO switches between matrices in the same lab (K5a sec. 5 row 3); "
+        "both parents now exist and neither is hard-coded as dominant.",
+    ),
+    Reaction(
+        "r_hmf_self", {"HMF": 1}, {"FRAG_C": 6}, "k_hmf_self",
+        "B7. HMF self-degradation, from Hamzalioglu's model-free control "
+        "(0.9 % in 7 days at 5 C, pH 3.5). ONE TEMPERATURE, so Ea = 0 by "
+        "declaration -- which makes this sink negligible at cooking "
+        "temperature and leaves the model with NO validated HMF sink there. "
+        "K5a declared gap G2: the 50-150 C window is empty. Pre-registered "
+        "consequence: HMF is expected to be OVER-predicted.",
+    ),
+    Reaction(
+        "r_odg_af", {"ODG": 1}, {"AF": 1}, "k_odg_af",
+        "B7. DMHF Edge A, HEXOSE arm: FIRST ORDER IN THE DEOXYOSONE ALONE, "
+        "because the C6 skeleton stays intact and needs no Strecker carbon. "
+        "That is measured twice over -- Wang & Ho's CAMOLA ([13C1]-[13C5] "
+        "ABSENT) and Poisson's in-bean CAMOLA (intact share 87-100 % at all "
+        "nine roast times, against 2,3-butanedione's collapsing 25.4 -> 0.4 % "
+        "in the same runs). The STRUCTURE is measured; the LEVEL is a declared "
+        "transfer from the pentose fit, because no hexose DMHF magnitude "
+        "exists anywhere in the cluster.",
+    ),
+    Reaction(
+        "r_af_dmhf", {"AF": 1}, {"DMHF": 1}, "k_af_dmhf",
+        "B7. Acetylformoin reduction to DMHF. Its RATE has no source; the "
+        "constant is a declared, unconstrained 'not rate-limiting' assumption "
+        "in the register of thiol_addition_pentodiulose, swept over three "
+        "decades in the fit report.",
+    ),
+    Reaction(
+        "r_mgo_dmhf", {"MGO": 2}, {"DMHF": 1}, "k_mgo_dmhf",
+        "B7. DMHF Edge B, the C3 + C3 recombination. IT DOES NOT PASS THROUGH "
+        "ACETYLFORMOIN and the network makes that structurally impossible: no "
+        "reaction with MGO as a reactant has AF among its products. That is "
+        "Wang & Ho's measured null (no [12C6]acetylformoin in the MG-spiked "
+        "run) and it resolves an ambiguity Poisson 2019 leaves open. The LEVEL "
+        "is a digitised bar-chart prior and is flagged as such everywhere.",
+    ),
 )
 
 REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in REACTIONS)
+
+#: Build Wave B7's eleven steps, named so a report can say which part of the
+#: trunk is B1's and which is B7's without counting.
+FURANIC_REACTION_KEYS: Tuple[str, ...] = (
+    "r_glc_tdg", "r_tdg_ddg", "r_ddg_hmf", "r_fru_int", "r_int_hmf",
+    "r_fru_odg", "r_tdg_mgo", "r_hmf_self", "r_odg_af", "r_af_dmhf",
+    "r_mgo_dmhf",
+)
+
+#: B1's fifteen, i.e. everything the B1 fit report was fitted against.
+B1_REACTION_KEYS: Tuple[str, ...] = tuple(
+    key for key in REACTION_KEYS if key not in FURANIC_REACTION_KEYS
+)
 
 
 # ---------------------------------------------------------------------------

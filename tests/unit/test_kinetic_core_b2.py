@@ -166,6 +166,12 @@ def test_every_sulfur_species_has_formation_and_consumption():
         # construction, nothing consumes it, and its only route to any
         # observable is the charge balance that sets the pH.
         "CBX",
+        # B7 adds the furanic channel's two sulfur-coupled sinks. Both are
+        # terminal because neither source measures anything downstream of them:
+        # Hamzalioglu reports the HMF that DISAPPEARED and never a released
+        # HMF, and Shu & Ho report a GC area percent with no reversibility
+        # experiment of any kind. An unmeasured release rate is an invented one.
+        "HMFAD", "DMHFS",
     }
     for species in SULFUR_STATE:
         if species.role in ("reactant", "site") or species.key in terminal_by_design:
@@ -830,8 +836,14 @@ def test_network_shape_is_pinned():
     # B2.1 added TTCA, BND_F, PRB, PROT_SS; B2.2 adds ACID.
     # 47 through B2.2; B2.3 adds ONE terminal accounting pool (CBX) and no
     # species any rate law can see.
-    assert described["n_species"] == 48
-    assert described["trunk_reactions"] == 15
+    # B7 adds SEVEN: five on the trunk (INT, DDG, HMF, AF, DMHF -- the furanic
+    # channel, whose parents are all trunk species) and two on this lane
+    # (HMFAD, DMHFS -- the two sinks that need a sulfur partner).
+    assert described["n_species"] == 55
+    # B7 adds ELEVEN steps to the TRUNK -- the furanic channel hangs there
+    # because all four of its parents (Fru, 3-DG, 1-DG, MGO) are trunk species.
+    # 15 through B6.
+    assert described["trunk_reactions"] == 26
     assert len(SULFUR_REACTIONS) == described["sulfur_reactions"]
     ph_tagged = {k for k, v in REACTION_PH_FACTOR.items() if v}
     assert len(ph_tagged) >= 9, "the pH factors must actually be wired up"

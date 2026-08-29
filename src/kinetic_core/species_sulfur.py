@@ -296,6 +296,46 @@ SULFUR_SPECIES: Tuple[Species, ...] = (
             "constant at 100-145 C. The mixture is declared instead, and the "
             "direction of the error is stated in the B2.3 report. "
             "TERMINAL: nothing consumes it."),
+    # ---- B7: the two SULFUR-COUPLED furanic sinks -------------------------
+    # The furanic block itself lives on the trunk (species.py). These two are
+    # here because both edges need a SULFUR reactant, and the sulfur reactants
+    # only exist on this lane.
+    Species("HMFAD", "HMF-cysteinyl adduct pool (thiol-Michael, amine-Michael, "
+                     "Schiff base and 2:1 adducts, LUMPED)",
+            8, 0, "product", False, sulfur=1,
+            note=(
+                "Hamzalioglu & Gokmen 2018 confirm FOUR distinct adducts at "
+                "delta < 1 ppm -- a thiol-Michael adduct, an amine-Michael "
+                "adduct, a Schiff base and a 2 HMF : 1 Cys adduct -- so the "
+                "stoichiometry of this sink is NOT 1:1 (K5a C11). This module "
+                "writes it 1:1 anyway, as a DECLARED SIMPLIFICATION: the paper "
+                "reports no branch fractions among the four, so any split "
+                "would be invented. The consequence is signed and stated: a "
+                "2:1 adduct would consume TWICE the HMF per cysteine, so the "
+                "1:1 form UNDER-states the sink. "
+                "CARBON: 8 = HMF's 6 + cysteine's 3 - the 1 carried out as the "
+                "alpha-carboxyl into CBX. NITROGEN: 0 -- the amine centre is "
+                "declared destroyed in CENTRE_LEDGER on AMINE_FATE_BASIS, the "
+                "same treatment every other cysteine-consuming step gets. "
+                "TERMINAL: nothing consumes it."),
+            ),
+    Species("DMHFS", "2,5-dimethyl-4-hydroxy-3(2H)-thiophenone "
+                     "(the DMHF ring-oxygen -> sulfur swap)",
+            6, 0, "product", True, sulfur=1,
+            note=(
+                "Shu & Ho 1988's unambiguous, structurally specific tracer of "
+                "the DMHF + cysteine coupling: DMHF with S in place of the "
+                "ring O. It is the exact C6 counterpart of the repo's existing "
+                "C5 edge ``furanone_reductive_sulfhydrylation``. "
+                "IT HAS NO RATE. Shu & Ho report a GC AREA PERCENT (6.0 / 5.8 "
+                "/ not-detected at pH 2.2 / 5.1 / 7.1) and NO residual DMHF, "
+                "no conversion, no mass balance and no molar yield of any "
+                "product. K5b sec. 8.6 names, by name, the failure mode a "
+                "constant fitted to that 6.0 % would repeat "
+                "(``thiol_addition_pentodiulose`` / cys_ribose_140C). So the "
+                "edge SHIPS WITH RATE EXACTLY ZERO and is structural only; see "
+                "``parameters_furanic.EDGE_C_ZERO_BY_DECLARATION``."),
+            ),
 )
 
 #: The concatenated table. B1's entries first, in B1's order, so trunk indices
@@ -330,8 +370,14 @@ SITE_POOLS: Tuple[str, ...] = tuple(s.key for s in SULFUR_SPECIES if s.role == "
 #: untested. With no measurement in either direction the conservative encoding
 #: is the one that cannot invent a release rate, so PRB is terminal and the
 #: absence of a release step is recorded here as a KNOWN GAP.
+#:
+#: B7 adds HMFAD and DMHFS. Both are terminal because neither source measures
+#: anything downstream of them: Hamzalioglu reports the HMF that DISAPPEARED,
+#: never a released HMF, and Shu & Ho report the thiophenone's GC area and no
+#: reversibility experiment of any kind. An unmeasured release rate would be an
+#: invented one.
 TERMINAL_POOLS: Tuple[str, ...] = (
-    "OLG", "PRB", "FRAG_N", "FRAG_S", "ACID", "CBX")
+    "OLG", "PRB", "FRAG_N", "FRAG_S", "ACID", "CBX", "HMFAD", "DMHFS")
 
 
 # ---------------------------------------------------------------------------
@@ -365,6 +411,23 @@ MOLECULAR_WEIGHT_G_PER_MOL: Mapping[str, float] = {
     "ACTZ": 127.16,   # C5H5NOS
     # B2.1
     "TTCA": 253.27,   # C8H15NO6S, L-cysteine + D-xylose - H2O
+    # B7 -- the furanic block. Kept in THIS table rather than a new one
+    # because ``engine.predict`` reads exactly one molecular-weight mapping and
+    # a second one would be a place a factor of 1000 could hide.
+    "HMF": 126.11,    # C6H6O3, 5-hydroxymethylfurfural
+    "DMHF": 128.13,   # C6H8O3, furaneol
+    "AF": 144.13,     # C6H8O4, acetylformoin
+    "DDG": 144.13,    # C6H8O4, 3,4-dideoxyglucosone
+    "INT": 162.14,    # C6H10O5 -- the fructose-dehydration intermediate,
+                      # written as the mono-anhydro sugar. IT IS NOT MEASURED,
+                      # so this weight can never be checked against anything;
+                      # it exists only so a mmol/L state has a mass, and no
+                      # reported number depends on it.
+    "HMFAD": 229.25,  # C8H15NO4S-ish lump; see the species note. The adduct
+                      # slate is heterogeneous and unquantified, so this is a
+                      # NOMINAL weight for reporting only and no scored
+                      # quantity uses it.
+    "DMHFS": 144.19,  # C6H8O2S, 2,5-dimethyl-4-hydroxy-3(2H)-thiophenone
 }
 
 

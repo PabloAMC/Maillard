@@ -203,35 +203,64 @@ TARGET_ALIASES: Mapping[str, str] = {
     "norfuraneol": "NF",
     "hydrogen sulfide": "H2S",
     "melanoidins": "MEL_N",
+    # -- B7, the furanic channel. Both compounds left UNREPRESENTED_COMPOUNDS
+    # in the same wave that gave them a route; the pre-B7 refusals were correct
+    # and are quoted in the B7 report so the change of verdict is legible.
+    "5-hydroxymethylfurfural": "HMF",
+    "5-hydroxymethylfurfural (hmf)": "HMF",
+    "5-hmf": "HMF",
+    "hmf": "HMF",
+    "dmhf": "DMHF",
+    "hdmf": "DMHF",
+    "furaneol": "DMHF",
+    "2,5-dimethyl-4-hydroxy-3(2h)-furanone": "DMHF",
+    "3,4-dideoxyglucosone": "DDG",
+    "acetylformoin": "AF",
 }
 
 #: Compounds a user may plausibly ask for that the core CANNOT NAME, each with
 #: the reason. Being on this list is what turns a request into a declaration
 #: instead of a KeyError, and the reason is what makes the declaration useful.
 UNREPRESENTED_COMPOUNDS: Mapping[str, str] = {
-    "5-hydroxymethylfurfural": (
-        "5-HMF is not a species in any core lane. The hexose-dehydration route "
-        "that forms it was never parameterised: no dataset in the fit corpus "
-        "measures it."
+    # -- B7: 5-HMF, DMHF and furaneol LEFT this list. Both pre-B7 refusals
+    # were CORRECT at the time and are quoted verbatim in the B7 report:
+    # "the hexose-dehydration route that forms it was never parameterised"
+    # and "reporting NF as DMHF would be a species substitution the corpus
+    # does not license". The first is now false (Kocadagli's amine-free
+    # glucose system is ingested whole); the second is still true and is
+    # honoured by DMHF being its OWN species with its own route, never an
+    # alias of NF.
+    #
+    # HEMF / homofuraneol did NOT leave the list, and the reason is sharper
+    # and different from the pre-B7 one -- exactly the discipline B6 used for
+    # 1-hexanol and 2-pentylfuran.
+    "hemf": (
+        "2-ethyl-4-hydroxy-5-methyl-3(2H)-furanone (homofuraneol) needs a C2 "
+        "Strecker donor -- alanine -- and the core cannot put alanine and a "
+        "pentose in the same lane: the pentose lives on the sulfur lane and "
+        "alanine only on the acrylamide lane, which do not compose. Blank 1997 "
+        "measures HEMF at 6.8-10.0 ug/mmol in pentose/alanine systems and at "
+        "0.3-1.3 in pentose/glycine ones -- a 5.2-25x PREFERENCE, not a switch "
+        "(FIT_HOLDOUT_DECLARATION Amendment 12 corrected Amendment 8 on "
+        "exactly this) -- so the compound is real, the route is understood, "
+        "and the lane algebra is what refuses. Refused rather than answered "
+        "with a DMHF number wearing a different name."
     ),
-    "5-hydroxymethylfurfural (hmf)": (
-        "5-HMF is not a species in any core lane. The hexose-dehydration route "
-        "that forms it was never parameterised: no dataset in the fit corpus "
-        "measures it."
+    "homofuraneol": (
+        "see HEMF: the core cannot put alanine and a pentose in the same lane."
     ),
-    "hmf": (
-        "5-HMF is not a species in any core lane. The hexose-dehydration route "
-        "that forms it was never parameterised: no dataset in the fit corpus "
-        "measures it."
+    "2-ethyl-4-hydroxy-5-methyl-3(2h)-furanone": (
+        "see HEMF: the core cannot put alanine and a pentose in the same lane."
     ),
-    "dmhf": (
-        "2,5-dimethyl-4-hydroxy-3(2H)-furanone is not a core species. The core "
-        "carries NORFURANEOL (4-hydroxy-5-methyl-3(2H)-furanone, key NF), which "
-        "is a different compound on a different (pentose) route. Reporting NF "
-        "as DMHF would be a species substitution the corpus does not license."
-    ),
-    "furaneol": (
-        "2,5-dimethyl-4-hydroxy-3(2H)-furanone is not a core species; see DMHF."
+    "2,5-dimethyl-4-hydroxy-3(2h)-thiophenone": (
+        "DMHF's ring-oxygen-to-sulfur swap IS a species (DMHFS) and its edge "
+        "IS in the network, balanced -- but its RATE IS EXACTLY ZERO. Shu & Ho "
+        "1988 is the only fed-precursor DMHF + cysteine experiment in the "
+        "corpus and it reports a GC AREA PERCENT with no internal standard, no "
+        "residual DMHF, no conversion and no molar yield of anything. Fitting "
+        "a constant to its 6.0 % is a named prohibited derivation "
+        "(k5b_dmhf_synthesis.md sec. 8.6, the thiol_addition_pentodiulose "
+        "failure class). Haleva-Toledo 1999 would close it."
     ),
     # -- B6: hexanal and nonanal LEFT this list. The lipid lane forms both. --
     # 1-hexanol and 2-pentylfuran did NOT: the lane exists now, and the reason
@@ -283,6 +312,16 @@ _TARGET_LANE: Mapping[str, str] = {
     "NF": SULFUR,
     "H2S": SULFUR,
     "MEL_N": TRUNK,
+    # -- B7, the furanic channel. TRUNK, and that is load-bearing rather than
+    # arbitrary: a TRUNK target adds NO lane requirement in ``resolve_lanes``,
+    # so asking for HMF alongside acrylamide or alongside a thiol does not
+    # create a lane conflict. The channel's parents are all trunk species and
+    # the trunk network runs inside every lane, so HMF and DMHF are answerable
+    # wherever their precursors are.
+    "HMF": TRUNK,
+    "DMHF": TRUNK,
+    "DDG": TRUNK,
+    "AF": TRUNK,
     # -- B6, the lipid lane ------------------------------------------------
     "HEXANAL": LIPID,
     "NONANAL": LIPID,
@@ -330,7 +369,7 @@ LIPID_CARRIER_ALIASES: Mapping[str, str] = {
 #: The compounds each lane can be asked to REPORT, in the display names the
 #: engine's vocabulary maps. Used when a caller does not name targets.
 LANE_DEFAULT_TARGETS: Mapping[str, Tuple[str, ...]] = {
-    TRUNK: ("melanoidins",),
+    TRUNK: ("melanoidins", "5-HMF", "DMHF"),
     SULFUR: (
         "2-methyl-3-furanthiol (MFT)",
         "2-furfurylthiol (FFT)",
@@ -850,6 +889,77 @@ def declare_envelope(
                 f"recorded and IGNORED."
             )
 
+    # --- B7: the furanic channel's own declarations -----------------------
+    # Every one of these is an EXTRAPOLATION WARNING, not a refusal, and each
+    # names the source that limits it. A caller who reads them knows exactly
+    # what the number does and does not rest on.
+    furanic_keys = set(mapped_targets.values()) & {"HMF", "DMHF", "AF", "DDG"}
+    if furanic_keys:
+        from .parameters_furanic import (
+            FURANONE_EA_ASSUMPTION,
+            HMF_SINK_NO_EXTRAPOLATION_ABOVE_K,
+        )
+
+        peak_k = spec.process.thermal.peak_temperature_c + CELSIUS
+        if "HMF" in furanic_keys:
+            warnings.append(
+                "5-HMF: the two formation limbs are ingested WHOLE from "
+                "Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt "
+                "at 160-200 C. This program runs at "
+                f"{spec.process.thermal.peak_temperature_c:.0f} C in an "
+                "aqueous or matrix system, so both the temperature and the "
+                "physical state are extrapolations. K5a sec. 6.2: that limb's "
+                "activation energy reproduces four independent ways in the "
+                "melt and COLLAPSES in all three real-matrix systems in the "
+                "corpus."
+            )
+            warnings.append(
+                "5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING "
+                "TEMPERATURE. The only audit-surviving HMF sink in the corpus "
+                "(Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C "
+                "and is CLAMPED at "
+                f"{HMF_SINK_NO_EXTRAPOLATION_ABOVE_K - CELSIUS:.0f} C rather "
+                "than extrapolated, and HMF self-degradation is a "
+                "single-temperature 0.9 %-per-7-days control carried with no "
+                "activation energy. K5a declared gap G2: the 50-150 C window "
+                "is empty. EXPECT HMF TO BE OVER-PREDICTED."
+            )
+            if peak_k > HMF_SINK_NO_EXTRAPOLATION_ABOVE_K and (
+                "Cys" in mapped_precursors
+            ):
+                warnings.append(
+                    "5-HMF + cysteine: the sink constant is HELD at its 50 C "
+                    "value for this whole program. Holding it UNDER-states the "
+                    "sink; extrapolating it is a named prohibited derivation "
+                    "(K5a sec. 7.3), and the direction is stated rather than "
+                    "chosen for convenience."
+                )
+        if "DMHF" in furanic_keys or "AF" in furanic_keys:
+            warnings.append(str(FURANONE_EA_ASSUMPTION["warning"]))
+            warnings.append(
+                "DMHF: the LEVEL of the hexose route is a DECLARED TRANSFER "
+                "from the pentose calibration. There is no absolute hexose "
+                "DMHF yield in any of the five papers of the cluster -- the "
+                "intact-C6 structure is settled twice over by CAMOLA and the "
+                "magnitude is measured nowhere. Blank 1997's 39 cells are all "
+                "pentose; Wang & Ho's nine are all per mole of methylglyoxal."
+            )
+            warnings.append(
+                "DMHF: the Edge B (methylglyoxal, C3+C3) level is DIGITISED "
+                "FROM A BAR CHART with no text layer, by external-standard "
+                "HPLC with no recovery correction and an unstated pH hold -- "
+                "three transmission defects deep, carried as a PRIOR ONLY. Its "
+                "bracket (below detection in situ; 8-13 % in a real bean; 20 % "
+                "at a 1.4 M methylglyoxal spike) is a hold-out, not a fit."
+            )
+            warnings.append(
+                "DMHF: the CYSTEINE SINK (Edge C) is present, balanced, and "
+                "runs at EXACTLY ZERO. No measurement of DMHF consumption "
+                "exists anywhere; fitting one to Shu & Ho's 6.0 % GC area is a "
+                "named prohibited derivation. Any DMHF number here is a "
+                "FORMATION number with no sink."
+            )
+
     if reasons:
         return EnvelopeDeclaration(
             state="out_of_envelope",
@@ -1033,6 +1143,12 @@ class CorePrediction:
         between a lane whose rate is measured and a lane whose rate is not.
         """
         widths = dict(self.run_metadata.get("lipid_extra_decades") or {})
+        # B7: the furanone edges carry NO activation energy from any source
+        # (all five papers of the cluster are single-temperature), so their
+        # partition barrier is a DECLARED ASSUMPTION and is priced the same
+        # way B6 prices its Q10 -- by re-integrating at both corners.
+        furanic = dict(self.run_metadata.get("furanic_extra_decades") or {})
+        widths.update(furanic)
         return {
             compound: absolute_concentration(
                 value,
@@ -1041,6 +1157,9 @@ class CorePrediction:
                 provenance=(
                     f"kinetic core {self.declaration.lane} lane"
                     + (
+                        "; +declared-assumption band (furanone partition "
+                        "barrier, +/-50 kJ/mol) sized by re-integration"
+                        if compound in furanic else
                         "; +declared-assumption band (Q10, lipid fraction, "
                         "peroxide value) sized by re-integration"
                         if compound in widths else ""
@@ -1174,6 +1293,37 @@ def _run_lipid_lane(
     return point, metadata, extra_decades
 
 
+#: B7. The compounds whose absolute level rests on the furanone-partition
+#: barrier -- a DECLARED ASSUMPTION, because no activation energy for any
+#: furanone family exists in the accessible literature on any edge.
+FURANONE_BANDED_KEYS: Tuple[str, ...] = ("DMHF", "AF")
+
+#: The edges the assumption sits on. ``k_af_dmhf`` is NOT here: it inherits a
+#: measured Ea (Martins' 1-DG -> acetic acid, corroborated by Knol 2010) and is
+#: swept separately, over three decades, in the B7 fit report.
+_FURANONE_PARTITION_EDGES: Tuple[str, ...] = (
+    "k_dpo_af", "k_odg_af", "k_mgo_dmhf",
+)
+
+
+def _furanone_corner_parameters(
+    parameters: Mapping[str, Any], ea_offset_kj_mol: float
+) -> Dict[str, Any]:
+    """The operative set with the furanone PARTITION barrier shifted."""
+    from dataclasses import replace
+
+    out = dict(parameters)
+    for key in _FURANONE_PARTITION_EDGES:
+        parameter = out.get(key)
+        if parameter is None or getattr(parameter, "ea_kj_mol", None) is None:
+            continue
+        out[key] = replace(
+            parameter,
+            ea_kj_mol=float(parameter.ea_kj_mol) + float(ea_offset_kj_mol),
+        )
+    return out
+
+
 def _integrate_program(
     lane: str,
     parameters: Mapping[str, Any],
@@ -1294,6 +1444,37 @@ def predict(
         )
         metadata["lanes"] = list(lanes)
 
+    # B7. PRICE THE FURANONE ASSUMPTION BY RE-INTEGRATION, not by nominating a
+    # width. Two extra integrations at the corners of the declared +/-50 kJ/mol
+    # partition barrier. The result is often much narrower than the barrier
+    # alone would suggest, because the deoxyosone POOL that feeds the edge is
+    # itself depleting -- which a nominal width could not have shown.
+    furanic_decades: Dict[str, float] = {}
+    if maillard_lane is not None and (
+        set(declaration.mapped_targets.values()) & set(FURANONE_BANDED_KEYS)
+    ):
+        from .parameters_furanic import FURANONE_PARTITION_EA_BAND_KJ_MOL
+
+        band = float(FURANONE_PARTITION_EA_BAND_KJ_MOL)
+        corners = []
+        for offset in (-band, +band):
+            corner_state, _ = _integrate_program(
+                maillard_lane,
+                _furanone_corner_parameters(operative, offset),
+                dict(declaration.mapped_precursors),
+                spec.process,
+            )
+            corners.append(corner_state)
+        for key in FURANONE_BANDED_KEYS:
+            lo = min(float(c.get(key, 0.0)) for c in corners)
+            hi = max(float(c.get(key, 0.0)) for c in corners)
+            if lo > 0.0 and hi > 0.0 and float(final_state.get(key, 0.0)) > 0.0:
+                furanic_decades[key] = 0.5 * abs(math.log10(hi / lo))
+        metadata["furanone_partition_band_kj_mol"] = band
+        metadata["furanone_partition_corner_mmol_per_l"] = [
+            {k: float(c.get(k, 0.0)) for k in FURANONE_BANDED_KEYS} for c in corners
+        ]
+
     extra_decades: Dict[str, float] = {}
     if LIPID in lanes:
         lipid_state, lipid_metadata, extra_decades = _run_lipid_lane(spec, declaration)
@@ -1345,6 +1526,12 @@ def predict(
             compound: extra_decades[key]
             for compound, key in declaration.mapped_targets.items()
             if key in extra_decades
+        }
+    if furanic_decades:
+        metadata["furanic_extra_decades"] = {
+            compound: furanic_decades[key]
+            for compound, key in declaration.mapped_targets.items()
+            if key in furanic_decades
         }
 
     return CorePrediction(

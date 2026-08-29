@@ -723,9 +723,17 @@ def test_network_shape_is_pinned():
     # so a wider state vector changes no acrylamide prediction.
     # 56 through B2.2; B2.3 adds ONE terminal accounting pool (CBX) to the
     # SULFUR block this lane inherits, and no species any rate law can see.
-    assert described["n_species"] == 57
-    assert described["trunk_reactions"] == 15
+    # B7 adds SEVEN more, all inherited and none of them acrylamide's: five on
+    # the trunk (the furanic channel) and two on the sulfur block. 57 through
+    # B6.
+    assert described["n_species"] == 64
+    # ... and ELEVEN more trunk REACTIONS, which this lane DOES compose,
+    # because the furanic channel hangs on the trunk rather than in a lane of
+    # its own. That is deliberate and it is what lets a glucose/alanine pot --
+    # which has no glycine and therefore no Amadori compound -- still make HMF
+    # and DMHF through the AMINE-FREE routes of Kocadagli's melt.
+    assert described["trunk_reactions"] == 26
     assert described["acrylamide_reactions"] == 16
-    assert described["n_reactions"] == 31
+    assert described["n_reactions"] == 42
     assert described["sulfur_reactions_composed_in"] == 0
     assert described["reference_temperature_K"] == T_REF_A_K

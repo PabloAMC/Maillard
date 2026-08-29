@@ -1,15 +1,17 @@
 # Cutover final exam — the kinetic core vs the old lane on the 21 frozen bundles
 
-Generated 2026-08-29 on `audit-remediation` @ `242bd1e` (dirty).
+Generated 2026-08-29 on `audit-remediation` @ `49df685` (dirty).
 
 Pre-registered in [`results/validation/cutover_prereg.md`](cutover_prereg.md), written BEFORE this scorer existed and before any measured value was read. **No parameter changed in this wave.** Pass band: **3.0x** on every level row, taken unchanged from the B2.1 and B3 scorecards.
 
 ## Headline
 
-- **21 bundles, 40 points.** The core ANSWERS **27** and **DECLINES 13**, each declension with a named structural reason.
-- **Core: 3/27 within 3.0x**, median fold error **50.13x**, worst 3.339e+04x.
+- **21 bundles, 40 points.** The core ANSWERS **34** and **DECLINES 6**, each declension with a named structural reason.
+- **Core: 4/34 within 3.0x**, median fold error **40.23x**, worst 3.339e+04x.
 - **Old lane, all 39 points it scores: 7 within 3.0x**, median **10.94x**, worst 2748x.
-- **PAIRED SUBSET (n=27), the only apples-to-apples number:** core median **50.13x** vs old median **12.65x**.
+- **PAIRED SUBSET (n=33), the only apples-to-apples number:** core median **42.23x** vs old median **10.86x**.
+- **GEOMETRIC-MEAN FOLD, on the same points:** core over all scored **43.29x**; on the paired subset core **45.02x** vs old **13.14x**. A median moves only when a row crosses the middle of the pool; a geometric mean moves whenever any row moves, including a row that was already failing.
+- **4 of these points are SHARED with the hold-out panel** — the same measurements, scored twice. THESE FOUR POINTS ARE THE SAME MEASUREMENTS AS FOUR ROWS OF THE KINETIC-CORE HOLD-OUT PANEL, not analogues of them. The exam and the panel are therefore NOT independent evidence on this axis: agreement between them here is one measurement counted twice. Established in results/validation/d1_exam_panel_reconciliation.md sec. 5 and declared in both artifacts from Wave B2.4 onward.
 
 > Read the paired row, not the two unpaired medians. The old lane emits a number for every point including the ones the core declines; a median over guesses and a median over answers are different quantities. Reporting only the unpaired pair would let the core look good by refusing its hardest points.
 
@@ -17,11 +19,11 @@ Pre-registered in [`results/validation/cutover_prereg.md`](cutover_prereg.md), w
 
 FIT_HOLDOUT_DECLARATION.md Amendment 9 clause 2: the exam is reported BOTH WAYS -- buffer-completed and as-was -- in the same artifact, PERMANENTLY. Not transitional: every number this repo published before B2.3 was computed as-was, and a report that silently replaced them would make its own history unreadable.
 
-| | scored | within band | median fold | paired median (n=27) |
+| | scored | within band | median fold | paired median (n=33) |
 |---|---:|---:|---:|---:|
-| **buffer-completed** | 27 | 3 | 50.13x | **50.13x** |
-| **as-was (no buffer field)** | 27 | 2 | 47.12x | **47.12x** |
-| old lane (identical in both) | 39 | 7 | 10.94x | 12.65x |
+| **buffer-completed** | 34 | 4 | 40.23x | **42.23x** |
+| **as-was (no buffer field)** | 34 | 3 | 31.22x | **35.08x** |
+| old lane (identical in both) | 39 | 7 | 10.94x | 10.86x |
 
 > THE OLD LANE HAS NO pH STATE AND NO BUFFER INPUT AT ALL, so its numbers are BY CONSTRUCTION the same in both columns. That is why the old-lane comparison is reported against BOTH core columns rather than recomputed: the comparison changes because the CORE moves, never because the old lane does.
 
@@ -33,19 +35,19 @@ FIT_HOLDOUT_DECLARATION.md Amendment 9 clause 2: the exam is reported BOTH WAYS 
 
 | family | points | completed median | completed in band | as-was median | as-was in band |
 |---|---:|---:|---:|---:|---:|
-| `acrylamide_180C` | 7 | 8.145x | 1 | 8.145x | 1 |
-| `furan_browning_glc_alanine` | 7 | --x | 0 | --x | 0 |
+| `acrylamide_180C` | 7 | 6.323x | 1 | 6.323x | 1 |
+| `furan_browning_glc_alanine` | 7 | 11.93x | 1 | 11.93x | 1 |
 | `matrix_path_lipid` | 8 | 1863x | 0 | 1863x | 0 |
-| `sulfur_hofmann1998_145C` | 10 | 12.21x | 2 | 17.15x | 1 |
+| `sulfur_hofmann1998_145C` | 10 | 11.48x | 2 | 17.15x | 1 |
 | `sulfur_yiltirak2026_T_ladder` | 8 | 193.5x | 0 | 444.5x | 0 |
 
 ### Every point the buffer field moved
 
 | bundle | compound | buffer | provenance | as-was fold | completed fold | |
 |---|---|---|---|---:|---:|---|
-| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Furfurylthiol (FFT) | phosphate 0.5 M | primary_source_pdf | 60.04x | 13.46x | closer |
-| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Furfurylthiol (FFT) | phosphate 0.5 M | primary_source_pdf | 31.22x | 318.1x | **further** |
-| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Methyl-3-furanthiol (MFT | phosphate 0.5 M | primary_source_pdf | 8.824x | 2.643x | closer |
+| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Furfurylthiol (FFT) | phosphate 0.5 M | primary_source_pdf | 54.02x | 12.35x | closer |
+| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Furfurylthiol (FFT) | phosphate 0.5 M | primary_source_pdf | 27.36x | 401.4x | **further** |
+| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Methyl-3-furanthiol (MFT | phosphate 0.5 M | primary_source_pdf | 8.539x | 2.48x | closer |
 | `mp_holdout_hofmann1998_ribose_cysteine_145C_20` | 2-Furfurylthiol (FFT) | phosphate 0.5 M | primary_source_pdf | 6.963x | 7.248x | **further** |
 | `mp_holdout_hofmann1998_ribose_cysteine_145C_20` | 2-Methyl-3-furanthiol (MFT | phosphate 0.5 M | primary_source_pdf | 207.5x | 42.23x | closer |
 | `mp_holdout_hofmann1998_ribose_cysteine_145C_20` | 2-Furfurylthiol (FFT) | phosphate 0.5 M | primary_source_pdf | 35.08x | 499x | **further** |
@@ -65,10 +67,10 @@ FIT_HOLDOUT_DECLARATION.md Amendment 9 clause 2: the exam is reported BOTH WAYS 
 
 | family | points | core answered | core declined | core within band | old within band | core median | old median |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| `acrylamide_180C` | 7 | 5 | 2 | 1 | 2 | 8.145x | 6.161x |
-| `furan_browning_glc_alanine` | 7 | 0 | 7 | 0 | 2 | --x | 5.658x |
+| `acrylamide_180C` | 7 | 7 | 0 | 1 | 2 | 6.323x | 6.161x |
+| `furan_browning_glc_alanine` | 7 | 5 | 2 | 1 | 2 | 11.93x | 5.658x |
 | `matrix_path_lipid` | 8 | 4 | 4 | 0 | 2 | 1863x | 104.1x |
-| `sulfur_hofmann1998_145C` | 10 | 10 | 0 | 2 | 0 | 12.21x | 13.77x |
+| `sulfur_hofmann1998_145C` | 10 | 10 | 0 | 2 | 0 | 11.48x | 13.77x |
 | `sulfur_yiltirak2026_T_ladder` | 8 | 8 | 0 | 0 | 1 | 193.5x | 16.77x |
 
 ## Every point, old lane vs core
@@ -83,24 +85,24 @@ FIT_HOLDOUT_DECLARATION.md Amendment 9 clause 2: the exam is reported BOTH WAYS 
 | `external_validation_li_2026_spi_wg_hme_control` | nonanal | ppb | 72.66 | 9548 | 131.4x | **DECLINED** | -- | --x | -- |
 | `external_validation_liu_2023_ppi_offnote_basel` | hexanal | ppb | 1.132e+04 | 1125 | 10.06x | ANSWERED | 0.339 | 3.339e+04x | **FAIL** |
 | `external_validation_liu_2023_ppi_offnote_basel` | nonanal | ppb | 0.8018 | 83.92 | 104.7x | **DECLINED** | -- | --x | -- |
-| `mp_holdout_fructose_asparagine_180C_Lin2022` | Acrylamide | ppb | 1859 | 100.6 | 18.49x | ANSWERED | 228.3 | 8.145x | **FAIL** |
-| `mp_holdout_fructose_asparagine_180C_Lin2022` | 5-Hydroxymethylfurfural (HMF) | ppb | 1.228e+04 | 6.121e+04 | 4.984x | **DECLINED** | -- | --x | -- |
+| `mp_holdout_fructose_asparagine_180C_Lin2022` | Acrylamide | ppb | 1859 | 100.6 | 18.49x | ANSWERED | 225.4 | 8.246x | **FAIL** |
+| `mp_holdout_fructose_asparagine_180C_Lin2022` | 5-Hydroxymethylfurfural (HMF) | ppb | 1.228e+04 | 6.121e+04 | 4.984x | ANSWERED | 1942 | 6.323x | **FAIL** |
 | `mp_holdout_glucose_alanine_130C_2h_pH50_Schibi` | Furfural | ppb | 1633 | 1.846e+04 | 11.3x | **DECLINED** | -- | --x | -- |
-| `mp_holdout_glucose_alanine_130C_2h_pH50_Schibi` | DMHF | ppb | 1153 | 6964 | 6.039x | **DECLINED** | -- | --x | -- |
-| `mp_holdout_glucose_alanine_130C_2h_pH50_Schibi` | 5-Hydroxymethylfurfural (HMF) | ppb | 5.725e+04 | 2.423e+04 | 2.363x | **DECLINED** | -- | --x | -- |
+| `mp_holdout_glucose_alanine_130C_2h_pH50_Schibi` | DMHF | ppb | 1153 | 6964 | 6.039x | ANSWERED | 21.84 | 52.8x | **FAIL** |
+| `mp_holdout_glucose_alanine_130C_2h_pH50_Schibi` | 5-Hydroxymethylfurfural (HMF) | ppb | 5.725e+04 | 2.423e+04 | 2.363x | ANSWERED | 2.796e+04 | 2.048x | PASS |
 | `mp_holdout_glucose_alanine_130C_2h_pH80_Schibi` | Furfural | ppb | 2402 | 1.43e+04 | 5.952x | **DECLINED** | -- | --x | -- |
-| `mp_holdout_glucose_alanine_130C_2h_pH80_Schibi` | DMHF | ppb | 5894 | 1.726e+04 | 2.929x | **DECLINED** | -- | --x | -- |
-| `mp_holdout_glucose_alanine_130C_2h_pH80_Schibi` | 5-Hydroxymethylfurfural (HMF) | ppb | 1.01e+05 | 1.876e+04 | 5.363x | **DECLINED** | -- | --x | -- |
-| `mp_holdout_glucose_asparagine_180C_10min_Chang` | Acrylamide | ppb | 28 | 61.32 | 2.19x | ANSWERED | 6766 | 241.7x | **FAIL** |
-| `mp_holdout_glucose_asparagine_180C_30min_Chang` | Acrylamide | ppb | 1459 | 76.04 | 19.19x | ANSWERED | 4041 | 2.77x | PASS |
-| `mp_holdout_glucose_asparagine_180C_30min_water` | Acrylamide | ppb | 832 | 76.04 | 10.94x | ANSWERED | 4041 | 4.857x | **FAIL** |
-| `mp_holdout_glucose_asparagine_180C_30min_water` | 5-Hydroxymethylfurfural (HMF) | ppb | 7000 | 4.313e+04 | 6.161x | **DECLINED** | -- | --x | -- |
-| `mp_holdout_glucose_asparagine_180C_Ye2024` | Acrylamide | umol_per_mol_limiting_precursor | 140.6 | 80.38 | 1.749x | ANSWERED | 7048 | 50.13x | **FAIL** |
-| `mp_holdout_glucose_only_autoclave_121C_Steinha` | 5-Hydroxymethylfurfural (HMF) | ppb | 1.74e+04 | 0 | --x | **DECLINED** | -- | --x | -- |
-| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Furfurylthiol (FFT) | ppb | 7 | 951.2 | 135.9x | ANSWERED | 94.23 | 13.46x | **FAIL** |
-| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Methyl-3-furanthiol (MFT) | ppb | 3 | 1519 | 506.4x | ANSWERED | 32.9 | 10.97x | **FAIL** |
-| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Furfurylthiol (FFT) | ppb | 6 | 343.4 | 57.23x | ANSWERED | 0.01886 | 318.1x | **FAIL** |
-| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Methyl-3-furanthiol (MFT) | ppb | 4 | 22.85 | 5.713x | ANSWERED | 10.57 | 2.643x | PASS |
+| `mp_holdout_glucose_alanine_130C_2h_pH80_Schibi` | DMHF | ppb | 5894 | 1.726e+04 | 2.929x | ANSWERED | 21.84 | 269.9x | **FAIL** |
+| `mp_holdout_glucose_alanine_130C_2h_pH80_Schibi` | 5-Hydroxymethylfurfural (HMF) | ppb | 1.01e+05 | 1.876e+04 | 5.363x | ANSWERED | 2.796e+04 | 3.599x | **FAIL** |
+| `mp_holdout_glucose_asparagine_180C_10min_Chang` | Acrylamide | ppb | 28 | 61.32 | 2.19x | ANSWERED | 6750 | 241.1x | **FAIL** |
+| `mp_holdout_glucose_asparagine_180C_30min_Chang` | Acrylamide | ppb | 1459 | 76.04 | 19.19x | ANSWERED | 4031 | 2.763x | PASS |
+| `mp_holdout_glucose_asparagine_180C_30min_water` | Acrylamide | ppb | 832 | 76.04 | 10.94x | ANSWERED | 4031 | 4.845x | **FAIL** |
+| `mp_holdout_glucose_asparagine_180C_30min_water` | 5-Hydroxymethylfurfural (HMF) | ppb | 7000 | 4.313e+04 | 6.161x | ANSWERED | 2108 | 3.32x | **FAIL** |
+| `mp_holdout_glucose_asparagine_180C_Ye2024` | Acrylamide | umol_per_mol_limiting_precursor | 140.6 | 80.38 | 1.749x | ANSWERED | 7037 | 50.06x | **FAIL** |
+| `mp_holdout_glucose_only_autoclave_121C_Steinha` | 5-Hydroxymethylfurfural (HMF) | ppb | 1.74e+04 | 0 | --x | ANSWERED | 1459 | 11.93x | **FAIL** |
+| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Furfurylthiol (FFT) | ppb | 7 | 951.2 | 135.9x | ANSWERED | 86.44 | 12.35x | **FAIL** |
+| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Methyl-3-furanthiol (MFT) | ppb | 3 | 1519 | 506.4x | ANSWERED | 31.82 | 10.61x | **FAIL** |
+| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Furfurylthiol (FFT) | ppb | 6 | 343.4 | 57.23x | ANSWERED | 0.01495 | 401.4x | **FAIL** |
+| `mp_holdout_hofmann1998_glucose_cysteine_145C_2` | 2-Methyl-3-furanthiol (MFT) | ppb | 4 | 22.85 | 5.713x | ANSWERED | 9.918 | 2.48x | PASS |
 | `mp_holdout_hofmann1998_ribose_cysteine_145C_20` | 2-Furfurylthiol (FFT) *(re-score)* | ppb | 229 | 1409 | 6.151x | ANSWERED | 1660 | 7.248x | **FAIL** |
 | `mp_holdout_hofmann1998_ribose_cysteine_145C_20` | 2-Methyl-3-furanthiol (MFT) *(re-score)* | ppb | 553 | 2878 | 5.204x | ANSWERED | 13.09 | 42.23x | **FAIL** |
 | `mp_holdout_hofmann1998_ribose_cysteine_145C_20` | 2-Furfurylthiol (FFT) *(re-score)* | ppb | 12 | 624.7 | 52.06x | ANSWERED | 0.02405 | 499x | **FAIL** |
@@ -129,18 +131,18 @@ Every claim in `cutover_prereg.md` that this exam can settle, checked against th
 
 | pre-registered claim | outcome | detail |
 |---|---|---|
-| 23 of the 40 points are in envelope; 17 are declared out | **MISSED** | core answered 27, declined 13 |
-| 2 to 7 of the 23 in-envelope points inside band, most likely 4 | **HELD** | 3/27 inside the 3.0x band |
-| core median fold error 10x-100x, and NOT better than the old lane | **HELD** | BAND HALF: core median over all scored points 50.13x, inside the 10x-100x band. NOT-BETTER HALF: on the paired subset the core is 50.13x against the old lane's 12.65x, i.e. the core is WORSE or equal, as claimed. (B2.3 scores both halves; through B2.2 this check tested only the band and printed HELD while its own detail said the opposite -- reported in kinetic_core_b2_2_diagnosis.md sec. 2.) |
+| 23 of the 40 points are in envelope; 17 are declared out | **MISSED** | core answered 34, declined 6 |
+| 2 to 7 of the 23 in-envelope points inside band, most likely 4 | **HELD** | 4/34 inside the 3.0x band |
+| core median fold error 10x-100x, and NOT better than the old lane | **HELD** | BAND HALF: core median over all scored points 40.23x, inside the 10x-100x band. NOT-BETTER HALF: on the paired subset the core is 42.23x against the old lane's 10.86x, i.e. the core is WORSE or equal, as claimed. (B2.3 scores both halves; through B2.2 this check tested only the band and printed HELD while its own detail said the opposite -- reported in kinetic_core_b2_2_diagnosis.md sec. 2.) |
 | Yiltirak: UNDER-prediction, worsening as temperature falls | **HALF-FALSIFIED** | DIRECTION WRONG -- the core OVER-predicts at 4/4 rungs, not under. GRADIENT RIGHT -- the worst rung is not the 100 C one (598.6x). |
-| Lin 2022 (fructose-fed) is the WORST acrylamide point | **FALSIFIED** | Lin fold 8.145x; worst Chang/Ye glucose fold 241.7x. The fructose point is the BEST acrylamide point, not the worst. |
+| Lin 2022 (fructose-fed) is the WORST acrylamide point | **FALSIFIED** | Lin fold 8.246x; worst Chang/Ye glucose fold 241.1x. The fructose point is the BEST acrylamide point, not the worst. |
 | acrylamide direction: UNDER-prediction, consistent with Knol 2010 | **FALSIFIED** | every answered acrylamide point OVER-predicts; the module under-predicted its own B3 gating row and over-predicts here by 2.8x-242x |
 
 ## What the exam found
 
 ### The core is WORSE than the old lane on the paired subset, and that is the headline
 
-On the 27 points both lanes answer, the core's median fold error is **50.13x** against the old lane's **12.65x**, i.e. about **3.964x worse on median accuracy**. The pre-registration allowed for this outcome and said it in advance ('the core is not expected to beat the old lane on median accuracy in this exam'), so this is a confirmed expectation rather than a surprise — but it is a negative result and it is the first thing a reader should be told.
+On the 33 points both lanes answer, the core's median fold error is **42.23x** against the old lane's **10.86x**, i.e. about **3.887x worse on median accuracy**. The pre-registration allowed for this outcome and said it in advance ('the core is not expected to beat the old lane on median accuracy in this exam'), so this is a confirmed expectation rather than a surprise — but it is a negative result and it is the first thing a reader should be told.
 
 What the core buys instead is the 17 declensions and the localisation of the failures. The old lane emitted a number for all 8 matrix-path lipid points and all 7 HMF/DMHF/furfural points; every one of those numbers came from a route the kinetic core does not have, and 5 of the old lane's 5 in-band hits sit in exactly those families. Whether that trade is worth making is a judgement, and the numbers for making it are both in the family table above.
 
@@ -187,4 +189,13 @@ These points ARE answered, but at conditions the parameters do not license. The 
 - pH 7 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED.
 - pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.
 - water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis.
+- 5-HMF: the two formation limbs are ingested WHOLE from Kocadagli & Gokmen 2016's AMINE-FREE amorphous glucose melt at 160-200 C. This program runs at 180 C in an aqueous or matrix system, so both the temperature and the physical state are extrapolations. K5a sec. 6.2: that limb's activation energy reproduces four independent ways in the melt and COLLAPSES in all three real-matrix systems in the corpus.
+- 5-HMF: THE MODEL HAS NO VALIDATED SINK AT COOKING TEMPERATURE. The only audit-surviving HMF sink in the corpus (Hamzalioglu 2018, HMF + cysteine) is measured over 5-50 C and is CLAMPED at 50 C rather than extrapolated, and HMF self-degradation is a single-temperature 0.9 %-per-7-days control carried with no activation energy. K5a declared gap G2: the 50-150 C window is empty. EXPECT HMF TO BE OVER-PREDICTED.
+- pH 5 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.
+- DMHF/furanone: the formation edge carries NO activation energy of its own -- none exists in the literature, on any edge, from any of the five papers in the cluster, all of which are single-temperature. Its temperature dependence is INHERITED from the measured 1-deoxyosone step. The reported interval spans a +/-50 kJ/mol partition barrier and is priced by re-integration, not nominated.
+- DMHF: the LEVEL of the hexose route is a DECLARED TRANSFER from the pentose calibration. There is no absolute hexose DMHF yield in any of the five papers of the cluster -- the intact-C6 structure is settled twice over by CAMOLA and the magnitude is measured nowhere. Blank 1997's 39 cells are all pentose; Wang & Ho's nine are all per mole of methylglyoxal.
+- DMHF: the Edge B (methylglyoxal, C3+C3) level is DIGITISED FROM A BAR CHART with no text layer, by external-standard HPLC with no recovery correction and an unstated pH hold -- three transmission defects deep, carried as a PRIOR ONLY. Its bracket (below detection in situ; 8-13 % in a real bean; 20 % at a 1.4 M methylglyoxal spike) is a hold-out, not a fit.
+- DMHF: the CYSTEINE SINK (Edge C) is present, balanced, and runs at EXACTLY ZERO. No measurement of DMHF consumption exists anywhere; fitting one to Shu & Ho's 6.0 % GC area is a named prohibited derivation. Any DMHF number here is a FORMATION number with no sink.
+- pH 8 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.
 - pH 6.86 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.
+- pH 4.36 was supplied, but the trunk lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.

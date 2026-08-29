@@ -245,6 +245,27 @@ from .lipid import (  # noqa: F401,E402
     slate_yields,
     validate_lipid_structure,
 )
+from .parameters_furanic import (  # noqa: F401,E402
+    EDGE_C_ZERO_BY_DECLARATION,
+    FITTED_FURANIC,
+    FROZEN_K_DPO_AF_L_PER_MMOL_MIN,
+    FURANIC_PARAMETERS,
+    FURANONE_EA_ASSUMPTION,
+    MEASURED_FURANIC,
+    MU_M_HAZARD,
+    furanic_registry_metadata,
+    with_fitted_furanic,
+)
+from .furanic import (  # noqa: F401,E402
+    FURANONE_STRUCTURAL_CONSTRAINTS,
+    HMF_LIMB_SOURCES,
+    NAMING_TRAPS,
+    blank1997_fit_cells,
+    describe_furanic,
+    furanone_yield_model_from_dict,
+    hmf_limb_shares,
+    validate_furanic_structure,
+)
 
 
 def operative_parameters(fitted):
@@ -257,6 +278,16 @@ def operative_parameters(fitted):
     """
     parameters = dict(MARTINS_M4)
     parameters.update(with_fitted_values(fitted))
+    # BUILD WAVE B7. The furanic channel hangs on the trunk, so its eleven
+    # steps are part of EVERY lane's network and their constants must be in
+    # every lane's parameter set. They are added here, at the single choke
+    # point, rather than lane by lane -- which is also why they are not read
+    # from a frozen B7 report: every B1/B2/B3 generator calls this function,
+    # and making them depend on a report produced by a later wave would make
+    # the repository unbootstrappable. The one fitted furanic constant is a
+    # FROZEN LITERAL in `parameters_furanic`, and a unit test asserts that it
+    # equals the value in the B7 fit report to 1e-9.
+    parameters.update(FURANIC_PARAMETERS)
     return parameters
 
 

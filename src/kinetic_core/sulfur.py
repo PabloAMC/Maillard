@@ -108,6 +108,7 @@ from .network import (
     Reaction,
 )
 from .parameters import KineticParameter
+from .parameters_furanic import TEMPERATURE_CAP_K as _FURANIC_TEMPERATURE_CAP_K
 from .parameters_sulfur import (
     MEASURED_SULFUR,
     SulfurParameter,
@@ -693,6 +694,54 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
     Reaction("ch_mesh_decay", {"MESH": 1}, {"FRAG_C": 1, "FRAG_S": 1}, "k_thiol_decay", ""),
     Reaction("ch_actz_decay", {"ACTZ": 1}, {"FRAG_C": 5, "FRAG_N": 1, "FRAG_S": 1},
              "k_thiol_decay", ""),
+    # =======================================================================
+    # BUILD WAVE B7 -- the three furanic edges that need a SULFUR-LANE partner
+    # =======================================================================
+    # The rest of the furanic channel lives on the trunk (network.py). These
+    # three are here and only here because their partners -- cysteine, sulfide
+    # and the 1-deoxyPENTOSONE -- exist only on this lane.
+    Reaction(
+        "r_dpo_af", {"DPO": 1, "Gly": 1}, {"AF": 1, "FRAG_C": 1, "FRAG_N": 1},
+        "k_dpo_af",
+        "B7. DMHF Edge A, PENTOSE arm, and THE ONLY FITTED CONSTANT IN THE "
+        "FURANIC CHANNEL. C5 + C1 -> C6: the pentose cannot make a C6 furanone "
+        "from its own skeleton, so the sixth carbon is the STRECKER ALDEHYDE "
+        "of the amino acid. Blank & Fay 1996 measured that split by 13C "
+        "labelling (~70 % Strecker / ~30 % fragmentation) and Blank 1997 "
+        "reproduced it NON-ISOTOPICALLY at 73/27 using 4-aminobutyric acid, "
+        "which does not undergo Strecker deamination, as a fragmentation-only "
+        "baseline. Two methods, three percentage points apart, same system. "
+        "DECLARED DEFECT: this step is FIRST ORDER in the amine and Blank's "
+        "Table 5 measures the apparent order at n = 0.35-0.71. That is "
+        "hold-out H8 and it is declared in advance, not discovered.",
+    ),
+    Reaction(
+        "r_hmf_cys", {"HMF": 1, "Cys": 1},
+        {"HMFAD": 1, "CBX": 1, "FRAG_N": 1}, "k_hmf_cys",
+        "B7. THE ONLY MEASURED HMF SINK IN THE CORPUS THAT SURVIVES AUDIT "
+        "(Hamzalioglu & Gokmen 2018; K5a sec. 4.1 refuses the other seven, one "
+        "of them because its own authors tested and rejected it). Written "
+        "BIMOLECULAR AND COMPETITIVE rather than as a fixed first-order decay, "
+        "which is K5a MUST-NOT #4: at 160-200 C the edge is out-competed for "
+        "the amine pool by glyoxal, 1-DG and MGO, and writing it first order "
+        "would make it uncompetable. "
+        "Its constant is CLAMPED at 323.15 K -- the data span 5-50 C and "
+        "extrapolating them to cooking temperature is a named prohibited "
+        "derivation. The carboxyl is CARRIED into CBX and the amine centre is "
+        "declared destroyed in CENTRE_LEDGER, the same treatment every other "
+        "cysteine-consuming step in this network gets.",
+    ),
+    Reaction(
+        "r_dmhf_h2s", {"DMHF": 1, "H2S": 1}, {"DMHFS": 1}, "k_dmhf_h2s",
+        "B7. DMHF Edge C, THE SINK, AND ITS RATE IS EXACTLY ZERO. The "
+        "stoichiometry balances exactly (C6H8O3 + H2S -> C6H8O2S + H2O) and it "
+        "is the exact C6 counterpart of this module's existing C5 edge "
+        "furanone_reductive_sulfhydrylation. What does not exist is a "
+        "magnitude: Shu & Ho 1988 report a GC area percent and no residual "
+        "DMHF, no conversion, no mass balance and no molar yield of anything. "
+        "k5b_dmhf_synthesis.md sec. 8.6 names the failure mode a constant "
+        "fitted to its 6.0 % would repeat. The edge ships structural.",
+    ),
 )
 
 #: The full network: B1's trunk first, then the sulfur block.
@@ -804,6 +853,20 @@ CENTRE_LEDGER: Mapping[str, Mapping[str, Any]] = {
         "the step releases a proton equivalent. Its carboxyl IS carried (CBX): "
         "thiazole formation from cysteine and a dicarbonyl is a "
         "decarboxylation.")},
+    # ---- B7 ---------------------------------------------------------------
+    "r_hmf_cys": {"amine": -1, "basis": (
+        "THE HMF SINK. Cysteine's alpha-carboxyl is CARRIED into CBX at full "
+        "strength; its alpha-amine is declared destroyed on the shared basis. "
+        "A CAVEAT THIS DECLARATION CANNOT RESOLVE, stated instead of hidden: "
+        "Hamzalioglu confirms FOUR adducts at delta < 1 ppm -- thiol-Michael, "
+        "amine-Michael, Schiff base and a 2 HMF : 1 Cys adduct -- and only two "
+        "of the four actually consume the amine. The thiol-Michael adduct "
+        "keeps both centres, exactly as ACRCYS does on the acrylamide lane. "
+        "With no measured split among the four, the conservative direction is "
+        "the one that cannot manufacture base, which is this one; if the thiol "
+        "route dominates, this declaration destroys an amine that survived and "
+        "the pot is predicted slightly more ACIDIC than it should be. "
+        + AMINE_FATE_BASIS)},
 }
 
 #: Which pH factor multiplies which reaction. Assigning a step to a factor is a
@@ -958,7 +1021,22 @@ def sulfur_rate_constants_at(
             )
         if isinstance(parameter, KineticParameter) and parameter.ea_kj_mol is None:
             raise ValueError(f"{reaction.key}: trunk parameter {key!r} has no Ea")
-        value = parameter.k_at(float(temperature_k))
+        # B7: A HARD TEMPERATURE CEILING, for the one constant that has one.
+        # Hamzalioglu's HMF + cysteine Ea is fitted to three points spanning
+        # 5-50 C with R^2 = 0.87 and a slope resting on the single point at
+        # which the authors declare the pseudo-first-order assumption
+        # compromised; cooking is 120-200 C. K5a sec. 7.3 registers
+        # extrapolating it as a PROHIBITED DERIVATION. The constant is
+        # therefore HELD at its 50 C value rather than extrapolated -- which
+        # UNDER-states the sink, and that direction is stated in the B7 report
+        # because it makes the module's HMF over-prediction worse rather than
+        # flattering it. A mapping rather than an ``if`` so the next capped
+        # constant cannot be added by editing a branch.
+        _cap = _FURANIC_TEMPERATURE_CAP_K.get(key)
+        value = parameter.k_at(
+            float(temperature_k) if _cap is None
+            else min(float(temperature_k), float(_cap))
+        )
         value *= ph_factor(
             REACTION_PH_FACTOR.get(reaction.key, ""), ph, float(temperature_k)
         )

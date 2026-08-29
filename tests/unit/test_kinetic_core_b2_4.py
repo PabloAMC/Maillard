@@ -141,9 +141,35 @@ def test_the_control_reproduces_b2_3s_cost_and_only_the_ph_rows_move():
     r_shipped = b24.residual_vector(x, b24.PH_ENDPOINT_WEIGHT["shipped"], True)
     cost = 0.5 * float(np.dot(r_shipped, r_shipped))
     published = json.loads(B23_FIT_REPORT.read_text())["objective"]["final_cost"]
-    assert cost == pytest.approx(published, rel=1e-9), (
-        f"the control weighting no longer reproduces B2.3's objective: "
-        f"{cost} vs published {published}")
+
+    # ==== WAVE B7 DISCLOSURE -- THIS BIT-IDENTITY IS BROKEN, ON PURPOSE ====
+    # Through B6 this assertion was `cost == published` to 1e-9, and it was the
+    # demonstration that B2.4's declared pH weighting reproduces B2.3's
+    # objective exactly at B2.3's own vector.
+    #
+    # B7 hangs the FURANIC CHANNEL on the TRUNK, and the sulfur network runs
+    # the trunk. Four of the eleven new steps drain a species the sulfur lane
+    # reads (fructose, 3-deoxyglucosone, 1-deoxyglucosone, methylglyoxal), so
+    # B2.3's residuals move even though NOT ONE of its 48 fitted constants has
+    # been touched. The objective moves 8.1754 -> 8.3862, i.e. +2.6 %.
+    #
+    # WHAT THIS WAVE DID **NOT** DO ABOUT IT: refit. B7's licence is the
+    # furanic channel's own declared FIT rows and nothing else; refitting the
+    # sulfur lane to absorb a trunk change would be exactly the undeclared
+    # sigma-exchange move that D1's diagnosis found accounted for 96 % of the
+    # B2.2 -> B2.3 exam regression. The consequence is REPORTED instead: the
+    # B2.4 vector is now fitted against a slightly different trunk from the one
+    # that ships, the discrepancy is 2.6 % of the objective, and the largest
+    # single exam row it moves is 1.26x (see the B7 hold-out report, H7).
+    # An orchestrator ruling on whether to re-run B2.3/B2.4 against the B7
+    # trunk is requested; nothing here presumes one.
+    B7_TRUNK_SHIFTED_COST = 8.386192115776923
+    assert cost == pytest.approx(B7_TRUNK_SHIFTED_COST, rel=1e-9), (
+        f"B2.3's objective at its own vector has moved again: {cost}. It is "
+        f"expected to differ from the published {published} by exactly the B7 "
+        f"trunk perturbation and by nothing else.")
+    assert cost / published == pytest.approx(1.0258, abs=5e-4), (
+        "the B7 trunk perturbation of B2.3's objective has changed size")
 
     r_measured = b24.residual_vector(x, b24.PH_ENDPOINT_WEIGHT["measured"], True)
     ph_idx = {i for i, row in enumerate(b24.B23.ACTIVE_FIT_ROWS)
