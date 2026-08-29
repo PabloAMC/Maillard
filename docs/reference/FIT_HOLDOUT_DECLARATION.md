@@ -809,3 +809,43 @@ fitted constant is moved.** Pre-registered in
    assertions enforce on CI.
 5. cutover_final_exam's 5e-8 non-bit-reproducibility: accepted (zero verdict
    changes); narrative corrected to match its own table.
+
+## Amendment 17 — 2026-08-30 (K6a/K6b rulings: the sulfur ladder collapses to n=1; the covalent sink closes)
+
+1. PROVENANCE CORRECTION: Kang 2026 Table S4 IS Zhai Food Chem 2022 Table 1
+   (101/102 cells identical incl. a reproduced arithmetic error; shared
+   author). The sulfur ladder is ONE experiment; primary source is Zhai Food
+   Chem 2022; quantification is f'=1 SEMI-QUANT (the "Tier A +/-15%" label is
+   withdrawn) — usable as within-study shape/ratio, never absolute. Zhai
+   JAFC 2023 Fig. 3 col E is marked ALREADY-SEEN (it is the hold-out's own
+   data republished).
+2. RETIRED, not failed: the kang_switch_on_* gating hold-out. The switch-on
+   exists only at the 120-min slice of shifting-peak curves (vanishes at
+   other times, with added xylose, and in Wang 2026's independent 5-rung
+   ladder where thiols peak mid-ladder and FALL). A fixed-time slice across
+   moving maxima measures peak position, not a barrier. Retirement is
+   evidence-based and recorded; the exam row count changes accordingly.
+3. REPLACEMENT HOLD-OUTS (seen-by-extraction, disclosed as always): the
+   response-factor-free 100->120 C threshold in Zhai's 13C5 isotope table;
+   Wang 2026's mid-ladder peak-and-fall shape (both thiols); the Ames
+   extrusion excess-Ea class split (FFT/MFT positive vs thiazoles negative
+   on the 120->150 leg).
+4. REFUTED: Ea_decay_thiol_sink = 248 (B2.2's bound-limited estimate).
+   B8 will replace it bounded by Gigl's measured covalent capture (60.2
+   kJ/mol, range 7-102) with the pi-stacking/covalent T-crossover carried
+   structurally; decay barriers (~60 covalent, ~122 oxidative Zhang) are the
+   same order as formation — the turnover mechanism the Yiltirak time-axis
+   failure has been missing.
+5. FIT: Zhang 2026's three audited Ea (Cys->CysARP 100.9, CysARP->alpha-DC
+   85.7, thiol->disulfide 122.2); Zhai Food Chem heat-map ratios; Feng ARP
+   depletion; browning Ea 28.3/30.6 (two-lab replicate). REFUSED: Zhang's
+   UV-node constants, plateau-artifact Ea, the fifth-order k18; Ames'
+   collapsed ladders; Chan's window (cannot test; non-Arrhenius legs noted).
+6. COVALENT SINK CLOSED (K6b): measured Ea 15-23 kJ/mol vs the >=70
+   threshold — the channel is NEGLIGIBLE at process temperature (capacity
+   falls with T; the equilibrium unwinds on heating per the corpus's only
+   matched forward/reverse pair). B4's covalent ceiling is retired to
+   "measured negligible" in B8. Milk thresholds are ug/kg (7/7 arithmetic
+   match) — the C.18 unit risk is RESOLVED. Refusals adopted: no hexanal
+   rate from Shepelev's decanal; no Yuan panel-inference Ea; hidalgo1993
+   stays out of the covalent lane.
