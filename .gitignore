@@ -479,3 +479,9 @@ scratch/
 #    without re-running the generator is not a flag.
 !results/validation/prefactor_audit.json
 !results/validation/prefactor_audit.md
+
+# 2026-08-30: xTB path-search working outputs stay local-only (no-DFT policy;
+# the compute lane is closed — these are inert leftovers, not provenance)
+data/geometries/multistep/
+data/geometries/xtb_inputs/asparagine_sugar_explicit_water_cluster/
+data/geometries/xtb_inputs/pe_amadori_water/
