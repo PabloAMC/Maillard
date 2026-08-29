@@ -414,3 +414,22 @@ sites) misquotes the paper (it names dismutation OR enoloxo compounds); the
 ledger's "stoichiometry the model uses" claim is false (the model lacks the
 step); the repo's Strecker-aldehyde-leaves co-product contradicts the paper's
 consumed-into-ring route.
+
+## Amendment 9 — 2026-08-29 (pre-declaration of Wave B2.3, before it runs)
+
+1. CHARGE-CONSERVATION FIX (invariant, not a parameter): B2.2 found that
+   solute charge is not conserved — sink steps delete carboxylate-bearing
+   species without depositing the acid equivalent (diagnosis §3 names every
+   site). B2.3 will fix ALL such sites, refit on the unchanged FIT rows, and
+   blind re-sit the full panel + exam. Trigger disclosure: the defect was
+   noticed via hold-out scoring, so the Kang 140 C MFT row is demoted to
+   seen-diagnostic PERMANENTLY (its B2.2 nominal pass was ruled not-counted);
+   the fix itself is a conservation law, defensible with no reference to any
+   hold-out value.
+2. BUFFER-FIELD COMPLETION: the 21 frozen bundles record no buffer species/
+   concentration; the exam therefore scores buffered experiments as water
+   (measured 11x predicted-FFT sensitivity). B2.3 will complete the CONDITION
+   records (buffer identity, concentration, initial pH scale) from each
+   bundle's SOURCE PAPER with per-field provenance notes — measured values,
+   compound lists, and roles remain byte-identical. The exam is then reported
+   BOTH WAYS (buffer-completed and as-was) in the same artifact, permanently.
