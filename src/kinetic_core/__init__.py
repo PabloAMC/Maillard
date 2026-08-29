@@ -199,6 +199,54 @@ from .matrix_oav import (  # noqa: F401,E402
 )
 
 
+# --- Build Wave B6: the lipid-oxidation module ----------------------------
+# Additive in exactly the way B2, B3 and B4 were. This is the FOURTH lane and
+# the first that CO-INTEGRATES with a Maillard lane instead of conflicting with
+# it; the ruling lives in ``lipid.lane_coupling_verdict``.
+from .species_lipid import (  # noqa: F401,E402
+    B4_COMPOUND_KEY,
+    CLEAVAGE_MECHANISM,
+    FRANKEL_SLATE,
+    LIPID_INDEX,
+    LIPID_KEYS,
+    LIPID_SPECIES,
+    LOOH_POOLS,
+    NAMED_UNQUANTIFIED_COPRODUCTS,
+    POSITION_PRODUCTS,
+    initial_lipid_state,
+)
+from .parameters_lipid import (  # noqa: F401,E402
+    COVALENT_SINK,
+    FRANKEL_ZERO_ADDITIVE,
+    K_LOOH_DECOMP_ANCHOR,
+    LIPID_CARRIERS,
+    LIPID_SOURCE_CONTRADICTIONS,
+    Q10_ASSUMPTION,
+    SHIPPED_VALUES_REFUTED,
+    LipidCarrier,
+    LipidParameter,
+    assert_no_dft_lipid,
+    k_looh_decomp_per_min,
+    lipid_registry_metadata,
+    looh_charge_mmol_per_l,
+)
+from .lipid import (  # noqa: F401,E402
+    BranchModel,
+    LOOHComposition,
+    LipidCharge,
+    LipidRun,
+    Y_HEXANAL_PER_LOOH,
+    branch_model_from_dict,
+    charge_from_carrier,
+    describe_lipid,
+    fit_branch_model,
+    integrate_lipid,
+    lane_coupling_verdict,
+    slate_yields,
+    validate_lipid_structure,
+)
+
+
 def operative_parameters(fitted):
     """
     Assemble the full operative parameter set: measured backbone + fitted steps.
@@ -255,6 +303,24 @@ __all__ = [
     "SULFUR_STATE",
     "ACRYLAMIDE_REACTIONS",
     "ACRYLAMIDE_STATE",
+    "BranchModel",
+    "COVALENT_SINK",
+    "FRANKEL_SLATE",
+    "FRANKEL_ZERO_ADDITIVE",
+    "K_LOOH_DECOMP_ANCHOR",
+    "LIPID_CARRIERS",
+    "LIPID_SPECIES",
+    "LOOHComposition",
+    "Q10_ASSUMPTION",
+    "Y_HEXANAL_PER_LOOH",
+    "charge_from_carrier",
+    "describe_lipid",
+    "fit_branch_model",
+    "integrate_lipid",
+    "lane_coupling_verdict",
+    "lipid_registry_metadata",
+    "slate_yields",
+    "validate_lipid_structure",
     "MEASURED_ACRYLAMIDE",
     "MATRIX_THRESHOLDS",
     "WATER_THRESHOLDS",

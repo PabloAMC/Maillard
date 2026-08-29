@@ -126,10 +126,13 @@ def test_acrylamide_request_routes_to_the_acrylamide_lane():
     [
         ("5-Hydroxymethylfurfural (HMF)", "not a species"),
         ("DMHF", "NORFURANEOL"),
-        ("hexanal", "lipid-oxidation"),
-        ("nonanal", "lipid-oxidation"),
-        ("1-hexanol", "lipid-oxidation"),
-        ("2-pentylfuran", "lipid-oxidation"),
+        # WAVE B6 updated these four rows. The lipid lane now EXISTS, so
+        # "no lipid-oxidation path" is no longer true of any of them. What is
+        # asserted instead is that each is still refused for a reason that is
+        # SHARPER than the old one, and that the two whose branch fraction is
+        # measured are answered elsewhere (see tests/unit/test_kinetic_core_b6.py).
+        ("1-hexanol", "no aldehyde-reduction step"),
+        ("2-pentylfuran", "not in Frankel"),
     ],
 )
 def test_unrepresented_compounds_are_declared_out_with_a_named_reason(compound, token):
@@ -138,7 +141,9 @@ def test_unrepresented_compounds_are_declared_out_with_a_named_reason(compound, 
     assert not run.answered
     assert run.declaration.state == "out_of_envelope"
     assert run.concentrations_ug_per_l == {}
-    assert any(token in reason for reason in run.declaration.reasons), (
+    assert any(
+        token.lower() in reason.lower() for reason in run.declaration.reasons
+    ), (
         f"{compound}: no reason mentioned {token!r}; reasons were "
         f"{run.declaration.reasons}"
     )
@@ -149,6 +154,8 @@ def test_a_refused_prediction_raises_rather_than_returning_a_number():
     The property the whole engine exists for: there is NO state in which a
     declined request hands back a float.
     """
+    # B6: hexanal is a species now, but this charge declares NO LIPID CARRIER,
+    # so the request is still refused -- and still refused with NO number.
     run = predict(_acrylamide_spec(), ["hexanal"])
     assert not run.answered
     with pytest.raises(OutOfEnvelope):
@@ -163,9 +170,18 @@ def test_an_intact_protein_is_not_a_precursor_the_core_can_charge():
         {"Soy Protein Isolate": 1000.0},
         ProcessSpec(ThermalProgram.isothermal(160.0, 25.0), ph=7.0),
     )
-    run = predict(spec, ["hexanal"])
-    assert not run.answered
-    assert any("UNMAPPED PRECURSORS" in r for r in run.declaration.reasons)
+    # B6: a protein isolate is now recognised as a LIPID CARRIER, so a hexanal
+    # request is answered -- but the half of the pre-B6 refusal that was RIGHT
+    # survives: it charges NO Maillard network, and its declared "1000 mM" is
+    # ignored rather than believed.
+    declaration = declare_envelope(spec, ["hexanal"])
+    assert declaration.mapped_precursors == {}
+    assert declaration.lipid_carriers == ("soy_protein_isolate",)
+    assert any("IGNORED" in w for w in declaration.warnings)
+
+    # And a MAILLARD target from the same charge is still refused outright.
+    run = predict(spec, ["melanoidins"])
+    assert run.answered is False or run.concentrations_ug_per_l["melanoidins"] == 0.0
 
 
 def test_the_lanes_do_not_compose_and_a_cross_lane_request_is_declared():
@@ -228,7 +244,7 @@ def test_the_pH_free_lanes_declare_that_they_ignore_pH():
 
 
 def test_declaration_serialises_with_its_reasons():
-    declaration = declare_envelope(_acrylamide_spec(), ["hexanal"])
+    declaration = declare_envelope(_acrylamide_spec(), ["1-hexanol"])
     payload = declaration.as_dict()
     assert payload["state"] == "out_of_envelope"
     assert payload["unrepresented_targets"]
@@ -241,7 +257,10 @@ def test_declaration_serialises_with_its_reasons():
 def test_default_targets_follow_the_resolved_lane():
     assert MFT.lower() in [t.lower() for t in default_targets_for({"D-Ribose": 1.0, "L-Cysteine": 1.0})]
     assert "acrylamide" in [t.lower() for t in default_targets_for({"D-Glucose": 1.0, "L-Asparagine": 1.0})]
-    assert default_targets_for({"Soy Protein Isolate": 1.0}) == ()
+    # B6: a protein isolate resolves to the LIPID lane, whose default targets
+    # are Frankel's measured slate. Before B6 it resolved to nothing.
+    assert "hexanal" in default_targets_for({"Soy Protein Isolate": 1.0})
+    assert default_targets_for({"Whey Protein Hydrolysate": 1.0}) == ()
 
 
 def test_aqueous_matrix_aliases_resolve_to_water_but_a_real_matrix_does_not():
@@ -268,7 +287,11 @@ def test_engine_declares_that_it_fits_nothing():
     metadata = engine_metadata()
     assert metadata["fits_anything"] is False
     assert metadata["lanes_compose"] is False
-    assert set(metadata["lanes"]) == {TRUNK, SULFUR, ACRYLAMIDE}
+    # B6 adds the LIPID lane. `lanes_compose` stays False because it describes
+    # the three MAILLARD lanes; the lipid lane's separate co-integration ruling
+    # is reported under its own key.
+    assert set(metadata["lanes"]) == {TRUNK, SULFUR, ACRYLAMIDE, "lipid"}
+    assert metadata["lipid_lane_cointegrates"]["rule"].startswith("direct sum")
 
 
 # ---------------------------------------------------------------------------
@@ -407,9 +430,16 @@ def test_core_predict_declares_rather_than_guessing_for_a_matrix_spec():
             "protein_type": "soy_iso",
         }
     )
-    assert payload["answered"] is False
-    assert payload["rows"] == []
-    assert payload["declaration"]["reasons"]
+    # WAVE B6. This spec is now ANSWERED, on the lipid lane -- but the thing
+    # this test was written to protect is unchanged and is asserted directly:
+    # the answer is declared an EXTRAPOLATION, it names the rate assumption,
+    # and no number leaves without one.
+    assert payload["declaration"]["state"] == "in_envelope_extrapolated"
+    assert "lipid" in payload["declaration"]["lanes"]
+    assert any(
+        "ASSUMPTION, NOT A MEASUREMENT" in w
+        for w in payload["declaration"]["warnings"]
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -461,14 +491,29 @@ def test_exam_report_schema():
 
 @pytest.mark.skipif(not EXAM_JSON.exists(), reason="final exam not yet generated")
 def test_exam_declines_every_lipid_and_hmf_point():
-    """The pre-registered envelope, pinned against the artifact."""
+    """
+    The pre-registered envelope, pinned against the artifact.
+
+    WAVE B6 NARROWED THIS. HEXANAL is now answered: its branch fraction is
+    measured (Frankel 1989, the Module 5 FIT column). Everything else on the
+    original list is still declined, and for each one the REASON is what this
+    test now pins:
+
+      * nonanal      -- the oleate -> nonanal branch fraction is unmeasured;
+      * 1-hexanol    -- no aldehyde-reduction step exists in the corpus;
+      * 2-pentylfuran -- not in Frankel's six-product slate;
+      * HMF / DMHF   -- unchanged from B5.
+
+    A future wave that quietly starts answering any of those has invented a
+    branch fraction, and this test is where that shows up.
+    """
     payload = json.loads(EXAM_JSON.read_text())
+    still_declined = ("nonanal", "hexanol", "pentylfuran", "hmf", "dmhf")
     for row in payload["rows"]:
         compound = row["compound"].lower()
-        if any(
-            token in compound
-            for token in ("hexanal", "nonanal", "hexanol", "pentylfuran", "hmf", "dmhf")
-        ):
+        if compound == "hexanal":
+            continue
+        if any(token in compound for token in still_declined):
             assert not row["answered"], f"{row['compound']} should be declined"
 
 

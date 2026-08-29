@@ -46,6 +46,7 @@ chemistry of its own.
 from __future__ import annotations
 
 import json
+import math
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, Mapping, Optional, Sequence, Tuple
@@ -106,8 +107,16 @@ _B3_FIT_REPORT = _ROOT / "results/validation/kinetic_core_b3_fit_report.json"
 TRUNK = "trunk"
 SULFUR = "sulfur"
 ACRYLAMIDE = "acrylamide"
+#: Build Wave B6. The lipid lane is the FOURTH lane and the FIRST one that
+#: CO-INTEGRATES with a Maillard lane rather than conflicting with it. The
+#: ruling and its condition live in ``lipid.lane_coupling_verdict`` and are
+#: pre-registered in ``results/validation/kinetic_core_b6_prereg.md`` sec. 6.
+LIPID = "lipid"
 
-LANES: Tuple[str, ...] = (TRUNK, SULFUR, ACRYLAMIDE)
+LANES: Tuple[str, ...] = (TRUNK, SULFUR, ACRYLAMIDE, LIPID)
+
+#: The lanes that consume the same cysteine and therefore cannot compose.
+MAILLARD_LANES: Tuple[str, ...] = (TRUNK, SULFUR, ACRYLAMIDE)
 
 
 class OutOfEnvelope(RuntimeError):
@@ -178,6 +187,17 @@ TARGET_ALIASES: Mapping[str, str] = {
     "mft dimer": "MFTD",
     "furfural": "FUR",
     "2-furaldehyde": "FUR",
+    # -- B6, the lipid lane. Frankel 1989's six-product slate, plus nonanal. --
+    "hexanal": "HEXANAL",
+    "n-hexanal": "HEXANAL",
+    "nonanal": "NONANAL",
+    "pentane": "PENTANE",
+    "2,4-decadienal": "DECADIENAL",
+    "trans,trans-2,4-decadienal": "DECADIENAL",
+    "(e,e)-2,4-decadienal": "DECADIENAL",
+    "methyl octanoate": "ME_OCTANOATE",
+    "methyl 9-oxononanoate": "ME_9_OXONONANOATE",
+    "methyl 13-oxo-9,11-tridecadienoate": "ME_13_OXO_TRIDECADIENOATE",
     "methanethiol": "MESH",
     "2-acetylthiazole": "ACTZ",
     "norfuraneol": "NF",
@@ -213,25 +233,41 @@ UNREPRESENTED_COMPOUNDS: Mapping[str, str] = {
     "furaneol": (
         "2,5-dimethyl-4-hydroxy-3(2H)-furanone is not a core species; see DMHF."
     ),
-    "hexanal": (
-        "The kinetic core has NO lipid-oxidation path. Hexanal is a lipid "
-        "hydroperoxide beta-scission product and no core lane forms it."
-    ),
-    "nonanal": (
-        "The kinetic core has NO lipid-oxidation path. Nonanal is the C9 "
-        "fragment of the OLEATE double bond and no core lane forms it."
-    ),
+    # -- B6: hexanal and nonanal LEFT this list. The lipid lane forms both. --
+    # 1-hexanol and 2-pentylfuran did NOT: the lane exists now, and the reason
+    # they are still refused is sharper and different. A wave that un-refused
+    # them would have invented two branch fractions.
     "1-hexanol": (
-        "The kinetic core has NO lipid-oxidation path, and no alcohol-reduction "
-        "step anywhere."
+        "The B6 lipid lane exists and forms the SIX products Frankel 1989 "
+        "measured, but 1-hexanol is not one of them and NO aldehyde-reduction "
+        "step is measured anywhere in the corpus -- in a thermally processed "
+        "extrudate the reductant pool is not even identified. The FAST lane "
+        "emits a number for it; this lane refuses. See "
+        "parameters_lipid.PROHIBITED_DERIVATIONS."
     ),
     "2-pentylfuran": (
-        "The kinetic core has NO lipid-oxidation path. 2-pentylfuran is a "
-        "linoleate-derived alkylfuran and no core lane forms it."
+        "The B6 lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's "
+        "six-product slate and no branch fraction for the linoleate -> "
+        "alkylfuran route is measured anywhere in the fit corpus. The FAST "
+        "lane's shipped 0.08 has no source. Refused rather than invented."
     ),
     "2-pentyl furan": (
-        "The kinetic core has NO lipid-oxidation path. 2-pentylfuran is a "
-        "linoleate-derived alkylfuran and no core lane forms it."
+        "The B6 lipid lane exists, but 2-pentylfuran is NOT in Frankel 1989's "
+        "six-product slate and no branch fraction for the linoleate -> "
+        "alkylfuran route is measured anywhere in the fit corpus. The FAST "
+        "lane's shipped 0.08 has no source. Refused rather than invented."
+    ),
+    "propanal": (
+        "The B6 lipid lane forms no propanal. Propanal is an alpha-LINOLENATE "
+        "scission product; Frankel 1989 fed linoleate only, so the FIT column "
+        "contains no propanal share, and Schroen's 7 % is a property of "
+        "RAPESEED OIL's fatty-acid profile rather than a transferable branch "
+        "fraction."
+    ),
+    "2-nonenal": (
+        "Named in Frankel 1989's introduction as the Hock partner of methyl "
+        "9-oxononanoate, and quantified in none of his tables. No share can be "
+        "fitted for it; see species_lipid.NAMED_UNQUANTIFIED_COPRODUCTS."
     ),
 }
 
@@ -247,6 +283,14 @@ _TARGET_LANE: Mapping[str, str] = {
     "NF": SULFUR,
     "H2S": SULFUR,
     "MEL_N": TRUNK,
+    # -- B6, the lipid lane ------------------------------------------------
+    "HEXANAL": LIPID,
+    "NONANAL": LIPID,
+    "PENTANE": LIPID,
+    "DECADIENAL": LIPID,
+    "ME_OCTANOATE": LIPID,
+    "ME_9_OXONONANOATE": LIPID,
+    "ME_13_OXO_TRIDECADIENOATE": LIPID,
 }
 
 #: Which lane each precursor species REQUIRES (absent = available in all lanes).
@@ -260,6 +304,26 @@ _PRECURSOR_LANE: Mapping[str, str] = {
     "Gln": ACRYLAMIDE,
     "Lys": ACRYLAMIDE,
     "Ala": ACRYLAMIDE,
+}
+
+#: B6. A LIPID CARRIER is not a precursor species: it is a matrix declaration
+#: that resolves to a hydroperoxide pool through
+#: ``parameters_lipid.LIPID_CARRIERS``, whose lipid fraction and peroxide value
+#: are DECLARED ASSUMPTIONS with bands, not measurements. They are kept out of
+#: ``mapped_precursors`` deliberately -- nothing may charge a Maillard network
+#: with a protein isolate, which was the correct half of the pre-B6 refusal.
+LIPID_CARRIER_ALIASES: Mapping[str, str] = {
+    "pea protein isolate": "pea_protein_isolate",
+    "pea protein": "pea_protein_isolate",
+    "ppi": "pea_protein_isolate",
+    "soy protein isolate": "soy_protein_isolate",
+    "soy protein": "soy_protein_isolate",
+    "spi": "soy_protein_isolate",
+    "soy protein concentrate": "soy_protein_isolate",
+    "methyl linoleate hydroperoxide": "frankel_pure_hydroperoxide",
+    "methyl linoleate hydroperoxides": "frankel_pure_hydroperoxide",
+    "linoleate hydroperoxide": "frankel_pure_hydroperoxide",
+    "lipid hydroperoxide": "frankel_pure_hydroperoxide",
 }
 
 
@@ -276,6 +340,14 @@ LANE_DEFAULT_TARGETS: Mapping[str, Tuple[str, ...]] = {
         "methanethiol",
     ),
     ACRYLAMIDE: ("acrylamide",),
+    LIPID: (
+        "hexanal",
+        "pentane",
+        "2,4-decadienal",
+        "methyl octanoate",
+        "methyl 9-oxononanoate",
+        "methyl 13-oxo-9,11-tridecadienoate",
+    ),
 }
 
 
@@ -310,16 +382,24 @@ def default_targets_for(precursors: Mapping[str, float]) -> Tuple[str, ...]:
     an empty success.
     """
     keys = []
+    carriers = []
     for name in precursors:
         key = PRECURSOR_ALIASES.get(_norm(name))
         if key is not None:
             keys.append(key)
-    if not keys:
+            continue
+        carrier = LIPID_CARRIER_ALIASES.get(_norm(name))
+        if carrier is not None:
+            carriers.append(carrier)
+    if not keys and not carriers:
         return ()
-    lane, reasons = resolve_lane(keys, [])
-    if lane is None or reasons:
+    lanes, reasons = resolve_lanes(keys, [], carriers)
+    if reasons or not lanes:
         return ()
-    return LANE_DEFAULT_TARGETS.get(lane, ())
+    out: Tuple[str, ...] = ()
+    for lane in lanes:
+        out = out + LANE_DEFAULT_TARGETS.get(lane, ())
+    return out
 
 
 # ---------------------------------------------------------------------------
@@ -442,6 +522,13 @@ class EnvelopeDeclaration:
     unrepresented_targets: Tuple[Tuple[str, str], ...] = ()
     mapped_precursors: Mapping[str, float] = field(default_factory=dict)
     mapped_targets: Mapping[str, str] = field(default_factory=dict)
+    #: B6. Every lane this request needs. ``lane`` stays the PRIMARY (Maillard)
+    #: lane so that every pre-B6 caller is unchanged; ``lanes`` is the tuple the
+    #: propagator actually runs, and it has more than one member only for a
+    #: CO-INTEGRATED lipid + Maillard request.
+    lanes: Tuple[str, ...] = ()
+    #: B6. The lipid carriers this charge declares, and where each came from.
+    lipid_carriers: Tuple[str, ...] = ()
 
     @property
     def is_answerable(self) -> bool:
@@ -451,6 +538,7 @@ class EnvelopeDeclaration:
         return {
             "state": self.state,
             "lane": self.lane,
+            "lanes": list(self.lanes or ((self.lane,) if self.lane else ())),
             "reasons": list(self.reasons),
             "warnings": list(self.warnings),
             "unmapped_precursors": list(self.unmapped_precursors),
@@ -459,16 +547,27 @@ class EnvelopeDeclaration:
             ],
             "mapped_precursors": dict(self.mapped_precursors),
             "mapped_targets": dict(self.mapped_targets),
+            "lipid_carriers": list(self.lipid_carriers),
         }
 
 
-def resolve_lane(
-    precursor_keys: Sequence[str], target_keys: Sequence[str]
-) -> Tuple[Optional[str], Tuple[str, ...]]:
+def resolve_lanes(
+    precursor_keys: Sequence[str],
+    target_keys: Sequence[str],
+    lipid_carriers: Sequence[str] = (),
+) -> Tuple[Tuple[str, ...], Tuple[str, ...]]:
     """
-    Pick the one lane that can carry this request, or explain why none can.
+    Every lane this request needs, or the reason no combination can carry it.
 
-    Returns ``(lane_or_None, reasons)``.
+    B6 CHANGES THE RULE FOR EXACTLY ONE PAIR. The three Maillard lanes still
+    refuse to compose with each other -- the acrylamide network deliberately
+    omits every sulfur step, and summing them spends the same cysteine twice.
+    The LIPID lane composes with any ONE of them, as a DIRECT SUM, because the
+    species sets are disjoint and the only candidate coupling (the
+    aldehyde-lysine covalent channel) is inert by ruling. The verdict is not
+    hard-coded here: it is asked of ``lipid.lane_coupling_verdict`` on every
+    call, so that enabling the covalent sink makes co-integration stop working
+    rather than silently start double-counting.
     """
     required = set()
     for key in target_keys:
@@ -479,19 +578,56 @@ def resolve_lane(
         lane = _PRECURSOR_LANE.get(key)
         if lane is not None:
             required.add(lane)
+    if lipid_carriers:
+        required.add(LIPID)
 
-    if len(required) > 1:
-        return None, (
+    maillard = sorted(required & set(MAILLARD_LANES))
+    if len(maillard) > 1:
+        return (), (
             "LANE CONFLICT: this request needs both the "
-            + " and ".join(sorted(required))
+            + " and ".join(maillard)
             + " lanes at once. They do not compose -- the acrylamide network "
             "deliberately omits every sulfur step (acrylamide.OUT_OF_SCOPE), "
             "because composing them would spend the same cysteine twice. No "
             "single integration can answer it.",
         )
-    if not required:
-        return TRUNK, ()
-    return required.pop(), ()
+
+    if LIPID in required and maillard:
+        from .lipid import lane_coupling_verdict
+        from .species import SPECIES_KEYS
+
+        verdict = lane_coupling_verdict(list(SPECIES_KEYS))
+        if not verdict["may_cointegrate"]:
+            return (), (
+                "LANE CONFLICT (lipid + " + maillard[0] + "): " + verdict["reason"],
+            )
+        return (maillard[0], LIPID), ()
+
+    if LIPID in required:
+        return (LIPID,), ()
+    if not maillard:
+        return (TRUNK,), ()
+    return (maillard[0],), ()
+
+
+def resolve_lane(
+    precursor_keys: Sequence[str],
+    target_keys: Sequence[str],
+    lipid_carriers: Sequence[str] = (),
+) -> Tuple[Optional[str], Tuple[str, ...]]:
+    """
+    The PRIMARY lane, or the reason none can carry this request.
+
+    Unchanged for every pre-B6 request: with no lipid target and no lipid
+    carrier this returns exactly what it returned before. When a lipid request
+    is co-integrated with a Maillard lane, the Maillard lane is the primary
+    (it owns the pH state, the buffer and the thermal warnings); a lipid-only
+    request returns ``"lipid"``.
+    """
+    lanes, reasons = resolve_lanes(precursor_keys, target_keys, lipid_carriers)
+    if reasons or not lanes:
+        return None, reasons
+    return lanes[0], ()
 
 
 def declare_envelope(
@@ -510,9 +646,25 @@ def declare_envelope(
     # --- precursors ------------------------------------------------------
     mapped_precursors: Dict[str, float] = {}
     unmapped: list = []
+    carriers: list = []
     for name, value in spec.precursors.items():
         key = PRECURSOR_ALIASES.get(_norm(name))
         if key is None:
+            carrier = LIPID_CARRIER_ALIASES.get(_norm(name))
+            if carrier is not None:
+                if carrier not in carriers:
+                    carriers.append(carrier)
+                warnings.append(
+                    f"{name!r} is a LIPID CARRIER, not a precursor species. Its "
+                    f"declared charge ({float(value):g}) is IGNORED -- 'mM of a "
+                    f"protein isolate' has no defensible molar basis -- and the "
+                    f"hydroperoxide pool comes instead from the carrier "
+                    f"registry's declared lipid fraction and peroxide value, "
+                    f"both of which are DECLARED ASSUMPTIONS with bands. It "
+                    f"charges NO Maillard network: an isolate is still not a "
+                    f"small-molecule precursor."
+                )
+                continue
             unmapped.append(str(name))
             continue
         mapped_precursors[key] = mapped_precursors.get(key, 0.0) + float(value)
@@ -551,11 +703,68 @@ def declare_envelope(
             + "; ".join(f"{c} -- {r}" for c, r in unrepresented)
         )
 
+    # --- the lipid charge -------------------------------------------------
+    # A lipid target with no carrier in the precursor list falls back to the
+    # MATRIX descriptor, because that is where a real bundle records "this is a
+    # pea protein isolate". The fallback is only consulted when a lipid target
+    # was actually asked for, so it cannot switch a Maillard-only request onto
+    # the lipid lane behind the caller's back.
+    lipid_targets = [
+        key for key in mapped_targets.values() if _TARGET_LANE.get(key) == LIPID
+    ]
+    if lipid_targets and not carriers:
+        from_matrix = LIPID_CARRIER_ALIASES.get(_norm(spec.process.matrix or ""))
+        if from_matrix is not None:
+            carriers.append(from_matrix)
+            warnings.append(
+                f"no lipid carrier was named among the precursors; the MATRIX "
+                f"descriptor {spec.process.matrix!r} was used instead. Its "
+                f"lipid fraction and peroxide value are declared assumptions."
+            )
+
     # --- lane ------------------------------------------------------------
-    lane, lane_reasons = resolve_lane(
-        list(mapped_precursors), list(mapped_targets.values())
+    lanes, lane_reasons = resolve_lanes(
+        list(mapped_precursors), list(mapped_targets.values()), carriers
     )
+    lane = lanes[0] if lanes else None
     reasons.extend(lane_reasons)
+
+    # --- the lipid lane's own refusals ------------------------------------
+    if LIPID in lanes:
+        from .parameters_lipid import LIPID_CARRIERS, oleate_fraction
+
+        if not carriers:
+            reasons.append(
+                "The lipid lane was selected but the charge declares NO LIPID "
+                "CARRIER. Every product in this lane comes from a hydroperoxide "
+                "pool, and the pool's size is an INPUT (an oxidation-state "
+                "proxy): there is no route that makes a lipid aldehyde from a "
+                "sugar or an amino acid. Name a carrier "
+                f"({', '.join(sorted(set(LIPID_CARRIER_ALIASES.values())))}) or "
+                "supply a peroxide value."
+            )
+        elif "NONANAL" in lipid_targets:
+            oleate = max(
+                oleate_fraction(LIPID_CARRIERS[c]) for c in carriers
+                if c in LIPID_CARRIERS
+            )
+            if oleate > 0.0:
+                reasons.append(
+                    "UNREPRESENTED TARGETS: nonanal -- the lipid lane exists "
+                    "and nonanal is a species in it, but its ONLY parent is the "
+                    "OLEATE hydroperoxide pool and the oleate -> nonanal branch "
+                    f"fraction is measured NOWHERE in the fit corpus. This "
+                    f"matrix is {100.0 * oleate:.0f} % oleate by fatty-acid "
+                    "share, so the pool is not zero. Frankel 1989 fed linoleate "
+                    "only and nonanal appears in no table, figure or sentence "
+                    "of it -- that ABSENCE is a declared hold-out, and honouring "
+                    "it means refusing here rather than carrying the FAST "
+                    "lane's unsourced 'nonanal 0.15' forward."
+                )
+    if lipid_targets and LIPID not in lanes and not lane_reasons:
+        reasons.append(
+            "a lipid product was requested but the lipid lane was not selected"
+        )
 
     # A target whose lane needs a precursor species this charge cannot supply.
     if lane is not None and not unmapped:
@@ -618,23 +827,50 @@ def declare_envelope(
             )
 
 
+    # B6: the lipid lane is ALWAYS an extrapolation, and says so first.
+    if LIPID in lanes:
+        from .parameters_lipid import K_LOOH_DECOMP_ANCHOR, Q10_ASSUMPTION
+
+        warnings.insert(0, Q10_ASSUMPTION.warning)
+        peak = spec.process.thermal.peak_temperature_c
+        warnings.insert(
+            1,
+            f"the lipid lane's rate anchor was measured at "
+            f"{K_LOOH_DECOMP_ANCHOR.temperature_of_measurement_c:g} C and this "
+            f"program peaks at {peak:.1f} C: "
+            f"{Q10_ASSUMPTION.decades_of_extrapolation(peak):.1f} decades of "
+            f"10 C, a factor of "
+            f"{Q10_ASSUMPTION.factor(peak, Q10_ASSUMPTION.lo):.3g}-"
+            f"{Q10_ASSUMPTION.factor(peak, Q10_ASSUMPTION.hi):.3g} on the rate.",
+        )
+        if abs(float(spec.process.ph) - float(K_LOOH_DECOMP_ANCHOR.ph_of_measurement)) > 1e-9:
+            warnings.append(
+                f"pH {spec.process.ph:g} was supplied; the lipid lane carries NO "
+                f"pH term (its anchor is a single pH-6.7 emulsion). The pH is "
+                f"recorded and IGNORED."
+            )
+
     if reasons:
         return EnvelopeDeclaration(
             state="out_of_envelope",
             lane=lane,
+            lanes=tuple(lanes),
             reasons=tuple(reasons),
             warnings=tuple(warnings),
             unmapped_precursors=tuple(sorted(unmapped)),
             unrepresented_targets=tuple(unrepresented),
             mapped_precursors=mapped_precursors,
             mapped_targets=mapped_targets,
+            lipid_carriers=tuple(carriers),
         )
     return EnvelopeDeclaration(
         state="in_envelope_extrapolated" if warnings else "in_envelope",
         lane=lane,
+        lanes=tuple(lanes),
         warnings=tuple(warnings),
         mapped_precursors=mapped_precursors,
         mapped_targets=mapped_targets,
+        lipid_carriers=tuple(carriers),
     )
 
 
@@ -708,7 +944,40 @@ def core_parameters(lane: str) -> Dict[str, Any]:
             )
         )
         return parameters
+    if lane == LIPID:
+        raise ValueError(
+            "the lipid lane has no mass-action parameter dictionary: its "
+            "frozen state is a BRANCH MODEL plus a rate ASSUMPTION. Call "
+            "core_lipid_model() instead -- the distinction is the module's "
+            "whole point."
+        )
     raise ValueError(f"unknown lane {lane!r}")
+
+
+_B6_FIT_REPORT = _ROOT / "results/validation/kinetic_core_b6_fit_report.json"
+
+
+def core_lipid_model():
+    """
+    B6's FROZEN branch model plus the default hydroperoxide-pool composition.
+
+    Returns ``(BranchModel, LOOHComposition)``. The composition default is
+    Frankel's AUTOXIDATION column as fitted -- the closest thing the corpus has
+    to "what an oxidising food lipid's hydroperoxide pool looks like". It is a
+    FIT quantity, not an assumption.
+    """
+    from .lipid import LOOHComposition, branch_model_from_dict
+
+    frozen = _read(_B6_FIT_REPORT)["frozen_parameters"]
+    branch = branch_model_from_dict(frozen["branch_model"])
+    cells = frozen["default_pool_composition"]
+    composition = LOOHComposition(
+        f13_ct=float(cells["LOOH_13_ct"]),
+        f13_tt=float(cells["LOOH_13_tt"]),
+        f9_ct=float(cells["LOOH_9_ct"]),
+        f9_tt=float(cells["LOOH_9_tt"]),
+    )
+    return branch, composition
 
 
 # ---------------------------------------------------------------------------
@@ -753,12 +1022,30 @@ class CorePrediction:
         return float(self.concentrations_ug_per_l[compound])
 
     def absolutes(self) -> Dict[str, Any]:
-        """Every answered concentration wrapped in its B4 reliability band."""
+        """
+        Every answered concentration wrapped in its B4 reliability band.
+
+        B6: a LIPID compound also carries the width of its three DECLARED
+        ASSUMPTIONS (Q10, lipid fraction, peroxide value), computed by
+        re-integration at both corners and added in quadrature with B4's
+        measured reliability band. A lipid absolute therefore reports a much
+        wider interval than a sulfur one, which is the honest difference
+        between a lane whose rate is measured and a lane whose rate is not.
+        """
+        widths = dict(self.run_metadata.get("lipid_extra_decades") or {})
         return {
             compound: absolute_concentration(
                 value,
                 via_partition=True,
-                provenance=f"kinetic core {self.declaration.lane} lane",
+                extra_decades=float(widths.get(compound, 0.0)),
+                provenance=(
+                    f"kinetic core {self.declaration.lane} lane"
+                    + (
+                        "; +declared-assumption band (Q10, lipid fraction, "
+                        "peroxide value) sized by re-integration"
+                        if compound in widths else ""
+                    )
+                ),
             )
             for compound, value in self.concentrations_ug_per_l.items()
         }
@@ -772,10 +1059,22 @@ class CorePrediction:
         display name silently returns ``NoMeasuredThreshold`` for a compound
         that has one -- a wiring bug found and fixed during the B5 cutover.
         """
-        by_key = {
-            self.declaration.mapped_targets.get(compound, compound): value
-            for compound, value in self.concentrations_ug_per_l.items()
-        }
+        from .species_lipid import B4_COMPOUND_KEY, NO_B4_RECORD
+
+        # B6: feed the ALREADY-WIDENED AbsoluteConcentration, not the bare
+        # float. odour_activity auto-wraps a float in B4's measured band alone,
+        # which would silently drop the lipid lane's declared-assumption width
+        # from the OAV interval -- the one place the honesty could leak out.
+        wrapped = self.absolutes()
+        by_key: Dict[str, Any] = {}
+        for compound, value in wrapped.items():
+            key = self.declaration.mapped_targets.get(compound, compound)
+            if key in NO_B4_RECORD:
+                # B6: no structural record, so no threshold, no binding class
+                # and no unsaturation gate. Dropped from the OAV table rather
+                # than defaulted -- ``NO_B4_RECORD`` says why for each.
+                continue
+            by_key[B4_COMPOUND_KEY.get(key, key)] = value
         return oav_table(
             by_key,
             matrix=matrix or resolve_matrix(self.spec.process.matrix),
@@ -800,6 +1099,79 @@ class CorePrediction:
             "species_mmol_per_l": dict(self.species_mmol_per_l),
             "run_metadata": dict(self.run_metadata),
         }
+
+
+def _run_lipid_lane(
+    spec: FormulationSpec, declaration: EnvelopeDeclaration
+) -> Tuple[Dict[str, float], Dict[str, Any], Dict[str, float]]:
+    """
+    Run the B6 lipid lane and size its interval BY RE-INTEGRATION.
+
+    THE INTERVAL IS NOT A NOMINAL WIDTH. The lipid lane's absolute scale rests
+    on three declared assumptions -- the Q10, the carrier's lipid fraction and
+    its peroxide value -- and the honest way to price them is to run the model
+    at both corners of all three and report the span. That also exposes a real
+    property of the kinetics: at process temperature the hydroperoxide pool is
+    EXHAUSTED within the hold, so the Q10 band largely cancels and what is left
+    is the pool band. A nominal width could not have shown that.
+    """
+    from .lipid import charge_from_carrier, integrate_lipid
+    from .parameters_lipid import LIPID_CARRIERS, Q10_ASSUMPTION
+
+    branch, composition = core_lipid_model()
+    segments = list(spec.process.thermal.segments)
+    carrier_keys = [c for c in declaration.lipid_carriers if c in LIPID_CARRIERS]
+    if not carrier_keys:
+        raise OutOfEnvelope(
+            f"{spec.name}: the lipid lane ran with no carrier", declaration
+        )
+
+    def _run(q10, lipid_scale, pv_scale):
+        state: Dict[str, float] = {}
+        runs = []
+        for key in carrier_keys:
+            carrier = LIPID_CARRIERS[key]
+            charge = charge_from_carrier(
+                carrier, composition,
+                lipid_fraction=lipid_scale(carrier),
+                peroxide_value_meq_per_kg=pv_scale(carrier),
+            )
+            run = integrate_lipid(charge, segments, branch, q10=q10)
+            runs.append(run)
+            for species_key, value in run.state_mmol_per_l.items():
+                state[species_key] = state.get(species_key, 0.0) + value
+        return state, runs
+
+    point, point_runs = _run(
+        None, lambda c: c.lipid_mass_fraction, lambda c: c.peroxide_value_meq_per_kg
+    )
+    low, _ = _run(Q10_ASSUMPTION.lo, lambda c: c.lipid_lo, lambda c: c.pv_lo)
+    high, _ = _run(Q10_ASSUMPTION.hi, lambda c: c.lipid_hi, lambda c: c.pv_hi)
+
+    extra_decades: Dict[str, float] = {}
+    for key, value in point.items():
+        lo, hi = low.get(key, 0.0), high.get(key, 0.0)
+        if value > 0.0 and lo > 0.0 and hi > 0.0:
+            extra_decades[key] = 0.5 * abs(math.log10(hi / lo))
+
+    metadata = {
+        "carriers": carrier_keys,
+        "branch_model": branch.as_dict(),
+        "pool_composition": composition.as_dict(),
+        "q10_default": Q10_ASSUMPTION.default,
+        "q10_band": [Q10_ASSUMPTION.lo, Q10_ASSUMPTION.hi],
+        "interval_method": (
+            "RE-INTEGRATION at both corners of the three declared assumptions "
+            "(Q10, lipid fraction, peroxide value). Not a nominal width."
+        ),
+        "declared_assumption_decades": dict(extra_decades),
+        "runs": [dict(r.metadata) for r in point_runs],
+        "warnings": sorted({w for r in point_runs for w in r.warnings}),
+        "refusals": {k: v for r in point_runs for k, v in r.refusals.items()},
+        "lower_corner_mmol_per_l": low,
+        "upper_corner_mmol_per_l": high,
+    }
+    return point, metadata, extra_decades
 
 
 def _integrate_program(
@@ -906,15 +1278,45 @@ def predict(
     if not declaration.is_answerable:
         return CorePrediction(spec=spec, declaration=declaration)
 
-    lane = declaration.lane or TRUNK
-    operative = dict(parameters) if parameters is not None else core_parameters(lane)
-    final_state, metadata = _integrate_program(
-        lane, operative, dict(declaration.mapped_precursors), spec.process
-    )
+    lanes = declaration.lanes or ((declaration.lane or TRUNK),)
+    maillard_lane = next((l for l in lanes if l in MAILLARD_LANES), None)
+
+    final_state: Dict[str, float] = {}
+    metadata: Dict[str, Any] = {"segments": [], "lane": declaration.lane,
+                                "lanes": list(lanes)}
+    if maillard_lane is not None:
+        operative = (
+            dict(parameters) if parameters is not None
+            else core_parameters(maillard_lane)
+        )
+        final_state, metadata = _integrate_program(
+            maillard_lane, operative, dict(declaration.mapped_precursors), spec.process
+        )
+        metadata["lanes"] = list(lanes)
+
+    extra_decades: Dict[str, float] = {}
+    if LIPID in lanes:
+        lipid_state, lipid_metadata, extra_decades = _run_lipid_lane(spec, declaration)
+        overlap = set(lipid_state) & set(final_state)
+        if overlap:
+            raise AssertionError(
+                "lipid and Maillard states overlap on "
+                f"{sorted(overlap)} -- the direct-sum co-integration ruling "
+                "assumed disjoint species sets and that assumption has broken."
+            )
+        final_state.update(lipid_state)
+        metadata["lipid"] = lipid_metadata
 
     concentrations: Dict[str, float] = {}
     for compound, key in declaration.mapped_targets.items():
         mmol = float(final_state.get(key, 0.0))
+        if _TARGET_LANE.get(key) == LIPID:
+            from .species_lipid import (
+                mmol_per_litre_to_ug_per_litre as _lipid_ug,
+            )
+
+            concentrations[compound] = _lipid_ug(key, mmol)
+            continue
         if key == "ACR":
             concentrations[compound] = acrylamide_ppb(mmol)
         elif key in MOLECULAR_WEIGHT_G_PER_MOL:
@@ -932,10 +1334,18 @@ def predict(
     )
     metadata["ph_drift_constants"] = (
         spec.process.ph_drift.as_dict() if spec.process.ph_drift is not None
-        else (core_ph_drift().as_dict() if lane == SULFUR else None)
+        else (core_ph_drift().as_dict() if maillard_lane == SULFUR else None)
     )
     metadata["matrix"] = spec.process.matrix
     metadata["thermal_program"] = spec.process.thermal.describe()
+    # B6: the declared-assumption band, re-keyed from species key to the
+    # caller's own compound name so ``absolutes()`` can find it.
+    if extra_decades:
+        metadata["lipid_extra_decades"] = {
+            compound: extra_decades[key]
+            for compound, key in declaration.mapped_targets.items()
+            if key in extra_decades
+        }
 
     return CorePrediction(
         spec=spec,
@@ -1033,8 +1443,29 @@ def engine_metadata() -> Dict[str, Any]:
                 "FULL_ACRYLAMIDE_REACTIONS (31 steps) = trunk + acrylamide; "
                 "sulfur STEPS deliberately absent"
             ),
+            LIPID: (
+                "B6: a hydroperoxide pool resolved by position (9-/13-) and "
+                "geometry (cis,trans / trans,trans), decomposing first-order "
+                "into Frankel 1989's six-product measured slate. The "
+                "DISTRIBUTION is fitted and frozen; the RATE is a declared, "
+                "bounded ASSUMPTION and every prediction says so."
+            ),
         },
         "lanes_compose": False,
+        "lipid_lane_cointegrates": {
+            "rule": "direct sum with any ONE Maillard lane",
+            "why": (
+                "disjoint species sets, and the only candidate coupling (the "
+                "aldehyde-lysine covalent channel) is INERT BY RULING "
+                "(FIT_HOLDOUT_DECLARATION Amendment 6 ruling 2). Checked at "
+                "every call by lipid.lane_coupling_verdict, not hard-coded."
+            ),
+            "condition": (
+                "revisit the moment the aldehyde-lysine Ea on food proteins is "
+                "measured -- the amine pool then becomes genuinely shared"
+            ),
+        },
+        "lipid_rate_is_an_assumption": True,
         "parameters_from": [
             str(_B1_FIT_REPORT.relative_to(_ROOT)),
             str(_B2_FIT_REPORT.relative_to(_ROOT)),
@@ -1048,6 +1479,11 @@ def engine_metadata() -> Dict[str, Any]:
 
 __all__ = [
     "ACRYLAMIDE",
+    "LIPID",
+    "LIPID_CARRIER_ALIASES",
+    "MAILLARD_LANES",
+    "core_lipid_model",
+    "resolve_lanes",
     "CorePrediction",
     "EnvelopeDeclaration",
     "FormulationSpec",

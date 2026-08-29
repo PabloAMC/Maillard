@@ -1,15 +1,15 @@
 # Cutover final exam — the kinetic core vs the old lane on the 21 frozen bundles
 
-Generated 2026-08-29 on `audit-remediation` @ `0c93520` (dirty).
+Generated 2026-08-29 on `audit-remediation` @ `242bd1e` (dirty).
 
 Pre-registered in [`results/validation/cutover_prereg.md`](cutover_prereg.md), written BEFORE this scorer existed and before any measured value was read. **No parameter changed in this wave.** Pass band: **3.0x** on every level row, taken unchanged from the B2.1 and B3 scorecards.
 
 ## Headline
 
-- **21 bundles, 40 points.** The core ANSWERS **23** and **DECLINES 17**, each declension with a named structural reason.
-- **Core: 3/23 within 3.0x**, median fold error **50.13x**, worst 647.8x.
-- **Old lane, all 31 points it scores: 5 within 3.0x**, median **10.86x**, worst 506.4x.
-- **PAIRED SUBSET (n=23), the only apples-to-apples number:** core median **50.13x** vs old median **12.65x**.
+- **21 bundles, 40 points.** The core ANSWERS **27** and **DECLINES 13**, each declension with a named structural reason.
+- **Core: 3/27 within 3.0x**, median fold error **50.13x**, worst 3.339e+04x.
+- **Old lane, all 39 points it scores: 7 within 3.0x**, median **10.94x**, worst 2748x.
+- **PAIRED SUBSET (n=27), the only apples-to-apples number:** core median **50.13x** vs old median **12.65x**.
 
 > Read the paired row, not the two unpaired medians. The old lane emits a number for every point including the ones the core declines; a median over guesses and a median over answers are different quantities. Reporting only the unpaired pair would let the core look good by refusing its hardest points.
 
@@ -17,11 +17,11 @@ Pre-registered in [`results/validation/cutover_prereg.md`](cutover_prereg.md), w
 
 FIT_HOLDOUT_DECLARATION.md Amendment 9 clause 2: the exam is reported BOTH WAYS -- buffer-completed and as-was -- in the same artifact, PERMANENTLY. Not transitional: every number this repo published before B2.3 was computed as-was, and a report that silently replaced them would make its own history unreadable.
 
-| | scored | within band | median fold | paired median (n=23) |
+| | scored | within band | median fold | paired median (n=27) |
 |---|---:|---:|---:|---:|
-| **buffer-completed** | 23 | 3 | 50.13x | **50.13x** |
-| **as-was (no buffer field)** | 23 | 2 | 47.12x | **47.12x** |
-| old lane (identical in both) | 31 | 5 | 10.86x | 12.65x |
+| **buffer-completed** | 27 | 3 | 50.13x | **50.13x** |
+| **as-was (no buffer field)** | 27 | 2 | 47.12x | **47.12x** |
+| old lane (identical in both) | 39 | 7 | 10.94x | 12.65x |
 
 > THE OLD LANE HAS NO pH STATE AND NO BUFFER INPUT AT ALL, so its numbers are BY CONSTRUCTION the same in both columns. That is why the old-lane comparison is reported against BOTH core columns rather than recomputed: the comparison changes because the CORE moves, never because the old lane does.
 
@@ -35,7 +35,7 @@ FIT_HOLDOUT_DECLARATION.md Amendment 9 clause 2: the exam is reported BOTH WAYS 
 |---|---:|---:|---:|---:|---:|
 | `acrylamide_180C` | 7 | 8.145x | 1 | 8.145x | 1 |
 | `furan_browning_glc_alanine` | 7 | --x | 0 | --x | 0 |
-| `matrix_path_lipid` | 8 | --x | 0 | --x | 0 |
+| `matrix_path_lipid` | 8 | 1863x | 0 | 1863x | 0 |
 | `sulfur_hofmann1998_145C` | 10 | 12.21x | 2 | 17.15x | 1 |
 | `sulfur_yiltirak2026_T_ladder` | 8 | 193.5x | 0 | 444.5x | 0 |
 
@@ -67,7 +67,7 @@ FIT_HOLDOUT_DECLARATION.md Amendment 9 clause 2: the exam is reported BOTH WAYS 
 |---|---:|---:|---:|---:|---:|---:|---:|
 | `acrylamide_180C` | 7 | 5 | 2 | 1 | 2 | 8.145x | 6.161x |
 | `furan_browning_glc_alanine` | 7 | 0 | 7 | 0 | 2 | --x | 5.658x |
-| `matrix_path_lipid` | 8 | 0 | 8 | 0 | 0 | --x | --x |
+| `matrix_path_lipid` | 8 | 4 | 4 | 0 | 2 | 1863x | 104.1x |
 | `sulfur_hofmann1998_145C` | 10 | 10 | 0 | 2 | 0 | 12.21x | 13.77x |
 | `sulfur_yiltirak2026_T_ladder` | 8 | 8 | 0 | 0 | 1 | 193.5x | 16.77x |
 
@@ -75,14 +75,14 @@ FIT_HOLDOUT_DECLARATION.md Amendment 9 clause 2: the exam is reported BOTH WAYS 
 
 | bundle | compound | unit | measured | old pred | old fold | core state | core pred | core fold | band |
 |---|---|---|---:|---:|---:|---|---:|---:|---|
-| `external_validation_bi_2020_raw_pea_hexanal` | hexanal | ppb | -- | 1125 | --x | **DECLINED** | -- | --x | -- |
-| `external_validation_bi_2020_roasted_pea_hexana` | hexanal | ppb | -- | 8.9e+05 | --x | **DECLINED** | -- | --x | -- |
-| `external_validation_li_2026_spi_wg_hme_control` | 1-hexanol | ppb | -- | 2.487e+04 | --x | **DECLINED** | -- | --x | -- |
-| `external_validation_li_2026_spi_wg_hme_control` | 2-pentylfuran | ppb | -- | 1.226e+04 | --x | **DECLINED** | -- | --x | -- |
-| `external_validation_li_2026_spi_wg_hme_control` | hexanal | ppb | -- | 6.266e+04 | --x | **DECLINED** | -- | --x | -- |
-| `external_validation_li_2026_spi_wg_hme_control` | nonanal | ppb | -- | 9548 | --x | **DECLINED** | -- | --x | -- |
-| `external_validation_liu_2023_ppi_offnote_basel` | hexanal | ppb | -- | 1125 | --x | **DECLINED** | -- | --x | -- |
-| `external_validation_liu_2023_ppi_offnote_basel` | nonanal | ppb | -- | 83.92 | --x | **DECLINED** | -- | --x | -- |
+| `external_validation_bi_2020_raw_pea_hexanal` | hexanal | ppb | 1260 | 1125 | 1.12x | ANSWERED | 0.339 | 3717x | **FAIL** |
+| `external_validation_bi_2020_roasted_pea_hexana` | hexanal | ppb | 324 | 8.9e+05 | 2748x | ANSWERED | 88.6 | 3.657x | **FAIL** |
+| `external_validation_li_2026_spi_wg_hme_control` | 1-hexanol | ppb | 20.04 | 2.487e+04 | 1241x | **DECLINED** | -- | --x | -- |
+| `external_validation_li_2026_spi_wg_hme_control` | 2-pentylfuran | ppb | 5626 | 1.226e+04 | 2.179x | **DECLINED** | -- | --x | -- |
+| `external_validation_li_2026_spi_wg_hme_control` | hexanal | ppb | 605.6 | 6.266e+04 | 103.5x | ANSWERED | 69.7 | 8.689x | **FAIL** |
+| `external_validation_li_2026_spi_wg_hme_control` | nonanal | ppb | 72.66 | 9548 | 131.4x | **DECLINED** | -- | --x | -- |
+| `external_validation_liu_2023_ppi_offnote_basel` | hexanal | ppb | 1.132e+04 | 1125 | 10.06x | ANSWERED | 0.339 | 3.339e+04x | **FAIL** |
+| `external_validation_liu_2023_ppi_offnote_basel` | nonanal | ppb | 0.8018 | 83.92 | 104.7x | **DECLINED** | -- | --x | -- |
 | `mp_holdout_fructose_asparagine_180C_Lin2022` | Acrylamide | ppb | 1859 | 100.6 | 18.49x | ANSWERED | 228.3 | 8.145x | **FAIL** |
 | `mp_holdout_fructose_asparagine_180C_Lin2022` | 5-Hydroxymethylfurfural (HMF) | ppb | 1.228e+04 | 6.121e+04 | 4.984x | **DECLINED** | -- | --x | -- |
 | `mp_holdout_glucose_alanine_130C_2h_pH50_Schibi` | Furfural | ppb | 1633 | 1.846e+04 | 11.3x | **DECLINED** | -- | --x | -- |
@@ -120,9 +120,7 @@ FIT_HOLDOUT_DECLARATION.md Amendment 9 clause 2: the exam is reported BOTH WAYS 
 
 These are the points the core refuses. A refusal is an output: it says the model cannot name the compound or cannot represent the system, which is a more useful statement than a number generated by a route that does not exist.
 
-- **hexanal** (matrix_path_lipid) — UNMAPPED PRECURSORS 'Pea Protein Isolate': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge.
-- **hexanal** (matrix_path_lipid) — UNREPRESENTED TARGETS: hexanal -- The kinetic core has NO lipid-oxidation path. Hexanal is a lipid hydroperoxide beta-scission product and no core lane forms it.
-- **1-hexanol** (matrix_path_lipid) — UNMAPPED PRECURSORS 'Soy Protein Isolate': not a species in any core lane. The core is a named small-molecule network; an intact protein, an isolate or a flour is not a precursor it can charge.
+- **1-hexanol** (matrix_path_lipid) — UNREPRESENTED TARGETS: 1-hexanol -- The B6 lipid lane exists and forms the SIX products Frankel 1989 measured, but 1-hexanol is not one of them and NO aldehyde-reduction step is measured anywhere in the corpus -- in a thermally processed extrudate the reductant pool is not even identified. The FAST lane emits a number for it; this lane refuses. See parameters_lipid.PROHIBITED_DERIVATIONS.
 - **Furfural** (furan_browning_glc_alanine) — LANE CONFLICT: this request needs both the acrylamide and sulfur lanes at once. They do not compose -- the acrylamide network deliberately omits every sulfur step (acrylamide.OUT_OF_SCOPE), because composing them would spend the same cysteine twice. No single integration can answer it.
 
 ## Pre-registration scorecard
@@ -131,8 +129,8 @@ Every claim in `cutover_prereg.md` that this exam can settle, checked against th
 
 | pre-registered claim | outcome | detail |
 |---|---|---|
-| 23 of the 40 points are in envelope; 17 are declared out | **HELD** | core answered 23, declined 17 |
-| 2 to 7 of the 23 in-envelope points inside band, most likely 4 | **HELD** | 3/23 inside the 3.0x band |
+| 23 of the 40 points are in envelope; 17 are declared out | **MISSED** | core answered 27, declined 13 |
+| 2 to 7 of the 23 in-envelope points inside band, most likely 4 | **HELD** | 3/27 inside the 3.0x band |
 | core median fold error 10x-100x, and NOT better than the old lane | **HELD** | BAND HALF: core median over all scored points 50.13x, inside the 10x-100x band. NOT-BETTER HALF: on the paired subset the core is 50.13x against the old lane's 12.65x, i.e. the core is WORSE or equal, as claimed. (B2.3 scores both halves; through B2.2 this check tested only the band and printed HELD while its own detail said the opposite -- reported in kinetic_core_b2_2_diagnosis.md sec. 2.) |
 | Yiltirak: UNDER-prediction, worsening as temperature falls | **HALF-FALSIFIED** | DIRECTION WRONG -- the core OVER-predicts at 4/4 rungs, not under. GRADIENT RIGHT -- the worst rung is not the 100 C one (598.6x). |
 | Lin 2022 (fructose-fed) is the WORST acrylamide point | **FALSIFIED** | Lin fold 8.145x; worst Chang/Ye glucose fold 241.7x. The fructose point is the BEST acrylamide point, not the worst. |
@@ -142,7 +140,7 @@ Every claim in `cutover_prereg.md` that this exam can settle, checked against th
 
 ### The core is WORSE than the old lane on the paired subset, and that is the headline
 
-On the 23 points both lanes answer, the core's median fold error is **50.13x** against the old lane's **12.65x**, i.e. about **3.964x worse on median accuracy**. The pre-registration allowed for this outcome and said it in advance ('the core is not expected to beat the old lane on median accuracy in this exam'), so this is a confirmed expectation rather than a surprise — but it is a negative result and it is the first thing a reader should be told.
+On the 27 points both lanes answer, the core's median fold error is **50.13x** against the old lane's **12.65x**, i.e. about **3.964x worse on median accuracy**. The pre-registration allowed for this outcome and said it in advance ('the core is not expected to beat the old lane on median accuracy in this exam'), so this is a confirmed expectation rather than a surprise — but it is a negative result and it is the first thing a reader should be told.
 
 What the core buys instead is the 17 declensions and the localisation of the failures. The old lane emitted a number for all 8 matrix-path lipid points and all 7 HMF/DMHF/furfural points; every one of those numbers came from a route the kinetic core does not have, and 5 of the old lane's 5 in-band hits sit in exactly those families. Whether that trade is worth making is a judgement, and the numbers for making it are both in the family table above.
 
@@ -179,6 +177,14 @@ Four, all wiring rather than chemistry — no parameter moved. The first three w
 
 These points ARE answered, but at conditions the parameters do not license. The warning travels with the number rather than being discovered later.
 
+- EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-8e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band.
+- the lipid lane's rate anchor was measured at 25 C and this program peaks at 40.0 C: 1.5 decades of 10 C, a factor of 2.83-5.2 on the rate.
+- 'Pea Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.
+- temperature program spans 40.0-40.0 C; the integrator is validated over 100-200 C and every operative rate constant was measured over 80-120 C. This is a numerically sound extrapolation of an experimentally unsupported barrier.
+- pH 6 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED.
+- the lipid lane's rate anchor was measured at 25 C and this program peaks at 160.0 C: 13.5 decades of 10 C, a factor of 1.16e+04-2.76e+06 on the rate.
+- 'Soy Protein Isolate' is a LIPID CARRIER, not a precursor species. Its declared charge (1000) is IGNORED -- 'mM of a protein isolate' has no defensible molar basis -- and the hydroperoxide pool comes instead from the carrier registry's declared lipid fraction and peroxide value, both of which are DECLARED ASSUMPTIONS with bands. It charges NO Maillard network: an isolate is still not a small-molecule precursor.
+- pH 7 was supplied; the lipid lane carries NO pH term (its anchor is a single pH-6.7 emulsion). The pH is recorded and IGNORED.
 - pH 6 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.
 - water activity is METADATA ONLY on the acrylamide lane: it changes no rate. The corpus spans a_w 0.35-1.0 without measuring the axis.
 - pH 6.86 was supplied, but the acrylamide lane carries NO pH term at all -- its parameters are homogeneous at pH 6.8. The pH is recorded and IGNORED; it changes no rate. Any pH sensitivity in the measurement is unmodelled.

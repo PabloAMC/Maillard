@@ -121,6 +121,44 @@ def _limiting_precursor_molar(bench: Dict[str, Any]) -> Tuple[Optional[str], Opt
     return min(items, key=lambda kv: kv[1])
 
 
+def _measured_value(
+    bench: Dict[str, Any], compound: str, target_spec: Dict[str, Any]
+) -> Optional[float]:
+    """
+    The measured value for one point, from wherever this bundle's schema keeps it.
+
+    WAVE B6 FIX -- A PRE-EXISTING DEFECT, FOUND BY THE LIPID LANE.
+    ------------------------------------------------------------
+    ``score_core`` and ``score_old_lane`` both took ``target_value`` and then
+    fell back to ``reference_volatiles[compound]["conc_ppb"]``. The seventeen
+    maillard_path bundles carry ``holdout_targets`` with ``target_value``, so
+    they scored. The FOUR matrix_path bundles do not: they carry the value in
+    ``measured_volatiles[compound]["conc_ppb"]``, and ``reference_volatiles``
+    does not exist in them at all. Every matrix_path point therefore came back
+    ``measured = None`` and was reported with NO fold error -- in BOTH lanes,
+    since the two functions shared the bug.
+
+    That went unnoticed because the core REFUSED all four bundles before B6, so
+    a missing measured value cost nothing visible. B6 answers them, and a
+    prediction with no referee is exactly what this exam exists to prevent.
+
+    This is a schema-reading fix, defensible with no reference to any hold-out
+    value -- the same standing as Amendment 9 clause 2's buffer-field
+    completion. It changes the OLD lane's reported numbers too, which is the
+    honest consequence of a shared bug: those points were never scored, and now
+    they are.
+    """
+    for candidate in (
+        target_spec.get("target_value"),
+        (bench.get("reference_volatiles") or {}).get(compound, {}).get("conc_ppb"),
+        target_spec.get("conc_ppb"),
+        (bench.get("measured_volatiles") or {}).get(compound, {}).get("conc_ppb"),
+    ):
+        if candidate is not None:
+            return float(candidate)
+    return None
+
+
 def _fold(predicted: Optional[float], measured: Optional[float]) -> Optional[float]:
     if predicted is None or measured is None:
         return None
@@ -270,17 +308,13 @@ def score_core(bundles: List[Path], *, use_buffer: bool = True) -> List[Dict[str
         targets = bench.get("holdout_targets") or bench.get("measured_volatiles") or {}
         _, limiting_molar = _limiting_precursor_molar(bench)
         spec = _core_spec(bench, use_buffer=use_buffer)
-        buffer_block = (bench.get("conditions") or {}).get("buffer") or {}
+        conditions_block = bench.get("conditions") or {}
+        buffer_block = conditions_block.get("buffer") or {}
 
         for compound, target_spec in targets.items():
             target_spec = target_spec if isinstance(target_spec, dict) else {}
             unit = str(target_spec.get("target_unit", "ppb"))
-            measured = target_spec.get("target_value")
-            if measured is None:
-                measured = (bench.get("reference_volatiles") or {}).get(
-                    compound, {}
-                ).get("conc_ppb")
-            measured = float(measured) if measured is not None else None
+            measured = _measured_value(bench, compound, target_spec)
 
             run = predict(spec, [compound])
             declaration = run.declaration
@@ -290,6 +324,28 @@ def score_core(bundles: List[Path], *, use_buffer: bool = True) -> List[Dict[str
                 else None
             )
             fold = _fold(predicted, measured)
+
+            # WAVE B6. The INTERVAL, not only the point. B4 has always wrapped
+            # an absolute in its measured reliability band, and B6's lipid lane
+            # adds the width of its three DECLARED ASSUMPTIONS (Q10, lipid
+            # fraction, peroxide value) on top. A lane whose rate is an
+            # assumption makes a much weaker claim than a lane whose rate is
+            # measured, and a report that prints only the point erases exactly
+            # that difference. Recorded for every answered ppb row, in both
+            # lanes' units, so the two are comparable.
+            interval = None
+            within_interval = None
+            if run.answered and unit == "ppb":
+                try:
+                    band = run.absolutes().get(compound)
+                except Exception:
+                    band = None
+                if band is not None:
+                    interval = [band.lo_ug_per_l, band.hi_ug_per_l]
+                    if measured is not None:
+                        within_interval = bool(
+                            band.lo_ug_per_l <= measured <= band.hi_ug_per_l
+                        )
 
             rows.append(
                 {
@@ -308,11 +364,19 @@ def score_core(bundles: List[Path], *, use_buffer: bool = True) -> List[Dict[str
                     "core_within_band": (
                         None if fold is None else bool(fold <= PASS_BAND_LEVEL)
                     ),
+                    "core_interval_ug_per_L": interval,
+                    "core_measured_within_interval": within_interval,
                     "b2_1_rescored": (benchmark_id, compound) in B2_1_RESCORED,
                     "buffer_species": buffer_block.get("species"),
                     "buffer_concentration_M": buffer_block.get("concentration_M"),
                     "buffer_provenance_class": buffer_block.get("provenance_class"),
                     "buffer_applied": bool(use_buffer),
+                    # B6: the thermal program, recorded on the row. Without it
+                    # a reader cannot tell a COOKING point from a 40 C / 10 min
+                    # ambient-headspace point, and the lipid lane's accuracy
+                    # splits exactly on that line.
+                    "temp_C": conditions_block.get("temp_C"),
+                    "time_min": conditions_block.get("time_min"),
                 }
             )
     return rows
@@ -364,12 +428,7 @@ def score_old_lane(bundles: List[Path], target_tag: str = "meaty") -> Dict[Tuple
         for compound, target_spec in targets.items():
             target_spec = target_spec if isinstance(target_spec, dict) else {}
             unit = str(target_spec.get("target_unit", "ppb"))
-            measured = target_spec.get("target_value")
-            if measured is None:
-                measured = (bench.get("reference_volatiles") or {}).get(
-                    compound, {}
-                ).get("conc_ppb")
-            measured = float(measured) if measured is not None else None
+            measured = _measured_value(bench, compound, target_spec)
 
             comparison = comparisons.get(compound)
             predicted_native: Optional[float] = None
