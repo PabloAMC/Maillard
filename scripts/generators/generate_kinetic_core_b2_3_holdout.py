@@ -124,6 +124,14 @@ BUFFER_NONE = BufferSpec(
     source="the source states water and declares no buffer")
 FIT_REPORT = ROOT / "results/validation/kinetic_core_b2_3_fit_report.json"
 
+#: WAVE B2.4, ADDITIVE AND BEHAVIOUR-PRESERVING. The default is the B2.3
+#: basename this file has always written, so a plain invocation produces
+#: byte-identical output. B2.4 re-sits this same panel under three declared
+#: weightings and needs three artifacts; it rebinds this module attribute
+#: (and FIT_REPORT above) rather than forking the scorer, because a forked
+#: hold-out scorer is a hold-out scorer that can drift.
+OUT_BASENAME = "kinetic_core_b2_3_holdout_report"
+
 B1_FITTED = {
     "k_glc_frag": (1.000032373292967e-08, 180.69531857985976),
     "k_mgo_mel": (0.02272608289635856, 20.043206355884948),
@@ -188,6 +196,69 @@ def flux(parameters, initial, t_c, minutes, ph, buffer=BUFFER_HOFMANN):
     )
 
 
+#: WAVE B2.4 -- THE FOUR SHARED ROWS, DECLARED.
+#:
+#: These four panel rows are THE SAME MEASUREMENTS as four of the cutover
+#: exam's 23 answered points -- Hofmann & Schieberle 1998's ribose + cysteine
+#: pots at 145 C / 20 min, pH 3 and pH 7 -- not analogues of them. This panel
+#: records `hofmann_ribose_pH7_FFT` at 0.00200x; the exam records the same
+#: measurement at 498.99x, which is the same number inverted.
+#:
+#: Consequence: THE PANEL AND THE EXAM ARE NOT INDEPENDENT EVIDENCE on this
+#: axis. Agreement between them here is one measurement counted twice.
+#: Established in results/validation/d1_exam_panel_reconciliation.md sec. 5 and
+#: declared in BOTH artifacts from Wave B2.4 onward.
+SHARED_WITH_CUTOVER_EXAM: Dict[str, str] = {
+    "hofmann_ribose_pH3_MFT":
+        "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 / MFT",
+    "hofmann_ribose_pH3_FFT":
+        "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 / FFT",
+    "hofmann_ribose_pH7_MFT":
+        "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 / MFT",
+    "hofmann_ribose_pH7_FFT":
+        "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 / FFT",
+}
+
+
+def _abs_log10_folds(rows: List[Dict[str, Any]]) -> List[float]:
+    out = []
+    for r in rows:
+        fold = r.get("fold_error")
+        try:
+            f = float(fold)
+        except (TypeError, ValueError):
+            continue
+        if not np.isfinite(f) or f <= 0.0:
+            continue
+        out.append(abs(math.log10(f)))
+    return out
+
+
+def _continuous_scorecard(rows: List[Dict[str, Any]]) -> Dict[str, Any]:
+    """Median |log10 fold| and geometric-mean fold, gating rows and all rows."""
+    gating_rows = [r for r in rows if r.get("gating") and r.get("pass") is not None]
+    out: Dict[str, Any] = {}
+    for label, block in (("gating", gating_rows), ("all_scored", [
+            r for r in rows if r.get("pass") is not None])):
+        logs = _abs_log10_folds(block)
+        if not logs:
+            out[f"median_abs_log10_fold_{label}"] = None
+            out[f"geometric_mean_fold_{label}"] = None
+            out[f"n_with_a_fold_{label}"] = 0
+            continue
+        out[f"median_abs_log10_fold_{label}"] = float(np.median(logs))
+        out[f"geometric_mean_fold_{label}"] = float(10.0 ** (sum(logs) / len(logs)))
+        out[f"n_with_a_fold_{label}"] = len(logs)
+    out["why_these_are_here"] = (
+        "A pass/fail count is CENSORED: a row already outside the band can "
+        "degrade by two decades and cost the count nothing. D1 sec. 5 measured "
+        "1.42 net decades of B2.2 -> B2.3 degradation that landed entirely on "
+        "already-failing rows and was invisible to the gating total. These "
+        "statistics are not censored and are reported beside it, always."
+    )
+    return out
+
+
 def score(observed: float, predicted: float, band: float) -> Dict[str, Any]:
     if not np.isfinite(predicted) or predicted <= 0 or observed <= 0:
         fold = float("nan")
@@ -234,6 +305,10 @@ def main() -> int:
                  "gating": False if demotion else gating,
                  "gating_in_b2_2": gating,
                  "seen_diagnostic": demotion,
+                 # B2.4: the cutover-exam point this row is the SAME
+                 # MEASUREMENT as, or None. Declared so the double-counting
+                 # between the two scorecards is visible in both.
+                 "shared_with_cutover_exam": SHARED_WITH_CUTOVER_EXAM.get(row_id),
                  "source_anchor": anchor, "comment": comment}
         entry.update(result)
         rows.append(entry)
@@ -941,6 +1016,21 @@ def main() -> int:
             "diagnostic_rows": len(diagnostic),
             "diagnostic_passed": n_diag_pass,
             "unscoreable_or_deferred": len(unscored),
+            # WAVE B2.4 SCORER CONDITION -- the CONTINUOUS statistic, printed
+            # beside the gating count and never without it.
+            #
+            # D1's reconciliation sec. 5 measured what the count cannot see. 22
+            # of the 34 gating rows were ALREADY FAILING in B2.2; between B2.2
+            # and B2.3, 11 of those got worse and 9 got better, for 5.44 decades
+            # lost against 4.02 gained -- 1.42 NET DECADES of degradation that
+            # cost the pass/fail count exactly nothing, because a censored
+            # statistic cannot see movement outside its band.
+            # `hofmann_ribose_pH7_FFT` alone fell 2.02 decades invisibly.
+            #
+            # A gating count answers "how many rows are inside 3x". It does not
+            # answer "did the model get better or worse", and it was read as if
+            # it did. These two lines answer the second question.
+            **_continuous_scorecard(rows),
         },
         "pre_registered_failures": [
             "van Seeventer 50 C -- STILL, and now expected to fail from the "
@@ -1097,7 +1187,7 @@ def main() -> int:
         ),
     }
 
-    out_json = ROOT / "results/validation/kinetic_core_b2_3_holdout_report.json"
+    out_json = ROOT / f"results/validation/{OUT_BASENAME}.json"
     out_json.parent.mkdir(parents=True, exist_ok=True)
     out_json.write_text(json.dumps(payload, indent=2, default=str))
 
@@ -1113,6 +1203,32 @@ def main() -> int:
       f"Diagnostic: {n_diag_pass} / {len(diagnostic)}. "
       f"Unscoreable or explicitly deferred: {len(unscored)}.")
     a("")
+    # B2.4 SCORER CONDITION: the continuous statistic, beside the count.
+    _sc = payload["scorecard"]
+    _mg, _gg = (_sc.get("median_abs_log10_fold_gating"),
+                _sc.get("geometric_mean_fold_gating"))
+    if _mg is not None:
+        a(f"**MEDIAN |log10 FOLD| ON THE GATING ROWS: {_mg:.3f}** "
+          f"(geometric-mean fold {_gg:.2f}x, n={_sc['n_with_a_fold_gating']}). "
+          f"All scored rows: {_sc['median_abs_log10_fold_all_scored']:.3f} "
+          f"({_sc['geometric_mean_fold_all_scored']:.2f}x, "
+          f"n={_sc['n_with_a_fold_all_scored']}).")
+        a("")
+        a(f"> {_sc['why_these_are_here']}")
+        a("")
+    _shared = [r for r in rows if r.get("shared_with_cutover_exam")]
+    if _shared:
+        a(f"**{len(_shared)} OF THESE ROWS ARE SHARED WITH THE CUTOVER EXAM** "
+          f"— the same measurements, scored twice, so the two scorecards are "
+          f"NOT independent evidence on this axis:")
+        a("")
+        a("| panel row | fold here | the exam point it IS |")
+        a("|---|---:|---|")
+        for r in _shared:
+            _f = r.get("fold_error")
+            _fs = f"{_f:.3g}x" if isinstance(_f, float) and np.isfinite(_f) else "--"
+            a(f"| `{r['id']}` | {_fs} | `{r['shared_with_cutover_exam']}` |")
+        a("")
     traj = payload["gating_trajectory"]
     a(f"**GATING TRAJECTORY: B2.1 {traj['B2.1'][0]} / {traj['B2.1'][1]} -> "
       f"B2.2 {traj['B2.2'][0]} / {traj['B2.2'][1]} -> "
@@ -1207,7 +1323,7 @@ def main() -> int:
     a(payload["firewall_disclosure"])
     a("")
 
-    out_md = ROOT / "results/validation/kinetic_core_b2_3_holdout_report.md"
+    out_md = ROOT / f"results/validation/{OUT_BASENAME}.md"
     out_md.write_text("\n".join(lines))
     print(f"GATING {n_gating_pass}/{len(gating)}  diagnostic {n_diag_pass}/"
           f"{len(diagnostic)}  unscored {len(unscored)}")

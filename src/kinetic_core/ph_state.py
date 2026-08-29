@@ -761,6 +761,35 @@ UNTRACKED_TITRATABLE: Mapping[str, str] = {
 #: IF IT IS WRONG, IT IS WRONG IN A NAMED DIRECTION: the pots would be modelled
 #: too acidic, most in the systems with the highest amino-nitrogen loading
 #: (Zhou's ARP + Cys, Cerny's ternary), and least in Kang's TTCA pot.
+#: WAVE B2.4 -- THE CITATION IS CORRECTED, AND THE EVIDENCE RE-DERIVED.
+#:
+#: Through B2.3 the last sentence of this declaration read "See
+#: ph_state.AMINE_FATE_BASIS for ... the pre-freeze probe that sized it". Two
+#: defects: the sentence sits INSIDE `AMINE_FATE_BASIS` and so pointed at
+#: itself, and the probe it pointed at -- `scratch/b23_encoding_probe.py` --
+#: DOES NOT RUN on the shipped tree. D1 sec. 7 found it raises `KeyError:
+#: 'AMN'`: there is no amine pool in `src/kinetic_core/` to patch, so two of
+#: that probe's three "encodings" collapsed onto one code path and the axis
+#: could not be re-probed at all.
+#:
+#: B2.4 rebuilt the probe against the CURRENT species set --
+#: `scripts/generators/probe_amine_fate_b2_4.py`, which derives the released
+#: amino nitrogen as (Cys + ARP + TTCA at t=0) minus (Cys + ARP + TTCA at t)
+#: and adds it back as ammonium at pKa 9.25, with no new species and no new
+#: parameter. IT REPRODUCES THE B2.3 PRE-REGISTRATION'S PUBLISHED TABLE IN
+#: EVERY CELL, TO TWO DECIMALS. So the defect was in the script, not in the
+#: evidence, and the declaration keeps its basis rather than being weakened.
+#:
+#: The cell-by-cell reproduction check is NOT reprinted here on purpose -- a
+#: number copied into a source comment is a number that can go stale silently.
+#: It lives in the frozen artifact
+#: `results/validation/kinetic_core_b2_4_amine_fate_probe.json`, under
+#: `verdict.reproduction_cell_by_cell`. The one comparison this declaration
+#: rests on is stated in the declaration itself, below.
+#:
+#: On the two anchors that actually acidify, the shipped encoding's mean |miss|
+#: is 0.34 pH units and "carry both" is 1.76: the amine cannot be carried and
+#: still reach those endpoints.
 AMINE_FATE_BASIS = (
     "THE LIBERATED AMINO NITROGEN IS DECLARED NON-TITRATABLE AT THE POINT OF "
     "RELEASE. Basis: (i) Amendment 7's three DECLARED FIT drift endpoints -- "
@@ -770,9 +799,13 @@ AMINE_FATE_BASIS = (
     "which is that the amino group is consumed into pyrazines, N-heterocycles "
     "and melanoidin nitrogen while carboxylic acids accumulate. The module has "
     "no step for that consumption, so the centre's loss is accounted where the "
-    "nitrogen leaves. See ph_state.AMINE_FATE_BASIS for the full statement, "
-    "the pre-freeze probe that sized it, and the direction of the error if it "
-    "is wrong."
+    "nitrogen leaves. (iii) A RUNNABLE probe, "
+    "scripts/generators/probe_amine_fate_b2_4.py, which realises the "
+    "counterfactual encoding against the CURRENT species set and puts Zhou's "
+    "three cooled endpoints at 5.04 / 5.11 / 5.89 when the amine is carried, "
+    "against 2.94 / 3.02 / 3.47 when it is not. The comment block above this "
+    "declaration carries the full statement, that probe's frozen result, and "
+    "the direction of the error if the declaration is wrong."
 )
 
 

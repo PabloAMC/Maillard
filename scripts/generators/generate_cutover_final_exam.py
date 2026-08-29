@@ -86,6 +86,31 @@ B2_1_RESCORED = {
 }
 
 
+#: WAVE B2.4 -- THE FOUR SHARED ROWS, DECLARED.
+#:
+#: D1's reconciliation sec. 5 established that four of this exam's 23 answered
+#: points are not merely analogous to four rows of the B2.1/B2.2/B2.3 hold-out
+#: panel -- they are THE SAME MEASUREMENTS. Hofmann & Schieberle 1998's ribose +
+#: cysteine pots at 145 C / 20 min, pH 3 and pH 7, scored once here in fold
+#: error and once there against a 3x band. The panel's `hofmann_ribose_pH7_FFT`
+#: reads 0.00200x and this exam reads 498.99x: the same number, inverted.
+#:
+#: Consequence, and the reason this table exists: THE EXAM AND THE PANEL ARE NOT
+#: INDEPENDENT EVIDENCE. Anyone who reads "the exam says X and the panel agrees"
+#: is, on these four points, reading one measurement twice. It is declared here
+#: and in the panel artifact so the double-counting is visible in both places.
+SHARED_WITH_HOLDOUT_PANEL: Dict[Tuple[str, str], str] = {
+    ("mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
+     "2-Methyl-3-furanthiol (MFT)"): "hofmann_ribose_pH3_MFT",
+    ("mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3",
+     "2-Furfurylthiol (FFT)"): "hofmann_ribose_pH3_FFT",
+    ("mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
+     "2-Methyl-3-furanthiol (MFT)"): "hofmann_ribose_pH7_MFT",
+    ("mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7",
+     "2-Furfurylthiol (FFT)"): "hofmann_ribose_pH7_FFT",
+}
+
+
 def _git_head() -> Dict[str, str]:
     def _run(*args: str) -> str:
         try:
@@ -367,6 +392,10 @@ def score_core(bundles: List[Path], *, use_buffer: bool = True) -> List[Dict[str
                     "core_interval_ug_per_L": interval,
                     "core_measured_within_interval": within_interval,
                     "b2_1_rescored": (benchmark_id, compound) in B2_1_RESCORED,
+                    # B2.4: the panel row id this point is the SAME MEASUREMENT
+                    # as, or None. Declared so the double-counting is visible.
+                    "shared_with_holdout_panel_row": SHARED_WITH_HOLDOUT_PANEL.get(
+                        (benchmark_id, str(compound))),
                     "buffer_species": buffer_block.get("species"),
                     "buffer_concentration_M": buffer_block.get("concentration_M"),
                     "buffer_provenance_class": buffer_block.get("provenance_class"),
@@ -459,10 +488,29 @@ def score_old_lane(bundles: List[Path], target_tag: str = "meaty") -> Dict[Tuple
 
 
 def _summarise(folds: List[float]) -> Dict[str, Any]:
+    """
+    WAVE B2.4 ADDS `geometric_mean_fold`, AND IT IS ADDITIVE.
+
+    D1's reconciliation sec. 2 showed why. The paired median is a RANK
+    statistic over 23 heterogeneous points: between B2.2 and B2.3 it moved
+    10.65x -> 50.13x, a factor of 4.7, while the value it reported did not move
+    in either wave (B2.2's median row was `glucose pH3 / MFT`; B2.3's was an
+    acrylamide-lane row that wave provably did not touch). Four rows crossing
+    the middle of a lumpy pool swung the headline by 4.7x. Over the SAME 23
+    points the geometric mean moved 26.8x -> 47.7x, a factor of 1.78 -- which
+    is the honest size of that degradation.
+
+    A geometric mean of fold errors is the natural summary here because every
+    fold is already a ratio and every residual in the fit is a log: it is the
+    exponential of the mean |log10 fold|, so it moves when ANY row moves,
+    including a row that was already failing. The median stays, and stays
+    reported, because the two disagreeing is itself information about the
+    pool's shape.
+    """
     clean = [f for f in folds if f is not None and math.isfinite(f)]
     if not clean:
         return {"n": 0, "median_fold_error": None, "worst_fold_error": None,
-                "median_abs_log10_error": None}
+                "median_abs_log10_error": None, "geometric_mean_fold": None}
     logs = [abs(math.log10(f)) for f in clean]
     return {
         "n": len(clean),
@@ -470,6 +518,7 @@ def _summarise(folds: List[float]) -> Dict[str, Any]:
         "worst_fold_error": max(clean),
         "best_fold_error": min(clean),
         "median_abs_log10_error": statistics.median(logs),
+        "geometric_mean_fold": 10.0 ** (sum(logs) / len(logs)),
     }
 
 
@@ -863,8 +912,32 @@ def build_exam(target_tag: str = "meaty") -> Dict[str, Any]:
         "by_family": both_ways_family,
     }
 
+    shared_rows = [
+        {
+            "benchmark_id": r["benchmark_id"],
+            "compound": r["compound"],
+            "holdout_panel_row": r["shared_with_holdout_panel_row"],
+            "exam_fold_error": r["core_fold_error"],
+            "exam_in_band": r["core_within_band"],
+        }
+        for r in core_rows if r.get("shared_with_holdout_panel_row")
+    ]
+
     return {
         "artifact": "cutover_final_exam",
+        "shared_with_holdout_panel": {
+            "n": len(shared_rows),
+            "declaration": (
+                "THESE FOUR POINTS ARE THE SAME MEASUREMENTS AS FOUR ROWS OF "
+                "THE KINETIC-CORE HOLD-OUT PANEL, not analogues of them. The "
+                "exam and the panel are therefore NOT independent evidence on "
+                "this axis: agreement between them here is one measurement "
+                "counted twice. Established in "
+                "results/validation/d1_exam_panel_reconciliation.md sec. 5 and "
+                "declared in both artifacts from Wave B2.4 onward."
+            ),
+            "rows": shared_rows,
+        },
         "prereg_checks": prereg_checks,
         "findings": findings,
         "wave": "B5 -- the propagator cutover",
@@ -958,6 +1031,26 @@ def render_markdown(payload: Dict[str, Any]) -> str:
         f"**{_fmt(paired['core']['median_fold_error'])}x** vs old median "
         f"**{_fmt(paired['old']['median_fold_error'])}x**."
     )
+    # B2.4 SCORER CONDITION. The geometric mean is printed BESIDE the paired
+    # median, on the same points, because D1 sec. 2 showed the median is a rank
+    # statistic over a lumpy 23-point pool: four rows crossing the middle swung
+    # it 4.7x between B2.2 and B2.3 while the geometric mean moved 1.78x. The
+    # two are reported together and neither is allowed to travel alone.
+    out.append(
+        f"- **GEOMETRIC-MEAN FOLD, on the same points:** core over all scored "
+        f"**{_fmt(core.get('geometric_mean_fold'))}x**; on the paired subset core "
+        f"**{_fmt(paired['core'].get('geometric_mean_fold'))}x** vs old "
+        f"**{_fmt(paired['old'].get('geometric_mean_fold'))}x**. A median moves "
+        f"only when a row crosses the middle of the pool; a geometric mean moves "
+        f"whenever any row moves, including a row that was already failing."
+    )
+    shared = payload.get("shared_with_holdout_panel") or {}
+    if shared.get("n"):
+        out.append(
+            f"- **{shared['n']} of these points are SHARED with the hold-out "
+            f"panel** — the same measurements, scored twice. "
+            f"{shared['declaration']}"
+        )
     out.append("")
     out.append(
         "> Read the paired row, not the two unpaired medians. The old lane emits a number for "

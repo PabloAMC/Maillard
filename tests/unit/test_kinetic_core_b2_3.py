@@ -481,8 +481,17 @@ def test_no_holdout_literal_appears_on_the_fit_side():
     for relative in _FIT_SIDE_FILES:
         text = (ROOT / relative).read_text()
         for literal in _HOLDOUT_LITERALS:
+            # WAVE B2.4 -- ONE CHARACTER, AND THE REASON IS ON THE RECORD.
+            # The literal list contains "2.4" (a Yiltirak hold-out fold). That
+            # substring also occurs inside the WAVE NAME "B2.4", so as first
+            # written this test made it impossible for any fit-side file to
+            # mention the fourth wave of its own module -- which is a defect in
+            # the guard, not in the prose. The added lookbehind exempts a match
+            # glued to a letter and nothing else: a measured value is never
+            # immediately preceded by a letter, so the guard loses no reach.
             pattern = re.compile(
-                r"(?<![0-9.eE])" + re.escape(literal) + r"(?![0-9eE])")
+                r"(?<![A-Za-z])(?<![0-9.eE])" + re.escape(literal)
+                + r"(?![0-9eE])")
             for line_no, line in enumerate(text.splitlines(), 1):
                 if not pattern.search(line):
                     continue

@@ -560,3 +560,96 @@ greps CANNOT see its content (round-3's negative sweep was blind to it); the
 dossier publishes the solved glyph map. QUEUED for the quality pass: audit
 every A_value in the corpus against refits from source k-tables (three
 confirmed cases of correct Ea bolted to defective prefactors).
+
+## Amendment 13 — 2026-08-29 (Wave B2.4: a declared weighting, two permanent scorer conditions, and the shared rows)
+
+Written by the build wave itself, additive only. **No stoichiometry, no
+species, no reaction, no benchmark, no hold-out row, no pass band, and no role
+changes.** Pre-registered in `results/validation/kinetic_core_b2_4_prereg.md`
+before any fit ran; mandated by `d1_exam_panel_reconciliation.md` §8 items 1–5.
+
+1. **THE pH-UNIT-vs-LOG-FOLD EXCHANGE RATE IS NOW DECLARED.** Through B2.3 the
+   objective scored three `zhou_final_pH_*` rows in **pH units** at σ = 0.25
+   inside the same sum of squares as 55 rows in **log₁₀ folds** at σ_log =
+   0.20–0.60. Nobody chose the resulting exchange rate; D1 §3 measured it at ~9×
+   (one pH unit priced at nine times a 3× level miss) and showed one of those
+   rows carrying **44% of the entire B2.2→B2.3 refit**. From B2.4 the rate is a
+   declared scalar `PH_ENDPOINT_WEIGHT`, `E` = decades of level error per pH
+   unit, implemented as `σ_ph = 0.35 / E`, and the fit is run and **reported at
+   three declared values**: **1.40** (B2.3's accidental rate made explicit —
+   reproduces its objective exactly, the control), **0.70** (a 4×-in-cost
+   down-weight), **0.28** (the fit corpus's own measured rate: Kumazawa 2003's
+   six declared-FIT retention rungs move 2-furfurylthiol 0.956 decades across
+   3.4 pH units). The shipping value is chosen by a criterion written before any
+   fit ran and **blind to both scorecards** (prereg §3).
+
+   **CORRECTION, DISCLOSED.** `E = 0.28` replaces a first draft of **0.32** that
+   was derived from D1 §4's Hofmann pH-3-to-pH-7 slope — **a hold-out-derived
+   quantity**. It was caught by this wave's own firewall test as the literal
+   `1.28` on the fit side, before any member at that weighting ran, and the
+   basis was re-derived from declared FIT rows only. Recorded as prereg
+   Correction C1.
+
+2. **TWO PERMANENT SCORER CONDITIONS, on both scorecards.** The cutover exam
+   now reports the **geometric-mean fold** beside the paired median (D1 §2: four
+   rows crossing the middle of a lumpy 23-point pool swung the median 4.7×
+   between B2.2 and B2.3 while the geometric mean moved 1.78×, and the reported
+   median row did not move in either wave). The kinetic-core hold-out panel now
+   reports **median |log₁₀ fold| and geometric-mean fold beside the gating
+   count** (D1 §5: 22 of 34 gating rows were already failing, and 1.42 net
+   decades of degradation landed entirely on them, invisible to a censored
+   count). Both are additive; no existing number changes.
+
+3. **THE FOUR SHARED ROWS ARE DECLARED IN BOTH ARTIFACTS.**
+   `hofmann_ribose_pH{3,7}_{FFT,MFT}` on the panel and the four
+   `mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH{3,7}` MFT/FFT points on
+   the exam are **the same measurements**, not analogues. The exam and the panel
+   are therefore **not independent evidence** on that axis, and agreement
+   between them there is one measurement counted twice. Declared in both
+   artifacts from this wave onward.
+
+4. **`ph_state.AMINE_FATE_BASIS`'s CITATION IS REPAIRED.** D1 §7 found the cited
+   pre-freeze probe (`scratch/b23_encoding_probe.py`) cannot run — `KeyError:
+   'AMN'`, a species not present in `src/kinetic_core/` — so the wave's
+   self-declared strongest assumption cited evidence nobody could reproduce, and
+   two of that probe's three "encodings" were the same code path. B2.4 rebuilds
+   the axis against the **current** species set
+   (`scripts/generators/probe_amine_fate_b2_4.py`), deriving the released amino
+   nitrogen as `(Cys + ARP + TTCA at t=0) − (Cys + ARP + TTCA at t)` with no new
+   species and no new parameter. **The rebuild reproduces the B2.3
+   pre-registration's published three-row table in every cell to two decimals**,
+   so the defect was in the script and not in the evidence: the declaration
+   keeps its basis, its citation now points at a probe that runs, and its
+   self-referential last sentence is removed. Frozen result:
+   `results/validation/kinetic_core_b2_4_amine_fate_probe.json`.
+
+5. **A CORPUS CONTRADICTION, NAMED (D1 §8 item 5): KUMAZAWA vs HOFMANN AT
+   pH ≥ 6.5.** Kumazawa 2003 Fig. 3 (a declared FIT row) says 89% of spiked
+   2-furfurylthiol is destroyed in **10 min at 121 °C at pH 6.4**. Hofmann &
+   Schieberle 1998 (a declared HOLD-OUT) reports **12 ppb of 2-furfurylthiol
+   still present after 20 min at 145 °C at pH 7**. No parameter choice satisfies
+   both: a destruction law fitted to Kumazawa's top rung and extrapolated in pH,
+   temperature and time annihilates Hofmann's pH-7 pot. **This is a different
+   conflict from the Hofmann-vs-Zhou MFT sign conflict already recorded** (that
+   one is about the DIRECTION of the MFT-vs-pH response between two systems;
+   this one is about a thiol's survival at pH ≥ 6.5) and it is recorded here as
+   a corpus contradiction in its own right. **Reported, not resolved.** Neither
+   dataset is demoted and neither role changes.
+
+6. **TWO PROCESS DEFECTS FOUND WHILE DOING THE ABOVE, both reported and both
+   repaired only in the narrowest way:**
+   * **The exam's pool moved under a concurrent wave.** D1's geometric means are
+     over **23** answered points; the exam now answers **27**, because Wave B6's
+     lipid lane answers four `matrix_path` points the core previously declined,
+     at a family median near 1900×. Any B2.4-vs-D1 comparison of a pool-wide
+     statistic is therefore **not like-for-like**, and every cross-wave number in
+     the B2.4 reports is computed on **D1's own 23-point pool** with the
+     27-point number printed beside it.
+   * **The firewall's literal list cannot express a wave named B2.4.** The
+     shipped list contains `"2.4"` (a Yiltirak hold-out fold), which occurs
+     inside the string `B2.4`, so as first written the guard made it impossible
+     for any fit-side file to name the fourth wave of its own module. The regex
+     gained one lookbehind — a match glued to a letter is exempt — which costs
+     the guard no reach, because a measured value is never immediately preceded
+     by a letter. An explicit, reason-carrying `FIREWALL-OK` marker is the only
+     other escape and a test asserts every such marker states its reason.
