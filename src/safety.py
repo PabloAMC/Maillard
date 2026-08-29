@@ -317,12 +317,19 @@ def build_safety_reference_context(*, analyte: str = "acrylamide") -> Dict[str, 
             "value does not resolve to the requested analyte. Their evidence is not "
             "represented above; see excluded_entries."
         )
-    return {
+    out = {
         "default_entries": default_entries,
         "extended_entries": extended_entries,
         "excluded_entries": excluded_entries,
         "exclusion_note": exclusion_note,
     }
+    # Wave B8 (Amendment 16 clause 2): the unsourced-Arrhenius flag TRAVELS on
+    # the payload, not only to stderr -- the `literature_runtime` shape. It is
+    # attached for the analytes those four pairs actually reach.
+    if str(analyte).strip().lower() in {"cml", "cel", "furosine", "ages",
+                                        "protein_damage_markers"}:
+        out["unsourced_arrhenius_pairs"] = dict(SAFETY_ARRHENIUS_PROVENANCE)
+    return out
 
 
 def get_safety_reference_range(matrix_family: str, reference_id: str = "squeo_2023_pbpi_acrylamide") -> Optional[dict]:
@@ -511,6 +518,109 @@ def _arrhenius_rate(*, temp_c: float, pre_exponential: float, activation_energy_
     return float(pre_exponential) * math.exp(-(float(activation_energy_kj_mol) * 1000.0) / (8.314 * temperature_kelvin))
 
 
+# ===========================================================================
+# THE FOUR UNCITED (Ea, A) PAIRS -- LABELLED, NOT MOVED (Wave B8)
+# ===========================================================================
+# FIT_HOLDOUT_DECLARATION.md Amendment 16 clause 2, ratified 2026-08-30:
+# "safety.py's 4 uncited (Ea, A) pairs: to be LABELLED unsourced per the Wave T3
+# convention in the next wave; conduct disclosed here."
+#
+# `results/validation/prefactor_audit.md` enumerates 53 shipped (Ea, A) pairs
+# and classes exactly four of them `hardcoded_in_code_uncited` -- the strictest
+# class in the audit, meaning there is not even a comment naming a paper:
+#
+#   safety_dicarbonyl_pool_formation      Ea 52,  A 4.0e6   (_estimate_dicarbonyl_pools)
+#   safety_dicarbonyl_pool_elimination    Ea 74,  A 2.5e9   (_estimate_dicarbonyl_pools)
+#   safety_furosine_formation             Ea 50,  A 8.0e5   (predict_furosine)
+#   safety_furosine_elimination           Ea 73,  A 1.8e10  (predict_furosine)
+#
+# The Wave T3 convention (src/matrix_correction.py::_warn_if_registry_unsourced,
+# src/literature_runtime.py::PROTEIN_SOURCE_PROVENANCE) is: state the defect,
+# name what depends on it downstream, declare that NO VALUE IS SUBSTITUTED OR
+# RESCALED, emit a RuntimeWarning, and carry a provenance record the flag can
+# travel on. All five parts are honoured below. FOUR PAIRS ARE LABELLED AND
+# ZERO NUMBERS MOVE.
+#
+# WHY NOTHING IS SUBSTITUTED: there is no source to substitute FROM. Inventing a
+# citation-shaped value would be the defect again, one layer deeper. And these
+# constants are not free-standing measurements -- they are the shape parameters
+# of a formation/elimination signal whose SCALE is separately fitted (`scale=`),
+# so "correcting" one member of a pair without the others would move predictions
+# without improving provenance.
+#
+# ⚠ DO NOT REFLOW THE FOUR CALL SITES. `generate_prefactor_audit.py` re-parses
+# those literals out of this file POSITIONALLY, with a regex that requires the
+# four keywords on four consecutive lines in the printed order, and treats the
+# two matches as (dicarbonyl, furosine) in file order. Hoisting them into named
+# constants or reordering them silently drops rows from the audit.
+SAFETY_UNCITED_ARRHENIUS_PAIRS: Tuple[str, ...] = (
+    "safety_dicarbonyl_pool_formation",
+    "safety_dicarbonyl_pool_elimination",
+    "safety_furosine_formation",
+    "safety_furosine_elimination",
+)
+
+#: Wave T3 flag value, verbatim, so the repo-wide census idiom matches.
+SAFETY_ARRHENIUS_SOURCE_STATUS = "no_verifiable_source"
+
+#: The provenance record. Emitted on the safety payload so the status travels
+#: with the numbers it contaminates instead of living only in a warning nobody
+#: sees (the `literature_runtime.PROTEIN_SOURCE_PROVENANCE` shape).
+SAFETY_ARRHENIUS_PROVENANCE: Dict[str, object] = {
+    "parameters": list(SAFETY_UNCITED_ARRHENIUS_PAIRS),
+    "source_status": SAFETY_ARRHENIUS_SOURCE_STATUS,
+    "where": "src/safety.py::_estimate_dicarbonyl_pools, ::predict_furosine",
+    "value_basis": (
+        "hardcoded_in_code_uncited -- no paper, no table and not even a comment "
+        "names a source for any of the four (Ea, A) pairs"
+    ),
+    "declared_upstream": "results/validation/prefactor_audit.md (the enumeration)",
+    "affects": [
+        "predict_cml", "predict_cel", "predict_furosine",
+        "the Amadori/dicarbonyl pool shape every one of them divides by",
+    ],
+    "warning": (
+        "UNSOURCED SHAPE CONSTANTS. Differences these produce between two "
+        "process conditions are not evidence; they reproduce a curve someone "
+        "wrote down. Labelled by Wave B8 per FIT_HOLDOUT_DECLARATION.md "
+        "Amendment 16 clause 2. VALUES ARE NOT SUBSTITUTED OR RESCALED."
+    ),
+    "known_miscalibration": (
+        "predict_furosine sits ~2.0e2x below its own Ramirez-Jimenez anchor "
+        "(see its docstring). That is REPORTED, not corrected, and it is an "
+        "independent defect from the missing provenance."
+    ),
+}
+
+#: Emitted at most once per process, and it names only the PARAMETER KEYS, not
+#: their values -- the `literature_runtime._assess_concentration_unit` design
+#: rule, and it matters here because both call sites run inside optimiser
+#: sweeps, where a per-value message would emit thousands of times.
+_SAFETY_ARRHENIUS_WARNED = False
+
+
+def _warn_safety_arrhenius_unsourced(consumer: str) -> bool:
+    """Surface the four uncited (Ea, A) pairs at first use. Wave T3 shape."""
+    global _SAFETY_ARRHENIUS_WARNED
+    if _SAFETY_ARRHENIUS_WARNED:
+        return True
+    _SAFETY_ARRHENIUS_WARNED = True
+    warnings.warn(
+        f"{consumer}: the Arrhenius pairs "
+        f"{', '.join(SAFETY_UNCITED_ARRHENIUS_PAIRS)} are declared "
+        f"source_status='{SAFETY_ARRHENIUS_SOURCE_STATUS}' -- no paper, no "
+        "table and no comment names a source for any of them "
+        "(results/validation/prefactor_audit.md). They are nonetheless LIVE: "
+        "they set the Amadori/dicarbonyl pool shape that predict_cml, "
+        "predict_cel and predict_furosine all divide by, so any CML, CEL or "
+        "furosine difference between two process conditions is unanchored on "
+        "that axis. Values are NOT substituted or rescaled.",
+        RuntimeWarning,
+        stacklevel=3,
+    )
+    return True
+
+
 def _formation_elimination_signal(
     precursor_drive: float,
     *,
@@ -521,7 +631,10 @@ def _formation_elimination_signal(
     elimination_pre_exponential: float,
     elimination_ea_kj_mol: float,
     scale: float = 1.0,
+    provenance_consumer: Optional[str] = None,
 ) -> float:
+    if provenance_consumer is not None:
+        _warn_safety_arrhenius_unsourced(provenance_consumer)
     if precursor_drive <= 0.0 or time_min <= 0.0:
         return 0.0
 
@@ -569,6 +682,9 @@ def _estimate_dicarbonyl_pools(
         elimination_pre_exponential=2.5e9,
         elimination_ea_kj_mol=74.0,
         scale=260.0 * (0.92 + 0.22 * aw_norm),
+        # Wave B8: labels the two dicarbonyl-pool pairs above as
+        # source_status='no_verifiable_source'. No value is changed.
+        provenance_consumer="src.safety._estimate_dicarbonyl_pools",
     )
 
     high_temp_drive = _sigmoid(thermal_temp_c, 138.0, 8.0)
@@ -716,6 +832,9 @@ def predict_furosine(
         elimination_pre_exponential=1.8e10,
         elimination_ea_kj_mol=73.0,
         scale=120.0,
+        # Wave B8: labels the two furosine pairs above as
+        # source_status='no_verifiable_source'. No value is changed.
+        provenance_consumer="src.safety.predict_furosine",
     )
 
 #: pH response shape constants for acrylamide formation (declared; see the

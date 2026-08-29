@@ -100,7 +100,21 @@ _B1_FIT_REPORT = _ROOT / "results/validation/kinetic_core_b1_fit_report.json"
 #: preferring them would be preferring a known defect. B2.2's report is kept
 #: as the fallback so that every earlier artefact stays regenerable on a
 #: checkout that has not run B2.3.
+#: WAVE B8 (FIT_HOLDOUT_DECLARATION.md Amendments 16-18) supersedes B2.3 for
+#: the same reason B2.3 superseded B2.2: preferring the predecessor would be
+#: preferring a known defect. B2.3's vector carries
+#: `Ea_decay_thiol_sink` = 216.1 kJ/mol, a value REFUTED by measurement --
+#: Gigl 2021 measures the covalent-capture channel at k(333)/k(279) = 67.2 and
+#: 216 kJ/mol predicts 4.6e6 for that ratio -- and it carries no barrier at all
+#: on the two disulfide channels that Zhang 2026 k17 measures at 122.2.
+#:
+#: THE PROMOTION WAS DECLARED BLIND, in `kinetic_core_b8_prereg.md` sec. 2,
+#: BEFORE any B8 score existed, and it is NOT contingent on a scorecard: what
+#: B8 carries is four measured barriers and the removal of a refuted one. It
+#: ships even where it scores worse, and where it scores worse the B8 hold-out
+#: report says so. (It does score worse on the hold-out panel: 12/32 -> 8/30.)
 _B2_FIT_REPORT_CANDIDATES = (
+    _ROOT / "results/validation/kinetic_core_b8_fit_report.json",
     _ROOT / "results/validation/kinetic_core_b2_3_fit_report.json",
     _ROOT / "results/validation/kinetic_core_b2_2_fit_report.json",
 )

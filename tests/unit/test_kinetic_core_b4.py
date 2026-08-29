@@ -461,12 +461,40 @@ def test_layer_metadata_names_what_it_refuses():
     assert layer_metadata()["primary_output"].startswith("formulation")
 
 
-def test_covalent_ceiling_carries_an_unmeasured_ea_rather_than_a_guess():
-    assert COVALENT_CEILING.ea_kj_mol is None
+def test_covalent_ceiling_carries_a_measured_ea_and_it_misses_the_threshold():
+    """
+    RE-PINNED BY WAVE B8, and the re-pin is the finding.
+
+    This test read `assert COVALENT_CEILING.ea_kj_mol is None` and
+    `assert "UNMEASURED" in report["ea_status"]` from B4 through B7, because
+    Amendment 6 ruling 2 had opened the Ea of aldehyde-lysine adduct formation
+    on food proteins as a NAMED WET-LAB GAP. Wave K6b closed it
+    (FIT_HOLDOUT_DECLARATION.md Amendment 17 clause 6): Shepelev & Reineccius
+    2024 measured it by 14-C scintillation on beta-lactoglobulin at three
+    temperatures and got 15-23 kJ/mol, corroborated at 10.0 by Hamzalioglu
+    2018 on a different aldehyde, in a different lab, by a different method.
+
+    A test asserting `is None` after the number exists would be pinning the
+    absence of a measurement that has been made, so it is replaced by the two
+    assertions that actually matter now: the value is present WITH its range,
+    and it MISSES the >= 70 kJ/mol decision threshold Amendment 6 set. What is
+    NOT relaxed is the inertness -- the term still contributes exactly 0.0, and
+    `test_the_covalent_term_is_inert_it_contributes_exactly_zero` is unchanged.
+    """
+    assert COVALENT_CEILING.ea_kj_mol == 20.0
+    assert COVALENT_CEILING.ea_range_kj_mol == (15.0, 23.0)
     assert COVALENT_CEILING.k2_m_per_s_at_20c == 2.5e-5
     assert COVALENT_CEILING.reversible_share_headspace_timescale >= 0.98
+    # the measurement MISSES the decision threshold, which is the whole verdict
+    assert COVALENT_CEILING.ea_kj_mol < COVALENT_CEILING.activation_condition_ea_kj_mol
+    assert COVALENT_CEILING.ea_range_kj_mol[1] < (
+        COVALENT_CEILING.activation_condition_ea_kj_mol)
     report = matrix_registry_metadata()["covalent_ceiling"]
-    assert "UNMEASURED" in report["ea_status"]
+    assert "MEASURED" in report["ea_status"]
+    assert "UNMEASURED" not in report["ea_status"]
+    assert report["contribution_to_point_prediction"] == 0.0
+    assert report["decision_threshold_missed_by_x"] == 3.5
+    assert "RETIRED" in report["retirement"]
 
 
 # =========================================================================
@@ -588,8 +616,15 @@ def test_pinned_soy_hexanal_prediction_is_small_and_says_so():
     prediction = predict_matrix_shift("hexanal", "soy_paste_hong")
     assert 1.5 < prediction.predicted_ratio < 5.0
     assert prediction.terms["covalent_ceiling"]["state"] == "structurally_allowed"
-    assert "UNMEASURED" in prediction.terms["covalent_ceiling"][
-        "process_temperature_report"]
+    # RE-PINNED BY WAVE B8: this asserted "UNMEASURED" in the process-temperature
+    # report through B7. The Ea is measured (Amendment 17 clause 6) and the
+    # report now says so. The predicted_ratio band above is UNCHANGED and
+    # deliberately so -- the covalent term contributed exactly 0.0 before and
+    # after, so if this ratio had moved the retirement would not have been the
+    # no-op B8 declares it to be.
+    assert "NEGLIGIBLE AT PROCESS TEMPERATURE, MEASURED" in (
+        prediction.terms["covalent_ceiling"]["process_temperature_report"])
+    assert prediction.terms["covalent_ceiling"]["ea_kJ_per_mol"] == 20.0
 
 
 def test_the_two_branched_butanals_are_indistinguishable_and_that_is_recorded():

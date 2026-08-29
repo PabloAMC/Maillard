@@ -849,3 +849,195 @@ fitted constant is moved.** Pre-registered in
    match) — the C.18 unit risk is RESOLVED. Refusals adopted: no hexanal
    rate from Shepelev's decanal; no Yuan panel-inference Ea; hidalgo1993
    stays out of the covalent lane.
+
+## Amendment 18 — 2026-08-30 (Wave B8, the final parameter wave: what it did to Amendments 16 and 17)
+
+Written by the build wave itself, additive only. **No dataset changes columns
+beyond the three replacement hold-outs Amendment 17 clause 3 already ratified,
+no frozen bundle is touched, and no B1/B3/B4/B6/B7 constant is moved.**
+Pre-registered in `results/validation/kinetic_core_b8_prereg.md` before any fit
+ran.
+
+1. **THE SULFUR T-STRUCTURE IS IMPLEMENTED (Amendment 17 clauses 4–5).**
+   `Ea_decay_thiol_sink` is searched inside Gigl 2021's measured band
+   **(7, 102)** with a prior centre of **60.2**, replacing the arbitrary
+   (20, 250) it was pressed against at 248.0 / 216.1 / 212.9. Two disulfide
+   channels (`k_dimer_mft`, `k_dimer_fft`) take Zhang 2026 k17's measured
+   **122.2 kJ/mol** where they previously carried **no barrier at all** and were
+   held at their 145 °C value everywhere. The two amine-catalysed fed-Amadori
+   enolisations (`k_arp_dpo`, `k_arp_tdp`) take its k16's measured **85.7**.
+   All four are `MEASURED_EA_OVERRIDES` and the fit cannot move them.
+   `MEASURED_EA_OVERRIDES` therefore grows from one entry to five, and
+   `NO_EA_KEYS` shrinks to `k_mmft` alone.
+   * **Zhang k15 (Cys + sugar → Cys-Amadori, 100.9) HAS NO SHIPPED SITE** and is
+     recorded as a declared prior instead of being forced onto a step that is
+     not it: this network's Amadori is FED, not formed.
+   * **The π-stacking reservoir (ΔH° = −19.5 kJ/mol, reversible, < 5 min) is
+     NOT implemented.** It is declared as a model-form gap with its measured
+     enthalpy on the record. Gigl §7c is explicit that no single positive-Ea
+     sink can reproduce a free-thiol fraction that RISES with temperature; B8
+     does not claim to have fixed that, and adding a species after reading a
+     scorecard would be a refit in disguise.
+   * **`carbonyl_sink` is untouched** at (20, 250), where it sits at 249.9
+     against its own ceiling. K6a measured no carbonyl-sink barrier, so
+     narrowing that band would be inventing one. The defect is carried forward.
+
+2. **FOUR NEW DECLARED FIT ROWS, all ratio- or conversion-scale**
+   (`feng_ARP_conversion_100C/120C`, `zhai_MFT/FFT_fold_120_over_100`), taking
+   the objective from 58 to 62 rows. None is a level and none touches a 140 °C
+   rung. **Total cost is therefore NOT comparable to B2.4's**, and every B8
+   artifact reports `sum_r2_level_shared_with_b2_4` — the same statistic over
+   exactly the rows both waves scored — beside it.
+
+3. **THE KANG/ZHAI RE-BAND COSTS NO VALUE CHANGE, and saying so is the honest
+   report.** Amendment 17 clause 1 withdraws the Tier A ±15 % label and
+   re-bands the ladder to Tier B semi-quant (×÷2–3). The six shipped level rows
+   already carry `sigma_log = 0.4` = log₁₀(2.51), which is *inside* that
+   interval. The correction is therefore a LABEL correction: every `kang_*`
+   anchor now names **Zhai et al. 2023, *Food Chem.* 404:134420** as the primary
+   source with Kang 2026 recorded as a re-publication, and no sigma moves.
+   Widening one to manufacture a visible edit would have been worse.
+
+4. **RETIREMENT ACCOUNTING IS NOW A FIRST-CLASS ARTIFACT FIELD.** The two
+   `kang_switch_on_*` rows are retired from gating (Amendment 17 clause 2) and
+   the three replacement hold-outs are `seen_diagnostic` and **may never gate**,
+   so the gating denominator falls by two and is not made back up. Both bases —
+   old (retired rows counted, exactly as they scored) and new — are printed
+   side by side in the JSON and in the markdown. **Retirement is kept distinct
+   from demotion in the schema**: a demotion says "this row is fine but we saw
+   it"; a retirement says "the quantity this row scores is not a property of the
+   chemistry". Collapsing them would let a retirement borrow a demotion's
+   excuse.
+
+5. **THE PREFACTOR FIX MOVES TWO NUMBERS, NOT ONE, AND THAT IS THE POINT.**
+   `cysteine_thermolysis` in `data/lit/arrhenius_params.yml` goes from
+   (130.4 kJ/mol, 1e14 s⁻¹) to **(133.0, 1.931e12)**. The Ea moves with the A
+   because 130.4 was the pH 3–9 MEAN and is a matched partner of no single
+   column's prefactor; transplanting the fitted A onto it would have introduced
+   a fresh ~2× rate error at 150 °C while removing a 51.8× one — which is
+   exactly what that entry's own CAUTION note forbids. The regenerated
+   `prefactor_audit.md` confirms it: the row goes to **OK (1×)** and the
+   cross-lane check against `k_cys_h2s` goes from **51.8× to 1×**. Flagged rows
+   fall 8 → 7. **Per the Amendment 16 ruling nothing else moves**: the six
+   Kocadagli-lane flags stay diagnostics-only (their shipped values come from
+   the source's simultaneous global ODE fit, not a transcribed k(T) table),
+   `k_thioether`'s gap is by design, and `schiff_condensation`/`k_schiff` stay
+   flagged because no source k(T) table exists for either.
+
+6. **THE COVALENT SINK IS RETIRED TO "MEASURED NEGLIGIBLE" (Amendment 17
+   clause 6), AND THE RETIREMENT IS A NO-OP ON EVERY NUMBER.** `ea_kj_mol`
+   moves from `None` to **20.0** with a measured range of (15, 23), missing
+   Amendment 6's ≥ 70 decision threshold by 3.5×. The channel was already INERT
+   BY RULING and contributed exactly 0.0 to every point prediction, so what
+   changed is that the zero is now measured rather than assumed. A pre-registered
+   consequence: the exam's acrylamide, furanic and lipid families must be
+   **bit-identical**, and if they are not, the retirement was not the
+   documentation change this wave claims. `k_protein_ss` — thiol/protein
+   **disulfide** exchange, different reaction, different lane, zero flux in
+   every scored row — keeps its bounded carry unchanged.
+
+7. **THE MILK ROWS ARE UNBLOCKED AND STILL NOT TABULATED, for a stated and
+   different reason.** `?/kg = µg/kg` is closed by arithmetic (7/7 digit-for-digit
+   against a column its source heads `Concentration (μg/kg)`), so `k3` §C.18 is
+   RESOLVED. Nothing was ever tabulated in `src/`, so unblocking is a provenance
+   edit and no value moves. **The seven rows have no declared column**: K6b §7b
+   proposes them as a HOLD-OUT and no amendment has ratified that, so the seal's
+   reason string now records the resolution, the three caveats that must travel
+   with them (`same_matrix: FALSE`; unsourced reference thresholds mislabelled
+   "in air"; SDs that are dilution-series steps, not threshold uncertainty), and
+   the fact that the role is open.
+
+8. **`safety.py`'s FOUR UNCITED (Ea, A) PAIRS ARE LABELLED, per Amendment 16
+   clause 2 and the Wave T3 convention.** A module-level provenance record with
+   `source_status: "no_verifiable_source"`, a once-per-process `RuntimeWarning`
+   naming the defect, what depends on it downstream (`predict_cml`,
+   `predict_cel`, `predict_furosine` all divide by the pool those constants
+   shape) and the declaration that **values are NOT substituted or rescaled**,
+   plus the flag travelling on the reference-context payload. **Four numbers,
+   zero moves.** The warning names only the parameter KEYS, not their values,
+   because both call sites run inside optimiser sweeps.
+
+9. **TWO CONTRADICTIONS FOUND WHILE DOING THE ABOVE, REPORTED NOT RESOLVED.**
+   * **The two covalent brackets disagree and both are right.**
+     `parameters_matrix.COVALENT_CEILING` carries `ambient_half_life_days =
+     (37, 760)` — Anantharamkrishnan's MS adduct-counting range — while
+     `parameters_lipid.CovalentSinkCeiling` carries (37, 74) — Meynier's
+     overlap of two independent methods. They answer different questions.
+     **Neither is changed.** Harmonising two measured brackets by picking one
+     after reading a scorecard is not a repair.
+   * **`kinetic_core_b2_2_diagnosis.md` K-4's "Kang's own immovable 55.1"
+     should read "Zhai's".** The primary source PRINTS the conversions in a
+     sentence (16.2 / 38.8 / 62.2 % ⇒ Ea 54.7, R² 0.996); Kang's 55.1 is the
+     same experiment digitised off a figure one publication downstream. The
+     0.7 % agreement validates the digitisation and is **not** an independent
+     confirmation. **The shipped 55.1 is NOT moved** — two readings of one
+     measurement, and swapping them would be churn. Also on the record: that
+     ladder's legs are 62.3 then 46.2, so the cysteine sink *decelerates*
+     across the interval where the retired switch-on claimed acceleration.
+
+10. **B2.3's OBJECTIVE AT ITS OWN FROZEN VECTOR MOVES 2.69× (8.386 → 22.56)**
+    under the T-structure, without one of its 48 constants being touched — the
+    same class of event as Amendment 15 clause 1's 2.6 % trunk propagation, and
+    a much larger one, because four barriers were replaced by measurements that
+    disagree with where the fit had put them. **That is the size of the
+    disagreement between the corpus's measured barriers and B2.3's fitted ones,
+    and it is reported rather than absorbed.** B8 refits from B2.4-half's
+    incumbent rather than re-deriving, so the movement is visible as a start
+    cost and not hidden inside a converged number.
+
+11. **THE PROMOTION HAPPENED, AND IT SHIPS A REGRESSION.** B8's frozen fit
+    report is now the engine's FIRST parameter candidate, ahead of B2.3's, as
+    the pre-registration declared blind and unconditionally before any B8 score
+    existed. **It ships despite scoring worse on the hold-out panel — 12/32 →
+    8/30, and 8/32 on the old basis** — because what it carries is four
+    measured barriers and the removal of one refuted by measurement, and
+    shipping a refuted 248-class value because its successor scores worse would
+    be preferring a known defect. The regression is itemised in
+    `kinetic_core_b8_holdout_report.md` and is not softened anywhere.
+    * **The four regressed rows are named**: `zhang_115C_MFT_consumed_share`,
+      `zhou_120C_dimer_share_pH8`, `zhou_pH8_FFT`, `zhou_pH8_MFTD`. Three of
+      the four are on the **Zhou pH-8 column**, i.e. the price of the
+      T-structure was paid on the alkaline side — not, as the pre-registration
+      guessed (H-3), on the two low-temperature rows, which both survived.
+    * **`Ea_decay_thiol_sink` came back BOUND-LIMITED AGAIN**, at 102.0 against
+      its new 102 ceiling. Pre-registered as F-1 at 60 % and it held. The
+      objective still wants more temperature dependence on the thiol sink than
+      the measurement allows, and B8 does not widen the band to let it: the
+      band is Gigl's measured range, the conflict is real, and it is reported.
+    * **`Ea_decay_carbonyl_sink` came OFF its rail**, 249.9 → 166.7, without
+      being touched by any of B8's declared changes. Recorded, not explained.
+    * The two seeded starts converged to 20.0882 and 20.0824 — a spread of
+      1.2e-4 decades, i.e. one basin. The wave has no evidence of a second one
+      within its declared neighbourhood.
+
+12. **THE YILTIRAK VERDICT: the mechanism appears, it is not enough, and its
+    residual is now LOCALISED.** All eight points improve and none enters the
+    band; the family median goes 193× → 122×, against a pre-registered ≥ 3×
+    (X-1, FALSIFIED). What the pre-registration did not anticipate is the
+    **asymmetry**: MFT improves by a median 3.8× and FFT by 1.7×, and the same
+    split appears independently on the replacement hold-outs — **Wang's MFT
+    turnover reproduces INSIDE the band** (predicted 0.36 against a measured
+    0.30, N-1 falsified in the informative direction: the wave predicted its own
+    mechanism would fail) **while Wang's FFT turnover does not** (0.81 against
+    0.15). Two scorers, two laboratories, one conclusion: the T-structure gives
+    MFT the peak-and-decline the corpus measures and leaves FFT's sink far too
+    weak, on the leg where Wang measures FFT's own precursor SATURATING while
+    the thiol collapses. **The next wave has a named target instead of a family
+    median.**
+    * **The decomposition matters and is why three columns were scored.** At
+      B2.4-half's own vector, the four measured barriers ALONE moved Yiltirak
+      the *wrong* way (193× → 206×) and moved MFT not at all. **The entire gain
+      is the refit.** Reporting only the endpoints would have credited the
+      measurements with a result they did not produce.
+    * The exam's paired median improves 42.2× → 24.8× while its in-band count
+      falls 4/34 → 3/34. Both halves are reported; neither is quotable alone.
+
+13. **X-5 HELD, EXACTLY: 16 exam points across the acrylamide, furanic and
+    lipid families are BIT-IDENTICAL.** The covalent-sink retirement moved no
+    number anywhere, which is what a retirement of an already-inert term must
+    do, and the regenerated `kinetic_core_b4_fit_report.json` shows the same
+    thing independently — every diff in it is a NEW provenance field, and not
+    one predicted ratio moved. `kinetic_core_b4_frozen_predictions.json` was
+    deliberately NOT regenerated: it is a pre-registration and re-dating one to
+    propagate a prose edit would be worse than leaving the superseded prose
+    inside a frozen record of what was believed at freeze time.

@@ -363,6 +363,16 @@ be written as the program it physically is.
   temperature direction is also wrong.
 - **The acrylamide lane's time shape.** It is inverted against measurement — a source measures
   acrylamide rising 28 → 1459 ppb between 10 and 30 min where the core predicts it falling.
+- **Anything that happens after the cook.** The model has no storage clock. The one
+  post-cook process it knows about is the covalent aldehyde–protein sink, and it knows about
+  it well enough to tell you it is the wrong tool: that channel's activation energy was
+  measured in 2026 at **15–23 kJ/mol**, so it removes **0.005 %–0.21 %** of an aldehyde
+  during any real thermal step — but over **weeks at ambient in a high-protein matrix it is
+  real and sizeable** (a C10 aldehyde loses 14.5–20 % of dose in 28 days at 25 °C, and
+  hexanal's half-life there is measured in weeks). If your question is about shelf life
+  rather than about the cook, this model answers the wrong question, and it will not warn
+  you, because every number it prints is an end-of-cook number.
+
 - **Anything the model refuses.** Do not work around a refusal by substituting a nearby
   compound. Norfuraneol is not DMHF; that substitution is exactly what the refusal exists to
   prevent.

@@ -523,17 +523,42 @@ class CovalentSinkCeiling:
     """
 
     k2_m_per_s_at_20c: float = 2.5e-5
+    #: NOT the same bracket as parameters_matrix.COVALENT_CEILING's (37, 760).
+    #: This is meynier2004 sec. 1(c)'s OVERLAP of two independent methods; that
+    #: one is anantharamkrishnan2020b's single-method MS adduct-counting range.
+    #: Wave B8 found the disagreement, verified both are as their sources print
+    #: them, and CHANGED NEITHER: they answer different questions and picking
+    #: one after reading a scorecard is not a repair. Reported, not resolved.
     ambient_half_life_days: Tuple[float, float] = (37.0, 74.0)
     activation_ea_threshold_kj_mol: float = 70.0
+    #: WAVE B8 (Amendment 17 clause 6): MEASURED, 15-23 kJ/mol, central 20.0.
+    #: Shepelev & Reineccius 2024 Fig. 3, 14-C on beta-lactoglobulin at 25/45/
+    #: 65 C. The channel stays DISABLED -- but for the opposite reason from
+    #: before: not because the deciding number is missing, but because it has
+    #: been measured and it decides against.
+    measured_ea_kj_mol: Optional[float] = 20.0
+    measured_ea_range_kj_mol: Tuple[float, float] = (15.0, 23.0)
     enabled: bool = False
     why_disabled: str = (
-        "INERT BY RULING (FIT_HOLDOUT_DECLARATION Amendment 6 ruling 2). The "
-        "channel's Ea on food proteins is UNMEASURED in every corpus source -- "
-        "a NAMED WET-LAB GAP -- so evaluating it at process temperature would "
-        "require inventing the one number that decides whether it matters at "
-        "all. It contributes exactly 0.0 to the point prediction, it is "
-        "reported as a ceiling on every lipid prediction, and the lane-coupling "
-        "guard in lipid.py asserts that it is still zero before permitting "
+        "INERT BY RULING (FIT_HOLDOUT_DECLARATION Amendment 6 ruling 2), AND "
+        "NOW ALSO BY MEASUREMENT (Amendment 17 clause 6, Wave B8). Through B7 "
+        "this field read: 'the channel's Ea on food proteins is UNMEASURED in "
+        "every corpus source -- a NAMED WET-LAB GAP -- so evaluating it at "
+        "process temperature would require inventing the one number that "
+        "decides whether it matters at all.' WAVE K6b MEASURED THAT NUMBER: "
+        "Ea = 15-23 kJ/mol against the >= 70 threshold, i.e. missed by "
+        "3.5-4.7x, so at process temperature the channel removes 0.005%-0.21% "
+        "of an aldehyde dose rather than the 1%-91% the assumption implied. "
+        "Two further measurements disable it without needing the Arrhenius "
+        "arithmetic at all: the sink's CAPACITY FALLS with temperature (day-28 "
+        "binding 25.6 > 20.1 > 17.4 mg/g at 25/45/65 C, the 65 C series "
+        "peaking at day 7 then declining 26%), and the EQUILIBRIUM UNWINDS on "
+        "heating (Ea_rev 52 > Ea_fwd 44 => K_eq falls 3.0x from 25 to 180 C). "
+        "It is an AMBIENT-STORAGE channel and no amount of heat makes it a "
+        "process channel. IT REMAINS DISABLED AND ITS FLUX REMAINS EXACTLY "
+        "0.0 -- the value did not move, the reason did. It is reported as a "
+        "ceiling on every lipid prediction, and the lane-coupling guard in "
+        "lipid.py asserts that it is still zero before permitting "
         "co-integration with a Maillard lane."
     )
 
@@ -717,6 +742,10 @@ def lipid_registry_metadata() -> Dict[str, Any]:
         "covalent_sink": {
             "enabled": COVALENT_SINK.enabled,
             "k2_M_per_s_at_20C_ceiling": COVALENT_SINK.k2_m_per_s_at_20c,
+            "measured_ea_kj_mol": COVALENT_SINK.measured_ea_kj_mol,
+            "measured_ea_range_kj_mol": list(COVALENT_SINK.measured_ea_range_kj_mol),
+            "decision_threshold_ea_kj_mol": COVALENT_SINK.activation_ea_threshold_kj_mol,
+            "ea_status": "MEASURED (Wave B8, Amendment 17 clause 6)",
             "why_disabled": COVALENT_SINK.why_disabled,
         },
         "declared_gaps": {

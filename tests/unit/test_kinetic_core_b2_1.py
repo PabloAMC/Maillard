@@ -179,19 +179,48 @@ def test_no_new_global_sulfur_ea_was_added():
     """
     assert isinstance(ps.LUMPED_FORMATION_EA_BOUNDS, tuple)
     assert len(ps.LUMPED_FORMATION_EA_BOUNDS) == 2
-    # one lumped Ea, one measured override, and nothing else
-    assert len(ps.MEASURED_EA_OVERRIDES) == 1
+    # STILL exactly ONE lumped, FITTED sulfur Ea. That is what the brief
+    # forbids adding to, and B8 did not add to it.
+    #
+    # UPDATED BY B8, DELIBERATELY. This assertion used to read
+    # `len(ps.MEASURED_EA_OVERRIDES) == 1`. B8 (FIT_HOLDOUT_DECLARATION.md
+    # Amendment 17 clause 5) adds FOUR entries on TWO measurements: Zhang 2026
+    # k17's 122.2 kJ/mol for thiol -> disulfide on both dimer channels, and its
+    # k16's 85.7 for Cys-Amadori -> alpha-dicarbonyl on both amine-catalysed
+    # fed-Amadori enolisations. A MEASURED barrier the fit cannot move is the
+    # opposite of a new fitted global Ea, so the test's purpose is served by
+    # counting the FITTED ones and pinning the measured ones by name.
+    assert len(ps.MEASURED_EA_OVERRIDES) == 5
+    assert set(ps.MEASURED_EA_OVERRIDES) == {
+        "k_cys_thermal", "k_dimer_mft", "k_dimer_fft", "k_arp_dpo", "k_arp_tdp",
+    }
+    # every override must name the source it came from
+    assert set(ps.MEASURED_EA_OVERRIDE_ANCHORS) == set(ps.MEASURED_EA_OVERRIDES)
+    for key, anchor in ps.MEASURED_EA_OVERRIDE_ANCHORS.items():
+        assert anchor.strip(), key
 
 
 def test_policy_2_still_holds_for_the_named_channels():
     """
     The prohibited derivation is an Arrhenius line through the FOUR NAMED
-    SINKS that four papers measure at four temperatures. Those still carry no
-    activation energy and no code path can pair them.
+    SINKS that four papers measure at four temperatures. No code path can pair
+    them, and that prohibition is untouched.
+
+    UPDATED BY B8. The loop used to run over every NAMED_CHANNEL_KEY. Two of
+    those -- `k_dimer_mft` and `k_dimer_fft` -- now carry Zhang 2026 k17's
+    MEASURED 122.2 kJ/mol, which is ONE paper's ONE step at THREE temperatures
+    (R^2 0.971) and therefore not the cross-paper pairing policy 2 exists to
+    prevent. The test now runs over NO_EA_KEYS, which is what "carries no
+    activation energy" actually means, and separately pins that the two dimer
+    channels carry the MEASUREMENT rather than the lumped fit.
     """
     built = ps.with_fitted_sulfur({k: -3.0 for k in ps.FITTED_SULFUR_KEYS}, 90.0)
-    for key in ps.NAMED_CHANNEL_KEYS:
+    for key in ps.NO_EA_KEYS:
         assert built[key].ea_kj_mol is None, f"{key} must carry no Ea"
+    assert set(ps.NO_EA_KEYS) == {"k_mmft"}
+    for key in ("k_dimer_mft", "k_dimer_fft"):
+        assert built[key].ea_kj_mol == pytest.approx(122.2), key
+        assert built[key].ea_kj_mol != pytest.approx(90.0), key
     assert ps.MEASURED_SULFUR["k_thioether"].channel.startswith("covalent_addition")
     assert ps.MEASURED_SULFUR["k_protein_ss"].ea_kj_mol is None
     assert ps.oligomerisation_rate() == 0.0

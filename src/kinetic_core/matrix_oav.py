@@ -69,6 +69,7 @@ from .parameters_matrix import (
     CHAIN_LENGTH_SLOPE_PER_CH2,
     COMPOUND_STRUCTURE,
     COVALENT_CEILING,
+    COVALENT_CEILING_RETIREMENT,
     HS_SPME_SAME_SAMPLE_DISPERSION,
     K_AW_UNCERTAINTY_DECADES,
     MATRIX_LOADING,
@@ -289,8 +290,39 @@ SEALED_OR_REFUSED_MATRICES: Mapping[str, str] = {
         "70 C cook, not concentrations present at the moment of perception. They "
         "are not thresholds in this repo's sense and are not tabulated here."),
     "milk_tian": (
-        "Tian 2020's units cell prints a literal `?`, verified at 900 dpi. A "
-        "factor-of-1000 basis risk; declared `neither, until the unit is settled`."),
+        "UNIT RESOLVED 2026-08-30 (Wave B8, FIT_HOLDOUT_DECLARATION.md "
+        "Amendment 17 clause 6); STILL NOT TABULATED, for a DIFFERENT and now "
+        "stated reason. The block was: `Tian 2020's units cell prints a literal "
+        "`?`, verified at 900 dpi. A factor-of-1000 basis risk; declared "
+        "`neither, until the unit is settled`.` THE UNIT IS SETTLED BY "
+        "ARITHMETIC, not by inference: Tian 2020 Table 1's own footnote says "
+        "its concentration column is the Y6 sample of Tian et al. 2019, and "
+        "SEVEN OF SEVEN values reproduce that column digit for digit (347; "
+        "7,030; 1,719 vs 1,720; 29 vs 29.3; 198 vs 199; 244; 1,001 vs 1,000) -- "
+        "a column its source heads `Concentration (ug/kg)` in plain type. The "
+        "same `?/kg` notation heads the THRESHOLD column of the same table, so "
+        "`?/kg` = `ug/kg` and the factor-of-1000 basis risk is CLOSED "
+        "(k3 sec. C.18 RESOLVED). Two independent confirmations: k2 sec. A.4 "
+        "recovered nonanal's aqueous threshold as ~1.1 ug/kg from Xin2026b and "
+        "computed ~1,450x, against 1,455x from Tian's own 1.10 -- 0.3% apart; "
+        "and tian2020b's yogurt thresholds (5,430-29,000 ug/kg) span the same "
+        "range as the seven milk rows read as ug/kg, while ng/kg would be "
+        "30-300x LOWER and mg/kg 1,000x higher and physically absurd. "
+        "WHY THEY ARE STILL NOT TABULATED, and this is a role decision and not "
+        "a defect: k6b sec. 7b proposes the seven newly-usable rows as a "
+        "HOLD-OUT, not as fit data -- 'they were previously unusable, so they "
+        "are newly valuable as a hold-out and should NOT be spent as fit data' "
+        "-- and no amendment has assigned them a column. THREE CAVEATS MUST "
+        "TRAVEL WITH THEM WHEREVER THEY LAND: (1) `same_matrix: FALSE` -- "
+        "'milk fan' is a CHEESE and the thresholds were dosed into an "
+        "unspecified 'fresh milk solution'; (2) the reference thresholds are "
+        "UNSOURCED and mislabelled 'in air' (they are almost certainly "
+        "aqueous, which is why nonanal's 1.10 matches); (3) the printed SDs "
+        "are NOT threshold uncertainty -- 0.16-2.1% RSD on a 15-panellist "
+        "sensory threshold is impossible and five of the seven values are "
+        "exact powers-of-two dilution steps (1,024 = 2^10; 25,600 = 25 x "
+        "1,024; 51,200 = 50 x 1,024). NO VALUE CHANGES IN THIS WAVE: nothing "
+        "was ever tabulated, so unblocking is a provenance edit."),
     "saliva": (
         "Starkenmann's thiol binding is STRANDED (no basis, no stoichiometry, "
         "mechanism unresolved) and Baek 1999 EXCLUDES mucosal binding for a "
@@ -820,12 +852,23 @@ def covalent_channel_state(compound: str, ph: Optional[float] = None) -> Dict[st
         "ambient_half_life_days": list(COVALENT_CEILING.ambient_half_life_days),
     }
     if state == "structurally_allowed":
+        # WAVE B8, Amendment 17 clause 6. This report used to read "Could matter
+        # at process temperature IF Ea >= 70 kJ/mol ... THAT Ea IS UNMEASURED IN
+        # EVERY CORPUS SOURCE." It is measured now, and it missed the threshold.
+        #
+        # The text is a PLAIN STRING constant carried on the parameter object
+        # rather than an f-string assembled here, deliberately: on Python 3.12 an
+        # f-string tokenizes into FSTRING_MIDDLE parts that are NOT
+        # tokenize.STRING, so every digit inside one leaks into what the B4
+        # hold-out firewall reads as executable code. Interpolating this
+        # paragraph would have tripped the firewall on a temperature in a
+        # citation. Keeping the prose in the registry keeps the guard sharp.
         out["process_temperature_report"] = (
-            f"Could matter at process temperature IF Ea >= "
-            f"{COVALENT_CEILING.activation_condition_ea_kj_mol} kJ/mol -- 36x would "
-            f"arrive in 36 min to 2.2 h at 140 C, and the extent is UNCAPPED "
-            f"(lysine in 360-36 000x excess). THAT Ea IS UNMEASURED IN EVERY "
-            f"CORPUS SOURCE. Named wet-lab gap, Amendment 6.")
+            COVALENT_CEILING.process_temperature_verdict)
+        out["ea_kJ_per_mol"] = COVALENT_CEILING.ea_kj_mol
+        out["ea_range_kJ_per_mol"] = list(COVALENT_CEILING.ea_range_kj_mol or ())
+        out["ea_status"] = COVALENT_CEILING.ea_status
+        out["retirement"] = COVALENT_CEILING_RETIREMENT
     else:
         out["process_temperature_report"] = (
             "Not applicable: the compound is outside the structurally allowed "

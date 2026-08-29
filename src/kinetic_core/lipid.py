@@ -622,9 +622,19 @@ def _covalent_consumption(state: Mapping[str, float], duration_min: float) -> fl
     if not COVALENT_SINK.enabled:
         return 0.0
     raise NotImplementedError(
-        "enabling the covalent sink requires the aldehyde-lysine Ea on food "
-        "proteins, a NAMED WET-LAB GAP (Amendment 6 ruling 2). Do not enable "
-        "it with a guessed Ea."
+        "the covalent sink is disabled BY MEASUREMENT, not by ignorance "
+        "(Amendment 17 clause 6, Wave B8). Its Ea on a food protein is 15-23 "
+        "kJ/mol against the >= 70 that would make it matter at process "
+        "temperature, so it removes 0.005%-0.21% of a dose in any real thermal "
+        "process; its capacity FALLS with temperature and its equilibrium "
+        "unwinds on heating. Enabling it for a THERMAL step would add a term "
+        "measured to be negligible there. The regime where it IS real is "
+        "AMBIENT STORAGE over weeks in a high-protein matrix, and implementing "
+        "that needs a storage clock this module does not have -- not an Ea. "
+        "(Before B8 this message read: 'enabling the covalent sink requires "
+        "the aldehyde-lysine Ea on food proteins, a NAMED WET-LAB GAP "
+        "(Amendment 6 ruling 2). Do not enable it with a guessed Ea.' That gap "
+        "is closed.)"
     )
 
 

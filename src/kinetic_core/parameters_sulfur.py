@@ -1371,6 +1371,191 @@ ALKALINE_PRIORS: Tuple[Dict[str, Any], ...] = (
 )
 
 # ===========================================================================
+# 3a-bis. B8 -- THE K6a / K6b MEASURED BARRIERS, AND THE PROVENANCE CORRECTION
+# ===========================================================================
+# FIT_HOLDOUT_DECLARATION.md Amendment 17, ratified 2026-08-30. Four things
+# happen here and each is a MEASUREMENT replacing either a fitted lump or an
+# absence, never a taste:
+#
+#   (1) the 248 kJ/mol thiol sink is REFUTED and replaced by a PRIOR BAND;
+#   (2) the disulfide channels gain the corpus's only measured barrier;
+#   (3) the fed-Amadori enolisations gain theirs;
+#   (4) the whole Kang ladder is re-pointed at its primary source and
+#       re-banded from Tier A to Tier B semi-quant.
+#
+# ---------------------------------------------------------------------------
+# (1) THE COVALENT-CAPTURE BAND -- Gigl, Hofmann & Frank 2021
+# ---------------------------------------------------------------------------
+#: B2.2's fit put `Ea_decay_thiol_sink` at 248.0 kJ/mol against a 250 ceiling;
+#: B2.3 got 216.1 and B2.4 212.9-218.1. NONE of those is compatible with the
+#: only direct measurement of a thiol sink's temperature structure that exists.
+#: Gigl 2021 (qHNMR, coffee melanoidins, 279 / 300 / 333 K) measures the
+#: covalent capture of 2-furfurylthiol at k = 1.17e-5 / 2.57e-4 / 7.83e-4 /min.
+#:
+#: THE FALSIFICATION IS ARITHMETIC, NOT RHETORICAL. 248 kJ/mol predicts
+#: k(333)/k(279) = exp(248000 * 5.81226e-4 / 8.314) = 3.4e7. The MEASURED ratio
+#: is 67.2. The prediction is wrong by 5.1e5x. No plateau choice and no rate law
+#: recovers a 248 kJ/mol barrier from a 67-fold change over 54 K.
+GIGL_EA_THIOL_COVALENT_CAPTURE_KJ_MOL = 60.2
+#: The DEFENSIBLE RANGE across all six of the dossier's derivation routes. It is
+#: a PRIOR BAND, not a numerical convenience: B8 searches inside it, and a fit
+#: that presses either edge is reporting a residual conflict rather than a
+#: barrier. (Three-point Arrhenius gives 58.5 with R^2 0.886.)
+GIGL_EA_COVALENT_CAPTURE_RANGE_KJ_MOL: Tuple[float, float] = (7.0, 102.0)
+GIGL_COVALENT_ANCHOR = (
+    "Gigl, Hofmann & Frank 2021, J. Agric. Food Chem. 69:15334-15344, doi "
+    "10.1021/acs.jafc.1c06163, Figure 4A (gigl2021_extraction.md secs. 5b, 6d, "
+    "7b): 2-furfurylthiol + isolated coffee HMW melanoidins, qHNMR with ERETIC "
+    "2 / PULCON absolute quantification, 279 / 300 / 333 K. Ea = "
+    "R ln(67.2) / (1/279 - 1/333) = 60.2 kJ/mol; 3-point fit 58.5, R^2 0.886."
+)
+GIGL_COVALENT_CAVEATS = (
+    "(1) A 3-5 DECADE EXTRAPOLATION. Measured at 6-60 C; used at 100-180 C. "
+    "Transfer risk is HIGH for magnitude, LOW for sign, MODERATE for order of "
+    "magnitude, and this module uses it ONLY as a band on a barrier -- never as "
+    "a rate. (2) n = 1, no SDs, no LOD anywhere in the paper. (3) The ligand : "
+    "site ratio is ~1e5 above an authentic brew. (4) The binding partner is a "
+    "PREFORMED, purified melanoidin re-added to solution, not a melanoidin "
+    "forming in situ. (5) The dossier's own calibrated verdict is that this "
+    "paper is a REFUTATIONAL and STRUCTURAL anchor, not a calibration source: "
+    "P(this paper alone suffices to refit a repo parameter) < 0.05, which is "
+    "why what it supplies here is a BAND and a prior centre rather than a value."
+)
+#: THE MODEL-FORM GAP THIS BAND DOES NOT CLOSE, DECLARED RATHER THAN PATCHED.
+#: Gigl's FFT is the only one of 20 odorants in "Scenario IV -- covalent AND
+#: pi-pi". Two controls dissect it: N-acetylcysteine (thiol, no ring) binds
+#: covalently only; methylated FFT (ring, no free -SH) pi-stacks only. The
+#: pi-stacked pool is a REVERSIBLE reservoir that FEEDS the covalent sink, it
+#: equilibrates in under five minutes, and its enthalpy is NEGATIVE:
+GIGL_DELTA_H_PI_STACKING_KJ_MOL = -19.5
+GIGL_PI_STACKING_DECLARATION = (
+    "NOT IMPLEMENTED, DECLARED. At 60 min Gigl's FREE thiol fraction RISES with "
+    "temperature (24.1% at 279 K, 32.3% at 300 K, 55.0% at 333 K): more thiol "
+    "survives HOT than COLD. NO single first-order sink with a positive Ea can "
+    "produce that at ANY prefactor -- it is a model-form falsification, not a "
+    "fit-quality problem, and it is the mechanism by which an optimiser asked "
+    "to represent two opposite-sign channels with one knob drives that knob to "
+    "a rail. This module has NO reversible negative-enthalpy sequestration "
+    "term. B8 declines to add one: adding a species after reading a hold-out "
+    "scorecard is a refit in disguise. The enthalpy is on the record "
+    "(-19.5 kJ/mol, R^2 0.979, confirmed independently on a pyrazine at -13.4) "
+    "so a later wave can implement it as a pre-registered structural change."
+)
+
+# ---------------------------------------------------------------------------
+# (2) and (3) THE ZHANG 2026 BARRIERS
+# ---------------------------------------------------------------------------
+#: Zhang et al. 2026, Food Chem. doi 10.1016/j.foodchem.2026.148681, Table 2 --
+#: the ONLY paper in wave K6a that publishes rate constants AND activation
+#: energies, and ALL NINETEEN of its Ea reproduce from its own k values (mean
+#: |deviation| 2.1%, median 1.7%). The MAGNITUDES are refused (no units printed,
+#: mixed reaction orders, 8 of 19 on arbitrary-scale nodes); the BARRIERS
+#: survive, because a constant scale cancels in ln(k2/k1).
+#:
+#: k17, Cys-Gly -> di-(Cys-Gly): THE CORPUS'S ONLY MEASURED BARRIER FOR THIOL
+#: OXIDATION TO A DISULFIDE. Before B8 the two dimerisation channels carried no
+#: activation energy at all and were held at their 145 C value everywhere --
+#: which is not conservatism but a strong claim (that a thermal oxidation runs
+#: exactly as fast at 100 C as at 145 C) with a known direction of error.
+ZHANG_EA_THIOL_TO_DISULFIDE_KJ_MOL = 122.2
+ZHANG_DISULFIDE_ANCHOR = (
+    "Zhang et al. 2026, Food Chem., Table 2 step k17 (zhang2026_extraction.md "
+    "secs. 4b, 6): k = 0.0008 / 0.0015 / 0.0045 at 130 / 140 / 150 C, "
+    "glucose-glutathione, pH 6.5, 0.2 M phosphate. Published Ea 122.9; this "
+    "wave's independent refit 122.2, R^2 0.971, deviation -0.6%. Legs 87.1 "
+    "(130->140) and 159.7 (140->150) -- the spread is recorded, and it is the "
+    "reason the value is carried as a barrier and never as a rate."
+)
+#: k16, Cys-Amadori -> alpha-dicarbonyl: R^2 = 1.000 with legs 86.7 / 84.7, a
+#: 2% spread. It is the FLAT-LEG member of a family (k4, k8, k11, k14) whose
+#: other four members saturate on the 140->150 C leg and whose published
+#: 53-68 kJ/mol are PLATEAU ARTEFACTS the authors noticed, wrote down, and
+#: published a single Arrhenius Ea for anyway. k16 does NOT show it, which is
+#: what makes it ingestible where they are not.
+ZHANG_EA_CYS_AMADORI_TO_ALPHA_DC_KJ_MOL = 85.7
+ZHANG_AMADORI_ANCHOR = (
+    "Zhang et al. 2026, Food Chem., Table 2 step k16 (zhang2026_extraction.md "
+    "secs. 4b, 6.2): k = 0.0263 / 0.0492 / 0.0881 at 130 / 140 / 150 C. "
+    "Published Ea 87.9; refit 85.7, R^2 1.000, legs 86.7 / 84.7. The product "
+    "node is a UV absorbance, so the Ea survives and the k does not; only the "
+    "Ea is taken. Applied to the two AMINE-CATALYSED fed-Amadori enolisations "
+    "(k_arp_dpo, k_arp_tdp), which are what Zhang's buffered pH-6.5 system "
+    "measures; the UNCATALYSED partners (k_arp_tdp_th, k_arp_dpo_th) are a "
+    "different mechanism and keep the lumped formation barrier."
+)
+#: k15, Cys + glucose -> Cys-Amadori, Ea = 100.9, R^2 1.000, legs 98.9 / 103.0 --
+#: the best-conditioned constant of the whole K6a wave. IT HAS NO SHIPPED SITE.
+#: This module's Amadori is FED (Zhou 2023 charges purified ARP at 20 mmol/L);
+#: there is no `Cys + sugar -> ARP` edge anywhere in `_FITTED_SULFUR`. Recording
+#: it as a declared prior with no site is the honest option; forcing it onto
+#: `k_ttca_cys` (a retro-condensation, not an Amadori rearrangement) would be
+#: assigning a measurement to a step that is not the one measured.
+ZHANG_EA_CYS_TO_CYS_AMADORI_KJ_MOL = 100.9
+ZHANG_CYS_AMADORI_FORMATION_NO_SITE = (
+    "DECLARED, NO SHIPPED SITE. Zhang 2026 k15 (Cys + glucose -> Cys-Amadori, "
+    "Ea 100.9, R^2 1.000, legs 98.9/103.0) is the best-conditioned barrier in "
+    "wave K6a and this network has no edge for it: the Amadori compound is a "
+    "FED precursor here, not a formed one. Ingested as a prior on the record so "
+    "a later wave that adds the formation edge inherits the measurement rather "
+    "than fitting one."
+)
+
+# ---------------------------------------------------------------------------
+# (4) THE PROVENANCE CORRECTION -- the ladder is ONE experiment, not four
+# ---------------------------------------------------------------------------
+#: FIT_HOLDOUT_DECLARATION.md Amendment 17 clause 1. Kang et al. 2026's Table S4
+#: -- the repo's only sulfur temperature ladder -- IS Zhai et al. 2023 (Food
+#: Chem. 404:134420, online 28 Sep 2022) Table 1, TTCA columns, published 3.5
+#: years earlier. Over the 102 shared cells (34 compounds x 3 temperatures) the
+#: two agree cell for cell to the last printed decimal in 101 of 102, all six
+#: class subtotals and all three grand totals agree EXACTLY -- including an
+#: arithmetic error at 120 C reproduced identically -- the printed SDs are
+#: identical, and Kang's corresponding author is Zhai's first author.
+#: The one discrepant cell is diagnosed: 2-methylthiophene at 120 C reads
+#: 1.128 +/- 0.126b in BOTH Zhai columns (a copy-paste), and Kang's 0.000 is the
+#: correction. No shipped row uses that cell.
+ZHAI_FOODCHEM_PRIMARY_SOURCE = (
+    "Zhai, Y. et al. 2023, Food Chemistry 404:134420, doi "
+    "10.1016/j.foodchem.2022.134420, Table 1 (online 28 Sep 2022) -- THE "
+    "PRIMARY SOURCE. Kang et al. 2026, Sust. Food Technol. 4:3239, Table S4, "
+    "which this module originally cited, is a RE-PUBLICATION of the same 102 "
+    "cells (zhai2023foodchem_extraction.md sec. 8; k6a_sulfur_ladders_"
+    "synthesis.md sec. 2). Any weighting that counted Kang S4 and S5 as two "
+    "observations was wrong by 2x."
+)
+#: THE TIER A LABEL IS WITHDRAWN. `kang2026_SI_extraction.md` sec. 4d assigned
+#: Tier A (+/-15%) on the strength of Kang's Table S3 calibration curves. The
+#: PRIMARY source states the opposite basis in a printed equation --
+#: `Wi = f' * (Ai*ms)/(As*V)` with "the correction factor was 1" -- and
+#: identical numbers cannot come from two quantification routes.
+ZHAI_LADDER_QUANTIFICATION = (
+    "SINGLE-IS SEMI-QUANT, f' = 1, n = 1 pot (1,2-dichlorobenzene, 0.054 ug). "
+    "TIER B: x/ 2 to x3 on absolute MAGNITUDE. Ea and SHAPE are unaffected, "
+    "because a constant unknown response factor cancels in a ratio and "
+    "therefore in an Arrhenius slope. THIS LICENSES within-study shape and "
+    "ratio use and FORBIDS absolute yields, cross-compound magnitude "
+    "comparison, cross-paper magnitude comparison, and class subtotals read as "
+    "physical totals. The six shipped level rows already carry sigma_log = 0.4 "
+    "= log10(2.51), which is INSIDE the x/ 2-3 interval, so this re-band is a "
+    "label correction and costs no value change; widening a sigma to "
+    "manufacture a visible edit would be worse, not better."
+)
+#: The switch-on the ladder was thought to show does not exist, and the failure
+#: is recorded here so no later wave re-fits a two-regime barrier to it.
+ZHAI_SWITCH_ON_RETIRED = (
+    "RETIRED, NOT FAILED (Amendment 17 clause 2). The MFT/FFT 'switch-on "
+    "between 120 and 140 C' is a HOLD-TIME ARTEFACT of a single 120-minute "
+    "slice through curves that peak and turn over. It vanishes at 40, 80 and "
+    "180 min in the same pot; it vanishes when an equimolar sugar is added "
+    "(MFT 1.44x/1.30x, FFT 1.35x/0.96x in the +Xyl arm of the same table); and "
+    "Wang 2026's independent 5-rung ladder has both thiols PEAK MID-LADDER AND "
+    "FALL. A fixed-time slice across a family of curves whose maxima move left "
+    "as temperature rises measures where each curve sits relative to its own "
+    "peak, not an activation energy. What survives, and is better supported: "
+    "above ~120-140 C thiol consumption outruns thiol formation."
+)
+
+# ===========================================================================
 # 3b. B2.1's NEW MEASURED CONSTRAINTS -- Kang 2026 SI and Kumazawa 2003
 # ===========================================================================
 #: Kang 2026 SI sec. 6c: peak free cysteine is 1.63 mmol/L (140 C, 40 min)
@@ -1392,6 +1577,28 @@ KANG_TTCA_CEILING_ANCHOR = (
 #: Digitised from Fig. S4 at 400 dpi with exact axis calibration; all three
 #: curves start at exactly 10.00 mmol/L at t = 0, which validates the axis.
 KANG_EA_FREE_CYS_DEPLETION_KJ_MOL = 55.1
+#: B8 / Amendment 17: THE PRIMARY SOURCE OF THIS NUMBER IS ZHAI, NOT KANG, and
+#: the two are not independent. Zhai Food Chem p. 6 PRINTS the conversions in a
+#: sentence -- 16.2% / 38.8% / 62.2% at 100 / 120 / 140 C, Cys 10 mmol/L, pH 7,
+#: 120 min -- which as pseudo-first order give k = 1.473e-3 / 4.092e-3 /
+#: 8.107e-3 /min and Ea = 54.7 kJ/mol (R^2 0.996, legs 62.3 / 46.2).
+#: `kang2026_SI_extraction.md` sec. 6b derived 55.1 by DIGITISING Kang's Fig. S4
+#: -- the same experiment, one publication downstream, read off a figure instead
+#: of a sentence. The 0.7% agreement is a VALIDATION OF THE DIGITISATION, not an
+#: independent confirmation, and `kinetic_core_b2_2_diagnosis.md` K-4's phrase
+#: "Kang's own immovable 55.1" should read "Zhai's".
+#: B8 does NOT move the shipped value: 54.7 and 55.1 are two readings of one
+#: measurement and swapping them would be churn, not a correction.
+ZHAI_EA_FREE_CYS_DEPLETION_PRIMARY_KJ_MOL = 54.7
+ZHAI_FREE_CYS_DEPLETION_NOTE = (
+    "PRIMARY-SOURCE VALUE 54.7 kJ/mol (Zhai Food Chem 2023 p. 6, printed "
+    "conversions 16.2 / 38.8 / 62.2% at 100 / 120 / 140 C; R^2 0.996). The "
+    "shipped 55.1 is the digitised reading of the SAME experiment in Kang 2026 "
+    "Fig. S4 and is kept. NOTE THE CURVATURE: legs 62.3 then 46.2 -- the "
+    "cysteine sink DECELERATES across the very interval where the thiols were "
+    "said to accelerate, so a single 55.1 is a 40 K average of a mildly curved "
+    "line whose curvature has the OPPOSITE SIGN to the retired switch-on."
+)
 #: FIT ROWS ONLY. The 140 C rung of both ladders is the declared GATING
 #: HOLD-OUT (Amendment 5) and is deliberately ABSENT from this file and from
 #: everything under src/. tests/unit/test_kinetic_core_b2_1.py greps for its
@@ -1403,6 +1610,8 @@ KANG_CYS_CONVERSION_AT_120_MIN: Mapping[float, float] = {
     100.0: 0.162, 120.0: 0.387,
 }
 KANG_CYS_ANCHOR = (
+    "PRIMARY SOURCE Zhai et al. 2023 Food Chem. 404:134420 p. 6 (printed "
+    "conversions); re-published as -- and originally cited here from -- "
     "Kang 2026 SI Fig. S4, digitised (kang2026_SI_extraction.md sec. 6b): free "
     "cysteine 10 mmol/L, pH 7, sealed, 0-120 min at 100/120/140 C. Arrhenius "
     "over all three points gives Ea = 55.1 kJ/mol, A = 8.0e4 /min, R^2 0.994, "
@@ -1725,8 +1934,40 @@ NAMED_CHANNEL_KEYS: Tuple[str, ...] = ("k_dimer_mft", "k_dimer_fft", "k_mmft")
 #: These do NOT receive the lumped formation Ea; they receive the measurement,
 #: and the fit cannot move it. This is the mechanism by which "the network's
 #: temperature dependence flows through measured Ea where they exist".
+#:
+#: B8 (Amendment 17 clause 5) adds FOUR entries, on two measurements. Each is a
+#: single paper's single step measured at THREE temperatures -- the same class
+#: of object as Kang/Zhai's 55.1, and NOT the derivation policy 2 prohibits
+#: (one Arrhenius line drawn through two DIFFERENT named channels from two
+#: DIFFERENT papers at two DIFFERENT temperatures). `k_mmft`, `k_thioether`,
+#: `k_oligomer` and `k_protein_ss` still carry no activation energy and no code
+#: path may pair them; that prohibition is untouched.
 MEASURED_EA_OVERRIDES: Mapping[str, float] = {
     "k_cys_thermal": KANG_EA_FREE_CYS_DEPLETION_KJ_MOL,
+    # B8: the oxidative decay family. Zhang 2026 k17, R^2 0.971.
+    "k_dimer_mft": ZHANG_EA_THIOL_TO_DISULFIDE_KJ_MOL,
+    "k_dimer_fft": ZHANG_EA_THIOL_TO_DISULFIDE_KJ_MOL,
+    # B8: the fed-Amadori enolisations. Zhang 2026 k16, R^2 1.000.
+    "k_arp_dpo": ZHANG_EA_CYS_AMADORI_TO_ALPHA_DC_KJ_MOL,
+    "k_arp_tdp": ZHANG_EA_CYS_AMADORI_TO_ALPHA_DC_KJ_MOL,
+}
+
+#: Which source each override came from, so a value can never be lifted out of
+#: this module without its conditions travelling with it.
+MEASURED_EA_OVERRIDE_ANCHORS: Mapping[str, str] = {
+    "k_cys_thermal": KANG_CYS_ANCHOR,
+    "k_dimer_mft": ZHANG_DISULFIDE_ANCHOR,
+    "k_dimer_fft": ZHANG_DISULFIDE_ANCHOR,
+    "k_arp_dpo": ZHANG_AMADORI_ANCHOR,
+    "k_arp_tdp": ZHANG_AMADORI_ANCHOR,
+}
+
+#: Measured barriers with NO shipped site in this network. Recorded so the
+#: measurement is not lost and is not forced onto a step it does not describe.
+MEASURED_EA_WITHOUT_A_SITE: Mapping[str, Tuple[float, str]] = {
+    "cys_plus_sugar_to_cys_amadori": (
+        ZHANG_EA_CYS_TO_CYS_AMADORI_KJ_MOL, ZHANG_CYS_AMADORI_FORMATION_NO_SITE,
+    ),
 }
 
 #: The unassigned sinks: fitted lumps, no measurement at any temperature, now
@@ -1779,6 +2020,43 @@ UNASSIGNED_SINK_KEYS: Tuple[str, ...] = (
 #:   them where they are is the conservative direction and it costs no claim.
 #:
 #: NET COST: TWO new fitted numbers. Not nine, and not one per lump.
+#:
+#: ===================================================================
+#: B8 -- THE T-STRUCTURE. THE THIOL SINK IS TWO CHANNELS, NOT ONE.
+#: ===================================================================
+#: Amendment 17 clause 4. Wave K6a produced four independent measurements of
+#: thiol decay and NONE is compatible with 248 kJ/mol. What they show is not one
+#: sink with a better number but TWO channels of different chemistry, and B8
+#: gives each its own barrier from its own measurement:
+#:
+#:   COVALENT CAPTURE -- the FAMILY A lumps above (`k_mft_decay`,
+#:   `k_fft_decay`, `k_thiol_decay`, `k_thiolate_loss`). STILL FITTED, but now
+#:   inside Gigl's measured band (7, 102) with a prior centre of 60.2 instead of
+#:   the arbitrary (20, 250). See `DECAY_EA_BOUNDS_BY_FAMILY`.
+#:
+#:   OXIDATIVE DIMERISATION -- `k_dimer_mft` and `k_dimer_fft`. NOT FITTED AT
+#:   ALL: they take Zhang 2026 k17's MEASURED 122.2 kJ/mol through
+#:   `MEASURED_EA_OVERRIDES`, and the fit cannot move it. Before B8 they carried
+#:   no barrier and were held at their 145 C value at every temperature.
+#:
+#: THE RESULTING PICTURE, and it is coherent where the B2.2 fit's was not:
+#:   thiol FORMATION, aqueous      ~30-75   (Zhai, Feng, Meng)
+#:   thiol DECAY, covalent capture ~60      (range 7-102, Gigl)
+#:   thiol DECAY, oxidative dimer  ~122     (Zhang k17)
+#:   precursor supply (Amadori)    ~86-106  (Zhang k15/k16 legs)
+#: Decay barriers are the SAME ORDER as formation -- somewhat higher, not higher
+#: by 170 kJ/mol. That is precisely the configuration that produces a
+#: PEAK-AND-DECLINE: at low temperature formation wins, at high temperature
+#: decay catches up, and above ~140 C precursor supply saturates while
+#: consumption keeps accelerating. The corpus measures that turnover in three
+#: laboratories and the pre-B8 core could not produce it at all.
+#:
+#: WHY A LUMPED SINK INFLATES ITS OWN FITTED BARRIER, on the record because it
+#: is the failure mode that produced the 248: Zhang's k18 (alpha-DC ->
+#: melanoidin) fits Ea = 118.0 from a FIFTH-ORDER rate law, against 28.3 and
+#: 30.6 measured directly for browning by two other labs -- a 4x inflation
+#: fully explained by four unmodelled co-reactant concentrations riding inside
+#: one "barrier".
 DECAY_FAMILY_THIOL_SINK: Tuple[str, ...] = (
     "k_mft_decay", "k_fft_decay", "k_thiol_decay", "k_thiolate_loss",
 )
@@ -1818,11 +2096,54 @@ DECAY_FAMILY_IDENTIFYING_ROWS: Mapping[str, str] = {
 #: told which, and neither bound is tightened toward either answer.
 DECAY_EA_BOUNDS: Tuple[float, float] = (20.0, 250.0)
 
+#: B8 -- PER-FAMILY BANDS. `DECAY_EA_BOUNDS` above is B2.2's arbitrary-wide pair
+#: and is KEPT UNCHANGED so that every B2.2/B2.3/B2.4 artefact stays exactly
+#: reproducible and the tests that pin those runs against it keep meaning what
+#: they meant. From B8 the fit uses the per-family bands below.
+#:
+#: `thiol_sink` (7, 102) is NOT a tightened search bound. It is Gigl 2021's
+#: DEFENSIBLE RANGE for the covalent-capture barrier, and the fact that its
+#: CEILING sits 2.1x below B2.3's landed 216.1 is the point: the incumbent value
+#: is refuted by measurement. A B8 fit that presses 102 is reporting a residual
+#: conflict between the objective and the measurement, and the report says so
+#: rather than widening the band to hide it.
+#:
+#: `carbonyl_sink` is UNCHANGED at (20, 250). K6a measured no carbonyl-sink
+#: barrier, so narrowing it would be inventing one. It landed at 249.9 in B2.3
+#: -- pressed against its ceiling -- and that remains an open, reported defect
+#: of exactly the kind Zhang's k18 explains: a lumped multi-order sink inflates
+#: its own fitted barrier. B8 does not touch it.
+DECAY_EA_BOUNDS_BY_FAMILY: Mapping[str, Tuple[float, float]] = {
+    "thiol_sink": GIGL_EA_COVALENT_CAPTURE_RANGE_KJ_MOL,
+    "carbonyl_sink": DECAY_EA_BOUNDS,
+}
+
+#: The prior centre each family's band is organised around, where one exists.
+DECAY_EA_PRIOR_CENTRE: Mapping[str, Optional[float]] = {
+    "thiol_sink": GIGL_EA_THIOL_COVALENT_CAPTURE_KJ_MOL,
+    "carbonyl_sink": None,
+}
+
+
+def decay_ea_bounds(family: str) -> Tuple[float, float]:
+    """The declared search band for one decay family (B8 and later)."""
+    return DECAY_EA_BOUNDS_BY_FAMILY.get(family, DECAY_EA_BOUNDS)
+
+
 #: Kept for the B2 API: every fitted step that consumes rather than forms.
 CONSUMPTION_KEYS: Tuple[str, ...] = NAMED_CHANNEL_KEYS + UNASSIGNED_SINK_KEYS
 
-#: The steps that get NO activation energy at all -- policy 2, narrowed.
-NO_EA_KEYS: Tuple[str, ...] = NAMED_CHANNEL_KEYS
+#: The steps that get NO activation energy at all -- policy 2, narrowed AGAIN
+#: in B8. `k_dimer_mft` and `k_dimer_fft` leave this tuple because Zhang 2026
+#: k17 MEASURES their barrier (one paper, one step, three temperatures, R^2
+#: 0.971). `k_mmft` stays: nothing measures a thiol + methanethiol condensation
+#: at any second temperature, so it is still held at 145 C.
+#: NAMED_CHANNEL_KEYS itself is UNCHANGED -- policy 2's prohibition on pairing
+#: the four named channels into one Arrhenius line is about a DERIVATION, not
+#: about membership of this tuple, and it still stands.
+NO_EA_KEYS: Tuple[str, ...] = tuple(
+    k for k in NAMED_CHANNEL_KEYS if k not in MEASURED_EA_OVERRIDES
+)
 
 FORMATION_KEYS: Tuple[str, ...] = tuple(
     k for k in FITTED_SULFUR_KEYS if k not in CONSUMPTION_KEYS
@@ -1883,12 +2204,22 @@ def sulfur_placeholders() -> Dict[str, SulfurParameter]:
             # widened to the union the fit actually spans.
             t_range=(100.0, 145.0),
             rate_transfer="not_licensed",
-            channel="" if not consumption else "fitted_consumption",
+            channel=(
+                "fitted_consumption" if key in CONSUMPTION_KEYS else ""
+            ),
             ph_factor_kind=ph_kind,
             flags=(
                 ("fitted_here", "no_literature_value")
+                # B8: the barrier flag now says which of THREE regimes a step is
+                # in, because there are three. Before B8 there were two and the
+                # tuple was chosen by NO_EA_KEYS membership alone, which would
+                # now mis-label the two dimer channels as sharing the lumped
+                # formation Ea when they carry a measurement.
                 + (("no_Ea_available", "temperature_held_fixed")
-                   if consumption else ("shares_lumped_formation_Ea",))
+                   if consumption
+                   else (("measured_Ea_override", "fit_cannot_move_this_barrier")
+                         if key in MEASURED_EA_OVERRIDES
+                         else ("shares_lumped_formation_Ea",)))
                 + ((f"b2_2_decay_family:{decay_family_of(key)}",)
                    if decay_family_of(key) else ())
             ),

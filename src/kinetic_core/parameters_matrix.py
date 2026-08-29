@@ -21,9 +21,14 @@ that licenses it:
   2. The ALPHA,BETA-UNSATURATION PENALTY, ~2-5x, the only parametric matrix
      term k2 sec. D.4.4 judged defensible, fitted here on FIT rows only.
   3. The COVALENT CEILING -- an INERT BOUND. It contributes ZERO to every point
-     prediction and activates only in REPORTING, as "this could matter at
-     process temperature if Ea >= 70 kJ/mol, and that Ea is unmeasured in every
-     corpus source" (Amendment 6 ruling 2, the new named wet-lab gap).
+     prediction and appears only in REPORTING. Through B7 it reported "this
+     could matter at process temperature if Ea >= 70 kJ/mol, and that Ea is
+     unmeasured in every corpus source" (Amendment 6 ruling 2, a named wet-lab
+     gap). WAVE B8 RETIRES THAT: the Ea is MEASURED at 15-23 kJ/mol
+     (Amendment 17 clause 6), the 70 threshold is missed by 3.5-4.7x, and the
+     channel is now reported as MEASURED NEGLIGIBLE at process temperature and
+     REAL over ambient storage. The term's numerical contribution was zero
+     before and is zero after; only the reason changed.
 
 Anything an observation shows beyond these three is reported as UNEXPLAINED
 RESIDUAL, quantified per compound. That is the honest output and it is the
@@ -548,18 +553,135 @@ class CovalentCeiling:
     activation_condition_ea_kj_mol: float
     source_anchor: str
     notes: str
+    #: B8: the two fields that turn "unmeasured, could matter" into "measured,
+    #: does not". `ea_kj_mol` is now a NUMBER and `ea_status` says so.
+    ea_range_kj_mol: Optional[Tuple[float, float]] = None
+    ea_status: str = ""
+    process_temperature_verdict: str = ""
 
 
+#: ===================================================================
+#: B8 -- THE CEILING IS RETIRED TO "MEASURED NEGLIGIBLE"
+#: ===================================================================
+#: FIT_HOLDOUT_DECLARATION.md Amendment 17 clause 6, ratified 2026-08-30.
+#: Amendment 6 ruling 2 posed the question in binary, quantitative form: this
+#: channel matters at process temperature ONLY if its Ea is >= ~70 kJ/mol, and
+#: that Ea is unmeasured in every corpus source. WAVE K6b MEASURED IT.
+#:
+#:   Ea = 15-23 kJ/mol.  The threshold is MISSED BY 3.5-4.7x.
+#:
+#: Primary: Shepelev & Reineccius 2024, JAFC 72:10579-10583, Fig. 3 -- decanal
+#: + beta-lactoglobulin, 14-C scintillation counting of protein-bound label at
+#: 25 / 45 / 65 C. Raw day-1 extents give 15.2 kJ/mol (R^2 0.998); the
+#: saturation-corrected first-order approach to plateau gives 20.0 (R^2 0.9997);
+#: the full envelope over every digitisation choice is 14-23; propagating the
+#: printed SDs (n = 4) gives 20 +/- 4 (1 sigma), 95% CI 12-28.
+#:
+#: FOUR INDEPENDENT CORROBORATIONS, none sharing a method with the primary:
+#:   1. Hamzalioglu 2018's HMF + free lysine, aqueous pH 3.5, 5-50 C, HPLC-UV:
+#:      10.0 kJ/mol. Different lab, aldehyde, nucleophile presentation, method.
+#:   2. Shepelev's OWN PEITC control, same figures and apparatus: 36-43 kJ/mol.
+#:      A 2.0-2.5x separation WITHIN one experiment proves the estimator
+#:      RESOLVES an Ea -- the low decanal number is not an estimator artefact.
+#:   3. Yuan 2023's ordinal panel: hexanal flat at 1,1,1,1 across 22 -> 130 C
+#:      in a table that DOES register crossings for compounds that accelerate.
+#:   4. Hidalgo 2010's thiol-Michael series, 8 temperatures, 80-180 C: 28-30.
+#:
+#: WHY THE OLD NUMBER WAS WRONG, in one sentence: every intuition the corpus had
+#: about "carbonyl-amine activation energies" was built on BAND C -- Strecker
+#: chemistry, browning, fluorescence, all at 50-81 kJ/mol -- and applied to a
+#: BAND A reaction. Adduct FORMATION lives at 10-30. The 70 was a band-C number
+#: applied to a band-A step.
+#:
+#: WHAT IT DOES TO THE ARITHMETIC. Acceleration 25 C -> process temperature:
+#:   Ea = 20 (measured):  5.1x at 100 C,  9.5x at 140 C,  15.8x at 180 C
+#:   Ea = 70 (assumed):   291x,           2 596x,         15 700x
+#: Fraction of a hexanal dose consumed covalently, computed from the FAST end
+#: of the corpus's own t_1/2 bracket so every figure OVER-states the sink:
+#:   UHT 130 C/30 s 0.005% | extrusion 140 C/60 s 0.012% |
+#:   retort 100 C/30 min 0.20% | bake 180 C/10 min 0.21%
+#: Under the >= 70 assumption those four are 1.0% / 3.3% / 4.6% / 90.7%.
+#: THE ASSUMPTION WAS WRONG BY TWO TO THREE ORDERS OF MAGNITUDE IN THE QUANTITY
+#: THAT MATTERS. Against the 1 304x (3.115 decades) hexanal cooked-beef/water
+#: threshold shift the channel was invoked to explain, 0.21% contributes
+#: 0.0009 decades -- 0.03% of it.
+#:
+#: TWO ARGUMENTS THAT NEED NO ARRHENIUS ARITHMETIC AT ALL, so the verdict does
+#: not rest on the Ea value being right:
+#:   (i)  THE SINK'S CAPACITY FALLS WITH TEMPERATURE, measured. Day-28 binding
+#:        is 25.6 > 20.1 > 17.4 mg/g at 25 / 45 / 65 C, and the 65 C series
+#:        PEAKS AT DAY 7 then declines 26%. The authors give the mechanism and
+#:        say they favour it: heating alters protein structure so it becomes
+#:        less available. Heating does not merely fail to speed the sink up; it
+#:        shrinks the sink's ceiling.
+#:   (ii) THE EQUILIBRIUM UNWINDS ON HEATING, measured. Zamora 2010's matched
+#:        forward/reverse pair -- the corpus's only one -- gives Ea_fwd 44 and
+#:        Ea_rev 52, hence dH ~ -8 kJ/mol and K_eq falling 3.0x from 25 to
+#:        180 C; demonstrated by acrylamide that was 99.3% gone after 28 d at
+#:        60 C being restored to 10.6% by 20 min at 180 C, a 15x recovery of an
+#:        analyte that had, to all measurement, disappeared.
+#:
+#: WHAT THE CHANNEL IS STILL GOOD FOR, stated positively: AMBIENT STORAGE over
+#: weeks to months in a high-protein matrix, where it is real and sizeable
+#: (decanal loses 14.5-20% of dose over 28 d at 25 C; hexanal's t_1/2 is
+#: 18-74 d). That is where the sink belongs, and this model has no storage clock.
+#:
+#: ⚠ WHAT THE VERDICT DOES NOT SETTLE, carried forward rather than closed:
+#: REVERSIBILITY of an aldehyde-protein adduct is STILL never measured. Three
+#: papers assert it and none tests it. It is now a well-specified experiment
+#: (synthesise the adduct, heat it alone, quantify released aldehyde against a
+#: labelled IS) rather than an open-ended gap.
+#:
+#: ⚠ AND A CONTRADICTION FOUND WHILE DOING THIS, REPORTED NOT RESOLVED: this
+#: object carries `ambient_half_life_days = (37, 760)` while the lipid lane's
+#: `CovalentSinkCeiling` carries (37, 74). They are two different brackets --
+#: 37-760 d is anantharamkrishnan2020b's MS adduct-counting range, 37-74 d is
+#: the OVERLAP of that with meynier2004's independent bound. Neither is wrong;
+#: they answer different questions. NEITHER IS CHANGED HERE. B8 will not
+#: harmonise two measured brackets by picking one after reading a scorecard.
 COVALENT_CEILING = CovalentCeiling(
     k2_m_per_s_at_20c=2.5e-5,
-    ea_kj_mol=None,  # UNMEASURED, everywhere in the corpus. This is the gap.
+    # B8: MEASURED. Was None ("UNMEASURED, everywhere in the corpus").
+    ea_kj_mol=20.0,
+    ea_range_kj_mol=(15.0, 23.0),
+    ea_status=(
+        "MEASURED (Shepelev 2024 Fig. 3, 14-C on beta-lactoglobulin, 3 "
+        "temperatures): 15-23 kJ/mol, central 20.0. Corroborated at 10.0 by "
+        "Hamzalioglu 2018 in a different lab on a different aldehyde by a "
+        "different method. The most generous defensible upper bound is 45 "
+        "(adding back a hypothetical hydrophobic pre-equilibrium the paper does "
+        "not measure and this layer would not want, since the sink acts on "
+        "total rather than bound aldehyde) -- and even 45 < 70."
+    ),
+    process_temperature_verdict=(
+        "NEGLIGIBLE AT PROCESS TEMPERATURE, MEASURED. The channel removes "
+        "0.005%-0.21% of a hexanal dose in any realistic thermal process "
+        "(UHT 130 C/30 s, extrusion 140 C/60 s, retort 100 C/30 min, bake "
+        "180 C/10 min), against the 1%-91% the >= 70 kJ/mol assumption implied. "
+        "Three independent mechanisms point the same way: the rate barely "
+        "rises (Ea 15-23), the CAPACITY FALLS with temperature (day-28 binding "
+        "25.6 > 20.1 > 17.4 mg/g at 25/45/65 C), and the EQUILIBRIUM UNWINDS on "
+        "heating (Ea_rev 52 > Ea_fwd 44 => K_eq falls 3.0x from 25 to 180 C). "
+        "It is an AMBIENT-STORAGE channel -- real and sizeable over weeks in a "
+        "high-protein matrix -- and no amount of heat makes it a process "
+        "channel. The term stays INERT and contributes exactly 0.0, which it "
+        "already did; what changed is that the zero is now MEASURED rather than "
+        "ASSUMED. STILL OPEN: adduct reversibility is asserted by three papers "
+        "and tested by none."
+    ),
     reversible_share_headspace_timescale=0.98,
     reversible_share_48h=0.77,
     ambient_half_life_days=(37.0, 760.0),
+    #: KEPT, as the historical decision threshold the measurement is scored
+    #: against. It is no longer a condition; it is the number that was missed.
     activation_condition_ea_kj_mol=70.0,
     source_anchor=(
         "Amendment 6 rulings 1, 2 and 4 (meynier2004_extraction.md sec. 9, G-2) "
-        "bracketed two-sided against anantharamkrishnan2020b's floor."),
+        "bracketed two-sided against anantharamkrishnan2020b's floor. THE Ea IS "
+        "NOW MEASURED: shepelev2024_extraction.md sec. 6 / "
+        "k6b_adduct_kinetics_synthesis.md secs. 1b, 2b, 2d, 2e (Amendment 17 "
+        "clause 6), with hamzalioglu2018, hidalgo2010 and zamora2010 as the "
+        "independent corroborations."),
     notes=(
         "k2(hexanal-Lys) <= 2.5e-5 M^-1 s^-1 at 20 C is a CEILING, measured as "
         "'<= 6 % of a 40 mM dose in 48 h'. The measured analogues are "
@@ -567,11 +689,29 @@ COVALENT_CEILING = CovalentCeiling(
         ">=98 % reversible on headspace timescales and >=77 % over 48 h; "
         "t-2-hexenal is ~2/3 reversible at 48 h. The covalent channel supplies "
         "~0.06 % of the 1 304x hexanal log-shift on a threshold-panel "
-        "timescale, so it does NOT close the matrix gap at ambient. The ONE "
-        "surviving corner: extent is uncapped (lysine is in 360-36 000x "
-        "excess), so at process temperature with Ea >= ~70 kJ/mol, 36x arrives "
-        "in 36 min - 2.2 h at 140 C. THAT Ea IS UNMEASURED IN EVERY CORPUS "
-        "SOURCE and is the named wet-lab gap Amendment 6 opened."),
+        "timescale, so it does NOT close the matrix gap at ambient. THE ONE "
+        "SURVIVING CORNER IS NOW CLOSED TOO (Wave B8): Amendment 6's argument "
+        "was that extent is uncapped (lysine is in 360-36 000x excess), so at "
+        "process temperature with Ea >= ~70 kJ/mol, 36x would arrive in 36 min "
+        "- 2.2 h at 140 C. THE Ea IS MEASURED AT 15-23 kJ/mol, so the "
+        "acceleration to 140 C is 9.5x rather than 2 596x and 36x never "
+        "arrives. The uncapped-extent argument also fails on its own terms: "
+        "the sink's measured CAPACITY FALLS with temperature. The named "
+        "wet-lab gap Amendment 6 opened is CLOSED; the one that replaces it is "
+        "narrower and different -- nobody has ever tested whether an "
+        "aldehyde-protein adduct is reversible."),
+)
+
+#: B8: kept as a named constant so the retirement is greppable and so the
+#: decision threshold and the measurement that missed it travel together.
+COVALENT_CEILING_RETIREMENT = (
+    "RETIRED 2026-08-30 (Wave B8, Amendment 17 clause 6). State change: "
+    "'UNMEASURED, could matter at process temperature if Ea >= 70 kJ/mol' -> "
+    "'MEASURED NEGLIGIBLE, Ea = 15-23 kJ/mol'. NO PREDICTED VALUE MOVES: the "
+    "term was already INERT BY RULING and contributed exactly 0.0 to every "
+    "point prediction, so what this replaces is an UNMEASURED zero with a "
+    "MEASURED one. Do not read a score change into it; if one appears, the "
+    "retirement was not the no-op it is declared to be and that is a finding."
 )
 
 #: STRUCTURAL GATE 1 -- the 32-of-47 no-adduct negative gate. A compound on
@@ -786,10 +926,21 @@ def matrix_registry_metadata() -> Dict[str, object]:
         "covalent_ceiling": {
             "k2_M_per_s_at_20C": COVALENT_CEILING.k2_m_per_s_at_20c,
             "ea_kJ_per_mol": COVALENT_CEILING.ea_kj_mol,
-            "ea_status": "UNMEASURED IN EVERY CORPUS SOURCE (Amendment 6 named gap)",
+            "ea_range_kJ_per_mol": list(COVALENT_CEILING.ea_range_kj_mol or ()),
+            "ea_status": COVALENT_CEILING.ea_status,
+            "process_temperature_verdict": (
+                COVALENT_CEILING.process_temperature_verdict),
+            "retirement": COVALENT_CEILING_RETIREMENT,
             "reversible_share_headspace": COVALENT_CEILING.reversible_share_headspace_timescale,
             "reversible_share_48h": COVALENT_CEILING.reversible_share_48h,
             "ambient_half_life_days": list(COVALENT_CEILING.ambient_half_life_days),
+            "decision_threshold_ea_kj_mol": (
+                COVALENT_CEILING.activation_condition_ea_kj_mol),
+            "decision_threshold_missed_by_x": round(
+                COVALENT_CEILING.activation_condition_ea_kj_mol
+                / COVALENT_CEILING.ea_kj_mol, 2),
+            # kept under its old key so no downstream reader breaks; the key
+            # now names a threshold that was MISSED rather than a live condition
             "activates_if_ea_at_least": COVALENT_CEILING.activation_condition_ea_kj_mol,
             "contribution_to_point_prediction": 0.0,
             "source": COVALENT_CEILING.source_anchor,

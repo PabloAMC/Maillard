@@ -568,9 +568,16 @@ def test_the_thermolysis_pair_reproduces_the_sources_own_table_I():
         f"within 3x everywhere; worst is {10 ** worst:.2f}x"
     )
 
-    # and the shipped repo pair fails the same check badly
-    shipped = 1.0e14 * 60.0 * math.exp(-130.4 / (R_KJ * (100.0 + CELSIUS)))
-    assert shipped / ZHENG_TABLE_I_K_PER_MIN[100.0][7.0] > 8.0
+    # and the pair the CANTERA LANE SHIPPED UNTIL WAVE B8 fails the same check
+    # badly. This is now a historical statement, kept because it is the
+    # arithmetic that justified B8's edit: on 2026-08-30 (Amendment 16 clause 1)
+    # data/lit/arrhenius_params.yml's `cysteine_thermolysis` moved from
+    # (130.4, 1.0e14 1/s) to the matched pH-5.0 pair (133.0, 1.931e12 1/s).
+    superseded = 1.0e14 * 60.0 * math.exp(-130.4 / (R_KJ * (100.0 + CELSIUS)))
+    assert superseded / ZHENG_TABLE_I_K_PER_MIN[100.0][7.0] > 8.0
+    # ...and the value that REPLACED it does not.
+    repaired = 1.931e12 * 60.0 * math.exp(-133.0 / (R_KJ * (100.0 + CELSIUS)))
+    assert abs(math.log10(repaired / ZHENG_TABLE_I_K_PER_MIN[100.0][5.0])) < math.log10(3.0)
 
 
 def test_ph3_is_not_interpolated_through():

@@ -10,7 +10,7 @@ Flag thresholds: prefactor differing by more than **2x**, activation energy diff
 * Verifiable against a transcribed source k(T) table: **11** (21 %)
 * **UNVERIFIABLE** — no k(T) table anywhere in `data/lit/extraction_dossiers/`: **42** (79 %)
 * Pairs shipping NO prefactor at all (NaN placeholder): **2**
-* Flagged: **8**
+* Flagged: **7**
 * Distinct source k(T) tables available to refit against: **13**
 
 Outside the scored set, and worth stating: These ship an activation energy with NO paired prefactor: the rate is reconstructed at the point of use from a generic Eyring/TST factor (k_B T/h, or the 6.25e12 'TST @ 150C' substitution). They are not (Ea, A) pairs and so are outside this audit's scored set, but they are the same silent-prefactor risk surface.
@@ -34,7 +34,7 @@ Four of the refits below have an independent prior refit in the dossiers, done b
 | `strecker` | T.P. Labuza 1998 | 80.33 | 1e+10 1/s | **no** | — | — | — | unverifiable |
 | `retro_aldol` | 10.1080/10408398.2017.1378865 | 160 | 1e+15 1/s | **no** | — | — | — | unverifiable |
 | `pyrazine_condensation` | 10.1016/j.foodchem.2025.145652 | 138.1 | 1e+11 L/mol.s | **no** | — | — | — | unverifiable |
-| `cysteine_thermolysis` | 10.1021/bk-1994-0564.ch011 | 130.4 | 1e+14 1/s | yes | 133 | 1.931e+12 1/s | 51.78 (51.8x) | **FLAG — prefactor** + **FLAG — cross-lane A** |
+| `cysteine_thermolysis` | 10.1021/bk-1994-0564.ch011 | 133 | 1.931e+12 1/s | yes | 133 | 1.931e+12 1/s | 0.9999 (1x) | OK |
 | `thiol_addition` | https://www.researchgate.net...acrylamide_removal | 29 | NaN placeholder | **no** | — | — | — | **NO PREFACTOR** (NaN placeholder) |
 | `beta_elimination_dha` | 10.1021/bi00270a010 (Helmerhorst, E., & Stokes, G. B., 1983) | 79.5 | NaN placeholder | **no** | — | — | — | **NO PREFACTOR** (NaN placeholder) |
 | `thiamine_degradation` | 10.1016/0022-1416(84)90226-9 (or similar lit) | 100.8 | 1e+09 1/s | **no** | — | — | — | unverifiable |
@@ -87,7 +87,7 @@ Two shipped pairs in different lanes that name the SAME source and the SAME elem
 | check | shipped A (lane 1) | shipped A (lane 2, converted) | fold | Ea (lane 1) | Ea (lane 2) | which side carries the defect | verdict |
 |---|---|---|---|---|---|---|---|
 | schiff_condensation (Cantera lane) vs k_schiff (kinetic core) | 1.5e+11 L/mol.s | 9.464e+09 | 15.9x | 97 | 96.8 | undecidable here — neither side has a source k-table | **FLAG** |
-| cysteine_thermolysis (Cantera lane) vs k_cys_h2s (kinetic core) | 1e+14 1/s | 1.93e+12 | 51.8x | 130.4 | 133 | `cysteine_thermolysis` (the other reproduces the source k-table) | **FLAG** |
+| cysteine_thermolysis (Cantera lane) vs k_cys_h2s (kinetic core) | 1.931e+12 1/s | 1.93e+12 | 1x | 133 | 133 | undecidable here — neither side has a source k-table | OK |
 
 * `schiff_condensation` / `k_schiff` — Martins & van Boekel 2005, Food Chem 90:257-269, Table 2, step 1 (Glc + Gly -> DFG). Both entries name it.
 * `cysteine_thermolysis` / `k_cys_h2s` — Zheng & Ho 1994, ACS Symp. Ser. 564:138-146, aqueous 0.1 M L-cysteine H2S release. Both entries name it.
@@ -100,18 +100,6 @@ Two shipped pairs in different lanes that name the SAME source and the SAME elem
 * shipped: Ea = 97 kJ/mol, A = 1.5e+11 L/mol.s
 * NO source k(T) table exists for this pair; it is flagged on the cross-lane axis only
 * NOTE: cross-lane: schiff_condensation (Cantera lane) vs k_schiff (kinetic core) disagree by 15.9x on the prefactor while citing the same source
-
-### `cysteine_thermolysis` — **FLAG — prefactor** + **FLAG — cross-lane A**
-
-* shipped in `data/lit/arrhenius_params.yml` (lane: cantera_export)
-* shipped: Ea = 130.4 kJ/mol, A = 1e+14 1/s
-* refit (WLS, n = 4, weighted R2 = 0.9746): Ea = 133 kJ/mol, A = 1.931e+12 1/s
-* unweighted reference fit: Ea = 133 kJ/mol, A = 1.931e+12
-* k-table: data/lit/extraction_dossiers/zheng1994_extraction.md sec. 3 (Table I), pH 5.0 column
-* unit conversion applied to the refit A: min^-1 -> s^-1 (/60)
-* Ea difference: +2.0 % (+2.6 kJ/mol)
-* NOTE: The shipped Ea 130.4 is the pH 3-9 MEAN, so no single pH column is its exact partner; pH 5 is used as the primary comparator and all four are reported. The prefactor must be judged against the whole 9.8e11-2.4e13 band the four columns give.
-* NOTE: cross-lane: cysteine_thermolysis (Cantera lane) vs k_cys_h2s (kinetic core) disagree by 51.8x on the prefactor while citing the same source and THIS side is the one that does not reproduce the source's own k(T) table
 
 ### `k_schiff` — **FLAG — cross-lane A**
 

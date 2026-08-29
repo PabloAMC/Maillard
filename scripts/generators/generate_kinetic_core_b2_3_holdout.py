@@ -150,6 +150,18 @@ B1_FITTED = {
 PASS_BAND_LEVEL = 3.0
 PASS_BAND_RATIO = 2.0
 
+#: WAVE B8 (Amendment 17 clause 3): the three replacement hold-outs. Kept as a
+#: module-level list so the retirement accounting can subtract them from the
+#: demotion bookkeeping -- they are seen-diagnostic, but they are NEW rows
+#: rather than rows that were demoted out of a total, and adding them to the
+#: `demoted` list would make the like-for-like denominator grow.
+B8_REPLACEMENT_HOLDOUT_IDS: Tuple[str, ...] = (
+    "wang2026_MFT_peak_and_fall_125_over_115",
+    "wang2026_FFT_peak_and_fall_115_over_105",
+    "zhai_13C_exogenous_carbon_threshold",
+    "ames2001_excess_Ea_class_split",
+)
+
 
 def load_frozen() -> Dict[str, Any]:
     if not FIT_REPORT.exists():
@@ -317,14 +329,92 @@ def main(argv: list[str] | None = None) -> int:
             "the charge defect this wave fixes was noticed through this row's "
             "scoring). Scored and reported, never counted."
         ),
+        # ---- WAVE B8's THREE REPLACEMENT HOLD-OUTS ----------------------
+        # FIT_HOLDOUT_DECLARATION.md Amendment 17 clause 3. All three are
+        # SEEN-BY-EXTRACTION: their values are printed in
+        # `k6a_sulfur_ladders_synthesis.md`, which B8 was instructed to read.
+        # Under the Amendment 9 / 10 / 14 precedent a seen row is demoted to
+        # seen-diagnostic and MAY NEVER GATE. Each therefore carries a written,
+        # quantitative prediction made before its scorer existed
+        # (`kinetic_core_b8_prereg.md` sec. 3, rows N-1 to N-4), which is the
+        # only thing that makes a seen hold-out worth scoring at all.
+        "wang2026_MFT_peak_and_fall_125_over_115": (
+            "SEEN-BY-EXTRACTION and disclosed (Amendment 17 clause 3, B8). "
+            "Printed in k6a sec. 4.3, which this wave was instructed to read. "
+            "Pre-registered as N-1 with a predicted FAIL in a named direction "
+            "before the scorer existed. Scored and reported, never counted."
+        ),
+        "wang2026_FFT_peak_and_fall_115_over_105": (
+            "SEEN-BY-EXTRACTION and disclosed (Amendment 17 clause 3, B8). "
+            "Pre-registered as N-2. Scored and reported, never counted."
+        ),
+        "zhai_13C_exogenous_carbon_threshold": (
+            "SEEN-BY-EXTRACTION and disclosed (Amendment 17 clause 3, B8), and "
+            "additionally OUT OF SCOPE in kind: the three compounds Zhai "
+            "isotope-traced are thiophenes, which this module declares out of "
+            "scope, and MFT/FFT were never traced. Pre-registered as N-3 with "
+            "the scope gap stated in advance. Scored on an in-scope proxy, "
+            "reported as a SCOPE GAP, never counted."
+        ),
+        "ames2001_excess_Ea_class_split": (
+            "SEEN-BY-EXTRACTION and disclosed (Amendment 17 clause 3, B8). "
+            "Diagnostic for a second, independent reason: Ames measures a "
+            "LOW-MOISTURE EXTRUDATE and k6a sec. 5.1 measures a ~2x "
+            "aqueous-to-matrix gap on exactly these two barriers, with no "
+            "transfer term in this model. Pre-registered as N-4. Never counted."
+        ),
+    }
+
+    #: ===================================================================
+    #: WAVE B8 -- RETIREMENT, WHICH IS NOT DEMOTION
+    #: ===================================================================
+    #: FIT_HOLDOUT_DECLARATION.md Amendment 17 clause 2. A DEMOTION says "this
+    #: row is fine but we saw it, so it cannot gate". A RETIREMENT says "the
+    #: quantity this row scores is not a property of the chemistry, so nobody
+    #: should be scored on it". These two rows are retired, not demoted, and
+    #: the distinction is kept in the artifact because collapsing them would
+    #: let a retirement borrow a demotion's excuse.
+    #:
+    #: They are STILL SCORED AND STILL PRINTED, and the report shows the gating
+    #: total on the OLD BASIS (with them counted, exactly as they scored) beside
+    #: the NEW BASIS, so a retirement can never read as score laundering.
+    RETIRED = {
+        "kang_switch_on_MFT": (
+            "RETIRED, NOT FAILED (Amendment 17 clause 2). The MFT/FFT "
+            "'switch-on between 120 and 140 C' is a HOLD-TIME ARTEFACT of a "
+            "single 120-minute slice through curves that peak and turn over. "
+            "It fails on four axes, three of them inside its own source "
+            "laboratory: (1) HOLD TIME -- in the same pot at the same three "
+            "temperatures the 100->120 / 120->140 folds are 5.54x/2.61x at 40 "
+            "min, 1.84x/3.25x at 80 min, 1.12x/4.26x at 120 min and "
+            "2.69x/1.62x at 180 min, i.e. the feature exists at ONE hold time; "
+            "(2) CO-SUBSTRATE -- add an equimolar sugar and it vanishes "
+            "(1.44x/1.30x); (3) AN INDEPENDENT LABORATORY -- Wang 2026's "
+            "five-rung buffered ladder has both thiols peak MID-ladder and "
+            "FALL; (4) the mechanism is visible in the raw time courses, where "
+            "the 140 C curve has its maximum INSIDE the sampling window. A "
+            "fixed-time slice across a family of curves whose maxima move left "
+            "as temperature rises measures where each curve sits relative to "
+            "its own peak, not an activation energy. Fitting a two-regime or "
+            "threshold Ea form to it -- which kang2026_SI_extraction.md sec. 7a "
+            "recommended -- would fit a sampling artefact into the physics."
+        ),
+        "kang_switch_on_FFT": (
+            "RETIRED, NOT FAILED (Amendment 17 clause 2) -- same evidence as "
+            "kang_switch_on_MFT, and FFT's case is the stronger of the two: in "
+            "the +xylose arm of its own source table the 120->140 fold is "
+            "0.96x, i.e. FFT FALLS across the leg it is supposed to switch on."
+        ),
     }
 
     def add(row_id, group, gating, anchor, result, comment=""):
         demotion = SEEN_DIAGNOSTIC.get(row_id)
+        retirement = RETIRED.get(row_id)
         entry = {"id": row_id, "group": group,
-                 "gating": False if demotion else gating,
+                 "gating": False if (demotion or retirement) else gating,
                  "gating_in_b2_2": gating,
                  "seen_diagnostic": demotion,
+                 "retired": retirement,
                  # B2.4: the cutover-exam point this row is the SAME
                  # MEASUREMENT as, or None. Declared so the double-counting
                  # between the two scorecards is visible in both.
@@ -807,6 +897,206 @@ def main(argv: list[str] | None = None) -> int:
         "module carries as a fixed barrier on r_cys_thermal.")
 
     # =====================================================================
+    # 13b. WAVE B8 -- THE THREE REPLACEMENT HOLD-OUTS (Amendment 17 clause 3)
+    # =====================================================================
+    # Two gating rows were RETIRED above. These three take their place in the
+    # ARTIFACT but NOT in the gating total: every one is SEEN-BY-EXTRACTION
+    # (their values are printed in k6a_sulfur_ladders_synthesis.md, which B8 was
+    # instructed to read) and the Amendment 9/10/14 precedent is that a seen row
+    # may never gate. The gating denominator therefore FALLS BY TWO, and the
+    # retirement accounting below prints both bases so that cannot be hidden.
+    #
+    # Each carries a written, quantitative pre-registration made before this
+    # scorer existed: kinetic_core_b8_prereg.md sec. 3, rows N-1 to N-4.
+
+    # ---- N-1 / N-2. WANG 2026's MID-LADDER PEAK-AND-FALL -----------------
+    # Wang et al. 2026 (Ningxia + SJTU), Fig. 5: 1.0 g Cys-Amadori + 1.0 g
+    # Glu-Amadori in 20.0 mL of 0.2 M PBS, five rungs at 85/95/105/115/125 C.
+    # BUFFERED, which matters: it is one of only three buffered sulfur papers in
+    # the corpus, and Kang/Zhai's contradicting pot is unbuffered and crashes to
+    # pH 4.9. Measured leg folds: MFT x2.6 (105->115) then x0.30 (115->125);
+    # FFT x0.56 (95->105), x0.15 (105->115), then to below detection.
+    #
+    # SCORED AS RATIOS, NEVER AS LEVELS, and that is forced rather than chosen:
+    # k6a sec. 7.4 REFUSES every absolute ug/L from this paper (0.5 g of
+    # lyophilisate is reported per litre with no volume, so the basis is
+    # unreconstructible). A within-arm fold is response-factor-free and is the
+    # only thing the source licenses.
+    #
+    # THREE DECLARED SYSTEM MISMATCHES, stated before the numbers:
+    #  (1) this module has ONE generic pentose Amadori (ARP) and no glutamic-acid
+    #      Amadori, so the two-ARP pot is proxied by ARP + Cys at equal loading;
+    #  (2) Wang's absolute loading cannot be reconstructed, so 20 mmol/L each is
+    #      the module's own Zhou-shaped loading, not Wang's;
+    #  (3) Wang never states the fixed pH and time of its temperature series
+    #      (the paper's single largest defect for modelling); pH 7 / 120 min is
+    #      the dossier's own best guess and is marked NOT VERIFIED.
+    # A row this qualified could not gate even if it had not been seen.
+    BUFFER_WANG_PBS = BufferSpec(
+        kind="phosphate", phosphate_mol_l=0.2, declared=True,
+        source="Wang 2026 Methods: PBS 0.2 mol/L, one of the corpus's three "
+               "BUFFERED sulfur systems")
+    wang = {}
+    for t_c in (105.0, 115.0, 125.0):
+        wang[t_c] = run(p, {"ARP": 20.0, "Cys": 20.0, "OX": OX_AMBIENT},
+                        t_c, 120.0, ph=7.0, buffer=BUFFER_WANG_PBS)
+    for row_id, species, hot, cold, observed, why in (
+        ("wang2026_MFT_peak_and_fall_125_over_115", "MFT", 125.0, 115.0, 0.30,
+         "MFT rises x2.6 over 105->115 C and then FALLS x0.30 over 115->125 C. "
+         "The model's thiol formation is monotone in temperature once its sink "
+         "is anchored at 145 C, so a fold BELOW 1.0 here requires a turnover "
+         "the pre-B8 core could not express at all. THIS IS THE ROW B8's "
+         "T-STRUCTURE EXISTS FOR."),
+        ("wang2026_FFT_peak_and_fall_115_over_105", "FFT", 115.0, 105.0, 0.15,
+         "FFT collapses x0.15 over 105->115 C WHILE ITS OWN PRECURSOR "
+         "SATURATES -- furfural goes x2.03, x1.10, x1.03 across the same legs. "
+         "That makes it a SINK observation rather than a supply observation, "
+         "and it is the second independent one in the corpus (Zhai's 140 C FFT "
+         "turnover is the first)."),
+    ):
+        denom = wang[cold].final(species)
+        predicted = (wang[hot].final(species) / denom if denom > 0
+                     else float("nan"))
+        add(row_id, "Wang 2026 five-rung ladder (B8 replacement)", True,
+            f"Wang 2026 Fig. 5 (wang2026_extraction.md sec. 4): {species} fold "
+            f"{observed} over {cold:.0f} -> {hot:.0f} C, purified Amadori pot, "
+            f"0.2 M PBS, five rungs 85-125 C",
+            score(observed, predicted, PASS_BAND_RATIO), why)
+
+    # ---- N-3. ZHAI'S 13C5 ISOTOPE THRESHOLD ------------------------------
+    # Zhai Food Chem 2023 Table 2: the fraction of each product's carbon
+    # skeleton coming from EXOGENOUS 13C5-xylose, at 100 / 120 / 140 C, 120 min.
+    # Three compounds go from 0 % at 100 C to 19-21 % at 120 C and 34-45 % at
+    # 140 C. An isotope ratio is immune to response factor, hold time and
+    # headspace partitioning -- every artefact that contaminates the yield
+    # ladders -- which is why this is the real threshold and the retired
+    # switch-on was not.
+    #
+    # ⚠ AND THE MODULE CANNOT ANSWER IT IN KIND. All three traced compounds are
+    # THIOPHENES, declared out of this module's scope, and the authors did not
+    # trace MFT or FFT -- which is precisely the measurement that would have
+    # settled the question. Scored on the only in-scope proxy available: the
+    # share of a product's flux attributable to ADDED xylose, computed as
+    # 1 - (TTCA alone) / (TTCA + xylose) on 2-acetylthiazole, the one traced
+    # compound this module carries. Reported as a SCOPE GAP, not as a verdict.
+    ttca_alone_100 = run(p, {"TTCA": 10.0, "OX": OX_AMBIENT}, 100.0, 120.0,
+                         ph=7.0, buffer=BUFFER_NONE)
+    ttca_xyl_100 = run(p, {"TTCA": 10.0, "PENT": 10.0, "OX": OX_AMBIENT},
+                       100.0, 120.0, ph=7.0, buffer=BUFFER_NONE)
+    ttca_alone_120 = run(p, {"TTCA": 10.0, "OX": OX_AMBIENT}, 120.0, 120.0,
+                         ph=7.0, buffer=BUFFER_NONE)
+    ttca_xyl_120 = run(p, {"TTCA": 10.0, "PENT": 10.0, "OX": OX_AMBIENT},
+                       120.0, 120.0, ph=7.0, buffer=BUFFER_NONE)
+
+    def _exogenous_share(alone, with_xyl, species):
+        both = with_xyl.final(species)
+        if both <= 0.0:
+            return float("nan")
+        return max(0.0, 1.0 - alone.final(species) / both)
+
+    share_100 = _exogenous_share(ttca_alone_100, ttca_xyl_100, "ACTZ")
+    share_120 = _exogenous_share(ttca_alone_120, ttca_xyl_120, "ACTZ")
+    threshold_reproduced = bool(
+        share_100 == share_100 and share_120 == share_120
+        and share_100 < 0.05 and share_120 >= 0.10)
+    add("zhai_13C_exogenous_carbon_threshold",
+        "Zhai 13C5 isotope threshold (B8 replacement)", True,
+        "Zhai Food Chem 2023 Table 2 (zhai2023foodchem_extraction.md sec. 6): "
+        "exogenous-carbon incorporation goes 0 % -> 19-21 % -> 34-45 % at "
+        "100 / 120 / 140 C for 3-thiophenethiol, thieno[3,2-b]thiophene and "
+        "2-methylthieno[2,3-b]thiophene. The threshold is at 100->120 C, NOT "
+        "at 120->140 C where the retired switch-on put it.",
+        {"observed": {"100C": 0.0, "120C": 0.20},
+         "predicted": {"100C_ACTZ_proxy": float(share_100),
+                       "120C_ACTZ_proxy": float(share_120)},
+         "fold_error": float("nan"), "pass_band": None,
+         "pass": threshold_reproduced},
+        "★ SCOPE GAP, AND IT IS THE HONEST ANSWER RATHER THAN A SCORE. The "
+        "three isotope-traced compounds are thiophenes and this module carries "
+        "none of them; MFT and FFT -- which it does carry -- were never traced. "
+        "The proxy scored here is the ADDED-XYLOSE share of 2-acetylthiazole, "
+        "the only traced compound in scope, and 2-acetylthiazole's own measured "
+        "isotope pattern is non-monotone (44 / 24 / 46 %) and is called "
+        "noise-dominated by its own dossier. A pass would therefore be weak "
+        "evidence and a fail would be weak evidence; what the row genuinely "
+        "records is that the corpus's best temperature-structure measurement "
+        "sits on chemistry this module declares out of scope.")
+
+    # ---- N-4. AMES 2001's EXCESS-Ea CLASS SPLIT --------------------------
+    # Ames 2001's xylose / pH 7.5 extrusion ladder -- the one clean ladder of
+    # its six (three others have their entire 150 C column collapse ~10x across
+    # every chemical class at once, one bad run, unfalsifiable at n = 1
+    # extrusion, and are refused). Asked properly, as EXCESS Ea over the bulk --
+    # which cancels response factor, residence time, shear, pH drift and common
+    # die loss -- the 120->150 C leg gives: aliphatic S +108.5, FFT +46.7,
+    # S-furans +36.7, MFT +33.5, thiophenes -6.5, THIAZOLES -42.7.
+    #
+    # THE CLAIM UNDER TEST IS A SIGN SPLIT, not a magnitude: direct H2S +
+    # carbonyl products (the free furanthiols) switch ON while ring-closure
+    # products (thiazoles) do not. It is the one thing about the retired
+    # switch-on that DID replicate, reached by a completely different route in
+    # a completely different medium -- and the die-volatilisation bias runs the
+    # favourable way, so the positive low-leg excess is a LOWER bound.
+    #
+    # ⚠ DIAGNOSTIC FOR A SECOND, INDEPENDENT REASON: Ames measures a
+    # LOW-MOISTURE STARCH EXTRUDATE and k6a sec. 5.1 measures the same two
+    # thiols at ~30-75 kJ/mol in water against ~104-108 in an extrudate -- a
+    # factor of ~2, in the direction of a matrix-SLOWED reaction, with no
+    # transfer term anywhere in this model. Ames' pH dependence also has the
+    # WRONG SIGN relative to the aqueous literature. The module is scored in
+    # its own aqueous pot and the transfer is NOT attempted.
+    ames = {}
+    for t_c in (120.0, 150.0):
+        ames[t_c] = run(p, {"PENT": 100.0, "Cys": 33.0, "OX": OX_AMBIENT},
+                        t_c, 20.0, ph=7.5, buffer=BUFFER_NONE)
+
+    def _apparent_ea(species):
+        lo, hi = ames[120.0].final(species), ames[150.0].final(species)
+        if lo <= 0.0 or hi <= 0.0:
+            return float("nan")
+        r_kj = 8.314e-3
+        return (r_kj * math.log(hi / lo)
+                / (1.0 / (120.0 + CELSIUS) - 1.0 / (150.0 + CELSIUS)))
+
+    bulk_species = ("FUR", "NF", "MP")
+    bulk = [_apparent_ea(s) for s in bulk_species]
+    bulk = [v for v in bulk if v == v]
+    bulk_ea = sum(bulk) / len(bulk) if bulk else float("nan")
+    excess = {s: _apparent_ea(s) - bulk_ea for s in ("MFT", "FFT", "ACTZ")}
+    split_reproduced = bool(
+        all(v == v for v in excess.values())
+        and excess["MFT"] > 0.0 and excess["FFT"] > 0.0 and excess["ACTZ"] < 0.0)
+    add("ames2001_excess_Ea_class_split",
+        "Ames 2001 extrusion excess-Ea (B8 replacement)", True,
+        "Ames 2001 (ames2001_extraction.md; k6a sec. 4.5): on the 120->150 C "
+        "leg of the xylose / pH 7.5 extrusion ladder the EXCESS activation "
+        "energy over the bulk is POSITIVE for the free thiols (FFT +46.7, MFT "
+        "+33.5, aliphatic S +108.5) and NEGATIVE for the ring-closure products "
+        "(thiazoles -42.7, thiophenes -6.5). A SIGN SPLIT, scored as one.",
+        {"observed": {"MFT_excess_sign": "+", "FFT_excess_sign": "+",
+                      "thiazole_excess_sign": "-"},
+         "predicted": {k: (float(v) if v == v else None)
+                       for k, v in excess.items()},
+         "fold_error": float("nan"), "pass_band": None,
+         "pass": split_reproduced},
+        "DIRECTIONAL AND DIAGNOSTIC. Scored in this module's own AQUEOUS pot "
+        "because it has no matrix-transfer term, against a measurement made in "
+        "a low-moisture starch extrudate where k6a measures the same two "
+        "barriers ~2x higher than in water. A pass would mean the class split "
+        "is a property of the network's topology rather than of the medium, "
+        "which is the interesting reading; a fail localises it to the medium. "
+        "THREE FURTHER MISMATCHES, all stated in advance and none corrected: "
+        "(1) the 150 C rung is ABOVE this module's declared 100-145 C window, "
+        "so the upper leg is an extrapolation; (2) pH 7.5 here is Ames' FEED "
+        "pH -- the paper MEASURES the extrudate running 1.4-2.6 units below it, "
+        "and the module is given the feed value because the offset is a "
+        "property of the extruder and not of this pot; (3) Ames' own nominal "
+        "ladder is not the real one -- measured die temperatures run -7 to "
+        "+14 C off target and the xylose pH-7.5 upper leg is 153->174 C, so "
+        "the true axis is 21 K where the nominal is 30 K and excess energies on "
+        "that leg are ~40% lower than the nominal ladder implies.")
+
+    # =====================================================================
     # 14. B2.1 -- SUN 2019's pH-9 COLUMN. The other new gating hold-out.
     # =====================================================================
     # FIT_HOLDOUT_DECLARATION.md Amendment 4: "sun2019 pH-9 column (temperature-
@@ -1169,7 +1459,13 @@ def main(argv: list[str] | None = None) -> int:
     # would make a demotion look like a result, so BOTH are printed: the
     # honest post-demotion total, and the like-for-like on B2.2's own
     # denominator with the demoted row added back exactly as it scored.
-    demoted = [r for r in rows if r["seen_diagnostic"] and r["pass"] is not None]
+    demoted = [r for r in rows
+               if r["seen_diagnostic"] and not r.get("retired")
+               and r["pass"] is not None
+               and r["id"] not in B8_REPLACEMENT_HOLDOUT_IDS]
+    retired = [r for r in rows if r.get("retired") and r["pass"] is not None]
+    b8_new = [r for r in rows if r["id"] in B8_REPLACEMENT_HOLDOUT_IDS
+              and r["pass"] is not None]
     like_for_like = n_gating_pass + sum(1 for r in demoted if r["pass"])
     payload["scorecard"]["gating_rows_in_b2_2"] = len(gating) + len(demoted)
     payload["scorecard"]["gating_passed_on_b2_2_denominator"] = like_for_like
@@ -1177,18 +1473,68 @@ def main(argv: list[str] | None = None) -> int:
         {"id": r["id"], "pass_if_it_had_counted": r["pass"],
          "why": r["seen_diagnostic"]} for r in demoted
     ]
+
+    # ------------------------------------------------------------------
+    # WAVE B8 -- THE RETIREMENT ACCOUNTING, BOTH BASES, SIDE BY SIDE
+    # ------------------------------------------------------------------
+    # A wave may not improve its score by removing rows. Amendment 17 clause 2
+    # retires two GATING rows on evidence about the TARGET (a hold-time
+    # artefact), which is a stronger reason than a demotion has -- and it is
+    # still a reason to print both totals, because the reader cannot check the
+    # reason against a number that was never shown.
+    #
+    # OLD BASIS = the two retired rows counted, exactly as they scored, in the
+    # denominator they were in before Amendment 17. NEW BASIS = the honest
+    # post-retirement total. The three replacement hold-outs enter NEITHER,
+    # because they are seen-by-extraction and may never gate: the gating
+    # denominator FALLS BY TWO and is not made back up.
+    old_basis_rows = len(gating) + len(retired)
+    old_basis_pass = n_gating_pass + sum(1 for r in retired if r["pass"])
+    payload["scorecard"]["b8_retirement_accounting"] = {
+        "new_basis_gating_passed": n_gating_pass,
+        "new_basis_gating_rows": len(gating),
+        "old_basis_gating_passed": old_basis_pass,
+        "old_basis_gating_rows": old_basis_rows,
+        "gating_rows_removed_by_retirement": len(retired),
+        "gating_rows_added_back": 0,
+        "retired": [
+            {"id": r["id"], "pass_if_it_had_counted": r["pass"],
+             "fold_error": r.get("fold_error"), "why": r["retired"]}
+            for r in retired
+        ],
+        "replacement_holdouts_added": [
+            {"id": r["id"], "gates": False, "pass": r["pass"],
+             "why_it_cannot_gate": r["seen_diagnostic"]} for r in b8_new
+        ],
+        "how_to_read_it": (
+            "BOTH TOTALS ARE PRINTED SO THE RETIREMENT CANNOT READ AS SCORE "
+            "LAUNDERING. If the retired rows were passing, removing them would "
+            "LOWER the new-basis total and the retirement costs the wave "
+            "something; if they were failing, removing them RAISES it and the "
+            "reader is entitled to see by how much before deciding whether the "
+            "evidence justifies it. The three rows Amendment 17 adds in their "
+            "place are seen-by-extraction and CANNOT GATE, so the denominator "
+            "genuinely falls by two and nothing is substituted in to hide it."
+        ),
+    }
+
     payload["gating_trajectory"] = {
         "B2.1": [b21_summary.get("gating_passed"), b21_summary.get("gating_rows")],
         "B2.2": [b2_summary.get("gating_passed"), b2_summary.get("gating_rows")],
         "B2.3_on_b2_2_denominator": [like_for_like, len(gating) + len(demoted)],
         "B2.3_after_the_permanent_demotion": [n_gating_pass, len(gating)],
+        "B8_old_basis_retired_rows_counted": [old_basis_pass, old_basis_rows],
+        "B8_new_basis_after_the_retirement": [n_gating_pass, len(gating)],
         "how_to_read_it": (
             "The first three numbers are directly comparable: same rows, same "
             "bands, same scorer. The fourth is the honest total AFTER "
-            "Amendment 9's permanent demotion of kang_140C_MFT, and it is the "
-            "one that should be quoted going forward. A wave may not improve "
-            "its score by demoting rows, so the like-for-like is printed first "
-            "and the demotion is itemised."
+            "Amendment 9's permanent demotion of kang_140C_MFT. The last two "
+            "are WAVE B8's two bases: Amendment 17 clause 2 retires the two "
+            "`kang_switch_on_*` rows on evidence that their target is a "
+            "hold-time artefact rather than a property of the chemistry, so "
+            "the OLD BASIS (them counted, as they scored) is printed beside "
+            "the NEW. A wave may not improve its score by removing rows, so "
+            "the like-for-like is printed first and the removal is itemised."
         ),
     }
     payload["comparison_with_b2_2"] = {
@@ -1265,6 +1611,37 @@ def main(argv: list[str] | None = None) -> int:
           f"{'PASSED' if d['pass_if_it_had_counted'] else 'FAILED'}. "
           f"{d['why']}")
     a("")
+    # WAVE B8: the retirement accounting, printed in the markdown and not only
+    # in the JSON, because the number a reader checks is the one they can see.
+    acc = payload["scorecard"].get("b8_retirement_accounting")
+    if acc and acc["gating_rows_removed_by_retirement"]:
+        a("### The retirement accounting (Amendment 17 clause 2) -- BOTH BASES")
+        a("")
+        a("| basis | gating | what is in it |")
+        a("|---|---|---|")
+        a(f"| **OLD** (pre-Amendment-17) | "
+          f"**{acc['old_basis_gating_passed']} / "
+          f"{acc['old_basis_gating_rows']}** | the two `kang_switch_on_*` rows "
+          f"COUNTED, exactly as they scored |")
+        a(f"| **NEW** (post-retirement) | "
+          f"**{acc['new_basis_gating_passed']} / "
+          f"{acc['new_basis_gating_rows']}** | those two removed; "
+          f"**{acc['gating_rows_added_back']} rows added back** |")
+        a("")
+        for r in acc["retired"]:
+            fold = r.get("fold_error")
+            fold_s = (f"{fold:.3g}x" if isinstance(fold, float)
+                      and np.isfinite(fold) else "--")
+            a(f"- RETIRED, not counted: `{r['id']}` -- it would have "
+              f"{'PASSED' if r['pass_if_it_had_counted'] else 'FAILED'} at "
+              f"{fold_s}. {r['why']}")
+        a("")
+        for r in acc["replacement_holdouts_added"]:
+            a(f"- ADDED, and it CANNOT GATE: `{r['id']}` -- scored "
+              f"{'PASS' if r['pass'] else 'FAIL'}. {r['why_it_cannot_gate']}")
+        a("")
+        a(acc["how_to_read_it"])
+        a("")
     if comparison:
         b2_g = b2_summary.get("gating_passed"), b2_summary.get("gating_rows")
         n_reg = sum(1 for c in comparison if c["status"] == "REGRESSED")

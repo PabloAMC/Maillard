@@ -188,13 +188,38 @@ def test_the_control_reproduces_b2_3s_cost_and_only_the_ph_rows_move():
     # where B7's trunk perturbation put it, and has not moved again. What is no
     # longer being asserted -- because it was never true -- is that a float sum
     # is bit-identical across platforms.
-    B7_TRUNK_SHIFTED_COST = 8.386192115776923
-    assert cost == pytest.approx(B7_TRUNK_SHIFTED_COST, rel=1e-5), (
+    # ==== WAVE B8: THE SECOND, MUCH LARGER PROPAGATION -- RE-PINNED ====
+    # B7 moved this quantity by 2.6 % because the furanic channel drains four
+    # trunk species the sulfur lane reads. B8 moves it by **2.69x**, and for a
+    # different and much more direct reason: FIT_HOLDOUT_DECLARATION.md
+    # Amendment 17 clause 5 replaces FOUR of the sulfur network's activation
+    # energies with MEASUREMENTS the fit cannot move --
+    #
+    #   k_dimer_mft, k_dimer_fft   no barrier at all  ->  122.2 (Zhang k17)
+    #   k_arp_dpo,   k_arp_tdp     the lumped 64.08   ->   85.7 (Zhang k16)
+    #
+    # -- and re-bands `Ea_decay_thiol_sink` from (20, 250) to Gigl's measured
+    # (7, 102), which CLIPS B2.3's own 216.1 down to 102.
+    #
+    # 8.3862 -> 22.5575 IS THE SIZE OF THE DISAGREEMENT BETWEEN THE CORPUS'S
+    # MEASURED BARRIERS AND B2.3'S FITTED ONES, evaluated at B2.3's vector. It
+    # is not a defect and it is not absorbed: B8 refits from B2.4-half's
+    # incumbent and reports this as its own start cost, so the movement is
+    # visible rather than buried inside a converged number.
+    #
+    # WHAT IS STILL BEING ASSERTED, and it is the same property as before: that
+    # B2.3's objective at its own vector sits where the last declared physics
+    # change put it and has not moved AGAIN. The tolerance stays at the 1e-5
+    # Q1 set, for the reason Q1 gave (cross-platform float summation, ~1.8e-6
+    # relative on this objective).
+    B8_T_STRUCTURE_SHIFTED_COST = 22.55754870634435
+    assert cost == pytest.approx(B8_T_STRUCTURE_SHIFTED_COST, rel=1e-5), (
         f"B2.3's objective at its own vector has moved again: {cost}. It is "
         f"expected to differ from the published {published} by exactly the B7 "
-        f"trunk perturbation and by nothing else.")
-    assert cost / published == pytest.approx(1.0258, abs=5e-4), (
-        "the B7 trunk perturbation of B2.3's objective has changed size")
+        f"trunk perturbation plus B8's T-structure, and by nothing else.")
+    assert cost / published == pytest.approx(2.759, abs=5e-3), (
+        "the size of B8's T-structure perturbation of B2.3's objective has "
+        "changed; it was 2.759x when Amendment 18 clause 10 recorded it")
 
     r_measured = b24.residual_vector(x, b24.PH_ENDPOINT_WEIGHT["measured"], True)
     ph_idx = {i for i, row in enumerate(b24.B23.ACTIVE_FIT_ROWS)

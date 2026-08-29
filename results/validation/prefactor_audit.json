@@ -22,17 +22,17 @@
       "shared_source": "Zheng & Ho 1994, ACS Symp. Ser. 564:138-146, aqueous 0.1 M L-cysteine H2S release. Both entries name it.",
       "left_id": "cysteine_thermolysis",
       "right_id": "k_cys_h2s",
-      "left_a": 100000000000000.0,
+      "left_a": 1931000000000.0,
       "left_a_unit": "1/s",
       "right_a_converted_to_left_unit": 1929999999999.9976,
-      "a_ratio": 51.81347150259074,
-      "a_fold_difference": 51.81347150259074,
-      "left_ea_kj_mol": 130.4,
+      "a_ratio": 1.0005181347150272,
+      "a_fold_difference": 1.0005181347150272,
+      "left_ea_kj_mol": 133.0,
       "right_ea_kj_mol": 133.0,
-      "ea_delta_kj_mol": -2.5999999999999943,
-      "side_carrying_the_defect": "cysteine_thermolysis",
-      "side_reproducing_its_source": "k_cys_h2s",
-      "flag": "FLAG_CROSS_LANE_A"
+      "ea_delta_kj_mol": 0.0,
+      "side_carrying_the_defect": null,
+      "side_reproducing_its_source": null,
+      "flag": "OK"
     }
   ],
   "thresholds": {
@@ -44,10 +44,10 @@
     "verifiable_against_a_dossier_k_table": 11,
     "unverifiable_no_dossier_k_table": 42,
     "pairs_with_no_prefactor_shipped": 2,
-    "flagged": 8,
+    "flagged": 7,
     "dossier_k_tables_available": 13,
     "cross_lane_checks_run": 2,
-    "cross_lane_checks_flagged": 2
+    "cross_lane_checks_flagged": 1
   },
   "out_of_scope_ea_only_tables": {
     "note": "These ship an activation energy with NO paired prefactor: the rate is reconstructed at the point of use from a generic Eyring/TST factor (k_B T/h, or the 6.25e12 'TST @ 150C' substitution). They are not (Ea, A) pairs and so are outside this audit's scored set, but they are the same silent-prefactor risk surface.",
@@ -247,8 +247,8 @@
       "shipped_in": "data/lit/arrhenius_params.yml",
       "lane": "cantera_export",
       "form": "explicit_A",
-      "shipped_ea_kj_mol": 130.4,
-      "shipped_a": 100000000000000.0,
+      "shipped_ea_kj_mol": 133.0,
+      "shipped_a": 1931000000000.0,
       "shipped_a_unit": "1/s",
       "a_is_placeholder_nan": false,
       "source_key": "10.1021/bk-1994-0564.ch011",
@@ -257,15 +257,13 @@
       "dossier_k_table": "data/lit/extraction_dossiers/zheng1994_extraction.md sec. 3 (Table I), pH 5.0 column",
       "refit_ea_kj_mol": 132.96804900025737,
       "refit_a": 1931214330876.3445,
-      "a_ratio": 51.78089163962557,
-      "ea_delta_pct": 1.969362730258712,
+      "a_ratio": 0.9998890175611698,
+      "ea_delta_pct": -0.024023308077168206,
       "flags": [
-        "FLAG_A_RATIO",
-        "FLAG_CROSS_LANE_A"
+        "OK"
       ],
       "notes": [
-        "The shipped Ea 130.4 is the pH 3-9 MEAN, so no single pH column is its exact partner; pH 5 is used as the primary comparator and all four are reported. The prefactor must be judged against the whole 9.8e11-2.4e13 band the four columns give.",
-        "cross-lane: cysteine_thermolysis (Cantera lane) vs k_cys_h2s (kinetic core) disagree by 51.8x on the prefactor while citing the same source and THIS side is the one that does not reproduce the source's own k(T) table"
+        "The shipped Ea 130.4 is the pH 3-9 MEAN, so no single pH column is its exact partner; pH 5 is used as the primary comparator and all four are reported. The prefactor must be judged against the whole 9.8e11-2.4e13 band the four columns give."
       ],
       "verifiable": true,
       "refit_a_ols": 1931214330876.3445,
@@ -273,8 +271,8 @@
       "refit_r2_weighted": 0.9745510908233191,
       "refit_n_points": 4,
       "refit_unit_conversion": "min^-1 -> s^-1 (/60)",
-      "a_fold_difference": 51.78089163962557,
-      "ea_delta_kj_mol": 2.5680490002573606
+      "a_fold_difference": 1.000110994757299,
+      "ea_delta_kj_mol": -0.03195099974263371
     },
     {
       "parameter_id": "thiol_addition",
@@ -1310,8 +1308,7 @@
         "OK"
       ],
       "notes": [
-        "shipped at ph_of_measurement 5.0, so the pH 5 column is the exact partner",
-        "cross-lane: disagrees with `cysteine_thermolysis` by 51.8x on the prefactor while both cite the same source, but THIS side reproduces the source's own k(T) table, so the defect is the other side's. Not flagged here."
+        "shipped at ph_of_measurement 5.0, so the pH 5 column is the exact partner"
       ],
       "verifiable": true,
       "refit_a_ols": 115872859852580.67,

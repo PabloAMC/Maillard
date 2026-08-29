@@ -420,8 +420,16 @@ def test_each_decay_family_receives_its_own_barrier():
         assert built[key].ea_kj_mol == pytest.approx(175.0), key
     for key in ps.DECAY_KEYS_ON_FORMATION_EA:
         assert built[key].ea_kj_mol == pytest.approx(119.0), key
-    for key in ps.NAMED_CHANNEL_KEYS:
+    # UPDATED BY B8: the loop was over NAMED_CHANNEL_KEYS and is now over
+    # NO_EA_KEYS. `k_dimer_mft` / `k_dimer_fft` left the no-Ea set because
+    # Zhang 2026 k17 measures their barrier (122.2 kJ/mol, R^2 0.971, three
+    # temperatures, one paper). What this test is FOR -- that a decay family's
+    # fitted barrier never leaks onto a channel outside it -- is preserved and
+    # strengthened: neither dimer channel takes 55.0, 175.0 or 119.0.
+    for key in ps.NO_EA_KEYS:
         assert built[key].ea_kj_mol is None, key
+    for key in ("k_dimer_mft", "k_dimer_fft"):
+        assert built[key].ea_kj_mol == pytest.approx(122.2), key
 
 
 def test_omitting_the_decay_barriers_reproduces_b2_1_exactly():

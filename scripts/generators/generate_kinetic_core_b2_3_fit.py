@@ -169,9 +169,11 @@ NOT FITTED (measured, fixed):
                   -- (131.2, 9.79e11), (133.0, 1.93e12), (135.5, 2.36e13),
                   (123.3, 1.04e12) in kJ/mol and 1/s at pH 3/5/7/9. These
                   reproduce the paper's own Table I everywhere within 3x, which
-                  is unit-tested. The repository's shipped pair (130.4 kJ/mol
-                  with A = 1.0e14 1/s) is NOT used: it runs ~15x faster than
-                  its own source at pH 7 / 100 C. pH 3.0 is treated as a
+                  is unit-tested. The Cantera lane's row (which
+                  shipped 130.4 kJ/mol with A = 1.0e14 1/s until Wave B8
+                  repaired it to the matched pH-5 pair on 2026-08-30) is NOT
+                  used here and never was: that pair ran ~15x faster than its
+                  own source at pH 7 / 100 C. pH 3.0 is treated as a
                   SEPARATE MECHANISM and is not interpolated through, on the
                   authors' own statement and on their own data, which invert
                   the pH ordering there at 100 C.
@@ -943,6 +945,20 @@ def observables(
             denominator = run.final(row["species_b"])
             predicted[row["id"]] = (
                 run.final(row["species"]) / denominator if denominator > 0 else np.nan
+            )
+        elif kind == "cross_system_ratio":
+            # ADDED BY WAVE B8, ADDITIVE ONLY: no row of B2.1/B2.2/B2.3/B2.4
+            # uses this kind, so every earlier artefact stays bit-reproducible.
+            # It exists because Amendment 17 re-bands the Kang/Zhai ladder to
+            # SEMI-QUANT (f' = 1, n = 1), and a single-IS semi-quant source
+            # licenses SHAPE and RATIO but not absolute magnitude. The
+            # response-factor-free form of "MFT rises 1.12x from 100 to 120 C"
+            # is a ratio of the SAME species between TWO systems -- which is
+            # exactly what this kind scores and what no existing kind could.
+            denominator = cache[row["system_b"]]["run"].final(row["species"])
+            predicted[row["id"]] = (
+                run.final(row["species"]) / denominator if denominator > 0
+                else np.nan
             )
         elif kind == "conversion":
             initial = float(SYSTEMS[row["system"]]["initial"].get(row["species"], 0.0))
