@@ -61,7 +61,12 @@ from typing import Any, Dict, Mapping, Optional, Sequence, Tuple
 
 import numpy as np
 
-from .network import BALANCED_ELEMENTS, REACTIONS as TRUNK_REACTIONS, Reaction
+from .network import (
+    BALANCED_ELEMENTS,
+    REACTIONS as TRUNK_REACTIONS,
+    TRUNK_CENTRE_LEDGER,
+    Reaction,
+)
 from .parameters import SCHIFF_AMADORI_SPLIT
 from .parameters_acrylamide import (
     ASN_SCHIFF_AMADORI_SPLIT,
@@ -80,6 +85,7 @@ from .species_acrylamide import (
     initial_acrylamide_state,
     total_element_acrylamide,
 )
+from .ph_state import AMINE_FATE_BASIS as _AMINE_FATE_BASIS
 from .species_sulfur import TERMINAL_POOLS as SULFUR_TERMINAL_POOLS
 
 
@@ -205,10 +211,19 @@ ACRYLAMIDE_REACTIONS: Tuple[Reaction, ...] = (
         "acrylamide lane to B2's cysteine pool.",
     ),
     Reaction(
-        "a_cys_sink", {"Cys": 1}, {"FRAG_C": 3, "FRAG_N": 1, "FRAG_S": 1},
+        "a_cys_sink", {"Cys": 1},
+        {"CBX": 1, "FRAG_C": 2, "FRAG_N": 1, "FRAG_S": 1},
         "k_cys_sink",
         "MEASURED cysteine sink of the SAME system (De Vleeschouwer II k_Y). "
-        "The product is not identified by the source, and the note says so.",
+        "The product is not identified by the source, and the note says so. "
+        "B2.3 CHARGE FIX, identical in form and in reasoning to the sulfur "
+        "lane's r_cys_thermal: an unidentified sink is not a licence to delete "
+        "cysteine's carboxylate and ammonium, so both centres are CARRIED "
+        "(CBX) while its amine centre is DECLARED destroyed in the ledger "
+        "rather than dropped into an untitratable pool in silence. The "
+        "acrylamide lane has no pH state today, so this changes no prediction "
+        "here -- it exists so that the day it gets one, the defect B2.2 found "
+        "in the sulfur lane is not waiting in this one.",
     ),
     # ---- competition: consumption of the SHARED sugar pool ------------------
     Reaction(
@@ -306,6 +321,44 @@ def validate_acrylamide_balance(
 
 
 validate_acrylamide_balance()
+
+
+# ---------------------------------------------------------------------------
+# B2.3: the acrylamide lane's half of the CENTRE LEDGER
+# ---------------------------------------------------------------------------
+# The audit is run here for the same reason it is run in `sulfur`: Amendment 9
+# says ALL sites, and this lane consumes B2's cysteine through three steps. Two
+# of them needed no change (a_acr_cys hands both centres to a real amino acid,
+# S-(2-carbamoylethyl)cysteine, which is now in the centre table; a_cys_sink is
+# fixed above), and the third is a DECLARED destruction whose basis is the same
+# one the trunk's melanoidin sink already relies on.
+ACRYLAMIDE_CENTRE_LEDGER: Mapping[str, Mapping[str, object]] = {
+    **TRUNK_CENTRE_LEDGER,
+    "a_cys_sink": {"amine": -1, "basis": (
+        "De Vleeschouwer II's k_Y cysteine sink, whose product the source does "
+        "not identify. Its CARBOXYL is carried (CBX) -- an unidentified "
+        "product is not a licence to delete a carboxylate -- and its amine is "
+        "declared destroyed on the shared basis. " + _AMINE_FATE_BASIS)},
+    "a_cys_glc": {"carboxyl": -1, "amine": -1, "basis": (
+        "MELANOIDIN INCORPORATION. Cysteine's carboxylate and ammonium enter "
+        "the terminal browning polymer, which really does retain them -- "
+        "melanoidins are polyanionic -- but the pool is carried ELEMENTALLY "
+        "(mmol of atom, not of repeat unit), so no per-unit centre count is "
+        "definable and the charge balance cannot see them. This is the SAME "
+        "declared gap as the trunk's r_tdg_mel + glycine, recorded in "
+        "ph_state.UNTRACKED_TITRATABLE['MEL_N']. It is a gap, not a licence: "
+        "the acrylamide lane carries no pH state, so it costs no prediction "
+        "today and becomes a defect the day it gets one.")},
+}
+
+
+def _validate_acrylamide_charge_closure() -> None:
+    from .ph_state import validate_charge_closure
+
+    validate_charge_closure(FULL_ACRYLAMIDE_REACTIONS, ACRYLAMIDE_CENTRE_LEDGER)
+
+
+_validate_acrylamide_charge_closure()
 
 
 def acrylamide_stoichiometric_matrix(

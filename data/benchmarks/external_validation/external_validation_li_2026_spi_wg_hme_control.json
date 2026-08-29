@@ -4,7 +4,15 @@
     "ph": 7.0,
     "temp_C": 160.0,
     "time_min": 0.4167,
-    "water_activity": 0.35
+    "water_activity": 0.35,
+    "buffer": {
+      "species": "buffer_unknown",
+      "concentration_M": null,
+      "initial_ph_scale": "unstated",
+      "provenance_class": "unknown",
+      "provenance_note": "Li et al. 2026, Foods 15(5):912. SOURCE PAPER NOT ON DISK and the repo carries NO verbatim methods quotation for the medium. The scored system is a 57 wt%-moisture high-moisture-extrusion melt, not an aqueous solution, so 'buffer' may not even be the right question -- but that is a reason to record UNKNOWN, not a licence to record 'none'. The protocol's own note is explicit: 'The paper does not publish a final-blend pH or water-activity closure' (data/protocols/external_validation/external_validation_li_2026_spi_wg_hme_control.yaml, benchmark_alignment.notes). ph_disagreement: the only pH in the whole record is 7.0 for the WHEAT-GLUTEN ENZYMATIC PRETREATMENT at 30 C -- a different unit operation -- and it has been transposed onto a 160 C extrusion run. conditions.ph = 7.0 is unsourced AS AN EXTRUSION CONDITION. Reported, not edited.",
+      "ph_disagreement": "conditions.ph = 7.0 is the wheat-gluten pretreatment pH at 30 C, not a stated extrusion condition."
+    }
   },
   "denaturation_state": 0.8,
   "evidence_class": "external_validation_only",

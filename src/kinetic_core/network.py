@@ -214,6 +214,56 @@ def validate_balance(reactions: Sequence[Reaction] = REACTIONS) -> None:
 validate_balance()
 
 
+# ---------------------------------------------------------------------------
+# B2.3: the trunk's half of the CENTRE LEDGER
+# ---------------------------------------------------------------------------
+# See ph_state.validate_charge_closure. The trunk owns five steps that move a
+# titratable centre and every one of them is a Martins-measured acid step; the
+# trunk's own amine (glycine, and the Schiff base and Amadori compound that
+# carry its carboxyl) is invisible to the charge balance, which is a DECLARED
+# GAP in ph_state.UNTRACKED_TITRATABLE rather than a licence -- the trunk lane
+# has no pH state, so the gap costs no prediction today and becomes a defect
+# the day it gets one.
+#
+# Both extended networks REUSE this table, so a trunk step can only be declared
+# in one place: sulfur.CENTRE_LEDGER and acrylamide.ACRYLAMIDE_CENTRE_LEDGER
+# both start from it.
+
+TRUNK_CENTRE_LEDGER: Mapping[str, Mapping[str, object]] = {
+    "r_tdg_fa": {"carboxyl": +1, "basis": (
+        "Martins 2005 step 5: 3-deoxyglucosone -> FORMIC ACID + C5 residue. A "
+        "neutral acid formed from a neutral deoxyosone; nothing is titrated "
+        "into existence, the molecule simply now has a dissociable proton.")},
+    "r_odg_aa": {"carboxyl": +1, "basis": (
+        "Martins 2005 step 8: 1-deoxyglucosone -> ACETIC ACID + C4 residue. "
+        "As r_tdg_fa.")},
+    "r_fru_acids": {"carboxyl": +2, "basis": (
+        "Martins 2005 step 10: fructose -> formic + acetic + C3 residue. TWO "
+        "neutral acids from one neutral sugar.")},
+    "r_fa_frag": {"carboxyl": -1, "basis": (
+        "FITTED decomposition of formic acid to unassigned fragment carbon "
+        "(decarbonylation / decarboxylation). The acid group is genuinely "
+        "destroyed and the step genuinely consumes a proton equivalent. "
+        "TRUNK-LANE ONLY: the dynamic pH state is sulfur-lane only, so no "
+        "scored pH observable depends on this today.")},
+    "r_aa_frag": {"carboxyl": -1, "basis": (
+        "FITTED decomposition of acetic acid to unassigned fragment carbon, "
+        "exactly as r_fa_frag. The acid group is genuinely destroyed, the step "
+        "genuinely consumes a proton equivalent, and the same trunk-lane "
+        "caveat applies: no scored pH observable depends on it today.")},
+}
+
+
+def _validate_trunk_charge_closure() -> None:
+    """Deferred so that ``network`` need not import ``ph_state`` at module top."""
+    from .ph_state import validate_charge_closure
+
+    validate_charge_closure(REACTIONS, TRUNK_CENTRE_LEDGER)
+
+
+_validate_trunk_charge_closure()
+
+
 def stoichiometric_matrix(
     reactions: Sequence[Reaction] = REACTIONS,
 ) -> np.ndarray:

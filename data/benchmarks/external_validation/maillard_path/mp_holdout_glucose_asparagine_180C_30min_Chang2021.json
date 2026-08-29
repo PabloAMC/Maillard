@@ -46,7 +46,14 @@
     "temp_C": 180.0,
     "ph": 6.0,
     "water_activity": 0.99,
-    "time_min": 30.0
+    "time_min": 30.0,
+    "buffer": {
+      "species": "acetate",
+      "concentration_M": 0.17,
+      "initial_ph_scale": "bench_cooled",
+      "provenance_class": "repo_verbatim_methods_quote",
+      "provenance_note": "Chang / Sung et al. 2021, Polymers 13(12):1901, sec. 2.2, verbatim as carried in this bundle's content_verification.quoted_method: 'MRPs were prepared by combining 0.5 g asparagine, 0.5 g chitosan, and 0.5 g glucose with 1% acetic acid' and 'The pH value of each solution was first adjusted to 5.8 by adding 1 N sodium hydroxide (NaOH) and then 0.001 N NaOH to pH 6.0 and topped up with distilled water to 100 mL.' Acetic acid back-titrated with NaOH to pH 6.0 IS an acetate buffer, which is why this is recorded as a buffer and not as water. SOURCE PAPER NOT ON DISK; second-hand. TWO AMBIGUITIES, REPORTED NOT RESOLVED: (i) '1%' carries no w/v-vs-v/v basis, so the total acetate is 0.167-0.175 M and 0.17 is the midpoint; (ii) the quoted sentence ties the 1% acetic acid to a formulation that ALSO contains 0.5 g chitosan, while this bundle's vehicle_note labels the same arm merely '1% acetic acid, back-titrated to pH 6.0 (Figure 3B arm)'. Whether the scored arm contains chitosan cannot be settled from the quoted text."
+    }
   },
   "metadata": {
     "tier": "REFERENCE",

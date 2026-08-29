@@ -46,7 +46,14 @@
     "temp_C": 130.0,
     "ph": 8.0,
     "water_activity": 0.98,
-    "time_min": 120.0
+    "time_min": 120.0,
+    "buffer": {
+      "species": "none",
+      "concentration_M": null,
+      "initial_ph_scale": "bench_cooled",
+      "provenance_class": "repo_verbatim_methods_quote",
+      "provenance_note": "As the pH-5.0 arm: Schibilsky 2019, sec. 5.1.6, bidistilled water, UNBUFFERED, pH set at t=0 ('auf 5,00 +/- 0,01 und 8,00 +/- 0,01 eingestellt'). This is the pH-8.0 arm. SOURCE NOT ON DISK; second-hand."
+    }
   },
   "metadata": {
     "tier": "REFERENCE",

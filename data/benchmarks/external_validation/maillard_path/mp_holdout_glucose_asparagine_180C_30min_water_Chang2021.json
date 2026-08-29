@@ -46,7 +46,14 @@
     "temp_C": 180.0,
     "ph": 6.0,
     "water_activity": 0.99,
-    "time_min": 30.0
+    "time_min": 30.0,
+    "buffer": {
+      "species": "none",
+      "concentration_M": null,
+      "initial_ph_scale": "bench_cooled",
+      "provenance_class": "repo_verbatim_methods_quote",
+      "provenance_note": "Chang / Sung et al. 2021, Polymers 13(12):1901, sec. 2.2, verbatim: 'Solutions containing 0.5 g asparagine, 0.5 g glucose, and 0.5 g hydroxymethylfurfural in distilled water were also prepared', and the same pH ladder ('adjusted to 5.8 by adding 1 N NaOH and then 0.001 N NaOH to pH 6.0'). This bundle's own vehicle_note names it 'Deionized water, pH adjusted to 6.0 (Figure 3A arm)'. POSITIVE FINDING OF NO BUFFER, not an absence of information -- and it is the WATER half of the two-arm pair whose arms the exam currently predicts identically. SOURCE PAPER NOT ON DISK; second-hand."
+    }
   },
   "metadata": {
     "tier": "REFERENCE",

@@ -264,6 +264,38 @@ SULFUR_SPECIES: Tuple[Species, ...] = (
             "It is TERMINAL: nothing in the sulfur network consumes it, so its "
             "existence cannot change any volatile prediction except through "
             "the pH.", ),
+    # ---- B2.3: the two CARRIED-CENTRE pools -------------------------------
+    Species("CBX", "carried carboxylate equivalents (a carboxyl group that "
+                   "outlived the molecule that brought it)",
+            1, 0, "pool", False,
+            "B2.3, NEW, AND IT IS A CONSERVATION LAW RATHER THAN A CHEMISTRY "
+            "CLAIM. B2.2's diagnosis sec. 3 measured the defect this pool "
+            "exists to close: a sink step that consumes cysteine, the Amadori "
+            "compound or TTCA DELETES that molecule's alpha-carboxylate, and "
+            "since no reaction makes or destroys the sodium that titrated it, "
+            "the pot manufactures strong base out of bookkeeping. Kang's "
+            "120 C pot went to a predicted pH 11.4 against a measured 4.9 for "
+            "exactly this reason. "
+            "WHY IT IS NOT `ACID`. `ACID` is the LUMPED deoxyosone sink, whose "
+            "acid yield is UNKNOWN and is the pH model's single calibrated "
+            "constant -- it enters the charge balance multiplied by that "
+            "fitted fraction. A carboxyl carried out of a molecule that "
+            "demonstrably had one is not a fraction of anything: it is one "
+            "equivalent, and it enters at full strength. Putting the two in "
+            "one pool would have let a fitted yield scale a stoichiometric "
+            "certainty. "
+            "CARBON CONVENTION, identical to `ACID`'s: counted on a FORMIC "
+            "basis, so one carbon per equivalent, and any further carbon of "
+            "the leaving residue stays in FRAG_C. "
+            "DECLARED APPROXIMATION: its pKa is `ph_state.ORGANIC_ACID_MIX`'s "
+            "4.25, while the real leaving groups are heterogeneous (pyruvic "
+            "acid 2.49 from the cysteine thermolysis lane, CO2 / carbonic acid "
+            "6.35 from the two decarboxylations). The module carries no CO2 "
+            "partition model -- no bundle in this corpus records a headspace "
+            "volume -- so a carbonate pool would need a guessed Henry "
+            "constant at 100-145 C. The mixture is declared instead, and the "
+            "direction of the error is stated in the B2.3 report. "
+            "TERMINAL: nothing consumes it."),
 )
 
 #: The concatenated table. B1's entries first, in B1's order, so trunk indices
@@ -298,7 +330,8 @@ SITE_POOLS: Tuple[str, ...] = tuple(s.key for s in SULFUR_SPECIES if s.role == "
 #: untested. With no measurement in either direction the conservative encoding
 #: is the one that cannot invent a release rate, so PRB is terminal and the
 #: absence of a release step is recorded here as a KNOWN GAP.
-TERMINAL_POOLS: Tuple[str, ...] = ("OLG", "PRB", "FRAG_N", "FRAG_S", "ACID")
+TERMINAL_POOLS: Tuple[str, ...] = (
+    "OLG", "PRB", "FRAG_N", "FRAG_S", "ACID", "CBX")
 
 
 # ---------------------------------------------------------------------------

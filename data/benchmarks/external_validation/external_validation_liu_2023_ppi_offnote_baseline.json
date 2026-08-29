@@ -4,7 +4,15 @@
     "ph": 6.0,
     "temp_C": 40.0,
     "time_min": 10.0,
-    "water_activity": 0.95
+    "water_activity": 0.95,
+    "buffer": {
+      "species": "none",
+      "concentration_M": null,
+      "initial_ph_scale": "bench_cooled",
+      "provenance_class": "repo_verbatim_methods_quote",
+      "provenance_note": "Liu, Cadwallader & Drake -- thesis sec. 2.9 / Food Chemistry 406: 134998, as carried in data/protocols/external_validation/external_validation_liu_2023_ppi_offnote_baseline.yaml (matrix_format): 'commercial pea protein rehydrated to 10% solids (w/w) in deionized water'. NO BUFFER. The slurry is never heated -- 40 C is a headspace equilibration, not a reaction -- so the buffer field is close to inert here in any case. SOURCE PAPER NOT ON DISK; second-hand. ph_disagreement: the source reports the rehydrated 10%-solids slurries at pH 6.3-7.3 (mean ~6.8) while conditions.ph = 6.0. The protocol YAML already self-declares this ('the proxied pH 6.0 is NOT the source pH ... left unchanged because editing an executable condition would change the prediction'). Reported, not edited.",
+      "ph_disagreement": "conditions.ph = 6.0 against a source range of 6.3-7.3 (mean ~6.8); already self-declared in the protocol YAML."
+    }
   },
   "denaturation_state": 0.0,
   "evidence_class": "external_validation_only",

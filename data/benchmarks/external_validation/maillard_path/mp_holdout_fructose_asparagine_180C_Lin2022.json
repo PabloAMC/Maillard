@@ -36,14 +36,25 @@
   "protein_type": "free",
   "denaturation_state": 0.0,
   "precursors": {
-    "D-Fructose": { "concentration_mM": 27.75 },
-    "L-Asparagine": { "concentration_mM": 33.3 }
+    "D-Fructose": {
+      "concentration_mM": 27.75
+    },
+    "L-Asparagine": {
+      "concentration_mM": 33.3
+    }
   },
   "conditions": {
     "temp_C": 180.0,
     "ph": 6.0,
     "water_activity": 0.99,
-    "time_min": 30.0
+    "time_min": 30.0,
+    "buffer": {
+      "species": "none",
+      "concentration_M": null,
+      "initial_ph_scale": "bench_cooled",
+      "provenance_class": "repo_verbatim_methods_quote",
+      "provenance_note": "Lin et al. 2022, Polymers 14(8):1565, sec. 2.2 'Preparation of Maillard Reaction Model System', verbatim as carried in this bundle's content_verification.quoted_method: 'We adjusted the pH of each solution to 5.8 by adding 1 N sodium hydroxide (NaOH) and then to 6.0 by adding 0.001 N NaOH' and 'Each solution was topped up with distilled water to 100 mL.' NO BUFFER: distilled water, pH set at the bench with NaOH and free to drift over the hold. SOURCE PAPER NOT ON DISK; second-hand."
+    }
   },
   "metadata": {
     "tier": "REFERENCE",

@@ -36,14 +36,25 @@
   "protein_type": "free",
   "denaturation_state": 0.0,
   "precursors": {
-    "D-Glucose": { "concentration_mM": 200.0 },
-    "L-Asparagine": { "concentration_mM": 200.0 }
+    "D-Glucose": {
+      "concentration_mM": 200.0
+    },
+    "L-Asparagine": {
+      "concentration_mM": 200.0
+    }
   },
   "conditions": {
     "temp_C": 180.0,
     "ph": 6.86,
     "water_activity": 0.99,
-    "time_min": 30.0
+    "time_min": 30.0,
+    "buffer": {
+      "species": "phosphate",
+      "concentration_M": 0.1,
+      "initial_ph_scale": "bench_cooled",
+      "provenance_class": "repo_verbatim_methods_quote",
+      "provenance_note": "Ye et al. 2024, Foods 13(17):2836, sec. 2.2 'Glc-Asn Thermal Model Reaction', verbatim as carried in this bundle's content_verification.quoted_method: 'an equimolar solution of glucose and asparagine was accurately prepared in phosphate buffer (0.1 M, pH 6.86), and 4 mL of the solution was transferred to a 25 mL thick-walled pressurized glass tube ... at 180 degC and kept for 30 min.' The 6.86 is the buffer's nominal bench pH. SOURCE PAPER NOT ON DISK; second-hand. NOTE, already recorded by the bundle: the same sentence is the ONLY statement of the medium and the paper never states the reactant molarity."
+    }
   },
   "metadata": {
     "tier": "REFERENCE",

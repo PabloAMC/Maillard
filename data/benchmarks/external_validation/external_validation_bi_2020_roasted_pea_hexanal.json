@@ -4,7 +4,15 @@
     "ph": 6.0,
     "temp_C": 160.0,
     "time_min": 30.0,
-    "water_activity": 0.35
+    "water_activity": 0.35,
+    "buffer": {
+      "species": "none",
+      "concentration_M": null,
+      "initial_ph_scale": "unstated",
+      "provenance_class": "primary_source_pdf",
+      "provenance_note": "As the raw-pea bundle: Bi et al. 2020, JAFC 68:2718, p. 2719, distilled water + NaCl for the headspace isolation, and the roasting itself is DRY (forced-air oven, p. 2719 'Sample Preparation and Roasting Procedures'), so there is no aqueous phase to buffer during the reaction at all. Read from data/articles/bi2020.pdf. ph_disagreement: the paper states no pH anywhere; conditions.ph = 6.0 is an unsourced assumption, reported and not edited.",
+      "ph_disagreement": "conditions.ph = 6.0 is unsourced: Bi 2020 states no pH."
+    }
   },
   "denaturation_state": 0.2,
   "evidence_class": "external_validation_only",

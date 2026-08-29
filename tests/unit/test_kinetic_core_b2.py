@@ -161,6 +161,11 @@ def test_every_sulfur_species_has_formation_and_consumption():
     terminal_by_design = {
         "FRAG_C", "FRAG_N", "FRAG_S", "MEL_C", "MEL_N", "BND", "BND_F",
         "OLG", "PRB", "ACID",
+        # B2.3 adds CBX, the CARRIED-CARBOXYLATE pool, on exactly the same
+        # terms as ACID and for exactly the same reason: it is terminal by
+        # construction, nothing consumes it, and its only route to any
+        # observable is the charge balance that sets the pH.
+        "CBX",
     }
     for species in SULFUR_STATE:
         if species.role in ("reactant", "site") or species.key in terminal_by_design:
@@ -823,7 +828,9 @@ def test_pinned_hofmann_ph5_regression(parameters):
 def test_network_shape_is_pinned():
     described = describe_sulfur()
     # B2.1 added TTCA, BND_F, PRB, PROT_SS; B2.2 adds ACID.
-    assert described["n_species"] == 47
+    # 47 through B2.2; B2.3 adds ONE terminal accounting pool (CBX) and no
+    # species any rate law can see.
+    assert described["n_species"] == 48
     assert described["trunk_reactions"] == 15
     assert len(SULFUR_REACTIONS) == described["sulfur_reactions"]
     ph_tagged = {k for k, v in REACTION_PH_FACTOR.items() if v}

@@ -46,7 +46,14 @@
     "temp_C": 130.0,
     "ph": 5.5,
     "water_activity": 0.98,
-    "time_min": 30.0
+    "time_min": 30.0,
+    "buffer": {
+      "species": "potassium_phosphate",
+      "concentration_M": 0.5,
+      "initial_ph_scale": "bench_cooled",
+      "provenance_class": "repo_verbatim_methods_quote",
+      "provenance_note": "Yiltirak et al. 2026, Food Res. Int. 231:118600, sec. 2.3 (model preparation), verbatim as carried in this bundle's own content_verification.quoted_method: 'All buffer phases were prepared by dissolving ribose (25 mM) and cysteine (25 mM) in potassium phosphate buffer (0.5 M, pH 5.5).' The scored arm is model (iv), 'buffer system (100% buffer)' -- oil-free and emulsifier-free. SOURCE PAPER IS NOT ON DISK in data/articles/; this is the repo's own verbatim extraction, second-hand. TWO CAVEATS THE SOURCE ITSELF RAISES, carried here rather than dropped: the buffer was made in TAP WATER, not deionised water, so trace-metal catalysis is uncontrolled; and the paper does not report the post-heating pH."
+    }
   },
   "metadata": {
     "tier": "REFERENCE",

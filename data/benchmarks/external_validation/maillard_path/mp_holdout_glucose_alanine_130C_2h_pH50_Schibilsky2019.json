@@ -46,7 +46,14 @@
     "temp_C": 130.0,
     "ph": 5.0,
     "water_activity": 0.98,
-    "time_min": 120.0
+    "time_min": 120.0,
+    "buffer": {
+      "species": "none",
+      "concentration_M": null,
+      "initial_ph_scale": "bench_cooled",
+      "provenance_class": "repo_verbatim_methods_quote",
+      "provenance_note": "Schibilsky 2019, TU Berlin dissertation, sec. 5.1.6 / 5.1.6.2, verbatim as carried in this bundle's content_verification.quoted_method: 'mit bidestilliertem Wasser aufgefuellt' and 'Des Weiteren wurde der pH-Wert auf 5,00 +/- 0,01 und 8,00 +/- 0,01 eingestellt.' NO BUFFER: bidistilled water, pH set at t=0 with dilute NaOH/HCl. The bundle's own content_verification.quantification_verdict already states the consequence in capitals -- 'the system is UNBUFFERED - pH is set at t=0 ... and will drift over 2 h at 130 degC, and the thesis does not report the final pH'. SOURCE NOT ON DISK; second-hand."
+    }
   },
   "metadata": {
     "tier": "REFERENCE",

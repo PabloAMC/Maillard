@@ -721,7 +721,9 @@ def test_network_shape_is_pinned():
     # all of which the acrylamide state vector inherits unchanged. The
     # acrylamide lane composes ZERO sulfur reactions, asserted two lines below,
     # so a wider state vector changes no acrylamide prediction.
-    assert described["n_species"] == 56
+    # 56 through B2.2; B2.3 adds ONE terminal accounting pool (CBX) to the
+    # SULFUR block this lane inherits, and no species any rate law can see.
+    assert described["n_species"] == 57
     assert described["trunk_reactions"] == 15
     assert described["acrylamide_reactions"] == 16
     assert described["n_reactions"] == 31

@@ -296,6 +296,14 @@ class BufferSpec:
                            because a pot whose buffer nobody recorded is a pot
                            whose pH trajectory is being extrapolated.
       * ``"phosphate"`` -- total orthophosphate, mol/L.
+      * ``"acetate"`` -- total acetate (acetic acid titrated with a strong
+                           base), mol/L. B2.3, and it exists because a real
+                           bundle needs it: Chang 2021's scored arm is 1%
+                           acetic acid back-titrated to pH 6.0, which IS a
+                           buffer and must not be recorded as water. It costs
+                           no new constant -- the ``ACETIC`` group above is
+                           already in this module, from the CRC, and is
+                           already half of ``ORGANIC_ACID_MIX``.
       * ``"citrate_phosphate"`` -- McIlvaine: citric acid AND disodium
                            hydrogen phosphate, both molarities required.
       * ``"clamped"``   -- the pH is HELD at the declared value. Reserved for
@@ -308,10 +316,11 @@ class BufferSpec:
     kind: str = "none"
     phosphate_mol_l: float = 0.0
     citrate_mol_l: float = 0.0
+    acetate_mol_l: float = 0.0
     declared: bool = False
     source: str = ""
 
-    _KINDS = ("none", "phosphate", "citrate_phosphate", "clamped")
+    _KINDS = ("none", "phosphate", "citrate_phosphate", "acetate", "clamped")
 
     def __post_init__(self) -> None:
         if self.kind not in self._KINDS:
@@ -324,6 +333,8 @@ class BufferSpec:
             self.phosphate_mol_l <= 0.0 or self.citrate_mol_l <= 0.0
         ):
             raise ValueError("a McIlvaine buffer needs both molarities")
+        if self.kind == "acetate" and self.acetate_mol_l <= 0.0:
+            raise ValueError("an acetate buffer needs a positive molarity")
 
     @property
     def is_clamped(self) -> bool:
@@ -338,6 +349,8 @@ class BufferSpec:
                 (PHOSPHATE, 1000.0 * float(self.phosphate_mol_l)),
                 (CITRATE, 1000.0 * float(self.citrate_mol_l)),
             )
+        if self.kind == "acetate":
+            return ((ACETIC, 1000.0 * float(self.acetate_mol_l)),)
         return ()
 
     def as_dict(self) -> Dict[str, Any]:
@@ -345,6 +358,7 @@ class BufferSpec:
             "kind": self.kind,
             "phosphate_mol_L": self.phosphate_mol_l,
             "citrate_mol_L": self.citrate_mol_l,
+            "acetate_mol_L": self.acetate_mol_l,
             "declared_by_source": self.declared,
             "source": self.source,
         }
@@ -464,6 +478,16 @@ def titratable_inventory(
     if ttca > 0.0:
         out.append((TTCA_GROUP, ttca))
 
+    # -- B2.3: the carboxyl centres the sinks CARRY OUT of a consumed --------
+    #    molecule. FULL STRENGTH: a carboxyl carried out of a molecule that
+    #    demonstrably had one is one equivalent, not a fraction of anything.
+    #    Only `ACID` -- the lumped deoxyosone sink, whose acid yield nobody
+    #    measured -- is scaled by the fitted yield.
+    carried_acid = float(concentrations.get("CBX", 0.0))
+    if carried_acid > 0.0:
+        for group, share in ORGANIC_ACID_MIX:
+            out.append((group, share * carried_acid))
+
     # -- the buffer -------------------------------------------------------
     out.extend(buffer_spec.groups())
     return tuple(out)
@@ -578,8 +602,280 @@ def buffer_capacity_mmol_per_ph(
     return float((down - up) / (2.0 * delta))
 
 
+# ===========================================================================
+# 5. B2.3 -- THE NET-SOLUTE-CHARGE AUDIT
+# ===========================================================================
+# WHAT WENT WRONG, IN ONE SENTENCE. The charge balance conserves the STRONG ION
+# DIFFERENCE, which is right -- no reaction makes or destroys sodium -- but the
+# NETWORK was free to delete a titratable solute without saying where its
+# titratable centre went, and the sodium that had titrated it was then left
+# balancing nothing, so the pot drifted alkaline for a bookkeeping reason.
+# B2.2's diagnosis sec. 3 measured it: Kang's 120 C pot at a predicted pH 11.4
+# against a measured 4.9.
+#
+# WHY A "CONSERVATION" TEST IS NOT ENOUGH, AND WHAT IS ENFORCED INSTEAD.
+# Titratable centres are NOT conserved quantities and a checker that demanded
+# they were would be wrong in both directions:
+#
+#   * MAKING one is ordinary chemistry. `r_tdg_fa` turns a neutral deoxyosone
+#     into neutral formic acid; the molecule that appears is uncharged and its
+#     dissociation is the equilibrium's business, not the stoichiometry's.
+#   * DESTROYING one is sometimes real too. `r_cys_actz` buries the cysteine
+#     nitrogen in a thiazole ring whose conjugate acid sits near pKa 2.5. That
+#     centre is genuinely gone, and the step genuinely releases a proton.
+#
+# So what is enforced is DECLARATION, not conservation: every reaction whose
+# net titratable-centre count is non-zero must appear in the network's
+# ``CENTRE_LEDGER`` with the exact delta and a written basis, and every ledger
+# entry must match the stoichiometry it claims to describe. A step cannot
+# quietly delete a carboxylate ever again -- it either carries it, or it says
+# in the ledger that it destroyed it and why.
+#
+# THE TABLE IS DERIVED FROM `titratable_inventory` ABOVE, not written twice:
+# a species has a centre here if and only if the charge balance gives it one,
+# and `tests/unit/test_kinetic_core_b2_3.py` pins that correspondence. A
+# species the charge balance cannot see contributes NOTHING here, which is why
+# `UNTRACKED_TITRATABLE` exists directly below and is itself pinned.
+
+CENTRE_KINDS: Tuple[str, ...] = ("carboxyl", "amine")
+
+#: Titratable centres per unit of each species, AS THE CHARGE BALANCE MODELS
+#: THEM. One entry per group `titratable_inventory` can put into the charge
+#: balance, and nothing else.
+TITRATABLE_CENTRES: Mapping[str, Mapping[str, int]] = {
+    "Cys": {"carboxyl": 1, "amine": 1},   # CYSTEINE: pKa 1.92 / 8.33 / 10.28
+    "ARP": {"carboxyl": 1, "amine": 1},   # drift.arp_group(): 3.00 / calibrated
+    "TTCA": {"carboxyl": 1, "amine": 1},  # TTCA_GROUP: 1.80 / 6.24 (ring NH+)
+    "FA": {"carboxyl": 1},                # FORMIC
+    "AA": {"carboxyl": 1},                # ACETIC
+    "ACID": {"carboxyl": 1},              # ORGANIC_ACID_MIX, scaled by the yield
+    "CBX": {"carboxyl": 1},               # ORGANIC_ACID_MIX, full strength
+    #: B3 lane only. S-(2-carbamoylethyl)cysteine IS an alpha-amino acid: the
+    #: acrylamide adds across the thiol and leaves the carboxyl and the
+    #: ammonium untouched. It is listed so that `a_acr_cys` nets to zero
+    #: HONESTLY -- because the centres really do survive into the adduct -- and
+    #: not because the acrylamide lane happens to have no pH state. The lane's
+    #: charge balance is not wired up, so this entry moves no prediction today.
+    "ACRCYS": {"carboxyl": 1, "amine": 1},
+}
+
+#: SPECIES WITH REAL TITRATABLE GROUPS THAT THE CHARGE BALANCE DELIBERATELY
+#: DOES NOT MODEL. This is a DECLARED GAP LIST, not an exemption list: nothing
+#: in it is allowed to satisfy a ledger entry, and the unit test pins the list
+#: verbatim so that a new titratable species cannot join the network silently.
+#: Each entry says why the omission is tolerable, or admits that it is not.
+UNTRACKED_TITRATABLE: Mapping[str, str] = {
+    "H2S": (
+        "sulfide, pKa1 7.05 at 25 C, present at mmol/L. THE LARGEST OF THESE "
+        "GAPS AND THE ONLY ONE THAT IS NOT OBVIOUSLY SMALL. It is left out "
+        "because closing it is a MODELLING ADDITION (a new titratable solute "
+        "in the balance), not a conservation fix, and B2.3's licence is the "
+        "conservation fix. Sized, not guessed: at the acidic endpoints these "
+        "pots reach, sulfide is fully protonated and carries no charge, so "
+        "the omission bites at the START of an alkaline run and not at its "
+        "end. It is reported as a residual defect, not as closed."
+    ),
+    "Gly": (
+        "glycine, the B1 trunk's amine. The trunk lane carries NO pH state at "
+        "all -- `integrate_sulfur`'s dynamic mode is sulfur-lane only -- so "
+        "the trunk's zwitterion is invisible to the charge balance from both "
+        "ends and its steps net to zero here by construction. If a pH state "
+        "is ever given to the trunk, this entry becomes a defect."
+    ),
+    "SB": (
+        "the Schiff base still carries glycine's carboxyl and its imine "
+        "nitrogen; both are invisible to the balance for the same trunk-lane "
+        "reason as Gly, and become defects the day the trunk gets a pH state."
+    ),
+    "AMA": (
+        "the Amadori compound still carries glycine's carboxyl and its "
+        "secondary ammonium; same trunk-lane reason as Gly. NOTE the "
+        "asymmetry with the SULFUR lane's ARP, which IS in the balance and "
+        "whose ammonium pKa is a calibrated constant."
+    ),
+    "MEL_N": (
+        "melanoidins are polyanionic and retain amine nitrogen, so the "
+        "terminal polymer really does hold titratable capacity. It is carried "
+        "ELEMENTALLY (mmol of atom, not of molecule), so no per-unit centre "
+        "count is definable. Same trunk-lane exemption as Gly."
+    ),
+    "THI": (
+        "thiamine. Its thiazolium is a PERMANENT CATION and its pyrimidinium "
+        "sits near pKa 4.8, so a thiamine pot carries a charge the balance "
+        "does not see. THE SIZE IS NOT SMALL (Zhang's pot charges 44.5 "
+        "mmol/L) and this is recorded as a genuine open defect, not as a "
+        "rounding argument."
+    ),
+    "MFT": (
+        "a furan-3-thiol, pKa near 7. Present at ug/L, i.e. <= 1e-3 mmol/L "
+        "against an acid pool of tens of mmol/L -- four to five orders below "
+        "the charge scale. Negligible on arithmetic, not on hope."
+    ),
+    "FFT": (
+        "a furfuryl thiol, same pKa class as MFT and present at the same ug/L "
+        "scale. Same arithmetic argument, same conclusion: four to five orders "
+        "below the charge scale, negligible by size and not by hope."
+    ),
+    "MESH": (
+        "methanethiol, pKa 10.3 and therefore barely dissociated anywhere "
+        "these pots go, at a concentration lower still than MFT's. It is the "
+        "least consequential entry on this list and it is here so that the "
+        "list is exhaustive rather than convenient."
+    ),
+}
+
+
+#: THE STRONGEST SINGLE ASSUMPTION IN THE pH MODEL, WRITTEN ONCE AND SHARED BY
+#: EVERY LEDGER ENTRY THAT RELIES ON IT.
+#:
+#: B2.3 CARRIES THE CARBOXYL AND DECLARES THE AMINE DESTROYED, and that
+#: asymmetry is not a convenience -- it is what the corpus's own DECLARED FIT
+#: anchors force. Zhou 2023's system (Amendment 7) charges 20 mmol/L of Amadori
+#: compound and 20 mmol/L of cysteine, i.e. 40 mmol/L of amino nitrogen, into
+#: an unbuffered pot, and finishes at a MEASURED pH of 3.22 / 3.42. Forty
+#: mmol/L of surviving ammonium (pKa 9.25, hence essentially fully protonated
+#: anywhere below pH 7) makes those endpoints arithmetically unreachable at any
+#: acid load this network can produce: the model was measured predicting
+#: 5.04 / 5.11 with the amine carried, against 2.94 / 3.02 with it destroyed,
+#: at B2.2's OWN frozen parameters (`scratch/b23_encoding_probe.py`, run before
+#: this choice was made and before any refit).
+#:
+#: The chemistry says the same thing and says it more generally. Maillard
+#: systems ACIDIFY, and the textbook reason is exactly this: the amino group is
+#: consumed -- into pyrazines, into other N-heterocycles, into melanoidin
+#: nitrogen, none of which is a base in this window -- while carboxylic acids
+#: accumulate. A model in which liberated amino nitrogen persists as free
+#: ammonia cannot reproduce the single most robust process observable in the
+#: whole corpus.
+#:
+#: WHAT THIS IS NOT. It is not a claim that no ammonia is ever released --
+#: Nedvidek 1992 Scheme 3 writes NH3 explicitly, and it is surely released. It
+#: is a claim that it does not SURVIVE as a titratable base on the timescale of
+#: these holds, and that the module, having no step for its consumption, must
+#: account for the centre's loss at the point of release rather than pretend
+#: the nitrogen is inert. This is the claim `FRAG_N` has silently encoded since
+#: B1; B2.3's contribution is to make it explicit, name its evidence, and stop
+#: it from concealing the CARBOXYL half, which does not vanish and which B2.2
+#: was measured deleting.
+#:
+#: IF IT IS WRONG, IT IS WRONG IN A NAMED DIRECTION: the pots would be modelled
+#: too acidic, most in the systems with the highest amino-nitrogen loading
+#: (Zhou's ARP + Cys, Cerny's ternary), and least in Kang's TTCA pot.
+AMINE_FATE_BASIS = (
+    "THE LIBERATED AMINO NITROGEN IS DECLARED NON-TITRATABLE AT THE POINT OF "
+    "RELEASE. Basis: (i) Amendment 7's three DECLARED FIT drift endpoints -- "
+    "40 mmol/L of amino nitrogen charged, measured finish at pH 3.22 / 3.42 -- "
+    "which 40 mmol/L of surviving ammonium (pKa 9.25) makes arithmetically "
+    "unreachable; (ii) the textbook reason Maillard systems acidify at all, "
+    "which is that the amino group is consumed into pyrazines, N-heterocycles "
+    "and melanoidin nitrogen while carboxylic acids accumulate. The module has "
+    "no step for that consumption, so the centre's loss is accounted where the "
+    "nitrogen leaves. See ph_state.AMINE_FATE_BASIS for the full statement, "
+    "the pre-freeze probe that sized it, and the direction of the error if it "
+    "is wrong."
+)
+
+
+def centre_delta(
+    reactants: Mapping[str, int], products: Mapping[str, int]
+) -> Dict[str, int]:
+    """
+    Net change in each titratable centre across one step, products minus
+    reactants. Zero for every kind means the step moves no titratable capacity.
+    """
+    out = {kind: 0 for kind in CENTRE_KINDS}
+    for mapping, sign in ((reactants, -1), (products, +1)):
+        for key, coefficient in mapping.items():
+            for kind, count in TITRATABLE_CENTRES.get(key, {}).items():
+                out[kind] += sign * int(coefficient) * int(count)
+    return out
+
+
+def validate_charge_closure(reactions, ledger: Mapping[str, Mapping[str, Any]]) -> None:
+    """
+    Raise unless every step's titratable-centre movement is DECLARED.
+
+    Three failure modes, and each is its own message because they mean
+    different things:
+
+      1. a step moves a centre and is NOT in the ledger -- the B2.2 defect,
+         and the one this function exists to make impossible;
+      2. a step is in the ledger with the wrong delta -- the declaration and
+         the stoichiometry have drifted apart, which is how a fix rots;
+      3. a ledger entry names a step that no longer moves anything -- dead
+         paperwork, which is how a ledger stops being read.
+    """
+    seen = set()
+    for reaction in reactions:
+        delta = centre_delta(reaction.reactants, reaction.products)
+        moved = {k: v for k, v in delta.items() if v != 0}
+        entry = ledger.get(reaction.key)
+        if not moved:
+            if entry is not None:
+                raise ValueError(
+                    f"{reaction.key}: CENTRE_LEDGER declares a movement "
+                    f"{ {k: v for k, v in entry.items() if k in CENTRE_KINDS} } "
+                    f"but the stoichiometry moves no titratable centre. Remove "
+                    f"the stale entry; a ledger nobody can trust is worse than "
+                    f"no ledger."
+                )
+            continue
+        seen.add(reaction.key)
+        if entry is None:
+            raise ValueError(
+                f"{reaction.key}: moves titratable centres {moved} and is NOT "
+                f"declared in CENTRE_LEDGER. A step that deletes a carboxylate "
+                f"or an amine without saying where it went makes the strong "
+                f"ion that titrated it balance nothing, and the pot drifts for "
+                f"a bookkeeping reason -- this is exactly the defect Build Wave "
+                f"B2.2's diagnosis sec. 3 measured (Kang's pot at a predicted "
+                f"pH 11.4 against a measured 4.9). Either CARRY the centre "
+                f"into CBX, or declare the destruction and its basis."
+            )
+        declared = {k: int(entry.get(k, 0)) for k in CENTRE_KINDS}
+        if declared != delta:
+            raise ValueError(
+                f"{reaction.key}: CENTRE_LEDGER declares {declared} but the "
+                f"stoichiometry gives {delta}."
+            )
+        if not str(entry.get("basis", "")).strip():
+            raise ValueError(
+                f"{reaction.key}: its CENTRE_LEDGER entry has no `basis`. Every "
+                f"declared centre movement must say, in words, what happens to "
+                f"the group."
+            )
+    stale = sorted(set(ledger) - seen)
+    if stale:
+        raise ValueError(
+            f"CENTRE_LEDGER declares steps that move nothing or do not exist: "
+            f"{stale}"
+        )
+
+
+def net_solute_charge(
+    concentrations: Mapping[str, float],
+    ph: float,
+    temperature_k: float,
+    drift: "PhDrift",
+    buffer_spec: "BufferSpec",
+) -> float:
+    """
+    The net charge carried by every modelled solute at ``ph``, mmol/L.
+
+    The reporting half of the audit: ``validate_charge_closure`` polices the
+    NETWORK at import, this polices a TRAJECTORY at run time. Along a run the
+    quantity ``SID + net_solute_charge + [H+] - [OH-]`` must stay at zero,
+    which is what `_charge_residual` returns.
+    """
+    inventory = titratable_inventory(concentrations, drift, buffer_spec)
+    return float(sum(
+        c * g.average_charge(float(ph), float(temperature_k))
+        for g, c in inventory if c > 0.0
+    ))
+
+
 PH_STATE_PROVENANCE: Dict[str, Any] = {
-    "module": "B2.2",
+    "module": "B2.3",
     "fitted_constants": 2,
     "fitted_constant_names": [
         "acid_yield_per_sink_event", "arp_secondary_ammonium_pKa",
@@ -613,6 +909,14 @@ PH_STATE_PROVENANCE: Dict[str, Any] = {
         "pool moves the predicted endpoints by ~0.4 pH units.",
         "TTCA's pKa are those of the unsubstituted parent acid.",
         "The ARP carboxyl pKa is a class value (3.00), not a measurement.",
+        "B2.3: CBX carries the mixture's 4.25 for a heterogeneous set of real "
+        "leaving groups (pyruvic 2.49, CO2/carbonic 6.35, acetic 4.76). No CO2 "
+        "partition model exists in this corpus, so the mixture is declared "
+        "rather than a Henry constant guessed.",
+        "B2.3: the LIBERATED AMINO NITROGEN is declared NON-TITRATABLE at "
+        "the point of release -- see AMINE_FATE_BASIS. That is a chemistry "
+        "claim with a measured basis, and it is the strongest single "
+        "assumption in the pH model.",
     ],
     "conserved_quantity": (
         "the strong-ion difference. No reaction in the network creates or "
@@ -621,4 +925,16 @@ PH_STATE_PROVENANCE: Dict[str, Any] = {
         "charge-conservation property tests/unit/test_kinetic_core_b2_2.py "
         "checks directly."
     ),
+    "b2_3_declared_invariant": (
+        "DECLARATION, not conservation. Titratable centres are not conserved "
+        "quantities -- making a neutral acid out of a neutral sugar is "
+        "ordinary chemistry and burying an amine in a thiazole ring really "
+        "does release a proton -- so `validate_charge_closure` requires every "
+        "step whose net centre count moves to be declared in the network's "
+        "CENTRE_LEDGER, with the exact delta and a written basis, and refuses "
+        "the import otherwise. The B2.2 defect (a sink deleting a carboxylate "
+        "in silence) is not merely fixed but unreachable."
+    ),
+    "b2_3_untracked_titratable_species": sorted(UNTRACKED_TITRATABLE),
+    "b2_3_amine_fate": AMINE_FATE_BASIS,
 }

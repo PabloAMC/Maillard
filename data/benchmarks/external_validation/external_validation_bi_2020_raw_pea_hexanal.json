@@ -9,7 +9,15 @@
     "ph": 6.0,
     "temp_C": 40.0,
     "time_min": 10.0,
-    "water_activity": 0.95
+    "water_activity": 0.95,
+    "buffer": {
+      "species": "none",
+      "concentration_M": null,
+      "initial_ph_scale": "unstated",
+      "provenance_class": "primary_source_pdf",
+      "provenance_note": "Bi et al. 2020, JAFC 68:2718, p. 2719, 'Isolation of Volatile Compounds from Raw and Roasted Pea Flour', verbatim: 'Sodium chloride (1.8 g) was dissolved in a 5 mL aliquot of distilled water contained in a 20 mL vial ... raw or roasted pea flour (1.5 g) was added.' p. 2719 'Chemicals': 'de-ionized water was used throughout the experiment.' NO BUFFER: distilled water plus NaCl, the salt being an SPME salting-out aid rather than a buffer. Read from data/articles/bi2020.pdf. ph_disagreement: THE PAPER STATES NO pH ANYWHERE (every page searched; zero hits). This bundle's conditions.ph = 6.0 is therefore an ASSUMPTION with no source. It is REPORTED and NOT EDITED -- changing an executable condition is outside Amendment 9's licence and would change a prediction.",
+      "ph_disagreement": "conditions.ph = 6.0 is unsourced: Bi 2020 states no pH."
+    }
   },
   "denaturation_state": 0.0,
   "evidence_class": "external_validation_only",

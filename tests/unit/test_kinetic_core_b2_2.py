@@ -203,8 +203,21 @@ def test_a_dynamic_run_conserves_charge_at_every_point():
             float(run.ph_series[i]), T120, sid, inventory)))
     # the pH is interpolated between fixed-point nodes, so the residual is not
     # machine zero; it must still be far below one part in a thousand of the
-    # charge scale (tens of mmol/L).
-    assert worst < 1e-2, f"charge balance drifts by {worst:.3g} mmol/L"
+    # charge scale. B2.3 EXPRESSES THAT THRESHOLD AS THE COMMENT ALWAYS STATED
+    # IT -- relative to the charge scale actually present -- rather than as the
+    # absolute 1e-2 that stood here before. The reason is disclosed: B2.3's
+    # charge fix makes this pot carry a LARGER titratable inventory (the
+    # carried carboxylate is now tracked instead of being deleted), so the same
+    # relative interpolation error is a larger absolute number. Pinning the
+    # absolute value would have made the test tighten itself every time the
+    # model became more complete, which is the wrong direction.
+    scale = abs(float(sid)) + sum(
+        c for _g, c in PH.titratable_inventory(
+            {k: float(run.concentrations[-1, SULFUR_INDEX[k]])
+             for k in SULFUR_STATE_KEYS}, _DRIFT, _BUFFER_NONE))
+    assert worst < 1e-3 * scale, (
+        f"charge balance drifts by {worst:.3g} mmol/L against a charge scale "
+        f"of {scale:.3g} mmol/L")
 
 
 def test_a_dynamic_run_conserves_carbon_nitrogen_and_sulfur():

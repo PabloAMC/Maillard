@@ -137,7 +137,76 @@ def _fold(predicted: Optional[float], measured: Optional[float]) -> Optional[flo
 # ---------------------------------------------------------------------------
 
 
-def _core_spec(bench: Dict[str, Any]):
+# ---------------------------------------------------------------------------
+# B2.3: THE BUFFER FIELD, AND WHY THIS EXAM IS NOW REPORTED BOTH WAYS
+# ---------------------------------------------------------------------------
+# `results/validation/kinetic_core_b2_2_diagnosis.md` sec. 4 found that the
+# frozen bundles record NO buffer, so bundles literally named
+# `..._ribose_cysteine_buffer_...` were being integrated as WATER -- and sized
+# that schema gap at an 11x swing in predicted 2-furfurylthiol on exactly the
+# system shape that is the worst point in this report.
+#
+# `docs/reference/FIT_HOLDOUT_DECLARATION.md` Amendment 9 clause 2 completes
+# the buffer field AND requires this exam to be reported BOTH WAYS --
+# buffer-completed and as-was -- in one artifact, PERMANENTLY. The reason the
+# as-was column is permanent rather than transitional: every earlier number
+# this repo has published was computed as-was, and a report that silently
+# replaces them makes its own history unreadable. Two columns cost one extra
+# integration per row and settle the question of how much of the Yiltirak
+# failure was chemistry and how much was a data-schema gap.
+#
+# NOTE ON REACH: only the SULFUR lane carries a pH state, so the buffer can
+# only move a sulfur-lane row. The acrylamide-lane bundles (Chang, Lin, Ye,
+# Schibilsky) will be IDENTICAL in both columns and that identity is a
+# reported result, not an omission -- it is the same gap X-7 names.
+
+
+def buffer_from_bundle(bench: Dict[str, Any]):
+    """
+    Translate a bundle's completed ``conditions.buffer`` block into a
+    ``BufferSpec``. Returns ``None`` when the bundle has no block at all.
+
+    ``buffer_unknown`` maps to the engine's DECLARED DEFAULT -- unbuffered,
+    ``declared=False``, which raises the extrapolation warning. That is the
+    correct handling and it is the point of recording unknown rather than
+    guessing: an unknown buffer produces a WARNED extrapolation, not a silent
+    assumption in either direction.
+    """
+    from src.kinetic_core.ph_state import BufferSpec
+
+    block = (bench.get("conditions") or {}).get("buffer")
+    if not isinstance(block, dict):
+        return None
+    species = str(block.get("species", "buffer_unknown"))
+    molarity = block.get("concentration_M")
+    note = str(block.get("provenance_note", ""))[:200]
+    if species == "buffer_unknown":
+        return BufferSpec(
+            kind="none", declared=False,
+            source=f"BUFFER UNKNOWN, recorded as such rather than guessed: {note}")
+    if species == "none":
+        return BufferSpec(
+            kind="none", declared=True,
+            source=f"the source states NO BUFFER: {note}")
+    if species in ("phosphate", "potassium_phosphate"):
+        return BufferSpec(
+            kind="phosphate", phosphate_mol_l=float(molarity), declared=True,
+            source=note)
+    if species == "acetate":
+        return BufferSpec(
+            kind="acetate", acetate_mol_l=float(molarity), declared=True,
+            source=note)
+    if species == "citrate_phosphate":
+        return BufferSpec(
+            kind="citrate_phosphate", phosphate_mol_l=float(molarity) * 2.0 / 3.0,
+            citrate_mol_l=float(molarity) / 3.0, declared=True, source=note)
+    raise SystemExit(
+        f"{bench.get('benchmark_id')}: buffer species {species!r} has no "
+        f"BufferSpec translation. Add one deliberately -- do not fall through "
+        f"to water, which is the defect this whole block exists to remove.")
+
+
+def _core_spec(bench: Dict[str, Any], *, use_buffer: bool = True):
     from src.kinetic_core.engine import FormulationSpec, ProcessSpec, ThermalProgram
 
     conditions = bench.get("conditions") or {}
@@ -159,6 +228,11 @@ def _core_spec(bench: Dict[str, Any]):
                 else None
             ),
             matrix=str(bench.get("protein_type") or "water"),
+            # BOTH WAYS. `use_buffer=False` reproduces every pre-B2.3 number in
+            # this report exactly: no buffer supplied means the engine's
+            # declared default, which is unbuffered plus an extrapolation
+            # warning.
+            buffer=buffer_from_bundle(bench) if use_buffer else None,
         ),
     )
 
@@ -186,7 +260,7 @@ def _core_native_value(
     return None
 
 
-def score_core(bundles: List[Path]) -> List[Dict[str, Any]]:
+def score_core(bundles: List[Path], *, use_buffer: bool = True) -> List[Dict[str, Any]]:
     from src.kinetic_core.engine import predict
 
     rows: List[Dict[str, Any]] = []
@@ -195,7 +269,8 @@ def score_core(bundles: List[Path]) -> List[Dict[str, Any]]:
         benchmark_id = str(bench.get("benchmark_id"))
         targets = bench.get("holdout_targets") or bench.get("measured_volatiles") or {}
         _, limiting_molar = _limiting_precursor_molar(bench)
-        spec = _core_spec(bench)
+        spec = _core_spec(bench, use_buffer=use_buffer)
+        buffer_block = (bench.get("conditions") or {}).get("buffer") or {}
 
         for compound, target_spec in targets.items():
             target_spec = target_spec if isinstance(target_spec, dict) else {}
@@ -234,6 +309,10 @@ def score_core(bundles: List[Path]) -> List[Dict[str, Any]]:
                         None if fold is None else bool(fold <= PASS_BAND_LEVEL)
                     ),
                     "b2_1_rescored": (benchmark_id, compound) in B2_1_RESCORED,
+                    "buffer_species": buffer_block.get("species"),
+                    "buffer_concentration_M": buffer_block.get("concentration_M"),
+                    "buffer_provenance_class": buffer_block.get("provenance_class"),
+                    "buffer_applied": bool(use_buffer),
                 }
             )
     return rows
@@ -361,17 +440,40 @@ def _prereg_checks(
         "detail": f"{hits}/{len(scored)} inside the 3.0x band",
     })
 
+    # B2.3 FIXES A SCORER DEFECT B2.2's DIAGNOSIS sec. 2 REPORTED AND DID NOT
+    # FIX (the B2.2 exam re-run was mandated as PURE RE-SCORING, so it could
+    # only report it). The claim is COMPOUND -- "median in 10x-100x" AND "not
+    # better than the old lane" -- and the check tested only the numeric band,
+    # so it printed HELD while its own detail column said "the core is BETTER
+    # on the paired subset". Both halves are now scored, and the label can be
+    # HALF-FALSIFIED. The fix moves the label in the CONSERVATIVE direction --
+    # it can only turn a HELD into a HALF-FALSIFIED, never the reverse.
     median = summary_core.get("median_fold_error")
+    old_median = old_paired.get("median_fold_error")
+    core_paired_median = (paired and _summarise(
+        [r["core_fold_error"] for r in paired]).get("median_fold_error")) or None
+    band_half = median is not None and 10.0 <= median <= 100.0
+    not_better_half = (
+        core_paired_median is not None and old_median is not None
+        and core_paired_median >= old_median
+    )
     checks.append({
         "claim": "core median fold error 10x-100x, and NOT better than the old lane",
         "outcome": (
-            "HELD" if median is not None and 10.0 <= median <= 100.0 else "MISSED"
+            "HELD" if band_half and not_better_half
+            else "FALSIFIED" if not band_half and not not_better_half
+            else "HALF-FALSIFIED"
         ),
         "detail": (
-            f"core median {_fmt(median)}x vs old paired "
-            f"{_fmt(old_paired.get('median_fold_error'))}x -- the core is "
-            f"{'WORSE' if median and old_paired.get('median_fold_error') and median > old_paired['median_fold_error'] else 'BETTER'} "
-            f"on the paired subset"
+            f"BAND HALF: core median over all scored points {_fmt(median)}x, "
+            f"{'inside' if band_half else 'OUTSIDE'} the 10x-100x band. "
+            f"NOT-BETTER HALF: on the paired subset the core is "
+            f"{_fmt(core_paired_median)}x against the old lane's "
+            f"{_fmt(old_median)}x, i.e. the core is "
+            f"{'WORSE or equal, as claimed' if not_better_half else 'BETTER, which the claim said it would not be'}. "
+            f"(B2.3 scores both halves; through B2.2 this check tested only "
+            f"the band and printed HELD while its own detail said the "
+            f"opposite -- reported in kinetic_core_b2_2_diagnosis.md sec. 2.)"
         ),
     })
 
@@ -426,21 +528,58 @@ def _prereg_checks(
     return checks
 
 
-def _findings(rows: List[Dict[str, Any]]) -> List[Dict[str, str]]:
-    """The narrative results, each tied to rows in the table above."""
+def _findings(rows: List[Dict[str, Any]], *, paired=(), old_paired=None,
+              by_family=None) -> List[Dict[str, str]]:
+    """
+    The narrative results, each tied to rows in the table above.
+
+    B2.3 MAKES THESE COMPUTED RATHER THAN TYPED. Through B2.2 the three
+    headline numbers in this section ("24.93x", "12.65x", "290x") were
+    hard-coded from the original B5 run and were STALE by B2.2 -- reported as
+    such in `kinetic_core_b2_2_diagnosis.md` sec. 2 and, because that wave's
+    exam was mandated as pure re-scoring, not fixed there. They are now read
+    off the rows this run actually produced, so the narrative cannot drift
+    away from its own table again.
+    """
     findings: List[Dict[str, str]] = []
+    old_paired = old_paired or {}
+    by_family = by_family or {}
+    core_paired_median = _summarise(
+        [r["core_fold_error"] for r in paired]).get("median_fold_error")
+    old_paired_median = old_paired.get("median_fold_error")
+    _core_better = (
+        core_paired_median is not None and old_paired_median is not None
+        and core_paired_median < old_paired_median)
+    _ratio = (
+        old_paired_median / core_paired_median
+        if _core_better and core_paired_median else
+        (core_paired_median / old_paired_median
+         if core_paired_median and old_paired_median else None))
 
     findings.append({
-        "title": "The core is WORSE than the old lane on the paired subset, and that is the headline",
+        "title": (
+            "The core is BETTER than the old lane on the paired subset"
+            if _core_better else
+            "The core is WORSE than the old lane on the paired subset, and that is the headline"
+        ),
         "body": (
-            "On the 23 points both lanes answer, the core's median fold error is **24.93x** "
-            "against the old lane's **12.65x**. The cutover shipped a predictor that is about "
-            "**2x worse on median accuracy** than the one it replaces. The pre-registration "
-            "allowed for this outcome and said it in advance ('the core is not expected to beat "
-            "the old lane on median accuracy in this exam'), so this is a confirmed expectation "
-            "rather than a surprise — but it is a negative result and it is the first thing a "
-            "reader should be told.\n\n"
-            "What the core buys instead is the 17 declensions and the localisation of the "
+            f"On the {len(paired)} points both lanes answer, the core's median fold error is "
+            f"**{_fmt(core_paired_median)}x** against the old lane's "
+            f"**{_fmt(old_paired_median)}x**"
+            + (f", i.e. about **{_fmt(_ratio)}x "
+               f"{'better' if _core_better else 'worse'} on median accuracy**. "
+               if _ratio else ". ")
+            + ("B5's pre-registration expected the core to LOSE this comparison and said so in "
+               "advance; through B2.1 it did. It no longer does, and the number below is "
+               "recomputed on every run rather than typed, because the version of this "
+               "paragraph that said '24.93x against 12.65x' was still saying it two waves after "
+               "it stopped being true.\n\n"
+               if _core_better else
+               "The pre-registration allowed for this outcome and said it in advance ('the core "
+               "is not expected to beat the old lane on median accuracy in this exam'), so this "
+               "is a confirmed expectation rather than a surprise — but it is a negative result "
+               "and it is the first thing a reader should be told.\n\n")
+            + "What the core buys instead is the 17 declensions and the localisation of the "
             "failures. The old lane emitted a number for all 8 matrix-path lipid points and all "
             "7 HMF/DMHF/furfural points; every one of those numbers came from a route the "
             "kinetic core does not have, and 5 of the old lane's 5 in-band hits sit in exactly "
@@ -457,17 +596,26 @@ def _findings(rows: List[Dict[str, Any]]) -> List[Dict[str, str]]:
             "lane that scores **0/10** on the same points and misses by up to 506x. That is a "
             "genuine out-of-sample win for the rebuilt sulfur network on the conditions closest "
             "to its fit point.\n\n"
-            "The Yiltirak family (100-130 C, 30 min - 4 h) is **0/8**, median 290x. The probe "
+            f"The Yiltirak family (100-130 C, 30 min - 4 h) is "
+            f"**{by_family.get('sulfur_yiltirak2026_T_ladder', {}).get('core_within_band', 0)}/"
+            f"{by_family.get('sulfur_yiltirak2026_T_ladder', {}).get('points', 8)}**, median "
+            f"{_fmt(by_family.get('sulfur_yiltirak2026_T_ladder', {}).get('core_median_fold'))}x. The probe "
             "that separates the two axes shows the network's temperature response is sound — at "
             "a fixed 20 min hold, product rises monotonically with temperature as it should. "
             "The failure is on the TIME axis: Yiltirak's protocol compensates lower temperature "
             "with longer holds, and over a 4 h hold at 100 C the core accumulates thiol far "
             "beyond the measurement. The mechanism is named and it is B2.1's own declared "
-            "policy: the sulfur CONSUMPTION channels carry **no activation energy at all**, so "
-            "lowering the temperature slows formation while leaving every sink running at its "
-            "145 C rate — except that the sinks are then given 12x longer to run and still fail "
-            "to remove the product. The lumped no-Ea consumption policy is the localised defect, "
-            "and this is the first out-of-sample evidence that prices it."
+            "policy through B2.1: the sulfur CONSUMPTION channels carried **no activation "
+            "energy at all**, so lowering the temperature slowed formation while leaving every "
+            "sink running at its 145 C rate — and the sinks were then given 12x longer to run "
+            "and still failed to remove the product. "
+            "**THAT SENTENCE IS NO LONGER CURRENT AND IS KEPT ONLY AS THE HISTORY OF THIS "
+            "DIAGNOSIS.** B2.2 gave the decay lumps two named barrier families of their own "
+            "(`thiol_sink`, `carbonyl_sink`) and the family median moved; B2.3 refits both "
+            "after a charge-conservation fix. The residual failure is therefore no longer "
+            "attributable to a no-Ea consumption policy, and the current fold errors above are "
+            "what should be read. B2.2's diagnosis sec. 2 flagged this paragraph as stale and "
+            "could not fix it under a pure-re-scoring mandate; B2.3 corrects it."
         ),
     })
 
@@ -524,12 +672,24 @@ def build_exam(target_tag: str = "meaty") -> Dict[str, Any]:
     if not bundles:
         raise SystemExit(f"no external-validation bundles under {EXTERNAL_DIR}")
 
-    core_rows = score_core(bundles)
+    # ---- B2.3: BOTH WAYS, in one artifact, permanently -------------------
+    core_rows = score_core(bundles, use_buffer=True)
+    as_was_rows = score_core(bundles, use_buffer=False)
+    as_was_index = {(r["benchmark_id"], r["compound"]): r for r in as_was_rows}
     old_rows = score_old_lane(bundles, target_tag=target_tag)
 
     for row in core_rows:
         key = (row["benchmark_id"], row["compound"])
         row.update(old_rows.get(key, {"old_predicted": None, "old_fold_error": None}))
+        was = as_was_index.get(key, {})
+        row["as_was_predicted"] = was.get("core_predicted")
+        row["as_was_fold_error"] = was.get("core_fold_error")
+        row["as_was_within_band"] = was.get("core_within_band")
+        row["buffer_moved_the_row"] = (
+            None if row["core_fold_error"] is None or row["as_was_fold_error"] is None
+            else abs(math.log10(max(row["core_fold_error"], 1e-30)
+                                / max(row["as_was_fold_error"], 1e-30))) > 0.01
+        )
 
     answered = [r for r in core_rows if r["answered"]]
     declined = [r for r in core_rows if not r["answered"]]
@@ -568,7 +728,81 @@ def build_exam(target_tag: str = "meaty") -> Dict[str, Any]:
     prereg_checks = _prereg_checks(core_rows, summary_core=core_summary, paired=paired,
                                    old_paired=old_paired, scored=scored_core,
                                    declined=declined, answered=answered)
-    findings = _findings(core_rows)
+    findings = _findings(core_rows, paired=paired, old_paired=old_paired,
+                         by_family=by_family)
+
+    # ---- the BOTH-WAYS block ---------------------------------------------
+    scored_as_was = [r for r in as_was_rows if r["core_fold_error"] is not None]
+    as_was_paired = [
+        r for r in scored_as_was
+        if (r["benchmark_id"], r["compound"]) in {
+            (p["benchmark_id"], p["compound"]) for p in paired}
+    ]
+    moved = [r for r in core_rows if r.get("buffer_moved_the_row")]
+    improved = [r for r in moved
+                if r["core_fold_error"] < r["as_was_fold_error"]]
+    worsened = [r for r in moved
+                if r["core_fold_error"] > r["as_was_fold_error"]]
+    both_ways_family: Dict[str, Any] = {}
+    for row in core_rows:
+        block = both_ways_family.setdefault(
+            row["family"], {"completed": [], "as_was": [],
+                            "completed_in_band": 0, "as_was_in_band": 0,
+                            "points": 0})
+        block["points"] += 1
+        if row["core_fold_error"] is not None:
+            block["completed"].append(row["core_fold_error"])
+            block["completed_in_band"] += int(bool(row["core_within_band"]))
+        if row["as_was_fold_error"] is not None:
+            block["as_was"].append(row["as_was_fold_error"])
+            block["as_was_in_band"] += int(bool(row["as_was_within_band"]))
+    for block in both_ways_family.values():
+        block["completed_median_fold"] = _summarise(
+            block.pop("completed"))["median_fold_error"]
+        block["as_was_median_fold"] = _summarise(
+            block.pop("as_was"))["median_fold_error"]
+
+    both_ways = {
+        "mandate": (
+            "FIT_HOLDOUT_DECLARATION.md Amendment 9 clause 2: the exam is "
+            "reported BOTH WAYS -- buffer-completed and as-was -- in the same "
+            "artifact, PERMANENTLY. Not transitional: every number this repo "
+            "published before B2.3 was computed as-was, and a report that "
+            "silently replaced them would make its own history unreadable."
+        ),
+        "buffer_completed": {
+            "scored": len(scored_core),
+            "within_band": sum(1 for r in scored_core if r["core_within_band"]),
+            "all_points": core_summary,
+            "paired": core_paired,
+        },
+        "as_was": {
+            "scored": len(scored_as_was),
+            "within_band": sum(1 for r in scored_as_was if r["core_within_band"]),
+            "all_points": _summarise([r["core_fold_error"] for r in scored_as_was]),
+            "paired": _summarise([r["core_fold_error"] for r in as_was_paired]),
+        },
+        "old_lane_paired": old_paired,
+        "old_lane_is_identical_in_both_columns": (
+            "THE OLD LANE HAS NO pH STATE AND NO BUFFER INPUT AT ALL, so its "
+            "numbers are BY CONSTRUCTION the same in both columns. That is "
+            "why the old-lane comparison is reported against BOTH core "
+            "columns rather than recomputed: the comparison changes because "
+            "the CORE moves, never because the old lane does."
+        ),
+        "rows_the_buffer_moved": len(moved),
+        "rows_improved_by_the_buffer": len(improved),
+        "rows_worsened_by_the_buffer": len(worsened),
+        "rows_untouched": len(core_rows) - len(moved),
+        "why_so_many_are_untouched": (
+            "Only the SULFUR lane carries a pH state. An acrylamide-lane or "
+            "matrix-lane row is identical in both columns no matter what its "
+            "buffer says, and that identity is a REPORTED GAP rather than an "
+            "omission -- it is the same gap that leaves Chang's two arms "
+            "predicting the same value."
+        ),
+        "by_family": both_ways_family,
+    }
 
     return {
         "artifact": "cutover_final_exam",
@@ -601,6 +835,7 @@ def build_exam(target_tag: str = "meaty") -> Dict[str, Any]:
             },
         },
         "by_family": by_family,
+        "both_ways": both_ways,
         "rows": core_rows,
     }
 
@@ -671,6 +906,76 @@ def render_markdown(payload: Dict[str, Any]) -> str:
         "over answers are different quantities. Reporting only the unpaired pair would let the "
         "core look good by refusing its hardest points."
     )
+    out.append("")
+
+    bw = payload["both_ways"]
+    out.append("## BOTH WAYS — buffer-completed and as-was")
+    out.append("")
+    out.append(bw["mandate"])
+    out.append("")
+    out.append("| | scored | within band | median fold | paired median (n=%d) |"
+               % paired["n"])
+    out.append("|---|---:|---:|---:|---:|")
+    out.append(
+        f"| **buffer-completed** | {bw['buffer_completed']['scored']} | "
+        f"{bw['buffer_completed']['within_band']} | "
+        f"{_fmt(bw['buffer_completed']['all_points']['median_fold_error'])}x | "
+        f"**{_fmt(bw['buffer_completed']['paired']['median_fold_error'])}x** |")
+    out.append(
+        f"| **as-was (no buffer field)** | {bw['as_was']['scored']} | "
+        f"{bw['as_was']['within_band']} | "
+        f"{_fmt(bw['as_was']['all_points']['median_fold_error'])}x | "
+        f"**{_fmt(bw['as_was']['paired']['median_fold_error'])}x** |")
+    out.append(
+        f"| old lane (identical in both) | {old_all['n']} | "
+        f"{summary['old_within_band']} | "
+        f"{_fmt(old_all['median_fold_error'])}x | "
+        f"{_fmt(bw['old_lane_paired']['median_fold_error'])}x |")
+    out.append("")
+    out.append(f"> {bw['old_lane_is_identical_in_both_columns']}")
+    out.append("")
+    out.append(
+        f"**The buffer field moved {bw['rows_the_buffer_moved']} of "
+        f"{payload['point_count']} points** — {bw['rows_improved_by_the_buffer']} "
+        f"closer to the measurement, {bw['rows_worsened_by_the_buffer']} further "
+        f"away, {bw['rows_untouched']} untouched.")
+    out.append("")
+    out.append(f"> {bw['why_so_many_are_untouched']}")
+    out.append("")
+    out.append("### Both ways, by family")
+    out.append("")
+    out.append("| family | points | completed median | completed in band | "
+               "as-was median | as-was in band |")
+    out.append("|---|---:|---:|---:|---:|---:|")
+    for name, block in sorted(bw["by_family"].items()):
+        out.append(
+            f"| `{name}` | {block['points']} | "
+            f"{_fmt(block['completed_median_fold'])}x | "
+            f"{block['completed_in_band']} | "
+            f"{_fmt(block['as_was_median_fold'])}x | {block['as_was_in_band']} |")
+    out.append("")
+    out.append("### Every point the buffer field moved")
+    out.append("")
+    out.append("| bundle | compound | buffer | provenance | as-was fold | "
+               "completed fold | |")
+    out.append("|---|---|---|---|---:|---:|---|")
+    _any_moved = False
+    for row in payload["rows"]:
+        if not row.get("buffer_moved_the_row"):
+            continue
+        _any_moved = True
+        better = row["core_fold_error"] < row["as_was_fold_error"]
+        molarity = row.get("buffer_concentration_M")
+        label = (f"{row.get('buffer_species')}"
+                 + (f" {molarity} M" if molarity else ""))
+        out.append(
+            f"| `{row['benchmark_id'][:46]}` | {row['compound'][:26]} | {label} | "
+            f"{row.get('buffer_provenance_class')} | "
+            f"{_fmt(row['as_was_fold_error'])}x | "
+            f"{_fmt(row['core_fold_error'])}x | "
+            f"{'closer' if better else '**further**'} |")
+    if not _any_moved:
+        out.append("| -- | -- | -- | -- | -- | -- | no row moved |")
     out.append("")
 
     out.append("## By bundle family")

@@ -101,7 +101,12 @@ from typing import Any, Dict, Mapping, Optional, Sequence, Tuple
 
 import numpy as np
 
-from .network import BALANCED_ELEMENTS, REACTIONS as TRUNK_REACTIONS, Reaction
+from .network import (
+    BALANCED_ELEMENTS,
+    REACTIONS as TRUNK_REACTIONS,
+    TRUNK_CENTRE_LEDGER,
+    Reaction,
+)
 from .parameters import KineticParameter
 from .parameters_sulfur import (
     MEASURED_SULFUR,
@@ -114,14 +119,17 @@ from .parameters_sulfur import (
     thiol_adduct_equilibrium_l_per_mmol,
 )
 from .ph_state import (
+    AMINE_FATE_BASIS,
     BUFFER_ABSENT_WARNING,
     DEFAULT_BUFFER,
     LABEL_TEMPERATURE_K,
     BufferSpec,
     PhDrift,
     buffer_capacity_mmol_per_ph,
+    centre_delta,
     ph_of_state,
     strong_ion_difference,
+    validate_charge_closure,
 )
 from .species_sulfur import (
     N_SULFUR_STATE,
@@ -212,7 +220,16 @@ OUT_OF_SCOPE: Tuple[Dict[str, str], ...] = (
 SULFUR_REACTIONS: Tuple[Reaction, ...] = (
     # ================= SULFUR SUPPLY =====================================
     Reaction(
-        "r_cys_h2s", {"Cys": 1}, {"H2S": 1, "FRAG_C": 3, "FRAG_N": 1}, "k_cys_h2s",
+        "r_cys_h2s", {"Cys": 1},
+        {"H2S": 1, "CBX": 1, "FRAG_C": 2, "FRAG_N": 1}, "k_cys_h2s",
+        "B2.3 CHARGE FIX: the products were {H2S, FRAG_C 3, FRAG_N 1}, which "
+        "deleted cysteine's alpha-carboxylate AND its ammonium into "
+        "untitratable pools. Cysteine's thermal beta-elimination route is "
+        "textbook -- H2S + NH3 + pyruvic acid -- so both centres have a named "
+        "destination and neither is invented: the carboxyl goes to CBX (as "
+        "pyruvate; CBX's declared pKa 4.25 approximates pyruvic acid's 2.49) "
+        "and the nitrogen leaves as NH3 -- whose FATE, not whose release, "
+        "is what CENTRE_LEDGER declares (ph_state.AMINE_FATE_BASIS). "
         "MEASURED, and the only pH-resolved rate in the module. Zheng & Ho 1994, "
         "first-order H2S release from aqueous cysteine at pH 3/5/7/9, 80-110 C, "
         "with the CORRECTED prefactors (9.8e11 / 1.9e12 / 2.4e13 / 1.0e12 1/s), "
@@ -220,8 +237,17 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
         "sulfide are unmeasured and are routed to FRAG_C / FRAG_N.",
     ),
     Reaction(
-        "r_cys_thermal", {"Cys": 1}, {"FRAG_C": 3, "FRAG_N": 1, "FRAG_S": 1},
+        "r_cys_thermal", {"Cys": 1},
+        {"CBX": 1, "FRAG_C": 2, "FRAG_N": 1, "FRAG_S": 1},
         "k_cys_thermal",
+        "B2.3 CHARGE FIX: the products were {FRAG_C 3, FRAG_N 1, FRAG_S 1}. "
+        "This step is a LUMP over cystine formation, non-sulfide degradation "
+        "and self-condensation, and the largest named member -- cystine -- "
+        "RETAINS both of cysteine's titratable centres, so carrying them is "
+        "the minimally-perturbing encoding as well as the conservative one. "
+        "At pH 5-8 a zwitterion's two centres nearly cancel, so this fix is "
+        "close to charge-neutral by construction; that it is close to neutral "
+        "is precisely why the pair had to move TOGETHER. "
         "B2.1, NEW, AND IT CARRIES A MEASURED ACTIVATION ENERGY. Kang 2026 SI "
         "Fig. S4 tracks FREE cysteine, 10 mmol/L, pH 7, sealed, and measures "
         "16.2% and 38.7% conversion by 120 min at 100 and 120 C -- the "
@@ -280,16 +306,33 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
         "~zero, so the data may reject it.",
     ),
     Reaction(
-        "r_arp_dpo", {"ARP": 1}, {"DPO": 1, "FRAG_C": 3, "FRAG_N": 1}, "k_arp_dpo",
+        "r_arp_dpo", {"ARP": 1},
+        {"DPO": 1, "CBX": 1, "FRAG_C": 2, "FRAG_N": 1}, "k_arp_dpo",
+        "B2.3 CHARGE FIX, AND THIS IS THE SITE B2.2's DIAGNOSIS DID NOT NAME. "
+        "sec. 3 listed the four cysteine sinks; it missed that all FOUR "
+        "Amadori enolisations delete the Amadori's own amino-acid moiety "
+        "(C3 N1 -- the alanine) into FRAG_C / FRAG_N, taking a carboxylate and "
+        "an ammonium with it. On Zhou's pot, whose entire charge inventory is "
+        "20 mmol/L of fed ARP, that is the DOMINANT leak, not a minor one. It "
+        "is also the mechanical reason the B2.2 fit drove the Amadori ammonium "
+        "pKa to 10.77 (diagnosis sec. 5 contradiction 2): a pKa that high "
+        "makes ARP electrically invisible, which is the cheapest way for an "
+        "optimiser to stop a leak it cannot repair. The liberated amino acid "
+        "acid's CARBOXYL goes to CBX, its amine centre is declared destroyed "
+        "in CENTRE_LEDGER, and the sugar residue stays in FRAG_C. "
         "The fed Amadori's 2,3-enolisation. Base-catalysed. Zhou 2023's feed "
         "partitions between this and r_arp_tdp, which is why MFT (this branch) "
         "and FFT (the acid branch) move in OPPOSITE pH directions in one pot.",
     ),
-    Reaction("r_arp_tdp", {"ARP": 1}, {"TDP": 1, "FRAG_C": 3, "FRAG_N": 1},
-             "k_arp_tdp", "The fed Amadori's 1,2-enolisation. Acid-catalysed."),
+    Reaction("r_arp_tdp", {"ARP": 1},
+             {"TDP": 1, "CBX": 1, "FRAG_C": 2, "FRAG_N": 1},
+             "k_arp_tdp", "The fed Amadori's 1,2-enolisation. Acid-catalysed. "
+                          "B2.3 charge fix, as r_arp_dpo."),
     Reaction(
-        "r_arp_tdp_thermal", {"ARP": 1}, {"TDP": 1, "FRAG_C": 3, "FRAG_N": 1},
+        "r_arp_tdp_thermal", {"ARP": 1},
+        {"TDP": 1, "CBX": 1, "FRAG_C": 2, "FRAG_N": 1},
         "k_arp_tdp_th",
+        "B2.3 charge fix, as r_arp_dpo. "
         "B2.1: THE UNCATALYSED 1,2-ENOLISATION OF THE FED AMADORI, and it is "
         "the fix for B2's dominant defect rather than a new chemical claim. If "
         "a product has exactly one route and that route is fully rate-limited "
@@ -304,9 +347,11 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
         "constants fitted on FIT rows -- not a pH parameter.",
     ),
     Reaction(
-        "r_arp_dpo_thermal", {"ARP": 1}, {"DPO": 1, "FRAG_C": 3, "FRAG_N": 1},
+        "r_arp_dpo_thermal", {"ARP": 1},
+        {"DPO": 1, "CBX": 1, "FRAG_C": 2, "FRAG_N": 1},
         "k_arp_dpo_th",
-        "The base-lane partner of r_arp_tdp_thermal, for the same reason.",
+        "The base-lane partner of r_arp_tdp_thermal, for the same reason. "
+        "B2.3 charge fix, as r_arp_dpo.",
     ),
     Reaction("r_dpo_nf", {"DPO": 1}, {"NF": 1}, "k_dpo_nf", ""),
     Reaction(
@@ -318,7 +363,17 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
     ),
     Reaction(
         "r_dpo_ddp", {"DPO": 1, "Cys": 1},
-        {"DDP": 1, "FRAG_C": 3, "FRAG_N": 1, "FRAG_S": 1}, "k_dpo_ddp",
+        {"DDP": 1, "CBX": 1, "FRAG_C": 2, "FRAG_N": 1, "FRAG_S": 1}, "k_dpo_ddp",
+        "B2.3 CHARGE FIX, AND IT IS THE ONE THE SOURCE WRITES OUT FOR US: "
+        "Nedvidek's own equation ends '+ RCHO + CO2 + NH3'. The CO2 is the "
+        "cysteine carboxyl leaving as an acid and the NH3 is its amino "
+        "nitrogen leaving. The CO2 half is transcription and goes to CBX; "
+        "the NH3 half is where the module must make a claim, and it makes "
+        "it in CENTRE_LEDGER on ph_state.AMINE_FATE_BASIS rather than here. "
+        "(CBX carries the mixture's pKa 4.25 against "
+        "carbonic acid's 6.35 -- the declared approximation on the CBX "
+        "species; a carbonate pool would need a CO2 partition model that no "
+        "bundle in this corpus supports.) "
         "Nedvidek 1992 Scheme 3: 1-deoxyosone + alpha-amino acid -> "
         "1,4-dideoxyosone + RCHO + CO2 + NH3, balance verified C7H13NO6 both "
         "sides for glycine. THE AMINO ACID IS A REAGENT: this step CONSUMES "
@@ -360,8 +415,14 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
     # ph_state.titratable_inventory, and it enters there scaled by the single
     # calibrated acid-yield fraction. Carbon balances step by step (the pool is
     # counted on a formic basis, 1 C, and the residue stays in FRAG_C).
-    Reaction("r_arp_decay", {"ARP": 1}, {"ACID": 1, "FRAG_C": 7, "FRAG_N": 1},
-             "k_osone_decay", ""),
+    Reaction("r_arp_decay", {"ARP": 1},
+             {"ACID": 1, "CBX": 1, "FRAG_C": 6, "FRAG_N": 1},
+             "k_osone_decay",
+             "B2.3 charge fix. The step keeps its ONE lumped-sink acid "
+             "equivalent (ACID, scaled by the fitted yield) and additionally "
+             "carries the Amadori's own amino-acid CARBOXYL into CBX at full "
+             "strength -- it is not a fraction of anything -- while its amine "
+             "centre is declared destroyed in CENTRE_LEDGER."),
     Reaction("r_osone_decay_dpo", {"DPO": 1}, {"ACID": 1, "FRAG_C": 4},
              "k_osone_decay", ""),
     Reaction("r_osone_decay_tdp", {"TDP": 1}, {"ACID": 1, "FRAG_C": 4},
@@ -451,7 +512,18 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
     ),
     # ================= 2-ACETYLTHIAZOLE ===================================
     Reaction(
-        "r_cys_actz", {"Cys": 1, "MGO": 1}, {"ACTZ": 1, "FRAG_C": 1}, "k_cys_actz",
+        "r_cys_actz", {"Cys": 1, "MGO": 1}, {"ACTZ": 1, "CBX": 1}, "k_cys_actz",
+        "B2.3 CHARGE FIX, AND IT IS THE ONE PLACE THE FIX IS ASYMMETRIC. The "
+        "carboxyl is CARRIED (thiazole formation from cysteine and a "
+        "dicarbonyl is a decarboxylation, so the group leaves as CO2 and "
+        "lands in CBX -- it replaces the FRAG_C 1 the step used to emit). The "
+        "AMINE IS NOT CARRIED AND MUST NOT BE: the cysteine nitrogen ends up "
+        "in the THIAZOLE RING of the product, already accounted by the "
+        "nitrogen balance, and a thiazolium's pKa near 2.5 is outside this "
+        "module's window. That centre is genuinely destroyed and the step "
+        "genuinely releases a proton. CENTRE_LEDGER declares the -1 rather "
+        "than depositing a titratable amine equivalent that would "
+        "manufacture base. "
         "Zhou 2023 measures 2-acetylthiazole in BOTH an ARP-fed and an MGO-fed "
         "system at pH 8 (582 vs 665 ug/L). That pair is a step-level, "
         "two-system constraint on the ARP -> MGO flux with no free downstream "
@@ -469,8 +541,19 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
     ),
     Reaction(
         "r_ttca_deg", {"TTCA": 1},
-        {"DPO": 1, "ACID": 1, "FRAG_C": 2, "FRAG_N": 1, "FRAG_S": 1},
+        {"DPO": 1, "CBX": 1, "FRAG_C": 2, "FRAG_N": 1, "FRAG_S": 1},
         "k_ttca_deg",
+        "B2.3 CHANGES B2.2's FIX IN TWO WAYS AND BOTH ARE DELIBERATE. (i) The "
+        "acid equivalent moves from ACID to CBX: TTCA's carboxyl is a carried "
+        "certainty, not a fraction of the lumped osone sink, so it must not "
+        "be multiplied by the fitted acid yield -- B2.2 had it scaled by "
+        "0.968 for no stated reason. (ii) The ring nitrogen's centre is now "
+        "DECLARED DESTROYED in CENTRE_LEDGER instead of being dropped into "
+        "FRAG_N in silence. This step leans on that declaration LESS than any "
+        "other, which is worth stating because Kang's whole ladder runs on "
+        "it: TTCA's ring nitrogen is a secondary amine of pKa 6.24, already "
+        "only ~15% protonated at Kang's initial pH 7, where an alpha-ammonium "
+        "would be essentially fully protonated. "
         "B2.1: TTCA's OTHER fate, and it is what the 16.3 mol% ceiling is made "
         "of. Peak free cysteine is 1.63 mmol/L against 10 mmol/L TTCA charged, "
         "so >=84% of the cysteine moiety leaves by a route that never passes "
@@ -616,6 +699,113 @@ SULFUR_REACTIONS: Tuple[Reaction, ...] = (
 FULL_REACTIONS: Tuple[Reaction, ...] = TRUNK_REACTIONS + SULFUR_REACTIONS
 FULL_REACTION_KEYS: Tuple[str, ...] = tuple(r.key for r in FULL_REACTIONS)
 
+
+# ---------------------------------------------------------------------------
+# B2.3: THE CENTRE LEDGER -- every step that moves a titratable centre, and why
+# ---------------------------------------------------------------------------
+# `ph_state.validate_charge_closure` refuses the import unless this table
+# matches the stoichiometry above EXACTLY: every step whose net carboxyl or
+# amine count is non-zero appears here with that delta and a written basis, and
+# no entry here describes a step that moves nothing. After the B2.3 fix every
+# entry falls into one of three classes, and the fact that the FOURTH class is
+# EMPTY is the whole result:
+#
+#   * CREATION of a neutral acid from neutral precursors -- the trunk's
+#     measured Martins acids, and the lumped osone sink. Charge-balanced as
+#     written; the dissociation belongs to the equilibrium, not to the
+#     stoichiometry.
+#   * DECLARED DESTRUCTION of a liberated amino nitrogen, on the shared
+#     ph_state.AMINE_FATE_BASIS -- a chemistry claim with a measured basis and
+#     a named error direction, not an exemption.
+#   * DECLARED DESTRUCTION of one nitrogen into a thiazole ring (r_cys_actz),
+#     whose basis is the product's own pKa.
+#   * ZERO undeclared deletions of a carboxylate or an amine. That class is
+#     what B2.2's diagnosis sec. 3 named four members of and this wave's audit
+#     found fourteen of; it is now empty, and it cannot be refilled without
+#     this table refusing the import.
+
+CENTRE_LEDGER: Mapping[str, Mapping[str, Any]] = {
+    # ---- B1 trunk: Martins' MEASURED acid-forming steps -------------------
+    # Reused verbatim from network.TRUNK_CENTRE_LEDGER so a trunk step is
+    # declared in exactly one place.
+    **TRUNK_CENTRE_LEDGER,
+    # ---- the LUMPED deoxyosone sink ---------------------------------------
+    # These five are why `ACID` exists at all and why its yield is the pH
+    # model's one calibrated constant: Martins measures that PART of the
+    # deoxyosone flux terminates as formic/acetic acid and part as browning
+    # polymer, and nothing in the corpus measures the pentose analogue's split.
+    "r_arp_decay": {"carboxyl": +1, "basis": (
+        "ONE lumped-sink acid equivalent (ACID), on the analogy of Martins' "
+        "measured steps 5 and 8. The Amadori's OWN carboxyl and amine are "
+        "separately CARRIED into CBX, so the +1 here is "
+        "the sink's new acid and nothing else.")},
+    "r_osone_decay_dpo": {"carboxyl": +1, "basis": (
+        "the lumped deoxyosone sink's acid equivalent; see r_arp_decay.")},
+    "r_osone_decay_tdp": {"carboxyl": +1, "basis": (
+        "the lumped deoxyosone sink's acid equivalent; see r_arp_decay.")},
+    "r_osone_decay_ddp": {"carboxyl": +1, "basis": (
+        "the lumped deoxyosone sink's acid equivalent; see r_arp_decay.")},
+    "r_ptr_decay": {"carboxyl": +1, "basis": (
+        "the lumped deoxyosone sink's acid equivalent; see r_arp_decay.")},
+    # ---- THE DECLARED AMINE DESTRUCTIONS ----------------------------------
+    # Eight steps liberate an amino nitrogen, and every one of them declares
+    # the centre destroyed on the SAME shared basis (ph_state.AMINE_FATE_BASIS)
+    # rather than on eight separate hand-waves. Their CARBOXYL halves are all
+    # carried into CBX, which is the half B2.2 was measured deleting.
+    #
+    # ASYMMETRY IS THE POINT. B2.2's diagnosis sec. 3 said "carry the
+    # carboxylate"; taken alone that would MANUFACTURE ACID, because an
+    # alpha-amino acid at pH 5-8 is a zwitterion whose two centres nearly
+    # cancel. B2.3 does not take it alone: the amine's fate is stated, its
+    # evidence is named, and the direction of the error if the statement is
+    # wrong is named too.
+    "r_cys_h2s": {"amine": -1, "basis": (
+        "cysteine thermolysis, Zheng & Ho's route: H2S + NH3 + pyruvic acid. "
+        "The carboxyl is CARRIED (CBX, as pyruvate). " + AMINE_FATE_BASIS)},
+    "r_cys_thermal": {"amine": -1, "basis": (
+        "Kang's lumped non-sulfide cysteine consumption (cystine formation, "
+        "self-condensation, degradation). Carboxyl CARRIED. " + AMINE_FATE_BASIS)},
+    "r_dpo_ddp": {"amine": -1, "basis": (
+        "Nedvidek 1992 Scheme 3 writes the leaving groups out: '+ RCHO + CO2 "
+        "+ NH3'. The CO2 is the carboxyl and it is CARRIED (CBX). The NH3 is "
+        "released and is exactly the nitrogen the shared basis is about -- "
+        "released, then consumed by the Maillard chemistry this step is part "
+        "of. " + AMINE_FATE_BASIS)},
+    "r_arp_dpo": {"amine": -1, "basis": (
+        "the Amadori's amino-acid moiety leaves in the 2,3-enolisation. "
+        "Carboxyl CARRIED. " + AMINE_FATE_BASIS)},
+    "r_arp_tdp": {"amine": -1, "basis": (
+        "as r_arp_dpo, 1,2-enolisation. " + AMINE_FATE_BASIS)},
+    "r_arp_dpo_thermal": {"amine": -1, "basis": (
+        "as r_arp_dpo, uncatalysed. " + AMINE_FATE_BASIS)},
+    "r_arp_tdp_thermal": {"amine": -1, "basis": (
+        "as r_arp_tdp, uncatalysed. " + AMINE_FATE_BASIS)},
+    "r_ttca_deg": {"amine": -1, "basis": (
+        "TTCA's thiazolidine ring opens and its nitrogen leaves with the C2S1 "
+        "residue. Carboxyl CARRIED (CBX, at FULL strength -- B2.2 put it in "
+        "ACID, where the fitted acid yield scaled a stoichiometric "
+        "certainty). NOTE, because this step is the one Kang's whole ladder "
+        "runs on: the ring nitrogen is a SECONDARY AMINE of pKa 6.24, i.e. "
+        "already only ~15% protonated at Kang's initial pH 7, so this "
+        "particular declaration moves less charge than the alpha-ammonium "
+        "ones do. " + AMINE_FATE_BASIS)},
+    "r_arp_decay": {"carboxyl": +1, "amine": -1, "basis": (
+        "TWO movements in one step and they are unrelated. The +1 carboxyl is "
+        "the LUMPED SINK's own new acid (ACID, scaled by the fitted yield), on "
+        "the analogy of Martins' measured steps 5 and 8. The -1 amine is the "
+        "Amadori's amino-acid nitrogen leaving; its carboxyl is separately "
+        "CARRIED into CBX at full strength. " + AMINE_FATE_BASIS)},
+    "r_cys_actz": {"amine": -1, "basis": (
+        "THE ONE DESTRUCTION THAT NEEDS NO SHARED BASIS, because the product "
+        "itself is the evidence: the cysteine nitrogen is in the THIAZOLE RING "
+        "of 2-acetylthiazole (the atom balance carries it there) and a "
+        "thiazolium's conjugate acid sits near pKa 2.5, below anything these "
+        "pots reach. The centre is destroyed at the moment of ring closure and "
+        "the step releases a proton equivalent. Its carboxyl IS carried (CBX): "
+        "thiazole formation from cysteine and a dicarbonyl is a "
+        "decarboxylation.")},
+}
+
 #: Which pH factor multiplies which reaction. Assigning a step to a factor is a
 #: MECHANISM claim (acid- or base-catalysed enolisation, sulfide nucleophile)
 #: and carries no fitted number; see parameters_sulfur.ph_factor.
@@ -695,6 +885,15 @@ def validate_sulfur_balance(
 
 
 validate_sulfur_balance()
+
+#: B2.3: THE FOURTH IMPORT-TIME INVARIANT, alongside carbon, nitrogen and
+#: sulfur. It walks the WHOLE network -- B1's trunk and the sulfur block -- and
+#: refuses the import unless every step's titratable-centre movement is
+#: declared in CENTRE_LEDGER. Making this an import-time invariant rather than
+#: a test is deliberate: the B2.2 defect survived a full unit suite because
+#: nothing in the suite knew to look for it, and a module that will not load is
+#: a stronger guarantee than a test somebody has to remember to run.
+validate_charge_closure(FULL_REACTIONS, CENTRE_LEDGER)
 
 
 def sulfur_stoichiometric_matrix(
@@ -1311,6 +1510,12 @@ def describe_sulfur() -> Dict[str, object]:
                 "carbon_balance": list(r.atom_balance("carbon", SULFUR_BY_KEY)),
                 "nitrogen_balance": list(r.atom_balance("nitrogen", SULFUR_BY_KEY)),
                 "sulfur_balance": list(r.atom_balance("sulfur", SULFUR_BY_KEY)),
+                # B2.3: the FOURTH invariant, per step. Zero for both centres
+                # means the step moves no titratable capacity; anything else
+                # must match CENTRE_LEDGER or the module will not import.
+                "titratable_centre_delta": centre_delta(r.reactants, r.products),
+                "centre_ledger_basis": (
+                    CENTRE_LEDGER.get(r.key, {}).get("basis")),
                 "note": r.note,
             }
             for r in FULL_REACTIONS
