@@ -480,8 +480,28 @@ scratch/
 !results/validation/prefactor_audit.json
 !results/validation/prefactor_audit.md
 
+# -- Wave B2.4 and B8 member archives & reports
+!results/validation/kinetic_core_b2_4_members/
+!results/validation/kinetic_core_b2_4_members/**
+!results/validation/kinetic_core_b8_prereg.md
+!results/validation/kinetic_core_b8_fit_report.json
+!results/validation/kinetic_core_b8_fit_report.md
+!results/validation/kinetic_core_b8_holdout_report.json
+!results/validation/kinetic_core_b8_holdout_report.md
+!results/validation/kinetic_core_b8_exam.json
+!results/validation/kinetic_core_b8_exam_physics_only.json
+!results/validation/kinetic_core_b8_panel.json
+!results/validation/kinetic_core_b8_panel_physics_only.json
+!results/validation/kinetic_core_b8_members/
+!results/validation/kinetic_core_b8_members/**
+
+# Generated HTML assets and legacy validation cases
+docs/assets/*.html
+data/reactions/rmg_validation_cases/
+
 # 2026-08-30: xTB path-search working outputs stay local-only (no-DFT policy;
 # the compute lane is closed — these are inert leftovers, not provenance)
 data/geometries/multistep/
 data/geometries/xtb_inputs/asparagine_sugar_explicit_water_cluster/
 data/geometries/xtb_inputs/pe_amadori_water/
+
