@@ -74,6 +74,7 @@ reports/
 results/*
 !results/validation/
 !results/validation/**
+!results/maillard_results.db
 
 # xTB & QM scratch outputs
 xtbopt.log
