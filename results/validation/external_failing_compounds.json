@@ -1,0 +1,20 @@
+{
+  "external_failing_compounds": [
+    {
+      "compound": "1-hexanol",
+      "mean_abs_log10_error": 3.0482397138082113,
+      "n_holdout_observations": 1
+    },
+    {
+      "compound": "hexanal",
+      "mean_abs_log10_error": 1.6263924055377275,
+      "n_holdout_observations": 4
+    },
+    {
+      "compound": "nonanal",
+      "mean_abs_log10_error": 2.0235888459263807,
+      "n_holdout_observations": 2
+    }
+  ],
+  "external_failing_threshold_dex": 1.0
+}

@@ -1,0 +1,558 @@
+{
+  "artifact": "holdout_prepost_barrier_offset_retirement",
+  "wave": "R1",
+  "generated_on": "2026-08-28",
+  "what_changed": "The auto-accepted +/-3.0 kcal/mol barrier offsets in data/lit/refinement_surrogate_patches.json were retired on 2026-08-28. They had been applied by src.barrier_constants.get_barrier() to every shipped prediction, silently overriding the audited FAST_BARRIERS table. The 'before' arm reconstructs them through the BARRIER_OFFSETS environment variable in a subprocess; no file was restored and no hold-out was regenerated or re-frozen.",
+  "barriers": {
+    "before": {
+      "Schiff_Base_Formation": 18.0,
+      "Retro_Aldol_Fragmentation": 29.0,
+      "Thiol_Addition": 31.6,
+      "Thiol_Addition_Pentodiulose": 28.6,
+      "Thiol_Addition_Hexose": 29.65,
+      "Amadori_Rearrangement": 23.0
+    },
+    "after": {
+      "Schiff_Base_Formation": 15.0,
+      "Retro_Aldol_Fragmentation": 32.0,
+      "Thiol_Addition": 28.6,
+      "Thiol_Addition_Pentodiulose": 28.6,
+      "Thiol_Addition_Hexose": 29.65,
+      "Amadori_Rearrangement": 23.0
+    }
+  },
+  "maillard_path": {
+    "baseline_file": "results/validation/maillard_path_holdout_frozen_predictions.json",
+    "baseline_commit": "12f43dd",
+    "frozen_summary": {
+      "bundle_count": 12,
+      "target_count": 22,
+      "quantitatively_scored_count": 21,
+      "ordinal_only_count": 0,
+      "structural_zero_count": 1,
+      "median_fold_error": 6.038752949192657,
+      "worst_fold_error": 52.58641429978577,
+      "best_fold_error": 1.5167561508937306,
+      "median_abs_log10_error": 0.7809472625943955,
+      "within_10x": 12,
+      "within_10x_rate": 0.5714285714285714,
+      "ordinal_pairs_correct": 8,
+      "ordinal_pairs_total": 12,
+      "series_directions_correct": 3,
+      "series_directions_total": 6
+    },
+    "summary_before": {
+      "bundle_count": 17,
+      "target_count": 32,
+      "quantitatively_scored_count": 31,
+      "ordinal_only_count": 0,
+      "structural_zero_count": 1,
+      "median_fold_error": 10.046216420836181,
+      "worst_fold_error": 565.2249476173552,
+      "best_fold_error": 1.2516083565659506,
+      "median_abs_log10_error": 1.0020025297226467,
+      "within_10x": 15,
+      "within_10x_rate": 0.4838709677419355,
+      "ordinal_pairs_correct": 10,
+      "ordinal_pairs_total": 17,
+      "series_directions_correct": 3,
+      "series_directions_total": 6
+    },
+    "summary_after": {
+      "bundle_count": 17,
+      "target_count": 32,
+      "quantitatively_scored_count": 31,
+      "ordinal_only_count": 0,
+      "structural_zero_count": 1,
+      "median_fold_error": 10.86381837964712,
+      "worst_fold_error": 506.424391151322,
+      "best_fold_error": 1.2435497830531987,
+      "median_abs_log10_error": 1.0359824965004563,
+      "within_10x": 15,
+      "within_10x_rate": 0.4838709677419355,
+      "ordinal_pairs_correct": 10,
+      "ordinal_pairs_total": 17,
+      "series_directions_correct": 3,
+      "series_directions_total": 6
+    },
+    "targets_moved_by_the_retirement": 31,
+    "targets_total": 32,
+    "targets_differing_from_the_freeze_before": 21,
+    "targets_differing_from_the_freeze_after": 8,
+    "frozen_target_count": 22,
+    "rows": [
+      {
+        "target": "mp_holdout_fructose_asparagine_180C_Lin2022 / 5-Hydroxymethylfurfural (HMF)",
+        "before": 61256.58854712403,
+        "after": 61206.665187108825,
+        "moved": true,
+        "ratio": 0.9991850124011264
+      },
+      {
+        "target": "mp_holdout_fructose_asparagine_180C_Lin2022 / Acrylamide",
+        "before": 100.6405141139846,
+        "after": 100.5584933430374,
+        "moved": true,
+        "ratio": 0.999185012401126
+      },
+      {
+        "target": "mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019 / 5-Hydroxymethylfurfural (HMF)",
+        "before": 24224.74730340632,
+        "after": 24232.973694254357,
+        "moved": true,
+        "ratio": 1.0003395862398483
+      },
+      {
+        "target": "mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019 / DMHF",
+        "before": 6980.414851735356,
+        "after": 6963.708738420496,
+        "moved": true,
+        "ratio": 0.9976067162669126
+      },
+      {
+        "target": "mp_holdout_glucose_alanine_130C_2h_pH50_Schibilsky2019 / Furfural",
+        "before": 18457.03265098045,
+        "after": 18463.30040529716,
+        "moved": true,
+        "ratio": 1.0003395862398485
+      },
+      {
+        "target": "mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019 / 5-Hydroxymethylfurfural (HMF)",
+        "before": 18763.66340086791,
+        "after": 18763.669018766024,
+        "moved": true,
+        "ratio": 1.0000002994030532
+      },
+      {
+        "target": "mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019 / DMHF",
+        "before": 17263.1400358876,
+        "after": 17263.137376539737,
+        "moved": true,
+        "ratio": 0.9999998459522509
+      },
+      {
+        "target": "mp_holdout_glucose_alanine_130C_2h_pH80_Schibilsky2019 / Furfural",
+        "before": 14296.188261709078,
+        "after": 14296.192542031491,
+        "moved": true,
+        "ratio": 1.000000299403053
+      },
+      {
+        "target": "mp_holdout_glucose_asparagine_180C_10min_Chang2021 / Acrylamide",
+        "before": 61.632600038323545,
+        "after": 61.32083711913466,
+        "moved": true,
+        "ratio": 0.9949415906680064
+      },
+      {
+        "target": "mp_holdout_glucose_asparagine_180C_30min_Chang2021 / Acrylamide",
+        "before": 76.38051268546343,
+        "after": 76.03662871126568,
+        "moved": true,
+        "ratio": 0.9954977524749817
+      },
+      {
+        "target": "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021 / 5-Hydroxymethylfurfural (HMF)",
+        "before": 43127.960390634085,
+        "after": 43128.26545648947,
+        "moved": true,
+        "ratio": 1.0000070735052764
+      },
+      {
+        "target": "mp_holdout_glucose_asparagine_180C_30min_water_Chang2021 / Acrylamide",
+        "before": 76.38051268546343,
+        "after": 76.03662871126568,
+        "moved": true,
+        "ratio": 0.9954977524749817
+      },
+      {
+        "target": "mp_holdout_glucose_asparagine_180C_Ye2024 / Acrylamide",
+        "before": 80.42236507503539,
+        "after": 80.37784396410122,
+        "moved": true,
+        "ratio": 0.9994464088330077
+      },
+      {
+        "target": "mp_holdout_glucose_only_autoclave_121C_Steinhagen2021 / 5-Hydroxymethylfurfural (HMF)",
+        "before": 0.0,
+        "after": 0.0,
+        "moved": false,
+        "ratio": null
+      },
+      {
+        "target": "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3 / 2-Furfurylthiol (FFT)",
+        "before": 668.9628212188949,
+        "after": 951.2336861844602,
+        "moved": true,
+        "ratio": 1.421952993518009
+      },
+      {
+        "target": "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH3 / 2-Methyl-3-furanthiol (MFT)",
+        "before": 1695.6748428520655,
+        "after": 1519.2731734539661,
+        "moved": true,
+        "ratio": 0.8959696370199148
+      },
+      {
+        "target": "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7 / 2-Furfurylthiol (FFT)",
+        "before": 286.08010076297023,
+        "after": 343.3846616459265,
+        "moved": true,
+        "ratio": 1.200309496291864
+      },
+      {
+        "target": "mp_holdout_hofmann1998_glucose_cysteine_145C_20min_pH7 / 2-Methyl-3-furanthiol (MFT)",
+        "before": 15.739405761335755,
+        "after": 22.85016652484176,
+        "moved": true,
+        "ratio": 1.4517807642378575
+      },
+      {
+        "target": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 / 2-Furfurylthiol (FFT)",
+        "before": 1021.2251647866073,
+        "after": 1408.6073192185615,
+        "moved": true,
+        "ratio": 1.379330795782829
+      },
+      {
+        "target": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 / 2-Methyl-3-furanthiol (MFT)",
+        "before": 3079.791124153851,
+        "after": 2877.6790322772144,
+        "moved": true,
+        "ratio": 0.9343747404518659
+      },
+      {
+        "target": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 / 2-Furfurylthiol (FFT)",
+        "before": 523.236359715624,
+        "after": 624.7049120085096,
+        "moved": true,
+        "ratio": 1.1939248876894435
+      },
+      {
+        "target": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 / 2-Methyl-3-furanthiol (MFT)",
+        "before": 321.35616550940273,
+        "after": 316.2148423999873,
+        "moved": true,
+        "ratio": 0.9840011686059746
+      },
+      {
+        "target": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 / 2-Furfurylthiol (FFT)",
+        "before": 1168.300166579016,
+        "after": 1428.7609804916851,
+        "moved": true,
+        "ratio": 1.2229399784092674
+      },
+      {
+        "target": "mp_holdout_hofmann1998_xylose_cysteine_145C_20min_pH5 / 2-Methyl-3-furanthiol (MFT)",
+        "before": 750.8979582908679,
+        "after": 713.7397042744561,
+        "moved": true,
+        "ratio": 0.9505149087087834
+      },
+      {
+        "target": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026 / 2-Furfurylthiol (FFT)",
+        "before": 12.859157018670311,
+        "after": 15.43934132907918,
+        "moved": true,
+        "ratio": 1.2006495687596535
+      },
+      {
+        "target": "mp_holdout_ribose_cysteine_buffer_100C_4h_Yiltirak2026 / 2-Methyl-3-furanthiol (MFT)",
+        "before": 8.61106549317374,
+        "after": 8.555622507406007,
+        "moved": true,
+        "ratio": 0.9935614256085168
+      },
+      {
+        "target": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026 / 2-Furfurylthiol (FFT)",
+        "before": 27.706237580584506,
+        "after": 33.174756204391144,
+        "moved": true,
+        "ratio": 1.197374999326461
+      },
+      {
+        "target": "mp_holdout_ribose_cysteine_buffer_110C_2h_Yiltirak2026 / 2-Methyl-3-furanthiol (MFT)",
+        "before": 15.861351598660129,
+        "after": 15.70902971000651,
+        "moved": true,
+        "ratio": 0.990396664010242
+      },
+      {
+        "target": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026 / 2-Furfurylthiol (FFT)",
+        "before": 51.336216631630634,
+        "after": 61.28098212094799,
+        "moved": true,
+        "ratio": 1.1937183170446168
+      },
+      {
+        "target": "mp_holdout_ribose_cysteine_buffer_120C_1h_Yiltirak2026 / 2-Methyl-3-furanthiol (MFT)",
+        "before": 26.423703219729806,
+        "after": 26.073164111153087,
+        "moved": true,
+        "ratio": 0.9867339144077663
+      },
+      {
+        "target": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026 / 2-Furfurylthiol (FFT)",
+        "before": 70.43279942797523,
+        "after": 83.9926871854059,
+        "moved": true,
+        "ratio": 1.1925223456622231
+      },
+      {
+        "target": "mp_holdout_ribose_cysteine_buffer_130C_30min_Yiltirak2026 / 2-Methyl-3-furanthiol (MFT)",
+        "before": 37.296255755302376,
+        "after": 36.734806615858105,
+        "moved": true,
+        "ratio": 0.9849462331251724
+      }
+    ]
+  },
+  "matrix_eight_point": {
+    "summary_before": {
+      "n_samples": 200,
+      "seed": 0,
+      "benchmark_count": 4,
+      "matched_compound_count": 8,
+      "ci_coverage_hits": 3,
+      "ci_coverage_rate": 0.375,
+      "ci_level_pct": 90,
+      "signal_origin_split": {
+        "external_literature": {
+          "hits": 3,
+          "total": 8,
+          "not_evaluable": 0,
+          "median_ci_width_log10": 4.0176770887691,
+          "ci_coverage_rate": 0.375
+        },
+        "internal_synthetic": {
+          "hits": 0,
+          "total": 0,
+          "not_evaluable": 0,
+          "median_ci_width_log10": null,
+          "ci_coverage_rate": null
+        },
+        "fitted_row": {
+          "hits": 0,
+          "total": 0,
+          "not_evaluable": 0,
+          "median_ci_width_log10": null,
+          "ci_coverage_rate": null
+        }
+      },
+      "honest_literature_coverage": {
+        "hits": 3,
+        "total": 8,
+        "rate": 0.375,
+        "not_evaluable": 0,
+        "median_ci_width_log10": 4.0176770887691,
+        "excluded_fitted_rows": 0,
+        "excluded_fitted_rows_that_would_have_been_hits": 0,
+        "definition": "External-literature rows only, with fitted rows (constants back-solved from the benchmark) and internal synthetic reproducibility rows removed from BOTH numerator and denominator. Read it together with median_ci_width_log10: a wide interval covering a measurement is a weak claim."
+      },
+      "holdout_kind_split": {
+        "genuine_extrapolation": {
+          "hits": 1,
+          "total": 5,
+          "rate": 0.2,
+          "benchmarks": [
+            "external_validation_bi_2020_roasted_pea_hexanal",
+            "external_validation_li_2026_spi_wg_hme_control"
+          ],
+          "meaning": "Bundles at a process state the calibration panel does not contain (roasting, HME extrusion). These are the only rows that test transfer."
+        },
+        "in_panel_rescoring": {
+          "hits": 2,
+          "total": 3,
+          "rate": 0.6666666666666666,
+          "meaning": "Bundles whose executable conditions are COPIED from an in-panel benchmark. Scoring them re-runs that anchor's prediction at that anchor's own conditions; it is a reproducibility comparison, not an extrapolation test."
+        }
+      },
+      "value_provenance_split": {
+        "counts": {
+          "primary_source_table_value_verified": 2,
+          "reported_point_value": 4,
+          "band_geometric_midpoint": 2
+        },
+        "direct_measurement": {
+          "hits": 1,
+          "total": 4,
+          "rate": 0.25
+        },
+        "derived_or_constructed": {
+          "hits": 2,
+          "total": 4,
+          "rate": 0.5
+        },
+        "note": "`band_geometric_midpoint` rows score against a number WE constructed as sqrt(min*max) of a reported range; `derived_from_oav_and_repo_threshold` rows score against the source's OAV multiplied by this repo's own (compilation-level, primary-table-unverified) hexanal odour threshold of 4.5 ppb. Only `reported_point_value` rows are external measurements in the ordinary sense."
+      },
+      "holdout_benchmark_count": 4,
+      "median_abs_log10_error": 1.9716640742121445,
+      "median_accuracy_fold": 93.68370852579324,
+      "max_fold_error": 2474.3859765332954,
+      "evidence_class": "external_validation_only",
+      "benchmark_dir": "/Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/external_validation",
+      "pre_widening_coverage": {
+        "matrix_sigma": 2.0,
+        "ci_coverage_hits": 3,
+        "matched_compound_count": 8,
+        "ci_coverage_rate": 0.375,
+        "genuine_extrapolation_hits": 1,
+        "genuine_extrapolation_total": 5,
+        "why": "The uncalibrated matrix ln-sigma was raised 2.0 -> 2.86 on 2026-08-26. Coverage at the SHIPPED sigma is therefore not comparable with any earlier run of this report. This row re-scores the identical hold-out at the pre-widening sigma so the difference between 'the model got better' and 'the interval got wider' is visible rather than inferred. Read the median fold error, which no prior can change, alongside both."
+      }
+    },
+    "summary_after": {
+      "n_samples": 200,
+      "seed": 0,
+      "benchmark_count": 4,
+      "matched_compound_count": 8,
+      "ci_coverage_hits": 3,
+      "ci_coverage_rate": 0.375,
+      "ci_level_pct": 90,
+      "signal_origin_split": {
+        "external_literature": {
+          "hits": 3,
+          "total": 8,
+          "not_evaluable": 0,
+          "median_ci_width_log10": 4.0176770887691,
+          "ci_coverage_rate": 0.375
+        },
+        "internal_synthetic": {
+          "hits": 0,
+          "total": 0,
+          "not_evaluable": 0,
+          "median_ci_width_log10": null,
+          "ci_coverage_rate": null
+        },
+        "fitted_row": {
+          "hits": 0,
+          "total": 0,
+          "not_evaluable": 0,
+          "median_ci_width_log10": null,
+          "ci_coverage_rate": null
+        }
+      },
+      "honest_literature_coverage": {
+        "hits": 3,
+        "total": 8,
+        "rate": 0.375,
+        "not_evaluable": 0,
+        "median_ci_width_log10": 4.0176770887691,
+        "excluded_fitted_rows": 0,
+        "excluded_fitted_rows_that_would_have_been_hits": 0,
+        "definition": "External-literature rows only, with fitted rows (constants back-solved from the benchmark) and internal synthetic reproducibility rows removed from BOTH numerator and denominator. Read it together with median_ci_width_log10: a wide interval covering a measurement is a weak claim."
+      },
+      "holdout_kind_split": {
+        "genuine_extrapolation": {
+          "hits": 1,
+          "total": 5,
+          "rate": 0.2,
+          "benchmarks": [
+            "external_validation_bi_2020_roasted_pea_hexanal",
+            "external_validation_li_2026_spi_wg_hme_control"
+          ],
+          "meaning": "Bundles at a process state the calibration panel does not contain (roasting, HME extrusion). These are the only rows that test transfer."
+        },
+        "in_panel_rescoring": {
+          "hits": 2,
+          "total": 3,
+          "rate": 0.6666666666666666,
+          "meaning": "Bundles whose executable conditions are COPIED from an in-panel benchmark. Scoring them re-runs that anchor's prediction at that anchor's own conditions; it is a reproducibility comparison, not an extrapolation test."
+        }
+      },
+      "value_provenance_split": {
+        "counts": {
+          "primary_source_table_value_verified": 2,
+          "reported_point_value": 4,
+          "band_geometric_midpoint": 2
+        },
+        "direct_measurement": {
+          "hits": 1,
+          "total": 4,
+          "rate": 0.25
+        },
+        "derived_or_constructed": {
+          "hits": 2,
+          "total": 4,
+          "rate": 0.5
+        },
+        "note": "`band_geometric_midpoint` rows score against a number WE constructed as sqrt(min*max) of a reported range; `derived_from_oav_and_repo_threshold` rows score against the source's OAV multiplied by this repo's own (compilation-level, primary-table-unverified) hexanal odour threshold of 4.5 ppb. Only `reported_point_value` rows are external measurements in the ordinary sense."
+      },
+      "holdout_benchmark_count": 4,
+      "median_abs_log10_error": 1.9716640742121445,
+      "median_accuracy_fold": 93.68370852579324,
+      "max_fold_error": 2474.3859765332954,
+      "evidence_class": "external_validation_only",
+      "benchmark_dir": "/Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/external_validation",
+      "pre_widening_coverage": {
+        "matrix_sigma": 2.0,
+        "ci_coverage_hits": 3,
+        "matched_compound_count": 8,
+        "ci_coverage_rate": 0.375,
+        "genuine_extrapolation_hits": 1,
+        "genuine_extrapolation_total": 5,
+        "why": "The uncalibrated matrix ln-sigma was raised 2.0 -> 2.86 on 2026-08-26. Coverage at the SHIPPED sigma is therefore not comparable with any earlier run of this report. This row re-scores the identical hold-out at the pre-widening sigma so the difference between 'the model got better' and 'the interval got wider' is visible rather than inferred. Read the median fold error, which no prior can change, alongside both."
+      }
+    },
+    "targets_moved_by_the_retirement": 0,
+    "targets_total": 8,
+    "rows": [
+      {
+        "target": "external_validation_bi_2020_raw_pea_hexanal / hexanal",
+        "before": 1013.0759346863279,
+        "after": 1013.0759346863279,
+        "moved": false,
+        "ratio": 1.0
+      },
+      {
+        "target": "external_validation_bi_2020_roasted_pea_hexanal / hexanal",
+        "before": 801701.0563967878,
+        "after": 801701.0563967878,
+        "moved": false,
+        "ratio": 1.0
+      },
+      {
+        "target": "external_validation_li_2026_spi_wg_hme_control / 1-hexanol",
+        "before": 22394.29686318585,
+        "after": 22394.29686318585,
+        "moved": false,
+        "ratio": 1.0
+      },
+      {
+        "target": "external_validation_li_2026_spi_wg_hme_control / 2-pentylfuran",
+        "before": 11038.555615711428,
+        "after": 11038.555615711428,
+        "moved": false,
+        "ratio": 1.0
+      },
+      {
+        "target": "external_validation_li_2026_spi_wg_hme_control / hexanal",
+        "before": 56409.86610754674,
+        "after": 56409.86610754674,
+        "moved": false,
+        "ratio": 1.0
+      },
+      {
+        "target": "external_validation_li_2026_spi_wg_hme_control / nonanal",
+        "before": 8596.350987797654,
+        "after": 8596.350987797654,
+        "moved": false,
+        "ratio": 1.0
+      },
+      {
+        "target": "external_validation_liu_2023_ppi_offnote_baseline / hexanal",
+        "before": 1013.0759346863279,
+        "after": 1013.0759346863279,
+        "moved": false,
+        "ratio": 1.0
+      },
+      {
+        "target": "external_validation_liu_2023_ppi_offnote_baseline / nonanal",
+        "before": 75.54835248430304,
+        "after": 75.54835248430304,
+        "moved": false,
+        "ratio": 1.0
+      }
+    ]
+  }
+}

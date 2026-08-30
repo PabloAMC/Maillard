@@ -1,0 +1,278 @@
+{
+  "summary": {
+    "protocol_id": "ppi_spi_ribose_cysteine_primary_benchmark_2026",
+    "selected_matrix": "pea_iso",
+    "selected_benchmark_id": "pea_isolate_ribose_cysteine_100C_45min_Internal2026",
+    "fallback_matrix": "soy_iso",
+    "arm_count": 2,
+    "primary_data_blocker": "external_quantitative_measured_volatiles_for_mixed_matrix_lane",
+    "next_best_action": "run_primary_benchmark_protocol_and_land_results_as_benchmark_json_plus_process_state_calibration"
+  },
+  "contract": {
+    "protocol_id": "ppi_spi_ribose_cysteine_primary_benchmark_2026",
+    "description": "Machine-readable companion contract for the first dual pea and soy internal benchmark package.",
+    "matrices": [
+      {
+        "matrix": "pea_iso",
+        "temp_C": 95.0,
+        "ph": 5.5,
+        "time_points_min": [
+          0,
+          30,
+          60,
+          120,
+          240
+        ],
+        "purpose": "First quantitative PPI meaty-positive matrix benchmark under moderate aqueous heating."
+      },
+      {
+        "matrix": "soy_iso",
+        "temp_C": 120.0,
+        "ph": 5.8,
+        "time_points_min": [
+          0,
+          30,
+          60,
+          120,
+          240
+        ],
+        "purpose": "First quantitative SPI benchmark capturing meaty generation and off-flavour suppression under high-severity heating."
+      }
+    ],
+    "precursor_addition": {
+      "D-ribose_mM": 1.0,
+      "L-cysteine_mM": 1.0
+    },
+    "required_panel": {
+      "desirable": [
+        "2-methyl-3-furanthiol",
+        "2-furfurylthiol",
+        "bis(2-methyl-3-furyl) disulfide",
+        "2,5-dimethylpyrazine"
+      ],
+      "adverse": [
+        "Hexanal",
+        "2-pentylfuran",
+        "furfural",
+        "1-octen-3-ol"
+      ],
+      "safety": [
+        "acrylamide"
+      ]
+    },
+    "companion_assays": [
+      "Ellman free SH",
+      "OPA free amino groups",
+      "DSC or equivalent denaturation proxy",
+      "post-heating pH measurement"
+    ],
+    "analytical_requirements": {
+      "headspace_method": "HS-SPME-GC-MS",
+      "thiol_quantification": "thiol-specific derivatization plus an internal-standard route suitable for absolute quantification",
+      "aldehyde_quantification": "calibrated quantification with hexanal-d12 or equivalent internal standard",
+      "safety_method": "LC-MS/MS in the soy 120 C arm",
+      "replicates": 3,
+      "required_metadata": [
+        "matrix supplier and lot number",
+        "protein content and solids basis",
+        "exact pH before and after heating",
+        "process vessel or heating format",
+        "number of process replicates",
+        "LOD and LOQ where relevant",
+        "non-detect policy",
+        "internal-standard details"
+      ]
+    }
+  },
+  "selected_target": {
+    "benchmark_id": "pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026",
+    "protein_type": "pea_iso",
+    "process_state": "aqueous_pre_extrusion_model",
+    "target_profile": "mixed",
+    "rationale": [
+      "same_protein_external_anchor_count=2",
+      "same_protein_external_process_states=2",
+      "quantitative_closed=0",
+      "internal_candidate=0",
+      "internal_measured_candidate=0",
+      "internal_reference_candidate=0"
+    ],
+    "selection_policy": "prefer_mixed_matrix_lanes_with_the_broadest_same_protein_external_anchor_span_before_mechanistic_escalation"
+  },
+  "arms": [
+    {
+      "matrix": "pea_iso",
+      "benchmark_id": "pea_isolate_ribose_cysteine_100C_45min_Internal2026",
+      "process_state": "aqueous_pre_extrusion_model",
+      "target_profile": "mixed",
+      "promotion_blocker": "insufficient externally measured target closure; current comparator is internal reference-only",
+      "protocol_temperature_c": 95.0,
+      "protocol_ph": 5.5,
+      "protocol_time_points_min": [
+        0,
+        30,
+        60,
+        120,
+        240
+      ],
+      "required_replicates": 3,
+      "required_desirable_targets": [
+        "2-methyl-3-furanthiol",
+        "2-furfurylthiol",
+        "bis(2-methyl-3-furyl) disulfide",
+        "2,5-dimethylpyrazine"
+      ],
+      "required_adverse_targets": [
+        "Hexanal",
+        "2-pentylfuran",
+        "furfural",
+        "1-octen-3-ol"
+      ],
+      "required_safety_targets": [
+        "acrylamide"
+      ],
+      "companion_assays": [
+        "Ellman free SH",
+        "OPA free amino groups",
+        "DSC or equivalent denaturation proxy",
+        "post-heating pH measurement"
+      ],
+      "calibration_closure_action": "calibration_closed",
+      "calibration_passed": true,
+      "hexanal_ratio": 1.0735329184674205,
+      "nonanal_ratio": 0.9845099647274906,
+      "unmet_promotion_requirements": [
+        {
+          "key": "comparator_is_measured_volatiles",
+          "label": "Comparator signal is wet-lab measured_volatiles",
+          "passed": false,
+          "detail": "reference_volatiles"
+        },
+        {
+          "key": "external_quantitative_origin",
+          "label": "Source is externally quantitative",
+          "passed": false,
+          "detail": "internal_reference_only"
+        },
+        {
+          "key": "minimum_quantitative_closed_targets",
+          "label": "At least two compounds are quantitatively closed",
+          "passed": false,
+          "detail": "0"
+        },
+        {
+          "key": "no_internal_or_directional_dependencies",
+          "label": "No internal-candidate or directional dependencies remain",
+          "passed": false,
+          "detail": "internal=6; directional=0"
+        }
+      ],
+      "mechanistic_blockers": [],
+      "evidence_or_calibration_blockers": [
+        "Hexanal",
+        "Nonanal"
+      ],
+      "transfer_ready_targets": [
+        "2-furfurylthiol",
+        "2-methyl-3-furanthiol",
+        "bis(2-methyl-3-furyl) disulfide",
+        "2,5-dimethylpyrazine"
+      ],
+      "would_close_requirements": [
+        "comparator_is_measured_volatiles",
+        "external_quantitative_origin",
+        "minimum_quantitative_closed_targets"
+      ],
+      "remaining_after_protocol": [
+        "no_internal_or_directional_dependencies"
+      ]
+    },
+    {
+      "matrix": "soy_iso",
+      "benchmark_id": "soy_isolate_ribose_cysteine_100C_45min_Internal2026",
+      "process_state": "aqueous_pre_extrusion_model",
+      "target_profile": "mixed",
+      "promotion_blocker": "insufficient externally measured target closure; current comparator is internal reference-only",
+      "protocol_temperature_c": 120.0,
+      "protocol_ph": 5.8,
+      "protocol_time_points_min": [
+        0,
+        30,
+        60,
+        120,
+        240
+      ],
+      "required_replicates": 3,
+      "required_desirable_targets": [
+        "2-methyl-3-furanthiol",
+        "2-furfurylthiol",
+        "bis(2-methyl-3-furyl) disulfide",
+        "2,5-dimethylpyrazine"
+      ],
+      "required_adverse_targets": [
+        "Hexanal",
+        "2-pentylfuran",
+        "furfural",
+        "1-octen-3-ol"
+      ],
+      "required_safety_targets": [
+        "acrylamide"
+      ],
+      "companion_assays": [
+        "Ellman free SH",
+        "OPA free amino groups",
+        "DSC or equivalent denaturation proxy",
+        "post-heating pH measurement"
+      ],
+      "calibration_closure_action": "calibration_closed",
+      "calibration_passed": true,
+      "hexanal_ratio": 1.0,
+      "nonanal_ratio": 1.0,
+      "unmet_promotion_requirements": [
+        {
+          "key": "comparator_is_measured_volatiles",
+          "label": "Comparator signal is wet-lab measured_volatiles",
+          "passed": false,
+          "detail": "reference_volatiles"
+        },
+        {
+          "key": "external_quantitative_origin",
+          "label": "Source is externally quantitative",
+          "passed": false,
+          "detail": "internal_reference_only"
+        },
+        {
+          "key": "minimum_quantitative_closed_targets",
+          "label": "At least two compounds are quantitatively closed",
+          "passed": false,
+          "detail": "0"
+        },
+        {
+          "key": "no_internal_or_directional_dependencies",
+          "label": "No internal-candidate or directional dependencies remain",
+          "passed": false,
+          "detail": "internal=6; directional=0"
+        }
+      ],
+      "mechanistic_blockers": [],
+      "evidence_or_calibration_blockers": [
+        "Hexanal",
+        "Nonanal"
+      ],
+      "transfer_ready_targets": [
+        "2-furfurylthiol",
+        "2-methyl-3-furanthiol",
+        "bis(2-methyl-3-furyl) disulfide",
+        "2,5-dimethylpyrazine"
+      ],
+      "would_close_requirements": [
+        "comparator_is_measured_volatiles",
+        "external_quantitative_origin",
+        "minimum_quantitative_closed_targets"
+      ],
+      "remaining_after_protocol": [
+        "no_internal_or_directional_dependencies"
+      ]
+    }
+  ]
+}

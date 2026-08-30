@@ -1,0 +1,486 @@
+{
+  "schema_version": "1.0",
+  "description": "Matrix target support status artifact distinguishing external decision-ready support from mechanistic-priority candidates and unresolved external gaps.",
+  "benchmarks": [
+    {
+      "benchmark_id": "pea_isolate_40C_PratapSingh2021",
+      "bench_file": "/Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/pea_isolate_40C_PratapSingh2021.json",
+      "protein_type": "pea_iso",
+      "execution_path": "matrix_only",
+      "process_state": "ambient_slurry",
+      "target_profile": "adverse_only",
+      "external_data_status": "external_quantitative",
+      "reference_signal_origin": "measured_volatiles",
+      "source_origin": "external_literature",
+      "ranking_contract_status": "pass",
+      "support_counts": {
+        "quantitative_closed": 2,
+        "internal_candidate": 0,
+        "internal_measured_candidate": 0,
+        "internal_reference_candidate": 0,
+        "directional_support": 0,
+        "open_gap": 0
+      },
+      "quantitative_support_ready": true,
+      "promotion_ready": false,
+      "mechanistic_priority_ready": false,
+      "promotion_blocker": "benchmark lacks meaty-positive targets",
+      "next_best_action": "retain_as_adverse_anchor",
+      "compounds": [
+        {
+          "compound": "hexanal",
+          "role": "adverse_marker",
+          "target_class": "adverse_lipid_markers",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Pratap-Singh 2021 pea isolate ambient slurry baseline (Wave O refit to the verified 1138.00 ppb)",
+          "calibration_evidence_strength": "fitted_to_benchmark",
+          "support_status": "quantitative_closed"
+        },
+        {
+          "compound": "2-pentylfuran",
+          "role": "adverse_marker",
+          "target_class": "adverse_lipid_markers",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Pratap-Singh 2021 pea isolate ambient slurry baseline",
+          "calibration_evidence_strength": "fitted_to_benchmark",
+          "support_status": "quantitative_closed"
+        }
+      ]
+    },
+    {
+      "benchmark_id": "pea_isolate_ribose_cysteine_100C_45min_Internal2026",
+      "bench_file": "/Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/pea_isolate_ribose_cysteine_100C_45min_Internal2026.json",
+      "protein_type": "pea_iso",
+      "execution_path": "matrix_precursor_augmented",
+      "process_state": "aqueous_pre_extrusion_model",
+      "target_profile": "mixed",
+      "external_data_status": "internal_reference_only",
+      "reference_signal_origin": "reference_volatiles",
+      "source_origin": "internal_reproducibility_candidate",
+      "ranking_contract_status": "pass",
+      "support_counts": {
+        "quantitative_closed": 0,
+        "internal_candidate": 6,
+        "internal_measured_candidate": 0,
+        "internal_reference_candidate": 6,
+        "directional_support": 0,
+        "open_gap": 0
+      },
+      "quantitative_support_ready": false,
+      "promotion_ready": false,
+      "mechanistic_priority_ready": true,
+      "promotion_blocker": "insufficient externally measured target closure; current comparator is internal reference-only",
+      "next_best_action": "prioritize_mechanistic_refinement",
+      "compounds": [
+        {
+          "compound": "Hexanal",
+          "role": "adverse_marker",
+          "target_class": "adverse_lipid_markers",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "unknown",
+          "calibration_evidence_strength": "heuristic",
+          "support_status": "internal_reference_candidate"
+        },
+        {
+          "compound": "Nonanal",
+          "role": "adverse_marker",
+          "target_class": "adverse_lipid_markers",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "unknown",
+          "calibration_evidence_strength": "heuristic",
+          "support_status": "internal_reference_candidate"
+        },
+        {
+          "compound": "2-furfurylthiol",
+          "role": "desirable_marker",
+          "target_class": "sulfur_positives",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Interpolated base sulfur yield matching internal benchmark limits",
+          "calibration_evidence_strength": "directional_transferred",
+          "support_status": "internal_reference_candidate"
+        },
+        {
+          "compound": "2,5-dimethylpyrazine",
+          "role": "desirable_marker",
+          "target_class": "pyrazines",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Interpolated base pyrazine yield matching internal benchmark limits",
+          "calibration_evidence_strength": "directional_transferred",
+          "support_status": "internal_reference_candidate"
+        },
+        {
+          "compound": "2-methyl-3-furanthiol",
+          "role": "desirable_marker",
+          "target_class": "sulfur_positives",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Interpolated base sulfur yield matching internal benchmark limits",
+          "calibration_evidence_strength": "directional_transferred",
+          "support_status": "internal_reference_candidate"
+        },
+        {
+          "compound": "bis(2-methyl-3-furyl) disulfide",
+          "role": "desirable_marker",
+          "target_class": "sulfur_positives",
+          "evidence_state": "transferred_prior",
+          "calibration_source": "Interpolated base sulfur yield matching internal benchmark limits",
+          "calibration_evidence_strength": "directional_transferred",
+          "support_status": "internal_reference_candidate"
+        }
+      ]
+    },
+    {
+      "benchmark_id": "pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026",
+      "bench_file": "/Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026.json",
+      "protein_type": "pea_iso",
+      "execution_path": "matrix_precursor_augmented",
+      "process_state": "aqueous_pre_extrusion_model",
+      "target_profile": "mixed",
+      "external_data_status": "synthetic_diagnostic_only",
+      "reference_signal_origin": "measured_volatiles",
+      "source_origin": "synthetic_diagnostic",
+      "ranking_contract_status": "pass",
+      "support_counts": {
+        "quantitative_closed": 0,
+        "internal_candidate": 6,
+        "internal_measured_candidate": 0,
+        "internal_reference_candidate": 6,
+        "directional_support": 0,
+        "open_gap": 0
+      },
+      "quantitative_support_ready": false,
+      "promotion_ready": false,
+      "mechanistic_priority_ready": true,
+      "promotion_blocker": "insufficient externally measured target closure; current comparator is synthetic model output (diagnostic only)",
+      "next_best_action": "prioritize_mechanistic_refinement",
+      "compounds": [
+        {
+          "compound": "Hexanal",
+          "role": "adverse_marker",
+          "target_class": "adverse_lipid_markers",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "unknown",
+          "calibration_evidence_strength": "heuristic",
+          "support_status": "internal_reference_candidate"
+        },
+        {
+          "compound": "Nonanal",
+          "role": "adverse_marker",
+          "target_class": "adverse_lipid_markers",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "unknown",
+          "calibration_evidence_strength": "heuristic",
+          "support_status": "internal_reference_candidate"
+        },
+        {
+          "compound": "2-furfurylthiol",
+          "role": "desirable_marker",
+          "target_class": "sulfur_positives",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Interpolated base sulfur yield matching internal benchmark limits",
+          "calibration_evidence_strength": "directional_transferred",
+          "support_status": "internal_reference_candidate"
+        },
+        {
+          "compound": "2,5-dimethylpyrazine",
+          "role": "desirable_marker",
+          "target_class": "pyrazines",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Interpolated base pyrazine yield matching internal benchmark limits",
+          "calibration_evidence_strength": "directional_transferred",
+          "support_status": "internal_reference_candidate"
+        },
+        {
+          "compound": "2-methyl-3-furanthiol",
+          "role": "desirable_marker",
+          "target_class": "sulfur_positives",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Interpolated base sulfur yield matching internal benchmark limits",
+          "calibration_evidence_strength": "directional_transferred",
+          "support_status": "internal_reference_candidate"
+        },
+        {
+          "compound": "bis(2-methyl-3-furyl) disulfide",
+          "role": "desirable_marker",
+          "target_class": "sulfur_positives",
+          "evidence_state": "transferred_prior",
+          "calibration_source": "Interpolated base sulfur yield matching internal benchmark limits",
+          "calibration_evidence_strength": "directional_transferred",
+          "support_status": "internal_reference_candidate"
+        }
+      ]
+    },
+    {
+      "benchmark_id": "pea_isolate_uht_140C_Trikusuma2019",
+      "bench_file": "/Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/pea_isolate_uht_140C_Trikusuma2019.json",
+      "protein_type": "pea_iso",
+      "execution_path": "matrix_only",
+      "process_state": "heated_matrix",
+      "target_profile": "adverse_only",
+      "external_data_status": "external_quantitative",
+      "reference_signal_origin": "measured_volatiles",
+      "source_origin": "external_literature",
+      "ranking_contract_status": "pass",
+      "support_counts": {
+        "quantitative_closed": 3,
+        "internal_candidate": 0,
+        "internal_measured_candidate": 0,
+        "internal_reference_candidate": 0,
+        "directional_support": 0,
+        "open_gap": 0
+      },
+      "quantitative_support_ready": true,
+      "promotion_ready": false,
+      "mechanistic_priority_ready": false,
+      "promotion_blocker": "benchmark lacks meaty-positive targets",
+      "next_best_action": "retain_as_adverse_anchor",
+      "compounds": [
+        {
+          "compound": "hexanal",
+          "role": "adverse_marker",
+          "target_class": "adverse_lipid_markers",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Trikusuma 2019 UHT pea beverage heated headspace anchor",
+          "calibration_evidence_strength": "fitted_to_benchmark",
+          "support_status": "quantitative_closed"
+        },
+        {
+          "compound": "2-pentylfuran",
+          "role": "adverse_marker",
+          "target_class": "adverse_lipid_markers",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Trikusuma 2019 UHT pea beverage heated headspace anchor",
+          "calibration_evidence_strength": "fitted_to_benchmark",
+          "support_status": "quantitative_closed"
+        },
+        {
+          "compound": "nonanal",
+          "role": "adverse_marker",
+          "target_class": "adverse_lipid_markers",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Trikusuma 2019 UHT pea beverage heated headspace anchor",
+          "calibration_evidence_strength": "fitted_to_benchmark",
+          "support_status": "quantitative_closed"
+        }
+      ]
+    },
+    {
+      "benchmark_id": "soy_isolate_40C_PratapSingh2021",
+      "bench_file": "/Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/soy_isolate_40C_PratapSingh2021.json",
+      "protein_type": "soy_iso",
+      "execution_path": "matrix_only",
+      "process_state": "ambient_slurry",
+      "target_profile": "adverse_only",
+      "external_data_status": "external_quantitative",
+      "reference_signal_origin": "measured_volatiles",
+      "source_origin": "external_literature",
+      "ranking_contract_status": "pass",
+      "support_counts": {
+        "quantitative_closed": 2,
+        "internal_candidate": 0,
+        "internal_measured_candidate": 0,
+        "internal_reference_candidate": 0,
+        "directional_support": 0,
+        "open_gap": 0
+      },
+      "quantitative_support_ready": true,
+      "promotion_ready": false,
+      "mechanistic_priority_ready": false,
+      "promotion_blocker": "benchmark lacks meaty-positive targets",
+      "next_best_action": "retain_as_adverse_anchor",
+      "compounds": [
+        {
+          "compound": "2-pentylfuran",
+          "role": "adverse_marker",
+          "target_class": "adverse_lipid_markers",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Pratap-Singh 2021 soy-vs-pea ambient slurry release ratio",
+          "calibration_evidence_strength": "fitted_to_benchmark",
+          "support_status": "quantitative_closed"
+        },
+        {
+          "compound": "hexanal",
+          "role": "adverse_marker",
+          "target_class": "adverse_lipid_markers",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Pratap-Singh 2021 soy ambient slurry hexanal (Wave O refit to the verified 1621.71 ppb)",
+          "calibration_evidence_strength": "fitted_to_benchmark",
+          "support_status": "quantitative_closed"
+        }
+      ]
+    },
+    {
+      "benchmark_id": "soy_isolate_ribose_cysteine_100C_45min_Internal2026",
+      "bench_file": "/Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/soy_isolate_ribose_cysteine_100C_45min_Internal2026.json",
+      "protein_type": "soy_iso",
+      "execution_path": "matrix_precursor_augmented",
+      "process_state": "aqueous_pre_extrusion_model",
+      "target_profile": "mixed",
+      "external_data_status": "internal_reference_only",
+      "reference_signal_origin": "reference_volatiles",
+      "source_origin": "internal_reproducibility_candidate",
+      "ranking_contract_status": "pass",
+      "support_counts": {
+        "quantitative_closed": 0,
+        "internal_candidate": 6,
+        "internal_measured_candidate": 0,
+        "internal_reference_candidate": 6,
+        "directional_support": 0,
+        "open_gap": 0
+      },
+      "quantitative_support_ready": false,
+      "promotion_ready": false,
+      "mechanistic_priority_ready": true,
+      "promotion_blocker": "insufficient externally measured target closure; current comparator is internal reference-only",
+      "next_best_action": "prioritize_mechanistic_refinement",
+      "compounds": [
+        {
+          "compound": "Hexanal",
+          "role": "adverse_marker",
+          "target_class": "adverse_lipid_markers",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "unknown",
+          "calibration_evidence_strength": "heuristic",
+          "support_status": "internal_reference_candidate"
+        },
+        {
+          "compound": "Nonanal",
+          "role": "adverse_marker",
+          "target_class": "adverse_lipid_markers",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "unknown",
+          "calibration_evidence_strength": "heuristic",
+          "support_status": "internal_reference_candidate"
+        },
+        {
+          "compound": "2-furfurylthiol",
+          "role": "desirable_marker",
+          "target_class": "sulfur_positives",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Interpolated base sulfur yield matching internal benchmark limits",
+          "calibration_evidence_strength": "directional_transferred",
+          "support_status": "internal_reference_candidate"
+        },
+        {
+          "compound": "2,5-dimethylpyrazine",
+          "role": "desirable_marker",
+          "target_class": "pyrazines",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Interpolated base pyrazine yield matching internal benchmark limits",
+          "calibration_evidence_strength": "directional_transferred",
+          "support_status": "internal_reference_candidate"
+        },
+        {
+          "compound": "2-methyl-3-furanthiol",
+          "role": "desirable_marker",
+          "target_class": "sulfur_positives",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Interpolated base sulfur yield matching internal benchmark limits",
+          "calibration_evidence_strength": "directional_transferred",
+          "support_status": "internal_reference_candidate"
+        },
+        {
+          "compound": "bis(2-methyl-3-furyl) disulfide",
+          "role": "desirable_marker",
+          "target_class": "sulfur_positives",
+          "evidence_state": "transferred_prior",
+          "calibration_source": "Interpolated base sulfur yield matching internal benchmark limits",
+          "calibration_evidence_strength": "directional_transferred",
+          "support_status": "internal_reference_candidate"
+        }
+      ]
+    },
+    {
+      "benchmark_id": "soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026",
+      "bench_file": "/Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026.json",
+      "protein_type": "soy_iso",
+      "execution_path": "matrix_precursor_augmented",
+      "process_state": "aqueous_pre_extrusion_model",
+      "target_profile": "mixed",
+      "external_data_status": "synthetic_diagnostic_only",
+      "reference_signal_origin": "measured_volatiles",
+      "source_origin": "synthetic_diagnostic",
+      "ranking_contract_status": "pass",
+      "support_counts": {
+        "quantitative_closed": 0,
+        "internal_candidate": 6,
+        "internal_measured_candidate": 0,
+        "internal_reference_candidate": 6,
+        "directional_support": 0,
+        "open_gap": 0
+      },
+      "quantitative_support_ready": false,
+      "promotion_ready": false,
+      "mechanistic_priority_ready": true,
+      "promotion_blocker": "insufficient externally measured target closure; current comparator is synthetic model output (diagnostic only)",
+      "next_best_action": "prioritize_mechanistic_refinement",
+      "compounds": [
+        {
+          "compound": "Hexanal",
+          "role": "adverse_marker",
+          "target_class": "adverse_lipid_markers",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "unknown",
+          "calibration_evidence_strength": "heuristic",
+          "support_status": "internal_reference_candidate"
+        },
+        {
+          "compound": "Nonanal",
+          "role": "adverse_marker",
+          "target_class": "adverse_lipid_markers",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "unknown",
+          "calibration_evidence_strength": "heuristic",
+          "support_status": "internal_reference_candidate"
+        },
+        {
+          "compound": "2-furfurylthiol",
+          "role": "desirable_marker",
+          "target_class": "sulfur_positives",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Interpolated base sulfur yield matching internal benchmark limits",
+          "calibration_evidence_strength": "directional_transferred",
+          "support_status": "internal_reference_candidate"
+        },
+        {
+          "compound": "2,5-dimethylpyrazine",
+          "role": "desirable_marker",
+          "target_class": "pyrazines",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Interpolated base pyrazine yield matching internal benchmark limits",
+          "calibration_evidence_strength": "directional_transferred",
+          "support_status": "internal_reference_candidate"
+        },
+        {
+          "compound": "2-methyl-3-furanthiol",
+          "role": "desirable_marker",
+          "target_class": "sulfur_positives",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Interpolated base sulfur yield matching internal benchmark limits",
+          "calibration_evidence_strength": "directional_transferred",
+          "support_status": "internal_reference_candidate"
+        },
+        {
+          "compound": "bis(2-methyl-3-furyl) disulfide",
+          "role": "desirable_marker",
+          "target_class": "sulfur_positives",
+          "evidence_state": "transferred_prior",
+          "calibration_source": "Interpolated base sulfur yield matching internal benchmark limits",
+          "calibration_evidence_strength": "directional_transferred",
+          "support_status": "internal_reference_candidate"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_benchmarks": 7,
+    "quantitative_support_ready": 3,
+    "promotion_ready": 0,
+    "mechanistic_priority_ready": 4,
+    "quantitative_closed": 7,
+    "internal_candidate": 24,
+    "internal_measured_candidate": 0,
+    "internal_reference_candidate": 24,
+    "directional_support": 0,
+    "open_gap": 0
+  }
+}

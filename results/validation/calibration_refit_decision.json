@@ -1,0 +1,147 @@
+{
+  "baseline_median_abs_log10_residual": 0.16846804809383023,
+  "candidate_median_abs_log10_residual": 0.16846804809383023,
+  "candidate_overrides": {},
+  "ci_regressions": 0,
+  "decision": "rejected",
+  "decision_id": "refit_2026-05-10",
+  "matrix_panel_after": {
+    "benchmark_count": 7,
+    "ci_coverage_hits": 33,
+    "ci_coverage_rate": 0.9428571428571428,
+    "ci_level_pct": 90,
+    "matched_compound_count": 35,
+    "n_samples": 60,
+    "seed": 0
+  },
+  "matrix_panel_before": {
+    "benchmark_count": 7,
+    "ci_coverage_hits": 33,
+    "ci_coverage_rate": 0.9428571428571428,
+    "ci_level_pct": 90,
+    "matched_compound_count": 35,
+    "n_samples": 60,
+    "seed": 0
+  },
+  "persistence_path": null,
+  "protein_sweeps": [
+    {
+      "baseline_mean_abs_log10_error": 0.005172677264478907,
+      "grid": [
+        {
+          "mean_abs_log10_error": 0.20797927231692248,
+          "multiplier": 0.55,
+          "protein_type": "pea_iso"
+        },
+        {
+          "mean_abs_log10_error": 0.12529346927480703,
+          "multiplier": 0.7,
+          "protein_type": "pea_iso"
+        },
+        {
+          "mean_abs_log10_error": 0.05872434898530496,
+          "multiplier": 0.85,
+          "protein_type": "pea_iso"
+        },
+        {
+          "mean_abs_log10_error": 0.005172677264478907,
+          "multiplier": 1.0,
+          "protein_type": "pea_iso"
+        },
+        {
+          "mean_abs_log10_error": 0.04887429413311833,
+          "multiplier": 1.15,
+          "protein_type": "pea_iso"
+        },
+        {
+          "mean_abs_log10_error": 0.10385002687632448,
+          "multiplier": 1.35,
+          "protein_type": "pea_iso"
+        },
+        {
+          "mean_abs_log10_error": 0.16210230121389185,
+          "multiplier": 1.6,
+          "protein_type": "pea_iso"
+        },
+        {
+          "mean_abs_log10_error": 0.2210235788167109,
+          "multiplier": 1.9,
+          "protein_type": "pea_iso"
+        }
+      ],
+      "improvement_pct": 0.0,
+      "protein_type": "pea_iso",
+      "selected_mean_abs_log10_error": 0.005172677264478907,
+      "selected_multiplier": 1.0
+    },
+    {
+      "baseline_mean_abs_log10_error": 3.006796952553857e-05,
+      "grid": [
+        {
+          "mean_abs_log10_error": 0.19475166961422463,
+          "multiplier": 0.55,
+          "protein_type": "soy_iso"
+        },
+        {
+          "mean_abs_log10_error": 0.11620015672421492,
+          "multiplier": 0.7,
+          "protein_type": "soy_iso"
+        },
+        {
+          "mean_abs_log10_error": 0.05295949244918802,
+          "multiplier": 0.85,
+          "protein_type": "soy_iso"
+        },
+        {
+          "mean_abs_log10_error": 3.006796952553857e-05,
+          "multiplier": 1.0,
+          "protein_type": "soy_iso"
+        },
+        {
+          "mean_abs_log10_error": 0.0454996935303012,
+          "multiplier": 1.15,
+          "protein_type": "soy_iso"
+        },
+        {
+          "mean_abs_log10_error": 0.09772663963634708,
+          "multiplier": 1.35,
+          "protein_type": "soy_iso"
+        },
+        {
+          "mean_abs_log10_error": 0.15306630025703608,
+          "multiplier": 1.6,
+          "protein_type": "soy_iso"
+        },
+        {
+          "mean_abs_log10_error": 0.20904151397971416,
+          "multiplier": 1.9,
+          "protein_type": "soy_iso"
+        }
+      ],
+      "improvement_pct": 0.0,
+      "protein_type": "soy_iso",
+      "selected_mean_abs_log10_error": 3.006796952553857e-05,
+      "selected_multiplier": 1.0
+    }
+  ],
+  "trust_loop_after": {
+    "benchmark_count": 16,
+    "ci_coverage_hits": 39,
+    "ci_coverage_rate": 0.8125,
+    "ci_level_pct": 90,
+    "matched_compound_count": 48,
+    "n_samples": 60,
+    "seed": 0
+  },
+  "trust_loop_before": {
+    "benchmark_count": 16,
+    "ci_coverage_hits": 39,
+    "ci_coverage_rate": 0.8125,
+    "ci_level_pct": 90,
+    "matched_compound_count": 48,
+    "n_samples": 60,
+    "seed": 0
+  },
+  "uncertainty_samples": 60,
+  "uncertainty_seed": 0
+}

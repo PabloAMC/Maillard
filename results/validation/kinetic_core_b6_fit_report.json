@@ -1,0 +1,497 @@
+{
+  "artifact": "kinetic_core_b6_fit_report",
+  "wave": "B6 -- the lipid-oxidation module",
+  "generated_on": "2026-08-29",
+  "git": {
+    "commit": "242bd1e9eae52772d8554fc7f2f82fbe1e182992",
+    "branch": "audit-remediation"
+  },
+  "pre_registration": "results/validation/kinetic_core_b6_prereg.md",
+  "fit_column": {
+    "source": "Frankel & Gardner (1989) Lipids 24:603-608, Table 1 col. '0' and Table 2 cols. '0' (both blocks); data/articles/frankel1989.pdf, read directly by Wave B6",
+    "dossier": "data/lit/extraction_dossiers/k3_final_parameter_inventory.md sec. A.5 and sec. C.9; docs/reference/FIT_HOLDOUT_DECLARATION.md D.6 Module 5",
+    "systems": [
+      "mixed_ct_tt_9_13",
+      "pure_ct_13",
+      "tt_9_13"
+    ],
+    "values": {
+      "mixed_ct_tt_9_13": {
+        "PENTANE": 16.0,
+        "HEXANAL": 11.0,
+        "ME_OCTANOATE": 17.0,
+        "DECADIENAL": 23.0,
+        "ME_9_OXONONANOATE": 13.0,
+        "ME_13_OXO_TRIDECADIENOATE": 20.0
+      },
+      "pure_ct_13": {
+        "PENTANE": 21.0,
+        "HEXANAL": 20.0,
+        "ME_OCTANOATE": 5.0,
+        "DECADIENAL": 3.5,
+        "ME_9_OXONONANOATE": 4.3,
+        "ME_13_OXO_TRIDECADIENOATE": 46.0
+      },
+      "tt_9_13": {
+        "PENTANE": 1.5,
+        "HEXANAL": 13.0,
+        "ME_OCTANOATE": 13.0,
+        "DECADIENAL": 30.0,
+        "ME_9_OXONONANOATE": 26.0,
+        "ME_13_OXO_TRIDECADIENOATE": 16.0
+      }
+    },
+    "n_values": 18,
+    "what_was_read": "the three ZERO-ADDITIVE columns and nothing else. fit_residuals() asserts the array shape before it computes."
+  },
+  "frozen_parameters": {
+    "branch_model": {
+      "provenance": "fitted to Frankel 1989 zero-additive columns (B6 FIT)",
+      "simplexes": {
+        "13_ct": {
+          "PENTANE": 0.26325943427955534,
+          "HEXANAL": 0.23110693088436035,
+          "ME_13_OXO_TRIDECADIENOATE": 0.5056336348360844
+        },
+        "13_tt": {
+          "PENTANE": 0.049180328008777224,
+          "HEXANAL": 0.4262295081336565,
+          "ME_13_OXO_TRIDECADIENOATE": 0.5245901638575663
+        },
+        "9_ct": {
+          "ME_OCTANOATE": 0.3244037422911843,
+          "DECADIENAL": 0.4241426202919617,
+          "ME_9_OXONONANOATE": 0.2514536374168541
+        },
+        "9_tt": {
+          "ME_OCTANOATE": 0.18840579710144234,
+          "DECADIENAL": 0.434782608695657,
+          "ME_9_OXONONANOATE": 0.3768115942029006
+        }
+      }
+    },
+    "system_compositions": {
+      "mixed_ct_tt_9_13": {
+        "LOOH_13_ct": 0.4563406706842672,
+        "LOOH_13_tt": 3.9959519943029344e-27,
+        "LOOH_9_ct": 0.5436593293157328,
+        "LOOH_9_tt": 4.760558768393586e-27
+      },
+      "pure_ct_13": {
+        "LOOH_13_ct": 0.8822474448573492,
+        "LOOH_13_tt": 0.0,
+        "LOOH_9_ct": 0.11775255514265082,
+        "LOOH_9_tt": 0.0
+      },
+      "tt_9_13": {
+        "LOOH_13_ct": 0.0,
+        "LOOH_13_tt": 0.30653266331661616,
+        "LOOH_9_ct": 0.0,
+        "LOOH_9_tt": 0.6934673366833839
+      }
+    },
+    "default_pool_composition": {
+      "LOOH_13_ct": 0.4563406706842672,
+      "LOOH_13_tt": 3.9959519943029344e-27,
+      "LOOH_9_ct": 0.5436593293157328,
+      "LOOH_9_tt": 4.760558768393586e-27
+    },
+    "default_pool_composition_provenance": "Frankel 1989 Table 1 is the AUTOXIDATION mixture, so its fitted composition is the closest the corpus comes to 'what an oxidising food lipid's hydroperoxide pool looks like'. It is a FIT quantity, not an assumption.",
+    "Y_hexanal_per_LOOH": 0.01,
+    "slate_yields_at_reference": {
+      "PENTANE": 0.010921453345735733,
+      "HEXANAL": 0.009587590167231963,
+      "ME_OCTANOATE": 0.016033192814685373,
+      "DECADIENAL": 0.02096264477110413,
+      "ME_9_OXONONANOATE": 0.012427737806549852,
+      "ME_13_OXO_TRIDECADIENOATE": 0.020976472003783875
+    }
+  },
+  "fit_quality": {
+    "median_abs_residual_pp": 0.545081456099374,
+    "worst_abs_residual_pp": 3.9864013196906978,
+    "sum_squared_residuals": 38.89047078643796,
+    "n_fit_values": 18,
+    "n_free_parameters": 12,
+    "degrees_of_freedom": 3,
+    "prereg_median_bound_pp": 3.0,
+    "prereg_worst_bound_pp": 8.0,
+    "prereg_F1_met": true
+  },
+  "fit_table": [
+    {
+      "system": "mixed_ct_tt_9_13",
+      "product": "PENTANE",
+      "measured_relative_percent": 16.0,
+      "predicted_relative_percent": 12.013598680309302,
+      "residual_pp": -3.9864013196906978
+    },
+    {
+      "system": "mixed_ct_tt_9_13",
+      "product": "HEXANAL",
+      "measured_relative_percent": 11.0,
+      "predicted_relative_percent": 10.546349183955156,
+      "residual_pp": -0.4536508160448438
+    },
+    {
+      "system": "mixed_ct_tt_9_13",
+      "product": "ME_OCTANOATE",
+      "measured_relative_percent": 17.0,
+      "predicted_relative_percent": 17.636512096153904,
+      "residual_pp": 0.6365120961539041
+    },
+    {
+      "system": "mixed_ct_tt_9_13",
+      "product": "DECADIENAL",
+      "measured_relative_percent": 23.0,
+      "predicted_relative_percent": 23.058909248214537,
+      "residual_pp": 0.0589092482145368
+    },
+    {
+      "system": "mixed_ct_tt_9_13",
+      "product": "ME_9_OXONONANOATE",
+      "measured_relative_percent": 13.0,
+      "predicted_relative_percent": 13.670511587204834,
+      "residual_pp": 0.6705115872048335
+    },
+    {
+      "system": "mixed_ct_tt_9_13",
+      "product": "ME_13_OXO_TRIDECADIENOATE",
+      "measured_relative_percent": 20.0,
+      "predicted_relative_percent": 23.074119204162255,
+      "residual_pp": 3.0741192041622547
+    },
+    {
+      "system": "pure_ct_13",
+      "product": "PENTANE",
+      "measured_relative_percent": 21.0,
+      "predicted_relative_percent": 23.179544330127346,
+      "residual_pp": 2.179544330127346
+    },
+    {
+      "system": "pure_ct_13",
+      "product": "HEXANAL",
+      "measured_relative_percent": 20.0,
+      "predicted_relative_percent": 20.34857122630278,
+      "residual_pp": 0.3485712263027807
+    },
+    {
+      "system": "pure_ct_13",
+      "product": "ME_OCTANOATE",
+      "measured_relative_percent": 5.0,
+      "predicted_relative_percent": 3.8122970813519714,
+      "residual_pp": -1.1877029186480286
+    },
+    {
+      "system": "pure_ct_13",
+      "product": "DECADIENAL",
+      "measured_relative_percent": 3.5,
+      "predicted_relative_percent": 4.984398952970907,
+      "residual_pp": 1.4843989529709072
+    },
+    {
+      "system": "pure_ct_13",
+      "product": "ME_9_OXONONANOATE",
+      "measured_relative_percent": 4.3,
+      "predicted_relative_percent": 2.9550089689136745,
+      "residual_pp": -1.3449910310863253
+    },
+    {
+      "system": "pure_ct_13",
+      "product": "ME_13_OXO_TRIDECADIENOATE",
+      "measured_relative_percent": 46.0,
+      "predicted_relative_percent": 44.52017944033332,
+      "residual_pp": -1.4798205596666776
+    },
+    {
+      "system": "tt_9_13",
+      "product": "PENTANE",
+      "measured_relative_percent": 1.5,
+      "predicted_relative_percent": 1.500000004267868,
+      "residual_pp": 4.267868058960289e-09
+    },
+    {
+      "system": "tt_9_13",
+      "product": "HEXANAL",
+      "measured_relative_percent": 13.0,
+      "predicted_relative_percent": 12.999999998077932,
+      "residual_pp": -1.9220678382225742e-09
+    },
+    {
+      "system": "tt_9_13",
+      "product": "ME_OCTANOATE",
+      "measured_relative_percent": 13.0,
+      "predicted_relative_percent": 12.999999999998899,
+      "residual_pp": -1.1013412404281553e-12
+    },
+    {
+      "system": "tt_9_13",
+      "product": "DECADIENAL",
+      "measured_relative_percent": 30.0,
+      "predicted_relative_percent": 29.9999999999989,
+      "residual_pp": -1.1013412404281553e-12
+    },
+    {
+      "system": "tt_9_13",
+      "product": "ME_9_OXONONANOATE",
+      "measured_relative_percent": 26.0,
+      "predicted_relative_percent": 25.9999999999989,
+      "residual_pp": -1.1013412404281553e-12
+    },
+    {
+      "system": "tt_9_13",
+      "product": "ME_13_OXO_TRIDECADIENOATE",
+      "measured_relative_percent": 16.0,
+      "predicted_relative_percent": 15.999999997657508,
+      "residual_pp": -2.3424924222581467e-09
+    }
+  ],
+  "prereg_F2_shipped_0_37_refuted": {
+    "fitted_hexanal_share_of_six_product_slate": 0.10546349183955156,
+    "frankel_measured_zero_additive_range_percent": [
+      11.0,
+      20.0
+    ],
+    "shipped_fast_lane_value": 0.37,
+    "verdict": "REFUTED",
+    "note": "Compared LIKE FOR LIKE: both are a hexanal share of the six-product slate. The per-isomer simplex values are NOT comparable to 0.37 -- they are shares of a three-product sub-slate -- and quoting one of those instead would be the kind of denominator swap this repository has already been caught by."
+  },
+  "prereg_F3_nonanal_refuted_structurally": {
+    "structural_zeros": {
+      "DECADIENAL": "reachable ONLY from the 9-hydroperoxide",
+      "HEXANAL": "reachable ONLY from the 13-hydroperoxide",
+      "ME_13_OXO_TRIDECADIENOATE": "reachable ONLY from the 13-hydroperoxide",
+      "ME_9_OXONONANOATE": "reachable ONLY from the 9-hydroperoxide",
+      "ME_OCTANOATE": "reachable ONLY from the 9-hydroperoxide",
+      "PENTANE": "reachable ONLY from the 13-hydroperoxide"
+    },
+    "nonanal": "STRUCTURAL ZERO from every linoleate pool. Its only parent is LOOH_OL, whose branch fraction is unmeasured, so it is answered as exactly 0.0 for a linoleate feed and REFUSED for an oleate-bearing matrix.",
+    "simplex_sums": {
+      "13_ct": 1.0,
+      "13_tt": 1.0,
+      "9_ct": 1.0,
+      "9_tt": 1.0
+    }
+  },
+  "pentane_me13oxo_pairing_anomaly": {
+    "ratio_by_system": {
+      "mixed_ct_tt_9_13": 0.8,
+      "pure_ct_13": 0.45652173913043476,
+      "tt_9_13": 0.09375
+    },
+    "spread_x": 8.533333333333333,
+    "expected_if_1to1": 1.0,
+    "finding": "Pentane and methyl 13-oxo-9,11-tridecadienoate are the two halves of ONE beta-scission and should be 1:1. Their measured ratio across the three zero-additive FIT columns spans 8.5x (0.80 / 0.46 / 0.094). Either the GC recovery of a C5 alkane and a C14 dienoate differ enormously, or the pairing is wrong. This module does NOT impose the pairing and does NOT absorb the discrepancy into a response factor; it fits free shares inside each isomer's simplex and reports the falsified pairing."
+  },
+  "total_peak_areas_NOT_fitted": {
+    "values": {
+      "mixed_ct_tt_9_13": 16.0,
+      "pure_ct_13": 2.2,
+      "tt_9_13": 2.3
+    },
+    "why_not": "relative to an internal standard at ONE temperature, and the three preparations were injected at different loadings (13.1 mg for the mixture; Table 2's totals are ~7x smaller). They carry no absolute yield and are not fitted."
+  },
+  "registry": {
+    "module": "src/kinetic_core/parameters_lipid.py",
+    "wave": "B6 -- the lipid-oxidation module",
+    "fit_column": {
+      "source": "Frankel & Gardner (1989) Lipids 24:603-608, Table 1 col. '0' and Table 2 cols. '0' (both blocks); data/articles/frankel1989.pdf, read directly by Wave B6",
+      "dossier": "data/lit/extraction_dossiers/k3_final_parameter_inventory.md sec. A.5 and sec. C.9; docs/reference/FIT_HOLDOUT_DECLARATION.md D.6 Module 5",
+      "systems": [
+        "mixed_ct_tt_9_13",
+        "pure_ct_13",
+        "tt_9_13"
+      ],
+      "n_values": 18,
+      "role": "FIT (declaration D.6 Module 5)"
+    },
+    "rate_is_an_assumption": true,
+    "rate_anchor": {
+      "key": "k_LOOH_decomp",
+      "what": "first-order decomposition of the lipid hydroperoxide pool to ALL secondary oxidation products (the authors' k4, an explicit LUMP)",
+      "value": 0.006,
+      "unit": "1/h",
+      "band": null,
+      "evidence_class": "hand_fitted_no_uncertainty",
+      "source": "Schroen & Berton-Carabin (2022) Food Res. Int. 160:111621, Table 1, k4,CD -- identical across all five emulsifiers (beta-lactoglobulin, BSA, beta-casein, Tween 20, Tween 80)",
+      "dossier": "research_round3_channels.md sec. D.1; data/articles/schroen2022_fulltext.txt",
+      "conditions": "rapeseed-oil O/W emulsion, droplets 1.4-1.8 um, pH 6.7 buffer, rotative agitation, controlled oxygen-to-lipid ratio",
+      "T_of_measurement_C": 25.0,
+      "pH_of_measurement": 6.7,
+      "rate_transfer": "licensed_as_an_anchor_only",
+      "flags": [
+        "hand_fitted_by_visual_agreement",
+        "no_standard_error_anywhere_in_the_source",
+        "lumped_over_all_secondary_products",
+        "storage_temperature_25C_only",
+        "temperature_dependence_UNMEASURED"
+      ],
+      "note": "Verbatim from the source: 'The parameter values (k1-k5) were determined based on visual agreement of fit.' and 'k4 is a lumped reaction rate, ultimately leading to formation of secondary oxidation products'. It is a FLOOR ANCHOR for the module's rate, never 'the hexanal barrier'."
+    },
+    "hexanal_anchor": {
+      "key": "k_hexanal_schroen",
+      "what": "first-order hexanal formation from the lipid hydroperoxide pool",
+      "value": 6e-05,
+      "unit": "1/h",
+      "band": null,
+      "evidence_class": "hand_fitted_no_uncertainty",
+      "source": "Schroen & Berton-Carabin (2022) Table 1, k_hexanal -- identical across all five emulsifiers",
+      "dossier": "research_round3_channels.md sec. D.1",
+      "conditions": "as k_LOOH_decomp",
+      "T_of_measurement_C": 25.0,
+      "pH_of_measurement": 6.7,
+      "rate_transfer": "not_licensed",
+      "flags": [
+        "hand_fitted_by_visual_agreement",
+        "no_standard_error",
+        "25C_storage_only"
+      ],
+      "note": "Its LEVEL does not transfer. Its RATIO to k4 does: the authors state 'The corresponding constants in Table 1 can be interpreted as a percentage of the total aldehydes formed related to k4 (7 % and 1.2 %, for propanal and hexanal, respectively).' That 1.2 % is a 25 C, whole-oil (C18:1 618.5 / C18:2 191.7 / C18:3 92.2 mg/g) figure and is NOT the same quantity as Frankel's within-slate share, which is a fraction of six measured peaks from a PURE linoleate hydroperoxide feed. The two are reported side by side in the fit report and never averaged."
+    },
+    "q10": {
+      "key": "Q10",
+      "default": 2.449489742783178,
+      "band": [
+        2.0,
+        3.0
+      ],
+      "evidence_class": "declared_assumption",
+      "source": "Schroen & Berton-Carabin (2022) sec. 3.2.2 and sec. 4.2, twice, verbatim: 'In general the reaction rate constant would need to be decreased by a factor of 2-3 for every 10 C temperature difference' and 'parameters will need to be adjusted according to their temperature-sensitivity, which typically is in the order of a factor of 2-3 per 10 C temperature difference'.",
+      "licensed_span_C": [
+        15.0,
+        40.0
+      ],
+      "warning": "EXTRAPOLATION WARNING -- THE LIPID LANE'S RATE IS AN ASSUMPTION, NOT A MEASUREMENT. The hydroperoxide decomposition constant is anchored at 25 C (Schroen & Berton-Carabin 2022, k4 = 6e-3 /h), hand-fitted by visual agreement, with NO standard error anywhere in the source, in a rapeseed O/W emulsion at pH 6.7, and it is an explicit LUMP over all secondary products. Its TEMPERATURE DEPENDENCE IS MEASURED NOWHERE (declared gap: research_round3_channels.md sec. F.3, re-affirming k3 sec. C.9). The Q10 applied here is the authors' own stated 2-3, but they licensed ADJUSTMENT, not an extrapolation across ~11.5 decades of 10 C steps (a factor of 3e3-8e5). The BRANCH DISTRIBUTION is measured; the ABSOLUTE RATE is not. Ratios between formulations at a common rate assumption are first-class; absolute ppb inherits this band."
+    },
+    "carriers": {
+      "pea_protein_isolate": {
+        "lipid_fraction": [
+          0.01,
+          0.025,
+          0.06
+        ],
+        "peroxide_value_meq_per_kg": [
+          2.0,
+          10.0,
+          40.0
+        ],
+        "evidence_class": "declared_assumption",
+        "source": "Fatty-acid profile and residual-lipid fraction carried forward VERBATIM from data/lit/lipid_oxidation_calibration.json matrix_lipid_profiles['pea_iso'], whose own provenance block says 'literature-typical values already present in the codebase'. They are NOT corpus values and NOT in the FIT column.",
+        "note": "THE LARGEST ASSUMPTION IN THIS MODULE, together with Q10. The peroxide value is not reported by any source for any of the exam's matrices; the band [2, 40] meq/kg spans an unoxidised isolate to a badly rancid one. It is propagated into every interval, and a user who measures PV collapses it."
+      },
+      "soy_protein_isolate": {
+        "lipid_fraction": [
+          0.008,
+          0.02,
+          0.05
+        ],
+        "peroxide_value_meq_per_kg": [
+          2.0,
+          10.0,
+          40.0
+        ],
+        "evidence_class": "declared_assumption",
+        "source": "As pea, from matrix_lipid_profiles['soy_iso'].",
+        "note": "Same standing as the pea entry."
+      },
+      "frankel_pure_hydroperoxide": {
+        "lipid_fraction": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "peroxide_value_meq_per_kg": [
+          2000.0,
+          2000.0,
+          2000.0
+        ],
+        "evidence_class": "structural_constant",
+        "source": "Frankel 1989 Methods: 13.1 mg methyl linoleate hydroperoxides injected from a 200 uL hexane solution, thermolysed in the injector port.",
+        "note": "Present so the FIT and the nonanal hold-out are run through the SAME code path as a real matrix, with no oleate at all."
+      }
+    },
+    "covalent_sink": {
+      "enabled": false,
+      "k2_M_per_s_at_20C_ceiling": 2.5e-05,
+      "why_disabled": "INERT BY RULING (FIT_HOLDOUT_DECLARATION Amendment 6 ruling 2). The channel's Ea on food proteins is UNMEASURED in every corpus source -- a NAMED WET-LAB GAP -- so evaluating it at process temperature would require inventing the one number that decides whether it matters at all. It contributes exactly 0.0 to the point prediction, it is reported as a ceiling on every lipid prediction, and the lane-coupling guard in lipid.py asserts that it is still zero before permitting co-integration with a Maillard lane."
+    },
+    "declared_gaps": {
+      "LOOH_formation": "NOT MODELLED, DECLARED. The hydroperoxide pool is an INPUT (an oxidation-state proxy), not a state variable that grows during heating. Schroen's initiation constants k1 (1.4e-5 to 6.5e-5 /h) and k5 are emulsifier-specific, 25 C, hand-fitted, and vary 4.6x between beta-lactoglobulin and beta-casein -- i.e. the ONE part of that paper's scheme the authors say is system-dependent. Extrapolating a system-dependent initiation term across 115 C would add a second unmeasured factor on top of the one this module already declares. The consequence is stated plainly: for a long, hot process the module UNDER-predicts, because it cannot make new hydroperoxide.",
+      "decadienal_to_hexanal": "NOT MODELLED, DECLARED. Frankel 1989's introduction cites Schieberle & Grosch (1981) for 'hexanal may form ... after oxidative decomposition of 2,4-decadienal'. If that route is live, hexanal and 2,4-decadienal are coupled and the fitted 13-OOH/9-OOH split is partly an artefact. No rate for it exists in the corpus, so it is a structurally enabled edge with no constant: reported as a named risk to the FIT, not silently assumed absent."
+    },
+    "prohibited_derivations": {
+      "Ea for LOOH decomposition from Frankel 1989": "ONE TEMPERATURE (180 C). k3 sec. C.9, verbatim: 'NOT a yield source ... no absolute yield and no Ea exist in it'. Re-affirmed by research_round3_channels.md sec. F.3 after a further search round.",
+      "Q10 baked into a rate constant": "The Q10 is the REPO'S assumption, not the authors'. It is exposed as Q10_ASSUMPTION with a band and a mandatory warning, and no stored constant is ever pre-multiplied by it.",
+      "oleate -> nonanal branch fraction": "Measured nowhere in the fit corpus. Frankel 1989 fed linoleate only. The FAST lane's shipped 0.15 has no source. Requests for absolute nonanal in an oleate-bearing matrix are REFUSED.",
+      "linoleate -> 2-pentylfuran branch fraction": "Not in Frankel's six-product slate and measured nowhere else in the corpus. The FAST lane's shipped 0.08 has no source.",
+      "aldehyde -> alcohol reduction (hexanal -> 1-hexanol)": "No reduction step is measured anywhere in the corpus, and in a thermally processed extrudate the reductant pool is not even identified. Refused.",
+      "propanal branch from the linolenate channel": "Schroen's 7 % propanal is a property of RAPESEED OIL's 92.2 mg/g alpha-linolenate, not a branch fraction of a linoleate hydroperoxide. Frankel's slate contains no propanal. Importing it would import an oil's composition as if it were chemistry.",
+      "a mass yield of hexanal per hydroperoxide": "Frankel's shares are fractions of SIX MEASURED PEAKS, and two of the scissions' partners (2-nonenal, methyl 12-oxo-10-dodecenoate) are named in his introduction and quantified in none of his tables. The share is therefore a WITHIN-SLATE share, and this module carries the difference in LIPID_FRAG_C rather than pretending the slate closes."
+    },
+    "source_contradictions": {
+      "schroen_1.2pct_vs_frankel_11_20pct": "Schroen's hexanal is 1.2 % of the secondary-product flux at 25 C in whole rapeseed oil; Frankel's is 11-20 % of a six-peak slate at 180 C from a PURE linoleate hydroperoxide. These differ by ~10-17x and they are NOT the same quantity: different denominator (all secondary products vs six peaks), different feed (whole oil, 62 % oleate, vs pure linoleate hydroperoxide), different temperature (25 vs 180 C) and different mechanism mix (Frankel's heterolytic Hock route is heat-promoted and cannot be active at 25 C). Reported side by side; never averaged, never reconciled by a fitted factor.",
+      "pentane_vs_me13oxo_pairing": "Pentane and methyl 13-oxo-9,11-tridecadienoate are the two halves of ONE beta-scission and should be 1:1. Their measured ratio across the three zero-additive FIT columns spans 8.5x (0.80 / 0.46 / 0.094). Either the GC recovery of a C5 alkane and a C14 dienoate differ enormously, or the pairing is wrong. This module does NOT impose the pairing and does NOT absorb the discrepancy into a response factor; it fits free shares inside each isomer's simplex and reports the falsified pairing."
+    },
+    "shipped_values_refuted": {
+      "hexanal 0.37": "data/lit/lipid_oxidation_calibration.json branching_ratios both paths, used at src/lipid_oxidation.py:446 and :512. Frankel's measured hexanal share spans 11-20 % across the three zero-additive columns and 11-26 % across all 26 columns: 0.37 sits ABOVE the paper's entire measured range. B6 does not edit that file (it belongs to the FAST lane); it declares its own registry and reports the contradiction.",
+      "nonanal 0.15": "same file, hexanal_path. Refuted STRUCTURALLY, not numerically: nonanal is the C9 fragment of the OLEATE double bond and cannot come from a linoleate hydroperoxide at all. See species_lipid.NONANAL."
+    },
+    "no_dft": true
+  },
+  "network": {
+    "module": "src/kinetic_core/lipid.py",
+    "wave": "B6 -- the lipid-oxidation module",
+    "species": [
+      "LOOH_13_ct",
+      "LOOH_13_tt",
+      "LOOH_9_ct",
+      "LOOH_9_tt",
+      "LOOH_OL",
+      "PENTANE",
+      "HEXANAL",
+      "ME_OCTANOATE",
+      "DECADIENAL",
+      "ME_9_OXONONANOATE",
+      "ME_13_OXO_TRIDECADIENOATE",
+      "NONANAL",
+      "LIPID_FRAG_C"
+    ],
+    "measured_slate": [
+      "PENTANE",
+      "HEXANAL",
+      "ME_OCTANOATE",
+      "DECADIENAL",
+      "ME_9_OXONONANOATE",
+      "ME_13_OXO_TRIDECADIENOATE"
+    ],
+    "reference_autoxidation_system": "mixed_ct_tt_9_13",
+    "Y_hexanal_per_LOOH": 0.01,
+    "Y_hexanal_provenance": "k_hexanal / k4 from Schroen & Berton-Carabin 2022 Table 1 -- a RATIO of two constants from the same table of the same paper, so the hand-fitting offset and the Q10 both cancel. The authors state the same ratio in prose as '1.2 %'; 6e-5/6e-3 = 1.0 %, and the 0.2 pp difference is their rounding, reported rather than reconciled.",
+    "rate_is_measured": false,
+    "distribution_is_measured": true,
+    "donor_parameter_is_fitted": false,
+    "covalent_sink_enabled": false
+  },
+  "named_unquantified_coproducts": {
+    "trans-2-nonenal": "the Hock partner of methyl 9-oxononanoate from the 9-hydroperoxide (Frankel 1989 introduction, attributing refs 4-7). Not in the six-product slate; no share is fitted for it, and none is invented.",
+    "methyl 12-oxo-10-dodecenoate": "the Hock partner of HEXANAL from the 13-hydroperoxide (same source). Its absence from the slate is why the hexanal share cannot be read as a mass yield: the slate's denominator is the sum of six MEASURED peaks, not the scission's full carbon."
+  },
+  "prohibited_derivations": {
+    "Ea for LOOH decomposition from Frankel 1989": "ONE TEMPERATURE (180 C). k3 sec. C.9, verbatim: 'NOT a yield source ... no absolute yield and no Ea exist in it'. Re-affirmed by research_round3_channels.md sec. F.3 after a further search round.",
+    "Q10 baked into a rate constant": "The Q10 is the REPO'S assumption, not the authors'. It is exposed as Q10_ASSUMPTION with a band and a mandatory warning, and no stored constant is ever pre-multiplied by it.",
+    "oleate -> nonanal branch fraction": "Measured nowhere in the fit corpus. Frankel 1989 fed linoleate only. The FAST lane's shipped 0.15 has no source. Requests for absolute nonanal in an oleate-bearing matrix are REFUSED.",
+    "linoleate -> 2-pentylfuran branch fraction": "Not in Frankel's six-product slate and measured nowhere else in the corpus. The FAST lane's shipped 0.08 has no source.",
+    "aldehyde -> alcohol reduction (hexanal -> 1-hexanol)": "No reduction step is measured anywhere in the corpus, and in a thermally processed extrudate the reductant pool is not even identified. Refused.",
+    "propanal branch from the linolenate channel": "Schroen's 7 % propanal is a property of RAPESEED OIL's 92.2 mg/g alpha-linolenate, not a branch fraction of a linoleate hydroperoxide. Frankel's slate contains no propanal. Importing it would import an oil's composition as if it were chemistry.",
+    "a mass yield of hexanal per hydroperoxide": "Frankel's shares are fractions of SIX MEASURED PEAKS, and two of the scissions' partners (2-nonenal, methyl 12-oxo-10-dodecenoate) are named in his introduction and quantified in none of his tables. The share is therefore a WITHIN-SLATE share, and this module carries the difference in LIPID_FRAG_C rather than pretending the slate closes."
+  },
+  "source_contradictions": {
+    "schroen_1.2pct_vs_frankel_11_20pct": "Schroen's hexanal is 1.2 % of the secondary-product flux at 25 C in whole rapeseed oil; Frankel's is 11-20 % of a six-peak slate at 180 C from a PURE linoleate hydroperoxide. These differ by ~10-17x and they are NOT the same quantity: different denominator (all secondary products vs six peaks), different feed (whole oil, 62 % oleate, vs pure linoleate hydroperoxide), different temperature (25 vs 180 C) and different mechanism mix (Frankel's heterolytic Hock route is heat-promoted and cannot be active at 25 C). Reported side by side; never averaged, never reconciled by a fitted factor.",
+    "pentane_vs_me13oxo_pairing": "Pentane and methyl 13-oxo-9,11-tridecadienoate are the two halves of ONE beta-scission and should be 1:1. Their measured ratio across the three zero-additive FIT columns spans 8.5x (0.80 / 0.46 / 0.094). Either the GC recovery of a C5 alkane and a C14 dienoate differ enormously, or the pairing is wrong. This module does NOT impose the pairing and does NOT absorb the discrepancy into a response factor; it fits free shares inside each isomer's simplex and reports the falsified pairing."
+  },
+  "shipped_values_refuted": {
+    "hexanal 0.37": "data/lit/lipid_oxidation_calibration.json branching_ratios both paths, used at src/lipid_oxidation.py:446 and :512. Frankel's measured hexanal share spans 11-20 % across the three zero-additive columns and 11-26 % across all 26 columns: 0.37 sits ABOVE the paper's entire measured range. B6 does not edit that file (it belongs to the FAST lane); it declares its own registry and reports the contradiction.",
+    "nonanal 0.15": "same file, hexanal_path. Refuted STRUCTURALLY, not numerically: nonanal is the C9 fragment of the OLEATE double bond and cannot come from a linoleate hydroperoxide at all. See species_lipid.NONANAL."
+  },
+  "holdout_exposure_disclosure": "THE BUILDER OF THIS WAVE SAW THE ALPHA-TOCOPHEROL HOLD-OUT COLUMNS. Frankel 1989 prints the zero-additive column (FIT) and the tocopherol columns (HOLD-OUT) in the SAME TABLE ROWS, and the abstract states the hold-out result in prose. Reading the fit column without seeing the hold-out column is impossible from that PDF. Consequence, adopted in the pre-registration sec. 0 and binding: the tocopherol hold-out is scored seen_diagnostic, never gating (the Amendment 9 clause 1 precedent), and the mitigation is structural -- the donor term has NO FITTED PARAMETER, so there is nothing to tune toward the seen numbers. The nonanal absence stays GATING because it is a structural zero fixed by molecular topology. The two frozen Bi 2020 bundles were never opened."
+}

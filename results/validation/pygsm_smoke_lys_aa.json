@@ -1,0 +1,64 @@
+{
+  "n_targets": 2,
+  "pass_count": 0,
+  "verdict": "REVIEW",
+  "records": [
+    {
+      "target_id": "lysinoalanine_crosslink",
+      "gsm": {
+        "converged": false,
+        "ts_energy_eh_xtb": 0.0,
+        "peak_index": 0,
+        "n_iters": 11,
+        "elapsed_s": 618.0154386570211,
+        "audit_dir": "/workspace/results/validation/pygsm_scratch/lysinoalanine_crosslink",
+        "reason": "peak at endpoint (index 0 of 11); no interior maximum",
+        "extras": {}
+      },
+      "passes_saddle_gate": false
+    },
+    {
+      "target_id": "aa_ring_open_dicarbonyl",
+      "gsm": {
+        "converged": true,
+        "ts_energy_eh_xtb": 1035.9090154813057,
+        "peak_index": 5,
+        "n_iters": 11,
+        "elapsed_s": 78.3744861020241,
+        "audit_dir": "/workspace/results/validation/pygsm_scratch/aa_ring_open_dicarbonyl",
+        "reason": "DE-GSM converged: TS at node 5/10, barrier_xtb=1035.909015 Eh (diagnostic only)",
+        "extras": {
+          "node_energies_eh": [
+            0.0,
+            -343.91466390281494,
+            -219.8712808989003,
+            -180.86253362805292,
+            -52.81550749935923,
+            1035.9090154813057,
+            -208.00112788390834,
+            -373.0716945892491,
+            -396.6039183979228,
+            -399.14229136245194,
+            -394.4857926904115
+          ],
+          "n_active_nodes": 11
+        }
+      },
+      "passes_saddle_gate": false,
+      "xtb_probe": {
+        "n_imag": 0,
+        "fmax_ev_ang": 129.2698552909055,
+        "energy_eh": -43.03584593911199
+      },
+      "ts_validation": {
+        "n_imaginary": 0,
+        "n_significant_imaginary": 0,
+        "imaginary_freqs_cm1": [],
+        "most_negative_cm1": null,
+        "is_true_saddle": false,
+        "verdict": "minimum",
+        "floor_cm1": 50.0
+      }
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "summary": {
+    "governing_status": "hold_observable_first",
+    "mechanistic_priority_benchmark_count": 0,
+    "benchmarks_with_named_targets": 0,
+    "cheap_first_advance_count": 4,
+    "approved_offline_job_count": 0,
+    "candidate_offline_job_count": 0,
+    "approved_offline_job_families": [],
+    "candidate_offline_job_families": [],
+    "policy": "continue_only_when_observable_closure_names_the_targets_and_cheap_first_screening_improves_benchmark_visible_diagnostics"
+  },
+  "blockers": [
+    "observable closure still names the benchmark-visible compounds that must move before mechanistic escalation",
+    "cheap-first screening produced no benchmark-visible improvement for the active mechanistic-priority families",
+    "no selective DFT jobs are approved until a cheap-first perturbation improves benchmark-visible diagnostics",
+    "OWNER POLICY 2026-08-28: the DFT lane is closed permanently \u2014 computed barriers are not trusted at Maillard-relevant accuracy; measured kinetics only"
+  ],
+  "mechanistic_priority_benchmarks": [],
+  "approved_offline_jobs": [],
+  "candidate_offline_jobs": []
+}

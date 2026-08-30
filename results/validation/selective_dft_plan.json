@@ -1,0 +1,151 @@
+{
+  "summary": {
+    "candidate_count": 9,
+    "run_now": 0,
+    "defer": 4,
+    "reject": 5
+  },
+  "candidates": [
+    {
+      "reaction_family": "thiol_oxidation",
+      "reaction_id": "family::thiol_oxidation",
+      "recommended_offsets": {
+        "thiol_oxidation": -1.0
+      },
+      "cheap_screen_decision": "defer",
+      "total_improvement": 1650.4082732004438,
+      "decision": "defer",
+      "priority_tier": "cheap_first_hold",
+      "rationale": "cheap-first perturbation moves mechanistic-priority surrogates but does not change the mechanistic-priority benchmark decisions",
+      "required_outputs": [],
+      "surrogate_plan": "Preserve current surrogate barrier until a cheap-first screen produces benchmark-visible improvement."
+    },
+    {
+      "reaction_family": "amadori_rearrangement",
+      "reaction_id": "family::amadori_rearrangement",
+      "recommended_offsets": {
+        "amadori": 1.0,
+        "amadori_rearrangement": 1.0
+      },
+      "cheap_screen_decision": "defer",
+      "total_improvement": 359.764778454308,
+      "decision": "defer",
+      "priority_tier": "cheap_first_hold",
+      "rationale": "cheap-first perturbation moves mechanistic-priority surrogates but does not change the mechanistic-priority benchmark decisions",
+      "required_outputs": [],
+      "surrogate_plan": "Preserve current surrogate barrier until a cheap-first screen produces benchmark-visible improvement."
+    },
+    {
+      "reaction_family": "1,2-enolisation",
+      "reaction_id": "family::1,2-enolisation",
+      "recommended_offsets": {
+        "1,2-enolisation": 1.0,
+        "1,2_enolisation": 1.0,
+        "enol": 1.0,
+        "enolisation": 1.0,
+        "enolisation_1_2": 1.0
+      },
+      "cheap_screen_decision": "defer",
+      "total_improvement": 194.88759091250546,
+      "decision": "defer",
+      "priority_tier": "cheap_first_hold",
+      "rationale": "cheap-first perturbation moves mechanistic-priority surrogates but does not change the mechanistic-priority benchmark decisions",
+      "required_outputs": [],
+      "surrogate_plan": "Preserve current surrogate barrier until a cheap-first screen produces benchmark-visible improvement."
+    },
+    {
+      "reaction_family": "aminoketone_condensation",
+      "reaction_id": "family::aminoketone_condensation",
+      "recommended_offsets": {
+        "aminoketone_condensation": 1.0
+      },
+      "cheap_screen_decision": "defer",
+      "total_improvement": -36.764743888461275,
+      "decision": "defer",
+      "priority_tier": "cheap_first_hold",
+      "rationale": "cheap-first perturbation moves mechanistic-priority surrogates but does not change the mechanistic-priority benchmark decisions",
+      "required_outputs": [],
+      "surrogate_plan": "Preserve current surrogate barrier until a cheap-first screen produces benchmark-visible improvement."
+    },
+    {
+      "reaction_family": "retro_aldol",
+      "reaction_id": "family::retro_aldol",
+      "recommended_offsets": {
+        "retro_aldol": -3.0,
+        "retro_aldol_fragmentation": -3.0
+      },
+      "cheap_screen_decision": "advance",
+      "total_improvement": 2599.7773028318434,
+      "decision": "reject",
+      "priority_tier": "not_applicable",
+      "rationale": "Low sensitivity or low benchmark impact. Keep this reaction on the cheap-first surrogate path.",
+      "required_outputs": [],
+      "surrogate_plan": "No DFT. Preserve current surrogate until a benchmark-visible gap appears."
+    },
+    {
+      "reaction_family": "schiff_condensation",
+      "reaction_id": "family::schiff_condensation",
+      "recommended_offsets": {
+        "lipid_schiff_base": 3.0,
+        "schiff": 3.0,
+        "schiff_base_formation": 3.0,
+        "schiff_condensation": 3.0
+      },
+      "cheap_screen_decision": "advance",
+      "total_improvement": 708.0165797705006,
+      "decision": "reject",
+      "priority_tier": "not_applicable",
+      "rationale": "Low sensitivity or low benchmark impact. Keep this reaction on the cheap-first surrogate path.",
+      "required_outputs": [],
+      "surrogate_plan": "No DFT. Preserve current surrogate until a benchmark-visible gap appears."
+    },
+    {
+      "reaction_family": "thiol_addition",
+      "reaction_id": "family::thiol_addition",
+      "recommended_offsets": {
+        "thiol_addition": 3.0,
+        "thiol_addition_h2": 3.0,
+        "thiol_addition_legacy_shortcut": 3.0
+      },
+      "cheap_screen_decision": "advance",
+      "total_improvement": 6.120647785880683,
+      "decision": "reject",
+      "priority_tier": "not_applicable",
+      "rationale": "Low sensitivity or low benchmark impact. Keep this reaction on the cheap-first surrogate path.",
+      "required_outputs": [],
+      "surrogate_plan": "No DFT. Preserve current surrogate until a benchmark-visible gap appears."
+    },
+    {
+      "reaction_family": "strecker_degradation",
+      "reaction_id": "family::strecker_degradation",
+      "recommended_offsets": {
+        "strecker": -3.0,
+        "strecker_degradation": -3.0
+      },
+      "cheap_screen_decision": "advance",
+      "total_improvement": 0.31572176319845247,
+      "decision": "reject",
+      "priority_tier": "not_applicable",
+      "rationale": "Low sensitivity or low benchmark impact. Keep this reaction on the cheap-first surrogate path.",
+      "required_outputs": [],
+      "surrogate_plan": "No DFT. Preserve current surrogate until a benchmark-visible gap appears."
+    },
+    {
+      "reaction_family": "cysteine_thermolysis",
+      "reaction_id": "family::cysteine_thermolysis",
+      "recommended_offsets": {
+        "cys": -1.0,
+        "cysteine_degradation": -1.0,
+        "cysteine_thermolysis": -1.0
+      },
+      "cheap_screen_decision": "reject",
+      "total_improvement": 0.0,
+      "decision": "reject",
+      "priority_tier": "not_applicable",
+      "rationale": "cheap-first perturbation does not move the target panel or benchmark diagnostics",
+      "required_outputs": [],
+      "surrogate_plan": "Preserve current surrogate barrier until a cheap-first screen produces benchmark-visible improvement."
+    }
+  ],
+  "offline_jobs": []
+}

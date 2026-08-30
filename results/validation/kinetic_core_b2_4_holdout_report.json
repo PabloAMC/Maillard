@@ -1,0 +1,3022 @@
+{
+  "wave": "B2.4 -- the declared weighting, the ensemble, and two scorer conditions",
+  "prereg": "results/validation/kinetic_core_b2_4_prereg.md",
+  "generated_by": "scripts/generators/generate_kinetic_core_b2_4_reports.py",
+  "declared_weights": {
+    "shipped": 1.4,
+    "half": 0.7,
+    "measured": 0.28
+  },
+  "weight_basis": {
+    "shipped": "B2.3's ACCIDENTAL rate made explicit: sigma_log 0.35 over sigma_ph 0.25 = 1.40 decades per pH unit. Reproduces B2.3's objective exactly and is the control -- it is what 'declaring the weighting' costs when the declared value is the one already in force.",
+    "half": "Half the shipped rate, i.e. the three pH endpoints down-weighted by 4x IN COST. Chosen as the smallest intervention large enough to be visible against a 10-dof objective, and chosen for that reason and not for any property of its outcome.",
+    "measured": "The exchange rate the corpus measures ON THE FIT SIDE. Kumazawa 2003's six DECLARED FIT retention rungs move 2-furfurylthiol from 0.995 to 0.110 survival across pH 3.0-6.4: 0.956 decades over 3.4 pH units, i.e. 0.281 decades per pH unit. This prices a pH miss at the level consequence the fit corpus's own pH-response measurement says a pH miss has. It REPLACES a first draft of this value that was derived from Hofmann's hold-out pH ladder -- see the correction note in this module."
+  },
+  "free_set": {
+    "n_free": 20,
+    "n_frozen": 28,
+    "keys": [
+      "k_tdp_fur",
+      "k_nf_mft",
+      "k_nf_mp3p",
+      "k_mgo_mp",
+      "k_glc_ha",
+      "k_dimer_fft",
+      "k_fft_decay",
+      "k_fur_decay",
+      "k_pent_caramel",
+      "k_cys_thermal",
+      "k_thiolate_loss",
+      "ph_acid_yield_per_sink_event",
+      "ph_arp_secondary_ammonium_pKa",
+      "k_fur_fft",
+      "k_osone_decay",
+      "k_dimer_decay",
+      "k_ttca_deg",
+      "k_thiol_decay",
+      "Ea_decay_thiol_sink",
+      "Ea_decay_carbonyl_sink"
+    ],
+    "clause": {
+      "k_tdp_fur": "R1 identified",
+      "k_nf_mft": "R1 identified",
+      "k_nf_mp3p": "R1 identified",
+      "k_mgo_mp": "R1 identified",
+      "k_glc_ha": "R1 identified",
+      "k_dimer_fft": "R1 identified",
+      "k_fft_decay": "R1 identified",
+      "k_fur_decay": "R1 identified",
+      "k_pent_caramel": "R1 identified",
+      "k_cys_thermal": "R1 identified",
+      "k_thiolate_loss": "R1 identified",
+      "ph_acid_yield_per_sink_event": "R2 pH-drift (price-taker of the weighting)",
+      "ph_arp_secondary_ammonium_pKa": "R2 pH-drift (price-taker of the weighting)",
+      "k_fur_fft": "R3 topology switch (moved >=3 decades B2.2->B2.3)",
+      "k_osone_decay": "R3 topology switch (moved >=3 decades B2.2->B2.3)",
+      "k_dimer_decay": "R3 topology switch (moved >=3 decades B2.2->B2.3)",
+      "k_ttca_deg": "R3 topology switch (moved >=3 decades B2.2->B2.3)",
+      "k_thiol_decay": "R3 topology switch (moved >=3 decades B2.2->B2.3)",
+      "Ea_decay_thiol_sink": "R4 decay barrier (traded on/off its bound)",
+      "Ea_decay_carbonyl_sink": "R4 decay barrier (traded on/off its bound)"
+    },
+    "frozen_keys": [
+      "k_pent_dpo",
+      "k_pent_tdp",
+      "k_dpo_c2c3",
+      "k_arp_dpo",
+      "k_arp_tdp",
+      "k_dpo_nf",
+      "k_dpo_ptr",
+      "k_dpo_ddp",
+      "k_ddp_mft",
+      "k_ha_mp_mft",
+      "k_thi_hmp",
+      "k_thi_mesh",
+      "k_hmp_mft",
+      "k_hmp_mp2p",
+      "k_cys_actz",
+      "k_dimer_mft",
+      "k_mmft",
+      "k_mft_decay",
+      "k_nf_decay",
+      "k_h2s_loss",
+      "k_pent_thermal",
+      "k_glc_fur",
+      "k_arp_tdp_th",
+      "k_arp_dpo_th",
+      "k_ddp_mft_hs",
+      "k_fur_fft_hs",
+      "k_ttca_cys",
+      "Ea_lumped_formation"
+    ]
+  },
+  "shipping_choice": {
+    "shipped": "half",
+    "qualifying": [
+      "half",
+      "measured"
+    ],
+    "tied_within_0_05": [
+      "half",
+      "measured"
+    ],
+    "tie_broken_toward_largest_E": true,
+    "fallback_used": false,
+    "criterion": "G1: all three zhou_final_pH_* within 1.0 pH unit at the ensemble-best member. G2: >=4 of 6 members converged. S = log10(max cost / min cost) over converged members; ship the qualifying weighting with the smallest S; ties within 0.05 break toward the largest E. Declared in results/validation/kinetic_core_b2_4_prereg.md sec. 3 before any fit ran. THE EXAM AND THE PANEL DO NOT ENTER IT."
+  },
+  "per_weighting": {
+    "shipped": {
+      "ensemble": {
+        "E": 1.4,
+        "sigma_ph_units": 0.25,
+        "basis": "B2.3's ACCIDENTAL rate made explicit: sigma_log 0.35 over sigma_ph 0.25 = 1.40 decades per pH unit. Reproduces B2.3's objective exactly and is the control -- it is what 'declaring the weighting' costs when the declared value is the one already in force.",
+        "n_members": 6,
+        "n_converged": 2,
+        "n_budget_exhausted": 4,
+        "arms": {
+          "0": "incumbent",
+          "1": "local",
+          "2": "local",
+          "3": "global",
+          "4": "global",
+          "5": "global"
+        },
+        "spread_S_local_arm_only": 6.788751920834102e-08,
+        "costs_by_arm": {
+          "incumbent": [
+            8.146322680728463
+          ],
+          "local": [
+            8.146323954135573,
+            11.10553820469433
+          ],
+          "global": [
+            19.41437375616114,
+            15.595087317542395,
+            15.594761426796884
+          ]
+        },
+        "costs": [
+          8.146322680728463,
+          8.146323954135573,
+          11.10553820469433,
+          19.41437375616114,
+          15.595087317542395,
+          15.594761426796884
+        ],
+        "costs_converged": [
+          8.146322680728463,
+          8.146323954135573
+        ],
+        "best_cost": 8.146322680728463,
+        "worst_converged_cost": 8.146323954135573,
+        "spread_S_log10_max_over_min": 6.788751920834102e-08,
+        "sum_r2_level_per_member": [
+          15.500859570306767,
+          15.500843665365222,
+          21.036455354836466,
+          37.62711052425599,
+          30.426093905767676,
+          30.42695413502581
+        ],
+        "best_sum_r2_level": 15.500859570306767,
+        "best_start": 0,
+        "ph_endpoint_miss_at_best": {
+          "zhou_final_pH_from_pH6": -0.14323662573471685,
+          "zhou_final_pH_from_pH7": 0.1697671948187054,
+          "zhou_final_pH_from_pH8": -0.012205759231001423
+        },
+        "gate_G1_calibration_within_1pH": true,
+        "gate_G2_at_least_4_of_6_converged": false
+      },
+      "best_member": {
+        "weight_tag": "shipped",
+        "ph_endpoint_weight_E": 1.4,
+        "sigma_ph_units": 0.25,
+        "start": 0,
+        "arm": "incumbent",
+        "seed": null,
+        "start_is_b2_3_vector": true,
+        "start_cost": 8.175413408509197,
+        "cost": 8.146322680728463,
+        "sum_r2_level": 15.500859570306767,
+        "evals": 430,
+        "eval_budget": 500,
+        "budget_exhausted": false,
+        "nfev": 29,
+        "status": 2,
+        "converged": true,
+        "seconds": 1375.5,
+        "parameters": {
+          "k_pent_dpo": -0.5446463072676107,
+          "k_pent_tdp": -0.5022095511358302,
+          "k_dpo_c2c3": -3.0155236916597783,
+          "k_arp_dpo": -6.365842545633689,
+          "k_arp_tdp": -1.9026714740978425,
+          "k_dpo_nf": 0.43445392481376577,
+          "k_dpo_ptr": -4.347247153178998,
+          "k_dpo_ddp": 0.04172302756946337,
+          "k_tdp_fur": -3.3911631912754427,
+          "k_ddp_mft": -6.540581367427349,
+          "k_fur_fft": -0.5693718469013034,
+          "k_nf_mft": -2.297352282752142,
+          "k_nf_mp3p": -2.8289312461355975,
+          "k_mgo_mp": -3.9381335426277224,
+          "k_ha_mp_mft": -3.8696667868173487,
+          "k_glc_ha": -0.6930702182462033,
+          "k_thi_hmp": -2.5882946400737175,
+          "k_thi_mesh": -3.273029275775544,
+          "k_hmp_mft": -2.6086953372771946,
+          "k_hmp_mp2p": -3.4372110320564206,
+          "k_cys_actz": -2.9736755938616524,
+          "k_dimer_mft": 0.49999999999999983,
+          "k_dimer_fft": -0.011981275144989829,
+          "k_mmft": -1.9837700999787538,
+          "k_mft_decay": 0.13411252144508923,
+          "k_fft_decay": -0.7792260287422009,
+          "k_dimer_decay": -0.2983088574270863,
+          "k_nf_decay": -2.181605124250818,
+          "k_fur_decay": 0.4999999999997468,
+          "k_h2s_loss": -1.3506222526942775,
+          "k_osone_decay": -1.995673469730289,
+          "k_thiol_decay": -4.554767594669317,
+          "k_pent_caramel": -2.366287420792593,
+          "k_pent_thermal": -3.437313963933767,
+          "k_glc_fur": -4.922868997756941,
+          "k_arp_tdp_th": -4.353715425211875,
+          "k_arp_dpo_th": -1.2902512237780432,
+          "k_ddp_mft_hs": -7.69250097808771,
+          "k_fur_fft_hs": -0.009550422129148002,
+          "k_ttca_cys": -0.5786517733288119,
+          "k_ttca_deg": -5.123080524954025,
+          "k_cys_thermal": -2.0310453797249557,
+          "k_thiolate_loss": -1.0127562233052458,
+          "Ea_lumped_formation": 64.0822869313293,
+          "Ea_decay_thiol_sink": 218.1054216489112,
+          "Ea_decay_carbonyl_sink": 249.99998422922988,
+          "ph_acid_yield_per_sink_event": 0.0004515080943746507,
+          "ph_arp_secondary_ammonium_pKa": 7.488545639613211
+        },
+        "ph_endpoint_miss_pH_units": {
+          "zhou_final_pH_from_pH6": -0.14323662573471685,
+          "zhou_final_pH_from_pH7": 0.1697671948187054,
+          "zhou_final_pH_from_pH8": -0.012205759231001423
+        },
+        "row_ids": [
+          "hofmann_ribose_FFT",
+          "hofmann_ribose_MFT",
+          "hofmann_xylose_FFT",
+          "hofmann_xylose_MFT",
+          "hofmann_glucose_FFT",
+          "hofmann_glucose_MFT",
+          "hofmann_fructose_FFT",
+          "hofmann_fructose_MFT",
+          "hofmann_ribose_NF_insitu",
+          "hofmann_ribose_FUR_insitu",
+          "fed_ribose_h2s_FFT",
+          "fed_ribose_h2s_MFT",
+          "fed_tdp_h2s_FFT",
+          "fed_furfural_h2s_FFT",
+          "fed_nf_h2s_MFT",
+          "fed_nf_cys_MFT",
+          "fed_c2c3_MFT",
+          "fed_c2c3_MFT_pH3",
+          "fed_c2c3_MFT_pH7",
+          "fed_thiamine_MFT",
+          "fed_mgo_h2s_1to1_MP",
+          "fed_mgo_h2s_1to2_MP",
+          "zhou_pH7_MFT",
+          "zhou_pH7_FFT",
+          "zhou_pH7_MFT_over_FFT",
+          "zhou_pH7_dimer_over_MFT",
+          "zhou_pH7_ACTZ",
+          "zhou_pH7_FUR_arp_alone",
+          "whitfield_nf_cys_MFT",
+          "whitfield_nf_h2s_MFT",
+          "whitfield_mercaptoketone_over_MFT",
+          "vanseeventer_cys_conversion",
+          "vanseeventer_ribose_conversion",
+          "zhang_fig1_cys_dimer_over_MFT",
+          "zhang_fig1_gcys_dimer_over_MFT",
+          "zhang_fig1_cys_MMFT_over_MFT",
+          "cerny_ternary_thiamine_share",
+          "cerny_isomer_split",
+          "kang_100C_MFT",
+          "kang_120C_MFT",
+          "kang_100C_FFT",
+          "kang_120C_FFT",
+          "kang_100C_FUR",
+          "kang_120C_FUR",
+          "kang_100C_MFT_over_FFT",
+          "kang_100C_cys_conversion",
+          "kang_120C_cys_conversion",
+          "kang_free_cys_yield_ceiling",
+          "kumazawa_FFT_retention_pH3_0",
+          "kumazawa_FFT_retention_pH4_0",
+          "kumazawa_FFT_retention_pH5_0",
+          "kumazawa_FFT_retention_pH5_4",
+          "kumazawa_FFT_retention_pH6_0",
+          "kumazawa_FFT_retention_pH6_4",
+          "zhou_final_pH_from_pH6",
+          "zhou_final_pH_from_pH7",
+          "zhou_final_pH_from_pH8",
+          "yaghmur_fft_share_ceiling"
+        ]
+      },
+      "largest_residual_row": "fed_c2c3_MFT_pH3",
+      "largest_residual": 2.087018227339003,
+      "fit_rows": {
+        "hofmann_ribose_FFT": {
+          "residual": -0.20775510522107876,
+          "sigma": 0.35,
+          "kind": "conc",
+          "fold": 0.8458351192309254,
+          "miss_pH": null
+        },
+        "hofmann_ribose_MFT": {
+          "residual": -0.17110819609366323,
+          "sigma": 0.35,
+          "kind": "conc",
+          "fold": 0.8711884948330981,
+          "miss_pH": null
+        },
+        "hofmann_xylose_FFT": {
+          "residual": 0.07942814383657107,
+          "sigma": 0.35,
+          "kind": "conc",
+          "fold": 1.0661046812687083,
+          "miss_pH": null
+        },
+        "hofmann_xylose_MFT": {
+          "residual": 0.23268938304965667,
+          "sigma": 0.35,
+          "kind": "conc",
+          "fold": 1.2062609925783327,
+          "miss_pH": null
+        },
+        "hofmann_glucose_FFT": {
+          "residual": -0.34019982673822113,
+          "sigma": 0.35,
+          "kind": "conc",
+          "fold": 0.7602038428486,
+          "miss_pH": null
+        },
+        "hofmann_glucose_MFT": {
+          "residual": 0.6772056307906418,
+          "sigma": 0.35,
+          "kind": "conc",
+          "fold": 1.7259252036179398,
+          "miss_pH": null
+        },
+        "hofmann_fructose_FFT": {
+          "residual": 0.356152274484612,
+          "sigma": 0.35,
+          "kind": "conc",
+          "fold": 1.3324572864171966,
+          "miss_pH": null
+        },
+        "hofmann_fructose_MFT": {
+          "residual": -0.8535309614351256,
+          "sigma": 0.35,
+          "kind": "conc",
+          "fold": 0.5026482368362842,
+          "miss_pH": null
+        },
+        "hofmann_ribose_NF_insitu": {
+          "residual": 0.3355202347603718,
+          "sigma": 0.35,
+          "kind": "conc",
+          "fold": 1.3104850840442068,
+          "miss_pH": null
+        },
+        "hofmann_ribose_FUR_insitu": {
+          "residual": -0.06289908831884462,
+          "sigma": 0.5,
+          "kind": "conc",
+          "fold": 0.9301445716187663,
+          "miss_pH": null
+        },
+        "fed_ribose_h2s_FFT": {
+          "residual": -0.06468602780463659,
+          "sigma": 0.45,
+          "kind": "molpct",
+          "fold": 0.9351715528809761,
+          "miss_pH": null
+        },
+        "fed_ribose_h2s_MFT": {
+          "residual": 0.0007143698577806131,
+          "sigma": 0.45,
+          "kind": "molpct",
+          "fold": 1.0007404778418902,
+          "miss_pH": null
+        },
+        "fed_tdp_h2s_FFT": {
+          "residual": 0.2550853428122338,
+          "sigma": 0.45,
+          "kind": "molpct",
+          "fold": 1.302532007852363,
+          "miss_pH": null
+        },
+        "fed_furfural_h2s_FFT": {
+          "residual": 0.014344718177654293,
+          "sigma": 0.45,
+          "kind": "molpct",
+          "fold": 1.0149744811033377,
+          "miss_pH": null
+        },
+        "fed_nf_h2s_MFT": {
+          "residual": 0.35108938321997374,
+          "sigma": 0.45,
+          "kind": "molpct",
+          "fold": 1.4387661860226446,
+          "miss_pH": null
+        },
+        "fed_nf_cys_MFT": {
+          "residual": 0.3975726813399834,
+          "sigma": 0.45,
+          "kind": "molpct",
+          "fold": 1.5097592759927796,
+          "miss_pH": null
+        },
+        "fed_c2c3_MFT": {
+          "residual": -0.3439759730321701,
+          "sigma": 0.45,
+          "kind": "molpct",
+          "fold": 0.700181790785283,
+          "miss_pH": null
+        },
+        "fed_c2c3_MFT_pH3": {
+          "residual": 2.087018227339003,
+          "sigma": 0.6,
+          "kind": "molpct",
+          "fold": 17.873554808663904,
+          "miss_pH": null
+        },
+        "fed_c2c3_MFT_pH7": {
+          "residual": -1.288010613781978,
+          "sigma": 0.6,
+          "kind": "molpct",
+          "fold": 0.16873051486762367,
+          "miss_pH": null
+        },
+        "fed_thiamine_MFT": {
+          "residual": -0.2187240781342884,
+          "sigma": 0.45,
+          "kind": "molpct",
+          "fold": 0.79721261964642,
+          "miss_pH": null
+        },
+        "fed_mgo_h2s_1to1_MP": {
+          "residual": 0.16704812896983906,
+          "sigma": 0.4,
+          "kind": "molpct",
+          "fold": 1.1663241052401532,
+          "miss_pH": null
+        },
+        "fed_mgo_h2s_1to2_MP": {
+          "residual": 0.03877245536885796,
+          "sigma": 0.4,
+          "kind": "molpct",
+          "fold": 1.036356038289794,
+          "miss_pH": null
+        },
+        "zhou_pH7_MFT": {
+          "residual": -0.2425709866198564,
+          "sigma": 0.5,
+          "kind": "conc",
+          "fold": 0.7563355372756433,
+          "miss_pH": null
+        },
+        "zhou_pH7_FFT": {
+          "residual": -0.26589020249114464,
+          "sigma": 0.5,
+          "kind": "conc",
+          "fold": 0.7363001666194273,
+          "miss_pH": null
+        },
+        "zhou_pH7_MFT_over_FFT": {
+          "residual": 0.046502137290205525,
+          "sigma": 0.25,
+          "kind": "ratio",
+          "fold": 1.0271302843251904,
+          "miss_pH": null
+        },
+        "zhou_pH7_dimer_over_MFT": {
+          "residual": -1.4633667808242878,
+          "sigma": 0.4,
+          "kind": "ratio",
+          "fold": 0.259808459408143,
+          "miss_pH": null
+        },
+        "zhou_pH7_ACTZ": {
+          "residual": -0.0029675871543117186,
+          "sigma": 0.6,
+          "kind": "conc",
+          "fold": 0.9959085198397778,
+          "miss_pH": null
+        },
+        "zhou_pH7_FUR_arp_alone": {
+          "residual": 0.10571296913396987,
+          "sigma": 0.5,
+          "kind": "conc",
+          "fold": 1.129422627953785,
+          "miss_pH": null
+        },
+        "whitfield_nf_cys_MFT": {
+          "residual": -0.5451572650298465,
+          "sigma": 0.5,
+          "kind": "molpct",
+          "fold": 0.5338526065077736,
+          "miss_pH": null
+        },
+        "whitfield_nf_h2s_MFT": {
+          "residual": -0.7703745837472882,
+          "sigma": 0.5,
+          "kind": "molpct",
+          "fold": 0.4119198381011583,
+          "miss_pH": null
+        },
+        "whitfield_mercaptoketone_over_MFT": {
+          "residual": -0.23603704813541718,
+          "sigma": 0.4,
+          "kind": "ratio",
+          "fold": 0.8046095459067213,
+          "miss_pH": null
+        },
+        "vanseeventer_cys_conversion": {
+          "residual": 0.6779444217522503,
+          "sigma": 0.3,
+          "kind": "conversion",
+          "fold": 1.5972883589324567,
+          "miss_pH": null
+        },
+        "vanseeventer_ribose_conversion": {
+          "residual": 0.4164624553605173,
+          "sigma": 0.3,
+          "kind": "conversion",
+          "fold": 1.333333333332889,
+          "miss_pH": null
+        },
+        "zhang_fig1_cys_dimer_over_MFT": {
+          "residual": 0.16215595956000148,
+          "sigma": 0.4,
+          "kind": "ratio",
+          "fold": 1.1610806404889977,
+          "miss_pH": null
+        },
+        "zhang_fig1_gcys_dimer_over_MFT": {
+          "residual": 1.135000677004651,
+          "sigma": 0.4,
+          "kind": "ratio",
+          "fold": 2.8444628810960557,
+          "miss_pH": null
+        },
+        "zhang_fig1_cys_MMFT_over_MFT": {
+          "residual": 0.0039614988221766505,
+          "sigma": 0.5,
+          "kind": "ratio",
+          "fold": 1.0045712605461887,
+          "miss_pH": null
+        },
+        "cerny_ternary_thiamine_share": {
+          "residual": -0.277299362941274,
+          "sigma": 0.2,
+          "kind": "share",
+          "fold": 0.8801164278546402,
+          "miss_pH": null
+        },
+        "cerny_isomer_split": {
+          "residual": 0.0043514848302442155,
+          "sigma": 0.6,
+          "kind": "ratio",
+          "fold": 1.0060299055891586,
+          "miss_pH": null
+        },
+        "kang_100C_MFT": {
+          "residual": -0.07649352795915575,
+          "sigma": 0.4,
+          "kind": "conc",
+          "fold": 0.9319714080028021,
+          "miss_pH": null
+        },
+        "kang_120C_MFT": {
+          "residual": 0.29898113353057854,
+          "sigma": 0.4,
+          "kind": "conc",
+          "fold": 1.3170202525872048,
+          "miss_pH": null
+        },
+        "kang_100C_FFT": {
+          "residual": -0.1141381145085861,
+          "sigma": 0.4,
+          "kind": "conc",
+          "fold": 0.900211909472127,
+          "miss_pH": null
+        },
+        "kang_120C_FFT": {
+          "residual": 0.21825323804207591,
+          "sigma": 0.4,
+          "kind": "conc",
+          "fold": 1.222647587394705,
+          "miss_pH": null
+        },
+        "kang_100C_FUR": {
+          "residual": 0.5359124805565435,
+          "sigma": 0.4,
+          "kind": "conc",
+          "fold": 1.6381927222343906,
+          "miss_pH": null
+        },
+        "kang_120C_FUR": {
+          "residual": -0.3001777268342163,
+          "sigma": 0.4,
+          "kind": "conc",
+          "fold": 0.7584534117596408,
+          "miss_pH": null
+        },
+        "kang_100C_MFT_over_FFT": {
+          "residual": 0.05086720713050838,
+          "sigma": 0.3,
+          "kind": "ratio",
+          "fold": 1.0357624496685462,
+          "miss_pH": null
+        },
+        "kang_100C_cys_conversion": {
+          "residual": -0.05738905882014372,
+          "sigma": 0.3,
+          "kind": "conversion",
+          "fold": 0.9611325431574731,
+          "miss_pH": null
+        },
+        "kang_120C_cys_conversion": {
+          "residual": -0.13061311565052772,
+          "sigma": 0.3,
+          "kind": "conversion",
+          "fold": 0.9137261733695136,
+          "miss_pH": null
+        },
+        "kang_free_cys_yield_ceiling": {
+          "residual": 0.0,
+          "sigma": 0.25,
+          "kind": "peak_fraction_ceiling",
+          "fold": 1.0,
+          "miss_pH": null
+        },
+        "kumazawa_FFT_retention_pH3_0": {
+          "residual": -0.07325930302371604,
+          "sigma": 0.2,
+          "kind": "retention",
+          "fold": 0.9668255957304361,
+          "miss_pH": null
+        },
+        "kumazawa_FFT_retention_pH4_0": {
+          "residual": -0.0312263157045039,
+          "sigma": 0.2,
+          "kind": "retention",
+          "fold": 0.9857226521397985,
+          "miss_pH": null
+        },
+        "kumazawa_FFT_retention_pH5_0": {
+          "residual": -0.15413626002429737,
+          "sigma": 0.2,
+          "kind": "retention",
+          "fold": 0.9314783130844867,
+          "miss_pH": null
+        },
+        "kumazawa_FFT_retention_pH5_4": {
+          "residual": -0.37841680429444785,
+          "sigma": 0.2,
+          "kind": "retention",
+          "fold": 0.8400722503674976,
+          "miss_pH": null
+        },
+        "kumazawa_FFT_retention_pH6_0": {
+          "residual": -0.7566249752452218,
+          "sigma": 0.2,
+          "kind": "retention",
+          "fold": 0.7057891942449397,
+          "miss_pH": null
+        },
+        "kumazawa_FFT_retention_pH6_4": {
+          "residual": 0.7767618147301953,
+          "sigma": 0.2,
+          "kind": "retention",
+          "fold": 1.430053755867419,
+          "miss_pH": null
+        },
+        "zhou_final_pH_from_pH6": {
+          "residual": -0.5729465029388674,
+          "sigma": 0.25,
+          "kind": "ph_endpoint",
+          "fold": null,
+          "miss_pH": -0.14323662573471685
+        },
+        "zhou_final_pH_from_pH7": {
+          "residual": 0.6790687792748216,
+          "sigma": 0.25,
+          "kind": "ph_endpoint",
+          "fold": null,
+          "miss_pH": 0.1697671948187054
+        },
+        "zhou_final_pH_from_pH8": {
+          "residual": -0.04882303692400569,
+          "sigma": 0.25,
+          "kind": "ph_endpoint",
+          "fold": null,
+          "miss_pH": -0.012205759231001423
+        },
+        "yaghmur_fft_share_ceiling": {
+          "residual": 0.31663120512637416,
+          "sigma": 0.3,
+          "kind": "ceiling",
+          "fold": 1.2444841265593731,
+          "miss_pH": null
+        }
+      },
+      "exam": {
+        "d1_pool_n": 23,
+        "d1_pool_geometric_mean_fold": 48.84423549959321,
+        "d1_pool_median_fold": 50.1349150063831,
+        "d1_pool_as_was_geometric_mean_fold": 55.83121772298128,
+        "d1_pool_as_was_median_fold": 47.52837869828901,
+        "d1_pool_in_band": 4,
+        "answered": 27,
+        "declined": 13,
+        "scored": 27,
+        "in_band": 4,
+        "median_fold_all": 50.1349150063831,
+        "geometric_mean_fold_all": 62.2332686855264,
+        "median_abs_log10_all": 1.7001402830195138,
+        "worst_fold": 33391.73597895205,
+        "paired_n": 27,
+        "paired_core_median": 50.1349150063831,
+        "paired_core_geomean": 62.2332686855264,
+        "paired_old_median": 12.648593695999491,
+        "paired_old_geomean": 16.79657576562487,
+        "as_was_geomean": 69.74038712743611,
+        "as_was_median": 47.52837869828901,
+        "by_family": {
+          "acrylamide_180C": {
+            "core_median_fold": 8.14453657237207,
+            "answered": 5,
+            "points": 7
+          },
+          "furan_browning_glc_alanine": {
+            "core_median_fold": null,
+            "answered": 0,
+            "points": 7
+          },
+          "matrix_path_lipid": {
+            "core_median_fold": 1862.7186340692897,
+            "answered": 4,
+            "points": 8
+          },
+          "sulfur_hofmann1998_145C": {
+            "core_median_fold": 12.404817176746738,
+            "answered": 10,
+            "points": 10
+          },
+          "sulfur_yiltirak2026_T_ladder": {
+            "core_median_fold": 202.15498374625923,
+            "answered": 8,
+            "points": 8
+          }
+        },
+        "hofmann_ph_block": {
+          "hofmann_ribose_pH3_FFT": {
+            "predicted_ppb": 1580.5735521982974,
+            "measured_ppb": 229.0,
+            "fold": 6.902067913529683,
+            "in_band": false
+          },
+          "hofmann_ribose_pH3_MFT": {
+            "predicted_ppb": 13.274893383182944,
+            "measured_ppb": 553.0,
+            "fold": 41.65758503948197,
+            "in_band": false
+          },
+          "hofmann_ribose_pH7_FFT": {
+            "predicted_ppb": 0.020972780762762894,
+            "measured_ppb": 12.0,
+            "fold": 572.1701922000711,
+            "in_band": false
+          },
+          "hofmann_ribose_pH7_MFT": {
+            "predicted_ppb": 0.04587042898574036,
+            "measured_ppb": 25.0,
+            "fold": 545.0134335515304,
+            "in_band": false
+          }
+        },
+        "shared_rows_declared": 4
+      },
+      "panel": {
+        "gating_passed": 11,
+        "gating_rows": 32,
+        "diagnostic_passed": 7,
+        "diagnostic_rows": 10,
+        "median_abs_log10_fold_gating": 0.6908689773595985,
+        "geometric_mean_fold_gating": 13.37711403617361,
+        "median_abs_log10_fold_all_scored": 0.6431313032256205,
+        "geometric_mean_fold_all_scored": 11.642020661300366,
+        "hofmann_ph_block": {
+          "hofmann_ribose_pH3_MFT": {
+            "fold": 0.024004931575679275,
+            "pass": false,
+            "shared": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 / MFT"
+          },
+          "hofmann_ribose_pH3_FFT": {
+            "fold": 6.885878399464926,
+            "pass": false,
+            "shared": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 / FFT"
+          },
+          "hofmann_ribose_pH7_MFT": {
+            "fold": 0.001834782047146884,
+            "pass": false,
+            "shared": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 / MFT"
+          },
+          "hofmann_ribose_pH7_FFT": {
+            "fold": 0.0017477255363180747,
+            "pass": false,
+            "shared": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 / FFT"
+          }
+        },
+        "hofmann_ph_block_passed": 0,
+        "shared_rows_declared": 4
+      },
+      "ladder": {
+        "FFT": {
+          "pH3_predicted_ppb": 1580.5735521982974,
+          "pH5_predicted_ppb": 102.34604942694197,
+          "pH7_predicted_ppb": 0.020972780762762894,
+          "pH3_to_pH7_decades": 4.877158693585944,
+          "monotone_falling": true,
+          "humped_at_pH5": false
+        },
+        "MFT": {
+          "pH3_predicted_ppb": 13.274893383182944,
+          "pH5_predicted_ppb": 172.49532197695342,
+          "pH7_predicted_ppb": 0.04587042898574036,
+          "pH3_to_pH7_decades": 2.461498240022451,
+          "monotone_falling": false,
+          "humped_at_pH5": true
+        }
+      }
+    },
+    "half": {
+      "ensemble": {
+        "E": 0.7,
+        "sigma_ph_units": 0.5,
+        "basis": "Half the shipped rate, i.e. the three pH endpoints down-weighted by 4x IN COST. Chosen as the smallest intervention large enough to be visible against a 10-dof objective, and chosen for that reason and not for any property of its outcome.",
+        "n_members": 6,
+        "n_converged": 5,
+        "n_budget_exhausted": 1,
+        "arms": {
+          "0": "incumbent",
+          "1": "local",
+          "2": "local",
+          "3": "global",
+          "4": "global",
+          "5": "global"
+        },
+        "spread_S_local_arm_only": 0.0029478413150727436,
+        "costs_by_arm": {
+          "incumbent": [
+            7.821850395073479
+          ],
+          "local": [
+            7.76893814766631,
+            7.769080122105223
+          ],
+          "global": [
+            15.231531724995499,
+            15.233408189679166,
+            15.232825094821798
+          ]
+        },
+        "costs": [
+          7.821850395073479,
+          7.76893814766631,
+          7.769080122105223,
+          15.231531724995499,
+          15.233408189679166,
+          15.232825094821798
+        ],
+        "costs_converged": [
+          7.821850395073479,
+          7.76893814766631,
+          7.769080122105223,
+          15.231531724995499,
+          15.232825094821798
+        ],
+        "best_cost": 7.76893814766631,
+        "worst_converged_cost": 15.232825094821798,
+        "spread_S_log10_max_over_min": 0.29241879166032103,
+        "sum_r2_level_per_member": [
+          15.282406173238613,
+          15.123046616117534,
+          15.123028680236082,
+          30.053701006840054,
+          30.057602249396524,
+          30.05764363689169
+        ],
+        "best_sum_r2_level": 15.123046616117534,
+        "best_start": 1,
+        "ph_endpoint_miss_at_best": {
+          "zhou_final_pH_from_pH6": -0.12092698251828571,
+          "zhou_final_pH_from_pH7": 0.2807375280372799,
+          "zhou_final_pH_from_pH8": 0.1013435989804563
+        },
+        "gate_G1_calibration_within_1pH": true,
+        "gate_G2_at_least_4_of_6_converged": true
+      },
+      "best_member": {
+        "weight_tag": "half",
+        "ph_endpoint_weight_E": 0.7,
+        "sigma_ph_units": 0.5,
+        "start": 1,
+        "arm": "local",
+        "seed": 20261829,
+        "start_is_b2_3_vector": false,
+        "start_cost": 777.6624245732773,
+        "cost": 7.76893814766631,
+        "sum_r2_level": 15.123046616117534,
+        "evals": 496,
+        "eval_budget": 500,
+        "budget_exhausted": false,
+        "nfev": 35,
+        "status": 2,
+        "converged": true,
+        "seconds": 693.3,
+        "parameters": {
+          "k_pent_dpo": -0.5446463072676107,
+          "k_pent_tdp": -0.5022095511358302,
+          "k_dpo_c2c3": -3.0155236916597783,
+          "k_arp_dpo": -6.365842545633689,
+          "k_arp_tdp": -1.9026714740978425,
+          "k_dpo_nf": 0.43445392481376577,
+          "k_dpo_ptr": -4.347247153178998,
+          "k_dpo_ddp": 0.04172302756946337,
+          "k_tdp_fur": -3.3712379238321435,
+          "k_ddp_mft": -6.540581367427349,
+          "k_fur_fft": -0.5576258994979104,
+          "k_nf_mft": -2.2951695468212665,
+          "k_nf_mp3p": -2.831745325159414,
+          "k_mgo_mp": -3.9383822660334076,
+          "k_ha_mp_mft": -3.8696667868173487,
+          "k_glc_ha": -0.6903256801652468,
+          "k_thi_hmp": -2.5882946400737175,
+          "k_thi_mesh": -3.273029275775544,
+          "k_hmp_mft": -2.6086953372771946,
+          "k_hmp_mp2p": -3.4372110320564206,
+          "k_cys_actz": -2.9736755938616524,
+          "k_dimer_mft": 0.49999999999999983,
+          "k_dimer_fft": -0.01722537587788557,
+          "k_mmft": -1.9837700999787538,
+          "k_mft_decay": 0.13411252144508923,
+          "k_fft_decay": -0.7775269297035279,
+          "k_dimer_decay": -0.28030917421272394,
+          "k_nf_decay": -2.181605124250818,
+          "k_fur_decay": 0.4999844762985889,
+          "k_h2s_loss": -1.3506222526942775,
+          "k_osone_decay": -1.8713010964498968,
+          "k_thiol_decay": -5.538243256773115,
+          "k_pent_caramel": -2.385544399999734,
+          "k_pent_thermal": -3.437313963933767,
+          "k_glc_fur": -4.922868997756941,
+          "k_arp_tdp_th": -4.353715425211875,
+          "k_arp_dpo_th": -1.2902512237780432,
+          "k_ddp_mft_hs": -7.69250097808771,
+          "k_fur_fft_hs": -0.009550422129148002,
+          "k_ttca_cys": -0.5786517733288119,
+          "k_ttca_deg": -8.415339269480457,
+          "k_cys_thermal": -2.015556376000652,
+          "k_thiolate_loss": -1.0153119631627086,
+          "Ea_lumped_formation": 64.0822869313293,
+          "Ea_decay_thiol_sink": 215.67858244265676,
+          "Ea_decay_carbonyl_sink": 249.99999997347555,
+          "ph_acid_yield_per_sink_event": 0.00010451365750547641,
+          "ph_arp_secondary_ammonium_pKa": 7.358634688472921
+        },
+        "ph_endpoint_miss_pH_units": {
+          "zhou_final_pH_from_pH6": -0.12092698251828571,
+          "zhou_final_pH_from_pH7": 0.2807375280372799,
+          "zhou_final_pH_from_pH8": 0.1013435989804563
+        },
+        "row_ids": [
+          "hofmann_ribose_FFT",
+          "hofmann_ribose_MFT",
+          "hofmann_xylose_FFT",
+          "hofmann_xylose_MFT",
+          "hofmann_glucose_FFT",
+          "hofmann_glucose_MFT",
+          "hofmann_fructose_FFT",
+          "hofmann_fructose_MFT",
+          "hofmann_ribose_NF_insitu",
+          "hofmann_ribose_FUR_insitu",
+          "fed_ribose_h2s_FFT",
+          "fed_ribose_h2s_MFT",
+          "fed_tdp_h2s_FFT",
+          "fed_furfural_h2s_FFT",
+          "fed_nf_h2s_MFT",
+          "fed_nf_cys_MFT",
+          "fed_c2c3_MFT",
+          "fed_c2c3_MFT_pH3",
+          "fed_c2c3_MFT_pH7",
+          "fed_thiamine_MFT",
+          "fed_mgo_h2s_1to1_MP",
+          "fed_mgo_h2s_1to2_MP",
+          "zhou_pH7_MFT",
+          "zhou_pH7_FFT",
+          "zhou_pH7_MFT_over_FFT",
+          "zhou_pH7_dimer_over_MFT",
+          "zhou_pH7_ACTZ",
+          "zhou_pH7_FUR_arp_alone",
+          "whitfield_nf_cys_MFT",
+          "whitfield_nf_h2s_MFT",
+          "whitfield_mercaptoketone_over_MFT",
+          "vanseeventer_cys_conversion",
+          "vanseeventer_ribose_conversion",
+          "zhang_fig1_cys_dimer_over_MFT",
+          "zhang_fig1_gcys_dimer_over_MFT",
+          "zhang_fig1_cys_MMFT_over_MFT",
+          "cerny_ternary_thiamine_share",
+          "cerny_isomer_split",
+          "kang_100C_MFT",
+          "kang_120C_MFT",
+          "kang_100C_FFT",
+          "kang_120C_FFT",
+          "kang_100C_FUR",
+          "kang_120C_FUR",
+          "kang_100C_MFT_over_FFT",
+          "kang_100C_cys_conversion",
+          "kang_120C_cys_conversion",
+          "kang_free_cys_yield_ceiling",
+          "kumazawa_FFT_retention_pH3_0",
+          "kumazawa_FFT_retention_pH4_0",
+          "kumazawa_FFT_retention_pH5_0",
+          "kumazawa_FFT_retention_pH5_4",
+          "kumazawa_FFT_retention_pH6_0",
+          "kumazawa_FFT_retention_pH6_4",
+          "zhou_final_pH_from_pH6",
+          "zhou_final_pH_from_pH7",
+          "zhou_final_pH_from_pH8",
+          "yaghmur_fft_share_ceiling"
+        ]
+      },
+      "largest_residual_row": "fed_c2c3_MFT_pH3",
+      "largest_residual": 2.087365452883709,
+      "fit_rows": {
+        "hofmann_ribose_FFT": {
+          "residual": -0.19848741619402407,
+          "sigma": 0.35,
+          "kind": "conc",
+          "fold": 0.852176206848486,
+          "miss_pH": null
+        },
+        "hofmann_ribose_MFT": {
+          "residual": -0.17060216080335286,
+          "sigma": 0.35,
+          "kind": "conc",
+          "fold": 0.8715438521226534,
+          "miss_pH": null
+        },
+        "hofmann_xylose_FFT": {
+          "residual": 0.08869583286362563,
+          "sigma": 0.35,
+          "kind": "conc",
+          "fold": 1.0740970937847116,
+          "miss_pH": null
+        },
+        "hofmann_xylose_MFT": {
+          "residual": 0.2331954183399669,
+          "sigma": 0.35,
+          "kind": "conc",
+          "fold": 1.206753025748377,
+          "miss_pH": null
+        },
+        "hofmann_glucose_FFT": {
+          "residual": -0.3422815009831903,
+          "sigma": 0.35,
+          "kind": "conc",
+          "fold": 0.7589295703194376,
+          "miss_pH": null
+        },
+        "hofmann_glucose_MFT": {
+          "residual": 0.6781168934927609,
+          "sigma": 0.35,
+          "kind": "conc",
+          "fold": 1.7271931730376773,
+          "miss_pH": null
+        },
+        "hofmann_fructose_FFT": {
+          "residual": 0.3625549697047686,
+          "sigma": 0.35,
+          "kind": "conc",
+          "fold": 1.339350485343548,
+          "miss_pH": null
+        },
+        "hofmann_fructose_MFT": {
+          "residual": -0.8516237483365151,
+          "sigma": 0.35,
+          "kind": "conc",
+          "fold": 0.5034214173896856,
+          "miss_pH": null
+        },
+        "hofmann_ribose_NF_insitu": {
+          "residual": 0.3349056100010087,
+          "sigma": 0.35,
+          "kind": "conc",
+          "fold": 1.3098361234724847,
+          "miss_pH": null
+        },
+        "hofmann_ribose_FUR_insitu": {
+          "residual": -0.08042054763168838,
+          "sigma": 0.5,
+          "kind": "conc",
+          "fold": 0.9115693748903975,
+          "miss_pH": null
+        },
+        "fed_ribose_h2s_FFT": {
+          "residual": -0.08734045493762621,
+          "sigma": 0.45,
+          "kind": "molpct",
+          "fold": 0.9134752717658862,
+          "miss_pH": null
+        },
+        "fed_ribose_h2s_MFT": {
+          "residual": 0.005699909667736789,
+          "sigma": 0.45,
+          "kind": "molpct",
+          "fold": 1.0059235121878227,
+          "miss_pH": null
+        },
+        "fed_tdp_h2s_FFT": {
+          "residual": 0.24864756958530188,
+          "sigma": 0.45,
+          "kind": "molpct",
+          "fold": 1.2938722731478092,
+          "miss_pH": null
+        },
+        "fed_furfural_h2s_FFT": {
+          "residual": 0.012781284926546746,
+          "sigma": 0.45,
+          "kind": "molpct",
+          "fold": 1.013331581801869,
+          "miss_pH": null
+        },
+        "fed_nf_h2s_MFT": {
+          "residual": 0.35308717008163226,
+          "sigma": 0.45,
+          "kind": "molpct",
+          "fold": 1.4417475648105482,
+          "miss_pH": null
+        },
+        "fed_nf_cys_MFT": {
+          "residual": 0.3972588568330634,
+          "sigma": 0.45,
+          "kind": "molpct",
+          "fold": 1.509268422194894,
+          "miss_pH": null
+        },
+        "fed_c2c3_MFT": {
+          "residual": -0.34317380480598564,
+          "sigma": 0.45,
+          "kind": "molpct",
+          "fold": 0.7007640079038512,
+          "miss_pH": null
+        },
+        "fed_c2c3_MFT_pH3": {
+          "residual": 2.087365452883709,
+          "sigma": 0.6,
+          "kind": "molpct",
+          "fold": 17.882130985259764,
+          "miss_pH": null
+        },
+        "fed_c2c3_MFT_pH7": {
+          "residual": -1.284488065437197,
+          "sigma": 0.6,
+          "kind": "molpct",
+          "fold": 0.16955365680021153,
+          "miss_pH": null
+        },
+        "fed_thiamine_MFT": {
+          "residual": -0.2181562359696519,
+          "sigma": 0.45,
+          "kind": "molpct",
+          "fold": 0.7976818194002858,
+          "miss_pH": null
+        },
+        "fed_mgo_h2s_1to1_MP": {
+          "residual": 0.16679326002016998,
+          "sigma": 0.4,
+          "kind": "molpct",
+          "fold": 1.166050350978963,
+          "miss_pH": null
+        },
+        "fed_mgo_h2s_1to2_MP": {
+          "residual": 0.03852647946168389,
+          "sigma": 0.4,
+          "kind": "molpct",
+          "fold": 1.0361212761610628,
+          "miss_pH": null
+        },
+        "zhou_pH7_MFT": {
+          "residual": -0.29109986008676686,
+          "sigma": 0.5,
+          "kind": "conc",
+          "fold": 0.7152371598383196,
+          "miss_pH": null
+        },
+        "zhou_pH7_FFT": {
+          "residual": -0.31778443308020027,
+          "sigma": 0.5,
+          "kind": "conc",
+          "fold": 0.6935979221979303,
+          "miss_pH": null
+        },
+        "zhou_pH7_MFT_over_FFT": {
+          "residual": 0.05323285154688581,
+          "sigma": 0.25,
+          "kind": "ratio",
+          "fold": 1.0311176309972716,
+          "miss_pH": null
+        },
+        "zhou_pH7_dimer_over_MFT": {
+          "residual": -1.3456760321195393,
+          "sigma": 0.4,
+          "kind": "ratio",
+          "fold": 0.28955401223157884,
+          "miss_pH": null
+        },
+        "zhou_pH7_ACTZ": {
+          "residual": -0.04262281438348987,
+          "sigma": 0.6,
+          "kind": "conc",
+          "fold": 0.9428146264370135,
+          "miss_pH": null
+        },
+        "zhou_pH7_FUR_arp_alone": {
+          "residual": -0.035669907288383304,
+          "sigma": 0.5,
+          "kind": "conc",
+          "fold": 0.9597653049729946,
+          "miss_pH": null
+        },
+        "whitfield_nf_cys_MFT": {
+          "residual": -0.5616308448125832,
+          "sigma": 0.5,
+          "kind": "molpct",
+          "fold": 0.5238230170073349,
+          "miss_pH": null
+        },
+        "whitfield_nf_h2s_MFT": {
+          "residual": -0.7788992761216887,
+          "sigma": 0.5,
+          "kind": "molpct",
+          "fold": 0.40789685982974977,
+          "miss_pH": null
+        },
+        "whitfield_mercaptoketone_over_MFT": {
+          "residual": -0.23098158857692272,
+          "sigma": 0.4,
+          "kind": "ratio",
+          "fold": 0.8083647451572662,
+          "miss_pH": null
+        },
+        "vanseeventer_cys_conversion": {
+          "residual": 0.6786964082604799,
+          "sigma": 0.3,
+          "kind": "conversion",
+          "fold": 1.5981182921008412,
+          "miss_pH": null
+        },
+        "vanseeventer_ribose_conversion": {
+          "residual": 0.4164624553605173,
+          "sigma": 0.3,
+          "kind": "conversion",
+          "fold": 1.333333333332889,
+          "miss_pH": null
+        },
+        "zhang_fig1_cys_dimer_over_MFT": {
+          "residual": 0.11133547917648509,
+          "sigma": 0.4,
+          "kind": "ratio",
+          "fold": 1.107985792810012,
+          "miss_pH": null
+        },
+        "zhang_fig1_gcys_dimer_over_MFT": {
+          "residual": 1.0881176599029925,
+          "sigma": 0.4,
+          "kind": "ratio",
+          "fold": 2.724250654832464,
+          "miss_pH": null
+        },
+        "zhang_fig1_cys_MMFT_over_MFT": {
+          "residual": -0.02149283603705169,
+          "sigma": 0.5,
+          "kind": "ratio",
+          "fold": 0.9755590946401329,
+          "miss_pH": null
+        },
+        "cerny_ternary_thiamine_share": {
+          "residual": -0.2777742257968147,
+          "sigma": 0.2,
+          "kind": "share",
+          "fold": 0.8799239829015463,
+          "miss_pH": null
+        },
+        "cerny_isomer_split": {
+          "residual": -0.003284918801839324,
+          "sigma": 0.6,
+          "kind": "ratio",
+          "fold": 0.99547199940682,
+          "miss_pH": null
+        },
+        "kang_100C_MFT": {
+          "residual": -0.07969751932759854,
+          "sigma": 0.4,
+          "kind": "conc",
+          "fold": 0.9292252282199921,
+          "miss_pH": null
+        },
+        "kang_120C_MFT": {
+          "residual": 0.2875550934242127,
+          "sigma": 0.4,
+          "kind": "conc",
+          "fold": 1.303232906616239,
+          "miss_pH": null
+        },
+        "kang_100C_FFT": {
+          "residual": -0.08675110467066323,
+          "sigma": 0.4,
+          "kind": "conc",
+          "fold": 0.923207997773599,
+          "miss_pH": null
+        },
+        "kang_120C_FFT": {
+          "residual": 0.23087330676696105,
+          "sigma": 0.4,
+          "kind": "conc",
+          "fold": 1.236941961819328,
+          "miss_pH": null
+        },
+        "kang_100C_FUR": {
+          "residual": 0.5795900791133454,
+          "sigma": 0.4,
+          "kind": "conc",
+          "fold": 1.7054383773202528,
+          "miss_pH": null
+        },
+        "kang_120C_FUR": {
+          "residual": -0.24777502659259965,
+          "sigma": 0.4,
+          "kind": "conc",
+          "fold": 0.795957701746299,
+          "miss_pH": null
+        },
+        "kang_100C_MFT_over_FFT": {
+          "residual": 0.010079203873835017,
+          "sigma": 0.3,
+          "kind": "ratio",
+          "fold": 1.006986761702817,
+          "miss_pH": null
+        },
+        "kang_100C_cys_conversion": {
+          "residual": -0.011395619302155487,
+          "sigma": 0.3,
+          "kind": "conversion",
+          "fold": 0.9921590866589955,
+          "miss_pH": null
+        },
+        "kang_120C_cys_conversion": {
+          "residual": -0.09223326479911043,
+          "sigma": 0.3,
+          "kind": "conversion",
+          "fold": 0.9382747314565574,
+          "miss_pH": null
+        },
+        "kang_free_cys_yield_ceiling": {
+          "residual": 0.0,
+          "sigma": 0.25,
+          "kind": "peak_fraction_ceiling",
+          "fold": 1.0,
+          "miss_pH": null
+        },
+        "kumazawa_FFT_retention_pH3_0": {
+          "residual": -0.07698509682569982,
+          "sigma": 0.2,
+          "kind": "retention",
+          "fold": 0.9651681469609926,
+          "miss_pH": null
+        },
+        "kumazawa_FFT_retention_pH4_0": {
+          "residual": -0.034731055897627656,
+          "sigma": 0.2,
+          "kind": "retention",
+          "fold": 0.9841329863669385,
+          "miss_pH": null
+        },
+        "kumazawa_FFT_retention_pH5_0": {
+          "residual": -0.1558266691395721,
+          "sigma": 0.2,
+          "kind": "retention",
+          "fold": 0.9307534746255838,
+          "miss_pH": null
+        },
+        "kumazawa_FFT_retention_pH5_4": {
+          "residual": -0.37799805880387183,
+          "sigma": 0.2,
+          "kind": "retention",
+          "fold": 0.840234265038015,
+          "miss_pH": null
+        },
+        "kumazawa_FFT_retention_pH6_0": {
+          "residual": -0.7557853533857994,
+          "sigma": 0.2,
+          "kind": "retention",
+          "fold": 0.7060621475711896,
+          "miss_pH": null
+        },
+        "kumazawa_FFT_retention_pH6_4": {
+          "residual": 0.7691920941762129,
+          "sigma": 0.2,
+          "kind": "retention",
+          "fold": 1.4250772887082508,
+          "miss_pH": null
+        },
+        "zhou_final_pH_from_pH6": {
+          "residual": -0.24185396503657142,
+          "sigma": 0.25,
+          "kind": "ph_endpoint",
+          "fold": null,
+          "miss_pH": -0.060463491259142854
+        },
+        "zhou_final_pH_from_pH7": {
+          "residual": 0.5614750560745598,
+          "sigma": 0.25,
+          "kind": "ph_endpoint",
+          "fold": null,
+          "miss_pH": 0.14036876401863996
+        },
+        "zhou_final_pH_from_pH8": {
+          "residual": 0.2026871979609126,
+          "sigma": 0.25,
+          "kind": "ph_endpoint",
+          "fold": null,
+          "miss_pH": 0.05067179949022815
+        },
+        "yaghmur_fft_share_ceiling": {
+          "residual": 0.32712660314508474,
+          "sigma": 0.3,
+          "kind": "ceiling",
+          "fold": 1.2535393772663515,
+          "miss_pH": null
+        }
+      },
+      "exam": {
+        "d1_pool_n": 23,
+        "d1_pool_geometric_mean_fold": 49.1724555773659,
+        "d1_pool_median_fold": 50.1349150063831,
+        "d1_pool_as_was_geometric_mean_fold": 56.16222842841283,
+        "d1_pool_as_was_median_fold": 46.66764114394788,
+        "d1_pool_in_band": 4,
+        "answered": 27,
+        "declined": 13,
+        "scored": 27,
+        "in_band": 4,
+        "median_fold_all": 50.1349150063831,
+        "geometric_mean_fold_all": 62.58932839934264,
+        "median_abs_log10_all": 1.7001402830195138,
+        "worst_fold": 33391.73597895205,
+        "paired_n": 27,
+        "paired_core_median": 50.1349150063831,
+        "paired_core_geomean": 62.58932839934264,
+        "paired_old_median": 12.648593695999491,
+        "paired_old_geomean": 16.79657576562487,
+        "as_was_geomean": 70.09245226845069,
+        "as_was_median": 46.66764114394788,
+        "by_family": {
+          "acrylamide_180C": {
+            "core_median_fold": 8.14453657237207,
+            "answered": 5,
+            "points": 7
+          },
+          "furan_browning_glc_alanine": {
+            "core_median_fold": null,
+            "answered": 0,
+            "points": 7
+          },
+          "matrix_path_lipid": {
+            "core_median_fold": 1862.7186340692897,
+            "answered": 4,
+            "points": 8
+          },
+          "sulfur_hofmann1998_145C": {
+            "core_median_fold": 12.439712501161617,
+            "answered": 10,
+            "points": 10
+          },
+          "sulfur_yiltirak2026_T_ladder": {
+            "core_median_fold": 205.66059036092352,
+            "answered": 8,
+            "points": 8
+          }
+        },
+        "hofmann_ph_block": {
+          "hofmann_ribose_pH3_FFT": {
+            "predicted_ppb": 1598.3357835676672,
+            "measured_ppb": 229.0,
+            "fold": 6.979632242653569,
+            "in_band": false
+          },
+          "hofmann_ribose_pH3_MFT": {
+            "predicted_ppb": 13.27152099657174,
+            "measured_ppb": 553.0,
+            "fold": 41.668170524150874,
+            "in_band": false
+          },
+          "hofmann_ribose_pH7_FFT": {
+            "predicted_ppb": 0.02050661082911143,
+            "measured_ppb": 12.0,
+            "fold": 585.1771460432972,
+            "in_band": false
+          },
+          "hofmann_ribose_pH7_MFT": {
+            "predicted_ppb": 0.0462560920335231,
+            "measured_ppb": 25.0,
+            "fold": 540.4693501102902,
+            "in_band": false
+          }
+        },
+        "shared_rows_declared": 4
+      },
+      "panel": {
+        "gating_passed": 12,
+        "gating_rows": 32,
+        "diagnostic_passed": 7,
+        "diagnostic_rows": 10,
+        "median_abs_log10_fold_gating": 0.6185122584477049,
+        "geometric_mean_fold_gating": 13.338160216454643,
+        "median_abs_log10_fold_all_scored": 0.6166286195552392,
+        "geometric_mean_fold_all_scored": 11.616993875005491,
+        "hofmann_ph_block": {
+          "hofmann_ribose_pH3_MFT": {
+            "fold": 0.023998833550056893,
+            "pass": false,
+            "shared": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 / MFT"
+          },
+          "hofmann_ribose_pH3_FFT": {
+            "fold": 6.962984005318837,
+            "pass": false,
+            "shared": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 / FFT"
+          },
+          "hofmann_ribose_pH7_MFT": {
+            "fold": 0.0018502078236066833,
+            "pass": false,
+            "shared": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 / MFT"
+          },
+          "hofmann_ribose_pH7_FFT": {
+            "fold": 0.0017088783482096554,
+            "pass": false,
+            "shared": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 / FFT"
+          }
+        },
+        "hofmann_ph_block_passed": 0,
+        "shared_rows_declared": 4
+      },
+      "ladder": {
+        "FFT": {
+          "pH3_predicted_ppb": 1598.3357835676672,
+          "pH5_predicted_ppb": 103.11332102866682,
+          "pH7_predicted_ppb": 0.02050661082911143,
+          "pH3_to_pH7_decades": 4.8917741330243905,
+          "monotone_falling": true,
+          "humped_at_pH5": false
+        },
+        "MFT": {
+          "pH3_predicted_ppb": 13.27152099657174,
+          "pH5_predicted_ppb": 172.56568272028537,
+          "pH7_predicted_ppb": 0.0462560920335231,
+          "pH3_to_pH7_decades": 2.457751760068703,
+          "monotone_falling": false,
+          "humped_at_pH5": true
+        }
+      }
+    },
+    "measured": {
+      "ensemble": {
+        "E": 0.28,
+        "sigma_ph_units": 1.2499999999999998,
+        "basis": "The exchange rate the corpus measures ON THE FIT SIDE. Kumazawa 2003's six DECLARED FIT retention rungs move 2-furfurylthiol from 0.995 to 0.110 survival across pH 3.0-6.4: 0.956 decades over 3.4 pH units, i.e. 0.281 decades per pH unit. This prices a pH miss at the level consequence the fit corpus's own pH-response measurement says a pH miss has. It REPLACES a first draft of this value that was derived from Hofmann's hold-out pH ladder -- see the correction note in this module.",
+        "n_members": 6,
+        "n_converged": 4,
+        "n_budget_exhausted": 2,
+        "arms": {
+          "0": "incumbent",
+          "1": "local",
+          "2": "local",
+          "3": "global",
+          "4": "global",
+          "5": "global"
+        },
+        "spread_S_local_arm_only": 0.00018312729965660993,
+        "costs_by_arm": {
+          "incumbent": [
+            7.403165863888169
+          ],
+          "local": [
+            7.402142880500084,
+            7.400044857199857
+          ],
+          "global": [
+            14.902817720139623,
+            14.900792743931342,
+            14.976282278681197
+          ]
+        },
+        "costs": [
+          7.403165863888169,
+          7.402142880500084,
+          7.400044857199857,
+          14.902817720139623,
+          14.900792743931342,
+          14.976282278681197
+        ],
+        "costs_converged": [
+          7.403165863888169,
+          7.402142880500084,
+          7.400044857199857,
+          14.902817720139623
+        ],
+        "best_cost": 7.400044857199857,
+        "worst_converged_cost": 14.902817720139623,
+        "spread_S_log10_max_over_min": 0.30403403720511624,
+        "sum_r2_level_per_member": [
+          14.492353757354088,
+          14.482340658016524,
+          14.419567477343524,
+          29.528739610830137,
+          29.495877164546037,
+          29.558137308267497
+        ],
+        "best_sum_r2_level": 14.419567477343524,
+        "best_start": 2,
+        "ph_endpoint_miss_at_best": {
+          "zhou_final_pH_from_pH6": -0.0004316752590241002,
+          "zhou_final_pH_from_pH7": 0.6625399043969811,
+          "zhou_final_pH_from_pH8": 0.39447013085707994
+        },
+        "gate_G1_calibration_within_1pH": true,
+        "gate_G2_at_least_4_of_6_converged": true
+      },
+      "best_member": {
+        "weight_tag": "measured",
+        "ph_endpoint_weight_E": 0.28,
+        "sigma_ph_units": 1.2499999999999998,
+        "start": 2,
+        "arm": "local",
+        "seed": 20262829,
+        "start_is_b2_3_vector": false,
+        "start_cost": 621.9691696139523,
+        "cost": 7.400044857199857,
+        "sum_r2_level": 14.419567477343524,
+        "evals": 410,
+        "eval_budget": 500,
+        "budget_exhausted": false,
+        "nfev": 29,
+        "status": 3,
+        "converged": true,
+        "seconds": 607.7,
+        "parameters": {
+          "k_pent_dpo": -0.5446463072676107,
+          "k_pent_tdp": -0.5022095511358302,
+          "k_dpo_c2c3": -3.0155236916597783,
+          "k_arp_dpo": -6.365842545633689,
+          "k_arp_tdp": -1.9026714740978425,
+          "k_dpo_nf": 0.43445392481376577,
+          "k_dpo_ptr": -4.347247153178998,
+          "k_dpo_ddp": 0.04172302756946337,
+          "k_tdp_fur": -3.3328242676434767,
+          "k_ddp_mft": -6.540581367427349,
+          "k_fur_fft": -0.5739788652191664,
+          "k_nf_mft": -2.2931032720939997,
+          "k_nf_mp3p": -2.833309922723758,
+          "k_mgo_mp": -3.9375547196853056,
+          "k_ha_mp_mft": -3.8696667868173487,
+          "k_glc_ha": -0.6930128381015531,
+          "k_thi_hmp": -2.5882946400737175,
+          "k_thi_mesh": -3.273029275775544,
+          "k_hmp_mft": -2.6086953372771946,
+          "k_hmp_mp2p": -3.4372110320564206,
+          "k_cys_actz": -2.9736755938616524,
+          "k_dimer_mft": 0.49999999999999983,
+          "k_dimer_fft": -0.024738076360323002,
+          "k_mmft": -1.9837700999787538,
+          "k_mft_decay": 0.13411252144508923,
+          "k_fft_decay": -0.7794871651483697,
+          "k_dimer_decay": -0.21395233608066394,
+          "k_nf_decay": -2.181605124250818,
+          "k_fur_decay": 0.49427891787826483,
+          "k_h2s_loss": -1.3506222526942775,
+          "k_osone_decay": -1.7282291291849818,
+          "k_thiol_decay": -8.312313192693319,
+          "k_pent_caramel": -2.426291027728553,
+          "k_pent_thermal": -3.437313963933767,
+          "k_glc_fur": -4.922868997756941,
+          "k_arp_tdp_th": -4.353715425211875,
+          "k_arp_dpo_th": -1.2902512237780432,
+          "k_ddp_mft_hs": -7.69250097808771,
+          "k_fur_fft_hs": -0.009550422129148002,
+          "k_ttca_cys": -0.5786517733288119,
+          "k_ttca_deg": -8.086691068035934,
+          "k_cys_thermal": -2.0162666766224726,
+          "k_thiolate_loss": -1.0131801993473915,
+          "Ea_lumped_formation": 64.0822869313293,
+          "Ea_decay_thiol_sink": 212.90062779907944,
+          "Ea_decay_carbonyl_sink": 249.99999999983893,
+          "ph_acid_yield_per_sink_event": 0.008479125755981965,
+          "ph_arp_secondary_ammonium_pKa": 6.97865992325673
+        },
+        "ph_endpoint_miss_pH_units": {
+          "zhou_final_pH_from_pH6": -0.0004316752590241002,
+          "zhou_final_pH_from_pH7": 0.6625399043969811,
+          "zhou_final_pH_from_pH8": 0.39447013085707994
+        },
+        "row_ids": [
+          "hofmann_ribose_FFT",
+          "hofmann_ribose_MFT",
+          "hofmann_xylose_FFT",
+          "hofmann_xylose_MFT",
+          "hofmann_glucose_FFT",
+          "hofmann_glucose_MFT",
+          "hofmann_fructose_FFT",
+          "hofmann_fructose_MFT",
+          "hofmann_ribose_NF_insitu",
+          "hofmann_ribose_FUR_insitu",
+          "fed_ribose_h2s_FFT",
+          "fed_ribose_h2s_MFT",
+          "fed_tdp_h2s_FFT",
+          "fed_furfural_h2s_FFT",
+          "fed_nf_h2s_MFT",
+          "fed_nf_cys_MFT",
+          "fed_c2c3_MFT",
+          "fed_c2c3_MFT_pH3",
+          "fed_c2c3_MFT_pH7",
+          "fed_thiamine_MFT",
+          "fed_mgo_h2s_1to1_MP",
+          "fed_mgo_h2s_1to2_MP",
+          "zhou_pH7_MFT",
+          "zhou_pH7_FFT",
+          "zhou_pH7_MFT_over_FFT",
+          "zhou_pH7_dimer_over_MFT",
+          "zhou_pH7_ACTZ",
+          "zhou_pH7_FUR_arp_alone",
+          "whitfield_nf_cys_MFT",
+          "whitfield_nf_h2s_MFT",
+          "whitfield_mercaptoketone_over_MFT",
+          "vanseeventer_cys_conversion",
+          "vanseeventer_ribose_conversion",
+          "zhang_fig1_cys_dimer_over_MFT",
+          "zhang_fig1_gcys_dimer_over_MFT",
+          "zhang_fig1_cys_MMFT_over_MFT",
+          "cerny_ternary_thiamine_share",
+          "cerny_isomer_split",
+          "kang_100C_MFT",
+          "kang_120C_MFT",
+          "kang_100C_FFT",
+          "kang_120C_FFT",
+          "kang_100C_FUR",
+          "kang_120C_FUR",
+          "kang_100C_MFT_over_FFT",
+          "kang_100C_cys_conversion",
+          "kang_120C_cys_conversion",
+          "kang_free_cys_yield_ceiling",
+          "kumazawa_FFT_retention_pH3_0",
+          "kumazawa_FFT_retention_pH4_0",
+          "kumazawa_FFT_retention_pH5_0",
+          "kumazawa_FFT_retention_pH5_4",
+          "kumazawa_FFT_retention_pH6_0",
+          "kumazawa_FFT_retention_pH6_4",
+          "zhou_final_pH_from_pH6",
+          "zhou_final_pH_from_pH7",
+          "zhou_final_pH_from_pH8",
+          "yaghmur_fft_share_ceiling"
+        ]
+      },
+      "largest_residual_row": "fed_c2c3_MFT_pH3",
+      "largest_residual": 2.087398468851451,
+      "fit_rows": {
+        "hofmann_ribose_FFT": {
+          "residual": -0.19726332474339078,
+          "sigma": 0.35,
+          "kind": "conc",
+          "fold": 0.8530172944589826,
+          "miss_pH": null
+        },
+        "hofmann_ribose_MFT": {
+          "residual": -0.16420083846509212,
+          "sigma": 0.35,
+          "kind": "conc",
+          "fold": 0.876051639118806,
+          "miss_pH": null
+        },
+        "hofmann_xylose_FFT": {
+          "residual": 0.0899199243142589,
+          "sigma": 0.35,
+          "kind": "conc",
+          "fold": 1.0751572146268478,
+          "miss_pH": null
+        },
+        "hofmann_xylose_MFT": {
+          "residual": 0.23959674067822778,
+          "sigma": 0.35,
+          "kind": "conc",
+          "fold": 1.212994576972435,
+          "miss_pH": null
+        },
+        "hofmann_glucose_FFT": {
+          "residual": -0.3334437157595051,
+          "sigma": 0.35,
+          "kind": "conc",
+          "fold": 0.7643542760105496,
+          "miss_pH": null
+        },
+        "hofmann_glucose_MFT": {
+          "residual": 0.6773714829371796,
+          "sigma": 0.35,
+          "kind": "conc",
+          "fold": 1.7261559079900717,
+          "miss_pH": null
+        },
+        "hofmann_fructose_FFT": {
+          "residual": 0.3608900660441753,
+          "sigma": 0.35,
+          "kind": "conc",
+          "fold": 1.3375546117896286,
+          "miss_pH": null
+        },
+        "hofmann_fructose_MFT": {
+          "residual": -0.8535360415428039,
+          "sigma": 0.35,
+          "kind": "conc",
+          "fold": 0.5026461789568583,
+          "miss_pH": null
+        },
+        "hofmann_ribose_NF_insitu": {
+          "residual": 0.3336074950264877,
+          "sigma": 0.35,
+          "kind": "conc",
+          "fold": 1.308466545677921,
+          "miss_pH": null
+        },
+        "hofmann_ribose_FUR_insitu": {
+          "residual": -0.08194333278221284,
+          "sigma": 0.5,
+          "kind": "conc",
+          "fold": 0.9099726378069748,
+          "miss_pH": null
+        },
+        "fed_ribose_h2s_FFT": {
+          "residual": -0.12885111913483038,
+          "sigma": 0.45,
+          "kind": "molpct",
+          "fold": 0.8750180189411499,
+          "miss_pH": null
+        },
+        "fed_ribose_h2s_MFT": {
+          "residual": 0.011025349816409269,
+          "sigma": 0.45,
+          "kind": "molpct",
+          "fold": 1.0114895665667252,
+          "miss_pH": null
+        },
+        "fed_tdp_h2s_FFT": {
+          "residual": 0.2567200210712753,
+          "sigma": 0.45,
+          "kind": "molpct",
+          "fold": 1.30474009773523,
+          "miss_pH": null
+        },
+        "fed_furfural_h2s_FFT": {
+          "residual": 0.019706005983938235,
+          "sigma": 0.45,
+          "kind": "molpct",
+          "fold": 1.0206285265582726,
+          "miss_pH": null
+        },
+        "fed_nf_h2s_MFT": {
+          "residual": 0.3535216719215527,
+          "sigma": 0.45,
+          "kind": "molpct",
+          "fold": 1.4423968071222324,
+          "miss_pH": null
+        },
+        "fed_nf_cys_MFT": {
+          "residual": 0.40000036744075307,
+          "sigma": 0.45,
+          "kind": "molpct",
+          "fold": 1.5135618246924036,
+          "miss_pH": null
+        },
+        "fed_c2c3_MFT": {
+          "residual": -0.34341164621294,
+          "sigma": 0.45,
+          "kind": "molpct",
+          "fold": 0.7005913311235149,
+          "miss_pH": null
+        },
+        "fed_c2c3_MFT_pH3": {
+          "residual": 2.087398468851451,
+          "sigma": 0.6,
+          "kind": "molpct",
+          "fold": 17.882946665885942,
+          "miss_pH": null
+        },
+        "fed_c2c3_MFT_pH7": {
+          "residual": -1.2870943022265497,
+          "sigma": 0.6,
+          "kind": "molpct",
+          "fold": 0.16894425134954955,
+          "miss_pH": null
+        },
+        "fed_thiamine_MFT": {
+          "residual": -0.21840863201272326,
+          "sigma": 0.45,
+          "kind": "molpct",
+          "fold": 0.79747323412332,
+          "miss_pH": null
+        },
+        "fed_mgo_h2s_1to1_MP": {
+          "residual": 0.16884986044995054,
+          "sigma": 0.4,
+          "kind": "molpct",
+          "fold": 1.1682611755937884,
+          "miss_pH": null
+        },
+        "fed_mgo_h2s_1to2_MP": {
+          "residual": 0.040557480893085154,
+          "sigma": 0.4,
+          "kind": "molpct",
+          "fold": 1.0380612807843128,
+          "miss_pH": null
+        },
+        "zhou_pH7_MFT": {
+          "residual": -0.4616438648684745,
+          "sigma": 0.5,
+          "kind": "conc",
+          "fold": 0.5877302817901153,
+          "miss_pH": null
+        },
+        "zhou_pH7_FFT": {
+          "residual": -0.4770512250070651,
+          "sigma": 0.5,
+          "kind": "conc",
+          "fold": 0.5773968197504128,
+          "miss_pH": null
+        },
+        "zhou_pH7_MFT_over_FFT": {
+          "residual": 0.030678425875260266,
+          "sigma": 0.25,
+          "kind": "ratio",
+          "fold": 1.0178167799470077,
+          "miss_pH": null
+        },
+        "zhou_pH7_dimer_over_MFT": {
+          "residual": -0.9662990103490315,
+          "sigma": 0.4,
+          "kind": "ratio",
+          "fold": 0.4106581022677121,
+          "miss_pH": null
+        },
+        "zhou_pH7_ACTZ": {
+          "residual": -0.18519445400033482,
+          "sigma": 0.6,
+          "kind": "conc",
+          "fold": 0.7742537680338512,
+          "miss_pH": null
+        },
+        "zhou_pH7_FUR_arp_alone": {
+          "residual": -0.3620827364061148,
+          "sigma": 0.5,
+          "kind": "conc",
+          "fold": 0.6591111094112158,
+          "miss_pH": null
+        },
+        "whitfield_nf_cys_MFT": {
+          "residual": -0.5674685705545338,
+          "sigma": 0.5,
+          "kind": "molpct",
+          "fold": 0.5203142434257315,
+          "miss_pH": null
+        },
+        "whitfield_nf_h2s_MFT": {
+          "residual": -0.7901213357670618,
+          "sigma": 0.5,
+          "kind": "molpct",
+          "fold": 0.4026607815183357,
+          "miss_pH": null
+        },
+        "whitfield_mercaptoketone_over_MFT": {
+          "residual": -0.22925903509086662,
+          "sigma": 0.4,
+          "kind": "ratio",
+          "fold": 0.8096482582899879,
+          "miss_pH": null
+        },
+        "vanseeventer_cys_conversion": {
+          "residual": 0.6786345544693566,
+          "sigma": 0.3,
+          "kind": "conversion",
+          "fold": 1.5980500106231346,
+          "miss_pH": null
+        },
+        "vanseeventer_ribose_conversion": {
+          "residual": 0.4164624553605173,
+          "sigma": 0.3,
+          "kind": "conversion",
+          "fold": 1.333333333332889,
+          "miss_pH": null
+        },
+        "zhang_fig1_cys_dimer_over_MFT": {
+          "residual": -0.02600909817100232,
+          "sigma": 0.4,
+          "kind": "ratio",
+          "fold": 0.9763293851764405,
+          "miss_pH": null
+        },
+        "zhang_fig1_gcys_dimer_over_MFT": {
+          "residual": 0.9382915734691479,
+          "sigma": 0.4,
+          "kind": "ratio",
+          "fold": 2.373103224250006,
+          "miss_pH": null
+        },
+        "zhang_fig1_cys_MMFT_over_MFT": {
+          "residual": -0.11954744345552817,
+          "sigma": 0.5,
+          "kind": "ratio",
+          "fold": 0.8714175019795685,
+          "miss_pH": null
+        },
+        "cerny_ternary_thiamine_share": {
+          "residual": -0.2815650255243363,
+          "sigma": 0.2,
+          "kind": "share",
+          "fold": 0.8783892151858195,
+          "miss_pH": null
+        },
+        "cerny_isomer_split": {
+          "residual": -0.0061768959769542275,
+          "sigma": 0.6,
+          "kind": "ratio",
+          "fold": 0.9915026114793776,
+          "miss_pH": null
+        },
+        "kang_100C_MFT": {
+          "residual": -0.09572894033804906,
+          "sigma": 0.4,
+          "kind": "conc",
+          "fold": 0.9156055654984022,
+          "miss_pH": null
+        },
+        "kang_120C_MFT": {
+          "residual": 0.23992881160353322,
+          "sigma": 0.4,
+          "kind": "conc",
+          "fold": 1.2473017298088551,
+          "miss_pH": null
+        },
+        "kang_100C_FFT": {
+          "residual": -0.029493572897738296,
+          "sigma": 0.4,
+          "kind": "conc",
+          "fold": 0.9732010545166704,
+          "miss_pH": null
+        },
+        "kang_120C_FFT": {
+          "residual": 0.2592869306863578,
+          "sigma": 0.4,
+          "kind": "conc",
+          "fold": 1.269739915512121,
+          "miss_pH": null
+        },
+        "kang_100C_FUR": {
+          "residual": 0.6592208881509193,
+          "sigma": 0.4,
+          "kind": "conc",
+          "fold": 1.8352209372292647,
+          "miss_pH": null
+        },
+        "kang_120C_FUR": {
+          "residual": -0.16173102651300275,
+          "sigma": 0.4,
+          "kind": "conc",
+          "fold": 0.8616037676562908,
+          "miss_pH": null
+        },
+        "kang_100C_MFT_over_FFT": {
+          "residual": -0.08763940443839417,
+          "sigma": 0.3,
+          "kind": "ratio",
+          "fold": 0.9412569125676579,
+          "miss_pH": null
+        },
+        "kang_100C_cys_conversion": {
+          "residual": -0.013506248342677801,
+          "sigma": 0.3,
+          "kind": "conversion",
+          "fold": 0.9907136015863628,
+          "miss_pH": null
+        },
+        "kang_120C_cys_conversion": {
+          "residual": -0.09398823871385507,
+          "sigma": 0.3,
+          "kind": "conversion",
+          "fold": 0.937137956728394,
+          "miss_pH": null
+        },
+        "kang_free_cys_yield_ceiling": {
+          "residual": 0.0,
+          "sigma": 0.25,
+          "kind": "peak_fraction_ceiling",
+          "fold": 1.0,
+          "miss_pH": null
+        },
+        "kumazawa_FFT_retention_pH3_0": {
+          "residual": -0.08068153128743781,
+          "sigma": 0.2,
+          "kind": "retention",
+          "fold": 0.9635265668392609,
+          "miss_pH": null
+        },
+        "kumazawa_FFT_retention_pH4_0": {
+          "residual": -0.03814145863601126,
+          "sigma": 0.2,
+          "kind": "retention",
+          "fold": 0.9825885708872844,
+          "miss_pH": null
+        },
+        "kumazawa_FFT_retention_pH5_0": {
+          "residual": -0.15690615571354474,
+          "sigma": 0.2,
+          "kind": "retention",
+          "fold": 0.9302908916434612,
+          "miss_pH": null
+        },
+        "kumazawa_FFT_retention_pH5_4": {
+          "residual": -0.3764467546659772,
+          "sigma": 0.2,
+          "kind": "retention",
+          "fold": 0.840834744507211,
+          "miss_pH": null
+        },
+        "kumazawa_FFT_retention_pH6_0": {
+          "residual": -0.7548410301872871,
+          "sigma": 0.2,
+          "kind": "retention",
+          "fold": 0.7063692644661197,
+          "miss_pH": null
+        },
+        "kumazawa_FFT_retention_pH6_4": {
+          "residual": 0.7566436645530407,
+          "sigma": 0.2,
+          "kind": "retention",
+          "fold": 1.4168658502219968,
+          "miss_pH": null
+        },
+        "zhou_final_pH_from_pH6": {
+          "residual": -0.0003453402072192802,
+          "sigma": 0.25,
+          "kind": "ph_endpoint",
+          "fold": null,
+          "miss_pH": -8.633505180482006e-05
+        },
+        "zhou_final_pH_from_pH7": {
+          "residual": 0.530031923517585,
+          "sigma": 0.25,
+          "kind": "ph_endpoint",
+          "fold": null,
+          "miss_pH": 0.13250798087939625
+        },
+        "zhou_final_pH_from_pH8": {
+          "residual": 0.315576104685664,
+          "sigma": 0.25,
+          "kind": "ph_endpoint",
+          "fold": null,
+          "miss_pH": 0.078894026171416
+        },
+        "yaghmur_fft_share_ceiling": {
+          "residual": 0.29433335176100467,
+          "sigma": 0.3,
+          "kind": "ceiling",
+          "fold": 1.2254624420088027,
+          "miss_pH": null
+        }
+      },
+      "exam": {
+        "d1_pool_n": 23,
+        "d1_pool_geometric_mean_fold": 49.609503815825356,
+        "d1_pool_median_fold": 50.1349150063831,
+        "d1_pool_as_was_geometric_mean_fold": 56.364842118978196,
+        "d1_pool_as_was_median_fold": 46.034105892772246,
+        "d1_pool_in_band": 4,
+        "answered": 27,
+        "declined": 13,
+        "scored": 27,
+        "in_band": 4,
+        "median_fold_all": 50.1349150063831,
+        "geometric_mean_fold_all": 63.06290123859583,
+        "median_abs_log10_all": 1.7001402830195138,
+        "worst_fold": 33391.73597895205,
+        "paired_n": 27,
+        "paired_core_median": 50.1349150063831,
+        "paired_core_geomean": 63.06290123859583,
+        "paired_old_median": 12.648593695999491,
+        "paired_old_geomean": 16.79657576562487,
+        "as_was_geomean": 70.30780176883691,
+        "as_was_median": 46.034105892772246,
+        "by_family": {
+          "acrylamide_180C": {
+            "core_median_fold": 8.14453657237207,
+            "answered": 5,
+            "points": 7
+          },
+          "furan_browning_glc_alanine": {
+            "core_median_fold": null,
+            "answered": 0,
+            "points": 7
+          },
+          "matrix_path_lipid": {
+            "core_median_fold": 1862.7186340692897,
+            "answered": 4,
+            "points": 8
+          },
+          "sulfur_hofmann1998_145C": {
+            "core_median_fold": 12.425755965397606,
+            "answered": 10,
+            "points": 10
+          },
+          "sulfur_yiltirak2026_T_ladder": {
+            "core_median_fold": 213.37037057057717,
+            "answered": 8,
+            "points": 8
+          }
+        },
+        "hofmann_ph_block": {
+          "hofmann_ribose_pH3_FFT": {
+            "predicted_ppb": 1584.0981588547859,
+            "measured_ppb": 229.0,
+            "fold": 6.917459208972864,
+            "in_band": false
+          },
+          "hofmann_ribose_pH3_MFT": {
+            "predicted_ppb": 13.314258868176088,
+            "measured_ppb": 553.0,
+            "fold": 41.53441851140417,
+            "in_band": false
+          },
+          "hofmann_ribose_pH7_FFT": {
+            "predicted_ppb": 0.019670269717015656,
+            "measured_ppb": 12.0,
+            "fold": 610.0577253203329,
+            "in_band": false
+          },
+          "hofmann_ribose_pH7_MFT": {
+            "predicted_ppb": 0.046299003516980616,
+            "measured_ppb": 25.0,
+            "fold": 539.968424824327,
+            "in_band": false
+          }
+        },
+        "shared_rows_declared": 4
+      },
+      "panel": {
+        "gating_passed": 12,
+        "gating_rows": 32,
+        "diagnostic_passed": 7,
+        "diagnostic_rows": 10,
+        "median_abs_log10_fold_gating": 0.5806958624069354,
+        "geometric_mean_fold_gating": 12.814715738566143,
+        "median_abs_log10_fold_all_scored": 0.5750660468797171,
+        "geometric_mean_fold_all_scored": 11.18680800034766,
+        "hofmann_ph_block": {
+          "hofmann_ribose_pH3_MFT": {
+            "fold": 0.024076115455910308,
+            "pass": false,
+            "shared": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 / MFT"
+          },
+          "hofmann_ribose_pH3_FFT": {
+            "fold": 6.900906087235112,
+            "pass": false,
+            "shared": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH3 / FFT"
+          },
+          "hofmann_ribose_pH7_MFT": {
+            "fold": 0.0018519243506606971,
+            "pass": false,
+            "shared": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 / MFT"
+          },
+          "hofmann_ribose_pH7_FFT": {
+            "fold": 0.0016391838383808064,
+            "pass": false,
+            "shared": "mp_holdout_hofmann1998_ribose_cysteine_145C_20min_pH7 / FFT"
+          }
+        },
+        "hofmann_ph_block_passed": 0,
+        "shared_rows_declared": 4
+      },
+      "ladder": {
+        "FFT": {
+          "pH3_predicted_ppb": 1584.0981588547859,
+          "pH5_predicted_ppb": 103.21509262953688,
+          "pH7_predicted_ppb": 0.019670269717015656,
+          "pH3_to_pH7_decades": 4.905971774235014,
+          "monotone_falling": true,
+          "humped_at_pH5": false
+        },
+        "MFT": {
+          "pH3_predicted_ppb": 13.314258868176088,
+          "pH5_predicted_ppb": 173.4582245455236,
+          "pH7_predicted_ppb": 0.046299003516980616,
+          "pH3_to_pH7_decades": 2.4587453527577945,
+          "monotone_falling": false,
+          "humped_at_pH5": true
+        }
+      }
+    }
+  },
+  "member_exams": {
+    "shipped_s0": {
+      "d1_pool_n": 23,
+      "d1_pool_geometric_mean_fold": 48.84423549959321,
+      "d1_pool_median_fold": 50.1349150063831,
+      "d1_pool_as_was_geometric_mean_fold": 55.83121772298128,
+      "d1_pool_as_was_median_fold": 47.52837869828901,
+      "d1_pool_in_band": 4,
+      "answered": 27,
+      "declined": 13,
+      "scored": 27,
+      "in_band": 4,
+      "median_fold_all": 50.1349150063831,
+      "geometric_mean_fold_all": 62.2332686855264,
+      "median_abs_log10_all": 1.7001402830195138,
+      "worst_fold": 33391.73597895205,
+      "paired_n": 27,
+      "paired_core_median": 50.1349150063831,
+      "paired_core_geomean": 62.2332686855264,
+      "paired_old_median": 12.648593695999491,
+      "paired_old_geomean": 16.79657576562487,
+      "as_was_geomean": 69.74038712743611,
+      "as_was_median": 47.52837869828901,
+      "by_family": {
+        "acrylamide_180C": {
+          "core_median_fold": 8.14453657237207,
+          "answered": 5,
+          "points": 7
+        },
+        "furan_browning_glc_alanine": {
+          "core_median_fold": null,
+          "answered": 0,
+          "points": 7
+        },
+        "matrix_path_lipid": {
+          "core_median_fold": 1862.7186340692897,
+          "answered": 4,
+          "points": 8
+        },
+        "sulfur_hofmann1998_145C": {
+          "core_median_fold": 12.404817176746738,
+          "answered": 10,
+          "points": 10
+        },
+        "sulfur_yiltirak2026_T_ladder": {
+          "core_median_fold": 202.15498374625923,
+          "answered": 8,
+          "points": 8
+        }
+      },
+      "hofmann_ph_block": {
+        "hofmann_ribose_pH3_FFT": {
+          "predicted_ppb": 1580.5735521982974,
+          "measured_ppb": 229.0,
+          "fold": 6.902067913529683,
+          "in_band": false
+        },
+        "hofmann_ribose_pH3_MFT": {
+          "predicted_ppb": 13.274893383182944,
+          "measured_ppb": 553.0,
+          "fold": 41.65758503948197,
+          "in_band": false
+        },
+        "hofmann_ribose_pH7_FFT": {
+          "predicted_ppb": 0.020972780762762894,
+          "measured_ppb": 12.0,
+          "fold": 572.1701922000711,
+          "in_band": false
+        },
+        "hofmann_ribose_pH7_MFT": {
+          "predicted_ppb": 0.04587042898574036,
+          "measured_ppb": 25.0,
+          "fold": 545.0134335515304,
+          "in_band": false
+        }
+      },
+      "shared_rows_declared": 4
+    },
+    "shipped_s1": {
+      "d1_pool_n": 23,
+      "d1_pool_geometric_mean_fold": 48.814876750573674,
+      "d1_pool_median_fold": 50.1349150063831,
+      "d1_pool_as_was_geometric_mean_fold": 55.82785102963679,
+      "d1_pool_as_was_median_fold": 47.526520394228214,
+      "d1_pool_in_band": 4,
+      "answered": 27,
+      "declined": 13,
+      "scored": 27,
+      "in_band": 4,
+      "median_fold_all": 50.1349150063831,
+      "geometric_mean_fold_all": 62.20140248724594,
+      "median_abs_log10_all": 1.7001402830195138,
+      "worst_fold": 33391.73597895205,
+      "paired_n": 27,
+      "paired_core_median": 50.1349150063831,
+      "paired_core_geomean": 62.20140248724594,
+      "paired_old_median": 12.648593695999491,
+      "paired_old_geomean": 16.79657576562487,
+      "as_was_geomean": 69.73680470475564,
+      "as_was_median": 47.526520394228214,
+      "by_family": {
+        "acrylamide_180C": {
+          "core_median_fold": 8.14453657237207,
+          "answered": 5,
+          "points": 7
+        },
+        "furan_browning_glc_alanine": {
+          "core_median_fold": null,
+          "answered": 0,
+          "points": 7
+        },
+        "matrix_path_lipid": {
+          "core_median_fold": 1862.7186340692897,
+          "answered": 4,
+          "points": 8
+        },
+        "sulfur_hofmann1998_145C": {
+          "core_median_fold": 12.404380270859393,
+          "answered": 10,
+          "points": 10
+        },
+        "sulfur_yiltirak2026_T_ladder": {
+          "core_median_fold": 202.01476663936117,
+          "answered": 8,
+          "points": 8
+        }
+      },
+      "hofmann_ph_block": {
+        "hofmann_ribose_pH3_FFT": {
+          "predicted_ppb": 1580.026002209325,
+          "measured_ppb": 229.0,
+          "fold": 6.899676865542904,
+          "in_band": false
+        },
+        "hofmann_ribose_pH3_MFT": {
+          "predicted_ppb": 13.277861275776049,
+          "measured_ppb": 553.0,
+          "fold": 41.64827365751183,
+          "in_band": false
+        },
+        "hofmann_ribose_pH7_FFT": {
+          "predicted_ppb": 0.021034971754891794,
+          "measured_ppb": 12.0,
+          "fold": 570.4785411565545,
+          "in_band": false
+        },
+        "hofmann_ribose_pH7_MFT": {
+          "predicted_ppb": 0.04597186584596854,
+          "measured_ppb": 25.0,
+          "fold": 543.8108621425979,
+          "in_band": false
+        }
+      },
+      "shared_rows_declared": 4
+    },
+    "shipped_s2": {
+      "d1_pool_n": 23,
+      "d1_pool_geometric_mean_fold": 36.386281944858176,
+      "d1_pool_median_fold": 50.1349150063831,
+      "d1_pool_as_was_geometric_mean_fold": 35.078407781173034,
+      "d1_pool_as_was_median_fold": 39.14202390433122,
+      "d1_pool_in_band": 2,
+      "answered": 27,
+      "declined": 13,
+      "scored": 27,
+      "in_band": 2,
+      "median_fold_all": 50.1349150063831,
+      "geometric_mean_fold_all": 48.427440327637726,
+      "median_abs_log10_all": 1.7001402830195138,
+      "worst_fold": 33391.73597895205,
+      "paired_n": 27,
+      "paired_core_median": 50.1349150063831,
+      "paired_core_geomean": 48.427440327637726,
+      "paired_old_median": 12.648593695999491,
+      "paired_old_geomean": 16.79657576562487,
+      "as_was_geomean": 46.94063253093773,
+      "as_was_median": 39.14202390433122,
+      "by_family": {
+        "acrylamide_180C": {
+          "core_median_fold": 8.14453657237207,
+          "answered": 5,
+          "points": 7
+        },
+        "furan_browning_glc_alanine": {
+          "core_median_fold": null,
+          "answered": 0,
+          "points": 7
+        },
+        "matrix_path_lipid": {
+          "core_median_fold": 1862.7186340692897,
+          "answered": 4,
+          "points": 8
+        },
+        "sulfur_hofmann1998_145C": {
+          "core_median_fold": 8.377448058458342,
+          "answered": 10,
+          "points": 10
+        },
+        "sulfur_yiltirak2026_T_ladder": {
+          "core_median_fold": 210.16713602391366,
+          "answered": 8,
+          "points": 8
+        }
+      },
+      "hofmann_ph_block": {
+        "hofmann_ribose_pH3_FFT": {
+          "predicted_ppb": 700.5918594020196,
+          "measured_ppb": 229.0,
+          "fold": 3.0593530978254133,
+          "in_band": false
+        },
+        "hofmann_ribose_pH3_MFT": {
+          "predicted_ppb": 12.861889889653352,
+          "measured_ppb": 553.0,
+          "fold": 42.99523668328529,
+          "in_band": false
+        },
+        "hofmann_ribose_pH7_FFT": {
+          "predicted_ppb": 0.08690221121842352,
+          "measured_ppb": 12.0,
+          "fold": 138.08624466227582,
+          "in_band": false
+        },
+        "hofmann_ribose_pH7_MFT": {
+          "predicted_ppb": 0.06672910957864887,
+          "measured_ppb": 25.0,
+          "fold": 374.6490873002624,
+          "in_band": false
+        }
+      },
+      "shared_rows_declared": 4
+    },
+    "shipped_s3": {
+      "d1_pool_n": 23,
+      "d1_pool_geometric_mean_fold": 28.531271608154558,
+      "d1_pool_median_fold": 50.1349150063831,
+      "d1_pool_as_was_geometric_mean_fold": 33.50238507703927,
+      "d1_pool_as_was_median_fold": 28.805030768599977,
+      "d1_pool_in_band": 5,
+      "answered": 27,
+      "declined": 13,
+      "scored": 27,
+      "in_band": 5,
+      "median_fold_all": 50.1349150063831,
+      "geometric_mean_fold_all": 39.366051747179085,
+      "median_abs_log10_all": 1.7001402830195138,
+      "worst_fold": 33391.73597895205,
+      "paired_n": 27,
+      "paired_core_median": 50.1349150063831,
+      "paired_core_geomean": 39.366051747179085,
+      "paired_old_median": 12.648593695999491,
+      "paired_old_geomean": 16.79657576562487,
+      "as_was_geomean": 45.13801354159213,
+      "as_was_median": 28.805030768599977,
+      "by_family": {
+        "acrylamide_180C": {
+          "core_median_fold": 8.14453657237207,
+          "answered": 5,
+          "points": 7
+        },
+        "furan_browning_glc_alanine": {
+          "core_median_fold": null,
+          "answered": 0,
+          "points": 7
+        },
+        "matrix_path_lipid": {
+          "core_median_fold": 1862.7186340692897,
+          "answered": 4,
+          "points": 8
+        },
+        "sulfur_hofmann1998_145C": {
+          "core_median_fold": 9.197346587471808,
+          "answered": 10,
+          "points": 10
+        },
+        "sulfur_yiltirak2026_T_ladder": {
+          "core_median_fold": 143.56588795825576,
+          "answered": 8,
+          "points": 8
+        }
+      },
+      "hofmann_ph_block": {
+        "hofmann_ribose_pH3_FFT": {
+          "predicted_ppb": 667.7987123167848,
+          "measured_ppb": 229.0,
+          "fold": 2.9161515821693658,
+          "in_band": true
+        },
+        "hofmann_ribose_pH3_MFT": {
+          "predicted_ppb": 8.899033589936023,
+          "measured_ppb": 553.0,
+          "fold": 62.14157912892828,
+          "in_band": false
+        },
+        "hofmann_ribose_pH7_FFT": {
+          "predicted_ppb": 0.19140571671881504,
+          "measured_ppb": 12.0,
+          "fold": 62.69405222430543,
+          "in_band": false
+        },
+        "hofmann_ribose_pH7_MFT": {
+          "predicted_ppb": 0.07668346367610115,
+          "measured_ppb": 25.0,
+          "fold": 326.0155293140651,
+          "in_band": false
+        }
+      },
+      "shared_rows_declared": 4
+    },
+    "shipped_s4": {
+      "d1_pool_n": 23,
+      "d1_pool_geometric_mean_fold": 37.20115606328684,
+      "d1_pool_median_fold": 50.1349150063831,
+      "d1_pool_as_was_geometric_mean_fold": 51.36429158566205,
+      "d1_pool_as_was_median_fold": 41.16768430969065,
+      "d1_pool_in_band": 3,
+      "answered": 27,
+      "declined": 13,
+      "scored": 27,
+      "in_band": 3,
+      "median_fold_all": 50.1349150063831,
+      "geometric_mean_fold_all": 49.34978553332633,
+      "median_abs_log10_all": 1.7001402830195138,
+      "worst_fold": 33391.73597895205,
+      "paired_n": 27,
+      "paired_core_median": 50.1349150063831,
+      "paired_core_geomean": 49.34978553332633,
+      "paired_old_median": 12.648593695999491,
+      "paired_old_geomean": 16.79657576562487,
+      "as_was_geomean": 64.95818168647845,
+      "as_was_median": 41.16768430969065,
+      "by_family": {
+        "acrylamide_180C": {
+          "core_median_fold": 8.14453657237207,
+          "answered": 5,
+          "points": 7
+        },
+        "furan_browning_glc_alanine": {
+          "core_median_fold": null,
+          "answered": 0,
+          "points": 7
+        },
+        "matrix_path_lipid": {
+          "core_median_fold": 1862.7186340692897,
+          "answered": 4,
+          "points": 8
+        },
+        "sulfur_hofmann1998_145C": {
+          "core_median_fold": 10.330383891048152,
+          "answered": 10,
+          "points": 10
+        },
+        "sulfur_yiltirak2026_T_ladder": {
+          "core_median_fold": 159.96214335656884,
+          "answered": 8,
+          "points": 8
+        }
+      },
+      "hofmann_ph_block": {
+        "hofmann_ribose_pH3_FFT": {
+          "predicted_ppb": 1410.745506852706,
+          "measured_ppb": 229.0,
+          "fold": 6.160460728614437,
+          "in_band": false
+        },
+        "hofmann_ribose_pH3_MFT": {
+          "predicted_ppb": 10.944514832594496,
+          "measured_ppb": 553.0,
+          "fold": 50.52759381832793,
+          "in_band": false
+        },
+        "hofmann_ribose_pH7_FFT": {
+          "predicted_ppb": 0.050625337598864395,
+          "measured_ppb": 12.0,
+          "fold": 237.03545633776037,
+          "in_band": false
+        },
+        "hofmann_ribose_pH7_MFT": {
+          "predicted_ppb": 0.06814163190253801,
+          "measured_ppb": 25.0,
+          "fold": 366.88290699813496,
+          "in_band": false
+        }
+      },
+      "shared_rows_declared": 4
+    },
+    "shipped_s5": {
+      "d1_pool_n": 23,
+      "d1_pool_geometric_mean_fold": 37.2229030479343,
+      "d1_pool_median_fold": 50.1349150063831,
+      "d1_pool_as_was_geometric_mean_fold": 51.36400856286401,
+      "d1_pool_as_was_median_fold": 41.137078179372864,
+      "d1_pool_in_band": 3,
+      "answered": 27,
+      "declined": 13,
+      "scored": 27,
+      "in_band": 3,
+      "median_fold_all": 50.1349150063831,
+      "geometric_mean_fold_all": 49.37435938038904,
+      "median_abs_log10_all": 1.7001402830195138,
+      "worst_fold": 33391.73597895205,
+      "paired_n": 27,
+      "paired_core_median": 50.1349150063831,
+      "paired_core_geomean": 49.37435938038904,
+      "paired_old_median": 12.648593695999491,
+      "paired_old_geomean": 16.79657576562487,
+      "as_was_geomean": 64.95787678591556,
+      "as_was_median": 41.137078179372864,
+      "by_family": {
+        "acrylamide_180C": {
+          "core_median_fold": 8.14453657237207,
+          "answered": 5,
+          "points": 7
+        },
+        "furan_browning_glc_alanine": {
+          "core_median_fold": null,
+          "answered": 0,
+          "points": 7
+        },
+        "matrix_path_lipid": {
+          "core_median_fold": 1862.7186340692897,
+          "answered": 4,
+          "points": 8
+        },
+        "sulfur_hofmann1998_145C": {
+          "core_median_fold": 10.323162484133736,
+          "answered": 10,
+          "points": 10
+        },
+        "sulfur_yiltirak2026_T_ladder": {
+          "core_median_fold": 159.68218929294383,
+          "answered": 8,
+          "points": 8
+        }
+      },
+      "hofmann_ph_block": {
+        "hofmann_ribose_pH3_FFT": {
+          "predicted_ppb": 1415.5555792576788,
+          "measured_ppb": 229.0,
+          "fold": 6.1814654116055845,
+          "in_band": false
+        },
+        "hofmann_ribose_pH3_MFT": {
+          "predicted_ppb": 10.935963758099833,
+          "measured_ppb": 553.0,
+          "fold": 50.56710247328819,
+          "in_band": false
+        },
+        "hofmann_ribose_pH7_FFT": {
+          "predicted_ppb": 0.05029792486108097,
+          "measured_ppb": 12.0,
+          "fold": 238.57843108126394,
+          "in_band": false
+        },
+        "hofmann_ribose_pH7_MFT": {
+          "predicted_ppb": 0.06788356364641437,
+          "measured_ppb": 25.0,
+          "fold": 368.27766041007635,
+          "in_band": false
+        }
+      },
+      "shared_rows_declared": 4
+    }
+  },
+  "w4_control_exam_at_b2_2_parameters": {
+    "d1_pool_n": 23,
+    "d1_pool_geometric_mean_fold": 36.655509848147034,
+    "d1_pool_median_fold": 21.357394986927307,
+    "d1_pool_as_was_geometric_mean_fold": 23.972730980221186,
+    "d1_pool_as_was_median_fold": 10.633401922099916,
+    "d1_pool_in_band": 3,
+    "answered": 27,
+    "declined": 13,
+    "scored": 27,
+    "in_band": 3,
+    "median_fold_all": 21.357394986927307,
+    "geometric_mean_fold_all": 48.732511064422944,
+    "median_abs_log10_all": 1.3295482796394655,
+    "worst_fold": 33391.73597895205,
+    "paired_n": 27,
+    "paired_core_median": 21.357394986927307,
+    "paired_core_geomean": 48.732511064422944,
+    "paired_old_median": 12.648593695999491,
+    "paired_old_geomean": 16.79657576562487,
+    "as_was_geomean": 33.940542400315366,
+    "as_was_median": 10.633401922099916,
+    "by_family": {
+      "acrylamide_180C": {
+        "core_median_fold": 8.14453657237207,
+        "answered": 5,
+        "points": 7
+      },
+      "furan_browning_glc_alanine": {
+        "core_median_fold": null,
+        "answered": 0,
+        "points": 7
+      },
+      "matrix_path_lipid": {
+        "core_median_fold": 1862.7186340692897,
+        "answered": 4,
+        "points": 8
+      },
+      "sulfur_hofmann1998_145C": {
+        "core_median_fold": 5.102827599086225,
+        "answered": 10,
+        "points": 10
+      },
+      "sulfur_yiltirak2026_T_ladder": {
+        "core_median_fold": 610.7961935210822,
+        "answered": 8,
+        "points": 8
+      }
+    },
+    "hofmann_ph_block": {
+      "hofmann_ribose_pH3_FFT": {
+        "predicted_ppb": 332.9524048913331,
+        "measured_ppb": 229.0,
+        "fold": 1.4539406327132451,
+        "in_band": true
+      },
+      "hofmann_ribose_pH3_MFT": {
+        "predicted_ppb": 25.892670915085244,
+        "measured_ppb": 553.0,
+        "fold": 21.357394986927307,
+        "in_band": false
+      },
+      "hofmann_ribose_pH7_FFT": {
+        "predicted_ppb": 2.68330091315246,
+        "measured_ppb": 12.0,
+        "fold": 4.472103721644053,
+        "in_band": false
+      },
+      "hofmann_ribose_pH7_MFT": {
+        "predicted_ppb": 0.17820610845205306,
+        "measured_ppb": 25.0,
+        "fold": 140.28699811222427,
+        "in_band": false
+      }
+    },
+    "shared_rows_declared": 4
+  },
+  "amine_fate_probe": {
+    "encodings_are_distinct": true,
+    "reproduces_the_b2_3_prereg_table": true,
+    "reproduction_cell_by_cell": {
+      "b22_no_carried_acid": {
+        "zhou_pH6": {
+          "b2_3_prereg": 3.29,
+          "b2_4_rebuild": 3.29,
+          "matches_to_2dp": true
+        },
+        "zhou_pH7": {
+          "b2_3_prereg": 3.49,
+          "b2_4_rebuild": 3.49,
+          "matches_to_2dp": true
+        },
+        "zhou_pH8": {
+          "b2_3_prereg": 5.07,
+          "b2_4_rebuild": 5.07,
+          "matches_to_2dp": true
+        },
+        "kang_120C": {
+          "b2_3_prereg": 11.57,
+          "b2_4_rebuild": 11.57,
+          "matches_to_2dp": true
+        }
+      },
+      "shipped": {
+        "zhou_pH6": {
+          "b2_3_prereg": 2.94,
+          "b2_4_rebuild": 2.94,
+          "matches_to_2dp": true
+        },
+        "zhou_pH7": {
+          "b2_3_prereg": 3.02,
+          "b2_4_rebuild": 3.02,
+          "matches_to_2dp": true
+        },
+        "zhou_pH8": {
+          "b2_3_prereg": 3.47,
+          "b2_4_rebuild": 3.47,
+          "matches_to_2dp": true
+        },
+        "kang_120C": {
+          "b2_3_prereg": 4.85,
+          "b2_4_rebuild": 4.85,
+          "matches_to_2dp": true
+        }
+      },
+      "carry_both": {
+        "zhou_pH6": {
+          "b2_3_prereg": 5.04,
+          "b2_4_rebuild": 5.04,
+          "matches_to_2dp": true
+        },
+        "zhou_pH7": {
+          "b2_3_prereg": 5.11,
+          "b2_4_rebuild": 5.11,
+          "matches_to_2dp": true
+        },
+        "zhou_pH8": {
+          "b2_3_prereg": 5.89,
+          "b2_4_rebuild": 5.89,
+          "matches_to_2dp": true
+        },
+        "kang_120C": {
+          "b2_3_prereg": 9.11,
+          "b2_4_rebuild": 9.11,
+          "matches_to_2dp": true
+        }
+      }
+    },
+    "mean_abs_miss_on_the_two_acidifying_anchors_pH": {
+      "shipped": 0.3406869095563889,
+      "b22_no_carried_acid": 0.07416496083140367,
+      "carry_both": 1.7554937641322612
+    },
+    "prereg_expectation": "the rebuilt 'carry both' encoding leaves Zhou's three cooled endpoints ABOVE pH 4.5 on all three anchors, reproducing the DIRECTION of the B2.3 prereg's third row but not its digits",
+    "prereg_expectation_held": true,
+    "shipped_worst_miss_pH_units": 1.6022765153832736,
+    "carry_both_worst_miss_pH_units": 1.821130549740046
+  },
+  "prereg_checks": [
+    {
+      "claim": "W-1 spread at W-SHIPPED > 0.30 (log10 max/min cost, converged)",
+      "outcome": "FALSIFIED",
+      "detail": "pooled S = 6.79e-08 over 2 converged of 6; local arm alone S = 6.79e-08; 4 budget-exhausted. Costs: [8.146, 8.146, 11.106, 19.414, 15.595, 15.595]. TWO GLOBAL STARTS 2005 AND 1942 COST-UNITS APART LANDED WITHIN 0.0003 OF EACH OTHER, so within the ~20 identified coordinates the objective really is single-basin; the B2.2->B2.3 scatter lives in the ~28 coordinates this wave FROZE and says nothing about. THE FALSIFICATION IS QUALIFIED, AND THE QUALIFICATION IS NOT IN THE CONTROL'S FAVOUR: at W-SHIPPED only 2 members survived A1's budget to enter S, so the statistic is a two-member statistic. The same seeds at the other two weightings DID converge and DID resolve a second basin -- W-HALF: 5 converged, S = 0.2924 (local arm alone 0.002948), costs [7.82, 7.77, 7.77, 15.23, 15.23, 15.23]; -- W-MEASURED: 4 converged, S = 0.304 (local arm alone 0.000183), costs [7.4, 7.4, 7.4, 14.9, 14.9, 14.98]. Read together: the near-basin structure is genuinely flat (local-arm S is 0.003 and 0.0002), but the GLOBAL arm finds a distinct attractor at about twice the cost at every weighting where it is allowed to converge. W-1 is falsified as written and the objective is still multi-modal over the free set."
+    },
+    {
+      "claim": "W-2 exam geometric-mean fold spans >= 1.5x across the W-SHIPPED ensemble",
+      "outcome": "HELD",
+      "detail": "6 members re-sat: [28.53, 36.39, 37.2, 37.22, 48.81, 48.84]; range 1.712x"
+    },
+    {
+      "claim": "W-3 down-weighting moves k_fur_fft below -2.0 AND the FFT pH slope below 3.0 decades",
+      "outcome": "FALSIFIED",
+      "detail": "W-HALF: k_fur_fft -0.5576 (needs < -2.0), pH3->pH7 FFT slope 4.892 decades (needs < 3.0); W-MEASURED: k_fur_fft -0.574 (needs < -2.0), pH3->pH7 FFT slope 4.906 decades (needs < 3.0)"
+    },
+    {
+      "claim": "W-4 the charge-conservation fix stays free (B2.2's parameters under B2.3's stoichiometry; claim as written: within 10% of 26.8x)",
+      "outcome": "HELD ON THE CORRECT REFERENCE, FALSIFIED AS WRITTEN",
+      "detail": "On D1's own 23-point pool the as-was geometric mean is 23.97x. THE CLAIM MIS-NAMED ITS REFERENCE: 26.8x is D1's `B22_ref` cell (B2.2 stoichiometry), while the cell the claim describes is D1's `S_only` (B2.3 stoichiometry), published at 23.97x. Against 23.97x this reproduces D1 to four significant figures; against the 26.8x actually written it is -10.5%, just outside the 10% band. Either way the substantive claim -- the conservation fix is free -- stands, and the as-was PAIRED MEDIAN is 10.63x against D1's 10.63x. On the CURRENT 27-point pool the same number is 33.94x; the pool grew because concurrent Wave B6 gave the core a lipid lane that answers four points D1's core declined."
+    },
+    {
+      "claim": "W-5 the Hofmann pH-3/pH-7 block never reaches 3/4 and the ladder stays humped -- re-weighting does NOT fix a shape defect",
+      "outcome": "HELD",
+      "detail": "panel block: W-SHIPPED 0/4, W-HALF 0/4, W-MEASURED 0/4 -- never reaches 3/4. Three-rung ladder (pH 5 fit-side-anchored, pH 3 and pH 7 hold-out, scored by the exam): monotone falling at ['shipped/FFT', 'half/FFT', 'measured/FFT']; monotone on BOTH compounds -- which is what the pre-registration declares as the falsifier -- at no weighting. REPORTED AGAINST THE CLAIM'S OWN PROSE, NOT ONLY ITS FALSIFIER: the claim asserts the ladder 'stays humped ... at every weighting', and only MFT does. FFT is monotone FALLING at all three weightings, at 4.88-4.91 decades against a measured 1.28 -- the right SHAPE with the wrong STEEPNESS, roughly four decades too steep. So W-5's verdict holds and its substance holds -- re-weighting fixed neither the block nor the shape -- but its description of the defect is half wrong, and the FFT defect is a slope defect rather than a hump. LIMITATION: three rungs, not D1's seven-rung sweep, so a hump BETWEEN pH 3 and pH 5 is invisible to this test."
+    },
+    {
+      "claim": "W-6 fed_c2c3_MFT_pH3 is the largest single residual at every weighting",
+      "outcome": "HELD",
+      "detail": "W-SHIPPED: fed_c2c3_MFT_pH3 at 2.087 sigma; W-HALF: fed_c2c3_MFT_pH3 at 2.087 sigma; W-MEASURED: fed_c2c3_MFT_pH3 at 2.087 sigma"
+    },
+    {
+      "claim": "W-7 exam and panel median |log10 fold| agree in SIGN at every weighting",
+      "outcome": "HELD",
+      "detail": "W-HALF: exam +0.000, panel -0.072 (same direction); W-MEASURED: exam +0.000, panel -0.110 (same direction). THE VERDICT IS DEGENERATE AND IS NOT EVIDENCE OF AGREEMENT: the exam's median |log10 fold| is BIT-IDENTICAL across all three weightings, so the exam contributes no sign and the test cannot fail on this statistic.. ON THE GEOMETRIC MEAN -- the other continuous statistic this wave added, and the one that actually moves -- THE TWO SCORECARDS DISAGREE IN SIGN at W-HALF, W-MEASURED: W-HALF exam +0.328x, panel -0.039x; W-MEASURED exam +0.765x, panel -0.562x. The panel improves as E falls while the exam worsens. By W-7's own stated consequence -- 'if they ever disagree in sign, the four shared rows are masking something and the wave says so' -- THE WAVE SAYS SO."
+    },
+    {
+      "claim": "W-8 sum_r2_level improves monotonically as E falls (W-SHIPPED >= W-HALF >= W-MEASURED)",
+      "outcome": "HELD",
+      "detail": "W-SHIPPED: 15.5; W-HALF: 15.12; W-MEASURED: 14.42"
+    },
+    {
+      "claim": "W-9 the pH-endpoint misses grow monotonically as E falls, AND W-MEASURED fails gate G1",
+      "outcome": "FALSIFIED",
+      "detail": "W-SHIPPED: worst |miss| 0.1698 pH units; W-HALF: worst |miss| 0.2807 pH units; W-MEASURED: worst |miss| 0.6625 pH units. W-MEASURED gate G1 = PASS"
+    },
+    {
+      "claim": "W-10 the pre-declared criterion does NOT select the best-exam weighting",
+      "outcome": "HELD",
+      "detail": "criterion ships W-HALF; best exam geometric mean is W-SHIPPED at 48.84x. All: W-SHIPPED 48.84x, W-HALF 49.17x, W-MEASURED 49.61x"
+    },
+    {
+      "claim": "PREREG sec.5 the rebuilt probe reproduces the DIRECTION of the B2.3 table (carry-both leaves all three Zhou endpoints above pH 4.5)",
+      "outcome": "HELD",
+      "detail": "three encodings distinct: True; reproduces the B2.3 prereg table cell-by-cell: True; mean |miss| on the two acidifying anchors -- shipped 0.3407, carry-both 1.755 pH units"
+    }
+  ],
+  "measured_ladder_for_reference": {
+    "note": "Hofmann & Schieberle 1998's own ribose ladder, as the SCORERS report it: pH 3 and pH 7 are hold-out and appear here only because the exam has already scored them; the pH-5 rung is a declared FIT anchor.",
+    "FFT_ppb": {
+      "pH3": 229.0,
+      "pH5": 121.0,
+      "pH7": 12.0
+    },
+    "MFT_ppb": {
+      "pH3": 553.0,
+      "pH5": 198.0,
+      "pH7": 25.0
+    },
+    "FFT_pH3_to_pH7_decades": 1.281,
+    "MFT_pH3_to_pH7_decades": 1.345
+  }
+}

@@ -1,0 +1,3532 @@
+{
+  "generated_at": "2026-05-27T21:12:36+00:00",
+  "summary": {
+    "target_count": 8,
+    "xtb_job_count": 8,
+    "xtb_ready_count": 8,
+    "dft_job_count": 8,
+    "dft_ready_count": 7,
+    "explicit_solvent_job_count": 1,
+    "governance_status": "hold_observable_first",
+    "maximum_promotion_without_wet_lab": "prior_narrowing_only"
+  },
+  "write_back_surfaces": [
+    "data/lit/computational_priors.json",
+    "results/validation/computational_gap_dft_ingestion_report.md",
+    "results/validation/computational_gap_dft_ingestion_report.json",
+    "results/validation/computational_gap_closure_scorecard.md",
+    "results/validation/computational_gap_closure_scorecard.json",
+    "results/validation/refinement_governance.md",
+    "results/validation/refinement_governance.json"
+  ],
+  "source_registry_path": "data/lit/computational_gap_closure_targets.json",
+  "targets": [
+    {
+      "id": "hexanal_radical_quench",
+      "priority_rank": 1,
+      "reaction_key": "hexanal_radical_quench",
+      "slr_family": "11",
+      "gap": "Family 11: Competitive kinetics of hexanal quenching by Maillard radicals is missing direct anchors.",
+      "decision_impact": "high",
+      "cheap_first_method": "MACE-OFF24 screening then xTB-derived GFN2 barriers",
+      "upgrade_method": "selective_dft_anchor (wB97M-V) for the transition state refinement",
+      "acceptance_signal": "hexanal suppression is non-zero in the presence of cysteine-derived radicals",
+      "method": "GFN2-xTB NEB path search",
+      "source_quality": "xtb_derived_gfn2",
+      "current_barrier_kcal_mol": 7.58,
+      "current_barrier_kj_mol": 31.72,
+      "uncertainty_kj": 42.0,
+      "promotion_ceiling": "ranking_only",
+      "maximum_claim_level": "ranking_only_support",
+      "active_arrhenius_key": "hexanal_radical_quench_xtb_derived",
+      "forming_bond": {
+        "available": true,
+        "method": "geometry_topology_diff",
+        "selection_rule": "interfragment_heavy_bond",
+        "family_recipe_source": null,
+        "family_recipe_form_bonds": [],
+        "all_new_bonds": [
+          {
+            "atom_indices_zero_based": [
+              5,
+              19
+            ],
+            "atom_indices_one_based": [
+              6,
+              20
+            ],
+            "atom_symbols": [
+              "C",
+              "S"
+            ],
+            "product_distance_angstrom": 1.8058,
+            "reactant_distance_angstrom": 4.027,
+            "distance_drop_angstrom": 2.2211,
+            "interfragment_in_reactant": true,
+            "heavy_atom_bond": true
+          },
+          {
+            "atom_indices_zero_based": [
+              6,
+              20
+            ],
+            "atom_indices_one_based": [
+              7,
+              21
+            ],
+            "atom_symbols": [
+              "O",
+              "H"
+            ],
+            "product_distance_angstrom": 0.9785,
+            "reactant_distance_angstrom": 1.5,
+            "distance_drop_angstrom": 0.5215,
+            "interfragment_in_reactant": true,
+            "heavy_atom_bond": false
+          }
+        ],
+        "atom_indices_zero_based": [
+          5,
+          19
+        ],
+        "atom_indices_one_based": [
+          6,
+          20
+        ],
+        "atom_symbols": [
+          "C",
+          "S"
+        ],
+        "product_distance_angstrom": 1.8058,
+        "reactant_distance_angstrom": 4.027,
+        "distance_drop_angstrom": 2.2211,
+        "interfragment_in_reactant": true
+      },
+      "surrogate": {
+        "available": false,
+        "kind": "",
+        "short_label": "",
+        "reaction": "",
+        "assumption": "",
+        "note": "",
+        "basis": [],
+        "barrier_kcal_mol": null,
+        "barrier_kj_mol": null
+      },
+      "governance_status": "hold_observable_first",
+      "governance_note": "Computational-gap refinement jobs can narrow priors and uncertainty only; they do not promote benchmark closure while observable-first governance remains active.",
+      "write_back_artifacts": [
+        "data/lit/computational_priors.json",
+        "results/validation/computational_gap_dft_ingestion_report.md",
+        "results/validation/computational_gap_dft_ingestion_report.json",
+        "results/validation/computational_gap_closure_scorecard.md",
+        "results/validation/computational_gap_closure_scorecard.json",
+        "results/validation/refinement_governance.md",
+        "results/validation/refinement_governance.json"
+      ],
+      "xtb": {
+        "required": true,
+        "status": "ready",
+        "blocker_note": null,
+        "surrogate_available": false,
+        "geometry_dir": "data/geometries/xtb_inputs/hexanal_radical_quench",
+        "runner_script": "data/geometries/xtb_inputs/hexanal_radical_quench/run_xtb.sh",
+        "required_inputs": [
+          "data/geometries/xtb_inputs/hexanal_radical_quench/reactant.xyz",
+          "data/geometries/xtb_inputs/hexanal_radical_quench/product.xyz"
+        ],
+        "reactant_atom_count": 21,
+        "product_atom_count": 21,
+        "atom_count_match": true,
+        "expected_outputs": [
+          "data/geometries/xtb_inputs/hexanal_radical_quench/xtbpath.xyz",
+          "data/geometries/xtb_inputs/hexanal_radical_quench/xtbpath_ts.xyz"
+        ],
+        "execute_with": "python scripts/run_computational_gap_xtb.py --target hexanal_radical_quench --execute"
+      },
+      "mlp": {
+        "allowed_candidate_id": "mace_mp_small",
+        "allowed_role": "geom_preopt",
+        "authority_allowed": false,
+        "blocked_candidates": [
+          "mace_off_medium",
+          "aimnet2_shortlist",
+          "orbmol_shortlist"
+        ],
+        "note": "MLP barrier authority remains blocked; only geometry preoptimization is allowed where benchmarked."
+      },
+      "dft": {
+        "required": true,
+        "status": "ready_for_dft",
+        "surrogate_available": false,
+        "runner_script": "scripts/run_computational_gap_dft.py",
+        "reactant_path": "data/geometries/xtb_inputs/hexanal_radical_quench/reactant.xyz",
+        "product_path": "data/geometries/xtb_inputs/hexanal_radical_quench/product.xyz",
+        "ts_guess_path": "data/geometries/xtb_inputs/hexanal_radical_quench/xtbpath_ts.xyz",
+        "forming_bond": {
+          "available": true,
+          "method": "geometry_topology_diff",
+          "selection_rule": "interfragment_heavy_bond",
+          "family_recipe_source": null,
+          "family_recipe_form_bonds": [],
+          "all_new_bonds": [
+            {
+              "atom_indices_zero_based": [
+                5,
+                19
+              ],
+              "atom_indices_one_based": [
+                6,
+                20
+              ],
+              "atom_symbols": [
+                "C",
+                "S"
+              ],
+              "product_distance_angstrom": 1.8058,
+              "reactant_distance_angstrom": 4.027,
+              "distance_drop_angstrom": 2.2211,
+              "interfragment_in_reactant": true,
+              "heavy_atom_bond": true
+            },
+            {
+              "atom_indices_zero_based": [
+                6,
+                20
+              ],
+              "atom_indices_one_based": [
+                7,
+                21
+              ],
+              "atom_symbols": [
+                "O",
+                "H"
+              ],
+              "product_distance_angstrom": 0.9785,
+              "reactant_distance_angstrom": 1.5,
+              "distance_drop_angstrom": 0.5215,
+              "interfragment_in_reactant": true,
+              "heavy_atom_bond": false
+            }
+          ],
+          "atom_indices_zero_based": [
+            5,
+            19
+          ],
+          "atom_indices_one_based": [
+            6,
+            20
+          ],
+          "atom_symbols": [
+            "C",
+            "S"
+          ],
+          "product_distance_angstrom": 1.8058,
+          "reactant_distance_angstrom": 4.027,
+          "distance_drop_angstrom": 2.2211,
+          "interfragment_in_reactant": true
+        },
+        "solvent_name": "water",
+        "temperature_k": 423.15,
+        "charge": 0,
+        "spin": 1,
+        "use_explicit_solvent": false,
+        "n_water": 0,
+        "expected_outputs": [
+          "optimized_reactant.xyz",
+          "optimized_ts.xyz",
+          "barrier_summary.json",
+          "quasi_harmonic_thermo.json",
+          "surrogate_patch.json"
+        ],
+        "execute_with": "python scripts/run_computational_gap_dft.py --target hexanal_radical_quench --execute"
+      }
+    },
+    {
+      "id": "lysinoalanine_crosslink",
+      "priority_rank": 2,
+      "reaction_key": "lysinoalanine_crosslink",
+      "slr_family": "12",
+      "gap": "Family 12: Absolute formation kinetics for lysinoalanine under alkaline HME conditions.",
+      "decision_impact": "high",
+      "cheap_first_method": "Balanced dehydroalanine-plus-lysine xTB seed, with the DHA_Crosslinking family rule retained as the bounded fallback until selective DFT lands",
+      "upgrade_method": "selective_dft_anchor for absolute yield prediction in extrusion",
+      "acceptance_signal": "LAL yield matches masked literature anchors from safety registries",
+      "method": "DHA_Crosslinking family-rule surrogate (ArrheniusEP E0=16 kcal/mol)",
+      "source_quality": "family_rule_surrogate",
+      "current_barrier_kcal_mol": 16.0,
+      "current_barrier_kj_mol": 66.95,
+      "uncertainty_kj": 42.0,
+      "promotion_ceiling": "ranking_only",
+      "maximum_claim_level": "ranking_only_support",
+      "active_arrhenius_key": "lysinoalanine_crosslink_dha_family_surrogate",
+      "forming_bond": {
+        "available": true,
+        "method": "geometry_topology_diff",
+        "selection_rule": "largest_distance_drop",
+        "family_recipe_source": "data/rmg_extensions/families/DHA_Crosslinking/groups.py",
+        "family_recipe_form_bonds": [
+          {
+            "left_label": "*1",
+            "order": 1,
+            "right_label": "*4"
+          },
+          {
+            "left_label": "*2",
+            "order": 1,
+            "right_label": "*5"
+          }
+        ],
+        "all_new_bonds": [
+          {
+            "atom_indices_zero_based": [
+              0,
+              6
+            ],
+            "atom_indices_one_based": [
+              1,
+              7
+            ],
+            "atom_symbols": [
+              "C",
+              "N"
+            ],
+            "product_distance_angstrom": 1.4708,
+            "reactant_distance_angstrom": 3.181,
+            "distance_drop_angstrom": 1.7102,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": true
+          },
+          {
+            "atom_indices_zero_based": [
+              1,
+              34
+            ],
+            "atom_indices_one_based": [
+              2,
+              35
+            ],
+            "atom_symbols": [
+              "C",
+              "H"
+            ],
+            "product_distance_angstrom": 1.0978,
+            "reactant_distance_angstrom": 4.8017,
+            "distance_drop_angstrom": 3.704,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              7,
+              22
+            ],
+            "atom_indices_one_based": [
+              8,
+              23
+            ],
+            "atom_symbols": [
+              "C",
+              "H"
+            ],
+            "product_distance_angstrom": 1.0957,
+            "reactant_distance_angstrom": 2.0375,
+            "distance_drop_angstrom": 0.9418,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              8,
+              24
+            ],
+            "atom_indices_one_based": [
+              9,
+              25
+            ],
+            "atom_symbols": [
+              "C",
+              "H"
+            ],
+            "product_distance_angstrom": 1.097,
+            "reactant_distance_angstrom": 2.1678,
+            "distance_drop_angstrom": 1.0708,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              9,
+              26
+            ],
+            "atom_indices_one_based": [
+              10,
+              27
+            ],
+            "atom_symbols": [
+              "C",
+              "H"
+            ],
+            "product_distance_angstrom": 1.0967,
+            "reactant_distance_angstrom": 2.1417,
+            "distance_drop_angstrom": 1.045,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              10,
+              28
+            ],
+            "atom_indices_one_based": [
+              11,
+              29
+            ],
+            "atom_symbols": [
+              "C",
+              "H"
+            ],
+            "product_distance_angstrom": 1.0962,
+            "reactant_distance_angstrom": 2.1662,
+            "distance_drop_angstrom": 1.0699,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              11,
+              30
+            ],
+            "atom_indices_one_based": [
+              12,
+              31
+            ],
+            "atom_symbols": [
+              "C",
+              "H"
+            ],
+            "product_distance_angstrom": 1.0967,
+            "reactant_distance_angstrom": 2.1723,
+            "distance_drop_angstrom": 1.0756,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              12,
+              31
+            ],
+            "atom_indices_one_based": [
+              13,
+              32
+            ],
+            "atom_symbols": [
+              "N",
+              "H"
+            ],
+            "product_distance_angstrom": 1.0181,
+            "reactant_distance_angstrom": 2.0927,
+            "distance_drop_angstrom": 1.0746,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              15,
+              33
+            ],
+            "atom_indices_one_based": [
+              16,
+              34
+            ],
+            "atom_symbols": [
+              "O",
+              "H"
+            ],
+            "product_distance_angstrom": 0.98,
+            "reactant_distance_angstrom": 3.674,
+            "distance_drop_angstrom": 2.6939,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          }
+        ],
+        "atom_indices_zero_based": [
+          0,
+          6
+        ],
+        "atom_indices_one_based": [
+          1,
+          7
+        ],
+        "atom_symbols": [
+          "C",
+          "N"
+        ],
+        "product_distance_angstrom": 1.4708,
+        "reactant_distance_angstrom": 3.181,
+        "distance_drop_angstrom": 1.7102,
+        "interfragment_in_reactant": false
+      },
+      "surrogate": {
+        "available": true,
+        "kind": "dha_michael_addition",
+        "short_label": "DHA+Lys family surrogate",
+        "reaction": "Dehydroalanine plus lysine epsilon-amine Michael addition to form lysinoalanine.",
+        "assumption": "Assumes dehydroalanine has already formed by beta-elimination; the balanced Michael-addition pair can now be screened with xTB, but the family rule remains the bounded authority until selective DFT is written back.",
+        "note": "Keep the repo's DHA_Crosslinking family rule as fallback authority while the regenerated balanced pair advances through xTB and selective DFT.",
+        "basis": [
+          "data/rmg_extensions/families/DHA_Crosslinking/rules.py",
+          "data/species/toxic_markers.yml",
+          "src/reaction_templates.py::_dha_competing_pathway"
+        ],
+        "barrier_kcal_mol": 16.0,
+        "barrier_kj_mol": 66.95
+      },
+      "governance_status": "hold_observable_first",
+      "governance_note": "Computational-gap refinement jobs can narrow priors and uncertainty only; they do not promote benchmark closure while observable-first governance remains active.",
+      "write_back_artifacts": [
+        "data/lit/computational_priors.json",
+        "results/validation/computational_gap_dft_ingestion_report.md",
+        "results/validation/computational_gap_dft_ingestion_report.json",
+        "results/validation/computational_gap_closure_scorecard.md",
+        "results/validation/computational_gap_closure_scorecard.json",
+        "results/validation/refinement_governance.md",
+        "results/validation/refinement_governance.json"
+      ],
+      "xtb": {
+        "required": true,
+        "status": "ready",
+        "blocker_note": null,
+        "surrogate_available": true,
+        "geometry_dir": "data/geometries/xtb_inputs/lysinoalanine_crosslink",
+        "runner_script": "data/geometries/xtb_inputs/lysinoalanine_crosslink/run_xtb.sh",
+        "required_inputs": [
+          "data/geometries/xtb_inputs/lysinoalanine_crosslink/reactant.xyz",
+          "data/geometries/xtb_inputs/lysinoalanine_crosslink/product.xyz"
+        ],
+        "reactant_atom_count": 35,
+        "product_atom_count": 35,
+        "atom_count_match": true,
+        "expected_outputs": [
+          "data/geometries/xtb_inputs/lysinoalanine_crosslink/xtbpath.xyz",
+          "data/geometries/xtb_inputs/lysinoalanine_crosslink/xtbpath_ts.xyz"
+        ],
+        "execute_with": "python scripts/run_computational_gap_xtb.py --target lysinoalanine_crosslink --execute"
+      },
+      "mlp": {
+        "allowed_candidate_id": "mace_mp_small",
+        "allowed_role": "geom_preopt",
+        "authority_allowed": false,
+        "blocked_candidates": [
+          "mace_off_medium",
+          "aimnet2_shortlist",
+          "orbmol_shortlist"
+        ],
+        "note": "MLP barrier authority remains blocked; only geometry preoptimization is allowed where benchmarked."
+      },
+      "dft": {
+        "required": true,
+        "status": "ready_for_dft",
+        "surrogate_available": true,
+        "runner_script": "scripts/run_computational_gap_dft.py",
+        "reactant_path": "data/geometries/xtb_inputs/lysinoalanine_crosslink/reactant.xyz",
+        "product_path": "data/geometries/xtb_inputs/lysinoalanine_crosslink/product.xyz",
+        "ts_guess_path": "data/geometries/xtb_inputs/lysinoalanine_crosslink/xtbpath_ts.xyz",
+        "forming_bond": {
+          "available": true,
+          "method": "geometry_topology_diff",
+          "selection_rule": "largest_distance_drop",
+          "family_recipe_source": "data/rmg_extensions/families/DHA_Crosslinking/groups.py",
+          "family_recipe_form_bonds": [
+            {
+              "left_label": "*1",
+              "order": 1,
+              "right_label": "*4"
+            },
+            {
+              "left_label": "*2",
+              "order": 1,
+              "right_label": "*5"
+            }
+          ],
+          "all_new_bonds": [
+            {
+              "atom_indices_zero_based": [
+                0,
+                6
+              ],
+              "atom_indices_one_based": [
+                1,
+                7
+              ],
+              "atom_symbols": [
+                "C",
+                "N"
+              ],
+              "product_distance_angstrom": 1.4708,
+              "reactant_distance_angstrom": 3.181,
+              "distance_drop_angstrom": 1.7102,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": true
+            },
+            {
+              "atom_indices_zero_based": [
+                1,
+                34
+              ],
+              "atom_indices_one_based": [
+                2,
+                35
+              ],
+              "atom_symbols": [
+                "C",
+                "H"
+              ],
+              "product_distance_angstrom": 1.0978,
+              "reactant_distance_angstrom": 4.8017,
+              "distance_drop_angstrom": 3.704,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                7,
+                22
+              ],
+              "atom_indices_one_based": [
+                8,
+                23
+              ],
+              "atom_symbols": [
+                "C",
+                "H"
+              ],
+              "product_distance_angstrom": 1.0957,
+              "reactant_distance_angstrom": 2.0375,
+              "distance_drop_angstrom": 0.9418,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                8,
+                24
+              ],
+              "atom_indices_one_based": [
+                9,
+                25
+              ],
+              "atom_symbols": [
+                "C",
+                "H"
+              ],
+              "product_distance_angstrom": 1.097,
+              "reactant_distance_angstrom": 2.1678,
+              "distance_drop_angstrom": 1.0708,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                9,
+                26
+              ],
+              "atom_indices_one_based": [
+                10,
+                27
+              ],
+              "atom_symbols": [
+                "C",
+                "H"
+              ],
+              "product_distance_angstrom": 1.0967,
+              "reactant_distance_angstrom": 2.1417,
+              "distance_drop_angstrom": 1.045,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                10,
+                28
+              ],
+              "atom_indices_one_based": [
+                11,
+                29
+              ],
+              "atom_symbols": [
+                "C",
+                "H"
+              ],
+              "product_distance_angstrom": 1.0962,
+              "reactant_distance_angstrom": 2.1662,
+              "distance_drop_angstrom": 1.0699,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                11,
+                30
+              ],
+              "atom_indices_one_based": [
+                12,
+                31
+              ],
+              "atom_symbols": [
+                "C",
+                "H"
+              ],
+              "product_distance_angstrom": 1.0967,
+              "reactant_distance_angstrom": 2.1723,
+              "distance_drop_angstrom": 1.0756,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                12,
+                31
+              ],
+              "atom_indices_one_based": [
+                13,
+                32
+              ],
+              "atom_symbols": [
+                "N",
+                "H"
+              ],
+              "product_distance_angstrom": 1.0181,
+              "reactant_distance_angstrom": 2.0927,
+              "distance_drop_angstrom": 1.0746,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                15,
+                33
+              ],
+              "atom_indices_one_based": [
+                16,
+                34
+              ],
+              "atom_symbols": [
+                "O",
+                "H"
+              ],
+              "product_distance_angstrom": 0.98,
+              "reactant_distance_angstrom": 3.674,
+              "distance_drop_angstrom": 2.6939,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            }
+          ],
+          "atom_indices_zero_based": [
+            0,
+            6
+          ],
+          "atom_indices_one_based": [
+            1,
+            7
+          ],
+          "atom_symbols": [
+            "C",
+            "N"
+          ],
+          "product_distance_angstrom": 1.4708,
+          "reactant_distance_angstrom": 3.181,
+          "distance_drop_angstrom": 1.7102,
+          "interfragment_in_reactant": false
+        },
+        "solvent_name": "water",
+        "temperature_k": 423.15,
+        "charge": 0,
+        "spin": 0,
+        "use_explicit_solvent": false,
+        "n_water": 0,
+        "expected_outputs": [
+          "optimized_reactant.xyz",
+          "optimized_ts.xyz",
+          "barrier_summary.json",
+          "quasi_harmonic_thermo.json",
+          "surrogate_patch.json"
+        ],
+        "execute_with": "python scripts/run_computational_gap_dft.py --target lysinoalanine_crosslink --execute"
+      }
+    },
+    {
+      "id": "aa_ring_open_dicarbonyl",
+      "priority_rank": 3,
+      "reaction_key": "aa_ring_open_dicarbonyl",
+      "slr_family": "14",
+      "gap": "Family 14: Arrhenius parameters for dehydroascorbic acid ring-opening into 3-deoxythreosone.",
+      "decision_impact": "medium_high",
+      "cheap_first_method": "Balanced dehydroascorbic-acid hydration/ring-opening xTB seed plus HCW literature anchor retained as the bounded Family 14 surrogate until selective DFT lands",
+      "upgrade_method": "DFT-based barrier refinement if AA-contributed browning dominates during extrusion",
+      "acceptance_signal": "AA-derived dicarbonyl yield matches molar glucose equivalence benchmarks",
+      "method": "Family 14 HCW literature surrogate (bounded upstream dicarbonyl source)",
+      "source_quality": "literature_derived_transfer",
+      "current_barrier_kcal_mol": 7.58,
+      "current_barrier_kj_mol": 31.7,
+      "uncertainty_kj": 20.0,
+      "promotion_ceiling": "bounded_calibration",
+      "maximum_claim_level": "bounded_calibration",
+      "active_arrhenius_key": "aa_ring_open_dicarbonyl_hcw_family14_surrogate",
+      "forming_bond": {
+        "available": true,
+        "method": "geometry_topology_diff",
+        "selection_rule": "largest_distance_drop",
+        "family_recipe_source": null,
+        "family_recipe_form_bonds": [],
+        "all_new_bonds": [
+          {
+            "atom_indices_zero_based": [
+              0,
+              4
+            ],
+            "atom_indices_one_based": [
+              1,
+              5
+            ],
+            "atom_symbols": [
+              "O",
+              "C"
+            ],
+            "product_distance_angstrom": 1.3441,
+            "reactant_distance_angstrom": 5.4929,
+            "distance_drop_angstrom": 4.1488,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": true
+          },
+          {
+            "atom_indices_zero_based": [
+              2,
+              14
+            ],
+            "atom_indices_one_based": [
+              3,
+              15
+            ],
+            "atom_symbols": [
+              "H",
+              "O"
+            ],
+            "product_distance_angstrom": 0.9818,
+            "reactant_distance_angstrom": 4.9442,
+            "distance_drop_angstrom": 3.9624,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          }
+        ],
+        "atom_indices_zero_based": [
+          0,
+          4
+        ],
+        "atom_indices_one_based": [
+          1,
+          5
+        ],
+        "atom_symbols": [
+          "O",
+          "C"
+        ],
+        "product_distance_angstrom": 1.3441,
+        "reactant_distance_angstrom": 5.4929,
+        "distance_drop_angstrom": 4.1488,
+        "interfragment_in_reactant": false
+      },
+      "surrogate": {
+        "available": true,
+        "kind": "ascorbic_upstream_dicarbonyl_source",
+        "short_label": "Family 14 HCW surrogate",
+        "reaction": "Dehydroascorbic-acid ring opening and hydration treated as a bounded upstream source of reactive dicarbonyl pressure rather than as a validated elementary xTB endpoint.",
+        "assumption": "Assumes the Family 14 runtime lane is still controlled by the HCW-derived effective barrier until selective DFT confirms or narrows the balanced DHAA-plus-water surrogate pair.",
+        "note": "Keep the literature-backed Family 14 source term as the bounded calibration authority while the regenerated balanced xTB pair is advanced through selective DFT.",
+        "basis": [
+          "src/literature_runtime.py::_build_ascorbic_acid_maillard_lane",
+          "data/lit/computational_priors.json:dft_kinetic_priors.aa_ring_open_dicarbonyl"
+        ],
+        "barrier_kcal_mol": 7.58,
+        "barrier_kj_mol": 31.7
+      },
+      "governance_status": "hold_observable_first",
+      "governance_note": "Computational-gap refinement jobs can narrow priors and uncertainty only; they do not promote benchmark closure while observable-first governance remains active.",
+      "write_back_artifacts": [
+        "data/lit/computational_priors.json",
+        "results/validation/computational_gap_dft_ingestion_report.md",
+        "results/validation/computational_gap_dft_ingestion_report.json",
+        "results/validation/computational_gap_closure_scorecard.md",
+        "results/validation/computational_gap_closure_scorecard.json",
+        "results/validation/refinement_governance.md",
+        "results/validation/refinement_governance.json"
+      ],
+      "xtb": {
+        "required": true,
+        "status": "ready",
+        "blocker_note": null,
+        "surrogate_available": true,
+        "geometry_dir": "data/geometries/xtb_inputs/aa_ring_open_dicarbonyl",
+        "runner_script": "data/geometries/xtb_inputs/aa_ring_open_dicarbonyl/run_xtb.sh",
+        "required_inputs": [
+          "data/geometries/xtb_inputs/aa_ring_open_dicarbonyl/reactant.xyz",
+          "data/geometries/xtb_inputs/aa_ring_open_dicarbonyl/product.xyz"
+        ],
+        "reactant_atom_count": 21,
+        "product_atom_count": 21,
+        "atom_count_match": true,
+        "expected_outputs": [
+          "data/geometries/xtb_inputs/aa_ring_open_dicarbonyl/xtbpath.xyz",
+          "data/geometries/xtb_inputs/aa_ring_open_dicarbonyl/xtbpath_ts.xyz"
+        ],
+        "execute_with": "python scripts/run_computational_gap_xtb.py --target aa_ring_open_dicarbonyl --execute"
+      },
+      "mlp": {
+        "allowed_candidate_id": "mace_mp_small",
+        "allowed_role": "geom_preopt",
+        "authority_allowed": false,
+        "blocked_candidates": [
+          "mace_off_medium",
+          "aimnet2_shortlist",
+          "orbmol_shortlist"
+        ],
+        "note": "MLP barrier authority remains blocked; only geometry preoptimization is allowed where benchmarked."
+      },
+      "dft": {
+        "required": true,
+        "status": "ready_for_dft",
+        "surrogate_available": true,
+        "runner_script": "scripts/run_computational_gap_dft.py",
+        "reactant_path": "data/geometries/xtb_inputs/aa_ring_open_dicarbonyl/reactant.xyz",
+        "product_path": "data/geometries/xtb_inputs/aa_ring_open_dicarbonyl/product.xyz",
+        "ts_guess_path": "data/geometries/xtb_inputs/aa_ring_open_dicarbonyl/xtbpath_ts.xyz",
+        "forming_bond": {
+          "available": true,
+          "method": "geometry_topology_diff",
+          "selection_rule": "largest_distance_drop",
+          "family_recipe_source": null,
+          "family_recipe_form_bonds": [],
+          "all_new_bonds": [
+            {
+              "atom_indices_zero_based": [
+                0,
+                4
+              ],
+              "atom_indices_one_based": [
+                1,
+                5
+              ],
+              "atom_symbols": [
+                "O",
+                "C"
+              ],
+              "product_distance_angstrom": 1.3441,
+              "reactant_distance_angstrom": 5.4929,
+              "distance_drop_angstrom": 4.1488,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": true
+            },
+            {
+              "atom_indices_zero_based": [
+                2,
+                14
+              ],
+              "atom_indices_one_based": [
+                3,
+                15
+              ],
+              "atom_symbols": [
+                "H",
+                "O"
+              ],
+              "product_distance_angstrom": 0.9818,
+              "reactant_distance_angstrom": 4.9442,
+              "distance_drop_angstrom": 3.9624,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            }
+          ],
+          "atom_indices_zero_based": [
+            0,
+            4
+          ],
+          "atom_indices_one_based": [
+            1,
+            5
+          ],
+          "atom_symbols": [
+            "O",
+            "C"
+          ],
+          "product_distance_angstrom": 1.3441,
+          "reactant_distance_angstrom": 5.4929,
+          "distance_drop_angstrom": 4.1488,
+          "interfragment_in_reactant": false
+        },
+        "solvent_name": "water",
+        "temperature_k": 423.15,
+        "charge": 0,
+        "spin": 0,
+        "use_explicit_solvent": false,
+        "n_water": 0,
+        "expected_outputs": [
+          "optimized_reactant.xyz",
+          "optimized_ts.xyz",
+          "barrier_summary.json",
+          "quasi_harmonic_thermo.json",
+          "surrogate_patch.json"
+        ],
+        "execute_with": "python scripts/run_computational_gap_dft.py --target aa_ring_open_dicarbonyl --execute"
+      }
+    },
+    {
+      "id": "quinone_cys_michael",
+      "priority_rank": 4,
+      "reaction_key": "quinone_cys_michael",
+      "slr_family": "13",
+      "gap": "Family 13: Absolute rates for polyphenol quinone capping of cysteine in high-moisture matrices.",
+      "decision_impact": "high",
+      "cheap_first_method": "Literature transfer from simple analogue plus xTB triage",
+      "upgrade_method": "DFT refinement of the Michael addition TS in aqueous microclusters",
+      "acceptance_signal": "Cys depletion rate correlates with quinone load in simulated pea juice",
+      "method": "GFN2-xTB NEB path search",
+      "source_quality": "xtb_derived_gfn2",
+      "current_barrier_kcal_mol": 17.84,
+      "current_barrier_kj_mol": 74.65,
+      "uncertainty_kj": 42.0,
+      "promotion_ceiling": "bounded_calibration",
+      "maximum_claim_level": "bounded_calibration",
+      "active_arrhenius_key": "quinone_cys_michael_xtb_derived",
+      "forming_bond": {
+        "available": true,
+        "method": "geometry_topology_diff",
+        "selection_rule": "interfragment_heavy_bond",
+        "family_recipe_source": null,
+        "family_recipe_form_bonds": [],
+        "all_new_bonds": [
+          {
+            "atom_indices_zero_based": [
+              2,
+              9
+            ],
+            "atom_indices_one_based": [
+              3,
+              10
+            ],
+            "atom_symbols": [
+              "C",
+              "S"
+            ],
+            "product_distance_angstrom": 1.8332,
+            "reactant_distance_angstrom": 8.2824,
+            "distance_drop_angstrom": 6.4492,
+            "interfragment_in_reactant": true,
+            "heavy_atom_bond": true
+          },
+          {
+            "atom_indices_zero_based": [
+              3,
+              17
+            ],
+            "atom_indices_one_based": [
+              4,
+              18
+            ],
+            "atom_symbols": [
+              "C",
+              "H"
+            ],
+            "product_distance_angstrom": 1.0968,
+            "reactant_distance_angstrom": 8.827,
+            "distance_drop_angstrom": 7.7302,
+            "interfragment_in_reactant": true,
+            "heavy_atom_bond": false
+          }
+        ],
+        "atom_indices_zero_based": [
+          2,
+          9
+        ],
+        "atom_indices_one_based": [
+          3,
+          10
+        ],
+        "atom_symbols": [
+          "C",
+          "S"
+        ],
+        "product_distance_angstrom": 1.8332,
+        "reactant_distance_angstrom": 8.2824,
+        "distance_drop_angstrom": 6.4492,
+        "interfragment_in_reactant": true
+      },
+      "surrogate": {
+        "available": false,
+        "kind": "",
+        "short_label": "",
+        "reaction": "",
+        "assumption": "",
+        "note": "",
+        "basis": [],
+        "barrier_kcal_mol": null,
+        "barrier_kj_mol": null
+      },
+      "governance_status": "hold_observable_first",
+      "governance_note": "Computational-gap refinement jobs can narrow priors and uncertainty only; they do not promote benchmark closure while observable-first governance remains active.",
+      "write_back_artifacts": [
+        "data/lit/computational_priors.json",
+        "results/validation/computational_gap_dft_ingestion_report.md",
+        "results/validation/computational_gap_dft_ingestion_report.json",
+        "results/validation/computational_gap_closure_scorecard.md",
+        "results/validation/computational_gap_closure_scorecard.json",
+        "results/validation/refinement_governance.md",
+        "results/validation/refinement_governance.json"
+      ],
+      "xtb": {
+        "required": true,
+        "status": "ready",
+        "blocker_note": null,
+        "surrogate_available": false,
+        "geometry_dir": "data/geometries/xtb_inputs/quinone_cys_michael",
+        "runner_script": "data/geometries/xtb_inputs/quinone_cys_michael/run_xtb.sh",
+        "required_inputs": [
+          "data/geometries/xtb_inputs/quinone_cys_michael/reactant.xyz",
+          "data/geometries/xtb_inputs/quinone_cys_michael/product.xyz"
+        ],
+        "reactant_atom_count": 18,
+        "product_atom_count": 18,
+        "atom_count_match": true,
+        "expected_outputs": [
+          "data/geometries/xtb_inputs/quinone_cys_michael/xtbpath.xyz",
+          "data/geometries/xtb_inputs/quinone_cys_michael/xtbpath_ts.xyz"
+        ],
+        "execute_with": "python scripts/run_computational_gap_xtb.py --target quinone_cys_michael --execute"
+      },
+      "mlp": {
+        "allowed_candidate_id": "mace_mp_small",
+        "allowed_role": "geom_preopt",
+        "authority_allowed": false,
+        "blocked_candidates": [
+          "mace_off_medium",
+          "aimnet2_shortlist",
+          "orbmol_shortlist"
+        ],
+        "note": "MLP barrier authority remains blocked; only geometry preoptimization is allowed where benchmarked."
+      },
+      "dft": {
+        "required": true,
+        "status": "ready_for_dft",
+        "surrogate_available": false,
+        "runner_script": "scripts/run_computational_gap_dft.py",
+        "reactant_path": "data/geometries/xtb_inputs/quinone_cys_michael/reactant.xyz",
+        "product_path": "data/geometries/xtb_inputs/quinone_cys_michael/product.xyz",
+        "ts_guess_path": "data/geometries/xtb_inputs/quinone_cys_michael/xtbpath_ts.xyz",
+        "forming_bond": {
+          "available": true,
+          "method": "geometry_topology_diff",
+          "selection_rule": "interfragment_heavy_bond",
+          "family_recipe_source": null,
+          "family_recipe_form_bonds": [],
+          "all_new_bonds": [
+            {
+              "atom_indices_zero_based": [
+                2,
+                9
+              ],
+              "atom_indices_one_based": [
+                3,
+                10
+              ],
+              "atom_symbols": [
+                "C",
+                "S"
+              ],
+              "product_distance_angstrom": 1.8332,
+              "reactant_distance_angstrom": 8.2824,
+              "distance_drop_angstrom": 6.4492,
+              "interfragment_in_reactant": true,
+              "heavy_atom_bond": true
+            },
+            {
+              "atom_indices_zero_based": [
+                3,
+                17
+              ],
+              "atom_indices_one_based": [
+                4,
+                18
+              ],
+              "atom_symbols": [
+                "C",
+                "H"
+              ],
+              "product_distance_angstrom": 1.0968,
+              "reactant_distance_angstrom": 8.827,
+              "distance_drop_angstrom": 7.7302,
+              "interfragment_in_reactant": true,
+              "heavy_atom_bond": false
+            }
+          ],
+          "atom_indices_zero_based": [
+            2,
+            9
+          ],
+          "atom_indices_one_based": [
+            3,
+            10
+          ],
+          "atom_symbols": [
+            "C",
+            "S"
+          ],
+          "product_distance_angstrom": 1.8332,
+          "reactant_distance_angstrom": 8.2824,
+          "distance_drop_angstrom": 6.4492,
+          "interfragment_in_reactant": true
+        },
+        "solvent_name": "water",
+        "temperature_k": 423.15,
+        "charge": 0,
+        "spin": 0,
+        "use_explicit_solvent": false,
+        "n_water": 0,
+        "expected_outputs": [
+          "optimized_reactant.xyz",
+          "optimized_ts.xyz",
+          "barrier_summary.json",
+          "quasi_harmonic_thermo.json",
+          "surrogate_patch.json"
+        ],
+        "execute_with": "python scripts/run_computational_gap_dft.py --target quinone_cys_michael --execute"
+      }
+    },
+    {
+      "id": "pe_schiff_base",
+      "priority_rank": 5,
+      "reaction_key": "pe_schiff_base",
+      "slr_family": "15",
+      "gap": "Family 15: Phospholipid-amine interfacial PE Schiff base \u2014 Ea=92.9 kJ/mol from SLR 15.",
+      "decision_impact": "high",
+      "cheap_first_method": "SLR 15 literature Ea=92.9 kJ/mol as literature_derived_transfer prior",
+      "upgrade_method": "wB97M-V//r2SCAN-3c DFT validation of the PE-glucose condensation TS",
+      "acceptance_signal": "Model explains sugar disappearance in lecithin-heavy extrudates; DFT validates literature Ea",
+      "method": "SLR 15 literature transfer (Ea=92.9 kJ/mol)",
+      "source_quality": "literature_derived_transfer",
+      "current_barrier_kcal_mol": 22.21,
+      "current_barrier_kj_mol": 92.9,
+      "uncertainty_kj": 20.9,
+      "promotion_ceiling": "bounded_calibration",
+      "maximum_claim_level": "bounded_calibration",
+      "active_arrhenius_key": "pe_schiff_base_lit_derived",
+      "forming_bond": {
+        "available": true,
+        "method": "geometry_topology_diff",
+        "selection_rule": "largest_distance_drop",
+        "family_recipe_source": null,
+        "family_recipe_form_bonds": [],
+        "all_new_bonds": [
+          {
+            "atom_indices_zero_based": [
+              1,
+              14
+            ],
+            "atom_indices_one_based": [
+              2,
+              15
+            ],
+            "atom_symbols": [
+              "C",
+              "H"
+            ],
+            "product_distance_angstrom": 1.0971,
+            "reactant_distance_angstrom": 2.0414,
+            "distance_drop_angstrom": 0.9443,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              1,
+              15
+            ],
+            "atom_indices_one_based": [
+              2,
+              16
+            ],
+            "atom_symbols": [
+              "C",
+              "H"
+            ],
+            "product_distance_angstrom": 1.0977,
+            "reactant_distance_angstrom": 2.0468,
+            "distance_drop_angstrom": 0.9492,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              2,
+              16
+            ],
+            "atom_indices_one_based": [
+              3,
+              17
+            ],
+            "atom_symbols": [
+              "C",
+              "H"
+            ],
+            "product_distance_angstrom": 1.0953,
+            "reactant_distance_angstrom": 2.1611,
+            "distance_drop_angstrom": 1.0658,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              2,
+              17
+            ],
+            "atom_indices_one_based": [
+              3,
+              18
+            ],
+            "atom_symbols": [
+              "C",
+              "H"
+            ],
+            "product_distance_angstrom": 1.0948,
+            "reactant_distance_angstrom": 2.1623,
+            "distance_drop_angstrom": 1.0674,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              3,
+              18
+            ],
+            "atom_indices_one_based": [
+              4,
+              19
+            ],
+            "atom_symbols": [
+              "O",
+              "H"
+            ],
+            "product_distance_angstrom": 0.9725,
+            "reactant_distance_angstrom": 2.0437,
+            "distance_drop_angstrom": 1.0711,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              4,
+              19
+            ],
+            "atom_indices_one_based": [
+              5,
+              20
+            ],
+            "atom_symbols": [
+              "C",
+              "H"
+            ],
+            "product_distance_angstrom": 1.1064,
+            "reactant_distance_angstrom": 2.9272,
+            "distance_drop_angstrom": 1.8208,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              5,
+              29
+            ],
+            "atom_indices_one_based": [
+              6,
+              30
+            ],
+            "atom_symbols": [
+              "O",
+              "H"
+            ],
+            "product_distance_angstrom": 0.969,
+            "reactant_distance_angstrom": 5.9694,
+            "distance_drop_angstrom": 5.0004,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              5,
+              30
+            ],
+            "atom_indices_one_based": [
+              6,
+              31
+            ],
+            "atom_symbols": [
+              "O",
+              "H"
+            ],
+            "product_distance_angstrom": 0.969,
+            "reactant_distance_angstrom": 7.2238,
+            "distance_drop_angstrom": 6.2548,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              6,
+              20
+            ],
+            "atom_indices_one_based": [
+              7,
+              21
+            ],
+            "atom_symbols": [
+              "C",
+              "H"
+            ],
+            "product_distance_angstrom": 1.0958,
+            "reactant_distance_angstrom": 5.46,
+            "distance_drop_angstrom": 4.3643,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              7,
+              21
+            ],
+            "atom_indices_one_based": [
+              8,
+              22
+            ],
+            "atom_symbols": [
+              "O",
+              "H"
+            ],
+            "product_distance_angstrom": 0.984,
+            "reactant_distance_angstrom": 3.4077,
+            "distance_drop_angstrom": 2.4237,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              8,
+              22
+            ],
+            "atom_indices_one_based": [
+              9,
+              23
+            ],
+            "atom_symbols": [
+              "C",
+              "H"
+            ],
+            "product_distance_angstrom": 1.0971,
+            "reactant_distance_angstrom": 2.1867,
+            "distance_drop_angstrom": 1.0896,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              9,
+              23
+            ],
+            "atom_indices_one_based": [
+              10,
+              24
+            ],
+            "atom_symbols": [
+              "O",
+              "H"
+            ],
+            "product_distance_angstrom": 0.9849,
+            "reactant_distance_angstrom": 4.3241,
+            "distance_drop_angstrom": 3.3392,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              10,
+              24
+            ],
+            "atom_indices_one_based": [
+              11,
+              25
+            ],
+            "atom_symbols": [
+              "C",
+              "H"
+            ],
+            "product_distance_angstrom": 1.097,
+            "reactant_distance_angstrom": 2.1684,
+            "distance_drop_angstrom": 1.0714,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              11,
+              25
+            ],
+            "atom_indices_one_based": [
+              12,
+              26
+            ],
+            "atom_symbols": [
+              "O",
+              "H"
+            ],
+            "product_distance_angstrom": 0.9814,
+            "reactant_distance_angstrom": 2.0755,
+            "distance_drop_angstrom": 1.0941,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              12,
+              26
+            ],
+            "atom_indices_one_based": [
+              13,
+              27
+            ],
+            "atom_symbols": [
+              "C",
+              "H"
+            ],
+            "product_distance_angstrom": 1.0938,
+            "reactant_distance_angstrom": 2.1571,
+            "distance_drop_angstrom": 1.0633,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              12,
+              27
+            ],
+            "atom_indices_one_based": [
+              13,
+              28
+            ],
+            "atom_symbols": [
+              "C",
+              "H"
+            ],
+            "product_distance_angstrom": 1.095,
+            "reactant_distance_angstrom": 2.3874,
+            "distance_drop_angstrom": 1.2923,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              13,
+              28
+            ],
+            "atom_indices_one_based": [
+              14,
+              29
+            ],
+            "atom_symbols": [
+              "O",
+              "H"
+            ],
+            "product_distance_angstrom": 0.9823,
+            "reactant_distance_angstrom": 2.0373,
+            "distance_drop_angstrom": 1.055,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          }
+        ],
+        "atom_indices_zero_based": [
+          5,
+          30
+        ],
+        "atom_indices_one_based": [
+          6,
+          31
+        ],
+        "atom_symbols": [
+          "O",
+          "H"
+        ],
+        "product_distance_angstrom": 0.969,
+        "reactant_distance_angstrom": 7.2238,
+        "distance_drop_angstrom": 6.2548,
+        "interfragment_in_reactant": false
+      },
+      "surrogate": {
+        "available": false,
+        "kind": "",
+        "short_label": "",
+        "reaction": "",
+        "assumption": "",
+        "note": "",
+        "basis": [],
+        "barrier_kcal_mol": null,
+        "barrier_kj_mol": null
+      },
+      "governance_status": "hold_observable_first",
+      "governance_note": "Computational-gap refinement jobs can narrow priors and uncertainty only; they do not promote benchmark closure while observable-first governance remains active.",
+      "write_back_artifacts": [
+        "data/lit/computational_priors.json",
+        "results/validation/computational_gap_dft_ingestion_report.md",
+        "results/validation/computational_gap_dft_ingestion_report.json",
+        "results/validation/computational_gap_closure_scorecard.md",
+        "results/validation/computational_gap_closure_scorecard.json",
+        "results/validation/refinement_governance.md",
+        "results/validation/refinement_governance.json"
+      ],
+      "xtb": {
+        "required": true,
+        "status": "ready",
+        "blocker_note": null,
+        "surrogate_available": false,
+        "geometry_dir": "data/geometries/xtb_inputs/pe_schiff_base",
+        "runner_script": "data/geometries/xtb_inputs/pe_schiff_base/run_xtb.sh",
+        "required_inputs": [
+          "data/geometries/xtb_inputs/pe_schiff_base/reactant.xyz",
+          "data/geometries/xtb_inputs/pe_schiff_base/product.xyz"
+        ],
+        "reactant_atom_count": 31,
+        "product_atom_count": 31,
+        "atom_count_match": true,
+        "expected_outputs": [
+          "data/geometries/xtb_inputs/pe_schiff_base/xtbpath.xyz",
+          "data/geometries/xtb_inputs/pe_schiff_base/xtbpath_ts.xyz"
+        ],
+        "execute_with": "python scripts/run_computational_gap_xtb.py --target pe_schiff_base --execute"
+      },
+      "mlp": {
+        "allowed_candidate_id": "mace_mp_small",
+        "allowed_role": "geom_preopt",
+        "authority_allowed": false,
+        "blocked_candidates": [
+          "mace_off_medium",
+          "aimnet2_shortlist",
+          "orbmol_shortlist"
+        ],
+        "note": "MLP barrier authority remains blocked; only geometry preoptimization is allowed where benchmarked."
+      },
+      "dft": {
+        "required": true,
+        "status": "ready_for_dft",
+        "surrogate_available": false,
+        "runner_script": "scripts/run_computational_gap_dft.py",
+        "reactant_path": "data/geometries/xtb_inputs/pe_schiff_base/reactant.xyz",
+        "product_path": "data/geometries/xtb_inputs/pe_schiff_base/product.xyz",
+        "ts_guess_path": "data/geometries/xtb_inputs/pe_schiff_base/xtbpath_ts.xyz",
+        "forming_bond": {
+          "available": true,
+          "method": "geometry_topology_diff",
+          "selection_rule": "largest_distance_drop",
+          "family_recipe_source": null,
+          "family_recipe_form_bonds": [],
+          "all_new_bonds": [
+            {
+              "atom_indices_zero_based": [
+                1,
+                14
+              ],
+              "atom_indices_one_based": [
+                2,
+                15
+              ],
+              "atom_symbols": [
+                "C",
+                "H"
+              ],
+              "product_distance_angstrom": 1.0971,
+              "reactant_distance_angstrom": 2.0414,
+              "distance_drop_angstrom": 0.9443,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                1,
+                15
+              ],
+              "atom_indices_one_based": [
+                2,
+                16
+              ],
+              "atom_symbols": [
+                "C",
+                "H"
+              ],
+              "product_distance_angstrom": 1.0977,
+              "reactant_distance_angstrom": 2.0468,
+              "distance_drop_angstrom": 0.9492,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                2,
+                16
+              ],
+              "atom_indices_one_based": [
+                3,
+                17
+              ],
+              "atom_symbols": [
+                "C",
+                "H"
+              ],
+              "product_distance_angstrom": 1.0953,
+              "reactant_distance_angstrom": 2.1611,
+              "distance_drop_angstrom": 1.0658,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                2,
+                17
+              ],
+              "atom_indices_one_based": [
+                3,
+                18
+              ],
+              "atom_symbols": [
+                "C",
+                "H"
+              ],
+              "product_distance_angstrom": 1.0948,
+              "reactant_distance_angstrom": 2.1623,
+              "distance_drop_angstrom": 1.0674,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                3,
+                18
+              ],
+              "atom_indices_one_based": [
+                4,
+                19
+              ],
+              "atom_symbols": [
+                "O",
+                "H"
+              ],
+              "product_distance_angstrom": 0.9725,
+              "reactant_distance_angstrom": 2.0437,
+              "distance_drop_angstrom": 1.0711,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                4,
+                19
+              ],
+              "atom_indices_one_based": [
+                5,
+                20
+              ],
+              "atom_symbols": [
+                "C",
+                "H"
+              ],
+              "product_distance_angstrom": 1.1064,
+              "reactant_distance_angstrom": 2.9272,
+              "distance_drop_angstrom": 1.8208,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                5,
+                29
+              ],
+              "atom_indices_one_based": [
+                6,
+                30
+              ],
+              "atom_symbols": [
+                "O",
+                "H"
+              ],
+              "product_distance_angstrom": 0.969,
+              "reactant_distance_angstrom": 5.9694,
+              "distance_drop_angstrom": 5.0004,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                5,
+                30
+              ],
+              "atom_indices_one_based": [
+                6,
+                31
+              ],
+              "atom_symbols": [
+                "O",
+                "H"
+              ],
+              "product_distance_angstrom": 0.969,
+              "reactant_distance_angstrom": 7.2238,
+              "distance_drop_angstrom": 6.2548,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                6,
+                20
+              ],
+              "atom_indices_one_based": [
+                7,
+                21
+              ],
+              "atom_symbols": [
+                "C",
+                "H"
+              ],
+              "product_distance_angstrom": 1.0958,
+              "reactant_distance_angstrom": 5.46,
+              "distance_drop_angstrom": 4.3643,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                7,
+                21
+              ],
+              "atom_indices_one_based": [
+                8,
+                22
+              ],
+              "atom_symbols": [
+                "O",
+                "H"
+              ],
+              "product_distance_angstrom": 0.984,
+              "reactant_distance_angstrom": 3.4077,
+              "distance_drop_angstrom": 2.4237,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                8,
+                22
+              ],
+              "atom_indices_one_based": [
+                9,
+                23
+              ],
+              "atom_symbols": [
+                "C",
+                "H"
+              ],
+              "product_distance_angstrom": 1.0971,
+              "reactant_distance_angstrom": 2.1867,
+              "distance_drop_angstrom": 1.0896,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                9,
+                23
+              ],
+              "atom_indices_one_based": [
+                10,
+                24
+              ],
+              "atom_symbols": [
+                "O",
+                "H"
+              ],
+              "product_distance_angstrom": 0.9849,
+              "reactant_distance_angstrom": 4.3241,
+              "distance_drop_angstrom": 3.3392,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                10,
+                24
+              ],
+              "atom_indices_one_based": [
+                11,
+                25
+              ],
+              "atom_symbols": [
+                "C",
+                "H"
+              ],
+              "product_distance_angstrom": 1.097,
+              "reactant_distance_angstrom": 2.1684,
+              "distance_drop_angstrom": 1.0714,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                11,
+                25
+              ],
+              "atom_indices_one_based": [
+                12,
+                26
+              ],
+              "atom_symbols": [
+                "O",
+                "H"
+              ],
+              "product_distance_angstrom": 0.9814,
+              "reactant_distance_angstrom": 2.0755,
+              "distance_drop_angstrom": 1.0941,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                12,
+                26
+              ],
+              "atom_indices_one_based": [
+                13,
+                27
+              ],
+              "atom_symbols": [
+                "C",
+                "H"
+              ],
+              "product_distance_angstrom": 1.0938,
+              "reactant_distance_angstrom": 2.1571,
+              "distance_drop_angstrom": 1.0633,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                12,
+                27
+              ],
+              "atom_indices_one_based": [
+                13,
+                28
+              ],
+              "atom_symbols": [
+                "C",
+                "H"
+              ],
+              "product_distance_angstrom": 1.095,
+              "reactant_distance_angstrom": 2.3874,
+              "distance_drop_angstrom": 1.2923,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                13,
+                28
+              ],
+              "atom_indices_one_based": [
+                14,
+                29
+              ],
+              "atom_symbols": [
+                "O",
+                "H"
+              ],
+              "product_distance_angstrom": 0.9823,
+              "reactant_distance_angstrom": 2.0373,
+              "distance_drop_angstrom": 1.055,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            }
+          ],
+          "atom_indices_zero_based": [
+            5,
+            30
+          ],
+          "atom_indices_one_based": [
+            6,
+            31
+          ],
+          "atom_symbols": [
+            "O",
+            "H"
+          ],
+          "product_distance_angstrom": 0.969,
+          "reactant_distance_angstrom": 7.2238,
+          "distance_drop_angstrom": 6.2548,
+          "interfragment_in_reactant": false
+        },
+        "solvent_name": "water",
+        "temperature_k": 423.15,
+        "charge": 0,
+        "spin": 0,
+        "use_explicit_solvent": false,
+        "n_water": 0,
+        "expected_outputs": [
+          "optimized_reactant.xyz",
+          "optimized_ts.xyz",
+          "barrier_summary.json",
+          "quasi_harmonic_thermo.json",
+          "surrogate_patch.json"
+        ],
+        "execute_with": "python scripts/run_computational_gap_dft.py --target pe_schiff_base --execute"
+      }
+    },
+    {
+      "id": "pe_amadori",
+      "priority_rank": 6,
+      "reaction_key": "pe_amadori",
+      "slr_family": "15",
+      "gap": "Family 15: PE Amadori rearrangement \u2014 Ea=82.9 kJ/mol from SLR 15.",
+      "decision_impact": "high",
+      "cheap_first_method": "SLR 15 literature Ea=82.9 kJ/mol as literature_derived_transfer prior",
+      "upgrade_method": "wB97M-V//r2SCAN-3c DFT validation of the PE-Amadori 1,2-proton shift",
+      "acceptance_signal": "PE-Amadori yield is consistent with sugar depletion experiments in model PE-sugar systems",
+      "method": "SLR 15 literature transfer (Ea=82.9 kJ/mol)",
+      "source_quality": "literature_derived_transfer",
+      "current_barrier_kcal_mol": 19.81,
+      "current_barrier_kj_mol": 82.9,
+      "uncertainty_kj": 20.9,
+      "promotion_ceiling": "bounded_calibration",
+      "maximum_claim_level": "bounded_calibration",
+      "active_arrhenius_key": "pe_amadori_lit_derived",
+      "forming_bond": {
+        "available": true,
+        "method": "geometry_topology_diff",
+        "selection_rule": "largest_distance_drop",
+        "family_recipe_source": null,
+        "family_recipe_form_bonds": [],
+        "all_new_bonds": [
+          {
+            "atom_indices_zero_based": [
+              2,
+              17
+            ],
+            "atom_indices_one_based": [
+              3,
+              18
+            ],
+            "atom_symbols": [
+              "C",
+              "H"
+            ],
+            "product_distance_angstrom": 1.0941,
+            "reactant_distance_angstrom": 2.4746,
+            "distance_drop_angstrom": 1.3806,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              3,
+              18
+            ],
+            "atom_indices_one_based": [
+              4,
+              19
+            ],
+            "atom_symbols": [
+              "N",
+              "H"
+            ],
+            "product_distance_angstrom": 1.0321,
+            "reactant_distance_angstrom": 2.7257,
+            "distance_drop_angstrom": 1.6936,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          }
+        ],
+        "atom_indices_zero_based": [
+          3,
+          18
+        ],
+        "atom_indices_one_based": [
+          4,
+          19
+        ],
+        "atom_symbols": [
+          "N",
+          "H"
+        ],
+        "product_distance_angstrom": 1.0321,
+        "reactant_distance_angstrom": 2.7257,
+        "distance_drop_angstrom": 1.6936,
+        "interfragment_in_reactant": false
+      },
+      "surrogate": {
+        "available": false,
+        "kind": "",
+        "short_label": "",
+        "reaction": "",
+        "assumption": "",
+        "note": "",
+        "basis": [],
+        "barrier_kcal_mol": null,
+        "barrier_kj_mol": null
+      },
+      "governance_status": "hold_observable_first",
+      "governance_note": "Computational-gap refinement jobs can narrow priors and uncertainty only; they do not promote benchmark closure while observable-first governance remains active.",
+      "write_back_artifacts": [
+        "data/lit/computational_priors.json",
+        "results/validation/computational_gap_dft_ingestion_report.md",
+        "results/validation/computational_gap_dft_ingestion_report.json",
+        "results/validation/computational_gap_closure_scorecard.md",
+        "results/validation/computational_gap_closure_scorecard.json",
+        "results/validation/refinement_governance.md",
+        "results/validation/refinement_governance.json"
+      ],
+      "xtb": {
+        "required": true,
+        "status": "ready",
+        "blocker_note": null,
+        "surrogate_available": false,
+        "geometry_dir": "data/geometries/xtb_inputs/pe_amadori",
+        "runner_script": "data/geometries/xtb_inputs/pe_amadori/run_xtb.sh",
+        "required_inputs": [
+          "data/geometries/xtb_inputs/pe_amadori/reactant.xyz",
+          "data/geometries/xtb_inputs/pe_amadori/product.xyz"
+        ],
+        "reactant_atom_count": 33,
+        "product_atom_count": 33,
+        "atom_count_match": true,
+        "expected_outputs": [
+          "data/geometries/xtb_inputs/pe_amadori/xtbpath.xyz",
+          "data/geometries/xtb_inputs/pe_amadori/xtbpath_ts.xyz"
+        ],
+        "execute_with": "python scripts/run_computational_gap_xtb.py --target pe_amadori --execute"
+      },
+      "mlp": {
+        "allowed_candidate_id": "mace_mp_small",
+        "allowed_role": "geom_preopt",
+        "authority_allowed": false,
+        "blocked_candidates": [
+          "mace_off_medium",
+          "aimnet2_shortlist",
+          "orbmol_shortlist"
+        ],
+        "note": "MLP barrier authority remains blocked; only geometry preoptimization is allowed where benchmarked."
+      },
+      "dft": {
+        "required": true,
+        "status": "ready_for_dft",
+        "surrogate_available": false,
+        "runner_script": "scripts/run_computational_gap_dft.py",
+        "reactant_path": "data/geometries/xtb_inputs/pe_amadori/reactant.xyz",
+        "product_path": "data/geometries/xtb_inputs/pe_amadori/product.xyz",
+        "ts_guess_path": "data/geometries/xtb_inputs/pe_amadori/xtbpath_ts.xyz",
+        "forming_bond": {
+          "available": true,
+          "method": "geometry_topology_diff",
+          "selection_rule": "largest_distance_drop",
+          "family_recipe_source": null,
+          "family_recipe_form_bonds": [],
+          "all_new_bonds": [
+            {
+              "atom_indices_zero_based": [
+                2,
+                17
+              ],
+              "atom_indices_one_based": [
+                3,
+                18
+              ],
+              "atom_symbols": [
+                "C",
+                "H"
+              ],
+              "product_distance_angstrom": 1.0941,
+              "reactant_distance_angstrom": 2.4746,
+              "distance_drop_angstrom": 1.3806,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                3,
+                18
+              ],
+              "atom_indices_one_based": [
+                4,
+                19
+              ],
+              "atom_symbols": [
+                "N",
+                "H"
+              ],
+              "product_distance_angstrom": 1.0321,
+              "reactant_distance_angstrom": 2.7257,
+              "distance_drop_angstrom": 1.6936,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            }
+          ],
+          "atom_indices_zero_based": [
+            3,
+            18
+          ],
+          "atom_indices_one_based": [
+            4,
+            19
+          ],
+          "atom_symbols": [
+            "N",
+            "H"
+          ],
+          "product_distance_angstrom": 1.0321,
+          "reactant_distance_angstrom": 2.7257,
+          "distance_drop_angstrom": 1.6936,
+          "interfragment_in_reactant": false
+        },
+        "solvent_name": "water",
+        "temperature_k": 423.15,
+        "charge": 0,
+        "spin": 0,
+        "use_explicit_solvent": false,
+        "n_water": 0,
+        "expected_outputs": [
+          "optimized_reactant.xyz",
+          "optimized_ts.xyz",
+          "barrier_summary.json",
+          "quasi_harmonic_thermo.json",
+          "surrogate_patch.json"
+        ],
+        "execute_with": "python scripts/run_computational_gap_dft.py --target pe_amadori --execute"
+      }
+    },
+    {
+      "id": "pe_amadori_water",
+      "priority_rank": 7,
+      "reaction_key": "pe_amadori_water",
+      "slr_family": "15",
+      "gap": "Family 15: PE Amadori rearrangement with 2 explicit waters as proton shuttle (Grotthuss relay) \u2014 addresses dry-mechanism barrier overestimation.",
+      "decision_impact": "high",
+      "cheap_first_method": "DE-GSM with explicit-water seed geometries",
+      "upgrade_method": "wB97M-V//r2SCAN-3c DFT robust_sp on water-shuttled TS",
+      "acceptance_signal": "Barrier within ~10 kcal/mol of literature 19.81 kcal/mol; clean 5-membered TS",
+      "method": "explicit-water cluster + DE-GSM + DFT robust_sp",
+      "source_quality": "literature_derived_transfer",
+      "current_barrier_kcal_mol": 19.81,
+      "current_barrier_kj_mol": 82.9,
+      "uncertainty_kj": 20.9,
+      "promotion_ceiling": "bounded_calibration",
+      "maximum_claim_level": "bounded_calibration",
+      "active_arrhenius_key": "pe_amadori_lit_derived",
+      "forming_bond": {
+        "available": true,
+        "method": "geometry_topology_diff",
+        "selection_rule": "largest_distance_drop",
+        "family_recipe_source": null,
+        "family_recipe_form_bonds": [],
+        "all_new_bonds": [
+          {
+            "atom_indices_zero_based": [
+              2,
+              17
+            ],
+            "atom_indices_one_based": [
+              3,
+              18
+            ],
+            "atom_symbols": [
+              "C",
+              "H"
+            ],
+            "product_distance_angstrom": 1.0941,
+            "reactant_distance_angstrom": 2.3536,
+            "distance_drop_angstrom": 1.2595,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              3,
+              18
+            ],
+            "atom_indices_one_based": [
+              4,
+              19
+            ],
+            "atom_symbols": [
+              "N",
+              "H"
+            ],
+            "product_distance_angstrom": 1.0321,
+            "reactant_distance_angstrom": 2.7173,
+            "distance_drop_angstrom": 1.6852,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              4,
+              37
+            ],
+            "atom_indices_one_based": [
+              5,
+              38
+            ],
+            "atom_symbols": [
+              "C",
+              "H"
+            ],
+            "product_distance_angstrom": 1.1057,
+            "reactant_distance_angstrom": 1.8981,
+            "distance_drop_angstrom": 0.7924,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          }
+        ],
+        "atom_indices_zero_based": [
+          3,
+          18
+        ],
+        "atom_indices_one_based": [
+          4,
+          19
+        ],
+        "atom_symbols": [
+          "N",
+          "H"
+        ],
+        "product_distance_angstrom": 1.0321,
+        "reactant_distance_angstrom": 2.7173,
+        "distance_drop_angstrom": 1.6852,
+        "interfragment_in_reactant": false
+      },
+      "surrogate": {
+        "available": false,
+        "kind": "",
+        "short_label": "",
+        "reaction": "",
+        "assumption": "",
+        "note": "",
+        "basis": [],
+        "barrier_kcal_mol": null,
+        "barrier_kj_mol": null
+      },
+      "governance_status": "hold_observable_first",
+      "governance_note": "Computational-gap refinement jobs can narrow priors and uncertainty only; they do not promote benchmark closure while observable-first governance remains active.",
+      "write_back_artifacts": [
+        "data/lit/computational_priors.json",
+        "results/validation/computational_gap_dft_ingestion_report.md",
+        "results/validation/computational_gap_dft_ingestion_report.json",
+        "results/validation/computational_gap_closure_scorecard.md",
+        "results/validation/computational_gap_closure_scorecard.json",
+        "results/validation/refinement_governance.md",
+        "results/validation/refinement_governance.json"
+      ],
+      "xtb": {
+        "required": true,
+        "status": "ready",
+        "blocker_note": null,
+        "surrogate_available": false,
+        "geometry_dir": "data/geometries/xtb_inputs/pe_amadori_water",
+        "runner_script": "data/geometries/xtb_inputs/pe_amadori_water/run_xtb.sh",
+        "required_inputs": [
+          "data/geometries/xtb_inputs/pe_amadori_water/reactant.xyz",
+          "data/geometries/xtb_inputs/pe_amadori_water/product.xyz"
+        ],
+        "reactant_atom_count": 39,
+        "product_atom_count": 39,
+        "atom_count_match": true,
+        "expected_outputs": [
+          "data/geometries/xtb_inputs/pe_amadori_water/xtbpath.xyz",
+          "data/geometries/xtb_inputs/pe_amadori_water/xtbpath_ts.xyz"
+        ],
+        "execute_with": "python scripts/run_computational_gap_xtb.py --target pe_amadori_water --execute"
+      },
+      "mlp": {
+        "allowed_candidate_id": "mace_mp_small",
+        "allowed_role": "geom_preopt",
+        "authority_allowed": false,
+        "blocked_candidates": [
+          "mace_off_medium",
+          "aimnet2_shortlist",
+          "orbmol_shortlist"
+        ],
+        "note": "MLP barrier authority remains blocked; only geometry preoptimization is allowed where benchmarked."
+      },
+      "dft": {
+        "required": true,
+        "status": "blocked_missing_xtb_ts",
+        "surrogate_available": false,
+        "runner_script": "scripts/run_computational_gap_dft.py",
+        "reactant_path": "data/geometries/xtb_inputs/pe_amadori_water/reactant.xyz",
+        "product_path": "data/geometries/xtb_inputs/pe_amadori_water/product.xyz",
+        "ts_guess_path": "data/geometries/xtb_inputs/pe_amadori_water/xtbpath_ts.xyz",
+        "forming_bond": {
+          "available": true,
+          "method": "geometry_topology_diff",
+          "selection_rule": "largest_distance_drop",
+          "family_recipe_source": null,
+          "family_recipe_form_bonds": [],
+          "all_new_bonds": [
+            {
+              "atom_indices_zero_based": [
+                2,
+                17
+              ],
+              "atom_indices_one_based": [
+                3,
+                18
+              ],
+              "atom_symbols": [
+                "C",
+                "H"
+              ],
+              "product_distance_angstrom": 1.0941,
+              "reactant_distance_angstrom": 2.3536,
+              "distance_drop_angstrom": 1.2595,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                3,
+                18
+              ],
+              "atom_indices_one_based": [
+                4,
+                19
+              ],
+              "atom_symbols": [
+                "N",
+                "H"
+              ],
+              "product_distance_angstrom": 1.0321,
+              "reactant_distance_angstrom": 2.7173,
+              "distance_drop_angstrom": 1.6852,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                4,
+                37
+              ],
+              "atom_indices_one_based": [
+                5,
+                38
+              ],
+              "atom_symbols": [
+                "C",
+                "H"
+              ],
+              "product_distance_angstrom": 1.1057,
+              "reactant_distance_angstrom": 1.8981,
+              "distance_drop_angstrom": 0.7924,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            }
+          ],
+          "atom_indices_zero_based": [
+            3,
+            18
+          ],
+          "atom_indices_one_based": [
+            4,
+            19
+          ],
+          "atom_symbols": [
+            "N",
+            "H"
+          ],
+          "product_distance_angstrom": 1.0321,
+          "reactant_distance_angstrom": 2.7173,
+          "distance_drop_angstrom": 1.6852,
+          "interfragment_in_reactant": false
+        },
+        "solvent_name": "water",
+        "temperature_k": 423.15,
+        "charge": 0,
+        "spin": 0,
+        "use_explicit_solvent": false,
+        "n_water": 0,
+        "expected_outputs": [
+          "optimized_reactant.xyz",
+          "optimized_ts.xyz",
+          "barrier_summary.json",
+          "quasi_harmonic_thermo.json",
+          "surrogate_patch.json"
+        ],
+        "execute_with": "python scripts/run_computational_gap_dft.py --target pe_amadori_water --execute"
+      }
+    },
+    {
+      "id": "asparagine_sugar_explicit_water_cluster",
+      "priority_rank": 8,
+      "reaction_key": "asparagine_sugar_explicit_water_cluster",
+      "slr_family": "13_safety",
+      "gap": "Safety lane: proton-transfer-sensitive asparagine-sugar transition state under wet or HME-like conditions remains too broad with implicit-solvent-only support.",
+      "decision_impact": "high",
+      "cheap_first_method": "seed the cluster in xTB with a minimal explicit-water motif set and preserve the result as uncertainty narrowing only",
+      "upgrade_method": "r2SCAN-3c refinement of a minimal explicit-water cluster before any single-point comparison",
+      "acceptance_signal": "the explicit-water result narrows the moisture-sensitive acrylamide uncertainty band without claiming matrix closure",
+      "method": "explicit-water cluster seed generation pending",
+      "source_quality": "seed_required",
+      "current_barrier_kcal_mol": null,
+      "current_barrier_kj_mol": null,
+      "uncertainty_kj": null,
+      "promotion_ceiling": "uncertainty_narrowing_only",
+      "maximum_claim_level": "uncertainty_narrowing_only",
+      "active_arrhenius_key": "asparagine_sugar_explicit_water_cluster_pending",
+      "forming_bond": {
+        "available": true,
+        "method": "geometry_topology_diff",
+        "selection_rule": "largest_distance_drop",
+        "family_recipe_source": null,
+        "family_recipe_form_bonds": [],
+        "all_new_bonds": [
+          {
+            "atom_indices_zero_based": [
+              0,
+              48
+            ],
+            "atom_indices_one_based": [
+              1,
+              49
+            ],
+            "atom_symbols": [
+              "N",
+              "H"
+            ],
+            "product_distance_angstrom": 1.0114,
+            "reactant_distance_angstrom": 17.2119,
+            "distance_drop_angstrom": 16.2005,
+            "interfragment_in_reactant": true,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              1,
+              49
+            ],
+            "atom_indices_one_based": [
+              2,
+              50
+            ],
+            "atom_symbols": [
+              "C",
+              "H"
+            ],
+            "product_distance_angstrom": 1.078,
+            "reactant_distance_angstrom": 17.8074,
+            "distance_drop_angstrom": 16.7294,
+            "interfragment_in_reactant": true,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              5,
+              28
+            ],
+            "atom_indices_one_based": [
+              6,
+              29
+            ],
+            "atom_symbols": [
+              "N",
+              "H"
+            ],
+            "product_distance_angstrom": 1.0095,
+            "reactant_distance_angstrom": 2.5965,
+            "distance_drop_angstrom": 1.587,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              6,
+              40
+            ],
+            "atom_indices_one_based": [
+              7,
+              41
+            ],
+            "atom_symbols": [
+              "C",
+              "H"
+            ],
+            "product_distance_angstrom": 1.053,
+            "reactant_distance_angstrom": 2.3004,
+            "distance_drop_angstrom": 1.2474,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              8,
+              18
+            ],
+            "atom_indices_one_based": [
+              9,
+              19
+            ],
+            "atom_symbols": [
+              "O",
+              "O"
+            ],
+            "product_distance_angstrom": 1.2446,
+            "reactant_distance_angstrom": 3.0913,
+            "distance_drop_angstrom": 1.8468,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": true
+          },
+          {
+            "atom_indices_zero_based": [
+              9,
+              30
+            ],
+            "atom_indices_one_based": [
+              10,
+              31
+            ],
+            "atom_symbols": [
+              "C",
+              "H"
+            ],
+            "product_distance_angstrom": 1.1021,
+            "reactant_distance_angstrom": 10.4051,
+            "distance_drop_angstrom": 9.303,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              11,
+              31
+            ],
+            "atom_indices_one_based": [
+              12,
+              32
+            ],
+            "atom_symbols": [
+              "C",
+              "H"
+            ],
+            "product_distance_angstrom": 1.0944,
+            "reactant_distance_angstrom": 5.6462,
+            "distance_drop_angstrom": 4.5519,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              12,
+              32
+            ],
+            "atom_indices_one_based": [
+              13,
+              33
+            ],
+            "atom_symbols": [
+              "O",
+              "H"
+            ],
+            "product_distance_angstrom": 0.9739,
+            "reactant_distance_angstrom": 3.3321,
+            "distance_drop_angstrom": 2.3581,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              13,
+              33
+            ],
+            "atom_indices_one_based": [
+              14,
+              34
+            ],
+            "atom_symbols": [
+              "C",
+              "H"
+            ],
+            "product_distance_angstrom": 1.0956,
+            "reactant_distance_angstrom": 2.1978,
+            "distance_drop_angstrom": 1.1022,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              14,
+              34
+            ],
+            "atom_indices_one_based": [
+              15,
+              35
+            ],
+            "atom_symbols": [
+              "O",
+              "H"
+            ],
+            "product_distance_angstrom": 0.9713,
+            "reactant_distance_angstrom": 2.4566,
+            "distance_drop_angstrom": 1.4853,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              15,
+              35
+            ],
+            "atom_indices_one_based": [
+              16,
+              36
+            ],
+            "atom_symbols": [
+              "C",
+              "H"
+            ],
+            "product_distance_angstrom": 1.0959,
+            "reactant_distance_angstrom": 2.1604,
+            "distance_drop_angstrom": 1.0645,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              16,
+              36
+            ],
+            "atom_indices_one_based": [
+              17,
+              37
+            ],
+            "atom_symbols": [
+              "O",
+              "H"
+            ],
+            "product_distance_angstrom": 0.9728,
+            "reactant_distance_angstrom": 2.5948,
+            "distance_drop_angstrom": 1.6221,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              17,
+              18
+            ],
+            "atom_indices_one_based": [
+              18,
+              19
+            ],
+            "atom_symbols": [
+              "C",
+              "O"
+            ],
+            "product_distance_angstrom": 1.4418,
+            "reactant_distance_angstrom": 1.9016,
+            "distance_drop_angstrom": 0.4598,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": true
+          },
+          {
+            "atom_indices_zero_based": [
+              17,
+              37
+            ],
+            "atom_indices_one_based": [
+              18,
+              38
+            ],
+            "atom_symbols": [
+              "C",
+              "H"
+            ],
+            "product_distance_angstrom": 1.0627,
+            "reactant_distance_angstrom": 2.0585,
+            "distance_drop_angstrom": 0.9958,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              18,
+              38
+            ],
+            "atom_indices_one_based": [
+              19,
+              39
+            ],
+            "atom_symbols": [
+              "O",
+              "H"
+            ],
+            "product_distance_angstrom": 0.959,
+            "reactant_distance_angstrom": 1.9106,
+            "distance_drop_angstrom": 0.9516,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              19,
+              39
+            ],
+            "atom_indices_one_based": [
+              20,
+              40
+            ],
+            "atom_symbols": [
+              "C",
+              "H"
+            ],
+            "product_distance_angstrom": 1.073,
+            "reactant_distance_angstrom": 2.2275,
+            "distance_drop_angstrom": 1.1545,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              19,
+              40
+            ],
+            "atom_indices_one_based": [
+              20,
+              41
+            ],
+            "atom_symbols": [
+              "C",
+              "H"
+            ],
+            "product_distance_angstrom": 1.1434,
+            "reactant_distance_angstrom": 2.9625,
+            "distance_drop_angstrom": 1.8191,
+            "interfragment_in_reactant": false,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              20,
+              41
+            ],
+            "atom_indices_one_based": [
+              21,
+              42
+            ],
+            "atom_symbols": [
+              "O",
+              "H"
+            ],
+            "product_distance_angstrom": 0.9775,
+            "reactant_distance_angstrom": 2.9778,
+            "distance_drop_angstrom": 2.0003,
+            "interfragment_in_reactant": true,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              21,
+              42
+            ],
+            "atom_indices_one_based": [
+              22,
+              43
+            ],
+            "atom_symbols": [
+              "O",
+              "H"
+            ],
+            "product_distance_angstrom": 0.965,
+            "reactant_distance_angstrom": 9.1134,
+            "distance_drop_angstrom": 8.1484,
+            "interfragment_in_reactant": true,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              21,
+              43
+            ],
+            "atom_indices_one_based": [
+              22,
+              44
+            ],
+            "atom_symbols": [
+              "O",
+              "H"
+            ],
+            "product_distance_angstrom": 0.9663,
+            "reactant_distance_angstrom": 8.5151,
+            "distance_drop_angstrom": 7.5487,
+            "interfragment_in_reactant": true,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              22,
+              44
+            ],
+            "atom_indices_one_based": [
+              23,
+              45
+            ],
+            "atom_symbols": [
+              "O",
+              "H"
+            ],
+            "product_distance_angstrom": 0.9626,
+            "reactant_distance_angstrom": 3.7127,
+            "distance_drop_angstrom": 2.7501,
+            "interfragment_in_reactant": true,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              22,
+              45
+            ],
+            "atom_indices_one_based": [
+              23,
+              46
+            ],
+            "atom_symbols": [
+              "O",
+              "H"
+            ],
+            "product_distance_angstrom": 0.965,
+            "reactant_distance_angstrom": 2.3271,
+            "distance_drop_angstrom": 1.3621,
+            "interfragment_in_reactant": true,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              23,
+              46
+            ],
+            "atom_indices_one_based": [
+              24,
+              47
+            ],
+            "atom_symbols": [
+              "O",
+              "H"
+            ],
+            "product_distance_angstrom": 0.9623,
+            "reactant_distance_angstrom": 3.3244,
+            "distance_drop_angstrom": 2.3621,
+            "interfragment_in_reactant": true,
+            "heavy_atom_bond": false
+          },
+          {
+            "atom_indices_zero_based": [
+              23,
+              47
+            ],
+            "atom_indices_one_based": [
+              24,
+              48
+            ],
+            "atom_symbols": [
+              "O",
+              "H"
+            ],
+            "product_distance_angstrom": 0.9623,
+            "reactant_distance_angstrom": 2.3872,
+            "distance_drop_angstrom": 1.4249,
+            "interfragment_in_reactant": true,
+            "heavy_atom_bond": false
+          }
+        ],
+        "atom_indices_zero_based": [
+          8,
+          18
+        ],
+        "atom_indices_one_based": [
+          9,
+          19
+        ],
+        "atom_symbols": [
+          "O",
+          "O"
+        ],
+        "product_distance_angstrom": 1.2446,
+        "reactant_distance_angstrom": 3.0913,
+        "distance_drop_angstrom": 1.8468,
+        "interfragment_in_reactant": false
+      },
+      "surrogate": {
+        "available": false,
+        "kind": "",
+        "short_label": "",
+        "reaction": "",
+        "assumption": "",
+        "note": "",
+        "basis": [],
+        "barrier_kcal_mol": null,
+        "barrier_kj_mol": null
+      },
+      "governance_status": "hold_observable_first",
+      "governance_note": "Computational-gap refinement jobs can narrow priors and uncertainty only; they do not promote benchmark closure while observable-first governance remains active.",
+      "write_back_artifacts": [
+        "data/lit/computational_priors.json",
+        "results/validation/computational_gap_dft_ingestion_report.md",
+        "results/validation/computational_gap_dft_ingestion_report.json",
+        "results/validation/computational_gap_closure_scorecard.md",
+        "results/validation/computational_gap_closure_scorecard.json",
+        "results/validation/refinement_governance.md",
+        "results/validation/refinement_governance.json"
+      ],
+      "xtb": {
+        "required": true,
+        "status": "ready",
+        "blocker_note": null,
+        "surrogate_available": false,
+        "geometry_dir": "data/geometries/xtb_inputs/asparagine_sugar_explicit_water_cluster",
+        "runner_script": "data/geometries/xtb_inputs/asparagine_sugar_explicit_water_cluster/run_xtb.sh",
+        "required_inputs": [
+          "data/geometries/xtb_inputs/asparagine_sugar_explicit_water_cluster/reactant.xyz",
+          "data/geometries/xtb_inputs/asparagine_sugar_explicit_water_cluster/product.xyz"
+        ],
+        "reactant_atom_count": 50,
+        "product_atom_count": 50,
+        "atom_count_match": true,
+        "expected_outputs": [
+          "data/geometries/xtb_inputs/asparagine_sugar_explicit_water_cluster/xtbpath.xyz",
+          "data/geometries/xtb_inputs/asparagine_sugar_explicit_water_cluster/xtbpath_ts.xyz"
+        ],
+        "execute_with": "python scripts/run_computational_gap_xtb.py --target asparagine_sugar_explicit_water_cluster --execute"
+      },
+      "mlp": {
+        "allowed_candidate_id": "mace_mp_small",
+        "allowed_role": "geom_preopt",
+        "authority_allowed": false,
+        "blocked_candidates": [
+          "mace_off_medium",
+          "aimnet2_shortlist",
+          "orbmol_shortlist"
+        ],
+        "note": "MLP barrier authority remains blocked; only geometry preoptimization is allowed where benchmarked."
+      },
+      "dft": {
+        "required": true,
+        "status": "ready_for_dft",
+        "surrogate_available": false,
+        "runner_script": "scripts/run_computational_gap_dft.py",
+        "reactant_path": "data/geometries/xtb_inputs/asparagine_sugar_explicit_water_cluster/reactant.xyz",
+        "product_path": "data/geometries/xtb_inputs/asparagine_sugar_explicit_water_cluster/product.xyz",
+        "ts_guess_path": "data/geometries/xtb_inputs/asparagine_sugar_explicit_water_cluster/xtbpath_ts.xyz",
+        "forming_bond": {
+          "available": true,
+          "method": "geometry_topology_diff",
+          "selection_rule": "largest_distance_drop",
+          "family_recipe_source": null,
+          "family_recipe_form_bonds": [],
+          "all_new_bonds": [
+            {
+              "atom_indices_zero_based": [
+                0,
+                48
+              ],
+              "atom_indices_one_based": [
+                1,
+                49
+              ],
+              "atom_symbols": [
+                "N",
+                "H"
+              ],
+              "product_distance_angstrom": 1.0114,
+              "reactant_distance_angstrom": 17.2119,
+              "distance_drop_angstrom": 16.2005,
+              "interfragment_in_reactant": true,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                1,
+                49
+              ],
+              "atom_indices_one_based": [
+                2,
+                50
+              ],
+              "atom_symbols": [
+                "C",
+                "H"
+              ],
+              "product_distance_angstrom": 1.078,
+              "reactant_distance_angstrom": 17.8074,
+              "distance_drop_angstrom": 16.7294,
+              "interfragment_in_reactant": true,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                5,
+                28
+              ],
+              "atom_indices_one_based": [
+                6,
+                29
+              ],
+              "atom_symbols": [
+                "N",
+                "H"
+              ],
+              "product_distance_angstrom": 1.0095,
+              "reactant_distance_angstrom": 2.5965,
+              "distance_drop_angstrom": 1.587,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                6,
+                40
+              ],
+              "atom_indices_one_based": [
+                7,
+                41
+              ],
+              "atom_symbols": [
+                "C",
+                "H"
+              ],
+              "product_distance_angstrom": 1.053,
+              "reactant_distance_angstrom": 2.3004,
+              "distance_drop_angstrom": 1.2474,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                8,
+                18
+              ],
+              "atom_indices_one_based": [
+                9,
+                19
+              ],
+              "atom_symbols": [
+                "O",
+                "O"
+              ],
+              "product_distance_angstrom": 1.2446,
+              "reactant_distance_angstrom": 3.0913,
+              "distance_drop_angstrom": 1.8468,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": true
+            },
+            {
+              "atom_indices_zero_based": [
+                9,
+                30
+              ],
+              "atom_indices_one_based": [
+                10,
+                31
+              ],
+              "atom_symbols": [
+                "C",
+                "H"
+              ],
+              "product_distance_angstrom": 1.1021,
+              "reactant_distance_angstrom": 10.4051,
+              "distance_drop_angstrom": 9.303,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                11,
+                31
+              ],
+              "atom_indices_one_based": [
+                12,
+                32
+              ],
+              "atom_symbols": [
+                "C",
+                "H"
+              ],
+              "product_distance_angstrom": 1.0944,
+              "reactant_distance_angstrom": 5.6462,
+              "distance_drop_angstrom": 4.5519,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                12,
+                32
+              ],
+              "atom_indices_one_based": [
+                13,
+                33
+              ],
+              "atom_symbols": [
+                "O",
+                "H"
+              ],
+              "product_distance_angstrom": 0.9739,
+              "reactant_distance_angstrom": 3.3321,
+              "distance_drop_angstrom": 2.3581,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                13,
+                33
+              ],
+              "atom_indices_one_based": [
+                14,
+                34
+              ],
+              "atom_symbols": [
+                "C",
+                "H"
+              ],
+              "product_distance_angstrom": 1.0956,
+              "reactant_distance_angstrom": 2.1978,
+              "distance_drop_angstrom": 1.1022,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                14,
+                34
+              ],
+              "atom_indices_one_based": [
+                15,
+                35
+              ],
+              "atom_symbols": [
+                "O",
+                "H"
+              ],
+              "product_distance_angstrom": 0.9713,
+              "reactant_distance_angstrom": 2.4566,
+              "distance_drop_angstrom": 1.4853,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                15,
+                35
+              ],
+              "atom_indices_one_based": [
+                16,
+                36
+              ],
+              "atom_symbols": [
+                "C",
+                "H"
+              ],
+              "product_distance_angstrom": 1.0959,
+              "reactant_distance_angstrom": 2.1604,
+              "distance_drop_angstrom": 1.0645,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                16,
+                36
+              ],
+              "atom_indices_one_based": [
+                17,
+                37
+              ],
+              "atom_symbols": [
+                "O",
+                "H"
+              ],
+              "product_distance_angstrom": 0.9728,
+              "reactant_distance_angstrom": 2.5948,
+              "distance_drop_angstrom": 1.6221,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                17,
+                18
+              ],
+              "atom_indices_one_based": [
+                18,
+                19
+              ],
+              "atom_symbols": [
+                "C",
+                "O"
+              ],
+              "product_distance_angstrom": 1.4418,
+              "reactant_distance_angstrom": 1.9016,
+              "distance_drop_angstrom": 0.4598,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": true
+            },
+            {
+              "atom_indices_zero_based": [
+                17,
+                37
+              ],
+              "atom_indices_one_based": [
+                18,
+                38
+              ],
+              "atom_symbols": [
+                "C",
+                "H"
+              ],
+              "product_distance_angstrom": 1.0627,
+              "reactant_distance_angstrom": 2.0585,
+              "distance_drop_angstrom": 0.9958,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                18,
+                38
+              ],
+              "atom_indices_one_based": [
+                19,
+                39
+              ],
+              "atom_symbols": [
+                "O",
+                "H"
+              ],
+              "product_distance_angstrom": 0.959,
+              "reactant_distance_angstrom": 1.9106,
+              "distance_drop_angstrom": 0.9516,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                19,
+                39
+              ],
+              "atom_indices_one_based": [
+                20,
+                40
+              ],
+              "atom_symbols": [
+                "C",
+                "H"
+              ],
+              "product_distance_angstrom": 1.073,
+              "reactant_distance_angstrom": 2.2275,
+              "distance_drop_angstrom": 1.1545,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                19,
+                40
+              ],
+              "atom_indices_one_based": [
+                20,
+                41
+              ],
+              "atom_symbols": [
+                "C",
+                "H"
+              ],
+              "product_distance_angstrom": 1.1434,
+              "reactant_distance_angstrom": 2.9625,
+              "distance_drop_angstrom": 1.8191,
+              "interfragment_in_reactant": false,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                20,
+                41
+              ],
+              "atom_indices_one_based": [
+                21,
+                42
+              ],
+              "atom_symbols": [
+                "O",
+                "H"
+              ],
+              "product_distance_angstrom": 0.9775,
+              "reactant_distance_angstrom": 2.9778,
+              "distance_drop_angstrom": 2.0003,
+              "interfragment_in_reactant": true,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                21,
+                42
+              ],
+              "atom_indices_one_based": [
+                22,
+                43
+              ],
+              "atom_symbols": [
+                "O",
+                "H"
+              ],
+              "product_distance_angstrom": 0.965,
+              "reactant_distance_angstrom": 9.1134,
+              "distance_drop_angstrom": 8.1484,
+              "interfragment_in_reactant": true,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                21,
+                43
+              ],
+              "atom_indices_one_based": [
+                22,
+                44
+              ],
+              "atom_symbols": [
+                "O",
+                "H"
+              ],
+              "product_distance_angstrom": 0.9663,
+              "reactant_distance_angstrom": 8.5151,
+              "distance_drop_angstrom": 7.5487,
+              "interfragment_in_reactant": true,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                22,
+                44
+              ],
+              "atom_indices_one_based": [
+                23,
+                45
+              ],
+              "atom_symbols": [
+                "O",
+                "H"
+              ],
+              "product_distance_angstrom": 0.9626,
+              "reactant_distance_angstrom": 3.7127,
+              "distance_drop_angstrom": 2.7501,
+              "interfragment_in_reactant": true,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                22,
+                45
+              ],
+              "atom_indices_one_based": [
+                23,
+                46
+              ],
+              "atom_symbols": [
+                "O",
+                "H"
+              ],
+              "product_distance_angstrom": 0.965,
+              "reactant_distance_angstrom": 2.3271,
+              "distance_drop_angstrom": 1.3621,
+              "interfragment_in_reactant": true,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                23,
+                46
+              ],
+              "atom_indices_one_based": [
+                24,
+                47
+              ],
+              "atom_symbols": [
+                "O",
+                "H"
+              ],
+              "product_distance_angstrom": 0.9623,
+              "reactant_distance_angstrom": 3.3244,
+              "distance_drop_angstrom": 2.3621,
+              "interfragment_in_reactant": true,
+              "heavy_atom_bond": false
+            },
+            {
+              "atom_indices_zero_based": [
+                23,
+                47
+              ],
+              "atom_indices_one_based": [
+                24,
+                48
+              ],
+              "atom_symbols": [
+                "O",
+                "H"
+              ],
+              "product_distance_angstrom": 0.9623,
+              "reactant_distance_angstrom": 2.3872,
+              "distance_drop_angstrom": 1.4249,
+              "interfragment_in_reactant": true,
+              "heavy_atom_bond": false
+            }
+          ],
+          "atom_indices_zero_based": [
+            8,
+            18
+          ],
+          "atom_indices_one_based": [
+            9,
+            19
+          ],
+          "atom_symbols": [
+            "O",
+            "O"
+          ],
+          "product_distance_angstrom": 1.2446,
+          "reactant_distance_angstrom": 3.0913,
+          "distance_drop_angstrom": 1.8468,
+          "interfragment_in_reactant": false
+        },
+        "solvent_name": "water",
+        "temperature_k": 423.15,
+        "charge": 0,
+        "spin": 0,
+        "use_explicit_solvent": true,
+        "n_water": 3,
+        "expected_outputs": [
+          "optimized_reactant.xyz",
+          "optimized_ts.xyz",
+          "barrier_summary.json",
+          "quasi_harmonic_thermo.json",
+          "surrogate_patch.json"
+        ],
+        "execute_with": "python scripts/run_computational_gap_dft.py --target asparagine_sugar_explicit_water_cluster --execute"
+      }
+    }
+  ]
+}

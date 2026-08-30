@@ -1,0 +1,188 @@
+{
+  "audit": {
+    "baseline_uncertainty_summary": {
+      "benchmark_count": 16,
+      "ci_coverage_hits": 39,
+      "ci_coverage_rate": 0.8125,
+      "ci_level_pct": 90,
+      "matched_compound_count": 48,
+      "n_samples": 12,
+      "seed": 0
+    },
+    "candidate_uncertainty_summary": {
+      "benchmark_count": 17,
+      "ci_coverage_hits": 43,
+      "ci_coverage_rate": 0.7962962962962963,
+      "ci_level_pct": 90,
+      "matched_compound_count": 54,
+      "n_samples": 12,
+      "seed": 0
+    },
+    "preview_samples": 12,
+    "preview_seed": 0
+  },
+  "benchmark_preview": {
+    "aligned_benchmark_id": "pea_isolate_ribose_cysteine_100C_45min_Internal2026",
+    "benchmarks_added": [
+      "pea_iso_external_matrix_intake_example_2026"
+    ],
+    "candidate_benchmark_id": "pea_iso_external_matrix_intake_example_2026"
+  },
+  "compound_deltas": {
+    "top_envelope_tightening_vs_aligned": [],
+    "top_median_shift_vs_aligned": [],
+    "top_strengthened": [
+      {
+        "baseline_measured_ppb": 0.0,
+        "baseline_predicted_ppb": 0.0,
+        "baseline_ratio": 0.0,
+        "baseline_support_status": "internal_reference_candidate",
+        "calibration_evidence_strength": "directional_transferred",
+        "compound": "2-furfurylthiol",
+        "evidence_state": "externally_benchmarked",
+        "measured_ppb": 0.0056,
+        "predicted_ppb": 0.005024215110674793,
+        "ratio": 1.1146019580455173,
+        "role": "desirable_marker",
+        "support_delta": "strengthened",
+        "support_status": "quantitative_closed",
+        "target_class": "sulfur_positives"
+      },
+      {
+        "baseline_measured_ppb": 0.0,
+        "baseline_predicted_ppb": 0.0,
+        "baseline_ratio": 0.0,
+        "baseline_support_status": "internal_reference_candidate",
+        "calibration_evidence_strength": "directional_transferred",
+        "compound": "2-methyl-3-furanthiol",
+        "evidence_state": "externally_benchmarked",
+        "measured_ppb": 0.0037,
+        "predicted_ppb": 0.003421173184298469,
+        "ratio": 1.0815003511021342,
+        "role": "desirable_marker",
+        "support_delta": "strengthened",
+        "support_status": "quantitative_closed",
+        "target_class": "sulfur_positives"
+      },
+      {
+        "baseline_measured_ppb": 0.0,
+        "baseline_predicted_ppb": 0.0,
+        "baseline_ratio": 0.0,
+        "baseline_support_status": "internal_reference_candidate",
+        "calibration_evidence_strength": "directional_transferred",
+        "compound": "2,5-dimethylpyrazine",
+        "evidence_state": "externally_benchmarked",
+        "measured_ppb": 0.00024,
+        "predicted_ppb": 0.00023376108663497553,
+        "ratio": 1.0266892726023589,
+        "role": "desirable_marker",
+        "support_delta": "strengthened",
+        "support_status": "quantitative_closed",
+        "target_class": "pyrazines"
+      },
+      {
+        "baseline_measured_ppb": 0.0,
+        "baseline_predicted_ppb": 0.0,
+        "baseline_ratio": 0.0,
+        "baseline_support_status": "internal_reference_candidate",
+        "calibration_evidence_strength": "heuristic",
+        "compound": "Hexanal",
+        "evidence_state": "externally_benchmarked",
+        "measured_ppb": 0.00021,
+        "predicted_ppb": 0.00019561579937371347,
+        "ratio": 1.0735329184674205,
+        "role": "adverse_marker",
+        "support_delta": "strengthened",
+        "support_status": "quantitative_closed",
+        "target_class": "adverse_lipid_markers"
+      },
+      {
+        "baseline_measured_ppb": 0.0,
+        "baseline_predicted_ppb": 0.0,
+        "baseline_ratio": 0.0,
+        "baseline_support_status": "internal_reference_candidate",
+        "calibration_evidence_strength": "heuristic",
+        "compound": "Nonanal",
+        "evidence_state": "externally_benchmarked",
+        "measured_ppb": 0.0001,
+        "predicted_ppb": 0.00010157337516403879,
+        "ratio": 1.015733751640388,
+        "role": "adverse_marker",
+        "support_delta": "strengthened",
+        "support_status": "quantitative_closed",
+        "target_class": "adverse_lipid_markers"
+      }
+    ],
+    "top_weakened": [
+      {
+        "baseline_measured_ppb": 0.0,
+        "baseline_predicted_ppb": 0.0,
+        "baseline_ratio": 0.0,
+        "baseline_support_status": "internal_reference_candidate",
+        "calibration_evidence_strength": "directional_transferred",
+        "compound": "bis(2-methyl-3-furyl) disulfide",
+        "evidence_state": "transferred_prior",
+        "measured_ppb": 0.00041,
+        "predicted_ppb": 0.0003237153767600219,
+        "ratio": 1.2665447162367667,
+        "role": "desirable_marker",
+        "support_delta": "weakened",
+        "support_status": "directional_support",
+        "target_class": "sulfur_positives"
+      }
+    ]
+  },
+  "coverage_preview": {
+    "after": {
+      "coverage_rate": 0.7962962962962963,
+      "inside_ci_count": 43,
+      "matched_compound_count": 54
+    },
+    "before": {
+      "coverage_rate": 0.8125,
+      "inside_ci_count": 39,
+      "matched_compound_count": 48
+    },
+    "delta": {
+      "coverage_rate": -0.01620370370370372,
+      "inside_ci_count": 4,
+      "matched_compound_count": 6
+    },
+    "participates_in_trust_loop": true
+  },
+  "experiment_id": "pea_iso_external_matrix_intake_example_2026",
+  "process_state": "aqueous_pre_extrusion_model",
+  "promotion_preview": {
+    "landing_recommendation": "land_in_internal_candidate_or_calibration_payload",
+    "promotion_blocker_after": "depends on internal or transferred support",
+    "promotion_blocker_before": "insufficient externally measured target closure; current comparator is internal reference-only",
+    "promotion_ready_after": false,
+    "promotion_ready_before": false,
+    "readiness_change": "evidence_strengthened_not_yet_promotable"
+  },
+  "protein_type": "pea_iso",
+  "support_delta": {
+    "baseline_support_counts": {
+      "directional_support": 0,
+      "internal_candidate": 6,
+      "internal_measured_candidate": 0,
+      "internal_reference_candidate": 6,
+      "open_gap": 0,
+      "quantitative_closed": 0
+    },
+    "current_support_counts": {
+      "directional_support": 1,
+      "internal_candidate": 0,
+      "internal_measured_candidate": 0,
+      "internal_reference_candidate": 0,
+      "open_gap": 0,
+      "quantitative_closed": 5
+    },
+    "delta_counts": {
+      "new_compound": 0,
+      "strengthened": 5,
+      "unchanged": 0,
+      "weakened": 1
+    }
+  }
+}

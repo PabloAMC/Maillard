@@ -1,0 +1,396 @@
+{
+  "benchmarks": [
+    {
+      "bench_file": "/Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/external_validation/external_validation_bi_2020_raw_pea_hexanal.json",
+      "benchmark_id": "external_validation_bi_2020_raw_pea_hexanal",
+      "compounds": [
+        {
+          "abs_log10_error": 0.09472854617455825,
+          "ci_width_log10": 4.0176770887691,
+          "compound": "hexanal",
+          "fold_error": 1.2437369765279496,
+          "inside_ci": true,
+          "is_direct_measurement": false,
+          "measured_ppb": 1260.0,
+          "predicted_mean": 57784.022379816975,
+          "predicted_p5": 16.081683783686714,
+          "predicted_p50": 1013.0759346863279,
+          "predicted_p95": 167497.60711223166,
+          "predicted_std": 431130.3738085451,
+          "value_provenance": "primary_source_table_value_verified"
+        }
+      ],
+      "execution_path": "matrix_only",
+      "holdout_kind": "in_panel_rescoring",
+      "inside_ci_count": 1,
+      "inside_ci_rate": 1.0,
+      "matched_compounds": 1,
+      "median_abs_log10_error": 0.09472854617455825,
+      "median_accuracy_fold": 1.2437369765279496
+    },
+    {
+      "bench_file": "/Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/external_validation/external_validation_bi_2020_roasted_pea_hexanal.json",
+      "benchmark_id": "external_validation_bi_2020_roasted_pea_hexanal",
+      "compounds": [
+        {
+          "abs_log10_error": 3.393467445658449,
+          "ci_width_log10": 4.0176770887691,
+          "compound": "hexanal",
+          "fold_error": 2474.3859765332954,
+          "inside_ci": false,
+          "is_direct_measurement": false,
+          "measured_ppb": 324.0,
+          "predicted_mean": 45727580.92323885,
+          "predicted_p5": 12726.294679986266,
+          "predicted_p50": 801701.0563967878,
+          "predicted_p95": 132549796.0894584,
+          "predicted_std": 341176474.82571995,
+          "value_provenance": "primary_source_table_value_verified"
+        }
+      ],
+      "execution_path": "matrix_only",
+      "holdout_kind": "genuine_extrapolation",
+      "inside_ci_count": 0,
+      "inside_ci_rate": 0.0,
+      "matched_compounds": 1,
+      "median_abs_log10_error": 3.393467445658449,
+      "median_accuracy_fold": 2474.385976533296
+    },
+    {
+      "bench_file": "/Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/external_validation/external_validation_li_2026_spi_wg_hme_control.json",
+      "benchmark_id": "external_validation_li_2026_spi_wg_hme_control",
+      "compounds": [
+        {
+          "abs_log10_error": 3.0482397138082113,
+          "ci_width_log10": 4.0176770887691,
+          "compound": "1-hexanol",
+          "fold_error": 1117.4798833925074,
+          "inside_ci": false,
+          "is_direct_measurement": true,
+          "measured_ppb": 20.04,
+          "predicted_mean": 1277330.2640174343,
+          "predicted_p5": 355.4896413794187,
+          "predicted_p50": 22394.29686318585,
+          "predicted_p95": 3702576.4892006647,
+          "predicted_std": 9530244.720297515,
+          "value_provenance": "reported_point_value"
+        },
+        {
+          "abs_log10_error": 0.29272796138143414,
+          "ci_width_log10": 4.0176770887691,
+          "compound": "2-pentylfuran",
+          "fold_error": 1.9621308286308485,
+          "inside_ci": true,
+          "is_direct_measurement": true,
+          "measured_ppb": 5625.8,
+          "predicted_mean": 629619.2841029409,
+          "predicted_p5": 175.22730010902325,
+          "predicted_p50": 11038.555615711428,
+          "predicted_p95": 1825067.1922035383,
+          "predicted_std": 4697630.69673706,
+          "value_provenance": "reported_point_value"
+        },
+        {
+          "abs_log10_error": 1.9691692024086542,
+          "ci_width_log10": 4.0176770887691,
+          "compound": "hexanal",
+          "fold_error": 93.1470708512991,
+          "inside_ci": false,
+          "is_direct_measurement": true,
+          "measured_ppb": 605.6,
+          "predicted_mean": 3217516.9244447662,
+          "predicted_p5": 895.4566957535648,
+          "predicted_p50": 56409.86610754674,
+          "predicted_p95": 9326564.048193427,
+          "predicted_std": 24006104.40812283,
+          "value_provenance": "reported_point_value"
+        },
+        {
+          "abs_log10_error": 2.0730187458371265,
+          "ci_width_log10": 4.0176770887691,
+          "compound": "nonanal",
+          "fold_error": 118.30926214970623,
+          "inside_ci": false,
+          "is_direct_measurement": true,
+          "measured_ppb": 72.66,
+          "predicted_mean": 490320.3411079559,
+          "predicted_p5": 136.45946325054928,
+          "predicted_p50": 8596.350987797654,
+          "predicted_p95": 1421283.608714675,
+          "predicted_std": 3658312.1638420625,
+          "value_provenance": "reported_point_value"
+        }
+      ],
+      "execution_path": "matrix_only",
+      "holdout_kind": "genuine_extrapolation",
+      "inside_ci_count": 1,
+      "inside_ci_rate": 0.25,
+      "matched_compounds": 4,
+      "median_abs_log10_error": 2.0210939741228904,
+      "median_accuracy_fold": 104.97695567991867
+    },
+    {
+      "bench_file": "/Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/external_validation/external_validation_liu_2023_ppi_offnote_baseline.json",
+      "benchmark_id": "external_validation_liu_2023_ppi_offnote_baseline",
+      "compounds": [
+        {
+          "abs_log10_error": 1.048204427909248,
+          "ci_width_log10": 4.0176770887691,
+          "compound": "hexanal",
+          "fold_error": 11.173890931981262,
+          "inside_ci": true,
+          "is_direct_measurement": false,
+          "measured_ppb": 11320.0,
+          "predicted_mean": 57784.022379816975,
+          "predicted_p5": 16.081683783686714,
+          "predicted_p50": 1013.0759346863279,
+          "predicted_p95": 167497.60711223166,
+          "predicted_std": 431130.3738085451,
+          "value_provenance": "band_geometric_midpoint"
+        },
+        {
+          "abs_log10_error": 1.974158946015635,
+          "ci_width_log10": 4.0176770887691,
+          "compound": "nonanal",
+          "fold_error": 94.22343787017091,
+          "inside_ci": false,
+          "is_direct_measurement": false,
+          "measured_ppb": 0.8018,
+          "predicted_mean": 4309.141636123185,
+          "predicted_p5": 1.1992632273978945,
+          "predicted_p50": 75.54835248430304,
+          "predicted_p95": 12490.83886916158,
+          "predicted_std": 32150.787845199487,
+          "value_provenance": "band_geometric_midpoint"
+        }
+      ],
+      "execution_path": "matrix_only",
+      "holdout_kind": "in_panel_rescoring",
+      "inside_ci_count": 1,
+      "inside_ci_rate": 0.5,
+      "matched_compounds": 2,
+      "median_abs_log10_error": 1.5111816869624415,
+      "median_accuracy_fold": 32.44753331144915
+    }
+  ],
+  "external_failing_compounds": [
+    {
+      "compound": "1-hexanol",
+      "mean_abs_log10_error": 3.0482397138082113,
+      "n_holdout_observations": 1
+    },
+    {
+      "compound": "hexanal",
+      "mean_abs_log10_error": 1.6263924055377275,
+      "n_holdout_observations": 4
+    },
+    {
+      "compound": "nonanal",
+      "mean_abs_log10_error": 2.0235888459263807,
+      "n_holdout_observations": 2
+    }
+  ],
+  "external_failing_threshold_dex": 1.0,
+  "priors": [
+    {
+      "key": "schiff_condensation",
+      "kind": "barrier",
+      "sigma_kcal": 1.5,
+      "source": "barrier_constants_default"
+    },
+    {
+      "key": "amadori_rearrangement",
+      "kind": "barrier",
+      "sigma_kcal": 1.5,
+      "source": "barrier_constants_default"
+    },
+    {
+      "key": "1,2-enolisation",
+      "kind": "barrier",
+      "sigma_kcal": 1.5,
+      "source": "barrier_constants_default"
+    },
+    {
+      "key": "2,3-enolisation",
+      "kind": "barrier",
+      "sigma_kcal": 1.5,
+      "source": "barrier_constants_default"
+    },
+    {
+      "key": "strecker_degradation",
+      "kind": "barrier",
+      "sigma_kcal": 1.5,
+      "source": "barrier_constants_default"
+    },
+    {
+      "key": "cysteine_thermolysis",
+      "kind": "barrier",
+      "sigma_kcal": 1.5,
+      "source": "barrier_constants_default"
+    },
+    {
+      "key": "thiol_addition",
+      "kind": "barrier",
+      "sigma_kcal": 1.5,
+      "source": "barrier_constants_default"
+    },
+    {
+      "key": "thiol_addition_hexose",
+      "kind": "barrier",
+      "sigma_kcal": 1.5,
+      "source": "barrier_constants_default"
+    },
+    {
+      "key": "thiol_oxidation",
+      "kind": "barrier",
+      "sigma_kcal": 1.5,
+      "source": "barrier_constants_default"
+    },
+    {
+      "key": "aminoketone_condensation",
+      "kind": "barrier",
+      "sigma_kcal": 1.5,
+      "source": "barrier_constants_default"
+    },
+    {
+      "key": "retro_aldol",
+      "kind": "barrier",
+      "sigma_kcal": 1.5,
+      "source": "barrier_constants_default"
+    },
+    {
+      "key": "dehydration",
+      "kind": "barrier",
+      "sigma_kcal": 1.5,
+      "source": "barrier_constants_default"
+    },
+    {
+      "key": "beta_elimination",
+      "kind": "barrier",
+      "sigma_kcal": 1.5,
+      "source": "barrier_constants_default"
+    },
+    {
+      "key": "lipid_thiazole",
+      "kind": "barrier",
+      "sigma_kcal": 1.5,
+      "source": "barrier_constants_default"
+    },
+    {
+      "key": "matrix_headspace",
+      "kind": "observable",
+      "sigma_kcal": 2.86,
+      "source": "observable_uncalibrated_matrix"
+    },
+    {
+      "key": "henry_kaw",
+      "kind": "observable",
+      "sigma_kcal": 1.0,
+      "source": "observable_uncalibrated_matrix"
+    },
+    {
+      "key": "matrix_retention",
+      "kind": "observable",
+      "sigma_kcal": 0.7,
+      "source": "observable_uncalibrated_matrix"
+    }
+  ],
+  "source": {
+    "benchmark_dir": "/Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/external_validation",
+    "description": "Hold-out matrix benchmarks synthesized from flavor_reference_payloads.json and excluded from the default calibration panel.",
+    "evidence_class": "external_validation_only"
+  },
+  "summary": {
+    "benchmark_count": 4,
+    "benchmark_dir": "/Users/pabloantoniomorenocasares/Developer/Maillard/data/benchmarks/external_validation",
+    "ci_coverage_hits": 3,
+    "ci_coverage_rate": 0.375,
+    "ci_level_pct": 90,
+    "evidence_class": "external_validation_only",
+    "holdout_benchmark_count": 4,
+    "holdout_kind_split": {
+      "genuine_extrapolation": {
+        "benchmarks": [
+          "external_validation_bi_2020_roasted_pea_hexanal",
+          "external_validation_li_2026_spi_wg_hme_control"
+        ],
+        "hits": 1,
+        "meaning": "Bundles at a process state the calibration panel does not contain (roasting, HME extrusion). These are the only rows that test transfer.",
+        "rate": 0.2,
+        "total": 5
+      },
+      "in_panel_rescoring": {
+        "hits": 2,
+        "meaning": "Bundles whose executable conditions are COPIED from an in-panel benchmark. Scoring them re-runs that anchor's prediction at that anchor's own conditions; it is a reproducibility comparison, not an extrapolation test.",
+        "rate": 0.6666666666666666,
+        "total": 3
+      }
+    },
+    "honest_literature_coverage": {
+      "definition": "External-literature rows only, with fitted rows (constants back-solved from the benchmark) and internal synthetic reproducibility rows removed from BOTH numerator and denominator. Read it together with median_ci_width_log10: a wide interval covering a measurement is a weak claim.",
+      "excluded_fitted_rows": 0,
+      "excluded_fitted_rows_that_would_have_been_hits": 0,
+      "hits": 3,
+      "median_ci_width_log10": 4.0176770887691,
+      "not_evaluable": 0,
+      "rate": 0.375,
+      "total": 8
+    },
+    "matched_compound_count": 8,
+    "max_fold_error": 2474.3859765332954,
+    "median_abs_log10_error": 1.9716640742121445,
+    "median_accuracy_fold": 93.68370852579324,
+    "n_samples": 200,
+    "pre_widening_coverage": {
+      "ci_coverage_hits": 3,
+      "ci_coverage_rate": 0.375,
+      "genuine_extrapolation_hits": 1,
+      "genuine_extrapolation_total": 5,
+      "matched_compound_count": 8,
+      "matrix_sigma": 2.0,
+      "why": "The uncalibrated matrix ln-sigma was raised 2.0 -> 2.86 on 2026-08-26. Coverage at the SHIPPED sigma is therefore not comparable with any earlier run of this report. This row re-scores the identical hold-out at the pre-widening sigma so the difference between 'the model got better' and 'the interval got wider' is visible rather than inferred. Read the median fold error, which no prior can change, alongside both."
+    },
+    "seed": 0,
+    "signal_origin_split": {
+      "external_literature": {
+        "ci_coverage_rate": 0.375,
+        "hits": 3,
+        "median_ci_width_log10": 4.0176770887691,
+        "not_evaluable": 0,
+        "total": 8
+      },
+      "fitted_row": {
+        "ci_coverage_rate": null,
+        "hits": 0,
+        "median_ci_width_log10": null,
+        "not_evaluable": 0,
+        "total": 0
+      },
+      "internal_synthetic": {
+        "ci_coverage_rate": null,
+        "hits": 0,
+        "median_ci_width_log10": null,
+        "not_evaluable": 0,
+        "total": 0
+      }
+    },
+    "value_provenance_split": {
+      "counts": {
+        "band_geometric_midpoint": 2,
+        "primary_source_table_value_verified": 2,
+        "reported_point_value": 4
+      },
+      "derived_or_constructed": {
+        "hits": 2,
+        "rate": 0.5,
+        "total": 4
+      },
+      "direct_measurement": {
+        "hits": 1,
+        "rate": 0.25,
+        "total": 4
+      },
+      "note": "`band_geometric_midpoint` rows score against a number WE constructed as sqrt(min*max) of a reported range; `derived_from_oav_and_repo_threshold` rows score against the source's OAV multiplied by this repo's own (compilation-level, primary-table-unverified) hexanal odour threshold of 4.5 ppb. Only `reported_point_value` rows are external measurements in the ordinary sense."
+    }
+  }
+}

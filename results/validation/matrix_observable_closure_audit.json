@@ -1,0 +1,321 @@
+{
+  "schema_version": "1.0",
+  "description": "Compound-level observable closure audit for mixed matrix lanes, labeling the next closure action needed for each decision-driving compound.",
+  "selected_promotion_target": {
+    "benchmark_id": "pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026",
+    "protein_type": "pea_iso",
+    "process_state": "aqueous_pre_extrusion_model",
+    "target_profile": "mixed",
+    "rationale": [
+      "same_protein_external_anchor_count=2",
+      "same_protein_external_process_states=2",
+      "quantitative_closed=0",
+      "internal_candidate=6",
+      "internal_measured_candidate=0",
+      "internal_reference_candidate=6"
+    ],
+    "selection_policy": "prefer_mixed_matrix_lanes_with_the_broadest_same_protein_external_anchor_span_before_mechanistic_escalation"
+  },
+  "benchmarks": [
+    {
+      "benchmark_id": "pea_isolate_ribose_cysteine_100C_45min_Internal2026",
+      "protein_type": "pea_iso",
+      "process_state": "aqueous_pre_extrusion_model",
+      "target_profile": "mixed",
+      "promotion_blocker": "insufficient externally measured target closure; current comparator is internal reference-only",
+      "source_origin": "internal_reproducibility_candidate",
+      "compounds": [
+        {
+          "compound": "Hexanal",
+          "role": "adverse_marker",
+          "target_class": "adverse_lipid_markers",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Pratap-Singh 2021 pea isolate ambient slurry baseline (Wave O refit to the verified 1138.00 ppb)",
+          "calibration_evidence_strength": "process_state_mismatch",
+          "support_status": "internal_reference_candidate",
+          "closure_action": "class_level_transfer_acceptable"
+        },
+        {
+          "compound": "Nonanal",
+          "role": "adverse_marker",
+          "target_class": "adverse_lipid_markers",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Pratap-Singh 2021 pea isolate ambient slurry baseline",
+          "calibration_evidence_strength": "process_state_mismatch",
+          "support_status": "internal_reference_candidate",
+          "closure_action": "class_level_transfer_acceptable"
+        },
+        {
+          "compound": "2-furfurylthiol",
+          "role": "desirable_marker",
+          "target_class": "sulfur_positives",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Interpolated base sulfur yield matching internal benchmark limits",
+          "calibration_evidence_strength": "directional_transferred",
+          "support_status": "internal_reference_candidate",
+          "closure_action": "class_level_transfer_acceptable"
+        },
+        {
+          "compound": "2-methyl-3-furanthiol",
+          "role": "desirable_marker",
+          "target_class": "sulfur_positives",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Interpolated base sulfur yield matching internal benchmark limits",
+          "calibration_evidence_strength": "directional_transferred",
+          "support_status": "internal_reference_candidate",
+          "closure_action": "class_level_transfer_acceptable"
+        },
+        {
+          "compound": "bis(2-methyl-3-furyl) disulfide",
+          "role": "desirable_marker",
+          "target_class": "sulfur_positives",
+          "evidence_state": "transferred_prior",
+          "calibration_source": "Interpolated base sulfur yield matching internal benchmark limits",
+          "calibration_evidence_strength": "directional_transferred",
+          "support_status": "internal_reference_candidate",
+          "closure_action": "class_level_transfer_acceptable"
+        },
+        {
+          "compound": "2,5-dimethylpyrazine",
+          "role": "desirable_marker",
+          "target_class": "pyrazines",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Interpolated base pyrazine yield matching internal benchmark limits",
+          "calibration_evidence_strength": "directional_transferred",
+          "support_status": "internal_reference_candidate",
+          "closure_action": "class_level_transfer_acceptable"
+        }
+      ],
+      "closure_action_counts": {
+        "class_level_transfer_acceptable": 6
+      }
+    },
+    {
+      "benchmark_id": "pea_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026",
+      "protein_type": "pea_iso",
+      "process_state": "aqueous_pre_extrusion_model",
+      "target_profile": "mixed",
+      "promotion_blocker": "insufficient externally measured target closure; current comparator is synthetic model output (diagnostic only)",
+      "source_origin": "synthetic_diagnostic",
+      "compounds": [
+        {
+          "compound": "Hexanal",
+          "role": "adverse_marker",
+          "target_class": "adverse_lipid_markers",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Pratap-Singh 2021 pea isolate ambient slurry baseline (Wave O refit to the verified 1138.00 ppb)",
+          "calibration_evidence_strength": "process_state_mismatch",
+          "support_status": "internal_reference_candidate",
+          "closure_action": "class_level_transfer_acceptable"
+        },
+        {
+          "compound": "Nonanal",
+          "role": "adverse_marker",
+          "target_class": "adverse_lipid_markers",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Pratap-Singh 2021 pea isolate ambient slurry baseline",
+          "calibration_evidence_strength": "process_state_mismatch",
+          "support_status": "internal_reference_candidate",
+          "closure_action": "class_level_transfer_acceptable"
+        },
+        {
+          "compound": "2-furfurylthiol",
+          "role": "desirable_marker",
+          "target_class": "sulfur_positives",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Interpolated base sulfur yield matching internal benchmark limits",
+          "calibration_evidence_strength": "directional_transferred",
+          "support_status": "internal_reference_candidate",
+          "closure_action": "class_level_transfer_acceptable"
+        },
+        {
+          "compound": "2-methyl-3-furanthiol",
+          "role": "desirable_marker",
+          "target_class": "sulfur_positives",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Interpolated base sulfur yield matching internal benchmark limits",
+          "calibration_evidence_strength": "directional_transferred",
+          "support_status": "internal_reference_candidate",
+          "closure_action": "class_level_transfer_acceptable"
+        },
+        {
+          "compound": "bis(2-methyl-3-furyl) disulfide",
+          "role": "desirable_marker",
+          "target_class": "sulfur_positives",
+          "evidence_state": "transferred_prior",
+          "calibration_source": "Interpolated base sulfur yield matching internal benchmark limits",
+          "calibration_evidence_strength": "directional_transferred",
+          "support_status": "internal_reference_candidate",
+          "closure_action": "class_level_transfer_acceptable"
+        },
+        {
+          "compound": "2,5-dimethylpyrazine",
+          "role": "desirable_marker",
+          "target_class": "pyrazines",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Interpolated base pyrazine yield matching internal benchmark limits",
+          "calibration_evidence_strength": "directional_transferred",
+          "support_status": "internal_reference_candidate",
+          "closure_action": "class_level_transfer_acceptable"
+        }
+      ],
+      "closure_action_counts": {
+        "class_level_transfer_acceptable": 6
+      }
+    },
+    {
+      "benchmark_id": "soy_isolate_ribose_cysteine_100C_45min_Internal2026",
+      "protein_type": "soy_iso",
+      "process_state": "aqueous_pre_extrusion_model",
+      "target_profile": "mixed",
+      "promotion_blocker": "insufficient externally measured target closure; current comparator is internal reference-only",
+      "source_origin": "internal_reproducibility_candidate",
+      "compounds": [
+        {
+          "compound": "Hexanal",
+          "role": "adverse_marker",
+          "target_class": "adverse_lipid_markers",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Pratap-Singh 2021 soy ambient slurry hexanal (Wave O refit to the verified 1621.71 ppb)",
+          "calibration_evidence_strength": "process_state_mismatch",
+          "support_status": "internal_reference_candidate",
+          "closure_action": "class_level_transfer_acceptable"
+        },
+        {
+          "compound": "Nonanal",
+          "role": "adverse_marker",
+          "target_class": "adverse_lipid_markers",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Pratap-Singh 2021 soy-vs-pea ambient slurry release ratio",
+          "calibration_evidence_strength": "process_state_mismatch",
+          "support_status": "internal_reference_candidate",
+          "closure_action": "class_level_transfer_acceptable"
+        },
+        {
+          "compound": "2-furfurylthiol",
+          "role": "desirable_marker",
+          "target_class": "sulfur_positives",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Interpolated base sulfur yield matching internal benchmark limits",
+          "calibration_evidence_strength": "directional_transferred",
+          "support_status": "internal_reference_candidate",
+          "closure_action": "class_level_transfer_acceptable"
+        },
+        {
+          "compound": "2-methyl-3-furanthiol",
+          "role": "desirable_marker",
+          "target_class": "sulfur_positives",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Interpolated base sulfur yield matching internal benchmark limits",
+          "calibration_evidence_strength": "directional_transferred",
+          "support_status": "internal_reference_candidate",
+          "closure_action": "class_level_transfer_acceptable"
+        },
+        {
+          "compound": "bis(2-methyl-3-furyl) disulfide",
+          "role": "desirable_marker",
+          "target_class": "sulfur_positives",
+          "evidence_state": "transferred_prior",
+          "calibration_source": "Interpolated base sulfur yield matching internal benchmark limits",
+          "calibration_evidence_strength": "directional_transferred",
+          "support_status": "internal_reference_candidate",
+          "closure_action": "class_level_transfer_acceptable"
+        },
+        {
+          "compound": "2,5-dimethylpyrazine",
+          "role": "desirable_marker",
+          "target_class": "pyrazines",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Interpolated base pyrazine yield matching internal benchmark limits",
+          "calibration_evidence_strength": "directional_transferred",
+          "support_status": "internal_reference_candidate",
+          "closure_action": "class_level_transfer_acceptable"
+        }
+      ],
+      "closure_action_counts": {
+        "class_level_transfer_acceptable": 6
+      }
+    },
+    {
+      "benchmark_id": "soy_isolate_ribose_cysteine_100C_45min_ProtocolPilot2026",
+      "protein_type": "soy_iso",
+      "process_state": "aqueous_pre_extrusion_model",
+      "target_profile": "mixed",
+      "promotion_blocker": "insufficient externally measured target closure; current comparator is synthetic model output (diagnostic only)",
+      "source_origin": "synthetic_diagnostic",
+      "compounds": [
+        {
+          "compound": "Hexanal",
+          "role": "adverse_marker",
+          "target_class": "adverse_lipid_markers",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Pratap-Singh 2021 soy ambient slurry hexanal (Wave O refit to the verified 1621.71 ppb)",
+          "calibration_evidence_strength": "process_state_mismatch",
+          "support_status": "internal_reference_candidate",
+          "closure_action": "class_level_transfer_acceptable"
+        },
+        {
+          "compound": "Nonanal",
+          "role": "adverse_marker",
+          "target_class": "adverse_lipid_markers",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Pratap-Singh 2021 soy-vs-pea ambient slurry release ratio",
+          "calibration_evidence_strength": "process_state_mismatch",
+          "support_status": "internal_reference_candidate",
+          "closure_action": "class_level_transfer_acceptable"
+        },
+        {
+          "compound": "2-furfurylthiol",
+          "role": "desirable_marker",
+          "target_class": "sulfur_positives",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Interpolated base sulfur yield matching internal benchmark limits",
+          "calibration_evidence_strength": "directional_transferred",
+          "support_status": "internal_reference_candidate",
+          "closure_action": "class_level_transfer_acceptable"
+        },
+        {
+          "compound": "2-methyl-3-furanthiol",
+          "role": "desirable_marker",
+          "target_class": "sulfur_positives",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Interpolated base sulfur yield matching internal benchmark limits",
+          "calibration_evidence_strength": "directional_transferred",
+          "support_status": "internal_reference_candidate",
+          "closure_action": "class_level_transfer_acceptable"
+        },
+        {
+          "compound": "bis(2-methyl-3-furyl) disulfide",
+          "role": "desirable_marker",
+          "target_class": "sulfur_positives",
+          "evidence_state": "transferred_prior",
+          "calibration_source": "Interpolated base sulfur yield matching internal benchmark limits",
+          "calibration_evidence_strength": "directional_transferred",
+          "support_status": "internal_reference_candidate",
+          "closure_action": "class_level_transfer_acceptable"
+        },
+        {
+          "compound": "2,5-dimethylpyrazine",
+          "role": "desirable_marker",
+          "target_class": "pyrazines",
+          "evidence_state": "externally_benchmarked",
+          "calibration_source": "Interpolated base pyrazine yield matching internal benchmark limits",
+          "calibration_evidence_strength": "directional_transferred",
+          "support_status": "internal_reference_candidate",
+          "closure_action": "class_level_transfer_acceptable"
+        }
+      ],
+      "closure_action_counts": {
+        "class_level_transfer_acceptable": 6
+      }
+    }
+  ],
+  "mechanistic_refinement_watchlist": [],
+  "summary": {
+    "benchmarks_audited": 4,
+    "mechanistic_watchlist_count": 0,
+    "closure_action_counts": {
+      "class_level_transfer_acceptable": 24
+    }
+  }
+}

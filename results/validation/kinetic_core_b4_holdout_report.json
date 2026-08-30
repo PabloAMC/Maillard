@@ -1,0 +1,464 @@
+{
+  "wave": "B4 -- matrix / OAV output layer",
+  "generated_by": "scripts/generators/generate_kinetic_core_b4_holdout.py",
+  "generated_on": "2026-08-28",
+  "predictions_frozen_on": "2026-08-28",
+  "pre_registered_expectations": {
+    "gating_criterion": "Declaration Amendment 4: >=7/10 of the paired soy/water ratios within 5x AND correct sign on all 10, including the ethyl-4-methylpentanoate inversion.",
+    "overall_expectation": "FAIL, and by construction rather than by accident.",
+    "expected_failures": [
+      {
+        "compound": "ethyl_4_methylpentanoate",
+        "expect": "SIGN WRONG",
+        "confidence": "very high (~95%)",
+        "why": "The declaration names this compound as carrying an INVERSION. The only term this layer has for an ester is Meynier's measured ester SUPPRESSION (1.07-1.33x at 33.9 g/L dairy protein), which can only push the ratio ABOVE 1. Nothing in the FIT column produces a sign reversal for an ester: the two measured enhancements in the corpus are a lactone and a furanone, not an ester. The one mechanism that could -- background-odour masking -- is unimplementable, because Hong measured no background volatiles in the soy matrix. So this single compound fails the 'correct sign on all 10' clause on its own, and therefore the gate fails whatever the magnitudes do."
+      },
+      {
+        "compounds": [
+          "2_3_dimethylpyrazine",
+          "2_pentylfuran",
+          "4_vinylphenol",
+          "butyric_acid",
+          "4_ethylphenol",
+          "dimethyl_disulfide"
+        ],
+        "expect": "NO PREDICTION AT ALL -> scored as sign-fail",
+        "confidence": "certain (structural)",
+        "why": "Six of the ten compounds belong to classes for which the entire FIT column contains NO per-gram binding constant: alkylpyrazine, alkylfuran, phenol (x2), carboxylic acid, disulfide. The layer reports `no_measured_constant_for_this_class` and emits 1.0, which is the ABSENCE of a prediction, not a prediction of no shift. Imputing a constant for them would be inventing a parameter, and a class-mean over unrelated chemistry would be the general correction factor k2 sec. D.1 refutes. This is the single most informative thing the hold-out will show: the corpus supports a matrix prediction for 4 of Hong's 10 compounds and no more."
+      },
+      {
+        "compounds": [
+          "hexanal",
+          "3_methylbutanal",
+          "2_methylbutanal"
+        ],
+        "expect": "SIGN RIGHT, MAGNITUDE FAR TOO SMALL",
+        "confidence": "high (~85%)",
+        "why": "These three do get a term. But Amendment 6 ruling 2 already computed the answer: reversible binding explains ~25 % of a hexanal matrix log-shift and covalent ~0.06 %. A model whose only active term is reversible binding must therefore UNDER-PREDICT a real matrix shift by roughly the remaining 0.75 of the log, which for a shift of order 100x is a fold error of order 20-30x -- far outside the 5x window. If any of these three lands inside 5x it will be because the true shift is small, not because the model captured a large one."
+      },
+      {
+        "compounds": [
+          "2_methylbutanal",
+          "3_methylbutanal"
+        ],
+        "expect": "IDENTICAL PREDICTIONS FOR TWO DIFFERENT COMPOUNDS",
+        "confidence": "certain (structural)",
+        "why": "Both are C5 branched alkanals reached by the same chain-length surrogate from the C6 n-alkanal. Branch position is unmeasured anywhere in the corpus, so the layer CANNOT distinguish them. Any difference Hong measured between the two is, for this layer, pure unexplained residual by construction."
+      },
+      {
+        "compound": "dimethyl_disulfide",
+        "expect": "carries an unresolved SOURCE CONTRADICTION",
+        "confidence": "certain",
+        "why": "anantharamkrishnan2020b's Table 2 and its own Results text disagree on whether DMDS forms a covalent adduct. Resolved conservatively in favour of the table (no covalent term) and reported on the row rather than decided silently. It changes nothing numerically here, because the covalent term is inert anyway."
+      }
+    ],
+    "what_would_falsify_the_expectation": "If the ester's measured ratio turns out to be ABOVE 1 the sign call would pass and this pre-registration would be wrong in the model's favour. If several of the six no-constant compounds happen to sit within 5x of 1.0, the magnitude count could reach 7/10 while the sign clause still fails -- that would be a pass on one half of a criterion that requires both, and it must not be reported as a partial pass.",
+    "declared_before": "any read of results/validation/holdout_frozen/hong2020_paired_thresholds.json by this wave."
+  },
+  "hong2020_flagship": {
+    "state": "scored",
+    "criterion": ">= 7/10 within 5.0x AND correct sign on all 10, including the ethyl-4-methylpentanoate inversion (Amendment 4)",
+    "gating": true,
+    "PASS": false,
+    "score_all_ten": {
+      "n": 10,
+      "n_within_5x": 0,
+      "n_sign_correct": 3,
+      "rows": [
+        "2_3_dimethylpyrazine",
+        "ethyl_4_methylpentanoate",
+        "2_pentylfuran",
+        "4_vinylphenol",
+        "hexanal",
+        "3_methylbutanal",
+        "2_methylbutanal",
+        "butyric_acid",
+        "4_ethylphenol",
+        "dimethyl_disulfide"
+      ]
+    },
+    "score_clean_six": {
+      "n": 5,
+      "n_within_5x": 0,
+      "n_sign_correct": 2,
+      "rows": [
+        "2_3_dimethylpyrazine",
+        "2_pentylfuran",
+        "3_methylbutanal",
+        "2_methylbutanal",
+        "dimethyl_disulfide"
+      ]
+    },
+    "blindness": {
+      "fully_blind": false,
+      "why": "the build brief instructed this wave to read k4b_paired_thresholds_and_browning.md, which prints Hong's aggregate statistics and four per-compound facts outside the paired table",
+      "leaked_rows": {
+        "hexanal": "k4b sec. A.4 prints the soy/water hexanal ratio in full.",
+        "ethyl_4_methylpentanoate": "k4b sec. B and the declaration itself name this compound as the inversion, which discloses its sign; k4b's hazard table also prints its soy BET.",
+        "butyric_acid": "k4b sec. B identifies the largest shift by chemical class and log P; butyric acid is the only acid in the panel.",
+        "4_vinylphenol": "k4b sec. B identifies the smallest ELEVATED shift as a phenol at a stated log P. Two phenols are in the panel, so the disclosure is partial -- it names one of the two but does not say which. Treated as leaked for both phenols, conservatively.",
+        "4_ethylphenol": "as 4_vinylphenol: the phenol disclosure cannot be attributed to one of the two, so both are excluded."
+      },
+      "clean_rows": [
+        "2_3_dimethylpyrazine",
+        "2_pentylfuran",
+        "3_methylbutanal",
+        "2_methylbutanal",
+        "dimethyl_disulfide"
+      ],
+      "reading_rule": "the clean-row score is the one that carries evidential weight; the ten-row score is reported because the declaration's criterion is defined over ten rows"
+    },
+    "rows": [
+      {
+        "compound": "2_3_dimethylpyrazine",
+        "measured_ratio": 48.88,
+        "predicted_ratio": 1.0,
+        "measured_log10": 1.6891311972344978,
+        "explained_log10": 0.0,
+        "residual_log10": 1.6891311972344978,
+        "unexplained_residual_x": 48.879999999999995,
+        "per_term_log10": {
+          "reversible_binding": 0.0,
+          "alpha_beta_unsaturation": 0.0,
+          "covalent_ceiling": 0.0
+        },
+        "fold_error": 48.88,
+        "sign_measured": "elevated",
+        "sign_predicted": "no_prediction",
+        "sign_correct": false,
+        "flags": [
+          "NO TERM AVAILABLE: the entire measured shift is unexplained residual, because the corpus supplies no constant for this class.",
+          "SIGN NOT PREDICTED: the model emits exactly 1.0, which is the absence of a prediction, not a prediction of no shift."
+        ],
+        "compound_display": "2,3-dimethyl pyrazine",
+        "binding_class": "alkylpyrazine",
+        "model_state": "no_binding_constant_for_class",
+        "covalent_gate": "blocked_by_negative_gate_class",
+        "within_5x": false,
+        "interval_covers_measured": false,
+        "leaked_to_this_wave": false,
+        "leak_reason": null
+      },
+      {
+        "compound": "ethyl_4_methylpentanoate",
+        "measured_ratio": 0.1546,
+        "predicted_ratio": 1.696999,
+        "measured_log10": -0.8107905104176939,
+        "explained_log10": 0.22968167407591325,
+        "residual_log10": -1.0404721844936071,
+        "unexplained_residual_x": 0.09110197990020993,
+        "per_term_log10": {
+          "reversible_binding": 0.22968167407591325,
+          "alpha_beta_unsaturation": 0.0,
+          "covalent_ceiling": 0.0
+        },
+        "fold_error": 10.97670763260026,
+        "sign_measured": "inverted",
+        "sign_predicted": "elevated",
+        "sign_correct": false,
+        "flags": [],
+        "compound_display": "ethyl-4-methylpentanoate",
+        "binding_class": "ester",
+        "model_state": "predicted",
+        "covalent_gate": "blocked_by_negative_gate_class",
+        "within_5x": false,
+        "interval_covers_measured": false,
+        "leaked_to_this_wave": true,
+        "leak_reason": "k4b sec. B and the declaration itself name this compound as the inversion, which discloses its sign; k4b's hazard table also prints its soy BET."
+      },
+      {
+        "compound": "2_pentylfuran",
+        "measured_ratio": 1359.3,
+        "predicted_ratio": 1.0,
+        "measured_log10": 3.133315316898848,
+        "explained_log10": 0.0,
+        "residual_log10": 3.133315316898848,
+        "unexplained_residual_x": 1359.2999999999997,
+        "per_term_log10": {
+          "reversible_binding": 0.0,
+          "alpha_beta_unsaturation": 0.0,
+          "covalent_ceiling": 0.0
+        },
+        "fold_error": 1359.3,
+        "sign_measured": "elevated",
+        "sign_predicted": "no_prediction",
+        "sign_correct": false,
+        "flags": [
+          "NO TERM AVAILABLE: the entire measured shift is unexplained residual, because the corpus supplies no constant for this class.",
+          "SIGN NOT PREDICTED: the model emits exactly 1.0, which is the absence of a prediction, not a prediction of no shift."
+        ],
+        "compound_display": "2-pentyl furan",
+        "binding_class": "alkylfuran",
+        "model_state": "no_binding_constant_for_class",
+        "covalent_gate": "unknown_class_no_gate_evidence",
+        "within_5x": false,
+        "interval_covers_measured": false,
+        "leaked_to_this_wave": false,
+        "leak_reason": null
+      },
+      {
+        "compound": "4_vinylphenol",
+        "measured_ratio": 151.4,
+        "predicted_ratio": 1.0,
+        "measured_log10": 2.180125875164054,
+        "explained_log10": 0.0,
+        "residual_log10": 2.180125875164054,
+        "unexplained_residual_x": 151.4,
+        "per_term_log10": {
+          "reversible_binding": 0.0,
+          "alpha_beta_unsaturation": 0.0,
+          "covalent_ceiling": 0.0
+        },
+        "fold_error": 151.4,
+        "sign_measured": "elevated",
+        "sign_predicted": "no_prediction",
+        "sign_correct": false,
+        "flags": [
+          "NO TERM AVAILABLE: the entire measured shift is unexplained residual, because the corpus supplies no constant for this class.",
+          "SIGN NOT PREDICTED: the model emits exactly 1.0, which is the absence of a prediction, not a prediction of no shift."
+        ],
+        "compound_display": "4-vinyl phenol",
+        "binding_class": "phenol",
+        "model_state": "no_binding_constant_for_class",
+        "covalent_gate": "blocked_by_negative_gate_named_compound",
+        "within_5x": false,
+        "interval_covers_measured": false,
+        "leaked_to_this_wave": true,
+        "leak_reason": "k4b sec. B identifies the smallest ELEVATED shift as a phenol at a stated log P. Two phenols are in the panel, so the disclosure is partial -- it names one of the two but does not say which. Treated as leaked for both phenols, conservatively."
+      },
+      {
+        "compound": "hexanal",
+        "measured_ratio": 132.5,
+        "predicted_ratio": 2.63442,
+        "measured_log10": 2.1222158782728267,
+        "explained_log10": 0.4206850147949033,
+        "residual_log10": 1.7015308634779234,
+        "unexplained_residual_x": 50.29570076145793,
+        "per_term_log10": {
+          "reversible_binding": 0.4206850147949033,
+          "alpha_beta_unsaturation": 0.0,
+          "covalent_ceiling": 0.0
+        },
+        "fold_error": 50.29570076145793,
+        "sign_measured": "elevated",
+        "sign_predicted": "elevated",
+        "sign_correct": true,
+        "flags": [],
+        "compound_display": "hexanal",
+        "binding_class": "n_alkanal",
+        "model_state": "predicted",
+        "covalent_gate": "structurally_allowed",
+        "within_5x": false,
+        "interval_covers_measured": false,
+        "leaked_to_this_wave": true,
+        "leak_reason": "k4b sec. A.4 prints the soy/water hexanal ratio in full."
+      },
+      {
+        "compound": "3_methylbutanal",
+        "measured_ratio": 263.2,
+        "predicted_ratio": 1.581644,
+        "measured_log10": 2.4202858849419178,
+        "explained_log10": 0.1991087733573384,
+        "residual_log10": 2.2211771115845793,
+        "unexplained_residual_x": 166.40911525013382,
+        "per_term_log10": {
+          "reversible_binding": 0.1991087733573384,
+          "alpha_beta_unsaturation": 0.0,
+          "covalent_ceiling": 0.0
+        },
+        "fold_error": 166.40912872934743,
+        "sign_measured": "elevated",
+        "sign_predicted": "elevated",
+        "sign_correct": true,
+        "flags": [],
+        "compound_display": "3-methyl butanal",
+        "binding_class": "branched_alkanal",
+        "model_state": "predicted_with_chain_length_surrogate",
+        "covalent_gate": "structurally_allowed",
+        "within_5x": false,
+        "interval_covers_measured": false,
+        "leaked_to_this_wave": false,
+        "leak_reason": null
+      },
+      {
+        "compound": "2_methylbutanal",
+        "measured_ratio": 261.4,
+        "predicted_ratio": 1.581644,
+        "measured_log10": 2.4173055832445254,
+        "explained_log10": 0.1991087733573384,
+        "residual_log10": 2.218196809887187,
+        "unexplained_residual_x": 165.2710589908244,
+        "per_term_log10": {
+          "reversible_binding": 0.1991087733573384,
+          "alpha_beta_unsaturation": 0.0,
+          "covalent_ceiling": 0.0
+        },
+        "fold_error": 165.27107237785492,
+        "sign_measured": "elevated",
+        "sign_predicted": "elevated",
+        "sign_correct": true,
+        "flags": [],
+        "compound_display": "2-methyl butanal",
+        "binding_class": "branched_alkanal",
+        "model_state": "predicted_with_chain_length_surrogate",
+        "covalent_gate": "structurally_allowed",
+        "within_5x": false,
+        "interval_covers_measured": false,
+        "leaked_to_this_wave": false,
+        "leak_reason": null
+      },
+      {
+        "compound": "butyric_acid",
+        "measured_ratio": 2034.7,
+        "predicted_ratio": 1.0,
+        "measured_log10": 3.308500385085033,
+        "explained_log10": 0.0,
+        "residual_log10": 3.308500385085033,
+        "unexplained_residual_x": 2034.6999999999998,
+        "per_term_log10": {
+          "reversible_binding": 0.0,
+          "alpha_beta_unsaturation": 0.0,
+          "covalent_ceiling": 0.0
+        },
+        "fold_error": 2034.7,
+        "sign_measured": "elevated",
+        "sign_predicted": "no_prediction",
+        "sign_correct": false,
+        "flags": [
+          "NO TERM AVAILABLE: the entire measured shift is unexplained residual, because the corpus supplies no constant for this class.",
+          "SIGN NOT PREDICTED: the model emits exactly 1.0, which is the absence of a prediction, not a prediction of no shift."
+        ],
+        "compound_display": "butyric acid",
+        "binding_class": "carboxylic_acid",
+        "model_state": "no_binding_constant_for_class",
+        "covalent_gate": "blocked_by_negative_gate_named_compound",
+        "within_5x": false,
+        "interval_covers_measured": false,
+        "leaked_to_this_wave": true,
+        "leak_reason": "k4b sec. B identifies the largest shift by chemical class and log P; butyric acid is the only acid in the panel."
+      },
+      {
+        "compound": "4_ethylphenol",
+        "measured_ratio": 29.1,
+        "predicted_ratio": 1.0,
+        "measured_log10": 1.4638929889859074,
+        "explained_log10": 0.0,
+        "residual_log10": 1.4638929889859074,
+        "unexplained_residual_x": 29.100000000000005,
+        "per_term_log10": {
+          "reversible_binding": 0.0,
+          "alpha_beta_unsaturation": 0.0,
+          "covalent_ceiling": 0.0
+        },
+        "fold_error": 29.1,
+        "sign_measured": "elevated",
+        "sign_predicted": "no_prediction",
+        "sign_correct": false,
+        "flags": [
+          "NO TERM AVAILABLE: the entire measured shift is unexplained residual, because the corpus supplies no constant for this class.",
+          "SIGN NOT PREDICTED: the model emits exactly 1.0, which is the absence of a prediction, not a prediction of no shift."
+        ],
+        "compound_display": "4-ethyl phenol",
+        "binding_class": "phenol",
+        "model_state": "no_binding_constant_for_class",
+        "covalent_gate": "blocked_by_negative_gate_class",
+        "within_5x": false,
+        "interval_covers_measured": false,
+        "leaked_to_this_wave": true,
+        "leak_reason": "as 4_vinylphenol: the phenol disclosure cannot be attributed to one of the two, so both are excluded."
+      },
+      {
+        "compound": "dimethyl_disulfide",
+        "measured_ratio": 1754.8,
+        "predicted_ratio": 1.0,
+        "measured_log10": 3.2442276257329077,
+        "explained_log10": 0.0,
+        "residual_log10": 3.2442276257329077,
+        "unexplained_residual_x": 1754.8000000000006,
+        "per_term_log10": {
+          "reversible_binding": 0.0,
+          "alpha_beta_unsaturation": 0.0,
+          "covalent_ceiling": 0.0
+        },
+        "fold_error": 1754.8,
+        "sign_measured": "elevated",
+        "sign_predicted": "no_prediction",
+        "sign_correct": false,
+        "flags": [
+          "NO TERM AVAILABLE: the entire measured shift is unexplained residual, because the corpus supplies no constant for this class.",
+          "SIGN NOT PREDICTED: the model emits exactly 1.0, which is the absence of a prediction, not a prediction of no shift."
+        ],
+        "compound_display": "dimethyl disulfide",
+        "binding_class": "disulfide",
+        "model_state": "no_binding_constant_for_class",
+        "covalent_gate": "blocked_by_negative_gate_named_compound",
+        "within_5x": false,
+        "interval_covers_measured": false,
+        "leaked_to_this_wave": false,
+        "leak_reason": null
+      }
+    ],
+    "source": "Hyun Hee Hong, Mina K. Kim (2020). \"Comparison of orthonasal thresholds of key volatile flavor compounds responsible for traditional doenjang flavor in two matrices: Water-based and soybean-based model system\". Journal of Sensory Studies 2020;e12567 (article number; no volume/page). DOI 10.1111/joss.12567. Short Contribution, 5 pages. Fermented Food Research Center, Jeonbuk (Chonbuk) National University, Jeonju-si, South Korea. NRF-2017R1D1A3B03032520."
+  },
+  "pre_registration_check": [
+    {
+      "expectation": "ethyl-4-methylpentanoate: SIGN WRONG (~95 %)",
+      "outcome": "HELD",
+      "detail": "measured inverted, predicted elevated, fold 11"
+    },
+    {
+      "expectation": "six compounds get NO prediction at all, scored as sign-fail",
+      "outcome": "HELD",
+      "detail": "6 compounds emitted no prediction: 2_3_dimethylpyrazine, 2_pentylfuran, 4_ethylphenol, 4_vinylphenol, butyric_acid, dimethyl_disulfide. Every one of them is a sign-fail and carries 100 % of its shift as unexplained residual."
+    },
+    {
+      "expectation": "hexanal and the two butanals: SIGN RIGHT, MAGNITUDE FAR TOO SMALL, fold error of order 20-30x (~85 %)",
+      "outcome": "HELD ON SIGN, UNDER-STATED ON MAGNITUDE",
+      "detail": "all three signs correct; fold errors 50.3x, 166.4x, 165.3x. The pre-registration guessed 20-30x and the truth is 50.3-166x, so the model is WORSE than this wave expected, not better."
+    },
+    {
+      "expectation": "the two branched butanals get IDENTICAL predictions, because branch position is unmeasured anywhere",
+      "outcome": "HELD, AND COST ALMOST NOTHING",
+      "detail": "predictions identical at 1.582x; and Hong measured the two only 1.01x apart (263.2x vs 261.4x). The layer's structural blindness to branch position turns out to be an accurate blindness on this pair -- an unexpectedly favourable result for a limitation that was declared as a defect."
+    },
+    {
+      "expectation": "Amendment 6 ruling 2: reversible binding explains ~25 % of a matrix log-shift and no more",
+      "outcome": "CORROBORATED OUT OF SAMPLE",
+      "detail": "on the three rows where the term is active the explained share hexanal 19.8%, 3_methylbutanal 8.2%, 2_methylbutanal 8.2% -- every one BELOW the ~25 % ceiling, on a matrix and a panel the ceiling was not derived from (it came from beef and from dairy protein). This is the strongest positive result in the report."
+    },
+    {
+      "expectation": "(not pre-registered; recorded on discovery)",
+      "outcome": "THE UNSATURATION TERM WAS NEVER EXERCISED",
+      "detail": "none of Hong's ten compounds is an alpha,beta-unsaturated CARBONYL -- 4-vinyl phenol has a conjugated C=C but no carbonyl -- so the layer's second named term contributed nothing to any row. The flagship hold-out tests one of the three terms, not three. That is a gap in the hold-out's coverage, not in the layer, and it means the ~3.7x penalty remains unvalidated out of sample."
+    }
+  ],
+  "zhou_oav_arithmetic": {
+    "state": "scored",
+    "gating": false,
+    "role": "HOLD-OUT (arithmetic check on the OAV code path)",
+    "potency_ratio_dimer_over_monomer": 15.624999999999998,
+    "potency_ratio_expected": 15.625,
+    "potency_ratio_reproduced": true,
+    "mft_OAV_point": 318000.0,
+    "dimer_OAV_point": 321000.0,
+    "mft_OAV_printed": 318000.0,
+    "dimer_OAV_printed": 321000.0,
+    "arithmetic_exact": true,
+    "dimer_mass_share_pct": [
+      6.5,
+      9.6
+    ],
+    "conclusion": "The dimer's OAV matches the monomer's while carrying 6.5-9.6 % of the MFT-equivalents. Mass lost to MFT dimerisation is NOT aroma lost, and any objective that scores the dimerisation channel as a pure loss is wrong by roughly the threshold ratio.",
+    "note": "Every OAV emitted by this layer is an INTERVAL; the point values above are the interval midpoints, and they are what the arithmetic check compares. The interval on each is [4.55e+04, 2.22e+06] and [4.59e+04, 2.25e+06]."
+  },
+  "brewer1995_beef": {
+    "state": "not_scored_by_ruling",
+    "gating": false,
+    "role": "HOLD-OUT, reclassified dose_added_pre_cook (D.6 Module 7)",
+    "why_not_scored": "Brewer's 'thresholds' are the dose you must add to RAW ground beef BEFORE a 70 C cook for the compound to be detectable AFTER cooking. Every thermally driven loss between dosing and sniffing -- evaporation, Schiff-base condensation with lysine on a denaturing protein, further oxidation -- comes straight off the numerator, and the paper analytically verifies nothing at the moment of sniffing. Scoring the layer against it would be scoring a perception model against a thermal-loss measurement.",
+    "what_it_is_still_good_for": "an engineering answer to 'how much can I let form before someone smells it', and a corroboration of the alkenal/alkanal contrast (2.01x) which this wave EXCLUDED from the fit precisely because Brewer is hold-out.",
+    "corroboration_note": "Hong's properly-controlled hexanal soy ratio sits an order of magnitude below Brewer's beef ratio, which is exactly what k2 sec. D.2(ii) predicted would happen once the pre-cook thermal loss was removed. That is an out-of-sample confirmation of the reclassification, and it is the one thing this hold-out row genuinely scores."
+  },
+  "frozen_bundles": "The 4 frozen matrix-path bundles and 17 maillard-path bundles under `data/benchmarks/external_validation/` were NEVER OPENED by this wave -- not to build the layer, not to score it, and not to check a name. They remain `evidence_class: external_validation_only`.",
+  "no_optimiser_in_this_file": true
+}
