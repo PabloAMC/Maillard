@@ -1,0 +1,10 @@
+{
+  "converged": false,
+  "ts_energy_eh_xtb": 0.0,
+  "peak_index": 0,
+  "n_iters": 11,
+  "elapsed_s": 68.98991613602266,
+  "audit_dir": "/workspace/results/validation/pygsm_scratch/hexanal_radical_quench",
+  "reason": "peak at endpoint (index 0 of 11); no interior maximum",
+  "extras": {}
+}

@@ -61,7 +61,7 @@ is probably a parity TEST rather than another hand-sync.
 """
 
 from src.barrier_constants import get_barrier
-from src.pathway_extractor import ElementaryStep, Species
+from src.chem_utils import ElementaryStep, Species
 
 # Computational priors that are LOADED but deliberately NOT WIRED to any step,
 # with the reason. Recorded explicitly so a parked prior cannot be mistaken for

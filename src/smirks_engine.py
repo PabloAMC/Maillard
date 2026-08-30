@@ -26,7 +26,7 @@ from functools import lru_cache
 from rdkit import Chem, RDLogger  # noqa: E402
 from rdkit.Chem import AllChem, Descriptors  # noqa: E402
 
-from src.pathway_extractor import Species, ElementaryStep  # noqa: E402
+from src.chem_utils import Species, ElementaryStep  # noqa: E402
 from src.conditions import ReactionConditions  # noqa: E402
 from src.chem_utils import canonicalize_smiles as _canonical  # noqa: E402
 

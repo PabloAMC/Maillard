@@ -119,31 +119,11 @@ the maillard conda env (Python 3.12) in the validated container.
   scientific-fast                    Scientific regression tests only.
   stability                          Targeted kinetics + safety tests.
   kinetics-validation                Cantera + temperature-profile tests.
-  qm-heavy                           QM lane tests.
-
-══ QM operator (selective DFT queue) ══
-  computational-gap-refinement-plan  Regenerate the selective-DFT plan + manifests.
-  computational-gap-xtb [TARGET]     Run xTB pathfinder for one or all targets.
-  computational-gap-dft-preflight    Preflight a target before DFT.
-                  [TARGET]
-  computational-gap-dft [TARGET]     Execute DFT refinement.
-  computational-gap-dft-ingest       Ingest finished DFT results.
-  computational-gap-dft-promote      Promote DFT-validated barriers.
 
 ══ Extrusion observable ingestion ══
   extrusion-closure-workbook FILE    Convert an external-closure workbook.
   extrusion-follow-on-workbook FILE  Convert a 5.8 disulfide follow-on workbook.
   extrusion-diagnostic-examples      Run synthetic diagnostic example bundles.
-
-══ React-OT pilot (TS guess generation) ══
-  react-ot-setup
-  react-ot-smoke [ARGS...]
-  react-ot-pilot [ARGS...]
-  react-ot-import-colab ARCHIVE [--out-dir DIR]
-  react-ot-open-colab [--github] [--open]
-  react-ot-coverage [--target TARGET ...]
-  react-ot-orchestrate [--prepare-only|--finish] [--archive PATH]
-                       [--target TARGET ...]
 
 See README.md and docs/guides/QUICKSTART.md for the recommended scientist
 flow. Trust artifacts live under results/validation/.
@@ -178,10 +158,6 @@ scientific_lane() {
   run_in_env "python scripts/generators/generate_matrix_observable_closure_audit.py --output-dir results/validation"
   run_in_env "python scripts/generators/generate_matrix_experiment_intake_schema.py --output-dir results/validation"
   run_in_env "python scripts/generators/generate_matrix_family_coverage.py"
-  run_in_env "python scripts/generators/generate_refinement_governance.py --output-dir results/validation"
-  run_in_env "python scripts/generators/generate_mlp_assessment.py"
-  run_in_env "python scripts/generators/generate_computational_gap_refinement_plan.py --output-dir results/validation --manifest-dir results/computational_gap_refinement"
-  run_in_env "python scripts/generators/ingest_computational_gap_dft_results.py --output-dir results/validation"
   run_in_env "python scripts/generators/generate_literature_learning_loop.py --output-dir results/validation"
   run_in_env "python scripts/generators/generate_family_promotion_state.py --output-dir results/validation"
   run_in_env "python scripts/generators/generate_family_lane_validation.py --output-dir results/validation"
@@ -200,10 +176,6 @@ scientific_fast_lane() {
 
 kinetics_validation_lane() {
   run_in_env "python -m pytest -m kinetics_validation tests/integration/test_cantera_sim.py tests/integration/test_temp_profiles.py"
-}
-
-qm_heavy_lane() {
-  run_in_env "python -m pytest tests/qm tests/integration/test_cantera_sim.py tests/integration/test_fft_bottleneck.py tests/integration/test_regression.py"
 }
 
 hofmann_diagnostic() {
@@ -264,15 +236,12 @@ run_generator_alias() {
     family-ingestion-plan) run_generator_script generate_family_ingestion_plan --output-dir results/validation ;;
     family-promotion-state) run_generator_script generate_family_promotion_state --output-dir results/validation ;;
     matrix-family-coverage) run_generator_script generate_matrix_family_coverage ;;
-    refinement-governance) run_generator_script generate_refinement_governance --output-dir results/validation ;;
-    mlp-assessment) run_generator_script generate_mlp_assessment ;;
     coverage-gaps) run_generator_script generate_benchmark_coverage_gaps ;;
     thermo-gating) run_generator_script generate_thermodynamic_gating_audit ;;
     validated-envelope) run_generator_script generate_validated_envelope_report ;;
     index) run_generator_script generate_benchmark_index ;;
     summary) run_generator_script generate_benchmark_summary ;;
     objective-progress) run_generator_script generate_objective_progress ;;
-    refinement-watchlist) run_generator_script generate_refinement_watchlist --output-dir results/validation ;;
     external-inventory) run_generator_script generate_external_validation_inventory --output-dir results/validation ;;
     family-priority) run_generator_script generate_matrix_family_priority_ranking ;;
     family-next-action) run_generator_script generate_matrix_family_next_action ;;
@@ -461,21 +430,7 @@ case "$cmd" in
   kinetics-validation)
     kinetics_validation_lane
     ;;
-  qm-heavy)
-    qm_heavy_lane
-    ;;
-  hofmann)
-    hofmann_diagnostic
-    ;;
-  targets)
-    shift
-    if [ "$#" -lt 1 ]; then
-      echo "Usage: ./scripts/docker_maillard.sh targets BENCHMARK_JSON [TYPE]" >&2
-      exit 1
-    fi
-    targets_snapshot "$1" "${2:-desirable}"
-    ;;
-  targets-report|matrix-deltas|matrix-assertions|matrix-evidence|matrix-readiness|matrix-promotion-contract|matrix-closure-audit|experiment-intake-schema|literature-learning-loop|family-ingestion-plan|family-promotion-state|matrix-family-coverage|refinement-governance|mlp-assessment|coverage-gaps|thermo-gating|validated-envelope|index|summary|objective-progress|refinement-watchlist|external-inventory|family-priority|family-next-action|scope-guard|family-implementation)
+  targets-report|matrix-deltas|matrix-assertions|matrix-evidence|matrix-readiness|matrix-promotion-contract|matrix-closure-audit|experiment-intake-schema|literature-learning-loop|family-ingestion-plan|family-promotion-state|matrix-family-coverage|coverage-gaps|thermo-gating|validated-envelope|index|summary|objective-progress|external-inventory|family-priority|family-next-action|scope-guard|family-implementation)
     run_generator_alias "$cmd"
     ;;
   ingest)
@@ -545,27 +500,6 @@ case "$cmd" in
   extrusion-diagnostic-examples)
     run_generator_script generate_extrusion_diagnostic_examples
     ;;
-  computational-gap-refinement-plan)
-    run_generator_script generate_computational_gap_refinement_plan --output-dir results/validation --manifest-dir results/computational_gap_refinement
-    ;;
-  computational-gap-xtb)
-    shift
-    run_computational_gap_job computational_gap_xtb xtb "--execute" "${1:-}"
-    ;;
-  computational-gap-dft-preflight)
-    shift
-    run_computational_gap_job computational_gap_dft dft "--preflight-only" "${1:-}"
-    ;;
-  computational-gap-dft)
-    shift
-    run_computational_gap_job computational_gap_dft dft "--execute" "${1:-}" "exec "
-    ;;
-  computational-gap-dft-ingest)
-    run_generator_script ingest_computational_gap_dft_results --output-dir results/validation
-    ;;
-  computational-gap-dft-promote)
-    run_generator_script promote_computational_gap_dft_results --output-dir results/validation
-    ;;
   matrix-branch-deltas)
     shift
     run_in_env "python scripts/compare_matrix_benchmark_branches.py --base-ref '${1:-main}'"
@@ -603,77 +537,6 @@ case "$cmd" in
     ;;
   deep-research-audit)
     run_in_env "python scripts/deep_research_tracker.py"
-    ;;
-  react-ot-setup)
-    ensure_container
-    REACT_OT_SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-    bash "${REACT_OT_SCRIPT_DIR}/setup_react_ot_env.sh"
-    ;;
-  react-ot-smoke)
-    shift
-    cmd="python scripts/run_react_ot_smoke.py"
-    for arg in "$@"; do
-      printf -v quoted_arg '%q' "$arg"
-      cmd+=" $quoted_arg"
-    done
-    run_in_env "$cmd"
-    ;;
-  react-ot-pilot)
-    shift
-    cmd="python scripts/recover_ts_react_ot_seed.py"
-    for arg in "$@"; do
-      printf -v quoted_arg '%q' "$arg"
-      cmd+=" $quoted_arg"
-    done
-    run_in_env "$cmd"
-    ;;
-  react-ot-import-colab)
-    shift
-    if [ "$#" -lt 1 ]; then
-      echo "Usage: ./scripts/docker_maillard.sh react-ot-import-colab ARCHIVE [--out-dir DIR]" >&2
-      exit 1
-    fi
-    cmd="python scripts/import_react_ot_colab_artifacts.py"
-    first=1
-    for arg in "$@"; do
-      if [ "$first" = "1" ]; then
-        arg="$(stage_into_workspace "$arg")"
-        first=0
-      fi
-      printf -v quoted_arg '%q' "$arg"
-      cmd+=" $quoted_arg"
-    done
-    run_in_env "$cmd"
-    ;;
-  react-ot-open-colab)
-    shift
-    # Runs on the host so a browser can actually be opened.
-    python3 "$(cd "$(dirname "$0")" && pwd)/open_react_ot_colab.py" "$@"
-    ;;
-  react-ot-coverage)
-    shift
-    cmd="python scripts/report_react_ot_seed_coverage.py"
-    for arg in "$@"; do
-      printf -v quoted_arg '%q' "$arg"
-      cmd+=" $quoted_arg"
-    done
-    run_in_env "$cmd"
-    ;;
-  react-ot-orchestrate)
-    shift
-    cmd="python scripts/orchestrate_react_ot_colab.py"
-    next_is_archive=0
-    for arg in "$@"; do
-      if [ "$next_is_archive" = "1" ]; then
-        arg="$(stage_into_workspace "$arg")"
-        next_is_archive=0
-      elif [ "$arg" = "--archive" ]; then
-        next_is_archive=1
-      fi
-      printf -v quoted_arg '%q' "$arg"
-      cmd+=" $quoted_arg"
-    done
-    run_in_env "$cmd"
     ;;
   notebook)
     run_in_env "jupyter notebook --ip 0.0.0.0 --port 8888 --no-browser --allow-root"

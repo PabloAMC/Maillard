@@ -45,7 +45,7 @@ from src.matrix_correction import (
     resolve_compound_matrix_retention,
     resolve_matrix_correction,
 )
-from src.pathway_extractor import Species
+from src.chem_utils import Species
 try:
     from rdkit import Chem
 except ImportError:

@@ -1,0 +1,10 @@
+{
+  "converged": false,
+  "ts_energy_eh_xtb": 0.0,
+  "peak_index": 0,
+  "n_iters": 11,
+  "elapsed_s": 618.0154386570211,
+  "audit_dir": "/workspace/results/validation/pygsm_scratch/lysinoalanine_crosslink",
+  "reason": "peak at endpoint (index 0 of 11); no interior maximum",
+  "extras": {}
+}

@@ -1,7 +1,7 @@
 from typing import List, Optional, Set, Tuple
 from rdkit import Chem
 from rdkit.Chem import AllChem
-from src.pathway_extractor import Species, ElementaryStep
+from src.chem_utils import Species, ElementaryStep
 from src.conditions import ReactionConditions
 from src.smirks_engine import (
     _is_ketose, _is_pentose, _is_hexose, _is_sugar, _is_asparagine,
