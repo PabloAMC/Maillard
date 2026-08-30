@@ -64,9 +64,6 @@ data/*
 # Bulky & auto-generated data exclusions
 data/Gemini_Deep_Research/
 data/reactions/rmg_validation_cases/
-data/lit/deep_research_backlog.json
-data/lit/slr_incorporation_matrix.json
-data/lit/deep_research_candidate_registry.json
 data/lit/*.pdf
 data/lit/**/*.pdf
 
