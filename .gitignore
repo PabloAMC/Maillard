@@ -72,7 +72,18 @@ data/lit/**/*.pdf
 
 # Output directories & auto-generated artifacts
 reports/
-results/
+results/*
+!results/validation/
+results/validation/*
+!results/validation/prediction_uncertainty.json
+!results/validation/trunk_rate_calibration_refit.json
+!results/validation/matrix_observability_refit_pratap_singh.json
+!results/validation/matrix_marker_yield_rederivation.json
+!results/validation/sulfur_barrier_refit_hofmann.json
+!results/validation/sulfur_barrier_refit_pentodiulose.json
+!results/validation/furanone_reductive_sulfhydrylation_refit_hofmann.json
+!results/validation/projection_constant_refit.json
+!results/validation/hydrolysate_observability_rederivation.json
 tasks/audit_remediation.md
 
 # xTB & QM scratch outputs
